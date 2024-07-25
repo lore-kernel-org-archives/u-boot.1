@@ -4,75 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7DACC3DA5D
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 09:26:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AACF3C3DA5D
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 09:32:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8F3486E85;
-	Thu, 25 Jul 2024 11:26:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 2C118876EA;
+	Thu, 25 Jul 2024 11:32:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="MlIh5J92";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8FEA87876; Thu, 25 Jul 2024 11:26:13 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1B09E8752A; Thu, 25 Jul 2024 11:32:50 +0200 (CEST)
+Received: from inva021.nxp.com (inva021.nxp.com [92.121.34.21])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7F7486464
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 11:26:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id D44B686D4C
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 11:32:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5a156556fb4so925969a12.3
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 02:26:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1721899571; x=1722504371;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VcW4S5l5fS7wTFmBpAZ+ZDHWcPQAmJYlYqVjqQyu8p0=;
- b=MlIh5J92X81t9WsghP5U6B0j/Jq76A0cthxgnJz1lCdeI3aEv9BpUc9ZJy5eh0IFH4
- TmXrPPx6WKpabfyv5iPxHVWGu4ue/DvXIo8r1dM7n18MoNPfA+hAmMsj2Whai5/6sK+q
- GDsujnEEdwe5J8LCe8g5JvQwN2QEFowxW7IBM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721899571; x=1722504371;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VcW4S5l5fS7wTFmBpAZ+ZDHWcPQAmJYlYqVjqQyu8p0=;
- b=IikapaZozOx4O3kuH8yHDYWBBZLKXgHHPoQmBoUbGyVpq13N16rYffdV0ul+UUvdB0
- WNCt6WX141qSz3QtLXfj48oleUpa8GnFYQatcm+i07Do18eqbFfuZvers9OuZ5OLa4YN
- MWH+mNk+8mIYRkP2/iU74+BFN0Cu/YxSqXWjW6tnROucLCatZh1E86xUa34uBmKuI/CZ
- C00dc4f1quvx/S8h7LGNrFhwiAM0RuB8/doEe0t68VrIT+D61Mo98tZcYpgLQt16Ak0m
- g76pzv9pyhHd8Mbf6iT7cWAY+xWE2U4aImrn9hQ0d9eeP7fDpOQRJ89e1HQRH1q1W6gY
- y20g==
-X-Gm-Message-State: AOJu0YwX5dzdhCgcBLwAKokM5MwTM5uD6B0dRhZNNPVSMilSyjauB+0r
- PYZxe//MFUoi+rXY4cFpeBmZmhl6+vCX2TmH4J1M+6w55L74wYbJNhrsHFBpCty9TjXsFhMLwjk
- LjVu9sfKWpLuWUB40M53B+XpH3h+cNgB+45Wd5A==
-X-Google-Smtp-Source: AGHT+IFZIr0tWvGZs7nUEBQuI7lhRm0ZOhesaaNf8/stXY8I2RkHMICOX6vVOsImeq1H4wb0LFiT6xpi8P7WFQXM6M8=
-X-Received: by 2002:a17:907:841:b0:a7a:a3db:c7b3 with SMTP id
- a640c23a62f3a-a7acb47a107mr103760266b.19.1721899571097; Thu, 25 Jul 2024
- 02:26:11 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240725073707.26040-1-Zhiqiang.Hou@nxp.com>
- <CAOf5uwm-kedmeH7at0F5+zfuJ9218NwRSJjA4_vjTGvpsJ7msA@mail.gmail.com>
- <DB9PR04MB9236ACC9C613982795A9E5AC84AB2@DB9PR04MB9236.eurprd04.prod.outlook.com>
-In-Reply-To: <DB9PR04MB9236ACC9C613982795A9E5AC84AB2@DB9PR04MB9236.eurprd04.prod.outlook.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Thu, 25 Jul 2024 11:25:59 +0200
-Message-ID: <CAOf5uw=nNter1RSuxvaXZ0NFkoOkqAKyQs2_97Ap4W5KhXSQmA@mail.gmail.com>
-Subject: Re: [PATCH] clk: fix ccf_clk_get_rate
-To: "Z.Q. Hou" <zhiqiang.hou@nxp.com>, Simon Glass <sjg@chromium.org>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "trini@konsulko.com" <trini@konsulko.com>, 
- "lukma@denx.de" <lukma@denx.de>, "seanga2@gmail.com" <seanga2@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=fail (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=Zhiqiang.Hou@nxp.com
+Received: from inva021.nxp.com (localhost [127.0.0.1])
+ by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 8B49E2005D9;
+ Thu, 25 Jul 2024 11:32:47 +0200 (CEST)
+Received: from aprdc01srsp001v.ap-rdc01.nxp.com
+ (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
+ by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 50FC4200604;
+ Thu, 25 Jul 2024 11:32:47 +0200 (CEST)
+Received: from mega.am.freescale.net (mega.ap.freescale.net [10.192.208.232])
+ by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id
+ 631341802183; Thu, 25 Jul 2024 17:32:46 +0800 (+08)
+From: Zhiqiang Hou <Zhiqiang.Hou@nxp.com>
+To: u-boot@lists.denx.de, trini@konsulko.com, peng.fan@nxp.com,
+ festevam@gmail.com, sjg@chromium.org
+Cc: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
+Subject: [PATCHv2 0/9] Add a subcommand 'release' to cmd/cpu.c
+Date: Thu, 25 Jul 2024 17:53:22 +0800
+Message-Id: <20240725095331.14245-1-Zhiqiang.Hou@nxp.com>
+X-Mailer: git-send-email 2.17.1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,62 +56,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+From: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 
-On Thu, Jul 25, 2024 at 10:53=E2=80=AFAM Z.Q. Hou <zhiqiang.hou@nxp.com> wr=
-ote:
->
-> Hi Michael,
->
-> > -----Original Message-----
-> > From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-> > Sent: Thursday, July 25, 2024 3:32 PM
-> > To: Z.Q. Hou <zhiqiang.hou@nxp.com>
-> > Cc: u-boot@lists.denx.de; trini@konsulko.com; lukma@denx.de;
-> > seanga2@gmail.com
-> > Subject: Re: [PATCH] clk: fix ccf_clk_get_rate
-> >
-> > Hi
-> >
-> > On Thu, Jul 25, 2024 at 9:16=E2=80=AFAM Zhiqiang Hou <Zhiqiang.Hou@nxp.=
-com>
-> > wrote:
-> > >
-> > > From: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
-> > >
-> > > As the type of return value is 'ulong', when clk_get_by_id() failed,
-> > > it should return 0 to indicate the get_rate operation doesn't succeed=
-.
-> > >
-> >
-> > I understand your point here but the clk_get_rate that can call the ccf
-> > clk_get_rate can already return -ENOSYS.
->
-> will also fix it.
->
+This patch set is to add a subcommand 'release' to the 'cpu' command
+in cmd/cpu.c, making the command is able to release a core to run
+baremetal and RTOS applications.
 
-Is there any usage of the error set on the latest bit of the clock? We
-need to be sure that this
-is correct use accross the uboot. The clk-uclass define the error that
-can return
+And enabled the 'cpu' command and imx CPU driver for i.MX 8M series
+EVK boards and i.MX 93 EVK board.
 
-Michael
+dependence:
+https://patchwork.ozlabs.org/project/uboot/patch/20240725083655.24486-1-Zhiqiang.Hou@nxp.com/
 
-> Thanks,
-> Zhiqiang
+Hou Zhiqiang (9):
+  cpu: add release_core callback
+  cpu: sandbox: implement release_core callback
+  test: cpu: add test for release CPU core.
+  cpu: imx: implement release_core callback
+  cpu: imx: fix the CPU type field width
+  cpu: imx: Add i.MX 8M series SoCs
+  cmd: cpu: add release subcommand
+  configs: imx8m: enable the 'cpu' command
+  configs: imx93: enable the 'cpu' command
 
+---
+V2:
+ - Implemented release_core() in sandbox and added test for the new API.
+ - Increased the CPU type mask in i.MX CPU driver.
+ - Added i.MX 8M series SoCs in i.MX CPU driver
 
+ cmd/cpu.c                         | 44 +++++++++++++++++++++++++++++--
+ configs/imx8mm_evk_defconfig      |  3 +++
+ configs/imx8mn_evk_defconfig      |  3 +++
+ configs/imx8mp_evk_defconfig      |  3 +++
+ configs/imx93_11x11_evk_defconfig |  1 +
+ drivers/cpu/cpu-uclass.c          | 10 +++++++
+ drivers/cpu/cpu_sandbox.c         |  6 +++++
+ drivers/cpu/imx8_cpu.c            | 34 ++++++++++++++++++++++--
+ include/cpu.h                     | 15 +++++++++++
+ test/dm/cpu.c                     |  2 ++
+ 10 files changed, 117 insertions(+), 4 deletions(-)
 
+-- 
+2.43.0
 
---
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
