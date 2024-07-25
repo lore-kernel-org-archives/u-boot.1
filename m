@@ -4,96 +4,165 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3758DC3DA63
-	for <u-boot@archiver.kernel.org>; Wed, 24 Jul 2024 22:57:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCF76C3DA61
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 01:18:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AAE0F889D3;
-	Thu, 25 Jul 2024 00:57:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id E1F0A889D7;
+	Thu, 25 Jul 2024 03:18:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QTpN0XMB";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="U/rEZFYs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 682D6888F6; Wed, 24 Jul 2024 17:09:53 +0200 (CEST)
-Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
- [IPv6:2607:f8b0:4864:20::12c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 06F4A889BB; Thu, 25 Jul 2024 03:18:12 +0200 (CEST)
+Received: from EUR03-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur03on20604.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260c::604])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E625889A8
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 17:09:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C1C6688800
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 03:18:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-376069031c7so25054065ab.0
- for <u-boot@lists.denx.de>; Wed, 24 Jul 2024 08:09:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721833788; x=1722438588; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rb9FbakTPHKNRpUtKOwmNcMME4fa7oSV+9UlLtahLQc=;
- b=QTpN0XMBM651eYShYTKSBWHPhLiF1yETlVg5OwW6ObVW3k8cSaZRjB72VbCXeY4vzS
- QE3CUD2xq3+whjOmN6fjdTsEpqYQb2D+4zRfuJDKLu94+lQavxW31i5p1s7K0ztJJbj1
- ZIclDWLWIegoMpub0poffeS02941N5wfBWDvU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721833788; x=1722438588;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rb9FbakTPHKNRpUtKOwmNcMME4fa7oSV+9UlLtahLQc=;
- b=kvAMAT3hN55f8cNlcZ4s/lcc5F1byfYL50Air7+1zhbp9GPbr/Fo/c1bWuZaXDyAOp
- WFyBLKNXGamjYW/LeW/IUm+N2bL3PhYXOAuK37S72P3aDFXBBj7IlwBSBs6vmXfDVBiX
- kCiW5DHCxEvaO8vyem2pC5yJMHZYGdRr+q1RR96X/EV83P6XrJR4bSoal0xJ2E8L52s1
- lUiXylcHkflPclfiP/BCLn3WjB5rdYgg5ukDbj4W4lLLw6i6o8ZsrB/3cFQ6EC4FsKqE
- cAuAz2TVoOBoemtjhvrzDr8Y+xNwQwrkyuVezBuERKUB+87/nHdIBZzJUWyftTtLgTj5
- jOvw==
-X-Gm-Message-State: AOJu0YxvRpxWVmgC3sZrV2lTFu1k+MUwt6ks5IN+Xoi6tP5I8yMulXJP
- hemLhj4nZdWK+Rgr711KCOCIY8Ra5LkQSoiDfnFq6RsGz8jOrmz/vXypmfE6PB+lY1pcFG/jcxs
- =
-X-Google-Smtp-Source: AGHT+IHWHtrH2mfwH6uXuQunu7QwnPXAqJ1uqvmNF4+4KgDvMQqM86l8Hk+llo8gI1MoOIyV4MFLOA==
-X-Received: by 2002:a05:6e02:2148:b0:398:17c8:6bd9 with SMTP id
- e9e14a558f8ab-39a217ce7d6mr115ab.8.1721833787371; 
- Wed, 24 Jul 2024 08:09:47 -0700 (PDT)
-Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
- [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39a18596c3asm6873645ab.25.2024.07.24.08.09.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Jul 2024 08:09:46 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Andrew Davis <afd@ti.com>, Aradhya Bhatia <a-bhatia1@ti.com>,
- Bin Meng <bmeng.cn@gmail.com>, Devarsh Thakkar <devarsht@ti.com>,
- Enrico Leto <enrico.leto@siemens.com>, Fabio Estevam <festevam@gmail.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Ion Agorria <ion@agorria.com>,
- Joao Paulo Goncalves <joao.goncalves@toradex.com>,
- Jonas Karlman <jonas@kwiboo.se>, MD Danish Anwar <danishanwar@ti.com>,
- Marek Vasut <marex@denx.de>,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Minkyu Kang <mk7.kang@samsung.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Nishanth Menon <nm@ti.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Ravi Gunasekaran <r-gunasekaran@ti.com>,
- Raymond Mao <raymond.mao@linaro.org>,
- Sean Anderson <sean.anderson@seco.com>,
- Shiji Yang <yangshiji66@outlook.com>, Stefano Babic <sbabic@denx.de>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- This contributor prefers not to receive mails <noreply@example.com>,
- Vitor Soares <vitor.soares@toradex.com>
-Subject: [PATCH 12/35] global_data: Convert have_console into a flag
-Date: Wed, 24 Jul 2024 09:08:59 -0600
-Message-Id: <20240724150922.2343249-13-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240724150922.2343249-1-sjg@chromium.org>
-References: <20240724150922.2343249-1-sjg@chromium.org>
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=zhiqiang.hou@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=JwY2jIv20Mf6nbCQKzpvyAYZgPwvs4X++kxZ+vqbOSLTMhoy6zEbI1KT4Uw6bopRyl2Xpf0cCLgTtuAKpaRh/0KsygufYV3gh3bDEaoLF/JZdA8fXx+fBrMIz7vBoy8oE8T/PvpixS9WOwjpE1sromOWcHpTzuDuLufDuJFczbEXD0sMNHYQmY6p8BSksxa8Fom7jqEbzTL72kRBcJ7nACCGs2hwPj4LoFP6vmeEi73WAhoGAo25ClX3rn2ru86lshPzck7ZN2izM8QysjhaBTqcNrAySIqa4B0BTImBA+BMNrtd1xD+gIaaiAxrDhzEQOTU///7rNlrVshiOuexhw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qMEhfUJlUBwgUEEk72rgjEm6EcsVdauM9qE/7hWZV+s=;
+ b=uc3tFoNneWzbzT/5lYgoIQZRMwYXF/+LAuHOzfATLKo5ilnth2lvZLhRLQJnrrp8zRXLbGI6YU/8Dw78fAZODFd8dbf06EHUgukDHnP6ERfyzF/vUOO9pz4IFW17pZS4gnWUpp3eeu9tKGoWmD19l8r7CcyvwajrIC8S+8EQSaAaAvJG/71ZJhXFQxXrb7FhP1bXUoo25G6g019zy4OwIifoliVlrXtOaKgmDjCsX4QpOLRuPykzh5ccRfvF2DgRQ32pHcFNHO327CO2ysovHydm/9H3f46v00CvwE97mE5oCN6K9ErYIPxDxq/NSZN/bncyInm7b2l4l7zevanfEA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qMEhfUJlUBwgUEEk72rgjEm6EcsVdauM9qE/7hWZV+s=;
+ b=U/rEZFYsHPfJrgdoMguddB4rhEPBvNa3YHHTZJc/DIQeWktfUNweWSKNMdWdRkryYBIwoRWGXHIwpYnlvhwog+sYoKXLl8k5iL4no/MV9SSoEdnXLRPEeVvGSC6AFVizwvkTa1Zy5Tl8w8m+M4Qfp8pN/lWHZscy3AtGu6kY4wa1TGd0p5fOT0k7c9rIEhB99QSr4h0lVbZZr/6DkqIVCuyI8MTADX/EqObTpVeeqiq8I1IrFujR+E4OPLZWVWoclwWilnezyZkrRbg6c/DyPB0QJXUgArpAvCzE1++N1eYOXYiIdE8hAKEopvloucAgy5iI8sSsdz94UT6hdud5jw==
+Received: from DB9PR04MB9236.eurprd04.prod.outlook.com (2603:10a6:10:370::16)
+ by DB8PR04MB6986.eurprd04.prod.outlook.com (2603:10a6:10:116::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7784.28; Thu, 25 Jul
+ 2024 01:18:08 +0000
+Received: from DB9PR04MB9236.eurprd04.prod.outlook.com
+ ([fe80::9903:6f05:ded5:924f]) by DB9PR04MB9236.eurprd04.prod.outlook.com
+ ([fe80::9903:6f05:ded5:924f%4]) with mapi id 15.20.7784.017; Thu, 25 Jul 2024
+ 01:18:07 +0000
+From: "Z.Q. Hou" <zhiqiang.hou@nxp.com>
+To: Fabio Estevam <festevam@gmail.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "trini@konsulko.com"
+ <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, "sjg@chromium.org"
+ <sjg@chromium.org>
+Subject: RE: [PATCHv1 3/5] cmd: cpu: add release subcommand
+Thread-Topic: [PATCHv1 3/5] cmd: cpu: add release subcommand
+Thread-Index: AQHa3Q6skebeC/7OrEGxYubJjn9uTrIEZTuAgACmUECAAA62gIABi+2g
+Date: Thu, 25 Jul 2024 01:18:07 +0000
+Message-ID: <DB9PR04MB92365077FE5E57B37FA5651C84AB2@DB9PR04MB9236.eurprd04.prod.outlook.com>
+References: <20240723150400.16650-1-Zhiqiang.Hou@nxp.com>
+ <20240723150400.16650-4-Zhiqiang.Hou@nxp.com>
+ <CAOMZO5BUguY8vbw9gUux=jfZ312q5pAr3FA0YKq_wAQiCvfEfw@mail.gmail.com>
+ <DB9PR04MB9236608870B7A84AAB4E486084AA2@DB9PR04MB9236.eurprd04.prod.outlook.com>
+ <CAOMZO5CNfAQzqaVPy0WDiNZ2VLzQiAKUd-d+Jii8ZrewUyiA_A@mail.gmail.com>
+In-Reply-To: <CAOMZO5CNfAQzqaVPy0WDiNZ2VLzQiAKUd-d+Jii8ZrewUyiA_A@mail.gmail.com>
+Accept-Language: zh-CN, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB9PR04MB9236:EE_|DB8PR04MB6986:EE_
+x-ms-office365-filtering-correlation-id: b6ecd8f9-1ac5-4f9a-eb37-08dcac47a449
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|376014|366016|38070700018;
+x-microsoft-antispam-message-info: =?utf-8?B?cWgrVjhzZEVSZTdFeHNtUGNvMHYrcVFPaGtpYURYOG92eE12aXF4RE1VdVVn?=
+ =?utf-8?B?ME1JTGxpaEI0NWhzdHJQUW0zZmVNTk9maWFrNktvUkR4NU5DSGJKOUlnS004?=
+ =?utf-8?B?WFYrdlJsMGltUlV2R2M0bTNBOW0wMkpGcWJqZVdNK2RkbVRxcit1NExlanRr?=
+ =?utf-8?B?SHVwWTR5b2QwY2Q0akhYSmVWa3NKRUJPcmNZYWtOd0xGUUI4TXZzSGp3ZFp6?=
+ =?utf-8?B?anVFUkVNU1RlcGkwZzB3eURReFJxUW9kRVFHZGE5Ry9qVUJuNnU0YzAvUFlu?=
+ =?utf-8?B?WUYwOHBBN01zL0t6MGYvaUFBR1lEbW1NZ0ovNHlGSlpNaS8zakRPN1hyVEEw?=
+ =?utf-8?B?ZmxFY1JHK2ZzUThmb0tRU1FSRGZEYTByaEhjOENJNjd0SzZVdmNSUXhrTUFW?=
+ =?utf-8?B?VE9FZ0ZkUTJoS2tIcTJDb1B2SUJlQUxRZ1d3TTlPSnplZzMzMVRUWmF6TEs5?=
+ =?utf-8?B?MjcvU0xXRlNwaFIra3dLMnhNUHdhTFpOY0RjYnRmalMvOHd2MG85UEdteDNi?=
+ =?utf-8?B?a0J1RDBQS3FPYnU4TXBMVzFPWlU3OVVDSWlMUEF5ZGpEV1labTlwYUlHQUVO?=
+ =?utf-8?B?dGk0c2ZkNG8wMXdTaU03M1pBbTRxUnRTT2l3bWQrb2NKTGdwY0krV0dER1I5?=
+ =?utf-8?B?enEwTGtRTEhyOWNRZW9nNW5ic1BqdVFweGRBTUIxbGt1TXhqa0NuZ3lrdkdu?=
+ =?utf-8?B?dUVlVUN5cjdHajNXRWFORTlSNC9IdjBZOTBMY2pCN29rc1lRMUZnRFB1WHd1?=
+ =?utf-8?B?NXlaTmRxM2VMOHZUVW52VDIvTkUxVUE1VkVnRVMvQ1VSeFFsZDVlV0RHR1li?=
+ =?utf-8?B?cDNDTXVKeFhKRCtid3pvZWdEbXE4Y2llcUlVTThQT3YvSm1malRLZlY5d1BO?=
+ =?utf-8?B?b0ZDMC84b3QyUjMxL0pmQVJubkJBRHdFdnRabWJsNXNHaW81TlJydFNOTFJR?=
+ =?utf-8?B?ck16STVyOFU2dC9uOGpNMEFrWWtSTW1kTXNiQnV2eEsyejlCd2NZNDlqRGJR?=
+ =?utf-8?B?NkZZb2hKUUJkNmJpeWt1UjViSTVGNU1MUktsUjkzR3hCK3J3Ny9kNzY0bzlT?=
+ =?utf-8?B?TFgrbDlJak1kaC9HQ1YxVUtXcmw3QThwNjFhQVlQQjB6VUZVUXBzK0sxS3Jq?=
+ =?utf-8?B?OXN1RXFyTU5jUkxnYUluOTVrQ3dvZUVkUkk1alRpeUpnMll0WnltMHAyYkkz?=
+ =?utf-8?B?ekhidFJ2OVpVVjVoTnp4Yll4cG9xRjBRN3dEQ3Z1d0dzaUE0YWoyNURRNGVs?=
+ =?utf-8?B?RHF1WHJIMXE4TkE5cllpUXk5ejY0S05TbHVvYnN2RWUyRnBDcUNPWGo0dmFj?=
+ =?utf-8?B?L2phMFZ5VFdEWS9OV21CTHlXNndFQUxwMGcwYy9EcnBlRmxTSERpNGpBZ0hY?=
+ =?utf-8?B?c1FQR0pwdTd3aVA0d1BpQkxnTmxIOHlhU2FGaUY0REREaDVUUjhNSXN3TFcv?=
+ =?utf-8?B?TjRNbm9HV3FNS2g4czZlMzAydzY4M3JHeU4xYzJTaFBiT2sxcW1tQ2g4YVVF?=
+ =?utf-8?B?Mm5YU0FGZUV0SkpWcWJyK2J0WDFXaHZBL3R1Z1NSaWcwQm9RR1hQN245WFdW?=
+ =?utf-8?B?NVFFaUgwRlpUZnFjZzJ0MnZXbm4ramN1cG1RY3QzZ3NISFJzQkp2QVBCNEx2?=
+ =?utf-8?B?clIwcUUwVlhUaEpSOHRZWkZPUUpxTE4vbkZMVWVQSk1DSWRBUVE3RmlmWjVL?=
+ =?utf-8?B?TU1NWmxLZGNpSlZEeFJUbmZSeXhFaE1RMDcvYmtIeDdaUXlBZEJ5SDcxekc4?=
+ =?utf-8?B?TFRNSEhHenZMYmJoYzVXeCtSeFVySm1nZFEwUll0eFE3NkIvZXFuVERPUUxO?=
+ =?utf-8?B?U0pSQVY2QVBKL253V3U2RG5iRytNelZhcmhsVG9wQmZvak1UN1EwNDJLN0NF?=
+ =?utf-8?B?UHFyK3lzQyt5QWVBemc3ZTVmZVlySXdtQ0h0bnh5Njh3TEE9PQ==?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR04MB9236.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016)(38070700018); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?cmU5R2J2OExRZ2IyYkJIYkhleHRnZlkwY2o3dllvaWtyNHgzb3lpM2FGTktM?=
+ =?utf-8?B?U1Q5SGsrR2JhNS9RUVNwWnNJYk55dC9lYWdRMUpXQW5TTG1PZjZXa1NzL1Ix?=
+ =?utf-8?B?N05ESk12MzNvanlMeUcwNEhOV0VxS2xJNk1EYzdEL2d6ZVFZaWRyMFFsYnVl?=
+ =?utf-8?B?ZVJLSTZ6dVhiS2JKNW9Ja2JpWkpFUWF3UXJnQmtEbUJmcVhXUzJpeCttbWhH?=
+ =?utf-8?B?K3dlWS9FSDYrN25BaVo2T2JMVlNYcXdjdXdIejkxSW0rbkR4Q2RVQ2hRZ0Yv?=
+ =?utf-8?B?cUErTEdmc2psb2ptRWR2MU5nclhEYVB1bWpWNk1qWFJldHBoZGVQdW11OXFR?=
+ =?utf-8?B?eXVobVhqd1dQbGx0Q2EwOENoNXhVZmdFOWlUTGdYUHFyY1pJN05GRzN3anBY?=
+ =?utf-8?B?ZlBjTTZkN1lmRlByeVJaRmgza3VMVXVNQ2czdTIveVBjcXEzNUoyUC9FRmNQ?=
+ =?utf-8?B?YWFTVDRVSlRRckl0RUJvcG83Z1VINk9LcDNVK3BDL0pDZ0g0bjB1OUJlL2xT?=
+ =?utf-8?B?U1RiNnIxQjJNNmpvUXpGOGpXRFFraUdXRGt1Z0s1WHBkTnZCYmVBK2JqVWlG?=
+ =?utf-8?B?VnV0S0c5Z0k2YWVjVnRFZHNaMjdWckZtYmhreGhqN0tkU2toYTR3T1VaYkJJ?=
+ =?utf-8?B?ZkxrNVd5QkVqNjFrRnQzVlNNOFExLzc0R3VBYi95bHlZMUhkK1BvWmJDcmxN?=
+ =?utf-8?B?ZGVheFNDaVdNMGpKUGRMZzhIMlpHUzh5QXdWdzNqc3dOQnJ6V1c3UnByRSta?=
+ =?utf-8?B?K1dwc2FmVXl5MWRkdWtITHFOU25lUXBMVVcvUjRpMWl6eVZ0VWtMMnlYUmZC?=
+ =?utf-8?B?YnJBekRpa0p2Uk1DWE04bm80ak9FazlidWRJWnEzM1RZMU9ySlZPeEZkZzJi?=
+ =?utf-8?B?UVdFZUhzcmcwM3hOWmdaeFljbEw1cjFaR3VaNk9UZnFyZ28wTGs1Mkt2ZDhk?=
+ =?utf-8?B?d25MZDlXZUhodFdCWmsxcDlGU2locTVhYUphVEpCQXV6WmVFUnVycVRFcnhJ?=
+ =?utf-8?B?bEkzdUdtQlcwbTEwMzJDbFdGdmdZdHQwc1ZvUndCN0hjbmR3ZFhMRDlIa0Rs?=
+ =?utf-8?B?ZFB1aTlEYWx1SW5GeHQ2aGg2STlEZG1xSHdFblNMN21pcWdJL2VBbFQyMUV6?=
+ =?utf-8?B?U1NGeHRWb2RtNGFEVXU0TFk5Z1hvd0I2b0ptQ210NjNwNzVOc2hlTHV2a0xr?=
+ =?utf-8?B?SkN6b0ZONG1KTWlhcTZBb2NoWHRMMk92SlVzSGgzajFzVVlzbUFVMEJJSDVL?=
+ =?utf-8?B?TUQ2ekxZQVI5QU5EZ0N3TnlEU2IvQ09JOWEzSFkvcmw3UEdmWlBqY3NSTnZQ?=
+ =?utf-8?B?OG1HdHVZTU1mVXlNVjlwK1Jqd001VEY3S0lETWFnbVZLMm1MY3A2RGxHVnFL?=
+ =?utf-8?B?WldSUlhacEhNcDJlU28rV2UrS094anl6dUR5eWZlQ2c4N0tFaS9oMEw4RE1G?=
+ =?utf-8?B?eDdyT3NNVmpEejNzYmdpMElxTFo1eHhPdGc3c055MUhqZ1BndFZuZVFpZ21X?=
+ =?utf-8?B?T3lQNXhyKzJ6Wkc1VUJYUDBROFM1Q2VIVzdmU1NpRzEzZkdGclV5bzhPNi9u?=
+ =?utf-8?B?QllqR25mVDFiU2NvNlcvajZCTzlTNFZ5TmVyWXpnV1JVV1B4enhDeU8yK3Zw?=
+ =?utf-8?B?Tkoza2lFTlk1OTB1cXd6NktkcWtlMWVYdVJ5VmViTXdHOU1xUEtRSWpOVXpN?=
+ =?utf-8?B?VVJiK1FURE40YjNBRExyaEZ5MzZUVnl1NUVBMXY1YjhucW5QSXJUbXJvaXcy?=
+ =?utf-8?B?SzFSOWNUQ2FmWnVRTk1VT08xMEpKVkovYTlOZ0Z6Rm9LdkpNWkZ2WTlTMDBu?=
+ =?utf-8?B?eUhoZnUxSVlJZGxmNWZEL0lYNnFJZ0RQYU1uMUlUVVlmY3RvSkMwVU16SEg4?=
+ =?utf-8?B?NDlrbjQzZEYwTHFWUUlPTXpzeEpaRGtNdW9LaFprY2JkQ2tvOUpEWTBnUm85?=
+ =?utf-8?B?dlRFTGRMWWRMckJhMVlZNGhFZ28vS0FkNll3dXU4dGp3UWZsTVlVT2w5bDJM?=
+ =?utf-8?B?N1VVU29vb0VVNDJaVVlKK0srbEVwMGhkbUZwQjZpeGdGK3lKc1JEM0gxODlH?=
+ =?utf-8?B?OUV0YWxtWTh1ZUd2VElXSjRFMUwvbFo1cnYyZXQ2alhybFV5NUQ3bVRyZzR3?=
+ =?utf-8?Q?8eRhvtBaNdgv9HDJtw0Ju9LmA?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 25 Jul 2024 00:57:39 +0200
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR04MB9236.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b6ecd8f9-1ac5-4f9a-eb37-08dcac47a449
+X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Jul 2024 01:18:07.8710 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: sN0fwzQalOyu7nElwu/sI4GH6BcTxXYbZVRTc/nIMZt+RwaltFBFF2bNiUSI1htKWjRwU2GoDUjnLBj4gzxvzA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR04MB6986
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,223 +179,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We don't need a full word for this boolean value. Convert it into a flag
-to save space in global_data.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
-
- arch/arm/cpu/arm926ejs/mxs/spl_boot.c |  2 +-
- arch/arm/mach-exynos/spl_boot.c       |  2 +-
- arch/arm/mach-k3/common.c             |  2 +-
- arch/arm/mach-k3/r5/sysfw-loader.c    |  2 +-
- board/siemens/common/board_am335x.c   |  2 +-
- common/board_f.c                      |  2 +-
- common/console.c                      | 14 +++++++-------
- common/spl/spl.c                      |  2 +-
- include/asm-generic/global_data.h     | 17 +++++++----------
- 9 files changed, 21 insertions(+), 24 deletions(-)
-
-diff --git a/arch/arm/cpu/arm926ejs/mxs/spl_boot.c b/arch/arm/cpu/arm926ejs/mxs/spl_boot.c
-index 76a69d7f958..dd748328293 100644
---- a/arch/arm/cpu/arm926ejs/mxs/spl_boot.c
-+++ b/arch/arm/cpu/arm926ejs/mxs/spl_boot.c
-@@ -117,7 +117,7 @@ static void mxs_spl_console_init(void)
- 	gd->bd = &bdata;
- 	gd->baudrate = CONFIG_BAUDRATE;
- 	serial_init();
--	gd->have_console = 1;
-+	gd->flags |= GD_FLG_HAVE_CONSOLE;
- #endif
- }
- 
-diff --git a/arch/arm/mach-exynos/spl_boot.c b/arch/arm/mach-exynos/spl_boot.c
-index bd5a06447b9..219d7fbf957 100644
---- a/arch/arm/mach-exynos/spl_boot.c
-+++ b/arch/arm/mach-exynos/spl_boot.c
-@@ -312,7 +312,7 @@ static void setup_global_data(gd_t *gdp)
- 	memzero((void *)gd, sizeof(gd_t));
- 	gd->flags |= GD_FLG_RELOC;
- 	gd->baudrate = CONFIG_BAUDRATE;
--	gd->have_console = 1;
-+	gd->flags |= GD_FLG_HAVE_CONSOLE;
- }
- 
- void board_init_f(unsigned long bootflag)
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index eaa7d361767..df48ec8d479 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -104,7 +104,7 @@ int early_console_init(void)
- 
- 	gd->cur_serial_dev = dev;
- 	gd->flags |= GD_FLG_SERIAL_READY;
--	gd->have_console = 1;
-+	gd->flags |= GD_FLG_HAVE_CONSOLE;
- 
- 	return 0;
- }
-diff --git a/arch/arm/mach-k3/r5/sysfw-loader.c b/arch/arm/mach-k3/r5/sysfw-loader.c
-index 94d051ba0fb..188731e673d 100644
---- a/arch/arm/mach-k3/r5/sysfw-loader.c
-+++ b/arch/arm/mach-k3/r5/sysfw-loader.c
-@@ -451,7 +451,7 @@ void k3_sysfw_loader(bool rom_loaded_sysfw,
- 		 * the case when continuing to boot serially from the same
- 		 * UART that the ROM loaded the initial bootloader from.
- 		 */
--		if (!gd->have_console)
-+		if (!(gd->flags & GD_FLG_HAVE_CONSOLE))
- 			early_console_init();
- #endif
- 		ret = spl_ymodem_load_image(&spl_image, &bootdev);
-diff --git a/board/siemens/common/board_am335x.c b/board/siemens/common/board_am335x.c
-index 2a727606bc3..e6537b0675a 100644
---- a/board/siemens/common/board_am335x.c
-+++ b/board/siemens/common/board_am335x.c
-@@ -36,7 +36,7 @@ void set_mux_conf_regs(void)
- 	/* enable early the console */
- 	gd->baudrate = CONFIG_BAUDRATE;
- 	serial_init();
--	gd->have_console = 1;
-+	gd->flags |= GD_FLG_HAVE_CONSOLE;
- 
- 	siemens_ee_setup();
- 	if (draco_read_eeprom() < 0)
-diff --git a/common/board_f.c b/common/board_f.c
-index 29e185137ad..1935b1dd11b 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -1006,7 +1006,7 @@ static const init_fnc_t init_sequence_f[] = {
- void board_init_f(ulong boot_flags)
- {
- 	gd->flags = boot_flags;
--	gd->have_console = 0;
-+	gd->flags &= ~GD_FLG_HAVE_CONSOLE;
- 
- 	if (initcall_run_list(init_sequence_f))
- 		hang();
-diff --git a/common/console.c b/common/console.c
-index 63f78004fdb..30ddefef6b1 100644
---- a/common/console.c
-+++ b/common/console.c
-@@ -586,7 +586,7 @@ int getchar(void)
- 	if (IS_ENABLED(CONFIG_DISABLE_CONSOLE) && (gd->flags & GD_FLG_DISABLE_CONSOLE))
- 		return 0;
- 
--	if (!gd->have_console)
-+	if (!(gd->flags & GD_FLG_HAVE_CONSOLE))
- 		return 0;
- 
- 	ch = console_record_getc();
-@@ -607,7 +607,7 @@ int tstc(void)
- 	if (IS_ENABLED(CONFIG_DISABLE_CONSOLE) && (gd->flags & GD_FLG_DISABLE_CONSOLE))
- 		return 0;
- 
--	if (!gd->have_console)
-+	if (!(gd->flags & GD_FLG_HAVE_CONSOLE))
- 		return 0;
- 
- 	if (console_record_tstc())
-@@ -715,7 +715,7 @@ void putc(const char c)
- 	if (IS_ENABLED(CONFIG_DISABLE_CONSOLE) && (gd->flags & GD_FLG_DISABLE_CONSOLE))
- 		return;
- 
--	if (!gd->have_console)
-+	if (!(gd->flags & GD_FLG_HAVE_CONSOLE))
- 		return pre_console_putc(c);
- 
- 	if (gd->flags & GD_FLG_DEVINIT) {
-@@ -759,7 +759,7 @@ void puts(const char *s)
- 	if (IS_ENABLED(CONFIG_DISABLE_CONSOLE) && (gd->flags & GD_FLG_DISABLE_CONSOLE))
- 		return;
- 
--	if (!gd->have_console)
-+	if (!(gd->flags & GD_FLG_HAVE_CONSOLE))
- 		return pre_console_puts(s);
- 
- 	if (gd->flags & GD_FLG_DEVINIT) {
-@@ -793,7 +793,7 @@ void flush(void)
- 	if (IS_ENABLED(CONFIG_DISABLE_CONSOLE) && (gd->flags & GD_FLG_DISABLE_CONSOLE))
- 		return;
- 
--	if (!gd->have_console)
-+	if (!(gd->flags & GD_FLG_HAVE_CONSOLE))
- 		return;
- 
- 	if (gd->flags & GD_FLG_DEVINIT) {
-@@ -872,7 +872,7 @@ static int ctrlc_disabled = 0;	/* see disable_ctrl() */
- static int ctrlc_was_pressed = 0;
- int ctrlc(void)
- {
--	if (!ctrlc_disabled && gd->have_console) {
-+	if (!ctrlc_disabled && (gd->flags & GD_FLG_HAVE_CONSOLE)) {
- 		if (tstc()) {
- 			switch (getchar()) {
- 			case 0x03:		/* ^C - Control C */
-@@ -1011,7 +1011,7 @@ int console_announce_r(void)
- /* Called before relocation - use serial functions */
- int console_init_f(void)
- {
--	gd->have_console = 1;
-+	gd->flags |= GD_FLG_HAVE_CONSOLE;
- 
- 	console_update_silent();
- 
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 7794ddccade..de34fb06548 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -832,7 +832,7 @@ void preloader_console_init(void)
- 
- 	serial_init();		/* serial communications setup */
- 
--	gd->have_console = 1;
-+	gd->flags |= GD_FLG_HAVE_CONSOLE;
- 
- #if CONFIG_IS_ENABLED(BANNER_PRINT)
- 	puts("\nU-Boot " SPL_TPL_NAME " " PLAIN_VERSION " (" U_BOOT_DATE " - "
-diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-index af568e99f47..f98d821e085 100644
---- a/include/asm-generic/global_data.h
-+++ b/include/asm-generic/global_data.h
-@@ -92,15 +92,6 @@ struct global_data {
- 	 */
- 	unsigned long board_type;
- #endif
--	/**
--	 * @have_console: console is available
--	 *
--	 * A value of 1 indicates that serial_init() was called and a console
--	 * is available.
--	 * A value of 0 indicates that console input and output drivers shall
--	 * not be called.
--	 */
--	unsigned long have_console;
- #if CONFIG_IS_ENABLED(PRE_CONSOLE_BUFFER)
- 	/**
- 	 * @precon_buf_idx: pre-console buffer index
-@@ -219,7 +210,7 @@ struct global_data {
- #endif
- #ifdef CONFIG_TIMER
- 	/**
--	 * @timer: timer instance for Driver Model
-+s	 * @timer: timer instance for Driver Model
- 	 */
- 	struct udevice *timer;
- #endif
-@@ -690,6 +681,12 @@ enum gd_flags {
- 	 * @GD_FLG_HUSH_MODERN_PARSER: Use hush 2021 parser.
- 	 */
- 	GD_FLG_HUSH_MODERN_PARSER = 0x2000000,
-+	/**
-+	 * @GD_FLG_HAVE_CONSOLE: serial_init() was called and a console
-+	 * is available. When not set, indicates that console input and output
-+	 * drivers shall not be called.
-+	 */
-+	GD_FLG_HAVE_CONSOLE = 0x4000000,
- };
- 
- #endif /* __ASSEMBLY__ */
--- 
-2.34.1
-
+SGkgRmFiaW8sDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogRmFiaW8g
+RXN0ZXZhbSA8ZmVzdGV2YW1AZ21haWwuY29tPg0KPiBTZW50OiBXZWRuZXNkYXksIEp1bHkgMjQs
+IDIwMjQgOTozOCBBTQ0KPiBUbzogWi5RLiBIb3UgPHpoaXFpYW5nLmhvdUBueHAuY29tPg0KPiBD
+YzogdS1ib290QGxpc3RzLmRlbnguZGU7IHRyaW5pQGtvbnN1bGtvLmNvbTsgUGVuZyBGYW4NCj4g
+PHBlbmcuZmFuQG54cC5jb20+OyBzamdAY2hyb21pdW0ub3JnDQo+IFN1YmplY3Q6IFJlOiBbUEFU
+Q0h2MSAzLzVdIGNtZDogY3B1OiBhZGQgcmVsZWFzZSBzdWJjb21tYW5kDQo+IA0KPiBIaSBaaGlx
+aWFuZywNCj4gDQo+IE9uIFR1ZSwgSnVsIDIzLCAyMDI0IGF0IDEwOjAy4oCvUE0gWi5RLiBIb3Ug
+PHpoaXFpYW5nLmhvdUBueHAuY29tPiB3cm90ZToNCj4gDQo+ID4gVGhlIGkuTVg4TSBQbHVzIG5h
+bWUgaXNuJ3QgYWRkZWQgdG8gdGhlIGlteDhfY3B1LmMsIHdpbGwgYWRkIHRoZSBpLk1YOE0NCj4g
+c2VyaWVzIG5hbWVzLg0KPiANCj4gT2ssIHRoYW5rcy4gUGxlYXNlIGFsc28gZml4IHRoZSBDUFUg
+ZnJlcXVlbmN5Lg0KDQpZZXMsIHRoZSBDUFUgZnJlcXVlbmN5IGlzIG5vdCBjb3JyZWN0LCB3aWxs
+IGhhdmUgYSBsb29rLiBUaGFua3MhDQoNCi0gWmhpcWlhbmcNCg==
