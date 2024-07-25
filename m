@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65D8FC3DA49
-	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 20:51:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7268AC3DA5D
+	for <u-boot@archiver.kernel.org>; Thu, 25 Jul 2024 20:51:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1492F887F5;
+	by phobos.denx.de (Postfix) with ESMTP id 5F63C88808;
 	Thu, 25 Jul 2024 22:45:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="o45cOfVQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SxUty/Ni";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D16188585; Thu, 25 Jul 2024 22:45:49 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 9CA0B88717; Thu, 25 Jul 2024 22:45:50 +0200 (CEST)
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3E5D8875B
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 22:45:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 68CEA88599
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 22:45:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7037c464792so175957a34.2
- for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 13:45:46 -0700 (PDT)
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-5d5bb03fe42so162485eaf.3
+ for <u-boot@lists.denx.de>; Thu, 25 Jul 2024 13:45:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721940345; x=1722545145; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1721940346; x=1722545146; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+XUQL7vLaVVGvE2U+OSGmb2jWwlqvKIeMENURlbclfE=;
- b=o45cOfVQ4aQmmZ+soFaSMDqI84b61948X/dmAnmzIAqJjzSHaLZ8NEW58Boyssw2kS
- bjt9sOxpki7+EbcIP5qOBT0klcxnyGyT3xpVoJhafrTDfBeQ+iFClG5UQiFbOML3aw00
- edFHCc3WZ0UfjfMCPrQpociZjQn1oi5Y9S4q9RaprqSuomCS2i0JdMl9/d8lT9afYda8
- 2X7XvX3FvyiEGS2WxVwBY+gHE2WEylH7RMrwJXXiLrLZWQ28TTAQwvAfFrXaHePIZuQR
- i8seN6Z7OD0a+THI1sBq75rVFtOh2biEQQbtDGqL0KL/VoNaVtAr27vKpdFE0GwlT/Y6
- mM6w==
+ bh=ncm51mb4XPPkXlgtosrF2Gll54fHmWIKTQhB9ftYqo4=;
+ b=SxUty/Nin2ZugX+bdWetbR5UYiD3z+ho92B6MwmLn2rCig852fw1KVWGJr+SL11b95
+ yfABdlgKLyOKF9NV/UNBeFNc1RVkfynrxR/qKUinMgLlLNNLcfWEZRfMjbHBsSjI/sw+
+ 0uq7dX3YlelgdejNSZ9uW3jG21xO+j2dl7uWGzoI9Z8xmRlX7Nk2M89AG4PhOu+udQg3
+ DfVFf3ejBAPAzKM+eIj4BUARkV0YyQvg1gT14tKZewCMkEkNu8lB80xfgCSoaZ30vT6A
+ ewkP+YF62RAFuewmexpDj2jh+Yp4fmlvV4nvzSx3vODLa/8ek2shyfTs9FVVIZH3p6yg
+ RHlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721940345; x=1722545145;
+ d=1e100.net; s=20230601; t=1721940346; x=1722545146;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+XUQL7vLaVVGvE2U+OSGmb2jWwlqvKIeMENURlbclfE=;
- b=JvAKU736FdYmSbfGWDbMFhGGgkL/zivmrbN7na2bXHjTb6ZcZKcY+WmTUa7th3fb/i
- wvg9DXsNlWYrBcXZpARynrkPuhr/JuvY5sWOkwz6myLXCwEV5Y/yXVlUZ0bZO4W5azNM
- Z5TG3DQMGgRfsjuDgFACqKEZMRxPTG3mzAvcmjtC/E7zQvrrmt2ZKW1dPKlrRZeJoaPF
- 1hYH+dMcuOPUhRF3qQ27e1R0jztoayJWeRvyj8+boaUUp16Y/xnD6SQ9/UXHjLArX45Z
- iUucWnBcn9aZIs6qoCMVb/mA5e+fUroBSOgXWdhd8aQY2c9x3rwamsJpfgaetV2dZI3O
- TAAw==
+ bh=ncm51mb4XPPkXlgtosrF2Gll54fHmWIKTQhB9ftYqo4=;
+ b=fY3dugUQkgqUd3IE+ifV0gEj5NB+oLEYjqPYGrt+wN8Gyu/12LxDmP7LUzPBVcfEll
+ FIBHqZVCTMYBpyghC1F/byPG1fAY7N+nahGkYaAat3ZOv9CvkNhV1xnfcCcmj+c3lq1E
+ sYHU232R+4Lz9WBST3WJ6lqZgWyCNyJtQV/VzwrVOow+jYT+EFprGdNhQW2W3WfskPox
+ +FUUgtYnv2jYkiFBjxQuOkmHcy/CkFa490PokxTm3feKT3MODW3+LGKRkYmHJ+/HhrdF
+ IFq0zWwhfFR+aQKi1I4BLxCwI4NQ7SDFMHxMtLb6sq+kQbDalKfjT2WiXq8D6T9a6YDo
+ ASwQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWj+rAaHlZbYLO9U8Xo3NhOuKiIo9/2iAmY6W2Zb2fcnxAPfhOPqX4YFYrswPExJobP2mVq2SHtAim8iZOe94x3WODKbg==
-X-Gm-Message-State: AOJu0YxtEkweo63xiYm072MYSpZqsr8Y3rEfrsdNlnGgotbd/Ubufz2G
- SsHnlpdtmz/HUFvcplmM9G0uX6eT6k8r9OFe00mhr37yfaZqQD5RL/e5MK3zrWQ=
-X-Google-Smtp-Source: AGHT+IFcDHxz/DKIi3peARXFJj9kTXs0lCkT9QCo5nEULTFbD2x6SORI+TtKdJUiEm+awv6PPXZaUA==
-X-Received: by 2002:a05:6830:6119:b0:703:6d44:41a5 with SMTP id
- 46e09a7af769-7093210e9aamr3676879a34.6.1721940345488; 
- Thu, 25 Jul 2024 13:45:45 -0700 (PDT)
+ AJvYcCVjM8qI4VitKW3cM3qNGppIqC2rSHHFvItocLLDTy5PtQ0znN4BgveCrIPrw6iDdkw6ircTv+5ggHdoQaJVmgs2yyjiEw==
+X-Gm-Message-State: AOJu0Yx4Rvm1cys27lkJOZaOrkYq2kkW68/evXrKfGYWArYehrJrIewU
+ Vk65+QBmB5P/l02Frok1J7G2YQb5obM5c1l9ZLMBvGZ0uF+youSEB4vTOEJS4r0=
+X-Google-Smtp-Source: AGHT+IEpNLU7/3JTI5ISSIgE3iwYbkfL/1KDHP2kWbi5V+uNKlnwMM86Gh38KB0hvSFH52pQxgRCbQ==
+X-Received: by 2002:a05:6820:1b09:b0:5cf:24e0:b78 with SMTP id
+ 006d021491bc7-5d5adac7d98mr5521860eaf.3.1721940346177; 
+ Thu, 25 Jul 2024 13:45:46 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7093071e976sm448354a34.34.2024.07.25.13.45.45
+ 006d021491bc7-5d5b2c639f9sm258109eaf.0.2024.07.25.13.45.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Thu, 25 Jul 2024 13:45:45 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
@@ -78,10 +78,10 @@ Cc: Minkyu Kang <mk7.kang@samsung.com>, Minkyu Kang <promsoft@gmail.com>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v4 33/38] mmc: exynos_dw_mmc: Don't call dwmci_setup_cfg()
- after add_dwmci()
-Date: Thu, 25 Jul 2024 15:45:15 -0500
-Message-Id: <20240725204520.18134-34-semen.protsenko@linaro.org>
+Subject: [PATCH v4 34/38] mmc: exynos_dw_mmc: Use dev->name as driver's
+ displayed name
+Date: Thu, 25 Jul 2024 15:45:16 -0500
+Message-Id: <20240725204520.18134-35-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240725204520.18134-1-semen.protsenko@linaro.org>
 References: <20240725204520.18134-1-semen.protsenko@linaro.org>
@@ -103,22 +103,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-add_dwmci() is already calling dwmci_setup_cfg() internally, there is no
-needed to call dwmci_setup_cfg() again in case when add_dwmci() is used
-(for non-DM cases). Fix it by calling dwmci_setup_cfg() only in DM
-cases, when add_dwmci() wasn't called. Also, this assignment:
+Reduce U-Boot footprint by reusing dev->name as a driver's displayed
+name. This changes boot device name (and "mmc info" output) from "EXYNOS
+DWMMC" to something like "mmc@12100000".
 
-    host->mmc = &plat->mmc;
-
-is wrong in non-DM case when add_dwmci() was called, as it's creating
-mmc object internally. Fix that by pulling that assignment into DM case,
-when add_dwmci() isn't called.
-
-While at it, add also this missing assignment:
-
-    host->mmc->dev = dev;
-
-Fixes: 3537ee879e04 ("mmc: exynos_dw_mmc: support the Driver mode for Exynos")
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
 Changes in v4:
@@ -128,44 +116,24 @@ Changes in v3:
   - (none)
 
 Changes in v2:
-  - Replaced CONFIG_IS_ENABLED() with #ifdef
+  - (none)
 
- drivers/mmc/exynos_dw_mmc.c | 16 +++++++++-------
- 1 file changed, 9 insertions(+), 7 deletions(-)
+ drivers/mmc/exynos_dw_mmc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
-index 41fb32c579ef..43111b749a6b 100644
+index 43111b749a6b..a9e240fd91d6 100644
 --- a/drivers/mmc/exynos_dw_mmc.c
 +++ b/drivers/mmc/exynos_dw_mmc.c
-@@ -333,19 +333,21 @@ static int exynos_dwmmc_probe(struct udevice *dev)
- 	host->clksel = exynos_dwmci_clksel;
- 	host->get_mmc_clk = exynos_dwmci_get_clk;
- 
--#ifndef CONFIG_DM_MMC
--	/* Add the mmc channel to be registered with mmc core */
--	if (add_dwmci(host, DWMMC_MAX_FREQ, DWMMC_MIN_FREQ)) {
-+#ifdef CONFIG_BLK
-+	dwmci_setup_cfg(&plat->cfg, host, DWMMC_MAX_FREQ, DWMMC_MIN_FREQ);
-+	host->mmc = &plat->mmc;
-+#else
-+	err = add_dwmci(host, DWMMC_MAX_FREQ, DWMMC_MIN_FREQ);
-+	if (err) {
- 		printf("DWMMC%d registration failed\n", host->dev_index);
--		return -1;
-+		return err;
+@@ -327,7 +327,7 @@ static int exynos_dwmmc_probe(struct udevice *dev)
+ 		       "continue anyway\n", host->dev_index, err);
  	}
- #endif
  
--	dwmci_setup_cfg(&plat->cfg, host, DWMMC_MAX_FREQ, DWMMC_MIN_FREQ);
--	host->mmc = &plat->mmc;
- 	host->mmc->priv = &priv->host;
--	host->priv = dev;
- 	upriv->mmc = host->mmc;
-+	host->mmc->dev = dev;
-+	host->priv = dev;
- 
- 	return dwmci_probe(dev);
- }
+-	host->name = "EXYNOS DWMMC";
++	host->name = dev->name;
+ 	host->board_init = exynos_dwmci_board_init;
+ 	host->caps = MMC_MODE_DDR_52MHz;
+ 	host->clksel = exynos_dwmci_clksel;
 -- 
 2.39.2
 
