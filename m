@@ -4,86 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEB77C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 14:33:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C0E9C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 14:54:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 344C0884C5;
-	Fri, 26 Jul 2024 16:33:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B8BF2885C4;
+	Fri, 26 Jul 2024 16:54:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="O4QiPSsR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UPX1YWsd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60A78884C5; Fri, 26 Jul 2024 16:33:29 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id BF0C5885C4; Fri, 26 Jul 2024 16:54:56 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BAE988585
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 16:33:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2433A884CC
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 16:54:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-3db1cd07753so407471b6e.2
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 07:33:27 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6b7b349a98aso5858316d6.3
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 07:54:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1722004406; x=1722609206; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rHnBpCbsoIEHhhWqz1P6k2CMu7ue/l6FxJxX01FcsMc=;
- b=O4QiPSsRSfVbqC3rzlldGzCD5HAirTHgyhsE/FmaM80jo5/Vo3zKTpN3b8LAeRjyTB
- 9zTtqpyu/wGwmWZ1f7YYgXXfRyYRJZka+24QCF9j/BixueCi/b+DcN6DjWzoELwiSCxo
- SXkZ0B88Ohq6OSYWcqskwV61wHtV5VZDkUWiQ=
+ d=chromium.org; s=google; t=1722005692; x=1722610492; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=1N2JGQKROKLzYnemstrPdc2sapX0fM8t5ClSmrhgx9c=;
+ b=UPX1YWsd+7eQZsM0Gi/CaQZAkj9aYjZ4I4hZhL7c38wmuzHfSVkHp9L7+fYAQBh0lB
+ ++QtnSZIEj/ZHpxXKNT8JFqIbPUpglyejFCCzpvktqyAldNCy3dmDVMbrLcJPkxmDga8
+ Qjs1KJNEk1M8kIFC5l4aTe97KaOINSm0yWfk8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722004406; x=1722609206;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rHnBpCbsoIEHhhWqz1P6k2CMu7ue/l6FxJxX01FcsMc=;
- b=j0Ce9cIYoEseNeeMDOBNcoFYiC0BZSCS5pv5A1Wn/odxDtSSkWB/5RGggHhDvRT7I6
- /b3WBXrWL8DJjt8GbkJpzCBqlaHCx/biXkVaQMRqtDmWycxVi1cLUYSuBm9u8BQzQOU1
- 7Kv476meTRyTAgiPsT8RznweWCkP9rUgIo2F20vaJRHq0JLGTIS/4HI6rps1lkkdBmsd
- YoBYOQbEkP/uKuNFXn2eSdAY7YFnxCAGwXF5VEROJuMOmixDPUWi+hM0+a/vqs+aZIrH
- Uaql7gTHVbqO6VS9oXnm0grG6KlRxjjj5uwyId2MqDmk+769cZJJxMfLbGlpts2RIPt1
- aIBg==
-X-Gm-Message-State: AOJu0YwFCLJMjRWfh49hNSBbW4pvq7bIcMcMoQPqOKmaKDncRHLeOz8X
- rYS474bSo94UMxI6kXQHI5cms7VR9gjS5I9jK6lCEOSnMRXig8QjJ0tHuWLuuxU=
-X-Google-Smtp-Source: AGHT+IF/xpaaI09sPEm3MiyzPYDyT3vgrs8pi72VlVQWROibV6gBwfvSFCbwAPkv5kYrOI1vPy66XQ==
-X-Received: by 2002:a05:6808:1a1d:b0:3da:a032:24ca with SMTP id
- 5614622812f47-3db10f320aamr7108027b6e.37.1722004405914; 
- Fri, 26 Jul 2024 07:33:25 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-202-45.totalplay.net.
- [187.190.202.45]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3db1341ebbasm711530b6e.20.2024.07.26.07.33.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jul 2024 07:33:25 -0700 (PDT)
-Date: Fri, 26 Jul 2024 08:33:20 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Anand Moon <linux.amoon@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Sean Anderson <sean.anderson@seco.com>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
-Subject: Re: [PATCH v4 3/4] alist: Add support for an allocated pointer list
-Message-ID: <20240726143320.GJ989285@bill-the-cat>
-References: <20240726140038.194946-1-sjg@chromium.org>
- <20240726140038.194946-4-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1722005692; x=1722610492;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1N2JGQKROKLzYnemstrPdc2sapX0fM8t5ClSmrhgx9c=;
+ b=WBM35DIuuuzR/EqSPMvW8rfq9PgWGkFancZDL+H7rbyhfCuoiva//hbRFX789AfJPK
+ qvLnt5RFSh/4YUpRvlMMREn9hGqi1wWa/dzq0HZODsqT1UUFOmUDjl6mW6BBT8yVqwha
+ sw7zxor71xLioc7n/rE8sLL4xJgq79uelsCsnqDOVUbsDA98w7m8cJXxGObGgJXX6YkY
+ 5y0TPGp9pHiKBlPIloGx2V8oHcxfbAVds3nwdDpYFoi171rDhA05bLI0lid9WBEN3IHy
+ JXFRpbXchr5vgX0QNg/fVAUz3D0bc6b6skidIMK0qE/vy5svI0YBv0ESPN9SFpkG/peo
+ JNFg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUn5Hu5JtdzbnJISTMeb+mHkyjG/aLaPayrByxf8M3kPQPhLnyq9yzYcNYCQW0BnqLba9bDs6pCGLSfR1CJ6wUT0I91Fw==
+X-Gm-Message-State: AOJu0Yxh+WPdL4i4q3PbA71Zm8mNs4O+bs1nchzQ3FbS257d/el3ccPs
+ Rwp6+0EpAA/Z8xQOPEFGpsTtaRJhxKrFQj41zz8N+61vyXRvpfAyC26QY/A1fas56DT+vKdp2d0
+ SKOALLclHT3BL+rkmQhVPeRY17EVYwNf6kVto
+X-Google-Smtp-Source: AGHT+IGC19Q41uFKBlm7Yolr2vtIYXSO2Hlwf+NgEC0dlyQrjnQpAL0NNKJ8N0dxwbV6U+JgOsu6GhYfffNKVtnuaP4=
+X-Received: by 2002:a05:6214:496:b0:6b7:a2c7:d3e9 with SMTP id
+ 6a1803df08f44-6bb55ae6822mr180076d6.56.1722005692341; Fri, 26 Jul 2024
+ 07:54:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tBJttr2V3c+tG3ES"
-Content-Disposition: inline
-In-Reply-To: <20240726140038.194946-4-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240725135629.3505072-1-sjg@chromium.org>
+ <20240725135629.3505072-6-sjg@chromium.org>
+ <72e02ed6-f8c3-4caa-8ae6-2cef00a2ddd2@gmx.de>
+ <CAFLszTjBw9wfFjwn2UeM=TNYCjCQP3xoBCmfv8WcWs515nOKxw@mail.gmail.com>
+ <CAC_iWjJbs=i6gWHzeHbsHwFv5BC+6PWy0NesKFFWC1=ERAvcQw@mail.gmail.com>
+In-Reply-To: <CAC_iWjJbs=i6gWHzeHbsHwFv5BC+6PWy0NesKFFWC1=ERAvcQw@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 26 Jul 2024 08:54:41 -0600
+Message-ID: <CAFLszTgkwUvou2i0zVCxJPDqGQPxbKUHE41gMs5Kt1_SToL9LA@mail.gmail.com>
+Subject: Re: [PATCH 5/6] efi: Use malloc() for the EFI pool
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,51 +89,224 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Ilias,
 
---tBJttr2V3c+tG3ES
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, 26 Jul 2024 at 02:31, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Simon,
+>
+>
+> On Fri, 26 Jul 2024 at 02:33, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Heinrich,
+> >
+> > On Thu, 25 Jul 2024 at 09:54, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > >
+> > > On 25.07.24 15:56, Simon Glass wrote:
+> > > > This API call is intended for allocating small amounts of memory,
+> > > > similar to malloc(). The current implementation rounds up to whole pages
+> > > > which can waste large amounts of memory. It also implements its own
+> > > > malloc()-style header on each block.
+> > > >
+> > > > Use U-Boot's built-in malloc() instead, to avoid these problems:
+> > > >
+> > > > - it should normally be large enough for pool allocations
+> > > > - if it isn't we can enforce a minimum size for boards which use
+> > > >    EFI_LOADER
+> > > > - the existing mechanism may create an unwatned entry in the memory map
+> > > > - it is used for most EFI allocations already
+> > > >
+> > > > One side effect is that this seems to be showing up some bugs in the
+> > > > EFI code, since the malloc() pool becomes corrupted with some tests.
+> > > > This has likely crept in due to the very large gaps between allocations
+> > > > (around 4KB), which provides a lot of leeway when the allocation size is
+> > > > too small. Work around this by increasing the size for now, until these
+> > > > (presumed) bugs are located.
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > ---
+> > > >
+> > > >   lib/efi_loader/efi_memory.c | 93 ++++++++-----------------------------
+> > > >   1 file changed, 19 insertions(+), 74 deletions(-)
+> > > >
+> > > > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> > > > index 2945f5648c7..fabe9e3a87a 100644
+> > > > --- a/lib/efi_loader/efi_memory.c
+> > > > +++ b/lib/efi_loader/efi_memory.c
+> > > > @@ -80,45 +80,6 @@ static LIST_HEAD(efi_mem);
+> > > >   void *efi_bounce_buffer;
+> > > >   #endif
+> > > >
+> > > > -/**
+> > > > - * struct efi_pool_allocation - memory block allocated from pool
+> > > > - *
+> > > > - * @num_pages:       number of pages allocated
+> > > > - * @checksum:        checksum
+> > > > - * @data:    allocated pool memory
+> > > > - *
+> > > > - * U-Boot services each UEFI AllocatePool() request as a separate
+> > > > - * (multiple) page allocation. We have to track the number of pages
+> > > > - * to be able to free the correct amount later.
+> > > > - *
+> > > > - * The checksum calculated in function checksum() is used in FreePool() to avoid
+> > > > - * freeing memory not allocated by AllocatePool() and duplicate freeing.
+> > > > - *
+> > > > - * EFI requires 8 byte alignment for pool allocations, so we can
+> > > > - * prepend each allocation with these header fields.
+> > > > - */
+> > > > -struct efi_pool_allocation {
+> > > > -     u64 num_pages;
+> > > > -     u64 checksum;
+> > > > -     char data[] __aligned(ARCH_DMA_MINALIGN);
+> > > > -};
+> > > > -
+> > > > -/**
+> > > > - * checksum() - calculate checksum for memory allocated from pool
+> > > > - *
+> > > > - * @alloc:   allocation header
+> > > > - * Return:   checksum, always non-zero
+> > > > - */
+> > > > -static u64 checksum(struct efi_pool_allocation *alloc)
+> > > > -{
+> > > > -     u64 addr = (uintptr_t)alloc;
+> > > > -     u64 ret = (addr >> 32) ^ (addr << 32) ^ alloc->num_pages ^
+> > > > -               EFI_ALLOC_POOL_MAGIC;
+> > > > -     if (!ret)
+> > > > -             ++ret;
+> > > > -     return ret;
+> > > > -}
+> > > > -
+> > > >   /**
+> > > >    * efi_mem_cmp() - comparator function for sorting memory map
+> > > >    *
+> > > > @@ -681,13 +642,10 @@ void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align)
+> > > >    * @buffer: allocated memory
+> > > >    * Return:  status code
+> > > >    */
+> > > > -efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size, void **buffer)
+> > > > +efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
+> > > > +                            void **buffer)
+> > > >   {
+> > > > -     efi_status_t r;
+> > > > -     u64 addr;
+> > > > -     struct efi_pool_allocation *alloc;
+> > > > -     u64 num_pages = efi_size_in_pages(size +
+> > > > -                                       sizeof(struct efi_pool_allocation));
+> > > > +     void *ptr;
+> > > >
+> > > >       if (!check_allowed())
+> > > >               return EFI_UNSUPPORTED;
+> > > > @@ -700,16 +658,21 @@ efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
+> > > >               return EFI_SUCCESS;
+> > > >       }
+> > >
+> > > Unfortunately this patch does not match the UEFI specification:
+> > >
+> > > Two different memory types cannot reside in the same memory page. You
+> > > have to keep track of the memory type of each allocated memory page and
+> > > report it in GetMemoryMap().
+> >
+> > I actually hadn't thought about that. Is it implied in the spec or
+> > actually stated somewhere?
+>
+> I don't remember if it's explicitly stated, but it *really* doesn't
+> have to be. Although u-boot doesn't currently support this on modern
+> secure systems you can't have code and data mixed on the same page.
+> This would prevent you to map pages with proper permissions and take
+> advantage of CPU security features  e.g RW^X.
 
-On Fri, Jul 26, 2024 at 08:00:37AM -0600, Simon Glass wrote:
-> In various places it is useful to have an array of structures, but allow
-> it to grow. In some cases we work around it by setting maximum number of
-> entries, using a Kconfig option. In other places we use a linked list,
-> which does not provide for random access and can complicate the code.
->=20
-> Introduce a new data structure, which is a variable-sized list of structs
-> each of the same, pre-set size. It provides O(1) access and is reasonably
-> efficient at expanding linearly, since it doubles in size when it runs out
-> of space.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
-> Changes in v4:
-> - Avoid using realloc() unless specifically enabled by Kconfig
+As it stands, U-Boot's data is reported as EFI_BOOT_SERVICES_CODE
+through EFI. Perhaps the difference between EFI_BOOT_SERVICES_CODE and
+EFI_BOOT_SERVICES_DATA isn't that important?
 
-Is this really so performance critical that we can't always just use
-malloc/free here?
+But if we did want to fix that, we could make the malloc region
+EFI_BOOT_SERVICES_DATA.
 
---=20
-Tom
+>
+> In any case, the AllocatePool description reads "This function
+> allocates pages from EfiConventionalMemory as needed to grow the
+> requested pool type. All allocations are eight-byte aligned". I don't
+> think using malloc in AllocatePool is appropriate. If we ever want to
+> do that and allocate from the malloc space, we need to teach malloc
+> some EFI semantics, but that's a really bad idea.
 
---tBJttr2V3c+tG3ES
-Content-Type: application/pgp-signature; name="signature.asc"
+Here I don't see the difference between EFI's malloc(n) and
+memalign(8, n). I do see a lot of comments like 'use the spec', 'read
+the spec'. It seems very clear to me that the bootloader can use
+whatever algorithm it likes to provide the allocated memory for the
+pool.
 
------BEGIN PGP SIGNATURE-----
+What sort of EFI semantics are you referring to?
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmajs6wACgkQFHw5/5Y0
-tyxBrAv/T64s3wWor/2vd1gcDifi59M75sHBcq9TwZrdeL/BthiCyPgvZwsP7R/8
-1DaD6dXpGpxK0IlTc1Z54z079ql7oXKq0AdHbf2e344xBkmZgHp/nIaCffqx+SWz
-MyLPX8P7LGyDOpuclAK5ONwhw9jN761fril/QkxNuRXhAFilXfUk1iJZXLuKm7fr
-20R6MaAvbPdCROXqG6thIQUBwHmyoGgDSEcXV03ygr2dB3SYiVfhvQ04P1Mn3PeP
-AGU4vGjdCZYxIKKAnun+x6/vWgafYXFB4V2PEAbiNsYkeN6uSx65eA3tfXIssw3g
-nJFDsMKZUIdvcT8FR0vn42WmXR2EwWgaGz59uoOQChXHuNpCX0M3RN4H89lVs/vs
-EQRifvt3dlx6Xgr8oZ+Nnps4GH9WVCXkO9VwTmF0xi3COF9gO1lpsI9fHp66cyxz
-eJ0otKUCGQYQh6PesdcpcotSMtU7CGStI8GaB7976xmnAzOr3M/BYRxpoLfU4TeX
-ydu2j7hP
-=q10I
------END PGP SIGNATURE-----
+>
+> >
+> > Anyway, from what I can tell, we mostly use EFI_BOOT_SERVICES_DATA.
+> > The only exception is EFI_RUNTIME_SERVICES_DATA for the runtime stuff.
+>
+> That's not entirely correct, we use a lot more than these 2.
+> EFI_LOADER_DATA, EFI_LOADER_CODE and EFI_ACPI_RECLAIM_MEMORY from a
+> quick grep
 
---tBJttr2V3c+tG3ES--
+Yes I did a quick grep too, but then checked each site. The first two
+are used in an EFI app, not U-Boot itself. The ACPI one is not an
+allocation.
+
+> >
+> > So perhaps we can use malloc() for EFI_BOOT_SERVICES_DATA allocations
+> > and stick with whole pages otherwise? That will mostly fix the problem
+> > I am seeing.
+
+Any comments on this?
+
+> >
+> > >
+> > > The specification is available https://uefi.org/specifications.
+> >
+> > The problem is that it is thousands of pages so it is hard to pick up
+> > on some of these issues.
+> >
+> > >
+> > > >
+> > > > -     r = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, pool_type, num_pages,
+> > > > -                            &addr);
+> > > > -     if (r == EFI_SUCCESS) {
+> > > > -             alloc = (struct efi_pool_allocation *)(uintptr_t)addr;
+> > > > -             alloc->num_pages = num_pages;
+> > > > -             alloc->checksum = checksum(alloc);
+> > > > -             *buffer = alloc->data;
+> > > > -     }
+> > > > +     /*
+> > > > +      * Some tests crash on qemu_arm etc. if the correct size is allocated.
+> > > > +      * Adding 0x10 seems to fix test_efi_selftest_device_tree
+> > > > +      * Increasing it to 0x20 seems to fix test_efi_selftest_base except
+> > > > +      * for riscv64 (in CI only). But 0x100 fixes CI too.
+> > > > +      *
+> > > > +      * This workaround can be dropped once these problems are resolved
+> > > > +      */
+> > > > +     ptr = memalign(8, size + 0x100);
+> > >
+> > > We were using ARCH_DMA_MINALIGN before this patch.
+> >
+> > Where is that in the code? All I see is EFI_PAGE_SHIFT.
+> >
+> > >
+> > > If we are overwriting allocated memory, we must fix that instead of
+> > > increasing size. Do you have a git tag showing the problem?
+> >
+> > Not easy to do, because the 4KB per allocation thing has been there
+> > from the start. It might be possible to apply my patch to earlier and
+> > earlier U-Boots to try to bisect it.
+
+Would anyone like to take a look at these presumed bugs?
+
+It might be worth moving to a newer dlmalloc() [1,2] as it has a checker.
+
+> >
+[..]
+
+Regards,
+Simon
+
+[1] https://gee.cs.oswego.edu/dl/html/malloc.html
+[2] https://gee.cs.oswego.edu/pub/misc/malloc.c
