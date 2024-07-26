@@ -4,99 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74B99C3DA49
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 14:01:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7A70C3DA49
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 14:05:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7ACBB88609;
-	Fri, 26 Jul 2024 16:01:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 491F8885F2;
+	Fri, 26 Jul 2024 16:05:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XYjWPHcA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AkaV63jL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C015F885C5; Fri, 26 Jul 2024 16:01:30 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 69BF3878ED; Fri, 26 Jul 2024 16:05:09 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85A98878ED
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 16:01:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B8809885F2
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 16:05:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-703775e4d5dso557891a34.0
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 07:01:28 -0700 (PDT)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7093705c708so962549a34.1
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 07:05:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1722002487; x=1722607287; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1722002705; x=1722607505; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wRrxjLJ1Mr8TXI65LLdNLRp4CPTAvrivufFaZv9Gbc8=;
- b=XYjWPHcAD5PvgKyIP2XYuhjqfKokivTRKcDQgPXZInnZ8JlTK4m9WHkIGHUIN5c2Mq
- ADkwiAEpVE+OqBUANqhbQvZ580Za3OWL5FHfbcBXYivNHsds8bi6KeWoycfxNk/OaRIl
- 4yZqt8joINIIlhsRBMKPDhn0nFi2RSisXFmk0=
+ bh=2rSUNgSjeq1Y6QMthpJibO4d0X7SgglkpC8tQOE52Ac=;
+ b=AkaV63jLFR3DQHaKsfpjJ4Fzx6rradwLtgBbQTww8eLChDwR26WyMK1vkGnSeFmu9g
+ ArM91DnGJHGUHo2XWkN5fFA3IRu+Q0x9NkGEWxHY9qF3sCtWp4PV29NKi+U61SLt/B97
+ SqrwrSicioMNvYewmL19IM6hWQOkEQ4236W1k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722002487; x=1722607287;
+ d=1e100.net; s=20230601; t=1722002705; x=1722607505;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wRrxjLJ1Mr8TXI65LLdNLRp4CPTAvrivufFaZv9Gbc8=;
- b=kqgyYy4RmiMR4/+rD9b6nduQ/BGeydN52DfNKSWzROCWdz63skSTH2uvqNltsS5hqi
- r1oHrLGNNw9gZCI5iLcSmsCgIYK3XyrqpEa0SJh01IrMX54IXy+RRFWcVNx825SPfZ6t
- mXguHhbMrIsyIIGrL7b3fqb9Wh4I2ux6O/5vaVHxdUkWXOJ30MkLAusxAn0lxlfztzSt
- VigkZ7giijNQdOFTOyzgEbrcpdLuSrJaKHLgjFXJ076JG3yCBprDW6Jm9aoiAHJQDRUW
- wBUCkU9ZLLP17yC9O1sOaW3ifRjwsg3l3lzA7E29jEbh6WoEbZ0yXfcv6SxG1I51I0P0
- 3eWw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXl6tSWAo5hQFHV/KjpBsExw+E3N1zi4FBjWTGZZVm9vXBKmGIQuUX/PcDHsGDWqrGfJ4dVjTkY7NWSm1MDwSggA5bThg==
-X-Gm-Message-State: AOJu0YwaqKcPPmRpLavyASZ+wL17iCLcYLbjpzmDQpLJ1vwMWFB6AVtc
- AlKlgleFkA4iZ/kgz3IpldgFvCiiy1DXbsuO7zdnyR9hN9xu+6SLuyadMgI5U1w=
-X-Google-Smtp-Source: AGHT+IGd/sUIuMB5B2F/lICQl1Oz0HSuMeIXW1XtifjDU9qDCaCNRpsL53pN7VTOEfhHJNWuUPVsgw==
-X-Received: by 2002:a05:6830:7006:b0:704:470d:a470 with SMTP id
- 46e09a7af769-709324fdbe6mr6230503a34.28.1722002487091; 
- Fri, 26 Jul 2024 07:01:27 -0700 (PDT)
+ bh=2rSUNgSjeq1Y6QMthpJibO4d0X7SgglkpC8tQOE52Ac=;
+ b=Lvtu7c1ySq9IrGwtZ3siTmAmNz2Svx02TdWOerUnGpzdhSKtJOhiTrpOJccQXty1Gp
+ 3PD/LPExpGhMvK/fBCf7GktJVsAiO33EIXtjm9ZmxzR4770XY8vPy9diP3L5KbBc//9z
+ 0sqKrrLDOTtpnsUnSbgusXbLwT5exZV5M/JrcrMwqshQP/2xqcE48FZtoaYA3kgM1SHn
+ UfHxekpiW9vxZ1UKaVb43S7fymehBTUFUFusHpAiwOIaclBbbny4/Iqfey07M4M2K66Q
+ 1Xi+6mTCLaGRusTp705lh3ayCkEnU54jJLnRpFOhomqIX1UkRygENhYMu7pSR4v+hSoe
+ T8QQ==
+X-Gm-Message-State: AOJu0YyshN/H1zGZGASAtY1taH1I9pOfKw10xg8QaLmR6gZlisyHSRJM
+ 4gh38lUEU1yimwTaQ7crfXHgJQJAQhW5kgVc1tZnBhzS3nbBTSE61t4xwqiwODM=
+X-Google-Smtp-Source: AGHT+IFM6J9eXPFh1YTecYqe+9gKUgkh/790Y3LguONA1LDBNaAFBK1oA+SeXlupoWjGMkrLPxaIBQ==
+X-Received: by 2002:a05:6870:524:b0:254:8afa:6914 with SMTP id
+ 586e51a60fabf-264a0eaf1a1mr7092119fac.34.1722002705401; 
+ Fri, 26 Jul 2024 07:05:05 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-202-45.totalplay.net.
  [187.190.202.45]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70930350e4csm763476a34.0.2024.07.26.07.01.21
+ 46e09a7af769-7093078f877sm747143a34.75.2024.07.26.07.05.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Jul 2024 07:01:26 -0700 (PDT)
-Date: Fri, 26 Jul 2024 08:01:18 -0600
+ Fri, 26 Jul 2024 07:05:05 -0700 (PDT)
+Date: Fri, 26 Jul 2024 08:05:02 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
- manish.pandey2@arm.com, Stefan Bosch <stefan_b@posteo.net>,
- Mario Six <mario.six@gdsys.cc>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>,
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng@tinylab.org>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
- Eddie James <eajames@linux.ibm.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: Re: [PATCH v4 07/29] mbedtls: add digest shim layer for MbedTLS
-Message-ID: <20240726140118.GH989285@bill-the-cat>
-References: <20240702182325.2904421-1-raymond.mao@linaro.org>
- <20240702182325.2904421-8-raymond.mao@linaro.org>
- <CAC_iWjKxdyTg+HeALny9sMDhwKpcJ7peL=M_6jdivcWN884Shw@mail.gmail.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>
+Subject: Re: [PATCH v5 16/20] configs: add qemu_arm64_lwip_defconfig
+Message-ID: <20240726140502.GI989285@bill-the-cat>
+References: <cover.1721910373.git.jerome.forissier@linaro.org>
+ <dcb78f4958be3ad322168ccac6214991af44c884.1721910373.git.jerome.forissier@linaro.org>
+ <20240725155806.GV989285@bill-the-cat>
+ <5d3859cb-f1c5-4f43-9223-ba1ce021937f@linaro.org>
+ <20240725162531.GX989285@bill-the-cat>
+ <eeaa2258-83f3-47da-a8ad-c666457e1f08@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="BCxjyXSe6Uajr0an"
+ protocol="application/pgp-signature"; boundary="aNBnZRLSpWKBqYbD"
 Content-Disposition: inline
-In-Reply-To: <CAC_iWjKxdyTg+HeALny9sMDhwKpcJ7peL=M_6jdivcWN884Shw@mail.gmail.com>
+In-Reply-To: <eeaa2258-83f3-47da-a8ad-c666457e1f08@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -115,66 +97,103 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---BCxjyXSe6Uajr0an
+--aNBnZRLSpWKBqYbD
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jul 26, 2024 at 01:18:57PM +0300, Ilias Apalodimas wrote:
-> Hi Raymond
+On Fri, Jul 26, 2024 at 02:27:05PM +0200, Jerome Forissier wrote:
 >=20
-> [...]
 >=20
-> >
-> > +if MBEDTLS_LIB_CRYPTO
-> > +
-> > +config SHA1_MBEDTLS
-> > +       bool "Enable SHA1 support with MbedTLS crypto library"
-> > +       depends on MBEDTLS_LIB_CRYPTO && SHA1
-> > +       help
-> > +         This option enables support of hashing using SHA1 algorithm
-> > +         with MbedTLS crypto library.
-> > +
-> > +config SHA256_MBEDTLS
-> > +       bool "Enable SHA256 support with MbedTLS crypto library"
-> > +       depends on MBEDTLS_LIB_CRYPTO && SHA256
-> > +       help
-> > +         This option enables support of hashing using SHA256 algorithm
-> > +         with MbedTLS crypto library.
-> > +
-> > +config SHA512_MBEDTLS
-> > +       bool "Enable SHA512 support with MbedTLS crypto library"
-> > +       depends on MBEDTLS_LIB_CRYPTO && SHA512
-> > +       default y if TI_SECURE_DEVICE && FIT_SIGNATURE
+> On 7/25/24 18:25, Tom Rini wrote:
+> > On Thu, Jul 25, 2024 at 06:10:48PM +0200, Jerome Forissier wrote:
+> >>
+> >>
+> >> On 7/25/24 17:58, Tom Rini wrote:
+> >>> On Thu, Jul 25, 2024 at 02:57:37PM +0200, Jerome Forissier wrote:
+> >>>
+> >>>> Add qemu_arm64_lwip_defconfig which #include's qemu_arm64_defconfig =
+and
+> >>>> selects NET_LWIP instead of NET. This config has all the supported n=
+et
+> >>>> commands enabled.
+> >>>>
+> >>>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> >>>> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> >>>> ---
+> >>>>  configs/qemu_arm64_lwip_defconfig | 5 +++++
+> >>>>  1 file changed, 5 insertions(+)
+> >>>>  create mode 100644 configs/qemu_arm64_lwip_defconfig
+> >>>>
+> >>>> diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_=
+lwip_defconfig
+> >>>> new file mode 100644
+> >>>> index 00000000000..1afef04d7a0
+> >>>> --- /dev/null
+> >>>> +++ b/configs/qemu_arm64_lwip_defconfig
+> >>>> @@ -0,0 +1,5 @@
+> >>>> +#include <configs/qemu_arm64_defconfig>
+> >>>> +CONFIG_NET_LWIP=3Dy
+> >>>> +CONFIG_CMD_DNS=3Dy
+> >>>> +CONFIG_CMD_WGET=3Dy
+> >>>> +CONFIG_EFI_HTTP_BOOT=3Dy
+> >>>
+> >>> This doesn't work,
+> >>
+> >> How so? I've used "make qemu_arm64_lwip_defconfig" hundreds of time to=
+ build for
+> >> arm64 QEMU :o
+> >=20
+> > Yes, but buildman (and CI) are in a chicken-and-egg situation without a
+> > few more details in the new defconfig, sadly.
 >=20
-> I don't like this default 'y' for 'ti secure devices'.  This is a
-> board specific option. I think it should be defined on the defconfig
-> of those boards instead.
+> With:
+>=20
+> $ cat configs/qemu_arm64_lwip_defconfig
+> #include <configs/qemu_arm64_defconfig>
+>=20
+> CONFIG_ARM=3Dy
+> CONFIG_ARCH_QEMU=3Dy
+>=20
+> CONFIG_NET_LWIP=3Dy
+> CONFIG_CMD_DNS=3Dy
+> CONFIG_CMD_WGET=3Dy
+> CONFIG_EFI_HTTP_BOOT=3Dy
+>=20
+> ...I get:
+>=20
+> $ make qemu_arm64_lwip_defconfig
+> generated_defconfig:71:warning: override: reassigning to symbol ARM
+> generated_defconfig:71:warning: override: ARM changes choice state
+> generated_defconfig:72:warning: override: reassigning to symbol ARCH_QEMU
+> generated_defconfig:72:warning: override: ARCH_QEMU changes choice state
+> #
+> # configuration written to .config
+> #
+>=20
+> It is OK?
 
-This follows the current symbols which are this way because it's
-basically for all ARCH_K3 platforms, and unlike the Linux Kernel, I'm
-happy about seeing default y if ... in the Kconfig files for things
-where there's some, but not much, choice in the matter on a given SoC.
+Yes, that's fine. Thanks.
 
 --=20
 Tom
 
---BCxjyXSe6Uajr0an
+--aNBnZRLSpWKBqYbD
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmajrCYACgkQFHw5/5Y0
-tyyV1wwAj1T+FG97zsWkn+TIbvn5Dh+IppGtbie9C4M1aFwX8mCeGBK50jomkHjF
-jb+tOfALwbEs17nOKsaNUEp+JB5Jbh2UrULXxWAco3zMtZ+EAUIxZE5F957M/ruw
-lzkE06ts993gH+woGiOv/e0Qk2l/gTiMKXYumoUv3fgE0bnBTaMDBreZ5O6o50NQ
-50xzp6l36Wrzv+CKK15I2Fikl/0xDizZfnquNnXqYb0N5XOPaD1t7PxkwTxKeTP1
-6dyXBKxccUU4Tkd1lRadwUz8AtcKzWHtC1POPfstYcsfw9gRZb2+Mz/MCDiWCphW
-vvPnUbtf0rcJ/uQM0KZTStz4/L6N/8EhL4+DbRERH246sFXf9VWsfdWMTCMJv6hx
-kO6PAk6FW0XKrDbpgCzCHTmEaZlxsDjt4LRgZFyCSUaPCBiT1OLQEEsVFpTSE6OC
-rQsvXf3N74gytOjnuR/H4Wxo27nYOpnvrfl3JLexCzS/cnjpRjgmlGP/hIE6HM+z
-bIdJmZub
-=OkCN
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmajrQ4ACgkQFHw5/5Y0
+tyydpQwAqTeNYpD/qgr9dYtt010wVnHunKeblrPrFzgbigQ6+jjjEpVwGur1Jek4
+MAcU8RGn8jjQa9/E3UZPfTF+PH0hvVZRFdIDiD5YQSrb79BTQsT11BOPCtp9BF1a
+Fng5jYaMoo8vUE2K926tXlfFKHiBbWU6jElXpHsBfrurMK9s3s13OrGG+UI+nODo
+9ilA+1GDo53Y+KrnqE7kNClCDS/frxDSqvW16XwM2tFLAoZU72mTed2z4nxwBQ2v
+5EmX5EufZXnp+aQ2s13E8Vu/LQesPoRsIpSJhwi01c7D0kefqe8/rhW7EsWmM7+S
+OjAGEFfA+wrEZpLYNNRgY9LhdbUGoggCLhyz52bMlRslxRkWSLpNnDl6tKa17M7C
+tOvxXeyJM6S+IiofmnzOci87W+hM2oIF/S+fVe3UwDFT+PFSed9UCfaqDoqTFfxq
+Ex/Di/ntQFR7eArm5ZJFH86HloMu/zO7o7+rQ34nhioUyvGxdKN26JF/GfJSiKsS
+emz+kDzx
+=6ZeN
 -----END PGP SIGNATURE-----
 
---BCxjyXSe6Uajr0an--
+--aNBnZRLSpWKBqYbD--
