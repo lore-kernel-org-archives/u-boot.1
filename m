@@ -4,73 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86C9EC3DA49
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 14:01:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8818C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 14:01:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C548F885BF;
-	Fri, 26 Jul 2024 16:00:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3A81587CF8;
+	Fri, 26 Jul 2024 16:00:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TPAzI2IC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ko79Pord";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45ACE878ED; Fri, 26 Jul 2024 16:00:51 +0200 (CEST)
-Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
- [IPv6:2607:f8b0:4864:20::133])
+ id 97357885BF; Fri, 26 Jul 2024 16:00:52 +0200 (CEST)
+Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
+ [IPv6:2607:f8b0:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34B1C884DB
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 16:00:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E82088570
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 16:00:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-3970f9331deso7540805ab.2
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 07:00:49 -0700 (PDT)
+Received: by mail-il1-x12b.google.com with SMTP id
+ e9e14a558f8ab-39865a15900so6561995ab.1
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 07:00:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722002448; x=1722607248; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722002449; x=1722607249; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FYhc/YHjz+SNjU8S0PYvLCnIV64pvWKwFmmMo7EqYdI=;
- b=TPAzI2ICymt0EeUyAflFb2+QaXjdLb94P4XIfUPlNQ7nCG81Nz8c4g94sDY9imELSY
- bijAnQZVsVHvAjQN6KW3rZP0R4TcjqBsvLjX5yHIhR6oIlJkQB/a6eQHH8OUqQ+yRa7V
- IZS5UarHPCUa2pJ4soKWaLlqzGG8tO/ibSkxw=
+ bh=LiorbJr5W30iyqHwCPgZi6RbEbcE4DwrMZBLGDyP3qw=;
+ b=Ko79PordScxRkhM38bQvXm7x1jmVqA9ZqkKIA9Y4JACw/uBUPxfbLtJQircKuLl5tI
+ flbozbPDkH7VPraLuxPspliRQDDgzrBAlQgABrtivm3fQQI31y32WNTH9MXp3todM9aB
+ 5VjSLonNf681x+l8c83ECnKb6E+7rKIBdMsEM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722002448; x=1722607248;
+ d=1e100.net; s=20230601; t=1722002449; x=1722607249;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FYhc/YHjz+SNjU8S0PYvLCnIV64pvWKwFmmMo7EqYdI=;
- b=xT8ynIP0HyEI24AHpny7wS9WlfqJZc/PEDsuTANTDElQjsBTHGRJ9SzpYv0otpAaZT
- erUcnwkg18fhtXDf5vb0QERwwWzbZQVnhSS7iyP3kvdNn0wpyTEo+0UBB1C67hQOm6ZT
- MOHID8S08Sod6+b35hZJHfQqDiFKxUII0D8xkyiwaviq4fxUab/lUqv4E3tjxiUZqLOS
- uWooohJbT6lt4soFNGKK3kynM6/C8dR1ZukZYbozysEsqEvf7+f13hSvJDScE3aAWOJd
- BRCYYnkSg/HlBaiqnvZKAk1HRvDKKIAunxBbBOFzexUdRVW2tCwhM+QVcB34VSgQGKdA
- iQ7g==
-X-Gm-Message-State: AOJu0Yx6cfybvfJ6yj/lH/mzHO1U1Kua2DfFXmSk72qshYb7IkY0qosY
- 4+hItAspiyFIZDreDp+qZ+6knPOp+bW5VH9p4KqN2236QyhgV+Z6GuWB/UPVcixKHDjyvT9a8A0
+ bh=LiorbJr5W30iyqHwCPgZi6RbEbcE4DwrMZBLGDyP3qw=;
+ b=dCPH5YVp1GNqqwhy7Sixw3pcDyQ7XMbaW+GZTLAK9nlW5ypN72j8PJIXAGE4QE2onR
+ Lfe2bVcOFCfns/HJKDs6i1m7ZWk6cYgyVZc5dMeSV7Vp4NW7afXNTGIBw/4Do9yk2mX2
+ jX1pkRgjCsOUE2dnh94zhTVR2bfvqfWZI6Uy86/tO3UxnQ8Tt/6Z+TMHwqzkW2Un86oB
+ GeLZNgfjNg8fHwrRBoX7sVXVhD6bfGie6kLhnKFI4CFuovHffeg1v657vJdhkP91H+Gd
+ yzpWBawYLJZWByg4hoLDYp/uaj/IGJFY/dj+90Ie2FnZkeSlP57q/MIFRBtPsyAHswXz
+ Xtng==
+X-Gm-Message-State: AOJu0YxAbIV6+2dTfOv58rGnuLzpN43wl6KwISP3ySj08syLrH6U68pg
+ 8l7yLSq7d2lsVSCjtgWKs8eY/Ix5mUZ6Y9iaQV2Hd/D+Q+B6k2Dtws21Rm+IpLFgmIOQUPlH04A
  =
-X-Google-Smtp-Source: AGHT+IEnBIvuNI4jj1BB9OZkwCIv6JaoJFnCytcrU0f5oeYOCuDXRWos2kQUUdKwZoBM/0FOffIxMg==
-X-Received: by 2002:a05:6e02:1486:b0:397:8704:ac84 with SMTP id
- e9e14a558f8ab-39a2400f176mr71883135ab.21.1722002447610; 
- Fri, 26 Jul 2024 07:00:47 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH6bImRB4RzLxJpA5uQwAI3eG9yUYTIDqsVMi0kddoGy0UVDzLGEB69R7Xpgb5YJ8OpdFxfOQ==
+X-Received: by 2002:a05:6e02:1c83:b0:399:df91:bf47 with SMTP id
+ e9e14a558f8ab-39a21822a89mr73584575ab.18.1722002448982; 
+ Fri, 26 Jul 2024 07:00:48 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39a22e7ec25sm14411905ab.6.2024.07.26.07.00.46
+ e9e14a558f8ab-39a22e7ec25sm14411905ab.6.2024.07.26.07.00.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Fri, 26 Jul 2024 07:00:47 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
- Eugene Uriev <eugeneuriev@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, Shengyu Qu <wiagn233@outlook.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 1/4] malloc: Support testing with realloc()
-Date: Fri, 26 Jul 2024 08:00:35 -0600
-Message-Id: <20240726140038.194946-2-sjg@chromium.org>
+Subject: [PATCH v4 2/4] lib: Handle a special case with str_to_list()
+Date: Fri, 26 Jul 2024 08:00:36 -0600
+Message-Id: <20240726140038.194946-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240726140038.194946-1-sjg@chromium.org>
 References: <20240726140038.194946-1-sjg@chromium.org>
@@ -92,33 +89,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present in tests it is possible to cause an out-of-memory condition
-with malloc() but not realloc(). Add support to realloc() too, so code
-which uses that function can be tested.
+The current implementation can return an extra result at the end when
+the string ends with a space. Fix this by adding a special case.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- common/dlmalloc.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ lib/strto.c   | 4 +++-
+ test/str_ut.c | 4 +---
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/common/dlmalloc.c b/common/dlmalloc.c
-index 62e8557daa7..1e1602a24de 100644
---- a/common/dlmalloc.c
-+++ b/common/dlmalloc.c
-@@ -1698,6 +1698,10 @@ Void_t* rEALLOc_impl(oldmem, bytes) Void_t* oldmem; size_t bytes;
- 		panic("pre-reloc realloc() is not supported");
- 	}
- #endif
-+  if (CONFIG_IS_ENABLED(UNIT_TEST) && malloc_testing) {
-+    if (--malloc_max_allocs < 0)
-+      return NULL;
-+  }
+diff --git a/lib/strto.c b/lib/strto.c
+index 5157332d6c1..f83ac67c666 100644
+--- a/lib/strto.c
++++ b/lib/strto.c
+@@ -236,12 +236,14 @@ const char **str_to_list(const char *instr)
+ 		return NULL;
  
-   newp    = oldp    = mem2chunk(oldmem);
-   newsize = oldsize = chunksize(oldp);
+ 	/* count the number of space-separated strings */
+-	for (count = *str != '\0', p = str; *p; p++) {
++	for (count = 0, p = str; *p; p++) {
+ 		if (*p == ' ') {
+ 			count++;
+ 			*p = '\0';
+ 		}
+ 	}
++	if (p != str && p[-1])
++		count++;
+ 
+ 	/* allocate the pointer array, allowing for a NULL terminator */
+ 	ptr = calloc(count + 1, sizeof(char *));
+diff --git a/test/str_ut.c b/test/str_ut.c
+index 389779859a3..96e048975d8 100644
+--- a/test/str_ut.c
++++ b/test/str_ut.c
+@@ -342,9 +342,7 @@ static int test_str_to_list(struct unit_test_state *uts)
+ 	ut_asserteq_str("space", ptr[3]);
+ 	ut_assertnonnull(ptr[4]);
+ 	ut_asserteq_str("", ptr[4]);
+-	ut_assertnonnull(ptr[5]);
+-	ut_asserteq_str("", ptr[5]);
+-	ut_assertnull(ptr[6]);
++	ut_assertnull(ptr[5]);
+ 	str_free_list(ptr);
+ 	ut_assertok(ut_check_delta(start));
+ 
 -- 
 2.34.1
 
