@@ -4,65 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37780C3DA7F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 12:44:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0394C3DA49
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 12:44:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED37C8862E;
-	Fri, 26 Jul 2024 14:44:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=inbox.ru
+	by phobos.denx.de (Postfix) with ESMTP id 618CE8863C;
+	Fri, 26 Jul 2024 14:44:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=inbox.ru header.i=@inbox.ru header.b="gsiDpxM9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZvQHfT4Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86150884F1; Fri, 26 Jul 2024 14:07:34 +0200 (CEST)
-Received: from smtp47.i.mail.ru (smtp47.i.mail.ru [95.163.41.85])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 085BF82BA7; Fri, 26 Jul 2024 14:08:22 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 901D48304A
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 14:07:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 04BDA884CC
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 14:08:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=inbox.ru
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fido_max@inbox.ru
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=inbox.ru;
- s=mail4; h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:
- To:From:From:Sender:Reply-To:To:Cc:Content-Type:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive:
- X-Cloud-Ids:Disposition-Notification-To;
- bh=huFUU7WjP/zT42uBZjr+WZVT6yLV+Bwyt6pHLtI2BFY=; t=1721995652; x=1722085652; 
- b=gsiDpxM9i1Ds3ufTAzW7SKER9Qm/qNo8HhQ6Pa5AQZDQhu3KjzYXEDFaj4sz133d2xw+UsP7NQK
- Zfzw95xuqOyi8p6C/NoOAkWNLZSlsm8cs6PBXxY4riu0Ymc3r6oGI3URz5Bgp4JI6y8ICBEHxzlHz
- UClo4AkTgqzRBlcE3QcT9jWgEUCb4aexelXSiw0ckhzX02EU0GiCfz+bIe4LdDmmHbD23q+LVbK1B
- Acr+Wh2SmAPaUp3uL/15LVSBNwadlIvJjaFSlzYdKwMVr0Ias/bnkxNbLKt9Cw0xrqD9pyQ3sNPl1
- gM69zERR1WyKJ/FUiwY+HdVhrFl/yiC8UJxw==;
-Received: by exim-smtp-868bf69f6c-jmqbj with esmtpa (envelope-from
- <fido_max@inbox.ru>)
- id 1sXJjM-00000000SKj-3JST; Fri, 26 Jul 2024 15:07:29 +0300
-From: Maxim Kochetkov <fido_max@inbox.ru>
-To: u-boot@lists.denx.de, rick@andestech.com, ycliang@andestech.com,
- trini@konsulko.com
-Cc: Maxim Kochetkov <fido_max@inbox.ru>
-Subject: [PATCH 1/1] riscv: define find_{first,next}_zero_bit in asm/bitops.h
-Date: Fri, 26 Jul 2024 15:07:21 +0300
-Message-ID: <20240726120721.150484-1-fido_max@inbox.ru>
-X-Mailer: git-send-email 2.45.2
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a7a83a968ddso202245766b.0
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 05:08:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1721995697; x=1722600497; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=YqgA/mz1ubTJ7pH8diEJHmREFgkYo82fVmsFQT3e7a0=;
+ b=ZvQHfT4QCozuARaBLOuXtWvAc295RjFZvSrlXQlwrM5uJeQW0xg0APNDs4VN62Q9Y8
+ P6aXFgaKFyQj5DqGoBI+X11qj13EVIQT62uRcIZ4elSkBguWJT7OzdFZMrADa81sX+ra
+ uk6cHLNB6rwcWlgMktT3AVgcvQaYaio9HPjS2Nle0QRxhT1HGpEt0DSQ8zc36coc4EH8
+ 55w7Mn9TBN/h+b/5T/oNToFRjdtxlTouPaIsmD3J13Qcyhj0w/kDvgwF9iul3ZCbM8dt
+ ICrPpJxeytQNxDzSuhS1tSwlyUQMqJ8hamyoruP/cGq0y7SkX94NkZ9k/YcmggnhFWTL
+ cQzg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721995697; x=1722600497;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=YqgA/mz1ubTJ7pH8diEJHmREFgkYo82fVmsFQT3e7a0=;
+ b=jiWmZxYONryioeO3V5uxPiZeDW8VbTHEXZ9GyrQSjtmxGf2gSotVw1xb0gyU22Nd3z
+ C5Bs6PeQ+u7aIOZS+7326c2yWAoqEZTSnzGjzK59yCXGjAHP2Tji1bE6guT4YeaMngVp
+ XvuOIfh0igIQBEdrVki4F4bhY/oFKNC6DUJ99XP8YBxxYUa9HYyT39SG+E6ccfawYgvX
+ vzCN2dkKPkLNlH68GrMBRDuyRvMGIitTJd3T4hwb98CbebKZXJNWoxdyUhw+IWMycfTH
+ NIb9iYKXfarfban5F/E5shsLZFbXGHiW9g4Ep19d0lErK4V7MsRC4PWXtd98ErXpcZZK
+ LxVg==
+X-Gm-Message-State: AOJu0Yyd+9jImcgSM0cbe+a39Eh299Bup+iiNwlke2TsgdY1WTWQA9Jd
+ oP46yzUz9BTQkIXOXGR82cIaNkP13XQVR3nPM7fSELp9qmstMh2BIOR0rE5yAk4=
+X-Google-Smtp-Source: AGHT+IGR4u9t97P0KkXk+18Xm5KQuhNi242nq9kBB6pVYP3LJSlKTOZ+IW/I8gsJuswbU84i5w2x0Q==
+X-Received: by 2002:a17:907:3e91:b0:a7a:c619:5105 with SMTP id
+ a640c23a62f3a-a7acb51e25emr402961666b.40.1721995697276; 
+ Fri, 26 Jul 2024 05:08:17 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:ef99:2dfc:dad:83fa?
+ ([2a01:e0a:3cb:7bb0:ef99:2dfc:dad:83fa])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a7acab28249sm168425866b.30.2024.07.26.05.08.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 26 Jul 2024 05:08:17 -0700 (PDT)
+Message-ID: <44223a7d-805f-4882-842a-8e5fa1814d39@linaro.org>
+Date: Fri, 26 Jul 2024 14:08:13 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Authentication-Results: exim-smtp-868bf69f6c-jmqbj;
- auth=pass smtp.auth=fido_max@inbox.ru
- smtp.mailfrom=fido_max@inbox.ru
-X-Mailru-Src: smtp
-X-7564579A: 78E4E2B564C1792B
-X-77F55803: 4F1203BC0FB41BD9000B6812E77BE1C64F981000A099A673814E7FD5A941394E182A05F5380850406FEB11808CCA91CC3DE06ABAFEAF67059A07A756A89558385FE6BF42C7EEC79F77EA5CD51374AFCE
-X-7FA49CB5: FF5795518A3D127A4AD6D5ED66289B5278DA827A17800CE782A779A89F7D69B2C2099A533E45F2D0395957E7521B51C2CFCAF695D4D8E9FCEA1F7E6F0F101C6778DA827A17800CE7F095E3787A950C88EA1F7E6F0F101C6723150C8DA25C47586E58E00D9D99D84E1BDDB23E98D2D38B043BF0FB74779F36DE22D8A5E8FA8375561BD3EA19457CBD1C4F90EADE3E438E1DF9E95F17B0083B26EA987F6312C9EC599709FD55CB46A62CC0D3CB04F14752D2E47CDBA5A96583C09775C1D3CA48CF4C82C86BFC697D19117882F4460429724CE54428C33FAD30A8DF7F3B2552694AC26CFBAC0749D213D2E47CDBA5A9658378DA827A17800CE7A6779F98BF527B7A9FA2833FD35BB23DF004C906525384302BEBFE083D3B9BA71A620F70A64A45A98AA50765F7900637A451E1E29F2EDBED6D1867E19FE1407978DA827A17800CE7649B83402744A6742DBA43225CD8A89FB26E97DCB74E625235872C767BF85DA2F004C90652538430E4A6367B16DE6309
-X-C1DE0DAB: 0D63561A33F958A55C61AF4357F576225002B1117B3ED6962CE3D916DB564E1D484B8D70797403F6823CB91A9FED034534781492E4B8EEADB0A1B66E9F5C9ED4C79554A2A72441328621D336A7BC284946AD531847A6065A535571D14F44ED41
-X-C8649E89: 1C3962B70DF3F0ADE00A9FD3E00BEEDF77DD89D51EBB7742D3581295AF09D3DF87807E0823442EA2ED31085941D9CD0AF7F820E7B07EA4CFB0B4B273E10E53B273D61898C608F9210EE761D87920FBD4045819CB047EB8F396A3CD8EA40B8F977D42B5C1564802C6A2241FF600A9E5A0FAD0744E3A7D614B548E503556A182319F49EEF1215E7BEC913E6812662D5F2A17D6C1CDD2003EB8E03787203701020945C72C348FB7EED3
-X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu530nj6fImhcD4MUrOEAnl0W826KZ9Q+tr5ycPtXkTV4k65bRjmOUUP8cvGozZ33TWg5HZplvhhXbhDGzqmQDTd6OAevLeAnq3Ra9uf7zvY2zzsIhlcp/Y7m53TZgf2aB4JOg4gkr2biojW5AakKLSukPT8RvPazbZig==
-X-Mailru-Sender: 689FA8AB762F7393C6D0B12EA33CAA9BFCACA472F7AA889FA3CD8D69EDBCA94C82231978AE40DA2190DE4A6105A3658D481B2AED7BCCC0A49AE3A01A4DD0D55C6C99E19F044156F45FEEDEB644C299C0ED14614B50AE0675
-X-Mras: Ok
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 02/20] net: introduce alternative implementation as
+ net-lwip/
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Marek Vasut <marex@denx.de>,
+ Simon Glass <sjg@chromium.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Jesse Taube <mr.bossman075@gmail.com>, Bo Gan <ganboing@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Greg Malysa <greg.malysa@timesys.com>,
+ John Keeping <jkeeping@inmusicbrands.com>, Shengyu Qu
+ <wiagn233@outlook.com>, Stefan Roese <sr@denx.de>,
+ Jagan Teki <jagan@amarulasolutions.com>, Bin Meng <bmeng@tinylab.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sean Anderson <sean.anderson@seco.com>,
+ Andre Przywara <andre.przywara@arm.com>, Samuel Holland
+ <samuel@sholland.org>, Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Alexey Romanov <avromanov@salutedevices.com>, Ion Agorria <ion@agorria.com>,
+ Yang Xiwen <forbidden405@outlook.com>, Boon Khai Ng
+ <boon.khai.ng@intel.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Baruch Siach <baruch@tkos.co.il>
+References: <cover.1721910373.git.jerome.forissier@linaro.org>
+ <a88252b5c961ee28a98653751bae627ab3349668.1721910373.git.jerome.forissier@linaro.org>
+ <20240725161754.GW989285@bill-the-cat>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20240725161754.GW989285@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Fri, 26 Jul 2024 14:43:57 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,72 +124,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These seem to be missing, and trying to build fastboot cmd without
-them is causing errors due to these being missing.
 
-Signed-off-by: Maxim Kochetkov <fido_max@inbox.ru>
----
- arch/riscv/include/asm/bitops.h | 40 +++++++++++++++++++++++++++++++++
- 1 file changed, 40 insertions(+)
 
-diff --git a/arch/riscv/include/asm/bitops.h b/arch/riscv/include/asm/bitops.h
-index 35f1368b83..2f2994c4dd 100644
---- a/arch/riscv/include/asm/bitops.h
-+++ b/arch/riscv/include/asm/bitops.h
-@@ -138,6 +138,43 @@ static inline unsigned long ffz(unsigned long word)
- 	return k;
- }
- 
-+static inline int find_next_zero_bit(void *addr, int size, int offset)
-+{
-+	unsigned long *p = ((unsigned long *)addr) + (offset / BITS_PER_LONG);
-+	unsigned long result = offset & ~(BITS_PER_LONG - 1);
-+	unsigned long tmp;
-+
-+	if (offset >= size)
-+		return size;
-+	size -= result;
-+	offset &= (BITS_PER_LONG - 1);
-+	if (offset) {
-+		tmp = *(p++);
-+		tmp |= ~0UL >> (BITS_PER_LONG - offset);
-+		if (size < BITS_PER_LONG)
-+			goto found_first;
-+		if (~tmp)
-+			goto found_middle;
-+		size -= BITS_PER_LONG;
-+		result += BITS_PER_LONG;
-+	}
-+	while (size & ~(BITS_PER_LONG - 1)) {
-+		tmp = *(p++);
-+		if (~tmp)
-+			goto found_middle;
-+		result += BITS_PER_LONG;
-+		size -= BITS_PER_LONG;
-+	}
-+	if (!size)
-+		return result;
-+	tmp = *p;
-+
-+found_first:
-+	tmp |= ~0UL << size;
-+found_middle:
-+	return result + ffz(tmp);
-+}
-+
- /*
-  * ffs: find first bit set. This is defined the same way as
-  * the libc and compiler builtin ffs routines, therefore
-@@ -158,6 +195,9 @@ static inline unsigned long ffz(unsigned long word)
- #define hweight16(x) generic_hweight16(x)
- #define hweight8(x) generic_hweight8(x)
- 
-+#define find_first_zero_bit(addr, size) \
-+	find_next_zero_bit((addr), (size), 0)
-+
- #define test_and_set_bit		__test_and_set_bit
- #define test_and_clear_bit		__test_and_clear_bit
- 
+On 7/25/24 18:17, Tom Rini wrote:
+> On Thu, Jul 25, 2024 at 02:57:23PM +0200, Jerome Forissier wrote:
+> 
+>> Prepare the introduction of the lwIP (lightweight IP) TCP/IP stack by
+>> adding a new net/lwip/ directory and the NET_LWIP symbol. Network
+>> support is either NO_NET, NET (legacy stack) or NET_LWIP. Subsequent
+>> commits will introduce the lwIP code, re-work the NETDEVICE integration
+>> and port some of the NET commands and features to lwIP.
+>>
+>> SPL_NET cannot be enabled when NET_LWIP=y. SPL_NET pulls some symbols
+>> that are part of NET (such as arp_init(), arp_timeout_check(),
+>> arp_receive(), net_arp_wait_packet_ip()). lwIP support in SPL may be
+>> added later.
+>>
+>> Similarly, DFU_TFTP and FASTBOOT are not compatible with NET_LWIP
+>> because of dependencies on net_loop(), tftp_timeout_ms,
+>> tftp_timeout_count_max and other NET things. Let's add a dependency on
+>> !NET_LWIP for now.
+>>
+>> As for SANDBOX, NET_LWIP cannot be used either because of strong
+>> assumptions on the network stack. Make NET_LWIP depend on !SANDBOX so
+>> that the NET_LWIP alternative is not visible in make menuconfig when
+>> sandbox_defconfig is used.
+>>
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> [snip]
+> 
+> Here in net/Kconfig you do..
+>> +if NET || NET_LWIP
+>> +
+>> +config BOOTDEV_ETH
+>> +	bool "Enable bootdev for ethernet"
+>> +	depends on BOOTSTD
+>> +	default y
+>> +	help
+>> +	  Provide a bootdev for ethernet so that is it possible to boot
+>> +	  an operating system over the network, using the PXE (Preboot
+>> +	  Execution Environment) protocol.
+>> +
+>>  config SYS_RX_ETH_BUFFER
+>>  	int "Number of receive packet buffers"
+>>  	default 4
+> 
+> But we must have SYS_RX_ETH_BUFFER defined even in the NO_NET case as
+> otherwise previously <net.h> and now <net-common.h> cannot be used, and
+> untying that is another big mess. We include <net.h> in common areas for
+> function prototypes where their usage is guarded. But we use PKTBUFSRX
+> in some structs that aren't guarded. Trying to build for example for
+> am62x_beagleplay_r5 with this series blows up in a lot of places.
+
+I have moved SYS_RX_ETH_BUFFER out of the 'if NET || NEW_LWIP' in v6.
+
+Thanks,
 -- 
-2.45.2
-
+Jerome
