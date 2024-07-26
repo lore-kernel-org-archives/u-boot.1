@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BC79C3DA70
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 13:03:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87C43C3DA49
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 13:03:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1DE388792;
-	Fri, 26 Jul 2024 14:59:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 20356887C0;
+	Fri, 26 Jul 2024 14:59:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N0eMcF1+";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bVvQ3/27";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A1398875B; Fri, 26 Jul 2024 14:59:23 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id AFC8288718; Fri, 26 Jul 2024 14:59:24 +0200 (CEST)
+Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
+ [IPv6:2607:f8b0:4864:20::c31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1134588714
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 14:59:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A5F1C87C7E
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 14:59:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6b79fc76d03so3642856d6.1
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 05:59:21 -0700 (PDT)
+Received: by mail-oo1-xc31.google.com with SMTP id
+ 006d021491bc7-5d5af8a4abbso632246eaf.1
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 05:59:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721998760; x=1722603560; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721998761; x=1722603561; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=t77mAhRpjKoIC+9Rns8AJv19OQNX3cuqxM1ok0ToT4A=;
- b=N0eMcF1+9gSeA56GZm0PS72uW/C/Q2fGGLk/mmaEtbsev2vWa/DPq80isPmfYxAMfG
- 3tiziToXltZcQuD8AuMARsa5UjgdsVuNvexdDJELs6T0DO959ysK1Pgf+8KlxoK6EJEV
- EMuGf3J+yvj7WoEseX9jhIIflJ15/3hml40Ys=
+ bh=oZVQD3/MvZUrwmUIK5a5y06s52tx6uyBNAkMBOwmAR4=;
+ b=bVvQ3/2731ZUG/HUK1aQpACy5hE8ZqvjPIytqUi8ktbJkvJYsUz1RaQWw6yPl9vrBA
+ YBSDecYuzUnEeyCXATpzzZxraIeSFghgNNDi9l2XA7ZOi330APlLONqbMUK3UgXDMmVn
+ HYpl5VG86axmsd5kDQn8CVkftpe4WgRRzSke0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721998760; x=1722603560;
+ d=1e100.net; s=20230601; t=1721998761; x=1722603561;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=t77mAhRpjKoIC+9Rns8AJv19OQNX3cuqxM1ok0ToT4A=;
- b=OCf/xdc9wXQfWj8mMod5D11k7Zz2xjIeyTs68Own7fn5fM9/l93jmkmcGFe9jLzcLd
- 9JstcqAqWIYgA4yLWpDGjbdXi/04nQc7xxaw1aMeh7E+OcVTBrI0sQMeKn9/t8ugl6Kt
- R4nXmkOOV8CB0Ui7kJx37G3+k8Gw04guPrdCyj737PeQtrJqzlMJbNF80HBFYlIZPksB
- +xy4DEpBSHxhMrPPaXO9SVbBbB2X98yq/K07VTXdEn/mwpu6NGae2GDGIIfquXgZoG1x
- iCuau9CGjzbFDBfv3B41xxIALsxa/cMypPTEdu0dFLcSB2YRNTZ8RcNY9O6gXjVu1EMp
- hpmw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXpYZRRmX6NHSgFvn/VkkSWHA52oJ7eQ4xPjuGtRTL9Y7yiv8TXUBHuZJ5JhPWyxANtCC9PzIAyb7OqKFoz/vMMwNFNPQ==
-X-Gm-Message-State: AOJu0YwtgNShjbRD2lfq9HfKzmnlGL3Q5SfaXefDhCAFH0sFk+WdhI4f
- SLBGQh8eO0KGi/fpZ/ewhxSg7ltcGA6bqxbYqX44zfPGNgOo927pXeGrtHm5T6XPwn6WMYN0NN2
- aS7qm7vtnlbHVY36Zlodr81qP5p4ds1n2Njbv
-X-Google-Smtp-Source: AGHT+IGTN9v0qGZVG1+ZVT4ub7COa8T9UwLjcWZ852NqKexLS6/Xn1r/xU5gbGBh2Dq/Yhnyx1cRMAO/J646pKR84nk=
-X-Received: by 2002:a05:6214:d6e:b0:6b7:a248:3961 with SMTP id
- 6a1803df08f44-6bb3cac5a8dmr76645266d6.41.1721998759936; Fri, 26 Jul 2024
- 05:59:19 -0700 (PDT)
+ bh=oZVQD3/MvZUrwmUIK5a5y06s52tx6uyBNAkMBOwmAR4=;
+ b=bT9rsaMHagcGsRQ/Q6VT4UioBezOv9NiZQp4y187t002tPBHncda4Dt+P4aMHSm5cN
+ OgZEndRkPNLv0KbWq03Q960k1SmYMa+zp/dw4G3ep+F2EcEfO66fP1rPpivcjX5Ht3Rz
+ mMe8dL+z38pnQsifsJcdhrEg15r2+wV6E4OfCfRw5P3v9gl7WtghAlH2aweS2x7qHCEW
+ dyFVWr9kigzstfZ73Yzjx9CIVL7Z3MLAeYluDJ/Na+or5pl2GDKq20oe8dhjgLlKEzpg
+ yXZu2h3s6ILOVQIRcVoTDgyGyzNaMq3K9PjVCcTro5ZCz9B9KUj2EqNNSAlSlJkX4aWS
+ Jtsw==
+X-Gm-Message-State: AOJu0Yw60gjOCPf7ooUxkcG/2L1aVkQuEg15DLDu9Zu1I0Svxeti8ORs
+ +BTeEOl18Ycq1576CpXz6q9nHUxnjjcafQInt062h47wbDQl6IzDdGrqf//2OfeFEz+uNV6du6m
+ HbAvX+8pILm1PwzADwAjTSE8MuUz3/pPdFCNp
+X-Google-Smtp-Source: AGHT+IFfUaUUsPsLsx050zE3O8+kFppCimoLIggobcLqt0HJLyXDb62Uy6YowyOnLh8gcax791jdnFYz8ZPlcl8BWQo=
+X-Received: by 2002:a05:6358:988a:b0:1a1:fe6f:a2f3 with SMTP id
+ e5c5f4694b2df-1acfb88bc64mr708652455d.1.1721998761315; Fri, 26 Jul 2024
+ 05:59:21 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 26 Jul 2024 05:59:18 -0700
+ HTTPREST; Fri, 26 Jul 2024 05:59:19 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240717155712.2913651-2-sjg@chromium.org>
-References: <20240717155712.2913651-2-sjg@chromium.org>
- <20240717155712.2913651-1-sjg@chromium.org>
-Date: Fri, 26 Jul 2024 05:59:18 -0700
-X-Google-Sender-Auth: oRjc8YQeIsq9Kx1-2YvB7xSaehs
-Message-ID: <CAFLszTgfZ4sQ4bxn8grizqoM0wBRRyhZ+0zroiboSiOj+kriQw@mail.gmail.com>
-Subject: Re: [PATCH 01/24] qconfig: Fix pylint error in read_database()
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+In-Reply-To: <20240711144608.GA1149069@oliver.lan>
+References: <20240711144608.GA1149069@oliver.lan>
+ <20240711081004.304917-1-sjg@chromium.org>
+Date: Fri, 26 Jul 2024 05:59:19 -0700
+X-Google-Sender-Auth: 8uS9VCIw6PckRUN0CAEsAm_vjUw
+Message-ID: <CAFLszTh2W5Nc=mEQ_1Z==2z0fSQm7JLpeYV8vX0HVQzE+4FVfA@mail.gmail.com>
+Subject: Re: [PATCH] buildman: Show board list with -x
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,15 +85,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix this error by initing the variable before the loop:
+On Thu, Jul 11, 2024 at 09:10:04AM +0100, Simon Glass wrote:
 
-tools/qconfig.py:880:22: E0606: Possibly using variable 'defconfig'
-   before assignment (possibly-used-before-assignment)
+> When -x is used, buildman does not show the list of boards that will be
+> built, since there are no terms which cause boards to be added, only
+> terms which cause them to be removed.
+>
+> Add a special case to fix this.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Tested-by: Tom Rini <trini@konsulko.com>
 
- tools/qconfig.py | 1 +
- 1 file changed, 1 insertion(+)
+-- 
+Tom
 
 Applied to u-boot-dm, thanks!
