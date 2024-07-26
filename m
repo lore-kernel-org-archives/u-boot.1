@@ -4,77 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72280C3DA49
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 08:31:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DE8BC3DA49
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 08:36:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D797188361;
-	Fri, 26 Jul 2024 10:31:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9ADF3884CC;
+	Fri, 26 Jul 2024 10:35:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="e+ZVAh5Z";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A175E8304A; Fri, 26 Jul 2024 10:31:46 +0200 (CEST)
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BB6E387CF8; Fri, 26 Jul 2024 10:35:57 +0200 (CEST)
+Received: from CHN02-SH0-obe.outbound.protection.partner.outlook.cn
+ (mail-sh0chn02on20715.outbound.protection.partner.outlook.cn
+ [IPv6:2406:e500:4420:2::715])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC3E387CF8
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 10:31:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EF5F884CC
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 10:35:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-75a6c290528so552200a12.1
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 01:31:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1721982702; x=1722587502; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=l9av2cLruQYZaPJIRtlUhA2Egl6moIlp874jPcdTzPU=;
- b=e+ZVAh5Z/azifzXUHDsmW7ea9+mQg7Xmhd0vxiOc6KM+3v4vSszNG1Cn0VVk2LaaFp
- uTgDe3uMZOz6KwAJ5Ok+IKixuAK67RGS5SRkv9qSGqqBdBKnMKlSglNLIzGAKBMK7lZf
- S6MLdbefA2m5Y+YfZjJal5n18VYgH8AlPKaEy24U9LiBZ4fE5jkJ7Wtaex9aX4PvMs+p
- CX0SFzSjjmDvvPcHBzSY+dwK6dCPcoQTIYL0Hum1FDsVnvvxG8ZMJaBcf87C7b/JexLJ
- RpWUSLt/IYeQxLMUL33SGvVrcgz+9c+kL6gAlWqXkdO3qNdnpYHLYmroT8pMxsIX+wTx
- qZhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721982702; x=1722587502;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=l9av2cLruQYZaPJIRtlUhA2Egl6moIlp874jPcdTzPU=;
- b=noopaBUrm5KzEM0vlN57rOpOavC3jeExaicZrc4HhvLJtHXLPPX3VCZFgBFbIfqNPl
- /PJ9ejTPV8UthUtI25kB8fjOc7S0tf3118NX5rxIeWqMGr06D5ivxOBvO4eXjPtdHp8J
- IP3W5fAyX6YdWYcUoQwm/KEvTM05TW9vL1JqH8BfXuwRBEUBpSuuVT829IhK0HJ/IAjr
- o7rOapgBOagvZeKqJwvb1Xj0Wj7TdILYTPSxBlIpztuwhLhRBQtElcDljNJq8pyFyf/c
- craoJqYRhLeyUywEgJ4Sgy0tw5Mba0DYHsed6yO37q7SM+bhGDRo2RWu6rashPS+3pCe
- EZQA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW3YQxaJ+760MhaS2X9nn1nwA9FOFLExqDU0zoui5c3KrobX8cqvb66m1gCPBe/74zMV/WAFbSeh5BvjFHLR4Ug3saqwQ==
-X-Gm-Message-State: AOJu0YwHFiXR4SQYXAmhBDL77a+Il8ir5VlL5I6Ctxw12P/E7AeOVnQl
- NzHcwVJUDigI1025SxKSfMxSTTcDsLGOjNLZr7a39e4A5CC6H/+EHhhR050BgpWHYwCOVKTFhmg
- Na9Lm24cw7Wze7XFodsv+HfK8IFf/bt8Lk7+CIQ==
-X-Google-Smtp-Source: AGHT+IGr5S4bNurDStYSRm3iPWpQzbnERHVydwnMRXpyHxIl9amJcX3yOgfzATxIMD7CggZjOo6FI3frJ6Mgpcc9k60=
-X-Received: by 2002:a17:90b:4f88:b0:2cb:4c25:f941 with SMTP id
- 98e67ed59e1d1-2cf2e9e1aa6mr5120078a91.17.1721982701961; Fri, 26 Jul 2024
- 01:31:41 -0700 (PDT)
+ spf=pass smtp.mailfrom=minda.chen@starfivetech.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=eYklh68HNF9ncbonYCN74FBXCyAYbtXdRxLfKBAIf49Ee4LYqv58j1va1ueOj7NfsrLUPteyEQ/JLUnNFv4uyTbhvgiVHr9E2NdKlgbIm9FGwyu6HTMoC1THWYVvub2HExyy+53lMFZGY5rk7A51mvNEOIajFfw/ltokx6kn8HnC4qNjjGEpwJDvfUo6Bg1owQ+p//RFdpeKb91zHjYQDUI0smHTOzHOHrF9MMhITon4sG9OEMEML1X3OruhYOIRv4UBU1eVjR/deEsjMFo0cdm/i0eAm5q7zYJU8nklN9sYJgXgNwxsi+uUKnmZ00tACyQ9/1wbje/INg6rAFj3Bw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=U+VzXf1BNPcASADY7GKVnIZk+d22ufI84YvvQUZ3aYk=;
+ b=ENuKZIIu4PIJzpaiR++OuiB5Jg6A7HnVT2Ct+poTdDyJe4AtQ+V47cEeREXEbJA+BOxJNczYKBEtjwL0i6yfUmlumzC8AlO2vHWBs1oD55GVP1H6c01N82wOQmsFPyFlHWyt8b2f17VxHLbAss9FBmvBZtUISYw9cUMxoynxZ74C/2CSlfIIAF0Wr4Ym7ktGHP/E/gttE+hQLvkRt7E+AAdgIeLC6q2krndnwllw3k19N9b7hNcBR4d0vuS6Gq5Aoz6HrgPk/66TtTH6PZhO/gSiGM29ETr4ZB4MCudXUiGRVYU9otvrhkvsyR6it8cMEELcxGQMYntQCB+57K0oPQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=starfivetech.com; dmarc=pass action=none
+ header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
+Received: from SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c311:25::15) by SHXPR01MB0592.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c311:1d::17) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.46; Fri, 26 Jul
+ 2024 08:35:49 +0000
+Received: from SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
+ ([fe80::bd9e:fb57:ebf7:9d71]) by
+ SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn ([fe80::bd9e:fb57:ebf7:9d71%4])
+ with mapi id 15.20.7762.032; Fri, 26 Jul 2024 08:35:49 +0000
+From: Minda Chen <minda.chen@starfivetech.com>
+To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, Roger Quadros
+ <rogerq@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, Alexey
+ Romanov <avromanov@salutedevices.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Mark Kettenis <kettenis@openbsd.org>, Nishanth Menon <nm@ti.com>, Rick Chen
+ <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>, E Shattow
+ <lucent@gmail.com>
+Subject: Re: [PATCH v3 5/8] pinctrl: starfive: Setup USB default disable
+ overcurrent pin
+Thread-Topic: [PATCH v3 5/8] pinctrl: starfive: Setup USB default disable
+ overcurrent pin
+Thread-Index: AQHa2XxftJB6J5MFEUO2rWpXlpSJCLIIuqgQ
+Date: Fri, 26 Jul 2024 08:35:49 +0000
+Message-ID: <SHXPR01MB0863CDB8BB20F8B851A0371BE6B42@SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn>
+References: <20240719013822.101374-1-minda.chen@starfivetech.com>
+ <20240719013822.101374-6-minda.chen@starfivetech.com>
+In-Reply-To: <20240719013822.101374-6-minda.chen@starfivetech.com>
+Accept-Language: en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=starfivetech.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SHXPR01MB0863:EE_|SHXPR01MB0592:EE_
+x-ms-office365-filtering-correlation-id: 78b2132d-57e9-4316-2c95-08dcad4df40c
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|41320700013|366016|1800799024|7416014|38070700018|921020; 
+x-microsoft-antispam-message-info: 8ztxssPPivQlp79AX1FWllHinCUZhgmKndlcZRhhG6IQnDQPG7PS3HVZ7FfrDgMRjEvfU1jFQ88rP0MRVcqAHuEKxhelWRZCZkKtIA2aPdTnLsVvLYFebBqi3F4ogzYRoeiQMWTGksAvG5tRnY+/QjKgEIgrny+gmFnblpUf3MVht0Bubg0h25Fg4ojPOkDLalRJS0EiN3XOvNnEKLI7J1KEK3LQ8pK5T2HekII7C7Tz2/5Pqumsp8QLxjFmw2rGhWwtfepY4RhddH9I5yBG8D28/IKaHxvCCS9jpLlpY8V7/oak5UpQFzkIg4Wb6fetYHRFcF1XfLe96hM8FPtv/jMddOxRWQQRekfGc25GexRjhSMP5SQhfH/4Q0+B+e2o85UIDJl/ZXRYPA8ufBvAJIlE/E1zHX7M7P93OnnYdWQggfbTSC5lUAaaqD7j93rOaIP1nYHG306lQ2E+P/UOgE4YHYTQMcbbO+e1glLX3znr0seNLfkNJ1GCeMJglOHtyKNZQZoK1uaVBXCZD4BAY8LpMBlSgNIFI6GkM95QGclRaX0RQQGCj7ABe4VxAAxdMOYOmJVz/sCWJmLuy0y/Kv4GnlIda2ETaNdaeNvGVVcaz3rgJ0n6at+IZAnIxXsfSyIve++Ud/olvWqkJW9qeA==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn; PTR:;
+ CAT:NONE;
+ SFS:(13230040)(41320700013)(366016)(1800799024)(7416014)(38070700018)(921020);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?4qRcA76X5isOP/iNTzAWMqKjfLGK+U90owgyHUcJa2g1fPqnkQLynPHH+j2s?=
+ =?us-ascii?Q?8lEGWsz+0+XnHPE3BYvPue7iWh9H+SpoRMYry8xaw64PyjLIyxEgDhLsmYLm?=
+ =?us-ascii?Q?zb2j4+EG+RTybb5/Q/KEZhrSn7uiKt0uLE2l6/lmpLSo3guYk3VOeB9qq88q?=
+ =?us-ascii?Q?f/eZhs3fkhqx9Xnq+RjBI3ck6zLOX3nyj6d+i/LEpf7gUQOwpKw58OCwVeHM?=
+ =?us-ascii?Q?ShnDT2NHiKFKjW2i1/P+6IVmpIYKOQvXmZDTPkfkD5rt9wNZyMfWEzcaN/ze?=
+ =?us-ascii?Q?Jp9ZD63sfSvgLHc/YE+792Mf2yMJGAySRMdRd/0TDyf8vin7UYQ7PWWYhdwa?=
+ =?us-ascii?Q?b76KX/o9YESc8uBkKNwgdkH6oUuZ5BqqrTs7RMUsfYtqJNMzrlBfMqMWVRp7?=
+ =?us-ascii?Q?lZm/4+xuM2w5qiAn81L7AsOmp14x2kok9ObGEbyfVkUWV6NUTCcSwwpmNjgE?=
+ =?us-ascii?Q?TYX5ohVGXt2nJt2lrJrMETDviBE3crkiUDHAHonh7OD/2J8eoDv+KjZD5ap+?=
+ =?us-ascii?Q?tnkT4p3VPkoffCnV7uZrwAQvguyZ8OGZ9dzXOVlZ+IiOjO8gP08nfIhi8/2W?=
+ =?us-ascii?Q?yNo0+S++z7aGSNn9AW/8N8QYtlebF/7wa1RaOk+Y87Ar8+L9EYiWaPnlsS+U?=
+ =?us-ascii?Q?9ENz7tgyml8kJSII8jgN8cJSG8hAoqJ7bk3PSEhR9U2WMEtCr3c5LSJGE7iH?=
+ =?us-ascii?Q?102FDXAUyxC23k4cB7Wf2e2KZVsEmEKlKTz8UDV+3ACuC7md98dsgfWdn/aX?=
+ =?us-ascii?Q?Uh376ulYnFCIwBxI+yNgtFJcKaVYsoPJQtaJ/95ebdd8AK3psC9+FgDxwbtb?=
+ =?us-ascii?Q?hHAsK2P3XBgNqFoB4EL20H818E0eVpTyWpn77FLwEfgQJFEeGEArA1CrxjDH?=
+ =?us-ascii?Q?4CcmK3Fmc0QghHAFXVc7cOKu27uNSMkYcUd+Oa5QL1sGWK6C8V0UXIX+Xdm1?=
+ =?us-ascii?Q?eYHmmXMfb/3+Fv8gYQw4AqJ0cpbz82mbuZSq0/jpExUQ1MWNLJkvQqFtOTp0?=
+ =?us-ascii?Q?d7DqOnySqq7KnIRbVRRLoaOnHKAql6+3dMC0k/uP2hZSsM/0K5Kn+OaWXg/b?=
+ =?us-ascii?Q?pfAbOKmOcnVfdT21xYJATqa1xnteZf1cD3SXzKgkg1hvHQcW3Jl7lvyZWsIr?=
+ =?us-ascii?Q?LPKmVmB9SXY2r33nv+PMB7kBGS3xE2t2J2znd9enrauEFkx64hM1iacCPAt9?=
+ =?us-ascii?Q?lTUH5UXv6is3EwQj8a+4PShiuOSgjKG3cHXATW8cV69r5Hbp6clEnk3x185g?=
+ =?us-ascii?Q?qGLglSiwPlvWBGp0UgPMQQ2o/QOpwgdweybAqLwL6MUlwlLW+FEF/TWGy3El?=
+ =?us-ascii?Q?oIYC1Vj56DoefPgAB1KMo+rv4KiKI3LGEqXPI67fgZTiBVfYaDUFpbYDLJdN?=
+ =?us-ascii?Q?aC8K5SuIsM5IoH5KK7VjtVQ7sVqRQIxpdgbjddBD/8doYtYZVfoBPyQ5Jq41?=
+ =?us-ascii?Q?5woryRDuBwIxjm2gkFa9MK6TkoRXLcBn3y2S558gtvhoajvTmTpR1MU6evrk?=
+ =?us-ascii?Q?KaK/TRCX9mXc2U+A0HLvGUgPUn1r82/hqtShaq1fokqRCCkBPI7K7yWOpHO1?=
+ =?us-ascii?Q?Cr1zCF2Oeq7Js3Rc2j3zzsnXLP+2M7+4LRZygFQd?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-References: <20240725135629.3505072-1-sjg@chromium.org>
- <20240725135629.3505072-6-sjg@chromium.org>
- <72e02ed6-f8c3-4caa-8ae6-2cef00a2ddd2@gmx.de>
- <CAFLszTjBw9wfFjwn2UeM=TNYCjCQP3xoBCmfv8WcWs515nOKxw@mail.gmail.com>
-In-Reply-To: <CAFLszTjBw9wfFjwn2UeM=TNYCjCQP3xoBCmfv8WcWs515nOKxw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 26 Jul 2024 11:31:05 +0300
-Message-ID: <CAC_iWjJbs=i6gWHzeHbsHwFv5BC+6PWy0NesKFFWC1=ERAvcQw@mail.gmail.com>
-Subject: Re: [PATCH 5/6] efi: Use malloc() for the EFI pool
-To: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+X-OriginatorOrg: starfivetech.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
+X-MS-Exchange-CrossTenant-Network-Message-Id: 78b2132d-57e9-4316-2c95-08dcad4df40c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Jul 2024 08:35:49.8227 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: BuwMg2dhnVy8SHm72Rw340VfxEHLvz4bGz0fJfkuHNGTWetaQdyJZ27FAHHKKQiQ+xFYrfpMw6rWSa64FJd+Hs3IFl4r1Qy5Zc5gssn7CwE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SHXPR01MB0592
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,239 +137,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
 
-On Fri, 26 Jul 2024 at 02:33, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Heinrich,
->
-> On Thu, 25 Jul 2024 at 09:54, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >
-> > On 25.07.24 15:56, Simon Glass wrote:
-> > > This API call is intended for allocating small amounts of memory,
-> > > similar to malloc(). The current implementation rounds up to whole pages
-> > > which can waste large amounts of memory. It also implements its own
-> > > malloc()-style header on each block.
-> > >
-> > > Use U-Boot's built-in malloc() instead, to avoid these problems:
-> > >
-> > > - it should normally be large enough for pool allocations
-> > > - if it isn't we can enforce a minimum size for boards which use
-> > >    EFI_LOADER
-> > > - the existing mechanism may create an unwatned entry in the memory map
-> > > - it is used for most EFI allocations already
-> > >
-> > > One side effect is that this seems to be showing up some bugs in the
-> > > EFI code, since the malloc() pool becomes corrupted with some tests.
-> > > This has likely crept in due to the very large gaps between allocations
-> > > (around 4KB), which provides a lot of leeway when the allocation size is
-> > > too small. Work around this by increasing the size for now, until these
-> > > (presumed) bugs are located.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > >   lib/efi_loader/efi_memory.c | 93 ++++++++-----------------------------
-> > >   1 file changed, 19 insertions(+), 74 deletions(-)
-> > >
-> > > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> > > index 2945f5648c7..fabe9e3a87a 100644
-> > > --- a/lib/efi_loader/efi_memory.c
-> > > +++ b/lib/efi_loader/efi_memory.c
-> > > @@ -80,45 +80,6 @@ static LIST_HEAD(efi_mem);
-> > >   void *efi_bounce_buffer;
-> > >   #endif
-> > >
-> > > -/**
-> > > - * struct efi_pool_allocation - memory block allocated from pool
-> > > - *
-> > > - * @num_pages:       number of pages allocated
-> > > - * @checksum:        checksum
-> > > - * @data:    allocated pool memory
-> > > - *
-> > > - * U-Boot services each UEFI AllocatePool() request as a separate
-> > > - * (multiple) page allocation. We have to track the number of pages
-> > > - * to be able to free the correct amount later.
-> > > - *
-> > > - * The checksum calculated in function checksum() is used in FreePool() to avoid
-> > > - * freeing memory not allocated by AllocatePool() and duplicate freeing.
-> > > - *
-> > > - * EFI requires 8 byte alignment for pool allocations, so we can
-> > > - * prepend each allocation with these header fields.
-> > > - */
-> > > -struct efi_pool_allocation {
-> > > -     u64 num_pages;
-> > > -     u64 checksum;
-> > > -     char data[] __aligned(ARCH_DMA_MINALIGN);
-> > > -};
-> > > -
-> > > -/**
-> > > - * checksum() - calculate checksum for memory allocated from pool
-> > > - *
-> > > - * @alloc:   allocation header
-> > > - * Return:   checksum, always non-zero
-> > > - */
-> > > -static u64 checksum(struct efi_pool_allocation *alloc)
-> > > -{
-> > > -     u64 addr = (uintptr_t)alloc;
-> > > -     u64 ret = (addr >> 32) ^ (addr << 32) ^ alloc->num_pages ^
-> > > -               EFI_ALLOC_POOL_MAGIC;
-> > > -     if (!ret)
-> > > -             ++ret;
-> > > -     return ret;
-> > > -}
-> > > -
-> > >   /**
-> > >    * efi_mem_cmp() - comparator function for sorting memory map
-> > >    *
-> > > @@ -681,13 +642,10 @@ void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align)
-> > >    * @buffer: allocated memory
-> > >    * Return:  status code
-> > >    */
-> > > -efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size, void **buffer)
-> > > +efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
-> > > +                            void **buffer)
-> > >   {
-> > > -     efi_status_t r;
-> > > -     u64 addr;
-> > > -     struct efi_pool_allocation *alloc;
-> > > -     u64 num_pages = efi_size_in_pages(size +
-> > > -                                       sizeof(struct efi_pool_allocation));
-> > > +     void *ptr;
-> > >
-> > >       if (!check_allowed())
-> > >               return EFI_UNSUPPORTED;
-> > > @@ -700,16 +658,21 @@ efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
-> > >               return EFI_SUCCESS;
-> > >       }
-> >
-> > Unfortunately this patch does not match the UEFI specification:
-> >
-> > Two different memory types cannot reside in the same memory page. You
-> > have to keep track of the memory type of each allocated memory page and
-> > report it in GetMemoryMap().
->
-> I actually hadn't thought about that. Is it implied in the spec or
-> actually stated somewhere?
+>=20
+> For some JH7110 boards, USB host overcurent pin is not reserved, To make =
+USB
+> host work, overcurrent pin must be disabled. So set the pin default disab=
+led.
+>=20
+> Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
+> ---
+>  drivers/pinctrl/starfive/pinctrl-jh7110-sys.c | 11 +++++++++--
+>  1 file changed, 9 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/drivers/pinctrl/starfive/pinctrl-jh7110-sys.c
+> b/drivers/pinctrl/starfive/pinctrl-jh7110-sys.c
+> index dafba65eae..1102985ab9 100644
+> --- a/drivers/pinctrl/starfive/pinctrl-jh7110-sys.c
+> +++ b/drivers/pinctrl/starfive/pinctrl-jh7110-sys.c
+> @@ -378,8 +378,15 @@ static int jh7110_sys_pinctrl_probe(struct udevice
+> *dev)  {
+>  	struct starfive_pinctrl_soc_info *info =3D
+>  		(struct starfive_pinctrl_soc_info *)dev_get_driver_data(dev);
+> -
+> -	return starfive_pinctrl_probe(dev, info);
+> +	struct starfive_pinctrl_priv *priv =3D dev_get_priv(dev);
+> +	int ret;
+> +
+> +	ret =3D starfive_pinctrl_probe(dev, info);
+> +	/* Set default the usb controller overcurrent signal. */
+> +	if (!ret)
+> +		clrsetbits_le32(priv->base + JH7110_SYS_GPI,
+> +				GENMASK(22, 16), BIT(16));
+> +	return ret;
+>  }
+>=20
+>  static const struct udevice_id jh7110_sys_pinctrl_ids[] =3D {
+> --
+> 2.17.1
 
-I don't remember if it's explicitly stated, but it *really* doesn't
-have to be. Although u-boot doesn't currently support this on modern
-secure systems you can't have code and data mixed on the same page.
-This would prevent you to map pages with proper permissions and take
-advantage of CPU security features  e.g RW^X.
+Hi Rick and Leo
+  I think move this to spl is better.=20
 
-In any case, the AllocatePool description reads "This function
-allocates pages from EfiConventionalMemory as needed to grow the
-requested pool type. All allocations are eight-byte aligned". I don't
-think using malloc in AllocatePool is appropriate. If we ever want to
-do that and allocate from the malloc space, we need to teach malloc
-some EFI semantics, but that's a really bad idea.
-
->
-> Anyway, from what I can tell, we mostly use EFI_BOOT_SERVICES_DATA.
-> The only exception is EFI_RUNTIME_SERVICES_DATA for the runtime stuff.
-
-That's not entirely correct, we use a lot more than these 2.
-EFI_LOADER_DATA, EFI_LOADER_CODE and EFI_ACPI_RECLAIM_MEMORY from a
-quick grep
-
-/Ilias
-
->
-> So perhaps we can use malloc() for EFI_BOOT_SERVICES_DATA allocations
-> and stick with whole pages otherwise? That will mostly fix the problem
-> I am seeing.
->
-> >
-> > The specification is available https://uefi.org/specifications.
->
-> The problem is that it is thousands of pages so it is hard to pick up
-> on some of these issues.
->
-> >
-> > >
-> > > -     r = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, pool_type, num_pages,
-> > > -                            &addr);
-> > > -     if (r == EFI_SUCCESS) {
-> > > -             alloc = (struct efi_pool_allocation *)(uintptr_t)addr;
-> > > -             alloc->num_pages = num_pages;
-> > > -             alloc->checksum = checksum(alloc);
-> > > -             *buffer = alloc->data;
-> > > -     }
-> > > +     /*
-> > > +      * Some tests crash on qemu_arm etc. if the correct size is allocated.
-> > > +      * Adding 0x10 seems to fix test_efi_selftest_device_tree
-> > > +      * Increasing it to 0x20 seems to fix test_efi_selftest_base except
-> > > +      * for riscv64 (in CI only). But 0x100 fixes CI too.
-> > > +      *
-> > > +      * This workaround can be dropped once these problems are resolved
-> > > +      */
-> > > +     ptr = memalign(8, size + 0x100);
-> >
-> > We were using ARCH_DMA_MINALIGN before this patch.
->
-> Where is that in the code? All I see is EFI_PAGE_SHIFT.
->
-> >
-> > If we are overwriting allocated memory, we must fix that instead of
-> > increasing size. Do you have a git tag showing the problem?
->
-> Not easy to do, because the 4KB per allocation thing has been there
-> from the start. It might be possible to apply my patch to earlier and
-> earlier U-Boots to try to bisect it.
->
-> Regards,
-> Simon
->
->
->
-> >
-> > Best regards
-> >
-> > Heinrich
-> >
-> > > +     if (!ptr)
-> > > +             return EFI_OUT_OF_RESOURCES;
-> > > +
-> > > +     *buffer = ptr;
-> > >
-> > > -     return r;
-> > > +     return EFI_SUCCESS;
-> > >   }
-> > >
-> > >   /**
-> > > @@ -742,30 +705,12 @@ void *efi_alloc(size_t size)
-> > >    */
-> > >   efi_status_t efi_free_pool(void *buffer)
-> > >   {
-> > > -     efi_status_t ret;
-> > > -     struct efi_pool_allocation *alloc;
-> > > -
-> > >       if (!buffer)
-> > >               return EFI_INVALID_PARAMETER;
-> > >
-> > > -     ret = efi_check_allocated((uintptr_t)buffer, true);
-> > > -     if (ret != EFI_SUCCESS)
-> > > -             return ret;
-> > > -
-> > > -     alloc = container_of(buffer, struct efi_pool_allocation, data);
-> > > -
-> > > -     /* Check that this memory was allocated by efi_allocate_pool() */
-> > > -     if (((uintptr_t)alloc & EFI_PAGE_MASK) ||
-> > > -         alloc->checksum != checksum(alloc)) {
-> > > -             printf("%s: illegal free 0x%p\n", __func__, buffer);
-> > > -             return EFI_INVALID_PARAMETER;
-> > > -     }
-> > > -     /* Avoid double free */
-> > > -     alloc->checksum = 0;
-> > > -
-> > > -     ret = efi_free_pages((uintptr_t)alloc, alloc->num_pages);
-> > > +     free(buffer);
-> > >
-> > > -     return ret;
-> > > +     return EFI_SUCCESS;
-> > >   }
-> > >
-> > >   /**
-> >
