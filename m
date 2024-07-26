@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EBF8C3DA49
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 17:31:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C8C6C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 17:32:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F22A388739;
-	Fri, 26 Jul 2024 19:30:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 55E0D88756;
+	Fri, 26 Jul 2024 19:30:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90E2288718; Fri, 26 Jul 2024 19:30:34 +0200 (CEST)
+ id 48B2588646; Fri, 26 Jul 2024 19:30:35 +0200 (CEST)
 Received: from inva020.nxp.com (inva020.nxp.com [92.121.34.13])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8888884C5
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 19:30:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C67D87C7E
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 19:30:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Zhiqiang.Hou@nxp.com
 Received: from inva020.nxp.com (localhost [127.0.0.1])
- by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 825161A0B69;
- Fri, 26 Jul 2024 19:30:31 +0200 (CEST)
+ by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 20F291A0B57;
+ Fri, 26 Jul 2024 19:30:33 +0200 (CEST)
 Received: from aprdc01srsp001v.ap-rdc01.nxp.com
  (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
- by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 3D1501A0B6E;
- Fri, 26 Jul 2024 19:30:31 +0200 (CEST)
+ by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id CFD5D1A02C1;
+ Fri, 26 Jul 2024 19:30:32 +0200 (CEST)
 Received: from mega.am.freescale.net (mega.ap.freescale.net [10.192.208.232])
  by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id
- 4729A183ACAC; Sat, 27 Jul 2024 01:30:30 +0800 (+08)
+ D82C6183ACAC; Sat, 27 Jul 2024 01:30:31 +0800 (+08)
 From: Zhiqiang Hou <Zhiqiang.Hou@nxp.com>
 To: u-boot@lists.denx.de, trini@konsulko.com, peng.fan@nxp.com,
  festevam@gmail.com, sjg@chromium.org
 Cc: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
-Subject: [PATCHv3 07/12] cpu: imx: implement release_core callback
-Date: Sat, 27 Jul 2024 01:51:03 +0800
-Message-Id: <20240726175108.34704-8-Zhiqiang.Hou@nxp.com>
+Subject: [PATCHv3 09/12] doc: cmd: add documentation for cpu command
+Date: Sat, 27 Jul 2024 01:51:05 +0800
+Message-Id: <20240726175108.34704-10-Zhiqiang.Hou@nxp.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20240726175108.34704-1-Zhiqiang.Hou@nxp.com>
 References: <20240726175108.34704-1-Zhiqiang.Hou@nxp.com>
@@ -60,71 +60,106 @@ X-Virus-Status: Clean
 
 From: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 
-Release the secondary cores through the PSCI request.
+Add documentation for the 'cpu' command, taking NXP i.MX 8M Plus
+as a example.
 
 Signed-off-by: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 ---
 V3:
- - No change.
+ - New patch.
 
- drivers/cpu/imx8_cpu.c | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
+ doc/usage/cmd/cpu.rst | 82 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 82 insertions(+)
+ create mode 100644 doc/usage/cmd/cpu.rst
 
-diff --git a/drivers/cpu/imx8_cpu.c b/drivers/cpu/imx8_cpu.c
-index c1315cc32dd..8525eba37c6 100644
---- a/drivers/cpu/imx8_cpu.c
-+++ b/drivers/cpu/imx8_cpu.c
-@@ -7,6 +7,7 @@
- #include <dm.h>
- #include <thermal.h>
- #include <asm/global_data.h>
-+#include <asm/ptrace.h>
- #include <asm/system.h>
- #include <firmware/imx/sci/sci.h>
- #include <asm/arch/sys_proto.h>
-@@ -15,6 +16,7 @@
- #include <imx_thermal.h>
- #include <linux/bitops.h>
- #include <linux/clk-provider.h>
-+#include <linux/psci.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -242,12 +244,34 @@ static int cpu_imx_is_current(struct udevice *dev)
- 	return 0;
- }
- 
-+static int cpu_imx_release_core(const struct udevice *dev, phys_addr_t addr)
-+{
-+	struct cpu_imx_plat *plat = dev_get_plat(dev);
-+	struct pt_regs regs;
+diff --git a/doc/usage/cmd/cpu.rst b/doc/usage/cmd/cpu.rst
+new file mode 100644
+index 00000000000..0970e57d5b5
+--- /dev/null
++++ b/doc/usage/cmd/cpu.rst
+@@ -0,0 +1,82 @@
++.. SPDX-License-Identifier: GPL-2.0+
++.. Copyright 2024 NXP
 +
-+	regs.regs[0] = PSCI_0_2_FN64_CPU_ON;
-+	regs.regs[1] = plat->mpidr;
-+	regs.regs[2] = addr;
-+	regs.regs[3] = 0;
++.. index::
++   single: cpu (command)
 +
-+	smc_call(&regs);
-+	if (regs.regs[0]) {
-+		printf("Failed to release CPU core (mpidr: 0x%x)\n", plat->mpidr);
-+		return -1;
-+	}
++cpu command
++===========
 +
-+	printf("Released CPU core (mpidr: 0x%x) to address 0x%llx\n", plat->mpidr, addr);
++Synopsis
++--------
 +
-+	return 0;
-+}
++::
 +
- static const struct cpu_ops cpu_imx_ops = {
- 	.get_desc	= cpu_imx_get_desc,
- 	.get_info	= cpu_imx_get_info,
- 	.get_count	= cpu_imx_get_count,
- 	.get_vendor	= cpu_imx_get_vendor,
- 	.is_current	= cpu_imx_is_current,
-+	.release_core	= cpu_imx_release_core,
- };
- 
- static const struct udevice_id cpu_imx_ids[] = {
++    cpu list
++    cpu detail
++    cpu release <core ID> <addr>
++
++Description
++-----------
++
++The *cpu* command prints information about the CPUs, and release a CPU core
++to a given address to run applications.
++
++Example
++-------
++
++cpu list
++~~~~~~~~
++List and print brief information of all the CPU cores On i.MX8M Plus EVK:
++::
++
++    u-boot=> cpu list
++      0: cpu@0      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 31C
++
++      1: cpu@1      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 30C
++
++      2: cpu@2      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 31C
++
++      3: cpu@3      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 31C
++
++cpu detail
++~~~~~~~~~~
++Print more details of all the CPU cores On i.MX8M Plus EVK:
++::
++
++    u-boot=> cpu detail
++      0: cpu@0      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 31C
++
++            ID = 0, freq = 1.2 GHz: L1 cache, MMU
++      1: cpu@1      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 30C
++
++            ID = 0, freq = 1.2 GHz: L1 cache, MMU
++      2: cpu@2      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 31C
++
++            ID = 0, freq = 1.2 GHz: L1 cache, MMU
++      3: cpu@3      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 31C
++
++            ID = 0, freq = 1.2 GHz: L1 cache, MMU
++
++cpu release
++~~~~~~~~~~~
++On i.MX8M Plus EVK, release the LAST core to run a RTOS application,
++the <core ID> is the sequence number refer to the 'cpu list':
++::
++
++     u-boot=> load mmc 1:2 C0000000 /hello_world.bin
++     66008 bytes read in 5 ms (12.6 MiB/s)
++     u-boot=> dcache flush; icache flush
++     u-boot=> cpu release 3 C0000000
++     Released CPU core (mpidr: 0x3) to address 0xc0000000
++
++Configuration
++-------------
++
++The cpu command is available if CONFIG_CMD_CPU=y.
++
++Return code
++-----------
++
++The return value $? is set to 0 (true) if the command is successful,
++1 (false) otherwise.
 -- 
 2.43.0
 
