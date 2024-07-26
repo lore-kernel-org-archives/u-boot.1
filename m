@@ -4,93 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61879C3DA7F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 09:29:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6556C3DA49
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 09:34:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E4EB88418;
-	Fri, 26 Jul 2024 11:29:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 2A4BD88418;
+	Fri, 26 Jul 2024 11:34:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="Y0koFSHv";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="ZUydB9GK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54CE288496; Fri, 26 Jul 2024 11:29:24 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1223088365; Fri, 26 Jul 2024 11:34:36 +0200 (CEST)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59E4088365
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 11:29:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9BEBF884BE
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 11:34:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 9BA0812001D;
- Fri, 26 Jul 2024 12:29:19 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 9BA0812001D
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1721986159;
- bh=Cdfur3kJq+5v61f9m8HKu1JvvB11hV5sYicq/hvHkx0=;
- h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
- b=Y0koFSHvvvgAcnYJRGLQQ0NjMRfSQdmqyZxekVn7xNBP2OwSEa9YryIO+v8nD8+Mv
- qlqFYeTg8WBUkFsAhcpqS0nYLUYbT0EdhrcxwGiHgXYzFKEKn9FoFTlPE9Tbq6Fq+X
- 0nAYWQDGL6YPVUUXEMD9MLyxyc/HZPZCJjEtxlFSdwgxaJXPMRpV06UszHFysDpZw4
- XSSPJRJMHivl4XdbKDUE/WakQk+A1fMImRJp4GDlHwP+Frg28vPQYW+3J8nwqOb4zm
- 7vQZaj7momom0Zk0LVWFJo+q/e0c2gKa2ny93PwSkWkyajSDtOHJXYwoZ8wkvHfRHG
- OkUyfGWu4xDvA==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
- [172.16.192.103])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Fri, 26 Jul 2024 12:29:19 +0300 (MSK)
-Received: from localhost (100.64.160.123) by p-i-exch-sc-m02.sberdevices.ru
- (172.16.192.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.40; Fri, 26 Jul
- 2024 12:29:19 +0300
-Date: Fri, 26 Jul 2024 12:29:13 +0300
-From: Dmitry Rokosov <ddrokosov@salutedevices.com>
-To: <igor.opaniuk@gmail.com>, <mkorpershoek@baylibre.com>,
- <semen.protsenko@linaro.org>, <trini@konsulko.com>,
- <colin.mcallister@garmin.com>, <4.shket@gmail.com>,
- <avromanov@salutedevices.com>
-CC: <u-boot@lists.denx.de>, <kernel@salutedevices.com>, <rockosov@gmail.com>
-Subject: Re: [PATCH v1 0/4] android_ab: fix slot_suffix issue and introduce
- ab_dump command
-Message-ID: <20240726092913.ilx4kkal73xtrdnm@CAB-WSD-L081021>
-References: <20240725194716.32232-1-ddrokosov@salutedevices.com>
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2ef23d04541so12673091fa.2
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 02:34:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1721986473; x=1722591273;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=JaGOyiLHgJtAHFK3kovevdtKv4Gg+B3kKsfR9JDCsj0=;
+ b=ZUydB9GKzbqo0wKP6EN1FUh6xhRpR6N8UiR5LrMBPp1SOabQSZ/ABLs0yemtqQQ72z
+ 82SMwbrF42wjDkdIU9wRDoEh5h7BL+g/mje3BLbOJV6olhuNQaW+AYeLMYdQe3Ek24AB
+ axGVaUFDSUVko6tGI1OiSYHd+Axk9iE1+dbugkraId7neQO2dP0aVTB67YT4TWAsd1Ff
+ ijR0eAElar3bRD6RsPssWyLV56joQDg9Uk1MURyHBNpgT6rBsifUpEwvQlmYQrmRKRb5
+ f4xymBt4e9cvYCCPZAYJ/4NlWsuVc+cTg2sAKQOx5pHN1Ry2Q0I6KVPLIZ1o5GE6wTyU
+ FZ6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1721986473; x=1722591273;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JaGOyiLHgJtAHFK3kovevdtKv4Gg+B3kKsfR9JDCsj0=;
+ b=HZCk1HP/XMeCQ74M4VHKwXXIhELDocYD7Bf4jCI+Cf0zBSvW6antPfTcUCvNpwB8Tq
+ 1rP+vkkBqklzSd3LroxtM1xtN5tKoNm03903wGSLn3Ihb8AZ0vi8OfBVJPY+4S4dP8ic
+ s2PP/mZdPLsjzqsBXHZxq/3QgNN65xwaYtYD5GXZW2ResPVyLrHI/I33CkSi8eyf0XmK
+ C8qHWGexMfdEBFlsQS100mBTwcCIMsCthnYizDPBK/rlTYV0uBweaOpw+N86ZJD8aYwK
+ J3nSDoesYZbR7DO/ZN4CGhxMBOKV9dz51dzvsK3vUeSHYpXKRNeCADitiJDu2q8oK+MS
+ 9AjQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUPmmxTtgX8KY5m4Xc80uspyJHuHPRWlAx8J98Zp4MUQTkihBs9KuDGKWxirPkhKuSoVseUtOgLmJcP4xyqX/hLck+ekg==
+X-Gm-Message-State: AOJu0Ywh8Xk3eVYX7bx7PFOqRV+TArlOBM56yEP5+gwOMF22aDoFR7S+
+ rzXFkfZVHw9d7rYfnJmUDgeBig59BQt/lhJ9kor9r6riG/9Y3OP0AbK84UHhLa+iUeoCuj7OB33
+ L
+X-Google-Smtp-Source: AGHT+IGFk33iBwN6KF+qhS81b/28Ymi+cE9pU7tRrHAU8nrM56I6BfeeLbnPhUb842xuJ2wbfYi+0Q==
+X-Received: by 2002:a2e:3a0f:0:b0:2ef:22a5:9472 with SMTP id
+ 38308e7fff4ca-2f045dfad31mr7642341fa.38.1721986472449; 
+ Fri, 26 Jul 2024 02:34:32 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-36b36861b05sm4516333f8f.94.2024.07.26.02.34.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 26 Jul 2024 02:34:31 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Marek Vasut <marex@denx.de>, Zixun LI <admin@hifiphile.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v4 0/7] usb: gadget: atmel: Code refactor and
+ DM_USB_GADGET support
+In-Reply-To: <24112707-c09b-4600-9e7a-a3d071e87952@denx.de>
+References: <20240725153204.358925-1-admin@hifiphile.com>
+ <0e0a053a-56b8-470e-98bd-80e61417e5df@denx.de>
+ <CA+GyqeZURHRsM3MZcUzY3+tyu0SeBM7aPbYd48JmSxqVuuZw=w@mail.gmail.com>
+ <24112707-c09b-4600-9e7a-a3d071e87952@denx.de>
+Date: Fri, 26 Jul 2024 11:34:31 +0200
+Message-ID: <87frrw4hug.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240725194716.32232-1-ddrokosov@salutedevices.com>
-User-Agent: NeoMutt/20220415
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
- p-i-exch-sc-m02.sberdevices.ru (172.16.192.103)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 186730 [Jul 26 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.4
-X-KSMG-AntiSpam-Envelope-From: ddrokosov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 24 0.3.24
- 186c4d603b899ccfd4883d230c53f273b80e467f, {Tracking_uf_ne_domains},
- {Track_E25351}, {Tracking_from_domain_doesnt_match_to},
- smtp.sberdevices.ru:7.1.1,5.0.1; 100.64.160.123:7.1.2;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; salutedevices.com:7.1.1;
- github.com:7.1.1;
- 127.0.0.199:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2024/07/26 09:01:00
-X-KSMG-LinksScanning: Clean, bases: 2024/07/26 09:01:00
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/07/26 00:24:00 #26151929
-X-KSMG-AntiVirus-Status: Clean, skipped
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,37 +99,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Azure pipeline is successfully DONE
+Hi,
 
-https://github.com/u-boot/u-boot/pull/625/checks
+On jeu., juil. 25, 2024 at 20:57, Marek Vasut <marex@denx.de> wrote:
 
-On Thu, Jul 25, 2024 at 10:47:00PM +0300, Dmitry Rokosov wrote:
-> The patch series include changes:
->     - fix indentation problems for --no-dec parameter in the ab_select
->       command
->     - introduce the ab_dump command to print the content of the BCB
->       block; it's seful for debugging A/B logic on supported boards
->     - add a test for the ab_dump command to verify the accuracy of each
->       field within the ABC data displayed.
->     - fix the slot suffix format in the ABC block to align with official
->       Android BCB specifications
-> 
-> Dmitry Rokosov (4):
->   cmd: ab_select: fix indentation problems for --no-dec parameter
->   cmd: ab: introduce 'ab_dump' command to print BCB block content
->   test/py: introduce test for ab_dump command
->   common: android_ab: fix slot suffix for abc block
-> 
->  boot/android_ab.c                     | 73 ++++++++++++++++++++++++++-
->  cmd/ab_select.c                       | 34 ++++++++++++-
->  include/android_ab.h                  |  9 ++++
->  test/py/tests/test_android/test_ab.py | 23 +++++++++
->  4 files changed, 135 insertions(+), 4 deletions(-)
-> 
-> -- 
-> 2.43.0
-> 
+> On 7/25/24 8:48 PM, Zixun LI wrote:
+>> On Thu, Jul 25, 2024 at 8:24=E2=80=AFPM Marek Vasut <marex@denx.de> wrot=
+e:
+>>>
+>>> On 7/25/24 5:31 PM, Zixun LI wrote:
+>>>> Changes in v4:
+>>>> - Release clocks if probe failed
+>>>> - Add missing endpoint data free
+>>>> - Addressed comments
+>>>
+>>> Please collect any AB/RB/TB tags that were provided in v3 too.
+>>
+>> Sorry didn't know that, should I spin a v5 ?
+>
+> No worries, wait a few days for more feedback (if any), and then collect
+> them for V5 and send V5.
 
--- 
-Thank you,
-Dmitry
+Indeed, it's important to collect the tags to make sure that the
+reviewers get credit for their time reviewing.
+
+Zixun, make sure to collect them for all future contributions.
+
+Fortunately, b4 (https://b4.docs.kernel.org/en/latest/index.html) can
+collect the tags:
+
+$ b4 shazam -s -l --check 20240725153204.358925-1-admin@hifiphile.com
+
+[...]
+
+  =E2=9C=93 [PATCH v4 1/7] usb: gadget: atmel: Sort includes
+    + Reviewed-by: Marek Vasut <marex@denx.de> (=E2=9C=93 DKIM/denx.de)
+    + Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> (=E2=9C=
+=93 DKIM/baylibre-com.20230601.gappssmtp.com)
+    + Link: https://lore.kernel.org/r/20240725153204.358925-2-admin@hifiphi=
+le.com
+    + Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+    =E2=97=8F checkpatch.pl: passed all checks
+
+So, for this series, 2 cases can happen:
+
+1. No other review comments are found. A v5 won't be required.
+   I will collect the tags with b4 when applying to the u-boot-dfu tree
+
+2. New review comments require the series to be modified. A v5 is
+   required. In that case, make sure to collect all tags yourself.
+
+Please wait a few days for others to get time to chime in this patch
+series.
+
+Thank you for your contribution !
+
+Mattijs
