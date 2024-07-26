@@ -4,74 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45857C3DA49
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 13:51:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1737AC3DA49
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 14:00:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E499E88591;
-	Fri, 26 Jul 2024 15:51:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
+	by phobos.denx.de (Postfix) with ESMTP id 56E078852E;
+	Fri, 26 Jul 2024 16:00:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="CQ2l5DHt";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fcxQyftI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30C7387B84; Fri, 26 Jul 2024 15:24:45 +0200 (CEST)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
+ id B3CF688599; Fri, 26 Jul 2024 16:00:50 +0200 (CEST)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 764CB881BA
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 15:24:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31E45878ED
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 16:00:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hifiphile.com
-Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2f0dfdc9e16so6173731fa.2
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 06:24:41 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-396db51d140so7686345ab.0
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 07:00:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1722000281; x=1722605081;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=CP/r+We5xlQL+f858ae5sEUk8lgZQvt8ZUsa4PVEj0I=;
- b=CQ2l5DHtEBoIU/g2+nWvct1RiW635Eq0wC/oMdA+JI1oroO0Gp4pRPSXzf7fykxfPu
- O5yUsVCAKl+xtzNdrPx2Qwx4tZPlMKf3OskJPcXiiWjF+b4yICNTxJp2M4uWWJ9dpeJJ
- s0NaKIcLveO20oH+lx2nB8ajU1dkqQ/ZVS9KxazZzs/lNx96/u/Nq8jsb2gpG7UixBfT
- vjifEPkVJyMebxPJSzzGOLK6X7LjAT0Xkna+V3NSSc0dS118qUVh3LyUXrUgUWlvG3hC
- e6ew0yAxZ3vhYLEcfuPratxcRlTNM+X+bD9uYVfSqzRNRjIBDa9rk61Hp3oEHArLZIg0
- 4bQA==
+ d=chromium.org; s=google; t=1722002447; x=1722607247; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=kwsPJi4hFv2YfbGhn2DBN/QxqcmAPQ85aPkjZkfeCB0=;
+ b=fcxQyftI6XstgCKfk6nzAfea/pNEqUpU5oFTgpxWH/Mi67tCjH/5UkmJwJ7IyL5hu2
+ fgum0+qKS3nI/NCmPZUfjSGUx9R8f7mUZVj1K7Cok2ngVK19AykJ6yMw2YqN7I8ssij6
+ MytBhgGLG+h8QSijnDNJADHMAiDCr+aeDc6h0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722000281; x=1722605081;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=CP/r+We5xlQL+f858ae5sEUk8lgZQvt8ZUsa4PVEj0I=;
- b=TAnPb4cGjCXPlDfXws4jmTdt8Yiim08k8FTLTs6JHC96VhowLZW75+KGp2MQ6yqdBu
- WFiDeC4yHy5j4+0/7iVaCrMCgwbw9GdOv6A1StaEqpNqBIKpsJNADRupm+prh9i++u55
- xtUByXRVQVuJW0Zi0QtL1IsR9M6ZMfQ6uNG2pwX/7bk3iDdaAl/ZicTbpWCJzbW1NjYX
- t1YllKx2jrcq3oRVyichAh60rvdqwi5v7rv9U/JXrnwdZeCYFIQMQEMPrRC7WoIhUicm
- Q8N/GfoOYKShnHUnwQmHS1iZp1nrYJ9CQVvGpeEAk2KhugstAeGLGVA86mnBaJ4QNQZK
- FaHA==
-X-Gm-Message-State: AOJu0YyPI+vIOtcfOL0JB99KiBctBoMueq6inSncGifr3AJe7LZlktRE
- uepztslxeqpZ4bYmvd159VEd7rehcRk/luIHzUlJoXsUdnPg53wylpoYh824OyEZlGAeZXOvQl3
- 40rlKqFnxw6GpLG+qvSM2pMs3/ODCCaRfzoM5+A==
-X-Google-Smtp-Source: AGHT+IEL3iBos9n7bYf50TAOXpoOXP2Csm9t8nPyHnMjfdpdYqmCCYcjVKbjAHVd0c/ZlSG3qU9JUoTne0DFX/INlls=
-X-Received: by 2002:a2e:9795:0:b0:2ef:2543:457c with SMTP id
- 38308e7fff4ca-2f039ca2d9emr43357461fa.24.1722000280570; Fri, 26 Jul 2024
- 06:24:40 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1722002447; x=1722607247;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=kwsPJi4hFv2YfbGhn2DBN/QxqcmAPQ85aPkjZkfeCB0=;
+ b=mda3eM8m1ZLq1i905OLpwUZnw5woJeU90iAAn+1snzEWMkCyicQh5kt+2l/u36ZJlN
+ T0wEqTv+3PhzBS7Z2pD5ECKDV5eI+ufZN4iAvOmFWjTQ+Xa5y4VegzU+vCSGBokaNFIS
+ 300v14fnmg7nnFt1D7S3iUF7+Jr43erG46So/1dN06aRlplj9FwH4PshLEJDTM3MoshE
+ y/1mLysT939k9uIv+h8oxazr8M/GOmu0fj3Z+bVk5v9hziAL6WpOSjPZNci8cJvXVSUC
+ yz3m2UUdhMiuLdsZPxcm9+X/ZMu8kRzmJxUNIyTf7+Tgln1AHRl3Ztw4h/Vnu4EzfDq/
+ d3Qg==
+X-Gm-Message-State: AOJu0YxewkSg00/dbh474DShbiEjPrrTIpiYV8XNOCAjtl6E0llQGUss
+ N7bt6tTEaPcm8t4wsSFuvxVIqJA0kYI373hdtU/4XFPj3fF88zMs5/jyITcl9RQFEKpEnX2Lm3Q
+ =
+X-Google-Smtp-Source: AGHT+IHZs04viBOdgJSU3ycYgEbcBCnv8oP0WRWMqwqt7edp3KNYgbcU/BO7mBt9KQt2QcM/4N7Kcw==
+X-Received: by 2002:a05:6e02:1885:b0:381:3989:214a with SMTP id
+ e9e14a558f8ab-39a23f5b915mr70569235ab.10.1722002446023; 
+ Fri, 26 Jul 2024 07:00:46 -0700 (PDT)
+Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
+ [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-39a22e7ec25sm14411905ab.6.2024.07.26.07.00.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 26 Jul 2024 07:00:45 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Anand Moon <linux.amoon@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Eugene Uriev <eugeneuriev@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>,
+ Shengyu Qu <wiagn233@outlook.com>, Tom Rini <trini@konsulko.com>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+Subject: [PATCH v4 0/4] alist: Implement a pointer list / array of structs
+Date: Fri, 26 Jul 2024 08:00:34 -0600
+Message-Id: <20240726140038.194946-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-From: Zixun LI <admin@hifiphile.com>
-Date: Fri, 26 Jul 2024 15:24:28 +0200
-Message-ID: <CA+GyqeYypLOeAMxZyy6MbG6rXmc6ksi==64gC-z7v5ZQtDURqw@mail.gmail.com>
-Subject: cmd: bind/unbind by class index doesn't work with usb gadget
-To: Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Simon Glass <sjg@chromium.org>, Miquel Raynal <miquel.raynal@bootlin.com>, 
- Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
- Nishanth Menon <nm@ti.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Fri, 26 Jul 2024 15:50:59 +0200
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,34 +97,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Bind/unbind a gadget function driver to a USB gadget device doesn't work
-with class index, while using node path is ok. For example:
+This data structure provides a list of pointers / array of structures.
+I was planning to use it for the lmb restructure, to allow it to
+support any number of entries, but then I gave up on it.
 
-U-Boot> dm tree
+There are quite a few places in U-Boot where such a list would be
+useful, since it supports growing the array.
 
- Class     Index  Probed  Driver                Name
------------------------------------------------------------
- root          0  [ + ]   root_driver           root_driver
- simple_bus    0  [ + ]   simple_bus            |-- ahb
- simple_bus    1  [ + ]   simple_bus            |   |-- apb
- ...
- usb           0  [   ]   atmel_usba_udc        |   |   |-- gadget@f803c000
+The series includes a patch to convert an existing function to use
+this.
 
-U-Boot> bind usb 0 usb_ether
-Cannot find device 0 of class usb
+It adds a little under 300 bytes of code with Thumb2.
 
-Both USB host uclass and USB gadget uclass are using the same name "usb"
-while they are under different class id of UCLASS_USB and
-UCLASS_USB_GADGET_GENERIC.
+With this version, use of realloc() is option and off by default. This
+reduces the size growth on xilinx_versal_mini_emmc0 (aarch64) from
+1765 bytes to 636, for the str_to_list() patch.
 
-bind_by_class_index() of cmd/bind.c uses uclass_get_by_name() to find
-class id, since both class have the same name it will get the id of
-UCLASS_USB instead since it is at the front of the uclass id list.
+The str_to_list() patch is marked as RFC since I beleive we have decided
+not to apply it.
 
-Then uclass_find_device() will try to find the wrong device and fail.
+Example:
 
-But fixing this issue simply by renaming gadget uclass name will break
-the DT alias feature DM_UC_FLAG_SEQ_ALIAS.
+ struct my_struct obj;
+ struct my_struct *ptr = alist_add(&lst, &obj, struct my_struct);
 
-Any idea how to fix it ? Like adding a name_seq_alias field to
-uclass_driver structure ?
+ // now ptr is in the list
+
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=371258&state=*
+
+Changes in v4:
+- Avoid using realloc() unless specifically enabled by Kconfig
+
+Changes in v3:
+- Add prototype for alist_expand_by()
+- Update for alist_add() API change
+
+Changes in v2:
+- Fix 'typeee' typo
+- Make alist_get_ptr() take a const alist *
+- Make alist_add() take a struct rather than a pointer
+- Declare alist_expand_by() as static
+
+Simon Glass (4):
+  malloc: Support testing with realloc()
+  lib: Handle a special case with str_to_list()
+  alist: Add support for an allocated pointer list
+  RFC: lib: Convert str_to_list() to use alist
+
+ common/dlmalloc.c |   4 +
+ include/alist.h   | 214 ++++++++++++++++++++++++++++++++++++++++++++++
+ lib/Kconfig       |  10 +++
+ lib/Makefile      |   1 +
+ lib/alist.c       | 157 ++++++++++++++++++++++++++++++++++
+ lib/strto.c       |  33 ++++---
+ test/lib/Makefile |   1 +
+ test/lib/alist.c  | 197 ++++++++++++++++++++++++++++++++++++++++++
+ test/str_ut.c     |   4 +-
+ 9 files changed, 604 insertions(+), 17 deletions(-)
+ create mode 100644 include/alist.h
+ create mode 100644 lib/alist.c
+ create mode 100644 test/lib/alist.c
+
+-- 
+2.34.1
+
