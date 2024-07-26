@@ -4,71 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE58FC3DA70
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 13:03:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CD3DC3DA70
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 13:03:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C451887D3;
-	Fri, 26 Jul 2024 14:59:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 05B6388780;
+	Fri, 26 Jul 2024 14:59:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q+den+yw";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z4YB8aQ9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80C4A87C7E; Fri, 26 Jul 2024 14:59:28 +0200 (CEST)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
+ id A0C1687C7E; Fri, 26 Jul 2024 14:59:28 +0200 (CEST)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9ACB88718
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 14:59:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3BC488791
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 14:59:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-5d31ef2c73cso588333eaf.3
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 05:59:24 -0700 (PDT)
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-5d5c2ac3410so453798eaf.2
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 05:59:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721998763; x=1722603563; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1721998764; x=1722603564; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YmhYRr5ztGmgrmYOtEqxoneP1/veMrOSYG+azpwZKcY=;
- b=Q+den+ywvKyegU2g1zm0B/kAWNabyIloAywaJKy9zfe/ccGXfvW4Hpqaufm+n6IisU
- /tT5rQLBH1/oi8iEHEL57K/e5VKZBZ18FZQEpfTZxZDU2R2BAw8mdb2afWJpxG7qsWmh
- aZNFR+rPHYBa69E44yZHoxRJpAGqZrkyncsJg=
+ bh=e7gzg06gzUXb1qd7x3kHQC4LBJ/mle/nQrzylWPRvYI=;
+ b=Z4YB8aQ9lsf9Z5VCC5r5KWjRgXLdgJBKMp/HMBbRUnzxArbutFWWDyWdXMpIOSWOBU
+ wF3xAKHn+QjxeQMfFI9NnLj1vNUSGD2Np2YQ8IJWn7EQ1sdNuMvF4TvHoFXNibwdI4Ok
+ +s4ngALxOUVnh7z2B0UEjSvJ6mSb1RgS3832g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721998763; x=1722603563;
+ d=1e100.net; s=20230601; t=1721998764; x=1722603564;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=YmhYRr5ztGmgrmYOtEqxoneP1/veMrOSYG+azpwZKcY=;
- b=rel7fkQVbbjE1XB6Sk52iDMrIaO00/Fd9CyL2E7gwWN2lUsmEly+vDxikMdmzaA+cH
- 7cQ48KFtKY94gJkHHSe4Texa2xB+Bq8+jIgqvIMbRQ0chosCbQVQkTrDLVmrhchLc9OS
- BqE5v6uIeEVLcQLMwEYW8PVnNz4XcXQYvXS1fAjyercbq12vsU4c2dTsEBwHxwoRjACs
- eeYRCCVoPawEk0HsPJMs2nPgaeOdn6NkHCu88c4d6aqOyAeQrnGl4jdIkrFrR0QSYs03
- NFzg4Mp6iDT5okAvh8TEbpXGtXgfelmO8RiofElsFwM+Sig23+r8ZIRxRZWMzYL6pF8y
- WLmA==
-X-Gm-Message-State: AOJu0Yy+fZg/MKeKPm8BR63L7NBjIIE7oVKM1MRkelbEn8PD1GO6BXkK
- fSnPXmuvS8gjggD+U4d8JLFifHiMcJkxnSoShMkTvPe+Qlfh60/M3LIq+0oJafweQZKI5lO6Lxm
- T6zjvJfCw04rwW0ftayUEUsbmKKxglFdAIdX+
-X-Google-Smtp-Source: AGHT+IFp6gL1Vi3PDbRrfow7hhfVkNQ8A95f5uFcVWmQpdCKHBrd+SDZ7Z8HhgzpZahXtxeyB/DxRuIbrENJfuKTJpY=
-X-Received: by 2002:a05:6358:718e:b0:19e:fa9c:5ec9 with SMTP id
- e5c5f4694b2df-1acfb8b1371mr551053755d.9.1721998763505; Fri, 26 Jul 2024
- 05:59:23 -0700 (PDT)
+ bh=e7gzg06gzUXb1qd7x3kHQC4LBJ/mle/nQrzylWPRvYI=;
+ b=D6H5A+ztHOxNfaNGHTpoUWjtMVHR+1N39UVD5gkdPVpxSUueQSSfjXJB9AwCuNfiH7
+ IQxyAqRfvrgTgaWCa97G73FcssYDCG01Mvj9GUojg3uzHu99l3WmS8jYZR4LtGtBfQpO
+ 3vlXBqWS03Hq1mshxexkY5M6krG09G339inHTWf0sJzkCiNVDeYzqk7RyJH/hXxlFn5b
+ s72Gx0u5yc8xIbqJWhAeOpkoQJ0XGWdxOAWxAo3CdYBwqfcNWxw3Z14BiIEt/nT/orGv
+ k7pBdxgl6a3Qyt4chJM47e/VngF4B522Pe6eVCUiKK2c7YI0hpQY4EbLZeLpxKISYvk0
+ JfeA==
+X-Gm-Message-State: AOJu0YzWR/wEMSGzhi/MD8lhHrpnF41QpXDJHelH9FjzUhansvTbHctS
+ up/UJsbM7nHF568jWlRzOg5AzrLAY2cxS7GLGQpHLeQa7CQP3GzRpn+N5kLg8wfy9lZGLPKUA/2
+ fPgitiFOddTCkShnOnmTNOIdHvLkBbrKF0oz3
+X-Google-Smtp-Source: AGHT+IGn/z5E8OzhUxSpa8n7E6dBLCi96LETay7HheucTI3rVR64m+NIe1qS9yVO2ok6LqgRWaxLgqh62/QkDBFlULs=
+X-Received: by 2002:a05:6358:528d:b0:1ac:efb0:fb2d with SMTP id
+ e5c5f4694b2df-1acfb894d37mr656381355d.4.1721998764499; Fri, 26 Jul 2024
+ 05:59:24 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 26 Jul 2024 05:59:22 -0700
+ HTTPREST; Fri, 26 Jul 2024 05:59:23 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAFLszThkmy0RG8HBFAsmCVf7h6S1Afa=SmuQ2PvLotxd7C=48Q@mail.gmail.com>
-References: <CAFLszThkmy0RG8HBFAsmCVf7h6S1Afa=SmuQ2PvLotxd7C=48Q@mail.gmail.com>
- <20240702170009.484961-1-andrew.goodbody@linaro.org>
-Date: Fri, 26 Jul 2024 05:59:22 -0700
-X-Google-Sender-Auth: iGe75Zk8_yoXSAa_ookEuue6DCw
-Message-ID: <CAFLszTihVjTU51Of29DbDJa3mRVw=tMD3kssixBp7kODMT6FhQ@mail.gmail.com>
-Subject: Re: [PATCH v2] sandbox: Fix LTO to work with STACKPROTECTOR
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Tom Rini <trini@konsulko.com>
+In-Reply-To: <20240702174643.GP38804@bill-the-cat>
+References: <20240702174643.GP38804@bill-the-cat>
+ <20240702163729.2674096-1-sjg@chromium.org>
+Date: Fri, 26 Jul 2024 05:59:23 -0700
+X-Google-Sender-Auth: RqC6uvVsbLOtoAKxHwVc6Ow6qE0
+Message-ID: <CAFLszTi4vfG4tBgiU+zTtzyON_TsBi7edAWjE36mj75JkP9YWw@mail.gmail.com>
+Subject: Re: [PATCH v2] binman: Update cbfstool
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,24 +90,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 2 Jul 2024 at 18:00, Andrew Goodbody <andrew.goodbody@linaro.org> wrote:
->
-> Add the STACKPROTECTOR symbols to the script that generates the
-> symbols that should not be removed by the use of LTO when linking
-> a shared object. This prevents a fail to build due to link errors.
->
-> https://source.denx.de/u-boot/u-boot/-/issues/35
->
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
->
-> Changes in v2:
-> - Made the new match more specific and added it to the grep run rather
->   than run grep twice
->
->  scripts/gen_ll_addressable_symbols.sh | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
+On Tue, Jul 02, 2024 at 05:37:28PM +0100, Simon Glass wrote:
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> Update to a newer version of this tool, 4.22.01. This runs OK with the
+> current binman tests and matches the one in CI.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+-- 
+Tom
 
 Applied to u-boot-dm, thanks!
