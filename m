@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CD3DC3DA70
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 13:03:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 017EEC3DA49
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 13:04:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05B6388780;
+	by phobos.denx.de (Postfix) with ESMTP id 700D288708;
 	Fri, 26 Jul 2024 14:59:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z4YB8aQ9";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DCQD2zmg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0C1687C7E; Fri, 26 Jul 2024 14:59:28 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
+ id 7D91E87C7E; Fri, 26 Jul 2024 14:59:30 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3BC488791
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 14:59:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3F5388729
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 14:59:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-5d5c2ac3410so453798eaf.2
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 05:59:25 -0700 (PDT)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6b7a3773a95so3734986d6.2
+ for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 05:59:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1721998764; x=1722603564; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=e7gzg06gzUXb1qd7x3kHQC4LBJ/mle/nQrzylWPRvYI=;
- b=Z4YB8aQ9lsf9Z5VCC5r5KWjRgXLdgJBKMp/HMBbRUnzxArbutFWWDyWdXMpIOSWOBU
- wF3xAKHn+QjxeQMfFI9NnLj1vNUSGD2Np2YQ8IJWn7EQ1sdNuMvF4TvHoFXNibwdI4Ok
- +s4ngALxOUVnh7z2B0UEjSvJ6mSb1RgS3832g=
+ d=chromium.org; s=google; t=1721998765; x=1722603565; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:references
+ :in-reply-to:from:sender:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wORB9pXoZxUVrCdK04fSgSjvkRQSECTphUOqpLrixM4=;
+ b=DCQD2zmg1Grnw1Jidg7/CVN4FjerVlJmJvOtz0EZ0HH3VZXSizmfqdHClN9dyg+Lxg
+ 6AZzqgGYUiKF1ml6YC8zjVmZ4itdMnVgLm4IQzLcGQ7liE0Qjp30YF6GBWDSPxFRDzqV
+ BRa6lyFCc7CUTOF/oWa1NSAUkxX6j4frvQo78=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1721998764; x=1722603564;
- h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=e7gzg06gzUXb1qd7x3kHQC4LBJ/mle/nQrzylWPRvYI=;
- b=D6H5A+ztHOxNfaNGHTpoUWjtMVHR+1N39UVD5gkdPVpxSUueQSSfjXJB9AwCuNfiH7
- IQxyAqRfvrgTgaWCa97G73FcssYDCG01Mvj9GUojg3uzHu99l3WmS8jYZR4LtGtBfQpO
- 3vlXBqWS03Hq1mshxexkY5M6krG09G339inHTWf0sJzkCiNVDeYzqk7RyJH/hXxlFn5b
- s72Gx0u5yc8xIbqJWhAeOpkoQJ0XGWdxOAWxAo3CdYBwqfcNWxw3Z14BiIEt/nT/orGv
- k7pBdxgl6a3Qyt4chJM47e/VngF4B522Pe6eVCUiKK2c7YI0hpQY4EbLZeLpxKISYvk0
- JfeA==
-X-Gm-Message-State: AOJu0YzWR/wEMSGzhi/MD8lhHrpnF41QpXDJHelH9FjzUhansvTbHctS
- up/UJsbM7nHF568jWlRzOg5AzrLAY2cxS7GLGQpHLeQa7CQP3GzRpn+N5kLg8wfy9lZGLPKUA/2
- fPgitiFOddTCkShnOnmTNOIdHvLkBbrKF0oz3
-X-Google-Smtp-Source: AGHT+IGn/z5E8OzhUxSpa8n7E6dBLCi96LETay7HheucTI3rVR64m+NIe1qS9yVO2ok6LqgRWaxLgqh62/QkDBFlULs=
-X-Received: by 2002:a05:6358:528d:b0:1ac:efb0:fb2d with SMTP id
- e5c5f4694b2df-1acfb894d37mr656381355d.4.1721998764499; Fri, 26 Jul 2024
- 05:59:24 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1721998765; x=1722603565;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:references
+ :in-reply-to:from:sender:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wORB9pXoZxUVrCdK04fSgSjvkRQSECTphUOqpLrixM4=;
+ b=paMlfDjJG83HyXXw1I4lLqShiLF2RftZgcgBD+x3F7oz+ZV9FMsNRFD1eNmAXpLb1i
+ Ftb2Aa8GdM6sRp0qEN2lE1giFfaOx23CJw5nkn1xKdJzAVmLSalRPX6j1p29Rhnv38Tz
+ Y8UCMesqoDX0Tf1IO2Aqk9v9vNYFSS6JJ8C51xnvn0QwhV8FVpnU5twwHhwrMae5aU3D
+ r7ZOIalI5rSxR1oXrmCZRhJ8r7ugghEIOsBXi5q2/bgAgaFBjGhZObrFSL8pypc49srF
+ F8CxhtYAQzZHCDli86Lkd60Tc2TRVute7F+N20k4jl7yBxJPPe6a+bakq2VjjQylFyCk
+ FTdw==
+X-Gm-Message-State: AOJu0YwgTP8xZ6SsQUQm3485wBU1jdebB7I5p9eB1rjBNmorvx7PqyqZ
+ E6JXi5r9IYY8rftOk3S1gg6jmBcSisYxSigZhR0zH/Uo+I3yckEBbkK+dFkKkVbFqIFHTIfzfkp
+ vXtEE+l6aZV+rK6TKQiUM/xnA94fDLq/L50qy
+X-Google-Smtp-Source: AGHT+IEkM1VHfwtH8T0nAZFFgnWfc3nIyCpudIjKF0gUR76gyskEN9bGlkyAD5wN472U5krx+/WFghOMFLBgNQq4rV8=
+X-Received: by 2002:a05:6214:212e:b0:6b5:7e70:3537 with SMTP id
+ 6a1803df08f44-6bb408714damr63258136d6.50.1721998765562; Fri, 26 Jul 2024
+ 05:59:25 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 26 Jul 2024 05:59:23 -0700
+ HTTPREST; Fri, 26 Jul 2024 05:59:24 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240702174643.GP38804@bill-the-cat>
-References: <20240702174643.GP38804@bill-the-cat>
- <20240702163729.2674096-1-sjg@chromium.org>
+In-Reply-To: <CAFLszTg96myB7u_GfjwBQ6N0LX-u1_UoX184+UZxdBb_ftjYVQ@mail.gmail.com>
+References: <CAFLszTg96myB7u_GfjwBQ6N0LX-u1_UoX184+UZxdBb_ftjYVQ@mail.gmail.com>
+ <20240701-python-3-12-fix-patman-license-v2-1-7de3d039e6ac@collins.com>
 Date: Fri, 26 Jul 2024 05:59:23 -0700
-X-Google-Sender-Auth: RqC6uvVsbLOtoAKxHwVc6Ow6qE0
-Message-ID: <CAFLszTi4vfG4tBgiU+zTtzyON_TsBi7edAWjE36mj75JkP9YWw@mail.gmail.com>
-Subject: Re: [PATCH v2] binman: Update cbfstool
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>, 
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Simon Glass <sjg@chromium.org>
+X-Google-Sender-Auth: ZXsmCHcwNONNCP12KkaG0PKo4dY
+Message-ID: <CAFLszTjvOfN=d8uKUt9eefPsod1wymo53GBvLaxE-eWVwBO8JQ@mail.gmail.com>
+Subject: Re: [PATCH v2] tools: patman: fix `pip install` with Python 3.12
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Brandon Maier <brandon.maier@collins.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,16 +88,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jul 02, 2024 at 05:37:28PM +0100, Simon Glass wrote:
-
-> Update to a newer version of this tool, 4.22.01. This runs OK with the
-> current binman tests and matches the one in CI.
+On Mon, 1 Jul 2024 at 18:51, Brandon Maier <brandon.maier@collins.com> wrot=
+e:
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Installing patman with `cd ./tools/patman && pip install -e .` fails
+> with the error below.
+>
+> As described in the error output below, the license line is not allowed
+> to be only defined in the setup.py. We remove the 'license' field
+> entirely, as the Python Packaging User Guide recommends using projects
+> classifiers instead[1] and we already set the GPL-2.0+ classifier.
+>
+> > $ cd ./tools/patman && pip install -e .
+> > Obtaining file:///.../u-boot/tools/patman
+> >   Installing build dependencies ... done
+> >   Checking if build backend supports build_editable ... done
+> >   Getting requirements to build editable ... error
+> >   error: subprocess-exited-with-error
+> >
+> >   =C3=97 Getting requirements to build editable did not run successfull=
+y.
+> >   =E2=94=82 exit code: 1
+> >   =E2=95=B0=E2=94=80> [61 lines of output]
+> >       /tmp/pip-build-env-mqjvnmz8/overlay/lib/python3.12/site-packages/=
+setuptools/config/_apply_pyprojecttoml.py:76:
+> >           _MissingDynamic: `license` defined outside of `pyproject.toml=
+` is ignored.
+> >       !!
+> >
+> >       *****************************************************************=
+***************
+> >       The following seems to be defined outside of `pyproject.toml`:
+> >
+> >       `license =3D 'GPL-2.0+'`
+> >
+> >       According to the spec (see the link below), however, setuptools C=
+ANNOT
+> >       consider this value unless `license` is listed as `dynamic`.
+> >
+> >       https://packaging.python.org/en/latest/specifications/pyproject-t=
+oml/#declaring-project-metadata-the-project-table
+> >
+> >       To prevent this problem, you can list `license` under `dynamic` o=
+r alternatively
+> >       remove the `[project]` table from your file and rely entirely on =
+other means of
+> >       configuration.
+> >       *****************************************************************=
+***************
+> >
+> >       !!
+>
+> [1] https://packaging.python.org/en/latest/guides/writing-pyproject-toml/=
+#license
+>
+> Signed-off-by: Brandon Maier <brandon.maier@collins.com>
+> ---
+> Changes in v2:
+> - drop the license in favor of license classifiers
+> ---
+>  tools/patman/setup.py | 1 -
+>  1 file changed, 1 deletion(-)
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
--- 
-Tom
+Thanks
 
 Applied to u-boot-dm, thanks!
