@@ -4,76 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 342E9C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 20:43:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26658C3DA49
+	for <u-boot@archiver.kernel.org>; Fri, 26 Jul 2024 23:00:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B23B987C7E;
-	Fri, 26 Jul 2024 22:43:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0FDFD885A8;
+	Sat, 27 Jul 2024 01:00:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DTlKBHs8";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="MZg5k+LJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62B5C87ED1; Fri, 26 Jul 2024 22:43:06 +0200 (CEST)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CDB8A885BF; Sat, 27 Jul 2024 01:00:47 +0200 (CEST)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F3278780A
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 22:43:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 967B98851E
+ for <u-boot@lists.denx.de>; Sat, 27 Jul 2024 01:00:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2ef2e37a171so2468361fa.2
- for <u-boot@lists.denx.de>; Fri, 26 Jul 2024 13:43:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722026583; x=1722631383; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6uNfSMrT8WS6j+L0Diz0eEilXm9kHoomHsecxw4NPvs=;
- b=DTlKBHs81q+MtyVAmVKibndqLyqKb37PyCN7KZxVQi0g/EJxRQHoOPPLl5IlAc+jMc
- beBCk4O8g7utTKMEQ4ecDAb83BEE8/ZXPjhVMH+fDx3nMe+mtk1/c8Hfme9uS5kKkM1K
- 4+OIaVSC5ezCpC/VMw88xT7DKIpuFmhpPeg/Vzj2Lduw3Db8QzmVMKHLeg10Vg4HP1Ei
- u+TiPMH89HauyndwyBBxq0OY4ahE20MpQ1OEPW4Ss3aHpeoqRGF70iC9vvyZbC8i/cNU
- tfHh9xmC6YTARcjzRrGnjGgQAuWzO5UtD3r6QawZ8mqPFDft7W2rwpyQEHfP8FBM1PIP
- OQwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722026583; x=1722631383;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6uNfSMrT8WS6j+L0Diz0eEilXm9kHoomHsecxw4NPvs=;
- b=hXKyutoGwAGAGd+CAyqyM/XhigRAdlA2KAfKdy4cbiWDKbTNKSJzZQ8J7AAbLWN0Jq
- Z7mZ4yt59FceM/IqW30U5YAcRX4XOBU/AcU9LFqpOZHkTijj2kUzd95d+bc3enzlsbf3
- BiTroE+CsKCO6WcqNGiUmhpLPuSV6iKKNbi1iuWgiOJsQscsocobNDL/6vXPt+AU6KLp
- iFJZyeWYScFf2CrJp3cC8xcTmxu32FV0R94Z+hXOM7jzZDEK9gGZRUujlipdBQ/HLJ/L
- W7KEAwTTMlcv6CiVqcnH/5fJKdZvsvjpkjq8YkCR/pVWQlhDa0EJ8Z0zIG1xe8aTUnks
- mR9Q==
-X-Gm-Message-State: AOJu0Yz32ARVMQowf7njc7gcq+jA6Nd1NGrVCUFJXXaG1te9F4ch5gyk
- 5R2E0USe3g3MzXNsAJJKRo+d/yxdUoN/rhULrWu6ngfujuQ/hDnPfdQiie154J/U6PpJqxWcZmW
- PWrfNpiC8IIMEJDazBylTqWRbwXE=
-X-Google-Smtp-Source: AGHT+IHAh5/wxEiFo1lqE/a9JH/BY7icF/iVbEtmmvIpeG2KsGa3sKJjjIRrcnYoT6QqrpLLczph59t93GcpFtGddPU=
-X-Received: by 2002:a05:6512:3f0f:b0:52e:fb8b:32d0 with SMTP id
- 2adb3069b0e04-52fd526b79fmr2868740e87.1.1722026583048; Fri, 26 Jul 2024
- 13:43:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=mwalle@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id B919BCE1349;
+ Fri, 26 Jul 2024 23:00:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 80D53C32782;
+ Fri, 26 Jul 2024 23:00:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1722034842;
+ bh=dzjWvTAGYDX/XuaDpHhUSZ9zBimYYY7IyiVGIdIj87c=;
+ h=From:To:Cc:Subject:Date:From;
+ b=MZg5k+LJJzoTHX9XnJLWkm+hzS7lxdcyLl2ASSJsUKAkS9uONGs9J++E1VRehwzre
+ O16BoFYPfZym7G+mKlVKpsWTNSScGvmwvCSEjqXtbBb2/1uhTmrhj4H1Tjk/a46Y/i
+ p+hKL020rJfYfetlXGIqahrPeVicxTv6Q1HRXb+5Mzgh+uRLmdLjKV1VRYHDVsHRFb
+ YwhQA3Sj6HKJPYAG8Iyo8nHuzVFJrL+WKVjEzDNLN9dmL6kskpJFfY4cKuHjYU1OxR
+ mG7Xns4JL6rofZLL5i+5k8n0M8RbPo8sYYUq3/QbUZRNdkwjSzRLKnaKueEaRmNg8o
+ o6QmmP4d5KIXg==
+From: Michael Walle <mwalle@kernel.org>
+To: Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de,
+	Michael Walle <mwalle@kernel.org>
+Subject: [PATCH] boot: android: fix booting without a ramdisk
+Date: Sat, 27 Jul 2024 01:00:35 +0200
+Message-Id: <20240726230035.2339680-1-mwalle@kernel.org>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <20240726175108.34704-1-Zhiqiang.Hou@nxp.com>
- <20240726175108.34704-5-Zhiqiang.Hou@nxp.com>
-In-Reply-To: <20240726175108.34704-5-Zhiqiang.Hou@nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 26 Jul 2024 17:42:51 -0300
-Message-ID: <CAOMZO5DFkhSd9Hi=aHoJQ95aq-NbSfr=_X3cmOHUGvr2FH5aow@mail.gmail.com>
-Subject: Re: [PATCHv3 04/12] cpu: imx: fix the CPU frequency in
- cpu_imx_get_info()
-To: Zhiqiang Hou <Zhiqiang.Hou@nxp.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, peng.fan@nxp.com, 
- sjg@chromium.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,14 +68,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Jul 26, 2024 at 2:30=E2=80=AFPM Zhiqiang Hou <Zhiqiang.Hou@nxp.com>=
- wrote:
->
-> From: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
->
-> 1MHz =3D 1000000Hzzzzzz
+android_image_get_ramdisk() will return an error if there is no ramdisk.
+Using the android image without a ramdisk worked until commit
+1ce8e10f3b4b ("image: Fix up ANDROID_BOOT_IMAGE ramdisk code") because
+that return code wasn't checked. Now that it is checked, don't return an
+error in the (valid) case that there is no ramdisk in the image.
 
-Please provide a proper commit log with an explanation. This Hzzzzzz
-makes no sense.
+With this, I'm able to boot a linux kernel using fastboot again:
 
-Please retain the Reviewed-by tags from Simon on the previous version.
+  fastboot --base 0x41000000 --header-version 2 --dtb /path/to/dtb \
+  --cmdline "root=/dev/mmcblk0p1 rootwait" boot path/to/Image
+
+Signed-off-by: Michael Walle <mwalle@kernel.org>
+---
+ boot/image-android.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/boot/image-android.c b/boot/image-android.c
+index 09c7a44e058..0900579ee8c 100644
+--- a/boot/image-android.c
++++ b/boot/image-android.c
+@@ -395,7 +395,7 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
+ 
+ 	if (!img_data.ramdisk_size) {
+ 		*rd_data = *rd_len = 0;
+-		return -1;
++		return 0;
+ 	}
+ 	if (img_data.header_version > 2) {
+ 		ramdisk_ptr = img_data.ramdisk_addr;
+-- 
+2.39.2
+
