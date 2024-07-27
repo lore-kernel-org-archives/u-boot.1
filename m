@@ -4,72 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 974ABC3DA4A
-	for <u-boot@archiver.kernel.org>; Sat, 27 Jul 2024 10:36:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 707D1C3DA4A
+	for <u-boot@archiver.kernel.org>; Sat, 27 Jul 2024 16:43:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0775886AF;
-	Sat, 27 Jul 2024 12:36:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8048488001;
+	Sat, 27 Jul 2024 18:43:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Rlpkpnl+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="K2i7gON7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4A8988646; Sat, 27 Jul 2024 12:36:04 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id 8CDA2886F1; Sat, 27 Jul 2024 18:43:04 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43D1288216
- for <u-boot@lists.denx.de>; Sat, 27 Jul 2024 12:36:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3E4587B1A
+ for <u-boot@lists.denx.de>; Sat, 27 Jul 2024 18:43:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-52fc14d6689so2109739e87.1
- for <u-boot@lists.denx.de>; Sat, 27 Jul 2024 03:36:02 -0700 (PDT)
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-52efa98b11eso327897e87.2
+ for <u-boot@lists.denx.de>; Sat, 27 Jul 2024 09:43:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722076561; x=1722681361; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1722098582; x=1722703382; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=osiFLReKr/wSImVw/JkAPtuT6CZk/H+lLkRavYHbVbQ=;
- b=Rlpkpnl+QGap0uFFE5ttWMaH81UsKux0GAxcD5+iXkjt9e0zlcKC8SrTdk9Nk7KFmv
- AvegzDCuNBRRcOhKYK2MEU64v96pcWvnHw+m5p0zjy3+JNTBJrE1dfyT4ZFpChFbKajW
- nyrLWabtJTRJkICUX4Ye1zSZ1DqSqLBc5gGyscrj7p5kN+qt+eINBEh2gxUWRY1zNz7W
- 8ll/rA6k/0G3f+Zo4p1uifVxIi69zuMcRxiLzzgu1NVLS1DUAV39tkMeVLue1RNrJj7v
- 0Tz910boZkcaaz0KYDZFlMD+Kb3x7QLxtXRsjQiDILxQzv4ZGob4uSgVeJZEoQTPvz2g
- MA7w==
+ bh=LUBHODyOyQv+RYhzo4y+vIriBWo6Cr0QZ5bW+WCmSGY=;
+ b=K2i7gON7VkUPIVI4lXjzgKFWcsBnT+tckX86HmLBn8A+YXLK0NYLBBX0IPVp6PNgG/
+ jxeqRa4n2p4ga2mBRk/4Fxf3KTUQZUWQ4a+qGvM96eD27wHekveI/MzER01JS0v8XwyD
+ lCl+ptcLQZ/5sgCZEJ4WYNh3sAgbTDbIEPe7QVldbKeOJ3j392T5C8G8p1A9bd+PqBrk
+ 4k5W0pWzJuMQGXIdVh9Va2Xdwml4kj5kA9IzAGCz8jYE7uwtvx7IvbLnP1hcoO3ClIJ4
+ lhuDO1OwMOM3lNrAweu12xOGDGw4e+UjhoXCuM9/wBOw1Z9Igmn9V8VbKSgNBm8Fnqj1
+ /DBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722076561; x=1722681361;
+ d=1e100.net; s=20230601; t=1722098582; x=1722703382;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=osiFLReKr/wSImVw/JkAPtuT6CZk/H+lLkRavYHbVbQ=;
- b=AJyeRSLA8SWy3pyZE+Ae9ACmRq5NsgcXNu7A/IrXo35TzakKUUpajHMqT/a5QqytI9
- E1xGrVEuYhaXSFByQOTsydq5Z+dDdSOLFjb/TT+D6Jw7h22JHzTVne8XbfK14MfGiQLi
- T+37rPH/CCEJkfAFyWh3Cg+AHOLKfqs2TloniCaQ7oZ8k33rmSCVZYYgMaJrZLCnUme0
- bZCK/W0QtcQd0H8b/iB1tEZ4+azOzC3HwgYs+fIqTAiHqvPF+DFcQvPSiIoPQhA4K5oA
- p2Dv1QfiTtXQN1fVw4dv2dmMp8HRfdqIoVi9N9XkSgBhaN5bCoP6AK4NCCGSKOG6QBjx
- 5Qzg==
-X-Gm-Message-State: AOJu0YxBxpXcD1CByTrJlny6hWYpwn815h/E7moNpof2HSJM38HYyMJ7
- nGtoc1AjLL4Hfhpssu+XSz9D0tcoVbgLCurufWTq1R+g1CU3m2Inm/KxwiyQSLE8MS0YY+upep4
- JWezJol11WADupuLyt+E0SAuGm7U=
-X-Google-Smtp-Source: AGHT+IHjzkajupcXuxdPo1YVuvoNFoEIRhWA5LTbLdc9qIn/0L2REaJZlIKeg3TqBkOmm27tdQhyUZEHhyAev91niE0=
-X-Received: by 2002:ac2:47ed:0:b0:52e:faf0:410 with SMTP id
- 2adb3069b0e04-5309b269bf9mr1510547e87.1.1722076561031; Sat, 27 Jul 2024
- 03:36:01 -0700 (PDT)
+ bh=LUBHODyOyQv+RYhzo4y+vIriBWo6Cr0QZ5bW+WCmSGY=;
+ b=b8/IyEhSlIdrZVhE6sqKqV+009gniQf6NuC/C3kvdANpRURnNjLVLMeUJ1LfMBFs9t
+ 1JbaADZ8uu3ugCEa7RN3GKI2hLQE2+PQH8sDx49T8NDl57cg+HFk2n0Z/UenHnvSJJl0
+ 2G09/56AEr1CFmBNpde3OlpcDwrIk0BIPqdjIffppA+9uneLKN14TRV5U4xQYIJtTG1V
+ T1XubZJdDSTE8DmE8Henrtr1w6SWEdsBfDt+E1yR8rRuzLschgYmsaEcVGNEUmt2SMuR
+ F1nvOolSqL4aVIV2t0KOSBf41CV/lM+OiWplWahDqwFBOy2IxEtW0P6YW7QQzgYfvu2n
+ DG3A==
+X-Gm-Message-State: AOJu0YxxUw5cfxTCsqwkS8fj1Fv23oCGHNBCGxqM9MaM5mCLIuXJlrBd
+ 4/aQsM1bmgZ96zfibwTEVMwFgsEV5sf/VpMFA3OvQR/FqkKPQiB7vLyjFrX94/7gNHKEPzu7sdQ
+ iQaqj+5/A/jL9nUfyg+B2QvkxLOM=
+X-Google-Smtp-Source: AGHT+IHcDZtU+KQaIDpJAFEZ0npTUI+XE4M4rHNzc5+ssI+4LIjThU9I1N8qRHk3sKjm3Aj7pdoulXstXO/9zYnMyY8=
+X-Received: by 2002:ac2:4c4f:0:b0:52f:3c:a81 with SMTP id
+ 2adb3069b0e04-52fd5274c82mr3856334e87.3.1722098581428; 
+ Sat, 27 Jul 2024 09:43:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240726120721.150484-1-fido_max@inbox.ru>
-In-Reply-To: <20240726120721.150484-1-fido_max@inbox.ru>
-From: E Shattow <lucent@gmail.com>
-Date: Sat, 27 Jul 2024 03:35:50 -0700
-Message-ID: <CANV2PTMxAOrVDGrD-QJWJjdJ=+1NV-9SNcbBZTsfMuDhqiJR=Q@mail.gmail.com>
-Subject: Re: [PATCH 1/1] riscv: define find_{first,
- next}_zero_bit in asm/bitops.h
-To: Maxim Kochetkov <fido_max@inbox.ru>
-Cc: u-boot@lists.denx.de, rick@andestech.com, ycliang@andestech.com, 
- trini@konsulko.com
+References: <20240726102954.14546-1-Zhiqiang.Hou@nxp.com>
+ <0a40ee6f-1fa1-469b-ac9a-f7d8b6ca9f40@denx.de>
+ <DB9PR04MB9236DE687B0FB9543836F55084B42@DB9PR04MB9236.eurprd04.prod.outlook.com>
+ <2abff6ea-7669-4023-b71e-bb9605ffb214@denx.de>
+In-Reply-To: <2abff6ea-7669-4023-b71e-bb9605ffb214@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sat, 27 Jul 2024 13:42:50 -0300
+Message-ID: <CAOMZO5C+b0-9FSdugkeje70RozqnedPNQoHfPPcuvwuJ8MfRvw@mail.gmail.com>
+Subject: Re: [PATCHv2] clk: imx8m: register ARM A53 core clock
+To: Marek Vasut <marex@denx.de>, "Z.Q. Hou" <zhiqiang.hou@nxp.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "trini@konsulko.com" <trini@konsulko.com>, 
+ "lukma@denx.de" <lukma@denx.de>, "seanga2@gmail.com" <seanga2@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -88,87 +93,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Is this a problem in Linux upstream? or specific to U-Boot, and is it
-a regression?
+Hi Zhiqiang,
 
-refrerence https://lore.kernel.org/u-boot/20240504183354.GL2568172@bill-the=
--cat/
-and reference https://lore.kernel.org/u-boot/BJXPR01MB0855813DD38EF86CCA6DD=
-5C8E6E92@BJXPR01MB0855.CHNPR01.prod.partner.outlook.cn/
+On Fri, Jul 26, 2024 at 5:38=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
 
-On Fri, Jul 26, 2024 at 5:44=E2=80=AFAM Maxim Kochetkov <fido_max@inbox.ru>=
- wrote:
+> Uh ... why are you adding this patch in the first place ?
 >
-> These seem to be missing, and trying to build fastboot cmd without
-> them is causing errors due to these being missing.
->
-> Signed-off-by: Maxim Kochetkov <fido_max@inbox.ru>
-> ---
->  arch/riscv/include/asm/bitops.h | 40 +++++++++++++++++++++++++++++++++
->  1 file changed, 40 insertions(+)
->
-> diff --git a/arch/riscv/include/asm/bitops.h b/arch/riscv/include/asm/bit=
-ops.h
-> index 35f1368b83..2f2994c4dd 100644
-> --- a/arch/riscv/include/asm/bitops.h
-> +++ b/arch/riscv/include/asm/bitops.h
-> @@ -138,6 +138,43 @@ static inline unsigned long ffz(unsigned long word)
->         return k;
->  }
->
-> +static inline int find_next_zero_bit(void *addr, int size, int offset)
-> +{
-> +       unsigned long *p =3D ((unsigned long *)addr) + (offset / BITS_PER=
-_LONG);
-> +       unsigned long result =3D offset & ~(BITS_PER_LONG - 1);
-> +       unsigned long tmp;
-> +
-> +       if (offset >=3D size)
-> +               return size;
-> +       size -=3D result;
-> +       offset &=3D (BITS_PER_LONG - 1);
-> +       if (offset) {
-> +               tmp =3D *(p++);
-> +               tmp |=3D ~0UL >> (BITS_PER_LONG - offset);
-> +               if (size < BITS_PER_LONG)
-> +                       goto found_first;
-> +               if (~tmp)
-> +                       goto found_middle;
-> +               size -=3D BITS_PER_LONG;
-> +               result +=3D BITS_PER_LONG;
-> +       }
-> +       while (size & ~(BITS_PER_LONG - 1)) {
-> +               tmp =3D *(p++);
-> +               if (~tmp)
-> +                       goto found_middle;
-> +               result +=3D BITS_PER_LONG;
-> +               size -=3D BITS_PER_LONG;
-> +       }
-> +       if (!size)
-> +               return result;
-> +       tmp =3D *p;
-> +
-> +found_first:
-> +       tmp |=3D ~0UL << size;
-> +found_middle:
-> +       return result + ffz(tmp);
-> +}
-> +
->  /*
->   * ffs: find first bit set. This is defined the same way as
->   * the libc and compiler builtin ffs routines, therefore
-> @@ -158,6 +195,9 @@ static inline unsigned long ffz(unsigned long word)
->  #define hweight16(x) generic_hweight16(x)
->  #define hweight8(x) generic_hweight8(x)
->
-> +#define find_first_zero_bit(addr, size) \
-> +       find_next_zero_bit((addr), (size), 0)
-> +
->  #define test_and_set_bit               __test_and_set_bit
->  #define test_and_clear_bit             __test_and_clear_bit
->
-> --
-> 2.45.2
->
+> Is there anything (driver? arch code?) which requires these clock ?
 
--E
+Marek brings up a good point.
+
+Please explain the motivation/reason for this change in the commit log.
+
+Thanks
