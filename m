@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3238AC3DA64
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jul 2024 23:59:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B760C3DA64
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jul 2024 23:59:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 264C488755;
+	by phobos.denx.de (Postfix) with ESMTP id 8E9C088763;
 	Mon, 29 Jul 2024 01:59:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N72rLoY6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UxbE8MBC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E77B28867C; Sun, 28 Jul 2024 19:00:39 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 6577F88703; Sun, 28 Jul 2024 19:55:15 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CC4B87F7D
- for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 19:00:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FB94882D6
+ for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 19:55:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-368526b1333so561888f8f.1
- for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 10:00:38 -0700 (PDT)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3683329f787so900050f8f.1
+ for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 10:55:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722186037; x=1722790837; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1722189313; x=1722794113; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NU7vFGsFVz9XttDSW/bkfmdXC55CVByOcRuEzg2DDFw=;
- b=N72rLoY6pYPMYNW8ohO0dwBFCck7UpvbqHGsX87Mw9IlssNqRlRYdxp1JPcm1IdiMV
- G1zR18YYoFiutIx4YGtiHpWJVe4HsDnS0KhjiGI8gowx7cZiDIHtxuYQ71WFA6MJVul9
- /KLvWCClKAqfKn0NOBnv95RoJDI29aHrP6RHTyY0qJtEGzGAZKQPyebq0sPyAOQdBMQq
- GVksGS2J6YI5y/fDjXghuW/P30yRpnkOFYvlp+6rzdFUv7//9b2GWV4dRP6pvm56ZT1l
- KE0j7n59KKghZJOPVi4lSwYrPJs1S1ATkCgbtZ0oN60TzyC+yzbSgEHWai5kPpFF08BY
- +UKw==
+ bh=XuLif95oo8Vc95yl+NcoucyXKoSKsTdFXYZX9JLI1Kc=;
+ b=UxbE8MBC+x2suOXKOTgKZab2fbsQSi+bVVZ/yILAqXaoJilNHbNASoAjtaoIkd7QPX
+ 1WL2h1+sVWkTuYfzC1wDcySS670UG2Bv3fhYBaVWfTqfB3yNBTDlJczymAvz01PJv1LC
+ pzrmr6jMw/eWC8tqYAkSIPZwTAwzBY9Vs28J7PuDYD1IUSh5R2MXjdW7Syh/z8/IHKfz
+ n7m71PzgjEhlW/kNQprvVkqs2fvzlNQJe5HVoNOLAnElET0zZzn2qUMiYVWIGBmJFoz5
+ QrWogj0YBSVTVMH0bQpH4wN2piq1lACU6mjJ+fSh2XqA333Zb5BqsoL1jxA/tiX/kYuS
+ wKhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722186037; x=1722790837;
+ d=1e100.net; s=20230601; t=1722189313; x=1722794113;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NU7vFGsFVz9XttDSW/bkfmdXC55CVByOcRuEzg2DDFw=;
- b=btM/jMkpbQ8y+vMiSEbAzhND99odqsGuDDecBPNlbNbzvQIZix/S4pyrHKXDoZ47Wv
- krz8yO7r0VTuRBTN8F7OxVBcNx4ghlrnFoBVw5D2dytdBm6PAnvF1az8v5gytFLKvI3l
- AE/KbLRZOnb6gUyjXSNqjKu7i6kRGctpt3DO0DSeSYNQQr3ZIA6yPj0JmHRJk8hWzt42
- R9cmlCzC3KnhBMQ7EhAG9Ou6JCh+ABI9ZpQorJxs1d9OBIdR2tZW4V+FQZ/w+rHVk3g0
- vCciZadUWZTYWnaZNxBrdr3/injVBZaSi5uap5O6/7r3PqUlOALFHt2+MGVQXQp9Gd5X
- 8/aw==
-X-Gm-Message-State: AOJu0YwwcivUm3UDqo+aRmvITPqNS8c/jOoqqdZ4RXtaxP+Rv2WM5MF/
- b7WC5O2Cb/SwAkV6xdp6jJYvxPUq1DjTI4ZgbAPhcK2v6bzN+GYXplKv4ix9vQDt7m3tTCSchuL
- x8DyvX7UJi5pAisLX3Dl8UPuqxPo=
-X-Google-Smtp-Source: AGHT+IFLXABcTYMcrmM3hytyaQW+HN19qzm+5VB+qqS6LEf4j+QYQxtuAoWqKqdfFYtD/IQf9TyZFesJZgdKl1dXn+M=
-X-Received: by 2002:a5d:604f:0:b0:362:4679:b5a with SMTP id
- ffacd0b85a97d-36b5d7d0054mr3401525f8f.16.1722186037138; Sun, 28 Jul 2024
- 10:00:37 -0700 (PDT)
+ bh=XuLif95oo8Vc95yl+NcoucyXKoSKsTdFXYZX9JLI1Kc=;
+ b=DB3wqpSW4gXTYpv+Ssh2G7xZvJ8lODti+j+paQlZg0rpJfcaGIConuSq9+oDdKmEhd
+ dqd2UmvHU99wdfHAdpMzFju6ujxclSu8MRv/Na9LAdCXKpordb0OWXhBj/uNAvOLp6dc
+ IyfkqykNzatQMuEIhQmeYyWbr0IXDYckIiqlIB3tNUlMSryZLaY6eMVT/q6GfOpvss0p
+ YjbbSj1Dh17gYxJ4SyXRQoWxbR8dzZ592UoGQyh8YyFGrvGlU1xFvjSdtyYwcGVHADba
+ f/dP69EGBn9Euxc1C3UtKtLuRnFuvVo31CKZ9I+ZGhL1qBmQyfUBc3gWYGwCkzmxe0kM
+ jSHA==
+X-Gm-Message-State: AOJu0YxDr12mHJlFG82AxkisN9cukNyHpF7+ibIeMSRF+GBSNeUoAeBc
+ xy6yFWIQWI0tmOAvdgYCakGGdXBSiFtX/zQxkAIxHYrsnQpNVN1qB/0wNTP7ssT8HYGXfFuH43V
+ IrGdVKLjkIzJ4RgaGFkxJYvmgMeo=
+X-Google-Smtp-Source: AGHT+IEXccUotEEis3LUoAkPv4+NVUfzyS3O5how4MkRKe11zkrDwrYFo4jppYKBUBQmB1H8h5wDraDHmd2XkBamLps=
+X-Received: by 2002:a05:6000:bc3:b0:368:7fca:9040 with SMTP id
+ ffacd0b85a97d-36b5d0ace36mr3567938f8f.39.1722189312647; Sun, 28 Jul 2024
+ 10:55:12 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240626235717.272219-1-marex@denx.de>
  <a73dffe5-87e3-4e96-965f-9d029f2af8ed@denx.de>
 In-Reply-To: <a73dffe5-87e3-4e96-965f-9d029f2af8ed@denx.de>
 From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Sun, 28 Jul 2024 20:00:25 +0300
-Message-ID: <CAPVz0n0QWCjSgh6QPyo_wnXGQYwhnt30XKJ_ofJK1O08rK9qyA@mail.gmail.com>
+Date: Sun, 28 Jul 2024 20:55:01 +0300
+Message-ID: <CAPVz0n0C6TPdBRUEvJmgAUGAKoetuzr1j=0cMXweP2EqMTwn=g@mail.gmail.com>
 Subject: Re: [PATCH 1/4] power: regulator: Trigger probe of regulators which
  are always-on or boot-on
 To: Marek Vasut <marex@denx.de>
@@ -133,5 +133,7 @@ e
 >
 > Is there anything blocking this series from being applied ?
 
-I would like to try it to be sure that it does not break my devices. I
-will respond within next 24 hours.
+This patchset causes PMIC regulators probe too early which results in
+i2c line setup failure. These patches MUST NOT be applied in this form
+since they will break at least 15 Tegra 3 devices which use DM PMIC,
+maybe more.
