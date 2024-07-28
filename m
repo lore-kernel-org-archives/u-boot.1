@@ -4,72 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67CC9C3DA64
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jul 2024 19:37:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17782C3DA64
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jul 2024 19:37:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87A13887F5;
-	Sun, 28 Jul 2024 21:36:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0E98D8880E;
+	Sun, 28 Jul 2024 21:36:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XhxsMwQB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z+zQr07K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2BC288795; Sun, 28 Jul 2024 21:36:20 +0200 (CEST)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id AB0C888703; Sun, 28 Jul 2024 21:36:21 +0200 (CEST)
+Received: from mail-vk1-xa2c.google.com (mail-vk1-xa2c.google.com
+ [IPv6:2607:f8b0:4864:20::a2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FD8F886F3
- for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 21:36:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BC31884C6
+ for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 21:36:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6b78c3670d0so14235506d6.1
- for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 12:36:18 -0700 (PDT)
+Received: by mail-vk1-xa2c.google.com with SMTP id
+ 71dfb90a1353d-4f50c673e83so857034e0c.0
+ for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 12:36:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722195377; x=1722800177; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722195378; x=1722800178; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Mp+PeHAvgzgML4JuMLRlg4ilQZC2NM+FcSAFTsTDxrs=;
- b=XhxsMwQBd43b7VvM24hY/L1/cNUt1dkaj9ubHBonNT8X1YjbqZwI62Qmq4Mjc5iaEG
- eLN+fYGDpa1tCKfXSAqs971UZNjAmLmjDObctM34SugjNCikEaVAb4i2llMcUJy6d3dl
- mFBVxlwYe8YJ3KFwpjFJEKTg73y2cDPTmQ6CY=
+ bh=QF88284mjSfC4P3azVfw2BBT9hrZnSbkemR8axNzIB8=;
+ b=Z+zQr07K45atOqb+/Ch0EOUpHCgdND/oL0bV9s/LmiU7jyS92oyzsV4GujUAab/Qmm
+ 2UMdQx5KiGcyQtAYnpnRqF3eoOn6HzjjKGCt/0bpN2A8up8UPBPadIX4FxT0FoIyJqrI
+ 6+4q/HuFXiz0WKLYS+1qAQghO2SMynuWY9J5g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722195377; x=1722800177;
+ d=1e100.net; s=20230601; t=1722195378; x=1722800178;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Mp+PeHAvgzgML4JuMLRlg4ilQZC2NM+FcSAFTsTDxrs=;
- b=hMEYRF7oJFMO68rsBisI5UhrB83x/pLJhw+ov3Ne3KVukLA4/p56LmxbOSTMWJZ5kY
- 71gTnvvSnVOXPP8DdRulXAey74sQQw7CbEG/4Evy7xgToGVBtQ/1KhAqEo87hiDofbCG
- SaAU0GpcQhdOBoS22oFE9W8Bc/QnTsqQofUk44NTAWHMNsUVe0YPafHofY8vaf3PcvRd
- si4Yr1OcHsHFURzfjsSUcs2kX900Jb9OZDUCcd6DuWP980ajwxIAL02Gqy3oVRY4Qdt7
- qlHDYDPNpw+aqoCxX4UM9RhZrC5JhifU1n1yStzKiXpQ79jdlo1oGIyf69txmxiZqgrZ
- ZQhg==
+ bh=QF88284mjSfC4P3azVfw2BBT9hrZnSbkemR8axNzIB8=;
+ b=r6Y8MhNlBHh2pRYez0LCF6Oc2AXDOOa5gt9qDoI9JE9uNucrKaR2ZZK+rvgAZ7unDh
+ 1qs6n/YJpo3sFhHiDAX7BfDSaLMiFMKsQj2EaDTx6uHVYhs/qlLHU5J1hip+gFWX5yTY
+ uc2cmJQ7TvWN9qW6YJ3AUR2d6KKF0wuhBFhMhTrx7aPqSa3w7zEEx4yUBTQ/Sp6VB6dT
+ OfSXapE18zW5jsWdn1+qywXz26TNzlDTJqiijXMhY4tKMI7nPAo6NpwxknIiH6fpDMnM
+ nxAika9K71Z9FGfyWWGLocPk0KIK64ExmsdJnskEclGmLSGnSOQFvUS2sq9WFVI64g2k
+ +8sQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXSbDqApjwG/IlPVBuc7cdMW5PpcK9RGAuPHqDlQ9BpYOSwfhTDGwQPlVibKOgysb+OQe1CYyZj8nrUHo0q09zWQ5+unw==
-X-Gm-Message-State: AOJu0YynVAkS6WKpsRdXnTYEK3Xz/oPMJB2Me6QwczokhYhYgCBrCpwR
- 8ZAlvqbT3DPlsJG5C8GtIK7A2iNOREaZ4oYPSk+iqPDAl9lwRcOQkoE1NT5t2lnTUmv9txNxNGI
- kF0AMLRKYGrN8QR2SMwrzBUsyV48RkAfMpHKO
-X-Google-Smtp-Source: AGHT+IFjNj7lbYmajQhmdWsTjb3gTjEDdS8NccsZdkJGN6V8ZwvrHhCxvL1EW86S9Z+uLD8D7YKykMtS1VJuVTIderM=
-X-Received: by 2002:ad4:5c44:0:b0:6b5:de3b:dc10 with SMTP id
- 6a1803df08f44-6bb55aba971mr103076446d6.35.1722195377537; Sun, 28 Jul 2024
- 12:36:17 -0700 (PDT)
+ AJvYcCUtsDv9fYaAj95rGHZ6J3xTNZwyoG3pum+CLKDZl6a3a15uFEW4a2foj0o2jvfm4Y99zZnBw0f9NGUY41D6F31RI7LpQQ==
+X-Gm-Message-State: AOJu0YytTpsPLL5njjGD4K9BwxDLns86yt23PFZCd5z6gO1N0QR4Nw4G
+ ndeWE94oAbE9N22XPTFxVJALJPIzVvFKzr/7Cu9+iXaXceUi4VUAFYcgi+No+2X1lHF1JLPKCm5
+ dH7LJ1smyRzzZPnlG3nn4XExCbJwqJKTIgfNh
+X-Google-Smtp-Source: AGHT+IFCovSgs9lr0Ff03wu9ReySKVelR3wptstuEM+g14bfx1guHilc07MnI1EMXGz+V20oFq38Un7dA780WrNfz8E=
+X-Received: by 2002:a05:6122:3bd1:b0:4ef:65b6:f3b5 with SMTP id
+ 71dfb90a1353d-4f6e6980cdbmr6073481e0c.10.1722195378411; Sun, 28 Jul 2024
+ 12:36:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240725194716.32232-1-ddrokosov@salutedevices.com>
- <20240725194716.32232-5-ddrokosov@salutedevices.com>
-In-Reply-To: <20240725194716.32232-5-ddrokosov@salutedevices.com>
+References: <20240726230035.2339680-1-mwalle@kernel.org>
+In-Reply-To: <20240726230035.2339680-1-mwalle@kernel.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 28 Jul 2024 13:36:06 -0600
-Message-ID: <CAFLszTiYyz-oa2vJUjsLj6auL8hU1XqfFw7fwPRP2++9akR02A@mail.gmail.com>
-Subject: Re: [PATCH v1 4/4] common: android_ab: fix slot suffix for abc block
-To: Dmitry Rokosov <ddrokosov@salutedevices.com>
-Cc: igor.opaniuk@gmail.com, mkorpershoek@baylibre.com, 
- semen.protsenko@linaro.org, trini@konsulko.com, colin.mcallister@garmin.com, 
- 4.shket@gmail.com, avromanov@salutedevices.com, u-boot@lists.denx.de, 
- kernel@salutedevices.com, rockosov@gmail.com
+Date: Sun, 28 Jul 2024 13:36:07 -0600
+Message-ID: <CAFLszTi2OAbzun0Rf68W4a8cNGCS3OvpqHtwAwryF9KwpcEOwQ@mail.gmail.com>
+Subject: Re: [PATCH] boot: android: fix booting without a ramdisk
+To: Michael Walle <mwalle@kernel.org>
+Cc: Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,55 +84,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dmitry,
+Hi Michael,
 
-On Thu, 25 Jul 2024 at 14:55, Dmitry Rokosov
-<ddrokosov@salutedevices.com> wrote:
+On Fri, 26 Jul 2024 at 17:00, Michael Walle <mwalle@kernel.org> wrote:
 >
-> To align with the official Android BCB (Boot Control Block)
-> specifications, it's important to note that the slot_suffix should start
-> with an underscore symbol.
+> android_image_get_ramdisk() will return an error if there is no ramdisk.
+> Using the android image without a ramdisk worked until commit
+> 1ce8e10f3b4b ("image: Fix up ANDROID_BOOT_IMAGE ramdisk code") because
+> that return code wasn't checked. Now that it is checked, don't return an
+> error in the (valid) case that there is no ramdisk in the image.
 >
-> For a comprehensive understanding of the expected slot_suffix format in
-> userspace, please refer to the provided reference [1].
+> With this, I'm able to boot a linux kernel using fastboot again:
 >
-> Links:
-> [1] - https://source.android.com/docs/core/architecture/bootloader/updating#slots
+>   fastboot --base 0x41000000 --header-version 2 --dtb /path/to/dtb \
+>   --cmdline "root=/dev/mmcblk0p1 rootwait" boot path/to/Image
 >
-> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
+> Signed-off-by: Michael Walle <mwalle@kernel.org>
 > ---
->  boot/android_ab.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-(can the test cover this?)
-
-
+>  boot/image-android.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/boot/android_ab.c b/boot/android_ab.c
-> index 359cc1a00428..45c154b10f1a 100644
-> --- a/boot/android_ab.c
-> +++ b/boot/android_ab.c
-> @@ -53,7 +53,7 @@ static int ab_control_default(struct bootloader_control *abc)
->         if (!abc)
->                 return -EFAULT;
+> diff --git a/boot/image-android.c b/boot/image-android.c
+> index 09c7a44e058..0900579ee8c 100644
+> --- a/boot/image-android.c
+> +++ b/boot/image-android.c
+> @@ -395,7 +395,7 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
 >
-> -       memcpy(abc->slot_suffix, "a\0\0\0", 4);
-> +       memcpy(abc->slot_suffix, "_a\0\0", 4);
->         abc->magic = BOOT_CTRL_MAGIC;
->         abc->version = BOOT_CTRL_VERSION;
->         abc->nb_slot = NUM_SLOTS;
-> @@ -319,7 +319,8 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
->                  * or the device tree.
->                  */
->                 memset(slot_suffix, 0, sizeof(slot_suffix));
-> -               slot_suffix[0] = BOOT_SLOT_NAME(slot);
-> +               slot_suffix[0] = '_';
-> +               slot_suffix[1] = BOOT_SLOT_NAME(slot);
->                 if (memcmp(abc->slot_suffix, slot_suffix,
->                            sizeof(slot_suffix))) {
->                         memcpy(abc->slot_suffix, slot_suffix,
+>         if (!img_data.ramdisk_size) {
+>                 *rd_data = *rd_len = 0;
+> -               return -1;
+> +               return 0;
+>         }
+>         if (img_data.header_version > 2) {
+>                 ramdisk_ptr = img_data.ramdisk_addr;
 > --
-> 2.43.0
+> 2.39.2
 >
+
+Rather than squashing the information here, you should return a value
+that indicates there is no ramdisk. Normally in U-Boot this is
+-ENOENT. Then the caller can check it. Also please update the function
+docs in the header.
+
+I see that -EINVAL is returned for some other error, so the caller
+should be careful to just allow -ENOENT.
+
+Regards,
+Simon
