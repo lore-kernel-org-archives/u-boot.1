@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D193C3DA64
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 00:01:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AD29C3DA64
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 00:01:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33C8C88814;
+	by phobos.denx.de (Postfix) with ESMTP id 93D3788827;
 	Mon, 29 Jul 2024 01:59:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A7518806A; Sun, 28 Jul 2024 22:27:09 +0200 (CEST)
+ id CE09D88677; Sun, 28 Jul 2024 22:27:19 +0200 (CEST)
 Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4EC7887DB6
- for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 22:27:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CCC6387F7D
+ for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 22:27:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paulk@sys-base.io
 Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id 906F51F00068
- for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 20:26:37 +0000 (UTC)
+ by leonov.paulk.fr (Postfix) with ESMTPS id 05A9E1F00036
+ for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 20:26:48 +0000 (UTC)
 Received: by laika.paulk.fr (Postfix, from userid 65534)
- id 8C3C8A11FC7; Sun, 28 Jul 2024 20:26:36 +0000 (UTC)
+ id 69AC7A11FC5; Sun, 28 Jul 2024 20:26:48 +0000 (UTC)
 Received: from localhost.localdomain (unknown [192.168.1.64])
- by laika.paulk.fr (Postfix) with ESMTP id D6181A11FB9;
- Sun, 28 Jul 2024 20:25:19 +0000 (UTC)
+ by laika.paulk.fr (Postfix) with ESMTP id 52734A11FBA;
+ Sun, 28 Jul 2024 20:25:20 +0000 (UTC)
 From: Paul Kocialkowski <paulk@sys-base.io>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Yegor Yefremov <yegorslists@googlemail.com>,
@@ -49,9 +49,10 @@ Cc: Tom Rini <trini@konsulko.com>, Yegor Yefremov <yegorslists@googlemail.com>,
  "Matwey V . Kornilov" <matwey.kornilov@gmail.com>,
  Niel Fourie <lusus@denx.de>, Parthiban Nallathambi <parthiban@linumiz.com>,
  Paul Kocialkowski <contact@paulk.fr>
-Subject: [PATCH 06/12] dra7xx: Unify init stack pointer address across boards
-Date: Sun, 28 Jul 2024 22:24:55 +0200
-Message-ID: <20240728202501.3204905-7-paulk@sys-base.io>
+Subject: [PATCH 07/12] dra7xx: Define common init stack pointer address in
+ Kconfig
+Date: Sun, 28 Jul 2024 22:24:56 +0200
+Message-ID: <20240728202501.3204905-8-paulk@sys-base.io>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240728202501.3204905-1-paulk@sys-base.io>
 References: <20240728202501.3204905-1-paulk@sys-base.io>
@@ -76,56 +77,117 @@ X-Virus-Status: Clean
 
 From: Paul Kocialkowski <contact@paulk.fr>
 
-The DRA7xx EVM board use a slightly different init stack pointer
-address compared to the AM57xx EVM board, for no particular reason.
-
-Align the address with the AM57xx EVM board (which matches the usual
-offset to the end of SRAM used by other OMAP devices) prior to removing
-it as a per-board option in a later commit.
+The init stack pointer was defined to the same value in each DRA7xx
+board defconfig. Move the common definition to the Kconfig option
+declaration instead.
 
 Signed-off-by: Paul Kocialkowski <contact@paulk.fr>
 ---
- configs/dra7xx_evm_defconfig        | 2 +-
- configs/dra7xx_hs_evm_defconfig     | 2 +-
- configs/dra7xx_hs_evm_usb_defconfig | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ Kconfig                             | 3 ++-
+ configs/am57xx_evm_defconfig        | 2 --
+ configs/am57xx_hs_evm_defconfig     | 2 --
+ configs/am57xx_hs_evm_usb_defconfig | 2 --
+ configs/dra7xx_evm_defconfig        | 2 --
+ configs/dra7xx_hs_evm_defconfig     | 2 --
+ configs/dra7xx_hs_evm_usb_defconfig | 2 --
+ 7 files changed, 2 insertions(+), 13 deletions(-)
 
-diff --git a/configs/dra7xx_evm_defconfig b/configs/dra7xx_evm_defconfig
-index 0cea5504364b..dd2378801249 100644
---- a/configs/dra7xx_evm_defconfig
-+++ b/configs/dra7xx_evm_defconfig
-@@ -4,7 +4,7 @@ CONFIG_SYS_MALLOC_F_LEN=0x18000
+diff --git a/Kconfig b/Kconfig
+index 19ce371a9cc2..70c26b4ce76d 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -236,7 +236,7 @@ config SYS_BOOT_GET_KBD
+ config HAS_CUSTOM_SYS_INIT_SP_ADDR
+ 	bool "Use a custom location for the initial stack pointer address"
+ 	depends on ARC || (ARM && !INIT_SP_RELATIVE) || MIPS || PPC || RISCV
+-	default y if OMAP34XX || AM33XX || AM43XX
++	default y if OMAP34XX || AM33XX || AM43XX || DRA7XX
+ 	default y if TFABOOT
+ 	help
+ 	  Typically, we use an initial stack pointer address that is calculated
+@@ -253,6 +253,7 @@ config CUSTOM_SYS_INIT_SP_ADDR
+ 	default 0x4020ff00 if OMAP34XX
+ 	default 0x4030ff00 if AM33XX
+ 	default 0x4033ff00 if AM43XX
++	default 0x4037ff00 if DRA7XX
+ 	default TEXT_BASE if TFABOOT
+ 
+ config SYS_MALLOC_F
+diff --git a/configs/am57xx_evm_defconfig b/configs/am57xx_evm_defconfig
+index 7c3ceeb07db0..145c6d8e5855 100644
+--- a/configs/am57xx_evm_defconfig
++++ b/configs/am57xx_evm_defconfig
+@@ -2,8 +2,6 @@ CONFIG_ARM=y
+ CONFIG_ARCH_OMAP2PLUS=y
  CONFIG_TI_COMMON_CMD_OPTIONS=y
  CONFIG_NR_DRAM_BANKS=2
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4037fef0
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4037ff00
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4037ff00
+ CONFIG_SF_DEFAULT_SPEED=76800000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+diff --git a/configs/am57xx_hs_evm_defconfig b/configs/am57xx_hs_evm_defconfig
+index 1f7eca4691ee..850fce024f1d 100644
+--- a/configs/am57xx_hs_evm_defconfig
++++ b/configs/am57xx_hs_evm_defconfig
+@@ -3,8 +3,6 @@ CONFIG_ARCH_OMAP2PLUS=y
+ CONFIG_TI_SECURE_DEVICE=y
+ CONFIG_TI_COMMON_CMD_OPTIONS=y
+ CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4037ff00
+ CONFIG_SF_DEFAULT_SPEED=76800000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+diff --git a/configs/am57xx_hs_evm_usb_defconfig b/configs/am57xx_hs_evm_usb_defconfig
+index 807e1d66a6d7..d1ef82b7bcb2 100644
+--- a/configs/am57xx_hs_evm_usb_defconfig
++++ b/configs/am57xx_hs_evm_usb_defconfig
+@@ -3,8 +3,6 @@ CONFIG_ARCH_OMAP2PLUS=y
+ CONFIG_TI_SECURE_DEVICE=y
+ CONFIG_TI_COMMON_CMD_OPTIONS=y
+ CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4037ff00
+ CONFIG_SF_DEFAULT_SPEED=76800000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+diff --git a/configs/dra7xx_evm_defconfig b/configs/dra7xx_evm_defconfig
+index dd2378801249..244d5351bd83 100644
+--- a/configs/dra7xx_evm_defconfig
++++ b/configs/dra7xx_evm_defconfig
+@@ -3,8 +3,6 @@ CONFIG_ARCH_OMAP2PLUS=y
+ CONFIG_SYS_MALLOC_F_LEN=0x18000
+ CONFIG_TI_COMMON_CMD_OPTIONS=y
+ CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4037ff00
  CONFIG_SF_DEFAULT_SPEED=76800000
  CONFIG_DM_GPIO=y
  CONFIG_SPL_DM_SPI=y
 diff --git a/configs/dra7xx_hs_evm_defconfig b/configs/dra7xx_hs_evm_defconfig
-index 5f56b1875037..b698a36eb838 100644
+index b698a36eb838..225f279572d5 100644
 --- a/configs/dra7xx_hs_evm_defconfig
 +++ b/configs/dra7xx_hs_evm_defconfig
-@@ -5,7 +5,7 @@ CONFIG_SYS_MALLOC_F_LEN=0x18000
+@@ -4,8 +4,6 @@ CONFIG_TI_SECURE_DEVICE=y
+ CONFIG_SYS_MALLOC_F_LEN=0x18000
  CONFIG_TI_COMMON_CMD_OPTIONS=y
  CONFIG_NR_DRAM_BANKS=2
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4037fef0
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4037ff00
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4037ff00
  CONFIG_SF_DEFAULT_SPEED=76800000
  CONFIG_DM_GPIO=y
  CONFIG_SPL_DM_SPI=y
 diff --git a/configs/dra7xx_hs_evm_usb_defconfig b/configs/dra7xx_hs_evm_usb_defconfig
-index 5b67a0e8392f..40f47a3adb1e 100644
+index 40f47a3adb1e..3b37355654ce 100644
 --- a/configs/dra7xx_hs_evm_usb_defconfig
 +++ b/configs/dra7xx_hs_evm_usb_defconfig
-@@ -5,7 +5,7 @@ CONFIG_SYS_MALLOC_F_LEN=0x18000
+@@ -4,8 +4,6 @@ CONFIG_TI_SECURE_DEVICE=y
+ CONFIG_SYS_MALLOC_F_LEN=0x18000
  CONFIG_TI_COMMON_CMD_OPTIONS=y
  CONFIG_NR_DRAM_BANKS=2
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
--CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4037fef0
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4037ff00
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4037ff00
  CONFIG_SF_DEFAULT_SPEED=76800000
  CONFIG_DM_GPIO=y
  CONFIG_SPL_DM_SPI=y
