@@ -4,77 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2F30C3DA49
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jul 2024 23:59:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3238AC3DA64
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jul 2024 23:59:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC71B8867C;
-	Mon, 29 Jul 2024 01:59:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 264C488755;
+	Mon, 29 Jul 2024 01:59:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1722211151;
-	bh=Ovfp1A5Cjbkgt/RlF3xgw0R21w9N2cHhAh+uu9X9b+4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=h3wweQSm/dgOiSbXPxFToZq5fer2bjNNY31W9ED2Zb+qZahRaEl+NLlTCEKjSp8z/
-	 cR0qMndSQsmWnf1/0iHRPgTZTm8GxvDY/0vYxYU4XwbBBCtF16Er4FmplAtMXLrzag
-	 ASu1AX91LBZ72PyAn7X/k6sIEFEC5n4hzyRJfEmUinGO2GPfAvnnDnp3hlEMkZJrH7
-	 J8z4m0xJTMEYBqJX80ugkz3bthqRUh90aTVKzpQZSg1+38uqIp8/uqhHOtpJz5aGjU
-	 bYHwZlf2ypnO7dVVbPkJITG2E2N/q1CMFe6DAy8sDiK7OfqaOzbE4GQVZpc3XTXSkJ
-	 lVynNxxFga3CA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N72rLoY6";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id E77B28867C; Sun, 28 Jul 2024 19:00:39 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 598A687F7D;
- Sun, 28 Jul 2024 18:38:06 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1722184689;
- bh=Ovfp1A5Cjbkgt/RlF3xgw0R21w9N2cHhAh+uu9X9b+4=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=OGYaMuC0hbggwxC3+eC5lfqFa1uc5G93EuxYm8PXHMjjBmFL+ugx6MIOJ2/RCtMJU
- VrduKIRdyfrxu9UgrQIRiNbAVmpLQZ3XBec+vsr1u3dgXh/xK9TcKp6xTubIyLlDx/
- cX5y8wC1Z+RMGpDArLj4TwOny6PLBbsojMmpuyivEiRT9lgmaW3ZfXymn+Bor/3vA0
- WnG1P6XTVLvD61TYwCcGF8YOCmT1jo4CyaPjQkZbSlzYk3JzuZTwtwDRTd/+BdsYc5
- yH2oTug2JTdznC44FYakkQ6wilZ/Sa3JxpmY1CDULEH7arqDtB3FY2HxwDU08JM7su
- kRfDdMaMloG+g==
-Message-ID: <a73dffe5-87e3-4e96-965f-9d029f2af8ed@denx.de>
-Date: Sun, 28 Jul 2024 18:38:05 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 0CC4B87F7D
+ for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 19:00:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-368526b1333so561888f8f.1
+ for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 10:00:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1722186037; x=1722790837; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NU7vFGsFVz9XttDSW/bkfmdXC55CVByOcRuEzg2DDFw=;
+ b=N72rLoY6pYPMYNW8ohO0dwBFCck7UpvbqHGsX87Mw9IlssNqRlRYdxp1JPcm1IdiMV
+ G1zR18YYoFiutIx4YGtiHpWJVe4HsDnS0KhjiGI8gowx7cZiDIHtxuYQ71WFA6MJVul9
+ /KLvWCClKAqfKn0NOBnv95RoJDI29aHrP6RHTyY0qJtEGzGAZKQPyebq0sPyAOQdBMQq
+ GVksGS2J6YI5y/fDjXghuW/P30yRpnkOFYvlp+6rzdFUv7//9b2GWV4dRP6pvm56ZT1l
+ KE0j7n59KKghZJOPVi4lSwYrPJs1S1ATkCgbtZ0oN60TzyC+yzbSgEHWai5kPpFF08BY
+ +UKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722186037; x=1722790837;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NU7vFGsFVz9XttDSW/bkfmdXC55CVByOcRuEzg2DDFw=;
+ b=btM/jMkpbQ8y+vMiSEbAzhND99odqsGuDDecBPNlbNbzvQIZix/S4pyrHKXDoZ47Wv
+ krz8yO7r0VTuRBTN8F7OxVBcNx4ghlrnFoBVw5D2dytdBm6PAnvF1az8v5gytFLKvI3l
+ AE/KbLRZOnb6gUyjXSNqjKu7i6kRGctpt3DO0DSeSYNQQr3ZIA6yPj0JmHRJk8hWzt42
+ R9cmlCzC3KnhBMQ7EhAG9Ou6JCh+ABI9ZpQorJxs1d9OBIdR2tZW4V+FQZ/w+rHVk3g0
+ vCciZadUWZTYWnaZNxBrdr3/injVBZaSi5uap5O6/7r3PqUlOALFHt2+MGVQXQp9Gd5X
+ 8/aw==
+X-Gm-Message-State: AOJu0YwwcivUm3UDqo+aRmvITPqNS8c/jOoqqdZ4RXtaxP+Rv2WM5MF/
+ b7WC5O2Cb/SwAkV6xdp6jJYvxPUq1DjTI4ZgbAPhcK2v6bzN+GYXplKv4ix9vQDt7m3tTCSchuL
+ x8DyvX7UJi5pAisLX3Dl8UPuqxPo=
+X-Google-Smtp-Source: AGHT+IFLXABcTYMcrmM3hytyaQW+HN19qzm+5VB+qqS6LEf4j+QYQxtuAoWqKqdfFYtD/IQf9TyZFesJZgdKl1dXn+M=
+X-Received: by 2002:a5d:604f:0:b0:362:4679:b5a with SMTP id
+ ffacd0b85a97d-36b5d7d0054mr3401525f8f.16.1722186037138; Sun, 28 Jul 2024
+ 10:00:37 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+References: <20240626235717.272219-1-marex@denx.de>
+ <a73dffe5-87e3-4e96-965f-9d029f2af8ed@denx.de>
+In-Reply-To: <a73dffe5-87e3-4e96-965f-9d029f2af8ed@denx.de>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Sun, 28 Jul 2024 20:00:25 +0300
+Message-ID: <CAPVz0n0QWCjSgh6QPyo_wnXGQYwhnt30XKJ_ofJK1O08rK9qyA@mail.gmail.com>
 Subject: Re: [PATCH 1/4] power: regulator: Trigger probe of regulators which
  are always-on or boot-on
-To: u-boot@lists.denx.de
-Cc: Ben Wolsieffer <benwolsieffer@gmail.com>,
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Ben Wolsieffer <benwolsieffer@gmail.com>, 
  Caleb Connolly <caleb.connolly@linaro.org>,
- Chris Morgan <macromorgan@hotmail.com>, Dragan Simic <dsimic@manjaro.org>,
- Eugen Hristev <eugen.hristev@collabora.com>,
+ Chris Morgan <macromorgan@hotmail.com>, 
+ Dragan Simic <dsimic@manjaro.org>, Eugen Hristev <eugen.hristev@collabora.com>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>,
- Kostya Porotchkin <kostap@marvell.com>, Matteo Lisi
- <matteo.lisi@engicam.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
+ Kostya Porotchkin <kostap@marvell.com>, Matteo Lisi <matteo.lisi@engicam.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
- Tom Rini <trini@konsulko.com>, Volodymyr Babchuk
- <Volodymyr_Babchuk@epam.com>, u-boot-amlogic@groups.io,
- u-boot-qcom@groups.io, u-boot@dh-electronics.com,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Sam Day <me@samcday.com>, 
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>, 
+ Thierry Reding <treding@nvidia.com>, Tom Rini <trini@konsulko.com>, 
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, u-boot-amlogic@groups.io, 
+ u-boot-qcom@groups.io, u-boot@dh-electronics.com, 
  uboot-stm32@st-md-mailman.stormreply.com
-References: <20240626235717.272219-1-marex@denx.de>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240626235717.272219-1-marex@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Mon, 29 Jul 2024 01:59:10 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,16 +110,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/27/24 1:55 AM, Marek Vasut wrote:
-> In case a regulator DT node contains regulator-always-on or regulator-boot-on
-> property, make sure the regulator gets correctly configured by U-Boot on start
-> up. Unconditionally probe such regulator drivers. This is a preparatory patch
-> for introduction of .regulator_post_probe() which would trigger the regulator
-> configuration.
-> 
-> Parsing of regulator-always-on and regulator-boot-on DT property has been
-> moved to regulator_post_bind() as the information is required early, the
-> rest of the DT parsing has been kept in regulator_pre_probe() to avoid
-> slowing down the boot process.
+=D0=BD=D0=B4, 28 =D0=BB=D0=B8=D0=BF. 2024=E2=80=AF=D1=80. =D0=BE 19:38 Mare=
+k Vasut <marex@denx.de> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> On 6/27/24 1:55 AM, Marek Vasut wrote:
+> > In case a regulator DT node contains regulator-always-on or regulator-b=
+oot-on
+> > property, make sure the regulator gets correctly configured by U-Boot o=
+n start
+> > up. Unconditionally probe such regulator drivers. This is a preparatory=
+ patch
+> > for introduction of .regulator_post_probe() which would trigger the reg=
+ulator
+> > configuration.
+> >
+> > Parsing of regulator-always-on and regulator-boot-on DT property has be=
+en
+> > moved to regulator_post_bind() as the information is required early, th=
+e
+> > rest of the DT parsing has been kept in regulator_pre_probe() to avoid
+> > slowing down the boot process.
+>
+> Is there anything blocking this series from being applied ?
 
-Is there anything blocking this series from being applied ?
+I would like to try it to be sure that it does not break my devices. I
+will respond within next 24 hours.
