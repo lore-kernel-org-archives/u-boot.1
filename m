@@ -4,75 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBA5BC3DA64
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jul 2024 19:38:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A0C8C3DA49
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jul 2024 20:08:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5916C887CD;
-	Sun, 28 Jul 2024 21:36:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 200FE8806A;
+	Sun, 28 Jul 2024 22:08:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h0DbhGk7";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B58587F7D; Sun, 28 Jul 2024 21:36:25 +0200 (CEST)
-Received: from mail-vk1-xa2f.google.com (mail-vk1-xa2f.google.com
- [IPv6:2607:f8b0:4864:20::a2f])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1722197313;
+	bh=M8SOmneL0ou17T8Wxxz4W2dcTHrvs2gZ6XSpfWjq7J4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=uQABJLHKXuNY+HqiEbe0xVnd1Xi17hEFeu/cU2aJ8sSkYSgvh9uouk97zJSLJOKwq
+	 A+5StTOGZBu93j/kW0AsBisTlAJ79vIIxY3A39Dq1jJRPOkg028jVV2ycGMrOujIq/
+	 U/uRLSa9WaRSKooogQghxMURtEJ4Z/HgyTb+Di/yrip+1uzP+c0yr7ZAVmfWXrfthk
+	 SZdvD7A8N8enHyfrI+3OY/WSGM2MeFz63r+PVkf8vQesLwjkhwQ9pkvcGQG87Mh6jV
+	 2wcdqladWBKTUVPY4WG+YEVZ94jFmkpVBhRMUudt+vvs4sJoSd5jAafAeQ70EIAZ2g
+	 reeGYGkWD3Naw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A1DA88730
- for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 21:36:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-vk1-xa2f.google.com with SMTP id
- 71dfb90a1353d-4f50c673e83so857042e0c.0
- for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 12:36:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722195381; x=1722800181; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7H71EG4//THjNSRe3Izd3g2A9tanXOSO8tpSS1UpkfU=;
- b=h0DbhGk7ff6w8CwOHnYczVOgg8qWIz1trP7OkjLYQCRAR+CJSqBOK9GcoxYtS+kw3p
- PCQgVW6zacF7nL5Wnv0VYI1a5MTO1OwuxTCMufvZTwjgUzAdWU1kSl70Pnp29O8Ek0sS
- kBPNeFC551cprnz8Mq5Qyg5SOfeVB62gjrokA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722195381; x=1722800181;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7H71EG4//THjNSRe3Izd3g2A9tanXOSO8tpSS1UpkfU=;
- b=UBVT3u4HQcQ0Cs8ZTbPIol0DcPQ1/vEQZ8ATSHuU2lCyZ31AZ/HJpY8hmdslvBhziP
- K7r1cB0akYMs3SMHiysJMCuVZOA4u6ExI8RK8Y53Ntx9QJSm7I8GT8jsXYfAwOL8vaDh
- /NIhYh3Wh1hT+5/0HoUyqGeBmL9Ps7ukZCQPfNfcggtChkflJkfV1rxQJ1UTrpvljEi9
- Q2+/jcZwQjkvTcZEMrjKPi93coG8/X/zUhoDlXJb8ETFDiOTPNH+SbQenj43fml6W8DJ
- g6hH+ZTeORKxHMxnYcBgmhXQpL4qhgOo7S4IQYELVM5nHxOOmG7HKKj8kuxjrS3iLfVo
- BHOg==
-X-Gm-Message-State: AOJu0YyGXa58DSPjwmEQipgSMigymDHDufl5I/FsZPUh31ADlqwv2mV/
- 0smJjqSCG+oA9VG9KKMcnGQoFMIYRKlyAKs5up9OjRtWIJOm6uTiJsO92Iri36jKmTwCsvUTPiP
- xbirjT7Jvnxl72LSzsr7CS4ZrQdgqmoOVCf3F
-X-Google-Smtp-Source: AGHT+IGPGI7wO6WHyQpftlIUPnmrUGXNLfEePLi91vBlAnxkdKYFKjY9+pOD+Sd0uLSIki1e2GgbwTgMEQeK1rAWtgM=
-X-Received: by 2002:a05:6122:2901:b0:4f5:261a:bdae with SMTP id
- 71dfb90a1353d-4f6e69989dbmr6012700e0c.14.1722195381166; Sun, 28 Jul 2024
- 12:36:21 -0700 (PDT)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 111CC841BC;
+ Sun, 28 Jul 2024 22:08:30 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1722197312;
+ bh=M8SOmneL0ou17T8Wxxz4W2dcTHrvs2gZ6XSpfWjq7J4=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=B0Ha5Enyef3ySQi2BFJg6r5Wmy8JV3eOOcSdZ7UPkNSi/G1JaNzbMiepY0BRH15UI
+ Ag31d+ndbOA8Dp7zT+R2MefBPyS8BlRSu9AnuB3+CVsNjwgNeoX8RfQL9FyyheNmdB
+ eiwk1NL6hdQv/gcfJJmqxtR8I4Yh5v9VI9Z38efWQNk4N8WC4kJxPD/9AfU85R+wbk
+ x/lu496nKKmxk5vDeaeoch/nH2YGjEAG3pmtiADmSW5aeS+O0NXilhEdQ5sfALTOC3
+ QE1QeV82QoC6Fa4Oh77sGJtewPcCDhuDBegUfmwuz1uA1nGC4EiXlZ0OcpPVYZnLhd
+ yAoNmjtaB76Zw==
+Message-ID: <18d84528-d2e5-41d6-ae1d-109ee30853b2@denx.de>
+Date: Sun, 28 Jul 2024 22:08:30 +0200
 MIME-Version: 1.0
-References: <20240516-rework-video-format-v1-0-f69822b742a3@flygoat.com>
- <c2853d56-4bdc-4d1b-81d8-c880aa298988@app.fastmail.com>
-In-Reply-To: <c2853d56-4bdc-4d1b-81d8-c880aa298988@app.fastmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 28 Jul 2024 13:36:10 -0600
-Message-ID: <CAFLszTj8eBf_ffT-kXNXRFRsBcPtLvUN9WHe+5U1xW39wo=fag@mail.gmail.com>
-Subject: Re: [PATCH 0/6] video: pixel format handling fixes and improvements
-To: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Heiko Schocher <hs@denx.de>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Anatolij Gustschin <agust@denx.de>, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] power: regulator: Trigger probe of regulators which
+ are always-on or boot-on
+To: Svyatoslav <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+References: <20240626235717.272219-1-marex@denx.de>
+ <a73dffe5-87e3-4e96-965f-9d029f2af8ed@denx.de>
+ <CAPVz0n0C6TPdBRUEvJmgAUGAKoetuzr1j=0cMXweP2EqMTwn=g@mail.gmail.com>
+ <0910419d-e8ab-4bf9-a083-dc2783afaca1@denx.de>
+ <4D07A6E5-F156-44C3-A26D-0F2D913CE92D@gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <4D07A6E5-F156-44C3-A26D-0F2D913CE92D@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,28 +81,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 7/28/24 9:02 PM, Svyatoslav wrote:
+
 Hi,
 
-On Wed, 17 Jul 2024 at 08:34, Jiaxun Yang <jiaxun.yang@flygoat.com> wrote:
->
->
->
-> =E5=9C=A82024=E5=B9=B45=E6=9C=8817=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8A=
-=E5=8D=886:16=EF=BC=8CJiaxun Yang=E5=86=99=E9=81=93=EF=BC=9A
-> > Hi all,
-> >
-> > This series fixes endian related problem I found in general
-> > video system when testing my fresh virtio-gpu driver on big
-> > endian target.
-> >
-> > It also removed a lot of duplicated code on pixel handling,
-> > and make implementation of new pixel formats easier. Further
-> > more, it removed limitation on bpc for BMP display, now we
-> > can display any image depth on any target display controller.
->
-> Ping
+I'm trimming the CC because I keep getting ML blockage due to large CC 
+list. If someone has been removed too hastily, sorry.
 
-I believe this is waiting on Anatolij?
+> 28 липня 2024 р. 21:35:27 GMT+03:00, Marek Vasut <marex@denx.de> написав(-ла):
+>> On 7/28/24 7:55 PM, Svyatoslav Ryhel wrote:
+>>> нд, 28 лип. 2024 р. о 19:38 Marek Vasut <marex@denx.de> пише:
+>>>>
+>>>> On 6/27/24 1:55 AM, Marek Vasut wrote:
+>>>>> In case a regulator DT node contains regulator-always-on or regulator-boot-on
+>>>>> property, make sure the regulator gets correctly configured by U-Boot on start
+>>>>> up. Unconditionally probe such regulator drivers. This is a preparatory patch
+>>>>> for introduction of .regulator_post_probe() which would trigger the regulator
+>>>>> configuration.
+>>>>>
+>>>>> Parsing of regulator-always-on and regulator-boot-on DT property has been
+>>>>> moved to regulator_post_bind() as the information is required early, the
+>>>>> rest of the DT parsing has been kept in regulator_pre_probe() to avoid
+>>>>> slowing down the boot process.
+>>>>
+>>>> Is there anything blocking this series from being applied ?
+>>>
+>>> This patchset causes PMIC regulators probe too early which results in
+>>> i2c line setup failure. These patches MUST NOT be applied in this form
+>>> since they will break at least 15 Tegra 3 devices which use DM PMIC,
+>>> maybe more.
+>>
+>> Thank you for testing. I do not have any tegra 3 devices, but this patchset does not do anything with pinmuxing. If a regulator is probed, all of its dependencies (i2c bus, pinmux configuration, etc.) should be probed as well. Can you have a look at what the problem with pinmuxing is on tegra 3? It seems it might be unrelated to this patchset and would eventually show up elsewhere?
+> 
+> Pinmux? Wdym, I wrote about a PMIC which is usually located on i2c line.
+> 
+> <https://patchwork.ozlabs.org/project/uboot/patch/20231003062126.42026-4-clamor95@gmail.com/>
+> 
+> This is a similar patch.
+> 
+> You may be able to reproduce the issue I face if you have a device which uses SPL and has DM PMIC with regulators that need always-on/boot-on properties.
 
-Regards,
-Simon
+I actually do use:
+
+configs/imx8mp_dhcom_pdk3_defconfig:CONFIG_DM_PMIC=y
+configs/imx8mp_dhcom_pdk3_defconfig:CONFIG_DM_PMIC_PCA9450=y
+configs/imx8mp_dhcom_pdk3_defconfig:CONFIG_SPL_DM_PMIC_PCA9450=y
+
+which is one of the devices I test this on.
+
+The PMIC is on I2C, DM_PMIC enabled in SPL, both buck4 and buck5 
+regulators are enabled in SPL, have regulator-always-on and 
+regulator-boot-on and bootph-pre-ram properties.
+
+This seems similar enough, right ?
+
+What is the problem you observe on tegra 3 ?
