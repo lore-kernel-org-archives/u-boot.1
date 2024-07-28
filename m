@@ -4,69 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17782C3DA64
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jul 2024 19:37:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE08CC3DA64
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jul 2024 19:37:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E98D8880E;
-	Sun, 28 Jul 2024 21:36:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 780D688703;
+	Sun, 28 Jul 2024 21:36:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z+zQr07K";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="T867XDIC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB0C888703; Sun, 28 Jul 2024 21:36:21 +0200 (CEST)
-Received: from mail-vk1-xa2c.google.com (mail-vk1-xa2c.google.com
- [IPv6:2607:f8b0:4864:20::a2c])
+ id 6014287F7D; Sun, 28 Jul 2024 21:36:22 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BC31884C6
- for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 21:36:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 47BB387F7D
+ for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 21:36:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-vk1-xa2c.google.com with SMTP id
- 71dfb90a1353d-4f50c673e83so857034e0c.0
- for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 12:36:19 -0700 (PDT)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6b97097f7fdso16780866d6.0
+ for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 12:36:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722195378; x=1722800178; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722195379; x=1722800179; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QF88284mjSfC4P3azVfw2BBT9hrZnSbkemR8axNzIB8=;
- b=Z+zQr07K45atOqb+/Ch0EOUpHCgdND/oL0bV9s/LmiU7jyS92oyzsV4GujUAab/Qmm
- 2UMdQx5KiGcyQtAYnpnRqF3eoOn6HzjjKGCt/0bpN2A8up8UPBPadIX4FxT0FoIyJqrI
- 6+4q/HuFXiz0WKLYS+1qAQghO2SMynuWY9J5g=
+ bh=wneMNhR3YHmt5zuxNSXTTOCvLwZLHvRr8GYYUPGgPIY=;
+ b=T867XDICrMvnLcwtgZJm+bqeW+FKw+et/F2H5Jdovo5BUpwOWfqeSlnkRWtdd0iFHZ
+ wyeRKohl3KtBcIa2DdMNkH0EHCLg1Rk1dI/GkA+3oTcpmwBdlM93+Igpbx1aMcUys+ik
+ jmf3IPOy+h5qrokBHvtbf7s96Fw9pS9ySHr9w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722195378; x=1722800178;
+ d=1e100.net; s=20230601; t=1722195379; x=1722800179;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=QF88284mjSfC4P3azVfw2BBT9hrZnSbkemR8axNzIB8=;
- b=r6Y8MhNlBHh2pRYez0LCF6Oc2AXDOOa5gt9qDoI9JE9uNucrKaR2ZZK+rvgAZ7unDh
- 1qs6n/YJpo3sFhHiDAX7BfDSaLMiFMKsQj2EaDTx6uHVYhs/qlLHU5J1hip+gFWX5yTY
- uc2cmJQ7TvWN9qW6YJ3AUR2d6KKF0wuhBFhMhTrx7aPqSa3w7zEEx4yUBTQ/Sp6VB6dT
- OfSXapE18zW5jsWdn1+qywXz26TNzlDTJqiijXMhY4tKMI7nPAo6NpwxknIiH6fpDMnM
- nxAika9K71Z9FGfyWWGLocPk0KIK64ExmsdJnskEclGmLSGnSOQFvUS2sq9WFVI64g2k
- +8sQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUtsDv9fYaAj95rGHZ6J3xTNZwyoG3pum+CLKDZl6a3a15uFEW4a2foj0o2jvfm4Y99zZnBw0f9NGUY41D6F31RI7LpQQ==
-X-Gm-Message-State: AOJu0YytTpsPLL5njjGD4K9BwxDLns86yt23PFZCd5z6gO1N0QR4Nw4G
- ndeWE94oAbE9N22XPTFxVJALJPIzVvFKzr/7Cu9+iXaXceUi4VUAFYcgi+No+2X1lHF1JLPKCm5
- dH7LJ1smyRzzZPnlG3nn4XExCbJwqJKTIgfNh
-X-Google-Smtp-Source: AGHT+IFCovSgs9lr0Ff03wu9ReySKVelR3wptstuEM+g14bfx1guHilc07MnI1EMXGz+V20oFq38Un7dA780WrNfz8E=
-X-Received: by 2002:a05:6122:3bd1:b0:4ef:65b6:f3b5 with SMTP id
- 71dfb90a1353d-4f6e6980cdbmr6073481e0c.10.1722195378411; Sun, 28 Jul 2024
- 12:36:18 -0700 (PDT)
+ bh=wneMNhR3YHmt5zuxNSXTTOCvLwZLHvRr8GYYUPGgPIY=;
+ b=eGPZuYgrQ2Y+RpsbFBEDziH1qB0cyFqKcQcJie4jWHLAVJ1UPH+VluE434ZjNju7Lf
+ 8sp1SjexsP5ntWqURRbW3uHhoynQV2So6SxInnEwsOATsA6WmuObzM90y80IAyqNCh9E
+ TBQuU8WxAcdbKQjquaO/yiCsfemUr4N6rjPqwo6gHBtqknNzbP3G3CMzLXvuvGyyiPhE
+ yPEE1BJ7v/SspmCMdfb4MPbDxuI5FbYTHRL4sdZ+4xx74HD9cY0+ZQpQl/bI9rTTjTjb
+ AL0HwFJ7pux1zODk387EqeD/X6bSCUka6Xevu0BMEsQAz1uugsJ5gCOaZzbTbbfXp38t
+ wORQ==
+X-Gm-Message-State: AOJu0YzzTQAOkVBCcj41uB+A+D0IXoDJtc9jGuQ2fX7N9z9AmVvywh4K
+ pAL72QBK/Ac6FGHSf9FBQF+xkkZZGwX4RAqe7pi74vCtwvMeQRVAFjIaUBJGfgyR/KEfUf8URms
+ Wla4EivWJSYGMJC9cv0+IWKvGbfniDqkaaBO0
+X-Google-Smtp-Source: AGHT+IGBNg1hRUGohwZ59rkPEzaPSVVpY+bAWhLwwxJ4KrUYCZN96PxJobS9si5G/L6IaW1NKW4bQpWy6VejttdORZQ=
+X-Received: by 2002:a05:6214:48b:b0:6b4:fd84:1cdf with SMTP id
+ 6a1803df08f44-6bb559baed8mr93355926d6.18.1722195379198; Sun, 28 Jul 2024
+ 12:36:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240726230035.2339680-1-mwalle@kernel.org>
-In-Reply-To: <20240726230035.2339680-1-mwalle@kernel.org>
+References: <a68bffff608d11f4249ede9e51226f9ec917da59.1721819159.git.love.kumar@amd.com>
+In-Reply-To: <a68bffff608d11f4249ede9e51226f9ec917da59.1721819159.git.love.kumar@amd.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 28 Jul 2024 13:36:07 -0600
-Message-ID: <CAFLszTi2OAbzun0Rf68W4a8cNGCS3OvpqHtwAwryF9KwpcEOwQ@mail.gmail.com>
-Subject: Re: [PATCH] boot: android: fix booting without a ramdisk
-To: Michael Walle <mwalle@kernel.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
+Date: Sun, 28 Jul 2024 13:36:08 -0600
+Message-ID: <CAFLszTiMk_oJTwU8K4CZGJa9FXnSgkJs2xgcD0fAWz_9iPjftQ@mail.gmail.com>
+Subject: Re: [PATCH v2] test/py: spi: Add tests for SPI flash device
+To: Love Kumar <love.kumar@amd.com>
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,50 +81,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
+Hi Love,
 
-On Fri, 26 Jul 2024 at 17:00, Michael Walle <mwalle@kernel.org> wrote:
+On Wed, 24 Jul 2024 at 05:07, Love Kumar <love.kumar@amd.com> wrote:
 >
-> android_image_get_ramdisk() will return an error if there is no ramdisk.
-> Using the android image without a ramdisk worked until commit
-> 1ce8e10f3b4b ("image: Fix up ANDROID_BOOT_IMAGE ramdisk code") because
-> that return code wasn't checked. Now that it is checked, don't return an
-> error in the (valid) case that there is no ramdisk in the image.
+> Add test cases for sf commands to verify various SPI flash operations
+> such as erase, write and read. It also adds qspi lock unlock cases.
+> This test relies on boardenv_* configurations to run it for different
+> SPI flash family such as single SPI, QSPI, and OSPI.
 >
-> With this, I'm able to boot a linux kernel using fastboot again:
->
->   fastboot --base 0x41000000 --header-version 2 --dtb /path/to/dtb \
->   --cmdline "root=/dev/mmcblk0p1 rootwait" boot path/to/Image
->
-> Signed-off-by: Michael Walle <mwalle@kernel.org>
+> Signed-off-by: Love Kumar <love.kumar@amd.com>
 > ---
->  boot/image-android.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/boot/image-android.c b/boot/image-android.c
-> index 09c7a44e058..0900579ee8c 100644
-> --- a/boot/image-android.c
-> +++ b/boot/image-android.c
-> @@ -395,7 +395,7 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
->
->         if (!img_data.ramdisk_size) {
->                 *rd_data = *rd_len = 0;
-> -               return -1;
-> +               return 0;
->         }
->         if (img_data.header_version > 2) {
->                 ramdisk_ptr = img_data.ramdisk_addr;
-> --
-> 2.39.2
+> Changes in v2:
+>  - Fix the pylint errors
+>  - Re-order/organize the tests
+> ---
+>  test/py/tests/test_spi.py | 680 ++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 680 insertions(+)
+>  create mode 100644 test/py/tests/test_spi.py
 >
 
-Rather than squashing the information here, you should return a value
-that indicates there is no ramdisk. Normally in U-Boot this is
--ENOENT. Then the caller can check it. Also please update the function
-docs in the header.
+How is this test enabled? Can it run in CI?
 
-I see that -EINVAL is returned for some other error, so the caller
-should be careful to just allow -ENOENT.
+With nits below:
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+> diff --git a/test/py/tests/test_spi.py b/test/py/tests/test_spi.py
+> new file mode 100644
+> index 000000000000..4774b4151b4e
+> --- /dev/null
+> +++ b/test/py/tests/test_spi.py
+> @@ -0,0 +1,680 @@
+> +# SPDX-License-Identifier: GPL-2.0
+> +# (C) Copyright 2024, Advanced Micro Devices, Inc.
+> +
+> +"""
+> +Note: This test relies on boardenv_* containing configuration values to define
+> +spi minimum and maximum frequnecies at which the flash part can operate on and
+
+spelling
+
+> +these tests run at 5 different spi frequnecy randomised values in the range.
+
+spelling
+
+> +It also defines the SPI bus number containing the SPI-flash chip, SPI
+> +chip-select, SPI mode, SPI flash part name and timeout parameters. If minimum
+> +and maximum frequency is not defined, it will run on freq 0 by default.
+> +
+> +Without the boardenv_* configuration, this test will be automatically skipped.
+> +
+> +It also relies on configuration values for supported flashes for lock and
+> +unlock cases for SPI family flash. It will run lock-unlock cases only for the
+> +supported flash parts.
+> +
+> +Example:
+> +env__spi_device_test = {
+> +    'bus': 0,
+> +    'chip_select': 0,
+> +    'min_freq': 10000000,
+> +    'max_freq': 100000000,
+> +    'mode': 0,
+> +    'part_name': 'n25q00a',
+> +    'timeout': 100000,
+> +    'iteration': 5,
+> +}
+
+Can you please describe what these params are?
+
+> +
+> +env__spi_lock_unlock = {
+> +    'supported_flash': 'mt25qu512a, n25q00a, n25q512ax3',
+> +}
+> +"""
+> +
+> +import random
+> +import re
+> +import pytest
+> +import u_boot_utils
+> +
+[..]
 
 Regards,
 Simon
