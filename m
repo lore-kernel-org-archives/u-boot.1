@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CE36C3DA49
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 00:02:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E042C3DA64
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 00:02:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4704C8887D;
+	by phobos.denx.de (Postfix) with ESMTP id 9D272887E8;
 	Mon, 29 Jul 2024 01:59:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF2A588276; Sun, 28 Jul 2024 22:28:15 +0200 (CEST)
+ id CFB9788677; Sun, 28 Jul 2024 22:28:29 +0200 (CEST)
 Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F032387F7D
- for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 22:28:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EFF1A885E7
+ for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 22:28:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paulk@sys-base.io
 Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id 269EB1F00072
- for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 20:27:30 +0000 (UTC)
+ by leonov.paulk.fr (Postfix) with ESMTPS id 9AC3E1F00086
+ for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 20:27:40 +0000 (UTC)
 Received: by laika.paulk.fr (Postfix, from userid 65534)
- id 75FD7A11FC2; Sun, 28 Jul 2024 20:27:29 +0000 (UTC)
+ id B85E5A11FC7; Sun, 28 Jul 2024 20:27:39 +0000 (UTC)
 Received: from localhost.localdomain (unknown [192.168.1.64])
- by laika.paulk.fr (Postfix) with ESMTP id 540CFA11FB4;
- Sun, 28 Jul 2024 20:25:31 +0000 (UTC)
+ by laika.paulk.fr (Postfix) with ESMTP id D3C44A11FBF;
+ Sun, 28 Jul 2024 20:25:35 +0000 (UTC)
 From: Paul Kocialkowski <paulk@sys-base.io>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Yegor Yefremov <yegorslists@googlemail.com>,
@@ -49,10 +49,9 @@ Cc: Tom Rini <trini@konsulko.com>, Yegor Yefremov <yegorslists@googlemail.com>,
  "Matwey V . Kornilov" <matwey.kornilov@gmail.com>,
  Niel Fourie <lusus@denx.de>, Parthiban Nallathambi <parthiban@linumiz.com>,
  Paul Kocialkowski <contact@paulk.fr>
-Subject: [PATCH 11/12] dra7xx: Remove explicit DRAM banks number from
- defconfigs
-Date: Sun, 28 Jul 2024 22:25:00 +0200
-Message-ID: <20240728202501.3204905-12-paulk@sys-base.io>
+Subject: [PATCH 12/12] omap3: sniper: Streamline defconfig
+Date: Sun, 28 Jul 2024 22:25:01 +0200
+Message-ID: <20240728202501.3204905-13-paulk@sys-base.io>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240728202501.3204905-1-paulk@sys-base.io>
 References: <20240728202501.3204905-1-paulk@sys-base.io>
@@ -77,97 +76,58 @@ X-Virus-Status: Clean
 
 From: Paul Kocialkowski <contact@paulk.fr>
 
-The common EMIF init code used for DRA7xx does not explicitly fill
-the gd->bd->bi_dram entries (like OMAP3 does), so there is no reason
-to set an explicit number of DRAM banks which doesn't correspond to
-anything in particular.
+Remove custom config options that are not particularly necessary.
+Align them with OMAP3 defaults used on other boards (especially for
+memory locations).
 
-Remove the CONFIG_NR_DRAM_BANKS option from the concerned defconfigs.
-The dram_init_banksize default implementation will be fine with the
-default value for the config option.
+Also enable Thumb build to reduce the SPL size and remove the custom
+prompt text.
+
+This makes the config a lot more minimalistic, maintainable and easier
+to read.
 
 Signed-off-by: Paul Kocialkowski <contact@paulk.fr>
 ---
- configs/am57xx_evm_defconfig        | 1 -
- configs/am57xx_hs_evm_defconfig     | 1 -
- configs/am57xx_hs_evm_usb_defconfig | 1 -
- configs/dra7xx_evm_defconfig        | 1 -
- configs/dra7xx_hs_evm_defconfig     | 1 -
- configs/dra7xx_hs_evm_usb_defconfig | 1 -
- 6 files changed, 6 deletions(-)
+ configs/sniper_defconfig | 16 ++++------------
+ 1 file changed, 4 insertions(+), 12 deletions(-)
 
-diff --git a/configs/am57xx_evm_defconfig b/configs/am57xx_evm_defconfig
-index 145c6d8e5855..587af53acb61 100644
---- a/configs/am57xx_evm_defconfig
-+++ b/configs/am57xx_evm_defconfig
-@@ -1,7 +1,6 @@
+diff --git a/configs/sniper_defconfig b/configs/sniper_defconfig
+index 08ab3a66c51a..5c6f9328bf8b 100644
+--- a/configs/sniper_defconfig
++++ b/configs/sniper_defconfig
+@@ -1,28 +1,20 @@
  CONFIG_ARM=y
+-# CONFIG_SYS_THUMB_BUILD is not set
  CONFIG_ARCH_OMAP2PLUS=y
- CONFIG_TI_COMMON_CMD_OPTIONS=y
--CONFIG_NR_DRAM_BANKS=2
- CONFIG_SF_DEFAULT_SPEED=76800000
- CONFIG_DM_GPIO=y
- CONFIG_SPL_DM_SPI=y
-diff --git a/configs/am57xx_hs_evm_defconfig b/configs/am57xx_hs_evm_defconfig
-index 850fce024f1d..b790897645fb 100644
---- a/configs/am57xx_hs_evm_defconfig
-+++ b/configs/am57xx_hs_evm_defconfig
-@@ -2,7 +2,6 @@ CONFIG_ARM=y
- CONFIG_ARCH_OMAP2PLUS=y
- CONFIG_TI_SECURE_DEVICE=y
- CONFIG_TI_COMMON_CMD_OPTIONS=y
--CONFIG_NR_DRAM_BANKS=2
- CONFIG_SF_DEFAULT_SPEED=76800000
- CONFIG_DM_GPIO=y
- CONFIG_SPL_DM_SPI=y
-diff --git a/configs/am57xx_hs_evm_usb_defconfig b/configs/am57xx_hs_evm_usb_defconfig
-index d1ef82b7bcb2..450751b354fd 100644
---- a/configs/am57xx_hs_evm_usb_defconfig
-+++ b/configs/am57xx_hs_evm_usb_defconfig
-@@ -2,7 +2,6 @@ CONFIG_ARM=y
- CONFIG_ARCH_OMAP2PLUS=y
- CONFIG_TI_SECURE_DEVICE=y
- CONFIG_TI_COMMON_CMD_OPTIONS=y
--CONFIG_NR_DRAM_BANKS=2
- CONFIG_SF_DEFAULT_SPEED=76800000
- CONFIG_DM_GPIO=y
- CONFIG_SPL_DM_SPI=y
-diff --git a/configs/dra7xx_evm_defconfig b/configs/dra7xx_evm_defconfig
-index 244d5351bd83..6264d9fa7ada 100644
---- a/configs/dra7xx_evm_defconfig
-+++ b/configs/dra7xx_evm_defconfig
-@@ -2,7 +2,6 @@ CONFIG_ARM=y
- CONFIG_ARCH_OMAP2PLUS=y
- CONFIG_SYS_MALLOC_F_LEN=0x18000
- CONFIG_TI_COMMON_CMD_OPTIONS=y
--CONFIG_NR_DRAM_BANKS=2
- CONFIG_SF_DEFAULT_SPEED=76800000
- CONFIG_DM_GPIO=y
- CONFIG_SPL_DM_SPI=y
-diff --git a/configs/dra7xx_hs_evm_defconfig b/configs/dra7xx_hs_evm_defconfig
-index 225f279572d5..4e7929718fd8 100644
---- a/configs/dra7xx_hs_evm_defconfig
-+++ b/configs/dra7xx_hs_evm_defconfig
-@@ -3,7 +3,6 @@ CONFIG_ARCH_OMAP2PLUS=y
- CONFIG_TI_SECURE_DEVICE=y
- CONFIG_SYS_MALLOC_F_LEN=0x18000
- CONFIG_TI_COMMON_CMD_OPTIONS=y
--CONFIG_NR_DRAM_BANKS=2
- CONFIG_SF_DEFAULT_SPEED=76800000
- CONFIG_DM_GPIO=y
- CONFIG_SPL_DM_SPI=y
-diff --git a/configs/dra7xx_hs_evm_usb_defconfig b/configs/dra7xx_hs_evm_usb_defconfig
-index 3b37355654ce..68d342b277cd 100644
---- a/configs/dra7xx_hs_evm_usb_defconfig
-+++ b/configs/dra7xx_hs_evm_usb_defconfig
-@@ -3,7 +3,6 @@ CONFIG_ARCH_OMAP2PLUS=y
- CONFIG_TI_SECURE_DEVICE=y
- CONFIG_SYS_MALLOC_F_LEN=0x18000
- CONFIG_TI_COMMON_CMD_OPTIONS=y
--CONFIG_NR_DRAM_BANKS=2
- CONFIG_SF_DEFAULT_SPEED=76800000
- CONFIG_DM_GPIO=y
- CONFIG_SPL_DM_SPI=y
+-CONFIG_TEXT_BASE=0x80100000
+-CONFIG_SYS_MALLOC_LEN=0x120000
+-CONFIG_SYS_MALLOC_F_LEN=0x400
++CONFIG_SYS_MALLOC_F_LEN=0x4000
+ CONFIG_TARGET_SNIPER=y
+-CONFIG_SPL_STACK=0x4020fffc
+-CONFIG_SPL_BSS_START_ADDR=0x80000000
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x400
+ CONFIG_SPL=y
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTCOMMAND="setenv boot_mmc_part ${kernel_mmc_part}; if test reboot-${reboot-mode} = reboot-r; then echo recovery; setenv boot_mmc_part ${recovery_mmc_part}; fi; if test reboot-${reboot-mode} = reboot-b; then echo fastboot; fastboot 0; fi; part start mmc ${boot_mmc_dev} ${boot_mmc_part} boot_mmc_start; part size mmc ${boot_mmc_dev} ${boot_mmc_part} boot_mmc_size; mmc dev ${boot_mmc_dev}; mmc read ${kernel_addr_r} ${boot_mmc_start} ${boot_mmc_size} && bootm ${kernel_addr_r};"
+-CONFIG_SYS_CBSIZE=512
+-CONFIG_SYS_PBSIZE=538
+ CONFIG_SYS_CONSOLE_IS_IN_ENV=y
+-# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_SYS_MALLOC=y
+-CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
+-CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x80208000
++CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
+ # CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=2
+ # CONFIG_SPL_FS_EXT4 is not set
+ # CONFIG_SPL_NAND_SUPPORT is not set
+-CONFIG_SYS_PROMPT="sniper # "
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
 -- 
 2.45.2
 
