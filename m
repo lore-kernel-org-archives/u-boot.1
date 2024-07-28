@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E387DC3DA64
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 00:00:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C9FAC3DA64
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 00:00:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34CD8887D1;
+	by phobos.denx.de (Postfix) with ESMTP id 8EEAB887E4;
 	Mon, 29 Jul 2024 01:59:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F92E8806A; Sun, 28 Jul 2024 22:25:49 +0200 (CEST)
+ id 120008806A; Sun, 28 Jul 2024 22:26:09 +0200 (CEST)
 Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F4EA87DB6
- for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 22:25:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1566587DB6
+ for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 22:26:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paulk@sys-base.io
 Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id D3E5B1F0003D
- for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 20:25:41 +0000 (UTC)
+ by leonov.paulk.fr (Postfix) with ESMTPS id 256EA1F00051
+ for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 20:25:55 +0000 (UTC)
 Received: by laika.paulk.fr (Postfix, from userid 65534)
- id 6CCE2A11FC8; Sun, 28 Jul 2024 20:25:40 +0000 (UTC)
+ id 9D89DA11FC5; Sun, 28 Jul 2024 20:25:50 +0000 (UTC)
 Received: from localhost.localdomain (unknown [192.168.1.64])
- by laika.paulk.fr (Postfix) with ESMTP id 3C214A11FB1;
+ by laika.paulk.fr (Postfix) with ESMTP id BE936A11FB7;
  Sun, 28 Jul 2024 20:25:09 +0000 (UTC)
 From: Paul Kocialkowski <paulk@sys-base.io>
 To: u-boot@lists.denx.de
@@ -49,10 +49,10 @@ Cc: Tom Rini <trini@konsulko.com>, Yegor Yefremov <yegorslists@googlemail.com>,
  "Matwey V . Kornilov" <matwey.kornilov@gmail.com>,
  Niel Fourie <lusus@denx.de>, Parthiban Nallathambi <parthiban@linumiz.com>,
  Paul Kocialkowski <contact@paulk.fr>
-Subject: [PATCH 01/12] omap3: Define common SPL text base in Kconfig instead
- of defconfigs
-Date: Sun, 28 Jul 2024 22:24:50 +0200
-Message-ID: <20240728202501.3204905-2-paulk@sys-base.io>
+Subject: [PATCH 02/12] omap3: Define common init stack pointer address in
+ Kconfig
+Date: Sun, 28 Jul 2024 22:24:51 +0200
+Message-ID: <20240728202501.3204905-3-paulk@sys-base.io>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240728202501.3204905-1-paulk@sys-base.io>
 References: <20240728202501.3204905-1-paulk@sys-base.io>
@@ -77,141 +77,158 @@ X-Virus-Status: Clean
 
 From: Paul Kocialkowski <contact@paulk.fr>
 
-The SPL text base was defined to the same value in each OMAP3 board
-defconfig. Move the common definition to the Kconfig option
+The init stack pointer was defined to the same value in each OMAP3
+board defconfig. Move the common definition to the Kconfig option
 declaration instead.
 
 Signed-off-by: Paul Kocialkowski <contact@paulk.fr>
 ---
- common/spl/Kconfig                   | 1 +
- configs/am3517_evm_defconfig         | 1 -
- configs/devkit8000_defconfig         | 1 -
- configs/igep00x0_defconfig           | 1 -
- configs/omap35_logic_defconfig       | 1 -
- configs/omap35_logic_somlv_defconfig | 1 -
- configs/omap3_evm_defconfig          | 1 -
- configs/omap3_logic_defconfig        | 1 -
- configs/omap3_logic_somlv_defconfig  | 1 -
- configs/sniper_defconfig             | 1 -
- 10 files changed, 1 insertion(+), 9 deletions(-)
+ Kconfig                              | 2 ++
+ configs/am3517_evm_defconfig         | 2 --
+ configs/devkit8000_defconfig         | 2 --
+ configs/igep00x0_defconfig           | 2 --
+ configs/omap35_logic_defconfig       | 2 --
+ configs/omap35_logic_somlv_defconfig | 2 --
+ configs/omap3_evm_defconfig          | 2 --
+ configs/omap3_logic_defconfig        | 2 --
+ configs/omap3_logic_somlv_defconfig  | 2 --
+ configs/sniper_defconfig             | 2 --
+ 10 files changed, 2 insertions(+), 18 deletions(-)
 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 6f56ca911c1e..6fc97f4ccbd8 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -261,6 +261,7 @@ config SPL_LDSCRIPT
+diff --git a/Kconfig b/Kconfig
+index 82df59f176ec..98175a8f3362 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -236,6 +236,7 @@ config SYS_BOOT_GET_KBD
+ config HAS_CUSTOM_SYS_INIT_SP_ADDR
+ 	bool "Use a custom location for the initial stack pointer address"
+ 	depends on ARC || (ARM && !INIT_SP_RELATIVE) || MIPS || PPC || RISCV
++	default y if OMAP34XX
+ 	default y if TFABOOT
+ 	help
+ 	  Typically, we use an initial stack pointer address that is calculated
+@@ -249,6 +250,7 @@ config HAS_CUSTOM_SYS_INIT_SP_ADDR
+ config CUSTOM_SYS_INIT_SP_ADDR
+ 	hex "Static location for the initial stack pointer"
+ 	depends on HAS_CUSTOM_SYS_INIT_SP_ADDR
++	default 0x4020ff00 if OMAP34XX
+ 	default TEXT_BASE if TFABOOT
  
- config SPL_TEXT_BASE
- 	hex "SPL Text Base"
-+	default 0x40200000 if OMAP34XX
- 	default 0x402F4000 if AM43XX
- 	default 0x402F0400 if AM33XX
- 	default 0x40301350 if OMAP54XX
+ config SYS_MALLOC_F
 diff --git a/configs/am3517_evm_defconfig b/configs/am3517_evm_defconfig
-index 3236f1dd672f..129ffa28d272 100644
+index 129ffa28d272..114d1a22f4a3 100644
 --- a/configs/am3517_evm_defconfig
 +++ b/configs/am3517_evm_defconfig
-@@ -10,7 +10,6 @@ CONFIG_ENV_SOURCE_FILE="am3517evm"
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
+@@ -7,8 +7,6 @@ CONFIG_SYS_MALLOC_F_LEN=0x4000
+ CONFIG_TI_COMMON_CMD_OPTIONS=y
+ CONFIG_NR_DRAM_BANKS=2
+ CONFIG_ENV_SOURCE_FILE="am3517evm"
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
  CONFIG_DEFAULT_DEVICE_TREE="ti/omap/am3517-evm"
--CONFIG_SPL_TEXT_BASE=0x40200000
  CONFIG_TARGET_AM3517_EVM=y
  CONFIG_EMIF4=y
- CONFIG_SYS_MONITOR_LEN=262144
 diff --git a/configs/devkit8000_defconfig b/configs/devkit8000_defconfig
-index 7653fbbe7e5a..db6e9386cf5f 100644
+index db6e9386cf5f..d68bb8bfd37b 100644
 --- a/configs/devkit8000_defconfig
 +++ b/configs/devkit8000_defconfig
-@@ -7,7 +7,6 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
+@@ -4,8 +4,6 @@ CONFIG_TEXT_BASE=0x80100000
+ CONFIG_SYS_MALLOC_LEN=0x40000
+ CONFIG_SYS_MALLOC_F_LEN=0x4000
+ CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
  CONFIG_DEFAULT_DEVICE_TREE="omap3-devkit8000"
--CONFIG_SPL_TEXT_BASE=0x40200000
  CONFIG_TARGET_DEVKIT8000=y
  CONFIG_SYS_MONITOR_LEN=262144
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x400
 diff --git a/configs/igep00x0_defconfig b/configs/igep00x0_defconfig
-index 473891607b0f..90ef2635c899 100644
+index 90ef2635c899..493395847255 100644
 --- a/configs/igep00x0_defconfig
 +++ b/configs/igep00x0_defconfig
-@@ -9,7 +9,6 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
+@@ -5,8 +5,6 @@ CONFIG_ARCH_OMAP2PLUS=y
+ CONFIG_SYS_MALLOC_F_LEN=0x4000
+ CONFIG_TI_COMMON_CMD_OPTIONS=y
+ CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
  CONFIG_ENV_SIZE=0x8000
  CONFIG_DEFAULT_DEVICE_TREE="ti/omap/omap3-igep0020"
--CONFIG_SPL_TEXT_BASE=0x40200000
  CONFIG_TARGET_OMAP3_IGEP00X0=y
- CONFIG_SYS_MONITOR_LEN=262144
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x400
 diff --git a/configs/omap35_logic_defconfig b/configs/omap35_logic_defconfig
-index 23b2e503385d..3b66af079c59 100644
+index 3b66af079c59..ca1b97a26d9e 100644
 --- a/configs/omap35_logic_defconfig
 +++ b/configs/omap35_logic_defconfig
-@@ -10,7 +10,6 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
+@@ -7,8 +7,6 @@ CONFIG_SYS_MALLOC_F_LEN=0x3000
+ CONFIG_TI_COMMON_CMD_OPTIONS=y
+ # CONFIG_SPL_GPIO is not set
+ CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
  CONFIG_DEFAULT_DEVICE_TREE="ti/omap/logicpd-torpedo-35xx-devkit"
--CONFIG_SPL_TEXT_BASE=0x40200000
  CONFIG_TARGET_OMAP3_LOGIC=y
  # CONFIG_SPL_OMAP3_ID_NAND is not set
- CONFIG_SYS_MONITOR_LEN=262144
 diff --git a/configs/omap35_logic_somlv_defconfig b/configs/omap35_logic_somlv_defconfig
-index a5f242ff40cf..1b1d3dcfb203 100644
+index 1b1d3dcfb203..3b0bc6d1eaf9 100644
 --- a/configs/omap35_logic_somlv_defconfig
 +++ b/configs/omap35_logic_somlv_defconfig
-@@ -10,7 +10,6 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
+@@ -7,8 +7,6 @@ CONFIG_SYS_MALLOC_F_LEN=0x3000
+ CONFIG_TI_COMMON_CMD_OPTIONS=y
+ # CONFIG_SPL_GPIO is not set
+ CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
  CONFIG_DEFAULT_DEVICE_TREE="ti/omap/logicpd-som-lv-35xx-devkit"
--CONFIG_SPL_TEXT_BASE=0x40200000
  CONFIG_TARGET_OMAP3_LOGIC=y
  # CONFIG_SPL_OMAP3_ID_NAND is not set
- CONFIG_SYS_MONITOR_LEN=262144
 diff --git a/configs/omap3_evm_defconfig b/configs/omap3_evm_defconfig
-index 3c8d974fbd09..4ccb9b65c8bb 100644
+index 4ccb9b65c8bb..d7a3fc4b25b9 100644
 --- a/configs/omap3_evm_defconfig
 +++ b/configs/omap3_evm_defconfig
-@@ -7,7 +7,6 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
+@@ -4,8 +4,6 @@ CONFIG_ARM=y
+ CONFIG_ARCH_OMAP2PLUS=y
+ CONFIG_SYS_MALLOC_F_LEN=0x4000
+ CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
  CONFIG_DEFAULT_DEVICE_TREE="omap3-evm"
--CONFIG_SPL_TEXT_BASE=0x40200000
  CONFIG_TARGET_OMAP3_EVM=y
  CONFIG_SYS_MONITOR_LEN=262144
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x400
 diff --git a/configs/omap3_logic_defconfig b/configs/omap3_logic_defconfig
-index d081d4e0fb46..1fa5873a42d5 100644
+index 1fa5873a42d5..52e2e459dbb0 100644
 --- a/configs/omap3_logic_defconfig
 +++ b/configs/omap3_logic_defconfig
-@@ -10,7 +10,6 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
+@@ -7,8 +7,6 @@ CONFIG_SYS_MALLOC_F_LEN=0x3000
+ CONFIG_TI_COMMON_CMD_OPTIONS=y
+ # CONFIG_SPL_GPIO is not set
+ CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
  CONFIG_DEFAULT_DEVICE_TREE="ti/omap/logicpd-torpedo-37xx-devkit"
--CONFIG_SPL_TEXT_BASE=0x40200000
  CONFIG_TARGET_OMAP3_LOGIC=y
  # CONFIG_SPL_OMAP3_ID_NAND is not set
- CONFIG_SYS_MONITOR_LEN=262144
 diff --git a/configs/omap3_logic_somlv_defconfig b/configs/omap3_logic_somlv_defconfig
-index 68e89d245eee..642d2121ceda 100644
+index 642d2121ceda..64bb401f7ac9 100644
 --- a/configs/omap3_logic_somlv_defconfig
 +++ b/configs/omap3_logic_somlv_defconfig
-@@ -10,7 +10,6 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
+@@ -7,8 +7,6 @@ CONFIG_SYS_MALLOC_F_LEN=0x3000
+ CONFIG_TI_COMMON_CMD_OPTIONS=y
+ # CONFIG_SPL_GPIO is not set
+ CONFIG_NR_DRAM_BANKS=2
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
  CONFIG_DEFAULT_DEVICE_TREE="ti/omap/logicpd-som-lv-37xx-devkit"
--CONFIG_SPL_TEXT_BASE=0x40200000
  CONFIG_TARGET_OMAP3_LOGIC=y
  # CONFIG_SPL_OMAP3_ID_NAND is not set
- CONFIG_SYS_MONITOR_LEN=262144
 diff --git a/configs/sniper_defconfig b/configs/sniper_defconfig
-index 0243b15f31ce..72634db607bf 100644
+index 72634db607bf..35cfc28006c1 100644
 --- a/configs/sniper_defconfig
 +++ b/configs/sniper_defconfig
-@@ -7,7 +7,6 @@ CONFIG_SYS_MALLOC_F_LEN=0x400
+@@ -5,8 +5,6 @@ CONFIG_TEXT_BASE=0x80100000
+ CONFIG_SYS_MALLOC_LEN=0x120000
+ CONFIG_SYS_MALLOC_F_LEN=0x400
  CONFIG_NR_DRAM_BANKS=2
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
--CONFIG_SPL_TEXT_BASE=0x40200000
+-CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+-CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
  CONFIG_TARGET_SNIPER=y
  CONFIG_SPL_STACK=0x4020fffc
  CONFIG_SPL_BSS_START_ADDR=0x80000000
