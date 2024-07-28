@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38E92C3DA49
-	for <u-boot@archiver.kernel.org>; Sun, 28 Jul 2024 19:37:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBA5BC3DA64
+	for <u-boot@archiver.kernel.org>; Sun, 28 Jul 2024 19:38:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E345E887B4;
-	Sun, 28 Jul 2024 21:36:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5916C887CD;
+	Sun, 28 Jul 2024 21:36:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MeKcfhCH";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h0DbhGk7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95572887FD; Sun, 28 Jul 2024 21:36:23 +0200 (CEST)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id 7B58587F7D; Sun, 28 Jul 2024 21:36:25 +0200 (CEST)
+Received: from mail-vk1-xa2f.google.com (mail-vk1-xa2f.google.com
+ [IPv6:2607:f8b0:4864:20::a2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E429886F3
- for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 21:36:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A1DA88730
+ for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 21:36:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6b78c3670d0so14235636d6.1
- for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 12:36:21 -0700 (PDT)
+Received: by mail-vk1-xa2f.google.com with SMTP id
+ 71dfb90a1353d-4f50c673e83so857042e0c.0
+ for <u-boot@lists.denx.de>; Sun, 28 Jul 2024 12:36:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722195380; x=1722800180; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=c22bqn4cn0uVe0//XjDOhrqdGGii8nQJu+IE4XNCWGY=;
- b=MeKcfhCHUX8X4t8cWWgK6mrJSSxfiDoL0OY8CcrG2jW+xU0fzZwrr5KfBAab2QAdDf
- 7VABWEqsFjGi171gWNosPHf1TJM8rqi8Rl3mP9ciDdxiAYNDs1PWNXbaOOrIxKMSHDNX
- xi8Jby7EnWZxQRsyKeNSPOfzlbe9dAeJRe42s=
+ d=chromium.org; s=google; t=1722195381; x=1722800181; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7H71EG4//THjNSRe3Izd3g2A9tanXOSO8tpSS1UpkfU=;
+ b=h0DbhGk7ff6w8CwOHnYczVOgg8qWIz1trP7OkjLYQCRAR+CJSqBOK9GcoxYtS+kw3p
+ PCQgVW6zacF7nL5Wnv0VYI1a5MTO1OwuxTCMufvZTwjgUzAdWU1kSl70Pnp29O8Ek0sS
+ kBPNeFC551cprnz8Mq5Qyg5SOfeVB62gjrokA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722195380; x=1722800180;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=c22bqn4cn0uVe0//XjDOhrqdGGii8nQJu+IE4XNCWGY=;
- b=KhhFkY3ZwnMp2xsycH+1iehK00pG4XqggoI696ls7NoSTo/tGrQlTZP1K9TbdhM2tG
- SwwrYtUSAh9p1L5iIELKTsJNHgNqmv1KN/nyxeXMGq4WTS+kdLThGLfdjeET4mRj5PXg
- dkcTpmO1sang/wcb+xzAK6ZTO0m4+d4Mdqg+cFY+jdmGylODpHDIVFqD+lPROBR9B5Jm
- HntVykdqpOnEZULULO/zjA0bnYc8Ih+u+ka72vjJ+pOJ7uLXvfcywUD285vKa9mMYn0/
- VlsusFC3vrSYdtETsyEJTeqY7Sa9VgKpiFYqbdXESrlusuH6IrC1NTdCQn4Yuqm0/yj8
- m42g==
-X-Gm-Message-State: AOJu0YwbrcB/Og+rFl9M1IPFnVvOxgegwVB323ksiisXHcmXKgbgc/m0
- Yh//1mRT940M8yUQUzNaqAQofcRPXFXcC2copt4d5B5T46q1pv4sle8XuxuYRMDtZ6GngPQGPSA
- eMbAZGePFj0c8QFMcZ8B3A9LjMJ4vTriH+T1yGdzqvq4TjJ8=
-X-Google-Smtp-Source: AGHT+IEq1ns5gvVUqeyFEhb4K/bFSUGyFWzw3YJq5EEWnfOuqD9LaCKFBXZsgkRuHgcT/I8Vffq/8Aqyhdk1MPuwEZ8=
-X-Received: by 2002:a05:6214:1d06:b0:6b7:a248:3949 with SMTP id
- 6a1803df08f44-6bb55abaac5mr95888366d6.38.1722195380337; Sun, 28 Jul 2024
- 12:36:20 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1722195381; x=1722800181;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7H71EG4//THjNSRe3Izd3g2A9tanXOSO8tpSS1UpkfU=;
+ b=UBVT3u4HQcQ0Cs8ZTbPIol0DcPQ1/vEQZ8ATSHuU2lCyZ31AZ/HJpY8hmdslvBhziP
+ K7r1cB0akYMs3SMHiysJMCuVZOA4u6ExI8RK8Y53Ntx9QJSm7I8GT8jsXYfAwOL8vaDh
+ /NIhYh3Wh1hT+5/0HoUyqGeBmL9Ps7ukZCQPfNfcggtChkflJkfV1rxQJ1UTrpvljEi9
+ Q2+/jcZwQjkvTcZEMrjKPi93coG8/X/zUhoDlXJb8ETFDiOTPNH+SbQenj43fml6W8DJ
+ g6hH+ZTeORKxHMxnYcBgmhXQpL4qhgOo7S4IQYELVM5nHxOOmG7HKKj8kuxjrS3iLfVo
+ BHOg==
+X-Gm-Message-State: AOJu0YyGXa58DSPjwmEQipgSMigymDHDufl5I/FsZPUh31ADlqwv2mV/
+ 0smJjqSCG+oA9VG9KKMcnGQoFMIYRKlyAKs5up9OjRtWIJOm6uTiJsO92Iri36jKmTwCsvUTPiP
+ xbirjT7Jvnxl72LSzsr7CS4ZrQdgqmoOVCf3F
+X-Google-Smtp-Source: AGHT+IGPGI7wO6WHyQpftlIUPnmrUGXNLfEePLi91vBlAnxkdKYFKjY9+pOD+Sd0uLSIki1e2GgbwTgMEQeK1rAWtgM=
+X-Received: by 2002:a05:6122:2901:b0:4f5:261a:bdae with SMTP id
+ 71dfb90a1353d-4f6e69989dbmr6012700e0c.14.1722195381166; Sun, 28 Jul 2024
+ 12:36:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240623203033.1566505-1-sjg@chromium.org>
- <20240623203033.1566505-14-sjg@chromium.org>
- <20240624182931.GI38804@bill-the-cat>
- <CAFLszTguTkc1m2JYb=5+yW_8uY+J0AsQZ_L0hFJHDfEXNeb0wQ@mail.gmail.com>
- <20240625141427.GO38804@bill-the-cat>
- <CAFLszTi1i+OrAyoyqRLZAuKzGTmAgNQ9Gwtn01XxVLvGmzZLcQ@mail.gmail.com>
- <20240626140752.GV38804@bill-the-cat>
- <CAFLszTj0h5w+sz796LokxgcfyRTGmHnQJ3OTDdoaoC61Ob=akw@mail.gmail.com>
- <20240627144214.GC38804@bill-the-cat>
- <CAFLszTixbMxDq7TvjPzc+Xup6biMmPvLP5CVPJLp7w94e0dd4Q@mail.gmail.com>
-In-Reply-To: <CAFLszTixbMxDq7TvjPzc+Xup6biMmPvLP5CVPJLp7w94e0dd4Q@mail.gmail.com>
+References: <20240516-rework-video-format-v1-0-f69822b742a3@flygoat.com>
+ <c2853d56-4bdc-4d1b-81d8-c880aa298988@app.fastmail.com>
+In-Reply-To: <c2853d56-4bdc-4d1b-81d8-c880aa298988@app.fastmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 28 Jul 2024 13:36:09 -0600
-Message-ID: <CAFLszThFL4BnoprJJ8qdSo8g_5Umo36yGp0ba4w=cAexgH9cNA@mail.gmail.com>
-Subject: Re: [PATCH 13/14] Update u-boot.cfg to include CFG also
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Sun, 28 Jul 2024 13:36:10 -0600
+Message-ID: <CAFLszTj8eBf_ffT-kXNXRFRsBcPtLvUN9WHe+5U1xW39wo=fag@mail.gmail.com>
+Subject: Re: [PATCH 0/6] video: pixel format handling fixes and improvements
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Heiko Schocher <hs@denx.de>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Anatolij Gustschin <agust@denx.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,94 +89,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi,
 
-On Fri, 28 Jun 2024 at 01:33, Simon Glass <sjg@chromium.org> wrote:
+On Wed, 17 Jul 2024 at 08:34, Jiaxun Yang <jiaxun.yang@flygoat.com> wrote:
 >
-> Hi Tom,
 >
-> On Thu, 27 Jun 2024 at 15:42, Tom Rini <trini@konsulko.com> wrote:
+>
+> =E5=9C=A82024=E5=B9=B45=E6=9C=8817=E6=97=A5=E4=BA=94=E6=9C=88 =E4=B8=8A=
+=E5=8D=886:16=EF=BC=8CJiaxun Yang=E5=86=99=E9=81=93=EF=BC=9A
+> > Hi all,
 > >
-> > On Thu, Jun 27, 2024 at 09:37:15AM +0100, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Wed, 26 Jun 2024 at 15:07, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Wed, Jun 26, 2024 at 09:00:41AM +0100, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Tue, 25 Jun 2024 at 15:14, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Tue, Jun 25, 2024 at 01:38:04PM +0100, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Mon, 24 Jun 2024 at 19:29, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > >
-> > > > > > > > On Sun, Jun 23, 2024 at 02:30:32PM -0600, Simon Glass wrote:
-> > > > > > > >
-> > > > > > > > > Some configuration is now in variables with a CFG_ prefix. Add these to
-> > > > > > > > > the .cfg file so that we can see everything in one place. Sort the
-> > > > > > > > > options so they are easier to find and compare.
-> > > > > > > > >
-> > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > ---
-> > > > > > > > >
-> > > > > > > > > Changes in v2:
-> > > > > > > > > - Add new patch to update u-boot.cfg with CFG_... options
-> > > > > > > > >
-> > > > > > > > >  scripts/Makefile.autoconf | 2 +-
-> > > > > > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > > > > > >
-> > > > > > > > > diff --git a/scripts/Makefile.autoconf b/scripts/Makefile.autoconf
-> > > > > > > > > index b42f9b525fe..65ff11ea508 100644
-> > > > > > > > > --- a/scripts/Makefile.autoconf
-> > > > > > > > > +++ b/scripts/Makefile.autoconf
-> > > > > > > > > @@ -71,7 +71,7 @@ quiet_cmd_autoconf = GEN     $@
-> > > > > > > > >  quiet_cmd_u_boot_cfg = CFG     $@
-> > > > > > > > >        cmd_u_boot_cfg = \
-> > > > > > > > >       $(CPP) $(c_flags) $2 -DDO_DEPS_ONLY -dM include/config.h > $@.tmp && { \
-> > > > > > > > > -             grep 'define CONFIG_' $@.tmp | \
-> > > > > > > > > +             egrep 'define (CONFIG_|CFG_)' $@.tmp | sort | \
-> > > > > > > > >                       sed '/define CONFIG_IS_ENABLED(/d;/define CONFIG_IF_ENABLED_INT(/d;/define CONFIG_VAL(/d;' > $@; \
-> > > > > > > > >               rm $@.tmp;                                              \
-> > > > > > > > >       } || {                                                          \
-> > > > > > > >
-> > > > > > > > I don't like this because whereas "CONFIG_" is enforced to be set only
-> > > > > > > > by Kconfig and so always all reliably set and found via a single header,
-> > > > > > > > CFG_ stuff is not.
-> > > > > > >
-> > > > > > > OK, so how are CFG_ options found? I hit this when trying to find the
-> > > > > > > SDRAM size on rockchip 3399 and I could not find any way of figuring
-> > > > > > > it out.
-> > > > > >
-> > > > > > It's just another define, there's no uniformity to it. For some of the
-> > > > > > SDRAM values really we need some build time way to grab some information
-> > > > > > out of the default device tree.
-> > > > >
-> > > > > Can you give an example of a board that could use this? I looked at
-> > > > > the devicetree for chromebook_kevin and don't see a memory range in
-> > > > > ther.
-> > > >
-> > > > OK, wow, I didn't realize /memory was optional now. But indeed, I don't
-> > > > see it in the dtb file. That removes that option then, sadly.
-> > >
-> > > Well, we can still require it, so long as an error is produced if the
-> > > property is needed but does not exist.
+> > This series fixes endian related problem I found in general
+> > video system when testing my fresh virtio-gpu driver on big
+> > endian target.
 > >
-> > "We" who? I don't feel like we'll have a lot of traction with linux
-> > kernel folks in requiring /memory to be added to the dts files on
-> > however many platforms don't have it today because I'm going to guess
-> > it's added at run time, possibly by us, with the correct size and we'd
-> > be asking for statically adding things half-wrong like a lot of
-> > platforms used to do (and in turn rely on U-Boot to correct the size).
+> > It also removed a lot of duplicated code on pixel handling,
+> > and make implementation of new pixel formats easier. Further
+> > more, it removed limitation on bpc for BMP display, now we
+> > can display any image depth on any target display controller.
 >
-> Hmm yes of course, the firmware is supposed to add these
-> properties...that's how it gets in there. So we need to stick with CFG
-> (and perhaps the RAM-size prober) for now.
+> Ping
 
-Coming back to this patch, can we apply it? It provides a way to find
-out the value of these CFG options, which otherwise involves chasing
-around header files.
+I believe this is waiting on Anatolij?
 
 Regards,
-SImon
+Simon
