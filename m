@@ -4,81 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0ED6C3DA61
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 13:55:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F8B3C3DA61
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 13:55:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36249887CD;
-	Mon, 29 Jul 2024 15:55:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9EE22887BE;
+	Mon, 29 Jul 2024 15:55:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YgfwStSq";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JspcSr/9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB403887D1; Mon, 29 Jul 2024 15:55:19 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 369F2887BE; Mon, 29 Jul 2024 15:55:31 +0200 (CEST)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5AF5887BE
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 15:55:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C7D9A887E6
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 15:55:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5a2ffc34677so5582924a12.2
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 06:55:17 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-2cb510cd097so2439270a91.1
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 06:55:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722261317; x=1722866117; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=2z1mEECFm6Y4Uk03e9PLRbekzo/REKqqvP3oteOk1qk=;
- b=YgfwStSq6HvnPhjDP2fVm5emyfnyeASPLQu9hqQnjkrCntgKvtoWxScnD3CNeGzHZ7
- Hx3i/5dM2KHOycSVEjPd1wj9htmUjrCKNM7W+icjdrXhsce9+B2M92PPbC/acHFr1INT
- YJh5aJDiPk75gzKxyco7LM8SiARON7WQdhvLv3eUoU8ZFgMV8CoZiNM8/oo114XwRsZE
- 2974Lfeq/rAkuODe7Ko/3a332UcAUMmcZZpVXxRV0x5YzVOQOFiavePrKhdTQRaSFDt7
- 6VtKXO+g/QsxSqlB7U7MeXYRXbKIVBuCfBWfEP1rfcvTNhv4xTMs/XrGz5ZDfa7qIOK6
- dHaA==
+ d=linaro.org; s=google; t=1722261327; x=1722866127; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=19hEm6WdnYLiXVxCMUjY5iiin/7v5g8W9RU61eZfRd8=;
+ b=JspcSr/90RDbhX59fM2+BO4OfD7sxmMrj9U09A3gBgt2z+FdMFyDptuxDQ+h9GYecx
+ cKVl2Vdm/ONl50rZSIRxOYoJiXzW9otmgT+hCsnkolJgBtorVzxBjl7PmCJgHuuqI58M
+ 6kYWohMaoXk8QdNoz945DTP4PWhgssDbDHA4Wmm3RuLtDmK8Uo+U8dJJk/3Vr+YIUqro
+ QnfaejsbdtNNZVg9j0UV5XJqRwwZAiUKeXoT6Qr4CsgTXjfoUx+2gBcgPEsVRj1C/ryw
+ wrGT/9872+FsNEK3oVwzSsKFfu11Jq0CopYyOCQAEqD4jIXAzL2P/w8UD7HQja1Wc5VQ
+ fbJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722261317; x=1722866117;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2z1mEECFm6Y4Uk03e9PLRbekzo/REKqqvP3oteOk1qk=;
- b=raFTRcsEfYtA6jkIP+UFN8NYcOKCW0QwhNvoQzxfn7s5rn6z6BfN/DboEbwL6LeswF
- DLN1Nt0OdrlypVExRi52Id8u4Lvco9k2mvYEV3qwHB5XXxpO2nkfTXeuNDEjahFjlmCP
- KZOxc66nY0dQknHSxWiIwKvltuZgAxUWuLfMAjiTwzIwSpSnr95olO9/Fax3JnDLGsQO
- dv63OZNqh/GIWzKX7t180Wp9DUqpyQHoeLlDjVngKph4EOHSt8On+TQiJgfrEgRVjNAo
- xj3QtjWxnGTybFzXnwAmlR4gs14EsDnxGGLOUcnxasUnfg2KeCg9XVDxaZ5I67nAAhP0
- NraQ==
-X-Gm-Message-State: AOJu0Ywd3a4wy/8ZGxAtvYyP5uiQ5KjmV0OUF+VBb8RLUktnt3VHw6kC
- mvU5oxZbOaiaLmw+9za15p5srifUV70zRsmnQ5R5ly6CFqX6k9y7vxbCi0bkBA0=
-X-Google-Smtp-Source: AGHT+IEKF8pzIosiDnUB2Pqu3+ZUQ670LG17/OaFFj4lmJ/KEYI4YlrATSfSILv4er4aBjKBtf1xWw==
-X-Received: by 2002:a17:907:3fa8:b0:a77:dd1c:627a with SMTP id
- a640c23a62f3a-a7d3ff5622emr616131166b.8.1722261316960; 
- Mon, 29 Jul 2024 06:55:16 -0700 (PDT)
-Received: from hades (ppp046103060252.access.hol.gr. [46.103.60.252])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7acadb98dbsm509166866b.216.2024.07.29.06.55.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Jul 2024 06:55:16 -0700 (PDT)
-Date: Mon, 29 Jul 2024 16:55:13 +0300
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Benjamin BARATTE <benjamin.baratte@st.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "eajames@linux.ibm.com" <eajames@linux.ibm.com>,
- "sjg@chromium.org" <sjg@chromium.org>,
- "tharvey@gateworks.com" <tharvey@gateworks.com>,
- "trini@konsulko.com" <trini@konsulko.com>
-Subject: Re: [PATCH 1/3] tpm: update tpm hash algorithm according to tpm2.0
- spec 1.59
-Message-ID: <ZqefQTOIwKSl1YzC@hades>
-References: <DU0PR10MB52445073A01A8668C66ADAA0E1A12@DU0PR10MB5244.EURPRD10.PROD.OUTLOOK.COM>
+ d=1e100.net; s=20230601; t=1722261327; x=1722866127;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=19hEm6WdnYLiXVxCMUjY5iiin/7v5g8W9RU61eZfRd8=;
+ b=q4+jcpFypcPch4527RZVTM9p6MdHYWgG6oopHeIC+/wlUjSzpjqNpJ8Sd6j934KGO2
+ jR5+f9MUY+iCKydZHnpsCS/2N4aY7oq07cz0CMvqNCu2JRur5mGsIgd8J1QfI0hD4KJd
+ EN6r8AkF7mElbBoGMvPHGbGfycfHWAfLWXwxZ5F7d723gnNGS64WLB+MZwakWfgHum5b
+ vFTQDEBaAgOYNPZt7AphIQZs/8VGWBZSkKG4oyiEcZVFqlZaXCJwmkjRz/kQcM8kV5An
+ RMDeY75+TcKOTUe67haHbzkK5WbL5ObIXZ4RWMPdcqTseHArNg9aJmDDQopPWhEdshgX
+ /NKA==
+X-Gm-Message-State: AOJu0Yw7NG16rGLsG9/hWpVkqmVuV4Yb6IKvIWthtcHd35bSrMGHicXt
+ eIYjyIUZHiQ/t4oIF8pVKPZgTvzgbENIiPvMEJdjhxFCVpJ/jO8dgPuqMQAiDocgaZk8ZFPkQOA
+ 4wHQPA7UCtiPKtsrHXoOqd2AXbCIh8/EsaZZcbQ==
+X-Google-Smtp-Source: AGHT+IHF3Sv7L3/b0yPvZ3yVOOhTAsl5k+ZmQoqH4xQX/Ae1t1nzb9QFJRA0qbYQO6SjrkmgdWXKx3LK3Zj6TLsojLw=
+X-Received: by 2002:a17:90a:5d17:b0:2c9:a151:44fb with SMTP id
+ 98e67ed59e1d1-2cf7e1fad43mr8912858a91.22.1722261327246; Mon, 29 Jul 2024
+ 06:55:27 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <DU0PR10MB52445073A01A8668C66ADAA0E1A12@DU0PR10MB5244.EURPRD10.PROD.OUTLOOK.COM>
+References: <20240702182325.2904421-1-raymond.mao@linaro.org>
+ <20240702182325.2904421-21-raymond.mao@linaro.org>
+ <CAC_iWjLeM3zKfo274FpEhPb11=KxrRASqBW6WDe4o-jmQxmBkQ@mail.gmail.com>
+In-Reply-To: <CAC_iWjLeM3zKfo274FpEhPb11=KxrRASqBW6WDe4o-jmQxmBkQ@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Mon, 29 Jul 2024 09:55:16 -0400
+Message-ID: <CAEfUkULz5rK7mf_JOiRb2n7Dqis-AYLY9hhHNidJqUaXkSu96g@mail.gmail.com>
+Subject: Re: [PATCH v4 20/29] lib/crypto: Adapt x509_cert_parser to MbedTLS
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
+ Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
+ Mario Six <mario.six@gdsys.cc>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng@tinylab.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,97 +107,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Benjamin, 
+On Mon, 29 Jul 2024 at 09:20, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+wrote:
 
-Apologies for the late reply, but I wasn't cc'ed in the series. Did you use
-get_maintainer.pl for the recipients?
+> Hi Raymond
+>
+> >
+> > +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
+> > +/* Backup of part of the parsing context */
+>
+> I am not sure I understand the comment
+>
+> We can remove this comment line.
 
-On Mon, Jul 15, 2024 at 01:33:16PM +0000, Benjamin BARATTE wrote:
-> The hash algorithm structure shall reflect the TCG specification for
-> TPM2.0
-> With vesion 1.59, the SHA3 algorithm has been added and shall be
-> reflected in this structure.
-> The fact that U-Boot does or does not support SHA3 algo yet is not
-> relevant for this structure.
 
-It's not, but I don't see why we should add more algorithms if we don't
-plan to support them. Any plans of adding actual support for the SHA3
-family?
+> > +struct x509_cert_mbedtls_ctx {
+> > +       void    *tbs;                   /* Signed data */
+> > +       void    *raw_serial;            /* Raw serial number in ASN.1 */
+> > +       void    *raw_issuer;            /* Raw issuer name in ASN.1 */
+> > +       void    *raw_subject;           /* Raw subject name in ASN.1 */
+> > +       void    *raw_skid;              /* Raw subjectKeyId in ASN.1 */
+> > +};
+> > +#endif
+> > +
+> > +/*
+> > + * MbedTLS integration Notes:
+> > + *
+> > + * Fields we don't need to populate from MbedTLS:
+>
+> You mean *for* mbedTLS?
+>
+> > + * 'raw_sig' and 'raw_sig_size' are buffer for x509_parse_context,
+>
+> 'raw_sig' and 'raw_sig_size' are used in x509_parse_context(), which
+> in turn is not used in mbedTLS?
+>
+> Both are used by the U-Boot ASN1 library when parsing the x509.
+But for MbedTLS, we removed "struct x509_parse_context ", since all
+parsing is done under MbedTLS and we don't need to expose them at all.
 
-Thanks
-/Ilias
-> It's up to the end user to configure the active PCR bank to supported
-> hash algorithm by all boot chain component.
-> Also, by default, TPM2.0 shall support at least SHA256 and SHA384, in
-> practice dTPM support 2 actives banks with this 2 hash algorithms
-> 
-> Signed-off-by: Benjamin BARATTE mailto:benjamin.baratte@st.com
-> ---
-> 
->  include/tpm-v2.h | 35 ++++++++++++++++++++++++++++++-----
->  1 file changed, 30 insertions(+), 5 deletions(-)
-> 
-> diff --git a/include/tpm-v2.h b/include/tpm-v2.h
-> index 4fd19c52fd..9848e1fd10 100644
-> --- a/include/tpm-v2.h
-> +++ b/include/tpm-v2.h
-> @@ -253,6 +253,9 @@ enum tpm2_algorithms {
->         TPM2_ALG_SHA512         = 0x0D,
->         TPM2_ALG_NULL           = 0x10,
->         TPM2_ALG_SM3_256        = 0x12,
-> +       TPM2_ALG_SHA3_256       = 0x27,
-> +       TPM2_ALG_SHA3_384       = 0x28,
-> +       TPM2_ALG_SHA3_512       = 0x29,
->  };
-> 
->  /**
-> @@ -271,11 +274,15 @@ struct digest_info {
->  };
-> 
->  /* Algorithm Registry */
-> -#define TCG2_BOOT_HASH_ALG_SHA1    0x00000001
-> -#define TCG2_BOOT_HASH_ALG_SHA256  0x00000002
-> -#define TCG2_BOOT_HASH_ALG_SHA384  0x00000004
-> -#define TCG2_BOOT_HASH_ALG_SHA512  0x00000008
-> -#define TCG2_BOOT_HASH_ALG_SM3_256 0x00000010
-> +#define TCG2_BOOT_HASH_ALG_SHA1     0x00000001
-> +#define TCG2_BOOT_HASH_ALG_SHA256   0x00000002
-> +#define TCG2_BOOT_HASH_ALG_SHA384   0x00000004
-> +#define TCG2_BOOT_HASH_ALG_SHA512   0x00000008
-> +#define TCG2_BOOT_HASH_ALG_SM3_256  0x00000010
-> +#define TCG2_BOOT_HASH_ALG_SHA3_256 0x00000020
-> +#define TCG2_BOOT_HASH_ALG_SHA3_384 0x00000040
-> +#define TCG2_BOOT_HASH_ALG_SHA3_512 0x00000080
-> +
-> 
->  static const struct digest_info hash_algo_list[] = {
->  #if IS_ENABLED(CONFIG_SHA1)
-> @@ -310,6 +317,24 @@ static const struct digest_info hash_algo_list[] = {
->                 TPM2_SHA512_DIGEST_SIZE,
->         },
->  #endif
-> +       {
-> +               "sha3_256",
-> +               TPM2_ALG_SHA3_256,
-> +               TCG2_BOOT_HASH_ALG_SHA3_256,
-> +               TPM2_SHA256_DIGEST_SIZE,
-> +       },
-> +       {
-> +               "sha3_384",
-> +               TPM2_ALG_SHA3_384,
-> +               TCG2_BOOT_HASH_ALG_SHA3_384,
-> +               TPM2_SHA384_DIGEST_SIZE,
-> +       },
-> +       {
-> +               "sha3_512",
-> +               TPM2_ALG_SHA3_512,
-> +               TCG2_BOOT_HASH_ALG_SHA3_512,
-> +               TPM2_SHA512_DIGEST_SIZE,
-`> +       },
->  };
-> 
->  /* NV index attributes */
-> --
-> 2.34.1
-> 
-> ST Restricted
+> + * not needed for MbedTLS.
+> > + * 'signer' and 'seen' are used internally by pkcs7_verify.
+> > + * 'verified' is not inuse.
+>
+> either 'unsued' or 'not in use'
+>
+A typo. will fix it.
+
+Regards,
+Raymond
