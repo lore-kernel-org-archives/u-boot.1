@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DF22C3DA61
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 08:50:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D60A5C3DA4A
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 08:52:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48857887D6;
-	Mon, 29 Jul 2024 10:49:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 57D9988747;
+	Mon, 29 Jul 2024 10:52:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WM+ta23d";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fMR16Gqk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4700C887BF; Mon, 29 Jul 2024 10:49:58 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 6CC2088747; Mon, 29 Jul 2024 10:52:15 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 558AA88651
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 10:49:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 79668887B9
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 10:52:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5a20de39cfbso4848603a12.1
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 01:49:56 -0700 (PDT)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-59589a9be92so4981219a12.2
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 01:52:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722242996; x=1722847796; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1722243133; x=1722847933; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HdMRbgcUEDo8uD96SVBCOcKIZqIhSwlv82+N7xwWx/8=;
- b=WM+ta23duGKUHgmpxiJOGpkQTuoNkQdVF+yCgdkFI2ux/F6yvNaCjnX6KnZ6cekYEs
- zzN85zwovonaK3sJdcitHfJe7+k/1IMeWh2w+jN/4WbZmGwcMGxw6C1Cve5J4ZDlEqdv
- 0R1KVYw2ptxxIAtVQOyicqKKGBufg6O8wGCNZVUQBdnYxXsysGcvj5LIHXXi+RzWeCXV
- IZhRfV1UznobKZjFeBAWLAwmV0T8lyOB4LRMPurfhJKwi76KRdmgR/p5KzM2zjuYL0pQ
- WVhFctsuQGEdcCMqBZU7RreB9dDH6VGK4siNANU8qHzQm1L48dcIMlkef1X+y9fAmzCf
- Db4Q==
+ bh=hJ6CS7lqqjqjO1KZ9iJfHDi23887n6tKHywRZD+GIL8=;
+ b=fMR16Gqkngnqk6tbwhfZscNJp98+7M5O8WY0m7KXQ0vP4FSNx62yl0fl/nY1hb7o9o
+ MLukKyFS1UzkAX+Z6YI7CNGBG4v5m/6QlhJXc8Yt5lGabJipNOgL6FhFccxTaWVYwvB7
+ SLq7hLM8VqVjBjUu8fYIYrCvnWi+an5Z6gEiF1qGPNUbdcW0SylPOeXS6xDYk5k45Fra
+ huhyoZ9XanTjKqyTIuPGLE0EUtPzrq10FuWkDIKwzYUPAK7a7T2Al09Frpl2XpTKtU5+
+ uZdEwPYTgmCZlD4zwJFXb48rfYgB+Fz7DND8PnH0f7FHbbitXauYRWByDlzZ6yBGZ2ze
+ ASNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722242996; x=1722847796;
+ d=1e100.net; s=20230601; t=1722243133; x=1722847933;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=HdMRbgcUEDo8uD96SVBCOcKIZqIhSwlv82+N7xwWx/8=;
- b=sRUL5kVJiTx9tpa6HHOrD0XsbE6i0qcIw2441+3dNk7dnSyStGmWuE+crtx25RWJUS
- yZ1XERE7lh6Juw3SLb7HGfALNT7YuO5v5c0BusXu60x2JWaSriy4PgC+v0rDzoW0f0rV
- BUgyksc8BXvlX8Wbk2gcvzkQ0xV+8YnHf6tSYbAES43Ma3ZNeXXGmhQ/hP67GWbvR2+U
- GtDawmMVss3fk/yYyzHbQ1zuXkmhCiLOl34sqt1Eaqrgm1Toe2+DOwug54vhpqu89SRB
- 2+2vrXJSXw+3/9aV+JPx6l5OJUHZQUNzMiCNSu0/wg2uOXhDa/4NsGxKKmwN6fsJsTbN
- fGnw==
-X-Gm-Message-State: AOJu0YxQA3nKaklI0PGgA0haaFm3mS0jE8eLAguauCWaU65MqbzAnnHM
- mfiuPJeSgpolgfMaPAUJko+Fa8zyTLk8m59xXvG33TTeqRXMK4H2iLGPN++nHltwT4vPfePo6Bh
- 9njXhn4GNKHkSsWAyTvCDH7JbpAfEEqRbgUrAuw==
-X-Google-Smtp-Source: AGHT+IEJ7UUfYWbaYjfJzeSEbYNg2RPbaKVshYtkKt2AJkjoCGWtN3eCL39iJtpMgGVMWs92KZMVwpW+a7uOfImcmZs=
-X-Received: by 2002:a05:6402:1e93:b0:5a1:39cf:6ac0 with SMTP id
- 4fb4d7f45d1cf-5b0205d6873mr5020313a12.2.1722242995662; Mon, 29 Jul 2024
- 01:49:55 -0700 (PDT)
+ bh=hJ6CS7lqqjqjO1KZ9iJfHDi23887n6tKHywRZD+GIL8=;
+ b=TwWwcn2NI13A1/rn9//4TeAYn2F+ktSPkXU7BAPOMdqt6dXxA4mJTwYG5opyJKCFB8
+ 8yM27EWI1HOf5yBRLETRmdGsHKzpjHb0ddbqDZ43r2HMsLP8uOvclltQtYQbq7pUZ6Ah
+ VAeceAybzsbQPwVDre9mXZxVx3kVojqq7gvRBEiUf0v1vqd6RVCAsTrohy5prl6qp5td
+ GVtCuKuCnssGmK+gtbLyY0P0p8BMWwBdByiKTEZPBHoZHLVyeF6UklfG6mbxASi5UzbS
+ ISD4iULhRbOUTMdsKwkNFN4AQRLDNSRgt6fQowIzeypgzhh1EFHhmXvnCQvCjuTwWBBy
+ 6jEg==
+X-Gm-Message-State: AOJu0YwU0t82z+pMzUw/w+cjVc1iy6p91Ja3RycfZ6Jakg3SN2wTFvNe
+ fk6LALe3vn9MVwjS/Cp6FWvtYAvXNNLfBfJMMY+aHct0AX7asQtqtX23WZUQhlZ13UV4uzPEo10
+ PS9lZHc2wOwcJZRw3jq8xVkg6ir1GnhZlPWX/Fw==
+X-Google-Smtp-Source: AGHT+IGvaeuRhpr07O417dWmI1wvB36o4TJ52KJ6HdlS/2ZKwM7HKlu+OV7wCx31aZNSJ7qK1XVpIb1BsM/6SeE91Vc=
+X-Received: by 2002:a50:d7c5:0:b0:5a2:1f7b:dffa with SMTP id
+ 4fb4d7f45d1cf-5b020101f53mr4205602a12.3.1722243132901; Mon, 29 Jul 2024
+ 01:52:12 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-28-sughosh.ganu@linaro.org>
- <CAFLszTiKg2kw1HGcCqcyWgjMsXmSCGKAtOzKStduNEvUR=iZSg@mail.gmail.com>
-In-Reply-To: <CAFLszTiKg2kw1HGcCqcyWgjMsXmSCGKAtOzKStduNEvUR=iZSg@mail.gmail.com>
+ <20240724060224.3071065-31-sughosh.ganu@linaro.org>
+ <CAFLszTg-hL9z3o68RigDFCE2=Cj-UVHv0xh0Y9=QuS=ZDq3FGw@mail.gmail.com>
+In-Reply-To: <CAFLszTg-hL9z3o68RigDFCE2=Cj-UVHv0xh0Y9=QuS=ZDq3FGw@mail.gmail.com>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 29 Jul 2024 14:19:44 +0530
-Message-ID: <CADg8p94kbXZv_P0pWR9XJd+kOit=eJTe-n+33tVOoEy38EvCVA@mail.gmail.com>
-Subject: Re: [PATCH 27/40] spl: sandbox: initialise the ram banksize in spl
+Date: Mon, 29 Jul 2024 14:22:01 +0530
+Message-ID: <CADg8p95m8w8hgsderBgDhMfNTv73RrTVGtNsu6Yh4wt6b1nNmg@mail.gmail.com>
+Subject: Re: [PATCH 30/40] sandbox: iommu: remove lmb allocation in the driver
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
@@ -101,57 +101,85 @@ On Fri, 26 Jul 2024 at 05:02, Simon Glass <sjg@chromium.org> wrote:
 >
 > On Wed, 24 Jul 2024 at 00:05, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > >
-> > Initialise the ram bank information for sandbox in SPL. This is needed
-> > for initialising the LMB memory map as part of the platform init.
+> > The sandbox iommu driver uses the LMB module to allocate a particular
+> > range of memory for the device virtual address(DVA). This used to work
+> > earlier since the LMB memory map was caller specific and not
+> > global. But with the change to make the LMB allocations global and
+> > persistent, adding this memory range has other side effects. On the
+> > other hand, the sandbox iommu test expects to see this particular
+> > value of the DVA. Use the DVA address directly, instead of mapping it
+> > in the LMB memory map, and then have it allocated.
+> >
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> > Changes since rfc: None
+> >
+> >  drivers/iommu/sandbox_iommu.c | 9 ++-------
+> >  1 file changed, 2 insertions(+), 7 deletions(-)
+> >
+> > diff --git a/drivers/iommu/sandbox_iommu.c b/drivers/iommu/sandbox_iommu.c
+> > index 505f2c3250..15ecaacbb3 100644
+> > --- a/drivers/iommu/sandbox_iommu.c
+> > +++ b/drivers/iommu/sandbox_iommu.c
+> > @@ -5,10 +5,10 @@
+> >
+> >  #include <dm.h>
+> >  #include <iommu.h>
+> > -#include <lmb.h>
+> >  #include <asm/io.h>
+> >  #include <linux/sizes.h>
+> >
+> > +#define DVA_ADDR               0x89abc000
 >
-> I don't understand what is going on here...you are moving code into a
-> function and should explain why.
+> This is a very strange address. You can put this in
+> arch/sandbox/include/asm/test.h and check it in the test. I suggest
+> using something like 0x12345678 so it is obviously meaningless.
 
-Will do. The bd struct's dram values need to be set up before the lmb
-initialisation happens.
+You will see that I am using the same address that is being used
+currently. I did not want to make any changes to what is working, nor
+did I want to spend time debugging if this logic can be improved --
+that is not the purpose of this series.
+
+>
+> >  #define IOMMU_PAGE_SIZE                SZ_4K
+> >
+> >  static dma_addr_t sandbox_iommu_map(struct udevice *dev, void *addr,
+> > @@ -20,8 +20,7 @@ static dma_addr_t sandbox_iommu_map(struct udevice *dev, void *addr,
+> >         paddr = ALIGN_DOWN(virt_to_phys(addr), IOMMU_PAGE_SIZE);
+> >         off = virt_to_phys(addr) - paddr;
+> >         psize = ALIGN(size + off, IOMMU_PAGE_SIZE);
+> > -
+> > -       dva = lmb_alloc(psize, IOMMU_PAGE_SIZE, LMB_NONE);
+> > +       dva = (phys_addr_t)DVA_ADDR;
+> >
+> >         return dva + off;
+> >  }
+> > @@ -35,8 +34,6 @@ static void sandbox_iommu_unmap(struct udevice *dev, dma_addr_t addr,
+> >         dva = ALIGN_DOWN(addr, IOMMU_PAGE_SIZE);
+> >         psize = size + (addr - dva);
+> >         psize = ALIGN(psize, IOMMU_PAGE_SIZE);
+> > -
+> > -       lmb_free(dva, psize, LMB_NONE);
+> >  }
+> >
+> >  static struct iommu_ops sandbox_iommu_ops = {
+> > @@ -46,8 +43,6 @@ static struct iommu_ops sandbox_iommu_ops = {
+> >
+> >  static int sandbox_iommu_probe(struct udevice *dev)
+> >  {
+> > -       lmb_add(0x89abc000, SZ_16K, LMB_NONE);
+> > -
+> >         return 0;
+> >  }
+>
+> If this function is empty, you should remove it.
+
+Okay.
 
 -sughosh
 
 >
 > >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> > Changes since rfc: New patch
-> >
-> >  arch/sandbox/cpu/spl.c | 13 +++++++++----
-> >  1 file changed, 9 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
-> > index 9ad9da686c..22cd916685 100644
-> > --- a/arch/sandbox/cpu/spl.c
-> > +++ b/arch/sandbox/cpu/spl.c
-> > @@ -121,6 +121,15 @@ static int load_from_image(struct spl_image_info *spl_image,
-> >  }
-> >  SPL_LOAD_IMAGE_METHOD("sandbox_image", 7, BOOT_DEVICE_BOARD, load_from_image);
-> >
-> > +int dram_init_banksize(void)
-> > +{
-> > +       /* These are necessary so TFTP can use LMBs to check its load address */
-> > +       gd->bd->bi_dram[0].start = gd->ram_base;
-> > +       gd->bd->bi_dram[0].size = get_effective_memsize();
-> > +
-> > +       return 0;
-> > +}
-> > +
-> >  void spl_board_init(void)
-> >  {
-> >         struct sandbox_state *state = state_get_current();
-> > @@ -128,10 +137,6 @@ void spl_board_init(void)
-> >         if (!CONFIG_IS_ENABLED(UNIT_TEST))
-> >                 return;
-> >
-> > -       /* These are necessary so TFTP can use LMBs to check its load address */
-> > -       gd->bd->bi_dram[0].start = gd->ram_base;
-> > -       gd->bd->bi_dram[0].size = get_effective_memsize();
-> > -
-> >         if (state->run_unittests) {
-> >                 struct unit_test *tests = UNIT_TEST_ALL_START();
-> >                 const int count = UNIT_TEST_ALL_COUNT();
 > > --
 > > 2.34.1
 > >
