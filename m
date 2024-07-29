@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C175C3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 15:26:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B773CC3DA4A
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 15:26:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE62588827;
-	Mon, 29 Jul 2024 17:26:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 421138880E;
+	Mon, 29 Jul 2024 17:26:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kw1ixoYa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OoB9UHwR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50F0E88808; Mon, 29 Jul 2024 17:26:18 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id 5652D8855C; Mon, 29 Jul 2024 17:26:26 +0200 (CEST)
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [IPv6:2607:f8b0:4864:20::f33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EC6D88806
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 17:26:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A41418880E
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 17:26:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6b5d42758a7so19025496d6.2
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 08:26:16 -0700 (PDT)
+Received: by mail-qv1-xf33.google.com with SMTP id
+ 6a1803df08f44-6b7a3e468a9so25421636d6.1
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 08:26:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722266775; x=1722871575; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722266781; x=1722871581; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vKXknqlF5G6HJuCxNKbHJfyREua5GEDvMl6Sa8TRaVI=;
- b=kw1ixoYaQoasueGXcCfPI4OX5zRjA35amGzmplvQ1MVQLVDXVjPpxRB6ScdLEBE3kf
- N+uX1HNex8OSw1OhK8psC++m84H35x4NStWHajrBZqRE5SO+Jve5y31nhH5EI2zI1VuA
- glDNllBE8O03wCuy+prF2HtIJmzxb/oMMrv3A=
+ bh=Mr4a6Kbp6mB5Ky7DOvLDPvO56g+v1hyYITKISBlmgSQ=;
+ b=OoB9UHwRObQyEx19c1J2U+Yw12ONZ7P1kAV535u86WDObYiA2wUMafZbOj2qtoE6VP
+ clCUyi/ly1C4Q9EUWTQP89jjYNDMa1xVXZanPRx0b1XK8okXBxR4N6Or1bvoQjzR7Sbr
+ r041JAVwSG6ogmI5J9oGp0UBJyf8ZhkNsrFGA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722266775; x=1722871575;
+ d=1e100.net; s=20230601; t=1722266781; x=1722871581;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vKXknqlF5G6HJuCxNKbHJfyREua5GEDvMl6Sa8TRaVI=;
- b=ZaClGmKeAZnIRFGgGi9zUBXyE97rx/GOjIjjf0dhRAVqdrhyTWJc/5pRbuTNsy81yy
- FXqfq4hB7wi79we+UGdEeMQJVkKBePQR+uM7n9VQ4oh71hhGoLWvXQ5eLsaRq8Gr14oO
- gXVg6I7AaKZCoVnK5loaQmGX/m4uJLALRawuIVlXt6eYRyoX901bJTU2mYi2BA+AI3m5
- jco+zBLayYNmc3Gdeh1Hko0uRXs3/Gz4xa4K6JcmPtdyCvEWEt1Y/s/KxR7ZP+tujnAy
- VGBI+iG6qlICxnHGfXCcySYOdPnXEUjjqCd9HeFmcIny3K8Vd1R5fgqaYuEiEpPu12Fv
- fugw==
-X-Gm-Message-State: AOJu0YxrR//4NZDW5m8CKLBl6TOVuop43JoflGg2UO3HqXIjRPzsucaB
- dh6cdONnClsil6hjr9nCtRwtgy/zA9QtQRlYmANWBUq7U6LxAQ7ZoFLD8Ja2nNxU3BeH49B3LiG
- eh61c4cCrd5C2SE+RS0hHzt219WkSRa1luC13
-X-Google-Smtp-Source: AGHT+IF3U6axqaEjvwtjHTSZjNcs4giGUn8KRjUOkoI+opm9b4PNeQJY1cLsuvm13g3K4WGSS1ZxNLctI5+2gVzN5Cw=
-X-Received: by 2002:a05:6214:40c:b0:6b9:5fb9:113f with SMTP id
- 6a1803df08f44-6bb55a7a9admr116037296d6.27.1722266775075; Mon, 29 Jul 2024
- 08:26:15 -0700 (PDT)
+ bh=Mr4a6Kbp6mB5Ky7DOvLDPvO56g+v1hyYITKISBlmgSQ=;
+ b=vOBRR1IbCMWrG1yPzMuxf+qC+FJZjMGIfrGIw2M8C8x/xwUPubbjpFzeHWo4QnwIIW
+ fWlrxjoxl/cCNyfW+s9h80csv5tznSuSpcrW+QqP58JoYYaR9xS6vq2hxn/FNlyPrcQA
+ 0b4GyFVqeVp5K1Pi1y/Tzv963m0ib33BcjB9q/cUg9j2ySrfplkdj/76m1nNyPLba8m2
+ A89JOq7rlLgWFi2tPMmK2fBOydFLQIpxHAJNM1/BIiyn5wUxoBTbPxnElX2WlkjokQHq
+ iWcWEJtvIdWuRK5s5VZEknBi7V/NVRvKXTCAY85RHfcSIvqw63NVNBPdkGWjxilawles
+ 5B7Q==
+X-Gm-Message-State: AOJu0YwW7iSPfrGQYuiXNO5k92uAVxVa4MMRojW33P5ICD9Q0x/mRMgA
+ kxF16z40y7zkOi1jJ4AIfHItcGTeRmS7lcKNstfftDhV4Mh1vKoLFRR8FHSBMkggBZJI53t2LGo
+ CTZcEgGA08sQX5YZU+p5+DfeNZ9ijE6ZYpX/9
+X-Google-Smtp-Source: AGHT+IHBosUd4FDMevnBb+OAm+/eN0l7R9qWplS501bepaHp8TNj9CEQb8fav6iSxKojsFgqES3OJDjrkiTK8YOBMkw=
+X-Received: by 2002:a05:6214:226e:b0:6b5:485:ea30 with SMTP id
+ 6a1803df08f44-6bb559baa81mr99309306d6.3.1722266781502; Mon, 29 Jul 2024
+ 08:26:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-12-sughosh.ganu@linaro.org>
- <CAFLszTi+zHHQErpBx+_6g5OP7xX1soWAUDLLzvtv1O7SSO-P+w@mail.gmail.com>
- <CADg8p95ZWorCTJ21EcEOAORdeZWDGCvo7MXjFBD6DcWwtA_W8A@mail.gmail.com>
-In-Reply-To: <CADg8p95ZWorCTJ21EcEOAORdeZWDGCvo7MXjFBD6DcWwtA_W8A@mail.gmail.com>
+ <20240724060224.3071065-6-sughosh.ganu@linaro.org>
+ <CAFLszTjCUWWZ1at-NWR17NJu1V3JjksFehy2=QgX2xf98SfXug@mail.gmail.com>
+ <CADg8p95aqMAAHjJwtwkq2JJGEcYLE9thnzR-EdHYD9v0PEd9oQ@mail.gmail.com>
+In-Reply-To: <CADg8p95aqMAAHjJwtwkq2JJGEcYLE9thnzR-EdHYD9v0PEd9oQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 29 Jul 2024 09:26:04 -0600
-Message-ID: <CAFLszTjLkEPVSxSN6gb98khL-Nks3S3Eji4P6CGaEDVhdxpDVA@mail.gmail.com>
-Subject: Re: [PATCH 11/40] lmb: make LMB memory map persistent and global
+Date: Mon, 29 Jul 2024 09:26:11 -0600
+Message-ID: <CAFLszTg5T9a4-HVfucA--9aj8hH1x3DXqv+kaft-ZgX460yKCA@mail.gmail.com>
+Subject: Re: [PATCH 05/40] spl: alloc: call full alloc functions if malloc
+ pool is available
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
@@ -94,7 +95,9 @@ X-Virus-Status: Clean
 
 Hi Sughosh,
 
-On Mon, 29 Jul 2024 at 01:50, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Mon, 29 Jul 2024 at 01:46, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+>
+> hi Simon,
 >
 > On Fri, 26 Jul 2024 at 05:02, Simon Glass <sjg@chromium.org> wrote:
 > >
@@ -102,74 +105,38 @@ On Mon, 29 Jul 2024 at 01:50, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > >
 > > On Wed, 24 Jul 2024 at 00:03, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > > >
-> > > The current LMB API's for allocating and reserving memory use a
-> > > per-caller based memory view. Memory allocated by a caller can then be
-> > > overwritten by another caller. Make these allocations and reservations
-> > > persistent using the alloced list data structure.
-> > >
-> > > Two alloced lists are declared -- one for the available(free) memory,
-> > > and one for the used memory. Once full, the list can then be extended
-> > > at runtime.
+> > > If the malloc simple functionality is enabled in SPL, it is not
+> > > possible to call the full-implementation alloc functions even after
+> > > the heap is set-up in ram memory. Check for this condition and
+> > > call the functions when enabled.
+> >
+> > Is this because you want to use lmb in SPL. Is that needed?
+>
+> Yes, there was a discussion on this, and Tom [1], and you also [2] had
+> mentioned on the earlier series that we do need lmb in SPL. You had
+> mentioned that this would subsequently be needed for VPL too.
+
+OK, well at least this way we can make sure it is disabled if not
+needed. We can worry about how to pass information through the phases,
+later.
+
+
+>
+> -sughosh
+>
+> [1] - https://lists.denx.de/pipermail/u-boot/2024-July/558250.html
+> [2] - https://lists.denx.de/pipermail/u-boot/2024-July/558644.html
+>
+> >
+> > BTW I'll send a patch to allow alist to run without realloc().
+> >
 > > >
 > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > > > ---
-> > > Changes since rfc:
-> > > * Squash patches 9 - 11, 13  from the rfc v2 series into a single
-> > >   patch to make it bisectable.
+> > > Changes since rfc: New patch
 > > >
-> > >  arch/arc/lib/cache.c                 |   4 +-
-> > >  arch/arm/lib/stack.c                 |   4 +-
-> > >  arch/arm/mach-apple/board.c          |  17 +-
-> > >  arch/arm/mach-snapdragon/board.c     |  17 +-
-> > >  arch/arm/mach-stm32mp/dram_init.c    |   8 +-
-> > >  arch/arm/mach-stm32mp/stm32mp1/cpu.c |   6 +-
-> > >  arch/m68k/lib/bootm.c                |   7 +-
-> > >  arch/microblaze/lib/bootm.c          |   4 +-
-> > >  arch/mips/lib/bootm.c                |  11 +-
-> > >  arch/nios2/lib/bootm.c               |   4 +-
-> > >  arch/powerpc/cpu/mpc85xx/mp.c        |   4 +-
-> > >  arch/powerpc/include/asm/mp.h        |   4 +-
-> > >  arch/powerpc/lib/bootm.c             |  14 +-
-> > >  arch/riscv/lib/bootm.c               |   4 +-
-> > >  arch/sh/lib/bootm.c                  |   4 +-
-> > >  arch/x86/lib/bootm.c                 |   4 +-
-> > >  arch/xtensa/lib/bootm.c              |   4 +-
-> > >  board/xilinx/common/board.c          |   8 +-
-> > >  boot/bootm.c                         |  26 +-
-> > >  boot/bootm_os.c                      |   5 +-
-> > >  boot/image-board.c                   |  34 +--
-> > >  boot/image-fdt.c                     |  36 ++-
-> > >  cmd/bdinfo.c                         |   6 +-
-> > >  cmd/booti.c                          |   2 +-
-> > >  cmd/bootz.c                          |   2 +-
-> > >  cmd/elf.c                            |   2 +-
-> > >  cmd/load.c                           |   7 +-
-> > >  drivers/iommu/apple_dart.c           |   8 +-
-> > >  drivers/iommu/sandbox_iommu.c        |  16 +-
-> > >  fs/fs.c                              |   7 +-
-> > >  include/image.h                      |  28 +-
-> > >  include/lmb.h                        | 114 +++-----
-> > >  lib/efi_loader/efi_dt_fixup.c        |   2 +-
-> > >  lib/efi_loader/efi_helper.c          |   2 +-
-> > >  lib/lmb.c                            | 395 +++++++++++++++------------
-> > >  net/tftp.c                           |   5 +-
-> > >  net/wget.c                           |   5 +-
-> > >  test/cmd/bdinfo.c                    |   2 +-
-> > >  test/lib/lmb.c                       | 205 ++++++--------
-> > >  39 files changed, 477 insertions(+), 560 deletions(-)
-> >
-> > I might have missed it, but I didn't see a response to my comment on
-> > the previous patch. I think we should have the lmb state in a struct
-> > so that sandbox tests can reset it as needed.
->
-> Based on your comment [1], my understanding was that you were okay
-> with not introducing a struct for this. I believe Tom too was not very
-> keen on including the lmb struct into gd.
-
-It should be in a struct, so that its state is all in one place...for
-testing if nothing else.
-
-Re gd, it doesn't need to be in there, if there is only one.
+> > >  common/malloc_simple.c | 13 +++++++++++++
+> > >  1 file changed, 13 insertions(+)
 
 Regards,
 Simon
