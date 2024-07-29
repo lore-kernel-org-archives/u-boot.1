@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C535FC3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 08:42:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A786FC3DA61
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 08:45:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3069B87F51;
-	Mon, 29 Jul 2024 10:42:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 04D29887D3;
+	Mon, 29 Jul 2024 10:45:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k+jhuPg6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="n7DNEPLB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBA5B87F51; Mon, 29 Jul 2024 10:42:25 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 42365887CD; Mon, 29 Jul 2024 10:45:31 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEA3A87A55
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 10:42:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 228C687A55
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 10:45:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a7d638a1f27so50691166b.2
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 01:42:23 -0700 (PDT)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5a2ffc34722so6884244a12.0
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 01:45:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722242543; x=1722847343; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1722242727; x=1722847527; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NyEL7cFHttAygYwEDCMF4Kxy9vK35zJ2/+PJN4wiA2I=;
- b=k+jhuPg6/+bjN2mpNGPaESLxORruxD26x4hdbxEzGHFUZ1Ds5MiE5Cz5nG0PWDRU9j
- YOFMSMRXXstiUBY2rWleLYsM5qIgTzWZgVM3s3a0YVbmCNPoWFKPLCRBEoJi1SkDkPll
- LLGvidPOec4+2SP6uY7pkAGrZHPoaPIcF9vZCQ2UTAdVZGtLKkTqNbcJj4zzao/azoeZ
- deSvp1eVExuDrsoNbfqNq/HeDexnbBuc5VB7+XIk7CnFb7SgaJhxE7rlqMfjEY7lhvwa
- GgDjyxN41x4MNMPXQk7D70HmUnxVweYa7Nh2LPZW1shx4gLV4koiKQKgefebYP/zEyGh
- 6fIw==
+ bh=oYb0NN0YZkMTzaP1Bph1yiS/fXySkzJteRhAcHQTN0s=;
+ b=n7DNEPLB54SACkQT1PpMYmQ5xlkDUnqI7Ihc+3/UdSrz030OguiI6vE4hQv7HWJeDW
+ Ybih2/ca425acJlO54nh8lIXmBob0ST2alvt3/w4EQz4O6pNnwg53I6Fsb9XGdbYWN3H
+ Y4F66bGiotio7eYE9cbACuH7Owcn9QC2PBmUXJpGgG2mOJlICBFG1hLRFB6kRLuJNxYC
+ /62F6GhlpaKp6H6WdDv5BWTIq49+tQyUj7iVvJe2Tn0YZE0FsX6HYasa+a6okD3qit3z
+ lqDhWJDLndf6veLSE8d13fr4mmzWTbglQXCOAryugndLQ/11F8F1cqS7C5093WwqgPzr
+ 3sdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722242543; x=1722847343;
+ d=1e100.net; s=20230601; t=1722242727; x=1722847527;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=NyEL7cFHttAygYwEDCMF4Kxy9vK35zJ2/+PJN4wiA2I=;
- b=PnVkNJB4MfVm2ZmtBGj4nl+PX9sOlz3NG1tta+0Krs0dbJtIm6YPCXW5oQVuKwV9gF
- ilAwQXoBV4TS0JgpJ/GhxKkaz8OzMwttvwLC3yrwp2+IMyjeUtpDiXXuh5jLbrHZIRkN
- QuG5p6BOHqv7Ylq0u5KfIxECsePvNmmHLqC0wz5n8DIMDqSriV6c2PLV40OSJdMR8PM3
- sm9jKNWd0/bze9rzYVqc4rp1nFBJDdl9M3klDPNZ/vDqbxHUpspUAh9zTGUMxrVzbyZh
- OYBSwBkcTOXesyG4+k93XhQoQD1J75DDRf5RS7t/d/5orSnvb+3s7FyG4tTzwY3QkYtP
- xpew==
-X-Gm-Message-State: AOJu0YxshwgcBhuNswW6aHd0wv/8CmLbIwhCesWj9zbcBaVx5S7TGpeZ
- Zpuc8hvGp/rbp3KzpPFzk8WBO4lm8cZQ5Mdxrgoa3krjmxWB/OWgSB9214T5iZfntsQI0yhLH8F
- lK9JPJOCUCKSsrLYSA1sVqkISPjLnV0dkSC4koA==
-X-Google-Smtp-Source: AGHT+IFNT4T1UDmRhW3llTwE+k/4APz8SDVnT9N2tPGu5CWyxJpz6aOpPii1yGosF1nEf3RNFpr7rdonZ0kRgmLZV+g=
-X-Received: by 2002:a05:6402:278e:b0:5a2:6142:24c1 with SMTP id
- 4fb4d7f45d1cf-5b021286d7cmr7479644a12.5.1722242543295; Mon, 29 Jul 2024
- 01:42:23 -0700 (PDT)
+ bh=oYb0NN0YZkMTzaP1Bph1yiS/fXySkzJteRhAcHQTN0s=;
+ b=PvmQjt9801TdDnW38/nZu3ZC6NSNPuCfnL8eJaJx92oQ8vspWZ3VcB826JguvzwymY
+ uQNY6UpJkc8cjMn2bW2/u/5Vn2/eMmM33FMjSNIxHOcCZ32TN97j7oTkH+NqSNHWDopm
+ PFvrWiQnEQvghV4r1GIBM3RCfiFu2MyC9xDCwO8nzwKNrbNzKmWyi0lyDYuVAL5QRHUg
+ 7jwWu5BRSqMiKuBiOvPaa+qQFqdTSbLpwcc+PEObQOO0pSw2qDL5jU7tzj4iUZ01wPuh
+ IwAF6fDF8WVSt1b6FWqmVOUGMj7Kxwv0i484oVAHv0ApoySerQA3g5+B+EOP+greIBMh
+ IZxQ==
+X-Gm-Message-State: AOJu0YzhTD8AgUM7mZ+FGeEKf8RPvJs+S0uIwbS2tmOazMvsVnZilN81
+ m+liHJEZhIufSFh7KRFoKZWC0VjmOTgjZLhevEOp7iHO7kcjTGLKA+sdtSMaG7N15eT84IOxfuf
+ PSJFdGVnFTvufkhoz4NQVmS6oc0/38b5apvJY8A==
+X-Google-Smtp-Source: AGHT+IHEqKLF8hioy422QT9FqQf0yRtkRlpkTUkc1Go9gEm0YctCMrPC6VbP6D9Fa/PQCbhIjO+01VPYrYKQBlFojmU=
+X-Received: by 2002:a50:bb49:0:b0:585:5697:b882 with SMTP id
+ 4fb4d7f45d1cf-5b016cdb714mr6975054a12.3.1722242727530; Mon, 29 Jul 2024
+ 01:45:27 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-25-sughosh.ganu@linaro.org>
- <CAFLszTj-+LgVc7ychfuiQXB27WRVzAuqUCV6wQvBLgk0_PzwKg@mail.gmail.com>
-In-Reply-To: <CAFLszTj-+LgVc7ychfuiQXB27WRVzAuqUCV6wQvBLgk0_PzwKg@mail.gmail.com>
+ <20240724060224.3071065-26-sughosh.ganu@linaro.org>
+ <CAFLszTg+5teQs4m++hX2wEDh1O7wTjPSK-2ogceFv1R=N_dz-A@mail.gmail.com>
+In-Reply-To: <CAFLszTg+5teQs4m++hX2wEDh1O7wTjPSK-2ogceFv1R=N_dz-A@mail.gmail.com>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 29 Jul 2024 14:12:11 +0530
-Message-ID: <CADg8p97_eYrwfuENcOA6m7DShtENbTVaWJQDy73vkqusAfTztg@mail.gmail.com>
-Subject: Re: [PATCH 24/40] lmb: add a common implementation of
- arch_lmb_reserve()
+Date: Mon, 29 Jul 2024 14:15:16 +0530
+Message-ID: <CADg8p97svCoSq+2dz6tUYBGssn=-BNLQGGxgco_kUPzcf2Xa4Q@mail.gmail.com>
+Subject: Re: [PATCH 25/40] sandbox: move the TCG event log to the start of ram
+ memory
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
@@ -102,40 +102,53 @@ On Fri, 26 Jul 2024 at 05:02, Simon Glass <sjg@chromium.org> wrote:
 >
 > On Wed, 24 Jul 2024 at 00:04, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > >
-> > Almost all of the current definitions of arch_lmb_reserve() are doing
-> > the same thing. The only exception in a couple of cases is the
-> > alignment parameter requirement. Have a generic weak implementation of
-> > this function, keeping the highest value of alignment that is being
-> > used(16K).
-> >
-> > Also, instead of using the current value of stack pointer for starting
-> > the reserved region, have a fixed value, considering the stack size
-> > config value.
+> > The TCG event log buffer is being set at the end of ram memory. This
+> > region of memory is to be reserved as LMB_NOMAP memory in the LMB
+> > memory map. The current location of this buffer overlaps with the
+> > memory region reserved for the U-Boot image, which is at the top of
+> > the usable memory. This worked earlier as the LMB memory map was not
+> > global but caller specific, but fails now because of the overlap. Move
+> > the TCG event log buffer to the start of the ram memory region
+> > instead.
 > >
 > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > > ---
-> > Changes since rfc: None
+> > Changes since rfc: New patch
 > >
-> >  arch/arc/lib/cache.c        | 14 --------------
-> >  arch/arm/lib/stack.c        | 14 --------------
-> >  arch/m68k/lib/bootm.c       | 17 -----------------
-> >  arch/microblaze/lib/bootm.c | 14 --------------
-> >  arch/mips/lib/bootm.c       | 15 ---------------
-> >  arch/nios2/lib/bootm.c      | 13 -------------
-> >  arch/powerpc/lib/bootm.c    | 13 +++----------
-> >  arch/riscv/lib/bootm.c      | 13 -------------
-> >  arch/sh/lib/bootm.c         | 13 -------------
-> >  arch/x86/lib/bootm.c        | 18 ------------------
-> >  arch/xtensa/lib/bootm.c     | 13 -------------
-> >  lib/lmb.c                   |  6 +++++-
-> >  12 files changed, 8 insertions(+), 155 deletions(-)
+> >  arch/sandbox/dts/test.dts | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+> > index 5fb5eac862..1e1e9eaeb5 100644
+> > --- a/arch/sandbox/dts/test.dts
+> > +++ b/arch/sandbox/dts/test.dts
+> > @@ -78,7 +78,7 @@
+> >
+> >                 event_log: tcg_event_log {
+> >                         no-map;
+> > -                       reg = <(CFG_SYS_SDRAM_SIZE - 0x2000) 0x2000>;
+> > +                       reg = <(CFG_SYS_SDRAM_BASE + 0x1000) 0x2000>;
+> >                 };
+> >         };
+> >
+> > --
+> > 2.34.1
+> >
 >
-> How about not having a weak function? I have to wonder whether powerpc
-> really needs to be different? If it does, I suppose we could use an
-> event to deal with powerpc.
+> It looks like this will conflict.
 
-Again, I have the same question about weak functions. It does not seem
-to be a universal policy.
+Can you please elaborate a bit here. I am not saying that I am not
+open to a different solution, but I did not get any CI errors with
+this change.
+
+>
+> Please check and update the memory map at the end of
+> doc/arch/sandbox/sandbox.rst
+>
+> Separate from this patch, I really think the TCG event log should go
+> in a bloblist. I can have a crack at that if you like.
+
+That can be taken up as a separate activity.
 
 -sughosh
 
