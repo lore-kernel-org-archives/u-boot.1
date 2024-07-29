@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1D8EC3DA7F
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 16:23:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD03DC3DA4A
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 16:23:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A362488934;
-	Mon, 29 Jul 2024 18:19:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 138428894E;
+	Mon, 29 Jul 2024 18:19:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RnCBnRPp";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kwMzZZQ7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80AAF888D4; Mon, 29 Jul 2024 18:19:48 +0200 (CEST)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id 98DAE88867; Mon, 29 Jul 2024 18:19:48 +0200 (CEST)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77C9288867
+ by phobos.denx.de (Postfix) with ESMTPS id 8EA09888B2
  for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 18:19:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-7a1e1237e9aso216463085a.3
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6b796667348so27543956d6.0
  for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 09:19:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1722269985; x=1722874785; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gHQzg8SXXDJnEuSV1she6fiejiJTho2QxWW5iVYeawQ=;
- b=RnCBnRPpr7wS8uPY/83NCNE0NeqIboVYp745UeihBKkU8zb+cC2oOW6eZiYYdvaTd1
- U4PV3ihm0rqv/WV6TNT24/te1D5jqiSW1bSHh+hwppAIZ7WVcu6dox0+cwbnaFH0rCe6
- Rv2l/lJRMqfyBE8vGMEYKV7uXc6z1KpSEt7WA=
+ bh=M+GRCuFWsoCbY3M7GUBrBlzVywNkUoe0ulaQhJszl7A=;
+ b=kwMzZZQ7z5FHr3pZeklHTo1t+Vm5onXg7OAVi2IUBtXahshZfjS9Gb48POt0ORt2WE
+ 6Nct+dMUm3g83jl3EMTuMCbVM3cLN4ipQCTenlCQykK1yy52rrphGcDfKpJXuDoMsr5b
+ VuSNHMpaCljlwlx0ypZUr14AndPl+i1TWObHc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1722269985; x=1722874785;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=gHQzg8SXXDJnEuSV1she6fiejiJTho2QxWW5iVYeawQ=;
- b=RMQSlI2PYROUxs/SX4YyhdFgNprK5npOiy6e05/i99dBYxGeGCcAGGxSb3nxR/0mi7
- p88gOY33BdCaCcrH9SDcAan8hKV8hVZOyUocgoDxYqCR6sQEVYmlh4kV1Jp0gql2T6/V
- 0Xy8bS5TxHOZsjRzLbwWXZSN/nDIgn9MfK3WDFGkmxrjLewumRm1rzkQGr6AdEMqhMZJ
- HZx0CeA+p3ePypZu64Fvh4cBIBk27aXOZ/xICMmvGFQP8K4f21KhPpt0zpL4Y219xNCA
- rL0KIFUsN1f7/7OT3WcGdvUPq8VEfLnShMwIu7/wGpC76QTnBIDMKxPlsHeIJh2Unsfi
- ol4w==
+ bh=M+GRCuFWsoCbY3M7GUBrBlzVywNkUoe0ulaQhJszl7A=;
+ b=pH6MUBynnIeqP7TjMIddKPIYWsJjPQVp0VnrZHRwMZ3g2U3hHMhARAhpR7SATPfw2i
+ CtIlpH6lQMoE1qaXCmMemVVNLgTfKUbrht0RwQyvxeIFAZ/2XyRosmXtX/5cSaV8vK1t
+ hiLlNP9SUD6yhPIZw3UVXnq1AdObtI6+/TnHZ7m06xNIk3y7vyByUpr9oFkZeLJggeFC
+ 4uuh2rz3qnVk0aieDgZ7GzjWqWCxfPY7AbMiyTazwzxWJd1xP1nDMoYbbISZeOoJ32PZ
+ 6hOg6MX55Pa6kPA3WA9MS1YbGfWGcT+Qq1F4DBx1k4iqK9yZN32gR7y6LKtZPLULoRzW
+ Fyzw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVQr8QJH80YQxKA9Dp8yvG8JmtBCIAhpQMEv2uk1rL3SV+Mu7stU0O3p4NKogxdfO4CGBnpZxJs3dGS+UCtKff66xbg1w==
-X-Gm-Message-State: AOJu0YwA3bW1lGbeDrmI45Pbi7LGBcntA6yt08xVW9fIdRuA6xVWsiAI
- 3ss/9gV9fWIwvbVn+njW3qoq1FtYdJay5RU3gQZUtm58A0AGtLbPX/r7N1FKUSPGUa8AgilSEh0
- oQayKdraRu2FSg0YuhurmIg/V73cAG6nnCdy2
-X-Google-Smtp-Source: AGHT+IG9Q4nsGwMQk79c9fWzEDJtGmFTPi3M4ot2E/Vmm2Oy40vki1SKHxJrRYjwgcecBS0cGNApr9iwE8dnYtTavvY=
-X-Received: by 2002:a05:6214:234b:b0:6b5:9146:6251 with SMTP id
- 6a1803df08f44-6bb5599c26fmr99107456d6.12.1722269985415; Mon, 29 Jul 2024
+ AJvYcCWVZwpCrfIHuqzYIFUXClUlNtXE6OWbAQrRHE4lSaJjOvC1cJVgysZxlBUCpmM7TRK0algycV+zX/pY9J4laUZuny/+EA==
+X-Gm-Message-State: AOJu0Yy7mq1rXIvu7SwsdFhEhh8L+63PPjM39bbwz/VnI0Dbjbfrf6s2
+ 548lUE1nfOYmoXr+QyC8B1RJJ5ipPvcrBu1pcwVVCzh+8qpIaveci4oaZpE17zUPacasF2yQ0Pc
+ 0YeBInX+7sGtAxINWFs4Ew9vD5AfX99XdZ85Fc0+PZUKSD0s=
+X-Google-Smtp-Source: AGHT+IEU+NNR8FGFv1Gc0wNCsKldLbiqFTYZHPqsVjsbrEFhcmwK5FPtABbFjemNnjUfdVYBn8jH55LyK5yUoXSNjyE=
+X-Received: by 2002:a05:6214:5009:b0:6b5:25b6:dd04 with SMTP id
+ 6a1803df08f44-6bb562e30c1mr210425056d6.1.1722269985417; Mon, 29 Jul 2024
  09:19:45 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 29 Jul 2024 09:19:45 -0700
+ HTTPREST; Mon, 29 Jul 2024 09:19:44 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240718091125.3788990-26-sjg@chromium.org>
-References: <20240718091125.3788990-26-sjg@chromium.org>
+In-Reply-To: <20240718091125.3788990-27-sjg@chromium.org>
+References: <20240718091125.3788990-27-sjg@chromium.org>
  <20240718091125.3788990-1-sjg@chromium.org>
-Date: Mon, 29 Jul 2024 09:19:45 -0700
-X-Google-Sender-Auth: UB5cGgRcsftLMGq8-S_5vzO1u2U
-Message-ID: <CAFLszTiKAzLAG8pmez-Mrs=A4Eiei3kLEv-xpiRP64e+PM+QMA@mail.gmail.com>
-Subject: Re: [PATCH v2 25/26] qconfig: Sort the boards by name when finding
+Date: Mon, 29 Jul 2024 09:19:44 -0700
+X-Google-Sender-Auth: sOQ3L2cZKrpzydKzT0nUpSj5DMc
+Message-ID: <CAFLszThtbcO1jrP-CEQk_Em0gNgxt82pqXMnNp074RnxSQRiFw@mail.gmail.com>
+Subject: Re: [PATCH v2 26/26] qconfig: Support a 'list' format
 To: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
@@ -87,17 +87,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is no particular ordering of the board list at present, since it
-is generated by a multi-threaded process. Sort them by name to make it
-easier to see if a particular board is present.
+Add a flag to output the found list in a more user-friendly format, with
+one board per line. Omit the board count.
+
+This can be useful with grep, for example.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v2:
-- Add a new patch to sort the boards by name when finding
+- Add new patch to support a 'list' format
 
- tools/qconfig.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tools/qconfig.py | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
 
 Applied to u-boot-dm, thanks!
