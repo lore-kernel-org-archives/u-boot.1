@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0724C3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 15:28:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3FA4C3DA61
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 15:28:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 237EA8883F;
-	Mon, 29 Jul 2024 17:28:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8447A88859;
+	Mon, 29 Jul 2024 17:28:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="daq6Pvue";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jN/rXVnI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3ED188850; Mon, 29 Jul 2024 17:28:16 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id 831438885E; Mon, 29 Jul 2024 17:28:24 +0200 (CEST)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0690F88860
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 17:28:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6856288852
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 17:28:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6b7af49e815so21742026d6.0
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 08:28:12 -0700 (PDT)
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6b79c969329so17013186d6.0
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 08:28:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722266892; x=1722871692; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722266901; x=1722871701; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=R2DWNapPFHqXVlDg4GeW/zJjGfHyTnFsozz90oHXY2A=;
- b=daq6PvueDAbVLl1++bMkMtaLT4HYmII+LC5y5HKehXFgOLytERBWISRzhi0LfrxtSD
- Gabwtd/pd+F8qhFMI+HhYrNWLsUynESCTsRXQrMqLbCqTdmFNcZyUAiadujfdltKHiEZ
- VGQzDBMoe/3pvrseKHdkGGyJomLX+ZlElYW6o=
+ bh=eWTRTWJ00oCoewk69efDRbZgYjXy6xdpaDOqR5hJay0=;
+ b=jN/rXVnI9abZrEdZDPURc6FQpo87JEipXNDBXXZX1QcdfEQrk6ILXcE2ThId0izs61
+ zn5eRxKUdVwWsc9Vtlx279n1qWkVnsESSmvFpT1mTXjnuK+UbidyFNXCjAhFf+DEX3iN
+ UXEojtv+RIS9B8ZOzgAjsrzwvcEfGsfWiLHn8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722266892; x=1722871692;
+ d=1e100.net; s=20230601; t=1722266901; x=1722871701;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=R2DWNapPFHqXVlDg4GeW/zJjGfHyTnFsozz90oHXY2A=;
- b=OdXFcTCXEJZTE+K17j59DyT+W6BHBIHKXeFXdvPGubJWD6sk44meBoI8j76n+QH1T1
- XbO9nKhTn+kFku/VV0WPkCgtPhLHqdZg35B89XW0TjtbAL1jp/Gh365WW25mKWfCFYuw
- 75V6zh8S1N/d8sPlp42CpbC2RWzWaY/fnrLMVKxm8mAK/H7uR2MGBhsGyjSgtPxJGI0P
- xu/6q6l41PTIMBgXn7lP5CksYr9wdVy+83cS1sT6Ah3rbLvicT+CUw1m/yvoCg8LLBzT
- yBEFvCJ92yGNEj1dxyqrLrJ2VzchvX5NgHxzpxqIoRRFwGuSG3CO0vgltGtQ29sxYnDD
- zIgQ==
-X-Gm-Message-State: AOJu0YzuwgFniVdKh6N5ZtvrS7hF2NXk79/2GpQCmq1iVGgQHDdmB+iW
- T+QGp12WUzG993d0mpjKKFsImeNZXXgb5Cq5Y6mjEMfjFLEimL0rI7zbOO+qK3xERlPG+dKzVKx
- tXdxwDXG4yFF+z5eibJST5kUxQhPAJb/YvONz
-X-Google-Smtp-Source: AGHT+IGVelVd8QIw1o/YkWbWFUpVE3SJXkQ3UULnaBLj+zLh5NKvNEVqp4yKHaeeek12nEj27y4yFRMBdmn6+S8YHto=
-X-Received: by 2002:a05:6214:212c:b0:6b5:e6b3:72f9 with SMTP id
- 6a1803df08f44-6bb559f8e05mr132404806d6.9.1722266891961; Mon, 29 Jul 2024
- 08:28:11 -0700 (PDT)
+ bh=eWTRTWJ00oCoewk69efDRbZgYjXy6xdpaDOqR5hJay0=;
+ b=ngY77+cf5/Bj5zq6YqsE2nhd+UDggyAHcQdNubHKbZq+Nwb4IbAfv8eLCShyEjRD50
+ G6Y/2EYiREIxPPq/b0A3FS01qa1z89w86ZfILLL4qF/MP0kmmmIjgBS3TWqVd5Xo+oyb
+ 4kdQxurXc6BXkLi+OKCMuDS2AHRNzvXcWT4sfI00bT8+1BXbRDAFOyOTDlrnWWt+VuFq
+ pfyYkMW92WH9DtxIPLZ2tkulITkloCTSgGEw63ygGWjod6VPQ2xnhr9zRNLVMid/C5TZ
+ aIjw9LrqnOtn6d+pCf4wePTpGNDh3w15gyfG3lKmQGar9oVUjaS53NIorw7wN+5958x4
+ gLMg==
+X-Gm-Message-State: AOJu0Yy2KhuEeIuaV72mhfRWS8EL43ZHgchW51N0qC+X4L1BsHRz8Elg
+ k58k+r41bAZ8pX0fcjsR75tTYMJU+CUt/E8yKP1XJsEdB5kvZKsCptuKmjUfnaYn6TTkOxjtNrr
+ d0eE8eGUjXbnsUa86fZYDqe25I/agNDitfzEs
+X-Google-Smtp-Source: AGHT+IHHqXYy6j0XVHJApgxxkEtKiysE10Pv8Mz5igw1R7/n0rLKtlQNkc4VRSPmOlQUl7z2nj8tH9c5zsPZgALRvbM=
+X-Received: by 2002:a05:6214:e83:b0:6b0:7821:4026 with SMTP id
+ 6a1803df08f44-6bb55af157fmr110159866d6.52.1722266901411; Mon, 29 Jul 2024
+ 08:28:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-34-sughosh.ganu@linaro.org>
- <CAFLszTg1nywmyXRJ2Dgsg97Mfbps7P37jDD72dNafo0wHF3RZQ@mail.gmail.com>
- <CADg8p97S84J7wrEchCfP-Y7L8qdC4F=koyuhzV0+jYxiM=YhRg@mail.gmail.com>
-In-Reply-To: <CADg8p97S84J7wrEchCfP-Y7L8qdC4F=koyuhzV0+jYxiM=YhRg@mail.gmail.com>
+ <20240724060224.3071065-37-sughosh.ganu@linaro.org>
+ <CAFLszTjQ011M-C+JNAPkFce2CEA5qofdm2TEtETndcU1k8vF5w@mail.gmail.com>
+ <CADg8p964_oxktCBb2BF81MCpGQVUbPYh-e1yxjjUbBKr=cfOpw@mail.gmail.com>
+In-Reply-To: <CADg8p964_oxktCBb2BF81MCpGQVUbPYh-e1yxjjUbBKr=cfOpw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 29 Jul 2024 09:28:01 -0600
-Message-ID: <CAFLszThRiRLXE2Nz7CM4_tDCM6=6d1v4snsDfYBCnvPnoXVPYg@mail.gmail.com>
-Subject: Re: [PATCH 33/40] test: cedit: use allocated address for reading file
+Date: Mon, 29 Jul 2024 09:28:10 -0600
+Message-ID: <CAFLszTgWYoz=Kd7EqUTU-CQEXYig9biwJ9UACeDOeNdbdkgXUw@mail.gmail.com>
+Subject: Re: [PATCH 36/40] test: lmb: add a separate class of unit tests for
+ lmb
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
@@ -94,38 +95,64 @@ X-Virus-Status: Clean
 
 Hi Sughosh,
 
-On Mon, 29 Jul 2024 at 02:53, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Mon, 29 Jul 2024 at 02:56, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> On Fri, 26 Jul 2024 at 05:02, Simon Glass <sjg@chromium.org> wrote:
+> On Fri, 26 Jul 2024 at 05:03, Simon Glass <sjg@chromium.org> wrote:
 > >
 > > Hi Sughosh,
 > >
 > > On Wed, 24 Jul 2024 at 00:05, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > > >
-> > > Instead of a randomly selected address, use an LMB allocated one for
-> > > reading the file into memory. With the LMB map now being persistent
-> > > and global, the address used for reading the file might be already
-> > > allocated as non-overwritable, resulting in a failure. Get a valid
-> > > address from LMB and then read the file to that address.
+> > > Add the LMB unit tests under a separate class of tests. The LMB tests
+> > > involve changing the LMB's memory map. With the memory map now
+> > > persistent and global, running these tests has a side effect and
+> > > impact any subsequent tests. Run these tests separately so that the
+> > > system can be reset on completion of these tests.
 > > >
+> >
+> > This is just not a good idea...we should fix the tests so they don't
+> > have these side effects.
+>
+> But this test *will* have side-effects -- if we are making the lmb
+> memory maps persistent, testing that code will have an impact. There
+> is no getting around it. Btw, I got this idea based on how the VBE
+> tests are run. This is similar to what is being done for the VBE
+> tests.
+
+You can set up the state before the test and restore it afterwards.
+That is what we do with other tests and it is why you should have the
+lmb state in a struct. See for example state_reset_for_test() which is
+called if the test has a UT_TESTF_DM flag.
+
+You can add a save/restore function (since you don't want a lmb pointer).
+
+The _norun thing is because the tests are written in C but need some
+Python setup. So the setup is done and then the test is run
+immediately afterwards.
+
+>
+> As an aside, what issue do you see with running these tests separately?
+
+They don't run with the 'ut' command so must be done specially. There
+is no Python setup needed. We have DM tests which save and restore all
+sorts of things...so we should do the same with lmb.
+
+
+>
+> -sughosh
+>
+> >
 > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > > > ---
 > > > Changes since rfc: None
 > > >
-> > >  test/boot/cedit.c | 6 +++++-
-> > >  1 file changed, 5 insertions(+), 1 deletion(-)
-> > >
-> >
-> > No, we should not start putting lmb into tests like this.
->
-> The test fails if the address is not allocated through an lmb api.
-> Although I can check why.
+> > >  include/test/suites.h        |  1 +
+> > >  test/Kconfig                 |  9 ++++++
+> > >  test/Makefile                |  1 +
+> > >  test/cmd_ut.c                |  7 +++++
+> > >  test/lib/Makefile            |  1 -
+> > >  test/{lib/lmb.c => lmb_ut.c} | 53 ++++++++++++++++++++++--------------
+> > >  6 files changed, 50 insertions(+), 22 deletions(-)
+> > >  rename test/{lib/lmb.c => lmb_ut.c} (93%)
 
-Neither am I, but you did put the tcg in the same region so perhaps
-that is an issue?
-
-Sandbox is designed so that low memory regions can be used in tests. I
-pointed you to the memory-map docs.
-
-Regards,
-SImon
+- Simon
