@@ -4,73 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2A6AC3DA7E
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 16:23:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6141C3DA61
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 16:45:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10478888EA;
-	Mon, 29 Jul 2024 18:20:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 52230887B9;
+	Mon, 29 Jul 2024 18:45:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=arachsys.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gGxDeCMa";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A1CC88906; Mon, 29 Jul 2024 18:19:50 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09736888C9
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 18:19:47 +0200 (CEST)
+ id BD74E8881F; Mon, 29 Jul 2024 18:45:09 +0200 (CEST)
+Received: from cdw.me.uk (cdw.me.uk [91.203.57.136])
+ by phobos.denx.de (Postfix) with ESMTP id CB0158854A
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 18:45:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6b79c27dd01so20086926d6.3
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 09:19:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722269986; x=1722874786; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2kGp/hanPxgEcVc17aVzs+xLAIczk0ie3xkLmY0x1fc=;
- b=gGxDeCMaKePQFsTAalW1ucxJy9oNxDuS9fYOaZ2a53xh+7loG+sxRzOALTWTZNDRlG
- PeaFHEIhN0MpHBkt8pzntZ1CbHB4dtt5Zi0mK4eD5MdN2mHaMNjam91D0BSLd79/Sfk5
- G8dhsNakLH+NLuWTwG0nd8/OeTJ+mVJej/5N8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722269986; x=1722874786;
- h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2kGp/hanPxgEcVc17aVzs+xLAIczk0ie3xkLmY0x1fc=;
- b=e4RJFxe6382kHWVmB5bqTr4e8cfNBriREcZhNpO4rl4gQOkqTimGEf8ogt65S43lli
- FXPnblc6Fwomnd8bPS1OtN5DQov0UYv6iZXwb+H8GJgB0RbJHACJnEib8VRWddHL07Qj
- cVS2SqwgPS+hLqh2eo56YfJ0RBNglNoH7uhYgChuY949+w8dno5g5J2K4sEs0qisWHRY
- f1lITRXmPg0Z7WLYOW1rbzfpeb/03oB4XnwNu7k5FJPEuichDzvC/0LftnCg4QG9g+dZ
- kA594JdhbGzoPVmIS1D0wn8GPjP1MAsrImrwBbqCEXQB6CJhYGn8pcS/5keAlolO+A3o
- bhkQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXVOqLuhDkmAe2eRaGj1d8EYx4rL1MFyf4Y1xiV83HEkixOa0RJ8Oo/l12qm4lYrthQEeR8+VMbm5BzQwG4eyeoqi3/xw==
-X-Gm-Message-State: AOJu0YxKhdtMCXNRq9Fq8QXtnawQndJ/hJ8EIGYRxAHBekUDE3QdGB7g
- aer35O/BsdMUeaRiBjEhiAlcUz0bMVKnwagJ5V1Jl3Uzs5rEnoD+Do4bP0Y8/yGT2SXn0quvaUm
- BGT/PZ0hk0Nu9WKG8rEu536bmxPawONMdSxn4H01qhbIwxxU=
-X-Google-Smtp-Source: AGHT+IEV5wqleoY9zAmVAfzhyOAN2YOcwYwLRHayxQxnBAJTNqAFsNS7yiWz21xa8y/d5vdX1RcordYhVxv8oxekz7c=
-X-Received: by 2002:a05:6214:1943:b0:6b7:9401:bb7d with SMTP id
- 6a1803df08f44-6bb55ab9ea9mr132768806d6.37.1722269986001; Mon, 29 Jul 2024
- 09:19:46 -0700 (PDT)
-Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 29 Jul 2024 09:19:45 -0700
-MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240718091125.3788990-25-sjg@chromium.org>
-References: <20240718091125.3788990-25-sjg@chromium.org>
- <20240718091125.3788990-1-sjg@chromium.org>
-Date: Mon, 29 Jul 2024 09:19:45 -0700
-X-Google-Sender-Auth: jn1fQZ_XdtVNzCsXC9jgWqaozG0
-Message-ID: <CAFLszTi4L4DW1j3iaEX=KDgAQF=VxN0ttBw5wpY1dc9ZNPmk0Q@mail.gmail.com>
-Subject: Re: [PATCH v2 24/26] qconfig: Allow searching for CONFIG values
+ dmarc=none (p=none dis=none) header.from=arachsys.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=chris@arachsys.com
+Received: from [31.94.64.200] (helo=smtpclient.apple)
+ by delta.arachsys.com with esmtpa (Exim 4.80)
+ (envelope-from <chris@arachsys.com>)
+ id 1sYTUW-0001X5-N3; Mon, 29 Jul 2024 17:44:56 +0100
+Content-Type: text/plain;
+	charset=us-ascii;
+	delsp=yes;
+	format=flowed
+Mime-Version: 1.0 (Mac OS X Mail 14.0 \(3654.120.0.1.15\))
+Subject: Re: [PATCH RFC] gpio: Fix probing of gpio-hogs
+From: Chris Webb <chris@arachsys.com>
+In-Reply-To: <CAFLszTggwpCnhZ0xaPR2n=e+x+PDe-wP4WxnPE60BqyF1ms3UA@mail.gmail.com>
+Date: Mon, 29 Jul 2024 17:45:05 +0100
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marex@denx.de>
+Content-Transfer-Encoding: 7bit
+Message-Id: <43228DC7-4184-4C63-9BBA-65F056ECC91F@arachsys.com>
+References: <0b24ac9c0f40ba2410529ee6e0ffd603c9453cff.1718275638.git.chris@arachsys.com>
+ <CAFLszTiwfVg7o+Rhf10U2exgUA-vJ4V_A-2L75ZLpwJ8sW=9Kw@mail.gmail.com>
+ <CB131E81-078E-43FF-BE67-90D7F48EDB2E@arachsys.com>
+ <CAFLszTggwpCnhZ0xaPR2n=e+x+PDe-wP4WxnPE60BqyF1ms3UA@mail.gmail.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Apple Mail (2.3654.120.0.1.15)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,18 +59,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add basic support for searching for matching of non-matching values.
+Hi Simon,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/20
+Simon Glass <sjg@chromium.org> wrote:
 
----
+> Well, yes, mt7981_pinctrl is wrong since it is not actually binding
+> the GPIO devices until it itself is probed. It should do it when it is
+> bound.
 
-Changes in v2:
-- Drop debugging
+Oh I see! Yes, I can see the mtk_gpiochip_register(dev) in  
+mtk_pinctrl_common_probe() exactly as you say.
 
- doc/develop/qconfig.rst | 14 ++++++++++++++
- tools/qconfig.py        | 15 +++++++++++----
- 2 files changed, 25 insertions(+), 4 deletions(-)
+> Better still, those GPIO devices should be in the devicetree and bound
+> automatically by driver model. But, sigh, I see that there is no
+> compatible string in the gpio subnode of pinctrl@11d00000. It should
+> really have one and avoid all this pointless code and problems.
+>
+> mtk_pinctrl_common_probe() is misnamed, as it actually binds and then  
+> probes.
+>
+> So (unless Linux allows a patch to add a compatible string) it needs a
+> new mtk_pinctrl_common_bind() (called from mtk_pinctrl_mt7981_bind())
+> which calls mtk_gpiochip_register(). Then you won't need to add your
+> dev_or_flags() into mtk_pinctrl_mt7981_bind().
 
-Applied to u-boot-dm, thanks!
+Yes, that makes complete sense. Many thanks! I'm very happy to write that  
+patch and grab back the physical hardware to double-check on if you like?  
+(Or equally happy to leave it if you'd prefer to fix yourself?)
+
+Presumably it needs to apply to every mtk soc that uses  
+mtk_pinctrl_common_probe() as they'll all be affected by this problem.
+
+Best wishes,
+
+Chris.
