@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BB37C3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 16:20:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C85EBC3DA4A
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 16:20:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C136B88847;
-	Mon, 29 Jul 2024 18:19:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2E6E688863;
+	Mon, 29 Jul 2024 18:19:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UJIY1EqB";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bwx8iah/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 725CE8882D; Mon, 29 Jul 2024 18:19:25 +0200 (CEST)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id B30B788896; Mon, 29 Jul 2024 18:19:27 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E22288872
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 18:19:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAA8E88842
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 18:19:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6b7a0ef0e75so20373176d6.1
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 09:19:21 -0700 (PDT)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6b7b23793c1so19106736d6.0
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 09:19:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722269960; x=1722874760; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722269964; x=1722874764; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=D61uzWyvRyM070EEhc4gSKZhoyIFnEnBr19G6iO2Gsg=;
- b=UJIY1EqBvMkPzsQFKlM58HZGC88z09bDLmCOrQFZ68k73OsS6Ra5f08eF4MuK54Y1u
- yfhe1ngaZCbGQu6gOuCMBY3hC7bheGUpuJZIaP6dh/mxwNULSjDmuqtASkliWi1AeVIg
- DMk0giNwgOlDpx3vK7+mo4e7x5i0648sGK0Ps=
+ bh=rZInrS6/12tSnEeFLasuPm+GCtFBxv+ey9dfkVm8LcY=;
+ b=bwx8iah/RPbOCxzYLUd24ccE8E9KF9qIRRC3vzQkLR7Yg6AzAK3dMcCTfK5LWZ1weZ
+ 7kQf13G/VPdZq2GWcmmk6u1rmiOSd3rC1KdMl3WkGfY0wGa0elvzYklEn4sRuURidtCr
+ cZQ8+u1t8kndaiAXLRSY89vEvAGu1eD0MmXks=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722269960; x=1722874760;
+ d=1e100.net; s=20230601; t=1722269964; x=1722874764;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=D61uzWyvRyM070EEhc4gSKZhoyIFnEnBr19G6iO2Gsg=;
- b=aK4HK0lEzpU5CWiGHE5Adp/vSK5fQ9gl3XYGQMWKTY/DFn3MSJQ0deRhrgQeygQwk5
- VLKap4ewUcAhYpGxDjWekfec2I2IOjfKqpvl1IRe/8HhK6cHQMjeZ29GmmxDSAclNXXA
- TaDR39iBjWJqd1aD3T8ZlcW7vg7T8oxxC2+jAXbMuYfQkSf4ni7d8mSybf78Grc21fVT
- 2OB3ark/UOOsEHGKeVUUFdIbDfyJlJrm6KoiSrnH/TS5rOAD1Z6btXFLQgIq4NQ4kOFp
- c56C+zGJp7EWi8B5/YrjWCKbwekAA5xt2J1kwAnun0/V7hoxTil49+JO2nr+642GqkIr
- G2UA==
+ bh=rZInrS6/12tSnEeFLasuPm+GCtFBxv+ey9dfkVm8LcY=;
+ b=A4skvlYxJYsW9gPfTun7z9JTQfYnDWnqz/V6ZsnvojvnG7I+Xr8Adr0mhUn11689ei
+ LQr+48KqSQzulzCF4qT8xlzH5l+cIZk5seq43bMrR7/pAwWUMdXQYKOjYuoGrf2Natca
+ NStbXdl7+icQ5pUyAvMXmR2K5NlLiisFy6jy/8/G1Mzk4AaVExjJ6KXJDNismuBVAXBf
+ FkbJtlLOlEzuMW/oDBXATldRq/Y/w9fRCEAZXpb5agaYhMFBIdZiLNYRXj0GAc+D0FIg
+ p7L4r1XPXc5gGLjkchTWf/hj8YsYmF761RGt293T7qOMTqq+hlv816eIQpHSio+4CihX
+ +D7g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVV84abOCg0jQtuw0iIS97HYmQ1EVy5bePRF2vRD4Fg+M2ynlO/EGy8ZEp9KXQFRKzubwuuTU7XCFP2CcufsbvlRus4Ag==
-X-Gm-Message-State: AOJu0Yyd1Hwwwpyk4/0iaY35UfsVBCuTkqgVq9ILhYZUaNFiV+RwBA3k
- IphhxdYfbju1ygssHx2c3N3UL1v1RLNPXK8gjQ7dd9m9xOGCm+LW7mFu7q3XfRCOBy+1VZAjss9
- KjBEyC7hEZxfYkZ41zOFftHUYbz8VfK23piCu
-X-Google-Smtp-Source: AGHT+IGDsOcxvwsXMKymN1W4aMC4voNjxd9eNA1HpffK39hicC5a1VdBt2WjfPqjwnx4cMTwC01sfSoas+ZHmYCTTmc=
-X-Received: by 2002:ad4:5c61:0:b0:6b0:6dba:c947 with SMTP id
- 6a1803df08f44-6bb55a0b2abmr106363446d6.18.1722269960364; Mon, 29 Jul 2024
- 09:19:20 -0700 (PDT)
+ AJvYcCU5Fad1pN3Qzqm/zh94JdiFDDm2FH6FhMlaeZDbc8x9/ig60EKhyjgZq7xaUD5B5TTwdWHDvJ7aiwYAKblMwzZaUZV9Rg==
+X-Gm-Message-State: AOJu0YzSIowDSI3orUqRmz2JG9SwWg62ArZLhhXeMjP/zZjrWKQ5iu2t
+ dH5thwKdRf32AWJwMN0SCiCbS+Ah0r4YktwuPvhdGkqpui+5Amd4jZ8UKOJrXTgqKJn4fp2VVB4
+ 647lCTem2ifj24vESTaWXxC9mu5UiET/I0Wkr
+X-Google-Smtp-Source: AGHT+IEJrleQ+uRPzfBWZtuEdMjLTsUqk4h04ddvoHjwxfTlQLPm7YVxn8mBvp3WkRIVsb1sycg0tIVYxQDLAk0ZwQw=
+X-Received: by 2002:a05:6214:768:b0:6b5:82df:5a2a with SMTP id
+ 6a1803df08f44-6bb559cff26mr99511816d6.15.1722269964569; Mon, 29 Jul 2024
+ 09:19:24 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 29 Jul 2024 09:19:18 -0700
+ HTTPREST; Mon, 29 Jul 2024 09:19:24 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240720104950.2730773-20-sjg@chromium.org>
-References: <20240720104950.2730773-20-sjg@chromium.org>
+In-Reply-To: <20240720104950.2730773-17-sjg@chromium.org>
+References: <20240720104950.2730773-17-sjg@chromium.org>
  <20240720104950.2730773-1-sjg@chromium.org>
-Date: Mon, 29 Jul 2024 09:19:18 -0700
-X-Google-Sender-Auth: RBV4_EGS8z-QjFVmAL-DOQkO-LY
-Message-ID: <CAFLszThvvprsEM-q=bTTrsLp-5Nguz09L1d7bbUcQjdh4s4_SA@mail.gmail.com>
-Subject: Re: [PATCH 19/20] Makefile: Provide VPL devicetree and padding to
- binman
+Date: Mon, 29 Jul 2024 09:19:24 -0700
+X-Google-Sender-Auth: zwAlNuMIRbC5XfOtlmig03FFA-E
+Message-ID: <CAFLszTjZoCDV3zmP9UMjNbdvK+hiYjK53rLW0P6_Xr=2aPkexw@mail.gmail.com>
+Subject: Re: [PATCH 16/20] binman: fit: Allow providing FDT filenames in a
+ directory
 To: Simon Glass <sjg@chromium.org>
-Cc: Andrew Davis <afd@ti.com>, Bryan Brattlof <bb@ti.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jesse Taube <mr.bossman075@gmail.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>, 
- Marek Vasut <marex@denx.de>, Masahiro Yamada <masahiroy@kernel.org>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sumit Garg <sumit.garg@linaro.org>, 
- Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Brandon Maier <brandon.maier@collins.com>, 
+ Christian Taedcke <christian.taedcke@weidmueller.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>, 
+ Lukas Funke <lukas.funke@weidmueller.com>, Marek Vasut <marex@denx.de>, 
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,13 +97,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide these parameters to binman so that it can produce images
-targeted at VPL.
+In some cases the list of available FDT files is not available in an
+entryarg. Provide an option to point to a directory containing them
+instead.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- Makefile | 2 ++
- 1 file changed, 2 insertions(+)
+ tools/binman/entries.rst              |  7 ++++
+ tools/binman/etype/fit.py             | 19 ++++++++-
+ tools/binman/ftest.py                 | 17 ++++++--
+ tools/binman/test/333_fit_fdt_dir.dts | 58 +++++++++++++++++++++++++++
+ 4 files changed, 96 insertions(+), 5 deletions(-)
+ create mode 100644 tools/binman/test/333_fit_fdt_dir.dts
 
 Applied to u-boot-dm, thanks!
