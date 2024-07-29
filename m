@@ -4,81 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE376C3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 07:51:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AB32C3DA4A
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 07:58:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 792BE82BA7;
-	Mon, 29 Jul 2024 09:51:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7702988747;
+	Mon, 29 Jul 2024 09:58:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ddoBt/8I";
+	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="k2UujY4K";
+	dkim=pass (1024-bit key) header.d=kernel-space.org header.i=@kernel-space.org header.b="aK+GFnJf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20518885F5; Mon, 29 Jul 2024 09:51:44 +0200 (CEST)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7587C88056; Mon, 29 Jul 2024 09:58:30 +0200 (CEST)
+Received: from mail.kernel-space.org (unknown [IPv6:2a01:4f8:c2c:5a84::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2734887E6
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 09:51:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B7C82887E3
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 09:58:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=kernel-space.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2eeb1051360so31682241fa.0
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 00:51:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722239501; x=1722844301; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0ECG3F8xnFsgu2skQAzp/1aEmIKByg3v10EABqJfvag=;
- b=ddoBt/8It/Jdy36t173EtaxbAZWleEL382CSwPABm6k0/gfV4ee0C3XviPvtGiBOJ5
- 9AJO5SegEEAXiIuEVGEjARy9vu5x8RKJ3zQvHJ9mX9wcdM4mqVaDv35lcGqP8XMLOpji
- MJyiP2jaP7bzwjx99mIGVDZfO+0glIrCPSJg8NA2QLtSLBO3m7F08B2j7pnHlBGAPuGM
- YEmvXnnhxdpPcP1q2QENm96vJjD1VzTjcJzrqDxbz+qAyOSWa1A/H+piHMJrxv7HuNJ8
- 4bDpnMVDD8bhAX9FFh9lD7gGvfsrGH9UFhXN83Lt6bX+UgO0rqJgrKJNEmyJu4jD4D/2
- Fdaw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722239501; x=1722844301;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0ECG3F8xnFsgu2skQAzp/1aEmIKByg3v10EABqJfvag=;
- b=P8IgQHleuZYFB30W+oOtSFVeRkJJDDcBvR+BItn6GoR6rbUsef0sMcnXx6ZsEkC/QR
- fHn3KKka8+KqS5LVOUnMZQiZjicU11azxz3Supw8oHQcHEF16yLyjCCj4eVEYUptrbtv
- BQqVtC1dKzZHv5hzPk30Yxm6NwlMbatyein+iwVYwIu7k5ELJSJIc7E3dKoIcErMAcc9
- k1LvZSHGbDU1EAgTNKhiPY4KI/m6X9PR/mquDhsANdj3IKKXA0BiJPylBiAjbf+9dYo/
- r1nY7G1UZzR4PGgXDhhogefAtCBKr4/Gi+r5Ys9JB9saRuXJ+/l7ny+Lobm+8E4RH9S6
- RfZA==
-X-Gm-Message-State: AOJu0YzGK4GiMwQQT36t5fO1RkMbaAqd+V6A7RUUeKGn7Nlkq7G5Wy8n
- YNGWIGsy24FsQiLan7JcoATpBJbf/q+QUYqbUeNb5OBp+rY5loI+S6s5owWXAJPI+Qd5mfh32Cu
- eFmr9bABJJpqX7LESCzC6zjCpvUhSCuIJmWNRKg==
-X-Google-Smtp-Source: AGHT+IHx3UvZnKIMQgErlIXNXH2YcAJPLloL8brplBscXlVC6xX+qomLGRXhYFS0GLJL89s7LTfWRRUewQ2305e2zHQ=
-X-Received: by 2002:a2e:2e0c:0:b0:2ef:1b64:5319 with SMTP id
- 38308e7fff4ca-2f12ee04091mr43384301fa.11.1722239501084; Mon, 29 Jul 2024
- 00:51:41 -0700 (PDT)
+ spf=pass smtp.mailfrom=angelo@kernel-space.org
+Received: from kernel-space.org (localhost [127.0.0.1])
+ by kernel-space.org (OpenSMTPD) with ESMTP id 3007e422;
+ Mon, 29 Jul 2024 07:56:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=kernel-space.org; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=s1; bh=KR
+ 90DrRWbFtDjwiXqS0UK3xB5+U=; b=k2UujY4KoEMAmCrPdmfHVm2aUn8sBjWAc7
+ RZmfbY+m1nyNqblGebi2kwcKtMOw2spjDSGQ7oKd+IAxZi1ZbYXtIxKT2hkmQIIs
+ aotKqhJIH/lx6JH/qWBDOHNyPYq5TlzfJKLOyPfbElMvG/r8S4jrVtc8D5FCE8z7
+ ulowvluv4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=kernel-space.org; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; q=dns; s=s1; b=
+ odwO4o0LwkEC73YFlytbP2jfzoIM/w3R6ImrFANw1nDOFMo0SRtQCWFJuHm8PzMy
+ 0ZrFH7B1FkN1T4trXT4G8hnAF7yrG93+/qST3nlHOH3LbW3b8K81uLPGxrNs/WXC
+ zJrv1lPek6RYjdDXFh86O3KtABOKxDb80PwXNwOik8Y=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
+ s=s1; t=1722239773;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=B5W9TUvhpYSTnK25Z+SB5KjcFPVTjME8CQte2E2Lc60=;
+ b=aK+GFnJfIvTjR5LT6pQN3Bm7YNUsJhdBn3u7XRt+R6plzmg9XCssSxecL6TjVvvtv8xK6u
+ qbfQEUHdL7h2Y1C19Wjbh2qR1sdCDAIVOJLV/gVw/N84mtfCiH/DbDKKt+F9Cnssph3Elb
+ TZvjVuovifA8CD1/Kx5Bfxi7UspgQ4s=
+Received: from [192.168.0.2] (host-87-5-224-154.retail.telecomitalia.it
+ [87.5.224.154])
+ by kernel-space.org (OpenSMTPD) with ESMTPSA id 5860d940
+ (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
+ Mon, 29 Jul 2024 07:56:13 +0000 (UTC)
+Message-ID: <9b88aef5-be01-43e4-973b-5742256a4ef4@kernel-space.org>
+Date: Mon, 29 Jul 2024 09:57:34 +0200
 MIME-Version: 1.0
-References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-17-sughosh.ganu@linaro.org>
- <CAFLszThWjpz47RRhAbrYqu47NnYs3ZtXWe-hE5ABw9dokyQ46g@mail.gmail.com>
-In-Reply-To: <CAFLszThWjpz47RRhAbrYqu47NnYs3ZtXWe-hE5ABw9dokyQ46g@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 29 Jul 2024 13:21:29 +0530
-Message-ID: <CADg8p941n8H0LD3p9WYs9wSAqC2co5fc68CHK_LMRx6pZn3JKw@mail.gmail.com>
-Subject: Re: [PATCH 16/40] lmb: allow lmb module to be used in SPL
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
- Max Filippov <jcmvbkbc@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Acked
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Huan Wang <alison.wang@nxp.com>, Lukasz Majewski <lukma@denx.de>,
+ Mario Six <mario.six@gdsys.cc>, Sean Anderson <seanga2@gmail.com>
+References: <20240724150922.2343249-1-sjg@chromium.org>
+ <20240724150922.2343249-2-sjg@chromium.org>
+Content-Language: en-US
+From: Angelo Dureghello <angelo@kernel-space.org>
+In-Reply-To: <20240724150922.2343249-2-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,42 +90,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 26 Jul 2024 at 05:02, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Sughosh,
->
-> On Wed, 24 Jul 2024 at 00:04, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >
-> > With the introduction of separate config symbols for the SPL phase of
-> > U-Boot, the condition checks need to be tweaked so that platforms that
-> > enable the LMB module in SPL are also able to call the LMB API's. Use
-> > the appropriate condition checks to achieve this.
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> > Changes since rfc:
-> > * Replace conditional compilation of lmb code to an if
-> >   (CONFIG_IS_ENABLED()) in store_block() and tftp_init_load_addr().
-> >
-> >  board/xilinx/common/board.c |  2 +-
-> >  boot/bootm.c                |  4 ++--
-> >  boot/image-board.c          |  2 +-
-> >  fs/fs.c                     |  4 ++--
-> >  lib/Makefile                |  2 +-
-> >  net/tftp.c                  | 40 ++++++++++++++++++-------------------
-> >  net/wget.c                  |  4 ++--
-> >  7 files changed, 29 insertions(+), 29 deletions(-)
->
-> Same question as previous patch...do any platforms need lmb in SPL?
+Acked-by: Angelo Dureghello <angelo@kernel-space.org>
 
-Same answer as my other two emails. This was called for by the maintainers.
-
--sughosh
-
+On 24/07/24 5:08 PM, Simon Glass wrote:
+> Only m68k and powerpc use this field, so move it to the arch-specific
+> info, to reduce the size for other archs.
 >
-> The cover letter says "The LMB module is enabled by default for the
-> main U-Boot image, while it needs to be enabled for SPL." but I don't
-> really understand that.
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
 >
-> Regards,
-> Simon
+>   arch/m68k/cpu/mcf5445x/cpu.c           | 2 +-
+>   arch/m68k/include/asm/global_data.h    | 2 ++
+>   arch/m68k/lib/bdinfo.c                 | 2 +-
+>   arch/powerpc/cpu/mpc83xx/pci.c         | 4 ++--
+>   arch/powerpc/cpu/mpc83xx/speed.c       | 2 +-
+>   arch/powerpc/include/asm/global_data.h | 2 ++
+>   drivers/clk/mpc83xx_clk.c              | 2 +-
+>   include/asm-generic/global_data.h      | 5 -----
+>   8 files changed, 10 insertions(+), 11 deletions(-)
+>
+> diff --git a/arch/m68k/cpu/mcf5445x/cpu.c b/arch/m68k/cpu/mcf5445x/cpu.c
+> index b811ac355e4..3fbd6a58c7d 100644
+> --- a/arch/m68k/cpu/mcf5445x/cpu.c
+> +++ b/arch/m68k/cpu/mcf5445x/cpu.c
+> @@ -92,7 +92,7 @@ int print_cpuinfo(void)
+>   		       strmhz(buf3, gd->arch.flb_clk));
+>   #ifdef CONFIG_PCI
+>   		printf("       PCI CLK %s MHz INP CLK %s MHz VCO CLK %s MHz\n",
+> -		       strmhz(buf1, gd->pci_clk),
+> +		       strmhz(buf1, gd->arch.pci_clk),
+>   		       strmhz(buf2, gd->arch.inp_clk),
+>   		       strmhz(buf3, gd->arch.vco_clk));
+>   #else
+> diff --git a/arch/m68k/include/asm/global_data.h b/arch/m68k/include/asm/global_data.h
+> index 93efc722ba8..4ac886933c6 100644
+> --- a/arch/m68k/include/asm/global_data.h
+> +++ b/arch/m68k/include/asm/global_data.h
+> @@ -26,6 +26,8 @@ struct arch_global_data {
+>   #if defined(CONFIG_FSL_ESDHC)
+>   	unsigned long sdhc_per_clk;
+>   #endif
+> +	/** @pci_clk: PCI clock rate in Hz */
+> +	unsigned long pci_clk;
+>   };
+>   
+>   #include <asm-generic/global_data.h>
+> diff --git a/arch/m68k/lib/bdinfo.c b/arch/m68k/lib/bdinfo.c
+> index cf6ae5adddf..891e94bbd3f 100644
+> --- a/arch/m68k/lib/bdinfo.c
+> +++ b/arch/m68k/lib/bdinfo.c
+> @@ -22,7 +22,7 @@ int arch_setup_bdinfo(void)
+>   	bd->bi_busfreq = gd->bus_clk;	/* Bus Freq,      in Hz */
+>   
+>   	if (IS_ENABLED(CONFIG_PCI))
+> -		bd->bi_pcifreq = gd->pci_clk;
+> +		bd->bi_pcifreq = gd->arch.pci_clk;
+>   
+>   #if defined(CONFIG_EXTRA_CLOCK)
+>   	bd->bi_inpfreq = gd->arch.inp_clk;	/* input Freq in Hz */
+> diff --git a/arch/powerpc/cpu/mpc83xx/pci.c b/arch/powerpc/cpu/mpc83xx/pci.c
+> index 6f378c4e221..aef1123a2b7 100644
+> --- a/arch/powerpc/cpu/mpc83xx/pci.c
+> +++ b/arch/powerpc/cpu/mpc83xx/pci.c
+> @@ -45,7 +45,7 @@ void ft_pci_setup(void *blob, struct bd_info *bd)
+>   			do_fixup_by_path(blob, path, "bus-range",
+>   				&tmp, sizeof(tmp), 1);
+>   
+> -			tmp[0] = cpu_to_be32(gd->pci_clk);
+> +			tmp[0] = cpu_to_be32(gd->arch.pci_clk);
+>   			do_fixup_by_path(blob, path, "clock-frequency",
+>   				&tmp, sizeof(tmp[0]), 1);
+>   		}
+> @@ -60,7 +60,7 @@ void ft_pci_setup(void *blob, struct bd_info *bd)
+>   			do_fixup_by_path(blob, path, "bus-range",
+>   				&tmp, sizeof(tmp), 1);
+>   
+> -			tmp[0] = cpu_to_be32(gd->pci_clk);
+> +			tmp[0] = cpu_to_be32(gd->arch.pci_clk);
+>   			do_fixup_by_path(blob, path, "clock-frequency",
+>   				&tmp, sizeof(tmp[0]), 1);
+>   		}
+> diff --git a/arch/powerpc/cpu/mpc83xx/speed.c b/arch/powerpc/cpu/mpc83xx/speed.c
+> index 72464962613..0185ab50ad9 100644
+> --- a/arch/powerpc/cpu/mpc83xx/speed.c
+> +++ b/arch/powerpc/cpu/mpc83xx/speed.c
+> @@ -456,7 +456,7 @@ int get_clocks(void)
+>   #if defined(CONFIG_ARCH_MPC837X)
+>   	gd->arch.sata_clk = sata_clk;
+>   #endif
+> -	gd->pci_clk = pci_sync_in;
+> +	gd->arch.pci_clk = pci_sync_in;
+>   	gd->cpu_clk = gd->arch.core_clk;
+>   	gd->bus_clk = gd->arch.csb_clk;
+>   	return 0;
+> diff --git a/arch/powerpc/include/asm/global_data.h b/arch/powerpc/include/asm/global_data.h
+> index a9efbbdd3d4..cc2ce617350 100644
+> --- a/arch/powerpc/include/asm/global_data.h
+> +++ b/arch/powerpc/include/asm/global_data.h
+> @@ -87,6 +87,8 @@ struct arch_global_data {
+>   #if defined(CONFIG_LWMON5)
+>   	unsigned long kbd_status;
+>   #endif
+> +	/** @pci_clk: PCI clock rate in Hz */
+> +	unsigned long pci_clk;
+>   };
+>   
+>   #include <asm-generic/global_data.h>
+> diff --git a/drivers/clk/mpc83xx_clk.c b/drivers/clk/mpc83xx_clk.c
+> index a29ad0d7a68..a43fff2e7ed 100644
+> --- a/drivers/clk/mpc83xx_clk.c
+> +++ b/drivers/clk/mpc83xx_clk.c
+> @@ -358,7 +358,7 @@ static int mpc83xx_clk_probe(struct udevice *dev)
+>   	gd->mem_clk = priv->speed[MPC83XX_CLK_MEM];
+>   
+>   	if (mpc83xx_has_pci(type))
+> -		gd->pci_clk = priv->speed[MPC83XX_CLK_PCI];
+> +		gd->arch.pci_clk = priv->speed[MPC83XX_CLK_PCI];
+>   
+>   	gd->cpu_clk = priv->speed[MPC83XX_CLK_CORE];
+>   	gd->bus_clk = priv->speed[MPC83XX_CLK_CSB];
+> diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
+> index aa336d63e3a..970053892e1 100644
+> --- a/include/asm-generic/global_data.h
+> +++ b/include/asm-generic/global_data.h
+> @@ -59,11 +59,6 @@ struct global_data {
+>   	 * @bus_clk: platform clock rate in Hz
+>   	 */
+>   	unsigned long bus_clk;
+> -	/**
+> -	 * @pci_clk: PCI clock rate in Hz
+> -	 */
+> -	/* We cannot bracket this with CONFIG_PCI due to mpc5xxx */
+> -	unsigned long pci_clk;
+>   	/**
+>   	 * @mem_clk: memory clock rate in Hz
+>   	 */
