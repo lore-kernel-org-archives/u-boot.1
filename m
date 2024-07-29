@@ -4,69 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12498C3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 10:43:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20E26C3DA61
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 11:04:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75381887D1;
-	Mon, 29 Jul 2024 12:43:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 56B1B887BE;
+	Mon, 29 Jul 2024 13:04:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1722249780;
-	bh=yVvbakc+wM8eVZyrNeBGH2mcSSr+uO3HeU+UAdcW0i4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=RY+jMeLbn3yLjnqth7FdCdIckT195E2aY3Nuyr70n0VM4c0g5QfklHvifoC8zwrKK
-	 Y68CDb/3eHwy6XvEXJaurWIFgJF5loAd0Y9aNJ0CIfdDxgNt05m3G7vH4JXViYuaxl
-	 FvSxjFK3wxVvrExBQohMLCSGYEWdfPxGg2FTpmmGORkcp/vKX02dhAUd1Zn3vFC/VD
-	 dW1KofF0M9PRkPjoO9YOmsoQ5JZ4hyJuex70gJxY5tFnQLQ5LfMT4w+ts0/n6atgRN
-	 8qf0AAPVA/nfwhb7Aq9AjPYhgKgeLA9nKniT11mmk4HxMFpYEWsqZyNM/4z99XzVYF
-	 s09N/dQDZa09g==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 03BBA887CD; Mon, 29 Jul 2024 13:04:52 +0200 (CEST)
+Received: from smtp-bc09.mail.infomaniak.ch (smtp-bc09.mail.infomaniak.ch
+ [45.157.188.9])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 1A0F288365;
- Mon, 29 Jul 2024 12:42:58 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1722249779;
- bh=yVvbakc+wM8eVZyrNeBGH2mcSSr+uO3HeU+UAdcW0i4=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=OT9fg5OTNpHxeXSOIoFcK6wWBN9WY84SIYarPehNma4c9uP+ioODfuBovyPkbNp3F
- s5W52ESDgArPcv585fPEveu7vFuO3kN6Aa9xoPWvZUN2a62Ol+f/6acfekrZHO8i26
- hLeFL8tbaWYh2Rpr+wWdlOkgUYBwQyYtxqMg65JCGaIMEKdVL6hUnq935wLrZ/pEvf
- C5fjDvNlkbXwQiWkpaZVeUOWva7aVo+IoGHhR/+1VC0sfZmQarZc2ZVoELR2XNYUrz
- jn7pw6ysf0gqBBBNal+vuLmbu6UyKQSV5qw60SwtbrS0E+y4j7pmeNgQfygJ6ycTNZ
- 0YEkfO6SZ/35A==
-Message-ID: <a95f0d60-2883-4c3d-8a53-ee3ef414cc32@denx.de>
-Date: Mon, 29 Jul 2024 12:42:57 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 92FC788365
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 13:04:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=0leil.net
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-4-0000.mail.infomaniak.ch (smtp-4-0000.mail.infomaniak.ch
+ [10.7.10.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4WXb9F1YDJzbLD;
+ Mon, 29 Jul 2024 13:04:49 +0200 (CEST)
+Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4WXb9D0kQGzDqR; Mon, 29 Jul 2024 13:04:48 +0200 (CEST)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Date: Mon, 29 Jul 2024 13:04:23 +0200
+Subject: [PATCH] rockchip: configs: puma-rk3399: disable VIDEO support that
+ breaks Linux
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] power: regulator: Trigger probe of regulators which
- are always-on or boot-on
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-References: <20240626235717.272219-1-marex@denx.de>
- <a73dffe5-87e3-4e96-965f-9d029f2af8ed@denx.de>
- <CAPVz0n0C6TPdBRUEvJmgAUGAKoetuzr1j=0cMXweP2EqMTwn=g@mail.gmail.com>
- <0910419d-e8ab-4bf9-a083-dc2783afaca1@denx.de>
- <4D07A6E5-F156-44C3-A26D-0F2D913CE92D@gmail.com>
- <18d84528-d2e5-41d6-ae1d-109ee30853b2@denx.de>
- <CAPVz0n2Jzfih0Z85TSQbnz-8OrX4D6UN=anKGTJ=hckRt8f3xA@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAPVz0n2Jzfih0Z85TSQbnz-8OrX4D6UN=anKGTJ=hckRt8f3xA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20240729-puma-no-video-v1-1-3b92072642a4@cherry.de>
+X-B4-Tracking: v=1; b=H4sIADZ3p2YC/x3MQQqAIBBA0avIrBtwTIq6SrSQnGoWaShJEN09a
+ fkW/z+QOQlnGNUDiYtkiaGCGgXL7sLGKL4ajDZW92bA8zochohFPEds/cBEbulIW6jNmXiV+/9
+ N8/t+lSZipl8AAAA=
+To: Klaus Goger <klaus.goger@cherry.de>, 
+ Heiko Stuebner <heiko.stuebner@cherry.de>, Tom Rini <trini@konsulko.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ linux-rockchip@lists.infradead.org, u-boot@lists.denx.de, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.0
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,38 +63,154 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/29/24 7:38 AM, Svyatoslav Ryhel wrote:
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-[...]
+RK3399 Puma has support for driving multiple displays at the same time,
+the most notable scenario being HDMI+DSI since there exists a devkit
+with both DSI display and HDMI output.
 
->> The PMIC is on I2C, DM_PMIC enabled in SPL, both buck4 and buck5
->> regulators are enabled in SPL, have regulator-always-on and
->> regulator-boot-on and bootph-pre-ram properties.
->>
->> This seems similar enough, right ?
->>
-> Yes, though SPL must remain as small as possible and you propose add
-> there i2c driver,  PMIC driver, PMIC regulator drivers, PMIC GPIO
-> drivers along with relocation of all this stuff. It is not optimal at
-> all.
+While HDMI seems to work fine in U-Boot, as the U-Boot logo is shown
+whenever the EFI bootmeth is used, it messes up DSI in HDMI+DSI setup in
+the Linux kernel. There are some ways to work around this bug but no
+known appropriate fix for now, so let's rather not trigger this bug.
 
-Sure, if you do use DM_PMIC for PMIC on I2C bus, then you also need 
-DM_I2C . You can also do non-DM PMIC configuration in SPL, non-DM in SPL 
-is allowed.
+Since there isn't any client of ours that seems to be using this
+feature, let's disable it for now. Users can re-enable this feature in
+the event they have HDMI-only products.
 
->> What is the problem you observe on tegra 3 ?
-> i2c line fails since it probes in spl with your patch, but it does not
-> relocate and then probes once more after relocation. Probe fails along
-> with all devices on same line.
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+@linux-rockchip: you've been added to this as it's an issue in the Linux
+kernel but that gets triggered from U-Boot. This is a patch for U-Boot
+but I wanted it to be available in linux-rockchip archives :)
 
-Could it be that you either have to:
-- Add DM_I2C to tegra 3 SPL
-- Remove bootph-* from DT to remove the regulator node from SPL
-- /delete-property/ regulator-always-on; and /delete-property/ 
-regulator-boot-on; in -u-boot.dtsi to prevent the regulator from being 
-enabled in SPL ?
+We recently ported Puma from 2022.10 to 2024.07 in our vendor tree but
+discovered that this broke the DSI display on our devkit whenever an
+HDMI display would be connected at boot.
 
-regulator-always-on means the regulator has to be enabled 
-unconditionally, and the system software has no other way to test 
-whether the regulator is enabled but access the PMIC, so that is why the 
-regulator is probed, even if it is early.
+While VIDEO has been enabled for a few years already on Puma, something
+actually started to make use of it in the "normal" boot process (it
+seems to be the EFI bootmeth?). While it seems to work okay-ish as the
+U-Boot logo is shown properly, it is followed by artefacts whenever the
+kernel is taking over in the boot flow. Additionally, whenever one boots
+with HDMI connected and has a secondary DSI display, DSI is now broken
+in the Linux kernel until I unplug HDMI.
+
+A bit of debugging later, it seems we have a different clock for the
+DCLK of the VOP used for DSI. GPLL is used whenever no HDMI is plugged
+in, otherwise VPLL is used. The rate of the frac clock is also
+different, with 59756KHz when it doesn't work and 59400KHz when it does.
+
+I discovered that the frac clock doesn't try to set the rate of its
+parent, the div clock, so tried the following:
+
+"""
+ diff --git a/drivers/clk/rockchip/clk-rk3399.c b/drivers/clk/rockchip/clk-rk3399.c
+ index 4f1a5782c2308..fd5d11b9e12ed 100644
+ --- a/drivers/clk/rockchip/clk-rk3399.c
+ +++ b/drivers/clk/rockchip/clk-rk3399.c
+ @@ -1166,7 +1166,7 @@ static struct rockchip_clk_branch rk3399_clk_branches[] __initdata = {
+  			RK3399_CLKSEL_CON(49), 8, 2, MFLAGS, 0, 8, DFLAGS,
+  			RK3399_CLKGATE_CON(10), 12, GFLAGS),
+  
+ -	COMPOSITE_FRACMUX_NOGATE(DCLK_VOP0_FRAC, "dclk_vop0_frac", "dclk_vop0_div", 0,
+ +	COMPOSITE_FRACMUX_NOGATE(DCLK_VOP0_FRAC, "dclk_vop0_frac", "dclk_vop0_div", CLK_SET_RATE_PARENT,
+  			RK3399_CLKSEL_CON(106), 0,
+  			&rk3399_dclk_vop0_fracmux),
+  
+ @@ -1196,7 +1196,7 @@ static struct rockchip_clk_branch rk3399_clk_branches[] __initdata = {
+  			RK3399_CLKSEL_CON(50), 8, 2, MFLAGS, 0, 8, DFLAGS,
+  			RK3399_CLKGATE_CON(10), 13, GFLAGS),
+  
+ -	COMPOSITE_FRACMUX_NOGATE(DCLK_VOP1_FRAC, "dclk_vop1_frac", "dclk_vop1_div", 0,
+ +	COMPOSITE_FRACMUX_NOGATE(DCLK_VOP1_FRAC, "dclk_vop1_frac", "dclk_vop1_div", CLK_SET_RATE_PARENT,
+  			RK3399_CLKSEL_CON(107), 0,
+  			&rk3399_dclk_vop1_fracmux),
+"""
+
+which made it work! But... the rate of the frac (but not the div!) is
+the same as well as the parent of div clock (still VPLL), so this
+smelled fishy, something like a timing issue.
+
+I therefore tried to reorder the probing of HDMI and DSI with:
+
+"""
+ diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_drv.c b/drivers/gpu/drm/rockchip/rockchip_drm_drv.c
+ index 6492f3caf0174..482b9a169653e 100644
+ --- a/drivers/gpu/drm/rockchip/rockchip_drm_drv.c
+ +++ b/drivers/gpu/drm/rockchip/rockchip_drm_drv.c
+ @@ -524,10 +524,10 @@ static int __init rockchip_drm_init(void)
+  	ADD_ROCKCHIP_SUB_DRIVER(rockchip_dp_driver,
+  				CONFIG_ROCKCHIP_ANALOGIX_DP);
+  	ADD_ROCKCHIP_SUB_DRIVER(cdn_dp_driver, CONFIG_ROCKCHIP_CDN_DP);
+ -	ADD_ROCKCHIP_SUB_DRIVER(dw_hdmi_rockchip_pltfm_driver,
+ -				CONFIG_ROCKCHIP_DW_HDMI);
+  	ADD_ROCKCHIP_SUB_DRIVER(dw_mipi_dsi_rockchip_driver,
+  				CONFIG_ROCKCHIP_DW_MIPI_DSI);
+ +	ADD_ROCKCHIP_SUB_DRIVER(dw_hdmi_rockchip_pltfm_driver,
+ +				CONFIG_ROCKCHIP_DW_HDMI);
+  	ADD_ROCKCHIP_SUB_DRIVER(inno_hdmi_driver, CONFIG_ROCKCHIP_INNO_HDMI);
+  	ADD_ROCKCHIP_SUB_DRIVER(rk3066_hdmi_driver,
+  				CONFIG_ROCKCHIP_RK3066_HDMI);
+"""
+
+this worked too!
+
+Then, I tried something else, applying
+https://lore.kernel.org/all/20240615170417.3134517-14-jonas@kwiboo.se/
+
+... which also made it work! But re-ordering the probe order like above,
+broke it again. So not perfect...
+
+It does seem that HDMI may need to be on VOPB in multidisplay scenarios?
+I honestly do not have any idea of what's going on here and I am not
+aware of any of our users using video in U-Boot, so we'll just be
+disabling it for now until some of our users request it in a
+multi-display context. Basically sweeping the dirt under the rug until
+someone lifts it.
+---
+ configs/puma-rk3399_defconfig | 10 +---------
+ 1 file changed, 1 insertion(+), 9 deletions(-)
+
+diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
+index 9e5499a1fec..ccc7f355dbd 100644
+--- a/configs/puma-rk3399_defconfig
++++ b/configs/puma-rk3399_defconfig
+@@ -19,6 +19,7 @@ CONFIG_SPL_SPI=y
+ CONFIG_SYS_LOAD_ADDR=0x800800
+ CONFIG_DEBUG_UART=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-puma-haikou.dtb"
++CONFIG_CONSOLE_MUX=y
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x2e000
+ CONFIG_SPL_PAD_TO=0x38000
+@@ -40,7 +41,6 @@ CONFIG_CMD_MMC=y
+ CONFIG_CMD_SPI=y
+ CONFIG_CMD_USB=y
+ # CONFIG_CMD_SETEXPR is not set
+-CONFIG_CMD_BMP=y
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_TIME=y
+ CONFIG_CMD_PMIC=y
+@@ -102,12 +102,4 @@ CONFIG_USB_ETHER_ASIX88179=y
+ CONFIG_USB_ETHER_MCS7830=y
+ CONFIG_USB_ETHER_RTL8152=y
+ CONFIG_USB_ETHER_SMSC95XX=y
+-CONFIG_VIDEO=y
+-# CONFIG_VIDEO_BPP8 is not set
+-CONFIG_DISPLAY=y
+-CONFIG_VIDEO_ROCKCHIP=y
+-CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+-CONFIG_BMP_16BPP=y
+-CONFIG_BMP_24BPP=y
+-CONFIG_BMP_32BPP=y
+ CONFIG_ERRNO_STR=y
+
+---
+base-commit: 9366640449ac3ef702b624e2f6f7604754a9082b
+change-id: 20240729-puma-no-video-3d9e11ac6104
+
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@cherry.de>
+
