@@ -4,96 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E132DC3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 14:52:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FA49C3DA4A
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 14:59:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 576CE885B9;
-	Mon, 29 Jul 2024 16:52:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 4CBFF887D1;
+	Mon, 29 Jul 2024 16:59:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="oNzz4bvj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YuABNggh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41E538870D; Mon, 29 Jul 2024 16:52:18 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1A196887EB; Mon, 29 Jul 2024 16:59:05 +0200 (CEST)
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [IPv6:2607:f8b0:4864:20::630])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A67BC8855C
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 16:52:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 60588885F5
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 16:59:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id D6F91100010;
- Mon, 29 Jul 2024 17:52:14 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru D6F91100010
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1722264734;
- bh=7+AAogGgmYnya2MA8LzrwQzvmvw2H5yYMaBf+p85s7A=;
- h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
- b=oNzz4bvjarNEfoigQR16vGjYe+rEW26ukNNdkK8yMxel2USvL8bnFkxQANcp+ymxN
- BAhjG1zDfojVZCWWAkhDQSVdmGOe9d/Si8KtfqUyf1ptMii4rU/Qs2afhMbPLQkdXa
- reFJrvj2rNZ2joKq2GX+Ky68rmKyVYnSk6Jyb6yrxzZqec29H1eFWiFfmHMy3lzM86
- karcoV+anACUfp3eHn7EDw+qnumV0gPgUB2Bmt7H2DXgGH1tPdxsXYN8qtpwnh3gRN
- JkeidW/0bO50o+/r3m+LmLsk2kChu1kEx5naJ4TtG+GZiMRP4IIgy188nOd3JoUtQw
- jux40FKYT4WXg==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
- [172.16.192.103])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Mon, 29 Jul 2024 17:52:14 +0300 (MSK)
-Received: from localhost (100.64.160.123) by p-i-exch-sc-m02.sberdevices.ru
- (172.16.192.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.40; Mon, 29 Jul
- 2024 17:52:14 +0300
-Date: Mon, 29 Jul 2024 17:52:14 +0300
-From: Dmitry Rokosov <ddrokosov@salutedevices.com>
-To: Simon Glass <sjg@chromium.org>
-CC: <igor.opaniuk@gmail.com>, <mkorpershoek@baylibre.com>,
- <semen.protsenko@linaro.org>, <trini@konsulko.com>,
- <colin.mcallister@garmin.com>, <4.shket@gmail.com>,
- <avromanov@salutedevices.com>, <u-boot@lists.denx.de>,
- <kernel@salutedevices.com>, <rockosov@gmail.com>
-Subject: Re: [PATCH v1 2/4] cmd: ab: introduce 'ab_dump' command to print BCB
- block content
-Message-ID: <20240729145214.lmhmlnfscp2jncm2@CAB-WSD-L081021>
-References: <20240725194716.32232-1-ddrokosov@salutedevices.com>
- <20240725194716.32232-3-ddrokosov@salutedevices.com>
- <CAFLszThbAAQ3Fwtf_t0k-K5xO6Yu8x_37Fejntqq=svwt-gdcQ@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pladow@gmail.com
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1fd6ed7688cso21448695ad.3
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 07:59:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1722265141; x=1722869941; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+DiergR9WN8hHDH+PPLtTxoMZ5BIy3ewdoEAnni0tnE=;
+ b=YuABNgghwwTdvvHZPMWVg9QiDzD8hKyVecHISiRx6ibyOov6LKgVdWgwQRqxCpHywR
+ 8kM+eSgbCFHj3/030b7SYtGpkBg+1cVLFcnTugQ8T/ELYzVSVS35hAG3nfmcUC63vnYt
+ 5Pi1W+5SAvl4C3VQbRIc653uzEipLCEoW2u3DUyTJBUX+s7r2MEfbskGBKEgWlHFTtRx
+ kspzf90oE2DDYxuVlUHZP41QDtVnAMn6fqwfIuJjqCRY59EvV7J00O1ZPjVwnpSY/eo/
+ p1QC20q9jiLQPquOV4eqk0D2C/p3hEELf1gE8xCJTzx6qdyaqZrXJYG2Jg9MFD507c8r
+ ylwQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722265141; x=1722869941;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+DiergR9WN8hHDH+PPLtTxoMZ5BIy3ewdoEAnni0tnE=;
+ b=T6efx7iqaNJKNRzSiPLIIayu7U+yu+Vt7Pjk0vgox2Xz9oUQjRbkFBnilOYWhjLlwK
+ QYAmaAyn7t68WSzvaaZR59c4eg/4QaxLxmX2nlRzMA1CzNKURHmPdIE6sJT4xNR3sc/s
+ sQlc668HorZ54j/lSNvl9uxwECwvJ60SzypUpiYiGVxHielLINlMeT6aJs3mNlW8Nun+
+ vPgyib+ov9aluBbJYlTgXbIQZF79Dri5bRbnX/fd3BDAifWQe3iWdQpeogETNau6IcI8
+ eGV5nlbWFIagsPVIDrR1rHdD3DbW+ZdY7yJcMZTVMxVLU4N9NujOwf383HO/uaCKGwnJ
+ MXcA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWH0HRQNaM6a0McZcL4XGyIEnmC+jQWTh2gDJ1i6f4Y5nX2W3FFwarc0TgXfdwsiCjBa6ojH+Z/rESRG2CAEovn4T1q5A==
+X-Gm-Message-State: AOJu0Ywv6GRvxLoLyCZ9I+tyDVAX6GcKfnrfuT2ON/GNHSO2Hjv1ZPWt
+ kOHiE1NfudpS8siramVgPFo8lrdotudpTms6L0e2SYTyet/PjmPyEwLs0O3u8zXMqR4Yzdo+utg
+ 42u48qXdhU9j3ELow/LTK+7GrIGc=
+X-Google-Smtp-Source: AGHT+IGQpcgEfhxo2SClt45ZuX0/55ZpSPPeW9CjGXuPvzRkQ8pPdD8p+N+kQozxd+OIqChWtw9Ak9V0YZE+ivSNulI=
+X-Received: by 2002:a17:903:2445:b0:1fb:67e0:2e0a with SMTP id
+ d9443c01a7336-1ff048e5bc5mr66944475ad.48.1722265140636; Mon, 29 Jul 2024
+ 07:59:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThbAAQ3Fwtf_t0k-K5xO6Yu8x_37Fejntqq=svwt-gdcQ@mail.gmail.com>
-User-Agent: NeoMutt/20220415
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
- p-i-exch-sc-m02.sberdevices.ru (172.16.192.103)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 186775 [Jul 29 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.4
-X-KSMG-AntiSpam-Envelope-From: ddrokosov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 24 0.3.24
- 186c4d603b899ccfd4883d230c53f273b80e467f, {Track_E25351},
- {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 100.64.160.123:7.1.2;
- salutedevices.com:7.1.1;
- smtp.sberdevices.ru:5.0.1,7.1.1, FromAlignment: s, ApMailHostAddress:
- 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/07/29 12:26:00 #26174422
-X-KSMG-AntiVirus-Status: Clean, skipped
+References: <CAN8Q1EeO0C-LcC1jC=XYZM3RbFbs6sUtjbR===VUe6FYe5Utrw@mail.gmail.com>
+ <CAN8Q1Ef=eUs9qfwzhCfHA2YrFFZnKVNQVA=5mQb5Hxqi6hs5cw@mail.gmail.com>
+ <CAOMZO5BT2st6FdSx-QzmOee2pqTZ0PE_-Ek6p4KbZ+JJJ=HAvw@mail.gmail.com>
+ <CAN8Q1EfPghRrKtgeO_gr_VZ26_dHQUpRkBqbfYshZf0KeGm=oA@mail.gmail.com>
+ <CAN8Q1EdCtmCE9HPhhjHakRk77Mw4AQ1-tPLm1SQcS0ELrgy3Lg@mail.gmail.com>
+ <5587ef25-7694-4aa9-8a73-98e589b61cae@kernel-space.org>
+In-Reply-To: <5587ef25-7694-4aa9-8a73-98e589b61cae@kernel-space.org>
+From: Peter LaDow <pladow@gmail.com>
+Date: Mon, 29 Jul 2024 07:58:49 -0700
+Message-ID: <CAN8Q1Ed+T5JKAqD4vwXSZs3CGF6ockiNF5XCJfg3m9NXY=kZuA@mail.gmail.com>
+Subject: Re: M68K Vectors
+To: Angelo Dureghello <angelo@kernel-space.org>
+Cc: Huan Wang <alison.wang@nxp.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,210 +93,291 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Jul 28, 2024 at 01:36:04PM -0600, Simon Glass wrote:
-> Hi Dmitry,
-> 
-> On Thu, 25 Jul 2024 at 14:55, Dmitry Rokosov
-> <ddrokosov@salutedevices.com> wrote:
-> >
-> > It's really helpful to have the ability to dump BCB block for debugging
-> > A/B logic on the board supported this partition schema.
-> >
-> > Command 'ab_dump' prints all fields of bootloader_control struct
-> > including slot_metadata for all presented slots.
-> >
-> > Output example:
-> > =====
-> > > board# ab_dump ubi 0#misc
-> > > Read 512 bytes from volume misc to 000000000bf51900
-> > > Bootloader Control:   [misc]
-> > > Active Slot:          _a
-> > > Magic Number:                 0x42414342
-> > > Version:              1
-> > > Number of Slots:      2
-> > > Recovery Tries Remaining: 7
-> > > CRC:                  0x61378F6F (Valid)
-> > >
-> > > Slot[0] Metadata:
-> > >       - Priority:             15
-> > >       - Tries Remaining:      4
-> > >       - Successful Boot:      0
-> > >       - Verity Corrupted:     0
-> > >
-> > > Slot[1] Metadata:
-> > >       - Priority:             15
-> > >       - Tries Remaining:      5
-> > >       - Successful Boot:      0
-> > >       - Verity Corrupted:     0
-> > ====
-> >
-> > Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
-> > ---
-> >  boot/android_ab.c    | 68 ++++++++++++++++++++++++++++++++++++++++++++
-> >  cmd/ab_select.c      | 30 +++++++++++++++++++
-> >  include/android_ab.h |  9 ++++++
-> >  3 files changed, 107 insertions(+)
-> >
-> > diff --git a/boot/android_ab.c b/boot/android_ab.c
-> > index 1e5aa81b7503..359cc1a00428 100644
-> > --- a/boot/android_ab.c
-> > +++ b/boot/android_ab.c
-> > @@ -363,3 +363,71 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
-> >
-> >         return slot;
-> >  }
-> > +
-> > +int ab_dump_abc(struct blk_desc *dev_desc, struct disk_partition *part_info)
-> > +{
-> > +       struct bootloader_control *abc;
-> > +       u32 crc32_le;
-> > +       int i, ret;
-> > +       struct slot_metadata *slot;
-> > +
-> > +       if (!dev_desc || !part_info) {
-> > +               log_err("ANDROID: Empty device descriptor or partition info\n");
-> > +               return -EINVAL;
-> > +       }
-> > +
-> > +       ret = ab_control_create_from_disk(dev_desc, part_info, &abc, 0);
-> > +       if (ret < 0) {
-> > +               log_err("ANDROID: Cannot create bcb from disk %d\n", ret);
-> > +               return ret;
-> > +       }
-> > +
-> > +       if (abc->magic != BOOT_CTRL_MAGIC) {
-> > +               log_err("ANDROID: Unknown A/B metadata: %.8x\n", abc->magic);
-> > +               ret = -ENODATA;
-> > +               goto error;
-> > +       }
-> > +
-> > +       if (abc->version > BOOT_CTRL_VERSION) {
-> > +               log_err("ANDROID: Unsupported A/B metadata version: %.8x\n",
-> > +                       abc->version);
-> > +               ret = -ENODATA;
-> > +               goto error;
-> > +       }
-> > +
-> > +       if (abc->nb_slot > ARRAY_SIZE(abc->slot_info)) {
-> > +               log_err("ANDROID: Wrong number of slots %u, expected %zu\n",
-> > +                       abc->nb_slot, ARRAY_SIZE(abc->slot_info));
-> > +               ret = -ENODATA;
-> > +               goto error;
-> > +       }
-> > +
-> > +       printf("Bootloader Control: \t[%s]\n", part_info->name);
-> > +       printf("Active Slot: \t\t%s\n", abc->slot_suffix);
-> > +       printf("Magic Number: \t\t0x%X\n", abc->magic);
-> > +       printf("Version: \t\t%u\n", abc->version);
-> > +       printf("Number of Slots: \t%u\n", abc->nb_slot);
-> > +       printf("Recovery Tries Remaining: %u\n", abc->recovery_tries_remaining);
-> > +
-> > +       printf("CRC: \t\t\t0x%.8X", abc->crc32_le);
-> > +
-> > +       crc32_le = ab_control_compute_crc(abc);
-> > +       if (abc->crc32_le != crc32_le)
-> > +               printf(" (Invalid, Expected: \t0x%.8X)\n", crc32_le);
-> > +       else
-> > +               printf(" (Valid)\n");
-> > +
-> > +       for (i = 0; i < abc->nb_slot; ++i) {
-> > +               slot = &abc->slot_info[i];
-> > +               printf("\nSlot[%d] Metadata:\n", i);
-> > +               printf("\t- Priority: \t\t%u\n", slot->priority);
-> > +               printf("\t- Tries Remaining: \t%u\n", slot->tries_remaining);
-> > +               printf("\t- Successful Boot: \t%u\n", slot->successful_boot);
-> > +               printf("\t- Verity Corrupted: \t%u\n", slot->verity_corrupted);
-> > +       }
-> > +
-> > +error:
-> > +       free(abc);
-> > +
-> > +       return ret;
-> > +}
-> > diff --git a/cmd/ab_select.c b/cmd/ab_select.c
-> > index 9e2f74573c22..1d34150ceea9 100644
-> > --- a/cmd/ab_select.c
-> > +++ b/cmd/ab_select.c
-> > @@ -51,6 +51,31 @@ static int do_ab_select(struct cmd_tbl *cmdtp, int flag, int argc,
-> >         return CMD_RET_SUCCESS;
-> >  }
-> >
-> > +static int do_ab_dump(struct cmd_tbl *cmdtp, int flag, int argc,
-> > +                     char *const argv[])
-> > +{
-> > +       int ret;
-> > +       struct blk_desc *dev_desc;
-> > +       struct disk_partition part_info;
-> > +
-> > +       if (argc < 3)
-> > +               return CMD_RET_USAGE;
-> > +
-> > +       if (part_get_info_by_dev_and_name_or_num(argv[1], argv[2],
-> > +                                                &dev_desc, &part_info,
-> > +                                                false) < 0) {
-> > +               return CMD_RET_FAILURE;
-> > +       }
-> > +
-> > +       ret = ab_dump_abc(dev_desc, &part_info);
-> > +       if (ret < 0) {
-> > +               printf("Cannot dump ABC data, error %d.\n", ret);
-> > +               return CMD_RET_FAILURE;
-> > +       }
-> > +
-> > +       return CMD_RET_SUCCESS;
-> > +}
-> > +
-> >  U_BOOT_CMD(ab_select, 5, 0, do_ab_select,
-> >            "Select the slot used to boot from and register the boot attempt.",
-> >            "<slot_var_name> <interface> <dev[:part|#part_name]> [--no-dec]\n"
-> > @@ -66,3 +91,8 @@ U_BOOT_CMD(ab_select, 5, 0, do_ab_select,
-> >            "    - If '--no-dec' is set, the number of tries remaining will not\n"
-> >            "      decremented for the selected boot slot\n"
-> >  );
-> > +
-> > +U_BOOT_CMD(ab_dump, 3, 0, do_ab_dump,
-> > +          "Dump boot_control information from specific partition.",
-> > +          "<interface> <dev[:part|#part_name]>\n"
-> > +);
-> > diff --git a/include/android_ab.h b/include/android_ab.h
-> > index 1fee7582b90a..e53bf7eb6a02 100644
-> > --- a/include/android_ab.h
-> > +++ b/include/android_ab.h
-> > @@ -33,4 +33,13 @@ struct disk_partition;
-> >  int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
-> >                     bool dec_tries);
-> >
-> > +/**
-> > + * Dump ABC information for specific partition.
-> > + *
-> > + * @param[in] dev_desc Device description pointer
-> > + * @param[in] part_info Partition information
-> 
-> We have moved to the @ notation now:
-> 
-> @dev_desc: ...
-> 
-> > + * Return: 0 on success, or a negative on error
-> > + */
-> > +int ab_dump_abc(struct blk_desc *dev_desc, struct disk_partition *part_info);
-> > +
-> >  #endif /* __ANDROID_AB_H */
-> > --
-> > 2.43.0
-> >
-> 
-> Rather than creating a new command I think this should be a subcommand
-> of abootimg.
-> 
-> Can you please create some docs in doc/usage/cmd/abootimg for the command?
-> 
-> I also wonder if ab_select should move under that command?
+I tried both the gcc-12.2 and the gcc-14.1, and both exhibit the same
+problem I am seeing.  And I tried it with the M5373EVB which is
+included w/ u-boot.
 
-I believe it's an excellent idea to utilize abootimg for modifying and
-dumping Android related stuff, as this tool is specifically designed for
-such purposes. Moreover, the A/B approach is predominantly an
-Android-based feature.
+From the arch/m68k/cpu/mcf530x/start.S:
 
--- 
-Thank you,
-Dmitry
+_vectors:
+.long   0x00000000
+#if defined(CONFIG_M5307) && \
+          (CONFIG_TEXT_BASE =3D=3D CFG_SYS_INT_FLASH_BASE)
+.long   _start - CONFIG_TEXT_BASE
+#else
+.long   _START
+#endif
+
+.long   _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT
+
+$ m68k-linux-objdump -s u-boot
+u-boot:     file format elf32-m68k
+
+Contents of section .text:
+00000 00000000 00000000 0000050c 0000050c  ................
+00010 0000050c 0000050c 0000050c 0000050c  ................
+
+Note the reset vector at offset 0x4 is 0x00000000, when it should be
+0x00000400.  This is true in both cases.  But _start (and _START which
+is #defined to _start above)
+
+$ m68k-linux-nm -n u-boot
+00000000 A __fixup_entries
+00000000 A __got2_entries
+00000000 t INITSP
+00000000 t _vectors
+00000004 t INITPC
+00000008 t vector02_0F
+00000040 t vector10_17
+00000060 t vector18_1F
+00000080 t vector20_2F
+000000c0 t vector30_3F
+00000100 t vector64_127
+00000200 t vector128_191
+00000300 t vector192_255
+00000400 T _start
+
+So even here we see the _start relocation not set correctly.
+
+However, I do notice something very different in how board_init.c is
+compiled.  The M5373EVB compiles with what appear to be some sort of
+trampolines.
+
+From the 5373 (compiled with -mcpu=3D5329):
+
+000114fe <board_init_f_init_reserve>:
+  114fe:       2f0d            movel %a5,%sp@-
+  11500:       206d 00a0       moveal %a5@(160),%a0
+  11504:       2f02            movel %d2,%sp@-
+  11506:       242f 000c       movel %sp@(12),%d2
+  1150a:       4878 00c0       pea c0 <vector30_3F>
+  1150e:       42a7            clrl %sp@-
+  11510:       2f02            movel %d2,%sp@-
+  11512:       4e90            jsr %a0@
+
+Notice at 0x11500 it loads %a0 with an offset from %a5.  And in
+_start, it loads %a5 with __got_start.  So some sort of global
+relocation table is used to call memset.
+
+But for my board, compiled with the exact same options except -mcpu=3D548x,=
+ I get:
+
+0000f5da <board_init_f_init_reserve>:
+   f5da:       2f02            movel %d2,%sp@-
+   f5dc:       242f 0008       movel %sp@(8),%d2
+   f5e0:       4878 00c0       pea c0 <_vectors+0xc0>
+   f5e4:       42a7            clrl %sp@-
+   f5e6:       2f02            movel %d2,%sp@-
+   f5e8:       61ff 0001 4622  bsrl 23c0c <_etext+0x138>
+
+Which is a relative branch (bsrl).
+
+The compilation command line is identical except for -mcpu.  Even the
+linker command line is identical except for paths to the object files.
+
+On Sun, Jul 28, 2024 at 2:04=E2=80=AFPM Angelo Dureghello
+<angelo@kernel-space.org> wrote:
+>
+> Hi Peter,
+>
+> glad to hear you solved.
+>
+> As a toolchain i use those provided by kernel.org:
+>
+> /opt/toolchains/m68k/gcc-12.2.0-nolibc/m68k-linux/bin/m68k-linux-
+>
+> https://cdn.kernel.org/pub/tools/crosstool/
+>
+> Just out of curiosity, what's the cpu model you used ?
+>
+>
+> Regards,
+> Angelo Dureghello
+>
+>
+> On 26/07/24 10:22 PM, Peter LaDow wrote:
+> > Scratch that.  I forgot I hard coded the vector table with 0x400 to
+> > test things.  Restoring _start still results in 0x00000000 for the
+> > reset vector.
+> >
+> > On Fri, Jul 26, 2024 at 1:16=E2=80=AFPM Peter LaDow <pladow@gmail.com> =
+wrote:
+> >> I should mention I was using the gcc-m68k-linux-gnu package on Ubuntu
+> >> 22.04.4, which pulled in gcc-11-m68k-linux-gnu.
+> >>
+> >> I just downloaded the bootlin m68k-coldfire--uclibc--stable-2024.02-1,
+> >> and tried that.  It generates the proper value in the vector table
+> >> (0x400 for _start).  But the call to memset is still bad:
+> >>
+> >> 0000f5da <board_init_f_init_reserve>:
+> >>     f5da:       2f02            movel %d2,%sp@-
+> >>     f5dc:       242f 0008       movel %sp@(8),%d2
+> >>     f5e0:       4878 00c0       pea c0 <_vectors+0xc0>
+> >>     f5e4:       42a7            clrl %sp@-
+> >>     f5e6:       2f02            movel %d2,%sp@-
+> >>     f5e8:       61ff 0001 4622  bsrl 23c0c <_etext+0x138>
+> >>     f5ee:       2f02            movel %d2,%sp@-
+> >>     f5f0:       61ff ffff ffd2  bsrl f5c4 <arch_setup_gd>
+> >>     f5f6:       0682 0000 00c0  addil #192,%d2
+> >>     f5fc:       4fef 0010       lea %sp@(16),%sp
+> >>     f600:       2047            moveal %d7,%a0
+> >>     f602:       2142 00a0       movel %d2,%a0@(160)
+> >>     f606:       241f            movel %sp@+,%d2
+> >>     f608:       4e75            rts
+> >>
+> >> Note "bsrl 23c0c" which points beyond _etext.
+> >>
+> >> On Fri, Jul 26, 2024 at 12:59=E2=80=AFPM Fabio Estevam <festevam@gmail=
+.com> wrote:
+> >>> Adding the Coldfire maintainers on Cc.
+> >>>
+> >>> On Fri, Jul 26, 2024 at 4:46=E2=80=AFPM Peter LaDow <pladow@gmail.com=
+> wrote:
+> >>>> After some digging it appears that this is a toolchain issue.  It se=
+ems the
+> >>>> linker fixups are sometimes not computed correctly.  For example, in
+> >>>> board_init_f_init_reserve, the object file disassembled has:
+> >>>>
+> >>>> 00000000 <board_init_f_init_reserve>:
+> >>>>    0:   2f02            movel %d2,%sp@-
+> >>>>    2:   242f 0008       movel %sp@(8),%d2
+> >>>>    6:   4878 00c0       pea c0 <board_init_f_init_reserve+0xc0>
+> >>>>    a:   42a7            clrl %sp@-
+> >>>>    c:   2f02            movel %d2,%sp@-
+> >>>>    e:   61ff 0000 0000  bsrl 10 <board_init_f_init_reserve+0x10>
+> >>>>   14:   2f02            movel %d2,%sp@-
+> >>>>   16:   61ff 0000 0000  bsrl 18 <board_init_f_init_reserve+0x18>
+> >>>>   1c:   0682 0000 00c0  addil #192,%d2
+> >>>>   22:   4fef 0010       lea %sp@(16),%sp
+> >>>>   26:   2047            moveal %d7,%a0
+> >>>>   28:   2142 00a0       movel %d2,%a0@(160)
+> >>>>   2c:   241f            movel %sp@+,%d2
+> >>>>   2e:   4e75            rts
+> >>>>
+> >>>> But when I disassemble the final linked u-boot output:
+> >>>>
+> >>>> 0000f646 <board_init_f_init_reserve>:
+> >>>>     f646:       2f02            movel %d2,%sp@-
+> >>>>     f648:       242f 0008       movel %sp@(8),%d2
+> >>>>     f64c:       4878 00c0       pea c0 <_vectors+0xc0>
+> >>>>     f650:       42a7            clrl %sp@-
+> >>>>     f652:       2f02            movel %d2,%sp@-
+> >>>>     f654:       61ff 0001 44da  bsrl 23b30 <_etext+0x138>
+> >>>>     f65a:       2f02            movel %d2,%sp@-
+> >>>>     f65c:       61ff ffff ffd2  bsrl f630 <arch_setup_gd>
+> >>>>     f662:       0682 0000 00c0  addil #192,%d2
+> >>>>     f668:       4fef 0010       lea %sp@(16),%sp
+> >>>>     f66c:       2047            moveal %d7,%a0
+> >>>>     f66e:       2142 00a0       movel %d2,%a0@(160)
+> >>>>     f672:       241f            movel %sp@+,%d2
+> >>>>     f674:       4e75            rts
+> >>>>
+> >>>> Note the pea c0 instruction.  The object file has
+> >>>> board_init_f_init_reserve+0xc0 as the argument, but the final linker=
+ has
+> >>>> 0xc0, meaning board_init_f_init_reserve is being set to 0 after link=
+ing.
+> >>>>
+> >>>> Also, note the first bsrl instruction, which is not setup correctly
+> >>>> either.  This is a call to memset.  This points to _etext+0x138, whi=
+ch is
+> >>>> not a code region Note that 0x239f8 + 0x138 =3D 0x23b30.  But in the=
+ final
+> >>>> uboot, memset is at 0x1f030.
+> >>>>
+> >>>> In the call to memset(),  objdump shows the relocation:
+> >>>>
+> >>>> RELOCATION RECORDS FOR [.text.board_init_f_init_reserve]:
+> >>>> OFFSET   TYPE              VALUE
+> >>>> 00000010 R_68K_PLT32       memset
+> >>>> 00000018 R_68K_PLT32       arch_setup_gd
+> >>>>
+> >>>> So it seems only when linking outside the same compilation unit that=
+ the
+> >>>> relocations aren't set correctly.
+> >>>>
+> >>>> I'm not sure where to look for a solution.  Or how to search for an
+> >>>> answer.  I've done some digging on Google, but nothing points to a c=
+lear
+> >>>> answer.  Anyone seen something similar?
+> >>>>
+> >>>> To love for the sake of being loved is human, but to love for the sa=
+ke of
+> >>>> loving is angelic. -- Alphonse de Lamartine.
+> >>>>
+> >>>>
+> >>>> On Thu, Jul 25, 2024 at 14:35 Peter LaDow <pladow@gmail.com> wrote:
+> >>>>> I'm trying to add support for a custom Colfire based board.  I have
+> >>>>> things building, but the final linked vectors in start.S do not poi=
+nt
+> >>>>> to _start.  In start.S I have:
+> >>>>>
+> >>>>> _vectors:
+> >>>>> .long   0x00000000              /* Flash offset is 0 until we setup=
+ CS0 */
+> >>>>> .long   _START
+> >>>>>
+> >>>>> .long   _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FA=
+ULT
+> >>>>> .long   _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FA=
+ULT
+> >>>>> .long   _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FA=
+ULT
+> >>>>>
+> >>>>> Dumping the symbols in the final u-boot yields:
+> >>>>>
+> >>>>> $ m68k-linux-gnu-nm -n u-boot
+> >>>>> 00000000 A __fixup_entries
+> >>>>> 00000000 A __got2_entries
+> >>>>> 00000000 t _vectors
+> >>>>> 00000400 T _start
+> >>>>> 0000047e T relocate_code
+> >>>>> 000004ae t fixloop
+> >>>>>
+> >>>>> But then dumping the raw binary:
+> >>>>>
+> >>>>> u-boot:     file format elf32-m68k
+> >>>>>
+> >>>>> Contents of section .text:
+> >>>>> 00000 00000000 00000000 00000516 00000516  ................
+> >>>>> 00010 00000516 00000516 00000516 00000516  ................
+> >>>>> 00020 00000516 00000516 00000516 00000516  ................
+> >>>>> 00030 00000516 00000516 00000516 00000516  ................
+> >>>>>
+> >>>>> Note at offset 4 it is 0x00000000, not 0x00000400 as I'd expect.
+> >>>>>
+> >>>>> The final linker script has:
+> >>>>>
+> >>>>> OUTPUT_ARCH(m68k)
+> >>>>> ENTRY(_start)
+> >>>>> SECTIONS
+> >>>>> {
+> >>>>> .text :
+> >>>>> {
+> >>>>>   arch/m68k/cpu/mcf548x/start.o (.text*)
+> >>>>>   . =3D DEFINED(env_offset) ? env_offset : .; env/embedded.o(.text*=
+);
+> >>>>>   *(.text*)
+> >>>>> }
+> >>>>>
+> >>>>>
+> >>>>> It is difficult to search the archives, and so far I haven't found
+> >>>>> anything.  Any help would be appreciated.
+> >>>>>
+> >>>>> --
+> >>>>> To love for the sake of being loved is human, but to love for the s=
+ake
+> >>>>> of loving is angelic. -- Alphonse de Lamartine.
+> >>
+> >>
+> >> --
+> >> To love for the sake of being loved is human, but to love for the sake
+> >> of loving is angelic. -- Alphonse de Lamartine.
+> >
+> >
+
+
+
+--=20
+To love for the sake of being loved is human, but to love for the sake
+of loving is angelic. -- Alphonse de Lamartine.
