@@ -4,58 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D7A7C3DA61
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 08:07:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC25DC3DA61
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 08:08:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E354E86BF1;
-	Mon, 29 Jul 2024 10:07:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
+	by phobos.denx.de (Postfix) with ESMTP id 595D8887DB;
+	Mon, 29 Jul 2024 10:08:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="Pr1cyZOB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="V4qimzYc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 794DF88056; Mon, 29 Jul 2024 10:07:36 +0200 (CEST)
-Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
- [IPv6:2a00:1098:ed:100::25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CB873887D6; Mon, 29 Jul 2024 10:08:03 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34DA382BA7
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 10:07:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=collabora.com
+ by phobos.denx.de (Postfix) with ESMTPS id 95781887C0
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 10:08:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1722240453;
- bh=VbJDMHelhKvRGj2X6A2SGgGdwi948CA4yUOhiK45A0k=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Pr1cyZOBBGajiXlW3gYST80f6FvLL+AxQvgQVH5E/ZJNK7Y8kK4BBSY2t1ktUfu6f
- UdnvWhAb2R3Nnx38icazUbG27i1Rwb4JU/BtG3CKYlRpfbsZy8p0rL3W/z8Vw2WvKB
- 5FKhd0Dmps7n3RyJwD2CdCwnFgAryQn6NT9Cbsfwsuq/7ikizNlvrjYjv7i8IDcbLT
- GNZ8UEAdhegS/GSowisQh1FqYLmmBLBNovJbi427DHOmZOq+ol0G8o/T6CVJ3xPD+Z
- ywqUV15KTZ9UVvLsDO9tjXkfU+rshahDJeb88Urza8HXjZmXVusAzeiXZcGFMt0val
- 4GX6dsgWjrGjg==
-Received: from [100.90.194.27] (cola.collaboradmins.com [195.201.22.229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: ehristev)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id 2A03137809CE;
- Mon, 29 Jul 2024 08:07:33 +0000 (UTC)
-Message-ID: <3827b52f-e31f-4d41-9a56-b619c35a5705@collabora.com>
-Date: Mon, 29 Jul 2024 11:07:23 +0300
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=zajec5@gmail.com
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5a15c2dc569so3025764a12.3
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 01:08:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1722240481; x=1722845281; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rl8HdNLgtv5Fxv2Nk9Of+lDPOeD8hPV7F8FWHfhtTmU=;
+ b=V4qimzYc0AJ+kDbQX2Dw/34Mu/VaTRPzPt1bn6f0m/jTZS88N2pSAEg9j+Yhtyzw5D
+ YpzCcF/hS8MxlJ4nxw0cPJdcVDFnniUGPNL2fK8TijjcHz0Je4ATtcQymBq5k8CGDjBJ
+ vA77rnIOso4kFp7nd9OV2fiawLi/NV3nYY0kRu9TQwQ99aluOPMl/8CI6IN6Etut36Lg
+ rcFWRbgZ9iE8E7f69MVSM0/lPWF3usOcUU8fl1h+eTBSxEeOKJBNdSOHV3hNqdzw+H4s
+ hG0XZfVgrOHSlP+xLy180OlZ1gdOOvelnDm/HSjwypP8LkFhRSaGWjj2LMKvoY4l95PH
+ NsUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722240481; x=1722845281;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rl8HdNLgtv5Fxv2Nk9Of+lDPOeD8hPV7F8FWHfhtTmU=;
+ b=PqqH8riTnFacY5oetDEWw95FwqWbWkg1qMsSWg7G3ua9oAAKPycunU3vOh5UYIfsZS
+ UUp0sfqB1WEeIWeiCVY36/E8vvafSpH8l/H1KcY6bpJC8MgzGDh8R1Kf9IlyTGVM6jOx
+ nn12dyggYutlFHy86CHWURsUfwUeorJZS73ZYpnP/gNkKxOHr9n2aW3DnqwWAduvGAhE
+ s/vom61JHrsJTHRp+JNtozUAtTpcbOrbDRdBe9E+3hR/7oFkKcf4b9/C6J8Ny1ps2Ni4
+ 8Hv2P7l7UfH+zYCJSzUWNmlxvQjZUhLYeX2tFd0C/iPBpD45djw9NRviFLeglFC5DTqi
+ ZPTg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUhcZIGYGLDXEYqrRZb097DObD2oP/RYOO5+3WXp4p4BW8/YgaQNdLClFYxVoM2lKeGruq1qZtK7dKdtubX/q+szXeUHg==
+X-Gm-Message-State: AOJu0YzggJd9N0S1qC8O/tRJg7Xtqvy6fdEvbhnbsFb6aWE7mMjZmFTY
+ y6dHWsIJMF1JrDBlSpGMbywUJs1FZU5AYmeJuF35Yqeu8CI4J3qF
+X-Google-Smtp-Source: AGHT+IGSPZPkd0loh76eNxSCbXh4tWMsSkZqipMIwMD0/JvF8wieYG1nkZYy/AvmyWaLsR5QnAao4Q==
+X-Received: by 2002:a05:6402:51cc:b0:5a1:de88:a5ef with SMTP id
+ 4fb4d7f45d1cf-5b02317f4c0mr5275599a12.27.1722240480627; 
+ Mon, 29 Jul 2024 01:08:00 -0700 (PDT)
+Received: from localhost.lan (031011218106.poznan.vectranet.pl.
+ [31.11.218.106]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5ac63590cedsm5352868a12.29.2024.07.29.01.07.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 29 Jul 2024 01:08:00 -0700 (PDT)
+From: =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <zajec5@gmail.com>
+To: Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Michael Walle <michael@walle.cc>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, devicetree@vger.kernel.org,
+ linux-mtd@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
+ u-boot@lists.denx.de, linux-kernel@vger.kernel.org,
+ =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <rafal@milecki.pl>
+Subject: [PATCH V2 2/3] dt-bindings: nvmem: convert U-Boot env to a layout
+Date: Mon, 29 Jul 2024 10:07:32 +0200
+Message-Id: <20240729080733.16839-2-zajec5@gmail.com>
+X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20240729080733.16839-1-zajec5@gmail.com>
+References: <20240729080733.16839-1-zajec5@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] mtd: nand: raw: atmel: Use ONFI ECC params if available
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Balamanikandan.Gunasundar@microchip.com
-Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>
-References: <20240721214552.63965-2-zli@ogga.fr>
- <59a891ca-1f02-4ffa-8727-0934025d88c5@microchip.com>
- <CAOf5uwnP7gGDakGHL1cFSyJQefJ=DG+a5tORU3B8-a7q9+gBiA@mail.gmail.com>
-Content-Language: en-US
-From: Eugen Hristev <eugen.hristev@collabora.com>
-In-Reply-To: <CAOf5uwnP7gGDakGHL1cFSyJQefJ=DG+a5tORU3B8-a7q9+gBiA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -74,68 +100,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/25/24 12:41, Michael Nazzareno Trimarchi wrote:
-> Hi
-> 
-> On Thu, Jul 25, 2024 at 11:36 AM
-> <Balamanikandan.Gunasundar@microchip.com> wrote:
->>
->> Acked-by: Balamanikandan Gunasundar
->> <balamanikandan.gunasundar@microchip.com>
->>
->> On 22/07/24 3:15 am, Zixun LI wrote:
->>> [Some people who received this message don't often get email from admin@hifiphile.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
->>>
->>> EXTERNAL EMAIL: Do not click links or open attachments unless you know the content is safe
->>>
->>> When ECC parameters are not specified in DT, first try ONFI ECC parameters
->>> before fallback to maximum strength.
->>>
->>> It's the Linux driver behavior since the driver rewriting in f88fc12.
->>>
->>>  From then 2 nand system refactors have been done in 6a1b66d6 and 53576c7b,
->>> chip->ecc_strength_ds and chip->ecc_step_ds became
->>> nanddev_get_ecc_requirements(). U-Boot didn't follow the refactor and
->>> always use these 2 fields.
->>>
->>> v2: Fix formatting, add upstream commit hash.
->>>
->>> Signed-off-by: Zixun LI <zli@ogga.fr>
->>> ---
->>>   drivers/mtd/nand/raw/atmel/nand-controller.c | 4 ++++
->>>   1 file changed, 4 insertions(+)
->>>
->>> diff --git a/drivers/mtd/nand/raw/atmel/nand-controller.c b/drivers/mtd/nand/raw/atmel/nand-controller.c
->>> index ee4ec6da58..817fab4ca3 100644
->>> --- a/drivers/mtd/nand/raw/atmel/nand-controller.c
->>> +++ b/drivers/mtd/nand/raw/atmel/nand-controller.c
->>> @@ -1029,11 +1029,15 @@ static int atmel_nand_pmecc_init(struct nand_chip *chip)
->>>                  req.ecc.strength = ATMEL_PMECC_MAXIMIZE_ECC_STRENGTH;
->>>          else if (chip->ecc.strength)
->>>                  req.ecc.strength = chip->ecc.strength;
->>> +       else if (chip->ecc_strength_ds)
->>> +               req.ecc.strength = chip->ecc_strength_ds;
->>>          else
->>>                  req.ecc.strength = ATMEL_PMECC_MAXIMIZE_ECC_STRENGTH;
->>>
->>>          if (chip->ecc.size)
->>>                  req.ecc.sectorsize = chip->ecc.size;
->>> +       else if (chip->ecc_step_ds)
->>> +               req.ecc.sectorsize = chip->ecc_step_ds;
->>>          else
->>>                  req.ecc.sectorsize = ATMEL_PMECC_SECTOR_SIZE_AUTO;
->>>
->>> --
->>> 2.45.2
->>>
->>
-> 
-> Feel free to apply on microchip uboot branch if you are on hurry
-> 
-> Michael
-> 
-Hello Michael,
+From: Rafał Miłecki <rafal@milecki.pl>
 
-This is fine, you(or Dario) can pick this up through the nand tree.
+U-Boot environment variables can be stored in various data sources. MTD
+is just one of available options. Refactor DT binding into a layout so
+it can be used with UBI volumes and other NVMEM devices.
 
-Eugen
+Link: https://lore.kernel.org/all/20231221173421.13737-1-zajec5@gmail.com/
+Signed-off-by: Rafał Miłecki <rafal@milecki.pl>
+Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
+---
+ .../bindings/nvmem/layouts/nvmem-layout.yaml  |  1 +
+ .../nvmem/{ => layouts}/u-boot,env.yaml       | 39 ++++++++++++++++---
+ 2 files changed, 35 insertions(+), 5 deletions(-)
+ rename Documentation/devicetree/bindings/nvmem/{ => layouts}/u-boot,env.yaml (75%)
+
+diff --git a/Documentation/devicetree/bindings/nvmem/layouts/nvmem-layout.yaml b/Documentation/devicetree/bindings/nvmem/layouts/nvmem-layout.yaml
+index 3b40f7880774..382507060651 100644
+--- a/Documentation/devicetree/bindings/nvmem/layouts/nvmem-layout.yaml
++++ b/Documentation/devicetree/bindings/nvmem/layouts/nvmem-layout.yaml
+@@ -21,6 +21,7 @@ oneOf:
+   - $ref: fixed-layout.yaml
+   - $ref: kontron,sl28-vpd.yaml
+   - $ref: onie,tlv-layout.yaml
++  - $ref: u-boot,env.yaml
+ 
+ properties:
+   compatible: true
+diff --git a/Documentation/devicetree/bindings/nvmem/u-boot,env.yaml b/Documentation/devicetree/bindings/nvmem/layouts/u-boot,env.yaml
+similarity index 75%
+rename from Documentation/devicetree/bindings/nvmem/u-boot,env.yaml
+rename to Documentation/devicetree/bindings/nvmem/layouts/u-boot,env.yaml
+index 9c36afc7084b..56a8f55d4a09 100644
+--- a/Documentation/devicetree/bindings/nvmem/u-boot,env.yaml
++++ b/Documentation/devicetree/bindings/nvmem/layouts/u-boot,env.yaml
+@@ -1,10 +1,10 @@
+ # SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+ %YAML 1.2
+ ---
+-$id: http://devicetree.org/schemas/nvmem/u-boot,env.yaml#
++$id: http://devicetree.org/schemas/nvmem/layouts/u-boot,env.yaml#
+ $schema: http://devicetree.org/meta-schemas/core.yaml#
+ 
+-title: U-Boot environment variables
++title: U-Boot environment variables layout
+ 
+ description: |
+   U-Boot uses environment variables to store device parameters and
+@@ -21,9 +21,6 @@ description: |
+   This binding allows marking storage device (as containing env data) and
+   specifying used format.
+ 
+-  Right now only flash partition case is covered but it may be extended to e.g.
+-  UBI volumes in the future.
+-
+   Variables can be defined as NVMEM device subnodes.
+ 
+ maintainers:
+@@ -42,6 +39,7 @@ properties:
+         const: brcm,env
+ 
+   reg:
++    description: Partition offset and size for env on top of MTD
+     maxItems: 1
+ 
+   bootcmd:
+@@ -58,6 +56,17 @@ properties:
+         description: The first argument is a MAC address offset.
+         const: 1
+ 
++allOf:
++  - if:
++      properties:
++        $nodename:
++          not:
++            contains:
++              pattern: "^partition@[0-9a-f]+$"
++    then:
++      properties:
++        reg: false
++
+ additionalProperties: false
+ 
+ examples:
+@@ -101,3 +110,23 @@ examples:
+             };
+         };
+     };
++  - |
++    partition@0 {
++        reg = <0x0 0x100000>;
++        label = "ubi";
++        compatible = "linux,ubi";
++
++        volumes {
++            ubi-volume-u-boot-env {
++                volname = "env";
++
++                nvmem-layout {
++                    compatible = "u-boot,env";
++
++                    ethaddr {
++                        #nvmem-cell-cells = <1>;
++                    };
++                };
++            };
++        };
++    };
+-- 
+2.35.3
+
