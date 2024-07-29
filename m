@@ -4,93 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F8B3C3DA61
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 13:55:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00A57C3DA61
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 14:05:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9EE22887BE;
-	Mon, 29 Jul 2024 15:55:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4BD49887D1;
+	Mon, 29 Jul 2024 16:05:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JspcSr/9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wzBhA5ZY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 369F2887BE; Mon, 29 Jul 2024 15:55:31 +0200 (CEST)
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
+ id F067D887D3; Mon, 29 Jul 2024 16:05:45 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7D9A887E6
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 15:55:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E8479887CD
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 16:05:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-2cb510cd097so2439270a91.1
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 06:55:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a7a9a369055so395429766b.3
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 07:05:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722261327; x=1722866127; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=19hEm6WdnYLiXVxCMUjY5iiin/7v5g8W9RU61eZfRd8=;
- b=JspcSr/90RDbhX59fM2+BO4OfD7sxmMrj9U09A3gBgt2z+FdMFyDptuxDQ+h9GYecx
- cKVl2Vdm/ONl50rZSIRxOYoJiXzW9otmgT+hCsnkolJgBtorVzxBjl7PmCJgHuuqI58M
- 6kYWohMaoXk8QdNoz945DTP4PWhgssDbDHA4Wmm3RuLtDmK8Uo+U8dJJk/3Vr+YIUqro
- QnfaejsbdtNNZVg9j0UV5XJqRwwZAiUKeXoT6Qr4CsgTXjfoUx+2gBcgPEsVRj1C/ryw
- wrGT/9872+FsNEK3oVwzSsKFfu11Jq0CopYyOCQAEqD4jIXAzL2P/w8UD7HQja1Wc5VQ
- fbJg==
+ d=linaro.org; s=google; t=1722261943; x=1722866743; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=cWx0WyxApH5hgjiPYwgP9riQrYcsbgfZM9ltQ2cm6qw=;
+ b=wzBhA5ZY3xLCevQgqrmakZPlWoE7BEviqGxqw9nPrbWm4/P2g2PWDOzwdZwq2nCOuh
+ xZxvW7go4X2152OUlCMcQXTMGgV2gGZA3nL2VA13i6MH03pF82th+/y9idQAFt2oqFRt
+ RRoxN9a3YQ+qsOmPXVNjqtHgu4hM3Mu9IDjL7erbrpzp0dy9mzS3XZJd5/kzuoCMGW5+
+ h422sd3aJUqo0GZatT6As6uJw1PhX/XkLraTVMcb9WQKd+AoA+HMs82hQj7bN5TV5Am7
+ tD1+0ZbYXJJOA6paytN10nJPqvPmbDgDNtHSWUKc6IoEoymAwPHfI7phZo1CtuxsSNIb
+ j+kQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722261327; x=1722866127;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=19hEm6WdnYLiXVxCMUjY5iiin/7v5g8W9RU61eZfRd8=;
- b=q4+jcpFypcPch4527RZVTM9p6MdHYWgG6oopHeIC+/wlUjSzpjqNpJ8Sd6j934KGO2
- jR5+f9MUY+iCKydZHnpsCS/2N4aY7oq07cz0CMvqNCu2JRur5mGsIgd8J1QfI0hD4KJd
- EN6r8AkF7mElbBoGMvPHGbGfycfHWAfLWXwxZ5F7d723gnNGS64WLB+MZwakWfgHum5b
- vFTQDEBaAgOYNPZt7AphIQZs/8VGWBZSkKG4oyiEcZVFqlZaXCJwmkjRz/kQcM8kV5An
- RMDeY75+TcKOTUe67haHbzkK5WbL5ObIXZ4RWMPdcqTseHArNg9aJmDDQopPWhEdshgX
- /NKA==
-X-Gm-Message-State: AOJu0Yw7NG16rGLsG9/hWpVkqmVuV4Yb6IKvIWthtcHd35bSrMGHicXt
- eIYjyIUZHiQ/t4oIF8pVKPZgTvzgbENIiPvMEJdjhxFCVpJ/jO8dgPuqMQAiDocgaZk8ZFPkQOA
- 4wHQPA7UCtiPKtsrHXoOqd2AXbCIh8/EsaZZcbQ==
-X-Google-Smtp-Source: AGHT+IHF3Sv7L3/b0yPvZ3yVOOhTAsl5k+ZmQoqH4xQX/Ae1t1nzb9QFJRA0qbYQO6SjrkmgdWXKx3LK3Zj6TLsojLw=
-X-Received: by 2002:a17:90a:5d17:b0:2c9:a151:44fb with SMTP id
- 98e67ed59e1d1-2cf7e1fad43mr8912858a91.22.1722261327246; Mon, 29 Jul 2024
- 06:55:27 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1722261943; x=1722866743;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cWx0WyxApH5hgjiPYwgP9riQrYcsbgfZM9ltQ2cm6qw=;
+ b=Kfvwttgp0PoivDsy9UNSp6Njc7S4LhBAxn4Bs7l3XqR+ztuQpvN+1G58hcPBqGrwZ9
+ p5AgT3zCQ1wrcctV8+D52gc1NtQED3tZJijczYvK9jRvaQYJSYgrZsGLtZyvYI6n6xS3
+ Hd9VClL63odL8bYPig0DxhAS3Gm5/fGmNA23A0w4VOjq6Rpttrrs8NnSUjjem673SjLD
+ xb+dFhHI9LspSKQyKR7l89zt3ZqVOLsMIE/Jjl75X4mFyIczM+kAVki6XF8chSaXxHvP
+ ypyQ3NH1Z0i78ESkjHZ6VLE/4uvdKclBZ3efOem8T7DV+uF0EqGEioMG1HGfX/KgrzZU
+ aJaA==
+X-Gm-Message-State: AOJu0Yyg3+6F02xzHcA0BCn0eOZXguPe9dw8MdGYCOOj1K87zIxSnlLu
+ DJWfp8Glv17uEfinjs2Iy/kLyS/BVFEO8Mu33CjGWl7GusHL5mE84xcKWHAWYtM=
+X-Google-Smtp-Source: AGHT+IEXKwLlw3FiqdJ6sw4Tu9MvKumt/LGzACXXOyI7BgZu4CPC5JdR+LJ9jfY9yvV38ZxbjEQbBw==
+X-Received: by 2002:a17:907:998a:b0:a7a:8cb9:7491 with SMTP id
+ a640c23a62f3a-a7d4014a685mr463068566b.54.1722261942790; 
+ Mon, 29 Jul 2024 07:05:42 -0700 (PDT)
+Received: from hera (ppp046103060252.access.hol.gr. [46.103.60.252])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a7aca51eea0sm513906266b.0.2024.07.29.07.05.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 29 Jul 2024 07:05:42 -0700 (PDT)
+Date: Mon, 29 Jul 2024 17:05:39 +0300
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Benjamin BARATTE <benjamin.baratte@st.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "eajames@linux.ibm.com" <eajames@linux.ibm.com>,
+ "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>,
+ "sjg@chromium.org" <sjg@chromium.org>,
+ "tharvey@gateworks.com" <tharvey@gateworks.com>,
+ "trini@konsulko.com" <trini@konsulko.com>
+Subject: Re: [PATCH 2/3] tpm: remove check on pcr bank count
+Message-ID: <Zqehs3kedwXDeCU7@hera>
+References: <DU0PR10MB52447C746D35B2C948CD2003E1A12@DU0PR10MB5244.EURPRD10.PROD.OUTLOOK.COM>
 MIME-Version: 1.0
-References: <20240702182325.2904421-1-raymond.mao@linaro.org>
- <20240702182325.2904421-21-raymond.mao@linaro.org>
- <CAC_iWjLeM3zKfo274FpEhPb11=KxrRASqBW6WDe4o-jmQxmBkQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjLeM3zKfo274FpEhPb11=KxrRASqBW6WDe4o-jmQxmBkQ@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Mon, 29 Jul 2024 09:55:16 -0400
-Message-ID: <CAEfUkULz5rK7mf_JOiRb2n7Dqis-AYLY9hhHNidJqUaXkSu96g@mail.gmail.com>
-Subject: Re: [PATCH v4 20/29] lib/crypto: Adapt x509_cert_parser to MbedTLS
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
- Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
- Mario Six <mario.six@gdsys.cc>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, 
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng@tinylab.org>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Alexander Gendin <agendin@matrox.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <DU0PR10MB52447C746D35B2C948CD2003E1A12@DU0PR10MB5244.EURPRD10.PROD.OUTLOOK.COM>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,52 +95,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 29 Jul 2024 at 09:20, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-wrote:
+On Mon, Jul 15, 2024 at 01:33:18PM +0000, Benjamin BARATTE wrote:
+> The number of PCR banks return by the tpm2_get_pcr_info() is related to
+> TPM supported list of hash algorithm that could be greater than thus
+> supported by U-Boot. This is not an issue as long as the PCR active bank
+> hash an hash algorithm supported by U-Boot.
+> Therefore, checking the number of PCR bank supported by the dTPM and
+> thus supported by U-Boot doesn't make sense.
+> This test shall be removed or shall reflect the maximum hash algorithm
+> defined by the TPM2.0 spec 1.59 which is 8 hash algorithms.
+>
+> Signed-off-by: Benjamin BARATTE <benjamin.baratte@st.com>
+> ---
+>
+>  lib/tpm-v2.c | 8 --------
+>  1 file changed, 8 deletions(-)
+>
+> diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
+> index 59e6cbafaf..64a2f15fee 100644
+> --- a/lib/tpm-v2.c
+> +++ b/lib/tpm-v2.c
+> @@ -413,14 +413,6 @@ int tpm2_get_pcr_info(struct udevice *dev, struct tpml_pcr_selection *pcrs)
+>                 return ret;
+>
+>         pcrs->count = get_unaligned_be32(response);
+> -       /*
+> -        * We only support 4 algorithms for now so check against that
+> -        * instead of TPM2_NUM_PCR_BANKS
+> -        */
+> -       if (pcrs->count > 4 || pcrs->count < 1) {
+> -               printf("%s: too many pcrs: %u\n", __func__, pcrs->count);
+> -               return -EMSGSIZE;
+> -       }
+>
+>         ret = tpm2_get_num_pcr(dev, &num_pcr);
+>         if (ret)
+> --
+> 2.34.1
+>
 
-> Hi Raymond
->
-> >
-> > +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
-> > +/* Backup of part of the parsing context */
->
-> I am not sure I understand the comment
->
-> We can remove this comment line.
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-
-> > +struct x509_cert_mbedtls_ctx {
-> > +       void    *tbs;                   /* Signed data */
-> > +       void    *raw_serial;            /* Raw serial number in ASN.1 */
-> > +       void    *raw_issuer;            /* Raw issuer name in ASN.1 */
-> > +       void    *raw_subject;           /* Raw subject name in ASN.1 */
-> > +       void    *raw_skid;              /* Raw subjectKeyId in ASN.1 */
-> > +};
-> > +#endif
-> > +
-> > +/*
-> > + * MbedTLS integration Notes:
-> > + *
-> > + * Fields we don't need to populate from MbedTLS:
->
-> You mean *for* mbedTLS?
->
-> > + * 'raw_sig' and 'raw_sig_size' are buffer for x509_parse_context,
->
-> 'raw_sig' and 'raw_sig_size' are used in x509_parse_context(), which
-> in turn is not used in mbedTLS?
->
-> Both are used by the U-Boot ASN1 library when parsing the x509.
-But for MbedTLS, we removed "struct x509_parse_context ", since all
-parsing is done under MbedTLS and we don't need to expose them at all.
-
-> + * not needed for MbedTLS.
-> > + * 'signer' and 'seen' are used internally by pkcs7_verify.
-> > + * 'verified' is not inuse.
->
-> either 'unsued' or 'not in use'
->
-A typo. will fix it.
-
-Regards,
-Raymond
+> ST Restricted
