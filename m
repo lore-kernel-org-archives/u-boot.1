@@ -4,58 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57CE2C3DA61
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 17:58:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62542C3DA61
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 18:06:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A8E38882D;
-	Mon, 29 Jul 2024 19:58:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=posteo.net
+	by phobos.denx.de (Postfix) with ESMTP id D1D8488791;
+	Mon, 29 Jul 2024 20:06:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=posteo.net header.i=@posteo.net header.b="mBMVoXdD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jSpFvRmt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2578F88835; Mon, 29 Jul 2024 19:58:04 +0200 (CEST)
-Received: from mout02.posteo.de (mout02.posteo.de [185.67.36.66])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 70A7B87BF4; Mon, 29 Jul 2024 20:06:00 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3436188791
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 19:58:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CC9E488791
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 20:05:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=posteo.net
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stefan_b@posteo.net
-Received: from submission (posteo.de [185.67.36.169]) 
- by mout02.posteo.de (Postfix) with ESMTPS id D48F6240104
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 19:58:01 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=posteo.net; s=2017;
- t=1722275881; bh=JdvW2nU/jaz6yIZS70rbzYQok3EkKm52SoB8VMDvfng=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:From:Content-Type:
- Content-Transfer-Encoding:From;
- b=mBMVoXdDDFHUWqaIa9JpEnqzgH3XUQ2G3BY8A2LdijaB225BPM8xZSch6R/B1hzhT
- gyhLdYhu5ycyyx2hi44By/9schqHvTjZ1lRcDlHehHgX/ORPOwzOn7aebOTfQtoQKK
- 5d/r+745HZXRfehKcOp+kPAD0h5zp1wQuD1MrdJvAWk+B7Lbxg/7lcJj4EdAYNKmAZ
- BzgpfdanB4hZAj6XIP+le0u07fM/iRoiPxn5s8VxYAcbq89pC5fDSpiOkjN7MqTklk
- KBCrsHmlxSxVIQy0eP0tpMxrMfXMz5T4FGh8g7u+ra5owSQjeDpYBrWuL9ncvjnb04
- x5C4tGBhjcwfw==
-Received: from customer (localhost [127.0.0.1])
- by submission (posteo.de) with ESMTPSA id 4WXmL10MQ6z6twV;
- Mon, 29 Jul 2024 19:58:00 +0200 (CEST)
-Message-ID: <8babad6c-92c0-7299-19e0-904b62e6143c@posteo.net>
-Date: Mon, 29 Jul 2024 17:57:32 +0000
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5a156556fb4so5988872a12.3
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 11:05:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1722276357; x=1722881157; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vIC8K9emuJ4rM7l2Dp3IQw7KqdqSxQk7+u7Kminrf7I=;
+ b=jSpFvRmtUe8aI5KOO4eudLEmwzUseYdHLcUPfZ+xV1SF2WV9dvBcgNRhVWWVP5cO3c
+ 5bM0WxSbtHobwvZJWP9EO0UBa/sv0LATpxyTKea6378uLKNvzcAp9tp6zQexwsH9J5Ei
+ Gga28Pn3hKNz1IZzzrfsS76aBSxtCfAJkpr7cmSwk1j9ejeKElVnHtATTQ33+8LPCHy/
+ PmL8ptg7AtmUVQRCIXeX0fOnRpBSmHXbuHdC8nJcyrDeOLFIXJSdtyGt5TIKlywWjcbC
+ dwR7gbbInZvMcQ0rWcNvg1agiCAuqWg9iqGVMMhwq/7o4Q5rwtkWjbzO29owv+5vsKlE
+ eihw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722276357; x=1722881157;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vIC8K9emuJ4rM7l2Dp3IQw7KqdqSxQk7+u7Kminrf7I=;
+ b=NuFzLeaPMhNL2OWhkgxxR8OM32Di68+G3IjjKAPWdFZeSfsXbOJE/C6IAxs0G1aMNO
+ 5JRH4TCgrEWbciWpN9vpCX9J8J2hFw1me2D17u0JPrnw0IYXw7kcArb0+/T0ZcisEisS
+ o3Zn4ijQKxZcckrqltk9tshpd1aRNkqcxdMfe00YyGDwcrrkSHdTRcRGTe/qHiVzPkGz
+ 6f137O/Eu7aZFpwTQ4M5TIrdeNSks4z049va2HxLEyZ3vWGWpgIBa25SBRKgIvzDrLIM
+ wl2j+G4vO3sXwGpveaJz985TLe3l8FXlLD9egGUlEnzOsiEP1cpbf8klB0/0sla3TZ1w
+ zv0Q==
+X-Gm-Message-State: AOJu0YyVMwALMesi+0YHuB07i4YRgLVGiRTTFhI7Eoofl+r8hPrSQ9Pt
+ zy4wk+iUIW0vTs1X/H/7xyCrQtvOHz9hhco1sAHLApgDnjZZG43Fp4rC7hqzWmoAgpkf2wYqsTv
+ x+dpTZpiNBnf03XO0mwuTSTEbdOIFGaT4taoKHw==
+X-Google-Smtp-Source: AGHT+IFpbFrGgsdJ92793BxAdYtNS23OFWLdg6FCY6SoSYVt22rpGirVVNTBB1O859DJsJaO1unvtAIAkA0FFHuQ45A=
+X-Received: by 2002:a50:ab11:0:b0:57d:2659:9141 with SMTP id
+ 4fb4d7f45d1cf-5b022003c65mr5177502a12.24.1722276357167; Mon, 29 Jul 2024
+ 11:05:57 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH 06/35] arm: friendlyarm: Avoid accessing global_data
- fb_base
+References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
+ <20240724060224.3071065-7-sughosh.ganu@linaro.org>
+ <CAFLszTgwmQTwRzBuOJvh-=qBGuq+5fRc6vxBptqgQuJyHyuP6w@mail.gmail.com>
+In-Reply-To: <CAFLszTgwmQTwRzBuOJvh-=qBGuq+5fRc6vxBptqgQuJyHyuP6w@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Mon, 29 Jul 2024 23:35:46 +0530
+Message-ID: <CADg8p94zPZVFq3Snus8EPT58xPK1AXiNk227uqOstNtZ0NWx1g@mail.gmail.com>
+Subject: Re: [PATCH 06/40] alist: add a couple of helper functions
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Albert Aribaud
- <albert.u.boot@aribaud.net>, U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20240724150922.2343249-1-sjg@chromium.org>
- <20240724150922.2343249-7-sjg@chromium.org>
-Content-Language: en-US, de-DE
-From: Stefan Bosch <stefan_b@posteo.net>
-In-Reply-To: <20240724150922.2343249-7-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
+ Max Filippov <jcmvbkbc@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,52 +95,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On Fri, 26 Jul 2024 at 05:03, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Sughosh,
+>
+> On Wed, 24 Jul 2024 at 00:03, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> >
+> > Add a couple of helper functions to detect an empty and full alist.
+> >
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> > Changes since rfc: None
+> >
+> >  include/alist.h | 22 ++++++++++++++++++++++
+> >  1 file changed, 22 insertions(+)
+>
+> I had to hunt around to see why these are needed. It's fine to add new
+> functions to the API, but in this case I want to make a few points.
+>
+> >
+> > diff --git a/include/alist.h b/include/alist.h
+> > index 6cc3161dcd..06ae137102 100644
+> > --- a/include/alist.h
+> > +++ b/include/alist.h
+> > @@ -82,6 +82,28 @@ static inline bool alist_err(struct alist *lst)
+> >         return lst->flags & ALISTF_FAIL;
+> >  }
+> >
+> > +/**
+> > + * alist_full() - Check if the alist is full
+> > + *
+> > + * @lst: List to check
+> > + * Return: true if full, false otherwise
+> > + */
+> > +static inline bool alist_full(struct alist *lst)
+> > +{
+> > +       return lst->count == lst->alloc;
+> > +}
+>
+> In general I see you manually modifying the members of the alist,
+> rather than using the API to add a new item. I think it is better to
+> use the API.
+>
+> struct lmb_region rgn;
+>
+> rgn.base = ...
+> rgn.size = ...
+> rgn.flags = ...
+> if (!alist_add(&lmb.used, rgn. struct lmb_region))
+>    return -ENOMEM;
 
-On 24.07.24 17:08, Simon Glass wrote:
-> Use the new video function to get the framebuffer base.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+Yes, I had seen this usage of the API in another of your patch.
+However, my personal opinion of the API's is that alist_expand_by()
+gives more clarity on what the function is doing. One gets a feeling
+that alist_add() is only adding the given node to the list, whereas it
+is doing a lot more under the hood. I feel that using the
+alist_expand_by() API makes the code much easier to understand, but
+that's my personal opinion.
 
-Tested-by: Stefan Bosch <stefan_b@posteo.net>
+>
+> or you could make a function to add a new region to a list, with base,
+> size & flags as args.
+>
+> > +
+> > +/**
+> > + * alist_empty() - Check if the alist is empty
+> > + *
+> > + * @lst: List to check
+> > + * Return: true if empty, false otherwise
+> > + */
+> > +static inline bool alist_empty(struct alist *lst)
+> > +{
+> > +       return !lst->count && lst->alloc;
+> > +}
+>
+> I would argue that this is a surprising definition of 'empty'. Why the
+> second term? It seems to be because you want to know if it is safe to
+> set values in item[0]. But see above for how to use the API.
 
-Looks OK, tested on FriendlyElec-Board NanoPC-T2 
-(s5p4418_nanopi2_defconfig).
+I want the initialisation of the list to be kept separate from adding
+more 'nodes' to the list. Hence my usage.
 
-Thanks!
+-sughosh
 
-> 
->   board/friendlyarm/nanopi2/board.c | 9 +++------
->   1 file changed, 3 insertions(+), 6 deletions(-)
-> 
-> diff --git a/board/friendlyarm/nanopi2/board.c b/board/friendlyarm/nanopi2/board.c
-> index c8cbc5a15fa..b32dfc6b570 100644
-> --- a/board/friendlyarm/nanopi2/board.c
-> +++ b/board/friendlyarm/nanopi2/board.c
-> @@ -11,6 +11,7 @@
->   #ifdef CONFIG_PWM_NX
->   #include <pwm.h>
->   #endif
-> +#include <video.h>
->   #include <asm/global_data.h>
->   #include <asm/io.h>
->   
-> @@ -492,12 +493,8 @@ int splash_screen_prepare(void)
->   					 ARRAY_SIZE(splash_locations));
->   	}
->   
-> -	if (!err) {
-> -		char addr[64];
-> -
-> -		sprintf(addr, "0x%lx", gd->fb_base);
-> -		env_set("fb_addr", addr);
-> -	}
-> +	if (!err)
-> +		env_set_hex("fb_addr", video_get_fb());
->   
->   	return err;
->   }
-
-Regards,
-Stefan
+>
+> > +
+> >  /**
+> >   * alist_get_ptr() - Get the value of a pointer
+> >   *
+> > --
+> > 2.34.1
+> >
+>
+> Regards,
+> Simon
