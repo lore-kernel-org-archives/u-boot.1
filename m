@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E674CC3DA7E
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 16:21:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD92BC3DA7F
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 16:21:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A552888A2;
-	Mon, 29 Jul 2024 18:19:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0842A888D1;
+	Mon, 29 Jul 2024 18:19:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ehYYOliD";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HR9Jd2U1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 817358882D; Mon, 29 Jul 2024 18:19:34 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id D6EBB88884; Mon, 29 Jul 2024 18:19:35 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3576888867
+ by phobos.denx.de (Postfix) with ESMTPS id B3C85888A4
  for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 18:19:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6b5f46191b5so18690926d6.3
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6b7a8cada97so17292976d6.3
  for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 09:19:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1722269971; x=1722874771; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DtV7F+u5+VN9t/Aqkm2Ch7XyTBOKfC19MEy7kaqbmGI=;
- b=ehYYOliD3fMxyUbm64UjK3ARm5hPMQFpX4EMa3+CXrSSUntzOvozo3SQOXB5+vOjc1
- WQhqVQdr4/UGnWPp33XGbw5CS6eUD0UT8KUKT6TfpU7CoioxWlrHioxV99Gbq2CubbCw
- S291h7noSZJc4S0hvUF7u+S9nt28+iX/SL+9M=
+ bh=Su5nRjwEV8BEysiAdJsnDV/LR2UKd90a+zszCOsPME4=;
+ b=HR9Jd2U1cID/yB9iWB2l8ykdTo8LbFdCT9CNBHoboRI/pOhLX+WUjCTCqcrsgTPsOV
+ 0xi+cZky3s81jE2HvmAFXqpRWDvN5GkXIa9g2o83UkzY/WnoKSE8u/KTIHr5JK8WDv6G
+ 15JMKJ9BrHphRBNYqLuVQs6xj76bOLEjTToxg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1722269971; x=1722874771;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DtV7F+u5+VN9t/Aqkm2Ch7XyTBOKfC19MEy7kaqbmGI=;
- b=dfeob0+GsI7ZKNEzbEjrDw9j2pc4856PdyaVDdW5k3X+38hk4IfpUJR0M22PFTQiA/
- FA8X7CK86Ux5ZA0hOKROCrGxTiy21TVq7wX1cqSJmxx8mxw+spUBhf1QiQhMmNhDVMNp
- TulW8Y3Ea+gLNkTJelpnpbqFxks1deC+xb71j09ROuDAdZIyPVDkdqKUlQHQsBmyoC4Q
- gas5bBe7DqeohVh0gJLoEiXwdQAZ4yDG3+UHnT3tXLPQ6qKBEN45BVutfL6PPyUWB8kE
- IrLESDgAPK6jW9qggZ/1kKqNTQU2baNZ4ZesiQ8JCFVnMvY3UwpzmS1+9pRb7AbQ+mS1
- tyOw==
+ bh=Su5nRjwEV8BEysiAdJsnDV/LR2UKd90a+zszCOsPME4=;
+ b=MWrO9mw/6+48WwhQ9sovJUY5eTMf0FuJM0Zc5Mpng2UsC0VIEZlnspzrTH4cqmnB2E
+ qEEoU12iar11Fx1cgJ3WvB+8cPJRKkdt8Z6xnuBaLaIbFoTBZMls7OYBjK/H7vjXdk6L
+ JpBp/XPDXyE0AQxVS1QUa+i19E0WwwBMzRY5Cjh2pAErQSfTgmhuCEGQBjz8tvTmGzkW
+ vO3VEbtRdbyBMrzza1X8hhP5uzT0rZtj7S2nN9WJGqJCRSTdmteMRu30eTcKFDro7xeD
+ 3SIPzUl5j00IPwO3l9MjsXF5+jRgGUTedjwdMZCSJoR3btbI1l6xxeRzqWgEkJ2ZeQSH
+ qlSg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWCUo3Q8Tas/oxqIVLkTnLKoIqI8pFjXRJgduAeXfujF1niaKTM8l6nPqQcRyTh7YF9EgW/rmn2c3a+phyk/UrUGTe/wA==
-X-Gm-Message-State: AOJu0Yx0o7tPYYDWww08ySi37g4Bl3D7ZPmXao918xYKj0YMm8+LUteu
- XENY3ivYDYmxmlXT1piwv9Ef7QN0n39e4kNFjpUtC6Tt+xKhsfc+FjWUn30S0NuoqdYyyQNKoNe
- A6Y0Q33EW7vRBMt1kzzhxFfzTxiYFwngAxEGZ
-X-Google-Smtp-Source: AGHT+IEbNvp60od4VCkciPewL39kO3leWCS8AoVMl/iWAogTUOjD3l5iy+p4lyVT1sg4+kNCJTbMbAbuQKk+1u/Aq24=
-X-Received: by 2002:a05:6214:402:b0:6b5:80e0:1301 with SMTP id
- 6a1803df08f44-6bb55aeca19mr118198846d6.55.1722269971232; Mon, 29 Jul 2024
+ AJvYcCXJl83Goh2da8+n5P7pK+spSS02KIdQU81H4hYBjKtmopXLmLMNdk92TX6gX/l9B3OJFB0CPQk8YzbRnY+thhx3OGUhhA==
+X-Gm-Message-State: AOJu0YzZN4bUKMGbHM+c+OLTzjr7A6sZ7nlZ+LXkwSrEog1CUPUxHxbU
+ qvxJSVfHlmqCsAQC8Mez3nf+tiWZKXhnSKnQcfC9xSzbZddEvRkiJ8wCah9xNxfXOQcZs78gHD9
+ JH2VHdGP1H1YrLmW/Fla+0iTUlUKgIGHTDTZD
+X-Google-Smtp-Source: AGHT+IGX8KLHvU/ISLpV+y/Q4VhtX3GCqAZSeg7oWPSo85lw3XD8uzcuIOrccfmq+8fcdO2kvkIK/PUtAARxYEvnxjw=
+X-Received: by 2002:a05:6214:2b0d:b0:6b5:4aa9:9682 with SMTP id
+ 6a1803df08f44-6bb55af91fcmr97062916d6.41.1722269971666; Mon, 29 Jul 2024
  09:19:31 -0700 (PDT)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 29 Jul 2024 09:19:30 -0700
+ HTTPREST; Mon, 29 Jul 2024 09:19:31 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240720104950.2730773-11-sjg@chromium.org>
-References: <20240720104950.2730773-11-sjg@chromium.org>
+In-Reply-To: <20240720104950.2730773-10-sjg@chromium.org>
+References: <20240720104950.2730773-10-sjg@chromium.org>
  <20240720104950.2730773-1-sjg@chromium.org>
-Date: Mon, 29 Jul 2024 09:19:30 -0700
-X-Google-Sender-Auth: x83tkxx1Lykc71VDbDhL0UsnjHc
-Message-ID: <CAFLszTgPBS1-DiFcfqcH-1wz5cZDf3TjMTzSRN5vtaUTXL0x8w@mail.gmail.com>
-Subject: Re: [PATCH 10/20] binman: Fix a comment typo in _DoReadFileDtb()
+Date: Mon, 29 Jul 2024 09:19:31 -0700
+X-Google-Sender-Auth: -TVocHmspTyW1EabI2cu842vano
+Message-ID: <CAFLszTiDDC1XYu=zo67Fu1j6pFftbdGX-x8CntZk3=hF=JgX_Q@mail.gmail.com>
+Subject: Re: [PATCH 09/20] binman: Mention expanded entries in u-boot-vpl
 To: Simon Glass <sjg@chromium.org>
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Brandon Maier <brandon.maier@collins.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Lukas Funke <lukas.funke@weidmueller.com>, 
- Marek Vasut <marex@denx.de>, Neha Malcom Francis <n-francis@ti.com>,
- Peng Fan <peng.fan@nxp.com>, 
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Christian Taedcke <christian.taedcke@weidmueller.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Lukas Funke <lukas.funke@weidmueller.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>, 
  Philippe Reynes <philippe.reynes@softathome.com>, 
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>, 
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>, 
@@ -95,12 +95,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix a minor typo in this function.
+Add a comment about this entry type being expanded, to match the comment
+for SPL and TPL. Drop an unwanted line in the SPL and TPL docs while
+here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/binman/ftest.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tools/binman/entries.rst               | 11 +++++------
+ tools/binman/etype/u_boot_spl_nodtb.py |  2 --
+ tools/binman/etype/u_boot_tpl_nodtb.py |  2 --
+ tools/binman/etype/u_boot_vpl.py       |  3 +++
+ tools/binman/etype/u_boot_vpl_nodtb.py |  4 ++--
+ 5 files changed, 10 insertions(+), 12 deletions(-)
 
 Applied to u-boot-dm, thanks!
