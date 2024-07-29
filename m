@@ -4,78 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 706B4C3DA61
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 12:42:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3B54C3DA4A
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 12:55:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B31E988651;
-	Mon, 29 Jul 2024 14:42:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3A530887BF;
+	Mon, 29 Jul 2024 14:55:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=inbox.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rrxGivPP";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=inbox.ru header.i=@inbox.ru header.b="fcY84zbA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BC25887B9; Mon, 29 Jul 2024 14:42:18 +0200 (CEST)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 33734887B4; Mon, 29 Jul 2024 07:47:38 +0200 (CEST)
+Received: from smtp44.i.mail.ru (smtp44.i.mail.ru [95.163.41.82])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D95B88056
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 14:42:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BB8288602
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 07:47:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=inbox.ru
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2cb5e0b020eso2524108a91.2
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 05:42:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722256934; x=1722861734; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VgQ3YqwtcVkxXXiELgCTUD5GiXv+UES6p8UtIuDkeHE=;
- b=rrxGivPPyxuTuG9KEospYvU6bsenyMBjG6ES90dLQu4i+rzhNOeVFBXDQTYUIMao5h
- w7Cl+Hx6YEPQPD35UUk0t1Ks39SpxSl4S7r4259fU77MH3P4dl171TVG3fSnAlZk0Aw/
- ZicS11ApX00myRCR9Sx+oqYYQqAZoQ/RyTiGLZmH7UtZvwS73D6OSRabUjJmMnbpoY8B
- BL59izA3sgMcmaueThPprk9+zabjbm89nm2kVbFxHvurfEx4JQ7q0CIj5MFX+g6dEyXp
- A/Ul5b3V3hotFR9Hc/XfsecpM8VAb8SvnyumR7P6QcX/INW991qGgOwQAPN5Xl2TJHa9
- rUdQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722256934; x=1722861734;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=VgQ3YqwtcVkxXXiELgCTUD5GiXv+UES6p8UtIuDkeHE=;
- b=OAjTwcRvELK31zlPjBFhnhx3dOuuHz6NT3Bu8HfBcA4m1lWcBZjSrxmpuOLvFA9G2r
- m//KurOO8/opnXgnEuZ6FDG29bjVzfMV9uYg/9fYILdAjZmXAyliWblcq7o556IY1KNw
- iyBMH/FUSEbYRiOOdP3wAEB+DvMcZACI7Z+i5Yfu8SLkNQ8pMzR8vWXWW8SVKgDB62w+
- eSLjBU6zHaMnHkeZJvYCQZ/LDsRFBcHqN5/PqxANfQTjsdBdGoexT6Sc7t1Yd1guzOtK
- 9T0vnYrkoxy/s94Z45nXFWkmdWhRPr7/Kl8xhrdteH8j67DLZmsqPFl3gMqlU4YtgSGP
- eTjA==
-X-Gm-Message-State: AOJu0Yy/LdABkEj7C29PWfTvuVeLl1tPDhTQSetOIqh4VwpyoZFxJXug
- dEM8FCn61pCzefQiw2W2E+zOn6CQVz9jQN69R6XwQSRnla7Vh8MPYF3mJobMIq8qnKxmiv0SusO
- r/kVg91rU7guQG4ly0RPgEWx+duCfGdB58gpN9Q==
-X-Google-Smtp-Source: AGHT+IEmdcNZ3lgEcJjed4oOcAxuG3yVmT7cOEIXmD48AnWGORIqnRWwfQJm6WJULnygqKijBOQq+u6Zd4bJG4uL3RM=
-X-Received: by 2002:a17:90a:784c:b0:2c9:e0e3:e507 with SMTP id
- 98e67ed59e1d1-2cf7d3efc32mr8027639a91.0.1722256933493; Mon, 29 Jul 2024
- 05:42:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=fido_max@inbox.ru
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=inbox.ru;
+ s=mail4; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References
+ :Cc:To:Subject:MIME-Version:Date:Message-ID:From:Sender:Reply-To:To:Cc:
+ Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:
+ List-Archive:X-Cloud-Ids:Disposition-Notification-To;
+ bh=JyKvhIJtpqsfND6e/xQzbK4HNRVh8U/V0miNzIf/yWU=; t=1722232055; x=1722322055; 
+ b=fcY84zbApoPcg9dwVFU71q1LU/OGkS/DYbHhJnQTyUziWthSSeaNeUAypBXcPd6M2DvO+YsnL4i
+ RDLAHSEeDGvCmFYGcvKRhY0UjfkGCaTseVOAwH3tJGyqmAJX6yqHP82Vq8QJToyh6AiIHE4RwqhCM
+ 4ql4cc0D5Nas2GVYN7ofZOjD5cJN7fQx+tPZ22aaGSDxNOzGdqzydXCeVIGyZxME39+dvdK5eL43M
+ NRXm6ai5Rhkw/dHCPLZaaPOq0PwWbxPd1qm8Z2RB+d28F0jippa7nVJekO5nkJh5MgWbbj0FLmA2f
+ eabXFVT1DEm0tTFf+yxatbahhI4bqSIQ433w==;
+Received: by exim-smtp-868bf69f6c-jrksh with esmtpa (envelope-from
+ <fido_max@inbox.ru>)
+ id 1sYJEK-00000000JR4-3eL8; Mon, 29 Jul 2024 08:47:33 +0300
+Message-ID: <049ecd76-8dc0-4506-9355-5f6e7ae94392@inbox.ru>
+Date: Mon, 29 Jul 2024 08:47:31 +0300
 MIME-Version: 1.0
-References: <cover.1721910373.git.jerome.forissier@linaro.org>
- <f28efa0115c71e97fbef0bd1a6628e087cd210c1.1721910373.git.jerome.forissier@linaro.org>
-In-Reply-To: <f28efa0115c71e97fbef0bd1a6628e087cd210c1.1721910373.git.jerome.forissier@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 29 Jul 2024 15:41:37 +0300
-Message-ID: <CAC_iWj+VCziVSKBFbPeCaRLJKQxM0XQD+h3b2kasQ74OMLiKpg@mail.gmail.com>
-Subject: Re: [PATCH v5 12/20] net: split cmd/net.c into cmd/net.c and
- cmd/net-common.c
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
- Raymond Mao <raymond.mao@linaro.org>, Maxim Uvarov <muvarov@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] riscv: define find_{first,next}_zero_bit in
+ asm/bitops.h
+To: E Shattow <lucent@gmail.com>
+Cc: u-boot@lists.denx.de, rick@andestech.com, ycliang@andestech.com,
+ trini@konsulko.com
+References: <20240726120721.150484-1-fido_max@inbox.ru>
+ <CANV2PTMxAOrVDGrD-QJWJjdJ=+1NV-9SNcbBZTsfMuDhqiJR=Q@mail.gmail.com>
+Content-Language: en-US
+From: Maxim Kochetkov <fido_max@inbox.ru>
+In-Reply-To: <CANV2PTMxAOrVDGrD-QJWJjdJ=+1NV-9SNcbBZTsfMuDhqiJR=Q@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Authentication-Results: exim-smtp-868bf69f6c-jrksh;
+ auth=pass smtp.auth=fido_max@inbox.ru
+ smtp.mailfrom=fido_max@inbox.ru
+X-Mailru-Src: smtp
+X-7564579A: B8F34718100C35BD
+X-77F55803: 4F1203BC0FB41BD9000B6812E77BE1C6C95C4F1944E32E59211CC92C36EF20F3182A05F538085040953632B6C8AD599D3DE06ABAFEAF67050DFF2D642BC76527C91D94A15C134E917E11F6D7719F38BE
+X-7FA49CB5: FF5795518A3D127A4AD6D5ED66289B5278DA827A17800CE705B093C0FC4B30B9EA1F7E6F0F101C67BD4B6F7A4D31EC0BCC500DACC3FED6E28638F802B75D45FF8AA50765F79006375A514678F9DF65078638F802B75D45FF36EB9D2243A4F8B5A6FCA7DBDB1FC311F39EFFDF887939037866D6147AF826D8DE3F998674553422A83D78C02541A7AB46F697E157280A5E20879F7C8C5043D14489FFFB0AA5F4BF176DF2183F8FC7C091DAD9F922AA71188941B15DA834481FA18204E546F3947CD23BF7408B3F9022F6B57BC7E64490618DEB871D839B7333395957E7521B51C2DFABB839C843B9C08941B15DA834481F8AA50765F790063707A1F3761B83B09E389733CBF5DBD5E9B5C8C57E37DE458B9E9CE733340B9D5F3BBE47FD9DD3FB595F5C1EE8F4F765FCF1175FABE1C0F9B6E2021AF6380DFAD18AA50765F7900637F09814068C508CC822CA9DD8327EE4930A3850AC1BE2E7356C9A9530EBF72002C4224003CC83647689D4C264860C145E
+X-C1DE0DAB: 0D63561A33F958A5F7D4B7270380899A5002B1117B3ED696B01E5E00B552E4FB957033528158102E823CB91A9FED034534781492E4B8EEADA3FB0D9844EF8EC5BDAD6C7F3747799A
+X-C8649E89: 1C3962B70DF3F0ADBF74143AD284FC7177DD89D51EBB7742DC8270968E61249B1004E42C50DC4CA955A7F0CF078B5EC49A30900B95165D3472E5ECC12A9739C1D2690D26E3280944151EB416270C2E200CF9D2CC4F532D34A8357A0A977FCAE31D7E09C32AA3244C3749C9B1B02F0D3377DD89D51EBB77426617FD882C79C6E0EA455F16B58544A2D06CB91D864A7BD257ADA2CBCE38F05762A0BE504FE5E636F1E3461735CEBA253FCF178C6DD14203
+X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu530nj6fImhcD4MUrOEAnl0W826KZ9Q+tr5ycPtXkTV4k65bRjmOUUP8cvGozZ33TWg5HZplvhhXbhDGzqmQDTd6OAevLeAnq3Ra9uf7zvY2zzsIhlcp/Y7m53TZgf2aB4JOg4gkr2biojX2k8aL79D6UV+kTfBBUIKQ==
+X-Mailru-Sender: 689FA8AB762F7393C6D0B12EA33CAA9B41AA34C7042309332DF6FE1A74364D27E7BBF71E5556281A90DE4A6105A3658D481B2AED7BCCC0A49AE3A01A4DD0D55C6C99E19F044156F45FEEDEB644C299C0ED14614B50AE0675
+X-Mras: Ok
+X-Mailman-Approved-At: Mon, 29 Jul 2024 14:55:00 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,277 +86,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 25 Jul 2024 at 15:59, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
-> Extract some code from cmd/net.c that will be useful in a subsequent
-> commit to implement wget with NET_LWIP.
->
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> ---
->  cmd/Makefile     |   5 ++-
->  cmd/net-common.c | 109 ++++++++++++++++++++++++++++++++++++++++++++
->  cmd/net.c        | 115 -----------------------------------------------
->  3 files changed, 113 insertions(+), 116 deletions(-)
->  create mode 100644 cmd/net-common.c
->
-> diff --git a/cmd/Makefile b/cmd/Makefile
-> index fe733cf6ba9..2c3de45a074 100644
-> --- a/cmd/Makefile
-> +++ b/cmd/Makefile
-> @@ -130,7 +130,10 @@ obj-$(CONFIG_CMD_NAND) += nand.o
->  ifdef CONFIG_CMD_NET
->  obj-$(CONFIG_NET) += net.o
->  obj-$(CONFIG_NET_LWIP) += net-lwip.o
-> -CFLAGS_net-lwip.o := -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
-> +obj-$(filter y,$(CONFIG_CMD_NET) $(CONFIG_CMD_NET_LWIP)) += net-common.o
-> +lwip-includes := -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
-> +CFLAGS_net-lwip.o := $(lwip-includes)
-> +CFLAGS_net-common.o := $(lwip-includes)
->  endif
->  obj-$(CONFIG_ENV_SUPPORT) += nvedit.o
->  obj-$(CONFIG_CMD_NVEDIT_EFI) += nvedit_efi.o
-> diff --git a/cmd/net-common.c b/cmd/net-common.c
-> new file mode 100644
-> index 00000000000..1c9fb83b896
-> --- /dev/null
-> +++ b/cmd/net-common.c
-> @@ -0,0 +1,109 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * (C) Copyright 2000
-> + * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-> + */
-> +
-> +#include <command.h>
-> +#include <dm/device.h>
-> +#include <dm/uclass.h>
-> +#include <net.h>
-> +#include <linux/compat.h>
-> +#include <linux/ethtool.h>
-> +
-> +static int do_net_list(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> +{
-> +       const struct udevice *current = eth_get_dev();
-> +       unsigned char env_enetaddr[ARP_HLEN];
-> +       const struct udevice *dev;
-> +       struct uclass *uc;
-> +
-> +       uclass_id_foreach_dev(UCLASS_ETH, dev, uc) {
-> +               eth_env_get_enetaddr_by_index("eth", dev_seq(dev), env_enetaddr);
-> +               printf("eth%d : %s %pM %s\n", dev_seq(dev), dev->name, env_enetaddr,
-> +                      current == dev ? "active" : "");
-> +       }
-> +       return CMD_RET_SUCCESS;
-> +}
-> +
-> +static int do_net_stats(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> +{
-> +       int nstats, err, i, off;
-> +       struct udevice *dev;
-> +       u64 *values;
-> +       u8 *strings;
-> +
-> +       if (argc < 2)
-> +               return CMD_RET_USAGE;
-> +
-> +       err = uclass_get_device_by_name(UCLASS_ETH, argv[1], &dev);
-> +       if (err) {
-> +               printf("Could not find device %s\n", argv[1]);
-> +               return CMD_RET_FAILURE;
-> +       }
-> +
-> +       if (!eth_get_ops(dev)->get_sset_count ||
-> +           !eth_get_ops(dev)->get_strings ||
-> +           !eth_get_ops(dev)->get_stats) {
-> +               printf("Driver does not implement stats dump!\n");
-> +               return CMD_RET_FAILURE;
-> +       }
-> +
-> +       nstats = eth_get_ops(dev)->get_sset_count(dev);
-> +       strings = kcalloc(nstats, ETH_GSTRING_LEN, GFP_KERNEL);
-> +       if (!strings)
-> +               return CMD_RET_FAILURE;
-> +
-> +       values = kcalloc(nstats, sizeof(u64), GFP_KERNEL);
-> +       if (!values)
-> +               goto err_free_strings;
-> +
-> +       eth_get_ops(dev)->get_strings(dev, strings);
-> +       eth_get_ops(dev)->get_stats(dev, values);
-> +
-> +       off = 0;
-> +       for (i = 0; i < nstats; i++) {
-> +               printf("  %s: %llu\n", &strings[off], values[i]);
-> +               off += ETH_GSTRING_LEN;
-> +       };
-> +
-> +       kfree(strings);
-> +       kfree(values);
-> +
-> +       return CMD_RET_SUCCESS;
-> +
-> +err_free_strings:
-> +       kfree(strings);
-> +
-> +       return CMD_RET_FAILURE;
-> +}
-> +
-> +static struct cmd_tbl cmd_net[] = {
-> +       U_BOOT_CMD_MKENT(list, 1, 0, do_net_list, "", ""),
-> +       U_BOOT_CMD_MKENT(stats, 2, 0, do_net_stats, "", ""),
-> +};
-> +
-> +static int do_net(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> +{
-> +       struct cmd_tbl *cp;
-> +
-> +       cp = find_cmd_tbl(argv[1], cmd_net, ARRAY_SIZE(cmd_net));
-> +
-> +       /* Drop the net command */
-> +       argc--;
-> +       argv++;
-> +
-> +       if (!cp || argc > cp->maxargs)
-> +               return CMD_RET_USAGE;
-> +       if (flag == CMD_FLAG_REPEAT && !cmd_is_repeatable(cp))
-> +               return CMD_RET_SUCCESS;
-> +
-> +       return cp->cmd(cmdtp, flag, argc, argv);
-> +}
-> +
-> +U_BOOT_CMD(
-> +       net, 3, 1, do_net,
-> +       "NET sub-system",
-> +       "list - list available devices\n"
-> +       "stats <device> - dump statistics for specified device\n"
-> +);
-> diff --git a/cmd/net.c b/cmd/net.c
-> index b206ff58e68..ad5aaf9245e 100644
-> --- a/cmd/net.c
-> +++ b/cmd/net.c
-> @@ -675,118 +675,3 @@ U_BOOT_CMD(
->  );
->
->  #endif  /* CONFIG_CMD_LINK_LOCAL */
-> -
-> -static int do_net_list(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> -{
-> -       const struct udevice *current = eth_get_dev();
-> -       unsigned char env_enetaddr[ARP_HLEN];
-> -       const struct udevice *dev;
-> -       struct uclass *uc;
-> -
-> -       uclass_id_foreach_dev(UCLASS_ETH, dev, uc) {
-> -               eth_env_get_enetaddr_by_index("eth", dev_seq(dev), env_enetaddr);
-> -               printf("eth%d : %s %pM %s\n", dev_seq(dev), dev->name, env_enetaddr,
-> -                      current == dev ? "active" : "");
-> -       }
-> -       return CMD_RET_SUCCESS;
-> -}
-> -
-> -static int do_net_stats(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> -{
-> -       int nstats, err, i, off;
-> -       struct udevice *dev;
-> -       u64 *values;
-> -       u8 *strings;
-> -
-> -       if (argc < 2)
-> -               return CMD_RET_USAGE;
-> -
-> -       err = uclass_get_device_by_name(UCLASS_ETH, argv[1], &dev);
-> -       if (err) {
-> -               printf("Could not find device %s\n", argv[1]);
-> -               return CMD_RET_FAILURE;
-> -       }
-> -
-> -       if (!eth_get_ops(dev)->get_sset_count ||
-> -           !eth_get_ops(dev)->get_strings ||
-> -           !eth_get_ops(dev)->get_stats) {
-> -               printf("Driver does not implement stats dump!\n");
-> -               return CMD_RET_FAILURE;
-> -       }
-> -
-> -       nstats = eth_get_ops(dev)->get_sset_count(dev);
-> -       strings = kcalloc(nstats, ETH_GSTRING_LEN, GFP_KERNEL);
-> -       if (!strings)
-> -               return CMD_RET_FAILURE;
-> -
-> -       values = kcalloc(nstats, sizeof(u64), GFP_KERNEL);
-> -       if (!values)
-> -               goto err_free_strings;
-> -
-> -       eth_get_ops(dev)->get_strings(dev, strings);
-> -       eth_get_ops(dev)->get_stats(dev, values);
-> -
-> -       off = 0;
-> -       for (i = 0; i < nstats; i++) {
-> -               printf("  %s: %llu\n", &strings[off], values[i]);
-> -               off += ETH_GSTRING_LEN;
-> -       };
-> -
-> -       return CMD_RET_SUCCESS;
-> -
-> -err_free_strings:
-> -       kfree(strings);
-> -
-> -       return CMD_RET_FAILURE;
-> -}
-> -
-> -static struct cmd_tbl cmd_net[] = {
-> -       U_BOOT_CMD_MKENT(list, 1, 0, do_net_list, "", ""),
-> -       U_BOOT_CMD_MKENT(stats, 2, 0, do_net_stats, "", ""),
-> -};
-> -
-> -static int do_net(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> -{
-> -       struct cmd_tbl *cp;
-> -
-> -       cp = find_cmd_tbl(argv[1], cmd_net, ARRAY_SIZE(cmd_net));
-> -
-> -       /* Drop the net command */
-> -       argc--;
-> -       argv++;
-> -
-> -       if (!cp || argc > cp->maxargs)
-> -               return CMD_RET_USAGE;
-> -       if (flag == CMD_FLAG_REPEAT && !cmd_is_repeatable(cp))
-> -               return CMD_RET_SUCCESS;
-> -
-> -       return cp->cmd(cmdtp, flag, argc, argv);
-> -}
-> -
-> -U_BOOT_CMD(
-> -       net, 3, 1, do_net,
-> -       "NET sub-system",
-> -       "list - list available devices\n"
-> -       "stats <device> - dump statistics for specified device\n"
-> -);
-> -
-> -#if defined(CONFIG_CMD_NCSI)
-> -static int do_ncsi(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
-> -{
-> -       if (!phy_interface_is_ncsi() || !ncsi_active()) {
-> -               printf("Device not configured for NC-SI\n");
-> -               return CMD_RET_FAILURE;
-> -       }
-> -
-> -       if (net_loop(NCSI) < 0)
-> -               return CMD_RET_FAILURE;
-> -
-> -       return CMD_RET_SUCCESS;
-> -}
-> -
-> -U_BOOT_CMD(
-> -       ncsi,   1,      1,      do_ncsi,
-> -       "Configure attached NIC via NC-SI",
-> -       ""
-> -);
-> -#endif  /* CONFIG_CMD_NCSI */
-> --
-> 2.40.1
->
+27.07.2024 13:35, E Shattow wrote:
+> Is this a problem in Linux upstream? or specific to U-Boot, and is it
+> a regression?
+> 
+> refrerence https://lore.kernel.org/u-boot/20240504183354.GL2568172@bill-the-cat/
+> and reference https://lore.kernel.org/u-boot/BJXPR01MB0855813DD38EF86CCA6DD5C8E6E92@BJXPR01MB0855.CHNPR01.prod.partner.outlook.cn/
+> 
+
+It is very similar. But it comes from
+
+In file included from 
+/home/maximus/git/yadro/ymp-build/u-boot/include/linux/usb/composite.h:26,
+                  from 
+/home/maximus/git/yadro/ymp-build/u-boot/include/g_dnl.h:12,
+                  from 
+/home/maximus/git/yadro/ymp-build/u-boot/cmd/fastboot.c:12:
+/home/maximus/git/yadro/ymp-build/u-boot/include/linux/bitmap.h: In 
+function ‘bitmap_find_next_zero_area’:
+/home/maximus/git/yadro/ymp-build/u-boot/include/linux/bitmap.h:170:17: 
+error: implicit declaration of function ‘find_next_zero_bit’; did you 
+mean ‘find_next_bit’? [-Wimplicit-function-declaration]
+   170 |         index = find_next_zero_bit(map, size, start);
+       |                 ^~~~~~~~~~~~~~~~~~
+       |                 find_next_bit
+
+I've just tried v2024.07 and master.
+
+I tried to drop #include <linux/bitmap.h> from composite.h, but it fails 
+on usb gadget compilation:
+
+   CC      drivers/usb/gadget/g_dnl.o
+In file included from 
+/home/maximus/git/yadro/ymp-build/u-boot/drivers/usb/gadget/g_dnl.c:24:
+/home/maximus/git/yadro/ymp-build/u-boot/drivers/usb/gadget/composite.c: 
+In function ‘reset_config’:
+/home/maximus/git/yadro/ymp-build/u-boot/drivers/usb/gadget/composite.c:362:17: 
+error: implicit declaration of function ‘bitmap_zero’ 
+[-Wimplicit-function-declaration]
+   362 |                 bitmap_zero(f->endpoints, 32);
+       |                 ^~~~~~~~~~~
 
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+
