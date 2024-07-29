@@ -4,82 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83782C3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 08:00:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D7A7C3DA61
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 08:07:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01AD6887D6;
-	Mon, 29 Jul 2024 10:00:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E354E86BF1;
+	Mon, 29 Jul 2024 10:07:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BPA+Kj6R";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="Pr1cyZOB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC9B388747; Mon, 29 Jul 2024 10:00:26 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 794DF88056; Mon, 29 Jul 2024 10:07:36 +0200 (CEST)
+Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
+ [IPv6:2a00:1098:ed:100::25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB03288056
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 10:00:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 34DA382BA7
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 10:07:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5b391c8abd7so135293a12.2
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 01:00:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722240024; x=1722844824; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=z4dtmTXO/LGJM6D599e6iexnj83QyJtbAa1qzp5d30A=;
- b=BPA+Kj6RjqJoUKIAqJgeJjFlrCxW5qX2EkCdVt6agLKhfdEHhEkujZZmoQLcxIhaUC
- BbKB4RMeY905lw3Krglz7RO7PI/WvU6l3REGF82hePW822z0rkq3YzoQfNeIjk9nQsL4
- Id6iiVdZwsYnP/28wxCjnohQqKUHapYIqo8lRQWnFFNoNVQiXJfzGhPC+GTWDr+YeY4m
- ND+x4jYgNK9NnuGeT6DH8RmU5F1XsMcTZ3bN0OPBbdCsNSEkPz+/lrbzjDtA4uwGi4lj
- EdOeyB55WTl6wwVGVNT+00ZKQdO/ZgQsVUkdl+VCZt5FFSNkfLyKmn3+k6FHnnvRmrNe
- /+FA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722240024; x=1722844824;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=z4dtmTXO/LGJM6D599e6iexnj83QyJtbAa1qzp5d30A=;
- b=tBTMwWLZuzAsuWMJByL7H6GDuOGaTVIs6z2Zp5qIu9i76bK6XrdvKC70TkT8H2i/5R
- 3+z6CEcwp8B9oZOwXusRXv+OOm3Xas4c4ONl0Zzk/FyLCzLIlXvPtblVeDEefoiYzsOe
- CzOz/uFV0towPvHl3wdlJYy0dfLX0ANfnmezM/yh5N02wRNC0o6R5p9Is5DFwLYYXYhj
- 6mNZzQqxg2IU4kcY3n+89uiROYch9OsVO97ieyJnETpD6Ew88MdaFY4DPPzUtx942RsH
- GsmKYLpvFvOY9VsxmhbJQwTqwk9H99Y3SpcDt5OeCjZY6f+pJsLLnnxUEyHZ4KnHVe75
- jR1g==
-X-Gm-Message-State: AOJu0Yy1ay7j4XuIwxsbEv2eA6LHmWZ4mc8nl0UbMuckTsUZqzWXLYnn
- H2z3iLmUtUYHdNH3JiEh1JbCaHK4h+VetTrYbGagsmiQud7LbqgoB9SvXHOjAKh+SOeMgcxSzLc
- nOTHus6bGF6M8twTWSu/xycVFXFxRKB93H/oeeA==
-X-Google-Smtp-Source: AGHT+IEn+cEuarewcLDYTtAPcIW6qV70R/g+mJxcjlUJmEVusS0tZVbUUudKhxfZAlZxC5K7eiCGTO3fBLVlqWztha4=
-X-Received: by 2002:a50:9b58:0:b0:5af:2e08:d362 with SMTP id
- 4fb4d7f45d1cf-5b0224cef1dmr4089405a12.23.1722240024048; Mon, 29 Jul 2024
- 01:00:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=eugen.hristev@collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1722240453;
+ bh=VbJDMHelhKvRGj2X6A2SGgGdwi948CA4yUOhiK45A0k=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=Pr1cyZOBBGajiXlW3gYST80f6FvLL+AxQvgQVH5E/ZJNK7Y8kK4BBSY2t1ktUfu6f
+ UdnvWhAb2R3Nnx38icazUbG27i1Rwb4JU/BtG3CKYlRpfbsZy8p0rL3W/z8Vw2WvKB
+ 5FKhd0Dmps7n3RyJwD2CdCwnFgAryQn6NT9Cbsfwsuq/7ikizNlvrjYjv7i8IDcbLT
+ GNZ8UEAdhegS/GSowisQh1FqYLmmBLBNovJbi427DHOmZOq+ol0G8o/T6CVJ3xPD+Z
+ ywqUV15KTZ9UVvLsDO9tjXkfU+rshahDJeb88Urza8HXjZmXVusAzeiXZcGFMt0val
+ 4GX6dsgWjrGjg==
+Received: from [100.90.194.27] (cola.collaboradmins.com [195.201.22.229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: ehristev)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id 2A03137809CE;
+ Mon, 29 Jul 2024 08:07:33 +0000 (UTC)
+Message-ID: <3827b52f-e31f-4d41-9a56-b619c35a5705@collabora.com>
+Date: Mon, 29 Jul 2024 11:07:23 +0300
 MIME-Version: 1.0
-References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-18-sughosh.ganu@linaro.org>
- <CAFLszTgrxZBkOgcrq0cwtrGs7UdFsqxH9srg0rBmxLfummg9qw@mail.gmail.com>
-In-Reply-To: <CAFLszTgrxZBkOgcrq0cwtrGs7UdFsqxH9srg0rBmxLfummg9qw@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 29 Jul 2024 13:30:13 +0530
-Message-ID: <CADg8p94zgPCfEFMCKRaZ9PkD5kn7Sb2vfU4m73KGnoWmqjrfeg@mail.gmail.com>
-Subject: Re: [PATCH 17/40] lmb: introduce a function to add memory to the lmb
- memory map
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
- Max Filippov <jcmvbkbc@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] mtd: nand: raw: atmel: Use ONFI ECC params if available
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Balamanikandan.Gunasundar@microchip.com
+Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>
+References: <20240721214552.63965-2-zli@ogga.fr>
+ <59a891ca-1f02-4ffa-8727-0934025d88c5@microchip.com>
+ <CAOf5uwnP7gGDakGHL1cFSyJQefJ=DG+a5tORU3B8-a7q9+gBiA@mail.gmail.com>
+Content-Language: en-US
+From: Eugen Hristev <eugen.hristev@collabora.com>
+In-Reply-To: <CAOf5uwnP7gGDakGHL1cFSyJQefJ=DG+a5tORU3B8-a7q9+gBiA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,127 +74,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 26 Jul 2024 at 05:02, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Sughosh,
->
-> On Wed, 24 Jul 2024 at 00:04, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >
-> > Introduce a function lmb_add_memory() to add available memory to the
-> > LMB memory map. Call this function during board init once the LMB data
-> > structures have been initialised.
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> > Changes since rfc: None
-> >
-> >  include/lmb.h | 12 ++++++++++++
-> >  lib/lmb.c     | 42 ++++++++++++++++++++++++++++++++++++++++++
-> >  2 files changed, 54 insertions(+)
-> >
-> > diff --git a/include/lmb.h b/include/lmb.h
-> > index a308796d58..77e2a23c0d 100644
-> > --- a/include/lmb.h
-> > +++ b/include/lmb.h
-> > @@ -40,6 +40,18 @@ struct lmb_region {
-> >  void lmb_init_and_reserve(struct bd_info *bd, void *fdt_blob);
-> >  void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
-> >                                 void *fdt_blob);
-> > +
-> > +/**
-> > + * lmb_add_memory() - Add memory range for LMB allocations
-> > + *
-> > + * Add the entire available memory range to the pool of memory that
-> > + * can be used by the LMB module for allocations.
-> > + *
-> > + * Return: None
-> > + *
-> > + */
-> > +void lmb_add_memory(void);
-> > +
-> >  long lmb_add(phys_addr_t base, phys_size_t size);
-> >  long lmb_reserve(phys_addr_t base, phys_size_t size);
-> >  /**
-> > diff --git a/lib/lmb.c b/lib/lmb.c
-> > index 88352e9a25..db0874371a 100644
-> > --- a/lib/lmb.c
-> > +++ b/lib/lmb.c
-> > @@ -239,6 +239,46 @@ void lmb_init_and_reserve(struct bd_info *bd, void *fdt_blob)
-> >         lmb_reserve_common(fdt_blob);
-> >  }
-> >
-> > +/**
-> > + * lmb_add_memory() - Add memory range for LMB allocations
-> > + *
-> > + * Add the entire available memory range to the pool of memory that
-> > + * can be used by the LMB module for allocations.
-> > + *
-> > + * This can be overridden for specific boards/architectures.
->
-> Why is this needed?
+On 7/25/24 12:41, Michael Nazzareno Trimarchi wrote:
+> Hi
+> 
+> On Thu, Jul 25, 2024 at 11:36 AM
+> <Balamanikandan.Gunasundar@microchip.com> wrote:
+>>
+>> Acked-by: Balamanikandan Gunasundar
+>> <balamanikandan.gunasundar@microchip.com>
+>>
+>> On 22/07/24 3:15 am, Zixun LI wrote:
+>>> [Some people who received this message don't often get email from admin@hifiphile.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+>>>
+>>> EXTERNAL EMAIL: Do not click links or open attachments unless you know the content is safe
+>>>
+>>> When ECC parameters are not specified in DT, first try ONFI ECC parameters
+>>> before fallback to maximum strength.
+>>>
+>>> It's the Linux driver behavior since the driver rewriting in f88fc12.
+>>>
+>>>  From then 2 nand system refactors have been done in 6a1b66d6 and 53576c7b,
+>>> chip->ecc_strength_ds and chip->ecc_step_ds became
+>>> nanddev_get_ecc_requirements(). U-Boot didn't follow the refactor and
+>>> always use these 2 fields.
+>>>
+>>> v2: Fix formatting, add upstream commit hash.
+>>>
+>>> Signed-off-by: Zixun LI <zli@ogga.fr>
+>>> ---
+>>>   drivers/mtd/nand/raw/atmel/nand-controller.c | 4 ++++
+>>>   1 file changed, 4 insertions(+)
+>>>
+>>> diff --git a/drivers/mtd/nand/raw/atmel/nand-controller.c b/drivers/mtd/nand/raw/atmel/nand-controller.c
+>>> index ee4ec6da58..817fab4ca3 100644
+>>> --- a/drivers/mtd/nand/raw/atmel/nand-controller.c
+>>> +++ b/drivers/mtd/nand/raw/atmel/nand-controller.c
+>>> @@ -1029,11 +1029,15 @@ static int atmel_nand_pmecc_init(struct nand_chip *chip)
+>>>                  req.ecc.strength = ATMEL_PMECC_MAXIMIZE_ECC_STRENGTH;
+>>>          else if (chip->ecc.strength)
+>>>                  req.ecc.strength = chip->ecc.strength;
+>>> +       else if (chip->ecc_strength_ds)
+>>> +               req.ecc.strength = chip->ecc_strength_ds;
+>>>          else
+>>>                  req.ecc.strength = ATMEL_PMECC_MAXIMIZE_ECC_STRENGTH;
+>>>
+>>>          if (chip->ecc.size)
+>>>                  req.ecc.sectorsize = chip->ecc.size;
+>>> +       else if (chip->ecc_step_ds)
+>>> +               req.ecc.sectorsize = chip->ecc_step_ds;
+>>>          else
+>>>                  req.ecc.sectorsize = ATMEL_PMECC_SECTOR_SIZE_AUTO;
+>>>
+>>> --
+>>> 2.45.2
+>>>
+>>
+> 
+> Feel free to apply on microchip uboot branch if you are on hurry
+> 
+> Michael
+> 
+Hello Michael,
 
-There is a definition of this function for the freescale layerscape
-platforms, and the e820 platform.
+This is fine, you(or Dario) can pick this up through the nand tree.
 
->  I'm really not a fan of weak functions...it often
-> means we should have a proper API for it.
-
-Is there some coding style guideline which prohibits using weak
-function definitions? I see it being used all across U-Boot. Moreover,
-I don't think that this particular case asks for adding an API for
-this one function. That would just add to the size without much
-benefit.
-
--sughosh
-
->
-> > + *
-> > + * Return: None
-> > + *
-> > + */
-> > +__weak void lmb_add_memory(void)
-> > +{
-> > +       int i;
-> > +       phys_size_t size;
-> > +       phys_addr_t rgn_top;
-> > +       u64 ram_top = gd->ram_top;
-> > +       struct bd_info *bd = gd->bd;
-> > +
-> > +       /* Assume a 4GB ram_top if not defined */
-> > +       if (!ram_top)
-> > +               ram_top = 0x100000000ULL;
-> > +
-> > +       for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-> > +               size = bd->bi_dram[i].size;
-> > +               if (size) {
-> > +                       if (bd->bi_dram[i].start > ram_top)
-> > +                               continue;
-> > +
-> > +                       rgn_top = bd->bi_dram[i].start +
-> > +                               bd->bi_dram[i].size;
-> > +
-> > +                       if (rgn_top > ram_top)
-> > +                               size -= rgn_top - ram_top;
-> > +
-> > +                       lmb_add(bd->bi_dram[i].start, size);
-> > +               }
-> > +       }
-> > +}
-> > +
-> >  /* Initialize the struct, add memory and call arch/board reserve functions */
-> >  void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
-> >                                 void *fdt_blob)
-> > @@ -728,5 +768,7 @@ int lmb_mem_regions_init(void)
-> >                 return -1;
-> >         }
-> >
-> > +       lmb_add_memory();
-> > +
-> >         return 0;
-> >  }
-> > --
-> > 2.34.1
-> >
->
-> Regards,
-> Simon
+Eugen
