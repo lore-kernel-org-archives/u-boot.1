@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 845C2C3DA61
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 20:45:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3CD9C3DA61
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 20:45:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F156888861;
-	Mon, 29 Jul 2024 22:45:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5BC3B888A4;
+	Mon, 29 Jul 2024 22:45:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71A9088863; Mon, 29 Jul 2024 22:45:09 +0200 (CEST)
+ id 8E041888A3; Mon, 29 Jul 2024 22:45:14 +0200 (CEST)
 Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46BC888791
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 22:45:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BF0A888B7
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 22:45:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paulk@sys-base.io
 Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id 80C041F00057
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 20:44:54 +0000 (UTC)
+ by leonov.paulk.fr (Postfix) with ESMTPS id E757F1F0004B
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 20:44:57 +0000 (UTC)
 Received: by laika.paulk.fr (Postfix, from userid 65534)
- id E58C9A1258F; Mon, 29 Jul 2024 20:44:53 +0000 (UTC)
+ id 28EEEA12587; Mon, 29 Jul 2024 20:44:57 +0000 (UTC)
 Received: from localhost.localdomain (unknown [192.168.1.64])
- by laika.paulk.fr (Postfix) with ESMTP id E949BA12589;
- Mon, 29 Jul 2024 20:44:40 +0000 (UTC)
+ by laika.paulk.fr (Postfix) with ESMTP id 3CA45A1258B;
+ Mon, 29 Jul 2024 20:44:41 +0000 (UTC)
 From: Paul Kocialkowski <paulk@sys-base.io>
 To: u-boot@lists.denx.de
 Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
@@ -42,10 +42,9 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Marcin Niestroj <m.niestroj@grinn-global.com>,
  Enric Balletbo i Serra <enric.balletbo@collabora.com>,
  Yegor Yefremov <yegorslists@googlemail.com>
-Subject: [PATCH 2/3] am33xx: Use regular spl_board_init instead of
- am33xx_spl_board_init
-Date: Mon, 29 Jul 2024 22:44:38 +0200
-Message-ID: <20240729204439.429900-2-paulk@sys-base.io>
+Subject: [PATCH 3/3] omap3: sniper: Convert to device-tree control and DM I2C
+Date: Mon, 29 Jul 2024 22:44:39 +0200
+Message-ID: <20240729204439.429900-3-paulk@sys-base.io>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240729204439.429900-1-paulk@sys-base.io>
 References: <20240729204439.429900-1-paulk@sys-base.io>
@@ -67,364 +66,145 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The am33xx_spl_board_init function was introduced as a way to add
-board-specific SPL init for AM33xx devices since the spl_board_init
-function was already used for SoC-specific init.
+From: Paul Kocialkowski <contact@paulk.fr>
 
-Now that the SoC-specific SPL init was moved to spl_soc_init, we can
-use spl_board_init for this purpose and get rid of
-am33xx_spl_board_init.
+This converts the sniper board (LG P970) to device-tree control
+and DM I2C, both for SPL and U-Boot.
 
-Rename the function in board files and enable the related config
-option for concerned boards.
+Note that we lose the call to board_mmc_power_init to enable power
+for MMC2. This is now expected to take place through proper
+regulators, which are not yet available with the twl4030 driver.
+The call to twl4030_power_mmc_init is moved to spl_board_init for now.
 
-Signed-off-by: Paul Kocialkowski <paulk@sys-base.io>
+Signed-off-by: Paul Kocialkowski <contact@paulk.fr>
 ---
- arch/arm/include/asm/arch-am33xx/sys_proto.h | 1 -
- arch/arm/mach-omap2/am33xx/board.c           | 8 --------
- arch/arm/mach-omap2/boot-common.c            | 3 ---
- board/BuR/brppt1/board.c                     | 2 +-
- board/BuR/brsmarc1/board.c                   | 2 +-
- board/BuR/brxre1/board.c                     | 2 +-
- board/bosch/guardian/board.c                 | 2 +-
- board/bosch/shc/board.c                      | 2 +-
- board/eets/pdu001/board.c                    | 6 +++---
- board/grinn/chiliboard/board.c               | 2 +-
- board/tcl/sl50/board.c                       | 2 +-
- board/vscom/baltos/board.c                   | 2 +-
- configs/am335x_baltos_defconfig              | 1 +
- configs/am335x_guardian_defconfig            | 1 +
- configs/am335x_pdu001_defconfig              | 1 +
- configs/am335x_shc_defconfig                 | 1 +
- configs/am335x_shc_ict_defconfig             | 1 +
- configs/am335x_shc_netboot_defconfig         | 1 +
- configs/am335x_shc_sdboot_defconfig          | 1 +
- configs/am335x_sl50_defconfig                | 1 +
- configs/brppt1_mmc_defconfig                 | 1 +
- configs/brsmarc1_defconfig                   | 1 +
- configs/brxre1_defconfig                     | 1 +
- configs/chiliboard_defconfig                 | 1 +
- 24 files changed, 23 insertions(+), 23 deletions(-)
+ arch/arm/dts/omap3-sniper-u-boot.dtsi | 16 +++++++++++++++
+ board/lg/sniper/sniper.c              | 29 +++++----------------------
+ configs/sniper_defconfig              | 13 +++++++-----
+ 3 files changed, 29 insertions(+), 29 deletions(-)
+ create mode 100644 arch/arm/dts/omap3-sniper-u-boot.dtsi
 
-diff --git a/arch/arm/include/asm/arch-am33xx/sys_proto.h b/arch/arm/include/asm/arch-am33xx/sys_proto.h
-index 513cdaca8593..7abcd1cb6156 100644
---- a/arch/arm/include/asm/arch-am33xx/sys_proto.h
-+++ b/arch/arm/include/asm/arch-am33xx/sys_proto.h
-@@ -37,7 +37,6 @@ u32 wait_on_value(u32, u32, void *, u32);
- #ifdef CONFIG_NOR_BOOT
- void enable_norboot_pin_mux(void);
- #endif
--void am33xx_spl_board_init(void);
- int am335x_get_efuse_mpu_max_freq(struct ctrl_dev *cdev);
- int am335x_get_mpu_vdd(int sil_rev, int frequency);
- int am335x_get_tps65910_mpu_vdd(int sil_rev, int frequency);
-diff --git a/arch/arm/mach-omap2/am33xx/board.c b/arch/arm/mach-omap2/am33xx/board.c
-index 84a60dedd729..abdc1e403351 100644
---- a/arch/arm/mach-omap2/am33xx/board.c
-+++ b/arch/arm/mach-omap2/am33xx/board.c
-@@ -337,14 +337,6 @@ int board_early_init_f(void)
- 	return 0;
- }
+diff --git a/arch/arm/dts/omap3-sniper-u-boot.dtsi b/arch/arm/dts/omap3-sniper-u-boot.dtsi
+new file mode 100644
+index 000000000000..d467f533a123
+--- /dev/null
++++ b/arch/arm/dts/omap3-sniper-u-boot.dtsi
+@@ -0,0 +1,16 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2024 Paul Kocialkowski <contact@paulk.fr>
++ */
++
++#include "omap3-u-boot.dtsi"
++
++/ {
++	chosen {
++		stdout-path = &uart3;
++	};
++};
++
++&i2c1 {
++	clock-frequency = <400000>;
++};
+diff --git a/board/lg/sniper/sniper.c b/board/lg/sniper/sniper.c
+index 88d5d0881433..9d0959f294e8 100644
+--- a/board/lg/sniper/sniper.c
++++ b/board/lg/sniper/sniper.c
+@@ -14,11 +14,9 @@
+ #include <linux/ctype.h>
+ #include <linux/usb/musb.h>
+ #include <asm/omap_musb.h>
+-#include <asm/arch/mmc_host_def.h>
+ #include <asm/arch/sys_proto.h>
+ #include <asm/arch/mem.h>
+ #include <asm/io.h>
+-#include <ns16550.h>
+ #include <twl4030.h>
+ #include "sniper.h"
  
--/*
-- * This function is the place to do per-board things such as ramp up the
-- * MPU clock frequency.
-- */
--__weak void am33xx_spl_board_init(void)
+@@ -30,18 +28,6 @@ const omap3_sysinfo sysinfo = {
+ 	.nand_string = "MMC"
+ };
+ 
+-static const struct ns16550_plat serial_omap_plat = {
+-	.base = OMAP34XX_UART3,
+-	.reg_shift = 2,
+-	.clock = V_NS16550_CLK,
+-	.fcr = UART_FCR_DEFVAL,
+-};
+-
+-U_BOOT_DRVINFO(sniper_serial) = {
+-	.name = "ns16550_serial",
+-	.plat = &serial_omap_plat
+-};
+-
+ #if defined(CONFIG_USB_MUSB_HOST) || defined(CONFIG_USB_MUSB_GADGET)
+ static struct musb_hdrc_config musb_config = {
+ 	.multipoint = 1,
+@@ -77,6 +63,11 @@ void get_board_mem_timings(struct board_sdrc_timings *timings)
+ 	timings->rfr_ctrl = SDP_3430_SDRC_RFR_CTRL_200MHz;
+ 	timings->mr = MICRON_V_MR_165;
+ }
++
++void spl_board_init(void)
++{
++	twl4030_power_mmc_init(1);
++}
+ #endif
+ 
+ int board_init(void)
+@@ -188,13 +179,3 @@ int fastboot_set_reboot_flag(enum fastboot_reboot_reason reason)
+ 
+ 	return omap_reboot_mode_store("b");
+ }
+-
+-int board_mmc_init(struct bd_info *bis)
 -{
+-	return omap_mmc_init(1, 0, 0, -1, -1);
 -}
 -
- #if defined(CONFIG_SPL_AM33XX_ENABLE_RTC32K_OSC)
- static void rtc32k_enable(void)
- {
-diff --git a/arch/arm/mach-omap2/boot-common.c b/arch/arm/mach-omap2/boot-common.c
-index 21b204074e80..649bc07047ab 100644
---- a/arch/arm/mach-omap2/boot-common.c
-+++ b/arch/arm/mach-omap2/boot-common.c
-@@ -285,9 +285,6 @@ void spl_soc_init(void)
- #endif
- #if defined(CONFIG_HW_WATCHDOG) || defined(CONFIG_WATCHDOG)
- 	hw_watchdog_init();
--#endif
--#ifdef CONFIG_AM33XX
--	am33xx_spl_board_init();
- #endif
- 	if (IS_ENABLED(CONFIG_SPL_BUILD) &&
- 	    IS_ENABLED(CONFIG_REMOTEPROC_TI_IPU))
-diff --git a/board/BuR/brppt1/board.c b/board/BuR/brppt1/board.c
-index 192a2fa6327b..80e0ca805b52 100644
---- a/board/BuR/brppt1/board.c
-+++ b/board/BuR/brppt1/board.c
-@@ -79,7 +79,7 @@ static const struct ctrl_ioregs ddr3_ioregs = {
- #define OSC	(V_OSCK/1000000)
- static const struct dpll_params dpll_ddr3 = { 400, OSC-1, 1, -1, -1, -1, -1};
- 
--void am33xx_spl_board_init(void)
-+void spl_board_init(void)
- {
- 	int rc;
- 
-diff --git a/board/BuR/brsmarc1/board.c b/board/BuR/brsmarc1/board.c
-index 2d3f593d0ab0..bfb6adf6d5c0 100644
---- a/board/BuR/brsmarc1/board.c
-+++ b/board/BuR/brsmarc1/board.c
-@@ -72,7 +72,7 @@ static const struct ctrl_ioregs ddr3_ioregs = {
- #define OSC	(V_OSCK / 1000000)
- const struct dpll_params dpll_ddr3 = { 400, OSC - 1, 1, -1, -1, -1, -1};
- 
--void am33xx_spl_board_init(void)
-+void spl_board_init(void)
- {
- 	struct cm_perpll *const cmper = (struct cm_perpll *)CM_PER;
- 	struct cm_wkuppll *const cmwkup = (struct cm_wkuppll *)CM_WKUP;
-diff --git a/board/BuR/brxre1/board.c b/board/BuR/brxre1/board.c
-index b9b595cb156d..510d2af31471 100644
---- a/board/BuR/brxre1/board.c
-+++ b/board/BuR/brxre1/board.c
-@@ -79,7 +79,7 @@ static const struct ctrl_ioregs ddr3_ioregs = {
- #define OSC	(V_OSCK / 1000000)
- const struct dpll_params dpll_ddr3 = { 400, OSC - 1, 1, -1, -1, -1, -1};
- 
--void am33xx_spl_board_init(void)
-+void spl_board_init(void)
- {
- 	int rc;
- 
-diff --git a/board/bosch/guardian/board.c b/board/bosch/guardian/board.c
-index 41d7567ad21e..33ba7a7751ce 100644
---- a/board/bosch/guardian/board.c
-+++ b/board/bosch/guardian/board.c
-@@ -75,7 +75,7 @@ static struct emif_regs ddr3_emif_reg_data = {
- const struct dpll_params dpll_ddr = {
- 		400, OSC - 1, 1, -1, -1, -1, -1};
- 
--void am33xx_spl_board_init(void)
-+void spl_board_init(void)
- {
- 	int mpu_vdd;
- 	int usb_cur_lim;
-diff --git a/board/bosch/shc/board.c b/board/bosch/shc/board.c
-index ab688745938a..59628ce6f570 100644
---- a/board/bosch/shc/board.c
-+++ b/board/bosch/shc/board.c
-@@ -310,7 +310,7 @@ const struct dpll_params *get_dpll_ddr_params(void)
- const struct dpll_params dpll_mpu_shc_opp100 = {
- 		99, MPUPLL_N, 1, -1, -1, -1, -1};
- 
--void am33xx_spl_board_init(void)
-+void spl_board_init(void)
- {
- 	int sil_rev;
- 	int mpu_vdd;
-diff --git a/board/eets/pdu001/board.c b/board/eets/pdu001/board.c
-index 2ad256f86357..00f9a5ef341b 100644
---- a/board/eets/pdu001/board.c
-+++ b/board/eets/pdu001/board.c
-@@ -56,10 +56,10 @@ DECLARE_GLOBAL_DATA_PTR;
-  *  boot device save register
-  * -------------------------
-  * The boot device can be quired by 'spl_boot_device()' in
-- * 'am33xx_spl_board_init'. However it can't be saved in the u-boot
-+ * 'spl_board_init'. However it can't be saved in the u-boot
-  * environment here. In turn 'spl_boot_device' can't be called in
-  * 'board_late_init' which allows writing to u-boot environment.
-- * To get the boot device from 'am33xx_spl_board_init' to
-+ * To get the boot device from 'spl_board_init' to
-  * 'board_late_init' we therefore use a scratch register from the RTC.
-  */
- #define CFG_SYS_RTC_SCRATCH0 0x60
-@@ -192,7 +192,7 @@ const struct dpll_params dpll_ddr_evm_sk = {
- const struct dpll_params dpll_ddr_bone_black = {
- 		400, OSC - 1, 1, -1, -1, -1, -1};
- 
--void am33xx_spl_board_init(void)
-+void spl_board_init(void)
- {
- 	struct ctrl_dev *cdev = (struct ctrl_dev *)CTRL_DEVICE_BASE;
- 
-diff --git a/board/grinn/chiliboard/board.c b/board/grinn/chiliboard/board.c
-index 8313b37655fb..e0eb8aa9f2bc 100644
---- a/board/grinn/chiliboard/board.c
-+++ b/board/grinn/chiliboard/board.c
-@@ -80,7 +80,7 @@ void set_mux_conf_regs(void)
- 	enable_board_pin_mux();
- }
- 
--void am33xx_spl_board_init(void)
-+void spl_board_init(void)
- {
- 	chilisom_spl_board_init();
- }
-diff --git a/board/tcl/sl50/board.c b/board/tcl/sl50/board.c
-index 484b4e244281..6c60c70b7b48 100644
---- a/board/tcl/sl50/board.c
-+++ b/board/tcl/sl50/board.c
-@@ -92,7 +92,7 @@ int spl_start_uboot(void)
- const struct dpll_params dpll_ddr_sl50 = {
- 		400, OSC-1, 1, -1, -1, -1, -1};
- 
--void am33xx_spl_board_init(void)
-+void spl_board_init(void)
- {
- 	int mpu_vdd;
- 
-diff --git a/board/vscom/baltos/board.c b/board/vscom/baltos/board.c
-index cea25f8c9005..f54f183038b8 100644
---- a/board/vscom/baltos/board.c
-+++ b/board/vscom/baltos/board.c
-@@ -177,7 +177,7 @@ const struct dpll_params dpll_ddr_evm_sk = {
- const struct dpll_params dpll_ddr_baltos = {
- 		400, OSC-1, 1, -1, -1, -1, -1};
- 
--void am33xx_spl_board_init(void)
-+void spl_board_init(void)
- {
- 	int sil_rev, mpu_vdd;
- 	int freq;
-diff --git a/configs/am335x_baltos_defconfig b/configs/am335x_baltos_defconfig
-index 14d8d96a8656..3fcebc6aa7d4 100644
---- a/configs/am335x_baltos_defconfig
-+++ b/configs/am335x_baltos_defconfig
-@@ -17,6 +17,7 @@ CONFIG_DISTRO_DEFAULTS=y
- CONFIG_OF_BOARD_SETUP=y
- CONFIG_BOOTCOMMAND="run findfdt; run usbboot;run mmcboot;setenv mmcdev 1; setenv bootpart 1:2; run mmcboot;run nandboot;"
- CONFIG_SYS_CONSOLE_INFO_QUIET=y
-+CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
- CONFIG_SPL_FS_EXT4=y
-diff --git a/configs/am335x_guardian_defconfig b/configs/am335x_guardian_defconfig
-index 6b40d398392c..7c7041c23b08 100644
---- a/configs/am335x_guardian_defconfig
-+++ b/configs/am335x_guardian_defconfig
-@@ -29,6 +29,7 @@ CONFIG_AUTOBOOT_DELAY_STR="d"
- CONFIG_AUTOBOOT_STOP_STR=" "
- CONFIG_SYS_CONSOLE_INFO_QUIET=y
- CONFIG_ARCH_MISC_INIT=y
-+CONFIG_SPL_BOARD_INIT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
-diff --git a/configs/am335x_pdu001_defconfig b/configs/am335x_pdu001_defconfig
-index f6b7d9c88ebd..a0163f16f369 100644
---- a/configs/am335x_pdu001_defconfig
-+++ b/configs/am335x_pdu001_defconfig
-@@ -22,6 +22,7 @@ CONFIG_AUTOBOOT_PROMPT="Press SPACE to abort autoboot in %d seconds\n"
- CONFIG_AUTOBOOT_STOP_STR=" "
- CONFIG_BOOTCOMMAND="run eval_boot_device;part uuid mmc ${mmc_boot}:${root_fs_partition} root_fs_partuuid;setenv bootargs console=${console} vt.global_cursor_default=0 root=PARTUUID=${root_fs_partuuid} rootfstype=ext4 rootwait rootdelay=1;fatload mmc ${mmc_boot} ${fdtaddr} ${fdtfile};fatload mmc ${mmc_boot} ${loadaddr} ${bootfile};bootz ${loadaddr} - ${fdtaddr}"
- CONFIG_BOARD_LATE_INIT=y
-+CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
- # CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR is not set
-diff --git a/configs/am335x_shc_defconfig b/configs/am335x_shc_defconfig
-index f2cf35c4c331..8fb6e1a5a9bb 100644
---- a/configs/am335x_shc_defconfig
-+++ b/configs/am335x_shc_defconfig
-@@ -31,6 +31,7 @@ CONFIG_BOOTCOMMAND="if mmc dev 1; mmc rescan; then run emmc_setup; else echo ERR
- CONFIG_DEFAULT_FDT_FILE="am335x-shc"
- CONFIG_SYS_PBSIZE=1049
- CONFIG_SYS_CONSOLE_INFO_QUIET=y
+-void board_mmc_power_init(void)
+-{
+-	twl4030_power_mmc_init(1);
+-}
+diff --git a/configs/sniper_defconfig b/configs/sniper_defconfig
+index 5c6f9328bf8b..06e9b2ae2faf 100644
+--- a/configs/sniper_defconfig
++++ b/configs/sniper_defconfig
+@@ -1,12 +1,14 @@
+ CONFIG_ARM=y
+ CONFIG_ARCH_OMAP2PLUS=y
+ CONFIG_SYS_MALLOC_F_LEN=0x4000
++CONFIG_DEFAULT_DEVICE_TREE="ti/omap/omap3-sniper"
+ CONFIG_TARGET_SNIPER=y
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x400
+ CONFIG_SPL=y
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTCOMMAND="setenv boot_mmc_part ${kernel_mmc_part}; if test reboot-${reboot-mode} = reboot-r; then echo recovery; setenv boot_mmc_part ${recovery_mmc_part}; fi; if test reboot-${reboot-mode} = reboot-b; then echo fastboot; fastboot 0; fi; part start mmc ${boot_mmc_dev} ${boot_mmc_part} boot_mmc_start; part size mmc ${boot_mmc_dev} ${boot_mmc_part} boot_mmc_size; mmc dev ${boot_mmc_dev}; mmc read ${kernel_addr_r} ${boot_mmc_start} ${boot_mmc_size} && bootm ${kernel_addr_r};"
+ CONFIG_SYS_CONSOLE_IS_IN_ENV=y
 +CONFIG_SPL_BOARD_INIT=y
  CONFIG_SPL_SYS_MALLOC_SIMPLE=y
  CONFIG_SPL_SYS_MALLOC=y
  CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
-diff --git a/configs/am335x_shc_ict_defconfig b/configs/am335x_shc_ict_defconfig
-index f30c2661100d..b9f5db23053d 100644
---- a/configs/am335x_shc_ict_defconfig
-+++ b/configs/am335x_shc_ict_defconfig
-@@ -29,6 +29,7 @@ CONFIG_BOOTCOMMAND="if mmc dev 0; mmc rescan; then run sd_setup; else echo ERROR
- CONFIG_DEFAULT_FDT_FILE="am335x-shc"
- CONFIG_SYS_PBSIZE=1049
- CONFIG_SYS_CONSOLE_INFO_QUIET=y
-+CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
-diff --git a/configs/am335x_shc_netboot_defconfig b/configs/am335x_shc_netboot_defconfig
-index e9262fdf3713..5c42bf423ff3 100644
---- a/configs/am335x_shc_netboot_defconfig
-+++ b/configs/am335x_shc_netboot_defconfig
-@@ -32,6 +32,7 @@ CONFIG_BOOTCOMMAND="run fusecmd; if run netboot; then echo Booting from network;
- CONFIG_DEFAULT_FDT_FILE="am335x-shc"
- CONFIG_SYS_PBSIZE=1049
- CONFIG_SYS_CONSOLE_INFO_QUIET=y
-+CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
-diff --git a/configs/am335x_shc_sdboot_defconfig b/configs/am335x_shc_sdboot_defconfig
-index 887b6aa6feb9..9375bc93a2f9 100644
---- a/configs/am335x_shc_sdboot_defconfig
-+++ b/configs/am335x_shc_sdboot_defconfig
-@@ -32,6 +32,7 @@ CONFIG_BOOTCOMMAND="if mmc dev 0; mmc rescan; then run sd_setup; else echo ERROR
- CONFIG_DEFAULT_FDT_FILE="am335x-shc"
- CONFIG_SYS_PBSIZE=1049
- CONFIG_SYS_CONSOLE_INFO_QUIET=y
-+CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
-diff --git a/configs/am335x_sl50_defconfig b/configs/am335x_sl50_defconfig
-index 3e539c8d54e4..894a59f58eda 100644
---- a/configs/am335x_sl50_defconfig
-+++ b/configs/am335x_sl50_defconfig
-@@ -22,6 +22,7 @@ CONFIG_AUTOBOOT_PROMPT="Press SPACE to abort autoboot in %d seconds\n"
- CONFIG_AUTOBOOT_DELAY_STR="d"
- CONFIG_AUTOBOOT_STOP_STR=" "
- CONFIG_SYS_CONSOLE_INFO_QUIET=y
-+CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
- CONFIG_SPL_ENV_SUPPORT=y
-diff --git a/configs/brppt1_mmc_defconfig b/configs/brppt1_mmc_defconfig
-index 09e061350bc8..8947b76e11f2 100644
---- a/configs/brppt1_mmc_defconfig
-+++ b/configs/brppt1_mmc_defconfig
-@@ -37,6 +37,7 @@ CONFIG_SYS_CONSOLE_INFO_QUIET=y
- # CONFIG_DISPLAY_CPUINFO is not set
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_ARCH_MISC_INIT=y
-+CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x500000
-diff --git a/configs/brsmarc1_defconfig b/configs/brsmarc1_defconfig
-index 5ec55f34f697..dc868b72b213 100644
---- a/configs/brsmarc1_defconfig
-+++ b/configs/brsmarc1_defconfig
-@@ -37,6 +37,7 @@ CONFIG_BOARD_TYPES=y
- # CONFIG_DISPLAY_CPUINFO is not set
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_ARCH_MISC_INIT=y
-+CONFIG_SPL_BOARD_INIT=y
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
-diff --git a/configs/brxre1_defconfig b/configs/brxre1_defconfig
-index 0663a597847a..fc801f267401 100644
---- a/configs/brxre1_defconfig
-+++ b/configs/brxre1_defconfig
-@@ -33,6 +33,7 @@ CONFIG_SYS_CONSOLE_INFO_QUIET=y
- # CONFIG_DISPLAY_CPUINFO is not set
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_ARCH_MISC_INIT=y
-+CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x500000
-diff --git a/configs/chiliboard_defconfig b/configs/chiliboard_defconfig
-index 25e162e938e3..98778989761d 100644
---- a/configs/chiliboard_defconfig
-+++ b/configs/chiliboard_defconfig
-@@ -22,6 +22,7 @@ CONFIG_BOOTCOMMAND="run mmcboot; run nandboot; run netboot"
- CONFIG_DEFAULT_FDT_FILE="am335x-chiliboard.dtb"
- CONFIG_SYS_CONSOLE_INFO_QUIET=y
- CONFIG_ARCH_MISC_INIT=y
-+CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
- CONFIG_SPL_I2C=y
+@@ -19,12 +21,13 @@ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
+ # CONFIG_CMD_SETEXPR is not set
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_UPSTREAM=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+-CONFIG_SYS_I2C_LEGACY=y
+-CONFIG_SPL_SYS_I2C_LEGACY=y
+-CONFIG_SYS_I2C_SPEED=400000
++CONFIG_SPL_DM=y
++CONFIG_DM_I2C=y
++CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+ CONFIG_TWL4030_INPUT=y
+ CONFIG_MMC_OMAP_HS=y
+-CONFIG_CONS_INDEX=3
+-CONFIG_OF_LIBFDT=y
 -- 
 2.45.2
 
