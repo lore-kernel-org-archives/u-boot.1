@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33D6AC3DA61
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 07:39:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8831AC3DA4A
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 07:39:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B7DA8861D;
-	Mon, 29 Jul 2024 09:39:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D7478887D2;
+	Mon, 29 Jul 2024 09:39:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="g6/Hqf0W";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Q0amlQfh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E453188747; Mon, 29 Jul 2024 09:39:30 +0200 (CEST)
-Received: from mail-m127156.xmail.ntesmail.com
- (mail-m127156.xmail.ntesmail.com [115.236.127.156])
+ id CB7DE887D1; Mon, 29 Jul 2024 09:39:45 +0200 (CEST)
+Received: from mail-m1038.netease.com (mail-m1038.netease.com [154.81.10.38])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 441E0887BF
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 09:39:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57858885F5
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 09:39:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=g6/Hqf0WXa2R2ZQ4+gOpJ+OFpVGD4Il8q/v/UIShQ3yhcPhzT0/90LO9V0dNbmrcEqaNAl4wQLAnbQ7rHUt7OhkXKLgn7cOjF2IO9OucWETpcWV5GXqM6VoHRUZt1xkEbm55dVoNiqUZp3WnISM2+a0lZVTezIOUlZD5pY7cdH4=;
+ b=Q0amlQfhCS3iGagIZFxXDrgJg/tfyBjYfsuZgjkVD3tD1lmJpoFmcyorUCcS3iMg0Bqkqm+6UwWBb141WslkwC809DoGtXjRTsq4jaa94C0krPNqdA5RNc3cNP0LQzJor6tT1vvf6h8z9TxPv8de6hvkU+12wMcpx3AzxPOTpPg=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=if/BexShAmER1YC0MMR2bRrTGU/tvYniU4lxWGN0tnA=;
+ bh=7JWdnUoUGxWLiiWTvKODAsJlz8v9PdXcJ7Yc9CXZaMA=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 9CB889005AB;
- Mon, 29 Jul 2024 15:39:15 +0800 (CST)
-Message-ID: <f5686f50-f554-4a92-b115-3621cd3df493@rock-chips.com>
-Date: Mon, 29 Jul 2024 15:39:15 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 11B639001C2;
+ Mon, 29 Jul 2024 15:39:34 +0800 (CST)
+Message-ID: <91cb34aa-f73a-4780-b8a0-c63578f5f0a4@rock-chips.com>
+Date: Mon, 29 Jul 2024 15:39:33 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rockchip: io-domain: Add support for RK3308
-To: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>
+Subject: Re: [PATCH] rockchip: rk3308: Update otp node in u-boot dtsi to match
+ v6.11-rc1
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
-References: <20240724065817.2736062-1-jonas@kwiboo.se>
+References: <20240724074409.2758552-1-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240724065817.2736062-1-jonas@kwiboo.se>
+In-Reply-To: <20240724074409.2758552-1-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGRoaH1ZPGkseSBgfGhhMSUtWFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQk0ZQlZDSxhDQkMdTR4YTklWFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a90fd6de4ec03a9kunm9cb889005ab
+X-HM-Tid: 0a90fd6e2c4103a9kunm11b639001c2
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NBA6Dgw4EzI3FzIWQjgKPAwK
- SRwKCS1VSlVKTElJSUhDTE5NTk1KVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPTUxJNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NxQ6Lxw4PDIwSDIeKz8jMzoL
+ CApPCRFVSlVKTElJSUhDTExPTUNJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTUNCNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,12 +74,10 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2024/7/24 14:58, Jonas Karlman wrote:
-> Port the RK3308 part of the Rockchip IO Domain driver from linux.
->
-> This differs from linux version in that vccio3 iodomain bit is enabled
-> in the write ops instead of in an init ops as in linux, this way we can
-> avoid keeping a full state of all supply that have been configured.
+On 2024/7/24 15:44, Jonas Karlman wrote:
+> The merged upstream DT node for OTP differs slightly, update node in
+> rk3308-u-boot.dtsi to match Linux kernel v6.11-rc1 in order to reduce
+> possible issue in future when devicetree-rebasing v6.11-dts is merged.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -87,88 +85,42 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   arch/arm/mach-rockchip/rk3308/syscon_rk3308.c |  3 ++
->   drivers/misc/rockchip-io-domain.c             | 37 +++++++++++++++++++
->   2 files changed, 40 insertions(+)
+>   arch/arm/dts/rk3308-u-boot.dtsi | 14 +++++++++++---
+>   1 file changed, 11 insertions(+), 3 deletions(-)
 >
-> diff --git a/arch/arm/mach-rockchip/rk3308/syscon_rk3308.c b/arch/arm/mach-rockchip/rk3308/syscon_rk3308.c
-> index 2d7e97110152..e77189eef6cf 100644
-> --- a/arch/arm/mach-rockchip/rk3308/syscon_rk3308.c
-> +++ b/arch/arm/mach-rockchip/rk3308/syscon_rk3308.c
-> @@ -16,4 +16,7 @@ U_BOOT_DRIVER(syscon_rk3308) = {
->   	.name = "rk3308_syscon",
->   	.id = UCLASS_SYSCON,
->   	.of_match = rk3308_syscon_ids,
-> +#if CONFIG_IS_ENABLED(OF_REAL)
-> +	.bind = dm_scan_fdt_dev,
-> +#endif
->   };
-> diff --git a/drivers/misc/rockchip-io-domain.c b/drivers/misc/rockchip-io-domain.c
-> index cf4f7c3984c7..025b6049a9f7 100644
-> --- a/drivers/misc/rockchip-io-domain.c
-> +++ b/drivers/misc/rockchip-io-domain.c
-> @@ -31,6 +31,10 @@
->   #define PX30_IO_VSEL_VCCIO6_SRC		BIT(0)
->   #define PX30_IO_VSEL_VCCIO6_SUPPLY_NUM	1
+> diff --git a/arch/arm/dts/rk3308-u-boot.dtsi b/arch/arm/dts/rk3308-u-boot.dtsi
+> index 684fa7abddb1..82b522eef8ec 100644
+> --- a/arch/arm/dts/rk3308-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3308-u-boot.dtsi
+> @@ -21,20 +21,28 @@
+>   		bootph-all;
+>   	};
 >   
-> +#define RK3308_SOC_CON0			0x300
-> +#define RK3308_SOC_CON0_VCCIO3		BIT(8)
-> +#define RK3308_SOC_VCCIO3_SUPPLY_NUM	3
-> +
->   #define RK3328_SOC_CON4			0x410
->   #define RK3328_SOC_CON4_VCCIO2		BIT(7)
->   #define RK3328_SOC_VCCIO2_SUPPLY_NUM	1
-> @@ -119,6 +123,22 @@ static int px30_iodomain_write(struct regmap *grf, uint offset, int idx, int uV)
->   	return ret;
->   }
+> -	otp: nvmem@ff210000 {
+> +	otp: efuse@ff210000 {
+>   		compatible = "rockchip,rk3308-otp";
+>   		reg = <0x0 0xff210000 0x0 0x4000>;
+> +		#address-cells = <1>;
+> +		#size-cells = <1>;
+>   		clocks = <&cru SCLK_OTP_USR>, <&cru PCLK_OTP_NS>,
+>   			 <&cru PCLK_OTP_PHY>;
+>   		clock-names = "otp", "apb_pclk", "phy";
+>   		resets = <&cru SRST_OTP_PHY>;
+>   		reset-names = "phy";
+> -		#address-cells = <1>;
+> -		#size-cells = <1>;
 >   
-> +static int rk3308_iodomain_write(struct regmap *grf, uint offset, int idx, int uV)
-> +{
-> +	int ret = rockchip_iodomain_write(grf, offset, idx, uV);
+>   		cpu_id: id@7 {
+>   			reg = <0x07 0x10>;
+>   		};
 > +
-> +	if (!ret && idx == RK3308_SOC_VCCIO3_SUPPLY_NUM) {
-> +		/*
-> +		 * set vccio3 iodomain to also use this framework
-> +		 * instead of a special gpio.
-> +		 */
-> +		u32 val = RK3308_SOC_CON0_VCCIO3 | (RK3308_SOC_CON0_VCCIO3 << 16);
-> +		ret = regmap_write(grf, RK3308_SOC_CON0, val);
-> +	}
+> +		cpu_leakage: cpu-leakage@17 {
+> +			reg = <0x17 0x1>;
+> +		};
 > +
-> +	return ret;
-> +}
-> +
->   static int rk3328_iodomain_write(struct regmap *grf, uint offset, int idx, int uV)
->   {
->   	int ret = rockchip_iodomain_write(grf, offset, idx, uV);
-> @@ -189,6 +209,19 @@ static const struct rockchip_iodomain_soc_data soc_data_px30_pmu = {
->   	.write = rockchip_iodomain_write,
->   };
+> +		logic_leakage: logic-leakage@18 {
+> +			reg = <0x18 0x1>;
+> +		};
+>   	};
 >   
-> +static const struct rockchip_iodomain_soc_data soc_data_rk3308 = {
-> +	.grf_offset = 0x300,
-> +	.supply_names = {
-> +		"vccio0-supply",
-> +		"vccio1-supply",
-> +		"vccio2-supply",
-> +		"vccio3-supply",
-> +		"vccio4-supply",
-> +		"vccio5-supply",
-> +	},
-> +	.write = rk3308_iodomain_write,
-> +};
-> +
->   static const struct rockchip_iodomain_soc_data soc_data_rk3328 = {
->   	.grf_offset = 0x410,
->   	.supply_names = {
-> @@ -256,6 +289,10 @@ static const struct udevice_id rockchip_iodomain_ids[] = {
->   		.compatible = "rockchip,px30-pmu-io-voltage-domain",
->   		.data = (ulong)&soc_data_px30_pmu,
->   	},
-> +	{
-> +		.compatible = "rockchip,rk3308-io-voltage-domain",
-> +		.data = (ulong)&soc_data_rk3308,
-> +	},
->   	{
->   		.compatible = "rockchip,rk3328-io-voltage-domain",
->   		.data = (ulong)&soc_data_rk3328,
+>   	rng: rng@ff2f0000 {
