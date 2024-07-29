@@ -4,76 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AB32C3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 07:58:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83782C3DA4A
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 08:00:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7702988747;
-	Mon, 29 Jul 2024 09:58:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
+	by phobos.denx.de (Postfix) with ESMTP id 01AD6887D6;
+	Mon, 29 Jul 2024 10:00:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="k2UujY4K";
-	dkim=pass (1024-bit key) header.d=kernel-space.org header.i=@kernel-space.org header.b="aK+GFnJf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BPA+Kj6R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7587C88056; Mon, 29 Jul 2024 09:58:30 +0200 (CEST)
-Received: from mail.kernel-space.org (unknown [IPv6:2a01:4f8:c2c:5a84::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EC9B388747; Mon, 29 Jul 2024 10:00:26 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7C82887E3
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 09:58:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=kernel-space.org
+ by phobos.denx.de (Postfix) with ESMTPS id DB03288056
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 10:00:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=angelo@kernel-space.org
-Received: from kernel-space.org (localhost [127.0.0.1])
- by kernel-space.org (OpenSMTPD) with ESMTP id 3007e422;
- Mon, 29 Jul 2024 07:56:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=kernel-space.org; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=s1; bh=KR
- 90DrRWbFtDjwiXqS0UK3xB5+U=; b=k2UujY4KoEMAmCrPdmfHVm2aUn8sBjWAc7
- RZmfbY+m1nyNqblGebi2kwcKtMOw2spjDSGQ7oKd+IAxZi1ZbYXtIxKT2hkmQIIs
- aotKqhJIH/lx6JH/qWBDOHNyPYq5TlzfJKLOyPfbElMvG/r8S4jrVtc8D5FCE8z7
- ulowvluv4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=kernel-space.org; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; q=dns; s=s1; b=
- odwO4o0LwkEC73YFlytbP2jfzoIM/w3R6ImrFANw1nDOFMo0SRtQCWFJuHm8PzMy
- 0ZrFH7B1FkN1T4trXT4G8hnAF7yrG93+/qST3nlHOH3LbW3b8K81uLPGxrNs/WXC
- zJrv1lPek6RYjdDXFh86O3KtABOKxDb80PwXNwOik8Y=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
- s=s1; t=1722239773;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=B5W9TUvhpYSTnK25Z+SB5KjcFPVTjME8CQte2E2Lc60=;
- b=aK+GFnJfIvTjR5LT6pQN3Bm7YNUsJhdBn3u7XRt+R6plzmg9XCssSxecL6TjVvvtv8xK6u
- qbfQEUHdL7h2Y1C19Wjbh2qR1sdCDAIVOJLV/gVw/N84mtfCiH/DbDKKt+F9Cnssph3Elb
- TZvjVuovifA8CD1/Kx5Bfxi7UspgQ4s=
-Received: from [192.168.0.2] (host-87-5-224-154.retail.telecomitalia.it
- [87.5.224.154])
- by kernel-space.org (OpenSMTPD) with ESMTPSA id 5860d940
- (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
- Mon, 29 Jul 2024 07:56:13 +0000 (UTC)
-Message-ID: <9b88aef5-be01-43e4-973b-5742256a4ef4@kernel-space.org>
-Date: Mon, 29 Jul 2024 09:57:34 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5b391c8abd7so135293a12.2
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 01:00:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1722240024; x=1722844824; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=z4dtmTXO/LGJM6D599e6iexnj83QyJtbAa1qzp5d30A=;
+ b=BPA+Kj6RjqJoUKIAqJgeJjFlrCxW5qX2EkCdVt6agLKhfdEHhEkujZZmoQLcxIhaUC
+ BbKB4RMeY905lw3Krglz7RO7PI/WvU6l3REGF82hePW822z0rkq3YzoQfNeIjk9nQsL4
+ Id6iiVdZwsYnP/28wxCjnohQqKUHapYIqo8lRQWnFFNoNVQiXJfzGhPC+GTWDr+YeY4m
+ ND+x4jYgNK9NnuGeT6DH8RmU5F1XsMcTZ3bN0OPBbdCsNSEkPz+/lrbzjDtA4uwGi4lj
+ EdOeyB55WTl6wwVGVNT+00ZKQdO/ZgQsVUkdl+VCZt5FFSNkfLyKmn3+k6FHnnvRmrNe
+ /+FA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722240024; x=1722844824;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=z4dtmTXO/LGJM6D599e6iexnj83QyJtbAa1qzp5d30A=;
+ b=tBTMwWLZuzAsuWMJByL7H6GDuOGaTVIs6z2Zp5qIu9i76bK6XrdvKC70TkT8H2i/5R
+ 3+z6CEcwp8B9oZOwXusRXv+OOm3Xas4c4ONl0Zzk/FyLCzLIlXvPtblVeDEefoiYzsOe
+ CzOz/uFV0towPvHl3wdlJYy0dfLX0ANfnmezM/yh5N02wRNC0o6R5p9Is5DFwLYYXYhj
+ 6mNZzQqxg2IU4kcY3n+89uiROYch9OsVO97ieyJnETpD6Ew88MdaFY4DPPzUtx942RsH
+ GsmKYLpvFvOY9VsxmhbJQwTqwk9H99Y3SpcDt5OeCjZY6f+pJsLLnnxUEyHZ4KnHVe75
+ jR1g==
+X-Gm-Message-State: AOJu0Yy1ay7j4XuIwxsbEv2eA6LHmWZ4mc8nl0UbMuckTsUZqzWXLYnn
+ H2z3iLmUtUYHdNH3JiEh1JbCaHK4h+VetTrYbGagsmiQud7LbqgoB9SvXHOjAKh+SOeMgcxSzLc
+ nOTHus6bGF6M8twTWSu/xycVFXFxRKB93H/oeeA==
+X-Google-Smtp-Source: AGHT+IEn+cEuarewcLDYTtAPcIW6qV70R/g+mJxcjlUJmEVusS0tZVbUUudKhxfZAlZxC5K7eiCGTO3fBLVlqWztha4=
+X-Received: by 2002:a50:9b58:0:b0:5af:2e08:d362 with SMTP id
+ 4fb4d7f45d1cf-5b0224cef1dmr4089405a12.23.1722240024048; Mon, 29 Jul 2024
+ 01:00:24 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Acked
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Huan Wang <alison.wang@nxp.com>, Lukasz Majewski <lukma@denx.de>,
- Mario Six <mario.six@gdsys.cc>, Sean Anderson <seanga2@gmail.com>
-References: <20240724150922.2343249-1-sjg@chromium.org>
- <20240724150922.2343249-2-sjg@chromium.org>
-Content-Language: en-US
-From: Angelo Dureghello <angelo@kernel-space.org>
-In-Reply-To: <20240724150922.2343249-2-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
+ <20240724060224.3071065-18-sughosh.ganu@linaro.org>
+ <CAFLszTgrxZBkOgcrq0cwtrGs7UdFsqxH9srg0rBmxLfummg9qw@mail.gmail.com>
+In-Reply-To: <CAFLszTgrxZBkOgcrq0cwtrGs7UdFsqxH9srg0rBmxLfummg9qw@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Mon, 29 Jul 2024 13:30:13 +0530
+Message-ID: <CADg8p94zgPCfEFMCKRaZ9PkD5kn7Sb2vfU4m73KGnoWmqjrfeg@mail.gmail.com>
+Subject: Re: [PATCH 17/40] lmb: introduce a function to add memory to the lmb
+ memory map
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
+ Max Filippov <jcmvbkbc@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,138 +96,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Acked-by: Angelo Dureghello <angelo@kernel-space.org>
+On Fri, 26 Jul 2024 at 05:02, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Sughosh,
+>
+> On Wed, 24 Jul 2024 at 00:04, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> >
+> > Introduce a function lmb_add_memory() to add available memory to the
+> > LMB memory map. Call this function during board init once the LMB data
+> > structures have been initialised.
+> >
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> > Changes since rfc: None
+> >
+> >  include/lmb.h | 12 ++++++++++++
+> >  lib/lmb.c     | 42 ++++++++++++++++++++++++++++++++++++++++++
+> >  2 files changed, 54 insertions(+)
+> >
+> > diff --git a/include/lmb.h b/include/lmb.h
+> > index a308796d58..77e2a23c0d 100644
+> > --- a/include/lmb.h
+> > +++ b/include/lmb.h
+> > @@ -40,6 +40,18 @@ struct lmb_region {
+> >  void lmb_init_and_reserve(struct bd_info *bd, void *fdt_blob);
+> >  void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
+> >                                 void *fdt_blob);
+> > +
+> > +/**
+> > + * lmb_add_memory() - Add memory range for LMB allocations
+> > + *
+> > + * Add the entire available memory range to the pool of memory that
+> > + * can be used by the LMB module for allocations.
+> > + *
+> > + * Return: None
+> > + *
+> > + */
+> > +void lmb_add_memory(void);
+> > +
+> >  long lmb_add(phys_addr_t base, phys_size_t size);
+> >  long lmb_reserve(phys_addr_t base, phys_size_t size);
+> >  /**
+> > diff --git a/lib/lmb.c b/lib/lmb.c
+> > index 88352e9a25..db0874371a 100644
+> > --- a/lib/lmb.c
+> > +++ b/lib/lmb.c
+> > @@ -239,6 +239,46 @@ void lmb_init_and_reserve(struct bd_info *bd, void *fdt_blob)
+> >         lmb_reserve_common(fdt_blob);
+> >  }
+> >
+> > +/**
+> > + * lmb_add_memory() - Add memory range for LMB allocations
+> > + *
+> > + * Add the entire available memory range to the pool of memory that
+> > + * can be used by the LMB module for allocations.
+> > + *
+> > + * This can be overridden for specific boards/architectures.
+>
+> Why is this needed?
 
-On 24/07/24 5:08 PM, Simon Glass wrote:
-> Only m68k and powerpc use this field, so move it to the arch-specific
-> info, to reduce the size for other archs.
+There is a definition of this function for the freescale layerscape
+platforms, and the e820 platform.
+
+>  I'm really not a fan of weak functions...it often
+> means we should have a proper API for it.
+
+Is there some coding style guideline which prohibits using weak
+function definitions? I see it being used all across U-Boot. Moreover,
+I don't think that this particular case asks for adding an API for
+this one function. That would just add to the size without much
+benefit.
+
+-sughosh
+
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+> > + *
+> > + * Return: None
+> > + *
+> > + */
+> > +__weak void lmb_add_memory(void)
+> > +{
+> > +       int i;
+> > +       phys_size_t size;
+> > +       phys_addr_t rgn_top;
+> > +       u64 ram_top = gd->ram_top;
+> > +       struct bd_info *bd = gd->bd;
+> > +
+> > +       /* Assume a 4GB ram_top if not defined */
+> > +       if (!ram_top)
+> > +               ram_top = 0x100000000ULL;
+> > +
+> > +       for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+> > +               size = bd->bi_dram[i].size;
+> > +               if (size) {
+> > +                       if (bd->bi_dram[i].start > ram_top)
+> > +                               continue;
+> > +
+> > +                       rgn_top = bd->bi_dram[i].start +
+> > +                               bd->bi_dram[i].size;
+> > +
+> > +                       if (rgn_top > ram_top)
+> > +                               size -= rgn_top - ram_top;
+> > +
+> > +                       lmb_add(bd->bi_dram[i].start, size);
+> > +               }
+> > +       }
+> > +}
+> > +
+> >  /* Initialize the struct, add memory and call arch/board reserve functions */
+> >  void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
+> >                                 void *fdt_blob)
+> > @@ -728,5 +768,7 @@ int lmb_mem_regions_init(void)
+> >                 return -1;
+> >         }
+> >
+> > +       lmb_add_memory();
+> > +
+> >         return 0;
+> >  }
+> > --
+> > 2.34.1
+> >
 >
->   arch/m68k/cpu/mcf5445x/cpu.c           | 2 +-
->   arch/m68k/include/asm/global_data.h    | 2 ++
->   arch/m68k/lib/bdinfo.c                 | 2 +-
->   arch/powerpc/cpu/mpc83xx/pci.c         | 4 ++--
->   arch/powerpc/cpu/mpc83xx/speed.c       | 2 +-
->   arch/powerpc/include/asm/global_data.h | 2 ++
->   drivers/clk/mpc83xx_clk.c              | 2 +-
->   include/asm-generic/global_data.h      | 5 -----
->   8 files changed, 10 insertions(+), 11 deletions(-)
->
-> diff --git a/arch/m68k/cpu/mcf5445x/cpu.c b/arch/m68k/cpu/mcf5445x/cpu.c
-> index b811ac355e4..3fbd6a58c7d 100644
-> --- a/arch/m68k/cpu/mcf5445x/cpu.c
-> +++ b/arch/m68k/cpu/mcf5445x/cpu.c
-> @@ -92,7 +92,7 @@ int print_cpuinfo(void)
->   		       strmhz(buf3, gd->arch.flb_clk));
->   #ifdef CONFIG_PCI
->   		printf("       PCI CLK %s MHz INP CLK %s MHz VCO CLK %s MHz\n",
-> -		       strmhz(buf1, gd->pci_clk),
-> +		       strmhz(buf1, gd->arch.pci_clk),
->   		       strmhz(buf2, gd->arch.inp_clk),
->   		       strmhz(buf3, gd->arch.vco_clk));
->   #else
-> diff --git a/arch/m68k/include/asm/global_data.h b/arch/m68k/include/asm/global_data.h
-> index 93efc722ba8..4ac886933c6 100644
-> --- a/arch/m68k/include/asm/global_data.h
-> +++ b/arch/m68k/include/asm/global_data.h
-> @@ -26,6 +26,8 @@ struct arch_global_data {
->   #if defined(CONFIG_FSL_ESDHC)
->   	unsigned long sdhc_per_clk;
->   #endif
-> +	/** @pci_clk: PCI clock rate in Hz */
-> +	unsigned long pci_clk;
->   };
->   
->   #include <asm-generic/global_data.h>
-> diff --git a/arch/m68k/lib/bdinfo.c b/arch/m68k/lib/bdinfo.c
-> index cf6ae5adddf..891e94bbd3f 100644
-> --- a/arch/m68k/lib/bdinfo.c
-> +++ b/arch/m68k/lib/bdinfo.c
-> @@ -22,7 +22,7 @@ int arch_setup_bdinfo(void)
->   	bd->bi_busfreq = gd->bus_clk;	/* Bus Freq,      in Hz */
->   
->   	if (IS_ENABLED(CONFIG_PCI))
-> -		bd->bi_pcifreq = gd->pci_clk;
-> +		bd->bi_pcifreq = gd->arch.pci_clk;
->   
->   #if defined(CONFIG_EXTRA_CLOCK)
->   	bd->bi_inpfreq = gd->arch.inp_clk;	/* input Freq in Hz */
-> diff --git a/arch/powerpc/cpu/mpc83xx/pci.c b/arch/powerpc/cpu/mpc83xx/pci.c
-> index 6f378c4e221..aef1123a2b7 100644
-> --- a/arch/powerpc/cpu/mpc83xx/pci.c
-> +++ b/arch/powerpc/cpu/mpc83xx/pci.c
-> @@ -45,7 +45,7 @@ void ft_pci_setup(void *blob, struct bd_info *bd)
->   			do_fixup_by_path(blob, path, "bus-range",
->   				&tmp, sizeof(tmp), 1);
->   
-> -			tmp[0] = cpu_to_be32(gd->pci_clk);
-> +			tmp[0] = cpu_to_be32(gd->arch.pci_clk);
->   			do_fixup_by_path(blob, path, "clock-frequency",
->   				&tmp, sizeof(tmp[0]), 1);
->   		}
-> @@ -60,7 +60,7 @@ void ft_pci_setup(void *blob, struct bd_info *bd)
->   			do_fixup_by_path(blob, path, "bus-range",
->   				&tmp, sizeof(tmp), 1);
->   
-> -			tmp[0] = cpu_to_be32(gd->pci_clk);
-> +			tmp[0] = cpu_to_be32(gd->arch.pci_clk);
->   			do_fixup_by_path(blob, path, "clock-frequency",
->   				&tmp, sizeof(tmp[0]), 1);
->   		}
-> diff --git a/arch/powerpc/cpu/mpc83xx/speed.c b/arch/powerpc/cpu/mpc83xx/speed.c
-> index 72464962613..0185ab50ad9 100644
-> --- a/arch/powerpc/cpu/mpc83xx/speed.c
-> +++ b/arch/powerpc/cpu/mpc83xx/speed.c
-> @@ -456,7 +456,7 @@ int get_clocks(void)
->   #if defined(CONFIG_ARCH_MPC837X)
->   	gd->arch.sata_clk = sata_clk;
->   #endif
-> -	gd->pci_clk = pci_sync_in;
-> +	gd->arch.pci_clk = pci_sync_in;
->   	gd->cpu_clk = gd->arch.core_clk;
->   	gd->bus_clk = gd->arch.csb_clk;
->   	return 0;
-> diff --git a/arch/powerpc/include/asm/global_data.h b/arch/powerpc/include/asm/global_data.h
-> index a9efbbdd3d4..cc2ce617350 100644
-> --- a/arch/powerpc/include/asm/global_data.h
-> +++ b/arch/powerpc/include/asm/global_data.h
-> @@ -87,6 +87,8 @@ struct arch_global_data {
->   #if defined(CONFIG_LWMON5)
->   	unsigned long kbd_status;
->   #endif
-> +	/** @pci_clk: PCI clock rate in Hz */
-> +	unsigned long pci_clk;
->   };
->   
->   #include <asm-generic/global_data.h>
-> diff --git a/drivers/clk/mpc83xx_clk.c b/drivers/clk/mpc83xx_clk.c
-> index a29ad0d7a68..a43fff2e7ed 100644
-> --- a/drivers/clk/mpc83xx_clk.c
-> +++ b/drivers/clk/mpc83xx_clk.c
-> @@ -358,7 +358,7 @@ static int mpc83xx_clk_probe(struct udevice *dev)
->   	gd->mem_clk = priv->speed[MPC83XX_CLK_MEM];
->   
->   	if (mpc83xx_has_pci(type))
-> -		gd->pci_clk = priv->speed[MPC83XX_CLK_PCI];
-> +		gd->arch.pci_clk = priv->speed[MPC83XX_CLK_PCI];
->   
->   	gd->cpu_clk = priv->speed[MPC83XX_CLK_CORE];
->   	gd->bus_clk = priv->speed[MPC83XX_CLK_CSB];
-> diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-> index aa336d63e3a..970053892e1 100644
-> --- a/include/asm-generic/global_data.h
-> +++ b/include/asm-generic/global_data.h
-> @@ -59,11 +59,6 @@ struct global_data {
->   	 * @bus_clk: platform clock rate in Hz
->   	 */
->   	unsigned long bus_clk;
-> -	/**
-> -	 * @pci_clk: PCI clock rate in Hz
-> -	 */
-> -	/* We cannot bracket this with CONFIG_PCI due to mpc5xxx */
-> -	unsigned long pci_clk;
->   	/**
->   	 * @mem_clk: memory clock rate in Hz
->   	 */
+> Regards,
+> Simon
