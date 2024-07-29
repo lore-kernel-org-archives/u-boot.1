@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3001AC3DA61
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 15:27:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1637C49EA1
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 15:28:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B569287E13;
-	Mon, 29 Jul 2024 17:27:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 30A9988808;
+	Mon, 29 Jul 2024 17:28:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YYpV1hiG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MT2I1/YT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8127E88806; Mon, 29 Jul 2024 17:27:56 +0200 (CEST)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
+ id C889188808; Mon, 29 Jul 2024 17:28:03 +0200 (CEST)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 642638785E
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 17:27:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 997F08785E
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 17:28:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-e0b9589a72dso302899276.3
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 08:27:54 -0700 (PDT)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-66498fd4f91so20373687b3.3
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 08:28:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722266873; x=1722871673; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722266880; x=1722871680; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UYHYd5eOU8HeQCo6iX8k8K2b8QCaWGZM8evMeOQ6h7g=;
- b=YYpV1hiGrDxbUaQiFxkrPiK4V+KMpGnPM3+bRtO5uLdZFMHWzHDhmRPB6DiluEGaqh
- AOzK6xK4GSr2aCAjphERVpH0REYPhdnwtxRy7nM4loMyLRIhOjY+C/LgCTb44JphOJxe
- ojtIxOZczfeZTBHstBNZRRFMv44S6djzliF1g=
+ bh=aCcH5DHV+Tdb6t9Sbb/d2Wkfr6ZUusgdGul9MD3vD6M=;
+ b=MT2I1/YTecJTDKilyorXSpU/xb4E9ej+WxhF/UA9A5uW7VAx7kz9bSkMQrS5scJ02P
+ +PMLo8P/Zbz771qbl5g4CyAMxR3B9nlYL0T03n3UDV45nInR5t4wQ3CIzS0YFgUluyjI
+ DFJ4RevNaFzhJq8amyd3njDfuYDgM2aLh6ZKQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722266873; x=1722871673;
+ d=1e100.net; s=20230601; t=1722266880; x=1722871680;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UYHYd5eOU8HeQCo6iX8k8K2b8QCaWGZM8evMeOQ6h7g=;
- b=NfShv3w6pCtor29Us3ugR8WDqDpu1wofybJP3aBjhnoX3TVcXEtivj6zxVG33hpRan
- LA8PobAfc+9Jg75joe79+1hqBeMZktqOoyfIc93rW/Pxdp9U0nXB7kMq79KTGDvDskVf
- RoZMW8q3hUWgD6RAP5YoWigXpci0LHxT9de+4/OULmaY+//iWko+onLmUpqq4UfNCjqG
- S2mxqQP2wmNE+F1NKFWuEKHzJ9blmsO65ms7r3LL2FEbPt5aNczv2lYejFcqyUIKQIZt
- f/APVpgXHHKmiW3UNGuOirXqblZFngY8duZkYjCsInsvB5wSdWpg2U2MV6JcZDXhAEla
- AU6Q==
-X-Gm-Message-State: AOJu0YxH8K5MlC5Tne7gt+zIxzzXlKpBnanM0NUQXFGnaMz1PpG/U7rn
- cMFs3M49fZGzbBoG+cxC1Q6Auizsc/YIX4Y5BxkEc4a5sthsrjhLVXbHG5igMrIZhJDx5FJd6Z2
- q5kmJWDuFtykvz12LxCwFzq17sRNhRKu0bdIt
-X-Google-Smtp-Source: AGHT+IF/U8pe1WVuOObOqJFq23fy6lbjgToLhGwLwHouRNQp5uT6LjTRY74iKgwh2EB1WBY8EoRP80oYgQtW8cbh1Eo=
-X-Received: by 2002:a25:1e06:0:b0:e03:601a:1a83 with SMTP id
- 3f1490d57ef6-e0b545a5306mr7877759276.39.1722266873291; Mon, 29 Jul 2024
- 08:27:53 -0700 (PDT)
+ bh=aCcH5DHV+Tdb6t9Sbb/d2Wkfr6ZUusgdGul9MD3vD6M=;
+ b=bQO25RR/RHbUWQRi5j4Ezm6n25sRsBCMxO015LUg8tMy8JY16I5j5b0qaDHjylJGNH
+ V2kXA7rzIWSpZXT5iwd6ZGhjzq0VUGivKZrCmWuqQUlI/aGRIbSEcfLe3eYOStKIxpiW
+ yEEffgpY8nEhCB6fxNwnEu+39hQPJjRD5v5id3qWLiAsMOk49YUyM8Pisp1gOkh9vWeu
+ 6SgILZ4UPz9qRd+als1sGMtJqqhAmRSIts1ZbW2JsN8B4CWZxT5K+8dLlUrmWqYPaq1y
+ W1K0+LHh04hv7+MS+LvrfGW0UX4HaIsN1puqq1w1x9O4aI/6x2pZq/84W2mV4NK1VxKX
+ 8ARQ==
+X-Gm-Message-State: AOJu0YwIe/ugO8CloPJfF+Yh3K8CbsbwlFPmdm1KFJlN0wJrirZZ8Hd4
+ rMlU5hYhI05X6SMl7bHj2aCkNmTN65xa9IOHdB1LiOhcYV/49zB+mG1VmaRnFgGF1ov9XCoCmVO
+ hFvQLXnwYm3DJom6PIbNEZ8sltjDNRtVkwsc/
+X-Google-Smtp-Source: AGHT+IFzBlHt8SvrgSZNahc4L1lHonFIRcXmfusaoXPsFB/8zYGkYHXyRhjKEBnfpb2gIWfVa6xd3yq6KJloq6WVtNA=
+X-Received: by 2002:a05:6902:1889:b0:e05:f3da:6583 with SMTP id
+ 3f1490d57ef6-e0b5459b70emr8622271276.43.1722266880486; Mon, 29 Jul 2024
+ 08:28:00 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-25-sughosh.ganu@linaro.org>
- <CAFLszTj-+LgVc7ychfuiQXB27WRVzAuqUCV6wQvBLgk0_PzwKg@mail.gmail.com>
- <CADg8p97_eYrwfuENcOA6m7DShtENbTVaWJQDy73vkqusAfTztg@mail.gmail.com>
-In-Reply-To: <CADg8p97_eYrwfuENcOA6m7DShtENbTVaWJQDy73vkqusAfTztg@mail.gmail.com>
+ <20240724060224.3071065-26-sughosh.ganu@linaro.org>
+ <CAFLszTg+5teQs4m++hX2wEDh1O7wTjPSK-2ogceFv1R=N_dz-A@mail.gmail.com>
+ <CADg8p97svCoSq+2dz6tUYBGssn=-BNLQGGxgco_kUPzcf2Xa4Q@mail.gmail.com>
+In-Reply-To: <CADg8p97svCoSq+2dz6tUYBGssn=-BNLQGGxgco_kUPzcf2Xa4Q@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 29 Jul 2024 09:27:42 -0600
-Message-ID: <CAFLszTghJQS6ss0PM1k2bRn4Ymf0_7AP2W5UrDCS=_MxoZm3XA@mail.gmail.com>
-Subject: Re: [PATCH 24/40] lmb: add a common implementation of
- arch_lmb_reserve()
+Date: Mon, 29 Jul 2024 09:27:49 -0600
+Message-ID: <CAFLszThsN+mJ2SQOBdEDEy0BZN82siVh7agp-6hKq7g5wM_JQQ@mail.gmail.com>
+Subject: Re: [PATCH 25/40] sandbox: move the TCG event log to the start of ram
+ memory
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
@@ -95,7 +95,7 @@ X-Virus-Status: Clean
 
 Hi Sughosh,
 
-On Mon, 29 Jul 2024 at 02:42, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Mon, 29 Jul 2024 at 02:45, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
 > On Fri, 26 Jul 2024 at 05:02, Simon Glass <sjg@chromium.org> wrote:
 > >
@@ -103,43 +103,57 @@ On Mon, 29 Jul 2024 at 02:42, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > >
 > > On Wed, 24 Jul 2024 at 00:04, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > > >
-> > > Almost all of the current definitions of arch_lmb_reserve() are doing
-> > > the same thing. The only exception in a couple of cases is the
-> > > alignment parameter requirement. Have a generic weak implementation of
-> > > this function, keeping the highest value of alignment that is being
-> > > used(16K).
-> > >
-> > > Also, instead of using the current value of stack pointer for starting
-> > > the reserved region, have a fixed value, considering the stack size
-> > > config value.
+> > > The TCG event log buffer is being set at the end of ram memory. This
+> > > region of memory is to be reserved as LMB_NOMAP memory in the LMB
+> > > memory map. The current location of this buffer overlaps with the
+> > > memory region reserved for the U-Boot image, which is at the top of
+> > > the usable memory. This worked earlier as the LMB memory map was not
+> > > global but caller specific, but fails now because of the overlap. Move
+> > > the TCG event log buffer to the start of the ram memory region
+> > > instead.
 > > >
 > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > > > ---
-> > > Changes since rfc: None
+> > > Changes since rfc: New patch
 > > >
-> > >  arch/arc/lib/cache.c        | 14 --------------
-> > >  arch/arm/lib/stack.c        | 14 --------------
-> > >  arch/m68k/lib/bootm.c       | 17 -----------------
-> > >  arch/microblaze/lib/bootm.c | 14 --------------
-> > >  arch/mips/lib/bootm.c       | 15 ---------------
-> > >  arch/nios2/lib/bootm.c      | 13 -------------
-> > >  arch/powerpc/lib/bootm.c    | 13 +++----------
-> > >  arch/riscv/lib/bootm.c      | 13 -------------
-> > >  arch/sh/lib/bootm.c         | 13 -------------
-> > >  arch/x86/lib/bootm.c        | 18 ------------------
-> > >  arch/xtensa/lib/bootm.c     | 13 -------------
-> > >  lib/lmb.c                   |  6 +++++-
-> > >  12 files changed, 8 insertions(+), 155 deletions(-)
+> > >  arch/sandbox/dts/test.dts | 2 +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > >
+> > > diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+> > > index 5fb5eac862..1e1e9eaeb5 100644
+> > > --- a/arch/sandbox/dts/test.dts
+> > > +++ b/arch/sandbox/dts/test.dts
+> > > @@ -78,7 +78,7 @@
+> > >
+> > >                 event_log: tcg_event_log {
+> > >                         no-map;
+> > > -                       reg = <(CFG_SYS_SDRAM_SIZE - 0x2000) 0x2000>;
+> > > +                       reg = <(CFG_SYS_SDRAM_BASE + 0x1000) 0x2000>;
+> > >                 };
+> > >         };
+> > >
+> > > --
+> > > 2.34.1
+> > >
 > >
-> > How about not having a weak function? I have to wonder whether powerpc
-> > really needs to be different? If it does, I suppose we could use an
-> > event to deal with powerpc.
+> > It looks like this will conflict.
 >
-> Again, I have the same question about weak functions. It does not seem
-> to be a universal policy.
+> Can you please elaborate a bit here. I am not saying that I am not
+> open to a different solution, but I did not get any CI errors with
+> this change.
+>
+> >
+> > Please check and update the memory map at the end of
+> > doc/arch/sandbox/sandbox.rst
 
-Perhaps the powerpc maintainer can help figure this out, with answers
-to the questions I posed?
+The address you are choosing is too low in memory...move it above the
+FDT and bloblist.
+
+> >
+> > Separate from this patch, I really think the TCG event log should go
+> > in a bloblist. I can have a crack at that if you like.
+>
+> That can be taken up as a separate activity.
 
 Regards,
-SImon
+Simon
