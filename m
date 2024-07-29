@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3FA4C3DA61
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 15:28:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A710DC3DA61
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 15:28:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8447A88859;
-	Mon, 29 Jul 2024 17:28:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DFCA388875;
+	Mon, 29 Jul 2024 17:28:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jN/rXVnI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UPUonYVG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 831438885E; Mon, 29 Jul 2024 17:28:24 +0200 (CEST)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id E4F6B88875; Mon, 29 Jul 2024 17:28:32 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6856288852
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 17:28:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CDA2888852
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 17:28:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6b79c969329so17013186d6.0
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 08:28:22 -0700 (PDT)
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6b7a4668f1fso19853106d6.3
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 08:28:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722266901; x=1722871701; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722266910; x=1722871710; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=eWTRTWJ00oCoewk69efDRbZgYjXy6xdpaDOqR5hJay0=;
- b=jN/rXVnI9abZrEdZDPURc6FQpo87JEipXNDBXXZX1QcdfEQrk6ILXcE2ThId0izs61
- zn5eRxKUdVwWsc9Vtlx279n1qWkVnsESSmvFpT1mTXjnuK+UbidyFNXCjAhFf+DEX3iN
- UXEojtv+RIS9B8ZOzgAjsrzwvcEfGsfWiLHn8=
+ bh=NZkgutDolLzr/aBNMcadaN0Wsea1+JPjiKUXtJ+3Pb4=;
+ b=UPUonYVGPY9WMA0ylRqQ5Sr7v+mXkX4UOPqEDbYZHL6KXIpwCV7C2kbOHm/iW2tIhQ
+ 8Y3+M7zJdO7qzb4IMw68Obs3jiZFeKtN0acnH5yplwA2ara3T7jrhj2IEXhl8SbHX60D
+ DIVuDYRIKnZxnBt1vyH7hnNq+EPm8xEAw3iMk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722266901; x=1722871701;
+ d=1e100.net; s=20230601; t=1722266910; x=1722871710;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=eWTRTWJ00oCoewk69efDRbZgYjXy6xdpaDOqR5hJay0=;
- b=ngY77+cf5/Bj5zq6YqsE2nhd+UDggyAHcQdNubHKbZq+Nwb4IbAfv8eLCShyEjRD50
- G6Y/2EYiREIxPPq/b0A3FS01qa1z89w86ZfILLL4qF/MP0kmmmIjgBS3TWqVd5Xo+oyb
- 4kdQxurXc6BXkLi+OKCMuDS2AHRNzvXcWT4sfI00bT8+1BXbRDAFOyOTDlrnWWt+VuFq
- pfyYkMW92WH9DtxIPLZ2tkulITkloCTSgGEw63ygGWjod6VPQ2xnhr9zRNLVMid/C5TZ
- aIjw9LrqnOtn6d+pCf4wePTpGNDh3w15gyfG3lKmQGar9oVUjaS53NIorw7wN+5958x4
- gLMg==
-X-Gm-Message-State: AOJu0Yy2KhuEeIuaV72mhfRWS8EL43ZHgchW51N0qC+X4L1BsHRz8Elg
- k58k+r41bAZ8pX0fcjsR75tTYMJU+CUt/E8yKP1XJsEdB5kvZKsCptuKmjUfnaYn6TTkOxjtNrr
- d0eE8eGUjXbnsUa86fZYDqe25I/agNDitfzEs
-X-Google-Smtp-Source: AGHT+IHHqXYy6j0XVHJApgxxkEtKiysE10Pv8Mz5igw1R7/n0rLKtlQNkc4VRSPmOlQUl7z2nj8tH9c5zsPZgALRvbM=
-X-Received: by 2002:a05:6214:e83:b0:6b0:7821:4026 with SMTP id
- 6a1803df08f44-6bb55af157fmr110159866d6.52.1722266901411; Mon, 29 Jul 2024
- 08:28:21 -0700 (PDT)
+ bh=NZkgutDolLzr/aBNMcadaN0Wsea1+JPjiKUXtJ+3Pb4=;
+ b=RB0BWZbCBMJWs1s53NjNwx1WOe+FpHPPEnYSUPYc6EKRzskiuKpbdwAKssWFcftqbN
+ d2X0wyDFuCzvjA0vonzYEsuiGldHNn5QBHb8vIVbAFqzWOnBN2daAUXqcAAHGbn7rC7B
+ Z6TCX/nD2TwrK9JjLMBp8mtlkgqcl/KEQnwlMyj7sPCXvrnrdE6aPVaemYwDGu7WeduD
+ Jhrtl0IyOd3JgVWVqS1wtZKSCFjk1BLmIcezxwhTd2bBgwfGacZ4vCB7P409eiU7qdgH
+ CIHoJGS+SY1Y9D+AvrznpMqUaE8STKsxXUVBngBgyXo5QCYM7r9QpRRbqyrbsy/xvv2t
+ wzJQ==
+X-Gm-Message-State: AOJu0YwDHZiuUwcR+D1FdzjCwiYM+spMM6UVkYfQfS/YEg3DY3wylqaU
+ nNuPPUK51k67wUgMs6S28q//ywElAPlBIWAJPHqaTN3/9paq10ArWh5WOsxOhwmAsiVgFdrfyGI
+ t/bgtFjhvUzKtdhVDIgDIxPMD2/NEQHwiMmBR
+X-Google-Smtp-Source: AGHT+IGw+h/GV9b/G4bv9a1o7frUlNHohCQYfYzOW6E4+dPUCjGM1TW7gxmISIY3vF0OXLpXagEzMZ7doxK0TqT2SPM=
+X-Received: by 2002:ad4:5ba4:0:b0:6b5:4865:948c with SMTP id
+ 6a1803df08f44-6bb55a41ce9mr100876856d6.27.1722266909785; Mon, 29 Jul 2024
+ 08:28:29 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-37-sughosh.ganu@linaro.org>
- <CAFLszTjQ011M-C+JNAPkFce2CEA5qofdm2TEtETndcU1k8vF5w@mail.gmail.com>
- <CADg8p964_oxktCBb2BF81MCpGQVUbPYh-e1yxjjUbBKr=cfOpw@mail.gmail.com>
-In-Reply-To: <CADg8p964_oxktCBb2BF81MCpGQVUbPYh-e1yxjjUbBKr=cfOpw@mail.gmail.com>
+ <20240724060224.3071065-41-sughosh.ganu@linaro.org>
+ <CAFLszTgSXD3FqwtYjGEHWyt=gxGVZFYCzMs8DDhTkxOg6eW+Og@mail.gmail.com>
+ <CADg8p96VOh=QExuK9h0jzvbozXN=fHk651M3LNa-=HCywos86Q@mail.gmail.com>
+In-Reply-To: <CADg8p96VOh=QExuK9h0jzvbozXN=fHk651M3LNa-=HCywos86Q@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 29 Jul 2024 09:28:10 -0600
-Message-ID: <CAFLszTgWYoz=Kd7EqUTU-CQEXYig9biwJ9UACeDOeNdbdkgXUw@mail.gmail.com>
-Subject: Re: [PATCH 36/40] test: lmb: add a separate class of unit tests for
- lmb
+Date: Mon, 29 Jul 2024 09:28:19 -0600
+Message-ID: <CAFLszTh3AVYEQxiQoKC4=MjswY+i_zh+SaMXYnpGHam13bGo5Q@mail.gmail.com>
+Subject: Re: [PATCH 40/40] lmb: ut: re-enable unit tests
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
@@ -95,64 +94,45 @@ X-Virus-Status: Clean
 
 Hi Sughosh,
 
-On Mon, 29 Jul 2024 at 02:56, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Mon, 29 Jul 2024 at 02:58, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
 > On Fri, 26 Jul 2024 at 05:03, Simon Glass <sjg@chromium.org> wrote:
 > >
 > > Hi Sughosh,
 > >
-> > On Wed, 24 Jul 2024 at 00:05, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > On Wed, 24 Jul 2024 at 00:06, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > > >
-> > > Add the LMB unit tests under a separate class of tests. The LMB tests
-> > > involve changing the LMB's memory map. With the memory map now
-> > > persistent and global, running these tests has a side effect and
-> > > impact any subsequent tests. Run these tests separately so that the
-> > > system can be reset on completion of these tests.
+> > > All the changes needed for making the LMB memory map persistent and
+> > > global have been made, including making corresponding changes in the
+> > > test code. Re-enable the unit tests on the platforms.
 > > >
-> >
-> > This is just not a good idea...we should fix the tests so they don't
-> > have these side effects.
->
-> But this test *will* have side-effects -- if we are making the lmb
-> memory maps persistent, testing that code will have an impact. There
-> is no getting around it. Btw, I got this idea based on how the VBE
-> tests are run. This is similar to what is being done for the VBE
-> tests.
-
-You can set up the state before the test and restore it afterwards.
-That is what we do with other tests and it is why you should have the
-lmb state in a struct. See for example state_reset_for_test() which is
-called if the test has a UT_TESTF_DM flag.
-
-You can add a save/restore function (since you don't want a lmb pointer).
-
-The _norun thing is because the tests are written in C but need some
-Python setup. So the setup is done and then the test is run
-immediately afterwards.
-
->
-> As an aside, what issue do you see with running these tests separately?
-
-They don't run with the 'ut' command so must be done specially. There
-is no Python setup needed. We have DM tests which save and restore all
-sorts of things...so we should do the same with lmb.
-
-
->
-> -sughosh
->
-> >
 > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > > > ---
-> > > Changes since rfc: None
+> > > Changes since rfc: New patch
 > > >
-> > >  include/test/suites.h        |  1 +
-> > >  test/Kconfig                 |  9 ++++++
-> > >  test/Makefile                |  1 +
-> > >  test/cmd_ut.c                |  7 +++++
-> > >  test/lib/Makefile            |  1 -
-> > >  test/{lib/lmb.c => lmb_ut.c} | 53 ++++++++++++++++++++++--------------
-> > >  6 files changed, 50 insertions(+), 22 deletions(-)
-> > >  rename test/{lib/lmb.c => lmb_ut.c} (93%)
+> > >  configs/sandbox64_defconfig        | 4 +++-
+> > >  configs/sandbox_defconfig          | 7 +++----
+> > >  configs/sandbox_flattree_defconfig | 4 +++-
+> > >  configs/sandbox_noinst_defconfig   | 8 ++++----
+> > >  configs/sandbox_spl_defconfig      | 8 ++++----
+> > >  configs/sandbox_vpl_defconfig      | 6 ++++--
+> > >  configs/snow_defconfig             | 2 +-
+> > >  7 files changed, 22 insertions(+), 17 deletions(-)
+> >
+> > It would be much better to change the tests as needed, so they keep passing.
+>
+> What issue do you see with this approach? If I have to do what you
+> suggest, I will have to put all the test related changes as part of
+> the same commit which makes the LMB map persistent and global. I have
+> seen this kind of approach taken elsewhere, so really not sure what is
+> the problem with this.
 
-- Simon
+Yes, normally when code changes the tests change too, otherwise the
+tests are broken on that commit. Disabling them doesn't resolve that.
+
+Once you figure out the save/restore thing you will find the tests
+quite easy. I think part of the problem is that you are making the lmb
+tests 'special'.
+
+Regards,
+Simon
