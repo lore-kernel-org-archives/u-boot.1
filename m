@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F204BC3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 12:29:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 706B4C3DA61
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 12:42:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D35388651;
-	Mon, 29 Jul 2024 14:29:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B31E988651;
+	Mon, 29 Jul 2024 14:42:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RYu9Gmp7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rrxGivPP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B12F7887B9; Mon, 29 Jul 2024 14:29:43 +0200 (CEST)
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
+ id 0BC25887B9; Mon, 29 Jul 2024 14:42:18 +0200 (CEST)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65F27885F5
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 14:29:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D95B88056
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 14:42:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-70eaf5874ddso2227134b3a.3
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 05:29:41 -0700 (PDT)
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-2cb5e0b020eso2524108a91.2
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 05:42:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722256180; x=1722860980; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1722256934; x=1722861734; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0jRrCwwS7yfhX4ncKkApBf9voXtYFnNGA4/PaV8Y9zM=;
- b=RYu9Gmp73+6wLvrkQDWwH/kpzhrolJ99tRHhf9BLkJf7R0YPmZIQ5IRpgsG5iS3AF2
- 5b0JlzC5DFgmBa92IChgtxV8hrIrYTGj0h1qT5mE/YPbjoJ0uSbM8muNxBh8Ae5M8L6G
- 1PxCN8T+BveJgV4O0Sl46PtJrdqF+kS9sZPWbPksWc4s07Vq0Sc3jDbLPjIZ5CVkTgVp
- e8AjAsN4dpzTLT+MiLvteWr00EKRYeQtJpXUczwynTsuOjxTrWrc2SFHM7dDFBRPymEM
- H+jjCmtscfXdO56yadUNCQ9SHvqOIQbwZC4qpJu75fK4rGgTxmTHprZxp40BvPr0oJMS
- 2Mlg==
+ bh=VgQ3YqwtcVkxXXiELgCTUD5GiXv+UES6p8UtIuDkeHE=;
+ b=rrxGivPPyxuTuG9KEospYvU6bsenyMBjG6ES90dLQu4i+rzhNOeVFBXDQTYUIMao5h
+ w7Cl+Hx6YEPQPD35UUk0t1Ks39SpxSl4S7r4259fU77MH3P4dl171TVG3fSnAlZk0Aw/
+ ZicS11ApX00myRCR9Sx+oqYYQqAZoQ/RyTiGLZmH7UtZvwS73D6OSRabUjJmMnbpoY8B
+ BL59izA3sgMcmaueThPprk9+zabjbm89nm2kVbFxHvurfEx4JQ7q0CIj5MFX+g6dEyXp
+ A/Ul5b3V3hotFR9Hc/XfsecpM8VAb8SvnyumR7P6QcX/INW991qGgOwQAPN5Xl2TJHa9
+ rUdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722256180; x=1722860980;
+ d=1e100.net; s=20230601; t=1722256934; x=1722861734;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0jRrCwwS7yfhX4ncKkApBf9voXtYFnNGA4/PaV8Y9zM=;
- b=qXChhXENBsKHbMAQX/Ou3UtcouisRgHyLw5i2kLOWNEVJJgxiASXlE+wI4aTxmsojZ
- 0L1VfyGVkmhexhEdZxlDe28/t9gGyhBbK3g3pKb/6HUA4RozF7lmqWLdQOaUc5D3du5T
- 5S6BKyZ+ZALw9gsXKBNBWhRVQq00mT0nPkjA3VL4jfHbf1vgulMnrRCYgElnAdW2C9IZ
- 4Z1JUYwX83XUXheQ6v+66U4BU3pX2sA7y5bIAzGVan5Ewa6RBsxoRokvVPARbrvPXNo/
- grUvr/7nu452doDjh3sD0CBKlmGEoY6cHap4Hz9Hy3hbtSYrFsp1gr4Hv7nwFcIHxozu
- TE0w==
-X-Gm-Message-State: AOJu0YyL9CvcUbJXsUiB2MaksRp8ooqh30hetF7F5Ai131iPRggBZVl5
- nxnJBGATdTQw3HUl13zJ9ypfsml9ySN01hOOfWajjT6YMTbsJZXIOmNXWJ3ZOruxJ4gY1oBAQje
- ezd+S+R3TC6AAGo8iikz6k1/yYPSVnhTbbjZ9aQ==
-X-Google-Smtp-Source: AGHT+IG40NZSP0uYuftV8KwKv3KKRiecAsitu/DSL6WCsVZ7cL+FfDGcs8uW3Zs+3uDwFIvwN56OPPatvU5V3LJNqo8=
-X-Received: by 2002:a05:6a20:a11f:b0:1c2:94ad:1c67 with SMTP id
- adf61e73a8af0-1c4a1307462mr6082685637.30.1722256179637; Mon, 29 Jul 2024
- 05:29:39 -0700 (PDT)
+ bh=VgQ3YqwtcVkxXXiELgCTUD5GiXv+UES6p8UtIuDkeHE=;
+ b=OAjTwcRvELK31zlPjBFhnhx3dOuuHz6NT3Bu8HfBcA4m1lWcBZjSrxmpuOLvFA9G2r
+ m//KurOO8/opnXgnEuZ6FDG29bjVzfMV9uYg/9fYILdAjZmXAyliWblcq7o556IY1KNw
+ iyBMH/FUSEbYRiOOdP3wAEB+DvMcZACI7Z+i5Yfu8SLkNQ8pMzR8vWXWW8SVKgDB62w+
+ eSLjBU6zHaMnHkeZJvYCQZ/LDsRFBcHqN5/PqxANfQTjsdBdGoexT6Sc7t1Yd1guzOtK
+ 9T0vnYrkoxy/s94Z45nXFWkmdWhRPr7/Kl8xhrdteH8j67DLZmsqPFl3gMqlU4YtgSGP
+ eTjA==
+X-Gm-Message-State: AOJu0Yy/LdABkEj7C29PWfTvuVeLl1tPDhTQSetOIqh4VwpyoZFxJXug
+ dEM8FCn61pCzefQiw2W2E+zOn6CQVz9jQN69R6XwQSRnla7Vh8MPYF3mJobMIq8qnKxmiv0SusO
+ r/kVg91rU7guQG4ly0RPgEWx+duCfGdB58gpN9Q==
+X-Google-Smtp-Source: AGHT+IEmdcNZ3lgEcJjed4oOcAxuG3yVmT7cOEIXmD48AnWGORIqnRWwfQJm6WJULnygqKijBOQq+u6Zd4bJG4uL3RM=
+X-Received: by 2002:a17:90a:784c:b0:2c9:e0e3:e507 with SMTP id
+ 98e67ed59e1d1-2cf7d3efc32mr8027639a91.0.1722256933493; Mon, 29 Jul 2024
+ 05:42:13 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1721910373.git.jerome.forissier@linaro.org>
- <4dee5a89157f3dd0e0a8d17ab6ff42292bb7ce79.1721910373.git.jerome.forissier@linaro.org>
-In-Reply-To: <4dee5a89157f3dd0e0a8d17ab6ff42292bb7ce79.1721910373.git.jerome.forissier@linaro.org>
+ <f28efa0115c71e97fbef0bd1a6628e087cd210c1.1721910373.git.jerome.forissier@linaro.org>
+In-Reply-To: <f28efa0115c71e97fbef0bd1a6628e087cd210c1.1721910373.git.jerome.forissier@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 29 Jul 2024 15:29:03 +0300
-Message-ID: <CAC_iWjLpwGzyNqqgs0YVZpR4=Vncnd7V_DVDcONX9OweyrDWGg@mail.gmail.com>
-Subject: Re: [PATCH v5 18/20] net-lwip: add TFTP_BLOCKSIZE
+Date: Mon, 29 Jul 2024 15:41:37 +0300
+Message-ID: <CAC_iWj+VCziVSKBFbPeCaRLJKQxM0XQD+h3b2kasQ74OMLiKpg@mail.gmail.com>
+Subject: Re: [PATCH v5 12/20] net: split cmd/net.c into cmd/net.c and
+ cmd/net-common.c
 To: Jerome Forissier <jerome.forissier@linaro.org>
 Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
  Raymond Mao <raymond.mao@linaro.org>, Maxim Uvarov <muvarov@gmail.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Baruch Siach <baruch@tkos.co.il>
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,79 +92,277 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
-
 On Thu, 25 Jul 2024 at 15:59, Jerome Forissier
 <jerome.forissier@linaro.org> wrote:
 >
-> Add support for setting the TFTP block size. The default value (1468)
-> is fine for Ethernet and allows a better throughput than the TFTP
-> default (512), if the server supports the blksize option of course.
->
-> I tested this change with qemu_arm64_lwip_defconfig. The throughput is
-> now 875 KiB/s vs. 313 KiB/s before. That is still a low number, but I
-> think we can't expect more without implementing the windowsize option.
+> Extract some code from cmd/net.c that will be useful in a subsequent
+> commit to implement wget with NET_LWIP.
 >
 > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 > ---
->  net/Kconfig     | 20 ++++++++++----------
->  net/lwip/tftp.c |  2 ++
->  2 files changed, 12 insertions(+), 10 deletions(-)
+>  cmd/Makefile     |   5 ++-
+>  cmd/net-common.c | 109 ++++++++++++++++++++++++++++++++++++++++++++
+>  cmd/net.c        | 115 -----------------------------------------------
+>  3 files changed, 113 insertions(+), 116 deletions(-)
+>  create mode 100644 cmd/net-common.c
 >
-> diff --git a/net/Kconfig b/net/Kconfig
-> index 952690d677d..7e5406bb923 100644
-> --- a/net/Kconfig
-> +++ b/net/Kconfig
-> @@ -69,16 +69,6 @@ config SYS_FAULT_ECHO_LINK_DOWN
->           this option is active, then CONFIG_SYS_FAULT_MII_ADDR also needs to
->           be configured.
+> diff --git a/cmd/Makefile b/cmd/Makefile
+> index fe733cf6ba9..2c3de45a074 100644
+> --- a/cmd/Makefile
+> +++ b/cmd/Makefile
+> @@ -130,7 +130,10 @@ obj-$(CONFIG_CMD_NAND) += nand.o
+>  ifdef CONFIG_CMD_NET
+>  obj-$(CONFIG_NET) += net.o
+>  obj-$(CONFIG_NET_LWIP) += net-lwip.o
+> -CFLAGS_net-lwip.o := -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
+> +obj-$(filter y,$(CONFIG_CMD_NET) $(CONFIG_CMD_NET_LWIP)) += net-common.o
+> +lwip-includes := -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
+> +CFLAGS_net-lwip.o := $(lwip-includes)
+> +CFLAGS_net-common.o := $(lwip-includes)
+>  endif
+>  obj-$(CONFIG_ENV_SUPPORT) += nvedit.o
+>  obj-$(CONFIG_CMD_NVEDIT_EFI) += nvedit_efi.o
+> diff --git a/cmd/net-common.c b/cmd/net-common.c
+> new file mode 100644
+> index 00000000000..1c9fb83b896
+> --- /dev/null
+> +++ b/cmd/net-common.c
+> @@ -0,0 +1,109 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * (C) Copyright 2000
+> + * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+> + */
+> +
+> +#include <command.h>
+> +#include <dm/device.h>
+> +#include <dm/uclass.h>
+> +#include <net.h>
+> +#include <linux/compat.h>
+> +#include <linux/ethtool.h>
+> +
+> +static int do_net_list(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> +{
+> +       const struct udevice *current = eth_get_dev();
+> +       unsigned char env_enetaddr[ARP_HLEN];
+> +       const struct udevice *dev;
+> +       struct uclass *uc;
+> +
+> +       uclass_id_foreach_dev(UCLASS_ETH, dev, uc) {
+> +               eth_env_get_enetaddr_by_index("eth", dev_seq(dev), env_enetaddr);
+> +               printf("eth%d : %s %pM %s\n", dev_seq(dev), dev->name, env_enetaddr,
+> +                      current == dev ? "active" : "");
+> +       }
+> +       return CMD_RET_SUCCESS;
+> +}
+> +
+> +static int do_net_stats(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> +{
+> +       int nstats, err, i, off;
+> +       struct udevice *dev;
+> +       u64 *values;
+> +       u8 *strings;
+> +
+> +       if (argc < 2)
+> +               return CMD_RET_USAGE;
+> +
+> +       err = uclass_get_device_by_name(UCLASS_ETH, argv[1], &dev);
+> +       if (err) {
+> +               printf("Could not find device %s\n", argv[1]);
+> +               return CMD_RET_FAILURE;
+> +       }
+> +
+> +       if (!eth_get_ops(dev)->get_sset_count ||
+> +           !eth_get_ops(dev)->get_strings ||
+> +           !eth_get_ops(dev)->get_stats) {
+> +               printf("Driver does not implement stats dump!\n");
+> +               return CMD_RET_FAILURE;
+> +       }
+> +
+> +       nstats = eth_get_ops(dev)->get_sset_count(dev);
+> +       strings = kcalloc(nstats, ETH_GSTRING_LEN, GFP_KERNEL);
+> +       if (!strings)
+> +               return CMD_RET_FAILURE;
+> +
+> +       values = kcalloc(nstats, sizeof(u64), GFP_KERNEL);
+> +       if (!values)
+> +               goto err_free_strings;
+> +
+> +       eth_get_ops(dev)->get_strings(dev, strings);
+> +       eth_get_ops(dev)->get_stats(dev, values);
+> +
+> +       off = 0;
+> +       for (i = 0; i < nstats; i++) {
+> +               printf("  %s: %llu\n", &strings[off], values[i]);
+> +               off += ETH_GSTRING_LEN;
+> +       };
+> +
+> +       kfree(strings);
+> +       kfree(values);
+> +
+> +       return CMD_RET_SUCCESS;
+> +
+> +err_free_strings:
+> +       kfree(strings);
+> +
+> +       return CMD_RET_FAILURE;
+> +}
+> +
+> +static struct cmd_tbl cmd_net[] = {
+> +       U_BOOT_CMD_MKENT(list, 1, 0, do_net_list, "", ""),
+> +       U_BOOT_CMD_MKENT(stats, 2, 0, do_net_stats, "", ""),
+> +};
+> +
+> +static int do_net(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> +{
+> +       struct cmd_tbl *cp;
+> +
+> +       cp = find_cmd_tbl(argv[1], cmd_net, ARRAY_SIZE(cmd_net));
+> +
+> +       /* Drop the net command */
+> +       argc--;
+> +       argv++;
+> +
+> +       if (!cp || argc > cp->maxargs)
+> +               return CMD_RET_USAGE;
+> +       if (flag == CMD_FLAG_REPEAT && !cmd_is_repeatable(cp))
+> +               return CMD_RET_SUCCESS;
+> +
+> +       return cp->cmd(cmdtp, flag, argc, argv);
+> +}
+> +
+> +U_BOOT_CMD(
+> +       net, 3, 1, do_net,
+> +       "NET sub-system",
+> +       "list - list available devices\n"
+> +       "stats <device> - dump statistics for specified device\n"
+> +);
+> diff --git a/cmd/net.c b/cmd/net.c
+> index b206ff58e68..ad5aaf9245e 100644
+> --- a/cmd/net.c
+> +++ b/cmd/net.c
+> @@ -675,118 +675,3 @@ U_BOOT_CMD(
+>  );
 >
-> -config TFTP_BLOCKSIZE
-> -       int "TFTP block size"
-> -       default 1468
-> -       help
-> -         Default TFTP block size.
-> -         The MTU is typically 1500 for ethernet, so a TFTP block of
-> -         1468 (MTU minus eth.hdrs) provides a good throughput with
-> -         almost-MTU block sizes.
-> -         You can also activate CONFIG_IP_DEFRAG to set a larger block.
+>  #endif  /* CONFIG_CMD_LINK_LOCAL */
 > -
-
-Why do you have to move the config option?
-
-Cheers
-/Ilias
->  config TFTP_PORT
->         bool "Set TFTP UDP source/destination ports via the environment"
->         help
-> @@ -263,4 +253,14 @@ config SYS_RX_ETH_BUFFER
->           since all buffers can be full shortly after enabling the interface on
->           high Ethernet traffic.
->
-> +config TFTP_BLOCKSIZE
-> +       int "TFTP block size"
-> +       default 1468
-> +       help
-> +         Default TFTP block size.
-> +         The MTU is typically 1500 for ethernet, so a TFTP block of
-> +         1468 (MTU minus eth.hdrs) provides a good throughput with
-> +         almost-MTU block sizes.
-> +         You can also activate CONFIG_IP_DEFRAG to set a larger block.
-> +
->  endif   # if NET || NET_LWIP
-> diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
-> index 78de0bd0dba..1fe948c84ec 100644
-> --- a/net/lwip/tftp.c
-> +++ b/net/lwip/tftp.c
-> @@ -136,6 +136,8 @@ static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
->         if (!(err == ERR_OK || err == ERR_USE))
->                 log_err("tftp_init_client err: %d\n", err);
->
-> +       tftp_client_set_blksize(CONFIG_TFTP_BLOCKSIZE);
-> +
->         ctx.start_time = get_timer(0);
->         err = tftp_get(&ctx, &srvip, srvport, fname, TFTP_MODE_OCTET);
->         /* might return different errors, like routing problems */
+> -static int do_net_list(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> -{
+> -       const struct udevice *current = eth_get_dev();
+> -       unsigned char env_enetaddr[ARP_HLEN];
+> -       const struct udevice *dev;
+> -       struct uclass *uc;
+> -
+> -       uclass_id_foreach_dev(UCLASS_ETH, dev, uc) {
+> -               eth_env_get_enetaddr_by_index("eth", dev_seq(dev), env_enetaddr);
+> -               printf("eth%d : %s %pM %s\n", dev_seq(dev), dev->name, env_enetaddr,
+> -                      current == dev ? "active" : "");
+> -       }
+> -       return CMD_RET_SUCCESS;
+> -}
+> -
+> -static int do_net_stats(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> -{
+> -       int nstats, err, i, off;
+> -       struct udevice *dev;
+> -       u64 *values;
+> -       u8 *strings;
+> -
+> -       if (argc < 2)
+> -               return CMD_RET_USAGE;
+> -
+> -       err = uclass_get_device_by_name(UCLASS_ETH, argv[1], &dev);
+> -       if (err) {
+> -               printf("Could not find device %s\n", argv[1]);
+> -               return CMD_RET_FAILURE;
+> -       }
+> -
+> -       if (!eth_get_ops(dev)->get_sset_count ||
+> -           !eth_get_ops(dev)->get_strings ||
+> -           !eth_get_ops(dev)->get_stats) {
+> -               printf("Driver does not implement stats dump!\n");
+> -               return CMD_RET_FAILURE;
+> -       }
+> -
+> -       nstats = eth_get_ops(dev)->get_sset_count(dev);
+> -       strings = kcalloc(nstats, ETH_GSTRING_LEN, GFP_KERNEL);
+> -       if (!strings)
+> -               return CMD_RET_FAILURE;
+> -
+> -       values = kcalloc(nstats, sizeof(u64), GFP_KERNEL);
+> -       if (!values)
+> -               goto err_free_strings;
+> -
+> -       eth_get_ops(dev)->get_strings(dev, strings);
+> -       eth_get_ops(dev)->get_stats(dev, values);
+> -
+> -       off = 0;
+> -       for (i = 0; i < nstats; i++) {
+> -               printf("  %s: %llu\n", &strings[off], values[i]);
+> -               off += ETH_GSTRING_LEN;
+> -       };
+> -
+> -       return CMD_RET_SUCCESS;
+> -
+> -err_free_strings:
+> -       kfree(strings);
+> -
+> -       return CMD_RET_FAILURE;
+> -}
+> -
+> -static struct cmd_tbl cmd_net[] = {
+> -       U_BOOT_CMD_MKENT(list, 1, 0, do_net_list, "", ""),
+> -       U_BOOT_CMD_MKENT(stats, 2, 0, do_net_stats, "", ""),
+> -};
+> -
+> -static int do_net(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> -{
+> -       struct cmd_tbl *cp;
+> -
+> -       cp = find_cmd_tbl(argv[1], cmd_net, ARRAY_SIZE(cmd_net));
+> -
+> -       /* Drop the net command */
+> -       argc--;
+> -       argv++;
+> -
+> -       if (!cp || argc > cp->maxargs)
+> -               return CMD_RET_USAGE;
+> -       if (flag == CMD_FLAG_REPEAT && !cmd_is_repeatable(cp))
+> -               return CMD_RET_SUCCESS;
+> -
+> -       return cp->cmd(cmdtp, flag, argc, argv);
+> -}
+> -
+> -U_BOOT_CMD(
+> -       net, 3, 1, do_net,
+> -       "NET sub-system",
+> -       "list - list available devices\n"
+> -       "stats <device> - dump statistics for specified device\n"
+> -);
+> -
+> -#if defined(CONFIG_CMD_NCSI)
+> -static int do_ncsi(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
+> -{
+> -       if (!phy_interface_is_ncsi() || !ncsi_active()) {
+> -               printf("Device not configured for NC-SI\n");
+> -               return CMD_RET_FAILURE;
+> -       }
+> -
+> -       if (net_loop(NCSI) < 0)
+> -               return CMD_RET_FAILURE;
+> -
+> -       return CMD_RET_SUCCESS;
+> -}
+> -
+> -U_BOOT_CMD(
+> -       ncsi,   1,      1,      do_ncsi,
+> -       "Configure attached NIC via NC-SI",
+> -       ""
+> -);
+> -#endif  /* CONFIG_CMD_NCSI */
 > --
 > 2.40.1
 >
+
+
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
