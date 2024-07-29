@@ -4,72 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3B54C3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 12:55:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74F8FC3DA4A
+	for <u-boot@archiver.kernel.org>; Mon, 29 Jul 2024 13:20:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A530887BF;
-	Mon, 29 Jul 2024 14:55:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=inbox.ru
+	by phobos.denx.de (Postfix) with ESMTP id C305E887CD;
+	Mon, 29 Jul 2024 15:20:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=inbox.ru header.i=@inbox.ru header.b="fcY84zbA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mXpbRE35";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33734887B4; Mon, 29 Jul 2024 07:47:38 +0200 (CEST)
-Received: from smtp44.i.mail.ru (smtp44.i.mail.ru [95.163.41.82])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7B649887D4; Mon, 29 Jul 2024 15:20:38 +0200 (CEST)
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [IPv6:2607:f8b0:4864:20::630])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BB8288602
- for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 07:47:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FA23887CD
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 15:20:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=inbox.ru
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fido_max@inbox.ru
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=inbox.ru;
- s=mail4; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References
- :Cc:To:Subject:MIME-Version:Date:Message-ID:From:Sender:Reply-To:To:Cc:
- Content-Type:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:
- List-Archive:X-Cloud-Ids:Disposition-Notification-To;
- bh=JyKvhIJtpqsfND6e/xQzbK4HNRVh8U/V0miNzIf/yWU=; t=1722232055; x=1722322055; 
- b=fcY84zbApoPcg9dwVFU71q1LU/OGkS/DYbHhJnQTyUziWthSSeaNeUAypBXcPd6M2DvO+YsnL4i
- RDLAHSEeDGvCmFYGcvKRhY0UjfkGCaTseVOAwH3tJGyqmAJX6yqHP82Vq8QJToyh6AiIHE4RwqhCM
- 4ql4cc0D5Nas2GVYN7ofZOjD5cJN7fQx+tPZ22aaGSDxNOzGdqzydXCeVIGyZxME39+dvdK5eL43M
- NRXm6ai5Rhkw/dHCPLZaaPOq0PwWbxPd1qm8Z2RB+d28F0jippa7nVJekO5nkJh5MgWbbj0FLmA2f
- eabXFVT1DEm0tTFf+yxatbahhI4bqSIQ433w==;
-Received: by exim-smtp-868bf69f6c-jrksh with esmtpa (envelope-from
- <fido_max@inbox.ru>)
- id 1sYJEK-00000000JR4-3eL8; Mon, 29 Jul 2024 08:47:33 +0300
-Message-ID: <049ecd76-8dc0-4506-9355-5f6e7ae94392@inbox.ru>
-Date: Mon, 29 Jul 2024 08:47:31 +0300
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1fc611a0f8cso18807535ad.2
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 06:20:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1722259234; x=1722864034; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=bPWXkKaJpOaBbwR4X6n/JsJs2jYu1eb5QeOiVGaa+ZI=;
+ b=mXpbRE35XStJvw02vc9Ekv3E4NOUriPARQM6hqxP7dRqS3sIUYxjn9Bp2XS6AGsj7N
+ KYUzXGYHXNOklmgGeHbC485eTnecUXA8Pvp1Drgg3wFUECkZ+/khUHWDvQ8qBvhEJTz3
+ Hi360jqBbGNNF9CgRBpEm49HQyiBSNythmYWZBgOL3gfVeV7X4fa1jlUiR7HhJzqg2AT
+ pgfc0Xk0yuqRbpELnJ3MN/lLfys/S5mpwKNPUywjmGYjp+jRN4A6hZ5ZiG1Hp1QBrGTH
+ h7iG3ygg2UJfsAAptyqXdZBRYZwiPDnK3B+qU3agf34jd/3z/A7+SkXFjb6wF6iWd7Ly
+ vebg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722259234; x=1722864034;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bPWXkKaJpOaBbwR4X6n/JsJs2jYu1eb5QeOiVGaa+ZI=;
+ b=Iab59MO44Fr3hEfJbcTwRDm+kVEAnw9kNJNZc/9oZYkJbXeQvKrIOMsP8Jx6Jbraqu
+ rgWfXXcOOMzq+AvqwMfMhZdK9KtIUk7kkBrWYI0IewO/kxxHGExnkXFT8nGAPkmmVVCi
+ jNU72KjAZyj8GMyO9zI5u1X2Jy7n3e6YRO+3aPyA9H90eey9POqtZxyck5Wo7/dclFjO
+ A6J3l1oDLT2ZPUhuxvav8yBayvOR+xjWPuQazXkTBtYx4kG5WU8Vii6oM1uCWH1WkZkH
+ JYPiPKdGPeopgJYP5tjhcWQ5vxpN9czDrSBkp42xQfWowVSKrHI1HJTfm9J7brqihzhh
+ BcpA==
+X-Gm-Message-State: AOJu0YxeM/VLCl8YZXFPQub9gFspXTXXUYxjbFZYvmTSFNmLE+yv1WJL
+ ru1s5JjJP70EvVfT6XpW/4itC26v67mG0tlzKWSlK8edsqmKQD2okIK4cOG+J0wbNkJcgbYUx3h
+ AvbIjG6HBXdNJO6A8EjRBPEjqZuhSOUu1pUJI5g==
+X-Google-Smtp-Source: AGHT+IGzHFZijrGnjHkhIRsXwlb8L+a8oDY8mqK1ynPBnjgJ+mBTxDTmFgu/qLT+nikMt4L59fhUY2Nnno3WgGlQ7rw=
+X-Received: by 2002:a17:90a:8d0a:b0:2cb:4e14:fd5d with SMTP id
+ 98e67ed59e1d1-2cf7e1f7f76mr5437273a91.17.1722259234371; Mon, 29 Jul 2024
+ 06:20:34 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] riscv: define find_{first,next}_zero_bit in
- asm/bitops.h
-To: E Shattow <lucent@gmail.com>
-Cc: u-boot@lists.denx.de, rick@andestech.com, ycliang@andestech.com,
- trini@konsulko.com
-References: <20240726120721.150484-1-fido_max@inbox.ru>
- <CANV2PTMxAOrVDGrD-QJWJjdJ=+1NV-9SNcbBZTsfMuDhqiJR=Q@mail.gmail.com>
-Content-Language: en-US
-From: Maxim Kochetkov <fido_max@inbox.ru>
-In-Reply-To: <CANV2PTMxAOrVDGrD-QJWJjdJ=+1NV-9SNcbBZTsfMuDhqiJR=Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Authentication-Results: exim-smtp-868bf69f6c-jrksh;
- auth=pass smtp.auth=fido_max@inbox.ru
- smtp.mailfrom=fido_max@inbox.ru
-X-Mailru-Src: smtp
-X-7564579A: B8F34718100C35BD
-X-77F55803: 4F1203BC0FB41BD9000B6812E77BE1C6C95C4F1944E32E59211CC92C36EF20F3182A05F538085040953632B6C8AD599D3DE06ABAFEAF67050DFF2D642BC76527C91D94A15C134E917E11F6D7719F38BE
-X-7FA49CB5: FF5795518A3D127A4AD6D5ED66289B5278DA827A17800CE705B093C0FC4B30B9EA1F7E6F0F101C67BD4B6F7A4D31EC0BCC500DACC3FED6E28638F802B75D45FF8AA50765F79006375A514678F9DF65078638F802B75D45FF36EB9D2243A4F8B5A6FCA7DBDB1FC311F39EFFDF887939037866D6147AF826D8DE3F998674553422A83D78C02541A7AB46F697E157280A5E20879F7C8C5043D14489FFFB0AA5F4BF176DF2183F8FC7C091DAD9F922AA71188941B15DA834481FA18204E546F3947CD23BF7408B3F9022F6B57BC7E64490618DEB871D839B7333395957E7521B51C2DFABB839C843B9C08941B15DA834481F8AA50765F790063707A1F3761B83B09E389733CBF5DBD5E9B5C8C57E37DE458B9E9CE733340B9D5F3BBE47FD9DD3FB595F5C1EE8F4F765FCF1175FABE1C0F9B6E2021AF6380DFAD18AA50765F7900637F09814068C508CC822CA9DD8327EE4930A3850AC1BE2E7356C9A9530EBF72002C4224003CC83647689D4C264860C145E
-X-C1DE0DAB: 0D63561A33F958A5F7D4B7270380899A5002B1117B3ED696B01E5E00B552E4FB957033528158102E823CB91A9FED034534781492E4B8EEADA3FB0D9844EF8EC5BDAD6C7F3747799A
-X-C8649E89: 1C3962B70DF3F0ADBF74143AD284FC7177DD89D51EBB7742DC8270968E61249B1004E42C50DC4CA955A7F0CF078B5EC49A30900B95165D3472E5ECC12A9739C1D2690D26E3280944151EB416270C2E200CF9D2CC4F532D34A8357A0A977FCAE31D7E09C32AA3244C3749C9B1B02F0D3377DD89D51EBB77426617FD882C79C6E0EA455F16B58544A2D06CB91D864A7BD257ADA2CBCE38F05762A0BE504FE5E636F1E3461735CEBA253FCF178C6DD14203
-X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu530nj6fImhcD4MUrOEAnl0W826KZ9Q+tr5ycPtXkTV4k65bRjmOUUP8cvGozZ33TWg5HZplvhhXbhDGzqmQDTd6OAevLeAnq3Ra9uf7zvY2zzsIhlcp/Y7m53TZgf2aB4JOg4gkr2biojX2k8aL79D6UV+kTfBBUIKQ==
-X-Mailru-Sender: 689FA8AB762F7393C6D0B12EA33CAA9B41AA34C7042309332DF6FE1A74364D27E7BBF71E5556281A90DE4A6105A3658D481B2AED7BCCC0A49AE3A01A4DD0D55C6C99E19F044156F45FEEDEB644C299C0ED14614B50AE0675
-X-Mras: Ok
-X-Mailman-Approved-At: Mon, 29 Jul 2024 14:55:00 +0200
+References: <20240702182325.2904421-1-raymond.mao@linaro.org>
+ <20240702182325.2904421-21-raymond.mao@linaro.org>
+In-Reply-To: <20240702182325.2904421-21-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 29 Jul 2024 16:19:58 +0300
+Message-ID: <CAC_iWjLeM3zKfo274FpEhPb11=KxrRASqBW6WDe4o-jmQxmBkQ@mail.gmail.com>
+Subject: Re: [PATCH v4 20/29] lib/crypto: Adapt x509_cert_parser to MbedTLS
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
+ Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
+ Mario Six <mario.six@gdsys.cc>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Ilya Lukin <4.shket@gmail.com>, Sergei Antonov <saproj@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng@tinylab.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,47 +105,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-27.07.2024 13:35, E Shattow wrote:
-> Is this a problem in Linux upstream? or specific to U-Boot, and is it
-> a regression?
-> 
-> refrerence https://lore.kernel.org/u-boot/20240504183354.GL2568172@bill-the-cat/
-> and reference https://lore.kernel.org/u-boot/BJXPR01MB0855813DD38EF86CCA6DD5C8E6E92@BJXPR01MB0855.CHNPR01.prod.partner.outlook.cn/
-> 
+Hi Raymond
 
-It is very similar. But it comes from
+>
+> +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
+> +/* Backup of part of the parsing context */
 
-In file included from 
-/home/maximus/git/yadro/ymp-build/u-boot/include/linux/usb/composite.h:26,
-                  from 
-/home/maximus/git/yadro/ymp-build/u-boot/include/g_dnl.h:12,
-                  from 
-/home/maximus/git/yadro/ymp-build/u-boot/cmd/fastboot.c:12:
-/home/maximus/git/yadro/ymp-build/u-boot/include/linux/bitmap.h: In 
-function ‘bitmap_find_next_zero_area’:
-/home/maximus/git/yadro/ymp-build/u-boot/include/linux/bitmap.h:170:17: 
-error: implicit declaration of function ‘find_next_zero_bit’; did you 
-mean ‘find_next_bit’? [-Wimplicit-function-declaration]
-   170 |         index = find_next_zero_bit(map, size, start);
-       |                 ^~~~~~~~~~~~~~~~~~
-       |                 find_next_bit
+I am not sure I understand the comment
 
-I've just tried v2024.07 and master.
+> +struct x509_cert_mbedtls_ctx {
+> +       void    *tbs;                   /* Signed data */
+> +       void    *raw_serial;            /* Raw serial number in ASN.1 */
+> +       void    *raw_issuer;            /* Raw issuer name in ASN.1 */
+> +       void    *raw_subject;           /* Raw subject name in ASN.1 */
+> +       void    *raw_skid;              /* Raw subjectKeyId in ASN.1 */
+> +};
+> +#endif
+> +
+> +/*
+> + * MbedTLS integration Notes:
+> + *
+> + * Fields we don't need to populate from MbedTLS:
 
-I tried to drop #include <linux/bitmap.h> from composite.h, but it fails 
-on usb gadget compilation:
+You mean *for* mbedTLS?
 
-   CC      drivers/usb/gadget/g_dnl.o
-In file included from 
-/home/maximus/git/yadro/ymp-build/u-boot/drivers/usb/gadget/g_dnl.c:24:
-/home/maximus/git/yadro/ymp-build/u-boot/drivers/usb/gadget/composite.c: 
-In function ‘reset_config’:
-/home/maximus/git/yadro/ymp-build/u-boot/drivers/usb/gadget/composite.c:362:17: 
-error: implicit declaration of function ‘bitmap_zero’ 
-[-Wimplicit-function-declaration]
-   362 |                 bitmap_zero(f->endpoints, 32);
-       |                 ^~~~~~~~~~~
+> + * 'raw_sig' and 'raw_sig_size' are buffer for x509_parse_context,
 
+'raw_sig' and 'raw_sig_size' are used in x509_parse_context(), which
+in turn is not used in mbedTLS?
 
+> + * not needed for MbedTLS.
+> + * 'signer' and 'seen' are used internally by pkcs7_verify.
+> + * 'verified' is not inuse.
 
-
+either 'unsued' or 'not in use'
+> + */
+>  struct x509_certificate {
+> +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
+> +       struct x509_cert_mbedtls_ctx *mbedtls_ctx;
+> +#endif
+>         struct x509_certificate *next;
+>         struct x509_certificate *signer;        /* Certificate that signed this one */
+>         struct public_key *pub;                 /* Public key details */
+> @@ -48,6 +76,32 @@ struct x509_certificate {
+>   * x509_cert_parser.c
+>   */
+>  extern void x509_free_certificate(struct x509_certificate *cert);
+> +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
+> +/**
+> + * x509_populate_pubkey() - Populate public key from MbedTLS context
+> + *
+> + * @cert:      Pointer to MbedTLS X509 cert
+> + * @pub_key:   Pointer to the populated public key handle
+> + * Return: 0 on succcess, error code on failure
+> + */
+> +int x509_populate_pubkey(mbedtls_x509_crt *cert, struct public_key **pub_key);
+> +/**
+> + * x509_populate_cert() - Populate X509 cert from MbedTLS context
+> + *
+> + * @mbedtls_cert:      Pointer to MbedTLS X509 cert
+> + * @pcert:             Pointer to the populated X509 cert handle
+> + * Return: 0 on succcess, error code on failure
+> + */
+> +int x509_populate_cert(mbedtls_x509_crt *mbedtls_cert,
+> +                      struct x509_certificate **pcert);
+> +/**
+> + * x509_get_timestamp() - Translate timestamp from MbedTLS context
+> + *
+> + * @x509_time: Pointer to MbedTLS time
+> + * Return: Time in time64_t format
+> + */
+> +time64_t x509_get_timestamp(const mbedtls_x509_time *x509_time);
+> +#endif
+>  extern struct x509_certificate *x509_cert_parse(const void *data, size_t datalen);
+>  extern int x509_decode_time(time64_t *_t,  size_t hdrlen,
+>                             unsigned char tag,
+> @@ -56,6 +110,8 @@ extern int x509_decode_time(time64_t *_t,  size_t hdrlen,
+>  /*
+>   * x509_public_key.c
+>   */
+> +#if !CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
+>  extern int x509_get_sig_params(struct x509_certificate *cert);
+> +#endif
+>  extern int x509_check_for_self_signed(struct x509_certificate *cert);
+>  #endif /* _X509_PARSER_H */
+> diff --git a/lib/crypto/Kconfig b/lib/crypto/Kconfig
+> index 6e0656ad1c5..6106190677e 100644
+> --- a/lib/crypto/Kconfig
+> +++ b/lib/crypto/Kconfig
+> @@ -1,6 +1,6 @@
+>  menuconfig ASYMMETRIC_KEY_TYPE
+>         bool "Asymmetric (public-key cryptographic) key Support"
+> -       depends on FIT_SIGNATURE
+> +       depends on LEGACY_CRYPTO_CERT || MBEDTLS_LIB_X509
+>         help
+>           This option provides support for a key type that holds the data for
+>           the asymmetric keys used for public key cryptographic operations such
+> diff --git a/lib/crypto/Makefile b/lib/crypto/Makefile
+> index 228ae443a27..7f5f04d582c 100644
+> --- a/lib/crypto/Makefile
+> +++ b/lib/crypto/Makefile
+> @@ -32,11 +32,11 @@ endif
+>  # X.509 Certificate handling
+>  #
+>  obj-$(CONFIG_$(SPL_)X509_CERTIFICATE_PARSER) += x509_key_parser.o
+> -x509_key_parser-y := \
+> +x509_key_parser-y := x509_helper.o
+> +x509_key_parser-$(CONFIG_$(SPL_)X509_CERTIFICATE_PARSER_LEGACY) += \
+>         x509.asn1.o \
+>         x509_akid.asn1.o \
+>         x509_cert_parser.o \
+> -       x509_helper.o \
+>         x509_public_key.o
+>
+>  $(obj)/x509_cert_parser.o: \
+> diff --git a/lib/crypto/x509_public_key.c b/lib/crypto/x509_public_key.c
+> index 4ba13c1adc3..310edbd21be 100644
+> --- a/lib/crypto/x509_public_key.c
+> +++ b/lib/crypto/x509_public_key.c
+> @@ -30,6 +30,8 @@
+>  #include "x509_parser.h"
+>  #endif
+>
+> +#if !CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
+> +
+>  /*
+>   * Set up the signature parameters in an X.509 certificate.  This involves
+>   * digesting the signed data and extracting the signature.
+> --
+> 2.25.1
+>
