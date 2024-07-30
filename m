@@ -4,95 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51836C3DA61
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 08:44:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 624BAC3DA49
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 08:51:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9121887D4;
-	Tue, 30 Jul 2024 10:44:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 8C4B9883A9;
+	Tue, 30 Jul 2024 10:51:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="NraUGg95";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="GY6VCB6m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04C4C883A9; Tue, 30 Jul 2024 10:44:34 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DB736887BF; Tue, 30 Jul 2024 10:51:27 +0200 (CEST)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A30E288802
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 10:44:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id D083387A55
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 10:51:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 53719120008;
- Tue, 30 Jul 2024 11:44:27 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 53719120008
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1722329067;
- bh=OSML7Dtj82yCmhoFtFlQMxwmYZROgvG0qEKJCOhHH9Q=;
- h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
- b=NraUGg95VAfvDY+5oD8JfuI7/2Oj3OLUmHhO0tKJxZD6/dwtc16jfrGQw2fGQ+2ZN
- AmyO44xZ6zhs2VEABJ3cMSkinrwAgdXULZZ96pyKRIGEkGMS9bG1Gb+RKrojP9OsiM
- km3qHPb2wUwvCWRcfpWEP0tt9GhKwQRjP6yxiuD6SwV9WTdMc9JZXw6JqGQGKHzzXI
- MtYIdCojgqEW8UWnrv1/wfE48RHF4dR/3zKyWua05F83qV/g9a5eZKKyeZJGm8n33F
- 4WoOOSUdnJDwOP69yljKjXxAwVW7vaOkFGaUKfVc8nATiPHWGFT3d6usp2BAtiuYzI
- KD9xGc61pDdlg==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
- [172.16.192.103])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue, 30 Jul 2024 11:44:27 +0300 (MSK)
-Received: from localhost (100.64.160.123) by p-i-exch-sc-m02.sberdevices.ru
- (172.16.192.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.40; Tue, 30 Jul
- 2024 11:44:26 +0300
-Date: Tue, 30 Jul 2024 11:44:26 +0300
-From: Dmitry Rokosov <ddrokosov@salutedevices.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-CC: <igor.opaniuk@gmail.com>, <semen.protsenko@linaro.org>,
- <trini@konsulko.com>, <colin.mcallister@garmin.com>, <4.shket@gmail.com>,
- <avromanov@salutedevices.com>, <u-boot@lists.denx.de>,
- <kernel@salutedevices.com>, <rockosov@gmail.com>
-Subject: Re: [PATCH v1 4/4] common: android_ab: fix slot suffix for abc block
-Message-ID: <20240730084426.pswkfe4satbavtwh@CAB-WSD-L081021>
-References: <20240725194716.32232-1-ddrokosov@salutedevices.com>
- <20240725194716.32232-5-ddrokosov@salutedevices.com>
- <878qxjqnha.fsf@baylibre.com>
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2f035ae0fe0so51209221fa.3
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 01:51:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1722329485; x=1722934285;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=LcIXKGEK0Q22+pGBNuCmq7e0+hRlXAdVe1zj6qQkanI=;
+ b=GY6VCB6mwWcqTnnEcj0gfFaz6YnHqNPNNRITDGC8vbhMnyPUgWvffNmx52p82TGGQP
+ 5YHRln+pZ8S+d6E43+SwMwteV5LA9rGdwmeifmsGt9qPXI+yVmjj/BqpGWnbVfS1osDp
+ k+rLRy5FXjSQ24nN03E7diW0vQJBWkto8Wuxky0DPiPS3awT1ZwBoYY6x/I765+0CKsu
+ NQYhMGgT1mzEpyMxW9jC1rtxXf75OrPofsD25oxy5FVsO2cal3VNC4UhmwQXvPJqEA5h
+ by+Med1oNgAbjlaKJgo+KHCTv8Swb3lap6/lD53S/tKg8JGmlsIYdPzjJXdc2FDpCOR/
+ 8q3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722329485; x=1722934285;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=LcIXKGEK0Q22+pGBNuCmq7e0+hRlXAdVe1zj6qQkanI=;
+ b=apMEySaErrDAhcmhcWvhngcWlc7yz0Vhb1tAipUa3gt/HZQ6rhkBFRhGukt8IkwKcB
+ Ja9yjPrQdejTDwdV3lQzLau1L1+54RMo9XQGHqvdGG/++jEtQ/rZlBRlJBqunTZWcb02
+ eDPsGddHd44BSiz4R/BfizhyRwkGA8UtkVRoefdaqKGrPayGoZmv5FJH86ibQ0N7n2Gc
+ FCzwXMRWi3FfGBtTbUpFfbAqyMmQsExWoxpD2iGu+wVnesmyND5KUScPGjBEAmHOOU/z
+ wK2VnuG4Rq6+j/pmr0j5hazfHuOKOPGjq636EWl/gBe1LrhMcKAQCW1F0RzYjH6zAad/
+ vLWA==
+X-Gm-Message-State: AOJu0Yy58oF5VebjEPe8OR8yU/fbB8hgz1wN/s1wPR23nlhmNuJQvTVM
+ HyV7BwXaNe+P+vAVmEM3+MHWCc1O5YzLpTL84ZzoyVT3oO6kOvdzYpDfOuTZOwQ=
+X-Google-Smtp-Source: AGHT+IEq6srsCRLY/G5FvWd4ROr8itx0xQrdzaqdBQ5kF0XvGrRBnB7p1Huj+0WSmXLORnvjT+ZaYg==
+X-Received: by 2002:a2e:8198:0:b0:2ef:28ee:944 with SMTP id
+ 38308e7fff4ca-2f12ee2f300mr63820851fa.45.1722329484693; 
+ Tue, 30 Jul 2024 01:51:24 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4280574b0e8sm211170855e9.26.2024.07.30.01.51.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 Jul 2024 01:51:24 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Michael Walle <mwalle@kernel.org>, Tom Rini <trini@konsulko.com>, Simon
+ Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Michael Walle <mwalle@kernel.org>
+Subject: Re: [PATCH v2] boot: android: fix booting without a ramdisk
+In-Reply-To: <20240729213657.2550935-1-mwalle@kernel.org>
+References: <20240729213657.2550935-1-mwalle@kernel.org>
+Date: Tue, 30 Jul 2024 10:51:21 +0200
+Message-ID: <875xsnqn3q.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <878qxjqnha.fsf@baylibre.com>
-User-Agent: NeoMutt/20220415
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
- p-i-exch-sc-m02.sberdevices.ru (172.16.192.103)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 186785 [Jul 30 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.4
-X-KSMG-AntiSpam-Envelope-From: ddrokosov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 24 0.3.24
- 186c4d603b899ccfd4883d230c53f273b80e467f, {Tracking_uf_ne_domains},
- {Track_E25351}, {Tracking_from_domain_doesnt_match_to},
- salutedevices.com:7.1.1; android-review.googlesource.com:7.1.1,5.0.1;
- 127.0.0.199:7.1.2; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- smtp.sberdevices.ru:7.1.1,5.0.1; 100.64.160.123:7.1.2;
- source.android.com:7.1.1,5.0.1, FromAlignment: s, ApMailHostAddress:
- 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2024/07/30 08:31:00
-X-KSMG-LinksScanning: Clean, bases: 2024/07/30 08:31:00
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/07/30 07:09:00 #26180129
-X-KSMG-AntiVirus-Status: Clean, skipped
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,66 +89,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Jul 30, 2024 at 10:43:13AM +0200, Mattijs Korpershoek wrote:
-> Hi Dmitry,
-> 
-> Thank you for the patch.
-> 
-> On jeu., juil. 25, 2024 at 22:47, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
-> 
-> > To align with the official Android BCB (Boot Control Block)
-> > specifications, it's important to note that the slot_suffix should start
-> > with an underscore symbol.
-> >
-> > For a comprehensive understanding of the expected slot_suffix format in
-> > userspace, please refer to the provided reference [1].
-> >
-> > Links:
-> > [1] - https://source.android.com/docs/core/architecture/bootloader/updating#slots
-> >
-> > Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
-> 
-> Can we point to the AOSP change on which this is based in the commit message?
-> 
-> https://android-review.googlesource.com/c/platform/external/u-boot/+/1446439
-> 
-> With that added:
-> 
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> 
+Hi Michael,
 
-Sure, no problem. I will add the reference in the next version.
+Thank you for the patch.
 
-> > ---
-> >  boot/android_ab.c | 5 +++--
-> >  1 file changed, 3 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/boot/android_ab.c b/boot/android_ab.c
-> > index 359cc1a00428..45c154b10f1a 100644
-> > --- a/boot/android_ab.c
-> > +++ b/boot/android_ab.c
-> > @@ -53,7 +53,7 @@ static int ab_control_default(struct bootloader_control *abc)
-> >  	if (!abc)
-> >  		return -EFAULT;
-> >  
-> > -	memcpy(abc->slot_suffix, "a\0\0\0", 4);
-> > +	memcpy(abc->slot_suffix, "_a\0\0", 4);
-> >  	abc->magic = BOOT_CTRL_MAGIC;
-> >  	abc->version = BOOT_CTRL_VERSION;
-> >  	abc->nb_slot = NUM_SLOTS;
-> > @@ -319,7 +319,8 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
-> >  		 * or the device tree.
-> >  		 */
-> >  		memset(slot_suffix, 0, sizeof(slot_suffix));
-> > -		slot_suffix[0] = BOOT_SLOT_NAME(slot);
-> > +		slot_suffix[0] = '_';
-> > +		slot_suffix[1] = BOOT_SLOT_NAME(slot);
-> >  		if (memcmp(abc->slot_suffix, slot_suffix,
-> >  			   sizeof(slot_suffix))) {
-> >  			memcpy(abc->slot_suffix, slot_suffix,
-> > -- 
-> > 2.43.0
+On lun., juil. 29, 2024 at 23:36, Michael Walle <mwalle@kernel.org> wrote:
 
--- 
-Thank you,
-Dmitry
+> android_image_get_ramdisk() will return an error if there is no ramdisk.
+> Using the android image without a ramdisk worked until commit
+> 1ce8e10f3b4b ("image: Fix up ANDROID_BOOT_IMAGE ramdisk code") because
+> the return code wasn't checked until then. Return -ENOENT in case
+> there is no ramdisk and translate that into -ENOPKG in the calling
+> code, which will then indicate "no ramdisk" to its caller
+> (boot_get_ramdisk()).
+>
+> This way, we can get rid of the "*rd_data = *rd_len = 0;" in the error
+> path, too.
+>
+> With this, I'm able to boot a linux kernel using fastboot again:
+>
+>   fastboot --base 0x41000000 --header-version 2 --dtb /path/to/dtb \
+>   --cmdline "root=/dev/mmcblk0p1 rootwait" boot path/to/Image
+>
+> Signed-off-by: Michael Walle <mwalle@kernel.org>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+> ---
+>  boot/image-android.c | 7 +++----
+>  boot/image-board.c   | 4 +++-
+>  include/image.h      | 2 +-
+>  3 files changed, 7 insertions(+), 6 deletions(-)
+>
+> diff --git a/boot/image-android.c b/boot/image-android.c
+> index 09c7a44e058..774565fd1fe 100644
+> --- a/boot/image-android.c
+> +++ b/boot/image-android.c
+> @@ -393,10 +393,9 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
+>  	if (!android_image_get_data(hdr, vendor_boot_img, &img_data))
+>  		return -EINVAL;
+>  
+> -	if (!img_data.ramdisk_size) {
+> -		*rd_data = *rd_len = 0;
+> -		return -1;
+> -	}
+> +	if (!img_data.ramdisk_size)
+> +		return -ENOENT;
+> +
+>  	if (img_data.header_version > 2) {
+>  		ramdisk_ptr = img_data.ramdisk_addr;
+>  		memcpy((void *)(ramdisk_ptr), (void *)img_data.vendor_ramdisk_ptr,
+> diff --git a/boot/image-board.c b/boot/image-board.c
+> index f2124013046..eca1b1d2bff 100644
+> --- a/boot/image-board.c
+> +++ b/boot/image-board.c
+> @@ -427,7 +427,9 @@ static int select_ramdisk(struct bootm_headers *images, const char *select, u8 a
+>  				unmap_sysmem(ptr);
+>  			}
+>  
+> -			if (ret)
+> +			if (ret == -ENOENT)
+> +				return -ENOPKG;
+> +			else if (ret)
+>  				return ret;
+>  			done = true;
+>  		}
+> diff --git a/include/image.h b/include/image.h
+> index dd4042d1bd9..2ab17075287 100644
+> --- a/include/image.h
+> +++ b/include/image.h
+> @@ -1858,7 +1858,7 @@ int android_image_get_kernel(const void *hdr,
+>   * @vendor_boot_img : Pointer to vendor boot image header
+>   * @rd_data:	Pointer to a ulong variable, will hold ramdisk address
+>   * @rd_len:	Pointer to a ulong variable, will hold ramdisk length
+> - * Return: 0 if succeeded, -1 if ramdisk size is 0
+> + * Return: 0 if OK, -ENOPKG if no ramdisk, -EINVAL if invalid image
+>   */
+>  int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
+>  			      ulong *rd_data, ulong *rd_len);
+> -- 
+> 2.39.2
