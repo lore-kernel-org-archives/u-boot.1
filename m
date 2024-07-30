@@ -4,79 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEB5BC3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 14:03:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 134A9C3DA70
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 14:06:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F5E188607;
-	Tue, 30 Jul 2024 16:03:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6B7CD8881F;
+	Tue, 30 Jul 2024 16:06:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MZxngHks";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nxZUgR/N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB2D488800; Tue, 30 Jul 2024 16:03:04 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 204CF8881F; Tue, 30 Jul 2024 16:06:10 +0200 (CEST)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46DB488271
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 16:03:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A114F88607
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 16:06:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-70943713472so1168669a34.2
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 07:03:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-2cdadce1a57so2941697a91.2
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 07:06:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1722348180; x=1722952980; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=EWhamAWc591vzGdFLYxx00/BomzhvFque6AvPIFt1+o=;
- b=MZxngHkshWu/3b3i07h78Hs7e0mMJVJPo2CRizdfONPraI2wajx2mMK/S0kwaW4Nk2
- sV+QzvBJ6gCKo+R3oZVd4UCmDedPG/exP5jWwqY4KDRcnyWBA6Fr70vFDRAl/2NlspDY
- 5eNTYEo/T7q+kkKroS63BqYFWb2CzIFOgyDDc=
+ d=linaro.org; s=google; t=1722348366; x=1722953166; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=MRNkMoBEXRF4I32kQ/r8u638ZAgYCqObR5wOjqelgaE=;
+ b=nxZUgR/Nm5HbR2NniKPTebiQhHtMJKvvWLpy5o8g+Q1X2RG3cDk/rI0MU1QFoXX86+
+ JU9bkwdjcPkYA9e02pBZqWMmERJT3f+uV8/JCoKPjC7NhuWMaoUvIiHNVEaviVMjJ8E9
+ y114V6uawGOtZG/LB+JzN7ocwRZjXLq0Wk0wERqT8cxZ+XoeRWS1V7UON/hhTyJZI6Mr
+ jnga1MJUGReOYQpwSpYxf0diwzjnq85oyx06LMurtuK5CTFDQs08s2KpB5Lz27Vu3drC
+ cDC9nufVZ+52IpCNS82y1aOYxAcXkEEy7wx1oGr1DT7HyZpRL3IKZa+wjXC674Axq3Ty
+ c86w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722348180; x=1722952980;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EWhamAWc591vzGdFLYxx00/BomzhvFque6AvPIFt1+o=;
- b=qq6UN0BzuWhPbQHMvJhr6lWxYT8+4iOcrybvRqHPTiQQgJGyaW0a8vzSdDlzpfc5Ft
- LkztFNVnyVtKNR8TEXwrbuxGLMpOvcsCmHwLck9ewSihyqaBCQQ8q5jBRXIi8S6H11BY
- bFIYn1J8+ZIK8wSPqxsW26KRJpA8pvq4vTVBnz2UlJgAGRU6AoAba3ojkoPeh4vVy1dV
- /fwKqfkxGY8FOna9M4ZWFoNVW1kMEXyNTJU6K4lK+bdMYOnYmOpucietvoS/dB+QQVNZ
- vJKYvggJup7s/FJ36Yu2USvEr8YUsG9PbUsw3Kv6zd4TjMQHcTnRP6gbBgrH/mguyU8m
- ByGQ==
-X-Gm-Message-State: AOJu0YxnL0/eOZHD5jMLzcYI9PYKbdS1hnTZMCigGnPZRCbh6Mh8VEoe
- aWrOlLLhdqaBk/H0ApLFfE6QnPIcQt2PzkafpvoZm3T43FcsR7o1+1ULx6d2XwM=
-X-Google-Smtp-Source: AGHT+IG1EsF6YXFxbk+7v5yGYSM7Y4uAKTxQr6b3aFPh3cew9U54KpwS9s9VLWO4WzjusrV4aFV4Zg==
-X-Received: by 2002:a05:6830:63ce:b0:703:77bd:9522 with SMTP id
- 46e09a7af769-70940c1d6b9mr17899758a34.17.1722348180511; 
- Tue, 30 Jul 2024 07:03:00 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-190.totalplay.net.
- [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5d5b3677464sm1354696eaf.35.2024.07.30.07.02.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jul 2024 07:03:00 -0700 (PDT)
-Date: Tue, 30 Jul 2024 08:02:56 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>
-Subject: Re: [PATCH v5 00/20] Introduce the lwIP network stack
-Message-ID: <20240730140256.GT989285@bill-the-cat>
-References: <cover.1721910373.git.jerome.forissier@linaro.org>
- <20240725172220.GA989285@bill-the-cat>
- <db1d3c5c-918b-4aa5-b68a-020c168cf05c@linaro.org>
+ d=1e100.net; s=20230601; t=1722348366; x=1722953166;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=MRNkMoBEXRF4I32kQ/r8u638ZAgYCqObR5wOjqelgaE=;
+ b=rDB+6pyfYh0IVbi3tSa4RjDnca1oFy9wZZFjpHqOscz8FKFIMQ9NziVxL25Ib8g6cS
+ ZQCOBPW8jfOQoj4IbFYcj1bOCYW1qFFGbGGnduJ5GboW+yZWvkrIPfMPkOtUJswtvwaW
+ IkBgm9mdAJhzeHG8lRFO4qmIKmSlANtIeVUI6ZT1XeFUnppjpKQ4WNBq8Jr0MHvKyg9/
+ Ty9W72jAP0bFyDwm/NWhJuuDn9WdABOBjtv27vow1kTWS/yhDitbJI+OkwkGFxcySDR/
+ TmywZik/Ec+Ek/UkvDWe1P8I8J4G0ZG0NxNZP0hD5FeJ7EHuqHQicGXhqMbG8JOqbn0s
+ l9Vw==
+X-Gm-Message-State: AOJu0YwNiaYLLRbXuqjYHllqOM5k7Qm3yVW71fPNcLHfpsoXXbxrBbtQ
+ SNZ+6tGktVb8ITVTHVE7KuCgGO/DNPZ2EnH3YRJHtO92Lo9aj0+HTjN8x4MJmUjP7K6NswMqdX2
+ JrgaiUNOg4cf+3kpJ8hQOCRDnGGGo5rmvMrfOGw==
+X-Google-Smtp-Source: AGHT+IGUUMxoxJqfzDP7ErVvIlPYundIkaMdC40aOe+ZuEoziNf2QmCyg61gwSfDuJOYEtfu/8WHGkc98eK4IeCq+3s=
+X-Received: by 2002:a17:90a:9a6:b0:2ca:8a93:a40b with SMTP id
+ 98e67ed59e1d1-2cf7e606ccemr9241614a91.31.1722348365611; Tue, 30 Jul 2024
+ 07:06:05 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="p9SV50ga3jfMJaYY"
-Content-Disposition: inline
-In-Reply-To: <db1d3c5c-918b-4aa5-b68a-020c168cf05c@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240702182325.2904421-1-raymond.mao@linaro.org>
+ <20240702182325.2904421-26-raymond.mao@linaro.org>
+ <CAC_iWjJtLb9N8sYn2qczTeLYdeuN-uZvjNGGf4KsD2Ks3uB1OA@mail.gmail.com>
+In-Reply-To: <CAC_iWjJtLb9N8sYn2qczTeLYdeuN-uZvjNGGf4KsD2Ks3uB1OA@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Tue, 30 Jul 2024 10:05:53 -0400
+Message-ID: <CAEfUkUKi8qcMRPSVAxz2qeQh-xmMJiD0g9iDyNQBiiP21uwy5Q@mail.gmail.com>
+Subject: Re: [PATCH v4 25/29] mbedtls: add RSA helper layer on MbedTLS
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
+ Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
+ Mario Six <mario.six@gdsys.cc>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>, Sergei Antonov <saproj@gmail.com>,
+ Ilya Lukin <4.shket@gmail.com>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alexander Gendin <agendin@matrox.com>, 
+ Bin Meng <bmeng@tinylab.org>, Manorit Chawdhry <m-chawdhry@ti.com>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,92 +108,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Ilias,
 
---p9SV50ga3jfMJaYY
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, 30 Jul 2024 at 04:05, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+wrote:
 
-On Tue, Jul 30, 2024 at 11:48:06AM +0200, Jerome Forissier wrote:
->=20
->=20
-> On 7/25/24 19:22, Tom Rini wrote:
-> > On Thu, Jul 25, 2024 at 02:57:21PM +0200, Jerome Forissier wrote:
-> >=20
-> >> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
-> >> library for the network stack" [1]. The goal is to introduce the lwIP =
-TCP/IP
-> >> stack [2] [3] as an alternative to the current implementation in net/,
-> >> selectable with Kconfig, and ultimately keep only lwIP if possible. So=
-me
-> >> reasons for doing so are:
-> >> - Make the support of HTTPS in the wget command easier. Javier T. and
-> >> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
-> >> so. With that it becomes possible to fetch and launch a distro install=
-er
-> >> such as Debian etc. using a secure, authenticated connection directly
-> >> from the U-Boot shell. Several use cases:
-> >>   * Authentication: prevent MITM attack (third party replacing the
-> >> binary with a different one)
-> >>   * Confidentiality: prevent third parties from grabbing a copy of the
-> >> image as it is being downloaded
-> >>   * Allow connection to servers that do not support plain HTTP anymore
-> >> (this is becoming more and more common on the Internet these days)
-> >> - Possibly benefit from additional features implemented in lwIP
-> >> - Less code to maintain in U-Boot
-> >>
-> >> Prior to applying this series, the lwIP stack needs to be added as a
-> >> Git subtree with the following command:
-> >>
-> >>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savann=
-ah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
-> >=20
-> > This is better than v4, and on the hardware platforms I could build and
-> > boot on (which was most of mine except the am62x_beagleplay), the tests
-> > ran and completed, including the tftp+boot a Linux kernel.
-> >=20
-> > The bad news is CI blows up, a lot:
-> > https://source.denx.de/u-boot/u-boot/-/pipelines/21764
->=20
-> They're all failing with: undefined reference to `tftp_start'
-> The reason is I inadvertently removed the 'default y' on CMD_TFTPBOOT :/
-> Fixed in v6.
->=20
-> > And:
-> > https://dev.azure.com/u-boot/a1096300-2999-4ec4-a21a-4c22075e3771/_apis=
-/build/builds/9014/logs/106
-> > which is another Kconfig dependency problem. I don't _think_ I
-> > introduced that, but since this wasn't against top of tree, I had to
-> > apply the cmd/Kconfig patch manually.
->=20
-> What's the build command? I can see:
->=20
-> /bin/bash --noprofile --norc /Users/runner/work/_temp/9710a6d2-6670-4f76-=
-81bc-990cc45b1898.sh
->=20
-> ...but that's not super helpful ;)
+> Hi Raymond
+>
+>
+> On Tue, 2 Jul 2024 at 21:33, Raymond Mao <raymond.mao@linaro.org> wrote:
+> >
+> > Add RSA helper layer on top on MbedTLS PK and RSA library.
+> > Introduce _LEGACY and _MBEDTLS kconfigs for RSA helper legacy and
+> > MbedTLS implementations respectively.
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> > Changes in v2
+> > - Initial patch.
+> > Changes in v3
+> > - None.
+> > Changes in v4
+> > - Introduce _LEGACY and _MBEDTLS kconfigs for RSA helper legacy and
+> >   MbedTLS implementations respectively.
+> > - Remove unnecessary type casting.
+> > - Minor fix of the include directories.
+> >
+> >  lib/mbedtls/Kconfig      | 36 +++++++++++++++
+> >  lib/mbedtls/Makefile     |  3 +-
+> >  lib/mbedtls/rsa_helper.c | 95 ++++++++++++++++++++++++++++++++++++++++
+> >  3 files changed, 133 insertions(+), 1 deletion(-)
+> >  create mode 100644 lib/mbedtls/rsa_helper.c
+> >
+> > diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+> > index d8a8f87e031..87c500d6ca9 100644
+> > --- a/lib/mbedtls/Kconfig
+> > +++ b/lib/mbedtls/Kconfig
+> > @@ -124,11 +124,13 @@ config LEGACY_CRYPTO_CERT
+> >         bool "legacy certificate libraries"
+> >         select ASYMMETRIC_PUBLIC_KEY_SUBTYPE_LEGACY if \
+> >                 ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+> > +       select RSA_PUBLIC_KEY_PARSER_LEGACY if RSA_PUBLIC_KEY_PARSER
+> >         select X509_CERTIFICATE_PARSER_LEGACY if X509_CERTIFICATE_PARSER
+> >         select PKCS7_MESSAGE_PARSER_LEGACY if PKCS7_MESSAGE_PARSER
+> >         select MSCODE_PARSER_LEGACY if MSCODE_PARSER
+> >         select SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE_LEGACY if \
+> >                 ASYMMETRIC_PUBLIC_KEY_SUBTYPE && SPL
+> > +       select SPL_RSA_PUBLIC_KEY_PARSER_LEGACY if RSA_PUBLIC_KEY_PARSER
+> && SPL
+>
+> SPL shouldn't be selected. IIRC we discussed the same thing on another
+> patch, so I assume this is fixed already?
+>
+> Yes. It is already fixed in the upcoming v5 as below:
+```
+select SPL_ASN1_DECODER_LEGACY if SPL_ASN1_DECODER
+select SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY if \
+SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+select SPL_RSA_PUBLIC_KEY_PARSER_LEGACY if SPL_RSA_PUBLIC_KEY_PARSER
+```
 
-make tools-only_defconfig or so, sorry.
-
---=20
-Tom
-
---p9SV50ga3jfMJaYY
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmao8okACgkQFHw5/5Y0
-tyz3eQv+OVlkOa54tHBTJ4qXUOl/3Sum1qY5xjVovb2ap6G1cElPv0OSn1knRovF
-ex+wYqq++K7S9psoiRtCVxwAix2ipi0/42sWUeOeCrdrsBFMxFDrzupD7mQ/yD6/
-DbIP6ebPkXZsOY2By6lNRzFfuGUQRfCnuaSybGAIUh+ejMSHkqTHHsD/dVA0m/Dg
-0PcI/7ap5wthsloH6VtJLLwJQcU/YdTFSRRfmTDIjtQj+o/AXriJNKhZpxMUZixv
-mj9HxTfr9u9R0w2Tokv+8k1tj0SxHPH2304mc6LiADfBBaf+OJFIPllubSODRz81
-6xd7+74Qy0+8znj84hPtDYs8fZ/1BnKhxszyAxxjBKdGZ4oC946naAZkVZISEf1y
-MN+AOAfBdzNbbbWnkhjWGxF+6to6mG2XAQ0bfjo8BPFquK2LRSMNUB5u+C5MPsji
-RrQmKtk6Sbenpchd9SMyw7e0x+KmkfOs8jAsY3icgMhGx/suJ7Ugej+17y1cY/Tb
-UDM69GrY
-=3OfZ
------END PGP SIGNATURE-----
-
---p9SV50ga3jfMJaYY--
+Regards,
+Raymond
