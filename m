@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEA06C3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 15:18:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5A33C3DA70
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 15:18:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14D578882C;
-	Tue, 30 Jul 2024 17:18:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 79F4C887B9;
+	Tue, 30 Jul 2024 17:18:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WwO+Pg38";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bWQcILyT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 580CB88800; Tue, 30 Jul 2024 17:18:17 +0200 (CEST)
+ id 501B388845; Tue, 30 Jul 2024 17:18:20 +0200 (CEST)
 Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
  [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F56088747
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 17:18:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D1A2F88747
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 17:18:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6b7a3e4686eso25858416d6.1
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 08:18:14 -0700 (PDT)
+ 6a1803df08f44-6b7b349a98aso28900316d6.3
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 08:18:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722352693; x=1722957493; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722352696; x=1722957496; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hiQ4HphX+oUpzHt4dYZi0zLB+DP9X7qvp0eK26teEXk=;
- b=WwO+Pg38mzy+J1jiXJe7O8F75JQOA3enIHVOjZmU/1Z12az7bLb072sP22reIE3kBs
- sI2FlPBxwXL0IVDVLqhSUeEg/AblZTAxqFGgUExgYR1fNOgKnx5c+BG2ytKWYZE7AAc8
- LjhXFKQ/czwEN6vQGxdBX8BOx1YqJDJNKmxUk=
+ bh=yoUkEsMoxh8RTg9WI6l2EiJnErJb7rTpmwrySbVYw/I=;
+ b=bWQcILyTfI7U5NnHF24d/u7jWNt4GuIbUAQbDFqKzx5mth7HyVp2VFfCxOqITDi2zf
+ DvHq5ZQZhhR7eOSUbnsRH7yhwewB8TOSridBcGDNttAGodJtWaOoYwldzU2l7GZmZJqn
+ nKG3b5DJ6XmthpgZ6YJ8BU7NT51xeyrh1KQhU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722352693; x=1722957493;
+ d=1e100.net; s=20230601; t=1722352696; x=1722957496;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=hiQ4HphX+oUpzHt4dYZi0zLB+DP9X7qvp0eK26teEXk=;
- b=O5qU2EHQyE56Q2uhkSDepXMHQjLhuu1ueABmDmEAq2qBEJpzTak31ZotNe0Su9qWUR
- uiPnPfNdDCrawOUmyeKu2JnngCxk3O+3bDYDvRPdRVLDRCvFSOPrKkUkCclGaCLFpJXz
- UNCwNbLqXge4vlkoTFh1cFTz1yQhJJY0v5afRYqstcP9AiV/+OAQpcV4FfigPU5aY0IW
- yjYdDe9a10yi9jzwch1wfkxJ0LE3KVncopOl6piklggl1CaD9OKre5lAgqyM5YUAQt5/
- ON1iChOzsquVkJCogdQ5czao0VuCGnH5ROOLqLS49rPLz9TxnWGIpiQhWMzsv2kGK413
- 6FTQ==
+ bh=yoUkEsMoxh8RTg9WI6l2EiJnErJb7rTpmwrySbVYw/I=;
+ b=GVIMX056i3R7/fpzCDe8CL+TgqQpn6TVbFH+y/3PkoqElRabFLvqNwAPgy1Jz4Buiu
+ wEMDvfVrCLdi1ERdY2ig2FCjebnxTSntpKZxRKpaHGrmKywCTqQl3oQKs8s9zsWXFSzU
+ 7HOrjvIewdS5qYh/iokEXtmd7E5ADtGNplSRUyO9DVSxsUFc4uir/u6fxldqHL5u1aaO
+ karG3ks5UPIKS2hdyuj1Q64o5wp9AVMdpV0/JRAQjq/dmwZqQxyi/L55gDisG0aIu8ep
+ Z5mk7Obpzk2c6DFjvDK6um1/AfIirUfPazlmUo4bt30Qq/s4NDFIiC4wjjc1pc9Lowaa
+ i7jw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVUmr2Oa8yCiDxrJXAKcy8TjiCrnDdy/T1xYdlk7YVyFAjvQVtDCBbk05SY3fLfapnf6IdOkC7EQ9iC405FunFY11c3sg==
-X-Gm-Message-State: AOJu0Yz5C56OC9JHHnQpLa+qWvMUd8zSZPUFa18T+dDzve3Cb0BYMEtE
- UZRNYAsIFlfhoofo3hucVJLsrbGWuJ2D4pgvS0oy+x63E6KT8+IH94ge7gnSAKpj7u8dIxWpW/8
- QyReK/q9uTMkPTvZfCBi1XxoKQ6+3GWvmB5WdrF+eublpay8=
-X-Google-Smtp-Source: AGHT+IHgVxjK9wjchjz1LbZg6ego1XaMLkjLIt/Ln1OenY6K1Ulzbh45C38EJlHri+BTpwLKG1VGXqDMGnwleUil6po=
-X-Received: by 2002:a05:6214:e48:b0:6b5:e9a6:8416 with SMTP id
- 6a1803df08f44-6bb55aca27cmr136016276d6.48.1722352693113; Tue, 30 Jul 2024
- 08:18:13 -0700 (PDT)
+ AJvYcCXG+oTIlkteD5OZIWAjSFJ1TLm3IWfaRcnpGj8I6rfOmVDa6sVeEtkGXGl84NzaqQvmRtBN16UJCxPtuGMBK7mUX+OHNg==
+X-Gm-Message-State: AOJu0YzvM/C+LlDiA0ZD6feLTEOVVHGl3Omidemlm3PzAc86i3XltW4b
+ aUypN9hYX+R9ZEsN0zX9sGClusIES+Ig8BXPAHPcBPvnCKT+Hll0D5P5ngH8SezZnKmst8C7ytm
+ b1cYfbUyS3a/6hH4gQ0tqRPMx2yYkIuJYxXE8
+X-Google-Smtp-Source: AGHT+IHuupJiO/Y/zHZDKCNvx32WoaTgU1hmVo1dENr21/2SCuOVXs8dTiC8v/Hbs9SNZHYiNuACclgqRX7Iu3jIMtY=
+X-Received: by 2002:a05:6214:240d:b0:6b5:4e5d:7cfd with SMTP id
+ 6a1803df08f44-6bb55a1356amr125398796d6.23.1722352696567; Tue, 30 Jul 2024
+ 08:18:16 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240725135629.3505072-1-sjg@chromium.org>
  <20240725135629.3505072-6-sjg@chromium.org>
@@ -68,16 +68,15 @@ References: <20240725135629.3505072-1-sjg@chromium.org>
  <CAFLszTg7aGk=nb+C1ovNu3QZk3d-vGAOsS5RzzUvdBCaMkyArw@mail.gmail.com>
  <CAC_iWjLcJ-PkX2d0LH-Tj8M513t-R1Hy1qNAZNz3Cjw4P+K2BA@mail.gmail.com>
  <CAFLszTivmh=ig-Zoe721B8wHqGRyFZ=R9_4Wo6ZhfmxNLO0+Bg@mail.gmail.com>
- <CAC_iWjJapZD2dvzVh9XGn9hy0YecoyDN6-vtMASv7oF_j8LS-A@mail.gmail.com>
-In-Reply-To: <CAC_iWjJapZD2dvzVh9XGn9hy0YecoyDN6-vtMASv7oF_j8LS-A@mail.gmail.com>
+ <87ttg7x772.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <87ttg7x772.fsf@bloch.sibelius.xs4all.nl>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 30 Jul 2024 09:18:02 -0600
-Message-ID: <CAFLszTgQuvgCHrV2Eej6rrnaxRt_xwtJrdgQtuhmp1oU6pgMGg@mail.gmail.com>
+Date: Tue, 30 Jul 2024 09:18:06 -0600
+Message-ID: <CAFLszTgwSeYg=FB=xeJxMUnhbdCJhS0HBrQDtBscbDTOYPHkLA@mail.gmail.com>
 Subject: Re: [PATCH 5/6] efi: Use malloc() for the EFI pool
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: ilias.apalodimas@linaro.org, xypron.glpk@gmx.de, sughosh.ganu@linaro.org, 
+ trini@konsulko.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,12 +94,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Mark,
 
-On Tue, 30 Jul 2024 at 08:54, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Tue, 30 Jul 2024 at 08:53, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
 >
-> On Tue, 30 Jul 2024 at 17:38, Simon Glass <sjg@chromium.org> wrote:
+> > From: Simon Glass <sjg@chromium.org>
+> > Date: Tue, 30 Jul 2024 08:38:03 -0600
 > >
 > > Hi Ilias,
 > >
@@ -334,67 +333,23 @@ On Tue, 30 Jul 2024 at 08:54, Ilias Apalodimas
 > > current allocator is allocating memory wherever it likes, potentially
 > > interfering with the kernel_addr_r addresses, etc. as on qemu_arm.
 >
-> It is, but I don't think using malloc is solving it. It's papering
-> over the problem, because if someone in the future launches an EFI app
-> or allocates EFI memory with a different type you are back on the same
-> problem.
+> And even if we'd go ahead with your idea, there would still be other
+> EFI allocations that would interefere.
 
-It is certainly solving this problem.
+Could you be a bit more specific? I believe I covered that already.
 
-Once the app is launched it is OK to overwrite memory...after all it
-has been loaded and is running. The issue is that these little
-allocations can end up anywhere in memory. Did you see the qemu_arm
-note?
+>
+> The real solution here is to start thinking about these addresses as
+> reservations, and actually record those reservations properly.  That
+> is kind-of what I did for the apple machines: the various addresses
+> are determined by allocating memory blocks using LMB.
+
+That's fine, but we are a way off from that.
+
+Of course, at the moment that lmb is local, so EFI can still overwrite
+your addresses. All you have done with the Apple code is to select the
+addresses at runtime, instead of using env vars. But the vast majority
+of platforms use the latter, with no lmb reservations.
 
 Regards,
 Simon
-
-> >
-> > > > > > > > >
-> > > > > > > > > The specification is available https://uefi.org/specifications.
-> > > > > > > >
-> > > > > > > > The problem is that it is thousands of pages so it is hard to pick up
-> > > > > > > > on some of these issues.
-> > > > > > > >
-> > > > > > > > >
-> > > > > > > > > >
-> > > > > > > > > > -     r = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, pool_type, num_pages,
-> > > > > > > > > > -                            &addr);
-> > > > > > > > > > -     if (r == EFI_SUCCESS) {
-> > > > > > > > > > -             alloc = (struct efi_pool_allocation *)(uintptr_t)addr;
-> > > > > > > > > > -             alloc->num_pages = num_pages;
-> > > > > > > > > > -             alloc->checksum = checksum(alloc);
-> > > > > > > > > > -             *buffer = alloc->data;
-> > > > > > > > > > -     }
-> > > > > > > > > > +     /*
-> > > > > > > > > > +      * Some tests crash on qemu_arm etc. if the correct size is allocated.
-> > > > > > > > > > +      * Adding 0x10 seems to fix test_efi_selftest_device_tree
-> > > > > > > > > > +      * Increasing it to 0x20 seems to fix test_efi_selftest_base except
-> > > > > > > > > > +      * for riscv64 (in CI only). But 0x100 fixes CI too.
-> > > > > > > > > > +      *
-> > > > > > > > > > +      * This workaround can be dropped once these problems are resolved
-> > > > > > > > > > +      */
-> > > > > > > > > > +     ptr = memalign(8, size + 0x100);
-> > > > > > > > >
-> > > > > > > > > We were using ARCH_DMA_MINALIGN before this patch.
-> > > > > > > >
-> > > > > > > > Where is that in the code? All I see is EFI_PAGE_SHIFT.
-> > > > > > > >
-> > > > > > > > >
-> > > > > > > > > If we are overwriting allocated memory, we must fix that instead of
-> > > > > > > > > increasing size. Do you have a git tag showing the problem?
-> > > > > > > >
-> > > > > > > > Not easy to do, because the 4KB per allocation thing has been there
-> > > > > > > > from the start. It might be possible to apply my patch to earlier and
-> > > > > > > > earlier U-Boots to try to bisect it.
-> > > > > >
-> > > > > > Would anyone like to take a look at these presumed bugs?
-> > > > > >
-> > > > > > It might be worth moving to a newer dlmalloc() [1,2] as it has a checker.
-> > > > > >
-> > > > > > > >
-> > > > > > [..]
-> > > > > >
-> > > > > >
-> > > > > > [1] https://gee.cs.oswego.edu/dl/html/malloc.html
-> > > > > > [2] https://gee.cs.oswego.edu/pub/misc/malloc.c
