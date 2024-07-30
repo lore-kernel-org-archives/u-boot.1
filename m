@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF616C3DA61
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 09:48:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C608AC3DA61
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 09:57:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 13107887D4;
-	Tue, 30 Jul 2024 11:48:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EC390887BF;
+	Tue, 30 Jul 2024 11:57:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="T3+L5X+V";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ErI/hR2R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6C89887B9; Tue, 30 Jul 2024 11:48:11 +0200 (CEST)
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [IPv6:2a00:1450:4864:20::22f])
+ id 80E77887D4; Tue, 30 Jul 2024 11:57:48 +0200 (CEST)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C851887E4
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 11:48:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 30FA1887B9
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 11:57:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2ef2cce8be8so56971231fa.1
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 02:48:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-1fd69e44596so27634025ad.1
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 02:57:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722332889; x=1722937689; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=SciELskzrXEIAx2jrLHwqMx6iKbzpnD+LUGoNMhs7k8=;
- b=T3+L5X+V11stA7ptuQibH59aThu69r5wMHzgeGHzL2ZPb8gEwe30V+ZpS1Vxuv320o
- KAnQNIxMzpJqlzwyDnGlcPbaL30g6csk7bVS5aV4jychWJdKNAB+GssMfjJFn66rXo1I
- VFiD1zkFuYJg2C1qm6hu0EZ3oqQ475JeeqvLq+JpvULSAU0JOdoEqioQoXs60sOVIrWd
- dRZ0pCS3t9Cr2el3dVv35ZSi0ibLANRNmSQJAPYQTkVj/fYij3DAs1FzWQG4EX7mQE8+
- /Ae5ksQKHkIhcRrHMILD4YBMhQ+XGkW7ftT4xM5JBqTdZBmN+udJReg6qeh4XBLTP0l+
- lwhg==
+ d=linaro.org; s=google; t=1722333465; x=1722938265; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ETCNyOOsAKqnu8w73R4y9qUtds/kPFZgiGDrWYIQCLs=;
+ b=ErI/hR2Rh+ta7+zI+Fneq7noiys8POBuCZdDcs/PaNh8PXolPdzpIPASsNoJcWrb5r
+ tJ01oHJtXtjgXiq3zijA7NnxDykWTX04CmpYciKDAuxo99bAh5KEtfAkeaFrAU7A6NZw
+ S82S6MsENCiS2a9eJ0mb4hOWLkCEK44P24Y/Bkh9tOMv5pMbRMbQqgJy5C51oZU30GnQ
+ 5V9ethRHHmOLd00Ev+XMgBTlZv2Xz53gDi1mB5XeYq2lDQDg7YUf/xaw49UrUgzUCB6A
+ HdUCcPCpYL2CgwfIBaxbZ5fLjLCxHBA0vWpF5OJcu+3VTpros1KEN/KVx5bMfkqeKCCw
+ AvFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722332889; x=1722937689;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=SciELskzrXEIAx2jrLHwqMx6iKbzpnD+LUGoNMhs7k8=;
- b=Vb1W/tCK/IHu9wp6jhOjoXrH+jENedusAu+pfW1tgpe45aVNeJ0K6UpKY5p6tXFfQO
- uN5Am9FmCgoZwcUKVS8Qlu4wzJE4JzYqtanjr8yAbUZVN1Pr1m+fgacReNSRBnC56vL3
- SPGdMdnDwdsIueH1/K+NX3Q6/cQreQwgXbM9GjBA7xHth2As7My4KlcRJEXzHDET4HYo
- VTo5HtUpD+UmInOZBq+TPKCVeAqI4flJlfMyPifWeF2z+ger1PXEzJSWAmCErJLu3010
- CqAv2PD4VoNwOsRrsAig0TnDtDjrIqhDyWqDQK6Mtz1VjoTIQygfNsfy0zAzxEgi8zhu
- rqxQ==
-X-Gm-Message-State: AOJu0YxIRmPvhXPrV6zd5dOTjm615kf/kaz5P/u0p4SkX6YDogEnQrIs
- ll5+2u8fViKygX4pl8A/+knPrBJ1TMsIOYP5vul7LQ91X6j9fGed4QFGtY1j1gc=
-X-Google-Smtp-Source: AGHT+IG4/NZNRSZ4A/zn2x9CBRSG7i1X9QxnECtw7mOb9xp0DGXN/yfT9bZ0LxCNswglR9hcYDYLjQ==
-X-Received: by 2002:a2e:a787:0:b0:2ec:63f:fe91 with SMTP id
- 38308e7fff4ca-2f12ee2419dmr92074271fa.38.1722332888543; 
- Tue, 30 Jul 2024 02:48:08 -0700 (PDT)
-Received: from [10.100.0.2] ([194.15.111.157])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36b36416e2esm14273357f8f.0.2024.07.30.02.48.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Jul 2024 02:48:08 -0700 (PDT)
-Message-ID: <db1d3c5c-918b-4aa5-b68a-020c168cf05c@linaro.org>
-Date: Tue, 30 Jul 2024 11:48:06 +0200
+ d=1e100.net; s=20230601; t=1722333465; x=1722938265;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ETCNyOOsAKqnu8w73R4y9qUtds/kPFZgiGDrWYIQCLs=;
+ b=MiaBMQoYjvFIv01SnSvcVh4hkFViCuQ8u2ei87zEi5fAF80yaPSj7GQVTVJZX0no0t
+ uTOln7sW0NMfXbUOrid76h0zmZxPd17e2QWbr0B9ryUdwuqw5jh28AQ9K2zeUOLGbqfj
+ FY9mO1LQls3xBzFL1myfjf4B0anDQBs//H0nHtWVGNZk5Qdiy+ybL82eDCmkQPBvQB8I
+ 0kBo6WYgLuXuex1SleiYtu04jGs3Lwxy/ltiwuN9QTPxSQ90GuLJiS/b68Eq/ixRY/li
+ cbQkY/iMsmeuw/41HVWH/MIKK/LXy1d7mTlpuWbt/maP/A3Q8Cgn0p+5Or9koccvgVby
+ /awg==
+X-Gm-Message-State: AOJu0Yxqdo8WaWMTdjRtm+BA7ke68SSqESgWFOy3Bxtp+dpUbqeHFUc3
+ 8FqJFPNodEKjpf3jTSaJc3Nv/P2VURMCHxUVbwvN1YhfN89d8dq2tV0ZXHLqluiuqnrImNxm0YO
+ rY24xAq5l32wlhw3HmSEUY2Ox/WqxBUTAwfA7HQ==
+X-Google-Smtp-Source: AGHT+IEGm32FXyqj2pkgair47iiUAQmfrCRtthwb8HTHXyLFz4h4TF5+j1LeQbB2MxUgVO1PzE4ZxBVAWNvFNhuVZ90=
+X-Received: by 2002:a17:902:fa8c:b0:1fb:9b91:d7d9 with SMTP id
+ d9443c01a7336-1ff37c111a1mr22350795ad.26.1722333464550; Tue, 30 Jul 2024
+ 02:57:44 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 00/20] Introduce the lwIP network stack
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>
 References: <cover.1721910373.git.jerome.forissier@linaro.org>
- <20240725172220.GA989285@bill-the-cat>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20240725172220.GA989285@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ <4dee5a89157f3dd0e0a8d17ab6ff42292bb7ce79.1721910373.git.jerome.forissier@linaro.org>
+ <CAC_iWjLpwGzyNqqgs0YVZpR4=Vncnd7V_DVDcONX9OweyrDWGg@mail.gmail.com>
+ <a117047c-8429-4209-9018-b160e9373ff9@linaro.org>
+In-Reply-To: <a117047c-8429-4209-9018-b160e9373ff9@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 30 Jul 2024 12:57:08 +0300
+Message-ID: <CAC_iWjL=XZRVr0ggD+HAvP-Q3M7+w=4ePOqWebD=wohx17ff5w@mail.gmail.com>
+Subject: Re: [PATCH v5 18/20] net-lwip: add TFTP_BLOCKSIZE
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
+ Raymond Mao <raymond.mao@linaro.org>, Maxim Uvarov <muvarov@gmail.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Baruch Siach <baruch@tkos.co.il>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,63 +92,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 29 Jul 2024 at 18:18, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> Hi Ilias,
+>
+> On 7/29/24 14:29, Ilias Apalodimas wrote:
+> > Hi Jerome,
+> >
+> > On Thu, 25 Jul 2024 at 15:59, Jerome Forissier
+> > <jerome.forissier@linaro.org> wrote:
+> >>
+> >> Add support for setting the TFTP block size. The default value (1468)
+> >> is fine for Ethernet and allows a better throughput than the TFTP
+> >> default (512), if the server supports the blksize option of course.
+> >>
+> >> I tested this change with qemu_arm64_lwip_defconfig. The throughput is
+> >> now 875 KiB/s vs. 313 KiB/s before. That is still a low number, but I
+> >> think we can't expect more without implementing the windowsize option.
+> >>
+> >> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> >> ---
+> >>  net/Kconfig     | 20 ++++++++++----------
+> >>  net/lwip/tftp.c |  2 ++
+> >>  2 files changed, 12 insertions(+), 10 deletions(-)
+> >>
+> >> diff --git a/net/Kconfig b/net/Kconfig
+> >> index 952690d677d..7e5406bb923 100644
+> >> --- a/net/Kconfig
+> >> +++ b/net/Kconfig
+> >> @@ -69,16 +69,6 @@ config SYS_FAULT_ECHO_LINK_DOWN
+> >>           this option is active, then CONFIG_SYS_FAULT_MII_ADDR also needs to
+> >>           be configured.
+> >>
+> >> -config TFTP_BLOCKSIZE
+> >> -       int "TFTP block size"
+> >> -       default 1468
+> >> -       help
+> >> -         Default TFTP block size.
+> >> -         The MTU is typically 1500 for ethernet, so a TFTP block of
+> >> -         1468 (MTU minus eth.hdrs) provides a good throughput with
+> >> -         almost-MTU block sizes.
+> >> -         You can also activate CONFIG_IP_DEFRAG to set a larger block.
+> >> -
+> >
+> > Why do you have to move the config option?
+>
+> It is moved from the 'if NET' block to the 'if NET || NET_LWIP' block since
+> it now applies to both.
+>
+> Thanks,
+> --
+> Jerome
+>
+> >
+> > Cheers
+> > /Ilias
+> >>  config TFTP_PORT
+> >>         bool "Set TFTP UDP source/destination ports via the environment"
+> >>         help
+> >> @@ -263,4 +253,14 @@ config SYS_RX_ETH_BUFFER
+> >>           since all buffers can be full shortly after enabling the interface on
+> >>           high Ethernet traffic.
+> >>
+> >> +config TFTP_BLOCKSIZE
+> >> +       int "TFTP block size"
+> >> +       default 1468
+> >> +       help
+> >> +         Default TFTP block size.
+> >> +         The MTU is typically 1500 for ethernet, so a TFTP block of
+> >> +         1468 (MTU minus eth.hdrs) provides a good throughput with
+> >> +         almost-MTU block sizes.
+> >> +         You can also activate CONFIG_IP_DEFRAG to set a larger block.
+> >> +
+> >>  endif   # if NET || NET_LWIP
+> >> diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
+> >> index 78de0bd0dba..1fe948c84ec 100644
+> >> --- a/net/lwip/tftp.c
+> >> +++ b/net/lwip/tftp.c
+> >> @@ -136,6 +136,8 @@ static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
+> >>         if (!(err == ERR_OK || err == ERR_USE))
+> >>                 log_err("tftp_init_client err: %d\n", err);
+> >>
+> >> +       tftp_client_set_blksize(CONFIG_TFTP_BLOCKSIZE);
+> >> +
+> >>         ctx.start_time = get_timer(0);
+> >>         err = tftp_get(&ctx, &srvip, srvport, fname, TFTP_MODE_OCTET);
+> >>         /* might return different errors, like routing problems */
+> >> --
+> >> 2.40.1
+> >>
 
-
-On 7/25/24 19:22, Tom Rini wrote:
-> On Thu, Jul 25, 2024 at 02:57:21PM +0200, Jerome Forissier wrote:
-> 
->> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
->> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
->> stack [2] [3] as an alternative to the current implementation in net/,
->> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
->> reasons for doing so are:
->> - Make the support of HTTPS in the wget command easier. Javier T. and
->> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
->> so. With that it becomes possible to fetch and launch a distro installer
->> such as Debian etc. using a secure, authenticated connection directly
->> from the U-Boot shell. Several use cases:
->>   * Authentication: prevent MITM attack (third party replacing the
->> binary with a different one)
->>   * Confidentiality: prevent third parties from grabbing a copy of the
->> image as it is being downloaded
->>   * Allow connection to servers that do not support plain HTTP anymore
->> (this is becoming more and more common on the Internet these days)
->> - Possibly benefit from additional features implemented in lwIP
->> - Less code to maintain in U-Boot
->>
->> Prior to applying this series, the lwIP stack needs to be added as a
->> Git subtree with the following command:
->>
->>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savannah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
-> 
-> This is better than v4, and on the hardware platforms I could build and
-> boot on (which was most of mine except the am62x_beagleplay), the tests
-> ran and completed, including the tftp+boot a Linux kernel.
-> 
-> The bad news is CI blows up, a lot:
-> https://source.denx.de/u-boot/u-boot/-/pipelines/21764
-
-They're all failing with: undefined reference to `tftp_start'
-The reason is I inadvertently removed the 'default y' on CMD_TFTPBOOT :/
-Fixed in v6.
-
-> And:
-> https://dev.azure.com/u-boot/a1096300-2999-4ec4-a21a-4c22075e3771/_apis/build/builds/9014/logs/106
-> which is another Kconfig dependency problem. I don't _think_ I
-> introduced that, but since this wasn't against top of tree, I had to
-> apply the cmd/Kconfig patch manually.
-
-What's the build command? I can see:
-
-/bin/bash --noprofile --norc /Users/runner/work/_temp/9710a6d2-6670-4f76-81bc-990cc45b1898.sh
-
-...but that's not super helpful ;)
-
-> 
-> I have my world build running still and may have more comments based on
-> that.
-
-
-Thanks,
--- 
-Jerome
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
