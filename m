@@ -4,74 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7173C3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 12:59:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CB25C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 12:59:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59C5E889E9;
+	by phobos.denx.de (Postfix) with ESMTP id BEBD188A03;
 	Wed, 31 Jul 2024 14:59:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=comcast.net
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=comcast.net header.i=@comcast.net header.b="pvBmMIow";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nUB2HlW6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A15D388821; Tue, 30 Jul 2024 16:27:25 +0200 (CEST)
-Received: from resqmta-c2p-546593.sys.comcast.net
- (resqmta-c2p-546593.sys.comcast.net [IPv6:2001:558:fd00:56::8])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 95561887B9; Tue, 30 Jul 2024 22:55:14 +0200 (CEST)
+Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
+ [IPv6:2607:f8b0:4864:20::82c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84C0487E62
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 16:27:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=comcast.net
+ by phobos.denx.de (Postfix) with ESMTPS id 6CDBA87A55
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 22:55:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fventuri@comcast.net
-Received: from resomta-c2p-555922.sys.comcast.net ([96.102.18.230])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 256/256 bits)
- (Client did not present a certificate)
- by resqmta-c2p-546593.sys.comcast.net with ESMTPS
- id Ym8Hsyi2BVY9BYnousUG2v; Tue, 30 Jul 2024 14:27:20 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=comcast.net;
- s=20190202a; t=1722349640;
- bh=cqyrFSqBpYVnatQItbQBbNajHJfydisFm1rhE2YIG3s=;
- h=Received:Received:Date:From:To:Message-ID:Subject:MIME-Version:
- Content-Type:Xfinity-Spam-Result;
- b=pvBmMIow892HAmkkYorneT2sHsDoTeXWBW08DxOlFh9WuLxfmFoMyPcIxzYZzDgAD
- eBhcJF+E/e55N+S+5smIDxgJJ+NBcRTd/1LT3X0Xf+y8WmiNdndQARGco588r17vYd
- qpt9VgBlWgsJDvv9wNR947pW5faGFZt8mQMLWfrRMrxQKdlJyNCujS3tdlVd7tkTP0
- WRUzC/5+UXM4ppkFjxZBF8218lnV9jPnwUgeMHnWmwZ6/mSPTUcxk5OCReus8iArKk
- f9SUMjRcbMYXpvc2nZPUmpJH7nisr1jTOx4QACL+NPn4O2ZQYUyU4linpk2WXWHq1S
- dTT4xHZVHgK9A==
-Received: from oxapp-ch2f-71o.email.comcast.net ([96.117.87.100])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 256/256 bits)
- (Client did not present a certificate)
- by resomta-c2p-555922.sys.comcast.net with ESMTPS
- id YnoXshUw8o31gYnoXsqgQv; Tue, 30 Jul 2024 14:26:58 +0000
-Date: Tue, 30 Jul 2024 10:26:57 -0400 (EDT)
-From: Franco VENTURI <fventuri@comcast.net>
-To: Peng Fan <peng.fan@nxp.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Tom Rini <trini@konsulko.com>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>
-Message-ID: <106755270.238150.1722349617215@connect.xfinity.com>
-In-Reply-To: <DB9PR04MB8461F1E0FC7BC664F4924C0788B02@DB9PR04MB8461.eurprd04.prod.outlook.com>
-References: <20240730133043.12577-1-fventuri@comcast.net>
- <DB9PR04MB8461F1E0FC7BC664F4924C0788B02@DB9PR04MB8461.eurprd04.prod.outlook.com>
-Subject: RE: [PATCH v1] mmc: fix signed vs unsigned compare in read check in
- _spl_load()
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=islavaivanov76@gmail.com
+Received: by mail-qt1-x82c.google.com with SMTP id
+ d75a77b69052e-447d6edc6b1so23304061cf.0
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 13:55:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1722372911; x=1722977711; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=tPx4ozDDToQf9KIl0SpIi2GImzRHbulp7LuGKoic/No=;
+ b=nUB2HlW6UjnAVkOStlEEo0GtMieIirlq9IxRow3jaEPLmy0Qd2WMQRueC/H0yJD5rn
+ EXryQh56b5Uj2QIM4kqE9jUknRYROXo5VLtwImbDbaJp78O7UCB7rJ4sbjlNOPOhtDnF
+ tNtAdt/2yjNOKExsIhI/Xti5E8JT03Or0JHK0f7FAmfKjXtTrRse/Rbd/caap7QNtwZF
+ i2RAx+Iyv1siXQgJVIjQ13RICSGco7/VFekusyIHGSYXbSmcsRdpu1eB4/ahyz9T371r
+ dVmn6wHwwLIxz3niRF77k9rC67UlfksMX9gYmkUsJrTAm+MXVZyDmGDm15LOlGpiVVXh
+ Wk7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722372911; x=1722977711;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=tPx4ozDDToQf9KIl0SpIi2GImzRHbulp7LuGKoic/No=;
+ b=U4d/ssVcLArLEnT21yntsPc0Ci/5F35F5YJQLxX1bkVpY6jFxohFe2K88W4GJG5qO3
+ ZERE4ExPYrcGL+kyZRfZkVLgYO5rjqvwT8AinVhywrhXSPPrIJEg+lN3AqpeJ2Ou9h3L
+ eOjH4QOjYgYjwZ4cuilnDNEMVYa3MLKO9I7EZdiO4MXS2t9txOFxuckvWXcGW587qYAR
+ Mo3Yxl6WB64N4kxHcMEDF6xY961ad0QHIPU/O+tie5vu6/WdOiXGuVoAz/cNgvRm1yEp
+ LCYaGh2xbe1xf744yEDKDwNf8xdBYdJ6ut95KHp7CicKt+yaOal+AiABZlwF2v/L7+WN
+ EEdg==
+X-Gm-Message-State: AOJu0YyaRPBy/mtq1/NPzbEBJ6nTtyv9Jcf/nWYlsoFRW9SPqEud8PiS
+ +3iPQv/iN8KzimyCXxFNjICvvjKEnlBdv5BKlY3XEFUQzM0WzBb5X6weWX0pkZCuwarPHbzx/BU
+ T/Pa+Zw089OGmbBtOf4hh8jzdbB/lyOW6Y9w=
+X-Google-Smtp-Source: AGHT+IFdmsJhDb4r5cHdzKUXlZVY+o7z8NetZZuEvlba2gXFjoPL1MgkCYwA7WJ4scsHCVdcthInXAV503eNecyMsR4=
+X-Received: by 2002:a05:622a:30c:b0:441:6021:df43 with SMTP id
+ d75a77b69052e-45004fa6ff7mr154946701cf.62.1722372911018; Tue, 30 Jul 2024
+ 13:55:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Priority: 3
-Importance: Normal
-X-Mailer: Open-Xchange Mailer v7.10.6-Rev59
-X-Originating-IP: ::ffff:76.18.214.183
-X-Originating-Client: open-xchange-appsuite
-X-CMAE-Envelope: MS4xfCEOlHvEqF7qbJi7qQ/A+58rBkdZ+gm0UAy+p3iylLKiSYgqvBDcZ3BiSarEFTWP4aGEjVplvJdzqqLYWLvS1s0VxGmOXbWvMBaNyIClA5dTicND2qJq
- hwSStPH7KTmCRD4zVo86PzWKBjLhMEKUVuBf5WLEuQkiJIwTakjOQscv2S4UihbKfsPPSiAf+wqP34K173hjeASYSrf5TLK5R7EsYUtwCx1Nxw2kJLkiZ8J/
- aZLNGC9imqn8bPig2BddSkjHmrSSH6AOyGbEoWmIkqtI5YV87yHCK+qwyQeHM943Wq50CwP0K+IVyglGzW2VO0bayjr+DpahIU3mfYiD9RNZEkjvJt8DEPjC
- 4cxBuGtT
+From: =?UTF-8?B?0KHQu9Cw0LLQsCDQmNCy0LDQvdC+0LI=?= <islavaivanov76@gmail.com>
+Date: Tue, 30 Jul 2024 23:55:01 +0300
+Message-ID: <CACS4SEmxUC_LLudMH9ErFEyaE5+MQGnsMdzvkvRGNWeih7v+_A@mail.gmail.com>
+Subject: [PATCH] arm: dts: orangepi: Fix Orange Pi R1 and Plus LTS boot issue
+To: u-boot@lists.denx.de
 X-Mailman-Approved-At: Wed, 31 Jul 2024 14:59:20 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,65 +83,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Peng,
-no, with just the condition 'read < sizeof(*header)', the variable 'read' (which is a signed integer) will be converted ('balanced') to unsigned to match the type of 'sizeof()' as per the C standard specification (see https://stackoverflow.com/a/17294164).
+Orange Pi R1 Plus and LTS don't have eMMC
+(default mmc0 in rk3328-u-boot.dtsi).
+The device is equipped with SPI flash memory, which U-Boot tries to use for
+reading configuration. However, the manufacturer has not provided any means
+to utilize SPI flash memory. There is no documentation,
+or software available for this purpose.
 
-This means that a value read = -2 will be converted to unsigned  0xFFFFFFFE, the comparison 'read < sizeof(*header)' will be false, and the _spl_load() function will not return -EIO
+As a result, during OpenWRT sysupgrade, the board fails to boot because the
+script that switches the boot_device to an available one does not trigger.
 
-In order to fix this bug one has to check first if the value of 'read' is negative *and* then check 'read' against 'sizeof(*header)'.
+This patch changes the alias of mmc0 from &emmc to &sdmmc,
+ensuring the board boots correctly,
+and sysupgrade completes successfully.
+Additionally, this allows saving the U-Boot environment
+by using saveenv with uboot-envtool.
 
-Hope this makes sense,
-Franco
- 
+Signed-off-by: Pugemon <islavaivanov76@gmail.com>
+Cc: Tianling Shen <cnsztl@gmail.com>
+---
+ arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi | 12 ++++++++++++
+ arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi     | 12 ++++++++++++
+ 2 files changed, 24 insertions(+)
 
-> On 07/30/2024 9:45 AM EDT Peng Fan <peng.fan@nxp.com> wrote:
-> 
->  
-> > Subject: [PATCH v1] mmc: fix signed vs unsigned compare in read
-> > check in _spl_load()
-> > 
-> > Fix signed vs unsigned compare in read check in _spl_load()
-> > 
-> > Issue: when info->read() returns a negative value because of an error,
-> >        the comparison of 'read' (signed) with 'sizeof(*header)'
-> >        (unsigned silently converts the negative value into a very
-> >        large unsigned value and the check on the error condition
-> >        always return false, i.e. the error is not detected
-> > Symptoms: if spl_load_image_fat() is unable to find the file 'uImage',
-> >           the SPL phase of the boot process just hangs after displaying
-> >           the following line:
-> >           Trying to boot from MMC1
-> > Fix: first check if 'read' is negative then check its value against
-> >      'sizeof(*header)'
-> > Reference:
-> > 
-> > Signed-off-by: Franco Venturi <fventuri@comcast.net>
-> > ---
-> > 
-> >  include/spl_load.h | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > 
-> > diff --git a/include/spl_load.h b/include/spl_load.h index
-> > 1c2b296c0a..1e05599d29 100644
-> > --- a/include/spl_load.h
-> > +++ b/include/spl_load.h
-> > @@ -22,7 +22,7 @@ static inline int _spl_load(struct spl_image_info
-> > *spl_image,
-> > 
-> >  	read = info->read(info, offset, ALIGN(sizeof(*header),
-> >  					      spl_get_bl_len(info)),
-> > header);
-> > -	if (read < sizeof(*header))
-> > +	if (read < 0 || read < sizeof(*header))
-> 
-> "read < 0" will imply that "read < sizeof(*header)", so there
-> should no need to include this change.
-> 
-> Regards,
-> Peng.
-> 
-> >  		return -EIO;
-> > 
-> >  	if (image_get_magic(header) == FDT_MAGIC) {
-> > --
-> > 2.45.2
+diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
+b/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
+index b50c1332b8..7063b188f2 100644
+--- a/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
++++ b/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
+@@ -2,11 +2,23 @@
+ /*
+  * (C) Copyright 2018-2019 Rockchip Electronics Co., Ltd
+  * (C) Copyright 2020 David Bauer
++ * (C) Copyright 2024 Pugemon
+  */
+
+ #include "rk3328-u-boot.dtsi"
+ #include "rk3328-sdram-lpddr3-666.dtsi"
+
++/ {
++       aliases {
++               mmc0 = &sdmmc;
++               spi0 = &spi0;
++       };
++
++       chosen {
++               u-boot,spl-boot-order = "same-as-spl", &sdmmc;
++       };
++};
++
+ &spi0 {
+        flash@0 {
+                bootph-pre-ram;
+diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
+b/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
+index 8ae003bbef..0374172527 100644
+--- a/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
++++ b/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
+@@ -2,11 +2,23 @@
+ /*
+  * (C) Copyright 2018-2019 Rockchip Electronics Co., Ltd
+  * (C) Copyright 2020 David Bauer
++ * (C) Copyright 2024 Pugemon
+  */
+
+ #include "rk3328-u-boot.dtsi"
+ #include "rk3328-sdram-ddr4-666.dtsi"
+
++/ {
++       aliases {
++               mmc0 = &sdmmc;
++               spi0 = &spi0;
++       };
++
++       chosen {
++               u-boot,spl-boot-order = "same-as-spl", &sdmmc;
++       };
++};
++
+ &spi0 {
+        flash@0 {
+                bootph-pre-ram;
