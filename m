@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 017B8C3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 09:20:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF616C3DA61
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 09:48:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 673728870D;
-	Tue, 30 Jul 2024 11:20:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 13107887D4;
+	Tue, 30 Jul 2024 11:48:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="G9EBuQN8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="T3+L5X+V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B1A0883A9; Tue, 30 Jul 2024 11:20:54 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id E6C89887B9; Tue, 30 Jul 2024 11:48:11 +0200 (CEST)
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [IPv6:2a00:1450:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07CEF8870D
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 11:20:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C851887E4
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 11:48:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2f0271b0ae9so55277061fa.1
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 02:20:51 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-2ef2cce8be8so56971231fa.1
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 02:48:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1722331251; x=1722936051;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=agzr5Tc8w7j95cJq+sIHaZwqeeFGqkcqEstmkh1sM24=;
- b=G9EBuQN88eOWzZ8u9B1PppzZmRDPNpSh502iUkmu3gkOcYUNWzJIF+A9Uo3FmDdz1v
- JB5ILJOzJVZcDW1DPeFoqlUNpruNOs9H1NXV6UbLibtwKMiTtbSFjhuChmv60uZ2nH0n
- OjQmNu4+/ju4kklEALJW1CD2RMi1cTGcu+fRQbhgYK1am2Hu7saegxYADVnIoeUahQDd
- LqM5+iL1nVagFHb5iHnDc0CoCWfcBaU4awFowEvJ9oHxHDOOcrp02a3G6PfV8gfhjB7I
- Ekro05lpJpFWvKEZ0vMZBYMC5CGfy+Je6hEakreXG48wGdkDxYyr/lhWxxleYkAAPUcl
- UYtQ==
+ d=linaro.org; s=google; t=1722332889; x=1722937689; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=SciELskzrXEIAx2jrLHwqMx6iKbzpnD+LUGoNMhs7k8=;
+ b=T3+L5X+V11stA7ptuQibH59aThu69r5wMHzgeGHzL2ZPb8gEwe30V+ZpS1Vxuv320o
+ KAnQNIxMzpJqlzwyDnGlcPbaL30g6csk7bVS5aV4jychWJdKNAB+GssMfjJFn66rXo1I
+ VFiD1zkFuYJg2C1qm6hu0EZ3oqQ475JeeqvLq+JpvULSAU0JOdoEqioQoXs60sOVIrWd
+ dRZ0pCS3t9Cr2el3dVv35ZSi0ibLANRNmSQJAPYQTkVj/fYij3DAs1FzWQG4EX7mQE8+
+ /Ae5ksQKHkIhcRrHMILD4YBMhQ+XGkW7ftT4xM5JBqTdZBmN+udJReg6qeh4XBLTP0l+
+ lwhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722331251; x=1722936051;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=agzr5Tc8w7j95cJq+sIHaZwqeeFGqkcqEstmkh1sM24=;
- b=NIenbdXWsK5bJfab/uIOucnaZZ+Y1bChJ7KYLatijr7uzX3nc0WVAZ9IC1+WkFcdlw
- guXDobSGcF41gLCMB5VjvjJl+mQOUjH8hk64X1DkOA6pvhaFAoCojKkyn6s9OUqp1eSX
- JXZ5uzyN8lCCCQrxUywu4rXs2+FVQaF/PjEvaHDqaPX5E/iDJA9ZGPqPv+U68CrA4b4b
- jN0F8WliHrJxi+865quiujCwyd+zP74N2uzvyZvsmOFbuuDHOUa1QRH6LzbMdMw9OSjk
- Lg/mPG6UwHw4F1WLz90xeyj4NkJaR7MLREugJHmcwPogwnQQPcE8OZy3PAdLHZiyDS+I
- oIjA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWthVf2+R9L+CWj/2fJliZ+Za7H1ybLhJ7xkjHbXwFJimXXOt+W3M45LltshnfTeoXUMxlj+tHv99ujoZvqUx7jZ8mqtQ==
-X-Gm-Message-State: AOJu0Yx0Ro25dwgdm5SoTmHRBmEWfAu6J6PCcEA2rl5xWnztGj7tuH+5
- YRuyabWuWC1SH2aYh7m+vOisth3tRFr1ELZ5U4P2vQ8QndqX/uVUEwdXgKNn+sERnyaY0CJre0C
- 6
-X-Google-Smtp-Source: AGHT+IG2Uc1OC9Jr4M4N5TUfxV70fdnk7KXN9xcGAHOJqu9bMtuVPn7vhFvrX57mfJK+1O1H0v04WQ==
-X-Received: by 2002:a2e:8508:0:b0:2ed:275d:aa44 with SMTP id
- 38308e7fff4ca-2f12edd67f5mr64601601fa.28.1722331250852; 
- Tue, 30 Jul 2024 02:20:50 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4280d37bad3sm150476945e9.13.2024.07.30.02.20.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jul 2024 02:20:50 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Shantur Rathore <i@shantur.com>, Eddie
- James <eajames@linux.ibm.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Marek Vasut <marex@denx.de>, Tom Rini
- <trini@konsulko.com>
-Subject: Re: [PATCH] usb: bootm: Drop old USB-device-removal code
-In-Reply-To: <20240726123609.57191-1-sjg@chromium.org>
-References: <20240726123609.57191-1-sjg@chromium.org>
-Date: Tue, 30 Jul 2024 11:20:47 +0200
-Message-ID: <87zfpzp768.fsf@baylibre.com>
+ d=1e100.net; s=20230601; t=1722332889; x=1722937689;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=SciELskzrXEIAx2jrLHwqMx6iKbzpnD+LUGoNMhs7k8=;
+ b=Vb1W/tCK/IHu9wp6jhOjoXrH+jENedusAu+pfW1tgpe45aVNeJ0K6UpKY5p6tXFfQO
+ uN5Am9FmCgoZwcUKVS8Qlu4wzJE4JzYqtanjr8yAbUZVN1Pr1m+fgacReNSRBnC56vL3
+ SPGdMdnDwdsIueH1/K+NX3Q6/cQreQwgXbM9GjBA7xHth2As7My4KlcRJEXzHDET4HYo
+ VTo5HtUpD+UmInOZBq+TPKCVeAqI4flJlfMyPifWeF2z+ger1PXEzJSWAmCErJLu3010
+ CqAv2PD4VoNwOsRrsAig0TnDtDjrIqhDyWqDQK6Mtz1VjoTIQygfNsfy0zAzxEgi8zhu
+ rqxQ==
+X-Gm-Message-State: AOJu0YxIRmPvhXPrV6zd5dOTjm615kf/kaz5P/u0p4SkX6YDogEnQrIs
+ ll5+2u8fViKygX4pl8A/+knPrBJ1TMsIOYP5vul7LQ91X6j9fGed4QFGtY1j1gc=
+X-Google-Smtp-Source: AGHT+IG4/NZNRSZ4A/zn2x9CBRSG7i1X9QxnECtw7mOb9xp0DGXN/yfT9bZ0LxCNswglR9hcYDYLjQ==
+X-Received: by 2002:a2e:a787:0:b0:2ec:63f:fe91 with SMTP id
+ 38308e7fff4ca-2f12ee2419dmr92074271fa.38.1722332888543; 
+ Tue, 30 Jul 2024 02:48:08 -0700 (PDT)
+Received: from [10.100.0.2] ([194.15.111.157])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-36b36416e2esm14273357f8f.0.2024.07.30.02.48.07
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 30 Jul 2024 02:48:08 -0700 (PDT)
+Message-ID: <db1d3c5c-918b-4aa5-b68a-020c168cf05c@linaro.org>
+Date: Tue, 30 Jul 2024 11:48:06 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 00/20] Introduce the lwIP network stack
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>
+References: <cover.1721910373.git.jerome.forissier@linaro.org>
+ <20240725172220.GA989285@bill-the-cat>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20240725172220.GA989285@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,70 +96,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-Thank you for the patch.
 
-On ven., juil. 26, 2024 at 06:36, Simon Glass <sjg@chromium.org> wrote:
+On 7/25/24 19:22, Tom Rini wrote:
+> On Thu, Jul 25, 2024 at 02:57:21PM +0200, Jerome Forissier wrote:
+> 
+>> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+>> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
+>> stack [2] [3] as an alternative to the current implementation in net/,
+>> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
+>> reasons for doing so are:
+>> - Make the support of HTTPS in the wget command easier. Javier T. and
+>> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
+>> so. With that it becomes possible to fetch and launch a distro installer
+>> such as Debian etc. using a secure, authenticated connection directly
+>> from the U-Boot shell. Several use cases:
+>>   * Authentication: prevent MITM attack (third party replacing the
+>> binary with a different one)
+>>   * Confidentiality: prevent third parties from grabbing a copy of the
+>> image as it is being downloaded
+>>   * Allow connection to servers that do not support plain HTTP anymore
+>> (this is becoming more and more common on the Internet these days)
+>> - Possibly benefit from additional features implemented in lwIP
+>> - Less code to maintain in U-Boot
+>>
+>> Prior to applying this series, the lwIP stack needs to be added as a
+>> Git subtree with the following command:
+>>
+>>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savannah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
+> 
+> This is better than v4, and on the hardware platforms I could build and
+> boot on (which was most of mine except the am62x_beagleplay), the tests
+> ran and completed, including the tftp+boot a Linux kernel.
+> 
+> The bad news is CI blows up, a lot:
+> https://source.denx.de/u-boot/u-boot/-/pipelines/21764
 
-> USB is stopped using driver model now, in dm_remove_devices_flags() in
-> announce_and_cleanup() at the top of this file.
->
-> The usb_stop() call actually unbinds devices.
->
-> When a USB device is unbound, it causes any bootflows attached to it to
-> be removed, via a call to bootdev_clear_bootflows() from
-> bootdev_pre_unbind(). This obviously makes it impossible to boot the
-> bootflow.
->
-> However, when booting a bootflow that relies on USB, usb_stop() is
-> called, which unbinds the device. At that point any information
-> attached to the bootflow is dropped.
->
-> This is quite risky since the contents of freed memory are not
-> guaranteed to remain unchanged. Depending on what other options are
-> done before boot, a hard-to-find bug may crop up.
->
-> Drop the call to this old function.
->
-> Leave the netconsole call there, since this needs conversion to
-> driver model.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Suggested-by: Shantur Rathore <i@shantur.com>
+They're all failing with: undefined reference to `tftp_start'
+The reason is I inadvertently removed the 'default y' on CMD_TFTPBOOT :/
+Fixed in v6.
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> And:
+> https://dev.azure.com/u-boot/a1096300-2999-4ec4-a21a-4c22075e3771/_apis/build/builds/9014/logs/106
+> which is another Kconfig dependency problem. I don't _think_ I
+> introduced that, but since this wasn't against top of tree, I had to
+> apply the cmd/Kconfig patch manually.
 
-> ---
-> The original patch was here:
-> https://patchwork.ozlabs.org/project/uboot/patch/
-> 20231119121144.v5.5.If206027372f73ce32480223e5626f4b944e281b7@changeid/
->
->  boot/bootm.c | 12 ------------
->  1 file changed, 12 deletions(-)
->
-> diff --git a/boot/bootm.c b/boot/bootm.c
-> index 376d63aafc9..480f8e6a0e6 100644
-> --- a/boot/bootm.c
-> +++ b/boot/bootm.c
-> @@ -740,18 +740,6 @@ ulong bootm_disable_interrupts(void)
->  	eth_halt();
->  #endif
->  
-> -#if defined(CONFIG_CMD_USB)
-> -	/*
-> -	 * turn off USB to prevent the host controller from writing to the
-> -	 * SDRAM while Linux is booting. This could happen (at least for OHCI
-> -	 * controller), because the HCCA (Host Controller Communication Area)
-> -	 * lies within the SDRAM and the host controller writes continously to
-> -	 * this area (as busmaster!). The HccaFrameNumber is for example
-> -	 * updated every 1 ms within the HCCA structure in SDRAM! For more
-> -	 * details see the OpenHCI specification.
-> -	 */
-> -	usb_stop();
-> -#endif
->  	return iflag;
->  }
->  
-> -- 
-> 2.34.1
+What's the build command? I can see:
+
+/bin/bash --noprofile --norc /Users/runner/work/_temp/9710a6d2-6670-4f76-81bc-990cc45b1898.sh
+
+...but that's not super helpful ;)
+
+> 
+> I have my world build running still and may have more comments based on
+> that.
+
+
+Thanks,
+-- 
+Jerome
