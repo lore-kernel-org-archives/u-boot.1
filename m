@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61455C3DA70
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 19:10:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AE8EC3DA70
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 19:42:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54A3E88831;
-	Tue, 30 Jul 2024 21:10:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9005C8882F;
+	Tue, 30 Jul 2024 21:42:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dcLc6sIx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AKLayZ4u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D01578887A; Tue, 30 Jul 2024 21:10:03 +0200 (CEST)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id 79F7D8887E; Tue, 30 Jul 2024 21:42:32 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E36778855C
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 21:10:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A925D88806
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 21:42:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pladow@gmail.com
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-1fec34f94abso34979205ad.2
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 12:10:00 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6b797fb1c4aso33851056d6.2
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 12:42:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722366599; x=1722971399; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=icD+J5wxV3Y0JSjeKPyClB3DHBdotWBmLD6oa0qOFGg=;
- b=dcLc6sIxphKUgscj6eIVfQdb1qF4XdlmeFaDo0kdmnlkv/3uYToPTAObAy+DH60rBU
- 1OReT7EHfoDwyH6JNZm8snVH2696oIYbftbh0xBKZfalR8scP+4/GRE01YmsGu+cL+Mj
- /v0QIHkHTPcSxU1nsf/NtGCgSSfO07xNP5Uc5HlbawEx8iXz6FBxX+Ay3WKnrGPkkcr3
- GUAPG/W1PlliJt2tQpJYwlK9wUH6etT+YtCJTnnTapgHXyL1/Z1HfQVwTcuV8gyet9IK
- c1eT3eBBWGlzmPRbDeAJ5BtAetqMRUfgfo8EpzNCWLOyD2td73Q/DYfI2bcRKVvZEoxN
- rz7g==
+ d=chromium.org; s=google; t=1722368548; x=1722973348; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=iha7ZPvANXrVdkPmAP16Jwl+SM8V1uLPWWIaE+ndNzk=;
+ b=AKLayZ4uclWyR7AgJIfOpud09vDonetK7+pbycZxhsnvyKk7m5t/Zeofq0qfxu5ibQ
+ roTmOGhZSwHeNuIznKbAQVGQorfzqL4SDlVJvZJLQBoR2kz9lpeRR9T+GYxFZgUw0eO3
+ BnaEIZiKr+ljhM83p4fR9PhL5NSUMFeXKzPoE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722366599; x=1722971399;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=icD+J5wxV3Y0JSjeKPyClB3DHBdotWBmLD6oa0qOFGg=;
- b=uX24t2ykkPEbND/l99C05Nt9pYGmCjKvJmE/VGwlQbqXc3dEZ4UP7z4D09VXC3XiXY
- ffzRon6BXzENKwBhYnw68JVx0WxjzyNFxaYIgU7wYmtaSlTaZm7tjAJnx8NClGrRbw0O
- O+CM/tXMZ4uZXjdXbq19L+0k5nmXuUmZKGb0d8ko6mynUn0l6d0qjNCnmfdliBcGwS6f
- bxMvLvJBU73EPxqZiXetyMj5W1MmD+vdwQQVldMD81iVhDDu7wnCTtKL1OcQbtSYkRQU
- h1uMfgahvKeGO46SUjNXw3Rkck3X7cf1DbnJG0z1Jj8LMMGrhGECPNamr6A4iykmk1Oa
- iZtw==
+ d=1e100.net; s=20230601; t=1722368548; x=1722973348;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=iha7ZPvANXrVdkPmAP16Jwl+SM8V1uLPWWIaE+ndNzk=;
+ b=HS+8N/PmesrZtS8D1jv1W1a2fiZ++Ocoqd2Mj/eP8xV/cikzcgAAVpqio8Qf6LjoCA
+ jC+qZvHWvFzELpw2DjFUdr13A7EW4iZrwTpznr2iX9sV8a4CjoW0dirXtFNdO6Ny9TNr
+ YWGuJM2UpAuQkQYGXnb6FnSrkd21hMlm67UGNYLNOrDX4FHVYlqVCAQii+aKFEX97oOo
+ jTubjKrNrMP9wskoE44WOe0R+VF1W8hO+ZdNbHBj0ub/6kV+wnt4brYr8TcSyEiXd94v
+ QaAyZXoIIe1cuX/SXqQ1VlhtPwfWjGU1s9O1Hq02g4aza1/f4BeuIAVSyMRpcq8038x8
+ zFow==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUeocLKjjffH9JGzaMhaPtyOp+PSN48f6A7yuvH+rjTqNprDJWL4V8UKtgk18zhwKynp5pJ3q1lN+I/jghVP8zoCrglJg==
-X-Gm-Message-State: AOJu0Yz7LzL/2cleacAX4jFFDPCj1Ty1ypx5I1ek+wbzhCgyrexlEIxH
- 4Rk27EcSjefGq5/EawYSO+ow1vzNufiJ0Ltr8hxuPzOjm5iD3WV1vhivx70G7IAKkLNVOQfDE+e
- qedp2CiWfguG+gLmSR4+yhemjrsk=
-X-Google-Smtp-Source: AGHT+IH8vOVxVQnL3JDcWyNNwXI6WsJBpn9Ky2wRivH6gDDtviJWrPw8IqEd10uIQEdvbHxHjyqLPPzxGzmXilf1DeY=
-X-Received: by 2002:a17:90a:8c81:b0:2c3:2557:3de8 with SMTP id
- 98e67ed59e1d1-2cf7e5c17c7mr9830861a91.33.1722366599191; Tue, 30 Jul 2024
- 12:09:59 -0700 (PDT)
+ AJvYcCXzfGWakCxE0PlkFRk0yGEg8ycGHoJmjS9/7L6y2gfE3DevWrYlj1kPOPohIQOLNoRytXqyuSe5RFmfjBGMBv1yLzPaaQ==
+X-Gm-Message-State: AOJu0YyHK37b9mj1BalNwvj+G1jDm3h8enmi1F7B8KNZj4VmYuw+9Rpx
+ fMMHH9nH+QIsJLNrNlyTgtVZ/xFl1e8KPjXOX7XEUohNXxt2NWPt4SEEXm6yVyMNcz1h5e6AVfg
+ V2iwvBll4wUPEG78YvxVBlq4A5UslRlx4f2MyjaHA7vKHDU0=
+X-Google-Smtp-Source: AGHT+IEfthyXBZ4qy70RuMqK2n2/2JqxJ5d4YXU/hdvttOrAbgNFnqt7o9UN+7uwdlzqngehoaGm49t4eDOOEW/xiL4=
+X-Received: by 2002:a05:6214:4119:b0:6b4:b179:8eea with SMTP id
+ 6a1803df08f44-6bb5597d3bamr126704716d6.3.1722368548404; Tue, 30 Jul 2024
+ 12:42:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAN8Q1EeO0C-LcC1jC=XYZM3RbFbs6sUtjbR===VUe6FYe5Utrw@mail.gmail.com>
- <CAN8Q1Ef=eUs9qfwzhCfHA2YrFFZnKVNQVA=5mQb5Hxqi6hs5cw@mail.gmail.com>
- <CAOMZO5BT2st6FdSx-QzmOee2pqTZ0PE_-Ek6p4KbZ+JJJ=HAvw@mail.gmail.com>
- <CAN8Q1EfPghRrKtgeO_gr_VZ26_dHQUpRkBqbfYshZf0KeGm=oA@mail.gmail.com>
- <CAN8Q1EdCtmCE9HPhhjHakRk77Mw4AQ1-tPLm1SQcS0ELrgy3Lg@mail.gmail.com>
- <5587ef25-7694-4aa9-8a73-98e589b61cae@kernel-space.org>
- <CAN8Q1Ee6LhiLadKDjFzBghzENEDaWjLL9OBDiOpK_LnfN=DTdg@mail.gmail.com>
- <0ca9ef05-1de8-4c30-b1e7-084a57c97828@kernel-space.org>
- <CAN8Q1EdrY9KfGG=RFGshEZGXhw1JNT6C_X6zs2kW8ecw3yut6w@mail.gmail.com>
-In-Reply-To: <CAN8Q1EdrY9KfGG=RFGshEZGXhw1JNT6C_X6zs2kW8ecw3yut6w@mail.gmail.com>
-From: Peter LaDow <pladow@gmail.com>
-Date: Tue, 30 Jul 2024 12:09:48 -0700
-Message-ID: <CAN8Q1Ed-dxKMLF3enY-zCE57YoQ9yisfyTULWos4JSMA+8qbfQ@mail.gmail.com>
-Subject: Re: M68K Vectors
-To: Angelo Dureghello <angelo@kernel-space.org>
-Cc: Huan Wang <alison.wang@nxp.com>, u-boot@lists.denx.de
+References: <72e02ed6-f8c3-4caa-8ae6-2cef00a2ddd2@gmx.de>
+ <CAFLszTjBw9wfFjwn2UeM=TNYCjCQP3xoBCmfv8WcWs515nOKxw@mail.gmail.com>
+ <CAC_iWjJbs=i6gWHzeHbsHwFv5BC+6PWy0NesKFFWC1=ERAvcQw@mail.gmail.com>
+ <CAFLszTgkwUvou2i0zVCxJPDqGQPxbKUHE41gMs5Kt1_SToL9LA@mail.gmail.com>
+ <CAC_iWjKvx8VEnAuotXLm41YVn24-ijNjh5PW6kBcb1TqV9o_og@mail.gmail.com>
+ <CAFLszTg7aGk=nb+C1ovNu3QZk3d-vGAOsS5RzzUvdBCaMkyArw@mail.gmail.com>
+ <CAC_iWjLcJ-PkX2d0LH-Tj8M513t-R1Hy1qNAZNz3Cjw4P+K2BA@mail.gmail.com>
+ <CAFLszTivmh=ig-Zoe721B8wHqGRyFZ=R9_4Wo6ZhfmxNLO0+Bg@mail.gmail.com>
+ <CAC_iWjJapZD2dvzVh9XGn9hy0YecoyDN6-vtMASv7oF_j8LS-A@mail.gmail.com>
+ <CAFLszTgQuvgCHrV2Eej6rrnaxRt_xwtJrdgQtuhmp1oU6pgMGg@mail.gmail.com>
+ <20240730152447.GU989285@bill-the-cat>
+In-Reply-To: <20240730152447.GU989285@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 30 Jul 2024 13:42:17 -0600
+Message-ID: <CAFLszTjVXzmwqbciQSF7a=teuhx_xSJHL2jy23oK5BgfP_3EDg@mail.gmail.com>
+Subject: Re: [PATCH 5/6] efi: Use malloc() for the EFI pool
+To: Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,378 +96,272 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A bit more digging.
+Hi Tom,
 
-When I follow the chain through the PLT call to memset, it does some
-lookups in the .got.plt section.  And even on the MCF5445x, it seems
-to ultimately result in a lookup of 0x00000000.
-
-Here's the chain for the MCF5445x.  I did the manually using
-objdump/nm, but I think the math works out (I did a similar thing for
-my board).
-
-Here's the call in board_init_f_init_reserve:
-
-  47e0ad62:       61ff 0001 4ae0  bsrl 47e1f844 <_etext+0x2d0>
-
-Now, 0x47e1f844 is in .plt.  The code here:
-
-  47e1f844:       203c 0000 c046  movel #49222,%d0
-  47e1f84a:       207b 08fa       moveal %pc@(47e1f846 <.plt+0x2d2>,%d0:l),=
-%a0
-  47e1f84e:       4ed0            jmp %a0@
-
-So, this does a lookup relative to PC:  0x47e1f84a + 2 (CF adds to for
-PC relative) - 6 (0xfa in the extension word) + 49222*1 (D0 register,
-scale of 1).  This PC relative lookup resolves to 0x47e2b88c, so it
-reads from this address, loads into A0, and jumps to that address.
-This address is in .got.plt:
-
-  Contents of section .got.plt:
-   ...
-   47e2b88c 47e1f850 47e1f868 47e1f880 47e1f898  G..PG..hG...G...
-
-So, the code jumps to 0x47e1f850.  The disassembly at 0x47e1f850:
-
-  47e1f850:       2f3c 0000 015c  movel #348,%sp@-
-  47e1f856:       61ff ffff fd1c  bsrl 47e1f574 <.plt>
-
-Which jumps to 0x47e1f574:
-
-  47e1f574 <.plt>:
-  47e1f574:       203c 0000 c29a  movel #49818,%d0
-  47e1f57a:       2ebb 08fa       movel %pc@(47e1f576 <.plt+0x2>,%d0:l),%sp=
-@
-  47e1f57e:       203c 0000 c294  movel #49812,%d0
-  47e1f584:       207b 08fa       moveal %pc@(47e1f580 <.plt+0xc>,%d0:l),%a=
-0
-  47e1f588:       4ed0            jmp %a0@
-
-Ultimately here we see it load more data from .got.plt (at
-0x47e1f584):  PC relative =3D 0x47e1f584 + 2 - 6 + 49812 =3D  0x47e2b814.
-This resolves to 0x47e2b814, which again is in .got.plt:
-
-  Contents of section .got.plt:
-   47e2b80c 47e2b75c 00000000 00000000 47e1f598  G..\........G...
-
-And we see at 0x47e2b814 a value of 0x00000000.  Meaning the code
-jumps to address 0.  Which cannot be correct.
-
-And this is exactly the behavior I'm seeing with my build.  My build
-gets lost on the call to memset(), because the PLT code ultimately
-resolves to call address 0x00000000.
-
-So, the question is how could this fixup be done?  Now, I do see code
-in start.S that does fixups.  But this references the .rela.dyn
-section, neither .plt nor .got.plt.  And I see no other code that does
-any fixup of .got or .got.plt.  And further, .got.plt is largely
-populated with values other than 0.  There's just these two entries.
-
-I think I'm going to reach out on the binutils list to try and get
-some insight into what is occurring here.
-
-Thanks,
-Pete
-
-
-On Tue, Jul 30, 2024 at 8:43=E2=80=AFAM Peter LaDow <pladow@gmail.com> wrot=
-e:
+On Tue, 30 Jul 2024 at 09:24, Tom Rini <trini@konsulko.com> wrote:
 >
-> Thank you for the feedback.
->
-> It looks like the mcf5441x executes from RAM.  At least looking at the
-> configuration for the stmark2, which defines CONFIG_SERIAL_BOOT and
-> CONFIG_SF_SBF.  This appears to copy from an external device using the
-> DSPI into RAM.  After loaded, _start finally executes.  Interestingly,
-> the offset to _start appears to be hard-coded.
->
-> First, it forces _start to offset 0x400:
->
-> .text
-> . =3D 0x400
-> .globl _start
-> _start:
->
-> Then the call to start is by a fixed offset:
->
-> /* jump to memory and execute */
-> move.l #(CONFIG_TEXT_BASE + 0x400), %a0
-> jmp (%a0)
->
-> Where CONFIG_TEXT_BASE is set to 0x47e00000.  The code is odd in this
-> case as it appears to use the vector table for the DSPI boot,
-> squeezing all that functionality into less than 1kbyte of memory.
->
-> However, once _start runs, the code is pretty much the same as the
-> other Coldfire variants.  It calls board_init_f_init_reserve, which
-> calls memset through the same PLT mechanism.  What isn't clear to me
-> (yet) is why that PLT mechanism works for you, but not for me.  But I
-> suspect it is because I'm trying to execute directly from flash.
->
-> Thanks,
-> Pete
->
-> On Tue, Jul 30, 2024 at 6:50=E2=80=AFAM Angelo Dureghello
-> <angelo@kernel-space.org> wrote:
+> On Tue, Jul 30, 2024 at 09:18:02AM -0600, Simon Glass wrote:
+> > Hi Ilias,
 > >
-> > Hi Peter,
-> >
-> > unfortunately i don't have any of such 548x boards, so cannot
-> > help that much, but if you can manage to have it working, it will
-> > be great.
-> >
-> > Considering 548x is with mmu, mcf5441x startup code may be helpful,
-> > even if it's isa_C (your is isa_B).
-> >
-> > mcf5441x is tested here, and it is actually doing an elf32 relocation,
-> > as you can see in start.S "fixloop". It is done after the "copy to ram"=
-.
-> >
-> > I would proceed with small steps, setting some debug output (or gpio ou=
-tput)
-> > to see where the startup code fails.
-> >
-> > Check also the makefile options in arch/m68k/cpu/Makefile, see the -fPI=
-C.
-> >
-> > I follow the thread.
-> >
-> > Thanks,
-> > regards,
-> > angelo
-> >
-> >
-> > On 29/07/24 4:27 PM, Peter LaDow wrote:
-> > > It's not solved yet.  I forgot I had hard coded some items.
+> > On Tue, 30 Jul 2024 at 08:54, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
 > > >
-> > > I will give the flavors you suggest a try.
+> > > On Tue, 30 Jul 2024 at 17:38, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Ilias,
+> > > >
+> > > > On Tue, 30 Jul 2024 at 02:20, Ilias Apalodimas
+> > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > >
+> > > > > On Mon, 29 Jul 2024 at 18:28, Simon Glass <sjg@chromium.org> wrote:
+> > > > > >
+> > > > > > Hi Ilias,
+> > > > > >
+> > > > > > On Mon, 29 Jul 2024 at 04:02, Ilias Apalodimas
+> > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > >
+> > > > > > > Hi Simon
+> > > > > > >
+> > > > > > > On Fri, 26 Jul 2024 at 17:54, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > >
+> > > > > > > > Hi Ilias,
+> > > > > > > >
+> > > > > > > > On Fri, 26 Jul 2024 at 02:31, Ilias Apalodimas
+> > > > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > > > >
+> > > > > > > > > Hi Simon,
+> > > > > > > > >
+> > > > > > > > >
+> > > > > > > > > On Fri, 26 Jul 2024 at 02:33, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > > > >
+> > > > > > > > > > Hi Heinrich,
+> > > > > > > > > >
+> > > > > > > > > > On Thu, 25 Jul 2024 at 09:54, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > On 25.07.24 15:56, Simon Glass wrote:
+> > > > > > > > > > > > This API call is intended for allocating small amounts of memory,
+> > > > > > > > > > > > similar to malloc(). The current implementation rounds up to whole pages
+> > > > > > > > > > > > which can waste large amounts of memory. It also implements its own
+> > > > > > > > > > > > malloc()-style header on each block.
+> > > > > > > > > > > >
+> > > > > > > > > > > > Use U-Boot's built-in malloc() instead, to avoid these problems:
+> > > > > > > > > > > >
+> > > > > > > > > > > > - it should normally be large enough for pool allocations
+> > > > > > > > > > > > - if it isn't we can enforce a minimum size for boards which use
+> > > > > > > > > > > >    EFI_LOADER
+> > > > > > > > > > > > - the existing mechanism may create an unwatned entry in the memory map
+> > > > > > > > > > > > - it is used for most EFI allocations already
+> > > > > > > > > > > >
+> > > > > > > > > > > > One side effect is that this seems to be showing up some bugs in the
+> > > > > > > > > > > > EFI code, since the malloc() pool becomes corrupted with some tests.
+> > > > > > > > > > > > This has likely crept in due to the very large gaps between allocations
+> > > > > > > > > > > > (around 4KB), which provides a lot of leeway when the allocation size is
+> > > > > > > > > > > > too small. Work around this by increasing the size for now, until these
+> > > > > > > > > > > > (presumed) bugs are located.
+> > > > > > > > > > > >
+> > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > > > > ---
+> > > > > > > > > > > >
+> > > > > > > > > > > >   lib/efi_loader/efi_memory.c | 93 ++++++++-----------------------------
+> > > > > > > > > > > >   1 file changed, 19 insertions(+), 74 deletions(-)
+> > > > > > > > > > > >
+> > > > > > > > > > > > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> > > > > > > > > > > > index 2945f5648c7..fabe9e3a87a 100644
+> > > > > > > > > > > > --- a/lib/efi_loader/efi_memory.c
+> > > > > > > > > > > > +++ b/lib/efi_loader/efi_memory.c
+> > > > > > > > > > > > @@ -80,45 +80,6 @@ static LIST_HEAD(efi_mem);
+> > > > > > > > > > > >   void *efi_bounce_buffer;
+> > > > > > > > > > > >   #endif
+> > > > > > > > > > > >
+> > > > > > > > > > > > -/**
+> > > > > > > > > > > > - * struct efi_pool_allocation - memory block allocated from pool
+> > > > > > > > > > > > - *
+> > > > > > > > > > > > - * @num_pages:       number of pages allocated
+> > > > > > > > > > > > - * @checksum:        checksum
+> > > > > > > > > > > > - * @data:    allocated pool memory
+> > > > > > > > > > > > - *
+> > > > > > > > > > > > - * U-Boot services each UEFI AllocatePool() request as a separate
+> > > > > > > > > > > > - * (multiple) page allocation. We have to track the number of pages
+> > > > > > > > > > > > - * to be able to free the correct amount later.
+> > > > > > > > > > > > - *
+> > > > > > > > > > > > - * The checksum calculated in function checksum() is used in FreePool() to avoid
+> > > > > > > > > > > > - * freeing memory not allocated by AllocatePool() and duplicate freeing.
+> > > > > > > > > > > > - *
+> > > > > > > > > > > > - * EFI requires 8 byte alignment for pool allocations, so we can
+> > > > > > > > > > > > - * prepend each allocation with these header fields.
+> > > > > > > > > > > > - */
+> > > > > > > > > > > > -struct efi_pool_allocation {
+> > > > > > > > > > > > -     u64 num_pages;
+> > > > > > > > > > > > -     u64 checksum;
+> > > > > > > > > > > > -     char data[] __aligned(ARCH_DMA_MINALIGN);
+> > > > > > > > > > > > -};
+> > > > > > > > > > > > -
+> > > > > > > > > > > > -/**
+> > > > > > > > > > > > - * checksum() - calculate checksum for memory allocated from pool
+> > > > > > > > > > > > - *
+> > > > > > > > > > > > - * @alloc:   allocation header
+> > > > > > > > > > > > - * Return:   checksum, always non-zero
+> > > > > > > > > > > > - */
+> > > > > > > > > > > > -static u64 checksum(struct efi_pool_allocation *alloc)
+> > > > > > > > > > > > -{
+> > > > > > > > > > > > -     u64 addr = (uintptr_t)alloc;
+> > > > > > > > > > > > -     u64 ret = (addr >> 32) ^ (addr << 32) ^ alloc->num_pages ^
+> > > > > > > > > > > > -               EFI_ALLOC_POOL_MAGIC;
+> > > > > > > > > > > > -     if (!ret)
+> > > > > > > > > > > > -             ++ret;
+> > > > > > > > > > > > -     return ret;
+> > > > > > > > > > > > -}
+> > > > > > > > > > > > -
+> > > > > > > > > > > >   /**
+> > > > > > > > > > > >    * efi_mem_cmp() - comparator function for sorting memory map
+> > > > > > > > > > > >    *
+> > > > > > > > > > > > @@ -681,13 +642,10 @@ void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align)
+> > > > > > > > > > > >    * @buffer: allocated memory
+> > > > > > > > > > > >    * Return:  status code
+> > > > > > > > > > > >    */
+> > > > > > > > > > > > -efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size, void **buffer)
+> > > > > > > > > > > > +efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
+> > > > > > > > > > > > +                            void **buffer)
+> > > > > > > > > > > >   {
+> > > > > > > > > > > > -     efi_status_t r;
+> > > > > > > > > > > > -     u64 addr;
+> > > > > > > > > > > > -     struct efi_pool_allocation *alloc;
+> > > > > > > > > > > > -     u64 num_pages = efi_size_in_pages(size +
+> > > > > > > > > > > > -                                       sizeof(struct efi_pool_allocation));
+> > > > > > > > > > > > +     void *ptr;
+> > > > > > > > > > > >
+> > > > > > > > > > > >       if (!check_allowed())
+> > > > > > > > > > > >               return EFI_UNSUPPORTED;
+> > > > > > > > > > > > @@ -700,16 +658,21 @@ efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
+> > > > > > > > > > > >               return EFI_SUCCESS;
+> > > > > > > > > > > >       }
+> > > > > > > > > > >
+> > > > > > > > > > > Unfortunately this patch does not match the UEFI specification:
+> > > > > > > > > > >
+> > > > > > > > > > > Two different memory types cannot reside in the same memory page. You
+> > > > > > > > > > > have to keep track of the memory type of each allocated memory page and
+> > > > > > > > > > > report it in GetMemoryMap().
+> > > > > > > > > >
+> > > > > > > > > > I actually hadn't thought about that. Is it implied in the spec or
+> > > > > > > > > > actually stated somewhere?
+> > > > > > > > >
+> > > > > > > > > I don't remember if it's explicitly stated, but it *really* doesn't
+> > > > > > > > > have to be. Although u-boot doesn't currently support this on modern
+> > > > > > > > > secure systems you can't have code and data mixed on the same page.
+> > > > > > > > > This would prevent you to map pages with proper permissions and take
+> > > > > > > > > advantage of CPU security features  e.g RW^X.
+> > > > > > > >
+> > > > > > > > As it stands, U-Boot's data is reported as EFI_BOOT_SERVICES_CODE
+> > > > > > > > through EFI. Perhaps the difference between EFI_BOOT_SERVICES_CODE and
+> > > > > > > > EFI_BOOT_SERVICES_DATA isn't that important?
+> > > > > > > >
+> > > > > > > > But if we did want to fix that, we could make the malloc region
+> > > > > > > > EFI_BOOT_SERVICES_DATA.
+> > > > > > > >
+> > > > > > > > >
+> > > > > > > > > In any case, the AllocatePool description reads "This function
+> > > > > > > > > allocates pages from EfiConventionalMemory as needed to grow the
+> > > > > > > > > requested pool type. All allocations are eight-byte aligned". I don't
+> > > > > > > > > think using malloc in AllocatePool is appropriate. If we ever want to
+> > > > > > > > > do that and allocate from the malloc space, we need to teach malloc
+> > > > > > > > > some EFI semantics, but that's a really bad idea.
+> > > > > > > >
+> > > > > > > > Here I don't see the difference between EFI's malloc(n) and
+> > > > > > > > memalign(8, n). I do see a lot of comments like 'use the spec', 'read
+> > > > > > > > the spec'. It seems very clear to me that the bootloader can use
+> > > > > > > > whatever algorithm it likes to provide the allocated memory for the
+> > > > > > > > pool.
+> > > > > > > >
+> > > > > > > > What sort of EFI semantics are you referring to?
+> > > > > > >
+> > > > > > > the memory type. Your patch removes the call to efi_allocate_pages
+> > > > > > > which tracks it.
+> > > > > >
+> > > > > > I can put that code back, depending on what we decide below.
+> > > > > >
+> > > > > > >
+> > > > > > > >
+> > > > > > > > >
+> > > > > > > > > >
+> > > > > > > > > > Anyway, from what I can tell, we mostly use EFI_BOOT_SERVICES_DATA.
+> > > > > > > > > > The only exception is EFI_RUNTIME_SERVICES_DATA for the runtime stuff.
+> > > > > > > > >
+> > > > > > > > > That's not entirely correct, we use a lot more than these 2.
+> > > > > > > > > EFI_LOADER_DATA, EFI_LOADER_CODE and EFI_ACPI_RECLAIM_MEMORY from a
+> > > > > > > > > quick grep
+> > > > > > > >
+> > > > > > > > Yes I did a quick grep too, but then checked each site. The first two
+> > > > > > > > are used in an EFI app, not U-Boot itself. The ACPI one is not an
+> > > > > > > > allocation.
+> > > > > > > >
+> > > > > > > > > >
+> > > > > > > > > > So perhaps we can use malloc() for EFI_BOOT_SERVICES_DATA allocations
+> > > > > > > > > > and stick with whole pages otherwise? That will mostly fix the problem
+> > > > > > > > > > I am seeing.
+> > > > > > > >
+> > > > > > > > Any comments on this?
+> > > > > > >
+> > > > > > > This violates the spec and probably breaks a few tests and the EFI
+> > > > > > > boot services API, as you are supposed to be able to define the memory
+> > > > > > > type. We might be able to control it from U-Boot, but EFI apps are
+> > > > > > > going to end up being buggy and hard to debug -- e.g an app calls
+> > > > > > > allocatePool to allocate memory that needs to be preserved at runtime.
+> > > > > >
+> > > > > > To be more specific, I am suggesting:
+> > > > > > - use malloc() for EFI_BOOT_SERVICES_DATA allocations (with no memory
+> > > > > > type since it is always that). This should cover all the U-Boot
+> > > > > > allocations and make sure they are safely within the malloc() pool
+> > > > > > - use efi_allocate_pages() for other memory types (keeping the memory
+> > > > > > type in metadata)
+> > > > > >
+> > > > >
+> > > > > Personally, I don't see the point and we deviate from the spec as
+> > > > > well. Perhaps Heinrich thinks otherwise, but the EFI spec still says
+> > > > > you need to allocate *pages* to grow the pool. What's missing from our
+> > > > > efi_allocate_pool() is the ability to merge allocations of the same
+> > > > > memory type to an existing pool assuming there's space, rather than
+> > > > > requesting a new pool of 4kb.
+> > > >
+> > > > "This function allocates pages from EfiConventionalMemory as needed to
+> > > > grow the requested pool type". So far as EFI is concerned, the
+> > > > malloc() region is in EfiConventionalMemory, so I don't see any
+> > > > deviation.
+> > > >
+> > > > Please also see below.
+> > > >
+> > > > > > >
+> > > > > > > You can switch some callsite of efi_allocate_pool to
+> > > > > > > efi_allocate_pages() internally. Will that fix the behavior?
+> > > > > >
+> > > > > > It still allocates memory 'in space' and uses 4KB for each allocation.
+> > > > > >
+> > > >
+> > > > This is the key point that doesn't seem to be coming across. The
+> > > > current allocator is allocating memory wherever it likes, potentially
+> > > > interfering with the kernel_addr_r addresses, etc. as on qemu_arm.
 > > >
-> > > I'm trying to add the MCF548x for a legacy board we have.  It's near
-> > > EOL, but we want to leverage uBoot from some in house work.
-> > >
-> > > Thanks,
-> > > Pete
-> > >
-> > > On Sun, Jul 28, 2024 at 2:04=E2=80=AFPM Angelo Dureghello
-> > > <angelo@kernel-space.org> wrote:
-> > >> Hi Peter,
-> > >>
-> > >> glad to hear you solved.
-> > >>
-> > >> As a toolchain i use those provided by kernel.org:
-> > >>
-> > >> /opt/toolchains/m68k/gcc-12.2.0-nolibc/m68k-linux/bin/m68k-linux-
-> > >>
-> > >> https://cdn.kernel.org/pub/tools/crosstool/
-> > >>
-> > >> Just out of curiosity, what's the cpu model you used ?
-> > >>
-> > >>
-> > >> Regards,
-> > >> Angelo Dureghello
-> > >>
-> > >>
-> > >> On 26/07/24 10:22 PM, Peter LaDow wrote:
-> > >>> Scratch that.  I forgot I hard coded the vector table with 0x400 to
-> > >>> test things.  Restoring _start still results in 0x00000000 for the
-> > >>> reset vector.
-> > >>>
-> > >>> On Fri, Jul 26, 2024 at 1:16=E2=80=AFPM Peter LaDow <pladow@gmail.c=
-om> wrote:
-> > >>>> I should mention I was using the gcc-m68k-linux-gnu package on Ubu=
-ntu
-> > >>>> 22.04.4, which pulled in gcc-11-m68k-linux-gnu.
-> > >>>>
-> > >>>> I just downloaded the bootlin m68k-coldfire--uclibc--stable-2024.0=
-2-1,
-> > >>>> and tried that.  It generates the proper value in the vector table
-> > >>>> (0x400 for _start).  But the call to memset is still bad:
-> > >>>>
-> > >>>> 0000f5da <board_init_f_init_reserve>:
-> > >>>>      f5da:       2f02            movel %d2,%sp@-
-> > >>>>      f5dc:       242f 0008       movel %sp@(8),%d2
-> > >>>>      f5e0:       4878 00c0       pea c0 <_vectors+0xc0>
-> > >>>>      f5e4:       42a7            clrl %sp@-
-> > >>>>      f5e6:       2f02            movel %d2,%sp@-
-> > >>>>      f5e8:       61ff 0001 4622  bsrl 23c0c <_etext+0x138>
-> > >>>>      f5ee:       2f02            movel %d2,%sp@-
-> > >>>>      f5f0:       61ff ffff ffd2  bsrl f5c4 <arch_setup_gd>
-> > >>>>      f5f6:       0682 0000 00c0  addil #192,%d2
-> > >>>>      f5fc:       4fef 0010       lea %sp@(16),%sp
-> > >>>>      f600:       2047            moveal %d7,%a0
-> > >>>>      f602:       2142 00a0       movel %d2,%a0@(160)
-> > >>>>      f606:       241f            movel %sp@+,%d2
-> > >>>>      f608:       4e75            rts
-> > >>>>
-> > >>>> Note "bsrl 23c0c" which points beyond _etext.
-> > >>>>
-> > >>>> On Fri, Jul 26, 2024 at 12:59=E2=80=AFPM Fabio Estevam <festevam@g=
-mail.com> wrote:
-> > >>>>> Adding the Coldfire maintainers on Cc.
-> > >>>>>
-> > >>>>> On Fri, Jul 26, 2024 at 4:46=E2=80=AFPM Peter LaDow <pladow@gmail=
-.com> wrote:
-> > >>>>>> After some digging it appears that this is a toolchain issue.  I=
-t seems the
-> > >>>>>> linker fixups are sometimes not computed correctly.  For example=
-, in
-> > >>>>>> board_init_f_init_reserve, the object file disassembled has:
-> > >>>>>>
-> > >>>>>> 00000000 <board_init_f_init_reserve>:
-> > >>>>>>     0:   2f02            movel %d2,%sp@-
-> > >>>>>>     2:   242f 0008       movel %sp@(8),%d2
-> > >>>>>>     6:   4878 00c0       pea c0 <board_init_f_init_reserve+0xc0>
-> > >>>>>>     a:   42a7            clrl %sp@-
-> > >>>>>>     c:   2f02            movel %d2,%sp@-
-> > >>>>>>     e:   61ff 0000 0000  bsrl 10 <board_init_f_init_reserve+0x10=
+> > > It is, but I don't think using malloc is solving it. It's papering
+> > > over the problem, because if someone in the future launches an EFI app
+> > > or allocates EFI memory with a different type you are back on the same
+> > > problem.
+> >
+> > It is certainly solving this problem.
+> >
+> > Once the app is launched it is OK to overwrite memory...after all it
+> > has been loaded and is running. The issue is that these little
+> > allocations can end up anywhere in memory. Did you see the qemu_arm
+> > note?
 >
-> > >>>>>>    14:   2f02            movel %d2,%sp@-
-> > >>>>>>    16:   61ff 0000 0000  bsrl 18 <board_init_f_init_reserve+0x18=
->
-> > >>>>>>    1c:   0682 0000 00c0  addil #192,%d2
-> > >>>>>>    22:   4fef 0010       lea %sp@(16),%sp
-> > >>>>>>    26:   2047            moveal %d7,%a0
-> > >>>>>>    28:   2142 00a0       movel %d2,%a0@(160)
-> > >>>>>>    2c:   241f            movel %sp@+,%d2
-> > >>>>>>    2e:   4e75            rts
-> > >>>>>>
-> > >>>>>> But when I disassemble the final linked u-boot output:
-> > >>>>>>
-> > >>>>>> 0000f646 <board_init_f_init_reserve>:
-> > >>>>>>      f646:       2f02            movel %d2,%sp@-
-> > >>>>>>      f648:       242f 0008       movel %sp@(8),%d2
-> > >>>>>>      f64c:       4878 00c0       pea c0 <_vectors+0xc0>
-> > >>>>>>      f650:       42a7            clrl %sp@-
-> > >>>>>>      f652:       2f02            movel %d2,%sp@-
-> > >>>>>>      f654:       61ff 0001 44da  bsrl 23b30 <_etext+0x138>
-> > >>>>>>      f65a:       2f02            movel %d2,%sp@-
-> > >>>>>>      f65c:       61ff ffff ffd2  bsrl f630 <arch_setup_gd>
-> > >>>>>>      f662:       0682 0000 00c0  addil #192,%d2
-> > >>>>>>      f668:       4fef 0010       lea %sp@(16),%sp
-> > >>>>>>      f66c:       2047            moveal %d7,%a0
-> > >>>>>>      f66e:       2142 00a0       movel %d2,%a0@(160)
-> > >>>>>>      f672:       241f            movel %sp@+,%d2
-> > >>>>>>      f674:       4e75            rts
-> > >>>>>>
-> > >>>>>> Note the pea c0 instruction.  The object file has
-> > >>>>>> board_init_f_init_reserve+0xc0 as the argument, but the final li=
-nker has
-> > >>>>>> 0xc0, meaning board_init_f_init_reserve is being set to 0 after =
-linking.
-> > >>>>>>
-> > >>>>>> Also, note the first bsrl instruction, which is not setup correc=
-tly
-> > >>>>>> either.  This is a call to memset.  This points to _etext+0x138,=
- which is
-> > >>>>>> not a code region Note that 0x239f8 + 0x138 =3D 0x23b30.  But in=
- the final
-> > >>>>>> uboot, memset is at 0x1f030.
-> > >>>>>>
-> > >>>>>> In the call to memset(),  objdump shows the relocation:
-> > >>>>>>
-> > >>>>>> RELOCATION RECORDS FOR [.text.board_init_f_init_reserve]:
-> > >>>>>> OFFSET   TYPE              VALUE
-> > >>>>>> 00000010 R_68K_PLT32       memset
-> > >>>>>> 00000018 R_68K_PLT32       arch_setup_gd
-> > >>>>>>
-> > >>>>>> So it seems only when linking outside the same compilation unit =
-that the
-> > >>>>>> relocations aren't set correctly.
-> > >>>>>>
-> > >>>>>> I'm not sure where to look for a solution.  Or how to search for=
- an
-> > >>>>>> answer.  I've done some digging on Google, but nothing points to=
- a clear
-> > >>>>>> answer.  Anyone seen something similar?
-> > >>>>>>
-> > >>>>>> To love for the sake of being loved is human, but to love for th=
-e sake of
-> > >>>>>> loving is angelic. -- Alphonse de Lamartine.
-> > >>>>>>
-> > >>>>>>
-> > >>>>>> On Thu, Jul 25, 2024 at 14:35 Peter LaDow <pladow@gmail.com> wro=
-te:
-> > >>>>>>> I'm trying to add support for a custom Colfire based board.  I =
-have
-> > >>>>>>> things building, but the final linked vectors in start.S do not=
- point
-> > >>>>>>> to _start.  In start.S I have:
-> > >>>>>>>
-> > >>>>>>> _vectors:
-> > >>>>>>> .long   0x00000000              /* Flash offset is 0 until we s=
-etup CS0 */
-> > >>>>>>> .long   _START
-> > >>>>>>>
-> > >>>>>>> .long   _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT,=
- _FAULT
-> > >>>>>>> .long   _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT,=
- _FAULT
-> > >>>>>>> .long   _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT,=
- _FAULT
-> > >>>>>>>
-> > >>>>>>> Dumping the symbols in the final u-boot yields:
-> > >>>>>>>
-> > >>>>>>> $ m68k-linux-gnu-nm -n u-boot
-> > >>>>>>> 00000000 A __fixup_entries
-> > >>>>>>> 00000000 A __got2_entries
-> > >>>>>>> 00000000 t _vectors
-> > >>>>>>> 00000400 T _start
-> > >>>>>>> 0000047e T relocate_code
-> > >>>>>>> 000004ae t fixloop
-> > >>>>>>>
-> > >>>>>>> But then dumping the raw binary:
-> > >>>>>>>
-> > >>>>>>> u-boot:     file format elf32-m68k
-> > >>>>>>>
-> > >>>>>>> Contents of section .text:
-> > >>>>>>> 00000 00000000 00000000 00000516 00000516  ................
-> > >>>>>>> 00010 00000516 00000516 00000516 00000516  ................
-> > >>>>>>> 00020 00000516 00000516 00000516 00000516  ................
-> > >>>>>>> 00030 00000516 00000516 00000516 00000516  ................
-> > >>>>>>>
-> > >>>>>>> Note at offset 4 it is 0x00000000, not 0x00000400 as I'd expect=
-.
-> > >>>>>>>
-> > >>>>>>> The final linker script has:
-> > >>>>>>>
-> > >>>>>>> OUTPUT_ARCH(m68k)
-> > >>>>>>> ENTRY(_start)
-> > >>>>>>> SECTIONS
-> > >>>>>>> {
-> > >>>>>>> .text :
-> > >>>>>>> {
-> > >>>>>>>    arch/m68k/cpu/mcf548x/start.o (.text*)
-> > >>>>>>>    . =3D DEFINED(env_offset) ? env_offset : .; env/embedded.o(.=
-text*);
-> > >>>>>>>    *(.text*)
-> > >>>>>>> }
-> > >>>>>>>
-> > >>>>>>>
-> > >>>>>>> It is difficult to search the archives, and so far I haven't fo=
-und
-> > >>>>>>> anything.  Any help would be appreciated.
-> > >>>>>>>
-> > >>>>>>> --
-> > >>>>>>> To love for the sake of being loved is human, but to love for t=
-he sake
-> > >>>>>>> of loving is angelic. -- Alphonse de Lamartine.
-> > >>>>
-> > >>>> --
-> > >>>> To love for the sake of being loved is human, but to love for the =
-sake
-> > >>>> of loving is angelic. -- Alphonse de Lamartine.
-> > >>>
-> > >
-> > >
->
->
->
-> --
-> To love for the sake of being loved is human, but to love for the sake
-> of loving is angelic. -- Alphonse de Lamartine.
+> Isn't this another part of why we need the LMB rework? So that
+> kernel_addr_r, et al, can be marked as reserved.
 
+If we mark them as reserved, we won't be able to load a file into that
+region, so boot scripts will fail.
 
+Please take a look at the whole series and let me know if there is
+anything missing from the descriptions I have given. I have had this
+problem in the back of my mind for some time...but just a few hours of
+investigation was enough to determine that it really is broken.
 
---
-To love for the sake of being loved is human, but to love for the sake
-of loving is angelic. -- Alphonse de Lamartine.
+Regards,
+Simon
