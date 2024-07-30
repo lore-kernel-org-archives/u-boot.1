@@ -4,135 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F02EFC3DA70
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 13:50:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA20CC3DA70
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 13:50:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A38F887E8;
-	Tue, 30 Jul 2024 15:50:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 0378D88820;
+	Tue, 30 Jul 2024 15:50:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=kernel-space.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="KhlPJ+tJ";
+	dkim=pass (1024-bit key; unprotected) header.d=kernel-space.org header.i=@kernel-space.org header.b="ny1+n9RP";
+	dkim=pass (1024-bit key) header.d=kernel-space.org header.i=@kernel-space.org header.b="pX5kjZLl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88B89887B9; Tue, 30 Jul 2024 15:50:33 +0200 (CEST)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2415::601])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E1B218881F; Tue, 30 Jul 2024 15:50:48 +0200 (CEST)
+Received: from mail.kernel-space.org (mail.kernel-space.org [195.201.34.187])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3267487BF4
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 15:50:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 698EE87BF4
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 15:50:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=kernel-space.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eAllmdHRdVyF8jmdKcrSf5wlEzuLlx/Nz8HFgZLAe294t72Y306reM3Y+SxgV7KHDk+VzkrOpzm0MhmHt+ZBH4nhl5xT8m+sHcKzZcVuG+SChuF91WmzwYzqkmFuzm8NcpTBc4DTQ94E/lTzuDsb5WULwaRPfFV9yDrvHDTC4hw+Z6e2+NR8wdUSDvgGhaAM1WbeS4rRSl5yOnm4KN/NCQgLf3HsOZJLrkOa481ANOZJzLFPNIP1tmFnd4zSqojrRWjUbqVO4y4eJgT9qDW+MEYm37bk2/EYu1hqTjsY7695nvLOOl3XsPUin3hJE164joZKwITqJk4uPgWC07y1WA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/9BNbGYo07k87fKLn2cXoD3mDKXA9xQ0GawCv4zVkPI=;
- b=yXsytIQoZS0LwWVqmaSpXnpJb3AwkllOirx1S50ZB7tuKX0z0ujwOxprCVFEkPgZJmylAhxMQ0m6lWvJQB0ecMGwMIIxYsQGEdpLZi4qri60ydOofNvifbIYVk5BDf+Gs7DnA1Dr4+J2WVenu/WY2UADWhwnAvq7kqLKLWi83/LmABhoORaxaks8kilDOrXPMLNz+FGE8GfC26O5Ayw+dDT+Q1vwKznkndaThclgTqY1JMFAF/iVKq37OPe/xZcC8V46PBmOD7fqoPaMt1j7uX4Dm4OP+5OKrUhDw+TRSBsshxzsUAAp3/+syPRMiBpCWLb9bwehM021PFuSoO4Ouw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/9BNbGYo07k87fKLn2cXoD3mDKXA9xQ0GawCv4zVkPI=;
- b=KhlPJ+tJUV86JdkLFwz8xQnF5PKPgn6YzoT+h5ugZ29faT5FfiUiH22l3Di16cmqsIL6CJn406DCdeM3MDjpJFjQZJUCVnMIPUZzXavpo/gosPxbzi5dgGUv0/yy0XSxN8HkeDCn8MAckstWsyOb9fjlhfq5RvsM4JZH4M0GtfE=
-Received: from MN2PR19CA0044.namprd19.prod.outlook.com (2603:10b6:208:19b::21)
- by DS7PR12MB6069.namprd12.prod.outlook.com (2603:10b6:8:9f::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7807.29; Tue, 30 Jul
- 2024 13:50:28 +0000
-Received: from BL02EPF0001A100.namprd03.prod.outlook.com
- (2603:10b6:208:19b:cafe::72) by MN2PR19CA0044.outlook.office365.com
- (2603:10b6:208:19b::21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7784.28 via Frontend
- Transport; Tue, 30 Jul 2024 13:50:27 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BL02EPF0001A100.mail.protection.outlook.com (10.167.242.107) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7828.19 via Frontend Transport; Tue, 30 Jul 2024 13:50:27 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 30 Jul
- 2024 08:50:25 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Tom Rini <trini@konsulko.com>
-Subject: [PATCH] ARM: zynq: Add support for 7z010_lr and 7z020_lr
-Date: Tue, 30 Jul 2024 15:50:17 +0200
-Message-ID: <14d8905a89d1b31fbb2318512cf57eb0256c11be.1722347416.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=angelo@kernel-space.org
+Received: from kernel-space.org (localhost [127.0.0.1])
+ by kernel-space.org (OpenSMTPD) with ESMTP id e932eb22;
+ Tue, 30 Jul 2024 13:48:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=kernel-space.org; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=s1; bh=Uz
+ 0m6N0SCV2MmMGBEIiSIj1n9kc=; b=ny1+n9RPQkrqvhmd0FTcOm+QSicwfr9To9
+ DcltD4eIItMcM6WzVGMII3Z11SR2eq3BdCaxCG/Cn7jjqtvgMZrTq19kZm9OJ2Ov
+ oZzcdDVBNboim99V13C/CwOuXcKfVEuQUGVfNLTa6SKla8jhX0tMrXVXr880qj64
+ jUuzBhk5w=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=kernel-space.org; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; q=dns; s=s1; b=
+ FTiO+K3DhR1TuryeUHTsGxNBbAfPz/e6yIGRLK5IKi6TZEt+qvJ89yar7EcWNjcV
+ bjbsXldv2BrzbcaeBuz9rdKKGAaFHk2dRXad5/jQb13L/fWBjF0ub1njw8vPPUoh
+ 4gj9OC7r+ExszRp80Ut98baTVeB+K0lIXNOat3xmToE=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel-space.org;
+ s=s1; t=1722347305;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=S3t94pfAbsl/ccU0IU3qrYszK/m1yNfpSb7iglABD3E=;
+ b=pX5kjZLlUal2V5UgWRCeqlKH3Mbyd595jQyMlTbjkLDoziQLSpEIpNOLyFSTVHBGNrm0dK
+ HgqO24nhNfUnee8o+ldjNt7thPaWPKw+XZucZVTU9jA9nyYY2315tC+smMdwp8ceDCFgDd
+ 4sa64MQJvxUAGiAbeTnZb/o/br4R2j0=
+Received: from [192.168.0.2] (host-87-5-224-154.retail.telecomitalia.it
+ [87.5.224.154])
+ by kernel-space.org (OpenSMTPD) with ESMTPSA id 9eed59f6
+ (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO); 
+ Tue, 30 Jul 2024 13:48:25 +0000 (UTC)
+Message-ID: <0ca9ef05-1de8-4c30-b1e7-084a57c97828@kernel-space.org>
+Date: Tue, 30 Jul 2024 15:49:51 +0200
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2312; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=KV0M/48S5W0/6zLZJElEh6x5SrLbRv36iryajIddO5A=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhrQV72f79GdYi75p6lne8nox2/bFqxdXXP199PO/0hlJR
- 4/13Fic0BHLwiDIxCArpsgibXPlzN7KGVOELx6Wg5nDygQyhIGLUwAmIqrJMN810WP2i6hvvLva
- 92mLzy77/zrg+B+G+eGbjvIxT2SZP0nDOz+Pv/Y8k0mbHAA=
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+User-Agent: Mozilla Thunderbird
+Subject: Re: M68K Vectors
+To: Peter LaDow <pladow@gmail.com>
+Cc: Huan Wang <alison.wang@nxp.com>, u-boot@lists.denx.de
+References: <CAN8Q1EeO0C-LcC1jC=XYZM3RbFbs6sUtjbR===VUe6FYe5Utrw@mail.gmail.com>
+ <CAN8Q1Ef=eUs9qfwzhCfHA2YrFFZnKVNQVA=5mQb5Hxqi6hs5cw@mail.gmail.com>
+ <CAOMZO5BT2st6FdSx-QzmOee2pqTZ0PE_-Ek6p4KbZ+JJJ=HAvw@mail.gmail.com>
+ <CAN8Q1EfPghRrKtgeO_gr_VZ26_dHQUpRkBqbfYshZf0KeGm=oA@mail.gmail.com>
+ <CAN8Q1EdCtmCE9HPhhjHakRk77Mw4AQ1-tPLm1SQcS0ELrgy3Lg@mail.gmail.com>
+ <5587ef25-7694-4aa9-8a73-98e589b61cae@kernel-space.org>
+ <CAN8Q1Ee6LhiLadKDjFzBghzENEDaWjLL9OBDiOpK_LnfN=DTdg@mail.gmail.com>
+Content-Language: en-US
+From: Angelo Dureghello <angelo@kernel-space.org>
+In-Reply-To: <CAN8Q1Ee6LhiLadKDjFzBghzENEDaWjLL9OBDiOpK_LnfN=DTdg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0001A100:EE_|DS7PR12MB6069:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3d580a71-c3bd-4e6a-e077-08dcb09e91bb
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700013|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?DqoDw3AsP6bbzb2E7+0Ys6C+OMBEdpV8y9ylHY3Wr2z9eTa1KuuB9JsHC+aN?=
- =?us-ascii?Q?599T5rQ3g8FLqfKvqkST3E4rD/hCjNFno90cd58YUmgzazV81lu1oA/CN/5S?=
- =?us-ascii?Q?qbgYtz5UMFrfZbDdkuk/d7sFeJQE8xepxwLKfMpva2K7chKX7YYI6iHOU27F?=
- =?us-ascii?Q?rF6YYNvcGJ0nOrMrOKO2cAuoly3AnxFq2h0GeVghbPvf2TeASESOq3xrxaRi?=
- =?us-ascii?Q?Lz6EgS8IxSfl17pn8SmcZKRX6ZeP3YGQNOzB6/spTKopdu4dTnNjrneA0OBu?=
- =?us-ascii?Q?t124KHI9suJ4UWHgOwBYfgvhSDKzSSYKluj8jmtwm9dp5IfVPd2jdQ3uqKOw?=
- =?us-ascii?Q?n5CIXGE7m6kGIrD26XgSBXSu7pukpVIKGThXQTTVaIWMGAPWHXjp+iyhUUB6?=
- =?us-ascii?Q?/4Esecg0AOXofheY0ldLSSv3T+P2TNo6pfI7kynuIHHtK3iXuXpSq+SjDRQY?=
- =?us-ascii?Q?MzBnQYvcJbywy4qqbOTY+CYz6DSbRCaMLE20LV4Ki4MGSlfEa7+4zqpbs5dN?=
- =?us-ascii?Q?gRGiEdfmyF+zAiXjpnD1PS/VMDI5oeZB4GxcnxBTETHEVYHW0tA5euBFFTeQ?=
- =?us-ascii?Q?Ff6aXfmSm8D0KXtygLGVLK+NI8OOmkVLdNHLqiVmbF1M7TsCoySMXLCGUvcf?=
- =?us-ascii?Q?Gfvos9IWUkluPHYekpc2/bF2CdnGUXKTBa+gRLSJ3uuyu1BW05tp4kF1iRl4?=
- =?us-ascii?Q?8umjGSbftGF81zHrxrwBCLP0e7VxurqFHxa132tVmrC/ugjIp3sgQWgVxJPB?=
- =?us-ascii?Q?rwWmSN/qOwgN0konxvhrk3+ny2W65qpkgyyu4/JCj5A1TbYRHo7ercgPJjcq?=
- =?us-ascii?Q?okKfJf7G7pnISC3RQlvl9WgmXGfoXp7b5/4tPC2oUEmXjJ28BObbVZAb4/K0?=
- =?us-ascii?Q?ebfZoVW3+iNi3mXPFjRPnZpNWHfSw/ZArQDv8gEBo1lmYfeIJl1v6IEFafYi?=
- =?us-ascii?Q?HEyljdEVouE8f9SDEPDf2jFu8iNBtFijcfaRM/DFqxmZz0M/kZf+YWp2xPmM?=
- =?us-ascii?Q?Lkvj2yb10pUswqjJulpXmzUxNeYRWn7zhJLH1BG8YMBkUPxn8Gm9s8bRiMBD?=
- =?us-ascii?Q?f1hkmWbpRjxaR5Bh4uJ4ciE6BoHG4gYlcOqZdjm6c33hMHw2r3uF1SzohnXe?=
- =?us-ascii?Q?/fHGbHJnqkYTihiaRrwnMUvGP5l3marh4kHSI1odOVcrM9kZV5TUM4J7aPSz?=
- =?us-ascii?Q?IK0gaLmvbbeMKqdHLE+xMBresJmkn9yf1b4SAVZJyeIRGbocAj0xoQwVA1JF?=
- =?us-ascii?Q?U3Yc5C998ybMP6RVSPASR35bO/CehMQyWEerGExrv4R2r+n3XfakX24/ZWEc?=
- =?us-ascii?Q?ElXRwVWQM6L6wZfga5XCJwbrVnmgeszIOGQqczAz0bCWENGIJFWplev6KlIl?=
- =?us-ascii?Q?fuj2PByfwZB5f7uspMTWnp8poVDt/5pbYlesTSgSur/h/Qvliyyl8GdTl+Zd?=
- =?us-ascii?Q?K87GaC/S5V7KiISPsM1SAYbXFzpyKeBO?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jul 2024 13:50:27.5473 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3d580a71-c3bd-4e6a-e077-08dcb09e91bb
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A100.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6069
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,72 +92,219 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for *_lr SOCs. Without this change chips are not going to be
-properly identified and bitstream programming won't work.
+Hi Peter,
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+unfortunately i don't have any of such 548x boards, so cannot
+help that much, but if you can manage to have it working, it will
+be great.
 
- arch/arm/mach-zynq/cpu.c | 2 ++
- include/zynqpl.h         | 6 ++++++
- 2 files changed, 8 insertions(+)
+Considering 548x is with mmu, mcf5441x startup code may be helpful,
+even if it's isa_C (your is isa_B).
 
-diff --git a/arch/arm/mach-zynq/cpu.c b/arch/arm/mach-zynq/cpu.c
-index c75e453d5730..5b6d765099d4 100644
---- a/arch/arm/mach-zynq/cpu.c
-+++ b/arch/arm/mach-zynq/cpu.c
-@@ -36,9 +36,11 @@ static const struct {
- } zynq_fpga_descs[] = {
- 	ZYNQ_DESC(7Z007S),
- 	ZYNQ_DESC(7Z010),
-+	ZYNQ_DESC(7Z010_LR),
- 	ZYNQ_DESC(7Z012S),
- 	ZYNQ_DESC(7Z014S),
- 	ZYNQ_DESC(7Z015),
-+	ZYNQ_DESC(7Z020_LR),
- 	ZYNQ_DESC(7Z020),
- 	ZYNQ_DESC(7Z030),
- 	ZYNQ_DESC(7Z035),
-diff --git a/include/zynqpl.h b/include/zynqpl.h
-index d7dc064585ea..08d067d87572 100644
---- a/include/zynqpl.h
-+++ b/include/zynqpl.h
-@@ -20,9 +20,11 @@ extern struct xilinx_fpga_op zynq_op;
- 
- #define XILINX_ZYNQ_XC7Z007S	0x3
- #define XILINX_ZYNQ_XC7Z010	0x2
-+#define XILINX_ZYNQ_XC7Z010_LR	0x4
- #define XILINX_ZYNQ_XC7Z012S	0x1c
- #define XILINX_ZYNQ_XC7Z014S	0x8
- #define XILINX_ZYNQ_XC7Z015	0x1b
-+#define XILINX_ZYNQ_XC7Z020_LR	0x9
- #define XILINX_ZYNQ_XC7Z020	0x7
- #define XILINX_ZYNQ_XC7Z030	0xc
- #define XILINX_ZYNQ_XC7Z035	0x12
-@@ -32,9 +34,11 @@ extern struct xilinx_fpga_op zynq_op;
- /* Device Image Sizes */
- #define XILINX_XC7Z007S_SIZE	16669920/8
- #define XILINX_XC7Z010_SIZE	16669920/8
-+#define XILINX_XC7Z010_LR_SIZE	16669920/8
- #define XILINX_XC7Z012S_SIZE	28085344/8
- #define XILINX_XC7Z014S_SIZE	32364512/8
- #define XILINX_XC7Z015_SIZE	28085344/8
-+#define XILINX_XC7Z020_LR_SIZE	32364512/8
- #define XILINX_XC7Z020_SIZE	32364512/8
- #define XILINX_XC7Z030_SIZE	47839328/8
- #define XILINX_XC7Z035_SIZE	106571232/8
-@@ -44,9 +48,11 @@ extern struct xilinx_fpga_op zynq_op;
- /* Device Names */
- #define XILINX_XC7Z007S_NAME	"7z007s"
- #define XILINX_XC7Z010_NAME	"7z010"
-+#define XILINX_XC7Z010_LR_NAME	"xc7z010_lr"
- #define XILINX_XC7Z012S_NAME	"7z012s"
- #define XILINX_XC7Z014S_NAME	"7z014s"
- #define XILINX_XC7Z015_NAME	"7z015"
-+#define XILINX_XC7Z020_LR_NAME	"xa7z020_lr"
- #define XILINX_XC7Z020_NAME	"7z020"
- #define XILINX_XC7Z030_NAME	"7z030"
- #define XILINX_XC7Z035_NAME	"7z035"
--- 
-2.43.0
+mcf5441x is tested here, and it is actually doing an elf32 relocation,
+as you can see in start.S "fixloop". It is done after the "copy to ram".
 
+I would proceed with small steps, setting some debug output (or gpio output)
+to see where the startup code fails.
+
+Check also the makefile options in arch/m68k/cpu/Makefile, see the -fPIC.
+
+I follow the thread.
+
+Thanks,
+regards,
+angelo
+
+
+On 29/07/24 4:27 PM, Peter LaDow wrote:
+> It's not solved yet.  I forgot I had hard coded some items.
+>
+> I will give the flavors you suggest a try.
+>
+> I'm trying to add the MCF548x for a legacy board we have.  It's near
+> EOL, but we want to leverage uBoot from some in house work.
+>
+> Thanks,
+> Pete
+>
+> On Sun, Jul 28, 2024 at 2:04 PM Angelo Dureghello
+> <angelo@kernel-space.org> wrote:
+>> Hi Peter,
+>>
+>> glad to hear you solved.
+>>
+>> As a toolchain i use those provided by kernel.org:
+>>
+>> /opt/toolchains/m68k/gcc-12.2.0-nolibc/m68k-linux/bin/m68k-linux-
+>>
+>> https://cdn.kernel.org/pub/tools/crosstool/
+>>
+>> Just out of curiosity, what's the cpu model you used ?
+>>
+>>
+>> Regards,
+>> Angelo Dureghello
+>>
+>>
+>> On 26/07/24 10:22 PM, Peter LaDow wrote:
+>>> Scratch that.  I forgot I hard coded the vector table with 0x400 to
+>>> test things.  Restoring _start still results in 0x00000000 for the
+>>> reset vector.
+>>>
+>>> On Fri, Jul 26, 2024 at 1:16 PM Peter LaDow <pladow@gmail.com> wrote:
+>>>> I should mention I was using the gcc-m68k-linux-gnu package on Ubuntu
+>>>> 22.04.4, which pulled in gcc-11-m68k-linux-gnu.
+>>>>
+>>>> I just downloaded the bootlin m68k-coldfire--uclibc--stable-2024.02-1,
+>>>> and tried that.  It generates the proper value in the vector table
+>>>> (0x400 for _start).  But the call to memset is still bad:
+>>>>
+>>>> 0000f5da <board_init_f_init_reserve>:
+>>>>      f5da:       2f02            movel %d2,%sp@-
+>>>>      f5dc:       242f 0008       movel %sp@(8),%d2
+>>>>      f5e0:       4878 00c0       pea c0 <_vectors+0xc0>
+>>>>      f5e4:       42a7            clrl %sp@-
+>>>>      f5e6:       2f02            movel %d2,%sp@-
+>>>>      f5e8:       61ff 0001 4622  bsrl 23c0c <_etext+0x138>
+>>>>      f5ee:       2f02            movel %d2,%sp@-
+>>>>      f5f0:       61ff ffff ffd2  bsrl f5c4 <arch_setup_gd>
+>>>>      f5f6:       0682 0000 00c0  addil #192,%d2
+>>>>      f5fc:       4fef 0010       lea %sp@(16),%sp
+>>>>      f600:       2047            moveal %d7,%a0
+>>>>      f602:       2142 00a0       movel %d2,%a0@(160)
+>>>>      f606:       241f            movel %sp@+,%d2
+>>>>      f608:       4e75            rts
+>>>>
+>>>> Note "bsrl 23c0c" which points beyond _etext.
+>>>>
+>>>> On Fri, Jul 26, 2024 at 12:59 PM Fabio Estevam <festevam@gmail.com> wrote:
+>>>>> Adding the Coldfire maintainers on Cc.
+>>>>>
+>>>>> On Fri, Jul 26, 2024 at 4:46 PM Peter LaDow <pladow@gmail.com> wrote:
+>>>>>> After some digging it appears that this is a toolchain issue.  It seems the
+>>>>>> linker fixups are sometimes not computed correctly.  For example, in
+>>>>>> board_init_f_init_reserve, the object file disassembled has:
+>>>>>>
+>>>>>> 00000000 <board_init_f_init_reserve>:
+>>>>>>     0:   2f02            movel %d2,%sp@-
+>>>>>>     2:   242f 0008       movel %sp@(8),%d2
+>>>>>>     6:   4878 00c0       pea c0 <board_init_f_init_reserve+0xc0>
+>>>>>>     a:   42a7            clrl %sp@-
+>>>>>>     c:   2f02            movel %d2,%sp@-
+>>>>>>     e:   61ff 0000 0000  bsrl 10 <board_init_f_init_reserve+0x10>
+>>>>>>    14:   2f02            movel %d2,%sp@-
+>>>>>>    16:   61ff 0000 0000  bsrl 18 <board_init_f_init_reserve+0x18>
+>>>>>>    1c:   0682 0000 00c0  addil #192,%d2
+>>>>>>    22:   4fef 0010       lea %sp@(16),%sp
+>>>>>>    26:   2047            moveal %d7,%a0
+>>>>>>    28:   2142 00a0       movel %d2,%a0@(160)
+>>>>>>    2c:   241f            movel %sp@+,%d2
+>>>>>>    2e:   4e75            rts
+>>>>>>
+>>>>>> But when I disassemble the final linked u-boot output:
+>>>>>>
+>>>>>> 0000f646 <board_init_f_init_reserve>:
+>>>>>>      f646:       2f02            movel %d2,%sp@-
+>>>>>>      f648:       242f 0008       movel %sp@(8),%d2
+>>>>>>      f64c:       4878 00c0       pea c0 <_vectors+0xc0>
+>>>>>>      f650:       42a7            clrl %sp@-
+>>>>>>      f652:       2f02            movel %d2,%sp@-
+>>>>>>      f654:       61ff 0001 44da  bsrl 23b30 <_etext+0x138>
+>>>>>>      f65a:       2f02            movel %d2,%sp@-
+>>>>>>      f65c:       61ff ffff ffd2  bsrl f630 <arch_setup_gd>
+>>>>>>      f662:       0682 0000 00c0  addil #192,%d2
+>>>>>>      f668:       4fef 0010       lea %sp@(16),%sp
+>>>>>>      f66c:       2047            moveal %d7,%a0
+>>>>>>      f66e:       2142 00a0       movel %d2,%a0@(160)
+>>>>>>      f672:       241f            movel %sp@+,%d2
+>>>>>>      f674:       4e75            rts
+>>>>>>
+>>>>>> Note the pea c0 instruction.  The object file has
+>>>>>> board_init_f_init_reserve+0xc0 as the argument, but the final linker has
+>>>>>> 0xc0, meaning board_init_f_init_reserve is being set to 0 after linking.
+>>>>>>
+>>>>>> Also, note the first bsrl instruction, which is not setup correctly
+>>>>>> either.  This is a call to memset.  This points to _etext+0x138, which is
+>>>>>> not a code region Note that 0x239f8 + 0x138 = 0x23b30.  But in the final
+>>>>>> uboot, memset is at 0x1f030.
+>>>>>>
+>>>>>> In the call to memset(),  objdump shows the relocation:
+>>>>>>
+>>>>>> RELOCATION RECORDS FOR [.text.board_init_f_init_reserve]:
+>>>>>> OFFSET   TYPE              VALUE
+>>>>>> 00000010 R_68K_PLT32       memset
+>>>>>> 00000018 R_68K_PLT32       arch_setup_gd
+>>>>>>
+>>>>>> So it seems only when linking outside the same compilation unit that the
+>>>>>> relocations aren't set correctly.
+>>>>>>
+>>>>>> I'm not sure where to look for a solution.  Or how to search for an
+>>>>>> answer.  I've done some digging on Google, but nothing points to a clear
+>>>>>> answer.  Anyone seen something similar?
+>>>>>>
+>>>>>> To love for the sake of being loved is human, but to love for the sake of
+>>>>>> loving is angelic. -- Alphonse de Lamartine.
+>>>>>>
+>>>>>>
+>>>>>> On Thu, Jul 25, 2024 at 14:35 Peter LaDow <pladow@gmail.com> wrote:
+>>>>>>> I'm trying to add support for a custom Colfire based board.  I have
+>>>>>>> things building, but the final linked vectors in start.S do not point
+>>>>>>> to _start.  In start.S I have:
+>>>>>>>
+>>>>>>> _vectors:
+>>>>>>> .long   0x00000000              /* Flash offset is 0 until we setup CS0 */
+>>>>>>> .long   _START
+>>>>>>>
+>>>>>>> .long   _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT
+>>>>>>> .long   _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT
+>>>>>>> .long   _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT, _FAULT
+>>>>>>>
+>>>>>>> Dumping the symbols in the final u-boot yields:
+>>>>>>>
+>>>>>>> $ m68k-linux-gnu-nm -n u-boot
+>>>>>>> 00000000 A __fixup_entries
+>>>>>>> 00000000 A __got2_entries
+>>>>>>> 00000000 t _vectors
+>>>>>>> 00000400 T _start
+>>>>>>> 0000047e T relocate_code
+>>>>>>> 000004ae t fixloop
+>>>>>>>
+>>>>>>> But then dumping the raw binary:
+>>>>>>>
+>>>>>>> u-boot:     file format elf32-m68k
+>>>>>>>
+>>>>>>> Contents of section .text:
+>>>>>>> 00000 00000000 00000000 00000516 00000516  ................
+>>>>>>> 00010 00000516 00000516 00000516 00000516  ................
+>>>>>>> 00020 00000516 00000516 00000516 00000516  ................
+>>>>>>> 00030 00000516 00000516 00000516 00000516  ................
+>>>>>>>
+>>>>>>> Note at offset 4 it is 0x00000000, not 0x00000400 as I'd expect.
+>>>>>>>
+>>>>>>> The final linker script has:
+>>>>>>>
+>>>>>>> OUTPUT_ARCH(m68k)
+>>>>>>> ENTRY(_start)
+>>>>>>> SECTIONS
+>>>>>>> {
+>>>>>>> .text :
+>>>>>>> {
+>>>>>>>    arch/m68k/cpu/mcf548x/start.o (.text*)
+>>>>>>>    . = DEFINED(env_offset) ? env_offset : .; env/embedded.o(.text*);
+>>>>>>>    *(.text*)
+>>>>>>> }
+>>>>>>>
+>>>>>>>
+>>>>>>> It is difficult to search the archives, and so far I haven't found
+>>>>>>> anything.  Any help would be appreciated.
+>>>>>>>
+>>>>>>> --
+>>>>>>> To love for the sake of being loved is human, but to love for the sake
+>>>>>>> of loving is angelic. -- Alphonse de Lamartine.
+>>>>
+>>>> --
+>>>> To love for the sake of being loved is human, but to love for the sake
+>>>> of loving is angelic. -- Alphonse de Lamartine.
+>>>
+>
+>
