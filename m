@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F241C3DA70
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 14:53:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC6EEC3DA49
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 14:53:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F7B588846;
-	Tue, 30 Jul 2024 16:52:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7BC528886C;
+	Tue, 30 Jul 2024 16:52:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="eOus6u/i";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="sJrbprA2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B515887B9; Tue, 30 Jul 2024 16:52:26 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ id 8F7A08886C; Tue, 30 Jul 2024 16:52:29 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05B0D8887E
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 16:52:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 41FA5888A7
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 16:52:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,21 +28,22 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1722351134; bh=PoW3HoXVQR+apxtlo3G+xD7dw13BaMu8BBO7ctNRS3k=;
- b=eOus6u/iSfY/+aesjbjOeXW978obZj6Su9VefIKS2v/Qb+fAbdFhtcprefLDm+2yVTV9Crf1a
- yNYlJZRko/S6EnJZ49XjFkAOT7zb3XCT3j+HbinBRcK4IWbHyfHB1+R5zNgcfe8NBn7sgLjqvWI
- YiIJT0w4Vc++ZczYqwfmZbvdIv9eXo4cb5iTrjeCqMULK2abNpuTvOxalQMy6VprobH5Eo6KAMy
- YVuH2irAt41MQJwsbZTENfejEyAU65f6+dlIlcsbg0iZ6BPDdX/tAtFe6xSXjwSdHxmBqrcTFOn
- uS6NQwjaNcuAwSWTSdabUvKyA4dOCV0jBeoe+ScdFXhQ==
+ t=1722351142; bh=XPApG9WM8NUX+An6baJyUIhtrX0mImynaLj/WS/h4fM=;
+ b=sJrbprA2MyqMT9xlJYifMYflbk/tqj+OCWsRRZgfpPICMDZMzMOe7mz0kC1SrN1MgJCWmas3M
+ /kdSiwXqMeygVr/z3x2RVTRpo7a0+DYeH/fgAXlXOxlrFQkEO2JKa1CaPF+M96F2V6IokfLwTQ0
+ TCxJ5LDpnMLglJ4VOcJKGsTwzHAkzHn0E4EQzn91bDQX3u11V9bsqXZ4F9MmXtXMwMJ4cGZL15Y
+ 5jUzlpT9oUa6OU6Or51mUPETElkcR5eFfQdki7JrJJLMFCgRuJZpi4ApoT0659AvbGtlEuB4DRs
+ W/L6U/kAzl4GE65Pki1B48sn30ApiKv6wwygKluzzpxg==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Sumit Garg <sumit.garg@linaro.org>, Akash Gajjar
  <gajjar04akash@gmail.com>, u-boot@lists.denx.de, Jonas Karlman
- <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>
-Subject: [PATCH 5/8] arm64: dts: rockchip: Add io-domains to rk3308-rock-pi-s
-Date: Tue, 30 Jul 2024 14:51:45 +0000
-Message-ID: <20240730145148.849245-6-jonas@kwiboo.se>
+ <jonas@kwiboo.se>
+Subject: [PATCH 7/8] rockchip: rk3308-rock-pi-s: Remove unnecessary u-boot
+ dtsi overrides
+Date: Tue, 30 Jul 2024 14:51:47 +0000
+Message-ID: <20240730145148.849245-8-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240730145148.849245-1-jonas@kwiboo.se>
 References: <20240730145148.849245-1-jonas@kwiboo.se>
@@ -53,8 +54,8 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 66a8fe1b88a51d097cb15602
+ 149.28.215.223
+X-ForwardEmail-ID: 66a8fe2288a51d097cb1562e
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,42 +72,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The VCCIO4 io-domain used for WiFi/BT is using 1v8 IO signal voltage.
-
-Add io-domains node with the VCCIO supplies connected on the board.
+With the emmc and uart0 DT nodes updated to v6.11-rc1 in dts/upstream
+there is no longer any need to keep overrides in board u-boot dtsi.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Link: https://lore.kernel.org/r/20240521211029.1236094-13-jonas@kwiboo.se
-Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-
-[ upstream commit: 100b3bdee6035192f6d4a1847970fe004bb505fb ]
-
-(cherry picked from commit f93b224359278728f01767a4701678ada9c25570)
 ---
- dts/upstream/src/arm64/rockchip/rk3308-rock-pi-s.dts | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ arch/arm/dts/rk3308-rock-pi-s-u-boot.dtsi | 19 -------------------
+ 1 file changed, 19 deletions(-)
 
-diff --git a/dts/upstream/src/arm64/rockchip/rk3308-rock-pi-s.dts b/dts/upstream/src/arm64/rockchip/rk3308-rock-pi-s.dts
-index f6fb90e13ad0..5c702f00b27f 100644
---- a/dts/upstream/src/arm64/rockchip/rk3308-rock-pi-s.dts
-+++ b/dts/upstream/src/arm64/rockchip/rk3308-rock-pi-s.dts
-@@ -231,6 +231,16 @@
- 	status = "okay";
+diff --git a/arch/arm/dts/rk3308-rock-pi-s-u-boot.dtsi b/arch/arm/dts/rk3308-rock-pi-s-u-boot.dtsi
+index a6fb8b12da38..ff5bab316a34 100644
+--- a/arch/arm/dts/rk3308-rock-pi-s-u-boot.dtsi
++++ b/arch/arm/dts/rk3308-rock-pi-s-u-boot.dtsi
+@@ -4,17 +4,6 @@
+  */
+ #include "rk3308-u-boot.dtsi"
+ 
+-&emmc {
+-	cap-sd-highspeed;
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&emmc_clk &emmc_cmd &emmc_bus4>;
+-};
+-
+-&emmc_bus4 {
+-	bootph-pre-ram;
+-	bootph-some-ram;
+-};
+-
+ &u2phy_otg {
+ 	/delete-property/ phy-supply;
+ };
+@@ -24,14 +13,6 @@
+ 	clock-frequency = <24000000>;
  };
  
-+&io_domains {
-+	vccio0-supply = <&vcc_io>;
-+	vccio1-supply = <&vcc_io>;
-+	vccio2-supply = <&vcc_io>;
-+	vccio3-supply = <&vcc_io>;
-+	vccio4-supply = <&vcc_1v8>;
-+	vccio5-supply = <&vcc_io>;
-+	status = "okay";
-+};
-+
- &pinctrl {
- 	pinctrl-names = "default";
- 	pinctrl-0 = <&rtc_32k>;
+-&uart0_cts {
+-	bootph-all;
+-};
+-
+-&uart0_rts {
+-	bootph-all;
+-};
+-
+ &uart0_xfer {
+ 	bootph-all;
+ };
 -- 
 2.45.2
 
