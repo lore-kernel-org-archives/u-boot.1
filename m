@@ -4,66 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AE24C3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 19:45:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D619C3DA49
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 19:45:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BEE1F8882F;
-	Tue, 30 Jul 2024 21:44:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 235B4888B9;
+	Tue, 30 Jul 2024 21:44:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ORAkzV2e";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JxqtNZK5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 228D7888A5; Tue, 30 Jul 2024 21:44:50 +0200 (CEST)
-Received: from mail-vk1-xa2f.google.com (mail-vk1-xa2f.google.com
- [IPv6:2607:f8b0:4864:20::a2f])
+ id 2D2A1888B8; Tue, 30 Jul 2024 21:44:51 +0200 (CEST)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17CB18887E
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 21:44:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 151F5888A2
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 21:44:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-vk1-xa2f.google.com with SMTP id
- 71dfb90a1353d-4f887be28e7so155044e0c.0
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 12:44:48 -0700 (PDT)
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-6b7a4668f07so26320516d6.1
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 12:44:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722368687; x=1722973487; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722368688; x=1722973488; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ljMhW0YcHd/W2TDaXiS3WQ2+QMmdz4y2dpz1qoM957M=;
- b=ORAkzV2ek2ZvY98a/uxUNvs0d87JJkPDI1fUo4D0G/djC9glDiPj7VavMYiNzb8XKN
- /8jAaunucV+7/a/1yE9HOOpaCdyO7UqKeSHbKRbNMCzUrP8CmEakHypOA3QFJAR0wdY7
- w6bBeQqQ3GzmON/x+3Woylkaf4O5Z4/cjnHDE=
+ bh=PABWvx5kCOsc1iZzC9KfaoqBfVOxzUDcU/THjo6QAY8=;
+ b=JxqtNZK5JgXEfojeQx7hSwVV8vU/yuj3MNIRwxkHrqyu7X8ILGP0uDgqF3I/QZmB1V
+ upsrY41KJVg1clllGRJZdayqHvDpthKT5VeiGRpz9MIRi3j00QKRp08NL5/6tclW/Xqn
+ AwIwGhWGRueRXSl/ip4NLJ2jnOMFf8ptqqMMw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722368687; x=1722973487;
+ d=1e100.net; s=20230601; t=1722368688; x=1722973488;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ljMhW0YcHd/W2TDaXiS3WQ2+QMmdz4y2dpz1qoM957M=;
- b=NXKIxE4dUjwPputzgU69Lazqj5RW8E6TGth1RN6HOPU2Oup59Bjq0q4nBHVeajnQot
- vVy/T7D7BRCan785zSr0GWP7iGBN5rCy8t+vlhMd9fpJxbQdUmziLux13kJqaBUGocou
- EQgpW7maD7VL6uFpbtOEXT6f8m+e9hjnpu27yJaLrjta8Eg/HEBVes7gb9tfcGClw0di
- LBgf7XELjxU83DtzGjvNnKEjITXULaI0m25zZKtJYZOaoTtvkmYHvzav10WsoQfJVgKt
- +G15NPbjRThfe9SNUTjdjfCrRQ2gwVl9HVUV4SThHElzuKDs6vQXn/BwnMS1zY1DAX7M
- omgA==
-X-Gm-Message-State: AOJu0Yzk1H25mU7/Mk1W+8c0X9IGmVIWo2xlNocm6HXBg8NUE9QmmY1C
- cKusw1VIoJV93GiajK8AT9jFGf7HH71beg7nUPZyFgRA2myjYX1BVAW7VuFkHSmHiy/L+qiPS7P
- i5c38BGY4dWzUU0Qv0vo98aJ0wkvQ8zmS/oDD
-X-Google-Smtp-Source: AGHT+IEKf8nOo94cb3YVaZy0H69xSrTdMHbEMvZPOj8ZThx9BIerVYKpdWoiGqinOIZ83+WNXu9WvPAFxbww8lNHztA=
-X-Received: by 2002:a05:6122:1d4b:b0:4f5:199b:2a61 with SMTP id
- 71dfb90a1353d-4f6e697fb3fmr15190124e0c.9.1722368686940; Tue, 30 Jul 2024
- 12:44:46 -0700 (PDT)
+ bh=PABWvx5kCOsc1iZzC9KfaoqBfVOxzUDcU/THjo6QAY8=;
+ b=ipoE9Hu+KIh0+dk/f+fMXEW4EF1baDKFJgpHmVv6ENZKx0iQv0cjZ8X71PMSY8NycP
+ N0/VP5TK9krOWWma4aOf40W9XU5Llq6jGgf7wLGJd5hJNuO7ZhJJ27hEgVin4LsiCohF
+ ZX5ImkpeI/8Rl9ex8xRVhvk3ZfOPDn4b1kj1blaejEDloX6TjQgdEBNk3bFPafhdPRNN
+ +3YEZR9zjH+0zBP3y5O2eB6k7ujCwuVn/vjmPjEzOXMjXtt+xJWPs57VBwpZRVIzJEVU
+ PHWfuG4fC9U9zmfzZtJ/KCuwAS/6cJ215c9FzeWnaO5HP7RUTX2Ov5KNexaFMPADMLSM
+ GuUw==
+X-Gm-Message-State: AOJu0YwwfPXQAnjWg3eOvKmSLT86eoL0Iup5a68WaFdUvAo5DWJGWPoG
+ lYNSjtMICA/nT2+xLlaaxZjWGfBsF23OU1xsN9gAqMf1pIU5H17Q8zUq22gAa6QTJXtexLcmSvi
+ 7QSiCDrxCQw4oMJiIXivd7TgtXQp4qWvU24Pa
+X-Google-Smtp-Source: AGHT+IHKSYFh10KGvv3iapluzGhbO8Sc/Hnopp2wGsNZyVny9nLicpUrNPNDfLqg3IGq+DJ/MTBcEyHZOlQnm5c9Ffo=
+X-Received: by 2002:a05:6214:2261:b0:6b5:1976:98ac with SMTP id
+ 6a1803df08f44-6bb55a6f10bmr165945036d6.28.1722368687958; Tue, 30 Jul 2024
+ 12:44:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240730111132.1097315-1-sughosh.ganu@linaro.org>
- <20240730111132.1097315-2-sughosh.ganu@linaro.org>
-In-Reply-To: <20240730111132.1097315-2-sughosh.ganu@linaro.org>
+ <20240730111132.1097315-3-sughosh.ganu@linaro.org>
+In-Reply-To: <20240730111132.1097315-3-sughosh.ganu@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 30 Jul 2024 13:44:36 -0600
-Message-ID: <CAFLszTjpjxtJZGsN=WnBQN42yEpfeETviAMVt0_umN_rzkQPKg@mail.gmail.com>
-Subject: Re: [PATCH 2/5] efi_memory: use list_count_nodes() to count list
- entries
+Date: Tue, 30 Jul 2024 13:44:37 -0600
+Message-ID: <CAFLszTiW+iptGpeV_Ou+dRgTTrtvVuXq6+ickgwyzD0GXc+6gw@mail.gmail.com>
+Subject: Re: [PATCH 3/5] efi_memory: avoid possible null pointer dereference
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -86,12 +85,43 @@ X-Virus-Status: Clean
 
 On Tue, 30 Jul 2024 at 05:11, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Use the API function list_count_nodes() to count the number of EFI
-> memory map entries.
+> Populate the previous memory descriptor node pointer only after it's
+
+its
+
+> parent struct has been initialised. The compiler fixes this logic to
+> do the right thing, but it is better to have correct code in place.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
->  lib/efi_loader/efi_memory.c | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
+>  lib/efi_loader/efi_memory.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+
+>
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index bfadd6bd41..8d4f6e339d 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -138,7 +138,7 @@ static void efi_mem_sort(void)
+>                 merge_again = false;
+>                 list_for_each(lhandle, &efi_mem) {
+>                         struct efi_mem_list *lmem;
+> -                       struct efi_mem_desc *prev = &prevmem->desc;
+> +                       struct efi_mem_desc *prev;
+>                         struct efi_mem_desc *cur;
+>                         uint64_t pages;
+>
+> @@ -149,6 +149,7 @@ static void efi_mem_sort(void)
+>                         }
+>
+>                         cur = &lmem->desc;
+> +                       prev = &prevmem->desc;
+>
+>                         if ((desc_get_end(cur) == prev->physical_start) &&
+>                             (prev->type == cur->type) &&
+> --
+> 2.34.1
+>
