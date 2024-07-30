@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23CB4C3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 14:52:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B62C2C3DA70
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 14:52:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E91288872;
-	Tue, 30 Jul 2024 16:52:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A082B888B8;
+	Tue, 30 Jul 2024 16:52:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="tt1RHffd";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="DmpVegN6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73FC88887A; Tue, 30 Jul 2024 16:52:17 +0200 (CEST)
+ id 42E60887B9; Tue, 30 Jul 2024 16:52:20 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E6098882C
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 16:52:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 730FF8887E
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 16:52:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,22 +28,22 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1722351126; bh=5O+JIB0+O5S2c2euHG8pgoqSi1gJqJRicyf+0O4dXQs=;
- b=tt1RHffdmlh7OOipzRZYZCVJhuQCR5Mylc1CqVMVJxJHGzE4EdwYBpkl04J3atzxD9BYj2Y2h
- Ksn6g8OjejMCCSmY1veGBTXUgFch3JmDH+2BliW/oFTff6YFwyMMTYfsj21OMge1J6rAHcESwF0
- 1MnuUCopnVtOyqcL3ZV0X1dUyqAJ57Y14c7eqE5hw6HHhTNVIV28YA5eub+r9chdKjIYXgzldBt
- RETkrCVvLC3YIy+B5t1NamMjQnqtIxEK3FdEP7EUG5zytzEmuGhn+4zbY6J+MItDsm1M/geTojt
- x99x4clIbC3Ny8c9ZmNSbJ/JPGcUHMR/ytrU94OeG+BA==
+ t=1722351132; bh=0rY/AxUJ5FK6sLobPVxQSLiI1sFTwIw2DCoHTuEAE0w=;
+ b=DmpVegN6XKHCW5b6PugPSsiX6PlzXu9WupVwbHPjmEtA1OFVpJOCBA3J+2mr4/YV/CGX6zMAS
+ q3yinr9Z1vQ6kixJ4+oJKSz6lsLhyGNMbOC6Vnx93RI4g1yqI/uL/+yl6T7AbFMc+UGOQn1x3Y9
+ igXDyaOD0GD79Rf0DoNGo+U3Zi5eEE5k5/yDNG8QjXgNTuhp6oHZ0Vo3RR81jrj9zFfZEpkAPba
+ hFJP2/XUSz0O41I2rGBCkOW4BhtBEP/ryNmaxZzrRqDgXojghNk4JvAzfKWKSMmdvUeHzu9OzJN
+ 5iEOp3gKh+JwUB/BD/GsYr7Tc0c1CLKTatxtOsJe8Myg==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Sumit Garg <sumit.garg@linaro.org>, Akash Gajjar
  <gajjar04akash@gmail.com>, u-boot@lists.denx.de, Jonas Karlman
  <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>
-Subject: [PATCH 2/8] arm64: dts: rockchip: Add sdmmc related properties on
+Subject: [PATCH 4/8] arm64: dts: rockchip: Add mdio and ethernet-phy nodes to
  rk3308-rock-pi-s
-Date: Tue, 30 Jul 2024 14:51:42 +0000
-Message-ID: <20240730145148.849245-3-jonas@kwiboo.se>
+Date: Tue, 30 Jul 2024 14:51:44 +0000
+Message-ID: <20240730145148.849245-5-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240730145148.849245-1-jonas@kwiboo.se>
 References: <20240730145148.849245-1-jonas@kwiboo.se>
@@ -55,7 +55,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 66a8fe1188a51d097cb155be
+X-ForwardEmail-ID: 66a8fe1888a51d097cb155f0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,38 +72,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add cap-mmc-highspeed to allow use of high speed MMC mode using an eMMC
-to uSD board. Use disable-wp to signal that no physical write-protect
-line is present. Also add vcc_io used for card and IO line power as
-vmmc-supply.
+Be explicit about the Ethernet port and define mdio and ethernet-phy
+nodes in the device tree for ROCK Pi S.
 
-Fixes: 2e04c25b1320 ("arm64: dts: rockchip: add ROCK Pi S DTS support")
+Fixes: bc3753aed81f ("arm64: dts: rockchip: rock-pi-s add more peripherals")
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Link: https://lore.kernel.org/r/20240521211029.1236094-5-jonas@kwiboo.se
+Link: https://lore.kernel.org/r/20240521211029.1236094-8-jonas@kwiboo.se
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 
-[ upstream commit: fc0daeccc384233eadfa9d5ddbd00159653c6bdc ]
+[ upstream commit: 4b64ed510ed946a4e4ca6d51d6512bf5361f6a04 ]
 
-(cherry picked from commit 39110e4bec51c9ce6bbd342234b288dbfccb9f80)
+(cherry picked from commit 703b8eae20eec5dbb0e52f0e1fb71e712c007dae)
 ---
- dts/upstream/src/arm64/rockchip/rk3308-rock-pi-s.dts | 3 +++
- 1 file changed, 3 insertions(+)
+ .../src/arm64/rockchip/rk3308-rock-pi-s.dts   | 26 ++++++++++++++++---
+ 1 file changed, 23 insertions(+), 3 deletions(-)
 
 diff --git a/dts/upstream/src/arm64/rockchip/rk3308-rock-pi-s.dts b/dts/upstream/src/arm64/rockchip/rk3308-rock-pi-s.dts
-index 079101cddd65..8ea984906403 100644
+index d4cf6026241c..f6fb90e13ad0 100644
 --- a/dts/upstream/src/arm64/rockchip/rk3308-rock-pi-s.dts
 +++ b/dts/upstream/src/arm64/rockchip/rk3308-rock-pi-s.dts
-@@ -272,7 +272,10 @@
- };
+@@ -144,11 +144,25 @@
  
- &sdmmc {
-+	cap-mmc-highspeed;
- 	cap-sd-highspeed;
-+	disable-wp;
-+	vmmc-supply = <&vcc_io>;
+ &gmac {
+ 	clock_in_out = "output";
++	phy-handle = <&rtl8201f>;
+ 	phy-supply = <&vcc_io>;
+-	snps,reset-gpio = <&gpio0 RK_PA7 GPIO_ACTIVE_LOW>;
+-	snps,reset-active-low;
+-	snps,reset-delays-us = <0 50000 50000>;
  	status = "okay";
++
++	mdio {
++		compatible = "snps,dwmac-mdio";
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		rtl8201f: ethernet-phy@1 {
++			compatible = "ethernet-phy-ieee802.3-c22";
++			reg = <1>;
++			pinctrl-names = "default";
++			pinctrl-0 = <&mac_rst>;
++			reset-assert-us = <20000>;
++			reset-deassert-us = <50000>;
++			reset-gpios = <&gpio0 RK_PA7 GPIO_ACTIVE_LOW>;
++		};
++	};
  };
  
+ &gpio0 {
+@@ -221,6 +235,12 @@
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&rtc_32k>;
+ 
++	gmac {
++		mac_rst: mac-rst {
++			rockchip,pins = <0 RK_PA7 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++
+ 	leds {
+ 		green_led: green-led {
+ 			rockchip,pins = <0 RK_PA6 RK_FUNC_GPIO &pcfg_pull_none>;
 -- 
 2.45.2
 
