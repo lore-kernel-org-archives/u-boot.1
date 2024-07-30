@@ -4,78 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD3C8C3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 08:43:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51836C3DA61
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 08:44:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CEFD883A9;
-	Tue, 30 Jul 2024 10:43:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id A9121887D4;
+	Tue, 30 Jul 2024 10:44:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="HWtFP44r";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="NraUGg95";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AABA8780A; Tue, 30 Jul 2024 10:43:20 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 04C4C883A9; Tue, 30 Jul 2024 10:44:34 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AF43887E4
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 10:43:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A30E288802
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 10:44:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4257d5fc9b7so31401535e9.2
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 01:43:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1722328997; x=1722933797;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=p2Jqdm6ZDwMp0s2hV7aXFq6aWeQetNdkWyTJtT/I3J4=;
- b=HWtFP44rj9qjFdPK2+4uCVD+TdbNxCp8Ui3NM2dr5xDLxqpSPziqzpIpdc9ana8sMf
- HR7lNsL/GIGfm4rSU3WWJkIwCwkGyxKsZhZHbgaNZErNSH/hFIP2x/kpM3OgEFd1j+FM
- U37iBkqcg8AADL68mdvzDn+6lMZFN+Oanz4VnMX0IBXLAhpmp4pty7hLxqRaI0bsabLv
- ywh5TUXpxZUaHIgINhLisOT13S8clLPHpy2hpGaN3nBpL+dK5AdmZH58owPcjrLf6uUO
- 5+i6fxS+UROA5LVzn/s+pgohrz0sDcdhY/paTlTFtBv4pZJ8h5DKC9wtCW2z1stZ74B+
- Cung==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722328997; x=1722933797;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=p2Jqdm6ZDwMp0s2hV7aXFq6aWeQetNdkWyTJtT/I3J4=;
- b=K86spipWwRs1xtRRbKMxGQJwfY6IFEnlOG1YFNWoRZv8yhM+6j0VpCvgOZ277s2yjo
- oXkp41Yz3OME2J8HDzXLYNyfV/VujKQh1qkTi1OzyvUGg7AonVrG3daM9w9ZjdR1qIy3
- Bs7aTife8B7seUQiOhx4DG/YKjNJuZjIsjg9wi+UEkoZOOtW4efhvHk/sgmIMUwiClf6
- 6m5KMxHw06KhwlNLAUlv1a1FPuZgR/kxMR8dXCsj8ChF0MOlV2hUPB/H4c+8Dl8K6JzS
- sPgRGyCo4nU3/YQtmNOqAx9PHVdtzWbZPKfYSiZKevo6mjMe9UnPljsFkg1XkMGuc6h3
- UXug==
-X-Gm-Message-State: AOJu0YwbraMr24JprhGeisIdUuadN7pQYnY5TNnyANlaFlZKGg8NblnY
- q50pmfXu3votKmNZBHiDWfjQuASUqO/QgOMcO+SbzFqkRIHbh2Mp5BezBH7l/i4=
-X-Google-Smtp-Source: AGHT+IFN9c/3y+T4opRzVoVTbsJez/kFsUaTBHG2huT2XfCtGgCxnOi7QIBYRiWAd/0nlUmbw4txeg==
-X-Received: by 2002:a05:600c:1c02:b0:426:5e1c:1ac2 with SMTP id
- 5b1f17b1804b1-42811d77894mr87846955e9.8.1722328997125; 
- Tue, 30 Jul 2024 01:43:17 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-428029e32fesm222662825e9.25.2024.07.30.01.43.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jul 2024 01:43:16 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Dmitry Rokosov <ddrokosov@salutedevices.com>, igor.opaniuk@gmail.com,
- semen.protsenko@linaro.org, trini@konsulko.com,
- colin.mcallister@garmin.com, 4.shket@gmail.com, avromanov@salutedevices.com
-Cc: u-boot@lists.denx.de, kernel@salutedevices.com, rockosov@gmail.com,
- Dmitry Rokosov <ddrokosov@salutedevices.com>
+ spf=pass smtp.mailfrom=ddrokosov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 53719120008;
+ Tue, 30 Jul 2024 11:44:27 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 53719120008
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1722329067;
+ bh=OSML7Dtj82yCmhoFtFlQMxwmYZROgvG0qEKJCOhHH9Q=;
+ h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
+ b=NraUGg95VAfvDY+5oD8JfuI7/2Oj3OLUmHhO0tKJxZD6/dwtc16jfrGQw2fGQ+2ZN
+ AmyO44xZ6zhs2VEABJ3cMSkinrwAgdXULZZ96pyKRIGEkGMS9bG1Gb+RKrojP9OsiM
+ km3qHPb2wUwvCWRcfpWEP0tt9GhKwQRjP6yxiuD6SwV9WTdMc9JZXw6JqGQGKHzzXI
+ MtYIdCojgqEW8UWnrv1/wfE48RHF4dR/3zKyWua05F83qV/g9a5eZKKyeZJGm8n33F
+ 4WoOOSUdnJDwOP69yljKjXxAwVW7vaOkFGaUKfVc8nATiPHWGFT3d6usp2BAtiuYzI
+ KD9xGc61pDdlg==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
+ [172.16.192.103])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Tue, 30 Jul 2024 11:44:27 +0300 (MSK)
+Received: from localhost (100.64.160.123) by p-i-exch-sc-m02.sberdevices.ru
+ (172.16.192.103) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.40; Tue, 30 Jul
+ 2024 11:44:26 +0300
+Date: Tue, 30 Jul 2024 11:44:26 +0300
+From: Dmitry Rokosov <ddrokosov@salutedevices.com>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+CC: <igor.opaniuk@gmail.com>, <semen.protsenko@linaro.org>,
+ <trini@konsulko.com>, <colin.mcallister@garmin.com>, <4.shket@gmail.com>,
+ <avromanov@salutedevices.com>, <u-boot@lists.denx.de>,
+ <kernel@salutedevices.com>, <rockosov@gmail.com>
 Subject: Re: [PATCH v1 4/4] common: android_ab: fix slot suffix for abc block
-In-Reply-To: <20240725194716.32232-5-ddrokosov@salutedevices.com>
+Message-ID: <20240730084426.pswkfe4satbavtwh@CAB-WSD-L081021>
 References: <20240725194716.32232-1-ddrokosov@salutedevices.com>
  <20240725194716.32232-5-ddrokosov@salutedevices.com>
-Date: Tue, 30 Jul 2024 10:43:13 +0200
-Message-ID: <878qxjqnha.fsf@baylibre.com>
+ <878qxjqnha.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <878qxjqnha.fsf@baylibre.com>
+User-Agent: NeoMutt/20220415
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
+ p-i-exch-sc-m02.sberdevices.ru (172.16.192.103)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 186785 [Jul 30 2024]
+X-KSMG-AntiSpam-Version: 6.1.0.4
+X-KSMG-AntiSpam-Envelope-From: ddrokosov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 24 0.3.24
+ 186c4d603b899ccfd4883d230c53f273b80e467f, {Tracking_uf_ne_domains},
+ {Track_E25351}, {Tracking_from_domain_doesnt_match_to},
+ salutedevices.com:7.1.1; android-review.googlesource.com:7.1.1,5.0.1;
+ 127.0.0.199:7.1.2; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
+ smtp.sberdevices.ru:7.1.1,5.0.1; 100.64.160.123:7.1.2;
+ source.android.com:7.1.1,5.0.1, FromAlignment: s, ApMailHostAddress:
+ 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean, bases: 2024/07/30 08:31:00
+X-KSMG-LinksScanning: Clean, bases: 2024/07/30 08:31:00
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/07/30 07:09:00 #26180129
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,58 +109,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dmitry,
+On Tue, Jul 30, 2024 at 10:43:13AM +0200, Mattijs Korpershoek wrote:
+> Hi Dmitry,
+> 
+> Thank you for the patch.
+> 
+> On jeu., juil. 25, 2024 at 22:47, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
+> 
+> > To align with the official Android BCB (Boot Control Block)
+> > specifications, it's important to note that the slot_suffix should start
+> > with an underscore symbol.
+> >
+> > For a comprehensive understanding of the expected slot_suffix format in
+> > userspace, please refer to the provided reference [1].
+> >
+> > Links:
+> > [1] - https://source.android.com/docs/core/architecture/bootloader/updating#slots
+> >
+> > Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
+> 
+> Can we point to the AOSP change on which this is based in the commit message?
+> 
+> https://android-review.googlesource.com/c/platform/external/u-boot/+/1446439
+> 
+> With that added:
+> 
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> 
 
-Thank you for the patch.
+Sure, no problem. I will add the reference in the next version.
 
-On jeu., juil. 25, 2024 at 22:47, Dmitry Rokosov <ddrokosov@salutedevices.com> wrote:
+> > ---
+> >  boot/android_ab.c | 5 +++--
+> >  1 file changed, 3 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/boot/android_ab.c b/boot/android_ab.c
+> > index 359cc1a00428..45c154b10f1a 100644
+> > --- a/boot/android_ab.c
+> > +++ b/boot/android_ab.c
+> > @@ -53,7 +53,7 @@ static int ab_control_default(struct bootloader_control *abc)
+> >  	if (!abc)
+> >  		return -EFAULT;
+> >  
+> > -	memcpy(abc->slot_suffix, "a\0\0\0", 4);
+> > +	memcpy(abc->slot_suffix, "_a\0\0", 4);
+> >  	abc->magic = BOOT_CTRL_MAGIC;
+> >  	abc->version = BOOT_CTRL_VERSION;
+> >  	abc->nb_slot = NUM_SLOTS;
+> > @@ -319,7 +319,8 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
+> >  		 * or the device tree.
+> >  		 */
+> >  		memset(slot_suffix, 0, sizeof(slot_suffix));
+> > -		slot_suffix[0] = BOOT_SLOT_NAME(slot);
+> > +		slot_suffix[0] = '_';
+> > +		slot_suffix[1] = BOOT_SLOT_NAME(slot);
+> >  		if (memcmp(abc->slot_suffix, slot_suffix,
+> >  			   sizeof(slot_suffix))) {
+> >  			memcpy(abc->slot_suffix, slot_suffix,
+> > -- 
+> > 2.43.0
 
-> To align with the official Android BCB (Boot Control Block)
-> specifications, it's important to note that the slot_suffix should start
-> with an underscore symbol.
->
-> For a comprehensive understanding of the expected slot_suffix format in
-> userspace, please refer to the provided reference [1].
->
-> Links:
-> [1] - https://source.android.com/docs/core/architecture/bootloader/updating#slots
->
-> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
-
-Can we point to the AOSP change on which this is based in the commit message?
-
-https://android-review.googlesource.com/c/platform/external/u-boot/+/1446439
-
-With that added:
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
-> ---
->  boot/android_ab.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
->
-> diff --git a/boot/android_ab.c b/boot/android_ab.c
-> index 359cc1a00428..45c154b10f1a 100644
-> --- a/boot/android_ab.c
-> +++ b/boot/android_ab.c
-> @@ -53,7 +53,7 @@ static int ab_control_default(struct bootloader_control *abc)
->  	if (!abc)
->  		return -EFAULT;
->  
-> -	memcpy(abc->slot_suffix, "a\0\0\0", 4);
-> +	memcpy(abc->slot_suffix, "_a\0\0", 4);
->  	abc->magic = BOOT_CTRL_MAGIC;
->  	abc->version = BOOT_CTRL_VERSION;
->  	abc->nb_slot = NUM_SLOTS;
-> @@ -319,7 +319,8 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
->  		 * or the device tree.
->  		 */
->  		memset(slot_suffix, 0, sizeof(slot_suffix));
-> -		slot_suffix[0] = BOOT_SLOT_NAME(slot);
-> +		slot_suffix[0] = '_';
-> +		slot_suffix[1] = BOOT_SLOT_NAME(slot);
->  		if (memcmp(abc->slot_suffix, slot_suffix,
->  			   sizeof(slot_suffix))) {
->  			memcpy(abc->slot_suffix, slot_suffix,
-> -- 
-> 2.43.0
+-- 
+Thank you,
+Dmitry
