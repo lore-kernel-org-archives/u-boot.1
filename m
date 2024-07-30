@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7D44C49EA1
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 19:49:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00BF8C49EA1
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 19:49:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27A958882F;
-	Tue, 30 Jul 2024 21:49:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1E2648890A;
+	Tue, 30 Jul 2024 21:49:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="dr9CWH8a";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Dmhot/wA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F1EF88905; Tue, 30 Jul 2024 21:49:00 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 655BF8890F; Tue, 30 Jul 2024 21:49:08 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2997888A2
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 21:48:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B7178890D
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 21:49:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,21 +28,20 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1722368933; bh=QeTSfUDaEzQtfIJJfjh8y8hejkIRwJRF/i8rbLCY5Vg=;
- b=dr9CWH8aiD5GReXiSjMlVM+pR3KZ6XX7ydAJ5ByXXB0+6ih2xiTLEU3U8ydyttfaHQV/8ep7c
- Y0v9anGjUE+JE/Nup5XqrqbYPDZO14P9yFOCuB3hvdMcOegHZI2sis7qLsltg9RX1d/VK8fIziw
- vWeHBe8LKWleIFhrfLEJcR9QYJvLovPoAA8LaCv9cMwXhtZqBlA2u/n28tyQdR70ySpDZmFOw2g
- QzUBgnET82aixO9qNuEYHMy49axBNFK9f8xazlrGj4dX1AT77jJmoiqg07H22PscH47pXz63Fck
- FN0SGpwz9ZwSFsWf0WTuF8Eu5IopG+rCEGISTo3BGg0g==
+ t=1722368935; bh=xXGdn4CSMlqgrXg2LQFwvLt3Y9I50dcePkDkdBhcbMY=;
+ b=Dmhot/wAbjtlpk8hsjYknoXh0mID6u/sZseu8NdahvQucsqBIfyH9g6xH1mhI2JD9Hxr4Z/gd
+ tUYp+92LZUprZUL3WmCN1QnBBi3yCZq9OK73GrIFburSZvyyWh5aP9lRP5K6S2FV4WCfdJfuU/N
+ GuNPv0bLAq4QcvaixDEBJ1f/0dVy2v53SniyYuovPSXNgbaq9gc1C/LN9MlO613nmU55phgm1tT
+ sGPCIBiG1pDhVIqKfjQC4/dRjfvHVy0BUtpzAVhAavCV2K8hU9gZrMNHzPaaDFycYrbxKnSDr1/
+ szh9kyLj8hzvnyhzqq2yLDsF5oBakPTNzzibXpHRPTQQ==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner
- <heiko@sntech.de>
-Subject: [PATCH 1/2] arm64: dts: rockchip: Add Radxa ROCK S0
-Date: Tue, 30 Jul 2024 19:48:36 +0000
-Message-ID: <20240730194842.916502-2-jonas@kwiboo.se>
+ Jonas Karlman <jonas@kwiboo.se>, Andy Yan <andy.yan@rock-chips.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH 2/2] board: rockchip: Add Radxa ROCK S0
+Date: Tue, 30 Jul 2024 19:48:37 +0000
+Message-ID: <20240730194842.916502-3-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240730194842.916502-1-jonas@kwiboo.se>
 References: <20240730194842.916502-1-jonas@kwiboo.se>
@@ -53,8 +52,8 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 66a943a22c52d9ba4458b1a1
+ 167.172.40.54
+X-ForwardEmail-ID: 66a943a52c52d9ba4458b1b3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,321 +71,156 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Radxa ROCK S0 is a single-board computer based on the Rockchip RK3308B
-SoC in an ultra-compact form factor.
+SoC in an ultra-compact form factor. Add a board target for the board.
 
-Add initial support for eMMC, SD-card, Ethernet, WiFi/BT and USB.
+Features tested on a ROCK S0 v1.2 with 512 MiB RAM and 8 GiB eMMC:
+- SD-card boot
+- eMMC boot
+- Ethernet
+- USB gadget
+- USB host
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Link: https://lore.kernel.org/r/20240521212247.1240226-3-jonas@kwiboo.se
-Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-
-[ upstream commit: adeb5d2a4ba47910238b3c4f5fd960cc0c26a98b ]
-
-(cherry picked from commit e291d457b0378f2cb3d3ebb597032ca862cdb973)
 ---
- .../src/arm64/rockchip/rk3308-rock-s0.dts     | 293 ++++++++++++++++++
- 1 file changed, 293 insertions(+)
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3308-rock-s0.dts
+ arch/arm/dts/rk3308-rock-s0-u-boot.dtsi | 21 ++++++++
+ board/rockchip/evb_rk3308/MAINTAINERS   |  6 +++
+ configs/rock-s0-rk3308_defconfig        | 72 +++++++++++++++++++++++++
+ doc/board/rockchip/rockchip.rst         |  1 +
+ 4 files changed, 100 insertions(+)
+ create mode 100644 arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
+ create mode 100644 configs/rock-s0-rk3308_defconfig
 
-diff --git a/dts/upstream/src/arm64/rockchip/rk3308-rock-s0.dts b/dts/upstream/src/arm64/rockchip/rk3308-rock-s0.dts
+diff --git a/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi b/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
 new file mode 100644
-index 000000000000..bd6419a5c20a
+index 000000000000..84ca2ee0d5fb
 --- /dev/null
-+++ b/dts/upstream/src/arm64/rockchip/rk3308-rock-s0.dts
-@@ -0,0 +1,293 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++++ b/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
+@@ -0,0 +1,21 @@
++// SPDX-License-Identifier: GPL-2.0+
 +
-+/dts-v1/;
++#include "rk3308-u-boot.dtsi"
 +
-+#include <dt-bindings/leds/common.h>
-+#include "rk3308.dtsi"
-+
-+/ {
-+	model = "Radxa ROCK S0";
-+	compatible = "radxa,rock-s0", "rockchip,rk3308";
-+
-+	aliases {
-+		ethernet0 = &gmac;
-+		mmc0 = &emmc;
-+		mmc1 = &sdmmc;
-+		mmc2 = &sdio;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial0:1500000n8";
-+	};
-+
-+	leds {
-+		compatible = "gpio-leds";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&pwr_led>;
-+
-+		led-green {
-+			color = <LED_COLOR_ID_GREEN>;
-+			default-state = "on";
-+			function = LED_FUNCTION_HEARTBEAT;
-+			gpios = <&gpio0 RK_PB6 GPIO_ACTIVE_HIGH>;
-+			linux,default-trigger = "heartbeat";
-+		};
-+	};
-+
-+	vdd_log: regulator-1v04-vdd-log {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vdd_log";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <1040000>;
-+		regulator-max-microvolt = <1040000>;
-+		vin-supply = <&vcc5v0_sys>;
-+	};
-+
-+	vcc_ddr: regulator-1v5-vcc-ddr {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc_ddr";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <1500000>;
-+		regulator-max-microvolt = <1500000>;
-+		vin-supply = <&vcc5v0_sys>;
-+	};
-+
-+	vcc_1v8: regulator-1v8-vcc {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc_1v8";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <1800000>;
-+		vin-supply = <&vcc_io>;
-+	};
-+
-+	vcc_io: regulator-3v3-vcc-io {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc_io";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+		vin-supply = <&vcc5v0_sys>;
-+	};
-+
-+	vcc5v0_sys: regulator-5v0-vcc-sys {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc5v0_sys";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+	};
-+
-+	vdd_core: regulator-vdd-core {
-+		compatible = "pwm-regulator";
-+		pwms = <&pwm0 0 5000 1>;
-+		pwm-supply = <&vcc5v0_sys>;
-+		regulator-name = "vdd_core";
-+		regulator-always-on;
-+		regulator-boot-on;
-+		regulator-min-microvolt = <827000>;
-+		regulator-max-microvolt = <1340000>;
-+		regulator-settling-time-up-us = <250>;
-+	};
-+
-+	sdio_pwrseq: sdio-pwrseq {
-+		compatible = "mmc-pwrseq-simple";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&wifi_reg_on>;
-+		reset-gpios = <&gpio0 RK_PA2 GPIO_ACTIVE_LOW>;
-+	};
-+};
-+
-+&cpu0 {
-+	cpu-supply = <&vdd_core>;
-+};
-+
-+&emmc {
-+	cap-mmc-highspeed;
-+	no-sd;
-+	no-sdio;
-+	non-removable;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&emmc_bus8 &emmc_clk &emmc_cmd &emmc_pwren>;
-+	vmmc-supply = <&vcc_io>;
-+	status = "okay";
-+};
-+
-+&gmac {
-+	clock_in_out = "output";
-+	phy-handle = <&rtl8201f>;
-+	phy-supply = <&vcc_io>;
-+	status = "okay";
-+
-+	mdio {
-+		compatible = "snps,dwmac-mdio";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		rtl8201f: ethernet-phy@1 {
-+			compatible = "ethernet-phy-ieee802.3-c22";
-+			reg = <1>;
-+			pinctrl-names = "default";
-+			pinctrl-0 = <&mac_rst>;
-+			reset-assert-us = <20000>;
-+			reset-deassert-us = <50000>;
-+			reset-gpios = <&gpio0 RK_PA7 GPIO_ACTIVE_LOW>;
-+		};
-+	};
-+};
-+
-+&io_domains {
-+	vccio0-supply = <&vcc_io>;
-+	vccio1-supply = <&vcc_io>;
-+	vccio2-supply = <&vcc_io>;
-+	vccio3-supply = <&vcc_io>;
-+	vccio4-supply = <&vcc_1v8>;
-+	vccio5-supply = <&vcc_io>;
-+	status = "okay";
-+};
-+
-+&pinctrl {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&rtc_32k>;
-+
-+	bluetooth {
-+		bt_reg_on: bt-reg-on {
-+			rockchip,pins = <4 RK_PB3 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+
-+		bt_wake_host: bt-wake-host {
-+			rockchip,pins = <4 RK_PB4 RK_FUNC_GPIO &pcfg_pull_down>;
-+		};
-+
-+		host_wake_bt: host-wake-bt {
-+			rockchip,pins = <4 RK_PB2 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+
-+	gmac {
-+		mac_rst: mac-rst {
-+			rockchip,pins = <0 RK_PA7 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+
-+	leds {
-+		pwr_led: pwr-led {
-+			rockchip,pins = <0 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+
-+	wifi {
-+		wifi_reg_on: wifi-reg-on {
-+			rockchip,pins = <0 RK_PA2 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+
-+		wifi_wake_host: wifi-wake-host {
-+			rockchip,pins = <0 RK_PA0 RK_FUNC_GPIO &pcfg_pull_down>;
-+		};
-+	};
-+};
-+
-+&pwm0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pwm0_pin_pull_down>;
-+	status = "okay";
-+};
-+
-+&saradc {
-+	vref-supply = <&vcc_1v8>;
-+	status = "okay";
-+};
-+
-+&sdio {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+	cap-sd-highspeed;
-+	cap-sdio-irq;
-+	keep-power-in-suspend;
-+	max-frequency = <50000000>;
-+	mmc-pwrseq = <&sdio_pwrseq>;
-+	no-mmc;
-+	no-sd;
-+	non-removable;
-+	vmmc-supply = <&vcc_io>;
-+	vqmmc-supply = <&vcc_1v8>;
-+	status = "okay";
-+
-+	brcmf: wifi@1 {
-+		compatible = "brcm,bcm43430a1-fmac", "brcm,bcm4329-fmac";
-+		reg = <1>;
-+		interrupt-parent = <&gpio0>;
-+		interrupts = <RK_PA0 IRQ_TYPE_LEVEL_HIGH>;
-+		interrupt-names = "host-wake";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&wifi_wake_host>;
-+	};
-+};
-+
-+&sdmmc {
-+	cap-mmc-highspeed;
-+	cap-sd-highspeed;
-+	disable-wp;
-+	vmmc-supply = <&vcc_io>;
-+	status = "okay";
-+};
-+
-+&u2phy {
-+	status = "okay";
-+};
-+
-+&u2phy_host {
-+	status = "okay";
-+};
-+
-+&u2phy_otg {
-+	status = "okay";
++&emmc_pwren {
++	bootph-pre-ram;
++	bootph-some-ram;
 +};
 +
 +&uart0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&uart0_xfer>;
-+	status = "okay";
++	bootph-all;
++	clock-frequency = <24000000>;
 +};
 +
-+&uart4 {
-+	uart-has-rtscts;
-+	status = "okay";
-+
-+	bluetooth {
-+		compatible = "brcm,bcm43430a1-bt";
-+		clocks = <&cru SCLK_RTC32K>;
-+		clock-names = "lpo";
-+		interrupt-parent = <&gpio4>;
-+		interrupts = <RK_PB4 IRQ_TYPE_LEVEL_HIGH>;
-+		interrupt-names = "host-wakeup";
-+		device-wakeup-gpios = <&gpio4 RK_PB2 GPIO_ACTIVE_HIGH>;
-+		shutdown-gpios = <&gpio4 RK_PB3 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&bt_reg_on &bt_wake_host &host_wake_bt>;
-+		vbat-supply = <&vcc_io>;
-+		vddio-supply = <&vcc_1v8>;
-+	};
++&uart0_xfer {
++	bootph-all;
 +};
 +
-+&usb_host_ehci {
-+	status = "okay";
++&vdd_core {
++	regulator-init-microvolt = <1015000>;
 +};
+diff --git a/board/rockchip/evb_rk3308/MAINTAINERS b/board/rockchip/evb_rk3308/MAINTAINERS
+index abffbb1eb0ab..cd219c65f278 100644
+--- a/board/rockchip/evb_rk3308/MAINTAINERS
++++ b/board/rockchip/evb_rk3308/MAINTAINERS
+@@ -12,3 +12,9 @@ R:      Jonas Karlman <jonas@kwiboo.se>
+ S:      Maintained
+ F:      configs/rock-pi-s-rk3308_defconfig
+ F:      arch/arm/dts/rk3308-rock-pi-s*
 +
-+&usb_host_ohci {
-+	status = "okay";
-+};
-+
-+&usb20_otg {
-+	dr_mode = "peripheral";
-+	status = "okay";
-+};
-+
-+&wdt {
-+	status = "okay";
-+};
++ROCK-S0
++M:      Jonas Karlman <jonas@kwiboo.se>
++S:      Maintained
++F:      configs/rock-s0-rk3308_defconfig
++F:      arch/arm/dts/rk3308-rock-s0*
+diff --git a/configs/rock-s0-rk3308_defconfig b/configs/rock-s0-rk3308_defconfig
+new file mode 100644
+index 000000000000..074ec4cd66ba
+--- /dev/null
++++ b/configs/rock-s0-rk3308_defconfig
+@@ -0,0 +1,72 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3308-rock-s0"
++CONFIG_DM_RESET=y
++CONFIG_ROCKCHIP_RK3308=y
++CONFIG_TARGET_EVB_RK3308=y
++CONFIG_DEBUG_UART_BASE=0xFF0A0000
++CONFIG_DEBUG_UART_CLOCK=24000000
++# CONFIG_DEBUG_UART_BOARD_INIT is not set
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_DEBUG_UART=y
++CONFIG_ANDROID_BOOT_IMAGE=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3308-rock-s0.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_ROCKUSB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_RNG=y
++CONFIG_CMD_KASLRSEED=y
++CONFIG_CMD_REGULATOR=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_REGMAP=y
++CONFIG_SYSCON=y
++CONFIG_CLK=y
++# CONFIG_USB_FUNCTION_FASTBOOT is not set
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_ROCKCHIP_IODOMAIN=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_PHY_REALTEK=y
++CONFIG_DM_MDIO=y
++CONFIG_DM_ETH_PHY=y
++CONFIG_ETH_DESIGNWARE=y
++CONFIG_GMAC_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PINCTRL=y
++CONFIG_REGULATOR_PWM=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_RAM=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_SYSINFO=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_DM_USB_GADGET=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_DWC2_OTG=y
++CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_USB_FUNCTION_ROCKUSB=y
++CONFIG_LZO=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index bedc52e03e20..82cbc6e3e0db 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -54,6 +54,7 @@ List of mainline supported Rockchip boards:
+      - Amarula Vyasa-RK3288 (vyasa-rk3288)
+ * rk3308
+      - Radxa ROCK Pi S (rock-pi-s-rk3308)
++     - Radxa ROCK S0 (rock-s0-rk3308)
+      - Rockchip Evb-RK3308 (evb-rk3308)
+      - Roc-cc-RK3308 (roc-cc-rk3308)
+ * rk3326
 -- 
 2.45.2
 
