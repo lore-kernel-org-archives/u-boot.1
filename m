@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47481C3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 07:12:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3651C3DA61
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 07:13:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC1D188640;
-	Tue, 30 Jul 2024 09:12:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2C025887D4;
+	Tue, 30 Jul 2024 09:13:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="FC9buFE/";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="nKQq/zdO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2409088640; Tue, 30 Jul 2024 09:12:09 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 19AB688827; Tue, 30 Jul 2024 09:13:20 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1142E88570
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 09:12:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 37B76887DB
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 09:13:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a7a8e73b29cso311070166b.3
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 00:12:07 -0700 (PDT)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a7ac469e4c4so835464866b.0
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 00:13:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1722323526; x=1722928326;
+ d=amarulasolutions.com; s=google; t=1722323598; x=1722928398;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mgaA76KiKsArl4oUcGVcliIcYMldk+Zp8+2JAs4n1To=;
- b=FC9buFE/mIAqpUxJ2T/ClBBp6WyEwxXGZTVVpxn2xSY9EEG0TUbgeRlnsDTznh8D2D
- wVgNMjNP4vX0qPHkp+rGCa6bCcBkR91wdN2JYqo6bJzcaznL9rsTIV2QfE27i+SMIHFY
- lADkbLMSiGWSv+k5b1yF2NSDgRB8H72wDwo34=
+ bh=Ug5wHidVHwAE2YIQwU+B/Yi/LPGW16Aa+fQHP3VBC+Q=;
+ b=nKQq/zdOVKuTITcgKjavJnepb/sSMMtzbWTQGyYAd/7fdyu6HDhBC1oC/7QZSNlX1N
+ vCaA/f/te6M1roavT3YAmXYU+vRwdIz1OWelRT6k3mo5hZm0euO/jgY1lroNwcBtg5nT
+ /puyphIP2U13YPbTRmQ44RTzuiqlQl2RTR7JI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722323526; x=1722928326;
+ d=1e100.net; s=20230601; t=1722323598; x=1722928398;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mgaA76KiKsArl4oUcGVcliIcYMldk+Zp8+2JAs4n1To=;
- b=WhBvB2zzkVFbp1knqzqnZQmXxDgqWjj+f9velC7iJM6QpjLHDE2Kzo+Y4H0T8hLieK
- 6J+j+AM5rHi9KTIqribpDqqGpDsoo9QTquMJ79h+svsC3UT29pCN7nGOBCuuPSzCYT9p
- L2TJqaP4nIFO3JL5W801NNB+JAr7dJ5vvi6uHvTSkcWSxO4uHwuOxt9DlBxLd4an14LW
- ds4okV0eyD1qJwOLvvQTgHtvOXyIpgygQ/PDqksXApH+FrYvOmbZ3QNmNf7K1xJ9rMVv
- +KBXQl9S/tVDghgtkVpJr4VbdW9wvH7z2/r4QgBL9B1tATVgJg//w1e4rTB0JwV2nJTN
- JTyQ==
-X-Gm-Message-State: AOJu0YwVRS863euInsW2/pBdM6sOXNaNH1c24RVLmZb0aYYbbSt62J3S
- qSsdO0L/tvu5t2zCD3zrdKi1aRJ6qareBxXWTEog2VF748k1elzYuTPzbwQltE7eMc6R5hGynHJ
- SoA64+XElxzAlf7643luhANvk4JVuG6G2lQYvHQ==
-X-Google-Smtp-Source: AGHT+IGh6TZ4qNtIQ4ausBSPp9Adui2zT1a0EI+xs0Bg88Tbwq/eq4/g7N/T/0azuxm+BkVObxZRoS0ZuR0LWSod9zs=
-X-Received: by 2002:a17:906:fe0b:b0:a7d:391f:17af with SMTP id
- a640c23a62f3a-a7d40128701mr654485766b.51.1722323526320; Tue, 30 Jul 2024
- 00:12:06 -0700 (PDT)
+ bh=Ug5wHidVHwAE2YIQwU+B/Yi/LPGW16Aa+fQHP3VBC+Q=;
+ b=kBfsKEPlptGG+xmWTrPzWxE0OnAHTKSFI0BxQgcw/hkePLBgGQ8Vuu20K9O33izxx7
+ swZUua53neHgcnCUATjuTPCxAVFCoNvl3xd8XjycTvNRrtTv1ui+BWfh/O+YC8GjSmYz
+ OE+d5ECAT9Hre0QSbOKarFnr/zSBHRr0QBj4/80iCeUJ4H4crcNyVa3HL6o610DVF8XY
+ yCf1SbUtn5gb6a33cJ3wvPMj3GYmBKxqyvv85ut/bTqWR4LzqbqAoUBRzjcIGsu7IW+L
+ aPXlhPrMCC7DfXxOyOc3OtV5gKQwdT5dSaAZuLLo0PEK3ENlfbQeY1xBE5D1isX76Y5g
+ Aiww==
+X-Gm-Message-State: AOJu0YyxoT9h6/lDMCyzRwn1UEJBVcsNj6STmjypNOoBaruPK1z9ybku
+ 6GNIx8Bmz+ijXrSmCS1uLEKY2WwAmbby5C4h2KERsTKzKCxLY+LEl9NPsoQcY3VmvPfLnimUQGL
+ Fc+SNxTqNYtQTIu4rgDrmFX+G1K2jU6TUdigslQ==
+X-Google-Smtp-Source: AGHT+IFlUfSn5pD+Rw5h77YO3vbccIrM25aRFv/xpgbSCqGwPeC5XgKpa/sqa/nHlYqDlUaKmKuiQ8P/4PljmhP6KEE=
+X-Received: by 2002:a17:906:6187:b0:a72:5f3f:27a2 with SMTP id
+ a640c23a62f3a-a7d85a426f1mr91141766b.26.1722323597585; Tue, 30 Jul 2024
+ 00:13:17 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240730073003.28892-1-Zhiqiang.Hou@nxp.com>
- <20240730073003.28892-2-Zhiqiang.Hou@nxp.com>
-In-Reply-To: <20240730073003.28892-2-Zhiqiang.Hou@nxp.com>
+ <20240730073003.28892-6-Zhiqiang.Hou@nxp.com>
+In-Reply-To: <20240730073003.28892-6-Zhiqiang.Hou@nxp.com>
 From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Tue, 30 Jul 2024 09:11:55 +0200
-Message-ID: <CAOf5uwk4CMFphnskngXierUoZLwR6deMw+MDa98Xco6GJ=Rf+A@mail.gmail.com>
-Subject: Re: [PATCHv4 01/14] clk: imx8m: register ARM A53 core clock
+Date: Tue, 30 Jul 2024 09:13:06 +0200
+Message-ID: <CAOf5uw=B6Wc-vYvttvWw2+TLUMvwAByhXw8Zi014NpRDNm_vKg@mail.gmail.com>
+Subject: Re: [PATCHv4 05/14] cpu: imx: fix the CPU frequency in
+ cpu_imx_get_info()
 To: Zhiqiang Hou <Zhiqiang.Hou@nxp.com>
 Cc: u-boot@lists.denx.de, trini@konsulko.com, peng.fan@nxp.com, 
  festevam@gmail.com, sjg@chromium.org, marex@denx.de, lukma@denx.de, 
@@ -90,127 +91,47 @@ X-Virus-Status: Clean
 
 Hi
 
-On Tue, Jul 30, 2024 at 9:09=E2=80=AFAM Zhiqiang Hou <Zhiqiang.Hou@nxp.com>=
+On Tue, Jul 30, 2024 at 9:10=E2=80=AFAM Zhiqiang Hou <Zhiqiang.Hou@nxp.com>=
  wrote:
 >
 > From: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 >
-> Register ARM A53 core clock for i.MX 8M Mini, Nano and Plus, preparing
-> for enabling the 'cpu' command, which depends on this to print CPU core
-> frequency.
+> The cpu_freq stores the current CPU frequency in Hz.
 >
 > Signed-off-by: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 > ---
 > V4:
->  - Moved here from other thread.
+>  - Rewrote the change log.
 >
->  drivers/clk/imx/clk-imx8mm.c | 6 ++++++
->  drivers/clk/imx/clk-imx8mn.c | 7 +++++++
->  drivers/clk/imx/clk-imx8mp.c | 7 +++++++
->  3 files changed, 20 insertions(+)
+>  drivers/cpu/imx8_cpu.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/drivers/clk/imx/clk-imx8mm.c b/drivers/clk/imx/clk-imx8mm.c
-> index e538f047b3..8d98fbaaa9 100644
-> --- a/drivers/clk/imx/clk-imx8mm.c
-> +++ b/drivers/clk/imx/clk-imx8mm.c
-> @@ -21,6 +21,8 @@ static const char * const sys_pll1_bypass_sels[] =3D {"=
-sys_pll1", "sys_pll1_ref_se
->  static const char * const sys_pll2_bypass_sels[] =3D {"sys_pll2", "sys_p=
-ll2_ref_sel", };
->  static const char * const sys_pll3_bypass_sels[] =3D {"sys_pll3", "sys_p=
-ll3_ref_sel", };
+> diff --git a/drivers/cpu/imx8_cpu.c b/drivers/cpu/imx8_cpu.c
+> index 4781a56554..601a7071a6 100644
+> --- a/drivers/cpu/imx8_cpu.c
+> +++ b/drivers/cpu/imx8_cpu.c
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /*
+> - * Copyright 2019 NXP
+> + * Copyright 2019, 2024 NXP
+>   */
 >
-> +static const char * const imx8mm_arm_core_sels[] =3D {"arm_a53_src", "ar=
-m_pll_out", };
-> +
->  static const char * const imx8mm_a53_sels[] =3D {"clock-osc-24m", "arm_p=
-ll_out", "sys_pll2_500m",
->                                                "sys_pll2_1000m", "sys_pll=
-1_800m", "sys_pll1_400m",
->                                                "audio_pll1_out", "sys_pll=
-3_out", };
-> @@ -417,6 +419,10 @@ static int imx8mm_clk_probe(struct udevice *dev)
->                imx_clk_gate4("qspi_root_clk", "qspi", base + 0x42f0, 0));
->  #endif
+>  #include <cpu.h>
+> @@ -193,7 +193,7 @@ static int cpu_imx_get_info(const struct udevice *dev=
+, struct cpu_info *info)
+>  {
+>         struct cpu_imx_plat *plat =3D dev_get_plat(dev);
 >
-> +       clk_dm(IMX8MM_CLK_ARM,
-> +              imx_clk_mux2("arm_core", base + 0x9880, 24, 1,
-> +                           imx8mm_arm_core_sels,
-> +                           ARRAY_SIZE(imx8mm_arm_core_sels)));
->         return 0;
+> -       info->cpu_freq =3D plat->freq_mhz * 1000;
+> +       info->cpu_freq =3D plat->freq_mhz * 1000000;
+>         info->features =3D BIT(CPU_FEAT_L1_CACHE) | BIT(CPU_FEAT_MMU);
 
-imx_clk_mux2_flags I think you should mark this clock CLK_IS_CRITICAL
+Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
 
-Michael
 
->  }
->
-> diff --git a/drivers/clk/imx/clk-imx8mn.c b/drivers/clk/imx/clk-imx8mn.c
-> index 8911e342f1..3de03e1f3b 100644
-> --- a/drivers/clk/imx/clk-imx8mn.c
-> +++ b/drivers/clk/imx/clk-imx8mn.c
-> @@ -23,6 +23,8 @@ static const char * const sys_pll1_bypass_sels[] =3D {"=
-sys_pll1", "sys_pll1_ref_se
->  static const char * const sys_pll2_bypass_sels[] =3D {"sys_pll2", "sys_p=
-ll2_ref_sel", };
->  static const char * const sys_pll3_bypass_sels[] =3D {"sys_pll3", "sys_p=
-ll3_ref_sel", };
->
-> +static const char * const imx8mn_arm_core_sels[] =3D {"arm_a53_src", "ar=
-m_pll_out", };
-> +
->  static const char * const imx8mn_a53_sels[] =3D {"clock-osc-24m", "arm_p=
-ll_out", "sys_pll2_500m",
->                                                "sys_pll2_1000m", "sys_pll=
-1_800m", "sys_pll1_400m",
->                                                "audio_pll1_out", "sys_pll=
-3_out", };
-> @@ -403,6 +405,11 @@ static int imx8mn_clk_probe(struct udevice *dev)
->                imx_clk_gate4("ecspi3_root_clk", "ecspi3", base + 0x4090, =
-0));
->  #endif
->
-> +       clk_dm(IMX8MN_CLK_ARM,
-> +              imx_clk_mux2("arm_core", base + 0x9880, 24, 1,
-> +                           imx8mn_arm_core_sels,
-> +                           ARRAY_SIZE(imx8mn_arm_core_sels)));
-> +
 >         return 0;
 >  }
->
-> diff --git a/drivers/clk/imx/clk-imx8mp.c b/drivers/clk/imx/clk-imx8mp.c
-> index 6b18483c81..32ea60f11e 100644
-> --- a/drivers/clk/imx/clk-imx8mp.c
-> +++ b/drivers/clk/imx/clk-imx8mp.c
-> @@ -21,6 +21,8 @@ static const char * const sys_pll1_bypass_sels[] =3D {"=
-sys_pll1", "sys_pll1_ref_se
->  static const char * const sys_pll2_bypass_sels[] =3D {"sys_pll2", "sys_p=
-ll2_ref_sel", };
->  static const char * const sys_pll3_bypass_sels[] =3D {"sys_pll3", "sys_p=
-ll3_ref_sel", };
->
-> +static const char * const imx8mp_arm_core_sels[] =3D {"arm_a53_src", "ar=
-m_pll_out", };
-> +
->  static const char * const imx8mp_a53_sels[] =3D {"clock-osc-24m", "arm_p=
-ll_out", "sys_pll2_500m",
->                                                "sys_pll2_1000m", "sys_pll=
-1_800m", "sys_pll1_400m",
->                                                "audio_pll1_out", "sys_pll=
-3_out", };
-> @@ -354,6 +356,11 @@ static int imx8mp_clk_probe(struct udevice *dev)
->
->         clk_dm(IMX8MP_CLK_USDHC3_ROOT, imx_clk_gate4("usdhc3_root_clk", "=
-usdhc3", base + 0x45e0, 0));
->
-> +       clk_dm(IMX8MP_CLK_ARM,
-> +              imx_clk_mux2("arm_core", base + 0x9880, 24, 1,
-> +                           imx8mp_arm_core_sels,
-> +                           ARRAY_SIZE(imx8mp_arm_core_sels)));
-> +
->         return 0;
->  }
->
 > --
 > 2.17.1
 >
