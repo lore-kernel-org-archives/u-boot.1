@@ -4,56 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00BF8C49EA1
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 19:49:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D765C3DA49
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 19:49:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E2648890A;
-	Tue, 30 Jul 2024 21:49:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 930E98891A;
+	Tue, 30 Jul 2024 21:49:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Dmhot/wA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OBo/J8fd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 655BF8890F; Tue, 30 Jul 2024 21:49:08 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2A2428891E; Tue, 30 Jul 2024 21:49:27 +0200 (CEST)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B7178890D
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 21:49:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5570C8894E
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 21:49:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=18d8=O7=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1722368935; bh=xXGdn4CSMlqgrXg2LQFwvLt3Y9I50dcePkDkdBhcbMY=;
- b=Dmhot/wAbjtlpk8hsjYknoXh0mID6u/sZseu8NdahvQucsqBIfyH9g6xH1mhI2JD9Hxr4Z/gd
- tUYp+92LZUprZUL3WmCN1QnBBi3yCZq9OK73GrIFburSZvyyWh5aP9lRP5K6S2FV4WCfdJfuU/N
- GuNPv0bLAq4QcvaixDEBJ1f/0dVy2v53SniyYuovPSXNgbaq9gc1C/LN9MlO613nmU55phgm1tT
- sGPCIBiG1pDhVIqKfjQC4/dRjfvHVy0BUtpzAVhAavCV2K8hU9gZrMNHzPaaDFycYrbxKnSDr1/
- szh9kyLj8hzvnyhzqq2yLDsF5oBakPTNzzibXpHRPTQQ==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jonas Karlman <jonas@kwiboo.se>, Andy Yan <andy.yan@rock-chips.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH 2/2] board: rockchip: Add Radxa ROCK S0
-Date: Tue, 30 Jul 2024 19:48:37 +0000
-Message-ID: <20240730194842.916502-3-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240730194842.916502-1-jonas@kwiboo.se>
-References: <20240730194842.916502-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-25dfb580d1fso2160114fac.2
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 12:49:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1722368962; x=1722973762; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=I7kVgzfVLS6qnQm/Z8Pfusz2Pwiqkl3okHvGhJpLewc=;
+ b=OBo/J8fd2jV5H6RYYmk9ASKM8DqcAY/d96cP2iXCRisu5jmPt4tZ5iVn2x+6601tTG
+ YiDpsNESvC15mZnwB8RU41BcNovLGgiPVSo7lmAciFn/9iudfLLXpaMCBaoyF+C3mEs0
+ DWEgp1Z6l8O3MqLOuJI40Lriny87CktMdVN3s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722368962; x=1722973762;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=I7kVgzfVLS6qnQm/Z8Pfusz2Pwiqkl3okHvGhJpLewc=;
+ b=uehHoyZGFBiIX/cTM2L5hkvmNxj6fCRRGF/Xj1eISp8t4J5I0o0t4MgZRuukE1u8Wl
+ UfHmAWt5u7nk5jAfhnmnqxQWFCuvwhRAV8F1lInYNaQNI4IEQbJdsS+0k69y7kvHHhNr
+ tI6YgZajat4rtPXchlgTyH5MLfYBkRhy3evwMXVr3eQhql6shjQEIoktpAoA7qCvoAl1
+ FMZiz2bI45CXYehUHc2DfHB+2ltIarIuxD1r/+rUlKssZ2rHqKvIxtSZCeBKmZRFqNzo
+ y1uz+UYfL6q9xeMsV2Vp1xo/gHKWzCknBruhuSEZqVfPKLnYX7hqknitdxNSx+EuENpz
+ mjTQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW7lLUIVcfiE2HOwngxr8Aw1ifKm7dhnojWn5h0mcW3N2CPOibJazpNIHBbRGdZK9ql6YMBWJFjYhz9yUDr8FgRuT/Uwg==
+X-Gm-Message-State: AOJu0YwmMYA4cQ5dfYztRsHPXC6kwYiZx299UxZmDKiDl6ZXq3cW63y0
+ wKYa/xpkdPpmqPw3Vn6p2A5hOJPiITOsxkhnTt7F+W0ni1hjdNOvobPp9ZRnMoc=
+X-Google-Smtp-Source: AGHT+IGxsp5DBk4aR1JwlLsq/I25QNTuF5Kx4UHWEdI3SQpEBvIrouHd5t8BSd2dRlOOYopnt6SYxA==
+X-Received: by 2002:a05:6870:9f82:b0:261:290:a089 with SMTP id
+ 586e51a60fabf-267d4dd65c4mr13547916fac.28.1722368961965; 
+ Tue, 30 Jul 2024 12:49:21 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-103-190.totalplay.net.
+ [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2653e7d4b35sm2392303fac.33.2024.07.30.12.49.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 Jul 2024 12:49:21 -0700 (PDT)
+Date: Tue, 30 Jul 2024 13:49:19 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 5/6] efi: Use malloc() for the EFI pool
+Message-ID: <20240730194919.GA3794063@bill-the-cat>
+References: <CAC_iWjJbs=i6gWHzeHbsHwFv5BC+6PWy0NesKFFWC1=ERAvcQw@mail.gmail.com>
+ <CAFLszTgkwUvou2i0zVCxJPDqGQPxbKUHE41gMs5Kt1_SToL9LA@mail.gmail.com>
+ <CAC_iWjKvx8VEnAuotXLm41YVn24-ijNjh5PW6kBcb1TqV9o_og@mail.gmail.com>
+ <CAFLszTg7aGk=nb+C1ovNu3QZk3d-vGAOsS5RzzUvdBCaMkyArw@mail.gmail.com>
+ <CAC_iWjLcJ-PkX2d0LH-Tj8M513t-R1Hy1qNAZNz3Cjw4P+K2BA@mail.gmail.com>
+ <CAFLszTivmh=ig-Zoe721B8wHqGRyFZ=R9_4Wo6ZhfmxNLO0+Bg@mail.gmail.com>
+ <CAC_iWjJapZD2dvzVh9XGn9hy0YecoyDN6-vtMASv7oF_j8LS-A@mail.gmail.com>
+ <CAFLszTgQuvgCHrV2Eej6rrnaxRt_xwtJrdgQtuhmp1oU6pgMGg@mail.gmail.com>
+ <20240730152447.GU989285@bill-the-cat>
+ <CAFLszTjVXzmwqbciQSF7a=teuhx_xSJHL2jy23oK5BgfP_3EDg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 66a943a52c52d9ba4458b1b3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Exj8bexTzdCrIPwg"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjVXzmwqbciQSF7a=teuhx_xSJHL2jy23oK5BgfP_3EDg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,157 +103,390 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Radxa ROCK S0 is a single-board computer based on the Rockchip RK3308B
-SoC in an ultra-compact form factor. Add a board target for the board.
 
-Features tested on a ROCK S0 v1.2 with 512 MiB RAM and 8 GiB eMMC:
-- SD-card boot
-- eMMC boot
-- Ethernet
-- USB gadget
-- USB host
+--Exj8bexTzdCrIPwg
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- arch/arm/dts/rk3308-rock-s0-u-boot.dtsi | 21 ++++++++
- board/rockchip/evb_rk3308/MAINTAINERS   |  6 +++
- configs/rock-s0-rk3308_defconfig        | 72 +++++++++++++++++++++++++
- doc/board/rockchip/rockchip.rst         |  1 +
- 4 files changed, 100 insertions(+)
- create mode 100644 arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
- create mode 100644 configs/rock-s0-rk3308_defconfig
+On Tue, Jul 30, 2024 at 01:42:17PM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Tue, 30 Jul 2024 at 09:24, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Tue, Jul 30, 2024 at 09:18:02AM -0600, Simon Glass wrote:
+> > > Hi Ilias,
+> > >
+> > > On Tue, 30 Jul 2024 at 08:54, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > > On Tue, 30 Jul 2024 at 17:38, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > Hi Ilias,
+> > > > >
+> > > > > On Tue, 30 Jul 2024 at 02:20, Ilias Apalodimas
+> > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > >
+> > > > > > On Mon, 29 Jul 2024 at 18:28, Simon Glass <sjg@chromium.org> wr=
+ote:
+> > > > > > >
+> > > > > > > Hi Ilias,
+> > > > > > >
+> > > > > > > On Mon, 29 Jul 2024 at 04:02, Ilias Apalodimas
+> > > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > > >
+> > > > > > > > Hi Simon
+> > > > > > > >
+> > > > > > > > On Fri, 26 Jul 2024 at 17:54, Simon Glass <sjg@chromium.org=
+> wrote:
+> > > > > > > > >
+> > > > > > > > > Hi Ilias,
+> > > > > > > > >
+> > > > > > > > > On Fri, 26 Jul 2024 at 02:31, Ilias Apalodimas
+> > > > > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > > > > >
+> > > > > > > > > > Hi Simon,
+> > > > > > > > > >
+> > > > > > > > > >
+> > > > > > > > > > On Fri, 26 Jul 2024 at 02:33, Simon Glass <sjg@chromium=
+=2Eorg> wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > Hi Heinrich,
+> > > > > > > > > > >
+> > > > > > > > > > > On Thu, 25 Jul 2024 at 09:54, Heinrich Schuchardt <xy=
+pron.glpk@gmx.de> wrote:
+> > > > > > > > > > > >
+> > > > > > > > > > > > On 25.07.24 15:56, Simon Glass wrote:
+> > > > > > > > > > > > > This API call is intended for allocating small am=
+ounts of memory,
+> > > > > > > > > > > > > similar to malloc(). The current implementation r=
+ounds up to whole pages
+> > > > > > > > > > > > > which can waste large amounts of memory. It also =
+implements its own
+> > > > > > > > > > > > > malloc()-style header on each block.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Use U-Boot's built-in malloc() instead, to avoid =
+these problems:
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > - it should normally be large enough for pool all=
+ocations
+> > > > > > > > > > > > > - if it isn't we can enforce a minimum size for b=
+oards which use
+> > > > > > > > > > > > >    EFI_LOADER
+> > > > > > > > > > > > > - the existing mechanism may create an unwatned e=
+ntry in the memory map
+> > > > > > > > > > > > > - it is used for most EFI allocations already
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > One side effect is that this seems to be showing =
+up some bugs in the
+> > > > > > > > > > > > > EFI code, since the malloc() pool becomes corrupt=
+ed with some tests.
+> > > > > > > > > > > > > This has likely crept in due to the very large ga=
+ps between allocations
+> > > > > > > > > > > > > (around 4KB), which provides a lot of leeway when=
+ the allocation size is
+> > > > > > > > > > > > > too small. Work around this by increasing the siz=
+e for now, until these
+> > > > > > > > > > > > > (presumed) bugs are located.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > > > > > ---
+> > > > > > > > > > > > >
+> > > > > > > > > > > > >   lib/efi_loader/efi_memory.c | 93 ++++++++------=
+-----------------------
+> > > > > > > > > > > > >   1 file changed, 19 insertions(+), 74 deletions(=
+-)
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > diff --git a/lib/efi_loader/efi_memory.c b/lib/ef=
+i_loader/efi_memory.c
+> > > > > > > > > > > > > index 2945f5648c7..fabe9e3a87a 100644
+> > > > > > > > > > > > > --- a/lib/efi_loader/efi_memory.c
+> > > > > > > > > > > > > +++ b/lib/efi_loader/efi_memory.c
+> > > > > > > > > > > > > @@ -80,45 +80,6 @@ static LIST_HEAD(efi_mem);
+> > > > > > > > > > > > >   void *efi_bounce_buffer;
+> > > > > > > > > > > > >   #endif
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > -/**
+> > > > > > > > > > > > > - * struct efi_pool_allocation - memory block all=
+ocated from pool
+> > > > > > > > > > > > > - *
+> > > > > > > > > > > > > - * @num_pages:       number of pages allocated
+> > > > > > > > > > > > > - * @checksum:        checksum
+> > > > > > > > > > > > > - * @data:    allocated pool memory
+> > > > > > > > > > > > > - *
+> > > > > > > > > > > > > - * U-Boot services each UEFI AllocatePool() requ=
+est as a separate
+> > > > > > > > > > > > > - * (multiple) page allocation. We have to track =
+the number of pages
+> > > > > > > > > > > > > - * to be able to free the correct amount later.
+> > > > > > > > > > > > > - *
+> > > > > > > > > > > > > - * The checksum calculated in function checksum(=
+) is used in FreePool() to avoid
+> > > > > > > > > > > > > - * freeing memory not allocated by AllocatePool(=
+) and duplicate freeing.
+> > > > > > > > > > > > > - *
+> > > > > > > > > > > > > - * EFI requires 8 byte alignment for pool alloca=
+tions, so we can
+> > > > > > > > > > > > > - * prepend each allocation with these header fie=
+lds.
+> > > > > > > > > > > > > - */
+> > > > > > > > > > > > > -struct efi_pool_allocation {
+> > > > > > > > > > > > > -     u64 num_pages;
+> > > > > > > > > > > > > -     u64 checksum;
+> > > > > > > > > > > > > -     char data[] __aligned(ARCH_DMA_MINALIGN);
+> > > > > > > > > > > > > -};
+> > > > > > > > > > > > > -
+> > > > > > > > > > > > > -/**
+> > > > > > > > > > > > > - * checksum() - calculate checksum for memory al=
+located from pool
+> > > > > > > > > > > > > - *
+> > > > > > > > > > > > > - * @alloc:   allocation header
+> > > > > > > > > > > > > - * Return:   checksum, always non-zero
+> > > > > > > > > > > > > - */
+> > > > > > > > > > > > > -static u64 checksum(struct efi_pool_allocation *=
+alloc)
+> > > > > > > > > > > > > -{
+> > > > > > > > > > > > > -     u64 addr =3D (uintptr_t)alloc;
+> > > > > > > > > > > > > -     u64 ret =3D (addr >> 32) ^ (addr << 32) ^ a=
+lloc->num_pages ^
+> > > > > > > > > > > > > -               EFI_ALLOC_POOL_MAGIC;
+> > > > > > > > > > > > > -     if (!ret)
+> > > > > > > > > > > > > -             ++ret;
+> > > > > > > > > > > > > -     return ret;
+> > > > > > > > > > > > > -}
+> > > > > > > > > > > > > -
+> > > > > > > > > > > > >   /**
+> > > > > > > > > > > > >    * efi_mem_cmp() - comparator function for sort=
+ing memory map
+> > > > > > > > > > > > >    *
+> > > > > > > > > > > > > @@ -681,13 +642,10 @@ void *efi_alloc_aligned_pag=
+es(u64 len, int memory_type, size_t align)
+> > > > > > > > > > > > >    * @buffer: allocated memory
+> > > > > > > > > > > > >    * Return:  status code
+> > > > > > > > > > > > >    */
+> > > > > > > > > > > > > -efi_status_t efi_allocate_pool(enum efi_memory_t=
+ype pool_type, efi_uintn_t size, void **buffer)
+> > > > > > > > > > > > > +efi_status_t efi_allocate_pool(enum efi_memory_t=
+ype pool_type, efi_uintn_t size,
+> > > > > > > > > > > > > +                            void **buffer)
+> > > > > > > > > > > > >   {
+> > > > > > > > > > > > > -     efi_status_t r;
+> > > > > > > > > > > > > -     u64 addr;
+> > > > > > > > > > > > > -     struct efi_pool_allocation *alloc;
+> > > > > > > > > > > > > -     u64 num_pages =3D efi_size_in_pages(size +
+> > > > > > > > > > > > > -                                       sizeof(st=
+ruct efi_pool_allocation));
+> > > > > > > > > > > > > +     void *ptr;
+> > > > > > > > > > > > >
+> > > > > > > > > > > > >       if (!check_allowed())
+> > > > > > > > > > > > >               return EFI_UNSUPPORTED;
+> > > > > > > > > > > > > @@ -700,16 +658,21 @@ efi_status_t efi_allocate_p=
+ool(enum efi_memory_type pool_type, efi_uintn_t size,
+> > > > > > > > > > > > >               return EFI_SUCCESS;
+> > > > > > > > > > > > >       }
+> > > > > > > > > > > >
+> > > > > > > > > > > > Unfortunately this patch does not match the UEFI sp=
+ecification:
+> > > > > > > > > > > >
+> > > > > > > > > > > > Two different memory types cannot reside in the sam=
+e memory page. You
+> > > > > > > > > > > > have to keep track of the memory type of each alloc=
+ated memory page and
+> > > > > > > > > > > > report it in GetMemoryMap().
+> > > > > > > > > > >
+> > > > > > > > > > > I actually hadn't thought about that. Is it implied i=
+n the spec or
+> > > > > > > > > > > actually stated somewhere?
+> > > > > > > > > >
+> > > > > > > > > > I don't remember if it's explicitly stated, but it *rea=
+lly* doesn't
+> > > > > > > > > > have to be. Although u-boot doesn't currently support t=
+his on modern
+> > > > > > > > > > secure systems you can't have code and data mixed on th=
+e same page.
+> > > > > > > > > > This would prevent you to map pages with proper permiss=
+ions and take
+> > > > > > > > > > advantage of CPU security features  e.g RW^X.
+> > > > > > > > >
+> > > > > > > > > As it stands, U-Boot's data is reported as EFI_BOOT_SERVI=
+CES_CODE
+> > > > > > > > > through EFI. Perhaps the difference between EFI_BOOT_SERV=
+ICES_CODE and
+> > > > > > > > > EFI_BOOT_SERVICES_DATA isn't that important?
+> > > > > > > > >
+> > > > > > > > > But if we did want to fix that, we could make the malloc =
+region
+> > > > > > > > > EFI_BOOT_SERVICES_DATA.
+> > > > > > > > >
+> > > > > > > > > >
+> > > > > > > > > > In any case, the AllocatePool description reads "This f=
+unction
+> > > > > > > > > > allocates pages from EfiConventionalMemory as needed to=
+ grow the
+> > > > > > > > > > requested pool type. All allocations are eight-byte ali=
+gned". I don't
+> > > > > > > > > > think using malloc in AllocatePool is appropriate. If w=
+e ever want to
+> > > > > > > > > > do that and allocate from the malloc space, we need to =
+teach malloc
+> > > > > > > > > > some EFI semantics, but that's a really bad idea.
+> > > > > > > > >
+> > > > > > > > > Here I don't see the difference between EFI's malloc(n) a=
+nd
+> > > > > > > > > memalign(8, n). I do see a lot of comments like 'use the =
+spec', 'read
+> > > > > > > > > the spec'. It seems very clear to me that the bootloader =
+can use
+> > > > > > > > > whatever algorithm it likes to provide the allocated memo=
+ry for the
+> > > > > > > > > pool.
+> > > > > > > > >
+> > > > > > > > > What sort of EFI semantics are you referring to?
+> > > > > > > >
+> > > > > > > > the memory type. Your patch removes the call to efi_allocat=
+e_pages
+> > > > > > > > which tracks it.
+> > > > > > >
+> > > > > > > I can put that code back, depending on what we decide below.
+> > > > > > >
+> > > > > > > >
+> > > > > > > > >
+> > > > > > > > > >
+> > > > > > > > > > >
+> > > > > > > > > > > Anyway, from what I can tell, we mostly use EFI_BOOT_=
+SERVICES_DATA.
+> > > > > > > > > > > The only exception is EFI_RUNTIME_SERVICES_DATA for t=
+he runtime stuff.
+> > > > > > > > > >
+> > > > > > > > > > That's not entirely correct, we use a lot more than the=
+se 2.
+> > > > > > > > > > EFI_LOADER_DATA, EFI_LOADER_CODE and EFI_ACPI_RECLAIM_M=
+EMORY from a
+> > > > > > > > > > quick grep
+> > > > > > > > >
+> > > > > > > > > Yes I did a quick grep too, but then checked each site. T=
+he first two
+> > > > > > > > > are used in an EFI app, not U-Boot itself. The ACPI one i=
+s not an
+> > > > > > > > > allocation.
+> > > > > > > > >
+> > > > > > > > > > >
+> > > > > > > > > > > So perhaps we can use malloc() for EFI_BOOT_SERVICES_=
+DATA allocations
+> > > > > > > > > > > and stick with whole pages otherwise? That will mostl=
+y fix the problem
+> > > > > > > > > > > I am seeing.
+> > > > > > > > >
+> > > > > > > > > Any comments on this?
+> > > > > > > >
+> > > > > > > > This violates the spec and probably breaks a few tests and =
+the EFI
+> > > > > > > > boot services API, as you are supposed to be able to define=
+ the memory
+> > > > > > > > type. We might be able to control it from U-Boot, but EFI a=
+pps are
+> > > > > > > > going to end up being buggy and hard to debug -- e.g an app=
+ calls
+> > > > > > > > allocatePool to allocate memory that needs to be preserved =
+at runtime.
+> > > > > > >
+> > > > > > > To be more specific, I am suggesting:
+> > > > > > > - use malloc() for EFI_BOOT_SERVICES_DATA allocations (with n=
+o memory
+> > > > > > > type since it is always that). This should cover all the U-Bo=
+ot
+> > > > > > > allocations and make sure they are safely within the malloc()=
+ pool
+> > > > > > > - use efi_allocate_pages() for other memory types (keeping th=
+e memory
+> > > > > > > type in metadata)
+> > > > > > >
+> > > > > >
+> > > > > > Personally, I don't see the point and we deviate from the spec =
+as
+> > > > > > well. Perhaps Heinrich thinks otherwise, but the EFI spec still=
+ says
+> > > > > > you need to allocate *pages* to grow the pool. What's missing f=
+rom our
+> > > > > > efi_allocate_pool() is the ability to merge allocations of the =
+same
+> > > > > > memory type to an existing pool assuming there's space, rather =
+than
+> > > > > > requesting a new pool of 4kb.
+> > > > >
+> > > > > "This function allocates pages from EfiConventionalMemory as need=
+ed to
+> > > > > grow the requested pool type". So far as EFI is concerned, the
+> > > > > malloc() region is in EfiConventionalMemory, so I don't see any
+> > > > > deviation.
+> > > > >
+> > > > > Please also see below.
+> > > > >
+> > > > > > > >
+> > > > > > > > You can switch some callsite of efi_allocate_pool to
+> > > > > > > > efi_allocate_pages() internally. Will that fix the behavior?
+> > > > > > >
+> > > > > > > It still allocates memory 'in space' and uses 4KB for each al=
+location.
+> > > > > > >
+> > > > >
+> > > > > This is the key point that doesn't seem to be coming across. The
+> > > > > current allocator is allocating memory wherever it likes, potenti=
+ally
+> > > > > interfering with the kernel_addr_r addresses, etc. as on qemu_arm.
+> > > >
+> > > > It is, but I don't think using malloc is solving it. It's papering
+> > > > over the problem, because if someone in the future launches an EFI =
+app
+> > > > or allocates EFI memory with a different type you are back on the s=
+ame
+> > > > problem.
+> > >
+> > > It is certainly solving this problem.
+> > >
+> > > Once the app is launched it is OK to overwrite memory...after all it
+> > > has been loaded and is running. The issue is that these little
+> > > allocations can end up anywhere in memory. Did you see the qemu_arm
+> > > note?
+> >
+> > Isn't this another part of why we need the LMB rework? So that
+> > kernel_addr_r, et al, can be marked as reserved.
+>=20
+> If we mark them as reserved, we won't be able to load a file into that
+> region, so boot scripts will fail.
 
-diff --git a/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi b/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
-new file mode 100644
-index 000000000000..84ca2ee0d5fb
---- /dev/null
-+++ b/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
-@@ -0,0 +1,21 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+#include "rk3308-u-boot.dtsi"
-+
-+&emmc_pwren {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
-+&uart0 {
-+	bootph-all;
-+	clock-frequency = <24000000>;
-+};
-+
-+&uart0_xfer {
-+	bootph-all;
-+};
-+
-+&vdd_core {
-+	regulator-init-microvolt = <1015000>;
-+};
-diff --git a/board/rockchip/evb_rk3308/MAINTAINERS b/board/rockchip/evb_rk3308/MAINTAINERS
-index abffbb1eb0ab..cd219c65f278 100644
---- a/board/rockchip/evb_rk3308/MAINTAINERS
-+++ b/board/rockchip/evb_rk3308/MAINTAINERS
-@@ -12,3 +12,9 @@ R:      Jonas Karlman <jonas@kwiboo.se>
- S:      Maintained
- F:      configs/rock-pi-s-rk3308_defconfig
- F:      arch/arm/dts/rk3308-rock-pi-s*
-+
-+ROCK-S0
-+M:      Jonas Karlman <jonas@kwiboo.se>
-+S:      Maintained
-+F:      configs/rock-s0-rk3308_defconfig
-+F:      arch/arm/dts/rk3308-rock-s0*
-diff --git a/configs/rock-s0-rk3308_defconfig b/configs/rock-s0-rk3308_defconfig
-new file mode 100644
-index 000000000000..074ec4cd66ba
---- /dev/null
-+++ b/configs/rock-s0-rk3308_defconfig
-@@ -0,0 +1,72 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3308-rock-s0"
-+CONFIG_DM_RESET=y
-+CONFIG_ROCKCHIP_RK3308=y
-+CONFIG_TARGET_EVB_RK3308=y
-+CONFIG_DEBUG_UART_BASE=0xFF0A0000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+# CONFIG_DEBUG_UART_BOARD_INIT is not set
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_DEBUG_UART=y
-+CONFIG_ANDROID_BOOT_IMAGE=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3308-rock-s0.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_PAD_TO=0x7f8000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_ROCKUSB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+CONFIG_CMD_RNG=y
-+CONFIG_CMD_KASLRSEED=y
-+CONFIG_CMD_REGULATOR=y
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_REGMAP=y
-+CONFIG_SYSCON=y
-+CONFIG_CLK=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_ROCKCHIP_IODOMAIN=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_DM_MDIO=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_ETH_DESIGNWARE=y
-+CONFIG_GMAC_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PINCTRL=y
-+CONFIG_REGULATOR_PWM=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_PWM_ROCKCHIP=y
-+CONFIG_RAM=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_SYSINFO=y
-+CONFIG_SYSRESET=y
-+CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_DWC2_OTG=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_USB_FUNCTION_ROCKUSB=y
-+CONFIG_LZO=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index bedc52e03e20..82cbc6e3e0db 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -54,6 +54,7 @@ List of mainline supported Rockchip boards:
-      - Amarula Vyasa-RK3288 (vyasa-rk3288)
- * rk3308
-      - Radxa ROCK Pi S (rock-pi-s-rk3308)
-+     - Radxa ROCK S0 (rock-s0-rk3308)
-      - Rockchip Evb-RK3308 (evb-rk3308)
-      - Roc-cc-RK3308 (roc-cc-rk3308)
- * rk3326
--- 
-2.45.2
+No? We mark it as being overwriteable but allocated. This is part of the
+LMB rework series.
 
+> Please take a look at the whole series and let me know if there is
+> anything missing from the descriptions I have given. I have had this
+> problem in the back of my mind for some time...but just a few hours of
+> investigation was enough to determine that it really is broken.
+
+I'm missing something, sorry. Yes, it is known that EFI can make some
+incorrect assumptions about what memory is/isn't available (as other
+implementations give EFI the world to work with), hence the LMB rework
+series to address some of these problems.
+
+--=20
+Tom
+
+--Exj8bexTzdCrIPwg
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmapQ7gACgkQFHw5/5Y0
+tywjjwv+MrcKviBqnKagqA34jkZYEPBsDGarlM00A7E7cosY7LDZUf07TZIe8rKg
+u2iSZNbp+l6osYtJbECj63qDY1MTWky5LRM88+E2mf445uvw4XYTqmRbCZ8//deR
+dzSjSA/S4GjhhOcakBnfMsRIU20t+qwoOPanUhcfguvbHRbVL8w8qTvUWrMHR+Oc
+Rv1I9ieDe4ehhJyreqTCUjZCtUNxyoI8etU7fe7NPsp5GRBXlFLyUW/cSJc2U+WU
+lp/we0nZE58UhL+loRbrahTJseI7mRw6nvrQG3Ef1/0TC5D50rykjxrp2eCCDgf1
+BPxsFZjq+EvYehkaHSnArHd1QtQTKErW0tGRGxoejr4cmXgIjgxwgovq6qAztolt
+KG4konpUBNmcNP5S3lATLok9q+6wvj28vKiFci6IIQ4MDMKnFD2xbKei3SkiH7VG
+8G2XD1t6kmpyIbPjsww7++EWT5iH7norC2DPPfKeoR2S1VE0V4NRsmuN+qN7jhCO
+rnP+RC/8
+=NRVA
+-----END PGP SIGNATURE-----
+
+--Exj8bexTzdCrIPwg--
