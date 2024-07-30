@@ -4,64 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCFB9C3DA49
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 05:32:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFC41C3DA49
+	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 06:08:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11CC6888E5;
-	Tue, 30 Jul 2024 07:31:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 3E24D888E5;
+	Tue, 30 Jul 2024 08:08:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1722317519;
-	bh=nGZmJTK2Hk5EvDGrCb/kMzNxo7EJcPQJE8HzDJbqcjQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=QQRUPt6ptsCSO7m9wivaHyDQm+qrJ49i3lh/OYMyAgT38VkxG73kOFRAKAM/2MYcw
-	 LNhtb4yjBL/56cgY+/VDcKCDgpqvmZFBESVc69LLpsh4q6UFDxmLQNPawmcfQuPBLl
-	 n3GBspYE9gxPms5wuRwDc2Pzx5ZZJLFLSC7cb+wSJ3rRwWEkrU5QJa61zhmg9Vjoo8
-	 uif5itD4SiPm5AU+j+u4CFEom5BitWdBk1kM1CM4L7aERvX4/eZIDOuzgnIt9unzlH
-	 c0+tq/I496Hz4q8wv9GXH3Z+ct7yTZ2QwNW6WaBWm7wefqGjxj6cjoG2Zs6BMI32zr
-	 ANv4GMoJ1gxoQ==
-Received: from eryximachos (unknown
- [IPv6:2001:861:52:5f60:7f4c:42be:fdf8:3b8a])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested) (Authenticated sender: pro@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id D981A88855;
- Tue, 30 Jul 2024 07:31:55 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1722317517;
- bh=nGZmJTK2Hk5EvDGrCb/kMzNxo7EJcPQJE8HzDJbqcjQ=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=xe7gf/jP7qDG8ZZYS55kzJjJ6K/WrNStsQRa0e0r2WEVJWzpZtBqLEh23DyujgOj2
- hG1VZwsOxnZk3i3x3tgLh04Qdx7wgHahnTE+nq5b5dJVcByQoBsQkqVlxKxw1xBy6+
- rSUYMUPKNl4Xuv9SWuToD3DGhakGLxL4FazGQT63ySIyqt7oWlz9Oy9o8Ef3+Kadp0
- Zs/jqxBjWBRxAu/3C6Sz13/Z7V/5l9wyvxefwUs9wW7FKK68V45CZhYshEKwW1TyjT
- DDEDgOaO8SjA+CH/H094YHNUoG46WoMWW0BHz8iYmwD3DYq3CDvSypismHuw4ukktH
- GKNolvHGN7yQw==
-Date: Tue, 30 Jul 2024 07:31:54 +0200
-From: Philip Oberfichtner <pro@denx.de>
-To: rfried.dev@gmail.com, u-boot@lists.denx.de
-Cc: bmeng.cn@gmail.com, caleb.connolly@linaro.org,
- christophe.roullier@foss.st.com, epsi@gmx.de,
- eugen.hristev@collabora.com, festevam@gmail.com,
- forbidden405@outlook.com, ivprusov@salutedevices.com,
- joe.hershberger@ni.com, jonas@kwiboo.se, kever.yang@rock-chips.com,
- leyfoon.tan@starfivetech.com, marek.vasut+renesas@mailbox.org,
- marjolaine.amate@odyssee-systemes.fr, neil.armstrong@linaro.org,
- n-francis@ti.com, patrice.chotard@foss.st.com,
- patrick.delaunay@foss.st.com, philipp.tomsich@vrull.eu,
- rfried.dev@gmail.com, seanga2@gmail.com,
- sebastian.reichel@collabora.com, sebastien.szymanski@armadeus.com,
- sjg@chromium.org, sumit.garg@linaro.org, trini@konsulko.com,
- xypron.glpk@gmx.de, marex@denx.de
-Subject: Re: [PATCH v3 0/5] net: dwc_eth_qos: Add glue driver for Intel MAC
-Message-ID: <Zqh6yvNEFUD2AKUq@eryximachos>
-References: <20240717122906.117861-1-pro@denx.de>
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="f6RCtJP+";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 5FC5F88908; Tue, 30 Jul 2024 08:08:27 +0200 (CEST)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E6C2888CF
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 08:08:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=9elements.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-e05f913e382so2535904276.2
+ for <u-boot@lists.denx.de>; Mon, 29 Jul 2024 23:08:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=9elements.com; s=google; t=1722319703; x=1722924503; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Rz7os/Gp9+ytDkaw0syesAy5AWvs3gFjSPH51uvUGT0=;
+ b=f6RCtJP+evIa4sVxDXH2u+A7wNgXOE4vkonrV4og9+bXjjHvZpw9v/snqyfJWcraW4
+ 1RSiYhT7DehsXjntVRdGNHOu2dUujE/btfSqPkJLPotepAE+VKgXFazanuftnviYx60R
+ Nk+HBuT9NeKz7y3InBD481vCLy7TcbnxmWjPKHmtIsWYURVkakaCGmdFC3IyRE3+k4JF
+ VA9yFFLxk9a0wJQPEIGZHzUqj8O47u0/gE3x/9iRSraT4UllU2S/tIJJ0XsJYO1bUSSi
+ e6kaQDxoPXxAw/+CLm4hb9hAILrgHnT69XKcLF1PdTQjS8Qv8aQbdUkkYQ7T4hD+XH/O
+ V5zQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722319703; x=1722924503;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Rz7os/Gp9+ytDkaw0syesAy5AWvs3gFjSPH51uvUGT0=;
+ b=syDKK9t08XmZNm6pjX+/BItYQkQr65Cb0qF1lsuYBGYh9ncs23pko+CRhFk43Zn7Zd
+ rN8E9jsU0FBLutVbmr7yDYY8nCRy9Bp1uJjnDrrjMnLmXxuSHPKl2Pw7YppUcOFJyBEb
+ zC5dQMfLpQILfmZ5GmBFD88vDj7D7ctyFd6tI2ap92stak+xizX7ncZkQWKeoFr8AMAq
+ WOa6G0b8CWBtFexTHO7Snt6CgrIyvbXM3MkpRy4sujP9/0dQSRjASaI4pgpMhkpE4o0k
+ 7STx4AG1Xz+nPr9w52m0Db8DrEfJ63d3tC8/3DtdXnccyAZD0IE5E7WY5dH4m6Qnl+be
+ rNtQ==
+X-Gm-Message-State: AOJu0YwezxkV/Hh2/AvVRaAVEmllTQZt3iumZ62BeiH7D0Ly+f42osOj
+ Xm+M01RgEheaClsc57D7oopV4qrYS2/TvXM321MTc0b0Fe6h3J86K2d4mDw1UhT+8FTo1Fp/X8w
+ si4T0W27MMr+TsuFqvZIwOEs5+am0w+nQou5deg==
+X-Google-Smtp-Source: AGHT+IE0PnHAsWMSXWkCOJLNfbjTgAqD4l/U1sYvNQ608zQk4PhQrwmdAmwLd4vHzyvboFwWwkV0qH5Y1fLJTnQH9Jk=
+X-Received: by 2002:a05:6902:1504:b0:e08:6787:54b8 with SMTP id
+ 3f1490d57ef6-e0b545bfbb0mr9900314276.46.1722319703261; Mon, 29 Jul 2024
+ 23:08:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240717122906.117861-1-pro@denx.de>
+References: <20240727071742.1735703-1-patrick.rudolph@9elements.com>
+ <CALeDE9OztBrRDbj8ScFq6e+0XR_Xivxy1NQAOjrsqdqvzRTZTw@mail.gmail.com>
+In-Reply-To: <CALeDE9OztBrRDbj8ScFq6e+0XR_Xivxy1NQAOjrsqdqvzRTZTw@mail.gmail.com>
+From: Patrick Rudolph <patrick.rudolph@9elements.com>
+Date: Tue, 30 Jul 2024 08:08:12 +0200
+Message-ID: <CALNFmy3pOyH3y48bgOwisOhDXB+p_p8dn2r+ZQLP_srd=JqFRw@mail.gmail.com>
+Subject: Re: [PATCH 00/17] Implement ACPI on aarch64
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de, mbrugger@suse.com, trini@konsulko.com, 
+ sjg@chromium.org, bmeng.cn@gmail.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,57 +87,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ramon,
+Hi Peter,
 
-Any comments on this series?
+> Rather than just RPi4 support we should add generic qemu support, as
+> opposed to emulated RPi4 in qemu support as qemu already supports ACPI
+> on aarch64 for generic SystemReady support with pci/network etc that
+> way the support is much easier to test in CI.
+>
+That sounds reasonable. I'll look into that as well.
 
-On Wed, Jul 17, 2024 at 02:29:01PM +0200, Philip Oberfichtner wrote:
-> This patch series implements the dwc_eth_qos glue driver for Intel SOCs.
-> Before doing that, a few general adaptions to the dwc_eth_qos.c main
-> driver are required. Most notably, the preparation for PCI based driver
-> instances, which do not necessarily use a device tree.
-> 
-> This patch series depends on: "net: dwc_eth_qos: mdio: Implement clause 45":
-> https://patchwork.ozlabs.org/project/uboot/patch/20240507094237.168238-1-pro@denx.de/
-> 
-> Changes in V3:
-> 	- Replace mfence() with mb()
-> 	- Clean-up eqos_get_base_addr()
-> 	- Several style fixes for dwc_eth_qos_intel
-> 
-> Philip Oberfichtner (5):
->   x86: provide mb() macro
->   net: dwc_eth_qos: Fix header to be self-contained
->   net: dwc_eth_qos: Adapt probe() for PCI devices
->   net: dwc_eth_qos: Implement bind() for PCI devices
->   net: dwc_eth_qos: Add glue driver for Intel MAC
-> 
->  arch/x86/cpu/mp_init.c             |  10 +-
->  arch/x86/include/asm/cpu.h         |   5 -
->  arch/x86/include/asm/io.h          |   1 +
->  drivers/net/Kconfig                |   7 +
->  drivers/net/Makefile               |   1 +
->  drivers/net/dwc_eth_qos.c          |  79 ++++-
->  drivers/net/dwc_eth_qos.h          |   8 +-
->  drivers/net/dwc_eth_qos_imx.c      |   6 +
->  drivers/net/dwc_eth_qos_intel.c    | 449 +++++++++++++++++++++++++++++
->  drivers/net/dwc_eth_qos_intel.h    |  57 ++++
->  drivers/net/dwc_eth_qos_qcom.c     |   6 +
->  drivers/net/dwc_eth_qos_rockchip.c |   6 +
->  drivers/net/dwc_eth_qos_starfive.c |   6 +
->  drivers/net/dwc_eth_qos_stm32.c    |   6 +
->  include/pci_ids.h                  |   9 +
->  15 files changed, 637 insertions(+), 19 deletions(-)
->  create mode 100644 drivers/net/dwc_eth_qos_intel.c
->  create mode 100644 drivers/net/dwc_eth_qos_intel.h
-> 
-> -- 
-> 2.39.2
-> 
-
--- 
-=====================================================================
-DENX Software Engineering GmbH,        Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-22  Fax: +49-8142-66989-80   Email: pro@denx.de
-=====================================================================
+> Also are the ACPI tables you use here compatible with the tianocore
+> raspberry pi 4 support so users don't end up with weird differences
+> between firmware?
+>
+The ACPI code is identical to the tianocore one. However the U-Boot
+implementation
+is a bare minimum to boot a Linux OS, thus yes there are differences
+between those
+firmwares. EDK2 has more quirks for various boards and reads in UEFI
+variables to
+enable/disable certain devices or features.
