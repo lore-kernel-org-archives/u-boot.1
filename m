@@ -4,50 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DECAC3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 13:00:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DA6CC3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 13:00:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D949C88A16;
-	Wed, 31 Jul 2024 14:59:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=protonmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 48FDD88A21;
+	Wed, 31 Jul 2024 14:59:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=protonmail.com header.i=@protonmail.com header.b="l+rmDAxU";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fPXrLJ3d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7E0E88958; Wed, 31 Jul 2024 10:48:22 +0200 (CEST)
-Received: from mail-4322.protonmail.ch (mail-4322.protonmail.ch [185.70.43.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D0239889D9; Wed, 31 Jul 2024 13:49:32 +0200 (CEST)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CE4283989
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 10:48:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=protonmail.com
+ by phobos.denx.de (Postfix) with ESMTPS id AF054889C1
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 13:49:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=emil.kronborg@protonmail.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
- s=protonmail3; t=1722415700; x=1722674900;
- bh=RfNB+1q8TmNcU8v2lU+Bg32mb2fm8zSdg4vrpc/6LyA=;
- h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=l+rmDAxUo60YSYkblWSE5p24cSETbnjRU6eF4CdsUQGoYjzVMXsgB9wBuugKqnGlx
- pwKY+slb+UUpx17+93qfweU7uhEtdk2ruEtLz20uJv4Mhy8eIV34hE3rdGgoPgR3QV
- Fah36lpt0qyEkkiVKBRveO6grK1U8N16GCaQalw5xTUWR6oUdY15G9EiFSBLQ6Oavf
- tzr5GebOryeIZST/jxOgThYpNodqzPNvKA9oxN7AoaejKw5bZCZwlsQb/uLGfERA/U
- 0OHQ9feJ8uF9r5qdR2Xv1ryUeYnQ89HT2J4d5G1W9IUUqrArGDmtWL5fUIQO7A9Sfh
- vlPoz1o6MZVBA==
-Date: Wed, 31 Jul 2024 08:48:13 +0000
-To: trini@konsulko.com
-From: Emil Kronborg <emil.kronborg@protonmail.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v2] doc: document the pwm command
-Message-ID: <20240731084809.30370-1-emil.kronborg@protonmail.com>
-Feedback-ID: 20949900:user:proton
-X-Pm-Message-ID: c058576ad539382f0ec07c245d595040b783941e
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=islavaivanov76@gmail.com
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-450217eaa62so21737451cf.3
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 04:49:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1722426569; x=1723031369; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=WOfvm6rf3ugMOQEwqj2yIwrAefBWgstu0cKYjusTxMw=;
+ b=fPXrLJ3de3cATWHCCtd5smY1bFh7coxEs9xQbl0HN1vP8a0y3CQKx/gc8znMflLnd3
+ jbWVsLE8ZIWGGaBFymHqyvKjSqxnxqy6IkNvhDM45jdJmbF8FqQkc8POxGDlDPtBjsFm
+ AwMH4aADv1HJDGsPIpyd35uyMV4ZjYg/zMXx1lIAlp0H5JjFz/qN1qdAe5qI8gF0uYRh
+ 7RUp+q/rEyoDhokFsfOq/5mdBr9goyK4CpbWMeZpdae26YZMZZbAoxieL7nIkZ8OnZ4k
+ rg4htDzHtb0w84FU4drcSEKPBhDmxwNvvssX1Gju3h0ouTmHD8IA6WcjSwTGfmr64kje
+ XWFg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722426569; x=1723031369;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=WOfvm6rf3ugMOQEwqj2yIwrAefBWgstu0cKYjusTxMw=;
+ b=jxu/9/OaWTfCzC2I6Asrv81MHq7kVK/4kdxm8oW7/I8UkeOYen+0ioLyHdoTvGtwcK
+ iAh60YJKGV5aSpenEuTydzEKDK1SgR6m9/J/nNkxFyvIqyThVqDcVajeiFa1Qcqytu0Y
+ vRD6q25iLcFEyGqMbp/5SfGjSkUXAvwpMBF8YFDRXZzlybd+gW3hDVr5+6r9kL6CKQbc
+ 5sL/WIeGi9XJv5j4ZMtbAnwsPk9mbFRzYzIG/QOKeVwqmRQHjUtdslN6s+9psrb36SOn
+ oRZONUu7tPy2GfmMY24IECNB1HLoYG0e/ZazzNyL9qU+0RtxXcWnN7La3Ya+/K4q4Xc2
+ uLbw==
+X-Gm-Message-State: AOJu0YyvZQy/3/W8hKXbou+ks9JgduOYVH+7ytsUbdGbNAQakE8k2NZp
+ 0spOkZzXi3nA1R6T9NpcehPZLs+2JvlNXxf5HW6BpjD0893Uo+EipV3NolQVqDJdSjTprCr9ns+
+ k4p0mFwSW1tlmXehnczzeQmNLCBtrxnteJZc=
+X-Google-Smtp-Source: AGHT+IHKvNRkOiyWiAIw4vD4lymEQkOkiSbpdtrLwrJ9fCaZHNxmxQr5wq0fR0Q6SOVxT3d0u89abrJyb4TprSaPxVY=
+X-Received: by 2002:a05:622a:1b22:b0:447:e381:9ad5 with SMTP id
+ d75a77b69052e-45004db0631mr167411931cf.5.1722426569286; Wed, 31 Jul 2024
+ 04:49:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+From: Pugemon <islavaivanov76@gmail.com>
+Date: Wed, 31 Jul 2024 14:49:18 +0300
+Message-ID: <CACS4SE=VOJ9uHvG=mnWtR=9g_xAqgtfyf3MjE=RDJBdVEFxvzw@mail.gmail.com>
+Subject: [PATCH] arm: dts: orangepi: Fix Orange Pi R1 and Plus LTS boot issue
+To: u-boot@lists.denx.de
 X-Mailman-Approved-At: Wed, 31 Jul 2024 14:59:20 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,120 +83,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Signed-off-by: Emil Kronborg <emil.kronborg@protonmail.com>
+Orange Pi R1 Plus and LTS don't have eMMC
+(default mmc0 in rk3328-u-boot.dtsi).
+The device is equipped with SPI flash memory, which U-Boot tries to use for
+reading configuration. However, the manufacturer has not provided any means
+to utilize SPI flash memory. There is no documentation,
+or software available for this purpose.
+
+As a result, during OpenWRT sysupgrade, the board fails to boot because the
+script that switches the boot_device to an available one does not trigger.
+
+This patch changes the alias of mmc0 from &emmc to &sdmmc,
+ensuring the board boots correctly,
+and sysupgrade completes successfully.
+Additionally, this allows saving the U-Boot environment
+by using saveenv with uboot-envtool.
+
+Signed-off-by: Pugemon <islavaivanov76@gmail.com>
+Cc: Tianling Shen <cnsztl@gmail.com>
 ---
-Changes in v2:
-- Fixed 'pwm enable' appearing twice in the examples section.
-- Rebased on top of master.
+ arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi | 12 ++++++++++++
+ arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi     | 12 ++++++++++++
+ 2 files changed, 24 insertions(+)
 
- doc/usage/cmd/pwm.rst | 80 +++++++++++++++++++++++++++++++++++++++++++
- doc/usage/index.rst   |  1 +
- 2 files changed, 81 insertions(+)
- create mode 100644 doc/usage/cmd/pwm.rst
+diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
+b/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
+index b50c1332b8..7063b188f2 100644
+--- a/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
++++ b/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
+@@ -2,11 +2,23 @@
+ /*
+  * (C) Copyright 2018-2019 Rockchip Electronics Co., Ltd
+  * (C) Copyright 2020 David Bauer
++ * (C) Copyright 2024 Pugemon
+  */
 
-diff --git a/doc/usage/cmd/pwm.rst b/doc/usage/cmd/pwm.rst
-new file mode 100644
-index 000000000000..3562e50280e6
---- /dev/null
-+++ b/doc/usage/cmd/pwm.rst
-@@ -0,0 +1,80 @@
-+.. SPDX-License-Identifier: GPL-2.0+:
-+
-+.. index::
-+   single: pwm (command)
-+
-+pwm command
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+
-+Synopsis
-+--------
-+
-+::
-+
-+    pwm invert <pwm_dev_num> <channel> <polarity> - invert polarity
-+    pwm config <pwm_dev_num> <channel> <period_ns> <duty_ns> - config PWM
-+    pwm enable <pwm_dev_num> <channel> - enable PWM output
-+    pwm disable <pwm_dev_num> <channel> - disable PWM output
-+
-+
-+Description
-+-----------
-+
-+The ``pwm`` command is used to access and configure PWM (Pulse Width Modul=
-ation)
-+signals. For all subcommands, the following arguments are common:
-+
-+pwm_dev_num
-+    device number
-+
-+channel
-+    channel on chosen device
-+
-+pwm invert
-+----------
-+
-+The signal's active and inactive states are swapped.
-+
-+pwm config
-+----------
-+
-+Configure the period and duty cycle in nanoseconds.
-+
-+pwm enable
-+----------
-+
-+Enable output on the configured device and channel.
-+
-+pwm disable
-+-----------
-+
-+Disable output on the configured device and channel.
-+
-+Examples
-+--------
-+
-+Configure device 0 channel 0 to 50 kHz period and 70% duty cycle::
-+
-+    =3D> pwm config 0 0 20000 14000
-+
-+Enable output on the configured device and channel::
-+
-+    =3D> pwm enable 0 0 20000 14000
-+
-+Disable output on the configured device and channel::
-+
-+    =3D> pwm disable 0 0 20000 14000
-+
-+Invert the signal on the configured device and channel::
-+
-+    =3D> pwm invert 0 0 1
-+
-+Configuration
-+-------------
-+
-+The ``pwm`` command is only available if CONFIG_CMD_PWM=3Dy.
-+
-+Return value
-+------------
-+
-+If the command succeeds, the return value ``$?`` is set to 0. If an error =
-occurs, the
-+return value ``$?`` is set to 1.
-diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-index 49b354e6ffd2..1adab5283950 100644
---- a/doc/usage/index.rst
-+++ b/doc/usage/index.rst
-@@ -92,6 +92,7 @@ Shell commands
-    cmd/pinmux
-    cmd/printenv
-    cmd/pstore
-+   cmd/pwm
-    cmd/qfw
-    cmd/read
-    cmd/reset
+ #include "rk3328-u-boot.dtsi"
+ #include "rk3328-sdram-lpddr3-666.dtsi"
 
-base-commit: 8877bc51a8a4d921ba2f163208b8b1a57ba47c18
---=20
-2.46.0
++/ {
++       aliases {
++               mmc0 = &sdmmc;
++               spi0 = &spi0;
++       };
++
++       chosen {
++               u-boot,spl-boot-order = "same-as-spl", &sdmmc;
++       };
++};
++
+ &spi0 {
+        flash@0 {
+                bootph-pre-ram;
+diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
+b/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
+index 8ae003bbef..0374172527 100644
+--- a/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
++++ b/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
+@@ -2,11 +2,23 @@
+ /*
+  * (C) Copyright 2018-2019 Rockchip Electronics Co., Ltd
+  * (C) Copyright 2020 David Bauer
++ * (C) Copyright 2024 Pugemon
+  */
 
+ #include "rk3328-u-boot.dtsi"
+ #include "rk3328-sdram-ddr4-666.dtsi"
 
++/ {
++       aliases {
++               mmc0 = &sdmmc;
++               spi0 = &spi0;
++       };
++
++       chosen {
++               u-boot,spl-boot-order = "same-as-spl", &sdmmc;
++       };
++};
++
+ &spi0 {
+        flash@0 {
+                bootph-pre-ram;
