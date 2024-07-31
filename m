@@ -4,56 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FDA9C3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 21:13:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF62CC3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 21:39:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C59D388A7B;
-	Wed, 31 Jul 2024 23:12:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id EFDD68897F;
+	Wed, 31 Jul 2024 23:39:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="0MaulCEj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KUy/uncm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0615488580; Wed, 31 Jul 2024 23:12:52 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 07C8A88644; Wed, 31 Jul 2024 23:39:23 +0200 (CEST)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1A8988A61
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 23:12:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A121F882F0
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 23:39:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=72bb=PA=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1722460360; bh=bpHkrA4IAjn/ccFiLfAaHRL59ksuThBkmkoF5NI/FXE=;
- b=0MaulCEj3cXtjbEah3WBOD9V4wph06vsX+7KRtTMurjPeNE256Blq/uPDkUhKPk5K8ZR7F7gX
- H6xYm2eg+2tu+WBoGZYH7OW6puglGWS2NQfZaL7qKCvC8cM/Xb7mRWv3VVnZUVDLXSAlbbxPE7f
- 7kIsD3RJpjR/e7Ep0o4td4Mm9+MCNFgCCw43SNLP2AoOrhTgwKbgRNN2NjyWBiuCDQvTwt1QNtd
- NidxMkyvC3yVxdvIubZRw+kAPyOPneWFnBz0qBOXJA6E+Gc47Lc/YsnS+QRvOOHu/aPapf7IpVc
- xlH4ii1ExqXZV/AvnxssEZlQnrAX0dsixbQ8jZSYgvcg==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jonas Karlman <jonas@kwiboo.se>
-Cc: Sebastian Kropatsch <seb-dev@mail.de>, u-boot@lists.denx.de
-Subject: [PATCH 2/2] board: rockchip: Add FriendlyElec CM3588 NAS
-Date: Wed, 31 Jul 2024 21:12:16 +0000
-Message-ID: <20240731211221.1523453-3-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240731211221.1523453-1-jonas@kwiboo.se>
-References: <20240731211221.1523453-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-5cdf7edddc5so2654888eaf.0
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 14:39:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1722461959; x=1723066759; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=cLQ1ExUTMczYyg+A2zPTcq/5t7+SfxzEEyd7gBRldtQ=;
+ b=KUy/uncmNzgfy3bHUhyMzo+9WAqoBLBdEyWp2hu7hZp6sNuFTCQWyTNaYsJLWEH97w
+ vXiaWdEt5bP4JQJlx2ttKIlrK06H1VJrEyWAScAnWs5MaR639JS+nL5YPlas+YauEVO3
+ 5HnmGgXLFII77HCTggpLndHM725nzylix8EvI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722461959; x=1723066759;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=cLQ1ExUTMczYyg+A2zPTcq/5t7+SfxzEEyd7gBRldtQ=;
+ b=tjwpIKKvbte0qiCcCZ9f1Cv7FjHQo6LGzmvu+2/9IV3Er83ISqeK2q0In767vjt5Js
+ 2/SWg/UWrnaBYJq6DsePNJPygS+cC3NabEH72bZOoWTToxBL0RjcPKNcwVWVICnQ+vNA
+ RIO3vTcMZkabLRURT2+5RtXvc2zj6oB+PiJ9yoZLjnA3FEabhnB9mOb5hZ0mWQAmMYiR
+ sgtJF3f6as06CijeSDxBgcLJSzLmTJ0WLbDtbxQeWLliSfFlNJqi/jYpOH8POParE428
+ 8nyxqD0od7rHFUu3cU1TWlHH1ybpQnRVjJ+mh9N8DgXr498nOv1XCdVmXBmZ9TZCjrgj
+ gxGg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXCh8TnYXy7/N6Sq/S3SpbxcyGb7QdY2MIjdwi54qg5AqtFAEhEp63Yq8txU/X3Ht7eTuTzOA1Am5y7HxnxNhvJ9+cKXA==
+X-Gm-Message-State: AOJu0YyCIJes3LtWZqoYafhvKMGtuU1OFPPX694Ucc4uL53I8wPrJSpA
+ nWA9UfiB7DwJuwb2EPluLu47HSUjC9eElHG38C5Xt95kG/vOB1AsqxA8fo5JYllmc9bDTb/4L+2
+ rlqxPcEU+5YUR8ewqz5Uyj62xH0O93KIHt+Bo
+X-Google-Smtp-Source: AGHT+IEewcEbIQnSxF1T7mCq7/+3HeSvJmhVa2VddLu9Qb1SKvVx2lX/i2ilsMMVJTtjQeXjK9uTa9pikARZi8Ah7Gg=
+X-Received: by 2002:a05:6358:480d:b0:1ac:f13e:49ab with SMTP id
+ e5c5f4694b2df-1af2ee8a044mr89676855d.26.1722461959293; Wed, 31 Jul 2024
+ 14:39:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 66aaa8c506984f15edfbc5a8
+References: <20240605032521.1142768-1-sjg@chromium.org>
+ <20240605032521.1142768-6-sjg@chromium.org>
+ <CAEfUkUKABkoHWr8i5fLNxgLAcs_7AdVYJEJj_UJj_Oby0HmwNA@mail.gmail.com>
+ <CAFLszThqijQQjvSgGAkK387KXV9mjo8xs9tEK_jfKGocYyZzGQ@mail.gmail.com>
+ <CAC_iWj+M5uw1qaVcUFZpXDArdbF3jfJDXk1HiA1i4S2eEYbEig@mail.gmail.com>
+ <CAFLszTgeKggZYaTRnH9xB7Uznf0=OS42aogg-rym7cp=QRjw+A@mail.gmail.com>
+ <CAC_iWj+Y+hXwjgcVaMdEYrE_G9XuuhiZQnp2ckCYNkzYPZN3tQ@mail.gmail.com>
+ <CAFLszThK_FnLxWrSzax_Jm7XMmmTanTmGrLjK3MfCM0uqKsNOw@mail.gmail.com>
+ <ZnLR_NnJY3hFBXcR@hera>
+ <CAFLszTitfewWG_dHDM3idEyntkL8tjvh6puH08+aUDeXLy4+LQ@mail.gmail.com>
+ <CAEfUkU+AJb8z6_KgMVac90iQ6R4P0dNTgq5hitvZrXDQ8x8B1w@mail.gmail.com>
+ <CAFLszTjQwiJFbgG+aXf9qmXPbHSP6JVowhv=xdZYr3B45_+1nA@mail.gmail.com>
+ <CAFLszThtUprUv5ZsoN-R_W2c9YG4FvvZ6zT_qGpqOwW5Axbs1Q@mail.gmail.com>
+ <CAEfUkULZGoBegrdiOyj9behHpwE8XTNa7DLqfte=wb=fks5Axw@mail.gmail.com>
+In-Reply-To: <CAEfUkULZGoBegrdiOyj9behHpwE8XTNa7DLqfte=wb=fks5Axw@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 31 Jul 2024 15:39:08 -0600
+Message-ID: <CAFLszTid4=AXe5tj9_TAxvhGKa0R5uNL9Tb7=AgVEAiO-pN9qA@mail.gmail.com>
+Subject: Re: [PATCH 5/9] fdt: Correct condition for bloblist existing
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Tom Rini <trini@konsulko.com>, Jerry Van Baren <vanbaren@cideas.com>, 
+ Shiji Yang <yangshiji66@outlook.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,225 +99,154 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The CM3588 NAS by FriendlyElec pairs the CM3588 compute module, based
-on the Rockchip RK3588 SoC, with the CM3588 NAS Kit carrier board.
+Hi Raymond,
 
-Features tested on a CM3588 NAS Kit with 8GB RAM 64GB eMMC module:
-- SD-card boot
-- eMMC boot
-- Ethernet
-- PCIe/NVMe
-- USB gadget
-- USB host
+On Wed, 31 Jul 2024 at 07:59, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Hi Simon,
+>
+> On Tue, 30 Jul 2024 at 18:35, Simon Glass <sjg@chromium.org> wrote:
+>>
+>> Hi all,
+>>
+>> On Fri, 21 Jun 2024 at 12:16, Simon Glass <sjg@chromium.org> wrote:
+>> >
+>> > Hi Raymond,
+>> >
+>> > On Fri, 21 Jun 2024 at 10:40, Raymond Mao <raymond.mao@linaro.org> wrote:
+>> > >
+>> > > Hi Simon,
+>> > >
+>> > > On Fri, 21 Jun 2024 at 10:58, Simon Glass <sjg@chromium.org> wrote:
+>> > >>
+>> > >> Hi Ilias,
+>> > >>
+>> > >> On Wed, 19 Jun 2024 at 06:41, Ilias Apalodimas
+>> > >> <ilias.apalodimas@linaro.org> wrote:
+>> > >> >
+>> > >> > Hi Simon,
+>> > >> >
+>> > >> > On Wed, Jun 12, 2024 at 02:24:31PM -0600, Simon Glass wrote:
+>> > >> > > Hi Ilias,
+>> > >> > >
+>> > >> > > On Wed, 12 Jun 2024 at 00:02, Ilias Apalodimas
+>> > >> > > <ilias.apalodimas@linaro.org> wrote:
+>> > >> > > >
+>> > >> > > > [...]
+>> > >> > > >
+>> > >> > > > > > > >> ---
+>> > >> > > > > > > >>
+>> > >> > > > > > > >>  lib/fdtdec.c | 12 ++++++++++--
+>> > >> > > > > > > >>  1 file changed, 10 insertions(+), 2 deletions(-)
+>> > >> > > > > > > >>
+>> > >> > > > > > > >> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+>> > >> > > > > > > >> index b2c59ab3818..b141244e3b9 100644
+>> > >> > > > > > > >> --- a/lib/fdtdec.c
+>> > >> > > > > > > >> +++ b/lib/fdtdec.c
+>> > >> > > > > > > >> @@ -1669,8 +1669,16 @@ int fdtdec_setup(void)
+>> > >> > > > > > > >>  {
+>> > >> > > > > > > >>         int ret = -ENOENT;
+>> > >> > > > > > > >>
+>> > >> > > > > > > >> -       /* If allowing a bloblist, check that first */
+>> > >> > > > > > > >> -       if (CONFIG_IS_ENABLED(BLOBLIST)) {
+>> > >> > > > > > > >> +       /*
+>> > >> > > > > > > >> +        * If allowing a bloblist, check that first. This would be better
+>> > >> > > > > > > >> +        * handled with an OF_BLOBLIST Kconfig, but that caused far too much
+>> > >> > > > > > > >> +        * argument, so add a hack here, used e.g. by chromebook_coral
+>> > >> > > > > > > >
+>> > >> > > > > > > > I am a bit confused by this comment - It means you will not use OF_BLOBLIST,
+>> > >> > > > > > > > but actually you are using it below. Is it a typo?
+>> > >> > > > > > >
+>> > >> > > > > > > Basically it would be cleaner to have a separate, phase-specific
+>> > >> > > > > > > Kconfig control as to whether the DT can come from the bloblist (I
+>> > >> > > > > > > can't remember the Kconfig name I suggested, nor the patch as it was
+>> > >> > > > > > > last year sometime). But for now I am adding this hack to get a few
+>> > >> > > > > > > boards working again.
+>> > >> > > > > >
+>> > >> > > > > > I am a bit confused.
+>> > >> > > > > > First of all the comment is innapropriate. We went through a lengthy
+>> > >> > > > > > discussion on BLOBLIST/OF_BLOSLIST etc and,  even Tom chimed in and we
+>> > >> > > > > > made up our minds. Why are you adding this comment now? Why do code
+>> > >> > > > > > comments have to illustrate your personal opinion -- which was
+>> > >> > > > > > rejected?
+>> > >> > > > >
+>> > >> > > > > I'm sorry for the tone of the comment. I am not trying to offend
+>> > >> > > > > anyone here and I'm happy to change the language.
+>> > >> > > >
+>> > >> > > > Yes please a comment explaining why that piece of code is there is far
+>> > >> > > > more intuitive.
+>> > >> > >
+>> > >> > > OK, once we have agreed the below I can do that.
+>> > >> > >
+>> > >> > > >
+>> > >> > > > >  As I probably
+>> > >> > > > > mentioned at the time, my accepted patch breaks my workflow and
+>> > >> > > > > several boards. I hope you can understand how frustrating that sort of
+>> > >> > > > > thing can be.
+>> > >> > > >
+>> > >> > > > Yes, I do and I am fine with a short-term patch that fixes issues, as
+>> > >> > > > long as its not too intrusive. There is a very thin line between quick
+>> > >> > > > and dirty fixes to spaghetti unreadable code. But we should have
+>> > >> > > > comments and/or commit messages indicating that this needs a proper
+>> > >> > > > fix
+>> > >> > >
+>> > >> > > I spent a lot of time explaining this last time.
+>> > >> > >
+>> > >> > > >
+>> > >> > > > > Also, now that I have my lab back up and running and I
+>> > >> > > > > would like these boards to work again on mainline!
+>> > >> > > > >
+>> > >> > > > > >
+>> > >> > > > > > Grepping for OF_BLOBLIST, I can't find any matches, so is the above if a typo?
+>> > >> > > > >
+>> > >> > > > > Remember, it was a patch you rejected :-)
+>> > >> > > >
+>> > >> > > > I don't maintain any of that. I only gave some feedback along the
+>> > >> > > > lines of "bloblist was designed to be auto-discoverable, I don't see
+>> > >> > > > how adding an explicit Kconfig helps". IIRC we eventually followed
+>> > >> > > > what Tom suggested.
+>> > >> > >
+>> > >> > > I'm not trying to point the finger here. So far the boards are broken
+>> > >> > > in mainline...I'm just trying to fix that,
+>> > >> > >
+>> > >> > > >
+>> > >> > > > In any case, the amount of bike-shedding in the topic is too much. Do
+>> > >> > > > you mind explaining the problem in your workflow again? Perhaps we can
+>> > >> > > > find a solution that is integrated in bloblist_maybe_init() instead of
+>> > >> > > > injecting ifs on when a bloblist should or should not be searched for
+>> > >> > > > all over the place.
+>> > >> > >
+>> > >> > > TPL (or SPL) sets up a bloblist with bits of info in it, but no DT
+>> > >> > > (which is in memory-mapped SPI flash)
+>> > >> > > U-Boot proper starts up, it wants to get the bloblist but not hang if
+>> > >> > > the bloblist doesn't have a DT
+>> > >> >
+>> > >> > Sure, that's reasonable and IIRC that's the design we agreed a while back.
+>> > >> > Looking at the code, if the DT isn't found in a bloblist and the feature is
+>> > >> > enabled, we don't crash. We just print a debug message and continue to find
+>> > >> > the DT as we used. Why do we have to skip the call to
+>> > >> > bloblist_maybe_init()?
+>> > >>
+>> > >> Because at this point, if there is no bloblist, then it needs to be
+>> > >> created. But creating it this early may fail, e.g. since there is no
+>> > >> malloc(). The intent of this code is to locate an FDT from an existing
+>> > >> bloblist. There is no point in creating a new bloblist here, since it
+>> > >> obviously won't have an FDT in it.
+>> > >>
+>> > > Can we add a bool arg to bloblist_init for this?
+>> > > Eg. int bloblist_init(bool allow_malloc);
+>> >
+>> > Yes, we can do anything, but that seems like a hack to me...if we init
+>> > the bloblist for the first time in the current phase, then it
+>> > obviously won't have an FDT inside it. It is the unconditional
+>> > requirement of an FDT which is causing the problems here.
+>>
+>> Can we apply this patch, please? I still have several broken boards in
+>> my lab due to this.
+>>
+> Acked-by: Raymond Mao <raymond.mao@linaro.org>
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- ...rk3588-friendlyelec-cm3588-nas-u-boot.dtsi |  8 ++
- arch/arm/mach-rockchip/rk3588/Kconfig         | 24 +++++
- board/friendlyelec/cm3588-nas-rk3588/Kconfig  | 12 +++
- .../cm3588-nas-rk3588/MAINTAINERS             |  6 ++
- configs/cm3588-nas-rk3588_defconfig           | 90 +++++++++++++++++++
- doc/board/rockchip/rockchip.rst               |  1 +
- 6 files changed, 141 insertions(+)
- create mode 100644 arch/arm/dts/rk3588-friendlyelec-cm3588-nas-u-boot.dtsi
- create mode 100644 board/friendlyelec/cm3588-nas-rk3588/Kconfig
- create mode 100644 board/friendlyelec/cm3588-nas-rk3588/MAINTAINERS
- create mode 100644 configs/cm3588-nas-rk3588_defconfig
+Thank you.
 
-diff --git a/arch/arm/dts/rk3588-friendlyelec-cm3588-nas-u-boot.dtsi b/arch/arm/dts/rk3588-friendlyelec-cm3588-nas-u-boot.dtsi
-new file mode 100644
-index 000000000000..2e60f2dce8f1
---- /dev/null
-+++ b/arch/arm/dts/rk3588-friendlyelec-cm3588-nas-u-boot.dtsi
-@@ -0,0 +1,8 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk3588-u-boot.dtsi"
-+
-+&sdhci {
-+	cap-mmc-highspeed;
-+	mmc-hs200-1_8v;
-+};
-diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-index 0dcf2249fb48..a76a470cc981 100644
---- a/arch/arm/mach-rockchip/rk3588/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-@@ -6,6 +6,29 @@ config TARGET_EVB_RK3588
- 	help
- 	  RK3588 EVB is a evaluation board for Rockchp RK3588.
- 
-+config TARGET_CM3588_NAS_RK3588
-+	bool "FriendlyElec CM3588 NAS"
-+	select BOARD_LATE_INIT
-+	help
-+	  The CM3588 NAS by FriendlyElec pairs the CM3588 compute module, based
-+	  on the Rockchip RK3588 SoC, with the CM3588 NAS Kit carrier board.
-+
-+	  Hardware features:
-+	  - Rockchip RK3588 SoC
-+	  - 4GB/8GB/16GB LPDDR4x RAM
-+	  - 0GB/64GB HS400 eMMC
-+	  - MicroSD card slot
-+	  - 1x RTL8125B 2.5G Ethernet
-+	  - 4x M.2 M-Key with PCIe 3.0 x1 (via bifurcation) for NVMe SSDs
-+	  - 2x USB 3.0 (USB 3.1 Gen1) Type-A, 1x USB 2.0 Type-A
-+	  - 1x USB 3.0 Type-C with DP AltMode support
-+	  - 2x HDMI 2.1 out, 1x HDMI in
-+	  - MIPI-CSI Connector, MIPI-DSI Connector
-+	  - 40-pin GPIO header
-+	  - 4 buttons: power, reset, recovery, MASK, user button
-+	  - 3.5mm Headphone out, 2.0mm PH-2A Mic in
-+	  - 5V Fan connector, PWM beeper, IR receiver, RTC battery connector
-+
- config TARGET_JAGUAR_RK3588
- 	bool "Theobroma Systems SBC-RK3588-AMR (Jaguar)"
- 	select BOARD_LATE_INIT
-@@ -339,6 +362,7 @@ config TEXT_BASE
- 
- source "board/armsom/sige7-rk3588/Kconfig"
- source "board/edgeble/neural-compute-module-6/Kconfig"
-+source "board/friendlyelec/cm3588-nas-rk3588/Kconfig"
- source "board/friendlyelec/nanopc-t6-rk3588/Kconfig"
- source "board/friendlyelec/nanopi-r6c-rk3588s/Kconfig"
- source "board/friendlyelec/nanopi-r6s-rk3588s/Kconfig"
-diff --git a/board/friendlyelec/cm3588-nas-rk3588/Kconfig b/board/friendlyelec/cm3588-nas-rk3588/Kconfig
-new file mode 100644
-index 000000000000..fdc458a42643
---- /dev/null
-+++ b/board/friendlyelec/cm3588-nas-rk3588/Kconfig
-@@ -0,0 +1,12 @@
-+if TARGET_CM3588_NAS_RK3588
-+
-+config SYS_BOARD
-+	default "cm3588-nas-rk3588"
-+
-+config SYS_VENDOR
-+	default "friendlyelec"
-+
-+config SYS_CONFIG_NAME
-+	default "nanopc-t6-rk3588"
-+
-+endif
-diff --git a/board/friendlyelec/cm3588-nas-rk3588/MAINTAINERS b/board/friendlyelec/cm3588-nas-rk3588/MAINTAINERS
-new file mode 100644
-index 000000000000..92b958ada6fa
---- /dev/null
-+++ b/board/friendlyelec/cm3588-nas-rk3588/MAINTAINERS
-@@ -0,0 +1,6 @@
-+CM3588-NAS-RK3588
-+M:	Jonas Karlman <jonas@kwiboo.se>
-+S:	Maintained
-+F:	board/friendlyelec/cm3588-nas-rk3588
-+F:	configs/cm3588-nas-rk3588_defconfig
-+F:	arch/arm/dts/rk3588-friendlyelec-cm3588-nas*
-diff --git a/configs/cm3588-nas-rk3588_defconfig b/configs/cm3588-nas-rk3588_defconfig
-new file mode 100644
-index 000000000000..d6d82757a2de
---- /dev/null
-+++ b/configs/cm3588-nas-rk3588_defconfig
-@@ -0,0 +1,90 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_SYS_HAS_NONCACHED_MEMORY=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-friendlyelec-cm3588-nas"
-+CONFIG_ROCKCHIP_RK3588=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_TARGET_CM3588_NAS_RK3588=y
-+CONFIG_DEBUG_UART_BASE=0xFEB50000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-friendlyelec-cm3588-nas.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_PAD_TO=0x7f8000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_ATF=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_ROCKUSB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_REGULATOR=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_BUTTON=y
-+CONFIG_BUTTON_ADC=y
-+CONFIG_BUTTON_GPIO=y
-+CONFIG_SPL_CLK=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_MISC=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_PHYLIB=y
-+CONFIG_RTL8169=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_DW_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_PHY_ROCKCHIP_USBDP=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_RK8XX=y
-+CONFIG_REGULATOR_RK8XX=y
-+CONFIG_PWM_ROCKCHIP=y
-+CONFIG_SPL_RAM=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_ROCKCHIP_SPI=y
-+CONFIG_SYSRESET=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_USB_FUNCTION_ROCKUSB=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 637d489f8428..0f9cb404d934 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -127,6 +127,7 @@ List of mainline supported Rockchip boards:
-      - Rockchip EVB (evb-rk3588)
-      - Edgeble Neural Compute Module 6A SoM - Neu6a (neu6a-io-rk3588)
-      - Edgeble Neural Compute Module 6B SoM - Neu6b (neu6b-io-rk3588)
-+     - FriendlyElec CM3588 NAS (cm3588-nas-rk3588)
-      - FriendlyElec NanoPC-T6 (nanopc-t6-rk3588)
-      - FriendlyElec NanoPi R6C (nanopi-r6c-rk3588s)
-      - FriendlyElec NanoPi R6S (nanopi-r6s-rk3588s)
--- 
-2.45.2
-
+Regards,
+Simon
