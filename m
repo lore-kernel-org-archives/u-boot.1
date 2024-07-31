@@ -4,53 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72E2DC3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 18:53:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15BB7C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 19:38:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D2AA8897F;
-	Wed, 31 Jul 2024 20:53:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 41EE088A7F;
+	Wed, 31 Jul 2024 21:38:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1722451998;
-	bh=YIBl9MsFybB8mpkbTeD8rhHsN92QCFyNhXIKnAHxbF0=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=w/YYjpDqTqj4IxnmdhxPU72OrojraGOKZOM30oecBnTamnmP9ltpyUw5JJ7H5wDiy
-	 lyVPvFY5++u46WQKXlyhNYoGWDw48mKJRldcPcQegOIhdHb0Lx+lQ/mbs1lMMhJUWr
-	 dzLEHgzVlpY/Z0UGF1TwXvVzvRUmy+Z1tCsVNdTRZ2Pmdpt9/N+f1ACWaXAr39PzNU
-	 vCadLUXCiOp/UCHpg3CKKlbFMEWla+SIRAM7+XhyI65VsgG0kRJInaPQHrxCwI+XmC
-	 jE1MjdREamAgRZdedd+fOqGY8JeAHoTTmpJr9utV1RZRnVWVq4sVUHqechPhCxFxro
-	 B3bYlywdFHfCw==
-Received: from crub (p54833c06.dip0.t-ipconnect.de [84.131.60.6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HLipzQXx";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 7155788A7F; Wed, 31 Jul 2024 21:38:46 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: agust@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 0702D88680;
- Wed, 31 Jul 2024 20:53:17 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1722451997;
- bh=YIBl9MsFybB8mpkbTeD8rhHsN92QCFyNhXIKnAHxbF0=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=F3gyya1U7CCJ83AZLN10/nrs5yX+1HaPe3GdQaNBjNBwOpFq3ob1VEAVobIgkHz3R
- y8uu8sqf01jRKQUbwtc4zC0KXX4Cj6w9XhAzlw9GcONHhbpigFajp+pggW1GFv/5Cx
- 6v6avPlgAMi1w07s0QJeUfiRNgVTPWLdeVc1iM0r1JoBo5jKMv5eJWdoEm7XQd5pvC
- Znd1AC+hGKLcsCUckAZ0X4b9MB5hDPMlwAAGd5VAe6Gbk3qqhmI3eMX+rt6JpNkyN9
- qhgg7OMTWpLEuFTsXA4kMop+SSkTP7aG7IvEdhl4D927XtEqX2zfC/nu6NWo9AaLu3
- po4Q3ORzKFG7A==
-Date: Wed, 31 Jul 2024 20:52:53 +0200
-From: Anatolij Gustschin <agust@denx.de>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v4 0/5] video: Improve syncing performance with cyclic
-Message-ID: <20240731205253.787c3749@crub>
-In-Reply-To: <20240731144412.790317-1-sjg@chromium.org>
-References: <20240731144412.790317-1-sjg@chromium.org>
+ by phobos.denx.de (Postfix) with ESMTPS id 59C6F88644
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 21:38:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-3db18842a4dso716281b6e.0
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 12:38:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1722454723; x=1723059523; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jXdTonOVHBxSG+LassHd2Koj/3DFWAe6M0ZmNeW59eo=;
+ b=HLipzQXxlri/JqEPjSzo1FA27FD97zBAe/KZqJWXsVUcwhQTdQCNCDhfzSI/5h8k6p
+ qRwWjn70ly+A+hYsZ0EoCUUpmwy5hWqew5qovhc0H7fV5ysuUxzZyqNVcJERbLCJqCk8
+ nl+dw+WWXqnQ6M3mnokU8fwmb6LfKSP3X0WJY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722454723; x=1723059523;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jXdTonOVHBxSG+LassHd2Koj/3DFWAe6M0ZmNeW59eo=;
+ b=UKCHiXv0xivwRl5e/Mv7/oQl7P0/in64UjrPCZwN2ECioknZe5Urxbau97MEQfwB6C
+ Iql5YyLGhYmmmSxYylIBvuMglAikMn8q/vpVuxAQn1xSzGDyK4JvzLUFNxwwC4qkv4Be
+ pC1rUlEpJEu3Avyyyf/7pvbqCLeB5UXcBrHAtHxhu5/mkPhnU9INMJqPi9c8v+i2eRSZ
+ LmTiJV0fDcbJ4j7j8v4zzG5f8AmDlnUAL4tl9Cb2KF3H9fES8UdpVK8zBAYrIvirITBs
+ ZIjisAYSVfmvNW1bo6LXVziiTAHp3dv7wV7cUnJ6q1fztvSqbmgQUTqjEi9ENj3uemc9
+ E9Eg==
+X-Gm-Message-State: AOJu0YzoB+1E1rTGZKz9v51p+U3+Kg4eWKO2tqcXARcBnkBFfGKZXVJK
+ sEtDXTl39lPFQjttZqJIMuhhgPLjx2vGk9HNTTWM56eEDQPkLdSPkoPdX9pEcL4=
+X-Google-Smtp-Source: AGHT+IEKc1D3LNBz1pa+R8rf5heEJ7sN0Vd/ZnFt1QlRDoGd5dMR90dWTaD4cyj/RYMHFO/Ij+eKhA==
+X-Received: by 2002:a05:6808:148d:b0:3db:1646:e958 with SMTP id
+ 5614622812f47-3db42cd88c6mr3333713b6e.13.1722454723107; 
+ Wed, 31 Jul 2024 12:38:43 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-103-190.totalplay.net.
+ [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3db41806da0sm817377b6e.31.2024.07.31.12.38.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 31 Jul 2024 12:38:42 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, uboot-snps-arc@synopsys.com, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>
+Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Ezequiel Garcia <ezequiel@collabora.com>, 
+ Gregory CLEMENT <gregory.clement@bootlin.com>, 
+ Lars Povlsen <lars.povlsen@microchip.com>, 
+ Horatiu Vultur <horatiu.vultur@microchip.com>, 
+ Alexey Brodkin <alexey.brodkin@synopsys.com>, 
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>
+In-Reply-To: <20240717-edian-v1-0-3cd4896edf2d@flygoat.com>
+References: <20240717-edian-v1-0-3cd4896edf2d@flygoat.com>
+Subject: Re: [PATCH 0/2] Endian Kconfig improvements
+Message-Id: <172245472040.3951333.12476335428392783288.b4-ty@konsulko.com>
+Date: Wed, 31 Jul 2024 13:38:40 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,30 +98,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On Wed, 17 Jul 2024 16:07:01 +0800, Jiaxun Yang wrote:
 
-On Wed, 31 Jul 2024 08:44:07 -0600
-Simon Glass sjg@chromium.org wrote:
-...
-> Simon Glass (5):
->   cyclic: Add a symbol for SPL
->   video: Move last_sync to private data
->   video: Use cyclic to handle video sync
->   sandbox: Increase cyclic CPU-time limit
->   sandbox: Drop video-sync in serial driver
+> This is a subset of my previous arm64_be work.
 > 
->  common/Kconfig                    |  9 ++++++
->  common/Makefile                   |  2 +-
->  drivers/serial/sandbox.c          |  2 --
->  drivers/video/Kconfig             | 35 +++++++++++++++++++++
->  drivers/video/video-uclass.c      | 52 +++++++++++++++++++++++++------
->  drivers/watchdog/Kconfig          |  2 ++
->  include/asm-generic/global_data.h |  2 +-
->  include/cyclic.h                  |  5 +--
->  include/video.h                   |  2 ++
->  9 files changed, 96 insertions(+), 15 deletions(-)
+> I wish this could be merged first so it would be easier to work
+> against xtensa and arm64 be support.
+> 
+> Thanks
+> 
+> [...]
 
-Applied to u-boot-video, thanks!
+Applied to u-boot/master, thanks!
 
---
-Anatolij
+-- 
+Tom
+
+
