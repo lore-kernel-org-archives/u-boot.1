@@ -4,73 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36EDCC3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 07:23:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24108C3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 07:26:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA3B48898A;
-	Wed, 31 Jul 2024 09:23:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 802DE88934;
+	Wed, 31 Jul 2024 09:26:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="KbriYNdK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Giwr2e5G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5464C88963; Wed, 31 Jul 2024 09:23:19 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 19F3288969; Wed, 31 Jul 2024 09:26:13 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C917688969
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 09:23:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 061B088886
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 09:26:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1722410595; x=1725002595;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=C1GvHX1DJtqjUBRhnfc8o5gpBQTGg85QYEj6xVnbiJI=;
- b=KbriYNdKlmd0xUNSQLU2YFnL+H2Gt3R6E5PAQYJaHvOY3Em/pxjvdOb8/cN5kFDy
- yq7WYE5S4ji5scahaPXqs5nnQjAYbW4Lrp4kbNK4bQ/DAnQ4+JzKtH3xrtNMmm17
- lXY7W5lh2sr2ezlsH4WOvBUNFgwKdJddNPKeGCASvzY=;
-X-AuditID: ac14000a-03e52700000021bc-ac-66a9e6635724
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 98.14.08636.366E9A66;
- Wed, 31 Jul 2024 09:23:15 +0200 (CEST)
-Received: from lws-moog.phytec.de (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 31 Jul
- 2024 09:23:15 +0200
-From: Yannic Moog <y.moog@phytec.de>
-Date: Wed, 31 Jul 2024 09:23:01 +0200
-Subject: [PATCH 3/3] configs: phycore-imx8mp_defconfig: enable CMD_ERASEENV
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5a3b866ebc9so7494136a12.3
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 00:26:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1722410770; x=1723015570; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=MoLH43Gj875qxiJucIdsVf9IjKJwm/jw3TGs51pS/Sg=;
+ b=Giwr2e5Gc5kNjQYpTuH8ErGJNilol1lnejvlgOLiNX2w6pQzbB5bDk/NJKLK7V/bpl
+ vaSRvERlfqKFBoIxfAfrC5x0M4SJg3HXz3SediSfuLgHrh1+TCA1Jk4tqFwLIJJd+9u8
+ sA4UwZ4MqAAGgGiXzyRza7eUnOUAA4Bxj0BGaOLrqyYw53hDura94Pd8QAYkxVDIYSZ0
+ SFfQGIp8VQ6D1j9qYiAjr3q2L9fSBaqj1gSWELbQa3vVE1MhiKIWFHaSnzKGc30CSKeF
+ rnpd1pz9UXgrqrkYbbBSjKqnnGxokdqBz3umyLF+FX7vySYDhKMvraUUdLs6mKIkMZYi
+ s4rw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722410770; x=1723015570;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=MoLH43Gj875qxiJucIdsVf9IjKJwm/jw3TGs51pS/Sg=;
+ b=tbcHIwoFm+sgNqlttGy9amLhS0yA93A5hkk2AAxclr/Nr7NT+x+GYW27YNn6FCJ09C
+ maFEIDwb7K+RbkR9ZMi3V4/hFKEeGPQcJyAqe/npQks7tuY75qruXslu6wm2/KF3yPiW
+ YQ8u+WLGMkHc8OhejfASvdUVcRsRaAgWV0GW59IadMyVEILpV/G7kAGjCMo2W5pFCEpC
+ Jh6oGt8XCOz8iYNfkvYHs1vL8XiVC7XbRhnFBtCM6t0vROBo1k/ajWObsINKsaaRd70I
+ 2smdIMgYhiUKi9j3aEtJTtzNuJZVoMBVDOSU5A/lgwOc79pflgcoSBlwHq831Acmy7Ca
+ h13A==
+X-Gm-Message-State: AOJu0YzI7aab81CmHHEzahZiRwbHvaXpOuSTNK9h1gqOIBASjgFzvWyR
+ voxzXeTACAcf/DT4ZDsxMxqDdAAhkdj79iR/DzLeewAKFCZXKQcLZeGxR7o9I2WAFl+Wmusu5Us
+ VXWSA+jCGX9cMaq70nfA1QcHaBnS+FEF61GceKrHkOGOL11dq
+X-Google-Smtp-Source: AGHT+IEkueYp7+e0IqLeFNP2DABeCozXTh1axMBjgHYudgjGFG8SvMX4BGHrZ43B9wYDQS+K1q602xA9eab5fLchYME=
+X-Received: by 2002:a50:d615:0:b0:5a1:7362:91d9 with SMTP id
+ 4fb4d7f45d1cf-5b020bbde56mr7282925a12.22.1722410770278; Wed, 31 Jul 2024
+ 00:26:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20240731-wip-y-moog-phytec-de-imx8_eraseenv-v1-3-b8f0c4366399@phytec.de>
-References: <20240731-wip-y-moog-phytec-de-imx8_eraseenv-v1-0-b8f0c4366399@phytec.de>
-In-Reply-To: <20240731-wip-y-moog-phytec-de-imx8_eraseenv-v1-0-b8f0c4366399@phytec.de>
-To: Teresa Remmet <t.remmet@phytec.de>, Fabio Estevam <festevam@gmail.com>
-CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, Yannic Moog
- <y.moog@phytec.de>
-X-Mailer: b4 0.14.0
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrHLMWRmVeSWpSXmKPExsWyRpKBRzf52co0gz+v5C0eXvW3eLu3k92i
- +526A7PHzll32T3O3tnB6NHf3cIawBzFZZOSmpNZllqkb5fAlXFjyTTmggmsFVOObmNpYNzE
- 0sXIySEhYCKxfM0T9i5GLg4hgSVMEvPuf2UESQgJPGSUmH5GEsRmE1CRePziHiuIzSKgKrF4
- 3QkwW1jAW+LBqbtsIDavgKDEyZlPgIZycDALaEqs36UPEmYWkJfY/nYOM0RJqMSp1xOhxgPZ
- bb/ZQco5BcIkLj+JBTFFBLwkLv7ngeiMkLh2cwlYhYSAsETDP0WIRlmJF+d72SGOl5eYdu41
- M4QdKnFk02qmCYxCs5CcMwvhnFlIzlnAyLyKUSg3Mzk7tSgzW68go7IkNVkvJXUTIyiMRRi4
- djD2zfE4xMjEwXiIUYKDWUmEV+jkyjQh3pTEyqrUovz4otKc1OJDjNIcLErivKs7glOFBNIT
- S1KzU1MLUotgskwcnFINjO35597O9dfKSHukwHj/PVPpy1MW6+bKHzz09NSLpFzblcuOTbD9
- 7lV1r+i/Z938iApjhnphw8og07xp4neXzLzJE69m3nI2I0Xa8lbRwevys1k976zmFeNaGZ6V
- aaYveFx3WpXky68Vd0/UFKQpCfh+ftZcs4nlwhY979eFk315J6xib38Zo8RSnJFoqMVcVJwI
- AK0CqxdRAgAA
+References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
+ <20240724060224.3071065-34-sughosh.ganu@linaro.org>
+ <CAFLszTg1nywmyXRJ2Dgsg97Mfbps7P37jDD72dNafo0wHF3RZQ@mail.gmail.com>
+ <CADg8p97S84J7wrEchCfP-Y7L8qdC4F=koyuhzV0+jYxiM=YhRg@mail.gmail.com>
+ <CAFLszThRiRLXE2Nz7CM4_tDCM6=6d1v4snsDfYBCnvPnoXVPYg@mail.gmail.com>
+In-Reply-To: <CAFLszThRiRLXE2Nz7CM4_tDCM6=6d1v4snsDfYBCnvPnoXVPYg@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Wed, 31 Jul 2024 12:55:59 +0530
+Message-ID: <CADg8p96UnUpeV51Dsr82rKs6vz-9TPBmoz6HTq+i4G0me6MR8w@mail.gmail.com>
+Subject: Re: [PATCH 33/40] test: cedit: use allocated address for reading file
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
+ Max Filippov <jcmvbkbc@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,26 +97,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable erasing environment with eraseenv command.
+On Mon, 29 Jul 2024 at 20:58, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Sughosh,
+>
+> On Mon, 29 Jul 2024 at 02:53, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> >
+> > On Fri, 26 Jul 2024 at 05:02, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Sughosh,
+> > >
+> > > On Wed, 24 Jul 2024 at 00:05, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > >
+> > > > Instead of a randomly selected address, use an LMB allocated one for
+> > > > reading the file into memory. With the LMB map now being persistent
+> > > > and global, the address used for reading the file might be already
+> > > > allocated as non-overwritable, resulting in a failure. Get a valid
+> > > > address from LMB and then read the file to that address.
+> > > >
+> > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > ---
+> > > > Changes since rfc: None
+> > > >
+> > > >  test/boot/cedit.c | 6 +++++-
+> > > >  1 file changed, 5 insertions(+), 1 deletion(-)
+> > > >
+> > >
+> > > No, we should not start putting lmb into tests like this.
+> >
+> > The test fails if the address is not allocated through an lmb api.
+> > Although I can check why.
+>
+> Neither am I, but you did put the tcg in the same region so perhaps
+> that is an issue?
 
-Signed-off-by: Yannic Moog <y.moog@phytec.de>
----
- configs/phycore-imx8mp_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+I now remember the issue. The cedit_fdt() function uses a random
+address(0x1000) and tries to load the settings.dtb file to the
+address. The load command uses the lmb_alloc_addr() API function to
+reserve and use this address for loading the file. This worked earlier
+because of the local nature of the lmb memory map. But it does not
+work anymore, as this clashes with some existing reservation resulting
+in the test failure.  So this change is very much needed.
 
-diff --git a/configs/phycore-imx8mp_defconfig b/configs/phycore-imx8mp_defconfig
-index 8dd4963bdc0..3ddceecf205 100644
---- a/configs/phycore-imx8mp_defconfig
-+++ b/configs/phycore-imx8mp_defconfig
-@@ -53,6 +53,7 @@ CONFIG_HUSH_PARSER=y
- CONFIG_SYS_PROMPT="u-boot=> "
- # CONFIG_CMD_EXPORTENV is not set
- # CONFIG_CMD_IMPORTENV is not set
-+CONFIG_CMD_ERASEENV=y
- # CONFIG_CMD_CRC32 is not set
- CONFIG_CMD_EEPROM=y
- CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
+-sughosh
 
--- 
-2.34.1
-
+>
+> Sandbox is designed so that low memory regions can be used in tests. I
+> pointed you to the memory-map docs.
+>
+> Regards,
+> SImon
