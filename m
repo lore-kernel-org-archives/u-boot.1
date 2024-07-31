@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CD80C3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 14:40:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FB7AC3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 14:40:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A360788A32;
-	Wed, 31 Jul 2024 16:39:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3E7CF88A46;
+	Wed, 31 Jul 2024 16:39:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KzBEYPIS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MDHWLhdf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17C7F88A4C; Wed, 31 Jul 2024 16:39:07 +0200 (CEST)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id A4DC488A52; Wed, 31 Jul 2024 16:39:07 +0200 (CEST)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6FD388A3C
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 16:39:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B66A88955
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 16:39:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3db14cc9066so3621718b6e.3
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 07:39:04 -0700 (PDT)
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6b78c3670d0so30875156d6.1
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 07:39:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722436743; x=1723041543; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722436744; x=1723041544; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=E49iAr15TzpjyvX8yGGY/5x1cUYwnZu/RrsTyhlQmHM=;
- b=KzBEYPISI2ByYukbqfx9PC7rY0u7iQrn1jbZb1JNIvHxa0qwXmfmWJnn2kYxPIqG7Z
- QkD9+HM8F/uoB1AzS3OlQdEsowZRlMp/jCIOX5JEMthazGaPWfdsjdUYk//laxttRr26
- q0eEZWEz+fyWMGsYETfX0jsHEtI7R6Tby/R+o=
+ bh=C5HhrosqXm4ClS8B3IVqtxDyVD7pygGqnHlne/eKFVY=;
+ b=MDHWLhdfGDxGMyWRqPt3Cdql1fygAhsw0pgdTwuOXERQMFu1BF/jCPf2Bhvn4C2ie3
+ 2zr14cAk0oEkdaHlwfJgVnX4i5YBKnK8Dw8QbsFFq7zLNjSz8h9joWmrTj2q0HZa4mfH
+ aCWhd3t0ov6qKWJ2UZK9xZDSFo8udSEcQqNys=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722436743; x=1723041543;
+ d=1e100.net; s=20230601; t=1722436744; x=1723041544;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=E49iAr15TzpjyvX8yGGY/5x1cUYwnZu/RrsTyhlQmHM=;
- b=dsfOMfmCHfEIurxqc/AeilesLroF6D2YvtF82JzdAAJt7Ab5U7EHw/l0TAcDLMOm5Y
- VcpfIV4RHaHs9P18Bs4me6B99zL/gpAVEojmE5Vgi70fk65kuRdlIhSN8tzGYzO7BQX6
- Jrz8IXZbCx9Bb6rHOfbJmsB3f0v43CvSF4UMqgse0B0Ymuor3lv7O0Fs+gOCVnOQUexM
- /18Cpx5AWGSsdRPU8AVbGm+JLAddPGqaWeKJIQpwo0S6LwrhxWLMfxnm1ZD19B6YZP1n
- XolOscIGH45/Oj+LTCVbdABKpfwi7EzVI5ESZtcPWYjPwP9Rz6HdaufjJ1Z6bQ5SiP9d
- WcZQ==
+ bh=C5HhrosqXm4ClS8B3IVqtxDyVD7pygGqnHlne/eKFVY=;
+ b=IoQ6zUdQb074VmjaEJGR1Nv/lGku9U40iIAacJIanyt+BdRSCr2Y4/nsnQllfSm9I0
+ jVn35s6XZCywOAhIwu42UWWkKIJs7rIa5mhJJRBmaX3/KEoUsQlF69VF53XupQAPpqLP
+ NnDO+4pFQocD0+byZIlE2nwEdYNh0U4TAYBw4XpiVPm7ERIx70XWsx9OcdU5ar6JtauQ
+ 2q9VCgO9ktvhJbYjYld/lGkvPm3t1fph+HNBX74mwkpMecfpoMTrcSlXaOGMryIWZBZD
+ WrxUXIKak/Fq5dhfP1P9RclMG04+1zggB8BuqfuZmHExsHV8GGNGE+2EGuxhmEVkqT9n
+ jz8g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU8vpSNk1H7fLe6/0ETE/07WM+hM45v72ExG9Vkoj/duwTFXudUFhvCcpHRe7v5aZ5VhDefzo9iZiGwHCka6QeAb7PwwA==
-X-Gm-Message-State: AOJu0YyRWeXRrUYVnzmssdyfeuF4ixYytrRknimQRXFmsT/UKzSaeZ08
- fyzSVrTtZ77IBhaT44dYfW9SsQz0XDk4SZZIEY3k3wM6cKMoH/LFWFQlv/CS2JCF82sglDTO2Vw
- bKQ0+1BsIPlBHlc9We8NQI3+CGIbWANi9xRS0
-X-Google-Smtp-Source: AGHT+IEoWKEfkDS2KaX2fraT9AZajbtGta9IB8YPQCV6F2/ER+ovYsQ3+JERQG1BWmHPwQsNeLfMpHTbIO8TwjVxtkE=
-X-Received: by 2002:a05:6358:5e04:b0:1ac:ed54:224d with SMTP id
- e5c5f4694b2df-1adc06b2124mr1720560955d.11.1722436742725; Wed, 31 Jul 2024
- 07:39:02 -0700 (PDT)
+ AJvYcCV7zEmnV4/nSuNy2PpaWNPT0ZoCwMvElm1PHxfqXTxUCCe+cgofh+27DBGBPFPj9ToP/+Ov3k27vouuu+g3Qeyu9iSLTg==
+X-Gm-Message-State: AOJu0Ywqf8lX7eGsWXiK8IOKKzrRerwCJVaQCUoW3qeCH9tiOd5lLXMe
+ 4vtMUfHLnRezxrlcjhHuhzj7AgoHP8SEwLdf6R9+++iYc7IAsvR6esxPWvhXDf9VWQE+4wperTn
+ zklqV3CEoOmJWv8sRofiGxkq1fBF0akzpAtBA
+X-Google-Smtp-Source: AGHT+IH2FXF//SXrKYoi96zuYM872iWF3+tVs3jo9xV3TP5sC45sbWPiJy9LLyvqMnu//2ShWESrNoxidox8d4Mu7H8=
+X-Received: by 2002:a05:6214:4119:b0:6b4:b179:8eea with SMTP id
+ 6a1803df08f44-6bb5597d3bamr154251826d6.3.1722436744350; Wed, 31 Jul 2024
+ 07:39:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240712081118.29189-1-richard@nod.at>
- <CAFLszTg-bqTTv2NtVC-3m2O2nw+9eczcM9_wn41u6XMcujqNEQ@mail.gmail.com>
- <12856391.hYdu0Ggh8K@somecomputer>
-In-Reply-To: <12856391.hYdu0Ggh8K@somecomputer>
+References: <20240719-b4-dynamic-uuid-v5-0-8a83de3fe3dc@linaro.org>
+ <20240719-b4-dynamic-uuid-v5-11-8a83de3fe3dc@linaro.org>
+In-Reply-To: <20240719-b4-dynamic-uuid-v5-11-8a83de3fe3dc@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 31 Jul 2024 08:38:51 -0600
-Message-ID: <CAFLszTjs84g4qcRrUxwqx3THMqttdhKya4m+AksoQkxKyDOswA@mail.gmail.com>
-Subject: Re: [PATCH] reloc_bootstage: Fix out-of-bounds read
-To: Richard Weinberger <richard@sigma-star.at>
-Cc: Richard Weinberger <richard@nod.at>, upstream@sigma-star.at,
- u-boot@lists.denx.de, 
- patrick.delaunay@foss.st.com, yangshiji66@outlook.com, raymond.mao@linaro.org, 
- n-jain1@ti.com, eugeneuriev@gmail.com, ilias.apalodimas@linaro.org, 
- devarsht@ti.com, bmeng.cn@gmail.com, trini@konsulko.com, 
- upstream+uboot@sigma-star.at
+Date: Wed, 31 Jul 2024 08:38:53 -0600
+Message-ID: <CAFLszTjx4fNnhmiAmAVq45jPNPmik8YcHOf8LGWC+SZ_5=j5Aw@mail.gmail.com>
+Subject: Re: [PATCH v5 11/11] test: lib/uuid: add tests for UUID
+ version/variant bits
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mario Six <mario.six@gdsys.cc>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,29 +90,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Richard,
+Hi Caleb,
 
-On Mon, 29 Jul 2024 at 15:57, Richard Weinberger <richard@sigma-star.at> wrote:
+On Fri, 19 Jul 2024 at 06:43, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> Simon,
+> Add a test to check the version/variant bits of v4 and v5 UUIDs.
 >
-> Am Samstag, 13. Juli 2024, 17:13:50 CEST schrieb Simon Glass:
-> > Can you use 'bootstage' as the commit tag?
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>  test/lib/uuid.c | 36 ++++++++++++++++++++++++++++++++++++
+>  1 file changed, 36 insertions(+)
 >
-> Sure.
+> diff --git a/test/lib/uuid.c b/test/lib/uuid.c
+> index 2c6cfd42ddc3..63d36e120623 100644
+> --- a/test/lib/uuid.c
+> +++ b/test/lib/uuid.c
+> @@ -43,8 +43,44 @@ static int lib_test_uuid_to_le(struct unit_test_state *uts)
+>  }
 >
-> > > +       debug("Copying bootstage from %p to %p\n", gd->bootstage,
-> > > +             gd->new_bootstage);
-> > > +       memcpy(gd->new_bootstage, gd->bootstage, sizeof(struct bootstage_data));
-> >
-> > I would like to have the relocation addresses in board_f like with
-> > other relocations, so it is easy to see what is happening, in one
-> > file. So how about passing the old address to bootstage_relocate() so
-> > it doesn't need to access gd->new_bootstage ?
+>  LIB_TEST(lib_test_uuid_to_le, 0);
 >
-> You mean passing the *new* address?
+> +/* Test UUID attribute bits (version, variant) */
+> +static int lib_test_uuid_bits(struct unit_test_state *uts)
+> +{
+> +       unsigned char uuid[16];
+> +       efi_guid_t guid;
+> +       int i;
+> +
+> +       /*
+> +        * Reduce the chance of a randomly generated UUID disguising
+> +        * a regression by testing multiple times.
+> +        */
+> +       for (i = 0; i < 5; i++) {
+> +               /* Test UUID v4 */
+> +               gen_rand_uuid((unsigned char *)&uuid);
+> +
+> +               printf("v4 UUID: %pUb\n", (efi_guid_t *)uuid);
+> +
+> +               ut_assert((uuid[6] & 0xf0) == 0x40); /* version 4 */
 
-Yes, sorry.
+ut_asserteq(0x40, uuid[6] & 0xf0); /* version 4 */
 
-REgards,
+save below
+
+> +               ut_assert((uuid[8] & UUID_VARIANT_MASK) == (UUID_VARIANT << UUID_VARIANT_SHIFT)); /* variant 1 */
+
+check line length
+
+> +
+> +               /* Test v5, use the v4 UUID as the namespace */
+> +               gen_v5_guid((struct uuid *)uuid,
+> +                       &guid, "test", 4, NULL);
+> +
+> +               printf("v5 GUID: %pUl\n", (efi_guid_t *)uuid);
+> +
+> +               /* This is a GUID so bits 6 and 7 are swapped (little endian) */
+> +               ut_assert((guid.b[7] & 0xf0) == 0x50); /* version 5 */
+> +               ut_assert((guid.b[8] & UUID_VARIANT_MASK) == (UUID_VARIANT << UUID_VARIANT_SHIFT)); /* variant 1 */
+> +       }
+> +
+> +       return 0;
+> +}
+> +
+> +LIB_TEST(lib_test_uuid_bits, 0);
+> +
+>  struct dynamic_uuid_test_data {
+>         const char *compatible;
+>         const u16 *images[4];
+>         const char *expected_uuids[4];
+>
+> --
+> 2.45.2
+>
+
+Regards,
 Simon
