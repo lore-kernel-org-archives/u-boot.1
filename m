@@ -4,81 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC7CBC3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 14:40:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79549C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 14:40:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6ECA88A08;
-	Wed, 31 Jul 2024 16:39:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2970188A10;
+	Wed, 31 Jul 2024 16:39:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D8Rea3/K";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S5kFdAlb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54AB288A5E; Wed, 31 Jul 2024 16:39:39 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id 38AE888A34; Wed, 31 Jul 2024 16:39:45 +0200 (CEST)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90F6888955
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 16:39:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 06C9088A4F
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 16:39:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-5d5b1e33fa8so3158273eaf.3
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 07:39:36 -0700 (PDT)
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-6b5dfcfb165so33817836d6.0
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 07:39:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722436775; x=1723041575; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722436782; x=1723041582; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3tbJEeLYiTdIOVl/k3OnHEQrTUHh+pQyKRRgPLzzVEM=;
- b=D8Rea3/K3SuEeb8QpN4bGPLDewa0ti6kScBATOPj+kqBqfD0pMkbEmGsK+tVqzOTIJ
- JwTR98SuYbbElQXw1X1cI8CtwT5eZ6B6y65pXpCGwEHXgl/gW4XZp+anRQkBScajiwfg
- Qr4ge1zuIDKBXFP3gEl+ZDqu/G+1E4e0gmLSI=
+ bh=3YY+MsRMd/G3y3tSdECk2JS2BMtnBWLtPtC6rszoeDw=;
+ b=S5kFdAlb+wgNv4GADCxo9L/xS8ji+LcU8xfuJ/77xfIj0xOKSm1KvYIgiJZ9Nika5e
+ uCisCeYuG8ja+mNLscH9PsNVsCjKz72cUSno4lG/HHGlyhZiL5fFRFwbQLWDwHQ/0bud
+ GRtd+Gs1JZYzFLNYRDiTkA+1gqhxwn8HunVqU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722436775; x=1723041575;
+ d=1e100.net; s=20230601; t=1722436782; x=1723041582;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3tbJEeLYiTdIOVl/k3OnHEQrTUHh+pQyKRRgPLzzVEM=;
- b=BfoOylCPrl2hMQDKhNZS0Wb1dJeTcJeWz6WzUDvVESdRq9TElPqF4KgQ67QwDBKAHI
- oKRjmvuMzvT4jmaWJbTBBeHsomS4R0fTk7SjLXGlf57xDgLuwOlY+8oiwPKJ6CFvuG06
- uyckkyFFM8B4EUbaCdvOMc54+VwnKSfNihjMWby7w2n5WkAjCn6zQab0XkBpOEGCzk59
- fyJQT3VRPMZ0dHxnnqfc3C9g/ujZg4svw9VawO4uMqvLv3YDjhKRhFik8qkCTQ/V4TnO
- yxnaU7c4G3ewoAIRWEuksTYDB0krrw3BPsSBYlnM0D1SZUXnOciKwZ3i/XCh0LfHdZ1k
- oy7g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW1nPe6wx9khNypbspCMeJDg+qKohph75JaOalva2yg/Y8Mop0B1V9loJo8suzKQkOSaRuQFHo7/xJ6N/QGsrdhGiRHgw==
-X-Gm-Message-State: AOJu0YwH6wUIgRhwONbMCctAGwVlOchQjIFvq7aMFmDsMzwQ7S9qWY+6
- FHhqvYyjQ4fw9ec6vwoW/uei5ppO7xIQQeLzWoaejW/FqmwG40m5vPuj+BPmm1SXFW/+qtKyQyy
- w0uoHJzy5dKc+mp4DGm4Wg9cPoooCC/jbi1CE
-X-Google-Smtp-Source: AGHT+IHJpixMTLNPzdoqWPHswS1nnz5RB1HVQdIFMZ3StlvqAW5Jmk+fBCOyf+tcb6ppZc/PsFzY/nUMtcBt574TcSc=
-X-Received: by 2002:a05:6358:54a2:b0:1ac:8550:9bf2 with SMTP id
- e5c5f4694b2df-1addc1597a1mr1725780755d.9.1722436775020; Wed, 31 Jul 2024
- 07:39:35 -0700 (PDT)
+ bh=3YY+MsRMd/G3y3tSdECk2JS2BMtnBWLtPtC6rszoeDw=;
+ b=bvcv7I3NRs8uT9o4Dxf7pnY1PzV7lAwMIT2XH+IWUredzlhHN9nEwG2mLnor+sS4Jn
+ sTyp6l+5a6/k/k/+xne0GvkIN0/PVOQkdW2Ag8+i1RQiVJOh1r8qvV17YX8Uoo1xdBbd
+ 5wnXhSMIFTBMIRgpv443Neoo9aGux1CY+UFNsRQ+1DtXSjdGPe454Ys2h0mQkCOCx8eH
+ deH4myxO7/5MBjPaHX8efMoBEUCf2MOmmvvwSFkPSYO8aTvJkeLPQDx/8Bd7PnER6zmh
+ ZrGY+dMvJKx4O2Up/OaK46k7NdxK40LHFtz70i3CKG/tWV8J2erF0hPIfAg/Re4m6jLf
+ wbyA==
+X-Gm-Message-State: AOJu0Yy3Qv38G72+7YUDT0vMAcq1T0HtYaH+uGNhv9bTqCLhGx/HXs+I
+ przHUw9e1bO0nqEe6m5+OftUGsPqzisQLNB7maDfGz2D9PXfi5+JNCaNa/pAo5BPY64nW0U/CWR
+ 7EY/Gm0AaV1xQTVD/bzQWUFEfI+lHL6SlN7Sab8GbrVRC1LY=
+X-Google-Smtp-Source: AGHT+IH2I/IgIJGB7bCwLY03uz46gbbWvYLgme/AnlpYY4oSONlxYkgR5WmtIvsoRs2AfXhq18h/v2JSD9alMzg3dvY=
+X-Received: by 2002:ad4:5c6a:0:b0:6b5:d663:bb53 with SMTP id
+ 6a1803df08f44-6bb559b7e12mr219163166d6.5.1722436781815; Wed, 31 Jul 2024
+ 07:39:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAC_iWjLcJ-PkX2d0LH-Tj8M513t-R1Hy1qNAZNz3Cjw4P+K2BA@mail.gmail.com>
- <CAFLszTivmh=ig-Zoe721B8wHqGRyFZ=R9_4Wo6ZhfmxNLO0+Bg@mail.gmail.com>
- <CAC_iWjJapZD2dvzVh9XGn9hy0YecoyDN6-vtMASv7oF_j8LS-A@mail.gmail.com>
- <CAFLszTgQuvgCHrV2Eej6rrnaxRt_xwtJrdgQtuhmp1oU6pgMGg@mail.gmail.com>
- <20240730152447.GU989285@bill-the-cat>
- <CAFLszTjVXzmwqbciQSF7a=teuhx_xSJHL2jy23oK5BgfP_3EDg@mail.gmail.com>
- <20240730194919.GA3794063@bill-the-cat>
- <CAFLszTiM0faJ2Dru7ZgLiuqRPS7R8kmtKqkco0x-_PfNM5+p_w@mail.gmail.com>
- <20240730201129.GB3794063@bill-the-cat>
- <CAFLszThWZUZabbysC15aLaCRt8EL1=qts45hn0Usp5htR-dp1A@mail.gmail.com>
- <20240730212009.GC3794063@bill-the-cat>
-In-Reply-To: <20240730212009.GC3794063@bill-the-cat>
+References: <20240623203033.1566505-14-sjg@chromium.org>
+ <20240624182931.GI38804@bill-the-cat>
+ <CAFLszTguTkc1m2JYb=5+yW_8uY+J0AsQZ_L0hFJHDfEXNeb0wQ@mail.gmail.com>
+ <20240625141427.GO38804@bill-the-cat>
+ <CAFLszTi1i+OrAyoyqRLZAuKzGTmAgNQ9Gwtn01XxVLvGmzZLcQ@mail.gmail.com>
+ <20240626140752.GV38804@bill-the-cat>
+ <CAFLszTj0h5w+sz796LokxgcfyRTGmHnQJ3OTDdoaoC61Ob=akw@mail.gmail.com>
+ <20240627144214.GC38804@bill-the-cat>
+ <CAFLszTixbMxDq7TvjPzc+Xup6biMmPvLP5CVPJLp7w94e0dd4Q@mail.gmail.com>
+ <CAFLszThFL4BnoprJJ8qdSo8g_5Umo36yGp0ba4w=cAexgH9cNA@mail.gmail.com>
+ <20240729181719.GP989285@bill-the-cat>
+In-Reply-To: <20240729181719.GP989285@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 31 Jul 2024 08:39:23 -0600
-Message-ID: <CAFLszThsMiQWfkVJ0POMJAFDyYWErLssG5vsQOG4V2WTWoE=4w@mail.gmail.com>
-Subject: Re: [PATCH 5/6] efi: Use malloc() for the EFI pool
+Date: Wed, 31 Jul 2024 08:39:30 -0600
+Message-ID: <CAFLszTi-ajf+wbwxyK3Xq3Efnwz9y+8U7nL7MgLrNY2h=V7faw@mail.gmail.com>
+Subject: Re: [PATCH 13/14] Update u-boot.cfg to include CFG also
 To: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,341 +93,108 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Tue, 30 Jul 2024 at 15:20, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 29 Jul 2024 at 12:17, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Tue, Jul 30, 2024 at 02:52:21PM -0600, Simon Glass wrote:
+> On Sun, Jul 28, 2024 at 01:36:09PM -0600, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Tue, 30 Jul 2024 at 14:11, Tom Rini <trini@konsulko.com> wrote:
+> > On Fri, 28 Jun 2024 at 01:33, Simon Glass <sjg@chromium.org> wrote:
 > > >
-> > > On Tue, Jul 30, 2024 at 02:05:19PM -0600, Simon Glass wrote:
-> > > > Hi Tom,
+> > > Hi Tom,
+> > >
+> > > On Thu, 27 Jun 2024 at 15:42, Tom Rini <trini@konsulko.com> wrote:
 > > > >
-> > > > On Tue, 30 Jul 2024 at 13:49, Tom Rini <trini@konsulko.com> wrote:
+> > > > On Thu, Jun 27, 2024 at 09:37:15AM +0100, Simon Glass wrote:
+> > > > > Hi Tom,
 > > > > >
-> > > > > On Tue, Jul 30, 2024 at 01:42:17PM -0600, Simon Glass wrote:
-> > > > > > Hi Tom,
+> > > > > On Wed, 26 Jun 2024 at 15:07, Tom Rini <trini@konsulko.com> wrote:
 > > > > > >
-> > > > > > On Tue, 30 Jul 2024 at 09:24, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > On Wed, Jun 26, 2024 at 09:00:41AM +0100, Simon Glass wrote:
+> > > > > > > Hi Tom,
 > > > > > > >
-> > > > > > > On Tue, Jul 30, 2024 at 09:18:02AM -0600, Simon Glass wrote:
-> > > > > > > > Hi Ilias,
+> > > > > > > On Tue, 25 Jun 2024 at 15:14, Tom Rini <trini@konsulko.com> wrote:
 > > > > > > > >
-> > > > > > > > On Tue, 30 Jul 2024 at 08:54, Ilias Apalodimas
-> > > > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > > > On Tue, Jun 25, 2024 at 01:38:04PM +0100, Simon Glass wrote:
+> > > > > > > > > Hi Tom,
 > > > > > > > > >
-> > > > > > > > > On Tue, 30 Jul 2024 at 17:38, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > > > On Mon, 24 Jun 2024 at 19:29, Tom Rini <trini@konsulko.com> wrote:
 > > > > > > > > > >
-> > > > > > > > > > Hi Ilias,
+> > > > > > > > > > On Sun, Jun 23, 2024 at 02:30:32PM -0600, Simon Glass wrote:
 > > > > > > > > > >
-> > > > > > > > > > On Tue, 30 Jul 2024 at 02:20, Ilias Apalodimas
-> > > > > > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > > > > > > Some configuration is now in variables with a CFG_ prefix. Add these to
+> > > > > > > > > > > the .cfg file so that we can see everything in one place. Sort the
+> > > > > > > > > > > options so they are easier to find and compare.
 > > > > > > > > > > >
-> > > > > > > > > > > On Mon, 29 Jul 2024 at 18:28, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > > > > > > >
-> > > > > > > > > > > > Hi Ilias,
-> > > > > > > > > > > >
-> > > > > > > > > > > > On Mon, 29 Jul 2024 at 04:02, Ilias Apalodimas
-> > > > > > > > > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > Hi Simon
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > On Fri, 26 Jul 2024 at 17:54, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > Hi Ilias,
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > On Fri, 26 Jul 2024 at 02:31, Ilias Apalodimas
-> > > > > > > > > > > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > Hi Simon,
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > On Fri, 26 Jul 2024 at 02:33, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > Hi Heinrich,
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > On Thu, 25 Jul 2024 at 09:54, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > On 25.07.24 15:56, Simon Glass wrote:
-> > > > > > > > > > > > > > > > > > This API call is intended for allocating small amounts of memory,
-> > > > > > > > > > > > > > > > > > similar to malloc(). The current implementation rounds up to whole pages
-> > > > > > > > > > > > > > > > > > which can waste large amounts of memory. It also implements its own
-> > > > > > > > > > > > > > > > > > malloc()-style header on each block.
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > Use U-Boot's built-in malloc() instead, to avoid these problems:
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > - it should normally be large enough for pool allocations
-> > > > > > > > > > > > > > > > > > - if it isn't we can enforce a minimum size for boards which use
-> > > > > > > > > > > > > > > > > >    EFI_LOADER
-> > > > > > > > > > > > > > > > > > - the existing mechanism may create an unwatned entry in the memory map
-> > > > > > > > > > > > > > > > > > - it is used for most EFI allocations already
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > One side effect is that this seems to be showing up some bugs in the
-> > > > > > > > > > > > > > > > > > EFI code, since the malloc() pool becomes corrupted with some tests.
-> > > > > > > > > > > > > > > > > > This has likely crept in due to the very large gaps between allocations
-> > > > > > > > > > > > > > > > > > (around 4KB), which provides a lot of leeway when the allocation size is
-> > > > > > > > > > > > > > > > > > too small. Work around this by increasing the size for now, until these
-> > > > > > > > > > > > > > > > > > (presumed) bugs are located.
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > > > > > > > > > > ---
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > >   lib/efi_loader/efi_memory.c | 93 ++++++++-----------------------------
-> > > > > > > > > > > > > > > > > >   1 file changed, 19 insertions(+), 74 deletions(-)
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> > > > > > > > > > > > > > > > > > index 2945f5648c7..fabe9e3a87a 100644
-> > > > > > > > > > > > > > > > > > --- a/lib/efi_loader/efi_memory.c
-> > > > > > > > > > > > > > > > > > +++ b/lib/efi_loader/efi_memory.c
-> > > > > > > > > > > > > > > > > > @@ -80,45 +80,6 @@ static LIST_HEAD(efi_mem);
-> > > > > > > > > > > > > > > > > >   void *efi_bounce_buffer;
-> > > > > > > > > > > > > > > > > >   #endif
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > -/**
-> > > > > > > > > > > > > > > > > > - * struct efi_pool_allocation - memory block allocated from pool
-> > > > > > > > > > > > > > > > > > - *
-> > > > > > > > > > > > > > > > > > - * @num_pages:       number of pages allocated
-> > > > > > > > > > > > > > > > > > - * @checksum:        checksum
-> > > > > > > > > > > > > > > > > > - * @data:    allocated pool memory
-> > > > > > > > > > > > > > > > > > - *
-> > > > > > > > > > > > > > > > > > - * U-Boot services each UEFI AllocatePool() request as a separate
-> > > > > > > > > > > > > > > > > > - * (multiple) page allocation. We have to track the number of pages
-> > > > > > > > > > > > > > > > > > - * to be able to free the correct amount later.
-> > > > > > > > > > > > > > > > > > - *
-> > > > > > > > > > > > > > > > > > - * The checksum calculated in function checksum() is used in FreePool() to avoid
-> > > > > > > > > > > > > > > > > > - * freeing memory not allocated by AllocatePool() and duplicate freeing.
-> > > > > > > > > > > > > > > > > > - *
-> > > > > > > > > > > > > > > > > > - * EFI requires 8 byte alignment for pool allocations, so we can
-> > > > > > > > > > > > > > > > > > - * prepend each allocation with these header fields.
-> > > > > > > > > > > > > > > > > > - */
-> > > > > > > > > > > > > > > > > > -struct efi_pool_allocation {
-> > > > > > > > > > > > > > > > > > -     u64 num_pages;
-> > > > > > > > > > > > > > > > > > -     u64 checksum;
-> > > > > > > > > > > > > > > > > > -     char data[] __aligned(ARCH_DMA_MINALIGN);
-> > > > > > > > > > > > > > > > > > -};
-> > > > > > > > > > > > > > > > > > -
-> > > > > > > > > > > > > > > > > > -/**
-> > > > > > > > > > > > > > > > > > - * checksum() - calculate checksum for memory allocated from pool
-> > > > > > > > > > > > > > > > > > - *
-> > > > > > > > > > > > > > > > > > - * @alloc:   allocation header
-> > > > > > > > > > > > > > > > > > - * Return:   checksum, always non-zero
-> > > > > > > > > > > > > > > > > > - */
-> > > > > > > > > > > > > > > > > > -static u64 checksum(struct efi_pool_allocation *alloc)
-> > > > > > > > > > > > > > > > > > -{
-> > > > > > > > > > > > > > > > > > -     u64 addr = (uintptr_t)alloc;
-> > > > > > > > > > > > > > > > > > -     u64 ret = (addr >> 32) ^ (addr << 32) ^ alloc->num_pages ^
-> > > > > > > > > > > > > > > > > > -               EFI_ALLOC_POOL_MAGIC;
-> > > > > > > > > > > > > > > > > > -     if (!ret)
-> > > > > > > > > > > > > > > > > > -             ++ret;
-> > > > > > > > > > > > > > > > > > -     return ret;
-> > > > > > > > > > > > > > > > > > -}
-> > > > > > > > > > > > > > > > > > -
-> > > > > > > > > > > > > > > > > >   /**
-> > > > > > > > > > > > > > > > > >    * efi_mem_cmp() - comparator function for sorting memory map
-> > > > > > > > > > > > > > > > > >    *
-> > > > > > > > > > > > > > > > > > @@ -681,13 +642,10 @@ void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align)
-> > > > > > > > > > > > > > > > > >    * @buffer: allocated memory
-> > > > > > > > > > > > > > > > > >    * Return:  status code
-> > > > > > > > > > > > > > > > > >    */
-> > > > > > > > > > > > > > > > > > -efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size, void **buffer)
-> > > > > > > > > > > > > > > > > > +efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
-> > > > > > > > > > > > > > > > > > +                            void **buffer)
-> > > > > > > > > > > > > > > > > >   {
-> > > > > > > > > > > > > > > > > > -     efi_status_t r;
-> > > > > > > > > > > > > > > > > > -     u64 addr;
-> > > > > > > > > > > > > > > > > > -     struct efi_pool_allocation *alloc;
-> > > > > > > > > > > > > > > > > > -     u64 num_pages = efi_size_in_pages(size +
-> > > > > > > > > > > > > > > > > > -                                       sizeof(struct efi_pool_allocation));
-> > > > > > > > > > > > > > > > > > +     void *ptr;
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > >       if (!check_allowed())
-> > > > > > > > > > > > > > > > > >               return EFI_UNSUPPORTED;
-> > > > > > > > > > > > > > > > > > @@ -700,16 +658,21 @@ efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
-> > > > > > > > > > > > > > > > > >               return EFI_SUCCESS;
-> > > > > > > > > > > > > > > > > >       }
-> > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > Unfortunately this patch does not match the UEFI specification:
-> > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > Two different memory types cannot reside in the same memory page. You
-> > > > > > > > > > > > > > > > > have to keep track of the memory type of each allocated memory page and
-> > > > > > > > > > > > > > > > > report it in GetMemoryMap().
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > I actually hadn't thought about that. Is it implied in the spec or
-> > > > > > > > > > > > > > > > actually stated somewhere?
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > I don't remember if it's explicitly stated, but it *really* doesn't
-> > > > > > > > > > > > > > > have to be. Although u-boot doesn't currently support this on modern
-> > > > > > > > > > > > > > > secure systems you can't have code and data mixed on the same page.
-> > > > > > > > > > > > > > > This would prevent you to map pages with proper permissions and take
-> > > > > > > > > > > > > > > advantage of CPU security features  e.g RW^X.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > As it stands, U-Boot's data is reported as EFI_BOOT_SERVICES_CODE
-> > > > > > > > > > > > > > through EFI. Perhaps the difference between EFI_BOOT_SERVICES_CODE and
-> > > > > > > > > > > > > > EFI_BOOT_SERVICES_DATA isn't that important?
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > But if we did want to fix that, we could make the malloc region
-> > > > > > > > > > > > > > EFI_BOOT_SERVICES_DATA.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > In any case, the AllocatePool description reads "This function
-> > > > > > > > > > > > > > > allocates pages from EfiConventionalMemory as needed to grow the
-> > > > > > > > > > > > > > > requested pool type. All allocations are eight-byte aligned". I don't
-> > > > > > > > > > > > > > > think using malloc in AllocatePool is appropriate. If we ever want to
-> > > > > > > > > > > > > > > do that and allocate from the malloc space, we need to teach malloc
-> > > > > > > > > > > > > > > some EFI semantics, but that's a really bad idea.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > Here I don't see the difference between EFI's malloc(n) and
-> > > > > > > > > > > > > > memalign(8, n). I do see a lot of comments like 'use the spec', 'read
-> > > > > > > > > > > > > > the spec'. It seems very clear to me that the bootloader can use
-> > > > > > > > > > > > > > whatever algorithm it likes to provide the allocated memory for the
-> > > > > > > > > > > > > > pool.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > What sort of EFI semantics are you referring to?
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > the memory type. Your patch removes the call to efi_allocate_pages
-> > > > > > > > > > > > > which tracks it.
-> > > > > > > > > > > >
-> > > > > > > > > > > > I can put that code back, depending on what we decide below.
-> > > > > > > > > > > >
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > Anyway, from what I can tell, we mostly use EFI_BOOT_SERVICES_DATA.
-> > > > > > > > > > > > > > > > The only exception is EFI_RUNTIME_SERVICES_DATA for the runtime stuff.
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > That's not entirely correct, we use a lot more than these 2.
-> > > > > > > > > > > > > > > EFI_LOADER_DATA, EFI_LOADER_CODE and EFI_ACPI_RECLAIM_MEMORY from a
-> > > > > > > > > > > > > > > quick grep
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > Yes I did a quick grep too, but then checked each site. The first two
-> > > > > > > > > > > > > > are used in an EFI app, not U-Boot itself. The ACPI one is not an
-> > > > > > > > > > > > > > allocation.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > So perhaps we can use malloc() for EFI_BOOT_SERVICES_DATA allocations
-> > > > > > > > > > > > > > > > and stick with whole pages otherwise? That will mostly fix the problem
-> > > > > > > > > > > > > > > > I am seeing.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > Any comments on this?
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > This violates the spec and probably breaks a few tests and the EFI
-> > > > > > > > > > > > > boot services API, as you are supposed to be able to define the memory
-> > > > > > > > > > > > > type. We might be able to control it from U-Boot, but EFI apps are
-> > > > > > > > > > > > > going to end up being buggy and hard to debug -- e.g an app calls
-> > > > > > > > > > > > > allocatePool to allocate memory that needs to be preserved at runtime.
-> > > > > > > > > > > >
-> > > > > > > > > > > > To be more specific, I am suggesting:
-> > > > > > > > > > > > - use malloc() for EFI_BOOT_SERVICES_DATA allocations (with no memory
-> > > > > > > > > > > > type since it is always that). This should cover all the U-Boot
-> > > > > > > > > > > > allocations and make sure they are safely within the malloc() pool
-> > > > > > > > > > > > - use efi_allocate_pages() for other memory types (keeping the memory
-> > > > > > > > > > > > type in metadata)
-> > > > > > > > > > > >
+> > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > > > ---
 > > > > > > > > > > >
-> > > > > > > > > > > Personally, I don't see the point and we deviate from the spec as
-> > > > > > > > > > > well. Perhaps Heinrich thinks otherwise, but the EFI spec still says
-> > > > > > > > > > > you need to allocate *pages* to grow the pool. What's missing from our
-> > > > > > > > > > > efi_allocate_pool() is the ability to merge allocations of the same
-> > > > > > > > > > > memory type to an existing pool assuming there's space, rather than
-> > > > > > > > > > > requesting a new pool of 4kb.
+> > > > > > > > > > > Changes in v2:
+> > > > > > > > > > > - Add new patch to update u-boot.cfg with CFG_... options
+> > > > > > > > > > >
+> > > > > > > > > > >  scripts/Makefile.autoconf | 2 +-
+> > > > > > > > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > > > > > > > > >
+> > > > > > > > > > > diff --git a/scripts/Makefile.autoconf b/scripts/Makefile.autoconf
+> > > > > > > > > > > index b42f9b525fe..65ff11ea508 100644
+> > > > > > > > > > > --- a/scripts/Makefile.autoconf
+> > > > > > > > > > > +++ b/scripts/Makefile.autoconf
+> > > > > > > > > > > @@ -71,7 +71,7 @@ quiet_cmd_autoconf = GEN     $@
+> > > > > > > > > > >  quiet_cmd_u_boot_cfg = CFG     $@
+> > > > > > > > > > >        cmd_u_boot_cfg = \
+> > > > > > > > > > >       $(CPP) $(c_flags) $2 -DDO_DEPS_ONLY -dM include/config.h > $@.tmp && { \
+> > > > > > > > > > > -             grep 'define CONFIG_' $@.tmp | \
+> > > > > > > > > > > +             egrep 'define (CONFIG_|CFG_)' $@.tmp | sort | \
+> > > > > > > > > > >                       sed '/define CONFIG_IS_ENABLED(/d;/define CONFIG_IF_ENABLED_INT(/d;/define CONFIG_VAL(/d;' > $@; \
+> > > > > > > > > > >               rm $@.tmp;                                              \
+> > > > > > > > > > >       } || {                                                          \
 > > > > > > > > > >
-> > > > > > > > > > "This function allocates pages from EfiConventionalMemory as needed to
-> > > > > > > > > > grow the requested pool type". So far as EFI is concerned, the
-> > > > > > > > > > malloc() region is in EfiConventionalMemory, so I don't see any
-> > > > > > > > > > deviation.
-> > > > > > > > > >
-> > > > > > > > > > Please also see below.
-> > > > > > > > > >
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > You can switch some callsite of efi_allocate_pool to
-> > > > > > > > > > > > > efi_allocate_pages() internally. Will that fix the behavior?
-> > > > > > > > > > > >
-> > > > > > > > > > > > It still allocates memory 'in space' and uses 4KB for each allocation.
-> > > > > > > > > > > >
-> > > > > > > > > >
-> > > > > > > > > > This is the key point that doesn't seem to be coming across. The
-> > > > > > > > > > current allocator is allocating memory wherever it likes, potentially
-> > > > > > > > > > interfering with the kernel_addr_r addresses, etc. as on qemu_arm.
+> > > > > > > > > > I don't like this because whereas "CONFIG_" is enforced to be set only
+> > > > > > > > > > by Kconfig and so always all reliably set and found via a single header,
+> > > > > > > > > > CFG_ stuff is not.
 > > > > > > > > >
-> > > > > > > > > It is, but I don't think using malloc is solving it. It's papering
-> > > > > > > > > over the problem, because if someone in the future launches an EFI app
-> > > > > > > > > or allocates EFI memory with a different type you are back on the same
-> > > > > > > > > problem.
+> > > > > > > > > OK, so how are CFG_ options found? I hit this when trying to find the
+> > > > > > > > > SDRAM size on rockchip 3399 and I could not find any way of figuring
+> > > > > > > > > it out.
 > > > > > > > >
-> > > > > > > > It is certainly solving this problem.
-> > > > > > > >
-> > > > > > > > Once the app is launched it is OK to overwrite memory...after all it
-> > > > > > > > has been loaded and is running. The issue is that these little
-> > > > > > > > allocations can end up anywhere in memory. Did you see the qemu_arm
-> > > > > > > > note?
+> > > > > > > > It's just another define, there's no uniformity to it. For some of the
+> > > > > > > > SDRAM values really we need some build time way to grab some information
+> > > > > > > > out of the default device tree.
 > > > > > > >
-> > > > > > > Isn't this another part of why we need the LMB rework? So that
-> > > > > > > kernel_addr_r, et al, can be marked as reserved.
+> > > > > > > Can you give an example of a board that could use this? I looked at
+> > > > > > > the devicetree for chromebook_kevin and don't see a memory range in
+> > > > > > > ther.
 > > > > > >
-> > > > > > If we mark them as reserved, we won't be able to load a file into that
-> > > > > > region, so boot scripts will fail.
+> > > > > > OK, wow, I didn't realize /memory was optional now. But indeed, I don't
+> > > > > > see it in the dtb file. That removes that option then, sadly.
 > > > > >
-> > > > > No? We mark it as being overwriteable but allocated. This is part of the
-> > > > > LMB rework series.
+> > > > > Well, we can still require it, so long as an error is produced if the
+> > > > > property is needed but does not exist.
 > > > >
-> > > > Yes, I see, that makes sense. I don't know any way to guess the
-> > > > expected size of the kernel or ramdisk. I see that Apple uses 128MB
-> > > > for the kernel (plenty) and 1GB for the ramdisk.
+> > > > "We" who? I don't feel like we'll have a lot of traction with linux
+> > > > kernel folks in requiring /memory to be added to the dts files on
+> > > > however many platforms don't have it today because I'm going to guess
+> > > > it's added at run time, possibly by us, with the correct size and we'd
+> > > > be asking for statically adding things half-wrong like a lot of
+> > > > platforms used to do (and in turn rely on U-Boot to correct the size).
 > > >
-> > > Yes, 128MiB is a practical limit. Ramdisk is where it gets trickier.
-> > >
-> > > > > > Please take a look at the whole series and let me know if there is
-> > > > > > anything missing from the descriptions I have given. I have had this
-> > > > > > problem in the back of my mind for some time...but just a few hours of
-> > > > > > investigation was enough to determine that it really is broken.
-> > > > >
-> > > > > I'm missing something, sorry. Yes, it is known that EFI can make some
-> > > > > incorrect assumptions about what memory is/isn't available (as other
-> > > > > implementations give EFI the world to work with), hence the LMB rework
-> > > > > series to address some of these problems.
-> > > >
-> > > > My goal here is to tidy up EFI memory allocation so that it doesn't
-> > > > result in allocating memory in strange places. Avoiding overlaps is
-> > > > one thing, but the way this is heading, we will get overlap errors
-> > > > randomly on platforms when someone tries to load something into RAM,
-> > > > or we won't protect things that need to be protected. It is all a bit
-> > > > mushy without a proper design.
-> > > >
-> > > > Does that make sense?
-> > >
-> > > Well, to me step one is to get the lmb series done so that if something
-> > > needs a range of memory it can both check if it's available and mark it
-> > > as unavailable to others. As yes, we have something analogous to
-> > > cooperative multitasking when it comes to memory management today, and
-> > > that doesn't always work out.
+> > > Hmm yes of course, the firmware is supposed to add these
+> > > properties...that's how it gets in there. So we need to stick with CFG
+> > > (and perhaps the RAM-size prober) for now.
 > >
-> > OK, and that is in progress.
-> >
-> > >
-> > > Step two is getting the new lmb series and EFI_LOADER talking,
-> >
-> > What sort of talking? Bear in mind that EFI_LOADER currently does
-> > allocations even if it isn't used.
+> > Coming back to this patch, can we apply it? It provides a way to find
+> > out the value of these CFG options, which otherwise involves chasing
+> > around header files.
 >
-> Well, Sughosh is (well, has, it wasn't in v3) splitting the latter half
-> of his series out since that's where some of the objections you had were
-> coming from.
+> No, because it implies that there's a consistent way to know what a
+> given CFG value will be when there is not. There is no equivalent header
+> to include like for CONFIG symbols to know that you got them. You're
+> likely better off trying out "ripgrep" which I have found to be much
+> faster than "git grep".
 
-Oh I see.
+Hmm it is really hard to know which files to grep!
 
->
-> > > so that
-> > > step three can be seeing what tweaks may be needed in where things
-> > > allocate memory.
-> >
-> > So my series is step 3?
->
-> Or at least understanding what the problems may still be, yes.
-
-In that case I would like to clean up EFI's memory management before
-doing step 2, since I believe many of the problems will just go away
-if we can get that right.
+Could we require that config.h includes all the CFG values? I'm just
+trying to find a way to bring a bit more order to this area.
 
 Regards,
 Simon
