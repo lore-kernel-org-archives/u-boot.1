@@ -4,66 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D8F0C3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 14:59:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AF88C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 15:03:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EF84889D2;
-	Wed, 31 Jul 2024 16:59:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 99EBF88A28;
+	Wed, 31 Jul 2024 17:03:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Dm6ZQiWe";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="KxoGhTH+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33AA5889AE; Wed, 31 Jul 2024 16:59:14 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E026288A28; Wed, 31 Jul 2024 17:03:30 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFE81889D5
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 16:59:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7742988A15
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 17:03:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vigneshr@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 46VEx00t072941;
- Wed, 31 Jul 2024 09:59:00 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1722437941;
- bh=TKoPDnaC5FmWT1ZeZ0BOG+F9Awe1rwVPBh0HeLV8Pvo=;
- h=From:To:CC:Subject:Date;
- b=Dm6ZQiWe4vI/eU+wp7izJoyiy7LHt4qIdg8V+G5a8MltuOlVFD5fLB/bwHHHWeo5P
- t8gv9jgcYUWWUE2JGiIF30VyvNd6JfxnuKj+fhG3gyHAm1HqmJHECrMEj2BuBkfwIM
- X4+a4MC4h5t+Sq186JkqdSMY+z2KMTt15lXEW0PU=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 46VEx0gJ006272
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 31 Jul 2024 09:59:00 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 31
- Jul 2024 09:59:00 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 31 Jul 2024 09:59:00 -0500
-Received: from uda0132425.dhcp.ti.com (uda0132425.dhcp.ti.com [172.24.227.94])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 46VEwvnI044345; 
- Wed, 31 Jul 2024 09:58:58 -0500
-From: Vignesh Raghavendra <vigneshr@ti.com>
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Michael Trimarchi
- <michael@amarulasolutions.com>, Tom Rini <trini@konsulko.com>
-CC: Roger Quadros <rogerq@kernel.org>, Vignesh Raghavendra <vigneshr@ti.com>, 
- William Zhang <william.zhang@broadcom.com>, Sean Anderson
- <seanga2@gmail.com>, <u-boot@lists.denx.de>, <s-k6@ti.com>
-Subject: [PATCH] mtd: nand: raw: omap_gpmc: Check return value of
- gpmc_nand_init
-Date: Wed, 31 Jul 2024 20:28:55 +0530
-Message-ID: <20240731145855.3122166-1-vigneshr@ti.com>
-X-Mailer: git-send-email 2.45.2
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=72bb=PA=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1722438195;
+ bh=6gWiXWmUrL1u5WqbNG0k6iZU25fmmmYswyw+4++R1tU=;
+ b=KxoGhTH+lzfpmfL7tKNiXDwgEG7Hs/SmcsSF9BSJ5B/MAXXjHy6BX+i810tVPFli7RlRa1mjk
+ nvWZRDDtD0/M8aw6+4ohCPe8oF9kENgAbpJe5jjc7tJu/Alp0hgLvujZ4qcL5B5XMb6fyg33X4k
+ AMnUJ5wHeFs7Q5LhJLEKbmXgz6HxZJgFXOh3VluEvFF2+7JKXyjqGJI6YCH4IqD+XU7CZzIdNHg
+ 3c2uNC5Geh+94fyOqaqSumgZjmDe+6iojUmV7v8LmYxAaXlL6eLwWJG55PrV1N1grR5SCAwBZTy
+ yaEczaN1x4VopdkR+WdU44pw3AIKmprdOCXyx3vOtZ3Q==
+Message-ID: <d77dd5c5-37fc-4743-9f3d-3ef88eabb07f@kwiboo.se>
+Date: Wed, 31 Jul 2024 17:03:03 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 8/8] rockchip: Avoid #ifdefs in RK3399 SPL
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Quentin Schulz
+ <quentin.schulz@cherry.de>, huang lin <hl@rock-chips.com>, "U-Boot Mailing
+ List" <u-boot@lists.denx.de>
+References: <20240731144908.795290-1-sjg@chromium.org>
+ <20240731144908.795290-9-sjg@chromium.org>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240731144908.795290-9-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 66aa522e06984f15edfb5c4d
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,32 +75,165 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If the function is called with no NAND device attached, then this
-function can return error value, proceeding further ignoring the same
-can cause system crash. This is seen when "mtd list" is run with no NAND
-addon cards connected.
+Hi Simon,
 
-Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
----
- drivers/mtd/nand/raw/omap_gpmc.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+On 2024-07-31 16:49, Simon Glass wrote:
+> The code here is confusing due to large blocks which are #ifdefed out.
+> Add a function phase_sdram_init() which returns whether SDRAM init
+> should happen in the current phase, using that as needed to control the
+> code flow.
+> 
+> This increases code size by about 500 bytes in SPL when the cache is on,
+> since it must call the rather large rockchip_sdram_size() function.
 
-diff --git a/drivers/mtd/nand/raw/omap_gpmc.c b/drivers/mtd/nand/raw/omap_gpmc.c
-index 92a92ad63a02..a36e2a148ccc 100644
---- a/drivers/mtd/nand/raw/omap_gpmc.c
-+++ b/drivers/mtd/nand/raw/omap_gpmc.c
-@@ -1188,7 +1188,10 @@ static int gpmc_nand_probe(struct udevice *dev)
- 		return ret;
- 
- 	base = devm_ioremap(dev, res.start, resource_size(&res));
--	gpmc_nand_init(nand, base);
-+	ret = gpmc_nand_init(nand, base);
-+	if (ret)
-+		return ret;
-+
- 	mtd->dev = dev;
- 	nand_set_flash_node(nand, dev_ofnode(dev));
- 
--- 
-2.45.2
+I am guessing this size increase only is related to kevin/bob since all
+other RK3399 boards already use rockchip_sdram_size() in SPL.
+
+> 
+> - Drop the non-dcache optimisation, since the cache should normally be on
+
+Is this referencing to something that is still done in this patch?
+
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+> (no changes since v5)
+> 
+> Changes in v5:
+> - Move setting of pmugrf into the probe() function
+> - Drop patches previously applied
+> 
+> Changes in v4:
+> - Fix 'stating' typo
+> - Move Binman size feature to a separate series
+> 
+> Changes in v3:
+> - Split out the refactoring into a separate patch
+> 
+> Changes in v2:
+> - Drop patch "regulator: rk8xx: Fix incorrect parameter"
+> - Rewrite boneblack patch to onstead drop the target and update docs
+> 
+>  drivers/ram/rockchip/sdram_rk3399.c | 33 ++++++++++++++---------------
+>  1 file changed, 16 insertions(+), 17 deletions(-)
+> 
+> diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
+> index bc79c034808..8a7cbb1849f 100644
+> --- a/drivers/ram/rockchip/sdram_rk3399.c
+> +++ b/drivers/ram/rockchip/sdram_rk3399.c
+> @@ -13,6 +13,7 @@
+>  #include <log.h>
+>  #include <ram.h>
+>  #include <regmap.h>
+> +#include <spl.h>
+>  #include <syscon.h>
+>  #include <asm/arch-rockchip/clock.h>
+>  #include <asm/arch-rockchip/cru.h>
+> @@ -63,8 +64,6 @@ struct chan_info {
+>  };
+>  
+>  struct dram_info {
+> -#if defined(CONFIG_TPL_BUILD) || \
+> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+>  	u32 pwrup_srefresh_exit[2];
+>  	struct chan_info chan[2];
+>  	struct clk ddr_clk;
+> @@ -75,7 +74,6 @@ struct dram_info {
+>  	struct rk3399_pmusgrf_regs *pmusgrf;
+>  	struct rk3399_ddr_cic_regs *cic;
+>  	const struct sdram_rk3399_ops *ops;
+> -#endif
+>  	struct ram_info info;
+>  	struct rk3399_pmugrf_regs *pmugrf;
+>  };
+> @@ -92,9 +90,6 @@ struct sdram_rk3399_ops {
+>  					struct rk3399_sdram_params *params);
+>  };
+>  
+> -#if defined(CONFIG_TPL_BUILD) || \
+> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+> -
+>  struct rockchip_dmc_plat {
+>  #if CONFIG_IS_ENABLED(OF_PLATDATA)
+>  	struct dtd_rockchip_rk3399_dmc dtplat;
+> @@ -191,6 +186,17 @@ struct io_setting {
+>  	},
+>  };
+>  
+> +/**
+> + * phase_sdram_init() - Check if this is the phase where SDRAM init happens
+> + *
+> + * Returns: true to do SDRAM init in this phase, false to not
+> + */
+> +static bool phase_sdram_init(void)
+> +{
+> +	return spl_phase() == PHASE_TPL ||
+> +	    (!IS_ENABLED(CONFIG_TPL) && !spl_in_proper());
+
+This is still wrong, please consider ROCKCHIP_EXTERNAL_TPL or this
+function fail to do what you document it to do.
+
+See our prior thread about this:
+https://lore.kernel.org/u-boot/CAFLszThg5xohR-9AgSMHVrW5Dp_tN39nC7rq1Z4ZMnqOQqJa1w@mail.gmail.com/
+
+Regards,
+Jonas
+
+> +}
+> +
+>  static struct io_setting *
+>  lpddr4_get_io_settings(const struct rk3399_sdram_params *params, u32 mr5)
+>  {
+> @@ -3024,7 +3030,7 @@ static int rk3399_dmc_of_to_plat(struct udevice *dev)
+>  	struct rockchip_dmc_plat *plat = dev_get_plat(dev);
+>  	int ret;
+>  
+> -	if (!CONFIG_IS_ENABLED(OF_REAL))
+> +	if (!CONFIG_IS_ENABLED(OF_REAL) || !phase_sdram_init())
+>  		return 0;
+>  
+>  	ret = dev_read_u32_array(dev, "rockchip,sdram-params",
+> @@ -3093,7 +3099,6 @@ static int rk3399_dmc_init(struct udevice *dev)
+>  	priv->cic = syscon_get_first_range(ROCKCHIP_SYSCON_CIC);
+>  	priv->grf = syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
+>  	priv->pmu = syscon_get_first_range(ROCKCHIP_SYSCON_PMU);
+> -	priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
+>  	priv->pmusgrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUSGRF);
+>  	priv->pmucru = rockchip_get_pmucru();
+>  	priv->cru = rockchip_get_cru();
+> @@ -3138,19 +3143,16 @@ static int rk3399_dmc_init(struct udevice *dev)
+>  
+>  	return 0;
+>  }
+> -#endif
+>  
+>  static int rk3399_dmc_probe(struct udevice *dev)
+>  {
+>  	struct dram_info *priv = dev_get_priv(dev);
+>  
+> -#if defined(CONFIG_TPL_BUILD) || \
+> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+> -	if (rk3399_dmc_init(dev))
+> -		return 0;
+> -#endif
+>  	priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
+>  	debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
+> +	if (phase_sdram_init() && rk3399_dmc_init(dev))
+> +		return 0;
+> +
+>  	priv->info.base = CFG_SYS_SDRAM_BASE;
+>  	priv->info.size =
+>  		rockchip_sdram_size((phys_addr_t)&priv->pmugrf->os_reg2);
+> @@ -3181,10 +3183,7 @@ U_BOOT_DRIVER(dmc_rk3399) = {
+>  	.id = UCLASS_RAM,
+>  	.of_match = rk3399_dmc_ids,
+>  	.ops = &rk3399_dmc_ops,
+> -#if defined(CONFIG_TPL_BUILD) || \
+> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+>  	.of_to_plat = rk3399_dmc_of_to_plat,
+> -#endif
+>  	.probe = rk3399_dmc_probe,
+>  	.priv_auto	= sizeof(struct dram_info),
+>  #if defined(CONFIG_TPL_BUILD) || \
 
