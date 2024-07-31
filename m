@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91004C3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 06:19:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27CE4C3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 06:21:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA1B18890F;
-	Wed, 31 Jul 2024 08:19:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 926468896C;
+	Wed, 31 Jul 2024 08:21:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="GOoiyuMI";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="uGuC3hDZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 683B38890F; Wed, 31 Jul 2024 08:19:18 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id BB4A28890F; Wed, 31 Jul 2024 08:21:35 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C4818889C
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 08:19:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C06C28889C
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 08:21:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1722406755; x=1723011555; i=xypron.glpk@gmx.de;
- bh=nnI1GKpvTnq+a4O2F5YrcWKouY5nosOxxNcNA5lWiqE=;
+ s=s31663417; t=1722406892; x=1723011692; i=xypron.glpk@gmx.de;
+ bh=+pYHYs7bQhYUSXRpMmU951NePF30tYs0xYBnHv8Wi4U=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=GOoiyuMIIxKOb/dXSc/ZQYk3ogilXx7y7O2N15PWS9haALE1iLUbfCmPahebl0M5
- rEuT763inohzksAub2Wzqx/NDO1ttHyx8m678r7rP4viwO5rsXibsbxi/v0E9xueg
- Z/dMcIwUv4kSbS0+PvzBa+tBjUWEyo1JhqKog3E1Fd3hcqa6U7pRUD7jPBvMnNh5z
- +Ke49Bxqjo1GdSP/NCWa1KPXcJeoIacWhxLsjwY4LPxClCMg21PD94HR65gKkOEey
- STXY8Qk84MqOimjlEsEQ34X02kxM/UizcdwvUgu8nkZ6hYiKqv4Vg/BmzkD2mJje+
- sJQ/ozBK2iE9SMC+pQ==
+ b=uGuC3hDZ//08lzvIo1z3hpm9oJAy+SgvBjiBzxyN6XmTmIxbTpyrPzWgfGXfEGMW
+ Ll9Xot22CScL5yziYPmtilvaMyDc5l8u4o7t+TMRCgOCsaeN5Io7hSQdJiJGpOvxi
+ cxlXOjT7PjACd2yoMRmopyEoe2aIQIA1ajlqBHDBOgYJeF22jcd92xUXtwGYbGU7a
+ 0n59h+jEt88/+/OYYS7amzINTwYfAClLmNnQNeZMioOojslABg8Tg0LbjEoe9I1yW
+ bFnCJpnTchXHBSZ7BagX6ta2NMV+JpxNDAh5gFeD+imYVhBCX2Cn9BBeOK8zJn/iv
+ FN1zKwIGLFlRcThmGw==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.161] ([62.143.93.80]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MeU0q-1s0nrD1nqm-00icrM; Wed, 31
- Jul 2024 08:19:15 +0200
-Message-ID: <ee72476f-7926-4cea-9525-3f494ec1ce72@gmx.de>
-Date: Wed, 31 Jul 2024 08:19:22 +0200
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MwQXN-1sI3Yn2fDB-010RA9; Wed, 31
+ Jul 2024 08:21:32 +0200
+Message-ID: <10fd2ecd-fe6d-4ab8-b10d-722ef712dc2c@gmx.de>
+Date: Wed, 31 Jul 2024 08:21:39 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/5] efi_memory: avoid possible null pointer dereference
+Subject: Re: [PATCH 4/5] efi_memory: get the efi_mem_list node directly
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
 References: <20240730111132.1097315-1-sughosh.ganu@linaro.org>
- <20240730111132.1097315-3-sughosh.ganu@linaro.org>
+ <20240730111132.1097315-4-sughosh.ganu@linaro.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240730111132.1097315-3-sughosh.ganu@linaro.org>
+In-Reply-To: <20240730111132.1097315-4-sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:lO3kE7D5XcDrH/78oXMUY65JCDF4+U05SKGMT0J6+jV6s9djoaz
- CG1UxXwYe/nj+b+9DdbVWqd8Mp81F8sK5EtSV+YbUjoGZ0T0jCcX1P5uD1CeO6kHljRJqS6
- 2WODbWlgMNModnjcjRJ3xIIJs0r9QA1k+3ttNifwFDXEqbJ4kdyrfuvmFaOMx+IYC/c+DoX
- pcVYUB9d2W4njcioyy1Pg==
-UI-OutboundReport: notjunk:1;M01:P0:ksngAR1gQ9M=;+L7RmdtY3hMb1DkE0WMxXrq2B68
- hsD1yzc3aXEXWvWpfcZfF8JgFu6FKkVnRolky9MXqB2J36ZG07xLlTmYXhmKALFMjpDACnpHx
- AoHTc1fLCYhiiR/VVLhmA9JxMU4uJnILc6JjylW9E8w+SzePhqyzpp/tSHefhh8TifJil5HE5
- pQbPhAJSAn5LHv5T6JpesGkvnAzpa3DtcaxdQOkHHONGacWE9q7nj5AV+V+fncSZGd8beEaey
- WPUrtk/ISnBMELCzULW4L6IeZySIuVUvUpsqesEVWgH7JotbuUMM6aIfmARjvrDYifSPOir1N
- x5W46P55siwUvgWXMSWSjzN5Xf6IQ3MvpvJWU8Yl/2NibN1IX59ZrS53lwrJZZEF9T/q4N05h
- mphUYhkxk1mg7rK2nODlL5qu1ElYZBnMKubUbPkBxmGSG/CZ+XgoLNQs/XJ0mSyzprhUne7zM
- p7+WZndM9p69oCh+dY+gyStlas1oJmkklUS/X7gDOBZSssj78szL10fCRp7BADzNfxx+21rW8
- SP/zPJCwqsi30HMO6a3ovmj5IU6LHL79zkNly4eZN9gaG4ER1xdsZRJ4Lou6VpLC96//WiDfL
- otTWSi0fRRND1oQA0NlB7fGIdeQQA000MLs7ouR+quPhMiS3gYaltono1p6PZ0c9BWdIIJHmz
- DGd7n4g0JTErSw5YAjbq6Xvdh/aDQCjTNM6jGr00jYXBClaD+dWOs7nU6UShhgvVy7eqT/iUQ
- Cc3L8UnPEXFMiWyFfAs466mN0l5Q0LEON07cV0x1nprHeMn58IUMXL+gvCE33QeGSs3VrLHYl
- ArWC24zhhKfheV9ZIqqAMtbQ==
+X-Provags-ID: V03:K1:ARdphSv8UgC+stLHlaMQd1MLAnG/1Uuc6+uaXds9m8TOp+fJEAl
+ Slwc3SQq6Ewf21pE64Wn9S5wkFYDNPnByq8XImojkCQlXmZ+0mEDzyv4aaQJH+yT7fL1hhU
+ OTD5AuVrGIvc2hs3FoI2x8ZKibQolTGNzDrfIwjkB2GJVEEOdzRqFaGRtoQr75Lbpr7YXn3
+ 0x1HpGg5ZUceH3If1Tzeg==
+UI-OutboundReport: notjunk:1;M01:P0:7iKF9s3Lm0U=;cl22Y9kLNcGd4TqSebeVYlRfJ5n
+ vDmguta7Oye27priflu1pW+Ronm/XCCLZYt0bqzHPJuqkQK+9YSDEMMRiuwIIhaBo7YXBKpCs
+ RCMbzwpBivIUUDt1VDeioRzYXu/KFW1CFBADCt3lmv27DKmg9ah5KAf+PlzpaRDRm7s0MCAOv
+ yy1eXxIm3Rpb0DxSgrjz4OwP7QHlhFso62peE7+7QS/S3nemLXyubiBC9O3+StCIMFc0xvYaB
+ cpOWmUdAiOAyLDaJpevKBZxhfoZlOkqAos96aZg+emTIPkHZAGxr9Aa5/3dHcSjGdlGGV68vJ
+ vwdng1XCG5g6MlZBMWvfzyIcToIDV/GXGwmGp4MD6BCtXzqGx3UmLJ/MuUdzTBOvoF/Zd/49B
+ /Vj/2r1iEnWkTb0jE1Uu5G7P4dUqJ1APk7D8GhIOhxdd+iebdOqPTig66wZkjxfiBTAzyXgRk
+ 4NAow3Q9fVmKwC+L+Jrd0U7NWAO34nRQpEqx9hj2aOYVTfwZ4xMaPnnqNaQWfkrTy2w8A99lY
+ i/8HzP7pCUWItUyE5nPcwrZsIW3C6VabWbA7/QYTNRDXUq+d08gFgryMIIRAR6k6c8OkxdjZT
+ joWfSAZkLtuX+zVI6IHou+L8qtSzMN6QLY0mRCcEMAdE3E3b1KiMFO6JqJKEkGRBUFI5dbGPz
+ PmJRZEbDQyxV4QUpfsiTnTrhcxMfa48TREL/QXdJ9QTIXqNqiU9YP7UA3tGItyhJME43tC9M4
+ mgr9CtsqssPJpru90S5s+A+25TnYhBQWSojEhxo39+QvCvCgft5JvWJB8pVYG1LeTZdtHCOhJ
+ 54BSpAgOqYoRsHLWKFurgc+A==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,38 +92,113 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 7/30/24 13:11, Sughosh Ganu wrote:
-> Populate the previous memory descriptor node pointer only after it's
-> parent struct has been initialised. The compiler fixes this logic to
-> do the right thing, but it is better to have correct code in place.
+> Use the list_for_each_entry() API to get the efi_mem_list node
+> directly, instead of making an additional call to list_entry().
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 
-Fixes: 7b05667ce239 ("efi_loader: Merge memory map entries")
 Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
 > ---
->   lib/efi_loader/efi_memory.c | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
+>   lib/efi_loader/efi_memory.c | 25 ++++++++-----------------
+>   1 file changed, 8 insertions(+), 17 deletions(-)
 >
 > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index bfadd6bd41..8d4f6e339d 100644
+> index 8d4f6e339d..6819c2ec90 100644
 > --- a/lib/efi_loader/efi_memory.c
 > +++ b/lib/efi_loader/efi_memory.c
-> @@ -138,7 +138,7 @@ static void efi_mem_sort(void)
+> @@ -127,7 +127,7 @@ static uint64_t desc_get_end(struct efi_mem_desc *de=
+sc)
+>    */
+>   static void efi_mem_sort(void)
+>   {
+> -	struct list_head *lhandle;
+> +	struct efi_mem_list *lmem;
+>   	struct efi_mem_list *prevmem =3D NULL;
+>   	bool merge_again =3D true;
+>
+> @@ -136,13 +136,11 @@ static void efi_mem_sort(void)
+>   	/* Now merge entries that can be merged */
+>   	while (merge_again) {
 >   		merge_again =3D false;
->   		list_for_each(lhandle, &efi_mem) {
->   			struct efi_mem_list *lmem;
-> -			struct efi_mem_desc *prev =3D &prevmem->desc;
-> +			struct efi_mem_desc *prev;
+> -		list_for_each(lhandle, &efi_mem) {
+> -			struct efi_mem_list *lmem;
+> +		list_for_each_entry(lmem, &efi_mem, link) {
+>   			struct efi_mem_desc *prev;
 >   			struct efi_mem_desc *cur;
 >   			uint64_t pages;
 >
-> @@ -149,6 +149,7 @@ static void efi_mem_sort(void)
->   			}
+> -			lmem =3D list_entry(lhandle, struct efi_mem_list, link);
+>   			if (!prevmem) {
+>   				prevmem =3D lmem;
+>   				continue;
+> @@ -269,7 +267,7 @@ static efi_status_t efi_add_memory_map_pg(u64 start,=
+ u64 pages,
+>   					  int memory_type,
+>   					  bool overlap_only_ram)
+>   {
+> -	struct list_head *lhandle;
+> +	struct efi_mem_list *lmem;
+>   	struct efi_mem_list *newlist;
+>   	bool carve_again;
+>   	uint64_t carved_pages =3D 0;
+> @@ -309,11 +307,9 @@ static efi_status_t efi_add_memory_map_pg(u64 start=
+, u64 pages,
+>   	/* Add our new map */
+>   	do {
+>   		carve_again =3D false;
+> -		list_for_each(lhandle, &efi_mem) {
+> -			struct efi_mem_list *lmem;
+> +		list_for_each_entry(lmem, &efi_mem, link) {
+>   			s64 r;
 >
->   			cur =3D &lmem->desc;
-> +			prev =3D &prevmem->desc;
+> -			lmem =3D list_entry(lhandle, struct efi_mem_list, link);
+>   			r =3D efi_mem_carve_out(lmem, &newlist->desc,
+>   					      overlap_only_ram);
+>   			switch (r) {
+> @@ -445,7 +441,7 @@ static efi_status_t efi_check_allocated(u64 addr, bo=
+ol must_be_allocated)
+>    */
+>   static uint64_t efi_find_free_memory(uint64_t len, uint64_t max_addr)
+>   {
+> -	struct list_head *lhandle;
+> +	struct efi_mem_list *lmem;
 >
->   			if ((desc_get_end(cur) =3D=3D prev->physical_start) &&
->   			    (prev->type =3D=3D cur->type) &&
+>   	/*
+>   	 * Prealign input max address, so we simplify our matching
+> @@ -453,9 +449,7 @@ static uint64_t efi_find_free_memory(uint64_t len, u=
+int64_t max_addr)
+>   	 */
+>   	max_addr &=3D ~EFI_PAGE_MASK;
+>
+> -	list_for_each(lhandle, &efi_mem) {
+> -		struct efi_mem_list *lmem =3D list_entry(lhandle,
+> -			struct efi_mem_list, link);
+> +	list_for_each_entry(lmem, &efi_mem, link) {
+>   		struct efi_mem_desc *desc =3D &lmem->desc;
+>   		uint64_t desc_len =3D desc->num_pages << EFI_PAGE_SHIFT;
+>   		uint64_t desc_end =3D desc->physical_start + desc_len;
+> @@ -745,7 +739,7 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_=
+map_size,
+>   {
+>   	int map_entries;
+>   	efi_uintn_t map_size =3D 0;
+> -	struct list_head *lhandle;
+> +	struct efi_mem_list *lmem;
+>   	efi_uintn_t provided_map_size;
+>
+>   	if (!memory_map_size)
+> @@ -774,10 +768,7 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory=
+_map_size,
+>   	/* Copy list into array */
+>   	/* Return the list in ascending order */
+>   	memory_map =3D &memory_map[map_entries - 1];
+> -	list_for_each(lhandle, &efi_mem) {
+> -		struct efi_mem_list *lmem;
+> -
+> -		lmem =3D list_entry(lhandle, struct efi_mem_list, link);
+> +	list_for_each_entry(lmem, &efi_mem, link) {
+>   		*memory_map =3D lmem->desc;
+>   		memory_map--;
+>   	}
 
