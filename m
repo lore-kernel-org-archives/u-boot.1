@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EB71C3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 08:29:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 393F9C3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 08:29:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 545F38842C;
-	Wed, 31 Jul 2024 10:28:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B8CC38898E;
+	Wed, 31 Jul 2024 10:28:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="O7/58PGs";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="qQBQQugZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E19E788997; Wed, 31 Jul 2024 10:28:45 +0200 (CEST)
+ id 7A588884A7; Wed, 31 Jul 2024 10:28:47 +0200 (CEST)
 Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20723.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::723])
+ (mail-am6eur05on20728.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::728])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E501088373
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 10:28:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C0A588982
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 10:28:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=m2I88sgBQjIoP9lCz63MAaBbZh+WzgFgC8jKEs5gf+f9WcROWa4bsi1lESa63d6HhYfAhEb7L1aCLeVrRnNIb1QQroNsqUdltRe/K92Cu1HlGA+k0UKz0ZcT6SzmOvquusnBr+am4A23Jvbh2bKXjMWDy5YMF6YekpU5hNvZhN0q6rw4KKOCp1LiGkfxuBr5Y1zVwFtVqg8TYlSChzYVBGoLiLQ6tuEX5XC0zArOZMWBvaSQyfWGcax+xWiEPatnGA3ZPkHxrC19d8x9RnkDVjnUf0+xF0khZvNY8S80RBEtkv3BvGBR6eMBmaqbdzUHYUQpk8UzeRgU7geDTJQ4jw==
+ b=P5QLUlyYr1zKbZ/NmaPPB1O/X8elt3058jzzR4o5ysOFF60nKGSzQoE6oclugqUiYiO8q9lgPWFUNn7M5WFDQxeHX14I3AJoSbZpaxBJFv6FxzQs24A+OoydoY8TQqsp5yNAXSqgO42TIqrNdm5OhrpNZ2dNb8e3ldRyZ0LkLbsLehbueJTMiuEIKxSIZyLqbAP4W8Rr2zao/oM4Cpe0cM/VAiORPCoF0A1Od4OmX/OJutGM3LeyrEyq5uac8axBgMxxYruBYXJHmR2ai/xubLHW6761+PZuCf1Zyz4ZEoORzhv/Fd6u7zej2MBK2ChRJdoUj0m2ZAniCcENlnw/Sg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FQTwLRE/0ph1Pw4b1GSQg7lG0t4sJtahM78/rsFItvc=;
- b=k1wummoNO/fAKWTEuhPCofElkTfjFkLvhvGYrKa1xxImOXGjY7M1lHDERIwdXq8O8Dycet4xlxZT7V9JmtzzzQMqb2/wVoRcNaaO2rb4SkOIMPditLvqs0FwzCXPcIQ5KiedKb/Hbswpno5Kn/LJGW2EHFdLzoZSF9ntCtTo667zP2C1hSdFygF55vWc2mN+uEQ8l+7BaLuGIcqN3cNItV02LA/DYuFDIdM2d4oQToOL4uva0ThulnatOO92NOtGVsmlYdxapmDnypVRyETiNj94JtxMIezw/a1sm9ydwF68Kir3hpPxvU5UFknApfrzmAiNGUrk/PhAr19xMrHbMQ==
+ bh=cdk5U8Ycr1FVQ8B5gUEI2BchXKFzkqhtc7UrkCMDtbw=;
+ b=qzmsLgV7Xf8y5rAvCR6tUf4sUzr98Vh7rJ8hMdWzawhHvMccg62iMrXhtdHmmFGEhexxL5Ki+h1CIuFrI5Lar3qfeAwm4KLw/xgthMyTchbWRwdw+g17ABmzPiSUUTUCywZubhp3d31i43EFAM25X2zsv55WgmOcjSyX3OWU7QRfgMFaOEb17FW4FnXDq2B/HK9cBWTr+XUoRDWIeRKneoy+rLW/upsxBpXUZM4/b3j1SbrQoTaz2iWnQ67A5jGlc4+q2CR6DMnOHmkDr5W55/Q98X+RyFPcPiK769d3SFnp7vnMMIU1JgE+6TMCFDqbtdUb6cIdLwm9KN5qZcdQwg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FQTwLRE/0ph1Pw4b1GSQg7lG0t4sJtahM78/rsFItvc=;
- b=O7/58PGs/cUtzsDGevNYDGLg0gc9D1+PV72Mg4cgE1+3FZjOl2fAoGoVanXOoSGnybwZesTvJLmpBJ++q5acTyYDIwyvl5wTkSG9ZRw8yB4JAQRkevHGOlRQFAEBnI7rmhGT4FTWileCJDMO41yQFGsiOesOWpZ3tei+8ww13A/e0GCh0IYUFVfJMbIBrSM451zopXiC0OQkOAFFjPTAyTXNi8bssbwnFZ2qAVmo29JDULGOH2Y96Tg8PbDo0gzl2gtkE0YG1G+SDQ26i8nhPdIGayt/+fina6mAKT5OkDcAOObAeHK8XXrSKQ+7vdeylNljUu9y/gCMKBaDuoFHxw==
+ bh=cdk5U8Ycr1FVQ8B5gUEI2BchXKFzkqhtc7UrkCMDtbw=;
+ b=qQBQQugZ8SbfsHcAMKxIIo9f6OS0tkHQEU2r1mewsnEugsIlH21YPAQvVlgKBvL8r6wzn9VCuaP7xr68ntXwdB+Ce0R8wpNUlw1lWKMObccWoWMmBYW0DtIoPAQ+tAcykxlos/sS2JLgQqfa+33mZ3/o6hugAXd2ccUNbQfSo60IeLWwxrzhx+yFPC1c/7RgelYk5zRnktyLMUa/4H0FVVXd+oC9AnDCGPQapao2Y13TARmpxnFQTAdTOQun+WNes5z5I7j2BO7P4Vy63e2QFhiRuKhU5j4NlA1uq/C/qpoEsBFHX13WLkTlxBEoDdosx8t5eQ6zKamVWmVAzAUZdQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
  by GV1PR08MB7827.eurprd08.prod.outlook.com (2603:10a6:150:5b::10)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7807.27; Wed, 31 Jul
- 2024 08:28:41 +0000
+ 2024 08:28:43 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%5]) with mapi id 15.20.7828.016; Wed, 31 Jul 2024
- 08:28:41 +0000
+ 08:28:43 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
@@ -66,9 +66,10 @@ To: Tom Rini <trini@konsulko.com>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
  Max Krummenacher <max.krummenacher@toradex.com>, u-boot@lists.denx.de
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH v3 02/10] mtd: spinand: Add a NAND page I/O request type
-Date: Wed, 31 Jul 2024 12:28:16 +0400
-Message-Id: <20240731082824.3890809-3-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v3 03/10] mtd: spinand: add missed add missed
+ MODULE_DEVICE_TABLE()
+Date: Wed, 31 Jul 2024 12:28:17 +0400
+Message-Id: <20240731082824.3890809-4-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240731082824.3890809-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20240731082824.3890809-1-mikhail.kshevetskiy@iopsys.eu>
@@ -80,78 +81,78 @@ X-ClientProxiedBy: PA7P264CA0103.FRAP264.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|GV1PR08MB7827:EE_
-X-MS-Office365-Filtering-Correlation-Id: d2e8c33b-e15f-4782-11a9-08dcb13ac8c9
+X-MS-Office365-Filtering-Correlation-Id: 3f5038cc-c7c7-49fb-bb79-08dcb13aca09
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|52116014|376014|1800799024|366016|7416014|921020|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?nQ6tN/lPofyQeH0qRWd79qlgkHczNrzcPfoq7vfGyfDohMcOo5+S5+p0Cc/v?=
- =?us-ascii?Q?O5okpE13jlcL57bD8nN7bHW7ZTPI1qLpb2KUrC5Lv1hqalcgWd67Qnyyy5qZ?=
- =?us-ascii?Q?5ZtF1zmZ5tj/Jmb9SjGUxSQA8BDuEQYsqFxUkZEHM++FIc3vbKoFbYEaWMpx?=
- =?us-ascii?Q?caFcC/1xm2mhuOLoQm2Y3kgb8OzG9fEbVtEqz8/ATipr589oWGN46KewnLv6?=
- =?us-ascii?Q?06VXfJjTB9ZDv6Q8vvcdIjVzGScMJFINqSLfJHTKAictqN1nB8Cxy2USwbGH?=
- =?us-ascii?Q?0vuZq36eT4k53Z1bhabzD8WNXatfwZzOQJd3bacR1+5MjvlqrFy9Qic3sDxW?=
- =?us-ascii?Q?6n/RCgiW2dAikRDElEQphogmrot4lZBYD3fLey6vg5SSnm1XfA7RNcs6EJw8?=
- =?us-ascii?Q?Fa2KlGi+UQz8lgdCNlsGKZSH3rAxvnX3Ey/Hiz46l9deAcgz4olNou3bYzim?=
- =?us-ascii?Q?UmtvyKkvJXGc4ZkearFkW1FGb6seSS0IBVKJNMeF0wDNfadnjMmKpA9+VC/n?=
- =?us-ascii?Q?xn6arRKYiiPQLv9q0RIhn2wo941FkwDYkaG1GAXdI0IIRpPu+YViBmf2qxCQ?=
- =?us-ascii?Q?gEoFhHeFTgKfTpl2m+YDxAl5nPT6fbERlXyvcaRYx63P8Ssii14k1haUXF4s?=
- =?us-ascii?Q?+T1V5jMO7S3c5z40n3JwCknijFTWMnbBGvarLsylb1ondEAy/cO51YuS/uj5?=
- =?us-ascii?Q?Iq/cZE02f5A/Vn1jbcfDaJnF2g1vgUPONjO/dt20b47g89iiMecCzyrIYBXL?=
- =?us-ascii?Q?Bejc0xGuUpVfYKUxJjuxA3aN1Y6/EMiWtQ+0nfXx0eT1hGwG4+dpBDRQEjXD?=
- =?us-ascii?Q?0rIuccj+ZujEAu4RFoLNXFTD2BByZU3aO1S8nnN7XAYoqGxSbshud6llOxxH?=
- =?us-ascii?Q?H0gcRWQ96y8QiQhjmm0b52uleBDJsNwjxncNB6/teJyKDGA9l4WILSBfdKTX?=
- =?us-ascii?Q?PeQPfEh7Q1rNIhL01rUnd3MnV5Zz6qMA71d1cxWZ8Upy5++cZCPZ63T0snvM?=
- =?us-ascii?Q?1+0wzVPn3RqCz1vBM5CvPeC4nsjuoPLobzbS/WTczukA4+VagUKiPShCUNB0?=
- =?us-ascii?Q?EOJnEDV6glHefQKjGTHS/zjiaKTZiweI0TQIiyFlcfb3QanqMvp7URzCrlza?=
- =?us-ascii?Q?DpL9jGsuIumLi0gbc3S4xSxhuqDH05Ulef98sq0tAlA2fZxXP4jJB1w8PhtU?=
- =?us-ascii?Q?5GwZYdAfrQiRdq0+mpgSP6Gm5ldBAVZclSrlzcJdZrihFkk3RZ1EWiXNwNl2?=
- =?us-ascii?Q?1FU54VMKkmVJ9XpecDnVm6S0Enu6kK17mHjuatszVQQDIPWJd3Oo6Te++Fb+?=
- =?us-ascii?Q?0FLdr0JQvGWP0IZ6vsnV1HUIcJGl+05xqF7Gzo7alGBIuARoGX4aU0pcfVUu?=
- =?us-ascii?Q?UOp8WrB++qbKmnA1QXpmPVg6F8NATZWbtS4KoCjJSOjBE/dRgFAi6dN7irmo?=
- =?us-ascii?Q?eG1TmCmQfV4=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?4CBL6uHf/4PFHTD9u5gUEJcp1CSYIX5xM1aZLdMZB45j1ZbcFQtpkvk4EEO4?=
+ =?us-ascii?Q?NmUznX4r1W+j8XDiNQz/uxrTUPy+Mkd+iq2kXBRY4InM4iwejYPLKXNQ8ezN?=
+ =?us-ascii?Q?CS3FbJeWzSI4SyRONyVS8eLdxdQRLd+NQ/e2PcRtisFvjadBtRTD0WVOH974?=
+ =?us-ascii?Q?1wJcY790nO/vtQrCpxu74ZgEifa5U45zfJ1GyK/onw7aKGqCJRd/wvD5FC6n?=
+ =?us-ascii?Q?SoZv7E4efRlMJzM9s4+7cC8HVv0eLxvsMDuc9XMgyMzNySvSVeJaHJNn3DJ+?=
+ =?us-ascii?Q?zNzVf0g73PpvNyKJppEzQqYgqBckrYkCA6A2qzhlYNUllxhcdDVuQBb5K7S1?=
+ =?us-ascii?Q?RwOY41S+UejfJPTEyA+tQkJrA07NKC1KbEdJ4yf6lmuIohT+Rg5oYi+AXoXU?=
+ =?us-ascii?Q?bajIxPKNCPNHSS0EZwpOsk5RLZIZ4uPYw8dPG0/PGbQuB80otVB4/Guf2KX0?=
+ =?us-ascii?Q?H4mj9dqcq94WGhCB7Wvp+CV3f2dEYlCmGyvOeSipE6yKkMI9jg+xhrG/maDs?=
+ =?us-ascii?Q?rbqi8l/55Vw+D3kt8351QQ4Wbse/+QlUW+dGHzpjcFkaN1wbBOMGLg6bVWod?=
+ =?us-ascii?Q?7ZYy1ewkeQB8E7DgVP/IJX0k332SBnIYrwp928lzdbP9t6QydmdLwAroZ6Fl?=
+ =?us-ascii?Q?4U+2aj+TwZWAP4/pmWApXMGZV2XFDVFrscjjDmN/juIBlBHcJ7GcvnLtWtgX?=
+ =?us-ascii?Q?zsgZXxncMjkaC5mOi5B5eVQfuWjdvDM7OWPG8kL152Z9nLmI775CX3EYtoe7?=
+ =?us-ascii?Q?VkNDGUsZBBD1zs0KNE1VqOHF2mVMw7TNzgZwADJTqqzOYySE8gl3GeiAnQtF?=
+ =?us-ascii?Q?1qXM56z96YkDFwjMvIUtuS60/bin7PtljZTczhBoa5waAaejTxTqEYRfRX+6?=
+ =?us-ascii?Q?/hGcnej6mwTkIXCVh0jwbrEnNECedBFvdW5OfzluFJCMKzy0Z3bHCVPlJQN3?=
+ =?us-ascii?Q?/UcNPBpi0KLODJRltAFR67OlXqFSLOmhuoRntS+1CuN00AEqJcr4/se8thHJ?=
+ =?us-ascii?Q?Snl86aCHpLRgTO2eYVLn1sN4L935NipkJt004tXH450LPJ+N8RPGC8eREERU?=
+ =?us-ascii?Q?wpfYYcu6cttmfllbxNK5vOhqb6f5zH3AURGGpm6oIdEGvHdOedm51XzXqIq3?=
+ =?us-ascii?Q?5y7vn+ntb6MdpOQyyj6ko3Fe8sKpHEuQUTiekjRH+p/nQGhgWgT2tUEsNDpZ?=
+ =?us-ascii?Q?oG7xZGUGul/RzmkkqI7sGqnEFiFUPAwP+lIrvYxJVgcvaf3SLVQdAcZ6Xaba?=
+ =?us-ascii?Q?nrt8KRndHWOqIKyXem3LCEAryjgb7epFX5WGa4SD3fH2XMnmLo+yuZK2XxpS?=
+ =?us-ascii?Q?aPJLWeEaxB4XV8W0DNwR7GecHlu6eWiWC+jRVCDUTz/Po/APF2x0hQJIcKhm?=
+ =?us-ascii?Q?xZjTWNwk5Ysf6u/tPgPC0wmRWRYuq0IAUqElmN4NA3lFoSfK2xAkHF51ZH2q?=
+ =?us-ascii?Q?56PYZfaxjAw=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(52116014)(376014)(1800799024)(366016)(7416014)(921020)(38350700014);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?7uFyWI/r2c5TNIvom79cMrPlVPWW8Lx0ii9hL+6PPiPOyZE1JxRbhOQB57o/?=
- =?us-ascii?Q?j5gfCHFkONpzBWa5QsoaORh+htw7mMoIdyIFTAPVlbVuTrPb4/16cFgUp2T6?=
- =?us-ascii?Q?G7pRJQFyr1tmtxDDwCslmbuf0oh/cP+BjTs4pAR5nIanFKLB2W/S0xEktqkp?=
- =?us-ascii?Q?lwcL5aunOinsAQwrvUus2DPy6byTok+qBWgPBJTXXKfrPPFYoELlhUo6TrOf?=
- =?us-ascii?Q?NnZIfzOYgK6r+47mn5u3HcHF5TWjsW6sRMgj7Q7rqiHKk3gINkWqczSLiAID?=
- =?us-ascii?Q?KYPP0XSORamTUjvutzgTgUMExbvUxs1wD/Q8eeyuFg8t28+pq9GktHPNw0FG?=
- =?us-ascii?Q?rFry+sgPE6gHkgTXqY2xnKrI6NTFtH8ZQn+EoKLeAPma4ZycFsPYf8wgc6QZ?=
- =?us-ascii?Q?Gbpg1OvAY0XWFlNihuV98VW3p2qlm43eYF0ysSBXMO3MRwGapF4R2J1GXVO/?=
- =?us-ascii?Q?wA/Wp7B1T+cfaRmCr7flS9e9RXWx4CTv9kN9n4LnDWWIyPRr+ovb+YQHHrZc?=
- =?us-ascii?Q?vx2fIemJJqSZwJZ6dmCjnx6ok2RDqdpeFL5yMHr5A+m7oNBYGdijDDl5UOVd?=
- =?us-ascii?Q?lQfOkev2pqMNsVmnOU2UG8gpy2zkKWXCrQM9eTznpIZH1IDu43qYwtZ68kg3?=
- =?us-ascii?Q?6TPsZj9tiKDzEbY1bAkWzhvFK+L+0z7CwZ2NHi46stMaEoy7g/YRqEhKWN20?=
- =?us-ascii?Q?DYEcBIZKoaUTTK+200Vm3PRs+u4tgqAOyx50SrMOkof0QOr66ZtoaJJljMY/?=
- =?us-ascii?Q?Cwb5ZQqof/knfXY5mnWrj8EF7cxB/o2cWmEH1aqhwzVU7eIPm8hSAQ36KX9o?=
- =?us-ascii?Q?mJWV95VSghhaiQrtfh//3tu3d17NLTQW5qV6kjedVywcoQaJg6COLgOVAnRX?=
- =?us-ascii?Q?MzApkIK8zJknsezRsYskfON+T0/RfVGMcfK5iDDZIx0i+n2rCUUHBkW0J1+S?=
- =?us-ascii?Q?sxXiOR4SoMTVsPV+SVQMo5foE7YZFRXqHwwG8gIiaF7SNfaCDN5UXLvwNcqo?=
- =?us-ascii?Q?p99BVUwznIQNx6tKF3PnZyScaExVXxOWI7Rt+Fq+leNSlLXz85EfbbE6ixN+?=
- =?us-ascii?Q?rolONBDgd2dWi0bQz+nyNn0xRRLqQUoxcrxzdm8DlWUGeD+fXLIYG0MmC2v2?=
- =?us-ascii?Q?9oN70SGiSyl0To22ccmAHGxOp/0bFESI5cxtcQ3dJ4Uvtf/cQF2jEYUqOcJy?=
- =?us-ascii?Q?+173nN2SuLRG5bq4RI1oEeQ6XOk38fy1GN/j7maVWzK7mTM18Vj4Bb3CW5qk?=
- =?us-ascii?Q?PtfKsd3D0KhWPsvvonI2M+8w5t51mxiAK0EXFeJbSBpwig6iQ95hbsPDpjdG?=
- =?us-ascii?Q?RlSnYiyz2//Cu1vv0fbU4kJKd6/YVNJH1eEG5PrE28nlJMOItMXTaye1eMNk?=
- =?us-ascii?Q?MM82T5RSiufFRZ6DGHFYWE8hSsFPBHcSyKZSJjchqyPrDjrcQK1I/302TEeM?=
- =?us-ascii?Q?MU9YMC5AKfidsXPmpccdvnmdMkkY80bj6/Z9Psy67VBqgNJk6svFbf9kbkY/?=
- =?us-ascii?Q?egB4VF5m4x0/BYqGL6xg9H+O0l3sUVzmk9Brv0l+g0nNe63SLuaa5gUIJkiL?=
- =?us-ascii?Q?huli7zMA3I+BrpjRujIHdNYm57xca3Gm1N4Vcks5wPD9zLVQpiJ6DRLroF7B?=
- =?us-ascii?Q?YLh6uL5iCijnFAiHeFwDcyU=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?490oEGdgg5PPhFndmpDr5pCJ6r1m2rwLniyk7hmMlgHpKjsDIu/cZPYkBIPv?=
+ =?us-ascii?Q?E5aIMmyvK5DcS9wgwYlmCcaeVgOA+pAzV+Q/bNIT3QKc9oJCGqM0hb2vGDcU?=
+ =?us-ascii?Q?jSk8WziXSMDp8ZM+pfRwAdtrmhXk4WcC1kqA3uh6p+Nad4GRVjq+c2M8fjWB?=
+ =?us-ascii?Q?ehNMGu3tESTGRrv994ZxRI0dV4vFKNh8UR0rNKb/kq5kJ/F9anOYh0Fi6/Pq?=
+ =?us-ascii?Q?gQa3S1afRRyTlEIYjyMfnx2JhNbommhO7EL+/lt9pPWb5EMsq1LNOtxjGCqD?=
+ =?us-ascii?Q?2XyAjbDrGNpJMmVX8DcbRV1RQ84/+9cLpVM8xCFZ7JJ+UUNhy28/piCXij5K?=
+ =?us-ascii?Q?c9np/ROZ4YoVxCeV1lBFaBavC1w47Pr/hd3MXApTDA3MF187zAdvVJFhl3ry?=
+ =?us-ascii?Q?aivesaP2vVDTLDY+0XKUjLF6VK3tzi5+Wf1r3sujAv3oqeVvbIXdisZG7gW+?=
+ =?us-ascii?Q?ckKG0wdqJBKs1rCx9KTK95oakazZ32PAK1mDjcrXofcR3LJVA0fcGti9ndxN?=
+ =?us-ascii?Q?bniWWU0j3MNqRDjm4Gg2BTnBMKzq2jPw9ukRjmKfoq6VypkH+2fU8TUkLqOp?=
+ =?us-ascii?Q?nNhNs3eCvoO932pCJyhef4Vxu/b/CuIy4oZwNDEkmN5fKSfiFuyLoYQqWcNo?=
+ =?us-ascii?Q?78WFB7ubBVEyzx9s1fB2NyOIQfFPCLTsWXYCdBZZSF7FTX55Ql9HCg+gQIt7?=
+ =?us-ascii?Q?8D3bQYlXCUKmO7xx6q14tMMjJmZ9LGQ8bpzVn3w7HaETNMxg8qTnb9cXeOz0?=
+ =?us-ascii?Q?CtxLdTIEiSGiwnAzdcUA2NobppqN/DL8fhDFTWtlPwQK9J9sCO5ynPT5ENkr?=
+ =?us-ascii?Q?Av8CKSfLJXLfkwjo2FCVPEsssHM6V7jcDT7kAbfiv0Kx1bHUHD05iQH480ZA?=
+ =?us-ascii?Q?09W8g6b7lsAZIHAIyX4x73KpVLyvRfqZIFAecV4QAywLnUui/6PToUqg/8Jg?=
+ =?us-ascii?Q?zfj+Eq7Tne1EmqemXyANm3D//vhzzKpsK1oWt9yG7BIC+qqQELye1aQeuqUu?=
+ =?us-ascii?Q?SvAz6ati2YDuj8AqiHN+nuEIa9rl1ty/M4xWu5XEuOzlzvSIb/DqwHgCpBjp?=
+ =?us-ascii?Q?4Ok5jM1DJuMtGVF3R6F6hjKUG9wzgAzkmqZAfXshTWj2q26eDko++J8mbabs?=
+ =?us-ascii?Q?W0Gpw+GhGLIiunzt3w2pIR7E75fTwWu4+OQodcKT2ifWXug0JB3hOMlIhMUV?=
+ =?us-ascii?Q?LQHs40kDgcaEzJBh45qiE29jvXyknTZf8hv7ThqtnROIZ9tNOFz04lVpn4Ox?=
+ =?us-ascii?Q?S5uPD1z41T0HjH4ugMS0I7aH0zh0yWk7N1xUCaLGRk0Yz1K6eLCP/yCpMYAZ?=
+ =?us-ascii?Q?QolhcUbrfRjyJKPs4B2FZBysT/rp6wLBBjSIHaxNJ+opEUX3Nrm1lxzS8sY4?=
+ =?us-ascii?Q?wUhSugtSlP0kU1x1/X91fgxB6DqE7Lp1VT2S8u01FsSgo3Kst3VX04V48A/u?=
+ =?us-ascii?Q?vEuQyPl5inhqVqDXTyzGzXmqVMOTHBp4u3PD7zdEXNWFrKyRFd5xHudrYseY?=
+ =?us-ascii?Q?+a6t1PNdCm/NvnAYbP/Env1K/WIOFpkg0K3fXMx5RCl2Q1KW99coEzJHKENe?=
+ =?us-ascii?Q?XoekD7kz7Hpdl/2rCWQC9IiHA/oidsOa7gUN3KXiuKWGCwyvacdHSaJZk6Io?=
+ =?us-ascii?Q?/qj8i2dRuCfECWWNeN41fZg=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: d2e8c33b-e15f-4782-11a9-08dcb13ac8c9
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3f5038cc-c7c7-49fb-bb79-08dcb13aca09
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jul 2024 08:28:41.6520 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jul 2024 08:28:43.8259 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Ai2SBJAKSmlOgdUR2pnl68SZTdXqkJcex2nhA1Dmqptud8iYLzQ23Vp+ZLRDCWneWp+DAljocDEm93C8NoIeMa6sZ9bq1IBaZueLoVY7ilw=
+X-MS-Exchange-CrossTenant-UserPrincipalName: ivqLTIE2AWDC22Wm17On0BwD7Fd2P2perCAve46CHbOBdAQ17PMQ7aVPcH0VfW+eik3661VTzlymNamI1Q1gbaxBc4KbPJJQvD/D7VtJrHc=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR08MB7827
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -169,97 +170,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use an enum to differentiate the type of I/O (reading or writing a
-page). Also update the request iterator.
-
-This is a port of linux patch 701981cab01696584a12e5f0e7c2ad931a326059
-created by Miquel Raynal <miquel.raynal@bootlin.com>
-
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 ---
- drivers/mtd/nand/spi/core.c |  4 ++--
- include/linux/mtd/nand.h    | 18 ++++++++++++++++--
- 2 files changed, 18 insertions(+), 4 deletions(-)
+ drivers/mtd/nand/spi/core.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index 2a7e9c164f5..ca07c70e217 100644
+index ca07c70e217..4741d3e087c 100644
 --- a/drivers/mtd/nand/spi/core.c
 +++ b/drivers/mtd/nand/spi/core.c
-@@ -518,7 +518,7 @@ static int spinand_mtd_read(struct mtd_info *mtd, loff_t from,
- 	mutex_lock(&spinand->lock);
- #endif
- 
--	nanddev_io_for_each_page(nand, from, ops, &iter) {
-+	nanddev_io_for_each_page(nand, NAND_PAGE_READ, from, ops, &iter) {
- 		schedule();
- 		ret = spinand_select_target(spinand, iter.req.pos.target);
- 		if (ret)
-@@ -570,7 +570,7 @@ static int spinand_mtd_write(struct mtd_info *mtd, loff_t to,
- 	mutex_lock(&spinand->lock);
- #endif
- 
--	nanddev_io_for_each_page(nand, to, ops, &iter) {
-+	nanddev_io_for_each_page(nand, NAND_PAGE_WRITE, to, ops, &iter) {
- 		schedule();
- 		ret = spinand_select_target(spinand, iter.req.pos.target);
- 		if (ret)
-diff --git a/include/linux/mtd/nand.h b/include/linux/mtd/nand.h
-index 651f8706df5..0afdaed5715 100644
---- a/include/linux/mtd/nand.h
-+++ b/include/linux/mtd/nand.h
-@@ -80,8 +80,19 @@ struct nand_pos {
- 	unsigned int page;
+@@ -1240,12 +1240,14 @@ static const struct spi_device_id spinand_ids[] = {
+ 	{ .name = "spi-nand" },
+ 	{ /* sentinel */ },
  };
++MODULE_DEVICE_TABLE(spi, spinand_ids);
  
-+/**
-+ * enum nand_page_io_req_type - Direction of an I/O request
-+ * @NAND_PAGE_READ: from the chip, to the controller
-+ * @NAND_PAGE_WRITE: from the controller, to the chip
-+ */
-+enum nand_page_io_req_type {
-+	NAND_PAGE_READ = 0,
-+	NAND_PAGE_WRITE,
-+};
-+
- /**
-  * struct nand_page_io_req - NAND I/O request object
-+ * @type: the type of page I/O: read or write
-  * @pos: the position this I/O request is targeting
-  * @dataoffs: the offset within the page
-  * @datalen: number of data bytes to read from/write to this page
-@@ -97,6 +108,7 @@ struct nand_pos {
-  * specific commands/operations.
-  */
- struct nand_page_io_req {
-+	enum nand_page_io_req_type type;
- 	struct nand_pos pos;
- 	unsigned int dataoffs;
- 	unsigned int datalen;
-@@ -613,11 +625,13 @@ static inline void nanddev_pos_next_page(struct nand_device *nand,
-  * layer.
-  */
- static inline void nanddev_io_iter_init(struct nand_device *nand,
-+					enum nand_page_io_req_type reqtype,
- 					loff_t offs, struct mtd_oob_ops *req,
- 					struct nand_io_iter *iter)
- {
- 	struct mtd_info *mtd = nanddev_to_mtd(nand);
+ #ifdef CONFIG_OF
+ static const struct of_device_id spinand_of_ids[] = {
+ 	{ .compatible = "spi-nand" },
+ 	{ /* sentinel */ },
+ };
++MODULE_DEVICE_TABLE(of, spinand_of_ids);
+ #endif
  
-+	iter->req.type = reqtype;
- 	iter->req.mode = req->mode;
- 	iter->req.dataoffs = nanddev_offs_to_pos(nand, offs, &iter->req.pos);
- 	iter->req.ooboffs = req->ooboffs;
-@@ -687,8 +701,8 @@ static inline bool nanddev_io_iter_end(struct nand_device *nand,
-  *
-  * Should be used for iterate over pages that are contained in an MTD request.
-  */
--#define nanddev_io_for_each_page(nand, start, req, iter)		\
--	for (nanddev_io_iter_init(nand, start, req, iter);		\
-+#define nanddev_io_for_each_page(nand, type, start, req, iter)		\
-+	for (nanddev_io_iter_init(nand, type, start, req, iter);	\
- 	     !nanddev_io_iter_end(nand, iter);				\
- 	     nanddev_io_iter_next_page(nand, iter))
- 
+ static struct spi_mem_driver spinand_drv = {
 -- 
 2.39.2
 
