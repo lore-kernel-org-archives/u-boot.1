@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B8FFC3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 14:50:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59417C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 14:50:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68D7D88A94;
-	Wed, 31 Jul 2024 16:49:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C92DE88A5D;
+	Wed, 31 Jul 2024 16:49:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BpwRWa6S";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kVHJVxQn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4402E88AB3; Wed, 31 Jul 2024 16:49:20 +0200 (CEST)
+ id 688C888A39; Wed, 31 Jul 2024 16:49:21 +0200 (CEST)
 Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
  [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24977889E3
+ by phobos.denx.de (Postfix) with ESMTPS id D17D788A5D
  for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 16:49:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-396db51d140so29430325ab.0
+ e9e14a558f8ab-395e9f2ebc0so33345035ab.0
  for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 07:49:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1722437357; x=1723042157; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Pfmf/6o7DbXMlaIeVlN3ssWt1k+mHBgxaykLu9wR+xk=;
- b=BpwRWa6St8Ry7U5P55qBiU9l1ysUsFEYrDmVPs9MYae9etbM994zcI6copmp5OAx4v
- FFRHJca5wt5gh1524MOmh89/7D828mUqlJ4Tx3gvHV7WJsinRJt+VXlfzKR5I1ynKhZ1
- l14ZEWoWDJHLEd1EQ0y4ueSdLtMtY6tB28thA=
+ bh=7l6MRzsmRbZLn3yhrkgcqlQ74+cI72j0xlnribpc3wU=;
+ b=kVHJVxQnQYNx6p08KbVzjUYvqJ7ZR6QGyUW/wHnyVLnFjTOBIKBQOxiEFbemvDrSRD
+ v/guitNJOVUmz7ljljcIAjXi8msK3Ll+Kt/3Ar3DXXqz1O2xSmPW1bLcFIN5pV+1UWqF
+ DoQlM1oFepv8snCOo8PS4yj18iZTCWkxvzInM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1722437357; x=1723042157;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Pfmf/6o7DbXMlaIeVlN3ssWt1k+mHBgxaykLu9wR+xk=;
- b=SM57cbK1JE5jwi5yxbpoM+9kQ0Eltsl/R7jrcMGbwa0CyJbi5rk7GQyCZQgraezpHc
- TCWhyoYw8XiwIHE4ivvl45Z6LQLPcRXsQ2bB587++T6DjHBRlURj/tgiv+7BFq24Mi0M
- G8UaeT0Pi8F3ARue8uWkGcMTI608lShpd6CAdiIi5z8gKjlMilUKbT6EN22xK8bXsXs6
- a7bNDlhDBAusnGV/aVabNRD7Q52kia43MbVkFsQ4YU25QwtlRS3RLzua1SGbo0H4rk/f
- NWcrEVxO1AQb3G/MNteiUl6wVVgAhaZhy4O6W68898AN4VfuzV+qjjQX8ZRIz/Gv0hQn
- mpYg==
-X-Gm-Message-State: AOJu0YwIegEQz/M9SdObxqqa84YsnLAuj4YGjVwD/TW0lvGKJInryk42
- 5MlqXCR+tzb4wDELZutMlI2u2jGxEuOvpOCQBEs+7qyMVp90RObLQLBMqCrrls+CoMceKrIva/U
+ bh=7l6MRzsmRbZLn3yhrkgcqlQ74+cI72j0xlnribpc3wU=;
+ b=oqsrkrRCS03i1eWrbcXeoqmeQDCGbZj+CSqC2x7dRzeA/Ug2NVk7NV0t2E8LtgiJpv
+ 70U1yfZN7m7CEwJSuMrsZftFT3Kw8SqhWxwvzVHdNyaDj0PtgHuaJt2WjUgw/5Gsx3vl
+ WS6pQhFQeBMGkBy+FWAfSYqDTTgu+vFofMcz9yOdnqiADkE8KKCLN3oglLoBHxH2aEyn
+ JPt5ajn3nYkUCgl0RinIzMq9ddjswrQnqxLNARawTmE84s7ZZZnJppPb1H2Qy6Y1DOr0
+ +EiSaFqtvUgIxFiT/CSf8RTbPdKCAzxDrvar1WDijspbyNbW2fJqB3T60rro1nZ+Bm+b
+ 755Q==
+X-Gm-Message-State: AOJu0Ywa6xDVWJemPDzHl050dCPRwq80ZtbjjiqLlhGlLxGgNw4A+YyH
+ SHYJTIHpd3mKoYr4UJMaNaHKK6JH+C8fi5kNgs3FnNKyYXMd+xVY9gneyhkZKdxxKRrzixbo31g
  =
-X-Google-Smtp-Source: AGHT+IEazetpybBgM1A23k3n4yXUiTFkvmGDoX/2ozkNfmOApIEsIwA7xoPHG3mpY+QbZ0pIsw8UyQ==
-X-Received: by 2002:a05:6e02:1cab:b0:398:16d1:610b with SMTP id
- e9e14a558f8ab-39aec24d15bmr201043235ab.0.1722437356744; 
- Wed, 31 Jul 2024 07:49:16 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IG+tbFsy57vvRzGEJQduopWkCvvhNQ58DL978mw9FZ2j3AeGw6sPg7j2WwWEqI0fICR+HLNww==
+X-Received: by 2002:a05:6e02:20ef:b0:379:40e0:b0b8 with SMTP id
+ e9e14a558f8ab-39aec3fedd0mr154914955ab.20.1722437357444; 
+ Wed, 31 Jul 2024 07:49:17 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
  e9e14a558f8ab-39aec0db8b2sm40671855ab.50.2024.07.31.07.49.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jul 2024 07:49:16 -0700 (PDT)
+ Wed, 31 Jul 2024 07:49:17 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Raymond Mao <raymond.mao@linaro.org>, Jerry Van Baren <vanbaren@cideas.com>
-Subject: [PATCH v7 6/8] fdt: Correct condition for bloblist existing
-Date: Wed, 31 Jul 2024 08:49:05 -0600
-Message-Id: <20240731144908.795290-7-sjg@chromium.org>
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>, huang lin <hl@rock-chips.com>
+Subject: [PATCH v7 7/8] rockchip: Ensure memory size is available in RK3399 SPL
+Date: Wed, 31 Jul 2024 08:49:06 -0600
+Message-Id: <20240731144908.795290-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240731144908.795290-1-sjg@chromium.org>
 References: <20240731144908.795290-1-sjg@chromium.org>
@@ -89,54 +91,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On some boards, the bloblist is created in SPL once SDRAM is ready. It
-cannot be accessed until that point, so is not available early in SPL.
+At present gd->ram_size is 0 in SPL, meaning that it is not possible to
+enable the cache. Correct this by always populating the RAM size
+correctly.
 
-Add a condition to avoid a hang in this case.
-
-This fixes a hang in chromebook_coral
-
-Fixes: 70fe2385943 ("fdt: Allow the devicetree to come from a bloblist")
+This increases code size by about 500 bytes in SPL, since it must call
+the rather large rockchip_sdram_size() function.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Acked-by: Raymond Mao <raymond.mao@linaro.org>
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
 
-Changes in v7:
-- Reword the comment
+(no changes since v3)
 
 Changes in v3:
-- Use BLOBLIST instead of OF_BLOBLIST
+- Cut the patch down to bare bones
 
 Changes in v2:
-- Use 'phase' instead of 'stage'
+- Add new patch to correct memory size in SPL
 
- lib/fdtdec.c | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+ drivers/ram/rockchip/sdram_rk3399.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-index 5b3b26df968..6865f78c70d 100644
---- a/lib/fdtdec.c
-+++ b/lib/fdtdec.c
-@@ -1668,8 +1668,16 @@ int fdtdec_setup(void)
- {
- 	int ret = -ENOENT;
+diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
+index ef9a1824b2b..bc79c034808 100644
+--- a/drivers/ram/rockchip/sdram_rk3399.c
++++ b/drivers/ram/rockchip/sdram_rk3399.c
+@@ -3142,19 +3142,19 @@ static int rk3399_dmc_init(struct udevice *dev)
  
--	/* If allowing a bloblist, check that first */
--	if (CONFIG_IS_ENABLED(BLOBLIST)) {
-+	/*
-+	 * If allowing a bloblist, check that first. There was discussion about
-+	 * adding an OF_BLOBLIST Kconfig, but this was rejected.
-+	 *
-+	 * The necessary test is whether the previous phase passed a bloblist,
-+	 * not whether this phase creates one.
-+	 */
-+	if (CONFIG_IS_ENABLED(BLOBLIST) &&
-+	    (spl_prev_phase() != PHASE_TPL ||
-+	     !IS_ENABLED(CONFIG_TPL_BLOBLIST))) {
- 		ret = bloblist_maybe_init();
- 		if (!ret) {
- 			gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
+ static int rk3399_dmc_probe(struct udevice *dev)
+ {
++	struct dram_info *priv = dev_get_priv(dev);
++
+ #if defined(CONFIG_TPL_BUILD) || \
+ 	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+ 	if (rk3399_dmc_init(dev))
+ 		return 0;
+-#else
+-	struct dram_info *priv = dev_get_priv(dev);
+-
++#endif
+ 	priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
+ 	debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
+ 	priv->info.base = CFG_SYS_SDRAM_BASE;
+ 	priv->info.size =
+ 		rockchip_sdram_size((phys_addr_t)&priv->pmugrf->os_reg2);
+-#endif
++
+ 	return 0;
+ }
+ 
 -- 
 2.34.1
 
