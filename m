@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4622CC3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 17:31:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0DC7C3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 17:31:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0E6688A08;
-	Wed, 31 Jul 2024 19:31:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4492488A68;
+	Wed, 31 Jul 2024 19:31:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pYySR24T";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MROkUwfh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91ED188A94; Wed, 31 Jul 2024 19:31:13 +0200 (CEST)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
+ id 9C51088A7D; Wed, 31 Jul 2024 19:31:34 +0200 (CEST)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F3E786FB1
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 19:31:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 63FAA86FB1
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 19:31:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-7a1e31bc1efso360987285a.3
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 10:31:11 -0700 (PDT)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7a1d066a5daso413789585a.3
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 10:31:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722447070; x=1723051870; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1722447091; x=1723051891; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Zgdde31wO2wy4T9xmk1DpA1dyAfwYIrJVEwNbQL1dUw=;
- b=pYySR24TpGMC59d377AH9EZ/et+MC5XrHjgYqaQ9IpfzWtaDl32YbUW0TXgh635/la
- olDA1+w2hLbQ3RJb7+QYXlFondOVud7TlEIY1VhSAGwlMtNa2jUPQEGMS6GtdnGePkf4
- h3J0hzgOHIfO536QK5lX/KClIhymoh7ako9pYYX8J1cnHDvr6t1/CpOgob9nwh6WIHrS
- 8l7jNvevyXfaz2GYARkL1yM88vj9DUSYOSGe0dRwuroXEJtkE4ETy/Mfb2KdEt0e/RWG
- pzCqxSPa1lujzsL7O5BO4+h25DdEbTDTVz4gt1olmFvo3ndv4CE8zH0Hsyab2dkKHWHo
- 6DNA==
+ bh=J1GzkvNLSw3Yqv7lJxTqOpiqHvEcc3DdaXaXhDO2rM8=;
+ b=MROkUwfhZBfqr5RhoiRQSO6G+3G1TScHsYozsNmQeEqhXczS2IAwuv8Fe1VdQ6HjFD
+ b/aUs6RNuwP1exlpBi6zKIGGxiWBGLvAHYIJMhDxrAG4hEnaYtKidJXemKBNH2OtsRge
+ m/rDwUTdcke38mK02o7GDS/D4ddCSvks9QXzK/+TsRzd80rjzuTZlvb+Bqqk/zKEcTpI
+ 44HC3AUsSuc+hEIFV8mIn20+k6eIdT6xzvwD/026IfRPMLAnRLXdZl8BB5oRcB4kr+jU
+ tz6YFLOc775doliISp3QlKA0veGbUaCztqN3gwP2+EeNbQ1UsEoGO5+dhO/muroHUx69
+ Hpyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722447070; x=1723051870;
+ d=1e100.net; s=20230601; t=1722447091; x=1723051891;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Zgdde31wO2wy4T9xmk1DpA1dyAfwYIrJVEwNbQL1dUw=;
- b=Yf4aPT3CPgtyHqmB5u8gMqBXTQxel57iuBfbVv23yVVbLysJ/C+7mSo0BrBNX83Bs6
- BPf1xDk9hj6RZ3wjvFN4DWDrK6zs50l+IdagwjKuRCmBLjp8hWtl0Kl/ZUWg3VqyX54R
- dBcX9eP4gZ9MBDzOX5DhgB3gFLFG5l0HdOl4BL3nqP6UCO20HYnxk7SKcuaV9xxLVQhM
- 6FdT4nYsun9GxDNj0y5ImRZMveNHzJM6CNkTgdKf5MW0Hz4B54L30hki9go+0Zg8uW60
- uDy97aFFOGij5x1TYa3DvqQnDAI1K1VoCyBOPadUWR93qNURHL5TbEXXj+WKHBGRHux8
- xbqQ==
-X-Gm-Message-State: AOJu0Ywhkc4nfh9WcG32mKLc/IojgCnfkFzDG7MdW378/XIZ6OW49+8h
- 5tm8BEeRkq31sWQ5DVoOLHXB/M8uPHfznhqaR/rF/l1RDQ9cxcPESx1nxC4NpJ1CN/FAxhwSwBD
- 9PEs=
-X-Google-Smtp-Source: AGHT+IFN878ZIlPrc3nXwG3pgsRV6EAzqTI6Bi80Z949pGGbxi3TSpCKAJJQJYmaKWvP0I3qNgKYeg==
-X-Received: by 2002:a05:620a:240f:b0:79f:758:9654 with SMTP id
- af79cd13be357-7a1e526018cmr1689728285a.40.1722447069816; 
- Wed, 31 Jul 2024 10:31:09 -0700 (PDT)
+ bh=J1GzkvNLSw3Yqv7lJxTqOpiqHvEcc3DdaXaXhDO2rM8=;
+ b=lXes/6IegM7HKnaxRlIuch2xl4tupYeyIzE38NgVW+/qsAZHyR0ehR4lw6kHGJfki8
+ A0mK38nQ+hYCnxvKSSmEBPfJvse4/P68BQoGTiWLolb3HxzVCBxN3xEoYM9j6F8GeWdw
+ dz/m9JKLuel0tYqS8eF6HkJz7rmwUOmrzA5oitSFJ7IAN9jMJbJIavV0UjQKNnmBXWGa
+ hbKzxOciqozMrFcXGcYCO+nF+ElBvnnLhbHEWUWW+oAgzQBY2XJMNp31KaCgc+P7bgnS
+ yFvHtifp0tbeR+e3gWkv3zW3ARFbZPBEnfpZecKgkNNnarFdFx9klaqX2b2DWMdIUsha
+ EVMA==
+X-Gm-Message-State: AOJu0YykJOcNMeHpJyAxlwSyUMRdVB2baIgbso8cX9CKMcBsXmMxlzxh
+ 8dDTvWZJzBZc0W849HJDKNJRDQmm9w7+SX2+oJErTTlPgr5GvWj9fVL/eAQbdaZy4l9A6dS+t1p
+ e3yY=
+X-Google-Smtp-Source: AGHT+IGfWgSKTxAW+Wg88IXoaVfyzxWdE4er+4DUdfa28711hyZjxYgQELEnDDXpbYvjCwVAiRtLHQ==
+X-Received: by 2002:a05:620a:40c3:b0:79f:1828:4279 with SMTP id
+ af79cd13be357-7a1e5224386mr1922833085a.4.1722447091016; 
+ Wed, 31 Jul 2024 10:31:31 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a1d73b378fsm779452485a.37.2024.07.31.10.31.08
+ af79cd13be357-7a1d73b378fsm779452485a.37.2024.07.31.10.31.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jul 2024 10:31:09 -0700 (PDT)
+ Wed, 31 Jul 2024 10:31:30 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
@@ -78,19 +78,19 @@ Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sean Anderson <seanga2@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
  Sumit Garg <sumit.garg@linaro.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
  "Leon M. Busch-George" <leon@georgemail.eu>,
  Igor Opaniuk <igor.opaniuk@gmail.com>, Ilya Lukin <4.shket@gmail.com>,
- Bin Meng <bmeng.cn@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Alexander Gendin <agendin@matrox.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: [PATCH v5 13/27] x509: move common functions to x509 helper
-Date: Wed, 31 Jul 2024 10:25:23 -0700
-Message-Id: <20240731172556.1348487-14-raymond.mao@linaro.org>
+Subject: [PATCH v5 14/27] pkcs7: move common functions to PKCS7 helper
+Date: Wed, 31 Jul 2024 10:25:24 -0700
+Message-Id: <20240731172556.1348487-15-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240731172556.1348487-1-raymond.mao@linaro.org>
 References: <20240731172556.1348487-1-raymond.mao@linaro.org>
@@ -112,8 +112,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move x509_check_for_self_signed as a common helper function
-that can be shared by legacy crypto lib and MbedTLS implementation.
+Move pkcs7_get_content_data as a helper function that can be
+shared by legacy crypto lib and MbedTLS implementation.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
@@ -121,163 +121,108 @@ Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Changes in v4
 - Initial patch.
 Changes in v5
-- Removed authorship.
+- Remove authorship.
 
- lib/crypto/Makefile          |  1 +
- lib/crypto/x509_helper.c     | 64 ++++++++++++++++++++++++++++++++++++
- lib/crypto/x509_public_key.c | 56 +------------------------------
- 3 files changed, 66 insertions(+), 55 deletions(-)
- create mode 100644 lib/crypto/x509_helper.c
+ lib/crypto/Makefile       |  1 +
+ lib/crypto/pkcs7_helper.c | 37 +++++++++++++++++++++++++++++++++++++
+ lib/crypto/pkcs7_parser.c | 28 ----------------------------
+ 3 files changed, 38 insertions(+), 28 deletions(-)
+ create mode 100644 lib/crypto/pkcs7_helper.c
 
 diff --git a/lib/crypto/Makefile b/lib/crypto/Makefile
-index 4ad1849040d..946cc3a7b59 100644
+index 946cc3a7b59..16059088f26 100644
 --- a/lib/crypto/Makefile
 +++ b/lib/crypto/Makefile
-@@ -37,6 +37,7 @@ x509_key_parser-y := \
- 	x509.asn1.o \
- 	x509_akid.asn1.o \
- 	x509_cert_parser.o \
-+	x509_helper.o \
- 	x509_public_key.o
+@@ -53,6 +53,7 @@ $(obj)/x509_akid.asn1.o: $(obj)/x509_akid.asn1.c $(obj)/x509_akid.asn1.h
+ obj-$(CONFIG_$(SPL_)PKCS7_MESSAGE_PARSER) += pkcs7_message.o
+ pkcs7_message-y := \
+ 	pkcs7.asn1.o \
++	pkcs7_helper.o \
+ 	pkcs7_parser.o
+ obj-$(CONFIG_$(SPL_)PKCS7_VERIFY) += pkcs7_verify.o
  
- $(obj)/x509_cert_parser.o: \
-diff --git a/lib/crypto/x509_helper.c b/lib/crypto/x509_helper.c
+diff --git a/lib/crypto/pkcs7_helper.c b/lib/crypto/pkcs7_helper.c
 new file mode 100644
-index 00000000000..87e8ff67ae1
+index 00000000000..bb3b9d1354f
 --- /dev/null
-+++ b/lib/crypto/x509_helper.c
-@@ -0,0 +1,64 @@
++++ b/lib/crypto/pkcs7_helper.c
+@@ -0,0 +1,37 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * X509 helper functions
++ * PKCS7 helper functions
 + *
-+ * Copyright (C) 2012 Red Hat, Inc. All Rights Reserved.
++ * Copyright (c) 2012 Red Hat, Inc. All Rights Reserved.
 + * Written by David Howells (dhowells@redhat.com)
 + */
++#include <linux/kernel.h>
 +#include <linux/err.h>
-+#include <crypto/public_key.h>
-+#include <crypto/x509_parser.h>
++#include <crypto/pkcs7_parser.h>
 +
-+/*
-+ * Check for self-signedness in an X.509 cert and if found, check the signature
-+ * immediately if we can.
++/**
++ * pkcs7_get_content_data - Get access to the PKCS#7 content
++ * @pkcs7: The preparsed PKCS#7 message to access
++ * @_data: Place to return a pointer to the data
++ * @_data_len: Place to return the data length
++ * @_headerlen: Size of ASN.1 header not included in _data
++ *
++ * Get access to the data content of the PKCS#7 message.  The size of the
++ * header of the ASN.1 object that contains it is also provided and can be used
++ * to adjust *_data and *_data_len to get the entire object.
++ *
++ * Returns -ENODATA if the data object was missing from the message.
 + */
-+int x509_check_for_self_signed(struct x509_certificate *cert)
++int pkcs7_get_content_data(const struct pkcs7_message *pkcs7,
++			   const void **_data, size_t *_data_len,
++			   size_t *_headerlen)
 +{
-+	int ret = 0;
++	if (!pkcs7->data)
++		return -ENODATA;
 +
-+	if (cert->raw_subject_size != cert->raw_issuer_size ||
-+	    memcmp(cert->raw_subject, cert->raw_issuer,
-+		   cert->raw_issuer_size))
-+		goto not_self_signed;
-+
-+	if (cert->sig->auth_ids[0] || cert->sig->auth_ids[1]) {
-+		/*
-+		 * If the AKID is present it may have one or two parts. If
-+		 * both are supplied, both must match.
-+		 */
-+		bool a = asymmetric_key_id_same(cert->skid,
-+						cert->sig->auth_ids[1]);
-+		bool b = asymmetric_key_id_same(cert->id,
-+						cert->sig->auth_ids[0]);
-+
-+		if (!a && !b)
-+			goto not_self_signed;
-+
-+		ret = -EKEYREJECTED;
-+		if (((a && !b) || (b && !a)) &&
-+		    cert->sig->auth_ids[0] && cert->sig->auth_ids[1])
-+			goto out;
-+	}
-+
-+	ret = -EKEYREJECTED;
-+	if (strcmp(cert->pub->pkey_algo, cert->sig->pkey_algo))
-+		goto out;
-+
-+	ret = public_key_verify_signature(cert->pub, cert->sig);
-+	if (ret == -ENOPKG) {
-+		cert->unsupported_sig = true;
-+		goto not_self_signed;
-+	}
-+	if (ret < 0)
-+		goto out;
-+
-+	pr_devel("Cert Self-signature verified");
-+	cert->self_signed = true;
-+
-+out:
-+	return ret;
-+
-+not_self_signed:
++	*_data = pkcs7->data;
++	*_data_len = pkcs7->data_len;
++	if (_headerlen)
++		*_headerlen = pkcs7->data_hdrlen;
 +	return 0;
 +}
-diff --git a/lib/crypto/x509_public_key.c b/lib/crypto/x509_public_key.c
-index a10145a7cdc..4ba13c1adc3 100644
---- a/lib/crypto/x509_public_key.c
-+++ b/lib/crypto/x509_public_key.c
-@@ -139,61 +139,7 @@ error:
- 	return ret;
+diff --git a/lib/crypto/pkcs7_parser.c b/lib/crypto/pkcs7_parser.c
+index d5efa828d6a..c849dc0d92d 100644
+--- a/lib/crypto/pkcs7_parser.c
++++ b/lib/crypto/pkcs7_parser.c
+@@ -182,34 +182,6 @@ out_no_ctx:
  }
+ EXPORT_SYMBOL_GPL(pkcs7_parse_message);
  
--/*
-- * Check for self-signedness in an X.509 cert and if found, check the signature
-- * immediately if we can.
+-/**
+- * pkcs7_get_content_data - Get access to the PKCS#7 content
+- * @pkcs7: The preparsed PKCS#7 message to access
+- * @_data: Place to return a pointer to the data
+- * @_data_len: Place to return the data length
+- * @_headerlen: Size of ASN.1 header not included in _data
+- *
+- * Get access to the data content of the PKCS#7 message.  The size of the
+- * header of the ASN.1 object that contains it is also provided and can be used
+- * to adjust *_data and *_data_len to get the entire object.
+- *
+- * Returns -ENODATA if the data object was missing from the message.
 - */
--int x509_check_for_self_signed(struct x509_certificate *cert)
+-int pkcs7_get_content_data(const struct pkcs7_message *pkcs7,
+-			   const void **_data, size_t *_data_len,
+-			   size_t *_headerlen)
 -{
--	int ret = 0;
+-	if (!pkcs7->data)
+-		return -ENODATA;
 -
--	pr_devel("==>%s()\n", __func__);
--
--	if (cert->raw_subject_size != cert->raw_issuer_size ||
--	    memcmp(cert->raw_subject, cert->raw_issuer,
--		   cert->raw_issuer_size) != 0)
--		goto not_self_signed;
--
--	if (cert->sig->auth_ids[0] || cert->sig->auth_ids[1]) {
--		/* If the AKID is present it may have one or two parts.  If
--		 * both are supplied, both must match.
--		 */
--		bool a = asymmetric_key_id_same(cert->skid, cert->sig->auth_ids[1]);
--		bool b = asymmetric_key_id_same(cert->id, cert->sig->auth_ids[0]);
--
--		if (!a && !b)
--			goto not_self_signed;
--
--		ret = -EKEYREJECTED;
--		if (((a && !b) || (b && !a)) &&
--		    cert->sig->auth_ids[0] && cert->sig->auth_ids[1])
--			goto out;
--	}
--
--	ret = -EKEYREJECTED;
--	if (strcmp(cert->pub->pkey_algo, cert->sig->pkey_algo) != 0)
--		goto out;
--
--	ret = public_key_verify_signature(cert->pub, cert->sig);
--	if (ret < 0) {
--		if (ret == -ENOPKG) {
--			cert->unsupported_sig = true;
--			ret = 0;
--		}
--		goto out;
--	}
--
--	pr_devel("Cert Self-signature verified");
--	cert->self_signed = true;
--
--out:
--	pr_devel("<==%s() = %d\n", __func__, ret);
--	return ret;
--
--not_self_signed:
--	pr_devel("<==%s() = 0 [not]\n", __func__);
+-	*_data = pkcs7->data;
+-	*_data_len = pkcs7->data_len;
+-	if (_headerlen)
+-		*_headerlen = pkcs7->data_hdrlen;
 -	return 0;
 -}
-+#endif /* !CONFIG_IS_ENABLED(MBEDTLS_LIB_X509) */
- 
- #ifndef __UBOOT__
+-EXPORT_SYMBOL_GPL(pkcs7_get_content_data);
+-
  /*
+  * Note an OID when we find one for later processing when we know how
+  * to interpret it.
 -- 
 2.25.1
 
