@@ -4,147 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 823F7C3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 04:12:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A755C3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 04:14:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19EF08892B;
-	Wed, 31 Jul 2024 06:11:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AB53C871C7;
+	Wed, 31 Jul 2024 06:14:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="iZ4CNHnn";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="w8MHgK2C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15A7E871C7; Wed, 31 Jul 2024 06:11:46 +0200 (CEST)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20726.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e1a::726])
+ id 58ADE87903; Wed, 31 Jul 2024 06:14:45 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::701])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7317488780
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 06:11:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 15DB58692C
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 06:14:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NckTiQPdoU0zZMNT400TbgOMQQSyCP7OgMTz1fhse9TGbhZvfLESeKKkQOV0zftf1KYJbz3mW0svcBbpKlkzIWAj7Ni+RfHN38qRtOgeRBP4TfqvO8CU3DcCiIJdPypu9D0/bysFuqCMLUkTmkS7JflaOnHcgWDs8jIrchxx9FAtMUr1Di8Rx5sg2JEZO04diiwB1FBd99DNCBV0a3iZNkRNAHCx+8ruEtu8epEBprhl01M5586OK/l0y50nPGa+rMPbvWOEHlfjy7LnKh2Q3m0m5Q2j3sVID10xHEAqSzvyFFiq6Rf2IVHxykqdCo8PLdflnBFolfvDDdgeVU3E3w==
+ b=ViKWluV9LG82dhg199V4DUAlOd+DcfQ1LKzfGKZzCD4EXotwvMVtzoKpH+cerdk6gkK+oTlAjupk143uiIC/EqtR9bL6N1itUmQVL7ahoyLklSenRnwf/Y3WEmA8TLdZYNP22DODUMIKuF1gIuac/W4/8HSlxOWAD9oe5H4jgwxnaKYEcuewTh2AZ94IkX2jvvOM1lyehQ1fvvogu+gdSehckR7tdwlla0y/SXlMuV9+d60V5M7t2ZExh/jtJ984n3sXY944lGa32cBFKadhzDeR/ESmYuyJTBFlkkmbP2+bbjsy90EJKiweytvZypyxKWmlSfqXqSR2zV4/4/9CCA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Tubk1Ci5jHqIf1YylfCyhNeXr4poF8EcHbkUCS8a6vM=;
- b=xmH+2vEKUt2XRBqyTQOFK4usT8e2hhxC21mUl0ljIVqBl6+pjSq43Fk/lyt+UhM2faLb7Oble3upKYUkpIPv3OC+0/oVUlz1Yp2txcFVFUHf3GvK5jssl0XG5gYaeIOENMqd+n0jKLTEpTeQcCnfOptbGXn3KKrWCeAvFSi68EgEGvUAVBkNu+sd/Y0pnmkWbZ1QchiJvSiABRuPVuOMRBaYehob37hHMBxQubK2D+GJ7iTtVOuCgWXB1MJM0WF0qA3MVkny2Devy9ktYEF9VYgopVBwUXAXG+1evKWEv8VPgQCOuWZMcALKD0MfzwapDrawR2YJngIqMsEBlcydhg==
+ bh=SEVK/F7lYBVP7TRnACQe0M1Bq1DIwqb6FoBXo6NbLNY=;
+ b=XhogrFR3TrGVC8LYwk9QSpwK3f6p7Z2yC2zpc91zehiTm8lZSg5Tmvsy69uoFi2cOcBDygcL4Fuowe/06IDaGQX2owuArLh/fpwCBMAOkRrdJgEAUWR71q8js3EjeBez7SMJ9No5wGFhfhMsV0NYDldO4CJak062ccn05sBInrdvCpiMZFVn+DwbThOGk18UK7NvQmknoa/ZO/Mxx09d6wUauAElZ2Jpx7MUrn1JREhBJUWh9I7M2xDgUGRT6wyacqR/CmGaHwcl0gDIpCKyqQyRVQQPT71qDw3czypDgYHhcaa0o/ugBI0+LkXFUyuA08PFyvbwjMlJF2DkboK38g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Tubk1Ci5jHqIf1YylfCyhNeXr4poF8EcHbkUCS8a6vM=;
- b=iZ4CNHnnqkI6wGNfQbiOvbJmN1QMJibfJlbKmMxHJPVcOx+KrpdvoZfB4MY8prjwZv48D7y4Q0+VYyt8UZ4q/eJgLeVx0lOx1AaCQvVezpTqcRBdTtBJ5uMXSokxKo64IokrLQsWpfeMAoSPleH4jX0JSvqxsm5hR43ARBu34rmZMpSlyCp+qTpnMTmcvZvbMIrR//3TPQ8F/a3h4VxiSE+LYKEdo77h37YOfqrzHuqeo4Qv6Bz25aFkmsTqQifumUio3u2b1PiaqlmSmALT7QjxoBEw3cRRNMnfTYO0fWtFzFQCoEov8++zTpp8DnU6nLXwXaomTJ58jjiAwkvDeg==
+ bh=SEVK/F7lYBVP7TRnACQe0M1Bq1DIwqb6FoBXo6NbLNY=;
+ b=w8MHgK2CtHmHzxYBHMuVh09eeTqLLunqM3yni0V4tRoBiAuSN1GEZoazQ8bX6rtP9IKyHriD86on6PJUebBoTHsj5GlRdV7MG71PS425ZkL98m4KqDRxTjYOMmyx53F0c1fHX273+gNPFkouSnc4dJNKt7CiclTgaB/0uiKb4B+pYAtlnwvvmwCRe3Id5U4/xzMlLs/I+hpppy1stKWQdEokrfIv1/dC9SLqkfJmtrtR0BNkpN/FEDyPsVrc0ylO6R68q7Q2niU4Cs9/oOFAYXoLYXwatgQSP8pNszKeIFUSUhF6gYQs8gbG6QYTmMkMjrg/rQNhjlh8ydSOR9HMeQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from DB4PR08MB8125.eurprd08.prod.outlook.com (2603:10a6:10:384::19)
  by PAVPR08MB8967.eurprd08.prod.outlook.com (2603:10a6:102:326::5)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7807.27; Wed, 31 Jul
- 2024 04:11:42 +0000
+ 2024 04:14:41 +0000
 Received: from DB4PR08MB8125.eurprd08.prod.outlook.com
  ([fe80::e9de:ca06:dae1:ef2f]) by DB4PR08MB8125.eurprd08.prod.outlook.com
  ([fe80::e9de:ca06:dae1:ef2f%5]) with mapi id 15.20.7807.026; Wed, 31 Jul 2024
- 04:11:42 +0000
+ 04:14:41 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-To: Tom Rini <trini@konsulko.com>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- William Zhang <william.zhang@broadcom.com>, u-boot@lists.denx.de,
- Fabio Estevam <festevam@gmail.com>
-Cc: Michael Polyntsov <michael.polyntsov@iopsys.eu>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH v2 2/2] spi: soft_spi: Parse cs-gpios only if num-chipselects
- is not <0>
-Date: Wed, 31 Jul 2024 08:11:29 +0400
-Message-Id: <20240731041129.3839918-3-mikhail.kshevetskiy@iopsys.eu>
+To: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Subject: [RESEND PATCH v3] net/tftp: make tftpput working with servers that do
+ not use OACK
+Date: Wed, 31 Jul 2024 08:14:32 +0400
+Message-Id: <20240731041432.3840128-1-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240731041129.3839918-1-mikhail.kshevetskiy@iopsys.eu>
-References: <20240731041129.3839918-1-mikhail.kshevetskiy@iopsys.eu>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: LO2P265CA0093.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:8::33) To DB4PR08MB8125.eurprd08.prod.outlook.com
+X-ClientProxiedBy: LO4P123CA0632.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:294::22) To DB4PR08MB8125.eurprd08.prod.outlook.com
  (2603:10a6:10:384::19)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DB4PR08MB8125:EE_|PAVPR08MB8967:EE_
-X-MS-Office365-Filtering-Correlation-Id: 98782679-4366-428c-e5a5-08dcb116e216
+X-MS-Office365-Filtering-Correlation-Id: 8334c803-2b37-4a3f-9512-08dcb1174cf5
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|52116014|366016|376014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?pP3a/gw/jiTMmi5wZSnATR5nSLkfk8AejgVfSRTK5qvJFUgHPCZJ8+fqG2jI?=
- =?us-ascii?Q?EeNB+Ar/iJ+fIQH2rhwvhq/6dyIBI4qm/Eaydg8DM7v32PRaaWD98kkJcjSX?=
- =?us-ascii?Q?flEgaGWpN4VW6sJee1hJ0Ov/zBOo0QyIeii5mlKUnucA7G+hS7p9n+pHpdNz?=
- =?us-ascii?Q?5wwckbCHcR9RjAS/neoh6BRR+rGMnfN/z0zLtaa7BKt5Eqv1uViV1lyAI3d5?=
- =?us-ascii?Q?v7qAbt8xMAoz9lRCg2aWF79xv6nPG7j3r0Q9t/ogW16BBiFyhf6XCsR34YlD?=
- =?us-ascii?Q?YNMOOlaaOp5YjjzLdM3yXZ99zn0NrHo43UBZD8atweR6kqWhuaUXVY6WpRoP?=
- =?us-ascii?Q?FjYOiHG8fkn+jCOr4lgpoz2ggQJYnEXIOSraOMTnjfDfvivckNN7IMSZ4eUC?=
- =?us-ascii?Q?7ZN+FSnZtxT1uO6oIeO2HFC95iMsv66y0GmbLChZrCBomS96bL6ESZccYOMK?=
- =?us-ascii?Q?AIYXU9B9LvKWxvMFvC+J6OOpfXmwxR9vleq6F5fktCg1SQP/Nvk4z1Jj1Ne7?=
- =?us-ascii?Q?3X+CnLk0gqWKyXqIMQQaxcHV1Y71K24c7g7yJQ3FjV/3Fpm8n7DuOGsIiMEI?=
- =?us-ascii?Q?O963RvhqtNqJYKEP2GPgT1UyrY/YAnvyKfDZLuSgkHhDQth03zwBH7lIfyKp?=
- =?us-ascii?Q?plLCXA2wK/7B0Gt8QHxZ4/ZWRbCe0h8LAzgLV9cEV6OVnKOCMYyxWDy/lbVI?=
- =?us-ascii?Q?WchSzwU1HJSDFNO2NnuRTeiinU/3BeEI1EiDPMqo4zgfI3plcMTEjbLV3ztX?=
- =?us-ascii?Q?GxIf7T0a7In0xcJ0YkqF5AQJW2AHXvWhdgWNtQ3N4BEJcglnm6aIGxbgyuiK?=
- =?us-ascii?Q?tkeQeaAsFQ3cOLJRGL1fx9ZGENeOjo2iI9NBn1nfXr9bj++/0wIwam53VX+D?=
- =?us-ascii?Q?CWbfF6eMvbE9G8J6YcM4OJVEm3qmYpFZY8SVq8l43Yc/kQ0BG+8TwtLv0yeV?=
- =?us-ascii?Q?5ZiN/ZG7fUWSz5wgLYzXRn1PETjnDDd5vSRIua0NvwXYp5RKfgaB3OsMHzJM?=
- =?us-ascii?Q?oNE5twiVzs/uhgQwIvcAvITiRS1EgU1DOOzzYuwvk2clBwWwPow/OPsaUYPz?=
- =?us-ascii?Q?xFnlG7hgRuJilU3k3/YTSO4k8WnZi+snGBTdbhDB0ItBFVP7w9C4S77gi2t8?=
- =?us-ascii?Q?vSMMpIBgm4iTAuIcY1iwFbaxtgEjKKN/+/OxMNlEHrCJCu6AtnDQly6EkaFE?=
- =?us-ascii?Q?UhyH+T0cib837xeL6cZzUrvn2hGbqToefQp9o8au/y3S+mq+sia3f+JdFpX5?=
- =?us-ascii?Q?jpJ4vX29v6+8I+QUmqrcKgX3eHVRGYwdWx31H/lZHn0tUmdrwtS1ZptIS5eE?=
- =?us-ascii?Q?VxtRvqpmkK1+k68RY8W9Bf4qkl0VzMx+u3/H9gGsvwQIkkGdCjlXkK3G6h53?=
- =?us-ascii?Q?Z2KQ+9VPTWugiuUP/a964tEi0z9pnzjObaApIJ2xpF/WaPodEA=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?E/OH1EbRhvijyE4v9F14253n00RacyISk+am/cdJ0BzT+uQDj7XEQhsoN9Rb?=
+ =?us-ascii?Q?jpp3zNneTvUXHeV1sm8qmUqfSTxhvrP1Rhdd5kw1aXd7ltVW0IBic19p4l/n?=
+ =?us-ascii?Q?To5gaXC7y9x6wSsEGGQZ7gBPuO6i+wJDRsmI9Ai1cgfXW85GIscx+Qu8HoJH?=
+ =?us-ascii?Q?Fn1kGNzTqBwyf1CGGF5s11S59I76SpdDf83vCMuoZYbqSCVGz7JP+R/ldVDL?=
+ =?us-ascii?Q?f177IDTxlWbMQtO+0sekDoSR08WXrcjH7BRHXUVGEDLIgzVqy+jbCuSVocOu?=
+ =?us-ascii?Q?Kt1ELtSaywID+47wQhBGH7rSWY+aBKPgift9thExrCvLpusClmDJGq18C+4w?=
+ =?us-ascii?Q?g7k96kDBA1/RGoYGKvqpxCxFB4plr0CphFN3/JTM5uGRwuWcOZFv3I2a16t3?=
+ =?us-ascii?Q?/+GOoUEE0xuFvvUnHTfBXf+RPhBvL9w7Tue4DGeaW5Oog782gN1kfqKhR3l3?=
+ =?us-ascii?Q?Pr6q/MhkJdhJpYWbM1CNvk7SJZS4jVOLFgo4KtWClUJrcBCQr7iRX1mUGlhA?=
+ =?us-ascii?Q?4WEOssTXae5Hg0bg2VRQ7OPFM2EKECdWwf+NKvw7Q/e3B2sM13AwvWR0iTZL?=
+ =?us-ascii?Q?I6Br4DFjgkkOyKekm38MMgueaGKs/73gurzo9ttzSD3ng8VHvvPrB6RIDQ7/?=
+ =?us-ascii?Q?VbtZLAR64AEXx45u4nLhPmaLDKQvIhT/XhtXI1NwhC1p1J9DHaFeEnW5wYDH?=
+ =?us-ascii?Q?SM/09uDX3yC28aWtpT3/o3PgHgxw3KrWivHq2pKAViziU31zS8l/JR+Bqhkh?=
+ =?us-ascii?Q?P6gg4HHId4825grOB/glckiBhB8uIercE47TRpJVuXQ2VVU/YZPmcXiTZCaA?=
+ =?us-ascii?Q?oRiwr0v4O3KC+mPi/XwRc8kTE6VajdOvM+DtIGoaZ2r8sLXiZls7MxyTGKL/?=
+ =?us-ascii?Q?z4qt5DTSesAM7Lnr/FA1jbJY2QeXtfACHsoujMB2AHEGYu/WxbAloB7/gsHw?=
+ =?us-ascii?Q?cdrlP2nvVflgIqwR2hCX7+Q1zBvq4bkWq38G5eHzM5cZXNdulBI1qnAHzDwu?=
+ =?us-ascii?Q?V7fKd92EePy56/dcuaBjw83S48rXFuyHkDcjtaKnHojiKWk8T3z5l8R2YRDv?=
+ =?us-ascii?Q?guxHF+Qn5nZLfTQfIP3DWcdcNP4B+kuexhRplTOF5AfwT2bYn8SfqQQgbQ3X?=
+ =?us-ascii?Q?ry4hnaSlIjrV4/Wbl3ZeDvaw3hPHMACYiS4WXkZTtOIy0JJQE2hW3zhoQtbi?=
+ =?us-ascii?Q?AU0I69K7gW4o5Hn9+Ggy8gZcBoniP0v7wCSI0th8nl1FpYa/eRlKhBuLW/Z7?=
+ =?us-ascii?Q?9jce81Bk7QSF35yNfZK+TP64Ga8PJGAyctgsqNdYaFcnWnVEiVGdcPBPH+MW?=
+ =?us-ascii?Q?A8tlkzb51CusypSMoLubdKmEblwEozrTzyXSJL+bVgh0YO82YOuhVI1Ogxji?=
+ =?us-ascii?Q?Zc7zo3E=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DB4PR08MB8125.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(52116014)(366016)(376014)(38350700014); DIR:OUT;
  SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?orm6NXK5LbCb64iIWfi7eAExUCROC6XFtVotepuQdYkV46qMqNIo1h/omiOf?=
- =?us-ascii?Q?1VtL5NrPNhBTukgwos4V5fL2vOgYTLgP6HdDNnGF/2xCCGhlg9JwftBmzgRu?=
- =?us-ascii?Q?+R1+SX97hOasJRM67cpwC/63J6zo8WLCzyUjmxpi5DYqD9UZDBEZS11+ACvJ?=
- =?us-ascii?Q?5a5RXF8MIQsdgrRXyo4ZFhnJKsI7VsBZ8lZiGpQUgSWmwivUpmXhtyUq1l2g?=
- =?us-ascii?Q?/oAdnh0fnaLvfch8aJYLEppUNFuhWFYbfNf20gmurZU9Bxz5MXtHNPKzOOmL?=
- =?us-ascii?Q?D2ckClTesQJrUBi300TL1ArJyJvgT4rhtFg2ZcOHys0/2SgZn7Trl4yM/GlJ?=
- =?us-ascii?Q?0e2qFyzenKo+AOURaBCyF6BDNx7I59JY9nF4h5C3ji0NmVcpMnXo7X+pcK86?=
- =?us-ascii?Q?5C3voXQ5BrfA1f83CYT99D13PHSyoH8nkeyrKQ7RMX5hnJnuchlYKo5hmD94?=
- =?us-ascii?Q?lX2mMkFE2sYj13y0exJ20N190/M/98iWbDXxLGEppTp4RYs5fHllkpSYxlVv?=
- =?us-ascii?Q?8wWl6k6ot/wwdZ5gUsQQY4nurukSkYYvTuCIjPNXSOcwnJz1oGsYZSQK0KAe?=
- =?us-ascii?Q?UfE5ALbcKjq/Vz0ehVJZ8ofP5SA1jborfcfeV+8UfXCF40NwMKxkNBR+H41E?=
- =?us-ascii?Q?2QGMG/ySKdZ3l8PgtBMN2ZXdXGyeziY60nnZ8DckLIL4nvueuYuKSUPwek3K?=
- =?us-ascii?Q?oDlWeTMZbW0Pi5cltbf3rBOHLO4Yw4gq7hpKM7j2CrUYrrZ2LeSwnH+h58ah?=
- =?us-ascii?Q?+YBx5JUM6OIwPlG71uQemsclBqIQxUfAZA2J9L6wMdZMwpecPQHPh5QyiRFm?=
- =?us-ascii?Q?r/hR1zaZL/xTl8uGwZiQqhd58UcHdWCwumf0x6p6ppD+PQmCHD2O9w72gRfx?=
- =?us-ascii?Q?s2fWCHimfuF9r6zpKic4fbtrAYSI68u0CBtjE1B5VbjPStrhdDoUoDiRU0o5?=
- =?us-ascii?Q?mYX2o9+DaxGdw/VJe7dcW9mTEaJ7u8n76Niy1TJN2vzWr9JxeE0yZKEb8wWx?=
- =?us-ascii?Q?LAwD872nNnJYaZu7a3mYO27AIoEu1A+2N2mF4ZoZSVL8wkPobRGZ8+pKhaA2?=
- =?us-ascii?Q?+0e1BeraozQdrFg7IbKw9AfBzuSAoH5inzHI71kwzUREdZSGzazcDaQi8AF3?=
- =?us-ascii?Q?Sxu8nGehfw8ykUvdRv5BUbRXE9RcIruG2oAQRIbgZaKGgwr2JMqsTXh3RmQ+?=
- =?us-ascii?Q?ypaoSa2kOrqbderrXKRfXN3veWQvenRydiY1D97+KMq8gYmh0X2NMLUjM9M/?=
- =?us-ascii?Q?pRgH/K0E6uMLycmGyeVtfDoCBkRVJu358UXq+dvWTkqRZE8UYThcJG7uWufN?=
- =?us-ascii?Q?ZOHX1GSk+jMc4qxcCXyHWBG4Kz2TOhWnxsNqtq3ax1tPrzxR1DzehTuXnkDE?=
- =?us-ascii?Q?4kPGpy/GrtvkQ0WUSLwO4HTk0AGSkoJ/lCdqWVo74WVD9dlQ/bYIUoHxRejj?=
- =?us-ascii?Q?jXiM3wf7QzC+kNJ+hfyOmUPmodh/9aWEiDwFhkgE7kf8DBuzy5ao0BXIDjo9?=
- =?us-ascii?Q?RMA6i7L6Fe2jZTQp4gFZqlxssr0LF/sY6RdhOL9uGzMKCkgDBGptXYK3J8O5?=
- =?us-ascii?Q?6W4QNJdoCgDnfmIb8BbQxzhjvefqEL6HGHrsnTc2cIwFdLQ4oIgFFHFy2O2h?=
- =?us-ascii?Q?/w=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?pZAQ3ZNPZeDh6KIJuVeqDhs7h3eAXgHucAq3ZFdHdinYOLIz+OZB3RxvmIkO?=
+ =?us-ascii?Q?MSRYFDYMbRVM14rxnyS59SCKv4Iz5rYY888nTvd/aij44MxNT2t2oHP4Oilp?=
+ =?us-ascii?Q?UQZR0xTD6AEZLW6K1mndmhBMCaXCCzQbGWwsU7MpB0B0E+Nomv+aC/zMkjNe?=
+ =?us-ascii?Q?vFHbnj9Az6+Ma3hZz1+p9AhDZdIzvTgFEmpEQOLB26PHrEjSQt0Ck2v0OYCy?=
+ =?us-ascii?Q?zJ8KXGIftmZ7+ykg/f1pzcKwc4IU+SJrf0zcVi/ng8sgAmQVO+xptioXCdha?=
+ =?us-ascii?Q?GrRZPoU2MLTOjSB6KZU7u8bmOeesWJe8jhiq/x0A+CklInxgoZ1sBJinS+rj?=
+ =?us-ascii?Q?Fs0txpdN6oEUlAAmfQShg+LLrx7D/Bc5/g6LrIlvqmQpSORZ9GZ3iC3If1th?=
+ =?us-ascii?Q?8Tid5uWWY5mufbYPS8fsT/5GJx/Inkl0MHOY39lVQb+w69PaeEKlScXjY6Of?=
+ =?us-ascii?Q?KOXA5PFiVYcN+BmZwTHMgfu5SCLxAxBdqBGT5e3xcSJ74JPZEPE8eUzXA5pe?=
+ =?us-ascii?Q?Y8E46z8iz1zvw2xKBVRxkpqN2P+A40sNNUfEurm+PO2zFKtBcw99DAWHWaH4?=
+ =?us-ascii?Q?au1ZretJx23Z4JKQeUSUbYsUYugayAHZJLfc9XKo8V8eGhK/cxdHdsoETK1g?=
+ =?us-ascii?Q?o8V9gOaLmzu5v4Tr6/8puKynjwID6s5Cx/5oFSPBc2v8PM9uWvYrMImULDh0?=
+ =?us-ascii?Q?GT930K6aH8vu5ZVT5A33iBFwZHI0dmmAxwKRSw0mTt99nQtQEN8hSeKw4IBY?=
+ =?us-ascii?Q?/CHKXPElFhw1KB2jcBmz44BY59XEZHRB4cgBWJw18RC4bLQ838Y/ocITzJHl?=
+ =?us-ascii?Q?PBP3nPRaJy6n1uWWmoZpeW80/hEY4Z9DoeqHObyYmvtVgX5LUE5Y4/E5pfeT?=
+ =?us-ascii?Q?QS/ho8h9PJ2gmojZ2u5U6MJ44Xm7QftFu5iyWStr/pP8f3zYeqImc/wOtouF?=
+ =?us-ascii?Q?hZvZ/u8pXPYTqWAmNGzmi2A53r8N9rPthAR69ReGxgiVIkp5vZbAnc1HpuYV?=
+ =?us-ascii?Q?9b8GHvJ6fWEL0Yir3sgIOv5/Wny3A6fWHLLEa7/Dq56it8l3ztY07Q8YlEAl?=
+ =?us-ascii?Q?cmzlgVPRpkSOFDPRRoYKCEghbMUNXWfeOV1B7J6l+L72jmbwzdd4O8akQrUY?=
+ =?us-ascii?Q?Ks38GbdP5CqMIpLc4dlmtLwFexLF7EmhHAimhns03yzPU4osyhFeJ1p6SuH3?=
+ =?us-ascii?Q?KdqRP/kp7OcrKSzGgGeXB2MzsSMKKuFA9qvhX7yaCcqH99XFnLg/YiQR3jBm?=
+ =?us-ascii?Q?I2Q1o49PR2wCMb9ScfCtNjG9sz9NmlbWwGP014kJpY8Id37kpys8j4AvKo8b?=
+ =?us-ascii?Q?ZlMXQUV6Wnev1CDGUucN0a4pD4Cp/DBkmuIrzPZdcXGhAcx0tk0H896/nW2C?=
+ =?us-ascii?Q?p3PVlj9+zCqsrFANGk0IsRI6lGgg4DOfe/HnE2xVjdZoZFecWTYMdI9crKi4?=
+ =?us-ascii?Q?EsMDaSWk5bn+5fx6AHY4+N0pBxm0UBboKG6+6JZsMGSpR750hrt3E2YVsuQf?=
+ =?us-ascii?Q?fv5U8jghSfN7GDXLSUixahk619Ci56yroZcZlQeHGLDMWIKSwufV94FLlDin?=
+ =?us-ascii?Q?2mDSKIf2y8geHaTIJB8/tAFk4CqTAulMf60IygMYtNdHig9ie1Lmurz6S2LZ?=
+ =?us-ascii?Q?Pg=3D=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 98782679-4366-428c-e5a5-08dcb116e216
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8334c803-2b37-4a3f-9512-08dcb1174cf5
 X-MS-Exchange-CrossTenant-AuthSource: DB4PR08MB8125.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jul 2024 04:11:42.1775 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jul 2024 04:14:41.4737 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +oF+ptGBJxFvUnhNzrqkmkheDlUQ45VjIlsyIzs0QBiqpj6QLvJQeGURL1Wi4rQkhW1sM6mg1DDfFb6uuHyaWX8zP+vZrpmFxD1lL9rZWCc=
+X-MS-Exchange-CrossTenant-UserPrincipalName: CqdL3EWr7oTRzNVAcAnqz3h83WK3Y7sGKiXEVVODqT6DVoYjP/WezjrZMPIakwNFYkU6sA17nXMPK0wJI6clDWigXIFXcaCjBya2H4fQSRQ=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR08MB8967
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -162,82 +159,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Michael Polyntsov <michael.polyntsov@iopsys.eu>
+Option Acknowledgment (OACK) is an extension of TFTP protocol (see rfc2347).
+Not all tftp servers implements it. For example it does not supported by
+tftpd server from debian-11 (https://packages.debian.org/bullseye/tftpd).
 
-Some boards don't have chipselect lines for leds so cs-gpios is not
-specified in the dts leading to probing error. Fix it by making
-behavior similar to the one in Linux, parse num-chipselects and
-if it is zero, ignore cs-gpios.
+Starting the "tftpput $loadaddr $size out_file" command with such server
+will results in the following packets flow:
 
-Signed-off-by: Michael Polyntsov <michael.polyntsov@iopsys.eu>
+192.168.27.3   192.168.27.1   TFTP   Write Request, ...
+192.168.27.1   192.168.27.3   TFTP   Acknowledgement, Block: 0
+192.168.27.3   192.168.27.1   TFTP   Write Request, ...
+192.168.27.1   192.168.27.3   TFTP   Acknowledgement, Block: 0
+192.168.27.3   192.168.27.1   TFTP   Write Request, ...
+192.168.27.1   192.168.27.3   TFTP   Acknowledgement, Block: 0
+192.168.27.1   192.168.27.3   TFTP   Acknowledgement, Block: 0
+192.168.27.1   192.168.27.3   TFTP   Acknowledgement, Block: 0
+...
+
+so, no data transfer happening.
+
+Here is a packets flow for tftp-server with OACK support
+(tftpd-hpa: https://packages.debian.org/stable/tftpd-hpa)
+
+192.168.27.3   192.168.27.1   TFTP   Write Request, ...
+192.168.27.1   192.168.27.3   TFTP   Option Acknowledgement, ...
+192.168.27.3   192.168.27.1   TFTP   Data Packet, Block: 1
+192.168.27.1   192.168.27.3   TFTP   Acknowledgement, Block: 1
+192.168.27.3   192.168.27.1   TFTP   Data Packet, Block: 2
+192.168.27.1   192.168.27.3   TFTP   Acknowledgement, Block: 2
+
+and this time data transfer starts normally.
+
+As we can see there is no OACK packet in the first case. Investigating
+an isssue we'll find out:
+
+1) tftp_start() sets
+
+      tftp_state = STATE_SEND_WRQ;
+
+2) on OACK tftp_handler() sets
+
+      tftp_state = STATE_DATA;
+
+   and send a first DATA packet.
+
+3) on ACK tftp_handler() will call a tftp_send() function.
+   tftp_send() will
+
+   * tftpd with OACK support:
+
+       Current state is STATE_DATA, so transmittion of data packet will
+       happen.
+
+   * tftpd without OACK support
+
+      Current state is STATE_SEND_WRQ, so retransmission of WRQ packet
+      will happen. Thus tftpd-server will retransmit an ACK.
+
+      This will repeats until timeout happens.
+
+      According to RFC1350 this is wrong. We should start data transfer
+      instead of WRQ retransmission.
+
+This patch fix an issue, so tftpput works fine with both types of servers.
+
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 ---
- doc/device-tree-bindings/spi/soft-spi.txt |  5 +++--
- drivers/spi/soft_spi.c                    | 22 +++++++++++++++++++++-
- 2 files changed, 24 insertions(+), 3 deletions(-)
+v2 change:
+ * add more bug details
 
-diff --git a/doc/device-tree-bindings/spi/soft-spi.txt b/doc/device-tree-bindings/spi/soft-spi.txt
-index bdf7e86befb..77b01b2fd9a 100644
---- a/doc/device-tree-bindings/spi/soft-spi.txt
-+++ b/doc/device-tree-bindings/spi/soft-spi.txt
-@@ -8,14 +8,15 @@ The soft SPI node requires the following properties:
- 
- Mandatory properties:
- compatible: "spi-gpio"
--cs-gpios: GPIOs to use for SPI chip select (output)
-+cs-gpios: GPIOs to use for SPI chip select (output), not required if num-chipselects = <0>
- sck-gpios: GPIO to use for SPI clock (output)
- And at least one of:
- mosi-gpios: GPIO to use for SPI MOSI line (output)
- miso-gpios: GPIO to use for SPI MISO line (input)
- 
--Optional propertie:
-+Optional properties:
- spi-delay-us: Number of microseconds of delay between each CS transition
-+num-chipselects: Number of chipselect lines
- 
- The GPIOs should be specified as required by the GPIO controller referenced.
- The first cell holds the phandle of the controller and the second cell
-diff --git a/drivers/spi/soft_spi.c b/drivers/spi/soft_spi.c
-index 04691d3a3ba..a8ec2f4f7b4 100644
---- a/drivers/spi/soft_spi.c
-+++ b/drivers/spi/soft_spi.c
-@@ -237,6 +237,18 @@ static int soft_spi_of_to_plat(struct udevice *dev)
- 	return 0;
- }
- 
-+static int retrieve_num_chipselects(struct udevice *dev)
-+{
-+	int chipselects;
-+	int ret;
-+
-+	ret = ofnode_read_u32(dev_ofnode(dev), "num-chipselects", &chipselects);
-+	if (ret)
-+		return ret;
-+
-+	return chipselects;
-+}
-+
- static int soft_spi_probe(struct udevice *dev)
- {
- 	struct spi_slave *slave = dev_get_parent_priv(dev);
-@@ -249,7 +261,15 @@ static int soft_spi_probe(struct udevice *dev)
- 
- 	ret = gpio_request_by_name(dev, "cs-gpios", 0, &plat->cs,
- 				   GPIOD_IS_OUT | cs_flags);
--	if (ret)
-+	/*
-+	 * If num-chipselects is zero we're ignoring absence of cs-gpios. This
-+	 * code relies on the fact that `gpio_request_by_name` call above
-+	 * initiailizes plat->cs to correct value with invalid GPIO even when
-+	 * there is no cs-gpios node in dts. All other functions which work
-+	 * with plat->cs verify it via `dm_gpio_is_valid` before using it, so
-+	 * such value doesn't cause any problems.
-+	 */
-+	if (ret && retrieve_num_chipselects(dev) != 0)
- 		return -EINVAL;
- 
- 	ret = gpio_request_by_name(dev, "gpio-sck", 0, &plat->sclk,
+v3 change:
+ * provide detailed analysis of an issue.
+---
+ net/tftp.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/net/tftp.c b/net/tftp.c
+index 65c39d7fb70..2e073183d5a 100644
+--- a/net/tftp.c
++++ b/net/tftp.c
+@@ -493,8 +493,15 @@ static void tftp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+ 				tftp_prev_block = tftp_cur_block;
+ 				tftp_cur_block = (unsigned short)(block + 1);
+ 				update_block_number();
+-				if (ack_ok)
++				if (ack_ok) {
++					if (block == 0 &&
++					    tftp_state == STATE_SEND_WRQ){
++						/* connection's first ACK */
++						tftp_state = STATE_DATA;
++						tftp_remote_port = src;
++					}
+ 					tftp_send(); /* Send next data block */
++				}
+ 			}
+ 		}
+ #endif
 -- 
 2.39.2
 
