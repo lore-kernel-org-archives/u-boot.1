@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29761C3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 09:23:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C822C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 09:23:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA409889CE;
-	Wed, 31 Jul 2024 11:21:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 14F4F884AC;
+	Wed, 31 Jul 2024 11:21:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="1bDJys8+";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="QJ+isgRj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E06CB889CB; Wed, 31 Jul 2024 11:21:51 +0200 (CEST)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20729.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::729])
+ id 5EADE83333; Wed, 31 Jul 2024 11:21:53 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::700])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75843889CE
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 11:21:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 02876889E9
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 11:21:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CnSEQ5i8+D7VZ1o2RsbahbDHmG/igETEStnwtw0efJc5skHALi/kzIj6fZCyDglk6lxjdnqTIGcz3tZMNfJgXQLwLoxKT19CljvXRchyRj/D0373EW6ZMZ/94hMsLtjxjbXa9Yw6aUuE1t/HIp31M1L1OiOudDZL4jDN9duU5qew72wHtnxqkh4uQD3W/3+FrF8jCfOXjToUtNOjhccHtAdVb5wtxJezn/6nX7UITEQhCr+iHbnvNjyfVy7rsy+XuTaO8ln6LDUScGfIJZbIr2dlUaH05FjrMmxruY1C9rgDharEy+XA25sUumKoMdCzE2shG7cDnCDpmPWxXb278Q==
+ b=nuh5/vxATDlt514uLlDcEBF73Vttnqq8tp9+I2pp2pq4BuSG3zd8jvWFPF+kQOgLWF95I9EmtIaqDGEiUzBYad7fHzrxBaCTX1ee5FW2Bp60r5Srywx6r2EcNVCxyG6+QvaDmsTcFcWf+2eJ+H+ssiyj1acZ7qXmyo2Vj+dij/HyE8izxaQTWUXsNz4nKrKhxfMI7uzlBqSkAR5NGhbaIGbHQORPOlcknQdQ5C4x0l1HHpqG8XVCAJf8BVub0ijWBDZRhwzhTWx25fCOtN0Hhg3HJKCWHVU2u6eccy/zl+n1j1D8r+7gtOCXoZIAERebN0a7OrddCjkvPVT6aJQ6Ew==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EL8MhXh41iN9EyZl2AQPPTCSXD4sTCclynNCfPtb2Yw=;
- b=JCFw7CigLyWkXD8Lhsm1TnFzDh6fWF9kJPZYKMPqLiKeZheq+xFT63hHVV0+CviQboq2xUX/SMKmSsg6ukVKxdFzpZHTMK/nvUXIXPGKiGQPYz/e1wUChZe5Ruvj2LAmzuSla+rBfmIuA6tde7kyue8WfYsmAM0l642pa4kEtnMYei4zit8J1pAmXR94XQZhDFeS8vJw7WJemtmNrSdi4JMFfr4SFT1qvf4DQ8SNo7TQQj9/B9RPq3i3j7DvbzJstnmPQ8ghy6oYOZw6mC7RGbGRzalTKY7pfptiO60tONCepu0zKYu/ekOKxGZ0MzKOZqu+tD4ksLb5DoGzq6rSLg==
+ bh=Jwt1UxjoWc7Rg7yveFvfmlE+diEXxPenAePMRF8spy0=;
+ b=bacM0ZOYWdsXUETGmknYc33MGqpB8QRjN46KwDR2XraWH56QTLt6wq7vOsLWpmqbyc9j9u0ftpH0W9fxoDb9kdnypsk44iN8WRweFDJ7Y9o+YoONmnJd41IW1vOAJKwHSVTnunHAt2BAOSrDnrqMqHsB+ErKRsU8oPDjpjgzn17CDRU5FqxNSGxEvHrk1kiIlNy9OwzYG9PcMKB+/JlfmJ2rvLINFQqjl9bTbK1sLux2o4dYMIImmnVcR55Bbr99NHyXlHUSKz/VSc1XT58jX09lgoFEPtqrkCc4inkg4lPwQtCAyYXg6OLHT7I+xIe18N1aMTZwsmAXj5tlDwscqQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EL8MhXh41iN9EyZl2AQPPTCSXD4sTCclynNCfPtb2Yw=;
- b=1bDJys8+RmsfchQbSK4LMLQ5gZAI9ZvX4mJ+qzQYD5W6aJ6YBpJYdF4yXO4lkqxywHJJoScoRa0vT6FlDftapW8oDE9y3APqOiTR2OLy8lEEm/witY4O3R9c2ZqdLNIvAgMsGnF9KSqIswBghJ+Ky/dfM+GFaDSo0FDNIoTb3vFxqFAu58BoSJD7gNZBGTAUMW5XfpIuTO4yQ3DRDN3B+VhPmKXRmJWTjIkN6dbPutfEk8LIgL3wgfm7u7DrtxHrncu1GHcQLeyRZE1ABRNRpIC13QtB8D2zqd/wJKR9glYEi2pGEXA2R/y8uff1MM2LYcVNiLvRQGiCyzndb+3x4w==
+ bh=Jwt1UxjoWc7Rg7yveFvfmlE+diEXxPenAePMRF8spy0=;
+ b=QJ+isgRjKm3GIV4YX2g9JJ+nIdB3f9nrR99/kmpMlgJMngU/ardqw7JYJD6IKI3kxRBl7iJsqf5Oo0vTFxLCM2Dmj/2NEOTfe0W7Z2/AiOYBIIMuhG/GNF54ot6kkqX8jBzioAsTxZM566wos+ux51/PRJViHYeOsHUe0jQlWI0+QL9EV5OgPKoLHGyPGtsyuocivpE49DyZY1AfB8JNKqUt/pA0aEwJqc3kXhqEdOxJS7NdyDWFPUFeOLRWk6x93qNYJT/I3B38dyjxSvXJx8SMzYi+GEl0Vp2Oz2E9UN4BRWdkCR9V8EmvLSGZuqKhYVYlgcmlSUB6VYiKRtv/ZQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
- by AS1PR08MB7515.eurprd08.prod.outlook.com (2603:10a6:20b:482::17)
+ by PA4PR08MB6207.eurprd08.prod.outlook.com (2603:10a6:102:f2::13)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7807.27; Wed, 31 Jul
- 2024 09:21:45 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7828.21; Wed, 31 Jul
+ 2024 09:21:47 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%5]) with mapi id 15.20.7828.016; Wed, 31 Jul 2024
- 09:21:45 +0000
+ 09:21:47 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
@@ -68,9 +68,9 @@ To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de,
  Peter Robinson <pbrobinson@gmail.com>
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH v3 8/9] net/tcp: define a fallback value for rcv_wnd size
-Date: Wed, 31 Jul 2024 13:21:09 +0400
-Message-Id: <20240731092110.4027134-9-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v3 9/9] net/netcat: add netcat over tcp support
+Date: Wed, 31 Jul 2024 13:21:10 +0400
+Message-Id: <20240731092110.4027134-10-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240731092110.4027134-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20240731092110.4027134-1-mikhail.kshevetskiy@iopsys.eu>
@@ -81,80 +81,80 @@ X-ClientProxiedBy: FR4P281CA0225.DEUP281.PROD.OUTLOOK.COM
  (2603:10a6:150:7d::22)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|AS1PR08MB7515:EE_
-X-MS-Office365-Filtering-Correlation-Id: 075d165a-32ba-4eb0-46e0-08dcb142323d
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|PA4PR08MB6207:EE_
+X-MS-Office365-Filtering-Correlation-Id: b67ccf60-24fe-4a38-f273-08dcb1423374
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|1800799024|52116014|366016|921020|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?SL0bFiFGpTI5CmwI3Pi/TvNLOdMLJ5C6IOdXiw/ILjoZoVQhZ1bemBspLbMn?=
- =?us-ascii?Q?i3b5DYK5QWVehfjIJWh/hR38DXPm7z3ybR1CAli7expqDEQLPSNu3LP6q3ww?=
- =?us-ascii?Q?XEY694kF8JIGqP3iI/zaVOTOqZEx7PjoUozDxCxNcGX/QhFUzgNF5pPuFUGv?=
- =?us-ascii?Q?ULLCAa0VlbThXJOIt8E7SlkBHwnOhZOhCIjw9ox2VC+YFaVkMyp7Ben1Vh3F?=
- =?us-ascii?Q?eApmDWyOSyg4m7bAyYxdplHm4r5SMN/5grv34m+GNiJ3sfL/5WN9IUSvcz1c?=
- =?us-ascii?Q?d1vlibE/FsuZYERilNqceip2uZPIErqUd2enMDsvg4JbrQdldP5AzwI66BI5?=
- =?us-ascii?Q?7KgeJdesZUfQZauUR/lhbT9FHYpT30sKW4kA5SFfTtS6OhN2jxNmm8k83sme?=
- =?us-ascii?Q?jbsA8VJCcDSQ3hLSyt1+Fzc+v72FeFob03dNfdDFrzZg7TC1CswlkaGOo1C1?=
- =?us-ascii?Q?fVOZSzfHEB9Y4T87EBH1AU6aziiyCMHJUkAD9sDaZQ/udmW7wywQ0X9O/IjA?=
- =?us-ascii?Q?XD3a0AVfwTdSoe6rjRfzxzjRr1H171SmT6QpD/W9lAMo7BEIguvVsMXFBKXl?=
- =?us-ascii?Q?UvkaMuciRyT72RuYwhHLPpJl0T+T8LGxEyEER5W4CwIOCN+id7xyFAJdIWIW?=
- =?us-ascii?Q?xqgA6aSXofx2RFPf1C1J2FYEJJa8F3qzORteLB4/25viI9BAB7+1SR0jWHln?=
- =?us-ascii?Q?K5Qy/cuSy9OSOB5d3doTBiLe26dBRRT86mnKGKXGvganQkDeDgo8Nv10SQtI?=
- =?us-ascii?Q?UxvMNFxIlqEji7Smyei614Dg/TVlPVFIpZwu4FJ7xp7F6PPbOfigjUCWmF7c?=
- =?us-ascii?Q?2NZoVV0IQMKMriSZyQHl7IB7soP01ETY5gH23uWl0EsxypBLOXJMTK12QB/8?=
- =?us-ascii?Q?ZJiig3tDNIOb2WRSw7k0tuXtf5150suQ5e7/2Gi4MIY5lTv2gx+D48zmg4TS?=
- =?us-ascii?Q?YK4KR0w1HhSVIS/o4N/FnakYjyHSu71Y951JBHnS47w0lgTRIow8un6maVnL?=
- =?us-ascii?Q?7qppZnX9c61s9Or5GMA2j5psjxUfOg69Z5cXIrW9EAILAHa3BsFSsHZ0B2MO?=
- =?us-ascii?Q?sggraS3HWSA4TPYNn5wjSurvZkqg4o30//XqS5XgObTeQB7u/kYezmtpnmdI?=
- =?us-ascii?Q?c7U486yx94Ob/5W5z8bKrVs5bif9ccJY3RFLIfBiF4pMAkDiRHUAvY8NI6XP?=
- =?us-ascii?Q?1Yo3aQAzze4md9wPF1I3hhukIqAVSgrie1TAcXSiJ8XaOZOhhK7LJgHrV/Ga?=
- =?us-ascii?Q?SqQFTIt1MGBCZHttjVGmMcsV9DAOsWxFNSYckdu/LoFl957lwoDjAZ5XNMVB?=
- =?us-ascii?Q?VNQRhEQuVRWq9rJSV8hzPKknqjvD5eqfvdKjlU0X+geQ8CUCcVnPw7Nyudcv?=
- =?us-ascii?Q?Qu7q/PHsjYfsXmCVBOyQ6c6kOhsbKbsWp5J4iKtC5WX+cSO09RWEmFGFhpkj?=
- =?us-ascii?Q?x0mnzA5u+V8=3D?=
+ ARA:13230040|1800799024|52116014|7416014|376014|366016|921020|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?A55WJrjkxWUgXxfmVNUFH8+b6F0zqPPmWMujmg9ZeWRz9SzJhuUn3M4us1bO?=
+ =?us-ascii?Q?6uaoI8n9hIfx4M+3wR4A90bt50V/DyLYo5hoD977pGHDvxN0cb2n27759cR+?=
+ =?us-ascii?Q?ERAZQjnTuWYMs/OMYGfQ03pawqq6cdcCZh8Z6u+cs6+xCBG+6LyEhFAtDXl6?=
+ =?us-ascii?Q?F2gfR0lwzUjMkr0Dwsj/MlwrZqvP7P5TDh2adtQNB0E2OwI+hN3coJT0GDyY?=
+ =?us-ascii?Q?4GIvZWFYiAi2unUlxAonL7rGGfs3HYmIDgHEj1nc+8gVyq9QcmH0EIXmIT5t?=
+ =?us-ascii?Q?cXQXndD781Q+12F/p8O8LEMnzWhYsVEuuinb7mT+GYxLC8FcphiUoY5xWjLS?=
+ =?us-ascii?Q?Y0/E5HFio2cIUcosBEFMlDVLU9JErRYcl1SHHoq/BHyWeUh/s9anq4qqgstA?=
+ =?us-ascii?Q?FIv+A415qFG0Ry2plINuCPAROsAiF8Lk17iHbnxGs6/M2835QTkwVkOCF5eT?=
+ =?us-ascii?Q?CVTm1vxeemH3AgqaBjb7w+MDs7nrkOiPQDcUAtSIkO71ZxRXkh/ogPfq9yTP?=
+ =?us-ascii?Q?+WBAEAYGZ3G/U+TBLxm3mrA0myxAVXm10yT0rgaVOVK1nxB1qJh1NjV2dsDt?=
+ =?us-ascii?Q?v3FiISD4GobkaMB0GLzEmtgVhAJNdWZTCKhWgBmp/uwOmjCWFnVMYP3wWdTL?=
+ =?us-ascii?Q?qAUIL0Y1WLVrXJBvOy+4phtGAtO0v2VtJwqqRnIwB8tTSpBy+wmG1HlTysCB?=
+ =?us-ascii?Q?jb8xjCQjX1JvLpJ7LcuJdCbZb6Sbf/QDbU68eUio/sqVLZseU/imRMS2TIZ1?=
+ =?us-ascii?Q?p0H51cQgWvLfJkJKTJ4dzbDSTSDNR0/VkDVbCXGHenDhSXgvD5VjedYpovq4?=
+ =?us-ascii?Q?VRUAr/oNlVPtGVd14MfSWQFL9PxMb3PhB9okml767tHD1eSvFM3ciamV2vkK?=
+ =?us-ascii?Q?z2BfSeHC47cyNQC3L1/lVVfMQx48wNfAZeDEbkWIw2taNz5l6JMZK8mFXVLi?=
+ =?us-ascii?Q?SezMEWCVf8DIsuzibAMj1917KOzBCp2jqqxvUJA6p/B/ZK9CYbll4zwbr7fX?=
+ =?us-ascii?Q?uKhPgA/G5Gt6za41EW6pIsuCMf4quhW1wv8FzruJ1kuZTNJXSKEp1/o+jmpQ?=
+ =?us-ascii?Q?y7krI3eG0KUyITCIxKqs4cGivDXz4pRcaEM8q12BFwuTyR/o01Wq6YCz3gwu?=
+ =?us-ascii?Q?hJ1iDoINb9ryfXHI0bsY8O1tN1UTn9WvezMjXmGF45LTy16S1GZMWVO/wrWi?=
+ =?us-ascii?Q?GvF9apeTsW/9uZUz5Ks5HaiHZG2pVlOsXTwLtNus23c+bjDFXQNy+leqxh7T?=
+ =?us-ascii?Q?PNz5ykRg+hoilX8WAeW+AA+ayxvGt6iO5t+76BE3wKX5VRplkiJTI2tfUh3k?=
+ =?us-ascii?Q?mOMdQbHrTNS3VlsudcuzoMFIyTFG/oyj8A3moeir3wPTMGwOkc8oAstLS3Fd?=
+ =?us-ascii?Q?0Cz/DyhBp7Yq7ELe0zu0c1IE5qAF6+0tr5N1TIlhcBGppSP+6p5IY2bcqD77?=
+ =?us-ascii?Q?IDq+d2QSFWE=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(1800799024)(52116014)(366016)(921020)(38350700014);
+ SFS:(13230040)(1800799024)(52116014)(7416014)(376014)(366016)(921020)(38350700014);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?/J9md8i3zp6HnDqQDtB0RtGrW8cLLcb2Ndj4ydf5bLP4zzN53FGFpDQawwpW?=
- =?us-ascii?Q?mcUQG6OkFR2zoCYDESRVDxJ34uTz4YDtSwze4YCMmsPn2nK3/aalBPqgaCfc?=
- =?us-ascii?Q?Pi7baM8lSL5rlp5Ga2da8TcFfLECXmk+HMRhLRp9n/UaL9Tk7FNFw+1aNv2A?=
- =?us-ascii?Q?Nf57T/ErkuWrnkZDZnvde2VmRkPODlPgjRSTMIpf5XEJw9sFRkMMNqU+dfll?=
- =?us-ascii?Q?DoTYZ0kvKIE/qhCmXSkDWGaCl8zpWCPONp2IKh9PhtCPfXWJOGVQB7L9gcyT?=
- =?us-ascii?Q?zUbLRtYd9sT0Hlm91B7Ykd5gEP+G5tcebJulPfCoVM2iUZHhGZ0PrYdfuCDG?=
- =?us-ascii?Q?LY4dXJWYWwlHnXNbLalLPipvOa7NYm2zYiegIKuEGAw1ZKRdO3pUlpsJ6t+g?=
- =?us-ascii?Q?hmLSZWnH221JAHbZhXDE2xGEYq8tl3tbtJysaGvolBOsTj709SVhiJ+HbKIG?=
- =?us-ascii?Q?Q8IMqECVOg81HXyw+pINEzt7Irf9JFjJp/WHLRv3p+ZLFFuCNd4AqAKlZms8?=
- =?us-ascii?Q?LGU47h+uipcBcb+VWLoQ5Rf0iE6eMGYTfc2A+1FS6aJDzsl2qkHi/Ud1M6Ak?=
- =?us-ascii?Q?ES9lLz2aHwhE8HJ2uA1TzvuwtPprWtMF6WLEZMwgfd8W1QozOfZU5DmJfAzC?=
- =?us-ascii?Q?nz4QT0fy6OpS0Li4BeC95LFS1WvjFneuIUW7PLzgLv3c4zbTTCm8YNV1HYjN?=
- =?us-ascii?Q?r85J40XUHSTVETPsh2ptN01MNQkalGjFDYViSvvZtku+LVukrR48Otk+vih/?=
- =?us-ascii?Q?7HLkR0vXJyjyw2MC4Ua3NvqPz+uyE38d2nKXdkdYTWNk8NN35tMgsmi5wurn?=
- =?us-ascii?Q?6MiufulwQGuYs1mdh6HEgf2l/+8YTiBOH9n2G/lh6gSOIYb4JBbaqpd+YgIr?=
- =?us-ascii?Q?pV6SIMgfYnE0/u+y7r269MIK2K5chHQPa31ukH1KgqN2Hf/YFI8ROrV0cgyz?=
- =?us-ascii?Q?02p6fKmR1sGjEpPUizVNj1+VrjlVBZcP3Bd80U50YOkr8hp90K9d8WzfPII2?=
- =?us-ascii?Q?M5SJ7ZOK2WIYXG4gCuGzcxUjaQZSgoCUaIA5SIrO21Bs8nMvfgo8UX558pTA?=
- =?us-ascii?Q?TS89EXQhn43xK4m9u9CRuvILT5870vvq7DpbCtvM6uwqLOhZRPXrl4N5jN7q?=
- =?us-ascii?Q?8rEwAJKzGQ8FdhpKXI6LiDigRIAKm2Fz86TKbjNW0WywAGn105ZxhbpX2YCT?=
- =?us-ascii?Q?3VcCIOXssrCW/hEAIPmwlleCNKarSKm2wgQzRXjoNZCz55VhfCj6rhk84En/?=
- =?us-ascii?Q?HfMmRe51LgpJK2Y64H9dcfi3Il8KEVIAlAx5PT6nad6e5BEP6PuQBjTddfBP?=
- =?us-ascii?Q?R7cYJSIfYfP8jN30ZQi5n/DNBg9FzjTaMi1B5ok50jXh2qV6ZnjkrjJs9eY/?=
- =?us-ascii?Q?VYQ5i2pdh9E2pQ66JhSoau5IVq1lOSviOFJ8ZwTpc90hbPEG2iXY1RZaC8M3?=
- =?us-ascii?Q?HlZWfYZRD6h5ibI54MPT/CEsUo8gVvP287NW+bcyG1ThHpNvudg6QMlhEfMB?=
- =?us-ascii?Q?IWLtZDKlOT/uFdSic4gKO6xKx09ygJSdXVVuJU2yYE3NBbqFOOUIIfgkkrCP?=
- =?us-ascii?Q?dyB/SwmQpral65svZ5H0Gq31GOlY/7m5t6VIJ2j40hY/2fYqEfuuxUP7LHal?=
- =?us-ascii?Q?Juaxn0T+OBkDW0EMHZMVjUg=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?51Yb+71tsrQaBM/bAUhbMkDJbsQLdAkZ2QETdZefY4KMJ/gxob9cUAAvyY7b?=
+ =?us-ascii?Q?npXrl0qwUntf6tUS1PSpXaryUvGbygMGCO+wntC0c+otkeaZxZol03AmelEj?=
+ =?us-ascii?Q?xX2reIFHJXD2Myu0N6RZ3yAvIRr5vdegWMjqR2knGKqy6WGxy217mSy0QESd?=
+ =?us-ascii?Q?p18/y0cS1csOEzdw317uyNJU2NI2GzHGcuorCjF9qWtP1wGoR8+5GtvWkDpU?=
+ =?us-ascii?Q?+1ABeyE3wPFMuIAYRkrdThovjCKz8Df6iaFgBgbzi5I7LYyjuxqeuhxbW/SH?=
+ =?us-ascii?Q?OQMGNwwGSxw4Jos2fHK0mY1fcXLC2gXI5hfy04l3qUqNTDTbNINdAC3n4h1+?=
+ =?us-ascii?Q?ZXcehGCbD1ptTHEbF/C+qc5NvgtqNOLq9dzCwkhEJ39j24gtFTklOHyudjYv?=
+ =?us-ascii?Q?DnZq9619w1hF/k+0SgWQp2mz8CbHmFFBIZatRG6i+Cx/3wOfvb/IgdWCdbCV?=
+ =?us-ascii?Q?d3h7hohrgYj4zbjLDP3hMxo8C1WM+qUXORdh5P9HSRAT9l2PMVjwz7NvSwFq?=
+ =?us-ascii?Q?lKMUzHrN5wVWSHki2KH3iXHgGObLshsyiIAmhiTTSMacgxxRV9Cijv1nvE6J?=
+ =?us-ascii?Q?DmSTTuxweeOVOPFSMdxPpputG/j6CZIH17MR8ko6x7eGippys1hcB/ZXjvvf?=
+ =?us-ascii?Q?wu3wYAxzsaDuPjO16i28hiNKNlRz2QggEodSx8O2dJkgKgkYzIbkgjmaBuL2?=
+ =?us-ascii?Q?RUxjKvD2RedMDSvZt/EekCs4Nbxl69tXg8jyM4rXi/BUYi1Z/z/qkHWKk7eC?=
+ =?us-ascii?Q?fP64aXEIsTt3Oz1PIbc1zquAOT9meoIMcY1QvxjbKjaULTj7c2coR8Tfgm9e?=
+ =?us-ascii?Q?533ZiJYY9/Hqg5z6qTbogP3OlAT3yEeEF9Mj/tAaUlsX9JYFVYrKBngGdups?=
+ =?us-ascii?Q?pBqhVV3/CSEjXmb14qMhSVe5WbIennPkN27gLqFFU/JfTid9VFJEc++XEISI?=
+ =?us-ascii?Q?CuUSxADQd6tOu4hW9eYiGqssqY8kpkyh/1eIIVphS+dxPRYvUalhU+BMQRT1?=
+ =?us-ascii?Q?f4+NSy+s/0SUJe63sAux5WJxhQVEkg4zbzW9sH6YnTlg4+EgSMjblkyPKHnt?=
+ =?us-ascii?Q?L/5dsLwkL3z4gG2UFlyOcTQucUlDftJ52yfHyPpVSi0JsRtaZOOpc4C4zqwl?=
+ =?us-ascii?Q?g3XdxPHvk2gbEpcULQgGG3qVJ99cE8BGSOYZ1zwfHqWtfjxIr5LKL5tz2xmF?=
+ =?us-ascii?Q?tclqT8AB3VS+SgXXR08S8q1AxqmOOIsudx29wcgorpnlMVaFmae3oxBrPKOK?=
+ =?us-ascii?Q?DuKEYcNcUVKJF1WXWdvoMQuor3GpbbZJAEC8gfnINHjbMUU1cjX1JdR74+Eg?=
+ =?us-ascii?Q?g3chYlLrnfs0Ar80/jbCMU1KU6D+eT8JA4NSdQncuPw45xNEbeF75MqGbEBd?=
+ =?us-ascii?Q?Aaty/4ZregdE/eXszWq2Pp2yX6zIf3y9EavXT6Z6bLXPt3mVmLCSsxdIkmQT?=
+ =?us-ascii?Q?gpYbRxyckTc9t8eX2AlNq7zn4EfvZbaD6wu/eKqZE1cVXyRQUhr+EqYdxCUL?=
+ =?us-ascii?Q?9wLIyRKQjYiWOcC/E60bX5cG7CR5wksQDty5L8r9r4MQ/TfTXrKGjYl83QK7?=
+ =?us-ascii?Q?yqntbMpVqKqRVBlzirSY3tR5wetQVXxRQDojCYgSH5WfOWQ1ysEITUEbUSsZ?=
+ =?us-ascii?Q?Ma5GjS/4uZQ5fdyhJtcscEw=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 075d165a-32ba-4eb0-46e0-08dcb142323d
+X-MS-Exchange-CrossTenant-Network-Message-Id: b67ccf60-24fe-4a38-f273-08dcb1423374
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jul 2024 09:21:45.0196 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jul 2024 09:21:47.0559 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: YOz66++2fVIjv3n9Vh3TopqdxMHYatXvypb4meYCeA1EPlHUqqp5ThB/2vaQ5ueQr5iRdMtAFMXM7mr5jlV5zEWkCL6X2C+ZgoK6J9ui2m4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS1PR08MB7515
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6xLjrlBS9w0LBjQ3erEqR3LteVjg9hLBwlOaAEiT2ilbSEKKU5WZ0Dus5GqBaEybiZursS54MY8BVPzGfbUInxcunfi8A4DNICKHE1t8dKI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR08MB6207
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -171,32 +171,356 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some driver implements it's own network packet pool, so PKTBUFSRX is zero.
-This results in zero-size TCP receive window, so data transfer doesn't
-work. Avod it by setting a reasonable fallback value.
+This patch adds downloading/uploading of data with netcat.
+Client/server mode both supported.
 
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 ---
- net/tcp.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ cmd/Kconfig          |   7 ++
+ cmd/net.c            |  34 +++++++--
+ include/net.h        |   2 +-
+ include/net/netcat.h |  20 ++++++
+ net/Makefile         |   1 +
+ net/net.c            |   9 +++
+ net/netcat.c         | 159 +++++++++++++++++++++++++++++++++++++++++++
+ 7 files changed, 226 insertions(+), 6 deletions(-)
+ create mode 100644 include/net/netcat.h
+ create mode 100644 net/netcat.c
 
-diff --git a/net/tcp.c b/net/tcp.c
-index 7014d5b4f43..f0889d72d44 100644
---- a/net/tcp.c
-+++ b/net/tcp.c
-@@ -28,7 +28,11 @@
- #define TCP_SEND_TIMEOUT	2000UL
- #define TCP_RX_INACTIVE_TIMEOUT	30000UL
- #define TCP_START_SEQ_INC	2153	/* just large prime number */
--#define TCP_RCV_WND_SIZE	(PKTBUFSRX * TCP_MSS)
-+#if PKTBUFSRX != 0
-+  #define TCP_RCV_WND_SIZE	(PKTBUFSRX * TCP_MSS)
-+#else
-+  #define TCP_RCV_WND_SIZE	(4 * TCP_MSS)
-+#endif
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 978f44eda42..abcd003f7f1 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2007,6 +2007,13 @@ config CMD_WGET
+ 	  wget is a simple command to download kernel, or other files,
+ 	  from a http server over TCP.
  
- #define TCP_PACKET_OK		0
- #define TCP_PACKET_DROP		1
++config CMD_NETCAT
++	bool "netcat"
++	select PROT_TCP
++	help
++	  netcat is a simple command to load/store kernel, or other files,
++	  using netcat like manner over TCP.
++
+ config CMD_MII
+ 	bool "mii"
+ 	imply CMD_MDIO
+diff --git a/cmd/net.c b/cmd/net.c
+index 53ce2bc5d0c..6ac81415f8a 100644
+--- a/cmd/net.c
++++ b/cmd/net.c
+@@ -206,6 +206,28 @@ U_BOOT_CMD(
+ );
+ #endif
+ 
++#if defined(CONFIG_CMD_NETCAT)
++static int do_netcat(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
++{
++	if (argc < 2)
++		return 1;
++
++	if (strcmp(argv[1], "load") == 0)
++		return netboot_common(NETCAT_LOAD, cmdtp, argc - 1, argv + 1);
++	else if (strcmp(argv[1], "store") == 0)
++		return netboot_common(NETCAT_STORE, cmdtp, argc - 1, argv + 1);
++	else
++		return 1;
++}
++
++U_BOOT_CMD(
++	netcat,   5,      1,      do_netcat,
++	"load/store data via tcp netcat utility",
++	"load [loadAddress] [[hostIPaddr:]port]\n"
++	"store Address Size [[hostIPaddr:]port]\n"
++);
++#endif
++
+ static void netboot_update_env(void)
+ {
+ 	char tmp[46];
+@@ -323,16 +345,17 @@ static int parse_args(enum proto_t proto, int argc, char *const argv[])
+ 
+ 	switch (argc) {
+ 	case 1:
+-		if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT)
++		if ((IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT) ||
++		    (IS_ENABLED(CONFIG_CMD_NETCAT) && proto == NETCAT_STORE))
+ 			return 1;
+-
+ 		/* refresh bootfile name from env */
+ 		copy_filename(net_boot_file_name, env_get("bootfile"),
+ 			      sizeof(net_boot_file_name));
+ 		break;
+ 
+ 	case 2:
+-		if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT)
++		if ((IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT) ||
++		    (IS_ENABLED(CONFIG_CMD_NETCAT) && proto == NETCAT_STORE))
+ 			return 1;
+ 		/*
+ 		 * Only one arg - accept two forms:
+@@ -354,7 +377,8 @@ static int parse_args(enum proto_t proto, int argc, char *const argv[])
+ 		break;
+ 
+ 	case 3:
+-		if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT) {
++		if ((IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT) ||
++		    (IS_ENABLED(CONFIG_CMD_NETCAT) && proto == NETCAT_STORE)) {
+ 			if (parse_addr_size(argv))
+ 				return 1;
+ 		} else {
+@@ -365,7 +389,7 @@ static int parse_args(enum proto_t proto, int argc, char *const argv[])
+ 		}
+ 		break;
+ 
+-#ifdef CONFIG_CMD_TFTPPUT
++#if defined(CONFIG_CMD_TFTPPUT) || defined(CONFIG_CMD_NETCAT)
+ 	case 4:
+ 		if (parse_addr_size(argv))
+ 			return 1;
+diff --git a/include/net.h b/include/net.h
+index b0ce13e0a9d..5ec826209f0 100644
+--- a/include/net.h
++++ b/include/net.h
+@@ -515,7 +515,7 @@ extern int		net_restart_wrap;	/* Tried all network devices */
+ enum proto_t {
+ 	BOOTP, RARP, ARP, TFTPGET, DHCP, DHCP6, PING, PING6, DNS, NFS, CDP,
+ 	NETCONS, SNTP, TFTPSRV, TFTPPUT, LINKLOCAL, FASTBOOT_UDP, FASTBOOT_TCP,
+-	WOL, UDP, NCSI, WGET, RS
++	WOL, UDP, NCSI, WGET, NETCAT_LOAD, NETCAT_STORE, RS
+ };
+ 
+ extern char	net_boot_file_name[1024];/* Boot File name */
+diff --git a/include/net/netcat.h b/include/net/netcat.h
+new file mode 100644
+index 00000000000..09470e7f0ce
+--- /dev/null
++++ b/include/net/netcat.h
+@@ -0,0 +1,20 @@
++/* SPDX-License-Identifier: BSD-2-Clause
++ *
++ * netcat include file
++ * Copyright (C) 2024 IOPSYS Software Solutions AB
++ * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
++ */
++#ifndef __NET_NETCAT_TCP_H__
++#define __NET_NETCAT_TCP_H__
++
++/**
++ * netcat_load_start() - begin netcat in loading mode
++ */
++void netcat_load_start(void);
++
++/**
++ * netcat_store_start() - begin netcat in data storing mode
++ */
++void netcat_store_start(void);
++
++#endif /* __NET_NETCAT_TCP_H__ */
+diff --git a/net/Makefile b/net/Makefile
+index 64ab7ec740a..dac7b4859fb 100644
+--- a/net/Makefile
++++ b/net/Makefile
+@@ -33,6 +33,7 @@ obj-$(CONFIG_CMD_WOL)  += wol.o
+ obj-$(CONFIG_PROT_UDP) += udp.o
+ obj-$(CONFIG_PROT_TCP) += tcp.o
+ obj-$(CONFIG_CMD_WGET) += wget.o
++obj-$(CONFIG_CMD_NETCAT) += netcat.o
+ 
+ # Disable this warning as it is triggered by:
+ # sprintf(buf, index ? "foo%d" : "foo", index)
+diff --git a/net/net.c b/net/net.c
+index 86182cc504e..0e05a8f2336 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -108,6 +108,7 @@
+ #include <test/test.h>
+ #include <net/tcp.h>
+ #include <net/wget.h>
++#include <net/netcat.h>
+ #include "arp.h"
+ #include "bootp.h"
+ #include "cdp.h"
+@@ -564,6 +565,14 @@ restart:
+ 			wget_start();
+ 			break;
+ #endif
++#if defined(CONFIG_CMD_NETCAT)
++		case NETCAT_LOAD:
++			netcat_load_start();
++			break;
++		case NETCAT_STORE:
++			netcat_store_start();
++			break;
++#endif
+ #if defined(CONFIG_CMD_CDP)
+ 		case CDP:
+ 			cdp_start();
+diff --git a/net/netcat.c b/net/netcat.c
+new file mode 100644
+index 00000000000..ea225c68c87
+--- /dev/null
++++ b/net/netcat.c
+@@ -0,0 +1,159 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * netcat support driver
++ * Copyright (C) 2024 IOPSYS Software Solutions AB
++ * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
++ */
++
++#include <command.h>
++#include <display_options.h>
++#include <env.h>
++#include <image.h>
++#include <mapmem.h>
++#include <net.h>
++#include <net/tcp.h>
++#include <net/netcat.h>
++
++#define HASHES_PER_LINE		65
++
++static struct in_addr		server_ip;
++static u16			server_port;
++static u16			local_port;
++static int			listen;
++static int			reading;
++static unsigned int		packets;
++static enum net_loop_state	netcat_loop_state;
++
++static void show_block_marker(void)
++{
++	if ((packets % 10) == 0)
++		putc('#');
++	else if (((packets + 1) % (10 * HASHES_PER_LINE)) == 0)
++		puts("\n");
++}
++
++static void tcp_stream_on_closed(struct tcp_stream *tcp)
++{
++	if (tcp->status != TCP_ERR_OK)
++		netcat_loop_state = NETLOOP_FAIL;
++
++	if (netcat_loop_state != NETLOOP_SUCCESS)
++		printf("\nnetcat: Transfer Fail, TCP status - %d\n", tcp->status);
++	else
++		printf("\nPackets %s %d, Transfer Successful\n",
++		       reading ? "received" : "transmitted", packets);
++	net_set_state(netcat_loop_state);
++}
++
++static void tcp_stream_on_rcv_nxt_update(struct tcp_stream *tcp, u32 rx_bytes)
++{
++	net_boot_file_size = rx_bytes;
++	show_block_marker();
++}
++
++static void tcp_stream_on_snd_una_update(struct tcp_stream *tcp, u32 tx_bytes)
++{
++	show_block_marker();
++	if (tx_bytes == image_save_size)
++		tcp_stream_close(tcp);
++}
++
++static void tcp_stream_on_established(struct tcp_stream *tcp)
++{
++	netcat_loop_state = NETLOOP_SUCCESS;
++}
++
++static u32 tcp_stream_rx(struct tcp_stream *tcp, u32 rx_offs, void *buf, u32 len)
++{
++	void *ptr;
++
++	packets++;
++	ptr = map_sysmem(image_load_addr + rx_offs, len);
++	memcpy(ptr, buf, len);
++	unmap_sysmem(ptr);
++	return len;
++}
++
++static u32 tcp_stream_tx(struct tcp_stream *tcp, u32 tx_offs, void *buf, u32 maxlen)
++{
++	void *ptr;
++
++	if (tx_offs + maxlen > image_save_size)
++		maxlen = image_save_size - tx_offs;
++	if (maxlen == 0)
++		return 0;
++
++	packets++;
++	ptr = map_sysmem(image_save_addr + tx_offs, maxlen);
++	memcpy(buf, ptr, maxlen);
++	unmap_sysmem(ptr);
++	return maxlen;
++}
++
++static int tcp_stream_on_create(struct tcp_stream *tcp)
++{
++	if (listen) {
++		if (tcp->lport != local_port)
++			return 0;
++	} else {
++		if ((tcp->rhost.s_addr != server_ip.s_addr) ||
++		    (tcp->rport != server_port))
++			return 0;
++	}
++
++	netcat_loop_state = NETLOOP_FAIL;
++	net_boot_file_size = 0;
++	packets = 0;
++
++	tcp->on_closed = tcp_stream_on_closed;
++	tcp->on_established = tcp_stream_on_established;
++	if (reading) {
++		tcp->on_rcv_nxt_update = tcp_stream_on_rcv_nxt_update;
++		tcp->rx = tcp_stream_rx;
++	} else {
++		tcp->on_snd_una_update = tcp_stream_on_snd_una_update;
++		tcp->tx = tcp_stream_tx;
++	}
++	return 1;
++}
++
++static void netcat_start(void)
++{
++	struct tcp_stream *tcp;
++
++	memset(net_server_ethaddr, 0, 6);
++	tcp_stream_set_on_create_handler(tcp_stream_on_create);
++
++	if (strchr(net_boot_file_name, ':') == NULL) {
++		listen = 1;
++		printf("Listening on port %s...\n", net_boot_file_name);
++
++		local_port = dectoul(net_boot_file_name, NULL);
++	} else {
++		listen = 0;
++		printf("Connecting to %s...\n", net_boot_file_name);
++
++		server_ip = string_to_ip(net_boot_file_name);
++		server_port = dectoul(strchr(net_boot_file_name, ':') + 1, NULL);
++
++		tcp = tcp_stream_connect(server_ip, server_port);
++		if (tcp == NULL) {
++			printf("No free tcp streams\n");
++			net_set_state(NETLOOP_FAIL);
++			return;
++		}
++		tcp_stream_put(tcp);
++	}
++}
++
++void netcat_load_start(void)
++{
++	reading = 1;
++	return netcat_start();
++}
++
++void netcat_store_start(void)
++{
++	reading = 0;
++	return netcat_start();
++}
 -- 
 2.39.2
 
