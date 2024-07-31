@@ -4,66 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42CB8C3DA7F
-	for <u-boot@archiver.kernel.org>; Tue, 30 Jul 2024 23:05:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8E0AC3DA49
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 01:41:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 735D888747;
-	Wed, 31 Jul 2024 01:05:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A02B08841E;
+	Wed, 31 Jul 2024 03:41:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1722380750;
-	bh=Y7kTvAzxRNzR817Oi9qX7+ieYm+UhAkmCNRpO3XHQD8=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=fLPkbK1JLjM/aNF9NUTXrXZ86EykLYdK6iRv+TislPwPKftyXwdgzY22kV+ZByTBC
-	 NJ5Zg4+DcifoWm8eM6es/Y6YZq3TUcrSXHIcnece8XCoEckS4i8qZw78yKsHyYIHXS
-	 4OwF3kqJXnhfTjKET0G5m4fSjmu43OJU9TRYuy+AUtrs1nEADbYWrD7UpOEfYYS2C4
-	 1e3cVSHDxlvV6SltnpGqDwWTDAgOG5Gy0vbgea8cxAVxXeDVeATZmxFe2JmNO444My
-	 CJyLe8GIxKn5aeUBuvKGAfSm6MhKNLkxH9ryk39NOJ+1bkOyWXfhb78mw01gnUFqDn
-	 8+z5mzcos7VAw==
-Received: from crub (p54833c06.dip0.t-ipconnect.de [84.131.60.6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OWpAx6GF";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id EBC4A88780; Wed, 31 Jul 2024 03:41:27 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: agust@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 3937387FFB;
- Wed, 31 Jul 2024 01:05:48 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1722380748;
- bh=Y7kTvAzxRNzR817Oi9qX7+ieYm+UhAkmCNRpO3XHQD8=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=lYmDK6Uq84V7MfotyUld7kS0VDySMNYEsoxg3LuylN5CmHbzQpcZtOq5s3l7yy1kh
- RWELMjpJFDFvf6ecqK4/j5DitKEyFSh5FLo7dO9PLi0p4g2E4X7sxm/qc1lfmOnmcU
- Z5vWLcFHUNngZ9iq5hw7bxcrsIfkUuc04gWsLtL7EtX4og7wVE+RU6zArE+MDO+3NW
- epWsiPM9U+LPqbNlraUzOQHjHcgwhbqw++YuWVfkCuWaj4sHEZqT4GnJX1WAaPhism
- l4GFVj3TeNPgi7z/go6SgW8g1AzDscD/eTOQVEW3111pREhgAZZFZUeU/twPCppGqd
- fxEckxFXOTubA==
-Date: Wed, 31 Jul 2024 01:05:25 +0200
-From: Anatolij Gustschin <agust@denx.de>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Angelo
- Dureghello <angelo@kernel-space.org>, Anton Bambura
- <jenneron@protonmail.com>, Bin Meng <bmeng@tinylab.org>, Caleb Connolly
- <caleb.connolly@linaro.org>, Chanho Park <chanho61.park@samsung.com>, Dan
- Carpenter <dan.carpenter@linaro.org>, Devarsh Thakkar <devarsht@ti.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Jagan Teki <jagan@amarulasolutions.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Nikhil M Jain <n-jain1@ti.com>, Ondrej
- Jirman <megi@xff.cz>, Peter Robinson <pbrobinson@gmail.com>, Randolph
- <randolph@andestech.com>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>,
- Stefan Roese <sr@denx.de>
-Subject: Re: [PATCH v3 0/5] video: Improve syncing performance with cyclic
-Message-ID: <20240731010407.0ff6a929@crub>
-In-Reply-To: <20240704074859.2956745-1-sjg@chromium.org>
-References: <20240704074859.2956745-1-sjg@chromium.org>
+ by phobos.denx.de (Postfix) with ESMTPS id F331F8841E
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 03:41:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-3db23a6085aso262986b6e.1
+ for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 18:41:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1722390084; x=1722994884; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2ZY5G9MyMOg92ThJj8l6v3QA1KQThVonzoJBFhxb0iM=;
+ b=OWpAx6GFswP/nUMYzdqZmj8WHQv5eAvpN5DGHGLHxReODjkrpWRiFdETuApqR09RNR
+ jwUBlXpGXScd5SLIT6YaFv754KyGiCWITipzC8RzVbUeViBXhf3AdYyEecBtYwApudm2
+ 52TYXWmmlpMxDmwxiF21A9GnT4BL/MSXFnyoc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722390084; x=1722994884;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2ZY5G9MyMOg92ThJj8l6v3QA1KQThVonzoJBFhxb0iM=;
+ b=inOUu0x97c5hogB4mcg5oBPhlAqeGc8rIhLeXvwRFELGwGbpP/jgCW4Zikpm4deEzX
+ HIxsJtGIfdCvM20pqz05s06jMh2Tj4s7h0IMLywOwZJXvbErRvMzhnSaMAAR3TY/CLAV
+ 1BiMwkpftGWjUnLEqheI4HKEFuKpWIFHQF22nIkEI5J+rhEeDj5Utz40cwxgQ4OGQr7x
+ Zhp0nLgcPyjtA7w67yh1HrsODogHKrEm3uFl1NILzfJAV6srLW3GBGnjYSLqRkJmoEcs
+ BZMeIDXE4UtYRvCAVse8B34rtwN/+vQ/DmyWkkNURlTYiV+vI7f9xmSA0zEqlk8ZCt32
+ U1Vg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVCvZWDgC6kUACSTeN3LgP7guCDxwFPNsoXpt3Tqyh/oL3SM/TTkURZxWmGmUl3OGJFJulG34TGRz4MSlpcqK2ExpPiJg==
+X-Gm-Message-State: AOJu0YzEUpr526x3F8R2akpyOB82QvxPsnoMPctl9QE2dkKjFuy6xBkp
+ O8fppGq2f3lD4e92tRlpwXjjDVr0mdCxOBV69ciHMoFaQ/5XNhqo3vOa3+4ZbbE=
+X-Google-Smtp-Source: AGHT+IH08Wa3mtBD+5Mu/XQnKzM1BozVuDSXy0Ga9U3cATsYOw86uktamfdhvlyWjnegsyzNqpmZQA==
+X-Received: by 2002:a05:6808:3021:b0:3db:169c:96de with SMTP id
+ 5614622812f47-3db42d37592mr1913171b6e.16.1722390083700; 
+ Tue, 30 Jul 2024 18:41:23 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-103-190.totalplay.net.
+ [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2653de269b1sm2533375fac.1.2024.07.30.18.41.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 Jul 2024 18:41:23 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Doug Zobel <douglas.zobel@climate.com>, Marek Vasut <marex@denx.de>, 
+ Christian Gmeiner <christian.gmeiner@gmail.com>, u-boot@lists.denx.de, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Simon Glass <sjg@chromium.org>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
+ Christian Marangi <ansuelsmth@gmail.com>
+In-Reply-To: <20240719091213.3757300-1-mikhail.kshevetskiy@iopsys.eu>
+References: <20240719091213.3757300-1-mikhail.kshevetskiy@iopsys.eu>
+Subject: Re: [PATCH v6 0/3] led: implement software blinking
+Message-Id: <172239008261.3831478.7216405283004244043.b4-ty@konsulko.com>
+Date: Tue, 30 Jul 2024 19:41:22 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,20 +95,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On Fri, 19 Jul 2024 13:12:10 +0400, Mikhail Kshevetskiy wrote:
 
-On Thu,  4 Jul 2024 08:48:54 +0100
-Simon Glass sjg@chromium.org wrote:
+> v2 changes:
+>  * Drop sw_blink_state structure, move its necessary fields to
+>    led_uc_plat structure.
+>  * Add cyclic_info pointer to led_uc_plat structure. This
+>    simplify code a lot.
+>  * Remove cyclic function search logic. Not needed anymore.
+>  * Fix blinking period. It was twice large.
+>  * Other cleanups.
+> 
+> [...]
 
-> Now that U-Boot has a background-processing feature, it is possible to
-> reduce the amount of 'foreground' syncing of the display. At present
-> this happens quite often.
+Applied to u-boot/master, thanks!
 
-This series breaks turris_1x_sdcard SPL build:
+-- 
+Tom
 
- https://source.denx.de/u-boot/custodians/u-boot-video/-/jobs/878470#L646
 
-Should we enable CONFIG_SPL_CYCLIC for this board to fix this?
-
---
-Anatolij
