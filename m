@@ -4,47 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F405C3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 10:14:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E15C5C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 10:17:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B65B286DBD;
-	Wed, 31 Jul 2024 12:14:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=arachsys.com
+	by phobos.denx.de (Postfix) with ESMTP id 48CAE88958;
+	Wed, 31 Jul 2024 12:17:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tnI0Bn0h";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D98A7889A6; Wed, 31 Jul 2024 12:14:38 +0200 (CEST)
-Received: from cdw.me.uk (cdw.me.uk [91.203.57.136])
- by phobos.denx.de (Postfix) with ESMTP id 0317C83989
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 12:14:36 +0200 (CEST)
+ id B741D8811C; Wed, 31 Jul 2024 12:16:59 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A985B88356
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 12:16:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=arachsys.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chris@arachsys.com
-Received: from [31.94.64.133] (helo=smtpclient.apple)
- by delta.arachsys.com with esmtpa (Exim 4.80)
- (envelope-from <chris@arachsys.com>)
- id 1sZ6Lh-0007Xh-MW; Wed, 31 Jul 2024 11:14:25 +0100
-Content-Type: text/plain;
-	charset=us-ascii;
-	delsp=yes;
-	format=flowed
-Mime-Version: 1.0 (Mac OS X Mail 14.0 \(3654.120.0.1.15\))
-Subject: Re: [PATCH RFC] gpio: Fix probing of gpio-hogs
-From: Chris Webb <chris@arachsys.com>
-In-Reply-To: <CAFLszThCz2NL+6svYMRD7qAHHNN8frWzrM4tyhDbuS77M3jUHg@mail.gmail.com>
-Date: Wed, 31 Jul 2024 11:14:34 +0100
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Marek Vasut <marex@denx.de>
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a7a8553db90so764494166b.2
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 03:16:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1722421017; x=1723025817; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=INmCd9tATTSC5oQHQ4+CdrpJ6/NZlOzSTzGPajpXgqk=;
+ b=tnI0Bn0hMv2Yc/MSFmJ/Xo9hEl5My4+hS3xyPyNJ1mq7JqwkfCQiEQg/e7XpwUpax8
+ Or0x0Q3f+Q80ZUv5+y1miT2icVZWpbVK0XHB3PCuiS0p1CqeJErQTLx/Rc8LmybyyaXU
+ lzy/7CyDRaWSXR9uyNUR/Xghg8jaxaOODLOLLNogjRWM/jw11FuZrDZav2Q//MmTz69l
+ 5+vKeeQMDxcB53MFYOm/nn+7EltuGErcUYWzzOFtaX8u6OBKgizUsdPtS8/DWeNo8OJC
+ sQfUFlUd1Yq+t/zQu4sz6jHGk+mFTMG6cHPaMoZTlglBR6pvtInyLlvu7ZdCL6uOfEm7
+ NQGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722421017; x=1723025817;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=INmCd9tATTSC5oQHQ4+CdrpJ6/NZlOzSTzGPajpXgqk=;
+ b=nQB4qzTv0L4z+C2jUju850Zdj+hnsNpOqELFqjgQgGMkKpiKwxFv2oAMCX8810mFyt
+ AMxckuNxJnIZviK0Os7tX+KQgLHxRkd7ChNJuFLAbwhc4CX5fk1h+HqA2fftjF8Gxsx2
+ 2HKlxM2Dk4Pj3hr+j7jBnX4OddK1QK2E8SjjtG0rAfqpGB46foxAk9EAmqRAOHk4qoWv
+ px+aFB7+9kSogvC4d+KMtxyFC8iK4q/5yfSvu0EMvl5bDJEXm+hPbfm69JoOFehYIdpE
+ Iz38SGUNrXzY019uCtBnqTlPF6YxTnqg9fs21wg6KbIYo0h90p4AtGOL//vpVxFccWn+
+ cxKg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW283JqTpRSSpkbbMfV708W2X6EqtaD1LrE7t4QQmaZkSDAXXFesXn7kUUWa/Fa52V+vJ9QfTmzZKjYzPtI04/akenqoA==
+X-Gm-Message-State: AOJu0YwK70uzTsKcbAj4JDvNE11dM9u5vY0E4VDqicjWWY5h31WFywYm
+ mclavyhhkGyc5TkEG8bWR7hkt/eYZvP/s4IKQvaHjJG69NjLNFhDJutzLFQoO3c=
+X-Google-Smtp-Source: AGHT+IHH9zNbXfRLzDoKoM8nj71Mbb826uThgwksjbgmep6ekWR3lFEB2JXFOdZelBcyFDKNANy0FA==
+X-Received: by 2002:a17:907:e93:b0:a7a:ab1a:2d64 with SMTP id
+ a640c23a62f3a-a7d4014bc9amr1010360266b.58.1722421017040; 
+ Wed, 31 Jul 2024 03:16:57 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:aa0d:be00::7424? ([2a02:8109:aa0d:be00::7424])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a7acadb9f55sm754647666b.221.2024.07.31.03.16.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 31 Jul 2024 03:16:56 -0700 (PDT)
+Message-ID: <23b45a9e-d2e6-40c9-beca-6de58c7f67e2@linaro.org>
+Date: Wed, 31 Jul 2024 12:16:55 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 02/11] lib: uuid: add UUID v5 support
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
+References: <20240719-b4-dynamic-uuid-v5-0-8a83de3fe3dc@linaro.org>
+ <20240719-b4-dynamic-uuid-v5-2-8a83de3fe3dc@linaro.org>
+ <CAC_iWjK1j0hG7jurTEPLKoYLPCL5JuUhRUoBwohUr=U93rb6dQ@mail.gmail.com>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAC_iWjK1j0hG7jurTEPLKoYLPCL5JuUhRUoBwohUr=U93rb6dQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <E1381CA1-72D5-42D5-BB22-2B9B458B29C7@arachsys.com>
-References: <0b24ac9c0f40ba2410529ee6e0ffd603c9453cff.1718275638.git.chris@arachsys.com>
- <CAFLszTiwfVg7o+Rhf10U2exgUA-vJ4V_A-2L75ZLpwJ8sW=9Kw@mail.gmail.com>
- <CB131E81-078E-43FF-BE67-90D7F48EDB2E@arachsys.com>
- <CAFLszTggwpCnhZ0xaPR2n=e+x+PDe-wP4WxnPE60BqyF1ms3UA@mail.gmail.com>
- <43228DC7-4184-4C63-9BBA-65F056ECC91F@arachsys.com>
- <CAFLszThCz2NL+6svYMRD7qAHHNN8frWzrM4tyhDbuS77M3jUHg@mail.gmail.com>
-To: Simon Glass <sjg@chromium.org>
-X-Mailer: Apple Mail (2.3654.120.0.1.15)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,42 +101,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
+>> +       /* Make little endian */
+>> +       tmp32 = (uint32_t *)&guid->b[0];
+>> +       *tmp32 = be32_to_cpu(*tmp32);
+>> +       tmp16 = (uint16_t *)&guid->b[4];
+>> +       *tmp16 = be16_to_cpu(*tmp16);
+>> +       tmp16 = (uint16_t *)&guid->b[6];
+>> +       *tmp16 = be16_to_cpu(*tmp16);
+> 
+> you need to explicitly convert those to LE, instead of relying to the
+> native cpu endianess here
 
-Simon Glass <sjg@chromium.org> wrote:
+The EFI spec iirc is not explicit on the binary format for GUIDs on big 
+endian systems (and currently doesn't support them at all??). Is LE 
+always correct??
+> 
+> cheers
+> /Ilias
+>> +}
+>> +
+>>   #if defined(CONFIG_RANDOM_UUID) || defined(CONFIG_CMD_UUID)
+>>   void gen_rand_uuid(unsigned char *uuid_bin)
+>>   {
+>>          u32 ptr[4];
+>> @@ -394,15 +444,9 @@ void gen_rand_uuid(unsigned char *uuid_bin)
+>>          /* Set all fields randomly */
+>>          for (i = 0; i < 4; i++)
+>>                  ptr[i] = rand();
+>>
+>> -       clrsetbits_be16(&uuid->time_hi_and_version,
+>> -                       UUID_VERSION_MASK,
+>> -                       UUID_VERSION << UUID_VERSION_SHIFT);
+>> -
+>> -       clrsetbits_8(&uuid->clock_seq_hi_and_reserved,
+>> -                    UUID_VARIANT_MASK,
+>> -                    UUID_VARIANT << UUID_VARIANT_SHIFT);
+>> +       configure_uuid(uuid, UUID_VERSION);
+>>
+>>          memcpy(uuid_bin, uuid, 16);
+>>   }
+>>
+>>
+>> --
+>> 2.45.2
+>>
 
->> Presumably it needs to apply to every mtk soc that uses
->> mtk_pinctrl_common_probe() as they'll all be affected by this problem.
->
-> Yes I suppose so.
-
-As well as the mediatek case (patch just sent), I thought I should look  
-through the other pinctrl drivers for other examples of this problem you  
-explained to me.
-
-Both starfive/pinctrl-starfive.c and mvebu/pinctrl-armada-37xx.c do the  
-same thing, calling their gpiochip_register as part of the driver probe  
-method. The pinctrl-armada-37xx.c driver also has a bind action:
-
-   static int armada_37xx_pinctrl_bind(struct udevice *dev)
-   {
-           /*
-            * Make sure that the pinctrl driver gets probed after binding
-            * as on A37XX the pinctrl driver is the one that is also
-            * registering the GPIO one during probe, so if its not probed
-            * GPIO-s are not registered as well.
-            */
-           dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
-
-           return 0;
-   }
-
-which presumably wouldn't be needed if the gpiochip were bound at pinctrl  
-bind time instead of pinctrl probe time?
-
-Alas I don't have any boards to test on for either of these platforms.
-
-Best wishes,
-
-Chris.
+-- 
+// Caleb (they/them)
