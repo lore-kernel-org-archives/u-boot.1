@@ -4,80 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2C67C3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 12:02:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19A28C3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 12:52:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F39A889D2;
-	Wed, 31 Jul 2024 14:02:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5564F88950;
+	Wed, 31 Jul 2024 14:52:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Xccc3qhK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bvPaFfOb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F148D889D2; Wed, 31 Jul 2024 14:02:30 +0200 (CEST)
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
+ id 1C48388955; Wed, 31 Jul 2024 14:52:26 +0200 (CEST)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AAC29889D5
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 14:02:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B5B738811C
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 14:52:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-76cb5b6b3e4so3487303a12.1
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 05:02:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6b7acf213a3so29766806d6.1
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 05:52:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722427347; x=1723032147; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BqKfJotq3eDHD985aYmU+sXieZCcmtqP3LZXmxqaCg4=;
- b=Xccc3qhKkgby4z+odoyX2SmZ1svTV3+949okrKXlSDjRYUNBEWGP4ImtD4lzxzvK5B
- q4Yp0Y3ow+lwMHFlVA35A7ib5oYQJySzCXGDJ8IfkhOADZBODHkqv1MffYDFivKERID+
- jEjkeR/D08GVQo8VSK39We75sSc/W9bZLpZWwbjD4ZHK1a5EXWNqQtvBEDFm5aRY3sDx
- XkxvRMErVM38NfsP+9XfnsVQW/Jh6dkbbXlfJvNMzdai9oUOUObaXxrbm1wStYHZprGX
- o0iFbwinzLK88ch0NC5chMIXI4Z9NiKbMjEtCJKt6ROX61cnN2oA+9XXGuqr9MUBgJ0E
- MuSA==
+ d=gmail.com; s=20230601; t=1722430342; x=1723035142; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=2XZBS/lo0+vzqYT2esCR+IaSauWDJzxZy1EebHmcB1w=;
+ b=bvPaFfObHAl9As7FidIhhzVE+igabccfF5uDaTd9vG3ALtCPMKeVdaaCk3QVlGubMJ
+ zDZOewWLgmGSFuLk3HqmGG6B3xyWkw3ox3kBM/RB7meckhkovLc334ar35MkSvCExuzu
+ v2J0Rby56STE8lnKotCeE7n8GYl4ZwOBWjI0+vPiFgaqGNN1wPR5WIk5INlDn71/sfN8
+ QMePoxSW4US9Sfzxzm0y9auoHKm3iRBDi+uim9OgqdG2fliW/8R6HSvUAxekgvppTFn9
+ JMmK3yVWBw39GQsePzttsitlWaBopWRqA6rWNlc665wgrImp3K81ZONM3JiBwf05nItB
+ 6bJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722427347; x=1723032147;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=BqKfJotq3eDHD985aYmU+sXieZCcmtqP3LZXmxqaCg4=;
- b=AWSpbD+dmp84yMm3TIwlvutuAn7bRQod0+oCJvvmrVdktS0qVA3IV4GFkUeEzUB1+s
- v9+snizu1svHkEYKsds0DA7dwiZTC9Y5ZMIU97RS6M6BnrfzornrgbuTWvZ+LfX2n/7z
- mNYWhsP0eJxP1z+m2QUbS8QkEw+BvcoKZdOfny7i/aaaUm37fuTQltsxUwcf2bNJ7scP
- Y4ZVNK80JCYXMtJ/owHILgGq2L9Ml9q9XNItTJkmHqKV2mdj0myNt3csS/UzhqFzGkwO
- O3Jh/Vsr3qTvpf1TE7C+tFKLxO4FHiKTEf515vU4mA0iLhEfsqSECOcL8nnSgGhbaZDZ
- dZ5A==
+ d=1e100.net; s=20230601; t=1722430342; x=1723035142;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=2XZBS/lo0+vzqYT2esCR+IaSauWDJzxZy1EebHmcB1w=;
+ b=SZSSWoaESItFkZTADLNRTxNhPomfB06MFylZKfwnd78S65mtmB3IA7AEdcDLqDjPrR
+ URB5TILRQKD7O1xC/wPeoMpE6rVsIGrRn0mrkKCWvFxkPqGTEDAG20YTWDY8mWPalaYK
+ uiDvTtBtnuqVyLyUssNbAdRlujK+HUCpZLE0PdoFa7XYfaEIkLhgDAgiowPKwfdjsiuC
+ L6HW6MKP8oMHsP5FSpSN1al9uVzNLBh3FouHbdT7UlqYtAmXIV1b/NhD0H11g92MfsbP
+ RscRz8v1dCBzWsE2JZUNhGYwdHn9kXSfh5EoYTYqhP3cSw1KqOmC122JjneH1jhZqtBi
+ SzAw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXJHqYRY+zgMXQ1B75xb9xqzP9H53DZ6aOP+YlBK89AQxHpYO257gdoQgiGsyyk7bef/q3eGLF+8TcVn3vMpKpdxSkddQ==
-X-Gm-Message-State: AOJu0Yw+ahZWfdBcRG+m7CwOqqxCiAYt6dIUZRl6wQ4WiosCAYtSmZR1
- GmBhB67eeXW9zcGtFUNI1424QShgYuFcjL5+xNoHP5qetstM2LR/vEDhAAVqomK3/XULKIYz7VN
- GRD0YdyVPJOGWZPgZPuErRZ/fXb5gKacCmYDYPg==
-X-Google-Smtp-Source: AGHT+IH9uVCUsrJ3+OYmV/6eW39uaqY8UDLfqgOR9iPSIUATWevoV5+n3o6Y0NLuliNUhs5CFefi1/aERlAj02a4PAE=
-X-Received: by 2002:a17:90a:fd87:b0:2cf:2ab6:a157 with SMTP id
- 98e67ed59e1d1-2cf7e1c1ac9mr12052884a91.12.1722427346565; Wed, 31 Jul 2024
- 05:02:26 -0700 (PDT)
+ AJvYcCU0sidTtdv6SXLDk9Zo9MapZwxmzdJZTJjLpH20ON0Nx0Whj39p3i1FAjJLmMM09TK5E/bN4B8=@lists.denx.de
+X-Gm-Message-State: AOJu0YySCG0WSrLmx6vNQxLuzjVatbDpYcricseZ2ysdEeMUKT3yGcOp
+ MLIZpAXcq3fcdN3vhxrKKFsG/DOSdt7szlF/AS/TWSJ9WGzGWkWs
+X-Google-Smtp-Source: AGHT+IFXXlPl+zzC1UAvLARrVF8S/1Nhi4G1Sl66jdCuZQ37CdNxWjQH3/1/4guGe259Mkhf/ZVjpw==
+X-Received: by 2002:ad4:5d46:0:b0:6b5:44c:24ea with SMTP id
+ 6a1803df08f44-6bb55a0245amr209398236d6.16.1722430342589; 
+ Wed, 31 Jul 2024 05:52:22 -0700 (PDT)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6bb78f3fc49sm16362796d6.87.2024.07.31.05.52.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 31 Jul 2024 05:52:22 -0700 (PDT)
+Message-ID: <60c5a1ae-763f-d6e4-2200-53916c99e29c@gmail.com>
+Date: Wed, 31 Jul 2024 08:52:21 -0400
 MIME-Version: 1.0
-References: <20240719-b4-dynamic-uuid-v5-0-8a83de3fe3dc@linaro.org>
- <20240719-b4-dynamic-uuid-v5-2-8a83de3fe3dc@linaro.org>
- <CAC_iWjK1j0hG7jurTEPLKoYLPCL5JuUhRUoBwohUr=U93rb6dQ@mail.gmail.com>
- <23b45a9e-d2e6-40c9-beca-6de58c7f67e2@linaro.org>
-In-Reply-To: <23b45a9e-d2e6-40c9-beca-6de58c7f67e2@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 31 Jul 2024 15:01:50 +0300
-Message-ID: <CAC_iWjLRsTEYUbnSqkmR09bZMu+fkwA-7oixXN7SZ+zB5xxTsg@mail.gmail.com>
-Subject: Re: [PATCH v5 02/11] lib: uuid: add UUID v5 support
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH v1] mmc: fix signed vs unsigned compare in read check in
+ _spl_load()
+Content-Language: en-US
+To: Franco Venturi <fventuri@comcast.net>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ Simon Glass <sjg@chromium.org>
+References: <20240730133043.12577-1-fventuri@comcast.net>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <20240730133043.12577-1-fventuri@comcast.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,64 +99,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+Hi Franco,
 
-On Wed, 31 Jul 2024 at 13:16, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
->
-> >> +       /* Make little endian */
-> >> +       tmp32 = (uint32_t *)&guid->b[0];
-> >> +       *tmp32 = be32_to_cpu(*tmp32);
-> >> +       tmp16 = (uint16_t *)&guid->b[4];
-> >> +       *tmp16 = be16_to_cpu(*tmp16);
-> >> +       tmp16 = (uint16_t *)&guid->b[6];
-> >> +       *tmp16 = be16_to_cpu(*tmp16);
-> >
-> > you need to explicitly convert those to LE, instead of relying to the
-> > native cpu endianess here
->
-> The EFI spec iirc is not explicit on the binary format for GUIDs on big
-> endian systems (and currently doesn't support them at all??). Is LE
-> always correct??
+On 7/30/24 09:30, Franco Venturi wrote:
+> Fix signed vs unsigned compare in read check in _spl_load()
+> 
+> Issue: when info->read() returns a negative value because of an error,
+>         the comparison of 'read' (signed) with 'sizeof(*header)'
+>         (unsigned silently converts the negative value into a very
+>         large unsigned value and the check on the error condition
+>         always return false, i.e. the error is not detected
+> Symptoms: if spl_load_image_fat() is unable to find the file 'uImage',
+>            the SPL phase of the boot process just hangs after displaying
+>            the following line:
+>            Trying to boot from MMC1
+> Fix: first check if 'read' is negative then check its value against
+>       'sizeof(*header)'
+> Reference: https://stackoverflow.com/questions/17293749/sizeof-operator-in-if-statement
+> 
+> Signed-off-by: Franco Venturi <fventuri@comcast.net>
+> ---
+> 
+>   include/spl_load.h | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/include/spl_load.h b/include/spl_load.h
+> index 1c2b296c0a..1e05599d29 100644
+> --- a/include/spl_load.h
+> +++ b/include/spl_load.h
+> @@ -22,7 +22,7 @@ static inline int _spl_load(struct spl_image_info *spl_image,
+>   
+>   	read = info->read(info, offset, ALIGN(sizeof(*header),
+>   					      spl_get_bl_len(info)), header);
+> -	if (read < sizeof(*header))
+> +	if (read < 0 || read < sizeof(*header))
+>   		return -EIO;
+>   
+>   	if (image_get_magic(header) == FDT_MAGIC) {
 
-Appendix A on GUIDs and formats says
-"It should also be noted that TimeLow, TimeMid, TimeHighAndVersion
-fields in the EFI are encoded as little endian".  So, the native
-endianness shouldn't matter
+Since read and int and sizeof(*header) < INT_MAX, I think the best solution is
+to cast the latter to an int.
 
-Cheers
-/Ilias
-
-> >
-> > cheers
-> > /Ilias
-> >> +}
-> >> +
-> >>   #if defined(CONFIG_RANDOM_UUID) || defined(CONFIG_CMD_UUID)
-> >>   void gen_rand_uuid(unsigned char *uuid_bin)
-> >>   {
-> >>          u32 ptr[4];
-> >> @@ -394,15 +444,9 @@ void gen_rand_uuid(unsigned char *uuid_bin)
-> >>          /* Set all fields randomly */
-> >>          for (i = 0; i < 4; i++)
-> >>                  ptr[i] = rand();
-> >>
-> >> -       clrsetbits_be16(&uuid->time_hi_and_version,
-> >> -                       UUID_VERSION_MASK,
-> >> -                       UUID_VERSION << UUID_VERSION_SHIFT);
-> >> -
-> >> -       clrsetbits_8(&uuid->clock_seq_hi_and_reserved,
-> >> -                    UUID_VARIANT_MASK,
-> >> -                    UUID_VARIANT << UUID_VARIANT_SHIFT);
-> >> +       configure_uuid(uuid, UUID_VERSION);
-> >>
-> >>          memcpy(uuid_bin, uuid, 16);
-> >>   }
-> >>
-> >>
-> >> --
-> >> 2.45.2
-> >>
->
-> --
-> // Caleb (they/them)
+--Sean
