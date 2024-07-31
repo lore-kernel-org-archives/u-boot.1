@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80E07C3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 14:42:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F4FAC3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 14:42:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF9CB88A8C;
-	Wed, 31 Jul 2024 16:41:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5255F88A10;
+	Wed, 31 Jul 2024 16:41:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XbHVc1/B";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LYgmp0lT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3353888A21; Wed, 31 Jul 2024 16:41:24 +0200 (CEST)
-Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
- [IPv6:2607:f8b0:4864:20::d2a])
+ id B96B088A47; Wed, 31 Jul 2024 16:41:26 +0200 (CEST)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C128088A85
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 16:41:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FB5E88958
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 16:41:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2a.google.com with SMTP id
- ca18e2360f4ac-81f9339e52cso269366439f.0
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 07:41:21 -0700 (PDT)
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-81f9339e534so201326639f.3
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 07:41:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722436880; x=1723041680; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722436881; x=1723041681; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=heeNVSuPfmKGlf8ZfBiv+awmb/TEadwE07nfjXnqUpI=;
- b=XbHVc1/BQIsW3gsLgNWwORLrMVK/65wemWcjhgYERIEiVfFOoL/YWQVStghE2Rqh/C
- PqZyJAojXErCgnWCOBKkkNg5JZQ3+f/iKuZE4eqmoZufmNxD2AfHpOjNSR4CHJ9MLbRV
- t3YUqtj0mp5lI4r4v6H44f2aUlE235BpF4fO0=
+ bh=dLAe3+PdXcNntF6HHKEzTzB26YxxirSGeryH0nQjYqo=;
+ b=LYgmp0lTPg9nVhGOQ39JxkVXY9+dDtevvg2Hb5XLBLRSb4s/fUkbRx1lt1sIwp8ciy
+ H1K19FGoWqlhANu6Xh41Lt+Jy9qMAdgjvBWBG0IiJ8yWQ2T4UnEpnOd7LIYAC52vD0/N
+ UFWuvJKU3NrYlGM+QjLR5fYnVTN3zbiqEJQdM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722436880; x=1723041680;
+ d=1e100.net; s=20230601; t=1722436881; x=1723041681;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=heeNVSuPfmKGlf8ZfBiv+awmb/TEadwE07nfjXnqUpI=;
- b=Db7OPO/jt57+ns6ZCDYwi861idhdyoJHvnknk5BjkBxR5Ex9/cLcMVfYZmwrHbUJfL
- 6td26BZqQQJ/Sosw3YsK5WLQKo0Uc06RWWsTXOqH4sH9pKB3w/ZF+uKz6k2fjEeNRSuO
- hgV1Yu8YUvkpSSAQMvi59sagdepbapw/2hQZza8aNvQZuO9maZ8mr1lMwPAlF2qJP1aR
- xIbcx9iq3m+NeALic7cxc9f22oixgVGm/71+qprIIBftYpn5wRx3WfT+0/7nXEwAserr
- 8JBqx0906nZuhjVM/ZM/ZkVrvRCXlHPvh4UzK1rfQWwkyL4aQdagv9/3o0r+xuQXJOCF
- ZOFg==
-X-Gm-Message-State: AOJu0YyjrrDCmC/frXP+ubXzSe93VwxVYvfIuytGcs7HX6jZ4P2xmYj+
- GZKZdou0HPwq9/Wn1yEDix+DnBivglNEkdlDGwws7Vp0Isws5oIyh4gJ8e4H9s3BnFYxRZLpKvs
+ bh=dLAe3+PdXcNntF6HHKEzTzB26YxxirSGeryH0nQjYqo=;
+ b=cyfUOg4pbi1q9VFakINojBkTidHq+RhqXpUhytrlTd+1Sa+OVyeVwKRij1/FpKIwPL
+ MLGhBMEjKsg1mUFdit7ehXg0btXnFa6Uj/jle3XJVJ5Uu5Em1aQ6REmTIcjxmqDNt82N
+ WTBnF5AKDth4IGYAxRHeuwkVIe7hW+4I7aykXqJVMkFW2FSwB9XJJcw8df7whXBWN7Yv
+ ms2lUJHYw4Ir/e4JSlcuq83BcmIAL+jAzGLZoQj0Tkk/DRFkp32j/UOPoSJqcKKeLZzN
+ IfN9bCz9C/HrMa6ziStv8Vfd6dwbhmFdV8LLNwL0b5HbGWBWQnS1Tjo3Dwmz4IiVjQcN
+ Wk3A==
+X-Gm-Message-State: AOJu0YxjGRBUjE0lfp71HJ1Qc+INR37sQNLZOd5zoFL0a84I1CxhxXn+
+ jIs9wGBWKgTA5AKritv7ZQi+Dc4sg5nfUZQJUuQ+uqkhCJ9DCcZnnXgF2C2Zjt7qnB8VcyUQJKA
  =
-X-Google-Smtp-Source: AGHT+IF3PbEjltc6a2sfh+Ch3YYWVQCo8f6ZBvFDl/eRDX38quDpmbFoAYFpZBD8xHNXb2yLxrvwug==
-X-Received: by 2002:a05:6602:26cb:b0:81f:8e7f:a54d with SMTP id
- ca18e2360f4ac-81f95bce33emr1682967539f.12.1722436880393; 
- Wed, 31 Jul 2024 07:41:20 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFf73/X8zLm7TewI96A8vf8py54I7ct6+u19ILNy1cDOH/4LyXtVOlTzuQZESuSLqsqefiGxQ==
+X-Received: by 2002:a05:6602:6c05:b0:803:c955:eda8 with SMTP id
+ ca18e2360f4ac-81f95a4f738mr1871127339f.6.1722436881128; 
+ Wed, 31 Jul 2024 07:41:21 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4c29fc0a569sm3209770173.126.2024.07.31.07.41.19
+ 8926c6da1cb9f-4c29fc0a569sm3209770173.126.2024.07.31.07.41.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jul 2024 07:41:19 -0700 (PDT)
+ Wed, 31 Jul 2024 07:41:20 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 4/5] sandbox: Increase cyclic CPU-time limit
-Date: Wed, 31 Jul 2024 08:41:11 -0600
-Message-Id: <20240731144112.787509-5-sjg@chromium.org>
+Subject: [PATCH v3 5/5] sandbox: Drop video-sync in serial driver
+Date: Wed, 31 Jul 2024 08:41:12 -0600
+Message-Id: <20240731144112.787509-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240731144112.787509-1-sjg@chromium.org>
 References: <20240731144112.787509-1-sjg@chromium.org>
@@ -89,31 +89,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that sandbox is using cyclic for video, it trips the 1us time
-limit. Updating the sandbox display often takes 20ms or more.
+With sandbox, when U-Boot is waiting for input it syncs the video
+display, since presumably the user has finished typing.
 
-Increase the limit to 100ms to avoid a warning.
+Now that cyclic is used for video syncing, we can drop this. Cyclic
+will automatically call the video_idle() function when idle.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+(no changes since v2)
 
- common/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+Changes in v2:
+- Fix 'groth' and 'work-around' typos in cover letter
 
-diff --git a/common/Kconfig b/common/Kconfig
-index 87b0ec3ea8f..83c81edac20 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -636,6 +636,7 @@ config SPL_CYCLIC
+ drivers/serial/sandbox.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/drivers/serial/sandbox.c b/drivers/serial/sandbox.c
+index ec0068e33d3..77a1558db68 100644
+--- a/drivers/serial/sandbox.c
++++ b/drivers/serial/sandbox.c
+@@ -138,8 +138,6 @@ static int sandbox_serial_pending(struct udevice *dev, bool input)
+ 		return 0;
  
- config CYCLIC_MAX_CPU_TIME_US
- 	int "Sets the max allowed time for a cyclic function in us"
-+	default 100000 if SANDBOX  # sandbox video is quite slow
- 	default 5000
- 	help
- 	  The max allowed time for a cyclic function in us. If a functions
+ 	os_usleep(100);
+-	if (IS_ENABLED(CONFIG_VIDEO) && !IS_ENABLED(CONFIG_SPL_BUILD))
+-		video_sync_all();
+ 	avail = membuff_putraw(&priv->buf, 100, false, &data);
+ 	if (!avail)
+ 		return 1;	/* buffer full */
 -- 
 2.34.1
 
