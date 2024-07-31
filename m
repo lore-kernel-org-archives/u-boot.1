@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 085F3C3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 17:27:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D673C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 17:27:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8439188A05;
-	Wed, 31 Jul 2024 19:27:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EF3798881B;
+	Wed, 31 Jul 2024 19:27:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Xbp3IwYi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YU6n3YFR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C0AB88A15; Wed, 31 Jul 2024 19:27:19 +0200 (CEST)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
+ id 0F5F988A40; Wed, 31 Jul 2024 19:27:41 +0200 (CEST)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70BE388A05
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 19:27:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F40986FB1
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 19:27:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-dfe43dca3bfso4332770276.0
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 10:27:16 -0700 (PDT)
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7a1e0ff6871so353665685a.2
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 10:27:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722446835; x=1723051635; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1722446857; x=1723051657; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VpNsZs3eofqxy72P0oTbLxfpWCvoeDadycxCQtPCMp8=;
- b=Xbp3IwYiOh4cpp0bRaGtPoWKobmYudM6pN3kdVQV/PmY73uKxPdMXc8z2XWVw/VI/h
- PMM/tK0mKldVgpZY1mO662fdhrLT9VYqH/Va6q5H6GU+ffkUdCiSC9wCvm4KilQtrnv4
- pxfsDNSIAFs/0UiKViZJsIOyYer2Rm0fzxkqQn2uiQ453bQX66esdRpnlmhdh9DE/z6f
- rx9ZDc2rH9iZRETQPgsl+Z3+hVzM17gfD0/jfigXseBS5QiIAG4dhp5N+YJ+9LWt90M9
- WNDbh+/IVUIM1Mwzs8z2Y9TGGGrJEqgy7woG9XqzZPVGB6jzfrwdwYvUdaOpCrb0lFFc
- zpJg==
+ bh=/umTosqa7boN+AdnKbh/PEvFFMz3xBH24DIRfOMz4bw=;
+ b=YU6n3YFRrShoUk3nYupWzQZSjA7QufaQfCdCLH0yRGii8pnjqPVONNs1rdpbqWsSP4
+ 8LlSFjJmakh7ix0cOXtCHQpfUlAXG6K8417fdsoBC2bUbY4vJnkQE7FfH94kmWwljeKQ
+ 2Qw2QU921QCfw5z0OiavX8wZuPiZTR/5xK6DUcH9rFnoDHiLIhkfok8BSodPmEM4NvSv
+ b9oru5OVAnDvdfvYLYhmuBhbPTwSF4dSO668GJxYUem8nW0rkGXKM67mkEAkQgfTSL91
+ 62Pp0EdPOkYT07pBPZkLccKM/YmjYyobY3vEFjdKCuiIqVr60OolVdCuNQo5VoJx8gQI
+ Qbmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722446835; x=1723051635;
+ d=1e100.net; s=20230601; t=1722446857; x=1723051657;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VpNsZs3eofqxy72P0oTbLxfpWCvoeDadycxCQtPCMp8=;
- b=Z0TbweW7x7TJ6MaPzhwvYR1clh81g5wXoum1uFNwRPFtxbaMIqB2kEiMMlIeKrL4v1
- 6BksAULu2HzxWi6r5SISc15D3FZZ8USFm/8RLSoRczCAEW48EDULRmujNqPbs9nRoxqB
- uLOsGY0125wSjeSv5h/xpWi/+9UoP/3afMzMFBWJUSVc5buLTIUMZzjfPVhTWuKXnO7C
- kyITMaXv4VB/8gTcz/CO9db8Ww3Fo91EqUvkcDaqV2jkKydsmKJmV71AZv1AdH4FWl2w
- jkEOKCk+NpS2z6tSYeCI5t7G0udhTiiiUmNBYZ0ca2/Hou8tNCu1zQ5Y5oyCuCaKXN3H
- Udsg==
-X-Gm-Message-State: AOJu0YxKDv6bhYsstNYA4RlDElz7rJvJyWgDQ5ZDNd0P9+F0ClUrvkpK
- u+lOH7RyI1AuFVGNnKJha1FIv2NWrYRaK1gPjk92brvUI+QlNSiE6/aE4uFP+mgev8e5CkomuIG
- NgSg=
-X-Google-Smtp-Source: AGHT+IFBzJ1IXLS1/s3p5ReyH4cJWR0zUJAkjj7tbvK/j77Lj8RhQ5vG9FAHCNdRgmRfiqsYKp/zaA==
-X-Received: by 2002:a05:6902:1206:b0:e0b:327d:51d6 with SMTP id
- 3f1490d57ef6-e0b5449bf91mr15050051276.3.1722446835024; 
- Wed, 31 Jul 2024 10:27:15 -0700 (PDT)
+ bh=/umTosqa7boN+AdnKbh/PEvFFMz3xBH24DIRfOMz4bw=;
+ b=VsX62V+XK4totzI6uRdCyj+ZhGXOpOFW5LGKCCO0m+1z/0y7KNpJt3n+P+9/IiVnJ8
+ NyUTvBDbzTC2ZEieDEsrT0i5sZ0o42/qXhOg3R4YTgO257f6M/51SD7vMmFk7A1+VLF3
+ WM38sQ1yVp6vWgTmRsYDYd7yuAkT4t4msM8lQ5f3wwHDmEjnqPUR9H5CrIgISHsf71/w
+ Aq4asBwmBZphRAKRmvtNvOZkDv+xkh+QOhljANDY1SchwUsXxKUIwl/wtTgoSjRSC5tx
+ 7gWKIuCEFXcT58glR0vlq/p9PDDCNU7hKZK48eLjrS7AtO/XBl99QMB/NZbB2LuufDnR
+ JHsg==
+X-Gm-Message-State: AOJu0YxM7bz4ifpbaMMB+WKEYTi+kMrgI/HxIR+xJBj47uPiLETk40HP
+ u82n8pMh91C+ENDQoWaPTYoqTdvMNj+GrgrcoopazYRABGEGtcdJBB4vOmzkRiSzcsqew464SiP
+ vtlo=
+X-Google-Smtp-Source: AGHT+IGYdpnmRonodiUByhP5wsMQYkCjXHoQDeGSZu2W5x3gdPKa5L/75Gt1Fy1v06sVPkUz+lS3qQ==
+X-Received: by 2002:a05:620a:472c:b0:79f:84f:809f with SMTP id
+ af79cd13be357-7a1e5265522mr1954378285a.33.1722446856548; 
+ Wed, 31 Jul 2024 10:27:36 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a1d73b378fsm779452485a.37.2024.07.31.10.27.13
+ af79cd13be357-7a1d73b378fsm779452485a.37.2024.07.31.10.27.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jul 2024 10:27:14 -0700 (PDT)
+ Wed, 31 Jul 2024 10:27:36 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
@@ -78,19 +78,21 @@ Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sean Anderson <seanga2@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
  Sumit Garg <sumit.garg@linaro.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
  "Leon M. Busch-George" <leon@georgemail.eu>,
- Ilya Lukin <4.shket@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Ilya Lukin <4.shket@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alexander Gendin <agendin@matrox.com>,
+ Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng.cn@gmail.com>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ Eddie James <eajames@linux.ibm.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: [PATCH v5 02/27] mbedtls: add mbedtls into the build system
-Date: Wed, 31 Jul 2024 10:25:12 -0700
-Message-Id: <20240731172556.1348487-3-raymond.mao@linaro.org>
+Subject: [PATCH v5 03/27] lib: Adapt digest header files to MbedTLS
+Date: Wed, 31 Jul 2024 10:25:13 -0700
+Message-Id: <20240731172556.1348487-4-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240731172556.1348487-1-raymond.mao@linaro.org>
 References: <20240731172556.1348487-1-raymond.mao@linaro.org>
@@ -112,401 +114,348 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Port mbedtls with adapted libc header files.
-Add mbedtls default config header file.
-Optimize mbedtls default config by disabling unused features to
-reduce the target size.
-Add mbedtls kbuild makefile.
-Add Kconfig skeleton and config submenu entry for selecting
-crypto libraries between mbedtls and legacy ones.
-Add the mbedtls include directories into the build system.
+Adapt digest header files to support both original libs and MbedTLS
+by switching on/off MBEDTLS_LIB_CRYPTO.
+Introduce <alg>_LEGACY kconfig for legacy hash implementations.
 
-Subsequent patches will separate those Kconfigs into pairs of
-_LEGACY and _MBEDTLS for controlling the implementations of legacy
-crypto libraries and MbedTLS ones respectively.
-
-The motivation of moving and adapting *INT* macros from kernel.h
-to limits.h is to fullfill the MbedTLS building requirement.
-The conditional compilation statements in MbedTLS expects the
-*INT* macros as constant expressions, thus expressions like
-`((int)(~0U >> 1))` will not work.
-
-Prerequisite
-------------
-
-This patch series requires mbedtls git repo to be added as a
-subtree to the main U-Boot repo via:
-
-$ git subtree add --prefix lib/mbedtls/external/mbedtls \
-      https://github.com/Mbed-TLS/mbedtls.git \
-      v3.6.0 --squash
-
-Moreover, due to the Windows-style files from mbedtls git repo,
-we need to convert the CRLF endings to LF and do a commit manually:
-
-$ git add --renormalize .
-$ git commit
+FIXME:
+`IS_ENABLED` or `CONFIG_IS_ENABLED` is not applicable here, since
+including <linux/kconfig.h> causes undefined reference on schedule()
+with sandbox build.
+As <linux/kconfig.h> includes <generated/autoconf.h> which enables
+`CONFIG_HW_WATCHDOG` and `CONFIG_WATCHDOG` but no schedule() are
+defined in sandbox build.
+`#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)` is a workaround.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
 Changes in v2
-- Disabled unused MbedTLS features to optimize the target size.
+- Initial patch.
 Changes in v3
-- Removed changes in stdio.h.
+- Remove the changes that were done in previous clean-up patch set.
 Changes in v4
-- Move limits.h as a common header file that is included by kernel.h.
-- Refactor the Kconfig to support legacy and MbedTLS options for each
-  algorithm.
-- Refactor MbedTLS makefile and default config file to remove unused
-  config options and objects.
+- Introduce <alg>_LEGACY kconfig for legacy hash implementations.
 Changes in v5
-- Merged patch #9 of v4 into this patch.
-- Removed unused config MBEDTLS_LIB_TLS.
-- Refactored MbedTLS Makefile and default config file.
+- Correct header file include directories.
+- Correct kconfig dependence.
 
- Makefile                         |  6 +++
- include/limits.h                 | 29 ++++++++++++++
- include/linux/kernel.h           | 13 +-----
- include/stdlib.h                 |  1 +
- lib/Kconfig                      |  4 ++
- lib/Makefile                     |  2 +
- lib/mbedtls/Kconfig              | 47 ++++++++++++++++++++++
- lib/mbedtls/Makefile             | 41 +++++++++++++++++++
- lib/mbedtls/mbedtls_def_config.h | 69 ++++++++++++++++++++++++++++++++
- lib/mbedtls/port/assert.h        | 12 ++++++
- 10 files changed, 212 insertions(+), 12 deletions(-)
- create mode 100644 include/limits.h
- create mode 100644 lib/mbedtls/Kconfig
- create mode 100644 lib/mbedtls/Makefile
- create mode 100644 lib/mbedtls/mbedtls_def_config.h
- create mode 100644 lib/mbedtls/port/assert.h
+ include/u-boot/md5.h    |  7 ++++
+ include/u-boot/sha1.h   | 21 +++++++++-
+ include/u-boot/sha256.h | 20 +++++++++
+ include/u-boot/sha512.h | 22 ++++++++--
+ lib/Makefile            | 10 +++--
+ lib/mbedtls/Kconfig     | 91 +++++++++++++++++++++++++++++++++++++++++
+ 6 files changed, 163 insertions(+), 8 deletions(-)
 
-diff --git a/Makefile b/Makefile
-index 07d7947c8af..fd855dbd5c9 100644
---- a/Makefile
-+++ b/Makefile
-@@ -829,6 +829,12 @@ KBUILD_HOSTCFLAGS += $(if $(CONFIG_TOOLS_DEBUG),-g)
- UBOOTINCLUDE    := \
- 	-Iinclude \
- 	$(if $(KBUILD_SRC), -I$(srctree)/include) \
-+	$(if $(CONFIG_MBEDTLS_LIB), \
-+		"-DMBEDTLS_CONFIG_FILE=\"mbedtls_def_config.h\"" \
-+		-I$(srctree)/lib/mbedtls \
-+		-I$(srctree)/lib/mbedtls/port \
-+		-I$(srctree)/lib/mbedtls/external/mbedtls \
-+		-I$(srctree)/lib/mbedtls/external/mbedtls/include) \
- 	$(if $(CONFIG_$(SPL_)SYS_THUMB_BUILD), \
- 		$(if $(CONFIG_HAS_THUMB2), \
- 			$(if $(CONFIG_CPU_V7M), \
-diff --git a/include/limits.h b/include/limits.h
-new file mode 100644
-index 00000000000..cc691d15650
---- /dev/null
-+++ b/include/limits.h
-@@ -0,0 +1,29 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) 2023 Linaro Limited
-+ * Author: Raymond Mao <raymond.mao@linaro.org>
-+ */
-+
-+#ifndef _LIMITS_H
-+#define _LIMITS_H
-+
-+#define INT_MAX         0x7fffffff
-+#define UINT_MAX	0xffffffffUL
-+#define CHAR_BIT        8
-+#define UINT32_MAX      0xffffffffUL
-+#define UINT64_MAX	0xffffffffffffffffUL
-+
-+#ifdef CONFIG_64BIT
-+    #define UINTPTR_MAX UINT64_MAX
+diff --git a/include/u-boot/md5.h b/include/u-boot/md5.h
+index c465925ea8d..69898fcbe49 100644
+--- a/include/u-boot/md5.h
++++ b/include/u-boot/md5.h
+@@ -6,10 +6,16 @@
+ #ifndef _MD5_H
+ #define _MD5_H
+ 
++#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
++#include <mbedtls/md5.h>
++#endif
+ #include "compiler.h"
+ 
+ #define MD5_SUM_LEN	16
+ 
++#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
++typedef mbedtls_md5_context MD5Context;
 +#else
-+    #define UINTPTR_MAX UINT32_MAX
+ typedef struct MD5Context {
+ 	__u32 buf[4];
+ 	__u32 bits[2];
+@@ -18,6 +24,7 @@ typedef struct MD5Context {
+ 		__u32 in32[16];
+ 	};
+ } MD5Context;
 +#endif
-+
-+#ifndef SIZE_MAX
-+#define SIZE_MAX        UINTPTR_MAX
-+#endif
-+#ifndef SSIZE_MAX
-+#define SSIZE_MAX	((ssize_t)(SIZE_MAX >> 1))
-+#endif
-+
-+#endif /* _LIMITS_H */
-diff --git a/include/linux/kernel.h b/include/linux/kernel.h
-index 5cd6c9dc821..2cb2ceaf84b 100644
---- a/include/linux/kernel.h
-+++ b/include/linux/kernel.h
-@@ -3,25 +3,18 @@
+ 
+ void MD5Init(MD5Context *ctx);
+ void MD5Update(MD5Context *ctx, unsigned char const *buf, unsigned int len);
+diff --git a/include/u-boot/sha1.h b/include/u-boot/sha1.h
+index c1e9f67068d..ab88134fb98 100644
+--- a/include/u-boot/sha1.h
++++ b/include/u-boot/sha1.h
+@@ -16,6 +16,21 @@
  
  #include <linux/types.h>
- #include <linux/printk.h> /* for printf/pr_* utilities */
-+#include <limits.h>
  
- #define USHRT_MAX	((u16)(~0U))
- #define SHRT_MAX	((s16)(USHRT_MAX>>1))
- #define SHRT_MIN	((s16)(-SHRT_MAX - 1))
--#define INT_MAX		((int)(~0U>>1))
- #define INT_MIN		(-INT_MAX - 1)
--#define UINT_MAX	(~0U)
- #define LONG_MAX	((long)(~0UL>>1))
- #define LONG_MIN	(-LONG_MAX - 1)
- #define ULONG_MAX	(~0UL)
- #define LLONG_MAX	((long long)(~0ULL>>1))
- #define LLONG_MIN	(-LLONG_MAX - 1)
- #define ULLONG_MAX	(~0ULL)
--#ifndef SIZE_MAX
--#define SIZE_MAX	(~(size_t)0)
--#endif
--#ifndef SSIZE_MAX
--#define SSIZE_MAX	((ssize_t)(SIZE_MAX >> 1))
--#endif
- 
- #define U8_MAX		((u8)~0U)
- #define S8_MAX		((s8)(U8_MAX>>1))
-@@ -36,10 +29,6 @@
- #define S64_MAX		((s64)(U64_MAX>>1))
- #define S64_MIN		((s64)(-S64_MAX - 1))
- 
--/* Aliases defined by stdint.h */
--#define UINT32_MAX	U32_MAX
--#define UINT64_MAX	U64_MAX
--
- #define INT32_MAX	S32_MAX
- 
- #define STACK_MAGIC	0xdeadbeef
-diff --git a/include/stdlib.h b/include/stdlib.h
-index 9c175d4d74c..dedfd52a144 100644
---- a/include/stdlib.h
-+++ b/include/stdlib.h
-@@ -7,5 +7,6 @@
- #define __STDLIB_H_
- 
- #include <malloc.h>
-+#include <rand.h>
- 
- #endif /* __STDLIB_H_ */
-diff --git a/lib/Kconfig b/lib/Kconfig
-index b3baa4b85b0..129063ca8a5 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -418,6 +418,10 @@ config CIRCBUF
- 
- source "lib/dhry/Kconfig"
- 
-+menu "Alternative crypto libraries"
-+source lib/mbedtls/Kconfig
-+endmenu
++#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
++/*
++ * FIXME:
++ * MbedTLS define the members of "mbedtls_sha256_context" as private,
++ * but "state" needs to be access by arch/arm/cpu/armv8/sha1_ce_glue.
++ * MBEDTLS_ALLOW_PRIVATE_ACCESS needs to be enabled to allow the external
++ * access.
++ * Directly including <external/mbedtls/library/common.h> is not allowed,
++ * since this will include <malloc.h> and break the sandbox test.
++ */
++#define MBEDTLS_ALLOW_PRIVATE_ACCESS
 +
- menu "Security support"
++#include <mbedtls/sha1.h>
++#endif
++
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+@@ -26,6 +41,9 @@ extern "C" {
  
- config AES
+ extern const uint8_t sha1_der_prefix[];
+ 
++#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
++typedef mbedtls_sha1_context sha1_context;
++#else
+ /**
+  * \brief	   SHA-1 context structure
+  */
+@@ -36,13 +54,14 @@ typedef struct
+     unsigned char buffer[64];	/*!< data block being processed */
+ }
+ sha1_context;
++#endif
+ 
+ /**
+  * \brief	   SHA-1 context setup
+  *
+  * \param ctx	   SHA-1 context to be initialized
+  */
+-void sha1_starts( sha1_context *ctx );
++void sha1_starts(sha1_context *ctx);
+ 
+ /**
+  * \brief	   SHA-1 process buffer
+diff --git a/include/u-boot/sha256.h b/include/u-boot/sha256.h
+index a4fe176c0b4..b58d5b58d39 100644
+--- a/include/u-boot/sha256.h
++++ b/include/u-boot/sha256.h
+@@ -3,6 +3,22 @@
+ 
+ #include <linux/types.h>
+ 
++#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
++/*
++ * FIXME:
++ * MbedTLS define the members of "mbedtls_sha256_context" as private,
++ * but "state" needs to be access by arch/arm/cpu/armv8/sha256_ce_glue.
++ * MBEDTLS_ALLOW_PRIVATE_ACCESS needs to be enabled to allow the external
++ * access.
++ * Directly including <external/mbedtls/library/common.h> is not allowed,
++ * since this will include <malloc.h> and break the sandbox test.
++ */
++#define MBEDTLS_ALLOW_PRIVATE_ACCESS
++
++#include <mbedtls/sha256.h>
++#endif
++
++#define SHA224_SUM_LEN	28
+ #define SHA256_SUM_LEN	32
+ #define SHA256_DER_LEN	19
+ 
+@@ -11,11 +27,15 @@ extern const uint8_t sha256_der_prefix[];
+ /* Reset watchdog each time we process this many bytes */
+ #define CHUNKSZ_SHA256	(64 * 1024)
+ 
++#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
++typedef mbedtls_sha256_context sha256_context;
++#else
+ typedef struct {
+ 	uint32_t total[2];
+ 	uint32_t state[8];
+ 	uint8_t buffer[64];
+ } sha256_context;
++#endif
+ 
+ void sha256_starts(sha256_context * ctx);
+ void sha256_update(sha256_context *ctx, const uint8_t *input, uint32_t length);
+diff --git a/include/u-boot/sha512.h b/include/u-boot/sha512.h
+index 90bd96a3f8c..2b5a21a7c70 100644
+--- a/include/u-boot/sha512.h
++++ b/include/u-boot/sha512.h
+@@ -3,6 +3,10 @@
+ 
+ #include <linux/types.h>
+ 
++#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
++#include <mbedtls/sha512.h>
++#endif
++
+ #define SHA384_SUM_LEN          48
+ #define SHA384_DER_LEN          19
+ #define SHA512_SUM_LEN          64
+@@ -12,11 +16,16 @@
+ #define CHUNKSZ_SHA384	(16 * 1024)
+ #define CHUNKSZ_SHA512	(16 * 1024)
+ 
++#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
++typedef mbedtls_sha512_context sha384_context;
++typedef mbedtls_sha512_context sha512_context;
++#else
+ typedef struct {
+ 	uint64_t state[SHA512_SUM_LEN / 8];
+ 	uint64_t count[2];
+ 	uint8_t buf[SHA512_BLOCK_SIZE];
+ } sha512_context;
++#endif
+ 
+ extern const uint8_t sha512_der_prefix[];
+ 
+@@ -29,12 +38,19 @@ void sha512_csum_wd(const unsigned char *input, unsigned int ilen,
+ 
+ extern const uint8_t sha384_der_prefix[];
+ 
++#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
++void sha384_starts(sha512_context *ctx);
++void
++sha384_update(sha512_context *ctx, const uint8_t *input, uint32_t length);
++void sha384_finish(sha512_context *ctx, uint8_t digest[SHA384_SUM_LEN]);
++void sha384_csum_wd(const unsigned char *input, unsigned int length,
++		    unsigned char *output, unsigned int chunk_sz);
++#else
+ void sha384_starts(sha512_context * ctx);
+ void sha384_update(sha512_context *ctx, const uint8_t *input, uint32_t length);
+ void sha384_finish(sha512_context * ctx, uint8_t digest[SHA384_SUM_LEN]);
+ 
+ void sha384_csum_wd(const unsigned char *input, unsigned int ilen,
+-		unsigned char *output, unsigned int chunk_sz);
+-
+-
++		    unsigned char *output, unsigned int chunk_sz);
++#endif
+ #endif /* _SHA512_H */
 diff --git a/lib/Makefile b/lib/Makefile
-index e389ad014f8..499d174199f 100644
+index 499d174199f..35b73d8d00c 100644
 --- a/lib/Makefile
 +++ b/lib/Makefile
-@@ -96,6 +96,8 @@ obj-$(CONFIG_LIBAVB) += libavb/
- obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += libfdt/
- obj-$(CONFIG_$(SPL_TPL_)OF_REAL) += fdtdec_common.o fdtdec.o
+@@ -71,14 +71,16 @@ obj-$(CONFIG_$(SPL_TPL_)CRC16) += crc16.o
+ obj-y += crypto/
  
-+obj-$(CONFIG_MBEDTLS_LIB) += mbedtls/
+ obj-$(CONFIG_$(SPL_TPL_)ACPI) += acpi/
+-obj-$(CONFIG_$(SPL_)MD5) += md5.o
+ obj-$(CONFIG_ECDSA) += ecdsa/
+ obj-$(CONFIG_$(SPL_)RSA) += rsa/
+ obj-$(CONFIG_HASH) += hash-checksum.o
+ obj-$(CONFIG_BLAKE2) += blake2/blake2b.o
+-obj-$(CONFIG_$(SPL_)SHA1) += sha1.o
+-obj-$(CONFIG_$(SPL_)SHA256) += sha256.o
+-obj-$(CONFIG_$(SPL_)SHA512) += sha512.o
 +
- ifdef CONFIG_SPL_BUILD
- obj-$(CONFIG_SPL_YMODEM_SUPPORT) += crc16-ccitt.o
- obj-$(CONFIG_$(SPL_TPL_)HASH) += crc16-ccitt.o
++obj-$(CONFIG_$(SPL_)MD5_LEGACY) += md5.o
++obj-$(CONFIG_$(SPL_)SHA1_LEGACY) += sha1.o
++obj-$(CONFIG_$(SPL_)SHA256_LEGACY) += sha256.o
++obj-$(CONFIG_$(SPL_)SHA512_LEGACY) += sha512.o
++
+ obj-$(CONFIG_CRYPT_PW) += crypt/
+ obj-$(CONFIG_$(SPL_)ASN1_DECODER) += asn1_decoder.o
+ 
 diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
-new file mode 100644
-index 00000000000..3e9057f1acf
---- /dev/null
+index 3e9057f1acf..efae2c4fd72 100644
+--- a/lib/mbedtls/Kconfig
 +++ b/lib/mbedtls/Kconfig
-@@ -0,0 +1,47 @@
-+choice
-+	prompt "Select crypto libraries"
-+	default LEGACY_CRYPTO
+@@ -21,9 +21,100 @@ if LEGACY_CRYPTO
+ 
+ config LEGACY_CRYPTO_BASIC
+ 	bool "legacy basic crypto libraries"
++	select MD5_LEGACY if MD5
++	select SHA1_LEGACY if SHA1
++	select SHA256_LEGACY if SHA256
++	select SHA512_LEGACY if SHA512
++	select SHA384_LEGACY if SHA384
++	select SPL_MD5_LEGACY if SPL_MD5
++	select SPL_SHA1_LEGACY if SPL_SHA1
++	select SPL_SHA256_LEGACY if SPL_SHA256
++	select SPL_SHA512_LEGACY if SPL_SHA512
++	select SPL_SHA384_LEGACY if SPL_SHA384
+ 	help
+ 	  Enable legacy basic crypto libraries.
+ 
++if LEGACY_CRYPTO_BASIC
++
++config SHA1_LEGACY
++	bool "Enable SHA1 support with legacy crypto library"
++	depends on LEGACY_CRYPTO_BASIC && SHA1
 +	help
-+	  Select crypto libraries.
-+	  LEGACY_CRYPTO for legacy crypto libraries,
-+	  MBEDTLS_LIB for MbedTLS libraries.
++	  This option enables support of hashing using SHA1 algorithm
++	  with legacy crypto library.
 +
-+config LEGACY_CRYPTO
-+	bool "legacy crypto libraries"
-+	select LEGACY_CRYPTO_BASIC
-+	select LEGACY_CRYPTO_CERT
-+
-+config MBEDTLS_LIB
-+	bool "MbedTLS libraries"
-+	select MBEDTLS_LIB_CRYPTO
-+	select MBEDTLS_LIB_X509
-+endchoice
-+
-+if LEGACY_CRYPTO
-+
-+config LEGACY_CRYPTO_BASIC
-+	bool "legacy basic crypto libraries"
++config SHA256_LEGACY
++	bool "Enable SHA256 support with legacy crypto library"
++	depends on LEGACY_CRYPTO_BASIC && SHA256
 +	help
-+	  Enable legacy basic crypto libraries.
++	  This option enables support of hashing using SHA256 algorithm
++	  with legacy crypto library.
 +
-+config LEGACY_CRYPTO_CERT
-+	bool "legacy certificate libraries"
++config SHA512_LEGACY
++	bool "Enable SHA512 support with legacy crypto library"
++	depends on LEGACY_CRYPTO_BASIC && SHA512
++	default y if TI_SECURE_DEVICE && FIT_SIGNATURE
 +	help
-+	  Enable legacy certificate libraries.
++	  This option enables support of hashing using SHA512 algorithm
++	  with legacy crypto library.
 +
-+endif # LEGACY_CRYPTO
-+
-+if MBEDTLS_LIB
-+
-+config MBEDTLS_LIB_CRYPTO
-+	bool "MbedTLS crypto libraries"
++config SHA384_LEGACY
++	bool "Enable SHA384 support with legacy crypto library"
++	depends on LEGACY_CRYPTO_BASIC && SHA384
++	select SHA512_LEGACY
 +	help
-+	  Enable MbedTLS crypto libraries.
++	  This option enables support of hashing using SHA384 algorithm
++	  with legacy crypto library.
 +
-+
-+config MBEDTLS_LIB_X509
-+	bool "MbedTLS certificate libraries"
++config MD5_LEGACY
++	bool "Enable MD5 support with legacy crypto library"
++	depends on LEGACY_CRYPTO_BASIC && MD5
 +	help
-+	  Enable MbedTLS certificate libraries.
++	  This option enables support of hashing using MD5 algorithm
++	  with legacy crypto library.
 +
-+endif # MBEDTLS_LIB
-diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
-new file mode 100644
-index 00000000000..e98241b46ab
---- /dev/null
-+++ b/lib/mbedtls/Makefile
-@@ -0,0 +1,41 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (c) 2024 Linaro Limited
-+# Author: Raymond Mao <raymond.mao@linaro.org>
++if SPL
 +
-+MBEDTLS_LIB_DIR = external/mbedtls/library
++config SPL_SHA1_LEGACY
++	bool "Enable SHA1 support in SPL with legacy crypto library"
++	depends on LEGACY_CRYPTO_BASIC && SPL_SHA1
++	help
++	  This option enables support of hashing using SHA1 algorithm
++	  with legacy crypto library.
 +
-+# MbedTLS crypto library
-+obj-$(CONFIG_MBEDTLS_LIB_CRYPTO) += mbedtls_lib_crypto.o
-+mbedtls_lib_crypto-y := \
-+	$(MBEDTLS_LIB_DIR)/platform_util.o \
-+	$(MBEDTLS_LIB_DIR)/constant_time.o \
-+	$(MBEDTLS_LIB_DIR)/md.o
-+mbedtls_lib_crypto-$(CONFIG_$(SPL_)MD5) += $(MBEDTLS_LIB_DIR)/md5.o
-+mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA1) += $(MBEDTLS_LIB_DIR)/sha1.o
-+mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA256) += \
-+	$(MBEDTLS_LIB_DIR)/sha256.o
-+mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA512) += \
-+	$(MBEDTLS_LIB_DIR)/sha512.o
++config SPL_SHA256_LEGACY
++	bool "Enable SHA256 support in SPL with legacy crypto library"
++	depends on LEGACY_CRYPTO_BASIC && SPL_SHA256
++	help
++	  This option enables support of hashing using SHA256 algorithm
++	  with legacy crypto library.
 +
-+# MbedTLS X509 library
-+obj-$(CONFIG_MBEDTLS_LIB_X509) += mbedtls_lib_x509.o
-+mbedtls_lib_x509-y := $(MBEDTLS_LIB_DIR)/x509.o
-+mbedtls_lib_x509-$(CONFIG_$(SPL_)ASN1_DECODER) += \
-+	$(MBEDTLS_LIB_DIR)/asn1parse.o \
-+	$(MBEDTLS_LIB_DIR)/asn1write.o \
-+	$(MBEDTLS_LIB_DIR)/oid.o
-+mbedtls_lib_x509-$(CONFIG_$(SPL_)RSA_PUBLIC_KEY_PARSER) += \
-+	$(MBEDTLS_LIB_DIR)/bignum.o \
-+	$(MBEDTLS_LIB_DIR)/bignum_core.o \
-+	$(MBEDTLS_LIB_DIR)/rsa.o \
-+	$(MBEDTLS_LIB_DIR)/rsa_alt_helpers.o
-+mbedtls_lib_x509-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_SUBTYPE) += \
-+	$(MBEDTLS_LIB_DIR)/pk.o \
-+	$(MBEDTLS_LIB_DIR)/pk_wrap.o \
-+	$(MBEDTLS_LIB_DIR)/pkparse.o
-+mbedtls_lib_x509-$(CONFIG_$(SPL_)X509_CERTIFICATE_PARSER) += \
-+	$(MBEDTLS_LIB_DIR)/x509_crl.o \
-+	$(MBEDTLS_LIB_DIR)/x509_crt.o
-+mbedtls_lib_x509-$(CONFIG_$(SPL_)PKCS7_MESSAGE_PARSER) += \
-+	$(MBEDTLS_LIB_DIR)/pkcs7.o
-diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_config.h
-new file mode 100644
-index 00000000000..38de6b0b9af
---- /dev/null
-+++ b/lib/mbedtls/mbedtls_def_config.h
-@@ -0,0 +1,69 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * MbedTLS config file
-+ *
-+ * Derived from the MbedTLS internal config file,
-+ * for more information about each build option,
-+ * please refer to:
-+ * external/mbedtls/include/mbedtls/mbedtls_config.h
-+ *
-+ * Copyright (c) 2024 Linaro Limited
-+ * Author: Raymond Mao <raymond.mao@linaro.org>
-+ */
++config SPL_SHA512_LEGACY
++	bool "Enable SHA512 support in SPL with legacy crypto library"
++	depends on LEGACY_CRYPTO_BASIC && SPL_SHA512
++	help
++	  This option enables support of hashing using SHA512 algorithm
++	  with legacy crypto library.
 +
-+#if CONFIG_IS_ENABLED(MBEDTLS_LIB_CRYPTO)
++config SPL_SHA384_LEGACY
++	bool "Enable SHA384 support in SPL with legacy crypto library"
++	depends on LEGACY_CRYPTO_BASIC && SPL_SHA384
++	select SPL_SHA512_LEGACY
++	help
++	  This option enables support of hashing using SHA384 algorithm
++	  with legacy crypto library.
 +
-+#define MBEDTLS_MD_C
++config SPL_MD5_LEGACY
++	bool "Enable MD5 support in SPL with legacy crypto library"
++	depends on LEGACY_CRYPTO_BASIC && SPL_MD5
++	help
++	  This option enables support of hashing using MD5 algorithm
++	  with legacy crypto library.
 +
-+#if CONFIG_IS_ENABLED(MD5)
-+#define MBEDTLS_MD5_C
-+#endif
++endif # SPL
 +
-+#if CONFIG_IS_ENABLED(SHA1)
-+#define MBEDTLS_SHA1_C
-+#endif
++endif # LEGACY_CRYPTO_BASIC
 +
-+#if CONFIG_IS_ENABLED(SHA256)
-+#define MBEDTLS_SHA256_C
-+#endif
-+
-+#if CONFIG_IS_ENABLED(SHA384)
-+#define MBEDTLS_SHA384_C
-+#endif
-+
-+#if CONFIG_IS_ENABLED(SHA512)
-+#define MBEDTLS_SHA512_C
-+#endif
-+
-+#endif /* CONFIG_IS_ENABLED(MBEDTLS_LIB_CRYPTO) */
-+
-+#if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
-+
-+#if CONFIG_IS_ENABLED(X509_CERTIFICATE_PARSER)
-+#define MBEDTLS_PKCS1_V15
-+#define MBEDTLS_X509_USE_C
-+#define MBEDTLS_X509_CRT_PARSE_C
-+#define MBEDTLS_X509_CRL_PARSE_C
-+#endif
-+
-+#if CONFIG_IS_ENABLED(ASYMMETRIC_PUBLIC_KEY_SUBTYPE)
-+#define MBEDTLS_PK_C
-+#define MBEDTLS_PK_PARSE_C
-+#endif
-+
-+#if CONFIG_IS_ENABLED(RSA_PUBLIC_KEY_PARSER)
-+#define MBEDTLS_BIGNUM_C
-+#define MBEDTLS_RSA_C
-+#endif
-+
-+#if CONFIG_IS_ENABLED(PKCS7_MESSAGE_PARSER)
-+#define MBEDTLS_PKCS7_C
-+#endif
-+
-+#if CONFIG_IS_ENABLED(ASN1_DECODER)
-+#define MBEDTLS_OID_C
-+#define MBEDTLS_ASN1_PARSE_C
-+#define MBEDTLS_ASN1_WRITE_C
-+#endif
-+
-+#endif /* CONFIG_IS_ENABLED(MBEDTLS_LIB_X509) */
-diff --git a/lib/mbedtls/port/assert.h b/lib/mbedtls/port/assert.h
-new file mode 100644
-index 00000000000..490701aa9d0
---- /dev/null
-+++ b/lib/mbedtls/port/assert.h
-@@ -0,0 +1,12 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Dummy file to allow mbedtls linked with U-Boot to include assert.h
-+ *
-+ * Copyright (c) 2023 Linaro Limited
-+ * Author: Raymond Mao <raymond.mao@linaro.org>
-+ */
-+
-+#ifndef _MBEDTLS_ASSERT_H
-+#define _MBEDTLS_ASSERT_H
-+
-+#endif /* _MBEDTLS_ASSERT_H */
+ config LEGACY_CRYPTO_CERT
+ 	bool "legacy certificate libraries"
+ 	help
 -- 
 2.25.1
 
