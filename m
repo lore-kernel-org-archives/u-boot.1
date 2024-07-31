@@ -4,68 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C43C2C3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 15:29:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56585C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 15:33:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06EBF88A39;
-	Wed, 31 Jul 2024 17:29:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id BC10A8897A;
+	Wed, 31 Jul 2024 17:33:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1722439762;
-	bh=daCEQeDovOEtciodmcUIS5ZUDoQpr+rh3s/I8OXh9Mc=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=QRrUlc22IlFGhqECaxG6Y6lFw8qOq2wS8AOmidQ5E1KuuKQFY63nKXrF/cyE3DCMx
-	 0FoqML6bZ/gDuqdfnmUaEoLf45PIQW8KU8wTz/FMoEDMVQSa4HZOcBwDHaqAQEgf7L
-	 bOq1qesAk8eZeDk84tnyTy2ZQXBzJaU2f4h3JcZIfSu1hj4qXY/opK2uWgLjnZ77gE
-	 UZu25TXiGfxY2wyt/BWsZ/5BFxNJLvtlQ+RAUDNeflWqzFxTAOWghu31sgynNR6uZk
-	 NyXgube+x9DnDpVU3URBwObLUU67SxJrQz+o6ZI1j0DfhUzObFzuiLnVnbhkyQeWeZ
-	 6s+1ZC8Q8YnqQ==
-Received: from crub (p54833c06.dip0.t-ipconnect.de [84.131.60.6])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tom4NjLr";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 87DA7889D2; Wed, 31 Jul 2024 17:33:34 +0200 (CEST)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: agust@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 9AC6888A08;
- Wed, 31 Jul 2024 17:29:19 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1722439760;
- bh=daCEQeDovOEtciodmcUIS5ZUDoQpr+rh3s/I8OXh9Mc=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=Rh6oS4gHCR9xGZQagcWX29ETnqMDD7HGcDp5p2Wrm43PZ59aYrppgBwW/bhJCC+a1
- K7Jy4bqFeJa5Nv4H6ntuxRne6IlyDJBBU/spGOaQkzO4pPHJsg6AHAo9Vk8xlof4SJ
- f81MJfjcng2FDLOZHB2Y3Bk4BK538vgeg/VjnLb/FrqxMbblJBFzOidqByVT5fErxR
- GIVod0mcP+LtLiGtU6xq7ric9aY7fG1NIPwpgYdr4R2ffB9C3las7nfM9ZdB25Dd8E
- l6CgE6xVC1xBiuYzE+c5ZqPhTKFFhn33agSyojIjx8RUJqhDtQx+WQupbcUGsQQhuk
- K5e0akxjQzSVA==
-Date: Wed, 31 Jul 2024 17:28:56 +0200
-From: Anatolij Gustschin <agust@denx.de>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Angelo
- Dureghello <angelo@kernel-space.org>, Anton Bambura
- <jenneron@protonmail.com>, Bin Meng <bmeng@tinylab.org>, Caleb Connolly
- <caleb.connolly@linaro.org>, Dan Carpenter <dan.carpenter@linaro.org>,
- Devarsh Thakkar <devarsht@ti.com>, Francis Laniel
- <francis.laniel@amarulasolutions.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Jagan Teki <jagan@amarulasolutions.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Nikhil M Jain <n-jain1@ti.com>, Ondrej
- Jirman <megi@xff.cz>, Peter Robinson <pbrobinson@gmail.com>, Randolph
- <randolph@andestech.com>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>,
- Stefan Roese <sr@denx.de>
-Subject: Re: [PATCH v3 0/5] video: Improve syncing performance with cyclic
-Message-ID: <20240731172856.1f6596e1@crub>
-In-Reply-To: <CAFLszTjr18h6oeFnNF6A5+D70LWLYXDDQLJ-5V6qO-pjW7qA9g@mail.gmail.com>
-References: <20240704074859.2956745-1-sjg@chromium.org>
- <20240731010407.0ff6a929@crub>
- <CAFLszTjr18h6oeFnNF6A5+D70LWLYXDDQLJ-5V6qO-pjW7qA9g@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+ by phobos.denx.de (Postfix) with ESMTPS id 8342A88958
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 17:33:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mwalle@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id AA5CCCE1372;
+ Wed, 31 Jul 2024 15:33:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8AD5EC116B1;
+ Wed, 31 Jul 2024 15:33:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1722440009;
+ bh=puG2uIF0EPLNs3+qhezi037D53oY5dyQtgXehs4Nuzo=;
+ h=Date:Subject:Cc:From:To:References:In-Reply-To:From;
+ b=tom4NjLriK8WDegDlN9FJgJ5SRBR4335uBvFuN1eAzV5PhJaxtOPZEsxBLss85gE1
+ VQW5mgw02KjLJpd7OepnQgm/OdvhL8ILyY+e7V1m5SGg91t3bcqyfwOILOB4VvJXGJ
+ cem0Dr2aRvTit8AdMf39SN+j94Pl0ezEZ5TSHaPKwFCLwJIIh6QWY39QsFqdGgeJcJ
+ 2VRyH6ATMbw2y2mWJPVFMkQAl94/Jig8nEd73tUxRIDFrGHPpqPPb+lJgEEPhZmgtz
+ XTnQSMxtE8xNwaDVrggNyj7HNzwtSQ32bSXdO26ry5Y48gk+lf5rhIeg+fSb6jp0tq
+ c9ryn85ZNhdtw==
+Content-Type: multipart/signed;
+ boundary=8c07f085817ce1b0adfcde9b23a7fcf9d896ec3a530a3a9f4ef1de11fef7;
+ micalg=pgp-sha384; protocol="application/pgp-signature"
+Date: Wed, 31 Jul 2024 17:33:25 +0200
+Message-Id: <D33U0UZY7230.18W0UEVD0508X@kernel.org>
+Subject: Re: [PATCH v2] boot: android: fix booting without a ramdisk
+Cc: "Tom Rini" <trini@konsulko.com>, <u-boot@lists.denx.de>
+From: "Michael Walle" <mwalle@kernel.org>
+To: "Simon Glass" <sjg@chromium.org>, "Mattijs Korpershoek"
+ <mkorpershoek@baylibre.com>
+X-Mailer: aerc 0.16.0
+References: <20240729213657.2550935-1-mwalle@kernel.org>
+ <875xsnqn3q.fsf@baylibre.com>
+ <CAFLszTip3uwZLy=jL+-BKwD74Wk8j6So_N9TW_P16gpBvLKQRQ@mail.gmail.com>
+In-Reply-To: <CAFLszTip3uwZLy=jL+-BKwD74Wk8j6So_N9TW_P16gpBvLKQRQ@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,37 +72,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+--8c07f085817ce1b0adfcde9b23a7fcf9d896ec3a530a3a9f4ef1de11fef7
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-On Wed, 31 Jul 2024 08:38:35 -0600
-Simon Glass sjg@chromium.org wrote:
+Hi,
 
-> Hi Anatolij,
-> 
-> On Tue, 30 Jul 2024 at 17:05, Anatolij Gustschin <agust@denx.de> wrote:
-> >
-> > Hi Simon,
-> >
-> > On Thu,  4 Jul 2024 08:48:54 +0100
-> > Simon Glass sjg@chromium.org wrote:
-> >  
-> > > Now that U-Boot has a background-processing feature, it is possible to
-> > > reduce the amount of 'foreground' syncing of the display. At present
-> > > this happens quite often.  
-> >
-> > This series breaks turris_1x_sdcard SPL build:
-> >
-> >  https://source.denx.de/u-boot/custodians/u-boot-video/-/jobs/878470#L646
-> >
-> > Should we enable CONFIG_SPL_CYCLIC for this board to fix this?  
-> 
-> Oh, my passing run was from a month ago[1].
+> > > -                     if (ret)
+> > > +                     if (ret =3D=3D -ENOENT)
+> > > +                             return -ENOPKG;
+>
+> We normally use -ENOENT for this sort of thing.
 
-I see, turris_1x board patches were merged later.
+That's the way select_ramdisk() is documented. It was actually
+introduced by yourself in commit e4c928792e93 ("image: Split up
+boot_get_ramdisk()") :)
 
-> I think I need to change a Kconfig condition. Let me try that and resend.
+-michael
 
-OK, thanks!
+--8c07f085817ce1b0adfcde9b23a7fcf9d896ec3a530a3a9f4ef1de11fef7
+Content-Type: application/pgp-signature; name="signature.asc"
 
---
-Anatolij
+-----BEGIN PGP SIGNATURE-----
+
+iKgEABMJADAWIQTIVZIcOo5wfU/AngkSJzzuPgIf+AUCZqpZRhIcbXdhbGxlQGtl
+cm5lbC5vcmcACgkQEic87j4CH/j/bwF/RXnYVe3YVsBOrAHWmgjyHz6k+RtS5IWu
+SP5khUtke1SRe+8kDVKZDxCYAMh4WQ1KAX4nN+BDxk+ksUxy0D8b6/XvgPPd8LHU
+UkO7fYypVktR2ynEtViZobVnoa5+zn0DGxY=
+=U8vO
+-----END PGP SIGNATURE-----
+
+--8c07f085817ce1b0adfcde9b23a7fcf9d896ec3a530a3a9f4ef1de11fef7--
