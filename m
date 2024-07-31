@@ -4,81 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78F64C3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 06:26:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D8A7C3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 06:51:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4D9D88951;
-	Wed, 31 Jul 2024 08:26:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E098C888A5;
+	Wed, 31 Jul 2024 08:51:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nKv7Y5Jb";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="I3q/D67A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3661E8890F; Wed, 31 Jul 2024 08:26:18 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E0FCF88934; Wed, 31 Jul 2024 08:51:02 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28C9488951
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 08:26:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 23B118889C
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 08:50:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a7a91cdcc78so324405366b.3
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 23:26:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722407175; x=1723011975; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=p2xO8eGdlOBypBOD/gnizWFYdfcAnS2zmUOeY+ZdKfo=;
- b=nKv7Y5JbrTAWOCPX7iQk2cv/BnNSeyb/QKayBEUiYGHP1M8qhuZEEfUHMA/kntrLc8
- xTfCP/TwAop8YNtXj6LrhB2kXK72BjE+7Vwu3sEmClVlbKCOYwJVg4LqJmYgd22nhFdJ
- xqPdpTXfyBKi2CO45ISl5/OtNAMu4lzLUNp1ei9z3FXY0OFWGSZaBZ36glC+1HTTN3lT
- K9nqc1o233KoScI6P11P/k3420Oq9+9SPomsJstx+xqozkbxXQOrg1Fqd1rSd9JZIsx/
- SA15UY5rZdpli+fVFfr0rl/f7ipHnJcq/6fuu0jYpFu89tHf1fbmj0AdSZ76nT1akaJL
- 02kA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722407175; x=1723011975;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=p2xO8eGdlOBypBOD/gnizWFYdfcAnS2zmUOeY+ZdKfo=;
- b=PwPZ7SerYQJJEdCdNpHO0lIvs8D+JlbZODOKWoVxclDaruB2vQ6Y7l078OPimJOb2V
- ocGgZESZ7F8sirECBdyFPJNqVKw1Zi3VWae8Ing7OhtqOFK9ePX7K1VD5aducefS5Wiq
- mghUS/ec7k7NXg+DpanC62Wro/5Wj1iGW1KuX4oPtcm+wrcD44+uVg3quU5b6Ml+aZ6N
- J8m6aWCnogd2RfLEfPjIn5eK6YDarnM1hjePEuoUi6rotCb6aMyPx/vyEaVSJ/zrNkjt
- 6oxJK26MWzJbbjr9Y1V7jWnXKAscVa3GbF1OJmCJFgUxXXU1wyRTIkfDwvJ1rTTURL1P
- E75A==
-X-Gm-Message-State: AOJu0YxzT1KgwTJcx8EgS++moT6gxk8Q6y1APIpghaL76l2yYK8XFVF5
- XuoKM9nE8IKjUG+YF9RulYYPZzWe0RfEVeu3qGUY69PMBssBcKxxyI04aBTzAu+hL9i6AN4YjeC
- xXphqVlCR4RVswgiLoZL+b/HTyM0bboOKtXBchQ==
-X-Google-Smtp-Source: AGHT+IElbX9FwpeFtItZiL/hNISeOz0T959r5cBdDO/dxPsquo468KtNS66/gayAlN8M3u84HMy2Qr8eCLH28q0sSjk=
-X-Received: by 2002:a50:8d57:0:b0:5a1:71b2:e9bd with SMTP id
- 4fb4d7f45d1cf-5b02375ed86mr10939547a12.34.1722407175493; Tue, 30 Jul 2024
- 23:26:15 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=18d8=O7=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1722408653;
+ bh=V6dtsP2AZwp0ugiC6X3tUNwWgYDpyWZI3o4q8zAgKnc=;
+ b=I3q/D67AP4xxfk6OuEf8ZwgYdUK42vetB3XSQodJpyCgvG6YholkqkSaVK9rl39/LSW1Tunej
+ nIxT3IywL8yalN2yXHasBvkB850D5ttwPO9eGUYcoQPK4+yI12sJ5JvBx29aiyMzdOTOahIC1IC
+ abXtwwwkgeVnxlhnlZU6gPYisotzKM+eLRTNHQWxNGXAAGvZQUP7D5jBpTIkGI28me0L9FrB5DI
+ OJDL/v4QSiHz9rD0gFHIUt/8KarwzlYd1D6cWUa0QlqbDMkPZIbu3MPubchoB+EgFlkLkQqdLYN
+ 1nnRVqHXV0wxcFFpEMAxu8f3FDnPU1rDgD/F5U+2gOrw==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de, Jonas Karlman
+ <jonas@kwiboo.se>
+Subject: [PATCH 0/5] board: rockchip: Add Radxa ZERO 3W/3E
+Date: Wed, 31 Jul 2024 06:50:35 +0000
+Message-ID: <20240731065048.1199792-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-12-sughosh.ganu@linaro.org>
- <CAFLszTigqxP-wbxmxUUSkrHauL2UrSpQV4e9XK8gDJ4H=e7a2g@mail.gmail.com>
-In-Reply-To: <CAFLszTigqxP-wbxmxUUSkrHauL2UrSpQV4e9XK8gDJ4H=e7a2g@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Wed, 31 Jul 2024 11:56:03 +0530
-Message-ID: <CADg8p974VKejYrBdqVW7qHfasuh4eBbkdkGiOW4iVjcciX8-1g@mail.gmail.com>
-Subject: Re: [PATCH 11/40] lmb: make LMB memory map persistent and global
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
- Max Filippov <jcmvbkbc@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66a9decd73d983cd09237924
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,95 +68,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 31 Jul 2024 at 01:17, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Sughosh,
->
-> On Wed, 24 Jul 2024 at 00:03, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >
-> > The current LMB API's for allocating and reserving memory use a
-> > per-caller based memory view. Memory allocated by a caller can then be
-> > overwritten by another caller. Make these allocations and reservations
-> > persistent using the alloced list data structure.
-> >
-> > Two alloced lists are declared -- one for the available(free) memory,
-> > and one for the used memory. Once full, the list can then be extended
-> > at runtime.
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> > Changes since rfc:
-> > * Squash patches 9 - 11, 13  from the rfc v2 series into a single
-> >   patch to make it bisectable.
-> >
-> >  arch/arc/lib/cache.c                 |   4 +-
-> >  arch/arm/lib/stack.c                 |   4 +-
-> >  arch/arm/mach-apple/board.c          |  17 +-
-> >  arch/arm/mach-snapdragon/board.c     |  17 +-
-> >  arch/arm/mach-stm32mp/dram_init.c    |   8 +-
-> >  arch/arm/mach-stm32mp/stm32mp1/cpu.c |   6 +-
-> >  arch/m68k/lib/bootm.c                |   7 +-
-> >  arch/microblaze/lib/bootm.c          |   4 +-
-> >  arch/mips/lib/bootm.c                |  11 +-
-> >  arch/nios2/lib/bootm.c               |   4 +-
-> >  arch/powerpc/cpu/mpc85xx/mp.c        |   4 +-
-> >  arch/powerpc/include/asm/mp.h        |   4 +-
-> >  arch/powerpc/lib/bootm.c             |  14 +-
-> >  arch/riscv/lib/bootm.c               |   4 +-
-> >  arch/sh/lib/bootm.c                  |   4 +-
-> >  arch/x86/lib/bootm.c                 |   4 +-
-> >  arch/xtensa/lib/bootm.c              |   4 +-
-> >  board/xilinx/common/board.c          |   8 +-
-> >  boot/bootm.c                         |  26 +-
-> >  boot/bootm_os.c                      |   5 +-
-> >  boot/image-board.c                   |  34 +--
-> >  boot/image-fdt.c                     |  36 ++-
-> >  cmd/bdinfo.c                         |   6 +-
-> >  cmd/booti.c                          |   2 +-
-> >  cmd/bootz.c                          |   2 +-
-> >  cmd/elf.c                            |   2 +-
-> >  cmd/load.c                           |   7 +-
-> >  drivers/iommu/apple_dart.c           |   8 +-
-> >  drivers/iommu/sandbox_iommu.c        |  16 +-
-> >  fs/fs.c                              |   7 +-
-> >  include/image.h                      |  28 +-
-> >  include/lmb.h                        | 114 +++-----
-> >  lib/efi_loader/efi_dt_fixup.c        |   2 +-
-> >  lib/efi_loader/efi_helper.c          |   2 +-
-> >  lib/lmb.c                            | 395 +++++++++++++++------------
-> >  net/tftp.c                           |   5 +-
-> >  net/wget.c                           |   5 +-
-> >  test/cmd/bdinfo.c                    |   2 +-
-> >  test/lib/lmb.c                       | 205 ++++++--------
-> >  39 files changed, 477 insertions(+), 560 deletions(-)
->
-> [..]
->
-> > diff --git a/lib/lmb.c b/lib/lmb.c
-> > index 4d39c0d1f9..dd6f22654c 100644
-> > --- a/lib/lmb.c
-> > +++ b/lib/lmb.c
-> [..]
-> > -static void lmb_remove_region(struct lmb_region *rgn, unsigned long r)
-> > +static void lmb_remove_region(struct alist *lmb_rgn_lst, unsigned long r)
-> >  {
-> >         unsigned long i;
-> > +       struct lmb_region *rgn = lmb_rgn_lst->data;
-> >
-> > -       for (i = r; i < rgn->cnt - 1; i++) {
-> > -               rgn->region[i].base = rgn->region[i + 1].base;
-> > -               rgn->region[i].size = rgn->region[i + 1].size;
-> > -               rgn->region[i].flags = rgn->region[i + 1].flags;
-> > +       for (i = r; i < lmb_rgn_lst->count - 1; i++) {
-> > +               rgn[i].base = rgn[i + 1].base;
-> > +               rgn[i].size = rgn[i + 1].size;
-> > +               rgn[i].flags = rgn[i + 1].flags;
->
-> This should be:
->
-> rgn[i] = rgn[i+1]
+This series add support for the RK3566 based Radxa ZERO 3W/3E boards.
 
-Yes, direct struct assignment is a better way of doing this. Thanks
-for pointing it out!
+rk_board_late_init() and board_fit_config_name_match() has been
+implemented to set fdtfile env var and load correct FIT config based
+on what board is detected at runtime.
 
--sughosh
+Features tested on a ZERO 3W 8GB v1.11:
+- SD-card boot
+- eMMC boot
+- USB gadget
+- USB host
+
+Features tested on a ZERO 3E 4GB v1.2:
+- SD-card boot
+- Ethernet
+- USB gadget
+- USB host
+
+This series depends on the following patch for a clean apply:
+- board: rockchip: add Radxa ROCK 3 Model C [1]
+
+[1] https://patchwork.ozlabs.org/patch/1963177/
+
+FUKAUMI Naoki (1):
+  arm64: dts: rockchip: fix mmc aliases for Radxa ZERO 3E/3W
+
+Jonas Karlman (3):
+  arm64: dts: rockchip: Add Radxa ZERO 3W/3E
+  dm: adc: Add SPL_ADC Kconfig symbol for use of ADC in SPL
+  board: rockchip: Add Radxa ZERO 3W/3E
+
+Trevor Woerner (1):
+  arm64: dts: rockchip: add gpio-line-names to radxa-zero-3
+
+ arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi |  11 +
+ arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi |  11 +
+ arch/arm/mach-rockchip/rk3568/Kconfig         |   6 +
+ board/radxa/zero3-rk3566/Kconfig              |  12 +
+ board/radxa/zero3-rk3566/MAINTAINERS          |   6 +
+ board/radxa/zero3-rk3566/Makefile             |   3 +
+ board/radxa/zero3-rk3566/zero3-rk3566.c       |  59 ++
+ configs/radxa-zero-3-rk3566_defconfig         |  85 +++
+ doc/board/rockchip/rockchip.rst               |   1 +
+ drivers/Makefile                              |   2 +-
+ drivers/adc/Kconfig                           |   4 +
+ .../arm64/rockchip/rk3566-radxa-zero-3.dtsi   | 531 ++++++++++++++++++
+ .../arm64/rockchip/rk3566-radxa-zero-3e.dts   |  52 ++
+ .../arm64/rockchip/rk3566-radxa-zero-3w.dts   |  92 +++
+ 14 files changed, 874 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi
+ create mode 100644 board/radxa/zero3-rk3566/Kconfig
+ create mode 100644 board/radxa/zero3-rk3566/MAINTAINERS
+ create mode 100644 board/radxa/zero3-rk3566/Makefile
+ create mode 100644 board/radxa/zero3-rk3566/zero3-rk3566.c
+ create mode 100644 configs/radxa-zero-3-rk3566_defconfig
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3.dtsi
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3e.dts
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3w.dts
+
+-- 
+2.45.2
+
