@@ -4,81 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8E0AC3DA49
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 01:41:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29AF0C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 03:38:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A02B08841E;
-	Wed, 31 Jul 2024 03:41:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 79F9988780;
+	Wed, 31 Jul 2024 05:38:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OWpAx6GF";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id EBC4A88780; Wed, 31 Jul 2024 03:41:27 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1722397122;
+	bh=MK+kJALQBhhvRPjkNrPlnM9MBWPiQks75Q8rkkgQzqg=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=NXegEbtrdU23Jjit49TWX+IHfxOapILMkU2DmK1Pp0X8hegV0i343ENZJfAi87wmm
+	 Ru7WjiqqZ6cpXQST2IfxcTQT40WeZ0lV8GPjkZr0KYyqcJip741PeZ6J8Ja1sljYp3
+	 +MX757njYXxKp4z2qw0D4nKxxKkX1Wglao9I4COh+sWP7MEENTgagcMvSeMqrEBLGR
+	 LHygrgjTqXgtVZ5Iy/drLtIJxTvdlH8e7GWnn3Kmmk5R8hF/7VisqUNtW9jnsCbYZ9
+	 2zs+Jt+6ZMs58fZRhYOjsrRp9natZ/2HVEeLdQ02Fs2BYJIAryNEDrbMy8NGmpckIX
+	 JjXKlBiD7p9uQ==
+Received: from [192.168.1.107] (87-97-105-110.pool.digikabel.hu
+ [87.97.105.110])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F331F8841E
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 03:41:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-3db23a6085aso262986b6e.1
- for <u-boot@lists.denx.de>; Tue, 30 Jul 2024 18:41:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1722390084; x=1722994884; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2ZY5G9MyMOg92ThJj8l6v3QA1KQThVonzoJBFhxb0iM=;
- b=OWpAx6GFswP/nUMYzdqZmj8WHQv5eAvpN5DGHGLHxReODjkrpWRiFdETuApqR09RNR
- jwUBlXpGXScd5SLIT6YaFv754KyGiCWITipzC8RzVbUeViBXhf3AdYyEecBtYwApudm2
- 52TYXWmmlpMxDmwxiF21A9GnT4BL/MSXFnyoc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722390084; x=1722994884;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2ZY5G9MyMOg92ThJj8l6v3QA1KQThVonzoJBFhxb0iM=;
- b=inOUu0x97c5hogB4mcg5oBPhlAqeGc8rIhLeXvwRFELGwGbpP/jgCW4Zikpm4deEzX
- HIxsJtGIfdCvM20pqz05s06jMh2Tj4s7h0IMLywOwZJXvbErRvMzhnSaMAAR3TY/CLAV
- 1BiMwkpftGWjUnLEqheI4HKEFuKpWIFHQF22nIkEI5J+rhEeDj5Utz40cwxgQ4OGQr7x
- Zhp0nLgcPyjtA7w67yh1HrsODogHKrEm3uFl1NILzfJAV6srLW3GBGnjYSLqRkJmoEcs
- BZMeIDXE4UtYRvCAVse8B34rtwN/+vQ/DmyWkkNURlTYiV+vI7f9xmSA0zEqlk8ZCt32
- U1Vg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVCvZWDgC6kUACSTeN3LgP7guCDxwFPNsoXpt3Tqyh/oL3SM/TTkURZxWmGmUl3OGJFJulG34TGRz4MSlpcqK2ExpPiJg==
-X-Gm-Message-State: AOJu0YzEUpr526x3F8R2akpyOB82QvxPsnoMPctl9QE2dkKjFuy6xBkp
- O8fppGq2f3lD4e92tRlpwXjjDVr0mdCxOBV69ciHMoFaQ/5XNhqo3vOa3+4ZbbE=
-X-Google-Smtp-Source: AGHT+IH08Wa3mtBD+5Mu/XQnKzM1BozVuDSXy0Ga9U3cATsYOw86uktamfdhvlyWjnegsyzNqpmZQA==
-X-Received: by 2002:a05:6808:3021:b0:3db:169c:96de with SMTP id
- 5614622812f47-3db42d37592mr1913171b6e.16.1722390083700; 
- Tue, 30 Jul 2024 18:41:23 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-103-190.totalplay.net.
- [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2653de269b1sm2533375fac.1.2024.07.30.18.41.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jul 2024 18:41:23 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Doug Zobel <douglas.zobel@climate.com>, Marek Vasut <marex@denx.de>, 
- Christian Gmeiner <christian.gmeiner@gmail.com>, u-boot@lists.denx.de, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Cc: Simon Glass <sjg@chromium.org>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
- Christian Marangi <ansuelsmth@gmail.com>
-In-Reply-To: <20240719091213.3757300-1-mikhail.kshevetskiy@iopsys.eu>
-References: <20240719091213.3757300-1-mikhail.kshevetskiy@iopsys.eu>
-Subject: Re: [PATCH v6 0/3] led: implement software blinking
-Message-Id: <172239008261.3831478.7216405283004244043.b4-ty@konsulko.com>
-Date: Tue, 30 Jul 2024 19:41:22 -0600
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 4D149883FE;
+ Wed, 31 Jul 2024 05:38:38 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1722397121;
+ bh=MK+kJALQBhhvRPjkNrPlnM9MBWPiQks75Q8rkkgQzqg=;
+ h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
+ b=HMUWFc3wzUwBeN1PgB2joXjQLRR5ui7CZt+NQMG8Ar8qklGGgtLkWuf4/09v7hFdV
+ KVWqrComcrJO7QFTSFJttf7Z1oobcr6+Nkc+J8ibFzPWkLSSNfm6RK0NlURag48DN6
+ y4G6XyPPmky/xvMTJP9AsFpQ0Fig6A9lVAfQS8toVlNyYfXnk8EbKCrgrXL9Vrw1bk
+ 0Q/9R2qRupHSSNHVxLTpr/ZXoyHWLSYxRCvQAh4eso3s1RnxXTpAgpfLnJZaxf+/Ql
+ DQ4sB2F52+7CmReufJVkFUAlgq3oztXxwX68Neiws594p97xKDVuaq6uUJbCoVbchE
+ Vn03B7XItqTQA==
+Message-ID: <5f928c0b-a05d-36b0-ab05-b77233e546ec@denx.de>
+Date: Wed, 31 Jul 2024 05:37:56 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v6 6/6] spinand: bind UBI block
+Content-Language: en-US
+To: Alexey Romanov <avromanov@salutedevices.com>,
+ dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
+ frieder.schrempf@kontron.de, kmpark@infradead.org, joe.hershberger@ni.com,
+ dunaev@tecon.ru, sjg@chromium.org, bmeng@tinylab.org, xypron.glpk@gmx.de,
+ tobias@waldekranz.com, jpewhacker@gmail.com,
+ marek.vasut+renesas@mailbox.org, kever.yang@rock-chips.com,
+ jbx6244@gmail.com, abdellatif.elkhlifi@arm.com,
+ mikhail.kshevetskiy@iopsys.eu, jagan@amarulasolutions.com
+Cc: kernel@salutedevices.com, u-boot@lists.denx.de
+References: <20240718054528.799539-1-avromanov@salutedevices.com>
+ <20240718054528.799539-7-avromanov@salutedevices.com>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <20240718054528.799539-7-avromanov@salutedevices.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,27 +72,36 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 19 Jul 2024 13:12:10 +0400, Mikhail Kshevetskiy wrote:
+Hello Alexey,
 
-> v2 changes:
->  * Drop sw_blink_state structure, move its necessary fields to
->    led_uc_plat structure.
->  * Add cyclic_info pointer to led_uc_plat structure. This
->    simplify code a lot.
->  * Remove cyclic function search logic. Not needed anymore.
->  * Fix blinking period. It was twice large.
->  * Other cleanups.
+On 18.07.24 07:45, Alexey Romanov wrote:
+> UBI block is virtual block device, which is an abstraction
+> over MTD layer. Therefore it is logical to use it in combination
+> with MTD drivers.
 > 
-> [...]
+> Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
+> Reviewed-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+> ---
+>   drivers/mtd/nand/spi/core.c | 12 ++++++++++--
+>   1 file changed, 10 insertions(+), 2 deletions(-)
 
-Applied to u-boot/master, thanks!
+Looks good from my side
+
+Reviewed-by: Heiko Schocher <hs@denx.de>
+
+Thanks!
+
+bye,
+Heiko
+
 
 -- 
-Tom
-
-
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
