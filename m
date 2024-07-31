@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61696C3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 14:42:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64A1EC3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 14:42:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32E1E88A64;
+	by phobos.denx.de (Postfix) with ESMTP id 8697488A97;
 	Wed, 31 Jul 2024 16:41:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JvOBkz8B";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JuLpc22p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57A1288958; Wed, 31 Jul 2024 16:41:22 +0200 (CEST)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id 1A9E688A21; Wed, 31 Jul 2024 16:41:24 +0200 (CEST)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2854088958
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 16:41:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 06C5A88A4F
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 16:41:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-81f96eaa02aso215269639f.2
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-81f921c40a0so233480039f.0
  for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 07:41:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1722436879; x=1723041679; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=B0j1bes5YLXzY5J61Qbe3iY9Var4uucdcZdNTux/Zng=;
- b=JvOBkz8BjwEoK0jkDD3/HL0L9YZCoiYiiKzC51drz8Nxq6Gj/IX5mRVeQ/aGN+TFsh
- 1KXzsmIEhJxIEQWSOP4cfDAk53OdQju1tVTjow6V+oEOqFJFeod7l84f3cBZCzbTeXXn
- jZr3sOKKb5uDAGfnVEb2uyGaKkl77dcL4GMA4=
+ bh=U/V1bK3kGD3T40oW8YjdRquqQ/kz09F16F6a47CT070=;
+ b=JuLpc22pzxUBRr/xlosVdf29GLcunEZx6k24qkBxOfXAo00FxqZPTihhr3K3hi4Bc2
+ +TbKBAaJwagQY0rEF9ejCsoSAT6KI65AAzqkAQfECmSnbl/zJPkKI6Ok9dJWk+NL8vB2
+ 0t15bQow2pxD2Xo9GSVwwR152pm2phEzm9MSQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1722436879; x=1723041679;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=B0j1bes5YLXzY5J61Qbe3iY9Var4uucdcZdNTux/Zng=;
- b=e5jD1AoaVdwMf8tt42iY32UWG+6Cv3EEEhJXV90p/FkZgjw/4EsewGq1uBjo2LCb+9
- I7nbhPrkUaYMn8dl3B3adi0k/Ko8Khse04dNCzKAVmytTzxOPMlGPLCIf6YNVP5TqsAQ
- 30SxbkJmoNRoGZjCO91mauaH+N0J9nuYuDM9JSI/kdAZ3Jnw0bGwp3kXvsY8Nsav5LuL
- DjLH8XgF9h0UvsCFwuNhB6ebOwhx7IG6ah6ofr+YBHWzjCa8pMwxaU9PbtfzaBzADlB6
- GmVhkSqnYFePAjFiRoQjAxAYIbsQOjWr77Adj06IspIebRXpTlBnBvPWiVI2zUY2sMeT
- ZmmA==
-X-Gm-Message-State: AOJu0YwfCVrgXwY1TqcuCFvLD2133S5Bbe2WREM9JP87GS9+B+RmVjZe
- hh74yRBboVbXBrhqrqSvGSoF/EogjNSANklMeNhzWkc1KzpamM8lhc45WsLxX/1+fNWNKtxn8HM
+ bh=U/V1bK3kGD3T40oW8YjdRquqQ/kz09F16F6a47CT070=;
+ b=mYXAaxtxjXa3weHjI7ZoNxvKvg3TyuU3E7Zgu3GD++63eW1oJfrb+mEBxWAyGhfy0x
+ zMgPsBKX6InYLlNRz1VaWoSd4f7tMiH6p0uAqQLi+AyLxC/1QPr2uq2fxiH1TttbN/WS
+ j5/50ukJWtOtaIvxlOdTmeMM5WLv+TZBZPymZlN1GwXriInnMepGpMK7JUjxZYVaESup
+ nkBbBz/YsP59K+lr+jm0CcCG2+UTfvxjQwpwV4hEdVIZIZ5Gt6hLCNmRGln4HjDRGPm0
+ NUnYrvcKrLogRxtfQF0LK3+0F2WP1qIcx3ijwLN6IYUlpZWKBQ+kVsBToFPAd8i4HiKG
+ 1Kng==
+X-Gm-Message-State: AOJu0YxZ8lgpNu6J/wgglsSVHDvggoyUaHpMBlTyDPnsGFLzRr2RBahf
+ N8wBdvo6THngWRdLyqd3wk2HZMMJsfGtZ2lDGQAHFZqVvVM9rkkpVakA3agMy2gobJ7x8WZDPyE
  =
-X-Google-Smtp-Source: AGHT+IHDkrmrvIZr5h2IkRtXNuPyo8VXucD05dqUOVSMoWkKpvEhgjiekzBxTkmjERlZWdtT5b1uVQ==
-X-Received: by 2002:a05:6602:2dd2:b0:803:5e55:ecb2 with SMTP id
- ca18e2360f4ac-81f959d2b12mr1566813339f.0.1722436878661; 
- Wed, 31 Jul 2024 07:41:18 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHaT2Rado/2NgKthy5XmBizkjUEvOxAVo7UIq7PfRCZDrtZn71Gr8ldTWic8a7pGoSvsM4L3w==
+X-Received: by 2002:a05:6602:6209:b0:81f:b38c:3537 with SMTP id
+ ca18e2360f4ac-81fb38c3e16mr876333639f.10.1722436879552; 
+ Wed, 31 Jul 2024 07:41:19 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
  8926c6da1cb9f-4c29fc0a569sm3209770173.126.2024.07.31.07.41.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jul 2024 07:41:18 -0700 (PDT)
+ Wed, 31 Jul 2024 07:41:19 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 2/5] video: Move last_sync to private data
-Date: Wed, 31 Jul 2024 08:41:09 -0600
-Message-Id: <20240731144112.787509-3-sjg@chromium.org>
+Subject: [PATCH v3 3/5] video: Use cyclic to handle video sync
+Date: Wed, 31 Jul 2024 08:41:10 -0600
+Message-Id: <20240731144112.787509-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240731144112.787509-1-sjg@chromium.org>
 References: <20240731144112.787509-1-sjg@chromium.org>
@@ -89,74 +89,213 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rather than using a static variable, use the video device's private
-data to remember when the last video sync was completed. This allows
-each display to have its own sync and avoids using static data in SPL.
+At present U-Boot flushes the cache after every character written to
+ths display. This makes the command-line slower, to the point that
+pasting in long strings can fail.
+
+Add a cyclic function to sync the display every 10ms. Enable this by
+default.
+
+Allow much longer times for sandbox, since the SDL display is quite
+slow.
+
+Avoid size growth if the feature is disabled by making the new init and
+destroy functions dependent on CYCLIC being enabled.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+(no changes since v3)
 
- drivers/video/video-uclass.c | 10 +++-------
- include/video.h              |  2 ++
- 2 files changed, 5 insertions(+), 7 deletions(-)
+Changes in v3:
+- Adapt to new cyclic API
 
+Changes in v2:
+- Expand help for CONFIG_VIDEO
+
+ drivers/video/Kconfig        | 35 +++++++++++++++++++++++++++
+ drivers/video/video-uclass.c | 46 ++++++++++++++++++++++++++++++++----
+ 2 files changed, 77 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+index 7808ae7919e..6e79694fd19 100644
+--- a/drivers/video/Kconfig
++++ b/drivers/video/Kconfig
+@@ -7,6 +7,7 @@ menu "Graphics support"
+ config VIDEO
+ 	bool "Enable driver model support for LCD/video"
+ 	depends on DM
++	imply CYCLIC
+ 	help
+ 	  This enables driver model for LCD and video devices. These support
+ 	  a bitmap display of various sizes and depths which can be drawn on
+@@ -14,6 +15,11 @@ config VIDEO
+ 	  option compiles in the video uclass and routes all LCD/video access
+ 	  through this.
+ 
++	  If CYCLIC is enabled (which it is by default), the cyclic subsystem
++	  is used to flush pending output to the display periodically, rather
++	  than this happening with every chunk of output. This allows for more
++	  efficient operation and faster display output.
++
+ if VIDEO
+ 
+ config VIDEO_FONT_4X6
+@@ -232,6 +238,35 @@ config NO_FB_CLEAR
+ 	  loads takes over the screen.  This, for example, can be used to
+ 	  keep splash image on screen until grub graphical boot menu starts.
+ 
++config VIDEO_SYNC_MS
++	int "Video-sync period in milliseconds for foreground processing"
++	default 300 if SANDBOX
++	default 100
++	help
++	  This sets the requested, maximum time before a video sync will take
++	  place, in milliseconds. Note that the time between video syncs
++	  may be longer than this, since syncs only happen when the video system
++	  is used, e.g. by outputting a character to the console.
++
++	  It may also be shorter, since the video uclass will automatically
++	  force a sync in certain situations.
++
++	  Many video-output systems require a sync operation before any output
++	  is visible. This may flush the CPU cache or perhaps copy the
++	  display contents to a hardware framebuffer. Without this, change to
++	  the video may never be displayed.
++
++config VIDEO_SYNC_CYCLIC_MS
++	int "Video-sync period in milliseconds for cyclic processing"
++	depends on CYCLIC
++	default 100 if SANDBOX
++	default 10
++	help
++	  This sets the frequency of cyclic video syncs. The cyclic system is
++	  used to ensure that when U-Boot is idle, it syncs the video. This
++	  improves the responsiveness of the command line to new characters
++	  being entered.
++
+ config PANEL
+ 	bool "Enable panel uclass support"
+ 	default y
 diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
-index ff1382f4a43..a95b5f199dc 100644
+index a95b5f199dc..a5aa8dd5295 100644
 --- a/drivers/video/video-uclass.c
 +++ b/drivers/video/video-uclass.c
-@@ -349,6 +349,7 @@ void video_set_default_colors(struct udevice *dev, bool invert)
- /* Flush video activity to the caches */
- int video_sync(struct udevice *vid, bool force)
- {
-+	struct video_priv *priv = dev_get_uclass_priv(vid);
- 	struct video_ops *ops = video_get_ops(vid);
- 	int ret;
+@@ -8,6 +8,7 @@
+ #include <bloblist.h>
+ #include <console.h>
+ #include <cpu_func.h>
++#include <cyclic.h>
+ #include <dm.h>
+ #include <log.h>
+ #include <malloc.h>
+@@ -52,6 +53,8 @@
+  */
+ DECLARE_GLOBAL_DATA_PTR;
  
-@@ -364,20 +365,15 @@ int video_sync(struct udevice *vid, bool force)
- 	 * out whether it exists? For now, ARM is safe.
- 	 */
- #if defined(CONFIG_ARM) && !CONFIG_IS_ENABLED(SYS_DCACHE_OFF)
--	struct video_priv *priv = dev_get_uclass_priv(vid);
--
- 	if (priv->flush_dcache) {
- 		flush_dcache_range((ulong)priv->fb,
- 				   ALIGN((ulong)priv->fb + priv->fb_size,
++struct cyclic_info;
++
+ /**
+  * struct video_uc_priv - Information for the video uclass
+  *
+@@ -60,9 +63,12 @@ DECLARE_GLOBAL_DATA_PTR;
+  *	available address to use for a device's framebuffer. It starts at
+  *	gd->video_top and works downwards, running out of space when it hits
+  *	gd->video_bottom.
++ * @cyc: handle for cyclic-execution function, or NULL if none
+  */
+ struct video_uc_priv {
+ 	ulong video_ptr;
++	bool cyc_active;
++	struct cyclic_info cyc;
+ };
+ 
+ /** struct vid_rgb - Describes a video colour */
+@@ -359,6 +365,10 @@ int video_sync(struct udevice *vid, bool force)
+ 			return ret;
+ 	}
+ 
++	if (CONFIG_IS_ENABLED(CYCLIC) && !force &&
++	    get_timer(priv->last_sync) < CONFIG_VIDEO_SYNC_MS)
++		return 0;
++
+ 	/*
+ 	 * flush_dcache_range() is declared in common.h but it seems that some
+ 	 * architectures do not actually implement it. Is there a way to find
+@@ -371,11 +381,10 @@ int video_sync(struct udevice *vid, bool force)
  					 CONFIG_SYS_CACHELINE_SIZE));
  	}
  #elif defined(CONFIG_VIDEO_SANDBOX_SDL)
--	struct video_priv *priv = dev_get_uclass_priv(vid);
--	static ulong last_sync;
--
--	if (force || get_timer(last_sync) > 100) {
-+	if (force || get_timer(priv->last_sync) > 100) {
- 		sandbox_sdl_sync(priv->fb);
--		last_sync = get_timer(0);
-+		priv->last_sync = get_timer(0);
- 	}
+-	if (force || get_timer(priv->last_sync) > 100) {
+-		sandbox_sdl_sync(priv->fb);
+-		priv->last_sync = get_timer(0);
+-	}
++	sandbox_sdl_sync(priv->fb);
  #endif
++	priv->last_sync = get_timer(0);
++
  	return 0;
-diff --git a/include/video.h b/include/video.h
-index 4d8df9baaad..4013a949983 100644
---- a/include/video.h
-+++ b/include/video.h
-@@ -97,6 +97,7 @@ enum video_format {
-  *		the LCD is updated
-  * @fg_col_idx:	Foreground color code (bit 3 = bold, bit 0-2 = color)
-  * @bg_col_idx:	Background color code (bit 3 = bold, bit 0-2 = color)
-+ * @last_sync:	Monotonic time of last video sync
-  */
- struct video_priv {
- 	/* Things set up by the driver: */
-@@ -121,6 +122,7 @@ struct video_priv {
- 	bool flush_dcache;
- 	u8 fg_col_idx;
- 	u8 bg_col_idx;
-+	ulong last_sync;
+ }
+ 
+@@ -524,10 +533,16 @@ int video_default_font_height(struct udevice *dev)
+ 	return vc_priv->y_charsize;
+ }
+ 
++static void video_idle(struct cyclic_info *cyc)
++{
++	video_sync_all();
++}
++
+ /* Set up the display ready for use */
+ static int video_post_probe(struct udevice *dev)
+ {
+ 	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
++	struct video_uc_priv *uc_priv = uclass_get_priv(dev->uclass);
+ 	struct video_priv *priv = dev_get_uclass_priv(dev);
+ 	char name[30], drv[15], *str;
+ 	const char *drv_name = drv;
+@@ -618,6 +633,16 @@ static int video_post_probe(struct udevice *dev)
+ 		}
+ 	}
+ 
++	/* register cyclic as soon as the first video device is probed */
++	if (CONFIG_IS_ENABLED(CYCLIC) && (gd->flags && GD_FLG_RELOC) &&
++	    !uc_priv->cyc_active) {
++		uint ms = CONFIG_IF_ENABLED_INT(CYCLIC, VIDEO_SYNC_CYCLIC_MS);
++
++		cyclic_register(&uc_priv->cyc, video_idle, ms * 1000,
++				"video_init");
++		uc_priv->cyc_active = true;
++	}
++
+ 	return 0;
  };
  
- /**
+@@ -657,6 +682,18 @@ static int video_post_bind(struct udevice *dev)
+ 	return 0;
+ }
+ 
++__maybe_unused static int video_destroy(struct uclass *uc)
++{
++	struct video_uc_priv *uc_priv = uclass_get_priv(uc);
++
++	if (uc_priv->cyc_active) {
++		cyclic_unregister(&uc_priv->cyc);
++		uc_priv->cyc_active = false;
++	}
++
++	return 0;
++}
++
+ UCLASS_DRIVER(video) = {
+ 	.id		= UCLASS_VIDEO,
+ 	.name		= "video",
+@@ -666,4 +703,5 @@ UCLASS_DRIVER(video) = {
+ 	.priv_auto	= sizeof(struct video_uc_priv),
+ 	.per_device_auto	= sizeof(struct video_priv),
+ 	.per_device_plat_auto	= sizeof(struct video_uc_plat),
++	CONFIG_IS_ENABLED(CYCLIC, (.destroy = video_destroy, ))
+ };
 -- 
 2.34.1
 
