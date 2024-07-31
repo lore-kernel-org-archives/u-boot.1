@@ -4,49 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2203FC3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 23:09:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CF20C3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 23:19:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29B8B88A9B;
-	Thu,  1 Aug 2024 01:09:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+	by phobos.denx.de (Postfix) with ESMTP id 743A888A7B;
+	Thu,  1 Aug 2024 01:18:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 6836F88AA7; Thu,  1 Aug 2024 01:09:02 +0200 (CEST)
-Received: from smtpbguseast2.qq.com (smtpbguseast2.qq.com [54.204.34.130])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21F8A88980
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 01:08:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
-X-QQ-mid: bizesmtpsz1t1722467308tpv2ok5
-X-QQ-Originating-IP: +9h4j+T/BPAK783xTg7XnYQx/T0SmXFB6iLG20f9oE4=
-Received: from [192.168.159.131] ( [106.150.157.243])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Thu, 01 Aug 2024 07:08:26 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 6620688350982495317
-Message-ID: <67FD7D4934C9209E+6a613b14-53c5-48fa-aa77-78dc711a4ed6@radxa.com>
-Date: Thu, 1 Aug 2024 08:08:25 +0900
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="OdUcxENh";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 8534088A95; Thu,  1 Aug 2024 01:18:57 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E61388897F
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 01:18:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=72bb=PA=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1722467931;
+ bh=S5CSZSqyeKKj9c3As8SlKlF/xaq1KUpN+EBXny8Yiho=;
+ b=OdUcxENhCiHzqpNIv44eI1t4d9xtl7y5FuAACSM2ivqW6HedbEG3TAvUnn3v0MIvnTIp1Xq7y
+ nQeidhZLpTON/82h9TGgYksR+wVrFx+SDF5oB7lBGZ3bqC7F7qiDS2Y0mgle87XixvNA1oM2QYn
+ iEVG34HnRuVgdBVBD9XL4oC4xNr/xcXhg9zgSfQAumYCBwxAXcKFuL3R90C1CqDqQqy57RiumDF
+ fJCsL2BCkL794ypQG/A2zAjODmj1H9V3ryD54AGkBNOILcpr2aQb8D9en1IWOl/6631/rHpqtOM
+ L/qrM8NpdfygqIkTe/WMepVwPXQccydSUy1YkbTilA1g==
+Message-ID: <d90a0e00-4fba-4ff2-8de6-2cdcdd27ca23@kwiboo.se>
+Date: Thu, 1 Aug 2024 01:18:40 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/5] board: rockchip: Add Radxa ZERO 3W/3E
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20240731065048.1199792-1-jonas@kwiboo.se>
- <20240731065048.1199792-6-jonas@kwiboo.se>
+Subject: Re: [PATCH v8 8/8] rockchip: Avoid #ifdefs in RK3399 SPL
+To: Simon Glass <sjg@chromium.org>
+Cc: "U-Boot Mailing List" <u-boot@lists.denx.de>, Tom Rini
+ <trini@konsulko.com>, Jeffy Chen <jeffy.chen@rock-chips.com>, Kever Yang
+ <kever.yang@rock-chips.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ huang lin <hl@rock-chips.com>
+References: <20240731215832.2266189-9-sjg@chromium.org>
 Content-Language: en-US
-From: FUKAUMI Naoki <naoki@radxa.com>
-In-Reply-To: <20240731065048.1199792-6-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240731215832.2266189-9-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtpsz:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66aac65606984f15edfbe222
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,322 +74,179 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Simon,
 
-On 7/31/24 15:50, Jonas Karlman wrote:
-> The Radxa ZERO 3W/3E is an ultra-small, high-performance single board
-> computer based on the Rockchip RK3566, with a compact form factor and
-> rich interfaces.
+On 2024-07-31 23:58, Simon Glass wrote:
+> The code here is confusing due to large blocks which are #ifdefed out.
+> Add a function phase_sdram_init() which returns whether SDRAM init
+> should happen in the current phase, using that as needed to control the
+> code flow.
 > 
-> Implement rk_board_late_init() to set correct fdtfile env var and
-> board_fit_config_name_match() to load correct FIT config based on what
-> board is detected at runtime so a single board target can be used for
-> both board models.
+> This increases code size by about 500 bytes in SPL when the cache is on,
+> since it must call the rather large rockchip_sdram_size() function.
 > 
-> Features tested on a ZERO 3W 8GB v1.11:
-> - SD-card boot
-> - eMMC boot
-> - USB gadget
-> - USB host
-> 
-> Features tested on a ZERO 3E 4GB v1.2:
-> - SD-card boot
-> - Ethernet
-> - USB gadget
-> - USB host
-> 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-
-for whole series,
-
-Tested-by FUKAUMI Naoki <naoki@radxa.com>
-
-Best regards,
-
---
-FUKAUMI Naoki
-Radxa Computer (Shenzhen) Co., Ltd.
-
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
->   arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi | 11 +++
->   arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi | 11 +++
->   arch/arm/mach-rockchip/rk3568/Kconfig         |  6 ++
->   board/radxa/zero3-rk3566/Kconfig              | 12 +++
->   board/radxa/zero3-rk3566/MAINTAINERS          |  6 ++
->   board/radxa/zero3-rk3566/Makefile             |  3 +
->   board/radxa/zero3-rk3566/zero3-rk3566.c       | 59 +++++++++++++
->   configs/radxa-zero-3-rk3566_defconfig         | 85 +++++++++++++++++++
->   doc/board/rockchip/rockchip.rst               |  1 +
->   9 files changed, 194 insertions(+)
->   create mode 100644 arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi
->   create mode 100644 arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi
->   create mode 100644 board/radxa/zero3-rk3566/Kconfig
->   create mode 100644 board/radxa/zero3-rk3566/MAINTAINERS
->   create mode 100644 board/radxa/zero3-rk3566/Makefile
->   create mode 100644 board/radxa/zero3-rk3566/zero3-rk3566.c
->   create mode 100644 configs/radxa-zero-3-rk3566_defconfig
 > 
-> diff --git a/arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi b/arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi
-> new file mode 100644
-> index 000000000000..4025f5097af5
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi
-> @@ -0,0 +1,11 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +
-> +#include "rk356x-u-boot.dtsi"
-> +
-> +&saradc {
-> +	bootph-pre-ram;
-> +};
-> +
-> +&vcca_1v8 {
-> +	bootph-pre-ram;
-> +};
-> diff --git a/arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi b/arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi
-> new file mode 100644
-> index 000000000000..4025f5097af5
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi
-> @@ -0,0 +1,11 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +
-> +#include "rk356x-u-boot.dtsi"
-> +
-> +&saradc {
-> +	bootph-pre-ram;
-> +};
-> +
-> +&vcca_1v8 {
-> +	bootph-pre-ram;
-> +};
-> diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
-> index 014ebf9f0ba7..0f32f243be4e 100644
-> --- a/arch/arm/mach-rockchip/rk3568/Kconfig
-> +++ b/arch/arm/mach-rockchip/rk3568/Kconfig
-> @@ -32,6 +32,11 @@ config TARGET_QUARTZ64_RK3566
->   	help
->   	  Pine64 Quartz64 single board computer with a RK3566 SoC.
->   
-> +config TARGET_RADXA_ZERO_3_RK3566
-> +	bool "Radxa ZERO 3W/3E"
-> +	help
-> +	  Radxa ZERO 3W/3E single board computers with a RK3566 SoC.
-> +
->   endchoice
->   
->   config ROCKCHIP_BOOT_MODE_REG
-> @@ -54,5 +59,6 @@ source "board/anbernic/rgxx3_rk3566/Kconfig"
->   source "board/hardkernel/odroid_m1/Kconfig"
->   source "board/pine64/quartz64_rk3566/Kconfig"
->   source "board/powkiddy/x55/Kconfig"
-> +source "board/radxa/zero3-rk3566/Kconfig"
->   
->   endif
-> diff --git a/board/radxa/zero3-rk3566/Kconfig b/board/radxa/zero3-rk3566/Kconfig
-> new file mode 100644
-> index 000000000000..7d46efc9c40f
-> --- /dev/null
-> +++ b/board/radxa/zero3-rk3566/Kconfig
-> @@ -0,0 +1,12 @@
-> +if TARGET_RADXA_ZERO_3_RK3566
-> +
-> +config SYS_BOARD
-> +	default "zero3-rk3566"
-> +
-> +config SYS_VENDOR
-> +	default "radxa"
-> +
-> +config SYS_CONFIG_NAME
-> +	default "evb_rk3568"
-> +
-> +endif
-> diff --git a/board/radxa/zero3-rk3566/MAINTAINERS b/board/radxa/zero3-rk3566/MAINTAINERS
-> new file mode 100644
-> index 000000000000..e5a5d856113d
-> --- /dev/null
-> +++ b/board/radxa/zero3-rk3566/MAINTAINERS
-> @@ -0,0 +1,6 @@
-> +RADXA-ZERO-3-RK3566
-> +M:	Jonas Karlman <jonas@kwiboo.se>
-> +S:	Maintained
-> +F:	board/radxa/zero3-rk3566
-> +F:	configs/radxa-zero-3-rk3566_defconfig
-> +F:	arch/arm/dts/rk3566-radxa-zero-3*
-> diff --git a/board/radxa/zero3-rk3566/Makefile b/board/radxa/zero3-rk3566/Makefile
-> new file mode 100644
-> index 000000000000..b28b58ed5d87
-> --- /dev/null
-> +++ b/board/radxa/zero3-rk3566/Makefile
-> @@ -0,0 +1,3 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +
-> +obj-y += zero3-rk3566.o
-> diff --git a/board/radxa/zero3-rk3566/zero3-rk3566.c b/board/radxa/zero3-rk3566/zero3-rk3566.c
-> new file mode 100644
-> index 000000000000..cf30c4e38987
-> --- /dev/null
-> +++ b/board/radxa/zero3-rk3566/zero3-rk3566.c
-> @@ -0,0 +1,59 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +#include <linux/errno.h>
-> +#include <linux/kernel.h>
-> +#include <adc.h>
-> +#include <env.h>
-> +
-> +#define HW_ID_CHANNEL	1
-> +
-> +struct board_model {
-> +	unsigned int low;
-> +	unsigned int high;
-> +	const char *fdtfile;
-> +};
-> +
-> +static const struct board_model board_models[] = {
-> +	{ 230, 270, "rockchip/rk3566-radxa-zero-3w.dtb" },
-> +	{ 400, 450, "rockchip/rk3566-radxa-zero-3e.dtb" },
-> +};
-> +
-> +static const struct board_model *get_board_model(void)
+> Changes in v8:
+> - Include ROCKCHIP_EXTERNAL_TPL in the condition
+> - Put the non-dcache change back into patch 5
+> 
+> Changes in v5:
+> - Move setting of pmugrf into the probe() function
+> - Drop the non-dcache optimisation, since the cache should normally be on
+> - Drop patches previously applied
+> 
+> Changes in v4:
+> - Fix 'stating' typo
+> - Move Binman size feature to a separate series
+> 
+> Changes in v3:
+> - Split out the refactoring into a separate patch
+> 
+> Changes in v2:
+> - Drop patch "regulator: rk8xx: Fix incorrect parameter"
+> - Rewrite boneblack patch to onstead drop the target and update docs
+> 
+>  drivers/ram/rockchip/sdram_rk3399.c | 35 +++++++++++++++--------------
+>  1 file changed, 18 insertions(+), 17 deletions(-)
+> 
+> diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
+> index bc79c034808..611e30cbe52 100644
+> --- a/drivers/ram/rockchip/sdram_rk3399.c
+> +++ b/drivers/ram/rockchip/sdram_rk3399.c
+> @@ -13,6 +13,7 @@
+>  #include <log.h>
+>  #include <ram.h>
+>  #include <regmap.h>
+> +#include <spl.h>
+>  #include <syscon.h>
+>  #include <asm/arch-rockchip/clock.h>
+>  #include <asm/arch-rockchip/cru.h>
+> @@ -63,8 +64,6 @@ struct chan_info {
+>  };
+>  
+>  struct dram_info {
+> -#if defined(CONFIG_TPL_BUILD) || \
+> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+>  	u32 pwrup_srefresh_exit[2];
+>  	struct chan_info chan[2];
+>  	struct clk ddr_clk;
+> @@ -75,7 +74,6 @@ struct dram_info {
+>  	struct rk3399_pmusgrf_regs *pmusgrf;
+>  	struct rk3399_ddr_cic_regs *cic;
+>  	const struct sdram_rk3399_ops *ops;
+> -#endif
+>  	struct ram_info info;
+>  	struct rk3399_pmugrf_regs *pmugrf;
+>  };
+> @@ -92,9 +90,6 @@ struct sdram_rk3399_ops {
+>  					struct rk3399_sdram_params *params);
+>  };
+>  
+> -#if defined(CONFIG_TPL_BUILD) || \
+> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+> -
+>  struct rockchip_dmc_plat {
+>  #if CONFIG_IS_ENABLED(OF_PLATDATA)
+>  	struct dtd_rockchip_rk3399_dmc dtplat;
+> @@ -191,6 +186,19 @@ struct io_setting {
+>  	},
+>  };
+>  
+> +/**
+> + * phase_sdram_init() - Check if this is the phase where SDRAM init happens
+> + *
+> + * Returns: true to do SDRAM init in this phase, false to not
+> + */
+> +static bool phase_sdram_init(void)
 > +{
-> +	unsigned int val;
-> +	int i, ret;
-> +
-> +	ret = adc_channel_single_shot("saradc@fe720000", HW_ID_CHANNEL, &val);
-> +	if (ret)
-> +		return NULL;
-> +
-> +	for (i = 0; i < ARRAY_SIZE(board_models); i++) {
-> +		unsigned int min = board_models[i].low;
-> +		unsigned int max = board_models[i].high;
-> +
-> +		if (min <= val && val <= max)
-> +			return &board_models[i];
-> +	}
-> +
-> +	return NULL;
+> +	return spl_phase() == PHASE_TPL ||
+> +		(!IS_ENABLED(CONFIG_TPL) &&
+> +		 !IS_ENABLED(CONFIG_ROCKCHIP_EXTERNAL_TPL) &&
+> +		 !spl_in_proper());
 > +}
 > +
-> +int rk_board_late_init(void)
-> +{
-> +	const struct board_model *model = get_board_model();
-> +
-> +	if (model)
-> +		env_set("fdtfile", model->fdtfile);
-> +
-> +	return 0;
-> +}
-> +
-> +int board_fit_config_name_match(const char *name)
-> +{
-> +	const struct board_model *model = get_board_model();
-> +
-> +	if (model && !strcmp(name, model->fdtfile))
+>  static struct io_setting *
+>  lpddr4_get_io_settings(const struct rk3399_sdram_params *params, u32 mr5)
+>  {
+> @@ -3024,7 +3032,7 @@ static int rk3399_dmc_of_to_plat(struct udevice *dev)
+>  	struct rockchip_dmc_plat *plat = dev_get_plat(dev);
+>  	int ret;
+>  
+> -	if (!CONFIG_IS_ENABLED(OF_REAL))
+> +	if (!CONFIG_IS_ENABLED(OF_REAL) || !phase_sdram_init())
+>  		return 0;
+>  
+>  	ret = dev_read_u32_array(dev, "rockchip,sdram-params",
+> @@ -3093,7 +3101,6 @@ static int rk3399_dmc_init(struct udevice *dev)
+>  	priv->cic = syscon_get_first_range(ROCKCHIP_SYSCON_CIC);
+>  	priv->grf = syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
+>  	priv->pmu = syscon_get_first_range(ROCKCHIP_SYSCON_PMU);
+> -	priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
+>  	priv->pmusgrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUSGRF);
+>  	priv->pmucru = rockchip_get_pmucru();
+>  	priv->cru = rockchip_get_cru();
+> @@ -3138,19 +3145,16 @@ static int rk3399_dmc_init(struct udevice *dev)
+>  
+>  	return 0;
+>  }
+> -#endif
+>  
+>  static int rk3399_dmc_probe(struct udevice *dev)
+>  {
+>  	struct dram_info *priv = dev_get_priv(dev);
+>  
+> -#if defined(CONFIG_TPL_BUILD) || \
+> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+> -	if (rk3399_dmc_init(dev))
+> -		return 0;
+> -#endif
+>  	priv->pmugrf = syscon_get_first_range(ROCKCHIP_SYSCON_PMUGRF);
+>  	debug("%s: pmugrf = %p\n", __func__, priv->pmugrf);
+> +	if (phase_sdram_init() && rk3399_dmc_init(dev))
 > +		return 0;
 > +
-> +	return -EINVAL;
-> +}
-> diff --git a/configs/radxa-zero-3-rk3566_defconfig b/configs/radxa-zero-3-rk3566_defconfig
-> new file mode 100644
-> index 000000000000..7606edf393ed
-> --- /dev/null
-> +++ b/configs/radxa-zero-3-rk3566_defconfig
-> @@ -0,0 +1,85 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_SPL_GPIO=y
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-radxa-zero-3w"
-> +CONFIG_ROCKCHIP_RK3568=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_TARGET_RADXA_ZERO_3_RK3566=y
-> +CONFIG_DEBUG_UART_BASE=0xFE660000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-radxa-zero-3w.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_POWER=y
-> +CONFIG_SPL_ATF=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_USB=y
-> +CONFIG_CMD_ROCKUSB=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_PMIC=y
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_OF_LIST="rockchip/rk3566-radxa-zero-3w rockchip/rk3566-radxa-zero-3e"
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_SPL_ADC=y
-> +CONFIG_SPL_CLK=y
-> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_LED=y
-> +CONFIG_LED_GPIO=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_DM_PMIC_FAN53555=y
-> +CONFIG_PMIC_RK8XX=y
-> +CONFIG_SPL_DM_REGULATOR=y
-> +CONFIG_SPL_DM_REGULATOR_FIXED=y
-> +CONFIG_REGULATOR_RK8XX=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_SYSRESET_PSCI=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_USB_GADGET=y
-> +CONFIG_USB_GADGET_DOWNLOAD=y
-> +CONFIG_USB_FUNCTION_ROCKUSB=y
-> +CONFIG_ERRNO_STR=y
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index a78d6dbedb6d..eadca0ceb2a5 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -107,6 +107,7 @@ List of mainline supported Rockchip boards:
->        - Powkiddy X55 (powkiddy-x55-rk3566)
->        - Radxa CM3 IO Board (radxa-cm3-io-rk3566)
->        - Radxa ROCK 3C (rock-3c-rk3566)
-> +     - Radxa ZERO 3W/3E (radxa-zero-3-rk3566)
->   
->   * rk3568
->        - Rockchip Evb-RK3568 (evb-rk3568)
+
+As you pointed out in the other mail thread, this adds ~500 bytes to TPL
+because of the added (and unneeded) call to rockchip_sdram_size().
+
+The rockchip_sdram_size() call only make sense to be done in SPL and
+later phases, as was done before the changes in this patch.
+
+This RAM driver need to:
+- In TPL (or SPL on bob/kevin) initialize DRAM, i.e. rk3399_dmc_init().
+- In SPL and later phases report DRAM size, i.e. rockchip_sdram_size().
+
+Please restore the old behavior with something like:
+
+	if (IS_ENABLED(CONFIG_TPL_BUILD))
+		return 0;
+
+Since we never are expected to need the struct ram_info in TPL, that
+should also reduce the unneeded size growth of TPL that you observed.
+
+Ideally we should really migrate bob and kevin to use both TPL and SPL
+same as all other Rockchip aarch64 boards. That should help simplify and
+reduce likelihood of future issues that are only observed on bob/kevin.
+I will try to send RFC patches for such migration, but wont be able to
+test them.
+
+Regards,
+Jonas
+
+>  	priv->info.base = CFG_SYS_SDRAM_BASE;
+>  	priv->info.size =
+>  		rockchip_sdram_size((phys_addr_t)&priv->pmugrf->os_reg2);
+> @@ -3181,10 +3185,7 @@ U_BOOT_DRIVER(dmc_rk3399) = {
+>  	.id = UCLASS_RAM,
+>  	.of_match = rk3399_dmc_ids,
+>  	.ops = &rk3399_dmc_ops,
+> -#if defined(CONFIG_TPL_BUILD) || \
+> -	(!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD))
+>  	.of_to_plat = rk3399_dmc_of_to_plat,
+> -#endif
+>  	.probe = rk3399_dmc_probe,
+>  	.priv_auto	= sizeof(struct dram_info),
+>  #if defined(CONFIG_TPL_BUILD) || \
+
