@@ -4,63 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0C82C3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 14:11:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C45EC3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 14:38:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B29E884F1;
-	Wed, 31 Jul 2024 16:11:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 6B5D788958;
+	Wed, 31 Jul 2024 16:38:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="EQBGY5fX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iLBv/cxd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F71C88934; Wed, 31 Jul 2024 16:11:18 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7E1CB889E3; Wed, 31 Jul 2024 16:38:50 +0200 (CEST)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E00B8839A
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 16:11:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 19AAE88958
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 16:38:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=72bb=PA=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1722435064;
- bh=02nHYVkkWd536sRYuGC8po1NVI61stJUgna7MYsiOIQ=;
- b=EQBGY5fXjcp8I2P4e+GwDWFlUAI7mo4IyrLJS6dgsIlp2QiRdVmdupM3bKWxvM/lAYDaUqFp0
- 3y6FM6tf0MHz7etzE1RL52Zf5io5JIGvBTM7jMrqucXQRp0hYgudrea+zMbiB5FV81V5/HPvq+h
- /q7YxajJNFxDLsr4bKQrodtKnefwlIKiVPakF05V6r6Nl6snYtOGHdBU9pH6ctTaQvrV+k8tgeT
- uKwztoGs4R7qJqdt3r8GO3AQpIFP+W/m6PjCxcazsOhxaZc9rqMpBxEXBb9BwTyoiK1fRl3uSkr
- yuNsBBe9Q3zl/+ViSnhU0Itr17rp36cd8rwZhbMNPh+g==
-Message-ID: <ea1bca18-51bd-4ca8-849d-70229c5e24ec@kwiboo.se>
-Date: Wed, 31 Jul 2024 16:10:55 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-7a1d3e93cceso97301685a.1
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 07:38:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1722436727; x=1723041527; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=pkLh5oadxtR3ODYxhFgf6dwOUwbCNANESwF1Y0xyrsA=;
+ b=iLBv/cxd1Ex/60i7jgjQ85XwZ1zZSrOkZW21e7MdGkA/18/ueerAOjNCo3LRmuCeAl
+ gsRb4AL2aTWec2rQWwWhM0t1r+HuT4wTuV623QarBvn7tRddYiD66vAEP2zrIfRYs9R1
+ xY0JoH39tZwojD0ha6gmjel73T5ft+ZWYUML0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722436727; x=1723041527;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pkLh5oadxtR3ODYxhFgf6dwOUwbCNANESwF1Y0xyrsA=;
+ b=MD5XbWimn6afGO60PpYE3/fr0K447Kfnhgt5vMiqRdJvHKbOTsv6+jzMwgJEOz0TyC
+ 98pv0pqYEkEm/XWxnB91uWxmW/R7RYhdKg3oFPyTESDH+oe45+Ol5J7s0Pa+5yugnHYZ
+ f5aivU0fuohFLhAnSdQxYCD0FOB8+IRjAFa+XCZYYptbv3PMOS8WYs3jckxyRgImguoz
+ R7eRDyt7Q4JCDtz/hcFOYCHEidPJlnHOZ1Tx/xDoownNmSRLaqIapB4/l/2cYTUNjp92
+ RiD6LANW2jHI7p9rreCn2o3WWX6FzdP3qqH3R3xSmawiplSoOkLX0+FN0IN8OSOO4Xe9
+ xGeg==
+X-Gm-Message-State: AOJu0YxEqfr38KMoeReFgRICUFAfxbVrGXP8aBOBUzI++6JabnfyU62r
+ JreD5nKj1U/RvffsViUWpzYVDOVswvrrmEV2ktX9/0SKKXDLjQKH7yQmqX1u0L0wWkmPdI0GlS5
+ mIUzt/e2OU1/2gPWnDYq4sHRrsQ5r5c9VvcOk
+X-Google-Smtp-Source: AGHT+IEo28+rFouq+a7L0ruVGCsNrDv3YoWWHBWQeuiJhrgddtNAPNHXCYIvSCSY4st4Qthhujpp7JkWM8UoVzQ+ips=
+X-Received: by 2002:ad4:5ce7:0:b0:6b5:684:2d5 with SMTP id
+ 6a1803df08f44-6bb77f5bd90mr113614136d6.4.1722436726878; 
+ Wed, 31 Jul 2024 07:38:46 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/5] dm: adc: Add SPL_ADC Kconfig symbol for use of ADC in
- SPL
-To: Quentin Schulz <quentin.schulz@cherry.de>, Kever Yang
- <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, Philipp
- Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-References: <20240731065048.1199792-1-jonas@kwiboo.se>
- <20240731065048.1199792-5-jonas@kwiboo.se>
- <7208a42b-4309-4216-ab64-16a5a82eced8.a73bd9c8-8cbe-42e2-876b-4c548d837fba.e39c66b9-19b8-456c-a1aa-5fb8d021db0b@emailsignatures365.codetwo.com>
- <a3f9a9ad-424e-4b51-8b02-56b992c33259@cherry.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <a3f9a9ad-424e-4b51-8b02-56b992c33259@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 66aa45f406984f15edfb4e65
+References: <20240704074859.2956745-1-sjg@chromium.org>
+ <20240731010407.0ff6a929@crub>
+In-Reply-To: <20240731010407.0ff6a929@crub>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 31 Jul 2024 08:38:35 -0600
+Message-ID: <CAFLszTjr18h6oeFnNF6A5+D70LWLYXDDQLJ-5V6qO-pjW7qA9g@mail.gmail.com>
+Subject: Re: [PATCH v3 0/5] video: Improve syncing performance with cyclic
+To: Anatolij Gustschin <agust@denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Angelo Dureghello <angelo@kernel-space.org>, 
+ Anton Bambura <jenneron@protonmail.com>, Bin Meng <bmeng@tinylab.org>, 
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Chanho Park <chanho61.park@samsung.com>, 
+ Dan Carpenter <dan.carpenter@linaro.org>, Devarsh Thakkar <devarsht@ti.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Nikhil M Jain <n-jain1@ti.com>, Ondrej Jirman <megi@xff.cz>,
+ Peter Robinson <pbrobinson@gmail.com>, Randolph <randolph@andestech.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>,
+ Stefan Roese <sr@denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,100 +99,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi Anatolij,
 
-On 2024-07-31 14:42, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 7/31/24 8:50 AM, Jonas Karlman wrote:
->  > What model of Radxa ZERO 3W/3E boards can be identified using ADC at
->  > runtime, add a Kconfig symbol to allow use of ADC in SPL.
->  >
->  > This will be used to identify board model in SPL to allow loading
->  > correct FIT configuration and FDT for U-Boot proper at SPL phase.
->  >
->  > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->  > ---
->  >   drivers/Makefile    | 2 +-
->  >   drivers/adc/Kconfig | 4 ++++
->  >   2 files changed, 5 insertions(+), 1 deletion(-)
->  >
->  > diff --git a/drivers/Makefile b/drivers/Makefile
->  > index 9195dafd37e0..1acd94f3c17e 100644
->  > --- a/drivers/Makefile
->  > +++ b/drivers/Makefile
->  > @@ -1,5 +1,6 @@
->  >   # SPDX-License-Identifier: GPL-2.0+
->  >
->  > +obj-$(CONFIG_$(SPL_TPL_)ADC) += adc/
->  >   obj-$(CONFIG_$(SPL_TPL_)BIOSEMU) += bios_emulator/
->  >   obj-$(CONFIG_$(SPL_TPL_)BLK) += block/
->  >   obj-$(CONFIG_$(SPL_TPL_)BOOTCOUNT_LIMIT) += bootcount/
->  > @@ -81,7 +82,6 @@ endif
->  >
->  >   ifeq ($(CONFIG_SPL_BUILD)$(CONFIG_TPL_BUILD),)
->  >
->  > -obj-y += adc/
->  >   obj-y += ata/
->  >   obj-$(CONFIG_DM_DEMO) += demo/
->  >   obj-y += block/
->  > diff --git a/drivers/adc/Kconfig b/drivers/adc/Kconfig
->  > index c9cdbe6942de..eb705f9e0fb8 100644
->  > --- a/drivers/adc/Kconfig
->  > +++ b/drivers/adc/Kconfig
->  > @@ -11,6 +11,10 @@ config ADC
->  >          - support supply's phandle with auto-enable
->  >          - supply polarity setting in fdt
->  >
->  > +config SPL_ADC
->  > +     bool "Enable ADC drivers using Driver Model in SPL"
->  > +     depends on ADC
->  > +
-> 
-> This is just because you didn't modify the drivers/adc/Makefile to have
-> obj-$(CONFIG_$(SPL_TPL_)ADC) += adc-uclass.o
-> I assume? It's a bit odd to require a "proper" symbol for an SPL symbol.
-> 
-> Additionally, since you use $(SPL_TPL_) maybe add that TPL symbol too in
-> the Kconfig?
+On Tue, 30 Jul 2024 at 17:05, Anatolij Gustschin <agust@denx.de> wrote:
+>
+> Hi Simon,
+>
+> On Thu,  4 Jul 2024 08:48:54 +0100
+> Simon Glass sjg@chromium.org wrote:
+>
+> > Now that U-Boot has a background-processing feature, it is possible to
+> > reduce the amount of 'foreground' syncing of the display. At present
+> > this happens quite often.
+>
+> This series breaks turris_1x_sdcard SPL build:
+>
+>  https://source.denx.de/u-boot/custodians/u-boot-video/-/jobs/878470#L646
+>
+> Should we enable CONFIG_SPL_CYCLIC for this board to fix this?
 
-Agree, this could have been done differently, I added the depends on ADC
-a few minutes before I send the series to ensure next user of ADC in SPL
-does not miss it.
+Oh, my passing run was from a month ago[1].
 
-The use of $(SPL_TPL_) was to follow rest of the Makefile, and there
-are plenty of other places where this is used and a symbol is missing.
-Also this helps when next user would like to use ADC in TPL, only the
-Kconfig symbol needs to be added.
-
-> 
-> Finally, I think it'd be best to have symbols for SPL and TPL for the
-> drivers as well and update the Makefile to use $(SPL_TPL_) for those as
-> well. I don't see this as being a big issue for ADC specifically right
-> now but it's been a pain for me for a few other subsystems (power, pmic,
-> i2c, spi, IIRC). This isn't a blocker though I believe.
-
-Yeah, lots of drivers/subsections could use an update to have more
-consistency.
-
-For this series I only wanted to include bare minimum change to make it
-possible to use adc_channel_single_shot() in SPL to figure out what FIT
-config to use.
-
-Full Makefile and Kconfig cleanup should probably be done in a separate
-series.
-
-> 
-> On a side note, I'm wondering if we're not missing a depends on DM for
-> CONFIG_ADC by any chance? c.f. the config option title: "Enable ADC
-> drivers using Driver Model"
-
-Probably, guessing no target is using ADC without DM at the moment.
+I think I need to change a Kconfig condition. Let me try that and resend.
 
 Regards,
-Jonas
+Simon
 
-> 
-> Cheers,
-> Quentin
-
+[1] https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/21437
