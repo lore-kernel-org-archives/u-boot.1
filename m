@@ -4,76 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E76B9C3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 08:42:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD717C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 09:03:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FE5C88970;
-	Wed, 31 Jul 2024 10:42:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id F05D88890A;
+	Wed, 31 Jul 2024 11:03:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="bBG1SJr7";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ThcGucR5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F23258897A; Wed, 31 Jul 2024 10:42:36 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ id E958E87919; Wed, 31 Jul 2024 11:03:56 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB109871C9
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 10:42:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F3B68890A
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 11:03:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1722415353; x=1723020153; i=xypron.glpk@gmx.de;
- bh=8GuVbUdyOMiV9lk3euq5vGrEQ752wARon3NvPopN3Wg=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
- Subject:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=bBG1SJr7DB0eweGlN8zlYfVSnI6ODMQGS1StkxZ1i6p/iCQdaAneBFav8c3Kb5i3
- Z8dpBaNcjM5s7rcPoWcjNHp1hrXEaUrkwekd30QLKkSgvrjyZveLqnCKDOtQfodyZ
- 4WoSaEmtYZwDbnN1w3SxzNTI+dO9kroLKGOOmyjp3eL1kXTtKdDhRSNShQX8OoDLT
- p4q2WPH0Ul4P8QgKCJZnTYa/Me1RB0EjO8pvYlHmCjLBGQzP7FCFGi1+4JmE0nf/r
- rjjAQXZA9jOfz4LyrkF9evdX+VH8I8OCqBaqn2pOjMYp7NJqotHHEroYYA84D+Z9E
- C2pq9d0BimjorURAew==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.126] ([62.143.93.80]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M59GA-1saBNU3IaS-007WUC; Wed, 31
- Jul 2024 10:42:32 +0200
-Message-ID: <bfbc4bba-ec7c-40af-a149-097b9bcaaf60@gmx.de>
-Date: Wed, 31 Jul 2024 10:42:27 +0200
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=18d8=O7=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1722416623;
+ bh=n6K3bWo+Uq6qB4TFDREfJAI7NIe8987nAfDxmTdWyag=;
+ b=ThcGucR5LnBUMvsK9dd1TctjL1sWRt1n3Imq5NB4ADopBMll7HjzmQ+XDmlUzXS9XO6FHWZ4p
+ 68fdiczRtGcfeE9f86diT4LHqioq1FNoIKqaUbVXC8A/y3KYGqDievec5F2OtMoLg/F1vcOujkZ
+ T/pvXL+lD/U34zzqDMEObzJZK8YDy8zwWdQnHfZCdK20wWYlFY4e/8uGUdVJw306wW+u4ROrl6h
+ GLMAB4qQgDh1dmIf1tMrHkFno8bf9l3u3fqHh6xRmTREYV8kvB5amAOWe+UiqTeq+6JBDXN6y6f
+ ULTiJslLPcw0Y5g63fkNE64lLwLQf6MU5pPQBYi/9h9w==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Ricardo Pardini <ricardo@pardini.net>, Sumit Garg
+ <sumit.garg@linaro.org>, u-boot@lists.denx.de, Jonas Karlman
+ <jonas@kwiboo.se>
+Subject: [PATCH 0/2] board: rockchip: Add Xunlong Orange Pi 3B
+Date: Wed, 31 Jul 2024 09:03:29 +0000
+Message-ID: <20240731090336.1269391-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Pull request efi-2024-10-rc2
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:NOs8DwtWhHEhCoAlKK0cTlMBvk03VaMTxqtF1YA7bYNzGBHibym
- gVy0/7K06VLXlnftSP0Ah5fUpHM0xY9tEY0y2pEIVm/lHAkBD7XA4QdVWUwGMT2uS8/Ps2O
- phYe/q3AroABbGkO5IDFbu1UTompXH8fnd9buG3r/fmtq6+TpKvCZ1R2I2Cro+xawJ9EpNO
- 3vEawv09YvLKEPKq8pKpw==
-UI-OutboundReport: notjunk:1;M01:P0:7xBJnZytDRk=;maJAzL+zV8isfzA61j80QebKLHV
- UO0sGde8O70CAPE01OOy6s5lhoHpOihlzotV+t1DlEmt2yRlHmjWCdGm8WPyaNoH/LsLi8UtU
- rVrXffv4dip1M/CNv6vO4HmeKKxxWmTVruQOuKTE7MXG9yAVHPSCWrT8VrnHfez5wsYeyCoHX
- sAG66RKOZTBSQVVHQ9WUL4oWRPda2vFXq2saT6h+gAyxfjf58AJ/CjPxsp8hij0vvnPRR8Dh5
- 0j5zQezndc/VSuWnv0dJk2GzJ3zWsCEVvgoqeTHDqIqjtfHF3nRvB9vs7fAapXXWApGFkt/p7
- IJzE3H3NkhnmCXiFmb12uTmPPy8qUjYZXWPIkcONtgGcwAh5y5Dn9Emq+I19YASoCa3CApRbg
- da55hufVPQ6gaHvC/7PO1fXQphLAuIK286HCu8JpXButUP/pE5Ip3K/iw+4A/qO17BhRaTONI
- 8SuEqQsx9D1pwcj63s8QJQJ7uCR9Qg0YvDWNy40cagyq5JLLjEAh3PpqqEK5c0G7nvbBoMEmw
- HTExkVLhBCqTuMWeb6N2fS9XQci4TZUNnG8R979aEJ/qnpd8fAtUiXwyYpkv64bq6YSbA0WPv
- QmsgGUzVrq0YXNHpXkmb+gegDPJpjuUuIerGdRMBOu6p9MdXTGbTIkMAHWqtOrCpPsoM5Q6r5
- b+jKKPM8tlqk/yorcPc1bOqrlaLbTYBZTgsDMHRgmY4WpeK26mFaEiKXJdu6+pes7kpAu94ku
- s7RRRbZoDlpWT+sA5xmHjBl6vph4hnmJkRDXL9492mJrMJDiGoiQWHmCyWgtjp8Kdh5W6txBY
- EqWtFp3r7EDvs4LvQLVtJ7Tg==
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 66a9fdee73d983cd09239b50
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,80 +69,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+This series add support for the RK3566 based Xunlong Orange Pi 3B board.
 
-The following changes since commit 8877bc51a8a4d921ba2f163208b8b1a57ba47c1=
-8:
+rk_board_late_init() and board_fit_config_name_match() has been
+implemented to set fdtfile env var and load correct FIT config based
+on what hw revision is detected at runtime.
 
-   Merge patch series "led: implement software blinking" (2024-07-30
-14:31:24 -0600)
+It is not possible to build DTs from both arch/arm/dts and dts/upstream
+at the same time with OF_UPSTREAM=y, instead minimal DTs that include DT
+from dts/upstream is used for this board to work around such issue.
 
-are available in the Git repository at:
+Features tested on Orange Pi 3B 4GB (v1.1.1 and v2.1):
+- SD-card boot
+- eMMC boot
+- SPI Flash boot
+- Ethernet
+- PCIe/NVMe
+- USB host
 
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-tags/efi-2024-10-rc2
+This series depends on the following patches for a clean apply:
+- board: rockchip: add Radxa ROCK 3 Model C [1]
+- board: rockchip: Add Radxa ZERO 3W/3E [2]
 
-for you to fetch changes up to 939afc80b6b5de23d70789f3cb3a391dd31319b1:
+[1] https://patchwork.ozlabs.org/patch/1963177/
+[2] https://patchwork.ozlabs.org/patch/1966895/
 
-   dm: use list_count_nodes() for counting list nodes (2024-07-31
-09:54:53 +0200)
+Jonas Karlman (1):
+  arm64: dts: rockchip: Add Xunlong Orange Pi 3B
 
-=2D---------------------------------------------------------------
-Pull request efi-2024-10-rc2
+Ricardo Pardini (1):
+  board: rockchip: Add Xunlong Orange Pi 3B
 
-Documentation:
+ arch/arm/dts/rk3566-orangepi-3b-u-boot.dtsi   |  14 +
+ .../dts/rk3566-orangepi-3b-v1.1-u-boot.dtsi   |   3 +
+ arch/arm/dts/rk3566-orangepi-3b-v1.1.dts      |   3 +
+ .../dts/rk3566-orangepi-3b-v2.1-u-boot.dtsi   |   3 +
+ arch/arm/dts/rk3566-orangepi-3b-v2.1.dts      |   3 +
+ arch/arm/dts/rk3566-orangepi-3b.dts           |   5 +
+ arch/arm/mach-rockchip/rk3568/Kconfig         |   6 +
+ board/xunlong/orangepi-3b-rk3566/Kconfig      |  12 +
+ board/xunlong/orangepi-3b-rk3566/MAINTAINERS  |   6 +
+ board/xunlong/orangepi-3b-rk3566/Makefile     |   3 +
+ .../orangepi-3b-rk3566/orangepi-3b-rk3566.c   |  77 ++
+ configs/orangepi-3b-rk3566_defconfig          |  98 +++
+ doc/board/rockchip/rockchip.rst               |   1 +
+ .../rockchip/rk3566-orangepi-3b-v1.1.dts      |  29 +
+ .../rockchip/rk3566-orangepi-3b-v2.1.dts      |  70 ++
+ .../arm64/rockchip/rk3566-orangepi-3b.dtsi    | 678 ++++++++++++++++++
+ 16 files changed, 1011 insertions(+)
+ create mode 100644 arch/arm/dts/rk3566-orangepi-3b-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3566-orangepi-3b-v1.1-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3566-orangepi-3b-v1.1.dts
+ create mode 100644 arch/arm/dts/rk3566-orangepi-3b-v2.1-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3566-orangepi-3b-v2.1.dts
+ create mode 100644 arch/arm/dts/rk3566-orangepi-3b.dts
+ create mode 100644 board/xunlong/orangepi-3b-rk3566/Kconfig
+ create mode 100644 board/xunlong/orangepi-3b-rk3566/MAINTAINERS
+ create mode 100644 board/xunlong/orangepi-3b-rk3566/Makefile
+ create mode 100644 board/xunlong/orangepi-3b-rk3566/orangepi-3b-rk3566.c
+ create mode 100644 configs/orangepi-3b-rk3566_defconfig
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3566-orangepi-3b-v1.1.dts
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3566-orangepi-3b-v2.1.dts
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3566-orangepi-3b.dtsi
 
-* Add a description for bootmeth_android
+-- 
+2.45.2
 
-UEFI:
-
-* Provide and use function list_count_nodes()
-* Require EFI boot manager for EBBR compliance
-* Correct check in efi_load_option_dp_join()
-* Adjust config options for capsule updates
-
-SMBIOS:
-
-* Add extended Extended BIOS ROM Size
-
-=2D---------------------------------------------------------------
-Caleb Connolly (1):
-       efi_loader: add /dtbs search path
-
-Heinrich Schuchardt (3):
-       efi_loader: require EFI boot manager for EBBR compliance
-       smbios: add extended Extended BIOS ROM Size
-       efi_loader: correct check in efi_load_option_dp_join()
-
-Ilias Apalodimas (1):
-       efi_loader: adjust config options for capsule updates
-
-Mattijs Korpershoek (1):
-       doc: Add a description for bootmeth_android
-
-Sughosh Ganu (5):
-       linux: list: add a function to count list nodes
-       efi_memory: use list_count_nodes() to count list entries
-       efi_memory: avoid possible null pointer dereference
-       efi_memory: get the efi_mem_list node directly
-       dm: use list_count_nodes() for counting list nodes
-
-  MAINTAINERS                      |  1 +
-  doc/develop/bootstd/android.rst  | 39
-+++++++++++++++++++++++++++++++++++++++
-  doc/develop/bootstd/index.rst    |  1 +
-  doc/develop/bootstd/overview.rst |  2 +-
-  drivers/core/util.c              | 14 ++------------
-  include/dm/util.h                |  8 --------
-  include/linux/list.h             | 15 +++++++++++++++
-  include/smbios.h                 |  1 +
-  lib/efi_loader/Kconfig           |  2 ++
-  lib/efi_loader/efi_fdt.c         |  3 +++
-  lib/efi_loader/efi_helper.c      |  2 +-
-  lib/efi_loader/efi_memory.c      | 33 ++++++++++++---------------------
-  lib/smbios.c                     |  9 ++++++++-
-  test/dm/bus.c                    |  5 +++--
-  test/dm/core.c                   |  9 +++++----
-  test/dm/test-fdt.c               |  5 +++--
-  16 files changed, 97 insertions(+), 52 deletions(-)
-  create mode 100644 doc/develop/bootstd/android.rst
