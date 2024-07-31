@@ -4,93 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0DC7C3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 17:31:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24478C3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 17:31:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4492488A68;
-	Wed, 31 Jul 2024 19:31:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A821288A08;
+	Wed, 31 Jul 2024 19:31:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MROkUwfh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EeJ79/kf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C51088A7D; Wed, 31 Jul 2024 19:31:34 +0200 (CEST)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id 828AC88AA6; Wed, 31 Jul 2024 19:31:55 +0200 (CEST)
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
+ [IPv6:2607:f8b0:4864:20::72a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63FAA86FB1
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 19:31:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 11BE88841E
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 19:31:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7a1d066a5daso413789585a.3
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 10:31:32 -0700 (PDT)
+Received: by mail-qk1-x72a.google.com with SMTP id
+ af79cd13be357-7a1d3e93cceso117317185a.1
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 10:31:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722447091; x=1723051891; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1722447112; x=1723051912; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=J1GzkvNLSw3Yqv7lJxTqOpiqHvEcc3DdaXaXhDO2rM8=;
- b=MROkUwfhZBfqr5RhoiRQSO6G+3G1TScHsYozsNmQeEqhXczS2IAwuv8Fe1VdQ6HjFD
- b/aUs6RNuwP1exlpBi6zKIGGxiWBGLvAHYIJMhDxrAG4hEnaYtKidJXemKBNH2OtsRge
- m/rDwUTdcke38mK02o7GDS/D4ddCSvks9QXzK/+TsRzd80rjzuTZlvb+Bqqk/zKEcTpI
- 44HC3AUsSuc+hEIFV8mIn20+k6eIdT6xzvwD/026IfRPMLAnRLXdZl8BB5oRcB4kr+jU
- tz6YFLOc775doliISp3QlKA0veGbUaCztqN3gwP2+EeNbQ1UsEoGO5+dhO/muroHUx69
- Hpyg==
+ bh=xAUKilCGppY+di/qpqZ9Ygk5gZDtUdVNE53flRR/YmM=;
+ b=EeJ79/kfgyye81zlySbGmCM7vuvpn5DnTai8XkGUt5zPb2QsXLitYmVgUsrKND6fNF
+ edjUPT0MLUoD5hEhkCNMwOqb+9jQAMjI1rGySvPJe+S18PhCKsV4pi25h1kjLlsie0xD
+ 6uII1OUNZZIjDDRyOkeR6f+/NZZvVzHGu11ZnRPf+EGWjX7Hi60jYYHx+2uKXIlu7sSh
+ tWPZCMSYSSR5nuhJtTRfj6IE7RWHQrTc9mwaHN/Tgbr4jQPDfSvEKyVtOqzf0qkGcoTy
+ xsnf0Xaa41wrMJifmWSBloThzwOFWLIrgJuyWMWhfnZ7Lpc6UEmA+V63isfaPcZyZ9IT
+ 0hqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722447091; x=1723051891;
+ d=1e100.net; s=20230601; t=1722447112; x=1723051912;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=J1GzkvNLSw3Yqv7lJxTqOpiqHvEcc3DdaXaXhDO2rM8=;
- b=lXes/6IegM7HKnaxRlIuch2xl4tupYeyIzE38NgVW+/qsAZHyR0ehR4lw6kHGJfki8
- A0mK38nQ+hYCnxvKSSmEBPfJvse4/P68BQoGTiWLolb3HxzVCBxN3xEoYM9j6F8GeWdw
- dz/m9JKLuel0tYqS8eF6HkJz7rmwUOmrzA5oitSFJ7IAN9jMJbJIavV0UjQKNnmBXWGa
- hbKzxOciqozMrFcXGcYCO+nF+ElBvnnLhbHEWUWW+oAgzQBY2XJMNp31KaCgc+P7bgnS
- yFvHtifp0tbeR+e3gWkv3zW3ARFbZPBEnfpZecKgkNNnarFdFx9klaqX2b2DWMdIUsha
- EVMA==
-X-Gm-Message-State: AOJu0YykJOcNMeHpJyAxlwSyUMRdVB2baIgbso8cX9CKMcBsXmMxlzxh
- 8dDTvWZJzBZc0W849HJDKNJRDQmm9w7+SX2+oJErTTlPgr5GvWj9fVL/eAQbdaZy4l9A6dS+t1p
- e3yY=
-X-Google-Smtp-Source: AGHT+IGfWgSKTxAW+Wg88IXoaVfyzxWdE4er+4DUdfa28711hyZjxYgQELEnDDXpbYvjCwVAiRtLHQ==
-X-Received: by 2002:a05:620a:40c3:b0:79f:1828:4279 with SMTP id
- af79cd13be357-7a1e5224386mr1922833085a.4.1722447091016; 
- Wed, 31 Jul 2024 10:31:31 -0700 (PDT)
+ bh=xAUKilCGppY+di/qpqZ9Ygk5gZDtUdVNE53flRR/YmM=;
+ b=Ie5TrsWQOys9H7+MeJoIWGGx3NOu1VdodJpPYoLEP+FGhiYk/+IJrdWKV9IIi8KFT/
+ 2zuA1Y7WVjiZkeZZ3fB427BAGLwBasZGl0OnhpH8YZvJbIOdUvMms6sbL1KKt5yOvSIH
+ S1gm7rLn2kJjxPHWUTpvUUfZExS3pwTi6OCzknrG4ep2dUJM0HDjh2xyP9+nwbPWDqzP
+ PoKoReMPiISwDAQoi2cGuaZtOzmoBeFuo+68pkjx77jSDkSh9qElZwHUGYcmkqNowcrn
+ WG/luPiPIiYQZ48YlPmBywwzO0mLRknKXPW13bp0+zkaQRNrIVCPD9ACUFuP8bZODpM4
+ LxCQ==
+X-Gm-Message-State: AOJu0Yz1Cajj44REmzUtuDrEgCHaSEa151lNFgwV4f7NSOuZwatPVrsy
+ sG5FBuwqjIUXuQdG6xMXvIaWqgvrRUsCNo3mAVfFz8iViFQkyFmgnQjV0lvCDe7JnTP+BodHutz
+ b9A4=
+X-Google-Smtp-Source: AGHT+IGZMpfhliRl/Cycdmvq7FQwOkOdE5w1hXxBX+2hMYEQhbbgJmPeSMUFRLKYF9hSK0bS7kpyww==
+X-Received: by 2002:a05:620a:4009:b0:79f:e0d:e052 with SMTP id
+ af79cd13be357-7a200ca7813mr1049961585a.9.1722447111653; 
+ Wed, 31 Jul 2024 10:31:51 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a1d73b378fsm779452485a.37.2024.07.31.10.31.29
+ af79cd13be357-7a1d73b378fsm779452485a.37.2024.07.31.10.31.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jul 2024 10:31:30 -0700 (PDT)
+ Wed, 31 Jul 2024 10:31:51 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
  Mario Six <mario.six@gdsys.cc>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Michal Simek <michal.simek@amd.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sean Anderson <seanga2@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
- Sumit Garg <sumit.garg@linaro.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Jesse Taube <mr.bossman075@gmail.com>,
+ Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
  Igor Opaniuk <igor.opaniuk@gmail.com>, Ilya Lukin <4.shket@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Alexander Gendin <agendin@matrox.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: [PATCH v5 14/27] pkcs7: move common functions to PKCS7 helper
-Date: Wed, 31 Jul 2024 10:25:24 -0700
-Message-Id: <20240731172556.1348487-15-raymond.mao@linaro.org>
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Eddie James <eajames@linux.ibm.com>
+Subject: [PATCH v5 15/27] mbedtls: add public key porting layer
+Date: Wed, 31 Jul 2024 10:25:25 -0700
+Message-Id: <20240731172556.1348487-16-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240731172556.1348487-1-raymond.mao@linaro.org>
 References: <20240731172556.1348487-1-raymond.mao@linaro.org>
@@ -112,117 +112,218 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move pkcs7_get_content_data as a helper function that can be
-shared by legacy crypto lib and MbedTLS implementation.
+Add porting layer for public key on top of MbedTLS X509 library.
+Introduce _LEGACY and _MBEDTLS kconfigs for public key legacy and
+MbedTLS implementations respectively.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
+Changes in v2
+- Move the porting layer to MbedTLS dir.
+Changes in v3
+- None.
 Changes in v4
-- Initial patch.
+- Introduce _LEGACY and _MBEDTLS kconfigs for public key legacy and
+  MbedTLS implementations respectively.
+- Move common functions to helper.
 Changes in v5
-- Remove authorship.
+- Correct kconfig dependence.
+- Kconfig rename.
+- Refactored MbedTLS makefile.
+- Adjust a few inline comments.
 
- lib/crypto/Makefile       |  1 +
- lib/crypto/pkcs7_helper.c | 37 +++++++++++++++++++++++++++++++++++++
- lib/crypto/pkcs7_parser.c | 28 ----------------------------
- 3 files changed, 38 insertions(+), 28 deletions(-)
- create mode 100644 lib/crypto/pkcs7_helper.c
+ lib/mbedtls/Kconfig      | 52 +++++++++++++++++++++++++
+ lib/mbedtls/Makefile     |  6 ++-
+ lib/mbedtls/public_key.c | 82 ++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 139 insertions(+), 1 deletion(-)
+ create mode 100644 lib/mbedtls/public_key.c
 
-diff --git a/lib/crypto/Makefile b/lib/crypto/Makefile
-index 946cc3a7b59..16059088f26 100644
---- a/lib/crypto/Makefile
-+++ b/lib/crypto/Makefile
-@@ -53,6 +53,7 @@ $(obj)/x509_akid.asn1.o: $(obj)/x509_akid.asn1.c $(obj)/x509_akid.asn1.h
- obj-$(CONFIG_$(SPL_)PKCS7_MESSAGE_PARSER) += pkcs7_message.o
- pkcs7_message-y := \
- 	pkcs7.asn1.o \
-+	pkcs7_helper.o \
- 	pkcs7_parser.o
- obj-$(CONFIG_$(SPL_)PKCS7_VERIFY) += pkcs7_verify.o
+diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+index 12f8c965f5a..e95b722c6e8 100644
+--- a/lib/mbedtls/Kconfig
++++ b/lib/mbedtls/Kconfig
+@@ -117,9 +117,35 @@ endif # LEGACY_CRYPTO_BASIC
  
-diff --git a/lib/crypto/pkcs7_helper.c b/lib/crypto/pkcs7_helper.c
+ config LEGACY_CRYPTO_CERT
+ 	bool "legacy certificate libraries"
++	select ASYMMETRIC_PUBLIC_KEY_LEGACY if \
++		ASYMMETRIC_PUBLIC_KEY_SUBTYPE
++	select SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY if \
++		SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+ 	help
+ 	  Enable legacy certificate libraries.
+ 
++if LEGACY_CRYPTO_CERT
++
++config ASYMMETRIC_PUBLIC_KEY_LEGACY
++	bool "Asymmetric public key crypto with legacy certificate library"
++	depends on LEGACY_CRYPTO_CERT && ASYMMETRIC_PUBLIC_KEY_SUBTYPE
++	help
++	  This option chooses legacy certificate library for asymmetric public
++	  key crypto algorithm.
++
++if SPL
++
++config SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY
++	bool "Asymmetric public key crypto with legacy certificate library in SPL"
++	depends on LEGACY_CRYPTO_CERT && SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
++	help
++	  This option chooses legacy certificate library for asymmetric public
++	  key crypto algorithm in SPL.
++
++endif # SPL
++
++endif # LEGACY_CRYPTO_CERT
++
+ endif # LEGACY_CRYPTO
+ 
+ if MBEDTLS_LIB
+@@ -222,7 +248,33 @@ endif # MBEDTLS_LIB_CRYPTO
+ 
+ config MBEDTLS_LIB_X509
+ 	bool "MbedTLS certificate libraries"
++	select ASYMMETRIC_PUBLIC_KEY_MBEDTLS if \
++		ASYMMETRIC_PUBLIC_KEY_SUBTYPE
++	select SPL_ASYMMETRIC_PUBLIC_KEY_MBEDTLS if \
++		SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+ 	help
+ 	  Enable MbedTLS certificate libraries.
+ 
++if MBEDTLS_LIB_X509
++
++config ASYMMETRIC_PUBLIC_KEY_MBEDTLS
++	bool "Asymmetric public key crypto with MbedTLS certificate library"
++	depends on MBEDTLS_LIB_X509 && ASYMMETRIC_PUBLIC_KEY_SUBTYPE
++	help
++	  This option chooses MbedTLS certificate library for asymmetric public
++	  key crypto algorithm.
++
++if SPL
++
++config SPL_ASYMMETRIC_PUBLIC_KEY_MBEDTLS
++	bool "Asymmetric public key crypto with MbedTLS certificate library in SPL"
++	depends on MBEDTLS_LIB_X509 && SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
++	help
++	  This option chooses MbedTLS certificate library for asymmetric public
++	  key crypto algorithm in SPL.
++
++endif # SPL
++
++endif # MBEDTLS_LIB_X509
++
+ endif # MBEDTLS_LIB
+diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
+index 50c1ba5f88e..2d2220dd4fd 100644
+--- a/lib/mbedtls/Makefile
++++ b/lib/mbedtls/Makefile
+@@ -11,6 +11,10 @@ obj-$(CONFIG_$(SPL_)SHA1_MBEDTLS) += sha1.o
+ obj-$(CONFIG_$(SPL_)SHA256_MBEDTLS) += sha256.o
+ obj-$(CONFIG_$(SPL_)SHA512_MBEDTLS) += sha512.o
+ 
++# x509 libraries
++obj-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_MBEDTLS) += \
++	public_key.o
++
+ # MbedTLS crypto library
+ obj-$(CONFIG_MBEDTLS_LIB_CRYPTO) += mbedtls_lib_crypto.o
+ mbedtls_lib_crypto-y := \
+@@ -36,7 +40,7 @@ mbedtls_lib_x509-$(CONFIG_$(SPL_)RSA_PUBLIC_KEY_PARSER) += \
+ 	$(MBEDTLS_LIB_DIR)/bignum_core.o \
+ 	$(MBEDTLS_LIB_DIR)/rsa.o \
+ 	$(MBEDTLS_LIB_DIR)/rsa_alt_helpers.o
+-mbedtls_lib_x509-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_SUBTYPE) += \
++mbedtls_lib_x509-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_MBEDTLS) += \
+ 	$(MBEDTLS_LIB_DIR)/pk.o \
+ 	$(MBEDTLS_LIB_DIR)/pk_wrap.o \
+ 	$(MBEDTLS_LIB_DIR)/pkparse.o
+diff --git a/lib/mbedtls/public_key.c b/lib/mbedtls/public_key.c
 new file mode 100644
-index 00000000000..bb3b9d1354f
+index 00000000000..5f73b99d4f2
 --- /dev/null
-+++ b/lib/crypto/pkcs7_helper.c
-@@ -0,0 +1,37 @@
++++ b/lib/mbedtls/public_key.c
+@@ -0,0 +1,82 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * PKCS7 helper functions
++ * Public key helper functions using MbedTLS X509 library
 + *
-+ * Copyright (c) 2012 Red Hat, Inc. All Rights Reserved.
-+ * Written by David Howells (dhowells@redhat.com)
++ * Copyright (c) 2024 Linaro Limited
++ * Author: Raymond Mao <raymond.mao@linaro.org>
 + */
-+#include <linux/kernel.h>
-+#include <linux/err.h>
-+#include <crypto/pkcs7_parser.h>
 +
-+/**
-+ * pkcs7_get_content_data - Get access to the PKCS#7 content
-+ * @pkcs7: The preparsed PKCS#7 message to access
-+ * @_data: Place to return a pointer to the data
-+ * @_data_len: Place to return the data length
-+ * @_headerlen: Size of ASN.1 header not included in _data
-+ *
-+ * Get access to the data content of the PKCS#7 message.  The size of the
-+ * header of the ASN.1 object that contains it is also provided and can be used
-+ * to adjust *_data and *_data_len to get the entire object.
-+ *
-+ * Returns -ENODATA if the data object was missing from the message.
-+ */
-+int pkcs7_get_content_data(const struct pkcs7_message *pkcs7,
-+			   const void **_data, size_t *_data_len,
-+			   size_t *_headerlen)
++#include <linux/compat.h>
++#include <crypto/public_key.h>
++
++int public_key_verify_signature(const struct public_key *pkey,
++				const struct public_key_signature *sig)
 +{
-+	if (!pkcs7->data)
-+		return -ENODATA;
++	mbedtls_md_type_t mb_hash_algo;
++	mbedtls_pk_context pk_ctx;
++	int ret;
 +
-+	*_data = pkcs7->data;
-+	*_data_len = pkcs7->data_len;
-+	if (_headerlen)
-+		*_headerlen = pkcs7->data_hdrlen;
-+	return 0;
++	if (!pkey || !sig || pkey->key_is_private)
++		return -EINVAL;
++
++	/*
++	 * ECRDSA (Elliptic Curve Russian Digital Signature Algorithm) is not
++	 * supported by MbedTLS.
++	 */
++	if (strcmp(pkey->pkey_algo, "rsa")) {
++		pr_err("Encryption is not RSA: %s\n", sig->pkey_algo);
++		return -EINVAL;
++	}
++
++	/*
++	 * Can be pkcs1 or raw, but pkcs1 is expected.
++	 * This is just for argument checking, not necessarily passed to MbedTLS,
++	 * For RSA signatures, MbedTLS typically supports the PKCS#1 v1.5
++	 * (aka. pkcs1) encoding by default.
++	 * The library internally handles the details of decoding and verifying
++	 * the signature according to the expected encoding for the specified algorithm.
++	 */
++	if (strcmp(sig->encoding, "pkcs1")) {
++		pr_err("Encoding %s is not supported, only supports pkcs1\n",
++		       sig->encoding);
++		return -EINVAL;
++	}
++
++	if (!strcmp(sig->hash_algo, "sha1"))
++		mb_hash_algo = MBEDTLS_MD_SHA1;
++	else if (!strcmp(sig->hash_algo, "sha224"))
++		mb_hash_algo = MBEDTLS_MD_SHA224;
++	else if (!strcmp(sig->hash_algo, "sha256"))
++		mb_hash_algo = MBEDTLS_MD_SHA256;
++	else if (!strcmp(sig->hash_algo, "sha384"))
++		mb_hash_algo = MBEDTLS_MD_SHA384;
++	else if (!strcmp(sig->hash_algo, "sha512"))
++		mb_hash_algo = MBEDTLS_MD_SHA512;
++	else	/* Unknown or unsupported hash algorithm */
++		return -EINVAL;
++	/* Initialize the mbedtls_pk_context with RSA key type */
++	mbedtls_pk_init(&pk_ctx);
++
++	/* Parse the DER-encoded public key */
++	ret = mbedtls_pk_parse_public_key(&pk_ctx, pkey->key, pkey->keylen);
++	if (ret) {
++		pr_err("Failed to parse public key, ret:-0x%04x\n", -ret);
++		ret = -EINVAL;
++		goto err_key;
++	}
++
++	/* Ensure that it is a RSA key */
++	if (mbedtls_pk_get_type(&pk_ctx) != MBEDTLS_PK_RSA) {
++		pr_err("Only RSA keys are supported\n");
++		ret = -EKEYREJECTED;
++		goto err_key;
++	}
++
++	/* Verify the hash */
++	ret = mbedtls_pk_verify(&pk_ctx, mb_hash_algo, sig->digest,
++				sig->digest_size, sig->s, sig->s_size);
++
++err_key:
++	mbedtls_pk_free(&pk_ctx);
++	return ret;
 +}
-diff --git a/lib/crypto/pkcs7_parser.c b/lib/crypto/pkcs7_parser.c
-index d5efa828d6a..c849dc0d92d 100644
---- a/lib/crypto/pkcs7_parser.c
-+++ b/lib/crypto/pkcs7_parser.c
-@@ -182,34 +182,6 @@ out_no_ctx:
- }
- EXPORT_SYMBOL_GPL(pkcs7_parse_message);
- 
--/**
-- * pkcs7_get_content_data - Get access to the PKCS#7 content
-- * @pkcs7: The preparsed PKCS#7 message to access
-- * @_data: Place to return a pointer to the data
-- * @_data_len: Place to return the data length
-- * @_headerlen: Size of ASN.1 header not included in _data
-- *
-- * Get access to the data content of the PKCS#7 message.  The size of the
-- * header of the ASN.1 object that contains it is also provided and can be used
-- * to adjust *_data and *_data_len to get the entire object.
-- *
-- * Returns -ENODATA if the data object was missing from the message.
-- */
--int pkcs7_get_content_data(const struct pkcs7_message *pkcs7,
--			   const void **_data, size_t *_data_len,
--			   size_t *_headerlen)
--{
--	if (!pkcs7->data)
--		return -ENODATA;
--
--	*_data = pkcs7->data;
--	*_data_len = pkcs7->data_len;
--	if (_headerlen)
--		*_headerlen = pkcs7->data_hdrlen;
--	return 0;
--}
--EXPORT_SYMBOL_GPL(pkcs7_get_content_data);
--
- /*
-  * Note an OID when we find one for later processing when we know how
-  * to interpret it.
 -- 
 2.25.1
 
