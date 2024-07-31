@@ -4,157 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C822C3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 09:23:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70232C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 09:24:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14F4F884AC;
-	Wed, 31 Jul 2024 11:21:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+	by phobos.denx.de (Postfix) with ESMTP id EEA2D8839A;
+	Wed, 31 Jul 2024 11:24:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="QJ+isgRj";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="LzmbyJ/D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EADE83333; Wed, 31 Jul 2024 11:21:53 +0200 (CEST)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20700.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::700])
+ id 8F122882BE; Wed, 31 Jul 2024 11:24:28 +0200 (CEST)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2060b.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2009::60b])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02876889E9
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 11:21:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CC473884AC
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 11:24:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
+ spf=fail smtp.mailfrom=love.kumar@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nuh5/vxATDlt514uLlDcEBF73Vttnqq8tp9+I2pp2pq4BuSG3zd8jvWFPF+kQOgLWF95I9EmtIaqDGEiUzBYad7fHzrxBaCTX1ee5FW2Bp60r5Srywx6r2EcNVCxyG6+QvaDmsTcFcWf+2eJ+H+ssiyj1acZ7qXmyo2Vj+dij/HyE8izxaQTWUXsNz4nKrKhxfMI7uzlBqSkAR5NGhbaIGbHQORPOlcknQdQ5C4x0l1HHpqG8XVCAJf8BVub0ijWBDZRhwzhTWx25fCOtN0Hhg3HJKCWHVU2u6eccy/zl+n1j1D8r+7gtOCXoZIAERebN0a7OrddCjkvPVT6aJQ6Ew==
+ b=UgKm2YGg+8iVKw28Q6OXC2O9wFJYUNq4Bhn+H704Gq13zn9C3+mXnR5KwphN82jOajrnjNLPoo8Du6HL/Ct2GEAXNlbU1xRFu4IzwZ4AqpByKaKG08k617hV+hEp5gDeaKHKWjX/tWO2yqDqvaF+ui4vWQA/G9/bpM7Lrar2mEaD/NXGtDFvWMVlGG1dd+6+ISlqIUs/z+ThEyX9BOAVkbRtnIftUf2FuMez9bSLAcxvln3o8URco1pVfSuvCCkxuAtBuLPm9MN4cF3+joGJXXEPuK9Ui+YdgKn0HaG6ftc0TsdmMLRN9F3IP42c/Ujk69h+N4/4dCyDi/J2wCf4kw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Jwt1UxjoWc7Rg7yveFvfmlE+diEXxPenAePMRF8spy0=;
- b=bacM0ZOYWdsXUETGmknYc33MGqpB8QRjN46KwDR2XraWH56QTLt6wq7vOsLWpmqbyc9j9u0ftpH0W9fxoDb9kdnypsk44iN8WRweFDJ7Y9o+YoONmnJd41IW1vOAJKwHSVTnunHAt2BAOSrDnrqMqHsB+ErKRsU8oPDjpjgzn17CDRU5FqxNSGxEvHrk1kiIlNy9OwzYG9PcMKB+/JlfmJ2rvLINFQqjl9bTbK1sLux2o4dYMIImmnVcR55Bbr99NHyXlHUSKz/VSc1XT58jX09lgoFEPtqrkCc4inkg4lPwQtCAyYXg6OLHT7I+xIe18N1aMTZwsmAXj5tlDwscqQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
- dkim=pass header.d=iopsys.eu; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
+ bh=zlPb2NC+Te1CxQW56Jh7pkq8lhIY6yEevWm3v3UvwhY=;
+ b=EnKN8swk8dFm8+EorxlekozXMSyNc7eCPi7zFg729fkXUT57Ilgn/vKMXeU/7Hv37efNW/UUK3ifLLpflj9B/Eilvu5Z+ujIFLDyGa2ZmX1Mb/YSz8K1Itgsg+hVeUzbJ/ztjoConFFSjPaWFcL8U7vjjwjjvPd60FCqxS/eAYcDMvXi78kiM6/oaHLCtQwIDZFfz9eq1ltJiMExU1pnz6seyypy9Pj2GyUjKGNDSOCbH7a/Ph34m6S+KxFZNmeSpdKAiQNwwt+mo8xmaahR02Gmi7iRwfct62TrydGEnej8w6cME2atZLGEGw21ecy/4J5yhDDr0LqkuREHtXKTTA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Jwt1UxjoWc7Rg7yveFvfmlE+diEXxPenAePMRF8spy0=;
- b=QJ+isgRjKm3GIV4YX2g9JJ+nIdB3f9nrR99/kmpMlgJMngU/ardqw7JYJD6IKI3kxRBl7iJsqf5Oo0vTFxLCM2Dmj/2NEOTfe0W7Z2/AiOYBIIMuhG/GNF54ot6kkqX8jBzioAsTxZM566wos+ux51/PRJViHYeOsHUe0jQlWI0+QL9EV5OgPKoLHGyPGtsyuocivpE49DyZY1AfB8JNKqUt/pA0aEwJqc3kXhqEdOxJS7NdyDWFPUFeOLRWk6x93qNYJT/I3B38dyjxSvXJx8SMzYi+GEl0Vp2Oz2E9UN4BRWdkCR9V8EmvLSGZuqKhYVYlgcmlSUB6VYiKRtv/ZQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=iopsys.eu;
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
- by PA4PR08MB6207.eurprd08.prod.outlook.com (2603:10a6:102:f2::13)
+ bh=zlPb2NC+Te1CxQW56Jh7pkq8lhIY6yEevWm3v3UvwhY=;
+ b=LzmbyJ/DIWlSwrQdLwakoo0dANy7LeU8yK8zHZIrjEPmMnSzCfKIsWXToThQoHwyw9fVbS8fuJBF1Ik6cz6E6rlF+couXTmo3hGe6AGIyHYI8ARsDZ8bdeNf/BxTZf23IaqPC6NRiwwf95xHqk3If/0RBEq8n4SHfyaZh5VzFy8=
+Received: from BYAPR21CA0012.namprd21.prod.outlook.com (2603:10b6:a03:114::22)
+ by LV8PR12MB9357.namprd12.prod.outlook.com (2603:10b6:408:1ff::14)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7828.21; Wed, 31 Jul
- 2024 09:21:47 +0000
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0%5]) with mapi id 15.20.7828.016; Wed, 31 Jul 2024
- 09:21:47 +0000
-From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Michal Simek <michal.simek@amd.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Anand Moon <linux.amoon@gmail.com>, Marek Vasut <marex@denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Sean Anderson <seanga2@gmail.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de,
- Peter Robinson <pbrobinson@gmail.com>
-Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [PATCH v3 9/9] net/netcat: add netcat over tcp support
-Date: Wed, 31 Jul 2024 13:21:10 +0400
-Message-Id: <20240731092110.4027134-10-mikhail.kshevetskiy@iopsys.eu>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240731092110.4027134-1-mikhail.kshevetskiy@iopsys.eu>
-References: <20240731092110.4027134-1-mikhail.kshevetskiy@iopsys.eu>
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7807.28; Wed, 31 Jul
+ 2024 09:24:22 +0000
+Received: from MWH0EPF000971E8.namprd02.prod.outlook.com
+ (2603:10b6:a03:114:cafe::6c) by BYAPR21CA0012.outlook.office365.com
+ (2603:10b6:a03:114::22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7849.5 via Frontend
+ Transport; Wed, 31 Jul 2024 09:24:21 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ MWH0EPF000971E8.mail.protection.outlook.com (10.167.243.68) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7828.19 via Frontend Transport; Wed, 31 Jul 2024 09:24:21 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 31 Jul
+ 2024 04:24:20 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 31 Jul
+ 2024 04:24:19 -0500
+Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Wed, 31 Jul 2024 04:24:18 -0500
+From: Love Kumar <love.kumar@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <git@xilinx.com>
+Subject: [PATCH v3] test/py: spi: Add tests for SPI flash device
+Date: Wed, 31 Jul 2024 14:54:12 +0530
+Message-ID: <d70c454ba91405d025ca276f7c15ec68b0f24e1c.1722417794.git.love.kumar@amd.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: FR4P281CA0225.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:e4::17) To GV2PR08MB8121.eurprd08.prod.outlook.com
- (2603:10a6:150:7d::22)
-MIME-Version: 1.0
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|PA4PR08MB6207:EE_
-X-MS-Office365-Filtering-Correlation-Id: b67ccf60-24fe-4a38-f273-08dcb1423374
+X-MS-TrafficTypeDiagnostic: MWH0EPF000971E8:EE_|LV8PR12MB9357:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3500c46a-594e-4bc0-58bb-08dcb1428f7b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|52116014|7416014|376014|366016|921020|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?A55WJrjkxWUgXxfmVNUFH8+b6F0zqPPmWMujmg9ZeWRz9SzJhuUn3M4us1bO?=
- =?us-ascii?Q?6uaoI8n9hIfx4M+3wR4A90bt50V/DyLYo5hoD977pGHDvxN0cb2n27759cR+?=
- =?us-ascii?Q?ERAZQjnTuWYMs/OMYGfQ03pawqq6cdcCZh8Z6u+cs6+xCBG+6LyEhFAtDXl6?=
- =?us-ascii?Q?F2gfR0lwzUjMkr0Dwsj/MlwrZqvP7P5TDh2adtQNB0E2OwI+hN3coJT0GDyY?=
- =?us-ascii?Q?4GIvZWFYiAi2unUlxAonL7rGGfs3HYmIDgHEj1nc+8gVyq9QcmH0EIXmIT5t?=
- =?us-ascii?Q?cXQXndD781Q+12F/p8O8LEMnzWhYsVEuuinb7mT+GYxLC8FcphiUoY5xWjLS?=
- =?us-ascii?Q?Y0/E5HFio2cIUcosBEFMlDVLU9JErRYcl1SHHoq/BHyWeUh/s9anq4qqgstA?=
- =?us-ascii?Q?FIv+A415qFG0Ry2plINuCPAROsAiF8Lk17iHbnxGs6/M2835QTkwVkOCF5eT?=
- =?us-ascii?Q?CVTm1vxeemH3AgqaBjb7w+MDs7nrkOiPQDcUAtSIkO71ZxRXkh/ogPfq9yTP?=
- =?us-ascii?Q?+WBAEAYGZ3G/U+TBLxm3mrA0myxAVXm10yT0rgaVOVK1nxB1qJh1NjV2dsDt?=
- =?us-ascii?Q?v3FiISD4GobkaMB0GLzEmtgVhAJNdWZTCKhWgBmp/uwOmjCWFnVMYP3wWdTL?=
- =?us-ascii?Q?qAUIL0Y1WLVrXJBvOy+4phtGAtO0v2VtJwqqRnIwB8tTSpBy+wmG1HlTysCB?=
- =?us-ascii?Q?jb8xjCQjX1JvLpJ7LcuJdCbZb6Sbf/QDbU68eUio/sqVLZseU/imRMS2TIZ1?=
- =?us-ascii?Q?p0H51cQgWvLfJkJKTJ4dzbDSTSDNR0/VkDVbCXGHenDhSXgvD5VjedYpovq4?=
- =?us-ascii?Q?VRUAr/oNlVPtGVd14MfSWQFL9PxMb3PhB9okml767tHD1eSvFM3ciamV2vkK?=
- =?us-ascii?Q?z2BfSeHC47cyNQC3L1/lVVfMQx48wNfAZeDEbkWIw2taNz5l6JMZK8mFXVLi?=
- =?us-ascii?Q?SezMEWCVf8DIsuzibAMj1917KOzBCp2jqqxvUJA6p/B/ZK9CYbll4zwbr7fX?=
- =?us-ascii?Q?uKhPgA/G5Gt6za41EW6pIsuCMf4quhW1wv8FzruJ1kuZTNJXSKEp1/o+jmpQ?=
- =?us-ascii?Q?y7krI3eG0KUyITCIxKqs4cGivDXz4pRcaEM8q12BFwuTyR/o01Wq6YCz3gwu?=
- =?us-ascii?Q?hJ1iDoINb9ryfXHI0bsY8O1tN1UTn9WvezMjXmGF45LTy16S1GZMWVO/wrWi?=
- =?us-ascii?Q?GvF9apeTsW/9uZUz5Ks5HaiHZG2pVlOsXTwLtNus23c+bjDFXQNy+leqxh7T?=
- =?us-ascii?Q?PNz5ykRg+hoilX8WAeW+AA+ayxvGt6iO5t+76BE3wKX5VRplkiJTI2tfUh3k?=
- =?us-ascii?Q?mOMdQbHrTNS3VlsudcuzoMFIyTFG/oyj8A3moeir3wPTMGwOkc8oAstLS3Fd?=
- =?us-ascii?Q?0Cz/DyhBp7Yq7ELe0zu0c1IE5qAF6+0tr5N1TIlhcBGppSP+6p5IY2bcqD77?=
- =?us-ascii?Q?IDq+d2QSFWE=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(52116014)(7416014)(376014)(366016)(921020)(38350700014);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?51Yb+71tsrQaBM/bAUhbMkDJbsQLdAkZ2QETdZefY4KMJ/gxob9cUAAvyY7b?=
- =?us-ascii?Q?npXrl0qwUntf6tUS1PSpXaryUvGbygMGCO+wntC0c+otkeaZxZol03AmelEj?=
- =?us-ascii?Q?xX2reIFHJXD2Myu0N6RZ3yAvIRr5vdegWMjqR2knGKqy6WGxy217mSy0QESd?=
- =?us-ascii?Q?p18/y0cS1csOEzdw317uyNJU2NI2GzHGcuorCjF9qWtP1wGoR8+5GtvWkDpU?=
- =?us-ascii?Q?+1ABeyE3wPFMuIAYRkrdThovjCKz8Df6iaFgBgbzi5I7LYyjuxqeuhxbW/SH?=
- =?us-ascii?Q?OQMGNwwGSxw4Jos2fHK0mY1fcXLC2gXI5hfy04l3qUqNTDTbNINdAC3n4h1+?=
- =?us-ascii?Q?ZXcehGCbD1ptTHEbF/C+qc5NvgtqNOLq9dzCwkhEJ39j24gtFTklOHyudjYv?=
- =?us-ascii?Q?DnZq9619w1hF/k+0SgWQp2mz8CbHmFFBIZatRG6i+Cx/3wOfvb/IgdWCdbCV?=
- =?us-ascii?Q?d3h7hohrgYj4zbjLDP3hMxo8C1WM+qUXORdh5P9HSRAT9l2PMVjwz7NvSwFq?=
- =?us-ascii?Q?lKMUzHrN5wVWSHki2KH3iXHgGObLshsyiIAmhiTTSMacgxxRV9Cijv1nvE6J?=
- =?us-ascii?Q?DmSTTuxweeOVOPFSMdxPpputG/j6CZIH17MR8ko6x7eGippys1hcB/ZXjvvf?=
- =?us-ascii?Q?wu3wYAxzsaDuPjO16i28hiNKNlRz2QggEodSx8O2dJkgKgkYzIbkgjmaBuL2?=
- =?us-ascii?Q?RUxjKvD2RedMDSvZt/EekCs4Nbxl69tXg8jyM4rXi/BUYi1Z/z/qkHWKk7eC?=
- =?us-ascii?Q?fP64aXEIsTt3Oz1PIbc1zquAOT9meoIMcY1QvxjbKjaULTj7c2coR8Tfgm9e?=
- =?us-ascii?Q?533ZiJYY9/Hqg5z6qTbogP3OlAT3yEeEF9Mj/tAaUlsX9JYFVYrKBngGdups?=
- =?us-ascii?Q?pBqhVV3/CSEjXmb14qMhSVe5WbIennPkN27gLqFFU/JfTid9VFJEc++XEISI?=
- =?us-ascii?Q?CuUSxADQd6tOu4hW9eYiGqssqY8kpkyh/1eIIVphS+dxPRYvUalhU+BMQRT1?=
- =?us-ascii?Q?f4+NSy+s/0SUJe63sAux5WJxhQVEkg4zbzW9sH6YnTlg4+EgSMjblkyPKHnt?=
- =?us-ascii?Q?L/5dsLwkL3z4gG2UFlyOcTQucUlDftJ52yfHyPpVSi0JsRtaZOOpc4C4zqwl?=
- =?us-ascii?Q?g3XdxPHvk2gbEpcULQgGG3qVJ99cE8BGSOYZ1zwfHqWtfjxIr5LKL5tz2xmF?=
- =?us-ascii?Q?tclqT8AB3VS+SgXXR08S8q1AxqmOOIsudx29wcgorpnlMVaFmae3oxBrPKOK?=
- =?us-ascii?Q?DuKEYcNcUVKJF1WXWdvoMQuor3GpbbZJAEC8gfnINHjbMUU1cjX1JdR74+Eg?=
- =?us-ascii?Q?g3chYlLrnfs0Ar80/jbCMU1KU6D+eT8JA4NSdQncuPw45xNEbeF75MqGbEBd?=
- =?us-ascii?Q?Aaty/4ZregdE/eXszWq2Pp2yX6zIf3y9EavXT6Z6bLXPt3mVmLCSsxdIkmQT?=
- =?us-ascii?Q?gpYbRxyckTc9t8eX2AlNq7zn4EfvZbaD6wu/eKqZE1cVXyRQUhr+EqYdxCUL?=
- =?us-ascii?Q?9wLIyRKQjYiWOcC/E60bX5cG7CR5wksQDty5L8r9r4MQ/TfTXrKGjYl83QK7?=
- =?us-ascii?Q?yqntbMpVqKqRVBlzirSY3tR5wetQVXxRQDojCYgSH5WfOWQ1ysEITUEbUSsZ?=
- =?us-ascii?Q?Ma5GjS/4uZQ5fdyhJtcscEw=3D?=
-X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: b67ccf60-24fe-4a38-f273-08dcb1423374
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jul 2024 09:21:47.0559 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 6xLjrlBS9w0LBjQ3erEqR3LteVjg9hLBwlOaAEiT2ilbSEKKU5WZ0Dus5GqBaEybiZursS54MY8BVPzGfbUInxcunfi8A4DNICKHE1t8dKI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR08MB6207
+ ARA:13230040|1800799024|376014|82310400026|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?setGQJNr6V3EZnJbnoB7ich1O3HNhNTNBbjC7Q4u/9EKmOFFTbMP3s7EBOwn?=
+ =?us-ascii?Q?sf5Ml5CcluByrxMsYcfRbbXGgqSsDLmh22yXEqwkz/eC1k4x+sr6FfgaAVLE?=
+ =?us-ascii?Q?snY8itNM7mBCPUo5qYo8VkFYZjpGspRILXOpimKxF7whNuMmdWJohXfaek8I?=
+ =?us-ascii?Q?Ijg7qdEBUcuoNZ2hoFqNED1+2rYFoVGzAUwq0Jtp76T087teGzOAJgQJxieI?=
+ =?us-ascii?Q?aHu6JArkOQwI9Kf7VddY34p5egjX6JGpouvo406FPkRBW1mueEOrniPtLzQM?=
+ =?us-ascii?Q?ogIYd5CwJtZhEntJrCvg2UFcFtT+Eu+Rsbl1YQhFhjPw/Nr4BPHPl+49Er1W?=
+ =?us-ascii?Q?1ksZDWTBTHyT3eb42q8U5ClaD7TcwQduNNLjDHj9Zh59lBf8CVyYg/wqdGZu?=
+ =?us-ascii?Q?dB8GTnuPP5uB3AYeEuT7yb+Zxx8uUIibxLn9/cJT2SFv/9crfgNmwvzKHSJv?=
+ =?us-ascii?Q?lBCgXlZkzJii7fTZBRoe9qwd1TZ+UBQ5se+dMw6FzfCJY0w4N2JCctSODmrJ?=
+ =?us-ascii?Q?sjE0DdQe0tKUp8GVDU7g9SQJacROzpaAYIGOFd6w7gBOBpnzKETRtqirb6v/?=
+ =?us-ascii?Q?TupGm6U4tLiUs66cEfr7AA882TbP0qklvMbjildOL2BLNcQlE45NfWPmBuyV?=
+ =?us-ascii?Q?ed7XPMQC4s7+iA24DCMA7Sg1hsoMTeT9mZgfpaqBk/udAJOUJNZGCjZoiWbr?=
+ =?us-ascii?Q?PTHpWa6blR6zRuaCYQlCp/98z4jO3DulT9F7bVn/fEYcGkwiIeFNrNCjaE+i?=
+ =?us-ascii?Q?P06M5m52UQVekmSizqQqrFkhzuTVp6ybLUNIlANkNoF37uww0Pis4GRlZZ5b?=
+ =?us-ascii?Q?0c3/ypB5+97MeKWXKo9y9qQTzAVrUBQNOyz9kz0DVkWHuHkqWyeygp6d+hJP?=
+ =?us-ascii?Q?SQY7SY8Bk2LaWe2ETSxODsV4Q+iUK2IR/JQp0KpeZu0qvWWNa6PzkQAzl0Ro?=
+ =?us-ascii?Q?a45PK5SPAtZtF85N0Q8LYNH6not+XuHX0EnR2IF13vKYfeLahiKs/hk2kpbb?=
+ =?us-ascii?Q?9xJdvKUyEjSIbQVMs+k3tQfv8FBSIV5OqfiqOqR+dOZK3Th6VCJsEUMD54sb?=
+ =?us-ascii?Q?o7BpjOiZ5kpTBmGcOS/xqZKRk+7jp7JQYAEkM8+VXJlKTjhX2f3wt0KO4wA/?=
+ =?us-ascii?Q?yeR0Lxw3CUxYTfJDXSJ86pz6Nzg7PbwqtBfZwLkCfM31NK5Vj+90D8g4N4D+?=
+ =?us-ascii?Q?SzugmpZXK8cFJ0hDDCSjLmjTztn+tm8Vr5y3He62tqx6bj2oxJ6Cd95E4P1u?=
+ =?us-ascii?Q?P6igcwbq1MlZ6kaIMyrsJeD7V7pYJD8tslpiFq6KUgX7zOzkIyoa/x3Y7TGg?=
+ =?us-ascii?Q?TsnXoYjS4zdkmL7JSnDJhRHDMouBV7SSX7a7uaqtDVdY4FoKzgA2Zg3WhtxR?=
+ =?us-ascii?Q?egFy3BVhEdPnOWUERQ+RkrOfUaWV8BYjJyLrLgYanh8VIh8wOHeEfD0ne61Z?=
+ =?us-ascii?Q?m+8Bqj0XQlI5EB3XICAMDxvhgDvQxtIK?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jul 2024 09:24:21.1076 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3500c46a-594e-4bc0-58bb-08dcb1428f7b
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000971E8.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR12MB9357
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -171,356 +146,726 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds downloading/uploading of data with netcat.
-Client/server mode both supported.
+Add test cases for sf commands to verify various SPI flash operations
+such as erase, write and read. It also adds qspi lock unlock cases.
+This test relies on boardenv_* configurations to run it for different
+SPI flash family such as single SPI, QSPI, and OSPI.
 
-Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Signed-off-by: Love Kumar <love.kumar@amd.com>
 ---
- cmd/Kconfig          |   7 ++
- cmd/net.c            |  34 +++++++--
- include/net.h        |   2 +-
- include/net/netcat.h |  20 ++++++
- net/Makefile         |   1 +
- net/net.c            |   9 +++
- net/netcat.c         | 159 +++++++++++++++++++++++++++++++++++++++++++
- 7 files changed, 226 insertions(+), 6 deletions(-)
- create mode 100644 include/net/netcat.h
- create mode 100644 net/netcat.c
+Changes in v2:
+ - Fix the pylint errors
+ - Re-order/organize the tests
+Changes in v3:
+ - Spelling correction
+ - Describe the boardenv params
+---
+ test/py/tests/test_spi.py | 696 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 696 insertions(+)
+ create mode 100644 test/py/tests/test_spi.py
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 978f44eda42..abcd003f7f1 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -2007,6 +2007,13 @@ config CMD_WGET
- 	  wget is a simple command to download kernel, or other files,
- 	  from a http server over TCP.
- 
-+config CMD_NETCAT
-+	bool "netcat"
-+	select PROT_TCP
-+	help
-+	  netcat is a simple command to load/store kernel, or other files,
-+	  using netcat like manner over TCP.
-+
- config CMD_MII
- 	bool "mii"
- 	imply CMD_MDIO
-diff --git a/cmd/net.c b/cmd/net.c
-index 53ce2bc5d0c..6ac81415f8a 100644
---- a/cmd/net.c
-+++ b/cmd/net.c
-@@ -206,6 +206,28 @@ U_BOOT_CMD(
- );
- #endif
- 
-+#if defined(CONFIG_CMD_NETCAT)
-+static int do_netcat(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-+{
-+	if (argc < 2)
-+		return 1;
-+
-+	if (strcmp(argv[1], "load") == 0)
-+		return netboot_common(NETCAT_LOAD, cmdtp, argc - 1, argv + 1);
-+	else if (strcmp(argv[1], "store") == 0)
-+		return netboot_common(NETCAT_STORE, cmdtp, argc - 1, argv + 1);
-+	else
-+		return 1;
-+}
-+
-+U_BOOT_CMD(
-+	netcat,   5,      1,      do_netcat,
-+	"load/store data via tcp netcat utility",
-+	"load [loadAddress] [[hostIPaddr:]port]\n"
-+	"store Address Size [[hostIPaddr:]port]\n"
-+);
-+#endif
-+
- static void netboot_update_env(void)
- {
- 	char tmp[46];
-@@ -323,16 +345,17 @@ static int parse_args(enum proto_t proto, int argc, char *const argv[])
- 
- 	switch (argc) {
- 	case 1:
--		if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT)
-+		if ((IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT) ||
-+		    (IS_ENABLED(CONFIG_CMD_NETCAT) && proto == NETCAT_STORE))
- 			return 1;
--
- 		/* refresh bootfile name from env */
- 		copy_filename(net_boot_file_name, env_get("bootfile"),
- 			      sizeof(net_boot_file_name));
- 		break;
- 
- 	case 2:
--		if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT)
-+		if ((IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT) ||
-+		    (IS_ENABLED(CONFIG_CMD_NETCAT) && proto == NETCAT_STORE))
- 			return 1;
- 		/*
- 		 * Only one arg - accept two forms:
-@@ -354,7 +377,8 @@ static int parse_args(enum proto_t proto, int argc, char *const argv[])
- 		break;
- 
- 	case 3:
--		if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT) {
-+		if ((IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT) ||
-+		    (IS_ENABLED(CONFIG_CMD_NETCAT) && proto == NETCAT_STORE)) {
- 			if (parse_addr_size(argv))
- 				return 1;
- 		} else {
-@@ -365,7 +389,7 @@ static int parse_args(enum proto_t proto, int argc, char *const argv[])
- 		}
- 		break;
- 
--#ifdef CONFIG_CMD_TFTPPUT
-+#if defined(CONFIG_CMD_TFTPPUT) || defined(CONFIG_CMD_NETCAT)
- 	case 4:
- 		if (parse_addr_size(argv))
- 			return 1;
-diff --git a/include/net.h b/include/net.h
-index b0ce13e0a9d..5ec826209f0 100644
---- a/include/net.h
-+++ b/include/net.h
-@@ -515,7 +515,7 @@ extern int		net_restart_wrap;	/* Tried all network devices */
- enum proto_t {
- 	BOOTP, RARP, ARP, TFTPGET, DHCP, DHCP6, PING, PING6, DNS, NFS, CDP,
- 	NETCONS, SNTP, TFTPSRV, TFTPPUT, LINKLOCAL, FASTBOOT_UDP, FASTBOOT_TCP,
--	WOL, UDP, NCSI, WGET, RS
-+	WOL, UDP, NCSI, WGET, NETCAT_LOAD, NETCAT_STORE, RS
- };
- 
- extern char	net_boot_file_name[1024];/* Boot File name */
-diff --git a/include/net/netcat.h b/include/net/netcat.h
+diff --git a/test/py/tests/test_spi.py b/test/py/tests/test_spi.py
 new file mode 100644
-index 00000000000..09470e7f0ce
+index 000000000000..c81eca5fba6e
 --- /dev/null
-+++ b/include/net/netcat.h
-@@ -0,0 +1,20 @@
-+/* SPDX-License-Identifier: BSD-2-Clause
-+ *
-+ * netcat include file
-+ * Copyright (C) 2024 IOPSYS Software Solutions AB
-+ * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-+ */
-+#ifndef __NET_NETCAT_TCP_H__
-+#define __NET_NETCAT_TCP_H__
++++ b/test/py/tests/test_spi.py
+@@ -0,0 +1,696 @@
++# SPDX-License-Identifier: GPL-2.0
++# (C) Copyright 2024, Advanced Micro Devices, Inc.
 +
-+/**
-+ * netcat_load_start() - begin netcat in loading mode
-+ */
-+void netcat_load_start(void);
++"""
++Note: This test relies on boardenv_* containing configuration values to define
++spi minimum and maximum frequencies at which the flash part can operate on and
++these tests run at different spi frequency randomised values in the range
++multiple times based on the user defined iteration value.
++It also defines the SPI bus number containing the SPI-flash chip, SPI
++chip-select, SPI mode, SPI flash part name and timeout parameters. If minimum
++and maximum frequency is not defined, it will run on freq 0 by default.
 +
-+/**
-+ * netcat_store_start() - begin netcat in data storing mode
-+ */
-+void netcat_store_start(void);
++Without the boardenv_* configuration, this test will be automatically skipped.
 +
-+#endif /* __NET_NETCAT_TCP_H__ */
-diff --git a/net/Makefile b/net/Makefile
-index 64ab7ec740a..dac7b4859fb 100644
---- a/net/Makefile
-+++ b/net/Makefile
-@@ -33,6 +33,7 @@ obj-$(CONFIG_CMD_WOL)  += wol.o
- obj-$(CONFIG_PROT_UDP) += udp.o
- obj-$(CONFIG_PROT_TCP) += tcp.o
- obj-$(CONFIG_CMD_WGET) += wget.o
-+obj-$(CONFIG_CMD_NETCAT) += netcat.o
- 
- # Disable this warning as it is triggered by:
- # sprintf(buf, index ? "foo%d" : "foo", index)
-diff --git a/net/net.c b/net/net.c
-index 86182cc504e..0e05a8f2336 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -108,6 +108,7 @@
- #include <test/test.h>
- #include <net/tcp.h>
- #include <net/wget.h>
-+#include <net/netcat.h>
- #include "arp.h"
- #include "bootp.h"
- #include "cdp.h"
-@@ -564,6 +565,14 @@ restart:
- 			wget_start();
- 			break;
- #endif
-+#if defined(CONFIG_CMD_NETCAT)
-+		case NETCAT_LOAD:
-+			netcat_load_start();
-+			break;
-+		case NETCAT_STORE:
-+			netcat_store_start();
-+			break;
-+#endif
- #if defined(CONFIG_CMD_CDP)
- 		case CDP:
- 			cdp_start();
-diff --git a/net/netcat.c b/net/netcat.c
-new file mode 100644
-index 00000000000..ea225c68c87
---- /dev/null
-+++ b/net/netcat.c
-@@ -0,0 +1,159 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * netcat support driver
-+ * Copyright (C) 2024 IOPSYS Software Solutions AB
-+ * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-+ */
++It also relies on configuration values for supported flashes for lock and
++unlock cases for SPI family flash. It will run lock-unlock cases only for the
++supported flash parts.
 +
-+#include <command.h>
-+#include <display_options.h>
-+#include <env.h>
-+#include <image.h>
-+#include <mapmem.h>
-+#include <net.h>
-+#include <net/tcp.h>
-+#include <net/netcat.h>
++For Example:
 +
-+#define HASHES_PER_LINE		65
++# Details of SPI device test parameters required for SPI device testing:
 +
-+static struct in_addr		server_ip;
-+static u16			server_port;
-+static u16			local_port;
-+static int			listen;
-+static int			reading;
-+static unsigned int		packets;
-+static enum net_loop_state	netcat_loop_state;
++# bus - SPI bus number to init the flash device
++# chip_select - SPI chip select number to init the flash device
++# min_freq - Minimum frequency in hz at which the flash part can operate, set 0
++# or None for default frequency
++# max_freq - Maximum frequency in hz at which the flash part can operate, set 0
++# or None for default frequency
++# mode - SPI mode to init the flash device
++# part_name - SPI flash part name to be detected
++# timeout - Default timeout to run the sf commands
++# iteration - No of iteration to run SPI flash test
 +
-+static void show_block_marker(void)
-+{
-+	if ((packets % 10) == 0)
-+		putc('#');
-+	else if (((packets + 1) % (10 * HASHES_PER_LINE)) == 0)
-+		puts("\n");
++env__spi_device_test = {
++    'bus': 0,
++    'chip_select': 0,
++    'min_freq': 10000000,
++    'max_freq': 100000000,
++    'mode': 0,
++    'part_name': 'n25q00a',
++    'timeout': 100000,
++    'iteration': 5,
 +}
 +
-+static void tcp_stream_on_closed(struct tcp_stream *tcp)
-+{
-+	if (tcp->status != TCP_ERR_OK)
-+		netcat_loop_state = NETLOOP_FAIL;
-+
-+	if (netcat_loop_state != NETLOOP_SUCCESS)
-+		printf("\nnetcat: Transfer Fail, TCP status - %d\n", tcp->status);
-+	else
-+		printf("\nPackets %s %d, Transfer Successful\n",
-+		       reading ? "received" : "transmitted", packets);
-+	net_set_state(netcat_loop_state);
++# supported_flash - Flash parts name which support lock-unlock functionality
++env__spi_lock_unlock = {
++    'supported_flash': 'mt25qu512a, n25q00a, n25q512ax3',
 +}
++"""
 +
-+static void tcp_stream_on_rcv_nxt_update(struct tcp_stream *tcp, u32 rx_bytes)
-+{
-+	net_boot_file_size = rx_bytes;
-+	show_block_marker();
-+}
++import random
++import re
++import pytest
++import u_boot_utils
 +
-+static void tcp_stream_on_snd_una_update(struct tcp_stream *tcp, u32 tx_bytes)
-+{
-+	show_block_marker();
-+	if (tx_bytes == image_save_size)
-+		tcp_stream_close(tcp);
-+}
++SPI_DATA = {}
++EXPECTED_ERASE = 'Erased: OK'
++EXPECTED_WRITE = 'Written: OK'
++EXPECTED_READ = 'Read: OK'
++EXPECTED_ERASE_ERRORS = [
++    'Erase operation failed',
++    'Attempted to modify a protected sector',
++    'Erased: ERROR',
++    'is protected and cannot be erased',
++    'ERROR: flash area is locked',
++]
++EXPECTED_WRITE_ERRORS = [
++    'ERROR: flash area is locked',
++    'Program operation failed',
++    'Attempted to modify a protected sector',
++    'Written: ERROR',
++]
 +
-+static void tcp_stream_on_established(struct tcp_stream *tcp)
-+{
-+	netcat_loop_state = NETLOOP_SUCCESS;
-+}
++def get_params_spi(u_boot_console):
++    ''' Get SPI device test parameters from boardenv file '''
++    f = u_boot_console.config.env.get('env__spi_device_test', None)
++    if not f:
++        pytest.skip('No env file to read for SPI family device test')
 +
-+static u32 tcp_stream_rx(struct tcp_stream *tcp, u32 rx_offs, void *buf, u32 len)
-+{
-+	void *ptr;
++    bus = f.get('bus', 0)
++    cs = f.get('chip_select', 0)
++    mode = f.get('mode', 0)
++    part_name = f.get('part_name', None)
++    timeout = f.get('timeout', None)
 +
-+	packets++;
-+	ptr = map_sysmem(image_load_addr + rx_offs, len);
-+	memcpy(ptr, buf, len);
-+	unmap_sysmem(ptr);
-+	return len;
-+}
++    if not part_name:
++        pytest.skip('No env file to read SPI family flash part name')
 +
-+static u32 tcp_stream_tx(struct tcp_stream *tcp, u32 tx_offs, void *buf, u32 maxlen)
-+{
-+	void *ptr;
++    return bus, cs, mode, part_name, timeout
 +
-+	if (tx_offs + maxlen > image_save_size)
-+		maxlen = image_save_size - tx_offs;
-+	if (maxlen == 0)
-+		return 0;
++def spi_find_freq_range(u_boot_console):
++    '''Find out minimum and maximum frequnecies that SPI device can operate'''
++    f = u_boot_console.config.env.get('env__spi_device_test', None)
++    if not f:
++        pytest.skip('No env file to read for SPI family device test')
 +
-+	packets++;
-+	ptr = map_sysmem(image_save_addr + tx_offs, maxlen);
-+	memcpy(buf, ptr, maxlen);
-+	unmap_sysmem(ptr);
-+	return maxlen;
-+}
++    min_f = f.get('min_freq', None)
++    max_f = f.get('max_freq', None)
++    iterations = f.get('iteration', 1)
 +
-+static int tcp_stream_on_create(struct tcp_stream *tcp)
-+{
-+	if (listen) {
-+		if (tcp->lport != local_port)
-+			return 0;
-+	} else {
-+		if ((tcp->rhost.s_addr != server_ip.s_addr) ||
-+		    (tcp->rport != server_port))
-+			return 0;
-+	}
++    if not min_f:
++        min_f = 0
++    if not max_f:
++        max_f = 0
 +
-+	netcat_loop_state = NETLOOP_FAIL;
-+	net_boot_file_size = 0;
-+	packets = 0;
++    max_f = max(max_f, min_f)
 +
-+	tcp->on_closed = tcp_stream_on_closed;
-+	tcp->on_established = tcp_stream_on_established;
-+	if (reading) {
-+		tcp->on_rcv_nxt_update = tcp_stream_on_rcv_nxt_update;
-+		tcp->rx = tcp_stream_rx;
-+	} else {
-+		tcp->on_snd_una_update = tcp_stream_on_snd_una_update;
-+		tcp->tx = tcp_stream_tx;
-+	}
-+	return 1;
-+}
++    return min_f, max_f, iterations
 +
-+static void netcat_start(void)
-+{
-+	struct tcp_stream *tcp;
++def spi_pre_commands(u_boot_console, freq):
++    ''' Find out SPI family flash memory parameters '''
++    bus, cs, mode, part_name, timeout = get_params_spi(u_boot_console)
 +
-+	memset(net_server_ethaddr, 0, 6);
-+	tcp_stream_set_on_create_handler(tcp_stream_on_create);
++    output = u_boot_console.run_command(f'sf probe {bus}:{cs} {freq} {mode}')
++    if not 'SF: Detected' in output:
++        pytest.fail('No SPI device available')
 +
-+	if (strchr(net_boot_file_name, ':') == NULL) {
-+		listen = 1;
-+		printf("Listening on port %s...\n", net_boot_file_name);
++    if not part_name in output:
++        pytest.fail('SPI flash part name not recognized')
 +
-+		local_port = dectoul(net_boot_file_name, NULL);
-+	} else {
-+		listen = 0;
-+		printf("Connecting to %s...\n", net_boot_file_name);
++    m = re.search('page size (.+?) Bytes', output)
++    if m:
++        try:
++            page_size = int(m.group(1))
++        except ValueError:
++            pytest.fail('SPI page size not recognized')
 +
-+		server_ip = string_to_ip(net_boot_file_name);
-+		server_port = dectoul(strchr(net_boot_file_name, ':') + 1, NULL);
++    m = re.search('erase size (.+?) KiB', output)
++    if m:
++        try:
++            erase_size = int(m.group(1))
++        except ValueError:
++            pytest.fail('SPI erase size not recognized')
 +
-+		tcp = tcp_stream_connect(server_ip, server_port);
-+		if (tcp == NULL) {
-+			printf("No free tcp streams\n");
-+			net_set_state(NETLOOP_FAIL);
-+			return;
-+		}
-+		tcp_stream_put(tcp);
-+	}
-+}
++        erase_size *= 1024
 +
-+void netcat_load_start(void)
-+{
-+	reading = 1;
-+	return netcat_start();
-+}
++    m = re.search('total (.+?) MiB', output)
++    if m:
++        try:
++            total_size = int(m.group(1))
++        except ValueError:
++            pytest.fail('SPI total size not recognized')
 +
-+void netcat_store_start(void)
-+{
-+	reading = 0;
-+	return netcat_start();
-+}
++        total_size *= 1024 * 1024
++
++    m = re.search('Detected (.+?) with', output)
++    if m:
++        try:
++            flash_part = m.group(1)
++            assert flash_part == part_name
++        except ValueError:
++            pytest.fail('SPI flash part not recognized')
++
++    global SPI_DATA
++    SPI_DATA = {
++        'page_size': page_size,
++        'erase_size': erase_size,
++        'total_size': total_size,
++        'flash_part': flash_part,
++        'timeout': timeout,
++    }
++
++def get_page_size():
++    ''' Get the SPI page size from spi data '''
++    return SPI_DATA['page_size']
++
++def get_erase_size():
++    ''' Get the SPI erase size from spi data '''
++    return SPI_DATA['erase_size']
++
++def get_total_size():
++    ''' Get the SPI total size from spi data '''
++    return SPI_DATA['total_size']
++
++def get_flash_part():
++    ''' Get the SPI flash part name from spi data '''
++    return SPI_DATA['flash_part']
++
++def get_timeout():
++    ''' Get the SPI timeout from spi data '''
++    return SPI_DATA['timeout']
++
++def spi_erase_block(u_boot_console, erase_size, total_size):
++    ''' Erase SPI flash memory block wise '''
++    for start in range(0, total_size, erase_size):
++        output = u_boot_console.run_command(f'sf erase {hex(start)} {hex(erase_size)}')
++        assert EXPECTED_ERASE in output
++
++@pytest.mark.buildconfigspec('cmd_sf')
++def test_spi_erase_block(u_boot_console):
++    ''' Test case to check SPI erase functionality by erasing memory regions
++    block-wise '''
++
++    min_f, max_f, loop = spi_find_freq_range(u_boot_console)
++    i = 0
++    while i < loop:
++        spi_pre_commands(u_boot_console, random.randint(min_f, max_f))
++        spi_erase_block(u_boot_console, get_erase_size(), get_total_size())
++        i = i + 1
++
++def spi_write_twice(u_boot_console, page_size, erase_size, total_size, timeout):
++    ''' Random write till page size, random till size and full size '''
++    addr = u_boot_utils.find_ram_base(u_boot_console)
++
++    old_size = 0
++    for size in (
++        random.randint(4, page_size),
++        random.randint(page_size, total_size),
++        total_size,
++    ):
++        offset = random.randint(4, page_size)
++        offset = offset & ~3
++        size = size & ~3
++        size = size - old_size
++        output = u_boot_console.run_command(f'crc32 {hex(addr + total_size)} {hex(size)}')
++        m = re.search('==> (.+?)$', output)
++        if not m:
++            pytest.fail('CRC32 failed')
++
++        expected_crc32 = m.group(1)
++        if old_size % page_size:
++            old_size = int(old_size / page_size)
++            old_size *= page_size
++
++        if size % erase_size:
++            erasesize = int(size / erase_size + 1)
++            erasesize *= erase_size
++
++        eraseoffset = int(old_size / erase_size)
++        eraseoffset *= erase_size
++
++        timeout = 100000000
++        with u_boot_console.temporary_timeout(timeout):
++            output = u_boot_console.run_command(
++                f'sf erase {hex(eraseoffset)} {hex(erasesize)}'
++            )
++            assert EXPECTED_ERASE in output
++
++        with u_boot_console.temporary_timeout(timeout):
++            output = u_boot_console.run_command(
++                f'sf write {hex(addr + total_size)} {hex(old_size)} {hex(size)}'
++            )
++            assert EXPECTED_WRITE in output
++        with u_boot_console.temporary_timeout(timeout):
++            output = u_boot_console.run_command(
++                f'sf read {hex(addr + total_size + offset)} {hex(old_size)} {hex(size)}'
++            )
++            assert EXPECTED_READ in output
++        output = u_boot_console.run_command(
++            f'crc32 {hex(addr + total_size + offset)} {hex(size)}'
++        )
++        assert expected_crc32 in output
++        old_size = size
++
++@pytest.mark.buildconfigspec('cmd_bdi')
++@pytest.mark.buildconfigspec('cmd_sf')
++@pytest.mark.buildconfigspec('cmd_memory')
++def test_spi_write_twice(u_boot_console):
++    ''' Test to write data with random size twice for SPI '''
++    min_f, max_f, loop = spi_find_freq_range(u_boot_console)
++    i = 0
++    while i < loop:
++        spi_pre_commands(u_boot_console, random.randint(min_f, max_f))
++        spi_write_twice(
++            u_boot_console,
++            get_page_size(),
++            get_erase_size(),
++            get_total_size(),
++            get_timeout()
++        )
++        i = i + 1
++
++def spi_write_continues(u_boot_console, page_size, erase_size, total_size, timeout):
++    ''' Write with random size of data to continue SPI write case '''
++    spi_erase_block(u_boot_console, erase_size, total_size)
++    addr = u_boot_utils.find_ram_base(u_boot_console)
++
++    output = u_boot_console.run_command(f'crc32 {hex(addr + 0x10000)} {hex(total_size)}')
++    m = re.search('==> (.+?)$', output)
++    if not m:
++        pytest.fail('CRC32 failed')
++    expected_crc32 = m.group(1)
++
++    old_size = 0
++    for size in (
++        random.randint(4, page_size),
++        random.randint(page_size, total_size),
++        total_size,
++    ):
++        size = size & ~3
++        size = size - old_size
++        with u_boot_console.temporary_timeout(timeout):
++            output = u_boot_console.run_command(
++                f'sf write {hex(addr + 0x10000 + old_size)} {hex(old_size)} {hex(size)}'
++            )
++            assert EXPECTED_WRITE in output
++        old_size += size
++
++    with u_boot_console.temporary_timeout(timeout):
++        output = u_boot_console.run_command(
++            f'sf read {hex(addr + 0x10000 + total_size)} 0 {hex(total_size)}'
++        )
++        assert EXPECTED_READ in output
++
++    output = u_boot_console.run_command(
++        f'crc32 {hex(addr + 0x10000 + total_size)} {hex(total_size)}'
++    )
++    assert expected_crc32 in output
++
++@pytest.mark.buildconfigspec('cmd_bdi')
++@pytest.mark.buildconfigspec('cmd_sf')
++@pytest.mark.buildconfigspec('cmd_memory')
++def test_spi_write_continues(u_boot_console):
++    ''' Test to write more random size data for SPI '''
++    min_f, max_f, loop = spi_find_freq_range(u_boot_console)
++    i = 0
++    while i < loop:
++        spi_pre_commands(u_boot_console, random.randint(min_f, max_f))
++        spi_write_twice(
++            u_boot_console,
++            get_page_size(),
++            get_erase_size(),
++            get_total_size(),
++            get_timeout(),
++        )
++        i = i + 1
++
++def spi_read_twice(u_boot_console, page_size, total_size, timeout):
++    ''' Read the whole SPI flash twice, random_size till full flash size,
++    random till page size '''
++    for size in random.randint(4, page_size), random.randint(4, total_size), total_size:
++        addr = u_boot_utils.find_ram_base(u_boot_console)
++        size = size & ~3
++        with u_boot_console.temporary_timeout(timeout):
++            output = u_boot_console.run_command(
++                f'sf read {hex(addr + total_size)} 0 {hex(size)}'
++            )
++            assert EXPECTED_READ in output
++        output = u_boot_console.run_command(f'crc32 {hex(addr + total_size)} {hex(size)}')
++        m = re.search('==> (.+?)$', output)
++        if not m:
++            pytest.fail('CRC32 failed')
++        expected_crc32 = m.group(1)
++        with u_boot_console.temporary_timeout(timeout):
++            output = u_boot_console.run_command(
++                f'sf read {hex(addr + total_size + 10)} 0 {hex(size)}'
++            )
++            assert EXPECTED_READ in output
++        output = u_boot_console.run_command(
++            f'crc32 {hex(addr + total_size + 10)} {hex(size)}'
++        )
++        assert expected_crc32 in output
++
++@pytest.mark.buildconfigspec('cmd_sf')
++@pytest.mark.buildconfigspec('cmd_bdi')
++@pytest.mark.buildconfigspec('cmd_memory')
++def test_spi_read_twice(u_boot_console):
++    ''' Test to read random data twice from SPI '''
++    min_f, max_f, loop = spi_find_freq_range(u_boot_console)
++    i = 0
++    while i < loop:
++        spi_pre_commands(u_boot_console, random.randint(min_f, max_f))
++        spi_read_twice(u_boot_console, get_page_size(), get_total_size(), get_timeout())
++        i = i + 1
++
++def spi_erase_all(u_boot_console, total_size, timeout):
++    ''' Erase the full chip SPI '''
++    start = 0
++    with u_boot_console.temporary_timeout(timeout):
++        output = u_boot_console.run_command(f'sf erase {start} {hex(total_size)}')
++        assert EXPECTED_ERASE in output
++
++@pytest.mark.buildconfigspec('cmd_sf')
++def test_spi_erase_all(u_boot_console):
++    ''' Test to check full chip erase for SPI '''
++    min_f, max_f, loop = spi_find_freq_range(u_boot_console)
++    i = 0
++    while i < loop:
++        spi_pre_commands(u_boot_console, random.randint(min_f, max_f))
++        spi_erase_all(u_boot_console, get_total_size(), get_timeout())
++        i = i + 1
++
++def flash_ops(
++    u_boot_console, ops, start, size, offset=0, exp_ret=0, exp_str='', not_exp_str=''
++):
++    ''' Flash operations: erase, write and read '''
++
++    f = u_boot_console.config.env.get('env__spi_device_test', None)
++    if not f:
++        timeout = 1000000
++
++    timeout = f.get('timeout', 1000000)
++
++    if ops == 'erase':
++        with u_boot_console.temporary_timeout(timeout):
++            output = u_boot_console.run_command(f'sf erase {hex(start)} {hex(size)}')
++    else:
++        with u_boot_console.temporary_timeout(timeout):
++            output = u_boot_console.run_command(
++                f'sf {ops} {hex(offset)} {hex(start)} {hex(size)}'
++            )
++
++    if exp_str:
++        assert exp_str in output
++    if not_exp_str:
++        assert not_exp_str not in output
++
++    ret_code = u_boot_console.run_command('echo $?')
++    if exp_ret >= 0:
++        assert ret_code.endswith(str(exp_ret))
++
++    return output, ret_code
++
++def spi_unlock_exit(u_boot_console, addr, size):
++    ''' Unlock the flash before making it fail '''
++    u_boot_console.run_command(f'sf protect unlock {hex(addr)} {hex(size)}')
++    assert False, 'FAIL: Flash lock is unable to protect the data!'
++
++def find_prot_region(lock_addr, lock_size):
++    ''' Get the protected and un-protected region of flash '''
++    total_size = get_total_size()
++    erase_size = get_erase_size()
++
++    if lock_addr < (total_size // 2):
++        sect_num = (lock_addr + lock_size) // erase_size
++        x = 1
++        while x < sect_num:
++            x *= 2
++        prot_start = 0
++        prot_size = x * erase_size
++        unprot_start = prot_start + prot_size
++        unprot_size = total_size - unprot_start
++    else:
++        sect_num = (total_size - lock_addr) // erase_size
++        x = 1
++        while x < sect_num:
++            x *= 2
++        prot_start = total_size - (x * erase_size)
++        prot_size = total_size - prot_start
++        unprot_start = 0
++        unprot_size = prot_start
++
++    return prot_start, prot_size, unprot_start, unprot_size
++
++def protect_ops(u_boot_console, lock_addr, lock_size, ops="unlock"):
++    ''' Run the command to lock or Unlock the flash '''
++    u_boot_console.run_command(f'sf protect {ops} {hex(lock_addr)} {hex(lock_size)}')
++    output = u_boot_console.run_command('echo $?')
++    if ops == "lock" and not output.endswith('0'):
++        u_boot_console.run_command(f'sf protect unlock {hex(lock_addr)} {hex(lock_size)}')
++        assert False, "sf protect lock command exits with non-zero return code"
++    assert output.endswith('0')
++
++def erase_write_ops(u_boot_console, start, size):
++    ''' Basic erase and write operation for flash '''
++    addr = u_boot_utils.find_ram_base(u_boot_console)
++    flash_ops(u_boot_console, 'erase', start, size, 0, 0, EXPECTED_ERASE)
++    flash_ops(u_boot_console, 'write', start, size, addr, 0, EXPECTED_WRITE)
++
++def spi_lock_unlock(u_boot_console, lock_addr, lock_size):
++    ''' Lock unlock operations for SPI family flash '''
++    addr = u_boot_utils.find_ram_base(u_boot_console)
++    erase_size = get_erase_size()
++
++    # Find the protected/un-protected region
++    prot_start, prot_size, unprot_start, unprot_size = find_prot_region(lock_addr, lock_size)
++
++    # Check erase/write operation before locking
++    erase_write_ops(u_boot_console, prot_start, prot_size)
++
++    # Locking the flash
++    protect_ops(u_boot_console, lock_addr, lock_size, 'lock')
++
++    # Check erase/write operation after locking
++    output, ret_code = flash_ops(u_boot_console, 'erase', prot_start, prot_size, 0, -1)
++    if not any(error in output for error in EXPECTED_ERASE_ERRORS) or ret_code.endswith(
++        '0'
++    ):
++        spi_unlock_exit(u_boot_console, lock_addr, lock_size)
++
++    output, ret_code = flash_ops(
++        u_boot_console, 'write', prot_start, prot_size, addr, -1
++    )
++    if not any(error in output for error in EXPECTED_WRITE_ERRORS) or ret_code.endswith(
++        '0'
++    ):
++        spi_unlock_exit(u_boot_console, lock_addr, lock_size)
++
++    # Check locked sectors
++    sect_lock_start = random.randrange(prot_start, (prot_start + prot_size), erase_size)
++    if prot_size > erase_size:
++        sect_lock_size = random.randrange(
++            erase_size, (prot_start + prot_size - sect_lock_start), erase_size
++        )
++    else:
++        sect_lock_size = erase_size
++    sect_write_size = random.randint(1, sect_lock_size)
++
++    output, ret_code = flash_ops(
++        u_boot_console, 'erase', sect_lock_start, sect_lock_size, 0, -1
++    )
++    if not any(error in output for error in EXPECTED_ERASE_ERRORS) or ret_code.endswith(
++        '0'
++    ):
++        spi_unlock_exit(u_boot_console, lock_addr, lock_size)
++
++    output, ret_code = flash_ops(
++        u_boot_console, 'write', sect_lock_start, sect_write_size, addr, -1
++    )
++    if not any(error in output for error in EXPECTED_WRITE_ERRORS) or ret_code.endswith(
++        '0'
++    ):
++        spi_unlock_exit(u_boot_console, lock_addr, lock_size)
++
++    # Check unlocked sectors
++    if unprot_size != 0:
++        sect_unlock_start = random.randrange(
++            unprot_start, (unprot_start + unprot_size), erase_size
++        )
++        if unprot_size > erase_size:
++            sect_unlock_size = random.randrange(
++                erase_size, (unprot_start + unprot_size - sect_unlock_start), erase_size
++            )
++        else:
++            sect_unlock_size = erase_size
++        sect_write_size = random.randint(1, sect_unlock_size)
++
++        output, ret_code = flash_ops(
++            u_boot_console, 'erase', sect_unlock_start, sect_unlock_size, 0, -1
++        )
++        if EXPECTED_ERASE not in output or ret_code.endswith('1'):
++            spi_unlock_exit(u_boot_console, lock_addr, lock_size)
++
++        output, ret_code = flash_ops(
++            u_boot_console, 'write', sect_unlock_start, sect_write_size, addr, -1
++        )
++        if EXPECTED_WRITE not in output or ret_code.endswith('1'):
++            spi_unlock_exit(u_boot_console, lock_addr, lock_size)
++
++    # Unlocking the flash
++    protect_ops(u_boot_console, lock_addr, lock_size, 'unlock')
++
++    # Check erase/write operation after un-locking
++    erase_write_ops(u_boot_console, prot_start, prot_size)
++
++    # Check previous locked sectors
++    sect_lock_start = random.randrange(prot_start, (prot_start + prot_size), erase_size)
++    if prot_size > erase_size:
++        sect_lock_size = random.randrange(
++            erase_size, (prot_start + prot_size - sect_lock_start), erase_size
++        )
++    else:
++        sect_lock_size = erase_size
++    sect_write_size = random.randint(1, sect_lock_size)
++
++    flash_ops(
++        u_boot_console, 'erase', sect_lock_start, sect_lock_size, 0, 0, EXPECTED_ERASE
++    )
++    flash_ops(
++        u_boot_console,
++        'write',
++        sect_lock_start,
++        sect_write_size,
++        addr,
++        0,
++        EXPECTED_WRITE,
++    )
++
++@pytest.mark.buildconfigspec('cmd_bdi')
++@pytest.mark.buildconfigspec('cmd_sf')
++@pytest.mark.buildconfigspec('cmd_memory')
++def test_spi_lock_unlock(u_boot_console):
++    ''' Test to check the lock-unlock functionality for SPI family flash '''
++    min_f, max_f, loop = spi_find_freq_range(u_boot_console)
++    flashes = u_boot_console.config.env.get('env__spi_lock_unlock', False)
++    if not flashes:
++        pytest.skip('No supported flash list for lock/unlock provided')
++
++    i = 0
++    while i < loop:
++        spi_pre_commands(u_boot_console, random.randint(min_f, max_f))
++        total_size = get_total_size()
++        flash_part = get_flash_part()
++
++        flashes_list = flashes.get('supported_flash', None).split(',')
++        flashes_list = [x.strip() for x in flashes_list]
++        if flash_part not in flashes_list:
++            pytest.skip('Detected flash does not support lock/unlock')
++
++        # For lower half of memory
++        lock_addr = random.randint(0, (total_size // 2) - 1)
++        lock_size = random.randint(1, ((total_size // 2) - lock_addr))
++        spi_lock_unlock(u_boot_console, lock_addr, lock_size)
++
++        # For upper half of memory
++        lock_addr = random.randint((total_size // 2), total_size - 1)
++        lock_size = random.randint(1, (total_size - lock_addr))
++        spi_lock_unlock(u_boot_console, lock_addr, lock_size)
++
++        # For entire flash
++        lock_addr = random.randint(0, total_size - 1)
++        lock_size = random.randint(1, (total_size - lock_addr))
++        spi_lock_unlock(u_boot_console, lock_addr, lock_size)
++
++        i = i + 1
++
++@pytest.mark.buildconfigspec('cmd_bdi')
++@pytest.mark.buildconfigspec('cmd_sf')
++@pytest.mark.buildconfigspec('cmd_memory')
++def test_spi_negative(u_boot_console):
++    ''' Negative tests for SPI '''
++    min_f, max_f, loop = spi_find_freq_range(u_boot_console)
++    spi_pre_commands(u_boot_console, random.randint(min_f, max_f))
++    total_size = get_total_size()
++    erase_size = get_erase_size()
++    page_size = get_page_size()
++    addr = u_boot_utils.find_ram_base(u_boot_console)
++    i = 0
++    while i < loop:
++        # Erase negative test
++        start = random.randint(0, total_size)
++        esize = erase_size
++
++        # If erasesize is not multiple of flash's erase size
++        while esize % erase_size == 0:
++            esize = random.randint(0, total_size - start)
++
++        error_msg = 'Erased: ERROR'
++        flash_ops(
++            u_boot_console, 'erase', start, esize, 0, 1, error_msg, EXPECTED_ERASE
++        )
++
++        # If eraseoffset exceeds beyond flash size
++        eoffset = random.randint(total_size, (total_size + int(0x1000000)))
++        error_msg = 'Offset exceeds device limit'
++        flash_ops(
++            u_boot_console, 'erase', eoffset, esize, 0, 1, error_msg, EXPECTED_ERASE
++        )
++
++        # If erasesize exceeds beyond flash size
++        esize = random.randint((total_size - start), (total_size + int(0x1000000)))
++        error_msg = 'ERROR: attempting erase past flash size'
++        flash_ops(
++            u_boot_console, 'erase', start, esize, 0, 1, error_msg, EXPECTED_ERASE
++        )
++
++        # If erase size is 0
++        esize = 0
++        error_msg = 'ERROR: Invalid size 0'
++        flash_ops(
++            u_boot_console, 'erase', start, esize, 0, 1, error_msg, EXPECTED_ERASE
++        )
++
++        # If erasesize is less than flash's page size
++        esize = random.randint(0, page_size)
++        start = random.randint(0, (total_size - page_size))
++        error_msg = 'Erased: ERROR'
++        flash_ops(
++            u_boot_console, 'erase', start, esize, 0, 1, error_msg, EXPECTED_ERASE
++        )
++
++        # Write/Read negative test
++        # if Write/Read size exceeds beyond flash size
++        offset = random.randint(0, total_size)
++        size = random.randint((total_size - offset), (total_size + int(0x1000000)))
++        error_msg = 'Size exceeds partition or device limit'
++        flash_ops(
++            u_boot_console, 'write', offset, size, addr, 1, error_msg, EXPECTED_WRITE
++        )
++        flash_ops(
++            u_boot_console, 'read', offset, size, addr, 1, error_msg, EXPECTED_READ
++        )
++
++        # if Write/Read offset exceeds beyond flash size
++        offset = random.randint(total_size, (total_size + int(0x1000000)))
++        size = random.randint(0, total_size)
++        error_msg = 'Offset exceeds device limit'
++        flash_ops(
++            u_boot_console, 'write', offset, size, addr, 1, error_msg, EXPECTED_WRITE
++        )
++        flash_ops(
++            u_boot_console, 'read', offset, size, addr, 1, error_msg, EXPECTED_READ
++        )
++
++        # if Write/Read size is 0
++        offset = random.randint(0, 2)
++        size = 0
++        error_msg = 'ERROR: Invalid size 0'
++        flash_ops(
++            u_boot_console, 'write', offset, size, addr, 1, error_msg, EXPECTED_WRITE
++        )
++        flash_ops(
++            u_boot_console, 'read', offset, size, addr, 1, error_msg, EXPECTED_READ
++        )
++
++        i = i + 1
 -- 
-2.39.2
+2.25.1
 
