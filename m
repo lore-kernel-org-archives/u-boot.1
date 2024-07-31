@@ -4,58 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29B81C3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 15:39:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0188BC3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 16:08:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F1D488A35;
-	Wed, 31 Jul 2024 17:39:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 3FAB188A08;
+	Wed, 31 Jul 2024 18:08:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nod.at
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="DL8OLLiv";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B597C88A35; Wed, 31 Jul 2024 17:39:04 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E533F88934
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 17:39:01 +0200 (CEST)
+ id 7FAA988A2A; Wed, 31 Jul 2024 18:08:02 +0200 (CEST)
+Received: from lithops.sigma-star.at (lithops.sigma-star.at [195.201.40.130])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 79DA08897F
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 18:08:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=72bb=PA=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: Cc:
- References: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1722440335;
- bh=nhz+ly9ZHys0FPQW4yY0AwJcJR5ZcraY7+G3dy5RZ3M=;
- b=DL8OLLivhwfxIvCDF/bSGKb/1o+EhFZcAIXtQvcmd0LLQIT54CXze8jiBZ1GSE0pyzhctAtZD
- WBgcRLcJbz6BwWDnslEDSBN+sxtMqvAQtyldt1YaEIzdcz7bMZzD2cGrbsvkuTUZi0dfp3fuiHH
- vNkL8Myp/ExUYPhnq2Z/qn2UkdVoKFTdFbAOGD3NAkM8XA+kkp18y32DkVO/LMKirCjWt7dDTyA
- mAqT6fCafzPUUn+lAHGGaZhbAYGRznnfqLH4rlXMjrmjw5CbBdB9W0cX+pn1EJFJERe3hAxo3PK
- 6ya7Lx2UXNyU3yQL6UADlv3auPiJF7T3tK7gRNRGinpg==
-Message-ID: <6aef9b07-454c-4d0f-a344-e265ec7917e6@kwiboo.se>
-Date: Wed, 31 Jul 2024 17:38:44 +0200
+ dmarc=none (p=none dis=none) header.from=nod.at
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=richard@nod.at
+Received: from localhost (localhost [127.0.0.1])
+ by lithops.sigma-star.at (Postfix) with ESMTP id 29F0F61966C1;
+ Wed, 31 Jul 2024 18:08:00 +0200 (CEST)
+Received: from lithops.sigma-star.at ([127.0.0.1])
+ by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id NYHuqLkWPPdn; Wed, 31 Jul 2024 18:07:59 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by lithops.sigma-star.at (Postfix) with ESMTP id A75E564A3D10;
+ Wed, 31 Jul 2024 18:07:59 +0200 (CEST)
+Received: from lithops.sigma-star.at ([127.0.0.1])
+ by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id XWPERpSG2Lsu; Wed, 31 Jul 2024 18:07:59 +0200 (CEST)
+Received: from foxxylove.corp.sigma-star.at (unknown [82.150.214.1])
+ by lithops.sigma-star.at (Postfix) with ESMTPSA id 45E3061966C1;
+ Wed, 31 Jul 2024 18:07:59 +0200 (CEST)
+From: Richard Weinberger <richard@nod.at>
+To: u-boot@lists.denx.de
+Cc: upstream+uboot@sigma-star.at, patrick.delaunay@foss.st.com,
+ marek.vasut+renesas@mailbox.org, yangshiji66@outlook.com,
+ xypron.glpk@gmx.de, eugeneuriev@gmail.com, raymond.mao@linaro.org,
+ devarsht@ti.com, bmeng.cn@gmail.com, sjg@chromium.org, trini@konsulko.com,
+ Richard Weinberger <richard@nod.at>
+Subject: [PATCH v2] bootstage: Fix out-of-bounds read in reloc_bootstage()
+Date: Wed, 31 Jul 2024 18:07:54 +0200
+Message-Id: <20240731160754.16263-1-richard@nod.at>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: dts: orangepi: Fix Orange Pi R1 and Plus LTS boot
- issue
-To: Pugemon <islavaivanov76@gmail.com>
-References: <CACS4SE=VOJ9uHvG=mnWtR=9g_xAqgtfyf3MjE=RDJBdVEFxvzw@mail.gmail.com>
-Content-Language: en-US
-Cc: u-boot@lists.denx.de
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CACS4SE=VOJ9uHvG=mnWtR=9g_xAqgtfyf3MjE=RDJBdVEFxvzw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 66aa5a8906984f15edfb65b6
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,137 +65,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+bootstage_get_size() returns the total size of the data structure
+including associated records.
+When copying from gd->bootstage, only the allocation size of gd->bootstag=
+e
+must be used. Otherwise too much memory is copied.
 
-On 2024-07-31 13:49, Pugemon wrote:
-> Orange Pi R1 Plus and LTS don't have eMMC
-> (default mmc0 in rk3328-u-boot.dtsi).
-> The device is equipped with SPI flash memory, which U-Boot tries to use for
-> reading configuration. However, the manufacturer has not provided any means
-> to utilize SPI flash memory. There is no documentation,
-> or software available for this purpose.
+This bug caused no harm so far because gd->new_bootstage is always
+large enough and reading beyond the allocation length of gd->bootstage
+caused no problem due to the U-Boot memory layout.
 
-The U-Boot documentation contain limited information on how you can
-write the generated rockchip-u-boot-spi.bin to SPI flash, after that it
-will load U-Boot from the SPI flash instead.
+Fix by using the correct size and perform the initial copy directly
+in bootstage_relocate() to have the whole relocation process in the
+same function.
 
-https://docs.u-boot.org/en/latest/board/rockchip/rockchip.html#spi
+Signed-off-by: Richard Weinberger <richard@nod.at>
+---
+Changes since v1:
+- Pass gd->new_bootstage to bootstage_relocate()
+---
+ common/board_f.c    | 8 +-------
+ common/bootstage.c  | 8 ++++++--
+ include/bootstage.h | 4 ++--
+ 3 files changed, 9 insertions(+), 11 deletions(-)
 
-> 
-> As a result, during OpenWRT sysupgrade, the board fails to boot because the
-> script that switches the boot_device to an available one does not trigger.
-
-This sounds more like an issue in your script?
-
-> 
-> This patch changes the alias of mmc0 from &emmc to &sdmmc,
-> ensuring the board boots correctly,
-> and sysupgrade completes successfully.
-
-There are aspects of the rockchip U-Boot code that depend on that mmc0
-is emmc and mmc1 is sdmmc, so this change may introduce new issues and
-should be avoided.
-
-I have no issues booting my OrangePi R1 Plus LTS without this. Please
-explain what the issue is and what script you are referring too. Is this
-a U-Boot script or linux userspace script? also what version of U-Boot
-have you had issue with? Does your SPI flash come with a vendor U-Boot
-that is interfering with your sysupdate?
-
-> Additionally, this allows saving the U-Boot environment
-> by using saveenv with uboot-envtool.
-
-U-Boot will expect the environment on the mmc device that U-Boot was
-loaded from, and fallback on what U-Boot consider is the SD-card (mmc1).
-
-saveenv from U-Boot CLI should work as intended and already save the env
-to the sdmmc, unless there is other issues/modifications in your U-Boot.
-
-So this may also be an issue in userspace tool?
-
-> 
-> Signed-off-by: Pugemon <islavaivanov76@gmail.com>
-> Cc: Tianling Shen <cnsztl@gmail.com>
-> ---
->  arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi | 12 ++++++++++++
->  arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi     | 12 ++++++++++++
->  2 files changed, 24 insertions(+)
-> 
-> diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
-> b/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
-> index b50c1332b8..7063b188f2 100644
-> --- a/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
-> @@ -2,11 +2,23 @@
->  /*
->   * (C) Copyright 2018-2019 Rockchip Electronics Co., Ltd
->   * (C) Copyright 2020 David Bauer
-> + * (C) Copyright 2024 Pugemon
->   */
-> 
->  #include "rk3328-u-boot.dtsi"
->  #include "rk3328-sdram-lpddr3-666.dtsi"
-> 
-> +/ {
-> +       aliases {
-> +               mmc0 = &sdmmc;
-> +               spi0 = &spi0;
-
-This is already defined in rk3328-u-boot.dtsi, no need to re-define it
-here.
-
-> +       };
-> +
-> +       chosen {
-> +               u-boot,spl-boot-order = "same-as-spl", &sdmmc;
-
-It should not be needed to change this, if the emmc node is disabled
-U-Boot should just skip it. Also the "same-as-spl" should already
-refer to the SPI flash or the SD-card depending on where TPL/SPL
-was loaded from.
-
-> +       };
-> +};
-> +
->  &spi0 {
->         flash@0 {
->                 bootph-pre-ram;
-> diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
-> b/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
-> index 8ae003bbef..0374172527 100644
-> --- a/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
-> @@ -2,11 +2,23 @@
->  /*
->   * (C) Copyright 2018-2019 Rockchip Electronics Co., Ltd
->   * (C) Copyright 2020 David Bauer
-> + * (C) Copyright 2024 Pugemon
->   */
-> 
->  #include "rk3328-u-boot.dtsi"
->  #include "rk3328-sdram-ddr4-666.dtsi"
-> 
-> +/ {
-> +       aliases {
-> +               mmc0 = &sdmmc;
-> +               spi0 = &spi0;
-
-Same as above.
-
-> +       };
-> +
-> +       chosen {
-> +               u-boot,spl-boot-order = "same-as-spl", &sdmmc;
-
-Same as above.
-
-Regards,
-Jonas
-
-> +       };
-> +};
-> +
->  &spi0 {
->         flash@0 {
->                 bootph-pre-ram;
+diff --git a/common/board_f.c b/common/board_f.c
+index 29e185137a..21a8944e2b 100644
+--- a/common/board_f.c
++++ b/common/board_f.c
+@@ -683,13 +683,7 @@ static int reloc_bootstage(void)
+ 	if (gd->flags & GD_FLG_SKIP_RELOC)
+ 		return 0;
+ 	if (gd->new_bootstage) {
+-		int size =3D bootstage_get_size();
+-
+-		debug("Copying bootstage from %p to %p, size %x\n",
+-		      gd->bootstage, gd->new_bootstage, size);
+-		memcpy(gd->new_bootstage, gd->bootstage, size);
+-		gd->bootstage =3D gd->new_bootstage;
+-		bootstage_relocate();
++		bootstage_relocate(gd->new_bootstage);
+ 	}
+ #endif
+=20
+diff --git a/common/bootstage.c b/common/bootstage.c
+index b6c268d9f4..49acc9078a 100644
+--- a/common/bootstage.c
++++ b/common/bootstage.c
+@@ -54,12 +54,16 @@ struct bootstage_hdr {
+ 	u32 next_id;		/* Next ID to use for bootstage */
+ };
+=20
+-int bootstage_relocate(void)
++int bootstage_relocate(void *to)
+ {
+-	struct bootstage_data *data =3D gd->bootstage;
++	struct bootstage_data *data;
+ 	int i;
+ 	char *ptr;
+=20
++	debug("Copying bootstage from %p to %p\n", gd->bootstage, to);
++	memcpy(to, gd->bootstage, sizeof(struct bootstage_data));
++	data =3D gd->bootstage =3D to;
++
+ 	/* Figure out where to relocate the strings to */
+ 	ptr =3D (char *)(data + 1);
+=20
+diff --git a/include/bootstage.h b/include/bootstage.h
+index f4e77b09d7..57792648c4 100644
+--- a/include/bootstage.h
++++ b/include/bootstage.h
+@@ -258,7 +258,7 @@ void show_boot_progress(int val);
+  * relocation, since memory can be overwritten later.
+  * Return: Always returns 0, to indicate success
+  */
+-int bootstage_relocate(void);
++int bootstage_relocate(void *to);
+=20
+ /**
+  * Add a new bootstage record
+@@ -395,7 +395,7 @@ static inline ulong bootstage_add_record(enum bootsta=
+ge_id id,
+  * and won't even do that unless CONFIG_SHOW_BOOT_PROGRESS is defined
+  */
+=20
+-static inline int bootstage_relocate(void)
++static inline int bootstage_relocate(void *to)
+ {
+ 	return 0;
+ }
+--=20
+2.35.3
 
