@@ -4,94 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38328C3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 17:36:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29FF5C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 17:36:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD26588AC1;
-	Wed, 31 Jul 2024 19:36:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AA9A188AC9;
+	Wed, 31 Jul 2024 19:36:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qoYeHLMs";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fc20SdSw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 877DD88ACA; Wed, 31 Jul 2024 19:36:00 +0200 (CEST)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id ABB3488ACC; Wed, 31 Jul 2024 19:36:20 +0200 (CEST)
+Received: from mail-vs1-xe2f.google.com (mail-vs1-xe2f.google.com
+ [IPv6:2607:f8b0:4864:20::e2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 736F08841E
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 19:35:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 77A7C88910
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 19:36:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-7a1d067d5bbso382658385a.3
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 10:35:57 -0700 (PDT)
+Received: by mail-vs1-xe2f.google.com with SMTP id
+ ada2fe7eead31-4928d2f45e2so1559824137.0
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 10:36:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722447356; x=1723052156; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1722447377; x=1723052177; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3flZ7wvuIxs9SdTd+tAVj8GGhox95DzzuN7ejoP6HQU=;
- b=qoYeHLMs+afrmrKb0W0/zAF4j100BjiKTwhFfFvh1mLc0t/YodAA3pWsyqSJL2J5B6
- z6HixqkxasJScBDHxd6+VYnCvtjTYGVUgglE7EgKlYLTdpctYAPtL2jCLObnGKzc7c3b
- OWs9N5ZuUCU1T7A0uMzzI+a3enIxCoznsbsGHlyvkM66bpU0Fvt5RxJ6V+ylMXFkvyKF
- AybYaA82MR5JkSeke66CR6wgrc0aygdotLflsKcdDdOjZ2ZrRw38X3+0yttZtC7QV92X
- ssy6B+ENavt+9RA1zF7MleNFJtxBX0EkiH/I62ZUGOjCztXzb43JK7AJ305hb4u0rIzH
- s/dQ==
+ bh=NQ/sou7R72dI0nMuKysuv/d20FbUygoq23oScFDWvog=;
+ b=fc20SdSwgrFeq2ChFNloQJwEBvzlbJ4WzPaeAdrRa19bhobCmx1RRchNiy9C0igILF
+ nGkJ8iIozGxnO8t0142DzjGkAwzi/t7HrWOa+hif+cwp936FRd7foqOk4U4javGd3OY2
+ d2hUAmJCtyCcs01P2Jnyhsnj/gpUft96v0L8zIToQE+GUipkb+0IPJXzqZ6yguz7yFcX
+ rnYtZxQu1K13hCyxSppOhvBrx3cz8s44CzfcMTKM6NUQLRI8u0gMM1ZkUk2g8OCuymQQ
+ 9bSgQm+bKGhLWJIO72zby60tclBB/dJNaaRee6ZK+I02lZv6XcpUiZ77bBR8s+8plJMm
+ C9Tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722447356; x=1723052156;
+ d=1e100.net; s=20230601; t=1722447377; x=1723052177;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3flZ7wvuIxs9SdTd+tAVj8GGhox95DzzuN7ejoP6HQU=;
- b=cEnmX3zbQJL3vHH45Hgxw3TURewZ+f84I/MRndCBQpMoyEM1tuwqUXNXTPi+JhgjMW
- em8yx03O1nkkyFTv5ZdzZIUYbZ0UZQ1rtl/Xrbml4blI/MUfI/PJYoqsWWPO75UfGiDV
- M2CoZx+HK/TsixHwN5o67ZO594VSBjrX+KhS9xKCJ+Rfx7K7rDELiQQNnFK41SibEAGJ
- UVGL5S1U1mV1s6wSkq1Y/aCeH/Y/PhO5TqYOW6q6hkoLn8DVi65MomEaUqsp6K8tNX8+
- uJbceVwkkmRUYKY3dSb/76OmryDEhuVanRiKBl15hpGeuFO8/xd7k6++71FHBxGnZcRZ
- 5aTw==
-X-Gm-Message-State: AOJu0YzuEXIeeWmGv/mqCOZ/xzAM/71Ya489J4RyaUpD7AK3Hg6yxAue
- qK2++XRqPAEz8oIEC14MvxSrRUyZhDLEBuZeW7cJTRRIF0tZY2/2U7RbXUY9Tbe8S+bHhsPnBNL
- PFxM=
-X-Google-Smtp-Source: AGHT+IFJHxAhjxUa8RRHHjMf52ijq2rozr4UqG8jnnXA1Rl84rK9kBCCZwY9yjFTGlLGhFRTiWd8VA==
-X-Received: by 2002:a05:620a:4051:b0:79d:6039:783c with SMTP id
- af79cd13be357-7a1e526b3f7mr2012607385a.41.1722447326064; 
- Wed, 31 Jul 2024 10:35:26 -0700 (PDT)
+ bh=NQ/sou7R72dI0nMuKysuv/d20FbUygoq23oScFDWvog=;
+ b=mr7wNs7YkOaTbhYsu6mSxU5JydTEMtY7w4TjLk2bmGkzfTuEC6ewXSqmUbjN5ugc+k
+ uJVuoJCsUHU95zT6I35X7Jqky1u2JLMg4wwPLYZICpR7l611X9XNfUcxcCm5kLoL0dPX
+ 4fJ9guyz1ONTpSQ13WFMxxFr3Zr7ITO7Q4FUK8HxAUo16Gqc4oxIHY8ETnUOc9QGh8+3
+ +ejEWuu8BPX7O7aRAfmgJcEwN75evjkJbPm+82R/Jpk5i5VotnbhR1bU7wS7cWdOWDcp
+ fODx71u2Y5+zf9qvTbgL24NhCzwm1vZzXK89cPujheHAYHIm1Mt03kHuuf0GcCH0DYtW
+ uoqA==
+X-Gm-Message-State: AOJu0Yz7f6WXr6YgGQWJQGTxm1Ia/6e8OeHE+jq9EYJRDLVg+N0YGWv+
+ IYKo7KQwLs0tMJDF5mmMT9RKJUt5xXfRwruR8v76yreXJYksBfS1GOKo4jBTY0pLm1itF7Otgv6
+ eV1g=
+X-Google-Smtp-Source: AGHT+IGag+yxfi4Qrrwwx4pOdffCwSxQEwlLWHtEx9snnpDwl7jKNX9NUz+APpP1Jyuitmp/2lkQ5w==
+X-Received: by 2002:a05:6102:1611:b0:494:2c0:cd18 with SMTP id
+ ada2fe7eead31-494509a9c23mr29365137.22.1722447376984; 
+ Wed, 31 Jul 2024 10:36:16 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a1d73b378fsm779452485a.37.2024.07.31.10.35.24
+ af79cd13be357-7a1d73b378fsm779452485a.37.2024.07.31.10.36.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jul 2024 10:35:25 -0700 (PDT)
+ Wed, 31 Jul 2024 10:36:16 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
  Mario Six <mario.six@gdsys.cc>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Michal Simek <michal.simek@amd.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sean Anderson <seanga2@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
- Sumit Garg <sumit.garg@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sumit Garg <sumit.garg@linaro.org>, Andrew Davis <afd@ti.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
  "Leon M. Busch-George" <leon@georgemail.eu>,
  Igor Opaniuk <igor.opaniuk@gmail.com>, Ilya Lukin <4.shket@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alexander Gendin <agendin@matrox.com>, Bin Meng <bmeng.cn@gmail.com>,
- Eddie James <eajames@linux.ibm.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: [PATCH v5 25/27] asn1_decoder: add build options for ASN1 decoder
-Date: Wed, 31 Jul 2024 10:25:35 -0700
-Message-Id: <20240731172556.1348487-26-raymond.mao@linaro.org>
+ Alexander Gendin <agendin@matrox.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Eddie James <eajames@linux.ibm.com>
+Subject: [PATCH v5 26/27] test: Remove ASN1 library test
+Date: Wed, 31 Jul 2024 10:25:36 -0700
+Message-Id: <20240731172556.1348487-27-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240731172556.1348487-1-raymond.mao@linaro.org>
 References: <20240731172556.1348487-1-raymond.mao@linaro.org>
@@ -113,144 +113,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When building with MbedTLS, we are using MbedTLS to decode ASN1 data
-for x509, pkcs7 and mscode.
-Introduce _LEGACY and _MBEDTLS kconfigs for ASN1 decoder legacy and
-MbedTLS implementations respectively.
+With MBEDTLS_LIB_X509 enabled, we don't build the original ASN1 lib,
+So remove it from test.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 Changes in v2
 - Initial patch.
 Changes in v3
 - None.
 Changes in v4
-- Introduce _LEGACY and _MBEDTLS kconfigs for ASN1 decoder legacy and
-  MbedTLS implementations respectively.
-- Update the commit subject.
+- None.
 Changes in v5
-- Correct kconfig dependence.
-- Refactored MbedTLS makefile.
+- None.
 
- lib/Makefile         |  2 +-
- lib/mbedtls/Kconfig  | 30 ++++++++++++++++++++++++++++++
- lib/mbedtls/Makefile |  2 +-
- 3 files changed, 32 insertions(+), 2 deletions(-)
+ test/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/lib/Makefile b/lib/Makefile
-index 35b73d8d00c..f0c5b9a9bb4 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -82,7 +82,7 @@ obj-$(CONFIG_$(SPL_)SHA256_LEGACY) += sha256.o
- obj-$(CONFIG_$(SPL_)SHA512_LEGACY) += sha512.o
+diff --git a/test/Kconfig b/test/Kconfig
+index e2ec0994a2e..558a9cd49b4 100644
+--- a/test/Kconfig
++++ b/test/Kconfig
+@@ -32,7 +32,7 @@ if UT_LIB
  
- obj-$(CONFIG_CRYPT_PW) += crypt/
--obj-$(CONFIG_$(SPL_)ASN1_DECODER) += asn1_decoder.o
-+obj-$(CONFIG_$(SPL_)ASN1_DECODER_LEGACY) += asn1_decoder.o
- 
- obj-$(CONFIG_$(SPL_)ZLIB) += zlib/
- obj-$(CONFIG_$(SPL_)ZSTD) += zstd/
-diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
-index ea306e07ee4..336c5220805 100644
---- a/lib/mbedtls/Kconfig
-+++ b/lib/mbedtls/Kconfig
-@@ -117,12 +117,14 @@ endif # LEGACY_CRYPTO_BASIC
- 
- config LEGACY_CRYPTO_CERT
- 	bool "legacy certificate libraries"
-+	select ASN1_DECODER_LEGACY if ASN1_DECODER
- 	select ASYMMETRIC_PUBLIC_KEY_LEGACY if \
- 		ASYMMETRIC_PUBLIC_KEY_SUBTYPE
- 	select RSA_PUBLIC_KEY_PARSER_LEGACY if RSA_PUBLIC_KEY_PARSER
- 	select X509_CERTIFICATE_PARSER_LEGACY if X509_CERTIFICATE_PARSER
- 	select PKCS7_MESSAGE_PARSER_LEGACY if PKCS7_MESSAGE_PARSER
- 	select MSCODE_PARSER_LEGACY if MSCODE_PARSER
-+	select SPL_ASN1_DECODER_LEGACY if SPL_ASN1_DECODER
- 	select SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY if \
- 		SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
- 	select SPL_RSA_PUBLIC_KEY_PARSER_LEGACY if SPL_RSA_PUBLIC_KEY_PARSER
-@@ -131,6 +133,12 @@ config LEGACY_CRYPTO_CERT
- 
- if LEGACY_CRYPTO_CERT
- 
-+config ASN1_DECODER_LEGACY
-+	bool "ASN1 decoder with legacy certificate library"
-+	depends on LEGACY_CRYPTO_CERT && ASN1_DECODER
-+	help
-+	  This option chooses legacy certificate library for ASN1 decoder.
-+
- config ASYMMETRIC_PUBLIC_KEY_LEGACY
- 	bool "Asymmetric public key crypto with legacy certificate library"
- 	depends on LEGACY_CRYPTO_CERT && ASYMMETRIC_PUBLIC_KEY_SUBTYPE
-@@ -172,6 +180,13 @@ config MSCODE_PARSER_LEGACY
- 
- if SPL
- 
-+config SPL_ASN1_DECODER_LEGACY
-+	bool "ASN1 decoder with legacy certificate library in SPL"
-+	depends on LEGACY_CRYPTO_CERT && SPL_ASN1_DECODER
-+	help
-+	  This option chooses legacy certificate library for ASN1 decoder in
-+	  SPL.
-+
- config SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY
- 	bool "Asymmetric public key crypto with legacy certificate library in SPL"
- 	depends on LEGACY_CRYPTO_CERT && SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
-@@ -293,12 +308,14 @@ endif # MBEDTLS_LIB_CRYPTO
- 
- config MBEDTLS_LIB_X509
- 	bool "MbedTLS certificate libraries"
-+	select ASN1_DECODER_MBEDTLS if ASN1_DECODER
- 	select ASYMMETRIC_PUBLIC_KEY_MBEDTLS if \
- 		ASYMMETRIC_PUBLIC_KEY_SUBTYPE
- 	select RSA_PUBLIC_KEY_PARSER_MBEDTLS if RSA_PUBLIC_KEY_PARSER
- 	select X509_CERTIFICATE_PARSER_MBEDTLS if X509_CERTIFICATE_PARSER
- 	select PKCS7_MESSAGE_PARSER_MBEDTLS if PKCS7_MESSAGE_PARSER
- 	select MSCODE_PARSER_MBEDTLS if MSCODE_PARSER
-+	select SPL_ASN1_DECODER_MBEDTLS if SPL_ASN1_DECODER
- 	select SPL_ASYMMETRIC_PUBLIC_KEY_MBEDTLS if \
- 		SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
- 	select SPL_RSA_PUBLIC_KEY_PARSER_MBEDTLS if SPL_RSA_PUBLIC_KEY_PARSER
-@@ -307,6 +324,12 @@ config MBEDTLS_LIB_X509
- 
- if MBEDTLS_LIB_X509
- 
-+config ASN1_DECODER_MBEDTLS
-+	bool "ASN1 decoder with MbedTLS certificate library"
-+	depends on MBEDTLS_LIB_X509 && ASN1_DECODER
-+	help
-+	  This option chooses MbedTLS certificate library for ASN1 decoder.
-+
- config ASYMMETRIC_PUBLIC_KEY_MBEDTLS
- 	bool "Asymmetric public key crypto with MbedTLS certificate library"
- 	depends on MBEDTLS_LIB_X509 && ASYMMETRIC_PUBLIC_KEY_SUBTYPE
-@@ -348,6 +371,13 @@ config MSCODE_PARSER_MBEDTLS
- 
- if SPL
- 
-+config SPL_ASN1_DECODER_MBEDTLS
-+	bool "ASN1 decoder with MbedTLS certificate library in SPL"
-+	depends on MBEDTLS_LIB_X509 && SPL_ASN1_DECODER
-+	help
-+	  This option chooses MbedTLS certificate library for ASN1 decoder in
-+	  SPL.
-+
- config SPL_ASYMMETRIC_PUBLIC_KEY_MBEDTLS
- 	bool "Asymmetric public key crypto with MbedTLS certificate library in SPL"
- 	depends on MBEDTLS_LIB_X509 && SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
-diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
-index 40031994708..14bc59f6cf3 100644
---- a/lib/mbedtls/Makefile
-+++ b/lib/mbedtls/Makefile
-@@ -36,7 +36,7 @@ mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA512_MBEDTLS) += \
- # MbedTLS X509 library
- obj-$(CONFIG_MBEDTLS_LIB_X509) += mbedtls_lib_x509.o
- mbedtls_lib_x509-y := $(MBEDTLS_LIB_DIR)/x509.o
--mbedtls_lib_x509-$(CONFIG_$(SPL_)ASN1_DECODER) += \
-+mbedtls_lib_x509-$(CONFIG_$(SPL_)ASN1_DECODER_MBEDTLS) += \
- 	$(MBEDTLS_LIB_DIR)/asn1parse.o \
- 	$(MBEDTLS_LIB_DIR)/asn1write.o \
- 	$(MBEDTLS_LIB_DIR)/oid.o
+ config UT_LIB_ASN1
+ 	bool "Unit test for asn1 compiler and decoder function"
+-	depends on SANDBOX
++	depends on SANDBOX && !MBEDTLS_LIB_X509
+ 	default y
+ 	imply ASYMMETRIC_KEY_TYPE
+ 	imply ASYMMETRIC_PUBLIC_KEY_SUBTYPE
 -- 
 2.25.1
 
