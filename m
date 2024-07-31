@@ -4,57 +4,157 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8B4CC3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 09:04:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 690C2C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 09:21:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0B21889B7;
-	Wed, 31 Jul 2024 11:04:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id CFE0F882BE;
+	Wed, 31 Jul 2024 11:21:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="neLaqrIP";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="0ubhIN9N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16244889B4; Wed, 31 Jul 2024 11:04:03 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 676C9882BE; Wed, 31 Jul 2024 11:21:34 +0200 (CEST)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on20708.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e1a::708])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EEE588998
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 11:04:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74A708897E
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 11:21:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=18d8=O7=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1722416633; bh=ZcIIlvIW7qoRpdrPso/7yqs6DlJqGVG1g+3bu+Nf5VE=;
- b=neLaqrIPDfNloMqa+LWL2W7aGovYaWZOkNi44IFce/t9YukojHVvVTDtjiz8PzSBo/wcaSGA0
- p/0rNK+UEse9LtVlGaJbEYrbegf2YnNgDkgqMNscrzCMaJe9kAO/MTYqSPNj/3mDZ93PS+lLJdP
- e6aEVP/foV9xUu91BTJhK7GtyQZ5nyF9+Xmrd94UAYktLUKflHwwa6yZsJ7r5Nh7tHuisoWYNe1
- f1RMZZWr7o92/qdtMH4/IOWuuTsv95UtJbzVGNoCuXrxAsYYr8gyn49PJDAXriXvjFrBIwCpcse
- JUlP3TFT8yC1ZFtf+ihZ9KTGVUT9L9EIne7uU7u8ZebQ==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jonas Karlman <jonas@kwiboo.se>
-Cc: Ricardo Pardini <ricardo@pardini.net>, Sumit Garg
- <sumit.garg@linaro.org>, u-boot@lists.denx.de
-Subject: [PATCH 2/2] board: rockchip: Add Xunlong Orange Pi 3B
-Date: Wed, 31 Jul 2024 09:03:31 +0000
-Message-ID: <20240731090336.1269391-3-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240731090336.1269391-1-jonas@kwiboo.se>
-References: <20240731090336.1269391-1-jonas@kwiboo.se>
-MIME-Version: 1.0
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=e+Ml1YVZ1HO4es9nCpKhIJOfGhSZxBALsvOSySqsQH3/ECb+doJKe9Epl290fg0ry8F8/yBd2dFwxLwSWhbvsxBr4mFUgB5YIY/UKCEqDU+B9kADYxJ4XpwHvQQdXe0+AYe0UZtAvdE450rsME1kfF4FVApX9Eh9L/N82vSDJvWkAYFYeyOUCb/+yTxqI13adbVvdtSEZjgVUG6ODrM/eQyYkfLlVOIRzbJbG3Q9ErKZpydDXL60xMTYNQXA/oWGb8sTu9Q6/s8u9dLDKk6ME66OD9tz53kDE9NPymmEluQLPEU/LVG5g122py5KTcflAjd0JhhNZXDvmJShfJ/3Xw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=oDh9nmeaVX1B03YZeUmx1GHxUxxjZR20kqyfubesKzA=;
+ b=SY/To7AKvwcaUO/ibOouWcgpWqLrya7T+V9H+eUD1Ldox7Zx1ClScC09u0XNd6UGaRm6Vfkw/GozNBvjEJ1xJwcnG6+4w4kQmUrorDZSM0Ty/ObTFfBzpdxx7k7dHKjUz0g+P940UA6+N5KEJ6oseIHeeeDBovZ/+5OoFp61ZrGwnjBh+c7A+whiD7VhG7oYq93bY4HROh3YltLHkmQ3gizgYzy0troFHZeGXzOtyQQpywQ6CZTP+pzMFY+S7aTrWldZIkfM7LSf155K70sN6uuiKOkl1oxd5+NZVQya5FYjn12J7opYrWEKOtVq3X8xkj/G6OxpOfdn1WwHquJriQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=oDh9nmeaVX1B03YZeUmx1GHxUxxjZR20kqyfubesKzA=;
+ b=0ubhIN9Ncj0uhgaEnvVqyJ/VUnUD5eVYUL4ptYVbf0BKEwZA+nQrBATrj0LxHx5ZsM+dYDktob23hd1XhW37TbeUglRYs3a6sSmcMVUI5Wtg44xRZqjy6g2pGkxEC4DLzs0tLcL3c9306HXcuzb7Io3VksXOg1dD7ciGlijrxwUCYxfYYbZHm2pKI275fCQEOeBNxCEiscJM23aqXTATe2mI4ilGqhsGoaqLKkTahsn9AcQJlC1VqGIyQ9jinhELNht1/XZ+WpmOOYNtdNpHv71AAAU0fJ2uFjCiC4gLDwqUqNvfDTrQk/kYWvnkcMA4o0hVLvT7NU5Ru5o83HuIIQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
+ by AS2PR08MB10180.eurprd08.prod.outlook.com (2603:10a6:20b:62d::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7828.21; Wed, 31 Jul
+ 2024 09:21:30 +0000
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0%5]) with mapi id 15.20.7828.016; Wed, 31 Jul 2024
+ 09:21:30 +0000
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Michal Simek <michal.simek@amd.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Anand Moon <linux.amoon@gmail.com>, Marek Vasut <marex@denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sean Anderson <seanga2@gmail.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de,
+ Peter Robinson <pbrobinson@gmail.com>
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v3 1/9] net/tcp: fix TCP options processing
+Date: Wed, 31 Jul 2024 13:21:02 +0400
+Message-Id: <20240731092110.4027134-2-mikhail.kshevetskiy@iopsys.eu>
+X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240731092110.4027134-1-mikhail.kshevetskiy@iopsys.eu>
+References: <20240731092110.4027134-1-mikhail.kshevetskiy@iopsys.eu>
 Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 66a9fdf673d983cd09239b7b
+Content-Type: text/plain
+X-ClientProxiedBy: FR4P281CA0225.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:e4::17) To GV2PR08MB8121.eurprd08.prod.outlook.com
+ (2603:10a6:150:7d::22)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|AS2PR08MB10180:EE_
+X-MS-Office365-Filtering-Correlation-Id: c2d64666-ab7c-4532-847d-08dcb1422997
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|52116014|1800799024|7416014|376014|366016|921020|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?SSWwOx0oDNJH4x06aW9u57xiQaXiHX6jIswyC1zidbJ+42FjqRS7yjfZrE24?=
+ =?us-ascii?Q?HktPa/U1Z9ai+YXuo+3Iz1DM98/4jyHeeJIZNvXNcc2SH5veetgeGC5KX7i6?=
+ =?us-ascii?Q?BvSY0J0kCOp7sIBy+NDuZAghVWkASCa5YVw4smtfGvAnGDqJBBAIzJ0o7/hn?=
+ =?us-ascii?Q?gPAueeYCNbi03u59ePRGTcD20HA9PF9dIgs/SUET0cd0/OKI10ps3Jnlh5xl?=
+ =?us-ascii?Q?vHavHu4+O5V9f/XEcjM1188u9yepQQzctJNrJpfaWiDa22npt16bGLqLDYWu?=
+ =?us-ascii?Q?YRnbFTyzPyL6VjVO2zlBJex3MU8XSDR4nWys8XUrD0Kyjrr8iQ2bna+WIS9C?=
+ =?us-ascii?Q?nj7WKwpdMCOoxzp78T3W3o8fT4k6Q1hrMlCjh1xRrfDkSkFpVIwvmyn+ObW9?=
+ =?us-ascii?Q?AAwKKmE73g3v3cF+zlG0USAdggT9wEp/0kG9HUs+YcuH7EOTe2VJH3E85o5d?=
+ =?us-ascii?Q?W8Q6aTSSla1jC7oYgMtDcBW+JhpRDpfRKQXS2zDoDkVOfbMOVD7TWyB+5RpQ?=
+ =?us-ascii?Q?qlngyWTcVb5O0zRbkboMQpRvuf9OdVi339ze7mMlnuhS1C+w9Ioi81NppK1z?=
+ =?us-ascii?Q?r7zMvF5MeYHIwxjUe7ORhImkW57mJCmtul+gYEOvc4aK/uZQTceA6jMWQ2CM?=
+ =?us-ascii?Q?ZJzEEDKZ77/VKg3ZgWFjh7muBqHWDQPneTJDWbgEkNzgdDt7eoKRTMGra2Gz?=
+ =?us-ascii?Q?at+i0I8mpz7NZdeGMwTDBQQzoMvQVu8fO/SFtgH6D5XvqAxK1CLpqvc+Oc/I?=
+ =?us-ascii?Q?Cx2bLH3flH3yjHCeJCGbu44mHqdrQwDyGS3cf7oV4EVDy7p8uxVm0mmDVKeI?=
+ =?us-ascii?Q?Jzb44k5N2TE8haeTXoSNiAsuDyUOav/fStUmmjLx+0+4CPKYFmGfgBWOrwGd?=
+ =?us-ascii?Q?OxrSuRdzUH7BI1hqPN9Q1yV/3X80DDaTkWNvmGJD/ZQHYbvdDWsRtfZJjR2F?=
+ =?us-ascii?Q?K5hy8/7454pPpKQmGD/KrkfeSiuSWSzz0ENsonw4jKpA11x/AQwq82AbpW7V?=
+ =?us-ascii?Q?DVjGNxGOY0Mi1VC+1ioAL55GHPTMC03IUjBcstWjL5C/ZWnMkk3AfGFrSmkz?=
+ =?us-ascii?Q?1trLHsV/j6j6T6u/QAnTtkTtD81wCVlsf9qVLQetL2Rq/oCvMQuwwRbKSPA4?=
+ =?us-ascii?Q?YCKYjWJDW50K5lArmBpzhLSnps0JqROUmFgqOOzePxv2IHJ8r2RupD/fMKgM?=
+ =?us-ascii?Q?bP4buspdecTASFySfnW/0GwreX5ZcbYbM35hVjym/wM4Bnpm45lqZrCzGN0B?=
+ =?us-ascii?Q?VYuMeCjL+HIApAx/mDRZ6GM9kEZejzDeCgKSqgbarQicecaiXDorgnZlVhpF?=
+ =?us-ascii?Q?9LvOx+pFsg64uDI6M7i8WT8EhIcx+MdcQKkE6mz01THMkZolcuAVtXpsdWkT?=
+ =?us-ascii?Q?GJ2lem3mjP9ykGUCMQawmALsNftILk3IGu97oMi7tOcZiqNegYnVdkKDdT1t?=
+ =?us-ascii?Q?+zLrNUnwcW8=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(1800799024)(7416014)(376014)(366016)(921020)(38350700014);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?WRVBAWZB3W4OWgLJZQ0ZSDPfIfyYPwGy0M1SeoAhxdU4TAKL6a0IqLDJ0oWA?=
+ =?us-ascii?Q?eKj9vVparzXd1Ruw/TfGaV7dceFBgwQ/K+caA5vO8x/nbF2d5veRQUNea5a0?=
+ =?us-ascii?Q?tlqbMc8r9z38Eo7bDKQ8yB48qKgBunu7Zg7NbYTweaKU010VvsGYFgIvJQ3H?=
+ =?us-ascii?Q?wAEdx7qTibocYywnyWiHdrslQY879z8/ibKSOi/bIm2jMgiLiuCOGRkbxxX2?=
+ =?us-ascii?Q?0iuf1zKPD3Y4XEOyEl9A1jLiYZqKpmfYFa/Xt3pUpl4JWBMYMklaxbIwwRLA?=
+ =?us-ascii?Q?vhEa0t5yggPScgP4hI6t/+pYK7rFTVDFPpn5xV7rwWIcDFmcF9pPI4kAh2eK?=
+ =?us-ascii?Q?lx6ox2zSXWbyyQmOmbYg58lX66gMwY8hOUyVTVwU4r3V9meC5sWshx7hadI5?=
+ =?us-ascii?Q?ydcxytTeyGrw5slUIBsk2TvUdo19YJ4dNRjQGUMmb38/Sxu8r5P976UDOhXr?=
+ =?us-ascii?Q?JaZy8A5aUGZl4ttZqhpF/Sar6J+bOq+jdypvzla3DR26tk6RpXefGvwYosDh?=
+ =?us-ascii?Q?MYnqRgtXpuIuP0xKeHfDj7AVHF5he54UGbwRW4ZigHeZdBuwbxbZ6UyQ2/HQ?=
+ =?us-ascii?Q?zW0kd6k98Ow6Ezq73DGWRHRjm3wS46EyEtL+xYdC47PbPHAMNhj0EwoYOT8x?=
+ =?us-ascii?Q?a7/MZNhJvqiPWj1+8Rs3lJovQRYvHkvvY+EaohN0B5xW1aPfMXwWizrVSctp?=
+ =?us-ascii?Q?CiaAjBY6euuIx320mhX1vIvNLIrlqDzBGQkwlEvVtPhVtB4yDK2M+Ad6bW0S?=
+ =?us-ascii?Q?G3zTVvHRHdz4SS2UKXB0cKGcNEq6UT2iv3DUEQoyC0T9tkCpZqKGPV2GaRjP?=
+ =?us-ascii?Q?VAYVB2A4PdjHi49mEmCXmUiXk/KeyvFmgx02qvCXwP2Fb+hNskvyyH/3yJN6?=
+ =?us-ascii?Q?njTiukKL+SNna/rxanx/y03RCkek1tq82eMTsRu2KQXnIkqgVGtPhwYFhdfz?=
+ =?us-ascii?Q?HOgXHlEKquABy7W761lBiQGvFbY85rkuD9MfYTyFlbEoHoejCu60YtLNgfBm?=
+ =?us-ascii?Q?nEVZvWC4odLLg9rCM3Lbp8QjngjGGtHHzGfly02U36Ae5W2xv6r7yeVp3ir7?=
+ =?us-ascii?Q?pBqqxpO8yfwh9Bs2DQj+MDxtRChLezlDnkFDiBbBYMa8N3aJ5RPpA1ko1Zj2?=
+ =?us-ascii?Q?BZVK5ck6mN7U7b98rjtmbLi6b9Gr+VU5eSOLmsbbX3OZFb23sJ4iwjnvbtcU?=
+ =?us-ascii?Q?831YZ50tnkuqxY6deog0QS8izM81Tv3InDURbkeVtWmXQAb2RZhYCZC2cdY/?=
+ =?us-ascii?Q?hspINK4YSzMqNO6eLk8DHavYhx809ku4NKpS4irukS+L86EkeCQrXtYPdRul?=
+ =?us-ascii?Q?2zbKK7U2cnVCbk+6y7PL57GPPTU8oUMSyoR9esO7GVMNNynJwwh9IPSbxcx7?=
+ =?us-ascii?Q?CDM1dVKP0ijmMi1RqnN+3ob2+FYAj/jxjiClDHCl6u7+m+krSJCUzSZJyl0m?=
+ =?us-ascii?Q?5TwmoGTAOklLigmwFgfa3zHl0DjxTiSbJBoGv3iVwoX8whwRNCwewchf2/En?=
+ =?us-ascii?Q?mmnthN9TdP8uP16YBYvcrYwMJI0GHkLZL20OgENYCtuX4NiEE9Jt4sbBRQ9b?=
+ =?us-ascii?Q?l0EfiffSkyou2eoW7f91ys4ycz1kmFHkDuWvkWhXa3PfNqAEUmiOch/YYHQP?=
+ =?us-ascii?Q?8gwL8VTVN7Fpr/KRTDPHgE8=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: c2d64666-ab7c-4532-847d-08dcb1422997
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Jul 2024 09:21:30.5466 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: NoElzcp22mqwJHsnYdpE2UENTHxLI8EDLzM4xpJ+OUEPaHpQ7f/na9GW198OVP5PWMxhfcXOVa75HjsPgk2rQAmat/Y5hyrEYU/9JDLFdqY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR08MB10180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,392 +171,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ricardo Pardini <ricardo@pardini.net>
+Current TCP code may miss an option if TCP_O_NOP option was used before
+it for proper aligning.
 
-The Xunlong Orange Pi 3B is a single-board computer based on the
-Rockchip RK3566 SoC.
-
-The two hw revisions use different io-voltage for Ethernet PHY and can
-be identified using GPIO4_C4:
-- v1.1.1: x (internal pull-down)
-- v2.1:   PHY_RESET (external pull-up)
-
-Implement rk_board_late_init() to set correct fdtfile env var and
-board_fit_config_name_match() to load correct FIT config based on what
-board is detected at runtime so a single board target can be used for
-both hw revisions.
-
-Minimal DTs that includ DT from dts/upstream is added to support booting
-from both hw revision and only set Ethernet PHY io-voltage when the hw
-revision is detected at runtime. A side-affect of this is that defconfig
-show OF_UPSTREAM=n, however dts/upstream DTs is used for this board.
-
-Features tested on Orange Pi 3B 4GB (v1.1.1 and v2.1):
-- SD-card boot
-- eMMC boot
-- SPI Flash boot
-- Ethernet
-- PCIe/NVMe
-- USB host
-
-Signed-off-by: Ricardo Pardini <ricardo@pardini.net>
-Co-developed-by: Jonas Karlman <jonas@kwiboo.se>
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 ---
- arch/arm/dts/rk3566-orangepi-3b-u-boot.dtsi   | 14 +++
- .../dts/rk3566-orangepi-3b-v1.1-u-boot.dtsi   |  3 +
- arch/arm/dts/rk3566-orangepi-3b-v1.1.dts      |  3 +
- .../dts/rk3566-orangepi-3b-v2.1-u-boot.dtsi   |  3 +
- arch/arm/dts/rk3566-orangepi-3b-v2.1.dts      |  3 +
- arch/arm/dts/rk3566-orangepi-3b.dts           |  5 +
- arch/arm/mach-rockchip/rk3568/Kconfig         |  6 ++
- board/xunlong/orangepi-3b-rk3566/Kconfig      | 12 +++
- board/xunlong/orangepi-3b-rk3566/MAINTAINERS  |  6 ++
- board/xunlong/orangepi-3b-rk3566/Makefile     |  3 +
- .../orangepi-3b-rk3566/orangepi-3b-rk3566.c   | 77 +++++++++++++++
- configs/orangepi-3b-rk3566_defconfig          | 98 +++++++++++++++++++
- doc/board/rockchip/rockchip.rst               |  1 +
- 13 files changed, 234 insertions(+)
- create mode 100644 arch/arm/dts/rk3566-orangepi-3b-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3566-orangepi-3b-v1.1-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3566-orangepi-3b-v1.1.dts
- create mode 100644 arch/arm/dts/rk3566-orangepi-3b-v2.1-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3566-orangepi-3b-v2.1.dts
- create mode 100644 arch/arm/dts/rk3566-orangepi-3b.dts
- create mode 100644 board/xunlong/orangepi-3b-rk3566/Kconfig
- create mode 100644 board/xunlong/orangepi-3b-rk3566/MAINTAINERS
- create mode 100644 board/xunlong/orangepi-3b-rk3566/Makefile
- create mode 100644 board/xunlong/orangepi-3b-rk3566/orangepi-3b-rk3566.c
- create mode 100644 configs/orangepi-3b-rk3566_defconfig
+ net/tcp.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/dts/rk3566-orangepi-3b-u-boot.dtsi b/arch/arm/dts/rk3566-orangepi-3b-u-boot.dtsi
-new file mode 100644
-index 000000000000..e44b699af720
---- /dev/null
-+++ b/arch/arm/dts/rk3566-orangepi-3b-u-boot.dtsi
-@@ -0,0 +1,14 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+#include "rk356x-u-boot.dtsi"
-+
-+&gpio4 {
-+	bootph-pre-ram;
-+};
-+
-+&sfc {
-+	flash@0 {
-+		bootph-pre-ram;
-+		bootph-some-ram;
-+	};
-+};
-diff --git a/arch/arm/dts/rk3566-orangepi-3b-v1.1-u-boot.dtsi b/arch/arm/dts/rk3566-orangepi-3b-v1.1-u-boot.dtsi
-new file mode 100644
-index 000000000000..50ea6ede7285
---- /dev/null
-+++ b/arch/arm/dts/rk3566-orangepi-3b-v1.1-u-boot.dtsi
-@@ -0,0 +1,3 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+#include "rk3566-orangepi-3b-u-boot.dtsi"
-diff --git a/arch/arm/dts/rk3566-orangepi-3b-v1.1.dts b/arch/arm/dts/rk3566-orangepi-3b-v1.1.dts
-new file mode 100644
-index 000000000000..f97e33bd8108
---- /dev/null
-+++ b/arch/arm/dts/rk3566-orangepi-3b-v1.1.dts
-@@ -0,0 +1,3 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include <arm64/rockchip/rk3566-orangepi-3b-v1.1.dts>
-diff --git a/arch/arm/dts/rk3566-orangepi-3b-v2.1-u-boot.dtsi b/arch/arm/dts/rk3566-orangepi-3b-v2.1-u-boot.dtsi
-new file mode 100644
-index 000000000000..50ea6ede7285
---- /dev/null
-+++ b/arch/arm/dts/rk3566-orangepi-3b-v2.1-u-boot.dtsi
-@@ -0,0 +1,3 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+#include "rk3566-orangepi-3b-u-boot.dtsi"
-diff --git a/arch/arm/dts/rk3566-orangepi-3b-v2.1.dts b/arch/arm/dts/rk3566-orangepi-3b-v2.1.dts
-new file mode 100644
-index 000000000000..0031e2477abf
---- /dev/null
-+++ b/arch/arm/dts/rk3566-orangepi-3b-v2.1.dts
-@@ -0,0 +1,3 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include <arm64/rockchip/rk3566-orangepi-3b-v2.1.dts>
-diff --git a/arch/arm/dts/rk3566-orangepi-3b.dts b/arch/arm/dts/rk3566-orangepi-3b.dts
-new file mode 100644
-index 000000000000..44b9a9c89f0b
---- /dev/null
-+++ b/arch/arm/dts/rk3566-orangepi-3b.dts
-@@ -0,0 +1,5 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+/dts-v1/;
-+
-+#include <arm64/rockchip/rk3566-orangepi-3b.dtsi>
-diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
-index 0f32f243be4e..899cf909fbb9 100644
---- a/arch/arm/mach-rockchip/rk3568/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3568/Kconfig
-@@ -37,6 +37,11 @@ config TARGET_RADXA_ZERO_3_RK3566
- 	help
- 	  Radxa ZERO 3W/3E single board computers with a RK3566 SoC.
+diff --git a/net/tcp.c b/net/tcp.c
+index b0cc8a1fe3e..3e3118de450 100644
+--- a/net/tcp.c
++++ b/net/tcp.c
+@@ -475,7 +475,7 @@ void tcp_parse_options(uchar *o, int o_len)
+ 	 * NOPs are options with a zero length, and thus are special.
+ 	 * All other options have length fields.
+ 	 */
+-	for (p = o; p < (o + o_len); p = p + p[1]) {
++	for (p = o; p < (o + o_len); ) {
+ 		if (!p[1])
+ 			return; /* Finished processing options */
  
-+config TARGET_ORANGEPI_3B_RK3566
-+	bool "Xunlong Orange Pi 3B"
-+	help
-+	  Xunlong Orange Pi 3B single board computer with a RK3566 SoC.
-+
- endchoice
+@@ -490,12 +490,14 @@ void tcp_parse_options(uchar *o, int o_len)
+ 		case TCP_O_TS:
+ 			tsopt = (struct tcp_t_opt *)p;
+ 			rmt_timestamp = tsopt->t_snd;
+-			return;
++			break;
+ 		}
  
- config ROCKCHIP_BOOT_MODE_REG
-@@ -60,5 +65,6 @@ source "board/hardkernel/odroid_m1/Kconfig"
- source "board/pine64/quartz64_rk3566/Kconfig"
- source "board/powkiddy/x55/Kconfig"
- source "board/radxa/zero3-rk3566/Kconfig"
-+source "board/xunlong/orangepi-3b-rk3566/Kconfig"
+ 		/* Process optional NOPs */
+ 		if (p[0] == TCP_O_NOP)
+ 			p++;
++		else
++			p += p[1];
+ 	}
+ }
  
- endif
-diff --git a/board/xunlong/orangepi-3b-rk3566/Kconfig b/board/xunlong/orangepi-3b-rk3566/Kconfig
-new file mode 100644
-index 000000000000..36ccc056c620
---- /dev/null
-+++ b/board/xunlong/orangepi-3b-rk3566/Kconfig
-@@ -0,0 +1,12 @@
-+if TARGET_ORANGEPI_3B_RK3566
-+
-+config SYS_BOARD
-+	default "orangepi-3b-rk3566"
-+
-+config SYS_VENDOR
-+	default "xunlong"
-+
-+config SYS_CONFIG_NAME
-+	default "evb_rk3568"
-+
-+endif
-diff --git a/board/xunlong/orangepi-3b-rk3566/MAINTAINERS b/board/xunlong/orangepi-3b-rk3566/MAINTAINERS
-new file mode 100644
-index 000000000000..6e1df1052ba2
---- /dev/null
-+++ b/board/xunlong/orangepi-3b-rk3566/MAINTAINERS
-@@ -0,0 +1,6 @@
-+ORANGEPI-3B-RK3566
-+M:	Jonas Karlman <jonas@kwiboo.se>
-+S:	Maintained
-+F:	board/xunlong/orangepi-3b-rk3566
-+F:	configs/orangepi-3b-rk3566_defconfig
-+F:	arch/arm/dts/rk3566-orangepi-3b*
-diff --git a/board/xunlong/orangepi-3b-rk3566/Makefile b/board/xunlong/orangepi-3b-rk3566/Makefile
-new file mode 100644
-index 000000000000..9ce25549e21e
---- /dev/null
-+++ b/board/xunlong/orangepi-3b-rk3566/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+
-+obj-y += orangepi-3b-rk3566.o
-diff --git a/board/xunlong/orangepi-3b-rk3566/orangepi-3b-rk3566.c b/board/xunlong/orangepi-3b-rk3566/orangepi-3b-rk3566.c
-new file mode 100644
-index 000000000000..d05c33adefaa
---- /dev/null
-+++ b/board/xunlong/orangepi-3b-rk3566/orangepi-3b-rk3566.c
-@@ -0,0 +1,77 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+#include <env.h>
-+#include <asm/gpio.h>
-+
-+struct board_model {
-+	int value;
-+	const char *fdtfile;
-+	const char *config;
-+};
-+
-+static const struct board_model board_models[] = {
-+	{ 0, "rockchip/rk3566-orangepi-3b-v1.1.dtb", "rk3566-orangepi-3b-v1.1.dtb" },
-+	{ 1, "rockchip/rk3566-orangepi-3b-v2.1.dtb", "rk3566-orangepi-3b-v2.1.dtb" },
-+};
-+
-+static int get_board_value(void)
-+{
-+	struct gpio_desc desc;
-+	int ret;
-+
-+	/*
-+	 * GPIO4_C4 (E20):
-+	 * v1.1.1: x (internal pull-down)
-+	 * v2.1:   PHY_RESET (external pull-up)
-+	 */
-+	ret = dm_gpio_lookup_name("E20", &desc);
-+	if (ret)
-+		return ret;
-+
-+	ret = dm_gpio_request(&desc, "phy_reset");
-+	if (ret && ret != -EBUSY)
-+		return ret;
-+
-+	dm_gpio_set_dir_flags(&desc, GPIOD_IS_IN);
-+	ret = dm_gpio_get_value(&desc);
-+	dm_gpio_free(desc.dev, &desc);
-+
-+	return ret;
-+}
-+
-+static const struct board_model *get_board_model(void)
-+{
-+	int i, val;
-+
-+	val = get_board_value();
-+	if (val < 0)
-+		return NULL;
-+
-+	for (i = 0; i < ARRAY_SIZE(board_models); i++) {
-+		if (val == board_models[i].value)
-+			return &board_models[i];
-+	}
-+
-+	return NULL;
-+}
-+
-+int rk_board_late_init(void)
-+{
-+	const struct board_model *model = get_board_model();
-+
-+	if (model)
-+		env_set("fdtfile", model->fdtfile);
-+
-+	return 0;
-+}
-+
-+int board_fit_config_name_match(const char *name)
-+{
-+	const struct board_model *model = get_board_model();
-+
-+	if (model && (!strcmp(name, model->fdtfile) ||
-+	              !strcmp(name, model->config)))
-+		return 0;
-+
-+	return -EINVAL;
-+}
-diff --git a/configs/orangepi-3b-rk3566_defconfig b/configs/orangepi-3b-rk3566_defconfig
-new file mode 100644
-index 000000000000..575dc4340d38
---- /dev/null
-+++ b/configs/orangepi-3b-rk3566_defconfig
-@@ -0,0 +1,98 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SPL_GPIO=y
-+CONFIG_SF_DEFAULT_SPEED=24000000
-+CONFIG_SF_DEFAULT_MODE=0x2000
-+CONFIG_DEFAULT_DEVICE_TREE="rk3566-orangepi-3b"
-+CONFIG_ROCKCHIP_RK3568=y
-+CONFIG_ROCKCHIP_SPI_IMAGE=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_TARGET_ORANGEPI_3B_RK3566=y
-+CONFIG_DEBUG_UART_BASE=0xFE660000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_SPL_SPI_FLASH_SUPPORT=y
-+CONFIG_SPL_SPI=y
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_AHCI=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-orangepi-3b.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_PAD_TO=0x7f8000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_SPI_LOAD=y
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
-+CONFIG_SPL_ATF=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_POWEROFF=y
-+CONFIG_CMD_USB=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_PMIC=y
-+CONFIG_CMD_REGULATOR=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+# CONFIG_OF_UPSTREAM is not set
-+CONFIG_OF_LIST="rk3566-orangepi-3b rk3566-orangepi-3b-v1.1 rk3566-orangepi-3b-v2.1"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_SCSI_AHCI=y
-+CONFIG_AHCI_PCI=y
-+CONFIG_SPL_CLK=y
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_MISC=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_SF_DEFAULT_BUS=4
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_SPI_FLASH_XMC=y
-+CONFIG_PHY_MOTORCOMM=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_DW_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_DM_PMIC=y
-+CONFIG_DM_PMIC_FAN53555=y
-+CONFIG_PMIC_RK8XX=y
-+CONFIG_REGULATOR_RK8XX=y
-+CONFIG_SPL_RAM=y
-+CONFIG_SCSI=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_ROCKCHIP_SFC=y
-+CONFIG_SYSRESET=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index 3febebd0b830..7003f05d0886 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -108,6 +108,7 @@ List of mainline supported Rockchip boards:
-      - Radxa CM3 IO Board (radxa-cm3-io-rk3566)
-      - Radxa ROCK 3C (rock-3c-rk3566)
-      - Radxa ZERO 3W/3E (radxa-zero-3-rk3566)
-+     - Xunlong Orange Pi 3B (orangepi-3b-rk3566)
- 
- * rk3568
-      - Rockchip Evb-RK3568 (evb-rk3568)
 -- 
-2.45.2
+2.39.2
 
