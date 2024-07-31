@@ -4,67 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A49CC3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 14:39:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE39EC3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 14:39:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 866358897F;
-	Wed, 31 Jul 2024 16:38:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E022F88A1C;
+	Wed, 31 Jul 2024 16:39:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hCA8urMG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VvczvCmw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13DB688A05; Wed, 31 Jul 2024 16:38:57 +0200 (CEST)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id 4285A88955; Wed, 31 Jul 2024 16:39:02 +0200 (CEST)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5C7388A16
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 16:38:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 16D5988A21
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 16:39:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6b7a3e468a9so41007506d6.1
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 07:38:54 -0700 (PDT)
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-5d5d0535396so2906747eaf.1
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 07:39:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722436734; x=1723041534; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722436739; x=1723041539; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yoMoY6hZ+zyff4u2qmDIEviXmPgEjQhWDCYwGNyGgH4=;
- b=hCA8urMGBR9M/z9CaRwOPpj+ImNKr0Lo/eMv/rjCICeS0WHNyTeWoaKj17QBjyQPYA
- 3mhY5hz09WxfVvluGHHD8u7NtIMBR/0DmYomsOTXyMcjCbgFgWFB7i8Y9sMRO9PA6x02
- w/H9VeB/SYoCB6jZWPhdN7XvbNqUmEceOlMLE=
+ bh=YeLtVzx9O+ygBWzPy9/o7d5N3uLDSeximlzx9H8G1dI=;
+ b=VvczvCmwsHhPLcEKXjrlbrfgQ6QwC15W+wi1oYlESQSAH0Z10FiaIjilYA8mN3bQ9q
+ Hgk/7bbx1U0vpMPaZeT4AExfvBMGKd6vxpM1CLOOwlpuNtJIORCz1vMrlaGm/mBjYy0a
+ SAt0C2hHldKKqjLgNA8WAt9coLB1B89k1bmJ0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722436734; x=1723041534;
+ d=1e100.net; s=20230601; t=1722436739; x=1723041539;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=yoMoY6hZ+zyff4u2qmDIEviXmPgEjQhWDCYwGNyGgH4=;
- b=xJBu8qrfuG5x3o8o3Ymm+ZIenxvZlJmjgFqzdvCq/d/JHE0Djngl/vkS2W3yDgd6UU
- sruKeaY0nK47RxI3LgukSh7PHdisyRcP2nTdXVFZUAstQmIuDST1Sb/d0LImVooGu8qc
- QwYHIyYuuIr0VNJHggSE6rJLirRn7c+6qCWo/3xL5xI1427PhgNEB5phIYIPgUxcMvzk
- dtR5xp/pmJBPE6N+gjuCF3IzV9B8RKuccxhmh+/H9lC6ynslW38zV/8ymAMJNPYn0Jyd
- E6Ux9um3SuOozdNMtLChfTa6cs3hsEuDniRpuieuYtTRnvioyotvIJ5BY1eZlQZvU+t8
- bP5g==
-X-Gm-Message-State: AOJu0Yx/ms2nCPKnBAwsVFon4kI9adC28hqmrp9qJInQs+nt2f556WG8
- I+yKmBFz3yhnpqMGnpOfq6nAwYgNty1Gtr3ZcIAo+3s7/EsRD6yKYNROSFWUOSomMVS11nJGrNc
- GMbcLXEmnLgIRiH7cNbtIGxZYNhWipA+It8pnMtWe3XNMwBM=
-X-Google-Smtp-Source: AGHT+IETsOuIZ2gYaO9Kyart5sh8BfPwHKtxtswE35SPFyzgiB3MAyac6hUFRGP6z4+69Y324JTT5jUnhCURoUkVomk=
-X-Received: by 2002:a05:6214:c25:b0:6b0:63ab:b7ba with SMTP id
- 6a1803df08f44-6bb55a16647mr155643346d6.15.1722436733568; Wed, 31 Jul 2024
- 07:38:53 -0700 (PDT)
+ bh=YeLtVzx9O+ygBWzPy9/o7d5N3uLDSeximlzx9H8G1dI=;
+ b=bdVWALwswIEdaeYcp5GULfHA+/T5UZKzSt7ZwEcS1Q3bakFntUWjFHvKt48kof2DVW
+ RLqADKFuO+uf8ucvHGjxMmzz9NRZkU3G5EeDsE+0SC89Td8Ey4/fp++qQvQt7XfL8Guf
+ G3XhThJti/hsqJMtUivdOz5n0R6Fh1CLs3rxDXD30kgWDvvLcDDXoHWNTEEVG8/AFNlj
+ mkoNari4vd4gCrCsKE4RQCcEcXnmkyrBEmeF1M6YH07jZC5rYhOeeuQCAmxrp25MUeM1
+ JrawgF4c4XBNqS5DRZMFfDgeldFIem4kk4G53iJ7hb6xjuUeZXSGUi6Wjr9q71zndcWD
+ pQbQ==
+X-Gm-Message-State: AOJu0YyIpwOH1818e0sVWtbvcSlEt+L+cUXNIy/VCYw2Ri+rg8D3mJjj
+ 05HBqS97NFbOKiEBDeJzV9K978ASj5ZVm5Co1IBED9l80LEVq7gntbh+vleaSMwg9zqWY3UmrmH
+ twBO6C6GOSVYNAcHT3LEEswvQ3+TvJD/5cPhV
+X-Google-Smtp-Source: AGHT+IHTmm704N3BqnenaLBNnV51Cju4ruPNuCdcDhG1vVfPrXGXax1gVWUPXFJE2YgSPvwkw4KIlnnH7m/yUl/Tlkk=
+X-Received: by 2002:a05:6358:715:b0:1ac:65e7:919b with SMTP id
+ e5c5f4694b2df-1adb24225d4mr1870087755d.6.1722436738730; Wed, 31 Jul 2024
+ 07:38:58 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-7-sughosh.ganu@linaro.org>
- <CAFLszTgwmQTwRzBuOJvh-=qBGuq+5fRc6vxBptqgQuJyHyuP6w@mail.gmail.com>
- <CADg8p94zPZVFq3Snus8EPT58xPK1AXiNk227uqOstNtZ0NWx1g@mail.gmail.com>
-In-Reply-To: <CADg8p94zPZVFq3Snus8EPT58xPK1AXiNk227uqOstNtZ0NWx1g@mail.gmail.com>
+ <20240724060224.3071065-34-sughosh.ganu@linaro.org>
+ <CAFLszTg1nywmyXRJ2Dgsg97Mfbps7P37jDD72dNafo0wHF3RZQ@mail.gmail.com>
+ <CADg8p97S84J7wrEchCfP-Y7L8qdC4F=koyuhzV0+jYxiM=YhRg@mail.gmail.com>
+ <CAFLszThRiRLXE2Nz7CM4_tDCM6=6d1v4snsDfYBCnvPnoXVPYg@mail.gmail.com>
+ <CADg8p96UnUpeV51Dsr82rKs6vz-9TPBmoz6HTq+i4G0me6MR8w@mail.gmail.com>
+In-Reply-To: <CADg8p96UnUpeV51Dsr82rKs6vz-9TPBmoz6HTq+i4G0me6MR8w@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 31 Jul 2024 08:38:42 -0600
-Message-ID: <CAFLszTjUGoSFOF1TQevgN_y2KdGsmFeVPT11aK4EEpUOVtx05g@mail.gmail.com>
-Subject: Re: [PATCH 06/40] alist: add a couple of helper functions
+Date: Wed, 31 Jul 2024 08:38:48 -0600
+Message-ID: <CAFLszThbvjMqQVCJ7gO0zd-21Xj2Y_uJE8ribzNRKhhrgYHeYQ@mail.gmail.com>
+Subject: Re: [PATCH 33/40] test: cedit: use allocated address for reading file
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
@@ -94,99 +96,61 @@ X-Virus-Status: Clean
 
 Hi Sughosh,
 
-On Mon, 29 Jul 2024 at 12:05, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Wed, 31 Jul 2024 at 01:26, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> On Fri, 26 Jul 2024 at 05:03, Simon Glass <sjg@chromium.org> wrote:
+> On Mon, 29 Jul 2024 at 20:58, Simon Glass <sjg@chromium.org> wrote:
 > >
 > > Hi Sughosh,
 > >
-> > On Wed, 24 Jul 2024 at 00:03, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > On Mon, 29 Jul 2024 at 02:53, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > > >
-> > > Add a couple of helper functions to detect an empty and full alist.
+> > > On Fri, 26 Jul 2024 at 05:02, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Sughosh,
+> > > >
+> > > > On Wed, 24 Jul 2024 at 00:05, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > > >
+> > > > > Instead of a randomly selected address, use an LMB allocated one for
+> > > > > reading the file into memory. With the LMB map now being persistent
+> > > > > and global, the address used for reading the file might be already
+> > > > > allocated as non-overwritable, resulting in a failure. Get a valid
+> > > > > address from LMB and then read the file to that address.
+> > > > >
+> > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > > ---
+> > > > > Changes since rfc: None
+> > > > >
+> > > > >  test/boot/cedit.c | 6 +++++-
+> > > > >  1 file changed, 5 insertions(+), 1 deletion(-)
+> > > > >
+> > > >
+> > > > No, we should not start putting lmb into tests like this.
 > > >
-> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > ---
-> > > Changes since rfc: None
-> > >
-> > >  include/alist.h | 22 ++++++++++++++++++++++
-> > >  1 file changed, 22 insertions(+)
+> > > The test fails if the address is not allocated through an lmb api.
+> > > Although I can check why.
 > >
-> > I had to hunt around to see why these are needed. It's fine to add new
-> > functions to the API, but in this case I want to make a few points.
-> >
-> > >
-> > > diff --git a/include/alist.h b/include/alist.h
-> > > index 6cc3161dcd..06ae137102 100644
-> > > --- a/include/alist.h
-> > > +++ b/include/alist.h
-> > > @@ -82,6 +82,28 @@ static inline bool alist_err(struct alist *lst)
-> > >         return lst->flags & ALISTF_FAIL;
-> > >  }
-> > >
-> > > +/**
-> > > + * alist_full() - Check if the alist is full
-> > > + *
-> > > + * @lst: List to check
-> > > + * Return: true if full, false otherwise
-> > > + */
-> > > +static inline bool alist_full(struct alist *lst)
-> > > +{
-> > > +       return lst->count == lst->alloc;
-> > > +}
-> >
-> > In general I see you manually modifying the members of the alist,
-> > rather than using the API to add a new item. I think it is better to
-> > use the API.
-> >
-> > struct lmb_region rgn;
-> >
-> > rgn.base = ...
-> > rgn.size = ...
-> > rgn.flags = ...
-> > if (!alist_add(&lmb.used, rgn. struct lmb_region))
-> >    return -ENOMEM;
+> > Neither am I, but you did put the tcg in the same region so perhaps
+> > that is an issue?
 >
-> Yes, I had seen this usage of the API in another of your patch.
-> However, my personal opinion of the API's is that alist_expand_by()
-> gives more clarity on what the function is doing. One gets a feeling
-> that alist_add() is only adding the given node to the list, whereas it
-> is doing a lot more under the hood. I feel that using the
-> alist_expand_by() API makes the code much easier to understand, but
-> that's my personal opinion.
+> I now remember the issue. The cedit_fdt() function uses a random
+> address(0x1000) and tries to load the settings.dtb file to the
+> address. The load command uses the lmb_alloc_addr() API function to
+> reserve and use this address for loading the file. This worked earlier
+> because of the local nature of the lmb memory map. But it does not
+> work anymore, as this clashes with some existing reservation resulting
+> in the test failure.  So this change is very much needed.
 
-With lmb there is the case of inserting a new element into the array,
-something which the API doesn't support at present. Perhaps that would
-help? It is a little hard to design the API until there are more users
-of it.
+OK I see. Do you know what is clashing? I wonder if we should have
+strings associated with lmb records, to make this easier, if there are
+going to be so many?
 
-alist_add() is really just adding an element (not a node) to the list,
-isn't it? Do you mean that it is copying the data into the list?
 
 >
-> >
-> > or you could make a function to add a new region to a list, with base,
-> > size & flags as args.
-> >
-> > > +
-> > > +/**
-> > > + * alist_empty() - Check if the alist is empty
-> > > + *
-> > > + * @lst: List to check
-> > > + * Return: true if empty, false otherwise
-> > > + */
-> > > +static inline bool alist_empty(struct alist *lst)
-> > > +{
-> > > +       return !lst->count && lst->alloc;
-> > > +}
-> >
-> > I would argue that this is a surprising definition of 'empty'. Why the
-> > second term? It seems to be because you want to know if it is safe to
-> > set values in item[0]. But see above for how to use the API.
+> -sughosh
 >
-> I want the initialisation of the list to be kept separate from adding
-> more 'nodes' to the list. Hence my usage.
-
-In that case, please rename the function to something other than 'empty'.
+> >
+> > Sandbox is designed so that low memory regions can be used in tests. I
+> > pointed you to the memory-map docs.
 
 Regards,
 Simon
