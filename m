@@ -4,85 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 444F9C3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 15:11:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C43C2C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 15:29:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CFBC884A9;
-	Wed, 31 Jul 2024 17:11:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 06EBF88A39;
+	Wed, 31 Jul 2024 17:29:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HpT3fTc1";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D6532882F0; Wed, 31 Jul 2024 17:11:09 +0200 (CEST)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1722439762;
+	bh=daCEQeDovOEtciodmcUIS5ZUDoQpr+rh3s/I8OXh9Mc=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=QRrUlc22IlFGhqECaxG6Y6lFw8qOq2wS8AOmidQ5E1KuuKQFY63nKXrF/cyE3DCMx
+	 0FoqML6bZ/gDuqdfnmUaEoLf45PIQW8KU8wTz/FMoEDMVQSa4HZOcBwDHaqAQEgf7L
+	 bOq1qesAk8eZeDk84tnyTy2ZQXBzJaU2f4h3JcZIfSu1hj4qXY/opK2uWgLjnZ77gE
+	 UZu25TXiGfxY2wyt/BWsZ/5BFxNJLvtlQ+RAUDNeflWqzFxTAOWghu31sgynNR6uZk
+	 NyXgube+x9DnDpVU3URBwObLUU67SxJrQz+o6ZI1j0DfhUzObFzuiLnVnbhkyQeWeZ
+	 6s+1ZC8Q8YnqQ==
+Received: from crub (p54833c06.dip0.t-ipconnect.de [84.131.60.6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8929884A9
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 17:11:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-52efd530a4eso9227375e87.0
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 08:11:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722438667; x=1723043467; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DdLSVmldl5JKW1FAOn1BmNdVh4SuisNeq3PmRW8mprY=;
- b=HpT3fTc1Pa7E7cN6gjLT8xohmUKAiTmQ3dZUviNuJRC4yBjplOOWyO6h4aXh0zBn3c
- o4a8b6hY09bq48RkA9118K4P/7TBpWthNkkCu80WhZi1BdMh4/iMJXpmwiXcx0SCYBJP
- RMjOSrpZbBzyMSB2+Vdg6Tb2WMD0gI9brXFlBSQ/oZiK+UrcKSe0/qTduGSq2Nx9Lx/Y
- a9kJB8jGTKn7y7pjBVRTpev2X1xjs+wszGbT863oDiaNYNWxumP+8AbXKXs9DIjaPmIH
- tpYDxuRpaNWLkdpjrakjIx/KscyXcmK1vAeTL1Pue2ngQV2HPA3dj5Gyne7m45+As+pw
- qEnw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722438667; x=1723043467;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DdLSVmldl5JKW1FAOn1BmNdVh4SuisNeq3PmRW8mprY=;
- b=H6SHLSs3VI5LmGEYGXFPWcLMc7bS8PwgkIAWB9j7kqFOvxRYdi8+9f05ynqXAoFYxX
- M4zXpZBk4noyOZRkrKf0EFkcaAswdy8pG6YtJl2oWVRFle80raup8uG4fC2g9wj70rWM
- Ul8DhznSQ2pp3+ucg1OgDR5ParZC7MGPWOaLAQtQtWEpCoRSw2cRlnCLGRP2JhmUixCV
- CZqxWzpSELEhTlZRdvYCkdZ8PHH+KxBtbyuPOSnO5NfA1ZKqAUMcIoz6ic6rjuTiXlXh
- muEahDucKEx7kGB2KwxI8tjppgYvzDfI1p4znLDggypCM9r1BS80ilPz+zWBFn3GRanQ
- boBQ==
-X-Gm-Message-State: AOJu0YyFks4f4B2ELYPu9vgAlKL6nefIKYJ7F+ipPtPdD8RguS2b5yPN
- BeeUa22sls3np8oKYdbWNPw57x8GOTjQEMzC14clnxAI2+zS5NArbv8hYBFPvlmkL9KLQqyGc6p
- EtilEiMKP9Zqpb6TzsFmpwMIPd5rrI1EFpg6MJA==
-X-Google-Smtp-Source: AGHT+IGKOesFkd+DHSqc/uGPxDhFaSL3tUwJ0S9Aj3jG+5W2tSnMSpXkGd+/GiS6+5hzp6r1RCafpdPq7VxW0bMo9dw=
-X-Received: by 2002:a05:6512:3990:b0:52c:881b:73c0 with SMTP id
- 2adb3069b0e04-5309b27a19dmr10537191e87.17.1722438666690; Wed, 31 Jul 2024
- 08:11:06 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-34-sughosh.ganu@linaro.org>
- <CAFLszTg1nywmyXRJ2Dgsg97Mfbps7P37jDD72dNafo0wHF3RZQ@mail.gmail.com>
- <CADg8p97S84J7wrEchCfP-Y7L8qdC4F=koyuhzV0+jYxiM=YhRg@mail.gmail.com>
- <CAFLszThRiRLXE2Nz7CM4_tDCM6=6d1v4snsDfYBCnvPnoXVPYg@mail.gmail.com>
- <CADg8p96UnUpeV51Dsr82rKs6vz-9TPBmoz6HTq+i4G0me6MR8w@mail.gmail.com>
- <CAFLszThbvjMqQVCJ7gO0zd-21Xj2Y_uJE8ribzNRKhhrgYHeYQ@mail.gmail.com>
-In-Reply-To: <CAFLszThbvjMqQVCJ7gO0zd-21Xj2Y_uJE8ribzNRKhhrgYHeYQ@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Wed, 31 Jul 2024 20:40:55 +0530
-Message-ID: <CADg8p978jK_hvmYEULh1_QJjCs7QuuDoOXuBfdcX1gC6AT=S6A@mail.gmail.com>
-Subject: Re: [PATCH 33/40] test: cedit: use allocated address for reading file
+ (Authenticated sender: agust@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 9AC6888A08;
+ Wed, 31 Jul 2024 17:29:19 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1722439760;
+ bh=daCEQeDovOEtciodmcUIS5ZUDoQpr+rh3s/I8OXh9Mc=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=Rh6oS4gHCR9xGZQagcWX29ETnqMDD7HGcDp5p2Wrm43PZ59aYrppgBwW/bhJCC+a1
+ K7Jy4bqFeJa5Nv4H6ntuxRne6IlyDJBBU/spGOaQkzO4pPHJsg6AHAo9Vk8xlof4SJ
+ f81MJfjcng2FDLOZHB2Y3Bk4BK538vgeg/VjnLb/FrqxMbblJBFzOidqByVT5fErxR
+ GIVod0mcP+LtLiGtU6xq7ric9aY7fG1NIPwpgYdr4R2ffB9C3las7nfM9ZdB25Dd8E
+ l6CgE6xVC1xBiuYzE+c5ZqPhTKFFhn33agSyojIjx8RUJqhDtQx+WQupbcUGsQQhuk
+ K5e0akxjQzSVA==
+Date: Wed, 31 Jul 2024 17:28:56 +0200
+From: Anatolij Gustschin <agust@denx.de>
 To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
- Max Filippov <jcmvbkbc@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
+ <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Angelo
+ Dureghello <angelo@kernel-space.org>, Anton Bambura
+ <jenneron@protonmail.com>, Bin Meng <bmeng@tinylab.org>, Caleb Connolly
+ <caleb.connolly@linaro.org>, Dan Carpenter <dan.carpenter@linaro.org>,
+ Devarsh Thakkar <devarsht@ti.com>, Francis Laniel
+ <francis.laniel@amarulasolutions.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Jagan Teki <jagan@amarulasolutions.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Nikhil M Jain <n-jain1@ti.com>, Ondrej
+ Jirman <megi@xff.cz>, Peter Robinson <pbrobinson@gmail.com>, Randolph
+ <randolph@andestech.com>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>,
+ Stefan Roese <sr@denx.de>
+Subject: Re: [PATCH v3 0/5] video: Improve syncing performance with cyclic
+Message-ID: <20240731172856.1f6596e1@crub>
+In-Reply-To: <CAFLszTjr18h6oeFnNF6A5+D70LWLYXDDQLJ-5V6qO-pjW7qA9g@mail.gmail.com>
+References: <20240704074859.2956745-1-sjg@chromium.org>
+ <20240731010407.0ff6a929@crub>
+ <CAFLszTjr18h6oeFnNF6A5+D70LWLYXDDQLJ-5V6qO-pjW7qA9g@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,74 +82,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 31 Jul 2024 at 20:08, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Sughosh,
->
-> On Wed, 31 Jul 2024 at 01:26, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >
-> > On Mon, 29 Jul 2024 at 20:58, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Sughosh,
-> > >
-> > > On Mon, 29 Jul 2024 at 02:53, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > > >
-> > > > On Fri, 26 Jul 2024 at 05:02, Simon Glass <sjg@chromium.org> wrote:
-> > > > >
-> > > > > Hi Sughosh,
-> > > > >
-> > > > > On Wed, 24 Jul 2024 at 00:05, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > > > > >
-> > > > > > Instead of a randomly selected address, use an LMB allocated one for
-> > > > > > reading the file into memory. With the LMB map now being persistent
-> > > > > > and global, the address used for reading the file might be already
-> > > > > > allocated as non-overwritable, resulting in a failure. Get a valid
-> > > > > > address from LMB and then read the file to that address.
-> > > > > >
-> > > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > > > ---
-> > > > > > Changes since rfc: None
-> > > > > >
-> > > > > >  test/boot/cedit.c | 6 +++++-
-> > > > > >  1 file changed, 5 insertions(+), 1 deletion(-)
-> > > > > >
-> > > > >
-> > > > > No, we should not start putting lmb into tests like this.
-> > > >
-> > > > The test fails if the address is not allocated through an lmb api.
-> > > > Although I can check why.
-> > >
-> > > Neither am I, but you did put the tcg in the same region so perhaps
-> > > that is an issue?
-> >
-> > I now remember the issue. The cedit_fdt() function uses a random
-> > address(0x1000) and tries to load the settings.dtb file to the
-> > address. The load command uses the lmb_alloc_addr() API function to
-> > reserve and use this address for loading the file. This worked earlier
-> > because of the local nature of the lmb memory map. But it does not
-> > work anymore, as this clashes with some existing reservation resulting
-> > in the test failure.  So this change is very much needed.
->
-> OK I see. Do you know what is clashing? I wonder if we should have
-> strings associated with lmb records, to make this easier, if there are
-> going to be so many?
+Hi Simon,
 
-Regarding your point about making use of strings for lmb records, I
-have something similar on my todo list. I plan to use the strings for
-the lmb flags associated with a memory region. The current flag values
-shown as part of the bdinfo command are not very helpful from the ease
-of understanding pov.
+On Wed, 31 Jul 2024 08:38:35 -0600
+Simon Glass sjg@chromium.org wrote:
 
--sughosh
+> Hi Anatolij,
+> 
+> On Tue, 30 Jul 2024 at 17:05, Anatolij Gustschin <agust@denx.de> wrote:
+> >
+> > Hi Simon,
+> >
+> > On Thu,  4 Jul 2024 08:48:54 +0100
+> > Simon Glass sjg@chromium.org wrote:
+> >  
+> > > Now that U-Boot has a background-processing feature, it is possible to
+> > > reduce the amount of 'foreground' syncing of the display. At present
+> > > this happens quite often.  
+> >
+> > This series breaks turris_1x_sdcard SPL build:
+> >
+> >  https://source.denx.de/u-boot/custodians/u-boot-video/-/jobs/878470#L646
+> >
+> > Should we enable CONFIG_SPL_CYCLIC for this board to fix this?  
+> 
+> Oh, my passing run was from a month ago[1].
 
->
->
-> >
-> > -sughosh
-> >
-> > >
-> > > Sandbox is designed so that low memory regions can be used in tests. I
-> > > pointed you to the memory-map docs.
->
-> Regards,
-> Simon
+I see, turris_1x board patches were merged later.
+
+> I think I need to change a Kconfig condition. Let me try that and resend.
+
+OK, thanks!
+
+--
+Anatolij
