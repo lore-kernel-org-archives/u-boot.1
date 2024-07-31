@@ -4,56 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C84BC3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 06:52:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A66B1C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 07:23:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63F118899A;
-	Wed, 31 Jul 2024 08:51:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id BB15288934;
+	Wed, 31 Jul 2024 09:23:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="M0YYU1iC";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="FRWSi4xv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCF3C88993; Wed, 31 Jul 2024 08:51:20 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7430C8896C; Wed, 31 Jul 2024 09:23:17 +0200 (CEST)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EEE38897A
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 08:51:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DC2A88886
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 09:23:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=18d8=O7=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1722408673; bh=Tw8DsVuJNI8nJHm5BWLE+nQ5+BC6prJMkk44SYvZcMA=;
- b=M0YYU1iCKFn1633gP4ky+YulMpK/GBxkT+9FnKstqejYU8iAcJuMde5ip26mFhqqkkMLjH4jN
- x5tB9De4ODq1zIOAkRpon54GBXnalqH2khlGrwgScWYwP3EL5NjgDIVi61wVnM4ZoTa2J8qjJXT
- 1xIbQqd7kfe3wwBAhnGSrn6FelSQEdF1l9O1MPdMLQk+UzL8C5Cx0KHeAASfQ8BGo7xiPwJdG5m
- KjRP04p52LUctjJcals98og5xFa4aKvNe8eBRWjuwmTxdWXy6dGOMzo2PRuhuZYWsrt41nGSd6x
- gfkmi57oWnucXxjb+9wW/pQdAtsypZouIGOr/1dbRPVQ==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jonas Karlman <jonas@kwiboo.se>
-Cc: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-Subject: [PATCH 5/5] board: rockchip: Add Radxa ZERO 3W/3E
-Date: Wed, 31 Jul 2024 06:50:40 +0000
-Message-ID: <20240731065048.1199792-6-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240731065048.1199792-1-jonas@kwiboo.se>
-References: <20240731065048.1199792-1-jonas@kwiboo.se>
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1722410595; x=1725002595;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=Wrrbuk/fo2+nOWnwBmQTm7lbAm8hz9xAMoB4N1FBkXA=;
+ b=FRWSi4xvUK48vsiIsiv1oTCCpWWdL3IX4HWhYNEdd6AGMQxXT3LVftBSzXumlPpq
+ vFhmb1b+f2MQxRYnLtMmnNR8DABHsAKAVXJw0ooxO0Wm2wNxi4uxImqKYC4grZkR
+ xpJZVC2av2+7Vxv2F/YwylfgJ9hOBquAZcXNyFG7D7w=;
+X-AuditID: ac14000a-03251700000021bc-a9-66a9e663f9cd
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id D7.14.08636.366E9A66;
+ Wed, 31 Jul 2024 09:23:15 +0200 (CEST)
+Received: from lws-moog.phytec.de (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 31 Jul
+ 2024 09:23:14 +0200
+From: Yannic Moog <y.moog@phytec.de>
+Subject: [PATCH 0/3] Enable CMD_ERASEENV for Phytec imx8m boards
+Date: Wed, 31 Jul 2024 09:22:58 +0200
+Message-ID: <20240731-wip-y-moog-phytec-de-imx8_eraseenv-v1-0-b8f0c4366399@phytec.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 66a9dede73d983cd09237980
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAFLmqWYC/x2NQQqDMBQFryJ/3Q+aahSvUkrR+NS/MAmJWEW8u
+ 8HlwDBzUkQQRGqzkwI2ieJsguKVkZk7O4FlSEwqV2Vevwv+i+eDF+cm9vOxwvCQnGVvfghdBOz
+ GRjdQY2X6SmtKIR8wyv5MPt/rugFfJ5U9dAAAAA==
+To: Teresa Remmet <t.remmet@phytec.de>, Fabio Estevam <festevam@gmail.com>
+CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, Yannic Moog
+ <y.moog@phytec.de>
+X-Mailer: b4 0.14.0
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrCLMWRmVeSWpSXmKPExsWyRpKBRzf52co0g7dvuCweXvW3eLu3k92i
+ +526A7PHzll32T3O3tnB6NHf3cIawBzFZZOSmpNZllqkb5fAldHx9jVjwTrWiob90g2MO1i6
+ GDk5JARMJBr+z2btYuTiEBJYwiTx5PMfRgjnIaPEowV/warYBFQkHr+4xwpiCws4SJybt58J
+ xGYRUJV49XMKWJxXIFTi4NxH7BC2oMTJmU+Aejk4mAU0Jdbv0gcJMwvIS2x/O4cZZL6EwBFG
+ iW8NF9lBakQEvCQu/ueBqImQuHZzCVhYQkBYouGfIkhYSEBW4sX5XnaIm+Ulpp17zQxhh0oc
+ 2bSaaQKj4Cwki2chLJ6FZPECRuZVjEK5mcnZqUWZ2XoFGZUlqcl6KambGEEhK8LAtYOxb47H
+ IUYmDsZDjBIczEoivEInV6YJ8aYkVlalFuXHF5XmpBYfYpTmYFES513dEZwqJJCeWJKanZpa
+ kFoEk2Xi4JRqYDR2t+FL7budsGMmb1n/kt/3fqs2lIsGv2fNYb1bq3f89UVBwRLdRr/Cvbdc
+ t740+LTp+qFtvfd6mb787RO2tRNcu4PlyM1mE8VPEdIvnnhNeO6f4BRj/J6174zY/HjFZ7rX
+ b+qrrt6d/mhTvsMWA8XFuc4Cgb7zekzLubM0OR/WSAV8fLRTV4mlOCPRUIu5qDgRAPlhkrZH
+ AgAA
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,311 +88,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Radxa ZERO 3W/3E is an ultra-small, high-performance single board
-computer based on the Rockchip RK3566, with a compact form factor and
-rich interfaces.
+Enable CMD_ERASEENV config option for
+imx8mm-phygate-tauri-l,
+phycore-imx8mm,
+phycore-imx8mp.
 
-Implement rk_board_late_init() to set correct fdtfile env var and
-board_fit_config_name_match() to load correct FIT config based on what
-board is detected at runtime so a single board target can be used for
-both board models.
-
-Features tested on a ZERO 3W 8GB v1.11:
-- SD-card boot
-- eMMC boot
-- USB gadget
-- USB host
-
-Features tested on a ZERO 3E 4GB v1.2:
-- SD-card boot
-- Ethernet
-- USB gadget
-- USB host
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi | 11 +++
- arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi | 11 +++
- arch/arm/mach-rockchip/rk3568/Kconfig         |  6 ++
- board/radxa/zero3-rk3566/Kconfig              | 12 +++
- board/radxa/zero3-rk3566/MAINTAINERS          |  6 ++
- board/radxa/zero3-rk3566/Makefile             |  3 +
- board/radxa/zero3-rk3566/zero3-rk3566.c       | 59 +++++++++++++
- configs/radxa-zero-3-rk3566_defconfig         | 85 +++++++++++++++++++
- doc/board/rockchip/rockchip.rst               |  1 +
- 9 files changed, 194 insertions(+)
- create mode 100644 arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi
- create mode 100644 board/radxa/zero3-rk3566/Kconfig
- create mode 100644 board/radxa/zero3-rk3566/MAINTAINERS
- create mode 100644 board/radxa/zero3-rk3566/Makefile
- create mode 100644 board/radxa/zero3-rk3566/zero3-rk3566.c
- create mode 100644 configs/radxa-zero-3-rk3566_defconfig
+Yannic Moog (3):
+      configs: imx8mm-phygate-tauri-l_defconfig: enable CMD_ERASEENV
+      configs: phycore-imx8mm_defconfig: enable CMD_ERASEENV
+      configs: phycore-imx8mp_defconfig: enable CMD_ERASEENV
 
-diff --git a/arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi b/arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi
-new file mode 100644
-index 000000000000..4025f5097af5
---- /dev/null
-+++ b/arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi
-@@ -0,0 +1,11 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk356x-u-boot.dtsi"
-+
-+&saradc {
-+	bootph-pre-ram;
-+};
-+
-+&vcca_1v8 {
-+	bootph-pre-ram;
-+};
-diff --git a/arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi b/arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi
-new file mode 100644
-index 000000000000..4025f5097af5
---- /dev/null
-+++ b/arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi
-@@ -0,0 +1,11 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk356x-u-boot.dtsi"
-+
-+&saradc {
-+	bootph-pre-ram;
-+};
-+
-+&vcca_1v8 {
-+	bootph-pre-ram;
-+};
-diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
-index 014ebf9f0ba7..0f32f243be4e 100644
---- a/arch/arm/mach-rockchip/rk3568/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3568/Kconfig
-@@ -32,6 +32,11 @@ config TARGET_QUARTZ64_RK3566
- 	help
- 	  Pine64 Quartz64 single board computer with a RK3566 SoC.
- 
-+config TARGET_RADXA_ZERO_3_RK3566
-+	bool "Radxa ZERO 3W/3E"
-+	help
-+	  Radxa ZERO 3W/3E single board computers with a RK3566 SoC.
-+
- endchoice
- 
- config ROCKCHIP_BOOT_MODE_REG
-@@ -54,5 +59,6 @@ source "board/anbernic/rgxx3_rk3566/Kconfig"
- source "board/hardkernel/odroid_m1/Kconfig"
- source "board/pine64/quartz64_rk3566/Kconfig"
- source "board/powkiddy/x55/Kconfig"
-+source "board/radxa/zero3-rk3566/Kconfig"
- 
- endif
-diff --git a/board/radxa/zero3-rk3566/Kconfig b/board/radxa/zero3-rk3566/Kconfig
-new file mode 100644
-index 000000000000..7d46efc9c40f
---- /dev/null
-+++ b/board/radxa/zero3-rk3566/Kconfig
-@@ -0,0 +1,12 @@
-+if TARGET_RADXA_ZERO_3_RK3566
-+
-+config SYS_BOARD
-+	default "zero3-rk3566"
-+
-+config SYS_VENDOR
-+	default "radxa"
-+
-+config SYS_CONFIG_NAME
-+	default "evb_rk3568"
-+
-+endif
-diff --git a/board/radxa/zero3-rk3566/MAINTAINERS b/board/radxa/zero3-rk3566/MAINTAINERS
-new file mode 100644
-index 000000000000..e5a5d856113d
---- /dev/null
-+++ b/board/radxa/zero3-rk3566/MAINTAINERS
-@@ -0,0 +1,6 @@
-+RADXA-ZERO-3-RK3566
-+M:	Jonas Karlman <jonas@kwiboo.se>
-+S:	Maintained
-+F:	board/radxa/zero3-rk3566
-+F:	configs/radxa-zero-3-rk3566_defconfig
-+F:	arch/arm/dts/rk3566-radxa-zero-3*
-diff --git a/board/radxa/zero3-rk3566/Makefile b/board/radxa/zero3-rk3566/Makefile
-new file mode 100644
-index 000000000000..b28b58ed5d87
---- /dev/null
-+++ b/board/radxa/zero3-rk3566/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+
-+obj-y += zero3-rk3566.o
-diff --git a/board/radxa/zero3-rk3566/zero3-rk3566.c b/board/radxa/zero3-rk3566/zero3-rk3566.c
-new file mode 100644
-index 000000000000..cf30c4e38987
---- /dev/null
-+++ b/board/radxa/zero3-rk3566/zero3-rk3566.c
-@@ -0,0 +1,59 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+#include <linux/errno.h>
-+#include <linux/kernel.h>
-+#include <adc.h>
-+#include <env.h>
-+
-+#define HW_ID_CHANNEL	1
-+
-+struct board_model {
-+	unsigned int low;
-+	unsigned int high;
-+	const char *fdtfile;
-+};
-+
-+static const struct board_model board_models[] = {
-+	{ 230, 270, "rockchip/rk3566-radxa-zero-3w.dtb" },
-+	{ 400, 450, "rockchip/rk3566-radxa-zero-3e.dtb" },
-+};
-+
-+static const struct board_model *get_board_model(void)
-+{
-+	unsigned int val;
-+	int i, ret;
-+
-+	ret = adc_channel_single_shot("saradc@fe720000", HW_ID_CHANNEL, &val);
-+	if (ret)
-+		return NULL;
-+
-+	for (i = 0; i < ARRAY_SIZE(board_models); i++) {
-+		unsigned int min = board_models[i].low;
-+		unsigned int max = board_models[i].high;
-+
-+		if (min <= val && val <= max)
-+			return &board_models[i];
-+	}
-+
-+	return NULL;
-+}
-+
-+int rk_board_late_init(void)
-+{
-+	const struct board_model *model = get_board_model();
-+
-+	if (model)
-+		env_set("fdtfile", model->fdtfile);
-+
-+	return 0;
-+}
-+
-+int board_fit_config_name_match(const char *name)
-+{
-+	const struct board_model *model = get_board_model();
-+
-+	if (model && !strcmp(name, model->fdtfile))
-+		return 0;
-+
-+	return -EINVAL;
-+}
-diff --git a/configs/radxa-zero-3-rk3566_defconfig b/configs/radxa-zero-3-rk3566_defconfig
-new file mode 100644
-index 000000000000..7606edf393ed
---- /dev/null
-+++ b/configs/radxa-zero-3-rk3566_defconfig
-@@ -0,0 +1,85 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SPL_GPIO=y
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-radxa-zero-3w"
-+CONFIG_ROCKCHIP_RK3568=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_TARGET_RADXA_ZERO_3_RK3566=y
-+CONFIG_DEBUG_UART_BASE=0xFE660000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_DEBUG_UART=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-radxa-zero-3w.dtb"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x40000
-+CONFIG_SPL_PAD_TO=0x7f8000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_POWER=y
-+CONFIG_SPL_ATF=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_ROCKUSB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_PMIC=y
-+CONFIG_CMD_REGULATOR=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_LIST="rockchip/rk3566-radxa-zero-3w rockchip/rk3566-radxa-zero-3e"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_SPL_ADC=y
-+CONFIG_SPL_CLK=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_MISC=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_DW=y
-+CONFIG_MMC_DW_ROCKCHIP=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_DM_PMIC=y
-+CONFIG_DM_PMIC_FAN53555=y
-+CONFIG_PMIC_RK8XX=y
-+CONFIG_SPL_DM_REGULATOR=y
-+CONFIG_SPL_DM_REGULATOR_FIXED=y
-+CONFIG_REGULATOR_RK8XX=y
-+CONFIG_SPL_RAM=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_PSCI=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_USB_FUNCTION_ROCKUSB=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index a78d6dbedb6d..eadca0ceb2a5 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -107,6 +107,7 @@ List of mainline supported Rockchip boards:
-      - Powkiddy X55 (powkiddy-x55-rk3566)
-      - Radxa CM3 IO Board (radxa-cm3-io-rk3566)
-      - Radxa ROCK 3C (rock-3c-rk3566)
-+     - Radxa ZERO 3W/3E (radxa-zero-3-rk3566)
- 
- * rk3568
-      - Rockchip Evb-RK3568 (evb-rk3568)
+ configs/imx8mm-phygate-tauri-l_defconfig | 1 +
+ configs/phycore-imx8mm_defconfig         | 1 +
+ configs/phycore-imx8mp_defconfig         | 1 +
+ 3 files changed, 3 insertions(+)
+---
+base-commit: a9c962941e119017eb9d5985c5c214d9711c9433
+change-id: 20240731-wip-y-moog-phytec-de-imx8_eraseenv-c68e2f5cb566
+
+Best regards,
 -- 
-2.45.2
+Yannic Moog <y.moog@phytec.de>
 
