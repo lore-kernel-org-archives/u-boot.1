@@ -4,76 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9133AC3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 13:36:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94D75C3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 13:59:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03D1F88A25;
-	Wed, 31 Jul 2024 15:36:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C6C5288970;
+	Wed, 31 Jul 2024 15:59:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ATwYT8vg";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KjmpR9RN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36E23889D2; Wed, 31 Jul 2024 15:36:23 +0200 (CEST)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id 3EEB188996; Wed, 31 Jul 2024 15:59:50 +0200 (CEST)
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
+ [IPv6:2607:f8b0:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9590888A25
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 15:36:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8985088934
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 15:59:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2ef298ff716so10314181fa.1
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 06:36:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-656d8b346d2so3553759a12.2
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 06:59:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722432979; x=1723037779; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rM2KLqyY+URfccRmKEIc+NTFpxl81TVKg5xW1rfGSRw=;
- b=ATwYT8vgGeA9UZedgEAyg+7IkowelEzRAJbzBYKOx0MGnqU7PQpndKAYsZaI+a4cBW
- DNzikQhJhS6p4RjMKRMwfv6LudUrMvhP3nEJLSWGnQChPd7GBaYdtI/IKCzH45Z9QXxu
- MM2W+FfSyme60cezZ6N8g75E/kWAefV9GCxaSlMGLyg1BG84ouM68B7yIh6ThzJvtY8O
- rQyphG4gWpVnAxuNnIG6pIsbt8oaHhQWfHlXOKdmuxSGnUYWI/MHMZVvR8dDN3MXnGD2
- B3DdfGGnSei9mlHacYM4xHIAjkkstjw0lXxCM/q3tM4bBTdcU+574hDSZ0lY4I7SBGLl
- YxGg==
+ d=linaro.org; s=google; t=1722434386; x=1723039186; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=bidsqyZsqyvkvFctvys/Q+mjV9yfATLQRb20h8HhT1A=;
+ b=KjmpR9RN+qxYBZGbOuaBIBh9uE6bpTLJooMumDQnqxehv4uJ7jVuI/StNwdc8xAkVk
+ /3oYtxHDoRp5EzWAUxqx88MpyoVurVMQKAvUzuS+P2wN3d/kq99wzoWFGLCfhx2kJk/r
+ Sp3B7QVJnMLi2CRHFODpSJ+OYv3JOj9/SeYBVAyBaPWX+MjBJ09vndytV3THp9yBjEuE
+ aLS1kOoJl2HmZ5zManxEaNuKurAZYM6ucVQI85X477AEx1KgxokgAP1xbRELJFrkEE5r
+ LSz0UbFURNLH+MFkpU/vhfOQZkZlCfHlN4BXaqbQRn4uHZ0DTJnh5flMPkh2ID5BT54+
+ RSgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722432979; x=1723037779;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rM2KLqyY+URfccRmKEIc+NTFpxl81TVKg5xW1rfGSRw=;
- b=AnH1qVnE0Vng+hSgrM9U0U+a2mi037XaIFsJr56zEfvB39kDM5AM0ooExPUlD43TCw
- ottlWA+rk59ErGhNymG4XNcuKHSdn0Of0po/NrSVyetlrBAUKLGwihfKNtc4NhBZEg96
- UoNjiqhPg+5XnvPo2mhP5JdYm+EoByNhNQgqpLS1Yh/hRh/fmsy4GSlqNiSo/Mi3MxXV
- 2xg+UYjdbGL3tHAd3M3cMUaYR2zpkrwc/qM3e6tz2cukRDZMLlkHo0oLCqR/II5x5u7l
- BqTBScuz4+1+6bgVABCg2T1XQizxNRAerFkKv1miUfE4Rj/qZytfPeGJ+QvnfPf7hnEf
- tHgQ==
-X-Gm-Message-State: AOJu0YxLYrOz14DYIKTsNhtczoZhlVP9Glx6tY5KYlWNrDh0CjznCTY8
- TXmZVx3hXsM6TZLuO+8f9lipwXJLc374LA1byOKHCdKFMZHE8P4M37gc4DaoP/ctEXUPxfA7W5P
- sx8lyJAnCn8I0aYd/WSrZ3n343pU=
-X-Google-Smtp-Source: AGHT+IFdPBLhfZnd4zUxsd/BWIs4yqW8FtKtYy40h+KJa4oJJZU+oMu/7RdutmdFp/5lPl5xWdQW07d7ornQY6Qczpk=
-X-Received: by 2002:a05:6512:3b84:b0:52e:9beb:bc09 with SMTP id
- 2adb3069b0e04-52fd5275421mr7933447e87.3.1722432978302; Wed, 31 Jul 2024
- 06:36:18 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1722434386; x=1723039186;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bidsqyZsqyvkvFctvys/Q+mjV9yfATLQRb20h8HhT1A=;
+ b=Crhe3uaUwvG5zveKkfnt3coZcjAOSh7ASlLajLGy5UcgopTsd9v8Qi2VqMa6/QPCiS
+ ZTmpuZdN9Otaum30e5QGAVQ/jU54H+fiofIv2IuUYDraZo2KSdywKpEFZAgtZ3qdJmuN
+ V0ytrPOz5R2tUeWIdMus4Jr8F4SijQovJaUsN+xxT+lLbDHd/ubhkuNquyBZ5OulOIvi
+ isS0JZDF1pjtTKRAhiQAAOL+ImSCNSrlmb0a+zfCrLpnChX/ojsXvYV0FhuvklwdL6Rc
+ qgsBx58FGj80OM7f3ToPHoFqNPqpGOEreO3V5BppPLqqpKGcDtExDqQQy+o1xMaSwIbp
+ jRhg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWoHIUmYKXb3e+s/lfvfo98+gWtRJe5pCBl7bVVdEByVLnaLQqPpsPQzT/zc4cKOeLHnHnrzFy+3EVvSWAv1B5ue5+WMQ==
+X-Gm-Message-State: AOJu0YyTQLnPWUfhSEWsaxnKc1iVfcMzB0kC6OwvZdnhiTp1L55B6ZD6
+ x2mCxLnvslpjtadqu0BCtZjoXhqC/3CJ1/R+N66I8ggKcL/J4OxVNwsBtTyC6ZiVzaZ8qf9pxLN
+ PB3zzJmMahzvft+NSM/m8GMp/Bl36ipBizWjaVQ==
+X-Google-Smtp-Source: AGHT+IGBE1linbCESD0/xq0Duq06Vh2IssfFCs9MjkFI11uvNn4ojiiVmnmCUMt+Gtht1yaNmFOGuksXVYtlEjRINXE=
+X-Received: by 2002:a17:90a:4e0a:b0:2c9:81d3:65d5 with SMTP id
+ 98e67ed59e1d1-2cf7e1fe3bbmr12997279a91.24.1722434384121; Wed, 31 Jul 2024
+ 06:59:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240730073003.28892-1-Zhiqiang.Hou@nxp.com>
- <20240730073003.28892-12-Zhiqiang.Hou@nxp.com>
-In-Reply-To: <20240730073003.28892-12-Zhiqiang.Hou@nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 31 Jul 2024 10:36:07 -0300
-Message-ID: <CAOMZO5Du4Ty8rka9g+RJ-TE+33YrKdeQGMgP98eTvB0UJfMv=g@mail.gmail.com>
-Subject: Re: [PATCHv4 11/14] doc: cmd: add documentation for cpu command
-To: Zhiqiang Hou <Zhiqiang.Hou@nxp.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, peng.fan@nxp.com, 
- sjg@chromium.org, marex@denx.de, lukma@denx.de, seanga2@gmail.com, 
- xypron.glpk@gmx.de
+References: <20240605032521.1142768-1-sjg@chromium.org>
+ <20240605032521.1142768-6-sjg@chromium.org>
+ <CAEfUkUKABkoHWr8i5fLNxgLAcs_7AdVYJEJj_UJj_Oby0HmwNA@mail.gmail.com>
+ <CAFLszThqijQQjvSgGAkK387KXV9mjo8xs9tEK_jfKGocYyZzGQ@mail.gmail.com>
+ <CAC_iWj+M5uw1qaVcUFZpXDArdbF3jfJDXk1HiA1i4S2eEYbEig@mail.gmail.com>
+ <CAFLszTgeKggZYaTRnH9xB7Uznf0=OS42aogg-rym7cp=QRjw+A@mail.gmail.com>
+ <CAC_iWj+Y+hXwjgcVaMdEYrE_G9XuuhiZQnp2ckCYNkzYPZN3tQ@mail.gmail.com>
+ <CAFLszThK_FnLxWrSzax_Jm7XMmmTanTmGrLjK3MfCM0uqKsNOw@mail.gmail.com>
+ <ZnLR_NnJY3hFBXcR@hera>
+ <CAFLszTitfewWG_dHDM3idEyntkL8tjvh6puH08+aUDeXLy4+LQ@mail.gmail.com>
+ <CAEfUkU+AJb8z6_KgMVac90iQ6R4P0dNTgq5hitvZrXDQ8x8B1w@mail.gmail.com>
+ <CAFLszTjQwiJFbgG+aXf9qmXPbHSP6JVowhv=xdZYr3B45_+1nA@mail.gmail.com>
+ <CAFLszThtUprUv5ZsoN-R_W2c9YG4FvvZ6zT_qGpqOwW5Axbs1Q@mail.gmail.com>
+In-Reply-To: <CAFLszThtUprUv5ZsoN-R_W2c9YG4FvvZ6zT_qGpqOwW5Axbs1Q@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Wed, 31 Jul 2024 09:59:32 -0400
+Message-ID: <CAEfUkULZGoBegrdiOyj9behHpwE8XTNa7DLqfte=wb=fks5Axw@mail.gmail.com>
+Subject: Re: [PATCH 5/9] fdt: Correct condition for bloblist existing
+To: Simon Glass <sjg@chromium.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Tom Rini <trini@konsulko.com>, Jerry Van Baren <vanbaren@cideas.com>, 
+ Shiji Yang <yangshiji66@outlook.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,30 +103,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Zhiqiang,
+Hi Simon,
 
-On Tue, Jul 30, 2024 at 4:09=E2=80=AFAM Zhiqiang Hou <Zhiqiang.Hou@nxp.com>=
- wrote:
+On Tue, 30 Jul 2024 at 18:35, Simon Glass <sjg@chromium.org> wrote:
+
+> Hi all,
 >
-> From: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
+> On Fri, 21 Jun 2024 at 12:16, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Raymond,
+> >
+> > On Fri, 21 Jun 2024 at 10:40, Raymond Mao <raymond.mao@linaro.org>
+> wrote:
+> > >
+> > > Hi Simon,
+> > >
+> > > On Fri, 21 Jun 2024 at 10:58, Simon Glass <sjg@chromium.org> wrote:
+> > >>
+> > >> Hi Ilias,
+> > >>
+> > >> On Wed, 19 Jun 2024 at 06:41, Ilias Apalodimas
+> > >> <ilias.apalodimas@linaro.org> wrote:
+> > >> >
+> > >> > Hi Simon,
+> > >> >
+> > >> > On Wed, Jun 12, 2024 at 02:24:31PM -0600, Simon Glass wrote:
+> > >> > > Hi Ilias,
+> > >> > >
+> > >> > > On Wed, 12 Jun 2024 at 00:02, Ilias Apalodimas
+> > >> > > <ilias.apalodimas@linaro.org> wrote:
+> > >> > > >
+> > >> > > > [...]
+> > >> > > >
+> > >> > > > > > > >> ---
+> > >> > > > > > > >>
+> > >> > > > > > > >>  lib/fdtdec.c | 12 ++++++++++--
+> > >> > > > > > > >>  1 file changed, 10 insertions(+), 2 deletions(-)
+> > >> > > > > > > >>
+> > >> > > > > > > >> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+> > >> > > > > > > >> index b2c59ab3818..b141244e3b9 100644
+> > >> > > > > > > >> --- a/lib/fdtdec.c
+> > >> > > > > > > >> +++ b/lib/fdtdec.c
+> > >> > > > > > > >> @@ -1669,8 +1669,16 @@ int fdtdec_setup(void)
+> > >> > > > > > > >>  {
+> > >> > > > > > > >>         int ret = -ENOENT;
+> > >> > > > > > > >>
+> > >> > > > > > > >> -       /* If allowing a bloblist, check that first */
+> > >> > > > > > > >> -       if (CONFIG_IS_ENABLED(BLOBLIST)) {
+> > >> > > > > > > >> +       /*
+> > >> > > > > > > >> +        * If allowing a bloblist, check that first.
+> This would be better
+> > >> > > > > > > >> +        * handled with an OF_BLOBLIST Kconfig, but
+> that caused far too much
+> > >> > > > > > > >> +        * argument, so add a hack here, used e.g. by
+> chromebook_coral
+> > >> > > > > > > >
+> > >> > > > > > > > I am a bit confused by this comment - It means you will
+> not use OF_BLOBLIST,
+> > >> > > > > > > > but actually you are using it below. Is it a typo?
+> > >> > > > > > >
+> > >> > > > > > > Basically it would be cleaner to have a separate,
+> phase-specific
+> > >> > > > > > > Kconfig control as to whether the DT can come from the
+> bloblist (I
+> > >> > > > > > > can't remember the Kconfig name I suggested, nor the
+> patch as it was
+> > >> > > > > > > last year sometime). But for now I am adding this hack to
+> get a few
+> > >> > > > > > > boards working again.
+> > >> > > > > >
+> > >> > > > > > I am a bit confused.
+> > >> > > > > > First of all the comment is innapropriate. We went through
+> a lengthy
+> > >> > > > > > discussion on BLOBLIST/OF_BLOSLIST etc and,  even Tom
+> chimed in and we
+> > >> > > > > > made up our minds. Why are you adding this comment now? Why
+> do code
+> > >> > > > > > comments have to illustrate your personal opinion -- which
+> was
+> > >> > > > > > rejected?
+> > >> > > > >
+> > >> > > > > I'm sorry for the tone of the comment. I am not trying to
+> offend
+> > >> > > > > anyone here and I'm happy to change the language.
+> > >> > > >
+> > >> > > > Yes please a comment explaining why that piece of code is there
+> is far
+> > >> > > > more intuitive.
+> > >> > >
+> > >> > > OK, once we have agreed the below I can do that.
+> > >> > >
+> > >> > > >
+> > >> > > > >  As I probably
+> > >> > > > > mentioned at the time, my accepted patch breaks my workflow
+> and
+> > >> > > > > several boards. I hope you can understand how frustrating
+> that sort of
+> > >> > > > > thing can be.
+> > >> > > >
+> > >> > > > Yes, I do and I am fine with a short-term patch that fixes
+> issues, as
+> > >> > > > long as its not too intrusive. There is a very thin line
+> between quick
+> > >> > > > and dirty fixes to spaghetti unreadable code. But we should have
+> > >> > > > comments and/or commit messages indicating that this needs a
+> proper
+> > >> > > > fix
+> > >> > >
+> > >> > > I spent a lot of time explaining this last time.
+> > >> > >
+> > >> > > >
+> > >> > > > > Also, now that I have my lab back up and running and I
+> > >> > > > > would like these boards to work again on mainline!
+> > >> > > > >
+> > >> > > > > >
+> > >> > > > > > Grepping for OF_BLOBLIST, I can't find any matches, so is
+> the above if a typo?
+> > >> > > > >
+> > >> > > > > Remember, it was a patch you rejected :-)
+> > >> > > >
+> > >> > > > I don't maintain any of that. I only gave some feedback along
+> the
+> > >> > > > lines of "bloblist was designed to be auto-discoverable, I
+> don't see
+> > >> > > > how adding an explicit Kconfig helps". IIRC we eventually
+> followed
+> > >> > > > what Tom suggested.
+> > >> > >
+> > >> > > I'm not trying to point the finger here. So far the boards are
+> broken
+> > >> > > in mainline...I'm just trying to fix that,
+> > >> > >
+> > >> > > >
+> > >> > > > In any case, the amount of bike-shedding in the topic is too
+> much. Do
+> > >> > > > you mind explaining the problem in your workflow again? Perhaps
+> we can
+> > >> > > > find a solution that is integrated in bloblist_maybe_init()
+> instead of
+> > >> > > > injecting ifs on when a bloblist should or should not be
+> searched for
+> > >> > > > all over the place.
+> > >> > >
+> > >> > > TPL (or SPL) sets up a bloblist with bits of info in it, but no DT
+> > >> > > (which is in memory-mapped SPI flash)
+> > >> > > U-Boot proper starts up, it wants to get the bloblist but not
+> hang if
+> > >> > > the bloblist doesn't have a DT
+> > >> >
+> > >> > Sure, that's reasonable and IIRC that's the design we agreed a
+> while back.
+> > >> > Looking at the code, if the DT isn't found in a bloblist and the
+> feature is
+> > >> > enabled, we don't crash. We just print a debug message and continue
+> to find
+> > >> > the DT as we used. Why do we have to skip the call to
+> > >> > bloblist_maybe_init()?
+> > >>
+> > >> Because at this point, if there is no bloblist, then it needs to be
+> > >> created. But creating it this early may fail, e.g. since there is no
+> > >> malloc(). The intent of this code is to locate an FDT from an existing
+> > >> bloblist. There is no point in creating a new bloblist here, since it
+> > >> obviously won't have an FDT in it.
+> > >>
+> > > Can we add a bool arg to bloblist_init for this?
+> > > Eg. int bloblist_init(bool allow_malloc);
+> >
+> > Yes, we can do anything, but that seems like a hack to me...if we init
+> > the bloblist for the first time in the current phase, then it
+> > obviously won't have an FDT inside it. It is the unconditional
+> > requirement of an FDT which is causing the problems here.
 >
-> Add documentation for the 'cpu' command, taking NXP i.MX 8M Plus
-> as a example.
+> Can we apply this patch, please? I still have several broken boards in
+> my lab due to this.
 >
-> Signed-off-by: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
-> ---
-> V4:
->  - Added brief descriptions for each subcommand..
+> Acked-by: Raymond Mao <raymond.mao@linaro.org>
 
-This gives the following error:
-
-Warning, treated as error:
-/builds/u-boot/custodians/u-boot-imx/doc/usage/cmd/cpu.rst:document
-isn't included in any toctree
-make[1]: *** [doc/Makefile:70: htmldocs] Error
-
-https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/878784
-
-Please fix it, run 'make htmldocs' and submit a v5.
-
-Thanks
+Regards,
+Raymond
