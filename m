@@ -4,75 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 042EBC3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 17:42:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA1B3C3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 18:15:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80E9D8897F;
-	Wed, 31 Jul 2024 19:42:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 00D1488A2A;
+	Wed, 31 Jul 2024 20:15:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=arachsys.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UiP/dppW";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D32678894E; Wed, 31 Jul 2024 19:42:49 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2BFE8894E
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 19:42:47 +0200 (CEST)
+ id 32B9E88996; Wed, 31 Jul 2024 20:15:02 +0200 (CEST)
+Received: from cdw.me.uk (cdw.me.uk [91.203.57.136])
+ by phobos.denx.de (Postfix) with ESMTP id 1D2FE8881B
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 20:15:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=arachsys.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fedorross@gmail.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a7a9a369055so666092366b.3
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 10:42:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722447767; x=1723052567; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tziS2iu08W90eoNUPJ4GL7R/PTfQTUpmRZ+jQszIEIM=;
- b=UiP/dppW2CzBvOWXjzbiGt9OjK7bJ9Ib9v5KyWqWQRlfChBlrNj8wBjB+K+ltsX58t
- YmhbEw30JWela72tqc4z2jz7IoBagdzMwYB0K7udJioNBc4j2Zow+dZDXEoRLPSEfkL5
- x+NvoNDGARYImkEc7P/yfTT/v8FxS+hudbldv07khsduR04QvjdbNfk5bPJ7WiJ6vyEk
- s3+LfMhA2U+8JuLHoKZXe+866rrVraM3t0bvuBksiVXr9HLBHWx/gz0uwmoYcSyoZJb0
- 6ZYnNth4ngLv/GUewNNp+vuZ+CrJcyN9aUB1duRkGpPnHUHj1bitChnc8HHT6ISLJNKj
- 1xTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722447767; x=1723052567;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=tziS2iu08W90eoNUPJ4GL7R/PTfQTUpmRZ+jQszIEIM=;
- b=ggB/Bvl5ed60GuovbYj567GuQ9upa13qPJpHg/Z61C54Q81OqWbkYAZ8+8SKjIJMTK
- cW30vsb82eUmDLr8So4uozHhovBx2mxSk18qyLUarflN6f5vYAbwmOwWjadSCkSmzY0b
- /JHQZOE69CmVoE8X1LDJHJOpcTPFVZQwPiGTtxG6r3lDHfrswIV+lt53zUVhR+LfMONJ
- 4mUNZKiV244XIVy/imEDcT3RXF1m0ohx7FkdTqVKkdv4iygoV6JmHltQlgeOd8ggkRTX
- /TmyaxrfTO/Nfdr73munHzSqETuWrtJ8Zv4FGzDEevliyNHmSBJHEj78Z5/Ppx+K/ZBh
- bUKw==
-X-Gm-Message-State: AOJu0Yzyborkx/LvvV9cY1rA2jdjZccoLa4ZWkkkqn8bzaSgzNEuMBJi
- pR2v7hLcVhnSnPz8EWgjCuaB5DkBPGYFTeyByUojkVhSJsTA27IZefmuDI3awhsPQm/ErXu0nt5
- M4Fn2zAHtQFdA2EPsI6cp3cDw0G8Gud3m
-X-Google-Smtp-Source: AGHT+IGk//CFqTdmuUugWXRpKoHIlqCPMYXMhc3smOodtWgkSKYkkpxngZ2sJJDlIh5i+F6OwUfVlmBEY+J9aUE6pSw=
-X-Received: by 2002:a17:907:7d86:b0:a72:5f9a:159a with SMTP id
- a640c23a62f3a-a7d3ff583a6mr1196553866b.2.1722447767048; Wed, 31 Jul 2024
- 10:42:47 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240730152529.143651-1-fedor.ross@ifm.com>
- <381c3a16-cae8-5543-1e5e-4551197f709a@denx.de>
-In-Reply-To: <381c3a16-cae8-5543-1e5e-4551197f709a@denx.de>
-From: Fedor Ross <fedorross@gmail.com>
-Date: Wed, 31 Jul 2024 19:42:36 +0200
-Message-ID: <CAEGWRBCXUUHSbZ3OSKcqNzQyEB0qQq9mF7v4isGHwFC1-t67Vg@mail.gmail.com>
-Subject: Re: [PATCHv2 1/3] i2c: imx_lpi2c: Fix a typo in bus_i2c_receive
-To: hs@denx.de
-Cc: u-boot@lists.denx.de, Fedor Ross <fedor.ross@ifm.com>,
- Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ spf=pass smtp.mailfrom=chris@arachsys.com
+Received: from [31.94.64.133] (helo=smtpclient.apple)
+ by delta.arachsys.com with esmtpa (Exim 4.80)
+ (envelope-from <chris@arachsys.com>)
+ id 1sZDqb-0004yK-04; Wed, 31 Jul 2024 19:14:49 +0100
+Content-Type: text/plain;
+	charset=us-ascii;
+	delsp=yes;
+	format=flowed
+Mime-Version: 1.0 (Mac OS X Mail 14.0 \(3654.120.0.1.15\))
+Subject: Re: [PATCH RFC] gpio: Fix probing of gpio-hogs
+From: Chris Webb <chris@arachsys.com>
+In-Reply-To: <CAFLszThj6=XKSUiBdfFK-1n5VeovJHf7UcjE+dORK7r68xQNag@mail.gmail.com>
+Date: Wed, 31 Jul 2024 19:14:57 +0100
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marex@denx.de>
+Content-Transfer-Encoding: 7bit
+Message-Id: <F14855F1-283C-44D4-A917-B804DFBBF8A9@arachsys.com>
+References: <0b24ac9c0f40ba2410529ee6e0ffd603c9453cff.1718275638.git.chris@arachsys.com>
+ <CAFLszTiwfVg7o+Rhf10U2exgUA-vJ4V_A-2L75ZLpwJ8sW=9Kw@mail.gmail.com>
+ <CB131E81-078E-43FF-BE67-90D7F48EDB2E@arachsys.com>
+ <CAFLszTggwpCnhZ0xaPR2n=e+x+PDe-wP4WxnPE60BqyF1ms3UA@mail.gmail.com>
+ <43228DC7-4184-4C63-9BBA-65F056ECC91F@arachsys.com>
+ <CAFLszThCz2NL+6svYMRD7qAHHNN8frWzrM4tyhDbuS77M3jUHg@mail.gmail.com>
+ <E1381CA1-72D5-42D5-BB22-2B9B458B29C7@arachsys.com>
+ <CAFLszThj6=XKSUiBdfFK-1n5VeovJHf7UcjE+dORK7r68xQNag@mail.gmail.com>
+To: Simon Glass <sjg@chromium.org>
+X-Mailer: Apple Mail (2.3654.120.0.1.15)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,36 +63,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Jul 31, 2024 at 5:41=E2=80=AFAM Heiko Schocher <hs@denx.de> wrote:
+Hi Simon,
+
+Simon Glass <sjg@chromium.org> wrote:
+
+> On Wed, 31 Jul 2024 at 04:14, Chris Webb <chris@arachsys.com> wrote:
+>> Alas I don't have any boards to test on for either of these platforms.
 >
-> Hello Fedor,
+> If you have the inclination it is still worth sending a patch. The
+> maintainer can check it. These sorts of counter-examples can be copied
+> and soon everyone is making the same mistake!
 
-Hello Heiko,
+Makes sense! If the Mediatek patch is okay, I'll write the equivalents for  
+the other two platforms and put a comment after the --- to warn the  
+maintainers that I haven't been able to test on real hardware. I can do a  
+compile test of them both at least, and they're simple, easy to verify  
+changes.
 
-> On 30.07.24 17:25, fedorross@gmail.com wrote:
-> > From: Fedor Ross <fedor.ross@ifm.com>
-> >
-> > Fix a typo in a debug message. It should be 'for' not 'fot' .
-> >
-> > Signed-off-by: Fedor Ross <fedor.ross@ifm.com>
-> > ---
-> > Cc: Heiko Schocher <hs@denx.de>
-> > Cc: Tom Rini <trini@konsulko.com>
-> > Cc: Marek Vasut <marex@denx.de>
-> > ---
-> >
-> > Changes in v2:
-> > - Add additional '---' below SoB line to separate Cc list. This way it
-> >    does not get included in the commit message when the patch is applie=
-d.
->
-> You may also take a look at patman tool in u-boot:/tools/patman
+Best wishes,
 
-I'll take a look at that. Thanks!
-
-> Reviewed-by: Heiko Schocher <hs@denx.de>
-
-[...]
-
-Best regards,
-Fedor
+Chris.
