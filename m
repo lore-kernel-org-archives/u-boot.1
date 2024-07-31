@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B19DC3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 06:11:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9B31C3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 06:15:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67C1888955;
-	Wed, 31 Jul 2024 08:10:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 22C8F88934;
+	Wed, 31 Jul 2024 08:15:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="gPq/Mg2o";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="tzn4paZd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 314B28890F; Wed, 31 Jul 2024 08:10:57 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ id 6B3F08894C; Wed, 31 Jul 2024 08:15:29 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4885387E95
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 08:10:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 830BA8890F
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 08:15:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1722406254; x=1723011054; i=xypron.glpk@gmx.de;
- bh=qbrF424AAqSsicWTghLIymx2tql5Kt4qIrJ57XasEZU=;
+ s=s31663417; t=1722406526; x=1723011326; i=xypron.glpk@gmx.de;
+ bh=7LOsA//f7lluW8as3QrpuAE3B9AA4io1rEbrJJz+3OA=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=gPq/Mg2oEdGJ9alUADeNfrfjEByxe/3L+MUJmmhw5ELTPKYNGnCYmVEG06bw8k0M
- 6nvad4xSl+EjxxTQr2pDuRF2u7LVMTw2mLpYOUOyEPpJTrodRsg+b2zQSibRgBK3Q
- 4aL8krfVS58HXc1iWn54UdOKMR8tIdEBD2deKKGUEYUgjdLaU1BpJk3Hk/W+aScXt
- R5qR+jbVBh3DZb90ujIMqB0XpEU4eZ+Y8zlSnhX0Jxm5tUXi8Fuqzd/1nETrrsdqr
- uognTMOibGWbEIJA8Qtl1ArWOfZTqaAwWvvULUN4wVae3ZPw7Rbg/+//xDcs0KF6w
- 0nZEf1aNFvjCgecVcg==
+ b=tzn4paZddc2Gf+n22Z34rqLAiqTn8f1yM0hBvg8YCxeNoTD/4YO1Z3RCePEWKjzf
+ UJc4MQx4+yxrWvLpMO13ZWXuLmP03S2wkRSQQxBZcdafui/o71ywzDOKFSKJ7z2Rc
+ 7LBz3dOdGr/fs6LPOCp0/gfUAks8WbVHMpCtQIxcETF1eqZ07Gbsm156/DWODGMqV
+ REP7HAOrFHwBjgP7CXLDez0y60AblP38jo0uTBvhg5CxghLnsUH2p3ldvEI7OThm6
+ MkKuryQhsCr37A3HUPMQ47OwCY8DcGfv8stUm/Aouc6ttNs/NqCEH5COnDU++HsTa
+ tx5yBzoZmOot7iUSFA==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.161] ([62.143.93.80]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N7QxB-1sBTsZ0Eur-00zAQc; Wed, 31
- Jul 2024 08:10:54 +0200
-Message-ID: <4e159477-4771-41a0-a497-16f3aa682280@gmx.de>
-Date: Wed, 31 Jul 2024 08:11:01 +0200
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N1wll-1s60Qx1hgP-00teIG; Wed, 31
+ Jul 2024 08:15:26 +0200
+Message-ID: <7ac89e53-2e48-47d7-9444-2ed51a09d7aa@gmx.de>
+Date: Wed, 31 Jul 2024 08:15:33 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] linux: list: add a function to count list nodes
+Subject: Re: [PATCH 2/5] efi_memory: use list_count_nodes() to count list
+ entries
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
 References: <20240730111132.1097315-1-sughosh.ganu@linaro.org>
+ <20240730111132.1097315-2-sughosh.ganu@linaro.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240730111132.1097315-1-sughosh.ganu@linaro.org>
+In-Reply-To: <20240730111132.1097315-2-sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:UeqfPT4bWCtZgOEOKP3oXD7lHy0WSrgWcN/8KC1f2ISOLycfx3K
- 7u0nzpWDRdgJEqPCEzSmB0QyFUMnUlaCoiIlm4HbrlD2nGbcg/3rey0o5KkX9DocWvbLjmZ
- EGxqo5tVKE853Q68SvcY0OJrpznbXR8bN/Zte2HeeKc3anMns2BbSl/QmjG089JjsENG42Q
- FfiIxw1+Nj2O6wE+Lmk9Q==
-UI-OutboundReport: notjunk:1;M01:P0:El3q3sgvdvU=;fIyGuvkY0goilha0IPYgf+4CJFx
- KC5f0pdKB5tpGhzPRbf85RpFDLgquSQGwYecEQVvA0lO29TdEdEGSmQ2HrqGWAjNq4o205+/a
- zT9L+DbpzPcLYfGHhw4p0vkQ+jRZzxg0NvIXz48i7XIeQ4MEwDIeeu1+DoC482dNoaGYaMJEC
- DHnmc0uBxawVk//zXhyotXYyb0WaKPPf/1KLnM8VSWVtZbJLXsei+gwBfjMoDMa0sstRflpOq
- gmEWsbCqS/dbksaVZRi9D357GkNbgd3vmcSoqJ8PGD5zAfyLnNXpl/Jp3MbY0FWeBkBMdoWPC
- m5Maqg7auofRQQ37kdaJrDOkIWPKmJVaneyy5e0rE2a4vvj8O6d2hnwVJkGP6GX/NljkjnnSN
- G0JyqfRiG6Uj+pQPJrLFBhTOg4dBno/IbEzoKj/C9fEmRvvtYnPiQwcyPWt+H0T0mi4qMy+ij
- SY5MW6hT7hdQN12+cSMG/vD/x4Wdkv4NHxFEAUmJ/XW1iECcloq6z/1jXTJhojq1yzM4NRqOV
- oF5BKqaiV+cVUq5LKNlEO2YUZK8FbNybaZg7h7TTXVoq1PUeu7RLq1MMRvP045u2dOFM406Fa
- 3D7ECt0nEfsayIaWeajeYqH4m9WfCHWY1yhPHLuetLTMHEUsdP1MnjWYjkM0+WOfVPF2H/YiG
- tImbAWfMWKaQ3ExQCbilAK7fDXQAFyuBaegV1NkTjv5/L9lAQhj7XWl2UGMAHlZvSNPbyGJck
- Y6BwIZDOghoy8sj+zIR/wcDo2D17GvvGinFxG8NFhfPt4JPTZjRJ83hMbVb18noXQiV8H6p+3
- Wbd30iQbrDUZexTWLbmbaBvQ==
+X-Provags-ID: V03:K1:yZf7UjlN6s22Uw6620MX0iuLWXMt+s1sWuX4tZNyznHao5FacYk
+ K1rCVzSOGsGSdtm0HocKQZcGB8e30c/ihkd1L+e9VDbqyyOFlin6iSpg+FvGU1x4X7Mk1nj
+ LuA4QMcULO6AYOdBmfwzTcx2zYvGmZyI6pcPxvUu39bNItV4Gqza+lPqU0hSgEs/IsW57iV
+ Xne2nog8uWkYw5h+Ef8mw==
+UI-OutboundReport: notjunk:1;M01:P0:77Q/GTzerdw=;dEc/zGVdy9JQX0HrOwVVLBzDrQJ
+ 8b+AsVEIprL/+MRKPMQFtxicKcwMY1aEHvCXO7g4AXclVokAB0XtApaV9jCGmNIK6bT6dbgby
+ 7rQVm85HoTbRAQYIBfYbEnueDUx3s6fld9q3lEK6sz6mQnRxaQP71GV5qg18KpM9azFKvMF3y
+ 8cbvzCvq1hO08fcW0ACt6KGOQbai2U4251RTdP1mVMao1h8AdsD4dVsbTYu2EZQDJPJNhioHs
+ kOby5b72LYRC5WwmZ7CvD6bEkg50H8p+fzoykKOo66bFPC9NgSGJEWohbvr9D1AuRAS/6ptZi
+ gKxz8AAttAOcUnzaZLoad3bprtmCnYr32U5qRArWFqFECOn0wiGhC1jh0Ghdx/AqPrUA5xayS
+ JLblCDj8hegnIHPyYgETva4pbhnYXUjlnGtHAx40t9fokagItdCqPGEK1N+SJ41HUoIEzXZbZ
+ Keu4Xh85okcIYTVZhFk1tcscDMDiXuxpl/zmO3m2j5mo8nJ57VLt6YUz/aJUMmafYmXUCsovg
+ w2anI1r36xeLKI4ENIFGEYcvak7josCo0DxRScDyNEbGz+Jnwc+s3jOJ2qrECAOomYfK1LpA+
+ 19r7X12FFc8ly2irKr+tgkVzJIS7RVwlPWVRosoRvqZz5Cs9rx0DHNsGry8pivxzWi1YQ7c4I
+ BFEZNskMLbeAzFMQRKq6t/Vi7ByF+SKVC55HBtDUtmTwW3wYuSBygnCM0CgTQxSblP1RwxmpE
+ 8tJP7y/qmXnD6tyXAJWDfjvcc6K8epC942XXBtAXxP35+8K41Ukx1hYZZFa/sgNib0yhOGErr
+ LdEBFIFrTUKfgFk+ZOmjlV6Q==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,55 +93,45 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 7/30/24 13:11, Sughosh Ganu wrote:
-> Add a function to count the nodes of a list.
-
-This could function could be used in lot of different code locations:
-
-test/boot/expo.c:707
-lib/fwu_updates/fwu_mtd.c:64
-lib/efi_loader/efi_memory.c:755
-lib/efi_loader/efi_boottime.c:2519
-fs/yaffs2/yaffs_guts.c:4460
-drivers/mtd/ubi/fastmap.c:589
-drivers/mtd/ubi/fastmap.c:586
-drivers/core/util.c:18
-boot/scene.c:85
-
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
->
-> Taken from linux 6.11-rc1 tag commit 8400291e289e.
+> Use the API function list_count_nodes() to count the number of EFI
+> memory map entries.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
->   include/linux/list.h | 15 +++++++++++++++
->   1 file changed, 15 insertions(+)
+>   lib/efi_loader/efi_memory.c | 5 ++---
+>   1 file changed, 2 insertions(+), 3 deletions(-)
 >
-> diff --git a/include/linux/list.h b/include/linux/list.h
-> index 6910721c00..0f9d939b05 100644
-> --- a/include/linux/list.h
-> +++ b/include/linux/list.h
-> @@ -547,6 +547,21 @@ static inline void list_splice_tail_init(struct lis=
-t_head *list,
->   	     &pos->member !=3D (head);					\
->   	     pos =3D n, n =3D list_entry(n->member.prev, typeof(*n), member))
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index 12cf23fa3f..bfadd6bd41 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -742,8 +742,8 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_=
+map_size,
+>   				efi_uintn_t *descriptor_size,
+>   				uint32_t *descriptor_version)
+>   {
+> +	int map_entries;
+
+This variable should be of type efi_uintn_t or size_t.
+
+Best regards
+
+Heinrich
+
+>   	efi_uintn_t map_size =3D 0;
+> -	int map_entries =3D 0;
+>   	struct list_head *lhandle;
+>   	efi_uintn_t provided_map_size;
 >
-> +/**
-> + * list_count_nodes - count nodes in the list
-> + * @head:	the head for your list.
-> + */
-> +static inline size_t list_count_nodes(struct list_head *head)
-> +{
-> +	struct list_head *pos;
-> +	size_t count =3D 0;
-> +
-> +	list_for_each(pos, head)
-> +		count++;
-> +
-> +	return count;
-> +}
-> +
->   /*
->    * Double linked lists with a single pointer list head.
->    * Mostly useful for hash tables where the two pointer list head is
+> @@ -752,8 +752,7 @@ efi_status_t efi_get_memory_map(efi_uintn_t *memory_=
+map_size,
+>
+>   	provided_map_size =3D *memory_map_size;
+>
+> -	list_for_each(lhandle, &efi_mem)
+> -		map_entries++;
+> +	map_entries =3D list_count_nodes(&efi_mem);
+>
+>   	map_size =3D map_entries * sizeof(struct efi_mem_desc);
+>
 
