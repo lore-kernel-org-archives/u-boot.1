@@ -4,75 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D03BAC3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 14:39:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43C10C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 14:39:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2D2B88A47;
-	Wed, 31 Jul 2024 16:39:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3FBDA88A21;
+	Wed, 31 Jul 2024 16:39:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nIRf0NVE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="U0kXM1hh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD09588A3E; Wed, 31 Jul 2024 16:39:05 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 05D8088A2F; Wed, 31 Jul 2024 16:39:06 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3815E88A2F
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 16:39:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E592588A21
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 16:39:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-704466b19c4so3522001a34.0
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 07:39:01 -0700 (PDT)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-70930f8eabbso2322824a34.1
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 07:39:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722436740; x=1723041540; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722436741; x=1723041541; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5eFoaptJI8ypc7kLczpdwXpANq7oq5cQCbANowwjHOA=;
- b=nIRf0NVEEVb8+/M3l2STv20t02P7NDdDfUNiitjso9QnMaccXQBO12zrdjsnvGBUGP
- 98+iEbpUyIpjr81tMhpSIjGS0XEk3YnvNw16Fu8Jksu/B6mMCeuN8khSUTXw8Gy3Wsyp
- tOtxrhCFHurTrq3NrlgDK6fLIIXrlv1/b0GRo=
+ bh=FOPDbqgvenwxYxWpcxlW3PvwLCksahPOMkYVjT23J28=;
+ b=U0kXM1hh2lMk8xgwtQeTFg+BbV0cVyIzANLn5QbtPuyKaPf5Jj9p5WZ9smm6vxQPDt
+ e4lAWvGmDsG3VAzHEs6EVxwAli/GA2P6OGVh04dRppa1AmYg+iu9Ptq1b77rgK4N595O
+ 3A77zsq02gXMBK8d2PDlAupbXSn4tKL1ghz58=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722436740; x=1723041540;
+ d=1e100.net; s=20230601; t=1722436741; x=1723041541;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5eFoaptJI8ypc7kLczpdwXpANq7oq5cQCbANowwjHOA=;
- b=Ef2lu9eIC/NdK6FbDxYA49krapAJ4DCpsEVa7u8dotd+NVuUFs7rB+JJyxTC3N1Rvw
- CO2DPub4MF5OhkOFpnwFnVzD0OAxwxyb5QGJuz93R/Y/fRtXf/nL7o1CsAx/FvOYd/8z
- jCnJsk15toOqzFcyTydGzfDtUMVRFy4xpuo7s9rjb3JwWDr+z9Mr+RWnOVZdcGRzupOJ
- 8eh8qWhYOZ1Erg+7q3AIxG5K5Bbivwt70APBbjFSgt8TW8fcQ8+HkayGn529gexmm/gK
- lSfurQKS+4iCIkITikySnYXOL7nGg58x8A9eaQkVXGl/jnK3IiXTCiV7I57LjxlplvB3
- 4EWA==
+ bh=FOPDbqgvenwxYxWpcxlW3PvwLCksahPOMkYVjT23J28=;
+ b=traZkncmo/1eiIuDIEXGxoW2FN0dg2CklpROPsDNm1dMsOrt66768F3Z1CJKV2qCDr
+ 9x4EpvvrmvjN8XB+0+0pW6HOyPfG4eDNEmvTEwIfDDH3XzkFB10lAcsd5/lm/T1EFPtw
+ SIGb5S0ndlpa+3CoW+RC1syUXZ0s9OyvVGHdPXVsMLBni10DiqgUcg/a92jNpmDKgemD
+ A9iAwcASNcouCETWWtyQK4/Y8EGAd2xhzCqWECaCEDMQlQacxEFAZHL6hgn1O+FCpitu
+ LBqQuIasjWw4mLcm1x9tcCEN9U12UvYYG8h806l/F2ZX54uL3o/y6SCxPlQ2ZRPEevKq
+ 8nRA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWqqlt6qSbaFmyQ+L+pE3tC6cj2LdLgLU4A6bIhEjwENtn0mGdbI8LvOSwlu+d33q/xxHzWia213Cxic4On3SWiY/UeoQ==
-X-Gm-Message-State: AOJu0YzdPgacsKBcDDu4+8wc60D310QYRBM4FmgVnhkXjhazBqGk1hG2
- ulI1VCWuuo6tqlPp/zXuKtS2jIcQt9CjxVmtCEF9GDmPu5EMMS4dsGSMKb1RGqmhSgAOnro6usV
- wIozluaGMEcSFUM/K6r1AVSfpDNIYX3iARVxK9UN887Nl5rc=
-X-Google-Smtp-Source: AGHT+IE8BZZXRhVAVp4fZqwou3qkfZonmX3LQebnHjScirhYTaQhvpA1zxPEQy9/QDi4FNZxSLi2XJZvNeZyLYIARok=
-X-Received: by 2002:a05:6358:758e:b0:1aa:9fdd:af89 with SMTP id
- e5c5f4694b2df-1adc06d4d7dmr2657253355d.20.1722436739874; Wed, 31 Jul 2024
- 07:38:59 -0700 (PDT)
+ AJvYcCWfW/t9O4G2Vk4t8cvUG744FCn4RhfjBnqCrt4mPCT9I86Kgqe9w3aqkYhaglnaY7a/fcnngeMGbbPqAUF5EqP7N/BOJw==
+X-Gm-Message-State: AOJu0YwVIpLsCJ05IUiu7rYa0rW45R+e/7aZC+c0Y/o+0xKnwOMbBK/X
+ F56EXs+LrPmlvcx6h34oV3Vp6rDpFX9CopHLmCZ+/eTaqYRx9V76IeLAPlPLQfhkIWOQ+VVV4yv
+ /nl8IGl40ggN/t/MWRXDoNWVTAASJpP0jRDui
+X-Google-Smtp-Source: AGHT+IHbN39+QkXuWfXW4CrErEcaKBVer8ShJolTTCsHEByXh4o9AVbKyZ9I7ybBrbt3XQdWfmNe9P+uKA1cGPd7kGY=
+X-Received: by 2002:a05:6358:590d:b0:1af:1bcd:a37a with SMTP id
+ e5c5f4694b2df-1af1bcdeacdmr596905255d.22.1722436741547; Wed, 31 Jul 2024
+ 07:39:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240725194716.32232-1-ddrokosov@salutedevices.com>
- <20240725194716.32232-3-ddrokosov@salutedevices.com>
- <CAFLszThbAAQ3Fwtf_t0k-K5xO6Yu8x_37Fejntqq=svwt-gdcQ@mail.gmail.com>
- <87ed7bqolf.fsf@baylibre.com>
-In-Reply-To: <87ed7bqolf.fsf@baylibre.com>
+References: <20240729213657.2550935-1-mwalle@kernel.org>
+ <875xsnqn3q.fsf@baylibre.com>
+In-Reply-To: <875xsnqn3q.fsf@baylibre.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 31 Jul 2024 08:38:49 -0600
-Message-ID: <CAFLszTik6sK+dU5hK8bfXq-Ho+V1FwfgBaXuGPDRwFYkzw9=VA@mail.gmail.com>
-Subject: Re: [PATCH v1 2/4] cmd: ab: introduce 'ab_dump' command to print BCB
- block content
+Date: Wed, 31 Jul 2024 08:38:50 -0600
+Message-ID: <CAFLszTip3uwZLy=jL+-BKwD74Wk8j6So_N9TW_P16gpBvLKQRQ@mail.gmail.com>
+Subject: Re: [PATCH v2] boot: android: fix booting without a ramdisk
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Dmitry Rokosov <ddrokosov@salutedevices.com>, igor.opaniuk@gmail.com, 
- semen.protsenko@linaro.org, trini@konsulko.com, colin.mcallister@garmin.com, 
- 4.shket@gmail.com, avromanov@salutedevices.com, u-boot@lists.denx.de, 
- kernel@salutedevices.com, rockosov@gmail.com
+Cc: Michael Walle <mwalle@kernel.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,287 +85,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mattijs,
-
-On Tue, 30 Jul 2024 at 02:19, Mattijs Korpershoek
+On Tue, 30 Jul 2024 at 02:51, Mattijs Korpershoek
 <mkorpershoek@baylibre.com> wrote:
 >
-> Hi Dmitry,
+> Hi Michael,
 >
 > Thank you for the patch.
 >
-> Hi Simon,
+> On lun., juil. 29, 2024 at 23:36, Michael Walle <mwalle@kernel.org> wrote:
 >
-> On dim., juil. 28, 2024 at 13:36, Simon Glass <sjg@chromium.org> wrote:
->
-> > Hi Dmitry,
+> > android_image_get_ramdisk() will return an error if there is no ramdisk.
+> > Using the android image without a ramdisk worked until commit
+> > 1ce8e10f3b4b ("image: Fix up ANDROID_BOOT_IMAGE ramdisk code") because
+> > the return code wasn't checked until then. Return -ENOENT in case
+> > there is no ramdisk and translate that into -ENOPKG in the calling
+> > code, which will then indicate "no ramdisk" to its caller
+> > (boot_get_ramdisk()).
 > >
-> > On Thu, 25 Jul 2024 at 14:55, Dmitry Rokosov
-> > <ddrokosov@salutedevices.com> wrote:
-> >>
-> >> It's really helpful to have the ability to dump BCB block for debugging
-> >> A/B logic on the board supported this partition schema.
-> >>
-> >> Command 'ab_dump' prints all fields of bootloader_control struct
-> >> including slot_metadata for all presented slots.
-> >>
-> >> Output example:
-> >> =====
-> >> > board# ab_dump ubi 0#misc
-> >> > Read 512 bytes from volume misc to 000000000bf51900
-> >> > Bootloader Control:   [misc]
-> >> > Active Slot:          _a
-> >> > Magic Number:                 0x42414342
-> >> > Version:              1
-> >> > Number of Slots:      2
-> >> > Recovery Tries Remaining: 7
-> >> > CRC:                  0x61378F6F (Valid)
-> >> >
-> >> > Slot[0] Metadata:
-> >> >       - Priority:             15
-> >> >       - Tries Remaining:      4
-> >> >       - Successful Boot:      0
-> >> >       - Verity Corrupted:     0
-> >> >
-> >> > Slot[1] Metadata:
-> >> >       - Priority:             15
-> >> >       - Tries Remaining:      5
-> >> >       - Successful Boot:      0
-> >> >       - Verity Corrupted:     0
-> >> ====
-> >>
-> >> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
-> >> ---
-> >>  boot/android_ab.c    | 68 ++++++++++++++++++++++++++++++++++++++++++++
-> >>  cmd/ab_select.c      | 30 +++++++++++++++++++
-> >>  include/android_ab.h |  9 ++++++
-> >>  3 files changed, 107 insertions(+)
-> >>
-> >> diff --git a/boot/android_ab.c b/boot/android_ab.c
-> >> index 1e5aa81b7503..359cc1a00428 100644
-> >> --- a/boot/android_ab.c
-> >> +++ b/boot/android_ab.c
-> >> @@ -363,3 +363,71 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
-> >>
-> >>         return slot;
-> >>  }
-> >> +
-> >> +int ab_dump_abc(struct blk_desc *dev_desc, struct disk_partition *part_info)
-> >> +{
-> >> +       struct bootloader_control *abc;
-> >> +       u32 crc32_le;
-> >> +       int i, ret;
-> >> +       struct slot_metadata *slot;
-> >> +
-> >> +       if (!dev_desc || !part_info) {
-> >> +               log_err("ANDROID: Empty device descriptor or partition info\n");
-> >> +               return -EINVAL;
-> >> +       }
-> >> +
-> >> +       ret = ab_control_create_from_disk(dev_desc, part_info, &abc, 0);
-> >> +       if (ret < 0) {
-> >> +               log_err("ANDROID: Cannot create bcb from disk %d\n", ret);
-> >> +               return ret;
-> >> +       }
-> >> +
-> >> +       if (abc->magic != BOOT_CTRL_MAGIC) {
-> >> +               log_err("ANDROID: Unknown A/B metadata: %.8x\n", abc->magic);
-> >> +               ret = -ENODATA;
-> >> +               goto error;
-> >> +       }
-> >> +
-> >> +       if (abc->version > BOOT_CTRL_VERSION) {
-> >> +               log_err("ANDROID: Unsupported A/B metadata version: %.8x\n",
-> >> +                       abc->version);
-> >> +               ret = -ENODATA;
-> >> +               goto error;
-> >> +       }
-> >> +
-> >> +       if (abc->nb_slot > ARRAY_SIZE(abc->slot_info)) {
-> >> +               log_err("ANDROID: Wrong number of slots %u, expected %zu\n",
-> >> +                       abc->nb_slot, ARRAY_SIZE(abc->slot_info));
-> >> +               ret = -ENODATA;
-> >> +               goto error;
-> >> +       }
-> >> +
-> >> +       printf("Bootloader Control: \t[%s]\n", part_info->name);
-> >> +       printf("Active Slot: \t\t%s\n", abc->slot_suffix);
-> >> +       printf("Magic Number: \t\t0x%X\n", abc->magic);
-> >> +       printf("Version: \t\t%u\n", abc->version);
-> >> +       printf("Number of Slots: \t%u\n", abc->nb_slot);
-> >> +       printf("Recovery Tries Remaining: %u\n", abc->recovery_tries_remaining);
->
-> In the console, this rendered not perfectly aligned, which is a bit of a
-> shame:
->
-> (done on sandbox)
->
-> => ab_dump mmc 7#misc
-> Bootloader Control:     [misc]
-> Active Slot:            _a
-> Magic Number:           0x42414342
-> Version:                1
-> Number of Slots:        2
-> Recovery Tries Remaining: 0
-> CRC:                    0x321FEF27 (Valid)
->
-> >> +
-> >> +       printf("CRC: \t\t\t0x%.8X", abc->crc32_le);
-> >> +
-> >> +       crc32_le = ab_control_compute_crc(abc);
-> >> +       if (abc->crc32_le != crc32_le)
-> >> +               printf(" (Invalid, Expected: \t0x%.8X)\n", crc32_le);
-> >> +       else
-> >> +               printf(" (Valid)\n");
-> >> +
-> >> +       for (i = 0; i < abc->nb_slot; ++i) {
-> >> +               slot = &abc->slot_info[i];
-> >> +               printf("\nSlot[%d] Metadata:\n", i);
-> >> +               printf("\t- Priority: \t\t%u\n", slot->priority);
-> >> +               printf("\t- Tries Remaining: \t%u\n", slot->tries_remaining);
-> >> +               printf("\t- Successful Boot: \t%u\n", slot->successful_boot);
-> >> +               printf("\t- Verity Corrupted: \t%u\n", slot->verity_corrupted);
-> >> +       }
-> >> +
-> >> +error:
-> >> +       free(abc);
-> >> +
-> >> +       return ret;
-> >> +}
-> >> diff --git a/cmd/ab_select.c b/cmd/ab_select.c
-> >> index 9e2f74573c22..1d34150ceea9 100644
-> >> --- a/cmd/ab_select.c
-> >> +++ b/cmd/ab_select.c
-> >> @@ -51,6 +51,31 @@ static int do_ab_select(struct cmd_tbl *cmdtp, int flag, int argc,
-> >>         return CMD_RET_SUCCESS;
-> >>  }
-> >>
-> >> +static int do_ab_dump(struct cmd_tbl *cmdtp, int flag, int argc,
-> >> +                     char *const argv[])
-> >> +{
-> >> +       int ret;
-> >> +       struct blk_desc *dev_desc;
-> >> +       struct disk_partition part_info;
-> >> +
-> >> +       if (argc < 3)
-> >> +               return CMD_RET_USAGE;
-> >> +
-> >> +       if (part_get_info_by_dev_and_name_or_num(argv[1], argv[2],
-> >> +                                                &dev_desc, &part_info,
-> >> +                                                false) < 0) {
-> >> +               return CMD_RET_FAILURE;
-> >> +       }
-> >> +
-> >> +       ret = ab_dump_abc(dev_desc, &part_info);
-> >> +       if (ret < 0) {
-> >> +               printf("Cannot dump ABC data, error %d.\n", ret);
-> >> +               return CMD_RET_FAILURE;
-> >> +       }
-> >> +
-> >> +       return CMD_RET_SUCCESS;
-> >> +}
-> >> +
-> >>  U_BOOT_CMD(ab_select, 5, 0, do_ab_select,
-> >>            "Select the slot used to boot from and register the boot attempt.",
-> >>            "<slot_var_name> <interface> <dev[:part|#part_name]> [--no-dec]\n"
-> >> @@ -66,3 +91,8 @@ U_BOOT_CMD(ab_select, 5, 0, do_ab_select,
-> >>            "    - If '--no-dec' is set, the number of tries remaining will not\n"
-> >>            "      decremented for the selected boot slot\n"
-> >>  );
-> >> +
-> >> +U_BOOT_CMD(ab_dump, 3, 0, do_ab_dump,
-> >> +          "Dump boot_control information from specific partition.",
-> >> +          "<interface> <dev[:part|#part_name]>\n"
-> >> +);
-> >> diff --git a/include/android_ab.h b/include/android_ab.h
-> >> index 1fee7582b90a..e53bf7eb6a02 100644
-> >> --- a/include/android_ab.h
-> >> +++ b/include/android_ab.h
-> >> @@ -33,4 +33,13 @@ struct disk_partition;
-> >>  int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
-> >>                     bool dec_tries);
-> >>
-> >> +/**
-> >> + * Dump ABC information for specific partition.
-> >> + *
-> >> + * @param[in] dev_desc Device description pointer
-> >> + * @param[in] part_info Partition information
+> > This way, we can get rid of the "*rd_data = *rd_len = 0;" in the error
+> > path, too.
 > >
-> > We have moved to the @ notation now:
+> > With this, I'm able to boot a linux kernel using fastboot again:
 > >
-> > @dev_desc: ...
->
-> I agree with this comment, but the file uses @param[in] already. We
-> should to a preparatory patch to convert this file to the new notation.
-
-OK, can do later.
-
->
+> >   fastboot --base 0x41000000 --header-version 2 --dtb /path/to/dtb \
+> >   --cmdline "root=/dev/mmcblk0p1 rootwait" boot path/to/Image
 > >
-> >> + * Return: 0 on success, or a negative on error
-> >> + */
-> >> +int ab_dump_abc(struct blk_desc *dev_desc, struct disk_partition *part_info);
-> >> +
-> >>  #endif /* __ANDROID_AB_H */
-> >> --
-> >> 2.43.0
-> >>
+> > Signed-off-by: Michael Walle <mwalle@kernel.org>
+>
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+But see below
+
+>
+> > ---
+> >  boot/image-android.c | 7 +++----
+> >  boot/image-board.c   | 4 +++-
+> >  include/image.h      | 2 +-
+> >  3 files changed, 7 insertions(+), 6 deletions(-)
 > >
-> > Rather than creating a new command I think this should be a subcommand
-> > of abootimg.
->
-> To me, they are not the same thing.
->
-> - ab_* commands are for manipulating specific bits from the BCB (Boot
->   Control Block, usually "misc" partition)
->   ab_* operates on partitions
->
-> - abootimg is for manipulating boot.img and vendor_boot.img headers
->   (which are not on the same partitions)
->   abootimg operations on memory regions (so someone else is responsible
->   for reading the partitions)
->
-> We also have a 3rd command "bcb". "bcb" also reads the "misc" partition
-> but can only read the "boot reason".
-> If we really want to merge ab_select and ab_dump into another command,
-> "bcb" is more relevant, in my opinion.
-
-That sounds good.
-
->
-> I'd prefer to keep 3 commands for the following reasons:
->
-> 1. Easier to track/port changes from Google's fork [1]
-> 2. Better separation of responsabilities
-> 3. Merging the commands requires the update of the existing U-Boot
->    environment users (meson64_android.h for example)
->
-> I don't strongly disagree with merging, but I'd prefer to keep it this way.
->
-> [1] https://android.googlesource.com/platform/external/u-boot
->
-> Simon, can you elaborate on why we should merge the commands? Do you
-> think that for U-Boot users it will be easier to have a single command
-> for all Android related topics?
-
-Not necessarily, it's just that we do try to keep similar pieces of
-functionality together. Perhaps we should create an entirely new
-command to bring all (or most) these things together, with aliases for
-compatibility?
-
-Note that 'boota' might be a better name for actually booting an
-Android image, since we have bootm, booti, etc. Having said that, with
-bootstd it might just be automatic.
-
-Why does Android have its own fork? I am not keen on any argument that
-says that mainline needs to follow a fork!
-
-
->
+> > diff --git a/boot/image-android.c b/boot/image-android.c
+> > index 09c7a44e058..774565fd1fe 100644
+> > --- a/boot/image-android.c
+> > +++ b/boot/image-android.c
+> > @@ -393,10 +393,9 @@ int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
+> >       if (!android_image_get_data(hdr, vendor_boot_img, &img_data))
+> >               return -EINVAL;
 > >
-> > Can you please create some docs in doc/usage/cmd/abootimg for the command?
+> > -     if (!img_data.ramdisk_size) {
+> > -             *rd_data = *rd_len = 0;
+> > -             return -1;
+> > -     }
+> > +     if (!img_data.ramdisk_size)
+> > +             return -ENOENT;
+> > +
+> >       if (img_data.header_version > 2) {
+> >               ramdisk_ptr = img_data.ramdisk_addr;
+> >               memcpy((void *)(ramdisk_ptr), (void *)img_data.vendor_ramdisk_ptr,
+> > diff --git a/boot/image-board.c b/boot/image-board.c
+> > index f2124013046..eca1b1d2bff 100644
+> > --- a/boot/image-board.c
+> > +++ b/boot/image-board.c
+> > @@ -427,7 +427,9 @@ static int select_ramdisk(struct bootm_headers *images, const char *select, u8 a
+> >                               unmap_sysmem(ptr);
+> >                       }
 > >
-> > I also wonder if ab_select should move under that command?
+> > -                     if (ret)
+> > +                     if (ret == -ENOENT)
+> > +                             return -ENOPKG;
+
+We normally use -ENOENT for this sort of thing.
+
+> > +                     else if (ret)
+> >                               return ret;
+> >                       done = true;
+> >               }
+> > diff --git a/include/image.h b/include/image.h
+> > index dd4042d1bd9..2ab17075287 100644
+> > --- a/include/image.h
+> > +++ b/include/image.h
+> > @@ -1858,7 +1858,7 @@ int android_image_get_kernel(const void *hdr,
+> >   * @vendor_boot_img : Pointer to vendor boot image header
+> >   * @rd_data: Pointer to a ulong variable, will hold ramdisk address
+> >   * @rd_len:  Pointer to a ulong variable, will hold ramdisk length
+> > - * Return: 0 if succeeded, -1 if ramdisk size is 0
+> > + * Return: 0 if OK, -ENOPKG if no ramdisk, -EINVAL if invalid image
+> >   */
+> >  int android_image_get_ramdisk(const void *hdr, const void *vendor_boot_img,
+> >                             ulong *rd_data, ulong *rd_len);
+> > --
+> > 2.39.2
 
 Regards,
-SImon
+Simon
