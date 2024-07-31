@@ -4,68 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7242BC3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 21:11:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C05FEC3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 21:11:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4840A88A7D;
+	by phobos.denx.de (Postfix) with ESMTP id A9D1088A95;
 	Wed, 31 Jul 2024 23:11:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="X852ypLj";
+	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="GgGKB7ug";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D0CE88A39; Wed, 31 Jul 2024 15:43:42 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id D8C6188A35; Wed, 31 Jul 2024 15:43:43 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BEBD888A21
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 15:43:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B5E488A44
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 15:43:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de;
  spf=none smtp.mailfrom=admin@hifiphile.com
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-368380828d6so3717728f8f.1
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 06:43:37 -0700 (PDT)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-3683f56b9bdso2777522f8f.1
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 06:43:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1722433417; x=1723038217;
+ d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1722433419; x=1723038219;
  darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=X4SNLmtN1TQT8JRRE39SLuFpqtgd86Bmub77WVBfnKE=;
- b=X852ypLjy6Fcl56QkmYyo4AaP+k6n8bkTK/g6zG5a4hfkmPGVVUwHFqAB0B1lVFVy3
- 8/bqybbGdvQU7aYNLs7uOMgHw+TKLk9hPmZarIi+FCrbi/jAMdEcIKqjWy5nftowcMMs
- xEt4i9jTS/1dWkbWOXJeBJ42b+JkPvUFJsRB6ny1PZ1gRM/cmNIsXkl0IiUlCPEATn6P
- UtcYybbR0Nxvmrrg4SkeeEp9I9iIs6YqFwR53LSaHY0s4/VG0nSStuUmMFuNCT5BHx56
- Uan8kvLJ6nsnofiKU1P3UzyOcJVB3xRFN0b5USBsrwmYjeLAXMJeGzipaG8bED/AgCoS
- NfXA==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=w6SJc/RkCx+Qh4F3UdjfV7x5j0idtMwby+oFCYIxoaU=;
+ b=GgGKB7ug4coJJHT0/MvXr8+4lzRtbjbjadX4qeYtkM/NXvQHyvjgpSztrskVhmPdEi
+ hZYTL9vDUeSrTgd16dsq2G5qFA9Y8xOO1b5sOsD7nibZFrvVwv1jZJTAyXCJtMNQtsse
+ Ih1CNZbsdH3Tt8JYVQCsViJPAbMXX19oxVRee7lyEbceCcsu5YNyO1eS5rVIE2oPlTje
+ vwFmmSPThq7hJ7eg3Jvy+6D5oibeiQseevtu8n6IkgmIsNqUEJ2s5uTghjownZzmFJri
+ zA3/MBh4DQjok3CXHI1PsF/jTlqk3JZH4SNWtZoZW6aq+op8f2JCl/v6RWnKraofTeUQ
+ uUrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722433417; x=1723038217;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=X4SNLmtN1TQT8JRRE39SLuFpqtgd86Bmub77WVBfnKE=;
- b=es6d2APhsHApY+tKiVcbfMUvWfsd7MITFasnJdFfTkIQ9TOzp0zVPmrdtQHpB3C9cG
- IgntLOjpn53qBIcAexxq4YkibJqN9G1dzo0trKzJcYrwTi+KvaOoZmNQqH9GzKK6O9c0
- /dXun/EAQiA0AFT05rvEKvqaAryLhmFPxMV9B9O31HOW2BGbrmrVms5MbNq1r/HAvlbr
- NChtPBkmj3OzO6nMXMn5FfrkXNfpAQHKjdWC5mAcMHbfVvuItMEg+Y11RkzlyyB6/l2+
- sz1SG+XseQkbuRvjLZxs/Q/1Y5hDyYEaJHJ0YAajfHlk/gRZbMtsQQmFlJXn88IPFq2m
- Dpfw==
+ d=1e100.net; s=20230601; t=1722433419; x=1723038219;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=w6SJc/RkCx+Qh4F3UdjfV7x5j0idtMwby+oFCYIxoaU=;
+ b=jFiufuCVwXb6qpG8nq99yVf+3lEN0UrBm9fbHerl7TPMH8QzDo3n/Fq346XyFjDqlX
+ O3qmFCgSqaIzTyiG2qeG30N4ROhD0JHW+OzA58E21h9ToFOYHERGszxf4YJjULgp9EXa
+ iG+RjJAy/tfZ33yXuZW8IAS4+ymxU+DFybTd4FJpRGm1TsESHJ/u9DnBXK+UWQGU3+w3
+ qUdByaWbKchC7vblh1U0dpxGYJbXe9HpTgPg7xgW/kn/q3NeMkcYwQjwXpmiPULgSzoe
+ LbNRgegwV4nlAgyzJ2pZ/WFAiYJk105a/bs6WP4enLwUvoCulU4jiNmwBsUKQ7YvVw+h
+ h1oA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUT1Ze+2d7M2o53EkWCdp5EVmRPGcTgvXsJK6RubgO56I4BGEfP421qoewwl91e7yTrnRxQ6XE=@lists.denx.de
-X-Gm-Message-State: AOJu0YySta1FRisFi52ugsAEv5scKAz1x3xECgc/YHYWeLbg7oHcLnmg
- 7aZlBJtRtYITRfXU1o/aJF9O1uyLC0gZxcyzJibwNnap8kfUyFeWKB9y1jGHlus=
-X-Google-Smtp-Source: AGHT+IGzYi1GRt4zhbj0U8ZEQNEN2e2ow8rQ4ieAs9MFuDvLmb+WzJetbXAVN0O6qijuPTcMK94Jkw==
-X-Received: by 2002:adf:ebca:0:b0:367:89b0:f58a with SMTP id
- ffacd0b85a97d-36b5d0cbd31mr8129309f8f.58.1722433416914; 
- Wed, 31 Jul 2024 06:43:36 -0700 (PDT)
+ AJvYcCVPCf/B0NIFoIyWpPI431fax1Oi0UAywrAsG6x8wYshf3V0DmhS34fYqlJoGRfDcj0t6CB+AzGPjNgIKQ9pD6Z4BR/Rjg==
+X-Gm-Message-State: AOJu0YzRcAX3QC43+1Ms2N8XpOV+3bE2/EKmWcQ+ks1xCs2MI8hUEiCr
+ 2key6/8lDtLIkTMTDLZYigkXAZEXi//WEqC1+cBGfnXAVqw2R1/AU3vA6l6jlj4yU4UJEaqaGnQ
+ ACHniBg==
+X-Google-Smtp-Source: AGHT+IHQ4eYPDkT6o0kkXeHsNyWMW+ofxTzHOhDrfuJA0q01Oo9SBiNjMD/B+EhiCqKzjhdC8Z1I3Q==
+X-Received: by 2002:adf:fc8f:0:b0:368:3ef6:f049 with SMTP id
+ ffacd0b85a97d-36b5cee2e36mr8339975f8f.2.1722433418615; 
+ Wed, 31 Jul 2024 06:43:38 -0700 (PDT)
 Received: from localhost.localdomain ([78.199.60.143])
  by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-36b36861b29sm17063739f8f.93.2024.07.31.06.43.36
+ ffacd0b85a97d-36b36861b29sm17063739f8f.93.2024.07.31.06.43.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jul 2024 06:43:36 -0700 (PDT)
+ Wed, 31 Jul 2024 06:43:37 -0700 (PDT)
 From: Zixun LI <admin@hifiphile.com>
 To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>,
@@ -73,10 +75,13 @@ To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Marek Vasut <marex@denx.de>
 Cc: Zixun LI <admin@hifiphile.com>,
 	u-boot@lists.denx.de
-Subject: [RFC PATCH 0/4] dm: Duplicate uclass name fix and alias improvements
-Date: Wed, 31 Jul 2024 15:42:15 +0200
-Message-ID: <20240731134257.686017-1-admin@hifiphile.com>
+Subject: [RFC PATCH 2/4] dm: core: Show device sequence instead in
+ dm_dump_tree()
+Date: Wed, 31 Jul 2024 15:42:17 +0200
+Message-ID: <20240731134257.686017-3-admin@hifiphile.com>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20240731134257.686017-1-admin@hifiphile.com>
+References: <20240731134257.686017-1-admin@hifiphile.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 31 Jul 2024 23:11:08 +0200
@@ -96,41 +101,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Patch 1 is a tentative fix for duplicate uclass name issue met in
-https://lists.denx.de/pipermail/u-boot/2024-July/560189.html
+Currently uclass index is shown in DM tree dump which ignores alias
+sequence numbering. The result could be confusing since these 2 numbers
+could be different. Show device sequence number instead.
 
-The idea is to use orignal class name only for sequence alias to keep this
-alias function working and rename the class something else.
+Signed-off-by: Zixun LI <admin@hifiphile.com>
+---
+ drivers/core/dump.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Patch 2 and 3 make "dm tree", "bind" and "unbind" commands to take care
-of alias sequence numbering. As the alias sequence numbering is more
-meanful than uclass index.
-
-Patch 4 is the actual fix for usb gadet class.
-
-There are some situations where uclass index and device sequence number
-are misused which is not convered by this patch set, for example in
-drivers/net/sandbox.c, uclass_get_device() is used which is based on
-uclass index, while in the comments it says "index - The alias index
-(also DM seq number)"
-
-Zixun LI (4):
-  dm: core: Add a way to specify an alt name for alias sequence
-    numbering
-  dm: core: Show device sequence instead in dm_dump_tree()
-  cmd: bind: Use device sequence instead for driver bind/unbind
-  usb: gadget: udc: Fix duplicate uclass name
-
- cmd/bind.c                          |  4 ++--
- drivers/core/device.c               |  3 ++-
- drivers/core/dump.c                 |  2 +-
- drivers/core/read.c                 |  7 ++++++-
- drivers/core/uclass.c               | 11 +++++++++--
- drivers/usb/gadget/udc/udc-uclass.c |  3 ++-
- include/dm/read.h                   |  9 ++++++++-
- include/dm/uclass.h                 |  2 ++
- 8 files changed, 32 insertions(+), 9 deletions(-)
-
---
+diff --git a/drivers/core/dump.c b/drivers/core/dump.c
+index 5ec30d5b3c..c812d87fa4 100644
+--- a/drivers/core/dump.c
++++ b/drivers/core/dump.c
+@@ -40,7 +40,7 @@ static void show_devices(struct udevice *dev, int depth, int last_flag,
+ 	/* print the first 20 characters to not break the tree-format. */
+ 	printf(CONFIG_IS_ENABLED(USE_TINY_PRINTF) ? " %s  %d  [ %c ]   %s  " :
+ 	       " %-10.10s  %3d  [ %c ]   %-20.20s  ", dev->uclass->uc_drv->name,
+-	       dev_get_uclass_index(dev, NULL),
++	       dev->seq_,
+ 	       flags & DM_FLAG_ACTIVATED ? '+' : ' ', dev->driver->name);
+ 
+ 	for (i = depth; i >= 0; i--) {
+-- 
 2.45.2
 
