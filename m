@@ -4,92 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5AB4C3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 17:26:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 085F3C3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 17:27:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35AAC86FB1;
-	Wed, 31 Jul 2024 19:26:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8439188A05;
+	Wed, 31 Jul 2024 19:27:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TrQaUx4h";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Xbp3IwYi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FCFA87DDF; Wed, 31 Jul 2024 19:26:56 +0200 (CEST)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
+ id 3C0AB88A15; Wed, 31 Jul 2024 19:27:19 +0200 (CEST)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D4FE86D4C
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 19:26:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 70BE388A05
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 19:27:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-e02c4983bfaso4886794276.2
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 10:26:54 -0700 (PDT)
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-dfe43dca3bfso4332770276.0
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 10:27:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722446813; x=1723051613; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1722446835; x=1723051635; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FN1zBT1E7YnplGtBOrzIeQ3Vh43RQyc+/ZDF7ApuOIY=;
- b=TrQaUx4hJOb0ScYS4sCsv2J0KnfNrHMY2ezlyim8OGsvV4GtFvn2PbLT/B1RBwZhVY
- qsNpSS9Izhv1/2n/mid54B2yG10vnKhQwWKbHzoioL/dl4stA0lnim6yp0pFYn4uL34W
- 0ejMnwkR/2uMjC9reWmG+5F0HblsmIvSjBe5AIinmifs3Mt0gy2ryhYWxMUpkNUWPWG+
- X/HrqPRcJy+sEiqYuq7NDriH+Dz5OAkhOVcdACK3lhb++F4Ep39jFzXsf+7Rg9B/nfO6
- P/8r6Vn6yan7x9VcLPRUqWyDX3yjpbm/ApDwHEIzgvX8XT8hhlRoHntMDOct9jKgf/L0
- umxQ==
+ bh=VpNsZs3eofqxy72P0oTbLxfpWCvoeDadycxCQtPCMp8=;
+ b=Xbp3IwYiOh4cpp0bRaGtPoWKobmYudM6pN3kdVQV/PmY73uKxPdMXc8z2XWVw/VI/h
+ PMM/tK0mKldVgpZY1mO662fdhrLT9VYqH/Va6q5H6GU+ffkUdCiSC9wCvm4KilQtrnv4
+ pxfsDNSIAFs/0UiKViZJsIOyYer2Rm0fzxkqQn2uiQ453bQX66esdRpnlmhdh9DE/z6f
+ rx9ZDc2rH9iZRETQPgsl+Z3+hVzM17gfD0/jfigXseBS5QiIAG4dhp5N+YJ+9LWt90M9
+ WNDbh+/IVUIM1Mwzs8z2Y9TGGGrJEqgy7woG9XqzZPVGB6jzfrwdwYvUdaOpCrb0lFFc
+ zpJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722446813; x=1723051613;
+ d=1e100.net; s=20230601; t=1722446835; x=1723051635;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FN1zBT1E7YnplGtBOrzIeQ3Vh43RQyc+/ZDF7ApuOIY=;
- b=VBz1XVUl+/Y0NXWWhNGpn9JyjY15RiPpdYCFS5ZpKlnRuGXVuokPirKyJVL0nh1ZL1
- ReGy3DfWcOvu4Dj+mzIPuOjXIoY+TlgkyDP+tpZgLYATKd1YXy4Ybfe5CVvoRT3B8nkF
- v+G2mYU1Qr1OW22XKLGcp2Md69ZLo+rjl84fGwQvAu9fW4uaRNN/HgJzd3eFuziKNxJw
- dvsFWTPchnNyPR78p7RCJqbzNuIuTzpdLMgc4xjRmGUxev5+uzrKS5r7+IirwpWjSMSl
- 6WRBPqk3+7z9BLpjtVh1CnybFxbArN0zP/pWk5Eau95hBE6b1YGyODfPj88FgdwJBWJf
- xBCg==
-X-Gm-Message-State: AOJu0Yztf7a2bPa/C0RAuR3WyFz4PiG9sSZSmxJ9FlLgxREu/bd9KvEf
- B79iBYLPFwszABPJ2LfiNJjRHLpl3tC2s/PF0iFwdV77yKzwB45ogC8H/EaxOIWh6mKegfEPYaO
- BF6s=
-X-Google-Smtp-Source: AGHT+IGIjhqE5AD637iySTjVQ5XT0MYOEGTZ8TUELjZWd/jxKMqNfyyxIofD6TF/t7h7tCpXuncBzQ==
-X-Received: by 2002:a05:6902:1894:b0:e08:646f:661d with SMTP id
- 3f1490d57ef6-e0b545af50emr17724121276.42.1722446813005; 
- Wed, 31 Jul 2024 10:26:53 -0700 (PDT)
+ bh=VpNsZs3eofqxy72P0oTbLxfpWCvoeDadycxCQtPCMp8=;
+ b=Z0TbweW7x7TJ6MaPzhwvYR1clh81g5wXoum1uFNwRPFtxbaMIqB2kEiMMlIeKrL4v1
+ 6BksAULu2HzxWi6r5SISc15D3FZZ8USFm/8RLSoRczCAEW48EDULRmujNqPbs9nRoxqB
+ uLOsGY0125wSjeSv5h/xpWi/+9UoP/3afMzMFBWJUSVc5buLTIUMZzjfPVhTWuKXnO7C
+ kyITMaXv4VB/8gTcz/CO9db8Ww3Fo91EqUvkcDaqV2jkKydsmKJmV71AZv1AdH4FWl2w
+ jkEOKCk+NpS2z6tSYeCI5t7G0udhTiiiUmNBYZ0ca2/Hou8tNCu1zQ5Y5oyCuCaKXN3H
+ Udsg==
+X-Gm-Message-State: AOJu0YxKDv6bhYsstNYA4RlDElz7rJvJyWgDQ5ZDNd0P9+F0ClUrvkpK
+ u+lOH7RyI1AuFVGNnKJha1FIv2NWrYRaK1gPjk92brvUI+QlNSiE6/aE4uFP+mgev8e5CkomuIG
+ NgSg=
+X-Google-Smtp-Source: AGHT+IFBzJ1IXLS1/s3p5ReyH4cJWR0zUJAkjj7tbvK/j77Lj8RhQ5vG9FAHCNdRgmRfiqsYKp/zaA==
+X-Received: by 2002:a05:6902:1206:b0:e0b:327d:51d6 with SMTP id
+ 3f1490d57ef6-e0b5449bf91mr15050051276.3.1722446835024; 
+ Wed, 31 Jul 2024 10:27:15 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a1d73b378fsm779452485a.37.2024.07.31.10.26.50
+ af79cd13be357-7a1d73b378fsm779452485a.37.2024.07.31.10.27.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jul 2024 10:26:52 -0700 (PDT)
+ Wed, 31 Jul 2024 10:27:14 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
- Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Stefan Bosch <stefan_b@posteo.net>, Mario Six <mario.six@gdsys.cc>,
+ Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
+ Mario Six <mario.six@gdsys.cc>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Michal Simek <michal.simek@amd.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sean Anderson <seanga2@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sumit Garg <sumit.garg@linaro.org>, Jesse Taube <mr.bossman075@gmail.com>,
- Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>,
  Ilya Lukin <4.shket@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Bin Meng <bmeng.cn@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Alexander Gendin <agendin@matrox.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: [PATCH v5 01/27] CI: Exclude MbedTLS subtree for CONFIG checks
-Date: Wed, 31 Jul 2024 10:25:11 -0700
-Message-Id: <20240731172556.1348487-2-raymond.mao@linaro.org>
+Subject: [PATCH v5 02/27] mbedtls: add mbedtls into the build system
+Date: Wed, 31 Jul 2024 10:25:12 -0700
+Message-Id: <20240731172556.1348487-3-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240731172556.1348487-1-raymond.mao@linaro.org>
 References: <20240731172556.1348487-1-raymond.mao@linaro.org>
@@ -111,54 +112,401 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since MbedTLS is an external repo with its own coding style,
-exclude it from Azure and gitlab CI CONFIG checks.
+Port mbedtls with adapted libc header files.
+Add mbedtls default config header file.
+Optimize mbedtls default config by disabling unused features to
+reduce the target size.
+Add mbedtls kbuild makefile.
+Add Kconfig skeleton and config submenu entry for selecting
+crypto libraries between mbedtls and legacy ones.
+Add the mbedtls include directories into the build system.
+
+Subsequent patches will separate those Kconfigs into pairs of
+_LEGACY and _MBEDTLS for controlling the implementations of legacy
+crypto libraries and MbedTLS ones respectively.
+
+The motivation of moving and adapting *INT* macros from kernel.h
+to limits.h is to fullfill the MbedTLS building requirement.
+The conditional compilation statements in MbedTLS expects the
+*INT* macros as constant expressions, thus expressions like
+`((int)(~0U >> 1))` will not work.
+
+Prerequisite
+------------
+
+This patch series requires mbedtls git repo to be added as a
+subtree to the main U-Boot repo via:
+
+$ git subtree add --prefix lib/mbedtls/external/mbedtls \
+      https://github.com/Mbed-TLS/mbedtls.git \
+      v3.6.0 --squash
+
+Moreover, due to the Windows-style files from mbedtls git repo,
+we need to convert the CRLF endings to LF and do a commit manually:
+
+$ git add --renormalize .
+$ git commit
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 Changes in v2
-- Initial patch.
+- Disabled unused MbedTLS features to optimize the target size.
 Changes in v3
-- None.
+- Removed changes in stdio.h.
 Changes in v4
-- None.
+- Move limits.h as a common header file that is included by kernel.h.
+- Refactor the Kconfig to support legacy and MbedTLS options for each
+  algorithm.
+- Refactor MbedTLS makefile and default config file to remove unused
+  config options and objects.
 Changes in v5
-- None.
+- Merged patch #9 of v4 into this patch.
+- Removed unused config MBEDTLS_LIB_TLS.
+- Refactored MbedTLS Makefile and default config file.
 
- .azure-pipelines.yml | 3 ++-
- .gitlab-ci.yml       | 3 ++-
- 2 files changed, 4 insertions(+), 2 deletions(-)
+ Makefile                         |  6 +++
+ include/limits.h                 | 29 ++++++++++++++
+ include/linux/kernel.h           | 13 +-----
+ include/stdlib.h                 |  1 +
+ lib/Kconfig                      |  4 ++
+ lib/Makefile                     |  2 +
+ lib/mbedtls/Kconfig              | 47 ++++++++++++++++++++++
+ lib/mbedtls/Makefile             | 41 +++++++++++++++++++
+ lib/mbedtls/mbedtls_def_config.h | 69 ++++++++++++++++++++++++++++++++
+ lib/mbedtls/port/assert.h        | 12 ++++++
+ 10 files changed, 212 insertions(+), 12 deletions(-)
+ create mode 100644 include/limits.h
+ create mode 100644 lib/mbedtls/Kconfig
+ create mode 100644 lib/mbedtls/Makefile
+ create mode 100644 lib/mbedtls/mbedtls_def_config.h
+ create mode 100644 lib/mbedtls/port/assert.h
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index c43bb51066a..339f9596b28 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -76,7 +76,8 @@ stages:
-       # have no matches.
-       - script: git grep -E '^#[[:blank:]]*(define|undef)[[:blank:]]*CONFIG_'
-                   :^doc/ :^arch/arm/dts/ :^scripts/kconfig/lkc.h
--                  :^include/linux/kconfig.h :^tools/ :^dts/upstream/ &&
-+                  :^include/linux/kconfig.h :^tools/ :^dts/upstream/
-+                  :^lib/mbedtls/external :^lib/mbedtls/mbedtls_def_config.h &&
-                   exit 1 || exit 0
+diff --git a/Makefile b/Makefile
+index 07d7947c8af..fd855dbd5c9 100644
+--- a/Makefile
++++ b/Makefile
+@@ -829,6 +829,12 @@ KBUILD_HOSTCFLAGS += $(if $(CONFIG_TOOLS_DEBUG),-g)
+ UBOOTINCLUDE    := \
+ 	-Iinclude \
+ 	$(if $(KBUILD_SRC), -I$(srctree)/include) \
++	$(if $(CONFIG_MBEDTLS_LIB), \
++		"-DMBEDTLS_CONFIG_FILE=\"mbedtls_def_config.h\"" \
++		-I$(srctree)/lib/mbedtls \
++		-I$(srctree)/lib/mbedtls/port \
++		-I$(srctree)/lib/mbedtls/external/mbedtls \
++		-I$(srctree)/lib/mbedtls/external/mbedtls/include) \
+ 	$(if $(CONFIG_$(SPL_)SYS_THUMB_BUILD), \
+ 		$(if $(CONFIG_HAS_THUMB2), \
+ 			$(if $(CONFIG_CPU_V7M), \
+diff --git a/include/limits.h b/include/limits.h
+new file mode 100644
+index 00000000000..cc691d15650
+--- /dev/null
++++ b/include/limits.h
+@@ -0,0 +1,29 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2023 Linaro Limited
++ * Author: Raymond Mao <raymond.mao@linaro.org>
++ */
++
++#ifndef _LIMITS_H
++#define _LIMITS_H
++
++#define INT_MAX         0x7fffffff
++#define UINT_MAX	0xffffffffUL
++#define CHAR_BIT        8
++#define UINT32_MAX      0xffffffffUL
++#define UINT64_MAX	0xffffffffffffffffUL
++
++#ifdef CONFIG_64BIT
++    #define UINTPTR_MAX UINT64_MAX
++#else
++    #define UINTPTR_MAX UINT32_MAX
++#endif
++
++#ifndef SIZE_MAX
++#define SIZE_MAX        UINTPTR_MAX
++#endif
++#ifndef SSIZE_MAX
++#define SSIZE_MAX	((ssize_t)(SIZE_MAX >> 1))
++#endif
++
++#endif /* _LIMITS_H */
+diff --git a/include/linux/kernel.h b/include/linux/kernel.h
+index 5cd6c9dc821..2cb2ceaf84b 100644
+--- a/include/linux/kernel.h
++++ b/include/linux/kernel.h
+@@ -3,25 +3,18 @@
  
-   - job: docs
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 165f765a833..a8f7f1940f3 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -156,7 +156,8 @@ check for new CONFIG symbols outside Kconfig:
-     # have no matches.
-     - git grep -E '^#[[:blank:]]*(define|undef)[[:blank:]]*CONFIG_'
-         :^doc/ :^arch/arm/dts/ :^scripts/kconfig/lkc.h
--        :^include/linux/kconfig.h :^tools/ :^dts/upstream/ &&
-+        :^include/linux/kconfig.h :^tools/ :^dts/upstream/
-+        :^lib/mbedtls/external :^lib/mbedtls/mbedtls_def_config.h &&
-         exit 1 || exit 0
+ #include <linux/types.h>
+ #include <linux/printk.h> /* for printf/pr_* utilities */
++#include <limits.h>
  
- # build documentation
+ #define USHRT_MAX	((u16)(~0U))
+ #define SHRT_MAX	((s16)(USHRT_MAX>>1))
+ #define SHRT_MIN	((s16)(-SHRT_MAX - 1))
+-#define INT_MAX		((int)(~0U>>1))
+ #define INT_MIN		(-INT_MAX - 1)
+-#define UINT_MAX	(~0U)
+ #define LONG_MAX	((long)(~0UL>>1))
+ #define LONG_MIN	(-LONG_MAX - 1)
+ #define ULONG_MAX	(~0UL)
+ #define LLONG_MAX	((long long)(~0ULL>>1))
+ #define LLONG_MIN	(-LLONG_MAX - 1)
+ #define ULLONG_MAX	(~0ULL)
+-#ifndef SIZE_MAX
+-#define SIZE_MAX	(~(size_t)0)
+-#endif
+-#ifndef SSIZE_MAX
+-#define SSIZE_MAX	((ssize_t)(SIZE_MAX >> 1))
+-#endif
+ 
+ #define U8_MAX		((u8)~0U)
+ #define S8_MAX		((s8)(U8_MAX>>1))
+@@ -36,10 +29,6 @@
+ #define S64_MAX		((s64)(U64_MAX>>1))
+ #define S64_MIN		((s64)(-S64_MAX - 1))
+ 
+-/* Aliases defined by stdint.h */
+-#define UINT32_MAX	U32_MAX
+-#define UINT64_MAX	U64_MAX
+-
+ #define INT32_MAX	S32_MAX
+ 
+ #define STACK_MAGIC	0xdeadbeef
+diff --git a/include/stdlib.h b/include/stdlib.h
+index 9c175d4d74c..dedfd52a144 100644
+--- a/include/stdlib.h
++++ b/include/stdlib.h
+@@ -7,5 +7,6 @@
+ #define __STDLIB_H_
+ 
+ #include <malloc.h>
++#include <rand.h>
+ 
+ #endif /* __STDLIB_H_ */
+diff --git a/lib/Kconfig b/lib/Kconfig
+index b3baa4b85b0..129063ca8a5 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -418,6 +418,10 @@ config CIRCBUF
+ 
+ source "lib/dhry/Kconfig"
+ 
++menu "Alternative crypto libraries"
++source lib/mbedtls/Kconfig
++endmenu
++
+ menu "Security support"
+ 
+ config AES
+diff --git a/lib/Makefile b/lib/Makefile
+index e389ad014f8..499d174199f 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -96,6 +96,8 @@ obj-$(CONFIG_LIBAVB) += libavb/
+ obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += libfdt/
+ obj-$(CONFIG_$(SPL_TPL_)OF_REAL) += fdtdec_common.o fdtdec.o
+ 
++obj-$(CONFIG_MBEDTLS_LIB) += mbedtls/
++
+ ifdef CONFIG_SPL_BUILD
+ obj-$(CONFIG_SPL_YMODEM_SUPPORT) += crc16-ccitt.o
+ obj-$(CONFIG_$(SPL_TPL_)HASH) += crc16-ccitt.o
+diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+new file mode 100644
+index 00000000000..3e9057f1acf
+--- /dev/null
++++ b/lib/mbedtls/Kconfig
+@@ -0,0 +1,47 @@
++choice
++	prompt "Select crypto libraries"
++	default LEGACY_CRYPTO
++	help
++	  Select crypto libraries.
++	  LEGACY_CRYPTO for legacy crypto libraries,
++	  MBEDTLS_LIB for MbedTLS libraries.
++
++config LEGACY_CRYPTO
++	bool "legacy crypto libraries"
++	select LEGACY_CRYPTO_BASIC
++	select LEGACY_CRYPTO_CERT
++
++config MBEDTLS_LIB
++	bool "MbedTLS libraries"
++	select MBEDTLS_LIB_CRYPTO
++	select MBEDTLS_LIB_X509
++endchoice
++
++if LEGACY_CRYPTO
++
++config LEGACY_CRYPTO_BASIC
++	bool "legacy basic crypto libraries"
++	help
++	  Enable legacy basic crypto libraries.
++
++config LEGACY_CRYPTO_CERT
++	bool "legacy certificate libraries"
++	help
++	  Enable legacy certificate libraries.
++
++endif # LEGACY_CRYPTO
++
++if MBEDTLS_LIB
++
++config MBEDTLS_LIB_CRYPTO
++	bool "MbedTLS crypto libraries"
++	help
++	  Enable MbedTLS crypto libraries.
++
++
++config MBEDTLS_LIB_X509
++	bool "MbedTLS certificate libraries"
++	help
++	  Enable MbedTLS certificate libraries.
++
++endif # MBEDTLS_LIB
+diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
+new file mode 100644
+index 00000000000..e98241b46ab
+--- /dev/null
++++ b/lib/mbedtls/Makefile
+@@ -0,0 +1,41 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (c) 2024 Linaro Limited
++# Author: Raymond Mao <raymond.mao@linaro.org>
++
++MBEDTLS_LIB_DIR = external/mbedtls/library
++
++# MbedTLS crypto library
++obj-$(CONFIG_MBEDTLS_LIB_CRYPTO) += mbedtls_lib_crypto.o
++mbedtls_lib_crypto-y := \
++	$(MBEDTLS_LIB_DIR)/platform_util.o \
++	$(MBEDTLS_LIB_DIR)/constant_time.o \
++	$(MBEDTLS_LIB_DIR)/md.o
++mbedtls_lib_crypto-$(CONFIG_$(SPL_)MD5) += $(MBEDTLS_LIB_DIR)/md5.o
++mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA1) += $(MBEDTLS_LIB_DIR)/sha1.o
++mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA256) += \
++	$(MBEDTLS_LIB_DIR)/sha256.o
++mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA512) += \
++	$(MBEDTLS_LIB_DIR)/sha512.o
++
++# MbedTLS X509 library
++obj-$(CONFIG_MBEDTLS_LIB_X509) += mbedtls_lib_x509.o
++mbedtls_lib_x509-y := $(MBEDTLS_LIB_DIR)/x509.o
++mbedtls_lib_x509-$(CONFIG_$(SPL_)ASN1_DECODER) += \
++	$(MBEDTLS_LIB_DIR)/asn1parse.o \
++	$(MBEDTLS_LIB_DIR)/asn1write.o \
++	$(MBEDTLS_LIB_DIR)/oid.o
++mbedtls_lib_x509-$(CONFIG_$(SPL_)RSA_PUBLIC_KEY_PARSER) += \
++	$(MBEDTLS_LIB_DIR)/bignum.o \
++	$(MBEDTLS_LIB_DIR)/bignum_core.o \
++	$(MBEDTLS_LIB_DIR)/rsa.o \
++	$(MBEDTLS_LIB_DIR)/rsa_alt_helpers.o
++mbedtls_lib_x509-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_SUBTYPE) += \
++	$(MBEDTLS_LIB_DIR)/pk.o \
++	$(MBEDTLS_LIB_DIR)/pk_wrap.o \
++	$(MBEDTLS_LIB_DIR)/pkparse.o
++mbedtls_lib_x509-$(CONFIG_$(SPL_)X509_CERTIFICATE_PARSER) += \
++	$(MBEDTLS_LIB_DIR)/x509_crl.o \
++	$(MBEDTLS_LIB_DIR)/x509_crt.o
++mbedtls_lib_x509-$(CONFIG_$(SPL_)PKCS7_MESSAGE_PARSER) += \
++	$(MBEDTLS_LIB_DIR)/pkcs7.o
+diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_config.h
+new file mode 100644
+index 00000000000..38de6b0b9af
+--- /dev/null
++++ b/lib/mbedtls/mbedtls_def_config.h
+@@ -0,0 +1,69 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * MbedTLS config file
++ *
++ * Derived from the MbedTLS internal config file,
++ * for more information about each build option,
++ * please refer to:
++ * external/mbedtls/include/mbedtls/mbedtls_config.h
++ *
++ * Copyright (c) 2024 Linaro Limited
++ * Author: Raymond Mao <raymond.mao@linaro.org>
++ */
++
++#if CONFIG_IS_ENABLED(MBEDTLS_LIB_CRYPTO)
++
++#define MBEDTLS_MD_C
++
++#if CONFIG_IS_ENABLED(MD5)
++#define MBEDTLS_MD5_C
++#endif
++
++#if CONFIG_IS_ENABLED(SHA1)
++#define MBEDTLS_SHA1_C
++#endif
++
++#if CONFIG_IS_ENABLED(SHA256)
++#define MBEDTLS_SHA256_C
++#endif
++
++#if CONFIG_IS_ENABLED(SHA384)
++#define MBEDTLS_SHA384_C
++#endif
++
++#if CONFIG_IS_ENABLED(SHA512)
++#define MBEDTLS_SHA512_C
++#endif
++
++#endif /* CONFIG_IS_ENABLED(MBEDTLS_LIB_CRYPTO) */
++
++#if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
++
++#if CONFIG_IS_ENABLED(X509_CERTIFICATE_PARSER)
++#define MBEDTLS_PKCS1_V15
++#define MBEDTLS_X509_USE_C
++#define MBEDTLS_X509_CRT_PARSE_C
++#define MBEDTLS_X509_CRL_PARSE_C
++#endif
++
++#if CONFIG_IS_ENABLED(ASYMMETRIC_PUBLIC_KEY_SUBTYPE)
++#define MBEDTLS_PK_C
++#define MBEDTLS_PK_PARSE_C
++#endif
++
++#if CONFIG_IS_ENABLED(RSA_PUBLIC_KEY_PARSER)
++#define MBEDTLS_BIGNUM_C
++#define MBEDTLS_RSA_C
++#endif
++
++#if CONFIG_IS_ENABLED(PKCS7_MESSAGE_PARSER)
++#define MBEDTLS_PKCS7_C
++#endif
++
++#if CONFIG_IS_ENABLED(ASN1_DECODER)
++#define MBEDTLS_OID_C
++#define MBEDTLS_ASN1_PARSE_C
++#define MBEDTLS_ASN1_WRITE_C
++#endif
++
++#endif /* CONFIG_IS_ENABLED(MBEDTLS_LIB_X509) */
+diff --git a/lib/mbedtls/port/assert.h b/lib/mbedtls/port/assert.h
+new file mode 100644
+index 00000000000..490701aa9d0
+--- /dev/null
++++ b/lib/mbedtls/port/assert.h
+@@ -0,0 +1,12 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Dummy file to allow mbedtls linked with U-Boot to include assert.h
++ *
++ * Copyright (c) 2023 Linaro Limited
++ * Author: Raymond Mao <raymond.mao@linaro.org>
++ */
++
++#ifndef _MBEDTLS_ASSERT_H
++#define _MBEDTLS_ASSERT_H
++
++#endif /* _MBEDTLS_ASSERT_H */
 -- 
 2.25.1
 
