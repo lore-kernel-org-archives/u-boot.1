@@ -4,49 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4548C3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 16:11:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39AA4C3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 17:17:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1990788A05;
-	Wed, 31 Jul 2024 18:11:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=short.pl
+	by phobos.denx.de (Postfix) with ESMTP id 487128751B;
+	Wed, 31 Jul 2024 19:17:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rVSrmjxF";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CB2188A08; Wed, 31 Jul 2024 18:11:52 +0200 (CEST)
-Received: from mx01.ayax.eu (mx01.ayax.eu [188.137.98.110])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A3BB28861A; Wed, 31 Jul 2024 19:17:20 +0200 (CEST)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00DCE8897F
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 18:11:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 351DF86DBD
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 19:17:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=short.pl
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=gszymaszek@short.pl
-Received: from [192.168.192.146] (port=53536 helo=nx64de-b91e0e)
- by mx01.ayax.eu with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
- (envelope-from <gszymaszek@short.pl>)
- id 1sZBvV-002A2n-2O; Wed, 31 Jul 2024 18:11:45 +0200
-Date: Wed, 31 Jul 2024 18:11:43 +0200
-From: Grzegorz Szymaszek <gszymaszek@short.pl>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-3db1bc36bc2so596443b6e.0
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 10:17:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1722446237; x=1723051037; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=G1jQCRx0rT4JRqYkjf2wXLR54l/GbJlGHEAtmLf/ScM=;
+ b=rVSrmjxFQqXyJy7WnlR3+IEWPzPExy7u09AZx6ez5x0ypR1WB2Q37TO6bfTWLKFeHe
+ jjtxXg77gbPUcJo9HHHMBtKieiCfXEHrH4donupEWuzqng9Sih+6YE3SsZyMiLWKJ6wf
+ jQ2Enq2ndBDOTRXTWcAyArTMdbRf8wMb29488=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722446237; x=1723051037;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=G1jQCRx0rT4JRqYkjf2wXLR54l/GbJlGHEAtmLf/ScM=;
+ b=rXeFsy87189gIZN3qyyb80iEyr04LNpfosv/KPY95P5WweVE6WGVGWM/y+nLdd73jq
+ OlfNwt/6jH+sqks2rLyLvPBQu7lNG8cFTvuKIsybbr6QIYZGf6dfOKemh/+vrNgb+tY0
+ 1OW1KbEOYrlp+0saTN9gf3fYhtN5uJut6hXY6HLKGm6yk9tkDMx/xfGkPmHsYEIvZvwp
+ VKNU2fAzL/14+Qxb81rVnTcJOgb0sIKvuEQXdgsIiVfm7UHz9u/YD3gWzC7Kr40cRER8
+ wNGKF5/8jn1jKwwne7SRAkF+sQWWCBrD+DQNq25NAzS6tUKs0jAkpoQvFEy7yb23PyAC
+ g6UQ==
+X-Gm-Message-State: AOJu0Yyetu9/e0Ww8oC/rppe4mjASVlJvkeqPQuNwzejzvKeMEqZ4gkx
+ BWCtBq4NnhRMpadGKyLeq9xdBdAmpWPx3aUf2zLZZrH17k3NGG/YEJbhVmgud8k=
+X-Google-Smtp-Source: AGHT+IHTbE2+2OEwj6cOovL4qOo9fxq2j5kiOIGoddH55CjNcIoTRWca6cGETbmCx7y7sZA9wb6Hvg==
+X-Received: by 2002:aca:1106:0:b0:3d2:95f:da8c with SMTP id
+ 5614622812f47-3db42d37fdfmr2293588b6e.18.1722446236902; 
+ Wed, 31 Jul 2024 10:17:16 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-103-190.totalplay.net.
+ [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3db420f9bd5sm757664b6e.55.2024.07.31.10.17.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 31 Jul 2024 10:17:16 -0700 (PDT)
+Date: Wed, 31 Jul 2024 11:17:13 -0600
+From: Tom Rini <trini@konsulko.com>
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [PATCH 2/3] doc: stm32mp1: fix literal block markers (::)
-Message-ID: <ZqpiP594mbXqx7SI@nx64de-b91e0e>
-Mail-Followup-To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com
-References: <41ae952bf3f45545e3c6579463df3d0408f6343a.1722014005.git.gszymaszek@short.pl>
- <789acb2e22e681aa86302d522c9385a4bae34582.1722014005.git.gszymaszek@short.pl>
- <cc33dbd1-d4a9-4989-a236-f6cf8d950512@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: Pull request efi-2024-10-rc2
+Message-ID: <20240731171713.GD3794063@bill-the-cat>
+References: <bfbc4bba-ec7c-40af-a149-097b9bcaaf60@gmx.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="s1gmahYwqwnp6XyG"
+ protocol="application/pgp-signature"; boundary="pk7ITOXjHQKsf/6+"
 Content-Disposition: inline
-In-Reply-To: <cc33dbd1-d4a9-4989-a236-f6cf8d950512@gmx.de>
+In-Reply-To: <bfbc4bba-ec7c-40af-a149-097b9bcaaf60@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,56 +94,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---s1gmahYwqwnp6XyG
+--pk7ITOXjHQKsf/6+
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi Heinrich,
+On Wed, Jul 31, 2024 at 10:42:27AM +0200, Heinrich Schuchardt wrote:
 
-thank you for comprehensive review. I'll respond to the specific points
-later, but there's one thing I feel I should explain. In this series I
-intended to only fix/improve the reStructuredText/HTML syntax and then,
-if the changes were approved, I would go with making the actual text
-easier to understand, I have some drafts already prepared. So I'm not
-sure if fixing, for example, unnecessary root prompts is really in scope
-of this changeset.
+> Dear Tom,
+>=20
+> The following changes since commit 8877bc51a8a4d921ba2f163208b8b1a57ba47c=
+18:
+>=20
+>   Merge patch series "led: implement software blinking" (2024-07-30
+> 14:31:24 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/efi-2024-10-rc2
+>=20
+> for you to fetch changes up to 939afc80b6b5de23d70789f3cb3a391dd31319b1:
+>=20
+>   dm: use list_count_nodes() for counting list nodes (2024-07-31
+> 09:54:53 +0200)
+>=20
 
-On Wed, Jul 31, 2024 at 07:15:10AM +0200, Heinrich Schuchardt wrote:
-> Please, provide a commit message.
-
-(Two perhaps, not one.) Is it really necessary in case of such trivial
-changes? See sending_patches.rst:
-
-> Put a detailed description after the summary and blank line. If the
-> summary line is sufficient to describe the change (e.g. it is a trivial
-> spelling correction or whitespace update), you can omit the blank line
-> and detailed description.
-
-
-All the best
+Applied to u-boot/master, thanks!
 
 --=20
-Grzegorz
+Tom
 
---s1gmahYwqwnp6XyG
+--pk7ITOXjHQKsf/6+
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCgAdFiEEZT55kPBhnB69hD4ZeE9lGUIcpz4FAmaqYj8ACgkQeE9lGUIc
-pz7vhA/+M/rGwvJr/QiBQt08JxMX9glbpaUywssa6RyRHc8z1R3JsgtIOhLzZ33w
-KDosKdSf1ERwFcBafudwKosvK92VB5DtZa5g9NiyPSXS5eVvkrKbc0/oZA4VajHR
-KMLFJQw6aL9wxsbL/5jcBYl8O9nyrgjDRk/l3zl+EKNXS6WDUK+9InTvoD3ChRtL
-o6KvFlowraym9m3Cla2Ifkvz9UnA1qeqw5S2ReFE/7dnFqXsBqLXV9HoqJKr6FG3
-oygf4OAJznv9D4Lwj3im1w27HuBlhvZFhw0W/gCy9SzwHlGdVHwqnzQUkpq/bAE2
-YR0BZRh9KKQYXRkEbwnmiqrjo08bduJueEr+7erzb0qZj80vFDQolZGgd4d7T895
-jo2GcJ/arKtWVXisVzj4ba42n1yqHwHuj+iRyvR+FnnzM/8hzzszutZ9PvGBfyer
-SgqVsy+nIoxeofbae/bUYymMLkriOtbHWVSgGZO5hMUZ3UkJREZt/Khx1qJWk0lN
-CbssXL+i2zynEGMM9Nn6fSLacb5WMRR+RdT5nTYlejIbaMMTC+9xNogt856Vf9qW
-zTw2ea5bm9AmJfFTSIAVNWqHzPFV7pvlHWNZy5D/FBkztANyGw1dnUx7H7bZgD0t
-Ggd8X1TY+pWPP/pCVSYdg+NPp8/pknkog0NoviI0dPucZZENvpY=
-=WQfw
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaqcZYACgkQFHw5/5Y0
+tyw2DQwApEYTO0krtV3lwRGloEmH7HB4TJrRomS1qFZbMCtD3Q186pVCH7aiRQhc
+qexgh4KmzsgbtNMEX5PqIDP6aUmG5BMDn+vYQsJELbLZsrjsGnLGcMP3kSwsdFTc
+7kw1J70O9JKe/rzG5q5CzeUBRZ2JcTHT6XkbUktGmjTaz8C4FVJCNujg5cvYVm4u
+w2DEjIzntpaySfuXUKlpgpQcVc0K6VVmSNcLE5DxL94YoARr2xSak4un8Qgj9xel
+UJ+uLRGeYVQGxVhEiyN8CJy5GV7WEyaYvuxNps1a4PWom1ZY38vqQ4Mt+U1qzMJt
+5TnClOxm+WGqMI91PIf9zzti+lWOUr+fZrYUc+UtrB4X5Ee1IgLCRtJD+pBqPz8h
+85OYEVrMONCBTtjc+ApdRi/NrWxi+pRNcLLWesGr4i/W1oyU+KNGQsHn1YoPVoBl
+7gXLdHkZfyxzbdWItHgoGfmqUQJPlq3FajYyFmH+YF00tsWtT4zW91Ir3ad7afmd
+ivwl2STY
+=x6zg
 -----END PGP SIGNATURE-----
 
---s1gmahYwqwnp6XyG--
+--pk7ITOXjHQKsf/6+--
