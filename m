@@ -4,51 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0188BC3DA7F
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 16:08:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4548C3DA64
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 16:11:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FAB188A08;
-	Wed, 31 Jul 2024 18:08:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nod.at
+	by phobos.denx.de (Postfix) with ESMTP id 1990788A05;
+	Wed, 31 Jul 2024 18:11:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=short.pl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FAA988A2A; Wed, 31 Jul 2024 18:08:02 +0200 (CEST)
-Received: from lithops.sigma-star.at (lithops.sigma-star.at [195.201.40.130])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79DA08897F
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 18:08:00 +0200 (CEST)
+ id 1CB2188A08; Wed, 31 Jul 2024 18:11:52 +0200 (CEST)
+Received: from mx01.ayax.eu (mx01.ayax.eu [188.137.98.110])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 00DCE8897F
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 18:11:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=nod.at
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=richard@nod.at
-Received: from localhost (localhost [127.0.0.1])
- by lithops.sigma-star.at (Postfix) with ESMTP id 29F0F61966C1;
- Wed, 31 Jul 2024 18:08:00 +0200 (CEST)
-Received: from lithops.sigma-star.at ([127.0.0.1])
- by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id NYHuqLkWPPdn; Wed, 31 Jul 2024 18:07:59 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by lithops.sigma-star.at (Postfix) with ESMTP id A75E564A3D10;
- Wed, 31 Jul 2024 18:07:59 +0200 (CEST)
-Received: from lithops.sigma-star.at ([127.0.0.1])
- by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id XWPERpSG2Lsu; Wed, 31 Jul 2024 18:07:59 +0200 (CEST)
-Received: from foxxylove.corp.sigma-star.at (unknown [82.150.214.1])
- by lithops.sigma-star.at (Postfix) with ESMTPSA id 45E3061966C1;
- Wed, 31 Jul 2024 18:07:59 +0200 (CEST)
-From: Richard Weinberger <richard@nod.at>
-To: u-boot@lists.denx.de
-Cc: upstream+uboot@sigma-star.at, patrick.delaunay@foss.st.com,
- marek.vasut+renesas@mailbox.org, yangshiji66@outlook.com,
- xypron.glpk@gmx.de, eugeneuriev@gmail.com, raymond.mao@linaro.org,
- devarsht@ti.com, bmeng.cn@gmail.com, sjg@chromium.org, trini@konsulko.com,
- Richard Weinberger <richard@nod.at>
-Subject: [PATCH v2] bootstage: Fix out-of-bounds read in reloc_bootstage()
-Date: Wed, 31 Jul 2024 18:07:54 +0200
-Message-Id: <20240731160754.16263-1-richard@nod.at>
-X-Mailer: git-send-email 2.35.3
+ dmarc=fail (p=none dis=none) header.from=short.pl
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=gszymaszek@short.pl
+Received: from [192.168.192.146] (port=53536 helo=nx64de-b91e0e)
+ by mx01.ayax.eu with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <gszymaszek@short.pl>)
+ id 1sZBvV-002A2n-2O; Wed, 31 Jul 2024 18:11:45 +0200
+Date: Wed, 31 Jul 2024 18:11:43 +0200
+From: Grzegorz Szymaszek <gszymaszek@short.pl>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com
+Subject: Re: [PATCH 2/3] doc: stm32mp1: fix literal block markers (::)
+Message-ID: <ZqpiP594mbXqx7SI@nx64de-b91e0e>
+Mail-Followup-To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com
+References: <41ae952bf3f45545e3c6579463df3d0408f6343a.1722014005.git.gszymaszek@short.pl>
+ <789acb2e22e681aa86302d522c9385a4bae34582.1722014005.git.gszymaszek@short.pl>
+ <cc33dbd1-d4a9-4989-a236-f6cf8d950512@gmx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="s1gmahYwqwnp6XyG"
+Content-Disposition: inline
+In-Reply-To: <cc33dbd1-d4a9-4989-a236-f6cf8d950512@gmx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,95 +63,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-bootstage_get_size() returns the total size of the data structure
-including associated records.
-When copying from gd->bootstage, only the allocation size of gd->bootstag=
-e
-must be used. Otherwise too much memory is copied.
 
-This bug caused no harm so far because gd->new_bootstage is always
-large enough and reading beyond the allocation length of gd->bootstage
-caused no problem due to the U-Boot memory layout.
+--s1gmahYwqwnp6XyG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Fix by using the correct size and perform the initial copy directly
-in bootstage_relocate() to have the whole relocation process in the
-same function.
+Hi Heinrich,
 
-Signed-off-by: Richard Weinberger <richard@nod.at>
----
-Changes since v1:
-- Pass gd->new_bootstage to bootstage_relocate()
----
- common/board_f.c    | 8 +-------
- common/bootstage.c  | 8 ++++++--
- include/bootstage.h | 4 ++--
- 3 files changed, 9 insertions(+), 11 deletions(-)
+thank you for comprehensive review. I'll respond to the specific points
+later, but there's one thing I feel I should explain. In this series I
+intended to only fix/improve the reStructuredText/HTML syntax and then,
+if the changes were approved, I would go with making the actual text
+easier to understand, I have some drafts already prepared. So I'm not
+sure if fixing, for example, unnecessary root prompts is really in scope
+of this changeset.
 
-diff --git a/common/board_f.c b/common/board_f.c
-index 29e185137a..21a8944e2b 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -683,13 +683,7 @@ static int reloc_bootstage(void)
- 	if (gd->flags & GD_FLG_SKIP_RELOC)
- 		return 0;
- 	if (gd->new_bootstage) {
--		int size =3D bootstage_get_size();
--
--		debug("Copying bootstage from %p to %p, size %x\n",
--		      gd->bootstage, gd->new_bootstage, size);
--		memcpy(gd->new_bootstage, gd->bootstage, size);
--		gd->bootstage =3D gd->new_bootstage;
--		bootstage_relocate();
-+		bootstage_relocate(gd->new_bootstage);
- 	}
- #endif
-=20
-diff --git a/common/bootstage.c b/common/bootstage.c
-index b6c268d9f4..49acc9078a 100644
---- a/common/bootstage.c
-+++ b/common/bootstage.c
-@@ -54,12 +54,16 @@ struct bootstage_hdr {
- 	u32 next_id;		/* Next ID to use for bootstage */
- };
-=20
--int bootstage_relocate(void)
-+int bootstage_relocate(void *to)
- {
--	struct bootstage_data *data =3D gd->bootstage;
-+	struct bootstage_data *data;
- 	int i;
- 	char *ptr;
-=20
-+	debug("Copying bootstage from %p to %p\n", gd->bootstage, to);
-+	memcpy(to, gd->bootstage, sizeof(struct bootstage_data));
-+	data =3D gd->bootstage =3D to;
-+
- 	/* Figure out where to relocate the strings to */
- 	ptr =3D (char *)(data + 1);
-=20
-diff --git a/include/bootstage.h b/include/bootstage.h
-index f4e77b09d7..57792648c4 100644
---- a/include/bootstage.h
-+++ b/include/bootstage.h
-@@ -258,7 +258,7 @@ void show_boot_progress(int val);
-  * relocation, since memory can be overwritten later.
-  * Return: Always returns 0, to indicate success
-  */
--int bootstage_relocate(void);
-+int bootstage_relocate(void *to);
-=20
- /**
-  * Add a new bootstage record
-@@ -395,7 +395,7 @@ static inline ulong bootstage_add_record(enum bootsta=
-ge_id id,
-  * and won't even do that unless CONFIG_SHOW_BOOT_PROGRESS is defined
-  */
-=20
--static inline int bootstage_relocate(void)
-+static inline int bootstage_relocate(void *to)
- {
- 	return 0;
- }
+On Wed, Jul 31, 2024 at 07:15:10AM +0200, Heinrich Schuchardt wrote:
+> Please, provide a commit message.
+
+(Two perhaps, not one.) Is it really necessary in case of such trivial
+changes? See sending_patches.rst:
+
+> Put a detailed description after the summary and blank line. If the
+> summary line is sufficient to describe the change (e.g. it is a trivial
+> spelling correction or whitespace update), you can omit the blank line
+> and detailed description.
+
+
+All the best
+
 --=20
-2.35.3
+Grzegorz
 
+--s1gmahYwqwnp6XyG
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEZT55kPBhnB69hD4ZeE9lGUIcpz4FAmaqYj8ACgkQeE9lGUIc
+pz7vhA/+M/rGwvJr/QiBQt08JxMX9glbpaUywssa6RyRHc8z1R3JsgtIOhLzZ33w
+KDosKdSf1ERwFcBafudwKosvK92VB5DtZa5g9NiyPSXS5eVvkrKbc0/oZA4VajHR
+KMLFJQw6aL9wxsbL/5jcBYl8O9nyrgjDRk/l3zl+EKNXS6WDUK+9InTvoD3ChRtL
+o6KvFlowraym9m3Cla2Ifkvz9UnA1qeqw5S2ReFE/7dnFqXsBqLXV9HoqJKr6FG3
+oygf4OAJznv9D4Lwj3im1w27HuBlhvZFhw0W/gCy9SzwHlGdVHwqnzQUkpq/bAE2
+YR0BZRh9KKQYXRkEbwnmiqrjo08bduJueEr+7erzb0qZj80vFDQolZGgd4d7T895
+jo2GcJ/arKtWVXisVzj4ba42n1yqHwHuj+iRyvR+FnnzM/8hzzszutZ9PvGBfyer
+SgqVsy+nIoxeofbae/bUYymMLkriOtbHWVSgGZO5hMUZ3UkJREZt/Khx1qJWk0lN
+CbssXL+i2zynEGMM9Nn6fSLacb5WMRR+RdT5nTYlejIbaMMTC+9xNogt856Vf9qW
+zTw2ea5bm9AmJfFTSIAVNWqHzPFV7pvlHWNZy5D/FBkztANyGw1dnUx7H7bZgD0t
+Ggd8X1TY+pWPP/pCVSYdg+NPp8/pknkog0NoviI0dPucZZENvpY=
+=WQfw
+-----END PGP SIGNATURE-----
+
+--s1gmahYwqwnp6XyG--
