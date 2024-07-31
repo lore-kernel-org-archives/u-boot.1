@@ -4,44 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B7DFC3DA64
-	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 22:59:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2203FC3DA7F
+	for <u-boot@archiver.kernel.org>; Wed, 31 Jul 2024 23:09:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FA2688A7F;
-	Thu,  1 Aug 2024 00:59:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 29B8B88A9B;
+	Thu,  1 Aug 2024 01:09:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 791DF88AA7; Thu,  1 Aug 2024 00:59:36 +0200 (CEST)
-Received: from smtpbgsg2.qq.com (smtpbgsg2.qq.com [54.254.200.128])
+ id 6836F88AA7; Thu,  1 Aug 2024 01:09:02 +0200 (CEST)
+Received: from smtpbguseast2.qq.com (smtpbguseast2.qq.com [54.204.34.130])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22B2D88980
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 00:59:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 21F8A88980
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 01:08:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
-X-QQ-mid: bizesmtpsz2t1722466734tohpwig
-X-QQ-Originating-IP: 30BKFvMTeP5Rnv0AL/ua4AnSZixoeJ2J6guTAN8biSs=
+X-QQ-mid: bizesmtpsz1t1722467308tpv2ok5
+X-QQ-Originating-IP: +9h4j+T/BPAK783xTg7XnYQx/T0SmXFB6iLG20f9oE4=
 Received: from [192.168.159.131] ( [106.150.157.243])
  by bizesmtp.qq.com (ESMTP) with 
- id ; Thu, 01 Aug 2024 06:58:52 +0800 (CST)
+ id ; Thu, 01 Aug 2024 07:08:26 +0800 (CST)
 X-QQ-SSF: 0000000000000000000000000000000
 X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 9197254214758468330
-Message-ID: <10090C14C05B2540+b10b824f-020b-4d39-8c4f-7ef3a20d54e2@radxa.com>
-Date: Thu, 1 Aug 2024 07:58:52 +0900
+X-BIZMAIL-ID: 6620688350982495317
+Message-ID: <67FD7D4934C9209E+6a613b14-53c5-48fa-aa77-78dc711a4ed6@radxa.com>
+Date: Thu, 1 Aug 2024 08:08:25 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] board: rockchip: add Radxa ROCK 3 Model C
-To: Maxim Moskalets <maximmosk4@gmail.com>, trini@konsulko.com,
- u-boot@lists.denx.de, sjg@chromium.org
-Cc: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>,
- Jonas Karlman <jonas@kwiboo.se>
-References: <20240722105623.74606-1-Maxim.Moskalets@kaspersky.com>
+Subject: Re: [PATCH 5/5] board: rockchip: Add Radxa ZERO 3W/3E
+To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20240731065048.1199792-1-jonas@kwiboo.se>
+ <20240731065048.1199792-6-jonas@kwiboo.se>
 Content-Language: en-US
 From: FUKAUMI Naoki <naoki@radxa.com>
-In-Reply-To: <20240722105623.74606-1-Maxim.Moskalets@kaspersky.com>
+In-Reply-To: <20240731065048.1199792-6-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-QQ-SENDSIZE: 520
@@ -64,33 +65,33 @@ X-Virus-Status: Clean
 
 Hi,
 
-please cherry-pick below too
-https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git/commit/src/arm64/rockchip/rk3566-rock-3c.dts?h=v6.11-rc1-dts&id=dd40945a1d0e28ae6eaf9da04f8e2dcebf8233ea
-
-On 7/22/24 19:56, Maxim Moskalets wrote:
-> Based on rock-3a-rk3568_defconfig.
-> Tested on v1.31 revision.
+On 7/31/24 15:50, Jonas Karlman wrote:
+> The Radxa ZERO 3W/3E is an ultra-small, high-performance single board
+> computer based on the Rockchip RK3566, with a compact form factor and
+> rich interfaces.
 > 
-> Board Specifications:
-> - Rockchip RK3566
-> - 1/2/4GB LPDDR4 2112MT/s
-> - eMMC socket
-> - uSD card slot
-> - M.2 2230 Connector
-> - GbE LAN with POE
+> Implement rk_board_late_init() to set correct fdtfile env var and
+> board_fit_config_name_match() to load correct FIT config based on what
+> board is detected at runtime so a single board target can be used for
+> both board models.
+> 
+> Features tested on a ZERO 3W 8GB v1.11:
+> - SD-card boot
+> - eMMC boot
+> - USB gadget
+> - USB host
+> 
+> Features tested on a ZERO 3E 4GB v1.2:
+> - SD-card boot
+> - Ethernet
+> - USB gadget
+> - USB host
+> 
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 
-I saw "Waiting for PHY auto negotiation to complete......" message few 
-seconds when trying to ping on u-boot.
-it doesn't happen on RadxaZERO 3E
+for whole series,
 
-does it happen on your board?
-
-> - 3.5mm jack with mic
-> - HDMI 2.0, MIPI DSI/CSI
-> - USB 3.0 Host/OTG, USB 2.0 Host
-
-OTG is USB2.0 (upper) port
-https://radxa.com/products/rock3/3c/#techspec
+Tested-by FUKAUMI Naoki <naoki@radxa.com>
 
 Best regards,
 
@@ -98,120 +99,240 @@ Best regards,
 FUKAUMI Naoki
 Radxa Computer (Shenzhen) Co., Ltd.
 
-> - 40-pin GPIO expansion ports
-> 
-> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
-> Suggested-by: Jonas Karlman <jonas@kwiboo.se>
-> Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
 > ---
-> v4:
-> 	fixed typo in commit-msg
-> 	moved maintainers record to file for rk3568 boards
-> 	renamed from ROCK 3 Model C to ROCK3C
-> v3:
-> 	add suggested by Jonas Karlman <jonas@kwiboo.se> in
-> 	https://lore.kernel.org/all/bbb81dd1-e318-423d-8258-db7556ce6850@kwiboo.se/
-> v2:
-> 	rebase to updated upstream dts
-> ---
->   arch/arm/dts/rk3566-rock-3c-u-boot.dtsi | 10 +++
->   board/rockchip/evb_rk3568/MAINTAINERS   |  7 ++
->   configs/rock-3c-rk3566_defconfig        | 97 +++++++++++++++++++++++++
->   doc/board/rockchip/rockchip.rst         |  1 +
->   4 files changed, 115 insertions(+)
->   create mode 100644 arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
->   create mode 100644 configs/rock-3c-rk3566_defconfig
+>   arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi | 11 +++
+>   arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi | 11 +++
+>   arch/arm/mach-rockchip/rk3568/Kconfig         |  6 ++
+>   board/radxa/zero3-rk3566/Kconfig              | 12 +++
+>   board/radxa/zero3-rk3566/MAINTAINERS          |  6 ++
+>   board/radxa/zero3-rk3566/Makefile             |  3 +
+>   board/radxa/zero3-rk3566/zero3-rk3566.c       | 59 +++++++++++++
+>   configs/radxa-zero-3-rk3566_defconfig         | 85 +++++++++++++++++++
+>   doc/board/rockchip/rockchip.rst               |  1 +
+>   9 files changed, 194 insertions(+)
+>   create mode 100644 arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi
+>   create mode 100644 arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi
+>   create mode 100644 board/radxa/zero3-rk3566/Kconfig
+>   create mode 100644 board/radxa/zero3-rk3566/MAINTAINERS
+>   create mode 100644 board/radxa/zero3-rk3566/Makefile
+>   create mode 100644 board/radxa/zero3-rk3566/zero3-rk3566.c
+>   create mode 100644 configs/radxa-zero-3-rk3566_defconfig
 > 
-> diff --git a/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi b/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+> diff --git a/arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi b/arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi
 > new file mode 100644
-> index 00000000000..fd7f5367b75
+> index 000000000000..4025f5097af5
 > --- /dev/null
-> +++ b/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
-> @@ -0,0 +1,10 @@
+> +++ b/arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi
+> @@ -0,0 +1,11 @@
 > +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 > +
 > +#include "rk356x-u-boot.dtsi"
 > +
-> +&sfc {
-> +	flash@0 {
-> +		bootph-pre-ram;
-> +		bootph-some-ram;
-> +	};
+> +&saradc {
+> +	bootph-pre-ram;
 > +};
-> diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/evb_rk3568/MAINTAINERS
-> index e5b0986ead9..ba4884db8e1 100644
-> --- a/board/rockchip/evb_rk3568/MAINTAINERS
-> +++ b/board/rockchip/evb_rk3568/MAINTAINERS
-> @@ -69,3 +69,10 @@ S:	Maintained
->   F:	configs/rock-3a-rk3568_defconfig
->   F:	arch/arm/dts/rk3568-rock-3a.dts
->   F:	arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
 > +
-> +ROCK-3C
-> +M:	Jonas Karlman <jonas@kwiboo.se>
-> +M:	Maxim Moskalets <maximmosk4@gmail.com>
-> +S:	Maintained
-> +F:	arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
-> +F:	configs/rock-3c-rk3566_defconfig
-> diff --git a/configs/rock-3c-rk3566_defconfig b/configs/rock-3c-rk3566_defconfig
+> +&vcca_1v8 {
+> +	bootph-pre-ram;
+> +};
+> diff --git a/arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi b/arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi
 > new file mode 100644
-> index 00000000000..f44b202c8c3
+> index 000000000000..4025f5097af5
 > --- /dev/null
-> +++ b/configs/rock-3c-rk3566_defconfig
-> @@ -0,0 +1,97 @@
+> +++ b/arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi
+> @@ -0,0 +1,11 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +#include "rk356x-u-boot.dtsi"
+> +
+> +&saradc {
+> +	bootph-pre-ram;
+> +};
+> +
+> +&vcca_1v8 {
+> +	bootph-pre-ram;
+> +};
+> diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
+> index 014ebf9f0ba7..0f32f243be4e 100644
+> --- a/arch/arm/mach-rockchip/rk3568/Kconfig
+> +++ b/arch/arm/mach-rockchip/rk3568/Kconfig
+> @@ -32,6 +32,11 @@ config TARGET_QUARTZ64_RK3566
+>   	help
+>   	  Pine64 Quartz64 single board computer with a RK3566 SoC.
+>   
+> +config TARGET_RADXA_ZERO_3_RK3566
+> +	bool "Radxa ZERO 3W/3E"
+> +	help
+> +	  Radxa ZERO 3W/3E single board computers with a RK3566 SoC.
+> +
+>   endchoice
+>   
+>   config ROCKCHIP_BOOT_MODE_REG
+> @@ -54,5 +59,6 @@ source "board/anbernic/rgxx3_rk3566/Kconfig"
+>   source "board/hardkernel/odroid_m1/Kconfig"
+>   source "board/pine64/quartz64_rk3566/Kconfig"
+>   source "board/powkiddy/x55/Kconfig"
+> +source "board/radxa/zero3-rk3566/Kconfig"
+>   
+>   endif
+> diff --git a/board/radxa/zero3-rk3566/Kconfig b/board/radxa/zero3-rk3566/Kconfig
+> new file mode 100644
+> index 000000000000..7d46efc9c40f
+> --- /dev/null
+> +++ b/board/radxa/zero3-rk3566/Kconfig
+> @@ -0,0 +1,12 @@
+> +if TARGET_RADXA_ZERO_3_RK3566
+> +
+> +config SYS_BOARD
+> +	default "zero3-rk3566"
+> +
+> +config SYS_VENDOR
+> +	default "radxa"
+> +
+> +config SYS_CONFIG_NAME
+> +	default "evb_rk3568"
+> +
+> +endif
+> diff --git a/board/radxa/zero3-rk3566/MAINTAINERS b/board/radxa/zero3-rk3566/MAINTAINERS
+> new file mode 100644
+> index 000000000000..e5a5d856113d
+> --- /dev/null
+> +++ b/board/radxa/zero3-rk3566/MAINTAINERS
+> @@ -0,0 +1,6 @@
+> +RADXA-ZERO-3-RK3566
+> +M:	Jonas Karlman <jonas@kwiboo.se>
+> +S:	Maintained
+> +F:	board/radxa/zero3-rk3566
+> +F:	configs/radxa-zero-3-rk3566_defconfig
+> +F:	arch/arm/dts/rk3566-radxa-zero-3*
+> diff --git a/board/radxa/zero3-rk3566/Makefile b/board/radxa/zero3-rk3566/Makefile
+> new file mode 100644
+> index 000000000000..b28b58ed5d87
+> --- /dev/null
+> +++ b/board/radxa/zero3-rk3566/Makefile
+> @@ -0,0 +1,3 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +
+> +obj-y += zero3-rk3566.o
+> diff --git a/board/radxa/zero3-rk3566/zero3-rk3566.c b/board/radxa/zero3-rk3566/zero3-rk3566.c
+> new file mode 100644
+> index 000000000000..cf30c4e38987
+> --- /dev/null
+> +++ b/board/radxa/zero3-rk3566/zero3-rk3566.c
+> @@ -0,0 +1,59 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +
+> +#include <linux/errno.h>
+> +#include <linux/kernel.h>
+> +#include <adc.h>
+> +#include <env.h>
+> +
+> +#define HW_ID_CHANNEL	1
+> +
+> +struct board_model {
+> +	unsigned int low;
+> +	unsigned int high;
+> +	const char *fdtfile;
+> +};
+> +
+> +static const struct board_model board_models[] = {
+> +	{ 230, 270, "rockchip/rk3566-radxa-zero-3w.dtb" },
+> +	{ 400, 450, "rockchip/rk3566-radxa-zero-3e.dtb" },
+> +};
+> +
+> +static const struct board_model *get_board_model(void)
+> +{
+> +	unsigned int val;
+> +	int i, ret;
+> +
+> +	ret = adc_channel_single_shot("saradc@fe720000", HW_ID_CHANNEL, &val);
+> +	if (ret)
+> +		return NULL;
+> +
+> +	for (i = 0; i < ARRAY_SIZE(board_models); i++) {
+> +		unsigned int min = board_models[i].low;
+> +		unsigned int max = board_models[i].high;
+> +
+> +		if (min <= val && val <= max)
+> +			return &board_models[i];
+> +	}
+> +
+> +	return NULL;
+> +}
+> +
+> +int rk_board_late_init(void)
+> +{
+> +	const struct board_model *model = get_board_model();
+> +
+> +	if (model)
+> +		env_set("fdtfile", model->fdtfile);
+> +
+> +	return 0;
+> +}
+> +
+> +int board_fit_config_name_match(const char *name)
+> +{
+> +	const struct board_model *model = get_board_model();
+> +
+> +	if (model && !strcmp(name, model->fdtfile))
+> +		return 0;
+> +
+> +	return -EINVAL;
+> +}
+> diff --git a/configs/radxa-zero-3-rk3566_defconfig b/configs/radxa-zero-3-rk3566_defconfig
+> new file mode 100644
+> index 000000000000..7606edf393ed
+> --- /dev/null
+> +++ b/configs/radxa-zero-3-rk3566_defconfig
+> @@ -0,0 +1,85 @@
 > +CONFIG_ARM=y
 > +CONFIG_SKIP_LOWLEVEL_INIT=y
 > +CONFIG_COUNTER_FREQUENCY=24000000
 > +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_SF_DEFAULT_SPEED=24000000
-> +CONFIG_SF_DEFAULT_MODE=0x2000
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-rock-3c"
+> +CONFIG_SPL_GPIO=y
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-radxa-zero-3w"
 > +CONFIG_ROCKCHIP_RK3568=y
-> +CONFIG_ROCKCHIP_SPI_IMAGE=y
 > +CONFIG_SPL_SERIAL=y
+> +CONFIG_TARGET_RADXA_ZERO_3_RK3566=y
 > +CONFIG_DEBUG_UART_BASE=0xFE660000
 > +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
-> +CONFIG_SPL_SPI=y
 > +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_PCI=y
 > +CONFIG_DEBUG_UART=y
-> +CONFIG_AHCI=y
 > +CONFIG_FIT=y
 > +CONFIG_FIT_VERBOSE=y
 > +CONFIG_SPL_FIT_SIGNATURE=y
 > +CONFIG_SPL_LOAD_FIT=y
 > +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-rock-3c.dtb"
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-radxa-zero-3w.dtb"
 > +# CONFIG_DISPLAY_CPUINFO is not set
 > +CONFIG_DISPLAY_BOARDINFO_LATE=y
 > +CONFIG_SPL_MAX_SIZE=0x40000
 > +CONFIG_SPL_PAD_TO=0x7f8000
 > +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_SPI_LOAD=y
-> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+> +CONFIG_SPL_POWER=y
 > +CONFIG_SPL_ATF=y
 > +CONFIG_CMD_GPIO=y
 > +CONFIG_CMD_GPT=y
 > +CONFIG_CMD_I2C=y
 > +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PCI=y
-> +CONFIG_CMD_POWEROFF=y
 > +CONFIG_CMD_USB=y
+> +CONFIG_CMD_ROCKUSB=y
+> +CONFIG_CMD_USB_MASS_STORAGE=y
 > +# CONFIG_CMD_SETEXPR is not set
 > +CONFIG_CMD_PMIC=y
 > +CONFIG_CMD_REGULATOR=y
 > +# CONFIG_SPL_DOS_PARTITION is not set
 > +CONFIG_SPL_OF_CONTROL=y
 > +CONFIG_OF_LIVE=y
+> +CONFIG_OF_LIST="rockchip/rk3566-radxa-zero-3w rockchip/rk3566-radxa-zero-3e"
 > +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
 > +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
 > +CONFIG_SPL_DM_SEQ_ALIAS=y
 > +CONFIG_SPL_REGMAP=y
 > +CONFIG_SPL_SYSCON=y
-> +CONFIG_SCSI_AHCI=y
-> +CONFIG_AHCI_PCI=y
+> +CONFIG_SPL_ADC=y
 > +CONFIG_SPL_CLK=y
+> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
 > +CONFIG_ROCKCHIP_GPIO=y
 > +CONFIG_SYS_I2C_ROCKCHIP=y
 > +CONFIG_LED=y
@@ -223,48 +344,41 @@ Radxa Computer (Shenzhen) Co., Ltd.
 > +CONFIG_MMC_SDHCI=y
 > +CONFIG_MMC_SDHCI_SDMA=y
 > +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_SF_DEFAULT_BUS=4
-> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-> +CONFIG_SPI_FLASH_GIGADEVICE=y
-> +CONFIG_SPI_FLASH_MACRONIX=y
-> +CONFIG_SPI_FLASH_WINBOND=y
-> +CONFIG_SPI_FLASH_XTX=y
 > +CONFIG_PHY_REALTEK=y
 > +CONFIG_DWC_ETH_QOS=y
 > +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-> +CONFIG_NVME_PCI=y
-> +CONFIG_PCIE_DW_ROCKCHIP=y
 > +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
 > +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
 > +CONFIG_SPL_PINCTRL=y
 > +CONFIG_DM_PMIC=y
+> +CONFIG_DM_PMIC_FAN53555=y
 > +CONFIG_PMIC_RK8XX=y
+> +CONFIG_SPL_DM_REGULATOR=y
+> +CONFIG_SPL_DM_REGULATOR_FIXED=y
 > +CONFIG_REGULATOR_RK8XX=y
 > +CONFIG_SPL_RAM=y
-> +CONFIG_SCSI=y
 > +CONFIG_BAUDRATE=1500000
 > +CONFIG_DEBUG_UART_SHIFT=2
 > +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_ROCKCHIP_SFC=y
 > +CONFIG_SYSRESET=y
+> +CONFIG_SYSRESET_PSCI=y
 > +CONFIG_USB=y
 > +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
 > +CONFIG_USB_DWC3=y
 > +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_USB_GADGET=y
+> +CONFIG_USB_GADGET_DOWNLOAD=y
+> +CONFIG_USB_FUNCTION_ROCKUSB=y
 > +CONFIG_ERRNO_STR=y
 > diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index bedc52e03e2..60357af6caa 100644
+> index a78d6dbedb6d..eadca0ceb2a5 100644
 > --- a/doc/board/rockchip/rockchip.rst
 > +++ b/doc/board/rockchip/rockchip.rst
-> @@ -105,6 +105,7 @@ List of mainline supported Rockchip boards:
->        - Pine64 SOQuartz on Model A (soquartz-model-a-rk3566)
+> @@ -107,6 +107,7 @@ List of mainline supported Rockchip boards:
 >        - Powkiddy X55 (powkiddy-x55-rk3566)
 >        - Radxa CM3 IO Board (radxa-cm3-io-rk3566)
-> +     - Radxa ROCK 3C (rock-3c-rk3566)
+>        - Radxa ROCK 3C (rock-3c-rk3566)
+> +     - Radxa ZERO 3W/3E (radxa-zero-3-rk3566)
 >   
 >   * rk3568
 >        - Rockchip Evb-RK3568 (evb-rk3568)
