@@ -4,71 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD4F8C3DA64
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 17:45:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A1ADC3DA64
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 19:29:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04D7D889D2;
-	Thu,  1 Aug 2024 19:45:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 88E7E8874D;
+	Thu,  1 Aug 2024 21:29:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Cit7ka2g";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XTC0hTKt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D50A88B33; Thu,  1 Aug 2024 19:45:12 +0200 (CEST)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id D4D97886F1; Thu,  1 Aug 2024 21:29:03 +0200 (CEST)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5849888297
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 19:45:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0482288B44
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 21:28:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-7a20c529c77so150296485a.1
- for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 10:45:10 -0700 (PDT)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6b797234b09so23012456d6.0
+ for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 12:28:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722534309; x=1723139109; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=h2yUkieIvWUOicBEBF6knA1wCJfqbyXV1gfBJYt5Aww=;
- b=Cit7ka2gYbRCbrx9pzZAGBCt+BRIwl5jPTD8nDKTLh8JoyPrEMpzRqYduU0GOI7uD3
- JkLtJam4XqpSIvBcKyuxwM3gbeKP2d3bllwkiRZUPGqLJGfEvujD+M8i/Y5feCl/24uc
- pmcbo9CkI70CJOYh97PFzH4UuS8RxWzl9s2Nw=
+ d=chromium.org; s=google; t=1722540539; x=1723145339; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=E6mWbCjUtGwKwDSuRGD5TKshE5tAp14lkh785ufGl4w=;
+ b=XTC0hTKtQn8TTIVUlTy6xeuB/1irw12KNfJVRRQw4UwceyXQINfY9tRUz074rjicUj
+ OxIE1BmSItO0eBvkDS2A7KiAIhDNnyGzCt07iWRs4IyMo5pyhIcAwewV9cTMYZZjRHp4
+ Dw490HuJlwrRYD3a/ZNbD4mjgNZ9mrslBjgEw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722534309; x=1723139109;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=h2yUkieIvWUOicBEBF6knA1wCJfqbyXV1gfBJYt5Aww=;
- b=OoGTprdDg+EEX3ka5dtf7Rx6CkMPTL5n72JykbL4gXt2DPWhhOAIQM9krAMH8cm6hM
- MADe7GB1UVNm0cdc5UpSt2bzPbuYRENAcfVh/XBrD3Btkp7AWQcRElOyqk9u0QPbF4mf
- du6cVdFb01C0heDWMbg92yA4c4mUP5Q/lrVa5wkmiOJwgRXwfTOZpXsdY+zgXSGF7XFV
- zr5KJtst2RMMRk/JOqsF05o4m/OEE0dkMDTE3dgVWddQYoZgYx/9DMzmp5PkD4azaCZk
- wKyrxF/5tC6H+fYV9PUwDzIho/55e4HDPTcKqfkqwy3aQqDPbVdMezoSM7MTK5b8BIVw
- LjDg==
-X-Gm-Message-State: AOJu0YwYnZqAP+B4VwJndm2EGkJSp8P2XYb85NlEm1PTV1SVqet+kSlL
- EBrbRxiofIwDZi0z4datLFqXBGRsaF68XpbCu6duWY5hp4oEpL5g9hyAOB8HJtRvdHdr9L9stJh
- TaTziBpjGr8QKjcR/KRHvnkH1WphBuaJxQ1yYJ73juY9Ys3M=
-X-Google-Smtp-Source: AGHT+IESEWU7uKGJUGpdvpmeUI8UyW+qyVZ0UPEOPS1ODoA4vcCb5UBIXWC24Dlk92/YU6ofUMC3oAZda44dJTMSffc=
-X-Received: by 2002:a05:6214:5b05:b0:6b5:17a2:887c with SMTP id
- 6a1803df08f44-6bb98379afamr13738636d6.10.1722534309010; Thu, 01 Aug 2024
- 10:45:09 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1722540539; x=1723145339;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=E6mWbCjUtGwKwDSuRGD5TKshE5tAp14lkh785ufGl4w=;
+ b=CqqYxNKYDkfBuF3+7drhiglj9bJYkwHbK9aKpYs+eE6g/bYIobjD+2ha5lHAxw+Mvd
+ 2JTfBlVpO3JAlqaRnncQdZt4bULtv7hjK4gtiODF0BERfXwmbSDmK3h+8Jrz5mP6+wMF
+ uHQ1BwodQR3vWuDddyo5azkCen86RlJqrfGQNRKSzuqmEXw5xpT8SY5/Gty9MvoHDNdj
+ Cp4RTwgEufKF4Mw89aMvD3MluiIWqc1bZ3Sd687zAIPHDCb6VdRZVFse2jn6nBURIapU
+ 8KhohPnmxBhBFCpwPImS9XAvKp8q4XoEDfZm3uf2RYnQMRoBG4n0B135A8WyMpK+zZSD
+ 6yoA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWy90JWh0dOo7G6gLA7IMyaRDYFFT6nurcnL70bTE8oSDpNHtv/bucz1Jj6VgaiiWO6eeovGOiUy4XalAat2Nmip+rkrg==
+X-Gm-Message-State: AOJu0YwDyxZr5how3iTGOtXpYS7+RdB/xptIqVWx9/LR2oD5vW38A6Vw
+ 8bchYQaA4T4TCAkhXQhRVxQXaghXMGV7pzWqX4wJApAIftN4Sv/0aOrNnnje0L2UBnGLIKJQawT
+ /dFwSbSvzSLfYDXyaWnb/ohkVMW+8TEXBymdg
+X-Google-Smtp-Source: AGHT+IEyl1/ZlRX1AfrBt87Zovi0oxEXY45sCO+1jX3hi5gw4C+k56Tzg2k7XvT1gfnuxKHXWYwAaVOo8haeIIdaUHg=
+X-Received: by 2002:a05:6214:3d85:b0:6b5:684:2d5 with SMTP id
+ 6a1803df08f44-6bb9868cac1mr20734066d6.4.1722540538784; Thu, 01 Aug 2024
+ 12:28:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240730144035.3992996-1-sjg@chromium.org>
- <20240730144035.3992996-3-sjg@chromium.org>
- <CADg8p94BuoZzqhjE8eioS8TOHP=iyEK6LkBsTys78hLTf54x_g@mail.gmail.com>
- <CAFLszTgOPQouuUB2mPL2z-S=3=swuah9uppJu1vtFzLS4RE1wQ@mail.gmail.com>
- <CADg8p96G==TRZkwN5axp9pjZR9AQeDPhD9aYaffvcJAbKUhNWQ@mail.gmail.com>
-In-Reply-To: <CADg8p96G==TRZkwN5axp9pjZR9AQeDPhD9aYaffvcJAbKUhNWQ@mail.gmail.com>
+References: <20240731134257.686017-1-admin@hifiphile.com>
+ <CAFLszTiAjodH7P50ryJv7NZCAn5zahT=gBrvs+sNUPX0CDdb-Q@mail.gmail.com>
+ <CA+GyqeZEJJocLXRKP5aAeKeZABzEGqkBqagRZyvwJjE2bjh7sw@mail.gmail.com>
+In-Reply-To: <CA+GyqeZEJJocLXRKP5aAeKeZABzEGqkBqagRZyvwJjE2bjh7sw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 1 Aug 2024 11:44:58 -0600
-Message-ID: <CAFLszTg-T6LQpfd=WDs-P9WtF+zhFtvLBE-6pXtsYZ0VmDNh3w@mail.gmail.com>
-Subject: Re: [RFC PATCH 2/4] lmb: Tighten up the code in lmb_add_region_flags()
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Thu, 1 Aug 2024 13:28:47 -0600
+Message-ID: <CAFLszTjJBtofb0cuPaKSV6S5+6DfaWYt86TYK7pfmtAxQpgB4g@mail.gmail.com>
+Subject: Re: [RFC PATCH 0/4] dm: Duplicate uclass name fix and alias
+ improvements
+To: Zixun LI <admin@hifiphile.com>
+Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,133 +90,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
+Hi Zixun,
 
-On Thu, 1 Aug 2024 at 10:19, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Thu, 1 Aug 2024 at 12:37, Zixun LI <admin@hifiphile.com> wrote:
 >
-> On Thu, 1 Aug 2024 at 21:42, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Sughosh,
-> >
-> > On Thu, 1 Aug 2024 at 08:58, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > >
-> > > On Tue, 30 Jul 2024 at 20:10, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > This function has more special cases than it needs. Simplify it to
-> > > > reduce code size and complexity.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > >  lib/lmb.c | 57 +++++++++++++++++++------------------------------------
-> > > >  1 file changed, 19 insertions(+), 38 deletions(-)
-> > > >
-> > > > diff --git a/lib/lmb.c b/lib/lmb.c
-> > > > index c11ce308c5b..83b060a2f4d 100644
-> > > > --- a/lib/lmb.c
-> > > > +++ b/lib/lmb.c
-> > > > @@ -396,14 +396,6 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
-> > > >         if (alist_err(lmb_rgn_lst))
-> > > >                 return -1;
-> > > >
-> > > > -       if (alist_empty(lmb_rgn_lst)) {
-> > > > -               rgn[0].base = base;
-> > > > -               rgn[0].size = size;
-> > > > -               rgn[0].flags = flags;
-> > > > -               lmb_rgn_lst->count = 1;
-> > > > -               return 0;
-> > > > -       }
-> > > > -
-> > > >         /* First try and coalesce this LMB with another. */
-> > > >         for (i = 0; i < lmb_rgn_lst->count; i++) {
-> > > >                 phys_addr_t rgnbase = rgn[i].base;
-> > > > @@ -448,50 +440,39 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
-> > > >                 }
-> > > >         }
-> > > >
-> > > > -       if (i < lmb_rgn_lst->count - 1 &&
-> > > > -           rgn[i].flags == rgn[i + 1].flags) {
-> > > > -               if (lmb_regions_adjacent(lmb_rgn_lst, i, i + 1)) {
-> > > > -                       lmb_coalesce_regions(lmb_rgn_lst, i, i + 1);
-> > > > -                       coalesced++;
-> > > > -               } else if (lmb_regions_overlap(lmb_rgn_lst, i, i + 1)) {
-> > > > -                       /* fix overlapping area */
-> > > > -                       lmb_fix_over_lap_regions(lmb_rgn_lst, i, i + 1);
-> > > > -                       coalesced++;
-> > > > +       if (lmb_rgn_lst->count && i < lmb_rgn_lst->count - 1) {
-> > > > +               rgn = lmb_rgn_lst->data;
-> > > > +               if (rgn[i].flags == rgn[i + 1].flags) {
-> > > > +                       if (lmb_regions_adjacent(lmb_rgn_lst, i, i + 1)) {
-> > > > +                               lmb_coalesce_regions(lmb_rgn_lst, i, i + 1);
-> > > > +                               coalesced++;
-> > > > +                       } else if (lmb_regions_overlap(lmb_rgn_lst, i, i + 1)) {
-> > > > +                               /* fix overlapping area */
-> > > > +                               lmb_fix_over_lap_regions(lmb_rgn_lst, i, i + 1);
-> > > > +                               coalesced++;
-> > > > +                       }
-> > > >                 }
-> > > >         }
-> > > >
-> > > >         if (coalesced)
-> > > >                 return coalesced;
-> > > >
-> > > > -       if (alist_full(lmb_rgn_lst)) {
-> > > > -               if (!alist_expand_by(lmb_rgn_lst, lmb_rgn_lst->alloc * 2))
-> > > > -                       return -1;
-> > > > -               else
-> > > > -                       rgn = lmb_rgn_lst->data;
-> > > > -       }
-> > > > +       if (!alist_add_placeholder(lmb_rgn_lst))
-> > > > +               return -1;
-> > > > +       rgn = lmb_rgn_lst->data;
-> > >
-> > > I think the above should have a check for alist_full(), and then add
-> > > to the list if full. Else we simply go on adding to the list on every
-> > > new node that gets added.
-> >
-> > At this point in the function, we know that we are adding a new entry.
-> > We could have an anlist_insert() perhaps?
-> >
-> > >
-> > > >
-> > > >         /* Couldn't coalesce the LMB, so add it to the sorted table. */
-> > > >         for (i = lmb_rgn_lst->count - 1; i >= 0; i--) {
-> > > > -               if (base < rgn[i].base) {
-> > > > -                       rgn[i + 1].base = rgn[i].base;
-> > > > -                       rgn[i + 1].size = rgn[i].size;
-> > > > -                       rgn[i + 1].flags = rgn[i].flags;
-> > > > +               if (i && base < rgn[i - 1].base) {
-> > > > +                       rgn[i] = rgn[i - 1];
-> > > >                 } else {
-> > > > -                       rgn[i + 1].base = base;
-> > > > -                       rgn[i + 1].size = size;
-> > > > -                       rgn[i + 1].flags = flags;
-> > > > +                       rgn[i].base = base;
-> > > > +                       rgn[i].size = size;
-> > > > +                       rgn[i].flags = flags;
-> > > >                         break;
-> > > >                 }
-> > > >         }
-> > >
-> > > With the logic that you put above, should the loop not have 'i'
-> > > initialised to lmb_rgn_lst-count? I mean
-> > >
-> > > for (i = lmb_rgn_lst->count; i >= 0; i--)
-> > >
-> > > Else we are overwriting one region?
-> >
-> > It starts by doing the assignment rgn[count - 1 + 1] = rgn[count - 1],
-> > which I believe is correct?
+> Hi Simon,
 >
-> That was the earlier logic, but now this is being replaced by
+> On Thu, Aug 1, 2024 at 4:42=E2=80=AFPM Simon Glass <sjg@chromium.org> wro=
+te:
+> >
+> > Can we rename the gadget uclass to usb_gadget or similar, then update
+> > the aliases?
+> >
 >
->  +               if (i && base < rgn[i - 1].base) {
->  +                       rgn[i] = rgn[i - 1];
->
-> Which means 'i' should be initialised to lmb_rgn_cnt->count? If you
-> see the patch, the for loop initialisation is not being changed.
+> You mean split patch no.4 into 2 parts, first rename the class to usb_gad=
+get
+> before doing the alias job ?
 
-OK, well I'll let you sort that out :-)
+Yes I suppose so. I am trying to avoid adding the extra field to the
+uclass, just for the use of one uclass.
+
+>
+> > I think it makes sense to show the seq instead of the index, but
+> > please update the header for the table to say 'Seq'
+>
+> Will do.
+>
+> > I assume no tests need updating, but please do add a note to
+> > doc/usage/cmd/bind.rst
+>
+> Will do.
+>
+> Regards,
+> Zixun LI
 
 Regards,
 Simon
