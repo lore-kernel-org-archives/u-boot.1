@@ -4,115 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ABF9C52D54
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:07:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AFCAC3DA64
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:20:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0402D88B3A;
-	Thu,  1 Aug 2024 16:06:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id D52768880B;
+	Thu,  1 Aug 2024 16:20:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=fiona.klute@gmx.de header.b="aKa8UrJs";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="B+8/X4rB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3323B88A15; Thu,  1 Aug 2024 13:32:40 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0BA8A8880B; Thu,  1 Aug 2024 16:20:28 +0200 (CEST)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D879F88A15
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 13:32:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32869884BE
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:20:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=fiona.klute@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1722511957; x=1723116757; i=fiona.klute@gmx.de;
- bh=f+7s0IJ5NL2kfXicxLyuD5dHsNjhkqWxUfbrXvpch5A=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:From:Subject:
- Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=aKa8UrJsCJyWtCswBEj+V4IeKofhUXBIDwSPyopkiXw/+38XDeuewxA7vweIFbh9
- 6AcWGqn4YJruPnk9PDwWBVQsAimhLq4WZ2qHLRPxEpZQo8ToedPBVNI4l0Y3vjDmS
- ygdNyGTs3aKuLmt/zOAAsGUrIaku2uyY1bNtv4xZwpypija+zUguZm2pJo7QoVwbE
- h1/t7lOv0TzwAVR1gn8cTEQKK1q95yqi6gJ0P1D2JWWJocyyRBntIGYsG3zpSCPm5
- HW5ZWts5laeGu9rBuiLRHmow5ZtYCPssaVpv1Ru4CG/I9H5d3F1jFMCc6oREOlG1w
- CpEN8o57hyglv9RZ0A==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.7.2] ([85.22.123.85]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mi2Jn-1s4X4e1SXh-00dGPd for
- <u-boot@lists.denx.de>; Thu, 01 Aug 2024 13:32:37 +0200
-Message-ID: <75114aa0-2de7-4f5c-b764-0953ebf08263@gmx.de>
-Date: Thu, 1 Aug 2024 13:32:36 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-26109c97728so4277459fac.0
+ for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:20:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1722522023; x=1723126823; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=x1hjWmZeT0RW0ZMNW1K1TnSt4FiDWQbrnxi8O3nIRCM=;
+ b=B+8/X4rBTSuNFw/S8wcZDlPe/RgWCBVL6b9nYReb7WU5otilb0GT9aWKkUWbmRLy3X
+ 6O3GSldSGBDQ8K3dYiMKz6r7lrTucEz/3hxYm/5UPPhhdjpglatedusmH9PZ7gjsTbDE
+ ZDam0IgEnWL0DOAPIQmMD+g2ppfdgmsPYiXIE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722522023; x=1723126823;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=x1hjWmZeT0RW0ZMNW1K1TnSt4FiDWQbrnxi8O3nIRCM=;
+ b=oq3MXYUE5RQN7NEkf3ghRHBlA4w2ErO2uBDIMqrW45Oi/QeOPRjCdyzejolsTWhQJY
+ foOUfzJHbj7MVaE7eW1+h+UIaJXpH726E9P74pQdP6j2P70sxOD5ouIm7Y/lzNW9bjGm
+ PPnhUqzzepcjAqHrM/NVENfsMC2cXLWPNR9Qf1l7rUg1OCSGKfkZMRlv2V42AzN6FKBF
+ 0LJpfn9Dd0e8I3G+00Xax1SYdvwM+HJxN3U+3BKNuUw0Mv7Ovw0lwaUDxjacAiC/Su+d
+ TqyELlsjlEOAFS22Am4LCemrb8H9ZNEyRLhwFZKnfsHjBEXY7O+OcD5EqvgdTFIz0Y6n
+ Lw3w==
+X-Gm-Message-State: AOJu0Yz619NIkDHCU2t6TKi+2fQnAtWq6GZEK6IaPZoqXk5MdAgi1R27
+ dtySb+iKft1s937UDB/x9IPxcaIQMtjvdz3bvV60xV7NNZ525wgaZnG0REQAxyA=
+X-Google-Smtp-Source: AGHT+IGDFxUc0ptck9Ro0qTCFgSpRQ2RDpAWVUXUVhWkIezE2eeWDCAOFzwb8nVU5KHNP//3+3uYIA==
+X-Received: by 2002:a05:6870:41d2:b0:254:c777:6327 with SMTP id
+ 586e51a60fabf-26891e92eeamr302065fac.36.1722522022863; 
+ Thu, 01 Aug 2024 07:20:22 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-103-190.totalplay.net.
+ [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2653e446f07sm3108167fac.13.2024.08.01.07.20.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Aug 2024 07:20:22 -0700 (PDT)
+Date: Thu, 1 Aug 2024 08:20:17 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Philip Oberfichtner <pro@denx.de>
+Cc: u-boot@lists.denx.de, bmeng.cn@gmail.com, caleb.connolly@linaro.org,
+ christophe.roullier@foss.st.com, epsi@gmx.de,
+ eugen.hristev@collabora.com, festevam@gmail.com,
+ forbidden405@outlook.com, ivprusov@salutedevices.com,
+ joe.hershberger@ni.com, jonas@kwiboo.se, kever.yang@rock-chips.com,
+ leyfoon.tan@starfivetech.com, marek.vasut+renesas@mailbox.org,
+ marjolaine.amate@odyssee-systemes.fr, neil.armstrong@linaro.org,
+ n-francis@ti.com, patrice.chotard@foss.st.com,
+ patrick.delaunay@foss.st.com, philipp.tomsich@vrull.eu,
+ rfried.dev@gmail.com, seanga2@gmail.com,
+ sebastian.reichel@collabora.com, sebastien.szymanski@armadeus.com,
+ sjg@chromium.org, sumit.garg@linaro.org, xypron.glpk@gmx.de, marex@denx.de
+Subject: Re: [PATCH v3 0/5] net: dwc_eth_qos: Add glue driver for Intel MAC
+Message-ID: <20240801142017.GA4041738@bill-the-cat>
+References: <20240717122906.117861-1-pro@denx.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US, de-DE-1901, de-DE
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-From: Fiona Klute <fiona.klute@gmx.de>
-Autocrypt: addr=fiona.klute@gmx.de; keydata=
- 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
-Subject: Selecting serial device for console
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:DaLuPVoP1ervOlnHDfVaQKT25I9AhF1yvg7TVr/DcEbW9JNcDNR
- lul+Q7WjCLiiYL6fwsDpLnXIva7OWrUb9jGGUqY1NpShkI78TPnsgWulSrAkhuA9g2dVRTN
- a3Vrb4CMPWet4ys/mCDORkttJ6jw1iBjq3AceTYF/PvAKsyuMtEmD5/R4yWlZGsvhtpY42S
- Q+OwJcKu59CN76UBBIDhw==
-UI-OutboundReport: notjunk:1;M01:P0:2A4tQqKRNUY=;v8zotpOHDHEs44yG5UrFJwGoEXJ
- vXlrJREYUQDYRkWnDhSGodlNBkGFrCA/m41nUxAiT74hEdAb2aYgrU6a5ndCerR1OYPaxSN4u
- 8JyX4P50hPTHr4GOX/aHtn8LzOj3bDwQWasgoHBi+DDCfBNDQe2t5nX156ON8adUzqeUmBPPO
- kXFF81Rq/Z5P+FRQWY+ugs7pFRqQJoCPZyKcZeGAEetLI+YKezyMZVzAUtGrWtSl8XHWPVYCX
- YsDFv+5b7runLVrh9L42hnaqVDESeQmY855cwP25/gcRqpLR/TdXuBpMOD4vQkAjYgxtdU+nn
- nFinQs92sPX0fbKozHj4rBZ8A3sW1aK1CUd0pR7jGHKk6Bfu6x7+PyJgQXueFfajMFT9QvO4E
- xMDGipP8gjvU4dpOK/cr9H7HVoimK92w44Mxh293558unhBj7wK0THeWttvi613rLgA/P/3Ix
- nrT08cbFKEVGLZ3qdJ4ssBQAuutdG7m76uqzbiW7HaRBbxSlAI9gkDptW3vfHoiShCP/5xmaJ
- IA49Jt0nWUHVmBIYavYTqmt9G2zJSbnuRe2xEwJ648gEXK24n/xBRe0bChLQ2zfWrrEePx/jd
- gmxGiqDELILrG5uYDgo3hxTsMQnyPENJBAUbIM0K6VDcKRVG34XqH+y43dQMFEd88EABueE9s
- PC5X3++ONwYvHKd+nrbxrxfu+lk85Agkqy9Hlm5rccacsArDwQ3jSTDpWCSft9yB6wASGvlje
- T+eqtmz1N/P7OVm2CbUeiavIm88eYi3a93Nomu79gagQJYTSmlzk6zoIX3/L1vDXtANmDC8nx
- VJSFMmAmNna2+7u4B/rXBjFw==
-X-Mailman-Approved-At: Thu, 01 Aug 2024 16:06:21 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="pGLkIFD5Oxl9jkjm"
+Content-Disposition: inline
+In-Reply-To: <20240717122906.117861-1-pro@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,60 +100,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi everyone,
 
-how can I configure which of the available serial devices U-Boot will
-use for its serial console?
+--pGLkIFD5Oxl9jkjm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Background: I have a device based on a Raspberry Pi CM4, which has 6
-UARTs (UART1 is a mini UART, the others PL011) [1]. In the default
-configuration (including the mainline Linux broadcom/bcm2711-rpi-cm4-io
-device tree) the Bluetooth module is attached to UART0. Unless I either
-completely disable UART0 (status =3D "disabled" in the device tree) or
-reconfigure it to be a serial console (e.g. using the RPi disable-bt
-DTBO) U-Boot fails to boot, I assume (it doesn't get far enough to show
-messages over netconsole) because it tries and fails to set up a serial
-console where there's a BT chip listening.
+On Wed, Jul 17, 2024 at 02:29:01PM +0200, Philip Oberfichtner wrote:
 
-That happens even if another serial console is available: With the RPi
-bcm2711-rpi-cm4 DTB plus "disable-bt" (disable the Bluetooth module,
-reconfigure UART0 as a serial console) and "uart1" (set up a serial
-console on UART1) DTBOs I can see that U-Boot discovers the serial
-device on UART1 (serial@7e215040):
+> This patch series implements the dwc_eth_qos glue driver for Intel SOCs.
+> Before doing that, a few general adaptions to the dwc_eth_qos.c main
+> driver are required. Most notably, the preparation for PCI based driver
+> instances, which do not necessarily use a device tree.
+>=20
+> This patch series depends on: "net: dwc_eth_qos: mdio: Implement clause 4=
+5":
+> https://patchwork.ozlabs.org/project/uboot/patch/20240507094237.168238-1-=
+pro@denx.de/
+>=20
+> Changes in V3:
+> 	- Replace mfence() with mb()
+> 	- Clean-up eqos_get_base_addr()
+> 	- Several style fixes for dwc_eth_qos_intel
 
-U-Boot> dm uclass serial
-uclass 108: serial
-0   * serial@7e201000 @ 3af3b200, seq 0
-1     serial@7e215040 @ 3af3b2d0, seq 1
+This adds a failure to build on stm32mp15_dhcor_basic and all of the
+other stm32mp15 platforms that use this driver:
++(stm32mp15_dhcor_basic) drivers/net/dwc_eth_qos.c: In function 'eqos_get_b=
+ase_addr_common':
++(stm32mp15_dhcor_basic) drivers/net/dwc_eth_qos.c:1415:30: error: format '=
+%llx' expects argument of type 'long long unsigned int', but argument 2 has=
+ type 'fdt_addr_t' {aka 'unsigned int'} [-Werror=3Dformat=3D]
++(stm32mp15_dhcor_basic)  1415 |                 dev_err(dev, "addr=3D0x%ll=
+x is invalid.\n", addr);
++(stm32mp15_dhcor_basic)       |                              ^~~~~~~~~~~~~=
+~~~~~~~~~~~~~~  ~~~~
++(stm32mp15_dhcor_basic)       |                                           =
+                |
++(stm32mp15_dhcor_basic)       |                                           =
+                fdt_addr_t {aka unsigned int}
++(stm32mp15_dhcor_basic) include/dm/device_compat.h:51:24: note: in definit=
+ion of macro 'dev_printk_emit'
++(stm32mp15_dhcor_basic)    51 |                 printf(fmt, ##__VA_ARGS__)=
+; \
++(stm32mp15_dhcor_basic)       |                        ^~~
++(stm32mp15_dhcor_basic) include/dm/device_compat.h:110:9: note: in expansi=
+on of macro '__dev_printk'
++(stm32mp15_dhcor_basic)   110 |         __dev_printk(LOGL_ERR, dev, fmt, #=
+#__VA_ARGS__)
++(stm32mp15_dhcor_basic)       |         ^~~~~~~~~~~~
++(stm32mp15_dhcor_basic) drivers/net/dwc_eth_qos.c:1415:17: note: in expans=
+ion of macro 'dev_err'
++(stm32mp15_dhcor_basic)       |                 ^~~~~~~
++(stm32mp15_dhcor_basic) drivers/net/dwc_eth_qos.c:1415:41: note: format st=
+ring is defined here
++(stm32mp15_dhcor_basic)       |                                      ~~~^
++(stm32mp15_dhcor_basic)       |                                         |
++(stm32mp15_dhcor_basic)       |                                         lo=
+ng long unsigned int
++(stm32mp15_dhcor_basic)       |                                      %x
++(stm32mp15_dhcor_basic) In file included from include/linux/printk.h:4,
++(stm32mp15_dhcor_basic)                  from include/linux/kernel.h:5,
++(stm32mp15_dhcor_basic)                  from include/linux/libfdt_env.h:1=
+3,
++(stm32mp15_dhcor_basic)                  from include/linux/libfdt.h:6,
++(stm32mp15_dhcor_basic)                  from include/fdtdec.h:17,
++(stm32mp15_dhcor_basic)                  from include/dm/ofnode.h:11,
++(stm32mp15_dhcor_basic)                  from include/clk.h:11,
++(stm32mp15_dhcor_basic)                  from drivers/net/dwc_eth_qos.c:32:
++(stm32mp15_dhcor_basic) include/log.h:224:24: note: in definition of macro=
+ 'log'
++(stm32mp15_dhcor_basic)   224 |                 printf(_fmt, ##_args); \
++(stm32mp15_dhcor_basic)       |                        ^~~~
++(stm32mp15_dhcor_basic) include/dm/device_compat.h:86:17: note: in expansi=
+on of macro 'dev_printk_emit'
++(stm32mp15_dhcor_basic)    86 |                 dev_printk_emit(LOG_CATEGO=
+RY, level, fmt, ##__VA_ARGS__); \
++(stm32mp15_dhcor_basic)       |                 ^~~~~~~~~~~~~~~
++(stm32mp15_dhcor_basic) include/dm/device_compat.h:55:24: note: in definit=
+ion of macro 'dev_printk_emit'
++(stm32mp15_dhcor_basic)    55 |                 printf(fmt, ##__VA_ARGS__)=
+; \
++(stm32mp15_dhcor_basic) include/dm/device_compat.h:92:41: error: format '%=
+llx' expects argument of type 'long long unsigned int', but argument 4 has =
+type 'fdt_addr_t' {aka 'unsigned int'} [-Werror=3Dformat=3D]
++(stm32mp15_dhcor_basic)    92 |                                         "%=
+s %s: " fmt, \
++(stm32mp15_dhcor_basic)       |                                         ^~=
+~~~~~~~
++(stm32mp15_dhcor_basic) include/dm/device_compat.h:91:25: note: in expansi=
+on of macro 'dev_printk_emit'
++(stm32mp15_dhcor_basic)    91 |                         dev_printk_emit(__=
+dev->driver->id, level, \
++(stm32mp15_dhcor_basic)       |                         ^~~~~~~~~~~~~~~
++(stm32mp15_dhcor_basic) include/dm/device_compat.h:97:41: error: format '%=
+llx' expects argument of type 'long long unsigned int', but argument 4 has =
+type 'fdt_addr_t' {aka 'unsigned int'} [-Werror=3Dformat=3D]
++(stm32mp15_dhcor_basic)    97 |                                         "%=
+s %s: " fmt, \
++(stm32mp15_dhcor_basic) include/dm/device_compat.h:96:25: note: in expansi=
+on of macro 'dev_printk_emit'
++(stm32mp15_dhcor_basic)    96 |                         dev_printk_emit(LO=
+G_CATEGORY, level, \
++(stm32mp15_dhcor_basic) cc1: all warnings being treated as errors
++(stm32mp15_dhcor_basic) make[3]: *** [scripts/Makefile.build:256: drivers/=
+net/dwc_eth_qos.o] Error 1
++(stm32mp15_dhcor_basic) make[2]: *** [scripts/Makefile.build:397: drivers/=
+net] Error 2
++(stm32mp15_dhcor_basic) make[1]: *** [Makefile:1895: drivers] Error 2
++(stm32mp15_dhcor_basic) make: *** [Makefile:177: sub-make] Error 2
 
-However, I can't find a way to make it *use* it instead of UART0
-(serial@7e201000). I tried to set CONFIG_CONS_INDEX=3D1 but didn't see any
-change (unfortunately the help does not describe exactly how the number
-is mapped to DT UART definitions). If I completely disable UART0 in the
-DT as mentioned above U-Boot uses UART1 just fine, so it's not an issue
-with UART1 as such.
+--=20
+Tom
 
-To make matters slightly more complicated, the specific device I have is
-a RevPi Connect 4, where a vendor overlay [2] describes how to set up an
-RS485 serial console using UART5. The pins defined there are wired to
-the outside of the box [3], so eventually I'll actually want to use
-UART5 for the serial console. Which means I really need a (build-time or
-preferably DT-based) way to configure which serial device to use.
+--pGLkIFD5Oxl9jkjm
+Content-Type: application/pgp-signature; name="signature.asc"
 
-My goal is to create a single DTS which both U-Boot and Linux can use,
-and get it upstreamed if possible. If there are configuration options
-and they're just missing from the documentation, I'd be happy to send a
-patch to add them once I have a solution.
+-----BEGIN PGP SIGNATURE-----
 
-Best regards,
-Fiona
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmarmZ0ACgkQFHw5/5Y0
+tyxVggv+Okmb8HLdPp1v5k1uzTCuW1Lr3VMy6xvnZH2hSBMTCkxjJ15cjaKgQEoq
+DsCQ1Xyxnh86NwxdFYl4dNJotEOGsdFJ0BfcXhnoSLO86HxlUkuiSMqlgZTTLCSg
+zZsdKKHape0PnxbbuCQHrpzcONZJ2Ns9bxVNmMIN0PLUznumD98vraysZApq94/9
+8ZeaPUUD4alovIOCuJo3zUIpF/XGvjsggZfcCQ5a5XY4nETH2fKCJ7GDAf5OL/H9
+r13HaDVY2FUqk5LNCEDsLb6w2hgxMe1DBKDBlYq2RgD5L9IuUv0Zaa+7ESagGMHL
+u+K4zx0DVjyX4DAUkim+QdD3LurGRv15RhRSH6maAxBfauivwvp6ffD3/Wz7vEEK
+cvSeSA1riK4vPgjcfb9yvMbD2LlQlaXYGQZ3WUaxLhFzwcH+4xGjBXa9hI3Ic6qW
+B2KDRA/fdKEOQ8++846OxDi+cAOMBNRuVStfWe6hNMitDZ12PKigWXDfB2yLKIUr
+uiYf5x82
+=dl4r
+-----END PGP SIGNATURE-----
 
-[1]
-https://www.raspberrypi.com/documentation/computers/configuration.html#con=
-figure-uarts
-[2]
-https://gitlab.com/revolutionpi/linux/-/blob/4ae9a35871799004300f83694a243=
-59a7b4ef8fa/arch/arm/boot/dts/overlays/revpi-connect4-overlay.dts#L281-292
-[3]
-https://revolutionpi.com/en/tutorials/uebersicht-revpi-connect/serielle-ge=
-raete-anschliessen-connect
+--pGLkIFD5Oxl9jkjm--
