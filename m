@@ -4,82 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93FE8C3DA64
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 21:16:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B70A4C3DA64
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 21:33:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4084A88B66;
-	Thu,  1 Aug 2024 23:16:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E27CE88B61;
+	Thu,  1 Aug 2024 23:33:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MlC+G7kF";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C243D88646; Thu,  1 Aug 2024 23:16:16 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 306A888B62; Thu,  1 Aug 2024 23:33:02 +0200 (CEST)
+Received: from smtpbguseast2.qq.com (smtpbguseast2.qq.com [54.204.34.130])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7FFD88B58
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 23:16:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 16EC988327
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 23:32:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3db2315d7ceso4259156b6e.1
- for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 14:16:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1722546973; x=1723151773; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RIC6kSiOkYOOOCTzdjfnidrRPsrd2hNxVUVYAY/ot84=;
- b=MlC+G7kFfNLaTx5CvlFKEZG1/mGFKUGjMZKsKQN3j/86xhLg7ygJ/pLi1v4lPJpfS3
- FiQHw/sGFiesM0MCLROj1gkNIppOetcvIhSPQK3gzDUSy8289eB42KsbnqsLGuIOpB2w
- d+x+MaoJ+n3FsCitdmcLymg+cI1L6Ewunl33E=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722546973; x=1723151773;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RIC6kSiOkYOOOCTzdjfnidrRPsrd2hNxVUVYAY/ot84=;
- b=FrBmmgdLDp50EKExg8ikRw8Cb5eMdWNO/YkELV1E0TIrWgiuB3cW5tB9xw8IFlJG15
- 3G0c2rsqLRVZeY5onvBBV8abiUKA+dkA7dn5Q7hUCkJ8tb+dXZZvDxZWNwqewo8jfqJW
- 5N8lFgkoeBZQyIN0VaBvgUdCb1j4Rbmx2b3Rm+7HaqtBzNXOkQ3jqlKa2ijhMoLMeNI8
- Fkdd3qzcC4Xzvh5Xy9zj2PDPdYzboncLd+OnBFroDO3/drNsPcViCOGvNZz0jOdx/4Zl
- TuWJLCo3w835SWXeUchSX/MoauFUN6G4DWEgO/SpyyiLnSL/BCbTR5cHFs5uw9QPnFsh
- MsjA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVfrM/lCWcdwPRFuvezXHEEarNpX8LWpZH9CVWNLqj24Wj7iH4mlapT2piRojaPHT82gItBP13+G/ua3pPI7vqGCsIXVg==
-X-Gm-Message-State: AOJu0YzOLNRsVlHb5X+xD8ObfvP3nfQhlB2QN9h5r8qfmOt+Wh8aBCe1
- OsIT3tfpc86dx5GlrDzK3OjvCFhlaDXCmLtPykf9zzyfJSGJgv1DkN+NhvU0gRU=
-X-Google-Smtp-Source: AGHT+IGSQKm5UAF/A1Zf9VYqaS5RjOyHzZUfjQ0fPmT3SsJExriwM6hxI0Bf80Ob2omuL2DNy5iidg==
-X-Received: by 2002:a05:6808:2123:b0:3db:15ed:2a21 with SMTP id
- 5614622812f47-3db55802279mr1706477b6e.16.1722546973346; 
- Thu, 01 Aug 2024 14:16:13 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-190.totalplay.net.
- [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70a31d9dd3bsm154949a34.10.2024.08.01.14.16.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Aug 2024 14:16:12 -0700 (PDT)
-Date: Thu, 1 Aug 2024 15:16:09 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Teresa Remmet <t.remmet@phytec.de>,
- u-boot@lists.denx.de, Benjamin Hahn <B.Hahn@phytec.de>,
- Cem Tenruh <c.tenruh@phytec.de>, Martyn Welch <martyn.welch@collabora.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 1/2] config: Add 'update_bootimg' command to update
- flash.bin on Phytec's imx8mm
-Message-ID: <20240801211609.GM3794063@bill-the-cat>
-References: <20240801125416.1582652-1-lukma@denx.de>
- <CAOMZO5AJw66wweVOL0QkvnKrAWCKRvQ9n00OdRfUPxfR8LUibg@mail.gmail.com>
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
+X-QQ-mid: bizesmtp79t1722547952tymbduey
+X-QQ-Originating-IP: Cs7Uka0gIBEjbuWZCBe0/hPx7bXYyPH2QqA0shQ9mAc=
+Received: from [192.168.159.131] ( [106.150.157.243])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Fri, 02 Aug 2024 05:32:29 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 7050501393528897189
+Message-ID: <91F50BEC51D3A968+65cdb141-964c-43cb-b129-c48bd376ed2e@radxa.com>
+Date: Fri, 2 Aug 2024 06:32:29 +0900
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="UB3c3dDg2E2THwyi"
-Content-Disposition: inline
-In-Reply-To: <CAOMZO5AJw66wweVOL0QkvnKrAWCKRvQ9n00OdRfUPxfR8LUibg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] board: rockchip: Add Radxa ROCK 3B
+To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Tom Rini <trini@konsulko.com>, Joseph Chen <chenjh@rock-chips.com>
+Cc: u-boot@lists.denx.de
+References: <20240731072858.1216627-1-jonas@kwiboo.se>
+ <20240731072858.1216627-3-jonas@kwiboo.se>
+Content-Language: en-US
+From: FUKAUMI Naoki <naoki@radxa.com>
+In-Reply-To: <20240731072858.1216627-3-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtp:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,50 +63,201 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---UB3c3dDg2E2THwyi
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 7/31/24 16:28, Jonas Karlman wrote:
+> The Radxa ROCK 3B is a single-board computer based on the Pico-ITX form
+> factor (100mm x 75mm). Two versions of the ROCK 3B exists, a community
+> version based on the RK3568 SoC and an industrial version based on the
+> RK3568J SoC.
+> 
+> Features tested on ROCK 3B 8GB v1.51 (both variants):
+> - SD-card boot
+> - eMMC boot
+> - SPI Flash boot
+> - Ethernet
+> - PCIe/NVMe
+> - USB gadget
+> - USB host
+> 
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 
-On Thu, Aug 01, 2024 at 10:13:13AM -0300, Fabio Estevam wrote:
-> Hi Lukasz,
->=20
-> On Thu, Aug 1, 2024 at 9:54=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wr=
-ote:
->=20
-> >         "mmcdev=3D" __stringify(CONFIG_SYS_MMC_ENV_DEV) "\0" \
-> >         "mmcpart=3D1\0" \
-> >         "mmcroot=3D2\0" \
-> > +       "update_mmc_part=3D1\0" \
-> > +       "update_offset=3D0x42\0" \
-> > +       "update_filename=3Dflash.bin\0" \
-> > +       "hostname=3D/tftpboot/lukma/\0" \
->=20
-> I don't think all the users will like to use this tftpboot path :-)
+for the whole series,
 
-And while we're touching these boards, can we get them migrated to plain
-text environment please?
+Tested-by: FUKAUMI Naoki <naoki@radxa.com>
 
---=20
-Tom
+thank you so much for your contribution!
 
---UB3c3dDg2E2THwyi
-Content-Type: application/pgp-signature; name="signature.asc"
+Best regards,
 
------BEGIN PGP SIGNATURE-----
+--
+FUKAUMI Naoki
+Radxa Computer (Shenzhen) Co., Ltd.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmar+xkACgkQFHw5/5Y0
-tyygTAv8ClGx0CxTBePz4Wgt9ypPz134NRqkzkZ4uZ8zT8stQXzoox9GbuFat+so
-Vw0D59JHepo0AEePUVyE8hhGj4rgw0q4uRgJXRR44AUTRO/dkiXsPYL8zHb8tfAQ
-rbQ34ZOGXIpk5J1MIMFZ2Tlsaa/kojduiLfPgbfTO4/fel8MCtpUIMrR8WekNY4+
-nMxAxIfmnqmuBZCChIWfzNnNCGO5Ya5Oo6PpjU9qpDNt8qvxGnesiWInNONxcVG3
-R5tGIw4FrT5nR7uOG+1XhgcwxOkXNQmZnyZWHYCzQBkjARCxpfgWklqXrjO1hAlN
-iWCfb++QQ7preiEcOOT3QTOWju6k87/K2PIJJ8pB+6PR+nf3UgpOSYsHdGwUltLp
-60tKwYHSmvJhCLoq/aNI3g32Ig95z2SHRGtRXVAbkMYFAZ8/CmkUbGtNLXgVxYtR
-iIE4KbeQoAVXVKdS+pwTWNRIFiU0YNWdwNDnAxhCyWNbZGO1MaJv3yCRyedGHHLw
-DJ/Jpwzg
-=NCUp
------END PGP SIGNATURE-----
-
---UB3c3dDg2E2THwyi--
+> ---
+>   arch/arm/dts/rk3568-rock-3b-u-boot.dtsi |  15 ++++
+>   board/rockchip/evb_rk3568/MAINTAINERS   |   6 ++
+>   configs/rock-3b-rk3568_defconfig        | 100 ++++++++++++++++++++++++
+>   doc/board/rockchip/rockchip.rst         |   3 +-
+>   4 files changed, 123 insertions(+), 1 deletion(-)
+>   create mode 100644 arch/arm/dts/rk3568-rock-3b-u-boot.dtsi
+>   create mode 100644 configs/rock-3b-rk3568_defconfig
+> 
+> diff --git a/arch/arm/dts/rk3568-rock-3b-u-boot.dtsi b/arch/arm/dts/rk3568-rock-3b-u-boot.dtsi
+> new file mode 100644
+> index 000000000000..b1f324282bac
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3568-rock-3b-u-boot.dtsi
+> @@ -0,0 +1,15 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +#include "rk356x-u-boot.dtsi"
+> +
+> +&sdhci {
+> +	mmc-hs400-1_8v;
+> +	mmc-hs400-enhanced-strobe;
+> +};
+> +
+> +&sfc {
+> +	flash@0 {
+> +		bootph-pre-ram;
+> +		bootph-some-ram;
+> +	};
+> +};
+> diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/evb_rk3568/MAINTAINERS
+> index ba4884db8e12..588134ecb27a 100644
+> --- a/board/rockchip/evb_rk3568/MAINTAINERS
+> +++ b/board/rockchip/evb_rk3568/MAINTAINERS
+> @@ -70,6 +70,12 @@ F:	configs/rock-3a-rk3568_defconfig
+>   F:	arch/arm/dts/rk3568-rock-3a.dts
+>   F:	arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
+>   
+> +ROCK-3B
+> +M:	Jonas Karlman <jonas@kwiboo.se>
+> +S:	Maintained
+> +F:	configs/rock-3b-rk3568_defconfig
+> +F:	arch/arm/dts/rk3568-rock-3b*
+> +
+>   ROCK-3C
+>   M:	Jonas Karlman <jonas@kwiboo.se>
+>   M:	Maxim Moskalets <maximmosk4@gmail.com>
+> diff --git a/configs/rock-3b-rk3568_defconfig b/configs/rock-3b-rk3568_defconfig
+> new file mode 100644
+> index 000000000000..937796811a97
+> --- /dev/null
+> +++ b/configs/rock-3b-rk3568_defconfig
+> @@ -0,0 +1,100 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_SPEED=24000000
+> +CONFIG_SF_DEFAULT_MODE=0x2000
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-rock-3b"
+> +CONFIG_ROCKCHIP_RK3568=y
+> +CONFIG_ROCKCHIP_SPI_IMAGE=y
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_DEBUG_UART_BASE=0xFE660000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
+> +CONFIG_SPL_SPI=y
+> +CONFIG_SYS_LOAD_ADDR=0xc00800
+> +CONFIG_PCI=y
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_AHCI=y
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-rock-3b.dtb"
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +CONFIG_SPL_PAD_TO=0x7f8000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_SPL_SPI_LOAD=y
+> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+> +CONFIG_SPL_ATF=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_PCI=y
+> +CONFIG_CMD_POWEROFF=y
+> +CONFIG_CMD_USB=y
+> +CONFIG_CMD_ROCKUSB=y
+> +CONFIG_CMD_USB_MASS_STORAGE=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_PMIC=y
+> +CONFIG_CMD_REGULATOR=y
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_OF_LIVE=y
+> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> +CONFIG_SPL_DM_SEQ_ALIAS=y
+> +CONFIG_SPL_REGMAP=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_SCSI_AHCI=y
+> +CONFIG_AHCI_PCI=y
+> +CONFIG_SPL_CLK=y
+> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
+> +CONFIG_ROCKCHIP_GPIO=y
+> +CONFIG_SYS_I2C_ROCKCHIP=y
+> +CONFIG_LED=y
+> +CONFIG_LED_GPIO=y
+> +CONFIG_MISC=y
+> +CONFIG_SUPPORT_EMMC_RPMB=y
+> +CONFIG_MMC_DW=y
+> +CONFIG_MMC_DW_ROCKCHIP=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_BUS=4
+> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+> +CONFIG_SPI_FLASH_MACRONIX=y
+> +CONFIG_SPI_FLASH_XTX=y
+> +CONFIG_PHY_REALTEK=y
+> +CONFIG_DWC_ETH_QOS=y
+> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+> +CONFIG_NVME_PCI=y
+> +CONFIG_PCIE_DW_ROCKCHIP=y
+> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+> +CONFIG_SPL_PINCTRL=y
+> +CONFIG_DM_PMIC=y
+> +CONFIG_DM_PMIC_FAN53555=y
+> +CONFIG_PMIC_RK8XX=y
+> +CONFIG_REGULATOR_RK8XX=y
+> +CONFIG_SPL_RAM=y
+> +CONFIG_SCSI=y
+> +CONFIG_BAUDRATE=1500000
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_ROCKCHIP_SFC=y
+> +CONFIG_SYSRESET=y
+> +CONFIG_USB=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_EHCI_GENERIC=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_USB_GADGET=y
+> +CONFIG_USB_GADGET_DOWNLOAD=y
+> +CONFIG_USB_FUNCTION_ROCKUSB=y
+> +CONFIG_ERRNO_STR=y
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+> index eadca0ceb2a5..3febebd0b830 100644
+> --- a/doc/board/rockchip/rockchip.rst
+> +++ b/doc/board/rockchip/rockchip.rst
+> @@ -118,7 +118,8 @@ List of mainline supported Rockchip boards:
+>        - Generic RK3566/RK3568 (generic-rk3568)
+>        - Hardkernel ODROID-M1 (odroid-m1-rk3568)
+>        - Radxa E25 Carrier Board (radxa-e25-rk3568)
+> -     - Radxa ROCK 3 Model A (rock-3a-rk3568)
+> +     - Radxa ROCK 3A (rock-3a-rk3568)
+> +     - Radxa ROCK 3B (rock-3b-rk3568)
+>   
+>   * rk3588
+>        - ArmSoM Sige7 (sige7-rk3588)
