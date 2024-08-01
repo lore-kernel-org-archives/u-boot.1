@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2820C3DA4A
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:21:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B81F9C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:21:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E87F884BE;
-	Thu,  1 Aug 2024 16:21:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ADEA488B21;
+	Thu,  1 Aug 2024 16:21:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dFIhKg0u";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VuTUYEav";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E52C88ADF; Thu,  1 Aug 2024 16:21:37 +0200 (CEST)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
+ id 92FAD88B0A; Thu,  1 Aug 2024 16:21:38 +0200 (CEST)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C539884A9
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:21:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F25D8874D
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:21:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-5d5f24d9df8so2294829eaf.2
- for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:21:35 -0700 (PDT)
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-26109c97728so4278421fac.0
+ for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:21:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1722522094; x=1723126894; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1722522095; x=1723126895; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=c03Hj+/7LxugyyIkzLG5SOvAJBTrzHd7EoqPZQRdGn0=;
- b=dFIhKg0uPcbv2KUDqYvU2xOMvgvveZMHm/qnEThjAnVaSRORu8/nBK0JTDbV3YBJbc
- ygSnn0A87+onKCYUZdVTVslxzNckiQolmp/E4wkUOxMCc1dWvkk4Qh/E9FLzizBjQTbk
- x8eML7u75qFDgQmjgDhOyWKKNvWDEwLCc3iHg=
+ bh=30iADnwUhfx2i5j74z2uENqOJlCkxQcnP2lrEyFP2Hs=;
+ b=VuTUYEavfV4d9yhP76tbLb9Cxll5KrBg+trZNCm7EuZ2RP7QwTWQLxJ276i2madtQh
+ bVR8C0dthttmLWuDzNLmXTLXCDgzeAiubN6fSCzmJ7Wbww6rzl4ZF6gVnMn3pcYao37i
+ 0OSpT1+TCDAL0ZM+CyjmNFntF4TwoqYZwBDCk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722522094; x=1723126894;
+ d=1e100.net; s=20230601; t=1722522095; x=1723126895;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=c03Hj+/7LxugyyIkzLG5SOvAJBTrzHd7EoqPZQRdGn0=;
- b=kY5Lu6m5KD3nSZGi7OxARFcXOHtODfrjaPP3qLU7+FbrDhDUDxQHPnxraMCRQN26i+
- Yu1A+GABctdGDI4sJyi74/MdzFMmkaSv3b6Dbhyi7jC0dHD7WRG5Q0539nV1XSZdzpdp
- YcLLan1TrL+6j/ykcFtvpBLLueFwux7AwUuVw3qSY0Ivcf0a7VY2XG687+m/8JP/aQGi
- MJ4uQiqcVcwIgoZrIkFNordZ8y3T6KtARnxIubE3MH7y5gTNeWDRpmRBEOBt5SaN7UQW
- hZo7BLOX0VJlc4PKfoZ4Vtuvv9WZosWs1xs3Vhq3PyFuDUPKyb8hKrcVxsdd2EpLrDvW
- 6ZHA==
-X-Gm-Message-State: AOJu0YxQtQhfqaWDCOJitcJ04PowTEcvnwiKCB6d3c+m6+bi5zBNXZJV
- fPyTIH+1879UmKbiKqRNFcfv32d7QJiwfp1uq6Klr9Hicj9pU4xxnlXvYnu00Jk=
-X-Google-Smtp-Source: AGHT+IEgfNooDIp0u9LTq5D8Zsles/O8RWapTVjCPrtllzMKEsDmJfokm6K+cJ61CuRrVJCu6fW5YA==
-X-Received: by 2002:a05:6870:d8ca:b0:260:ffcd:21fe with SMTP id
- 586e51a60fabf-26891d3dc41mr281280fac.23.1722522093739; 
- Thu, 01 Aug 2024 07:21:33 -0700 (PDT)
+ bh=30iADnwUhfx2i5j74z2uENqOJlCkxQcnP2lrEyFP2Hs=;
+ b=mNpdL8pPTcN35RK/fFuZrKSNxxfijO64qiVYyE67oCE0UjeR4Sj+rdHMXn87nX7bc/
+ c6Dk+7d4xbRwNFCW5N9Da4hoU7UZ605vUvtIkgAQMjZAlvGfuVuL3/1353yBdqnwt+BP
+ S6nYFsry/T3Z7BiGtkXq2rm5WRoKFdN+apjsIkAO5vqjN1xhwuxe4Sa1IGIdiP20KNQ1
+ +GGFhLPUmPUopCUQMdxfFOA/if8i87S/W1g3+jGARv2UStl6KmSBS9oOA3ArEuX+ojY7
+ 1Ymp2y/hLOy8kog2JFuGvCrMO3G4e/tH0burZDvwSfrzlaAQ+FQ4QRCKvtfUndE34P0q
+ aASg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXzgEPbXzNmAb4D2C0LsqMIYQcDzFtNIS5NooX/AmVSkuPy4cTzh8UN2gQKOuPpwVHC+h4cbct8QsjmBqhi5FuvSk9Qtg==
+X-Gm-Message-State: AOJu0Yzvmhwfjse1HTy8kA0YOCjtoNDy4AKTvDkck3F1GKjg3t5dlRR8
+ WyNsXlXaghh06yfu1lM5qxMOCAQwt9xyfSf/GhEazxUbts/tPPnjsjWA4QlkWL0=
+X-Google-Smtp-Source: AGHT+IGp97nCFbAcudsgs7orBG5fOMyR/aM/DYWWzzH79PQB6E0KcvfaX9ghtnl8VJV3kqSix+XDdQ==
+X-Received: by 2002:a05:6870:9124:b0:268:2189:f0d with SMTP id
+ 586e51a60fabf-26891e9306amr244069fac.33.1722522095007; 
+ Thu, 01 Aug 2024 07:21:35 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-103-190.totalplay.net.
  [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2653e63f463sm3087486fac.18.2024.08.01.07.21.32
+ 586e51a60fabf-2653e63f463sm3087486fac.18.2024.08.01.07.21.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Aug 2024 07:21:33 -0700 (PDT)
+ Thu, 01 Aug 2024 07:21:34 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, "A. Sverdlin" <alexander.sverdlin@siemens.com>
-Cc: Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20240708091002.2585902-1-alexander.sverdlin@siemens.com>
-References: <20240708091002.2585902-1-alexander.sverdlin@siemens.com>
-Subject: Re: [PATCH] net: remove duplicate eth_env_set_enetaddr_by_index()
- declaration
-Message-Id: <172252209245.4049041.5722437738397875513.b4-ty@konsulko.com>
-Date: Thu, 01 Aug 2024 08:21:32 -0600
+To: Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Peter Robinson <pbrobinson@gmail.com>
+In-Reply-To: <20240712094754.2901920-1-mikhail.kshevetskiy@iopsys.eu>
+References: <20240712094754.2901920-1-mikhail.kshevetskiy@iopsys.eu>
+Subject: Re: [PATCH v3] net/tftp: make tftpput working with servers that do
+ not use OACK
+Message-Id: <172252209384.4049041.9420272355672284889.b4-ty@konsulko.com>
+Date: Thu, 01 Aug 2024 08:21:33 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -92,13 +95,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 08 Jul 2024 11:09:58 +0200, A. Sverdlin wrote:
+On Fri, 12 Jul 2024 13:47:54 +0400, Mikhail Kshevetskiy wrote:
 
-> eth_env_set_enetaddr_by_index() declaration is duplicated in eth_internal.h
-> and net.h, but all units including eth_internal.h already include net.h.
-> Remove the superfluous declaration.
+> Option Acknowledgment (OACK) is an extension of TFTP protocol (see rfc2347).
+> Not all tftp servers implements it. For example it does not supported by
+> tftpd server from debian-11 (https://packages.debian.org/bullseye/tftpd).
 > 
+> Starting the "tftpput $loadaddr $size out_file" command with such server
+> will results in the following packets flow:
 > 
+> [...]
 
 Applied to u-boot/master, thanks!
 
