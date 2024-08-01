@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CAB5C3DA4A
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 03:40:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1483FC3DA64
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 03:40:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AAFF88AEE;
-	Thu,  1 Aug 2024 05:39:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 29CCB88ADA;
+	Thu,  1 Aug 2024 05:39:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91E4B88AEE; Thu,  1 Aug 2024 05:39:31 +0200 (CEST)
-Received: from inva020.nxp.com (inva020.nxp.com [92.121.34.13])
+ id 0240088AD4; Thu,  1 Aug 2024 05:39:34 +0200 (CEST)
+Received: from inva021.nxp.com (inva021.nxp.com [92.121.34.21])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8E9C8881B
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 05:39:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E12088AE8
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 05:39:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Zhiqiang.Hou@nxp.com
-Received: from inva020.nxp.com (localhost [127.0.0.1])
- by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 7EBD01A06FC;
- Thu,  1 Aug 2024 05:39:29 +0200 (CEST)
+Received: from inva021.nxp.com (localhost [127.0.0.1])
+ by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id DF20D200D36;
+ Thu,  1 Aug 2024 05:39:30 +0200 (CEST)
 Received: from aprdc01srsp001v.ap-rdc01.nxp.com
  (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
- by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 483881A0658;
- Thu,  1 Aug 2024 05:39:29 +0200 (CEST)
+ by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id AFC072005DB;
+ Thu,  1 Aug 2024 05:39:30 +0200 (CEST)
 Received: from mega.am.freescale.net (mega.ap.freescale.net [10.192.208.232])
  by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id
- 53E371820F57; Thu,  1 Aug 2024 11:39:27 +0800 (+08)
+ E0EBF1800318; Thu,  1 Aug 2024 11:39:28 +0800 (+08)
 From: Zhiqiang Hou <Zhiqiang.Hou@nxp.com>
 To: u-boot@lists.denx.de, trini@konsulko.com, peng.fan@nxp.com,
  festevam@gmail.com, sjg@chromium.org, marex@denx.de, lukma@denx.de,
  seanga2@gmail.com, xypron.glpk@gmx.de
 Cc: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
-Subject: [PATCHv5 03/14] cpu: sandbox: implement release_core callback
-Date: Thu,  1 Aug 2024 11:59:48 +0800
-Message-Id: <20240801035959.43115-4-Zhiqiang.Hou@nxp.com>
+Subject: [PATCHv5 04/14] test: cpu: add test for release CPU core.
+Date: Thu,  1 Aug 2024 11:59:49 +0800
+Message-Id: <20240801035959.43115-5-Zhiqiang.Hou@nxp.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20240801035959.43115-1-Zhiqiang.Hou@nxp.com>
 References: <20240801035959.43115-1-Zhiqiang.Hou@nxp.com>
@@ -61,7 +61,7 @@ X-Virus-Status: Clean
 
 From: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 
-Add empty release CPU core function for testing.
+Add test for API cpu_release_core().
 
 Signed-off-by: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
@@ -69,33 +69,22 @@ Reviewed-by: Simon Glass <sjg@chromium.org>
 V5:
  - No change.
 
- drivers/cpu/cpu_sandbox.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ test/dm/cpu.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/drivers/cpu/cpu_sandbox.c b/drivers/cpu/cpu_sandbox.c
-index e65e1bdc51..b152795783 100644
---- a/drivers/cpu/cpu_sandbox.c
-+++ b/drivers/cpu/cpu_sandbox.c
-@@ -44,6 +44,11 @@ void cpu_sandbox_set_current(const char *name)
- 	cpu_current = name;
+diff --git a/test/dm/cpu.c b/test/dm/cpu.c
+index acba810599..8af25316ce 100644
+--- a/test/dm/cpu.c
++++ b/test/dm/cpu.c
+@@ -43,6 +43,8 @@ static int dm_test_cpu(struct unit_test_state *uts)
+ 	ut_assertok(cpu_get_vendor(dev, text, sizeof(text)));
+ 	ut_assertok(strcmp(text, "Languid Example Garbage Inc."));
+ 
++	ut_assertok(cpu_release_core(dev, 0));
++
+ 	return 0;
  }
  
-+static int cpu_sandbox_release_core(const struct udevice *dev, phys_addr_t addr)
-+{
-+	return 0;
-+}
-+
- static int cpu_sandbox_is_current(struct udevice *dev)
- {
- 	if (!strcmp(dev->name, cpu_current))
-@@ -58,6 +63,7 @@ static const struct cpu_ops cpu_sandbox_ops = {
- 	.get_count = cpu_sandbox_get_count,
- 	.get_vendor = cpu_sandbox_get_vendor,
- 	.is_current = cpu_sandbox_is_current,
-+	.release_core = cpu_sandbox_release_core,
- };
- 
- static int cpu_sandbox_bind(struct udevice *dev)
 -- 
 2.17.1
 
