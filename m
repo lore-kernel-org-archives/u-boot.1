@@ -4,60 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98C5EC3DA4A
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:42:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26D57C3DA64
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:42:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18BC988B17;
-	Thu,  1 Aug 2024 16:42:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 800BA88B37;
+	Thu,  1 Aug 2024 16:42:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1722523339;
-	bh=YTshFCTD1WOCr928axjfA/nLwpvxmzrFn3Z+CUovkms=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=fxmLHTu1P2szCac/NphTk3e7J6wZCLA0oE4ljZXLWTcl6nt78kPKBGbq9moULZKtw
-	 wvkkw79SRwaqzZ1gCPPQ3z3vc8r9G9OSUkE9ZLSYlp9n1MJVFmzk0lp0hxaCyvqmY6
-	 B3qqqCvUkX1RtICpq2aUGv6IKsdmiE5IRVvmFucNCeXsbDzRGXR8NRSw1oWdnQtlUs
-	 YzUOqkazjuOpmDgucG868iccwE9FLX0ZbyQNtk4TR7wJ74j9dq7zYrfyLZf59NJGoq
-	 OiUwlecg2+kLNuNsOQAZpmgnChUijwI2w9qKdvA2y5zIHfqF/uAO+vZ/XKL1cblBph
-	 NS24quGMwfxvg==
-Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Sa4VVmjl";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C98C488B2B; Thu,  1 Aug 2024 16:42:27 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 59BB188A15;
- Thu,  1 Aug 2024 16:42:17 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1722523337;
- bh=YTshFCTD1WOCr928axjfA/nLwpvxmzrFn3Z+CUovkms=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=al+JalvGU3phJoHHTWvzWQJiyRlia5AfggN8gmJeyfX4j8Pai2R3r4nIvr4WaUNeF
- SMFODHsPNeGs43+3PjRnOwbwhCpkDdii19QkW/L8O24IZ3nMPquyxYy5r144ahxi5F
- Qq9UIbA/wB0qn9pGiM1o06qGPbWUIrEt5XvtUXj2zHEuhM8ZpQntr9HMeI9Fqlddpl
- RC7SAzAG3q5F4myyaA4jzddYG+OXOm5UZ7qg2JJbhmityUCDWjL9iOveZnr921dJ88
- 0sX+dK0san+htwj18GYPj6JVO7WO7LxZUyjC3PfC7rnUUEVP/6Hfxxjwf5ZxgYGaur
- Cwcypul8HoJAQ==
-Date: Thu, 1 Aug 2024 16:42:16 +0200
-From: Lukasz Majewski <lukma@denx.de>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Teresa Remmet <t.remmet@phytec.de>, u-boot@lists.denx.de, Tom Rini
- <trini@konsulko.com>, Benjamin Hahn <B.Hahn@phytec.de>, Cem Tenruh
- <c.tenruh@phytec.de>, Martyn Welch <martyn.welch@collabora.com>, Simon
- Glass <sjg@chromium.org>
-Subject: Re: [PATCH 2/2] config: Adjust Phytec imx8mm module config to
- support NVME disk
-Message-ID: <20240801164216.40eec3ec@wsk>
-In-Reply-To: <CAOMZO5CqQtUOt1zgL7x8goSaH=HeFwQkg3-CJtY=ynyHgg7=bA@mail.gmail.com>
-References: <20240801125416.1582652-1-lukma@denx.de>
- <20240801125416.1582652-2-lukma@denx.de>
- <CAOMZO5CqQtUOt1zgL7x8goSaH=HeFwQkg3-CJtY=ynyHgg7=bA@mail.gmail.com>
-Organization: denx.de
-X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ by phobos.denx.de (Postfix) with ESMTPS id A72E3889FC
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:42:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7094468d392so2982928a34.0
+ for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:42:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1722523344; x=1723128144; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=bXC5jcxbgap0yoLi+qk/mY9RSbTOYbhp8rzxhyZ7zn4=;
+ b=Sa4VVmjlKvxL3ZE/GK+AhfoFUnhTkDSVPk3Sazbt9iOmmqJaOSSStIM7jS9zaAcFhf
+ wL3/oI1eqsLJcyJuhco0/eiMAFA3fHGBZumPti+0OmMK6XWSKc2IvYfgXnFNFDQYQfVF
+ lZZlKoXFESr29AculS+Y7BdZ3LOH6ZgtUPEAY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722523344; x=1723128144;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bXC5jcxbgap0yoLi+qk/mY9RSbTOYbhp8rzxhyZ7zn4=;
+ b=OnTPfPoakL+3ndhDzsSMg+W5To+k6yQCgBqBRKjrknxYYX5Ose3UGkhz0spaiMyjBL
+ 47lPRU5FnUaiPom14/o90GEBzehRYyWtC6o2nj8bWCA3dlDgYBM2J1FFnNEH/le84p3i
+ +AhWyKPUy5dXmOq/wODHuKLAk8i6jPDapOGMvbI2TYl6FaGAG8dfJpSCOcdZntafyBOg
+ xxb//b5rl8njHWbF21WNn9RIl5oi89oymLgyPvfAIk8Z9JlHtcvWN6V19bXSelygJolu
+ d3ZFk4CZzWOmYrays86fGwranpwq/d9zjFj5MdzW1yEmM2R/+HK9OXMIfd/IlJQuEhbc
+ nb6A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXY7b3s/YgHPzln0f0DhotAaK8CWkXQ6OY+Y8ppWurv7lDfV39QFxmGaCURiEsVT+wY3vdqeCUy9dKIEw6w8UsuMWLvbg==
+X-Gm-Message-State: AOJu0YyoKLLmptcSGDe0KPsNQMy5D+SG9UeMv/ZqxR+pk/44uhvXePYs
+ L6m1b2s56T7X5xGE1gPv03ZsqsWTRtBRVhnKfjAGgHcDjE8quOkiXdDYswETYeiPdabGNrN90nx
+ Uc3dLrrDUDeLohbJqocyW4zqnMnwh24+s5zk0
+X-Google-Smtp-Source: AGHT+IF87O/jbuzSkPd7w+7SRfzQtAbg8vqW8RkBYdIpCNd+CwV2asWLxxkMe17km7RveKZMDfCNLL2ZOrKjAae7VI4=
+X-Received: by 2002:a05:6358:e4a9:b0:1aa:c71e:2b5d with SMTP id
+ e5c5f4694b2df-1af3baa3ed0mr25134655d.23.1722523344316; Thu, 01 Aug 2024
+ 07:42:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/wOcUKARxlj/qSvdOp_w/1XX";
- protocol="application/pgp-signature"; micalg=pgp-sha512
+References: <20240729213657.2550935-1-mwalle@kernel.org>
+ <875xsnqn3q.fsf@baylibre.com>
+ <CAFLszTip3uwZLy=jL+-BKwD74Wk8j6So_N9TW_P16gpBvLKQRQ@mail.gmail.com>
+ <D33U0UZY7230.18W0UEVD0508X@kernel.org>
+In-Reply-To: <D33U0UZY7230.18W0UEVD0508X@kernel.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 1 Aug 2024 08:42:13 -0600
+Message-ID: <CAFLszTiELmY_Svts6NK730TbEWDidFUL3xnuof3fuSOW0avT2g@mail.gmail.com>
+Subject: Re: [PATCH v2] boot: android: fix booting without a ramdisk
+To: Michael Walle <mwalle@kernel.org>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,53 +87,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---Sig_/wOcUKARxlj/qSvdOp_w/1XX
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Hi Michael,
 
-Hi Fabio,
+On Wed, 31 Jul 2024 at 09:33, Michael Walle <mwalle@kernel.org> wrote:
+>
+> Hi,
+>
+> > > > -                     if (ret)
+> > > > +                     if (ret == -ENOENT)
+> > > > +                             return -ENOPKG;
+> >
+> > We normally use -ENOENT for this sort of thing.
+>
+> That's the way select_ramdisk() is documented. It was actually
+> introduced by yourself in commit e4c928792e93 ("image: Split up
+> boot_get_ramdisk()") :)
 
-> Hi Lukasz,
->=20
-> On Thu, Aug 1, 2024 at 9:54=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wr=
-ote:
->=20
-> > +CONFIG_CYCLIC_MAX_CPU_TIME_US=3D1000 =20
->=20
-> Please explain why this option was added.
+Hmm, OK. Perhaps I was worried about conflicting with a file-not-found
+error in bootstd. Anyway, let's stick with ENOPKG.
 
-It must have been slipped in...
-
-Default value is 5000 for this SoM.
-
-IMHO it would be safe to remove it (and use default value) - I will
-prepare v2 without it. Thanks for spotting it.
-
-
-Best regards,
-
-Lukasz Majewski
-
---
-
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
-
---Sig_/wOcUKARxlj/qSvdOp_w/1XX
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmarnsgACgkQAR8vZIA0
-zr2+gQgAgUwQBGnkRUokC4EOgO2DZcpkD8Dd9T8dEKpDiQ/dHrR1kR8kYmacDKDN
-hyiVT5tCe6kwuc7mVaxf1QQcZckKBsMutzmz4JnSyho0xt52FteGd4MdmztCpLr2
-SHgj+GjjVZGa9BEhJTraP8YMvjaMNPc+lUNEVc5+RUFkyniM0sGKTjZbDMoAo1iI
-Ch1WbR5+ftBeFSIa5szt2p8VdQ9kKmc6ja0qeshN/W7dhuuRwVaJBe8wKbe+RgWS
-XVQSibjpKgakrnwah5r1xnqaFU7k9J03LbjL9oGG0A9TmODlxno96r4Hravmm9Ga
-rBf3Fzgpkluj8cHgwDpbHaoKxecTMw==
-=NxAY
------END PGP SIGNATURE-----
-
---Sig_/wOcUKARxlj/qSvdOp_w/1XX--
+Regards,
+Simon
