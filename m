@@ -4,71 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF9D3C3DA64
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 15:38:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB6EBC3DA64
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 16:12:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCFD388B31;
-	Thu,  1 Aug 2024 17:38:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1CD7688646;
+	Thu,  1 Aug 2024 18:12:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zNpqCR45";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i2s+G65q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EC2088A9B; Thu,  1 Aug 2024 17:38:23 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 3DAB988667; Thu,  1 Aug 2024 18:12:43 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A574885BF
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 17:38:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 01A808862F
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 18:12:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5a79df5af51so4101925a12.0
- for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 08:38:21 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-70968db52d0so1481973a34.3
+ for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 09:12:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722526701; x=1723131501; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722528760; x=1723133560; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aatAOfjwuIwMD2c5Cce3+amTTkyScyjWeEAoz8CyJS0=;
- b=zNpqCR45vM1P+usNLDR2DtwdP9yl+ZBzY4SMW0OmHvW6DbEYbK7waZwHJEtXDlpltg
- uH9EDRrZoqp8EIGHhbGJs2Phuxm5mNFmx+K1J/zSf09Ds52bTsV3Ch/qddgOzlSYT8AX
- ABv+9d9KU1VbYYo4JXNW/QlyF4tOc9zgLmh46PwO3j2bQwoKtmnzUE1MNEbjCe8Yid7n
- HcMf4i7L0qV5aFvf1Ui4IKzca+cdMVJ1EFzt0rC7rSIQ1sxF9yxP1lcYhx9ip2EIggS3
- aXcKyZXv1ow1SpQIjlPEzwqfQwsBX4PgXJdq/rQIUOVsx+zmU3oYgahygB0VxP5/y/lV
- jLLg==
+ bh=BLxMrj0D1ihTq/qG5/7efSOUlc2SpI4axMu/r4gy0UI=;
+ b=i2s+G65qCSatsLcyF7Lz+rQa5wdV+iExO2PpbWDSkf7jBPMaDw9VtjR2zuMz4u10Pl
+ /hq/ObJy3OPgvT4Mk+Kat1Kgbqo/FWW9FONZ5a/lV4YfW2C3ITMd4wwy365gkrkjqy1Z
+ PAPUE6bGsLuJnJ+kA/YofucJPFvdkc39BH8jY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722526701; x=1723131501;
+ d=1e100.net; s=20230601; t=1722528760; x=1723133560;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=aatAOfjwuIwMD2c5Cce3+amTTkyScyjWeEAoz8CyJS0=;
- b=owsTKOyyrMiL2ZSCuPsLg1Rz7J6HuWAoT9geDGKV8bQPfnoZ5APMqCDYeIvQ21QvoW
- Zo6hpuLzhMSmUpVna+oBaSNOe4TPbdWAO7vBOVzgzAG1N24QlKvroyOhguEW51UEky8n
- IgTnoxNAJHnBvdOxcdxrVYRTElusLnXBXtM8H62quYlWWbCYMkUsvL0B+6iVVYXKD7vA
- Pzu8cSK3tMdn+WifDhX5HnfkIySlc0vYsdjsUBcuzpQzSR9XfHbLjgPKzIE2uzmXeY3H
- GFClnzntMjLpax0iojia081xuc8lH+Ta/wlMx3bI7ameMse7pb90AXkjiDhWPsvdPMmO
- 73iQ==
-X-Gm-Message-State: AOJu0YxcYXMuXZAmeeoAOPokowZ7W6gcqDPBUobPBYthqef9GLzVysJk
- CgFDg9Whhr6pSsh4gy26Uz7dCd3qWOMfs1PrtvYnWbSb8GHNOaBwST49PqNqfG4Irn8pbkV2dIs
- qcKFLHlOHMGm9CEJeBPh9i9UyiTJe0LQXwMJOBeSqoRUV08Y/
-X-Google-Smtp-Source: AGHT+IEckdyPGKE7mh4ZpW8dgHuTmRI5BOwI8pJsrmjRtjthQ621Vwx/0SYBw5+/trpdIuwDKeUDC5ncWYIXcY9XrrU=
-X-Received: by 2002:a17:907:6e87:b0:a7a:b26d:fb5 with SMTP id
- a640c23a62f3a-a7dbcc28512mr177510266b.19.1722526700564; Thu, 01 Aug 2024
- 08:38:20 -0700 (PDT)
+ bh=BLxMrj0D1ihTq/qG5/7efSOUlc2SpI4axMu/r4gy0UI=;
+ b=wbPDy3MLFLUjaX1zSQ1jsYpYDP27MALRrKHkyCjilCaOUdzbR4ol0uwzf6/NCZAmL+
+ jRsln8QD4aK2AVWFJOWIm+y8z+mK83LkYiaUslAqzkmdW9gAwHINYcFVfIhr6psF3wr1
+ nuu0ROPptOVRZgV33Xfpa1U2hy8lNcuvSv07FqP4K7GciBoyzg11sFvT3CE+YsYnUml6
+ Zjj7GMF1DAQL00d9ilDbdW8PNerN1TIaZHmWH5EUBFNCLa661LpzpLYSs+3ZzVD3lNlv
+ qZwIZzraHq7UvnDoTK1HtwRFGDJGB+udl5kL3+RHJPgsjo3tMSMOsWsISF6vFwYRb++Z
+ 8SNQ==
+X-Gm-Message-State: AOJu0YzB79aLdEkIbIPEm869i9YP1cYvs/2H5zUXGsw0t5Xrf+SB/OvV
+ qaHUIDl1l2fWNCe5xjuifDd/+2SXohKiYAxu+fj2rDHfzmzQ4CjeReP9VCLcPJmuFnC3v2BSxH+
+ T4Taf1h/sVYqfk1Oaq1eq6vqBw5pm/BTpE2LK
+X-Google-Smtp-Source: AGHT+IGsFL6ZSNe8AgN4cv496QDRvZYEa4Kw/JFDDALVrrr4C1DYaNxOKai4Nl2rgkmfPfgIwNPGIyDuatC8CG/CoeM=
+X-Received: by 2002:a05:6830:2656:b0:703:6845:ed89 with SMTP id
+ 46e09a7af769-709ad85200bmr865904a34.5.1722528759723; Thu, 01 Aug 2024
+ 09:12:39 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240730144035.3992996-1-sjg@chromium.org>
  <20240730144035.3992996-3-sjg@chromium.org>
  <CADg8p94BuoZzqhjE8eioS8TOHP=iyEK6LkBsTys78hLTf54x_g@mail.gmail.com>
 In-Reply-To: <CADg8p94BuoZzqhjE8eioS8TOHP=iyEK6LkBsTys78hLTf54x_g@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Thu, 1 Aug 2024 21:08:09 +0530
-Message-ID: <CADg8p94pk=V1jv=N6brXjOZxZV7jpSUvLtmRLFdt556uG8oKBw@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 1 Aug 2024 10:12:28 -0600
+Message-ID: <CAFLszTgOPQouuUB2mPL2z-S=3=swuah9uppJu1vtFzLS4RE1wQ@mail.gmail.com>
 Subject: Re: [RFC PATCH 2/4] lmb: Tighten up the code in lmb_add_region_flags()
-To: Simon Glass <sjg@chromium.org>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -87,7 +83,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 1 Aug 2024 at 20:28, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+Hi Sughosh,
+
+On Thu, 1 Aug 2024 at 08:58, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
 > On Tue, 30 Jul 2024 at 20:10, Simon Glass <sjg@chromium.org> wrote:
 > >
@@ -162,6 +160,10 @@ On Thu, 1 Aug 2024 at 20:28, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > I think the above should have a check for alist_full(), and then add
 > to the list if full. Else we simply go on adding to the list on every
 > new node that gets added.
+
+At this point in the function, we know that we are adding a new entry.
+We could have an anlist_insert() perhaps?
+
 >
 > >
 > >         /* Couldn't coalesce the LMB, so add it to the sorted table. */
@@ -190,15 +192,9 @@ On Thu, 1 Aug 2024 at 20:28, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
 > Else we are overwriting one region?
 
-To answer my question, yes we do need to change the loop start to
-accommodate the new node. This code is better, thanks for the
-suggestion!
+It starts by doing the assignment rgn[count - 1 + 1] = rgn[count - 1],
+which I believe is correct?
 
--sughosh
-
->
-> -sughosh
->
 > >
 > > -       if (base < rgn[0].base) {
 > > -               rgn[0].base = base;
@@ -214,3 +210,6 @@ suggestion!
 > > --
 > > 2.34.1
 > >
+
+Regards,
+SImon
