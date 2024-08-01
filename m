@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 253FEC3DA64
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:43:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC2D3C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:43:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96EA388B56;
-	Thu,  1 Aug 2024 16:42:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F06F888B0A;
+	Thu,  1 Aug 2024 16:42:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mI4AaYMd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FrMBXe7p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64371889FC; Thu,  1 Aug 2024 16:42:38 +0200 (CEST)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 27C2088B68; Thu,  1 Aug 2024 16:42:40 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AE5F88B36
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:42:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB6EB88B58
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:42:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-6678a45eaa3so59574687b3.2
- for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:42:36 -0700 (PDT)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6b7b349a98aso47113766d6.3
+ for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:42:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722523355; x=1723128155; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722523356; x=1723128156; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=sD+enhfOMej7DvqkovxxtrJhVORM5GKgHn+gjTanvTo=;
- b=mI4AaYMd5wWd7FLGdfk1dIkWhjepODMGFNNL9osqqAxK8kwpLFvbqi36KN/L+DSzUm
- 4dOMBiMqomlkJoVQTFF6svqqGMvcbVmbqo0862QlHJ6L29vm5FZi6HbxaEsBaWvAjhQx
- bb72ritDOTYqaswlRzw0dnypxEHS9yoVrfMrU=
+ bh=KAWtoI5gfeRZVRqSYU0tCslGohSIbXBJ+wqDOrUj0NY=;
+ b=FrMBXe7puXuDGOWlohk6RpkGVpZSyOIPmrlp6Qh4LUMWELUrA9p4G0wK0facLlD7br
+ W7YxRMMdD2hrpQYVV4QZdbSs/WcQQjPIoxlyJuhRYRxHd3wJEBMVlZB/rYwNFoOzSHCE
+ Uk5rVXfH+IpYrMVXZA3jA8HYd1fBtCyZPQduY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722523355; x=1723128155;
+ d=1e100.net; s=20230601; t=1722523356; x=1723128156;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=sD+enhfOMej7DvqkovxxtrJhVORM5GKgHn+gjTanvTo=;
- b=lQXp9ZyFuNw8JKAoZ1ffPXRtcBA/5URzLRIFtwfr9vMsI+UNcbLYuHLPwXjaYfHpxA
- W1ZiPkqKtFalTlQptlDkn3xtLV2Th3ReAH5dFvOJkVjGaqrrKMDxDlUMCIJYwqwQAZUl
- 2pqBP7Ez0Q0cIJkuVogTooXDtq58rWMEy0ghtaeISWyQj3hk7Yejpiguv/Etx4H4tNf9
- xX3Bf3rQ6/8wLdrxrHhpy0MIdgLbs983mkf1PMazwEiUDTw8ixnXM86BsrXDH7iQF0Bw
- xTV/IOcTbUCt+vsT+jBU3oVpcppcsd8tdmZoIDwb/vcog6tun+RR7PpyGyNO9Y4uomMv
- fZpA==
+ bh=KAWtoI5gfeRZVRqSYU0tCslGohSIbXBJ+wqDOrUj0NY=;
+ b=EcUrNfGpNQR+FEDfSTUKNAh3TD2ao+rKWGiTHQD5ZBZfyytEQL96APEq27/zwM7vY2
+ Oe4ucKDk0K8spbC88yTRrpaMRqGTJ76t8jNBjDk6CSgAQhtBE3rtuOxaTUJZxe6gLNsU
+ 5LSr0SWovuzCWEub8BrHcdESCwBdkieF+fTdVbmov0g3X1qaYiQp9Fh004J6b/i1A1YB
+ PxV0buRs21aPcuby2tBDVeA8+8aPJ0IS5VhROzkIEjLvNnuD08SwNAYKfPIL+eAEWPyY
+ RFDoXiDAusXokUu0l87qnUS4BCiZAbYaAKS1IrAF+bKdEQX7mpTll69bT6P1cyqqBpqu
+ NF/w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVkwqW+2LtqrecEn/Xw/QX+o9LA7hH2MEjh+5l7Y4yEwIMq7qdCS76nSsK9ztbwBK1PS8rHOg7Q3SaQA0B8VsNjn4/0sw==
-X-Gm-Message-State: AOJu0YyTEf3BLJM4PqP4An/7kWRXVRln0f/mUYcRgaWofxWogVewfbT4
- HXFyGglkxAeHyQ1ghTnGHnqtcO0wtOzU68gKJK4Zq3gf0/d+WrMQnEctnqw/H1bd2QNF+0cMlDw
- MOiqV8dqRjOCp6Ffbx++VyXLBAA7vjYZsd3S4
-X-Google-Smtp-Source: AGHT+IEc7hZWA2HJRl5dMeZMv48Q9jQoCijeo25ZX9tbbvW51hbM1Uw6qi3ZJpvsAB5j6LoZEwZUBZvzeKrLbnr0Nxo=
-X-Received: by 2002:a0d:f1c4:0:b0:64a:9fc7:3b15 with SMTP id
- 00721157ae682-68961037a8fmr2769027b3.26.1722523355070; Thu, 01 Aug 2024
- 07:42:35 -0700 (PDT)
+ AJvYcCWtb5arICuuIcD8daFkrsGRI4t3yBdszfxJccji1uLMCwBKmvCIa5XoefObuxgGKrYrOFAYw5TmG98riu5T9lgZjU46kA==
+X-Gm-Message-State: AOJu0YwmlF2C1Ss542RNG3s7KordQEjcvYJ9Faq+DHA5NGc22DQLeQEa
+ O2/Lc+yahK128Xk7RAkQ/P7kY05npwHL81KlqZnFmaGkIlPLLHQhdhr2UUHtXi0PnhHvd+SBgl+
+ niUCLrUfA/2n3FHG2CQPDBV+GWe5sKGV/CXqS
+X-Google-Smtp-Source: AGHT+IG0F+7ubQ6qFTv4Illz03mYIZWQ4Sfy2bTJYBpGjdoCL2Qw18aOe6cIrpLgTddC/8MnfZQ+RptD43cKUi1EjSg=
+X-Received: by 2002:a05:6214:5781:b0:6b5:d90d:ea3c with SMTP id
+ 6a1803df08f44-6bb98378f87mr5361806d6.3.1722523356148; Thu, 01 Aug 2024
+ 07:42:36 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240731134257.686017-1-admin@hifiphile.com>
- <20240731134257.686017-4-admin@hifiphile.com>
-In-Reply-To: <20240731134257.686017-4-admin@hifiphile.com>
+In-Reply-To: <20240731134257.686017-1-admin@hifiphile.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 1 Aug 2024 08:42:24 -0600
-Message-ID: <CAFLszThGCdJYopHkQn_84OVjNjQyv3WbT4gmW7NpKYuuZRet8A@mail.gmail.com>
-Subject: Re: [RFC PATCH 3/4] cmd: bind: Use device sequence instead for driver
- bind/unbind
+Date: Thu, 1 Aug 2024 08:42:25 -0600
+Message-ID: <CAFLszTiAjodH7P50ryJv7NZCAn5zahT=gBrvs+sNUPX0CDdb-Q@mail.gmail.com>
+Subject: Re: [RFC PATCH 0/4] dm: Duplicate uclass name fix and alias
+ improvements
 To: Zixun LI <admin@hifiphile.com>
 Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
  Mattijs Korpershoek <mkorpershoek@baylibre.com>, Marek Vasut <marex@denx.de>,
@@ -91,41 +90,45 @@ Hi Zixun,
 
 On Wed, 31 Jul 2024 at 07:43, Zixun LI <admin@hifiphile.com> wrote:
 >
-> Currently uclass index is used for bind/unbind which ignores alias
-> sequence numbering. Use device sequence number instead as it's
-> the number explicitly set in the DT.
+> Patch 1 is a tentative fix for duplicate uclass name issue met in
+> https://lists.denx.de/pipermail/u-boot/2024-July/560189.html
 >
-> Signed-off-by: Zixun LI <admin@hifiphile.com>
-> ---
->  cmd/bind.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
+> The idea is to use orignal class name only for sequence alias to keep this
+> alias function working and rename the class something else.
 
-I assume no tests need updating, but please do add a note to
-doc/usage/cmd/bind.rst
+Can we rename the gadget uclass to usb_gadget or similar, then update
+the aliases?
 
-> diff --git a/cmd/bind.c b/cmd/bind.c
-> index 3a59eefd5c..30f1163e17 100644
-> --- a/cmd/bind.c
-> +++ b/cmd/bind.c
-> @@ -31,7 +31,7 @@ static int bind_by_class_index(const char *uclass, int index,
->                 return -EINVAL;
->         }
 >
-> -       ret = uclass_find_device(uclass_id, index, &parent);
-> +       ret = uclass_find_device_by_seq(uclass_id, index, &parent);
->         if (!parent || ret) {
->                 printf("Cannot find device %d of class %s\n", index, uclass);
->                 return ret;
-> @@ -58,7 +58,7 @@ static int find_dev(const char *uclass, int index, struct udevice **devp)
->                 return -EINVAL;
->         }
+> Patch 2 and 3 make "dm tree", "bind" and "unbind" commands to take care
+> of alias sequence numbering. As the alias sequence numbering is more
+> meanful than uclass index.
 >
-> -       rc = uclass_find_device(uclass_id, index, devp);
-> +       rc = uclass_find_device_by_seq(uclass_id, index, devp);
->         if (!*devp || rc) {
->                 printf("Cannot find device %d of class %s\n", index, uclass);
->                 return rc;
+> Patch 4 is the actual fix for usb gadet class.
+>
+> There are some situations where uclass index and device sequence number
+> are misused which is not convered by this patch set, for example in
+> drivers/net/sandbox.c, uclass_get_device() is used which is based on
+> uclass index, while in the comments it says "index - The alias index
+> (also DM seq number)"
+>
+> Zixun LI (4):
+>   dm: core: Add a way to specify an alt name for alias sequence
+>     numbering
+>   dm: core: Show device sequence instead in dm_dump_tree()
+>   cmd: bind: Use device sequence instead for driver bind/unbind
+>   usb: gadget: udc: Fix duplicate uclass name
+>
+>  cmd/bind.c                          |  4 ++--
+>  drivers/core/device.c               |  3 ++-
+>  drivers/core/dump.c                 |  2 +-
+>  drivers/core/read.c                 |  7 ++++++-
+>  drivers/core/uclass.c               | 11 +++++++++--
+>  drivers/usb/gadget/udc/udc-uclass.c |  3 ++-
+>  include/dm/read.h                   |  9 ++++++++-
+>  include/dm/uclass.h                 |  2 ++
+>  8 files changed, 32 insertions(+), 9 deletions(-)
+>
 > --
 > 2.45.2
 >
