@@ -4,45 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5228AC3DA64
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 03:41:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D713C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 05:33:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBAB988AFA;
-	Thu,  1 Aug 2024 05:39:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id CB40C8863C;
+	Thu,  1 Aug 2024 07:33:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cDPZrHNt";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B5AF8881B; Thu,  1 Aug 2024 05:39:48 +0200 (CEST)
-Received: from inva020.nxp.com (inva020.nxp.com [92.121.34.13])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0CB5B88ACA; Thu,  1 Aug 2024 07:33:45 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 317C288B1F
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 05:39:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C0F388A9B
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 07:33:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=nxp.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Zhiqiang.Hou@nxp.com
-Received: from inva020.nxp.com (localhost [127.0.0.1])
- by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id E9A661A0C8B;
- Thu,  1 Aug 2024 05:39:44 +0200 (CEST)
-Received: from aprdc01srsp001v.ap-rdc01.nxp.com
- (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
- by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id B17111A0B07;
- Thu,  1 Aug 2024 05:39:44 +0200 (CEST)
-Received: from mega.am.freescale.net (mega.ap.freescale.net [10.192.208.232])
- by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id
- 06DDC1820F59; Thu,  1 Aug 2024 11:39:42 +0800 (+08)
-From: Zhiqiang Hou <Zhiqiang.Hou@nxp.com>
-To: u-boot@lists.denx.de, trini@konsulko.com, peng.fan@nxp.com,
- festevam@gmail.com, sjg@chromium.org, marex@denx.de, lukma@denx.de,
- seanga2@gmail.com, xypron.glpk@gmx.de
-Cc: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
-Subject: [PATCHv5 14/14] configs: imx93: enable the 'cpu' command
-Date: Thu,  1 Aug 2024 11:59:59 +0800
-Message-Id: <20240801035959.43115-15-Zhiqiang.Hou@nxp.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20240801035959.43115-1-Zhiqiang.Hou@nxp.com>
-References: <20240801035959.43115-1-Zhiqiang.Hou@nxp.com>
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-59f9f59b827so9641976a12.1
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 22:33:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1722490421; x=1723095221; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=siDGD527myJBJ/mJBS46QFP8C/jqB6HD7sA4jdUzJF8=;
+ b=cDPZrHNt32SGFCxRnHe/tnzVzN2OvhFsbvix/C0Y98IYRLGqGr943RNjmwa1Gdjhnl
+ JQyQYIdvmhHW4ChxqMEonQzi6wKJdHIulPBawtCjJgA1+aMjI9050DSgj4QNt8BlYpDD
+ cMjuYYei7ToyW+At1iqnA4hikcetx4387DDKiHX8wyJpl3L91lK61VwvspEWFh4Gp/BS
+ LLkgixYZ/40JyYwgZJg6MBbFuhoG0J04FzT0eutXPPDrciESrOKppb4His73Srr0KPTR
+ ij+6AeUmfCo9ZAbVwknnjreAU9tpV2q1xKyAsPZOQM07VwI5YCQUKeKYJMS2cJ+J7TXb
+ noGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722490421; x=1723095221;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=siDGD527myJBJ/mJBS46QFP8C/jqB6HD7sA4jdUzJF8=;
+ b=l7u+HN9bKpBlVpVLmjIJL5onOXe0j1dL3Z0MjFTXea7CKRJFv55PBz+E+C2PzGuZ9/
+ OnVMNrnnUyz/xm1lA/ALoXmbzG/GBxXQTiXMgG+XkhqZZYLLphTZOi/JgIJauzPDTUXx
+ ZylYrSehx1pMVlXk1L8J+ElBBuiG0Y/MxI988Jpe1uSTl4rFvo2hyAsvAuhF7speYcel
+ vA3HfJ0IxdATxRMwOXfYQ8ypq5iqZb87LCuAfS8FxYdqZbENLUxTYsTr2Pog4bxyNx9C
+ dHQxd/JxNfpkj+tTmKkjLXpHc1pHSkcFVBPc21c+qPrMCwYsUBVNZ3eFPKqZJkGE6qDy
+ l79A==
+X-Gm-Message-State: AOJu0YxGnxwhVyzACetd6mkltIlNEsavanC+/iCoa2ZiKPd9YnsWf9mr
+ BCZ/C0XeD189sUjz/BC8eZEq6wiXEcPt2J1YdylKQPMPXTXXA6Ld
+X-Google-Smtp-Source: AGHT+IELnM6eIIDMtTmlKUrnvzR/gy0yM0dQkHFLZchG7oUde8IUMZy3k8ra16oMfJU5tysPJZtygg==
+X-Received: by 2002:aa7:de90:0:b0:5a3:3062:36c7 with SMTP id
+ 4fb4d7f45d1cf-5b6feb13eb2mr691648a12.7.1722490421300; 
+ Wed, 31 Jul 2024 22:33:41 -0700 (PDT)
+Received: from xeon.. ([188.163.112.54]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5ac64eb3a95sm9477990a12.61.2024.07.31.22.33.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 31 Jul 2024 22:33:41 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
+ Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng@tinylab.org>,
+ Anton Bambura <jenneron@protonmail.com>,
+ =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Igor Prusov <ivprusov@salutedevices.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v1 1/3] video: tegra20: dc: remove DECLARE_GLOBAL_DATA_PTR use
+Date: Thu,  1 Aug 2024 08:33:13 +0300
+Message-ID: <20240801053315.6428-2-clamor95@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240801053315.6428-1-clamor95@gmail.com>
+References: <20240801053315.6428-1-clamor95@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,31 +96,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
+It seems that DECLARE_GLOBAL_DATA_PTR use is not needed and video system
+works perfectly fine without it.
 
-Enable the 'cpu' command to display the CPU info and release CPU core to
-run baremetal or RTOS applications.
-
-Signed-off-by: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
+Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
-V5:
- - No change.
+ drivers/video/tegra20/tegra-dc.c | 2 --
+ 1 file changed, 2 deletions(-)
 
- configs/imx93_11x11_evk_defconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/configs/imx93_11x11_evk_defconfig b/configs/imx93_11x11_evk_defconfig
-index 2246715d82..93ab0b9aa3 100644
---- a/configs/imx93_11x11_evk_defconfig
-+++ b/configs/imx93_11x11_evk_defconfig
-@@ -52,6 +52,7 @@ CONFIG_CMD_ERASEENV=y
- # CONFIG_CMD_CRC32 is not set
- CONFIG_CMD_MEMTEST=y
- CONFIG_CMD_CLK=y
-+CONFIG_CMD_CPU=y
- CONFIG_CMD_DFU=y
- CONFIG_CMD_FUSE=y
- CONFIG_CMD_GPIO=y
+diff --git a/drivers/video/tegra20/tegra-dc.c b/drivers/video/tegra20/tegra-dc.c
+index accabbf4db..d24aa375b3 100644
+--- a/drivers/video/tegra20/tegra-dc.c
++++ b/drivers/video/tegra20/tegra-dc.c
+@@ -26,8 +26,6 @@
+ 
+ #include "tegra-dc.h"
+ 
+-DECLARE_GLOBAL_DATA_PTR;
+-
+ /* Holder of Tegra per-SOC DC differences */
+ struct tegra_dc_soc_info {
+ 	bool has_timer;
 -- 
-2.17.1
+2.43.0
 
