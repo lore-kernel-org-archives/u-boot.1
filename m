@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D6F4C3DA4A
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:43:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86D15C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:43:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5C2188B67;
-	Thu,  1 Aug 2024 16:42:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 14CE688AE4;
+	Thu,  1 Aug 2024 16:43:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J3AnJanJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="V0HRi2hR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EE2D88B36; Thu,  1 Aug 2024 16:42:42 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id 6B51088ADF; Thu,  1 Aug 2024 16:43:51 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED79688B63
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:42:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D5C1D88B17
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:43:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-70968db52d0so1386443a34.3
- for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:42:39 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-7093b53f315so2602478a34.2
+ for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:43:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722523359; x=1723128159; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zYG3ivsFnQ7hhCX9FyhinV+Va97uHnNo7qzFZnNPOz0=;
- b=J3AnJanJZqqQnByc3Xj8YpwbhGM4Tel7GAurgk9kYX4IdydHYiYCHMD7YkU3Ll+6zZ
- oEcX8qWbuhGktgukwbxN1hB3B1YRap2QibWlMpR2tRlH2VgO4OmDBMp6L+fWxSKwXcJl
- 1fWNabBCVJnCeqNAJnZsTNvREIfCplJGA8Yuc=
+ d=konsulko.com; s=google; t=1722523427; x=1723128227; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=dl2xrcUHVQwTOmv8LkbxCa+ZVcqtj8eXYnjkETgcdTg=;
+ b=V0HRi2hRZUl4r2KK0EwZbpHhE+ww/lGZcjyTlo2qg+cSQ7ApR5sYgyMM9JYq3uk15X
+ WONgJkmiTLSwPz7jfIyhDDL69yjdu2a3rxVmO1cnp2Uztf/eVeWD2opejdFM3ze8b0rA
+ QzkxyyQsgLJA3MFInCGe00Xt1XxWibQvffLYI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722523359; x=1723128159;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zYG3ivsFnQ7hhCX9FyhinV+Va97uHnNo7qzFZnNPOz0=;
- b=d87gImf2fmc9gUgk2g2ryotwRTFx0TAhRIVVkTQjiieIYzJucYSQamncZFNv5GtdjP
- w3qGvtvlsyMDxGX/Ox5UZDePkHEw29P4vDzoS4aFIzXDszQxvFfJerFIcuZ0aAONJ+WM
- agCTbAhxIfpjwzIqnG+LpDBKa681l07w7qr+tj7ZrADOzLSs/Ugz93bBH46/cRcB/atf
- gdqjfEeHL/xkMcrqTshADlTShCMbN+4pXD9QLTHnBo5LtssVdemllq7EwavOyNDTZpXY
- wVjekk4n/v+u0D7cHMu/5f08pm34UhDz6appBsLzguj6LgvuhDUAzbQ9BvaiPLahU4Lk
- 5bCA==
-X-Gm-Message-State: AOJu0YzHLewcwAM57kOTr3XNsCUmdYT7M3tYL3hPFyTWDSn9W5UUxkFW
- 9TL1avslWUwV32YpgYOEyLDCWb5rOX5ibiz9FndkHfUn+CxgjnuaS/W0+oi/IjYHZard6r4z648
- ICpBTHKyC+LXQ3UivooRP8rTN9ob/zrJI7jYP
-X-Google-Smtp-Source: AGHT+IEwkL4LG4L/NbEGLdOC/FZU4fitYFAHwhvb4FwXxhzJZ64Rr6B/XCAJFu7MNOFrJN4JREFKizY5PtOzlmV06ZE=
-X-Received: by 2002:a05:6358:42a1:b0:1a6:72b8:d08f with SMTP id
- e5c5f4694b2df-1af3bb29a12mr28645655d.29.1722523358621; Thu, 01 Aug 2024
- 07:42:38 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1722523427; x=1723128227;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dl2xrcUHVQwTOmv8LkbxCa+ZVcqtj8eXYnjkETgcdTg=;
+ b=c59wRsxv5+p8kHyPU0rTukx/03DY1Xi1TNFvAY+mooINUNP79OEYaMa7liZabdI66t
+ s2qX3+/foWH8YJNCZzMP445uwI/4Pf/IljWjY73ABygGFM4nAUy//Bkijcfn42BBPlSI
+ IEgLCqFWft5J45N3UAQyiFFilCX1RQSashVRYSTvhzxuEMr44LvYMGscgR0d4fRHl/f+
+ u0sj0bjd736GxZvakMvhPW5dqOJK0jsn6hgV7ZMNNOqGJcvkP+6OCNAYCKz15ykZq9Tc
+ KNMsNYLY36cVb1fxjDIyIMGoVvGPRFjdNAhIhCNoPzeLUXnAdp+4KUCqaHvsvkPHbxMu
+ Ev4Q==
+X-Gm-Message-State: AOJu0YzwDmReWIT1rAVjgA6fe42L+GTjHoW78Ha4LmGHrEiALWVNDqt1
+ gzgsACv3QUOXNPvwru+Q6xhUtv+h5qODVfzwO5beu0eDe0RSwM2ycfzpc3VSf0s=
+X-Google-Smtp-Source: AGHT+IHwk3XaYvdqBxz8xrToYo3AIhZ1Rm4Sr8wVHIBBgJFQuk+jW9la0o3Vs1iAsviFL0aBWGSiaQ==
+X-Received: by 2002:a05:6830:7107:b0:709:40d5:44f2 with SMTP id
+ 46e09a7af769-709b32015e1mr404599a34.3.1722523427552; 
+ Thu, 01 Aug 2024 07:43:47 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-103-190.totalplay.net.
+ [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7095aea641bsm1401681a34.58.2024.08.01.07.43.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Aug 2024 07:43:47 -0700 (PDT)
+Date: Thu, 1 Aug 2024 08:43:44 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>
+Subject: Re: [PATCH v5 00/20] Introduce the lwIP network stack
+Message-ID: <20240801144344.GH3794063@bill-the-cat>
+References: <cover.1721910373.git.jerome.forissier@linaro.org>
+ <20240725172220.GA989285@bill-the-cat>
+ <20240725223401.GD989285@bill-the-cat>
+ <ebc992d6-93e8-4e7e-99dc-834cc981f5a3@linaro.org>
 MIME-Version: 1.0
-References: <20240730073003.28892-1-Zhiqiang.Hou@nxp.com>
- <20240730073003.28892-11-Zhiqiang.Hou@nxp.com>
- <CAFLszTgzXzUym-JBNk8i+50TsN81vU=Nhs_GMzvR+jmYaqMPsQ@mail.gmail.com>
- <DB9PR04MB9236CF945D9E444C5808FC2F84B22@DB9PR04MB9236.eurprd04.prod.outlook.com>
-In-Reply-To: <DB9PR04MB9236CF945D9E444C5808FC2F84B22@DB9PR04MB9236.eurprd04.prod.outlook.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 1 Aug 2024 08:42:28 -0600
-Message-ID: <CAFLszTg7casCckSwQuC0VqYYaDvyOwnzQRUu6tTLESKGvhS+Zg@mail.gmail.com>
-Subject: Re: [PATCHv4 10/14] cmd: cpu: add release subcommand
-To: "Z.Q. Hou" <zhiqiang.hou@nxp.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "trini@konsulko.com" <trini@konsulko.com>, 
- Peng Fan <peng.fan@nxp.com>, "festevam@gmail.com" <festevam@gmail.com>,
- "marex@denx.de" <marex@denx.de>, 
- "lukma@denx.de" <lukma@denx.de>, "seanga2@gmail.com" <seanga2@gmail.com>, 
- "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="80rdvzUvNhg5JRum"
+Content-Disposition: inline
+In-Reply-To: <ebc992d6-93e8-4e7e-99dc-834cc981f5a3@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,115 +94,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Zhiqiang,
 
-On Wed, 31 Jul 2024 at 20:37, Z.Q. Hou <zhiqiang.hou@nxp.com> wrote:
->
-> Hi Simon,
->
-> > -----Original Message-----
-> > From: Simon Glass <sjg@chromium.org>
-> > Sent: Wednesday, July 31, 2024 10:39 PM
-> > To: Z.Q. Hou <zhiqiang.hou@nxp.com>
-> > Cc: u-boot@lists.denx.de; trini@konsulko.com; Peng Fan
-> > <peng.fan@nxp.com>; festevam@gmail.com; marex@denx.de;
-> > lukma@denx.de; seanga2@gmail.com; xypron.glpk@gmx.de
-> > Subject: Re: [PATCHv4 10/14] cmd: cpu: add release subcommand
-> >
-> > Hi Zhiqiang,
-> >
-> > On Tue, 30 Jul 2024 at 01:09, Zhiqiang Hou <Zhiqiang.Hou@nxp.com> wrote=
-:
-> > >
-> > > From: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
-> > >
-> > > Add a new subcommand 'release' to bring up a core to run baremetal an=
-d
-> > > RTOS applications.
-> > >
-> > > For example on i.MX8M Plus EVK, release the LAST core to run a RTOS
-> > > application, passing the sequence number of the CPU core to release,
-> > > here it is 3:
-> > >     u-boot=3D> cpu list
-> > >       0: cpu@0      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 31C
-> > >       1: cpu@1      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 30C
-> > >       2: cpu@2      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 31C
-> > >       3: cpu@3      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 31C
-> > >
-> > >     u-boot=3D> load mmc 1:2 c0000000 /hello_world.bin
-> > >     66008 bytes read in 5 ms (12.6 MiB/s)
-> > >     u-boot=3D> dcache flush; icache flush
-> > >     u-boot=3D> cpu release 3 c0000000
-> > >     Released CPU core (mpidr: 0x3) to address 0xc0000000
-> > >
-> > > Signed-off-by: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
-> > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > > V4:
-> > >  - Updated the change logs.
-> > >
-> > >  cmd/cpu.c | 44 ++++++++++++++++++++++++++++++++++++++++++--
-> > >  1 file changed, 42 insertions(+), 2 deletions(-)
-> > >
-> > > diff --git a/cmd/cpu.c b/cmd/cpu.c
-> > > index 9e323069b9..2755250756 100644
-> > > --- a/cmd/cpu.c
-> > > +++ b/cmd/cpu.c
-> > > @@ -3,6 +3,7 @@
-> > >   * Copyright (c) 2015 Google, Inc
-> > >   * Written by Simon Glass <sjg@chromium.org>
-> > >   * Copyright (c) 2017 =C3=81lvaro Fern=C3=A1ndez Rojas <noltari@gmai=
-l.com>
-> > > + * Copyright 2024 NXP
-> > >   */
-> > >
-> > >  #include <command.h>
-> > > @@ -18,6 +19,19 @@ static const char
-> > *cpu_feature_name[CPU_FEAT_COUNT] =3D {
-> > >         "Device ID",
-> > >  };
-> > >
-> > > +static struct udevice *cpu_find_device(unsigned long cpu_id) {
-> > > +       struct udevice *dev;
-> > > +
-> > > +       for (uclass_first_device(UCLASS_CPU, &dev); dev;
-> > > +            uclass_next_device(&dev)) {
-> > > +               if (cpu_id =3D=3D dev_seq(dev))
-> > > +                       return dev;
-> > > +       }
-> > > +
-> > > +       return NULL;
-> > > +}
-> > > +
-> > >  static int print_cpu_list(bool detail)  {
-> > >         struct udevice *dev;
-> > > @@ -82,10 +96,36 @@ static int do_cpu_detail(struct cmd_tbl *cmdtp, i=
-nt
-> > flag, int argc,
-> > >         return 0;
-> > >  }
-> > >
-> > > +static int do_cpu_release(struct cmd_tbl *cmdtp, int flag, int argc,
-> > > +                         char *const argv[]) {
-> > > +       struct udevice *dev;
-> > > +       unsigned long cpu_id;
-> > > +       unsigned long long boot_addr;
-> > > +
-> > > +       if (argc !=3D 3)
-> > > +               return CMD_RET_USAGE;
-> > > +
-> > > +       cpu_id =3D dectoul(argv[1], NULL);
-> >
-> > I just noticed this...normally we use hex for parameters.
->
-> Yes, but the <core ID> is from the CPU device sequence number listed by t=
-he 'cpu list', which is printed in dec. So I think use dec parameter here i=
-s reasonable.
+--80rdvzUvNhg5JRum
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-We will have devices with hundreds of CPUs so decimal is probably
-going to bite us. U-Boot uses hex for most values.
+On Thu, Aug 01, 2024 at 04:40:03PM +0200, Jerome Forissier wrote:
+>=20
+>=20
+> On 7/26/24 00:34, Tom Rini wrote:
+> > On Thu, Jul 25, 2024 at 11:22:20AM -0600, Tom Rini wrote:
+> >> On Thu, Jul 25, 2024 at 02:57:21PM +0200, Jerome Forissier wrote:
+> >>
+> >>> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lw=
+ip
+> >>> library for the network stack" [1]. The goal is to introduce the lwIP=
+ TCP/IP
+> >>> stack [2] [3] as an alternative to the current implementation in net/,
+> >>> selectable with Kconfig, and ultimately keep only lwIP if possible. S=
+ome
+> >>> reasons for doing so are:
+> >>> - Make the support of HTTPS in the wget command easier. Javier T. and
+> >>> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
+> >>> so. With that it becomes possible to fetch and launch a distro instal=
+ler
+> >>> such as Debian etc. using a secure, authenticated connection directly
+> >>> from the U-Boot shell. Several use cases:
+> >>>   * Authentication: prevent MITM attack (third party replacing the
+> >>> binary with a different one)
+> >>>   * Confidentiality: prevent third parties from grabbing a copy of the
+> >>> image as it is being downloaded
+> >>>   * Allow connection to servers that do not support plain HTTP anymore
+> >>> (this is becoming more and more common on the Internet these days)
+> >>> - Possibly benefit from additional features implemented in lwIP
+> >>> - Less code to maintain in U-Boot
+> >>>
+> >>> Prior to applying this series, the lwIP stack needs to be added as a
+> >>> Git subtree with the following command:
+> >>>
+> >>>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savan=
+nah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
+> >>
+> >> This is better than v4, and on the hardware platforms I could build and
+> >> boot on (which was most of mine except the am62x_beagleplay), the tests
+> >> ran and completed, including the tftp+boot a Linux kernel.
+> >>
+> >> The bad news is CI blows up, a lot:
+> >> https://source.denx.de/u-boot/u-boot/-/pipelines/21764
+> >> And:
+> >> https://dev.azure.com/u-boot/a1096300-2999-4ec4-a21a-4c22075e3771/_api=
+s/build/builds/9014/logs/106
+> >> which is another Kconfig dependency problem. I don't _think_ I
+> >> introduced that, but since this wasn't against top of tree, I had to
+> >> apply the cmd/Kconfig patch manually.
+> >>
+> >> I have my world build running still and may have more comments based on
+> >> that.
+> >=20
+> > First, with NET_LWIP being default rather than NET, there's a lot of
+> > other Kconfig dependency issues. Unfortunately I don't see an easy tool
+> > for making sure this is all clean aside from a shell loop like:
+> > for C in `(cd configs;ls)`;do make -s $C;done
+>=20
+> I have run this loop successfully with the upcoming v6 version. Some
+> configs do print some warnings but there is no error.
 
-Anyway, let's worry about it later. What you have is fine.
+Those warnings are the problem, I wasn't clear, sorry. If I could make
+it error, I would since then CI would catch it.
 
-Regards,
-Simon
+--=20
+Tom
+
+--80rdvzUvNhg5JRum
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmarnxkACgkQFHw5/5Y0
+tyz7bAv/Q1TqmsFtwSR4nUPIH126OBSG39wQCPNOCv2YwJm3WKb5MXxo247Ra6q5
+qxS4WuZb3koRZwQJDQye1HFvBnlj3oCkdIJySaYO6+8KP+u03RTeSg1U8Btnv5by
++OBtU0R/494CIFBrKLMIPP2k0C6FOY83jRRGAJ1Yj4WxjRP486bagLmt8KW5TB4m
+SqV58HNbIbjGY5xD881JQejft73K8VmVANgu/HBmM1zpFHSmCbEPJwGjB8M1iMfh
+4b+X61NSoNLSjudbas//GPt6P+mc3n6hbTPV2oSTKomfN2ztus/e2LCTryCRdkvk
+k0WoGskuHdt/Yj4/PrFQQIxfZMUZl0l5nNQBCBM0l9M6paU8yZQ+zk9Lidmc3Ysy
+pym1c1f9jUgCcBHdDD4zwWCMWbEaRRg3Vy6xpUDZPYAMy14/xzYWxdKflUAGSlso
+zZt/qeG5yscyEH0INBV5Y/8iNrCiS6bGyuo1ovOE+l1JcesfOLDj8mlPRFIJsL6t
+J7Gj0p4l
+=tP2+
+-----END PGP SIGNATURE-----
+
+--80rdvzUvNhg5JRum--
