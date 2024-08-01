@@ -4,71 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 015E1C3DA7F
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 00:30:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E830C3DA7F
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 01:01:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C87288AC9;
-	Thu,  1 Aug 2024 02:30:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 985B688AB9;
+	Thu,  1 Aug 2024 03:01:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1722472204;
-	bh=DGCh97dwzx+CgyCJ4GYjdQytENCFGXIngisPqPPH3Ag=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=uV/mwItBp+5n2Op3YGsK9+sy0EIXEO8bLw56O8YtJKBjHt2nQUpWUcML5oaBypwMm
-	 h6Qe/9muHxbLiSOCeoLSAdaHBHI6AivSEttd/nBhZZsj1lR3SlNdq8x0HpeDzubP3m
-	 M65/KkbBlV3G+U3vQq4ahiquyh3lGmgh7wgvUvua48TP03kCA7tx6j5tGEwVyMd/lv
-	 6aMsdD51tfeQk7B9HwGhCzpdOM6d7OcbEu3lU8YW9yNg/zC3du3LLUTCaHd0AWE5j4
-	 vVG8bVSu/aC82fZrTRsOzF9cX0DsGTJMYMu6CYZQnm+Nx21PRNo4y1v1nm7AmusAKV
-	 cIvg/S2YWeq8Q==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="EuAqbZQ9";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 9C46D88AB9; Thu,  1 Aug 2024 03:01:15 +0200 (CEST)
+Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 09D3E88A49;
- Thu,  1 Aug 2024 02:30:00 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1722472202;
- bh=DGCh97dwzx+CgyCJ4GYjdQytENCFGXIngisPqPPH3Ag=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=HG1IoXNTMBGsGfEZOjWwwyajvXIk3CBa7Ob/tiM5NSj2AExguTsPHf3hwrJgKKHa2
- 8taQIumEuUhr/F3k4q2uteuTy+Ex6jj8bpN224AcHK4N+D90rcLk0BYtrXjklJp4SO
- s8py4Jb22UNy85uwl8y6lLfE2s+ep591L0mhTkbikR2OXsrCBR/YakK/cHlnc8b38v
- SGnnFsocUaTlU9OpWfRh6AV6EBW5vw2IapHcCN4/CJThUrg3bF/CfRtTNYCoUEY5R+
- UasbGL6AcXZrzBi6yV/fuCneaz7N3KXQzlBgmzCePNTIBmLYVSp9IbUvKUuKudVulp
- rIE4mpkY/Q3gg==
-Message-ID: <eced1020-2157-44a4-98a9-845e218529d9@denx.de>
-Date: Thu, 1 Aug 2024 02:28:48 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 61D9488ABE
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 03:01:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=samsung.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sw0312.kim@samsung.com
+Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
+ by mailout3.samsung.com (KnoxPortal) with ESMTP id
+ 20240801010105epoutp03008163cae5fccc817df1e1b5f656820b~ndQlmZkHP2492424924epoutp03m
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 01:01:05 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
+ 20240801010105epoutp03008163cae5fccc817df1e1b5f656820b~ndQlmZkHP2492424924epoutp03m
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1722474065;
+ bh=Ge2eVW9npf/wt75iuRDXILCzQoBxTtA61mjJPg0APkE=;
+ h=From:To:Cc:Subject:Date:References:From;
+ b=EuAqbZQ9L580xVNLy3AlDLuWbjNlPb3qgLPsTaX5tSSc4U2NgVsAPAUxvr2WkYPzH
+ O1jXEFtIGHW7WqdPGB+y2f6/v3DV0mUDUtnL3a9U9IE/cxH2vTWwH5/xTYjc6XESAI
+ T25qnbKArUFZIVFCsFLxDZXnhOVCA/blvP9yd4PY=
+Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
+ epcas1p4.samsung.com (KnoxPortal) with ESMTP id
+ 20240801010105epcas1p482e6cd2d56be545cdab988f7b37b7e5d~ndQlSoyxi1734317343epcas1p4l;
+ Thu,  1 Aug 2024 01:01:05 +0000 (GMT)
+Received: from epsmges1p5.samsung.com (unknown [182.195.36.136]) by
+ epsnrtp4.localdomain (Postfix) with ESMTP id 4WZ9dD30bgz4x9Px; Thu,  1 Aug
+ 2024 01:01:04 +0000 (GMT)
+Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
+ epsmges1p5.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 91.2F.09734.05EDAA66; Thu,  1 Aug 2024 10:01:04 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
+ 20240801010104epcas1p3aadbfa545c1f7e0c7d91c3175614ab99~ndQkBgVO83143131431epcas1p3R;
+ Thu,  1 Aug 2024 01:01:04 +0000 (GMT)
+Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20240801010104epsmtrp1aff64076b60ad80bd0ab039b758904cd~ndQkAws501156411564epsmtrp1R;
+ Thu,  1 Aug 2024 01:01:04 +0000 (GMT)
+X-AuditID: b6c32a39-8f9ff70000002606-82-66aade50c832
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ B3.69.07567.F4EDAA66; Thu,  1 Aug 2024 10:01:03 +0900 (KST)
+Received: from localhost.localdomain (unknown [10.113.221.223]) by
+ epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
+ 20240801010103epsmtip2ff03cb0c520963ef40c1ca6c40408a17~ndQjv9ggR2122721227epsmtip23;
+ Thu,  1 Aug 2024 01:01:03 +0000 (GMT)
+From: Seung-Woo Kim <sw0312.kim@samsung.com>
+To: u-boot@lists.denx.de, jagan@amarulasolutions.com,
+ andre.przywara@arm.com, trini@konsulko.com
+Cc: sw0312.kim@samsung.com, jh80.chung@samsung.com
+Subject: [PATCH] tools: imagetool: Remove unnecessary check from
+ toc0_verify_cert_item()
+Date: Thu,  1 Aug 2024 10:01:00 +0900
+Message-Id: <20240801010100.21009-1-sw0312.kim@samsung.com>
+X-Mailer: git-send-email 2.19.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] power: regulator: Trigger probe of regulators which
- are always-on or boot-on
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-References: <20240626235717.272219-1-marex@denx.de>
- <a73dffe5-87e3-4e96-965f-9d029f2af8ed@denx.de>
- <CAPVz0n0C6TPdBRUEvJmgAUGAKoetuzr1j=0cMXweP2EqMTwn=g@mail.gmail.com>
- <0910419d-e8ab-4bf9-a083-dc2783afaca1@denx.de>
- <4D07A6E5-F156-44C3-A26D-0F2D913CE92D@gmail.com>
- <18d84528-d2e5-41d6-ae1d-109ee30853b2@denx.de>
- <CAPVz0n2Jzfih0Z85TSQbnz-8OrX4D6UN=anKGTJ=hckRt8f3xA@mail.gmail.com>
- <a95f0d60-2883-4c3d-8a53-ee3ef414cc32@denx.de>
- <CAPVz0n3Ji1sKQK+Lnq8rP3ZqwX3o-kXe2btj93UuVBa3T5C=qw@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAPVz0n3Ji1sKQK+Lnq8rP3ZqwX3o-kXe2btj93UuVBa3T5C=qw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrPKsWRmVeSWpSXmKPExsWy7bCmgW7AvVVpBtu2ilqsmPeT0eLLpgls
+ Fjd+tbFazJj8ks1i6qTN7BZv93ayO7B5rP14n9Vjzbw1jB6vDqxi9zh7ZwejR9+WVYwBrFHZ
+ NhmpiSmpRQqpecn5KZl56bZK3sHxzvGmZgaGuoaWFuZKCnmJuam2Si4+AbpumTlAJygplCXm
+ lAKFAhKLi5X07WyK8ktLUhUy8otLbJVSC1JyCkwL9IoTc4tL89L18lJLrAwNDIxMgQoTsjOu
+ He9nKXjAVtH+jKOB8RprFyMnh4SAicSKyW+AbC4OIYEdjBL9F6ayQTifGCUuHjgBlfnGKLFo
+ 0w5mmJYzt14zQST2ArW0/2CBcL4wSkw6c4sNpIpNQEdi/5LfYEtEBJIkvvStAetmFjCS2HJ+
+ ExOILSwQJbFn3lxGEJtFQFXi0IrXYPW8AtYSF2dsZoTYJi9xYcMtqLigxMmZT1gg5shLNG+d
+ zQyyWELgGLvE28fzWSAaXCS+LF3KDmELS7w6vgXKlpJ42d/GDtHQzCjx/tktRginh1Fiw7QF
+ UN3GEvuXTgY6jwNohabE+l36ENv4JN597WEFCUsI8Ep0tAlBVKtI7Dw6iQ0iLCUxa0MwRNhD
+ 4nTrK7CwkECsxLzpVhMY5WYh+WAWkg9mIaxawMi8ilEstaA4Nz212LDAFB6Ryfm5mxjBKU/L
+ cgfj9Lcf9A4xMnEwHmKU4GBWEuEVOrkyTYg3JbGyKrUoP76oNCe1+BCjKTBMJzJLiSbnA5Nu
+ Xkm8oYmlgYmZkbGJhaGZoZI475krZalCAumJJanZqakFqUUwfUwcnFINTNm64T4tYT71CmtO
+ /DX7+Hpx0wOFLXty1S/tKrSY0HyZUSum7x+zuab7lUst3t/z/LtbTvbMTfS3bX57NYH1PIuB
+ wwxNiwPmG7nO/tdcrfioadv2Q0untc+NPzHhWAH77AWf4/c+m13S8IBjNov31b/PDlhv0+zw
+ P/HYSfCIqKroWfY7oWqrdp0yElKuZwlhmngv6+YyE+9fLMb5c9WkZzUKtO88Kx+960fTv7IH
+ psnTRIL41nCcZlHMfdUXunHVkUYR3ZKVlzQ+Gk5XE2RMTRJvO3JjCt/k6afFl34QW3Ns+f4b
+ 56Mcc5n9W3vTmrxz+zjc+uysrl9xSctb9suLLWhd34Pk42lcAXc1rga9UGIpzkg01GIuKk4E
+ AEhbMxgCBAAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrJLMWRmVeSWpSXmKPExsWy7bCSvK7/vVVpBttWWlmsmPeT0eLLpgls
+ Fjd+tbFazJj8ks1i6qTN7BZv93ayO7B5rP14n9Vjzbw1jB6vDqxi9zh7ZwejR9+WVYwBrFFc
+ NimpOZllqUX6dglcGdeO97MUPGCraH/G0cB4jbWLkZNDQsBE4syt10xdjFwcQgK7GSUevp/O
+ BpGQkpj7bTtjFyMHkC0scfhwMUTNJ0aJHdtmsYDUsAnoSOxf8htskIhAmsTvt8fBbGagoatv
+ tzGB2MICERIPPrwCm8kioCpxaMVrsBpeAWuJizM2M0Lskpe4sOEWVFxQ4uTMJywQc+QlmrfO
+ Zp7AyDcLSWoWktQCRqZVjJKpBcW56bnJhgWGeanlesWJucWleel6yfm5mxjBoamlsYPx3vx/
+ eocYmTgYDzFKcDArifAKnVyZJsSbklhZlVqUH19UmpNafIhRmoNFSZzXcMbsFCGB9MSS1OzU
+ 1ILUIpgsEwenVANT7F6O2bnsC9Z9n7xZzVk3d037d8GNzyt1F78UjOPU1jBczl8i27/71wGL
+ zcuO/zy+YFVutNaOJ3OX/r930WfRc+ak0p8zbdtZTLVcghPKCmYu3hncm39iXtXhrPI4h21b
+ XdrlT7xVX6An8jTUpd5x1kPzqSWrBNIE/l2IDvCZUNXWwvJ76ZaYXWv2s6w6qTMh+v+ZSyaT
+ H5wPZlLM0mlJP+DbsjSu8MDShvCIizq3YzNCp77sjtm8U8LNqd3XPemW7y3FC2EbU7635X94
+ fC7WadNZ3R0bdpnyP7YrlnAOrGWdmvDk8QmpVOUrGk5xjO+3btqwqEX86tLSfLNU5bf/z3JN
+ eNDj+26P4imvgzmzlFiKMxINtZiLihMB/KurvrwCAAA=
+X-CMS-MailID: 20240801010104epcas1p3aadbfa545c1f7e0c7d91c3175614ab99
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+CMS-TYPE: 101P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20240801010104epcas1p3aadbfa545c1f7e0c7d91c3175614ab99
+References: <CGME20240801010104epcas1p3aadbfa545c1f7e0c7d91c3175614ab99@epcas1p3.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,44 +130,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/29/24 1:55 PM, Svyatoslav Ryhel wrote:
+Remove unnecessary null check from toc0_verify_cert_item()
+because the array digest is always not null.
 
-[...]
+Signed-off-by: Seung-Woo Kim <sw0312.kim@samsung.com>
+---
+ tools/sunxi_toc0.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
->>>> What is the problem you observe on tegra 3 ?
->>> i2c line fails since it probes in spl with your patch, but it does not
->>> relocate and then probes once more after relocation. Probe fails along
->>> with all devices on same line.
->>
->> Could it be that you either have to:
->> - Add DM_I2C to tegra 3 SPL
->> - Remove bootph-* from DT to remove the regulator node from SPL
->> - /delete-property/ regulator-always-on; and /delete-property/
->> regulator-boot-on; in -u-boot.dtsi to prevent the regulator from being
->> enabled in SPL ?
->>
-> Obviously NO, you propose nonsense. Same dts is used for both stages.
+diff --git a/tools/sunxi_toc0.c b/tools/sunxi_toc0.c
+index 292649fe90f1..76693647a095 100644
+--- a/tools/sunxi_toc0.c
++++ b/tools/sunxi_toc0.c
+@@ -444,7 +444,7 @@ static int toc0_verify_cert_item(const uint8_t *buf, uint32_t len, RSA *fw_key,
+ 
+ 	/* If a digest was provided, compare it to the embedded digest. */
+ 	extension = &totalSequence->mainSequence.explicit3.extension;
+-	if (digest && memcmp(&extension->digest, digest, SHA256_DIGEST_LENGTH)) {
++	if (memcmp(&extension->digest, digest, SHA256_DIGEST_LENGTH)) {
+ 		pr_err("Wrong firmware digest in certificate\n");
+ 		goto err;
+ 	}
+-- 
+2.19.2
 
-DT source yes, DT blob likely no.
-
-> And I have to add hack-ish stuff just because you wanna introduce code
-> which causes known regressions.
-
-I am trying to understand what problem there is on tegra 3, but it is 
-still not clear to me.
-
-Is the problem somehow related to PMICs (?) being probed in SPL (?) 
-because they have regulators (?) which are marked as regulator-always-on 
-? If so, then this is correct behavior, and if this is not desired in 
-SPL, then you can remove this property from SPL DT in -u-boot.dtsi using 
-/delete-property/ .
-
-[...]
-
-> "We must not probe things as we go. There might be other
-> dependencies not yet bound. It may also take some time. This is not
-> following driver model design, sorry.
-> 
-> So please think of a way to do this properly."
-
-What is this quote about ? Where is this from ?
