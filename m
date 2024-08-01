@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 522C9C3DA64
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 05:48:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EA36C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 05:48:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C59A488AC2;
-	Thu,  1 Aug 2024 07:48:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2725488AE4;
+	Thu,  1 Aug 2024 07:48:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ITEfxvcf";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QB4TF1Fc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAA7588ADC; Thu,  1 Aug 2024 07:48:26 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 2F04D88ACA; Thu,  1 Aug 2024 07:48:27 +0200 (CEST)
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [IPv6:2a00:1450:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1376B88ACA
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 07:48:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9348988A00
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 07:48:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a7a94478a4eso319619666b.1
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 22:48:25 -0700 (PDT)
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-2f01e9f53e3so94871031fa.1
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 22:48:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20230601; t=1722491304; x=1723096104; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CSKDlCRUkmJthEm50ThqusoNqvaIEj4I2eEkVlMdUsc=;
- b=ITEfxvcfVqcHa4tP7bh3D0XdG1SIl2vCSwLbDZHCehr47ZGwAzgHVuHa5Ni1GL/6jv
- tz30lp1kMMWtz6p+m6u4SsDip5qPArOP1UIRujdefMO2kRhqDv97GGJIlnUji3oTWhc6
- cnk3WNjzYu1UiEJ6wraD/Hu+H72gij3x5DEZRHTOskC0+w696rR7R5/JNPNGrhBLzhHH
- jivcbwSXk0fyfKoJGoxjzAl1U0TH56kbCEJjWH9lXVuekNropIOs3fzux4TltZSf6TF6
- ZgNfsTt4dLiFKJePjpYkvflG4DWO+rMEQlz+Wdcm2OSVKOSn6ZG76Zlh6VJdKKJfeM7E
- EQwA==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=hZMQHjE+OHT8XXlwWeZS3x1o42j7zjHwEBCplDbFGFM=;
+ b=QB4TF1FcdDkoGlAceyvzmrTIAndXRGmHs/j2UhvKDp95SQ55Srs2/dzdN4toir7DjE
+ GYavJTQlzb5gB/ExjXL/1piNh/pqDwg97lb2aNGnNSgcD+5uS01KAGGWLyPwStSx8gpU
+ RjqkENKSmYX3ZjjpCj6Cj9Rld0zCSCrkJoiewShNwFIg1kIPnVhX/mP6TlB1KkfarPgR
+ QapNzf3emVEQTfw+78JymuJUQKZ/xvQquKFxe1zrffF0Plnr9scfBTtACPmHL8CquzpR
+ psy/pEhpzrWxXHzZN/JSHfF6F3Fy+n6XGXAA05x/8i7HT4Alnrh/0+4VhtK7Ln93pc8M
+ EFFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1722491304; x=1723096104;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CSKDlCRUkmJthEm50ThqusoNqvaIEj4I2eEkVlMdUsc=;
- b=fe6DyJ2QHYwIZBqCaeO0WR+YF11FJY2Ypu7Oc2kEhtGzaBCxHL+89UqeqnPj8qt1PV
- ariGk4SanpaNPopblB372wk7OddnaPs62I4waYhd3yJg8YiksV1VtcmjAxOXTYqv8WG5
- wkMJ8PH5Ir9ZgP0AQjMlaCXmfGG+j72Y2oAp75zRcGKiapJ+k3lb1MJDPBJzqVLgWS/8
- bBL+aB1vfcKSh32UJZZSalRo85k9IsODlR6cm/y9d3YCMrQZ3l7i3pJdvCHbKvZJOcc3
- yq1CzDpB+82384MArwuD9NlpWcPySsqOzEWyqHvmwQPV6ONZQkG3cSwCZ3BzmzuYUcHO
- YWpA==
-X-Gm-Message-State: AOJu0YyyiZJZsY6HE4mGuUUgZCPjrliQeo2YF09J9wbdbtkgsfhvI/XN
- Ce0z/w1pwWKKJiRtBjlmHXWpK8qKJWO70iqS+hbR1WivPIZ+2dMb
-X-Google-Smtp-Source: AGHT+IHDFTuuL9Jw1MrDKuKecKo3lwAP/0YMpM0i8n46hm+GJzFixZRXP34ajXPcvrD2sX6fNffwBQ==
-X-Received: by 2002:a17:907:7ba3:b0:a73:9037:fdf5 with SMTP id
- a640c23a62f3a-a7dbcb94058mr18737366b.6.1722491304196; 
- Wed, 31 Jul 2024 22:48:24 -0700 (PDT)
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hZMQHjE+OHT8XXlwWeZS3x1o42j7zjHwEBCplDbFGFM=;
+ b=L63JQ6ZkFXmK3QRxGWXZT7lTgnYLryhpAukvjg7ASbx7JQDiIAsXw7IcILzYKInBEK
+ sFWkSz4vhxwivdkiOepdJ3n/lqQOk/UymtgQvudwcPO5Hh1m/ehP+fCzoM48zX5k5M3f
+ Why/B6Jnc8p/pShnWW7XzXEb7wlggcI7nBGki+P/Or/z1DpbLt1Dz9xtMPzmcCkT8wNp
+ xPzGDk0cd1TwWBK2O+ZAQjF5BC2zUM4Grh0D6Wh3j04LdxbAr3zxUSsS6eBIYszBMS1F
+ jll8dC+oz/x4hDZnlM4nKnbzFqTvu0BFE9WHQ+YeCgkaNOc5zT1CKEUWJ5b9u3Uk7qeZ
+ yWIQ==
+X-Gm-Message-State: AOJu0YxkXj+F2/g47hCCRfJ5NHbvL4MLzWd0unX1sylvmGcpBBYhmASo
+ hZaVT4vWvr1BbrEjLAiR1HwxY+7gLcaTYiZPxkceEmWH0qoXBtjr
+X-Google-Smtp-Source: AGHT+IEt7bQPNXlLOZvIMysL3lCkyGWG8qNPHmOh4wuvZodhqvtBcxbULR8kjVFIh09e1D4N+5sBsA==
+X-Received: by 2002:a05:651c:168c:b0:2ef:2d3a:e700 with SMTP id
+ 38308e7fff4ca-2f1530ea574mr9922481fa.18.1722491303417; 
+ Wed, 31 Jul 2024 22:48:23 -0700 (PDT)
 Received: from xeon.. ([188.163.112.54]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7acab23125sm849823666b.1.2024.07.31.22.48.23
+ a640c23a62f3a-a7acab23125sm849823666b.1.2024.07.31.22.48.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jul 2024 22:48:24 -0700 (PDT)
+ Wed, 31 Jul 2024 22:48:23 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
  Anand Moon <linux.amoon@gmail.com>, Simon Glass <sjg@chromium.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 1/1] disk: add TegraPT support
-Date: Thu,  1 Aug 2024 08:48:10 +0300
-Message-ID: <20240801054810.7170-2-clamor95@gmail.com>
+Subject: [PATCH v1 0/1] disk: add TegraPT support
+Date: Thu,  1 Aug 2024 08:48:09 +0300
+Message-ID: <20240801054810.7170-1-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240801054810.7170-1-clamor95@gmail.com>
-References: <20240801054810.7170-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,59 +89,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-TegraPT is compatible with EFI part but it can't pass Protective MBR check.
-Skip this check if CONFIG_TEGRA_PARTITION is enabled, storage uclass is MMC
-and devnum is 0. Note, eMMC on supported devices MUST be aliased to mmc0.
+Production Tegra20/30/114/124/132 devices use Nvidia's own
+partition table, which makes them a bit complicated to deal
+with. Luckily, it is compatible with the existing EFI
+partition already available in U-Boot, apart from the fact
+that it cannot pass Protective MBR check.
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
+In order to address this without unwanted code additions,
+I have come up with this solution.
+
+Svyatoslav Ryhel (1):
+  disk: add TegraPT support
+
  disk/Kconfig    |  8 ++++++++
  disk/part_efi.c | 13 +++++++++++++
  2 files changed, 21 insertions(+)
 
-diff --git a/disk/Kconfig b/disk/Kconfig
-index ffa835eb35..75a849ec8c 100644
---- a/disk/Kconfig
-+++ b/disk/Kconfig
-@@ -49,6 +49,14 @@ config SPL_MAC_PARTITION
- 	default y if MAC_PARTITION
- 	select SPL_PARTITIONS
- 
-+config TEGRA_PARTITION
-+	bool "Enable Nvidia Tegra partition table"
-+	select PARTITIONS
-+	select EFI_PARTITION
-+	help
-+	  Say Y here if you would like to use U-Boot on a device with
-+	  Nvidia Tegra partition table.
-+
- config DOS_PARTITION
- 	bool "Enable MS Dos partition table"
- 	default y if BOOT_DEFAULTS
-diff --git a/disk/part_efi.c b/disk/part_efi.c
-index b1a03bd165..3afc871409 100644
---- a/disk/part_efi.c
-+++ b/disk/part_efi.c
-@@ -318,6 +318,19 @@ static int part_test_efi(struct blk_desc *desc)
- 	/* Read legacy MBR from block 0 and validate it */
- 	if ((blk_dread(desc, 0, 1, (ulong *)legacymbr) != 1)
- 		|| (is_pmbr_valid(legacymbr) != 1)) {
-+
-+		/*
-+		 * TegraPT is compatible with EFI part but it
-+		 * cannot pass Protective MBR check. Skip it
-+		 * if CONFIG_TEGRA_PARTITION is enabled and
-+		 * device is question is eMMC.
-+		 */
-+		if (IS_ENABLED(CONFIG_TEGRA_PARTITION))
-+			if (!is_pmbr_valid(legacymbr) &&
-+			    desc->uclass_id == UCLASS_MMC &&
-+			    !desc->devnum)
-+				return 0;
-+
- 		return -1;
- 	}
- 	return 0;
 -- 
 2.43.0
 
