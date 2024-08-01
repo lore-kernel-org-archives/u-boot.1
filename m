@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1855BC3DA4A
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 03:40:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7937C3DA64
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 03:40:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B8A688ACC;
-	Thu,  1 Aug 2024 05:39:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6345488B04;
+	Thu,  1 Aug 2024 05:39:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB31D8881B; Thu,  1 Aug 2024 05:39:37 +0200 (CEST)
+ id 914A18881B; Thu,  1 Aug 2024 05:39:38 +0200 (CEST)
 Received: from inva021.nxp.com (inva021.nxp.com [92.121.34.21])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9522588AEA
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 05:39:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CA3888645
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 05:39:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Zhiqiang.Hou@nxp.com
 Received: from inva021.nxp.com (localhost [127.0.0.1])
- by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 576522005DB;
- Thu,  1 Aug 2024 05:39:34 +0200 (CEST)
+ by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 46F9920057D;
+ Thu,  1 Aug 2024 05:39:36 +0200 (CEST)
 Received: from aprdc01srsp001v.ap-rdc01.nxp.com
  (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
- by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 1C47520057D;
- Thu,  1 Aug 2024 05:39:34 +0200 (CEST)
+ by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 0F889200266;
+ Thu,  1 Aug 2024 05:39:36 +0200 (CEST)
 Received: from mega.am.freescale.net (mega.ap.freescale.net [10.192.208.232])
  by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id
- C596A1820F59; Thu,  1 Aug 2024 11:39:31 +0800 (+08)
+ C06F0183487B; Thu,  1 Aug 2024 11:39:33 +0800 (+08)
 From: Zhiqiang Hou <Zhiqiang.Hou@nxp.com>
 To: u-boot@lists.denx.de, trini@konsulko.com, peng.fan@nxp.com,
  festevam@gmail.com, sjg@chromium.org, marex@denx.de, lukma@denx.de,
  seanga2@gmail.com, xypron.glpk@gmx.de
 Cc: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
-Subject: [PATCHv5 06/14] cpu: imx: fix the CPU type field width
-Date: Thu,  1 Aug 2024 11:59:51 +0800
-Message-Id: <20240801035959.43115-7-Zhiqiang.Hou@nxp.com>
+Subject: [PATCHv5 07/14] cpu: imx: removed the tail '\n' of the CPU description
+Date: Thu,  1 Aug 2024 11:59:52 +0800
+Message-Id: <20240801035959.43115-8-Zhiqiang.Hou@nxp.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20240801035959.43115-1-Zhiqiang.Hou@nxp.com>
 References: <20240801035959.43115-1-Zhiqiang.Hou@nxp.com>
@@ -61,36 +61,29 @@ X-Virus-Status: Clean
 
 From: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 
-Increase one more bit to cover all CPU types. Otherwise it shows
-wrong CPU info on some platforms, such as i.MX8M Plus:
-
-    U-Boot 2024.04+g674440bc73e+p0 (Jun 06 2024 - 10:05:34 +0000)
-
-    CPU:   NXP i.MX8MM Rev1.1 A53 at 4154504685 MHz at 30C
-
-    Model: NXP i.MX8MPlus LPDDR4 EVK board
+Return CPU description string without newline character in the end.
 
 Signed-off-by: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 ---
 V5:
  - No change.
 
- drivers/cpu/imx8_cpu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/cpu/imx8_cpu.c | 2 --
+ 1 file changed, 2 deletions(-)
 
 diff --git a/drivers/cpu/imx8_cpu.c b/drivers/cpu/imx8_cpu.c
-index 601a7071a6..6a97b7b9ad 100644
+index 6a97b7b9ad..b633a2c73a 100644
 --- a/drivers/cpu/imx8_cpu.c
 +++ b/drivers/cpu/imx8_cpu.c
-@@ -287,7 +287,7 @@ static int imx_cpu_probe(struct udevice *dev)
- 	cpurev = get_cpu_rev();
- 	plat->cpurev = cpurev;
- 	plat->rev = get_imx_rev_str(cpurev & 0xFFF);
--	plat->type = get_imx_type_str((cpurev & 0xFF000) >> 12);
-+	plat->type = get_imx_type_str((cpurev & 0x1FF000) >> 12);
- 	plat->freq_mhz = imx_get_cpu_rate(dev) / 1000000;
- 	plat->mpidr = dev_read_addr(dev);
- 	if (plat->mpidr == FDT_ADDR_T_NONE) {
+@@ -184,8 +184,6 @@ static int cpu_imx_get_desc(const struct udevice *dev, char *buf, int size)
+ 			ret = snprintf(buf, size, " - invalid sensor data");
+ 	}
+ 
+-	snprintf(buf + ret, size - ret, "\n");
+-
+ 	return 0;
+ }
+ 
 -- 
 2.17.1
 
