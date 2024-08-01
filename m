@@ -4,96 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CF07C3DA64
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 21:16:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93FE8C3DA64
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 21:16:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE63388B6A;
-	Thu,  1 Aug 2024 23:16:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4084A88B66;
+	Thu,  1 Aug 2024 23:16:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X8JCovXG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MlC+G7kF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82A0F88B1D; Thu,  1 Aug 2024 23:16:09 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id C243D88646; Thu,  1 Aug 2024 23:16:16 +0200 (CEST)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F21F88B70
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 23:16:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A7FFD88B58
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 23:16:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-26119999171so5145061fac.2
- for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 14:16:06 -0700 (PDT)
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-3db2315d7ceso4259156b6e.1
+ for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 14:16:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1722546965; x=1723151765; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1722546973; x=1723151773; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=avbkhpM82ag+nsgikKpq918mQeW6EHn6FQpt29Ce7Mc=;
- b=X8JCovXGcjW6kLKJ//+1RKdnF3e6352Z7YbOAhvQH0i2ltKuzfvB2MQZ94pywVCpnI
- Kgn6Cunb2mJUyglNMYK1IIYULaC2L36QGNUOQl21QYDEmAij8you4LCrHrLIUd6O1jEy
- JHQyHZy27oz5PaNfKHbeSuom2LK5x8RZrIMtQ=
+ bh=RIC6kSiOkYOOOCTzdjfnidrRPsrd2hNxVUVYAY/ot84=;
+ b=MlC+G7kFfNLaTx5CvlFKEZG1/mGFKUGjMZKsKQN3j/86xhLg7ygJ/pLi1v4lPJpfS3
+ FiQHw/sGFiesM0MCLROj1gkNIppOetcvIhSPQK3gzDUSy8289eB42KsbnqsLGuIOpB2w
+ d+x+MaoJ+n3FsCitdmcLymg+cI1L6Ewunl33E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722546965; x=1723151765;
+ d=1e100.net; s=20230601; t=1722546973; x=1723151773;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=avbkhpM82ag+nsgikKpq918mQeW6EHn6FQpt29Ce7Mc=;
- b=Hv4B1oWQj4DHAg5Yjf7K/lmWxHqs7wNFooc7LRvCEkYu+q5iz6/ITnHM/crupBz2/R
- QwvJTz5PjJRasw/fY4gIhCEKCVa/fgfHEcC4UfG7BW4iyL4rzYjTy068EYWtSG2QSlom
- bP3VSevdI0Z7pSztP4+NWibk0Xw3bxDuqIT2Tco+NshRFuI5c29R586i6vugw468quc3
- 8FROhsXE5XvvweZnnzL6UUxq9lwPIwEnu4lBv1FxSsyer0zRya3khl6nJ2eMiGPcl8z6
- L07kBcXwmJsL1Rqx91uzrf7+4cjo1I+QlgDb+CMKzIERa9uK/pzVFe0PJfZYptHiKu3l
- /A8g==
-X-Gm-Message-State: AOJu0YyWXixfji5uXfjND18f/UyQz5qxGEP12AWqxOdbn37undW5kg6z
- z5GNBoBuJsE1i8ygqoLkZziqyY0SEmiBZfJD1bIzFbHBctJRvaSqk5JzTbTaHYMFdI0UR1CsmkU
- eA6Y=
-X-Google-Smtp-Source: AGHT+IFcDJU0HM4N/dh6DUWqyL06vOQj6dqBuaASk1Dq2pQ1n4TeFnTb8mU2QtrJZ2OhwJY+jtmvlw==
-X-Received: by 2002:a05:6870:d208:b0:260:e093:ff8d with SMTP id
- 586e51a60fabf-26891f3ef3bmr1442358fac.45.1722546965028; 
- Thu, 01 Aug 2024 14:16:05 -0700 (PDT)
+ bh=RIC6kSiOkYOOOCTzdjfnidrRPsrd2hNxVUVYAY/ot84=;
+ b=FrBmmgdLDp50EKExg8ikRw8Cb5eMdWNO/YkELV1E0TIrWgiuB3cW5tB9xw8IFlJG15
+ 3G0c2rsqLRVZeY5onvBBV8abiUKA+dkA7dn5Q7hUCkJ8tb+dXZZvDxZWNwqewo8jfqJW
+ 5N8lFgkoeBZQyIN0VaBvgUdCb1j4Rbmx2b3Rm+7HaqtBzNXOkQ3jqlKa2ijhMoLMeNI8
+ Fkdd3qzcC4Xzvh5Xy9zj2PDPdYzboncLd+OnBFroDO3/drNsPcViCOGvNZz0jOdx/4Zl
+ TuWJLCo3w835SWXeUchSX/MoauFUN6G4DWEgO/SpyyiLnSL/BCbTR5cHFs5uw9QPnFsh
+ MsjA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVfrM/lCWcdwPRFuvezXHEEarNpX8LWpZH9CVWNLqj24Wj7iH4mlapT2piRojaPHT82gItBP13+G/ua3pPI7vqGCsIXVg==
+X-Gm-Message-State: AOJu0YzOLNRsVlHb5X+xD8ObfvP3nfQhlB2QN9h5r8qfmOt+Wh8aBCe1
+ OsIT3tfpc86dx5GlrDzK3OjvCFhlaDXCmLtPykf9zzyfJSGJgv1DkN+NhvU0gRU=
+X-Google-Smtp-Source: AGHT+IGSQKm5UAF/A1Zf9VYqaS5RjOyHzZUfjQ0fPmT3SsJExriwM6hxI0Bf80Ob2omuL2DNy5iidg==
+X-Received: by 2002:a05:6808:2123:b0:3db:15ed:2a21 with SMTP id
+ 5614622812f47-3db55802279mr1706477b6e.16.1722546973346; 
+ Thu, 01 Aug 2024 14:16:13 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-103-190.totalplay.net.
  [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2689a2f1af9sm25883fac.13.2024.08.01.14.16.02
+ 46e09a7af769-70a31d9dd3bsm154949a34.10.2024.08.01.14.16.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Aug 2024 14:16:04 -0700 (PDT)
-Date: Thu, 1 Aug 2024 15:16:00 -0600
+ Thu, 01 Aug 2024 14:16:12 -0700 (PDT)
+Date: Thu, 1 Aug 2024 15:16:09 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, manish.pandey2@arm.com,
- Stefan Bosch <stefan_b@posteo.net>, Mario Six <mario.six@gdsys.cc>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sumit Garg <sumit.garg@linaro.org>, Andrew Davis <afd@ti.com>,
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilya Lukin <4.shket@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alexander Gendin <agendin@matrox.com>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: Re: [PATCH v5 27/27] configs: enable MbedTLS as default setting
-Message-ID: <20240801211600.GL3794063@bill-the-cat>
-References: <20240731172556.1348487-1-raymond.mao@linaro.org>
- <20240731172556.1348487-28-raymond.mao@linaro.org>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Teresa Remmet <t.remmet@phytec.de>,
+ u-boot@lists.denx.de, Benjamin Hahn <B.Hahn@phytec.de>,
+ Cem Tenruh <c.tenruh@phytec.de>, Martyn Welch <martyn.welch@collabora.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 1/2] config: Add 'update_bootimg' command to update
+ flash.bin on Phytec's imx8mm
+Message-ID: <20240801211609.GM3794063@bill-the-cat>
+References: <20240801125416.1582652-1-lukma@denx.de>
+ <CAOMZO5AJw66wweVOL0QkvnKrAWCKRvQ9n00OdRfUPxfR8LUibg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="cSpYocdzbm/irHj0"
+ protocol="application/pgp-signature"; boundary="UB3c3dDg2E2THwyi"
 Content-Disposition: inline
-In-Reply-To: <20240731172556.1348487-28-raymond.mao@linaro.org>
+In-Reply-To: <CAOMZO5AJw66wweVOL0QkvnKrAWCKRvQ9n00OdRfUPxfR8LUibg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -112,80 +97,49 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---cSpYocdzbm/irHj0
-Content-Type: text/plain; charset=us-ascii
+--UB3c3dDg2E2THwyi
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 31, 2024 at 10:25:37AM -0700, Raymond Mao wrote:
+On Thu, Aug 01, 2024 at 10:13:13AM -0300, Fabio Estevam wrote:
+> Hi Lukasz,
+>=20
+> On Thu, Aug 1, 2024 at 9:54=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wr=
+ote:
+>=20
+> >         "mmcdev=3D" __stringify(CONFIG_SYS_MMC_ENV_DEV) "\0" \
+> >         "mmcpart=3D1\0" \
+> >         "mmcroot=3D2\0" \
+> > +       "update_mmc_part=3D1\0" \
+> > +       "update_offset=3D0x42\0" \
+> > +       "update_filename=3Dflash.bin\0" \
+> > +       "hostname=3D/tftpboot/lukma/\0" \
+>=20
+> I don't think all the users will like to use this tftpboot path :-)
 
-> Enable MbedTLS as default setting for qemu arm64
->=20
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
-> Changes in v2
-> - None.
-> Changes in v3
-> - None.
-> Changes in v4
-> - None.
-> Changes in v5
-> - Remove unused config MBEDTLS_LIB_TLS.
-> - Remove EFI_SECURE_BOOT from the default config.
->=20
->  configs/qemu_arm64_defconfig | 3 +++
->  configs/sandbox_defconfig    | 3 +++
->  2 files changed, 6 insertions(+)
->=20
-> diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-> index 7e166f43908..22d38608842 100644
-> --- a/configs/qemu_arm64_defconfig
-> +++ b/configs/qemu_arm64_defconfig
-> @@ -67,4 +67,7 @@ CONFIG_TPM2_MMIO=3Dy
->  CONFIG_USB_EHCI_HCD=3Dy
->  CONFIG_USB_EHCI_PCI=3Dy
->  CONFIG_SEMIHOSTING=3Dy
-> +CONFIG_MBEDTLS_LIB=3Dy
-> +CONFIG_MBEDTLS_LIB_CRYPTO=3Dy
-> +CONFIG_MBEDTLS_LIB_X509=3Dy
->  CONFIG_TPM=3Dy
-> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-> index 93b52f2de5c..679bbf69936 100644
-> --- a/configs/sandbox_defconfig
-> +++ b/configs/sandbox_defconfig
-> @@ -343,6 +343,9 @@ CONFIG_FS_CBFS=3Dy
->  CONFIG_FS_CRAMFS=3Dy
->  CONFIG_ADDR_MAP=3Dy
->  CONFIG_CMD_DHRYSTONE=3Dy
-> +CONFIG_MBEDTLS_LIB=3Dy
-> +CONFIG_MBEDTLS_LIB_CRYPTO=3Dy
-> +CONFIG_MBEDTLS_LIB_X509=3Dy
->  CONFIG_ECDSA=3Dy
->  CONFIG_ECDSA_VERIFY=3Dy
->  CONFIG_TPM=3Dy
-
-Please run this through savedefconfig as I believe it's just one line,
-not 3, in the end.
+And while we're touching these boards, can we get them migrated to plain
+text environment please?
 
 --=20
 Tom
 
---cSpYocdzbm/irHj0
+--UB3c3dDg2E2THwyi
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmar+xAACgkQFHw5/5Y0
-tyxV+Av/Q8ioSgztOrsNmzyQd4/36/NubY4xJlo4rfPyD8lUigF/CPde2mrTJyS2
-vCQFVTEysgo8Oj1LgRmrpX+4PtJA0BVPpHqNZqC81NrjJfsuE7jELA5V+NSjjSIF
-+XhWKUb467Ojo/2oZGJQcqNT70EF/+aYLf6XgLWERzpeqjb7wuwFFtvLR1+9732Z
-DIUhulquNMokqtD4Y0DCjp3ZujNMutmbnZeUsV//ogOW3YJGFFbYIUa1+PAs65Hz
-FWE0OFbYPzTpQcDuXO0NJ/NHEp774IZRom+Zjh5MaLsQFghndsv5OwccnH4snf0o
-0arJR+pC2davr0gstHzialopofQ2aglvzYeKgB+pvaTmUzRiusjkOdwUsFFpE+WO
-CzhgIJg8OQqfdjJXqmaBl0kMlvM1N5D0NqRW3D1GkZeALSX1iwfZ2II86WlYhLKA
-b03UPHFQYG+0OqW/US0rFCRwLJhflisLVP88MIrLV/jJKBhH3lDrUTgCR9TzYYsy
-OfDhxqDV
-=X9sT
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmar+xkACgkQFHw5/5Y0
+tyygTAv8ClGx0CxTBePz4Wgt9ypPz134NRqkzkZ4uZ8zT8stQXzoox9GbuFat+so
+Vw0D59JHepo0AEePUVyE8hhGj4rgw0q4uRgJXRR44AUTRO/dkiXsPYL8zHb8tfAQ
+rbQ34ZOGXIpk5J1MIMFZ2Tlsaa/kojduiLfPgbfTO4/fel8MCtpUIMrR8WekNY4+
+nMxAxIfmnqmuBZCChIWfzNnNCGO5Ya5Oo6PpjU9qpDNt8qvxGnesiWInNONxcVG3
+R5tGIw4FrT5nR7uOG+1XhgcwxOkXNQmZnyZWHYCzQBkjARCxpfgWklqXrjO1hAlN
+iWCfb++QQ7preiEcOOT3QTOWju6k87/K2PIJJ8pB+6PR+nf3UgpOSYsHdGwUltLp
+60tKwYHSmvJhCLoq/aNI3g32Ig95z2SHRGtRXVAbkMYFAZ8/CmkUbGtNLXgVxYtR
+iIE4KbeQoAVXVKdS+pwTWNRIFiU0YNWdwNDnAxhCyWNbZGO1MaJv3yCRyedGHHLw
+DJ/Jpwzg
+=NCUp
 -----END PGP SIGNATURE-----
 
---cSpYocdzbm/irHj0--
+--UB3c3dDg2E2THwyi--
