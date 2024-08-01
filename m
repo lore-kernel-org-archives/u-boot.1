@@ -4,82 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AE9EC3DA64
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:21:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9922DC52D54
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:32:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D80388B40;
-	Thu,  1 Aug 2024 16:21:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 24BB488AE4;
+	Thu,  1 Aug 2024 16:32:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J+T/7tNN";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W/4L5cfm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 388D288B0A; Thu,  1 Aug 2024 16:21:41 +0200 (CEST)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
+ id 9348A889FC; Thu,  1 Aug 2024 16:32:04 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2435B8874D
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:21:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B72288667
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:31:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-25e3d8d9f70so4250903fac.2
- for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:21:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-52ef9714673so1170122e87.0
+ for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:31:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1722522098; x=1723126898; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1722522718; x=1723127518; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PPpjtUKnuclWk5dBW/IrkvItmp7hce6RekRKRdwx1Dc=;
- b=J+T/7tNN9tbN2d2zkiO1a2WQjkOtyeNKz6D6jBi8cOs2VQqlubJc2u9f6QWqzNCEfK
- ry0I1GrrnH8kTulJImLi5LjrvZXwJMm1fJGiuec4yGc4kRoaPx8ETyGSD7l8wP5tFmv/
- p+5l9qoW5wMuy7nzgbLaTV6SmR+doAowZRN1E=
+ bh=h1p8WenxLJcTw5OpyvDSx4yjC5bLeNKXJVFsNnjU8BA=;
+ b=W/4L5cfmYUj0T9vjXS6CNrRUSw7kjP1/C+JdfrP1o6Vie0n2RinXPUZqV5ywsBNLjm
+ ohvS3qZz4Pd9+gADNDf5qZrrq+hKq2DSc5Dc6bvQglH9dV8iJEVO/HasUSeIgBZkvzKR
+ 4ONrZ3iYacZ3H7aVucEjFI3MhL02+v987buZntukGxkmTunlexrhqwodOPxDDWS2Ho/m
+ s3/YBFY8gxdgA61NAs0z0Hw85byK4LP+vOZY9H+SBeKoXSPgIXh6xE/zOwe7niR9XAlB
+ eFNmtGbNZBHuE3RHSymi/Rkz0rJ6qvsj1MgIps8F/1quX0FUhabmJz0kKeZHfx1TX5Q8
+ Bmuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722522098; x=1723126898;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1722522718; x=1723127518;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PPpjtUKnuclWk5dBW/IrkvItmp7hce6RekRKRdwx1Dc=;
- b=ug3VOgR2LKYX2WH8b7QVHtvbCO5q0ucwrYz6ZPZGdRSAgWyJJ9Me2G7x2G7JU8Ictv
- puB0b0/Oz6UZTaDMK0Tro76cqd9ow9zuxznWq6t+AGZpWUDLM545oXMrNA2eVLH2/fc/
- 7WjWWGa/Iiq+l+rINdK+9Wm2ISf829HQDMoFV522Na3zynDr93eZgp8IDn+FdtSbFs2j
- gZrsTdvnqWo1MbwTVLZ2vpX2cRYZIRo5M62cRopoHOzZb6UOkrPw7Q7Cqsi0WqKh5Nma
- DKsBVhpb0VAfIusojba02oglmjUJd21LC9kC0qXPqUD0erGEY7IU7Vnh0ZLB5Gynmo6d
- ENhA==
-X-Gm-Message-State: AOJu0Yya9LyCRF5zvpY78G/whoF9Q9sXVzoq9RrrXgLoXk7ktlYDzygk
- r8UddWYnpdDVIC70k8oE7uAv+n+TCD7lW+Geilg0zoXmIwL8tCh4ufz4YqN/BLQ=
-X-Google-Smtp-Source: AGHT+IFRtb6rxtW4qmgBjNPRq6wqLL0V/IjSEwE8zQ/1BFPWaa2sn7NK/9ZWwz+ODiphNIfGtUhw3A==
-X-Received: by 2002:a05:6871:3422:b0:250:70bb:1a97 with SMTP id
- 586e51a60fabf-26891d3c9fdmr346968fac.24.1722522097750; 
- Thu, 01 Aug 2024 07:21:37 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-103-190.totalplay.net.
- [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2653e63f463sm3087486fac.18.2024.08.01.07.21.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Aug 2024 07:21:37 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Philip Oberfichtner <pro@denx.de>
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, caleb.connolly@linaro.org, 
- neil.armstrong@linaro.org, sumit.garg@linaro.org, sjg@chromium.org, 
- philipp.tomsich@vrull.eu, kever.yang@rock-chips.com, 
- patrick.delaunay@foss.st.com, patrice.chotard@foss.st.com, jonas@kwiboo.se, 
- marex@denx.de, leyfoon.tan@starfivetech.com, epsi@gmx.de, 
- xypron.glpk@gmx.de, seanga2@gmail.com, sebastien.szymanski@armadeus.com, 
- festevam@gmail.com, sebastian.reichel@collabora.com, 
- yanhong.wang@starfivetech.com, christophe.roullier@st.com
-In-Reply-To: <20240507094237.168238-1-pro@denx.de>
-References: <20240507094237.168238-1-pro@denx.de>
-Subject: Re: [PATCH v2 1/1] net: dwc_eth_qos: mdio: Implement clause 45
-Message-Id: <172252209513.4049041.1050059758384510792.b4-ty@konsulko.com>
-Date: Thu, 01 Aug 2024 08:21:35 -0600
+ bh=h1p8WenxLJcTw5OpyvDSx4yjC5bLeNKXJVFsNnjU8BA=;
+ b=vjc+iWxT8C1t+eknI9YkRzpdKwrlhFbHrpxJLT0WcA9Wav6h5VySBPC2ZVNVfp02Dv
+ awFXalFa6zd1m6AYxKCkFQ1hfW/3VJuRruFA3NfdI6UoL2AvMvvIo1uhl9Q3DiPufAl1
+ kxDwQfK6Wg8Q1na68dDzJ+KYlzOr5DY9gPfBo6UvU+iVPnuuqif4XMq8hHQG5Y6krTiV
+ LXgpajZFeTi5b1PzeoCvspfVcI9mYAG6zi9dcBei4jYrazHu7HAuSm4u9TTgndZds7yp
+ kkf4pcqpsfLYhU+TaMSO5IW/el4lz0lKdJ4g/dVSlKTGAfS0gz1JY/UBl4npGjDo7Kec
+ mw4Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXwZ00y+amWI1lC/j2ebRPpyrUKJv9aX31SJUybrMSSSYDNbXI+JbnsE6Sm37qYeaNDsqbWmebSlxsXtBMfx6Lk75tPsQ==
+X-Gm-Message-State: AOJu0YxX/6LP2YefzrEpoL+5OtB33PjyW635D1yU/jR/3RNSnpsEVDRr
+ /UyZ5n8HTJqKp+83wzwbK147AXdI3usPAqgz2ZkuFBg4BYsL/HDiISnmMSYjydD8fkBs0+b2WyO
+ 1lbmQ7v4oKZtlNcb8Ltz7z/nzAhg=
+X-Google-Smtp-Source: AGHT+IFtB8DUbF406RyQ2npOphjAYtLMCDQeB1zUOgKqyPhiP1Tdd5HKLvT1tCK8DudE3uy5Cr89veKOCp5L2kLh5h4=
+X-Received: by 2002:a05:6512:3a93:b0:52f:10b:666c with SMTP id
+ 2adb3069b0e04-530bb396b78mr21764e87.5.1722522717242; Thu, 01 Aug 2024
+ 07:31:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+References: <20240801125416.1582652-1-lukma@denx.de>
+ <20240801125416.1582652-2-lukma@denx.de>
+In-Reply-To: <20240801125416.1582652-2-lukma@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 1 Aug 2024 11:31:45 -0300
+Message-ID: <CAOMZO5CqQtUOt1zgL7x8goSaH=HeFwQkg3-CJtY=ynyHgg7=bA@mail.gmail.com>
+Subject: Re: [PATCH 2/2] config: Adjust Phytec imx8mm module config to support
+ NVME disk
+To: Lukasz Majewski <lukma@denx.de>
+Cc: Teresa Remmet <t.remmet@phytec.de>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>, 
+ Benjamin Hahn <B.Hahn@phytec.de>, Cem Tenruh <c.tenruh@phytec.de>, 
+ Martyn Welch <martyn.welch@collabora.com>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,21 +94,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 07 May 2024 11:42:37 +0200, Philip Oberfichtner wrote:
+Hi Lukasz,
 
-> Bevor this commit, only clause 22 access was possible. After this commit,
-> clause 45 direct access will available as well.
-> 
-> Note that there is a slight change of behavior: Before this commit, the
-> C45E bit was set to whatever value was left in the register from the
-> previous access. After this commit, we adopt the common practice of
-> discerning C45 from C22 using the devad argument.
-> 
-> [...]
+On Thu, Aug 1, 2024 at 9:54=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wrot=
+e:
 
-Applied to u-boot/master, thanks!
+> +CONFIG_CYCLIC_MAX_CPU_TIME_US=3D1000
 
--- 
-Tom
-
-
+Please explain why this option was added.
