@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF52DC3DA64
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:42:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 253FEC3DA64
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:43:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40ECD88B40;
+	by phobos.denx.de (Postfix) with ESMTP id 96EA388B56;
 	Thu,  1 Aug 2024 16:42:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iuotvOos";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mI4AaYMd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EACCE88B5F; Thu,  1 Aug 2024 16:42:37 +0200 (CEST)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id 64371889FC; Thu,  1 Aug 2024 16:42:38 +0200 (CEST)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51FAD88B56
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:42:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AE5F88B36
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:42:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-6b7a3e468a9so49654826d6.1
- for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:42:33 -0700 (PDT)
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-6678a45eaa3so59574687b3.2
+ for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:42:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722523352; x=1723128152; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722523355; x=1723128155; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Dx3O4PniHzVFOiLL78vH0A7bBaqkfecNs4WybB6jsYs=;
- b=iuotvOosCwGp2IFRVBNy3+Wpk3l2QVIvfAJA2ekpllSLnRxeC44SEV9EsuaLOMrR31
- A7XdkbS5HUmOLYhBiSW+m0mEbnzIEtcPbT7DIS5Ah/HAldTweVY3JjIJFhkTo2AqLw5h
- sJjes4PYC2ewCJTx7uyzRER2hup8VUwB6LV9M=
+ bh=sD+enhfOMej7DvqkovxxtrJhVORM5GKgHn+gjTanvTo=;
+ b=mI4AaYMd5wWd7FLGdfk1dIkWhjepODMGFNNL9osqqAxK8kwpLFvbqi36KN/L+DSzUm
+ 4dOMBiMqomlkJoVQTFF6svqqGMvcbVmbqo0862QlHJ6L29vm5FZi6HbxaEsBaWvAjhQx
+ bb72ritDOTYqaswlRzw0dnypxEHS9yoVrfMrU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722523352; x=1723128152;
+ d=1e100.net; s=20230601; t=1722523355; x=1723128155;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Dx3O4PniHzVFOiLL78vH0A7bBaqkfecNs4WybB6jsYs=;
- b=remcMNXb76VeII5cL1M4/vtX9etHuz32pvNWQyec0O8xgXrT1Hbj8QNtiTLFpubw+R
- 2O0BrAJqcCWaWRyzo0W7eFrAETy7Blda8GyDAOpgq+ugSPyywGIzUp7zxOzYpeL3AArY
- sMYq+9YkkHKKBzzfRjq0T/crSAxCIAweD3sBj6QDjnLOYS8bLy8tEDwF4D1Ne7C76qft
- pZvL8Y6boIfcot8ItO9aO7TkGVf22mVBLIj/yMYc9i94RZW7/ieOzyCoQItXneJMMHOP
- tgvUPVWzFE8RrY0QmXTAHmm6zE9G0sUrwDdulOxvJR+3uKzPJKnh6jfpKz8uO4Oe3gvb
- J/cw==
+ bh=sD+enhfOMej7DvqkovxxtrJhVORM5GKgHn+gjTanvTo=;
+ b=lQXp9ZyFuNw8JKAoZ1ffPXRtcBA/5URzLRIFtwfr9vMsI+UNcbLYuHLPwXjaYfHpxA
+ W1ZiPkqKtFalTlQptlDkn3xtLV2Th3ReAH5dFvOJkVjGaqrrKMDxDlUMCIJYwqwQAZUl
+ 2pqBP7Ez0Q0cIJkuVogTooXDtq58rWMEy0ghtaeISWyQj3hk7Yejpiguv/Etx4H4tNf9
+ xX3Bf3rQ6/8wLdrxrHhpy0MIdgLbs983mkf1PMazwEiUDTw8ixnXM86BsrXDH7iQF0Bw
+ xTV/IOcTbUCt+vsT+jBU3oVpcppcsd8tdmZoIDwb/vcog6tun+RR7PpyGyNO9Y4uomMv
+ fZpA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUm6pSZGSoDM51ynfxQ2x0bria0kTBjwKo7hgGFWsSc2JoosU6WYGMotIhxGnMC80ZkdjnCPY7gKnqqGgT4e9gnFysngg==
-X-Gm-Message-State: AOJu0YyNp5AR3QkWJdwfD2FV9hGsCaL5zh/WtN/q6E2IaCGkemnsyNZr
- 6HCHwwBnUHq6SOeiYfTOBGDV0yVuysC/xLgUnFyXJVvw4AvMAIoyF4Tuat+lqyOnwZGN+npNprl
- h0oLW2BSTYrcaHhP2sNIIAMvwcTpWJ1P0/Ora
-X-Google-Smtp-Source: AGHT+IHxRPZdiINUhUWDXPhf+Yo9LE9p77HhlElagRQ0pDCYb2cv8nEa5MhQk9/kG6xobgoEagm9vtEAE8+CS7UofNM=
-X-Received: by 2002:a05:6214:4a02:b0:6b5:8dd2:468b with SMTP id
- 6a1803df08f44-6bb98482365mr4429016d6.44.1722523352131; Thu, 01 Aug 2024
- 07:42:32 -0700 (PDT)
+ AJvYcCVkwqW+2LtqrecEn/Xw/QX+o9LA7hH2MEjh+5l7Y4yEwIMq7qdCS76nSsK9ztbwBK1PS8rHOg7Q3SaQA0B8VsNjn4/0sw==
+X-Gm-Message-State: AOJu0YyTEf3BLJM4PqP4An/7kWRXVRln0f/mUYcRgaWofxWogVewfbT4
+ HXFyGglkxAeHyQ1ghTnGHnqtcO0wtOzU68gKJK4Zq3gf0/d+WrMQnEctnqw/H1bd2QNF+0cMlDw
+ MOiqV8dqRjOCp6Ffbx++VyXLBAA7vjYZsd3S4
+X-Google-Smtp-Source: AGHT+IEc7hZWA2HJRl5dMeZMv48Q9jQoCijeo25ZX9tbbvW51hbM1Uw6qi3ZJpvsAB5j6LoZEwZUBZvzeKrLbnr0Nxo=
+X-Received: by 2002:a0d:f1c4:0:b0:64a:9fc7:3b15 with SMTP id
+ 00721157ae682-68961037a8fmr2769027b3.26.1722523355070; Thu, 01 Aug 2024
+ 07:42:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240731134257.686017-1-admin@hifiphile.com>
- <20240731134257.686017-3-admin@hifiphile.com>
-In-Reply-To: <20240731134257.686017-3-admin@hifiphile.com>
+ <20240731134257.686017-4-admin@hifiphile.com>
+In-Reply-To: <20240731134257.686017-4-admin@hifiphile.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 1 Aug 2024 08:42:21 -0600
-Message-ID: <CAFLszTix0ooymfjCL=QSM43NCaF9a=x_3p__KRPPEPWfzw8Dow@mail.gmail.com>
-Subject: Re: [RFC PATCH 2/4] dm: core: Show device sequence instead in
- dm_dump_tree()
+Date: Thu, 1 Aug 2024 08:42:24 -0600
+Message-ID: <CAFLszThGCdJYopHkQn_84OVjNjQyv3WbT4gmW7NpKYuuZRet8A@mail.gmail.com>
+Subject: Re: [RFC PATCH 3/4] cmd: bind: Use device sequence instead for driver
+ bind/unbind
 To: Zixun LI <admin@hifiphile.com>
 Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
  Mattijs Korpershoek <mkorpershoek@baylibre.com>, Marek Vasut <marex@denx.de>,
@@ -91,32 +91,41 @@ Hi Zixun,
 
 On Wed, 31 Jul 2024 at 07:43, Zixun LI <admin@hifiphile.com> wrote:
 >
-> Currently uclass index is shown in DM tree dump which ignores alias
-> sequence numbering. The result could be confusing since these 2 numbers
-> could be different. Show device sequence number instead.
-
-I think it makes sense to show the seq instead of the index, but
-please update the header for the table to say 'Seq'
-
+> Currently uclass index is used for bind/unbind which ignores alias
+> sequence numbering. Use device sequence number instead as it's
+> the number explicitly set in the DT.
 >
 > Signed-off-by: Zixun LI <admin@hifiphile.com>
 > ---
->  drivers/core/dump.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  cmd/bind.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/drivers/core/dump.c b/drivers/core/dump.c
-> index 5ec30d5b3c..c812d87fa4 100644
-> --- a/drivers/core/dump.c
-> +++ b/drivers/core/dump.c
-> @@ -40,7 +40,7 @@ static void show_devices(struct udevice *dev, int depth, int last_flag,
->         /* print the first 20 characters to not break the tree-format. */
->         printf(CONFIG_IS_ENABLED(USE_TINY_PRINTF) ? " %s  %d  [ %c ]   %s  " :
->                " %-10.10s  %3d  [ %c ]   %-20.20s  ", dev->uclass->uc_drv->name,
-> -              dev_get_uclass_index(dev, NULL),
-> +              dev->seq_,
->                flags & DM_FLAG_ACTIVATED ? '+' : ' ', dev->driver->name);
+
+I assume no tests need updating, but please do add a note to
+doc/usage/cmd/bind.rst
+
+> diff --git a/cmd/bind.c b/cmd/bind.c
+> index 3a59eefd5c..30f1163e17 100644
+> --- a/cmd/bind.c
+> +++ b/cmd/bind.c
+> @@ -31,7 +31,7 @@ static int bind_by_class_index(const char *uclass, int index,
+>                 return -EINVAL;
+>         }
 >
->         for (i = depth; i >= 0; i--) {
+> -       ret = uclass_find_device(uclass_id, index, &parent);
+> +       ret = uclass_find_device_by_seq(uclass_id, index, &parent);
+>         if (!parent || ret) {
+>                 printf("Cannot find device %d of class %s\n", index, uclass);
+>                 return ret;
+> @@ -58,7 +58,7 @@ static int find_dev(const char *uclass, int index, struct udevice **devp)
+>                 return -EINVAL;
+>         }
+>
+> -       rc = uclass_find_device(uclass_id, index, devp);
+> +       rc = uclass_find_device_by_seq(uclass_id, index, devp);
+>         if (!*devp || rc) {
+>                 printf("Cannot find device %d of class %s\n", index, uclass);
+>                 return rc;
 > --
 > 2.45.2
 >
