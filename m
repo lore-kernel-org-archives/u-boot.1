@@ -4,52 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB281C3DA64
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 12:54:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 916D3C3DA64
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 12:54:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A76988AD9;
+	by phobos.denx.de (Postfix) with ESMTP id A02C988B19;
 	Thu,  1 Aug 2024 14:54:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1722516872;
-	bh=c+PH0tWuLoQ5BvDJGmUaW5CnUCirARvhqWgoPgBvGWs=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=sMWSpd1x23X+sp1EqtbDHHLX1BV8Uqcj87/6k9mTvp89Sc5Wkg358/P94ntKs1Trv
-	 ddxwe47ThubBY3tCV6X8QhmrAlp9Rr/Y6p6zsy7VkUKBR6IRlgZy33WcLo1BgZUvvX
-	 +MZwcSfeC8FYGT13SCKow8A9yhqplWx0mBDt7osa6m/zI5Kt7Ib7yNU70QlmF/D4+S
-	 xBzxITZ4S7g1bl/fzmRh8R0lesmhazAVX5Ymo5+dnJkTS4p7R7oUjFPMXI56qlI6Xh
-	 70CsDrILQHE2myJ2el/TsUaYBVrM51we/ui1Vo5TdNMDn0ML0upHhlQI0UEYOm2vIb
-	 4JaMWBIQg2ODA==
+	bh=kHok2tveLwiCduVEUnPMJKKDfK0JeKJSGxsY/1tfTds=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=EQLNQxs9GA6szab5FOohayfmt5QmnSRs8zoXp7lOBIvuV11qQ18XuAeQSv2JKPmUd
+	 XfROAwHip8Q2NkFYw0bRYkLJ7mMIO1OBLAwMGPN8RzY/Z2wzLgCm/Ip1vwleZxw7o+
+	 ofQ91PciCcW5NiP3ooVJil6lj34U5hH6TnqdwqK9kzPzkNFlVR1sefV3zaNDpS+vBJ
+	 Qb5wtqFTQo/oUml/iDlHkEqVwq7U0cIS93J5vuhTgmqbRlWX+LGYhiQ1jbSjheUIfH
+	 CKKmwdRA2JhI4LY8YUnpdtf+Bck2O6Zxzf0rJDnujBSa7RXuprErbaq4wVBxm3xIdg
+	 WZxzA6B+CmMng==
 Received: from localhost.localdomain (85-222-111-42.dynamic.chello.pl
  [85.222.111.42])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E9E6A881BA;
- Thu,  1 Aug 2024 14:54:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 5FED6886F0;
+ Thu,  1 Aug 2024 14:54:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1722516871;
- bh=c+PH0tWuLoQ5BvDJGmUaW5CnUCirARvhqWgoPgBvGWs=;
- h=From:To:Cc:Subject:Date:From;
- b=sK/yAqTs6yJtvUquEcvRpbp2IeRKgOVxo71LeHoU8lAtyH1+btrF731ynIvxnHkwI
- XlP3WVPF4FWWMGQmy94DUIhbDoSkI1291LByLgB59eIV7R7zJnC7P+Tatn4JpxzJIx
- gocLGmORM3BZh5l7tWQw9i8klZxAfCLfJP2qshz1vIR0ntF3H2J3ZikMrZoyrvfnQE
- b7QjdXJkxQ/DpdegIDJIEdLS0c5FjPUpz0Zl/XPGpg7JDmIvlpWaMnVfDD/YWLQnLh
- FdV8polZ32kYKG8bckPhgAP66MQYbPi1ZMUS2LckqyP+yGc00x3Qj7ZkiBmIrH8aXn
- ODqmlq4d8+csA==
+ bh=kHok2tveLwiCduVEUnPMJKKDfK0JeKJSGxsY/1tfTds=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=pEZmmCT/tJ2Kl945NMftuKG9YdGIVoenBAHEUIRrBqH79H1JSyrmP4PD6Noq5qFD0
+ 2i0F3PDLGhMaedf7pbqx2mKoYFTtKdGoiLY/VEoTB+gscEdpwF0WWsmo7EFaC8g9uQ
+ quto+alj2CTM2wRyQ+TEMpNDYCWXpWn0j7UjAS8ebf9RSd61mb/nZ+UjLQ1yrJnDMg
+ kU3teKOOF8Co/7YbA13iaGYfAsciqot4x9iGmdU46nhK3c179Mdt2KI392u5y2Rqh7
+ ts66NSoQ7v+hgmZmo95/VSwN0svu/jE14TPdvKf2qeiAdi2qG+LkGzbJ6oYQyZmYkY
+ hJJa5qiUiJDqg==
 From: Lukasz Majewski <lukma@denx.de>
 To: Teresa Remmet <t.remmet@phytec.de>,
 	u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Benjamin Hahn <B.Hahn@phytec.de>,
  Cem Tenruh <c.tenruh@phytec.de>, Martyn Welch <martyn.welch@collabora.com>,
  Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>
-Subject: [PATCH 1/2] config: Add 'update_bootimg' command to update flash.bin
- on Phytec's imx8mm
-Date: Thu,  1 Aug 2024 14:54:15 +0200
-Message-Id: <20240801125416.1582652-1-lukma@denx.de>
+Subject: [PATCH 2/2] config: Adjust Phytec imx8mm module config to support
+ NVME disk
+Date: Thu,  1 Aug 2024 14:54:16 +0200
+Message-Id: <20240801125416.1582652-2-lukma@denx.de>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240801125416.1582652-1-lukma@denx.de>
+References: <20240801125416.1582652-1-lukma@denx.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -68,36 +71,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This command allows easy update on SD card (hence the update_mmc_part=1)
-of the flash.bin generated during u-boot build.
+This change adds support for PCIe connected nvme disk - phyBOARD-Polis
+base board.
+
+One needs to call following commands in u-boot:
+> pci enum
+> nvme scan
+> nvme info
+
+And then ones to access proper file system (like fat[ls|load|write],
+ext4[ls|load|write]).
 
 Signed-off-by: Lukasz Majewski <lukma@denx.de>
 ---
- include/configs/phycore_imx8mm.h | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ configs/phycore-imx8mm_defconfig | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-diff --git a/include/configs/phycore_imx8mm.h b/include/configs/phycore_imx8mm.h
-index ce6dc87c69..fdeb11933f 100644
---- a/include/configs/phycore_imx8mm.h
-+++ b/include/configs/phycore_imx8mm.h
-@@ -29,6 +29,17 @@
- 	"mmcdev=" __stringify(CONFIG_SYS_MMC_ENV_DEV) "\0" \
- 	"mmcpart=1\0" \
- 	"mmcroot=2\0" \
-+	"update_mmc_part=1\0" \
-+	"update_offset=0x42\0" \
-+	"update_filename=flash.bin\0" \
-+	"hostname=/tftpboot/lukma/\0" \
-+	"update_bootimg="						\
-+		"mmc dev ${mmcdev} ; "		\
-+		"if dhcp ${hostname}/${update_filename} ; then "	\
-+		"setexpr fw_sz ${filesize} / 0x200 ; "	/* SD block size */ \
-+		"setexpr fw_sz ${fw_sz} + 1 ; "				\
-+		"mmc write ${loadaddr} ${update_offset} ${fw_sz} ; "	\
-+		"fi\0" \
- 	"mmcautodetect=yes\0" \
- 	"mmcargs=setenv bootargs console=${console} " \
- 		"root=/dev/mmcblk${mmcdev}p${mmcroot} rootwait rw\0" \
+diff --git a/configs/phycore-imx8mm_defconfig b/configs/phycore-imx8mm_defconfig
+index 22d419024f..e6854aa571 100644
+--- a/configs/phycore-imx8mm_defconfig
++++ b/configs/phycore-imx8mm_defconfig
+@@ -12,6 +12,7 @@ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="imx8mm-phyboard-polis-rdk"
+ CONFIG_SPL_TEXT_BASE=0x7E1000
+ CONFIG_TARGET_PHYCORE_IMX8MM=y
++CONFIG_DM_RESET=y
+ CONFIG_SYS_MONITOR_LEN=524288
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+@@ -23,6 +24,7 @@ CONFIG_SPL_BSS_MAX_SIZE=0x2000
+ CONFIG_SPL=y
+ CONFIG_ENV_OFFSET_REDUND=0x3E0000
+ CONFIG_SYS_LOAD_ADDR=0x40480000
++CONFIG_PCI=y
+ CONFIG_FIT=y
+ CONFIG_FIT_EXTERNAL_OFFSET=0x3000
+ CONFIG_SPL_LOAD_FIT=y
+@@ -32,6 +34,7 @@ CONFIG_BOOTCOMMAND="mmc dev ${mmcdev}; if mmc rescan; then if run loadimage; the
+ CONFIG_DEFAULT_FDT_FILE="oftree"
+ CONFIG_SYS_CBSIZE=2048
+ CONFIG_SYS_PBSIZE=2074
++CONFIG_CYCLIC_MAX_CPU_TIME_US=1000
+ CONFIG_BOARD_LATE_INIT=y
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+ CONFIG_SPL_SYS_MALLOC=y
+@@ -59,6 +62,7 @@ CONFIG_CMD_FUSE=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
+ CONFIG_CMD_SF_TEST=y
+ CONFIG_CMD_DHCP=y
+ CONFIG_CMD_MII=y
+@@ -110,10 +114,15 @@ CONFIG_PHY_TI_DP83867=y
+ CONFIG_PHY_GIGE=y
+ CONFIG_FEC_MXC=y
+ CONFIG_MII=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_IMX=y
++CONFIG_PHY=y
++CONFIG_PHY_IMX8M_PCIE=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_IMX8M=y
+-CONFIG_DM_REGULATOR=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_IMX8M_POWER_DOMAIN=y
+ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_REGULATOR_GPIO=y
+ CONFIG_DM_SERIAL=y
 -- 
 2.39.2
 
