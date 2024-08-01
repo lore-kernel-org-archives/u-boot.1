@@ -4,49 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B70A4C3DA64
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 21:33:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F8FBC3DA64
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 21:47:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E27CE88B61;
-	Thu,  1 Aug 2024 23:33:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+	by phobos.denx.de (Postfix) with ESMTP id 8CD8287C7E;
+	Thu,  1 Aug 2024 23:47:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 306A888B62; Thu,  1 Aug 2024 23:33:02 +0200 (CEST)
-Received: from smtpbguseast2.qq.com (smtpbguseast2.qq.com [54.204.34.130])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16EC988327
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 23:32:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
-X-QQ-mid: bizesmtp79t1722547952tymbduey
-X-QQ-Originating-IP: Cs7Uka0gIBEjbuWZCBe0/hPx7bXYyPH2QqA0shQ9mAc=
-Received: from [192.168.159.131] ( [106.150.157.243])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Fri, 02 Aug 2024 05:32:29 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 7050501393528897189
-Message-ID: <91F50BEC51D3A968+65cdb141-964c-43cb-b129-c48bd376ed2e@radxa.com>
-Date: Fri, 2 Aug 2024 06:32:29 +0900
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ThGZfmjx";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B1276885A8; Thu,  1 Aug 2024 23:47:48 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D0D387919
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 23:47:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=d829=PB=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1722548857;
+ bh=1tHN6OLkTWk3gua1AMi779rdbcM37fwy1kSMqmewW+w=;
+ b=ThGZfmjxdkXpi9tI42fs6mh2hObm6FsX8nHRDirBtME6yNZoDw2JZoS+42/0yuvmjPJUmrqYv
+ KgQ2VpduPFCcgaYgWvQ66f6RTRDvK5gGzADse5bxUgdmgGLOuhUX49T+k/1FsmJ6lmfbCBfC5tX
+ JW/FkUHf/ZFiWXCtmumxOekHgIZ7B6oNyuOJT1+7xUkS29IkqmuylXjTGK8dumCChxy7DlWxkjM
+ 4NnNhBQOvPuGRq5J4YnNyOA+BmdgWaZ4qSy5W55ykbH1CVKWuHjrSrK82H+FHY6b06LNBEKUZdy
+ jx4B2ZuRtg3t0INv/bV+GUrq11wNORU6DTAALUVi7EkA==
+Message-ID: <944a6125-3a61-4e1f-902a-145516b315df@kwiboo.se>
+Date: Thu, 1 Aug 2024 23:47:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] board: rockchip: Add Radxa ROCK 3B
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>, Joseph Chen <chenjh@rock-chips.com>
-Cc: u-boot@lists.denx.de
-References: <20240731072858.1216627-1-jonas@kwiboo.se>
- <20240731072858.1216627-3-jonas@kwiboo.se>
+Subject: Re: [PATCH 4/5] dm: adc: Add SPL_ADC Kconfig symbol for use of ADC in
+ SPL
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
+References: <20240731065048.1199792-1-jonas@kwiboo.se>
+ <20240731065048.1199792-5-jonas@kwiboo.se>
+ <7208a42b-4309-4216-ab64-16a5a82eced8.a73bd9c8-8cbe-42e2-876b-4c548d837fba.e39c66b9-19b8-456c-a1aa-5fb8d021db0b@emailsignatures365.codetwo.com>
+ <a3f9a9ad-424e-4b51-8b02-56b992c33259@cherry.de>
+ <ea1bca18-51bd-4ca8-849d-70229c5e24ec@kwiboo.se>
+ <e6e50791-3308-4634-afb4-9210f92695d5@cherry.de>
 Content-Language: en-US
-From: FUKAUMI Naoki <naoki@radxa.com>
-In-Reply-To: <20240731072858.1216627-3-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <e6e50791-3308-4634-afb4-9210f92695d5@cherry.de>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtp:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66ac027606984f15ed09f0b1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,201 +79,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Quentin,
 
-On 7/31/24 16:28, Jonas Karlman wrote:
-> The Radxa ROCK 3B is a single-board computer based on the Pico-ITX form
-> factor (100mm x 75mm). Two versions of the ROCK 3B exists, a community
-> version based on the RK3568 SoC and an industrial version based on the
-> RK3568J SoC.
+On 2024-08-01 11:26, Quentin Schulz wrote:
+> Hi Jonas,
 > 
-> Features tested on ROCK 3B 8GB v1.51 (both variants):
-> - SD-card boot
-> - eMMC boot
-> - SPI Flash boot
-> - Ethernet
-> - PCIe/NVMe
-> - USB gadget
-> - USB host
+> On 7/31/24 4:10 PM, Jonas Karlman wrote:
+>  > Hi Quentin,
+>  >
+>  > On 2024-07-31 14:42, Quentin Schulz wrote:
+>  >> Hi Jonas,
+>  >>
+>  >> On 7/31/24 8:50 AM, Jonas Karlman wrote:
+>  >>   > What model of Radxa ZERO 3W/3E boards can be identified using ADC at
+>  >>   > runtime, add a Kconfig symbol to allow use of ADC in SPL.
+>  >>   >
+>  >>   > This will be used to identify board model in SPL to allow loading
+>  >>   > correct FIT configuration and FDT for U-Boot proper at SPL phase.
+>  >>   >
+>  >>   > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>  >>   > ---
+>  >>   >   drivers/Makefile    | 2 +-
+>  >>   >   drivers/adc/Kconfig | 4 ++++
+>  >>   >   2 files changed, 5 insertions(+), 1 deletion(-)
+>  >>   >
+>  >>   > diff --git a/drivers/Makefile b/drivers/Makefile
+>  >>   > index 9195dafd37e0..1acd94f3c17e 100644
+>  >>   > --- a/drivers/Makefile
+>  >>   > +++ b/drivers/Makefile
+>  >>   > @@ -1,5 +1,6 @@
+>  >>   >   # SPDX-License-Identifier: GPL-2.0+
+>  >>   >
+>  >>   > +obj-$(CONFIG_$(SPL_TPL_)ADC) += adc/
+>  >>   >   obj-$(CONFIG_$(SPL_TPL_)BIOSEMU) += bios_emulator/
+>  >>   >   obj-$(CONFIG_$(SPL_TPL_)BLK) += block/
+>  >>   >   obj-$(CONFIG_$(SPL_TPL_)BOOTCOUNT_LIMIT) += bootcount/
+>  >>   > @@ -81,7 +82,6 @@ endif
+>  >>   >
+>  >>   >   ifeq ($(CONFIG_SPL_BUILD)$(CONFIG_TPL_BUILD),)
+>  >>   >
+>  >>   > -obj-y += adc/
+>  >>   >   obj-y += ata/
+>  >>   >   obj-$(CONFIG_DM_DEMO) += demo/
+>  >>   >   obj-y += block/
+>  >>   > diff --git a/drivers/adc/Kconfig b/drivers/adc/Kconfig
+>  >>   > index c9cdbe6942de..eb705f9e0fb8 100644
+>  >>   > --- a/drivers/adc/Kconfig
+>  >>   > +++ b/drivers/adc/Kconfig
+>  >>   > @@ -11,6 +11,10 @@ config ADC
+>  >>   >          - support supply's phandle with auto-enable
+>  >>   >          - supply polarity setting in fdt
+>  >>   >
+>  >>   > +config SPL_ADC
+>  >>   > +     bool "Enable ADC drivers using Driver Model in SPL"
+>  >>   > +     depends on ADC
+>  >>   > +
+>  >>
+>  >> This is just because you didn't modify the drivers/adc/Makefile to have
+>  >> obj-$(CONFIG_$(SPL_TPL_)ADC) += adc-uclass.o
+>  >> I assume? It's a bit odd to require a "proper" symbol for an SPL symbol.
+>  >>
+>  >> Additionally, since you use $(SPL_TPL_) maybe add that TPL symbol too in
+>  >> the Kconfig?
+>  >
+>  > Agree, this could have been done differently, I added the depends on ADC
+>  > a few minutes before I send the series to ensure next user of ADC in SPL
+>  > does not miss it.
+>  >
 > 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> I would rather not depend on a hack if we can avoid it. I believe:
+> obj-$(CONFIG_$(SPL_TPL_)ADC) += adc-uclass.o
+> should be enough of a change here?
 
-for the whole series,
+I thinks so to, will change to that in a v2.
 
-Tested-by: FUKAUMI Naoki <naoki@radxa.com>
-
-thank you so much for your contribution!
-
-Best regards,
-
---
-FUKAUMI Naoki
-Radxa Computer (Shenzhen) Co., Ltd.
-
-> ---
->   arch/arm/dts/rk3568-rock-3b-u-boot.dtsi |  15 ++++
->   board/rockchip/evb_rk3568/MAINTAINERS   |   6 ++
->   configs/rock-3b-rk3568_defconfig        | 100 ++++++++++++++++++++++++
->   doc/board/rockchip/rockchip.rst         |   3 +-
->   4 files changed, 123 insertions(+), 1 deletion(-)
->   create mode 100644 arch/arm/dts/rk3568-rock-3b-u-boot.dtsi
->   create mode 100644 configs/rock-3b-rk3568_defconfig
 > 
-> diff --git a/arch/arm/dts/rk3568-rock-3b-u-boot.dtsi b/arch/arm/dts/rk3568-rock-3b-u-boot.dtsi
-> new file mode 100644
-> index 000000000000..b1f324282bac
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3568-rock-3b-u-boot.dtsi
-> @@ -0,0 +1,15 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +
-> +#include "rk356x-u-boot.dtsi"
-> +
-> +&sdhci {
-> +	mmc-hs400-1_8v;
-> +	mmc-hs400-enhanced-strobe;
-> +};
-> +
-> +&sfc {
-> +	flash@0 {
-> +		bootph-pre-ram;
-> +		bootph-some-ram;
-> +	};
-> +};
-> diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/evb_rk3568/MAINTAINERS
-> index ba4884db8e12..588134ecb27a 100644
-> --- a/board/rockchip/evb_rk3568/MAINTAINERS
-> +++ b/board/rockchip/evb_rk3568/MAINTAINERS
-> @@ -70,6 +70,12 @@ F:	configs/rock-3a-rk3568_defconfig
->   F:	arch/arm/dts/rk3568-rock-3a.dts
->   F:	arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
->   
-> +ROCK-3B
-> +M:	Jonas Karlman <jonas@kwiboo.se>
-> +S:	Maintained
-> +F:	configs/rock-3b-rk3568_defconfig
-> +F:	arch/arm/dts/rk3568-rock-3b*
-> +
->   ROCK-3C
->   M:	Jonas Karlman <jonas@kwiboo.se>
->   M:	Maxim Moskalets <maximmosk4@gmail.com>
-> diff --git a/configs/rock-3b-rk3568_defconfig b/configs/rock-3b-rk3568_defconfig
-> new file mode 100644
-> index 000000000000..937796811a97
-> --- /dev/null
-> +++ b/configs/rock-3b-rk3568_defconfig
-> @@ -0,0 +1,100 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_SF_DEFAULT_SPEED=24000000
-> +CONFIG_SF_DEFAULT_MODE=0x2000
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-rock-3b"
-> +CONFIG_ROCKCHIP_RK3568=y
-> +CONFIG_ROCKCHIP_SPI_IMAGE=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_DEBUG_UART_BASE=0xFE660000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
-> +CONFIG_SPL_SPI=y
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_PCI=y
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_AHCI=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-rock-3b.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_SPI_LOAD=y
-> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
-> +CONFIG_SPL_ATF=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PCI=y
-> +CONFIG_CMD_POWEROFF=y
-> +CONFIG_CMD_USB=y
-> +CONFIG_CMD_ROCKUSB=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_PMIC=y
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_SCSI_AHCI=y
-> +CONFIG_AHCI_PCI=y
-> +CONFIG_SPL_CLK=y
-> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_LED=y
-> +CONFIG_LED_GPIO=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_SF_DEFAULT_BUS=4
-> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-> +CONFIG_SPI_FLASH_MACRONIX=y
-> +CONFIG_SPI_FLASH_XTX=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-> +CONFIG_NVME_PCI=y
-> +CONFIG_PCIE_DW_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_DM_PMIC_FAN53555=y
-> +CONFIG_PMIC_RK8XX=y
-> +CONFIG_REGULATOR_RK8XX=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_SCSI=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_ROCKCHIP_SFC=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_USB_GADGET=y
-> +CONFIG_USB_GADGET_DOWNLOAD=y
-> +CONFIG_USB_FUNCTION_ROCKUSB=y
-> +CONFIG_ERRNO_STR=y
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index eadca0ceb2a5..3febebd0b830 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -118,7 +118,8 @@ List of mainline supported Rockchip boards:
->        - Generic RK3566/RK3568 (generic-rk3568)
->        - Hardkernel ODROID-M1 (odroid-m1-rk3568)
->        - Radxa E25 Carrier Board (radxa-e25-rk3568)
-> -     - Radxa ROCK 3 Model A (rock-3a-rk3568)
-> +     - Radxa ROCK 3A (rock-3a-rk3568)
-> +     - Radxa ROCK 3B (rock-3b-rk3568)
->   
->   * rk3588
->        - ArmSoM Sige7 (sige7-rk3588)
+> I'm actually wondering if we can't simply have
+> obj-y += adc-uclass.o
+> ? considering that this Makefile is only included if
+> $(CONFIG_$(SPL_TPL_)ADC)?
+
+Should be possible, but it is probably better to be explicit in case the
+condition in drivers/Makefile ever changes in the future.
+
+Regards,
+Jonas
+
+> 
+> Cheers,
+> Quentin
+
