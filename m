@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43941C3DA4A
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 05:34:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1582C3DA64
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 05:34:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B33E88967;
-	Thu,  1 Aug 2024 07:33:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8730088AE1;
+	Thu,  1 Aug 2024 07:33:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="czau3Qi0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ThO24FF+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC68F884BE; Thu,  1 Aug 2024 07:33:45 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 0DBBC88967; Thu,  1 Aug 2024 07:33:47 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED4AB88ADA
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 07:33:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A63088599
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 07:33:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-595856e2336so2801355a12.1
- for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 22:33:42 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-58f9874aeb4so8494102a12.0
+ for <u-boot@lists.denx.de>; Wed, 31 Jul 2024 22:33:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722490422; x=1723095222; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1722490423; x=1723095223; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UMw6nSK/bj3k0MpybUw/oCW/apySRZLpdg0k0rEuspA=;
- b=czau3Qi0qukiyqPBIC0TuT30skPQ1bjgalJtxxreziGFt58tuxJluDa1D95HOOTTmT
- VhOzXZJLYPpcZf5T9tmlykmZQvc+s9h1wumwjJu0BmvJpyjVOOFla8jLzRrBvDa+Om3r
- Ge233KVgP3Yvc/q+WCqupnE/KGNxB48qLTqMTjmoExjH4IhKLQ0Pp1SO/j6l1RIh/2K2
- dG6HPNPe/h/fccQxJNny40BYfi2BaggklaaNFoMGciOPv8JV5QAHuvQDxTnxcs/1hzQO
- eJjnxE3jXxd513EUOotn711GxmeEsJ4+mqEf/LBZ1iiUKcf1f32C9959Tgp9cBeclOXV
- fMeg==
+ bh=59InUIlwyp6Y4Pe43LpnzsdqdQ8DPNqXNYY7nkEPm0I=;
+ b=ThO24FF+A9qW+BVVDysRmtaEe4k1QIgGO5/tA4eeTe0D9likOR4jxeb0YK9WIlK+S2
+ OMyE31YcsPbfaNuRHK017fg1g5dtM8agJWVVPHf4AanRBatAf/ryCwOZ+ooFggvv0t3t
+ Id6jj7M8Zzrbkl2zOEJq3LfKbqUg5rbdVoTL89tc0pF97vM2W02VjYc0d5jWr3QGEOTL
+ ofDBouo8wuAd0y4Sq4yph035L0znG4d14zsrA6PCUHrXuKlX3YUJow8hHV1KDV3X61oU
+ aEMOPuP2KSj62pw0B+cGPO1CbZyKqYZHJxWLShbeZ3TIS7aSLtABo8B2I567mxb4W5fe
+ 8N3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722490422; x=1723095222;
+ d=1e100.net; s=20230601; t=1722490423; x=1723095223;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UMw6nSK/bj3k0MpybUw/oCW/apySRZLpdg0k0rEuspA=;
- b=G62MrEuplAoipMBTb5s4arqBT1uMyeovfxCHqwGp/nqe2VU7Zcwnrz1MHQH6xTyX8A
- 1j4wscu8ugmfctfpmTwleWr9irTpxUzk7tXL4HapGjZi4QtYROtTdBbt16Rkc0wDN3F7
- fkocXwknk7+trSVnVglfPz9Va5LUB0cfRlxv75Bh7OMupkmgYLEQ5l8skM4PwSdQP/3P
- MM3n1rr4hjv2UuaCgunYWSY1YqtCvivackMLB20I0/79N5z5SF2tv4Nk6GV4NllR0LfG
- gjvmBtQkF/qAK1wvGKCxDUdeKENAW4aKUcg7bmD90Xf9moRK72psT827TsXGYugQBqKD
- z3AQ==
-X-Gm-Message-State: AOJu0YzNiEcKwTF73eJiV2zgKULPsh6fgkDs/OP0HZeFAtd2vxy9DeEm
- IJRC4cr7APy+olivZRzQ5rpAvit//DcQtng3vJMTWeFocvUzHDrS
-X-Google-Smtp-Source: AGHT+IG9ilpdJTuhNf3Rojljm3Nva4cipbn4kdaokpAp11aIeeaLsq6R2Tv6sM7lw4TMW6oNspmTUA==
-X-Received: by 2002:a50:ef17:0:b0:5af:5538:e03e with SMTP id
- 4fb4d7f45d1cf-5b77c974c1fmr157635a12.9.1722490422293; 
- Wed, 31 Jul 2024 22:33:42 -0700 (PDT)
+ bh=59InUIlwyp6Y4Pe43LpnzsdqdQ8DPNqXNYY7nkEPm0I=;
+ b=lfjLhJkyjmixDH4AGlI+7cCovhp1g0fyp9zWb/JY0DKcMjRNVog1TSDhy+IhxvQHK9
+ T20Gu9yUZrr5v7s5q+LcUMij+532/ZjJ8vEFSXknjz5LkZLEwlCpLVFRvA9gxRc0lPwk
+ rYXsWIkASn6PVhooXLrGvAFV0BtSngOI46TXosQ7BHDS/gtYeD1cVhdW6luxshhQQB3n
+ 1ebE1ntGGkaTYfUxPLhiPiEol002fFtMjKbcWAFb0EQR/aFlGuPYLlBVC5b7BJf1xX7H
+ 7enSybvLZPyTVOe393dXXbq6M1zEPXRdpyUK4ZUFsLJIrvjl1clo5XH3DGmNeUrxbmL5
+ JW8w==
+X-Gm-Message-State: AOJu0Yw4PzMFtf8mcrihG3UtF8YfzNMdmOYPOleqP5nDidhpUXNhVeHn
+ mjm9/ietelnFkCOPjZZf1KcOA/1NIx/xHZnJ4NUicUQzGzvcrMs8
+X-Google-Smtp-Source: AGHT+IHRfTmvGNTKZvoyLe4v8uD/cw+6FUDr6KDUWlmvYc9+fZ8/Ex1fFUEKVUZ4X+u6spth1Vq88g==
+X-Received: by 2002:aa7:df06:0:b0:5a1:cb3c:bd3e with SMTP id
+ 4fb4d7f45d1cf-5b6fef06d9fmr715038a12.20.1722490423267; 
+ Wed, 31 Jul 2024 22:33:43 -0700 (PDT)
 Received: from xeon.. ([188.163.112.54]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5ac64eb3a95sm9477990a12.61.2024.07.31.22.33.41
+ 4fb4d7f45d1cf-5ac64eb3a95sm9477990a12.61.2024.07.31.22.33.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 31 Jul 2024 22:33:42 -0700 (PDT)
+ Wed, 31 Jul 2024 22:33:43 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
  Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
@@ -72,13 +72,15 @@ To: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
  Eugen Hristev <eugen.hristev@collabora.com>,
  Igor Prusov <ivprusov@salutedevices.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 2/3] video: tegra20: dsi: add ganged mode support
-Date: Thu,  1 Aug 2024 08:33:14 +0300
-Message-ID: <20240801053315.6428-3-clamor95@gmail.com>
+Subject: [PATCH v1 3/3] video: panel: add Sharp LQ101R1SX01 MIPI DSI panel
+ driver
+Date: Thu,  1 Aug 2024 08:33:15 +0300
+Message-ID: <20240801053315.6428-4-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240801053315.6428-1-clamor95@gmail.com>
 References: <20240801053315.6428-1-clamor95@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,230 +98,342 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement ganged mode support for the Tegra DSI driver. The DSI host
-controller to gang up with is specified via a phandle in the device tree
-and the resolved DSI host controller used for the programming of the
-ganged-mode registers.
+This module is a color active matrix LCD module incorporating
+Oxide TFT (Thin Film Transistor). It is composed of a color TFT-LCD
+panel, driver ICs, a control circuit and power supply circuit, and
+a backlight unit. Graphics and texts can be displayed on a 2560×1600
+dots panel with (16,777,216) colors by using MIPI DUAL DSI interface,
+supplying +3.3V DC supply voltage for TFT-LCD panel driving and
+supplying DC supply voltage for LED Backlight.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/tegra20/tegra-dsi.c | 95 +++++++++++++++++++++++++++++--
- drivers/video/tegra20/tegra-dsi.h | 15 ++++-
- 2 files changed, 104 insertions(+), 6 deletions(-)
+ drivers/video/Kconfig             |   9 +
+ drivers/video/Makefile            |   1 +
+ drivers/video/sharp-lq101r1sx01.c | 282 ++++++++++++++++++++++++++++++
+ 3 files changed, 292 insertions(+)
+ create mode 100644 drivers/video/sharp-lq101r1sx01.c
 
-diff --git a/drivers/video/tegra20/tegra-dsi.c b/drivers/video/tegra20/tegra-dsi.c
-index 35a8e6c176..6327266dd2 100644
---- a/drivers/video/tegra20/tegra-dsi.c
-+++ b/drivers/video/tegra20/tegra-dsi.c
-@@ -20,6 +20,7 @@
- #include <asm/gpio.h>
- #include <asm/io.h>
- #include <asm/arch/clock.h>
-+#include <asm/arch-tegra/clk_rst.h>
+diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
+index 7808ae7919..8ef7690744 100644
+--- a/drivers/video/Kconfig
++++ b/drivers/video/Kconfig
+@@ -564,6 +564,15 @@ config VIDEO_LCD_SAMSUNG_LTL106HL02
+ 	  LCD module found in Microsoft Surface 2. The panel has a FullHD
+ 	  resolution (1920x1080).
  
- #include "tegra-dc.h"
- #include "tegra-dsi.h"
-@@ -50,6 +51,10 @@ struct tegra_dsi_priv {
- 	int host_fifo_depth;
- 
- 	u32 version;
++config VIDEO_LCD_SHARP_LQ101R1SX01
++	tristate "Sharp LQ101R1SX01 2560x1600 DSI video mode panel"
++	depends on PANEL && BACKLIGHT
++	select VIDEO_MIPI_DSI
++	help
++	  Say Y here if you want to enable support for Sharp LQ101R1SX01
++	  LCD module found in ASUS Transformer TF701T. The panel has a
++	  WQXGA resolution (2560x1600).
 +
-+	/* for ganged-mode support */
-+	struct udevice *master;
-+	struct udevice *slave;
- };
- 
- static void tegra_dc_enable_controller(struct udevice *dev)
-@@ -595,6 +600,17 @@ static void tegra_dsi_set_phy_timing(struct dsi_timing_reg *ptiming,
- 	writel(value, &ptiming->dsi_bta_timing);
- }
- 
-+static void tegra_dsi_ganged_enable(struct udevice *dev, unsigned int start,
-+				    unsigned int size)
+ config VIDEO_LCD_SSD2828
+ 	bool "SSD2828 bridge chip"
+ 	---help---
+diff --git a/drivers/video/Makefile b/drivers/video/Makefile
+index f3f70cd04a..5973bad742 100644
+--- a/drivers/video/Makefile
++++ b/drivers/video/Makefile
+@@ -64,6 +64,7 @@ obj-$(CONFIG_VIDEO_LCD_RAYDIUM_RM68200) += raydium-rm68200.o
+ obj-$(CONFIG_VIDEO_LCD_RENESAS_R61307) += renesas-r61307.o
+ obj-$(CONFIG_VIDEO_LCD_RENESAS_R69328) += renesas-r69328.o
+ obj-$(CONFIG_VIDEO_LCD_SAMSUNG_LTL106HL02) += samsung-ltl106hl02.o
++obj-$(CONFIG_VIDEO_LCD_SHARP_LQ101R1SX01) += sharp-lq101r1sx01.o
+ obj-$(CONFIG_VIDEO_LCD_SSD2828) += ssd2828.o
+ obj-$(CONFIG_VIDEO_LCD_TDO_TL070WSH30) += tdo-tl070wsh30.o
+ obj-$(CONFIG_VIDEO_MCDE_SIMPLE) += mcde_simple.o
+diff --git a/drivers/video/sharp-lq101r1sx01.c b/drivers/video/sharp-lq101r1sx01.c
+new file mode 100644
+index 0000000000..5d8453fd79
+--- /dev/null
++++ b/drivers/video/sharp-lq101r1sx01.c
+@@ -0,0 +1,282 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Sharp LQ101R1SX01 DSI panel driver
++ *
++ * Copyright (C) 2014 NVIDIA Corporation
++ * Copyright (c) 2023 Svyatoslav Ryhel <clamor95@gmail.com>
++ */
++
++#include <backlight.h>
++#include <dm.h>
++#include <panel.h>
++#include <log.h>
++#include <mipi_dsi.h>
++#include <linux/delay.h>
++#include <power/regulator.h>
++
++struct sharp_lq101r1sx01_priv {
++	struct udevice *backlight;
++	struct udevice *panel_sec;
++	struct udevice *vcc;
++};
++
++static struct display_timing default_timing = {
++	.pixelclock.typ		= 278000000,
++	.hactive.typ		= 2560,
++	.hfront_porch.typ	= 128,
++	.hback_porch.typ	= 64,
++	.hsync_len.typ		= 64,
++	.vactive.typ		= 1600,
++	.vfront_porch.typ	= 4,
++	.vback_porch.typ	= 8,
++	.vsync_len.typ		= 32,
++};
++
++static int sharp_lq101r1sx01_write(struct mipi_dsi_device *dsi,
++				   u16 offset, u8 value)
 +{
-+	struct tegra_dsi_priv *priv = dev_get_priv(dev);
-+	struct dsi_ganged_mode_reg *ganged = &priv->dsi->ganged;
++	u8 payload[3] = { offset >> 8, offset & 0xff, value };
++	int ret;
 +
-+	writel(start, &ganged->ganged_mode_start);
-+	writel(size << 16 | size, &ganged->ganged_mode_size);
-+	writel(DSI_GANGED_MODE_CONTROL_ENABLE, &ganged->ganged_mode_ctrl);
++	ret = mipi_dsi_generic_write(dsi, payload, sizeof(payload));
++	if (ret < 0) {
++		log_debug("%s: failed to write %02x to %04x: %zd\n",
++			  __func__, value, offset, ret);
++		return ret;
++	}
++
++	ret = mipi_dsi_dcs_nop(dsi);
++	if (ret < 0) {
++		log_debug("%s: failed to send DCS nop: %zd\n",
++			  __func__, ret);
++		return ret;
++	}
++
++	udelay(20);
++
++	return 0;
 +}
 +
- static void tegra_dsi_configure(struct udevice *dev,
- 				unsigned long mode_flags)
- {
-@@ -679,9 +695,19 @@ static void tegra_dsi_configure(struct udevice *dev,
- 		writel(hact << 16 | hbp, &len->dsi_pkt_len_2_3);
- 		writel(hfp, &len->dsi_pkt_len_4_5);
- 		writel(0x0f0f << 16, &len->dsi_pkt_len_6_7);
-+
-+		/* set SOL delay (for non-burst mode only) */
-+		writel(8 * mul / div, &misc->dsi_sol_delay);
- 	} else {
--		/* 1 byte (DCS command) + pixel data */
--		value = 1 + timing->hactive.typ * mul / div;
-+		if (priv->master || priv->slave) {
-+			/*
-+			 * For ganged mode, assume symmetric left-right mode.
-+			 */
-+			value = 1 + (timing->hactive.typ / 2) * mul / div;
-+		} else {
-+			/* 1 byte (DCS command) + pixel data */
-+			value = 1 + timing->hactive.typ * mul / div;
-+		}
- 
- 		writel(0, &len->dsi_pkt_len_0_1);
- 		writel(value << 16, &len->dsi_pkt_len_2_3);
-@@ -691,10 +717,40 @@ static void tegra_dsi_configure(struct udevice *dev,
- 		value = MIPI_DCS_WRITE_MEMORY_START << 8 |
- 			MIPI_DCS_WRITE_MEMORY_CONTINUE;
- 		writel(value, &len->dsi_dcs_cmds);
-+
-+		/* set SOL delay */
-+		if (priv->master || priv->slave) {
-+			unsigned long delay, bclk, bclk_ganged;
-+			unsigned int lanes = device->lanes;
-+			unsigned long htotal = timing->hactive.typ + timing->hfront_porch.typ +
-+					       timing->hback_porch.typ + timing->hsync_len.typ;
-+
-+			/* SOL to valid, valid to FIFO and FIFO write delay */
-+			delay = 4 + 4 + 2;
-+			delay = DIV_ROUND_UP(delay * mul, div * lanes);
-+			/* FIFO read delay */
-+			delay = delay + 6;
-+
-+			bclk = DIV_ROUND_UP(htotal * mul, div * lanes);
-+			bclk_ganged = DIV_ROUND_UP(bclk * lanes / 2, lanes);
-+			value = bclk - bclk_ganged + delay + 20;
-+		} else {
-+			/* TODO: revisit for non-ganged mode */
-+			value = 8 * mul / div;
-+		}
-+
-+		writel(value, &misc->dsi_sol_delay);
- 	}
- 
--	/* set SOL delay (for non-burst mode only) */
--	writel(8 * mul / div, &misc->dsi_sol_delay);
-+	if (priv->slave) {
-+		/*
-+		 * TODO: Support modes other than symmetrical left-right
-+		 * split.
-+		 */
-+		tegra_dsi_ganged_enable(dev, 0, timing->hactive.typ / 2);
-+		tegra_dsi_ganged_enable(priv->slave, timing->hactive.typ / 2,
-+					timing->hactive.typ / 2);
-+	}
- }
- 
- static int tegra_dsi_encoder_enable(struct udevice *dev)
-@@ -774,6 +830,9 @@ static int tegra_dsi_encoder_enable(struct udevice *dev)
- 	value |= DSI_POWER_CONTROL_ENABLE;
- 	writel(value, &misc->dsi_pwr_ctrl);
- 
-+	if (priv->slave)
-+		tegra_dsi_encoder_enable(priv->slave);
-+
- 	return 0;
- }
- 
-@@ -803,6 +862,14 @@ static void tegra_dsi_init_clocks(struct udevice *dev)
- 	unsigned int mul, div;
- 	unsigned long bclk, plld;
- 
-+	if (!priv->slave) {
-+		/* Change DSIB clock parent to match DSIA */
-+		struct clk_rst_ctlr *clkrst =
-+			(struct clk_rst_ctlr *)NV_PA_CLK_RST_BASE;
-+
-+		clrbits_le32(&clkrst->plld2.pll_base, BIT(25)); /* DSIB_CLK_SRC */
-+	}
-+
- 	tegra_dsi_get_muldiv(device->format, &mul, &div);
- 
- 	bclk = (priv->timing.pixelclock.typ * mul) /
-@@ -854,6 +921,24 @@ static void tegra_dsi_init_clocks(struct udevice *dev)
- 	reset_set_enable(priv->dsi_clk, 0);
- }
- 
-+static int tegra_dsi_ganged_probe(struct udevice *dev)
++static int sharp_setup_symmetrical_split(struct mipi_dsi_device *left,
++					 struct mipi_dsi_device *right,
++					 struct display_timing *timing)
 +{
-+	struct tegra_dsi_priv *mpriv = dev_get_priv(dev);
-+	struct udevice *gangster;
++	int ret;
 +
-+	uclass_get_device_by_phandle(UCLASS_PANEL, dev,
-+				     "nvidia,ganged-mode", &gangster);
-+	if (gangster) {
-+		/* Ganged mode is set */
-+		struct tegra_dsi_priv *spriv = dev_get_priv(gangster);
++	ret = mipi_dsi_dcs_set_column_address(left, 0,
++					      timing->hactive.typ / 2 - 1);
++	if (ret < 0) {
++		log_debug("%s: failed to set column address: %d\n",
++			  __func__, ret);
++		return ret;
++	}
 +
-+		mpriv->slave = gangster;
-+		spriv->master = dev;
++	ret = mipi_dsi_dcs_set_page_address(left, 0, timing->vactive.typ - 1);
++	if (ret < 0) {
++		log_debug("%s: failed to set page address: %d\n",
++			  __func__, ret);
++		return ret;
++	}
++
++	ret = mipi_dsi_dcs_set_column_address(right, timing->hactive.typ / 2,
++					      timing->hactive.typ - 1);
++	if (ret < 0) {
++		log_debug("%s: failed to set column address: %d\n",
++			  __func__, ret);
++		return ret;
++	}
++
++	ret = mipi_dsi_dcs_set_page_address(right, 0, timing->vactive.typ - 1);
++	if (ret < 0) {
++		log_debug("%s: failed to set page address: %d\n",
++			  __func__, ret);
++		return ret;
 +	}
 +
 +	return 0;
 +}
 +
- static int tegra_dsi_bridge_probe(struct udevice *dev)
- {
- 	struct tegra_dsi_priv *priv = dev_get_priv(dev);
-@@ -873,6 +958,8 @@ static int tegra_dsi_bridge_probe(struct udevice *dev)
- 	priv->video_fifo_depth = 1920;
- 	priv->host_fifo_depth = 64;
- 
-+	tegra_dsi_ganged_probe(dev);
++static int sharp_lq101r1sx01_enable_backlight(struct udevice *dev)
++{
++	struct sharp_lq101r1sx01_priv *priv = dev_get_priv(dev);
 +
- 	ret = reset_get_by_name(dev, "dsi", &reset_ctl);
- 	if (ret) {
- 		log_debug("%s: reset_get_by_name() failed: %d\n",
-diff --git a/drivers/video/tegra20/tegra-dsi.h b/drivers/video/tegra20/tegra-dsi.h
-index 69dac4bd1b..683c5e31a3 100644
---- a/drivers/video/tegra20/tegra-dsi.h
-+++ b/drivers/video/tegra20/tegra-dsi.h
-@@ -98,9 +98,9 @@ struct dsi_timeout_reg {
- 	uint dsi_to_tally;		/* _DSI_TO_TALLY_0 */
- };
- 
--/* DSI PAD control register 0x04b ~ 0x04e */
-+/* DSI PAD control register 0x04b ~ 0x052 */
- struct dsi_pad_ctrl_reg {
--	/* Address 0x04b ~ 0x04e */
-+	/* Address 0x04b ~ 0x052 */
- 	uint pad_ctrl;			/* _PAD_CONTROL_0 */
- 	uint pad_ctrl_cd;		/* _PAD_CONTROL_CD_0 */
- 	uint pad_cd_status;		/* _PAD_CD_STATUS_0 */
-@@ -111,6 +111,14 @@ struct dsi_pad_ctrl_reg {
- 	uint pad_ctrl_4;		/* _PAD_CONTROL_4 */
- };
- 
-+/* DSI ganged mode register 0x053 ~ 0x04e */
-+struct dsi_ganged_mode_reg {
-+	/* Address 0x053 ~ 0x055 */
-+	uint ganged_mode_ctrl;		/* _DSI_GANGED_MODE_CONTROL_0 */
-+	uint ganged_mode_start;		/* _DSI_GANGED_MODE_START_0 */
-+	uint ganged_mode_size;		/* _DSI_GANGED_MODE_SIZE_0 */
++	if (!priv->panel_sec)
++		return 0;
++
++	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
++	struct mipi_dsi_panel_plat *plat_sec = dev_get_plat(priv->panel_sec);
++	struct mipi_dsi_device *link1 = plat->device;
++	struct mipi_dsi_device *link2 = plat_sec->device;
++	int ret;
++
++	ret = mipi_dsi_dcs_exit_sleep_mode(link1);
++	if (ret < 0) {
++		log_debug("%s: failed to exit sleep mode: %d\n",
++			  __func__, ret);
++		return ret;
++	}
++
++	/* set left-right mode */
++	ret = sharp_lq101r1sx01_write(link1, 0x1000, 0x2a);
++	if (ret < 0) {
++		log_debug("%s: failed to set left-right mode: %d\n",
++			  __func__, ret);
++		return ret;
++	}
++
++	/* enable command mode */
++	ret = sharp_lq101r1sx01_write(link1, 0x1001, 0x01);
++	if (ret < 0) {
++		log_debug("%s: failed to enable command mode: %d\n",
++			  __func__, ret);
++		return ret;
++	}
++
++	ret = mipi_dsi_dcs_set_pixel_format(link1, MIPI_DCS_PIXEL_FMT_24BIT);
++	if (ret < 0) {
++		log_debug("%s: failed to set pixel format: %d\n",
++			  __func__, ret);
++		return ret;
++	}
++
++	/*
++	 * TODO: The device supports both left-right and even-odd split
++	 * configurations, but this driver currently supports only the left-
++	 * right split. To support a different mode a mechanism needs to be
++	 * put in place to communicate the configuration back to the DSI host
++	 * controller.
++	 */
++	ret = sharp_setup_symmetrical_split(link1, link2, &default_timing);
++	if (ret < 0) {
++		log_debug("%s: failed to set up symmetrical split: %d\n",
++			  __func__, ret);
++		return ret;
++	}
++
++	ret = mipi_dsi_dcs_set_display_on(link1);
++	if (ret < 0) {
++		log_debug("%s: failed to set panel on: %d\n",
++			  __func__, ret);
++		return ret;
++	}
++	mdelay(20);
++
++	return 0;
++}
++
++static int sharp_lq101r1sx01_set_backlight(struct udevice *dev, int percent)
++{
++	struct sharp_lq101r1sx01_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	if (!priv->panel_sec)
++		return 0;
++
++	ret = backlight_enable(priv->backlight);
++	if (ret)
++		return ret;
++
++	return backlight_set_brightness(priv->backlight, percent);
++}
++
++static int sharp_lq101r1sx01_timings(struct udevice *dev,
++				     struct display_timing *timing)
++{
++	memcpy(timing, &default_timing, sizeof(*timing));
++	return 0;
++}
++
++static int sharp_lq101r1sx01_of_to_plat(struct udevice *dev)
++{
++	struct sharp_lq101r1sx01_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	/* If node has no link2 it is secondary panel */
++	if (!dev_read_bool(dev, "link2"))
++		return 0;
++
++	ret = uclass_get_device_by_phandle(UCLASS_PANEL, dev,
++					   "link2", &priv->panel_sec);
++	if (ret) {
++		log_debug("%s: cannot get secondary panel: ret = %d\n",
++			  __func__, ret);
++		return ret;
++	}
++
++	ret = uclass_get_device_by_phandle(UCLASS_PANEL_BACKLIGHT, dev,
++					   "backlight", &priv->backlight);
++	if (ret) {
++		log_debug("%s: cannot get backlight: ret = %d\n",
++			  __func__, ret);
++		return ret;
++	}
++
++	ret = uclass_get_device_by_phandle(UCLASS_REGULATOR, dev,
++					   "power-supply", &priv->vcc);
++	if (ret) {
++		log_debug("%s: cannot get power-supply: ret = %d\n",
++			  __func__, ret);
++		return ret;
++	}
++
++	return 0;
++}
++
++static int sharp_lq101r1sx01_hw_init(struct udevice *dev)
++{
++	struct sharp_lq101r1sx01_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	if (!priv->panel_sec)
++		return 0;
++
++	ret = regulator_set_enable_if_allowed(priv->vcc, 1);
++	if (ret) {
++		log_debug("%s: enabling power-supply failed (%d)\n",
++			  __func__, ret);
++		return ret;
++	}
++
++	/*
++	 * According to the datasheet, the panel needs around 10 ms to fully
++	 * power up. At least another 120 ms is required before exiting sleep
++	 * mode to make sure the panel is ready. Throw in another 20 ms for
++	 * good measure.
++	 */
++	mdelay(150);
++
++	return 0;
++}
++
++static int sharp_lq101r1sx01_probe(struct udevice *dev)
++{
++	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
++
++	/* fill characteristics of DSI data link */
++	plat->lanes = 4;
++	plat->format = MIPI_DSI_FMT_RGB888;
++
++	return sharp_lq101r1sx01_hw_init(dev);
++}
++
++static const struct panel_ops sharp_lq101r1sx01_ops = {
++	.enable_backlight	= sharp_lq101r1sx01_enable_backlight,
++	.set_backlight		= sharp_lq101r1sx01_set_backlight,
++	.get_display_timing	= sharp_lq101r1sx01_timings,
 +};
 +
- /* Display Serial Interface (DSI_) regs */
- struct dsi_ctlr {
- 	struct dsi_syncpt_reg syncpt;	/* SYNCPT register 0x000 ~ 0x002 */
-@@ -133,6 +141,7 @@ struct dsi_ctlr {
- 	uint reserved5[4];		/* reserved_5[4] */
- 
- 	struct dsi_pad_ctrl_reg pad;	/* PAD registers 0x04b ~ 0x04e */
-+	struct dsi_ganged_mode_reg ganged; /* GANGED registers 0x053 ~ 0x055 */
- };
- 
- #define DSI_POWER_CONTROL_ENABLE	BIT(0)
-@@ -202,6 +211,8 @@ struct dsi_ctlr {
- #define DSI_PAD_PREEMP_PD(x)		(((x) & 0x3) << 4)
- #define DSI_PAD_PREEMP_PU(x)		(((x) & 0x3) << 0)
- 
-+#define DSI_GANGED_MODE_CONTROL_ENABLE	BIT(0)
++static const struct udevice_id sharp_lq101r1sx01_ids[] = {
++	{ .compatible = "sharp,lq101r1sx01" },
++	{ }
++};
 +
- /*
-  * pixel format as used in the DSI_CONTROL_FORMAT field
-  */
++U_BOOT_DRIVER(sharp_lq101r1sx01) = {
++	.name		= "sharp_lq101r1sx01",
++	.id		= UCLASS_PANEL,
++	.of_match	= sharp_lq101r1sx01_ids,
++	.ops		= &sharp_lq101r1sx01_ops,
++	.of_to_plat	= sharp_lq101r1sx01_of_to_plat,
++	.probe		= sharp_lq101r1sx01_probe,
++	.plat_auto	= sizeof(struct mipi_dsi_panel_plat),
++	.priv_auto	= sizeof(struct sharp_lq101r1sx01_priv),
++};
 -- 
 2.43.0
 
