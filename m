@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 055C0C3DA64
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 22:58:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC66BC3DA64
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 22:58:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39ACA88B6C;
-	Fri,  2 Aug 2024 00:57:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A200788B7D;
+	Fri,  2 Aug 2024 00:57:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j8ABcoIi";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A84+L6Qx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 966B388B77; Fri,  2 Aug 2024 00:57:47 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id AC01488B7F; Fri,  2 Aug 2024 00:57:48 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2378B88B61
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 00:57:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 850FE88B6C
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 00:57:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=macroalpha82@gmail.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-3db50abf929so1075253b6e.2
- for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 15:57:45 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-25e397c51b2so4656532fac.3
+ for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 15:57:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722553063; x=1723157863; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1722553065; x=1723157865; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mAl13mUpFnzqvLLgNQb/MXjvMvcZsEF5aTBr3EQEmSA=;
- b=j8ABcoIiY5jNQG11+dzR8b7xph4Wdi4yLLpUHf1wl86j9mnMwda0cveJc2u+lXaCl5
- azpNAI648w3iz30NWgWlseMn1Yall1w0EhaQPm4kbhj78oaZ/7F5IeRZOrdGW+C4q9EF
- 5xCqiOLlQlI8+QIAoQIGydQhi03u+3IrHgH8nC32c+ibtkCBXQSsUcqnI0JrNzzZNlqT
- Zj06HJfj/lHISNznsuYYSEUKDSwk0Zt1aSEGmiXH9y79Lz7vghLvub3nNz3V5XxxVpit
- lijeMzG4jh02YJCeiZwRcVOx/EVQ8w0UZiNpjbIs9U03gRZbfabqAM1iTvaTpg7wHGm7
- btyQ==
+ bh=yC/WJ2yLZrHQaE3blhTJooqc7hTRPiNSBI0zfZn+B8Y=;
+ b=A84+L6QxMlcbFZZIgC3u+/bGLo31SZC2c4sFNDvKrAzJ9nGNtW3oeugYwjznHjao9I
+ wOvujhdLtfwNbnJG/low7llyYXCSDBo6Qy0cd26kCXKNOzUJHE1Tk9X5hbsWXCiCt1mB
+ frvRwJMprCMb+9yVRZut+a1tXTQAYKWcaIq5pD54e/E4lG4qYZiNq64fA1xxsb+xRdQf
+ wC+vFmn8EAWosSBpMljK7GSPL7zIkXSVX3aZQ3HyiSU5dhUTlA6kb6FntMOPU7Bmw3UZ
+ FYejbEQqZwe2gcTm4B2fS2/xqqd+TdifticIal3bicGCOoHuDY8M3ae9RgOGPXOcaO4l
+ NYfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722553063; x=1723157863;
+ d=1e100.net; s=20230601; t=1722553065; x=1723157865;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mAl13mUpFnzqvLLgNQb/MXjvMvcZsEF5aTBr3EQEmSA=;
- b=Nl3/0iix6x2oXZ3GifqjzbtMuatjaI0mFnzseh9a/zm8oO9a/DZhUdX+ejYxXDSeUU
- urncRGN6pPHFAbooBNz8PP/6JpqpmUl/T+C8lpTmmvYo05Mp/J64NvsQs1YnrOoCXEZp
- zlRfyDNMG51X2ErAoQ6sM7vgWFroKrM3sMZij753b2Fd8hIURrwWb8kjVBShpBtERkVH
- IyIztoaclBniHa6zzVv2HV7mES4ZLcZYJ5HkPRtiAuv+Pekm9qY/Ncz899HM0WJHNNBP
- 4GDn0SoCgpV2kHKdE+6AHaIQjRk5Ik1EMtz2xGNjAoC92dMAUn2zfhmWpU26YjyFTL6p
- v0bQ==
-X-Gm-Message-State: AOJu0YyV86kGKc8HY5vGwboc2UpWDTYaK1qyMCuMu3P38207Dzs3UI7y
- TQHW0TApTFs2wAlhu+Pu8uAX/xyl8Cjvw6mwKvb8j+q5MyG+8qgo2pEgkQ==
-X-Google-Smtp-Source: AGHT+IGqNw5+Z0wxAJjOFZZYobHSBMCFCBk2ecKCYkKU9hg/atkkb+2Q6Fbgjh3cer8X+ZS6IyXk4w==
-X-Received: by 2002:a05:6870:818b:b0:25d:f0ba:eab7 with SMTP id
- 586e51a60fabf-26891b1d08amr2047610fac.18.1722553063689; 
- Thu, 01 Aug 2024 15:57:43 -0700 (PDT)
+ bh=yC/WJ2yLZrHQaE3blhTJooqc7hTRPiNSBI0zfZn+B8Y=;
+ b=U+SrmOr6TARJUMXjF4azdEEJM9ZG2bNbMQaItGzkehMHCWbxAFP9opiQSQwlqyzrwx
+ 8B1alixTrwjqxFY0Bn4LYuUFQj3otdnntGxccw5nFJfj8OhSCWzTGq4HAvN4xFezUhS4
+ v0ty2+NH8xUYf8/bZyvXCZKoCofdagxcymGUWN4yy/vE5MD1U1mr+gR+GP/FVDn1XRaH
+ 5d8rqmdAwVxJWaDVYQ95lrEgT+BNgXxnSgCRndhUeYBZEzRA9/f2QXtTRigTZ8aZiwbp
+ EZ0N+C/RfR4qCSeIb6BjNf2WHrHtj5vOswZoCqszUhRXbuiGFQFxXqlIZ1SCRCkyYLVL
+ nV8w==
+X-Gm-Message-State: AOJu0YwgstOd8HXzY5S05/2eMak5GItoXWPhHEt2MLlaa1mWfpwtzgPi
+ 12Q30TWPoxjSjgjBnuIvxgRVkE5vb6vNDI6u75dhmwkJ/sI2PnDWX9Mo4Q==
+X-Google-Smtp-Source: AGHT+IFklhVl5NlBX4tWSmMAuIC4tvUjcPwT0jrNHOO9WgcgmQgw9OSOvQa+ohcvdkAYyz+q9M9Q1w==
+X-Received: by 2002:a05:6870:7246:b0:25e:1f67:b3c2 with SMTP id
+ 586e51a60fabf-26891ae029cmr2086462fac.1.1722553065137; 
+ Thu, 01 Aug 2024 15:57:45 -0700 (PDT)
 Received: from localhost.localdomain ([2600:1700:fb0:1bcf::54])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2689a67b515sm58039fac.50.2024.08.01.15.57.43
+ 586e51a60fabf-2689a67b515sm58039fac.50.2024.08.01.15.57.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Aug 2024 15:57:43 -0700 (PDT)
+ Thu, 01 Aug 2024 15:57:44 -0700 (PDT)
 From: Chris Morgan <macroalpha82@gmail.com>
 To: u-boot@lists.denx.de
 Cc: sjg@chromium.org, jernej.skrabec@gmail.com, neil.armstrong@linaro.org,
  hdegoede@redhat.com, andre.przywara@arm.com, jagan@amarulasolutions.com,
  trini@konsulko.com, ryan@testtoast.com,
  Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH 2/9] sunxi: H616: dram: LPDDR3: adjust settings
-Date: Thu,  1 Aug 2024 17:55:12 -0500
-Message-Id: <20240801225519.336667-3-macroalpha82@gmail.com>
+Subject: [PATCH 4/9] sunxi: H616: DRAM: Add alternative pin mapping
+Date: Thu,  1 Aug 2024 17:55:14 -0500
+Message-Id: <20240801225519.336667-5-macroalpha82@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240801225519.336667-1-macroalpha82@gmail.com>
 References: <20240801225519.336667-1-macroalpha82@gmail.com>
@@ -96,42 +96,102 @@ X-Virus-Status: Clean
 
 From: Jernej Skrabec <jernej.skrabec@gmail.com>
 
-Adjust H616 LPDDR3 DRAM settings to be in line with vendor driver.
+It seems that different dies need different PHY pin mapping. Select
+alternatives based on "bond ID".
 
 Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
 Tested-by: Chris Morgan <macromorgan@hotmail.com>
 ---
- arch/arm/mach-sunxi/dram_sun50i_h616.c         | 2 +-
- arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ arch/arm/mach-sunxi/dram_sun50i_h616.c | 59 +++++++++++++++++++-------
+ 1 file changed, 44 insertions(+), 15 deletions(-)
 
 diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-index 37c139e0ee..a20264d8b4 100644
+index b6638c519e..abb8ee760b 100644
 --- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
 +++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-@@ -945,7 +945,7 @@ static bool mctl_phy_init(const struct dram_para *para,
- 		val = para->tpr6 & 0xff;
- 		break;
- 	case SUNXI_DRAM_TYPE_LPDDR3:
--		val = para->tpr6 >> 8 & 0xff;
-+		val = para->tpr6 >> 16 & 0xff;
- 		break;
- 	case SUNXI_DRAM_TYPE_LPDDR4:
- 		val = para->tpr6 >> 24 & 0xff;
-diff --git a/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c b/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c
-index ce2ffa7a02..82b86084a6 100644
---- a/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c
-+++ b/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c
-@@ -24,8 +24,8 @@ void mctl_set_timing_params(const struct dram_para *para)
- 	u8 trrd		= max(ns_to_t(6), 4);
- 	u8 trcd		= ns_to_t(24);
- 	u8 trc		= ns_to_t(70);
--	u8 txp		= max(ns_to_t(8), 3);
- 	u8 trtp		= max(ns_to_t(8), 2);
-+	u8 txp		= trtp;
- 	u8 trp		= ns_to_t(27);
- 	u8 tras		= ns_to_t(41);
- 	u16 trefi	= ns_to_t(7800) / 64;
+@@ -225,22 +225,43 @@ static void mctl_set_addrmap(const struct dram_config *config)
+ 	mctl_ctl->addrmap[8] = 0x3F3F;
+ }
+ 
+-static const u8 phy_init[] = {
++static const u8 phy_addr_maps[2][27] = {
+ #ifdef CONFIG_SUNXI_DRAM_H616_DDR3_1333
+-	0x07, 0x0b, 0x02, 0x16, 0x0d, 0x0e, 0x14, 0x19,
+-	0x0a, 0x15, 0x03, 0x13, 0x04, 0x0c, 0x10, 0x06,
+-	0x0f, 0x11, 0x1a, 0x01, 0x12, 0x17, 0x00, 0x08,
+-	0x09, 0x05, 0x18
++	{
++		0x07, 0x0b, 0x02, 0x16, 0x0d, 0x0e, 0x14, 0x19,
++		0x0a, 0x15, 0x03, 0x13, 0x04, 0x0c, 0x10, 0x06,
++		0x0f, 0x11, 0x1a, 0x01, 0x12, 0x17, 0x00, 0x08,
++		0x09, 0x05, 0x18
++	}, {
++		0x08, 0x02, 0x12, 0x05, 0x15, 0x17, 0x18, 0x0b,
++		0x14, 0x07, 0x04, 0x13, 0x0c, 0x00, 0x16, 0x1a,
++		0x0a, 0x11, 0x03, 0x10, 0x0e, 0x01, 0x0d, 0x19,
++		0x06, 0x09, 0x0f
++	}
+ #elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR3)
+-	0x18, 0x06, 0x00, 0x05, 0x04, 0x03, 0x09, 0x02,
+-	0x08, 0x01, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+-	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x07,
+-	0x17, 0x19, 0x1a
++	{
++		0x18, 0x06, 0x00, 0x05, 0x04, 0x03, 0x09, 0x02,
++		0x08, 0x01, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
++		0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x07,
++		0x17, 0x19, 0x1a
++	}, {
++		0x18, 0x00, 0x04, 0x09, 0x06, 0x05, 0x02, 0x19,
++		0x17, 0x03, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
++		0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x07,
++		0x08, 0x01, 0x1a
++	}
+ #elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR4)
+-	0x02, 0x00, 0x17, 0x05, 0x04, 0x19, 0x06, 0x07,
+-	0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+-	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x01,
+-	0x18, 0x03, 0x1a
++	{
++		0x02, 0x00, 0x17, 0x05, 0x04, 0x19, 0x06, 0x07,
++		0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
++		0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x01,
++		0x18, 0x03, 0x1a
++	}, {
++		0x03, 0x00, 0x17, 0x05, 0x02, 0x19, 0x06, 0x07,
++		0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
++		0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x01,
++		0x18, 0x04, 0x1a
++	}
+ #endif
+ };
+ 
+@@ -887,6 +908,7 @@ static bool mctl_phy_init(const struct dram_para *para,
+ 	struct sunxi_mctl_ctl_reg * const mctl_ctl =
+ 			(struct sunxi_mctl_ctl_reg *)SUNXI_DRAM_CTL0_BASE;
+ 	u32 val, val2, *ptr, mr0, mr2;
++	const u8 *map;
+ 	int i;
+ 
+ 	if (para->type == SUNXI_DRAM_TYPE_LPDDR4)
+@@ -942,8 +964,15 @@ static bool mctl_phy_init(const struct dram_para *para,
+ 	writel(val2, SUNXI_DRAM_PHY0_BASE + 0x37c);
+ 
+ 	ptr = (u32 *)(SUNXI_DRAM_PHY0_BASE + 0xc0);
+-	for (i = 0; i < ARRAY_SIZE(phy_init); i++)
+-		writel(phy_init[i], &ptr[i]);
++	val = readl(SUNXI_SID_BASE);
++	if (((val & 0xfbff) == 0x5000) ||
++	    ((val & 0xfeff) == 0x5c00) ||
++	    ((val & 0xf7ff) == 0x2000))
++		map = phy_addr_maps[0];
++	else
++		map = phy_addr_maps[1];
++	for (i = 0; i < ARRAY_SIZE(phy_addr_maps[0]); i++)
++		writel(map[i], &ptr[i]);
+ 
+ 	if (para->tpr10 & TPR10_CA_BIT_DELAY)
+ 		mctl_phy_ca_bit_delay_compensation(para, config);
 -- 
 2.34.1
 
