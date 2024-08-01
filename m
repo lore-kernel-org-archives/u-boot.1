@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AED5BC3DA4A
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 03:41:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5619C3DA64
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 03:41:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CD3188B25;
+	by phobos.denx.de (Postfix) with ESMTP id F3E3988B2B;
 	Thu,  1 Aug 2024 05:39:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86A0288B11; Thu,  1 Aug 2024 05:39:43 +0200 (CEST)
-Received: from inva021.nxp.com (inva021.nxp.com [92.121.34.21])
+ id 8F27C88AF8; Thu,  1 Aug 2024 05:39:44 +0200 (CEST)
+Received: from inva020.nxp.com (inva020.nxp.com [92.121.34.13])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FFF088B09
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 05:39:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A22C488ACA
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 05:39:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Zhiqiang.Hou@nxp.com
-Received: from inva021.nxp.com (localhost [127.0.0.1])
- by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 5735F200D2A;
- Thu,  1 Aug 2024 05:39:41 +0200 (CEST)
+Received: from inva020.nxp.com (localhost [127.0.0.1])
+ by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 667891A06FC;
+ Thu,  1 Aug 2024 05:39:42 +0200 (CEST)
 Received: from aprdc01srsp001v.ap-rdc01.nxp.com
  (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
- by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id E71C1200266;
- Thu,  1 Aug 2024 05:39:40 +0200 (CEST)
+ by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 2E0721A0658;
+ Thu,  1 Aug 2024 05:39:42 +0200 (CEST)
 Received: from mega.am.freescale.net (mega.ap.freescale.net [10.192.208.232])
  by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id
- 45C381800318; Thu,  1 Aug 2024 11:39:39 +0800 (+08)
+ 7B2AE1820F57; Thu,  1 Aug 2024 11:39:40 +0800 (+08)
 From: Zhiqiang Hou <Zhiqiang.Hou@nxp.com>
 To: u-boot@lists.denx.de, trini@konsulko.com, peng.fan@nxp.com,
  festevam@gmail.com, sjg@chromium.org, marex@denx.de, lukma@denx.de,
  seanga2@gmail.com, xypron.glpk@gmx.de
 Cc: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
-Subject: [PATCHv5 11/14] doc: cmd: add documentation for cpu command
-Date: Thu,  1 Aug 2024 11:59:56 +0800
-Message-Id: <20240801035959.43115-12-Zhiqiang.Hou@nxp.com>
+Subject: [PATCHv5 12/14] MAINTAINERS: add entry for cpu command
+Date: Thu,  1 Aug 2024 11:59:57 +0800
+Message-Id: <20240801035959.43115-13-Zhiqiang.Hou@nxp.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20240801035959.43115-1-Zhiqiang.Hou@nxp.com>
 References: <20240801035959.43115-1-Zhiqiang.Hou@nxp.com>
@@ -61,139 +61,35 @@ X-Virus-Status: Clean
 
 From: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 
-Add documentation for the 'cpu' command, taking NXP i.MX 8M Plus
-as a example.
+Added the original author Simon and myself.
 
 Signed-off-by: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 V5:
- - Added cmd/cpu to doc/usage/index.rst to fix doc build failure.
+ - No change.
 
- doc/usage/cmd/cpu.rst | 101 ++++++++++++++++++++++++++++++++++++++++++
- doc/usage/index.rst   |   1 +
- 2 files changed, 102 insertions(+)
- create mode 100644 doc/usage/cmd/cpu.rst
+ MAINTAINERS | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/doc/usage/cmd/cpu.rst b/doc/usage/cmd/cpu.rst
-new file mode 100644
-index 0000000000..8b0b7d5a69
---- /dev/null
-+++ b/doc/usage/cmd/cpu.rst
-@@ -0,0 +1,101 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. Copyright 2024 NXP
+diff --git a/MAINTAINERS b/MAINTAINERS
+index c2832345ab..ddcb7128db 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -997,6 +997,13 @@ F:	arch/m68k/
+ F:	doc/arch/m68k.rst
+ F:	drivers/watchdog/mcf_wdt.c
+ 
++CPU
++M:	Simon Glass <sjg@chromium.org>
++M:	Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
++S:	Maintained
++F:	cmd/cpu.c
++F:	doc/usage/cpu.rst
 +
-+.. index::
-+   single: cpu (command)
-+
-+cpu command
-+===========
-+
-+Synopsis
-+--------
-+
-+::
-+
-+    cpu list
-+    cpu detail
-+    cpu release <core ID> <addr>
-+
-+Description
-+-----------
-+
-+The *cpu* command prints information about the CPUs, and release a CPU core
-+to a given address to run applications.
-+
-+
-+cpu list
-+~~~~~~~~
-+
-+The 'list' subcommand lists and prints brief information of all the CPU cores,
-+the CPU information is provided by vendors' CPU driver.
-+
-+cpu detail
-+~~~~~~~~~~
-+
-+The 'detail' subcommand prints more details about the CPU cores, including
-+CPU ID, core frequency and feature list.
-+
-+cpu release
-+~~~~~~~~~~~
-+
-+The 'release' subcommand is used to release a CPU core to run a baremetal or
-+RTOS applications.
-+The parameter <core ID> is the sequence number of the CPU core to release.
-+The parameter <addr> is the address to run of the specified core after release.
-+
-+
-+Examples
-+--------
-+
-+cpu list
-+~~~~~~~~
-+
-+This example lists all the CPU cores On i.MX8M Plus EVK:
-+::
-+
-+    u-boot=> cpu list
-+      0: cpu@0      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 31C
-+      1: cpu@1      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 30C
-+      2: cpu@2      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 31C
-+      3: cpu@3      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 31C
-+
-+cpu detail
-+~~~~~~~~~~
-+
-+This example prints the details of the CPU cores On i.MX8M Plus EVK:
-+::
-+
-+    u-boot=> cpu detail
-+      0: cpu@0      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 31C
-+            ID = 0, freq = 1.2 GHz: L1 cache, MMU
-+      1: cpu@1      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 30C
-+            ID = 0, freq = 1.2 GHz: L1 cache, MMU
-+      2: cpu@2      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 31C
-+            ID = 0, freq = 1.2 GHz: L1 cache, MMU
-+      3: cpu@3      NXP i.MX8MP Rev1.1 A53 at 1200 MHz at 31C
-+            ID = 0, freq = 1.2 GHz: L1 cache, MMU
-+
-+cpu release
-+~~~~~~~~~~~
-+
-+This example shows release the LAST CPU core to run a RTOS application, on
-+i.MX8M Plus EVK:
-+::
-+
-+     u-boot=> load mmc 1:2 c0000000 /hello_world.bin
-+     66008 bytes read in 5 ms (12.6 MiB/s)
-+     u-boot=> dcache flush; icache flush
-+     u-boot=> cpu release 3 c0000000
-+     Released CPU core (mpidr: 0x3) to address 0xc0000000
-+
-+
-+Configuration
-+-------------
-+
-+The cpu command is available if CONFIG_CMD_CPU=y.
-+
-+Return code
-+-----------
-+
-+The return value $? is set to 0 (true) if the command is successful,
-+1 (false) otherwise.
-diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-index 49b354e6ff..1f6518b77c 100644
---- a/doc/usage/index.rst
-+++ b/doc/usage/index.rst
-@@ -50,6 +50,7 @@ Shell commands
-    cmd/coninfo
-    cmd/conitrace
-    cmd/cp
-+   cmd/cpu
-    cmd/cyclic
-    cmd/dm
-    cmd/ebtupdate
+ CYCLIC
+ M:	Stefan Roese <sr@denx.de>
+ S:	Maintained
 -- 
 2.17.1
 
