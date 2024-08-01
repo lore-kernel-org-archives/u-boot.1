@@ -4,57 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 916D3C3DA64
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 12:54:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAAF6C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 12:56:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A02C988B19;
-	Thu,  1 Aug 2024 14:54:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 3953D88AD9;
+	Thu,  1 Aug 2024 14:56:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1722516872;
-	bh=kHok2tveLwiCduVEUnPMJKKDfK0JeKJSGxsY/1tfTds=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=EQLNQxs9GA6szab5FOohayfmt5QmnSRs8zoXp7lOBIvuV11qQ18XuAeQSv2JKPmUd
-	 XfROAwHip8Q2NkFYw0bRYkLJ7mMIO1OBLAwMGPN8RzY/Z2wzLgCm/Ip1vwleZxw7o+
-	 ofQ91PciCcW5NiP3ooVJil6lj34U5hH6TnqdwqK9kzPzkNFlVR1sefV3zaNDpS+vBJ
-	 Qb5wtqFTQo/oUml/iDlHkEqVwq7U0cIS93J5vuhTgmqbRlWX+LGYhiQ1jbSjheUIfH
-	 CKKmwdRA2JhI4LY8YUnpdtf+Bck2O6Zxzf0rJDnujBSa7RXuprErbaq4wVBxm3xIdg
-	 WZxzA6B+CmMng==
-Received: from localhost.localdomain (85-222-111-42.dynamic.chello.pl
- [85.222.111.42])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 5FED6886F0;
- Thu,  1 Aug 2024 14:54:31 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1722516871;
- bh=kHok2tveLwiCduVEUnPMJKKDfK0JeKJSGxsY/1tfTds=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=pEZmmCT/tJ2Kl945NMftuKG9YdGIVoenBAHEUIRrBqH79H1JSyrmP4PD6Noq5qFD0
- 2i0F3PDLGhMaedf7pbqx2mKoYFTtKdGoiLY/VEoTB+gscEdpwF0WWsmo7EFaC8g9uQ
- quto+alj2CTM2wRyQ+TEMpNDYCWXpWn0j7UjAS8ebf9RSd61mb/nZ+UjLQ1yrJnDMg
- kU3teKOOF8Co/7YbA13iaGYfAsciqot4x9iGmdU46nhK3c179Mdt2KI392u5y2Rqh7
- ts66NSoQ7v+hgmZmo95/VSwN0svu/jE14TPdvKf2qeiAdi2qG+LkGzbJ6oYQyZmYkY
- hJJa5qiUiJDqg==
-From: Lukasz Majewski <lukma@denx.de>
-To: Teresa Remmet <t.remmet@phytec.de>,
-	u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Benjamin Hahn <B.Hahn@phytec.de>,
- Cem Tenruh <c.tenruh@phytec.de>, Martyn Welch <martyn.welch@collabora.com>,
- Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>
-Subject: [PATCH 2/2] config: Adjust Phytec imx8mm module config to support
- NVME disk
-Date: Thu,  1 Aug 2024 14:54:16 +0200
-Message-Id: <20240801125416.1582652-2-lukma@denx.de>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240801125416.1582652-1-lukma@denx.de>
-References: <20240801125416.1582652-1-lukma@denx.de>
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id A85EF88B0A; Thu,  1 Aug 2024 14:56:33 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 5A9FD881BA
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 14:56:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6CFFB15A1;
+ Thu,  1 Aug 2024 05:56:56 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AC9083F766;
+ Thu,  1 Aug 2024 05:56:29 -0700 (PDT)
+Date: Thu, 1 Aug 2024 13:56:25 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: "Seung-Woo Kim" <sw0312.kim@samsung.com>
+Cc: <u-boot@lists.denx.de>, <jagan@amarulasolutions.com>,
+ <trini@konsulko.com>, <jh80.chung@samsung.com>, "'Samuel Holland'"
+ <samuel@sholland.org>
+Subject: Re: [PATCH] tools: imagetool: Remove unnecessary check from
+ toc0_verify_cert_item()
+Message-ID: <20240801135625.34c3148d@donnerap.manchester.arm.com>
+In-Reply-To: <019501dae3f7$b1b2e710$1518b530$@samsung.com>
+References: <CGME20240801010104epcas1p3aadbfa545c1f7e0c7d91c3175614ab99@epcas1p3.samsung.com>
+ <20240801010100.21009-1-sw0312.kim@samsung.com>
+ <20240801102738.38ed300b@donnerap.manchester.arm.com>
+ <019501dae3f7$b1b2e710$1518b530$@samsung.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,75 +62,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This change adds support for PCIe connected nvme disk - phyBOARD-Polis
-base board.
+On Thu, 1 Aug 2024 18:46:33 +0900
+"Seung-Woo Kim" <sw0312.kim@samsung.com> wrote:
 
-One needs to call following commands in u-boot:
-> pci enum
-> nvme scan
-> nvme info
+> Hi,
+> 
+> > -----Original Message-----
+> > From: Andre Przywara <andre.przywara@arm.com>
+> > Sent: Thursday, August 1, 2024 6:28 PM
+> > Subject: Re: [PATCH] tools: imagetool: Remove unnecessary check from
+> > toc0_verify_cert_item()
+> > 
+> > On Thu,  1 Aug 2024 10:01:00 +0900
+> > Seung-Woo Kim <sw0312.kim@samsung.com> wrote:
+> > 
+> > Hi,
+> >   
+> > > Remove unnecessary null check from toc0_verify_cert_item() because the
+> > > array digest is always not null.  
+> > 
+> > Do you mean it's always not NULL *as currently used*? Because digest is a
+> > function parameter, so within the scope of this function definition can be
+> > NULL.
+> > I agree that *currently* there is only one caller, and this passes the
+> > addresses of a local variable from the stack, though it's never NULL.
+> > 
+> > But I don't think this check hurts (looks like the compiler removes it
+> > anyway), and it makes the code more robust. So is there any problem with
+> > this check? Why do you want it to be removed?  
+> 
+> Because in my gcc-14 environment, it gives -Wnonnull-compare warning.
 
-And then ones to access proper file system (like fat[ls|load|write],
-ext4[ls|load|write]).
+Ah, I see, it's GCC 14 reporting this now. And after some digging I found
+digest cannot be NULL, as the digest parameter is declared as
+"digest[static SHA256_DIGEST_LENGTH]" (mind the "static" within the
+brackets).
 
-Signed-off-by: Lukasz Majewski <lukma@denx.de>
----
- configs/phycore-imx8mm_defconfig | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+So yes, the patch is correct. I will amend the commit message while
+applying.
 
-diff --git a/configs/phycore-imx8mm_defconfig b/configs/phycore-imx8mm_defconfig
-index 22d419024f..e6854aa571 100644
---- a/configs/phycore-imx8mm_defconfig
-+++ b/configs/phycore-imx8mm_defconfig
-@@ -12,6 +12,7 @@ CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="imx8mm-phyboard-polis-rdk"
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_TARGET_PHYCORE_IMX8MM=y
-+CONFIG_DM_RESET=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-@@ -23,6 +24,7 @@ CONFIG_SPL_BSS_MAX_SIZE=0x2000
- CONFIG_SPL=y
- CONFIG_ENV_OFFSET_REDUND=0x3E0000
- CONFIG_SYS_LOAD_ADDR=0x40480000
-+CONFIG_PCI=y
- CONFIG_FIT=y
- CONFIG_FIT_EXTERNAL_OFFSET=0x3000
- CONFIG_SPL_LOAD_FIT=y
-@@ -32,6 +34,7 @@ CONFIG_BOOTCOMMAND="mmc dev ${mmcdev}; if mmc rescan; then if run loadimage; the
- CONFIG_DEFAULT_FDT_FILE="oftree"
- CONFIG_SYS_CBSIZE=2048
- CONFIG_SYS_PBSIZE=2074
-+CONFIG_CYCLIC_MAX_CPU_TIME_US=1000
- CONFIG_BOARD_LATE_INIT=y
- # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
- CONFIG_SPL_SYS_MALLOC=y
-@@ -59,6 +62,7 @@ CONFIG_CMD_FUSE=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
- CONFIG_CMD_SF_TEST=y
- CONFIG_CMD_DHCP=y
- CONFIG_CMD_MII=y
-@@ -110,10 +114,15 @@ CONFIG_PHY_TI_DP83867=y
- CONFIG_PHY_GIGE=y
- CONFIG_FEC_MXC=y
- CONFIG_MII=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_DW_IMX=y
-+CONFIG_PHY=y
-+CONFIG_PHY_IMX8M_PCIE=y
- CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_PINCTRL_IMX8M=y
--CONFIG_DM_REGULATOR=y
-+CONFIG_POWER_DOMAIN=y
-+CONFIG_IMX8M_POWER_DOMAIN=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_DM_SERIAL=y
--- 
-2.39.2
+> tools/sunxi_toc0.c: In function 'toc0_verify_cert_item':
+> tools/sunxi_toc0.c:447:12: warning: 'nonnull' argument 'digest' compared to
+> NULL [-Wnonnull-compare]
+>   447 |         if (digest && memcmp(&extension->digest, digest,
+> SHA256_DIGEST_LENGTH)) {
+>       |            ^
+> 
+> Regards,
+> - Seung-Woo Kim
+> 
+> > 
+> > Cheers,
+> > Andre
+> >   
+> > >
+> > > Signed-off-by: Seung-Woo Kim <sw0312.kim@samsung.com>
+
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+
+Cheers,
+Andre
+
+> > > ---
+> > >  tools/sunxi_toc0.c | 2 +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > >
+> > > diff --git a/tools/sunxi_toc0.c b/tools/sunxi_toc0.c index
+> > > 292649fe90f1..76693647a095 100644
+> > > --- a/tools/sunxi_toc0.c
+> > > +++ b/tools/sunxi_toc0.c
+> > > @@ -444,7 +444,7 @@ static int toc0_verify_cert_item(const uint8_t
+> > > *buf, uint32_t len, RSA *fw_key,
+> > >
+> > >  	/* If a digest was provided, compare it to the embedded digest. */
+> > >  	extension = &totalSequence->mainSequence.explicit3.extension;
+> > > -	if (digest && memcmp(&extension->digest, digest,  
+> > SHA256_DIGEST_LENGTH)) {  
+> > > +	if (memcmp(&extension->digest, digest, SHA256_DIGEST_LENGTH)) {
+> > >  		pr_err("Wrong firmware digest in certificate\n");
+> > >  		goto err;
+> > >  	}  
+> 
+> 
 
