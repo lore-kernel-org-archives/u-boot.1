@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BD92C3DA4A
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:42:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF52DC3DA64
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:42:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D38CB88B41;
-	Thu,  1 Aug 2024 16:42:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 40ECD88B40;
+	Thu,  1 Aug 2024 16:42:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EOazQbw6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iuotvOos";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8194788B39; Thu,  1 Aug 2024 16:42:28 +0200 (CEST)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id EACCE88B5F; Thu,  1 Aug 2024 16:42:37 +0200 (CEST)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EFB388ADF
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:42:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 51FAD88B56
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:42:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-6678a45eaa3so59572147b3.2
- for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:42:26 -0700 (PDT)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6b7a3e468a9so49654826d6.1
+ for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:42:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722523345; x=1723128145; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722523352; x=1723128152; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6KH5U8fPwjIgCv4+dsyAsNHwnbC0IKhU3U1Bv+iXOqI=;
- b=EOazQbw699PlBcL2vk0wBrh4DFSLHWWjefxVNGvsG/gZhw4063rpo4XDpqkNpifDVo
- 9ZlYAZR/REtPKSH+SNkoG/aQMJbRKRWKodQTjARS8GQs7RoWUoQU6IeDU12ZXvsWSLus
- IcyFHRq76QTQyXmk23xfCbAeZu3ou4Wt6+xf4=
+ bh=Dx3O4PniHzVFOiLL78vH0A7bBaqkfecNs4WybB6jsYs=;
+ b=iuotvOosCwGp2IFRVBNy3+Wpk3l2QVIvfAJA2ekpllSLnRxeC44SEV9EsuaLOMrR31
+ A7XdkbS5HUmOLYhBiSW+m0mEbnzIEtcPbT7DIS5Ah/HAldTweVY3JjIJFhkTo2AqLw5h
+ sJjes4PYC2ewCJTx7uyzRER2hup8VUwB6LV9M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722523345; x=1723128145;
+ d=1e100.net; s=20230601; t=1722523352; x=1723128152;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6KH5U8fPwjIgCv4+dsyAsNHwnbC0IKhU3U1Bv+iXOqI=;
- b=r1J6SmZjtzmJVHRUVIyEmvDpLmr9+Z6YVrOQGQ7KT7amGngRZqlXeBQ6IwKjHIFFg/
- vQIEvQ4DK81Opk/UC4Ia6iD3a+TLU1JmoAFWpKpDS+Jfb469ktQg3m4iIF+eSUz8ftVU
- WeVlkkTQ1f1uAtV49gE4D9GTF3bY06+V1+r3DC7UeM42cQ0T0SiXhsa+lq/hayEVDTZu
- H1UTe/3VfV2RyOl5qAEyItBpNIXLuP60cVYcYrajS8XtdE7OXlSc0wNO8jNaVVcR0NSp
- nF4NuakH0x+WsSHrzEGC2swTH1MsrsLl+iSZznD7XZHKNdIl++2vVRQqrwI42BVtALlV
- V4bA==
-X-Gm-Message-State: AOJu0YySB5QAEoOmV6uoqNw0FeaPj4WY6w/bICawoL1io8ocYqS8HXGX
- Z/Q3nLYwteneINyk5Tb9t+rdg8AHfpzIvRYJjC6mQxJsH8VimMkB3iaJHcEw87JKkbkuFe3ZPDA
- Wo2YlUpne65vkKsHbJdvwWh/VzzFnRJzodkY7
-X-Google-Smtp-Source: AGHT+IEx5cMYSc8ZtDElmgf2HyAAybOd2BmzVUyFJMvDEbH8bTabjUyzfsffF1H8/1xkqSJ+sUxQKsz25KamvlTz3DI=
-X-Received: by 2002:a81:c24e:0:b0:631:43e1:6b99 with SMTP id
- 00721157ae682-689601ab907mr2837007b3.12.1722523345320; Thu, 01 Aug 2024
- 07:42:25 -0700 (PDT)
+ bh=Dx3O4PniHzVFOiLL78vH0A7bBaqkfecNs4WybB6jsYs=;
+ b=remcMNXb76VeII5cL1M4/vtX9etHuz32pvNWQyec0O8xgXrT1Hbj8QNtiTLFpubw+R
+ 2O0BrAJqcCWaWRyzo0W7eFrAETy7Blda8GyDAOpgq+ugSPyywGIzUp7zxOzYpeL3AArY
+ sMYq+9YkkHKKBzzfRjq0T/crSAxCIAweD3sBj6QDjnLOYS8bLy8tEDwF4D1Ne7C76qft
+ pZvL8Y6boIfcot8ItO9aO7TkGVf22mVBLIj/yMYc9i94RZW7/ieOzyCoQItXneJMMHOP
+ tgvUPVWzFE8RrY0QmXTAHmm6zE9G0sUrwDdulOxvJR+3uKzPJKnh6jfpKz8uO4Oe3gvb
+ J/cw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUm6pSZGSoDM51ynfxQ2x0bria0kTBjwKo7hgGFWsSc2JoosU6WYGMotIhxGnMC80ZkdjnCPY7gKnqqGgT4e9gnFysngg==
+X-Gm-Message-State: AOJu0YyNp5AR3QkWJdwfD2FV9hGsCaL5zh/WtN/q6E2IaCGkemnsyNZr
+ 6HCHwwBnUHq6SOeiYfTOBGDV0yVuysC/xLgUnFyXJVvw4AvMAIoyF4Tuat+lqyOnwZGN+npNprl
+ h0oLW2BSTYrcaHhP2sNIIAMvwcTpWJ1P0/Ora
+X-Google-Smtp-Source: AGHT+IHxRPZdiINUhUWDXPhf+Yo9LE9p77HhlElagRQ0pDCYb2cv8nEa5MhQk9/kG6xobgoEagm9vtEAE8+CS7UofNM=
+X-Received: by 2002:a05:6214:4a02:b0:6b5:8dd2:468b with SMTP id
+ 6a1803df08f44-6bb98482365mr4429016d6.44.1722523352131; Thu, 01 Aug 2024
+ 07:42:32 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240731160754.16263-1-richard@nod.at>
-In-Reply-To: <20240731160754.16263-1-richard@nod.at>
+References: <20240731134257.686017-1-admin@hifiphile.com>
+ <20240731134257.686017-3-admin@hifiphile.com>
+In-Reply-To: <20240731134257.686017-3-admin@hifiphile.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 1 Aug 2024 08:42:14 -0600
-Message-ID: <CAFLszThXjgSBHjUmbD1whpVnRvQO0rBXdYv60RS7DgXwrbzvKA@mail.gmail.com>
-Subject: Re: [PATCH v2] bootstage: Fix out-of-bounds read in reloc_bootstage()
-To: Richard Weinberger <richard@nod.at>
-Cc: u-boot@lists.denx.de, upstream+uboot@sigma-star.at, 
- patrick.delaunay@foss.st.com, marek.vasut+renesas@mailbox.org, 
- yangshiji66@outlook.com, xypron.glpk@gmx.de, eugeneuriev@gmail.com, 
- raymond.mao@linaro.org, devarsht@ti.com, bmeng.cn@gmail.com, 
- trini@konsulko.com
+Date: Thu, 1 Aug 2024 08:42:21 -0600
+Message-ID: <CAFLszTix0ooymfjCL=QSM43NCaF9a=x_3p__KRPPEPWfzw8Dow@mail.gmail.com>
+Subject: Re: [RFC PATCH 2/4] dm: core: Show device sequence instead in
+ dm_dump_tree()
+To: Zixun LI <admin@hifiphile.com>
+Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,107 +87,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Richard,
+Hi Zixun,
 
-On Wed, 31 Jul 2024 at 10:08, Richard Weinberger <richard@nod.at> wrote:
+On Wed, 31 Jul 2024 at 07:43, Zixun LI <admin@hifiphile.com> wrote:
 >
-> bootstage_get_size() returns the total size of the data structure
-> including associated records.
-> When copying from gd->bootstage, only the allocation size of gd->bootstage
-> must be used. Otherwise too much memory is copied.
+> Currently uclass index is shown in DM tree dump which ignores alias
+> sequence numbering. The result could be confusing since these 2 numbers
+> could be different. Show device sequence number instead.
+
+I think it makes sense to show the seq instead of the index, but
+please update the header for the table to say 'Seq'
+
 >
-> This bug caused no harm so far because gd->new_bootstage is always
-> large enough and reading beyond the allocation length of gd->bootstage
-> caused no problem due to the U-Boot memory layout.
->
-> Fix by using the correct size and perform the initial copy directly
-> in bootstage_relocate() to have the whole relocation process in the
-> same function.
->
-> Signed-off-by: Richard Weinberger <richard@nod.at>
+> Signed-off-by: Zixun LI <admin@hifiphile.com>
 > ---
-> Changes since v1:
-> - Pass gd->new_bootstage to bootstage_relocate()
-> ---
->  common/board_f.c    | 8 +-------
->  common/bootstage.c  | 8 ++++++--
->  include/bootstage.h | 4 ++--
->  3 files changed, 9 insertions(+), 11 deletions(-)
+>  drivers/core/dump.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-nit below
-
-> diff --git a/common/board_f.c b/common/board_f.c
-> index 29e185137a..21a8944e2b 100644
-> --- a/common/board_f.c
-> +++ b/common/board_f.c
-> @@ -683,13 +683,7 @@ static int reloc_bootstage(void)
->         if (gd->flags & GD_FLG_SKIP_RELOC)
->                 return 0;
->         if (gd->new_bootstage) {
-> -               int size = bootstage_get_size();
-> -
-> -               debug("Copying bootstage from %p to %p, size %x\n",
-> -                     gd->bootstage, gd->new_bootstage, size);
-> -               memcpy(gd->new_bootstage, gd->bootstage, size);
-> -               gd->bootstage = gd->new_bootstage;
-> -               bootstage_relocate();
-> +               bootstage_relocate(gd->new_bootstage);
->         }
->  #endif
+> diff --git a/drivers/core/dump.c b/drivers/core/dump.c
+> index 5ec30d5b3c..c812d87fa4 100644
+> --- a/drivers/core/dump.c
+> +++ b/drivers/core/dump.c
+> @@ -40,7 +40,7 @@ static void show_devices(struct udevice *dev, int depth, int last_flag,
+>         /* print the first 20 characters to not break the tree-format. */
+>         printf(CONFIG_IS_ENABLED(USE_TINY_PRINTF) ? " %s  %d  [ %c ]   %s  " :
+>                " %-10.10s  %3d  [ %c ]   %-20.20s  ", dev->uclass->uc_drv->name,
+> -              dev_get_uclass_index(dev, NULL),
+> +              dev->seq_,
+>                flags & DM_FLAG_ACTIVATED ? '+' : ' ', dev->driver->name);
 >
-> diff --git a/common/bootstage.c b/common/bootstage.c
-> index b6c268d9f4..49acc9078a 100644
-> --- a/common/bootstage.c
-> +++ b/common/bootstage.c
-> @@ -54,12 +54,16 @@ struct bootstage_hdr {
->         u32 next_id;            /* Next ID to use for bootstage */
->  };
->
-> -int bootstage_relocate(void)
-> +int bootstage_relocate(void *to)
->  {
-> -       struct bootstage_data *data = gd->bootstage;
-> +       struct bootstage_data *data;
->         int i;
->         char *ptr;
->
-> +       debug("Copying bootstage from %p to %p\n", gd->bootstage, to);
-> +       memcpy(to, gd->bootstage, sizeof(struct bootstage_data));
-> +       data = gd->bootstage = to;
-
-should be a separate line (patman/checkpatch complains)
-
-> +
->         /* Figure out where to relocate the strings to */
->         ptr = (char *)(data + 1);
->
-> diff --git a/include/bootstage.h b/include/bootstage.h
-> index f4e77b09d7..57792648c4 100644
-> --- a/include/bootstage.h
-> +++ b/include/bootstage.h
-> @@ -258,7 +258,7 @@ void show_boot_progress(int val);
->   * relocation, since memory can be overwritten later.
->   * Return: Always returns 0, to indicate success
->   */
-> -int bootstage_relocate(void);
-> +int bootstage_relocate(void *to);
->
->  /**
->   * Add a new bootstage record
-> @@ -395,7 +395,7 @@ static inline ulong bootstage_add_record(enum bootstage_id id,
->   * and won't even do that unless CONFIG_SHOW_BOOT_PROGRESS is defined
->   */
->
-> -static inline int bootstage_relocate(void)
-> +static inline int bootstage_relocate(void *to)
->  {
->         return 0;
->  }
+>         for (i = depth; i >= 0; i--) {
 > --
-> 2.35.3
+> 2.45.2
 >
 
 Regards,
