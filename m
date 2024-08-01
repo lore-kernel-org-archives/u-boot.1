@@ -4,81 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4989C3DA64
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:48:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 195A7C3DA64
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:58:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B91688216;
-	Thu,  1 Aug 2024 16:48:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sigma-star.at
+	by phobos.denx.de (Postfix) with ESMTP id 83664885CF;
+	Thu,  1 Aug 2024 16:58:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sigma-star.at header.i=@sigma-star.at header.b="KNDMGUlv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hFtGy6NX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DA998870E; Thu,  1 Aug 2024 16:48:41 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 5675C8863E; Thu,  1 Aug 2024 16:58:35 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 895CC807EC
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:48:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FC8C87D10
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:58:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=sigma-star.at
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=richard@sigma-star.at
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a7aa086b077so634227266b.0
- for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:48:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5a10bb7bcd0so10762583a12.3
+ for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:58:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sigma-star.at; s=google; t=1722523719; x=1723128519; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4OJs2E5qHrIUpXyATauI0Kit7Fz6EBeuVBOZ9iu7Y0M=;
- b=KNDMGUlvymjE+onujj77zpRXE5snqkSdirKdkNqTg5nPoMtY0pwQgI+ywZX7rdmD+L
- cr86b3UwXYR0VTNTHEacFDkLfg8yQagU6hiXm3nZu90pYNcqLMSKIB0KUWUklbN9HkVn
- UR2nOrn/G6i/oJqo9CX2xGioWU2cpSyptUcg48sCjSKlY8hC3y131bGskG/z1POxaFJZ
- 3wanPT3+JkefZSWTGyGYI7rz+IIlUS/s1x7dtrGtUgmauxZRO6BlAyG0E1AbTXTGvoXd
- 5rZEXdYlB1nvF03HTNo7CHDRsw/15EryJUII8lKkHU38MM9K7ZGVojILjd516R0IOUpt
- sX+g==
+ d=linaro.org; s=google; t=1722524313; x=1723129113; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=pVF/IgLCfzATpZGgSv36GUmdZPSATCZmU1ZcTGciKpg=;
+ b=hFtGy6NX/Y3S8TM5kLrp1hwsIi+baG76zeMOkdQIi4clmW4lS2yUzNTTkgYYPuSnpm
+ Nin8s6oCwhWrcA3zDrOqb10/iRD3DlalwQLyIa7Y0tD+BBfLZYzE+5+zspUnP/U/yli6
+ XLqffxUNkq1sEqPbcO7mVbdJDMbQwkxXlgdkGIhIsrCh70uOB5JiInA1CSDWnUFINuV1
+ uzqWbZvaHvB/w8UelOqatE9YpO3r3wxGpypek49hZAusy0uLuToaSu2XVGRqZDgQOf2/
+ IvM3ySk1ElmHy+7n5O74lbAmpKKktKy5zxp2rYo/qv+E1hC371tScKMD8wFat3Gw1Vej
+ NH0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722523719; x=1723128519;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4OJs2E5qHrIUpXyATauI0Kit7Fz6EBeuVBOZ9iu7Y0M=;
- b=sfCD9nSLV2C7ESQONxNBoP0le6Y638BWK+/kndyUr6CqIraLRFSEv3udunsWgsOeEG
- FH6hmmipCUwc7ULQoa3mks1WkRUURLqU26q66JQ33gdvFAFP1PJLa4gu2GmN4eMhqtN1
- x06gn9/35Tk9gW3fsvbk/ZjfSpRYPkpHBJJhs6TfNa3gnGLTOlojKEVxX0uQizQf74/P
- Ctid9kPVA43FKOM3f1fdxRWaBRSgytBMbLBaP1bnShZnI/OsgwTp8P1PYiww/UFEPV1u
- fFjeMP+0YTvfN6ysmioKMYt9x5jU26gNXmcRg5r2ySu5CdPFuj79ACFjlQiy8EjXIKnc
- kIzw==
-X-Gm-Message-State: AOJu0YwMJFIMczLsdHYJezntehScCou0UhZnLI/Qn9zlVbEKRyT+ju3T
- sY7t/N0jZ/+DwlAS775518ZeYdNj2TiE6+/Zlt85jeJCjJmjpNOtLXm1L6wtnek=
-X-Google-Smtp-Source: AGHT+IH/VNtLaYrpTEmwiRLrZ6KV6xpj6r8WHlyheSZcOttyl6Fo/tGeuzKGLvT8SeEyKBimrwagyA==
-X-Received: by 2002:a17:907:3e1a:b0:a75:2781:a5c4 with SMTP id
- a640c23a62f3a-a7dc4ea9ebdmr33054366b.29.1722523718627; 
- Thu, 01 Aug 2024 07:48:38 -0700 (PDT)
-Received: from blindfold.localnet ([2001:4bb8:142:a8e5:a087:2ca3:8388:c4ce])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7acad4acbfsm901192066b.100.2024.08.01.07.48.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Aug 2024 07:48:38 -0700 (PDT)
-From: Richard Weinberger <richard@sigma-star.at>
-To: Richard Weinberger <richard@nod.at>, upstream@sigma-star.at
-Cc: u-boot@lists.denx.de, upstream+uboot@sigma-star.at,
- patrick.delaunay@foss.st.com, marek.vasut+renesas@mailbox.org,
- yangshiji66@outlook.com, xypron.glpk@gmx.de, eugeneuriev@gmail.com,
- raymond.mao@linaro.org, devarsht@ti.com, bmeng.cn@gmail.com,
- trini@konsulko.com, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v2] bootstage: Fix out-of-bounds read in reloc_bootstage()
-Date: Thu, 01 Aug 2024 16:48:36 +0200
-Message-ID: <5054868.82XvGhxQ46@somecomputer>
-In-Reply-To: <CAFLszThXjgSBHjUmbD1whpVnRvQO0rBXdYv60RS7DgXwrbzvKA@mail.gmail.com>
-References: <20240731160754.16263-1-richard@nod.at>
- <CAFLszThXjgSBHjUmbD1whpVnRvQO0rBXdYv60RS7DgXwrbzvKA@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1722524313; x=1723129113;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pVF/IgLCfzATpZGgSv36GUmdZPSATCZmU1ZcTGciKpg=;
+ b=Zq0Gh87xtRBQLRwAIkMNXoWhjx6j7/z0o7y3Z+NxwnZqZZDhr8NTvC9Xt8lJMQ9TSI
+ hvaw53sA8ltjDuIOMsWlYB2pBQflyjNmhNYJD5LPLmKO8ZWK/QJ7iJQDVP7f2CuSHMmK
+ 8jWAxFeJhScVlre11M1qa+F/Bb9gwu/P2/9+Jo3O/7J42xvj+Y09a//Kz9rhMrr1E+kJ
+ /Yre83L7U8cb5rkUqN8BXwOI5w7CBKf0JZwuawB0kEoMha4wf1ytYb7FuxglxUr5d9vv
+ TcVcpOkxyNKQWLMVCCs3I1Q9mHSs/kc3qUFznB56Lqz/nnDYF4oDJufeBGuHuK4QCm+I
+ /NGQ==
+X-Gm-Message-State: AOJu0YwV2Q3r0dCKqEodN6nqnQKHRX/R9Tbt9ts9+muZ3scr7Qay7bv5
+ U4qE6aLcblAEwuBbkn6LcoSFiKNUlcw5DlEyLFZUTNd1JJX2eO0jgZlVP7ARHKX7RCIL5PeRnpf
+ 8wPTd8/TjkxUoF280WTMCux+O02iBmya4p8f2Kb1sydBqnc6n
+X-Google-Smtp-Source: AGHT+IF6Ma+vCkjJLsfsAMokAypuqDuLOn86Dmnuuk5pfu0mK0lQ25+wYfAD3Nvnc+OM+MIt8ESjKpYpy1P3uTDHViw=
+X-Received: by 2002:aa7:d601:0:b0:5aa:32bb:161 with SMTP id
+ 4fb4d7f45d1cf-5b7f4294153mr442943a12.22.1722524312330; Thu, 01 Aug 2024
+ 07:58:32 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+References: <20240730144035.3992996-1-sjg@chromium.org>
+ <20240730144035.3992996-3-sjg@chromium.org>
+In-Reply-To: <20240730144035.3992996-3-sjg@chromium.org>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Thu, 1 Aug 2024 20:28:21 +0530
+Message-ID: <CADg8p94BuoZzqhjE8eioS8TOHP=iyEK6LkBsTys78hLTf54x_g@mail.gmail.com>
+Subject: Re: [RFC PATCH 2/4] lmb: Tighten up the code in lmb_add_region_flags()
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,24 +86,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Simon,
+On Tue, 30 Jul 2024 at 20:10, Simon Glass <sjg@chromium.org> wrote:
+>
+> This function has more special cases than it needs. Simplify it to
+> reduce code size and complexity.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+>  lib/lmb.c | 57 +++++++++++++++++++------------------------------------
+>  1 file changed, 19 insertions(+), 38 deletions(-)
+>
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index c11ce308c5b..83b060a2f4d 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -396,14 +396,6 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
+>         if (alist_err(lmb_rgn_lst))
+>                 return -1;
+>
+> -       if (alist_empty(lmb_rgn_lst)) {
+> -               rgn[0].base = base;
+> -               rgn[0].size = size;
+> -               rgn[0].flags = flags;
+> -               lmb_rgn_lst->count = 1;
+> -               return 0;
+> -       }
+> -
+>         /* First try and coalesce this LMB with another. */
+>         for (i = 0; i < lmb_rgn_lst->count; i++) {
+>                 phys_addr_t rgnbase = rgn[i].base;
+> @@ -448,50 +440,39 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
+>                 }
+>         }
+>
+> -       if (i < lmb_rgn_lst->count - 1 &&
+> -           rgn[i].flags == rgn[i + 1].flags) {
+> -               if (lmb_regions_adjacent(lmb_rgn_lst, i, i + 1)) {
+> -                       lmb_coalesce_regions(lmb_rgn_lst, i, i + 1);
+> -                       coalesced++;
+> -               } else if (lmb_regions_overlap(lmb_rgn_lst, i, i + 1)) {
+> -                       /* fix overlapping area */
+> -                       lmb_fix_over_lap_regions(lmb_rgn_lst, i, i + 1);
+> -                       coalesced++;
+> +       if (lmb_rgn_lst->count && i < lmb_rgn_lst->count - 1) {
+> +               rgn = lmb_rgn_lst->data;
+> +               if (rgn[i].flags == rgn[i + 1].flags) {
+> +                       if (lmb_regions_adjacent(lmb_rgn_lst, i, i + 1)) {
+> +                               lmb_coalesce_regions(lmb_rgn_lst, i, i + 1);
+> +                               coalesced++;
+> +                       } else if (lmb_regions_overlap(lmb_rgn_lst, i, i + 1)) {
+> +                               /* fix overlapping area */
+> +                               lmb_fix_over_lap_regions(lmb_rgn_lst, i, i + 1);
+> +                               coalesced++;
+> +                       }
+>                 }
+>         }
+>
+>         if (coalesced)
+>                 return coalesced;
+>
+> -       if (alist_full(lmb_rgn_lst)) {
+> -               if (!alist_expand_by(lmb_rgn_lst, lmb_rgn_lst->alloc * 2))
+> -                       return -1;
+> -               else
+> -                       rgn = lmb_rgn_lst->data;
+> -       }
+> +       if (!alist_add_placeholder(lmb_rgn_lst))
+> +               return -1;
+> +       rgn = lmb_rgn_lst->data;
 
-Am Donnerstag, 1. August 2024, 16:42:14 CEST schrieb Simon Glass:
-> > +       debug("Copying bootstage from %p to %p\n", gd->bootstage, to);
-> > +       memcpy(to, gd->bootstage, sizeof(struct bootstage_data));
-> > +       data =3D gd->bootstage =3D to;
->=20
-> should be a separate line (patman/checkpatch complains)
+I think the above should have a check for alist_full(), and then add
+to the list if full. Else we simply go on adding to the list on every
+new node that gets added.
 
-I saw the suggestion of checkpatch.pl but ditched it as matter of taste.
-Do you want a v3?
+>
+>         /* Couldn't coalesce the LMB, so add it to the sorted table. */
+>         for (i = lmb_rgn_lst->count - 1; i >= 0; i--) {
+> -               if (base < rgn[i].base) {
+> -                       rgn[i + 1].base = rgn[i].base;
+> -                       rgn[i + 1].size = rgn[i].size;
+> -                       rgn[i + 1].flags = rgn[i].flags;
+> +               if (i && base < rgn[i - 1].base) {
+> +                       rgn[i] = rgn[i - 1];
+>                 } else {
+> -                       rgn[i + 1].base = base;
+> -                       rgn[i + 1].size = size;
+> -                       rgn[i + 1].flags = flags;
+> +                       rgn[i].base = base;
+> +                       rgn[i].size = size;
+> +                       rgn[i].flags = flags;
+>                         break;
+>                 }
+>         }
 
-Thanks,
-//richard
+With the logic that you put above, should the loop not have 'i'
+initialised to lmb_rgn_lst-count? I mean
 
-=2D-=20
-=E2=80=8B=E2=80=8B=E2=80=8B=E2=80=8B=E2=80=8Bsigma star gmbh | Eduard-Bodem=
-=2DGasse 6, 6020 Innsbruck, AUT
-UID/VAT Nr: ATU 66964118 | FN: 374287y
+for (i = lmb_rgn_lst->count; i >= 0; i--)
 
+Else we are overwriting one region?
 
+-sughosh
+
+>
+> -       if (base < rgn[0].base) {
+> -               rgn[0].base = base;
+> -               rgn[0].size = size;
+> -               rgn[0].flags = flags;
+> -       }
+> -
+> -       lmb_rgn_lst->count++;
+> -
+>         return 0;
+>  }
+>
+> --
+> 2.34.1
+>
