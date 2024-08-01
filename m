@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B36F5C3DA64
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 03:41:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5228AC3DA64
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 03:41:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D35088B13;
-	Thu,  1 Aug 2024 05:39:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BBAB988AFA;
+	Thu,  1 Aug 2024 05:39:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7C6F88B0E; Thu,  1 Aug 2024 05:39:45 +0200 (CEST)
-Received: from inva021.nxp.com (inva021.nxp.com [92.121.34.21])
+ id 6B5AF8881B; Thu,  1 Aug 2024 05:39:48 +0200 (CEST)
+Received: from inva020.nxp.com (inva020.nxp.com [92.121.34.13])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8D9C88B09
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 05:39:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 317C288B1F
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 05:39:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Zhiqiang.Hou@nxp.com
-Received: from inva021.nxp.com (localhost [127.0.0.1])
- by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id AE16F2005DB;
- Thu,  1 Aug 2024 05:39:43 +0200 (CEST)
+Received: from inva020.nxp.com (localhost [127.0.0.1])
+ by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id E9A661A0C8B;
+ Thu,  1 Aug 2024 05:39:44 +0200 (CEST)
 Received: from aprdc01srsp001v.ap-rdc01.nxp.com
  (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
- by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 6DB56200266;
- Thu,  1 Aug 2024 05:39:43 +0200 (CEST)
+ by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id B17111A0B07;
+ Thu,  1 Aug 2024 05:39:44 +0200 (CEST)
 Received: from mega.am.freescale.net (mega.ap.freescale.net [10.192.208.232])
  by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id
- B988D1800318; Thu,  1 Aug 2024 11:39:41 +0800 (+08)
+ 06DDC1820F59; Thu,  1 Aug 2024 11:39:42 +0800 (+08)
 From: Zhiqiang Hou <Zhiqiang.Hou@nxp.com>
 To: u-boot@lists.denx.de, trini@konsulko.com, peng.fan@nxp.com,
  festevam@gmail.com, sjg@chromium.org, marex@denx.de, lukma@denx.de,
  seanga2@gmail.com, xypron.glpk@gmx.de
 Cc: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
-Subject: [PATCHv5 13/14] configs: imx8m: enable the 'cpu' command
-Date: Thu,  1 Aug 2024 11:59:58 +0800
-Message-Id: <20240801035959.43115-14-Zhiqiang.Hou@nxp.com>
+Subject: [PATCHv5 14/14] configs: imx93: enable the 'cpu' command
+Date: Thu,  1 Aug 2024 11:59:59 +0800
+Message-Id: <20240801035959.43115-15-Zhiqiang.Hou@nxp.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20240801035959.43115-1-Zhiqiang.Hou@nxp.com>
 References: <20240801035959.43115-1-Zhiqiang.Hou@nxp.com>
@@ -61,53 +61,29 @@ X-Virus-Status: Clean
 
 From: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 
-Enable the 'cpu' command and the depended imx CPU driver to
-display the CPU info and release CPU core to run baremetal
-or RTOS applications.
+Enable the 'cpu' command to display the CPU info and release CPU core to
+run baremetal or RTOS applications.
 
 Signed-off-by: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 ---
 V5:
  - No change.
 
- configs/imx8mm_evk_defconfig | 3 +++
- configs/imx8mn_evk_defconfig | 3 +++
- configs/imx8mp_evk_defconfig | 3 +++
- 3 files changed, 9 insertions(+)
+ configs/imx93_11x11_evk_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/configs/imx8mm_evk_defconfig b/configs/imx8mm_evk_defconfig
-index ff33d1532a..8b04586f86 100644
---- a/configs/imx8mm_evk_defconfig
-+++ b/configs/imx8mm_evk_defconfig
-@@ -118,3 +118,6 @@ CONFIG_SDP_LOADADDR=0x40400000
- CONFIG_USB_GADGET_DOWNLOAD=y
- CONFIG_SPL_USB_SDP_SUPPORT=y
- CONFIG_IMX_WATCHDOG=y
-+CONFIG_CPU=y
-+CONFIG_CPU_IMX=y
+diff --git a/configs/imx93_11x11_evk_defconfig b/configs/imx93_11x11_evk_defconfig
+index 2246715d82..93ab0b9aa3 100644
+--- a/configs/imx93_11x11_evk_defconfig
++++ b/configs/imx93_11x11_evk_defconfig
+@@ -52,6 +52,7 @@ CONFIG_CMD_ERASEENV=y
+ # CONFIG_CMD_CRC32 is not set
+ CONFIG_CMD_MEMTEST=y
+ CONFIG_CMD_CLK=y
 +CONFIG_CMD_CPU=y
-diff --git a/configs/imx8mn_evk_defconfig b/configs/imx8mn_evk_defconfig
-index 2402e9e8bf..ee7a5e9088 100644
---- a/configs/imx8mn_evk_defconfig
-+++ b/configs/imx8mn_evk_defconfig
-@@ -105,3 +105,6 @@ CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
- CONFIG_DM_THERMAL=y
- CONFIG_IMX_WATCHDOG=y
-+CONFIG_CPU=y
-+CONFIG_CPU_IMX=y
-+CONFIG_CMD_CPU=y
-diff --git a/configs/imx8mp_evk_defconfig b/configs/imx8mp_evk_defconfig
-index f5ba022b07..3176069991 100644
---- a/configs/imx8mp_evk_defconfig
-+++ b/configs/imx8mp_evk_defconfig
-@@ -137,3 +137,6 @@ CONFIG_USB_GADGET_MANUFACTURER="FSL"
- CONFIG_USB_GADGET_VENDOR_NUM=0x0525
- CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
- CONFIG_IMX_WATCHDOG=y
-+CONFIG_CPU=y
-+CONFIG_CPU_IMX=y
-+CONFIG_CMD_CPU=y
+ CONFIG_CMD_DFU=y
+ CONFIG_CMD_FUSE=y
+ CONFIG_CMD_GPIO=y
 -- 
 2.17.1
 
