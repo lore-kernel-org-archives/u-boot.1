@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4F33C3DA64
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 03:40:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5001BC3DA64
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 03:40:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5F4088AF4;
-	Thu,  1 Aug 2024 05:39:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 671BC8897F;
+	Thu,  1 Aug 2024 05:39:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3E3988ACA; Thu,  1 Aug 2024 05:39:39 +0200 (CEST)
-Received: from inva020.nxp.com (inva020.nxp.com [92.121.34.13])
+ id D139A88B07; Thu,  1 Aug 2024 05:39:40 +0200 (CEST)
+Received: from inva021.nxp.com (inva021.nxp.com [92.121.34.21])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C213488AF8
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 05:39:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 017EA88645
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 05:39:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Zhiqiang.Hou@nxp.com
-Received: from inva020.nxp.com (localhost [127.0.0.1])
- by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 8C9E71A0B07;
- Thu,  1 Aug 2024 05:39:37 +0200 (CEST)
+Received: from inva021.nxp.com (localhost [127.0.0.1])
+ by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id C0C8520057D;
+ Thu,  1 Aug 2024 05:39:38 +0200 (CEST)
 Received: from aprdc01srsp001v.ap-rdc01.nxp.com
  (aprdc01srsp001v.ap-rdc01.nxp.com [165.114.16.16])
- by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 5364A1A0658;
- Thu,  1 Aug 2024 05:39:37 +0200 (CEST)
+ by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 88BBD200266;
+ Thu,  1 Aug 2024 05:39:38 +0200 (CEST)
 Received: from mega.am.freescale.net (mega.ap.freescale.net [10.192.208.232])
  by aprdc01srsp001v.ap-rdc01.nxp.com (Postfix) with ESMTP id
- 965021800318; Thu,  1 Aug 2024 11:39:35 +0800 (+08)
+ D525A1820F59; Thu,  1 Aug 2024 11:39:36 +0800 (+08)
 From: Zhiqiang Hou <Zhiqiang.Hou@nxp.com>
 To: u-boot@lists.denx.de, trini@konsulko.com, peng.fan@nxp.com,
  festevam@gmail.com, sjg@chromium.org, marex@denx.de, lukma@denx.de,
  seanga2@gmail.com, xypron.glpk@gmx.de
 Cc: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
-Subject: [PATCHv5 08/14] cpu: imx: Add i.MX 8M series SoCs
-Date: Thu,  1 Aug 2024 11:59:53 +0800
-Message-Id: <20240801035959.43115-9-Zhiqiang.Hou@nxp.com>
+Subject: [PATCHv5 09/14] cpu: imx: implement release_core callback
+Date: Thu,  1 Aug 2024 11:59:54 +0800
+Message-Id: <20240801035959.43115-10-Zhiqiang.Hou@nxp.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20240801035959.43115-1-Zhiqiang.Hou@nxp.com>
 References: <20240801035959.43115-1-Zhiqiang.Hou@nxp.com>
@@ -61,33 +61,71 @@ X-Virus-Status: Clean
 
 From: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 
-Add i.MX 8M Mini, Nano and Plus SoCs support.
+Release the secondary cores through the PSCI request.
 
 Signed-off-by: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
 ---
 V5:
  - No change.
 
- drivers/cpu/imx8_cpu.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ drivers/cpu/imx8_cpu.c | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 
 diff --git a/drivers/cpu/imx8_cpu.c b/drivers/cpu/imx8_cpu.c
-index b633a2c73a..a35147b72a 100644
+index a35147b72a..60deca963a 100644
 --- a/drivers/cpu/imx8_cpu.c
 +++ b/drivers/cpu/imx8_cpu.c
-@@ -31,6 +31,12 @@ struct cpu_imx_plat {
- static const char *get_imx_type_str(u32 imxtype)
- {
- 	switch (imxtype) {
-+	case MXC_CPU_IMX8MM:
-+		return "8MM";
-+	case MXC_CPU_IMX8MN:
-+		return "8MN";
-+	case MXC_CPU_IMX8MP:
-+		return "8MP";
- 	case MXC_CPU_IMX8QXP:
- 	case MXC_CPU_IMX8QXP_A0:
- 		return "8QXP";
+@@ -7,6 +7,7 @@
+ #include <dm.h>
+ #include <thermal.h>
+ #include <asm/global_data.h>
++#include <asm/ptrace.h>
+ #include <asm/system.h>
+ #include <firmware/imx/sci/sci.h>
+ #include <asm/arch/sys_proto.h>
+@@ -15,6 +16,7 @@
+ #include <imx_thermal.h>
+ #include <linux/bitops.h>
+ #include <linux/clk-provider.h>
++#include <linux/psci.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -240,12 +242,34 @@ static int cpu_imx_is_current(struct udevice *dev)
+ 	return 0;
+ }
+ 
++static int cpu_imx_release_core(const struct udevice *dev, phys_addr_t addr)
++{
++	struct cpu_imx_plat *plat = dev_get_plat(dev);
++	struct pt_regs regs;
++
++	regs.regs[0] = PSCI_0_2_FN64_CPU_ON;
++	regs.regs[1] = plat->mpidr;
++	regs.regs[2] = addr;
++	regs.regs[3] = 0;
++
++	smc_call(&regs);
++	if (regs.regs[0]) {
++		printf("Failed to release CPU core (mpidr: 0x%x)\n", plat->mpidr);
++		return -1;
++	}
++
++	printf("Released CPU core (mpidr: 0x%x) to address 0x%llx\n", plat->mpidr, addr);
++
++	return 0;
++}
++
+ static const struct cpu_ops cpu_imx_ops = {
+ 	.get_desc	= cpu_imx_get_desc,
+ 	.get_info	= cpu_imx_get_info,
+ 	.get_count	= cpu_imx_get_count,
+ 	.get_vendor	= cpu_imx_get_vendor,
+ 	.is_current	= cpu_imx_is_current,
++	.release_core	= cpu_imx_release_core,
+ };
+ 
+ static const struct udevice_id cpu_imx_ids[] = {
 -- 
 2.17.1
 
