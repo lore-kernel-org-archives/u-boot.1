@@ -4,83 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29771C3DA64
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:40:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98C5EC3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:42:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B9B588B0A;
-	Thu,  1 Aug 2024 16:40:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 18BC988B17;
+	Thu,  1 Aug 2024 16:42:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="leqKtuL+";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F11788667; Thu,  1 Aug 2024 16:40:09 +0200 (CEST)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1722523339;
+	bh=YTshFCTD1WOCr928axjfA/nLwpvxmzrFn3Z+CUovkms=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=fxmLHTu1P2szCac/NphTk3e7J6wZCLA0oE4ljZXLWTcl6nt78kPKBGbq9moULZKtw
+	 wvkkw79SRwaqzZ1gCPPQ3z3vc8r9G9OSUkE9ZLSYlp9n1MJVFmzk0lp0hxaCyvqmY6
+	 B3qqqCvUkX1RtICpq2aUGv6IKsdmiE5IRVvmFucNCeXsbDzRGXR8NRSw1oWdnQtlUs
+	 YzUOqkazjuOpmDgucG868iccwE9FLX0ZbyQNtk4TR7wJ74j9dq7zYrfyLZf59NJGoq
+	 OiUwlecg2+kLNuNsOQAZpmgnChUijwI2w9qKdvA2y5zIHfqF/uAO+vZ/XKL1cblBph
+	 NS24quGMwfxvg==
+Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3B19886BB
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:40:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2f15790b472so7959591fa.0
- for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:40:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722523205; x=1723128005; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=d+kscTsyHXdsbBzKsghuRhmcv80lotrInqPF16Klm6g=;
- b=leqKtuL+LnBXCvGrxn8AcmsAMuozpJEjP3xOiWys7dbqpozC4yKip9PbS+9SwKFi3S
- eZiRc5LFnq1SWAkMvHOG2ux/wEzUNHHY2UocyahhzeJjn90fwdjcwKKYvqWivb7VBHSh
- 07CYycUEsYzgFzH9Edn6ul+4X36cluDlV3+OFdUDtddLskr5/fs6Xg8Ez3Ybuo15WW7R
- 5Mw+Lb0QEc66wuV8H8A1SIPKr0rPF75eImc+3ZCmdRY2Dj0Bt/7eMK1Cq0Fjtiuimb9K
- 6VuzRLPKIZ5Mu5sEVG9jI2DQms6Mtwl+drupdTqkzsCHb5egzLEtGpHQMhcP3HqzKcPA
- jHHQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722523205; x=1723128005;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=d+kscTsyHXdsbBzKsghuRhmcv80lotrInqPF16Klm6g=;
- b=BHzLFqNnIlT+QDkKLtLkKUSpvUtrjoOLQkCAgktxEx8DSH6D6Ai9mKsppSD+G4S5/B
- v+aquP83iJGGhjhavm+phQ+HofcUllUYsyVSqnQJvhZasBHd2Vqzs6wECUa72mu17UTB
- jR1G6bUHLPJYwY7f8GcRtDB39GGwPsf2rATi+4mn2IzzkC2x9XkgQkRqwWlwQV13YZ1Y
- /8+OV81fRt2rEPYRa4NI4wpY5KcARdaKVreYAqePHEHD6qHLWnurCeXFq85gjfvWyeD7
- Jmgq5doTGo0mxtITKEq9Wr0omZOE8tcRZKUU8YDKgbGhav0DYbLsSTiwlAerueD5x7V9
- 6AZA==
-X-Gm-Message-State: AOJu0YzYVJD3pHUXBjYcGbYyoQvYsHNbAkskHK30hRxbi2ej/kvxBFMd
- wX8cAAA8ewA1QfmoO6oP0FSGUPvx8S4p6PkBQliM8qu4UXxP3QKvf/u1pv8dJe0=
-X-Google-Smtp-Source: AGHT+IHAVPiS56qwxguFIrz/3mP7XAAALoEqBhczSzUiOrB337cjON6RiIl1PFhwE7VZKLBmQnNzlg==
-X-Received: by 2002:a2e:9a88:0:b0:2f0:1a19:f3f1 with SMTP id
- 38308e7fff4ca-2f15aa84fb9mr3537911fa.7.1722523204650; 
- Thu, 01 Aug 2024 07:40:04 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:10f0:14b5:e4e1:d5ec?
- ([2a01:e0a:3cb:7bb0:10f0:14b5:e4e1:d5ec])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4282bac7349sm60498555e9.27.2024.08.01.07.40.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 01 Aug 2024 07:40:04 -0700 (PDT)
-Message-ID: <ebc992d6-93e8-4e7e-99dc-834cc981f5a3@linaro.org>
-Date: Thu, 1 Aug 2024 16:40:03 +0200
+ (Authenticated sender: lukma@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 59BB188A15;
+ Thu,  1 Aug 2024 16:42:17 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1722523337;
+ bh=YTshFCTD1WOCr928axjfA/nLwpvxmzrFn3Z+CUovkms=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=al+JalvGU3phJoHHTWvzWQJiyRlia5AfggN8gmJeyfX4j8Pai2R3r4nIvr4WaUNeF
+ SMFODHsPNeGs43+3PjRnOwbwhCpkDdii19QkW/L8O24IZ3nMPquyxYy5r144ahxi5F
+ Qq9UIbA/wB0qn9pGiM1o06qGPbWUIrEt5XvtUXj2zHEuhM8ZpQntr9HMeI9Fqlddpl
+ RC7SAzAG3q5F4myyaA4jzddYG+OXOm5UZ7qg2JJbhmityUCDWjL9iOveZnr921dJ88
+ 0sX+dK0san+htwj18GYPj6JVO7WO7LxZUyjC3PfC7rnUUEVP/6Hfxxjwf5ZxgYGaur
+ Cwcypul8HoJAQ==
+Date: Thu, 1 Aug 2024 16:42:16 +0200
+From: Lukasz Majewski <lukma@denx.de>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Teresa Remmet <t.remmet@phytec.de>, u-boot@lists.denx.de, Tom Rini
+ <trini@konsulko.com>, Benjamin Hahn <B.Hahn@phytec.de>, Cem Tenruh
+ <c.tenruh@phytec.de>, Martyn Welch <martyn.welch@collabora.com>, Simon
+ Glass <sjg@chromium.org>
+Subject: Re: [PATCH 2/2] config: Adjust Phytec imx8mm module config to
+ support NVME disk
+Message-ID: <20240801164216.40eec3ec@wsk>
+In-Reply-To: <CAOMZO5CqQtUOt1zgL7x8goSaH=HeFwQkg3-CJtY=ynyHgg7=bA@mail.gmail.com>
+References: <20240801125416.1582652-1-lukma@denx.de>
+ <20240801125416.1582652-2-lukma@denx.de>
+ <CAOMZO5CqQtUOt1zgL7x8goSaH=HeFwQkg3-CJtY=ynyHgg7=bA@mail.gmail.com>
+Organization: denx.de
+X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 00/20] Introduce the lwIP network stack
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>
-References: <cover.1721910373.git.jerome.forissier@linaro.org>
- <20240725172220.GA989285@bill-the-cat> <20240725223401.GD989285@bill-the-cat>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20240725223401.GD989285@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; boundary="Sig_/wOcUKARxlj/qSvdOp_w/1XX";
+ protocol="application/pgp-signature"; micalg=pgp-sha512
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,99 +74,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+--Sig_/wOcUKARxlj/qSvdOp_w/1XX
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Hi Fabio,
+
+> Hi Lukasz,
+>=20
+> On Thu, Aug 1, 2024 at 9:54=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wr=
+ote:
+>=20
+> > +CONFIG_CYCLIC_MAX_CPU_TIME_US=3D1000 =20
+>=20
+> Please explain why this option was added.
+
+It must have been slipped in...
+
+Default value is 5000 for this SoM.
+
+IMHO it would be safe to remove it (and use default value) - I will
+prepare v2 without it. Thanks for spotting it.
 
 
-On 7/26/24 00:34, Tom Rini wrote:
-> On Thu, Jul 25, 2024 at 11:22:20AM -0600, Tom Rini wrote:
->> On Thu, Jul 25, 2024 at 02:57:21PM +0200, Jerome Forissier wrote:
->>
->>> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
->>> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
->>> stack [2] [3] as an alternative to the current implementation in net/,
->>> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
->>> reasons for doing so are:
->>> - Make the support of HTTPS in the wget command easier. Javier T. and
->>> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
->>> so. With that it becomes possible to fetch and launch a distro installer
->>> such as Debian etc. using a secure, authenticated connection directly
->>> from the U-Boot shell. Several use cases:
->>>   * Authentication: prevent MITM attack (third party replacing the
->>> binary with a different one)
->>>   * Confidentiality: prevent third parties from grabbing a copy of the
->>> image as it is being downloaded
->>>   * Allow connection to servers that do not support plain HTTP anymore
->>> (this is becoming more and more common on the Internet these days)
->>> - Possibly benefit from additional features implemented in lwIP
->>> - Less code to maintain in U-Boot
->>>
->>> Prior to applying this series, the lwIP stack needs to be added as a
->>> Git subtree with the following command:
->>>
->>>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savannah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
->>
->> This is better than v4, and on the hardware platforms I could build and
->> boot on (which was most of mine except the am62x_beagleplay), the tests
->> ran and completed, including the tftp+boot a Linux kernel.
->>
->> The bad news is CI blows up, a lot:
->> https://source.denx.de/u-boot/u-boot/-/pipelines/21764
->> And:
->> https://dev.azure.com/u-boot/a1096300-2999-4ec4-a21a-4c22075e3771/_apis/build/builds/9014/logs/106
->> which is another Kconfig dependency problem. I don't _think_ I
->> introduced that, but since this wasn't against top of tree, I had to
->> apply the cmd/Kconfig patch manually.
->>
->> I have my world build running still and may have more comments based on
->> that.
-> 
-> First, with NET_LWIP being default rather than NET, there's a lot of
-> other Kconfig dependency issues. Unfortunately I don't see an easy tool
-> for making sure this is all clean aside from a shell loop like:
-> for C in `(cd configs;ls)`;do make -s $C;done
+Best regards,
 
-I have run this loop successfully with the upcoming v6 version. Some
-configs do print some warnings but there is no error.
+Lukasz Majewski
 
+--
 
-> Once those are fixed, this is feeling pretty OK I think. I assume PXE
-> support is high on the follow-up TODO list?
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
 
-Certainly, although I'm not sure I'll be able to spend time on it in the
-very near future.
+--Sig_/wOcUKARxlj/qSvdOp_w/1XX
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
 
-> That said, after taking
-> tiger-rk3588 as an example platform and hacking out PXE related stuff and
-> turning on lwIP:
->    aarch64: (for 1/1 boards) all +10144.0 bss -4040.0 data -64.0 rodata -100.0 text +14348.0
->             tiger-rk3588   : all +10144 bss -4040 data -64 rodata -100 text +14348
->                u-boot: add: 161/-115, grow: 8/-6 bytes: 24552/-14382 (10170)
-[snip]
- 
-> Although I'm not 100% sure that config is functionally equivalent, so
-> perhaps it would be helpful if you could take a board or two and
-> reconfigure them with the legacy stack, but equivalent functionality to
-> with lwIP, for comparison sake? Thanks!
+-----BEGIN PGP SIGNATURE-----
 
-I tried two boards and compared NET (u-boot.net) agains NET_LWIP
-(u-boot). I will give more details on how to remove PXE from the NET
-build and select/unselect the proper Kconfig symbols to obtain equivalent
-functionality in the cover letter for v6. Note that dhcp, ping, dns, tftp
-and wget are enabled in both builds. Here are the results.
+iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmarnsgACgkQAR8vZIA0
+zr2+gQgAgUwQBGnkRUokC4EOgO2DZcpkD8Dd9T8dEKpDiQ/dHrR1kR8kYmacDKDN
+hyiVT5tCe6kwuc7mVaxf1QQcZckKBsMutzmz4JnSyho0xt52FteGd4MdmztCpLr2
+SHgj+GjjVZGa9BEhJTraP8YMvjaMNPc+lUNEVc5+RUFkyniM0sGKTjZbDMoAo1iI
+Ch1WbR5+ftBeFSIa5szt2p8VdQ9kKmc6ja0qeshN/W7dhuuRwVaJBe8wKbe+RgWS
+XVQSibjpKgakrnwah5r1xnqaFU7k9J03LbjL9oGG0A9TmODlxno96r4Hravmm9Ga
+rBf3Fzgpkluj8cHgwDpbHaoKxecTMw==
+=NxAY
+-----END PGP SIGNATURE-----
 
-- For imx8mp_evk_defconfig:
-
-$ ~/work/linux/scripts/bloat-o-meter u-boot.net u-boot | sed -n '1p;$p'
-add/remove: 228/162 grow/shrink: 49/4 up/down: 51217/-29078 (22139)
-Total: Before=651990, After=674129, chg +3.40%
-
-- For rpi_3_32b_defconfig:
-
-$ ~/work/linux/scripts/bloat-o-meter u-boot.net u-boot | sed -n '1p;$p'
-add/remove: 256/92 grow/shrink: 5/8 up/down: 50934/-16780 (34154)
-Total: Before=418877, After=453031, chg +8.15%
-
-I will post v6 soon.
-
-Thanks,
--- 
-Jerome
+--Sig_/wOcUKARxlj/qSvdOp_w/1XX--
