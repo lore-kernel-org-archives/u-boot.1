@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B81F9C3DA4A
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:21:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AE9EC3DA64
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:21:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADEA488B21;
-	Thu,  1 Aug 2024 16:21:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1D80388B40;
+	Thu,  1 Aug 2024 16:21:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VuTUYEav";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J+T/7tNN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92FAD88B0A; Thu,  1 Aug 2024 16:21:38 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id 388D288B0A; Thu,  1 Aug 2024 16:21:41 +0200 (CEST)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F25D8874D
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:21:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2435B8874D
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:21:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-26109c97728so4278421fac.0
- for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:21:36 -0700 (PDT)
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-25e3d8d9f70so4250903fac.2
+ for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:21:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1722522095; x=1723126895; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1722522098; x=1723126898; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=30iADnwUhfx2i5j74z2uENqOJlCkxQcnP2lrEyFP2Hs=;
- b=VuTUYEavfV4d9yhP76tbLb9Cxll5KrBg+trZNCm7EuZ2RP7QwTWQLxJ276i2madtQh
- bVR8C0dthttmLWuDzNLmXTLXCDgzeAiubN6fSCzmJ7Wbww6rzl4ZF6gVnMn3pcYao37i
- 0OSpT1+TCDAL0ZM+CyjmNFntF4TwoqYZwBDCk=
+ bh=PPpjtUKnuclWk5dBW/IrkvItmp7hce6RekRKRdwx1Dc=;
+ b=J+T/7tNN9tbN2d2zkiO1a2WQjkOtyeNKz6D6jBi8cOs2VQqlubJc2u9f6QWqzNCEfK
+ ry0I1GrrnH8kTulJImLi5LjrvZXwJMm1fJGiuec4yGc4kRoaPx8ETyGSD7l8wP5tFmv/
+ p+5l9qoW5wMuy7nzgbLaTV6SmR+doAowZRN1E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722522095; x=1723126895;
+ d=1e100.net; s=20230601; t=1722522098; x=1723126898;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=30iADnwUhfx2i5j74z2uENqOJlCkxQcnP2lrEyFP2Hs=;
- b=mNpdL8pPTcN35RK/fFuZrKSNxxfijO64qiVYyE67oCE0UjeR4Sj+rdHMXn87nX7bc/
- c6Dk+7d4xbRwNFCW5N9Da4hoU7UZ605vUvtIkgAQMjZAlvGfuVuL3/1353yBdqnwt+BP
- S6nYFsry/T3Z7BiGtkXq2rm5WRoKFdN+apjsIkAO5vqjN1xhwuxe4Sa1IGIdiP20KNQ1
- +GGFhLPUmPUopCUQMdxfFOA/if8i87S/W1g3+jGARv2UStl6KmSBS9oOA3ArEuX+ojY7
- 1Ymp2y/hLOy8kog2JFuGvCrMO3G4e/tH0burZDvwSfrzlaAQ+FQ4QRCKvtfUndE34P0q
- aASg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXzgEPbXzNmAb4D2C0LsqMIYQcDzFtNIS5NooX/AmVSkuPy4cTzh8UN2gQKOuPpwVHC+h4cbct8QsjmBqhi5FuvSk9Qtg==
-X-Gm-Message-State: AOJu0Yzvmhwfjse1HTy8kA0YOCjtoNDy4AKTvDkck3F1GKjg3t5dlRR8
- WyNsXlXaghh06yfu1lM5qxMOCAQwt9xyfSf/GhEazxUbts/tPPnjsjWA4QlkWL0=
-X-Google-Smtp-Source: AGHT+IGp97nCFbAcudsgs7orBG5fOMyR/aM/DYWWzzH79PQB6E0KcvfaX9ghtnl8VJV3kqSix+XDdQ==
-X-Received: by 2002:a05:6870:9124:b0:268:2189:f0d with SMTP id
- 586e51a60fabf-26891e9306amr244069fac.33.1722522095007; 
- Thu, 01 Aug 2024 07:21:35 -0700 (PDT)
+ bh=PPpjtUKnuclWk5dBW/IrkvItmp7hce6RekRKRdwx1Dc=;
+ b=ug3VOgR2LKYX2WH8b7QVHtvbCO5q0ucwrYz6ZPZGdRSAgWyJJ9Me2G7x2G7JU8Ictv
+ puB0b0/Oz6UZTaDMK0Tro76cqd9ow9zuxznWq6t+AGZpWUDLM545oXMrNA2eVLH2/fc/
+ 7WjWWGa/Iiq+l+rINdK+9Wm2ISf829HQDMoFV522Na3zynDr93eZgp8IDn+FdtSbFs2j
+ gZrsTdvnqWo1MbwTVLZ2vpX2cRYZIRo5M62cRopoHOzZb6UOkrPw7Q7Cqsi0WqKh5Nma
+ DKsBVhpb0VAfIusojba02oglmjUJd21LC9kC0qXPqUD0erGEY7IU7Vnh0ZLB5Gynmo6d
+ ENhA==
+X-Gm-Message-State: AOJu0Yya9LyCRF5zvpY78G/whoF9Q9sXVzoq9RrrXgLoXk7ktlYDzygk
+ r8UddWYnpdDVIC70k8oE7uAv+n+TCD7lW+Geilg0zoXmIwL8tCh4ufz4YqN/BLQ=
+X-Google-Smtp-Source: AGHT+IFRtb6rxtW4qmgBjNPRq6wqLL0V/IjSEwE8zQ/1BFPWaa2sn7NK/9ZWwz+ODiphNIfGtUhw3A==
+X-Received: by 2002:a05:6871:3422:b0:250:70bb:1a97 with SMTP id
+ 586e51a60fabf-26891d3c9fdmr346968fac.24.1722522097750; 
+ Thu, 01 Aug 2024 07:21:37 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-103-190.totalplay.net.
  [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2653e63f463sm3087486fac.18.2024.08.01.07.21.33
+ 586e51a60fabf-2653e63f463sm3087486fac.18.2024.08.01.07.21.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Aug 2024 07:21:34 -0700 (PDT)
+ Thu, 01 Aug 2024 07:21:37 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Cc: Peter Robinson <pbrobinson@gmail.com>
-In-Reply-To: <20240712094754.2901920-1-mikhail.kshevetskiy@iopsys.eu>
-References: <20240712094754.2901920-1-mikhail.kshevetskiy@iopsys.eu>
-Subject: Re: [PATCH v3] net/tftp: make tftpput working with servers that do
- not use OACK
-Message-Id: <172252209384.4049041.9420272355672284889.b4-ty@konsulko.com>
-Date: Thu, 01 Aug 2024 08:21:33 -0600
+To: u-boot@lists.denx.de, Philip Oberfichtner <pro@denx.de>
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, caleb.connolly@linaro.org, 
+ neil.armstrong@linaro.org, sumit.garg@linaro.org, sjg@chromium.org, 
+ philipp.tomsich@vrull.eu, kever.yang@rock-chips.com, 
+ patrick.delaunay@foss.st.com, patrice.chotard@foss.st.com, jonas@kwiboo.se, 
+ marex@denx.de, leyfoon.tan@starfivetech.com, epsi@gmx.de, 
+ xypron.glpk@gmx.de, seanga2@gmail.com, sebastien.szymanski@armadeus.com, 
+ festevam@gmail.com, sebastian.reichel@collabora.com, 
+ yanhong.wang@starfivetech.com, christophe.roullier@st.com
+In-Reply-To: <20240507094237.168238-1-pro@denx.de>
+References: <20240507094237.168238-1-pro@denx.de>
+Subject: Re: [PATCH v2 1/1] net: dwc_eth_qos: mdio: Implement clause 45
+Message-Id: <172252209513.4049041.1050059758384510792.b4-ty@konsulko.com>
+Date: Thu, 01 Aug 2024 08:21:35 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,14 +96,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 12 Jul 2024 13:47:54 +0400, Mikhail Kshevetskiy wrote:
+On Tue, 07 May 2024 11:42:37 +0200, Philip Oberfichtner wrote:
 
-> Option Acknowledgment (OACK) is an extension of TFTP protocol (see rfc2347).
-> Not all tftp servers implements it. For example it does not supported by
-> tftpd server from debian-11 (https://packages.debian.org/bullseye/tftpd).
+> Bevor this commit, only clause 22 access was possible. After this commit,
+> clause 45 direct access will available as well.
 > 
-> Starting the "tftpput $loadaddr $size out_file" command with such server
-> will results in the following packets flow:
+> Note that there is a slight change of behavior: Before this commit, the
+> C45E bit was set to whatever value was left in the register from the
+> previous access. After this commit, we adopt the common practice of
+> discerning C45 from C22 using the devad argument.
 > 
 > [...]
 
