@@ -4,71 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC2D3C3DA4A
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:43:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BAC8C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:43:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F06F888B0A;
-	Thu,  1 Aug 2024 16:42:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 516E088B57;
+	Thu,  1 Aug 2024 16:42:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FrMBXe7p";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Vgm489Lx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27C2088B68; Thu,  1 Aug 2024 16:42:40 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id A42A588B57; Thu,  1 Aug 2024 16:42:40 +0200 (CEST)
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [IPv6:2607:f8b0:4864:20::f33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB6EB88B58
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:42:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 90025889FC
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 16:42:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6b7b349a98aso47113766d6.3
- for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:42:37 -0700 (PDT)
+Received: by mail-qv1-xf33.google.com with SMTP id
+ 6a1803df08f44-6b78c980981so37341496d6.2
+ for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 07:42:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722523356; x=1723128156; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722523357; x=1723128157; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KAWtoI5gfeRZVRqSYU0tCslGohSIbXBJ+wqDOrUj0NY=;
- b=FrMBXe7puXuDGOWlohk6RpkGVpZSyOIPmrlp6Qh4LUMWELUrA9p4G0wK0facLlD7br
- W7YxRMMdD2hrpQYVV4QZdbSs/WcQQjPIoxlyJuhRYRxHd3wJEBMVlZB/rYwNFoOzSHCE
- Uk5rVXfH+IpYrMVXZA3jA8HYd1fBtCyZPQduY=
+ bh=MAv1w6Vhw0c1XuNv05WVnMcdCWYc56xSwLfxMDzHhVU=;
+ b=Vgm489Lxm8jxIdx6NTNQYiqa1vL15MiQCHwg09dMuIaniCvIzoXDXGvtcljPL7SlkG
+ q7bh9xBkeiJW+yrYwuVOypqlpdmxjfohzVRp+vDButlRhcIV0o9gexc0w+1rrd5xPyPE
+ WCwfwhogxQ/Zx3U7Q+iw+2AcsJcEct/TqxAYw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722523356; x=1723128156;
+ d=1e100.net; s=20230601; t=1722523357; x=1723128157;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=KAWtoI5gfeRZVRqSYU0tCslGohSIbXBJ+wqDOrUj0NY=;
- b=EcUrNfGpNQR+FEDfSTUKNAh3TD2ao+rKWGiTHQD5ZBZfyytEQL96APEq27/zwM7vY2
- Oe4ucKDk0K8spbC88yTRrpaMRqGTJ76t8jNBjDk6CSgAQhtBE3rtuOxaTUJZxe6gLNsU
- 5LSr0SWovuzCWEub8BrHcdESCwBdkieF+fTdVbmov0g3X1qaYiQp9Fh004J6b/i1A1YB
- PxV0buRs21aPcuby2tBDVeA8+8aPJ0IS5VhROzkIEjLvNnuD08SwNAYKfPIL+eAEWPyY
- RFDoXiDAusXokUu0l87qnUS4BCiZAbYaAKS1IrAF+bKdEQX7mpTll69bT6P1cyqqBpqu
- NF/w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWtb5arICuuIcD8daFkrsGRI4t3yBdszfxJccji1uLMCwBKmvCIa5XoefObuxgGKrYrOFAYw5TmG98riu5T9lgZjU46kA==
-X-Gm-Message-State: AOJu0YwmlF2C1Ss542RNG3s7KordQEjcvYJ9Faq+DHA5NGc22DQLeQEa
- O2/Lc+yahK128Xk7RAkQ/P7kY05npwHL81KlqZnFmaGkIlPLLHQhdhr2UUHtXi0PnhHvd+SBgl+
- niUCLrUfA/2n3FHG2CQPDBV+GWe5sKGV/CXqS
-X-Google-Smtp-Source: AGHT+IG0F+7ubQ6qFTv4Illz03mYIZWQ4Sfy2bTJYBpGjdoCL2Qw18aOe6cIrpLgTddC/8MnfZQ+RptD43cKUi1EjSg=
-X-Received: by 2002:a05:6214:5781:b0:6b5:d90d:ea3c with SMTP id
- 6a1803df08f44-6bb98378f87mr5361806d6.3.1722523356148; Thu, 01 Aug 2024
- 07:42:36 -0700 (PDT)
+ bh=MAv1w6Vhw0c1XuNv05WVnMcdCWYc56xSwLfxMDzHhVU=;
+ b=C3pfkeRuWAWszzJv0pVg8gG0B2h3CD+e6M9aaJYZGbxyFQ/8a8SkA8if0FjT6SgQRC
+ t0YZsAiQUN9mu/Cu2L0Xim+4GNiLgE6Puxyx13Y7jgDoNraUvNgWzOnTBiuWXd+LOvYS
+ Op1yEvi9tedR3YwCRlorUvR/RcOGI7pVkdOkcMyzyg7aPacPzC8AIEirxvVWj7b9NL2C
+ epsheUng16nL7yqQEsUg2d+2TOVHtzthPNSGN/1voXZBd1iICvBST5A/+BnRc6yB6Aop
+ 8yJ7VDcSI3BnudhWaUR5K7Phtaj/2kVO+ggyH+vssHtjnlX3GoKf/BZm17JcaKIuUjlg
+ tSsQ==
+X-Gm-Message-State: AOJu0YwIl45o/2Oj9zv1POxuPX17mV/kr9hSh8sqvdBMdMw3f0aq/EH9
+ q9BvJnNAsehgH1VF9WGCkt4vOrLCUtUokDERXXf6MyuqO+u9S+0Qm++TRhBljH/J9pOW+zEcCGk
+ DimR2DBrzpoQX3+eOajlHEzznQMVi9DJimW9+
+X-Google-Smtp-Source: AGHT+IH2JpQH3HiFl0xB3B2Iy2UkzaGNP4QaI0GknVYJcuVJgQ6xtqM+J2yEXGjlnwpoImzjTRR3EMbEAhLeoC3WMC8=
+X-Received: by 2002:a05:6214:5713:b0:6b5:ef1:72b with SMTP id
+ 6a1803df08f44-6bb9848f4f6mr2825196d6.50.1722523357549; Thu, 01 Aug 2024
+ 07:42:37 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240731134257.686017-1-admin@hifiphile.com>
-In-Reply-To: <20240731134257.686017-1-admin@hifiphile.com>
+References: <20240731145521.19527-1-sughosh.ganu@linaro.org>
+In-Reply-To: <20240731145521.19527-1-sughosh.ganu@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 1 Aug 2024 08:42:25 -0600
-Message-ID: <CAFLszTiAjodH7P50ryJv7NZCAn5zahT=gBrvs+sNUPX0CDdb-Q@mail.gmail.com>
-Subject: Re: [RFC PATCH 0/4] dm: Duplicate uclass name fix and alias
- improvements
-To: Zixun LI <admin@hifiphile.com>
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
+Date: Thu, 1 Aug 2024 08:42:27 -0600
+Message-ID: <CAFLszTjwL7qZzTmSrJpyPsqhBuM-rRRaiki2DVrfzJ8UypnkQw@mail.gmail.com>
+Subject: Re: [PATCH] list: use list_count_nodes() to count list entries
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,52 +82,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Zixun,
-
-On Wed, 31 Jul 2024 at 07:43, Zixun LI <admin@hifiphile.com> wrote:
+On Wed, 31 Jul 2024 at 08:55, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Patch 1 is a tentative fix for duplicate uclass name issue met in
-> https://lists.denx.de/pipermail/u-boot/2024-July/560189.html
+> Use the API function list_count_nodes() to count the number of list
+> entries.
 >
-> The idea is to use orignal class name only for sequence alias to keep this
-> alias function working and rename the class something else.
-
-Can we rename the gadget uclass to usb_gadget or similar, then update
-the aliases?
-
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> ---
 >
-> Patch 2 and 3 make "dm tree", "bind" and "unbind" commands to take care
-> of alias sequence numbering. As the alias sequence numbering is more
-> meanful than uclass index.
+> Note: To be applied on top of efi-2024-10-rc2
 >
-> Patch 4 is the actual fix for usb gadet class.
->
-> There are some situations where uclass index and device sequence number
-> are misused which is not convered by this patch set, for example in
-> drivers/net/sandbox.c, uclass_get_device() is used which is based on
-> uclass index, while in the comments it says "index - The alias index
-> (also DM seq number)"
->
-> Zixun LI (4):
->   dm: core: Add a way to specify an alt name for alias sequence
->     numbering
->   dm: core: Show device sequence instead in dm_dump_tree()
->   cmd: bind: Use device sequence instead for driver bind/unbind
->   usb: gadget: udc: Fix duplicate uclass name
->
->  cmd/bind.c                          |  4 ++--
->  drivers/core/device.c               |  3 ++-
->  drivers/core/dump.c                 |  2 +-
->  drivers/core/read.c                 |  7 ++++++-
->  drivers/core/uclass.c               | 11 +++++++++--
->  drivers/usb/gadget/udc/udc-uclass.c |  3 ++-
->  include/dm/read.h                   |  9 ++++++++-
->  include/dm/uclass.h                 |  2 ++
->  8 files changed, 32 insertions(+), 9 deletions(-)
->
-> --
-> 2.45.2
+>  boot/scene.c                  | 8 +-------
+>  drivers/mtd/ubi/fastmap.c     | 8 +++-----
+>  fs/yaffs2/yaffs_guts.c        | 5 ++---
+>  lib/efi_loader/efi_boottime.c | 4 +---
+>  lib/fwu_updates/fwu_mtd.c     | 5 +----
+>  test/boot/expo.c              | 4 +---
+>  6 files changed, 9 insertions(+), 25 deletions(-)
 >
 
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
