@@ -4,52 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA6CBC3DA64
-	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:06:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79A74C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  1 Aug 2024 14:07:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC74288B23;
-	Thu,  1 Aug 2024 16:06:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 523E788B29;
+	Thu,  1 Aug 2024 16:06:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=protonmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=protonmail.com header.i=@protonmail.com header.b="XrOY6C4F";
+	dkim=pass (2048-bit key; secure) header.d=protonmail.com header.i=@protonmail.com header.b="b5MbI9UZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3DB7B88ADB; Thu,  1 Aug 2024 11:59:59 +0200 (CEST)
-Received: from mail-40131.protonmail.ch (mail-40131.protonmail.ch
- [185.70.40.131])
+ id 86C1388AE4; Thu,  1 Aug 2024 12:08:02 +0200 (CEST)
+Received: from mail-4316.protonmail.ch (mail-4316.protonmail.ch [185.70.43.16])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35C818851E
- for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 11:59:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 934788874D
+ for <u-boot@lists.denx.de>; Thu,  1 Aug 2024 12:08:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=protonmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=emil.kronborg@protonmail.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
- s=protonmail3; t=1722506396; x=1722765596;
- bh=vDmmBxyQDuMRLEgOspQiZKXioWWua9u3AwUwwiJJtGc=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=XrOY6C4FbwW72iYJ4Vw4yr8ZFq6mIGjmxL+PJjZC3d2sgVe0NXN6W6cKiLMT8EYVs
- +XyAZIhgjJDta7zAW4O+fkb6IxGIlHT+85rQ/lIYo+705WovU2u/WgOKqAzcqq04A5
- 7fMRAi6PgHRE6pkFs0jYSKRCAd/2ZYwiORKWRZUujt/umq/4JICJ89gKn1tPFmhmYq
- bdl+AAUEbyV2Z34uLC6bQvNeDZotqyO9sATe9scqA0sEwZZ8/57fFQcnbDlc9DV2Q4
- 62mJqL1roFqa0TBZd8/Ckpz66zdIIfvP0qCd13JFeYZU9f59mpgvzHKTUqfjpXIURA
- UTvmemGbMuvIw==
-Date: Thu, 01 Aug 2024 09:59:51 +0000
-To: Quentin Schulz <quentin.schulz@cherry.de>
+ s=protonmail3; t=1722506879; x=1722766079;
+ bh=AiG2zbHmg1QDlD/Z7vcncYJWQrx02I0U4bO2kRtKXuk=;
+ h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+ Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=b5MbI9UZbHrWDD1C6/FnpY80f7v2/X99rJhV0TxzyaKE90DO/yvnMcA7emIE7OfCk
+ 1Ujm74x1m6t2UwmLtNAa7R8kBg4KlJQtwYmmdcBJlxj8jy6m2D6dL5OxnY7l3o+UXD
+ 3CUH0ZWG6Cqz1ZR4fjHMScBCX0XvSyYQA8rs8t/VjXkyHXmd2x2U8+UF7cuQRhRcX7
+ c1c0mcVOTJWk/gthwjNxoGSCbHbIJJr7cGZY3mFHQ5RbBlrIhwxwfBax3d+yKvnwjE
+ oi2DPI+Y1xlBJXk0edon6ObWBZ7ZifKQIOBN1ibf7tNRRrWSa09DJ35hInmDSZf+nT
+ Jnrs0DX18FrgQ==
+Date: Thu, 01 Aug 2024 10:07:57 +0000
+To: trini@konsulko.com
 From: Emil Kronborg <emil.kronborg@protonmail.com>
-Cc: trini@konsulko.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] doc: document the pwm command
-Message-ID: <j4q36ysesqxpc2l222m7s25fgcehneksqitv2p2hyjqubu7xec@ssrff2yzsdkf>
-In-Reply-To: <a2fdc6b4-548b-4c66-aca7-3a5e8f29f0f9@cherry.de>
-References: <20240731084809.30370-1-emil.kronborg@protonmail.com>
- <7208a42b-4309-4216-ab64-16a5a82eced8.a73bd9c8-8cbe-42e2-876b-4c548d837fba.6d214a3c-c188-466c-933f-ff863159d2d9@emailsignatures365.codetwo.com>
- <a2fdc6b4-548b-4c66-aca7-3a5e8f29f0f9@cherry.de>
+Cc: quentin.schulz@cherry.de, u-boot@lists.denx.de
+Subject: [PATCH v3] doc: document the pwm command
+Message-ID: <20240801100754.44732-1-emil.kronborg@protonmail.com>
 Feedback-ID: 20949900:user:proton
-X-Pm-Message-ID: e548edfc12543dc4208cdb0682ebd245a6c37810
+X-Pm-Message-ID: f1496347ff59bdf78ff2de085e42ae311e47c226
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -70,42 +64,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Aug 01, 2024 at 11:16 GMT, Quentin Schulz wrote:
->=20
->    Did you test this? It doesn't match the synopsis section, the help tex=
-t
->=20
->    of the command and the source code.
->=20
->    Reading the code, pwm enable only expects two arguments, same for pwm
->    disable, so I would assume that the following should be used instead:
->=20
->    pwm enable 0 0
->    pwm disable 0 0
->=20
->    Did we forget to fix the help text and I misread the code maybe?
->=20
->    Cheers,
->    Quentin
->=20
+Signed-off-by: Emil Kronborg <emil.kronborg@protonmail.com>
+---
+Changes in v3:
+- The help text for 'pwm config' in the examples section is more
+  explicit about 20 us and 14 us for the period and duty cycle,
+  respectively.
+- Fixed 'pwm enable' and 'pwm disable' in the examples section to only
+  expect 2 arguments.
+- Rebased on top of master.
 
-Hi Quentin,
+ doc/usage/cmd/pwm.rst | 80 +++++++++++++++++++++++++++++++++++++++++++
+ doc/usage/index.rst   |  1 +
+ 2 files changed, 81 insertions(+)
+ create mode 100644 doc/usage/cmd/pwm.rst
 
-I did indeed test it, and you are correct that pwm enable and disable
-only expect two arguments. The additional two arguments (20000 14000)
-were a leftover from copy-pasting that I forgot to delete.
+diff --git a/doc/usage/cmd/pwm.rst b/doc/usage/cmd/pwm.rst
+new file mode 100644
+index 000000000000..bd1255d82186
+--- /dev/null
++++ b/doc/usage/cmd/pwm.rst
+@@ -0,0 +1,80 @@
++.. SPDX-License-Identifier: GPL-2.0+:
++
++.. index::
++   single: pwm (command)
++
++pwm command
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++
++Synopsis
++--------
++
++::
++
++    pwm invert <pwm_dev_num> <channel> <polarity> - invert polarity
++    pwm config <pwm_dev_num> <channel> <period_ns> <duty_ns> - config PWM
++    pwm enable <pwm_dev_num> <channel> - enable PWM output
++    pwm disable <pwm_dev_num> <channel> - disable PWM output
++
++
++Description
++-----------
++
++The ``pwm`` command is used to access and configure PWM (Pulse Width Modul=
+ation)
++signals. For all subcommands, the following arguments are common:
++
++pwm_dev_num
++    device number
++
++channel
++    channel on chosen device
++
++pwm invert
++----------
++
++The signal's active and inactive states are swapped.
++
++pwm config
++----------
++
++Configure the period and duty cycle in nanoseconds.
++
++pwm enable
++----------
++
++Enable output on the configured device and channel.
++
++pwm disable
++-----------
++
++Disable output on the configured device and channel.
++
++Examples
++--------
++
++Configure device 0 channel 0 to 20 us period and 14 us (that is, 70%) duty=
+ cycle::
++
++    =3D> pwm config 0 0 20000 14000
++
++Enable output on the configured device and channel::
++
++    =3D> pwm enable 0 0
++
++Disable output on the configured device and channel::
++
++    =3D> pwm disable 0 0
++
++Invert the signal on the configured device and channel::
++
++    =3D> pwm invert 0 0 1
++
++Configuration
++-------------
++
++The ``pwm`` command is only available if CONFIG_CMD_PWM=3Dy.
++
++Return value
++------------
++
++If the command succeeds, the return value ``$?`` is set to 0. If an error =
+occurs, the
++return value ``$?`` is set to 1.
+diff --git a/doc/usage/index.rst b/doc/usage/index.rst
+index 49b354e6ffd2..1adab5283950 100644
+--- a/doc/usage/index.rst
++++ b/doc/usage/index.rst
+@@ -92,6 +92,7 @@ Shell commands
+    cmd/pinmux
+    cmd/printenv
+    cmd/pstore
++   cmd/pwm
+    cmd/qfw
+    cmd/read
+    cmd/reset
 
-You did not misread anything, but I sent out a v2 patch to address
-another issue before I got your email.
-
-I will send a v3 patch, which:
-
-- Changes the help text to be explicit about 20 us and 14 us for the
-  period and duty cycle, respectively.
-- Fixes pwm enable and disable to only expect 2 arguments.
-
-Thanks again.
-
+base-commit: 7010f22eba35b2a6b66ba37ce565e566ca08c68f
 --=20
-Emil Kronborg
+2.46.0
+
 
