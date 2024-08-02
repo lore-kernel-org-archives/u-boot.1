@@ -4,80 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69DDEC3DA64
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 00:24:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D961FC3DA64
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 01:55:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9EAC488B8F;
-	Fri,  2 Aug 2024 02:24:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id CF1CC886E6;
+	Fri,  2 Aug 2024 03:55:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GItx4i57";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C14588B80; Fri,  2 Aug 2024 02:24:17 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5187088717; Fri,  2 Aug 2024 03:55:19 +0200 (CEST)
+Received: from smtpbguseast3.qq.com (smtpbguseast3.qq.com [54.243.244.52])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 153C388B70
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 02:24:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D0CD8863E
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 03:55:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-704466b19c4so4572084a34.0
- for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 17:24:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1722558254; x=1723163054; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tkbOR5pGhp8giDgAEY7pt8KveQVkW+qz+rrs/ekK/UQ=;
- b=GItx4i57aWhv1qIjvRhtGE9eYiAujcukSkXtTBtxC2oF8ZZxGV8jJY8KBkGEzf/wXN
- n56e6NkSW5Zp5ZiybO7NKtjLXQS+Zglw/7FjkpeI7PZfjgBC8Sk39ItEaBhOTH0vnl2B
- xvCbJh2HXLCzETsYKnQ32MChyMldNEgC/ZkDg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722558254; x=1723163054;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=tkbOR5pGhp8giDgAEY7pt8KveQVkW+qz+rrs/ekK/UQ=;
- b=CyLMYTOuuxeJSY+OXbodeYZhvAkJWS1+dqQ4sAJVod/UTZskoLwsbeF3c9uQCXA1Dr
- KiURM4x6O+m0E/adDeKg7pWZIdh5NtuWcosZPjZ5e7XMqIsmti++djrQCFP9eAVhqWm9
- 32IbqE8m7rDKE8kzjkDZTON4v9dCWYGN6OJWHf+vNC/MlF23SglnK+xvqLSUXHWH3YK9
- Dxsrc8RR1xeEVk8tItLjtA5DpCwcVpGCdtRu8z8G3xBB2Oc6FmcLKqhMDdek1WYMc9Hi
- lDxp1mY7ygX09dBu6im7EeNV6C8uglo4vkhGHi96LrLcbbChCPayKcvWrwfLpcLw1cul
- kd+g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUWlmy+TJ4X1zRucnrlSgZliCFWzs9HLm3GKi+enaoYGT7oNiuUtMCH1kEaiTWZ+69itF2mQ80iix5bGQCELrscxQnd1g==
-X-Gm-Message-State: AOJu0YyoANgmVlJkfNWybIDluBbayzaPszucK3amKIGZatZq6AfZ6ho6
- 5RwahLnwBoNm1KP2DMf0H09sHdglDOV5VSyyWgj7BexZqoIzfRLorAlRiVIbKMs=
-X-Google-Smtp-Source: AGHT+IEBc9yAA5sE3GTeWwJBucjxiLYhcym0zCv+y6dbXXhswPvhsxurdcdT/XsCdkTDgvuwUTUBxA==
-X-Received: by 2002:a05:6830:661b:b0:704:470d:638a with SMTP id
- 46e09a7af769-709b05258dfmr2645737a34.3.1722558253770; 
- Thu, 01 Aug 2024 17:24:13 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-103-190.totalplay.net.
- [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70a31d9dcaesm232611a34.7.2024.08.01.17.24.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Aug 2024 17:24:13 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>
-Cc: linux-amarula@amarulasolutions.com, u-boot@lists.denx.de, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>
-In-Reply-To: <20240709062813.112698-1-michael@amarulasolutions.com>
-References: <20240709062813.112698-1-michael@amarulasolutions.com>
-Subject: Re: [PATCH] clk: clk-uclass: Print clk name in clk_enable/clk_disable
-Message-Id: <172255825277.13067.153605108314581517.b4-ty@konsulko.com>
-Date: Thu, 01 Aug 2024 18:24:12 -0600
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
+X-QQ-mid: bizesmtp78t1722563667tl7f01eg
+X-QQ-Originating-IP: HrdY/nfQImBKwNdSP6dl4p7RL2ma8GTxMjztSBPGBLA=
+Received: from [192.168.159.131] ( [106.150.157.243])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Fri, 02 Aug 2024 09:54:25 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 18285278815738417028
+Message-ID: <136B826B50004A39+ea8c295c-7877-4fc4-9912-3b35da605b8c@radxa.com>
+Date: Fri, 2 Aug 2024 10:54:24 +0900
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] board: rockchip: add Radxa ROCK 3 Model C
+To: Maxim Moskalets <maximmosk4@gmail.com>, trini@konsulko.com,
+ u-boot@lists.denx.de, sjg@chromium.org
+Cc: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>,
+ Jonas Karlman <jonas@kwiboo.se>
+References: <20240722105623.74606-1-Maxim.Moskalets@kaspersky.com>
+Content-Language: en-US
+From: FUKAUMI Naoki <naoki@radxa.com>
+In-Reply-To: <20240722105623.74606-1-Maxim.Moskalets@kaspersky.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtp:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,17 +62,229 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 09 Jul 2024 08:28:13 +0200, Michael Trimarchi wrote:
+Hi,
 
-> Print clk name in clk_enable and clk_disable. Make sense to know
-> what clock get disabled/enabled before a system crash or system
-> hang.
+On 7/22/24 19:56, Maxim Moskalets wrote:
+> Based on rock-3a-rk3568_defconfig.
+> Tested on v1.31 revision.
 > 
+> Board Specifications:
+> - Rockchip RK3566
+> - 1/2/4GB LPDDR4 2112MT/s
+> - eMMC socket
+> - uSD card slot
+> - M.2 2230 Connector
+> - GbE LAN with POE
+> - 3.5mm jack with mic
+> - HDMI 2.0, MIPI DSI/CSI
+> - USB 3.0 Host/OTG, USB 2.0 Host
+> - 40-pin GPIO expansion ports
 > 
+> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
+> Suggested-by: Jonas Karlman <jonas@kwiboo.se>
+> Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+> ---
+> v4:
+> 	fixed typo in commit-msg
+> 	moved maintainers record to file for rk3568 boards
+> 	renamed from ROCK 3 Model C to ROCK3C
+> v3:
+> 	add suggested by Jonas Karlman <jonas@kwiboo.se> in
+> 	https://lore.kernel.org/all/bbb81dd1-e318-423d-8258-db7556ce6850@kwiboo.se/
+> v2:
+> 	rebase to updated upstream dts
+> ---
+>   arch/arm/dts/rk3566-rock-3c-u-boot.dtsi | 10 +++
+>   board/rockchip/evb_rk3568/MAINTAINERS   |  7 ++
+>   configs/rock-3c-rk3566_defconfig        | 97 +++++++++++++++++++++++++
+>   doc/board/rockchip/rockchip.rst         |  1 +
+>   4 files changed, 115 insertions(+)
+>   create mode 100644 arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+>   create mode 100644 configs/rock-3c-rk3566_defconfig
+> 
+> diff --git a/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi b/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..fd7f5367b75
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+> @@ -0,0 +1,10 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +#include "rk356x-u-boot.dtsi"
+> +
+> +&sfc {
+> +	flash@0 {
+> +		bootph-pre-ram;
+> +		bootph-some-ram;
+> +	};
+> +};
+> diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/evb_rk3568/MAINTAINERS
+> index e5b0986ead9..ba4884db8e1 100644
+> --- a/board/rockchip/evb_rk3568/MAINTAINERS
+> +++ b/board/rockchip/evb_rk3568/MAINTAINERS
+> @@ -69,3 +69,10 @@ S:	Maintained
+>   F:	configs/rock-3a-rk3568_defconfig
+>   F:	arch/arm/dts/rk3568-rock-3a.dts
+>   F:	arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
+> +
+> +ROCK-3C
+> +M:	Jonas Karlman <jonas@kwiboo.se>
+> +M:	Maxim Moskalets <maximmosk4@gmail.com>
+> +S:	Maintained
+> +F:	arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+> +F:	configs/rock-3c-rk3566_defconfig
+> diff --git a/configs/rock-3c-rk3566_defconfig b/configs/rock-3c-rk3566_defconfig
+> new file mode 100644
+> index 00000000000..f44b202c8c3
+> --- /dev/null
+> +++ b/configs/rock-3c-rk3566_defconfig
+> @@ -0,0 +1,97 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_SPEED=24000000
+> +CONFIG_SF_DEFAULT_MODE=0x2000
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-rock-3c"
+> +CONFIG_ROCKCHIP_RK3568=y
+> +CONFIG_ROCKCHIP_SPI_IMAGE=y
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_DEBUG_UART_BASE=0xFE660000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
+> +CONFIG_SPL_SPI=y
+> +CONFIG_SYS_LOAD_ADDR=0xc00800
+> +CONFIG_PCI=y
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_AHCI=y
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-rock-3c.dtb"
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +CONFIG_SPL_PAD_TO=0x7f8000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_SPL_SPI_LOAD=y
+> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+> +CONFIG_SPL_ATF=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_PCI=y
+> +CONFIG_CMD_POWEROFF=y
+> +CONFIG_CMD_USB=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_PMIC=y
+> +CONFIG_CMD_REGULATOR=y
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_OF_LIVE=y
+> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> +CONFIG_SPL_DM_SEQ_ALIAS=y
+> +CONFIG_SPL_REGMAP=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_SCSI_AHCI=y
+> +CONFIG_AHCI_PCI=y
+> +CONFIG_SPL_CLK=y
+> +CONFIG_ROCKCHIP_GPIO=y
+> +CONFIG_SYS_I2C_ROCKCHIP=y
+> +CONFIG_LED=y
+> +CONFIG_LED_GPIO=y
+> +CONFIG_MISC=y
+> +CONFIG_SUPPORT_EMMC_RPMB=y
+> +CONFIG_MMC_DW=y
+> +CONFIG_MMC_DW_ROCKCHIP=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_BUS=4
+> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+> +CONFIG_SPI_FLASH_GIGADEVICE=y
+> +CONFIG_SPI_FLASH_MACRONIX=y
+> +CONFIG_SPI_FLASH_WINBOND=y
+> +CONFIG_SPI_FLASH_XTX=y
+> +CONFIG_PHY_REALTEK=y
+> +CONFIG_DWC_ETH_QOS=y
+> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+> +CONFIG_NVME_PCI=y
+> +CONFIG_PCIE_DW_ROCKCHIP=y
+> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+> +CONFIG_SPL_PINCTRL=y
+> +CONFIG_DM_PMIC=y
+> +CONFIG_PMIC_RK8XX=y
+> +CONFIG_REGULATOR_RK8XX=y
+> +CONFIG_SPL_RAM=y
+> +CONFIG_SCSI=y
+> +CONFIG_BAUDRATE=1500000
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_ROCKCHIP_SFC=y
+> +CONFIG_SYSRESET=y
+> +CONFIG_USB=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_EHCI_GENERIC=y
+> +CONFIG_USB_OHCI_HCD=y
+> +CONFIG_USB_OHCI_GENERIC=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_ERRNO_STR=y
 
-Applied to u-boot/master, thanks!
 
--- 
-Tom
+since USB Type-A OTG port is peripheral mode, you can enable USB gadget 
+functions. could you merge following patch?
 
+diff --git a/configs/rock-3c-rk3566_defconfig 
+b/configs/rock-3c-rk3566_defconfig
+index f44b202c8c3..707088657fc 100644
+--- a/configs/rock-3c-rk3566_defconfig
++++ b/configs/rock-3c-rk3566_defconfig
+@@ -37,6 +37,8 @@ CONFIG_CMD_MMC=y
+  CONFIG_CMD_PCI=y
+  CONFIG_CMD_POWEROFF=y
+  CONFIG_CMD_USB=y
++CONFIG_CMD_ROCKUSB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
+  # CONFIG_CMD_SETEXPR is not set
+  CONFIG_CMD_PMIC=y
+  CONFIG_CMD_REGULATOR=y
+@@ -51,6 +53,7 @@ CONFIG_SPL_SYSCON=y
+  CONFIG_SCSI_AHCI=y
+  CONFIG_AHCI_PCI=y
+  CONFIG_SPL_CLK=y
++# CONFIG_USB_FUNCTION_FASTBOOT is not set
+  CONFIG_ROCKCHIP_GPIO=y
+  CONFIG_SYS_I2C_ROCKCHIP=y
+  CONFIG_LED=y
+@@ -94,4 +97,7 @@ CONFIG_USB_OHCI_HCD=y
+  CONFIG_USB_OHCI_GENERIC=y
+  CONFIG_USB_DWC3=y
+  CONFIG_USB_DWC3_GENERIC=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_USB_FUNCTION_ROCKUSB=y
+  CONFIG_ERRNO_STR=y
 
+--
+FUKAUMI Naoki
+Radxa Computer (Shenzhen) Co., Ltd.
+
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+> index bedc52e03e2..60357af6caa 100644
+> --- a/doc/board/rockchip/rockchip.rst
+> +++ b/doc/board/rockchip/rockchip.rst
+> @@ -105,6 +105,7 @@ List of mainline supported Rockchip boards:
+>        - Pine64 SOQuartz on Model A (soquartz-model-a-rk3566)
+>        - Powkiddy X55 (powkiddy-x55-rk3566)
+>        - Radxa CM3 IO Board (radxa-cm3-io-rk3566)
+> +     - Radxa ROCK 3C (rock-3c-rk3566)
+>   
+>   * rk3568
+>        - Rockchip Evb-RK3568 (evb-rk3568)
