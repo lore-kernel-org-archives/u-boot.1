@@ -4,59 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D07DAC3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 10:31:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4918C3DA49
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 10:38:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1805D86BF1;
-	Fri,  2 Aug 2024 12:31:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 35EC2882B7;
+	Fri,  2 Aug 2024 12:38:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1722594704;
-	bh=WMEBsyPqFRVWjyp7YDBhfQBYswz21c1rc246ndzYtdM=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=HRhfnCv7ySbP4U51rjNiTeDhcBQLNty3j9bQK8wRwsz9JejjPbguasjXbcThalH+P
-	 UQz4uBogmNamSY651XhQTjE6m/xz81c++l1n7sJSyWDhHR9jQOWqW2yDfKNiYYiXzC
-	 gdbdynpGVjNSeDE2x6ovkkrl5t6xpN9dqLQhdkbSb3YTe9QYdYwle0XwHCS/w30xoR
-	 4nLXp5YDPgUaX5aooJsiQyBVH8YfjNSIeqao1uUoyTXxTYSKJ5k4w6Cs3AYlRGoVqT
-	 SeFr/fPPGvBHfOlTLioUslk2jNf+X4kfsS+gTM1hlPibWvKFOs8TasNC4h4ZmniTYP
-	 CQYYGebYZhEzQ==
-Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="l4c1McY/";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 41166885F4; Fri,  2 Aug 2024 12:38:54 +0200 (CEST)
+Received: from mail-ua1-x935.google.com (mail-ua1-x935.google.com
+ [IPv6:2607:f8b0:4864:20::935])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id D984C831A1;
- Fri,  2 Aug 2024 12:31:42 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1722594703;
- bh=WMEBsyPqFRVWjyp7YDBhfQBYswz21c1rc246ndzYtdM=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=RkBf3/qe7jALDUgaM6rxzjX1TXGadUsZTAjlxJ6eY7g/MjR3kuufl+EZkhhNRANYW
- VKWCT2JwnNwRQk8/MNMpqPsHURda7+BACIgONIODDanvcjkzxVYPjZCPTv72ajnGew
- 00Gdo594dHPssoRP8Viz0TALODkjMq5ijXp2L51SmI9nwsE6j+rN9ad1bIYIYVZCRQ
- 24z5cRU/fwwr99Cf68x3R6UR3XZ4HGF5NRzni2aRJKY90fcwRYosaiGpcmOnV4a1lM
- CIpWKGmtBv7W0pUC6oGuSZHq1gYkBDwJ+ZilduAtv1eNAcBZTzfdNUE5iMMwHV7M0O
- TguPejpj/JkOQ==
-Date: Fri, 2 Aug 2024 12:31:41 +0200
-From: Lukasz Majewski <lukma@denx.de>
-To: Benjamin Hahn <B.Hahn@phytec.de>
-Cc: Teresa Remmet <T.Remmet@phytec.de>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, Cem Tenruh
- <C.Tenruh@phytec.de>, "Martyn Welch" <martyn.welch@collabora.com>, Simon
- Glass <sjg@chromium.org>
-Subject: Re: [PATCH 1/2] config: Add 'update_bootimg' command to update
- flash.bin on Phytec's imx8mm
-Message-ID: <20240802123141.2133daf4@wsk>
-In-Reply-To: <71f5fc5c-296e-40e7-b849-3d860e39184f@phytec.de>
-References: <20240801125416.1582652-1-lukma@denx.de>
- <71f5fc5c-296e-40e7-b849-3d860e39184f@phytec.de>
-Organization: denx.de
-X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ by phobos.denx.de (Postfix) with ESMTPS id B329586BF1
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 12:38:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x935.google.com with SMTP id
+ a1e0cc1a2514c-820f7c6eaa5so1918910241.3
+ for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 03:38:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1722595130; x=1723199930; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=RDHPfh6tPBcFp7l0KXVV8Df7TbXGYqfSXJslIDmdUBY=;
+ b=l4c1McY/X8lUAyCyPf6cJf99+8pLzLzFI6YQ8egx6TalEcL2L5pOa0rPqCLNda3Ct6
+ UWS5aJw/wPo0JXd+zUGhDncZmQNPDdZuFXLZQLD/bNcE52IZKxsm5kQvzLdFRgp4sSYM
+ UExz+mr7CPKOgYa6CrfBBcsDc5l6Iw7ic9MrZwZl/S+7mRfSdZPiQYhasPfGCEj7W63c
+ OCEhfTz8e+U4yPQKsDHXvErsGENpkgLvJPoY9BX6/bfwUZIU8loj5q8JNyeDt7Z8sSfq
+ fwQvNcphPXYwTwjMnkA2ohv3Nuq8m41nH8ymKLB3mrmn5P1S4owRk0E5haDVZGTUk9Rz
+ eVdw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722595130; x=1723199930;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RDHPfh6tPBcFp7l0KXVV8Df7TbXGYqfSXJslIDmdUBY=;
+ b=Ntt7Xw0Hvrm0669ujXzG0WnxZ72Ttf3pfEeX59Ecj45X6tJwMg6+9+hKRUono9s6MC
+ pbdfw7mAIGUqvHWeQoJkug0uQisNwOBzNo4smLlv3I7o3uKSmTs5o5M8GdgQFUtfrJcU
+ FEDrLd6QIVNc+RTulV/GZUZLHz29qscs+GDCKwoKYkOaOFgyWU9oe4GOrtrs503QLFin
+ f7jK1oESblO/Z+5k+VdbBs2kew/7RBPR8C6sukQ2/NId3aMkYY2qYgBN4Rth8wzr0zIq
+ CFTvCVwL7eDfGwSt+96oCGjWf0HCNOU1keFlkEe33kHHgJDpg2KSpOsMdIUZtRu9+PC8
+ CjNg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWXHsL/AlwPqgn0TdQcv/Bm6VfAz649KnGwZzInqte87FcpcrgGQSx+GMRfKk868JhWShesdLAwrfC0NxFF8OrBv7otXw==
+X-Gm-Message-State: AOJu0Ywhzr3o6i+EfXxMqAIJfiLYAavASJDc3oosmwC39fMCdYthfzO9
+ +0cWueUPkyNmq82yfk56+oBjiaaxRH7vsvvyzSHv8jHGDV8Yoh/g+UF1vNKc1fIMYxHoTmIkLSd
+ ht02m3sa86vAAI4nX3R0khrJNRyly9sd77jaRww==
+X-Google-Smtp-Source: AGHT+IFZhPtRfDrEgUx/rXThJ5RPiKHK8SenbGtXJj5Bt/TftuSlWSojdX0TrdPb+weI/QgocKTIY4Q0TrR5Dh6ZLpg=
+X-Received: by 2002:a05:6102:41aa:b0:493:d4e7:4ea7 with SMTP id
+ ada2fe7eead31-4945beafdc4mr4099372137.19.1722595130437; Fri, 02 Aug 2024
+ 03:38:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/GPjYPp/v=0LI95GujTuooRC";
- protocol="application/pgp-signature"; micalg=pgp-sha512
+References: <20240801225519.336667-1-macroalpha82@gmail.com>
+ <20240801225519.336667-10-macroalpha82@gmail.com>
+ <CAFA6WYP7fnswZ4BHtqd+nKT7MZeBrKgocQf-WpJ7-HqjBOaFvQ@mail.gmail.com>
+ <20240802105719.0dab15cb@donnerap.manchester.arm.com>
+In-Reply-To: <20240802105719.0dab15cb@donnerap.manchester.arm.com>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Fri, 2 Aug 2024 16:08:39 +0530
+Message-ID: <CAFA6WYMqYx-sEYTKcNPDbqYii_67YVUq1xnKKRjH+F7FjOMacw@mail.gmail.com>
+Subject: Re: [PATCH 9/9] sunxi: Add support for Anbernic RG35XX-2024
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de,
+ sjg@chromium.org, 
+ jernej.skrabec@gmail.com, neil.armstrong@linaro.org, hdegoede@redhat.com, 
+ jagan@amarulasolutions.com, trini@konsulko.com, ryan@testtoast.com, 
+ Chris Morgan <macromorgan@hotmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,135 +94,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---Sig_/GPjYPp/v=0LI95GujTuooRC
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Hi Andre,
 
-Hi Benjamin,
-
-> Hi Lukasz,
->=20
-> On 01.08.24 14:54, Lukasz Majewski wrote:
-> > This command allows easy update on SD card (hence the
-> > update_mmc_part=3D1) of the flash.bin generated during u-boot build.
+On Fri, 2 Aug 2024 at 15:27, Andre Przywara <andre.przywara@arm.com> wrote:
+>
+> On Fri, 2 Aug 2024 12:24:56 +0530
+> Sumit Garg <sumit.garg@linaro.org> wrote:
+>
+> Hi Sumit,
+>
+> > Hi Chris,
 > >
-> > Signed-off-by: Lukasz Majewski <lukma@denx.de>
-> > ---
-> >   include/configs/phycore_imx8mm.h | 11 +++++++++++
-> >   1 file changed, 11 insertions(+)
+> > On Fri, 2 Aug 2024 at 04:29, Chris Morgan <macroalpha82@gmail.com> wrote:
+> > >
+> > > From: Chris Morgan <macromorgan@hotmail.com>
+> > >
+> > > The Anbernic RG35XX series of devices are based around an Allwinner
+> > > H700 SoC with 1GB of RAM, 2 SD cards, and multiple input buttons.
+> > >
+> > > This bootloader has been tested on the Anbernic RG35XX-2024 and
+> > > RG35XX-H, but should be suitable for the entire lineup of H700 based
+> > > devices.
+> > >
+> > > A future series of updates will add board selection logic to identify
+> > > and load the correct device tree automatically, and will switch to
+> > > utilizing a mainline device tree.
 > >
-> > diff --git a/include/configs/phycore_imx8mm.h
-> > b/include/configs/phycore_imx8mm.h index ce6dc87c69..fdeb11933f
-> > 100644 --- a/include/configs/phycore_imx8mm.h
-> > +++ b/include/configs/phycore_imx8mm.h
-> > @@ -29,6 +29,17 @@
-> >   	"mmcdev=3D" __stringify(CONFIG_SYS_MMC_ENV_DEV) "\0" \
-> >   	"mmcpart=3D1\0" \
-> >   	"mmcroot=3D2\0" \
-> > +	"update_mmc_part=3D1\0" \ =20
->=20
-> You define the update_mmc_part variable here, but do not use it=20
-> anywhere. You use the mmcdev variable later which is good, because
-> the function then works not only for SD-Card, but also for eMMC.
->=20
-> In the commit description you say it is for updating SD-Card, which=20
-> would be mmc dev 1, but the name of the variable would indicate that
-> is is for a partition.
-> As I understand it you want to update just the U-Boot, which is not=20
-> inside any partition, so you would not need this variable.
+> > I can already see the upstream DT subtree containing DTS for this board as:
+> >
+> > ./dts/upstream/src/arm64/allwinner/sun50i-h700-anbernic-rg35xx-2024.dts
+> >
+> > Are there any major differences that won't allow you to switch to
+> > OF_UPSTREAM for this board?
+>
+> In this case there are no differences between the DT in the kernel repo
+> and what we put in U-Boot. The main reason for me holding back the switch
+> to OF_UPSTREAM for the H616 was indeed the rather slow update cadence,
+> which somewhat slows down upstreaming of new boards like this. Doing this
+> separately gives us a bit more control and freedom to take DT patches
+> early, for instance when they appear in some Linux -rc1, or even before
+> that (linux-next).
+> I explained my position in more detail here:
+> https://lore.kernel.org/u-boot/191A0F66-E2AE-4D1B-ACBE-E411E135BB61@arm.com/
+>
 
-Yes, for updating u-boot it is not required. I will remove it.
+I can see the reasoning, thanks.
 
->=20
-> > +	"update_offset=3D0x42\0" \
-> > +	"update_filename=3Dflash.bin\0" \
-> > +	"hostname=3D/tftpboot/lukma/\0" \ =20
-> We adivse to use /srv/tftp=C2=A0 as tftp dir in our BSP documentation. But
-> I don't think you need that variable at all, because the dhcp command=20
-> should find the tftp dir automatically.
+> I think Tom partly convinced me that regular updates together with
+> cherry-picking should solve most of those problems, so I will probably do
+> the switch for the next cycle.
+>
 
-I can follow your documentation adn add /srv/tftp
+Glad to hear that. Cherry-picking has been working really well for
+Rockchip platforms [1] [2] [3] as the changes appear in Linux -rc1.
+Also, it pretty much avoids maintainers to review the DT changes
+unless there are some bits added via *-u-boot.dtsi.
 
-> > +	"update_bootimg=3D"
-> > 	\
-> > +		"mmc dev ${mmcdev} ; "		\
-> > +		"if dhcp ${hostname}/${update_filename} ; then
-> > "	\ =20
->=20
-> Does this work? For me it does not. As far as I know the syntax of
-> this command is "dhcp <loadaddr> <filename>". So I would expect this
-> to be: dhcp ${loadaddr} ${update_filename}
->=20
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=417233
+[2] https://patchwork.ozlabs.org/project/uboot/list/?series=417377
+[3] https://patchwork.ozlabs.org/project/uboot/list/?series=417353
 
-When you don't provide the <loadaddr> the one from ${loadaddr} is used
-by default.
-
-However, yes - the latter - i.e. one with ${loadaddr} is more readable
-and shall be used.
-
-> > +		"setexpr fw_sz ${filesize} / 0x200 ; "	/*
-> > SD block size */ \
-> > +		"setexpr fw_sz ${fw_sz} + 1 ; "
-> > 		\ =20
-> Why do you add one here? Is this important for something?
-
-Yes, it is. The / division is only giving you the value without
-reminder. As the filesize can be not aligned to 0x200 you wouldn't
-flash the whole binary.
-
-> For me it=20
-> works also without the one.
-
-Sometimes it works, sometimes not - it depends if you crop the relevant
-part.
-
-> It is also described in our BSP documentation without adding one. See:
-> https://phytec.github.io/doc-bsp-yocto/bsp/imx8/imx8mp/mainline-head.html=
-#flash-emmc-u-boot-image-via-network-from-running-u-boot=20
->=20
-
-If you are 100% sure that all the time the size of the binary is
-aligned to 0x200, then you can omit the 1 as well.
-
-> (This is for our imx8mp mainline release but is the same for imx8mm
-> with another offset).
->=20
-> Benjamin
-> > +		"mmc write ${loadaddr} ${update_offset} ${fw_sz} ;
-> > "	\
-> > +		"fi\0" \
-> >   	"mmcautodetect=3Dyes\0" \
-> >   	"mmcargs=3Dsetenv bootargs console=3D${console} " \
-> >   		"root=3D/dev/mmcblk${mmcdev}p${mmcroot} rootwait
-> > rw\0" \ =20
->=20
->=20
-
-
-Best regards,
-
-Lukasz Majewski
-
---
-
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
-
---Sig_/GPjYPp/v=0LI95GujTuooRC
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmastY0ACgkQAR8vZIA0
-zr00hQgAp00ckECh3dg9Kka/RjmENT49TU9SiJzw+bYTh0LE/w1DdyBJOnAIBgYj
-jFg8WLpQQJrhkRxpTTzSgmYbPRrlsuc/lV3WK5S8J3+CMZSMv4qqpBdNxvYn8bEy
-+IiICoMhAr473e9s8K5cXZzhSCTUQ+y5ySRuez1Wz0JktuyPVMYNYR9Qb2OKii/e
-4eEv5IC1HqtD4a0tt6QXbmCp/4na4hLO7goPjhrmcvTBBVzhEUdLxn0lcXTJDcaM
-hMrPGWBdYwwZhHgCJdcH4O+720dooMC0EGfPaGgvD44FVIGllG6XmJIyCtJI/ES2
-QBmLNAcYC8BAhIxohJBsDq8+46/ShA==
-=1ilw
------END PGP SIGNATURE-----
-
---Sig_/GPjYPp/v=0LI95GujTuooRC--
+-Sumit
