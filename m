@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46D33C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 22:58:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BCA9C3DA7F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 22:59:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB20F88C8B;
-	Sat,  3 Aug 2024 00:57:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 44F0288C6F;
+	Sat,  3 Aug 2024 00:57:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="zR4UD5V8";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="wBAYQq2C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B34188C04; Sat,  3 Aug 2024 00:57:44 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 06AC188C81; Sat,  3 Aug 2024 00:57:51 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B76D588C7E
- for <u-boot@lists.denx.de>; Sat,  3 Aug 2024 00:57:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 13E2988C04
+ for <u-boot@lists.denx.de>; Sat,  3 Aug 2024 00:57:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,20 +28,19 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1722639458; bh=vSJLhzxQbyihptsuCpUVfjOmDV59GUCQwbCVas8Bjug=;
- b=zR4UD5V86sIs6R0eQusN7doevAojnBhlrUmmaXn5WyHUKCt0HOqKBicILcZrn7kmkvibnpxO7
- RC2eqGlfHdDOgbAs7qyx902ohd52eMeamd6WuYBH21mrMyTzZ1z1wWgE3e6eydFDd/2IR5LywaO
- dkCU4jcCiRZFIE8bWox6eATaG9yhe8eH/W0Tqmmx/Opq5+Jd2ThsGYaBkdDKT/j6z1ArjJsS2Mp
- zk5nvg435T/wTjcNogpo1ohlr3lUQyBTHkXrHxL1tkH+ZQ1lWCHmyq9vpQzePZy2ArrpolbOyJL
- X4ZqTj8MKgJ9RSTfr6MWUr9eC8uUfu+qG+Cq2xrOjJHg==
+ t=1722639461; bh=6+ZwgT4kJw4mxJ8WuuLh2kvdaraLxPlf/Grfqkzwm/o=;
+ b=wBAYQq2CYdAXO/Hmv7q6yyeaswgITODAUv2cbgX9n06Yx8taI9rMwN1x92iRvjJFFNxhhg/V3
+ RxHEsJxlRXFt6Sw1RMtgNgR1xO8TnYWgR0/9vLC3jAc+MLMsrWdAV/0p5okVXl/pwzqW+PoX098
+ nszhKXKTIiMEserv29Qsbcet/5mZ46IEV3Ko3EazCK0RCxSRPl0+uBCWaVQ4+pPiOgkf4r4Umol
+ nciiApRUaJf3lTaZ6lTK9KYIQFYkQXWVf29zRtCyUPK1yOoq2pW+n+m8rtYz1XpSVqKQLUfOBgK
+ TmsYzwdZCy/lL1+2yGiK2zFiz83djCgXpHPJiY6asH0A==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>, Johan Jonker
- <jbx6244@gmail.com>
-Subject: [PATCH v2 09/10] rockchip: gpio: Add gpio-ranges props
-Date: Fri,  2 Aug 2024 22:56:51 +0000
-Message-ID: <20240802225705.2640999-10-jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v2 10/10] rockchip: gpio: Add missing gpio aliases
+Date: Fri,  2 Aug 2024 22:56:52 +0000
+Message-ID: <20240802225705.2640999-11-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240802225705.2640999-1-jonas@kwiboo.se>
 References: <20240802225705.2640999-1-jonas@kwiboo.se>
@@ -52,8 +51,8 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 66ad646016ac7a56c917af18
+ 167.172.40.54
+X-ForwardEmail-ID: 66ad646316ac7a56c917af2a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,339 +69,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add gpio-ranges props to supported SoCs based on the following Linux
-patches:
+Add aliases for gpio controllers to soc u-boot dtsi files that are
+missing aliases in soc dtsi files to ensure dev_seq() return the
+expected number when a gpio controller is included in SPL.
 
-ARM: dts: rockchip: add gpio-ranges property to gpio nodes
-https://lore.kernel.org/all/26007385-81dc-9961-05d5-8b9a0969d0b6@gmail.com/
-
-arm64: dts: rockchip: add gpio-ranges property to gpio nodes
-https://lore.kernel.org/all/18c8c89a-9962-40f0-814f-81e2c420c957@gmail.com/
-
-For RK3066 and RK3288 the gpio-ranges props is adjusted to match
-https://lore.kernel.org/all/541b7633-af3b-4392-ac29-7ee1f2c6f943@kwiboo.se/
-
-Re-enable gpio6 on RK3066 now that the pinctrl pin offset is used with
-get_gpio_mux().
+Also drop the aliases from rk3288-u-boot.dtsi, they are already part of
+rk3288.dtsi.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 ---
-v2: Collect r-b tag
-
-Cc: Johan Jonker <jbx6244@gmail.com>
+v2: New patch
 ---
- arch/arm/dts/rk3036-u-boot.dtsi  | 12 ++++++++++++
- arch/arm/dts/rk3066a-u-boot.dtsi |  3 +--
- arch/arm/dts/rk3128-u-boot.dtsi  | 16 ++++++++++++++++
- arch/arm/dts/rk322x-u-boot.dtsi  | 16 ++++++++++++++++
- arch/arm/dts/rk3288-u-boot.dtsi  | 33 ++++++++++++++++++++++++++++++++
- arch/arm/dts/rk3308-u-boot.dtsi  | 20 +++++++++++++++++++
- arch/arm/dts/rk3328-u-boot.dtsi  | 13 +++++++++++++
- arch/arm/dts/rk3368-u-boot.dtsi  | 16 ++++++++++++++++
- arch/arm/dts/rk3399-u-boot.dtsi  | 20 +++++++++++++++++++
- arch/arm/dts/rv1108-u-boot.dtsi  | 16 ++++++++++++++++
- arch/arm/dts/rv1126-u-boot.dtsi  | 14 ++++++++++++++
- 11 files changed, 177 insertions(+), 2 deletions(-)
+ arch/arm/dts/px30-u-boot.dtsi    | 4 ++++
+ arch/arm/dts/rk3066a-u-boot.dtsi | 7 +++++++
+ arch/arm/dts/rk3288-u-boot.dtsi  | 9 ---------
+ arch/arm/dts/rk3xxx-u-boot.dtsi  | 7 +++++++
+ arch/arm/dts/rv1108-u-boot.dtsi  | 9 +++++++++
+ arch/arm/dts/rv1126-u-boot.dtsi  | 8 ++++++++
+ 6 files changed, 35 insertions(+), 9 deletions(-)
 
-diff --git a/arch/arm/dts/rk3036-u-boot.dtsi b/arch/arm/dts/rk3036-u-boot.dtsi
-index 41ac054b81e8..3e788187f630 100644
---- a/arch/arm/dts/rk3036-u-boot.dtsi
-+++ b/arch/arm/dts/rk3036-u-boot.dtsi
-@@ -4,3 +4,15 @@
-  */
+diff --git a/arch/arm/dts/px30-u-boot.dtsi b/arch/arm/dts/px30-u-boot.dtsi
+index abc6b49e6663..3dc70d4e432b 100644
+--- a/arch/arm/dts/px30-u-boot.dtsi
++++ b/arch/arm/dts/px30-u-boot.dtsi
+@@ -7,6 +7,10 @@
  
- #include "rockchip-u-boot.dtsi"
-+
-+&gpio0 {
-+	gpio-ranges = <&pinctrl 0 0 32>;
-+};
-+
-+&gpio1 {
-+	gpio-ranges = <&pinctrl 0 32 32>;
-+};
-+
-+&gpio2 {
-+	gpio-ranges = <&pinctrl 0 64 32>;
-+};
+ / {
+ 	aliases {
++		gpio0 = &gpio0;
++		gpio1 = &gpio1;
++		gpio2 = &gpio2;
++		gpio3 = &gpio3;
+ 		mmc0 = &emmc;
+ 		mmc1 = &sdmmc;
+ 	};
 diff --git a/arch/arm/dts/rk3066a-u-boot.dtsi b/arch/arm/dts/rk3066a-u-boot.dtsi
-index 06f405ca2c5e..35b52d6fb7f3 100644
+index 35b52d6fb7f3..60d18d2daeac 100644
 --- a/arch/arm/dts/rk3066a-u-boot.dtsi
 +++ b/arch/arm/dts/rk3066a-u-boot.dtsi
-@@ -24,6 +24,5 @@
- };
+@@ -3,6 +3,13 @@
+ #include "rockchip-u-boot.dtsi"
+ #include "rk3xxx-u-boot.dtsi"
  
- &gpio6 {
--	status = "disabled";
-+	gpio-ranges = <&pinctrl 0 160 16>;
- };
--
-diff --git a/arch/arm/dts/rk3128-u-boot.dtsi b/arch/arm/dts/rk3128-u-boot.dtsi
-index 6d1965e6b520..dd1208e7cf40 100644
---- a/arch/arm/dts/rk3128-u-boot.dtsi
-+++ b/arch/arm/dts/rk3128-u-boot.dtsi
-@@ -14,6 +14,22 @@
- 	bootph-all;
- };
- 
-+&gpio0 {
-+	gpio-ranges = <&pinctrl 0 0 32>;
++/ {
++	aliases {
++		gpio4 = &gpio4;
++		gpio6 = &gpio6;
++	};
 +};
 +
-+&gpio1 {
-+	gpio-ranges = <&pinctrl 0 32 32>;
-+};
-+
-+&gpio2 {
-+	gpio-ranges = <&pinctrl 0 64 32>;
-+};
-+
-+&gpio3 {
-+	gpio-ranges = <&pinctrl 0 96 32>;
-+};
-+
- &grf {
- 	bootph-all;
- };
-diff --git a/arch/arm/dts/rk322x-u-boot.dtsi b/arch/arm/dts/rk322x-u-boot.dtsi
-index aea917544b1c..f0e2a1f95aa0 100644
---- a/arch/arm/dts/rk322x-u-boot.dtsi
-+++ b/arch/arm/dts/rk322x-u-boot.dtsi
-@@ -47,6 +47,22 @@
- 	max-frequency = <150000000>;
- };
- 
-+&gpio0 {
-+	gpio-ranges = <&pinctrl 0 0 32>;
-+};
-+
-+&gpio1 {
-+	gpio-ranges = <&pinctrl 0 32 32>;
-+};
-+
-+&gpio2 {
-+	gpio-ranges = <&pinctrl 0 64 32>;
-+};
-+
-+&gpio3 {
-+	gpio-ranges = <&pinctrl 0 96 32>;
-+};
-+
- &grf {
- 	bootph-all;
+ &gpio0 {
+ 	gpio-ranges = <&pinctrl 0 0 32>;
  };
 diff --git a/arch/arm/dts/rk3288-u-boot.dtsi b/arch/arm/dts/rk3288-u-boot.dtsi
-index a43d320ade7b..0f8053a8b690 100644
+index 0f8053a8b690..379d9413adee 100644
 --- a/arch/arm/dts/rk3288-u-boot.dtsi
 +++ b/arch/arm/dts/rk3288-u-boot.dtsi
-@@ -95,8 +95,41 @@
- 	clock-names = "clk_edp", "clk_edp_24m", "pclk_edp";
- };
+@@ -7,15 +7,6 @@
  
-+&gpio0 {
-+	gpio-ranges = <&pinctrl 0 0 24>;
-+};
-+
-+&gpio1 {
-+	gpio-ranges = <&pinctrl 0 24 32>;
-+};
-+
-+&gpio2 {
-+	gpio-ranges = <&pinctrl 0 56 32>;
-+};
-+
-+&gpio3 {
-+	gpio-ranges = <&pinctrl 0 88 32>;
-+};
-+
-+&gpio4 {
-+	gpio-ranges = <&pinctrl 0 120 32>;
-+};
-+
-+&gpio5 {
-+	gpio-ranges = <&pinctrl 0 152 32>;
-+};
-+
-+&gpio6 {
-+	gpio-ranges = <&pinctrl 0 184 32>;
-+};
-+
- &gpio7 {
- 	bootph-all;
-+	gpio-ranges = <&pinctrl 0 216 32>;
-+};
-+
-+&gpio8 {
-+	gpio-ranges = <&pinctrl 0 248 16>;
- };
+ / {
+ 	aliases {
+-		gpio0 = &gpio0;
+-		gpio1 = &gpio1;
+-		gpio2 = &gpio2;
+-		gpio3 = &gpio3;
+-		gpio4 = &gpio4;
+-		gpio5 = &gpio5;
+-		gpio6 = &gpio6;
+-		gpio7 = &gpio7;
+-		gpio8 = &gpio8;
+ 		mmc0 = &emmc;
+ 		mmc1 = &sdmmc;
+ 		mmc2 = &sdio0;
+diff --git a/arch/arm/dts/rk3xxx-u-boot.dtsi b/arch/arm/dts/rk3xxx-u-boot.dtsi
+index 6af6a451ea78..097407ca72dc 100644
+--- a/arch/arm/dts/rk3xxx-u-boot.dtsi
++++ b/arch/arm/dts/rk3xxx-u-boot.dtsi
+@@ -1,6 +1,13 @@
+ // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
  
- &grf {
-diff --git a/arch/arm/dts/rk3308-u-boot.dtsi b/arch/arm/dts/rk3308-u-boot.dtsi
-index b7964e2756f3..c2d56b532f80 100644
---- a/arch/arm/dts/rk3308-u-boot.dtsi
-+++ b/arch/arm/dts/rk3308-u-boot.dtsi
-@@ -54,6 +54,26 @@
- 	bootph-some-ram;
- };
- 
-+&gpio0 {
-+	gpio-ranges = <&pinctrl 0 0 32>;
-+};
+ / {
++	aliases {
++		gpio0 = &gpio0;
++		gpio1 = &gpio1;
++		gpio2 = &gpio2;
++		gpio3 = &gpio3;
++	};
 +
-+&gpio1 {
-+	gpio-ranges = <&pinctrl 0 32 32>;
-+};
-+
-+&gpio2 {
-+	gpio-ranges = <&pinctrl 0 64 32>;
-+};
-+
-+&gpio3 {
-+	gpio-ranges = <&pinctrl 0 96 32>;
-+};
-+
-+&gpio4 {
-+	gpio-ranges = <&pinctrl 0 128 32>;
-+};
-+
- &grf {
- 	bootph-all;
- };
-diff --git a/arch/arm/dts/rk3328-u-boot.dtsi b/arch/arm/dts/rk3328-u-boot.dtsi
-index 0135bc08d491..3bc776146a82 100644
---- a/arch/arm/dts/rk3328-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-u-boot.dtsi
-@@ -57,6 +57,19 @@
- 
- &gpio0 {
- 	bootph-pre-ram;
-+	gpio-ranges = <&pinctrl 0 0 32>;
-+};
-+
-+&gpio1 {
-+	gpio-ranges = <&pinctrl 0 32 32>;
-+};
-+
-+&gpio2 {
-+	gpio-ranges = <&pinctrl 0 64 32>;
-+};
-+
-+&gpio3 {
-+	gpio-ranges = <&pinctrl 0 96 32>;
- };
- 
- &grf {
-diff --git a/arch/arm/dts/rk3368-u-boot.dtsi b/arch/arm/dts/rk3368-u-boot.dtsi
-index 811d59ac346e..be2ebda83529 100644
---- a/arch/arm/dts/rk3368-u-boot.dtsi
-+++ b/arch/arm/dts/rk3368-u-boot.dtsi
-@@ -26,3 +26,19 @@
- 		reg = <0x0 0xff740000 0x0 0x1000>;
- 	};
- };
-+
-+&gpio0 {
-+	gpio-ranges = <&pinctrl 0 0 32>;
-+};
-+
-+&gpio1 {
-+	gpio-ranges = <&pinctrl 0 32 32>;
-+};
-+
-+&gpio2 {
-+	gpio-ranges = <&pinctrl 0 64 32>;
-+};
-+
-+&gpio3 {
-+	gpio-ranges = <&pinctrl 0 96 32>;
-+};
-diff --git a/arch/arm/dts/rk3399-u-boot.dtsi b/arch/arm/dts/rk3399-u-boot.dtsi
-index c4c8bb1401ea..cead23ea7c20 100644
---- a/arch/arm/dts/rk3399-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-u-boot.dtsi
-@@ -91,6 +91,26 @@
- 	bootph-some-ram;
- };
- 
-+&gpio0 {
-+	gpio-ranges = <&pinctrl 0 0 32>;
-+};
-+
-+&gpio1 {
-+	gpio-ranges = <&pinctrl 0 32 32>;
-+};
-+
-+&gpio2 {
-+	gpio-ranges = <&pinctrl 0 64 32>;
-+};
-+
-+&gpio3 {
-+	gpio-ranges = <&pinctrl 0 96 32>;
-+};
-+
-+&gpio4 {
-+	gpio-ranges = <&pinctrl 0 128 32>;
-+};
-+
- &grf {
- 	bootph-all;
- };
+ 	noc: syscon@10128000 {
+ 		compatible = "rockchip,rk3188-noc", "syscon";
+ 		reg = <0x10128000 0x2000>;
 diff --git a/arch/arm/dts/rv1108-u-boot.dtsi b/arch/arm/dts/rv1108-u-boot.dtsi
-index ccf2d8bd83ec..f772d618bd1d 100644
+index f772d618bd1d..58711e8b2f8a 100644
 --- a/arch/arm/dts/rv1108-u-boot.dtsi
 +++ b/arch/arm/dts/rv1108-u-boot.dtsi
-@@ -5,6 +5,22 @@
+@@ -5,6 +5,15 @@
  
  #include "rockchip-u-boot.dtsi"
  
-+&gpio0 {
-+	gpio-ranges = <&pinctrl 0 0 32>;
++/ {
++	aliases {
++		gpio0 = &gpio0;
++		gpio1 = &gpio1;
++		gpio2 = &gpio2;
++		gpio3 = &gpio3;
++	};
 +};
 +
-+&gpio1 {
-+	gpio-ranges = <&pinctrl 0 32 32>;
-+};
-+
-+&gpio2 {
-+	gpio-ranges = <&pinctrl 0 64 32>;
-+};
-+
-+&gpio3 {
-+	gpio-ranges = <&pinctrl 0 96 32>;
-+};
-+
- &grf {
- 	bootph-all;
+ &gpio0 {
+ 	gpio-ranges = <&pinctrl 0 0 32>;
  };
 diff --git a/arch/arm/dts/rv1126-u-boot.dtsi b/arch/arm/dts/rv1126-u-boot.dtsi
-index 448598013578..3e6df1e433db 100644
+index 3e6df1e433db..05b5f5260dd5 100644
 --- a/arch/arm/dts/rv1126-u-boot.dtsi
 +++ b/arch/arm/dts/rv1126-u-boot.dtsi
-@@ -31,10 +31,24 @@
+@@ -6,6 +6,14 @@
+ #include "rockchip-u-boot.dtsi"
  
- &gpio0 {
- 	bootph-pre-ram;
-+	gpio-ranges = <&pinctrl 0 0 32>;
- };
- 
- &gpio1 {
- 	bootph-pre-ram;
-+	gpio-ranges = <&pinctrl 0 32 32>;
-+};
+ / {
++	aliases {
++		gpio0 = &gpio0;
++		gpio1 = &gpio1;
++		gpio2 = &gpio2;
++		gpio3 = &gpio3;
++		gpio4 = &gpio4;
++	};
 +
-+&gpio2 {
-+	gpio-ranges = <&pinctrl 0 64 32>;
-+};
-+
-+&gpio3 {
-+	gpio-ranges = <&pinctrl 0 96 32>;
-+};
-+
-+&gpio4 {
-+	gpio-ranges = <&pinctrl 0 128 2>;
- };
- 
- &grf {
+ 	chosen {
+ 		u-boot,spl-boot-order = \
+ 			"same-as-spl", &emmc, &sdmmc;
 -- 
 2.45.2
 
