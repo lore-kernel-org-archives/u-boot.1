@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E02BC3DA49
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 09:26:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D89D4C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 09:26:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0FB988BBC;
-	Fri,  2 Aug 2024 11:25:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 813AB88BB4;
+	Fri,  2 Aug 2024 11:26:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1722590758;
-	bh=OzN+S6jGYsZq9ye7fST1STcw/DIXZYk1h1HJ2DqxT7c=;
+	s=phobos-20191101; t=1722590760;
+	bh=dgMUBXIqp3g+6/zqxXoYeQrZSlXztxRDucrL8lDxhkQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=sWQT39OWEeb+0v7SCEsrfAvGSwuZMedqNYlWDz9rdZkJyxtn74wFjxez2rxhrmorH
-	 fUfu+q3XqDOZySGfK/DOKnjRm3WmAAmtsK83EwHo7KV1uiXrfXIQjbJJKc4biQ/xU8
-	 bBEzObVIlW8qcjxcMhQ6H9Wr9uyE6q/0R7C/wSz2v8UlOKm7Fg+OIUXIWSC5d+3YKu
-	 DJb1erQaO6X9s21q9hY2qsQSplvLy+95399cZ5ftcWyqLQqjCHRXjmnA4/4xyz36w6
-	 kp7oqp+z994dw6J+BbF6ddrXYyw//0S/fn7poDczA/K6r4xZcLskm8NwdaoK69m4ak
-	 9jMSBp6JXX9rg==
+	b=FI312R111lT6GLOgybmwUJqouAxUftTXzJOYJlS6sQ/ce81Z/TDxRWbJhnNC4u7Dm
+	 AuytaItusGfQBLCaETQneyUv2tGP+oEjpr5rdIEk8FE/adZ2jPpiBao7qwiQ0r9O5d
+	 SSc1u/lha+mWNgT4VxbmkUE1H0ve3lDjNeCjWh9/f4XsneInLYEsEv9q3BhKd6BzCM
+	 54YysE73Wf0ngyoXu8C6ixJCii1eRMvHjEfCCvFE8oR9Re39sNSa5ddt0NOBLuclBc
+	 nZ9c/Bpc559OJ6rO50ROO2LFmkG+dSayWbaTWMWpCAeyE92OxUFch5oWl73FxQWEuG
+	 7TOcsJS5YkgDw==
 Received: from localhost (unknown [IPv6:2001:861:52:5f60:7f4c:42be:fdf8:3b8a])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested) (Authenticated sender: pro@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E17E288BBB;
- Fri,  2 Aug 2024 11:25:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id CBCD088BAE;
+ Fri,  2 Aug 2024 11:25:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1722590758;
- bh=OzN+S6jGYsZq9ye7fST1STcw/DIXZYk1h1HJ2DqxT7c=;
+ s=phobos-20191101; t=1722590760;
+ bh=dgMUBXIqp3g+6/zqxXoYeQrZSlXztxRDucrL8lDxhkQ=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=xA5oJPaH+cMIOpSoDuUOkqG2SgM3aJjYUawY8eL0/lY0C9FRNWh8gSDACSDN7Vt6q
- I3hunk5RcmtB0fMwAcfT2rJt8GApMqAZntETP6NCSHd98Ui+KbntgdgBHqWfnXVBlz
- KawM3lVBjBLBSqhuVMooz8tUJHG6XrXiIQWFj7QhgeVMI+zxK0wibSKeRvVBYuOlGD
- rMKLLSj+zwt6gf0rHQM8eymhaVu8HqtR+mC5v3wTekOSvj2yoUwXSfbVt8dYNhhe0r
- OJO3qG3C6xNppHmFBmPLc6fDQtimDbsbW2x9QuQzb72VtUDfhE0PpGJtl3vHidtyr9
- bWBAv335JnrWw==
+ b=GMJq961UHEZ9ibZ/O7i2ZVzQQtD0tkIwOV3dByYqvAn0+GmTdXwjU0HATJoVbxtaY
+ IzJUXoN8HdJ1/SaIhLubyAtWVuXARhjVq3pqMpRq5BYKxZ2/H/EBJUnxf0gihI1gRj
+ /6pQC5sa0My8BZ+rMLO/A6pVG/BTXDshfIaPTh5HhcQrQRshkFOdobAxpH3Mb8s7OC
+ 5xFEIGAY/tfYoTCrx9hbiNoDzajduhNB1c8tSksM7DkLLP4p0T3N80xk+5Ya4ogVZK
+ IxNCau+Pw/F4XbtWxOln4g/031S4pNErfpwEsgoZdrZeyUAB4B9hYLpgCokQD9/ei8
+ VGmQjLNDWfucw==
 From: Philip Oberfichtner <pro@denx.de>
 To: u-boot@lists.denx.de
 Cc: bmeng.cn@gmail.com, caleb.connolly@linaro.org,
@@ -52,9 +52,9 @@ Cc: bmeng.cn@gmail.com, caleb.connolly@linaro.org,
  sebastien.szymanski@armadeus.com, sjg@chromium.org, sumit.garg@linaro.org,
  trini@konsulko.com, xypron.glpk@gmx.de, marex@denx.de,
  Philip Oberfichtner <pro@denx.de>
-Subject: [PATCH v4 4/5] net: dwc_eth_qos: Implement bind() for PCI devices
-Date: Fri,  2 Aug 2024 11:25:38 +0200
-Message-Id: <20240802092539.162892-5-pro@denx.de>
+Subject: [PATCH v4 5/5] net: dwc_eth_qos: Add glue driver for Intel MAC
+Date: Fri,  2 Aug 2024 11:25:39 +0200
+Message-Id: <20240802092539.162892-6-pro@denx.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240802092539.162892-1-pro@denx.de>
 References: <20240802092539.162892-1-pro@denx.de>
@@ -76,53 +76,634 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-PCI devices do not necessarily use a device tree. Implement a bind()
-function to assign unique device names in that case.
+Add dwc_eth_qos glue driver for the Intel Elkhart-Lake SOC.
 
 Signed-off-by: Philip Oberfichtner <pro@denx.de>
 ---
 
 Notes:
     Changes in V4: None
-    Changes in V3: None
+    
+    Changes in V3:
+    - update linux reference to current stable
+    - replace pr_err by dev_err
+    - drop __prefix from local function names
+    - use FIELD_PREP to simplify bitfield extraction
 
- drivers/net/dwc_eth_qos.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ drivers/net/Kconfig             |   7 +
+ drivers/net/Makefile            |   1 +
+ drivers/net/dwc_eth_qos.c       |  12 +
+ drivers/net/dwc_eth_qos.h       |   1 +
+ drivers/net/dwc_eth_qos_intel.c | 449 ++++++++++++++++++++++++++++++++
+ drivers/net/dwc_eth_qos_intel.h |  57 ++++
+ include/pci_ids.h               |   9 +
+ 7 files changed, 536 insertions(+)
+ create mode 100644 drivers/net/dwc_eth_qos_intel.c
+ create mode 100644 drivers/net/dwc_eth_qos_intel.h
 
+diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+index 69ae7c0750..6ed325517c 100644
+--- a/drivers/net/Kconfig
++++ b/drivers/net/Kconfig
+@@ -243,6 +243,13 @@ config DWC_ETH_QOS_IMX
+ 	  The Synopsys Designware Ethernet QOS IP block with the specific
+ 	  configuration used in IMX soc.
+ 
++config DWC_ETH_QOS_INTEL
++	bool "Synopsys DWC Ethernet QOS device support for Intel"
++	depends on DWC_ETH_QOS
++	help
++	  The Synopsys Designware Ethernet QOS IP block with the specific
++	  configuration used in the Intel Elkhart-Lake soc.
++
+ config DWC_ETH_QOS_ROCKCHIP
+ 	bool "Synopsys DWC Ethernet QOS device support for Rockchip SoCs"
+ 	depends on DWC_ETH_QOS
+diff --git a/drivers/net/Makefile b/drivers/net/Makefile
+index 425dd721f9..4946a63f80 100644
+--- a/drivers/net/Makefile
++++ b/drivers/net/Makefile
+@@ -20,6 +20,7 @@ obj-$(CONFIG_DRIVER_DM9000) += dm9000x.o
+ obj-$(CONFIG_DSA_SANDBOX) += dsa_sandbox.o
+ obj-$(CONFIG_DWC_ETH_QOS) += dwc_eth_qos.o
+ obj-$(CONFIG_DWC_ETH_QOS_IMX) += dwc_eth_qos_imx.o
++obj-$(CONFIG_DWC_ETH_QOS_INTEL) += dwc_eth_qos_intel.o
+ obj-$(CONFIG_DWC_ETH_QOS_ROCKCHIP) += dwc_eth_qos_rockchip.o
+ obj-$(CONFIG_DWC_ETH_QOS_QCOM) += dwc_eth_qos_qcom.o
+ obj-$(CONFIG_DWC_ETH_XGMAC) += dwc_eth_xgmac.o
 diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
-index 203c86c6cf..f6cec32021 100644
+index f6cec32021..3415c418a9 100644
 --- a/drivers/net/dwc_eth_qos.c
 +++ b/drivers/net/dwc_eth_qos.c
-@@ -1383,6 +1383,21 @@ static int eqos_remove_resources_tegra186(struct udevice *dev)
- 	return 0;
+@@ -1434,6 +1434,18 @@ int eqos_get_base_addr_dt(struct udevice *dev)
+ 	return eqos_get_base_addr_common(dev, addr);
  }
  
-+static int eqos_bind(struct udevice *dev)
++int eqos_get_base_addr_pci(struct udevice *dev)
 +{
-+	static int dev_num;
-+	const size_t name_sz = 16;
-+	char name[name_sz];
++	fdt_addr_t addr;
++	void *paddr;
 +
-+	/* Device name defaults to DT node name. */
-+	if (ofnode_valid(dev_ofnode(dev)))
-+		return 0;
++	paddr = dm_pci_map_bar(dev, PCI_BASE_ADDRESS_0, 0, 0, PCI_REGION_TYPE,
++							      PCI_REGION_MEM);
++	addr = paddr ? (fdt_addr_t)paddr : FDT_ADDR_T_NONE;
 +
-+	/* Assign unique names in case there is no DT node. */
-+	snprintf(name, name_sz, "eth_eqos#%d", dev_num++);
-+	return device_set_name(dev, name);
++	return eqos_get_base_addr_common(dev, addr);
 +}
 +
- /*
-  * Get driver data based on the device tree. Boards not using a device tree can
-  * overwrite this function.
-@@ -1613,6 +1628,7 @@ U_BOOT_DRIVER(eth_eqos) = {
- 	.name = "eth_eqos",
- 	.id = UCLASS_ETH,
- 	.of_match = of_match_ptr(eqos_ids),
-+	.bind	= eqos_bind,
- 	.probe = eqos_probe,
- 	.remove = eqos_remove,
- 	.ops = &eqos_ops,
+ static int eqos_probe(struct udevice *dev)
+ {
+ 	struct eqos_priv *eqos = dev_get_priv(dev);
+diff --git a/drivers/net/dwc_eth_qos.h b/drivers/net/dwc_eth_qos.h
+index b37d3d2f5d..ce57e22a81 100644
+--- a/drivers/net/dwc_eth_qos.h
++++ b/drivers/net/dwc_eth_qos.h
+@@ -290,6 +290,7 @@ void eqos_flush_desc_generic(void *desc);
+ void eqos_inval_buffer_generic(void *buf, size_t size);
+ void eqos_flush_buffer_generic(void *buf, size_t size);
+ int eqos_get_base_addr_dt(struct udevice *dev);
++int eqos_get_base_addr_pci(struct udevice *dev);
+ int eqos_null_ops(struct udevice *dev);
+ void *eqos_get_driver_data(struct udevice *dev);
+ 
+diff --git a/drivers/net/dwc_eth_qos_intel.c b/drivers/net/dwc_eth_qos_intel.c
+new file mode 100644
+index 0000000000..a2c6825732
+--- /dev/null
++++ b/drivers/net/dwc_eth_qos_intel.c
+@@ -0,0 +1,449 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (c) 2023-2024 DENX Software Engineering GmbH
++ * Philip Oberfichtner <pro@denx.de>
++ *
++ * Based on linux v6.6.39, especially drivers/net/ethernet/stmicro/stmmac
++ */
++
++#include <asm/io.h>
++#include <dm.h>
++#include <dm/device_compat.h>
++#include <linux/bitfield.h>
++#include <linux/delay.h>
++#include <miiphy.h>
++#include <net.h>
++#include <pci.h>
++
++#include "dwc_eth_qos.h"
++#include "dwc_eth_qos_intel.h"
++
++static struct pci_device_id intel_pci_ids[] = {
++	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EHL_RGMII1G) },
++	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EHL_SGMII1) },
++	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EHL_SGMII2G5) },
++	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EHL_PSE0_RGMII1G) },
++	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EHL_PSE0_SGMII1G) },
++	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EHL_PSE0_SGMII2G5) },
++	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EHL_PSE1_RGMII1G) },
++	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EHL_PSE1_SGMII1G) },
++	{ PCI_DEVICE(PCI_VENDOR_ID_INTEL, PCI_DEVICE_ID_INTEL_EHL_PSE1_SGMII2G5) },
++	{}
++};
++
++static int pci_config(struct udevice *dev)
++{
++	u32 val;
++
++	/* Try to enable I/O accesses and bus-mastering */
++	dm_pci_read_config32(dev, PCI_COMMAND, &val);
++	val |= PCI_COMMAND_MEMORY | PCI_COMMAND_MASTER;
++	dm_pci_write_config32(dev, PCI_COMMAND, val);
++
++	/* Make sure it worked */
++	dm_pci_read_config32(dev, PCI_COMMAND, &val);
++	if (!(val & PCI_COMMAND_MEMORY)) {
++		dev_err(dev, "%s: Can't enable I/O memory\n", __func__);
++		return -ENOSPC;
++	}
++
++	if (!(val & PCI_COMMAND_MASTER)) {
++		dev_err(dev, "%s: Can't enable bus-mastering\n", __func__);
++		return -EPERM;
++	}
++
++	return 0;
++}
++
++static void limit_fifo_size(struct udevice *dev)
++{
++	/*
++	 * As described in Intel Erratum EHL22, Document Number: 636674-2.1,
++	 * the PSE GbE Controllers advertise a wrong RX and TX fifo size.
++	 * Software should limit this value to 64KB.
++	 */
++	struct eqos_priv *eqos = dev_get_priv(dev);
++
++	eqos->tx_fifo_sz = 0x8000;
++	eqos->rx_fifo_sz = 0x8000;
++}
++
++static int serdes_status_poll(struct udevice *dev,
++			      unsigned char phyaddr, unsigned char phyreg,
++			      unsigned short mask, unsigned short val)
++{
++	struct eqos_priv *eqos = dev_get_priv(dev);
++	unsigned int retries = 10;
++	unsigned short val_rd;
++
++	do {
++		miiphy_read(eqos->mii->name, phyaddr, phyreg, &val_rd);
++		if ((val_rd & mask) == (val & mask))
++			return 0;
++		udelay(POLL_DELAY_US);
++	} while (--retries);
++
++	return -ETIMEDOUT;
++}
++
++ /* Returns -ve if MAC is unknown and 0 on success */
++static int mac_check_pse(const struct udevice *dev, bool *is_pse)
++{
++	struct pci_child_plat *plat = dev_get_parent_plat(dev);
++
++	if (!plat || plat->vendor != PCI_VENDOR_ID_INTEL)
++		return -ENXIO;
++
++	switch (plat->device) {
++	case PCI_DEVICE_ID_INTEL_EHL_PSE0_RGMII1G:
++	case PCI_DEVICE_ID_INTEL_EHL_PSE1_RGMII1G:
++	case PCI_DEVICE_ID_INTEL_EHL_PSE0_SGMII1G:
++	case PCI_DEVICE_ID_INTEL_EHL_PSE1_SGMII1G:
++	case PCI_DEVICE_ID_INTEL_EHL_PSE0_SGMII2G5:
++	case PCI_DEVICE_ID_INTEL_EHL_PSE1_SGMII2G5:
++		*is_pse = 1;
++		return 0;
++
++	case PCI_DEVICE_ID_INTEL_EHL_RGMII1G:
++	case PCI_DEVICE_ID_INTEL_EHL_SGMII1:
++	case PCI_DEVICE_ID_INTEL_EHL_SGMII2G5:
++		*is_pse = 0;
++		return 0;
++	};
++
++	return -ENXIO;
++}
++
++/* Check if we're in 2G5 mode */
++static bool serdes_link_mode_2500(struct udevice *dev)
++{
++	const unsigned char phyad = INTEL_MGBE_ADHOC_ADDR;
++	struct eqos_priv *eqos = dev_get_priv(dev);
++	unsigned short data;
++
++	miiphy_read(eqos->mii->name, phyad, SERDES_GCR, &data);
++	if (FIELD_GET(SERDES_LINK_MODE_MASK, data) == SERDES_LINK_MODE_2G5)
++		return true;
++
++	return false;
++}
++
++static int serdes_powerup(struct udevice *dev)
++{
++	/* Based on linux/drivers/net/ethernet/stmicro/stmmac/dwmac-intel.c */
++
++	const unsigned char phyad = INTEL_MGBE_ADHOC_ADDR;
++	struct eqos_priv *eqos = dev_get_priv(dev);
++	unsigned short data;
++	int ret;
++	bool is_pse;
++
++	/* Set the serdes rate and the PCLK rate */
++	miiphy_read(eqos->mii->name, phyad, SERDES_GCR0, &data);
++
++	data &= ~SERDES_RATE_MASK;
++	data &= ~SERDES_PCLK_MASK;
++
++	if (serdes_link_mode_2500(dev))
++		data |= SERDES_RATE_PCIE_GEN2 << SERDES_RATE_PCIE_SHIFT |
++			SERDES_PCLK_37p5MHZ << SERDES_PCLK_SHIFT;
++	else
++		data |= SERDES_RATE_PCIE_GEN1 << SERDES_RATE_PCIE_SHIFT |
++			SERDES_PCLK_70MHZ << SERDES_PCLK_SHIFT;
++
++	miiphy_write(eqos->mii->name, phyad, SERDES_GCR0, data);
++
++	/* assert clk_req */
++	miiphy_read(eqos->mii->name, phyad, SERDES_GCR0, &data);
++	data |= SERDES_PLL_CLK;
++	miiphy_write(eqos->mii->name, phyad, SERDES_GCR0, data);
++
++	/* check for clk_ack assertion */
++	ret = serdes_status_poll(dev, phyad, SERDES_GSR0,
++				 SERDES_PLL_CLK, SERDES_PLL_CLK);
++
++	if (ret) {
++		dev_err(dev, "Serdes PLL clk request timeout\n");
++		return ret;
++	}
++
++	/* assert lane reset*/
++	miiphy_read(eqos->mii->name, phyad, SERDES_GCR0, &data);
++	data |= SERDES_RST;
++	miiphy_write(eqos->mii->name, phyad, SERDES_GCR0, data);
++
++	/* check for assert lane reset reflection */
++	ret = serdes_status_poll(dev, phyad, SERDES_GSR0,
++				 SERDES_RST, SERDES_RST);
++
++	if (ret) {
++		dev_err(dev, "Serdes assert lane reset timeout\n");
++		return ret;
++	}
++
++	/* move power state to P0 */
++	miiphy_read(eqos->mii->name, phyad, SERDES_GCR0, &data);
++	data &= ~SERDES_PWR_ST_MASK;
++	data |= SERDES_PWR_ST_P0 << SERDES_PWR_ST_SHIFT;
++	miiphy_write(eqos->mii->name, phyad, SERDES_GCR0, data);
++
++	/* Check for P0 state */
++	ret = serdes_status_poll(dev, phyad, SERDES_GSR0,
++				 SERDES_PWR_ST_MASK,
++				 SERDES_PWR_ST_P0 << SERDES_PWR_ST_SHIFT);
++
++	if (ret) {
++		dev_err(dev, "Serdes power state P0 timeout.\n");
++		return ret;
++	}
++
++	/* PSE only - ungate SGMII PHY Rx Clock*/
++	ret = mac_check_pse(dev, &is_pse);
++	if (ret) {
++		dev_err(dev, "Failed to determine MAC type.\n");
++		return ret;
++	}
++
++	if (is_pse) {
++		miiphy_read(eqos->mii->name, phyad, SERDES_GCR0, &data);
++		data |= SERDES_PHY_RX_CLK;
++		miiphy_write(eqos->mii->name, phyad, SERDES_GCR0, data);
++	}
++
++	return 0;
++}
++
++static int xpcs_access(struct udevice *dev, int reg, int v)
++{
++	/*
++	 * Common read/write helper function
++	 *
++	 * It may seem a bit odd at a first glance that we use bus->read()
++	 * directly insetad of one of the wrapper functions. But:
++	 *
++	 * (1) phy_read() can't be used because we do not access an acutal PHY,
++	 *     but a MAC-internal submodule.
++	 *
++	 * (2) miiphy_read() can't be used because it assumes MDIO_DEVAD_NONE.
++	 */
++
++	int port = INTEL_MGBE_XPCS_ADDR;
++	int devad = 0x1f;
++	u16 val;
++	struct eqos_priv *eqos;
++	struct mii_dev *bus;
++
++	eqos = dev_get_priv(dev);
++	bus = eqos->mii;
++
++	if (v < 0)
++		return bus->read(bus, port, devad, reg);
++
++	val = v;
++	return bus->write(bus, port, devad, reg, val);
++}
++
++static int xpcs_read(struct udevice *dev, int reg)
++{
++	return xpcs_access(dev, reg, -1);
++}
++
++static int xpcs_write(struct udevice *dev, int reg, u16 val)
++{
++	return xpcs_access(dev, reg, val);
++}
++
++static int xpcs_clr_bits(struct udevice *dev, int reg, u16 bits)
++{
++	int ret;
++
++	ret = xpcs_read(dev, reg);
++	if (ret < 0)
++		return ret;
++
++	ret &= ~bits;
++
++	return xpcs_write(dev, reg, ret);
++}
++
++static int xpcs_set_bits(struct udevice *dev, int reg, u16 bits)
++{
++	int ret;
++
++	ret = xpcs_read(dev, reg);
++	if (ret < 0)
++		return ret;
++
++	ret |= bits;
++
++	return xpcs_write(dev, reg, ret);
++}
++
++static int xpcs_init(struct udevice *dev)
++{
++	/* Based on linux/drivers/net/pcs/pcs-xpcs.c */
++	struct eqos_priv *eqos = dev_get_priv(dev);
++	phy_interface_t interface = eqos->config->interface(dev);
++
++	if (interface != PHY_INTERFACE_MODE_SGMII)
++		return 0;
++
++	if (xpcs_clr_bits(dev, VR_MII_MMD_CTRL,  XPCS_AN_CL37_EN)  ||
++	    xpcs_set_bits(dev, VR_MII_AN_CTRL,   XPCS_MODE_SGMII)  ||
++	    xpcs_set_bits(dev, VR_MII_DIG_CTRL1, XPCS_MAC_AUTO_SW) ||
++	    xpcs_set_bits(dev, VR_MII_MMD_CTRL,  XPCS_AN_CL37_EN))
++		return -EIO;
++
++	return 0;
++}
++
++static int eqos_probe_ressources_intel(struct udevice *dev)
++{
++	int ret;
++
++	ret = eqos_get_base_addr_pci(dev);
++	if (ret) {
++		dev_err(dev, "eqos_get_base_addr_pci failed: %d\n", ret);
++		return ret;
++	}
++
++	limit_fifo_size(dev);
++
++	ret = pci_config(dev);
++	if (ret) {
++		dev_err(dev, "pci_config failed: %d\n", ret);
++		return ret;
++	}
++
++	return 0;
++}
++
++struct eqos_config eqos_intel_config;
++
++/*
++ * overwrite __weak function from eqos_intel.c
++ *
++ * For PCI devices the devcie tree is optional. Choose driver data based on PCI
++ * IDs instead.
++ */
++void *eqos_get_driver_data(struct udevice *dev)
++{
++	const struct pci_device_id *id;
++	const struct pci_child_plat *plat;
++
++	plat = dev_get_parent_plat(dev);
++
++	if (!plat)
++		return NULL;
++
++	/* last intel_pci_ids element is zero initialized */
++	for (id = intel_pci_ids; id->vendor != 0; id++) {
++		if (id->vendor == plat->vendor && id->device == plat->device)
++			return &eqos_intel_config;
++	}
++
++	return NULL;
++}
++
++static int eqos_start_resets_intel(struct udevice *dev)
++{
++	int ret;
++
++	ret = xpcs_init(dev);
++	if (ret) {
++		dev_err(dev, "xpcs init failed.\n");
++		return ret;
++	}
++
++	ret = serdes_powerup(dev);
++	if (ret) {
++		dev_err(dev, "Failed to power up serdes.\n");
++		return ret;
++	}
++
++	return 0;
++}
++
++static ulong eqos_get_tick_clk_rate_intel(struct udevice *dev)
++{
++	return 0;
++}
++
++static int eqos_get_enetaddr_intel(struct udevice *dev)
++{
++	/* Assume MAC address is programmed by previous boot stage */
++	struct eth_pdata *plat = dev_get_plat(dev);
++	struct eqos_priv *eqos = dev_get_priv(dev);
++	u8 *lo = (u8 *)&eqos->mac_regs->address0_low;
++	u8 *hi = (u8 *)&eqos->mac_regs->address0_high;
++
++	plat->enetaddr[0] = lo[0];
++	plat->enetaddr[1] = lo[1];
++	plat->enetaddr[2] = lo[2];
++	plat->enetaddr[3] = lo[3];
++	plat->enetaddr[4] = hi[0];
++	plat->enetaddr[5] = hi[1];
++
++	return 0;
++}
++
++static phy_interface_t eqos_get_interface_intel(const struct udevice *dev)
++{
++	struct pci_child_plat *plat = dev_get_parent_plat(dev);
++
++	if (!plat || plat->vendor != PCI_VENDOR_ID_INTEL)
++		return PHY_INTERFACE_MODE_NA;
++
++	switch (plat->device) {
++	/* The GbE Host Controller has no RGMII interface */
++	case PCI_DEVICE_ID_INTEL_EHL_RGMII1G:
++		return PHY_INTERFACE_MODE_NA;
++
++	case PCI_DEVICE_ID_INTEL_EHL_PSE0_RGMII1G:
++	case PCI_DEVICE_ID_INTEL_EHL_PSE1_RGMII1G:
++		return PHY_INTERFACE_MODE_RGMII;
++
++	/* Host SGMII and Host SGMII2G5 share the same device id */
++	case PCI_DEVICE_ID_INTEL_EHL_SGMII1:
++	case PCI_DEVICE_ID_INTEL_EHL_SGMII2G5:
++	case PCI_DEVICE_ID_INTEL_EHL_PSE0_SGMII2G5:
++	case PCI_DEVICE_ID_INTEL_EHL_PSE0_SGMII1G:
++	case PCI_DEVICE_ID_INTEL_EHL_PSE1_SGMII1G:
++	case PCI_DEVICE_ID_INTEL_EHL_PSE1_SGMII2G5:
++		return PHY_INTERFACE_MODE_SGMII;
++	};
++
++	return PHY_INTERFACE_MODE_NA;
++}
++
++static struct eqos_ops eqos_intel_ops = {
++	.eqos_inval_desc = eqos_inval_desc_generic,
++	.eqos_flush_desc = eqos_flush_desc_generic,
++	.eqos_inval_buffer = eqos_inval_buffer_generic,
++	.eqos_flush_buffer = eqos_flush_buffer_generic,
++	.eqos_probe_resources =  eqos_probe_ressources_intel,
++	.eqos_remove_resources = eqos_null_ops,
++	.eqos_stop_resets = eqos_null_ops,
++	.eqos_start_resets = eqos_start_resets_intel,
++	.eqos_stop_clks = eqos_null_ops,
++	.eqos_start_clks = eqos_null_ops,
++	.eqos_calibrate_pads = eqos_null_ops,
++	.eqos_disable_calibration = eqos_null_ops,
++	.eqos_set_tx_clk_speed = eqos_null_ops,
++	.eqos_get_enetaddr = eqos_get_enetaddr_intel,
++	.eqos_get_tick_clk_rate = eqos_get_tick_clk_rate_intel,
++};
++
++struct eqos_config eqos_intel_config = {
++	.reg_access_always_ok = false,
++	.mdio_wait = 10,
++	.swr_wait = 50,
++	.config_mac = EQOS_MAC_RXQ_CTRL0_RXQ0EN_ENABLED_DCB,
++	.config_mac_mdio = EQOS_MAC_MDIO_ADDRESS_CR_250_300,
++	.axi_bus_width = EQOS_AXI_WIDTH_64,
++	.interface = eqos_get_interface_intel,
++	.ops = &eqos_intel_ops
++};
++
++extern U_BOOT_DRIVER(eth_eqos);
++U_BOOT_PCI_DEVICE(eth_eqos, intel_pci_ids);
+diff --git a/drivers/net/dwc_eth_qos_intel.h b/drivers/net/dwc_eth_qos_intel.h
+new file mode 100644
+index 0000000000..847c75ede5
+--- /dev/null
++++ b/drivers/net/dwc_eth_qos_intel.h
+@@ -0,0 +1,57 @@
++/* SPDX-License-Identifier: GPL-2.0
++ *
++ * Copyright (c) 2023-2024 DENX Software Engineering GmbH
++ * Philip Oberfichtner <pro@denx.de>
++ *
++ * This header is based on linux v6.6.39,
++ *
++ *	drivers/net/pcs/pcs-xpcs.h
++ *	drivers/net/ethernet/stmicro/stmmac/dwmac-intel.h,
++ *
++ *      Copyright (c) 2020 Synopsys, Inc. and/or its affiliates
++ *      Copyright (c) 2020 Intel Corporation
++ */
++
++#ifndef __DWMAC_INTEL_H__
++#define __DWMAC_INTEL_H__
++
++#define POLL_DELAY_US 8
++
++/* SERDES Register */
++#define SERDES_GCR	0x0	/* Global Conguration */
++#define SERDES_GSR0	0x5	/* Global Status Reg0 */
++#define SERDES_GCR0	0xb	/* Global Configuration Reg0 */
++
++/* SERDES defines */
++#define SERDES_PLL_CLK		BIT(0)		/* PLL clk valid signal */
++#define SERDES_PHY_RX_CLK	BIT(1)		/* PSE SGMII PHY rx clk */
++#define SERDES_RST		BIT(2)		/* Serdes Reset */
++#define SERDES_PWR_ST_MASK	GENMASK(6, 4)	/* Serdes Power state*/
++#define SERDES_RATE_MASK	GENMASK(9, 8)
++#define SERDES_PCLK_MASK	GENMASK(14, 12)	/* PCLK rate to PHY */
++#define SERDES_LINK_MODE_MASK	GENMASK(2, 1)
++#define SERDES_PWR_ST_SHIFT	4
++#define SERDES_PWR_ST_P0	0x0
++#define SERDES_PWR_ST_P3	0x3
++#define SERDES_LINK_MODE_2G5	0x3
++#define SERSED_LINK_MODE_1G	0x2
++#define SERDES_PCLK_37p5MHZ	0x0
++#define SERDES_PCLK_70MHZ	0x1
++#define SERDES_RATE_PCIE_GEN1	0x0
++#define SERDES_RATE_PCIE_GEN2	0x1
++#define SERDES_RATE_PCIE_SHIFT	8
++#define SERDES_PCLK_SHIFT	12
++
++#define INTEL_MGBE_ADHOC_ADDR	0x15
++#define INTEL_MGBE_XPCS_ADDR	0x16
++
++/* XPCS defines */
++#define XPCS_MODE_SGMII		BIT(2)
++#define XPCS_MAC_AUTO_SW	BIT(9)
++#define XPCS_AN_CL37_EN		BIT(12)
++
++#define VR_MII_MMD_CTRL		0x0000
++#define VR_MII_DIG_CTRL1	0x8000
++#define VR_MII_AN_CTRL		0x8001
++
++#endif /* __DWMAC_INTEL_H__ */
+diff --git a/include/pci_ids.h b/include/pci_ids.h
+index 191d277bc8..a8939b105f 100644
+--- a/include/pci_ids.h
++++ b/include/pci_ids.h
+@@ -2600,6 +2600,15 @@
+ #define PCI_DEVICE_ID_DCI_PCCOM2	0x0004
+ 
+ #define PCI_VENDOR_ID_INTEL		0x8086
++#define PCI_DEVICE_ID_INTEL_EHL_RGMII1G       0x4b30
++#define PCI_DEVICE_ID_INTEL_EHL_SGMII1        0x4b31
++#define PCI_DEVICE_ID_INTEL_EHL_SGMII2G5      0x4b32
++#define PCI_DEVICE_ID_INTEL_EHL_PSE0_RGMII1G  0x4ba0
++#define PCI_DEVICE_ID_INTEL_EHL_PSE0_SGMII1G  0x4ba1
++#define PCI_DEVICE_ID_INTEL_EHL_PSE0_SGMII2G5 0x4ba2
++#define PCI_DEVICE_ID_INTEL_EHL_PSE1_RGMII1G  0x4bb0
++#define PCI_DEVICE_ID_INTEL_EHL_PSE1_SGMII1G  0x4bb1
++#define PCI_DEVICE_ID_INTEL_EHL_PSE1_SGMII2G5 0x4bb2
+ #define PCI_DEVICE_ID_INTEL_EESSC	0x0008
+ #define PCI_DEVICE_ID_INTEL_SNB_IMC	0x0100
+ #define PCI_DEVICE_ID_INTEL_IVB_IMC	0x0154
 -- 
 2.39.2
 
