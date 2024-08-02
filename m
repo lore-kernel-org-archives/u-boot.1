@@ -4,87 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E0B5C52D6D
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 13:17:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0286DC3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 13:50:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CA2E88C04;
-	Fri,  2 Aug 2024 15:15:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 25C9E88A83;
+	Fri,  2 Aug 2024 15:50:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="g0ZbFUPW";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="NUjlj17Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F81988BE4; Fri,  2 Aug 2024 15:15:15 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A64D288A98; Fri,  2 Aug 2024 15:50:32 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CC7188AF0
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 15:15:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AA3F688606
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 15:50:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-428e0d184b4so13287425e9.2
- for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 06:15:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722604513; x=1723209313; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sKlcmRfoniWXVhSWmoK6IZWIj0OZ5n4IXqkHVuJswJk=;
- b=g0ZbFUPWNK79zdrFekt2Df+t3eI6uwtblMSV/NZLbf0k8nRW0eU3aSmn3W1mSjX2h/
- 60a4O7vRlZzQaDDmpaGtdy21dkBHwsl6+oyUFHEtAla+eF2POlUg318cqzKZdg9u+Psj
- tygYirDY89B1a44fwIyQrE00g7JsoVvW3cwWJTGkqD4Jw+0YUvtp+csm3UukT4T6bCO7
- yPiVAeVYLfqh8N6MzglaWoSJcrzOHRAJsmFQAHDokXE76gjbJgeJV5CqIZy4m26MS+1z
- pDi/Fw4bPqOMag4xi+NqS5vtEmWHObklTECwbj4k9Zya95Jw5aIegvfmrGoc1MNhfAdp
- ztaw==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
+ [209.85.208.200])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 312A5400B1
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 13:50:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1722606629;
+ bh=jU36AU62XKlNFp8tbs/afinZO8upOvkp6fXhP7esJFE=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=NUjlj17Z0f+U5foY56qaJYvqIUroVethl9Hpwktwlz/VKOLBac48alLTTZBq6y+ov
+ qAdj8GRVxLoUzof1TwOLxOkfFDr1JfPIWoGpgKn6fKdNO0kqKLZzzBNC8vtmuf5DPo
+ F5glYkdDpxNx4hFAe1hXmrQkgeFVpNMigC7m8WxhIV74eJGwQXfRTKl4UG3AhJLF+Q
+ wBWHwgaOixGLWghSlXe2WLNjYvxsqlwLNU5WjPPGwKAf6RZWSmRWFjZoVAlMKQIFZw
+ bWRl/koq39Ga17yaC6qCCd16VmnTmuODmLB3L/sTCpFPYQPPoH4qAasN8xT9xz+4h0
+ sgXo6enmQJX/Q==
+Received: by mail-lj1-f200.google.com with SMTP id
+ 38308e7fff4ca-2ef1b9a466cso81734091fa.3
+ for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 06:50:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722604513; x=1723209313;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sKlcmRfoniWXVhSWmoK6IZWIj0OZ5n4IXqkHVuJswJk=;
- b=drCSk7WGMvS0E2RFw1xuqYSui2ZVNb8ZEKWNJ0InlrBW6cSwpHvQJYGikcUD51zzZx
- qM73OOuIbwzSaUp43l+Wpl45WQ6oHqwAeLYCd6SyOQ+qqLrjyMqU6dFIG3hX2KwtFLNo
- ct/crM1654Wu9U1s0D03Gv+ZBU5AFsGYtoPFxYOnTy7Ote763TGUa8typisY/NtiQa2Y
- UbRZ5UPVKaAWHnNBaA2nJsG6DH0QGaL/sg1qstw0k1I9JM/BNWz6dVD1CKRmbU3ineQQ
- 8vCi4ma9psfkda4k2IfR4DRNcDP22Dex04bQ/VbT9ZULm8qFlK27JHS1ZilcX2csdDzW
- kT7g==
-X-Gm-Message-State: AOJu0YznMWBtKhdYQ0i49onEJ+haKQQiS3RrLJPnkfG78Wtb/zUtV7Ee
- hfP+UR3BkpZpk3pBh1SRnMi2qDdD8e3TQwWKudB7IQNNE2MEHcopyDi44+qIQoOiAZN3eMb/oNe
- E/rWv4bxi
-X-Google-Smtp-Source: AGHT+IFAHFIfqMvJR2H+kjI9wNN8B1KcdXKQP/lQmr93ghz/8O9LA7T+Sygfzg4bOfclrLW7FZIrzw==
-X-Received: by 2002:a5d:5c85:0:b0:36b:bcef:b38e with SMTP id
- ffacd0b85a97d-36bbcefb4f5mr1753787f8f.38.1722604512331; 
- Fri, 02 Aug 2024 06:15:12 -0700 (PDT)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:4fc9:a3ab:c134:cdf4])
+ d=1e100.net; s=20230601; t=1722606628; x=1723211428;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jU36AU62XKlNFp8tbs/afinZO8upOvkp6fXhP7esJFE=;
+ b=vczm8MnO9yEFLrYMk9VvBab8i0OX4B8rXn6lkgoV9RK8IX32J9xqpLXLp3ifUB2YLa
+ AEF9EV0+2+bOEFk3rOOLEYO19fFZ6327O1+hCwT/8AhL92lTMPryNVpNNOGqeS5sdJzZ
+ mRaeLkFPHy40EpHdYqGX45gUF/ddMFGtmQM5wD5iVf7caxFSgsJFowRVReszD9oq5oGI
+ zfmXVFjRH9M14/zx8Ja2NjlhctI68ybpzCGfjb2ftEpQyNKEnmucb8LljRlQOxwX9LVi
+ AE3kILYU3qIZzHp1JDO/5cjsCKUjPp8o+i7JIlR9gT1x/POWZtHMTTNvvddBeDbKsZ/5
+ CJHg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXFiXksh/XzDK+abyvNR25ZxGvy7uOejZzF3mSp+jNiSPyU+AmviMxhEJM/G3nd2zqC4XtxR1MsmcTqg+YicJ9AhzXBqQ==
+X-Gm-Message-State: AOJu0Yx7UMSjaM/5dXqDNUdDzv5mpDtIjQYHx5Jdm4Nyc4n/ObbiR79y
+ R6r2CurMlsMh4zSepzxXr7+3dsilog4Sm7LlAcUBFWD39bgoi4KmgIJnc/8nyiTtBYw/sf56sAF
+ w36OwZK88j3h7SeQr7EfHQrEe5DwdlvmEDMDTl5Y4RAUovYPFlKc7HkTNM+DdLVAjxCA=
+X-Received: by 2002:a05:651c:1024:b0:2f1:561a:4092 with SMTP id
+ 38308e7fff4ca-2f15ab37f36mr26552171fa.41.1722606627845; 
+ Fri, 02 Aug 2024 06:50:27 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEcSY/oMXhlQIAFVKwtstaYOt9O6Is/PkWdsRUvHexLX6wtnandI+5WMumSHRGNQZGM1oiq5g==
+X-Received: by 2002:a05:651c:1024:b0:2f1:561a:4092 with SMTP id
+ 38308e7fff4ca-2f15ab37f36mr26552011fa.41.1722606627274; 
+ Fri, 02 Aug 2024 06:50:27 -0700 (PDT)
+Received: from workstation5.fritz.box
+ (ip-062-143-093-080.um16.pools.vodafone-ip.de. [62.143.93.80])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36bbcf0cc58sm1970304f8f.2.2024.08.02.06.15.11
+ 4fb4d7f45d1cf-5b83a552984sm1147387a12.58.2024.08.02.06.50.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Aug 2024 06:15:12 -0700 (PDT)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
- Marek Vasut <marex@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH v6 20/20] MAINTAINERS: net-lwip: add myself as a maintainer
-Date: Fri,  2 Aug 2024 15:14:07 +0200
-Message-Id: <f769f4356d3ccdecea0aaa0686f90da168cc936e.1722601509.git.jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <cover.1722601509.git.jerome.forissier@linaro.org>
-References: <cover.1722601509.git.jerome.forissier@linaro.org>
+ Fri, 02 Aug 2024 06:50:26 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Dave Jones <dave.jones@canonical.com>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Andrew Davis <afd@ti.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Bryan Brattlof <bb@ti.com>,
+ Jesse Taube <mr.bossman075@gmail.com>,
+ "Leon M . Busch-George" <leon@georgemail.eu>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] Makefile: don't use CFLAGS for environment text file
+Date: Fri,  2 Aug 2024 15:50:23 +0200
+Message-ID: <20240802135023.107143-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -103,39 +106,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add myself as a maintainer for the lwIP network stack integration code
-and network commands. The library code itself (i.e., most files under
-lib/lwip/ except README, Makefile and integration files in u-boot) is
-unmodified from upstream and therefore does not need a maintainer.
+We use KCPPFLAGS to let the user set flags when invoking the C precompiler.
+These should also be used when generating the environment text file.
 
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reported-by: Dave Jones <dave.jones@canonical.com>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- MAINTAINERS | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 6b32a6d9464..10323efffad 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1336,6 +1336,17 @@ F:	drivers/net/
- F:	include/net.h
- F:	net/
- 
-+NETWORK (LWIP)
-+M:	Jerome Forissier <jerome.forissier@linaro.org>
-+S:	Maintained
-+F:	cmd/net-lwip.c
-+F:	configs/qemu_arm64_lwip_defconfig
-+F:	include/net-lwip.h
-+F:	lib/lwip/Makefile
-+F:	lib/lwip/README
-+F:	lib/lwip/u-boot/
-+F:	net-lwip/
-+
- NIOS
- M:	Thomas Chou <thomas@wytron.com.tw>
- S:	Maintained
+diff --git a/Makefile b/Makefile
+index f0e6f07178f..4c469b9ce2b 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1839,7 +1839,7 @@ ENV_FILE := $(if $(ENV_SOURCE_FILE),$(ENV_FILE_CFG),$(wildcard $(ENV_FILE_BOARD)
+ quiet_cmd_gen_envp = ENVP    $@
+       cmd_gen_envp = \
+ 	if [ -s "$(ENV_FILE)" ]; then \
+-		$(CPP) -P $(CFLAGS) -x assembler-with-cpp -undef \
++		$(CPP) -P $(cpp_flags) -x assembler-with-cpp -undef \
+ 			-D__ASSEMBLY__ \
+ 			-D__UBOOT_CONFIG__ \
+ 			-I . -I include -I $(srctree)/include \
 -- 
-2.40.1
+2.45.2
 
