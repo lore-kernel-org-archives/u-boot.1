@@ -4,48 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39BBEC52D6F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 16:37:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25963C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 16:37:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8C2888BCE;
-	Fri,  2 Aug 2024 18:37:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2999488BE4;
+	Fri,  2 Aug 2024 18:37:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nod.at
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 795C288BDA; Fri,  2 Aug 2024 18:37:02 +0200 (CEST)
+ id 8505688BC8; Fri,  2 Aug 2024 18:37:02 +0200 (CEST)
 Received: from lithops.sigma-star.at (lithops.sigma-star.at [195.201.40.130])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 933D588BC8
+ by phobos.denx.de (Postfix) with ESMTPS id AED4A88BCE
  for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 18:37:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=nod.at
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=richard@nod.at
 Received: from localhost (localhost [127.0.0.1])
- by lithops.sigma-star.at (Postfix) with ESMTP id 275E564C3B2C;
+ by lithops.sigma-star.at (Postfix) with ESMTP id 30E4464C3B35;
  Fri,  2 Aug 2024 18:37:00 +0200 (CEST)
 Received: from lithops.sigma-star.at ([127.0.0.1])
  by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id dzQIJ-Woaso8; Fri,  2 Aug 2024 18:36:59 +0200 (CEST)
+ with ESMTP id D_SCjiVv6qdu; Fri,  2 Aug 2024 18:36:59 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by lithops.sigma-star.at (Postfix) with ESMTP id A0BE864C3B27;
+ by lithops.sigma-star.at (Postfix) with ESMTP id D02E364C3B29;
  Fri,  2 Aug 2024 18:36:59 +0200 (CEST)
 Received: from lithops.sigma-star.at ([127.0.0.1])
  by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id nSfXqWQmFlGL; Fri,  2 Aug 2024 18:36:59 +0200 (CEST)
+ with ESMTP id ofK6d-nM2YNT; Fri,  2 Aug 2024 18:36:59 +0200 (CEST)
 Received: from foxxylove.corp.sigma-star.at (unknown [82.150.214.1])
- by lithops.sigma-star.at (Postfix) with ESMTPSA id 5D7326196A4E;
+ by lithops.sigma-star.at (Postfix) with ESMTPSA id 9048564C3B26;
  Fri,  2 Aug 2024 18:36:59 +0200 (CEST)
 From: Richard Weinberger <richard@nod.at>
 To: u-boot@lists.denx.de
 Cc: upstream+uboot@sigma-star.at, trini@konsulko.com,
  miquel.raynal@bootlin.com, thomas.petazzoni@bootlin.com,
  jmcosta944@gmail.com, Richard Weinberger <richard@nod.at>
-Subject: [PATCH v2 1/4] squashfs: Fix integer overflow in
- sqfs_resolve_symlink()
-Date: Fri,  2 Aug 2024 18:36:44 +0200
-Message-Id: <20240802163647.26674-1-richard@nod.at>
+Subject: [PATCH v2 2/4] squashfs: Fix integer overflow in sqfs_inode_size()
+Date: Fri,  2 Aug 2024 18:36:45 +0200
+Message-Id: <20240802163647.26674-2-richard@nod.at>
 X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20240802163647.26674-1-richard@nod.at>
+References: <20240802163647.26674-1-richard@nod.at>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -64,51 +65,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A carefully crafted squashfs filesystem can exhibit an inode size of 0xff=
-ffffff,
-as a consequence malloc() will do a zero allocation.
-Later in the function the inode size is again used for copying data.
-So an attacker can overwrite memory.
-Avoid the overflow by using the __builtin_add_overflow() helper.
+A carefully crafted squashfs filesystem can exhibit an extremly large
+inode size and overflow the calculation in sqfs_inode_size().
+As a consequence, the squashfs driver will read from wrong locations.
+
+Fix by using __builtin_add_overflow() to detect the overflow.
 
 Signed-off-by: Richard Weinberger <richard@nod.at>
 Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
- fs/squashfs/sqfs.c | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
+ fs/squashfs/sqfs_inode.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
-index 1430e671a5..16a07c0622 100644
---- a/fs/squashfs/sqfs.c
-+++ b/fs/squashfs/sqfs.c
-@@ -422,8 +422,10 @@ static char *sqfs_resolve_symlink(struct squashfs_sy=
-mlink_inode *sym,
- 	char *resolved, *target;
- 	u32 sz;
+diff --git a/fs/squashfs/sqfs_inode.c b/fs/squashfs/sqfs_inode.c
+index d25cfb53e7..bb3ccd37e3 100644
+--- a/fs/squashfs/sqfs_inode.c
++++ b/fs/squashfs/sqfs_inode.c
+@@ -78,11 +78,16 @@ int sqfs_inode_size(struct squashfs_base_inode *inode=
+, u32 blk_size)
 =20
--	sz =3D get_unaligned_le32(&sym->symlink_size);
--	target =3D malloc(sz + 1);
-+	if (__builtin_add_overflow(get_unaligned_le32(&sym->symlink_size), 1, &=
-sz))
-+		return NULL;
+ 	case SQFS_SYMLINK_TYPE:
+ 	case SQFS_LSYMLINK_TYPE: {
++		int size;
 +
-+	target =3D malloc(sz);
- 	if (!target)
- 		return NULL;
+ 		struct squashfs_symlink_inode *symlink =3D
+ 			(struct squashfs_symlink_inode *)inode;
 =20
-@@ -431,9 +433,9 @@ static char *sqfs_resolve_symlink(struct squashfs_sym=
-link_inode *sym,
- 	 * There is no trailling null byte in the symlink's target path, so a
- 	 * copy is made and a '\0' is added at its end.
- 	 */
--	target[sz] =3D '\0';
-+	target[sz - 1] =3D '\0';
- 	/* Get target name (relative path) */
--	strncpy(target, sym->symlink, sz);
-+	strncpy(target, sym->symlink, sz - 1);
+-		return sizeof(*symlink) +
+-			get_unaligned_le32(&symlink->symlink_size);
++		if (__builtin_add_overflow(sizeof(*symlink),
++		    get_unaligned_le32(&symlink->symlink_size), &size))
++			return -EINVAL;
++
++		return size;
+ 	}
 =20
- 	/* Relative -> absolute path conversion */
- 	resolved =3D sqfs_get_abs_path(base_path, target);
+ 	case SQFS_BLKDEV_TYPE:
 --=20
 2.35.3
 
