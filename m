@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89C78C3DA7F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 19:53:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E8B5C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 19:56:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E211E88C4F;
-	Fri,  2 Aug 2024 21:52:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E493688C3E;
+	Fri,  2 Aug 2024 21:56:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SdXn3iq1";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bMPLdGev";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8837E88BD6; Fri,  2 Aug 2024 21:52:08 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 129E088C16; Fri,  2 Aug 2024 21:56:34 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C6E488C59
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 21:52:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8AAFD88C2F
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 21:56:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-428119da952so55186415e9.0
- for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 12:52:06 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-42817f1eb1fso51682375e9.1
+ for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 12:56:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722628326; x=1723233126; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=lfH4aIp2Pym1F7OWELDXTty+Eh/EwM5/c+LsHcajr/k=;
- b=SdXn3iq1CjCqTBAQI1EI+qNtIrVL8al0reQmlAsDMkHAmqP5R852alLesQXvjv26ig
- EpwVmaQT3IHVA1ys9BPn7i6xaXheFLxXah9risgtOmvbsJspUQeGBPuBZK6tpfx9sj04
- Tj5zeL2gjOwj6SkXKdp9QxziZz62jRWc8mMcIK4D5DeCJkTQjI9pj3eDUzDCJqfNa/Rz
- SHJTSNVdjXv9WLWP5cTzsdjNjdToibRVIHg7I3fZvzvAjl0p/eLKKOQKjzf7lYnpUWyn
- bF/cuW93awlGSeQ6DsLRGdLHaiGQzGEnf5hl2eZMCeoAdgz02L/ttj5I/L2u7P9IqBaS
- uiYQ==
+ d=gmail.com; s=20230601; t=1722628591; x=1723233391; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=jER9ZaIUYq0X1TlEnVzvaWZz7I/f+wHaLDBDEtIZNnU=;
+ b=bMPLdGevmGkdhuDOYV2LOyI21khO4BHtT9J69tnkLMW4dvhFhfbf5ZeCoMxPX036KQ
+ 5L9pU9yL1HiChFo+bEizFai7W8oCsgzohseAkqt/e7Ks4X08bkqqxZLcBXQISg+XIXC5
+ FQcMJkAMjpwb9A7QsA3IOKagw4jXjK3aaA+76S80kQVHEJhn0msymBs/bAsnfEge1gjT
+ Di0f1lpJFQDmh0RjX8bUpKTC5jH1B38CzXICxcLUmmhp1CTlg3uUxv7BLUw2BtGZWU3I
+ /j9fMmspzhwwJTTPIntdXB+3ojnV5OPPFsj5nCp4FnfSSR/DpQc0kXwHo9iA3pSbvOku
+ iFyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722628326; x=1723233126;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lfH4aIp2Pym1F7OWELDXTty+Eh/EwM5/c+LsHcajr/k=;
- b=iEhunz79E3bSuiOPyNA9R5FSPKhnGoaNyL8yMdKQe/v8w9VvOCGEHFvKCg6koDWMGX
- 8VlCYznef96gMo+adcrdJQeF6aiHvjgMr7hyaDWhJaP/r4NmpdLUyMrxYhwSfW9uPG/K
- hWquTU8s3edmoW+LqffAHBqCFVxtxN1cfui1px0il4cYs07S47oyWUqI8zftOtDuGqRu
- /Fai+triY5l8a76mMP9MopTQ7WkwW3gv/P3e1X/3uMF6rWwGM1mzTFt6b94cZ1nCd4ZP
- hhDvslnnx8VxiscmUJoIxfVF4N9LR6C0qL0ssJQRdHTai8W02f7cK1MK8aH5VqhF6lrT
- cXJw==
+ d=1e100.net; s=20230601; t=1722628591; x=1723233391;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=jER9ZaIUYq0X1TlEnVzvaWZz7I/f+wHaLDBDEtIZNnU=;
+ b=SQR46f1Alv6YRoGEeojcoDHyV5yy3raWG1fXq9nB2tP06etqCXtlYB7atR/dL0bHRY
+ pGXwrsYBxlp3xDxSiXApV3eveSe5MtHd1U1TTHzyy9oWxuKrgXXT/acPdVCpX6R7RS2H
+ HwygPCc+iWlhnDnuID5quMP5gW+S3K6TGzkA89n5qDQp9g5akUh95TIE25fXNDW9jTuw
+ 1laf/y13P00/Vr0cqZnG4gANG5nsHqAWxXM5HVIfyHoJtkV8Y3ywYOpCu1bTJ9SAdcBp
+ IwK6x7RBhtQPK5SBsDtt8/W7bPJe2PUIz05Oy+hw+3XcR9uVdVt23gjQe3SlbSTmPRdw
+ 4XZQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV0AJOXwtjrBta6Vjftw+5c47MN/njQvgya7ruZ5mm6fM+4BYW8m88+fdMWl0zsFijDLm1iYl2InYRMuzePDuAcCMu1WQ==
-X-Gm-Message-State: AOJu0YxkbLeGArpUErV06dm/rWI2UBVLkOtxC816dk6hMMLnsBxVkvD+
- YIaTRgigqM+e5vsKwNwHMireix0zD/kymJIEB+Rjaw6bXRLXzhVP
-X-Google-Smtp-Source: AGHT+IFfkOwaGRoLsuVYCiZh0c+OkbnZZY1jJizRUUbHfA7VKz358F1siU9HpI6rc69deODy48cpUA==
-X-Received: by 2002:a5d:634d:0:b0:368:5a86:c1b7 with SMTP id
- ffacd0b85a97d-36bbc1c22cbmr2774055f8f.55.1722628325579; 
- Fri, 02 Aug 2024 12:52:05 -0700 (PDT)
+ AJvYcCV1ucB30CO2R3HkF34YoUyQJp7FDLnWGR1jN6zKwgEdOpKwSQ5WK9t+EI7kOFPP+i0lXV08f1+f5rFWb5Wn1eWckoe+2g==
+X-Gm-Message-State: AOJu0Yz5NtpW799gZcQquM2NmJuz3YirxcUB7+8EWpT4/6hl8SDj4uSg
+ wpfNWg/aN/oE3m9vP+Z+uISDHOWEJuDAwBKWAQGukDDRB/LaV5xe
+X-Google-Smtp-Source: AGHT+IFFmtLNXQgjsZ+Ocm9nTI0zXq0l5OZPYALWDF6njLKxxn72DzSOJUpvPuwieRQXzv9sOCRM5g==
+X-Received: by 2002:a5d:51c1:0:b0:367:89fd:1e06 with SMTP id
+ ffacd0b85a97d-36bbc1312c6mr2888533f8f.36.1722628590724; 
+ Fri, 02 Aug 2024 12:56:30 -0700 (PDT)
 Received: from localhost.localdomain
  (host-87-6-196-30.retail.telecomitalia.it. [87.6.196.30])
  by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-36bbd06d03fsm2643344f8f.91.2024.08.02.12.52.04
+ 5b1f17b1804b1-428e6e01d0asm43350485e9.16.2024.08.02.12.56.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Aug 2024 12:52:05 -0700 (PDT)
+ Fri, 02 Aug 2024 12:56:30 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+To: Crispin John <john@phrozen.org>, Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
  Chunfeng Yun <chunfeng.yun@mediatek.com>,
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, Sam Shih <sam.shih@mediatek.com>,
  u-boot@lists.denx.de
-Subject: [PATCH 8/8] clk: mediatek: mt7622: add missing A1/2SYS clock ID
-Date: Fri,  2 Aug 2024 15:48:32 +0200
-Message-ID: <20240802134835.24006-9-ansuelsmth@gmail.com>
+Subject: [PATCH 00/14] clk: mediatek: mt7981: clk migration for OF_UPSTREAM
+Date: Fri,  2 Aug 2024 15:53:01 +0200
+Message-ID: <20240802135326.25303-1-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240802134835.24006-1-ansuelsmth@gmail.com>
-References: <20240802134835.24006-1-ansuelsmth@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,31 +95,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add missing A1/2SYS clock ID just as a reference for OF_UPSTREAM
-support. These clocks are not defined and are not usable as current
-clock topckgen OPs doesn't support gates.
+These are all the required patches to migrate clk and correctly support
+OF_UPSTREAM. This will align the clk index to upstream to support the same
+clk implementation with downstream and upstream DTS.
 
-These special node won't ever be used by uboot hence just add them for
-reference.
+Christian Marangi (14):
+  clk: mediatek: mt7981: add missing clock for infra_ipcie_pipe
+  clk: mediatek: mt7981: fix typo for infra_i2c0_ck
+  clk: mediatek: mt7981: fix wrong mux width for pwm2 and pwm1 clock
+  clk: mediatek: mt7981: fix wrong clock definition for spi2
+  clk: mediatek: mt7981: add missing clock for spi1 node
+  clk: mediatek: mt7981: swap wrong clock-names for spi nodes
+  clk: mediatek: mt7981: fix wrong parent for TOP_FAUD clock
+  clk: mediatek: mt7981: fix wrong parent list for INFRA_PWM1_SEL mux
+  clk: mediatek: mt7981: implement sgmii0/1 clock
+  clk: mediatek: mt7981: drop 1/1 spurious factor
+  clk: mediatek: mt7981: replace infracfg ID with upstream linux
+  clk: mediatek: mt7981: fix support for pwm3 clock
+  clk: mediatek: mt7981: convert to unified infracfg gates + muxes
+  clk: mediatek: mt7981: rename CK to CLK
 
-Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
----
- include/dt-bindings/clock/mt7622-clk.h | 2 ++
- 1 file changed, 2 insertions(+)
+ arch/arm/dts/mt7981.dtsi               | 124 ++---
+ drivers/clk/mediatek/clk-mt7981.c      | 735 +++++++++++++------------
+ include/dt-bindings/clock/mt7981-clk.h | 429 +++++++--------
+ 3 files changed, 642 insertions(+), 646 deletions(-)
 
-diff --git a/include/dt-bindings/clock/mt7622-clk.h b/include/dt-bindings/clock/mt7622-clk.h
-index cd11a1c901e..cdbcaef76eb 100644
---- a/include/dt-bindings/clock/mt7622-clk.h
-+++ b/include/dt-bindings/clock/mt7622-clk.h
-@@ -117,6 +117,8 @@
- #define CLK_TOP_I2S1_MCK_DIV_PD		104
- #define CLK_TOP_I2S2_MCK_DIV_PD		105
- #define CLK_TOP_I2S3_MCK_DIV_PD		106
-+#define CLK_TOP_A1SYS_HP_DIV_PD		107
-+#define CLK_TOP_A2SYS_HP_DIV_PD		108
- 
- /* INFRACFG */
- 
 -- 
 2.45.2
 
