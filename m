@@ -4,93 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB0C3C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 15:28:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82A96C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 15:34:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF00D886B5;
-	Fri,  2 Aug 2024 17:28:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id C315E886B5;
+	Fri,  2 Aug 2024 17:34:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Unm43KX2";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="O1R+BFxZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9DA388BA4; Fri,  2 Aug 2024 17:28:35 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0D49F88BA4; Fri,  2 Aug 2024 17:34:37 +0200 (CEST)
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
+ [IPv6:2607:f8b0:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A48587CF8
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 17:28:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF9F088641
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 17:34:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
- [209.85.208.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 99A893FE08
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 15:28:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1722612512;
- bh=g9Ce5j57IKwpI3Zt8ZRFPemJeQPs+yd/Ap1IleNGiPw=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=Unm43KX2V4qxq1l+RK10WHWwjj7Z0qDiQOR8bedhMauhBh7pV6XGobZJsJsJxWbu3
- SjGRPYz5E40DojVGJp+rrDJPbr97zGb0vMs3wj3fEKpnT2ehQCQgBGucZFSWWhCz81
- vr4/HF36/VZgkpkzJo+smWNJb/yZVp8ov3cWBd2K0C6VgqaYD1/ZQtDqgJ8zN20FZs
- 8OLpYKJ2lfl1qUHu2yvuRtPlBLkeMU4jt3I6eoYDbIKGc6rkKBRu8qIXoY+cA09vxB
- ChNPXTY3VI0ByHdXX40BrsZ4xCz0fIQUpol1dzFs/uVg6W9TR5PJ3kEj+mqp5jot/c
- NjqJY/e7DOOFA==
-Received: by mail-ed1-f70.google.com with SMTP id
- 4fb4d7f45d1cf-5a0fa34d1c9so8477727a12.0
- for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 08:28:32 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-70d2d7e692eso6790440b3a.0
+ for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 08:34:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1722612872; x=1723217672; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=IdYHjvV7lgDCFxlR5UAni2X4xK7E4HbHP3VDa4Rps2Y=;
+ b=O1R+BFxZqyQYp2vN/vyZQbvu4+gKbA2eHqxMxNQeAqRccELshE1QisNXyXuDFtfgVQ
+ bBjBlI4UdZCb5vWDYrGSagUFRmwXcff5FIWbPMiI5se0Yi4ddyUlf5NJd7epxFKKRRq2
+ eCfi12ZpTNmATTISzpspKK2IMVzRRXetFS1CKLFjvisN4Oob1Y9tNe8oUc8NK9XiCzcQ
+ BIbO3gYFBNMQaqYYdQfvqQHI4AKJ0WXUtSUV6CJGMTmFD4Hz15iXdOTlDq1IU+424e1C
+ f/pt8MXzMs0vdt16xYavFspAerws5B48aqsf/ebT0a6KmSoj/wf5c+8k9pPXRWEg3Djz
+ A0Gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722612512; x=1723217312;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=g9Ce5j57IKwpI3Zt8ZRFPemJeQPs+yd/Ap1IleNGiPw=;
- b=Yt4seNLaUJbj0PZs9PPPQ0yYwLrZV1HCmxzYyUfcNIfDUto9O4yl7e/SDR6ZArCyTp
- 6ebaH9BXyfeVYswR7DDfjBRn2gKllUomlDL3aO3Y7eZULcyPar7qo4Glk+cFoGXwe6jV
- NJ1I7iCSXPUSQQeBqeCJ3Kq5tJKs8AkFsF/hF+nlNzGNieQwD2rJwa87yKBVUWd5ut9O
- p3mDieaHiT7N5oFZ87wyWaFpZ80/LZEF0LLdz1oceQIQ/1LG0vzN8v+/1swc+le1YuN9
- kDjnteiXa5nn5JQFVC5Jtn9pLG/7u9gpnvphqeZdFJPrcDunwqIOy8cieR2gjKMgyRUy
- CUlA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWvj/ml9LxzAh1hQG2zjZV4jh0do3n7Gp4bjHMvJ93upkII55OKryMTjaOBFwnnu2/tZ/1EwqTFIM12DrW07VJ5LdaHbQ==
-X-Gm-Message-State: AOJu0YyShAb0SfOFBB5esEaBMKzDVStouu8758ajwxXWphinE289OqRA
- jSzRz/ozPxyIgFy/kecaks/224+OhReiUZAqFx16Er2xwpSooFiD4/qhLQ1wEJ+6L8A9rcrmu7C
- Q1D+bohEYLcF6Bqdy5PBTVfFemvl9PoKcMzu0lyXG9tq5F77eKXMCVF4Xh/uYbY+G6jTrv+RXnU
- 8=
-X-Received: by 2002:aa7:cf09:0:b0:5a2:5bd2:ca50 with SMTP id
- 4fb4d7f45d1cf-5b7f5413badmr2850058a12.25.1722612512084; 
- Fri, 02 Aug 2024 08:28:32 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGwrwRrVHXk6ZZAp7UOdNmoIvzh5Do7A8126u1RD6I0++rtTUPcj+eigAs9JJ620ezs3JQRSQ==
-X-Received: by 2002:aa7:cf09:0:b0:5a2:5bd2:ca50 with SMTP id
- 4fb4d7f45d1cf-5b7f5413badmr2850029a12.25.1722612511493; 
- Fri, 02 Aug 2024 08:28:31 -0700 (PDT)
-Received: from [192.168.123.126]
- (ip-062-143-093-080.um16.pools.vodafone-ip.de. [62.143.93.80])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5b83b723e78sm1245865a12.59.2024.08.02.08.28.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 02 Aug 2024 08:28:30 -0700 (PDT)
-Message-ID: <27d5a36b-1485-4837-9427-c9cf44310837@canonical.com>
-Date: Fri, 2 Aug 2024 17:28:29 +0200
+ d=1e100.net; s=20230601; t=1722612872; x=1723217672;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IdYHjvV7lgDCFxlR5UAni2X4xK7E4HbHP3VDa4Rps2Y=;
+ b=mzJOxwPEA+AAGTreou6pez1qjiiL3xF//Blhzw6UwreO4YrzfRtnlLMtbA1W8BzxWT
+ ZZqiPDt5HJykmRtA7ojadZAg4UKA1/kozjLnRhBfWvZJV/AGkfFerF9036PKLAevTpbA
+ veaze714ehCgJrkJlclTz6+AdesF1zhn2SFeAixvEg89vfk9z5a8BLI5qnUGL9eY5VoN
+ 4jlyxBvJRtuzPVuXIjCfjzjOBw+KsyblnNJN7ZEdJ4HBFTFAwVj4j/n4Z27JTgzb8zeS
+ s6Uwts94doXgAT70xR5Q5pHejia+r5+J4GiiZAQPTKqA3h3oukAxnWDIkj5FIDRqoU6r
+ MvPw==
+X-Gm-Message-State: AOJu0YwBminiLc6kj3FT+OMJdkbgRDVLa3Wd4aPiJQkz1qRq7Fq0KaAx
+ koNI8b5dR+80dnsj1b0NgYVnNzJ3XC+4ALYq/sFn9TwNJHnco7rXP+wuHRuvU312/GzhdYU+9nm
+ MYydkV9okC9hIhB2ovF1Lirhd420uguMUFBMinw==
+X-Google-Smtp-Source: AGHT+IF+msUL9uV7nPW8OsJBv8wHJlSbqQgETJEACNyktPrqRxYJvEa/KtVKKFLepjMmb4WzUxZlBtGLXCsVFNvHfQ0=
+X-Received: by 2002:a05:6a00:9451:b0:70e:98e3:1aef with SMTP id
+ d2e1a72fcca58-7106d084745mr4183111b3a.29.1722612872054; Fri, 02 Aug 2024
+ 08:34:32 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] doc: document the pwm command
-To: Emil Kronborg <emil.kronborg@protonmail.com>
-Cc: quentin.schulz@cherry.de, u-boot@lists.denx.de, trini@konsulko.com
-References: <20240801100754.44732-1-emil.kronborg@protonmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240801100754.44732-1-emil.kronborg@protonmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20240731172556.1348487-1-raymond.mao@linaro.org>
+ <20240801204606.GJ3794063@bill-the-cat>
+In-Reply-To: <20240801204606.GJ3794063@bill-the-cat>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Fri, 2 Aug 2024 11:34:20 -0400
+Message-ID: <CAEfUkU+hDK2z4wJYSBU5_r1Bwa9npDDw0s6AixUBbM=wGGXzfw@mail.gmail.com>
+Subject: Re: [PATCH v5 00/27] Integrate MbedTLS v3.6 LTS with U-Boot
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
+ Stefan Bosch <stefan_b@posteo.net>, Mario Six <mario.six@gdsys.cc>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Andrew Davis <afd@ti.com>, Sumit Garg <sumit.garg@linaro.org>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Ilya Lukin <4.shket@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, Alexander Gendin <agendin@matrox.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,179 +105,278 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 01.08.24 12:07, Emil Kronborg wrote:
-> Signed-off-by: Emil Kronborg <emil.kronborg@protonmail.com>
-> ---
-> Changes in v3:
-> - The help text for 'pwm config' in the examples section is more
->    explicit about 20 us and 14 us for the period and duty cycle,
->    respectively.
-> - Fixed 'pwm enable' and 'pwm disable' in the examples section to only
->    expect 2 arguments.
-> - Rebased on top of master.
-> 
->   doc/usage/cmd/pwm.rst | 80 +++++++++++++++++++++++++++++++++++++++++++
->   doc/usage/index.rst   |  1 +
->   2 files changed, 81 insertions(+)
->   create mode 100644 doc/usage/cmd/pwm.rst
-> 
-> diff --git a/doc/usage/cmd/pwm.rst b/doc/usage/cmd/pwm.rst
-> new file mode 100644
-> index 000000000000..bd1255d82186
-> --- /dev/null
-> +++ b/doc/usage/cmd/pwm.rst
-> @@ -0,0 +1,80 @@
-> +.. SPDX-License-Identifier: GPL-2.0+:
-> +
-> +.. index::
-> +   single: pwm (command)
-> +
-> +pwm command
-> +===========
-> +
-> +Synopsis
-> +--------
-> +
-> +::
-> +
-> +    pwm invert <pwm_dev_num> <channel> <polarity> - invert polarity
-> +    pwm config <pwm_dev_num> <channel> <period_ns> <duty_ns> - config PWM
-> +    pwm enable <pwm_dev_num> <channel> - enable PWM output
-> +    pwm disable <pwm_dev_num> <channel> - disable PWM output
+Hi Tom,
 
-Thank you for documenting the command.
+On Thu, 1 Aug 2024 at 16:46, Tom Rini <trini@konsulko.com> wrote:
 
-To stay consistent with other pages, please, remove the descriptions 
-here. They are available below.
+> On Wed, Jul 31, 2024 at 10:25:10AM -0700, Raymond Mao wrote:
+> >
+> > Integrate MbedTLS v3.6 LTS (currently v3.6.0) with U-Boot.
+> >
+> > Motivations:
+> > ------------
+> >
+> > 1. MbedTLS is well maintained with LTS versions.
+> > 2. LWIP is integrated with MbedTLS and easily to enable HTTPS.
+> > 3. MbedTLS recently switched license back to GPLv2.
+> >
+> > Prerequisite:
+> > -------------
+> >
+> > This patch series requires mbedtls git repo to be added as a
+> > subtree to the main U-Boot repo via:
+> >     $ git subtree add --prefix lib/mbedtls/external/mbedtls \
+> >           https://github.com/Mbed-TLS/mbedtls.git \
+> >           v3.6.0 --squash
+> > Moreover, due to the Windows-style files from mbedtls git repo,
+> > we need to convert the CRLF endings to LF and do a commit manually:
+> >     $ git add --renormalize .
+> >     $ git commit
+> >
+> > New Kconfig options:
+> > --------------------
+> >
+> > `MBEDTLS_LIB` is for MbedTLS general switch.
+> > `MBEDTLS_LIB_CRYPTO` is for replacing original digest and crypto libs
+> with
+> > MbedTLS.
+> > `MBEDTLS_LIB_X509` is for replacing original X509, PKCS7, MSCode, ASN1,
+> > and Pubkey parser with MbedTLS.
+> > `LEGACY_CRYPTO` is introduced as a main switch for legacy crypto library.
+> > `LEGACY_CRYPTO_BASIC` is for the basic crypto functionalities and
+> > `LEGACY_CRYPTO_CERT` is for the certificate related functionalities.
+> > For each of the algorithm, a pair of `<alg>_LEGACY` and `<alg>_MBEDTLS`
+> > Kconfig options are introduced. Meanwhile, `SPL_` Kconfig options are
+> > introduced.
+> >
+> > In this patch set, MBEDTLS_LIB, MBEDTLS_LIB_CRYPTO and MBEDTLS_LIB_X509
+> > are by default enabled in qemu_arm64_defconfig and sandbox_defconfig
+> > for testing purpose.
+> >
+> > Patches for external MbedTLS project:
+> > -------------------------------------
+> >
+> > Since U-Boot uses Microsoft Authentication Code to verify PE/COFFs
+> > executables which is not supported by MbedTLS at the moment,
+> > addtional patches for MbedTLS are created to adapt with the EFI loader:
+> > 1. Decoding of Microsoft Authentication Code.
+> > 2. Decoding of PKCS#9 Authenticate Attributes.
+> > 3. Extending MbedTLS PKCS#7 lib to support multiple signer's
+> certificates.
+> > 4. MbedTLS native test suites for PKCS#7 signer's info.
+> >
+> > All above 4 patches (tagged with `mbedtls/external`) are submitted to
+> > MbedTLS project and being reviewed, eventually they should be part of
+> > MbedTLS LTS release.
+> > But before that, please merge them into U-Boot, otherwise the building
+> > will be broken when MBEDTLS_LIB_X509 is enabled.
+> >
+> > See below PR link for the reference:
+> > https://github.com/Mbed-TLS/mbedtls/pull/9001
+> >
+> > Miscellaneous:
+> > --------------
+> >
+> > Optimized MbedTLS library size by tailoring the config file
+> > and disabling all unnecessary features for EFI loader.
+> > From v2, original libs (rsa, asn1_decoder, rsa_helper, md5, sha1, sha256,
+> > sha512) are completely replaced when MbedTLS is enabled.
+> > From v3, the size-growth is slightly reduced by refactoring Hash
+> functions.
+> >
+> > Target(QEMU arm64) size-growth when enabling MbedTLS:
+> > v1: 6.03%
+> > v2: 4.66%
+> > From v3: 4.55%
+> >
+> > Please see the latest output from buildman for size-growth on QEMU arm64,
+> > Sandbox and Nanopi A64. [1]
+>
+> Let us inline the growth on qemu_arm64 for a moment:
+>    aarch64: (for 1/1 boards) all +6916.0 bss -32.0 data -64.0 rodata
+> +200.0 text +6812.0
+>             qemu_arm64     : all +6916 bss -32 data -64 rodata +200 text
+> +6812
+>                u-boot: add: 28/-17, grow: 12/-16 bytes: 15492/-8304 (7188)
+>                  function                                   old     new
+>  delta
+>                  mbedtls_internal_sha1_process                -    4540
+>  +4540
+>                  mbedtls_internal_md5_process                 -    2928
+>  +2928
+>                  mbedtls_internal_sha256_process              -    2052
+>  +2052
+>                  mbedtls_internal_sha512_process              -    1056
+>  +1056
+>                  K                                            -     896
+> +896
+>                  mbedtls_sha512_finish                        -     556
+> +556
+>                  mbedtls_sha256_finish                        -     484
+> +484
+>                  mbedtls_sha1_finish                          -     420
+> +420
+>                  mbedtls_sha512_starts                        -     340
+> +340
+>                  mbedtls_md5_finish                           -     336
+> +336
+>                  mbedtls_sha512_update                        -     264
+> +264
+>                  mbedtls_sha256_update                        -     252
+> +252
+>                  mbedtls_sha1_update                          -     236
+> +236
+>                  mbedtls_md5_update                           -     236
+> +236
+>                  mbedtls_sha512                               -     148
+> +148
+>                  mbedtls_sha256_starts                        -     124
+> +124
+>                  hash_init_sha512                            52     128
+>  +76
+>                  hash_init_sha256                            52     128
+>  +76
+>                  mbedtls_sha1_starts                          -      72
+>  +72
+>                  mbedtls_md5_starts                           -      60
+>  +60
+>                  hash_init_sha1                              52     112
+>  +60
+>                  mbedtls_platform_zeroize                     -      56
+>  +56
+>                  mbedtls_sha512_free                          -      16
+>  +16
+>                  mbedtls_sha256_free                          -      16
+>  +16
+>                  mbedtls_sha1_free                            -      16
+>  +16
+>                  mbedtls_md5_free                             -      16
+>  +16
+>                  hash_finish_sha512                          72      88
+>  +16
+>                  hash_finish_sha256                          72      88
+>  +16
+>                  hash_finish_sha1                            72      88
+>  +16
+>                  sha512_csum_wd                              68      80
+>  +12
+>                  sha256_csum_wd                              68      80
+>  +12
+>                  sha1_csum_wd                                68      80
+>  +12
+>                  md5_wd                                      68      80
+>  +12
+>                  mbedtls_sha512_init                          -      12
+>  +12
+>                  mbedtls_sha256_init                          -      12
+>  +12
+>                  mbedtls_sha1_init                            -      12
+>  +12
+>                  mbedtls_md5_init                             -      12
+>  +12
+>                  memset_func                                  -       8
+>   +8
+>                  sha512_update                                4       8
+>   +4
+>                  sha384_update                                4       8
+>   +4
+>                  sha256_update                               12       8
+>   -4
+>                  sha1_update                                 12       8
+>   -4
+>                  sha256_process                              16       -
+>  -16
+>                  sha1_process                                16       -
+>  -16
+>                  hash_update_sha512                          36      16
+>  -20
+>                  hash_update_sha256                          36      16
+>  -20
+>                  hash_update_sha1                            36      16
+>  -20
+>                  MD5Init                                     56      36
+>  -20
+>                  sha1_starts                                 60      36
+>  -24
+>                  hash_update_sha384                          36       -
+>  -36
+>                  hash_init_sha384                            52       -
+>  -52
+>                  sha384_csum_wd                              68      12
+>  -56
+>                  sha256_starts                              104      40
+>  -64
+>                  sha256_padding                              64       -
+>  -64
+>                  sha1_padding                                64       -
+>  -64
+>                  hash_finish_sha384                          72       -
+>  -72
+>                  sha512_finish                              152      36
+> -116
+>                  sha512_starts                              168      40
+> -128
+>                  sha384_starts                              168      40
+> -128
+>                  sha384_finish                              152       4
+> -148
+>                  MD5Final                                   196      44
+> -152
+>                  sha512_base_do_finalize                    160       -
+> -160
+>                  static.sha256_update                       228       -
+> -228
+>                  static.sha1_update                         240       -
+> -240
+>                  sha512_base_do_update                      244       -
+> -244
+>                  MD5Update                                  260       -
+> -260
+>                  sha1_finish                                300      36
+> -264
+>                  sha256_finish                              404      36
+> -368
+>                  sha256_armv8_ce_process                    428       -
+> -428
+>                  sha1_armv8_ce_process                      484       -
+> -484
+>                  sha512_K                                   640       -
+> -640
+>                  sha512_block_fn                           1212       -
+>  -1212
+>                  MD5Transform                              2552       -
+>  -2552
+>
+> And to start with, that's not bad. In fact, tossing LTO in before mbedTLS
+> only changes
+> the top-line a little:
+>    aarch64: (for 1/1 boards) all +5120.0 bss -16.0 data -64.0 rodata
+> +200.0 text +5000.0
+>             qemu_arm64     : all +5120 bss -16 data -64 rodata +200 text
+> +5000
+>                u-boot: add: 19/-18, grow: 11/-7 bytes: 14696/-7884 (6812)
+>
+> But, is there something we can do still? mbedTLS is a more robust
+> solution and I'm accepting there will be growth. But still the
+> process/start/finish is much larger. Is there something configurable
+> there?
+>
+> I have investigated all those MbedTLS native functions with big-size
+(_process/_update/_finish).
+For MD5 and SHA1, we don't have turnable configs.
+For SHA256 and SHA512, there are a few configs:
+1. Performance configs only for Armv8/a64.
+    I didn't turn that on, which might affect the target size as well.
+2. Smaller implementation with lower size (only for non-Armv8/a64) at the
+expense of losing
+    performance.
+I didn't enable both, as #1 is more for performance and might potentially
+increase target size;
+#2 compromises the performance and only for non-Armv8/a64.
+Looks like that both don't help in reducing the size of qemu_arm64.
+But I will try #1 on qemu_arm64 and  #2 on sandbox and let you know
+the size impact soon.
 
-> +
-> +
-> +Description
-> +-----------
-> +
-> +The ``pwm`` command is used to access and configure PWM (Pulse Width Modulation)
-> +signals. For all subcommands, the following arguments are common:
-> +
-> +pwm_dev_num
-> +    device number
-> +
-> +channel
-> +    channel on chosen device
-> +
-> +pwm invert
-> +----------
-> +
-> +The signal's active and inactive states are swapped.
-
-This would imply that all invocations irrespective of the polarity value 
-swap the active and inactive state.
-
-I guess we could say here:
-
-The polarity of the signal is set.
-
-If the value of `polarity` is 0, the default polarity is used.
-If the value of `polarity` is 1, the polarity is inverted.
-
-> +
-> +pwm config
-> +----------
-> +
-> +Configure the period and duty cycle in nanoseconds.
-
-According to https://en.wikipedia.org/wiki/Duty_cycle "duty cycle" is 
-the ratio of "pulse active time" and "total period". This implies that 
-it is dimensionless.
-
-%s/duty cycle/pulse width/ or "duty period" as in pwm.h.
-
-> +
-> +pwm enable
-> +----------
-> +
-> +Enable output on the configured device and channel.
-
-What happens if the device-channel combination is not configured yet?
-
-> +
-> +pwm disable
-> +-----------
-> +
-> +Disable output on the configured device and channel.
-
-
-
-Please, describe the parameters here:
-
-pwm_dev_num
-    Device number of the pulse width modulation device
-
-channel
-    Output channel of the PWM device
-
-polarity
-    * 0 - use normal polarity
-    * 1 - use inverted polarity
-
-duty_ns
-    pulse width in ns
-
-period_ns
-    cycle time in ns
-
-
-> +
-> +Examples
-> +--------
-> +
-> +Configure device 0 channel 0 to 20 us period and 14 us (that is, 70%) duty cycle::
-
-Please, add comma, use 'µs', and don't misuse 'duty cycle':
-
-"Configure device 0, channel 0 to 20 µs period time and 14 µs (that is, 
-70%) pulse width::"
-
-Best regards
-
-Heinrich
-
-> +
-> +    => pwm config 0 0 20000 14000
-> +
-> +Enable output on the configured device and channel::
-> +
-> +    => pwm enable 0 0
-> +
-> +Disable output on the configured device and channel::
-> +
-> +    => pwm disable 0 0
-> +
-> +Invert the signal on the configured device and channel::
-> +
-> +    => pwm invert 0 0 1
-> +
-> +Configuration
-> +-------------
-> +
-> +The ``pwm`` command is only available if CONFIG_CMD_PWM=y.
-> +
-> +Return value
-> +------------
-> +
-> +If the command succeeds, the return value ``$?`` is set to 0. If an error occurs, the
-> +return value ``$?`` is set to 1.
-> diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-> index 49b354e6ffd2..1adab5283950 100644
-> --- a/doc/usage/index.rst
-> +++ b/doc/usage/index.rst
-> @@ -92,6 +92,7 @@ Shell commands
->      cmd/pinmux
->      cmd/printenv
->      cmd/pstore
-> +   cmd/pwm
->      cmd/qfw
->      cmd/read
->      cmd/reset
-> 
-> base-commit: 7010f22eba35b2a6b66ba37ce565e566ca08c68f
-
+Thanks.
+Regards,
+Raymond
