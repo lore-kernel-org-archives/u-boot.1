@@ -4,82 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E566C52D6F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 14:38:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6815C52D6F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 15:04:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8780288B80;
-	Fri,  2 Aug 2024 16:38:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 365E488B80;
+	Fri,  2 Aug 2024 17:04:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cUXdpDpe";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LG1BCtc3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FB2C88B8E; Fri,  2 Aug 2024 16:38:38 +0200 (CEST)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
+ id 8CE3588BB4; Fri,  2 Aug 2024 17:04:39 +0200 (CEST)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58C4E88B63
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 16:38:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2148988B22
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 17:04:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-5d5cbe88f70so4126068eaf.0
- for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 07:38:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=macroalpha82@gmail.com
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3daf0e73a5bso5434596b6e.0
+ for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 08:04:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1722609515; x=1723214315; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lsUbiXNALZ3jUmRIVGqN655wqQqo1YuHPPAu+cfowKs=;
- b=cUXdpDpeP3MBz7sIaKPL/pj37fG7g/S7derH7brRFYotzJDQtFsobK8pGtjlIbnBCD
- 3oko0gN3uhYYvNsPTebX+V2tBmvmZIfyHyA+5qyZfd7adrzo1aLumYWegMuwXlYtZ5WJ
- 7E4eV6ATB3i/KOiwNO1AhMJdoo3UBOcPrh084=
+ d=gmail.com; s=20230601; t=1722611076; x=1723215876; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:subject:cc
+ :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=4wr3zAk5fhLx5Q6lEcEAv+F5CVjsIUuiddTnX6LD5eA=;
+ b=LG1BCtc3SflANtuO/bAyMoRli8PSqJhv413nDNpbr3jT+A2JEUfbKpCR3ix3ytdrmv
+ iFZ6MayGInRIU2zykR0cl2GTPIfnAtuT/CxIAvaY3h8ILNcMeUqTSVJBndujXEoFOq67
+ QYtOMzV7+fAA90Ofd3Si/FYclW0r96xzvXOwHQNYLeKKAC9ZcoI4P14YnkEmLTLLqU4h
+ bN1CVMvCYg6yWfxgbdcu5NGZ8/yYeEwQ1tmIrDmR1hPSYVXM4Oq6t788XRazF8A18Seb
+ FLqqlyfPsF+jmOq+Drjhe1wLUfQ7sReTUqUYK6/n57YQ+EgH+pJKOweawDKVLxpIp937
+ JMFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722609515; x=1723214315;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1722611076; x=1723215876;
+ h=in-reply-to:content-disposition:mime-version:references:subject:cc
+ :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lsUbiXNALZ3jUmRIVGqN655wqQqo1YuHPPAu+cfowKs=;
- b=FK0aP/xKVSKkqVZEUZKBPVOfppYsH02riNwGur+azvu5MfNiGITN+9PgAa0HoPdC+l
- VTJ69337qIXuA6eGrN132ZcyEaTOMlAz8zek8ihD8u3nkVn1Oo0A1OiZpxGHpQafUiOt
- nGnhQW3Un/5jZsS/UTO5OS+hTJo4QmcPzokYzCnTtw2VR755wuT+3X/hZuGQpGWj7U9Q
- 81TT/7fFCQgRkKCnLnP/jKeKohkzMRoc+SYieNl1zDq6v0gt9oVC8K4MoCqmygVPrTT1
- 8/zfGEy/j+eRyr5lLJMGZKaOPmwUvWWglbVze8VphTg7/709/ntJiEN7aVZLY6Bsak9k
- 7FYw==
-X-Gm-Message-State: AOJu0Yzd5hcZlLA44hubp/5tSxovPHPCsL4yUAQ/5k8ST4tvwKRl95V9
- Y5DtvTEl8owXwJ5SfESLOktCXp3BiT2YDomTJweSNjhKrFe+x47L9o/bKS667X0=
-X-Google-Smtp-Source: AGHT+IHl9Ltscj2oGFTkw1POHq7gkA8oOqmeEokk8uFBKaRJrKY8QnqplYZlUmX5oJSUyYTn0FjXrA==
-X-Received: by 2002:a05:6820:612:b0:5d6:f4b:8fb6 with SMTP id
- 006d021491bc7-5d6636d2cb5mr4458067eaf.3.1722609515065; 
- Fri, 02 Aug 2024 07:38:35 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-190.totalplay.net.
- [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5d757178a18sm345064eaf.4.2024.08.02.07.38.33
+ bh=4wr3zAk5fhLx5Q6lEcEAv+F5CVjsIUuiddTnX6LD5eA=;
+ b=BKjfLOzTJgNbtz9OD0cYqGmpSsvUD/USKH1yiOW7sGq70KiBfzvgoVe2qdMkfYztxr
+ B6RheejEOTeiuC9lK71TsXyPHaaivcCA9dkj5KpZrL0TFM7Y/j6HOXJP9Xw39M2S7FaT
+ sspMMUTPZxINARfu6XJaHraEJzFQTRdjLFOxhhhpUIMrSWTYJKeB9fkq2fWhvNoq1LWu
+ wQFTzeOlGT0qzfzwdISmE/InuWpAi0u1RhsQA9aqMWgvzcFrSckzduygr+UoOGAcONfX
+ Bxgz3lZkJJy8c7ialelowQc301CvT0I2Kran0DJ0d9XawbioEc+a90A2Zb4IcLt5jdO9
+ EJCg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXzXmsB047V1EfZ9fz8tbc6Ew6M66d8tP34ASMml7PF5tFvYzwZ4yIHdjQaVMQREfaCzTh5sFAwz25iv0l64rQ5UNS65g==
+X-Gm-Message-State: AOJu0Yz4bMEK2k8PGebzlN/f8QW/Y+F/QBVJjlBzsDTlY+8DhnGF3NoG
+ pGm+IdRPb7P+J+HKb1SA1NsKvqEEoq1zQmnjFUxXNtxbjkxu5OtO
+X-Google-Smtp-Source: AGHT+IHUHAn8SA8HUQPAPDCNPGn2Bzf5+bYBoI/TIdBuZGKx2BKgq0MdLv4kfAd6si17RsGHrMt8qw==
+X-Received: by 2002:a05:6808:2014:b0:3d9:e22a:8fb8 with SMTP id
+ 5614622812f47-3db55818184mr5126020b6e.26.1722611075685; 
+ Fri, 02 Aug 2024 08:04:35 -0700 (PDT)
+Received: from neuromancer. ([2600:1700:fb0:1bcf::54])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3db5637117csm431705b6e.23.2024.08.02.08.04.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Aug 2024 07:38:34 -0700 (PDT)
-Date: Fri, 2 Aug 2024 08:38:31 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Eddie James <eajames@linux.ibm.com>, Sean Anderson <seanga2@gmail.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>
-Subject: Re: [PATCH v6 00/20] Introduce the lwIP network stack
-Message-ID: <20240802143831.GN3794063@bill-the-cat>
-References: <cover.1722601509.git.jerome.forissier@linaro.org>
+ Fri, 02 Aug 2024 08:04:35 -0700 (PDT)
+Message-ID: <66acf583.050a0220.3cb48d.242d@mx.google.com>
+X-Google-Original-Message-ID: <Zqz1glvIw+SPNhe1@neuromancer.>
+Date: Fri, 2 Aug 2024 10:04:34 -0500
+From: Chris Morgan <macroalpha82@gmail.com>
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Andre Przywara <andre.przywara@arm.com>, u-boot@lists.denx.de,
+ sjg@chromium.org, jernej.skrabec@gmail.com,
+ neil.armstrong@linaro.org, hdegoede@redhat.com,
+ jagan@amarulasolutions.com, trini@konsulko.com, ryan@testtoast.com,
+ Chris Morgan <macromorgan@hotmail.com>
+Subject: Re: [PATCH 9/9] sunxi: Add support for Anbernic RG35XX-2024
+References: <20240801225519.336667-1-macroalpha82@gmail.com>
+ <20240801225519.336667-10-macroalpha82@gmail.com>
+ <CAFA6WYP7fnswZ4BHtqd+nKT7MZeBrKgocQf-WpJ7-HqjBOaFvQ@mail.gmail.com>
+ <20240802105719.0dab15cb@donnerap.manchester.arm.com>
+ <CAFA6WYMqYx-sEYTKcNPDbqYii_67YVUq1xnKKRjH+F7FjOMacw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3IXNR5OR3le+/N+K"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <cover.1722601509.git.jerome.forissier@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <CAFA6WYMqYx-sEYTKcNPDbqYii_67YVUq1xnKKRjH+F7FjOMacw@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,55 +101,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, Aug 02, 2024 at 04:08:39PM +0530, Sumit Garg wrote:
+> Hi Andre,
+> 
+> On Fri, 2 Aug 2024 at 15:27, Andre Przywara <andre.przywara@arm.com> wrote:
+> >
+> > On Fri, 2 Aug 2024 12:24:56 +0530
+> > Sumit Garg <sumit.garg@linaro.org> wrote:
+> >
+> > Hi Sumit,
+> >
+> > > Hi Chris,
+> > >
+> > > On Fri, 2 Aug 2024 at 04:29, Chris Morgan <macroalpha82@gmail.com> wrote:
+> > > >
+> > > > From: Chris Morgan <macromorgan@hotmail.com>
+> > > >
+> > > > The Anbernic RG35XX series of devices are based around an Allwinner
+> > > > H700 SoC with 1GB of RAM, 2 SD cards, and multiple input buttons.
+> > > >
+> > > > This bootloader has been tested on the Anbernic RG35XX-2024 and
+> > > > RG35XX-H, but should be suitable for the entire lineup of H700 based
+> > > > devices.
+> > > >
+> > > > A future series of updates will add board selection logic to identify
+> > > > and load the correct device tree automatically, and will switch to
+> > > > utilizing a mainline device tree.
+> > >
+> > > I can already see the upstream DT subtree containing DTS for this board as:
+> > >
+> > > ./dts/upstream/src/arm64/allwinner/sun50i-h700-anbernic-rg35xx-2024.dts
+> > >
+> > > Are there any major differences that won't allow you to switch to
+> > > OF_UPSTREAM for this board?
+> >
+> > In this case there are no differences between the DT in the kernel repo
+> > and what we put in U-Boot. The main reason for me holding back the switch
+> > to OF_UPSTREAM for the H616 was indeed the rather slow update cadence,
+> > which somewhat slows down upstreaming of new boards like this. Doing this
+> > separately gives us a bit more control and freedom to take DT patches
+> > early, for instance when they appear in some Linux -rc1, or even before
+> > that (linux-next).
+> > I explained my position in more detail here:
+> > https://lore.kernel.org/u-boot/191A0F66-E2AE-4D1B-ACBE-E411E135BB61@arm.com/
+> >
+> 
+> I can see the reasoning, thanks.
+> 
+> > I think Tom partly convinced me that regular updates together with
+> > cherry-picking should solve most of those problems, so I will probably do
+> > the switch for the next cycle.
+> >
+> 
+> Glad to hear that. Cherry-picking has been working really well for
+> Rockchip platforms [1] [2] [3] as the changes appear in Linux -rc1.
+> Also, it pretty much avoids maintainers to review the DT changes
+> unless there are some bits added via *-u-boot.dtsi.
+> 
+> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=417233
+> [2] https://patchwork.ozlabs.org/project/uboot/list/?series=417377
+> [3] https://patchwork.ozlabs.org/project/uboot/list/?series=417353
+> 
+> -Sumit
 
---3IXNR5OR3le+/N+K
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The specific differences between this and the upstream tree is that the
+upstream tree is missing the switch from rsb to i2c for the PMIC. That
+said, if we can cherry pick the change (it was just accepted and should
+end up in 6.12) that would work and I can start from the get-go with an
+upstream tree. There may be other differences, but they are ultimately
+superficial for U-Boot. I'll still make this for the RK35XX-2024 only
+for now, because I need to finish some stuff in the detection logic.
 
-On Fri, Aug 02, 2024 at 03:13:47PM +0200, Jerome Forissier wrote:
-
-> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
-> library for the network stack" [1]. The goal is to introduce the lwIP TCP=
-/IP
-> stack [2] [3] as an alternative to the current implementation in net/,
-> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
-> reasons for doing so are:
-> - Make the support of HTTPS in the wget command easier. Javier T. and
-> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
-> so. With that it becomes possible to fetch and launch a distro installer
-> such as Debian etc. using a secure, authenticated connection directly
-> from the U-Boot shell. Several use cases:
->   * Authentication: prevent MITM attack (third party replacing the
-> binary with a different one)
->   * Confidentiality: prevent third parties from grabbing a copy of the
-> image as it is being downloaded
->   * Allow connection to servers that do not support plain HTTP anymore
-> (this is becoming more and more common on the Internet these days)
-> - Possibly benefit from additional features implemented in lwIP
-> - Less code to maintain in U-Boot
-
-Please rebase this on top of current master and resend, thanks.
-
---=20
-Tom
-
---3IXNR5OR3le+/N+K
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmas72AACgkQFHw5/5Y0
-tywnkwwAlaKr8FtU550z7fVIDhQTds/8yOa6S4/lrF+9YgWwLLAGz3CD+3T8wenP
-WiUp7RNSEto0bTju3dGxHNUg77Lk8LzgziXAc5te70zr885oOZI5p6EJQ/ZpxUSq
-TI2F/wc44TftGZ+n5Nv41VGLHZWFffC4lYPshwRT/301jg14fl/Kef7F/IsMWv6v
-U5sNmfOZcPm05DdcAWbnZ5GrL1DgBmpgvNgXLFsP8A8OgCI7Y+orhJASkc3dvgzG
-iREUrgzTjNw6bIGnr34ABPMhCKDZLEt5487AZgUNFD64oVF27YrQXbOMVA8/vvvT
-ZHQtQRDny8wzdnLuoRY1LW5wUhhtNoaHoA7DXg+qoFXs7uP1kyqkxCIBH8ZStEIr
-58qJrSjQwOOta2tY+sDha30x3ppPxEkdLvI+dkFzi7zO3GMy6px37DtVvYy46KPC
-i0CeCj/iscmfR8PGkn9/08ZU4Ies4cRgZtYfAZ31smj5JaJBJgPPV4kgd4B5qkOV
-qROVRrM1
-=2qP2
------END PGP SIGNATURE-----
-
---3IXNR5OR3le+/N+K--
+Thank you.
+Chris
