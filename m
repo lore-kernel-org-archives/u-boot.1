@@ -4,90 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4158C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 19:09:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1B59C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 19:19:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF4B788BC8;
-	Fri,  2 Aug 2024 21:09:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E194988BF0;
+	Fri,  2 Aug 2024 21:19:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Fv61DgcB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lHz8ha++";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B94888BD9; Fri,  2 Aug 2024 21:09:14 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 472A088BC8; Fri,  2 Aug 2024 21:19:00 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32A4588BC8
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 21:09:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BEB688BC8
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 21:18:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=virag.david003@gmail.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5a1337cfbb5so13473878a12.3
- for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 12:09:12 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a7a9a7af0d0so1105643466b.3
+ for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 12:18:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722625751; x=1723230551; darn=lists.denx.de;
- h=mime-version:user-agent:content-transfer-encoding:references
- :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
- :date:message-id:reply-to;
- bh=V5bN+tdWK/wiRNxEeHmWvujl3Bp2Tb55Tre1ZtKmvdY=;
- b=Fv61DgcB11JvBFwsgnHTfQv+TIoo9BV5wMqrWr/fOCljTR1KbDZLTQnkN0vOmvyiIQ
- NVoqtO+ddbnqeHWEO7ztjVJVDDggChywTVmrNM/6LezQpRQI3m4RsBgni6yPp7Z/nTLo
- pc0Yk9DhbQFmZaAMPM87e47u9/zCbpPuW8oafCNnJBsqza421J5vITOZ7/SvYgyY3rI5
- DZOs0QsExdwA0X18hdeFYMvMumrqT77Dv2ag79y6cUK7WT5BBfpNyIdX2q2OyTDAIFL8
- +Ptfby3VVcPUmf2a6g6ubD65CxvLojZw1vDu/4iF9cy1R5BQ7XeBZBJmvBfvG0SKswGH
- fmww==
+ d=gmail.com; s=20230601; t=1722626338; x=1723231138; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=X9fMILRQigwV/LEcRAmXGUeI4up2nJMbbsv1HpFttTs=;
+ b=lHz8ha++DLi95nZGJLtQviMkfH9A9q9vlDJ4a/Mhxh3Qxs7HgGVJMRTaUPrZ7U3/3T
+ bNU4HCAdEEbjJnuvKoIm4rAJ0frZksfAb49JTqk+5M8oxjxksHVLUSq8sSk1PpZf4vOG
+ i/WW+QuGOXdibMB80eGkBmnh9HYRDzO69d2AmHlH5Lvrcys6Ezgi64q8oc7/gEvGaGu1
+ 1aOhkYJpdPWsF3vHNiivT1JVBv7Fu9kCE+AWB3e2mhYFRdcoNrhg68Anx5vB144IcFe1
+ iB5109h7T2aSs1cihSvTV+xSWm5PsEhZVGFfr2QhsntWrDxh+2Xppth0cNj0j+4KjYM2
+ HNdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722625751; x=1723230551;
- h=mime-version:user-agent:content-transfer-encoding:references
- :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=V5bN+tdWK/wiRNxEeHmWvujl3Bp2Tb55Tre1ZtKmvdY=;
- b=X5GW6f4jvAnP1Kfy79QT0Yz8pM9rBaUipS0E/i1jSoJIBPr6ztQL+h0ZYXQClx0bLj
- 6QCL0c3+Uqzd3RKgnzRcXCgLeyOq7MeVY+DaA1+3SG7zg8lN1wbdpCYDTiZEDe3lk/IJ
- TjUKHxo89VfMioKbJrzMfM2fYvz9yxtEMrT9f1gAvLW9zXqzZ9H+lYd2woc1SRZoQ41N
- rTOdAiXqOA61QDHza3uW4R+UjnJ3VzcW3dgncLAPqqBtqvGpRQtQKVp4mw1gqXp8dqEA
- rqTRQqwGDWv7Rrk/HeVDm2UCsyBwcptM34Ccopl5iz3NHEuhY2Yvuy4UtpsXZaUhz6Ob
- bTSA==
+ d=1e100.net; s=20230601; t=1722626338; x=1723231138;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=X9fMILRQigwV/LEcRAmXGUeI4up2nJMbbsv1HpFttTs=;
+ b=Z0zdAbqOJtWXDikkcOYzjmd7L01AlbKvByJT2w+SmmxsnBHIe3f4MUnc7Ap1mr8vLg
+ EQoVoUXQrx5j/kT86e9tPSoVw5sT2qnK3DTQiMiKaxaou2CxYPJONSPUmB9BEzASFhqN
+ IKb4xou8XOQjOYQdDnfR1c6DjMQo5Cs0wr9PVctFneiFQ7dN4KktCsHutozwKQLDnsCZ
+ ZK1TG8UBGsNYcOoj7lj3hns5YcyEVFKMEfErZhNuTlgGZi3vGCFM3xj/CbOCD2EpCpUf
+ Hn+45pqNog1SQoC1v3UTCT84jFepXZ1W1+lykry6WnvdJZJCbRM5g6sCs/m2TZzYQvfY
+ mXiw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUzZTImoSWTHST4iibShnHoXfLeIjjf1hh8+5T5nE6aC/M9WccW3fNebMkPfTBP8EaCpDJxVcc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy8DfF9mjNHFN4NhD24kl5lnESf+r1mfbfk1BhWC64/3Bm6O1E8
- mfNhMvPsrJxJPsTq6p/UgdhZ9NShanpxxV2W6nAKNQniqwK8Q6vG
-X-Google-Smtp-Source: AGHT+IFf0VbxOfXmAnnbUKRA7F+2JaW23TGFQXlcfFWCAEeEkZSXDbiFR1SOYhHCv6M3TAYFKpM/7A==
-X-Received: by 2002:a50:fc0c:0:b0:5a4:12ea:333f with SMTP id
- 4fb4d7f45d1cf-5b7f5dc279amr2811383a12.37.1722625751101; 
- Fri, 02 Aug 2024 12:09:11 -0700 (PDT)
-Received: from ?IPv6:2a02:ab88:3711:c80:e7a7:e025:f1a5:ef78?
- ([2a02:ab88:3711:c80:e7a7:e025:f1a5:ef78])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5b83960f101sm1426738a12.20.2024.08.02.12.09.10
+ AJvYcCWM6uKtWPWapJoTudsC2VIfCpRZyoi80DIMTgkTD2AGXvpINefoyUko/o4QB+8aSDN3QNBDudEsm9u0F0RGHU1LYy9SEg==
+X-Gm-Message-State: AOJu0YxqsuerKGc/zc0RLCNThAlEcbqowqlMDMboIF8feGOHw8nMZnui
+ xqPkVaBcVQvyvE2c7EK0Mf9jiodP/paxknJpMY5MYCHUnLpv+Hmo
+X-Google-Smtp-Source: AGHT+IFcq8a2kWoBgLUbcURooBCa8jMf/iY4zcSbzNIuNTAKBkqnA915hmVDvatKawm/mICVVFM0Ig==
+X-Received: by 2002:a17:907:9450:b0:a7a:8cb9:7490 with SMTP id
+ a640c23a62f3a-a7dc5098889mr292030166b.47.1722626337451; 
+ Fri, 02 Aug 2024 12:18:57 -0700 (PDT)
+Received: from localhost.localdomain ([2a02:ab88:3711:c80:e7a7:e025:f1a5:ef78])
+ by smtp.googlemail.com with ESMTPSA id
+ a640c23a62f3a-a7dc9e8383dsm130128066b.173.2024.08.02.12.18.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Aug 2024 12:09:10 -0700 (PDT)
-Message-ID: <0452dfa8a4945293869698f825b778e4d86a954a.camel@gmail.com>
-Subject: Re: [PATCH 2/2] i2c: samsung: Support platforms other than EXYNOS4
- and EXYNOS5
+ Fri, 02 Aug 2024 12:18:57 -0700 (PDT)
 From: David Virag <virag.david003@gmail.com>
-To: Henrik Grimler <henrik@grimler.se>
-Cc: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>, Paul Barker
- <paul.barker.ct@bp.renesas.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>,  Caleb Connolly
- <caleb.connolly@linaro.org>, Minda Chen <minda.chen@starfivetech.com>, Neil
- Armstrong <neil.armstrong@linaro.org>, Sam Protsenko
- <semen.protsenko@linaro.org>,  Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Date: Fri, 02 Aug 2024 21:10:14 +0200
-In-Reply-To: <20240802173147.GA1684431@l14.localdomain>
-References: <20240727174152.306827-1-virag.david003@gmail.com>
- <20240727174152.306827-3-virag.david003@gmail.com>
- <20240802173147.GA1684431@l14.localdomain>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.52.3 
+To: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ David Virag <virag.david003@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Sam Protsenko <semen.protsenko@linaro.org>,
+ Henrik Grimler <henrik@grimler.se>, u-boot@lists.denx.de
+Subject: [PATCH v2 0/2] Enable Samsung I2C drivers on newer platforms
+Date: Fri,  2 Aug 2024 21:19:14 +0200
+Message-ID: <20240802191920.132133-1-virag.david003@gmail.com>
+X-Mailer: git-send-email 2.46.0
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,68 +96,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Henrik,
+This set of patches should enable the Samsung I2C drivers to work on
+platforms other than EXYNOS4/EXYNOS5.
 
-On Fri, 2024-08-02 at 19:31 +0200, Henrik Grimler wrote:
-[snip]
+This has been tested on Exynos7885 with the S3C I2C driver.
+With the clocks for it implemented in it's driver, this should also
+enable S3C I2C to work on Exynos850.
 
-> The exynos_hs_i2c driver no longer compiles for exynos4 or exynos5
-> with these changes, I am getting (with for example `make
-> odroid-xu3_defconfig; make`):
->=20
-> =C2=A0 CC=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 drivers/i2c/exynos_hs_i2c.o
-> ../drivers/i2c/exynos_hs_i2c.c: In function 'hsi2c_get_clk_details':
-> ../drivers/i2c/exynos_hs_i2c.c:154:17: warning: implicit declaration
-> of function 'get_i2c_clk'; did you mean 'get_tbclk'? [-Wimplicit-
-> function-declaration]
-> =C2=A0 154 |=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 clkin =3D ge=
-t_i2c_clk();
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ^~~~~~~~~~~
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 get_tbclk
-> ../drivers/i2c/exynos_hs_i2c.c: In function 's3c_i2c_of_to_plat':
-> ../drivers/i2c/exynos_hs_i2c.c:543:23: warning: implicit declaration
-> of function 'pinmux_decode_periph_id' [-Wimplicit-function-
-> declaration]
-> =C2=A0 543 |=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 i2c_bus->id =
-=3D pinmux_decode_periph_id(blob, node);
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 ^~~~~~~~~~~~~~~~~~~~~~~
-> ../drivers/i2c/exynos_hs_i2c.c:553:9: warning: implicit declaration
-> of function 'exynos_pinmux_config' [-Wimplicit-function-declaration]
-> =C2=A0 553 |=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 exynos_pinmu=
-x_config(i2c_bus->id,
-> PINMUX_FLAG_HS_MODE);
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 ^~~~~~~~~~~~~~~~~~~~
-> ../drivers/i2c/exynos_hs_i2c.c:553:43: error: 'PINMUX_FLAG_HS_MODE'
-> undeclared (first use in this function)
-> =C2=A0 553 |=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 exynos_pinmu=
-x_config(i2c_bus->id,
-> PINMUX_FLAG_HS_MODE);
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ^~~~~~~~~~~=
-~~~~~~~~
-> ../drivers/i2c/exynos_hs_i2c.c:553:43: note: each undeclared
-> identifier is reported only once for each function it appears in
-> make[3]: *** [../scripts/Makefile.build:257:
-> drivers/i2c/exynos_hs_i2c.o] Error 1
-> make[2]: *** [../scripts/Makefile.build:397: drivers/i2c] Error 2
-> make[1]: *** [/mnt/linux/Makefile:1895: drivers] Error 2
+While at it, clean up some dead code as well.
 
-Woops, stupid mistake, sending v2 soon which does actually compile on
-exynos4/5 too.
-Should work fine with that, but trying it would be appreciated.
+Changes in v2:
+- Fix compile on Exynos4/Exynos5 platform
 
->=20
-> Best regards,
-> Henrik Grimler
->=20
+David Virag (2):
+  i2c: samsung: Drop s3c24x0 specific code.
+  i2c: samsung: Support platforms other than EXYNOS4 and EXYNOS5
 
-Best regards,
-David
->=20
+ drivers/i2c/Kconfig         |  2 +-
+ drivers/i2c/exynos_hs_i2c.c | 25 +++++++++++++++++++++----
+ drivers/i2c/s3c24x0_i2c.c   | 32 ++++++++++++++++++++++++--------
+ drivers/i2c/s3c24x0_i2c.h   |  2 ++
+ 4 files changed, 48 insertions(+), 13 deletions(-)
+
+-- 
+2.46.0
+
