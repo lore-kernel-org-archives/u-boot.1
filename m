@@ -4,60 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15E35C52D70
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 06:57:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 254D6C3DA7F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 07:20:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DAF3B88B1F;
-	Fri,  2 Aug 2024 08:56:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 7D8E38862D;
+	Fri,  2 Aug 2024 09:20:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Xkr7yiRv";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="aUPn1CqV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 884AE88B22; Fri,  2 Aug 2024 08:56:59 +0200 (CEST)
-Received: from mail-m12781.qiye.163.com (mail-m12781.qiye.163.com
- [115.236.127.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 712278863C; Fri,  2 Aug 2024 09:20:01 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56ACE88B0F
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 08:56:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id BD03388606
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 09:19:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=Xkr7yiRv9fsyuvlH5oWvqGlyyfUW+hldf4mJN9Qc5FKAWnd02bsXE0CeqExWW+EgYHuue7fhK3pyMlK+jqO2IA2LWpjhpxgASC9oR6pgtdK6CNLxhw1iM7hl1qn2vIsPaN+k4VJXiHleyztDLGyrJ76SbbfhTWBLdfDKxvxBJec=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=VvrBn6KGIVv9kgmQeeC6PbJP/K0mUjZM/XzxDEPhK54=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.93] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 4CE1A9004B5;
- Fri,  2 Aug 2024 14:56:45 +0800 (CST)
-Message-ID: <4bb448af-4c71-4f5c-ac91-ef93d76f71b8@rock-chips.com>
-Date: Fri, 2 Aug 2024 14:56:44 +0800
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-427b1d4da32so16579345e9.0
+ for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 00:19:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1722583198; x=1723187998;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+gLUZ234pmEsrq4gP+Zjn6CP4HKlmvdTOByZiV7ivzQ=;
+ b=aUPn1CqVF7Q3Wf7HYC3l240qsxNay8aNDM38gUsBPKfwoy+I/glRvOutN8+YxjyIPn
+ bbJjpYaXcwUWWv6VZYmt1Mf+skNTVKvdeOmImMxe572j8Ay1zj7WNa1BL4HaWBhJLMrk
+ Vo45ocUXIxZCrji8yHRA2TgxogxmyJlrzfCCbXTVjvrf5IoFeIEDPbNHSY5WzGnX1eLX
+ SXvuA/2GWfkjZM71uUUwK1jZSlLQpSZI8HAiZ608Pf8ZqxvK7HiQte/y5CUYyUT+eQOV
+ I9pbxGkVVZYGrzSxO1SQv7mIM4HXTAR/+ANIMnbZQmFYT2ZG9+BPg6fcP3X+5a44Pa6+
+ mL2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722583198; x=1723187998;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+gLUZ234pmEsrq4gP+Zjn6CP4HKlmvdTOByZiV7ivzQ=;
+ b=ZMrYdDMYGpHVdCoTIOkwkRgknfbAiXjYzQaiRHCHskZHEzlsuEDxym8AfDkaMLTvfO
+ qoxfQRm8rd5M0U4utnC8IQXVp4hiEzmhrRJQBjDXdLdh6hZMZ+sBuYB+R387R2oAWKR8
+ 46zjtfXhM14Ug71TmOQ4Q8xGR+dmsjlCVH3m6YBAJtEUIr9zYhdutJy1ewjLXLRwcPUM
+ o3iEkPbDdH3CqUD7n6mNl2GM5+F6bxfZTixOTYzbDXHbv4aO2lU0T+PbVLUB/JWyBsoU
+ c9qINopzcRVv7h61wUNWqv3/5q71t0n/BlOsqrsFmJ6OeMb8coYOf0If0OI8QYL4bEQj
+ uHYw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUdZR4d9iPcQj8/agRGHzaSsoFga8CeWYJEt9usr6lcyEDIajjnELId7zhktrutVMA4z3UDSis9AYhVlg1dGmdHOCISJQ==
+X-Gm-Message-State: AOJu0Yzr9n9sfjBMlf1mjkqLRes8eaDzjPYzpyM7oop3vkgBu7t/QXSM
+ GXZmvqgFShYWspgBGE0bpNaKg1984vJNyS4ju4cWDjVLavSBLKS11WwcfNE+sVE=
+X-Google-Smtp-Source: AGHT+IG5TeUiP/nPtGl37JgzbZzpQObCh3UmwzRx2VCNrzR53mQCrcAxCU+LBaF6xbEy2+Tc1ZKbmw==
+X-Received: by 2002:a05:600c:35cd:b0:426:6eb6:1374 with SMTP id
+ 5b1f17b1804b1-428e465b0c2mr35491685e9.0.1722583197323; 
+ Fri, 02 Aug 2024 00:19:57 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-428e6e01d0asm21980005e9.16.2024.08.02.00.19.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 02 Aug 2024 00:19:56 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Dmitry Rokosov <ddrokosov@salutedevices.com>, igor.opaniuk@gmail.com,
+ semen.protsenko@linaro.org, trini@konsulko.com,
+ colin.mcallister@garmin.com, 4.shket@gmail.com,
+ avromanov@salutedevices.com, u-boot@lists.denx.de,
+ kernel@salutedevices.com, rockosov@gmail.com
+Subject: Re: [PATCH v1 2/4] cmd: ab: introduce 'ab_dump' command to print
+ BCB block content
+In-Reply-To: <CAFLszTik6sK+dU5hK8bfXq-Ho+V1FwfgBaXuGPDRwFYkzw9=VA@mail.gmail.com>
+References: <20240725194716.32232-1-ddrokosov@salutedevices.com>
+ <20240725194716.32232-3-ddrokosov@salutedevices.com>
+ <CAFLszThbAAQ3Fwtf_t0k-K5xO6Yu8x_37Fejntqq=svwt-gdcQ@mail.gmail.com>
+ <87ed7bqolf.fsf@baylibre.com>
+ <CAFLszTik6sK+dU5hK8bfXq-Ho+V1FwfgBaXuGPDRwFYkzw9=VA@mail.gmail.com>
+Date: Fri, 02 Aug 2024 09:19:56 +0200
+Message-ID: <87wmkz5r37.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] board: rockchip: Add FriendlyElec CM3588 NAS
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Sebastian Kropatsch <seb-dev@mail.de>, u-boot@lists.denx.de
-References: <20240731211221.1523453-1-jonas@kwiboo.se>
- <20240731211221.1523453-3-jonas@kwiboo.se>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240731211221.1523453-3-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQktMHVYZShoeS0lNHkhDSE5WFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a9111e06ac503a9kunm4ce1a9004b5
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PlE6Hxw5NTI2ViIUF01PNQEe
- FQ0wCxxVSlVKTElJTkNKQ0tNSUxDVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFCSElONwY+
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,229 +100,328 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
-On 2024/8/1 05:12, Jonas Karlman wrote:
-> The CM3588 NAS by FriendlyElec pairs the CM3588 compute module, based
-> on the Rockchip RK3588 SoC, with the CM3588 NAS Kit carrier board.
->
-> Features tested on a CM3588 NAS Kit with 8GB RAM 64GB eMMC module:
-> - SD-card boot
-> - eMMC boot
-> - Ethernet
-> - PCIe/NVMe
-> - USB gadget
-> - USB host
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+On mer., juil. 31, 2024 at 08:38, Simon Glass <sjg@chromium.org> wrote:
 
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
-
-Thanks,
-- Kever
-> ---
->   ...rk3588-friendlyelec-cm3588-nas-u-boot.dtsi |  8 ++
->   arch/arm/mach-rockchip/rk3588/Kconfig         | 24 +++++
->   board/friendlyelec/cm3588-nas-rk3588/Kconfig  | 12 +++
->   .../cm3588-nas-rk3588/MAINTAINERS             |  6 ++
->   configs/cm3588-nas-rk3588_defconfig           | 90 +++++++++++++++++++
->   doc/board/rockchip/rockchip.rst               |  1 +
->   6 files changed, 141 insertions(+)
->   create mode 100644 arch/arm/dts/rk3588-friendlyelec-cm3588-nas-u-boot.dtsi
->   create mode 100644 board/friendlyelec/cm3588-nas-rk3588/Kconfig
->   create mode 100644 board/friendlyelec/cm3588-nas-rk3588/MAINTAINERS
->   create mode 100644 configs/cm3588-nas-rk3588_defconfig
+> Hi Mattijs,
 >
-> diff --git a/arch/arm/dts/rk3588-friendlyelec-cm3588-nas-u-boot.dtsi b/arch/arm/dts/rk3588-friendlyelec-cm3588-nas-u-boot.dtsi
-> new file mode 100644
-> index 000000000000..2e60f2dce8f1
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3588-friendlyelec-cm3588-nas-u-boot.dtsi
-> @@ -0,0 +1,8 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +
-> +#include "rk3588-u-boot.dtsi"
-> +
-> +&sdhci {
-> +	cap-mmc-highspeed;
-> +	mmc-hs200-1_8v;
-> +};
-> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-> index 0dcf2249fb48..a76a470cc981 100644
-> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
-> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-> @@ -6,6 +6,29 @@ config TARGET_EVB_RK3588
->   	help
->   	  RK3588 EVB is a evaluation board for Rockchp RK3588.
->   
-> +config TARGET_CM3588_NAS_RK3588
-> +	bool "FriendlyElec CM3588 NAS"
-> +	select BOARD_LATE_INIT
-> +	help
-> +	  The CM3588 NAS by FriendlyElec pairs the CM3588 compute module, based
-> +	  on the Rockchip RK3588 SoC, with the CM3588 NAS Kit carrier board.
-> +
-> +	  Hardware features:
-> +	  - Rockchip RK3588 SoC
-> +	  - 4GB/8GB/16GB LPDDR4x RAM
-> +	  - 0GB/64GB HS400 eMMC
-> +	  - MicroSD card slot
-> +	  - 1x RTL8125B 2.5G Ethernet
-> +	  - 4x M.2 M-Key with PCIe 3.0 x1 (via bifurcation) for NVMe SSDs
-> +	  - 2x USB 3.0 (USB 3.1 Gen1) Type-A, 1x USB 2.0 Type-A
-> +	  - 1x USB 3.0 Type-C with DP AltMode support
-> +	  - 2x HDMI 2.1 out, 1x HDMI in
-> +	  - MIPI-CSI Connector, MIPI-DSI Connector
-> +	  - 40-pin GPIO header
-> +	  - 4 buttons: power, reset, recovery, MASK, user button
-> +	  - 3.5mm Headphone out, 2.0mm PH-2A Mic in
-> +	  - 5V Fan connector, PWM beeper, IR receiver, RTC battery connector
-> +
->   config TARGET_JAGUAR_RK3588
->   	bool "Theobroma Systems SBC-RK3588-AMR (Jaguar)"
->   	select BOARD_LATE_INIT
-> @@ -339,6 +362,7 @@ config TEXT_BASE
->   
->   source "board/armsom/sige7-rk3588/Kconfig"
->   source "board/edgeble/neural-compute-module-6/Kconfig"
-> +source "board/friendlyelec/cm3588-nas-rk3588/Kconfig"
->   source "board/friendlyelec/nanopc-t6-rk3588/Kconfig"
->   source "board/friendlyelec/nanopi-r6c-rk3588s/Kconfig"
->   source "board/friendlyelec/nanopi-r6s-rk3588s/Kconfig"
-> diff --git a/board/friendlyelec/cm3588-nas-rk3588/Kconfig b/board/friendlyelec/cm3588-nas-rk3588/Kconfig
-> new file mode 100644
-> index 000000000000..fdc458a42643
-> --- /dev/null
-> +++ b/board/friendlyelec/cm3588-nas-rk3588/Kconfig
-> @@ -0,0 +1,12 @@
-> +if TARGET_CM3588_NAS_RK3588
-> +
-> +config SYS_BOARD
-> +	default "cm3588-nas-rk3588"
-> +
-> +config SYS_VENDOR
-> +	default "friendlyelec"
-> +
-> +config SYS_CONFIG_NAME
-> +	default "nanopc-t6-rk3588"
-> +
-> +endif
-> diff --git a/board/friendlyelec/cm3588-nas-rk3588/MAINTAINERS b/board/friendlyelec/cm3588-nas-rk3588/MAINTAINERS
-> new file mode 100644
-> index 000000000000..92b958ada6fa
-> --- /dev/null
-> +++ b/board/friendlyelec/cm3588-nas-rk3588/MAINTAINERS
-> @@ -0,0 +1,6 @@
-> +CM3588-NAS-RK3588
-> +M:	Jonas Karlman <jonas@kwiboo.se>
-> +S:	Maintained
-> +F:	board/friendlyelec/cm3588-nas-rk3588
-> +F:	configs/cm3588-nas-rk3588_defconfig
-> +F:	arch/arm/dts/rk3588-friendlyelec-cm3588-nas*
-> diff --git a/configs/cm3588-nas-rk3588_defconfig b/configs/cm3588-nas-rk3588_defconfig
-> new file mode 100644
-> index 000000000000..d6d82757a2de
-> --- /dev/null
-> +++ b/configs/cm3588-nas-rk3588_defconfig
-> @@ -0,0 +1,90 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_SYS_HAS_NONCACHED_MEMORY=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-friendlyelec-cm3588-nas"
-> +CONFIG_ROCKCHIP_RK3588=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_TARGET_CM3588_NAS_RK3588=y
-> +CONFIG_DEBUG_UART_BASE=0xFEB50000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_PCI=y
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-friendlyelec-cm3588-nas.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_ATF=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PCI=y
-> +CONFIG_CMD_USB=y
-> +CONFIG_CMD_ROCKUSB=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_BUTTON=y
-> +CONFIG_BUTTON_ADC=y
-> +CONFIG_BUTTON_GPIO=y
-> +CONFIG_SPL_CLK=y
-> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_LED=y
-> +CONFIG_LED_GPIO=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_PHYLIB=y
-> +CONFIG_RTL8169=y
-> +CONFIG_NVME_PCI=y
-> +CONFIG_PCIE_DW_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_PHY_ROCKCHIP_USBDP=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_PMIC_RK8XX=y
-> +CONFIG_REGULATOR_RK8XX=y
-> +CONFIG_PWM_ROCKCHIP=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_ROCKCHIP_SPI=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_USB_GADGET=y
-> +CONFIG_USB_GADGET_DOWNLOAD=y
-> +CONFIG_USB_FUNCTION_ROCKUSB=y
-> +CONFIG_ERRNO_STR=y
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index 637d489f8428..0f9cb404d934 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -127,6 +127,7 @@ List of mainline supported Rockchip boards:
->        - Rockchip EVB (evb-rk3588)
->        - Edgeble Neural Compute Module 6A SoM - Neu6a (neu6a-io-rk3588)
->        - Edgeble Neural Compute Module 6B SoM - Neu6b (neu6b-io-rk3588)
-> +     - FriendlyElec CM3588 NAS (cm3588-nas-rk3588)
->        - FriendlyElec NanoPC-T6 (nanopc-t6-rk3588)
->        - FriendlyElec NanoPi R6C (nanopi-r6c-rk3588s)
->        - FriendlyElec NanoPi R6S (nanopi-r6s-rk3588s)
+> On Tue, 30 Jul 2024 at 02:19, Mattijs Korpershoek
+> <mkorpershoek@baylibre.com> wrote:
+>>
+>> Hi Dmitry,
+>>
+>> Thank you for the patch.
+>>
+>> Hi Simon,
+>>
+>> On dim., juil. 28, 2024 at 13:36, Simon Glass <sjg@chromium.org> wrote:
+>>
+>> > Hi Dmitry,
+>> >
+>> > On Thu, 25 Jul 2024 at 14:55, Dmitry Rokosov
+>> > <ddrokosov@salutedevices.com> wrote:
+>> >>
+>> >> It's really helpful to have the ability to dump BCB block for debugging
+>> >> A/B logic on the board supported this partition schema.
+>> >>
+>> >> Command 'ab_dump' prints all fields of bootloader_control struct
+>> >> including slot_metadata for all presented slots.
+>> >>
+>> >> Output example:
+>> >> =====
+>> >> > board# ab_dump ubi 0#misc
+>> >> > Read 512 bytes from volume misc to 000000000bf51900
+>> >> > Bootloader Control:   [misc]
+>> >> > Active Slot:          _a
+>> >> > Magic Number:                 0x42414342
+>> >> > Version:              1
+>> >> > Number of Slots:      2
+>> >> > Recovery Tries Remaining: 7
+>> >> > CRC:                  0x61378F6F (Valid)
+>> >> >
+>> >> > Slot[0] Metadata:
+>> >> >       - Priority:             15
+>> >> >       - Tries Remaining:      4
+>> >> >       - Successful Boot:      0
+>> >> >       - Verity Corrupted:     0
+>> >> >
+>> >> > Slot[1] Metadata:
+>> >> >       - Priority:             15
+>> >> >       - Tries Remaining:      5
+>> >> >       - Successful Boot:      0
+>> >> >       - Verity Corrupted:     0
+>> >> ====
+>> >>
+>> >> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
+>> >> ---
+>> >>  boot/android_ab.c    | 68 ++++++++++++++++++++++++++++++++++++++++++++
+>> >>  cmd/ab_select.c      | 30 +++++++++++++++++++
+>> >>  include/android_ab.h |  9 ++++++
+>> >>  3 files changed, 107 insertions(+)
+>> >>
+>> >> diff --git a/boot/android_ab.c b/boot/android_ab.c
+>> >> index 1e5aa81b7503..359cc1a00428 100644
+>> >> --- a/boot/android_ab.c
+>> >> +++ b/boot/android_ab.c
+>> >> @@ -363,3 +363,71 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
+>> >>
+>> >>         return slot;
+>> >>  }
+>> >> +
+>> >> +int ab_dump_abc(struct blk_desc *dev_desc, struct disk_partition *part_info)
+>> >> +{
+>> >> +       struct bootloader_control *abc;
+>> >> +       u32 crc32_le;
+>> >> +       int i, ret;
+>> >> +       struct slot_metadata *slot;
+>> >> +
+>> >> +       if (!dev_desc || !part_info) {
+>> >> +               log_err("ANDROID: Empty device descriptor or partition info\n");
+>> >> +               return -EINVAL;
+>> >> +       }
+>> >> +
+>> >> +       ret = ab_control_create_from_disk(dev_desc, part_info, &abc, 0);
+>> >> +       if (ret < 0) {
+>> >> +               log_err("ANDROID: Cannot create bcb from disk %d\n", ret);
+>> >> +               return ret;
+>> >> +       }
+>> >> +
+>> >> +       if (abc->magic != BOOT_CTRL_MAGIC) {
+>> >> +               log_err("ANDROID: Unknown A/B metadata: %.8x\n", abc->magic);
+>> >> +               ret = -ENODATA;
+>> >> +               goto error;
+>> >> +       }
+>> >> +
+>> >> +       if (abc->version > BOOT_CTRL_VERSION) {
+>> >> +               log_err("ANDROID: Unsupported A/B metadata version: %.8x\n",
+>> >> +                       abc->version);
+>> >> +               ret = -ENODATA;
+>> >> +               goto error;
+>> >> +       }
+>> >> +
+>> >> +       if (abc->nb_slot > ARRAY_SIZE(abc->slot_info)) {
+>> >> +               log_err("ANDROID: Wrong number of slots %u, expected %zu\n",
+>> >> +                       abc->nb_slot, ARRAY_SIZE(abc->slot_info));
+>> >> +               ret = -ENODATA;
+>> >> +               goto error;
+>> >> +       }
+>> >> +
+>> >> +       printf("Bootloader Control: \t[%s]\n", part_info->name);
+>> >> +       printf("Active Slot: \t\t%s\n", abc->slot_suffix);
+>> >> +       printf("Magic Number: \t\t0x%X\n", abc->magic);
+>> >> +       printf("Version: \t\t%u\n", abc->version);
+>> >> +       printf("Number of Slots: \t%u\n", abc->nb_slot);
+>> >> +       printf("Recovery Tries Remaining: %u\n", abc->recovery_tries_remaining);
+>>
+>> In the console, this rendered not perfectly aligned, which is a bit of a
+>> shame:
+>>
+>> (done on sandbox)
+>>
+>> => ab_dump mmc 7#misc
+>> Bootloader Control:     [misc]
+>> Active Slot:            _a
+>> Magic Number:           0x42414342
+>> Version:                1
+>> Number of Slots:        2
+>> Recovery Tries Remaining: 0
+>> CRC:                    0x321FEF27 (Valid)
+>>
+>> >> +
+>> >> +       printf("CRC: \t\t\t0x%.8X", abc->crc32_le);
+>> >> +
+>> >> +       crc32_le = ab_control_compute_crc(abc);
+>> >> +       if (abc->crc32_le != crc32_le)
+>> >> +               printf(" (Invalid, Expected: \t0x%.8X)\n", crc32_le);
+>> >> +       else
+>> >> +               printf(" (Valid)\n");
+>> >> +
+>> >> +       for (i = 0; i < abc->nb_slot; ++i) {
+>> >> +               slot = &abc->slot_info[i];
+>> >> +               printf("\nSlot[%d] Metadata:\n", i);
+>> >> +               printf("\t- Priority: \t\t%u\n", slot->priority);
+>> >> +               printf("\t- Tries Remaining: \t%u\n", slot->tries_remaining);
+>> >> +               printf("\t- Successful Boot: \t%u\n", slot->successful_boot);
+>> >> +               printf("\t- Verity Corrupted: \t%u\n", slot->verity_corrupted);
+>> >> +       }
+>> >> +
+>> >> +error:
+>> >> +       free(abc);
+>> >> +
+>> >> +       return ret;
+>> >> +}
+>> >> diff --git a/cmd/ab_select.c b/cmd/ab_select.c
+>> >> index 9e2f74573c22..1d34150ceea9 100644
+>> >> --- a/cmd/ab_select.c
+>> >> +++ b/cmd/ab_select.c
+>> >> @@ -51,6 +51,31 @@ static int do_ab_select(struct cmd_tbl *cmdtp, int flag, int argc,
+>> >>         return CMD_RET_SUCCESS;
+>> >>  }
+>> >>
+>> >> +static int do_ab_dump(struct cmd_tbl *cmdtp, int flag, int argc,
+>> >> +                     char *const argv[])
+>> >> +{
+>> >> +       int ret;
+>> >> +       struct blk_desc *dev_desc;
+>> >> +       struct disk_partition part_info;
+>> >> +
+>> >> +       if (argc < 3)
+>> >> +               return CMD_RET_USAGE;
+>> >> +
+>> >> +       if (part_get_info_by_dev_and_name_or_num(argv[1], argv[2],
+>> >> +                                                &dev_desc, &part_info,
+>> >> +                                                false) < 0) {
+>> >> +               return CMD_RET_FAILURE;
+>> >> +       }
+>> >> +
+>> >> +       ret = ab_dump_abc(dev_desc, &part_info);
+>> >> +       if (ret < 0) {
+>> >> +               printf("Cannot dump ABC data, error %d.\n", ret);
+>> >> +               return CMD_RET_FAILURE;
+>> >> +       }
+>> >> +
+>> >> +       return CMD_RET_SUCCESS;
+>> >> +}
+>> >> +
+>> >>  U_BOOT_CMD(ab_select, 5, 0, do_ab_select,
+>> >>            "Select the slot used to boot from and register the boot attempt.",
+>> >>            "<slot_var_name> <interface> <dev[:part|#part_name]> [--no-dec]\n"
+>> >> @@ -66,3 +91,8 @@ U_BOOT_CMD(ab_select, 5, 0, do_ab_select,
+>> >>            "    - If '--no-dec' is set, the number of tries remaining will not\n"
+>> >>            "      decremented for the selected boot slot\n"
+>> >>  );
+>> >> +
+>> >> +U_BOOT_CMD(ab_dump, 3, 0, do_ab_dump,
+>> >> +          "Dump boot_control information from specific partition.",
+>> >> +          "<interface> <dev[:part|#part_name]>\n"
+>> >> +);
+>> >> diff --git a/include/android_ab.h b/include/android_ab.h
+>> >> index 1fee7582b90a..e53bf7eb6a02 100644
+>> >> --- a/include/android_ab.h
+>> >> +++ b/include/android_ab.h
+>> >> @@ -33,4 +33,13 @@ struct disk_partition;
+>> >>  int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
+>> >>                     bool dec_tries);
+>> >>
+>> >> +/**
+>> >> + * Dump ABC information for specific partition.
+>> >> + *
+>> >> + * @param[in] dev_desc Device description pointer
+>> >> + * @param[in] part_info Partition information
+>> >
+>> > We have moved to the @ notation now:
+>> >
+>> > @dev_desc: ...
+>>
+>> I agree with this comment, but the file uses @param[in] already. We
+>> should to a preparatory patch to convert this file to the new notation.
+>
+> OK, can do later.
+>
+>>
+>> >
+>> >> + * Return: 0 on success, or a negative on error
+>> >> + */
+>> >> +int ab_dump_abc(struct blk_desc *dev_desc, struct disk_partition *part_info);
+>> >> +
+>> >>  #endif /* __ANDROID_AB_H */
+>> >> --
+>> >> 2.43.0
+>> >>
+>> >
+>> > Rather than creating a new command I think this should be a subcommand
+>> > of abootimg.
+>>
+>> To me, they are not the same thing.
+>>
+>> - ab_* commands are for manipulating specific bits from the BCB (Boot
+>>   Control Block, usually "misc" partition)
+>>   ab_* operates on partitions
+>>
+>> - abootimg is for manipulating boot.img and vendor_boot.img headers
+>>   (which are not on the same partitions)
+>>   abootimg operations on memory regions (so someone else is responsible
+>>   for reading the partitions)
+>>
+>> We also have a 3rd command "bcb". "bcb" also reads the "misc" partition
+>> but can only read the "boot reason".
+>> If we really want to merge ab_select and ab_dump into another command,
+>> "bcb" is more relevant, in my opinion.
+>
+> That sounds good.
+>
+>>
+>> I'd prefer to keep 3 commands for the following reasons:
+>>
+>> 1. Easier to track/port changes from Google's fork [1]
+>> 2. Better separation of responsabilities
+>> 3. Merging the commands requires the update of the existing U-Boot
+>>    environment users (meson64_android.h for example)
+>>
+>> I don't strongly disagree with merging, but I'd prefer to keep it this way.
+>>
+>> [1] https://android.googlesource.com/platform/external/u-boot
+>>
+>> Simon, can you elaborate on why we should merge the commands? Do you
+>> think that for U-Boot users it will be easier to have a single command
+>> for all Android related topics?
+>
+> Not necessarily, it's just that we do try to keep similar pieces of
+> functionality together. Perhaps we should create an entirely new
+> command to bring all (or most) these things together, with aliases for
+> compatibility?
+
+I think that merging the ab_* features into BCB is the most
+relevant.
+
+>
+> Note that 'boota' might be a better name for actually booting an
+> Android image, since we have bootm, booti, etc. Having said that, with
+> bootstd it might just be automatic.
+
+Boards relying on boot* commands for booting android use the bootm
+command, see: include/configs/meson64_android.h
+
+In my opinion, everyone booting Android should migrate to use bootstd.
+
+>
+> Why does Android have its own fork? I am not keen on any argument that
+> says that mainline needs to follow a fork!
+
+I don't know why Android has its own fork, but it's unfortunate.
+
+Looking at the code, I suspect:
+- Android bootflow (for cuttlefish) (cmd/boot_android)
+- Fixes on fastboot
+- Fixes on AB
+- Fixes on AVB (support for block devices instead of only mmc)
+
+For example, here are some relevant fixes that I want to port to
+upstream:
+
+- https://android-review.googlesource.com/c/platform/external/u-boot/+/1446442
+- https://android-review.googlesource.com/c/platform/external/u-boot/+/1451016
+
+I completely agree with you. It's non-sense say that "mainline needs to
+follow a fork".
+I'm just a bit worried that porting over relevant changes from this
+particular fork might get more difficult in the future.
+
+Thinking again about this, if we just move the command bits and keep the
+boot/android_ab.c part it should be too troublesome.
+
+So I'm ok to proceed with this.
+
+Thanks!
+
+>
+>
+>>
+>> >
+>> > Can you please create some docs in doc/usage/cmd/abootimg for the command?
+>> >
+>> > I also wonder if ab_select should move under that command?
+>
+> Regards,
+> SImon
