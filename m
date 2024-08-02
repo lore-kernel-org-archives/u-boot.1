@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F537C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 22:13:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10539C3DA7F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 22:13:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA80D88C3E;
-	Sat,  3 Aug 2024 00:13:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3B7FC88765;
+	Sat,  3 Aug 2024 00:13:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="WeUIwezS";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="BXAzeZxX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5586F87EED; Sat,  3 Aug 2024 00:13:02 +0200 (CEST)
+ id 2370787EED; Sat,  3 Aug 2024 00:13:06 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E8A188C4E
- for <u-boot@lists.denx.de>; Sat,  3 Aug 2024 00:12:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 48F0988765
+ for <u-boot@lists.denx.de>; Sat,  3 Aug 2024 00:13:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,22 +28,23 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1722636771; bh=dih98ilIyPPf1nb6Ges6QsqzXjyxoyPoNWzMyy0qR6E=;
- b=WeUIwezSkEnlyv8poIZ1nrt/CipA1zP68Ii3tShpcYvrhPOp5My+/Gdj4FSzndgU+YhUMtchL
- pwpw6ZesC6OWRznW4sAE5W0x2RBHG71F9ti3mkNRvomUoweeDAuSz541aeKDcahq2yDRHpxoDOR
- 1ejIXz66BcMw6MN019Y4zqIXjR8/xjfOBbWx8YxvtWbg4P3HQbY4gFjC2SLOS0REPeX8xf3QWd8
- 6v56dTSr9RwAF9cUqxsG6qxY07+Jim0POF6Ef6rajjyiYz1/jsb7mojptj2WOvp06WzvR1J9TVm
- 1psnO/WKFjyc+/RMvWjpBeRRIHVV8LdJWPY+vnT0u4DA==
+ t=1722636776; bh=NHYsBqmI3uyZozVaqiKEymdd3VoGByhERVOGjABE3mc=;
+ b=BXAzeZxX9kt16YWEwgR4Y7j7b3iyF4E/w2WEUQGlMYpA9XoPspLyLh7vBKRv7m+TB3i4i1OZx
+ PRr0UOInk8kexlMbwpRt/+vLTdC96x1UY2xitnieXwuNAvuH6agzrtydPyihCbR7jAgqk8uYl0m
+ b0GGChzQ/z9RcNY0/oxYVsh1rcaL6mJ4YpeCrnqmJXXZKDISkM8iC85FiTYD6Q8f8Fae1bpWa7O
+ ZQZVnGYmzLCk45EO4RfZIFZsyQZ89/HSljG51WQ85mU1Wqkd8AGaZM9fNdLnQR3BFnPe2zOvfTR
+ DbB5jXRGQ9uvAmuwfGdQ0snEayU4bqEws3/ZSi+0vKdA==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@linaro.org>
 Cc: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de, Jonas Karlman
- <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>
-Subject: [PATCH v2 2/5] arm64: dts: rockchip: fix mmc aliases for Radxa ZERO
- 3E/3W
-Date: Fri,  2 Aug 2024 22:12:20 +0000
-Message-ID: <20240802221231.2629416-3-jonas@kwiboo.se>
+ <jonas@kwiboo.se>, Trevor Woerner <twoerner@gmail.com>, Heiko Stuebner
+ <heiko@sntech.de>
+Subject: [PATCH v2 3/5] arm64: dts: rockchip: add gpio-line-names to
+ radxa-zero-3
+Date: Fri,  2 Aug 2024 22:12:21 +0000
+Message-ID: <20240802221231.2629416-4-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240802221231.2629416-1-jonas@kwiboo.se>
 References: <20240802221231.2629416-1-jonas@kwiboo.se>
@@ -55,7 +56,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 66ad59dfb3fb002aec6e71f0
+X-ForwardEmail-ID: 66ad59e4b3fb002aec6e7202
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,80 +73,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: FUKAUMI Naoki <naoki@radxa.com>
+From: Trevor Woerner <twoerner@gmail.com>
 
-align with other Radxa products.
+Add names to the pins of the general-purpose expansion header as given
+in the Radxa documentation[1] following the conventions in the kernel[2]
+to make it easier for users to correlate pins with functions when using
+utilities such as 'gpioinfo'.
 
-- mmc0 is eMMC
-- mmc1 is microSD
+[1] https://docs.radxa.com/en/zero/zero3/hardware-design/hardware-interface
+[2] https://www.kernel.org/doc/Documentation/devicetree/bindings/gpio/gpio.txt
 
-for ZERO 3E, there is no eMMC, but aliases should start at 0, so mmc0
-is microSD as exception.
-
-Fixes: 1a5c8d307c83 ("arm64: dts: rockchip: Add Radxa ZERO 3W/3E")
-Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
-
-Changes in v3:
-- fix syntax error in rk3566-radxa-zero-3e.dts
-Changes in v2:
-- microSD is mmc0 instead of mmc1 for ZERO 3E
-
-Link: https://lore.kernel.org/r/20240620224435.2752-1-naoki@radxa.com
+Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+Link: https://lore.kernel.org/r/20240620013301.33653-1-twoerner@gmail.com
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 
-[ upstream commit: 060c1950037e4c54ca4d8186a8f46269e35db901 ]
+[ upstream commit: f7c742cbe664ebdedc075945e75443683d1175f7 ]
 
-(cherry picked from commit 8324bc7493e4088013c62bc41f49d6d181575493)
+(cherry picked from commit 8b26cf42ba0c74a9c86cebe591a9195f75151d97)
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
 v2: Add Signed-off-by tag
 ---
- dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3.dtsi | 4 ----
- dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3e.dts | 1 +
- dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3w.dts | 3 ++-
- 3 files changed, 3 insertions(+), 5 deletions(-)
+ .../arm64/rockchip/rk3566-radxa-zero-3.dtsi   | 72 +++++++++++++++++++
+ 1 file changed, 72 insertions(+)
 
 diff --git a/dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3.dtsi b/dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3.dtsi
-index 623d5939d194..081be841b286 100644
+index 081be841b286..9cc7aa3298d0 100644
 --- a/dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3.dtsi
 +++ b/dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3.dtsi
-@@ -6,10 +6,6 @@
- #include "rk3566.dtsi"
- 
- / {
--	aliases {
--		mmc0 = &sdmmc0;
--	};
--
- 	chosen {
- 		stdout-path = "serial2:1500000n8";
- 	};
-diff --git a/dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3e.dts b/dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3e.dts
-index e166d66990b9..4a830eb09f0b 100644
---- a/dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3e.dts
-+++ b/dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3e.dts
-@@ -10,6 +10,7 @@
- 
- 	aliases {
- 		ethernet0 = &gmac1;
-+		mmc0 = &sdmmc0;
- 	};
+@@ -105,6 +105,78 @@
+ 	cpu-supply = <&vdd_cpu>;
  };
  
-diff --git a/dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3w.dts b/dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3w.dts
-index 9bf4f464915f..f92475c59deb 100644
---- a/dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3w.dts
-+++ b/dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3w.dts
-@@ -9,7 +9,8 @@
- 	compatible = "radxa,zero-3w", "rockchip,rk3566";
- 
- 	aliases {
--		mmc1 = &sdhci;
-+		mmc0 = &sdhci;
-+		mmc1 = &sdmmc0;
- 		mmc2 = &sdmmc1;
- 	};
- 
++&gpio0 {
++	gpio-line-names =
++		/* GPIO0_A0 - A7 */
++		"", "", "", "", "", "", "", "",
++		/* GPIO0_B0 - B7 */
++		"", "", "", "", "", "", "", "",
++		/* GPIO0_C0 - C7 */
++		"", "", "", "", "", "", "", "",
++		/* GPIO0_D0 - D7 */
++		"pin-10 [GPIO0_D0]", "pin-08 [GPIO0_D1]", "",
++		"", "", "", "", "";
++};
++
++&gpio1 {
++	gpio-line-names =
++		/* GPIO1_A0 - A7 */
++		"pin-03 [GPIO1_A0]", "pin-05 [GPIO1_A1]", "",
++		"",                  "pin-37 [GPIO1_A4]", "",
++		"",                  "",
++		/* GPIO1_B0 - B7 */
++		"", "", "", "", "", "", "", "",
++		/* GPIO1_C0 - C7 */
++		"", "", "", "", "", "", "", "",
++		/* GPIO1_D0 - D7 */
++		"", "", "", "", "", "", "", "";
++};
++
++&gpio2 {
++	gpio-line-names =
++		/* GPIO2_A0 - A7 */
++		"", "", "", "", "", "", "", "",
++		/* GPIO2_B0 - B7 */
++		"", "", "", "", "", "", "", "",
++		/* GPIO2_C0 - C7 */
++		"", "", "", "", "", "", "", "",
++		/* GPIO2_D0 - D7 */
++		"", "", "", "", "", "", "", "";
++};
++
++&gpio3 {
++	gpio-line-names =
++		/* GPIO3_A0 - A7 */
++		"",                  "pin-11 [GPIO3_A1]", "pin-13 [GPIO3_A2]",
++		"pin-12 [GPIO3_A3]", "pin-35 [GPIO3_A4]", "pin-40 [GPIO3_A5]",
++		"pin-38 [GPIO3_A6]", "pin-36 [GPIO3_A7]",
++		/* GPIO3_B0 - B7 */
++		"pin-15 [GPIO3_B0]", "pin-16 [GPIO3_B1]", "pin-18 [GPIO3_B2]",
++		"pin-29 [GPIO3_B3]", "pin-31 [GPIO3_B4]", "",
++		"", "",
++		/* GPIO3_C0 - C7 */
++		"",                  "pin-22 [GPIO3_C1]", "pin-32 [GPIO3_C2]",
++		"pin-33 [GPIO3_C3]", "pin-07 [GPIO3_C4]", "",
++		"", "",
++		/* GPIO3_D0 - D7 */
++		"", "", "", "", "", "", "", "";
++};
++
++&gpio4 {
++	gpio-line-names =
++		/* GPIO4_A0 - A7 */
++		"", "", "", "", "", "", "", "",
++		/* GPIO4_B0 - B7 */
++		"",                  "",                  "pin-27 [GPIO4_B2]",
++		"pin-28 [GPIO4_B3]", "", "", "", "",
++		/* GPIO4_C0 - C7 */
++		"",                  "",                  "pin-23 [GPIO4_C2]",
++		"pin-19 [GPIO4_C3]", "",                  "pin-21 [GPIO4_C5]",
++		"pin-24 [GPIO4_C6]", "",
++		/* GPIO4_D0 - D7 */
++		"", "", "", "", "", "", "", "";
++};
++
+ &gpu {
+ 	mali-supply = <&vdd_gpu_npu>;
+ 	status = "okay";
 -- 
 2.45.2
 
