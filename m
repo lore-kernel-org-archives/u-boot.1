@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F5D6C3DA7F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 19:56:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19A84C3DA7F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 19:57:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 343BF88C3D;
-	Fri,  2 Aug 2024 21:56:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 23EAD88C6D;
+	Fri,  2 Aug 2024 21:56:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VJNcQA69";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gyDVa32y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA88D88BE4; Fri,  2 Aug 2024 21:56:36 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 86AA488C19; Fri,  2 Aug 2024 21:56:38 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42AEA88C16
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 21:56:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B3A088C5F
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 21:56:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-427fc97a88cso58351135e9.0
- for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 12:56:34 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-42819654737so51660415e9.1
+ for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 12:56:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722628594; x=1723233394; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1722628595; x=1723233395; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=42Ttjhnqvu+VUpByPnMFgSJgZY+SKsiQu28HON6IhxQ=;
- b=VJNcQA69UBTUOCQR6VW6NwLkAVnxFcqlSeZLaJxhm6apCWHhvLrDjGjD/ijzPi0MXM
- ivboKFTIcOTI5b3TwA5H/G65uHLVrTpdcOVrSyOhiPQCWCYePlMG68g9UoUr4LNSWm1g
- oNOSYX+Iqiuz7hCGy7qV5s+3vsO357uWtExChfCCGm2IJM+3qj1UBnC+MU2GV255UlAe
- WhQuhwfk2f6pq4lL8Ld0Pw5+Xkc1t/VL9vDvDsNhk2R2UM+0CRQi4WbBSjZPD0wzEd1d
- STu1vBb1ltvWPgTR7N8lyOrv/C3F8T6KD63FJKFyCrfVvSfQaFCyEh4vJQ4MrD6BwAEr
- dlFg==
+ :reply-to; bh=IimY4Kn/j943kf0c7nLQKNaoSrHF5wWXyxU22DJHe+k=;
+ b=gyDVa32yOw4ESf4ABtj6T1zmUpg6sQGIELj7v0o526LWnXuc7TfQx218+2QsPFei+1
+ kT+OLrIPKu4Qpb3hICMnuXgC+Dja+J7U3PcSKu0dVG9fxkf90svrna0Kmq/XZMDhnRyg
+ R4aOlZJuUNTjcRuq6l/5qIkKTbT8ZmqzdvZGsEHU3Lo3kl5TMIy0gGM/x1Wp+Uvzzkdo
+ sgBuyqZgOzyuvgkTu7fbI9UwCa/dL5Ly7cvTdkMeZpf2G97IhYFmfA9nDaVC7qi3uBXd
+ sC40DqholDgZT6XmJB5AnaIvQoOLGWgVGi4xykA1a+plZ8YslXKu63NcB/gORTzmwJmh
+ t9uA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722628594; x=1723233394;
+ d=1e100.net; s=20230601; t=1722628595; x=1723233395;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=42Ttjhnqvu+VUpByPnMFgSJgZY+SKsiQu28HON6IhxQ=;
- b=qk+jrwFaT2o3FZIAz7AKM0FMLHqaCk/wUtCe5cjhXr5d+xp8Tt8p6uRZBtwIQaSaXF
- kpcGAa0qBnjhIk+aO9Dbqh9S9qZEE4QfiX/WpVZe6CUf0AhJUmDwYAjtFlrUHj5HDN08
- Ka+i5XenLWEQRUQd2sj8Bb1PcGjbOKHbJb50d+8VSd4zloh0smJPe7c0amXKKqlbC8un
- P1+c+o9TYNDbBd05ovbeUrspGGGKtFRcdjwcWUfg/ue9Gs6x5ZvI8CYX2SQJNZ6AKSIQ
- uGqjIqlvbaeIbf5ogJLQD9YssroQ51GjM0VP46FdjD+9sV658QZQ+pT0QzN15k8wZiWI
- V1LA==
+ bh=IimY4Kn/j943kf0c7nLQKNaoSrHF5wWXyxU22DJHe+k=;
+ b=w6Ag9jXdyW2wLoR+eHl53D0k7VE4M0Pl5Q/T7cXyvBnGhziV6/+ZrRkUgpGpUtND5W
+ sWHQt0Nm5kc2UBFTm+LZ8k8HPTu7Jx8a4V/BOWHuGCCQbOrSBuQCy9B3fbtUfm2+vQyW
+ IvSujhqC8vXdizBIn/59QHc+1Ij6zC6OWqWD9SHrwoxD9Mcf9cNvjSC9alqqc9Xsax5K
+ dFf+5C4BDb2J8aXCl9xdZ1ylM1Rk8mR2zmWA/gdOds7WqXKnQN/HKp20ctADc7pLsey4
+ K9EibgpPT//oefoFN91dcrliIh2XKclpCM3Suw/8IR8W6A4lambtQO0TXmluUE9RQQPB
+ zckg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXWrGisUqv0E9LB6p+FnxmPt//nLyMWlsT9FuJtDC7C0ttykBoLP9T9D1TSlOGqQJ5TVqbHVOkyt/qKfN6CXVzLSkc4wQ==
-X-Gm-Message-State: AOJu0Yxq3i434HuyKkyK+OZlSkqxQQNkgsZBURIPee6s5OKnyeL0LO4J
- FTgUx1P0y7LrqO/6owc0oxYtomcswdrP0YVqyS9F2MRXIzTpg+xr
-X-Google-Smtp-Source: AGHT+IFOTPzGBEqRB4gCeH6npco/GK6C+5QGCuEcc7g2e4QyhwdT1yilqJPlqTCTk7xe9SS3al1Rag==
-X-Received: by 2002:a05:600c:4f0c:b0:426:6099:6eaa with SMTP id
- 5b1f17b1804b1-428e6b7c61emr30077865e9.26.1722628593606; 
- Fri, 02 Aug 2024 12:56:33 -0700 (PDT)
+ AJvYcCW3a/iMJ6wWpDyv3oBONl1h+ONox4DH9E6bjncEbRZbX0/AO8GbpSNd9x9RfJeR27tnrCfRwwZTanGLpdBEL97psQ8B2Q==
+X-Gm-Message-State: AOJu0YzY+DSig/ETcvaQ/3QCiimShgkrBckkyXv5HtNcU7T2WdGLCHAI
+ uPhtkKojsOu1vvB2RH6znYKu9OA1XXLQEljENZ0qcjl5V1LoKGwN
+X-Google-Smtp-Source: AGHT+IHK8STvacJ2QEYYfrpYi1vK1LcbbDp6VqgpQyB6J1SOWLi6Y9imyGzRo8vD4ZPKY7YlGIhBmg==
+X-Received: by 2002:a05:600c:358e:b0:426:6876:83bb with SMTP id
+ 5b1f17b1804b1-428e6b31fbamr29626585e9.17.1722628594918; 
+ Fri, 02 Aug 2024 12:56:34 -0700 (PDT)
 Received: from localhost.localdomain
  (host-87-6-196-30.retail.telecomitalia.it. [87.6.196.30])
  by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-428e6e01d0asm43350485e9.16.2024.08.02.12.56.32
+ 5b1f17b1804b1-428e6e01d0asm43350485e9.16.2024.08.02.12.56.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Aug 2024 12:56:33 -0700 (PDT)
+ Fri, 02 Aug 2024 12:56:34 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Crispin John <john@phrozen.org>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
@@ -74,9 +74,10 @@ To: Crispin John <john@phrozen.org>, Tom Rini <trini@konsulko.com>,
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Christian Marangi <ansuelsmth@gmail.com>, Sam Shih <sam.shih@mediatek.com>,
  u-boot@lists.denx.de
-Subject: [PATCH 02/14] clk: mediatek: mt7981: fix typo for infra_i2c0_ck
-Date: Fri,  2 Aug 2024 15:53:03 +0200
-Message-ID: <20240802135326.25303-3-ansuelsmth@gmail.com>
+Subject: [PATCH 03/14] clk: mediatek: mt7981: fix wrong mux width for pwm2 and
+ pwm1 clock
+Date: Fri,  2 Aug 2024 15:53:04 +0200
+Message-ID: <20240802135326.25303-4-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240802135326.25303-1-ansuelsmth@gmail.com>
 References: <20240802135326.25303-1-ansuelsmth@gmail.com>
@@ -98,54 +99,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix a typo for infra_i2c0_ck where 0 was misspelled as O.
+Fix wrong mux width for pwm2 and pwm1. Upstream have width 1 but U-Boot
+have width set to 2. Change the value to follow upstream implementation.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- arch/arm/dts/mt7981.dtsi               | 2 +-
- drivers/clk/mediatek/clk-mt7981.c      | 2 +-
- include/dt-bindings/clock/mt7981-clk.h | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ drivers/clk/mediatek/clk-mt7981.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/dts/mt7981.dtsi b/arch/arm/dts/mt7981.dtsi
-index 7aaa7770f83..1056667ba65 100644
---- a/arch/arm/dts/mt7981.dtsi
-+++ b/arch/arm/dts/mt7981.dtsi
-@@ -158,7 +158,7 @@
- 		      <0x10217080 0x80>;
- 		interrupts = <GIC_SPI 136 IRQ_TYPE_LEVEL_HIGH>;
- 		clock-div = <1>;
--		clocks = <&infracfg_ao CK_INFRA_I2CO_CK>,
-+		clocks = <&infracfg_ao CK_INFRA_I2C0_CK>,
- 			 <&infracfg_ao CK_INFRA_AP_DMA_CK>;
- 		clock-names = "main", "dma";
- 		#address-cells = <1>;
 diff --git a/drivers/clk/mediatek/clk-mt7981.c b/drivers/clk/mediatek/clk-mt7981.c
-index 7a699162421..69d018b817a 100644
+index 69d018b817a..6e770de99cf 100644
 --- a/drivers/clk/mediatek/clk-mt7981.c
 +++ b/drivers/clk/mediatek/clk-mt7981.c
-@@ -474,7 +474,7 @@ static const struct mtk_gate infracfg_ao_gates[] = {
- 	GATE_INFRA0(CK_INFRA_SEJ_CK, "infra_sej", CK_INFRA_66M_MCK, 24),
- 	GATE_INFRA0(CK_INFRA_SEJ_13M_CK, "infra_sej_13m", CK_INFRA_CK_F26M, 25),
- 	GATE_INFRA1(CK_INFRA_THERM_CK, "infra_therm", CK_INFRA_CK_F26M, 0),
--	GATE_INFRA1(CK_INFRA_I2CO_CK, "infra_i2co", CK_INFRA_I2CS_CK, 1),
-+	GATE_INFRA1(CK_INFRA_I2C0_CK, "infra_i2c0", CK_INFRA_I2CS_CK, 1),
- 	GATE_INFRA1(CK_INFRA_UART0_CK, "infra_uart0", CK_INFRA_MUX_UART0, 2),
- 	GATE_INFRA1(CK_INFRA_UART1_CK, "infra_uart1", CK_INFRA_MUX_UART1, 3),
- 	GATE_INFRA1(CK_INFRA_UART2_CK, "infra_uart2", CK_INFRA_MUX_UART2, 4),
-diff --git a/include/dt-bindings/clock/mt7981-clk.h b/include/dt-bindings/clock/mt7981-clk.h
-index 1c2781cd765..2dae6766ac3 100644
---- a/include/dt-bindings/clock/mt7981-clk.h
-+++ b/include/dt-bindings/clock/mt7981-clk.h
-@@ -196,7 +196,7 @@
- #define CK_INFRA_SEJ_CK			(24 - INFRACFG_AO_OFFSET)
- #define CK_INFRA_SEJ_13M_CK		(25 - INFRACFG_AO_OFFSET)
- #define CK_INFRA_THERM_CK		(26 - INFRACFG_AO_OFFSET)
--#define CK_INFRA_I2CO_CK		(27 - INFRACFG_AO_OFFSET)
-+#define CK_INFRA_I2C0_CK		(27 - INFRACFG_AO_OFFSET)
- #define CK_INFRA_UART0_CK		(28 - INFRACFG_AO_OFFSET)
- #define CK_INFRA_UART1_CK		(29 - INFRACFG_AO_OFFSET)
- #define CK_INFRA_UART2_CK		(30 - INFRACFG_AO_OFFSET)
+@@ -404,9 +404,9 @@ static const struct mtk_composite infra_muxes[] = {
+ 	INFRA_MUX(CK_INFRA_SPI2_SEL, "infra_spi2_sel", infra_spi0_parents, 0x10,
+ 		  6, 1),
+ 	INFRA_MUX(CK_INFRA_PWM1_SEL, "infra_pwm1_sel", infra_pwm1_parents, 0x10,
+-		  9, 2),
++		  9, 1),
+ 	INFRA_MUX(CK_INFRA_PWM2_SEL, "infra_pwm2_sel", infra_pwm1_parents, 0x10,
+-		  11, 2),
++		  11, 1),
+ 	INFRA_MUX(CK_INFRA_PWM_BSEL, "infra_pwm_bsel", infra_pwm_bsel_parents,
+ 		  0x10, 13, 2),
+ 	INFRA_MUX(CK_INFRA_PCIE_SEL, "infra_pcie_sel", infra_pcie_parents, 0x20,
 -- 
 2.45.2
 
