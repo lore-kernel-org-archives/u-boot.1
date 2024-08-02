@@ -4,63 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F8ADC3DA7F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 21:04:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F94EC3DA7F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 22:12:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39D1E88B80;
-	Fri,  2 Aug 2024 23:04:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1D7D1889AF;
+	Sat,  3 Aug 2024 00:12:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="r2OoQnxU";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="gtgBUT/Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 258DC88B8E; Fri,  2 Aug 2024 23:04:25 +0200 (CEST)
+ id 3CC41889AF; Sat,  3 Aug 2024 00:12:53 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE66288B22
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 23:04:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32C4E885F2
+ for <u-boot@lists.denx.de>; Sat,  3 Aug 2024 00:12:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=5651=PC=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1722632654;
- bh=E4Z5s5LPq9gjOxO0ZSDD1L79O5MAjVjTk8yS/FMT0FQ=;
- b=r2OoQnxUnyicTMKjl1Ld2hQG3CYUxeX4caR/Z62V9gA6WN0+uJ93X2sEtmA3Tlp7vx+fE5FRd
- TWujOXISgVa/zThaQENbIGBizII5Xl2oB+1lrLyLBpxQoxCoemVigwmVbQUpbF+tU1WSHPAJ/YN
- fr4YPyPVEsd+XsbjwbIBZPl9h7swLeRmMPr055mj1r4gYvAoDfM/u4SNPmFt+q5jSjD/qcv5dWQ
- 1RLr44GTWrPiXL+ONNRtRKVPrk3Ky7PDxCba9B6RpEqgXe4J6wHdcUNaq/AM3xso/MLjxBbIvXz
- ARHdKoc16Ctpw6c63rGiKdCla/wNHbuUpnP9o+3QdG2w==
-Message-ID: <88da35e4-77d8-4360-8be2-5efa6ae0d5cf@kwiboo.se>
-Date: Fri, 2 Aug 2024 23:04:05 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/7] board: rock5b-rk3588: enable USB-C in operating
- system
-To: Sebastian Reichel <sebastian.reichel@collabora.com>
-Cc: Marek Vasut <marex@denx.de>, Eugen Hristev
- <eugen.hristev@collabora.com>, Tim Harvey <tharvey@gateworks.com>, Kever
- Yang <kever.yang@rock-chips.com>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>, Soeren Moch
- <smoch@web.de>, u-boot@lists.denx.de
-References: <20240802180027.139193-1-sebastian.reichel@collabora.com>
- <20240802180027.139193-5-sebastian.reichel@collabora.com>
-Content-Language: en-US
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1722636761;
+ bh=D/bF/UbxZeFOy1HTS0hedkExVEqtOfe7RpN9f436rqI=;
+ b=gtgBUT/Z9uIWwsmIA5IHxnbQKIBYr7H4lJUZEVPi2DJFsnSXzOPu7GKe5axAy1L+5Qif3Yf30
+ ZQSBXtiOPtbOA7nNVAJpzIhwfaBtRXS02vpzGqMMIYVHpAUWVKEovCCeHa4XiJO4ohAkgMIEE7l
+ snJ0Z12DsoZWAjjhpdX1NZCeA9eHIphflLU1ygDFmPec0u5Il2EfuiNpTHk1CdY6VsMX6V4/m+o
+ evtc6Ibsc5Uo8b/RkSBJIHiCtUTt3PKtkDK0tc07nI1OxeNltoxJPI0Lf9zDo50WG04oPucm3zQ
+ Gx8qjU3euhl7CvwulD//s6nm2LVYAhi5JL3yW2LzwHRg==
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20240802180027.139193-5-sebastian.reichel@collabora.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de, Jonas Karlman
+ <jonas@kwiboo.se>
+Subject: [PATCH v2 0/5] board: rockchip: Add Radxa ZERO 3W/3E
+Date: Fri,  2 Aug 2024 22:12:18 +0000
+Message-ID: <20240802221231.2629416-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.45.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-Report-Abuse-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 66ad49cbb3fb002aec6e62fa
+X-ForwardEmail-ID: 66ad59d6b3fb002aec6e71c6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,65 +68,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sebastian,
+This series add support for the RK3566 based Radxa ZERO 3W/3E boards.
 
-On 2024-08-02 19:59, Sebastian Reichel wrote:
-> Since older U-Boot releases do not negotiate USB PD, the kernel
-> DT may not enable the USB-C controller by default to avoid a
-> regression. The plan is to upstream it with 'status = "fail";'
-> instead. U-Boot should then mark it as 'status = "okay";' if
-> it negotiated USB PD. Currently existing upstream kernel DTs do
-> not yet have the USB-C controller at all, so we ignore any
-> failures.
+rk_board_late_init() and board_fit_config_name_match() has been
+implemented to set fdtfile env var and load correct FIT config based
+on what board is detected at runtime.
 
-I do not really understand why you need to upstream it this way, there
-are plenty of other rk3588 boards with fcs,fusb302 already having status
-"okay" that possible are affected by same USB PD issue that ROCK 5B
-have.
+Features tested on a ZERO 3W 8GB v1.11:
+- SD-card boot
+- eMMC boot
+- USB gadget
+- USB host
 
-I guess you want to try and protect users that upgrade kernel DT and
-ignore upgrading to a newer U-Boot, use vendor U-Boot or any other
-bootloader from having possible issues with those USB PD power supplies
-that have issues?
+Features tested on a ZERO 3E 4GB v1.2:
+- SD-card boot
+- Ethernet
+- USB gadget
+- USB host
 
-> 
-> Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
-> ---
->  board/radxa/rock5b-rk3588/rock5b-rk3588.c | 11 +++++++++++
->  1 file changed, 11 insertions(+)
-> 
-> diff --git a/board/radxa/rock5b-rk3588/rock5b-rk3588.c b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
-> index 1c17ae93c76c..4e926ebf2cb0 100644
-> --- a/board/radxa/rock5b-rk3588/rock5b-rk3588.c
-> +++ b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
-> @@ -3,6 +3,8 @@
->   * Copyright (c) 2023-2024 Collabora Ltd.
->   */
->  
-> +#include <fdtdec.h>
-> +#include <fdt_support.h>
->  #include <usb/tcpm.h>
->  
->  #ifdef CONFIG_MISC_INIT_R
-> @@ -33,3 +35,12 @@ int misc_init_r(void)
->  	return 0;
->  }
->  #endif
-> +
-> +#ifdef CONFIG_OF_BOARD_SETUP
-> +int ft_board_setup(void *blob, struct bd_info *bd)
-> +{
-> +	if (IS_ENABLED(CONFIG_MISC_INIT_R))
+Changes in v2:
+- Add Signed-off-by tags to cherry-picked dts/upstream commits
+- Drop depends on ADC and instead use $(SPL_TPL_) for adc-uclass.o
+- Add depends on DM/SPL_DM to ADC/SPL_ADC
+- Add override for dr_mode in usb_host0_xhci node
+  https://lore.kernel.org/linux-rockchip/20240802051508.498-1-naoki@radxa.com/
+- Collect t-b tag
 
-It make very little sense to check for this, it is implied for almost
-all Rockchip boards since it is used in rockchip board common code
-to setup serial and Ethernet mac addresses env vars.
+This series depends on the following patch for a clean apply:
+- board: rockchip: add Radxa ROCK 3 Model C [1]
 
-Regards,
-Jonas
+[1] https://patchwork.ozlabs.org/patch/1963177/
 
-> +		fdt_status_okay_by_compatible(blob, "fcs,fusb302");
-> +	return 0;
-> +}
-> +#endif
+FUKAUMI Naoki (1):
+  arm64: dts: rockchip: fix mmc aliases for Radxa ZERO 3E/3W
+
+Jonas Karlman (3):
+  arm64: dts: rockchip: Add Radxa ZERO 3W/3E
+  dm: adc: Add SPL_ADC Kconfig symbol for use of ADC in SPL
+  board: rockchip: Add Radxa ZERO 3W/3E
+
+Trevor Woerner (1):
+  arm64: dts: rockchip: add gpio-line-names to radxa-zero-3
+
+ arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi |  15 +
+ arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi |  15 +
+ arch/arm/mach-rockchip/rk3568/Kconfig         |   6 +
+ board/radxa/zero3-rk3566/Kconfig              |  12 +
+ board/radxa/zero3-rk3566/MAINTAINERS          |   6 +
+ board/radxa/zero3-rk3566/Makefile             |   3 +
+ board/radxa/zero3-rk3566/zero3-rk3566.c       |  59 ++
+ configs/radxa-zero-3-rk3566_defconfig         |  85 +++
+ doc/board/rockchip/rockchip.rst               |   1 +
+ drivers/Makefile                              |   2 +-
+ drivers/adc/Kconfig                           |   5 +
+ drivers/adc/Makefile                          |   2 +-
+ .../arm64/rockchip/rk3566-radxa-zero-3.dtsi   | 531 ++++++++++++++++++
+ .../arm64/rockchip/rk3566-radxa-zero-3e.dts   |  52 ++
+ .../arm64/rockchip/rk3566-radxa-zero-3w.dts   |  92 +++
+ 15 files changed, 884 insertions(+), 2 deletions(-)
+ create mode 100644 arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi
+ create mode 100644 board/radxa/zero3-rk3566/Kconfig
+ create mode 100644 board/radxa/zero3-rk3566/MAINTAINERS
+ create mode 100644 board/radxa/zero3-rk3566/Makefile
+ create mode 100644 board/radxa/zero3-rk3566/zero3-rk3566.c
+ create mode 100644 configs/radxa-zero-3-rk3566_defconfig
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3.dtsi
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3e.dts
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3w.dts
+
+-- 
+2.45.2
 
