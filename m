@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C9DCC52D71
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 06:19:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DB31C52D70
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 06:21:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 240E488B70;
-	Fri,  2 Aug 2024 08:19:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BBB1B8874E;
+	Fri,  2 Aug 2024 08:21:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Czk6vcPG";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Sa7MzFZp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3BBA88B77; Fri,  2 Aug 2024 08:19:16 +0200 (CEST)
-Received: from mail-m15571.qiye.163.com (mail-m15571.qiye.163.com
- [101.71.155.71])
+ id 4E2AB88B70; Fri,  2 Aug 2024 08:21:05 +0200 (CEST)
+Received: from mail-m19731109.qiye.163.com (mail-m19731109.qiye.163.com
+ [220.197.31.109])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F22A88617
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 08:19:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 728D287C38
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 08:21:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=Czk6vcPGD3BL2i7cUTrmEZCrRI8Vm8kF6PVN0cKV/KHu3ffvoHCpn0jT5lemf9Yj3lW6XIJMn06mrGglixzqU72SpHKnQ2U6M9clZrR2J9yzBxbwkRlb0RrFgVvASE3hBiAe3cfhbkdrBmjzgkhBA3NBWx+FtO4zrSq0G+dPOd4=;
+ b=Sa7MzFZpeXPDIJ8gJCrWaQiw2uDSC/TmVTCh/SvYwsqtlhCC3cjzGR7U1+23ZdeTfJD21dxEMFWdaF4bQuy/miplvK5sMkCDLvP3Na5ZgSULWZTKbNyj4bPGY0fX4HOdr9HSOdxZsePkVSKRB6B9nyzJ6h6LCNzvorD8E6C6pyQ=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=3nlvtE15tH22uZkaQWkRcLs+H7FFhcZ66LRbARvKmmA=;
+ bh=fJVlK8uqGCslzPqUJpXRkgFGPYHVcfEq2w5A9qAXDX4=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 9B593900490;
- Fri,  2 Aug 2024 14:19:06 +0800 (CST)
-Message-ID: <de482eac-c80f-462e-a090-7b8cfdd319cf@rock-chips.com>
-Date: Fri, 2 Aug 2024 14:19:06 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id DB25B9004A7;
+ Fri,  2 Aug 2024 14:20:37 +0800 (CST)
+Message-ID: <3bc0f24f-41d2-4a7c-8f2a-bfdabe138d8f@rock-chips.com>
+Date: Fri, 2 Aug 2024 14:20:37 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 8/8] rockchip: rk3308-rock-pi-s: Enable LED and IO Domain
- driver
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Sumit Garg <sumit.garg@linaro.org>, Akash Gajjar
- <gajjar04akash@gmail.com>, u-boot@lists.denx.de
-References: <20240730145148.849245-1-jonas@kwiboo.se>
- <20240730145148.849245-9-jonas@kwiboo.se>
+Subject: Re: [PATCH 2/4] arm64: dts: rockchip: add thermal zones information
+ on RK3588
+To: Heiko Stuebner <heiko@sntech.de>, sjg@chromium.org,
+ philipp.tomsich@vrull.eu
+Cc: dsimic@manjaro.org, u-boot@lists.denx.de,
+ Alexey Charkov <alchark@gmail.com>
+References: <20240731102624.2541989-1-heiko@sntech.de>
+ <20240731102624.2541989-3-heiko@sntech.de>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240730145148.849245-9-jonas@kwiboo.se>
+In-Reply-To: <20240731102624.2541989-3-heiko@sntech.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGh9JQ1YdTxhOSkIYGhlCGUtWFRQJFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGktKTFYZSU0fT04eQ0NOTUhWFRQJFh
  oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
  hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a9111bdf42303a9kunm9b593900490
+X-HM-Tid: 0a9111bf586703a9kunmdb25b9004a7
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PzY6DQw*GDI2DyJWAgIYFAoq
- TzMKCzJVSlVKTElJTkxCTk9MTkxPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTkhCNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6N006Vhw5CzI6SCIROE1NIgEq
+ CAkwCxhVSlVKTElJTkxCTUhDQkhCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFNQk1INwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,38 +77,205 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2024/7/30 22:51, Jonas Karlman wrote:
-> Add LED=y and LED_GPIO=y to support the onboard leds.
+On 2024/7/31 18:26, Heiko Stuebner wrote:
+> From: Alexey Charkov <alchark@gmail.com>
 >
-> Add ROCKCHIP_IODOMAIN=y to configure correct io voltage domains.
+> This includes the necessary device tree data to allow thermal
+> monitoring on RK3588(s) using the on-chip TSADC device, along with
+> trip points for automatic thermal management.
 >
-> Add DM_MDIO=y now that the DT contain a Ethernet phy node.
+> Each of the CPU clusters (one for the little cores and two for
+> the big cores) get a passive cooling trip point at 85C, which
+> will trigger DVFS throttling of the respective cluster upon
+> reaching a high temperature condition.
 >
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> All zones also have a critical trip point at 115C, which will
+> trigger a reset.
+>
+> Signed-off-by: Alexey Charkov <alchark@gmail.com>
+> Link: https://lore.kernel.org/r/20240617-rk-dts-additions-v5-1-c1f5f3267f1e@gmail.com
+> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+>
+> [ upstream commit: 510cd9e688453166b2bff3999ed21cac97385bb5 ]
+>
+> (cherry picked from commit 33e7079543d5eee1415b937054e8634000d1bde4)
+> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   configs/rock-pi-s-rk3308_defconfig | 4 ++++
->   1 file changed, 4 insertions(+)
+>   .../src/arm64/rockchip/rk3588-base.dtsi       | 153 ++++++++++++++++++
+>   1 file changed, 153 insertions(+)
 >
-> diff --git a/configs/rock-pi-s-rk3308_defconfig b/configs/rock-pi-s-rk3308_defconfig
-> index e450a0618020..54f7744c9895 100644
-> --- a/configs/rock-pi-s-rk3308_defconfig
-> +++ b/configs/rock-pi-s-rk3308_defconfig
-> @@ -38,10 +38,14 @@ CONFIG_CLK=y
->   # CONFIG_USB_FUNCTION_FASTBOOT is not set
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_LED=y
-> +CONFIG_LED_GPIO=y
-> +CONFIG_ROCKCHIP_IODOMAIN=y
->   CONFIG_SUPPORT_EMMC_RPMB=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_PHY_REALTEK=y
-> +CONFIG_DM_MDIO=y
->   CONFIG_DM_ETH_PHY=y
->   CONFIG_ETH_DESIGNWARE=y
->   CONFIG_GMAC_ROCKCHIP=y
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi b/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi
+> index 629049f3dc1..78bc9dc9704 100644
+> --- a/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi
+> @@ -10,6 +10,7 @@
+>   #include <dt-bindings/reset/rockchip,rk3588-cru.h>
+>   #include <dt-bindings/phy/phy.h>
+>   #include <dt-bindings/ata/ahci.h>
+> +#include <dt-bindings/thermal/thermal.h>
+>   
+>   / {
+>   	compatible = "rockchip,rk3588";
+> @@ -2368,6 +2369,158 @@
+>   		status = "disabled";
+>   	};
+>   
+> +	thermal_zones: thermal-zones {
+> +		/* sensor near the center of the SoC */
+> +		package_thermal: package-thermal {
+> +			polling-delay-passive = <0>;
+> +			polling-delay = <0>;
+> +			thermal-sensors = <&tsadc 0>;
+> +
+> +			trips {
+> +				package_crit: package-crit {
+> +					temperature = <115000>;
+> +					hysteresis = <0>;
+> +					type = "critical";
+> +				};
+> +			};
+> +		};
+> +
+> +		/* sensor between A76 cores 0 and 1 */
+> +		bigcore0_thermal: bigcore0-thermal {
+> +			polling-delay-passive = <100>;
+> +			polling-delay = <0>;
+> +			thermal-sensors = <&tsadc 1>;
+> +
+> +			trips {
+> +				bigcore0_alert: bigcore0-alert {
+> +					temperature = <85000>;
+> +					hysteresis = <2000>;
+> +					type = "passive";
+> +				};
+> +
+> +				bigcore0_crit: bigcore0-crit {
+> +					temperature = <115000>;
+> +					hysteresis = <0>;
+> +					type = "critical";
+> +				};
+> +			};
+> +
+> +			cooling-maps {
+> +				map0 {
+> +					trip = <&bigcore0_alert>;
+> +					cooling-device =
+> +						<&cpu_b0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> +						<&cpu_b1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
+> +				};
+> +			};
+> +		};
+> +
+> +		/* sensor between A76 cores 2 and 3 */
+> +		bigcore2_thermal: bigcore2-thermal {
+> +			polling-delay-passive = <100>;
+> +			polling-delay = <0>;
+> +			thermal-sensors = <&tsadc 2>;
+> +
+> +			trips {
+> +				bigcore2_alert: bigcore2-alert {
+> +					temperature = <85000>;
+> +					hysteresis = <2000>;
+> +					type = "passive";
+> +				};
+> +
+> +				bigcore2_crit: bigcore2-crit {
+> +					temperature = <115000>;
+> +					hysteresis = <0>;
+> +					type = "critical";
+> +				};
+> +			};
+> +
+> +			cooling-maps {
+> +				map0 {
+> +					trip = <&bigcore2_alert>;
+> +					cooling-device =
+> +						<&cpu_b2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> +						<&cpu_b3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
+> +				};
+> +			};
+> +		};
+> +
+> +		/* sensor between the four A55 cores */
+> +		little_core_thermal: littlecore-thermal {
+> +			polling-delay-passive = <100>;
+> +			polling-delay = <0>;
+> +			thermal-sensors = <&tsadc 3>;
+> +
+> +			trips {
+> +				littlecore_alert: littlecore-alert {
+> +					temperature = <85000>;
+> +					hysteresis = <2000>;
+> +					type = "passive";
+> +				};
+> +
+> +				littlecore_crit: littlecore-crit {
+> +					temperature = <115000>;
+> +					hysteresis = <0>;
+> +					type = "critical";
+> +				};
+> +			};
+> +
+> +			cooling-maps {
+> +				map0 {
+> +					trip = <&littlecore_alert>;
+> +					cooling-device =
+> +						<&cpu_l0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> +						<&cpu_l1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> +						<&cpu_l2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+> +						<&cpu_l3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
+> +				};
+> +			};
+> +		};
+> +
+> +		/* sensor near the PD_CENTER power domain */
+> +		center_thermal: center-thermal {
+> +			polling-delay-passive = <0>;
+> +			polling-delay = <0>;
+> +			thermal-sensors = <&tsadc 4>;
+> +
+> +			trips {
+> +				center_crit: center-crit {
+> +					temperature = <115000>;
+> +					hysteresis = <0>;
+> +					type = "critical";
+> +				};
+> +			};
+> +		};
+> +
+> +		gpu_thermal: gpu-thermal {
+> +			polling-delay-passive = <0>;
+> +			polling-delay = <0>;
+> +			thermal-sensors = <&tsadc 5>;
+> +
+> +			trips {
+> +				gpu_crit: gpu-crit {
+> +					temperature = <115000>;
+> +					hysteresis = <0>;
+> +					type = "critical";
+> +				};
+> +			};
+> +		};
+> +
+> +		npu_thermal: npu-thermal {
+> +			polling-delay-passive = <0>;
+> +			polling-delay = <0>;
+> +			thermal-sensors = <&tsadc 6>;
+> +
+> +			trips {
+> +				npu_crit: npu-crit {
+> +					temperature = <115000>;
+> +					hysteresis = <0>;
+> +					type = "critical";
+> +				};
+> +			};
+> +		};
+> +	};
+> +
+>   	tsadc: tsadc@fec00000 {
+>   		compatible = "rockchip,rk3588-tsadc";
+>   		reg = <0x0 0xfec00000 0x0 0x400>;
