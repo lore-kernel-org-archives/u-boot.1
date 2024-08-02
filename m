@@ -4,19 +4,19 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE94EC3DA7F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 21:01:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E87ABC3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 21:01:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80EEF88C08;
-	Fri,  2 Aug 2024 23:00:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DF3AF88BC1;
+	Fri,  2 Aug 2024 23:00:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B89A888B80; Fri,  2 Aug 2024 23:00:47 +0200 (CEST)
+ id C2A7F88C1A; Fri,  2 Aug 2024 23:00:49 +0200 (CEST)
 Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79B2688B8E
+ by phobos.denx.de (Postfix) with ESMTPS id 95EAF88BE4
  for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 23:00:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=sntech.de
@@ -25,17 +25,15 @@ Received: from i53875a76.versanet.de ([83.135.90.118] helo=phil.lan)
  by gloria.sntech.de with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
  (envelope-from <heiko@sntech.de>)
- id 1sZzOE-0006IU-Q6; Fri, 02 Aug 2024 23:00:42 +0200
+ id 1sZzOF-0006IU-Ih; Fri, 02 Aug 2024 23:00:43 +0200
 From: Heiko Stuebner <heiko@sntech.de>
 To: sjg@chromium.org,
 	philipp.tomsich@vrull.eu,
 	kever.yang@rock-chips.com
-Cc: heiko@sntech.de, dsimic@manjaro.org, u-boot@lists.denx.de, jonas@kwiboo.se,
- Alexey Charkov <alchark@gmail.com>
-Subject: [PATCH v2 2/4] arm64: dts: rockchip: add thermal zones information on
- RK3588
-Date: Fri,  2 Aug 2024 23:00:26 +0200
-Message-Id: <20240802210028.2919639-3-heiko@sntech.de>
+Cc: heiko@sntech.de, dsimic@manjaro.org, u-boot@lists.denx.de, jonas@kwiboo.se
+Subject: [PATCH v2 4/4] board: rockchip: Add Radxa ROCK 5 ITX
+Date: Fri,  2 Aug 2024 23:00:28 +0200
+Message-Id: <20240802210028.2919639-5-heiko@sntech.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240802210028.2919639-1-heiko@sntech.de>
 References: <20240802210028.2919639-1-heiko@sntech.de>
@@ -57,204 +55,302 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alexey Charkov <alchark@gmail.com>
+The Rock 5 ITX is board in ITX form factor using the RK358 SoC
 
-This includes the necessary device tree data to allow thermal
-monitoring on RK3588(s) using the on-chip TSADC device, along with
-trip points for automatic thermal management.
+It can be powered either by 12V, ATX power-supply or PoE.
 
-Each of the CPU clusters (one for the little cores and two for
-the big cores) get a passive cooling trip point at 85C, which
-will trigger DVFS throttling of the respective cluster upon
-reaching a high temperature condition.
+Notable peripherals are the 4 SATA ports, M.2 M-Key slot, M.2 E-key slot,
+2*2.5Gb PCIe-connected Ethernet NICs.
 
-All zones also have a critical trip point at 115C, which will
-trigger a reset.
+Display options are 2*HDMI, DP via USB-c, eDP + 2*DSI via PCB connectors.
 
-Signed-off-by: Alexey Charkov <alchark@gmail.com>
-Link: https://lore.kernel.org/r/20240617-rk-dts-additions-v5-1-c1f5f3267f1e@gmail.com
+USB ports are 4*USB3 + 2*USB2 on the back panel and 2-port front-panel
+connector.
+
+Schematics for the board can be found on
+- https://dl.radxa.com/rock5/5itx/radxa_rock_5_itx_X1100_schematic.pdf
+- https://dl.radxa.com/rock5/5itx/v1110/radxa_rock_5itx_v1110_schematic.pdf
+
+The naming scheme with the dashes follows Dragan's comment on the mainline
+devicetree commit:
+    "the name of this board deviates from the standard Radxa naming scheme,
+     which is something like "ROCK <number><letter>" thus, "rock-5a" is
+     fine, but it should be "rock-5-itx", simply because there's a space
+     between "5" and "ITX" in "ROCK 5 ITX"
+
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-
-[ upstream commit: 510cd9e688453166b2bff3999ed21cac97385bb5 ]
-
-(cherry picked from commit 33e7079543d5eee1415b937054e8634000d1bde4)
-Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 ---
- .../src/arm64/rockchip/rk3588-base.dtsi       | 153 ++++++++++++++++++
- 1 file changed, 153 insertions(+)
+ arch/arm/dts/rk3588-rock-5-itx-u-boot.dtsi |  22 ++++
+ arch/arm/mach-rockchip/rk3588/Kconfig      |  29 ++++++
+ board/radxa/rock-5-itx-rk3588/Kconfig      |  12 +++
+ board/radxa/rock-5-itx-rk3588/MAINTAINERS  |   8 ++
+ configs/rock-5-itx-rk3588_defconfig        | 111 +++++++++++++++++++++
+ doc/board/rockchip/rockchip.rst            |   1 +
+ include/configs/rock-5-itx-rk3588.h        |  15 +++
+ 7 files changed, 198 insertions(+)
+ create mode 100644 arch/arm/dts/rk3588-rock-5-itx-u-boot.dtsi
+ create mode 100644 board/radxa/rock-5-itx-rk3588/Kconfig
+ create mode 100644 board/radxa/rock-5-itx-rk3588/MAINTAINERS
+ create mode 100644 configs/rock-5-itx-rk3588_defconfig
+ create mode 100644 include/configs/rock-5-itx-rk3588.h
 
-diff --git a/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi b/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi
-index 629049f3dc1..78bc9dc9704 100644
---- a/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi
-+++ b/dts/upstream/src/arm64/rockchip/rk3588-base.dtsi
-@@ -10,6 +10,7 @@
- #include <dt-bindings/reset/rockchip,rk3588-cru.h>
- #include <dt-bindings/phy/phy.h>
- #include <dt-bindings/ata/ahci.h>
-+#include <dt-bindings/thermal/thermal.h>
- 
- / {
- 	compatible = "rockchip,rk3588";
-@@ -2368,6 +2369,158 @@
- 		status = "disabled";
- 	};
- 
-+	thermal_zones: thermal-zones {
-+		/* sensor near the center of the SoC */
-+		package_thermal: package-thermal {
-+			polling-delay-passive = <0>;
-+			polling-delay = <0>;
-+			thermal-sensors = <&tsadc 0>;
+diff --git a/arch/arm/dts/rk3588-rock-5-itx-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5-itx-u-boot.dtsi
+new file mode 100644
+index 00000000000..1e5c2674e49
+--- /dev/null
++++ b/arch/arm/dts/rk3588-rock-5-itx-u-boot.dtsi
+@@ -0,0 +1,22 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2023 Collabora Ltd.
++ */
 +
-+			trips {
-+				package_crit: package-crit {
-+					temperature = <115000>;
-+					hysteresis = <0>;
-+					type = "critical";
-+				};
-+			};
-+		};
++#include "rk3588-u-boot.dtsi"
 +
-+		/* sensor between A76 cores 0 and 1 */
-+		bigcore0_thermal: bigcore0-thermal {
-+			polling-delay-passive = <100>;
-+			polling-delay = <0>;
-+			thermal-sensors = <&tsadc 1>;
++&fspim2_pins {
++	bootph-pre-ram;
++	bootph-some-ram;
++};
 +
-+			trips {
-+				bigcore0_alert: bigcore0-alert {
-+					temperature = <85000>;
-+					hysteresis = <2000>;
-+					type = "passive";
-+				};
-+
-+				bigcore0_crit: bigcore0-crit {
-+					temperature = <115000>;
-+					hysteresis = <0>;
-+					type = "critical";
-+				};
-+			};
-+
-+			cooling-maps {
-+				map0 {
-+					trip = <&bigcore0_alert>;
-+					cooling-device =
-+						<&cpu_b0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+						<&cpu_b1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
-+				};
-+			};
-+		};
-+
-+		/* sensor between A76 cores 2 and 3 */
-+		bigcore2_thermal: bigcore2-thermal {
-+			polling-delay-passive = <100>;
-+			polling-delay = <0>;
-+			thermal-sensors = <&tsadc 2>;
-+
-+			trips {
-+				bigcore2_alert: bigcore2-alert {
-+					temperature = <85000>;
-+					hysteresis = <2000>;
-+					type = "passive";
-+				};
-+
-+				bigcore2_crit: bigcore2-crit {
-+					temperature = <115000>;
-+					hysteresis = <0>;
-+					type = "critical";
-+				};
-+			};
-+
-+			cooling-maps {
-+				map0 {
-+					trip = <&bigcore2_alert>;
-+					cooling-device =
-+						<&cpu_b2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+						<&cpu_b3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
-+				};
-+			};
-+		};
-+
-+		/* sensor between the four A55 cores */
-+		little_core_thermal: littlecore-thermal {
-+			polling-delay-passive = <100>;
-+			polling-delay = <0>;
-+			thermal-sensors = <&tsadc 3>;
-+
-+			trips {
-+				littlecore_alert: littlecore-alert {
-+					temperature = <85000>;
-+					hysteresis = <2000>;
-+					type = "passive";
-+				};
-+
-+				littlecore_crit: littlecore-crit {
-+					temperature = <115000>;
-+					hysteresis = <0>;
-+					type = "critical";
-+				};
-+			};
-+
-+			cooling-maps {
-+				map0 {
-+					trip = <&littlecore_alert>;
-+					cooling-device =
-+						<&cpu_l0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+						<&cpu_l1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+						<&cpu_l2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+						<&cpu_l3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
-+				};
-+			};
-+		};
-+
-+		/* sensor near the PD_CENTER power domain */
-+		center_thermal: center-thermal {
-+			polling-delay-passive = <0>;
-+			polling-delay = <0>;
-+			thermal-sensors = <&tsadc 4>;
-+
-+			trips {
-+				center_crit: center-crit {
-+					temperature = <115000>;
-+					hysteresis = <0>;
-+					type = "critical";
-+				};
-+			};
-+		};
-+
-+		gpu_thermal: gpu-thermal {
-+			polling-delay-passive = <0>;
-+			polling-delay = <0>;
-+			thermal-sensors = <&tsadc 5>;
-+
-+			trips {
-+				gpu_crit: gpu-crit {
-+					temperature = <115000>;
-+					hysteresis = <0>;
-+					type = "critical";
-+				};
-+			};
-+		};
-+
-+		npu_thermal: npu-thermal {
-+			polling-delay-passive = <0>;
-+			polling-delay = <0>;
-+			thermal-sensors = <&tsadc 6>;
-+
-+			trips {
-+				npu_crit: npu-crit {
-+					temperature = <115000>;
-+					hysteresis = <0>;
-+					type = "critical";
-+				};
-+			};
-+		};
++&sfc {
++	flash@0 {
++		bootph-pre-ram;
++		bootph-some-ram;
 +	};
++};
 +
- 	tsadc: tsadc@fec00000 {
- 		compatible = "rockchip,rk3588-tsadc";
- 		reg = <0x0 0xfec00000 0x0 0x400>;
++&vcc3v3_mkey {
++	regulator-always-on;
++};
+diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
+index e751d64e1a1..0dcf2249fb4 100644
+--- a/arch/arm/mach-rockchip/rk3588/Kconfig
++++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+@@ -185,6 +185,34 @@ config TARGET_ROCK5B_RK3588
+ 	  USB PD over USB Type-C
+ 	  Size: 100mm x 72mm (Pico-ITX form factor)
+ 
++config TARGET_ROCK_5_ITX_RK3588
++	bool "Radxa ROCK-5-ITX RK3588 board"
++	select BOARD_LATE_INIT
++	help
++	  Radxa ROCK-5-ITX is a Rockchip RK3588 based SBC (Single Board
++	  Computer) by Radxa in the ITX formfactor.
++
++	  There are variants depending on the DRAM size : from 4G up to 32G.
++
++	  Specification:
++
++	  Rockchip Rk3588 SoC
++	  4x ARM Cortex-A76, 4x ARM Cortex-A55
++	  4/8/16/24/32GB memory LPDDR5
++	  Mali G610MC4 GPU
++	  2x MIPI CSI 2 multiple lanes connector
++	  eMMC
++	  uSD slot (up to 128GB)
++	  M.2 M-key and M.2 E-key connector
++	  4x SATA
++	  2x USB 2.0 + 4x USB 3.0 Type-A, 2x USB 2.0 Panel, 1x USB 3.0 Type-C
++	  2x HDMI 2.1 output, 1x HDMI input
++	  DP via Type-C
++	  2x DSI via PCB connector
++	  2x 2.5 Gbps Ethernet port
++	  Front-panel connectors for audio and case-power, -leds
++	  Powered by either 12V, ATX power-supply or PoE
++
+ config TARGET_SIGE7_RK3588
+ 	bool "ArmSoM Sige7 RK3588 board"
+ 	select BOARD_LATE_INIT
+@@ -319,6 +347,7 @@ source "board/pine64/quartzpro64-rk3588/Kconfig"
+ source "board/turing/turing-rk1-rk3588/Kconfig"
+ source "board/radxa/rock5a-rk3588s/Kconfig"
+ source "board/radxa/rock5b-rk3588/Kconfig"
++source "board/radxa/rock-5-itx-rk3588/Kconfig"
+ source "board/rockchip/evb_rk3588/Kconfig"
+ source "board/rockchip/toybrick_rk3588/Kconfig"
+ source "board/theobroma-systems/jaguar_rk3588/Kconfig"
+diff --git a/board/radxa/rock-5-itx-rk3588/Kconfig b/board/radxa/rock-5-itx-rk3588/Kconfig
+new file mode 100644
+index 00000000000..f7a7666d531
+--- /dev/null
++++ b/board/radxa/rock-5-itx-rk3588/Kconfig
+@@ -0,0 +1,12 @@
++if TARGET_ROCK_5_ITX_RK3588
++
++config SYS_BOARD
++	default "rock-5-itx-rk3588"
++
++config SYS_VENDOR
++	default "radxa"
++
++config SYS_CONFIG_NAME
++	default "rock-5-itx-rk3588"
++
++endif
+diff --git a/board/radxa/rock-5-itx-rk3588/MAINTAINERS b/board/radxa/rock-5-itx-rk3588/MAINTAINERS
+new file mode 100644
+index 00000000000..1c4f24306a0
+--- /dev/null
++++ b/board/radxa/rock-5-itx-rk3588/MAINTAINERS
+@@ -0,0 +1,8 @@
++ROCK-5-ITX-RK3588
++M:	Heiko Stuebner <heiko@sntech.de>
++R:	Jonas Karlman <jonas@kwiboo.se>
++S:	Maintained
++F:	board/radxa/rock-5-itx-rk3588
++F:	include/configs/rock-5-itx-rk3588.h
++F:	configs/rock-5-itx-rk3588_defconfig
++F:	arch/arm/dts/rk3588-rock-5-itx-u-boot.dtsi
+diff --git a/configs/rock-5-itx-rk3588_defconfig b/configs/rock-5-itx-rk3588_defconfig
+new file mode 100644
+index 00000000000..bb9f148692a
+--- /dev/null
++++ b/configs/rock-5-itx-rk3588_defconfig
+@@ -0,0 +1,111 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_SYS_HAS_NONCACHED_MEMORY=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_SF_DEFAULT_SPEED=24000000
++CONFIG_SF_DEFAULT_MODE=0x2000
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-rock-5-itx"
++CONFIG_ROCKCHIP_RK3588=y
++CONFIG_ROCKCHIP_SPI_IMAGE=y
++CONFIG_SPL_SERIAL=y
++CONFIG_TARGET_ROCK5B_RK3588=y
++CONFIG_DEBUG_UART_BASE=0xFEB50000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_AHCI=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-rock-5-itx.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
++CONFIG_SPL_ATF=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_ROCKUSB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_AHCI_PCI=y
++CONFIG_DWC_AHCI=y
++CONFIG_SPL_CLK=y
++# CONFIG_USB_FUNCTION_FASTBOOT is not set
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_SF_DEFAULT_BUS=5
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_XTX=y
++CONFIG_PHYLIB=y
++CONFIG_RTL8169=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_PHY_ROCKCHIP_USBDP=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_RK8XX=y
++CONFIG_REGULATOR_RK8XX=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_SPL_RAM=y
++CONFIG_SCSI=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SFC=y
++CONFIG_ROCKCHIP_SPI=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_USB_HOST_ETHER=y
++CONFIG_USB_ETHER_ASIX=y
++CONFIG_USB_ETHER_ASIX88179=y
++CONFIG_USB_ETHER_LAN75XX=y
++CONFIG_USB_ETHER_LAN78XX=y
++CONFIG_USB_ETHER_MCS7830=y
++CONFIG_USB_ETHER_RTL8152=y
++CONFIG_USB_ETHER_SMSC95XX=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_USB_FUNCTION_ROCKUSB=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index bedc52e03e2..90416ce13aa 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -128,6 +128,7 @@ List of mainline supported Rockchip boards:
+      - Generic RK3588S/RK3588 (generic-rk3588)
+      - Indiedroid Nova (nova-rk3588s)
+      - Pine64 QuartzPro64 (quartzpro64-rk3588)
++     - Radxa ROCK 5 ITX (rock-5-itx-rk3588)
+      - Radxa ROCK 5A (rock5a-rk3588s)
+      - Radxa ROCK 5B (rock5b-rk3588)
+      - Rockchip Toybrick TB-RK3588X (toybrick-rk3588)
+diff --git a/include/configs/rock-5-itx-rk3588.h b/include/configs/rock-5-itx-rk3588.h
+new file mode 100644
+index 00000000000..bc0f9e72bc5
+--- /dev/null
++++ b/include/configs/rock-5-itx-rk3588.h
+@@ -0,0 +1,15 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2024 Heiko Stuebner <heiko@sntech.de>
++ */
++
++#ifndef __ROCK_5_ITX_RK3588_H
++#define __ROCK_5_ITX_RK3588_H
++
++#define ROCKCHIP_DEVICE_SETTINGS \
++		"stdout=serial,vidconsole\0" \
++		"stderr=serial,vidconsole\0"
++
++#include <configs/rk3588_common.h>
++
++#endif /* __ROCK_5_ITX_RK3588_H */
 -- 
 2.39.2
 
