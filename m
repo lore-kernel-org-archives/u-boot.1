@@ -4,80 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 157F5C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 20:16:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18292C3DA7F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 20:43:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5982988BF3;
-	Fri,  2 Aug 2024 22:16:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 76C8C88B8E;
+	Fri,  2 Aug 2024 22:43:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="La0BvSEz";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="iaUM66mw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D94488C01; Fri,  2 Aug 2024 22:16:43 +0200 (CEST)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 37DC988BC4; Fri,  2 Aug 2024 22:43:25 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFA0388BE4
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 22:16:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C062388B80
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 22:43:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-2681941eae0so3291587fac.0
- for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 13:16:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1722629799; x=1723234599; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DQUiB6/e5ned0KJgGH1UtG52K+6IFCiPDs3meckUn8o=;
- b=La0BvSEzaBFgOBX/6aJQHCHjQauKsxb8t5SozdpVIs7VtRYZiF3QwUB+a9VUvZsSoq
- 7sOoDD8CSE6eYUJdMTic9gYQBtffYjytNs7w/KpuWdhukiNulTkMPiS5spqxRcr3z/gy
- UhY7aPvOuvG2nQAm5vfYHt0ZtezCijCzrwCME=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722629799; x=1723234599;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DQUiB6/e5ned0KJgGH1UtG52K+6IFCiPDs3meckUn8o=;
- b=NGqSLEyze0KfnsmW4sIZNuApYPzr9KQDtuOL9XS8OvMsbuNyO7flfrALoX/uEDGsNZ
- 3jh0Zac0v9bd3a6Ay0rPwWdqVwany+gPipP+D48CM4zz7AL/17EvrSYNV3b2wNKPxMWD
- fWZglXBYQ9Kt0kYfYLCz4tvveApb97wf15G4TXQgsbDWivZcEaVTxtvK5Dc37PvB7MMY
- YUEnX7cwu+VWJ3aqVDjYfy2e5TsIqfU08YbY7/GRKgZP99cC8wQHnziDvTsk2vpaVEQJ
- nyY9H429Is4Icud8UJigXIwndyUKKSKHNShBse6pYitYBzedAu+RUUhQCQjngp17WAq0
- qeBg==
-X-Gm-Message-State: AOJu0YyxEzqZdWLGPET+WQPoeUup0d3EFAN4hZkxFbaOBT1ZS2xM7OMF
- pkgVCoXYd4wurQG5e9bVJKa36ohGI8xjEewlmTvrmNed2CrBDRADAMAwD3c3/A0=
-X-Google-Smtp-Source: AGHT+IHH+nqBY+nDFn2EwqSYfkUbDrnftMnXD/R4nvOweP+B/cTTd1UUUEQ1LtzQa2ZlP/Z/+a1txQ==
-X-Received: by 2002:a05:6870:15d5:b0:263:3b45:b7dd with SMTP id
- 586e51a60fabf-26891a7f2eemr5312793fac.1.1722629799367; 
- Fri, 02 Aug 2024 13:16:39 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-190.totalplay.net.
- [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2689a434171sm526221fac.31.2024.08.02.13.16.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Aug 2024 13:16:38 -0700 (PDT)
-Date: Fri, 2 Aug 2024 14:16:35 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>
-Subject: Re: [PATCH v5 00/20] Introduce the lwIP network stack
-Message-ID: <20240802201635.GQ3794063@bill-the-cat>
-References: <cover.1721910373.git.jerome.forissier@linaro.org>
- <20240725172220.GA989285@bill-the-cat>
- <20240725223401.GD989285@bill-the-cat>
- <ebc992d6-93e8-4e7e-99dc-834cc981f5a3@linaro.org>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=5651=PC=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1722631390;
+ bh=5RxHVR3CGfkrSkMTtF5A5u34zxJZkjflu2JZYsEQJzA=;
+ b=iaUM66mwGJ7HCVZfV+EtQF3PUIXtPKPdDoYjvqoB7Fk29ZbmVc9/A/8XzOynhjlhzm/2vbAkM
+ kZliytWxal82h3FUXuq1s3M4oRAF8JAzK5DiwvLAmKsR+/yoC+LTgtz+5Gsm+HUQDWbOMllF/7o
+ vhHEDc+Vev+UbYJh0iw8dVa1hYHevKhq2EVnoZi5FmPfe2R/bb+bLHcuK4rXfn035LtsqeRyoJX
+ DfC1aBJVptKLwneUG/wUJLQaqFj5QeSV9dMt3kPlLZYmZbb/i9qNP+z5atxMv86Y3I8xKh049fU
+ Dl8iP0ki4WOJpS5fOVkIW/5+l76uLxazzwulkhroOd2A==
+Message-ID: <354cb9d4-45f0-4dc8-909a-925423d75044@kwiboo.se>
+Date: Fri, 2 Aug 2024 22:42:56 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="GfLHi8HFIuOMHKnW"
-Content-Disposition: inline
-In-Reply-To: <ebc992d6-93e8-4e7e-99dc-834cc981f5a3@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/7] board: rock5b-rk3588: add USB-C controller support
+To: Sebastian Reichel <sebastian.reichel@collabora.com>
+Cc: Marek Vasut <marex@denx.de>, Eugen Hristev
+ <eugen.hristev@collabora.com>, Tim Harvey <tharvey@gateworks.com>, Kever
+ Yang <kever.yang@rock-chips.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>, Soeren Moch
+ <smoch@web.de>, u-boot@lists.denx.de
+References: <20240802180027.139193-1-sebastian.reichel@collabora.com>
+ <20240802180027.139193-4-sebastian.reichel@collabora.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240802180027.139193-4-sebastian.reichel@collabora.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66ad44d7a20167d9d447c67b
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,94 +76,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Sebastian,
 
---GfLHi8HFIuOMHKnW
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2024-08-02 19:59, Sebastian Reichel wrote:
+> Enable support for the fusb302 USB Type-C controller.
+> 
+> This will do early USB PD (power deliver) negotiation, which must happen
+> within 5 seconds after the USB-C connector has plugged in according to
+> the specification. It takes almost 5 seconds to go through the bootchain
+> on Rock 5B and jump to the operating system. When the Linux initializes
+> the fusb302 usually 20-30 seconds have gone since the device has been
+> plugged, which is far too late. The USB PD power source reacts with a
+> hard reset, which disables VBUS for some time. This is not a problem for
+> a battery driven device, but Rock 5B will loose its power-supply and
+> reset. By initializing PD in U-Boot, this can be avoided.
+> 
+> Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+> ---
+>  board/radxa/rock5b-rk3588/Makefile        |  6 ++++
+>  board/radxa/rock5b-rk3588/rock5b-rk3588.c | 35 +++++++++++++++++++++++
+>  2 files changed, 41 insertions(+)
+>  create mode 100644 board/radxa/rock5b-rk3588/Makefile
+>  create mode 100644 board/radxa/rock5b-rk3588/rock5b-rk3588.c
+> 
+> diff --git a/board/radxa/rock5b-rk3588/Makefile b/board/radxa/rock5b-rk3588/Makefile
+> new file mode 100644
+> index 000000000000..95d813596da4
+> --- /dev/null
+> +++ b/board/radxa/rock5b-rk3588/Makefile
+> @@ -0,0 +1,6 @@
+> +# SPDX-License-Identifier:     GPL-2.0+
+> +#
+> +# Copyright (c) 2022 Collabora Ltd.
+> +#
+> +
+> +obj-y += rock5b-rk3588.o
+> diff --git a/board/radxa/rock5b-rk3588/rock5b-rk3588.c b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
+> new file mode 100644
+> index 000000000000..1c17ae93c76c
+> --- /dev/null
+> +++ b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
+> @@ -0,0 +1,35 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (c) 2023-2024 Collabora Ltd.
+> + */
+> +
+> +#include <usb/tcpm.h>
+> +
+> +#ifdef CONFIG_MISC_INIT_R
+> +int misc_init_r(void)
 
-On Thu, Aug 01, 2024 at 04:40:03PM +0200, Jerome Forissier wrote:
->=20
->=20
-> On 7/26/24 00:34, Tom Rini wrote:
-> > On Thu, Jul 25, 2024 at 11:22:20AM -0600, Tom Rini wrote:
-> >> On Thu, Jul 25, 2024 at 02:57:21PM +0200, Jerome Forissier wrote:
-> >>
-> >>> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lw=
-ip
-> >>> library for the network stack" [1]. The goal is to introduce the lwIP=
- TCP/IP
-> >>> stack [2] [3] as an alternative to the current implementation in net/,
-> >>> selectable with Kconfig, and ultimately keep only lwIP if possible. S=
-ome
-> >>> reasons for doing so are:
-> >>> - Make the support of HTTPS in the wget command easier. Javier T. and
-> >>> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
-> >>> so. With that it becomes possible to fetch and launch a distro instal=
-ler
-> >>> such as Debian etc. using a secure, authenticated connection directly
-> >>> from the U-Boot shell. Several use cases:
-> >>>   * Authentication: prevent MITM attack (third party replacing the
-> >>> binary with a different one)
-> >>>   * Confidentiality: prevent third parties from grabbing a copy of the
-> >>> image as it is being downloaded
-> >>>   * Allow connection to servers that do not support plain HTTP anymore
-> >>> (this is becoming more and more common on the Internet these days)
-> >>> - Possibly benefit from additional features implemented in lwIP
-> >>> - Less code to maintain in U-Boot
-> >>>
-> >>> Prior to applying this series, the lwIP stack needs to be added as a
-> >>> Git subtree with the following command:
-> >>>
-> >>>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savan=
-nah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
-> >>
-> >> This is better than v4, and on the hardware platforms I could build and
-> >> boot on (which was most of mine except the am62x_beagleplay), the tests
-> >> ran and completed, including the tftp+boot a Linux kernel.
-> >>
-> >> The bad news is CI blows up, a lot:
-> >> https://source.denx.de/u-boot/u-boot/-/pipelines/21764
-> >> And:
-> >> https://dev.azure.com/u-boot/a1096300-2999-4ec4-a21a-4c22075e3771/_api=
-s/build/builds/9014/logs/106
-> >> which is another Kconfig dependency problem. I don't _think_ I
-> >> introduced that, but since this wasn't against top of tree, I had to
-> >> apply the cmd/Kconfig patch manually.
-> >>
-> >> I have my world build running still and may have more comments based on
-> >> that.
-> >=20
-> > First, with NET_LWIP being default rather than NET, there's a lot of
-> > other Kconfig dependency issues. Unfortunately I don't see an easy tool
-> > for making sure this is all clean aside from a shell loop like:
-> > for C in `(cd configs;ls)`;do make -s $C;done
->=20
-> I have run this loop successfully with the upcoming v6 version. Some
-> configs do print some warnings but there is no error.
+You should not override misc_init_r() here as it will override the
+rockchip board common misc_init_r() function that read cpuid, set serial
+and ethernet mac address env vars.
 
-Oh. Right. So, to make the rest of the problems show up, switch the
-default stack to NET_LWIP and then we see other issues.
+I would suggest you instead of tcpm_get() add something similar to
 
---=20
-Tom
+int tcpm_probe_all()
+{
+	struct udevice *dev;
+	struct uclass *uc;
+	int ret;
 
---GfLHi8HFIuOMHKnW
-Content-Type: application/pgp-signature; name="signature.asc"
+	ret = uclass_get(UCLASS_TCPM, &uc);
+	if (ret)
+		return ret;
 
------BEGIN PGP SIGNATURE-----
+	for (ret = uclass_first_device_check(UCLASS_TCPM, &dev);
+	     dev;
+	     ret = uclass_next_device_check(&dev)) {
+		if (ret)
+			printf("Failed to probe Type-C controller '%s' (ret=%d)\n",
+			       dev->name, ret);
+	}
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmatPp8ACgkQFHw5/5Y0
-tyywMwv8C9trAYxhOXgGOWkk1PRLp5lOi9GlUqKW43Xm9oK4X1LgYT0E8NH5Zpmi
-JxzbF9BW3lpk1J107V3jIuqknCJRujf9zOgbMCw9pkw1d7xtEDo2oDy2khbMY7he
-//diNxM/95Uq4Dc32Lr2HuTmFSzQWJTiZO5N85Y/jWjCrP60WCflxj3C8RdUKBrj
-mk0ARr+9arEH0I8bF1n4qXvsFvrwiRwSxF1ZGhNBdddJNPB058+sdK7wxxg19qyG
-Yid52Vlq4U1ttpnw7a/+7sfzSp1PSH/9KDMHZnAjQRXuPNXtzWRYItNd4YdLyE7n
-b8AkR0PYrEtCxT7L84VeDx87a1YhhRgzoWe4mVU0OSnwD2hvFElTgfnOvfw5YtWh
-ftBnthMf5jnCyIGp5jus/6TMGJSn+9jcAtU7ex//F2aiysGY4CppAV0/VhhIaZrA
-L1nRBGBvVdEOVlfDmapqZD5FJi9KFqa6yTFGoGTLnJaEE+Iv4AZUr3kyxi8uro7J
-ZaIiDZrw
-=Xv4m
------END PGP SIGNATURE-----
+	return 0;
+}
 
---GfLHi8HFIuOMHKnW--
+or if we do not care about the error message this could use
+
+	uclass_probe_all(UCLASS_TCPM);
+
+and call it from the rockchip board common code in mach-rockchip/board.c
+directly after the call to regulators_enable_boot_on() in board_init().
+
+Alternatively you could call following in a tcpm_post_bind()
+
+	dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
+
+to automatically probe the device as soon as possible after all devices
+have been bind, this is how the rockchip-io-domain driver does it.
+
+Otherwise we need to add custom board code for each board using USB PD,
+something to avoid.
+
+Regards,
+Jonas
+
+> +{
+> +	struct udevice *dev;
+> +	int ret;
+> +
+> +	/*
+> +	 * This will do early USB PD (power deliver) negotiation, which must
+> +	 * happen within 5 seconds after the USB-C connector has plugged in
+> +	 * according to the specification. It takes almost 5 seconds to go
+> +	 * through the bootchain on Rock 5B and jump to the operating system.
+> +	 * When the Linux initializes the fusb302 usually 20-30 seconds have
+> +	 * gone since the device has been plugged, which is far too late.
+> +	 *
+> +	 * The USB PD power source reacts with a hard reset, which disables
+> +	 * VBUS for some time. This is not a problem for a battery driven
+> +	 * device, but Rock 5B will loose its power-supply and reset. By
+> +	 * initializing PD in U-Boot, this can be avoided.
+> +	 */
+> +	ret = tcpm_get("usb-typec@22", &dev);
+> +	if (ret) {
+> +		printf("Failed to probe Type-C controller\n");
+> +		return 0;
+> +	}
+> +
+> +	return 0;
+> +}
+> +#endif
+
