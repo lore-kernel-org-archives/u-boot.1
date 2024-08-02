@@ -4,62 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18292C3DA7F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 20:43:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFEE8C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 21:00:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76C8C88B8E;
-	Fri,  2 Aug 2024 22:43:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 2871788B8E;
+	Fri,  2 Aug 2024 23:00:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="iaUM66mw";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37DC988BC4; Fri,  2 Aug 2024 22:43:25 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 64B0788C01; Fri,  2 Aug 2024 23:00:47 +0200 (CEST)
+Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C062388B80
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 22:43:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 78BF488B80
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 23:00:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=5651=PC=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1722631390;
- bh=5RxHVR3CGfkrSkMTtF5A5u34zxJZkjflu2JZYsEQJzA=;
- b=iaUM66mwGJ7HCVZfV+EtQF3PUIXtPKPdDoYjvqoB7Fk29ZbmVc9/A/8XzOynhjlhzm/2vbAkM
- kZliytWxal82h3FUXuq1s3M4oRAF8JAzK5DiwvLAmKsR+/yoC+LTgtz+5Gsm+HUQDWbOMllF/7o
- vhHEDc+Vev+UbYJh0iw8dVa1hYHevKhq2EVnoZi5FmPfe2R/bb+bLHcuK4rXfn035LtsqeRyoJX
- DfC1aBJVptKLwneUG/wUJLQaqFj5QeSV9dMt3kPlLZYmZbb/i9qNP+z5atxMv86Y3I8xKh049fU
- Dl8iP0ki4WOJpS5fOVkIW/5+l76uLxazzwulkhroOd2A==
-Message-ID: <354cb9d4-45f0-4dc8-909a-925423d75044@kwiboo.se>
-Date: Fri, 2 Aug 2024 22:42:56 +0200
+ dmarc=fail (p=none dis=none) header.from=sntech.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
+Received: from i53875a76.versanet.de ([83.135.90.118] helo=phil.lan)
+ by gloria.sntech.de with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <heiko@sntech.de>)
+ id 1sZzOD-0006IU-Tt; Fri, 02 Aug 2024 23:00:41 +0200
+From: Heiko Stuebner <heiko@sntech.de>
+To: sjg@chromium.org,
+	philipp.tomsich@vrull.eu,
+	kever.yang@rock-chips.com
+Cc: heiko@sntech.de, dsimic@manjaro.org, u-boot@lists.denx.de, jonas@kwiboo.se
+Subject: [PATCH v2 0/4] U-Boot support for the Rock 5 ITX
+Date: Fri,  2 Aug 2024 23:00:24 +0200
+Message-Id: <20240802210028.2919639-1-heiko@sntech.de>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/7] board: rock5b-rk3588: add USB-C controller support
-To: Sebastian Reichel <sebastian.reichel@collabora.com>
-Cc: Marek Vasut <marex@denx.de>, Eugen Hristev
- <eugen.hristev@collabora.com>, Tim Harvey <tharvey@gateworks.com>, Kever
- Yang <kever.yang@rock-chips.com>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>, Soeren Moch
- <smoch@web.de>, u-boot@lists.denx.de
-References: <20240802180027.139193-1-sebastian.reichel@collabora.com>
- <20240802180027.139193-4-sebastian.reichel@collabora.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20240802180027.139193-4-sebastian.reichel@collabora.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 66ad44d7a20167d9d447c67b
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,128 +53,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sebastian,
+Support for the Rock 5 ITX is now part of 6.11-rc1, so add
+support for it in u-boot as well.
 
-On 2024-08-02 19:59, Sebastian Reichel wrote:
-> Enable support for the fusb302 USB Type-C controller.
-> 
-> This will do early USB PD (power deliver) negotiation, which must happen
-> within 5 seconds after the USB-C connector has plugged in according to
-> the specification. It takes almost 5 seconds to go through the bootchain
-> on Rock 5B and jump to the operating system. When the Linux initializes
-> the fusb302 usually 20-30 seconds have gone since the device has been
-> plugged, which is far too late. The USB PD power source reacts with a
-> hard reset, which disables VBUS for some time. This is not a problem for
-> a battery driven device, but Rock 5B will loose its power-supply and
-> reset. By initializing PD in U-Boot, this can be avoided.
-> 
-> Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
-> ---
->  board/radxa/rock5b-rk3588/Makefile        |  6 ++++
->  board/radxa/rock5b-rk3588/rock5b-rk3588.c | 35 +++++++++++++++++++++++
->  2 files changed, 41 insertions(+)
->  create mode 100644 board/radxa/rock5b-rk3588/Makefile
->  create mode 100644 board/radxa/rock5b-rk3588/rock5b-rk3588.c
-> 
-> diff --git a/board/radxa/rock5b-rk3588/Makefile b/board/radxa/rock5b-rk3588/Makefile
-> new file mode 100644
-> index 000000000000..95d813596da4
-> --- /dev/null
-> +++ b/board/radxa/rock5b-rk3588/Makefile
-> @@ -0,0 +1,6 @@
-> +# SPDX-License-Identifier:     GPL-2.0+
-> +#
-> +# Copyright (c) 2022 Collabora Ltd.
-> +#
-> +
-> +obj-y += rock5b-rk3588.o
-> diff --git a/board/radxa/rock5b-rk3588/rock5b-rk3588.c b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
-> new file mode 100644
-> index 000000000000..1c17ae93c76c
-> --- /dev/null
-> +++ b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
-> @@ -0,0 +1,35 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (c) 2023-2024 Collabora Ltd.
-> + */
-> +
-> +#include <usb/tcpm.h>
-> +
-> +#ifdef CONFIG_MISC_INIT_R
-> +int misc_init_r(void)
+The naming follows Dragan's suggestion in the mainline submission:
+    "the name of this board deviates from the standard Radxa naming scheme,
+     which is something like "ROCK <number><letter>" thus, "rock-5a" is
+     fine, but it should be "rock-5-itx", simply because there's a space
+     between "5" and "ITX" in "ROCK 5 ITX"
 
-You should not override misc_init_r() here as it will override the
-rockchip board common misc_init_r() function that read cpuid, set serial
-and ethernet mac address env vars.
+Not sure if the u-boot side wants less dashes, but we'll see :-)
 
-I would suggest you instead of tcpm_get() add something similar to
+U-Boot master + this series can detect all mass storage devices
+(emmc, sd, nvme) and also both PCIe connected network controllers
 
-int tcpm_probe_all()
-{
-	struct udevice *dev;
-	struct uclass *uc;
-	int ret;
 
-	ret = uclass_get(UCLASS_TCPM, &uc);
-	if (ret)
-		return ret;
+changes in v2:
+- apply Jonas' review comments:
+  - keep vcc3v3_mkey always on
+  - Jonas as reviewer
+  - entry in the list of Rockchip boards
+  - config mass-storage support
+  - config led support
+  - config pmic+spi support
+- add Kever's review-tag to patches 1-3
 
-	for (ret = uclass_first_device_check(UCLASS_TCPM, &dev);
-	     dev;
-	     ret = uclass_next_device_check(&dev)) {
-		if (ret)
-			printf("Failed to probe Type-C controller '%s' (ret=%d)\n",
-			       dev->name, ret);
-	}
+Alexey Charkov (1):
+  arm64: dts: rockchip: add thermal zones information on RK3588
 
-	return 0;
-}
+Dragan Simic (1):
+  arm64: dts: rockchip: Prepare RK3588 SoC dtsi files for per-variant
+    OPPs
 
-or if we do not care about the error message this could use
+Heiko Stuebner (2):
+  arm64: dts: rockchip: add ROCK 5 ITX board
+  board: rockchip: Add Radxa ROCK 5 ITX
 
-	uclass_probe_all(UCLASS_TCPM);
+ arch/arm/dts/rk3588-rock-5-itx-u-boot.dtsi    |   22 +
+ arch/arm/mach-rockchip/rk3588/Kconfig         |   29 +
+ board/radxa/rock-5-itx-rk3588/Kconfig         |   12 +
+ board/radxa/rock-5-itx-rk3588/MAINTAINERS     |    8 +
+ configs/rock-5-itx-rk3588_defconfig           |  111 +
+ doc/board/rockchip/rockchip.rst               |    1 +
+ ...-pinctrl.dtsi => rk3588-base-pinctrl.dtsi} |    0
+ .../{rk3588s.dtsi => rk3588-base.dtsi}        |  155 +-
+ ...pinctrl.dtsi => rk3588-extra-pinctrl.dtsi} |    0
+ .../{rk3588.dtsi => rk3588-extra.dtsi}        |    4 +-
+ .../src/arm64/rockchip/rk3588-rock-5-itx.dts  | 1177 ++++++++
+ dts/upstream/src/arm64/rockchip/rk3588.dtsi   |  420 +--
+ dts/upstream/src/arm64/rockchip/rk3588j.dtsi  |    2 +-
+ dts/upstream/src/arm64/rockchip/rk3588s.dtsi  | 2677 +----------------
+ include/configs/rock-5-itx-rk3588.h           |   15 +
+ 15 files changed, 1546 insertions(+), 3087 deletions(-)
+ create mode 100644 arch/arm/dts/rk3588-rock-5-itx-u-boot.dtsi
+ create mode 100644 board/radxa/rock-5-itx-rk3588/Kconfig
+ create mode 100644 board/radxa/rock-5-itx-rk3588/MAINTAINERS
+ create mode 100644 configs/rock-5-itx-rk3588_defconfig
+ rename dts/upstream/src/arm64/rockchip/{rk3588s-pinctrl.dtsi => rk3588-base-pinctrl.dtsi} (100%)
+ copy dts/upstream/src/arm64/rockchip/{rk3588s.dtsi => rk3588-base.dtsi} (95%)
+ rename dts/upstream/src/arm64/rockchip/{rk3588-pinctrl.dtsi => rk3588-extra-pinctrl.dtsi} (100%)
+ copy dts/upstream/src/arm64/rockchip/{rk3588.dtsi => rk3588-extra.dtsi} (99%)
+ create mode 100644 dts/upstream/src/arm64/rockchip/rk3588-rock-5-itx.dts
+ rewrite dts/upstream/src/arm64/rockchip/rk3588.dtsi (99%)
+ rewrite dts/upstream/src/arm64/rockchip/rk3588s.dtsi (99%)
+ create mode 100644 include/configs/rock-5-itx-rk3588.h
 
-and call it from the rockchip board common code in mach-rockchip/board.c
-directly after the call to regulators_enable_boot_on() in board_init().
-
-Alternatively you could call following in a tcpm_post_bind()
-
-	dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
-
-to automatically probe the device as soon as possible after all devices
-have been bind, this is how the rockchip-io-domain driver does it.
-
-Otherwise we need to add custom board code for each board using USB PD,
-something to avoid.
-
-Regards,
-Jonas
-
-> +{
-> +	struct udevice *dev;
-> +	int ret;
-> +
-> +	/*
-> +	 * This will do early USB PD (power deliver) negotiation, which must
-> +	 * happen within 5 seconds after the USB-C connector has plugged in
-> +	 * according to the specification. It takes almost 5 seconds to go
-> +	 * through the bootchain on Rock 5B and jump to the operating system.
-> +	 * When the Linux initializes the fusb302 usually 20-30 seconds have
-> +	 * gone since the device has been plugged, which is far too late.
-> +	 *
-> +	 * The USB PD power source reacts with a hard reset, which disables
-> +	 * VBUS for some time. This is not a problem for a battery driven
-> +	 * device, but Rock 5B will loose its power-supply and reset. By
-> +	 * initializing PD in U-Boot, this can be avoided.
-> +	 */
-> +	ret = tcpm_get("usb-typec@22", &dev);
-> +	if (ret) {
-> +		printf("Failed to probe Type-C controller\n");
-> +		return 0;
-> +	}
-> +
-> +	return 0;
-> +}
-> +#endif
+-- 
+2.39.2
 
