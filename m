@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1DC7C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 22:58:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF365C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 22:58:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6427D88C69;
-	Sat,  3 Aug 2024 00:57:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BB82788C71;
+	Sat,  3 Aug 2024 00:57:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="C4GuWTnq";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="mkYMUndS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F66788C61; Sat,  3 Aug 2024 00:57:33 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id C935588C6F; Sat,  3 Aug 2024 00:57:34 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 268A288C69
- for <u-boot@lists.denx.de>; Sat,  3 Aug 2024 00:57:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D610A88C04
+ for <u-boot@lists.denx.de>; Sat,  3 Aug 2024 00:57:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,20 +28,19 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1722639447; bh=bhh5Y5rdgM4P4oJqO8KAlqo0jvWCMJw5r0eAiaqW+EA=;
- b=C4GuWTnqLPAfcDOi07Fyz2XRsYnI2yrox8F+MBAT9fGe19XXLUszY1j1f6L1wOt0tkYxSjLm0
- r3isLkTnwdlblpDoj91accn0RA3QvG3J10QBv+ZpovcXgPJUPOQH/EzCyKe45lblVJqRjkBqqPT
- uwLHfhC3hX3kJhj6xzvUTPgirpMojJZK9mBgj8BdNiqs9RuKLUznMaR0XLzimy8CuQXy+MsTIFM
- DaJpBZT62txUgCvsdUTlQlAAOtNPZmyRbO3ZU1iItgahIkwm8H8zRh8FCGDt/G93mZ+qNQHS9Wv
- GCIMXzcakJxOMm7s+PDjngKzr6b7rL6N/DGuwQCYGSqw==
+ t=1722639445; bh=kY5SnPr3b/s4p/5MEwgE2B+8MI40+nQRNyQw1NT29O0=;
+ b=mkYMUndSv9tv6PFtZJCfw0vaz5y+lm+yKq9f6UKwlKm2hd+0w5auVgW8jq17XYQV7h2/lalaB
+ d5PtGC+z0mqyNVKC94U8iw3MkMDGMxKaXeDIABRpqpRW4MQaZRLnRd85uNm9Tp/fpeT6aPdkcjX
+ ZT1rckd33QBloiWIojEStYBacet0gEFFmNOPz2IVUAImRFVKx6dVCM+C0SQytvv24ie8+i9/qAJ
+ zdUNIHsp91gGiBOP6ix0HmVWOAXESnVXeUpoourB6jDN6Z6dhMIxF1sY+ca3N2NLPl3dxvLfHS/
+ QI3UL0CCpxtaUCWF6X+lnOiwC7JcEMKqatBJDI6ZZYzg==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 06/10] gpio: rockchip: Get pinctrl device from gpio-ranges
- prop
-Date: Fri,  2 Aug 2024 22:56:48 +0000
-Message-ID: <20240802225705.2640999-7-jonas@kwiboo.se>
+Subject: [PATCH v2 05/10] pinctrl: rockchip: Add gpio_request_enable() ops
+Date: Fri,  2 Aug 2024 22:56:47 +0000
+Message-ID: <20240802225705.2640999-6-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240802225705.2640999-1-jonas@kwiboo.se>
 References: <20240802225705.2640999-1-jonas@kwiboo.se>
@@ -52,8 +51,8 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 66ad645616ac7a56c917aedb
+ 167.172.40.54
+X-ForwardEmail-ID: 66ad645416ac7a56c917aec9
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,70 +69,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Get pinctrl device from gpio-ranges phandle when the property exists,
-fallback to get the first pinctrl device.
+Implement gpio_request_enable() ops so that the gpio request() ops can
+be implemented and a gpio requested pin automatically is pinmuxed for
+gpio use, similar to Linux kernel.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 ---
-v2: Collect r-b tag
+v2: New patch from "rockchip: Add gpio request() ops" series
 ---
- drivers/gpio/rk_gpio.c | 27 +++++++++++++++++++--------
- 1 file changed, 19 insertions(+), 8 deletions(-)
+ drivers/pinctrl/rockchip/pinctrl-rockchip-core.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/drivers/gpio/rk_gpio.c b/drivers/gpio/rk_gpio.c
-index 24ba12dd820e..abece6409ae0 100644
---- a/drivers/gpio/rk_gpio.c
-+++ b/drivers/gpio/rk_gpio.c
-@@ -181,12 +181,6 @@ static int rockchip_gpio_probe(struct udevice *dev)
+diff --git a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
+index 345e0abdf5d1..e164af0d8f61 100644
+--- a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
++++ b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
+@@ -358,6 +358,18 @@ static int rockchip_set_mux(struct rockchip_pin_bank *bank, int pin, int mux)
+ 	return 0;
+ }
  
- 	priv->regs = dev_read_addr_ptr(dev);
- 
--	if (CONFIG_IS_ENABLED(PINCTRL)) {
--		ret = uclass_first_device_err(UCLASS_PINCTRL, &priv->pinctrl);
--		if (ret)
--			return ret;
--	}
--
- 	/*
- 	 * If "gpio-ranges" is present in the devicetree use it to parse
- 	 * the GPIO bank ID, otherwise use the legacy method.
-@@ -194,16 +188,33 @@ static int rockchip_gpio_probe(struct udevice *dev)
- 	ret = ofnode_parse_phandle_with_args(dev_ofnode(dev),
- 					     "gpio-ranges", NULL, 3,
- 					     0, &args);
--	if (!ret || ret != -ENOENT) {
-+	if (!ret) {
- 		uc_priv->gpio_count = args.args[2];
- 		priv->bank = args.args[1] / ROCKCHIP_GPIOS_PER_BANK;
--	} else {
++static int rockchip_pinctrl_gpio_request_enable(struct udevice *dev,
++						unsigned int selector)
++{
++	struct rockchip_pin_bank *bank;
 +
-+		if (CONFIG_IS_ENABLED(PINCTRL)) {
-+			ret = uclass_get_device_by_ofnode(UCLASS_PINCTRL,
-+							  args.node,
-+							  &priv->pinctrl);
-+			if (ret)
-+				return ret;
-+		}
-+	} else if (ret == -ENOENT || !CONFIG_IS_ENABLED(PINCTRL)) {
- 		uc_priv->gpio_count = ROCKCHIP_GPIOS_PER_BANK;
- 		ret = dev_read_alias_seq(dev, &priv->bank);
- 		if (ret) {
- 			end = strrchr(dev->name, '@');
- 			priv->bank = trailing_strtoln(dev->name, end);
- 		}
++	bank = rockchip_pin_to_bank(dev, selector);
++	if (!bank)
++		return -EINVAL;
 +
-+		if (CONFIG_IS_ENABLED(PINCTRL)) {
-+			ret = uclass_first_device_err(UCLASS_PINCTRL,
-+						      &priv->pinctrl);
-+			if (ret)
-+				return ret;
-+		}
-+	} else {
-+		return ret;
- 	}
++	return rockchip_set_mux(bank, selector - bank->pin_base, RK_FUNC_GPIO);
++}
++
+ static int rockchip_perpin_drv_list[DRV_TYPE_MAX][8] = {
+ 	{ 2, 4, 8, 12, -1, -1, -1, -1 },
+ 	{ 3, 6, 9, 12, -1, -1, -1, -1 },
+@@ -608,6 +620,7 @@ const struct pinctrl_ops rockchip_pinctrl_ops = {
+ 	.set_state			= rockchip_pinctrl_set_state,
+ 	.get_gpio_mux			= rockchip_pinctrl_get_gpio_mux,
+ 	.get_pin_muxing			= rockchip_pinctrl_get_pin_muxing,
++	.gpio_request_enable		= rockchip_pinctrl_gpio_request_enable,
+ };
  
- 	priv->name[0] = 'A' + priv->bank;
+ /* retrieve the soc specific data */
 -- 
 2.45.2
 
