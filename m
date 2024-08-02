@@ -4,84 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CC61C3DA7F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 19:19:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12C86C3DA7F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 19:23:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D509188BCE;
-	Fri,  2 Aug 2024 21:19:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8FCEB88BCB;
+	Fri,  2 Aug 2024 21:23:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aHy71oGz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Cfq2DsOx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E30AF88BBB; Fri,  2 Aug 2024 21:19:03 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 5A88088BE0; Fri,  2 Aug 2024 21:23:17 +0200 (CEST)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF63688BCE
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 21:19:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CCAF788BBB
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 21:23:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=virag.david003@gmail.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a7aa086b077so779995966b.0
- for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 12:19:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-1ff496707beso3391645ad.2
+ for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 12:23:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722626341; x=1723231141; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IUpjbydaVLGAPY2WVTABtHm1SH35HgBvTYjFDH2dUT0=;
- b=aHy71oGzeXG6Jkr4okR0p0TUW1c7QUXwBEbXJcAah8Awz8rAaofqJCHmhhp+T5jGRT
- HJ6bgtqG4IvVP/bcNeDAgJcDcwSMTodkDnchbLezwI/S6IV9eZGQ47vf6WvV5DU0yqR+
- 4BKg9zYOAyN0pg2wtTXNLT9jgQ8G45kqR0jqEBE1SHFBNjK89OoDgbgwqtrQefh3/xk9
- nnfuNAo4gNfPRZ3TCfmuW3bdY5ZoP6uwgswoo/Jr0HqlL3/4/OXNy48yZT0JaXZ2AQuy
- oQe36M6s6P07As9IwPpIDbnSjGhhKL89H2mUQSYAUimMUBnBfKGrmrd2Yf6tjpEX5YZ8
- w+wg==
+ d=gmail.com; s=20230601; t=1722626593; x=1723231393; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xTqy6OauXQdGMglBGcKBaggf/2SkWeRzHkNJ9UWHzHY=;
+ b=Cfq2DsOxafA1e8UN6qM6fhKxFPg7uR1yZ8MkkJ47yLcDqV10MEn2tVNTm67uFFrF1G
+ rhJe95DZ3w0ols1djAclCZdNwLY93/R52+Hl2LjQAc/tJi/DWsy9FMmijJoaGq2n2N7E
+ PZA9U+Jc6WjsafjibIrwMvHspL/nlyCKJ/ovUKaZt1aNNlUEQ5aXEAfuI++ZA1FOAUJI
+ Sb3k4+TXBa97UOQ7fok2/ai2AM1lv6V3N1qaXIFLxgfPUca91qUV5kdXCTBE4ctrSAgX
+ KGT87ZUwN8HxwqE/9SvUvWzL5mx+FwQNpAQvOsbB8ah3N4u7Jl5nuxLVPjYXAOmY0vo5
+ 1KJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722626341; x=1723231141;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IUpjbydaVLGAPY2WVTABtHm1SH35HgBvTYjFDH2dUT0=;
- b=quGW/ok4SoZi2ASoC04TWhvErj6+bSLaQTJcdTrNr1U9qBZLftJH6y2oDuYO4gbk6a
- 6cAVemAujc7SyOuMA82mLBpWmZTyoiltJUXFCVouhbuoKhZx4fcDvGDkkOjSvnehj2nm
- LzhO4nb251TGCD7Kp2FeiqZBpSGA4QoKzBZpzZ6ZaPHUt2aAPZOfKGWKxNg8vYBJBtx4
- MsnYCiJS5LNwA9Q5keMRyyERG5a0VwffoI8FBGLPd5FRY8GtBnN9s+xZvYC1bWxJ2YYl
- xDZ3MSeADA53PYIaPZdXMsXPA0o5KOGheMykt2C9xcp9xAUEeC/0nkmsMWtXI3Jy4J9E
- IhgQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVYLyUG2Thks9QqqtNdZYK778zdJiAb06lY3FVH9i2HuYElp3KIuCGylsOHiHJHd1MarFuGar93JBN7ruysMj+bp2gJCw==
-X-Gm-Message-State: AOJu0Yz6ZvCjAzJfcU4luJ9hEk5IkNQiJsNIkhw7U2owicDIVsj5JMPh
- gp6nAHRqWfSPN99j+vKeP5rm36fj14IssOFTY0DEPnyz+kBimA3g
-X-Google-Smtp-Source: AGHT+IGv3r1RdEhVa3aoQFvABbzJNkCUWXxa8vzoQOelElAIPAniB32/0F+aYYMaCoGmpx9lrpS0/g==
-X-Received: by 2002:a17:907:6d2a:b0:a7a:a7b8:adad with SMTP id
- a640c23a62f3a-a7dc4fa3f6bmr336764066b.32.1722626340996; 
- Fri, 02 Aug 2024 12:19:00 -0700 (PDT)
-Received: from localhost.localdomain ([2a02:ab88:3711:c80:e7a7:e025:f1a5:ef78])
- by smtp.googlemail.com with ESMTPSA id
- a640c23a62f3a-a7dc9e8383dsm130128066b.173.2024.08.02.12.19.00
+ d=1e100.net; s=20230601; t=1722626593; x=1723231393;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xTqy6OauXQdGMglBGcKBaggf/2SkWeRzHkNJ9UWHzHY=;
+ b=oZBs73D/QDFCtkAnnIgMwEBNT+nv0pyKdD1ebM9gqSqB3KmW1xSBt2G+g7j1shdqSX
+ xRvTx1asO3kHDeXWO6VVBnAqvp260Xfiay7BhVcm4IQ3Oq5/Ekl6mnfGyfUhb8yEVoBm
+ +a/MkHMOlJQZh7P93D8P/1pj0o0kWEdmvVccBvfDVnmD36hOeXnvXznqEIp1YOL4XmXd
+ dM9JiM4guDBBnKoiKBQwgBbugUfU07FbuhPiSXqcqhTixWmYZlOsrYuyQVxCChW4Enn1
+ igw7OrVG0LMSSJ8wZKunxxi7gNwCK/lcrm5DUQLyN0JSvOaYPUe8IBp01lMVjNZXTp2M
+ cCRQ==
+X-Gm-Message-State: AOJu0YzDtgLgZy2kQstgKSo33InlZXHRJId5Ya5B+NEjqONc1BB6ufAm
+ w5s7fnAP2KnL/OglswZEp5YOIfSHbTsoaZSufSO9z0NxUvFHkG3QC8ru0Q==
+X-Google-Smtp-Source: AGHT+IFLZRKBLr3BEgXGtErc2C7DnS5UgJcQ/eWBVQX963pproHU7PW0Ra7k3NIGRlyFt7HhVL6NSw==
+X-Received: by 2002:a17:903:245:b0:1fd:aac9:a722 with SMTP id
+ d9443c01a7336-1ff5728b2d0mr31347885ad.4.1722626593144; 
+ Fri, 02 Aug 2024 12:23:13 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:c701:7231:d178:3f24])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-1ff5929ac42sm20852125ad.267.2024.08.02.12.23.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Aug 2024 12:19:00 -0700 (PDT)
-From: David Virag <virag.david003@gmail.com>
-To: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- David Virag <virag.david003@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass <sjg@chromium.org>,
- Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Sam Protsenko <semen.protsenko@linaro.org>,
- Henrik Grimler <henrik@grimler.se>, u-boot@lists.denx.de
-Subject: [PATCH v2 2/2] i2c: samsung: Support platforms other than EXYNOS4 and
- EXYNOS5
-Date: Fri,  2 Aug 2024 21:19:16 +0200
-Message-ID: <20240802191920.132133-3-virag.david003@gmail.com>
-X-Mailer: git-send-email 2.46.0
-In-Reply-To: <20240802191920.132133-1-virag.david003@gmail.com>
-References: <20240802191920.132133-1-virag.david003@gmail.com>
+ Fri, 02 Aug 2024 12:23:12 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-master-20240802
+Date: Fri,  2 Aug 2024 16:23:09 -0300
+Message-Id: <20240802192309.1777601-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -100,234 +88,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Newer Samsung SoCs (including newer Exynos, ExynosAuto, Google Tensor)
-still use these IPs, or slightly newer versions of it.
+Hi Tom,
 
-Make these drivers available on these platforms by guarding
-EXYNOS4/EXYNOS5 specific code behind their configs, and using CCF for
-clocks on other platforms.
+Please pull from u-boot-imx/master, thanks.
 
-Tested S3C I2C driver on Exynos7885.
-This along with extended clock driver should enable S3C I2C on
-Exynos850.
+The following changes since commit a70d991212c9684e09ed80ece69ce1ff7bfd9f08:
 
-Signed-off-by: David Virag <virag.david003@gmail.com>
----
- drivers/i2c/Kconfig         |  2 +-
- drivers/i2c/exynos_hs_i2c.c | 25 +++++++++++++++++++++++--
- drivers/i2c/s3c24x0_i2c.c   | 30 +++++++++++++++++++++++++++---
- drivers/i2c/s3c24x0_i2c.h   |  2 ++
- 4 files changed, 53 insertions(+), 6 deletions(-)
+  clk: clk-uclass: Print clk name in clk_enable/clk_disable (2024-08-01 15:35:28 -0600)
 
-diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
-index cba7f84894..52067fa7c1 100644
---- a/drivers/i2c/Kconfig
-+++ b/drivers/i2c/Kconfig
-@@ -650,7 +650,7 @@ config SYS_I2C_GENI
- 
- config SYS_I2C_S3C24X0
- 	bool "Samsung I2C driver"
--	depends on (ARCH_EXYNOS4 || ARCH_EXYNOS5) && DM_I2C
-+	depends on DM_I2C
- 	help
- 	  Support for Samsung I2C controller as Samsung SoCs.
- 
-diff --git a/drivers/i2c/exynos_hs_i2c.c b/drivers/i2c/exynos_hs_i2c.c
-index 189ce6d509..fa0d1c8f64 100644
---- a/drivers/i2c/exynos_hs_i2c.c
-+++ b/drivers/i2c/exynos_hs_i2c.c
-@@ -9,11 +9,15 @@
- #include <dm.h>
- #include <i2c.h>
- #include <log.h>
-+#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
- #include <asm/arch/clk.h>
- #include <asm/arch/cpu.h>
- #include <asm/arch/pinmux.h>
-+#endif
- #include <asm/global_data.h>
-+#include <asm/io.h>
- #include <linux/delay.h>
-+#include <clk.h>
- #include "s3c24x0_i2c.h"
- 
- DECLARE_GLOBAL_DATA_PTR;
-@@ -137,15 +141,26 @@ static int hsi2c_wait_for_trx(struct exynos5_hsi2c *i2c)
- 	return I2C_NOK_TOUT;
- }
- 
--static int hsi2c_get_clk_details(struct s3c24x0_i2c_bus *i2c_bus)
-+static int hsi2c_get_clk_details(struct udevice *dev)
- {
-+	struct s3c24x0_i2c_bus *i2c_bus = dev_get_priv(dev);
- 	struct exynos5_hsi2c *hsregs = i2c_bus->hsregs;
- 	ulong clkin;
- 	unsigned int op_clk = i2c_bus->clock_frequency;
- 	unsigned int i = 0, utemp0 = 0, utemp1 = 0;
- 	unsigned int t_ftl_cycle;
- 
-+#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
- 	clkin = get_i2c_clk();
-+#else
-+	struct clk clk;
-+	int ret;
-+
-+	ret = clk_get_by_name(dev, "hsi2c", &clk);
-+	if (ret < 0)
-+		return ret;
-+	clkin = clk_get_rate(&clk);
-+#endif
- 	/* FPCLK / FI2C =
- 	 * (CLK_DIV + 1) * (TSCLK_L + TSCLK_H + 2) + 8 + 2 * FLT_CYCLE
- 	 * uTemp0 = (CLK_DIV + 1) * (TSCLK_L + TSCLK_H + 2)
-@@ -487,7 +502,7 @@ static int s3c24x0_i2c_set_bus_speed(struct udevice *dev, unsigned int speed)
- 
- 	i2c_bus->clock_frequency = speed;
- 
--	if (hsi2c_get_clk_details(i2c_bus))
-+	if (hsi2c_get_clk_details(dev))
- 		return -EFAULT;
- 	hsi2c_ch_init(i2c_bus);
- 
-@@ -514,7 +529,9 @@ static int s3c24x0_i2c_probe(struct udevice *dev, uint chip, uint chip_flags)
- 
- static int s3c_i2c_of_to_plat(struct udevice *dev)
- {
-+#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
- 	const void *blob = gd->fdt_blob;
-+#endif
- 	struct s3c24x0_i2c_bus *i2c_bus = dev_get_priv(dev);
- 	int node;
- 
-@@ -522,7 +539,9 @@ static int s3c_i2c_of_to_plat(struct udevice *dev)
- 
- 	i2c_bus->hsregs = dev_read_addr_ptr(dev);
- 
-+#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
- 	i2c_bus->id = pinmux_decode_periph_id(blob, node);
-+#endif
- 
- 	i2c_bus->clock_frequency =
- 		dev_read_u32_default(dev, "clock-frequency",
-@@ -530,7 +549,9 @@ static int s3c_i2c_of_to_plat(struct udevice *dev)
- 	i2c_bus->node = node;
- 	i2c_bus->bus_num = dev_seq(dev);
- 
-+#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
- 	exynos_pinmux_config(i2c_bus->id, PINMUX_FLAG_HS_MODE);
-+#endif
- 
- 	i2c_bus->active = true;
- 
-diff --git a/drivers/i2c/s3c24x0_i2c.c b/drivers/i2c/s3c24x0_i2c.c
-index ae3a801cad..ade1ad6cef 100644
---- a/drivers/i2c/s3c24x0_i2c.c
-+++ b/drivers/i2c/s3c24x0_i2c.c
-@@ -9,12 +9,15 @@
- #include <fdtdec.h>
- #include <time.h>
- #include <log.h>
-+#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
- #include <asm/arch/clk.h>
- #include <asm/arch/cpu.h>
- #include <asm/arch/pinmux.h>
-+#endif
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <i2c.h>
-+#include <clk.h>
- #include "s3c24x0_i2c.h"
- 
- DECLARE_GLOBAL_DATA_PTR;
-@@ -46,10 +49,23 @@ static void read_write_byte(struct s3c24x0_i2c *i2c)
- 	clrbits_le32(&i2c->iiccon, I2CCON_IRPND);
- }
- 
--static void i2c_ch_init(struct s3c24x0_i2c *i2c, int speed, int slaveadd)
-+static int i2c_ch_init(struct udevice *dev, int speed, int slaveadd)
- {
-+	struct s3c24x0_i2c_bus *i2c_bus = dev_get_priv(dev);
-+	struct s3c24x0_i2c *i2c = i2c_bus->regs;
- 	ulong freq, pres = 16, div;
-+
-+#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || defined(CONFIG_ARCH_EXYNOS5)
- 	freq = get_i2c_clk();
-+#else
-+	struct clk clk;
-+	int ret;
-+
-+	ret = clk_get_by_name(dev, "i2c", &clk);
-+	if (ret < 0)
-+		return ret;
-+	freq = clk_get_rate(&clk);
-+#endif
- 	/* calculate prescaler and divisor values */
- 	if ((freq / pres / (16 + 1)) > speed)
- 		/* set prescaler to 512 */
-@@ -67,6 +83,7 @@ static void i2c_ch_init(struct s3c24x0_i2c *i2c, int speed, int slaveadd)
- 	writel(slaveadd, &i2c->iicadd);
- 	/* program Master Transmit (and implicit STOP) */
- 	writel(I2C_MODE_MT | I2C_TXRX_ENA, &i2c->iicstat);
-+	return 0;
- }
- 
- #define SYS_I2C_S3C24X0_SLAVE_ADDR	0
-@@ -77,8 +94,9 @@ static int s3c24x0_i2c_set_bus_speed(struct udevice *dev, unsigned int speed)
- 
- 	i2c_bus->clock_frequency = speed;
- 
--	i2c_ch_init(i2c_bus->regs, i2c_bus->clock_frequency,
--		    SYS_I2C_S3C24X0_SLAVE_ADDR);
-+	if (i2c_ch_init(dev, i2c_bus->clock_frequency,
-+			SYS_I2C_S3C24X0_SLAVE_ADDR))
-+		return -EFAULT;
- 
- 	return 0;
- }
-@@ -293,7 +311,9 @@ static int s3c24x0_i2c_xfer(struct udevice *dev, struct i2c_msg *msg,
- 
- static int s3c_i2c_of_to_plat(struct udevice *dev)
- {
-+#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
- 	const void *blob = gd->fdt_blob;
-+#endif
- 	struct s3c24x0_i2c_bus *i2c_bus = dev_get_priv(dev);
- 	int node;
- 
-@@ -301,7 +321,9 @@ static int s3c_i2c_of_to_plat(struct udevice *dev)
- 
- 	i2c_bus->regs = dev_read_addr_ptr(dev);
- 
-+#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
- 	i2c_bus->id = pinmux_decode_periph_id(blob, node);
-+#endif
- 
- 	i2c_bus->clock_frequency =
- 		dev_read_u32_default(dev, "clock-frequency",
-@@ -309,7 +331,9 @@ static int s3c_i2c_of_to_plat(struct udevice *dev)
- 	i2c_bus->node = node;
- 	i2c_bus->bus_num = dev_seq(dev);
- 
-+#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
- 	exynos_pinmux_config(i2c_bus->id, 0);
-+#endif
- 
- 	i2c_bus->active = true;
- 
-diff --git a/drivers/i2c/s3c24x0_i2c.h b/drivers/i2c/s3c24x0_i2c.h
-index ec8f1acaef..12249d5c14 100644
---- a/drivers/i2c/s3c24x0_i2c.h
-+++ b/drivers/i2c/s3c24x0_i2c.h
-@@ -54,7 +54,9 @@ struct s3c24x0_i2c_bus {
- 	struct exynos5_hsi2c *hsregs;
- 	int is_highspeed;	/* High speed type, rather than I2C */
- 	unsigned clock_frequency;
-+#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
- 	int id;
-+#endif
- 	unsigned clk_cycle;
- 	unsigned clk_div;
- };
--- 
-2.46.0
+are available in the Git repository at:
 
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20240802
+
+for you to fetch changes up to 0ee02e1c252da85a6ac75865ca33accde69072b7:
+
+  config: Adjust Phytec imx8mm module config to support NVME disk (2024-08-02 15:16:54 -0300)
+
+u-boot-imx-master-20240802
+--------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/21846
+
+- Convert warp7 to OF_UPSTREAM.
+- Add 'cpu' command to imx8m and imx93.
+- Enable CMD_ERASEENV for imx8mm/mp Phytec boards.
+----------------------------------------------------------------
+Fabio Estevam (1):
+      warp7: Convert to OF_UPSTREAM
+
+Hou Zhiqiang (14):
+      clk: imx8m: register ARM A53 core clock
+      cpu: add release_core callback
+      cpu: sandbox: implement release_core callback
+      test: cpu: add test for release CPU core.
+      cpu: imx: fix the CPU frequency in cpu_imx_get_info()
+      cpu: imx: fix the CPU type field width
+      cpu: imx: removed the tail '\n' of the CPU description
+      cpu: imx: Add i.MX 8M series SoCs
+      cpu: imx: implement release_core callback
+      cmd: cpu: add release subcommand
+      doc: cmd: add documentation for cpu command
+      MAINTAINERS: add entry for cpu command
+      configs: imx8m: enable the 'cpu' command
+      configs: imx93: enable the 'cpu' command
+
+Lukasz Majewski (1):
+      config: Adjust Phytec imx8mm module config to support NVME disk
+
+Yannic Moog (3):
+      configs: imx8mm-phygate-tauri-l_defconfig: enable CMD_ERASEENV
+      configs: phycore-imx8mm_defconfig: enable CMD_ERASEENV
+      configs: phycore-imx8mp_defconfig: enable CMD_ERASEENV
+
+ MAINTAINERS                              |   7 +
+ arch/arm/dts/Makefile                    |   1 -
+ arch/arm/dts/imx7s-warp.dts              | 500 -------------------------------
+ arch/arm/mach-imx/mx7/Kconfig            |   1 +
+ cmd/cpu.c                                |  44 ++-
+ configs/imx8mm-phygate-tauri-l_defconfig |   1 +
+ configs/imx8mm_evk_defconfig             |   3 +
+ configs/imx8mn_evk_defconfig             |   3 +
+ configs/imx8mp_evk_defconfig             |   3 +
+ configs/imx93_11x11_evk_defconfig        |   1 +
+ configs/phycore-imx8mm_defconfig         |  11 +-
+ configs/phycore-imx8mp_defconfig         |   1 +
+ configs/warp7_bl33_defconfig             |   2 +-
+ configs/warp7_defconfig                  |   2 +-
+ doc/usage/cmd/cpu.rst                    | 101 +++++++
+ doc/usage/index.rst                      |   1 +
+ drivers/clk/imx/clk-imx8mm.c             |   8 +
+ drivers/clk/imx/clk-imx8mn.c             |   8 +
+ drivers/clk/imx/clk-imx8mp.c             |   8 +
+ drivers/cpu/cpu-uclass.c                 |  10 +
+ drivers/cpu/cpu_sandbox.c                |   6 +
+ drivers/cpu/imx8_cpu.c                   |  38 ++-
+ include/cpu.h                            |  15 +
+ test/dm/cpu.c                            |   2 +
+ 24 files changed, 266 insertions(+), 511 deletions(-)
+ delete mode 100644 arch/arm/dts/imx7s-warp.dts
+ create mode 100644 doc/usage/cmd/cpu.rst
