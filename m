@@ -4,80 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB9F7C52D6D
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 13:16:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C7B6C52D6D
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 13:16:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40EC388BDE;
-	Fri,  2 Aug 2024 15:15:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9D97088BF5;
+	Fri,  2 Aug 2024 15:15:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DUvA5Gxg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kpZJ8gWo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E1FD88BD5; Fri,  2 Aug 2024 15:15:06 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id BD9D388BEA; Fri,  2 Aug 2024 15:15:08 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B44688BCD
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 15:15:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9419B88B9B
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 15:15:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3683329f787so4391063f8f.1
- for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 06:15:04 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-427b1d4da32so18590945e9.0
+ for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 06:15:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722604504; x=1723209304; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1722604506; x=1723209306; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pGIPg4sIs7sgHbap9hsM6EDN0caUckpXtW0NEK12en0=;
- b=DUvA5Gxgkh3BZtIdLFGRlcNriL+VfhG6tKPH0JyOn6Z3VwyLPYYEkL/yA6Gl6a/5g3
- Mj7wwWM9LY0D1MEtv7h8YSsLFhgdE8mJ81krfKKk6KWVGVhRVYdCz1dWDEiKiSXPzvYM
- FYgpwYpKtXPydV4AgY5Aam4bmuIcKrh8bWPT6OOlHUQWm7zdaxOwCmIM9n3dKx6tbZtY
- Y4GiA8rpenEIsZt9JBU+SEYEfuVz0FywIIMBpUK8/ID+d3APytH7C0sRPi2IIsJudNi7
- Y9QgVi6yzS12sUxS5oJWxU+OI6mONG7isE3yVhJDjCGq8CK6k/xvbkylgvUO53S+faaT
- AOBQ==
+ bh=TERqOuMzDcSX6pRz3xpvZX8Z6PpIvLLKKtMjLzdRCHw=;
+ b=kpZJ8gWoXLxl2b7HXRaPdHqO1Z41mmmMcx4m2EB5HTIfdchrg/yRLzufjLZTeQR/qj
+ LZ/WoC+i678fxy0SeVQ5J2oYOg+L2RAlHVZ34gJbbL8+YbELARGeE2cJ9w/PyssJlWEq
+ E52rEI35fNQOStJC0HvyDw6xvNkcHXRKh9JtbdDtll5FoMh5Jt1KwynhtG7tCVKrPIaC
+ uDVfaPc+kx0Hr7jP2h1CeLeQtATwF6/tptbAlSQPdjrZw8YC1gB1G6lwwgeR7CUDGKJS
+ VOldK4DZXiZoIWklnQXCJn5O7NDktyTOqLlBSCRYIEmiFQFiG1RQ3Fs+wOaBQ/pBGZAt
+ PDXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722604504; x=1723209304;
+ d=1e100.net; s=20230601; t=1722604506; x=1723209306;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pGIPg4sIs7sgHbap9hsM6EDN0caUckpXtW0NEK12en0=;
- b=JzIkfQHWXdo3WMdTt0Sle1hVhAv9YQHO6Ry4aawBUmAc3Eu4Pq0tjsV8z0n/dNcKPX
- 0aJ4Ejwad16Ey7D2bYBGRvRUIYpRmCJR8vNBawWZGEi5XZ0rRTRJ1FVWCKAwM2zc2Rzj
- TwuyDZx8ei3Sa0jMWuhAJi4uhqG/uZUxVUizqQ7nIaqZ2/igreNkdDXx3VGbogxEMD3D
- hu1thdAIVWiYYlsILEw9PvzG2lNxPoso/xNE3sIrmKfHsCZHVuvqY7VZvpwYAGRzQPoD
- Cx6LtVScvtyRg+HMVWPqp0/f7UzBL6+jbtwlZapCrpeIZ4XqyXNGCBY0CyDEZTGvkKqK
- w7cg==
-X-Gm-Message-State: AOJu0Yzeds8T4LllPkdvFccVuMb63nFOliqD1BBvDth8LX3bbReY86QS
- QkiLfgM8Vq7tj4thN/bBBXxscqISdp5rauJHdtEzsKTLk4Xgir4QIah4CF9G1UYBFfSBRJBgWk+
- GBAgs1nqR
-X-Google-Smtp-Source: AGHT+IHPd14fT5jEMObL4YJJRaph+ohTX9H9TQi4pFpd32Og6JkRdHU37ArrpV6C34cDpeX17Uyj8A==
-X-Received: by 2002:a5d:5443:0:b0:367:434f:caa2 with SMTP id
- ffacd0b85a97d-36bbbfff748mr2237063f8f.0.1722604503713; 
- Fri, 02 Aug 2024 06:15:03 -0700 (PDT)
+ bh=TERqOuMzDcSX6pRz3xpvZX8Z6PpIvLLKKtMjLzdRCHw=;
+ b=W9Teuyl/kMZGB2iV9Wg8TtwBMZysJi7EgLUHjy35t2BGebBt5t+sNFn5xyeVccTlBG
+ osqsGT6XzfE/j/TIpYeViye772UDf9unNN4/ONAOaQyK4P3oJhnFaC/0vEFwqgcmJcGT
+ B7OlNul7oUw3wId2d8bBv4lx0oycEA07/7/HKyaq0cv/v0jJMLDyyiUlgRvRZFoZUHTu
+ 85cZZaKjwXfUyAjIlCj7vRrWzy1HuKOj1exPDOV2RVIuCCKUrn8JryW+P5MkQrRa8M5S
+ kBMEFGb/6lk15OT2kb3bvC6aufbBqM3lDxPf7+ZjHLwGb3dM8yTrdqKkECEexT8vBypN
+ KyOQ==
+X-Gm-Message-State: AOJu0Yx+46JssZYFzb46kqMw+F4/FejZ+iwLII3mqYPJlwL6eNdKegg+
+ WztcyrlFXLnw1DeEllcTBCWpJDY99k132QYy/Qgdp3ZHy8amxPv64oYlXWlvSGQflcbICKePmqr
+ q/oCfzCJA
+X-Google-Smtp-Source: AGHT+IFnP1Z1nWN5X7s41eF+sGUbPgNHCCx3Tu1Jya1/DPSXNwmmVs01LUleayg8bdp3nLRX5JNSMQ==
+X-Received: by 2002:a05:6000:144d:b0:367:895f:619e with SMTP id
+ ffacd0b85a97d-36bb359d1camr4651249f8f.11.1722604505716; 
+ Fri, 02 Aug 2024 06:15:05 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:4fc9:a3ab:c134:cdf4])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36bbcf0cc58sm1970304f8f.2.2024.08.02.06.15.02
+ ffacd0b85a97d-36bbcf0cc58sm1970304f8f.2.2024.08.02.06.15.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Aug 2024 06:15:03 -0700 (PDT)
+ Fri, 02 Aug 2024 06:15:05 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
  Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Francis Laniel <francis.laniel@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH v6 12/20] net: split cmd/net.c into cmd/net.c and
- cmd/net-common.c
-Date: Fri,  2 Aug 2024 15:13:59 +0200
-Message-Id: <980e363db5dff8c8403d586b7901ed8755e5b586.1722601509.git.jerome.forissier@linaro.org>
+ Jonathan Humphreys <j-humphreys@ti.com>
+Subject: [PATCH v6 13/20] net-lwip: add wget command
+Date: Fri,  2 Aug 2024 15:14:00 +0200
+Message-Id: <87b0eed7e9436840ef978745b5035c9952779d0b.1722601509.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1722601509.git.jerome.forissier@linaro.org>
 References: <cover.1722601509.git.jerome.forissier@linaro.org>
@@ -99,272 +102,397 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Extract some code from cmd/net.c that will be useful in a subsequent
-commit to implement wget with NET_LWIP.
+Add support for the wget command with NET_LWIP.
+
+Based on code initially developed by Maxim U.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Co-developed-by: Maxim Uvarov <muvarov@gmail.com>
+Cc: Maxim Uvarov <muvarov@gmail.com>
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- cmd/Makefile     |   5 ++-
- cmd/net-common.c | 109 ++++++++++++++++++++++++++++++++++++++++++++
- cmd/net.c        | 115 -----------------------------------------------
- 3 files changed, 113 insertions(+), 116 deletions(-)
- create mode 100644 cmd/net-common.c
+ cmd/Kconfig        |  16 +--
+ cmd/net-lwip.c     |   8 ++
+ include/net-lwip.h |  18 +++
+ net/lwip/Makefile  |   1 +
+ net/lwip/wget.c    | 278 +++++++++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 314 insertions(+), 7 deletions(-)
+ create mode 100644 net/lwip/wget.c
 
-diff --git a/cmd/Makefile b/cmd/Makefile
-index fe733cf6ba9..2c3de45a074 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -130,7 +130,10 @@ obj-$(CONFIG_CMD_NAND) += nand.o
- ifdef CONFIG_CMD_NET
- obj-$(CONFIG_NET) += net.o
- obj-$(CONFIG_NET_LWIP) += net-lwip.o
--CFLAGS_net-lwip.o := -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
-+obj-$(filter y,$(CONFIG_CMD_NET) $(CONFIG_CMD_NET_LWIP)) += net-common.o
-+lwip-includes := -I$(srctree)/lib/lwip/lwip/src/include -I$(srctree)/lib/lwip/u-boot
-+CFLAGS_net-lwip.o := $(lwip-includes)
-+CFLAGS_net-common.o := $(lwip-includes)
- endif
- obj-$(CONFIG_ENV_SUPPORT) += nvedit.o
- obj-$(CONFIG_CMD_NVEDIT_EFI) += nvedit_efi.o
-diff --git a/cmd/net-common.c b/cmd/net-common.c
-new file mode 100644
-index 00000000000..1c9fb83b896
---- /dev/null
-+++ b/cmd/net-common.c
-@@ -0,0 +1,109 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * (C) Copyright 2000
-+ * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index c53ec2b2a14..81e4ae698bd 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1986,13 +1986,6 @@ config SYS_DISABLE_AUTOLOAD
+ 	  is complete.  Enable this option to disable this behavior and instead
+ 	  require files to be loaded over the network by subsequent commands.
+ 
+-config CMD_WGET
+-	bool "wget"
+-	select PROT_TCP
+-	help
+-	  wget is a simple command to download kernel, or other files,
+-	  from a http server over TCP.
+-
+ config CMD_PING6
+ 	bool "ping6"
+ 	depends on IPV6
+@@ -2107,6 +2100,15 @@ config CMD_TFTPBOOT
+ 	help
+ 	  tftpboot - load file via network using TFTP protocol
+ 
++config CMD_WGET
++	bool "wget"
++	select PROT_TCP if NET
++	select PROT_TCP_LWIP if NET_LWIP
++	select PROT_DNS_LWIP if NET_LWIP
++	help
++	  wget is a simple command to download kernel, or other files,
++	  from a http server over TCP.
++
+ endif  # if CMD_NET
+ 
+ endif  # if NET || NET_LWIP
+diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
+index c021da6a674..42f8bd6b259 100644
+--- a/cmd/net-lwip.c
++++ b/cmd/net-lwip.c
+@@ -35,3 +35,11 @@ U_BOOT_CMD(
+ 	"hostname [envvar]"
+ );
+ #endif
++
++#if defined(CONFIG_CMD_WGET)
++U_BOOT_CMD(
++	wget,   3,      1,      do_wget,
++	"boot image via network using HTTP protocol",
++	"[loadAddress] URL"
++);
++#endif
+diff --git a/include/net-lwip.h b/include/net-lwip.h
+index cb60537f9f3..f5d9255ccaf 100644
+--- a/include/net-lwip.h
++++ b/include/net-lwip.h
+@@ -12,8 +12,26 @@ void net_lwip_remove_netif(struct netif *netif);
+ struct netif *net_lwip_get_netif(void);
+ int net_lwip_rx(struct udevice *udev, struct netif *netif);
+ 
++/**
++ * wget_with_dns() - runs dns host IP address resulution before wget
++ *
++ * @dst_addr:	destination address to download the file
++ * @uri:	uri string of target file of wget
++ * Return:	downloaded file size, negative if failed
 + */
 +
++int wget_with_dns(ulong dst_addr, char *uri);
++/**
++ * wget_validate_uri() - varidate the uri
++ *
++ * @uri:	uri string of target file of wget
++ * Return:	true if uri is valid, false if uri is invalid
++ */
++bool wget_validate_uri(char *uri);
++
+ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
++int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
+ 
+ #endif /* __NET_LWIP_H__ */
+diff --git a/net/lwip/Makefile b/net/lwip/Makefile
+index 645d8a8c457..f2558f8763a 100644
+--- a/net/lwip/Makefile
++++ b/net/lwip/Makefile
+@@ -5,3 +5,4 @@ obj-$(CONFIG_CMD_DHCP) += dhcp.o
+ obj-$(CONFIG_CMD_DNS) += dns.o
+ obj-$(CONFIG_CMD_PING) += ping.o
+ obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
++obj-$(CONFIG_CMD_WGET) += wget.o
+diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+new file mode 100644
+index 00000000000..65a69fab6e8
+--- /dev/null
++++ b/net/lwip/wget.c
+@@ -0,0 +1,278 @@
++// SPDX-License-Identifier: GPL-2.0+
++/* Copyright (C) 2024 Linaro Ltd. */
++
 +#include <command.h>
-+#include <dm/device.h>
-+#include <dm/uclass.h>
++#include <console.h>
++#include <display_options.h>
++#include <image.h>
++#include <lwip/apps/http_client.h>
++#include <lwip/timeouts.h>
 +#include <net.h>
-+#include <linux/compat.h>
-+#include <linux/ethtool.h>
++#include <time.h>
 +
-+static int do_net_list(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-+{
-+	const struct udevice *current = eth_get_dev();
-+	unsigned char env_enetaddr[ARP_HLEN];
-+	const struct udevice *dev;
-+	struct uclass *uc;
++#define SERVER_NAME_SIZE 200
++#define HTTP_PORT_DEFAULT 80
++#define PROGRESS_PRINT_STEP_BYTES (100 * 1024)
 +
-+	uclass_id_foreach_dev(UCLASS_ETH, dev, uc) {
-+		eth_env_get_enetaddr_by_index("eth", dev_seq(dev), env_enetaddr);
-+		printf("eth%d : %s %pM %s\n", dev_seq(dev), dev->name, env_enetaddr,
-+		       current == dev ? "active" : "");
-+	}
-+	return CMD_RET_SUCCESS;
-+}
-+
-+static int do_net_stats(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-+{
-+	int nstats, err, i, off;
-+	struct udevice *dev;
-+	u64 *values;
-+	u8 *strings;
-+
-+	if (argc < 2)
-+		return CMD_RET_USAGE;
-+
-+	err = uclass_get_device_by_name(UCLASS_ETH, argv[1], &dev);
-+	if (err) {
-+		printf("Could not find device %s\n", argv[1]);
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	if (!eth_get_ops(dev)->get_sset_count ||
-+	    !eth_get_ops(dev)->get_strings ||
-+	    !eth_get_ops(dev)->get_stats) {
-+		printf("Driver does not implement stats dump!\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	nstats = eth_get_ops(dev)->get_sset_count(dev);
-+	strings = kcalloc(nstats, ETH_GSTRING_LEN, GFP_KERNEL);
-+	if (!strings)
-+		return CMD_RET_FAILURE;
-+
-+	values = kcalloc(nstats, sizeof(u64), GFP_KERNEL);
-+	if (!values)
-+		goto err_free_strings;
-+
-+	eth_get_ops(dev)->get_strings(dev, strings);
-+	eth_get_ops(dev)->get_stats(dev, values);
-+
-+	off = 0;
-+	for (i = 0; i < nstats; i++) {
-+		printf("  %s: %llu\n", &strings[off], values[i]);
-+		off += ETH_GSTRING_LEN;
-+	};
-+
-+	kfree(strings);
-+	kfree(values);
-+
-+	return CMD_RET_SUCCESS;
-+
-+err_free_strings:
-+	kfree(strings);
-+
-+	return CMD_RET_FAILURE;
-+}
-+
-+static struct cmd_tbl cmd_net[] = {
-+	U_BOOT_CMD_MKENT(list, 1, 0, do_net_list, "", ""),
-+	U_BOOT_CMD_MKENT(stats, 2, 0, do_net_stats, "", ""),
++enum done_state {
++        NOT_DONE = 0,
++        SUCCESS = 1,
++        FAILURE = 2
 +};
 +
-+static int do_net(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
++struct wget_ctx {
++	ulong daddr;
++	ulong saved_daddr;
++	ulong size;
++	ulong prevsize;
++	ulong start_time;
++	enum done_state done;
++};
++
++static int parse_url(char *url, char *host, u16 *port, char **path)
 +{
-+	struct cmd_tbl *cp;
++	char *p, *pp;
++	long lport;
 +
-+	cp = find_cmd_tbl(argv[1], cmd_net, ARRAY_SIZE(cmd_net));
++	p = strstr(url, "http://");
++	if (!p) {
++		log_err("only http:// is supported\n");
++		return -EINVAL;
++	}
 +
-+	/* Drop the net command */
-+	argc--;
-+	argv++;
++	p += strlen("http://");
 +
-+	if (!cp || argc > cp->maxargs)
-+		return CMD_RET_USAGE;
-+	if (flag == CMD_FLAG_REPEAT && !cmd_is_repeatable(cp))
-+		return CMD_RET_SUCCESS;
++	/* Parse hostname */
++	pp = strchr(p, ':');
++	if (!pp)
++		pp = strchr(p, '/');
++	if (!pp)
++		return -EINVAL;
 +
-+	return cp->cmd(cmdtp, flag, argc, argv);
++	if (p + SERVER_NAME_SIZE <= pp)
++		return -EINVAL;
++
++	memcpy(host, p, pp - p);
++	host[pp - p] = '\0';
++
++	if (*pp == ':') {
++		/* Parse port number */
++		p = pp + 1;
++		lport = simple_strtol(p, &pp, 10);
++		if (pp && *pp != '/')
++			return -EINVAL;
++		if (lport > 65535)
++			return -EINVAL;
++		*port = (u16)lport;
++	} else {
++		*port = HTTP_PORT_DEFAULT;
++	}
++	if (*pp != '/')
++		return -EINVAL;
++	*path = pp;
++
++	return 0;
 +}
 +
-+U_BOOT_CMD(
-+	net, 3, 1, do_net,
-+	"NET sub-system",
-+	"list - list available devices\n"
-+	"stats <device> - dump statistics for specified device\n"
-+);
-diff --git a/cmd/net.c b/cmd/net.c
-index b206ff58e68..ad5aaf9245e 100644
---- a/cmd/net.c
-+++ b/cmd/net.c
-@@ -675,118 +675,3 @@ U_BOOT_CMD(
- );
- 
- #endif  /* CONFIG_CMD_LINK_LOCAL */
--
--static int do_net_list(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
--{
--	const struct udevice *current = eth_get_dev();
--	unsigned char env_enetaddr[ARP_HLEN];
--	const struct udevice *dev;
--	struct uclass *uc;
--
--	uclass_id_foreach_dev(UCLASS_ETH, dev, uc) {
--		eth_env_get_enetaddr_by_index("eth", dev_seq(dev), env_enetaddr);
--		printf("eth%d : %s %pM %s\n", dev_seq(dev), dev->name, env_enetaddr,
--		       current == dev ? "active" : "");
--	}
--	return CMD_RET_SUCCESS;
--}
--
--static int do_net_stats(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
--{
--	int nstats, err, i, off;
--	struct udevice *dev;
--	u64 *values;
--	u8 *strings;
--
--	if (argc < 2)
--		return CMD_RET_USAGE;
--
--	err = uclass_get_device_by_name(UCLASS_ETH, argv[1], &dev);
--	if (err) {
--		printf("Could not find device %s\n", argv[1]);
--		return CMD_RET_FAILURE;
--	}
--
--	if (!eth_get_ops(dev)->get_sset_count ||
--	    !eth_get_ops(dev)->get_strings ||
--	    !eth_get_ops(dev)->get_stats) {
--		printf("Driver does not implement stats dump!\n");
--		return CMD_RET_FAILURE;
--	}
--
--	nstats = eth_get_ops(dev)->get_sset_count(dev);
--	strings = kcalloc(nstats, ETH_GSTRING_LEN, GFP_KERNEL);
--	if (!strings)
--		return CMD_RET_FAILURE;
--
--	values = kcalloc(nstats, sizeof(u64), GFP_KERNEL);
--	if (!values)
--		goto err_free_strings;
--
--	eth_get_ops(dev)->get_strings(dev, strings);
--	eth_get_ops(dev)->get_stats(dev, values);
--
--	off = 0;
--	for (i = 0; i < nstats; i++) {
--		printf("  %s: %llu\n", &strings[off], values[i]);
--		off += ETH_GSTRING_LEN;
--	};
--
--	return CMD_RET_SUCCESS;
--
--err_free_strings:
--	kfree(strings);
--
--	return CMD_RET_FAILURE;
--}
--
--static struct cmd_tbl cmd_net[] = {
--	U_BOOT_CMD_MKENT(list, 1, 0, do_net_list, "", ""),
--	U_BOOT_CMD_MKENT(stats, 2, 0, do_net_stats, "", ""),
--};
--
--static int do_net(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
--{
--	struct cmd_tbl *cp;
--
--	cp = find_cmd_tbl(argv[1], cmd_net, ARRAY_SIZE(cmd_net));
--
--	/* Drop the net command */
--	argc--;
--	argv++;
--
--	if (!cp || argc > cp->maxargs)
--		return CMD_RET_USAGE;
--	if (flag == CMD_FLAG_REPEAT && !cmd_is_repeatable(cp))
--		return CMD_RET_SUCCESS;
--
--	return cp->cmd(cmdtp, flag, argc, argv);
--}
--
--U_BOOT_CMD(
--	net, 3, 1, do_net,
--	"NET sub-system",
--	"list - list available devices\n"
--	"stats <device> - dump statistics for specified device\n"
--);
--
--#if defined(CONFIG_CMD_NCSI)
--static int do_ncsi(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
--{
--	if (!phy_interface_is_ncsi() || !ncsi_active()) {
--		printf("Device not configured for NC-SI\n");
--		return CMD_RET_FAILURE;
--	}
--
--	if (net_loop(NCSI) < 0)
--		return CMD_RET_FAILURE;
--
--	return CMD_RET_SUCCESS;
--}
--
--U_BOOT_CMD(
--	ncsi,	1,	1,	do_ncsi,
--	"Configure attached NIC via NC-SI",
--	""
--);
--#endif  /* CONFIG_CMD_NCSI */
++static err_t httpc_recv_cb(void *arg, struct altcp_pcb *pcb, struct pbuf *pbuf,
++			   err_t err)
++{
++	struct wget_ctx *ctx = arg;
++	struct pbuf *buf;
++
++	if (!pbuf)
++		return ERR_BUF;
++
++	for (buf = pbuf; buf; buf = buf->next) {
++		memcpy((void *)ctx->daddr, buf->payload, buf->len);
++		ctx->daddr += buf->len;
++		ctx->size += buf->len;
++		if (ctx->size - ctx->prevsize > PROGRESS_PRINT_STEP_BYTES) {
++			printf("#");
++			ctx->prevsize = ctx->size;
++		}
++	}
++
++	altcp_recved(pcb, pbuf->tot_len);
++	pbuf_free(pbuf);
++	return ERR_OK;
++}
++
++static void httpc_result_cb(void *arg, httpc_result_t httpc_result,
++			    u32_t rx_content_len, u32_t srv_res, err_t err)
++{
++	struct wget_ctx *ctx = arg;
++	ulong elapsed;
++
++	if (httpc_result != HTTPC_RESULT_OK) {
++		log_err("\nHTTP client error %d\n", httpc_result);
++		ctx->done = FAILURE;
++		return;
++	}
++
++	elapsed = get_timer(ctx->start_time);
++	if (rx_content_len > PROGRESS_PRINT_STEP_BYTES)
++		printf("\n");
++        printf("%u bytes transferred in %lu ms (", rx_content_len,
++	       get_timer(ctx->start_time));
++        print_size(rx_content_len / elapsed * 1000, "/s)\n");
++
++	if (env_set_hex("filesize", rx_content_len) ||
++	    env_set_hex("fileaddr", ctx->saved_daddr)) {
++		log_err("Could not set filesize or fileaddr\n");
++		ctx->done = FAILURE;
++		return;
++	}
++
++	ctx->done = SUCCESS;
++}
++
++static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
++{
++	char server_name[SERVER_NAME_SIZE];
++	httpc_connection_t conn;
++	httpc_state_t *state;
++	struct netif *netif;
++	struct wget_ctx ctx;
++	char *path;
++	u16 port;
++
++	ctx.daddr = dst_addr;
++	ctx.saved_daddr = dst_addr;
++	ctx.done = NOT_DONE;
++	ctx.size = 0;
++	ctx.prevsize = 0;
++
++	if (parse_url(uri, server_name, &port, &path))
++		return CMD_RET_USAGE;
++
++	netif = net_lwip_new_netif(udev);
++	if (!netif)
++		return -1;
++
++	memset(&conn, 0, sizeof(conn));
++	conn.result_fn = httpc_result_cb;
++	ctx.start_time = get_timer(0);
++	if (httpc_get_file_dns(server_name, port, path, &conn, httpc_recv_cb,
++			       &ctx, &state)) {
++		net_lwip_remove_netif(netif);
++		return CMD_RET_FAILURE;
++	}
++
++	while (!ctx.done) {
++		net_lwip_rx(udev, netif);
++		sys_check_timeouts();
++		if (ctrlc())
++			break;
++	}
++
++	net_lwip_remove_netif(netif);
++
++	if (ctx.done == SUCCESS)
++		return 0;
++
++	return -1;
++}
++
++int wget_with_dns(ulong dst_addr, char *uri)
++{
++	eth_set_current();
++
++	return wget_loop(eth_get_dev(), dst_addr, uri);
++}
++
++int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
++{
++	char *end;
++	char *url;
++	ulong dst_addr;
++
++	if (argc < 2 || argc > 3)
++		return CMD_RET_USAGE;
++
++	dst_addr = hextoul(argv[1], &end);
++        if (end == (argv[1] + strlen(argv[1]))) {
++		if (argc < 3)
++			return CMD_RET_USAGE;
++		url = argv[2];
++	} else {
++		dst_addr = image_load_addr;
++		url = argv[1];
++	}
++
++	if (wget_with_dns(dst_addr, url))
++		return CMD_RET_FAILURE;
++
++	return CMD_RET_SUCCESS;
++}
++
++/**
++ * wget_validate_uri() - validate the uri for wget
++ *
++ * @uri:	uri string
++ *
++ * This function follows the current U-Boot wget implementation.
++ * scheme: only "http:" is supported
++ * authority:
++ *   - user information: not supported
++ *   - host: supported
++ *   - port: not supported(always use the default port)
++ *
++ * Uri is expected to be correctly percent encoded.
++ * This is the minimum check, control codes(0x1-0x19, 0x7F, except '\0')
++ * and space character(0x20) are not allowed.
++ *
++ * TODO: stricter uri conformance check
++ *
++ * Return:	true on success, false on failure
++ */
++bool wget_validate_uri(char *uri)
++{
++	char c;
++	bool ret = true;
++	char *str_copy, *s, *authority;
++
++	for (c = 0x1; c < 0x21; c++) {
++		if (strchr(uri, c)) {
++			log_err("invalid character is used\n");
++			return false;
++		}
++	}
++	if (strchr(uri, 0x7f)) {
++		log_err("invalid character is used\n");
++		return false;
++	}
++
++	if (strncmp(uri, "http://", 7)) {
++		log_err("only http:// is supported\n");
++		return false;
++	}
++	str_copy = strdup(uri);
++	if (!str_copy)
++		return false;
++
++	s = str_copy + strlen("http://");
++	authority = strsep(&s, "/");
++	if (!s) {
++		log_err("invalid uri, no file path\n");
++		ret = false;
++		goto out;
++	}
++	s = strchr(authority, '@');
++	if (s) {
++		log_err("user information is not supported\n");
++		ret = false;
++		goto out;
++	}
++	s = strchr(authority, ':');
++	if (s) {
++		log_err("user defined port is not supported\n");
++		ret = false;
++		goto out;
++	}
++
++out:
++	free(str_copy);
++
++	return ret;
++}
 -- 
 2.40.1
 
