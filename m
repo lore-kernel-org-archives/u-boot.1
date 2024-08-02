@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0E45C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 19:52:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A6B7C3DA7F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 19:52:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D1D588C18;
-	Fri,  2 Aug 2024 21:51:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E0F5B88C16;
+	Fri,  2 Aug 2024 21:52:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lObDDuV+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T4/feyfJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90DC088C17; Fri,  2 Aug 2024 21:51:58 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 7D58B88C37; Fri,  2 Aug 2024 21:52:00 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACB8F88622
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 21:51:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 167C888C0F
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 21:51:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-428243f928fso49277095e9.0
- for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 12:51:56 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3686b554cfcso4306174f8f.1
+ for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 12:51:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722628316; x=1723233116; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=leuubVYaLUtH4af1t6UlxW3hcQqwVo/36vprPcewXh0=;
- b=lObDDuV+HjacLF29+LMGxEu59BelxRaqhqVlGagrGMH5v3eM7lsimbdVngX2419rE8
- iN5GMmkxU6NOY98c/nA5ts7SHsPke9rL7hxbicln1H3n0p/AXQT7OYUSwqSRB8HXTlK/
- PE+EaRlW7sYOnhVCCmUFyVTwAPRS577QtZHfo0anFudIoy3GMH9Qja6LIHxtEhFmBVFr
- bmvlY2IDdLQ9k/+LF1ZlKXw8ZDvfrY9wG9tGwUb9eZKtLjh+KP+BcRCXRRd7smG0cBhv
- TvfdXjH2HLhXQa/n1HrQ0fiog4c6OSRh0uV6gAHaWKg+NMBtfmVGY/z3m20dIcZtEu4L
- MtwA==
+ d=gmail.com; s=20230601; t=1722628317; x=1723233117; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=CFIu3Xo5u3gKh3u396SMqHcfNLJMHqCmnONohW3sQug=;
+ b=T4/feyfJOqFKZ0sJGbN+Vz5mZJdekbQPlciZBm2NO6utMGo/wN3ZinTvMQ8kPA7IZz
+ WwuoijSZu/n/KEkT/6eZHhPzH8C0otYGRqzeo+grKif60nURgAeihg6K1QcfcOO6I2vz
+ QIzdoD//QrGA6BmhcwAipJcG8yjWlFKok9aQwKj4mhJs61wwwBzpupgng7gn3zWKNcSo
+ 7VAVrFqlhGyS8btgNY8QQfzxwA0t+PRz8gcWaqBonvT4aw9oMmVC9pK9MtZ6VgjySVAm
+ /4zwvh5wjrQTo3nvsWcjx7atNEGKOmNEAnMaf1yk2UNA6DOpOmBKSn9WWbtmBDAC7Uwp
+ 3B9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722628316; x=1723233116;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=leuubVYaLUtH4af1t6UlxW3hcQqwVo/36vprPcewXh0=;
- b=XK6XmQQTkbJWu6VRA+UZnQip7zTSgmimFY7UpFzDxxgOTwUuC9hD3WBSeqiLESaJrp
- B8RatOt1uUNhweXx52zvZM5N2cfPQx6g3QD09jluM7lmaO+hIQp/SDaDyequWtcPCjSt
- 6cOy0qiIRmgbQ4a7SzSu4W7oTAkITtSGEkUFo4Q0NSA8Y6Wuk6Sw7cx9GP3meSCAxAZa
- tl/JPMW8KsG4aXKJEn/CqX7uj/7xNdo7iphI+B1gX9VXuJbl7qN+HnzrnsuiXfNLm2CW
- IrPfoVlEBPmF03v+YE3sQpUETarrgrirsm481a7Az/M7T1/O3g/C6js/9fVLxCoEX1tm
- HDzg==
+ d=1e100.net; s=20230601; t=1722628317; x=1723233117;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=CFIu3Xo5u3gKh3u396SMqHcfNLJMHqCmnONohW3sQug=;
+ b=lIHY41jnqtyS9kmAD0vT+/vDYQu90KqeD7+iqsN1zDZgVdBpxLqkspKhivsXeFHEdo
+ BfnGNdiJvHW6GjIgQ0Yi276DzVkUl60CzU9tSxRToXraN7y/1M2e+etsUEhRkqWtP5gx
+ w5Wz71u/WUujYxrtlDcLxoguxSw2kfq76xw6/mL40nccZ/5wCX+Og9fwr0gSSAm3yKOP
+ f6E/IERXo5jn38YD8BYwowsS241Jv7KmIjUUs3kUdT7sAG4DakxK94OLm7iVQlvloNHL
+ 8IIH6QDD4LWkBBNshTru3AISo9Ru2ssCYKtUY1nHNmLPK5XwllWPHuzY9liNQxaBegMV
+ itqw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU9+bOsXIUUCFAK55CewnMQNbOtoKsKZFXZiobl0Wq7n6xgHKn8cs9uZBoJbRY7tFgU1ZNQCK7blswMdVaBx6D45MLKKA==
-X-Gm-Message-State: AOJu0YyaxFGe1z8y1dhYqtw4wudEX53XLOecGga1iCjvb4fUcRHfHPmP
- O7WXF5x1zv5Ie8DU0jHCnp6lZdfehgaJlTr+3IoCEyZ9uopW2tcr
-X-Google-Smtp-Source: AGHT+IEbB8ubWXGXok7Hk4aRBijdUUsfIn2HnKINRGTaFvtsW1Ma9/vwW5aw0RFggzSxsngB8B5pAA==
-X-Received: by 2002:a05:600c:4f95:b0:426:6ed5:fcb with SMTP id
- 5b1f17b1804b1-428e6af2e72mr36311935e9.4.1722628315861; 
- Fri, 02 Aug 2024 12:51:55 -0700 (PDT)
+ AJvYcCUa0xaVur8bXV/W/3WriyRCxZPk3ynx2N6MIsw2n963XhybNn3rQS5qb/1Z1BI6g8nI3j2jEYMSsbeKymPTMyfgje53bA==
+X-Gm-Message-State: AOJu0Yx9gBzrcRoZjPzEHrbQECYQWI8T/ZjAArWBgRpDlvVyX7gTspOr
+ cabzf8dOhyhbcc3ifFU/sA7xPYS6/vWktxQW7oNtNU0ZlUwN9eLu
+X-Google-Smtp-Source: AGHT+IEt56vzgu/tWDr3aPQdEQvYQ46wgGySL1NmqlhPt+m/vMgjcCAMZZmUMpxbJ34HNSZuK/Eshg==
+X-Received: by 2002:adf:cc89:0:b0:368:68d3:32b3 with SMTP id
+ ffacd0b85a97d-36bbc11aaa5mr2832196f8f.26.1722628317255; 
+ Fri, 02 Aug 2024 12:51:57 -0700 (PDT)
 Received: from localhost.localdomain
  (host-87-6-196-30.retail.telecomitalia.it. [87.6.196.30])
  by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-36bbd06d03fsm2643344f8f.91.2024.08.02.12.51.54
+ ffacd0b85a97d-36bbd06d03fsm2643344f8f.91.2024.08.02.12.51.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Aug 2024 12:51:55 -0700 (PDT)
+ Fri, 02 Aug 2024 12:51:56 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
@@ -72,10 +73,13 @@ To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
  u-boot@lists.denx.de
-Subject: [PATCH 0/8] clk: mediatek: mt7622: clk migration for OF_UPSTREAM
-Date: Fri,  2 Aug 2024 15:48:24 +0200
-Message-ID: <20240802134835.24006-1-ansuelsmth@gmail.com>
+Subject: [PATCH 1/8] clk: mediatek: mt7622: fix broken peri_cgs clk with XTAL
+ parents
+Date: Fri,  2 Aug 2024 15:48:25 +0200
+Message-ID: <20240802134835.24006-2-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20240802134835.24006-1-ansuelsmth@gmail.com>
+References: <20240802134835.24006-1-ansuelsmth@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,24 +98,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These are all the required patches to migrate clk and correctly support
-OF_UPSTREAM. This will align the clk index to upstream to support the same
-clk implementation with downstream and upstream DTS.
+Fix broken peri_cgs clock with XTAL parents as they have wrong
+definition of the parent type.
 
-Christian Marangi (8):
-  clk: mediatek: mt7622: fix broken peri_cgs clk with XTAL parents
-  clk: mediatek_ mt7622: rename AUDIO_AWB3 to AUDIO_AWB2
-  clk: mediatek: mt7622: move INFRA_TRNG to the bottom
-  clk: mediatek: mt7622: add missing clock define for MAIN_CORE_EN
-  clk: mediatek: mt7622: add missing clock MUX1_SEL
-  clk: mediatek: mt7622: add missing clock PERI_UART4_PD
-  clk: mediatek: mt7622: add missing clock PERIBUS_SEL clock
-  clk: mediatek: mt7622: add missing A1/2SYS clock ID
+Correctly fix them and use CLK_PARENT_XTAL for them.
 
- drivers/clk/mediatek/clk-mt7622.c      | 104 +++++++++++++++++++++----
- include/dt-bindings/clock/mt7622-clk.h |  68 ++++++++--------
- 2 files changed, 124 insertions(+), 48 deletions(-)
+Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+---
+ drivers/clk/mediatek/clk-mt7622.c | 26 +++++++++++++++-----------
+ 1 file changed, 15 insertions(+), 11 deletions(-)
 
+diff --git a/drivers/clk/mediatek/clk-mt7622.c b/drivers/clk/mediatek/clk-mt7622.c
+index 2beb63030f2..4a7c5faff1a 100644
+--- a/drivers/clk/mediatek/clk-mt7622.c
++++ b/drivers/clk/mediatek/clk-mt7622.c
+@@ -402,13 +402,17 @@ static const struct mtk_gate_regs peri1_cg_regs = {
+ 	.sta_ofs = 0x1C,
+ };
+ 
+-#define GATE_PERI0(_id, _parent, _shift) {			\
++#define GATE_PERI0_FLAGS(_id, _parent, _shift, _flags) {	\
+ 		.id = _id,					\
+ 		.parent = _parent,				\
+ 		.regs = &peri0_cg_regs,				\
+ 		.shift = _shift,				\
+-		.flags = CLK_GATE_SETCLR | CLK_PARENT_TOPCKGEN,	\
++		.flags = _flags,				\
+ 	}
++#define GATE_PERI0(_id, _parent, _shift) \
++	GATE_PERI0_FLAGS(_id, _parent, _shift, CLK_GATE_SETCLR | CLK_PARENT_TOPCKGEN)
++#define GATE_PERI0_XTAL(_id, _parent, _shift) \
++	GATE_PERI0_FLAGS(_id, _parent, _shift, CLK_GATE_SETCLR | CLK_PARENT_XTAL)
+ 
+ #define GATE_PERI1(_id, _parent, _shift) {			\
+ 		.id = _id,					\
+@@ -421,14 +425,14 @@ static const struct mtk_gate_regs peri1_cg_regs = {
+ static const struct mtk_gate peri_cgs[] = {
+ 	/* PERI0 */
+ 	GATE_PERI0(CLK_PERI_THERM_PD, CLK_TOP_AXI_SEL, 1),
+-	GATE_PERI0(CLK_PERI_PWM1_PD, CLK_XTAL, 2),
+-	GATE_PERI0(CLK_PERI_PWM2_PD, CLK_XTAL, 3),
+-	GATE_PERI0(CLK_PERI_PWM3_PD, CLK_XTAL, 4),
+-	GATE_PERI0(CLK_PERI_PWM4_PD, CLK_XTAL, 5),
+-	GATE_PERI0(CLK_PERI_PWM5_PD, CLK_XTAL, 6),
+-	GATE_PERI0(CLK_PERI_PWM6_PD, CLK_XTAL, 7),
+-	GATE_PERI0(CLK_PERI_PWM7_PD, CLK_XTAL, 8),
+-	GATE_PERI0(CLK_PERI_PWM_PD, CLK_XTAL, 9),
++	GATE_PERI0_XTAL(CLK_PERI_PWM1_PD, CLK_XTAL, 2),
++	GATE_PERI0_XTAL(CLK_PERI_PWM2_PD, CLK_XTAL, 3),
++	GATE_PERI0_XTAL(CLK_PERI_PWM3_PD, CLK_XTAL, 4),
++	GATE_PERI0_XTAL(CLK_PERI_PWM4_PD, CLK_XTAL, 5),
++	GATE_PERI0_XTAL(CLK_PERI_PWM5_PD, CLK_XTAL, 6),
++	GATE_PERI0_XTAL(CLK_PERI_PWM6_PD, CLK_XTAL, 7),
++	GATE_PERI0_XTAL(CLK_PERI_PWM7_PD, CLK_XTAL, 8),
++	GATE_PERI0_XTAL(CLK_PERI_PWM_PD, CLK_XTAL, 9),
+ 	GATE_PERI0(CLK_PERI_AP_DMA_PD, CLK_TOP_AXI_SEL, 12),
+ 	GATE_PERI0(CLK_PERI_MSDC30_0_PD, CLK_TOP_MSDC30_0_SEL, 13),
+ 	GATE_PERI0(CLK_PERI_MSDC30_1_PD, CLK_TOP_MSDC30_1_SEL, 14),
+@@ -441,7 +445,7 @@ static const struct mtk_gate peri_cgs[] = {
+ 	GATE_PERI0(CLK_PERI_I2C1_PD, CLK_TOP_AXI_SEL, 24),
+ 	GATE_PERI0(CLK_PERI_I2C2_PD, CLK_TOP_AXI_SEL, 25),
+ 	GATE_PERI0(CLK_PERI_SPI1_PD, CLK_TOP_SPI1_SEL, 26),
+-	GATE_PERI0(CLK_PERI_AUXADC_PD, CLK_XTAL, 27),
++	GATE_PERI0_XTAL(CLK_PERI_AUXADC_PD, CLK_XTAL, 27),
+ 	GATE_PERI0(CLK_PERI_SPI0_PD, CLK_TOP_SPI0_SEL, 28),
+ 	GATE_PERI0(CLK_PERI_SNFI_PD, CLK_TOP_NFI_INFRA_SEL, 29),
+ 	GATE_PERI0(CLK_PERI_NFI_PD, CLK_TOP_AXI_SEL, 30),
 -- 
 2.45.2
 
