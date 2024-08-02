@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2AC5C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 19:49:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0E45C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 19:52:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9913F88BF5;
-	Fri,  2 Aug 2024 21:49:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7D1D588C18;
+	Fri,  2 Aug 2024 21:51:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bDe6IMvP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lObDDuV+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDC8988C34; Fri,  2 Aug 2024 21:48:59 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 90DC088C17; Fri,  2 Aug 2024 21:51:58 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7948388C1F
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 21:48:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ACB8F88622
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 21:51:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-428e1915e18so15442435e9.1
- for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 12:48:57 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-428243f928fso49277095e9.0
+ for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 12:51:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722628137; x=1723232937; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=cfTAfKVcuSLB6PDJiSxdZBEdBH6CVzfNQ0jWOt8dgDM=;
- b=bDe6IMvPy3BVE6kIKu4SFnXAWsNeTmy3MCXDFQAdPnolq0rzsT04uSDs2qAhdc2RZO
- UhsrCwI7fn8c42yNH1icjtHneKsIe4mPgcnQI5TigQfwvK0Iw3/bFhHls3swN3SAXySl
- LF61WXzyPRptTYn/70mJzn64WGZjv0a54GdwP4VNVddA7oG5M19gdKWn6Nb1TiARcc8K
- e+i6cyAaCJbdB9dPAwmNjW5+uxM2ACnICgIwdZ2jzhK3Hu3dTzXYFap8vsK6TDzyxkLA
- /LuDbDdqecUX3AM4sctO98i9mc1HoKN4LxvENN3GV8GYQzKA9HXGf9O4uiNxUe+gdG3x
- DxVg==
+ d=gmail.com; s=20230601; t=1722628316; x=1723233116; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=leuubVYaLUtH4af1t6UlxW3hcQqwVo/36vprPcewXh0=;
+ b=lObDDuV+HjacLF29+LMGxEu59BelxRaqhqVlGagrGMH5v3eM7lsimbdVngX2419rE8
+ iN5GMmkxU6NOY98c/nA5ts7SHsPke9rL7hxbicln1H3n0p/AXQT7OYUSwqSRB8HXTlK/
+ PE+EaRlW7sYOnhVCCmUFyVTwAPRS577QtZHfo0anFudIoy3GMH9Qja6LIHxtEhFmBVFr
+ bmvlY2IDdLQ9k/+LF1ZlKXw8ZDvfrY9wG9tGwUb9eZKtLjh+KP+BcRCXRRd7smG0cBhv
+ TvfdXjH2HLhXQa/n1HrQ0fiog4c6OSRh0uV6gAHaWKg+NMBtfmVGY/z3m20dIcZtEu4L
+ MtwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722628137; x=1723232937;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cfTAfKVcuSLB6PDJiSxdZBEdBH6CVzfNQ0jWOt8dgDM=;
- b=t+mmKE/l+cVd6OXbdhpNQ8IugJGYl2/Gfppnd8K0JqHpBnDhBzucSOX47CkeiXatMu
- 4FQwDoHBK4bFAbsPrEaBzE2a+YcFMWtVDgRxt1TEvIIRSSnsFpMDy0ufAmPQt2fkfle0
- TgQfy2b3Wzj+SaqK5cavIRsLj8aU/cgRx6+J5VX8AeInaUSkmP1nNGj3MaaVwRekgCGH
- 0m5LGMCw924/bRZ5tre1rrfSEABy+XQqHYLPGmZZxgPt/7ZatOkwfYBQmEGR8IgVIIV3
- eYOlc7R/PHyal1x38DjU/UbT9ze6kAQCV5mnLueaLTZl9nr6fBTg3T3m3SFk/j/4fSAs
- uMQQ==
+ d=1e100.net; s=20230601; t=1722628316; x=1723233116;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=leuubVYaLUtH4af1t6UlxW3hcQqwVo/36vprPcewXh0=;
+ b=XK6XmQQTkbJWu6VRA+UZnQip7zTSgmimFY7UpFzDxxgOTwUuC9hD3WBSeqiLESaJrp
+ B8RatOt1uUNhweXx52zvZM5N2cfPQx6g3QD09jluM7lmaO+hIQp/SDaDyequWtcPCjSt
+ 6cOy0qiIRmgbQ4a7SzSu4W7oTAkITtSGEkUFo4Q0NSA8Y6Wuk6Sw7cx9GP3meSCAxAZa
+ tl/JPMW8KsG4aXKJEn/CqX7uj/7xNdo7iphI+B1gX9VXuJbl7qN+HnzrnsuiXfNLm2CW
+ IrPfoVlEBPmF03v+YE3sQpUETarrgrirsm481a7Az/M7T1/O3g/C6js/9fVLxCoEX1tm
+ HDzg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUKOfPgRVim1BT2KLEwVUprd4ojHB/cf2t5K9SDpAMyhLkSMSeM1GDbESjllrVHJ2ISwxN2CiPAE3pKS23mJFLwy1ZI+Q==
-X-Gm-Message-State: AOJu0YwP2L/1HMJ+GPDQc+Egc2phKoSzZjbNC4xE+ObnuV4NoX8vRxfY
- 4SIhmFv9wpOqGZQfSwFRj+1Qxj7sz8VJv1jRSzBXsCF1FMHoBRmk
-X-Google-Smtp-Source: AGHT+IFwzCw4sgwZBKaDn0fOh9IOJKBaY7sZT9ERH7UAMyaZSKoTaAUY/tlRahf+OVcb5YvW8I1nNg==
-X-Received: by 2002:a05:600c:358b:b0:427:d8f7:b718 with SMTP id
- 5b1f17b1804b1-428e6b7f0abmr30534075e9.24.1722628136685; 
- Fri, 02 Aug 2024 12:48:56 -0700 (PDT)
+ AJvYcCU9+bOsXIUUCFAK55CewnMQNbOtoKsKZFXZiobl0Wq7n6xgHKn8cs9uZBoJbRY7tFgU1ZNQCK7blswMdVaBx6D45MLKKA==
+X-Gm-Message-State: AOJu0YyaxFGe1z8y1dhYqtw4wudEX53XLOecGga1iCjvb4fUcRHfHPmP
+ O7WXF5x1zv5Ie8DU0jHCnp6lZdfehgaJlTr+3IoCEyZ9uopW2tcr
+X-Google-Smtp-Source: AGHT+IEbB8ubWXGXok7Hk4aRBijdUUsfIn2HnKINRGTaFvtsW1Ma9/vwW5aw0RFggzSxsngB8B5pAA==
+X-Received: by 2002:a05:600c:4f95:b0:426:6ed5:fcb with SMTP id
+ 5b1f17b1804b1-428e6af2e72mr36311935e9.4.1722628315861; 
+ Fri, 02 Aug 2024 12:51:55 -0700 (PDT)
 Received: from localhost.localdomain
  (host-87-6-196-30.retail.telecomitalia.it. [87.6.196.30])
  by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-428ebbe18c0sm24827455e9.17.2024.08.02.12.48.55
+ ffacd0b85a97d-36bbd06d03fsm2643344f8f.91.2024.08.02.12.51.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Aug 2024 12:48:56 -0700 (PDT)
+ Fri, 02 Aug 2024 12:51:55 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
@@ -73,12 +72,10 @@ To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
  u-boot@lists.denx.de
-Subject: [PATCH 5/5] clk: mediatek: mt7623: remap peri clock ID and add MUX
-Date: Fri,  2 Aug 2024 15:45:05 +0200
-Message-ID: <20240802134511.23608-6-ansuelsmth@gmail.com>
+Subject: [PATCH 0/8] clk: mediatek: mt7622: clk migration for OF_UPSTREAM
+Date: Fri,  2 Aug 2024 15:48:24 +0200
+Message-ID: <20240802134835.24006-1-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240802134511.23608-1-ansuelsmth@gmail.com>
-References: <20240802134511.23608-1-ansuelsmth@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,136 +94,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Upstream kernel linux makes use of peri clock MUX to setup UART.
+These are all the required patches to migrate clk and correctly support
+OF_UPSTREAM. This will align the clk index to upstream to support the same
+clk implementation with downstream and upstream DTS.
 
-Add definition for these and add remap table as in the upstream clock ID
-order gates are before MUX but we require MUX first and then clocks in
-our downstream driver.
+Christian Marangi (8):
+  clk: mediatek: mt7622: fix broken peri_cgs clk with XTAL parents
+  clk: mediatek_ mt7622: rename AUDIO_AWB3 to AUDIO_AWB2
+  clk: mediatek: mt7622: move INFRA_TRNG to the bottom
+  clk: mediatek: mt7622: add missing clock define for MAIN_CORE_EN
+  clk: mediatek: mt7622: add missing clock MUX1_SEL
+  clk: mediatek: mt7622: add missing clock PERI_UART4_PD
+  clk: mediatek: mt7622: add missing clock PERIBUS_SEL clock
+  clk: mediatek: mt7622: add missing A1/2SYS clock ID
 
-Convert the peri clk tree to MUX + GATE implementation.
+ drivers/clk/mediatek/clk-mt7622.c      | 104 +++++++++++++++++++++----
+ include/dt-bindings/clock/mt7622-clk.h |  68 ++++++++--------
+ 2 files changed, 124 insertions(+), 48 deletions(-)
 
-Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
----
- drivers/clk/mediatek/clk-mt7623.c | 83 +++++++++++++++++++++++++++++--
- 1 file changed, 80 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/clk/mediatek/clk-mt7623.c b/drivers/clk/mediatek/clk-mt7623.c
-index 78e390d49f8..d0b80f48b0a 100644
---- a/drivers/clk/mediatek/clk-mt7623.c
-+++ b/drivers/clk/mediatek/clk-mt7623.c
-@@ -807,6 +807,74 @@ static const struct mtk_gate infra_cgs[] = {
- };
- 
- /* pericfg */
-+static const int peri_id_offs_map[] = {
-+	/* MUX CLK */
-+	[CLK_PERI_UART0_SEL]			= 1,
-+	[CLK_PERI_UART1_SEL]			= 2,
-+	[CLK_PERI_UART2_SEL]			= 3,
-+	[CLK_PERI_UART3_SEL]			= 4,
-+	/* GATE CLK */
-+	[CLK_PERI_NFI]				= 5,
-+	[CLK_PERI_THERM]			= 6,
-+	[CLK_PERI_PWM1]				= 7,
-+	[CLK_PERI_PWM2]				= 8,
-+	[CLK_PERI_PWM3]				= 9,
-+	[CLK_PERI_PWM4]				= 10,
-+	[CLK_PERI_PWM5]				= 11,
-+	[CLK_PERI_PWM6]				= 12,
-+	[CLK_PERI_PWM7]				= 13,
-+	[CLK_PERI_PWM]				= 14,
-+	[CLK_PERI_USB0]				= 15,
-+	[CLK_PERI_USB1]				= 16,
-+	[CLK_PERI_AP_DMA]			= 17,
-+	[CLK_PERI_MSDC30_0]			= 18,
-+	[CLK_PERI_MSDC30_1]			= 19,
-+	[CLK_PERI_MSDC30_2]			= 20,
-+	[CLK_PERI_MSDC30_3]			= 21,
-+	[CLK_PERI_MSDC50_3]			= 22,
-+	[CLK_PERI_NLI]				= 23,
-+	[CLK_PERI_UART0]			= 24,
-+	[CLK_PERI_UART1]			= 25,
-+	[CLK_PERI_UART2]			= 26,
-+	[CLK_PERI_UART3]			= 27,
-+	[CLK_PERI_BTIF]				= 28,
-+	[CLK_PERI_I2C0]				= 29,
-+	[CLK_PERI_I2C1]				= 30,
-+	[CLK_PERI_I2C2]				= 31,
-+	[CLK_PERI_I2C3]				= 32,
-+	[CLK_PERI_AUXADC]			= 33,
-+	[CLK_PERI_SPI0]				= 34,
-+	[CLK_PERI_ETH]				= 35,
-+	[CLK_PERI_USB0_MCU]			= 36,
-+	[CLK_PERI_USB1_MCU]			= 37,
-+	[CLK_PERI_USB_SLV]			= 38,
-+	[CLK_PERI_GCPU]				= 39,
-+	[CLK_PERI_NFI_ECC]			= 40,
-+	[CLK_PERI_NFI_PAD]			= 41,
-+	[CLK_PERI_FLASH]			= 42,
-+	[CLK_PERI_HOST89_INT]			= 43,
-+	[CLK_PERI_HOST89_SPI]			= 44,
-+	[CLK_PERI_HOST89_DVD]			= 45,
-+	[CLK_PERI_SPI1]				= 46,
-+	[CLK_PERI_SPI2]				= 47,
-+	[CLK_PERI_FCI]				= 48,
-+};
-+
-+#define TOP_PARENT(_id) PARENT(_id, CLK_PARENT_TOPCKGEN)
-+#define XTAL_PARENT(_id) PARENT(_id, CLK_PARENT_XTAL)
-+
-+static const struct mtk_parent uart_ck_sel_parents[] = {
-+	XTAL_PARENT(CLK_XTAL),
-+	TOP_PARENT(CLK_TOP_UART_SEL),
-+};
-+
-+static const struct mtk_composite peri_muxes[] = {
-+	MUX_MIXED(CLK_PERI_UART0_SEL, uart_ck_sel_parents, 0x40C, 0, 1),
-+	MUX_MIXED(CLK_PERI_UART1_SEL, uart_ck_sel_parents, 0x40C, 1, 1),
-+	MUX_MIXED(CLK_PERI_UART2_SEL, uart_ck_sel_parents, 0x40C, 2, 1),
-+	MUX_MIXED(CLK_PERI_UART3_SEL, uart_ck_sel_parents, 0x40C, 3, 1),
-+};
-+
- static const struct mtk_gate_regs peri0_cg_regs = {
- 	.set_ofs = 0x8,
- 	.clr_ofs = 0x10,
-@@ -980,6 +1048,7 @@ static int mt7623_topckgen_probe(struct udevice *dev)
- static const struct mtk_clk_tree mt7623_clk_gate_tree = {
- 	/* Each CLK ID for gates clock starts at index 1 */
- 	.gates_offs = 1,
-+	.xtal_rate = 26 * MHZ,
- };
- 
- static int mt7623_infracfg_probe(struct udevice *dev)
-@@ -988,10 +1057,18 @@ static int mt7623_infracfg_probe(struct udevice *dev)
- 					infra_cgs);
- }
- 
-+static const struct mtk_clk_tree mt7623_clk_peri_tree = {
-+	.id_offs_map = peri_id_offs_map,
-+	.muxes_offs = peri_id_offs_map[CLK_PERI_UART0_SEL],
-+	.gates_offs = peri_id_offs_map[CLK_PERI_NFI],
-+	.muxes = peri_muxes,
-+	.gates = peri_cgs,
-+	.xtal_rate = 26 * MHZ,
-+};
-+
- static int mt7623_pericfg_probe(struct udevice *dev)
- {
--	return mtk_common_clk_gate_init(dev, &mt7623_clk_gate_tree,
--					peri_cgs);
-+	return mtk_common_clk_infrasys_init(dev, &mt7623_clk_peri_tree);
- }
- 
- static int mt7623_hifsys_probe(struct udevice *dev)
-@@ -1098,7 +1175,7 @@ U_BOOT_DRIVER(mtk_clk_pericfg) = {
- 	.of_match = mt7623_pericfg_compat,
- 	.probe = mt7623_pericfg_probe,
- 	.priv_auto	= sizeof(struct mtk_cg_priv),
--	.ops = &mtk_clk_gate_ops,
-+	.ops = &mtk_clk_infrasys_ops,
- 	.flags = DM_FLAG_PRE_RELOC,
- };
- 
 -- 
 2.45.2
 
