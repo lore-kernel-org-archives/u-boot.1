@@ -4,62 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1850C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 08:43:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC797C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 08:50:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18EB98863C;
-	Fri,  2 Aug 2024 10:43:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id DBC6888B79;
+	Fri,  2 Aug 2024 10:50:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1722588228;
-	bh=A5DI+hPu1lCeJSL1nVGyvzNAizxbfhJTv00pXMElNxs=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=J7AOYawJV5LJgraNJ+odUZRhJQoox8kLt9/YdtubMQf6llfiAB0P/2ue+XFRkbkhc
-	 OZZyV6DxJcFBTXXnVgA67X7mw9vH8unNquSmAnl96hTpyjBbngF+lCQziUBE+iJ0GT
-	 CfcaBH53O6xQ7fvZWHSq8/5upI8jWteAXmgKCFkh0SzEFjEzBZ9qD4RS+DAPutQm8p
-	 JO4dFhh85rLnagNpyfG9scbkGid4Wy/LvM79XWOlZjpmRYEkhareTgUnHhUEgf0TH6
-	 MBrmamOI8YxYSgPowK4XH3GjNJt2Z9HvQpXrBaDasKMiUe7Od8wHZ+EaIys5HmKnH4
-	 omXMhoq3JstKA==
-Received: from [192.168.1.107] (82-131-232-44.pool.digikabel.hu
- [82.131.232.44])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 4705B8870E;
- Fri,  2 Aug 2024 10:43:45 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1722588226;
- bh=A5DI+hPu1lCeJSL1nVGyvzNAizxbfhJTv00pXMElNxs=;
- h=Date:Subject:To:References:Reply-To:From:In-Reply-To:From;
- b=itYpESlnyg8b5d454t+gv3zVc0dco5qx+TtlHbbEvmzNVVG+Y1LxVBcaqt9v33YzZ
- eDzKsmO12gmb7Z7bKkdtvawWV2jR5+ARvUfHN8AsL2Jki8WIUzgrHabGSlUmLYC5Kl
- vezXi8FWS1aDbV+1hUiDLeuqFI7/laIT0ODmW3qOG0Ns7b2c2/JdEFz/+5m9ubghYv
- 5Zz21Nr02bwlCY7pQ6ZKDNd2Z3Gdmz3uUR6ThNMiJcPkZF8J94UJ5fVO+zaO/tH6Kc
- Pltvu3O7AgRE/qayOUyhRehL8FvIqroHuO7R/ocQwsExLk9GiM3ArxZIcA0qPQ/u3a
- ywJCPNensT9Pw==
-Message-ID: <b7bee770-6270-6d62-997b-09a25c875e66@denx.de>
-Date: Fri, 2 Aug 2024 10:43:06 +0200
+Authentication-Results: phobos.denx.de;
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="B4051jvq";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 099CF88AD3; Fri,  2 Aug 2024 10:50:32 +0200 (CEST)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B9E878863C
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 10:50:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=B.Hahn@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1722588629; x=1725180629;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=azaIHTCu6sRHVNBiIQvdNC9JGAjKPskaOXchzrAYg2w=;
+ b=B4051jvqJ6y9pHhSX7/5EcbPuz02+PYMpzmU0p+uSz19Y+J3LAK3XhuS9xFqpGsi
+ hd42q+DxIh0bPHg2UbCX1mPvWbECh9toJWNAycHWVWPAMKOnYS3zhaAqszdqQA1j
+ M/dqHkXViqqAojpRDXycVf64V3opAlEKeRnMJc7BsXs=;
+X-AuditID: ac14000a-03e52700000021bc-29-66ac9dd539d8
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id EF.11.08636.5DD9CA66;
+ Fri,  2 Aug 2024 10:50:29 +0200 (CEST)
+Received: from Berlix.phytec.de (172.25.0.12) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Fri, 2 Aug 2024
+ 10:50:28 +0200
+Received: from Berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4]) by
+ berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4%4]) with mapi id 15.01.2507.006;
+ Fri, 2 Aug 2024 10:50:28 +0200
+From: Benjamin Hahn <B.Hahn@phytec.de>
+To: Lukasz Majewski <lukma@denx.de>, Teresa Remmet <T.Remmet@phytec.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, Cem Tenruh <C.Tenruh@phytec.de>, "Martyn
+ Welch" <martyn.welch@collabora.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 1/2] config: Add 'update_bootimg' command to update
+ flash.bin on Phytec's imx8mm
+Thread-Topic: [PATCH 1/2] config: Add 'update_bootimg' command to update
+ flash.bin on Phytec's imx8mm
+Thread-Index: AQHa5BH04BXzxqgNfUeeI1JsqPoJibITiGAA
+Date: Fri, 2 Aug 2024 08:50:28 +0000
+Message-ID: <71f5fc5c-296e-40e7-b849-3d860e39184f@phytec.de>
+References: <20240801125416.1582652-1-lukma@denx.de>
+In-Reply-To: <20240801125416.1582652-1-lukma@denx.de>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.25.0.11]
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <0F53252A574F574BA947F1602D2B8592@phytec.de>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH 0/4] fs: ubifs: Fix crash and add safeguards
-Content-Language: en-US
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- u-boot@lists.denx.de, Stefan Roese <sr@denx.de>,
- Hans de Goede <hdegoede@redhat.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Kyungmin Park <kmpark@infradead.org>
-References: <20240703101258.1670825-1-ada@thorsis.com>
- <8f3a7059-6330-f332-8e9f-729b853e001e@denx.de>
- <20240704-goes-grape-25a9f1d14c24@thorsis.com>
- <20240801-wham-entertain-15505d61f84b@thorsis.com>
- <CAOf5uw=u5h2By9DpPs2FEzMjqvdOvw7UKs+q4JfN9-V59oBW_A@mail.gmail.com>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <CAOf5uw=u5h2By9DpPs2FEzMjqvdOvw7UKs+q4JfN9-V59oBW_A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrFIsWRmVeSWpSXmKPExsWyRpKBR/fq3DVpBl+ec1s8f3eZyeLBxS4W
+ i29btjFaTJ20md3i7d5OdgdWj9kNF1k8dtxdwugxb9YJFo9XB1axe5y9s4MxgDWKyyYlNSez
+ LLVI3y6BK+Ppn4PsBbOkK86vLW5gPCDVxcjJISFgIrFw9wnGLkYuDiGBJUwSndNPsYMkhATu
+ MUq0TjWAsNczSrz9qwliswmoSex685oVxBYRqJA4tOsKE4jNLDCRUaLtAFiNsECaxObfPYwQ
+ NekS22dMYoawjSSudDSA9bIIqEis7JnPAmLzCthI9LQ+YYbYZSJxo2MqWJxTwFRi59p3YDaj
+ gKzEhg3nmSF2iUtsevadFeIBAYkleyDiEgKiEi8f/4OKy0ucuDUN6DYOoHpNifW79CFaLSQe
+ n53DAmErSkzpfsgOcYKgxMmZT1gmMIrPQrJhFkL3LCTds5B0z0LSvYCRdRWjUG5mcnZqUWa2
+ XkFGZUlqsl5K6iZGUHyKMHDtYOyb43GIkYmD8RCjBAezkgiv0MmVaUK8KYmVValF+fFFpTmp
+ xYcYpTlYlMR5V3cEpwoJpCeWpGanphakFsFkmTg4pRoY9/37yXFh04l7Nv68V3hFvHOu8Pnr
+ 3PmcsFJ1ftf0WW/uN/DNmzeRear+ZvOzbJmHXuoHhCmvs/w65ZJwp9HiXzXr9Yv0DmiLTyhU
+ mZ66pPKy/f7A8GW9/L+dDU0nbldZavUoikm97NjKDyov4ta5tUW/+jotfpfItCtb/3Q7LRTV
+ 7BJ48fWhjhJLcUaioRZzUXEiAPVTS369AgAA
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,236 +93,53 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Michael,
-
-On 01.08.24 08:53, Michael Nazzareno Trimarchi wrote:
-> Hi all
-> 
-> On Thu, Aug 1, 2024 at 8:50 AM Alexander Dahl <ada@thorsis.com> wrote:
->>
->> Hei,
->>
->> Am Thu, Jul 04, 2024 at 10:18:55AM +0200 schrieb Alexander Dahl:
->>> Hello Heiko,
->>>
->>> Am Thu, Jul 04, 2024 at 06:28:31AM +0200 schrieb Heiko Schocher:
->>>> Hello Alexander,
->>>>
->>>> On 03.07.24 12:12, Alexander Dahl wrote:
->>>>> Hei hei,
->>>>>
->>>>> filesystem handling is different in U-Boot and beyond that UBI/UBIFS is
->>>>> different from other filesystems in U-Boot.  There's UBI and UBIFS code
->>>>> ported from Linux (quite old already now, maybe someone wants to update
->>>>> that?), and there's "glue code" or "wrapper code" to interface with
->>>>> U-Boot scripts, commands, and filesystem handling.  The fixes and
->>>>> improvements in this patch series are for this U-Boot specific glue
->>>>> code.
->>>>
->>>> Yes, the linux base is very old ... patches are welcome!
->>>
->>> The last sync was back in 2015 from linux v4.2, there were 800+
->>> changes to ubi/ubifs in Linux since then. :-/
->>>
->>>> And for me it is not that easy, as I do not have a hardware with
->>>> current mainline U-Boot running on it... I want to update a hardware
->>>> I have to current mainline, but I had no time yet for it...
->>>
->>> Besides the custom hardware here, I used Microchip SAM9X60-Curiosity
->>> lately, which is coming with a raw NAND flash and can boot from it.
->>>
-> 
-> I read it now, I have one mainline board with ubifs running on it. If the patch
-> are not get applied I will take a look today of the thread. Sync to
-> newest version
-> of the kernel it's a good idea. I will check if someone in the company
-> can start this task
-
-That would be nice!
-
-bye,
-Heiko
-> 
-> Michael
-> 
->>>>
->>>>> I'm no filesystem expert, but after days of debugging I'm quite sure the
->>>>> bug is in U-Boot since UBIFS support was added in 2009, and it was
->>>>> repeated in 2015 when generic filesystem support for UBIFS was added.
->>>>> So please review carefully!
->>>>
->>>> Which bug?
->>>
->>> The memory leak and double free fixed with patch 1 of the series.
->>>
->>>>
->>>>> The crashes were not easily reproducible, only with boards using the old
->>>>> distroboot _and_ a boot script inspired by (but not equal to) the one
->>>>> proposed by RAUC [1], which basically boils down to:
->>>>>
->>>>>     ubifsmount ubi0:boot (from distroboot)
->>>>>     test -e (from distroboot)
->>>>>     ubifsmount ubi0:rootfs1 (this time from the boot script,
->>>>>                              triggering a ubifs_umount)
->>>>
->>>> So, you have a special sequence you execute to trigger the bug, good!
->>>>
->>>> In special 2 ubifsmount in a row... may not often needed for booting!
->>>> (I ask me, why that is needed? Boottime is not good than...)
->>>
->>> Using distroboot with a script here.  The script is in a separate UBI
->>> volume ubi0:boot, kernel is loaded from ubi0:rootfs1 or ubi0:rootfs2
->>> however.  So there is 'ubifsmount ubi0:boot' from distroboot and in the
->>> script found, loaded, and run there is 'ubifsmount ubi0:rootfs1' (or
->>> rootfs2) later.  ubifsmount calls ubifsumount internally if some
->>> volume is mounted already.
->>>
->>>>
->>>> BTW: Is this really a good bootcmd in [1] as on *every* boot your
->>>>       Environment is saved? This is not good for lifetime of your
->>>>       storage device ... why not using bootcounter?
->>>
->>> Well, I was not aware of bootcounter, but I had a look and the actual
->>> counter must be stored somewhere.  Possible are:
->>>
->>> - pmic → has no storage possibility on my board
->>> - rtc → soc internal only, volatile in the end (if battery is empty)
->>> - i2c eeprom → missing
->>> - spi flash → missing
->>> - filesystem → ends up on the flash
->>> - nvmem → no other nvmems present
->>> - syscon or some cpu register or sram → volatile
->>>
->>> So none of these are possible in my case, I only have a raw NAND as
->>> storage and thus I have to use U-Boot env, which is stored in UBI here
->>> btw to not stress the flash too much.
->>>
->>> I could investigate if it would be possible to let RAUC use the
->>> U-Boot bootcounter infrastructure, but currently RAUC depends on
->>> U-Boot environment variables for tracking boot attempts.
->>>
->>> btw: documentation of bootcount is sparse, I only found the very short
->>> 'doc/README.bootcount' and it's not even migrated to recent U-Boot
->>> sphinx based docs. ;-)
->>>
->>> But from what I understood the concept is the same, U-Boot counts
->>> something and Linux userspace has to reset it.  The counter must be
->>> stored somewhere, for example in U-Boot env if no other storage is
->>> possible.
->>>
->>>>
->>>>> Crashes can be triggered more easily, if patch order is changed and
->>>>> patch 2 (resetting pointers to NULL after free) comes first, or if patch
->>>>> 2 is applied on its own only.
->>>>
->>>> Hmm...
->>>>
->>>>> The fix is in the first patch, and on my boards I see no crashes
->>>>> anymore.  I also tested all kinds of combinations of calling `ubi part`,
->>>>> `ubi detach`, `ubifsmount`, `ubifsumount`, `ubifsls`, `ubifsload`, `ls`,
->>>>> `load`, `size`, and `test -e` and got no crashes anymore after the fix.
->>>>
->>>> That sounds good! Hmm.. test -e has nothing to do with ubi/ubifs I think.
->>>
->>> Oh it has, 'test -e' calls file_exists() which calls fs_exists() which
->>> ends up calling ubifs_exists() which is one of the functions causing
->>> an immediate memory leak, see patch 1.
->>>
->>>> On what hardware do you test? Is it in mainline?
->>>
->>> Tested on custom hardware, but I'm confident it should be reproducible
->>> on any board using ubifs, especially after applying patch 2 resetting
->>> pointers of freed memory to NULL.  This should trigger the bug with
->>> the simple sequence already described:
->>>
->>>    > ubifsmount ubi0:anyvolume
->>>    > ls ubi ubi0:anyvolume / # (or load, or test -e, or size)
->>>    > ubifsumount
->>>
->>> ubifsumount will call ubifs_umount() which calls
->>> ubi_close_volume(c->ubi), that pointer is either invalid leading to a
->>> double free inside of ubi_close_volume() and it will crash only in
->>> certain conditions or the pointer is NULL after applying patch 2 of
->>> the series, then ubi_close_volume() crashes right away with a NULL
->>> pointer exception.
->>>
->>> Note: without patch 2 it very much depends on the sequence of
->>> commands, but after the first ubi_close_volume() triggered by
->>> ls/load/size/exists the pointer in ubifs_sb is invalid, but accessed later
->>> by the second ubi_close_volume() triggered by ubifs_umount().  If you
->>> do something in between those using the freed memory by something else
->>> again, the second ubi_close_volume() access might get corrupted data
->>> or access things outside of RAM.  Patch 2 redirects this on a clean
->>> NULL pointer exception you can easily trigger.
->>>
->>> In my case I got a pointer variable actually containing a string
->>> "ng.." aka 0x2e2e676e which looked suspiciously similar to a valid
->>> pointer on the platform somewhere in RAM between 0x20000000 and
->>> 0x28000000 so it took me two days to realize it's not a pointer. ;-)
->>>
->>>>
->>>>> The three additional patches (2 to 4) are more or less safeguards and
->>>>> improvements for the future, and come from me trying and my debugging
->>>>> code done on the way, more or less optional, but I think nice to have.
->>>>
->>>> I will look at them .. but give me some time, as I am in holidays the
->>>> next 2 weeks ... Hmm.. and it would be good to get some Tested-by
->>>> from people with hardware...
->>>
->>> Take your time, no need to work in holidays.  Would appreciate a
->>> Tested-by by anyone else though, maybe some of the raw NAND folks?
->>
->> Well, apparently nobody had a look in the month of July, I add the raw
->> NAND maintainers in Cc, maybe I should have done in the first place.
->>
->> Would be happy if someone could have a look at the fix, maybe read the
->> patches first before the discussion? ;-)
->>
->> Greets
->> Alex
->>
->>>
->>> Greets
->>> Alex
->>>
->>>>
->>>> bye,
->>>> Heiko
->>>>>
->>>>> Greets
->>>>> Alex
->>>>>
->>>>> [1] https://github.com/rauc/rauc/blob/master/contrib/uboot.sh
->>>>>
->>>>> Alexander Dahl (4):
->>>>>     fs: ubifs: Fix memleak and double free in u-boot wrapper functions
->>>>>     fs: ubifs: Set pointers to NULL after free
->>>>>     fs: ubifs: Make k(z)alloc/kfree symmetric
->>>>>     fs: ubifs: Add volume mounted check
->>>>>
->>>>>    fs/ubifs/super.c |  8 ++++++--
->>>>>    fs/ubifs/ubifs.c | 31 +++++++++++++++++++------------
->>>>>    2 files changed, 25 insertions(+), 14 deletions(-)
->>>>>
->>>>>
->>>>> base-commit: 65fbdab27224ee3943a89496b21862db83c34da2
->>>>>
->>>>
->>>> --
->>>> DENX Software Engineering GmbH,      Managing Director: Erika Unter
->>>> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
->>>> Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
-> 
-> 
-> 
-
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+SGkgTHVrYXN6LA0KDQpPbiAwMS4wOC4yNCAxNDo1NCwgTHVrYXN6IE1hamV3c2tpIHdyb3RlOg0K
+PiBUaGlzIGNvbW1hbmQgYWxsb3dzIGVhc3kgdXBkYXRlIG9uIFNEIGNhcmQgKGhlbmNlIHRoZSB1
+cGRhdGVfbW1jX3BhcnQ9MSkNCj4gb2YgdGhlIGZsYXNoLmJpbiBnZW5lcmF0ZWQgZHVyaW5nIHUt
+Ym9vdCBidWlsZC4NCj4NCj4gU2lnbmVkLW9mZi1ieTogTHVrYXN6IE1hamV3c2tpIDxsdWttYUBk
+ZW54LmRlPg0KPiAtLS0NCj4gICBpbmNsdWRlL2NvbmZpZ3MvcGh5Y29yZV9pbXg4bW0uaCB8IDEx
+ICsrKysrKysrKysrDQo+ICAgMSBmaWxlIGNoYW5nZWQsIDExIGluc2VydGlvbnMoKykNCj4NCj4g
+ZGlmZiAtLWdpdCBhL2luY2x1ZGUvY29uZmlncy9waHljb3JlX2lteDhtbS5oIGIvaW5jbHVkZS9j
+b25maWdzL3BoeWNvcmVfaW14OG1tLmgNCj4gaW5kZXggY2U2ZGM4N2M2OS4uZmRlYjExOTMzZiAx
+MDA2NDQNCj4gLS0tIGEvaW5jbHVkZS9jb25maWdzL3BoeWNvcmVfaW14OG1tLmgNCj4gKysrIGIv
+aW5jbHVkZS9jb25maWdzL3BoeWNvcmVfaW14OG1tLmgNCj4gQEAgLTI5LDYgKzI5LDE3IEBADQo+
+ICAgCSJtbWNkZXY9IiBfX3N0cmluZ2lmeShDT05GSUdfU1lTX01NQ19FTlZfREVWKSAiXDAiIFwN
+Cj4gICAJIm1tY3BhcnQ9MVwwIiBcDQo+ICAgCSJtbWNyb290PTJcMCIgXA0KPiArCSJ1cGRhdGVf
+bW1jX3BhcnQ9MVwwIiBcDQoNCllvdSBkZWZpbmUgdGhlIHVwZGF0ZV9tbWNfcGFydCB2YXJpYWJs
+ZSBoZXJlLCBidXQgZG8gbm90IHVzZSBpdCANCmFueXdoZXJlLiBZb3UgdXNlIHRoZSBtbWNkZXYg
+dmFyaWFibGUgbGF0ZXIgd2hpY2ggaXMgZ29vZCwgYmVjYXVzZSB0aGUgDQpmdW5jdGlvbiB0aGVu
+IHdvcmtzIG5vdCBvbmx5IGZvciBTRC1DYXJkLCBidXQgYWxzbyBmb3IgZU1NQy4NCg0KSW4gdGhl
+IGNvbW1pdCBkZXNjcmlwdGlvbiB5b3Ugc2F5IGl0IGlzIGZvciB1cGRhdGluZyBTRC1DYXJkLCB3
+aGljaCANCndvdWxkIGJlIG1tYyBkZXYgMSwgYnV0IHRoZSBuYW1lIG9mIHRoZSB2YXJpYWJsZSB3
+b3VsZCBpbmRpY2F0ZSB0aGF0IGlzIA0KaXMgZm9yIGEgcGFydGl0aW9uLg0KQXMgSSB1bmRlcnN0
+YW5kIGl0IHlvdSB3YW50IHRvIHVwZGF0ZSBqdXN0IHRoZSBVLUJvb3QsIHdoaWNoIGlzIG5vdCAN
+Cmluc2lkZSBhbnkgcGFydGl0aW9uLCBzbyB5b3Ugd291bGQgbm90IG5lZWQgdGhpcyB2YXJpYWJs
+ZS4NCg0KPiArCSJ1cGRhdGVfb2Zmc2V0PTB4NDJcMCIgXA0KPiArCSJ1cGRhdGVfZmlsZW5hbWU9
+Zmxhc2guYmluXDAiIFwNCj4gKwkiaG9zdG5hbWU9L3RmdHBib290L2x1a21hL1wwIiBcDQpXZSBh
+ZGl2c2UgdG8gdXNlIC9zcnYvdGZ0cMKgIGFzIHRmdHAgZGlyIGluIG91ciBCU1AgZG9jdW1lbnRh
+dGlvbi4gQnV0IEkgDQpkb24ndCB0aGluayB5b3UgbmVlZCB0aGF0IHZhcmlhYmxlIGF0IGFsbCwg
+YmVjYXVzZSB0aGUgZGhjcCBjb21tYW5kIA0Kc2hvdWxkIGZpbmQgdGhlIHRmdHAgZGlyIGF1dG9t
+YXRpY2FsbHkuDQo+ICsJInVwZGF0ZV9ib290aW1nPSIJCQkJCQlcDQo+ICsJCSJtbWMgZGV2ICR7
+bW1jZGV2fSA7ICIJCVwNCj4gKwkJImlmIGRoY3AgJHtob3N0bmFtZX0vJHt1cGRhdGVfZmlsZW5h
+bWV9IDsgdGhlbiAiCVwNCg0KRG9lcyB0aGlzIHdvcms/IEZvciBtZSBpdCBkb2VzIG5vdC4gQXMg
+ZmFyIGFzIEkga25vdyB0aGUgc3ludGF4IG9mIHRoaXMgY29tbWFuZCBpcyAiZGhjcCA8bG9hZGFk
+ZHI+IDxmaWxlbmFtZT4iLg0KU28gSSB3b3VsZCBleHBlY3QgdGhpcyB0byBiZToNCmRoY3AgJHts
+b2FkYWRkcn0gJHt1cGRhdGVfZmlsZW5hbWV9DQoNCj4gKwkJInNldGV4cHIgZndfc3ogJHtmaWxl
+c2l6ZX0gLyAweDIwMCA7ICIJLyogU0QgYmxvY2sgc2l6ZSAqLyBcDQo+ICsJCSJzZXRleHByIGZ3
+X3N6ICR7Zndfc3p9ICsgMSA7ICIJCQkJXA0KV2h5IGRvIHlvdSBhZGQgb25lIGhlcmU/IElzIHRo
+aXMgaW1wb3J0YW50IGZvciBzb21ldGhpbmc/IEZvciBtZSBpdCANCndvcmtzIGFsc28gd2l0aG91
+dCB0aGUgb25lLg0KSXQgaXMgYWxzbyBkZXNjcmliZWQgaW4gb3VyIEJTUCBkb2N1bWVudGF0aW9u
+IHdpdGhvdXQgYWRkaW5nIG9uZS4gU2VlOg0KaHR0cHM6Ly9waHl0ZWMuZ2l0aHViLmlvL2RvYy1i
+c3AteW9jdG8vYnNwL2lteDgvaW14OG1wL21haW5saW5lLWhlYWQuaHRtbCNmbGFzaC1lbW1jLXUt
+Ym9vdC1pbWFnZS12aWEtbmV0d29yay1mcm9tLXJ1bm5pbmctdS1ib290IA0KDQooVGhpcyBpcyBm
+b3Igb3VyIGlteDhtcCBtYWlubGluZSByZWxlYXNlIGJ1dCBpcyB0aGUgc2FtZSBmb3IgaW14OG1t
+IHdpdGggDQphbm90aGVyIG9mZnNldCkuDQoNCkJlbmphbWluDQo+ICsJCSJtbWMgd3JpdGUgJHts
+b2FkYWRkcn0gJHt1cGRhdGVfb2Zmc2V0fSAke2Z3X3N6fSA7ICIJXA0KPiArCQkiZmlcMCIgXA0K
+PiAgIAkibW1jYXV0b2RldGVjdD15ZXNcMCIgXA0KPiAgIAkibW1jYXJncz1zZXRlbnYgYm9vdGFy
+Z3MgY29uc29sZT0ke2NvbnNvbGV9ICIgXA0KPiAgIAkJInJvb3Q9L2Rldi9tbWNibGske21tY2Rl
+dn1wJHttbWNyb290fSByb290d2FpdCByd1wwIiBcDQoNCg0K
