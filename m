@@ -4,86 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 254D6C3DA7F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 07:20:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D4E9C52D70
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 07:44:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D8E38862D;
-	Fri,  2 Aug 2024 09:20:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 4CFD2886B5;
+	Fri,  2 Aug 2024 09:44:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="aUPn1CqV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zkTRgpab";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 712278863C; Fri,  2 Aug 2024 09:20:01 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 559E288641; Fri,  2 Aug 2024 09:44:48 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD03388606
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 09:19:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 89932886B5
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 09:44:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-427b1d4da32so16579345e9.0
- for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 00:19:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5ab2baf13d9so10892355a12.2
+ for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 00:44:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1722583198; x=1723187998;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=+gLUZ234pmEsrq4gP+Zjn6CP4HKlmvdTOByZiV7ivzQ=;
- b=aUPn1CqVF7Q3Wf7HYC3l240qsxNay8aNDM38gUsBPKfwoy+I/glRvOutN8+YxjyIPn
- bbJjpYaXcwUWWv6VZYmt1Mf+skNTVKvdeOmImMxe572j8Ay1zj7WNa1BL4HaWBhJLMrk
- Vo45ocUXIxZCrji8yHRA2TgxogxmyJlrzfCCbXTVjvrf5IoFeIEDPbNHSY5WzGnX1eLX
- SXvuA/2GWfkjZM71uUUwK1jZSlLQpSZI8HAiZ608Pf8ZqxvK7HiQte/y5CUYyUT+eQOV
- I9pbxGkVVZYGrzSxO1SQv7mIM4HXTAR/+ANIMnbZQmFYT2ZG9+BPg6fcP3X+5a44Pa6+
- mL2w==
+ d=linaro.org; s=google; t=1722584685; x=1723189485; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=csfNNJxR4avMISXi2f1Po+GZIXDzq02ctzItTFALplw=;
+ b=zkTRgpabb9UZrXzORmvzVdbQfIguGBz25buuKDxkSksqrRIWQdIJM9fzaQ8QNOXRaA
+ ebm0caoSG9Tu21Br1ebkBuwmfXfuW7d+rUgM3gLyO47qTkJ2cmCoromsj+ah7oQ7ivrw
+ UYsxPzFt9DqCEWjkslZHCaIjGfjFtHcXgsx2RXr6WlhFRZ3pbArPPnzmAhIsFc64URpa
+ Tc0gXK9WVGTpd+W+YUtbsxRBWW+B14nSxOu+yEtT+0Odvgc/UOUiAWqvSC8lXwb1W5yj
+ 44DJMSdQ+GnDN9OTNZLKUvlKJUVcNJEfOACkZKdUUxCFM9NEy1Z8dT5kH3Z31l5wSjxA
+ K4gg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722583198; x=1723187998;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+gLUZ234pmEsrq4gP+Zjn6CP4HKlmvdTOByZiV7ivzQ=;
- b=ZMrYdDMYGpHVdCoTIOkwkRgknfbAiXjYzQaiRHCHskZHEzlsuEDxym8AfDkaMLTvfO
- qoxfQRm8rd5M0U4utnC8IQXVp4hiEzmhrRJQBjDXdLdh6hZMZ+sBuYB+R387R2oAWKR8
- 46zjtfXhM14Ug71TmOQ4Q8xGR+dmsjlCVH3m6YBAJtEUIr9zYhdutJy1ewjLXLRwcPUM
- o3iEkPbDdH3CqUD7n6mNl2GM5+F6bxfZTixOTYzbDXHbv4aO2lU0T+PbVLUB/JWyBsoU
- c9qINopzcRVv7h61wUNWqv3/5q71t0n/BlOsqrsFmJ6OeMb8coYOf0If0OI8QYL4bEQj
- uHYw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUdZR4d9iPcQj8/agRGHzaSsoFga8CeWYJEt9usr6lcyEDIajjnELId7zhktrutVMA4z3UDSis9AYhVlg1dGmdHOCISJQ==
-X-Gm-Message-State: AOJu0Yzr9n9sfjBMlf1mjkqLRes8eaDzjPYzpyM7oop3vkgBu7t/QXSM
- GXZmvqgFShYWspgBGE0bpNaKg1984vJNyS4ju4cWDjVLavSBLKS11WwcfNE+sVE=
-X-Google-Smtp-Source: AGHT+IG5TeUiP/nPtGl37JgzbZzpQObCh3UmwzRx2VCNrzR53mQCrcAxCU+LBaF6xbEy2+Tc1ZKbmw==
-X-Received: by 2002:a05:600c:35cd:b0:426:6eb6:1374 with SMTP id
- 5b1f17b1804b1-428e465b0c2mr35491685e9.0.1722583197323; 
- Fri, 02 Aug 2024 00:19:57 -0700 (PDT)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-428e6e01d0asm21980005e9.16.2024.08.02.00.19.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Aug 2024 00:19:56 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Dmitry Rokosov <ddrokosov@salutedevices.com>, igor.opaniuk@gmail.com,
- semen.protsenko@linaro.org, trini@konsulko.com,
- colin.mcallister@garmin.com, 4.shket@gmail.com,
- avromanov@salutedevices.com, u-boot@lists.denx.de,
- kernel@salutedevices.com, rockosov@gmail.com
-Subject: Re: [PATCH v1 2/4] cmd: ab: introduce 'ab_dump' command to print
- BCB block content
-In-Reply-To: <CAFLszTik6sK+dU5hK8bfXq-Ho+V1FwfgBaXuGPDRwFYkzw9=VA@mail.gmail.com>
-References: <20240725194716.32232-1-ddrokosov@salutedevices.com>
- <20240725194716.32232-3-ddrokosov@salutedevices.com>
- <CAFLszThbAAQ3Fwtf_t0k-K5xO6Yu8x_37Fejntqq=svwt-gdcQ@mail.gmail.com>
- <87ed7bqolf.fsf@baylibre.com>
- <CAFLszTik6sK+dU5hK8bfXq-Ho+V1FwfgBaXuGPDRwFYkzw9=VA@mail.gmail.com>
-Date: Fri, 02 Aug 2024 09:19:56 +0200
-Message-ID: <87wmkz5r37.fsf@baylibre.com>
+ d=1e100.net; s=20230601; t=1722584685; x=1723189485;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=csfNNJxR4avMISXi2f1Po+GZIXDzq02ctzItTFALplw=;
+ b=EzPFF9SiYCGUMP2ORaHrVchZVltLmMqakccz71lkZzN9ac10vK/LdMtMs1ZGqIWnv6
+ Yjy8T7Vg6yYapMsemPmVTTWkcm7OyDVYNYITgVvOkCOmC2XMFZ/oHHZblAm5rFzUrxcd
+ KgqK9hFSInPonDQ5p6OtHy0NGbs+bZy/XGkNhHAWyMYdFM+QXtUti9+QYj7Ttdp2qab3
+ /cj0O1hl+hi89QrqpTgpFe+kIs78aerzC8IHTcq69ogBlrUmBTJyEml5GjcZIREtiP1O
+ AUuE4jI2jiMI+9Xb+6wS4jgDWHUPafgeY0grYShZhlKFajPmOkgjfHneoUM3sbAphysM
+ gShA==
+X-Gm-Message-State: AOJu0Ywq8maHpODmRWKXiRZr4LNYwjNEWhqi87hU7cxeAiNG+wUfIuEY
+ 2MLlF8MeFGOaIy4PRtTLWXCuLY5mVknT4XohmNzYpOFPidV8klbvEiqCOX+qiiKWc8esfdNlgER
+ Sx0o7HVviWWQVcT0U1sbibax7IOuNGWTtp2ABDA==
+X-Google-Smtp-Source: AGHT+IECfH26lW2xGGQngRPU434uvDQdrYWp3ACJGBtWSMC+kTpDKTI6MO5NZkVUTnNrIsbdmzFe8G/QM7ZuSEEKUS0=
+X-Received: by 2002:a05:6402:2032:b0:5a3:a4d7:caf5 with SMTP id
+ 4fb4d7f45d1cf-5b7f5dc13cemr1621494a12.36.1722584684776; Fri, 02 Aug 2024
+ 00:44:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
+ <20240724060224.3071065-31-sughosh.ganu@linaro.org>
+ <CAFLszTg-hL9z3o68RigDFCE2=Cj-UVHv0xh0Y9=QuS=ZDq3FGw@mail.gmail.com>
+ <CADg8p95m8w8hgsderBgDhMfNTv73RrTVGtNsu6Yh4wt6b1nNmg@mail.gmail.com>
+ <CAFLszTh4CvysoS1njOtEP8NHd3avHQhbYr_Z0n1wMvDmnJT0fQ@mail.gmail.com>
+In-Reply-To: <CAFLszTh4CvysoS1njOtEP8NHd3avHQhbYr_Z0n1wMvDmnJT0fQ@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Fri, 2 Aug 2024 13:14:33 +0530
+Message-ID: <CADg8p961G-FLGjot1Ur-3CoBvrHhnDLv5hv_c-k4NeBAZ598xA@mail.gmail.com>
+Subject: Re: [PATCH 30/40] sandbox: iommu: remove lmb allocation in the driver
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
+ Max Filippov <jcmvbkbc@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,328 +97,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On Mon, 29 Jul 2024 at 20:58, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Sughosh,
+>
+> On Mon, 29 Jul 2024 at 02:52, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> >
+> > On Fri, 26 Jul 2024 at 05:02, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Sughosh,
+> > >
+> > > On Wed, 24 Jul 2024 at 00:05, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > >
+> > > > The sandbox iommu driver uses the LMB module to allocate a particular
+> > > > range of memory for the device virtual address(DVA). This used to work
+> > > > earlier since the LMB memory map was caller specific and not
+> > > > global. But with the change to make the LMB allocations global and
+> > > > persistent, adding this memory range has other side effects. On the
+> > > > other hand, the sandbox iommu test expects to see this particular
+> > > > value of the DVA. Use the DVA address directly, instead of mapping it
+> > > > in the LMB memory map, and then have it allocated.
+> > > >
+> > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > ---
+> > > > Changes since rfc: None
+> > > >
+> > > >  drivers/iommu/sandbox_iommu.c | 9 ++-------
+> > > >  1 file changed, 2 insertions(+), 7 deletions(-)
+> > > >
+> > > > diff --git a/drivers/iommu/sandbox_iommu.c b/drivers/iommu/sandbox_iommu.c
+> > > > index 505f2c3250..15ecaacbb3 100644
+> > > > --- a/drivers/iommu/sandbox_iommu.c
+> > > > +++ b/drivers/iommu/sandbox_iommu.c
+> > > > @@ -5,10 +5,10 @@
+> > > >
+> > > >  #include <dm.h>
+> > > >  #include <iommu.h>
+> > > > -#include <lmb.h>
+> > > >  #include <asm/io.h>
+> > > >  #include <linux/sizes.h>
+> > > >
+> > > > +#define DVA_ADDR               0x89abc000
+> > >
+> > > This is a very strange address. You can put this in
+> > > arch/sandbox/include/asm/test.h and check it in the test. I suggest
+> > > using something like 0x12345678 so it is obviously meaningless.
+> >
+> > You will see that I am using the same address that is being used
+> > currently. I did not want to make any changes to what is working, nor
+> > did I want to spend time debugging if this logic can be improved --
+> > that is not the purpose of this series.
+>
+> Please just move it. You can keep the same address, but put the
+> constant in the header file.
 
-On mer., juil. 31, 2024 at 08:38, Simon Glass <sjg@chromium.org> wrote:
+Looking into this, there isn't an appropriate header file where I can
+put this constant. And creating one only for a macro seems like an
+overkill. Can you propose a header file where I can put this. If there
+isn't an existing one, maybe I can keep the macro as is?
 
-> Hi Mattijs,
->
-> On Tue, 30 Jul 2024 at 02:19, Mattijs Korpershoek
-> <mkorpershoek@baylibre.com> wrote:
->>
->> Hi Dmitry,
->>
->> Thank you for the patch.
->>
->> Hi Simon,
->>
->> On dim., juil. 28, 2024 at 13:36, Simon Glass <sjg@chromium.org> wrote:
->>
->> > Hi Dmitry,
->> >
->> > On Thu, 25 Jul 2024 at 14:55, Dmitry Rokosov
->> > <ddrokosov@salutedevices.com> wrote:
->> >>
->> >> It's really helpful to have the ability to dump BCB block for debugging
->> >> A/B logic on the board supported this partition schema.
->> >>
->> >> Command 'ab_dump' prints all fields of bootloader_control struct
->> >> including slot_metadata for all presented slots.
->> >>
->> >> Output example:
->> >> =====
->> >> > board# ab_dump ubi 0#misc
->> >> > Read 512 bytes from volume misc to 000000000bf51900
->> >> > Bootloader Control:   [misc]
->> >> > Active Slot:          _a
->> >> > Magic Number:                 0x42414342
->> >> > Version:              1
->> >> > Number of Slots:      2
->> >> > Recovery Tries Remaining: 7
->> >> > CRC:                  0x61378F6F (Valid)
->> >> >
->> >> > Slot[0] Metadata:
->> >> >       - Priority:             15
->> >> >       - Tries Remaining:      4
->> >> >       - Successful Boot:      0
->> >> >       - Verity Corrupted:     0
->> >> >
->> >> > Slot[1] Metadata:
->> >> >       - Priority:             15
->> >> >       - Tries Remaining:      5
->> >> >       - Successful Boot:      0
->> >> >       - Verity Corrupted:     0
->> >> ====
->> >>
->> >> Signed-off-by: Dmitry Rokosov <ddrokosov@salutedevices.com>
->> >> ---
->> >>  boot/android_ab.c    | 68 ++++++++++++++++++++++++++++++++++++++++++++
->> >>  cmd/ab_select.c      | 30 +++++++++++++++++++
->> >>  include/android_ab.h |  9 ++++++
->> >>  3 files changed, 107 insertions(+)
->> >>
->> >> diff --git a/boot/android_ab.c b/boot/android_ab.c
->> >> index 1e5aa81b7503..359cc1a00428 100644
->> >> --- a/boot/android_ab.c
->> >> +++ b/boot/android_ab.c
->> >> @@ -363,3 +363,71 @@ int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
->> >>
->> >>         return slot;
->> >>  }
->> >> +
->> >> +int ab_dump_abc(struct blk_desc *dev_desc, struct disk_partition *part_info)
->> >> +{
->> >> +       struct bootloader_control *abc;
->> >> +       u32 crc32_le;
->> >> +       int i, ret;
->> >> +       struct slot_metadata *slot;
->> >> +
->> >> +       if (!dev_desc || !part_info) {
->> >> +               log_err("ANDROID: Empty device descriptor or partition info\n");
->> >> +               return -EINVAL;
->> >> +       }
->> >> +
->> >> +       ret = ab_control_create_from_disk(dev_desc, part_info, &abc, 0);
->> >> +       if (ret < 0) {
->> >> +               log_err("ANDROID: Cannot create bcb from disk %d\n", ret);
->> >> +               return ret;
->> >> +       }
->> >> +
->> >> +       if (abc->magic != BOOT_CTRL_MAGIC) {
->> >> +               log_err("ANDROID: Unknown A/B metadata: %.8x\n", abc->magic);
->> >> +               ret = -ENODATA;
->> >> +               goto error;
->> >> +       }
->> >> +
->> >> +       if (abc->version > BOOT_CTRL_VERSION) {
->> >> +               log_err("ANDROID: Unsupported A/B metadata version: %.8x\n",
->> >> +                       abc->version);
->> >> +               ret = -ENODATA;
->> >> +               goto error;
->> >> +       }
->> >> +
->> >> +       if (abc->nb_slot > ARRAY_SIZE(abc->slot_info)) {
->> >> +               log_err("ANDROID: Wrong number of slots %u, expected %zu\n",
->> >> +                       abc->nb_slot, ARRAY_SIZE(abc->slot_info));
->> >> +               ret = -ENODATA;
->> >> +               goto error;
->> >> +       }
->> >> +
->> >> +       printf("Bootloader Control: \t[%s]\n", part_info->name);
->> >> +       printf("Active Slot: \t\t%s\n", abc->slot_suffix);
->> >> +       printf("Magic Number: \t\t0x%X\n", abc->magic);
->> >> +       printf("Version: \t\t%u\n", abc->version);
->> >> +       printf("Number of Slots: \t%u\n", abc->nb_slot);
->> >> +       printf("Recovery Tries Remaining: %u\n", abc->recovery_tries_remaining);
->>
->> In the console, this rendered not perfectly aligned, which is a bit of a
->> shame:
->>
->> (done on sandbox)
->>
->> => ab_dump mmc 7#misc
->> Bootloader Control:     [misc]
->> Active Slot:            _a
->> Magic Number:           0x42414342
->> Version:                1
->> Number of Slots:        2
->> Recovery Tries Remaining: 0
->> CRC:                    0x321FEF27 (Valid)
->>
->> >> +
->> >> +       printf("CRC: \t\t\t0x%.8X", abc->crc32_le);
->> >> +
->> >> +       crc32_le = ab_control_compute_crc(abc);
->> >> +       if (abc->crc32_le != crc32_le)
->> >> +               printf(" (Invalid, Expected: \t0x%.8X)\n", crc32_le);
->> >> +       else
->> >> +               printf(" (Valid)\n");
->> >> +
->> >> +       for (i = 0; i < abc->nb_slot; ++i) {
->> >> +               slot = &abc->slot_info[i];
->> >> +               printf("\nSlot[%d] Metadata:\n", i);
->> >> +               printf("\t- Priority: \t\t%u\n", slot->priority);
->> >> +               printf("\t- Tries Remaining: \t%u\n", slot->tries_remaining);
->> >> +               printf("\t- Successful Boot: \t%u\n", slot->successful_boot);
->> >> +               printf("\t- Verity Corrupted: \t%u\n", slot->verity_corrupted);
->> >> +       }
->> >> +
->> >> +error:
->> >> +       free(abc);
->> >> +
->> >> +       return ret;
->> >> +}
->> >> diff --git a/cmd/ab_select.c b/cmd/ab_select.c
->> >> index 9e2f74573c22..1d34150ceea9 100644
->> >> --- a/cmd/ab_select.c
->> >> +++ b/cmd/ab_select.c
->> >> @@ -51,6 +51,31 @@ static int do_ab_select(struct cmd_tbl *cmdtp, int flag, int argc,
->> >>         return CMD_RET_SUCCESS;
->> >>  }
->> >>
->> >> +static int do_ab_dump(struct cmd_tbl *cmdtp, int flag, int argc,
->> >> +                     char *const argv[])
->> >> +{
->> >> +       int ret;
->> >> +       struct blk_desc *dev_desc;
->> >> +       struct disk_partition part_info;
->> >> +
->> >> +       if (argc < 3)
->> >> +               return CMD_RET_USAGE;
->> >> +
->> >> +       if (part_get_info_by_dev_and_name_or_num(argv[1], argv[2],
->> >> +                                                &dev_desc, &part_info,
->> >> +                                                false) < 0) {
->> >> +               return CMD_RET_FAILURE;
->> >> +       }
->> >> +
->> >> +       ret = ab_dump_abc(dev_desc, &part_info);
->> >> +       if (ret < 0) {
->> >> +               printf("Cannot dump ABC data, error %d.\n", ret);
->> >> +               return CMD_RET_FAILURE;
->> >> +       }
->> >> +
->> >> +       return CMD_RET_SUCCESS;
->> >> +}
->> >> +
->> >>  U_BOOT_CMD(ab_select, 5, 0, do_ab_select,
->> >>            "Select the slot used to boot from and register the boot attempt.",
->> >>            "<slot_var_name> <interface> <dev[:part|#part_name]> [--no-dec]\n"
->> >> @@ -66,3 +91,8 @@ U_BOOT_CMD(ab_select, 5, 0, do_ab_select,
->> >>            "    - If '--no-dec' is set, the number of tries remaining will not\n"
->> >>            "      decremented for the selected boot slot\n"
->> >>  );
->> >> +
->> >> +U_BOOT_CMD(ab_dump, 3, 0, do_ab_dump,
->> >> +          "Dump boot_control information from specific partition.",
->> >> +          "<interface> <dev[:part|#part_name]>\n"
->> >> +);
->> >> diff --git a/include/android_ab.h b/include/android_ab.h
->> >> index 1fee7582b90a..e53bf7eb6a02 100644
->> >> --- a/include/android_ab.h
->> >> +++ b/include/android_ab.h
->> >> @@ -33,4 +33,13 @@ struct disk_partition;
->> >>  int ab_select_slot(struct blk_desc *dev_desc, struct disk_partition *part_info,
->> >>                     bool dec_tries);
->> >>
->> >> +/**
->> >> + * Dump ABC information for specific partition.
->> >> + *
->> >> + * @param[in] dev_desc Device description pointer
->> >> + * @param[in] part_info Partition information
->> >
->> > We have moved to the @ notation now:
->> >
->> > @dev_desc: ...
->>
->> I agree with this comment, but the file uses @param[in] already. We
->> should to a preparatory patch to convert this file to the new notation.
->
-> OK, can do later.
->
->>
->> >
->> >> + * Return: 0 on success, or a negative on error
->> >> + */
->> >> +int ab_dump_abc(struct blk_desc *dev_desc, struct disk_partition *part_info);
->> >> +
->> >>  #endif /* __ANDROID_AB_H */
->> >> --
->> >> 2.43.0
->> >>
->> >
->> > Rather than creating a new command I think this should be a subcommand
->> > of abootimg.
->>
->> To me, they are not the same thing.
->>
->> - ab_* commands are for manipulating specific bits from the BCB (Boot
->>   Control Block, usually "misc" partition)
->>   ab_* operates on partitions
->>
->> - abootimg is for manipulating boot.img and vendor_boot.img headers
->>   (which are not on the same partitions)
->>   abootimg operations on memory regions (so someone else is responsible
->>   for reading the partitions)
->>
->> We also have a 3rd command "bcb". "bcb" also reads the "misc" partition
->> but can only read the "boot reason".
->> If we really want to merge ab_select and ab_dump into another command,
->> "bcb" is more relevant, in my opinion.
->
-> That sounds good.
->
->>
->> I'd prefer to keep 3 commands for the following reasons:
->>
->> 1. Easier to track/port changes from Google's fork [1]
->> 2. Better separation of responsabilities
->> 3. Merging the commands requires the update of the existing U-Boot
->>    environment users (meson64_android.h for example)
->>
->> I don't strongly disagree with merging, but I'd prefer to keep it this way.
->>
->> [1] https://android.googlesource.com/platform/external/u-boot
->>
->> Simon, can you elaborate on why we should merge the commands? Do you
->> think that for U-Boot users it will be easier to have a single command
->> for all Android related topics?
->
-> Not necessarily, it's just that we do try to keep similar pieces of
-> functionality together. Perhaps we should create an entirely new
-> command to bring all (or most) these things together, with aliases for
-> compatibility?
-
-I think that merging the ab_* features into BCB is the most
-relevant.
+-sughosh
 
 >
-> Note that 'boota' might be a better name for actually booting an
-> Android image, since we have bootm, booti, etc. Having said that, with
-> bootstd it might just be automatic.
-
-Boards relying on boot* commands for booting android use the bootm
-command, see: include/configs/meson64_android.h
-
-In my opinion, everyone booting Android should migrate to use bootstd.
-
->
-> Why does Android have its own fork? I am not keen on any argument that
-> says that mainline needs to follow a fork!
-
-I don't know why Android has its own fork, but it's unfortunate.
-
-Looking at the code, I suspect:
-- Android bootflow (for cuttlefish) (cmd/boot_android)
-- Fixes on fastboot
-- Fixes on AB
-- Fixes on AVB (support for block devices instead of only mmc)
-
-For example, here are some relevant fixes that I want to port to
-upstream:
-
-- https://android-review.googlesource.com/c/platform/external/u-boot/+/1446442
-- https://android-review.googlesource.com/c/platform/external/u-boot/+/1451016
-
-I completely agree with you. It's non-sense say that "mainline needs to
-follow a fork".
-I'm just a bit worried that porting over relevant changes from this
-particular fork might get more difficult in the future.
-
-Thinking again about this, if we just move the command bits and keep the
-boot/android_ab.c part it should be too troublesome.
-
-So I'm ok to proceed with this.
-
-Thanks!
-
->
->
->>
->> >
->> > Can you please create some docs in doc/usage/cmd/abootimg for the command?
->> >
->> > I also wonder if ab_select should move under that command?
+> >
+> > >
+> > > >  #define IOMMU_PAGE_SIZE                SZ_4K
+> > > >
+> > > >  static dma_addr_t sandbox_iommu_map(struct udevice *dev, void *addr,
+> > > > @@ -20,8 +20,7 @@ static dma_addr_t sandbox_iommu_map(struct udevice *dev, void *addr,
+> > > >         paddr = ALIGN_DOWN(virt_to_phys(addr), IOMMU_PAGE_SIZE);
+> > > >         off = virt_to_phys(addr) - paddr;
+> > > >         psize = ALIGN(size + off, IOMMU_PAGE_SIZE);
+> > > > -
+> > > > -       dva = lmb_alloc(psize, IOMMU_PAGE_SIZE, LMB_NONE);
+> > > > +       dva = (phys_addr_t)DVA_ADDR;
+> > > >
+> > > >         return dva + off;
+> > > >  }
+> > > > @@ -35,8 +34,6 @@ static void sandbox_iommu_unmap(struct udevice *dev, dma_addr_t addr,
+> > > >         dva = ALIGN_DOWN(addr, IOMMU_PAGE_SIZE);
+> > > >         psize = size + (addr - dva);
+> > > >         psize = ALIGN(psize, IOMMU_PAGE_SIZE);
+> > > > -
+> > > > -       lmb_free(dva, psize, LMB_NONE);
+> > > >  }
+> > > >
+> > > >  static struct iommu_ops sandbox_iommu_ops = {
+> > > > @@ -46,8 +43,6 @@ static struct iommu_ops sandbox_iommu_ops = {
+> > > >
+> > > >  static int sandbox_iommu_probe(struct udevice *dev)
+> > > >  {
+> > > > -       lmb_add(0x89abc000, SZ_16K, LMB_NONE);
+> > > > -
+> > > >         return 0;
+> > > >  }
+> > >
+> > > If this function is empty, you should remove it.
+> >
+> > Okay.
 >
 > Regards,
-> SImon
+> Simon
