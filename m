@@ -4,55 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BCA9C3DA7F
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 22:59:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EF51C3DA7F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 23:16:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44F0288C6F;
-	Sat,  3 Aug 2024 00:57:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id EA76988C37;
+	Sat,  3 Aug 2024 01:16:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="wBAYQq2C";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06AC188C81; Sat,  3 Aug 2024 00:57:51 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C4A4688C39; Sat,  3 Aug 2024 01:16:09 +0200 (CEST)
+Received: from smtpbgeu2.qq.com (smtpbgeu2.qq.com [18.194.254.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13E2988C04
- for <u-boot@lists.denx.de>; Sat,  3 Aug 2024 00:57:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A4438881A1
+ for <u-boot@lists.denx.de>; Sat,  3 Aug 2024 01:16:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=5651=PC=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1722639461; bh=6+ZwgT4kJw4mxJ8WuuLh2kvdaraLxPlf/Grfqkzwm/o=;
- b=wBAYQq2CYdAXO/Hmv7q6yyeaswgITODAUv2cbgX9n06Yx8taI9rMwN1x92iRvjJFFNxhhg/V3
- RxHEsJxlRXFt6Sw1RMtgNgR1xO8TnYWgR0/9vLC3jAc+MLMsrWdAV/0p5okVXl/pwzqW+PoX098
- nszhKXKTIiMEserv29Qsbcet/5mZ46IEV3Ko3EazCK0RCxSRPl0+uBCWaVQ4+pPiOgkf4r4Umol
- nciiApRUaJf3lTaZ6lTK9KYIQFYkQXWVf29zRtCyUPK1yOoq2pW+n+m8rtYz1XpSVqKQLUfOBgK
- TmsYzwdZCy/lL1+2yGiK2zFiz83djCgXpHPJiY6asH0A==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 10/10] rockchip: gpio: Add missing gpio aliases
-Date: Fri,  2 Aug 2024 22:56:52 +0000
-Message-ID: <20240802225705.2640999-11-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240802225705.2640999-1-jonas@kwiboo.se>
-References: <20240802225705.2640999-1-jonas@kwiboo.se>
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
+X-QQ-mid: bizesmtpsz2t1722640547t5hfl1k
+X-QQ-Originating-IP: wRuzx8AlG+5s7zmZ+TFu6iuuwAcHr9TSjnPBJKSdqXE=
+Received: from [192.168.159.131] ( [106.150.157.243])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Sat, 03 Aug 2024 07:15:45 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 9892928272030068091
+Message-ID: <FFD6C6BEDD046CFF+153916f7-994a-4a2d-bb34-d3ad9adebd2b@radxa.com>
+Date: Sat, 3 Aug 2024 08:15:45 +0900
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 66ad646316ac7a56c917af2a
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] configs: rockchip: enable USB gadget functions for Radxa
+ ROCK 3A
+To: u-boot@lists.denx.de
+Cc: gajjar04akash@gmail.com, jonas@kwiboo.se
+References: <20240802025847.122976-1-naoki@radxa.com>
+Content-Language: en-US
+From: FUKAUMI Naoki <naoki@radxa.com>
+In-Reply-To: <20240802025847.122976-1-naoki@radxa.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtpsz:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,135 +61,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add aliases for gpio controllers to soc u-boot dtsi files that are
-missing aliases in soc dtsi files to ensure dev_seq() return the
-expected number when a gpio controller is included in SPL.
+hi,
 
-Also drop the aliases from rk3288-u-boot.dtsi, they are already part of
-rk3288.dtsi.
+please don't merge this for a while.
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
-v2: New patch
----
- arch/arm/dts/px30-u-boot.dtsi    | 4 ++++
- arch/arm/dts/rk3066a-u-boot.dtsi | 7 +++++++
- arch/arm/dts/rk3288-u-boot.dtsi  | 9 ---------
- arch/arm/dts/rk3xxx-u-boot.dtsi  | 7 +++++++
- arch/arm/dts/rv1108-u-boot.dtsi  | 9 +++++++++
- arch/arm/dts/rv1126-u-boot.dtsi  | 8 ++++++++
- 6 files changed, 35 insertions(+), 9 deletions(-)
+I'm thinking opposite change may be better to align with ROCK 4/5 
+series. (OTG port is "host")
 
-diff --git a/arch/arm/dts/px30-u-boot.dtsi b/arch/arm/dts/px30-u-boot.dtsi
-index abc6b49e6663..3dc70d4e432b 100644
---- a/arch/arm/dts/px30-u-boot.dtsi
-+++ b/arch/arm/dts/px30-u-boot.dtsi
-@@ -7,6 +7,10 @@
- 
- / {
- 	aliases {
-+		gpio0 = &gpio0;
-+		gpio1 = &gpio1;
-+		gpio2 = &gpio2;
-+		gpio3 = &gpio3;
- 		mmc0 = &emmc;
- 		mmc1 = &sdmmc;
- 	};
-diff --git a/arch/arm/dts/rk3066a-u-boot.dtsi b/arch/arm/dts/rk3066a-u-boot.dtsi
-index 35b52d6fb7f3..60d18d2daeac 100644
---- a/arch/arm/dts/rk3066a-u-boot.dtsi
-+++ b/arch/arm/dts/rk3066a-u-boot.dtsi
-@@ -3,6 +3,13 @@
- #include "rockchip-u-boot.dtsi"
- #include "rk3xxx-u-boot.dtsi"
- 
-+/ {
-+	aliases {
-+		gpio4 = &gpio4;
-+		gpio6 = &gpio6;
-+	};
-+};
-+
- &gpio0 {
- 	gpio-ranges = <&pinctrl 0 0 32>;
- };
-diff --git a/arch/arm/dts/rk3288-u-boot.dtsi b/arch/arm/dts/rk3288-u-boot.dtsi
-index 0f8053a8b690..379d9413adee 100644
---- a/arch/arm/dts/rk3288-u-boot.dtsi
-+++ b/arch/arm/dts/rk3288-u-boot.dtsi
-@@ -7,15 +7,6 @@
- 
- / {
- 	aliases {
--		gpio0 = &gpio0;
--		gpio1 = &gpio1;
--		gpio2 = &gpio2;
--		gpio3 = &gpio3;
--		gpio4 = &gpio4;
--		gpio5 = &gpio5;
--		gpio6 = &gpio6;
--		gpio7 = &gpio7;
--		gpio8 = &gpio8;
- 		mmc0 = &emmc;
- 		mmc1 = &sdmmc;
- 		mmc2 = &sdio0;
-diff --git a/arch/arm/dts/rk3xxx-u-boot.dtsi b/arch/arm/dts/rk3xxx-u-boot.dtsi
-index 6af6a451ea78..097407ca72dc 100644
---- a/arch/arm/dts/rk3xxx-u-boot.dtsi
-+++ b/arch/arm/dts/rk3xxx-u-boot.dtsi
-@@ -1,6 +1,13 @@
- // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
- 
- / {
-+	aliases {
-+		gpio0 = &gpio0;
-+		gpio1 = &gpio1;
-+		gpio2 = &gpio2;
-+		gpio3 = &gpio3;
-+	};
-+
- 	noc: syscon@10128000 {
- 		compatible = "rockchip,rk3188-noc", "syscon";
- 		reg = <0x10128000 0x2000>;
-diff --git a/arch/arm/dts/rv1108-u-boot.dtsi b/arch/arm/dts/rv1108-u-boot.dtsi
-index f772d618bd1d..58711e8b2f8a 100644
---- a/arch/arm/dts/rv1108-u-boot.dtsi
-+++ b/arch/arm/dts/rv1108-u-boot.dtsi
-@@ -5,6 +5,15 @@
- 
- #include "rockchip-u-boot.dtsi"
- 
-+/ {
-+	aliases {
-+		gpio0 = &gpio0;
-+		gpio1 = &gpio1;
-+		gpio2 = &gpio2;
-+		gpio3 = &gpio3;
-+	};
-+};
-+
- &gpio0 {
- 	gpio-ranges = <&pinctrl 0 0 32>;
- };
-diff --git a/arch/arm/dts/rv1126-u-boot.dtsi b/arch/arm/dts/rv1126-u-boot.dtsi
-index 3e6df1e433db..05b5f5260dd5 100644
---- a/arch/arm/dts/rv1126-u-boot.dtsi
-+++ b/arch/arm/dts/rv1126-u-boot.dtsi
-@@ -6,6 +6,14 @@
- #include "rockchip-u-boot.dtsi"
- 
- / {
-+	aliases {
-+		gpio0 = &gpio0;
-+		gpio1 = &gpio1;
-+		gpio2 = &gpio2;
-+		gpio3 = &gpio3;
-+		gpio4 = &gpio4;
-+	};
-+
- 	chosen {
- 		u-boot,spl-boot-order = \
- 			"same-as-spl", &emmc, &sdmmc;
--- 
-2.45.2
+any comment?
 
+--
+FUKAUMI Naoki
+Radxa Computer (Shenzhen) Co., Ltd.
+
+On 8/2/24 11:58, FUKAUMI Naoki wrote:
+> since dr_mode of "usb_host0_xhci" is "otg", we can use USB gadget
+> functions on USB3 Type-A OTG (upper) port. enable it.
+> 
+> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+> ---
+>   configs/rock-3a-rk3568_defconfig | 6 ++++++
+>   1 file changed, 6 insertions(+)
+> 
+> diff --git a/configs/rock-3a-rk3568_defconfig b/configs/rock-3a-rk3568_defconfig
+> index 66ac2f6d7aa..0568a730383 100644
+> --- a/configs/rock-3a-rk3568_defconfig
+> +++ b/configs/rock-3a-rk3568_defconfig
+> @@ -37,6 +37,8 @@ CONFIG_CMD_MMC=y
+>   CONFIG_CMD_PCI=y
+>   CONFIG_CMD_POWEROFF=y
+>   CONFIG_CMD_USB=y
+> +CONFIG_CMD_ROCKUSB=y
+> +CONFIG_CMD_USB_MASS_STORAGE=y
+>   # CONFIG_CMD_SETEXPR is not set
+>   CONFIG_CMD_PMIC=y
+>   CONFIG_CMD_REGULATOR=y
+> @@ -50,6 +52,7 @@ CONFIG_SPL_SYSCON=y
+>   CONFIG_SCSI_AHCI=y
+>   CONFIG_AHCI_PCI=y
+>   CONFIG_SPL_CLK=y
+> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
+>   CONFIG_ROCKCHIP_GPIO=y
+>   CONFIG_SYS_I2C_ROCKCHIP=y
+>   CONFIG_MISC=y
+> @@ -90,4 +93,7 @@ CONFIG_USB_OHCI_HCD=y
+>   CONFIG_USB_OHCI_GENERIC=y
+>   CONFIG_USB_DWC3=y
+>   CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_USB_GADGET=y
+> +CONFIG_USB_GADGET_DOWNLOAD=y
+> +CONFIG_USB_FUNCTION_ROCKUSB=y
+>   CONFIG_ERRNO_STR=y
