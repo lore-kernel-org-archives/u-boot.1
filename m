@@ -4,80 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4918C3DA49
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 10:38:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EA5AC52D54
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 11:04:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35EC2882B7;
-	Fri,  2 Aug 2024 12:38:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5AF2B8862D;
+	Fri,  2 Aug 2024 13:04:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sntech.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="l4c1McY/";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41166885F4; Fri,  2 Aug 2024 12:38:54 +0200 (CEST)
-Received: from mail-ua1-x935.google.com (mail-ua1-x935.google.com
- [IPv6:2607:f8b0:4864:20::935])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 01DDC88714; Fri,  2 Aug 2024 13:04:37 +0200 (CEST)
+Received: from gloria.sntech.de (gloria.sntech.de [185.11.138.130])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B329586BF1
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 12:38:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7959588606
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 13:04:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x935.google.com with SMTP id
- a1e0cc1a2514c-820f7c6eaa5so1918910241.3
- for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 03:38:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722595130; x=1723199930; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RDHPfh6tPBcFp7l0KXVV8Df7TbXGYqfSXJslIDmdUBY=;
- b=l4c1McY/X8lUAyCyPf6cJf99+8pLzLzFI6YQ8egx6TalEcL2L5pOa0rPqCLNda3Ct6
- UWS5aJw/wPo0JXd+zUGhDncZmQNPDdZuFXLZQLD/bNcE52IZKxsm5kQvzLdFRgp4sSYM
- UExz+mr7CPKOgYa6CrfBBcsDc5l6Iw7ic9MrZwZl/S+7mRfSdZPiQYhasPfGCEj7W63c
- OCEhfTz8e+U4yPQKsDHXvErsGENpkgLvJPoY9BX6/bfwUZIU8loj5q8JNyeDt7Z8sSfq
- fwQvNcphPXYwTwjMnkA2ohv3Nuq8m41nH8ymKLB3mrmn5P1S4owRk0E5haDVZGTUk9Rz
- eVdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722595130; x=1723199930;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RDHPfh6tPBcFp7l0KXVV8Df7TbXGYqfSXJslIDmdUBY=;
- b=Ntt7Xw0Hvrm0669ujXzG0WnxZ72Ttf3pfEeX59Ecj45X6tJwMg6+9+hKRUono9s6MC
- pbdfw7mAIGUqvHWeQoJkug0uQisNwOBzNo4smLlv3I7o3uKSmTs5o5M8GdgQFUtfrJcU
- FEDrLd6QIVNc+RTulV/GZUZLHz29qscs+GDCKwoKYkOaOFgyWU9oe4GOrtrs503QLFin
- f7jK1oESblO/Z+5k+VdbBs2kew/7RBPR8C6sukQ2/NId3aMkYY2qYgBN4Rth8wzr0zIq
- CFTvCVwL7eDfGwSt+96oCGjWf0HCNOU1keFlkEe33kHHgJDpg2KSpOsMdIUZtRu9+PC8
- CjNg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWXHsL/AlwPqgn0TdQcv/Bm6VfAz649KnGwZzInqte87FcpcrgGQSx+GMRfKk868JhWShesdLAwrfC0NxFF8OrBv7otXw==
-X-Gm-Message-State: AOJu0Ywhzr3o6i+EfXxMqAIJfiLYAavASJDc3oosmwC39fMCdYthfzO9
- +0cWueUPkyNmq82yfk56+oBjiaaxRH7vsvvyzSHv8jHGDV8Yoh/g+UF1vNKc1fIMYxHoTmIkLSd
- ht02m3sa86vAAI4nX3R0khrJNRyly9sd77jaRww==
-X-Google-Smtp-Source: AGHT+IFZhPtRfDrEgUx/rXThJ5RPiKHK8SenbGtXJj5Bt/TftuSlWSojdX0TrdPb+weI/QgocKTIY4Q0TrR5Dh6ZLpg=
-X-Received: by 2002:a05:6102:41aa:b0:493:d4e7:4ea7 with SMTP id
- ada2fe7eead31-4945beafdc4mr4099372137.19.1722595130437; Fri, 02 Aug 2024
- 03:38:50 -0700 (PDT)
+ dmarc=fail (p=none dis=none) header.from=sntech.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heiko@sntech.de
+Received: from i53875a76.versanet.de ([83.135.90.118] helo=diego.localnet)
+ by gloria.sntech.de with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <heiko@sntech.de>)
+ id 1sZq5D-0000j4-Bg; Fri, 02 Aug 2024 13:04:27 +0200
+From: Heiko =?ISO-8859-1?Q?St=FCbner?= <heiko@sntech.de>
+To: Jonas Karlman <jonas@kwiboo.se>, sjg@chromium.org,
+ philipp.tomsich@vrull.eu, Kever Yang <kever.yang@rock-chips.com>
+Cc: dsimic@manjaro.org, u-boot@lists.denx.de
+Subject: Re: [PATCH 4/4] board: rockchip: Add Radxa ROCK 5 ITX
+Date: Fri, 02 Aug 2024 13:04:26 +0200
+Message-ID: <2664734.bgRvk7e4E5@diego>
+In-Reply-To: <fa6f7df9-abc2-4e3f-b248-f24641ee6d3b@rock-chips.com>
+References: <20240731102624.2541989-1-heiko@sntech.de>
+ <3059dbeb-b068-4202-9951-3e9523ab36db@kwiboo.se>
+ <fa6f7df9-abc2-4e3f-b248-f24641ee6d3b@rock-chips.com>
 MIME-Version: 1.0
-References: <20240801225519.336667-1-macroalpha82@gmail.com>
- <20240801225519.336667-10-macroalpha82@gmail.com>
- <CAFA6WYP7fnswZ4BHtqd+nKT7MZeBrKgocQf-WpJ7-HqjBOaFvQ@mail.gmail.com>
- <20240802105719.0dab15cb@donnerap.manchester.arm.com>
-In-Reply-To: <20240802105719.0dab15cb@donnerap.manchester.arm.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 2 Aug 2024 16:08:39 +0530
-Message-ID: <CAFA6WYMqYx-sEYTKcNPDbqYii_67YVUq1xnKKRjH+F7FjOMacw@mail.gmail.com>
-Subject: Re: [PATCH 9/9] sunxi: Add support for Anbernic RG35XX-2024
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de,
- sjg@chromium.org, 
- jernej.skrabec@gmail.com, neil.armstrong@linaro.org, hdegoede@redhat.com, 
- jagan@amarulasolutions.com, trini@konsulko.com, ryan@testtoast.com, 
- Chris Morgan <macromorgan@hotmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,64 +56,365 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andre,
+Hi Kever,
 
-On Fri, 2 Aug 2024 at 15:27, Andre Przywara <andre.przywara@arm.com> wrote:
->
-> On Fri, 2 Aug 2024 12:24:56 +0530
-> Sumit Garg <sumit.garg@linaro.org> wrote:
->
-> Hi Sumit,
->
-> > Hi Chris,
+Am Freitag, 2. August 2024, 08:35:00 CEST schrieb Kever Yang:
+> On 2024/8/1 03:41, Jonas Karlman wrote:
+> > On 2024-07-31 12:26, Heiko Stuebner wrote:
+> >> The Rock 5 ITX is board in ITX form factor using the RK358 SoC
+> >>
+> >> It can be powered either by 12V, ATX power-supply or PoE.
+> >>
+> >> Notable peripherals are the 4 SATA ports, M.2 M-Key slot, M.2 E-key slot,
+> >> 2*2.5Gb PCIe-connected Ethernet NICs.
+> >>
+> >> Display options are 2*HDMI, DP via USB-c, eDP + 2*DSI via PCB connectors.
+> >>
+> >> USB ports are 4*USB3 + 2*USB2 on the back panel and 2-port front-panel
+> >> connector.
+> >>
+> >> Schematics for the board can be found on
+> >> -https://dl.radxa.com/rock5/5itx/radxa_rock_5_itx_X1100_schematic.pdf
+> >> -https://dl.radxa.com/rock5/5itx/v1110/radxa_rock_5itx_v1110_schematic.pdf
+> >>
+> >> The naming scheme with the dashes follows Dragan's comment on the mainline
+> >> devicetree commit:
+> >>      "the name of this board deviates from the standard Radxa naming scheme,
+> >>       which is something like "ROCK <number><letter>" thus, "rock-5a" is
+> >>       fine, but it should be "rock-5-itx", simply because there's a space
+> >>       between "5" and "ITX" in "ROCK 5 ITX"
+> >>
+> >> Signed-off-by: Heiko Stuebner<heiko@sntech.de>
+> >> ---
+> >>   arch/arm/dts/rk3588-rock-5-itx-u-boot.dtsi |  18 ++++
+> >>   arch/arm/mach-rockchip/rk3588/Kconfig      |  29 ++++++
+> >>   board/radxa/rock-5-itx-rk3588/Kconfig      |  12 +++
+> >>   board/radxa/rock-5-itx-rk3588/MAINTAINERS  |   7 ++
+> >>   configs/rock-5-itx-rk3588_defconfig        | 104 +++++++++++++++++++++
+> >>   include/configs/rock-5-itx-rk3588.h        |  15 +++
+> >>   6 files changed, 185 insertions(+)
+> >>   create mode 100644 arch/arm/dts/rk3588-rock-5-itx-u-boot.dtsi
+> >>   create mode 100644 board/radxa/rock-5-itx-rk3588/Kconfig
+> >>   create mode 100644 board/radxa/rock-5-itx-rk3588/MAINTAINERS
+> >>   create mode 100644 configs/rock-5-itx-rk3588_defconfig
+> >>   create mode 100644 include/configs/rock-5-itx-rk3588.h
+> > Please also add this board to the rk3588 list in rockchip.rst.
 > >
-> > On Fri, 2 Aug 2024 at 04:29, Chris Morgan <macroalpha82@gmail.com> wrote:
-> > >
-> > > From: Chris Morgan <macromorgan@hotmail.com>
-> > >
-> > > The Anbernic RG35XX series of devices are based around an Allwinner
-> > > H700 SoC with 1GB of RAM, 2 SD cards, and multiple input buttons.
-> > >
-> > > This bootloader has been tested on the Anbernic RG35XX-2024 and
-> > > RG35XX-H, but should be suitable for the entire lineup of H700 based
-> > > devices.
-> > >
-> > > A future series of updates will add board selection logic to identify
-> > > and load the correct device tree automatically, and will switch to
-> > > utilizing a mainline device tree.
+> >> diff --git a/arch/arm/dts/rk3588-rock-5-itx-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5-itx-u-boot.dtsi
+> >> new file mode 100644
+> >> index 00000000000..c94df088af5
+> >> --- /dev/null
+> >> +++ b/arch/arm/dts/rk3588-rock-5-itx-u-boot.dtsi
+> >> @@ -0,0 +1,18 @@
+> >> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> >> +/*
+> >> + * Copyright (c) 2023 Collabora Ltd.
+> >> + */
+> >> +
+> >> +#include "rk3588-u-boot.dtsi"
+> >> +
+> >> +&fspim2_pins {
+> >> +	bootph-pre-ram;
+> >> +	bootph-some-ram;
+> >> +};
+> >> +
+> >> +&sfc {
+> >> +	flash@0 {
+> >> +		bootph-pre-ram;
+> >> +		bootph-some-ram;
+> >> +	};
+> >> +};
+> > Running "pci enum" without anything in the M.2 M-key slot my board
+> > freeze at pcie@fe160000, leaving the mkey regulator always-on seem to
+> > work around this:
 > >
-> > I can already see the upstream DT subtree containing DTS for this board as:
+> > &vcc3v3_mkey {
+> > 	regulator-always-on;
+> > };
+> 
+> Does the refclock generator need to depends on this power supply?
+> 
+> Kernel should have the same problem, the fe160000 and fe150000 shares 
+> the clock generator,
+> 
+> so they should both have the ability to enable the clock, or else the 
+> power set as always on could be an option.
+
+correct, for the kernel I'm working on this in [0] to give both
+PCIe controllers the ability to control that clock generation.
+
+For u-boot I was aiming to follow Jonas' suggestion to keep the
+supply simply on for now. 
+
+
+Heiko
+
+
+[0] https://lore.kernel.org/linux-rockchip/20240715110251.261844-1-heiko@sntech.de/
+
+
+> >> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
+> >> index e751d64e1a1..0dcf2249fb4 100644
+> >> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
+> >> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+> >> @@ -185,6 +185,34 @@ config TARGET_ROCK5B_RK3588
+> >>   	  USB PD over USB Type-C
+> >>   	  Size: 100mm x 72mm (Pico-ITX form factor)
+> >>   
+> >> +config TARGET_ROCK_5_ITX_RK3588
+> >> +	bool "Radxa ROCK-5-ITX RK3588 board"
+> >> +	select BOARD_LATE_INIT
+> >> +	help
+> >> +	  Radxa ROCK-5-ITX is a Rockchip RK3588 based SBC (Single Board
+> >> +	  Computer) by Radxa in the ITX formfactor.
+> >> +
+> >> +	  There are variants depending on the DRAM size : from 4G up to 32G.
+> >> +
+> >> +	  Specification:
+> >> +
+> >> +	  Rockchip Rk3588 SoC
+> >> +	  4x ARM Cortex-A76, 4x ARM Cortex-A55
+> >> +	  4/8/16/24/32GB memory LPDDR5
+> >> +	  Mali G610MC4 GPU
+> >> +	  2x MIPI CSI 2 multiple lanes connector
+> >> +	  eMMC
+> >> +	  uSD slot (up to 128GB)
+> >> +	  M.2 M-key and M.2 E-key connector
+> >> +	  4x SATA
+> >> +	  2x USB 2.0 + 4x USB 3.0 Type-A, 2x USB 2.0 Panel, 1x USB 3.0 Type-C
+> >> +	  2x HDMI 2.1 output, 1x HDMI input
+> >> +	  DP via Type-C
+> >> +	  2x DSI via PCB connector
+> >> +	  2x 2.5 Gbps Ethernet port
+> >> +	  Front-panel connectors for audio and case-power, -leds
+> >> +	  Powered by either 12V, ATX power-supply or PoE
+> >> +
+> >>   config TARGET_SIGE7_RK3588
+> >>   	bool "ArmSoM Sige7 RK3588 board"
+> >>   	select BOARD_LATE_INIT
+> >> @@ -319,6 +347,7 @@ source "board/pine64/quartzpro64-rk3588/Kconfig"
+> >>   source "board/turing/turing-rk1-rk3588/Kconfig"
+> >>   source "board/radxa/rock5a-rk3588s/Kconfig"
+> >>   source "board/radxa/rock5b-rk3588/Kconfig"
+> >> +source "board/radxa/rock-5-itx-rk3588/Kconfig"
+> >>   source "board/rockchip/evb_rk3588/Kconfig"
+> >>   source "board/rockchip/toybrick_rk3588/Kconfig"
+> >>   source "board/theobroma-systems/jaguar_rk3588/Kconfig"
+> >> diff --git a/board/radxa/rock-5-itx-rk3588/Kconfig b/board/radxa/rock-5-itx-rk3588/Kconfig
+> >> new file mode 100644
+> >> index 00000000000..f7a7666d531
+> >> --- /dev/null
+> >> +++ b/board/radxa/rock-5-itx-rk3588/Kconfig
+> >> @@ -0,0 +1,12 @@
+> >> +if TARGET_ROCK_5_ITX_RK3588
+> >> +
+> >> +config SYS_BOARD
+> >> +	default "rock-5-itx-rk3588"
+> >> +
+> >> +config SYS_VENDOR
+> >> +	default "radxa"
+> >> +
+> >> +config SYS_CONFIG_NAME
+> >> +	default "rock-5-itx-rk3588"
+> >> +
+> >> +endif
+> >> diff --git a/board/radxa/rock-5-itx-rk3588/MAINTAINERS b/board/radxa/rock-5-itx-rk3588/MAINTAINERS
+> >> new file mode 100644
+> >> index 00000000000..297b0676ddf
+> >> --- /dev/null
+> >> +++ b/board/radxa/rock-5-itx-rk3588/MAINTAINERS
+> >> @@ -0,0 +1,7 @@
+> >> +ROCK-5-ITX-RK3588
+> >> +M:	Heiko Stuebner<heiko@sntech.de>
+> > Feel free to add me as a reviewer of this board:
 > >
-> > ./dts/upstream/src/arm64/allwinner/sun50i-h700-anbernic-rg35xx-2024.dts
+> > R:	Jonas Karlman<jonas@kwiboo.se>
 > >
-> > Are there any major differences that won't allow you to switch to
-> > OF_UPSTREAM for this board?
->
-> In this case there are no differences between the DT in the kernel repo
-> and what we put in U-Boot. The main reason for me holding back the switch
-> to OF_UPSTREAM for the H616 was indeed the rather slow update cadence,
-> which somewhat slows down upstreaming of new boards like this. Doing this
-> separately gives us a bit more control and freedom to take DT patches
-> early, for instance when they appear in some Linux -rc1, or even before
-> that (linux-next).
-> I explained my position in more detail here:
-> https://lore.kernel.org/u-boot/191A0F66-E2AE-4D1B-ACBE-E411E135BB61@arm.com/
->
+> >> +S:	Maintained
+> >> +F:	board/radxa/rock-5-itx-rk3588
+> >> +F:	include/configs/rock-5-itx-rk3588.h
+> >> +F:	configs/rock-5-itx-rk3588_defconfig
+> >> +F:	arch/arm/dts/rk3588-rock-5-itx-u-boot.dtsi
+> >> diff --git a/configs/rock-5-itx-rk3588_defconfig b/configs/rock-5-itx-rk3588_defconfig
+> >> new file mode 100644
+> >> index 00000000000..2a41642245b
+> >> --- /dev/null
+> >> +++ b/configs/rock-5-itx-rk3588_defconfig
+> >> @@ -0,0 +1,104 @@
+> >> +CONFIG_ARM=y
+> >> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> >> +CONFIG_SYS_HAS_NONCACHED_MEMORY=y
+> >> +CONFIG_COUNTER_FREQUENCY=24000000
+> >> +CONFIG_ARCH_ROCKCHIP=y
+> >> +CONFIG_SF_DEFAULT_SPEED=24000000
+> >> +CONFIG_SF_DEFAULT_MODE=0x2000
+> >> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-rock-5-itx"
+> >> +CONFIG_ROCKCHIP_RK3588=y
+> >> +CONFIG_ROCKCHIP_SPI_IMAGE=y
+> >> +CONFIG_SPL_SERIAL=y
+> >> +CONFIG_TARGET_ROCK5B_RK3588=y
+> >> +CONFIG_DEBUG_UART_BASE=0xFEB50000
+> >> +CONFIG_DEBUG_UART_CLOCK=24000000
+> >> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
+> >> +CONFIG_SPL_SPI=y
+> >> +CONFIG_SYS_LOAD_ADDR=0xc00800
+> >> +CONFIG_PCI=y
+> >> +CONFIG_DEBUG_UART=y
+> >> +CONFIG_AHCI=y
+> >> +CONFIG_FIT=y
+> >> +CONFIG_FIT_VERBOSE=y
+> >> +CONFIG_SPL_FIT_SIGNATURE=y
+> >> +CONFIG_SPL_LOAD_FIT=y
+> >> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> >> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-rock-5-itx.dtb"
+> >> +# CONFIG_DISPLAY_CPUINFO is not set
+> >> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> >> +CONFIG_SPL_MAX_SIZE=0x40000
+> >> +CONFIG_SPL_PAD_TO=0x7f8000
+> >> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> >> +CONFIG_SPL_SPI_LOAD=y
+> >> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+> >> +CONFIG_SPL_ATF=y
+> >> +CONFIG_CMD_GPIO=y
+> >> +CONFIG_CMD_GPT=y
+> >> +CONFIG_CMD_I2C=y
+> >> +CONFIG_CMD_MMC=y
+> >> +CONFIG_CMD_PCI=y
+> >> +CONFIG_CMD_USB=y
+> >> +CONFIG_CMD_ROCKUSB=y
+> > Suggest you also add support for the UMS cmd:
+> >
+> > CONFIG_CMD_USB_MASS_STORAGE=y
+> >
+> >> +# CONFIG_CMD_SETEXPR is not set
+> >> +CONFIG_CMD_REGULATOR=y
+> >> +# CONFIG_SPL_DOS_PARTITION is not set
+> >> +CONFIG_SPL_OF_CONTROL=y
+> >> +CONFIG_OF_LIVE=y
+> >> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> > Suggest you add following:
+> >
+> > CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> >
+> > Still not fully sure what this option really affect but have started
+> > adding it to new boards to closer match older rk33xx boards:
+> >
+> >
+> >> +CONFIG_SPL_DM_SEQ_ALIAS=y
+> >> +CONFIG_SPL_REGMAP=y
+> >> +CONFIG_SPL_SYSCON=y
+> >> +CONFIG_AHCI_PCI=y
+> >> +CONFIG_DWC_AHCI=y
+> >> +CONFIG_SPL_CLK=y
+> >> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
+> >> +CONFIG_ROCKCHIP_GPIO=y
+> >> +CONFIG_SYS_I2C_ROCKCHIP=y
+> > If we want to control the leds in U-Boot:
+> >
+> > CONFIG_LED=y
+> > CONFIG_LED_GPIO=y
+> >
+> >> +CONFIG_MISC=y
+> >> +CONFIG_SUPPORT_EMMC_RPMB=y
+> >> +CONFIG_MMC_DW=y
+> >> +CONFIG_MMC_DW_ROCKCHIP=y
+> >> +CONFIG_MMC_SDHCI=y
+> >> +CONFIG_MMC_SDHCI_SDMA=y
+> >> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+> >> +CONFIG_SF_DEFAULT_BUS=5
+> >> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+> >> +CONFIG_SPI_FLASH_MACRONIX=y
+> >> +CONFIG_SPI_FLASH_XTX=y
+> >> +CONFIG_PHYLIB=y
+> >> +CONFIG_RTL8169=y
+> >> +CONFIG_NVME_PCI=y
+> >> +CONFIG_PCIE_DW_ROCKCHIP=y
+> >> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+> >> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+> >> +CONFIG_PHY_ROCKCHIP_USBDP=y
+> >> +CONFIG_SPL_PINCTRL=y
+> > The rk8xx driver support the PMIC used on this board,
+> > suggest you add following:
+> >
+> > CONFIG_DM_PMIC=y
+> > CONFIG_PMIC_RK8XX=y
+> > CONFIG_REGULATOR_RK8XX=y
+> >
+> >> +CONFIG_PWM_ROCKCHIP=y
+> >> +CONFIG_SPL_RAM=y
+> >> +CONFIG_SCSI=y
+> >> +CONFIG_BAUDRATE=1500000
+> >> +CONFIG_DEBUG_UART_SHIFT=2
+> >> +CONFIG_SYS_NS16550_MEM32=y
+> >> +CONFIG_ROCKCHIP_SFC=y
+> > The PMIC use SPI:
+> >
+> > CONFIG_ROCKCHIP_SPI=y
+> >
+> >> +CONFIG_SYSRESET=y
+> >> +CONFIG_USB=y
+> >> +CONFIG_USB_XHCI_HCD=y
+> >> +CONFIG_USB_EHCI_HCD=y
+> >> +CONFIG_USB_EHCI_GENERIC=y
+> >> +CONFIG_USB_OHCI_HCD=y
+> >> +CONFIG_USB_OHCI_GENERIC=y
+> >> +CONFIG_USB_DWC3=y
+> >> +CONFIG_USB_DWC3_GENERIC=y
+> >> +CONFIG_SPL_USB_DWC3_GENERIC=y
+> > This can probably be dropped, there is no usb node included in SPL FDT
+> > when I check with "dtc -I dtb -O dts spl/u-boot-spl.dtb".
+> >
+> > Tested following feature on my v1.11 board:
+> > - SD-card boot
+> > - eMMC boot
+> > - SPI flash boot
+> > - PCIe/NVMe/AHCI
+> > - USB gadget
+> > - USB host
+> >
+> > I did notice some issue with usb host trying to start/stop multiple
+> > times. First start after a reset seem to work however after a "usb stop"
+> > it is not fully possible to re-enable and have working usb.
+> >
+> > Do not think this is specific to this board so nothing blocking.
+> >
+> > Regards,
+> > Jonas
+> >
+> >> +CONFIG_USB_HOST_ETHER=y
+> >> +CONFIG_USB_ETHER_ASIX=y
+> >> +CONFIG_USB_ETHER_ASIX88179=y
+> >> +CONFIG_USB_ETHER_LAN75XX=y
+> >> +CONFIG_USB_ETHER_LAN78XX=y
+> >> +CONFIG_USB_ETHER_MCS7830=y
+> >> +CONFIG_USB_ETHER_RTL8152=y
+> >> +CONFIG_USB_ETHER_SMSC95XX=y
+> >> +CONFIG_USB_GADGET=y
+> >> +CONFIG_USB_GADGET_DOWNLOAD=y
+> >> +CONFIG_USB_FUNCTION_ROCKUSB=y
+> >> +CONFIG_ERRNO_STR=y
+> >> diff --git a/include/configs/rock-5-itx-rk3588.h b/include/configs/rock-5-itx-rk3588.h
+> >> new file mode 100644
+> >> index 00000000000..bc0f9e72bc5
+> >> --- /dev/null
+> >> +++ b/include/configs/rock-5-itx-rk3588.h
+> >> @@ -0,0 +1,15 @@
+> >> +/* SPDX-License-Identifier: GPL-2.0+ */
+> >> +/*
+> >> + * Copyright (c) 2024 Heiko Stuebner<heiko@sntech.de>
+> >> + */
+> >> +
+> >> +#ifndef __ROCK_5_ITX_RK3588_H
+> >> +#define __ROCK_5_ITX_RK3588_H
+> >> +
+> >> +#define ROCKCHIP_DEVICE_SETTINGS \
+> >> +		"stdout=serial,vidconsole\0" \
+> >> +		"stderr=serial,vidconsole\0"
+> >> +
+> >> +#include <configs/rk3588_common.h>
+> >> +
+> >> +#endif /* __ROCK_5_ITX_RK3588_H */
 
-I can see the reasoning, thanks.
 
-> I think Tom partly convinced me that regular updates together with
-> cherry-picking should solve most of those problems, so I will probably do
-> the switch for the next cycle.
->
 
-Glad to hear that. Cherry-picking has been working really well for
-Rockchip platforms [1] [2] [3] as the changes appear in Linux -rc1.
-Also, it pretty much avoids maintainers to review the DT changes
-unless there are some bits added via *-u-boot.dtsi.
 
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=417233
-[2] https://patchwork.ozlabs.org/project/uboot/list/?series=417377
-[3] https://patchwork.ozlabs.org/project/uboot/list/?series=417353
-
--Sumit
