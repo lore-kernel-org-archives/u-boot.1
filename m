@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D45CC3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 19:57:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30CE6C3DA7F
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 19:57:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C9D888C2F;
-	Fri,  2 Aug 2024 21:56:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4041D88C36;
+	Fri,  2 Aug 2024 21:56:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UhkbwyOl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Pmjm0dRT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D35488C6A; Fri,  2 Aug 2024 21:56:39 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 5E2CF88C2F; Fri,  2 Aug 2024 21:56:40 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0BD088C36
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 21:56:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 301F588C4C
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 21:56:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-428e0d184b4so16146885e9.2
- for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 12:56:36 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4257d5fc9b7so75914555e9.2
+ for <u-boot@lists.denx.de>; Fri, 02 Aug 2024 12:56:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722628596; x=1723233396; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1722628598; x=1723233398; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=zUwxp90/MEx06lhOUj/Ney8+BuEg/9FiX31Dy0NtLKw=;
- b=UhkbwyOllT7CeNZ5eTrQzBPNtvileDhYNXcj31YTnCXtwQN1qHtmdldPeTPb9HurkO
- Pe6gunifELj0CSWrfXaVp020Grs37qThBVgS2AgXRmmisFVqEhgDXrzvkVooDt4et/2h
- 37mphW0jU2RUSCKa3GwwQLbq2sa/3TyZTxMLS3EYQNzFBiXabhMLF3Gdu1VEjfiF8vPS
- A1F+q2PjnGszWBVnRD7kfyrZ8yJ2S2X5B9Qrqe7vk6LpEMIrjMoDmdQFz32k2dYa111G
- X5Aue0LY/oEdU1v9ASKQ1FGRchvGNI+W11LWsMy8epHrnV9BOZWdpEmP7S3QXpBkr6D+
- Us3Q==
+ :reply-to; bh=KwgE/DwoMkkYLq+BnoMP5gt5Mhab3Lja2XZVGTvvmRI=;
+ b=Pmjm0dRTHVQY1DpTMl6qkT26ISoT588RRCLFKc+gtPUJsi1dOv7abKGFm9MoDJAQXi
+ 7Vqhh1Tt7JuHXmFdzsYQ7tsm6Qjdvr7La2CzjKDmjhcrkB+Bpp6ZFsIBK/6x1x5zu3/G
+ Gz3yzIT/pulqhXd/yvONpB7vq0zRgjtt/5Tzj+4eacxr6xJB4JS4tmxxE5cMWlVjKkzU
+ N0rNaeUWLmDfEWduvhjxCW0bKxB7+zik9WJVvNLZ4JmsWSyZIP9gLr1XDMqCoq2IWIz1
+ ZkO72qfhYuq8D81VUuzTm0EFJB81/xguCLpUGRpWsOE1KIC81o1hMHdWksfdGN13/MnT
+ oRcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722628596; x=1723233396;
+ d=1e100.net; s=20230601; t=1722628598; x=1723233398;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zUwxp90/MEx06lhOUj/Ney8+BuEg/9FiX31Dy0NtLKw=;
- b=NP7uBXCnVcXsXGwcfvPLNCbP+GNwH9CKIMwgox1oqjckA4dZ8wCvsB6iNT8hvTz8g5
- fV5ki3gwNePjOcTGj88O7vDR8f6Bh2dgaz2DPkNkfJfhqr35WPJQdISdXyfcM7UKVDGN
- dC9P2In2ppHd8rFaX98HpQoBzlaUcyPkHQ5JSDXM9n5KfDZneFFYBGzNps5si21dKtCu
- eXJx7ZFwwmKGCY2sdRhQrrkH7VXEG/OXvWlKxefZ1NVq5UAuEeIwu8CDjRA7d3Hg4Rx6
- bcLPKqRdeszyi2T34zuVFQMHUtzMk6OCka0kfArpa9WbsYzQfDTmnNPlBKVzopb2zQO4
- u8ew==
+ bh=KwgE/DwoMkkYLq+BnoMP5gt5Mhab3Lja2XZVGTvvmRI=;
+ b=KwHaZAQGYDe1iPGeJj+bAZojcrith69hltHuuyqInzQVEAu4mUmEIkIjsM2J1nQdJt
+ 6nlyrQkRljw3E9uUJeAgftZax83dHbsZuGPFZ7sVRlXInf9kaVK3pUgLG5CCeJtrQp9W
+ RXqAdG1arJ1JYjaMCFzNR61YPVOplOPz73Gg8ERmYjlEsXEiEI7uGb4sjb4eCO3H9xoJ
+ SwqEQxdFtn1+VlxeP3G3b6k2DLbts3nmen4MGTlvNV7RJu6QEYF+zw6zKZjxJtCdR8dw
+ gAOe11t0izESGt+EKmKJDF0oj0nS3WJpoe4pKJxz8r4BF+WCkiu+yfEPX7mC8qTpdCI3
+ 4mnQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUehoA0d7gsWAUuV7S3O2fYm48xWpf5OySzG7IywcxN/ZQrsoL5ZOEbykTm1ARDmMev/pMCRf0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx75gnlUgLe2gWNgE6K/fanYGZ/0s836kCdJ4ERT5OTUlOPuoeB
- EMYpUyJmnfcLNJQqUwhd0YC980PJYjuKBi9JvKuwZnsTCaWGALoo
-X-Google-Smtp-Source: AGHT+IHD1W+zhV0KAVi/wb1aQMhsHuKbGaPt3OJ9bxOazTquzxLkVbHJ83PxJAetBEmaTT+Cq1ckvA==
-X-Received: by 2002:a05:600c:524e:b0:426:51ce:bb14 with SMTP id
- 5b1f17b1804b1-428e6b7f4abmr27520865e9.30.1722628596229; 
- Fri, 02 Aug 2024 12:56:36 -0700 (PDT)
+ AJvYcCWq6/mrKwL3Kh/LSjA+god+YQm2TmAfCgzYj2AxSTLESqgGyX3rIrRbjUTepQX9Px8LyAAQfADMCbUrHSvMGxurDC4inw==
+X-Gm-Message-State: AOJu0Yz3sw1WLi0t/YjLyljOYFUPDfjR3Pg+N/CWRxm7093GhoRHo//3
+ PCGk5CZkoXOUnlheasOAVyHejtEhpBJjn26TBkkNA9++XMPXZjpv
+X-Google-Smtp-Source: AGHT+IHxSLQ9SmOtCLQ8/yvrfkcfdiC0Bz9zJaoowpOm3882ZXgd9C0okRKHJJMk3NfHarQois4nSw==
+X-Received: by 2002:a05:600c:524e:b0:426:63f1:9a1b with SMTP id
+ 5b1f17b1804b1-428e6b9547dmr35366715e9.33.1722628597549; 
+ Fri, 02 Aug 2024 12:56:37 -0700 (PDT)
 Received: from localhost.localdomain
  (host-87-6-196-30.retail.telecomitalia.it. [87.6.196.30])
  by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-428e6e01d0asm43350485e9.16.2024.08.02.12.56.35
+ 5b1f17b1804b1-428e6e01d0asm43350485e9.16.2024.08.02.12.56.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 02 Aug 2024 12:56:35 -0700 (PDT)
+ Fri, 02 Aug 2024 12:56:37 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Crispin John <john@phrozen.org>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
@@ -74,10 +74,9 @@ To: Crispin John <john@phrozen.org>, Tom Rini <trini@konsulko.com>,
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
  Christian Marangi <ansuelsmth@gmail.com>, Sam Shih <sam.shih@mediatek.com>,
  u-boot@lists.denx.de
-Subject: [PATCH 04/14] clk: mediatek: mt7981: fix wrong clock definition for
- spi2
-Date: Fri,  2 Aug 2024 15:53:05 +0200
-Message-ID: <20240802135326.25303-5-ansuelsmth@gmail.com>
+Subject: [PATCH 05/14] clk: mediatek: mt7981: add missing clock for spi1 node
+Date: Fri,  2 Aug 2024 15:53:06 +0200
+Message-ID: <20240802135326.25303-6-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240802135326.25303-1-ansuelsmth@gmail.com>
 References: <20240802135326.25303-1-ansuelsmth@gmail.com>
@@ -99,31 +98,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix wrong clock definition for spi2 node as they reference spi0 clock
-instead of spi2.
+Add missing clock for spi1 node. Clocks taken from upstream clock
+definition and clock mux.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- arch/arm/dts/mt7981.dtsi | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ arch/arm/dts/mt7981.dtsi | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
 diff --git a/arch/arm/dts/mt7981.dtsi b/arch/arm/dts/mt7981.dtsi
-index 1056667ba65..131adc00a56 100644
+index 131adc00a56..d80eceb8d4c 100644
 --- a/arch/arm/dts/mt7981.dtsi
 +++ b/arch/arm/dts/mt7981.dtsi
-@@ -286,10 +286,10 @@
- 	spi2: spi@11009000 {
+@@ -280,6 +280,13 @@
  		compatible = "mediatek,ipm-spi";
- 		reg = <0x11009000 0x100>;
--		clocks = <&infracfg_ao CK_INFRA_SPI0_CK>,
-+		clocks = <&infracfg_ao CK_INFRA_SPI2_CK>,
- 			 <&topckgen CK_TOP_SPI_SEL>;
- 		assigned-clocks = <&topckgen CK_TOP_SPI_SEL>,
--				  <&infracfg CK_INFRA_SPI0_SEL>;
-+				  <&infracfg CK_INFRA_SPI2_SEL>;
- 		assigned-clock-parents = <&topckgen CK_TOP_CB_M_D2>,
- 					 <&topckgen CK_INFRA_ISPI0>;
- 		clock-names = "sel-clk", "spi-clk";
+ 		reg = <0x1100b000 0x100>;
+ 		interrupts = <GIC_SPI 141 IRQ_TYPE_LEVEL_HIGH>;
++		clocks = <&infracfg_ao CK_INFRA_SPI1_CK>,
++			 <&topckgen CK_TOP_SPIM_MST_SEL>;
++		assigned-clocks = <&topckgen CK_TOP_SPIM_MST_SEL>,
++				  <&infracfg CK_INFRA_SPI1_SEL>;
++		assigned-clock-parents = <&topckgen CK_TOP_CB_M_D2>,
++					 <&topckgen CK_INFRA_ISPI1>;
++		clock-names = "sel-clk", "spi-clk";
+ 		status = "disabled";
+ 	};
+ 
 -- 
 2.45.2
 
