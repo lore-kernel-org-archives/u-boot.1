@@ -4,48 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D961FC3DA64
-	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 01:55:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 409C0C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  2 Aug 2024 02:16:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF1CC886E6;
-	Fri,  2 Aug 2024 03:55:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+	by phobos.denx.de (Postfix) with ESMTP id 91F24886B5;
+	Fri,  2 Aug 2024 04:16:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 5187088717; Fri,  2 Aug 2024 03:55:19 +0200 (CEST)
-Received: from smtpbguseast3.qq.com (smtpbguseast3.qq.com [54.243.244.52])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D0CD8863E
- for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 03:55:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
-X-QQ-mid: bizesmtp78t1722563667tl7f01eg
-X-QQ-Originating-IP: HrdY/nfQImBKwNdSP6dl4p7RL2ma8GTxMjztSBPGBLA=
-Received: from [192.168.159.131] ( [106.150.157.243])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Fri, 02 Aug 2024 09:54:25 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 18285278815738417028
-Message-ID: <136B826B50004A39+ea8c295c-7877-4fc4-9912-3b35da605b8c@radxa.com>
-Date: Fri, 2 Aug 2024 10:54:24 +0900
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P577hm29";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 748BA88717; Fri,  2 Aug 2024 04:16:12 +0200 (CEST)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2403588617
+ for <u-boot@lists.denx.de>; Fri,  2 Aug 2024 04:16:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-70d333d5890so7095143b3a.0
+ for <u-boot@lists.denx.de>; Thu, 01 Aug 2024 19:16:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1722564968; x=1723169768; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3d5q1oTzH0HPAljmLxbzlxuYkdvcbYxBkM3Jt90AWVQ=;
+ b=P577hm29BY/qOblVhnIWWLcGpcABjT9IODwYPsqKVGXVxThUR8iwOeBUfb2KfvXMah
+ IXegKirjsGhdpDmxEjeMVQfYmbJgEIUPg8QN+xFOKo5WOa4OUi4iI9EeQqHwo0qVpN11
+ qchTvgQps0ZNXczOZcqoubAEucawoDrH9w3b2P3Ptuc51G3/ykfxBVNKhgvuCROodN6B
+ jOIUPclhQEeAHPidIWtM5/BmQfFipfNRHV87MkmLFkJ5sS7y9chJBBLeOSZHm9a9mPee
+ MMGUD40UXG1wWYJzIjo/klMNzIjUEPlbJhWdKJn6rQ8SdVEiFMd8LP68C7FUvbo23AZT
+ TF3g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722564968; x=1723169768;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3d5q1oTzH0HPAljmLxbzlxuYkdvcbYxBkM3Jt90AWVQ=;
+ b=Q3J+ipWzFlHzMRHqo8WV7gd5t8FbS5u7BeYXYcFkSJvSUl+2prQGVg/arZPscNL8Vh
+ E1fAeQaCZxSp47B3rOtFKPEU1DoA7IATQXkFCDOeYYp+CELgyx8pXY8F1WYI5s8xjePv
+ YiojvrRQPcPbnWMzlMwomUlBfwP5QYTVZBRQTWVGnjLVI9iMF1OQGvQdNCG0ccSyHUzW
+ YUHv9UC27TI4xEsXJp1ELMrhOwCkaJYqd3vfwTaPmuAfO00Uk8oLCzCq+t6Y4KfBcUrB
+ mvAeO3E4W9mKM1TRlWdhk0NuulrFkXdEt/9Y/lISxXqspGdYzECBgI5nTX9ZbH2Emdql
+ mkpA==
+X-Gm-Message-State: AOJu0YxY5XD2e7wzEM5V/5Lod374FTB2iRR8uhydqyFkYjoKtqhxEfKP
+ QOyYSJbCMxBD60dtaLeuyXcym+sRocDnFb+RdR4707JWGDcRWkS0Diu+B0DQNSCZoqer4+vde+C
+ R5gQ5Ntj75sQRCrlbTl1Do8UxsfY=
+X-Google-Smtp-Source: AGHT+IGd0UYTgwGkvBIr/kzBJaCg+GWvAlcX7i15iek9+M1XQoDN3AeNoW0TV6xzByqYAVjsJ0tAvXsmy9mgOMm4m1g=
+X-Received: by 2002:a05:6a20:3d89:b0:1c2:8d49:dc33 with SMTP id
+ adf61e73a8af0-1c699681770mr2778154637.40.1722564968311; Thu, 01 Aug 2024
+ 19:16:08 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] board: rockchip: add Radxa ROCK 3 Model C
-To: Maxim Moskalets <maximmosk4@gmail.com>, trini@konsulko.com,
- u-boot@lists.denx.de, sjg@chromium.org
-Cc: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>,
- Jonas Karlman <jonas@kwiboo.se>
-References: <20240722105623.74606-1-Maxim.Moskalets@kaspersky.com>
-Content-Language: en-US
-From: FUKAUMI Naoki <naoki@radxa.com>
-In-Reply-To: <20240722105623.74606-1-Maxim.Moskalets@kaspersky.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtp:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+References: <20240728202501.3204905-1-paulk@sys-base.io>
+ <20240728202501.3204905-2-paulk@sys-base.io>
+In-Reply-To: <20240728202501.3204905-2-paulk@sys-base.io>
+From: Adam Ford <aford173@gmail.com>
+Date: Thu, 1 Aug 2024 21:15:57 -0500
+Message-ID: <CAHCN7xKER6LtOw5oOT3evjrpAPkwz1oKBEkwp+vEPXpzzm20KQ@mail.gmail.com>
+Subject: Re: [PATCH 01/12] omap3: Define common SPL text base in Kconfig
+ instead of defconfigs
+To: Paul Kocialkowski <paulk@sys-base.io>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Sjoerd Simons <sjoerd.simons@collabora.co.uk>, 
+ Govindaraji Sivanantham <Govindaraji.Sivanantham@in.bosch.com>, 
+ Hiremath Gireesh <Gireesh.Hiremath@in.bosch.com>,
+ "Andrew F . Davis" <afd@ti.com>, 
+ =?UTF-8?Q?Javier_Mart=C3=ADnez_Canillas?= <javier@dowhile0.org>, 
+ Felix Brack <fb@ltec.ch>, Heiko Schocher <hs@denx.de>, 
+ Enric Balletbo i Serra <enric.balletbo@collabora.com>, 
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>, 
+ Marcin Niestroj <m.niestroj@grinn-global.com>,
+ Nikita Kiryanov <nikita@compulab.co.il>, 
+ Thomas Weber <weber@corscience.de>, Enrico Leto <enrico.leto@siemens.com>, 
+ "Derald D . Woods" <woods.technical@gmail.com>, 
+ "Matwey V . Kornilov" <matwey.kornilov@gmail.com>, Niel Fourie <lusus@denx.de>,
+ Parthiban Nallathambi <parthiban@linumiz.com>,
+ Paul Kocialkowski <contact@paulk.fr>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,229 +105,160 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Sun, Jul 28, 2024 at 3:25=E2=80=AFPM Paul Kocialkowski <paulk@sys-base.i=
+o> wrote:
+>
+> From: Paul Kocialkowski <contact@paulk.fr>
+>
+> The SPL text base was defined to the same value in each OMAP3 board
+> defconfig. Move the common definition to the Kconfig option
+> declaration instead.
 
-On 7/22/24 19:56, Maxim Moskalets wrote:
-> Based on rock-3a-rk3568_defconfig.
-> Tested on v1.31 revision.
-> 
-> Board Specifications:
-> - Rockchip RK3566
-> - 1/2/4GB LPDDR4 2112MT/s
-> - eMMC socket
-> - uSD card slot
-> - M.2 2230 Connector
-> - GbE LAN with POE
-> - 3.5mm jack with mic
-> - HDMI 2.0, MIPI DSI/CSI
-> - USB 3.0 Host/OTG, USB 2.0 Host
-> - 40-pin GPIO expansion ports
-> 
-> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
-> Suggested-by: Jonas Karlman <jonas@kwiboo.se>
-> Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+Thanks for doing this.
+>
+> Signed-off-by: Paul Kocialkowski <contact@paulk.fr>
+
+For the series,
+
+Tested-by: Adam Ford <aford173@gmail.com> #am3517-evm
+
 > ---
-> v4:
-> 	fixed typo in commit-msg
-> 	moved maintainers record to file for rk3568 boards
-> 	renamed from ROCK 3 Model C to ROCK3C
-> v3:
-> 	add suggested by Jonas Karlman <jonas@kwiboo.se> in
-> 	https://lore.kernel.org/all/bbb81dd1-e318-423d-8258-db7556ce6850@kwiboo.se/
-> v2:
-> 	rebase to updated upstream dts
-> ---
->   arch/arm/dts/rk3566-rock-3c-u-boot.dtsi | 10 +++
->   board/rockchip/evb_rk3568/MAINTAINERS   |  7 ++
->   configs/rock-3c-rk3566_defconfig        | 97 +++++++++++++++++++++++++
->   doc/board/rockchip/rockchip.rst         |  1 +
->   4 files changed, 115 insertions(+)
->   create mode 100644 arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
->   create mode 100644 configs/rock-3c-rk3566_defconfig
-> 
-> diff --git a/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi b/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
-> new file mode 100644
-> index 00000000000..fd7f5367b75
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
-> @@ -0,0 +1,10 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +
-> +#include "rk356x-u-boot.dtsi"
-> +
-> +&sfc {
-> +	flash@0 {
-> +		bootph-pre-ram;
-> +		bootph-some-ram;
-> +	};
-> +};
-> diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/evb_rk3568/MAINTAINERS
-> index e5b0986ead9..ba4884db8e1 100644
-> --- a/board/rockchip/evb_rk3568/MAINTAINERS
-> +++ b/board/rockchip/evb_rk3568/MAINTAINERS
-> @@ -69,3 +69,10 @@ S:	Maintained
->   F:	configs/rock-3a-rk3568_defconfig
->   F:	arch/arm/dts/rk3568-rock-3a.dts
->   F:	arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> +
-> +ROCK-3C
-> +M:	Jonas Karlman <jonas@kwiboo.se>
-> +M:	Maxim Moskalets <maximmosk4@gmail.com>
-> +S:	Maintained
-> +F:	arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
-> +F:	configs/rock-3c-rk3566_defconfig
-> diff --git a/configs/rock-3c-rk3566_defconfig b/configs/rock-3c-rk3566_defconfig
-> new file mode 100644
-> index 00000000000..f44b202c8c3
-> --- /dev/null
-> +++ b/configs/rock-3c-rk3566_defconfig
-> @@ -0,0 +1,97 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_SF_DEFAULT_SPEED=24000000
-> +CONFIG_SF_DEFAULT_MODE=0x2000
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-rock-3c"
-> +CONFIG_ROCKCHIP_RK3568=y
-> +CONFIG_ROCKCHIP_SPI_IMAGE=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_DEBUG_UART_BASE=0xFE660000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
-> +CONFIG_SPL_SPI=y
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_PCI=y
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_AHCI=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-rock-3c.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_SPI_LOAD=y
-> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
-> +CONFIG_SPL_ATF=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PCI=y
-> +CONFIG_CMD_POWEROFF=y
-> +CONFIG_CMD_USB=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_PMIC=y
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_SCSI_AHCI=y
-> +CONFIG_AHCI_PCI=y
-> +CONFIG_SPL_CLK=y
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_LED=y
-> +CONFIG_LED_GPIO=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_SF_DEFAULT_BUS=4
-> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-> +CONFIG_SPI_FLASH_GIGADEVICE=y
-> +CONFIG_SPI_FLASH_MACRONIX=y
-> +CONFIG_SPI_FLASH_WINBOND=y
-> +CONFIG_SPI_FLASH_XTX=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-> +CONFIG_NVME_PCI=y
-> +CONFIG_PCIE_DW_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_PMIC_RK8XX=y
-> +CONFIG_REGULATOR_RK8XX=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_SCSI=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_ROCKCHIP_SFC=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_ERRNO_STR=y
-
-
-since USB Type-A OTG port is peripheral mode, you can enable USB gadget 
-functions. could you merge following patch?
-
-diff --git a/configs/rock-3c-rk3566_defconfig 
-b/configs/rock-3c-rk3566_defconfig
-index f44b202c8c3..707088657fc 100644
---- a/configs/rock-3c-rk3566_defconfig
-+++ b/configs/rock-3c-rk3566_defconfig
-@@ -37,6 +37,8 @@ CONFIG_CMD_MMC=y
-  CONFIG_CMD_PCI=y
-  CONFIG_CMD_POWEROFF=y
-  CONFIG_CMD_USB=y
-+CONFIG_CMD_ROCKUSB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-  # CONFIG_CMD_SETEXPR is not set
-  CONFIG_CMD_PMIC=y
-  CONFIG_CMD_REGULATOR=y
-@@ -51,6 +53,7 @@ CONFIG_SPL_SYSCON=y
-  CONFIG_SCSI_AHCI=y
-  CONFIG_AHCI_PCI=y
-  CONFIG_SPL_CLK=y
-+# CONFIG_USB_FUNCTION_FASTBOOT is not set
-  CONFIG_ROCKCHIP_GPIO=y
-  CONFIG_SYS_I2C_ROCKCHIP=y
-  CONFIG_LED=y
-@@ -94,4 +97,7 @@ CONFIG_USB_OHCI_HCD=y
-  CONFIG_USB_OHCI_GENERIC=y
-  CONFIG_USB_DWC3=y
-  CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_USB_FUNCTION_ROCKUSB=y
-  CONFIG_ERRNO_STR=y
-
---
-FUKAUMI Naoki
-Radxa Computer (Shenzhen) Co., Ltd.
-
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index bedc52e03e2..60357af6caa 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -105,6 +105,7 @@ List of mainline supported Rockchip boards:
->        - Pine64 SOQuartz on Model A (soquartz-model-a-rk3566)
->        - Powkiddy X55 (powkiddy-x55-rk3566)
->        - Radxa CM3 IO Board (radxa-cm3-io-rk3566)
-> +     - Radxa ROCK 3C (rock-3c-rk3566)
->   
->   * rk3568
->        - Rockchip Evb-RK3568 (evb-rk3568)
+>  common/spl/Kconfig                   | 1 +
+>  configs/am3517_evm_defconfig         | 1 -
+>  configs/devkit8000_defconfig         | 1 -
+>  configs/igep00x0_defconfig           | 1 -
+>  configs/omap35_logic_defconfig       | 1 -
+>  configs/omap35_logic_somlv_defconfig | 1 -
+>  configs/omap3_evm_defconfig          | 1 -
+>  configs/omap3_logic_defconfig        | 1 -
+>  configs/omap3_logic_somlv_defconfig  | 1 -
+>  configs/sniper_defconfig             | 1 -
+>  10 files changed, 1 insertion(+), 9 deletions(-)
+>
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> index 6f56ca911c1e..6fc97f4ccbd8 100644
+> --- a/common/spl/Kconfig
+> +++ b/common/spl/Kconfig
+> @@ -261,6 +261,7 @@ config SPL_LDSCRIPT
+>
+>  config SPL_TEXT_BASE
+>         hex "SPL Text Base"
+> +       default 0x40200000 if OMAP34XX
+>         default 0x402F4000 if AM43XX
+>         default 0x402F0400 if AM33XX
+>         default 0x40301350 if OMAP54XX
+> diff --git a/configs/am3517_evm_defconfig b/configs/am3517_evm_defconfig
+> index 3236f1dd672f..129ffa28d272 100644
+> --- a/configs/am3517_evm_defconfig
+> +++ b/configs/am3517_evm_defconfig
+> @@ -10,7 +10,6 @@ CONFIG_ENV_SOURCE_FILE=3D"am3517evm"
+>  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x4020ff00
+>  CONFIG_DEFAULT_DEVICE_TREE=3D"ti/omap/am3517-evm"
+> -CONFIG_SPL_TEXT_BASE=3D0x40200000
+>  CONFIG_TARGET_AM3517_EVM=3Dy
+>  CONFIG_EMIF4=3Dy
+>  CONFIG_SYS_MONITOR_LEN=3D262144
+> diff --git a/configs/devkit8000_defconfig b/configs/devkit8000_defconfig
+> index 7653fbbe7e5a..db6e9386cf5f 100644
+> --- a/configs/devkit8000_defconfig
+> +++ b/configs/devkit8000_defconfig
+> @@ -7,7 +7,6 @@ CONFIG_NR_DRAM_BANKS=3D2
+>  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x4020ff00
+>  CONFIG_DEFAULT_DEVICE_TREE=3D"omap3-devkit8000"
+> -CONFIG_SPL_TEXT_BASE=3D0x40200000
+>  CONFIG_TARGET_DEVKIT8000=3Dy
+>  CONFIG_SYS_MONITOR_LEN=3D262144
+>  CONFIG_SPL_SYS_MALLOC_F_LEN=3D0x400
+> diff --git a/configs/igep00x0_defconfig b/configs/igep00x0_defconfig
+> index 473891607b0f..90ef2635c899 100644
+> --- a/configs/igep00x0_defconfig
+> +++ b/configs/igep00x0_defconfig
+> @@ -9,7 +9,6 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x4020ff00
+>  CONFIG_ENV_SIZE=3D0x8000
+>  CONFIG_DEFAULT_DEVICE_TREE=3D"ti/omap/omap3-igep0020"
+> -CONFIG_SPL_TEXT_BASE=3D0x40200000
+>  CONFIG_TARGET_OMAP3_IGEP00X0=3Dy
+>  CONFIG_SYS_MONITOR_LEN=3D262144
+>  CONFIG_SPL_SYS_MALLOC_F_LEN=3D0x400
+> diff --git a/configs/omap35_logic_defconfig b/configs/omap35_logic_defcon=
+fig
+> index 23b2e503385d..3b66af079c59 100644
+> --- a/configs/omap35_logic_defconfig
+> +++ b/configs/omap35_logic_defconfig
+> @@ -10,7 +10,6 @@ CONFIG_NR_DRAM_BANKS=3D2
+>  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x4020ff00
+>  CONFIG_DEFAULT_DEVICE_TREE=3D"ti/omap/logicpd-torpedo-35xx-devkit"
+> -CONFIG_SPL_TEXT_BASE=3D0x40200000
+>  CONFIG_TARGET_OMAP3_LOGIC=3Dy
+>  # CONFIG_SPL_OMAP3_ID_NAND is not set
+>  CONFIG_SYS_MONITOR_LEN=3D262144
+> diff --git a/configs/omap35_logic_somlv_defconfig b/configs/omap35_logic_=
+somlv_defconfig
+> index a5f242ff40cf..1b1d3dcfb203 100644
+> --- a/configs/omap35_logic_somlv_defconfig
+> +++ b/configs/omap35_logic_somlv_defconfig
+> @@ -10,7 +10,6 @@ CONFIG_NR_DRAM_BANKS=3D2
+>  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x4020ff00
+>  CONFIG_DEFAULT_DEVICE_TREE=3D"ti/omap/logicpd-som-lv-35xx-devkit"
+> -CONFIG_SPL_TEXT_BASE=3D0x40200000
+>  CONFIG_TARGET_OMAP3_LOGIC=3Dy
+>  # CONFIG_SPL_OMAP3_ID_NAND is not set
+>  CONFIG_SYS_MONITOR_LEN=3D262144
+> diff --git a/configs/omap3_evm_defconfig b/configs/omap3_evm_defconfig
+> index 3c8d974fbd09..4ccb9b65c8bb 100644
+> --- a/configs/omap3_evm_defconfig
+> +++ b/configs/omap3_evm_defconfig
+> @@ -7,7 +7,6 @@ CONFIG_NR_DRAM_BANKS=3D2
+>  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x4020ff00
+>  CONFIG_DEFAULT_DEVICE_TREE=3D"omap3-evm"
+> -CONFIG_SPL_TEXT_BASE=3D0x40200000
+>  CONFIG_TARGET_OMAP3_EVM=3Dy
+>  CONFIG_SYS_MONITOR_LEN=3D262144
+>  CONFIG_SPL_SYS_MALLOC_F_LEN=3D0x400
+> diff --git a/configs/omap3_logic_defconfig b/configs/omap3_logic_defconfi=
+g
+> index d081d4e0fb46..1fa5873a42d5 100644
+> --- a/configs/omap3_logic_defconfig
+> +++ b/configs/omap3_logic_defconfig
+> @@ -10,7 +10,6 @@ CONFIG_NR_DRAM_BANKS=3D2
+>  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x4020ff00
+>  CONFIG_DEFAULT_DEVICE_TREE=3D"ti/omap/logicpd-torpedo-37xx-devkit"
+> -CONFIG_SPL_TEXT_BASE=3D0x40200000
+>  CONFIG_TARGET_OMAP3_LOGIC=3Dy
+>  # CONFIG_SPL_OMAP3_ID_NAND is not set
+>  CONFIG_SYS_MONITOR_LEN=3D262144
+> diff --git a/configs/omap3_logic_somlv_defconfig b/configs/omap3_logic_so=
+mlv_defconfig
+> index 68e89d245eee..642d2121ceda 100644
+> --- a/configs/omap3_logic_somlv_defconfig
+> +++ b/configs/omap3_logic_somlv_defconfig
+> @@ -10,7 +10,6 @@ CONFIG_NR_DRAM_BANKS=3D2
+>  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x4020ff00
+>  CONFIG_DEFAULT_DEVICE_TREE=3D"ti/omap/logicpd-som-lv-37xx-devkit"
+> -CONFIG_SPL_TEXT_BASE=3D0x40200000
+>  CONFIG_TARGET_OMAP3_LOGIC=3Dy
+>  # CONFIG_SPL_OMAP3_ID_NAND is not set
+>  CONFIG_SYS_MONITOR_LEN=3D262144
+> diff --git a/configs/sniper_defconfig b/configs/sniper_defconfig
+> index 0243b15f31ce..72634db607bf 100644
+> --- a/configs/sniper_defconfig
+> +++ b/configs/sniper_defconfig
+> @@ -7,7 +7,6 @@ CONFIG_SYS_MALLOC_F_LEN=3D0x400
+>  CONFIG_NR_DRAM_BANKS=3D2
+>  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+>  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x4020ff00
+> -CONFIG_SPL_TEXT_BASE=3D0x40200000
+>  CONFIG_TARGET_SNIPER=3Dy
+>  CONFIG_SPL_STACK=3D0x4020fffc
+>  CONFIG_SPL_BSS_START_ADDR=3D0x80000000
+> --
+> 2.45.2
+>
