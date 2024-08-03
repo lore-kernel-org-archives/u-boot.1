@@ -4,83 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FC6CC3DA4A
-	for <u-boot@archiver.kernel.org>; Sat,  3 Aug 2024 11:14:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8765CC3DA4A
+	for <u-boot@archiver.kernel.org>; Sat,  3 Aug 2024 12:42:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54A9388CCA;
-	Sat,  3 Aug 2024 13:13:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BA6E488753;
+	Sat,  3 Aug 2024 14:42:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GYQ8JOIP";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="XyabK2uw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6C8288CD1; Sat,  3 Aug 2024 13:13:13 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EF1DF88C56; Sat,  3 Aug 2024 14:42:09 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED4FF88C45
- for <u-boot@lists.denx.de>; Sat,  3 Aug 2024 13:13:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E2AE188702
+ for <u-boot@lists.denx.de>; Sat,  3 Aug 2024 14:42:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3683f56b9bdso4636161f8f.1
- for <u-boot@lists.denx.de>; Sat, 03 Aug 2024 04:13:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722683591; x=1723288391; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=lfH4aIp2Pym1F7OWELDXTty+Eh/EwM5/c+LsHcajr/k=;
- b=GYQ8JOIPOcfCUb7OFGOsJao9zhNc8OGdPLar6ZZtgeM87v8Qm1bgqKe2fwyYdw0fz9
- t+x6qZhFMdKW2dUC2bkEn4GBRqo07qgwfIYrHM0Z+dkzVlLsSqUEIu0lFj1Q6ZMnK6WT
- U0rvSCqHxR1KtoYNvPkyWdWmzPg3SJxmhbBZAE+9fCCxXig5Q+UwRkPT0ypxkV5TyWQm
- IDIJpEs47MZMhogoF7FWIdfKdzFG/+erPHRFAPAdnyEtgCzjZT2Uf+knC5cu0fxnyNQt
- VOQTakZNmTL3kVOXRUM5XoZT3WOHkiHyotsc/Hwfz7ugloTZJUZ3CccnSK4vdjeibwwz
- Y6og==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722683591; x=1723288391;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lfH4aIp2Pym1F7OWELDXTty+Eh/EwM5/c+LsHcajr/k=;
- b=auVWMbtT29K1k157Bx/bn9MJFTwEil3IuXQeKu/5RwMxj1SuLaJffDiaorYiNYtyVI
- aUEcz2bMj2jTm7SEOSNmtKGeAHuCmgsowovJFkVaT1wKS8ekV2tF+NaXZsCPfWQmnDuJ
- IIUEylzX3MD+SMDKMMcylx1c6VtcLxWIDwsitioCcO/3n1aPHMd9kgzrpzVdrk5W7Zeq
- lz7Du1HyG48mh63GSALS/OF2HifOQ+GZ1jWzdjq31atqD2xbVTTkRm3EZTTWxvgxdG/8
- vHUjDSY8yZUFxxclXm+wfct+zz4ssv+G0LVBbk6sPlF7HtOQOc98IjkCi29d35RHiMs8
- QRJQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUgzWyl1FFCQSa7Wl1P/xomoNHf4fPc+YBdnSfjzftedbkXDsVIF525k9e9nc86N/Fi35mvsDEpkNo5YYD6pMbo+eFM9w==
-X-Gm-Message-State: AOJu0Yzl8sHdKDr5dzddW5/aevny4ygR/I3PQ67BLw92BpIsTfsLSs60
- 2NTOD5gSc0GeEWNNM1KWINsERxw12TYsZzcgZKOelwHECIohI0a+
-X-Google-Smtp-Source: AGHT+IEhC6WZWZm4QILUt8tE6BRY+XN41LOxs/Z1De0E3jf4vaX8AUrbGdkzyku+DQZ5hU7FMtSytQ==
-X-Received: by 2002:a05:6000:124c:b0:360:7971:7e2c with SMTP id
- ffacd0b85a97d-36bbc194918mr4166537f8f.54.1722683591298; 
- Sat, 03 Aug 2024 04:13:11 -0700 (PDT)
-Received: from localhost.localdomain
- (host-87-6-196-30.retail.telecomitalia.it. [87.6.196.30])
- by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-428e6d648a0sm63835655e9.10.2024.08.03.04.13.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 03 Aug 2024 04:13:11 -0700 (PDT)
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
- u-boot@lists.denx.de
-Subject: [PATCH v2 8/8] clk: mediatek: mt7622: add missing A1/2SYS clock ID
-Date: Sat,  3 Aug 2024 10:43:26 +0200
-Message-ID: <20240803084329.1688-9-ansuelsmth@gmail.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=c82d=PD=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1722688919;
+ bh=cvJFYyvvnWrypR+HIy2R/9ocGvViAmudKS7NVk5XDoQ=;
+ b=XyabK2uw+PVZJwq2dP5QizgAyBYEG1BjShbi09VIBTQnIP9Cjqcnsib4cmcDI5PPdjWn/x+AX
+ 7teyZ8Ws94EzUAr/Hf0xt0k2nzGynf6GA3Qysb9UCnIKcMsLMKSK4n/ePI9ZqvVfX6ibyc1CFIv
+ k6UO89I+ZbW1YXkDqqOdFkqtM4cw7ivKIuCdrjm0yOleh/rP+1g1u9y6fvLDvFPTZ+3qByURUXb
+ ZpwEOIO/Gxpmfl7wyWXOUcfyoAkzLV0Byhf9wTfuNkCdPhbay04aAczfV6WjbwEngANckmMjA44
+ NNrt7F8soFRsirFjDVTgMx9P/5l9cUKba2sxvpKS1F4w==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 0/2] bootstage: Fix unstash and sorting of records
+Date: Sat,  3 Aug 2024 12:41:43 +0000
+Message-ID: <20240803124149.2916030-1-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240803084329.1688-1-ansuelsmth@gmail.com>
-References: <20240803084329.1688-1-ansuelsmth@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66ae2592c2f14e5c6aed0255
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,31 +66,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add missing A1/2SYS clock ID just as a reference for OF_UPSTREAM
-support. These clocks are not defined and are not usable as current
-clock topckgen OPs doesn't support gates.
+This series fixes two issues with bootstage observed trying to measure
+boot times on my Rockchip aarch64 boards.
 
-These special node won't ever be used by uboot hence just add them for
-reference.
+First patch fixes a regression in v2024.10-rc1 where bootstage records
+from SPL no longer is unstashed.
 
-Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
----
- include/dt-bindings/clock/mt7622-clk.h | 2 ++
- 1 file changed, 2 insertions(+)
+Second patch change to not sort bootstage records in order to show
+correct elapsed time when TF-A reset the timer counter.
 
-diff --git a/include/dt-bindings/clock/mt7622-clk.h b/include/dt-bindings/clock/mt7622-clk.h
-index cd11a1c901e..cdbcaef76eb 100644
---- a/include/dt-bindings/clock/mt7622-clk.h
-+++ b/include/dt-bindings/clock/mt7622-clk.h
-@@ -117,6 +117,8 @@
- #define CLK_TOP_I2S1_MCK_DIV_PD		104
- #define CLK_TOP_I2S2_MCK_DIV_PD		105
- #define CLK_TOP_I2S3_MCK_DIV_PD		106
-+#define CLK_TOP_A1SYS_HP_DIV_PD		107
-+#define CLK_TOP_A2SYS_HP_DIV_PD		108
- 
- /* INFRACFG */
- 
+Tested on a few Rockchip boards with:
+
+  CONFIG_BOOTSTAGE=y
+  CONFIG_CMD_BOOTSTAGE=y
+  CONFIG_BOOTSTAGE_RECORD_COUNT=20
+  CONFIG_SPL_BOOTSTAGE=y
+  CONFIG_SPL_BOOTSTAGE_RECORD_COUNT=20
+  CONFIG_BOOTSTAGE_STASH_ADDR=0x3800000
+  CONFIG_BOOTSTAGE_STASH_SIZE=0x10000
+  CONFIG_BOOTSTAGE_STASH=y
+  CONFIG_BOOTSTAGE_REPORT=y
+  CONFIG_BOOTDELAY=-1
+
+Jonas Karlman (2):
+  bootstage: Fix unstash of records from SPL
+  bootstage: Do not sort records
+
+ common/board_f.c   |  2 +-
+ common/bootstage.c | 12 ++----------
+ 2 files changed, 3 insertions(+), 11 deletions(-)
+
 -- 
 2.45.2
 
