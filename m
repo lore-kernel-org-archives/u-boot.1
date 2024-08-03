@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4CE1C3DA4A
-	for <u-boot@archiver.kernel.org>; Sat,  3 Aug 2024 16:16:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4D5BC49EA1
+	for <u-boot@archiver.kernel.org>; Sat,  3 Aug 2024 16:16:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25C0A88CE7;
+	by phobos.denx.de (Postfix) with ESMTP id 9A7C388CED;
 	Sat,  3 Aug 2024 18:15:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1722701720;
-	bh=9dkP/xwsyM7sLm9YxPJu+de83u4Igqv3BuJ1ynawShA=;
+	bh=D5efXucQyf09qCXw45VUq0QJkOZaX2ctRAM3gZ8gKV8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=e4++8uQ4iMJlsRVU7kgMNTsLi6a7J1XX5Z3sVLFIFQLYRtsyQU+GHAURWYNEdrVWx
-	 zwho6ctMRJfwDVougTnj5CsGq92HmY4bYnB+cwUGpJF+5k1F9CYRjKOLMmidG5USYj
-	 dK7ussX0a2NZSuBXuoNYMqKv0JnRKnFEO97FpsxlztDfh82mQ7ptSpx7V0dJMVWQ5b
-	 n4BTiN8qpU8IRKxLW5Nfz0cnvri8Nb2WiJFIzKHU9G62yY/TangcoI09zWOoScbaIj
-	 Bq0+0RMlx+iO08drUlVDyHnlDcMhaI9GxPyi+VHGKPPO490FDrSnzdxfxVMf4S4Eyn
-	 t7uVbaqxpLnYA==
+	b=YGLjKOgQIJPtlrzMv7ZyO+oUs6WSpGFojVC4NngF+MyzntIzJ/cNRO3n6wbYjdcQE
+	 wMnyeFk9b6h8NQT9wN1STxHxCOQDdDqAcVVGKubVFMt6qyHBTUk7Fujb60TC7HmpJO
+	 GbeosvJksuL9GCyCxWp5FBC5UX7RnQkHSUYzepr5Ejutibnog1/VNEqPVU0bsipnV1
+	 n3JH96yHkz3wsKyBUfXh3KX+MiEX0SXdR2HZpTolt0ApNY64wJDtH4k/FxqAXk/rmz
+	 qg0aQvOWJlLZ0TG1ztTndRii1SCKbKyJlvrrnF4mbLwzA7YDImbRRYC2LDppez25p5
+	 ghqwF8bGkHwcw==
 Received: from crub.agik.hopto.org (p54833c06.dip0.t-ipconnect.de
  [84.131.60.6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: agust@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 4031088CA8;
+ by phobos.denx.de (Postfix) with ESMTPSA id 76EA988C8F;
  Sat,  3 Aug 2024 18:15:16 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1722701716;
- bh=9dkP/xwsyM7sLm9YxPJu+de83u4Igqv3BuJ1ynawShA=;
+ bh=D5efXucQyf09qCXw45VUq0QJkOZaX2ctRAM3gZ8gKV8=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ZTDbNRD89qDYKqqKTdd+7BJbgfoc6o+XhkHQDZ3KBud3ZtR5Apw3j8UiVg01UzS2O
- +ImGf1dOR2oxENAtsLp5My4I6W7yqvwdZmbumhndHZgsR5it1/T3Ibpo1zZeqdTGVw
- grIP9KeKZP079PzUUP1PFRZVn6HmIFRXb6yDYRdz/pV+nkomBhh3pdXW6YrjQGGs5M
- vuRVZ8hI48id6jHNAWGHqq2+WE/xGxPUhUpdwcbmbrbGJDfX9eG5JC3SIXXvgW3eqH
- 2150an3VU0BaIIRuZamYaGwqY5vI1x0H+YdukTQli9wxy9F39uQJ8vj34ZHkODDZor
- pBoLOXVteU6OA==
+ b=jLZOy8g1EpXKVKJuVsMvQwM/fagk3tjnbOA/7RVXRhXxB8wejGyRNkJirunsWcmC5
+ IVIdE6MENGu+JZrR1taCEGFRClzrmj9tW3j3zZ3NE+pKxi5rrkAUaKXi3uQq+WVina
+ Yhaabm6H3EaXweD+NFyEQ/rMP9dWsF6SilfnNDQfAcr5n8+EVcpRFJseSMIoXE16Tm
+ IvR4DkVJrAuKloFV8gsgpGlGNsua+U5ar+teGZ7Oz0z8kSZmrnHOfjpvteuW3WmcQ7
+ 2j+X37DWYZ7tbiPe7GP9097ALsx5AU3rM3bIebjgZT8z/WvXmOXKuBzOGtFYWRxtly
+ vFs/ROUrKaxCA==
 From: Anatolij Gustschin <agust@denx.de>
 To: u-boot@lists.denx.de
-Cc: Paul Kocialkowski <contact@paulk.fr>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 09/11] board: sniper: convert to DM_I2C
-Date: Sat,  3 Aug 2024 18:15:11 +0200
-Message-Id: <20240803161513.486062-9-agust@denx.de>
+Cc: Nikita Kiryanov <nikita@compulab.co.il>, Fabio Estevam <festevam@denx.de>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 10/11] board: cm_fx6: convert to DM_I2C
+Date: Sat,  3 Aug 2024 18:15:12 +0200
+Message-Id: <20240803161513.486062-10-agust@denx.de>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240803161513.486062-1-agust@denx.de>
 References: <20240803161513.486062-1-agust@denx.de>
@@ -68,60 +68,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Conversion to DM_I2C is mandatory, enable DM_I2C
-to disable board removal warning. Also enable
-OF_UPSTREAM since we do not have a default device
-tree.
+Conversion to DM_I2C is mandatory, enable DM_I2C to fix board
+removal warning. Convert EEPROM access to use DM_I2C API.
 
 Signed-off-by: Anatolij Gustschin <agust@denx.de>
 ---
-Cc: Paul Kocialkowski <contact@paulk.fr>
+Cc: Nikita Kiryanov <nikita@compulab.co.il>
+Cc: Fabio Estevam <festevam@denx.de>
 Cc: Tom Rini <trini@konsulko.com>
 ---
- arch/arm/mach-omap2/omap3/Kconfig | 1 +
- configs/sniper_defconfig          | 6 ++++--
- 2 files changed, 5 insertions(+), 2 deletions(-)
+ board/compulab/cm_fx6/cm_fx6.c |  3 ++-
+ board/compulab/common/Makefile |  2 +-
+ board/compulab/common/eeprom.c | 14 +++++---------
+ board/compulab/common/eeprom.h |  2 +-
+ configs/cm_fx6_defconfig       |  2 +-
+ 5 files changed, 10 insertions(+), 13 deletions(-)
 
-diff --git a/arch/arm/mach-omap2/omap3/Kconfig b/arch/arm/mach-omap2/omap3/Kconfig
-index f15f44fe7d..b56e379ca1 100644
---- a/arch/arm/mach-omap2/omap3/Kconfig
-+++ b/arch/arm/mach-omap2/omap3/Kconfig
-@@ -115,6 +115,7 @@ config TARGET_SNIPER
- 	select OMAP3_GPIO_5
- 	select OMAP3_GPIO_6
- 	imply CMD_DM
-+	imply OF_UPSTREAM
+diff --git a/board/compulab/cm_fx6/cm_fx6.c b/board/compulab/cm_fx6/cm_fx6.c
+index c6d33c32cc..40047cf678 100644
+--- a/board/compulab/cm_fx6/cm_fx6.c
++++ b/board/compulab/cm_fx6/cm_fx6.c
+@@ -14,6 +14,7 @@
+ #include <env.h>
+ #include <fsl_esdhc_imx.h>
+ #include <init.h>
++#include <i2c.h>
+ #include <miiphy.h>
+ #include <mtd_node.h>
+ #include <net.h>
+@@ -256,7 +257,7 @@ static int cm_fx6_setup_one_i2c(int busnum, struct i2c_pads_info *pads)
+ {
+ 	int ret;
  
- endchoice
+-	ret = setup_i2c(busnum, CONFIG_SYS_I2C_SPEED, 0x7f, pads);
++	ret = setup_i2c(busnum, I2C_SPEED_STANDARD_RATE, 0x7f, pads);
+ 	if (ret)
+ 		printf("Warning: I2C%d setup failed: %d\n", busnum, ret);
  
-diff --git a/configs/sniper_defconfig b/configs/sniper_defconfig
-index 0243b15f31..29e783da8a 100644
---- a/configs/sniper_defconfig
-+++ b/configs/sniper_defconfig
-@@ -7,6 +7,7 @@ CONFIG_SYS_MALLOC_F_LEN=0x400
- CONFIG_NR_DRAM_BANKS=2
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
-+CONFIG_DEFAULT_DEVICE_TREE="ti/omap/omap3-sniper"
- CONFIG_SPL_TEXT_BASE=0x40200000
- CONFIG_TARGET_SNIPER=y
- CONFIG_SPL_STACK=0x4020fffc
-@@ -32,12 +33,13 @@ CONFIG_CMD_GPIO=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- # CONFIG_CMD_SETEXPR is not set
-+CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+diff --git a/board/compulab/common/Makefile b/board/compulab/common/Makefile
+index 7c8226e6e1..863b50a98e 100644
+--- a/board/compulab/common/Makefile
++++ b/board/compulab/common/Makefile
+@@ -5,5 +5,5 @@
+ # Author: Igor Grinberg <grinberg@compulab.co.il>
+ 
+ obj-y				+= common.o
+-obj-$(CONFIG_$(SPL_)SYS_I2C_LEGACY)	+= eeprom.o
++obj-$(CONFIG_$(SPL_)DM_I2C)	+= eeprom.o
+ obj-$(CONFIG_SMC911X)		+= omap3_smc911x.o
+diff --git a/board/compulab/common/eeprom.c b/board/compulab/common/eeprom.c
+index efdaf342d5..1b12d09604 100644
+--- a/board/compulab/common/eeprom.c
++++ b/board/compulab/common/eeprom.c
+@@ -34,19 +34,15 @@ static int cl_eeprom_layout; /* Implicitly LAYOUT_INVALID */
+ 
+ static int cl_eeprom_read(uint offset, uchar *buf, int len)
+ {
++	struct udevice *eeprom;
+ 	int res;
+-	unsigned int current_i2c_bus = i2c_get_bus_num();
+ 
+-	res = i2c_set_bus_num(cl_eeprom_bus);
+-	if (res < 0)
++	res = i2c_get_chip_for_busnum(cl_eeprom_bus, CONFIG_SYS_I2C_EEPROM_ADDR,
++				      CONFIG_SYS_I2C_EEPROM_ADDR_LEN, &eeprom);
++	if (res)
+ 		return res;
+ 
+-	res = i2c_read(CONFIG_SYS_I2C_EEPROM_ADDR, offset,
+-			CONFIG_SYS_I2C_EEPROM_ADDR_LEN, buf, len);
+-
+-	i2c_set_bus_num(current_i2c_bus);
+-
+-	return res;
++	return dm_i2c_read(eeprom, offset, (uint8_t *)buf, len);
+ }
+ 
+ static int cl_eeprom_setup(uint eeprom_bus)
+diff --git a/board/compulab/common/eeprom.h b/board/compulab/common/eeprom.h
+index 9bd7604a99..ca8738db76 100644
+--- a/board/compulab/common/eeprom.h
++++ b/board/compulab/common/eeprom.h
+@@ -10,7 +10,7 @@
+ #define _EEPROM_
+ #include <errno.h>
+ 
+-#if CONFIG_IS_ENABLED(SYS_I2C_LEGACY)
++#if CONFIG_IS_ENABLED(DM_I2C)
+ int cl_eeprom_read_mac_addr(uchar *buf, uint eeprom_bus);
+ u32 cl_eeprom_get_board_rev(uint eeprom_bus);
+ int cl_eeprom_get_product_name(uchar *buf, uint eeprom_bus);
+diff --git a/configs/cm_fx6_defconfig b/configs/cm_fx6_defconfig
+index 386616cc42..81a39f7073 100644
+--- a/configs/cm_fx6_defconfig
++++ b/configs/cm_fx6_defconfig
+@@ -80,7 +80,7 @@ CONFIG_BOUNCE_BUFFER=y
+ CONFIG_DWC_AHSATA=y
+ # CONFIG_DWC_AHSATA_AHCI is not set
+ CONFIG_LBA48=y
 -CONFIG_SYS_I2C_LEGACY=y
-+# CONFIG_TI_SYSC is not set
 +CONFIG_DM_I2C=y
  CONFIG_SPL_SYS_I2C_LEGACY=y
- CONFIG_SYS_I2C_SPEED=400000
- CONFIG_TWL4030_INPUT=y
- CONFIG_MMC_OMAP_HS=y
- CONFIG_CONS_INDEX=3
--CONFIG_OF_LIBFDT=y
+ CONFIG_SYS_I2C_MXC=y
+ CONFIG_SYS_MXC_I2C3_SPEED=400000
 -- 
 2.25.1
 
