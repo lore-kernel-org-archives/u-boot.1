@@ -4,44 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8E39C52D6F
-	for <u-boot@archiver.kernel.org>; Sat,  3 Aug 2024 18:55:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D433C3DA4A
+	for <u-boot@archiver.kernel.org>; Sat,  3 Aug 2024 18:56:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F5DF88CF0;
+	by phobos.denx.de (Postfix) with ESMTP id E997588CF7;
 	Sat,  3 Aug 2024 20:55:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="pek3pt/6";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kaI61OsA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66D1488C75; Sat,  3 Aug 2024 18:09:34 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 6E38B885BC; Sat,  3 Aug 2024 18:18:04 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BED188BFF
- for <u-boot@lists.denx.de>; Sat,  3 Aug 2024 18:09:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 358D388CAB
+ for <u-boot@lists.denx.de>; Sat,  3 Aug 2024 18:18:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sre@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id ACF2460ACA;
- Sat,  3 Aug 2024 16:09:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 371E2C116B1;
- Sat,  3 Aug 2024 16:09:30 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id E090160E07;
+ Sat,  3 Aug 2024 16:18:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6BE49C116B1;
+ Sat,  3 Aug 2024 16:18:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1722701370;
- bh=3XNJUG7Pn6OxUar8JNumZMpROiG/PzjA0Nx6anGUU7U=;
+ s=k20201202; t=1722701880;
+ bh=QmVaG65Mg7TUnSk+GS0vc3YhHdMJ2WKBv0jdx3R1L1g=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=pek3pt/6jih+rdGefqpVI3Xi7GHyYysB2B3lPUYqBf+n9S1rjjMglI+bgMhfsmsS6
- z6qRlntbRzUUOoVED2xNHKdzCNJDYE+Menl2XqkVhcU9BJqJbBVsfH3AD2tNR49PWO
- rjMoxgCWGlugiPZ8P4mL1MrmiIzFqyEOPHzTMILVvGsYjm2qEuTyzQPT1eQsovLuWr
- VQO7DMNIvJHfyi0d15QZH9n6CipMhCij375nrXEx5BffyPt7kYaohctf9zTEtyUlwL
- gUe3zSF2y0k/5MSK9EZgtrXb+YeWX+Ou20wd7FcHm2N5PNPKb5aqfx/tpZRC2BjY96
- tIWDKE81fvBDw==
+ b=kaI61OsADH6Hecvvvcd3uZUDE+olu56U0lvaNoTpZGi3UEZdWS8eCA20pEa5S4/Lm
+ 445Ze/yZ+gBz+scWccjEicoFbkNEn65kIAEAdFdQxG8b1L8ct3n6HCSsYUVw6g3tKh
+ z4pnrzmTv2oSRv+Pl3uLcc/Q+HJvic8ph8NXUOmzoUQIhBjMMFiQ84Fu+7XQXOgdN6
+ gbN5a+el4IBwvBEPDAzmnktWDyxOLaNY9CjPM/44Ep2HNIje5XVhNptW1DgufwYilk
+ nnE5WC7eA30FDOrnbI0QWDrMvM9TLa+9UKpYWM/8utyJOsRNALq0ltWVnblFOTOpfe
+ kwavwYUmHYv3Q==
 Received: by mercury (Postfix, from userid 1000)
- id C10621060930; Sat, 03 Aug 2024 18:09:27 +0200 (CEST)
-Date: Sat, 3 Aug 2024 18:09:27 +0200
+ id F36721060930; Sat, 03 Aug 2024 18:17:57 +0200 (CEST)
+Date: Sat, 3 Aug 2024 18:17:57 +0200
 From: Sebastian Reichel <sre@kernel.org>
 To: Jonas Karlman <jonas@kwiboo.se>
 Cc: Marek Vasut <marex@denx.de>, 
@@ -50,17 +51,16 @@ Cc: Marek Vasut <marex@denx.de>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, 
  Simon Glass <sjg@chromium.org>, Soeren Moch <smoch@web.de>,
  u-boot@lists.denx.de
-Subject: Re: [PATCH v3 4/7] board: rock5b-rk3588: enable USB-C in operating
- system
-Message-ID: <j654dnoy5yu57do2nmdssfykvnw74hayl53nlqvn5jlycr6ny2@h5pprs7sjfds>
+Subject: Re: [PATCH v3 3/7] board: rock5b-rk3588: add USB-C controller support
+Message-ID: <tr5v2aoyyytil5cgs56fi4wyqfvugkpt2yf3zkrstyawbl3xds@k7t5d2x2ting>
 References: <20240802180027.139193-1-sebastian.reichel@collabora.com>
- <20240802180027.139193-5-sebastian.reichel@collabora.com>
- <88da35e4-77d8-4360-8be2-5efa6ae0d5cf@kwiboo.se>
+ <20240802180027.139193-4-sebastian.reichel@collabora.com>
+ <354cb9d4-45f0-4dc8-909a-925423d75044@kwiboo.se>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="j4axkujm35vrojpe"
+ protocol="application/pgp-signature"; boundary="g2pxyis7yw5cd7xe"
 Content-Disposition: inline
-In-Reply-To: <88da35e4-77d8-4360-8be2-5efa6ae0d5cf@kwiboo.se>
+In-Reply-To: <354cb9d4-45f0-4dc8-909a-925423d75044@kwiboo.se>
 X-Mailman-Approved-At: Sat, 03 Aug 2024 20:55:08 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -79,106 +79,170 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---j4axkujm35vrojpe
+--g2pxyis7yw5cd7xe
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
 Hi Jonas,
 
-On Fri, Aug 02, 2024 at 11:04:05PM GMT, Jonas Karlman wrote:
-> Hi Sebastian,
->=20
+On Fri, Aug 02, 2024 at 10:42:56PM GMT, Jonas Karlman wrote:
 > On 2024-08-02 19:59, Sebastian Reichel wrote:
-> > Since older U-Boot releases do not negotiate USB PD, the kernel
-> > DT may not enable the USB-C controller by default to avoid a
-> > regression. The plan is to upstream it with 'status =3D "fail";'
-> > instead. U-Boot should then mark it as 'status =3D "okay";' if
-> > it negotiated USB PD. Currently existing upstream kernel DTs do
-> > not yet have the USB-C controller at all, so we ignore any
-> > failures.
+> > Enable support for the fusb302 USB Type-C controller.
+> >=20
+> > This will do early USB PD (power deliver) negotiation, which must happen
+> > within 5 seconds after the USB-C connector has plugged in according to
+> > the specification. It takes almost 5 seconds to go through the bootchain
+> > on Rock 5B and jump to the operating system. When the Linux initializes
+> > the fusb302 usually 20-30 seconds have gone since the device has been
+> > plugged, which is far too late. The USB PD power source reacts with a
+> > hard reset, which disables VBUS for some time. This is not a problem for
+> > a battery driven device, but Rock 5B will loose its power-supply and
+> > reset. By initializing PD in U-Boot, this can be avoided.
+> >=20
+> > Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+> > ---
+> >  board/radxa/rock5b-rk3588/Makefile        |  6 ++++
+> >  board/radxa/rock5b-rk3588/rock5b-rk3588.c | 35 +++++++++++++++++++++++
+> >  2 files changed, 41 insertions(+)
+> >  create mode 100644 board/radxa/rock5b-rk3588/Makefile
+> >  create mode 100644 board/radxa/rock5b-rk3588/rock5b-rk3588.c
+> >=20
+> > diff --git a/board/radxa/rock5b-rk3588/Makefile b/board/radxa/rock5b-rk=
+3588/Makefile
+> > new file mode 100644
+> > index 000000000000..95d813596da4
+> > --- /dev/null
+> > +++ b/board/radxa/rock5b-rk3588/Makefile
+> > @@ -0,0 +1,6 @@
+> > +# SPDX-License-Identifier:     GPL-2.0+
+> > +#
+> > +# Copyright (c) 2022 Collabora Ltd.
+> > +#
+> > +
+> > +obj-y +=3D rock5b-rk3588.o
+> > diff --git a/board/radxa/rock5b-rk3588/rock5b-rk3588.c b/board/radxa/ro=
+ck5b-rk3588/rock5b-rk3588.c
+> > new file mode 100644
+> > index 000000000000..1c17ae93c76c
+> > --- /dev/null
+> > +++ b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
+> > @@ -0,0 +1,35 @@
+> > +// SPDX-License-Identifier: GPL-2.0+
+> > +/*
+> > + * Copyright (c) 2023-2024 Collabora Ltd.
+> > + */
+> > +
+> > +#include <usb/tcpm.h>
+> > +
+> > +#ifdef CONFIG_MISC_INIT_R
+> > +int misc_init_r(void)
 >=20
-> I do not really understand why you need to upstream it this way, there
-> are plenty of other rk3588 boards with fcs,fusb302 already having status
-> "okay" that possible are affected by same USB PD issue that ROCK 5B
-> have.
+> You should not override misc_init_r() here as it will override the
+> rockchip board common misc_init_r() function that read cpuid, set serial
+> and ethernet mac address env vars.
 >=20
-> I guess you want to try and protect users that upgrade kernel DT and
-> ignore upgrading to a newer U-Boot, use vendor U-Boot or any other
-> bootloader from having possible issues with those USB PD power supplies
-> that have issues?
+> I would suggest you instead of tcpm_get() add something similar to
+>=20
+> int tcpm_probe_all()
+> {
+> 	struct udevice *dev;
+> 	struct uclass *uc;
+> 	int ret;
+>=20
+> 	ret =3D uclass_get(UCLASS_TCPM, &uc);
+> 	if (ret)
+> 		return ret;
+>=20
+> 	for (ret =3D uclass_first_device_check(UCLASS_TCPM, &dev);
+> 	     dev;
+> 	     ret =3D uclass_next_device_check(&dev)) {
+> 		if (ret)
+> 			printf("Failed to probe Type-C controller '%s' (ret=3D%d)\n",
+> 			       dev->name, ret);
+> 	}
+>=20
+> 	return 0;
+> }
+>=20
+> or if we do not care about the error message this could use
+>=20
+> 	uclass_probe_all(UCLASS_TCPM);
+>=20
+> and call it from the rockchip board common code in mach-rockchip/board.c
+> directly after the call to regulators_enable_boot_on() in board_init().
+>=20
+> Alternatively you could call following in a tcpm_post_bind()
+>=20
+> 	dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
+>=20
+> to automatically probe the device as soon as possible after all devices
+> have been bind, this is how the rockchip-io-domain driver does it.
+>=20
+> Otherwise we need to add custom board code for each board using USB PD,
+> something to avoid.
 
-Correct. Existing upstream U-Boot with new kernel would result in a
-boot loop. That's precisly why we need this U-Boot series. Since the
-Rock 5B is usually powered via USB-C and Radxa explicitly requests a
-USB-C PD power-supply almost everyone would be affected. IDK how
-other boards solve this considering U-Boot does not yet have a
-fusb302 driver. For me **all** of my power-supplies trigger a hard
-reset and thus a power-loss when booting a kernel with fusb302
-combined with an old U-Boot version not supporting fusb302.
+All of your suggestions result in any USB-PD controllers being
+probed automatically. I intentionally did not go that way, since
+probing can be quite slow depending on the remote side. For most
+power-supplies it seems to be quite fast, but I've seen a boot
+with one of the supplies being delayed by 2-3 seconds. Seems not
+nice to add this penality for a device not depending on it.
+
+Greetings,
 
 -- Sebastian
 
-> > Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
-> > ---
-> >  board/radxa/rock5b-rk3588/rock5b-rk3588.c | 11 +++++++++++
-> >  1 file changed, 11 insertions(+)
-> >=20
-> > diff --git a/board/radxa/rock5b-rk3588/rock5b-rk3588.c b/board/radxa/ro=
-ck5b-rk3588/rock5b-rk3588.c
-> > index 1c17ae93c76c..4e926ebf2cb0 100644
-> > --- a/board/radxa/rock5b-rk3588/rock5b-rk3588.c
-> > +++ b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
-> > @@ -3,6 +3,8 @@
-> >   * Copyright (c) 2023-2024 Collabora Ltd.
-> >   */
-> > =20
-> > +#include <fdtdec.h>
-> > +#include <fdt_support.h>
-> >  #include <usb/tcpm.h>
-> > =20
-> >  #ifdef CONFIG_MISC_INIT_R
-> > @@ -33,3 +35,12 @@ int misc_init_r(void)
-> >  	return 0;
-> >  }
-> >  #endif
-> > +
-> > +#ifdef CONFIG_OF_BOARD_SETUP
-> > +int ft_board_setup(void *blob, struct bd_info *bd)
-> > +{
-> > +	if (IS_ENABLED(CONFIG_MISC_INIT_R))
->=20
-> It make very little sense to check for this, it is implied for almost
-> all Rockchip boards since it is used in rockchip board common code
-> to setup serial and Ethernet mac addresses env vars.
 >=20
 > Regards,
 > Jonas
 >=20
-> > +		fdt_status_okay_by_compatible(blob, "fcs,fusb302");
+> > +{
+> > +	struct udevice *dev;
+> > +	int ret;
+> > +
+> > +	/*
+> > +	 * This will do early USB PD (power deliver) negotiation, which must
+> > +	 * happen within 5 seconds after the USB-C connector has plugged in
+> > +	 * according to the specification. It takes almost 5 seconds to go
+> > +	 * through the bootchain on Rock 5B and jump to the operating system.
+> > +	 * When the Linux initializes the fusb302 usually 20-30 seconds have
+> > +	 * gone since the device has been plugged, which is far too late.
+> > +	 *
+> > +	 * The USB PD power source reacts with a hard reset, which disables
+> > +	 * VBUS for some time. This is not a problem for a battery driven
+> > +	 * device, but Rock 5B will loose its power-supply and reset. By
+> > +	 * initializing PD in U-Boot, this can be avoided.
+> > +	 */
+> > +	ret =3D tcpm_get("usb-typec@22", &dev);
+> > +	if (ret) {
+> > +		printf("Failed to probe Type-C controller\n");
+> > +		return 0;
+> > +	}
+> > +
 > > +	return 0;
 > > +}
 > > +#endif
 >=20
 
---j4axkujm35vrojpe
+--g2pxyis7yw5cd7xe
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCgAdFiEE72YNB0Y/i3JqeVQT2O7X88g7+poFAmauVi0ACgkQ2O7X88g7
-+praRg//THqx9f4+C6xtidr+1+MZJWvt1VNG719kIiOLTpea3V5dVcBynJPbylJk
-y59FO6eFgJU8i/DKbAIDdafgmUydYb7kYhwrjTdDpqdxvNGtv98lMv3KXyn1ATKZ
-dl6iKFWQbxCeGBjiZjuYPnZPPNJd2Xo2Pdx7svdT7Fji+rtfE0/QqY8XQ08c6Sws
-PdIh3Kt8rrmR7j1LTHZuJfAPq1z48gJ5HcsS8Bu25KaFE9KCC+Wf+AVJfwdUBIOn
-OunOTyMVe771EtimP6wFDDhH4uHrp/8IrIUlOoZ/hfzw/mfibDn9pylSl7e1Ajrx
-BDuov9yonH2pZxli7G9ezLbHPkbMrjXkL+ITLeS/Xe64z/SWyocIgGIccrtnyRh4
-77njBbYSx/In60xFxX9S63lMEyf4EBLUCziueI2IZtVkrDL1q3kJJMorAqbG0yQO
-cKblL3Ut4ukTMShI9zxuNug2bwK/Z963Tbo779mURYnfOAIVsYS/rmz5GbkjL9iY
-WJFyyoQiVah2L1txWDS4vJaUm1PDTq724QyeffS1tepb8jlTU5424lFEaOrTDFvg
-/ev8dtJ0G+Bwn651BhNOnkw0SAhudx3R3gsucul3NiMz5bBoWMH/hsqZOoWGslCN
-QDgJfrODupSZ0P9SvhLCnazIDgfZ6XUhixh0fjwV19gucZU7TpM=
-=D9Uj
+iQIzBAABCgAdFiEE72YNB0Y/i3JqeVQT2O7X88g7+poFAmauWDUACgkQ2O7X88g7
++prR7g/+OFPVgllfEiPn75ROGbvFVf1hHMQKw6U/IxIX7DAm6pCTBe8dgdg0IVgz
+R47zxJMaYXKhJd1eILa+MNtxfWD5mAnMZgO4BDkUKQHbUdPHSHA1d40JNhQsCpFt
+FsbBdey5YJzW/ZOedq4xDLICjWTbUAaUAcgqVi7ABElXfLzmdZm4hJ1LlhBEfZbh
+JQ0ruprGdUx8vBJx62vpqk/bw6qc6wG008CjktjxHj91cXkOBSPhlaR3e9gxhy6e
+sBUbrw1KDmNUZ7ocpKMXxlEMV6CvWZnPHM+lM2NVuvFSgEWuMniJwbFqAQBMQdBn
+3a0F3EbORyc6bp+1Fa85Csk7pPWAo1cnckeoymxxPvdVuh4lPkdeo8YXQWCDMc1+
+HxKlJpPSfEi+OtAR+en03sw1vu3CDjR2wuNfQhubdonTuZZCEbtThQ4n63skFaVE
+mSa/S3yn7PYBs98lH+IocYEpCprXs+knJt+lyRYHKHhTwR5vFisda8T9yQfI7t/H
+nKM0cXDuCHT1975DKoTTm1vRaKNjRDlbVmDty6vk2xNaMmoQH3B2RT3WKnyv2/ii
+z4QMJoLw4Bs4IHUEngq20e4ijeJjHdgqqUezdJvbfE0+quCwEwrGAF1TP0SbuoGu
+T48S+KSWbSbV3d378gd5pIp7eUNzJ+AQsw+P/uwmvomXCuHUmuY=
+=OmQl
 -----END PGP SIGNATURE-----
 
---j4axkujm35vrojpe--
+--g2pxyis7yw5cd7xe--
