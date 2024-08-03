@@ -4,57 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72BE6C3DA4A
-	for <u-boot@archiver.kernel.org>; Sat,  3 Aug 2024 22:39:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7AD5C52D6D
+	for <u-boot@archiver.kernel.org>; Sat,  3 Aug 2024 23:33:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8809A88702;
-	Sun,  4 Aug 2024 00:39:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F1864888B4;
+	Sun,  4 Aug 2024 01:33:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=grimler.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="KwF3c6Jy";
+	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="XmPN6N2r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0CDF8862F; Sun,  4 Aug 2024 00:39:00 +0200 (CEST)
-Received: from out-182.mta0.migadu.com (out-182.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::b6])
+ id D0E06888CC; Sun,  4 Aug 2024 01:33:55 +0200 (CEST)
+Received: from out-173.mta1.migadu.com (out-173.mta1.migadu.com
+ [95.215.58.173])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5DEC88702
- for <u-boot@lists.denx.de>; Sun,  4 Aug 2024 00:38:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 94C1388861
+ for <u-boot@lists.denx.de>; Sun,  4 Aug 2024 01:33:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=grimler.se
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=henrik@grimler.se
-Date: Sun, 4 Aug 2024 00:38:54 +0200
+Date: Sun, 4 Aug 2024 01:33:50 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=grimler.se; s=key1;
- t=1722724737;
+ t=1722728033;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=B2OAZwIIAMRTL/Jt6hRpr7rGCe2v6ggiFGaVLdaOH18=;
- b=KwF3c6Jy6occ52Q7ay+VuhZAfG3/SERzv+6paMEC4wrXXMBEmvjy93QKe5v32vh2xy60Lb
- 8k2gMxCf0TnTh3LJcuO3hixqQ9nWtr0CXqQaiyqSr6tWDApZqhNxQUHy+NGeaLDxvz6iAA
- w0rfED1OC3wwoMF9myBsZ8L1TdLbDqs=
+ bh=w7R7Ex8j23kr+T2klQ3LLbRoZp+Z7QT88+H5+SwHGYs=;
+ b=XmPN6N2rNOgLDNnM4BHpXMAGISt12C8zUBhkxXJgWUIglXUff+Mfg6Gz0hPqzoV9ygf0WZ
+ TNLv3Qpe1rFKen31fthwMxN3tKokAJp7VN3c9USsFx++JU6kSp6ylYJ1BmLmDhk42M6zkR
+ od2V6n68/qqyCI1ea5MNYlVVctjBGhw=
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 From: Henrik Grimler <henrik@grimler.se>
-To: David Virag <virag.david003@gmail.com>
-Cc: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass <sjg@chromium.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sam Protsenko <semen.protsenko@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 2/2] i2c: samsung: Support platforms other than
- EXYNOS4 and EXYNOS5
-Message-ID: <20240803223854.GA185145@l14.localdomain>
-References: <20240802191920.132133-1-virag.david003@gmail.com>
- <20240802191920.132133-3-virag.david003@gmail.com>
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>, Minkyu Kang <mk7.kang@samsung.com>,
+ Minkyu Kang <promsoft@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Yang Xiwen <forbidden405@outlook.com>,
+ Ferass El Hafidi <vitali64pmemail@protonmail.com>,
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
+ uboot-snps-arc@synopsys.com
+Subject: Re: [PATCH v4 14/38] arm: dts: exynos: Add upstream DW MMC
+ properties to all Exynos dts
+Message-ID: <20240803233350.GA194598@l14.localdomain>
+References: <20240725204520.18134-1-semen.protsenko@linaro.org>
+ <20240725204520.18134-15-semen.protsenko@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20240802191920.132133-3-virag.david003@gmail.com>
+In-Reply-To: <20240725204520.18134-15-semen.protsenko@linaro.org>
 X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -72,246 +78,359 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi David,
+Hi Sam,
 
-On Fri, Aug 02, 2024 at 09:19:16PM +0200, David Virag wrote:
-> Newer Samsung SoCs (including newer Exynos, ExynosAuto, Google Tensor)
-> still use these IPs, or slightly newer versions of it.
-> 
-> Make these drivers available on these platforms by guarding
-> EXYNOS4/EXYNOS5 specific code behind their configs, and using CCF for
-> clocks on other platforms.
-> 
-> Tested S3C I2C driver on Exynos7885.
-> This along with extended clock driver should enable S3C I2C on
-> Exynos850.
-> 
-> Signed-off-by: David Virag <virag.david003@gmail.com>
+Thanks for working on this, makes switching to upstream dts'es easier
+:)
 
-Tested-by: Henrik Grimler <henrik@grimler.se>
+I tested the series on exynos4412-odroid-u2 and exynos5422-odroid-xu4.
+One issue for exynos4412-odroid to resolve below, with that fixed
+booting from both eMMC and sdcard works on my devices.
 
-Tested on exynos4412-odroid-u2 and exynos5422-odroid-xu4.  On both
-devices i2c still works fine, thanks!
+On Thu, Jul 25, 2024 at 03:44:56PM -0500, Sam Protsenko wrote:
+> Some device tree properties for DW MMC block were updated in Linux
+> kernel. Let's follow its example and rework corresponding properties in
+> all Exynos device trees. Don't remove outdated properties yet, it'll be
+> done later once DW MMC driver is updated accordingly to read the updated
+> properties instead of outdated ones.
+> 
+> Next properties are added:
+> 
+> * samsung,dw-mshc-ciu-div and samsung,dw-mshc-sdr-timing:
+> 
+>   They were derived from outdated samsung,timing property.
+> 
+> * fifo-depth (generic replacement for fifoth_val):
+> 
+>   FIFO depth was calculated from fifoth_val (using expressions from
+>   FIFOTH register description in TRM):
+> 
+>       fifo-depth = ((fifoth_val >> 16) + 1) * 2
+> 
+> * bus-width: generic replacement for samsung,bus-width
+> * clock-frequency: generic replacement for bus_hz
+> * non-removable: generic replacement for samsung,removable = <0>
+> 
+> No functional change.
+> 
+> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> ---
+> Changes in v4:
+>   - (none)
+> 
+> Changes in v3:
+>   - (none)
+> 
+> Changes in v2:
+>   - (none)
+> 
+>  arch/arm/dts/exynos4210-origen.dts         | 1 +
+>  arch/arm/dts/exynos4210-trats.dts          | 2 ++
+>  arch/arm/dts/exynos4210-universal_c210.dts | 2 ++
+>  arch/arm/dts/exynos4412-odroid.dts         | 6 ++++++
+>  arch/arm/dts/exynos4412-trats2.dts         | 8 ++++++++
+>  arch/arm/dts/exynos5250-arndale.dts        | 6 ++++++
+>  arch/arm/dts/exynos5250-smdk5250.dts       | 7 +++++++
+>  arch/arm/dts/exynos5250-snow.dts           | 7 +++++++
+>  arch/arm/dts/exynos5250-spring.dts         | 4 ++++
+>  arch/arm/dts/exynos5420-smdk5420.dts       | 7 +++++++
+>  arch/arm/dts/exynos5422-odroidxu3.dts      | 2 ++
+>  arch/arm/dts/exynos54xx.dtsi               | 7 +++++++
+>  12 files changed, 59 insertions(+)
+> 
+> diff --git a/arch/arm/dts/exynos4210-origen.dts b/arch/arm/dts/exynos4210-origen.dts
+> index 65a5fcd67eff..a4915de2c49c 100644
+> --- a/arch/arm/dts/exynos4210-origen.dts
+> +++ b/arch/arm/dts/exynos4210-origen.dts
+> @@ -26,6 +26,7 @@
+>  
+>  &sdhci2 {
+>  	samsung,bus-width = <4>;
+> +	bus-width = <4>;
+>  	samsung,timing = <1 2 3>;
+>  	cd-gpios = <&gpk2 2 0>;
+>  	status = "okay";
+> diff --git a/arch/arm/dts/exynos4210-trats.dts b/arch/arm/dts/exynos4210-trats.dts
+> index 05989ee97e5b..4fbdf4730994 100644
+> --- a/arch/arm/dts/exynos4210-trats.dts
+> +++ b/arch/arm/dts/exynos4210-trats.dts
+> @@ -241,6 +241,7 @@
+>  
+>  &sdhci0 {
+>  	samsung,bus-width = <8>;
+> +	bus-width = <8>;
+>  	samsung,timing = <1 3 3>;
+>  	pwr-gpios = <&gpk0 2 0>;
+>  	status = "okay";
+> @@ -248,6 +249,7 @@
+>  
+>  &sdhci2 {
+>  	samsung,bus-width = <4>;
+> +	bus-width = <4>;
+>  	samsung,timing = <1 2 3>;
+>  	cd-gpios = <&gpx3 4 0>;
+>  	status = "okay";
+> diff --git a/arch/arm/dts/exynos4210-universal_c210.dts b/arch/arm/dts/exynos4210-universal_c210.dts
+> index 610a8ad2e71e..1b3ac1fee15f 100644
+> --- a/arch/arm/dts/exynos4210-universal_c210.dts
+> +++ b/arch/arm/dts/exynos4210-universal_c210.dts
+> @@ -236,6 +236,7 @@
+>  
+>  &sdhci0 {
+>  	samsung,bus-width = <8>;
+> +	bus-width = <8>;
+>  	samsung,timing = <1 3 3>;
+>  	pwr-gpios = <&gpk0 2 0>;
+>  	status = "okay";
+> @@ -243,6 +244,7 @@
+>  
+>  &sdhci2 {
+>  	samsung,bus-width = <4>;
+> +	bus-width = <4>;
+>  	samsung,timing = <1 2 3>;
+>  	cd-gpios = <&gpx3 4 0>;
+>  	status = "okay";
+> diff --git a/arch/arm/dts/exynos4412-odroid.dts b/arch/arm/dts/exynos4412-odroid.dts
+> index ce08e8dc1ebb..24e96ed05868 100644
+> --- a/arch/arm/dts/exynos4412-odroid.dts
+> +++ b/arch/arm/dts/exynos4412-odroid.dts
+> @@ -243,9 +243,15 @@
+>  
+>  &mshc_0 {
+>  	samsung,bus-width = <8>;
+> +	bus-width = <8>;
+>  	samsung,timing = <2 1 0>;
+> +	samsung,dw-mshc-ciu-div = <0>;
+> +	samsung,dw-mshc-sdr-timing = <2 1>;
+>  	samsung,removable = <0>;
+> +	non-removable;
+>  	fifoth_val = <0x203f0040>;
+> +	fifo-depth = <0x80>;
+> +	clock-frequency = <400000000>;
+>  	bus_hz = <400000000>;
+>  	div = <0x3>;
+>  	index = <4>;
+
+bus-width needs to be added to sdhci2 (sdcard) node above as well.
 
 Best regards,
 Henrik Grimler
 
-> ---
->  drivers/i2c/Kconfig         |  2 +-
->  drivers/i2c/exynos_hs_i2c.c | 25 +++++++++++++++++++++++--
->  drivers/i2c/s3c24x0_i2c.c   | 30 +++++++++++++++++++++++++++---
->  drivers/i2c/s3c24x0_i2c.h   |  2 ++
->  4 files changed, 53 insertions(+), 6 deletions(-)
-> 
-> diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
-> index cba7f84894..52067fa7c1 100644
-> --- a/drivers/i2c/Kconfig
-> +++ b/drivers/i2c/Kconfig
-> @@ -650,7 +650,7 @@ config SYS_I2C_GENI
+> diff --git a/arch/arm/dts/exynos4412-trats2.dts b/arch/arm/dts/exynos4412-trats2.dts
+> index c4db137e01f6..30758ffa1ef9 100644
+> --- a/arch/arm/dts/exynos4412-trats2.dts
+> +++ b/arch/arm/dts/exynos4412-trats2.dts
+> @@ -109,6 +109,7 @@
 >  
->  config SYS_I2C_S3C24X0
->  	bool "Samsung I2C driver"
-> -	depends on (ARCH_EXYNOS4 || ARCH_EXYNOS5) && DM_I2C
-> +	depends on DM_I2C
->  	help
->  	  Support for Samsung I2C controller as Samsung SoCs.
+>  	sdhci@12510000 {
+>  		samsung,bus-width = <8>;
+> +		bus-width = <8>;
+>  		samsung,timing = <1 3 3>;
+>  		pwr-gpios = <&gpk0 4 0>;
+>  		status = "disabled";
+> @@ -432,6 +433,7 @@
 >  
-> diff --git a/drivers/i2c/exynos_hs_i2c.c b/drivers/i2c/exynos_hs_i2c.c
-> index 189ce6d509..fa0d1c8f64 100644
-> --- a/drivers/i2c/exynos_hs_i2c.c
-> +++ b/drivers/i2c/exynos_hs_i2c.c
-> @@ -9,11 +9,15 @@
->  #include <dm.h>
->  #include <i2c.h>
->  #include <log.h>
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
->  #include <asm/arch/clk.h>
->  #include <asm/arch/cpu.h>
->  #include <asm/arch/pinmux.h>
-> +#endif
->  #include <asm/global_data.h>
-> +#include <asm/io.h>
->  #include <linux/delay.h>
-> +#include <clk.h>
->  #include "s3c24x0_i2c.h"
+>  &sdhci0 {
+>  	samsung,bus-width = <8>;
+> +	bus-width = <8>;
+>  	samsung,timing = <1 3 3>;
+>  	pwr-gpios = <&gpk0 4 0>;
+>  	status = "disabled";
+> @@ -439,6 +441,7 @@
 >  
->  DECLARE_GLOBAL_DATA_PTR;
-> @@ -137,15 +141,26 @@ static int hsi2c_wait_for_trx(struct exynos5_hsi2c *i2c)
->  	return I2C_NOK_TOUT;
->  }
+>  &sdhci2 {
+>  	samsung,bus-width = <4>;
+> +	bus-width = <4>;
+>  	samsung,timing = <1 2 3>;
+>  	cd-gpios = <&gpk2 2 0>;
+>  	status = "okay";
+> @@ -446,9 +449,14 @@
 >  
-> -static int hsi2c_get_clk_details(struct s3c24x0_i2c_bus *i2c_bus)
-> +static int hsi2c_get_clk_details(struct udevice *dev)
->  {
-> +	struct s3c24x0_i2c_bus *i2c_bus = dev_get_priv(dev);
->  	struct exynos5_hsi2c *hsregs = i2c_bus->hsregs;
->  	ulong clkin;
->  	unsigned int op_clk = i2c_bus->clock_frequency;
->  	unsigned int i = 0, utemp0 = 0, utemp1 = 0;
->  	unsigned int t_ftl_cycle;
+>  &mshc_0 {
+>  	samsung,bus-width = <8>;
+> +	bus-width = <8>;
+>  	samsung,timing = <2 1 0>;
+> +	samsung,dw-mshc-ciu-div = <0>;
+> +	samsung,dw-mshc-sdr-timing = <2 1>;
+>  	samsung,removable = <0>;
+> +	non-removable;
+>  	fifoth_val = <0x203f0040>;
+> +	clock-frequency = <400000000>;
+>  	bus_hz = <400000000>;
+>  	div = <0x3>;
+>  	index = <4>;
+> diff --git a/arch/arm/dts/exynos5250-arndale.dts b/arch/arm/dts/exynos5250-arndale.dts
+> index 60309c61f302..7f84589c97a2 100644
+> --- a/arch/arm/dts/exynos5250-arndale.dts
+> +++ b/arch/arm/dts/exynos5250-arndale.dts
+> @@ -28,7 +28,10 @@
 >  
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
->  	clkin = get_i2c_clk();
-> +#else
-> +	struct clk clk;
-> +	int ret;
-> +
-> +	ret = clk_get_by_name(dev, "hsi2c", &clk);
-> +	if (ret < 0)
-> +		return ret;
-> +	clkin = clk_get_rate(&clk);
-> +#endif
->  	/* FPCLK / FI2C =
->  	 * (CLK_DIV + 1) * (TSCLK_L + TSCLK_H + 2) + 8 + 2 * FLT_CYCLE
->  	 * uTemp0 = (CLK_DIV + 1) * (TSCLK_L + TSCLK_H + 2)
-> @@ -487,7 +502,7 @@ static int s3c24x0_i2c_set_bus_speed(struct udevice *dev, unsigned int speed)
+>  	mmc@12200000 {
+>  		samsung,bus-width = <8>;
+> +		bus-width = <8>;
+>  		samsung,timing = <1 3 3>;
+> +		samsung,dw-mshc-ciu-div = <3>;
+> +		samsung,dw-mshc-sdr-timing = <1 3>;
+>  	};
 >  
->  	i2c_bus->clock_frequency = speed;
+>  	mmc@12210000 {
+> @@ -37,7 +40,10 @@
 >  
-> -	if (hsi2c_get_clk_details(i2c_bus))
-> +	if (hsi2c_get_clk_details(dev))
->  		return -EFAULT;
->  	hsi2c_ch_init(i2c_bus);
+>  	mmc@12220000 {
+>  		samsung,bus-width = <4>;
+> +		bus-width = <4>;
+>  		samsung,timing = <1 2 3>;
+> +		samsung,dw-mshc-ciu-div = <3>;
+> +		samsung,dw-mshc-sdr-timing = <1 2>;
+>  	};
 >  
-> @@ -514,7 +529,9 @@ static int s3c24x0_i2c_probe(struct udevice *dev, uint chip, uint chip_flags)
+>  	mmc@12230000 {
+> diff --git a/arch/arm/dts/exynos5250-smdk5250.dts b/arch/arm/dts/exynos5250-smdk5250.dts
+> index afe0cca48a93..882db2d1f608 100644
+> --- a/arch/arm/dts/exynos5250-smdk5250.dts
+> +++ b/arch/arm/dts/exynos5250-smdk5250.dts
+> @@ -146,8 +146,12 @@
 >  
->  static int s3c_i2c_of_to_plat(struct udevice *dev)
->  {
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
->  	const void *blob = gd->fdt_blob;
-> +#endif
->  	struct s3c24x0_i2c_bus *i2c_bus = dev_get_priv(dev);
->  	int node;
+>  	mmc@12200000 {
+>  		samsung,bus-width = <8>;
+> +		bus-width = <8>;
+>  		samsung,timing = <1 3 3>;
+> +		samsung,dw-mshc-ciu-div = <3>;
+> +		samsung,dw-mshc-sdr-timing = <1 3>;
+>  		samsung,removable = <0>;
+> +		non-removable;
+>  	};
 >  
-> @@ -522,7 +539,9 @@ static int s3c_i2c_of_to_plat(struct udevice *dev)
+>  	mmc@12210000 {
+> @@ -156,7 +160,10 @@
 >  
->  	i2c_bus->hsregs = dev_read_addr_ptr(dev);
+>  	mmc@12220000 {
+>  		samsung,bus-width = <4>;
+> +		bus-width = <4>;
+>  		samsung,timing = <1 2 3>;
+> +		samsung,dw-mshc-ciu-div = <3>;
+> +		samsung,dw-mshc-sdr-timing = <1 2>;
+>  		samsung,removable = <1>;
+>  	};
 >  
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
->  	i2c_bus->id = pinmux_decode_periph_id(blob, node);
-> +#endif
+> diff --git a/arch/arm/dts/exynos5250-snow.dts b/arch/arm/dts/exynos5250-snow.dts
+> index e41f2d3041e2..bcf04d5c07c0 100644
+> --- a/arch/arm/dts/exynos5250-snow.dts
+> +++ b/arch/arm/dts/exynos5250-snow.dts
+> @@ -302,8 +302,12 @@
 >  
->  	i2c_bus->clock_frequency =
->  		dev_read_u32_default(dev, "clock-frequency",
-> @@ -530,7 +549,9 @@ static int s3c_i2c_of_to_plat(struct udevice *dev)
->  	i2c_bus->node = node;
->  	i2c_bus->bus_num = dev_seq(dev);
+>  	mmc@12200000 {
+>  		samsung,bus-width = <8>;
+> +		bus-width = <8>;
+>  		samsung,timing = <1 3 3>;
+> +		samsung,dw-mshc-ciu-div = <3>;
+> +		samsung,dw-mshc-sdr-timing = <1 3>;
+>  		samsung,removable = <0>;
+> +		non-removable;
+>  	};
 >  
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
->  	exynos_pinmux_config(i2c_bus->id, PINMUX_FLAG_HS_MODE);
-> +#endif
+>  	mmc@12210000 {
+> @@ -312,7 +316,10 @@
 >  
->  	i2c_bus->active = true;
+>  	mmc@12220000 {
+>  		samsung,bus-width = <4>;
+> +		bus-width = <4>;
+>  		samsung,timing = <1 2 3>;
+> +		samsung,dw-mshc-ciu-div = <3>;
+> +		samsung,dw-mshc-sdr-timing = <1 2>;
+>  		samsung,removable = <1>;
+>  	};
 >  
-> diff --git a/drivers/i2c/s3c24x0_i2c.c b/drivers/i2c/s3c24x0_i2c.c
-> index ae3a801cad..ade1ad6cef 100644
-> --- a/drivers/i2c/s3c24x0_i2c.c
-> +++ b/drivers/i2c/s3c24x0_i2c.c
-> @@ -9,12 +9,15 @@
->  #include <fdtdec.h>
->  #include <time.h>
->  #include <log.h>
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
->  #include <asm/arch/clk.h>
->  #include <asm/arch/cpu.h>
->  #include <asm/arch/pinmux.h>
-> +#endif
->  #include <asm/global_data.h>
->  #include <asm/io.h>
->  #include <i2c.h>
-> +#include <clk.h>
->  #include "s3c24x0_i2c.h"
+> diff --git a/arch/arm/dts/exynos5250-spring.dts b/arch/arm/dts/exynos5250-spring.dts
+> index 77e7a6b9e45a..7270a546a795 100644
+> --- a/arch/arm/dts/exynos5250-spring.dts
+> +++ b/arch/arm/dts/exynos5250-spring.dts
+> @@ -104,8 +104,12 @@
 >  
->  DECLARE_GLOBAL_DATA_PTR;
-> @@ -46,10 +49,23 @@ static void read_write_byte(struct s3c24x0_i2c *i2c)
->  	clrbits_le32(&i2c->iiccon, I2CCON_IRPND);
->  }
+>  	mmc@12200000 {
+>  		samsung,bus-width = <8>;
+> +		bus-width = <8>;
+>  		samsung,timing = <1 3 3>;
+> +		samsung,dw-mshc-ciu-div = <3>;
+> +		samsung,dw-mshc-sdr-timing = <1 3>;
+>  		samsung,removable = <0>;
+> +		non-removable;
+>  	};
 >  
-> -static void i2c_ch_init(struct s3c24x0_i2c *i2c, int speed, int slaveadd)
-> +static int i2c_ch_init(struct udevice *dev, int speed, int slaveadd)
->  {
-> +	struct s3c24x0_i2c_bus *i2c_bus = dev_get_priv(dev);
-> +	struct s3c24x0_i2c *i2c = i2c_bus->regs;
->  	ulong freq, pres = 16, div;
-> +
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || defined(CONFIG_ARCH_EXYNOS5)
->  	freq = get_i2c_clk();
-> +#else
-> +	struct clk clk;
-> +	int ret;
-> +
-> +	ret = clk_get_by_name(dev, "i2c", &clk);
-> +	if (ret < 0)
-> +		return ret;
-> +	freq = clk_get_rate(&clk);
-> +#endif
->  	/* calculate prescaler and divisor values */
->  	if ((freq / pres / (16 + 1)) > speed)
->  		/* set prescaler to 512 */
-> @@ -67,6 +83,7 @@ static void i2c_ch_init(struct s3c24x0_i2c *i2c, int speed, int slaveadd)
->  	writel(slaveadd, &i2c->iicadd);
->  	/* program Master Transmit (and implicit STOP) */
->  	writel(I2C_MODE_MT | I2C_TXRX_ENA, &i2c->iicstat);
-> +	return 0;
->  }
+>  	mmc@12210000 {
+> diff --git a/arch/arm/dts/exynos5420-smdk5420.dts b/arch/arm/dts/exynos5420-smdk5420.dts
+> index 7a5da674fbed..1f27baafebaf 100644
+> --- a/arch/arm/dts/exynos5420-smdk5420.dts
+> +++ b/arch/arm/dts/exynos5420-smdk5420.dts
+> @@ -107,8 +107,12 @@
 >  
->  #define SYS_I2C_S3C24X0_SLAVE_ADDR	0
-> @@ -77,8 +94,9 @@ static int s3c24x0_i2c_set_bus_speed(struct udevice *dev, unsigned int speed)
+>  	mmc@12200000 {
+>  		samsung,bus-width = <8>;
+> +		bus-width = <8>;
+>  		samsung,timing = <1 3 3>;
+> +		samsung,dw-mshc-ciu-div = <3>;
+> +		samsung,dw-mshc-sdr-timing = <1 3>;
+>  		samsung,removable = <0>;
+> +		non-removable;
+>  		samsung,pre-init;
+>  	};
 >  
->  	i2c_bus->clock_frequency = speed;
+> @@ -118,7 +122,10 @@
 >  
-> -	i2c_ch_init(i2c_bus->regs, i2c_bus->clock_frequency,
-> -		    SYS_I2C_S3C24X0_SLAVE_ADDR);
-> +	if (i2c_ch_init(dev, i2c_bus->clock_frequency,
-> +			SYS_I2C_S3C24X0_SLAVE_ADDR))
-> +		return -EFAULT;
+>  	mmc@12220000 {
+>  		samsung,bus-width = <4>;
+> +		bus-width = <4>;
+>  		samsung,timing = <1 2 3>;
+> +		samsung,dw-mshc-ciu-div = <3>;
+> +		samsung,dw-mshc-sdr-timing = <1 2>;
+>  		samsung,removable = <1>;
+>  	};
 >  
->  	return 0;
->  }
-> @@ -293,7 +311,9 @@ static int s3c24x0_i2c_xfer(struct udevice *dev, struct i2c_msg *msg,
+> diff --git a/arch/arm/dts/exynos5422-odroidxu3.dts b/arch/arm/dts/exynos5422-odroidxu3.dts
+> index 9d055d066fd3..767b3e415d58 100644
+> --- a/arch/arm/dts/exynos5422-odroidxu3.dts
+> +++ b/arch/arm/dts/exynos5422-odroidxu3.dts
+> @@ -281,10 +281,12 @@
 >  
->  static int s3c_i2c_of_to_plat(struct udevice *dev)
->  {
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
->  	const void *blob = gd->fdt_blob;
-> +#endif
->  	struct s3c24x0_i2c_bus *i2c_bus = dev_get_priv(dev);
->  	int node;
+>  	mmc@12200000 {
+>  		fifoth_val = <0x201f0020>;
+> +		fifo-depth = <0x40>;
+>  	};
 >  
-> @@ -301,7 +321,9 @@ static int s3c_i2c_of_to_plat(struct udevice *dev)
+>  	mmc@12220000 {
+>  		fifoth_val = <0x201f0020>;
+> +		fifo-depth = <0x40>;
+>  	};
 >  
->  	i2c_bus->regs = dev_read_addr_ptr(dev);
+>  	emmc-reset {
+> diff --git a/arch/arm/dts/exynos54xx.dtsi b/arch/arm/dts/exynos54xx.dtsi
+> index 221da8b4850b..fd74166c7e48 100644
+> --- a/arch/arm/dts/exynos54xx.dtsi
+> +++ b/arch/arm/dts/exynos54xx.dtsi
+> @@ -120,8 +120,12 @@
 >  
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
->  	i2c_bus->id = pinmux_decode_periph_id(blob, node);
-> +#endif
+>  	mmc@12200000 {
+>  		samsung,bus-width = <8>;
+> +		bus-width = <8>;
+>  		samsung,timing = <1 3 3>;
+> +		samsung,dw-mshc-ciu-div = <3>;
+> +		samsung,dw-mshc-sdr-timing = <1 3>;
+>  		samsung,removable = <0>;
+> +		non-removable;
+>  		samsung,pre-init;
+>  	};
 >  
->  	i2c_bus->clock_frequency =
->  		dev_read_u32_default(dev, "clock-frequency",
-> @@ -309,7 +331,9 @@ static int s3c_i2c_of_to_plat(struct udevice *dev)
->  	i2c_bus->node = node;
->  	i2c_bus->bus_num = dev_seq(dev);
+> @@ -131,7 +135,10 @@
 >  
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
->  	exynos_pinmux_config(i2c_bus->id, 0);
-> +#endif
+>  	mmc@12220000 {
+>  		samsung,bus-width = <4>;
+> +		bus-width = <4>;
+>  		samsung,timing = <1 2 3>;
+> +		samsung,dw-mshc-ciu-div = <3>;
+> +		samsung,dw-mshc-sdr-timing = <1 2>;
+>  		samsung,removable = <1>;
+>  	};
 >  
->  	i2c_bus->active = true;
->  
-> diff --git a/drivers/i2c/s3c24x0_i2c.h b/drivers/i2c/s3c24x0_i2c.h
-> index ec8f1acaef..12249d5c14 100644
-> --- a/drivers/i2c/s3c24x0_i2c.h
-> +++ b/drivers/i2c/s3c24x0_i2c.h
-> @@ -54,7 +54,9 @@ struct s3c24x0_i2c_bus {
->  	struct exynos5_hsi2c *hsregs;
->  	int is_highspeed;	/* High speed type, rather than I2C */
->  	unsigned clock_frequency;
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
->  	int id;
-> +#endif
->  	unsigned clk_cycle;
->  	unsigned clk_div;
->  };
 > -- 
-> 2.46.0
+> 2.39.2
 > 
