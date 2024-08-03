@@ -4,85 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29085C52D6F
-	for <u-boot@archiver.kernel.org>; Sat,  3 Aug 2024 18:55:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8E39C52D6F
+	for <u-boot@archiver.kernel.org>; Sat,  3 Aug 2024 18:55:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D856788CEA;
-	Sat,  3 Aug 2024 20:55:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8F5DF88CF0;
+	Sat,  3 Aug 2024 20:55:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OvFWD4Ju";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="pek3pt/6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 071ED88C45; Sat,  3 Aug 2024 15:28:22 +0200 (CEST)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 66D1488C75; Sat,  3 Aug 2024 18:09:34 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B108688BF3
- for <u-boot@lists.denx.de>; Sat,  3 Aug 2024 15:28:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3BED188BFF
+ for <u-boot@lists.denx.de>; Sat,  3 Aug 2024 18:09:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=iuncuim@gmail.com
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-52f025bc147so12780662e87.3
- for <u-boot@lists.denx.de>; Sat, 03 Aug 2024 06:28:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722691699; x=1723296499; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=7XyNtl0LHvsCrAApELfQJQid1cVE92LJCqA53DHdbUY=;
- b=OvFWD4JubIsC+6QkJs7pGIdsGNogAzqXeWJPwTMKt1lFjJHrwi1z3iV4DHCMntoyXw
- p/fljNpxugV9BrTnIVY7e+REPiVC4gpXHYMtayHJ2v/p1I6eaydcj/S0hoGs35f+i2Nn
- qqRpe151iL56Z1HBsMCG9DAK+B+d/Y9rHa4eaeH8ATB6AENuaBBXTQHiEJ3NhW4SGSni
- 8EkvkM8eOS2pAr4CRICDZ2UTObAGw4+gPXDajKqq8WxmQ3ybepglnDSVIrYbjluZJIhr
- OZYKz1KHCHEd4xzQCM7EDb+52Jl4rIajQeLzpdfhO6uPZlqLnccz1tzm9pnpAPQItvQx
- Pnfw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722691699; x=1723296499;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=7XyNtl0LHvsCrAApELfQJQid1cVE92LJCqA53DHdbUY=;
- b=t/xdCmemM/IWtvAZc3VRg/UPkyHj43rw/QZS6SwL9jrz2RISl+cv5iCiRpMx0MgosC
- Ksi58eOdr4mbIMYAOSTnZfjEyi+6s/VWqSOxW7oT1v8dxEVrC38V5ye6jVUlO+Y0Bd2T
- 69zE97FjYCGc75n0p9aGlLwBWTMSWkjVboopbEXTHaJ/aqpTYel5xzG5Vk4xqx++WDT7
- 7NOWv2y5tqC3ACYjO9b14cweSXSRfSyxsVvF8CNUzaZ8OlO17VI0LBCvVmDtKnk0RLmk
- ikGnN7swiZaZ1CvoS+Vhxu7eFKJ9qmAQUl7GeBu6FbHLnmKD5YJTHAi3nqkPT9hLQPo+
- JdJQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVuy3QH1Kixjmyudc3dyWZpglsIzXDpr0cnQC1mHA38J6B/SgU8xd3NBPRyIkroB2t9N0EfbdZx9yklWhRDFbZLNgIJlA==
-X-Gm-Message-State: AOJu0Yw53cJvkey8Evb25fJdjqzBzp1Cv1JlnR6ki5gijy/DbiCaq/mc
- Hx9kq/iY3d5ToFe14nx6gjjujHEMGMC6f9+tOegIStQhCKVRk05x
-X-Google-Smtp-Source: AGHT+IHl+jntrGNMySP9V2ggnRLXDp8ivvs+9XnX+wIAx2pbLwGbtzopCzvrfwvN2StnsPfmZAroUw==
-X-Received: by 2002:a05:6512:239e:b0:52c:daa4:2f5c with SMTP id
- 2adb3069b0e04-530bb395ea1mr4567529e87.42.1722691698559; 
- Sat, 03 Aug 2024 06:28:18 -0700 (PDT)
-Received: from [192.168.99.248] ([94.143.198.76])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-530bba07e02sm507771e87.53.2024.08.03.06.28.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 03 Aug 2024 06:28:18 -0700 (PDT)
-Message-ID: <ee8f950d-5a09-4513-b604-bff2449a4e9e@gmail.com>
-Date: Sat, 3 Aug 2024 16:28:15 +0300
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sre@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id ACF2460ACA;
+ Sat,  3 Aug 2024 16:09:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 371E2C116B1;
+ Sat,  3 Aug 2024 16:09:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1722701370;
+ bh=3XNJUG7Pn6OxUar8JNumZMpROiG/PzjA0Nx6anGUU7U=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=pek3pt/6jih+rdGefqpVI3Xi7GHyYysB2B3lPUYqBf+n9S1rjjMglI+bgMhfsmsS6
+ z6qRlntbRzUUOoVED2xNHKdzCNJDYE+Menl2XqkVhcU9BJqJbBVsfH3AD2tNR49PWO
+ rjMoxgCWGlugiPZ8P4mL1MrmiIzFqyEOPHzTMILVvGsYjm2qEuTyzQPT1eQsovLuWr
+ VQO7DMNIvJHfyi0d15QZH9n6CipMhCij375nrXEx5BffyPt7kYaohctf9zTEtyUlwL
+ gUe3zSF2y0k/5MSK9EZgtrXb+YeWX+Ou20wd7FcHm2N5PNPKb5aqfx/tpZRC2BjY96
+ tIWDKE81fvBDw==
+Received: by mercury (Postfix, from userid 1000)
+ id C10621060930; Sat, 03 Aug 2024 18:09:27 +0200 (CEST)
+Date: Sat, 3 Aug 2024 18:09:27 +0200
+From: Sebastian Reichel <sre@kernel.org>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Marek Vasut <marex@denx.de>, 
+ Eugen Hristev <eugen.hristev@collabora.com>, Tim Harvey <tharvey@gateworks.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Simon Glass <sjg@chromium.org>, Soeren Moch <smoch@web.de>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v3 4/7] board: rock5b-rk3588: enable USB-C in operating
+ system
+Message-ID: <j654dnoy5yu57do2nmdssfykvnw74hayl53nlqvn5jlycr6ny2@h5pprs7sjfds>
+References: <20240802180027.139193-1-sebastian.reichel@collabora.com>
+ <20240802180027.139193-5-sebastian.reichel@collabora.com>
+ <88da35e4-77d8-4360-8be2-5efa6ae0d5cf@kwiboo.se>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 9/9] sunxi: Add support for Anbernic RG35XX-2024
-To: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de
-Cc: sjg@chromium.org, jernej.skrabec@gmail.com, neil.armstrong@linaro.org,
- hdegoede@redhat.com, andre.przywara@arm.com, jagan@amarulasolutions.com,
- trini@konsulko.com, ryan@testtoast.com,
- Chris Morgan <macromorgan@hotmail.com>
-References: <20240801225519.336667-1-macroalpha82@gmail.com>
- <20240801225519.336667-10-macroalpha82@gmail.com>
-Content-Language: en-US
-From: Mikhail Kalashnikov <iuncuim@gmail.com>
-In-Reply-To: <20240801225519.336667-10-macroalpha82@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="j4axkujm35vrojpe"
+Content-Disposition: inline
+In-Reply-To: <88da35e4-77d8-4360-8be2-5efa6ae0d5cf@kwiboo.se>
 X-Mailman-Approved-At: Sat, 03 Aug 2024 20:55:08 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,448 +79,106 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 02.08.2024 01:55, Chris Morgan wrote:
-> From: Chris Morgan <macromorgan@hotmail.com>
->
-> The Anbernic RG35XX series of devices are based around an Allwinner
-> H700 SoC with 1GB of RAM, 2 SD cards, and multiple input buttons.
->
-> This bootloader has been tested on the Anbernic RG35XX-2024 and
-> RG35XX-H, but should be suitable for the entire lineup of H700 based
-> devices.
->
-> A future series of updates will add board selection logic to identify
-> and load the correct device tree automatically, and will switch to
-> utilizing a mainline device tree.
->
-> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
-> ---
->   arch/arm/dts/Makefile                         |   3 +-
->   .../dts/sun50i-h700-anbernic-rg35xx-2024.dts  | 320 ++++++++++++++++++
->   board/sunxi/MAINTAINERS                       |   5 +
->   configs/anbernic_rg35xx_h700_defconfig        |  50 +++
->   4 files changed, 377 insertions(+), 1 deletion(-)
->   create mode 100644 arch/arm/dts/sun50i-h700-anbernic-rg35xx-2024.dts
->   create mode 100644 configs/anbernic_rg35xx_h700_defconfig
->
-> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index 3ae4110d60..886ab0312a 100644
-> --- a/arch/arm/dts/Makefile
-> +++ b/arch/arm/dts/Makefile
-> @@ -679,10 +679,11 @@ dtb-$(CONFIG_MACH_SUN50I_H6) += \
->   	sun50i-h6-tanix-tx6-mini.dtb
->   dtb-$(CONFIG_MACH_SUN50I_H616) += \
->   	sun50i-h616-orangepi-zero2.dtb \
-> +	sun50i-h616-x96-mate.dtb \
->   	sun50i-h618-orangepi-zero2w.dtb \
->   	sun50i-h618-orangepi-zero3.dtb \
->   	sun50i-h618-transpeed-8k618-t.dtb \
-> -	sun50i-h616-x96-mate.dtb
-> +	sun50i-h700-anbernic-rg35xx-2024.dtb
->   dtb-$(CONFIG_MACH_SUN50I) += \
->   	sun50i-a64-amarula-relic.dtb \
->   	sun50i-a64-bananapi-m64.dtb \
-> diff --git a/arch/arm/dts/sun50i-h700-anbernic-rg35xx-2024.dts b/arch/arm/dts/sun50i-h700-anbernic-rg35xx-2024.dts
-> new file mode 100644
-> index 0000000000..75206af164
-> --- /dev/null
-> +++ b/arch/arm/dts/sun50i-h700-anbernic-rg35xx-2024.dts
-> @@ -0,0 +1,320 @@
-> +// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +/*
-> + * Copyright (C) 2024 Ryan Walklin <ryan@testtoast.com>.
-> + */
-> +
-> +/dts-v1/;
-> +
-> +#include "sun50i-h616.dtsi"
-> +#include <dt-bindings/gpio/gpio.h>
-> +#include <dt-bindings/input/linux-event-codes.h>
-> +#include <dt-bindings/interrupt-controller/arm-gic.h>
-> +#include <dt-bindings/leds/common.h>
-> +
-> +/ {
-> +	model = "Anbernic RG35XX 2024";
-> +	chassis-type = "handset";
-> +	compatible = "anbernic,rg35xx-2024", "allwinner,sun50i-h700";
-> +
-> +	aliases {
-> +		serial0 = &uart0;
-> +	};
-> +
-> +	chosen {
-> +		stdout-path = "serial0:115200n8";
-> +	};
-> +
-> +	gpio_keys_gamepad: gpio-keys-gamepad {
-> +		compatible = "gpio-keys";
-> +
-> +		button-a {
-> +			label = "Action-Pad A";
-> +			gpios = <&pio 0 0 GPIO_ACTIVE_LOW>; /* PA0 */
-> +			linux,input-type = <EV_KEY>;
-> +			linux,code = <BTN_EAST>;
-> +		};
-> +
-> +		button-b {
-> +			label = "Action-Pad B";
-> +			gpios = <&pio 0 1 GPIO_ACTIVE_LOW>; /* PA1 */
-> +			linux,input-type = <EV_KEY>;
-> +			linux,code = <BTN_SOUTH>;
-> +		};
-> +
-> +		button-down {
-> +			label = "D-Pad Down";
-> +			gpios = <&pio 4 0 GPIO_ACTIVE_LOW>; /* PE0 */
-> +			linux,input-type = <EV_KEY>;
-> +			linux,code = <BTN_DPAD_DOWN>;
-> +		};
-> +
-> +		button-l1 {
-> +			label = "Key L1";
-> +			gpios = <&pio 0 10 GPIO_ACTIVE_LOW>; /* PA10 */
-> +			linux,input-type = <EV_KEY>;
-> +			linux,code = <BTN_TL>;
-> +		};
-> +
-> +		button-l2 {
-> +			label = "Key L2";
-> +			gpios = <&pio 0 11 GPIO_ACTIVE_LOW>; /* PA11 */
-> +			linux,input-type = <EV_KEY>;
-> +			linux,code = <BTN_TL2>;
-> +		};
-> +
-> +		button-left {
-> +			label = "D-Pad left";
-> +			gpios = <&pio 0 8 GPIO_ACTIVE_LOW>; /* PA8 */
-> +			linux,input-type = <EV_KEY>;
-> +			linux,code = <BTN_DPAD_LEFT>;
-> +		};
-> +
-> +		button-menu {
-> +			label = "Key Menu";
-> +			gpios = <&pio 4 3 GPIO_ACTIVE_LOW>; /* PE3 */
-> +			linux,input-type = <EV_KEY>;
-> +			linux,code = <BTN_MODE>;
-> +		};
-> +
-> +		button-r1 {
-> +			label = "Key R1";
-> +			gpios = <&pio 0 12 GPIO_ACTIVE_LOW>; /* PA12 */
-> +			linux,input-type = <EV_KEY>;
-> +			linux,code = <BTN_TR>;
-> +		};
-> +
-> +		button-r2 {
-> +			label = "Key R2";
-> +			gpios = <&pio 0 7 GPIO_ACTIVE_LOW>; /* PA7 */
-> +			linux,input-type = <EV_KEY>;
-> +			linux,code = <BTN_TR2>;
-> +		};
-> +
-> +		button-right {
-> +			label = "D-Pad Right";
-> +			gpios = <&pio 0 9 GPIO_ACTIVE_LOW>; /* PA9 */
-> +			linux,input-type = <EV_KEY>;
-> +			linux,code = <BTN_DPAD_RIGHT>;
-> +		};
-> +
-> +		button-select {
-> +			label = "Key Select";
-> +			gpios = <&pio 0 5 GPIO_ACTIVE_LOW>; /* PA5 */
-> +			linux,input-type = <EV_KEY>;
-> +			linux,code = <BTN_SELECT>;
-> +		};
-> +		button-start {
-> +			label = "Key Start";
-> +			gpios = <&pio 0 4 GPIO_ACTIVE_LOW>; /* PA4 */
-> +			linux,input-type = <EV_KEY>;
-> +			linux,code = <BTN_START>;
-> +		};
-> +
-> +		button-up {
-> +			label = "D-Pad Up";
-> +			gpios = <&pio 0 6 GPIO_ACTIVE_LOW>; /* PA6 */
-> +			linux,input-type = <EV_KEY>;
-> +			linux,code = <BTN_DPAD_UP>;
-> +		};
-> +
-> +		button-x {
-> +			label = "Action-Pad X";
-> +			gpios = <&pio 0 3 GPIO_ACTIVE_LOW>; /* PA3 */
-> +			linux,input-type = <EV_KEY>;
-> +			linux,code = <BTN_NORTH>;
-> +		};
-> +
-> +		button-y {
-> +			label = "Action Pad Y";
-> +			gpios = <&pio 0 2 GPIO_ACTIVE_LOW>; /* PA2 */
-> +			linux,input-type = <EV_KEY>;
-> +			linux,code = <BTN_WEST>;
-> +		};
-> +	};
-> +
-> +	gpio-keys-volume {
-> +		compatible = "gpio-keys";
-> +		autorepeat;
-> +
-> +		button-vol-up {
-> +			label = "Key Volume Up";
-> +			gpios = <&pio 4 1 GPIO_ACTIVE_LOW>; /* PE1 */
-> +			linux,input-type = <EV_KEY>;
-> +			linux,code = <KEY_VOLUMEUP>;
-> +		};
-> +
-> +		button-vol-down {
-> +			label = "Key Volume Down";
-> +			gpios = <&pio 4 2 GPIO_ACTIVE_LOW>; /* PE2 */
-> +			linux,input-type = <EV_KEY>;
-> +			linux,code = <KEY_VOLUMEDOWN>;
-> +		};
-> +	};
-> +
-> +	leds {
-> +		compatible = "gpio-leds";
-> +
-> +		led-0 {
-> +			function = LED_FUNCTION_POWER;
-> +			color = <LED_COLOR_ID_GREEN>;
-> +			gpios = <&pio 8 12 GPIO_ACTIVE_HIGH>; /* PI12 */
-> +			default-state = "on";
-> +		};
-> +	};
-> +
-> +	reg_vcc5v: regulator-vcc5v { /* USB-C power input */
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vcc-5v";
-> +		regulator-min-microvolt = <5000000>;
-> +		regulator-max-microvolt = <5000000>;
-> +	};
-> +};
-> +
-> +&cpu0 {
-> +	cpu-supply = <&reg_dcdc1>;
-> +};
-> +
-> +&mmc0 {
-> +	vmmc-supply = <&reg_cldo3>;
-> +	disable-wp;
-> +	cd-gpios = <&pio 5 6 GPIO_ACTIVE_LOW>;  /* PF6 */
-> +	bus-width = <4>;
-> +	status = "okay";
-> +};
-> +
-> +&pio {
-> +	vcc-pa-supply = <&reg_cldo3>;
-> +	vcc-pc-supply = <&reg_cldo3>;
-> +	vcc-pe-supply = <&reg_cldo3>;
-> +	vcc-pf-supply = <&reg_cldo3>;
-> +	vcc-pg-supply = <&reg_aldo4>;
-> +	vcc-ph-supply = <&reg_cldo3>;
-> +	vcc-pi-supply = <&reg_cldo3>;
-> +};
-> +
-> +&r_i2c {
-> +	status = "okay";
-> +
-> +	axp717: pmic@34 {
-> +		compatible = "x-powers,axp717";
-> +		reg = <0x34>;
-> +		interrupt-controller;
-> +		#interrupt-cells = <1>;
-> +		interrupt-parent = <&nmi_intc>;
-> +		interrupts = <0 IRQ_TYPE_LEVEL_LOW>;
-> +
-> +		vin1-supply = <&reg_vcc5v>;
-> +		vin2-supply = <&reg_vcc5v>;
-> +		vin3-supply = <&reg_vcc5v>;
-> +		vin4-supply = <&reg_vcc5v>;
-> +
-> +		regulators {
-> +			reg_dcdc1: dcdc1 {
-> +				regulator-always-on;
-> +				regulator-min-microvolt = <900000>;
-> +				regulator-max-microvolt = <1160000>;
-> +				regulator-name = "vdd-cpu";
-> +			};
-> +
-> +			reg_dcdc2: dcdc2 {
-> +				regulator-always-on;
-> +				regulator-min-microvolt = <940000>;
-> +				regulator-max-microvolt = <940000>;
-> +				regulator-name = "vdd-gpu-sys";
-> +			};
-> +
-> +			reg_dcdc3: dcdc3 {
-> +				regulator-always-on;
-> +				regulator-min-microvolt = <1100000>;
-> +				regulator-max-microvolt = <1100000>;
-> +				regulator-name = "vdd-dram";
-> +			};
-> +
-> +			reg_aldo1: aldo1 {
-> +				/* 1.8v - unused */
-> +			};
-> +
-> +			reg_aldo2: aldo2 {
-> +				/* 1.8v - unused */
-> +			};
-> +
-> +			reg_aldo3: aldo3 {
-> +				/* 1.8v - unused */
-> +			};
-> +
-> +			reg_aldo4: aldo4 {
-> +				regulator-min-microvolt = <1800000>;
-> +				regulator-max-microvolt = <1800000>;
-> +				regulator-name = "vcc-pg";
-> +			};
-> +
-> +			reg_bldo1: bldo1 {
-> +				/* 1.8v - unused */
-> +			};
-> +
-> +			reg_bldo2: bldo2 {
-> +				regulator-always-on;
-> +				regulator-min-microvolt = <1800000>;
-> +				regulator-max-microvolt = <1800000>;
-> +				regulator-name = "vcc-pll";
-> +			};
-> +
-> +			reg_bldo3: bldo3 {
-> +				/* 2.8v - unused */
-> +			};
-> +
-> +			reg_bldo4: bldo4 {
-> +				/* 1.2v - unused */
-> +			};
-> +
-> +			reg_cldo1: cldo1 {
-> +				/* 3.3v - audio codec - not yet implemented */
-> +			};
-> +
-> +			reg_cldo2: cldo2 {
-> +				/* 3.3v - unused */
-> +			};
-> +
-> +			reg_cldo3: cldo3 {
-> +				regulator-always-on;
-> +				regulator-min-microvolt = <3300000>;
-> +				regulator-max-microvolt = <3300000>;
-> +				regulator-name = "vcc-io";
-> +			};
-> +
-> +			reg_cldo4: cldo4 {
-> +				regulator-min-microvolt = <3300000>;
-> +				regulator-max-microvolt = <3300000>;
-> +				regulator-name = "vcc-wifi";
-> +			};
-> +
-> +			reg_boost: boost {
-> +				regulator-min-microvolt = <5000000>;
-> +				regulator-max-microvolt = <5200000>;
-> +				regulator-name = "boost";
-> +			};
-> +
-> +			reg_cpusldo: cpusldo {
-> +				regulator-always-on;
-> +				regulator-min-microvolt = <500000>;
-> +				regulator-max-microvolt = <1400000>;
-> +				regulator-name = "cpusldo";
-> +			};
-> +		};
-> +	};
-> +};
-> +
-> +&uart0 {
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&uart0_ph_pins>;
-> +	status = "okay";
-> +};
-> +
-> +&usbotg {
-> +	dr_mode = "peripheral";
-> +	status = "okay";
-> +};
-> +
-> +&usbphy {
-> +	status = "okay";
-> +};
-> diff --git a/board/sunxi/MAINTAINERS b/board/sunxi/MAINTAINERS
-> index 4bcd9b9af7..e31c1b3a83 100644
-> --- a/board/sunxi/MAINTAINERS
-> +++ b/board/sunxi/MAINTAINERS
-> @@ -121,6 +121,11 @@ M:	Paul Kocialkowski <contact@paulk.fr>
->   S:	Maintained
->   F:	configs/Ainol_AW1_defconfig
->   
-> +ANBERNIC RG35XX-2024
-> +M:	Chris Morgan <macromorgan@hotmail.com>
-> +S:	Maintained
-> +F:	configs/anbernic_rg35xx_h700_defconfig
-> +
->   AMARULA A64-RELIC
->   M:	Jagan Teki <jagan@amarulasolutions.com>
->   S:	Maintained
-> diff --git a/configs/anbernic_rg35xx_h700_defconfig b/configs/anbernic_rg35xx_h700_defconfig
-> new file mode 100644
-> index 0000000000..e8958aaf57
-> --- /dev/null
-> +++ b/configs/anbernic_rg35xx_h700_defconfig
-> @@ -0,0 +1,50 @@
-> +CONFIG_ARM=y
-> +CONFIG_ARCH_SUNXI=y
-> +CONFIG_DEFAULT_DEVICE_TREE="sun50i-h700-anbernic-rg35xx-2024"
-> +CONFIG_SPL=y
-> +CONFIG_DRAM_SUN50I_H616_DX_ODT=0x08080808
-> +CONFIG_DRAM_SUN50I_H616_DX_DRI=0x0e0e0e0e
-> +CONFIG_DRAM_SUN50I_H616_CA_DRI=0x0e0e
-> +CONFIG_DRAM_SUN50I_H616_ODT_EN=0x7887bbbb
-> +CONFIG_DRAM_SUN50I_H616_TPR2=0x1
-> +CONFIG_DRAM_SUN50I_H616_TPR6=0x40808080
-> +CONFIG_DRAM_SUN50I_H616_TPR10=0x402f6633
-> +CONFIG_DRAM_SUN50I_H616_TPR11=0x1a1e1e1b
+--j4axkujm35vrojpe
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-If your "Memory Dumps from Factory 35XXH (Allwinner H700) " from gist 
-correct,
+Hi Jonas,
 
-TPR12 parameter should be here.
+On Fri, Aug 02, 2024 at 11:04:05PM GMT, Jonas Karlman wrote:
+> Hi Sebastian,
+>=20
+> On 2024-08-02 19:59, Sebastian Reichel wrote:
+> > Since older U-Boot releases do not negotiate USB PD, the kernel
+> > DT may not enable the USB-C controller by default to avoid a
+> > regression. The plan is to upstream it with 'status =3D "fail";'
+> > instead. U-Boot should then mark it as 'status =3D "okay";' if
+> > it negotiated USB PD. Currently existing upstream kernel DTs do
+> > not yet have the USB-C controller at all, so we ignore any
+> > failures.
+>=20
+> I do not really understand why you need to upstream it this way, there
+> are plenty of other rk3588 boards with fcs,fusb302 already having status
+> "okay" that possible are affected by same USB PD issue that ROCK 5B
+> have.
+>=20
+> I guess you want to try and protect users that upgrade kernel DT and
+> ignore upgrading to a newer U-Boot, use vendor U-Boot or any other
+> bootloader from having possible issues with those USB PD power supplies
+> that have issues?
 
-> +CONFIG_MACH_SUN50I_H616=y
-> +CONFIG_RESERVE_ALLWINNER_BOOT0_HEADER=y
-> +CONFIG_SUNXI_DRAM_H616_LPDDR4=y
-> +CONFIG_DRAM_CLK=672
-> +CONFIG_R_I2C_ENABLE=y
-> +CONFIG_DEFAULT_FDT_FILE="sun50i-h700-anbernic-rg35xx-2024.dtb"
-> +CONFIG_LAST_STAGE_INIT=y
-> +CONFIG_SPL_I2C=y
-> +CONFIG_CMD_BDINFO_EXTRA=y
-> +CONFIG_CMD_BOOTDEV=y
-> +CONFIG_CMD_BOOTMETH=y
-> +CONFIG_CMD_BOOTZ=y
-> +CONFIG_BOOTM_OPENRTOS=y
-> +CONFIG_BOOTM_OSE=y
-> +CONFIG_CMD_ADTIMG=y
-> +CONFIG_CMD_ADC=y
-> +CONFIG_CMD_CLK=y
-> +# CONFIG_CMD_LOADB is not set
-> +# CONFIG_CMD_LOADS is not set
-> +CONFIG_CMD_BKOPS_ENABLE=y
-> +CONFIG_CMD_MMC_REG=y
-> +CONFIG_CMD_MMC_SWRITE=y
-> +CONFIG_CMD_SDRAM=y
-> +CONFIG_CMD_PMIC=y
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_NET is not set
-> +CONFIG_BUTTON=y
-> +CONFIG_BUTTON_GPIO=y
-> +CONFIG_SPL_SYS_I2C_LEGACY=y
-> +CONFIG_SYS_I2C_MVTWSI=y
-> +CONFIG_SYS_I2C_SLAVE=0x7f
-> +CONFIG_SYS_I2C_SPEED=400000
-> +CONFIG_REGULATOR_AXP=y
-> +CONFIG_AXP717_POWER=y
-> +CONFIG_AXP_DCDC2_VOLT=940
-> +CONFIG_AXP_DCDC3_VOLT=1100
-> +CONFIG_REGEX=y
-> +# CONFIG_EFI_LOADER is not set
+Correct. Existing upstream U-Boot with new kernel would result in a
+boot loop. That's precisly why we need this U-Boot series. Since the
+Rock 5B is usually powered via USB-C and Radxa explicitly requests a
+USB-C PD power-supply almost everyone would be affected. IDK how
+other boards solve this considering U-Boot does not yet have a
+fusb302 driver. For me **all** of my power-supplies trigger a hard
+reset and thus a power-loss when booting a kernel with fusb302
+combined with an old U-Boot version not supporting fusb302.
+
+-- Sebastian
+
+> > Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+> > ---
+> >  board/radxa/rock5b-rk3588/rock5b-rk3588.c | 11 +++++++++++
+> >  1 file changed, 11 insertions(+)
+> >=20
+> > diff --git a/board/radxa/rock5b-rk3588/rock5b-rk3588.c b/board/radxa/ro=
+ck5b-rk3588/rock5b-rk3588.c
+> > index 1c17ae93c76c..4e926ebf2cb0 100644
+> > --- a/board/radxa/rock5b-rk3588/rock5b-rk3588.c
+> > +++ b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
+> > @@ -3,6 +3,8 @@
+> >   * Copyright (c) 2023-2024 Collabora Ltd.
+> >   */
+> > =20
+> > +#include <fdtdec.h>
+> > +#include <fdt_support.h>
+> >  #include <usb/tcpm.h>
+> > =20
+> >  #ifdef CONFIG_MISC_INIT_R
+> > @@ -33,3 +35,12 @@ int misc_init_r(void)
+> >  	return 0;
+> >  }
+> >  #endif
+> > +
+> > +#ifdef CONFIG_OF_BOARD_SETUP
+> > +int ft_board_setup(void *blob, struct bd_info *bd)
+> > +{
+> > +	if (IS_ENABLED(CONFIG_MISC_INIT_R))
+>=20
+> It make very little sense to check for this, it is implied for almost
+> all Rockchip boards since it is used in rockchip board common code
+> to setup serial and Ethernet mac addresses env vars.
+>=20
+> Regards,
+> Jonas
+>=20
+> > +		fdt_status_okay_by_compatible(blob, "fcs,fusb302");
+> > +	return 0;
+> > +}
+> > +#endif
+>=20
+
+--j4axkujm35vrojpe
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEE72YNB0Y/i3JqeVQT2O7X88g7+poFAmauVi0ACgkQ2O7X88g7
++praRg//THqx9f4+C6xtidr+1+MZJWvt1VNG719kIiOLTpea3V5dVcBynJPbylJk
+y59FO6eFgJU8i/DKbAIDdafgmUydYb7kYhwrjTdDpqdxvNGtv98lMv3KXyn1ATKZ
+dl6iKFWQbxCeGBjiZjuYPnZPPNJd2Xo2Pdx7svdT7Fji+rtfE0/QqY8XQ08c6Sws
+PdIh3Kt8rrmR7j1LTHZuJfAPq1z48gJ5HcsS8Bu25KaFE9KCC+Wf+AVJfwdUBIOn
+OunOTyMVe771EtimP6wFDDhH4uHrp/8IrIUlOoZ/hfzw/mfibDn9pylSl7e1Ajrx
+BDuov9yonH2pZxli7G9ezLbHPkbMrjXkL+ITLeS/Xe64z/SWyocIgGIccrtnyRh4
+77njBbYSx/In60xFxX9S63lMEyf4EBLUCziueI2IZtVkrDL1q3kJJMorAqbG0yQO
+cKblL3Ut4ukTMShI9zxuNug2bwK/Z963Tbo779mURYnfOAIVsYS/rmz5GbkjL9iY
+WJFyyoQiVah2L1txWDS4vJaUm1PDTq724QyeffS1tepb8jlTU5424lFEaOrTDFvg
+/ev8dtJ0G+Bwn651BhNOnkw0SAhudx3R3gsucul3NiMz5bBoWMH/hsqZOoWGslCN
+QDgJfrODupSZ0P9SvhLCnazIDgfZ6XUhixh0fjwV19gucZU7TpM=
+=D9Uj
+-----END PGP SIGNATURE-----
+
+--j4axkujm35vrojpe--
