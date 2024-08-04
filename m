@@ -4,46 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22D4CC3DA7F
-	for <u-boot@archiver.kernel.org>; Sun,  4 Aug 2024 10:06:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 373A6C3DA64
+	for <u-boot@archiver.kernel.org>; Sun,  4 Aug 2024 15:06:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38CC088815;
-	Sun,  4 Aug 2024 12:06:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
+	by phobos.denx.de (Postfix) with ESMTP id 5342C88719;
+	Sun,  4 Aug 2024 17:06:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Hs9YMEri";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D795D88815; Sun,  4 Aug 2024 12:06:05 +0200 (CEST)
-Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
+ id 227178872E; Sun,  4 Aug 2024 17:06:09 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DC1888861
- for <u-boot@lists.denx.de>; Sun,  4 Aug 2024 12:06:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9777B8870D
+ for <u-boot@lists.denx.de>; Sun,  4 Aug 2024 17:06:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=sys-base.io
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paulk@sys-base.io
-Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id 094411F00047
- for <u-boot@lists.denx.de>; Sun,  4 Aug 2024 10:06:01 +0000 (UTC)
-Received: by laika.paulk.fr (Postfix, from userid 65534)
- id 48F29A13B8C; Sun,  4 Aug 2024 10:06:00 +0000 (UTC)
-Received: from collins (unknown [192.168.1.1])
- by laika.paulk.fr (Postfix) with ESMTPSA id 9B2BCA13B85;
- Sun,  4 Aug 2024 10:05:59 +0000 (UTC)
-Date: Sun, 4 Aug 2024 12:05:57 +0200
-From: Paul Kocialkowski <paulk@sys-base.io>
-To: Anatolij Gustschin <agust@denx.de>
-Cc: u-boot@lists.denx.de, Paul Kocialkowski <contact@paulk.fr>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 09/11] board: sniper: convert to DM_I2C
-Message-ID: <Zq9ShR3cdTxbCpqQ@collins>
-References: <20240803161513.486062-1-agust@denx.de>
- <20240803161513.486062-9-agust@denx.de>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=32c7=PE=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1722783962;
+ bh=o9MywSeLLGF7nSoRbc+dLwyWoTNmQms7RGUBj983e5s=;
+ b=Hs9YMEriMzmJN2IKnrGt9qvrEi3p9DP4o55yyvK0eGhIzsxSJ6U+Kcr0uWHpWVn1PAyCk7jfx
+ XqHS1++0/YcOQpyeiW4Y25ZMGtGRe9WAmtg6+xs5t+9es3OGlO2FyrxSBO68cKf3fA/xZV3MIzC
+ HUXihR2KnotN+d6vBGuEwKcpQrV6tl7pcQGGjzk9zzhB14gvfNeTyVTTFZHWKNQ/QGRAO0gduhd
+ loApSexDa7DlI7IQGqHYiMBGZQzFUzICbswE1F4NLqtplaE60+4QCHKLalOL9anwg228TdMw88X
+ j5BUEKQiJYOS2gGCiXykK4JMJwKJKCMFNvnxmbdTOYBQ==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 0/3] dm: core: Avoid multiple calls to fdt_parent_offset()
+Date: Sun,  4 Aug 2024 15:05:48 +0000
+Message-ID: <20240804150556.3519995-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="yPlMWqV70+JSUGXG"
-Content-Disposition: inline
-In-Reply-To: <20240803161513.486062-9-agust@denx.de>
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66af98d9b04314fb234e2f7e
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,110 +66,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Use of fdt_parent_offset() is very expensive as detailed by the function
+documentation:
 
---yPlMWqV70+JSUGXG
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+  NOTE: This function is expensive, as it must scan the device tree
+  structure from the start to nodeoffset, *twice*.
 
-Hi,
+This series remove multiple calls to fdt_parent_offset() or
+ofnode_get_parent() when instead a single call can be made and the
+returned value can be reused.
 
-Le Sat 03 Aug 24, 18:15, Anatolij Gustschin a =C3=A9crit :
-> Conversion to DM_I2C is mandatory, enable DM_I2C
-> to disable board removal warning. Also enable
-> OF_UPSTREAM since we do not have a default device
-> tree.
+This series help reduce boot time by around:
+- ~137ms on a Radxa ROCK Pi 4 (RK3399)
+- ~33ms on a Radxa ZERO 3W (RK3566)
 
-Thanks for looking into this, but I already submitted a similar patch just
-a few days ago, with additional cleanups!
+Jonas Karlman (3):
+  dm: core: fdtaddr: Avoid multiple calls to fdt_parent_offset()
+  dm: core: ofnode: Avoid multiple calls to ofnode_get_parent()
+  dm: core: regmap: Avoid multiple calls to ofnode_get_parent()
 
-See https://patchwork.ozlabs.org/project/uboot/patch/20240729204439.429900-=
-3-paulk@sys-base.io/
+ drivers/core/fdtaddr.c | 24 +++++++++++++++++-------
+ drivers/core/ofnode.c  |  5 +++--
+ drivers/core/regmap.c  | 14 ++++++++++----
+ 3 files changed, 30 insertions(+), 13 deletions(-)
 
-Cheers,
+-- 
+2.45.2
 
-Paul
-
-> Signed-off-by: Anatolij Gustschin <agust@denx.de>
-> ---
-> Cc: Paul Kocialkowski <contact@paulk.fr>
-> Cc: Tom Rini <trini@konsulko.com>
-> ---
->  arch/arm/mach-omap2/omap3/Kconfig | 1 +
->  configs/sniper_defconfig          | 6 ++++--
->  2 files changed, 5 insertions(+), 2 deletions(-)
->=20
-> diff --git a/arch/arm/mach-omap2/omap3/Kconfig b/arch/arm/mach-omap2/omap=
-3/Kconfig
-> index f15f44fe7d..b56e379ca1 100644
-> --- a/arch/arm/mach-omap2/omap3/Kconfig
-> +++ b/arch/arm/mach-omap2/omap3/Kconfig
-> @@ -115,6 +115,7 @@ config TARGET_SNIPER
->  	select OMAP3_GPIO_5
->  	select OMAP3_GPIO_6
->  	imply CMD_DM
-> +	imply OF_UPSTREAM
-> =20
->  endchoice
-> =20
-> diff --git a/configs/sniper_defconfig b/configs/sniper_defconfig
-> index 0243b15f31..29e783da8a 100644
-> --- a/configs/sniper_defconfig
-> +++ b/configs/sniper_defconfig
-> @@ -7,6 +7,7 @@ CONFIG_SYS_MALLOC_F_LEN=3D0x400
->  CONFIG_NR_DRAM_BANKS=3D2
->  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
->  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0x4020ff00
-> +CONFIG_DEFAULT_DEVICE_TREE=3D"ti/omap/omap3-sniper"
->  CONFIG_SPL_TEXT_BASE=3D0x40200000
->  CONFIG_TARGET_SNIPER=3Dy
->  CONFIG_SPL_STACK=3D0x4020fffc
-> @@ -32,12 +33,13 @@ CONFIG_CMD_GPIO=3Dy
->  CONFIG_CMD_I2C=3Dy
->  CONFIG_CMD_MMC=3Dy
->  # CONFIG_CMD_SETEXPR is not set
-> +CONFIG_OF_CONTROL=3Dy
->  CONFIG_ENV_OVERWRITE=3Dy
->  CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
-> -CONFIG_SYS_I2C_LEGACY=3Dy
-> +# CONFIG_TI_SYSC is not set
-> +CONFIG_DM_I2C=3Dy
->  CONFIG_SPL_SYS_I2C_LEGACY=3Dy
->  CONFIG_SYS_I2C_SPEED=3D400000
->  CONFIG_TWL4030_INPUT=3Dy
->  CONFIG_MMC_OMAP_HS=3Dy
->  CONFIG_CONS_INDEX=3D3
-> -CONFIG_OF_LIBFDT=3Dy
-> --=20
-> 2.25.1
->=20
-
---=20
-Paul Kocialkowski,
-
-Independent contractor - sys-base - https://www.sys-base.io/
-Free software developer - https://www.paulk.fr/
-
-Expertise in multimedia, graphics and embedded hardware support with Linux.
-
---yPlMWqV70+JSUGXG
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmavUoUACgkQhP3B6o/u
-lQzrTRAAkqIGFIjrsI9XLh+hf3YVBQwTMIAM+qVIyedYbdzKLnKV7w37EbBdnxKW
-WtEHG8xmY2dA5h9HBo8xEvNRSAbMGHpqyaAlnpgBCHdRRE91ie9ycIPMd+QY6oaz
-+TpFOi9z1Xe0a9gwymSkWyrjfegf/89MX/zXhIcPqwFoTW241fLRa4VSyONIfZuh
-IUR3oIfWGSZ32grFSFjRf4/172jH/UR/mI8h47leShWdnpcxXPaViDtqetHobs/c
-DmA31ApDaKdRpze5T8QqBwn7JTuikE8uxwMbv9d924ph8iuVW08rjcSiwIH02UMO
-NRctbhfKdGPl+w9g8g7IK9ThpbIaM5NqsPZYTwqlyKYESJQtmdq2bM7hrgScUKLB
-+rw3buxbYkLIiTsqG8rtZa8yzbdEnXVXHXyEiGzX1Gp7jEaSiBa6lN8cvR5PcSpV
-8j6WMblJAvrkoZd1IIdVoCr9E34OlhdrjE0SP8Sm80mj1vV9CuIJdMB8x24K0SAB
-nqjb/dPG44jaI6UqgdVHMfZs9vKTXJiiwY12fRM5+nijkW+mIQjNR7HIPCWgka2h
-PPnSTghUQaxK7mON1RyWQSPMOSfcbigwGJPM8E0vPXzt8zHo0s4O3QD6OzL7Uk3X
-4eZWhMaQP7YP9CAp06YUxYYhEBukbTQKykHZACgacnMN2Ql4GUc=
-=APlU
------END PGP SIGNATURE-----
-
---yPlMWqV70+JSUGXG--
