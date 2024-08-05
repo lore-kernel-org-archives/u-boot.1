@@ -4,161 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC2E1C3DA7F
-	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 10:23:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6359CC3DA4A
+	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 10:54:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1246787D10;
-	Mon,  5 Aug 2024 12:23:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 8C7D4888AB;
+	Mon,  5 Aug 2024 12:54:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="F0TKNkWK";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 50A3688247; Mon,  5 Aug 2024 12:23:47 +0200 (CEST)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::600])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4848587C38
- for <u-boot@lists.denx.de>; Mon,  5 Aug 2024 12:23:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ySHK3tEACGsmWrg4e50Cc5di1glRO5TBWnKjCf4Rvike1jWDEjJna8Rq53vOBu+QMGNRtXaMBB7BgF1IMR/0ohgTh/C8m8dMfAOruCsWeeE23RGSAviRN3l/F9+tihiwk0xx+MVYsAzsnAZma7Ja9PS/I+5zqQGGfGq8Drk0lz3e6/EZDXh0tFaYrlAicGw1sg42tpBIVL9nXdfDgISQyYNkZo/EwO7yey7RwIToq4m1jCmhCrX/1WWgILbypdkw7oEF19DWpGs9HDyTvZo3l0CLwZLnMQ/5uDJQryBTK678qxIackHp96CJVDZ1dB07pdyEZhdTGmXAldnJen8oyw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6BuNyFBK+MU8jUjJ4CMMxM2G2uaoygENeegH9gBg88I=;
- b=zHAx6lKOVAnxHLzBNWBnFGsSDbXR653BhAwQj/oFkDFG4RxmGtKnGE4U2rsqyAtCMuu+cMkL491bAnRO5bZWRzdPePbMScyxU80xoix5eN7KqhjrSngSQmTNVwI/Ibt3FTGdLwOzZQg3wU6S4zFj3iHPFo/w58wHSe/gRN6lBHCZyWlqf93EveymHRt/IAqGVSVdIMoqYUk586e9MDA8xi/9WJb8AREH9ZL1I5fpcImiuyPeYfp6WBaxYSZQ7CE6TxYZnlEDwPhUHcRTgOsPAshybfFVQBdn+hhUSCyFB/E86rIqnOScYp7xzUy8J9mISIB//OWJxgjc/9k6fJvM9w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6BuNyFBK+MU8jUjJ4CMMxM2G2uaoygENeegH9gBg88I=;
- b=F0TKNkWKBh+74HBW5kOroT/lG+Jf89V9see3v5ndqtqGSeQJgGxWyXZimW4dtS6s0K99LmLauouifAHuDmpw1UVHUjJn74Wl5sVtxDoz7ZNSpR3FQ8MIYdrrIo040IkHUvMCegF+ZWoxK9GA3TZljJoCr09ejf9qzgFs47FVpJQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by DB9PR04MB8445.eurprd04.prod.outlook.com (2603:10a6:10:2cf::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7762.23; Mon, 5 Aug
- 2024 10:23:42 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%5]) with mapi id 15.20.7784.020; Mon, 5 Aug 2024
- 10:23:42 +0000
-Message-ID: <6df6a6df-f8fc-44c3-9688-6f2ccbd8888d@cherry.de>
-Date: Mon, 5 Aug 2024 12:23:39 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/4] rockchip: Skip serial pinctrl at pre-reloc phase
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>,
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
-Cc: u-boot@lists.denx.de
-References: <20240805084350.3895788-1-jonas@kwiboo.se>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20240805084350.3895788-1-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BE1P281CA0062.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:26::20) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1722855287;
+	bh=HjFciGllr9Y41L6+dg1dftKKcbOoc1wPQ8iBnzJooJs=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=Q6IqnBDHLYjiTt/bkUjK5+rQuKLODKvwx5J/K+hIZiTn5sZFJDlj67wGNF2k2sv7r
+	 UaxuCd/xBjZA1tGADUmEDE2oqeJOuO4zoCypcqMGjy+Edx/41vuqJyt24jt8m4ZR2S
+	 Yc1DHj3daTMLLlWDNRxR4sRPS/B+BVk9/MrWBKjInsPh/8Bt+j+PZdoyJfAFq2maE7
+	 icujx+h0XfUQZ/t4+rWvHLjaFXV35a5xloziAjgmuyay0T4yrTAMTxeAdjQpH68reh
+	 DKXdUrBiFKXQLe2dPClIJqXIUVhDjyfG54SB2i1f7wT1MB7cvOy5fzZ0LUmrq5e2QE
+	 eX2QHetn60r+A==
+Received: from [192.168.1.107] (82-131-232-44.pool.digikabel.hu
+ [82.131.232.44])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 51CD088884;
+ Mon,  5 Aug 2024 12:54:44 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1722855287;
+ bh=HjFciGllr9Y41L6+dg1dftKKcbOoc1wPQ8iBnzJooJs=;
+ h=Date:Subject:To:References:Reply-To:From:In-Reply-To:From;
+ b=MDDkJvwVEq87FWC6x+pmpZAIqlgoBtHtVDVlYL/fXo8TL/sfJ0nn1Jqf9bs1MYYdX
+ C3BzG4nVwVUF7t23flbcHx+yJPt5IQQzUsKgw8Blnyu6Q16IWyLnOXnbgt7gi1FkIM
+ /ivajwWLED/M3y4/dEY65FUes/B3Ewm4OX8WEfZN9vyQpVaG2UEdiyqU7Vipw5apG9
+ Wlaqs8n9eqf+wHVGEJllS2R+RmB1GSBfpnsK9SYaaFH9iYqXJYqEWq5IU19TyPgs2G
+ s31rHonQb2ThPvteDLVgE6nzWq33pQTEy7KWFTMP3kWh3WCxXtWoXWqUZ9dG7YPj8+
+ TT7uYbzaau3vw==
+Message-ID: <89972a73-b9b6-2ea4-960a-49cb4727cdbf@denx.de>
+Date: Mon, 5 Aug 2024 12:54:05 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DB9PR04MB8445:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0bf71cc9-6abb-4a72-4cb5-08dcb538ae4c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?cUJyUWRoUXBXRkFnSnl2bDJ2VVE4QlliMEo1QU1adS9aMTU1cTY1UWJEY2RB?=
- =?utf-8?B?RXM3S0hXMmN5TXZ4amR6OGU0d0ZBNFBFbklTVENZc3dxcWtEUFdqK0o3YWhE?=
- =?utf-8?B?eGJIZmVGQ2FTY0p6OGxlTXpFeGZkWVpObmdHbGZ4QWE2c05EdE9xbFJTNk9O?=
- =?utf-8?B?czZGYWwxdE9VNjBod1h2bW9zMmpPc3RxVmJaOHgyb3c4aHlEekFGRzZvMWxG?=
- =?utf-8?B?cVNKRVZTaWgzMktOQmlUcG9yRFprZFZNa2lPdUF6K1l6Mmp2MDRLbEt3blBp?=
- =?utf-8?B?MXdyQStMU3lFTi9JTGhZWDVDQVRKNHMxYlhNOTk4WDRxUGFQcjZxQUJIcDY3?=
- =?utf-8?B?NE1ma1NSeFRVQlNUdVcya3lEYlpxYmJzWDhVWmhBRENsWjFoTUx5bGJTd2hp?=
- =?utf-8?B?amkvYzZCZzVuMW83Slg2bXN4d1pyYk5FYWx4c29RWWxpMHRHVWZPWndHMGdF?=
- =?utf-8?B?Z2R2bXJ2SmNSQXNDL1ZQK3c1VjhyRkg5bHh6L1lmM20veVJLd2VMaDlFSTR0?=
- =?utf-8?B?dW0ydHVhVE5yN0R0WkswRXJxUjBnZmg5ZEV4MDZKclkvQ2F5dDVDU3hVaDg5?=
- =?utf-8?B?QkN0Wm5CZTJUWE85Wkhib1llYTdtczRveVF6Vml6SGdidlM5T3Y2WnMxaFJJ?=
- =?utf-8?B?WlBmbXMzLzhWdFNWZXlJVXBRMEdkdlFFU1ZPZHh0c1BZOTV0MlZBdnRTcUN2?=
- =?utf-8?B?azlrY3FxYWlLcXZWYnVrNHlvbllNQlpJYjk0ZnIwVmE4TGlqV2RTWEUwQVhh?=
- =?utf-8?B?Rkliank1OHQ4QmhpMC9yTVlFaTlrYnArZWdPYWFsODdWdlpYQVZyRHNGLzY0?=
- =?utf-8?B?d2hZdDM5ckpLWERuZ0xiek5lRHVOaG5KcHo0UW5qdXRHa24rNFlkcWxrUWUy?=
- =?utf-8?B?ditHb09ZbnpFSGxlN3k2RC9xZUNzMTJKYmwyMXJBbVp3SEFXZGszamlXcU81?=
- =?utf-8?B?VFQ3MHVsUlkwZnJQQzIwaDA5VWNrdzRzcTlkRWJjL3RDWnBEeUtURVZJZy9S?=
- =?utf-8?B?Ym9zemZjeVRieWVKdTY5QjZ4VXRBV2hUdml0NStRdi9ab1Jna1RUN1hTL1F4?=
- =?utf-8?B?QXpTZk1CSjVycVpOdjRwWHRRWnVFQnNXQloxcWw2M2taQ0h6WjVUbloxWE16?=
- =?utf-8?B?MmRmaEhaYktodFpTaEkzcjVUN0k5NFMydUROeGJKTmkyRlcvUk8xb294NU16?=
- =?utf-8?B?ZFZFQVNjTmUyellkSWVJL1dWeGdHd0d4TnNDM3ZLUEhNZ2k0MW9jVmFIRmc2?=
- =?utf-8?B?WGJ0MjlkcDFhOGswNHFEYmpjL0JYU2t4U1RrK3hHdjVQWExXOWhGNVR0WE1F?=
- =?utf-8?B?SS8xcWNUN3JyeHpldm16Ymc5UC9LeU9vVGNhTURXOWttM3I5K0x6UE1BZ0RH?=
- =?utf-8?B?eGoydFlRWFdQK1p6L0ZaSkhpQVdtWDhvaURBTTRtK0NzZkVPRlVDazBaa0Zn?=
- =?utf-8?B?L29wOFpya29FUmF6eFFwYVRhc0FlaEtTT1ZmUDAvSWN6QnI0dFQxMmxNazlC?=
- =?utf-8?B?RFduVGxyMDlMU3RBRWxkTU9XZzgrVHBOSlZoS1Mvblc5TDR1RWxDVWlieEsz?=
- =?utf-8?B?NzJKUHV0M3dVSHkwSVVQZGUyQnlRQkZxVFVzdHdQZTJ1MUkxdFdnd0ZsZmxn?=
- =?utf-8?B?Rnh2d1A3Y204NVJkcXBFWkdsM05EcGUvMk5ucEoyZGpwMlQxTnlqWEIxbFpW?=
- =?utf-8?B?VVBOWDAzQk9XbDFXRmcwV0JKVVJtRXhGekhPZ25VcU5FTUZtUHBveStkR0RC?=
- =?utf-8?B?VXhqTmhwcWdGaHp4S3VaUHB2SktsZXlCYm4xeEE0RnhQckNwRmhDOTJaOEgx?=
- =?utf-8?B?bDR4U21PNWxpM1NiNGtLUT09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Smo5OHdueWhOSXhLeHRrV1VnaDhWTmg3K0dMTDQrQjFmODFKTlZLVm43QTU4?=
- =?utf-8?B?ZzVSWVgxUDkrUlBuejNEaEt6UXZiV1lITzZEUVhLb21Fd01NalVCbkl0ZmF4?=
- =?utf-8?B?dEUvOWRreDE1R0x5cVFQdWg2ZXNSd04vV1FtV2ErblNDNTNoSi9qa0FTRjht?=
- =?utf-8?B?YVY1TGtmVEZmY0xISjVIOE9BS2hJbCtic0twdU5XSVR6alpvNzR6aUYzMklJ?=
- =?utf-8?B?TkhZQjlYTHROOUJCeGppZlFMbVgrNE44Z3pRRjNBWmluZUFDZzlqQjBqT0RI?=
- =?utf-8?B?bC9ncWE0R3lqOTFCWFJsWjZhL1JwV01pRS9vOS9nMmUrUFYrY2RwZmVoSURX?=
- =?utf-8?B?b2ZrM0FMNTlCUFI4bUdaelpEdHpsdEhENjNBTmRPeFhnVGZkM2s1RWlySkNp?=
- =?utf-8?B?MWdlcC9JMlRlUFhaZm1GWFl6b3RTK3ZkOTRFZ0RQQ2hjNTc3cXdKWnpTSkxx?=
- =?utf-8?B?Nk9DYitHMG9lVGp2YnRaTkxEaUxZdGkzcFE1SUErRWVDSENGY3FsU2J3U2cy?=
- =?utf-8?B?WkNzQjEzMFJMb3M0cFBNRTlxUWhGQUVYZ1ZWUnJlbnZoTlEzZGdlR3VBZzFC?=
- =?utf-8?B?SVJrQldld3NvVWJmVGR2bVJhZ2JHeWIyMGJ6OVVQZlpJZWtDUlBsTkVDZk9h?=
- =?utf-8?B?YjVzQ1VHK2k4OW4yTWw2R09qSklvaDMwdG12ZnEwZlN6OW9BS3BkVUlyYlNh?=
- =?utf-8?B?aVR0Q0NZaWlQd3BUYTlsQlJsVklMWHduVTlZYUQzbGhGT2RvSTJyMHpjdGRv?=
- =?utf-8?B?TVBRbG1McWtLbWdNdFp6aWpiR3drSmVMdllrdW44VU9pdkhTbmduaEl6M3U4?=
- =?utf-8?B?d0hvdGhCM25mZzhTdW96OXI4ZldJRDZsOW91S1lzcGhFN0twZkczdk1nWUtJ?=
- =?utf-8?B?L0lwTjFwU2JxR2Z2ampFeW1xNzZ3UEg0MDROY3IvTEdta2hqR3BsRFZzM3BF?=
- =?utf-8?B?YmZsUUJ0alpacGxtUVJndHFLOTlOSWF3bVZNQlpmWnBLTlVkd3dXSHkvSXc5?=
- =?utf-8?B?TEtSR2VXdjB4T29PMVQ2Nkg0c3RzaVVHUTlKSnlhVGRXa3IxTzhVK21EdkV4?=
- =?utf-8?B?M3dMbzl0VGZMZ2dsZHNGYlZqY2RTRGxJS05waEdFamUwWVV5bmpNMTJ1Nm54?=
- =?utf-8?B?WkdLOVh5RnM0RVRmTjdTZzRIdVFwT0xzeEkxNU12emRMSkZpbUZkd0J1cFNM?=
- =?utf-8?B?NTgzdEFaUm5iZ1M4SGlzTWVRbzJoYnh1bDh2eFdZSEJhbDdhVXJRT3BYUWNQ?=
- =?utf-8?B?c3p5cml0M05XaERiNTFwVVR5MTdDM1FhTTQ3b0pKMXFnT0J6ZVlWSjRvQWgw?=
- =?utf-8?B?NzJnOXE0eFhtN1FyQ2N6WnREZWVnYVFQbkxxRnpKU3dCZ3ovb1VNaGx2YzV1?=
- =?utf-8?B?MEpqNjg5blFKSDRlaHpwdXZ6RVJSeUsxbC9DbUNpS2k0TTROVUJuU0lYdDlD?=
- =?utf-8?B?aWFmQ2x5YjUvZ09POWYrYW5UZEIrL0xuVnUrUzJqa2I5ako1alY3dTJzd2hG?=
- =?utf-8?B?MkltL3N4dmZKSW5uNVRvYVhtcXhFc3QyWFpNTmRqczMxS1ZaeUZKa3lKdGMw?=
- =?utf-8?B?WkYyWXVxSzNUbjFLaVR6ZHZMY1BQay8zSVExcUFDS1dmMHJlV05nK1YyUnN1?=
- =?utf-8?B?cVpwaUtsZXJ0Mys3eERZdkdDMG9WMkZUT0RFL1d5dHJ0a0Z6MVorNGRPQXB0?=
- =?utf-8?B?QSsvZUpjVTNEZjZtL2dVZFFYMzAzelpYNTRLZlNqVktaa3J2QnVzWS9BV1Az?=
- =?utf-8?B?N0RlbytOdjZuNS8yQWlJMmdVcGpDS25xRS8xTDFMV2RXUDVWQU1HYkpnNHlO?=
- =?utf-8?B?OVd0NllaQ052blBVNmZxd1hvMXdjc2lUdlhHNnZDazVtQlBsdTZtL1hMVkt1?=
- =?utf-8?B?a1RIeTdubzdxVHlhcjJWQjI5Ykc4TzNuNjA0bE02bEpxc1dGNWs4U0h5WDdi?=
- =?utf-8?B?UWRDZmJzMnB3SDVhWGIvdTVCMkxnclFpTUIvMnZrd3BIMkhQbUtSSG1XbUxW?=
- =?utf-8?B?cTNOY0tNaWp6Z2ZBd2RFRnFFRnRNV3htQjhlY3VJRUZ0cEFNN2lCQ3RNUS9M?=
- =?utf-8?B?NzNGRURNVjNRV0ozNnJ4Vkk3VkluY2xRUmx0a1R2dmNNRGJrU2N5ekMzZFJQ?=
- =?utf-8?B?TWovMjFiVXZqYUJiYnF1cWJ4RnVWRVhMNm40bEFGdURSQ09MZ3lNN0xxOGYr?=
- =?utf-8?Q?okOk19of5tkwYxMYIIu2W38=3D?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0bf71cc9-6abb-4a72-4cb5-08dcb538ae4c
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Aug 2024 10:23:42.7651 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hugQKJlCob/Hby0nI2pINvd3+gKHb9rvLLsY00xi8BKWY9QQ9cjmWiXx1SanJJ1RztBaCV/z2rJ6IeT2ixoxpVXvaYICN3HnABjP/B/O2p8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8445
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [EXTERNAL] Re: [PATCH 0/4] fs: ubifs: Fix crash and add safeguards
+Content-Language: en-US
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Ravi Minnikanti <rminnikanti@marvell.com>, u-boot@lists.denx.de,
+ Stefan Roese <sr@denx.de>, Hans de Goede <hdegoede@redhat.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Kyungmin Park <kmpark@infradead.org>,
+ Alexey Romanov <avromanov@salutedevices.com>
+References: <20240703101258.1670825-1-ada@thorsis.com>
+ <8f3a7059-6330-f332-8e9f-729b853e001e@denx.de>
+ <20240704-goes-grape-25a9f1d14c24@thorsis.com>
+ <20240801-wham-entertain-15505d61f84b@thorsis.com>
+ <e0c3e3e2-1c7f-e244-5b1d-0498b5771deb@denx.de>
+ <363c73bb-54cf-3800-bb31-9af83fbaf33d@marvell.com>
+ <44ca37d8-5d8c-80f7-1151-6a77732433f7@denx.de>
+ <20240805-outlook-dollhouse-e2d93213b174@thorsis.com>
+ <CAOf5uw=LbRAvDvG5_50OF0bUiL1TVfALwMBonza9s2x99tHoBQ@mail.gmail.com>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <CAOf5uw=LbRAvDvG5_50OF0bUiL1TVfALwMBonza9s2x99tHoBQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -170,63 +76,380 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hello Michael,
 
-On 8/5/24 10:43 AM, Jonas Karlman wrote:
-> UART pinctrl for serial is typically applied multiple times:
-> - in external TPL or in TPL for DEBUG_UART in board_debug_uart_init()
-> - in SPL for DEBUG_UART in board_debug_uart_init()
-> - in SPL using pinctrl from DT
-> - in pre-reloc phase using pinctrl from DT
-> - after relocation using pinctrl from DT
+On 05.08.24 10:58, Michael Nazzareno Trimarchi wrote:
+> Hi all
 > 
-> This series change bootph props for the UART pinctrl to not include them
-> in pre-reloc phase to save some boot time:
+> On Mon, Aug 5, 2024 at 10:49 AM Alexander Dahl <ada@thorsis.com> wrote:
+>>
+>> Hello,
+>>
+>> Am Mon, Aug 05, 2024 at 07:28:19AM +0200 schrieb Heiko Schocher:
+>>> Hello Ravi,
+>>>
+>>> On 01.08.24 21:39, Ravi Minnikanti wrote:
+>>>> Hi Heiko, Alexander,
+>>>>
+>>>> On 7/31/24 23:54, Heiko Schocher wrote:
+>>>>> Hello Alexander, On 01. 08. 24 08: 50, Alexander Dahl wrote: > Hei, > > Am Thu,
+>>>>> Jul 04, 2024 at 10: 18: 55AM +0200 schrieb Alexander Dahl: >> Hello Heiko, >> >>
+>>>>> Am Thu, Jul 04, 2024 at 06: 28: 31AM +0200 schrieb Heiko Schocher:
+>>>>>
+>>>>>
+>>>>> Hello Alexander,
+>>>>>
+>>>>> On 01.08.24 08:50, Alexander Dahl wrote:
+>>>>>> Hei,
+>>>>>>
+>>>>>> Am Thu, Jul 04, 2024 at 10:18:55AM +0200 schrieb Alexander Dahl:
+>>>>>>> Hello Heiko,
+>>>>>>>
+>>>>>>> Am Thu, Jul 04, 2024 at 06:28:31AM +0200 schrieb Heiko Schocher:
+>>>>>>>> Hello Alexander,
+>>>>>>>>
+>>>>>>>> On 03.07.24 12:12, Alexander Dahl wrote:
+>>>>>>>>> Hei hei,
+>>>>>>>>>
+>>>>>>>>> filesystem handling is different in U-Boot and beyond that UBI/UBIFS is
+>>>>>>>>> different from other filesystems in U-Boot.  There's UBI and UBIFS code
+>>>>>>>>> ported from Linux (quite old already now, maybe someone wants to update
+>>>>>>>>> that?), and there's "glue code" or "wrapper code" to interface with
+>>>>>>>>> U-Boot scripts, commands, and filesystem handling.  The fixes and
+>>>>>>>>> improvements in this patch series are for this U-Boot specific glue
+>>>>>>>>> code.
+>>>>>>>>
+>>>>>>>> Yes, the linux base is very old ... patches are welcome!
+>>>>>>>
+>>>>>>> The last sync was back in 2015 from linux v4.2, there were 800+
+>>>>>>> changes to ubi/ubifs in Linux since then. :-/
+>>>>>>>
+>>>>>>>> And for me it is not that easy, as I do not have a hardware with
+>>>>>>>> current mainline U-Boot running on it... I want to update a hardware
+>>>>>>>> I have to current mainline, but I had no time yet for it...
+>>>>>>>
+>>>>>>> Besides the custom hardware here, I used Microchip SAM9X60-Curiosity
+>>>>>>> lately, which is coming with a raw NAND flash and can boot from it.
+>>>>>>>
+>>>>>>>>
+>>>>>>>>> I'm no filesystem expert, but after days of debugging I'm quite sure the
+>>>>>>>>> bug is in U-Boot since UBIFS support was added in 2009, and it was
+>>>>>>>>> repeated in 2015 when generic filesystem support for UBIFS was added.
+>>>>>>>>> So please review carefully!
+>>>>>>>>
+>>>>>>>> Which bug?
+>>>>>>>
+>>>>>>> The memory leak and double free fixed with patch 1 of the series.
+>>>>>>>
+>>>>>>>>
+>>>>>>>>> The crashes were not easily reproducible, only with boards using the old
+>>>>>>>>> distroboot _and_ a boot script inspired by (but not equal to) the one
+>>>>>>>>> proposed by RAUC [1], which basically boils down to:
+>>>>>>>>>
+>>>>>>>>>       ubifsmount ubi0:boot (from distroboot)
+>>>>>>>>>       test -e (from distroboot)
+>>>>>>>>>       ubifsmount ubi0:rootfs1 (this time from the boot script,
+>>>>>>>>>                                triggering a ubifs_umount)
+>>>>>>>>
+>>>>>>>> So, you have a special sequence you execute to trigger the bug, good!
+>>>>>>>>
+>>>>>>>> In special 2 ubifsmount in a row... may not often needed for booting!
+>>>>>>>> (I ask me, why that is needed? Boottime is not good than...)
+>>>>>>>
+>>>>>>> Using distroboot with a script here.  The script is in a separate UBI
+>>>>>>> volume ubi0:boot, kernel is loaded from ubi0:rootfs1 or ubi0:rootfs2
+>>>>>>> however.  So there is 'ubifsmount ubi0:boot' from distroboot and in the
+>>>>>>> script found, loaded, and run there is 'ubifsmount ubi0:rootfs1' (or
+>>>>>>> rootfs2) later.  ubifsmount calls ubifsumount internally if some
+>>>>>>> volume is mounted already.
+>>>>>>>
+>>>>>>>>
+>>>>>>>> BTW: Is this really a good bootcmd in [1] as on *every* boot your
+>>>>>>>>         Environment is saved? This is not good for lifetime of your
+>>>>>>>>         storage device ... why not using bootcounter?
+>>>>>>>
+>>>>>>> Well, I was not aware of bootcounter, but I had a look and the actual
+>>>>>>> counter must be stored somewhere.  Possible are:
+>>>>>>>
+>>>>>>> - pmic → has no storage possibility on my board
+>>>>>>> - rtc → soc internal only, volatile in the end (if battery is empty)
+>>>>>>> - i2c eeprom → missing
+>>>>>>> - spi flash → missing
+>>>>>>> - filesystem → ends up on the flash
+>>>>>>> - nvmem → no other nvmems present
+>>>>>>> - syscon or some cpu register or sram → volatile
+>>>>>>>
+>>>>>>> So none of these are possible in my case, I only have a raw NAND as
+>>>>>>> storage and thus I have to use U-Boot env, which is stored in UBI here
+>>>>>>> btw to not stress the flash too much.
+>>>>>>>
+>>>>>>> I could investigate if it would be possible to let RAUC use the
+>>>>>>> U-Boot bootcounter infrastructure, but currently RAUC depends on
+>>>>>>> U-Boot environment variables for tracking boot attempts.
+>>>>>>>
+>>>>>>> btw: documentation of bootcount is sparse, I only found the very short
+>>>>>>> 'doc/README.bootcount' and it's not even migrated to recent U-Boot
+>>>>>>> sphinx based docs. ;-)
+>>>>>>>
+>>>>>>> But from what I understood the concept is the same, U-Boot counts
+>>>>>>> something and Linux userspace has to reset it.  The counter must be
+>>>>>>> stored somewhere, for example in U-Boot env if no other storage is
+>>>>>>> possible.
+>>>>>>>
+>>>>>>>>
+>>>>>>>>> Crashes can be triggered more easily, if patch order is changed and
+>>>>>>>>> patch 2 (resetting pointers to NULL after free) comes first, or if patch
+>>>>>>>>> 2 is applied on its own only.
+>>>>>>>>
+>>>>>>>> Hmm...
+>>>>>>>>
+>>>>>>>>> The fix is in the first patch, and on my boards I see no crashes
+>>>>>>>>> anymore.  I also tested all kinds of combinations of calling `ubi part`,
+>>>>>>>>> `ubi detach`, `ubifsmount`, `ubifsumount`, `ubifsls`, `ubifsload`, `ls`,
+>>>>>>>>> `load`, `size`, and `test -e` and got no crashes anymore after the fix.
+>>>>>>>>
+>>>>>>>> That sounds good! Hmm.. test -e has nothing to do with ubi/ubifs I think.
+>>>>>>>
+>>>>>>> Oh it has, 'test -e' calls file_exists() which calls fs_exists() which
+>>>>>>> ends up calling ubifs_exists() which is one of the functions causing
+>>>>>>> an immediate memory leak, see patch 1.
+>>>>>>>
+>>>>>>>> On what hardware do you test? Is it in mainline?
+>>>>>>>
+>>>>>>> Tested on custom hardware, but I'm confident it should be reproducible
+>>>>>>> on any board using ubifs, especially after applying patch 2 resetting
+>>>>>>> pointers of freed memory to NULL.  This should trigger the bug with
+>>>>>>> the simple sequence already described:
+>>>>>>>
+>>>>>>>      > ubifsmount ubi0:anyvolume
+>>>>>>>      > ls ubi ubi0:anyvolume / # (or load, or test -e, or size)
+>>>>>>>      > ubifsumount
+>>>>>>>
+>>>>>>> ubifsumount will call ubifs_umount() which calls
+>>>>>>> ubi_close_volume(c->ubi), that pointer is either invalid leading to a
+>>>>>>> double free inside of ubi_close_volume() and it will crash only in
+>>>>>>> certain conditions or the pointer is NULL after applying patch 2 of
+>>>>>>> the series, then ubi_close_volume() crashes right away with a NULL
+>>>>>>> pointer exception.
+>>>>>>>
+>>>>>>> Note: without patch 2 it very much depends on the sequence of
+>>>>>>> commands, but after the first ubi_close_volume() triggered by
+>>>>>>> ls/load/size/exists the pointer in ubifs_sb is invalid, but accessed later
+>>>>>>> by the second ubi_close_volume() triggered by ubifs_umount().  If you
+>>>>>>> do something in between those using the freed memory by something else
+>>>>>>> again, the second ubi_close_volume() access might get corrupted data
+>>>>>>> or access things outside of RAM.  Patch 2 redirects this on a clean
+>>>>>>> NULL pointer exception you can easily trigger.
+>>>>>>>
+>>>>>>> In my case I got a pointer variable actually containing a string
+>>>>>>> "ng.." aka 0x2e2e676e which looked suspiciously similar to a valid
+>>>>>>> pointer on the platform somewhere in RAM between 0x20000000 and
+>>>>>>> 0x28000000 so it took me two days to realize it's not a pointer. ;-)
+>>>>>>>
+>>>>>>>>
+>>>>>>>>> The three additional patches (2 to 4) are more or less safeguards and
+>>>>>>>>> improvements for the future, and come from me trying and my debugging
+>>>>>>>>> code done on the way, more or less optional, but I think nice to have.
+>>>>>>>>
+>>>>>>>> I will look at them .. but give me some time, as I am in holidays the
+>>>>>>>> next 2 weeks ... Hmm.. and it would be good to get some Tested-by
+>>>>>>>> from people with hardware...
+>>>>>>>
+>>>>>>> Take your time, no need to work in holidays.  Would appreciate a
+>>>>>>> Tested-by by anyone else though, maybe some of the raw NAND folks?
+>>>>>>
+>>>>>> Well, apparently nobody had a look in the month of July, I add the raw
+>>>>>> NAND maintainers in Cc, maybe I should have done in the first place.
+>>>>>>
+>>>>>> Would be happy if someone could have a look at the fix, maybe read the
+>>>>>> patches first before the discussion? ;-)
+>>>>>
+>>>>> I asked Ravi and Alexey (added to cc) if they have time to look it they
+>>>>> can reproduce the issue and test your patches...
+>>>>>
+>>>>> bye,
+>>>>> Heiko
+>>>>
+>>>> I tried to reproduce with CONFIG_SYS_MALLOC_LEN reduced to 1MB and
+>>>> calling ubifsls in a loop, logic below:
+>>>>
+> 
+> 
+>>>> ubi part ubi0:rootfs
+>>>> ubifsmount ubi0:rootfs
+>>>> setenv i 1
+>>>> while test $i -le 200; do
+>>>>       ubifsls a/b/test.bin
+>>>>       setexpr i $i + 1
+>>>>       sleep 1
+>>>>       echo "Loop count: $i"
+>>>> done
+>>>
+>>> Thanks for testing! But it is not exactly the same sequence Alexander
+>>> described ... but you also trigger a bug.
+>>
+> 
+> diff --git a/fs/ubifs/ubifs.c b/fs/ubifs/ubifs.c
+> index 048730db7f..33df4ff51f 100644
+> --- a/fs/ubifs/ubifs.c
+> +++ b/fs/ubifs/ubifs.c
+> @@ -557,6 +557,7 @@ static unsigned long ubifs_findfile(struct
+> super_block *sb, char *filename)
+> 
+>                          /* We have some sort of symlink recursion, bail out */
+>                          if (symlink_count++ > 8) {
+> +                               ubifs_iput(inode);
+>                                  printf("Symlink recursion, aborting\n");
+>                                  return 0;
+>                          }
+> @@ -568,6 +569,7 @@ static unsigned long ubifs_findfile(struct
+> super_block *sb, char *filename)
+>                                   * the leading slash */
+>                                  next = name = link_name + 1;
+>                                  root_inum = 1;
+> +                               ubifs_iput(inode);
+>                                  continue;
+>                          }
+>                          /* Relative to cur dir */
+> @@ -575,6 +577,7 @@ static unsigned long ubifs_findfile(struct
+> super_block *sb, char *filename)
+>                                          link_name, next == NULL ? "" : next);
+>                          memcpy(symlinkpath, buf, sizeof(buf));
+>                          next = name = symlinkpath;
+> +                       ubifs_iput(inode);
+>                          continue;
+>                  }
+> 
+> @@ -583,8 +586,10 @@ static unsigned long ubifs_findfile(struct
+> super_block *sb, char *filename)
+>                   */
+> 
+>                  /* Found the node!  */
+> -               if (!next || *next == '\0')
+> +               if (!next || *next == '\0') {
+> +                       ubifs_iput(inode);
+>                          return inum;
+> +               }
+> 
+>                  root_inum = inum;
+>                  name = next;
+> 
+> 
+> Should we not free inode_iget?
+
+Yep, that patchsnipset seems valid to me ... We should check
+all calls from ubifs_get() ... so I think we need to correct also
+filldir() fucntion in this file?
+
+and
+
+fs/ubifs/recovery.c ubifs_recover_size()
+fs/ubifs/super.c ubifs_fill_super()
+
+?
+
+bye,
+Heiko
+> 
+> Michael
+> 
+>> +1 … thanks for testing. :-)
+>>
+>>>> It crashes with or without patch. With patch it takes 4,5 loops more to crash.
+>>>>
+>>>> Log:
+>>>> UBIFS error (ubi0:0 pid 0): ubifs_iget: failed to read inode 85, error -12
+>>>> "Synchronous Abort" handler, esr 0x96000004
+>>>
+>>> -12 = -ENOMEM
+>>>
+>>> So it seems, we have a memleak...
+>>
+>> If with my patch it takes more loops to crash, this suggests we have
+>> more than one memory leak, and of them got fixed with my patch(es).
+>>
+>>> Yes, ubi/ubifs linux base is very old, but I tend to think that problem is
+>>> in U-Boot adaption layer...
+>>
+>> I would also suspect the adaption layer.
+>>
+>> However, although my patch fixes one memory leak, that was not the
+>> main reason doing this.  The reason of the crash in my case was the
+>> double free, and accessing invalid memory afterwards.  So from my
+>> perspective the patches are okay on their own, and looking after more
+>> memory leaks should not be part of this series.
+>>
+>> Greets
+>> Alex
+>>
+>> P.S.: not sure what's causing this, but I only got the mails from you
+>> all through the mailing list.  You can keep me in Cc, so I won't
+>> overlook your answers easily.
+>>
+>>>
+>>> bye,
+>>> Heiko
+>>>>
+>>>>
+>>>> Thanks,
+>>>> Ravi
+>>>>>>
+>>>>>> Greets
+>>>>>> Alex
+>>>>>>
+>>>>>>>
+>>>>>>> Greets
+>>>>>>> Alex
+>>>>>>>
+>>>>>>>>
+>>>>>>>> bye,
+>>>>>>>> Heiko
+>>>>>>>>>
+>>>>>>>>> Greets
+>>>>>>>>> Alex
+>>>>>>>>>
+>>>>>>>>> [1] https://urldefense.proofpoint.com/v2/url?u=https-3A__github.com_rauc_rauc_blob_master_contrib_uboot.sh&d=DwIDaQ&c=nKjWec2b6R0mOyPaz7xtfQ&r=3apjoJolwzwH82pd_c1HzSLzzrwfu9x1lSm802edgOg&m=lpy642UhqtTXHV0dd0xnOtQxkQSO5RC6FwcUbzt-FsNwd3QSXZsulfqC6dP9qV7G&s=wbnw_T9_r6taMKIFqJ2-wtj9Zv02OD7mbIy-ZZFRjRE&e=  <https://urldefense.proofpoint.com/v2/url?u=https-3A__github.com_rauc_rauc_blob_master_contrib_uboot.sh&d=DwIDaQ&c=nKjWec2b6R0mOyPaz7xtfQ&r=3apjoJolwzwH82pd_c1HzSLzzrwfu9x1lSm802edgOg&m=lpy642UhqtTXHV0dd0xnOtQxkQSO5RC6FwcUbzt-FsNwd3QSXZsulfqC6dP9qV7G&s=wbnw_T9_r6taMKIFqJ2-wtj9Zv02OD7mbIy-ZZFRjRE&e=>
+>>>>>>>>>
+>>>>>>>>> Alexander Dahl (4):
+>>>>>>>>>       fs: ubifs: Fix memleak and double free in u-boot wrapper functions
+>>>>>>>>>       fs: ubifs: Set pointers to NULL after free
+>>>>>>>>>       fs: ubifs: Make k(z)alloc/kfree symmetric
+>>>>>>>>>       fs: ubifs: Add volume mounted check
+>>>>>>>>>
+>>>>>>>>>      fs/ubifs/super.c |  8 ++++++--
+>>>>>>>>>      fs/ubifs/ubifs.c | 31 +++++++++++++++++++------------
+>>>>>>>>>      2 files changed, 25 insertions(+), 14 deletions(-)
+>>>>>>>>>
+>>>>>>>>>
+>>>>>>>>> base-commit: 65fbdab27224ee3943a89496b21862db83c34da2
+>>>>>>>>>
+>>>>>>>>
+>>>>>>>> --
+>>>>>>>> DENX Software Engineering GmbH,      Managing Director: Erika Unter
+>>>>>>>> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+>>>>>>>> Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+>>>>>
+>>>>> --
+>>>>> DENX Software Engineering GmbH,      Managing Director: Erika Unter
+>>>>> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+>>>>> Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+>>>>>
+>>>
+>>> --
+>>> DENX Software Engineering GmbH,      Managing Director: Erika Unter
+>>> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+>>> Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+> 
+> 
 > 
 
-NACK. I feel like this is a hack for vendor trees only.
-
-1) The Device Tree represents the hardware. We need the mux at all times.
-2) This breaks users who want to have no serial in TPL/SPL but in proper 
-(where you want it as soon as possible I assume, thus pre-reloc).
-3) This likely also means if BL31 is configured to output on a different 
-UART mux of the same controller for some reason (I've seen weird stuff), 
-now U-Boot proper pre-reloc will not output anything as well.
-
-Adding Lukasz in Cc who's trying to fix U-Boot so that this is possible 
-on PX30 (therefore, not just a theoretical use case I'm bringing up ;) ).
-
-> - Radxa ROCK Pi S (RK3308): ~80 ms
-> - Radxa ZERO 3W (RK3566): ~120 ms
-> - Radxa ROCK 5B (RK3588): ~150 ms
-> 
-> Similar change has already been applied for RK3328 and RK3399 boards.
-> 
-
-Then I believe this was a mistake.
-
-> The change for PX30 has not been runtime tested, and only include change
-> for uart2, not uart0 and uart5 used on two of the supported px30 boards.
-> 
-
-This means we have uart2 pinctrl at all stages even though we make no 
-use of it?
-
-I'm starting to wonder if this optimization isn't orthogonal to having 
-as much support as possible via an <soc>-u-boot.dtsi which was done to 
-make bring-up and maintenance easier. If you're really after 
-optimization AND we keep the pinctrl for the debug uart (thus, not 
-breaking 2) above), then what we want is cleaning up the default 
-px30-u-boot.dtsi and move bootph properties to the board DTS instead?
-
-I was a bit against this "turn-key" solution wrt u-boot DT for 
-rk3568/rk3588 but we went ahead, are we changing our mind now? Just to 
-know what exactly is the direction we are planning to take.
-
-Cheers,
-Quentin
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
