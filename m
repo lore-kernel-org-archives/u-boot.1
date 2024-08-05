@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF089C3DA4A
-	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 13:35:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A831CC3DA4A
+	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 13:35:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34E3E88914;
+	by phobos.denx.de (Postfix) with ESMTP id 99A008892C;
 	Mon,  5 Aug 2024 15:35:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="fzAiUQKf";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="hPMbHLlA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E266288913; Mon,  5 Aug 2024 15:35:41 +0200 (CEST)
-Received: from PAUP264CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170110002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::2])
+ id 0D6A788913; Mon,  5 Aug 2024 15:35:42 +0200 (CEST)
+Received: from PR0P264CU014.outbound.protection.outlook.com
+ (mail-francecentralazlp170120004.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::4])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC3C28892C
- for <u-boot@lists.denx.de>; Mon,  5 Aug 2024 15:35:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 073D88891A
+ for <u-boot@lists.denx.de>; Mon,  5 Aug 2024 15:35:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=softathome.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.henrys_ext@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=H9zk5anaZYknekyZG4U5ogd7vtkaKe7dB+BABq6zc9+HgD7NjFWSItdrujt/Nq6s6MWEj1e9tSi6h5OleXNZMDrBDoOABKBAdA+ikxD+v7oUQBBG4C2M498JEPN6mPi6Bfam5XefBNSuMZ8Whzr7LjAH0sD1+KjVRtM0YDoUn5Ox0JyXI1L9n4kBS7S3Ea7uUoVGjpfsuK+01KmjOm1d8O/9iLmqPBxi0FaCgQ05kwObBtvY6NCUzNOxV4S/hmUzhcby07NpWJ5zwdzi/X7YrF5QtKSOJAM1QrhEX5bFpNiriLZ9R/K4NYTCAE5ifYUFyNId8lqNyY/D3zj6enRTPQ==
+ b=Nj4LC13wJnXsKj+3dHtG6JpPGGkiwxqIi6/48CW5D2tBlhOqm1HGgXQo2qkyxlRaLGJdqmbqDhYmXzIN+KOWUkDP4Ss7goX6W5kjHxDhkjF1L6rKfTBBBPZGiZB+2MYeDptvk2vb7oKtQPR3zLCuuxMxJu94ZwG/hQd0yb3kRG6U6o8MAVYwQRsr7WM2qUYiMEGJ3YVsgtsqIQvIlbQtmIBorez3ywyDlbdDLAUlWy4pR330jJAlzFALRmS65cbp6Jc4cDyZFBJBQkmNOavG8tcqlgZqFqKTbW9yQj1dld0aTAQWeJAeoeaYDBPuMAFbq6a5AXlvINCwrfSnDXaIaA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lHwufONacqNxboChgXxwbcgMCqMZBL5lXK8EnhAVNH8=;
- b=n6LS+IHvq+tOoC8+Xn6WiruQDPxO4m0K17lgI2ex1irCi4y/Xyrm9sW4nrwWtd2kMp+BTvwXiAQSo+93ViydNfJN9PHL/em93PLknSKkdgVj40RaCthJjd4A4KWY4QUnQJmYJMAeDrA3xlOl5BaAe8XFSgMbs5k1en9eAjWJDOABtlOoaxc74v6LHVxcnAABfLWpb3ElrYG7veTIKHVYK80e7+bYsSjzgbu+evxa1/67hg+lM+29OXVLrFEWr0ZFhOLLGPIx5FNsivFfQLVTKfhaPrHiFk8ssoi+QJMUbCH5NSXXfYKIZqiOEmO8Rc7ozu3PWrByJQ73U3YPj98GSQ==
+ bh=sPKaLklXgF7RWOA2TwlSDP7nXTX5CLxBh/ar0BJZv+w=;
+ b=pTwa/DMm3aA95q6kv8B6HLM1BGEFvAF5fGZGSK2J8g43B2TKkqt4P7LOPHejQcTYBd8IV6MgVdu/Oth3Lmi8Mw6FUogBLnXygIwLkrZnlzXypJrS762gMVGuePO71JT4Y+NPPwgFYMMuinc4v4d8kswUb399FMQJo+mqa1+BWE8RXfAwDqqPICAJCajXKKgGH9LYuSUbk3pl0LBe+JJI975LwZwIV38rymo2BpHR8pLtv3IECP07SIIwRft9De8QBCdXqkHNjbgvJirgr8k8PrCBmZSR0aFYsY1qewwHYYBsCMqYVxvHOlamAJ6yQkNdKjG+5CK8yc/Kh7r9qmqYoA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=chromium.org smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -41,18 +41,17 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lHwufONacqNxboChgXxwbcgMCqMZBL5lXK8EnhAVNH8=;
- b=fzAiUQKfZ/u2NgaX3oUIPzOBQSk+eFK7DzNKVjT/UnImC30S5lCFoXVgCkNlUZpaxefQTXL8qQIrCgI24Cfeg8KodCm3NnrIj4b0M4R4joc4gJvY4uUoHt0hkK/g7ujKjJqdxv3y+taSDhof1nmdmm86nZXzsEFoBBFRbVuVXsbXirlmAAcJ/zVy0Iyh3jHmJ4ICSp8E9zEo+5eGy54q4qC26RdSPBtm7+oUuRUWcYK+QQK89U5/9Y/eM4EUBwCkfuXs3EN0NDfpHOLpQ0gGPu6wsGFE2XkeBduj4AvjAtt4DevZZoMWGi5TKOcpk8lNT9rltLdjMmeaosj13Nd/nw==
-Received: from MR1P264CA0158.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:54::18)
- by MR1P264MB3444.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:2b::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7828.26; Mon, 5 Aug
- 2024 13:35:37 +0000
-Received: from MR1PEPF00000D58.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:501:54:cafe::dc) by MR1P264CA0158.outlook.office365.com
- (2603:10a6:501:54::18) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7828.27 via Frontend
- Transport; Mon, 5 Aug 2024 13:35:37 +0000
+ bh=sPKaLklXgF7RWOA2TwlSDP7nXTX5CLxBh/ar0BJZv+w=;
+ b=hPMbHLlAolJMx0jAY2J7T56HlYTNfpJshWUFBb1auqOlNZyFyYzkqgcc9Rr1jlGcEyu8gJYDDeLkGlxMKaCVrIQF5ArA5jUJYYkEnn3AWyNjDKxDLQqE8Z5qKeVm1pYvFcaK/bDAA4IYrxuc5tRwtIXJoyFANoOs65SQw+YiQCbVCknA/GKxxiIPR9FyN0+G0Q3u2Xo9xA4gWIRj9r+K6qATJvQ/KDgRZyWexhUoNrw66+xbj16fbn3GOoYoCI1WsES3vfI6UZ0GSUwB46yhvwKiHnqN7m1yfr5b0brGrhZOEtiXxv2nrensZWVx0Rp8hmZB5BcrnpOj74TvwBsKWg==
+Received: from PR0P264CA0250.FRAP264.PROD.OUTLOOK.COM (2603:10a6:100::22) by
+ MR0P264MB5448.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:61::19) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7828.26; Mon, 5 Aug 2024 13:35:38 +0000
+Received: from PA1PEPF000CC3F9.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:100:0:cafe::22) by PR0P264CA0250.outlook.office365.com
+ (2603:10a6:100::22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7828.26 via Frontend
+ Transport; Mon, 5 Aug 2024 13:35:38 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
  smtp.mailfrom=softathome.com; dkim=none (message not signed)
  header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
@@ -61,20 +60,20 @@ Received-SPF: Pass (protection.outlook.com: domain of softathome.com
  receiver=protection.outlook.com; client-ip=149.6.166.170;
  helo=proxy.softathome.com; pr=C
 Received: from proxy.softathome.com (149.6.166.170) by
- MR1PEPF00000D58.mail.protection.outlook.com (10.167.241.5) with Microsoft
+ PA1PEPF000CC3F9.mail.protection.outlook.com (10.167.242.4) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.7849.8
- via Frontend Transport; Mon, 5 Aug 2024 13:35:37 +0000
+ via Frontend Transport; Mon, 5 Aug 2024 13:35:38 +0000
 Received: from sahess08-ThinkPad-T580.home (unknown [192.168.18.10])
- by proxy.softathome.com (Postfix) with ESMTPSA id 01CD320070;
- Mon,  5 Aug 2024 15:35:36 +0200 (CEST)
+ by proxy.softathome.com (Postfix) with ESMTPSA id A5C83201AB;
+ Mon,  5 Aug 2024 15:35:37 +0200 (CEST)
 From: Paul HENRYS <paul.henrys_ext@softathome.com>
 To: u-boot@lists.denx.de
 Cc: sjg@chromium.org,
 	Paul HENRYS <paul.henrys_ext@softathome.com>
-Subject: [PATCH v2 2/3] tools: binman: Add a property to pass a key directory
- to mkimage
-Date: Mon,  5 Aug 2024 15:35:19 +0200
-Message-Id: <20240805133520.1745316-2-paul.henrys_ext@softathome.com>
+Subject: [PATCH v2 3/3] tools: binman: Add tests for FIT with data encrypted
+ by mkimage
+Date: Mon,  5 Aug 2024 15:35:20 +0200
+Message-Id: <20240805133520.1745316-3-paul.henrys_ext@softathome.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240805133520.1745316-1-paul.henrys_ext@softathome.com>
 References: <20240805133520.1745316-1-paul.henrys_ext@softathome.com>
@@ -82,52 +81,52 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MR1PEPF00000D58:EE_|MR1P264MB3444:EE_
+X-MS-TrafficTypeDiagnostic: PA1PEPF000CC3F9:EE_|MR0P264MB5448:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 9c4dafe9-7402-4a7c-2ce0-08dcb5537da2
+X-MS-Office365-Filtering-Correlation-Id: 1c757b0a-d277-486f-7776-08dcb5537e01
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700013|1800799024|34020700016; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?oQZ7WwCp5adnrnfZqXYKkz/PlBSuh0SdWPJbgHM1lSsaR7EXSclWufRebTSW?=
- =?us-ascii?Q?4cGE0wI2DLcQ3FsJgfkQOqTX9nFibGYepSK9BmNOjNgh+PF+3oCpr5MRXDRL?=
- =?us-ascii?Q?eFMjHW54LkDS8v68XGuUuHS23UAvdnmk/CIufW4U40FJ6VaxA00v6uV7QluK?=
- =?us-ascii?Q?vinQ9h4ahaua4q5jFYUvNteNJ7mf5emk4D8onUGK/3ncmPx0u37aLjwMdXPB?=
- =?us-ascii?Q?0Iu0r+exMSIxh0mLsZemn90kQtforewUQP0deR8LCChb2+5Jl6cVxwJ309nB?=
- =?us-ascii?Q?cKF29wLx5rDJCOX8zz72DXvdB/wTgcf8zuVR+//A0wgZM6FNSkwj3TKCh2vO?=
- =?us-ascii?Q?bAEGMe3C+aJnrcr6P+8KYONqsaJHKgo/yGAHgdZWIaEAtUBsx7VRBdVilmOA?=
- =?us-ascii?Q?kWihLxhC5EXXF3OriPzbNm4zkCxz3T5D+NlufQnQ21JOIciPZG22kxR8Y20M?=
- =?us-ascii?Q?Q6p91PsiBeu7xLwjYTv+kfwj2uCuKrmgNMooHvarFag1HGxr7HF0YIjNzitd?=
- =?us-ascii?Q?nxuoVJK7zn8xsOYcHEuvnHDo5vJMi9bf+gLYhVeWgrapS5mceZYzhFwadIJF?=
- =?us-ascii?Q?ijObXbqX9T/snYnstVSgEheYeyYkiU7uLw5hksTnvQduEm49X0/zPj5Kz4Rl?=
- =?us-ascii?Q?AFGuxUQ6J0reCpDCQugTJX+zcLJE6ENxFC6ze4lxzlBWAvl4evOjl7ddNKku?=
- =?us-ascii?Q?vzYPDzO/+YN6Vi8k0eVe4UXOKrNa99WZSpyES/zR5jAh0iQaMB1/wL3LB42v?=
- =?us-ascii?Q?CgHMWPuf4P2QeAHJv7cgJlHsX4yiwZEg5gke8obiTJYYMoSX0WKZUwwZY39A?=
- =?us-ascii?Q?XzT/80hTKhbNULAKLKUvF60nxjis5RMmZKRUvJHYJBNYIhMD4Z/Xq4NWWuZv?=
- =?us-ascii?Q?IToEsr8Uqb/CYvjdg8ikK0X+eR3Mj/XGhVoKfJKytIQ7pB4v/FWCQnVmWT4w?=
- =?us-ascii?Q?E9/NEQPB69tGTj5VkzPN/7sPIswQTHQT4iITsfRT4WNRdAkeqcNG9t9Uu6Es?=
- =?us-ascii?Q?/zL4SEyyhOSBIpV+5iJbxbI4CaKTuh0fZ35K3vT8vdZb17K6Uk0c91ohG+zi?=
- =?us-ascii?Q?wsXK6gcsP9PCENfAWa/WJkxpZ1yK+oWydRpGcHWGWIx2SKK404bxL3ozjt04?=
- =?us-ascii?Q?2jl0tvn/3G+N3nTcWUN+0yALSGzUvKjl0fygun8uA0iODVCNxL9NuFYXH/+B?=
- =?us-ascii?Q?nReuofzkFdgg1lquatGygCpaavvrVonU5QLgFHPCdYLHGId0+PfThPcWmfGI?=
- =?us-ascii?Q?eZjQwcXLAUHWB25fyT8mhcajJGjWZjotdXRs96b7nrYvzGUhAeXfwInC22Aq?=
- =?us-ascii?Q?M9TO0j602nrdO9TLPXmz5pSGivKZuO6RzOBvd6Z9Y57pup0bZuaXNfBoZpT1?=
- =?us-ascii?Q?hH9eUnk305WGkDIKa+mbNVabePmOFX0sD1h3+MVsUFucwZzlzUo5UNq2mxxX?=
- =?us-ascii?Q?PKh6nH+PxkB5cM/pZXlNtbuKWyvmdM6m?=
+ ARA:13230040|376014|82310400026|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?wXsdWg8Hn2RzSxql5B84WYf50KsHoBrwNnq0QoYyGbYUbUlXPVPbcFqWvETt?=
+ =?us-ascii?Q?ievFBPP/6AG4aBIYZW9NGfcCw5z0DaEK61JwpelAeaopC6zuV6v8T1HwwS1B?=
+ =?us-ascii?Q?OP0aWz/Udo9FlF2WM9oyWLlBQCOhSWCWyOxIeTbhrZXtoiezDV1wHrqgLv3Z?=
+ =?us-ascii?Q?2O3/sXDQ0y0NiOzm03ZgKSz+u0vGCpbRuputdevydsPpxdH5tlc4bOYsGOi7?=
+ =?us-ascii?Q?j11O2dnfY7yreky7c2+iyog2EFCGHF3Yv1JzTCw8I8XXLhZIKQvrd/c/3/+h?=
+ =?us-ascii?Q?YdVwpQ7OT61/+TAKb2kszsZ0sDtoaLknN4CujqCi++8IFplg0mkzPZ+Ua0Rk?=
+ =?us-ascii?Q?rA6sszqxr0k4vYyYqPwdEfHPMGqxsal807NYNLRNM0Oci8BwaC4KFhYMI6QC?=
+ =?us-ascii?Q?SoDbpoHYpmt92CHQWbNyaJtFIi6GnBIi1yvbEuS/TUWv2tBgqrWLYRjbeD0l?=
+ =?us-ascii?Q?7//o4r1fmIaVv+BbLJ0dXNg8gi0slGc9vYleObAw7HHMsdgBOxc6URrhhLmj?=
+ =?us-ascii?Q?DyZeK/fuMgMr8dioDAg1Z/t45xELwi0iCj/FhI/WTXo6knkMRNxeSViHcfip?=
+ =?us-ascii?Q?Hy0TSHjcdsggptKwLGxLJpOnBArMglFRK7vPPEHzQlZe9RLPW/h95g2Fcf5G?=
+ =?us-ascii?Q?y8hklgGUOB2D9iLNTAaeelUhaYQKsx2YOXgZ1AFkvRuIWDTtZXQB4N8O1Yj0?=
+ =?us-ascii?Q?uuSOLfMb2ucD2Wyp4s+fMxtEdOUQSppabysZaxnyVkaG8LVgZhY+py1w4s4+?=
+ =?us-ascii?Q?1yEtvdwX2BH9scnNdGJk/jfN5YLbwyn9XN7C6Iajdcfv/uyF62nrVGr64a9E?=
+ =?us-ascii?Q?ZoSGJ9TWspTgCzCv5vj8A3UB8SFygjtajzuffCAGjmVh9Lqn9Hmqt3SIXJRZ?=
+ =?us-ascii?Q?uFUvbq/BMn3LGvPelu0CdwALEOiivI6XezZ4pBPGQqpNU+uxD+SPHWfa9xaR?=
+ =?us-ascii?Q?2asO8VZIfLZN/AMv2fbY5RZCUm4WVJXrvfqAu21MDXmuzxUUFI80vnOBmgiZ?=
+ =?us-ascii?Q?VI/+or+lzUF4xVHozJPCAbthTKsz34yRZfS7VP7asqxZ0mZHy0pam4fdEgJ7?=
+ =?us-ascii?Q?+8YHVIXa7ju7FIH3bp/RpeBCeMhdzKubCIGP8S9Yu+iADS7OT/zhtUdqK0B8?=
+ =?us-ascii?Q?/S/jG1VnAzanMb6YNzhhgZmlGXrV/TfKx1ut0JUGAVwhUuCFSdhjYYt2SZFm?=
+ =?us-ascii?Q?OQi9EcIHW7GRZ5QaJuVfPQQkdhpP/v+Oa/9xRO8pk17L7OjG9n7TLPOs1FkR?=
+ =?us-ascii?Q?wMzm2rgsdutZHgyZewL5jJGzj5Bz7B6M4CAh/gIGMEsboQtXJsJVOK6zWg6i?=
+ =?us-ascii?Q?v59uMERQvmVCei1J7YBTY3xBS+fPZ9z3756qAdRyQ/h2slgoFMbMN8X5qD1U?=
+ =?us-ascii?Q?Ml1iePwDb5ACxGbM3WR1dmDqGJCHO4S8Og9cwP6J9MCRp/aPYWHD42sC1ILT?=
+ =?us-ascii?Q?IjMfWla3jOxLH7NfBZk91NN06u+tWjgj?=
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024)(34020700016);
- DIR:OUT; SFP:1101; 
+ SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
+ SFP:1101; 
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Aug 2024 13:35:37.3836 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9c4dafe9-7402-4a7c-2ce0-08dcb5537da2
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Aug 2024 13:35:38.0237 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1c757b0a-d277-486f-7776-08dcb5537e01
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: MR1PEPF00000D58.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: PA1PEPF000CC3F9.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR1P264MB3444
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR0P264MB5448
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,85 +143,197 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The property 'fit,keys-directory' can be added to the configuration file
-passed to binman to specify a directory where keys are stored and can be
-used by mkimage to sign and cipher data.
+Test the property 'fit,keys-directory' which, when a cipher node is
+present, encrypts the data stored in the FIT.
 
 Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
 ---
- tools/binman/btool/mkimage.py | 5 ++++-
- tools/binman/entries.rst      | 3 +++
- tools/binman/etype/fit.py     | 6 ++++++
- 3 files changed, 13 insertions(+), 1 deletion(-)
+ tools/binman/ftest.py                         |  39 +++++++++++++
+ tools/binman/test/326_fit_encrypt_data.dts    |  53 ++++++++++++++++++
+ .../test/327_fit_encrypt_data_no_key.dts      |  53 ++++++++++++++++++
+ tools/binman/test/aes256.bin                  | Bin 0 -> 32 bytes
+ 4 files changed, 145 insertions(+)
+ create mode 100644 tools/binman/test/326_fit_encrypt_data.dts
+ create mode 100644 tools/binman/test/327_fit_encrypt_data_no_key.dts
+ create mode 100644 tools/binman/test/aes256.bin
 
-diff --git a/tools/binman/btool/mkimage.py b/tools/binman/btool/mkimage.py
-index 39a4c8c1432..dbcf8daac30 100644
---- a/tools/binman/btool/mkimage.py
-+++ b/tools/binman/btool/mkimage.py
-@@ -22,7 +22,7 @@ class Bintoolmkimage(bintool.Bintool):
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index 93f3d22cf57..64b7d0231de 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -7691,5 +7691,44 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+             self.assertIsNone(dtb.GetNode('/node/other-node'))
  
-     # pylint: disable=R0913
-     def run(self, reset_timestamp=False, output_fname=None, external=False,
--            pad=None, align=None):
-+            pad=None, align=None, keys_dir=None):
-         """Run mkimage
  
-         Args:
-@@ -34,6 +34,7 @@ class Bintoolmkimage(bintool.Bintool):
-                 other things to be easily added later, if required, such as
-                 signatures
-             align: Bytes to use for alignment of the FIT and its external data
-+            keys_dir: directory where keys are stored
-             version: True to get the mkimage version
-         """
-         args = []
-@@ -45,6 +46,8 @@ class Bintoolmkimage(bintool.Bintool):
-             args += ['-B', f'{align:x}']
-         if reset_timestamp:
-             args.append('-t')
-+        if keys_dir:
-+            args += ['-k', keys_dir]
-         if output_fname:
-             args += ['-F', output_fname]
-         return self.run_cmd(*args)
-diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
-index 12482703782..eb33eb9eedf 100644
---- a/tools/binman/entries.rst
-+++ b/tools/binman/entries.rst
-@@ -864,6 +864,9 @@ The top-level 'fit' node supports the following special properties:
- 
-             fit,fdt-list-dir = "arch/arm/dts
- 
-+    fit,keys-directory
-+        Provides a directory where keys can be retrieved.
++    def testSimpleFitEncryptedData(self):
++        """Test an image with a FIT containing data to be encrypted"""
++        data = self._DoReadFile('326_fit_encrypt_data.dts')
 +
- Substitutions
- ~~~~~~~~~~~~~
- 
-diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
-index ee44e5a1cd6..d20906aab3b 100644
---- a/tools/binman/etype/fit.py
-+++ b/tools/binman/etype/fit.py
-@@ -96,6 +96,9 @@ class Entry_fit(Entry_section):
- 
-                 fit,fdt-list-dir = "arch/arm/dts
- 
-+        fit,keys-directory
-+            Provides a directory where keys can be retrieved.
++        fit = fdt.Fdt.FromData(data)
++        fit.Scan()
 +
-     Substitutions
-     ~~~~~~~~~~~~~
- 
-@@ -518,6 +521,9 @@ class Entry_fit(Entry_section):
-         align = self._fit_props.get('fit,align')
-         if align is not None:
-             args.update({'align': fdt_util.fdt32_to_cpu(align.value)})
-+        keys_dir = self._fit_props.get('fit,keys-directory')
-+        if keys_dir is not None:
-+            args.update({'keys_dir': keys_dir.value})
-         if self.mkimage.run(reset_timestamp=True, output_fname=output_fname,
-                             **args) is None:
-             if not self.GetAllowMissing():
++        # Extract the encrypted data and the IV from the FIT
++        node = fit.GetNode('/images/u-boot')
++        subnode = fit.GetNode('/images/u-boot/cipher')
++        data_size_unciphered = int.from_bytes(fit.GetProps(node)['data-size-unciphered'].bytes,
++                                              byteorder='big')
++        self.assertEqual(data_size_unciphered, len(U_BOOT_NODTB_DATA))
++
++        # Retrieve the key name from the FIT removing any null byte
++        key_name = fit.GetProps(subnode)['key-name-hint'].bytes.replace(b'\x00', b'')
++        with open(self.TestFile(key_name.decode('ascii') + '.bin'), 'rb') as file:
++            key = file.read()
++        iv = fit.GetProps(subnode)['iv'].bytes.hex()
++        enc_data = fit.GetProps(node)['data'].bytes
++        outdir = tools.get_output_dir()
++        enc_data_file = os.path.join(outdir, 'encrypted_data.bin')
++        tools.write_file(enc_data_file, enc_data)
++        data_file = os.path.join(outdir, 'data.bin')
++
++        # Decrypt the encrypted data from the FIT and compare the data
++        tools.run('openssl', 'enc', '-aes-256-cbc', '-nosalt', '-d', '-in',
++                  enc_data_file, '-out', data_file, '-K', key.hex(), '-iv', iv)
++        with open(data_file, 'r') as file:
++            dec_data = file.read()
++        self.assertEqual(U_BOOT_NODTB_DATA, dec_data.encode('ascii'))
++
++    def testSimpleFitEncryptedDataMissingKey(self):
++        """Test an image with a FIT containing data to be encrypted but with a missing key"""
++        with self.assertRaises(ValueError) as e:
++            self._DoReadFile('327_fit_encrypt_data_no_key.dts')
++
++        self.assertIn("Can't open file ./aes256.bin (err=2 => No such file or directory)", str(e.exception))
++
+ if __name__ == "__main__":
+     unittest.main()
+diff --git a/tools/binman/test/326_fit_encrypt_data.dts b/tools/binman/test/326_fit_encrypt_data.dts
+new file mode 100644
+index 00000000000..3cd890063cd
+--- /dev/null
++++ b/tools/binman/test/326_fit_encrypt_data.dts
+@@ -0,0 +1,53 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		fit {
++			fit,keys-directory = "tools/binman/test";
++			description = "Test a FIT with encrypted data";
++			#address-cells = <1>;
++
++			images {
++				u-boot {
++					description = "U-Boot";
++					type = "firmware";
++					arch = "arm64";
++					os = "U-Boot";
++					compression = "none";
++					load = <00000000>;
++					entry = <00000000>;
++					cipher {
++						algo = "aes256";
++						key-name-hint = "aes256";
++					};
++					u-boot-nodtb {
++					};
++				};
++				fdt-1 {
++					description = "Flattened Device Tree blob";
++					type = "flat_dt";
++					arch = "arm64";
++					compression = "none";
++					cipher {
++						algo = "aes256";
++						key-name-hint = "aes256";
++					};
++				};
++			};
++
++			configurations {
++				default = "conf-1";
++				conf-1 {
++					description = "Boot U-Boot with FDT blob";
++					firmware = "u-boot";
++					fdt = "fdt-1";
++				};
++			};
++		};
++	};
++};
+diff --git a/tools/binman/test/327_fit_encrypt_data_no_key.dts b/tools/binman/test/327_fit_encrypt_data_no_key.dts
+new file mode 100644
+index 00000000000..b92cd2e4bd6
+--- /dev/null
++++ b/tools/binman/test/327_fit_encrypt_data_no_key.dts
+@@ -0,0 +1,53 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		fit {
++			fit,keys-directory = ".";
++			description = "Test a FIT with encrypted data";
++			#address-cells = <1>;
++
++			images {
++				u-boot {
++					description = "U-Boot";
++					type = "firmware";
++					arch = "arm64";
++					os = "U-Boot";
++					compression = "none";
++					load = <00000000>;
++					entry = <00000000>;
++					cipher {
++						algo = "aes256";
++						key-name-hint = "aes256";
++					};
++					u-boot-nodtb {
++					};
++				};
++				fdt-1 {
++					description = "Flattened Device Tree blob";
++					type = "flat_dt";
++					arch = "arm64";
++					compression = "none";
++					cipher {
++						algo = "aes256";
++						key-name-hint = "aes256";
++					};
++				};
++			};
++
++			configurations {
++				default = "conf-1";
++				conf-1 {
++					description = "Boot U-Boot with FDT blob";
++					firmware = "u-boot";
++					fdt = "fdt-1";
++				};
++			};
++		};
++	};
++};
+diff --git a/tools/binman/test/aes256.bin b/tools/binman/test/aes256.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..09b8bf6254ada5c084039f32916bc7d30233bb2c
+GIT binary patch
+literal 32
+ncmXpsGBz<aGq<obNK8sjNli=7$jr*l$<50zC@d;2DJ=s4pC}7U
+
+literal 0
+HcmV?d00001
+
 -- 
 2.25.1
 
