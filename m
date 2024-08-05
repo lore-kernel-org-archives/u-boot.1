@@ -4,83 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49098C3DA4A
-	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 11:55:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8C2BC3DA4A
+	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 12:23:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70F2C8870B;
-	Mon,  5 Aug 2024 13:55:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id F18A38882C;
+	Mon,  5 Aug 2024 14:23:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FWnMM+X4";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="q4QTuerr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D75A1884C6; Mon,  5 Aug 2024 13:55:15 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 26DC288890; Mon,  5 Aug 2024 14:23:18 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F3958870B
- for <u-boot@lists.denx.de>; Mon,  5 Aug 2024 13:55:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 699D3887E8
+ for <u-boot@lists.denx.de>; Mon,  5 Aug 2024 14:23:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5a1337cfbb5so15725974a12.3
- for <u-boot@lists.denx.de>; Mon, 05 Aug 2024 04:55:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722858912; x=1723463712; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=y9HJXETpUPKu0tv68zbiDPmcgsdLYqpBLt6RxsniRwY=;
- b=FWnMM+X4HUnTIEZVJXje4ljAzc6e6V9bGXwIGy2lDjm3HYnFRqAK5dkbd+bDTIvvuu
- uIAZfr+zezfetkgmyJIcRIdcuUNWh1IJkGsAsQ9rlb6VQiT1/rog3bYeYXER5XaK8GXE
- +Ykf+iU1SXJyeEkgsIV0vRi7Wg9TdK/cG3C67v/TCeVjmeZUxJvf2OgnmKbX/CMFXuar
- QZIJAl2SE79LV2dL/UqllzlKnIQsPmQXE5KMuJDS8zYUaIxvpRVZB3uYcXjVF4BAnsyG
- y+vru7KUhCp0PWbCpJlgjywH+AhubZldSNX/lgH3MIwTdjbazbsGhHKL8bZZmYM+6In8
- DQNA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722858912; x=1723463712;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=y9HJXETpUPKu0tv68zbiDPmcgsdLYqpBLt6RxsniRwY=;
- b=uq+x4ncesyJErDjZGDkkpumQDVaNpzCKoW5aB9bU1sid5gszQPdDEgm8f0D32gMOQl
- NjbnCnGNx8RGYhgw/g/B0jCudCpum7lu87Bz2v6Z0EM4GYz2bTQ6qTnjT6ThjX0nKFo0
- xiGJwVFd6aYoe3MCggLVPPFwJGxej8lYF/y3ghfELG/KbkacSVngVFQeXNk4lLCGBq+l
- lzlZnEOmIkr6BaafrNI0inR1XmcIAe9n2OUiiLnz6ZNnHcHvCUzoPwjycsHYfngDoMIV
- QbbKmHdg+3nF3rjn7J0pC5Q+K7Rf1IhNDwrrdfNdhCRwhnolJ7B+q6CPLDjAw+TIE2UX
- V7Hg==
-X-Gm-Message-State: AOJu0YyYr1CFfG7MiXcghCCkZ9mf+IZOpCBvitAGwVSW1iMqYgt4SSU2
- o5gadSFCd9A9HIfXR/YFR7F7UhIyq3UAGzXLs0w8OqfDr+NKNXb+L2bbB5CVQwg7kfi//S8SKno
- 2UfUv/xsq7DoswykTv9N8z3HGaxAFlXxdJ/qxYA==
-X-Google-Smtp-Source: AGHT+IFFvuSGa2Oy20KlgA7DsS+sXFVwdwH8gNCm8ZamIG+m6TOwhTNdTLobRmHOWjS/yH/CXNc0x02JACF1C7ybOv4=
-X-Received: by 2002:a05:6402:40c5:b0:5b9:462d:c538 with SMTP id
- 4fb4d7f45d1cf-5b9462dc9aamr7517446a12.3.1722858911756; Mon, 05 Aug 2024
- 04:55:11 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=6949=PF=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1722860575;
+ bh=u9l/SRWNIBr4AQv+Fetuc4VzjnJtuLH31Upm4bew1dI=;
+ b=q4QTuerrm5w/326zPpTNeic8A0ebxz19P7azyQhf5C/DoMPdRqF0SEI19w6q9s54kWK/64STT
+ ov0Ew762swImR/AWz+VMV5VxndvAq++pDr1lpfPq7WsWV5yJHg+cdQF9Mf/MRjC8mXjqqMmXMkn
+ stKtrxezURTyAeCQrQzuTnS5Gp/llrlyiGAyUeszxoDtq7jq0kXyELIGRXVrl1O+dWyCV7x6GGf
+ yjeaJRTnGNixiKbz1jYXn+Pd/tmHMgGO2gczfAQ6rohx5VwUnu+9RvY8fuXWZy/a+xBGJF2wKTE
+ YO8ZQKVVbaKL7hAyEVR4VG6SpWx5scq8orb/U8cyFTEg==
+Message-ID: <ea4c0f12-bf49-405a-afdb-3312e1eb8c95@kwiboo.se>
+Date: Mon, 5 Aug 2024 14:22:47 +0200
 MIME-Version: 1.0
-References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
- <20240724060224.3071065-24-sughosh.ganu@linaro.org>
- <CAFLszTibBKMmPWjApmRUxRLWj11=Nf5NTz7+bGP+n5guYeFqYw@mail.gmail.com>
- <CADg8p94pVzK4AaBsCVg4PoQmbBHMKTdzB2MiBxuOzA6=Um3kmg@mail.gmail.com>
- <CAFLszTjRMsOsxKLdhbgH3yY8Rv6yR-r3uoHycjuGh+zTAKqsZA@mail.gmail.com>
-In-Reply-To: <CAFLszTjRMsOsxKLdhbgH3yY8Rv6yR-r3uoHycjuGh+zTAKqsZA@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 5 Aug 2024 17:25:00 +0530
-Message-ID: <CADg8p96wT2tfXU8o+M+8CuoyP1YF4OwKdg1ZS+2rkZzknMKGdA@mail.gmail.com>
-Subject: Re: [PATCH 23/40] lmb: add a flags parameter to the API's
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
- Max Filippov <jcmvbkbc@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/4] rockchip: Skip serial pinctrl at pre-reloc phase
+To: Quentin Schulz <quentin.schulz@cherry.de>, Lukasz Czechowski
+ <lukasz.czechowski@thaumatec.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20240805084350.3895788-1-jonas@kwiboo.se>
+ <6df6a6df-f8fc-44c3-9688-6f2ccbd8888d@cherry.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <6df6a6df-f8fc-44c3-9688-6f2ccbd8888d@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66b0c41be96ab59460b16ee5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,76 +75,150 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 29 Jul 2024 at 20:56, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Sughosh,
->
-> On Mon, 29 Jul 2024 at 02:40, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >
-> > On Fri, 26 Jul 2024 at 05:02, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Sughosh,
-> > >
-> > > On Wed, 24 Jul 2024 at 00:04, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > > >
-> > > > Add a flags parameter to the LMB API functions. The parameter can then
-> > > > be used to pass any other type of reservations or allocations needed
-> > > > by the callers. These will be used in a subsequent set of changes for
-> > > > allocation requests coming from the EFI subsystem.
-> > > >
-> > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > ---
-> > > > Changes since rfc: New patch
-> > > >
-> > > >  arch/arm/mach-apple/board.c       |  17 ++--
-> > > >  arch/arm/mach-snapdragon/board.c  |   2 +-
-> > > >  arch/arm/mach-stm32mp/dram_init.c |   4 +-
-> > > >  arch/powerpc/cpu/mpc85xx/mp.c     |   2 +-
-> > > >  arch/powerpc/lib/bootm.c          |   2 +-
-> > > >  board/xilinx/common/board.c       |   4 +-
-> > > >  boot/bootm.c                      |   5 +-
-> > > >  boot/image-board.c                |  15 ++-
-> > > >  boot/image-fdt.c                  |  15 +--
-> > > >  cmd/booti.c                       |   2 +-
-> > > >  cmd/bootz.c                       |   2 +-
-> > > >  cmd/load.c                        |   4 +-
-> > > >  drivers/iommu/apple_dart.c        |   6 +-
-> > > >  drivers/iommu/sandbox_iommu.c     |   6 +-
-> > > >  fs/fs.c                           |   2 +-
-> > > >  include/lmb.h                     |  23 ++---
-> > > >  lib/lmb.c                         |  48 ++++------
-> > > >  test/lib/lmb.c                    | 150 +++++++++++++++---------------
-> > > >  18 files changed, 150 insertions(+), 159 deletions(-)
-> > >
-> > > This negates any code-size advantage of dropping the lmb parameter.
-> > >
-> > > All of these are LMB_NONE. Can we have a separate function (e.g.
-> > > lmb_alloc_type()) for when we actually need to specify the type?
-> >
-> > We will be passing different values when we call the LMB API's from
-> > the EFI allocation function. This is only adding a parameter to the
-> > allocation API's, which I believe is better than adding separate
-> > functions which take a flag parameter only to be called from the EFI
-> > subsystem.
->
-> No i believe it is worse, unless there are a lot of such functions.
-> The flags are a special case, not the common case.
+Hi Quentin,
 
-I have done some size impact tests on the two scenarios, one where we
-have a common set of lmb allocation API functions, with an added flags
-parameter, and second where we have separate API's to be called from
-the EFI memory module. I have put out the results of the size impact
-[1].
+On 2024-08-05 12:23, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 8/5/24 10:43 AM, Jonas Karlman wrote:
+>> UART pinctrl for serial is typically applied multiple times:
+>> - in external TPL or in TPL for DEBUG_UART in board_debug_uart_init()
+>> - in SPL for DEBUG_UART in board_debug_uart_init()
+>> - in SPL using pinctrl from DT
+>> - in pre-reloc phase using pinctrl from DT
+>> - after relocation using pinctrl from DT
+>>
+>> This series change bootph props for the UART pinctrl to not include them
+>> in pre-reloc phase to save some boot time:
+>>
+> 
+> NACK. I feel like this is a hack for vendor trees only.
 
-You will see that with common API's, we are not losing much even on
-boards with EFI_LOADER disabled. But otoh, on boards which have
-EFI_LOADER enabled, the gains are pretty significant. I believe we
-should reconsider using a common LMB API with the flags parameter.
+I disagree, this just relaxes the bootph props currently enforced by
+<soc>-u-boot.dtsi files. For boards that has special need they can
+still add bootph-all or the bootph-some-ram prop to restore prior
+behavior.
 
--sughosh
+Also please do not associate me with any vendor, I am a hobbyist :-)
 
-[1] - https://gist.github.com/sughoshg/a20207f26e19238fef86f710134d6efd
+> 
+> 1) The Device Tree represents the hardware. We need the mux at all times.
 
->
-> Regards,
-> SImon
+I do not think this changes the the description of the hardware in any
+way. The bootph props is currently already more of a representation of
+how software should behave than hardware.
+
+In general for Rockchip use of the bootph-some-ram prop (pre-relocation
+phase) does not fully make any sense, since we already have full SDRAM
+in SPL.
+
+If we where to fully follow the dtschema description for the bootph
+props, for Rockchip they should probably map to something like:
+
+TPL:
+- bootph-pre-sram: Enable this node when SRAM is not available.
+- bootph-pre-ram: Enable this node in the phase that sets up SDRAM.
+
+SPL:
+- bootph-some-ram: Enable this node in the phase that is run after SDRAM
+                   is working but before all of it is available.
+
+U-Boot pre-reloc:
+- no prop mapping, we have all SDRAM and can use all devices, ideally
+  for Rockchip we should just do bare minimum to relocate without
+  loading any driver and then move to main post-reloc phase.
+
+Instead they map to the different U-Boot software stages:
+- bootph-pre-sram: TPL
+- bootph-pre-ram: SPL
+- bootph-some-ram: U-Boot pre-reloc
+
+> 2) This breaks users who want to have no serial in TPL/SPL but in proper 
+> (where you want it as soon as possible I assume, thus pre-reloc).
+
+Do you know of any such user/board? Adding the bootph-some-ram or
+bootph-all prop can easily be done in <board>-u-boot.dtsi for such
+user/board to restore current behavior.
+
+> 3) This likely also means if BL31 is configured to output on a different 
+> UART mux of the same controller for some reason (I've seen weird stuff), 
+> now U-Boot proper pre-reloc will not output anything as well.
+
+Same as for 2), adding the bootph-some-ram or bootph-all can and should
+be done at board level for boards that have special, or weird,
+requirements.
+
+It is also possible to add board specific code that call
+debug_uart_init() early if you want to ensure pinmux without adding the
+unnecessary delay that use of pinctrl in pre-reloc brings.
+
+> 
+> Adding Lukasz in Cc who's trying to fix U-Boot so that this is possible 
+> on PX30 (therefore, not just a theoretical use case I'm bringing up ;) ).
+> 
+>> - Radxa ROCK Pi S (RK3308): ~80 ms
+>> - Radxa ZERO 3W (RK3566): ~120 ms
+>> - Radxa ROCK 5B (RK3588): ~150 ms
+>>
+>> Similar change has already been applied for RK3328 and RK3399 boards.
+>>
+> 
+> Then I believe this was a mistake.
+
+My wording may have been misleading, when we added broad use of pinctrl props
+to SPL for rk3328/rk3399 we limited so that the uart pinctrl group was only
+enabled for TPL/SPL and not pre-reloc phase, because also including it at
+pre-reloc added 200-300 ms in extra boot time.
+
+This series tries to apply same findings on remaining Rockchip aarch64
+boards.
+
+> 
+>> The change for PX30 has not been runtime tested, and only include change
+>> for uart2, not uart0 and uart5 used on two of the supported px30 boards.
+>>
+> 
+> This means we have uart2 pinctrl at all stages even though we make no 
+> use of it?
+
+Yes, in my opinion the px30-u-boot.dtsi include lots of nodes that seem
+very board specific, some that probably should move to board specific
+u-boot.dtsi files.
+
+> 
+> I'm starting to wonder if this optimization isn't orthogonal to having 
+> as much support as possible via an <soc>-u-boot.dtsi which was done to 
+> make bring-up and maintenance easier. If you're really after 
+> optimization AND we keep the pinctrl for the debug uart (thus, not 
+> breaking 2) above), then what we want is cleaning up the default 
+> px30-u-boot.dtsi and move bootph properties to the board DTS instead?
+
+Agree, for other aarch64 socs I have already tried to cleanup
+<soc>-u-boot.dtsi to only contain what more than 70-80% of all supported
+boards may need. For rk3399 bob and kevin even use /delete-property/ to
+remove some of the common boothp props because all other rk3399 boards
+benefited from those common boothp props.
+
+I have no px30 board and the only rk3326 board I do have does not
+include the px30-u-boot.dtsi, so I will not try to do any cleanup of
+that file.
+
+> 
+> I was a bit against this "turn-key" solution wrt u-boot DT for 
+> rk3568/rk3588 but we went ahead, are we changing our mind now? Just to 
+> know what exactly is the direction we are planning to take.
+
+Please elaborate, I do not understand what you mean by this.
+
+The noticeable effect of boot time was discovered when reworking
+rk3399-u-boot.dtsi, after rk3568/rk3588 u-boot.dtsi already had gained a
+bootph-all prop in its uart2m0_xfer node. This try to apply those
+findings on a few more SoCs.
+
+Regards,
+Jonas
+
+> 
+> Cheers,
+> Quentin
+
