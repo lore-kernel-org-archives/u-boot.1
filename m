@@ -4,90 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77380C3DA4A
-	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 07:11:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70401C3DA4A
+	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 07:19:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADCB1886B3;
-	Mon,  5 Aug 2024 09:11:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E1CEC8885D;
+	Mon,  5 Aug 2024 09:19:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YenUOHDQ";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="dt5Le2p8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A426D887B9; Mon,  5 Aug 2024 09:11:06 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 670488886A; Mon,  5 Aug 2024 09:19:43 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170130004.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::4])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CF898854A
- for <u-boot@lists.denx.de>; Mon,  5 Aug 2024 09:11:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8AB2088327
+ for <u-boot@lists.denx.de>; Mon,  5 Aug 2024 09:19:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-3685b3dbcdcso5954515f8f.3
- for <u-boot@lists.denx.de>; Mon, 05 Aug 2024 00:11:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722841864; x=1723446664; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BPBEka04mIms4nEJMPc16MaDlP5DusiXcCyRpQdYuy0=;
- b=YenUOHDQDQ8SvLBTrb3GXvx59mjFOyXi6D3/FhJVBS3O+Vgb5dhIYhWPLHbqCQsuFs
- lgfGh7AAwmN4kAi1BypIPtMYd1p2C0Znrc9bp9qz3lZFwcBocgP7twc7rf1edzQDfUT1
- ea7uAClbrBmGfwb87XbmymQE4R9RccL5fWbWM31WiJy0Y632xyygOKLJYcK6uf3DyN5Y
- maMwBMCVA2H8aU2CG6N+mZfx6QVGSjhPdzdCkkriBu6FEu+lmmm6YX4XlA+vISLTXlPA
- G9rz/4L2cL2u2WxYpVi3QaIdZVX86k2CNAwxa3kIdiRKMJWdjV/OBt97UO00tVbqvVWb
- c+8Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722841864; x=1723446664;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=BPBEka04mIms4nEJMPc16MaDlP5DusiXcCyRpQdYuy0=;
- b=w5YbquiisN6p9NSFOkZqDwhe0IYJSVaqMQWpUnUIozD761S3nRU9n6+qh8vrS30aMe
- zKGjeL3DyGtAAZMQdKDHF3rhrPiuMXmomL9vJTJvv8N64xpF6g9u86Vik8ADRCJ54oiL
- TaibO84y9D0iKDA4t11okvQm/12oVlXtwUU4P5i9tUOIzFceL02y5K0uF1+ptrjdhbN1
- jmS4m8WMyUmaDrUoHb19FxisM9OVGSTtJ4PvVOJ3Gt1AM02dsh5ZXxSi3gFhnTrVScI+
- PcFSGKg/HoiEub7FSBSaI/85n4waYyV2ST0bMI7NxyHuuKJwQbfdVj1hGGvxH9HI4+Zr
- bwKA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUsP7smJB0lGJV0vgxG6cWCY7SjM+nk+kHoJzyzQyqfAjfHBiFweodB9qyd1RuZB5d3ejlIMDRi89cVcU3EgFH/8zAsqA==
-X-Gm-Message-State: AOJu0YzIxB39NLNf22GSllGtpmJsQeSTY+5VwQCI3l8Y34Gqvs4jM3Mq
- m82xZVrt6wHHQZrajXwsU58aczFoofDiKaxAaS02c2DwR2N2jOY4p+bA9eOVD/XwqeGSrlZJ487
- YDArCvfOUqL775J8k9UoMZR+Bv78=
-X-Google-Smtp-Source: AGHT+IE/pXJFoZwAX09RZAoR7mJw37VyjEOeV05+bAjdFyTat68rhq+vYyT7by+5gIzg/S+nMQ6yJ8M6Smyi96AfmJQ=
-X-Received: by 2002:a5d:6d87:0:b0:366:e7b5:3b49 with SMTP id
- ffacd0b85a97d-36bbc1c246dmr8815515f8f.54.1722841863684; Mon, 05 Aug 2024
- 00:11:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=usUIcCb3gT8rCderWEZDeN2fgokAKfYYMSwZch6EoZF4kH0dOekNpH/8iNUMmUgXjtdeRAiH5zB/GRIrQqSn9Jo2104HCNc4F2Oxt1uPZDYVMMCqwDibDwBqiXo1VKMrGQfRM2tybSKZaD2zxILM4Exybh/CxHz4vNUUgi8/hoaqgY9q2qWuIzrwuh+70AO2OMkqV4KWJRPWzwwRszG2ZmfvPHwM5JhUKdrHjiieqEoc9GcmfrR7uQlB9BW8C2TzAZpS89VdrmRqt7Kh9GNsiOuDiM0kxyJTB0OyTbHW+2FI+MuqfJeAmsggPluFIMOM5XqFhfjVWNf1SvH3iLHKdg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rj18pXMp5eN9hzxBDAFipiK2+TYdFWaNxm7Ryrp+4H4=;
+ b=RV3FaaXsH7sOxcelA70tp43MVX/s8WiNnAPCtkN4jcb6oW1PSHxiI6hNc/ivtzrThlfvFbqVldiQhOGho15WX3E4Z1Qhh8Q1ZwB14BhafL0fn45/1ivib2e1yEsYkLdDGSQC6MHdYxfCaA8ZwGPQW0k8QydoeiWcJ3awL0QT8OT/gb4U3YqHUJmIaGMsDuPMPVHaHUG7wFeGZj+dar8MJiCR08nclW3xHKeRPoZQUmHrTokiOIP+b92QqZVribn7fcupVpRuT93fG0IwQMfdbGT0BwZSZ170pUZL98Rn5e/uTnvWxkUmSMbYa9PSygPgUl+EurZ+Z9hguoxhF/5QTw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rj18pXMp5eN9hzxBDAFipiK2+TYdFWaNxm7Ryrp+4H4=;
+ b=dt5Le2p8JchZVBARon+WHFXjIVNXhOlLOEmty/euKy+N6GAAkPrGu9E+VmU7UFjicceasS2JK8aJD7tiDxnogk0lSVljXRqZnin4yoGv99zbbjzhSI1Fk+H1ZB3S2JrTUuPDq/77reNndubIdqy3zRd/60QcVWVglk5WnIEh3EA=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by DU2PR04MB8789.eurprd04.prod.outlook.com (2603:10a6:10:2e0::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7828.24; Mon, 5 Aug
+ 2024 07:19:37 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%5]) with mapi id 15.20.7784.020; Mon, 5 Aug 2024
+ 07:19:37 +0000
+Message-ID: <b96a6544-05a9-46a0-8be0-379835a9c175@cherry.de>
+Date: Mon, 5 Aug 2024 09:19:35 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] serial: ns16550: Try get serial clock rate from DT before
+ CLK
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20240804150955.3521296-1-jonas@kwiboo.se>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20240804150955.3521296-1-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BE0P281CA0031.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:14::18) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-References: <20240801055738.7601-1-clamor95@gmail.com>
- <20240801055738.7601-2-clamor95@gmail.com>
- <20240805053157.GA7516@francesco-nb>
- <CAPVz0n1TQ=bzvEv3OW_k+sBYVx13oRH6Oc_yfrhjNoe5+ujgoA@mail.gmail.com>
- <ZrB5nBI3GLA--gPQ@gaggiata.pivistrello.it>
- <CAPVz0n0s57E=x8cQZO7dzTXTjOkQMtQ6PF4A=8yM6P5an5BbgQ@mail.gmail.com>
- <ZrB6cpRQsO4-uFHM@gaggiata.pivistrello.it>
-In-Reply-To: <ZrB6cpRQsO4-uFHM@gaggiata.pivistrello.it>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Mon, 5 Aug 2024 10:10:52 +0300
-Message-ID: <CAPVz0n3AVp+wZ=0apbu+rfv06NX1J+T_hKnO6ZKpQ7zwCY4Cjw@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] board: tegra: convert tegra-based boards to text
- env
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, 
- Thierry Reding <treding@nvidia.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Joe Hershberger <joe.hershberger@ni.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Fabio Estevam <festevam@gmail.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
- Martyn Welch <martyn.welch@collabora.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DU2PR04MB8789:EE_
+X-MS-Office365-Filtering-Correlation-Id: 42887a9d-1b70-41d9-edbc-08dcb51ef69f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZHB4MVZKUkR0MDUraUd6NTNCUHJtaXJDOHoxVTMrdWlkV2J6bmQyNEw1bVE2?=
+ =?utf-8?B?WWI5WHliVFc1Q25tM1VxSDJFQkpyaGRKTzR0azVLS0dVQXFVMXh6S1lSS1BX?=
+ =?utf-8?B?dUtUVyttbkVhbkdndHRzZHNCTjBQeUpjWHh6Tzd5QTFGcWhlNExuUGZDQUor?=
+ =?utf-8?B?UDNnY1lIdFNGY0RUWXo4MUx5azNQM0FFODg3UUR4MkVDVWYySlBoUWVFazE4?=
+ =?utf-8?B?dkUrci9OK1JoNXpOWm0yNzJ6ZUlkNFh0Wmx1Uk0ycFJFeVpleEF4MG5STDVM?=
+ =?utf-8?B?RUplZ3J6UUdJd1lueVVHWEpnZXo1Tk1sNVRBOE1LbWdXK0hkOGE0UXkyUnVC?=
+ =?utf-8?B?T1BqZ3ptd0FGZjN1ZG9CdFdXRGdjWU5RRkE1ZktRYVBrdFB5NWZBQ04ya25Y?=
+ =?utf-8?B?b2JrbW9aSjVMRm9GSi9odW1ldjhIOUJXeXAxT25OcDcvNm00N0Fpb3dDdWxx?=
+ =?utf-8?B?UzNvQTJYNlk1QkthcmhzYmxtdDR4amFmc3VTL0ZHV1A5NVMxQUVJNFdTOHUv?=
+ =?utf-8?B?Zyt4bnVSc2lJUFBaQk1XcXRUMEJYMHRFK0xKYkQ4ckNONTNPSi9PaTJLcVRX?=
+ =?utf-8?B?SE5VbXBwTjlBMzlqWWdEc25aSDVNV2o0ck1mSUs0eHlZUWkvY0hua0ZpZXNo?=
+ =?utf-8?B?MFBhei9kR0UzTWJJRkpaYWdUbHU5OEpLdk9wNkpud1hPemRHQkxjZytkVlhQ?=
+ =?utf-8?B?WU1TaWM1QTl0NURvR2VDNURXZlB4cDVGZis2YUFFakIzVDExMnNLTjVIVkVV?=
+ =?utf-8?B?WlczOTZjK0MvQzFuVkhPU1VjVldBSnAvZTgxS0RGdmxDRlNQSVNxdzdwN05S?=
+ =?utf-8?B?ZG5SY1Z3VXZwajRsK25zWVlJd2FyTVZqaStSRXVDUWVaeEJjWHl0MUloV1Bl?=
+ =?utf-8?B?SGZNN2UyZHh0NktEVHY4SnpvdzZ5NW9rNTJnT1MxUzR3WHFrTGxVdDFZUk1r?=
+ =?utf-8?B?WVd2YmVuVWtsUk9RWnhPYVZiL1kvbkJaTWg3TVRzRGNmOUJManNqQjQ2UXJz?=
+ =?utf-8?B?MU41eVgyQ2srL0YrQlQ1Tit1eWxqQUJOa2JGVGhWTGI4bzc3Tzc5SDE2OERB?=
+ =?utf-8?B?OUdBQTQ0ajM1RGlFNHRpV1c1VWExY1N2YU9lNHZQY25JVC85ZGJVdE5IS3hL?=
+ =?utf-8?B?TUwzL1NwYXp0UjRrUzRwcXpLLzJLMHZKa0x5WHhLNElLL09Jc3IvTXdvQUlz?=
+ =?utf-8?B?VWJEa1VITStxUW5ZOU10SzZVYzZVSjd3czdvMDhMazVaRWZvL0l3TUhnTEJ3?=
+ =?utf-8?B?Z3RoNm5heWlZL2RtNmI3dFF1UW40VjA5aWNpV2wyL1NycHJ2TWdtYmJHVVFZ?=
+ =?utf-8?B?OVJrZGw5MGkxZTNnamNoTDlqOEJURHNUZTBIakxBNi8yUFRzSE92SDdNbmRB?=
+ =?utf-8?B?Z0tzcjNlOHV5dUxUVnB4T2FrYXRTSVNLSWROMit3QUFkSDhkYTFDam1VTDV1?=
+ =?utf-8?B?YUZWME0rblV0ZmFZUklPbklmMjR4RGN1MGNUbTVjK0Y4MTBieXFsMXhYd3Q4?=
+ =?utf-8?B?L21QSUJ6OWJWcnI1ZGNWTUpyamJyM0VDMjdsMEpMb2cxR21FWG9qQ2NvSGt2?=
+ =?utf-8?B?SzF1NUFPc1RMK3lYRmF4enhUcy9BbDcwWGJlNVAxVkhOWkk5dmEwSnFQTWRC?=
+ =?utf-8?B?WHVBNWlBYlhRWGtlcWZReXlZdVhIeDdxM0pyeWJ5UlhWNG1LVlNaY1NpdnZB?=
+ =?utf-8?B?VU53WHdmY3BkTGc1VUJ6WjM2bVdFTTA4dk45OTdMQmJsNFhvT3ZGVm1XYnVG?=
+ =?utf-8?B?cGt0dHBqeXJuVXFrbUNOUW1NWVhhR2ZyRGlFMG5NRmdjWVYwSU9vZGlic1Ir?=
+ =?utf-8?B?a0NnVXNTWnJMcUg3dXdZZz09?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZDdvN3BYMVlsazhyeVhiRFBkenJDRGNlZk9oc2ZtMTBsaE5ZVC82YnZ0Z0ZI?=
+ =?utf-8?B?amtxOG4vVTgzZEhRaGpGbkN2K0I2eXFxc1dXeE5ZbGJacGhDK21uZWpKSTg2?=
+ =?utf-8?B?cDZXYVBUdmZtbmNxWjdHVWxtWm1EUi92RGhuL1UvTXQ0WGNESVY5SjJhUHYr?=
+ =?utf-8?B?YVdOMVFkc0p0dmxrY2tZM3p0c2Y0THJDWjRkNm81ZWNhV0JMWFVxNm1sZ1dz?=
+ =?utf-8?B?UVl1blVEVXRBLzhOTzJUdExCVmZOWDRUQjNCUU9aTzd1K2dyS3BTb3BqRTF4?=
+ =?utf-8?B?Nk52QTNOM0ZxSnRkZ1hsdnl6VkhhclVZbW5kanhLZlNiOGRkTFpNUHBMSTFW?=
+ =?utf-8?B?SldMSlVuRmRWV1djTlljMXZ6aENsZ2dSZjBlYmVGMUFsYS9INWZFMzE2ZFEr?=
+ =?utf-8?B?NjhhSFdFNVErMU8zMGdWY0ppcDZYTTMrRWxMZEh6YU1tL00zS3NLSklxeHJl?=
+ =?utf-8?B?OGdMd2F0L2Z6dmpaNHJySG5kcjhUSFBhKzlhd1dLdStiOVUxSGUxblNqU2RQ?=
+ =?utf-8?B?cmJGTkk2Q0hYdU1PZExLQkJPVFozWUNMekEzTDdadDZ5NnNoZTRjZlZVeE9K?=
+ =?utf-8?B?MHhIc2Z5dk0rTnArdXEraE5qMWZTRWVJQnlJNHZ6eE1Wb1pRenZPYW12VFFF?=
+ =?utf-8?B?OGt0SlZ0ajlMdGdvM2NjWlFTaWFYSHEwdGNSbWpIbE5QZmxmdFV1a0JsaVRP?=
+ =?utf-8?B?SklBd3o3R3Vvbnp3OHUxNTJxd3lic0huN0NmWG1aTFRDSHp3bjNRRXFNNHR4?=
+ =?utf-8?B?Mkp3cERBdjg5TlFIcWlVUHF3RW1uMXkzMU9WOVZscG03TG5CRVBONWRhUHhX?=
+ =?utf-8?B?SUNOY00ySWdkMFNEMHB3Wmc2ZnpGc25LOE82UHdYUTZBSkVHdFcvZ3dFK2tT?=
+ =?utf-8?B?a0x5d3NtVTl1eGc3ZWNGTDdKcVdnT1ZjVGp2a2pVMk9reGwreEsreHU1T2lU?=
+ =?utf-8?B?T0N6SFJ4bzJFT005WVZHbkJ0S3o2SEF3OE4rSjZ2d2xLS3UxeVhnQ1VYcjll?=
+ =?utf-8?B?a1RqRUUzZ1F2WU9VcHF0Y1YwMTJkb1NHSmhMdjhXTDg2TFU2aDJ4TnFIQzFx?=
+ =?utf-8?B?QTV1eGRncTY0Y3VOQ0lxQU41UGxPdG5OcHMrRm5vbzlWUnpmekNiOGM2aFBJ?=
+ =?utf-8?B?ckE1T245dlIyOW5ZNGFvRjltTHlMeURoZkpqWlZwZUcwQmQva01tNzQ1NW9W?=
+ =?utf-8?B?OGZMVndXZ2pzd3ZvRkplUjFUSTBuTU9LMUMvaXEwUmEyYjllay9LY0JWN3M5?=
+ =?utf-8?B?a2d2cG01YkhVMGdXak9ydUdwWHc0bk5SU0dQdkNhTGRpcjFmVTBOUFdabmRQ?=
+ =?utf-8?B?UkttUDk0ZU1RdmxXTlFFbW9pVWRhSkh0b01PdVRXQ3BiVmtNamNWdjR1SzQ1?=
+ =?utf-8?B?Q2wrZ0N4bG9hUDZvWll5bXdOLytKd3g3WWhXbnVJcHc5WXF1ZEhhNjR4MFFh?=
+ =?utf-8?B?U2RWTk9XeENnSzRiMWdPWGtKNWMzTmdJRWhJNXdpUEFTd1FtZ3NGNWpNUUtl?=
+ =?utf-8?B?eURzeXRaZTVydzZXY0dNeFgyNDJyVExLLy9xVG5ldVBveXRrSlNlOHhqUTRa?=
+ =?utf-8?B?cFhFYi9WcFJZMkxMdTNWeFBFcEtOeFYvRFh1V0FrbmFhdGFNNkJab1lJYWxP?=
+ =?utf-8?B?Vm5hckU4aEF3WEVCWWlhU3BWV0JOQmFlMHl0c1ZRVnprUFBOeHlOUmdMM1kz?=
+ =?utf-8?B?TE9ETkF3YjRWN3dLR0dqNHhoUi9kYVhFdVlxU1FGZ216R3JTdHdBMmhCZWNk?=
+ =?utf-8?B?NGhpQU45eWpZTXZXeC82Y3BvZFZQWlBRL01KZ0lMeEpJbHdhUW13dUhuTXNW?=
+ =?utf-8?B?SWJ3WEV3UU9ueWl4dnA4U2VJM3Z1YXZ0VkMyZHFCYzJ3VjRVU3k4aUZ1ZGZ2?=
+ =?utf-8?B?UmdCT1BsMDRRMWVxV0Vjam1OVWttbmxUQUI0Qzgrc0JRWkpJa3pybEtaREhD?=
+ =?utf-8?B?bksxU01jdS8xTXRHNURQbm53OUZWNk53VTZaOUF6cW9FUFQzUXNsTTFueXov?=
+ =?utf-8?B?dkxOKzNpSzVVOGFTOFFnZVdxa0dxUlNHVEZaN3FTelZaUEhxUzhHeTcvQnc5?=
+ =?utf-8?B?SkpFbDhseWk2V3VrakhnVFZZYWNsRGg2L2ZrOUowWE9LVHdCTmI2dWhFU3lj?=
+ =?utf-8?B?SENRcGQ3d3Fad0J0NVZZSjRZNXcydFhUZW9VUVFRMDdsQWc4NVhFY0hNd3VG?=
+ =?utf-8?B?Smc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 42887a9d-1b70-41d9-edbc-08dcb51ef69f
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Aug 2024 07:19:37.2436 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: AjZhf/vlU9xcnrGJTpmwSJncdZTmuzFMT/85iJrOarjHIvFQisZ7QtVYgTYbtLj5cklxBvQy+9A4rJH/mdZBxEHgDIodBnLUxHx8f1GGc4I=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8789
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,158 +174,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=BF=D0=BD, 5 =D1=81=D0=B5=D1=80=D0=BF. 2024=E2=80=AF=D1=80. =D0=BE 10:08=
- Francesco Dolcini <francesco@dolcini.it> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> On Mon, Aug 05, 2024 at 10:06:04AM +0300, Svyatoslav Ryhel wrote:
-> > =D0=BF=D0=BD, 5 =D1=81=D0=B5=D1=80=D0=BF. 2024=E2=80=AF=D1=80. =D0=BE 1=
-0:05 Francesco Dolcini <francesco@dolcini.it> =D0=BF=D0=B8=D1=88=D0=B5:
-> > >
-> > > On Mon, Aug 05, 2024 at 10:01:27AM +0300, Svyatoslav Ryhel wrote:
-> > > > =D0=BF=D0=BD, 5 =D1=81=D0=B5=D1=80=D0=BF. 2024=E2=80=AF=D1=80. =D0=
-=BE 08:32 Francesco Dolcini <francesco@dolcini.it> =D0=BF=D0=B8=D1=88=D0=B5=
-:
-> > > > > On Thu, Aug 01, 2024 at 08:57:38AM +0300, Svyatoslav Ryhel wrote:
-> > > > > > Convert boards to use text based env. This is the first stage o=
-f
-> > > > > > conversion, common inclusions should be converted next.
-> > > > > >
-> > > > > > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > > > > > ---
-> > > > > >  board/asus/grouper/grouper.env                | 15 +++
-> > > > > >  .../asus/transformer-t20/transformer-t20.env  | 16 ++++
-> > > > > >  .../transformer-t30/configs/tf600t.config     |  1 +
-> > > > > >  board/asus/transformer-t30/tf600t.env         | 16 ++++
-> > > > > >  .../asus/transformer-t30/transformer-t30.env  | 16 ++++
-> > > > > >  board/htc/endeavoru/endeavoru.env             | 13 +++
-> > > > > >  .../ideapad-yoga-11/ideapad-yoga-11.env       | 16 ++++
-> > > > > >  board/lg/x3-t30/configs/p880.config           |  1 +
-> > > > > >  board/lg/x3-t30/configs/p895.config           |  1 +
-> > > > > >  board/lg/x3-t30/p880.env                      | 14 +++
-> > > > > >  board/lg/x3-t30/p895.env                      | 13 +++
-> > > > > >  board/microsoft/surface-rt/surface-rt.env     | 14 +++
-> > > > > >  board/nvidia/cardhu/cardhu.env                |  2 +
-> > > > > >  board/nvidia/p2771-0000/p2771-0000.env        | 22 +++++
-> > > > > >  board/nvidia/p3450-0000/p3450-0000.env        |  7 ++
-> > > > > >  board/toradex/apalis-tk1/apalis_tk1.env       | 45 +++++++++
-> > > > > >  board/toradex/apalis_t30/apalis_t30.env       |  9 ++
-> > > > > >  board/toradex/colibri_t20/colibri_t20.env     |  3 +
-> > > > > >  board/toradex/colibri_t30/colibri_t30.env     |  9 ++
-> > > > > >  board/wexler/qc750/qc750.env                  | 14 +++
-> > > > > >  configs/apalis-tk1_defconfig                  |  1 +
-> > > > > >  configs/apalis_t30_defconfig                  |  1 +
-> > > > > >  configs/cardhu_defconfig                      |  1 +
-> > > > > >  configs/colibri_t20_defconfig                 |  1 +
-> > > > > >  configs/colibri_t30_defconfig                 |  1 +
-> > > > >
-> > > > > ...
-> > > > >
-> > > > > > diff --git a/board/toradex/apalis-tk1/apalis_tk1.env b/board/to=
-radex/apalis-tk1/apalis_tk1.env
-> > > > > > new file mode 100644
-> > > > > > index 0000000000..90db361be3
-> > > > > > --- /dev/null
-> > > > > > +++ b/board/toradex/apalis-tk1/apalis_tk1.env
-> > > > > > @@ -0,0 +1,45 @@
-> > > > > > +/*
-> > > > > > + * Custom Distro Boot configuration:
-> > > > > > + * 1. 8bit SD port (MMC1)
-> > > > > > + * 2. 4bit SD port (MMC2)
-> > > > > > + * 3. eMMC (MMC0)
-> > > > > > + */
-> > > > > > +boot_targets=3Dmmc1 mmc2 mmc0 usb pxe dhcp
-> > > > > > +
-> > > > > > +boot_file=3DzImage
-> > > > > > +boot_script_dhcp=3Dboot.scr
-> > > > > > +console=3DttyS0
-> > > > > > +defargs=3Dlp0_vec=3D2064@0xf46ff000 core_edp_mv=3D1150 core_ed=
-p_ma=3D4000
-> > > > > > +     usb_port_owner_info=3D2 lane_owner_info=3D6 emc_max_dvfs=
-=3D0
-> > > > > > +     user_debug=3D30 pcie_aspm=3Doff
-> > > > > > +dfu_alt_info=3Dapalis-tk1.img raw 0x0 0x500 mmcpart 1;
-> > > > > > +     boot part 0 1 mmcpart 0;
-> > > > > > +     rootfs part 0 2 mmcpart 0;
-> > > > > > +     zImage fat 0 1 mmcpart 0;
-> > > > > > +     tegra124-apalis-eval.dtb fat 0 1 mmcpart 0
-> > > > > > +fdt_board=3Deval
-> > > > > > +fdt_fixup=3D;
-> > > > > > +fdt_module=3Dapalis-v1.2
-> > > > > > +uboot_hwpart=3D1
-> > > > > > +uboot_blk=3D0
-> > > > > > +set_blkcnt=3Dsetexpr blkcnt ${filesize} + 0x1ff &&
-> > > > > > +     setexpr blkcnt ${blkcnt} / 0x200
-> > > > > > +update_uboot=3Drun set_blkcnt && mmc dev 0 ${uboot_hwpart} &&
-> > > > > > +     mmc write ${loadaddr} ${uboot_blk} ${blkcnt}
-> > > > > > +setethupdate=3Dif env exists ethaddr; then; else setenv ethadd=
-r
-> > > > > > +     00:14:2d:00:00:00; fi; pci enum && tftpboot ${loadaddr}
-> > > > > > +     flash_eth.img && source ${loadaddr}
-> > > > > > +setsdupdate=3Dsetenv interface mmc; setenv drive 1; mmc rescan=
-;
-> > > > > > +     load ${interface} ${drive}:1 ${loadaddr} flash_blk.img
-> > > > > > +     || setenv drive 2; mmc rescan; load ${interface} ${drive}=
-:1
-> > > > > > +     ${loadaddr} flash_blk.img &&
-> > > > > > +     source ${loadaddr}
-> > > > > > +setup=3Dsetenv setupargs igb_mac=3D${ethaddr}
-> > > > > > +     consoleblank=3D0 no_console_suspend=3D1 console=3Dtty1
-> > > > > > +     console=3D${console},${baudrate}n8 debug_uartport=3Dlspor=
-t,0
-> > > > > > +     ${memargs}
-> > > > > > +setupdate=3Drun setsdupdate || run setusbupdate || run setethu=
-pdate
-> > > > > > +setusbupdate=3Dusb start && setenv interface usb; setenv drive=
- 0;
-> > > > > > +     load ${interface} ${drive}:1 ${loadaddr} flash_blk.img &&
-> > > > > > +     source ${loadaddr}
-> > > > > > +vidargs=3Dfbcon=3Dmap:1
-> > > > >
-> > > > > ...
-> > > > >
-> > > > > > diff --git a/include/configs/apalis-tk1.h b/include/configs/apa=
-lis-tk1.h
-> > > > > > index 71d4727ca9..4c690a1785 100644
-> > > > > > --- a/include/configs/apalis-tk1.h
-> > > > > > +++ b/include/configs/apalis-tk1.h
-> > > > > > @@ -18,64 +18,6 @@
-> > > > > >  #define FDT_MODULE                   "apalis-v1.2"
-> > > > > >  #define FDT_MODULE_V1_0                      "apalis"
-> > > > > >
-> > > > > > -/*
-> > > > > > - * Custom Distro Boot configuration:
-> > > > > > - * 1. 8bit SD port (MMC1)
-> > > > > > - * 2. 4bit SD port (MMC2)
-> > > > > > - * 3. eMMC (MMC0)
-> > > > > > - */
-> > > > > > -#define BOOT_TARGET_DEVICES(func) \
-> > > > > > -     func(MMC, mmc, 1) \
-> > > > > > -     func(MMC, mmc, 2) \
-> > > > > > -     func(MMC, mmc, 0) \
-> > > > > > -     func(USB, usb, 0) \
-> > > > > > -     func(PXE, pxe, na) \
-> > > > > > -     func(DHCP, dhcp, na)
-> > > > > > -
-> > > > >
-> > > > > I do recall that to transition to text env file it was required t=
-o move
-> > > > > from standard boot to distroboot. Did I recall incorrectly?
-> > > >
-> > > > Are you 100% sure? Have you tried?
-> > >
-> > > No, I am not, but Simon in copy knows for sure.
-> > >
-> > > What I am sure is that I mean migrating from distroboot to standard b=
-oot, the
-> > > opposite of what I wrote ...
-> >
-> > Tegra uses standard boot
->
-> BOOT_TARGET_DEVICES seems distroboot to me.
->
+Hi Jonas,
 
-It seems that Tegra switched to standard boot, but Toradex boards were
-not adjusted.
+On 8/4/24 5:09 PM, Jonas Karlman wrote:
+> Initializing a clock driver to read a known static clock rate can take
+> some time at U-Boot proper pre-reloc phase.
+> 
+> Change to first try and read clock rate from DT to speed up boot time,
+> fall back to getting the clock rate from clock driver.
+> 
+> This help reduce boot time by around:
+> - ~35ms on a Radxa ROCK Pi 4 (RK3399)
+> - ~15ms on a Radxa ZERO 3W (RK3566)
+> Time that is wasted getting a static rate known at compile time.
+> 
 
-> Francesco
->
+I guess this also makes some board perform worse as well, the ones 
+without a clock-frequency set?
+
+The change seems sound to me, therefore
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+
+Thanks!
+Quentin
