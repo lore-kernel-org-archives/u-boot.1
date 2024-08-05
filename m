@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94592C3DA4A
-	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 13:55:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81E8EC3DA7F
+	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 13:55:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B8D28896A;
+	by phobos.denx.de (Postfix) with ESMTP id 8750888975;
 	Mon,  5 Aug 2024 15:55:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LNgry+hk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nYs0dNBl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3260588905; Mon,  5 Aug 2024 14:43:40 +0200 (CEST)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id A7512888F6; Mon,  5 Aug 2024 14:43:41 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B77E88915
- for <u-boot@lists.denx.de>; Mon,  5 Aug 2024 14:43:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 93109888D7
+ for <u-boot@lists.denx.de>; Mon,  5 Aug 2024 14:43:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bisson.gary@gmail.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6bb84ac8facso28757496d6.1
- for <u-boot@lists.denx.de>; Mon, 05 Aug 2024 05:43:37 -0700 (PDT)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6b796667348so47169766d6.0
+ for <u-boot@lists.denx.de>; Mon, 05 Aug 2024 05:43:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722861816; x=1723466616; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1722861817; x=1723466617; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mDz3/zWh7t59HevhVq+1h+sStqoc9Wi8qXh3yAn2l8w=;
- b=LNgry+hkBAi0MKmvpRhyEM9JBxY4C1bxF18VvI7BZGcZYE0s88hf23SD/M8mqCs5IM
- Alq4WMvvVXX9tjGcwROPVmKtLgUa5NhjT5dxFUTVhi1sDnZ1SPg0ri5O1ZYYyekofdFv
- vS1qRmzU2CZZX1oLspfdSqQcwz7oLzRDC9l3z7NHDr0JGeUwXnfjBUwlqtvYxVlsVPMP
- /B7ks3Dr17Y0i1Q2/NztCD8VvwWh1gOtx+qabqs5d/8ZPsnFExoORMuqDDtDKnIKgSMZ
- 8womTBOZZUnhAShxHaJV6opVJppzzo9uAWHVs1/bdHTcgCFWms8cVGDnjhqyuPX+crlJ
- dx/A==
+ bh=iCEv4QbvIhAYTYl2QKKcipo/TOJRbHhY/FhAtveaZdg=;
+ b=nYs0dNBlN+Znm+bV94D5dqxM4sckk8KxPBVDWYg0qD8IjEeA6VS8etPWNZ00opFEDs
+ sniZb9JRY5dk7u1LVF3I6BEJxD9+loqdE77Ou163uxrP4WvHSqoEreI5Wte0bfC0wb5Q
+ q8RW+CNmL+VY4F3Df8WLWFYLycFv/xdHNgUXmviARQDTxd+5iz3FvjIJcLJTsJDkvoQQ
+ 1SpLPTr/0l4ufMTsFQHvOCy+r/D3U2bdc9+NwzYgNqy9eNfjOE8z4fZmlIPBGgM9yYip
+ wN+QYNf1njYFChyYAvQYyJJZQ9N0VgvO2XPPSli/8JxvUPsSNJoYz/BgxzzlpLAAB4Rp
+ n6gA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722861816; x=1723466616;
+ d=1e100.net; s=20230601; t=1722861817; x=1723466617;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mDz3/zWh7t59HevhVq+1h+sStqoc9Wi8qXh3yAn2l8w=;
- b=CR18LqRfLfJQpfUsR2h+G6xMldahzZ2vHtqjkw4yGNbl4SxumX/aPBZf/zuMQ8UDVl
- 9naATrvug7FEc7MUVhybZ8UogcUKUp4EHSRZU2nrhtREyHK6uCtLYF0tgxyJ2eYh3IRq
- vI/x1oAZoUjvkzuH9KO2NDzVewqqU7tZceTFcKVsZCX4y0BHtODfgg8Yz4lzjofSsHWt
- RAIgXVxQdopRIwG3ZCyo1LQbdju9tmj4gF6Twiq7IDP6sUtss8NaZdrq+vXIRiYE5Ti3
- C8rHu+hqTsGmSoLepv00wj8Wl52rVMgizxv6xGbLky0NSvNETw/8WGYEDYv/deZc69qD
- 2s5A==
-X-Gm-Message-State: AOJu0YyhcXUcN2ZguP9i50Uf5MzgeCY0kCx2DWvVAncw+bYf94zY5CBa
- +ZqGLaBKKxvPts+c1/tCECP1dTUfO8ljhImCObkHq+JjW5bZgUD8YIrxkQ==
-X-Google-Smtp-Source: AGHT+IHSwqfh1m2AB+69ADQV8Sa5yQpEjTAycI2nvVxHjPPBUHBdUH52ClocW7hD9WX8CptXG4Z5GA==
-X-Received: by 2002:a05:6214:310f:b0:6b5:e97b:bdce with SMTP id
- 6a1803df08f44-6bb983d6ecemr108205226d6.22.1722861816096; 
- Mon, 05 Aug 2024 05:43:36 -0700 (PDT)
+ bh=iCEv4QbvIhAYTYl2QKKcipo/TOJRbHhY/FhAtveaZdg=;
+ b=CuspFgo2vbZWNG4mSrwMWuHWetyLLOuvCrboYyW2mfvEbMc3uF5HNtwAd8+ErHSvDx
+ opeY4BBD+ihPN9xDOb9gdsXTDTuCA8jwPracjVvO4aG/E0d11I9kI/EQOPQUBgC+r88v
+ OY+ZyUvQvw/xXxf3drrptZ1cJILKsWYAgBqlWtcSNjfqnY7Fjt/sx/MRMcB6KqweVSf5
+ Gragh3XMquBk9wXlKuJrolosMQKDhyyJ6zptlJk6RI5HMk1QcYWxomgDeON8+ZGm/oqe
+ 4WpxkRjNcnsuo/GxzRUCUBfXlEhLMa7TlQjqU1FXqV+Z354FHP1Z/ygdOoPE7+RgoBM9
+ LBkQ==
+X-Gm-Message-State: AOJu0Yw3DVLqt4fZDjKGuMgjRfxWBUXsPzfSQIB3RY52W90bMoXdRSM0
+ whkmKhLWu5s2dqZwch8xUXsDyg7eRUFJQCCphFn0/JKdH5wVquAZd+tFRA==
+X-Google-Smtp-Source: AGHT+IEV8I6LyCGeOX0LQ/1aJMxp+5vyLTlIxBSmQRBfymnrx7i/DYVO5BIJlh4WqaaRNqzRniTvIg==
+X-Received: by 2002:a05:6214:33c5:b0:6bb:8b2e:8e7a with SMTP id
+ 6a1803df08f44-6bb987af505mr194394126d6.24.1722861817347; 
+ Mon, 05 Aug 2024 05:43:37 -0700 (PDT)
 Received: from p1g2.lan (128-78-204-97.abo.bbox.fr. [128.78.204.97])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6bb9c87bb90sm34984796d6.130.2024.08.05.05.43.35
+ 6a1803df08f44-6bb9c87bb90sm34984796d6.130.2024.08.05.05.43.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Aug 2024 05:43:35 -0700 (PDT)
+ Mon, 05 Aug 2024 05:43:37 -0700 (PDT)
 From: Gary Bisson <bisson.gary@gmail.com>
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, festevam@gmail.com, peng.fan@nxp.com,
  uboot-imx@nxp.com, Gary Bisson <bisson.gary@gmail.com>
-Subject: [PATCH 4/5] mach-imx: Add i.MX 8ULP binman support
-Date: Mon,  5 Aug 2024 14:43:25 +0200
-Message-ID: <20240805124326.544310-5-bisson.gary@gmail.com>
+Subject: [PATCH 5/5] imx8ulp_evk: enable binman support
+Date: Mon,  5 Aug 2024 14:43:26 +0200
+Message-ID: <20240805124326.544310-6-bisson.gary@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240805124326.544310-1-bisson.gary@gmail.com>
 References: <20240805124326.544310-1-bisson.gary@gmail.com>
@@ -93,145 +93,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-- Re-use i.MX 93 Makefile target as similar boot process
-- Create imx8ulp-u-boot.dtsi for binman image architecture
-- Create both SPL and U-Boot containers configuration
-
-Key differences between the 93 and 8ULP SPL container are:
-- No LPDDR training library needed for 8ULP
-- 8ULP requires a uPower binary (RISC-V core) for power management
-- 8ULP also requires a M33 binary to work properly
-
 Signed-off-by: Gary Bisson <bisson.gary@gmail.com>
 ---
- arch/arm/dts/imx8ulp-u-boot.dtsi        | 63 +++++++++++++++++++++++++
- arch/arm/mach-imx/Makefile              |  4 +-
- arch/arm/mach-imx/imx8ulp/container.cfg |  7 +++
- arch/arm/mach-imx/imx8ulp/imximage.cfg  |  9 ++++
- 4 files changed, 81 insertions(+), 2 deletions(-)
- create mode 100644 arch/arm/dts/imx8ulp-u-boot.dtsi
- create mode 100644 arch/arm/mach-imx/imx8ulp/container.cfg
- create mode 100644 arch/arm/mach-imx/imx8ulp/imximage.cfg
+ arch/arm/dts/imx8ulp-evk-u-boot.dtsi | 2 ++
+ arch/arm/mach-imx/imx8ulp/Kconfig    | 1 +
+ configs/imx8ulp_evk_defconfig        | 3 ++-
+ 3 files changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/imx8ulp-u-boot.dtsi b/arch/arm/dts/imx8ulp-u-boot.dtsi
-new file mode 100644
-index 00000000000..30baaeff8ef
---- /dev/null
-+++ b/arch/arm/dts/imx8ulp-u-boot.dtsi
-@@ -0,0 +1,63 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+#ifdef CONFIG_BINMAN
-+/ {
-+	binman: binman {
-+		multiple-images;
-+	};
-+};
-+
-+&binman {
-+	u-boot-spl-ddr {
-+		align = <4>;
-+		align-size = <4>;
-+		filename = "u-boot-spl-ddr.bin";
-+		pad-byte = <0xff>;
-+
-+		u-boot-spl {
-+			align-end = <4>;
-+			filename = "u-boot-spl.bin";
-+		};
-+	};
-+
-+	spl {
-+		filename = "spl.bin";
-+
-+		mkimage {
-+			args = "-n spl/u-boot-spl.cfgout -T imx8image -e 0x22020000";
-+
-+			blob {
-+				filename = "u-boot-spl-ddr.bin";
-+			};
-+		};
-+	};
-+
-+	u-boot-container {
-+		filename = "u-boot-container.bin";
-+
-+		mkimage {
-+			args = "-n u-boot-container.cfgout -T imx8image -e 0x0";
-+
-+			blob {
-+				filename = "u-boot.bin";
-+			};
-+		};
-+	};
-+
-+	imx-boot {
-+		filename = "flash.bin";
-+		pad-byte = <0x00>;
-+
-+		spl: blob-ext@1 {
-+			filename = "spl.bin";
-+			offset = <0x0>;
-+			align-size = <0x400>;
-+			align = <0x400>;
-+		};
-+
-+		uboot: blob-ext@2 {
-+			filename = "u-boot-container.bin";
-+		};
-+	};
-+};
-+#endif
-diff --git a/arch/arm/mach-imx/Makefile b/arch/arm/mach-imx/Makefile
-index ef0caed3f7f..b311d176d64 100644
---- a/arch/arm/mach-imx/Makefile
-+++ b/arch/arm/mach-imx/Makefile
-@@ -129,7 +129,7 @@ DEPFILE_EXISTS := $(shell $(CPP) $(cpp_flags) -x c -o u-boot-dtb.cfgout $(srctre
- else ifeq ($(CONFIG_ARCH_IMX8M), y)
- IMAGE_TYPE := imx8mimage
- DEPFILE_EXISTS := 0
--else ifeq ($(CONFIG_ARCH_IMX9), y)
-+else ifeq ($(CONFIG_ARCH_IMX9)$(CONFIG_ARCH_IMX8ULP), y)
- IMAGE_TYPE := imx8image
- DEPFILE_EXISTS := 0
- else
-@@ -215,7 +215,7 @@ flash.bin: spl/u-boot-spl.bin FORCE
- endif
- endif
+diff --git a/arch/arm/dts/imx8ulp-evk-u-boot.dtsi b/arch/arm/dts/imx8ulp-evk-u-boot.dtsi
+index 608bde3a2a3..f67fe166d31 100644
+--- a/arch/arm/dts/imx8ulp-evk-u-boot.dtsi
++++ b/arch/arm/dts/imx8ulp-evk-u-boot.dtsi
+@@ -3,6 +3,8 @@
+  * Copyright 2021 NXP
+  */
  
--ifeq ($(CONFIG_ARCH_IMX9), y)
-+ifeq ($(CONFIG_ARCH_IMX9)$(CONFIG_ARCH_IMX8ULP), y)
++#include "imx8ulp-u-boot.dtsi"
++
+ / {
+ 	mu@27020000 {
+ 		compatible = "fsl,imx8ulp-mu";
+diff --git a/arch/arm/mach-imx/imx8ulp/Kconfig b/arch/arm/mach-imx/imx8ulp/Kconfig
+index 49ea25250a3..6ce6039faf9 100644
+--- a/arch/arm/mach-imx/imx8ulp/Kconfig
++++ b/arch/arm/mach-imx/imx8ulp/Kconfig
+@@ -23,6 +23,7 @@ choice
  
- quiet_cmd_imx9_check = CHECK    $@
- cmd_imx9_check = $(srctree)/tools/imx9_image.sh $@
-diff --git a/arch/arm/mach-imx/imx8ulp/container.cfg b/arch/arm/mach-imx/imx8ulp/container.cfg
-new file mode 100644
-index 00000000000..029b79128c8
---- /dev/null
-+++ b/arch/arm/mach-imx/imx8ulp/container.cfg
-@@ -0,0 +1,7 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+
-+BOOT_FROM SD 0x400
-+SOC_TYPE ULP
-+CONTAINER
-+IMAGE A35 bl31.bin 0x20040000
-+IMAGE A35 u-boot.bin CONFIG_TEXT_BASE
-diff --git a/arch/arm/mach-imx/imx8ulp/imximage.cfg b/arch/arm/mach-imx/imx8ulp/imximage.cfg
-new file mode 100644
-index 00000000000..a55359fee23
---- /dev/null
-+++ b/arch/arm/mach-imx/imx8ulp/imximage.cfg
-@@ -0,0 +1,9 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+
-+BOOT_FROM SD 0x400
-+SOC_TYPE ULP
-+APPEND mx8ulpa2-ahab-container.img
-+CONTAINER
-+IMAGE PWR upower.bin
-+IMAGE M40 m33_image.bin 0x1ffc2000
-+IMAGE A35 u-boot-spl-ddr.bin 0x22020000
+ config TARGET_IMX8ULP_EVK
+ 	bool "imx8ulp_evk"
++        select BINMAN
+ 	select IMX8ULP
+ 	select SUPPORT_SPL
+ 	select IMX8ULP_DRAM
+diff --git a/configs/imx8ulp_evk_defconfig b/configs/imx8ulp_evk_defconfig
+index b302df1f351..0f0748b6792 100644
+--- a/configs/imx8ulp_evk_defconfig
++++ b/configs/imx8ulp_evk_defconfig
+@@ -8,7 +8,7 @@ CONFIG_NR_DRAM_BANKS=2
+ CONFIG_SF_DEFAULT_SPEED=40000000
+ CONFIG_ENV_SIZE=0x2000
+ CONFIG_ENV_OFFSET=0x400000
+-CONFIG_IMX_CONFIG=""
++CONFIG_IMX_CONFIG="arch/arm/mach-imx/imx8ulp/imximage.cfg"
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="imx8ulp-evk"
+ CONFIG_SPL_TEXT_BASE=0x22020000
+@@ -38,6 +38,7 @@ CONFIG_SPL_MAX_SIZE=0x25000
+ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_BOOTROM_SUPPORT=y
+ CONFIG_SPL_LOAD_IMX_CONTAINER=y
++CONFIG_IMX_CONTAINER_CFG="arch/arm/mach-imx/imx8ulp/container.cfg"
+ # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
 -- 
 2.43.0
 
