@@ -4,38 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C327C3DA64
-	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 02:28:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3113CC3DA7F
+	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 04:53:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CEFB8852D;
-	Mon,  5 Aug 2024 04:28:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+	by phobos.denx.de (Postfix) with ESMTP id EA9258885D;
+	Mon,  5 Aug 2024 06:53:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D0E0887F3; Mon,  5 Aug 2024 04:28:19 +0200 (CEST)
-Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A554088297
- for <u-boot@lists.denx.de>; Mon,  5 Aug 2024 04:28:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
-Received: from secure.fukaumi.org ([10.0.0.2])
- by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
- 4752S5Ra017723; Mon, 5 Aug 2024 11:28:05 +0900
-From: FUKAUMI Naoki <naoki@radxa.com>
-To: u-boot@lists.denx.de
-Cc: sumit.garg@linaro.org, sjg@chromium.org, philipp.tomsich@vrull.eu,
- kever.yang@rock-chips.com, FUKAUMI Naoki <naoki@radxa.com>,
- Heiko Stuebner <heiko@sntech.de>
-Subject: [PATCH] arm64: dts: rockchip: change spi-max-frequency for Radxa ROCK
- 3C
-Date: Mon,  5 Aug 2024 11:26:01 +0900
-Message-ID: <20240805022601.913-1-naoki@radxa.com>
-X-Mailer: git-send-email 2.43.0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1722833619;
+	bh=JKFcTcGYgi2LMqxl3pLCS9NeNQbCCIx8xvV+Q3SaEKE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=kbsQDWqpz1kc4Q8etb53U+1GMWFydQi9JSIP8PKvOYkQpAAI9nuRuBvLj5dvvnzHR
+	 U7yMdUSx4Onn2iczib4bLyQPN08KVGyfYKzmauTTJprz+P0TLrXvSmleCs2btr8FF7
+	 UkgOuUDxxdZAj2BkuP9q55VCVmB7Hye2J+h0ycoG6cnTbeuaCUM90+pm38xz+7qYZL
+	 1LEAiI6jLW+KUeybJ2vmj/ejKXZpQzXCPkhJT2o4ATKCuucb5IL2kj0soDGQ3zACsH
+	 8SeQlp6550Zha6vaDBvy8G/Gt8R3Si+ml24sz6CEgdqAWtGOuWYQQSCTHrjSNl2DBC
+	 32K/sICMXLamQ==
+Received: from [192.168.1.107] (82-131-232-44.pool.digikabel.hu
+ [82.131.232.44])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 6143088027;
+ Mon,  5 Aug 2024 06:53:35 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1722833616;
+ bh=JKFcTcGYgi2LMqxl3pLCS9NeNQbCCIx8xvV+Q3SaEKE=;
+ h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
+ b=TW+GFz1sIzTl2GxU0yiXSwLBOwP75prV+MRuVh9gc2g5U8NfjuSWilUCU4V8uWvq/
+ cRcf6J8gAcgbbMsHKHioMB3g1U3lreBpfmXceIdH2alp9iJxHUQr7JLrFFUjGpfLIR
+ thWHA/Y+pxCmGQPVK1DRQrKNMVT/smphZvA7EMQXGFL1ACI5X3xKIYUnKP3GI1aLmw
+ DnR6+PBTNclNbuqoHXJ2EO43a98KdXipnDmbaQAR0HEeXnHBX/akyYYc8w+MtUULJA
+ QPHqrFUeRnKTvymdINcTna0YpG2j6exAbWAEUo6+jNSiQXpfn6U3/ubJlecmYR16e2
+ EhN+ytlfhe45Q==
+Message-ID: <54ecf652-42ca-8982-8eee-ced124aee221@denx.de>
+Date: Mon, 5 Aug 2024 06:52:51 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v2 1/2] i2c: samsung: Drop s3c24x0 specific code.
+Content-Language: en-US
+To: David Virag <virag.david003@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass
+ <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Sam Protsenko <semen.protsenko@linaro.org>,
+ Henrik Grimler <henrik@grimler.se>, u-boot@lists.denx.de
+References: <20240802191920.132133-1-virag.david003@gmail.com>
+ <20240802191920.132133-2-virag.david003@gmail.com>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <20240802191920.132133-2-virag.david003@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -47,37 +70,31 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SPI NOR flash chip may vary, so use safe(lowest) spi-max-frequency.
+Hello David,
 
-Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
-Link: https://lore.kernel.org/r/20240623023329.1044-3-naoki@radxa.com
-Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+On 02.08.24 21:19, David Virag wrote:
+> This has been dead code for many years now. Remove it.
+> 
+> Signed-off-by: David Virag <virag.david003@gmail.com>
+> ---
+>   drivers/i2c/exynos_hs_i2c.c | 4 ----
+>   drivers/i2c/s3c24x0_i2c.c   | 8 --------
+>   2 files changed, 12 deletions(-)
 
-[ upstream commit: 06f6dd4d607766a527e37529f2f3f90dd1464293 ]
+Reviewed-by: Heiko Schocher <hs@denx.de>
 
-(cherry picked from commit dd40945a1d0e28ae6eaf9da04f8e2dcebf8233ea)
----
- dts/upstream/src/arm64/rockchip/rk3566-rock-3c.dts | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Thanks!
 
-diff --git a/dts/upstream/src/arm64/rockchip/rk3566-rock-3c.dts b/dts/upstream/src/arm64/rockchip/rk3566-rock-3c.dts
-index b242409d378..f2cc086e500 100644
---- a/dts/upstream/src/arm64/rockchip/rk3566-rock-3c.dts
-+++ b/dts/upstream/src/arm64/rockchip/rk3566-rock-3c.dts
-@@ -633,7 +633,7 @@
- 	flash@0 {
- 		compatible = "jedec,spi-nor";
- 		reg = <0x0>;
--		spi-max-frequency = <120000000>;
-+		spi-max-frequency = <104000000>;
- 		spi-rx-bus-width = <4>;
- 		spi-tx-bus-width = <1>;
- 	};
+bye,
+Heiko
+
 -- 
-2.43.0
-
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
