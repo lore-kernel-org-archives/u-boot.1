@@ -4,71 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80D49C3DA4A
-	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 14:31:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23DDBC3DA4A
+	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 15:07:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D14AC889D1;
-	Mon,  5 Aug 2024 16:30:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 5DE9788155;
+	Mon,  5 Aug 2024 17:07:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PXzuhTk4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cozy4d1Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 726E6889A6; Mon,  5 Aug 2024 16:30:34 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8ABAC88247; Mon,  5 Aug 2024 17:07:48 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4284D8899A
- for <u-boot@lists.denx.de>; Mon,  5 Aug 2024 16:30:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 73E5E88107
+ for <u-boot@lists.denx.de>; Mon,  5 Aug 2024 17:07:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 475EUTLG062171;
- Mon, 5 Aug 2024 09:30:29 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1722868229;
- bh=niuvnKXiRyqPgOv4tHWi2XveQRbyOmiGxOqrGW1zcRU=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=PXzuhTk46TmAHHQXzu+x0RRZc4EQ2/rEFatzWrTkNxpQ6sSTY9ksCNE89hbXF09UO
- ib+ol9oIo4ufTuHcy3+xlvDCBjqaPWj4mf9VKALlF9J+9CNMHe/Uq3qFuQ4ii910fe
- fnCaU+Vw94Bztc5BqetQOKTkAjjiUJ1S5ZAyVoh4=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 475EUTdW111288
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 5 Aug 2024 09:30:29 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 5
- Aug 2024 09:30:28 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 5 Aug 2024 09:30:28 -0500
-Received: from lcpd911.dhcp.ti.com (lcpd911.dhcp.ti.com [172.24.227.68])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 475ETihu084343;
- Mon, 5 Aug 2024 09:30:24 -0500
-From: Dhruva Gole <d-gole@ti.com>
-To: Tom Rini <trini@konsulko.com>, Nishant Menon <nm@ti.com>
-CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>,
- <c-shilwant@ti.com>, <m-chawdhry@ti.com>, <vigneshr@ti.com>, Robert Nelson
- <robertcnelson@gmail.com>,
- Vibhore Vardhan <vibhore@ti.com>, Vishal Mahaveer <vishalm@ti.com>,
- Sebin Francis <sebin.francis@ti.com>, Wadim Egorov
- <w.egorov@phytec.de>, <t.remmet@phytec.de>,
- <mkorpershoek@baylibre.com>, Daniel Schultz <d.schultz@phytec.de>,
- Dhruva Gole <d-gole@ti.com>
-Subject: [PATCH V8 7/7] arm: dts: phycore-am62x: Package TIFS Stub
-Date: Mon, 5 Aug 2024 19:59:37 +0530
-Message-ID: <20240805142937.443737-8-d-gole@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240805142937.443737-1-d-gole@ti.com>
-References: <20240805142937.443737-1-d-gole@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-42812945633so74436545e9.0
+ for <u-boot@lists.denx.de>; Mon, 05 Aug 2024 08:07:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1722870466; x=1723475266; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cDAGYgWOzqLDP603I48jA1A5nQuIbciEEIqPlMiT2aE=;
+ b=cozy4d1YECzpb5hjUUhUQ6BBfN9SAuhY3q8zlaaDe3Fb6COWK1QNuQ2TIfZ9o+IN3W
+ 7afw5Dbr02bArrcv97x6+2VwTg+U0ErPxDqnRHfJ603ukZ6WeTBlZujXw2ZgC3SubiI5
+ sZPvQ9SMTFVUf/12k43XhQqU53gE6tsG/hh4qSvQtwDR6tyip+TzVwe/kySRpQlumN9a
+ DYOI7YIZacha25C9F6xBvXzRbIEY4dPffgPBl40shyVjT/9k3Na4w5Do+lW6W97jfkr4
+ eRBSKA6/jzkBbLmxau/+OLOQsfnvCSbrcTsVBw2fCo/RieL/DTqgq7pYxfax34HS/AME
+ bAYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722870466; x=1723475266;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cDAGYgWOzqLDP603I48jA1A5nQuIbciEEIqPlMiT2aE=;
+ b=SkExkp1eeFtSppiDVIDliVSEc/EWUmIzFlGx9V0Fx/ueb00Q3kJc8WiYXggn9IM1uw
+ v9pYX2t4tp7hCbNIewDeAEFTWSXMtQCtMXco4LVeTsvFZaHf4LK8JMhU3r5/IsSbqhZU
+ TY6VJKf43tigmJU2KzbDdCCy1jYGgzIbprRY7JR+M4cFabnO8Lonlxka1pRi/rQlMarM
+ V0Stjp+XRKuhlbXzh3dCtSV9WkReK6M3f3fWc82GsACQh1ZCKBURTmU5v1rCuU7dLvlW
+ LYzqxKv48G9/kiXeyhi08pknj0i+i14NbhF78fGoxT7U5Oe95CjBvu1zDD8+9TCR7f90
+ izsg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUERUxGIxTj9uQzLSmLemrKamHmVqxZ6TlD5eWsMZU+5qK2QcIZYgb9aBKOw9B0Iu+v7JZvweryE5nM/mxUeefqDtdIGg==
+X-Gm-Message-State: AOJu0YxhJJnltDQjWNA2z0gGxr2Ci12OS3Cti8pM41kREEd+15I3iN+l
+ L1Fhgkh3mzBtm16V1n8dy76La0H3DL+OxMt2S9S9VKKh81ekPEjzR+zAtblhrbtqdA+syH8MhI7
+ 0XnshTMIK0bFfm/eWoC2PQWVaK/k=
+X-Google-Smtp-Source: AGHT+IFRWdD5Uj6gINEdghUvkXK5fXfRLfmgwQfFQTW0UvNnFwLJumdNwJ1/JPhNmbxGC1JfzToFmH45NONs4OMTWP0=
+X-Received: by 2002:a05:600c:4752:b0:426:5471:156a with SMTP id
+ 5b1f17b1804b1-428e6af0f33mr82148985e9.13.1722870465543; Mon, 05 Aug 2024
+ 08:07:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240801055738.7601-1-clamor95@gmail.com>
+ <20240801055738.7601-2-clamor95@gmail.com>
+ <20240805053157.GA7516@francesco-nb>
+ <CAPVz0n1TQ=bzvEv3OW_k+sBYVx13oRH6Oc_yfrhjNoe5+ujgoA@mail.gmail.com>
+ <ZrB5nBI3GLA--gPQ@gaggiata.pivistrello.it>
+ <CAPVz0n0s57E=x8cQZO7dzTXTjOkQMtQ6PF4A=8yM6P5an5BbgQ@mail.gmail.com>
+ <ZrB6cpRQsO4-uFHM@gaggiata.pivistrello.it>
+In-Reply-To: <ZrB6cpRQsO4-uFHM@gaggiata.pivistrello.it>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Mon, 5 Aug 2024 18:07:34 +0300
+Message-ID: <CAPVz0n1O8efBVhqJ0tNLNsW+caywLoE=zVx=Mrq0fdqn5RkpFw@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] board: tegra: convert tegra-based boards to text
+ env
+To: Francesco Dolcini <francesco@dolcini.it>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, 
+ Thierry Reding <treding@nvidia.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
+ Fabio Estevam <festevam@gmail.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
+ Martyn Welch <martyn.welch@collabora.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,170 +104,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for packaging the TIFS Stub as it's required for basic Low
-Power Modes like Deep Sleep.
-The reason it is packaged using binman and not inherently as part of the
-DM firmware is because for HS devices, customer owns the customer key
-and only customer has access to it.
-DM is release by TI, Since TI doesn't have access to the customer key it
-cannot have a component that is signed by customer key.
-Hence, it's left as part of binman to be signed and packaged.
+=D0=BF=D0=BD, 5 =D1=81=D0=B5=D1=80=D0=BF. 2024=E2=80=AF=D1=80. =D0=BE 10:08=
+ Francesco Dolcini <francesco@dolcini.it> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> On Mon, Aug 05, 2024 at 10:06:04AM +0300, Svyatoslav Ryhel wrote:
+> > =D0=BF=D0=BD, 5 =D1=81=D0=B5=D1=80=D0=BF. 2024=E2=80=AF=D1=80. =D0=BE 1=
+0:05 Francesco Dolcini <francesco@dolcini.it> =D0=BF=D0=B8=D1=88=D0=B5:
+> > >
+> > > On Mon, Aug 05, 2024 at 10:01:27AM +0300, Svyatoslav Ryhel wrote:
+> > > > =D0=BF=D0=BD, 5 =D1=81=D0=B5=D1=80=D0=BF. 2024=E2=80=AF=D1=80. =D0=
+=BE 08:32 Francesco Dolcini <francesco@dolcini.it> =D0=BF=D0=B8=D1=88=D0=B5=
+:
+> > > > > On Thu, Aug 01, 2024 at 08:57:38AM +0300, Svyatoslav Ryhel wrote:
+> > > > > > Convert boards to use text based env. This is the first stage o=
+f
+> > > > > > conversion, common inclusions should be converted next.
+> > > > > >
+> > > > > > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> > > > > > ---
+> > > > > >  board/asus/grouper/grouper.env                | 15 +++
+> > > > > >  .../asus/transformer-t20/transformer-t20.env  | 16 ++++
+> > > > > >  .../transformer-t30/configs/tf600t.config     |  1 +
+> > > > > >  board/asus/transformer-t30/tf600t.env         | 16 ++++
+> > > > > >  .../asus/transformer-t30/transformer-t30.env  | 16 ++++
+> > > > > >  board/htc/endeavoru/endeavoru.env             | 13 +++
+> > > > > >  .../ideapad-yoga-11/ideapad-yoga-11.env       | 16 ++++
+> > > > > >  board/lg/x3-t30/configs/p880.config           |  1 +
+> > > > > >  board/lg/x3-t30/configs/p895.config           |  1 +
+> > > > > >  board/lg/x3-t30/p880.env                      | 14 +++
+> > > > > >  board/lg/x3-t30/p895.env                      | 13 +++
+> > > > > >  board/microsoft/surface-rt/surface-rt.env     | 14 +++
+> > > > > >  board/nvidia/cardhu/cardhu.env                |  2 +
+> > > > > >  board/nvidia/p2771-0000/p2771-0000.env        | 22 +++++
+> > > > > >  board/nvidia/p3450-0000/p3450-0000.env        |  7 ++
+> > > > > >  board/toradex/apalis-tk1/apalis_tk1.env       | 45 +++++++++
+> > > > > >  board/toradex/apalis_t30/apalis_t30.env       |  9 ++
+> > > > > >  board/toradex/colibri_t20/colibri_t20.env     |  3 +
+> > > > > >  board/toradex/colibri_t30/colibri_t30.env     |  9 ++
+> > > > > >  board/wexler/qc750/qc750.env                  | 14 +++
+> > > > > >  configs/apalis-tk1_defconfig                  |  1 +
+> > > > > >  configs/apalis_t30_defconfig                  |  1 +
+> > > > > >  configs/cardhu_defconfig                      |  1 +
+> > > > > >  configs/colibri_t20_defconfig                 |  1 +
+> > > > > >  configs/colibri_t30_defconfig                 |  1 +
+> > > > >
+> > > > > ...
+> > > > >
+> > > > > > diff --git a/board/toradex/apalis-tk1/apalis_tk1.env b/board/to=
+radex/apalis-tk1/apalis_tk1.env
+> > > > > > new file mode 100644
+> > > > > > index 0000000000..90db361be3
+> > > > > > --- /dev/null
+> > > > > > +++ b/board/toradex/apalis-tk1/apalis_tk1.env
+> > > > > > @@ -0,0 +1,45 @@
+> > > > > > +/*
+> > > > > > + * Custom Distro Boot configuration:
+> > > > > > + * 1. 8bit SD port (MMC1)
+> > > > > > + * 2. 4bit SD port (MMC2)
+> > > > > > + * 3. eMMC (MMC0)
+> > > > > > + */
+> > > > > > +boot_targets=3Dmmc1 mmc2 mmc0 usb pxe dhcp
+> > > > > > +
+> > > > > > +boot_file=3DzImage
+> > > > > > +boot_script_dhcp=3Dboot.scr
+> > > > > > +console=3DttyS0
+> > > > > > +defargs=3Dlp0_vec=3D2064@0xf46ff000 core_edp_mv=3D1150 core_ed=
+p_ma=3D4000
+> > > > > > +     usb_port_owner_info=3D2 lane_owner_info=3D6 emc_max_dvfs=
+=3D0
+> > > > > > +     user_debug=3D30 pcie_aspm=3Doff
+> > > > > > +dfu_alt_info=3Dapalis-tk1.img raw 0x0 0x500 mmcpart 1;
+> > > > > > +     boot part 0 1 mmcpart 0;
+> > > > > > +     rootfs part 0 2 mmcpart 0;
+> > > > > > +     zImage fat 0 1 mmcpart 0;
+> > > > > > +     tegra124-apalis-eval.dtb fat 0 1 mmcpart 0
+> > > > > > +fdt_board=3Deval
+> > > > > > +fdt_fixup=3D;
+> > > > > > +fdt_module=3Dapalis-v1.2
+> > > > > > +uboot_hwpart=3D1
+> > > > > > +uboot_blk=3D0
+> > > > > > +set_blkcnt=3Dsetexpr blkcnt ${filesize} + 0x1ff &&
+> > > > > > +     setexpr blkcnt ${blkcnt} / 0x200
+> > > > > > +update_uboot=3Drun set_blkcnt && mmc dev 0 ${uboot_hwpart} &&
+> > > > > > +     mmc write ${loadaddr} ${uboot_blk} ${blkcnt}
+> > > > > > +setethupdate=3Dif env exists ethaddr; then; else setenv ethadd=
+r
+> > > > > > +     00:14:2d:00:00:00; fi; pci enum && tftpboot ${loadaddr}
+> > > > > > +     flash_eth.img && source ${loadaddr}
+> > > > > > +setsdupdate=3Dsetenv interface mmc; setenv drive 1; mmc rescan=
+;
+> > > > > > +     load ${interface} ${drive}:1 ${loadaddr} flash_blk.img
+> > > > > > +     || setenv drive 2; mmc rescan; load ${interface} ${drive}=
+:1
+> > > > > > +     ${loadaddr} flash_blk.img &&
+> > > > > > +     source ${loadaddr}
+> > > > > > +setup=3Dsetenv setupargs igb_mac=3D${ethaddr}
+> > > > > > +     consoleblank=3D0 no_console_suspend=3D1 console=3Dtty1
+> > > > > > +     console=3D${console},${baudrate}n8 debug_uartport=3Dlspor=
+t,0
+> > > > > > +     ${memargs}
+> > > > > > +setupdate=3Drun setsdupdate || run setusbupdate || run setethu=
+pdate
+> > > > > > +setusbupdate=3Dusb start && setenv interface usb; setenv drive=
+ 0;
+> > > > > > +     load ${interface} ${drive}:1 ${loadaddr} flash_blk.img &&
+> > > > > > +     source ${loadaddr}
+> > > > > > +vidargs=3Dfbcon=3Dmap:1
+> > > > >
+> > > > > ...
+> > > > >
+> > > > > > diff --git a/include/configs/apalis-tk1.h b/include/configs/apa=
+lis-tk1.h
+> > > > > > index 71d4727ca9..4c690a1785 100644
+> > > > > > --- a/include/configs/apalis-tk1.h
+> > > > > > +++ b/include/configs/apalis-tk1.h
+> > > > > > @@ -18,64 +18,6 @@
+> > > > > >  #define FDT_MODULE                   "apalis-v1.2"
+> > > > > >  #define FDT_MODULE_V1_0                      "apalis"
+> > > > > >
+> > > > > > -/*
+> > > > > > - * Custom Distro Boot configuration:
+> > > > > > - * 1. 8bit SD port (MMC1)
+> > > > > > - * 2. 4bit SD port (MMC2)
+> > > > > > - * 3. eMMC (MMC0)
+> > > > > > - */
+> > > > > > -#define BOOT_TARGET_DEVICES(func) \
+> > > > > > -     func(MMC, mmc, 1) \
+> > > > > > -     func(MMC, mmc, 2) \
+> > > > > > -     func(MMC, mmc, 0) \
+> > > > > > -     func(USB, usb, 0) \
+> > > > > > -     func(PXE, pxe, na) \
+> > > > > > -     func(DHCP, dhcp, na)
+> > > > > > -
+> > > > >
+> > > > > I do recall that to transition to text env file it was required t=
+o move
+> > > > > from standard boot to distroboot. Did I recall incorrectly?
+> > > >
+> > > > Are you 100% sure? Have you tried?
+> > >
+> > > No, I am not, but Simon in copy knows for sure.
+> > >
+> > > What I am sure is that I mean migrating from distroboot to standard b=
+oot, the
+> > > opposite of what I wrote ...
+> >
+> > Tegra uses standard boot
+>
+> BOOT_TARGET_DEVICES seems distroboot to me.
+>
+> Francesco
+>
 
-While at it, also make sure it's documented in phycore-am62x
+If you own Apalis TK1 board, may you test
 
-Reviewed-by: Nishanth Menon <nm@ti.com>
-Reviewed-by: Wadim Egorov <w.egorov@phytec.de>
-Signed-off-by: Dhruva Gole <d-gole@ti.com>
----
- arch/arm/dts/k3-am625-phycore-som-binman.dtsi | 101 +++++++++++++++++-
- doc/board/phytec/phycore-am62x.rst            |   2 +-
- 2 files changed, 100 insertions(+), 3 deletions(-)
+CONFIG_BOOTCOMMAND=3D"setenv fdtfile
+${soc}-${fdt_module}-${fdt_board}.dtb && bootflow scan"
 
-diff --git a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
-index dbee4aa8d8a5..0961ca66f280 100644
---- a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
-+++ b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
-@@ -150,12 +150,107 @@
- 			filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
- 		};
- 	};
-+
-+	tifsstub-hs {
-+		filename = "tifsstub.bin_hs";
-+		ti-secure-rom {
-+			content = <&tifsstub_hs_cert>;
-+			core = "secure";
-+			load = <0x40000>;
-+			sw-rev = <CONFIG_K3_X509_SWRV>;
-+			keyfile = "custMpk.pem";
-+			countersign;
-+			tifsstub;
-+		};
-+		tifsstub_hs_cert: tifsstub-hs-cert.bin {
-+			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-cert.bin";
-+			type = "blob-ext";
-+			optional;
-+		};
-+		tifsstub_hs_enc: tifsstub-hs-enc.bin {
-+			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-enc.bin";
-+			type = "blob-ext";
-+			optional;
-+		};
-+	};
-+
-+	tifsstub-fs {
-+		filename = "tifsstub.bin_fs";
-+		tifsstub_fs_cert: tifsstub-fs-cert.bin {
-+			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-cert.bin";
-+			type = "blob-ext";
-+			optional;
-+		};
-+		tifsstub_fs_enc: tifsstub-fs-enc.bin {
-+			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-enc.bin";
-+			type = "blob-ext";
-+			optional;
-+		};
-+
-+	};
-+
-+	tifsstub-gp {
-+		filename = "tifsstub.bin_gp";
-+		ti-secure-rom {
-+			content = <&tifsstub_gp>;
-+			core = "secure";
-+			load = <0x60000>;
-+			sw-rev = <CONFIG_K3_X509_SWRV>;
-+			keyfile = "ti-degenerate-key.pem";
-+			tifsstub;
-+		};
-+		tifsstub_gp: tifsstub-gp.bin {
-+			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-gp.bin";
-+			type = "blob-ext";
-+			optional;
-+		};
-+	};
-+
-+
- 	ti-spl {
- 		insert-template = <&ti_spl_template>;
- 
- 		fit {
- 
- 			images {
-+				tifsstub-hs {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-hs";
-+					load = <0x9dc00000>;
-+					entry = <0x9dc00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_hs";
-+					};
-+				};
-+
-+				tifsstub-fs {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-fs";
-+					load = <0x9dc00000>;
-+					entry = <0x9dc00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_fs";
-+					};
-+				};
-+
-+				tifsstub-gp {
-+					description = "TIFSSTUB";
-+					type = "firmware";
-+					arch = "arm32";
-+					compression = "none";
-+					os = "tifsstub-gp";
-+					load = <0x9dc00000>;
-+					entry = <0x9dc00000>;
-+					blob-ext {
-+						filename = "tifsstub.bin_gp";
-+					};
-+				};
- 				dm {
- 					ti-secure {
- 						content = <&dm>;
-@@ -187,7 +282,8 @@
- 				conf-0 {
- 					description = "k3-am625-phyboard-lyra-rdk";
- 					firmware = "atf";
--					loadables = "tee", "dm", "spl";
-+					loadables = "tee", "tifsstub-hs", "tifsstub-fs",
-+						    "tifsstub-gp", "dm", "spl";
- 					fdt = "fdt-0";
- 				};
- 			};
-@@ -266,7 +362,8 @@
- 				conf-0 {
- 					description = "k3-am625-phyboard-lyra-rdk";
- 					firmware = "atf";
--					loadables = "tee", "dm", "spl";
-+					loadables = "tee", "tifsstub-hs", "tifsstub-fs",
-+						    "tifsstub-gp", "dm", "spl";
- 					fdt = "fdt-0";
- 				};
- 			};
-diff --git a/doc/board/phytec/phycore-am62x.rst b/doc/board/phytec/phycore-am62x.rst
-index af24acf9aac4..56c1fd8354b4 100644
---- a/doc/board/phytec/phycore-am62x.rst
-+++ b/doc/board/phytec/phycore-am62x.rst
-@@ -32,7 +32,7 @@ Sources
- 
- .. include::  ../ti/k3.rst
-     :start-after: .. k3_rst_include_start_boot_firmwares
--    :end-before: .. k3_rst_include_end_boot_firmwares
-+    :end-before: .. k3_rst_include_end_tifsstub
- 
- Build procedure
- ---------------
--- 
-2.34.1
-
+in defconfig along with this commit. This should fix the device.
