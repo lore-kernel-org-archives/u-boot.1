@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B36A2C3DA7F
-	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 23:01:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ABBCC52D6D
+	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 23:25:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9460488901;
-	Tue,  6 Aug 2024 01:01:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id F29738890F;
+	Tue,  6 Aug 2024 01:25:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T1TEUk8h";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VpmmDbOT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1B6A87E96; Tue,  6 Aug 2024 01:01:17 +0200 (CEST)
-Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
- [IPv6:2607:f8b0:4864:20::c34])
+ id D366E88673; Tue,  6 Aug 2024 01:25:12 +0200 (CEST)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27E1D887B4
- for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 01:01:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 963B088361
+ for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 01:25:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc34.google.com with SMTP id
- 006d021491bc7-5c667b28c82so121648eaf.1
- for <u-boot@lists.denx.de>; Mon, 05 Aug 2024 16:01:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2ef298ff716so467861fa.1
+ for <u-boot@lists.denx.de>; Mon, 05 Aug 2024 16:25:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1722898874; x=1723503674; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1722900310; x=1723505110; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=syATQRBnaxbtSSaR7nG9i2icxtKr4S7m0oLiUdntX00=;
- b=T1TEUk8hGsxGlJMYxooSDKvlt9uRdjR42J+vqwS/AbPcY5qRDhIiz/C3qR6tce4Ki1
- YUSKQHUf3ie7dM0c68O0aD2tYO1dslIl7ki3C8VwoYLvVXeAOOXSJVUxR0QDDom4mYF1
- w6pZQbQDsSAdzzVKkh2xmtkchw36mmVKt6jPY=
+ bh=LNhJ6GLbHVKqYaL2ot7Uv8L45xHRRzyQMTH6SanxFcU=;
+ b=VpmmDbOTqZsfqCC3YcMJcgReZcOO9fIp/7JGb420+EGY3Pb3e1F4qYcR8s1dsBwppK
+ 38qGqkTW3aRaP8L829TM66EFyv+dx8sPHgbwXlcDyEjHfByRIuqstAUOF6D6p6fMmc8d
+ CWu+wGS75xmt5baUe7OVYoa6RzzH3mxlP5N0cvvJJHGZHfO5ZF/FlZIaaYlEwYVc+CcP
+ d5qmaXOIJPSEOk048oQ3XFFKCjQkKO0COHRJAQ9lM9qG23bSXq+1HOyQQmmNd/G29f1G
+ 28OBOS+bzjD5eQuGpO5Nu6jTYwp4qoW06A6Qi9WGLjTjD/X1hDjbHUOLpdSLl3HfhrkV
+ cGVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722898874; x=1723503674;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1722900310; x=1723505110;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=syATQRBnaxbtSSaR7nG9i2icxtKr4S7m0oLiUdntX00=;
- b=P+3avQZ6rLjb4DUMGV+Pw6oG7atIpKn7ejcXpdVIhTwS4BHcai+F8QKMuxEVPdyeDM
- l4A6eScVUxQJ+Lb+BEvRhEWrWh6Tvx3FOUBFnl6ZO+F3nPdRY6YsDU9x+x2Ecl0bXLfq
- 11AZKzv/MIhHfzKD+jh07Bha9YNISaxKd08E3AsP4gSPeM1mJlVH8xnLShCpJknS8joh
- ztooVVVy5ItOIhl28k3zH2KolMIpwB/8sz960pqKWyXmToHNGaCWWB8lq6xcxV7XFJfz
- +9Tq3B3e3F/ykQ5HSPVQxbrevYHjvtO8hLSeLs75N03CmAoauOGfp2yFLsyMYNUQnc2j
- UEOA==
-X-Gm-Message-State: AOJu0YxvYP7bLzKBRquOGyX4hH9GySrDhCxT6YILFd336wJVQXGm+qBZ
- NgUdUP21Z2BOoVd0Pm49Bf8EEy2hMhw+tYp5jaQ0OYSQeZmyzXRucO4VqMfjahXWK8SOodDPQfa
- Xjvc=
-X-Google-Smtp-Source: AGHT+IFQBx7uF/hPJBA114cON3numnR9P+V4PsTK6cnHeCmoy6zMr/oBqcnB4KMgRdtrgp0IIackrA==
-X-Received: by 2002:a05:6820:2281:b0:5d6:510:6acd with SMTP id
- 006d021491bc7-5d6c8143f93mr6595743eaf.2.1722898873906; 
- Mon, 05 Aug 2024 16:01:13 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-103-190.totalplay.net.
- [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5d762052af1sm2246436eaf.28.2024.08.05.16.01.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Aug 2024 16:01:13 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, 
- Jeffy Chen <jeffy.chen@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Kever Yang <kever.yang@rock-chips.com>, huang lin <hl@rock-chips.com>
-In-Reply-To: <20240801124723.770213-8-sjg@chromium.org>
-References: <20240801124723.770213-8-sjg@chromium.org>
-Subject: Re: [PATCH v9 7/8] rockchip: Ensure memory size is available in
- RK3399 SPL
-Message-Id: <172289887312.1534766.1592007483972042174.b4-ty@konsulko.com>
-Date: Mon, 05 Aug 2024 17:01:13 -0600
+ bh=LNhJ6GLbHVKqYaL2ot7Uv8L45xHRRzyQMTH6SanxFcU=;
+ b=JVfw2bJ1ptUZQJh1a1U+r2dkCdCem71OiQQ7HKnp3ZTGcQkGc1vea55uOmmVTPTKaZ
+ zKVo8JTlELCr5d6/uzUVBR6FUCvXyMYddWvPzwrwlCNveFy6a916wSjT8MGslN5ukNJY
+ BWUxEUgqMdOCFuPaCn4V+Bgh4N9fnxXrEcymUBHOfBHjCZ8KEjuSYUtZ/98Ib2OUZeL4
+ aS+2Q/6Z+SBKCbTK071iv9Tsebt7Myt7leG6GGIJqIiToaBoV00dQyIdIllulpM744GH
+ 5EB3mzL5B7OdyOl1uV4i6p9fJ4emjOzMRi35Es0ChrwzyvvzOfllweiRW+yHGX/xO2Z7
+ +aIw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVUaG5emqHdB9cX8XsjXysZZw5jjyoKZdTN8ykQP4DdNSoBasxsLUGdykBMAyn88FUzn8B3iMf3EpfiGZ24Z8rfNpsLjw==
+X-Gm-Message-State: AOJu0Yx574ZxRJwIx4WyfYRmiVr/jg9+BVSUmj027RhNPzCmt3V3qQaR
+ JuclL3ZnkeZbMZBDe2CPjcAz/pBwd5XKfbk848nRBnXMJyjKmLZsPOGu8UBDNKJfyMxkPP4EyOi
+ C0+kOWlf76F9W+GDAzaZty8/dblA=
+X-Google-Smtp-Source: AGHT+IGI04rFEpq7djLv3siPCkn9/P0jSTxOVEtiNL8I9CMVmBkdhJ9DeUcZS2C202gZkpuDA5p0yac2BVHkEqjYxcE=
+X-Received: by 2002:a05:6512:3da6:b0:52f:c337:4c1f with SMTP id
+ 2adb3069b0e04-530bb30827emr5048926e87.0.1722900309342; Mon, 05 Aug 2024
+ 16:25:09 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+References: <20240805084202.3530203-1-lukma@denx.de>
+In-Reply-To: <20240805084202.3530203-1-lukma@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 5 Aug 2024 20:24:57 -0300
+Message-ID: <CAOMZO5B6F3LZcs=eYpZwOmDGctRqrnJDby2hH_343vczpk_uJQ@mail.gmail.com>
+Subject: Re: [PATCH v2] config: Add 'update_bootimg' command to update
+ flash.bin on Phytec's imx8mm
+To: Lukasz Majewski <lukma@denx.de>
+Cc: Teresa Remmet <t.remmet@phytec.de>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>, 
+ Benjamin Hahn <B.Hahn@phytec.de>, Cem Tenruh <c.tenruh@phytec.de>, 
+ Martyn Welch <martyn.welch@collabora.com>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,20 +93,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 01 Aug 2024 06:47:22 -0600, Simon Glass wrote:
+Hi Lukasz,
 
-> At present gd->ram_size is 0 in SPL, meaning that it is not possible to
-> enable the cache. Correct this by always populating the RAM size
-> correctly.
-> 
-> This increases code size by about 500 bytes in SPL, since it must call
-> the rather large rockchip_sdram_size() function.
-> 
-> [...]
+On Mon, Aug 5, 2024 at 5:42=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wrot=
+e:
 
-Applied to u-boot/master, thanks!
+> +       "update_offset=3D0x42\0" \
+> +       "update_filename=3Dflash.bin\0" \
+> +       "hostname=3D/srv/tftp/\0" \
+> +       "update_bootimg=3D"                                              =
+ \
+> +               "mmc dev ${mmcdev} ; "          \
+> +               "if dhcp ${loadaddr} ${hostname}/${update_filename} ; the=
+n "    \
+> +               "setexpr fw_sz ${filesize} / 0x200 ; "  /* SD block size =
+*/ \
+> +               "setexpr fw_sz ${fw_sz} + 1 ; "
 
--- 
-Tom
+As Benjamin pointed out earlier this increment by one is not necessary.
 
-
+All other i.MX8M docs don't have this increment.
