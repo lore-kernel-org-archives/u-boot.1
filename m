@@ -4,55 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBBB4C3DA7F
-	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 08:42:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38FEFC3DA7F
+	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 08:44:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9808886FC;
-	Mon,  5 Aug 2024 10:42:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8042E886FC;
+	Mon,  5 Aug 2024 10:44:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1722847347;
-	bh=ALv2S9UvlDhQwCehYMvpj8oo0k7S4cXjDH+JGdmKb0g=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=yASLnRd3m0+qC9xItyr5Iw3sU1GiPY9APaPyqjk2ET7wAUKJsKemCmk1tLaXrPmEU
-	 ih1Jhu1voI6V43jzmCo5FRU6fS8nQRC7vtbXci/lXav7ENq4vVEcocFSo/tyj3099K
-	 +0yMsKOqwQT0AhvFgUqyrBNxXtKTl+ooF8BjB/WgAD0OWpUUPSNeG3etUhgomyb73H
-	 eSiCUSgj2SZPoUFLHx3eJXxHosvJ48fAL2W58ZEtJ4oqdLZLcvp2qQ2dZ+p8oWHnSZ
-	 yoskbVWwuTEccAc7ou2AxTgM2wsFIztwKZaMLY5pYiUUyhNXRUjTvrFJiYb1QlZUXJ
-	 P+hxnK2ELNePA==
-Received: from localhost.localdomain (85-222-111-42.dynamic.chello.pl
- [85.222.111.42])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ql7p/J+q";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id DFF0F888B9; Mon,  5 Aug 2024 10:44:15 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id B567B8889C;
- Mon,  5 Aug 2024 10:42:26 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1722847347;
- bh=ALv2S9UvlDhQwCehYMvpj8oo0k7S4cXjDH+JGdmKb0g=;
- h=From:To:Cc:Subject:Date:From;
- b=t8tYUD+ZPUNZPmW9hSYw6ZdcPrFS2VJxfwd0jTH2TlKOxb4Q5DNdx4HY2PjfYsMQk
- VGecb2JYklZhV88Uky4r1XPNJ9g//m5BcVmhTBbbgZYK0tg6YQXXe8qb/6Hwxta+J6
- +47EFpeYFcgiGndPYA2GfvyFebMlVtnZYLBHhLtg8jp4330KQK/be0QEmB3LXbP9KX
- qXFCB9dhOBo+uXzyjckxdaeZeE2I1zT+EiUdQAOsuM2BRbvEwyUy/k7JQ/325BVhBG
- 076A78QyuTHsoaSWRz9EjOa+m4cZrdvcrbKKfFLetlBoo7IgGxgxZFf8EL8OTuIZqW
- C3XL9MR5r36vw==
-From: Lukasz Majewski <lukma@denx.de>
-To: Teresa Remmet <t.remmet@phytec.de>,
-	u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Benjamin Hahn <B.Hahn@phytec.de>,
- Cem Tenruh <c.tenruh@phytec.de>, Martyn Welch <martyn.welch@collabora.com>,
- Simon Glass <sjg@chromium.org>, Fabio Estevam <festevam@gmail.com>,
- Lukasz Majewski <lukma@denx.de>
-Subject: [PATCH v2] config: Add 'update_bootimg' command to update flash.bin
- on Phytec's imx8mm
-Date: Mon,  5 Aug 2024 10:42:02 +0200
-Message-Id: <20240805084202.3530203-1-lukma@denx.de>
-X-Mailer: git-send-email 2.39.2
+ by phobos.denx.de (Postfix) with ESMTPS id E5B2D887E8
+ for <u-boot@lists.denx.de>; Mon,  5 Aug 2024 10:44:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=32c7=PE=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1722847442;
+ bh=086pitYW9mv45gCpvj6GcttSfhJTfy8DWLwEyhi6VzI=;
+ b=ql7p/J+qB+GHqkHkDGJK1rsN8FhCQvyXagbWaiC2Wx8Y8ugmmqosIb57x7woW5cU/kESsvsyJ
+ OHkmXFHdX6Q0aRNHKPIv1GiYwmKlJWNHREfd2JIRsZkaijS9G8oNByRDyoLLU/NncMwn5BbbKPa
+ VMpvHK8Wr+5YM7yfC7kZbwP6TI6xa340YzYyG8m7DlBznvfEWtXOqAinOeQ2Rf1VzDMU7A8q/fG
+ O0OLDs0LIxt53mv50R4pvZFkZ2kOwf9AdZSoPLy6xtovzNCUsACJ25k748PUMeDAz+tyW+MihtA
+ r6wifaMtUi6RLj2av5eIdrZ5NE1AjJQ/3POLXN8iXMkA==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 0/4] rockchip: Skip serial pinctrl at pre-reloc phase
+Date: Mon,  5 Aug 2024 08:43:40 +0000
+Message-ID: <20240805084350.3895788-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66b090ceef96678d293a4eae
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,40 +67,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This command allows easy update on SD card or eMMC of the flash.bin
-generated (with binman) during u-boot build.
+UART pinctrl for serial is typically applied multiple times:
+- in external TPL or in TPL for DEBUG_UART in board_debug_uart_init()
+- in SPL for DEBUG_UART in board_debug_uart_init()
+- in SPL using pinctrl from DT
+- in pre-reloc phase using pinctrl from DT
+- after relocation using pinctrl from DT
 
-Signed-off-by: Lukasz Majewski <lukma@denx.de>
----
-Changes for v2:
-- Remove 'update_mmc_part' variable
-- Change path for hostname
-- Use full version of dhcp command (${loadaddr} added)
----
- include/configs/phycore_imx8mm.h | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+This series change bootph props for the UART pinctrl to not include them
+in pre-reloc phase to save some boot time:
 
-diff --git a/include/configs/phycore_imx8mm.h b/include/configs/phycore_imx8mm.h
-index ce6dc87c69..361e665676 100644
---- a/include/configs/phycore_imx8mm.h
-+++ b/include/configs/phycore_imx8mm.h
-@@ -29,6 +29,16 @@
- 	"mmcdev=" __stringify(CONFIG_SYS_MMC_ENV_DEV) "\0" \
- 	"mmcpart=1\0" \
- 	"mmcroot=2\0" \
-+	"update_offset=0x42\0" \
-+	"update_filename=flash.bin\0" \
-+	"hostname=/srv/tftp/\0" \
-+	"update_bootimg="						\
-+		"mmc dev ${mmcdev} ; "		\
-+		"if dhcp ${loadaddr} ${hostname}/${update_filename} ; then "	\
-+		"setexpr fw_sz ${filesize} / 0x200 ; "	/* SD block size */ \
-+		"setexpr fw_sz ${fw_sz} + 1 ; "				\
-+		"mmc write ${loadaddr} ${update_offset} ${fw_sz} ; "	\
-+		"fi\0" \
- 	"mmcautodetect=yes\0" \
- 	"mmcargs=setenv bootargs console=${console} " \
- 		"root=/dev/mmcblk${mmcdev}p${mmcroot} rootwait rw\0" \
+- Radxa ROCK Pi S (RK3308): ~80 ms
+- Radxa ZERO 3W (RK3566): ~120 ms
+- Radxa ROCK 5B (RK3588): ~150 ms
+
+Similar change has already been applied for RK3328 and RK3399 boards.
+
+The change for PX30 has not been runtime tested, and only include change
+for uart2, not uart0 and uart5 used on two of the supported px30 boards.
+
+Jonas Karlman (4):
+  rockchip: rk3308: Skip serial pinctrl at pre-reloc phase
+  rockchip: rk356x: Skip serial pinctrl at pre-reloc phase
+  rockchip: rk3588: Skip serial pinctrl at pre-reloc phase
+  rockchip: px30: Skip serial pinctrl at pre-reloc phase
+
+ arch/arm/dts/px30-u-boot.dtsi                | 3 ++-
+ arch/arm/dts/rk3308-evb-u-boot.dtsi          | 3 ++-
+ arch/arm/dts/rk3308-roc-cc-u-boot.dtsi       | 3 ++-
+ arch/arm/dts/rk3308-rock-pi-s-u-boot.dtsi    | 3 ++-
+ arch/arm/dts/rk3308-rock-s0-u-boot.dtsi      | 3 ++-
+ arch/arm/dts/rk356x-u-boot.dtsi              | 3 ++-
+ arch/arm/dts/rk3588-tiger-haikou-u-boot.dtsi | 3 ++-
+ arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi   | 3 ++-
+ arch/arm/dts/rk3588s-u-boot.dtsi             | 3 ++-
+ 9 files changed, 18 insertions(+), 9 deletions(-)
+
 -- 
-2.39.2
+2.45.2
 
