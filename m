@@ -4,86 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D243AC3DA4A
-	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 18:14:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CABCEC3DA4A
+	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 18:18:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5201884CC;
-	Mon,  5 Aug 2024 20:14:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5116A884CC;
+	Mon,  5 Aug 2024 20:18:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ri4zpbhD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gADO8XEr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AD74884CC; Mon,  5 Aug 2024 20:14:22 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 43EB5884CC; Mon,  5 Aug 2024 20:18:14 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09FD9884CA
- for <u-boot@lists.denx.de>; Mon,  5 Aug 2024 20:14:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DF90B87F5C
+ for <u-boot@lists.denx.de>; Mon,  5 Aug 2024 20:18:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7093472356dso6427429a34.0
- for <u-boot@lists.denx.de>; Mon, 05 Aug 2024 11:14:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5b8c2a6135eso65961a12.0
+ for <u-boot@lists.denx.de>; Mon, 05 Aug 2024 11:18:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1722881659; x=1723486459; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=q/OiMiKsO1OHRkP8UPJyCNJop95yAgRHbNSis4+VCxU=;
- b=Ri4zpbhDEaaw1eghEb4HAJwFrNDYVVJQu15s1RVCwZ3U5+3/VWqJgst/99D5H+nZcs
- 7CAp2WXU7J4cYLwNQ+xhFsU5QL0W/lqNT8DscILXM1hbvje3ij188Nypd7e1CuOxMP70
- vzvZkqK81n7+jv/tgiKpF/sB15tGNySCeO8XU=
+ d=linaro.org; s=google; t=1722881891; x=1723486691; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=VtNr2vk6lmkO0J1KhZaDdAcYmIU/YdrktFxjtnIXL6Q=;
+ b=gADO8XErIiPdOjSb/TAtyn2BNgKVqn9TT3zvYjar5M09/0xHGTiyJkaSL1VlXKFtzz
+ tTvsGRRJGU/7ZKiytpy7F/yZg8N7cp8/5uvXJ/eHx/ZBjA0/21npXjFliA00FNgnEQ8e
+ qJigr5cgn+hgdzsbBl9eXErpv/2q3u2LQBp/kUHWt0eVsLH++4SgVOZlk8l0Dq9TEsq1
+ 4DBmGWSOw+RaNE4vEGkrbTI+YiMwhK6O4EX1eX5iln/scT+SrSfw6BTBHMDN1Iwrf26o
+ Nvo8sA5QLwXRpHiZDurfNefe3Ge82DwGhnnqrDls7uWD5r80GiGD4Lxd+2395JzoqO8z
+ /DzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722881659; x=1723486459;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=q/OiMiKsO1OHRkP8UPJyCNJop95yAgRHbNSis4+VCxU=;
- b=paHNrwTh6fkla46J6raPTDT5B7EaQJLafy0SzWgucBA1/xBeEayqNdtLxaBmN9QKTh
- sNf7JC8mvIw1RJQfGInCKZU4QsNig4tqErmDI/I5X9OZgJ6y9J/e3qHdYnYSG/KEFPrq
- HwK/o9km41TNQ9MGb2ajrPRmcdP9Xj2uv6qcNifiOqM/JEQObHp109+b8egqWCYt+++D
- 94UNABeAS2wb3pzaE1bD5N7JOydZKCgM414pYAmUYMm/2bBSPZEOX4mXml0INc0aFZBT
- XJbrvijIXxAP6/ELb8N3EsGgRGHinXJU0nvkbGrWiXkotXFNimGEq5n2VDu+GzVCZegg
- 7YAA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWKa/Kh+3WmlgYavxtOAeHsAked96sPJeEyA5r0/sKqKtRZIOa4jRcZLnLiGlY8PQCdbieShZsp0AMKm7O2n1GlrK3vfQ==
-X-Gm-Message-State: AOJu0YwtyaKKrG+NGRfqteq/YhNeuf3Z8PdbFGTWPgT5Eefv652KazX7
- AGt4BuCVZlF5CUp9RGq7R8AvDNVYcDdX9aPf1kMqg9dTRuarp/A54bbgc1KQ9oc=
-X-Google-Smtp-Source: AGHT+IGftT1IGfYNGIa3a3zDNRVFMpdX0KpBM2YUaPAE8KvmyLqcw3hYAsZEmwDMXjxna3JbLHgkHQ==
-X-Received: by 2002:a05:6830:dc9:b0:704:4bb7:af8a with SMTP id
- 46e09a7af769-709b3243b1bmr14088641a34.20.1722881658630; 
- Mon, 05 Aug 2024 11:14:18 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-190.totalplay.net.
- [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70a31eb6383sm3180166a34.32.2024.08.05.11.14.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Aug 2024 11:14:18 -0700 (PDT)
-Date: Mon, 5 Aug 2024 12:14:14 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>,
- Jonas =?iso-8859-1?Q?Schw=F6bel?= <jonasschwoebel@yahoo.de>,
- Thierry Reding <treding@nvidia.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Martyn Welch <martyn.welch@collabora.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 0/1] board: tegra: convert boards to text env
-Message-ID: <20240805181414.GA267004@bill-the-cat>
-References: <20240801055738.7601-1-clamor95@gmail.com>
- <20240805053343.GB7516@francesco-nb>
+ d=1e100.net; s=20230601; t=1722881891; x=1723486691;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=VtNr2vk6lmkO0J1KhZaDdAcYmIU/YdrktFxjtnIXL6Q=;
+ b=pq37Mxen6KrCTQ9XXLsfnKoiSX+swebg/CjSBpTL2vN9FmSPsfUH/lrWUhx49iYsWv
+ B3zUiaBlMl1P9uvlSz3DHpcsyssTIStFjxGVJ41nuYPfsZDSgrCDabPZh2AsIEgzvHI2
+ ipza1+Uu6dx5leeAMxToK8LxXkvBxgTAAmyWrRYeYFvyhwfxKLBq2TcIIIqjLDLst4q2
+ Dp7him0w7s6QdbXNWorJInb6/pAwBC3m7uZLsCj8lfNNS2S5ekX600yYxaLv9itmCWVu
+ dw1vVxIqF0mtsapo5d1DFfT8WW9v+59q+tPhg2euTp614BnfZyVc9zP/MboQ1zR/GhmH
+ f8EQ==
+X-Gm-Message-State: AOJu0YwXNm/GluahAAM6djGyPvYfIzt7jkNuX0jN+/r6Sl8U5ElTSwGP
+ FIcobqB7QX4q4cqszKXzUqiBXmId+2WxqP+F+aMDueEN2MY7YkWFYFuJXPR15lc=
+X-Google-Smtp-Source: AGHT+IF3+SKNhSibmeIs4CcQoXThj5I63johCtuIhcOqYzz+fN1zkeTBfa3SUcX2+ZYNQs/J6YW2cQ==
+X-Received: by 2002:a05:6402:75a:b0:5af:b1d8:f3d5 with SMTP id
+ 4fb4d7f45d1cf-5b80c8c556cmr11092000a12.12.1722881891077; 
+ Mon, 05 Aug 2024 11:18:11 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:8dbd:af80:ee89:6ef9?
+ ([2a01:e0a:3cb:7bb0:8dbd:af80:ee89:6ef9])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5b83b931794sm5155834a12.64.2024.08.05.11.18.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 05 Aug 2024 11:18:10 -0700 (PDT)
+Message-ID: <adf03f1c-cdde-4d4f-8078-59a4bf58b10d@linaro.org>
+Date: Mon, 5 Aug 2024 20:18:09 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="h2OA4aRz2e+MpzXN"
-Content-Disposition: inline
-In-Reply-To: <20240805053343.GB7516@francesco-nb>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 00/20] Introduce the lwIP network stack
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Eddie James <eajames@linux.ibm.com>, Sean Anderson <seanga2@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>
+References: <cover.1722615735.git.jerome.forissier@linaro.org>
+ <20240802183249.GO3794063@bill-the-cat>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20240802183249.GO3794063@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,50 +105,78 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---h2OA4aRz2e+MpzXN
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 05, 2024 at 07:33:43AM +0200, Francesco Dolcini wrote:
-> Hello Tom,
->=20
-> On Thu, Aug 01, 2024 at 08:57:37AM +0300, Svyatoslav Ryhel wrote:
-> > Move env stuff into dedicated files in boards (1st stage).
->=20
-> Is there any plan or expectation to move existing boards to text env file?
-> And what about newly added boards?
+On 8/2/24 20:32, Tom Rini wrote:
+> On Fri, Aug 02, 2024 at 06:26:27PM +0200, Jerome Forissier wrote:
+> 
+>> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+>> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
+>> stack [2] [3] as an alternative to the current implementation in net/,
+>> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
+>> reasons for doing so are:
+>> - Make the support of HTTPS in the wget command easier. Javier T. and
+>> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
+>> so. With that it becomes possible to fetch and launch a distro installer
+>> such as Debian etc. using a secure, authenticated connection directly
+>> from the U-Boot shell. Several use cases:
+>>   * Authentication: prevent MITM attack (third party replacing the
+>> binary with a different one)
+>>   * Confidentiality: prevent third parties from grabbing a copy of the
+>> image as it is being downloaded
+>>   * Allow connection to servers that do not support plain HTTP anymore
+>> (this is becoming more and more common on the Internet these days)
+>> - Possibly benefit from additional features implemented in lwIP
+>> - Less code to maintain in U-Boot
+>>
+>> Prior to applying this series, the lwIP stack needs to be added as a
+>> Git subtree with the following command:
+>>
+>>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savannah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
+> 
+> On Pi 3 I'm again / still seeing:
+> ========================================== FAILURES ===========================================
+> ___________________________________ test_efi_helloworld_net ___________________________________
+> test/py/tests/test_efi_loader.py:163: in test_efi_helloworld_net
+>     assert expected_text in output
+> E   AssertionError: assert 'Hello, world' in 'No UEFI binary known at 200000'
+> ------------------------------------ Captured stdout call -------------------------------------
+> U-Boot> tftpboot 200000 EFI/arm64/helloworld.efi
+> Using smsc95xx_eth device
+> TFTP from server 192.168.1.10; our IP address is 192.168.1.100
+> Filename 'EFI/arm64/helloworld.efi'.
+> Load address: 0x200000
+> Loading: #
+>          883.8 KiB/s
+> done
+> Bytes transferred = 4528 (11b0 hex)
+> U-Boot> U-Boot> crc32 200000 $filesize
+> crc32 for 00200000 ... 002011af ==> 2b466005
+> U-Boot> U-Boot> bootefi 200000
+> No UEFI binary known at 200000
+> U-Boot>
+> =================================== short test summary info ===================================
+> 
+> On a configuration that works fine with the legacy network stack.
+> 
 
-Long term, we would like to eliminate include/configs/<board.h> and so
-yes, conversion to plain text environment is needed for that to happen.
-Is every use case 1:1 supported? No as for example, boards need to move
-=66rom "distro boot" (which uses tons of cpp macros that we just can't do
-in plain text env) to "standard boot" and while no functionality is
-intended to change with that, it's a conversion that requires the
-developer to check the result and verify it does what's expected in that
-case (boards that don't use "distro boot" for example can be if not
-mechanically converted, at least u-boot-initial-env compared
-before/after and verified to match).
+That was caused by a missing call to efi_set_bootdev() in tftp_loop()
+(net/lwip/tftp.c). Fixed in v8.
 
---=20
-Tom
+I also fixed a similar issue with wget (net/lwip/wget.c) but I
+noticed that the NET version of wget has the same issue:
 
---h2OA4aRz2e+MpzXN
-Content-Type: application/pgp-signature; name="signature.asc"
+U-Boot> wget 200000 192.168.0.30:helloworld.efi
+Waiting for Ethernet connection... done.
+HTTP/1.0 200 OK
+Packets received 13, Transfer Successful
+Bytes transferred = 12720 (31b0 hex)
+U-Boot> bootefi 200000
+No UEFI binary known at 200000
+U-Boot>
 
------BEGIN PGP SIGNATURE-----
+Should I also fix it in the same way? Or did I miss something? How
+are you supposed to boot an EFI image downloaded via wget?
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaxFnIACgkQFHw5/5Y0
-tywcdQwAmYikklW+espj/Qur1a4hkin/i5ej81heuG0GOrkl6WIzkCQtU1qyUXvE
-no3PPcNZA/kSkb+/Ep1XFQLjtfjVg5yqmjL/mTbEZoJLKQZK97hkc2+qBRnUPwAd
-quuerBVGDV5WZ1zF1ko78vBGyqyzYTfMCBbqzFcB56b342I5eZjZgAPstgh8nMyg
-P7Dw+I3XKxguBmwvButI4sSs1WlIeVWLygrTm0LFiQDtLLmyIExEBGNWkta9rnfH
-1D6Ff0yaCtpAhVaWc/w9D7QA+3pdHGDyZtOt0Jt31GKFwzvHnsYfQxU2+CYr+ePe
-wlQ6i0MwHPz22+m+UQO6IyEL1G1IZXPQ4Lz3rBJH4IFXevJ3BxHILkLg5Fei3Ix0
-X+B2t7qkFqBC8rs+g0Z7d/NmwFVcwBGyuFjL+mAtRaByNkpJI9Gmx04WP7znCzdJ
-suPoshzeMWAnXhMQR8YPKoIPddbF03Z5Qkr9DeZv8BIiApmw0POJHnZYOBV12DG+
-udrUsSVg
-=pgfn
------END PGP SIGNATURE-----
-
---h2OA4aRz2e+MpzXN--
+Thanks,
+-- 
+Jerome
