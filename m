@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43E16C3DA7F
-	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 14:30:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F30CC3DA4A
+	for <u-boot@archiver.kernel.org>; Mon,  5 Aug 2024 14:30:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B1C688913;
-	Mon,  5 Aug 2024 16:29:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DA5788896A;
+	Mon,  5 Aug 2024 16:30:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CBZ6po3o";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VNxqwOpR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7790188916; Mon,  5 Aug 2024 16:29:56 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id E5645884CC; Mon,  5 Aug 2024 16:30:06 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9B63884CC
- for <u-boot@lists.denx.de>; Mon,  5 Aug 2024 16:29:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 09D008898B
+ for <u-boot@lists.denx.de>; Mon,  5 Aug 2024 16:30:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 475EToOT061477;
- Mon, 5 Aug 2024 09:29:50 -0500
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 475EU1nT068627;
+ Mon, 5 Aug 2024 09:30:01 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1722868190;
- bh=EMRg+WOBV+D9XTbYqPcNZH6MdERHjxpUL3YD1X4r3AQ=;
- h=From:To:CC:Subject:Date;
- b=CBZ6po3onAZlImgt4zn/cfHO11LPHqeRIlJ2l3/63Ua/9QFPQSH9bGwzbiDsnpYES
- B1mAkcr2uV6bKpLcIXT0w8jSntqkhcdiNRV8loLLhsHmrFrhcMpCConSVDRCjBHej5
- Dk9ZfP5gVnp+9TggAKODRkaojt8Q8l6823TSRLv4=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 475ETogs086670
+ s=ti-com-17Q1; t=1722868201;
+ bh=70V8L2dMAHkkQGbjLCTvNN+0bmm7Y9DKAj2+WbDb2Qw=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=VNxqwOpRdrojfPTomI2DQtlPvOKn+K8lKw1WMESFajeBZRyDPE7v8sjSNI+M/VrqZ
+ O/XTiPj7eJ7XI4zT0xSHJadM1T/XSh7IrK/YfjaO65e3MLwge8FN0LGqMTUHLSRUER
+ N8II4hq49LDmyg1UBQxebVsRigB21hTeYCoXw4ow=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 475EU1gX086764
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 5 Aug 2024 09:29:50 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 5 Aug 2024 09:30:01 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 5
- Aug 2024 09:29:49 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2024 09:30:01 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 5 Aug 2024 09:29:49 -0500
+ Frontend Transport; Mon, 5 Aug 2024 09:30:01 -0500
 Received: from lcpd911.dhcp.ti.com (lcpd911.dhcp.ti.com [172.24.227.68])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 475ETihn084343;
- Mon, 5 Aug 2024 09:29:45 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 475ETiho084343;
+ Mon, 5 Aug 2024 09:29:56 -0500
 From: Dhruva Gole <d-gole@ti.com>
 To: Tom Rini <trini@konsulko.com>, Nishant Menon <nm@ti.com>
 CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>,
@@ -59,10 +59,12 @@ CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>,
  <w.egorov@phytec.de>, <t.remmet@phytec.de>,
  <mkorpershoek@baylibre.com>, Daniel Schultz <d.schultz@phytec.de>,
  Dhruva Gole <d-gole@ti.com>
-Subject: [PATCH V8 0/7] Low Power Mode: Package TIFS Stub in BeaglePlay
-Date: Mon, 5 Aug 2024 19:59:30 +0530
-Message-ID: <20240805142937.443737-1-d-gole@ti.com>
+Subject: [PATCH V8 1/7] MAINTAINERS: Include the TI docs under ARM TI
+Date: Mon, 5 Aug 2024 19:59:31 +0530
+Message-ID: <20240805142937.443737-2-d-gole@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240805142937.443737-1-d-gole@ti.com>
+References: <20240805142937.443737-1-d-gole@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -83,59 +85,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+Add entry for the TI boards documentation under ARM TI
 
-This series aims to add documentation around the boot flow and tispl
-packaging details regarding the TIFS Stub. While at it, also refactors the
-k3 common docs to add more labels to provide more granularity on how we
-include chunks from common docs into SoC specific docs.
+Reviewed-by: Nishanth Menon <nm@ti.com>
+Signed-off-by: Dhruva Gole <d-gole@ti.com>
+---
+ MAINTAINERS | 1 +
+ 1 file changed, 1 insertion(+)
 
-This series also includes the binman related changes required to package
-TIFS Stub to support Low Power Modes on BeaglePlay and phycore-am625 SOM.
-
-Changelog:
-**********
-No changes other than picking up R-by's and rebased.
-
-Link to v7:
-https://lore.kernel.org/all/20240725093546.4193107-1-d-gole@ti.com/
-
-Dhruva Gole (7):
-  MAINTAINERS: Include the TI docs under ARM TI
-  doc: ti: k3: Add TIFS Stub documentation
-  doc: board: ti: Update to use the new boot firmware labels
-  doc: ti: am62*: Mention TIFS Stub in img fmts and boot flow
-  arm: dts: k3-am625-beagleplay: Package TIFS Stub
-  doc: beagle: am62x_beagleplay: Document the use of TIFS Stub
-  arm: dts: phycore-am62x: Package TIFS Stub
-
- MAINTAINERS                                   |    1 +
- arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi  |   33 +-
- arch/arm/dts/k3-am625-phycore-som-binman.dtsi |  101 +-
- doc/board/beagle/am62x_beagleplay.rst         |    8 +-
- doc/board/beagle/j721e_beagleboneai64.rst     |    4 +
- doc/board/phytec/phycore-am62x.rst            |    4 +
- doc/board/phytec/phycore-am64x.rst            |    4 +
- doc/board/ti/am62ax_sk.rst                    |    8 +-
- doc/board/ti/am62px_sk.rst                    |    8 +-
- doc/board/ti/am62x_sk.rst                     |    8 +-
- doc/board/ti/am64x_evm.rst                    |    4 +
- doc/board/ti/am65x_evm.rst                    |    4 +
- doc/board/ti/img/boot_diagram_am62.svg        | 1983 +++++++++++++++++
- doc/board/ti/img/tifsstub_dm_tispl.bin.svg    |  353 +++
- doc/board/ti/j7200_evm.rst                    |    4 +
- doc/board/ti/j721e_evm.rst                    |    4 +
- doc/board/ti/j721s2_evm.rst                   |    4 +
- doc/board/ti/j722s_evm.rst                    |    4 +
- doc/board/ti/j784s4_evm.rst                   |    4 +
- doc/board/ti/k3.rst                           |   51 +-
- doc/board/toradex/verdin-am62.rst             |    4 +
- 21 files changed, 2571 insertions(+), 27 deletions(-)
- create mode 100644 doc/board/ti/img/boot_diagram_am62.svg
- create mode 100644 doc/board/ti/img/tifsstub_dm_tispl.bin.svg
-
-
-base-commit: 6becf9ba1ab82af6f4fcf9f4d0da38f9c75212d2
+diff --git a/MAINTAINERS b/MAINTAINERS
+index ddcb7128db4e..f1fe19e0f002 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -732,6 +732,7 @@ F:	arch/arm/mach-omap2/
+ F:	arch/arm/include/asm/arch-omap*/
+ F:	arch/arm/include/asm/ti-common/
+ F:	board/ti/
++F:	doc/board/ti/
+ F:	drivers/dma/ti*
+ F:	drivers/dma/ti*/
+ F:	drivers/firmware/ti_sci.*
 -- 
 2.34.1
 
