@@ -4,71 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A557C52D6F
-	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 21:51:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12B22C49EA1
+	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 21:51:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 712CD88AE4;
+	by phobos.denx.de (Postfix) with ESMTP id CD1EB88AF8;
 	Tue,  6 Aug 2024 23:51:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eaGyFaEJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d2ETEv7A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A195B88AE4; Tue,  6 Aug 2024 23:51:06 +0200 (CEST)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
+ id 29F7088B02; Tue,  6 Aug 2024 23:51:07 +0200 (CEST)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8553088AF6
- for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 23:51:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 45F0F88AE6
+ for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 23:51:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2cb4b6ecb3dso928796a91.3
- for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 14:51:03 -0700 (PDT)
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6b7a3e468a9so6861956d6.1
+ for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 14:51:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722981055; x=1723585855; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722981050; x=1723585850; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uGk6aWjX4IKbybBy80Xj6ulpGi50aYumOf+CiG47ol0=;
- b=eaGyFaEJNfyHJtMy0sWF43ZTPvPyDA70zjNqGxXgSd/O1HPAbuxKaoFxe0dOmzIa60
- CYCw5fN4t9ac1bjiYzWgtFI1RaljB9aENe4BGw+l9nl2TEfdF99B4yRvG35MnzywXYZK
- L/oGGFsD4HPFW39P2MQZgwCT6V5lFLZODyWVU=
+ bh=Ol2Hua1VOCQbLhkJL8y3b2C1GKi2FfNBkj2rzTOfl08=;
+ b=d2ETEv7AGb6fvfAGTSGjTKDWYHCrkYmFBeXZnXkE9wjR9FHbGwgiIKKYqn8MbRHLMt
+ RHFRSooMXX05IQkyr7Xz/CEUBvralMiHdlNodKLMEBRCfgvlFpDPZZPcXTX/mSS0Gfen
+ xpddzjjolBqspzpAGwk0VpjMRQoWTIwxpuoUk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722981055; x=1723585855;
+ d=1e100.net; s=20230601; t=1722981050; x=1723585850;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=uGk6aWjX4IKbybBy80Xj6ulpGi50aYumOf+CiG47ol0=;
- b=KVSjO0CwzvHquIVVoPq/DkFw+KeQn0SsOL892+Zm2FucF36zWCl4l64FFKH1u9w5c/
- OORuZfDHDMQj1+tGtV01M4RmAPj2PVJbBIb0PCfl/zY+64G4I5vqBG06e+iE71W5mN89
- LrtyvI4LohJESHRZnE28RzKBea7h2JvvVKbHcXzyLqfp5vm1imer+Z+07VpH9PIOG4uM
- uThYMWTMHoe95FhM6xNBORHykPgr1ZRxLtojzDIvE0KkZkvB+G0rsU2IfAa1hVHR5H2X
- wWpN+7iNaXRnXAdTDjqbSWfrjB7lOaxBTi6tBmwgnKdylPp3j+qhBZnrVcj3xWCmXKIe
- zL7A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWduZswGdr7OC9oP05vYDQXk8P7rX5RquAJGE/DP4NfvIFBguflPGCwYq27HygDG2UbhZoV0BnbZAzrex0K3r29jcKd+w==
-X-Gm-Message-State: AOJu0YzZNJ/OGpjtnsK7b//RX57+WNda7aVqLFT7xa6DkSBnk+Sjn3zJ
- wTKaNO6MbiPrDt4N+jUUjCciz9A0zc244wz3MwiaeXPIE/WVWpe918FNcME2JRdlpZ4gP34wMt1
- 5jGy2vI1HpOAHD4vpTBjNi9uj6puliZOV+7QQ
-X-Google-Smtp-Source: AGHT+IFHKVTcuBKddoSpxfJMm4DU41C1r+4aA5aPEbJnEgu4rbQyTxrjeTivhi0eWsU4u4YdK4cMnFjKR5nmXFYJQM8=
-X-Received: by 2002:a17:90b:1e43:b0:2cd:3e75:4e51 with SMTP id
- 98e67ed59e1d1-2cff955d116mr17298433a91.39.1722981055067; Tue, 06 Aug 2024
- 14:50:55 -0700 (PDT)
+ bh=Ol2Hua1VOCQbLhkJL8y3b2C1GKi2FfNBkj2rzTOfl08=;
+ b=bFyAaf6DiruvaEuEAt/qdlMIsrSqraSRAvuGkFMW8KVionmjbVtsGcxqPVLeUN/Tjz
+ LkkOy+WM6gvcKAcMTUCvhBY2UxfVJ7xJ+XG7bfckojMFCVlOAfZRuF/454YdjW0bMJxe
+ uZa0z5BVxeQZ9RscxyFDRktFtnsvQ62A4WLowmuj/dmdTfjGEbcs9e56HlyFDu9pyuoM
+ Pu6vDmdUXYQUj5VYiDJs2z6+zXcouHMtc9z/8DyCkcj1j5fTHPVNoyXdfnVEZy1F7wEy
+ /j+/BXDpgKhxyOH//VUq3hVk26Ej1SXdJxPT10AVEemRNjbGptjIsfpjdssq2nkkkQ/A
+ 4y2g==
+X-Gm-Message-State: AOJu0Yw0rv0MvyFcQIBDf+FBPmftc2RCnt5zKBG8KfdNE6cHb1+Y4vuS
+ Tyq+uwwGVUcIzqRvqwu1wtpU5s67D3tyV049oTNdamLue3FwQezVH6h9GFLd3Zgme+qkR3pJY9Z
+ kE7IvyNNDw01cIMHyXCqtLfsLsv7HQgHrDVZI
+X-Google-Smtp-Source: AGHT+IEYSSYS/4f9lpFwnVw7yCWa1F1qiBNnirxhxXbOFB7P6s1gsrRFr+MIJfK2GgAAnTiEnNz2ZFIg1d3c7NMZMvw=
+X-Received: by 2002:a05:6214:3d98:b0:6b5:d764:69d9 with SMTP id
+ 6a1803df08f44-6bb983a9940mr218286976d6.7.1722981049689; Tue, 06 Aug 2024
+ 14:50:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240802092820.917450-1-admin@hifiphile.com>
- <20240802092820.917450-2-admin@hifiphile.com>
-In-Reply-To: <20240802092820.917450-2-admin@hifiphile.com>
+References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
+ <20240724060224.3071065-31-sughosh.ganu@linaro.org>
+ <CAFLszTg-hL9z3o68RigDFCE2=Cj-UVHv0xh0Y9=QuS=ZDq3FGw@mail.gmail.com>
+ <CADg8p95m8w8hgsderBgDhMfNTv73RrTVGtNsu6Yh4wt6b1nNmg@mail.gmail.com>
+ <CAFLszTh4CvysoS1njOtEP8NHd3avHQhbYr_Z0n1wMvDmnJT0fQ@mail.gmail.com>
+ <CADg8p961G-FLGjot1Ur-3CoBvrHhnDLv5hv_c-k4NeBAZ598xA@mail.gmail.com>
+In-Reply-To: <CADg8p961G-FLGjot1Ur-3CoBvrHhnDLv5hv_c-k4NeBAZ598xA@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 6 Aug 2024 15:50:42 -0600
-Message-ID: <CAFLszTj8Cci7_6vpZ+NXndzKxxvAW6oY9BskFjgji=oi1UtPWA@mail.gmail.com>
-Subject: Re: [PATCH] dm: core: Show device sequence instead in dm_dump_tree()
-To: Zixun LI <admin@hifiphile.com>
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
+Date: Tue, 6 Aug 2024 15:50:38 -0600
+Message-ID: <CAFLszTgh_T7Mf3r1vgnn5=Gp4G1z6s9wO=TmRd7XQeq2vRc-bg@mail.gmail.com>
+Subject: Re: [PATCH 30/40] sandbox: iommu: remove lmb allocation in the driver
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
+ Max Filippov <jcmvbkbc@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,72 +94,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 2 Aug 2024 at 03:31, Zixun LI <admin@hifiphile.com> wrote:
->
-> Currently uclass index is shown in DM tree dump which ignores alias
-> sequence numbering. The result could be confusing since these 2 numbers
-> could be different. Show device sequence number instead as it's more
-> meaningful.
->
-> Also update documentation to use sequence number.
->
-> Signed-off-by: Zixun LI <admin@hifiphile.com>
-> ---
->  doc/usage/cmd/dm.rst | 7 +++----
->  drivers/core/dump.c  | 4 ++--
->  2 files changed, 5 insertions(+), 6 deletions(-)
+Hi Sughosh,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Fri, 2 Aug 2024 at 01:44, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+>
+> On Mon, 29 Jul 2024 at 20:58, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Sughosh,
+> >
+> > On Mon, 29 Jul 2024 at 02:52, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > >
+> > > On Fri, 26 Jul 2024 at 05:02, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Sughosh,
+> > > >
+> > > > On Wed, 24 Jul 2024 at 00:05, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > > >
+> > > > > The sandbox iommu driver uses the LMB module to allocate a particular
+> > > > > range of memory for the device virtual address(DVA). This used to work
+> > > > > earlier since the LMB memory map was caller specific and not
+> > > > > global. But with the change to make the LMB allocations global and
+> > > > > persistent, adding this memory range has other side effects. On the
+> > > > > other hand, the sandbox iommu test expects to see this particular
+> > > > > value of the DVA. Use the DVA address directly, instead of mapping it
+> > > > > in the LMB memory map, and then have it allocated.
+> > > > >
+> > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > > ---
+> > > > > Changes since rfc: None
+> > > > >
+> > > > >  drivers/iommu/sandbox_iommu.c | 9 ++-------
+> > > > >  1 file changed, 2 insertions(+), 7 deletions(-)
+> > > > >
+> > > > > diff --git a/drivers/iommu/sandbox_iommu.c b/drivers/iommu/sandbox_iommu.c
+> > > > > index 505f2c3250..15ecaacbb3 100644
+> > > > > --- a/drivers/iommu/sandbox_iommu.c
+> > > > > +++ b/drivers/iommu/sandbox_iommu.c
+> > > > > @@ -5,10 +5,10 @@
+> > > > >
+> > > > >  #include <dm.h>
+> > > > >  #include <iommu.h>
+> > > > > -#include <lmb.h>
+> > > > >  #include <asm/io.h>
+> > > > >  #include <linux/sizes.h>
+> > > > >
+> > > > > +#define DVA_ADDR               0x89abc000
+> > > >
+> > > > This is a very strange address. You can put this in
+> > > > arch/sandbox/include/asm/test.h and check it in the test. I suggest
+> > > > using something like 0x12345678 so it is obviously meaningless.
+> > >
+> > > You will see that I am using the same address that is being used
+> > > currently. I did not want to make any changes to what is working, nor
+> > > did I want to spend time debugging if this logic can be improved --
+> > > that is not the purpose of this series.
+> >
+> > Please just move it. You can keep the same address, but put the
+> > constant in the header file.
+>
+> Looking into this, there isn't an appropriate header file where I can
+> put this constant. And creating one only for a macro seems like an
+> overkill. Can you propose a header file where I can put this. If there
+> isn't an existing one, maybe I can keep the macro as is?
+
+arch/sandbox/include/asm/test.h
+
+It is used for quite a few constants.
 
 
 >
-> diff --git a/doc/usage/cmd/dm.rst b/doc/usage/cmd/dm.rst
-> index 7651507937..196b22d137 100644
-> --- a/doc/usage/cmd/dm.rst
-> +++ b/doc/usage/cmd/dm.rst
-> @@ -112,9 +112,8 @@ This shows the full tree of devices including the following fields:
->  uclass
->      Shows the name of the uclass for the device
+> -sughosh
 >
-> -Index
-> -    Shows the index number of the device, within the uclass. This shows the
-> -    ordering within the uclass, but not the sequence number.
-> +Seq
-> +    Shows the sequence number of the device, within the uclass.
->
->  Probed
->      Shows `+` if the device is active
-> @@ -366,7 +365,7 @@ dm tree
->  This example shows the abridged sandbox output::
->
->      => dm tree
-> -    Class     Index  Probed  Driver                Name
-> +    Class     Seq    Probed  Driver                Name
->      -----------------------------------------------------------
->      root          0  [ + ]   root_driver           root_driver
->      demo          0  [   ]   demo_shape_drv        |-- demo_shape_drv
-> diff --git a/drivers/core/dump.c b/drivers/core/dump.c
-> index 5ec30d5b3c..5cbaa97fa3 100644
-> --- a/drivers/core/dump.c
-> +++ b/drivers/core/dump.c
-> @@ -40,7 +40,7 @@ static void show_devices(struct udevice *dev, int depth, int last_flag,
->         /* print the first 20 characters to not break the tree-format. */
->         printf(CONFIG_IS_ENABLED(USE_TINY_PRINTF) ? " %s  %d  [ %c ]   %s  " :
->                " %-10.10s  %3d  [ %c ]   %-20.20s  ", dev->uclass->uc_drv->name,
-> -              dev_get_uclass_index(dev, NULL),
-> +              dev->seq_,
->                flags & DM_FLAG_ACTIVATED ? '+' : ' ', dev->driver->name);
->
->         for (i = depth; i >= 0; i--) {
-> @@ -129,7 +129,7 @@ void dm_dump_tree(char *dev_name, bool extended, bool sort)
->  {
->         struct udevice *root;
->
-> -       printf(" Class     Index  Probed  Driver                Name\n");
-> +       printf(" Class     Seq    Probed  Driver                Name\n");
->         printf("-----------------------------------------------------------\n");
->
->         root = dm_root();
-> --
-> 2.45.2
->
+> >
+> > >
+> > > >
+> > > > >  #define IOMMU_PAGE_SIZE                SZ_4K
+> > > > >
+> > > > >  static dma_addr_t sandbox_iommu_map(struct udevice *dev, void *addr,
+> > > > > @@ -20,8 +20,7 @@ static dma_addr_t sandbox_iommu_map(struct udevice *dev, void *addr,
+> > > > >         paddr = ALIGN_DOWN(virt_to_phys(addr), IOMMU_PAGE_SIZE);
+> > > > >         off = virt_to_phys(addr) - paddr;
+> > > > >         psize = ALIGN(size + off, IOMMU_PAGE_SIZE);
+> > > > > -
+> > > > > -       dva = lmb_alloc(psize, IOMMU_PAGE_SIZE, LMB_NONE);
+> > > > > +       dva = (phys_addr_t)DVA_ADDR;
+> > > > >
+> > > > >         return dva + off;
+> > > > >  }
+> > > > > @@ -35,8 +34,6 @@ static void sandbox_iommu_unmap(struct udevice *dev, dma_addr_t addr,
+> > > > >         dva = ALIGN_DOWN(addr, IOMMU_PAGE_SIZE);
+> > > > >         psize = size + (addr - dva);
+> > > > >         psize = ALIGN(psize, IOMMU_PAGE_SIZE);
+> > > > > -
+> > > > > -       lmb_free(dva, psize, LMB_NONE);
+> > > > >  }
+> > > > >
+> > > > >  static struct iommu_ops sandbox_iommu_ops = {
+> > > > > @@ -46,8 +43,6 @@ static struct iommu_ops sandbox_iommu_ops = {
+> > > > >
+> > > > >  static int sandbox_iommu_probe(struct udevice *dev)
+> > > > >  {
+> > > > > -       lmb_add(0x89abc000, SZ_16K, LMB_NONE);
+> > > > > -
+> > > > >         return 0;
+> > > > >  }
+> > > >
+> > > > If this function is empty, you should remove it.
+> > >
+> > > Okay.
+Regards,
+Simon
