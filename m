@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 345DCC52D6F
-	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 18:43:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A115C52D6F
+	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 21:13:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 466098882F;
-	Tue,  6 Aug 2024 20:43:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5BB30889A3;
+	Tue,  6 Aug 2024 23:13:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Pvo9B6Au";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a0EVYDIf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 764CE8882F; Tue,  6 Aug 2024 20:43:20 +0200 (CEST)
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
+ id C3704888FB; Tue,  6 Aug 2024 23:13:02 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B951885D1
- for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 20:43:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 518C988A54
+ for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 23:13:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-3db1657c0fdso606471b6e.1
- for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 11:43:17 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6b7acf213a3so5070646d6.1
+ for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 14:13:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1722969793; x=1723574593; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JArR2yQOZWtc6vxUgeCrolCu9ejWxpad3Heh3R3wDjI=;
- b=Pvo9B6Auza/bFeQ0fjnAKOWF5qPl4M6Jjnn4gXuduMN6IkRiERpqYvHnbFcTQGLkDs
- B4mgCzH9mSdaZ5MojHuE3uutqmbjgHqkndO6aKYXsXPW7oQT+ke/m3E0We9wSMhj5Tdh
- f3bVFOSFwJiOgplLA1eJTgKNhkOkJJ1xO7/r0=
+ d=chromium.org; s=google; t=1722978778; x=1723583578; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=xHCDICBPFquQzjy2QkEMXuQiJLZECGVwgHuRZllveIs=;
+ b=a0EVYDIfBPJum/NM+FEH/W1ltfnRk3zK+X56rWBX+7+HSr2P1jUtccHgiH4azwaM93
+ s7M5A6CJCDxgwVsofqTXmTyyPhwN3yc4gocpyt734GY4F6gp05cu9UHP48tTd5VBPouZ
+ oCBuoYTA7xubNlx0bpkaoPFvI22LdxYc7iGLk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722969793; x=1723574593;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JArR2yQOZWtc6vxUgeCrolCu9ejWxpad3Heh3R3wDjI=;
- b=c2GP1oZMQFzv2FtEHeCHvj33GoVGUn+MyhMRm0Qa3Xk2ChhTUqEFs02ncI1v16VSfZ
- 6OqLx74grLtpMkU3QL7uG0XvFOim9D0C3WTjqv1UYjkIfzRZnaDTTMiLXJT3P/2nLy/z
- tr/gpgHJ5r4lP9hn4n5GGFSvho1kPzzdRUSF4CdRNDFIUp1fdkrXZjcMSPMu4/s5UmFh
- 5KfFAkYPUDfhvKDhQJqrcjljuYb/OryJUAkb2imWJfq+o76BCuiXcSYnjcfdF/hqsdIp
- z7eX0rOBDz0VABkwj4pELqzXegKpkmONv4dX2FUPevqRlWNZ35qeU8Sl2YLWwF0qKr9L
- YIzg==
-X-Gm-Message-State: AOJu0YzZjVELFMq08+4vDoquPAouGs75AIup3FDo4Jgbtzq4uIOtCHYJ
- JXx9Gw2wr3XEu5zakVXnQyTUxwokTo5e5kuPE/7icAO5O0XY/NjORWU0HW6Dm9Q=
-X-Google-Smtp-Source: AGHT+IGH4z1NFL+5pj35HuwxeXjCkiXtwaP8ZeBC5PcUbgMwr+Vk0UtWH6ALxKlaaEqbx5rNs+/40w==
-X-Received: by 2002:a05:6808:18a5:b0:3da:b36c:c702 with SMTP id
- 5614622812f47-3db5583b1f1mr20397838b6e.46.1722969792904; 
- Tue, 06 Aug 2024 11:43:12 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-103-190.totalplay.net.
- [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3db56361a1esm3609750b6e.7.2024.08.06.11.43.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Aug 2024 11:43:12 -0700 (PDT)
-Date: Tue, 6 Aug 2024 12:43:03 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, Seung-Woo Kim <sw0312.kim@samsung.com>,
- Michael Walle <mwalle@kernel.org>, linux-sunxi@lists.linux.dev
-Subject: Re: Pull request: u-boot-sunxi/master for v2024.10
-Message-ID: <20240806184303.GB1626301@bill-the-cat>
-References: <20240806143823.1438437-1-andre.przywara@arm.com>
+ d=1e100.net; s=20230601; t=1722978778; x=1723583578;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xHCDICBPFquQzjy2QkEMXuQiJLZECGVwgHuRZllveIs=;
+ b=ZZUb/YjyUHQbndRYSX9GwtTDT1bvA6zmV/6nwsz0Nyhj5xGaT9vt8CHj+yzzKpejAK
+ 0Yd7tlRoWI1Vk1PdJBcS7vt7VrzXJzyjsqmRTCHi01e/H8IuOyhiOVq1RMoZuJ7cy/M4
+ /nZsku6Y48Gqiky3KKOeEzeW8IfUL0+VuL5fYurl2jHoiiFgd2Xb5cJERN71rLWm75mD
+ nJ7K8izWK23V1Hz+sMZZbfB91rjbsT9/xW4YbDJyjNGLHDuxsFxSZIZGtuzz8nBm+jzu
+ wXWI9iaLnM6FPAuSna178mxKV6n/EMIE1L0hYb6Nq+hM13jqmNAprHaSAjOMuB7wBQhX
+ iaAA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWdkjG3L9JIZUV1JH1ioK4DDAvaFXICzZHLBkLgWkgtJvToGVZLDQWZaJgk0xBHbzD2rceBfCE9VoUM7jFPAfTBdEau2A==
+X-Gm-Message-State: AOJu0YxjbQ19v+UZkZhPcVNv04EWvu5KRgG0B3tDAAzoqIwirnmso7Im
+ ji3fiRjK2Xl3eVHCVDMRR3MwEXTMg/dndyqLbvaZ7kapdUwItd+W5PczwJZTieIWmmBaRvcUABx
+ qnxJ7nMw0sCShnIaM4K/qCJelJdG4ZhvbZEyF
+X-Google-Smtp-Source: AGHT+IEi0yvUyNjLuYNZimnpQbFfXvWigaCKHdktuIfNO6WRVd8C4yZESD0trb9Zg+mKmekiSPoKmG7RSINsrghazHA=
+X-Received: by 2002:a05:6214:3da1:b0:6b5:88:7cc8 with SMTP id
+ 6a1803df08f44-6bb9836f6e6mr183739326d6.7.1722978778316; Tue, 06 Aug 2024
+ 14:12:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="nmCHRswCGQ601//L"
-Content-Disposition: inline
-In-Reply-To: <20240806143823.1438437-1-andre.przywara@arm.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <cover.1722615735.git.jerome.forissier@linaro.org>
+ <20240802183249.GO3794063@bill-the-cat>
+In-Reply-To: <20240802183249.GO3794063@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 6 Aug 2024 15:12:47 -0600
+Message-ID: <CAFLszThqMXGifQakKdWDwOYv0WXymk1C_3YVDvkKMgEsgS3Eyg@mail.gmail.com>
+Subject: Re: [PATCH v7 00/20] Introduce the lwIP network stack
+To: Tom Rini <trini@konsulko.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, 
+ Raymond Mao <raymond.mao@linaro.org>, Maxim Uvarov <muvarov@gmail.com>, 
+ Tim Harvey <tharvey@gateworks.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Eddie James <eajames@linux.ibm.com>, Sean Anderson <seanga2@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Siddharth Vadapalli <s-vadapalli@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,74 +93,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---nmCHRswCGQ601//L
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, 2 Aug 2024 at 12:32, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Aug 02, 2024 at 06:26:27PM +0200, Jerome Forissier wrote:
+>
+> > This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+> > library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
+> > stack [2] [3] as an alternative to the current implementation in net/,
+> > selectable with Kconfig, and ultimately keep only lwIP if possible. Some
+> > reasons for doing so are:
+> > - Make the support of HTTPS in the wget command easier. Javier T. and
+> > Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
+> > so. With that it becomes possible to fetch and launch a distro installer
+> > such as Debian etc. using a secure, authenticated connection directly
+> > from the U-Boot shell. Several use cases:
+> >   * Authentication: prevent MITM attack (third party replacing the
+> > binary with a different one)
+> >   * Confidentiality: prevent third parties from grabbing a copy of the
+> > image as it is being downloaded
+> >   * Allow connection to servers that do not support plain HTTP anymore
+> > (this is becoming more and more common on the Internet these days)
+> > - Possibly benefit from additional features implemented in lwIP
+> > - Less code to maintain in U-Boot
+> >
+> > Prior to applying this series, the lwIP stack needs to be added as a
+> > Git subtree with the following command:
+> >
+> >  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savannah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
+>
+> On Pi 3 I'm again / still seeing:
+> ========================================== FAILURES ===========================================
+> ___________________________________ test_efi_helloworld_net ___________________________________
+> test/py/tests/test_efi_loader.py:163: in test_efi_helloworld_net
+>     assert expected_text in output
+> E   AssertionError: assert 'Hello, world' in 'No UEFI binary known at 200000'
+> ------------------------------------ Captured stdout call -------------------------------------
+> U-Boot> tftpboot 200000 EFI/arm64/helloworld.efi
+> Using smsc95xx_eth device
+> TFTP from server 192.168.1.10; our IP address is 192.168.1.100
+> Filename 'EFI/arm64/helloworld.efi'.
+> Load address: 0x200000
+> Loading: #
+>          883.8 KiB/s
+> done
+> Bytes transferred = 4528 (11b0 hex)
+> U-Boot> U-Boot> crc32 200000 $filesize
+> crc32 for 00200000 ... 002011af ==> 2b466005
+> U-Boot> U-Boot> bootefi 200000
+> No UEFI binary known at 200000
+> U-Boot>
+> =================================== short test summary info ===================================
+>
+> On a configuration that works fine with the legacy network stack.
 
-On Tue, Aug 06, 2024 at 03:38:23PM +0100, Andre Przywara wrote:
+BTW the "No UEFI binary known at 200000" is that hack that I would
+really like to improve on, by updating bootstd to keep track of which
+images are loaded.
 
-> Hi Tom,
->=20
-> please pull the sunxi/master branch, containing some more changes for
-> 2024.10.
-> This updates the "old style" DTs to that of Linux v6.10, matching what
-> OF_UPSTREAM is at now. Hopefully we won't need to do this (manually)
-> anymore. Since this brings in the DT for a new board (Tanix TX1), also
-> add the defconfig for that, which has just been waiting for that sync.
-> There are three more fixes: two for the SPI clock setup, which avoids
-> too high frequencies in some cases, and one fix to avoid a build warning
-> with GCC 14 for the sunxi TOC0 part of the mkimage tool.
->=20
-> The gitlab CI passed, and I tested the SPI flash on the OrangePi Zero 3
-> and also booted that into Linux.
->=20
-> Please pull!
->=20
-> Cheers,
-> Andre
->=20
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> The following changes since commit 6becf9ba1ab82af6f4fcf9f4d0da38f9c75212=
-d2:
->=20
->   Merge tag 'u-boot-imx-master-20240802' of https://gitlab.denx.de/u-boot=
-/custodians/u-boot-imx (2024-08-02 14:40:59 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-sunxi.git master
->=20
-> for you to fetch changes up to 541a1649e74787682902d820d0b79e16bad69a4f:
->=20
->   spi: sunxi: fix clock divider calculation for max frequency setting (20=
-24-08-06 11:20:10 +0100)
->=20
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---nmCHRswCGQ601//L
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaybrQACgkQFHw5/5Y0
-tyx22QwAqbxB5nk3vf8GsIGlcujGfqOlUeEuDcjIDhgGuvMLKAiKIjAR6o60qXg7
-uUL/mNQ9KOnQrTcvHtWB7vGQMA4hurHe7UtiSfu4L+AsCvboa7XdzTiYwGJtFauc
-sUm4aCNl3ftPZ9BKuRtNPaWOchunniMHuTQf4XZCgFlLXmTcMTv925YsbNQ6UAoy
-xYdq+X3NrK1RwqcMfbFck1s5MIAFs6KdFWcR+gVg9I2GeBFWRfDG+PeRobwl5aDE
-7TZpIeiEtjcfnGlc5WqDRhhufwd5uvTAGzEJqLqGZVSUrfUQ5CBXdudgL1slSrSg
-72FSQfM1+UE4wdMs8YWCa2pPG5RQf4C2y03krsiTlZ24hpz8ZkmEXwaX5NWv17zZ
-FvZFCK0abgAbFUYhp+XU0AdlRVFut97avdPdDPQoCsUj8XhWLnEwaV8gZwRAQ66p
-QpC+Tp6l+s0YfkYup4NEAys0YF0W5O+uQTq5309NpsdoIE3azKuvwfhcimm+W0y0
-OyXEe+J9
-=Gw/+
------END PGP SIGNATURE-----
-
---nmCHRswCGQ601//L--
+Regards,
+SImon
