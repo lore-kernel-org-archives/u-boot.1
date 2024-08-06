@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75BE9C3DA7F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 13:40:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28E44C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 13:44:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 977C988B91;
-	Wed,  7 Aug 2024 15:40:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5377088BB7;
+	Wed,  7 Aug 2024 15:44:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WlnlvZY/";
+	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="vK6aeAxa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2234D88B7E; Wed,  7 Aug 2024 15:40:06 +0200 (CEST)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id 2C66F88AB8; Tue,  6 Aug 2024 22:29:13 +0200 (CEST)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37AD188BA6
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 15:40:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D45D87876
+ for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 22:29:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=max.oss.09@gmail.com
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2f16d2f2b68so29097341fa.3
- for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 06:40:04 -0700 (PDT)
+ spf=none smtp.mailfrom=admin@hifiphile.com
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2f189a2a7f8so12797951fa.2
+ for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 13:29:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723038003; x=1723642803; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=rQXDt47tigEoQ7ei+vXu64hESbcdAVmkKueLCMh64HQ=;
- b=WlnlvZY/ywhQCeVRpISv4Rl6jt0NF9BzdpOGSncQchSTv8wu4r8LSbkDxzMnmb91AV
- bNaSzKE/q9dnJURzKSzN0Y3gnCA7m153a/vYJaD4+f4IiMjBGMLNezMuUSA08Fl/mgI2
- b1DJABn8YFYXnPS8ThrNsDy8xFHBJKT34+57S7okzcLs5p3yaswbRnInSpO1h5PxBKoh
- vz/YBv0Ra2pug6MJuq6LJlfQq5MvdMm+6Owo1xH6oLBUQrXPiqYB9mXBaPLqNIDY155V
- wGt/plXM61pI+dPplyi3T6FioATyDVxhEZYbHXYUax5J5vOo2dT6+By5s0d+y4r6iVlv
- LrUQ==
+ d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1722976142; x=1723580942;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Cg0h21acBZNTO6+tKUQwWrtC788HGSSlsNMgQGbx6n0=;
+ b=vK6aeAxa6V9YMj1ZTZwdb524yZGWYjpXBKb4bZ6CazkQ3FHQmowMVgV9CKrlFvNfo0
+ OdlVCos+pAbB+dWv+OFpXL2v8Ne73OQDL9l0Jy9jhGFPmBC2EqwS5HM3KpAGt4Lp81GE
+ 22VMqEy4nP3ReC6M5U1dAns/Huqryv+2Aty+qxmEEFUZU8ItlDgzdcKJ5Fs7lK+IVO7H
+ qVhRGL+E2tRm8O63PKJhQfp7oEPNvp0GvnQfshC11EL8UWzVWd5StnUuIldI6cgNvgzn
+ /CRq6bMNo9xENo2sPzubDBHbbl8XN+F039KyssVtxSPSdZFY7uU94DD6tKuTiOBVXtpl
+ VSGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723038003; x=1723642803;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rQXDt47tigEoQ7ei+vXu64hESbcdAVmkKueLCMh64HQ=;
- b=MnGn3hbxhw8r9wXMwbSdBqlOw0WMR3UTw7bkdPSEstLuZaEJFXiAuOEUVN7WR1rLgZ
- JhmbTSy59B+j8hdnInnJXMItWqFN2rb4HEyUG6+NiCPIJMdPRmuuayxXqePKArCwa52l
- KCar1taLa60Dxh734esbyuq26cRdzSjWvTvfXTI6DrPA1YofB9Vh+/JRB2xDK4yvdojh
- r6SRUHw+Se25icknNocfET047xiwVOa8xfFO20lpMBwtwGz4me92yprBlqhkmsNecBXy
- RzHxQkcRfN67rYL1i5Ju3310SF5xZprVZ2Q71NVADF6vOTJz3hnpzsLmgjaVLnyZexHW
- 655Q==
-X-Gm-Message-State: AOJu0YxqC9xjVpR4nJlPYvNGzMrnP34VMQNLLQBA2Feum6qFYIj74AyZ
- ppAGPI/PTZ2O4Ygwk1tjPahDQ7Qr7AhuQDudxe4cFJy6I1ovH0nLIVHfnA==
-X-Google-Smtp-Source: AGHT+IGhMml2KhvSsEXnT3KAVDwpul7Zo6DDNOSzxePS4rFOCY8UW2X/mcx/Pwh1io0h/V5roZSeyA==
-X-Received: by 2002:a2e:320b:0:b0:2ef:28ed:1ff2 with SMTP id
- 38308e7fff4ca-2f15aa88cb7mr149580221fa.9.1723038002243; 
- Wed, 07 Aug 2024 06:40:02 -0700 (PDT)
-Received: from toolbox.int.toradex.com (31-10-206-125.static.upc.ch.
- [31.10.206.125]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5b83a03b403sm7181742a12.42.2024.08.07.06.40.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 06:40:02 -0700 (PDT)
-From: max.oss.09@gmail.com
-To: u-boot@lists.denx.de
-Cc: Max Krummenacher <max.krummenacher@toradex.com>,
- Fabio Estevam <festevam@gmail.com>,
- Igor Opaniuk <igor.opaniuk@foundries.io>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>
-Subject: [PATCH] imx: imx8: fix build when CONFIG_IMX_BOOTAUX is set
-Date: Wed,  7 Aug 2024 15:39:11 +0200
-Message-ID: <20240807133919.4155815-1-max.oss.09@gmail.com>
-X-Mailer: git-send-email 2.42.0
+ d=1e100.net; s=20230601; t=1722976142; x=1723580942;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Cg0h21acBZNTO6+tKUQwWrtC788HGSSlsNMgQGbx6n0=;
+ b=tbFvHiUpOVcBi/rcFOjLFtHiB16ALS/73Zec0rC6b7FbbD1k0hMBsrUD2BJ00iW/el
+ bqa2TKeURU8gI/z+rdW7mGznISRstX4uHR4GF0DDgW8ZFiY7f6Fkc19z6Lo4iHfQQJqL
+ SRcyQzrbotRZo4ReNkVPLAHZuewfvzKb3CnReZwNBkflUrZXTXKXgdCy1Fy8wy0ZYRcY
+ 6tI43PH/VRM8ge/jWrN/qh7BpcTAyUdqG+utkceFHwOtqJcLiR6eANBMGpuazaOuHG5I
+ B0zgCn/dHrEwlcbpWDnMxCyuTQSi4ad34LRgvUGOQH0mwEETe/xTXRVNXzPqS03VF4r8
+ O6FQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWh8XQAU6RgM4iwvHT8Qc5wLSDKsmDx2jzg5GGuNs9L6QV/mh3iKZedUfP5vwHKewNnhmCILiHnJwy2PZ1J5anX6QsF6w==
+X-Gm-Message-State: AOJu0YwKDEmGdOstFJi6UBXiSTk/L217reYIm1bw20jXedLOSOkMqLOD
+ I3st4tdhxy271+zi3nwsGJuDtMZDnNNdbxq/llAD1pcgE2pJRYFLvntkPFCKVkGCoNHthpEE0pU
+ KxSitQ+T7Pl/lccMcWi9lSaGZfk0CYp66OwqQsJchSv/VR0UYVsPXzA==
+X-Google-Smtp-Source: AGHT+IGXiARuK42yMTeAp8SG4YsUyjtG3pZpZiZt0rqYdklwK83dfgOMkVz1P001HZ7up/4kbS0LIGworjC8eaWFgBE=
+X-Received: by 2002:a2e:b6d3:0:b0:2ef:1f68:eae1 with SMTP id
+ 38308e7fff4ca-2f15aa95b5emr107154271fa.17.1722976142177; Tue, 06 Aug 2024
+ 13:29:02 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240726083102.380719-1-admin@hifiphile.com>
+ <87y159oio6.fsf@baylibre.com>
+In-Reply-To: <87y159oio6.fsf@baylibre.com>
+From: Zixun LI <admin@hifiphile.com>
+Date: Tue, 6 Aug 2024 22:28:50 +0200
+Message-ID: <CA+GyqeaD26fE9Ks+KP7X+Bok2gF8VE_hgeE2Qfiub8X=REO4EA@mail.gmail.com>
+Subject: Re: [PATCH] usb: gadget: ether: Handle gadget driver registration in
+ start and stop
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Wed, 07 Aug 2024 15:44:15 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,38 +94,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Max Krummenacher <max.krummenacher@toradex.com>
+Hi Mattijs,
 
-Use correct function name.
+On Tue, Aug 6, 2024 at 4:00=E2=80=AFPM Mattijs Korpershoek
+<mkorpershoek@baylibre.com> wrote:
+>
+> I'd like to test this on my end as well. Could you please give some
+> details on how this has been tested?
+>
+> A sequence of U-Boot commands would be helpful, for example.
 
-Fixes: e8cd1f60d964 ("imx: imx8: bootaux: Add i.MX8 M4 boot support")
-Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
----
+My tests are done on a custom ATMEL SAM9G25 board powered
+by USB Gadget port.
 
- arch/arm/mach-imx/imx8/cpu.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Gadget is enabled in the DT:
+&usb2 {
+status =3D "okay";
+};
 
-diff --git a/arch/arm/mach-imx/imx8/cpu.c b/arch/arm/mach-imx/imx8/cpu.c
-index accba502e492..834aca82bcfd 100644
---- a/arch/arm/mach-imx/imx8/cpu.c
-+++ b/arch/arm/mach-imx/imx8/cpu.c
-@@ -258,14 +258,14 @@ int arch_auxiliary_core_up(u32 core_id, ulong boot_private_data)
- 			return -EIO;
- 		}
- 
--		if (!power_domain_lookup_name("audio_sai0", &pd)) {
-+		if (!imx8_power_domain_lookup_name("audio_sai0", &pd)) {
- 			if (power_domain_on(&pd)) {
- 				printf("Error power on SAI0\n");
- 				return -EIO;
- 			}
- 		}
- 
--		if (!power_domain_lookup_name("audio_ocram", &pd)) {
-+		if (!imx8_power_domain_lookup_name("audio_ocram", &pd)) {
- 			if (power_domain_on(&pd)) {
- 				printf("Error power on HIFI RAM\n");
- 				return -EIO;
--- 
-2.42.0
+usb_ether enabled in board late init:
+int board_late_init(void)
+{
+#ifdef CONFIG_USB_ETHER
+usb_ether_init();
+#endif
+return 0;
+}
 
+Without this patch the host will try to enumerate the USB device once
+ U-Boot is loaded and result in the error I mentioned.
+
+With this patch USB is connected only when ethernet command, like dhcp
+is run, then disconnect when it's finished:
+usb 1-1: new high-speed USB device number 91 using xhci_hcd
+usb 1-1: New USB device found, idVendor=3D0000, idProduct=3D0000, bcdDevice=
+=3D 3.17
+usb 1-1: New USB device strings: Mfr=3D1, Product=3D2, SerialNumber=3D0
+usb 1-1: Product: Ethernet Gadget
+usb 1-1: Manufacturer: U-Boot
+cdc_ether 1-1:1.0 usb0: register 'cdc_ether' at usb-0000:04:00.3-1,
+CDC Ethernet Device, de:ad:be:ef:00:00
+cdc_ether 1-1:1.0 enp4s0f3u1: renamed from usb0
+gadget0: port 1(enp4s0f3u1) entered blocking state
+gadget0: port 1(enp4s0f3u1) entered disabled state
+cdc_ether 1-1:1.0 enp4s0f3u1: entered allmulticast mode
+cdc_ether 1-1:1.0 enp4s0f3u1: entered promiscuous mode
+gadget0: port 1(enp4s0f3u1) entered blocking state
+gadget0: port 1(enp4s0f3u1) entered forwarding state
+usb 1-1: USB disconnect, device number 91
