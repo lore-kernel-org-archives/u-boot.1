@@ -4,92 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CDCAC52D6F
-	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 22:29:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 124EAC49EA1
+	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 22:33:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9151188AF9;
-	Wed,  7 Aug 2024 00:29:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4C8AC871C7;
+	Wed,  7 Aug 2024 00:33:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XrNNWg+H";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="g2gPxyFQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1481688B15; Wed,  7 Aug 2024 00:29:08 +0200 (CEST)
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [IPv6:2a00:1450:4864:20::234])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B57238789F; Wed,  7 Aug 2024 00:33:09 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B85AA889E1
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 00:29:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAAF086D4C
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 00:33:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-2f1870c355cso12554861fa.1
- for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 15:29:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1722983342; x=1723588142; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=XvnCNhpj2xYC6lsQUadjPRKGQvZ5FpVDVrhipdfyAHc=;
- b=XrNNWg+H4GY0gNuXkGfzH0pT8GB7M3M1WFs8RyDGi++rpAFBkBvBcUgOAvgqQ4qaPQ
- hOjhkqd2G4SjZ5K1sTuh1AAb79T9iGlN3OeE/oftl/opAUz45TV2x4TOC6j3eoDAOS2p
- 1397w7A7v1L2f2wCrL5pdHqrx/vZFikOv23VonNHU6qpSQZTfhE+Y1bRiMNBj6mNMos+
- IsW9iBbb+bC0soWzYJsWSnB7/XaQ9bOfq/c2EDX5ObVWkhVhjVxbhxSLWwRccrR0ChTs
- n7k/yPYGbO+tJcbASRTMDn73k55gqe/eZPDylqzCtlgTtKKOqkx/izfEfKYkLHri9AUH
- tNGg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722983342; x=1723588142;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=XvnCNhpj2xYC6lsQUadjPRKGQvZ5FpVDVrhipdfyAHc=;
- b=HW63g2fIpXlv12no1OdpE7RuJzjjZFzUmpGWSPiDDCi+BT37Go0Eg8UUkU6Ej+VVOX
- syHXTPXh2coXCkPhw7EO80+cYPskSjisHZQmp8c/CJg9m9TuAhhqUi7Wuw2SXWnH2UhH
- bS2mTO7s/vg8p1dgtKDbD8RK4ofDoqa7n9H30XXnt8oJWKeGzkv12qplK9rErTxj39Qt
- tUqQsrj/wwBPcMqWjPGkMH4mtmTNjc8xzlixVrE+dixk7LtkGKwBL+tgvtc0HNG1qN6o
- +yT9dFHsTEAMpkhxLRhvqf9AAonXG5rLIzOqVFvMN9X4L0e5lW7SFWWJfPLZcujbH5jx
- BQaA==
-X-Gm-Message-State: AOJu0Yyp6i1lBEAuC8/YOtoUrEt21aFefF2cdp07qAwA7EVHsPZeoskN
- j6j8coEPfvEfip8Gp4O+913eUY3EpreOQLRgeHy0CnuJiFQd3EOg32+i+03xias=
-X-Google-Smtp-Source: AGHT+IFYZnF7I4U58MwN2Mx2r+XSF7O86Nm2CcM1feP1IMhGwMPJqyWAE2y1YL0hsSU1kUsiRwGiew==
-X-Received: by 2002:a05:6512:308c:b0:52c:86de:cb61 with SMTP id
- 2adb3069b0e04-530bb366700mr11667111e87.10.1722983342082; 
- Tue, 06 Aug 2024 15:29:02 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:3c20:d905:6027:2354?
- ([2a01:e0a:3cb:7bb0:3c20:d905:6027:2354])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7dc9c0c801sm579615966b.59.2024.08.06.15.29.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 Aug 2024 15:29:01 -0700 (PDT)
-Message-ID: <2dca5cab-b96c-4661-944c-3aeb63d707ca@linaro.org>
-Date: Wed, 7 Aug 2024 00:29:00 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 00/20] Introduce the lwIP network stack
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Eddie James <eajames@linux.ibm.com>, Sean Anderson <seanga2@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Siddharth Vadapalli <s-vadapalli@ti.com>
-References: <cover.1722615735.git.jerome.forissier@linaro.org>
- <20240802183249.GO3794063@bill-the-cat>
- <adf03f1c-cdde-4d4f-8078-59a4bf58b10d@linaro.org>
- <20240805182022.GB267004@bill-the-cat>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20240805182022.GB267004@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: d674f498-5443-11ef-b63e-00505699b430
+Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id d674f498-5443-11ef-b63e-00505699b430;
+ Wed, 07 Aug 2024 00:33:00 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=7IpQL8L/1ceLEYMHr4AOxJdKc2YH3Ripl3ojURbLROY=;
+ b=g2gPxyFQPurT038ugLMH8mnWjH3Ao23oTwqv6w4VS7s/7HOsCxKaAEYb4PvW1CnEtNxQGj32Oruik
+ Pf4WwINqmBnQ0Y3jAZPJOISao/4RyMFz724GmBllqh9yv/E34aCjvGbRQxpoHDgBHIHZcql19wcJoq
+ u+GCmJLscOTokiJ5hoyUMHN10qJNCuqCiQJqzz0SJEea2eleRN7DsqYp69vd5MJLagxhHJclucCmmR
+ 9Ia7/KyXlcw0sZ7qKyI/CkuakqWcLw3T/4rlMKnJ5Z+onlBa+gOVxlpmyiuy8LgKreB9O5dJqiAGYA
+ z8Ht/9QXUZerlwjQWm/lr4B3QvKuUYg==
+X-KPN-MID: 33|s2T3RbsA/5306JQLN2QHu6vcqyh4LmNa2miRvu+l/eQIwAVyWc0b1JsbxxoswOr
+ u/kWwH4dRNz2lsSYECnevRA==
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|hCgiwqsBT6yhoZqTw8VTn9efobbXgmz+Z6Y/fvybGdpqPitjDEo/qaJK98soGMJ
+ oWBPOajbzzcD7vs34a6pjnQ==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id d62b3748-5443-11ef-b40c-005056998788;
+ Wed, 07 Aug 2024 00:33:01 +0200 (CEST)
+Date: Wed, 07 Aug 2024 00:33:00 +0200
+Message-Id: <87frrhcmeb.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Simon Glass <sjg@chromium.org>
+Cc: fiona.klute@gmx.de, u-boot@lists.denx.de
+In-Reply-To: <CAFLszTh2Am1AuROKKwBr6zCNF4QCZQG2Vd88R2WWYFpGkMwjzQ@mail.gmail.com>
+ (message from Simon Glass on Tue, 6 Aug 2024 15:50:44 -0600)
+Subject: Re: Selecting serial device for console
+References: <75114aa0-2de7-4f5c-b764-0953ebf08263@gmx.de>
+ <CAFLszTh2Am1AuROKKwBr6zCNF4QCZQG2Vd88R2WWYFpGkMwjzQ@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,92 +74,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+> From: Simon Glass <sjg@chromium.org>
+> Date: Tue, 6 Aug 2024 15:50:44 -0600
 
+Hi Simon,
 
-On 8/5/24 20:20, Tom Rini wrote:
-> On Mon, Aug 05, 2024 at 08:18:09PM +0200, Jerome Forissier wrote:
->>
->>
->> On 8/2/24 20:32, Tom Rini wrote:
->>> On Fri, Aug 02, 2024 at 06:26:27PM +0200, Jerome Forissier wrote:
->>>
->>>> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
->>>> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
->>>> stack [2] [3] as an alternative to the current implementation in net/,
->>>> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
->>>> reasons for doing so are:
->>>> - Make the support of HTTPS in the wget command easier. Javier T. and
->>>> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
->>>> so. With that it becomes possible to fetch and launch a distro installer
->>>> such as Debian etc. using a secure, authenticated connection directly
->>>> from the U-Boot shell. Several use cases:
->>>>   * Authentication: prevent MITM attack (third party replacing the
->>>> binary with a different one)
->>>>   * Confidentiality: prevent third parties from grabbing a copy of the
->>>> image as it is being downloaded
->>>>   * Allow connection to servers that do not support plain HTTP anymore
->>>> (this is becoming more and more common on the Internet these days)
->>>> - Possibly benefit from additional features implemented in lwIP
->>>> - Less code to maintain in U-Boot
->>>>
->>>> Prior to applying this series, the lwIP stack needs to be added as a
->>>> Git subtree with the following command:
->>>>
->>>>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savannah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
->>>
->>> On Pi 3 I'm again / still seeing:
->>> ========================================== FAILURES ===========================================
->>> ___________________________________ test_efi_helloworld_net ___________________________________
->>> test/py/tests/test_efi_loader.py:163: in test_efi_helloworld_net
->>>     assert expected_text in output
->>> E   AssertionError: assert 'Hello, world' in 'No UEFI binary known at 200000'
->>> ------------------------------------ Captured stdout call -------------------------------------
->>> U-Boot> tftpboot 200000 EFI/arm64/helloworld.efi
->>> Using smsc95xx_eth device
->>> TFTP from server 192.168.1.10; our IP address is 192.168.1.100
->>> Filename 'EFI/arm64/helloworld.efi'.
->>> Load address: 0x200000
->>> Loading: #
->>>          883.8 KiB/s
->>> done
->>> Bytes transferred = 4528 (11b0 hex)
->>> U-Boot> U-Boot> crc32 200000 $filesize
->>> crc32 for 00200000 ... 002011af ==> 2b466005
->>> U-Boot> U-Boot> bootefi 200000
->>> No UEFI binary known at 200000
->>> U-Boot>
->>> =================================== short test summary info ===================================
->>>
->>> On a configuration that works fine with the legacy network stack.
->>>
->>
->> That was caused by a missing call to efi_set_bootdev() in tftp_loop()
->> (net/lwip/tftp.c). Fixed in v8.
+> Hi Fiona,
 > 
-> Thanks.
+> On Thu, 1 Aug 2024 at 08:07, Fiona Klute <fiona.klute@gmx.de> wrote:
+> >
+> > Hi everyone,
+> >
+> > how can I configure which of the available serial devices U-Boot will
+> > use for its serial console?
+> >
+> > Background: I have a device based on a Raspberry Pi CM4, which has 6
+> > UARTs (UART1 is a mini UART, the others PL011) [1]. In the default
+> > configuration (including the mainline Linux broadcom/bcm2711-rpi-cm4-io
+> > device tree) the Bluetooth module is attached to UART0. Unless I either
+> > completely disable UART0 (status = "disabled" in the device tree) or
+> > reconfigure it to be a serial console (e.g. using the RPi disable-bt
+> > DTBO) U-Boot fails to boot, I assume (it doesn't get far enough to show
+> > messages over netconsole) because it tries and fails to set up a serial
+> > console where there's a BT chip listening.
+> >
+> > That happens even if another serial console is available: With the RPi
+> > bcm2711-rpi-cm4 DTB plus "disable-bt" (disable the Bluetooth module,
+> > reconfigure UART0 as a serial console) and "uart1" (set up a serial
+> > console on UART1) DTBOs I can see that U-Boot discovers the serial
+> > device on UART1 (serial@7e215040):
+> >
+> > U-Boot> dm uclass serial
+> > uclass 108: serial
+> > 0   * serial@7e201000 @ 3af3b200, seq 0
+> > 1     serial@7e215040 @ 3af3b2d0, seq 1
+> >
+> > However, I can't find a way to make it *use* it instead of UART0
+> > (serial@7e201000). I tried to set CONFIG_CONS_INDEX=1 but didn't see any
+> > change (unfortunately the help does not describe exactly how the number
+> > is mapped to DT UART definitions). If I completely disable UART0 in the
+> > DT as mentioned above U-Boot uses UART1 just fine, so it's not an issue
+> > with UART1 as such.
+> >
+> > To make matters slightly more complicated, the specific device I have is
+> > a RevPi Connect 4, where a vendor overlay [2] describes how to set up an
+> > RS485 serial console using UART5. The pins defined there are wired to
+> > the outside of the box [3], so eventually I'll actually want to use
+> > UART5 for the serial console. Which means I really need a (build-time or
+> > preferably DT-based) way to configure which serial device to use.
+> >
+> > My goal is to create a single DTS which both U-Boot and Linux can use,
+> > and get it upstreamed if possible. If there are configuration options
+> > and they're just missing from the documentation, I'd be happy to send a
+> > patch to add them once I have a solution.
 > 
->> I also fixed a similar issue with wget (net/lwip/wget.c) but I
->> noticed that the NET version of wget has the same issue:
->>
->> U-Boot> wget 200000 192.168.0.30:helloworld.efi
->> Waiting for Ethernet connection... done.
->> HTTP/1.0 200 OK
->> Packets received 13, Transfer Successful
->> Bytes transferred = 12720 (31b0 hex)
->> U-Boot> bootefi 200000
->> No UEFI binary known at 200000
->> U-Boot>
->>
->> Should I also fix it in the same way? Or did I miss something? How
->> are you supposed to boot an EFI image downloaded via wget?
+> You should be able to update /chosen/stdout-path (in the devicetree)
+> to specify the UART you want, using its alias. So if you have a
+> 'serial1' alias, you can set stdout-path to 'serial1'. This should
+> work in Linux too.
 > 
-> A lack of tests for wget + EFI is how we got here, so thanks for finding
-> the bug. For the sake of cleaner tests, can you please fix the legacy
-> one as well, and add a test similar to the tftp one, but for wget?
-> 
+> The code in question is serial_find_console_or_panic().
 
-wget test added to v8.
+While this may reflect how modern Linux handles things, this doesn't
+actually make a lot of sense to me.  And the clue is really in the
+name of the node under which the stdout-path resides.  That property
+is supposed to communicate to the OS what the firmware/bootloader
+picked as the console device rather than indicate to the
+firmware/bootloader what the console device should be.  This was how
+things worked back in the days of OpenFirmware where the firmware
+would pick an input and an output device based on firmware variables
+and whether a keyboard was plugged in or not and would set "stdin" and
+"stdout" properties under /chosen to reflect the choice made by the
+firmware.
 
-Thanks,
--- 
-Jerome
+With this in mind it would make total sense to have U-Boot set
+/chosen/stdout-path based on some environment variable or other
+information.  Of course it might still make sense that the device tree
+used by U-Boot sets /chosen/stdout-path to indicate the default choice
+for the console device.  But it doesn't make senso to me to tell users
+that if they want to use a different console device they should go and
+edit the device tree...
+
+Cheers,
+
+Mark
