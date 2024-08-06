@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24AF1C3DA64
-	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 04:39:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11BECC3DA64
+	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 04:39:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D9D6889AA;
-	Tue,  6 Aug 2024 06:39:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E26A1889CD;
+	Tue,  6 Aug 2024 06:39:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S6aP0oFM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BOPNVnIu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A3A38898E; Tue,  6 Aug 2024 06:39:11 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id DA734889CB; Tue,  6 Aug 2024 06:39:14 +0200 (CEST)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13627889B8
- for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 06:39:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 902D9889BB
+ for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 06:39:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-1ff4568676eso3686265ad.0
- for <u-boot@lists.denx.de>; Mon, 05 Aug 2024 21:39:09 -0700 (PDT)
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-1fd6ed7688cso3662295ad.3
+ for <u-boot@lists.denx.de>; Mon, 05 Aug 2024 21:39:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722919143; x=1723523943; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=dJua7/v5vqeUZTPDRhBrBECI3dd3NVeXh5BlD/7ZKQE=;
- b=S6aP0oFM2Mzub2EJwrTSNDTUkwcmmLtjGUqk+quS+6c/4L2i+dFZG9Lb9PfVglRzO1
- PpbAr+i8x9XSH7QBjEHagcyfXfrkJOxuwXN/2BOKOBV95ENGtSnFRUVL0cfcnZubBAnv
- 57IGN+8aTJdKGvU93UqvQbSuCJjW89G70Rxxr1qg3cRQPR59lDHQz17VL7FXxXazfRkA
- 0JWarQIDZnd+tQLNqGcgOEhrb32BkC7zpG1wF/iWIYgTb8RP614REghr0YFh9ph5Icqm
- TyGR2E9JphTcyhK5Kcowa7C+T/MJYRIAz+tPvx7ktdLwF8n9grza0E/fQGDTdX78hKZu
- xchA==
+ d=gmail.com; s=20230601; t=1722919146; x=1723523946; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ukeCMLwYRHDf2yq7KGfmMBIhPCpdtd9C7ivv0G4sgRo=;
+ b=BOPNVnIuFTiXg8Yq/7gLB6S/bQ+UBxY6JD+nTwf6Xk211gtLIf0KcDI/XN8sz7Ap+e
+ U/NLcIs6xTwc5kYpE1YxEWHgX0jlSrqKlPZccvPWu5wsvReX9MW37CI5iDohmrsrOFJ4
+ 1EhbPlVQ8nK0Z47FYKRwQayPU0rKrsRGkzFlD7pXAZHUdILobFEAom0QTgRvRUy3jEz4
+ WEocQT6IEO7ihtgye0+yltohGRVlssq7UvYgelxEqrI0zNEqhkWEx5POIRhbTqstklaR
+ cBYRmox6NoUX37ekXXNcQKM8vVPGezFW9QOESBbhg3YNzHJz50bkOU+p8qsnGDz/9Y2T
+ /RIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722919143; x=1723523943;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dJua7/v5vqeUZTPDRhBrBECI3dd3NVeXh5BlD/7ZKQE=;
- b=E1xZ8X9SjO2yWpobJO75WQdxe7RPYfDOaK1RLKObQwR/IXR74Jhz7N6fXsYxRL3/fB
- d5lJk5Tq8HFey6xZvrVHaOu5rCmRxn7EyysrDu+JSTGTfEOwmvm/iyfRfMtBHBwDAgjv
- 5TOmAM2WSgkVYrkDGEx/qGaqBJDkS6ivvdEA75ZkwNrGiq1fFfuoXpjs2sbxkRDACAvh
- UR2PJd+dOBExAfoFGMM2ziivSMed4sBJhK2tNB8MaJ5+fMO4XSAmZsHoEP+vqlmefT5Z
- hBVmtsN8TS3DP1n2Er/4rNHoWFtLuS1gchyK62IP0OhbKhvmDKwvGMKXsClT2577JKBZ
- vF5w==
+ d=1e100.net; s=20230601; t=1722919146; x=1723523946;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ukeCMLwYRHDf2yq7KGfmMBIhPCpdtd9C7ivv0G4sgRo=;
+ b=gTWME+U8xEqlLeJwlVO2HN33tTobOmKlQaIrJwDEJsFAhDoo7vAfJsKgN3C5LOa5wm
+ GrsD4l3GFIoWqG8L5Y2A1I3/JDpE91SUxPosqlCumrHXqIMmWVHwIgxinE14p4Dcr4HU
+ 1l2wkliT1HdA80YB9XgObCLYl90H3A2atMz0YmUUcmbxWlq5K1M7zr+h2Be+51ReSbIQ
+ 32aEKsKoCHVIc7nSqLv4+qibN68VGY5hwHpUUiqjuJdAGJfjaQcOTlP5PaH1GrUelxcr
+ YKuT8uuWr9Zx1BgbH/4qepd4oUXBmzxPy5rNlctHuHaZHPrwvzriJFsXpzIxlc70hSGt
+ LxXA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWAzTO67Ei+IaE7TLQgeUlgxGLo08+oh3v9eG4iZx2HYXC8dtzXmBtVv7c3GCRVQScGKReDSILvVwndG0Smtu29BtHzyw==
-X-Gm-Message-State: AOJu0Yx83umC/c+vC7M/3g83IyCV6BsEuS/v1EdFuCY2/k/HPCSDdAtW
- QxC7edF6ahBVMh08Tso+Yk/i7pde/FNxGD/dhNR8nvLwh6Xkly44
-X-Google-Smtp-Source: AGHT+IGBoo2BN6vnflqUo76Mk1RyQ/HTP3qO2AiCEnTS3NqxuBNHkinnKVlxcfTKvbZ4/U40He4v2g==
-X-Received: by 2002:a17:902:ea10:b0:1fd:74ac:e6b6 with SMTP id
- d9443c01a7336-1ff57281c3fmr153628695ad.24.1722919143181; 
- Mon, 05 Aug 2024 21:39:03 -0700 (PDT)
+ AJvYcCUqGNu/ZG3MDYHsf6F1YpmdqnNExdTjchWnerRPxIaCCXiDuSawHXwJYLGz8ZIL4ZwTbY1G/vwMy9HJwnXWcfojhU/WpQ==
+X-Gm-Message-State: AOJu0YwyXtiTPTb0fZb24IUgIcnk6B6qbdZusFzt40NVvROmZlHwexsY
+ JgSRlUyf4UxJXElkF7Ba+UIEW3VIUIjztk9TJRndC556oTtODuEdSpjOPQ==
+X-Google-Smtp-Source: AGHT+IFHsKUgR8W/URqMgGBGZjct2I2IpXbLC7obKMr58V/8EbQN2bpnTbO9Rl1KvUpupJtxetqR5g==
+X-Received: by 2002:a17:903:1ca:b0:1fd:a72a:f44 with SMTP id
+ d9443c01a7336-1ff57261dc8mr146021385ad.17.1722919146001; 
+ Mon, 05 Aug 2024 21:39:06 -0700 (PDT)
 Received: from localhost.localdomain ([113.30.217.222])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20077164e0esm5823485ad.185.2024.08.05.21.39.00
+ d9443c01a7336-20077164e0esm5823485ad.185.2024.08.05.21.39.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Aug 2024 21:39:02 -0700 (PDT)
+ Mon, 05 Aug 2024 21:39:05 -0700 (PDT)
 From: Anand Moon <linux.amoon@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
  Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
 Cc: Anand Moon <linux.amoon@gmail.com>
-Subject: [PATCH v1 00/12] Bind Syscon driver with OF_REAL
-Date: Tue,  6 Aug 2024 04:38:37 +0000
-Message-ID: <20240806043849.3607-1-linux.amoon@gmail.com>
+Subject: [PATCH v1 01/12] arm: rockchip: rk3399: Remove unused syscon drivers
+ code
+Date: Tue,  6 Aug 2024 04:38:38 +0000
+Message-ID: <20240806043849.3607-2-linux.amoon@gmail.com>
 X-Mailer: git-send-email 2.46.0
+In-Reply-To: <20240806043849.3607-1-linux.amoon@gmail.com>
+References: <20240806043849.3607-1-linux.amoon@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,40 +96,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Bind syscon driver with dm_scan_fdt_dev
-As OF_PLATDATA is no longer enabled, the related
+Since commit 95397385091d ("treewide: Use OF_REAL instead of !OF_PLATDATA"),
+the OF_PLATDATA code, As OF_PLATDATA is no longer enabled, the related
 code is removed.
 
-Compiled and tested on RK3399 and RV1126 board.
+Signed-off-by: Anand Moon <linux.amoon@gmail.com>
+---
+ arch/arm/mach-rockchip/rk3399/syscon_rk3399.c | 45 -------------------
+ 1 file changed, 45 deletions(-)
 
-Thanks
--Anand
-
-Anand Moon (12):
-  arm: rockchip: rk3399: Remove unused syscon drivers code
-  arch: rockchip: rv1126: Update syscon driver binding method
-  arm: rockchip: rv1126: Remove unused syscon drivers code
-  arm: rockchip: px30: Remove unused syscon drivers code
-  arch: rockchip: rk3066: Update syscon driver binding method
-  arm: rockchip: rk3066: Remove unused syscon drivers code
-  arch: rockchip: rk3368: Update syscon driver binding method
-  arm: rockchip: rk3368: Remove unused syscon drivers code
-  arch: rockchip: rk3188: Update syscon driver binding method
-  arm: rockchip: rk3188: Remove unused syscon drivers code
-  arch: rockchip: rk3288: Update syscon driver binding method
-  arm: rockchip: rk3288: Remove unused syscon drivers code
-
- arch/arm/mach-rockchip/px30/syscon_px30.c     |  31 ----
- arch/arm/mach-rockchip/rk3066/syscon_rk3066.c |  34 +---
- arch/arm/mach-rockchip/rk3188/syscon_rk3188.c |  34 +---
- arch/arm/mach-rockchip/rk3288/syscon_rk3288.c | 157 +-----------------
- arch/arm/mach-rockchip/rk3368/syscon_rk3368.c |  41 +----
- arch/arm/mach-rockchip/rk3399/syscon_rk3399.c |  45 -----
- arch/arm/mach-rockchip/rv1126/syscon_rv1126.c |  27 +--
- 7 files changed, 14 insertions(+), 355 deletions(-)
-
-
-base-commit: 6becf9ba1ab82af6f4fcf9f4d0da38f9c75212d2
+diff --git a/arch/arm/mach-rockchip/rk3399/syscon_rk3399.c b/arch/arm/mach-rockchip/rk3399/syscon_rk3399.c
+index b92ad54ede5..5895fa373ec 100644
+--- a/arch/arm/mach-rockchip/rk3399/syscon_rk3399.c
++++ b/arch/arm/mach-rockchip/rk3399/syscon_rk3399.c
+@@ -25,48 +25,3 @@ U_BOOT_DRIVER(syscon_rk3399) = {
+ #endif
+ 	.of_match = rk3399_syscon_ids,
+ };
+-
+-#if CONFIG_IS_ENABLED(OF_PLATDATA)
+-static int rk3399_syscon_bind_of_plat(struct udevice *dev)
+-{
+-	dev->driver_data = dev->driver->of_match->data;
+-	debug("syscon: %s %d\n", dev->name, (uint)dev->driver_data);
+-
+-	return 0;
+-}
+-
+-U_BOOT_DRIVER(rockchip_rk3399_grf) = {
+-	.name = "rockchip_rk3399_grf",
+-	.id = UCLASS_SYSCON,
+-	.of_match = rk3399_syscon_ids,
+-	.bind = rk3399_syscon_bind_of_plat,
+-};
+-
+-U_BOOT_DRIVER(rockchip_rk3399_pmugrf) = {
+-	.name = "rockchip_rk3399_pmugrf",
+-	.id = UCLASS_SYSCON,
+-	.of_match = rk3399_syscon_ids + 1,
+-	.bind = rk3399_syscon_bind_of_plat,
+-};
+-
+-U_BOOT_DRIVER(rockchip_rk3399_pmusgrf) = {
+-	.name = "rockchip_rk3399_pmusgrf",
+-	.id = UCLASS_SYSCON,
+-	.of_match = rk3399_syscon_ids + 2,
+-	.bind = rk3399_syscon_bind_of_plat,
+-};
+-
+-U_BOOT_DRIVER(rockchip_rk3399_cic) = {
+-	.name = "rockchip_rk3399_cic",
+-	.id = UCLASS_SYSCON,
+-	.of_match = rk3399_syscon_ids + 3,
+-	.bind = rk3399_syscon_bind_of_plat,
+-};
+-
+-U_BOOT_DRIVER(rockchip_rk3399_pmu) = {
+-	.name = "rockchip_rk3399_pmu",
+-	.id = UCLASS_SYSCON,
+-	.of_match = rk3399_syscon_ids + 4,
+-	.bind = rk3399_syscon_bind_of_plat,
+-};
+-#endif
 -- 
 2.46.0
 
