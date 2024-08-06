@@ -4,83 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E8A3C3DA64
-	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 15:33:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBCCCC52D70
+	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 15:36:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A61D88A23;
-	Tue,  6 Aug 2024 17:33:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 3149D88ABF;
+	Tue,  6 Aug 2024 17:36:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="d3Ka0Pxn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NOB6Dw6G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01DAD88A1E; Tue,  6 Aug 2024 17:33:06 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 27B3C88AB4; Tue,  6 Aug 2024 17:36:03 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF41088AA9
- for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 17:33:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7251488A1E
+ for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 17:36:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-42817f1eb1fso5697095e9.1
- for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 08:33:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-70938328a0aso395728a34.1
+ for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 08:36:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1722958382; x=1723563182;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=u/0i9wm+HH+4u8lWtp+TaFHrvn3t89KvsTssqkwGzjs=;
- b=d3Ka0PxnbcNi4aK5ZxfIpRCQP2PtznvdW/PoOveK+T7eIhXdXVFbGzCDs22f8aowFo
- 8Zj/63N9Fb6WPUuIWmcxyPAX6fNf8etHBG4hQODFwwq7Bcgxs73hFxrozLXTcj4KIkLi
- tFcfya9QQ9O6agTnBhBVx5lTknAOt+ZRa93jNaVWEyoUUN/0vtNLvogAdYiLTB7c9uOr
- g8WWZ6KUHpoiNc4bfaFryrj9+2XGV5OLcW1bxEKPRHcKJvG3ufXs8OORsgJXtPBlZA/y
- bqFpwfmMzjKDpxy/WO1YTRL4QdZSURbGBgpYJy1mQ+n0nsHZXjofM6IZLxzW8w8snY7n
- hraA==
+ d=konsulko.com; s=google; t=1722958552; x=1723563352; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/HbpJKBNEGymHE8zzHclTr31Hfm3oN/es2vYJuRl5jg=;
+ b=NOB6Dw6G2PR6HV/ASjiHVwXBBs3iVeEHMo+HqpOWmtheswCPvoXLrZ+WqG6l89WlQr
+ 9uulBnoJeswEo1aPy8wcImrUeJJOA6xzr4dwbFQARjHoAypYN4Z/fr8GbqAQOCTGLH8E
+ 6KbDPvW4sgfF4np07gnwWO13661os20Q49vao=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722958382; x=1723563182;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=u/0i9wm+HH+4u8lWtp+TaFHrvn3t89KvsTssqkwGzjs=;
- b=Yql1Go46VtUcHm4xWjBNquBCbwBuvGSI8BZ793YPwFrxIC+drRe458ay6qsI2fcqjQ
- NTxJcK2jSL9CO+ECKyl0fhg/34mUMOH/uLT/oM4dPHXu1yE65a2XSOVPhJ3Zg30/GzzV
- XP+o+is2YF8mF8ByubLPZod7iqGMrBTmB8hxpDnLWax/ODD6+i5ZC377R4m7DYuT7O0G
- 2K0g5ZLMhkgUaCn42hPZEqUXzzV1uiyRKPKugydFdS700RsYr+VL2bzM035ik2aIPIHC
- fJqu5cvsAQ/UZqDLHWgkTqfozlJ8KMJ0bdqfW4eeGB4tfni8+mCFf7L4i9g5H1us+pRI
- BBnA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVEB2dp+dCXXlrD/35lSI9LEJWuJlnJSXz5HKB3kZEGPmkwdern9luKCExesyRpyPWRXKAUivGR9x/fElVq4Web+G56NA==
-X-Gm-Message-State: AOJu0YzQiB/kGpzygDKy9g7zfsOBk7OM3EWE1QlT5PNO4hQAM4Crsvd6
- DGSAw8j4zN4AQCoe0yc3hmd64Itq4DvfoXCGT4mSRZdwQ6bbkUJi8zz9gD+ThD0=
-X-Google-Smtp-Source: AGHT+IEsx8kZIKU7vxPvsIGXm4yoXkD70P9A7cYfnffTgatcCNUWmkK1cmCh06FewNkSLEHrbZEanw==
-X-Received: by 2002:a05:600c:35c2:b0:428:f79:1836 with SMTP id
- 5b1f17b1804b1-428e6b7e74dmr112287575e9.26.1722958381833; 
- Tue, 06 Aug 2024 08:33:01 -0700 (PDT)
-Received: from localhost ([2a01:cb19:8f40:f900:f167:cb53:a707:1347])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-428e6e9e924sm182335935e9.48.2024.08.06.08.33.01
+ d=1e100.net; s=20230601; t=1722958552; x=1723563352;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/HbpJKBNEGymHE8zzHclTr31Hfm3oN/es2vYJuRl5jg=;
+ b=i5u6fBOyBz2ioJQqYrxSCljHiH6/1Nm7l1F629LRd32L7fj5VlTZ1toEgZNmvKGs44
+ hChwYkq2VIoDYFC0bpL01loEeeRAwjoZPq2ikN7XrRtvAT/ilyAMcdlCCu3dg+ZGYX8B
+ c3VLXXZy1/lZm6F/7WDTgv8VLGB125IIBaBS69qZRWKZbj2lIRwphgPi96OnFeOrpKHA
+ m0+A+a9glrP1wavZ7vQT5ISc141omn7sfIXvFpK/+ATuHCqociP5EBlD++8lBx3KsA/Y
+ huZWyAZU0JEJ5LHKbuY2767LTagdTwzBMrtAEt7Sio5xDILf+m6jatGPK3t20a4UGihb
+ saRQ==
+X-Gm-Message-State: AOJu0YwtcwlGjq8VTUMgWr6h/Vjt5Lg4lGZc5Nzdq4STKIue4twnv65g
+ ckIJ1Z8EwF9TulILz0MYrmAA+bKhdzzGS5IQsQ9YAlAT+KH5fOQuWltbbjyBHZY=
+X-Google-Smtp-Source: AGHT+IEShfWMQXLGHsGA59Ce6/X4nZ9X9j7kL0ujspzjNOQehvHdJkMLNnAWb+Fd6NyTAELpJnTrvQ==
+X-Received: by 2002:a05:6830:3707:b0:708:b344:fed8 with SMTP id
+ 46e09a7af769-709b99791aemr16097088a34.33.1722958552446; 
+ Tue, 06 Aug 2024 08:35:52 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-103-190.totalplay.net.
+ [189.203.103.190]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-70a31ec3713sm4017615a34.44.2024.08.06.08.35.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Aug 2024 08:33:01 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Richard Weinberger <richard@nod.at>, u-boot@lists.denx.de
-Cc: upstream+uboot@sigma-star.at, francis.laniel@amarulasolutions.com,
- glaroque@baylibre.com, sjg@chromium.org,
- christian.taedcke@weidmueller.com, trini@konsulko.com, Richard Weinberger
- <richard@nod.at>
-Subject: Re: [PATCH 2/3] test_fs: Rename mount dir to scratch
-In-Reply-To: <20240802093322.15240-2-richard@nod.at>
-References: <20240802093322.15240-1-richard@nod.at>
- <20240802093322.15240-2-richard@nod.at>
-Date: Tue, 06 Aug 2024 17:32:58 +0200
-Message-ID: <87plqloedx.fsf@baylibre.com>
+ Tue, 06 Aug 2024 08:35:51 -0700 (PDT)
+Date: Tue, 6 Aug 2024 09:35:48 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Michal Simek <monstr@monstr.eu>, Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [GIT PULL] xilinx patches for v2024.07-rc3
+Message-ID: <20240806153548.GA1626301@bill-the-cat>
+References: <a28e06df-b7c5-47d2-95de-aad4558d8f23@monstr.eu>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="xFJhhSZbB7fYBF4J"
+Content-Disposition: inline
+In-Reply-To: <a28e06df-b7c5-47d2-95de-aad4558d8f23@monstr.eu>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,251 +89,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Richard,
 
-Thank you for the patch.
+--xFJhhSZbB7fYBF4J
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On ven., ao=C3=BBt 02, 2024 at 11:33, Richard Weinberger <richard@nod.at> w=
-rote:
+On Tue, Aug 06, 2024 at 08:02:37AM +0200, Michal Simek wrote:
 
-> Since no mounting happens anymore, rename the "mnt"
-> directory to "scratch" and the related variables.
->
-> Signed-off-by: Richard Weinberger <richard@nod.at>
-> ---
->  test/py/tests/test_fs/conftest.py | 66 +++++++++++++++----------------
->  1 file changed, 33 insertions(+), 33 deletions(-)
->
-> diff --git a/test/py/tests/test_fs/conftest.py b/test/py/tests/test_fs/co=
-nftest.py
-> index 59342a6e3d..af2adaf164 100644
-> --- a/test/py/tests/test_fs/conftest.py
-> +++ b/test/py/tests/test_fs/conftest.py
-> @@ -178,13 +178,13 @@ def fs_obj_basic(request, u_boot_config):
->      fs_ubtype =3D fstype_to_ubname(fs_type)
->      check_ubconfig(u_boot_config, fs_ubtype)
->=20=20
-> -    mount_dir =3D u_boot_config.persistent_data_dir + '/mnt'
-> +    scratch_dir =3D u_boot_config.persistent_data_dir + '/scratch'
->=20=20
-> -    small_file =3D mount_dir + '/' + SMALL_FILE
-> -    big_file =3D mount_dir + '/' + BIG_FILE
-> +    small_file =3D scratch_dir + '/' + SMALL_FILE
-> +    big_file =3D scratch_dir + '/' + BIG_FILE
->=20=20
->      try:
-> -        check_call('mkdir -p %s' % mount_dir, shell=3DTrue)
-> +        check_call('mkdir -p %s' % scratch_dir, shell=3DTrue)
->      except CalledProcessError as err:
->          pytest.skip('Preparing mount folder failed for filesystem: ' + f=
-s_type + '. {}'.format(err))
+> Hi Tom,
+>=20
+> please pull these patches to your tree. I created tag yesterday and push =
+it
+> to gitlab to see issues and rc2 has been created that's why apologize that
+> my tag is using rc2. There are new mini defconfigs but they can't break
+> anything.
+>=20
+> I am aware about one issue which is in the tree for a while. Please take =
+a look at
+> https://lore.kernel.org/all/CAHTX3d+qAMKgL9T5Fo6y=3DrvXDiMS_mCiCEGazHt07e=
+iVN32Fgw@mail.gmail.com/#t
+> but I didn't get any reaction from Simon about it yet.
 
-Should we update the error message here as well?
-'Preparing scratch folder failed for filestem: '
+If Simon doesn't have any further feedback, fix it how you see fit.
 
-Same is true for similar messages below.
+>=20
+> Thanks,
+> Michal
+>=20
+> The following changes since commit 6becf9ba1ab82af6f4fcf9f4d0da38f9c75212=
+d2:
+>=20
+>   Merge tag 'u-boot-imx-master-20240802' of
+> https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2024-08-02 14:40:59
+> -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   git@source.denx.de:u-boot/custodians/u-boot-microblaze.git
+> tags/xilinx-for-v2024.10-rc2
+>=20
+> for you to fetch changes up to 81b28310628fdfde5e4cbee7a947dad0fc717eb8:
+>=20
+>   soc: zynqmp: Add support for zu1eg_lr device (2024-08-05 16:14:10 +0200)
+>=20
 
-With that fixed:
+Applied to u-boot/master, thanks!
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+--=20
+Tom
 
->          call('rm -f %s' % fs_img, shell=3DTrue)
-> @@ -192,7 +192,7 @@ def fs_obj_basic(request, u_boot_config):
->=20=20
->      try:
->          # Create a subdirectory.
-> -        check_call('mkdir %s/SUBDIR' % mount_dir, shell=3DTrue)
-> +        check_call('mkdir %s/SUBDIR' % scratch_dir, shell=3DTrue)
->=20=20
->          # Create big file in this image.
->          # Note that we work only on the start 1MB, couple MBs in the 2GB=
- range
-> @@ -253,7 +253,7 @@ def fs_obj_basic(request, u_boot_config):
->=20=20
->          try:
->              # 3GiB volume
-> -            fs_img =3D fs_helper.mk_fs(u_boot_config, fs_type, 0xc000000=
-0, '3GB', mount_dir)
-> +            fs_img =3D fs_helper.mk_fs(u_boot_config, fs_type, 0xc000000=
-0, '3GB', scratch_dir)
->          except CalledProcessError as err:
->              pytest.skip('Creating failed for filesystem: ' + fs_type + '=
-. {}'.format(err))
->              return
-> @@ -264,7 +264,7 @@ def fs_obj_basic(request, u_boot_config):
->      else:
->          yield [fs_ubtype, fs_img, md5val]
->      finally:
-> -        call('rm -rf %s' % mount_dir, shell=3DTrue)
-> +        call('rm -rf %s' % scratch_dir, shell=3DTrue)
->          call('rm -f %s' % fs_img, shell=3DTrue)
->=20=20
->  #
-> @@ -288,13 +288,13 @@ def fs_obj_ext(request, u_boot_config):
->      fs_ubtype =3D fstype_to_ubname(fs_type)
->      check_ubconfig(u_boot_config, fs_ubtype)
->=20=20
-> -    mount_dir =3D u_boot_config.persistent_data_dir + '/mnt'
-> +    scratch_dir =3D u_boot_config.persistent_data_dir + '/scratch'
->=20=20
-> -    min_file =3D mount_dir + '/' + MIN_FILE
-> -    tmp_file =3D mount_dir + '/tmpfile'
-> +    min_file =3D scratch_dir + '/' + MIN_FILE
-> +    tmp_file =3D scratch_dir + '/tmpfile'
->=20=20
->      try:
-> -        check_call('mkdir -p %s' % mount_dir, shell=3DTrue)
-> +        check_call('mkdir -p %s' % scratch_dir, shell=3DTrue)
->      except CalledProcessError as err:
->          pytest.skip('Preparing mount folder failed for filesystem: ' + f=
-s_type + '. {}'.format(err))
->          call('rm -f %s' % fs_img, shell=3DTrue)
-> @@ -302,7 +302,7 @@ def fs_obj_ext(request, u_boot_config):
->=20=20
->      try:
->          # Create a test directory
-> -        check_call('mkdir %s/dir1' % mount_dir, shell=3DTrue)
-> +        check_call('mkdir %s/dir1' % scratch_dir, shell=3DTrue)
->=20=20
->          # Create a small file and calculate md5
->          check_call('dd if=3D/dev/urandom of=3D%s bs=3D1K count=3D20'
-> @@ -343,7 +343,7 @@ def fs_obj_ext(request, u_boot_config):
->=20=20
->          try:
->              # 128MiB volume
-> -            fs_img =3D fs_helper.mk_fs(u_boot_config, fs_type, 0x8000000=
-, '128MB', mount_dir)
-> +            fs_img =3D fs_helper.mk_fs(u_boot_config, fs_type, 0x8000000=
-, '128MB', scratch_dir)
->          except CalledProcessError as err:
->              pytest.skip('Creating failed for filesystem: ' + fs_type + '=
-. {}'.format(err))
->              return
-> @@ -354,7 +354,7 @@ def fs_obj_ext(request, u_boot_config):
->      else:
->          yield [fs_ubtype, fs_img, md5val]
->      finally:
-> -        call('rm -rf %s' % mount_dir, shell=3DTrue)
-> +        call('rm -rf %s' % scratch_dir, shell=3DTrue)
->          call('rm -f %s' % fs_img, shell=3DTrue)
->=20=20
->  #
-> @@ -409,10 +409,10 @@ def fs_obj_unlink(request, u_boot_config):
->      fs_ubtype =3D fstype_to_ubname(fs_type)
->      check_ubconfig(u_boot_config, fs_ubtype)
->=20=20
-> -    mount_dir =3D u_boot_config.persistent_data_dir + '/mnt'
-> +    scratch_dir =3D u_boot_config.persistent_data_dir + '/scratch'
->=20=20
->      try:
-> -        check_call('mkdir -p %s' % mount_dir, shell=3DTrue)
-> +        check_call('mkdir -p %s' % scratch_dir, shell=3DTrue)
->      except CalledProcessError as err:
->          pytest.skip('Preparing mount folder failed for filesystem: ' + f=
-s_type + '. {}'.format(err))
->          call('rm -f %s' % fs_img, shell=3DTrue)
-> @@ -420,29 +420,29 @@ def fs_obj_unlink(request, u_boot_config):
->=20=20
->      try:
->          # Test Case 1 & 3
-> -        check_call('mkdir %s/dir1' % mount_dir, shell=3DTrue)
-> +        check_call('mkdir %s/dir1' % scratch_dir, shell=3DTrue)
->          check_call('dd if=3D/dev/urandom of=3D%s/dir1/file1 bs=3D1K coun=
-t=3D1'
-> -                                    % mount_dir, shell=3DTrue)
-> +                                    % scratch_dir, shell=3DTrue)
->          check_call('dd if=3D/dev/urandom of=3D%s/dir1/file2 bs=3D1K coun=
-t=3D1'
-> -                                    % mount_dir, shell=3DTrue)
-> +                                    % scratch_dir, shell=3DTrue)
->=20=20
->          # Test Case 2
-> -        check_call('mkdir %s/dir2' % mount_dir, shell=3DTrue)
-> +        check_call('mkdir %s/dir2' % scratch_dir, shell=3DTrue)
->          for i in range(0, 20):
->              check_call('mkdir %s/dir2/0123456789abcdef%02x'
-> -                                    % (mount_dir, i), shell=3DTrue)
-> +                                    % (scratch_dir, i), shell=3DTrue)
->=20=20
->          # Test Case 4
-> -        check_call('mkdir %s/dir4' % mount_dir, shell=3DTrue)
-> +        check_call('mkdir %s/dir4' % scratch_dir, shell=3DTrue)
->=20=20
->          # Test Case 5, 6 & 7
-> -        check_call('mkdir %s/dir5' % mount_dir, shell=3DTrue)
-> +        check_call('mkdir %s/dir5' % scratch_dir, shell=3DTrue)
->          check_call('dd if=3D/dev/urandom of=3D%s/dir5/file1 bs=3D1K coun=
-t=3D1'
-> -                                    % mount_dir, shell=3DTrue)
-> +                                    % scratch_dir, shell=3DTrue)
->=20=20
->          try:
->              # 128MiB volume
-> -            fs_img =3D fs_helper.mk_fs(u_boot_config, fs_type, 0x8000000=
-, '128MB', mount_dir)
-> +            fs_img =3D fs_helper.mk_fs(u_boot_config, fs_type, 0x8000000=
-, '128MB', scratch_dir)
->          except CalledProcessError as err:
->              pytest.skip('Creating failed for filesystem: ' + fs_type + '=
-. {}'.format(err))
->              return
-> @@ -453,7 +453,7 @@ def fs_obj_unlink(request, u_boot_config):
->      else:
->          yield [fs_ubtype, fs_img]
->      finally:
-> -        call('rm -rf %s' % mount_dir, shell=3DTrue)
-> +        call('rm -rf %s' % scratch_dir, shell=3DTrue)
->          call('rm -f %s' % fs_img, shell=3DTrue)
->=20=20
->  #
-> @@ -477,13 +477,13 @@ def fs_obj_symlink(request, u_boot_config):
->      fs_ubtype =3D fstype_to_ubname(fs_type)
->      check_ubconfig(u_boot_config, fs_ubtype)
->=20=20
-> -    mount_dir =3D u_boot_config.persistent_data_dir + '/mnt'
-> +    scratch_dir =3D u_boot_config.persistent_data_dir + '/scratch'
->=20=20
-> -    small_file =3D mount_dir + '/' + SMALL_FILE
-> -    medium_file =3D mount_dir + '/' + MEDIUM_FILE
-> +    small_file =3D scratch_dir + '/' + SMALL_FILE
-> +    medium_file =3D scratch_dir + '/' + MEDIUM_FILE
->=20=20
->      try:
-> -        check_call('mkdir -p %s' % mount_dir, shell=3DTrue)
-> +        check_call('mkdir -p %s' % scratch_dir, shell=3DTrue)
->      except CalledProcessError as err:
->          pytest.skip('Preparing mount folder failed for filesystem: ' + f=
-s_type + '. {}'.format(err))
->          call('rm -f %s' % fs_img, shell=3DTrue)
-> @@ -491,7 +491,7 @@ def fs_obj_symlink(request, u_boot_config):
->=20=20
->      try:
->          # Create a subdirectory.
-> -        check_call('mkdir %s/SUBDIR' % mount_dir, shell=3DTrue)
-> +        check_call('mkdir %s/SUBDIR' % scratch_dir, shell=3DTrue)
->=20=20
->          # Create a small file in this image.
->          check_call('dd if=3D/dev/urandom of=3D%s bs=3D1M count=3D1'
-> @@ -513,7 +513,7 @@ def fs_obj_symlink(request, u_boot_config):
->=20=20
->          try:
->              # 1GiB volume
-> -            fs_img =3D fs_helper.mk_fs(u_boot_config, fs_type, 0x4000000=
-0, '1GB', mount_dir)
-> +            fs_img =3D fs_helper.mk_fs(u_boot_config, fs_type, 0x4000000=
-0, '1GB', scratch_dir)
->          except CalledProcessError as err:
->              pytest.skip('Creating failed for filesystem: ' + fs_type + '=
-. {}'.format(err))
->              return
-> @@ -524,7 +524,7 @@ def fs_obj_symlink(request, u_boot_config):
->      else:
->          yield [fs_ubtype, fs_img, md5val]
->      finally:
-> -        call('rm -rf %s' % mount_dir, shell=3DTrue)
-> +        call('rm -rf %s' % scratch_dir, shell=3DTrue)
->          call('rm -f %s' % fs_img, shell=3DTrue)
->=20=20
->  #
-> --=20
-> 2.35.3
+--xFJhhSZbB7fYBF4J
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmayQs0ACgkQFHw5/5Y0
+tyzpFAwAs8ObmZUzeHmuJ2kkf54mxRZ5sZmh0AHj0+oSVOml4kwANbo0qMeICskT
+9ABgdxTxmRKtHQGgaZpMuz53XYxPmcDRgKBMW/VDl0ypX1QJ1X83GISZFAyprqOC
+/8YapTMXsyeziwDXOTCL7PlzyrEbhgq0TexgqvYc2CsWUmp0hY+i+BrqR/F+BCAy
+zDCEyLRGjp6odLmdLrZ/jo0S0cknkkbr5kqcXFJbKhX40e8RUganOPN4Kdx3dwBI
+uh+d/6w6yistaVLK4g2Gfx7Fwjt2UitwtC6HaKrppDPla3zBeLzm0NAy7McAQGuU
+H/whYugdpiNc96mXdNW6cRURRSvxcKVDlaqHHlVSDcSRP2WU7sUHL3ewLDkgftvP
+ZlUKIhEyUg+LWvUComcb9S+Nvab1LwTpGH0h2F2Vk5BsiybcH9zpIR9jAYOAm7D2
+6j2csvF2J73Nme7OTSGz1p9MEFOCcCkN3rz9ukIGwFdmmWrRM7rjo+O4FmLeZ8+k
+iQoJ9GTm
+=4XVQ
+-----END PGP SIGNATURE-----
+
+--xFJhhSZbB7fYBF4J--
