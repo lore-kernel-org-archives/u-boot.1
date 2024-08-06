@@ -4,160 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1791FC3DA64
-	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 14:47:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C697C3DA64
+	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 14:53:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EE9288A38;
-	Tue,  6 Aug 2024 16:47:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E8EAB87F19;
+	Tue,  6 Aug 2024 16:53:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="PF65zyYl";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="e657n87F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C88FF88A85; Tue,  6 Aug 2024 16:47:10 +0200 (CEST)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170110001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
+ id 2CD9A87E9D; Tue,  6 Aug 2024 16:53:16 +0200 (CEST)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on20626.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::626])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E181188813
- for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 16:47:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 01FBB88A23
+ for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 16:53:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HDGmX2EyX7jFFWzgTXapny8iLTBrSXcisXF110oObCtRcp7vHxn0/T0Jn2K7Kk0DJg/04gnZAnWKQ98NYdus5aqBiJhTRjwX2nDK+NlPkT4G9zXYyUZqgEEIdDJ37XDQ5AHoBCRZt5fqUhlkAPwQGqoerNJucw/yRjDJfeXA+9LVjX8Am5flxm1fyy4pdHCJtixj88xZQ8eHW3FIV+XxbQ4/5y3PqXb5dnLH9ZqQJMnLd5tx+PtuuWjgmcm3PrjT+SxpoxpvDYPZs97sVocrRkquO1tZrXBpxWaTXX/N3TGl9DkDWltdT7A1cjETK7nDfeDKtvxz2nIJutqWWHGF8w==
+ b=QU7fJ4N9djT1wb8qGMMyblJBC/bpjkm5/yscFpdprzD2EdOLdGZPkHuT5j9wBe8Xdag5JV24RwvRxmwuIvKprlqx7kFnzowliTys4KsVUClo9251n7k3aWdteMr6VHVtEytPNMdsEXGkJvmb0ToNLUa90UvsfhcH+WzZ7dQhUGn4C3/1hojgposMvwV0zAldusYvHaGPrJ95AU2QbtCpJKnWk3W1h+UtzalB/ZpXFcn29hi12PssoqCc8+NFqIHEgbI+Q3qmcU+jp7t0Jx7IzaHFkyqt8my3a43Lkt0gTYUeI+U5o7QOrIVr3jADgJpYB/kTyw1/Ox07/ibl6xQ6lw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=f8tP/b9+oHI209o1P1fpOhZdpXHGp3bHmUhzH6nUQDo=;
- b=J9L3+m4WwqYHO1V3cuMUiZ3cbwgI2rbPQ/hjCTPL1QE3GDSpORJKe6gHZvGzUOMCfry/4xU+PMuFFfRRjv12knW5mMcGoFpiD/iZd1BaBGBdYLDed5wgVKj17jzkRQmOj0lcuvkSB7Fb2BwdtjJi9oApMbw/FyHpvTo7QkyvyZ6SZaUqIflpNZ42Uvvy6OL8BDz99Cfa2daNFpry+xzCr6rJYw67QLpgQNPsnHAZrPQJ1mxBo8FFYRnNLw6xMxPLVidxSL2jSiuNQcPBXnAd1b/yyc772wsWOa3fgdBUP4uHtwJpLLiH97RiCQ/0YWi56+kdfxUbxRpddNPWPdiMPw==
+ bh=iKLFmGrbPYbMHJgaFbTM+JzjWnIS4pHsCaj74JoWMs4=;
+ b=Xk6twYmDxeZiirmlOVPO/51qIAYnUu3tZHITojCCtsk6e+3JXjZLNEMxVSKxZlC8DGTnDu04YriWfyfOMsMVATjZ52suQwfR3bx1ATEGUJrJ4LsjQnr/BvqE9Q/Y+Pfx2gv6Jn0Sv14tdDllTesPfi+WxIyXLSjGN6APji/ixVf308JEky7x+H2uu2Dko5OlLmvVBBZQ1KOhuoR6An+I/bZOWfl6E85xTvgU28b9RSQsK9AZRkFZrtUUVawbHxRyLBshCE+H0FvsApqagTU2xNa99QSPp2n09z0u1j29bi13sMHQmxMbL3Oalw/nG+mq5vKMEv1l75Kq49o5V0j+kw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=f8tP/b9+oHI209o1P1fpOhZdpXHGp3bHmUhzH6nUQDo=;
- b=PF65zyYlLQh/09ziPyw+Z2udrQ7+eIFvbIWoMzrXGnfrPqIzz+qUHoveem9c9+firTNO/1QJ6eX5lNsJpIaEU/Qu0OnGAe9rqAo/0+L43kq5AMDxEAp6P0/YyYNQG208wp3UMjxCVlLAzSyrEgGy9rWKRmGzD8Q5ZVZPYT6/xng=
+ bh=iKLFmGrbPYbMHJgaFbTM+JzjWnIS4pHsCaj74JoWMs4=;
+ b=e657n87FuWtPaijCB8lHQpjQebkoC8YZeMD1r9+rOlyYkpgKLJTYC8ekrfD5O4+3hb0nHfcmWCmcpzwT3KFkGDgY8QeLucUI01pwyJs8RFZA+AJATmjSp7HdBr5VRK2d57WR1qMxFkE4nbfohzHf+aUu5zo+SNd2vvYeYP0WZfE=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by PAXPR04MB8374.eurprd04.prod.outlook.com (2603:10a6:102:1bd::21)
+ by DU0PR04MB9419.eurprd04.prod.outlook.com (2603:10a6:10:35a::16)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7828.29; Tue, 6 Aug
- 2024 14:31:40 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7828.25; Tue, 6 Aug
+ 2024 14:53:06 +0000
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a%5]) with mapi id 15.20.7849.008; Tue, 6 Aug 2024
- 14:31:40 +0000
-Message-ID: <ed51012a-1123-4938-96f7-fac520c78d6c@cherry.de>
-Date: Tue, 6 Aug 2024 16:31:38 +0200
+ 14:53:06 +0000
+Message-ID: <8a2ec8f9-7226-4728-ae03-ba434f18c1f3@cherry.de>
+Date: Tue, 6 Aug 2024 16:53:04 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 10/14] spl: mmc: Adjust args of spl_mmc_find_device()
+Subject: Re: [PATCH v2 11/14] spl: mmc: Try to clean up raw-mode options
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
  <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
 References: <20240721152600.3212917-1-sjg@chromium.org>
- <20240721152600.3212917-11-sjg@chromium.org>
+ <20240721152600.3212917-12-sjg@chromium.org>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20240721152600.3212917-11-sjg@chromium.org>
+In-Reply-To: <20240721152600.3212917-12-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BE1P281CA0128.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:7a::18) To AS8PR04MB8897.eurprd04.prod.outlook.com
+X-ClientProxiedBy: WA2P291CA0002.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1e::22) To AS8PR04MB8897.eurprd04.prod.outlook.com
  (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PAXPR04MB8374:EE_
-X-MS-Office365-Filtering-Correlation-Id: 80fefa95-a8ec-45d1-b517-08dcb6247c4b
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DU0PR04MB9419:EE_
+X-MS-Office365-Filtering-Correlation-Id: c48ac120-5434-4835-30e0-08dcb6277b04
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?MG01SGllVjU4M2JDcEgrNWdDSHZUWjJGdWNDZkpSZFRMY2RVNHQ1cy96bk1I?=
- =?utf-8?B?azZHWnJVYVd6NFBMM2xCeEUvdVZMYzd0bGE5WkNhUnp4enFMZzY3SEY2Nnlu?=
- =?utf-8?B?M0d4KzVxUk9scWMyS3UwbFNRSzV2aUJqSGxqNEhPVDZHaFJUeS9RNTN3TktV?=
- =?utf-8?B?emhKcERPL1hYQmlqKzdNdDlLR2k4Tnd0YVd4anVJWHNIbTh4MTdDRDRHVXI1?=
- =?utf-8?B?eHNWMjMzd3ZNemh1MmYxZHFLZ1VsT09iWFRFM0h5MGhGY21NbjF5a3JMY3Vt?=
- =?utf-8?B?cnBqVnNCcTdNT0hJdDdhVHlQL0ptNkxTWHFJZWhVZWdERWRtNENVRXJhalJz?=
- =?utf-8?B?ZWZZQzVwKzZ1enV2bUFXRjBCTGFiVHhUN2R3V1o4SDEzWHhkbWgzcmpJKzBO?=
- =?utf-8?B?ZDJMRGF4c3ZORkdIWWFsMWFWMncxb2l0UlhOUlNzNGFlaDlZUTR1TmRvdjVR?=
- =?utf-8?B?L3ovb3Qva1NXUmhKLysyU04zamFsbFlLMVg0dC9rNWVlZi9LNFFuODdlS3VX?=
- =?utf-8?B?UGpaVkdMV2h4SlBZNVdRTUJONE00RGFCcll4ZEQ4c09YN0dWQlg1WEVkMmFL?=
- =?utf-8?B?aFNYWlYvRENMTlRycUZqbERSVTBNckY1NTNsYzZFVFJxd2ppZXRzSDRXWEll?=
- =?utf-8?B?RjE5Ym9jTmk1MDhyblRkYlFROVRZWkpGeTFDMFNVc3ZuR2p4Z1dTVDJDeHY0?=
- =?utf-8?B?dkFURzNzcFdSOVh6TDZtWkZDUUVjN1VjSzgxbHVkb25oeUtEYXZzZHdUQW1U?=
- =?utf-8?B?SHpCeng2RnVXOXNqSDhjKys4aXFUQ0ZiRTZuZXMwbmdlNXhGRmg4MXFTKy9R?=
- =?utf-8?B?ZGFVTEM3dkVIWHBhRFBWdXZscUZXWTdvKys1L1FRZ1pVZEFLNFBrMjBRSk1k?=
- =?utf-8?B?eXh4TUorU0pQb3hWbTl0Q1d1bnY3T0dsbmk4cWc3MTYvdlFseEZHcnBuSjZX?=
- =?utf-8?B?Z1RDNEViWGo1dXdxbVUrdU9XU3FIOTRFMFpZYkRFWFBjSGE3eTcxNHNsQzBn?=
- =?utf-8?B?WDZ3OFVKaWF2SlpKdmJ6cTVZUUZrSHhEdmxsV284d3ZQc1dnTUZxMDlSaHhR?=
- =?utf-8?B?b1RPS2k5Sm9talJzekEwMUR1UEE4akR4UEhscjNKc3ZHbW94WWhiWTgrNEl4?=
- =?utf-8?B?dDY3WjhjME5HWjdoMXVSUEhKdXJZWm9FMlVRUytUYkJFdm4yTEdMS0lHcExQ?=
- =?utf-8?B?YWt1UXJlWDNzR29UTXNRNVkyZzlOalZqL0s1bTdiUUoyNGlZcVgvNk9KY201?=
- =?utf-8?B?enJrNFpqWTVQTXNad3NrSFlTV2FFNmZGSkt2OFYzczlTR3hRTlNUdlg3dXZu?=
- =?utf-8?B?T0hHTDdFSFRFeWxqNTZBQm5CdzFvUmYxYXVJVG1PdzliVzNJQ1NCUFcvaHJs?=
- =?utf-8?B?UDcySERLOEtpMVhrcFV3NDlWdVozR3BFWXFrWjhHZ3hWMVRNd0pRKzNIMXov?=
- =?utf-8?B?WlBYRGZ4M0pLVC9tdlZycWlaNmtOWDhjK25yMHNRZjJHd1M3NGlHYzVKUUpT?=
- =?utf-8?B?RDI1cnprQkhremQrSlN4RUVsa2kybmdjbDRsemhGS0xjZjdMWktid21rb21L?=
- =?utf-8?B?eUxmeFBEWVF1Zm5kMVBpYUZYL0ltVlFsYnoyd1gvSlZmWWQ1cEpNL0d3dnRm?=
- =?utf-8?B?VkJuc0U1dGYrU1E0dytBOStTN09YNjExTmhQS1RvaUt6eDJwcmhNenArL3Bx?=
- =?utf-8?B?Zkk3UWZ4b0xEcElseFpEUElmRC9hcXh1SkpwS252VTBOQ2lWU0pZMkRDcTIz?=
- =?utf-8?B?TlBHaUJnUHFqVlpVUWhjMlZVVy9ORlcxMU1KK3M3V3c2WkNxbE42QmFlSEJF?=
- =?utf-8?B?YnU5STcwbFpaMDBod015QT09?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?V3J3bXJYekE4cmV2clhCMExCTmZHTTAvbDE4Qnd1aEEzeTRWbkFqKzJJeGxz?=
+ =?utf-8?B?bWxLR0VDNVMwOE1hRjRHRjc2aDJMM0pGMHFtejF2T3Q5ckVYV25LSzhTTDNn?=
+ =?utf-8?B?WEhRK3d1VTU4THNmYmExVTcrbnBSdWlnNTNGU1ZuQ3RNOExPOFlaeW1TeExv?=
+ =?utf-8?B?cDN5QllzU29yMHFTOFBsS0hKZEFJUjcwT1hWd1NITjI0NWlwSEdVTWptdy9M?=
+ =?utf-8?B?M0hNcWFuYTNPQktGaS9pa0xHMG1HVE1pMUJSVzg1bXRWQTg0a0lOL1hrcTBK?=
+ =?utf-8?B?OHVYaW1UVkFaNEZjNFBMRW1yN1lGNExBQjZ6VGtyQ0JLUkQ0K09ldWVRT3ls?=
+ =?utf-8?B?VDlydUVtbWtMWXNrZTFBSjRSVVlma1M0TG1BMnlTem5vV3pnMHhwZG5JcEhH?=
+ =?utf-8?B?WEUxWEdLSWlldElMTktxN3ovSWg1NHl5N0ZPUzR3N1NJYy8xOEJEK2VjQ0pn?=
+ =?utf-8?B?OThuZmJ6cE9PYkc5dUFYUVJHeEVHTkhhT3RUZXZEMjAxb2RPRmFTaFJlRno0?=
+ =?utf-8?B?N0JyQXBxdkNQcVZaVjF3REVUSmVOcmVNMVZFV2h6QUowajRMbk5mR0F0Wmhh?=
+ =?utf-8?B?VWVrU1ZIZGRpa1Jqc3NGbU81dmtyT0NOSGhKOGZMbk9yYXlid0ZMQkFQWU5n?=
+ =?utf-8?B?LzdMdXJJRTZ4WFBSVkhTdGJHeDRZZVF3LzZmVFcyV29nSjQ5K2x1eVhzeTFu?=
+ =?utf-8?B?TXNIc0dzSzZnQWhIOCtxckU5eU9sM0hMOGc4bmNzOEoveEVXVmxhdGxvK3cx?=
+ =?utf-8?B?c25YSjlXZEtmaVVGb2hWTHI1dWJRM2VBTW4wOGYvUk42Q3BrbTUrR2NBNmJ2?=
+ =?utf-8?B?aGxuMHJkRk8xbiswYlpiVHFrdjNBemhZZWxSUjRHSjhyVGxOYWpmR29pTnA2?=
+ =?utf-8?B?L0xkeElGejZaM2QxNURUZjRGSmNyWHl4NEk5MXYzbENLNFNuZjVoM29BTUJp?=
+ =?utf-8?B?RHBOME5tMkloQ0M2QlZ3aWZYcVg5WlB2V3YrYWNndDhXNUNTd0tqNEdaeElS?=
+ =?utf-8?B?RGRySGV2QVlwR2g2WHR4VXJlVTVnMkxIekdHOVFVeUJlY3I4N0o4OFlVR0NZ?=
+ =?utf-8?B?aUlZeExWRnpwWTVFUjBEWjBZcUdvWXV0Qm9ZNU5jZWdxUElrdEt0WkViQ2w0?=
+ =?utf-8?B?dnBzcXJPWURYcFJydU81cmpnRDFTak03VEZKeFVRdTduY1FlaFc1SVJCVHkx?=
+ =?utf-8?B?UEVWdjdTWDd4THJSK1F4NGhra2FxekJrWkZwOXowdzhKakFpTFdrVnR2Nzli?=
+ =?utf-8?B?Tml0VmgrUWpIWFJ2UktuY3h0eVZaMW5VNktvQXdWMDZYMzg4Y29DQVdkb1pJ?=
+ =?utf-8?B?dXl3UTBXUzZmRjZaM29lVWthUkJDMERDdklIQkkyanhwRkhvRmlGR2NwLzVK?=
+ =?utf-8?B?dERWY2MwN25saUN0NmdQYitvajdiY0ZrMmF3Y0ZkRTk1R3ZDOVdDYUVXM2h5?=
+ =?utf-8?B?WkRWdFdldDYraXRvbk8ydUp5cEs5UWdLRldqZmVic3QrNGJVWWVaQksyT2Nz?=
+ =?utf-8?B?MUlOQjZQd3pxTnVpQXJnQlNHN3o1RmxaNWNjQnBKdE9SeVFjc1JtMHFNZmNr?=
+ =?utf-8?B?Qjh6dFA5S21JaXJYK3VsbWk5bGJ2bzBtbW9Vd0JvdWx5aDV0T0NNcENseTBs?=
+ =?utf-8?B?MFg1cC9FcG1MSVdqV3EraUNjdi9qYWcvblVnMXJ0emlyM284aEhQOUVhekZE?=
+ =?utf-8?B?QzRVT1BrVmZSMDhZTExnYXRzYVBlV3BUYkphMWFJMncvUzNldjFrOGR6ZEJr?=
+ =?utf-8?B?dXRLVjBRWUFaWVgyMXFMNmJXY3d5T3pJbzJRdWc5RzBWYjFQSmNLKzZMR0Uy?=
+ =?utf-8?B?TE9GQ1JUMmlQT0NkeVhGZz09?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SUNHMFl2MU5jNTJBVjFWRXdRdFcyTG96OFpLeE0vaE9lZHJCUXZPeCs2YW5M?=
- =?utf-8?B?TFoybTVuK2tXcFBFam4zbllScnR4MXNnWXpxYXlLd0txczFuM29sckxWbXJY?=
- =?utf-8?B?TDExZzZITlFOSXBOdEVhbWNDbWNhbzExRW9rbVI2ay9oZTlrWlBVNXpJS3Jt?=
- =?utf-8?B?d3FCZWN3QWl6WkNXT1g0M1llekRKdXVEWG55SnJDZm1uekZxTmdpK3pIdHZS?=
- =?utf-8?B?REZIVWhGNlBiMmRCbE1oNCtVY3gyQThXcnpQb3g4djVXMHRTS1RNNmNRRk5i?=
- =?utf-8?B?OXdyc2t4dm5iUFlXT1JQWDlRbUZNM3dHOW1UN1BCQjZQbGJmaGpSU1pKVlIv?=
- =?utf-8?B?MHcxVnlQWEpiRmhoUDBIVE1Xdk80VUtKWnRmSDVkMGZKcHh6cEpqNHJ2Ujlx?=
- =?utf-8?B?NzlFdVFSRUVMWWdFV3FUeHI5SDg2TUFIMnkxSy9ONXhFeUN2QmJFeEJBQlp5?=
- =?utf-8?B?UzN3N0RHeDR6d29DNXljQk5tSUF0NkViYkI2QWx5M2MwUjU2NE9VWFNzOURL?=
- =?utf-8?B?TTlpcEdlTGs1SHNOYWdxSkFmYlRYa1lNYU5NeC9MbnNXckNYaTljNFprdEhz?=
- =?utf-8?B?bitWaFFvUmxLa0pSa3JxS0FsM083aUYwNi96dWRHOFNKLzNxbFNuMjQzTmwv?=
- =?utf-8?B?YjB1TytScE9FZVhuTjY2VUdvUTBNaTVTUDRyTzMxQUw0Rk1mREJTR1hNQ1Uz?=
- =?utf-8?B?clpSR1EvTENUMVZvR0hsYUUrMVRFOVY5bGpkL01mOXcvcGVLZ2xFS1pPbVVv?=
- =?utf-8?B?Y0ZZeFF5TkN2V2dEV2hQdnVqVUFYWDlrc0s3WXVJbjZ0Q2Z0a0V5VjAzL01y?=
- =?utf-8?B?YlJaOGF3N1V5cm1yeFUvSnBSdFBkQ1dnL3FsVTA1WTZPS3R4Rmd4TldhUndo?=
- =?utf-8?B?SU1tWFFHV1NyaFlTNm81a3JGWlhGamI1TDk4TUNwUnRycEtzU3V4dm8raTFp?=
- =?utf-8?B?OGRIOHpxWGRLTWFsdW5ScGtHMlEzOGdObHNhSnZPcHRJcERhUElLcTFEMEpv?=
- =?utf-8?B?NzhJY0hPajdtTTZBMDNpY2QxdUxRNGl1UEtuQm5XRkdZQ211dHQ0WjloTXp2?=
- =?utf-8?B?MUJMSndETGVHSHNhWDYyZDNoaXFSSUxpbW5PRk9SM084OTVRa1krcUE5VUlu?=
- =?utf-8?B?UlpSekQvc21QNjcwL0hTQWd5UnpCOEZlOWdWUjF5UzJWTlNKQnRMbytZVFNR?=
- =?utf-8?B?T3Uyd29GYW56V0d3aWdjWnNmMFBiNFB4SUZXYis0R0NpVmpmVS9jSzJvRjNS?=
- =?utf-8?B?Ky9aMVd6R01jUHZzNGdTVzZ5N0tWVDFRRThzMlhveUlKb1BpdUpIUUFWSDh2?=
- =?utf-8?B?VUZDdzVwSzV6Qnp2RzR3eVcxcFYwNEQ3Z3VjWFZXRVFHQU81TGVrNHJlMTdI?=
- =?utf-8?B?YTl4emNBMktrak0zcGp5Rk1TYmtMQUxjMUM0OWN3ZUJSdHg1R1VDSUVWZjhj?=
- =?utf-8?B?UTYzZmNtZ0FOWldiQTBhNXFqZ0UzRmQ0a3hqN000RFUxMVVVc1dySHlJUEo2?=
- =?utf-8?B?TmNscEdkVEdLb0dFeThmTmdNSmhhdmNHTFg3amR5dFJHQmhpbGFmNW4yemV6?=
- =?utf-8?B?VzU3RVF0UzJ0S0JFZFFHVE1Tb1VnZW91NDJzY0wyb1h2c28rZHUzSytpQWkz?=
- =?utf-8?B?dzFlRjE3SkgyWEpUWjRaU0FnM2RPUmJIVGJuK1BkbytaejgrVWZkeUxLQUFX?=
- =?utf-8?B?bGw4Sjc3RVFocmhJQVVZYm9TcEpSWE5UMG80aU50WGw4VStZRVZQM29mYXhE?=
- =?utf-8?B?RFNRQ01oMVBRRTBLRWJnUFRPazRCTW52NnJucW90MXNtK3k2eUl4ZHprL3dM?=
- =?utf-8?B?ZDNLSGR1Y1BFKy8wWGM3enVNWmFieFZGTUhzUlptR0hETDMvZWpvRElmMlAv?=
- =?utf-8?B?UkJOM0UwbmtOTHBrR0MxTGtsUUFWdUl4Mm1mb3JGTXBPQ1FrU21qbW5DOUh6?=
- =?utf-8?B?YU1yMy9XL0J4YUJVMi80TVNidTQzQ1FtM3JjVlpvUkdLdk56bGZiUTdlRmdQ?=
- =?utf-8?B?MkFxZHo3TURaOVZ2cnlwRlR0RlZMdmw5ZkVrdm9pUFJxanRrQTZQTU9vb01t?=
- =?utf-8?B?UDNFSUlkV0JZekVjcWkvSENxQkxwTGlRelFoMHJDdzZBcFBBL0t6a2gvNWMr?=
- =?utf-8?B?dk8zelBCWGZ0cWQ2MVNCbHhTN2lsYWFWbUtJbGE0TTl5dkQ0MTJlZGk5cXpO?=
- =?utf-8?B?Rnc9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dDg3Q01NMVB2QTVOU2ZpSy96MTJyaXpMNFI3bDhFTnlTYTkzeGZXYTMzQVhr?=
+ =?utf-8?B?b0NPSnQwbWhDb2dweWMzeGNzMHpDZmtKK3E1UXhyWUVLZTNKTzl6TXU1NUp1?=
+ =?utf-8?B?K3VVZDl3OVZ3TDhFNDk1SEhBVDlTZUk0MEsydGpPY3gyWTVCVDU0dmRaSUZJ?=
+ =?utf-8?B?ZTVNbVFVUk0wc2pBZWZ5aHpqODdPMjFvMy9TQjN4d09VaVY2dVVVVGlpZHM4?=
+ =?utf-8?B?bnFKc3VrY1dacHF6NVNUV3dHWmtuMTVDdWZyeDI5L2RJcVIxN3plRld5OGxz?=
+ =?utf-8?B?RE9GdGpTZzhaS0lQYUNjTXIwTlJ4V3ZyWExaNTArSTh2ZTFYZWJiUUhMdEpI?=
+ =?utf-8?B?K05ndlJkYlZFb1IwNFJmM1cxaSsxN2JBTDZrSE5oQ2owWklJKzEyWkUyZzBy?=
+ =?utf-8?B?MmU0TnlxVVZMLzAxcDVyVEdTNWh2UkdHNndlUVQ4aWZRWEhBZzlsQTlodVVW?=
+ =?utf-8?B?OUFZMDQzUWNQeFI5dEpyeWF5cmtuZnE2NG0ydnRZdlpwNzBlZGpGT0RqUnVp?=
+ =?utf-8?B?ZnIwR1JiYm9TcW1BQTBLRmJScUpZY3BzZjNHRGRYbFdNcHB3NHdFSlp2RTFs?=
+ =?utf-8?B?akQ5a2gyQmZSUUlpRTR6YXppQVdabTJVNjlwM01EWTJTbnllYkRkM29HUUhW?=
+ =?utf-8?B?TDZZR2hwaXBsU0cybERjTGptNWN2SGdXN2FXdWFFeW03U2d3ZFBlaTdySXhz?=
+ =?utf-8?B?WHhsRE1KQm84MytSOGZzeU41UmJiU1BJQmNDV0tGRmdGL2w4Zkt1OHpkbGtY?=
+ =?utf-8?B?dW5ISFdqakpHYi9qZG5lSFBxcXR3QWwzSTRJZUFla1p4T0psVXJjUGJIaTRu?=
+ =?utf-8?B?R1FUN0RDM2U4eHY5Z05kcVVsaUJvK0UvV3lUM1ZLWmpocnpTaEhGSmFYSXo1?=
+ =?utf-8?B?R2JHNzYrNkZ0MmhXVzlmN1RiQ2lyRGZQcnBQeDk1QUVHTXA2U0tVcW5rejd6?=
+ =?utf-8?B?RWdrNFBmckhDWEpPVm9KWEcybDZ5blpHVTJvWjREdVNYN3p3ZXptU1JidXRl?=
+ =?utf-8?B?RGVTTjR0YVVSUGRoUm9sQTRuU3hrdVZkT1E5TzlQTHNWZ3Ywb3hqTWQrYXcz?=
+ =?utf-8?B?alUyUHZ4bktoU3IwbHQ5UHZ0c2tCL3o2RC9CeG0rSGtSdkF6c3FOVnJUdkJU?=
+ =?utf-8?B?eDNoNVNSSnJXdmZJdUcvZ0c3VTNNZE9VbVZNdit5dVljYkN0TjlpcnA5a0Jk?=
+ =?utf-8?B?a0x4RldYOUgrbGF0dHl4Q3Mrd1k2RkR1NEE2aG5pMWQyclNHQ0svMkJFbDlR?=
+ =?utf-8?B?dWNoOHdDS1AzZldWY2ZUWFp5emRacmNiSGVWOFBSUlJTc0U3TzV6NnA3TVlV?=
+ =?utf-8?B?K3paNmtzSWkrRmJjelNRQWZYY2ZiUjlnbTRJVTVrUWw4NXM4T0JOZEQ2T01j?=
+ =?utf-8?B?WU9mUVFBM3NiTUtFY0lmNm5SMzdkYlgvNHMzREJZYnc1K01kMURHemtTNzU0?=
+ =?utf-8?B?aGJlNmNNTkpNbTJYWkR0Z0VYR3kvZVZQMXg4dGhwNWpJNzlnYVRqdFFXb0Qr?=
+ =?utf-8?B?dXdGTG5mZHhqY1hEWE04Ylo3VlU4cDViKzR5QXV6cEx2TUF3N1ZnOTJNbmV5?=
+ =?utf-8?B?ZFhkQ2NJWUNOUiszTVBYRk1mR2hjWjNteFBEUkZxSnN1ZlM3N1FYc3kyOFRT?=
+ =?utf-8?B?VjhQa2RXbDU5V2hjdVRseHVsVWtnUElvbVZEY3paWCtXcVl0N3pBM285bGhM?=
+ =?utf-8?B?MnI3aXFKRDJ4V3BIM3QvQjkrQkZqSWp1VUptbEVmcjRFbWRTTUI0VXZlak0z?=
+ =?utf-8?B?NHNrcER6NE01UXMxY24wVTh5QkhXaWljY0NOVmNHZkF1Y2ptUTZQU1FRSHdS?=
+ =?utf-8?B?T0ZGVUxwWkdWeHNQeVJhU3ozVlEvMndGVEFOM0s5ZWQxWVltbktkRFNYWVA5?=
+ =?utf-8?B?dkREZ1JDbTZ1SzdKL1Rnc0JKWHc0TnlCSXhLQ3NFMWxVM001YUJuNytlUWkx?=
+ =?utf-8?B?cHg5YWlFa0JoSHVDNFRCQi9pdXM1YWlsTGs4cGd2T25OWGYyTWJiZE4vYits?=
+ =?utf-8?B?MVNSZVFyRWswaEFva0Y2TllLWStkWDBwL2NldWc2TjZHNitsS1lyNWJwdlVh?=
+ =?utf-8?B?VWcrZ2F0SG9KVmk5Yy9xTENtVDk5aVI5TFhNVForRXF0Y2l1eEFNQkVMdmcr?=
+ =?utf-8?B?cnFXNzBYcnNPak1hWXhxKzl2WjRsT0JWWmU4WDB1di8yemZvcVA1b0dFcXpU?=
+ =?utf-8?B?UWc9PQ==?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 80fefa95-a8ec-45d1-b517-08dcb6247c4b
+X-MS-Exchange-CrossTenant-Network-Message-Id: c48ac120-5434-4835-30e0-08dcb6277b04
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Aug 2024 14:31:40.1989 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Aug 2024 14:53:06.4541 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: v4R8mfioDnxHlUR/mDhyA14TUb8fgBtujfhCUQfbXi+Na2lPS2eOqjzdg8H0SPoaq8gZyS4vgXjpMoNpLx3uZu4TBcFhLVDYBl3780XLt/o=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8374
+X-MS-Exchange-CrossTenant-UserPrincipalName: LZEmqHrbtdDbavXHuqGw9Bp1/ZkYH1t6z92qP6DnSxcAq3PwNl2iDyDdu1Bf+noz+hCO0lnwK6okqRqiiN26ghHcYggDhgalXSiknLmPbWE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR04MB9419
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -177,15 +177,288 @@ X-Virus-Status: Clean
 Hi Simon,
 
 On 7/21/24 5:25 PM, Simon Glass wrote:
-> At present spl_mmc_load() is the only caller of this function, passing
-> it a boot_device, an index into the available MMC devices. Pass the
-> device number instead, since it is known by the caller and simplifies
-> the code.
+> Make the raw-mode options depend on SPL_SYS_MMCSD_RAW_MODE in a more
+> direct way. This makes it easier to understand the options with
+> 'make menuconfig'.
 > 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> There are three different ways of specifying the offset:
+> 
+> - sector offset
+> - partition number
+> - partition type
+> 
+> So make these a choice, so it is more obvious what is going on.
+> 
+> Update existing boards to enable SPL_SYS_MMCSD_RAW_MODE where needed.
+> 
 > Reviewed-by: Sean Anderson <seanga2@gmail.com>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+> (no changes since v1)
+> 
+>   arch/arm/mach-imx/imx8m/soc.c                 |  2 +
+>   arch/arm/mach-imx/spl_imx_romapi.c            | 13 ++++-
+>   .../imx8mp_rsb3720a1/imx8mp_rsb3720a1.c       |  4 +-
+>   common/spl/Kconfig                            | 52 +++++++++++--------
+>   configs/am335x_guardian_defconfig             |  2 +-
+>   configs/am335x_pdu001_defconfig               |  2 +-
+>   configs/am3517_evm_defconfig                  |  2 +-
+>   configs/am62ax_evm_a53_defconfig              |  1 +
+>   configs/am62ax_evm_r5_defconfig               |  1 +
+>   configs/am62px_evm_a53_defconfig              |  1 +
+>   configs/am62px_evm_r5_defconfig               |  1 +
+>   configs/am62x_beagleplay_a53_defconfig        |  1 +
+>   configs/am62x_beagleplay_r5_defconfig         |  1 +
+>   configs/am62x_evm_a53_defconfig               |  1 +
+>   configs/am62x_evm_r5_defconfig                |  1 +
+>   configs/am64x_evm_a53_defconfig               |  1 +
+>   configs/am64x_evm_r5_defconfig                |  1 +
+>   configs/am65x_evm_a53_defconfig               |  1 +
+>   configs/am65x_evm_r5_defconfig                |  1 +
+>   configs/brppt2_defconfig                      |  2 +-
+>   configs/brsmarc1_defconfig                    |  2 +-
+>   configs/cgtqmx8_defconfig                     |  1 +
+>   configs/chromebit_mickey_defconfig            |  2 +-
+>   configs/chromebook_jerry_defconfig            |  2 +-
+>   configs/chromebook_minnie_defconfig           |  2 +-
+>   configs/chromebook_speedy_defconfig           |  2 +-
+>   configs/ci20_mmc_defconfig                    |  1 +
+>   configs/da850evm_defconfig                    |  2 +-
+>   configs/da850evm_nand_defconfig               |  2 +-
+>   configs/deneb_defconfig                       |  1 +
+>   configs/display5_defconfig                    |  2 +-
+>   configs/display5_factory_defconfig            |  2 +-
+>   configs/draco-rastaban_defconfig              |  2 +-
+>   configs/draco-thuban_defconfig                |  2 +-
+>   .../gardena-smart-gateway-at91sam_defconfig   |  2 +-
+>   configs/giedi_defconfig                       |  1 +
+>   configs/imx28_xea_defconfig                   |  1 +
+>   configs/imx28_xea_sb_defconfig                |  1 +
+>   configs/imx6q_logic_defconfig                 |  2 +-
+>   configs/imx8mm-cl-iot-gate-optee_defconfig    |  1 +
+>   configs/imx8mm-cl-iot-gate_defconfig          |  1 +
+>   configs/imx8mm-icore-mx8mm-ctouch2_defconfig  |  1 +
+>   configs/imx8mm-icore-mx8mm-edimm2.2_defconfig |  1 +
+>   configs/imx8mm-mx8menlo_defconfig             |  1 +
+>   configs/imx8mm-phygate-tauri-l_defconfig      |  1 +
+>   configs/imx8mm_beacon_defconfig               |  1 +
+>   configs/imx8mm_beacon_fspi_defconfig          |  1 +
+>   configs/imx8mm_data_modul_edm_sbc_defconfig   |  1 +
+>   configs/imx8mm_evk_defconfig                  |  1 +
+>   configs/imx8mm_evk_fspi_defconfig             |  1 +
+>   configs/imx8mm_phg_defconfig                  |  1 +
+>   configs/imx8mm_venice_defconfig               |  1 +
+>   configs/imx8mn_beacon_2g_defconfig            |  1 +
+>   configs/imx8mn_beacon_defconfig               |  1 +
+>   configs/imx8mn_beacon_fspi_defconfig          |  1 +
+>   configs/imx8mn_bsh_smm_s2_defconfig           |  1 +
+>   configs/imx8mn_bsh_smm_s2pro_defconfig        |  1 +
+>   configs/imx8mn_ddr4_evk_defconfig             |  1 +
+>   configs/imx8mn_evk_defconfig                  |  1 +
+>   configs/imx8mn_var_som_defconfig              |  1 +
+>   configs/imx8mn_venice_defconfig               |  1 +
+>   configs/imx8mp-icore-mx8mp-edimm2.2_defconfig |  1 +
+>   configs/imx8mp_beacon_defconfig               |  1 +
+>   configs/imx8mp_data_modul_edm_sbc_defconfig   |  1 +
+>   configs/imx8mp_debix_model_a_defconfig        |  1 +
+>   configs/imx8mp_dhcom_pdk2_defconfig           |  1 +
+>   configs/imx8mp_dhcom_pdk3_defconfig           |  1 +
+>   configs/imx8mp_evk_defconfig                  |  1 +
+>   configs/imx8mp_rsb3720a1_4G_defconfig         |  2 +
+>   configs/imx8mp_rsb3720a1_6G_defconfig         |  1 +
+>   configs/imx8mp_venice_defconfig               |  1 +
+>   configs/imx8mq_cm_defconfig                   |  1 +
+>   configs/imx8mq_evk_defconfig                  |  1 +
+>   configs/imx8mq_phanbell_defconfig             |  1 +
+>   configs/imx8mq_reform2_defconfig              |  1 +
+>   configs/imx8qm_mek_defconfig                  |  1 +
+>   configs/imx8qxp_mek_defconfig                 |  1 +
+>   configs/imx8ulp_evk_defconfig                 |  1 +
+>   configs/imx93-phyboard-segin_defconfig        |  1 +
+>   configs/imx93_11x11_evk_defconfig             |  1 +
+>   configs/imx93_11x11_evk_ld_defconfig          |  1 +
+>   configs/imx93_var_som_defconfig               |  1 +
+>   configs/imxrt1020-evk_defconfig               |  1 +
+>   configs/imxrt1050-evk_defconfig               |  1 +
+>   configs/imxrt1050-evk_fspi_defconfig          |  1 +
+>   configs/imxrt1170-evk_defconfig               |  1 +
+>   configs/iot2050_defconfig                     |  1 +
+>   configs/j7200_evm_a72_defconfig               |  1 +
+>   configs/j7200_evm_r5_defconfig                |  1 +
+>   configs/j721e_beagleboneai64_a72_defconfig    |  1 +
+>   configs/j721e_beagleboneai64_r5_defconfig     |  1 +
+>   configs/j721e_evm_a72_defconfig               |  1 +
+>   configs/j721e_evm_r5_defconfig                |  1 +
+>   configs/j721s2_evm_a72_defconfig              |  1 +
+>   configs/j721s2_evm_r5_defconfig               |  1 +
+>   configs/j722s_evm_a53_defconfig               |  1 +
+>   configs/j722s_evm_r5_defconfig                |  1 +
+>   configs/j784s4_evm_a72_defconfig              |  1 +
+>   configs/j784s4_evm_r5_defconfig               |  1 +
+>   configs/kontron-sl-mx8mm_defconfig            |  1 +
+>   configs/kontron_pitx_imx8m_defconfig          |  1 +
+>   configs/kontron_sl28_defconfig                |  1 +
+>   configs/librem5_defconfig                     |  1 +
+>   configs/ls1021aiot_sdcard_defconfig           |  1 +
+>   configs/ls1021aqds_nand_defconfig             |  1 +
+>   configs/ls1021aqds_sdcard_ifc_defconfig       |  1 +
+>   configs/ls1021aqds_sdcard_qspi_defconfig      |  1 +
+>   configs/ls1021atsn_sdcard_defconfig           |  1 +
+>   ...s1021atwr_sdcard_ifc_SECURE_BOOT_defconfig |  1 +
+>   configs/ls1021atwr_sdcard_ifc_defconfig       |  1 +
+>   configs/ls1021atwr_sdcard_qspi_defconfig      |  1 +
+>   configs/msc_sm2s_imx8mp_defconfig             |  1 +
+>   configs/omap35_logic_defconfig                |  2 +-
+>   configs/omap35_logic_somlv_defconfig          |  2 +-
+>   configs/omap3_logic_defconfig                 |  2 +-
+>   configs/omap3_logic_somlv_defconfig           |  2 +-
+>   configs/phycore-imx8mm_defconfig              |  1 +
+>   configs/phycore-imx8mp_defconfig              |  1 +
+>   configs/phycore_am62x_a53_defconfig           |  1 +
+>   configs/phycore_am62x_r5_defconfig            |  1 +
+>   configs/phycore_am64x_a53_defconfig           |  1 +
+>   configs/phycore_am64x_r5_defconfig            |  1 +
+>   configs/pico-imx8mq_defconfig                 |  1 +
+>   configs/sama5d27_wlsom1_ek_mmc_defconfig      |  2 +-
+>   .../sama5d27_wlsom1_ek_qspiflash_defconfig    |  2 +-
+>   configs/sama5d2_icp_mmc_defconfig             |  2 +-
+>   configs/sandbox_noinst_defconfig              |  1 +
+>   configs/sniper_defconfig                      |  2 +-
+>   configs/socfpga_secu1_defconfig               |  2 +-
+>   configs/verdin-am62_a53_defconfig             |  1 +
+>   configs/verdin-am62_r5_defconfig              |  1 +
+>   configs/verdin-imx8mm_defconfig               |  1 +
+>   configs/verdin-imx8mp_defconfig               |  1 +
+>   133 files changed, 175 insertions(+), 52 deletions(-)
+> 
+> diff --git a/arch/arm/mach-imx/imx8m/soc.c b/arch/arm/mach-imx/imx8m/soc.c
+> index be38ca52885..f30178ae213 100644
+> --- a/arch/arm/mach-imx/imx8m/soc.c
+> +++ b/arch/arm/mach-imx/imx8m/soc.c
+> @@ -735,6 +735,7 @@ int boot_mode_getprisec(void)
+>   #endif
+>   
+>   #if defined(CONFIG_IMX8MN) || defined(CONFIG_IMX8MP)
+> +#ifdef SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+>   #define IMG_CNTN_SET1_OFFSET	GENMASK(22, 19)
+>   unsigned long arch_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
+>   						unsigned long raw_sect)
+> @@ -769,6 +770,7 @@ unsigned long arch_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
+>   
+>   	return raw_sect;
+>   }
+> +#endif /* SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION */
+>   #endif
+>   
+>   bool is_usb_boot(void)
+> diff --git a/arch/arm/mach-imx/spl_imx_romapi.c b/arch/arm/mach-imx/spl_imx_romapi.c
+> index 9a86f5c133f..bdaea439d7f 100644
+> --- a/arch/arm/mach-imx/spl_imx_romapi.c
+> +++ b/arch/arm/mach-imx/spl_imx_romapi.c
+> @@ -33,8 +33,17 @@ ulong spl_romapi_raw_seekable_read(u32 offset, u32 size, void *buf)
+>   
+>   ulong __weak spl_romapi_get_uboot_base(u32 image_offset, u32 rom_bt_dev)
+>   {
+> -	return image_offset +
+> -		(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR * 512 - 0x8000);
+> +	u32 sector = 0;
+> +
+> +	/*
+> +	 * Some boards use this value even though MMC is not enabled in SPL, for
+> +	 * example imx8mn_bsh_smm_s2
+> +	 */
+> +#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
+> +	sector = CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR;
+> +#endif
+> +
+> +	return image_offset + sector * 512 - 0x8000;
+>   }
+>   
+>   static int is_boot_from_stream_device(u32 boot)
+> diff --git a/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c b/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
+> index 070933fb54b..af083c3c38f 100644
+> --- a/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
+> +++ b/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
+> @@ -190,7 +190,7 @@ int board_late_init(void)
+>   	return 0;
+>   }
+>   
+> -#ifdef CONFIG_SPL_MMC
+> +#ifdef CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
+>   #define UBOOT_RAW_SECTOR_OFFSET 0x40
+>   unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
+>   					   unsigned long raw_sector)
+> @@ -204,4 +204,4 @@ unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
+>   		return CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR;
+>   	}
+>   }
+> -#endif /* CONFIG_SPL_MMC */
+> +#endif /* CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR */
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> index af43b5f5d3c..55a42a3a7c7 100644
+> --- a/common/spl/Kconfig
+> +++ b/common/spl/Kconfig
+> @@ -490,24 +490,45 @@ config SPL_DISPLAY_PRINT
+>   	  the board.
+>   
+>   config SPL_SYS_MMCSD_RAW_MODE
+> -	bool
+> -	help
+> -	  Support booting from an MMC without a filesystem.
+> -
+> -config SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
+> -	bool "MMC raw mode: by sector"
+> +	bool "Use raw reads to locate the next boot phase"
+> +	depends on SPL_DM_MMC || SPL_MMC
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+This one is a weird one to me, we can have DM_MMC without MMC? Shouldn't 
+we fix it?
 
-Thanks!
+>   	default y if ARCH_SUNXI || ARCH_DAVINCI || ARCH_UNIPHIER || \
+>   		     ARCH_MX6 || ARCH_MX7 || \
+>   		     ARCH_ROCKCHIP || ARCH_MVEBU ||  ARCH_SOCFPGA || \
+>   		     ARCH_AT91 || ARCH_ZYNQ || ARCH_KEYSTONE || OMAP34XX || \
+>   		     OMAP44XX || OMAP54XX || AM33XX || AM43XX || \
+>   		     TARGET_SIFIVE_UNLEASHED || TARGET_SIFIVE_UNMATCHED
+> +	help
+> +	  Support booting from an MMC without a filesystem.
+> +
+> +if SPL_SYS_MMCSD_RAW_MODE
+> +
+> +choice
+> +	prompt "Method for locating next phase of boot (e.g. U-Boot)"
+> +
+> +config SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
+> +	bool "MMC raw mode: by sector"
+>   	select SPL_LOAD_BLOCK if SPL_MMC
+
+We can remove the if SPL_MMC here as SPL_SYS_MMCSD_RAW_MODE already 
+depends on it and this choice is guarded by it.
+
+> -	select SPL_SYS_MMCSD_RAW_MODE if SPL_MMC
+>   	help
+>   	  Use sector number for specifying U-Boot location on MMC/SD in
+>   	  raw mode.
+>   
+> +config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+> +	bool "MMC Raw mode: by partition"
+
+Lower case "raw" here to match the two other choices?
+
+> +	select SPL_LOAD_BLOCK if SPL_MMC
+
+Ditto wrt SPL_MMC that I brought up earlier.
+
+> +	help
+> +	  Use a partition for loading U-Boot when using MMC/SD in raw mode.
+> +
+> +config SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
+> +	bool "MMC raw mode: by partition type"
+> +	depends on DOS_PARTITION && SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
+
+This can never be met, as SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION is 
+another option in the same choice.
+
+Cheers,
 Quentin
