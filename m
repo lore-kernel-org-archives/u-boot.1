@@ -4,74 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C497C3DA64
-	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 07:14:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0EE6C52D6D
+	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 08:08:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DF1D889C9;
-	Tue,  6 Aug 2024 09:14:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id D92A2889EE;
+	Tue,  6 Aug 2024 10:08:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="I3K4n6r7";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0270C889CD; Tue,  6 Aug 2024 09:14:06 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1722931687;
+	bh=7K6aGWqsiroKafNTkZVrDv5RrgsxtaioyrpFbjGxzcM=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=VBuZ9zrud/pPG2qvFEcSowgScCvW8gYCB4SHvU+AaAX/d9aVBQK7tM2zZNouYk1a7
+	 hXTVjR3aPXbKvrcz7HCJvWmkWn9N7AS5DbhWBv0BltsJriYLIOxAr/XZ1OYMIAQoyj
+	 RrNvGoeL8IOwMeYcZN5NITsNAE3QxUmtDBPvmUnPw6nJDDLSYf0nhERBCpdtUEMkSL
+	 a91vjyqYSLCsr+PdLnJ1sIDAbEscl86/HUnITigtWRY+P8adEXNeBEQer4Lhm/tiS1
+	 N2FI1LU+J2rVcNwIyT9RpYLIeErHEKUYwcYP5pV5jyP45qVDEgS/hPCM0EWydpWOvX
+	 HVm2BNOPqGEew==
+Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1C9587DB6
- for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 09:14:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a7aa4ca9d72so23429466b.0
- for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 00:14:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1722928441; x=1723533241;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7Z3IHuGj7IROQoo6Pidr2KaCYD82oNLOnVx6DKMJAb8=;
- b=I3K4n6r7ZeHQizEri+jssG5eF2Mdaun77WKEKGRF5GQfP1jjgLaSdus6pV4euZwUw/
- 1uhNP0lunCvTz6YjxbmJbmRTSEFn1mZMpPhlLZQtaKsbXf+pb5QZ1QBXuxMbGiaHcUIE
- lrQ3NoAEZZbDkISr1cTwE/SctX0afcG3Bk8Rk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722928441; x=1723533241;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7Z3IHuGj7IROQoo6Pidr2KaCYD82oNLOnVx6DKMJAb8=;
- b=arYffaAb0yOJBAzg7qddnTum6T2Bj0iKD+r7Huarc7LMvT62IjzxAa0i6LhSSo/MCB
- EEVo61/yWORXxWW768ZiTl0jP4oDSISGx3mAg2tsjDFxHskrAuCQFkc/SukMyIhneK/z
- JZxj0Q9reE3RDM/bogrotQZzsEHxsJ4LUas4yJVVUq83O2rNzrULLPUWHm+hwgqJF49Q
- ENzAI31Qs9R3L6/ebNPiHyBkDsUNag7h5ID5+0RGS5PO+aljPjV9YSOcC1FzfFHZ7H5T
- gDlvbKuMTWR7ceYfNWMjEmgjqcphTWXQLCPSEKe0s+nfpma7hMnAF6PYl92jidebXuMk
- 0BAw==
-X-Gm-Message-State: AOJu0Yy3iAQfzGnu+uAiYw/OmUQDAVpPSXnbyjVbNPSIRx4vsqLQPVt8
- N7xiFLTetHrHg94yTki1JVcQjs900jtM50QqEt1aopt7ytGQzn6T5Agyl3vUX+iJTMPFHtpnXzo
- BXlpJlHwJO0WCuReWofEHMH2PmlaWwybjLy589w==
-X-Google-Smtp-Source: AGHT+IE0buOUAlp8RWUph0RbuLW7suyG4GdS85bSP7n0zPrtJppHBzJIruY2AgiQlN2RJyK6PAtxCpNSN++A4z4EXZY=
-X-Received: by 2002:a17:906:d25a:b0:a7a:8586:d36b with SMTP id
- a640c23a62f3a-a7dc4da6f9fmr1010032766b.3.1722928441416; Tue, 06 Aug 2024
- 00:14:01 -0700 (PDT)
+ (Authenticated sender: lukma@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id AB04D8811A;
+ Tue,  6 Aug 2024 10:08:06 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1722931687;
+ bh=7K6aGWqsiroKafNTkZVrDv5RrgsxtaioyrpFbjGxzcM=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=gjdCMj0kt2cB90mYq2Wwkea6NS0ZAJxdehF6M8IdghsYywys9WM601xhKM698s8lq
+ h87LjETM2tDlrSJzdEn19r27jzL/UR+0i4TJb5L8JrEjw13+ltNH2f9JldBLC15vv8
+ YHO/nmq6AowHuw/orgsAEfXH+Y4dQin3Gh6WdgnlaktWGx/zOD50ujYGR8Cy9ZKXya
+ Z/sPonhDyaYB/PM5J5czIOJidNR5VmHZwIb9ayveE8QCCldhHiqs5wqzNwDOecu+Sx
+ /dvfMpzXsNdjITBEmXLFsBUobMWfxxqoScyA3ozkrqzWvM3n6gZdW13PS02SjR2/bk
+ yw+s8r8I0v3wg==
+Date: Tue, 6 Aug 2024 10:08:05 +0200
+From: Lukasz Majewski <lukma@denx.de>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Teresa Remmet <t.remmet@phytec.de>, u-boot@lists.denx.de, Tom Rini
+ <trini@konsulko.com>, Benjamin Hahn <B.Hahn@phytec.de>, Cem Tenruh
+ <c.tenruh@phytec.de>, Martyn Welch <martyn.welch@collabora.com>, Simon
+ Glass <sjg@chromium.org>
+Subject: Re: [PATCH v2] config: Add 'update_bootimg' command to update
+ flash.bin on Phytec's imx8mm
+Message-ID: <20240806100805.38f61c38@wsk>
+In-Reply-To: <CAOMZO5B6F3LZcs=eYpZwOmDGctRqrnJDby2hH_343vczpk_uJQ@mail.gmail.com>
+References: <20240805084202.3530203-1-lukma@denx.de>
+ <CAOMZO5B6F3LZcs=eYpZwOmDGctRqrnJDby2hH_343vczpk_uJQ@mail.gmail.com>
+Organization: denx.de
+X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-References: <20240805173140.84453-1-michael@amarulasolutions.com>
- <40ec5639-fcc8-0e4f-a592-afadce34ad6f@denx.de>
-In-Reply-To: <40ec5639-fcc8-0e4f-a592-afadce34ad6f@denx.de>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Tue, 6 Aug 2024 09:13:50 +0200
-Message-ID: <CAOf5uwmohRnQ1hHKR1w8p1NVLsRi_TwZALdbWJpWFs2mwmR30A@mail.gmail.com>
-Subject: Re: [RFC PATCH] ubifs: Call ubifs_iput when ubifs_iget is used
-To: hs@denx.de
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; boundary="Sig_/qzqaFRieY9QjEitjFk+ZgD1";
+ protocol="application/pgp-signature"; micalg=pgp-sha512
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,69 +73,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heiko
+--Sig_/qzqaFRieY9QjEitjFk+ZgD1
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 6, 2024 at 6:29=E2=80=AFAM Heiko Schocher <hs@denx.de> wrote:
->
-> Hello Michael,
->
-> On 05.08.24 19:31, Michael Trimarchi wrote:
-> > The inode should be freed after a reference is get to avoid
-> > memory leak
-> >
-> > Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
-> > ---
-> >   fs/ubifs/ubifs.c | 9 ++++++---
-> >   1 file changed, 6 insertions(+), 3 deletions(-)
->
-> As discussed, that patch looks valid to me!
->
-> It would be good to have some testers...
->
-> Looking through the code, I think there is one more place:
->
-> $ git diff
-> diff --git a/fs/ubifs/super.c b/fs/ubifs/super.c
-> index d8d78a2d3d..a5d141055c 100644
-> --- a/fs/ubifs/super.c
-> +++ b/fs/ubifs/super.c
-> @@ -2322,6 +2322,7 @@ static int ubifs_fill_super(struct super_block *sb,=
- void *data, int silent)
->          }
->   #else
->          sb->s_root =3D NULL;
-> +       ubifs_iput(inode);
->   #endif
->
+Hi Fabio,
 
-Right, I think that people are reporting now those problem can try to
-give a quick try on it
+> Hi Lukasz,
+>=20
+> On Mon, Aug 5, 2024 at 5:42=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wr=
+ote:
+>=20
+> > +       "update_offset=3D0x42\0" \
+> > +       "update_filename=3Dflash.bin\0" \
+> > +       "hostname=3D/srv/tftp/\0" \
+> > +       "update_bootimg=3D"
+> >     \
+> > +               "mmc dev ${mmcdev} ; "          \
+> > +               "if dhcp ${loadaddr} ${hostname}/${update_filename}
+> > ; then "    \
+> > +               "setexpr fw_sz ${filesize} / 0x200 ; "  /* SD block
+> > size */ \
+> > +               "setexpr fw_sz ${fw_sz} + 1 ; " =20
+>=20
+> As Benjamin pointed out earlier this increment by one is not
+> necessary.
+>=20
+> All other i.MX8M docs don't have this increment.
 
-Michael
+So apparently the BSP build scripts in OE/Yocto take always care to
+have 0x200 aligned binaries (imx-boot and flash.bin).
 
->          mutex_unlock(&c->umount_mutex);
-> $
->
-> What do you mean?
->
-> bye,
-> Heiko
-> --
-> DENX Software Engineering GmbH,      Managing Director: Erika Unter
-> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-> Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+OK, I will remove it.
 
 
+Best regards,
+
+Lukasz Majewski
 
 --
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
+
+--Sig_/qzqaFRieY9QjEitjFk+ZgD1
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmax2eUACgkQAR8vZIA0
+zr0NHAf/Rqpj1KD9s+YVi47IFM5YXLB2Orz7372ZFCR7tsUSDzN81wT8/YldAeFm
+GDYAB/yztjcg9K7VXHGnr5AM07IFf7l9Lqg46OWx4gVbzjtnJi5sga6wrEfG2rjj
+77BO46NyA0CYm5V+Qw0RT9qpDkdI0IceLcD8q4Y4pP/CTxsTnRImjMBykBFI8z+n
+mx1GHh+tzOUqv+UhhAVFEzNwPNJj63zEadUM/MxjwYHqPu1fTMgqm5z8xQfAwreJ
+tZ0XwCF1CbpBexK5QInqT/qDgyRENopXjB1+AEeCPgOwxSDhIhBoSQ/xiSX+Keq4
+jt29S6drLc3TvuL2Ep6dE5lsQbRuLw==
+=C7cx
+-----END PGP SIGNATURE-----
+
+--Sig_/qzqaFRieY9QjEitjFk+ZgD1--
