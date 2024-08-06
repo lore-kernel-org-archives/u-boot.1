@@ -4,66 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDAA4C49EA1
-	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 21:51:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A854BC52D6F
+	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 21:52:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A377588B0E;
-	Tue,  6 Aug 2024 23:51:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 14E9088AF6;
+	Tue,  6 Aug 2024 23:51:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BaDPnH//";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ES6kEHE9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F2C988AE4; Tue,  6 Aug 2024 23:51:09 +0200 (CEST)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id EF23888B03; Tue,  6 Aug 2024 23:51:10 +0200 (CEST)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B10188AFA
- for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 23:51:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7945C88AEA
+ for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 23:51:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-2cf11b91813so934858a91.1
- for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 14:51:03 -0700 (PDT)
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-2cb55ff1007so827549a91.0
+ for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 14:51:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722981056; x=1723585856; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722981066; x=1723585866; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=r7Hf+4sLdxqUq0ruOjfrRQQxXZOoZdr/jePemre3J9s=;
- b=BaDPnH//MWDrdeBN+LH4+WnfCjyLKEdF+ydo03Idg9QtlW/7AO5oWAqOxEsQurp1IH
- DjAytjawso9Fis91oT0OiaZrsDfrTuiBzmdpPN0MXHiZhXc+oKExNLjbWIB7ynx5Ic2D
- JuOwMm3Vx6fEJiJV66lqwwnNRS90Gvdc9qU2A=
+ bh=YFgZvbAcM2SfjPTtYpq7asQ/5dslpFOeOYqAD0n9NgE=;
+ b=ES6kEHE9KU/ZBcydnECm++gWTEJ4wNPPnSawNIyqd/7t7gO3doVDoNLYKtUO6bxGKF
+ 6bbBAB/uNNZLPxRTg3MGQ35XLKgvtmp89HpUB/YBMCPPZvUmTFDQA2FVYxoAttQ7BOfW
+ wuMiQ/AkHMVYmTlJ2Z+JxOMP6mk2B97sFn7FY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722981056; x=1723585856;
+ d=1e100.net; s=20230601; t=1722981066; x=1723585866;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=r7Hf+4sLdxqUq0ruOjfrRQQxXZOoZdr/jePemre3J9s=;
- b=L9x54jSXT8+DCyhXYUyDYQbc+cM4S4GdwboDdKL4lxndEB2+07ZV/Jxc3Y9oAkjFkQ
- oNtHD9+KrZP8jmbc08nKUQCPsr8CToPP7tBPJ9/xbLfUlYVqn2IDyUrJl82UXthSc/DQ
- HcIwNH2dBMz4AM24tapoFP+MWtKVUTiRgfUqjwUf7Ay7gwVqKeDQju27tuSC8AJmQjH7
- tjrIA7umSE2xrW1+a4CarC5pCD2xAQ8iN5JYI1qzfJj0uOLTfGW0EPXGnHeC0m/5NwHy
- X4sARTklIyrTq5HWKCj3tDOuDWMp6qc91t2wf0ALxKmzEr7tgfhuRUvDwOpdS9wagtUG
- Dsqw==
-X-Gm-Message-State: AOJu0YyfWEZ3MU5zhBL+bXdnl0jzl6eiDMZ+8TicWzhXkVq8+rytiKZ0
- isTt//misReJ8O16/grSjlhpxuKdy/djw/Xw3SagUrECpnXUFrNrAjsUPBpBBd7mJvJ6FNlkESN
- oCET3sHfQpL6eD1ardJO0iw2O+iu34QiZW1uW1vDYcoBhy/4=
-X-Google-Smtp-Source: AGHT+IG6AdU3tiFj3DsQl7y1Wg7wiRqAFz5jeBhnt0KSFv2EfjuHRZZebE2II0UIY7YgkN64u2BlKbyOARMHhuchJIk=
-X-Received: by 2002:a17:90a:898b:b0:2cd:2c4d:9345 with SMTP id
- 98e67ed59e1d1-2cff93c8ebbmr15798903a91.6.1722981056107; Tue, 06 Aug 2024
- 14:50:56 -0700 (PDT)
+ bh=YFgZvbAcM2SfjPTtYpq7asQ/5dslpFOeOYqAD0n9NgE=;
+ b=vbg7dG2XpZU7yg98JqoG6TTIMbyYm5JVxGuI+cKl9Pj7kjPHx/DS3Y5inhi1RxCytq
+ qzJPhQMH33zqq0gQfoZkmaBFSqXvTvkJrKe+6k9w4l1Bf+vSs+HKSn7L7rRuf4abCmNL
+ pzOjH50kjbpJVSTqGOxUTK9p1KU9ugv+RkzEqDowCTU6I/GS2o172WtjforvfdMkgz/v
+ T5CCujUvoAXDf/S/hIFXUBUm3gyP46j1aArZhMtLzjrLIk2s9Z2NVddAdo6M0SUwTqK5
+ 97r3oGiL/EgV18AzvsCzv3zbEfhRz/01NyfeL6X0mdl9Z5WpIjdQ0V5d4u3+krRX5oTV
+ hmyA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUb1jHCl25pL6h92WnaG0T+x1va3qUUszekYErysKVVlbXQ01LbBsAHZ7E1Ycb/p+XtNGuAyj6vGDuoLMjugDxMGjdK2g==
+X-Gm-Message-State: AOJu0YwkD6iTgGXoRFqHF+CGsW6q01ut9s2LiUUdQyKMp7yRzefhXW6d
+ cpgcUUvGV5krCPpo82XZp/M+CdBRttgYHMdv5KL0gNME5pN/jLESU+iAQDoKx62E34x4In8ifLW
+ z1bcyhsiNFJnq0VAmFTjO8KxhMDjf2OkaF+fV
+X-Google-Smtp-Source: AGHT+IGSVcI1rl4+zRYa5SacmACURY//5elWnLhTEbri5P9jVHAg8K4FeRvG+Yy+MoOsuLZDEcZT9Le/H/YFISth5EI=
+X-Received: by 2002:a17:90b:1893:b0:2c3:2557:3de8 with SMTP id
+ 98e67ed59e1d1-2cff95146f8mr16223211a91.33.1722981065950; Tue, 06 Aug 2024
+ 14:51:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <75114aa0-2de7-4f5c-b764-0953ebf08263@gmx.de>
-In-Reply-To: <75114aa0-2de7-4f5c-b764-0953ebf08263@gmx.de>
+References: <20240802135023.107143-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240802135023.107143-1-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 6 Aug 2024 15:50:44 -0600
-Message-ID: <CAFLszTh2Am1AuROKKwBr6zCNF4QCZQG2Vd88R2WWYFpGkMwjzQ@mail.gmail.com>
-Subject: Re: Selecting serial device for console
-To: Fiona Klute <fiona.klute@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Tue, 6 Aug 2024 15:50:45 -0600
+Message-ID: <CAFLszTg-_ARgOuxBUdmhczdwUWiS8n45uQrsq9vKSyJFA9Wr2g@mail.gmail.com>
+Subject: Re: [PATCH 1/1] Makefile: don't use CFLAGS for environment text file
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Dave Jones <dave.jones@canonical.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Andrew Davis <afd@ti.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Bryan Brattlof <bb@ti.com>, 
+ Jesse Taube <mr.bossman075@gmail.com>,
+ "Leon M . Busch-George" <leon@georgemail.eu>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,73 +87,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fiona,
+On Fri, 2 Aug 2024 at 07:50, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> We use KCPPFLAGS to let the user set flags when invoking the C precompiler.
+> These should also be used when generating the environment text file.
+>
+> Reported-by: Dave Jones <dave.jones@canonical.com>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  Makefile | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
 
-On Thu, 1 Aug 2024 at 08:07, Fiona Klute <fiona.klute@gmx.de> wrote:
->
-> Hi everyone,
->
-> how can I configure which of the available serial devices U-Boot will
-> use for its serial console?
->
-> Background: I have a device based on a Raspberry Pi CM4, which has 6
-> UARTs (UART1 is a mini UART, the others PL011) [1]. In the default
-> configuration (including the mainline Linux broadcom/bcm2711-rpi-cm4-io
-> device tree) the Bluetooth module is attached to UART0. Unless I either
-> completely disable UART0 (status = "disabled" in the device tree) or
-> reconfigure it to be a serial console (e.g. using the RPi disable-bt
-> DTBO) U-Boot fails to boot, I assume (it doesn't get far enough to show
-> messages over netconsole) because it tries and fails to set up a serial
-> console where there's a BT chip listening.
->
-> That happens even if another serial console is available: With the RPi
-> bcm2711-rpi-cm4 DTB plus "disable-bt" (disable the Bluetooth module,
-> reconfigure UART0 as a serial console) and "uart1" (set up a serial
-> console on UART1) DTBOs I can see that U-Boot discovers the serial
-> device on UART1 (serial@7e215040):
->
-> U-Boot> dm uclass serial
-> uclass 108: serial
-> 0   * serial@7e201000 @ 3af3b200, seq 0
-> 1     serial@7e215040 @ 3af3b2d0, seq 1
->
-> However, I can't find a way to make it *use* it instead of UART0
-> (serial@7e201000). I tried to set CONFIG_CONS_INDEX=1 but didn't see any
-> change (unfortunately the help does not describe exactly how the number
-> is mapped to DT UART definitions). If I completely disable UART0 in the
-> DT as mentioned above U-Boot uses UART1 just fine, so it's not an issue
-> with UART1 as such.
->
-> To make matters slightly more complicated, the specific device I have is
-> a RevPi Connect 4, where a vendor overlay [2] describes how to set up an
-> RS485 serial console using UART5. The pins defined there are wired to
-> the outside of the box [3], so eventually I'll actually want to use
-> UART5 for the serial console. Which means I really need a (build-time or
-> preferably DT-based) way to configure which serial device to use.
->
-> My goal is to create a single DTS which both U-Boot and Linux can use,
-> and get it upstreamed if possible. If there are configuration options
-> and they're just missing from the documentation, I'd be happy to send a
-> patch to add them once I have a solution.
-
-You should be able to update /chosen/stdout-path (in the devicetree)
-to specify the UART you want, using its alias. So if you have a
-'serial1' alias, you can set stdout-path to 'serial1'. This should
-work in Linux too.
-
-The code in question is serial_find_console_or_panic().
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 
+> diff --git a/Makefile b/Makefile
+> index f0e6f07178f..4c469b9ce2b 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -1839,7 +1839,7 @@ ENV_FILE := $(if $(ENV_SOURCE_FILE),$(ENV_FILE_CFG),$(wildcard $(ENV_FILE_BOARD)
+>  quiet_cmd_gen_envp = ENVP    $@
+>        cmd_gen_envp = \
+>         if [ -s "$(ENV_FILE)" ]; then \
+> -               $(CPP) -P $(CFLAGS) -x assembler-with-cpp -undef \
+> +               $(CPP) -P $(cpp_flags) -x assembler-with-cpp -undef \
+>                         -D__ASSEMBLY__ \
+>                         -D__UBOOT_CONFIG__ \
+>                         -I . -I include -I $(srctree)/include \
+> --
+> 2.45.2
 >
-> Best regards,
-> Fiona
->
-> [1]
-> https://www.raspberrypi.com/documentation/computers/configuration.html#configure-uarts
-> [2]
-> https://gitlab.com/revolutionpi/linux/-/blob/4ae9a35871799004300f83694a24359a7b4ef8fa/arch/arm/boot/dts/overlays/revpi-connect4-overlay.dts#L281-292
-> [3]
-> https://revolutionpi.com/en/tutorials/uebersicht-revpi-connect/serielle-geraete-anschliessen-connect
