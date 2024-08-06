@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F96BC49EA1
-	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 12:58:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D259AC3DA64
+	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 12:59:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A63B18811A;
-	Tue,  6 Aug 2024 14:58:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3CCD988A1E;
+	Tue,  6 Aug 2024 14:59:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="f+x0mzqZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gLhJAVa5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB76C88A1A; Tue,  6 Aug 2024 14:58:06 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id C73C188A1E; Tue,  6 Aug 2024 14:59:25 +0200 (CEST)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E062A87EED
- for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 14:58:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8FC5687EED
+ for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 14:59:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-52fcdc2f1b6so76654e87.3
- for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 05:58:04 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-39b27935379so2105215ab.1
+ for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 05:59:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1722949079; x=1723553879; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1722949160; x=1723553960; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zJxi0UGWh80Umg492JdkFx/V9IKcX1Vjzqb5A1koQAI=;
- b=f+x0mzqZKB9yG+YseudM0xDehXkGH++bCv/q8Guawn4MpniaR6M7SCgpjT3ZSE4DoH
- fFznho6aZp/ZCS8kh+43uMMZWCgwtTk3meq1WH+6P6MrX/3A44XjZcMHnq6Va0959Pza
- DlpIYdwHwVl4hs/TMLkD9PN9SORhKfCwN6nzXjZh1jNZdCDt1HjZc4W6v/4fF4dL9F+o
- yy3Aki0Sv1IGqxTOdelMlbPZl6kSORrVZ5jbwPdowbk/mMxFnEu7BXyKZ/tt7K5g/raL
- VFSazxHWb7/EKyRggBV30zdf179pm0DfWBtFzLpj4g/tHJ2nU+bzGI/jEM13qPN2i447
- En6w==
+ bh=Fn6taKCgx/ZA4Wh9YCprniYz6cyu/bRt9qJKUSb8eus=;
+ b=gLhJAVa5maBV/nFWR8hygDctAqGnlhPRq3bDmhiNaD/Fh+cdTuQg8zR4K3iv+yqnfz
+ gvytffs+t/SOsRlq77/oadHMKuIuudyo7aM0EQwWS0okf5WXMJjn0asN9ll0W/jYVU8y
+ UTCG+thNPOCYYNvlOdztREvCIlF12jxrAch4U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722949079; x=1723553879;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1722949160; x=1723553960;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zJxi0UGWh80Umg492JdkFx/V9IKcX1Vjzqb5A1koQAI=;
- b=jTzJ/LxF2OCDwl/clBQtIfTJV89B0yReBLkO9jmNv/kbJzSljvaiI9eo1alYdrBlZ7
- E1JNVOrKNg3XuHgrxnXcLU8p8GPbNfc4Bv7td62oeUlnmxnzrAxcQcgsUk195vK1wAOm
- VrW+13LCt4mmb89Aah/x/lJ8fz16ASJ7u/7EvgzDJ0uuQ3tUalpjaYKMAdUEQ8S0alU/
- nVBH6em0HPz4hiHh6EFF20bbmEavRigu0eOA2WYgUYTItGdpK8LNxUuXm1g53dYzbAkx
- 5fQ93bGphDUoyFBnqvisG4sQ7Fg/dbI4iBrnJiVK6V3kF7DuVO7AnnCEqtUH9dpoU5dJ
- RT+g==
-X-Gm-Message-State: AOJu0Ywbl0aeGhgP6fHytX9KGvuUKqc5ESjbWLxCaJ6w3szwrNh3N+e1
- SM4ryRrcRZUKjJPmm80NXMvXuapPAQyetPqPVe6g6p79CxviI945uqdPjiyXkPAT1BPU93yAHDa
- iYz+nqPCnI6BaeZFkRFeXK1u/oTE=
-X-Google-Smtp-Source: AGHT+IF1z0ZG7zlpvD/Wjb/f+SisjOtwNaz1WZGYyJEHXi+iRCsQV5rFSL1CchY6ItCjEi2yZJxhTMsVERxmmgatWx8=
-X-Received: by 2002:a05:6512:3da4:b0:52f:c438:883c with SMTP id
- 2adb3069b0e04-530bb362e75mr5616790e87.1.1722949078987; Tue, 06 Aug 2024
- 05:57:58 -0700 (PDT)
+ bh=Fn6taKCgx/ZA4Wh9YCprniYz6cyu/bRt9qJKUSb8eus=;
+ b=B0xqZwZ3mYfev4mwGDTQyvlB78XaQPpa1fuwcUtel47Wcy3MYZq3kqi/gTOxQLWd5d
+ 1GlX/1y5C0PuNrVNaRZCrZQC6bkNBkRVy2I3S6whdRC6MrP4/2tkBsPU4Hu/cjzbvGcC
+ vKhVTIccshAY1KELMl3F0f9BlxOGHeLC96MJ7oJ2mPG3ZM/6Lddbj/7bx2tGhTocd7cP
+ +TKPsBfy+r7djh1MPT00INkdWym+8I6mUq8eKxudvvG8WChaVdwjhUH8g36pwdjroOM6
+ C7f3PH+Hin20YVIgYpLk9h5dymwm9q3gg4yeIbhpo0jCIl6TqK+OVXCkPCA7cwRwQUnD
+ WTUA==
+X-Gm-Message-State: AOJu0YyoKyNYHzoSaAtf1GSTfQOqDNZfhKLQyOhB43piT3RZViHqocm0
+ DoUUnP7DT4I2yQ0fUfFrZhUMgqteCcA/wRpFecSd9FwG2rBZiAfZ3i2ELf5BnmPhx3QZkI2ZbG0
+ =
+X-Google-Smtp-Source: AGHT+IFXLOHOO+cBH/dPzjtBR9cK88UtPQzL6bvMqD1AuXKiXOSsSUtzZkB4ciMeGaXVaYyyi4M5dw==
+X-Received: by 2002:a92:6610:0:b0:39a:ea4c:2982 with SMTP id
+ e9e14a558f8ab-39b1fb79b4amr161164615ab.10.1722949159661; 
+ Tue, 06 Aug 2024 05:59:19 -0700 (PDT)
+Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
+ [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-39b20ab5ccdsm36871565ab.40.2024.08.06.05.59.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 Aug 2024 05:59:19 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ William Zhang <william.zhang@broadcom.com>
+Subject: [PATCH v2 01/39] nvmxip: Drop the message on probe
+Date: Tue,  6 Aug 2024 06:58:12 -0600
+Message-Id: <20240806125850.2316956-2-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240806125850.2316956-1-sjg@chromium.org>
+References: <20240806125850.2316956-1-sjg@chromium.org>
 MIME-Version: 1.0
-References: <20240806081131.4065425-1-lukma@denx.de>
-In-Reply-To: <20240806081131.4065425-1-lukma@denx.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 6 Aug 2024 09:57:46 -0300
-Message-ID: <CAOMZO5BUi3VZ6nJSt1baMmLL0GLWcOzA0QBJFsSQ7W8-7tJ6Lg@mail.gmail.com>
-Subject: Re: [PATCH v3] config: Add 'update_bootimg' command to update
- flash.bin on Phytec's imx8mm
-To: Lukasz Majewski <lukma@denx.de>, Teresa Remmet <t.remmet@phytec.de>,
- Benjamin Hahn <b.hahn@phytec.de>, Cem Tenruh <c.tenruh@phytec.de>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Martyn Welch <martyn.welch@collabora.com>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,28 +94,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Lukasz,
+We should not need to announce this device. Drop the message.
 
-On Tue, Aug 6, 2024 at 5:11=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wrot=
-e:
->
-> This command allows easy update on SD card or eMMC of the flash.bin
-> generated (with binman) during u-boot build.
->
-> Signed-off-by: Lukasz Majewski <lukma@denx.de>
-> ---
-> Changes for v2:
-> - Remove 'update_mmc_part' variable
-> - Change path for hostname
-> - Use full version of dhcp command (${loadaddr} added)
->
-> Changes for v3:
-> - Remove +1 when calculating the size of binary to be written
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-It looks good to me now.
+(no changes since v1)
 
-Teresa/Benjamin/Cem,
+ drivers/mtd/nvmxip/nvmxip-uclass.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Are you happy with this version?
+diff --git a/drivers/mtd/nvmxip/nvmxip-uclass.c b/drivers/mtd/nvmxip/nvmxip-uclass.c
+index 254f04e0b99..58e8c3fb74b 100644
+--- a/drivers/mtd/nvmxip/nvmxip-uclass.c
++++ b/drivers/mtd/nvmxip/nvmxip-uclass.c
+@@ -47,7 +47,8 @@ int nvmxip_probe(struct udevice *udev)
+ 		return ret;
+ 	}
+ 
+-	log_info("[%s]: the block device %s ready for use\n", udev->name, bdev_name);
++	log_debug("[%s]: the block device %s ready for use\n", udev->name,
++		  bdev_name);
+ 
+ 	return 0;
+ }
+-- 
+2.34.1
 
-Thanks
