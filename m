@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A378DC52D70
-	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 13:00:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C779C3DA64
+	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 13:00:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0086F88A43;
-	Tue,  6 Aug 2024 14:59:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 55EF88811A;
+	Tue,  6 Aug 2024 14:59:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="1VGkF3s0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l7nQsioN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63B3B88A27; Tue,  6 Aug 2024 14:59:27 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 0C28B88A29; Tue,  6 Aug 2024 14:59:28 +0200 (CEST)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B162F88A05
- for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 14:59:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D7DA988A29
+ for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 14:59:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3687fb526b9so296798f8f.0
- for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 05:59:21 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-81f94ce2272so17368239f.2
+ for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 05:59:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1722949160; x=1723553960;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1722949164; x=1723553964; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hcczTmF1gubIAa235CuSuVySuy4XsQ46UQppBMztWlY=;
- b=1VGkF3s046jqQk376YBCrIOpGRruJOfAbyViMF7Hbx2+oHQ/5+wBv5r79YZySyXzeH
- F/ik1fsTdP1gDRToSfXSB05abEPUxg+2rshBwnqGwsPVCuE3NS+C4fkOGhsBJC9xUNu/
- T1nObiaZMvS+lJXIPZzZK8SZcpB2Ot3R0dGJ/qvhML9+y8Q98XsagSOZCoOQcPcZk9JW
- /gs/z+Obr89tuvmwpn+1bZvTP0aycemD26UsAlJGtejGwJrnaSg+WjJ8p5IKlY41GJeN
- j1WplyM26Pqr7dYktakREWcX2Xpl3mpmV5QHamigo0IlESYKBrppTuwCKT7vDYnT8SvA
- vsQg==
+ bh=l5227moHnIG/HQTOiRb822LPfqQBpeXc3svmB08+Lx0=;
+ b=l7nQsioNvoWzl4zGqdIVI0exP31REXIXa4yfRxA8PeEv4LkvdMDW/d1meZSgGdO1iK
+ 4KoF+D6MZoXpp/cQAZRKlhK3Yxi092y1+kPJNIWyBcsWTtwUJykVqJ7BTHzud0eGSiDj
+ PjIHu9khPje7ueQLpDqydoWWBQgGnOS7YrnjU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722949160; x=1723553960;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1722949164; x=1723553964;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hcczTmF1gubIAa235CuSuVySuy4XsQ46UQppBMztWlY=;
- b=eR/FIt1PKiJaYimS2dMgumdpdgGVXgiduneRAOD7fjheUkjFXWkphjbnCa0WISOTFb
- S9rYGEYC6Z940xmUd7wIkMdykTo5FWRBZD+pr1slGo7s60OjMqvTIv29EYt9Kf1C3NMh
- coe5JiqvlRzFP+CJZ5ox+UPWaq5WtSW8UN/ecVRAebSTlSvlUuHzph3jRsdatf96TQRM
- /Gw5q8ydoSyFW5ERLOR5yJplVy1Bb/3LQgsEGDbHQ9dXnAb+0Ym6lXrXlkyZGkuMRo9A
- KrAHVlcXv4PS9w7tEzJhoJXKly7bW9fxli8N0zdP7+Fok00YLQid1ZHYCdPOjE2swf3w
- MRmw==
-X-Gm-Message-State: AOJu0YxZMieey9TlVn8JDK/1NplrfVkto4QO9EMWYTmLNK3WEvTTTUne
- ndfs4sg5y2+2CjGDa7E0oqfuPVKeY4BaidgRTa7u45z73NdaxlV1BKT72cxt54Q=
-X-Google-Smtp-Source: AGHT+IHBUIJcP5H2v+ta5zLIoj+jBoSQPRujbBkAuOlavCL/IjTCvSnw9dantJ+K6ELiVmmkk39W3w==
-X-Received: by 2002:a05:6000:1faf:b0:368:d0d:a5d6 with SMTP id
- ffacd0b85a97d-36bbc1beb75mr10317873f8f.50.1722949159875; 
- Tue, 06 Aug 2024 05:59:19 -0700 (PDT)
-Received: from mkorpershoek-xps13.home
- ([2a01:cb19:8f40:f900:f167:cb53:a707:1347])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36bbcf1dc90sm12782529f8f.25.2024.08.06.05.59.18
+ bh=l5227moHnIG/HQTOiRb822LPfqQBpeXc3svmB08+Lx0=;
+ b=Qq/E98A86kCmlTP2Fj6PiOjbmaXx0dVZn2NWXoUtFY2v1f41VcPfS0LZSH0+i4GOX/
+ 8FRVsBIMFnYgINSPmY5j/4sODE/jkVfRf/1Lrftwqgnp1ZFqU0VXXCvN4RTyZHeK25Bz
+ k5MhJ6DxuYBnX8lxHH7bW0RwvLklH2NAikx0nFZPoAf+PRi+oqWoT7oN+zHg3voyAT3I
+ hXPdlB9Kny5o7h4mZT9r6ssnTpySrWIefXAak+RylhJw4LDh5DX4yeCkXwTgs//m8Ssk
+ yX7WnNU12YfI+all4Qq0Ie4KBK1/U8Q9LAIp5eBvhROgghhOX6y4iEXJOYMBp5xeZOBp
+ 6Clg==
+X-Gm-Message-State: AOJu0YzqXlyvyh/hK/Z3pwJDZoUq1HQwVlHpmRiPdBWNjj1q9+57tGzK
+ SwZns1XTzIAfQlFOMkqeXIqre0k5Bt2AHMBzA1pDvnZvcpDzbB2UFAGhwoYEOV2I0iKYlM4bt58
+ =
+X-Google-Smtp-Source: AGHT+IGG8Z6hdIAe6NHebqM66Xt7PXH46X9n1MDcwKoj7XG766NTEMI74pINIWBsmyBA9ITuxViM/A==
+X-Received: by 2002:a05:6e02:1a47:b0:375:a205:86a6 with SMTP id
+ e9e14a558f8ab-39b1fc1b3e7mr181450335ab.17.1722949163969; 
+ Tue, 06 Aug 2024 05:59:23 -0700 (PDT)
+Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
+ [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-39b20ab5ccdsm36871565ab.40.2024.08.06.05.59.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Aug 2024 05:59:19 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, 
- Tom Rini <trini@konsulko.com>, Zixun LI <admin@hifiphile.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20240725153204.358925-1-admin@hifiphile.com>
-References: <20240725153204.358925-1-admin@hifiphile.com>
-Subject: Re: [PATCH v4 0/7] usb: gadget: atmel: Code refactor and
- DM_USB_GADGET support
-Message-Id: <172294915875.40327.6325892052107416270.b4-ty@baylibre.com>
-Date: Tue, 06 Aug 2024 14:59:18 +0200
+ Tue, 06 Aug 2024 05:59:23 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>, Dan Carpenter <dan.carpenter@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v2 06/39] bootstd: Create a function to reset USB
+Date: Tue,  6 Aug 2024 06:58:17 -0600
+Message-Id: <20240806125850.2316956-7-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240806125850.2316956-1-sjg@chromium.org>
+References: <20240806125850.2316956-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,36 +92,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Set up a function for this, since it needs to be used from multiple test
+files.
 
-On Thu, 25 Jul 2024 17:31:54 +0200, Zixun LI wrote:
-> Changes in v4:
-> - Release clocks if probe failed
-> - Add missing endpoint data free
-> - Addressed comments
-> 
-> Changes in v3:
-> - Separate code refactor into individual commits
-> - Extract the controller point from udevice private data in DM functions
-> 
-> [...]
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
+(no changes since v1)
 
-[1/7] usb: gadget: atmel: Sort includes
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/9cfee49022e2f22ca7074d423bd23a610ed652f4
-[2/7] usb: gadget: atmel: Replace printf() and pr_err() by log_err()
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/9ec3b70b21d9f825a4dedbf609cf76ffe37deb55
-[3/7] usb: gadget: atmel: Fix typo in usb gadget driver register and unregister
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/dbbacf19d6310b5b255662ad87c07eb34b73d39d
-[4/7] usb: gadget: atmel: Move usba_udc_pdata() with other static functions
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/9b97a354bdc0afc788b9e99ceb9d03a696e5f749
-[5/7] usb: gadget: atmel: Rename atmel_usba_start()/_stop() to usba_udc_enable()/_disable()
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/7a448c8f384022a2585e8439c2a182ada3e4aab2
-[6/7] usb: gadget: atmel: Add attach/detach support
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/ef5e1d1f97623f8c549c6fffd481bb120df12dcb
-[7/7] usb: gadget: atmel: Add DM_USB_GADGET support
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/d6376f7ed823569acd8bb0fdfa501c040cfec36f
+ test/boot/bootdev.c        | 19 ++++++-------------
+ test/boot/bootstd_common.c | 12 ++++++++++++
+ test/boot/bootstd_common.h |  8 ++++++++
+ 3 files changed, 26 insertions(+), 13 deletions(-)
 
---
-Mattijs
+diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
+index 1bf5929c396..de16a51956d 100644
+--- a/test/boot/bootdev.c
++++ b/test/boot/bootdev.c
+@@ -16,13 +16,6 @@
+ #include <test/ut.h>
+ #include "bootstd_common.h"
+ 
+-/* Allow reseting the USB-started flag */
+-#if defined(CONFIG_USB_HOST) || defined(CONFIG_USB_GADGET)
+-extern bool usb_started;
+-#else
+-#include <usb.h>
+-#endif
+-
+ /* Check 'bootdev list' command */
+ static int bootdev_test_cmd_list(struct unit_test_state *uts)
+ {
+@@ -201,7 +194,7 @@ static int bootdev_test_order(struct unit_test_state *uts)
+ 	test_set_skip_delays(true);
+ 
+ 	/* Start up USB which gives us three additional bootdevs */
+-	usb_started = false;
++	bootstd_reset_usb();
+ 	ut_assertok(run_command("usb start", 0));
+ 
+ 	/*
+@@ -317,7 +310,7 @@ static int bootdev_test_prio(struct unit_test_state *uts)
+ 	test_set_eth_enable(false);
+ 
+ 	/* Start up USB which gives us three additional bootdevs */
+-	usb_started = false;
++	bootstd_reset_usb();
+ 	ut_assertok(run_command("usb start", 0));
+ 
+ 	ut_assertok(bootstd_test_drop_bootdev_order(uts));
+@@ -357,7 +350,7 @@ static int bootdev_test_hunter(struct unit_test_state *uts)
+ {
+ 	struct bootstd_priv *std;
+ 
+-	usb_started = false;
++	bootstd_reset_usb();
+ 	test_set_skip_delays(true);
+ 
+ 	/* get access to the used hunters */
+@@ -398,7 +391,7 @@ static int bootdev_test_cmd_hunt(struct unit_test_state *uts)
+ 	struct bootstd_priv *std;
+ 
+ 	test_set_skip_delays(true);
+-	usb_started = false;
++	bootstd_reset_usb();
+ 
+ 	/* get access to the used hunters */
+ 	ut_assertok(bootstd_get_priv(&std));
+@@ -527,7 +520,7 @@ BOOTSTD_TEST(bootdev_test_bootable, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
+ /* Check hunting for bootdev of a particular priority */
+ static int bootdev_test_hunt_prio(struct unit_test_state *uts)
+ {
+-	usb_started = false;
++	bootstd_reset_usb();
+ 	test_set_skip_delays(true);
+ 
+ 	console_record_reset_enable();
+@@ -556,7 +549,7 @@ static int bootdev_test_hunt_label(struct unit_test_state *uts)
+ 	struct bootstd_priv *std;
+ 	int mflags;
+ 
+-	usb_started = false;
++	bootstd_reset_usb();
+ 
+ 	/* get access to the used hunters */
+ 	ut_assertok(bootstd_get_priv(&std));
+diff --git a/test/boot/bootstd_common.c b/test/boot/bootstd_common.c
+index e50539500a0..ff0aff4bbe7 100644
+--- a/test/boot/bootstd_common.c
++++ b/test/boot/bootstd_common.c
+@@ -20,6 +20,13 @@
+ /* tracks whether bootstd_setup_for_tests() has been run yet */
+ bool vbe_setup_done;
+ 
++/* Allow resetting the USB-started flag */
++#if defined(CONFIG_USB_HOST) || defined(CONFIG_USB_GADGET)
++extern bool usb_started;
++#else
++#include <usb.h>
++#endif
++
+ /* set up MMC for VBE tests */
+ int bootstd_setup_for_tests(void)
+ {
+@@ -88,6 +95,11 @@ int bootstd_test_check_mmc_hunter(struct unit_test_state *uts)
+ 	return 0;
+ }
+ 
++void bootstd_reset_usb(void)
++{
++	usb_started = false;
++}
++
+ int do_ut_bootstd(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
+ 	struct unit_test *tests = UNIT_TEST_SUITE_START(bootstd_test);
+diff --git a/test/boot/bootstd_common.h b/test/boot/bootstd_common.h
+index 4a126e43ff4..e29036c897c 100644
+--- a/test/boot/bootstd_common.h
++++ b/test/boot/bootstd_common.h
+@@ -53,4 +53,12 @@ int bootstd_setup_for_tests(void);
+  */
+ int bootstd_test_check_mmc_hunter(struct unit_test_state *uts);
+ 
++/**
++ * bootstd_reset_usb() - Reset the USB subsystem
++ *
++ * Resets USB so that it can be started (and scanning) again. This is useful in
++ * tests which need to use USB.
++ */
++void bootstd_reset_usb(void);
++
+ #endif
+-- 
+2.34.1
+
