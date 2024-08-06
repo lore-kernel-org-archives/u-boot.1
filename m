@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FF3AC3DA64
-	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 13:05:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6FA9C3DA64
+	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 13:05:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06D4288AA6;
+	by phobos.denx.de (Postfix) with ESMTP id 5BE5F88ACB;
 	Tue,  6 Aug 2024 14:59:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CSSPLCJU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nr5e3Grw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C493288AF6; Tue,  6 Aug 2024 14:59:51 +0200 (CEST)
-Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
- [IPv6:2607:f8b0:4864:20::130])
+ id 3A3B188B06; Tue,  6 Aug 2024 14:59:52 +0200 (CEST)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD39988ABA
- for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 14:59:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 15E9B88A8F
+ for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 14:59:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x130.google.com with SMTP id
- e9e14a558f8ab-39b37b63834so2740445ab.0
- for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 05:59:47 -0700 (PDT)
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-81f9339e52cso21755939f.0
+ for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 05:59:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722949186; x=1723553986; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722949187; x=1723553987; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YAd5s5Nlbb/oxDYoWI+zXPb8qiHk1bgcQqreP2GsPQM=;
- b=CSSPLCJU5tNz9Tq6K1be/9JbKawVb4zLePtMRB9GL8Yi0MnBITRv7r+LoZYr3Vn1D6
- H2yeMubkYq6Ta6soVraE0bDPlE99pTYbCp5C/wvWDbW0ZJt3kxBcXcLPA9X9ZLq8DGj4
- vVqDh0km8lZ2js3TPSPpYTTmYANoU/xcop254=
+ bh=yzZSEdq27xsTACKG9U6R1IRZchzVcWl4fQRrNpNdfyQ=;
+ b=nr5e3GrwCv8bVXmCxrCDV7EdPjPKf9PGxkKdCcU3h2XpIq+KbTL91IRkh1m7FGB+Mr
+ Majy+IJMWSdxvE48SdtExhwflOGylOJZjlryPrXPdntYfb7V2CoszWRmJGp7H9hc2m/m
+ lD6f7WPi3W1pG1+yHXVsXeAHF3zYWskTSHiM0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722949186; x=1723553986;
+ d=1e100.net; s=20230601; t=1722949187; x=1723553987;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YAd5s5Nlbb/oxDYoWI+zXPb8qiHk1bgcQqreP2GsPQM=;
- b=pyjBSApPJsYUObnpNb/4L6gCbqCvK0g6ePkh+36hP295nqJbQ1ZgLdmFuLDkLHDjea
- TuIOnqEATxolo50T5jRYWiDAMllBsOAHBdJQ1YM2336nVncg9CsuXa9rUZ7O3wdrfDrG
- kqx01onYxp8on6fojay5obkNMYACeetnGsPXC85bsADqT9l9pOaHXh3k4eKjqLvQ2NNf
- w3p/m+B70T3Ulp4d8rzma8Pw75mtExieiBsNzmin7lhRYJyFF6MQRMtlL0yxeu8uwGdE
- iHtxTJVg8N+fwefIaKZw4uZg8yV3JCSDn+dvf/wq/CH3yTXJXVajFfGfaznNJCmcVM2L
- jO4Q==
-X-Gm-Message-State: AOJu0YwYtJdYozVTe/fpwPVAhp3lV5YPBYu8F9feJaQ3kN1OFb9phbDm
- Xtd3LIhOMzctoX6Bjhezg5Gd79RiMugrSI85O+WmGLS9Y8P3Zu74uiONzFMV9UPtTjcgXy4Slh4
+ bh=yzZSEdq27xsTACKG9U6R1IRZchzVcWl4fQRrNpNdfyQ=;
+ b=IYx1Mv45E9Q/xBfcPHBvPM3Q2JDq2Xi7OmYTgpL3GfjkQSmjyN1wW/W8u3kfu0nk91
+ UyPyhB428fWYiNd4/GMP5C7FRzJb0aWFsjHiY6oDmmYJp9AmjHVf5tsTwz5VDHVyuyhH
+ XGauF2fJuVrzotuMDTZihygeZElRwYXC5cEWaGBuZuF5UReley9vztgGP6VJNLJDxsqB
+ CYpRRU/f9n9hvpJPDuWq5+5syqWa2iFxG10ZWSvhgemvDpaEFY8DBWy0IhjHRR+5pMGE
+ AQZVRFG0BoO843fzIA0J7Fa2uqRhHU9tlOkXhSrqPkBahpx2AxDT4yWLwj1GbPG8gAS8
+ Lg8w==
+X-Gm-Message-State: AOJu0YxFXqt8i3KXWMcrHgB6qbSugWf8Kl7V5FtGJf82HBwV+CwJN2qN
+ zbwHAnle6VNEnUyVrKaO/Y72ffGKOHnLm36xyELwbO5DrKLoYNVAwHX4Gy4XRNemcT7R4fQXKVQ
  =
-X-Google-Smtp-Source: AGHT+IHGggH1ji62KAU+b2/TT38lgyITA+d3dzAuxJxBWJmIyaFVVgHdplk57ktltnpxC8rUYGGrzw==
-X-Received: by 2002:a05:6e02:1ca2:b0:383:6af0:eb0d with SMTP id
- e9e14a558f8ab-39b1fc36ab0mr207174675ab.26.1722949185751; 
- Tue, 06 Aug 2024 05:59:45 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGWI2z3fuSPA8HZCEa0VOvXk9IPwYPEGFIKGafG5rFyz3eNuf+uvH2iJiGCPn/ukWQnlPv5ZA==
+X-Received: by 2002:a92:ccd0:0:b0:375:c443:9883 with SMTP id
+ e9e14a558f8ab-39b1fc1a5d8mr131358825ab.21.1722949186579; 
+ Tue, 06 Aug 2024 05:59:46 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
  e9e14a558f8ab-39b20ab5ccdsm36871565ab.40.2024.08.06.05.59.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Aug 2024 05:59:45 -0700 (PDT)
+ Tue, 06 Aug 2024 05:59:46 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Caleb Connolly <caleb.connolly@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Dragan Simic <dsimic@manjaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nam Cao <namcao@linutronix.de>, Tony Dinh <mibodhi@gmail.com>
-Subject: [PATCH v2 31/39] Revert "bootdev: avoid infinite probe loop"
-Date: Tue,  6 Aug 2024 06:58:42 -0600
-Message-Id: <20240806125850.2316956-32-sjg@chromium.org>
+ Dragan Simic <dsimic@manjaro.org>, Nam Cao <namcao@linutronix.de>,
+ =?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
+ Tony Dinh <mibodhi@gmail.com>
+Subject: [PATCH v2 32/39] bootstd: Make bootdev_next_prio() continue after
+ failure
+Date: Tue,  6 Aug 2024 06:58:43 -0600
+Message-Id: <20240806125850.2316956-33-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240806125850.2316956-1-sjg@chromium.org>
 References: <20240806125850.2316956-1-sjg@chromium.org>
@@ -94,65 +95,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This turns out to be insufficient to fix the problem, since when
-bootdev_next_prio() exits, the caller has no idea that this really
-is the end. Nor is it, since there may be other devices which should
-be checked.
+When a device fails to probe, the next device should be tried, until
+either we find a suitable device or run out of devices. A device
+should never be tried twice.
 
-The caller iterates which calls iter_incr() which calls
-bootdev_next_prio() again, which finds the same device and the loop
-continues.
+When we run out of devices of a particular priority, the hunter should
+be used to generate devices of the next priority. Only if all attempts
+fail should this function return an error.
 
-We never did create a test for this[1], which makes it hard to be
-sure which problem was fixed.
+Update the function to use the latent 'found' boolean to determine
+whether another loop iteration is warranted, rather than setting 'dev'
+to NULL, which creates confusion, suggesting that no devices have been
+scanned and the whole process is starting from the beginning.
 
-The original code had the virtual of staying in the loop looking for
-a bootdev, so let's go back to that and try to fix this another way.
-
-This reverts commit 9d92c418acfb7576e12e2bd53fed294bb9543724.
+Note that the upcoming bootflow_efi() test is used to test this
+behaviour.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Fixes: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/17
 ---
 
 (no changes since v1)
 
- boot/bootdev-uclass.c | 14 ++------------
- 1 file changed, 2 insertions(+), 12 deletions(-)
+ boot/bootdev-uclass.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
 diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
-index 7c7bba088c9..15a8a3555c6 100644
+index 15a8a3555c6..807f8dfb064 100644
 --- a/boot/bootdev-uclass.c
 +++ b/boot/bootdev-uclass.c
-@@ -632,7 +632,7 @@ int bootdev_next_label(struct bootflow_iter *iter, struct udevice **devp,
- 
- int bootdev_next_prio(struct bootflow_iter *iter, struct udevice **devp)
- {
--	struct udevice *dev = *devp, *last_dev = NULL;
-+	struct udevice *dev = *devp;
- 	bool found;
- 	int ret;
- 
-@@ -682,19 +682,9 @@ int bootdev_next_prio(struct bootflow_iter *iter, struct udevice **devp)
+@@ -640,6 +640,7 @@ int bootdev_next_prio(struct bootflow_iter *iter, struct udevice **devp)
+ 	*devp = NULL;
+ 	log_debug("next prio %d: dev=%p/%s\n", iter->cur_prio, dev,
+ 		  dev ? dev->name : "none");
++	found = false;
+ 	do {
+ 		/*
+ 		 * Don't probe devices here since they may not be of the
+@@ -682,13 +683,13 @@ int bootdev_next_prio(struct bootflow_iter *iter, struct udevice **devp)
  			}
  		} else {
  			ret = device_probe(dev);
--			if (!ret)
--				last_dev = dev;
- 			if (ret) {
--				log_warning("Device '%s' failed to probe\n",
-+				log_debug("Device '%s' failed to probe\n",
+-			if (ret) {
++			if (ret)
+ 				log_debug("Device '%s' failed to probe\n",
  					  dev->name);
--				if (last_dev == dev) {
--					/*
--					 * We have already tried this device
--					 * and it failed to probe. Give up.
--					 */
--					return log_msg_ret("probe", ret);
--				}
--				last_dev = dev;
- 				dev = NULL;
- 			}
+-				dev = NULL;
+-			}
++			else
++				found = true;
  		}
+-	} while (!dev);
++	} while (!found);
+ 
+ 	*devp = dev;
+ 
 -- 
 2.34.1
 
