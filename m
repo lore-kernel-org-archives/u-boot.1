@@ -4,47 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2827C3DA7F
-	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 00:23:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FDF3C3DA4A
+	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 01:19:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D70F488210;
-	Tue,  6 Aug 2024 02:23:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 449FB88673;
+	Tue,  6 Aug 2024 03:19:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3588F88210; Tue,  6 Aug 2024 02:23:40 +0200 (CEST)
-Received: from smtpbgau1.qq.com (smtpbgau1.qq.com [54.206.16.166])
+ id 4E65588361; Tue,  6 Aug 2024 03:19:06 +0200 (CEST)
+Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FC98887B4
- for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 02:23:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A8A188673
+ for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 03:19:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
-X-QQ-mid: bizesmtpsz6t1722903789t8qevwb
-X-QQ-Originating-IP: UFY4w2ACiQfuWA3WUjo0IGMzz0mUQWl9r2HR3MG6NcM=
-Received: from [192.168.159.131] ( [106.150.157.243])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Tue, 06 Aug 2024 08:23:07 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 4860993546828033599
-Message-ID: <ED431E8315AE32DB+5e47b7b1-358b-48cf-8647-9bf4f0eb84fe@radxa.com>
-Date: Tue, 6 Aug 2024 09:23:06 +0900
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: dts: rockchip: sort usbdp_phy nodes for Radxa ROCK 5B
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- eugen.hristev@collabora.com, jonas@kwiboo.se
-References: <20240806000911.2766-1-naoki@radxa.com>
-Content-Language: en-US
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
+Received: from secure.fukaumi.org ([10.0.0.2])
+ by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
+ 4761ImPd020881; Tue, 6 Aug 2024 10:18:49 +0900
 From: FUKAUMI Naoki <naoki@radxa.com>
-In-Reply-To: <20240806000911.2766-1-naoki@radxa.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtpsz:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+To: u-boot@lists.denx.de
+Cc: gajjar04akash@gmail.com, jonas@kwiboo.se, sjg@chromium.org,
+ philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ FUKAUMI Naoki <naoki@radxa.com>
+Subject: [PATCH] arm: dts: rockchip: remove upstreamed props for Radxa ROCK 3A
+Date: Tue,  6 Aug 2024 10:18:42 +0900
+Message-ID: <20240806011842.3718-1-naoki@radxa.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,38 +51,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-sorry, please ignore this patch.
+"sfc" node was already upstreamed. remove unnecessary properties from
+u-boot.dtsi.
 
-Best regards,
+Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+---
+ arch/arm/dts/rk3568-rock-3a-u-boot.dtsi | 9 ---------
+ 1 file changed, 9 deletions(-)
 
---
-FUKAUMI Naoki
-Radxa Computer (Shenzhen) Co., Ltd.
+diff --git a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
+index 9d18f5d0b36..4df40eec975 100644
+--- a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
++++ b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
+@@ -26,17 +26,8 @@
+ };
+ 
+ &sfc {
+-	#address-cells = <1>;
+-	#size-cells = <0>;
+-	status = "okay";
+-
+ 	flash@0 {
+-		compatible = "jedec,spi-nor";
+-		reg = <0>;
+ 		bootph-pre-ram;
+ 		bootph-some-ram;
+-		spi-max-frequency = <24000000>;
+-		spi-rx-bus-width = <4>;
+-		spi-tx-bus-width = <1>;
+ 	};
+ };
+-- 
+2.43.0
 
-On 8/6/24 09:09, FUKAUMI Naoki wrote:
-> sort nodes alphanumerically.
-> no functional change is intended.
-> 
-> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
-> ---
->   arch/arm/dts/rk3588-rock-5b-u-boot.dtsi | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> index 8e318e624a8..fabbd717b61 100644
-> --- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> @@ -47,11 +47,11 @@
->   	status = "okay";
->   };
->   
-> -&usbdp_phy1 {
-> +&usbdp_phy0 {
->   	status = "okay";
->   };
->   
-> -&usbdp_phy0 {
-> +&usbdp_phy1 {
->   	status = "okay";
->   };
->   
