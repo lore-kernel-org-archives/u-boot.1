@@ -4,34 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C192AC3DA4A
-	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 03:38:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2430C3DA64
+	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 03:48:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E80B888FB;
-	Tue,  6 Aug 2024 05:38:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3450E887B9;
+	Tue,  6 Aug 2024 05:48:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36DC7888FB; Tue,  6 Aug 2024 05:38:11 +0200 (CEST)
+ id C33FF888FB; Tue,  6 Aug 2024 05:48:15 +0200 (CEST)
 Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50C818897C
- for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 05:38:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C6E40887B4
+ for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 05:48:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
 Received: from secure.fukaumi.org ([10.0.0.2])
  by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
- 4763boVK021171; Tue, 6 Aug 2024 12:37:50 +0900
+ 4763m3Ac021215; Tue, 6 Aug 2024 12:48:03 +0900
 From: FUKAUMI Naoki <naoki@radxa.com>
 To: u-boot@lists.denx.de
-Cc: eugen.hristev@collabora.com, jonas@kwiboo.se, sjg@chromium.org,
- philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+Cc: eugen.hristev@collabora.com, jonas@kwiboo.se,
  FUKAUMI Naoki <naoki@radxa.com>
-Subject: [PATCH] arm: dts: rockchip: remove upstreamed props for Radxa ROCK 5B
-Date: Tue,  6 Aug 2024 12:37:42 +0900
-Message-ID: <20240806033742.50411-1-naoki@radxa.com>
+Subject: [PATCH] configs: rockchip: enable "ums" command for Radxa ROCK 5B
+Date: Tue,  6 Aug 2024 12:47:59 +0900
+Message-ID: <20240806034759.50646-1-naoki@radxa.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -51,46 +50,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-"usb_host1_xhci" and related node were already upstreamed. remove
-unnecessary properties from u-boot.dtsi.
+USB Type-C port is configured as "peripheral" port. so enable "ums"
+command to use as USB Mass Storage device.
+("rockusb" command is already enabled and working)
 
 Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
 ---
- arch/arm/dts/rk3588-rock-5b-u-boot.dtsi | 17 -----------------
- 1 file changed, 17 deletions(-)
+ configs/rock5b-rk3588_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-index 8e318e624a8..4dd17ff408c 100644
---- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-+++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-@@ -39,18 +39,6 @@
- 	status = "okay";
- };
- 
--&u2phy1 {
--	status = "okay";
--};
--
--&u2phy1_otg {
--	status = "okay";
--};
--
--&usbdp_phy1 {
--	status = "okay";
--};
--
- &usbdp_phy0 {
- 	status = "okay";
- };
-@@ -60,8 +48,3 @@
- 	maximum-speed = "high-speed";
- 	status = "okay";
- };
--
--&usb_host1_xhci {
--	dr_mode = "host";
--	status = "okay";
--};
+diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
+index fc118cea7ba..80a2f2fed58 100644
+--- a/configs/rock5b-rk3588_defconfig
++++ b/configs/rock5b-rk3588_defconfig
+@@ -39,6 +39,7 @@ CONFIG_CMD_MMC=y
+ CONFIG_CMD_PCI=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_ROCKUSB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_CMD_REGULATOR=y
+ # CONFIG_SPL_DOS_PARTITION is not set
 -- 
 2.43.0
 
