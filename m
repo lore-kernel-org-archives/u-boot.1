@@ -4,77 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29579C52D6F
-	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 21:53:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8475C52D6F
+	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 21:53:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 908E888B60;
-	Tue,  6 Aug 2024 23:51:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E96BB88B49;
+	Tue,  6 Aug 2024 23:51:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QLn60mmT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cfbFrCMp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22FEA88B2B; Tue,  6 Aug 2024 23:51:34 +0200 (CEST)
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
+ id 634E688B5F; Tue,  6 Aug 2024 23:51:35 +0200 (CEST)
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
+ [IPv6:2607:f8b0:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 788DC88B52
- for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 23:51:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0766088B5B
+ for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 23:51:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-2cb5e0b020eso843521a91.2
- for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 14:51:30 -0700 (PDT)
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-7163489149eso821129a12.1
+ for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 14:51:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722981084; x=1723585884; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=guFg3tuE74fHMqfJ4QY+nh4DFZHrHWkj8GU1QtvXhc8=;
- b=QLn60mmT6T4pOev9Wj0zE3qSVyOX6D4cWXSb3z6JhOBxhqcGaanVeoiQ2XxHP29mm7
- c7Abopot5cQ2ubVNa+QlEl6vc6TLsCwSLm3vnVG9Nlz/nBoCSGs2zgQOkxkAirAaQBCh
- vyFYJsvliMDJSFsOIzbhXYqKNeDhWdGQQuSUQ=
+ d=chromium.org; s=google; t=1722981087; x=1723585887; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=cDi0vwfUKhpxpvl6fMsLcxXnGMCfhi7D1zN1RsTV0wg=;
+ b=cfbFrCMpr971bP6gf+cPc/zVM1OtsZDP9ZaFnSTBux9ieY14HMW7gGJ/U3tqhE7OzW
+ TlWRhkGFWupUboSviqn0gm1NIQaWtZRj5IBCc9pCds/yXGyHUtXi1QN3C46+6SUmd19J
+ Nf/gfoTYeFgG3aJPKutiaA6TfnSkvSghRDi1I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722981084; x=1723585884;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=guFg3tuE74fHMqfJ4QY+nh4DFZHrHWkj8GU1QtvXhc8=;
- b=es/hNG6p6KZOnX/sbxCEsXx3jONjT4PCAa0HppGx5QCmivp3rgZ+ChfVnYIfyISysk
- y+jI4Cij/KHAdfh6UP+lC7hWpBUaEM8FmEEHEa8oPsT7fm/Pt5I7TuFgssRlJqZ71r4F
- j/DcCTimR9IJCc2vYjPeqZMmd9f7/MT5OZsQPdnQGwQcniOOTnUDK9G/2cu1TSpinz/2
- edG2UZFFDi6SNMpqP6Wp84GOG5ddBHopYKuwOQ6pxFdVhOVanjgqWw72mhEPG8cVcz+L
- Ko2pvjhYJuTPdUA1Y89Lz9lScNIgsMfXBdVHiwfes3H1KkHHsCSpUhELGvqQsido/fvq
- CW1g==
+ d=1e100.net; s=20230601; t=1722981087; x=1723585887;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=cDi0vwfUKhpxpvl6fMsLcxXnGMCfhi7D1zN1RsTV0wg=;
+ b=fUaJEr6GlTq/GjdPDSz0D4ttwEQnpM/1CL99MKHzyw4jfsK2BQQOgT6YB9zcrQNufY
+ lUcCLgVLcayja7rqAcvGyqJzQCh7+WFdXu9vqnF1CEmJJ85mvQcPodAzX20skNBBXM+A
+ pBY1bQub2WAnlMW7UxuvZig4Y4kG2MHf7IROS2ALm98oWAxzlKSsXoWAMCAl6BT1U1ae
+ tK1UX+Fpk0CLmSjmipJWllJtVnSp4RPJ8hWucp1/N41M6y2Bvq+bzZjzWEeKgqpm1x3K
+ 2zpz3SF1UKV7xEAsAKEKo7OJ7arPzr0SOsp+nXpxvI68zcLdJj/yCtJK00Sy1HEQ/1FM
+ rQVQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXjv8ZrauSwp/Q252jntIx6pATqxyodgKnSutts98IcHeKEGS9ZraQ5rS948GApy12aXF5tm1zRFsVwGOvCPYtWzotfEQ==
-X-Gm-Message-State: AOJu0YzFTIZq7+XP+jQvb55X7WAoJ948cH2llS0z/tBENRoZx4sEV4XR
- LHQwkn+T2cuHpKrIP/hbLwhLAH4POcPEbHK9gZRX/E8sLJ1FFRCxiLxz1cs5UpmAuUJ23DfrNq/
- uOOmF+0/20Jo5zVNwaH/KYYEEigdKLxEAEpEl4q5XW+ZZr94=
-X-Google-Smtp-Source: AGHT+IH47MIjQMfJaBXD3MnEWdvfBeVxrti8TAB7ILrEjNBUWK05It+5BzVv4nOwGBLXHF0aMDRfU9/E7XTq2Eo7Nvg=
-X-Received: by 2002:a17:90a:bf14:b0:2c9:758b:a278 with SMTP id
- 98e67ed59e1d1-2cff957d120mr20271966a91.35.1722981084102; Tue, 06 Aug 2024
- 14:51:24 -0700 (PDT)
+ AJvYcCXyGQ/7/B5XhH3e1xlAtfXK4QIiqyK9GaRFfHDuL0VVxKYN/Egj/iUI8uvufm9N7amzojsQmoIbOlTmvLIi0mjpXDS6Tw==
+X-Gm-Message-State: AOJu0YySWyCHXcDRAHVR1hUU0gEBL/pITiUEWfu7BDxZkRQUb7q97Qdg
+ UA5sBmQLdU9kjM3DI2Mgk5yytvP6B5LC2sFzkkPeKxMUw6Jq8+bz9GYfVpIbXLlBooHkSg2EVP8
+ J9m207C8p6xdSdFG8jFg3I7/34Lvb+kba4Wzd
+X-Google-Smtp-Source: AGHT+IEOagyhanVmCwon85CNVJNEBUCwio4aeZpivJGnxRxtq/ImrLoIrXEoP1DntO1/MXXdezNDuXav/V3TUjPr1CA=
+X-Received: by 2002:a17:90b:2307:b0:2ca:7636:2214 with SMTP id
+ 98e67ed59e1d1-2cff9414339mr20209969a91.4.1722981087233; Tue, 06 Aug 2024
+ 14:51:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230822031705.1340941-1-sjg@chromium.org>
- <20230822031705.1340941-6-sjg@chromium.org>
- <CAHTX3d+qAMKgL9T5Fo6y=rvXDiMS_mCiCEGazHt07eiVN32Fgw@mail.gmail.com>
- <d388c065-9370-498b-96c8-d22af41d2e64@amd.com>
-In-Reply-To: <d388c065-9370-498b-96c8-d22af41d2e64@amd.com>
+References: <20240802092820.917450-1-admin@hifiphile.com>
+In-Reply-To: <20240802092820.917450-1-admin@hifiphile.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 6 Aug 2024 15:50:39 -0600
-Message-ID: <CAFLszTgMTwiunEyVaPYWwDeKoDnWx8PW2JzEj6yk_nuY+bJePw@mail.gmail.com>
-Subject: Re: [PATCH 05/14] initcall: Adjust the failure message and return
- value
-To: Michal Simek <michal.simek@amd.com>
-Cc: Michal Simek <monstr@monstr.eu>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Graf <agraf@csgraf.de>, Tom Rini <trini@konsulko.com>,
- Bin Meng <bmeng.cn@gmail.com>
+Date: Tue, 6 Aug 2024 15:50:42 -0600
+Message-ID: <CAFLszTh3x8JDjjRWSffTz10x4YEjtrKv-OuGTQYzw79rOF=WMA@mail.gmail.com>
+Subject: Re: [PATCH] usb: gadget: udc: Fix duplicate uclass name
+To: Zixun LI <admin@hifiphile.com>
+Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,91 +85,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
-
-On Fri, 2 Aug 2024 at 03:21, Michal Simek <michal.simek@amd.com> wrote:
+On Fri, 2 Aug 2024 at 03:31, Zixun LI <admin@hifiphile.com> wrote:
 >
-> Hi Simon,
+> Currently both USB host uclass and USB gadget uclass are using the same
+> name "usb" which break uclass functions like uclass_get_by_name().
 >
-> On 3/22/24 11:22, Michal Simek wrote:
-> > Hi Simon,
-> >
-> > =C3=BAt 22. 8. 2023 v 5:18 odes=C3=ADlatel Simon Glass <sjg@chromium.or=
-g
-> > <mailto:sjg@chromium.org>> napsal:
-> >
-> >     Move the failure message outside the loop, so it is easier to follo=
-w the
-> >     code. Avoid swallowing the error code - just pass it along.
-> >
-> >     Drop the initcall-list address from the output. This is confusing s=
-ince
-> >     we show two addresses. Really it is only the function address which=
- is
-> >     useful, since it can be looked up in the map, e.g. with:
-> >
-> >         grep -A1 -B1 serial_init u-boot.map
-> >
-> >     Signed-off-by: Simon Glass <sjg@chromium.org <mailto:sjg@chromium.o=
-rg>>
-> >     ---
-> >
-> >       lib/initcall.c | 12 +++++++-----
-> >       1 file changed, 7 insertions(+), 5 deletions(-)
-> >
-> >     diff --git a/lib/initcall.c b/lib/initcall.c
-> >     index 81c5d2450735..0f74cef32f85 100644
-> >     --- a/lib/initcall.c
-> >     +++ b/lib/initcall.c
-> >     @@ -46,11 +46,13 @@ int initcall_run_list(const init_fnc_t init_seq=
-uence[])
-> >                      }
-> >
-> >                      ret =3D func();
-> >     -               if (ret) {
-> >     -                       printf("initcall sequence %p failed at call=
- %p
-> >     (err=3D%d)\n",
-> >     -                              init_sequence, (char *)func - reloc_=
-ofs, ret);
-> >     -                       return -1;
-> >     -               }
-> >     +       }
-> >     +
-> >     +       if (ret) {
-> >     +               printf("initcall failed at call %p (err=3D%dE)\n",
-> >     +                      (char *)func - reloc_ofs, ret);
-> >     +
-> >     +               return ret;
-> >              }
-> >
-> >              return 0;
-> >     --
-> >     2.42.0.rc1.204.g551eb34607-goog
-> >
-> >
-> > I am debugging one issue and I get output like this. And I dig into it =
-and find
-> > out that failures are not reported
-> > on the function which is causing it but on the next one. It is because =
-of
-> > pointer is moved to next function;
-> >
-> > This is what I see.
-> > initcall: 0000000008072de8, 0
-> > initcall failed at call 000000000802b14c (err=3D-19)
-> >
-> > And this is the problematic part.
-> > for (ptr =3D init_sequence; func =3D *ptr, !ret && func; ptr++) {
-> >
-> > Fix should be of course to get that if(ret) code back but maybe you wan=
-t to see
-> > different solution.
+> Rename the uclass to "usb_gadget" to fix, also makes bind/unbind by class
+> index (or sequence) working.
 >
-> Any comment on this one?
+> This breaks the capacity of using "usb" as DT alias sequence numbering
+> which needs a fix afterwards.
+>
+> Signed-off-by: Zixun LI <admin@hifiphile.com>
+> ---
+>  drivers/usb/gadget/udc/udc-uclass.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Yes it was fixed by this, I believe, although no Fixes tag unfortunately:
-7554388c1d1 initcall: break loop immediately on failure
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
