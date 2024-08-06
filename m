@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41F55C49EA1
-	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 21:52:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34FDCC52D6F
+	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 21:52:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D122D88AE8;
-	Tue,  6 Aug 2024 23:51:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3DDE588B36;
+	Tue,  6 Aug 2024 23:51:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hND5Q0Ui";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ltJfljQp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0708A88AE3; Tue,  6 Aug 2024 23:51:24 +0200 (CEST)
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
+ id AAF5288B36; Tue,  6 Aug 2024 23:51:27 +0200 (CEST)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C89D688B1B
- for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 23:51:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7EF7688B2B
+ for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 23:51:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-75a6c290528so757764a12.1
- for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 14:51:20 -0700 (PDT)
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-2cb4b7fef4aso857898a91.0
+ for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 14:51:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722981078; x=1723585878; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722981080; x=1723585880; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vv7CfJOS84SLXP/nn1jftC8ZZsEDxOWC17LeHeKdY40=;
- b=hND5Q0Ui9F48q6OIy/g5xb7rWUhhFR/3w6Qy5e9Mu+SF1X40cP7twj8CYAL3YwTjZP
- ikvsR654JuAKxQQTmGDCFeHVloDXHT39Gy72U4p9ix2dtj7V9lzzAO6HXY/biPlUrnmr
- y/s1nBuqukbSeJoHu7iD/7qHkCQ4Zv9CQDz0E=
+ bh=/Wk4HQKwiV2eu4wd4taJbLsqQp1BgTMoyGXFky70j+8=;
+ b=ltJfljQp2P019HK6NbcqBaWFPjbPOs6P7kW7XSlb3RsFz2hTJyGZ6kfF6K0759uudL
+ 1H75/isryLX0hGrqcIZ+W0Wha2QmqAn0AJcGI3FfSSP/aozD9q2jehpEIg9AkkiKI4Rk
+ a3qt8188JIWcuHVWVc9U2ITRqwGyp5Wyvh9+U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722981078; x=1723585878;
+ d=1e100.net; s=20230601; t=1722981080; x=1723585880;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vv7CfJOS84SLXP/nn1jftC8ZZsEDxOWC17LeHeKdY40=;
- b=Wz5D5eoWMezKi9Leduysq4hONEU0CyzfxpCT2PFolzVmwgJ7BG7+d9SLACyyO/xs8D
- byorJToAogjQBDGXiPW4TARtkJErrusziqVi18O91m4+0OMvEMeYSo/AP0RG4rcLTSPG
- v9EGsqxbCtpsDblBip9VDm0PIMneQbYNPEGd21pg+OAi6JJwHuzGHEjGtxlVj+repypq
- qz+lWYis3OwX4mOvNJ7w3s1u08ufqognN3mqU82VWr/XZDu7T7/X1kWM9coHvBLf4qbt
- 8RSk5pAMzJ/PPNVqgX7jRWWzyHUysN3nYvOXZf8fAKZD5phmYhnoSHWfMVKzL07cSVNW
- LvLw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVKLT9il0dgF+U3cpW0IYCMqtD72mUlDaWJqaFdjU8QCN8XfKIP/lnwLun1yYvj3/bZ2a9TByzpPLzaJbzh0XaB3KxXxQ==
-X-Gm-Message-State: AOJu0YzV3m2I8uWUjmB+v1vLy9fN243cTs3ZQUGzKYffS8iLRitzn3Q/
- NHC/0HSpU3X3tBEdKGpO5zxGVoqTMlYHnou1AueFUatQxqASci28mtt9YjoxKwi+QHGUx1N0aI1
- dt2+CGei86no00IveZh1GmOtOLWdJxDcCbWus
-X-Google-Smtp-Source: AGHT+IEzUwoT+RJaoK0Gyxye8byrdA7GKZe7ZnJ2s6BNso8MeTNH/W4fvyuPo+fl8aBQoYFLKXoltedFwUA1R3PEESc=
-X-Received: by 2002:a17:90a:a38d:b0:2c8:f3b4:421 with SMTP id
- 98e67ed59e1d1-2cff93d40d9mr16239954a91.4.1722981078304; Tue, 06 Aug 2024
- 14:51:18 -0700 (PDT)
+ bh=/Wk4HQKwiV2eu4wd4taJbLsqQp1BgTMoyGXFky70j+8=;
+ b=AupWJ8xWN9MOegAHXlVfuMOlWYTB45Jn4SrdClvYq0Ph9L+RkAl9uWQNiBVLKtdCgn
+ tG8xytFrpiv1E3bLAR4bpajMAmHxFyKol23yCRFbQTAopWSNaIil+iGAXrV/bQIv/YBS
+ PwavndBIbMuh8VWKEOXeamwcz3AerzZerxeFIrdQ+OVb7JSIdxBVahFHIePV5bjO1cYO
+ 1HNw2wFdS/3Hfl0hPG5cgzNICHtVITUNfloB0G0TB4lKJ4YXfQ84CEU71EdtgordlaDn
+ LDJxFVibVPo7BrYuaMkHr6UcI+ThmmtwcAgmACpseq7dLuLr1cIrcFmDLAZ5HTOmO8Df
+ c03Q==
+X-Gm-Message-State: AOJu0YztOq6k/HGgmHStR1RRg3MKtUilL7WsaSfSOCfpGMG1o64SI1Dz
+ goyEvQEznHiKRpYlW1Qn0OUlRVXfRwxM2I1X1IliKHAD/+VxTROB4saM34LNgBNbaSgQN+Jnm+f
+ 98/GMwD79QJdu2BbddYQkeVcEnbnCE+Q7WF4u1BOXIWaVGus=
+X-Google-Smtp-Source: AGHT+IHU74tKr8IHYjlVZ5IXk4kV/aRDTIVfXjOpNFgLt5z+1RR8W1igEQFVWLOzymlLFk187tjPT9YKPBN4R1Bdw5Y=
+X-Received: by 2002:a17:90b:ed2:b0:2cd:2992:e8e5 with SMTP id
+ 98e67ed59e1d1-2cff952d38amr20260854a91.33.1722981080544; Tue, 06 Aug 2024
+ 14:51:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240803124149.2916030-1-jonas@kwiboo.se>
- <20240803124149.2916030-2-jonas@kwiboo.se>
- <20240803141616.GT3794063@bill-the-cat>
-In-Reply-To: <20240803141616.GT3794063@bill-the-cat>
+References: <20240802100846.16619-1-richard@nod.at>
+ <20240802100846.16619-4-richard@nod.at>
+In-Reply-To: <20240802100846.16619-4-richard@nod.at>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 6 Aug 2024 15:50:48 -0600
-Message-ID: <CAFLszThuH7iKoDn3o9pG1DPEBmq72qiYZkc0nu+S6M93dCwm_w@mail.gmail.com>
-Subject: Re: [PATCH 1/2] bootstage: Fix unstash of records from SPL
-To: Tom Rini <trini@konsulko.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de
+Date: Tue, 6 Aug 2024 15:50:45 -0600
+Message-ID: <CAFLszTiawOFJMuoNbbk=GRr3gymLz6aa6Ji9YdEcERTuRXHcBg@mail.gmail.com>
+Subject: Re: [PATCH 4/4] dlmalloc: Make sure allocation size is within malloc
+ area
+To: Richard Weinberger <richard@nod.at>
+Cc: u-boot@lists.denx.de, upstream+uboot@sigma-star.at, 
+ marek.vasut+renesas@mailbox.org, eugeneuriev@gmail.com, trini@konsulko.com, 
+ bmeng.cn@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,30 +85,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 3 Aug 2024 at 08:16, Tom Rini <trini@konsulko.com> wrote:
+Hi Richard,
+
+On Fri, 2 Aug 2024 at 04:08, Richard Weinberger <richard@nod.at> wrote:
 >
-> On Sat, Aug 03, 2024 at 12:41:44PM +0000, Jonas Karlman wrote:
+> Since U-Boot does not support memory overcommit we can
+> enforce that the allocation size is within the malloc area.
+> This is a simple and efficient hardening measure to mitigate
+> further integer overflows in dlmalloc.
 >
-> > The commit b81e31a1e6c5 ("bootstash: Do not provide a default address
-> > for all") changed a bootstage unstash call to bootstage stash, this
-> > has resulted in bootstage records stashed in SPL no longer get unstaged
-> > in U-Boot proper. Fix this by changing back to a unstage call.
-> >
-> > Fixes: b81e31a1e6c5 ("bootstash: Do not provide a default address for all")
-> > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Signed-off-by: Richard Weinberger <richard@nod.at>
+> ---
+>  common/dlmalloc.c | 9 ++++++---
+>  1 file changed, 6 insertions(+), 3 deletions(-)
 >
-> Whoops, thanks!
+> diff --git a/common/dlmalloc.c b/common/dlmalloc.c
+> index c8d1da1cb1..d264fc031a 100644
+> --- a/common/dlmalloc.c
+> +++ b/common/dlmalloc.c
+> @@ -1274,7 +1274,8 @@ Void_t* mALLOc_impl(bytes) size_t bytes;
+>      return NULL;
+>    }
 >
-> Reviewed-by: Tom Rini <trini@konsulko.com>
+> -  if ((long)bytes < 0) return NULL;
+> +  if (bytes > CONFIG_SYS_MALLOC_LEN || (long)bytes < 0)
+> +     return NULL;
+>
+>    nb = request2size(bytes);  /* padded request size; */
+>
+> @@ -1687,7 +1688,8 @@ Void_t* rEALLOc_impl(oldmem, bytes) Void_t* oldmem; size_t bytes;
+>    }
+>  #endif
+>
+> -  if ((long)bytes < 0) return NULL;
+> +  if (bytes > CONFIG_SYS_MALLOC_LEN || (long)bytes < 0)
+> +     return NULL;
+>
+>    /* realloc of null is supposed to be same as malloc */
+>    if (oldmem == NULL) return mALLOc_impl(bytes);
+> @@ -1907,7 +1909,8 @@ Void_t* mEMALIGn_impl(alignment, bytes) size_t alignment; size_t bytes;
+>    mchunkptr remainder;        /* spare room at end to split off */
+>    long      remainder_size;   /* its size */
+>
+> -  if ((long)bytes < 0) return NULL;
+> +  if (bytes > CONFIG_SYS_MALLOC_LEN || (long)bytes < 0)
+> +     return NULL;
+>
+>  #if CONFIG_IS_ENABLED(SYS_MALLOC_F)
+>         if (!(gd->flags & GD_FLG_FULL_MALLOC_INIT)) {
+> --
+> 2.35.3
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Thanks.
-
-How about a test for sandbox_spl to check this? I see that
-CONFIG_SPL_BOOTSTAGE is not enabled there.
-
-There is a vaguely similar test in test/py/tests/test_handoff.py
+I wonder if we can get away without the memalign() one since it is
+calling malloc() always? There is still the request2size() though.
 
 Regards,
-SImon
+Simon
