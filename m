@@ -4,68 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D458C49EA1
-	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 21:51:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A557C52D6F
+	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 21:51:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1152D88AEE;
-	Tue,  6 Aug 2024 23:51:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 712CD88AE4;
+	Tue,  6 Aug 2024 23:51:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mmBGwp9P";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eaGyFaEJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71B5A88AE4; Tue,  6 Aug 2024 23:51:06 +0200 (CEST)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id A195B88AE4; Tue,  6 Aug 2024 23:51:06 +0200 (CEST)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BE3888AF2
+ by phobos.denx.de (Postfix) with ESMTPS id 8553088AF6
  for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 23:51:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6bb96ef0e8eso6059816d6.2
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-2cb4b6ecb3dso928796a91.3
  for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 14:51:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722981051; x=1723585851; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722981055; x=1723585855; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=C+PJNatz7KD6dRVKZ8UGaj+r6432ValLYqxd+tY04f4=;
- b=mmBGwp9PB8dY6gTPHhhmzSyT83UBD8sXkpk9wuoadRwQhvfKwwd8JehcIS4EkGGMaH
- fe9nCZZHrrw+Ju3qrFd/M83HKjC2O9NDGICKQltH56QXaM0DrsvjaCfBJJPcz3V7g+1v
- saDHwaY4pKRSJURHZYQwYFx2t8w9r4SXmaFcU=
+ bh=uGk6aWjX4IKbybBy80Xj6ulpGi50aYumOf+CiG47ol0=;
+ b=eaGyFaEJNfyHJtMy0sWF43ZTPvPyDA70zjNqGxXgSd/O1HPAbuxKaoFxe0dOmzIa60
+ CYCw5fN4t9ac1bjiYzWgtFI1RaljB9aENe4BGw+l9nl2TEfdF99B4yRvG35MnzywXYZK
+ L/oGGFsD4HPFW39P2MQZgwCT6V5lFLZODyWVU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722981051; x=1723585851;
+ d=1e100.net; s=20230601; t=1722981055; x=1723585855;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=C+PJNatz7KD6dRVKZ8UGaj+r6432ValLYqxd+tY04f4=;
- b=A9lHYCOqqM2XO4iJoQQepdrksXi4eD3oIKuiDhBLBqDpYGs+pQ10ZF6KOEcq/bUUQM
- r5oL5iEg9TmrijEuJCx1VtNYP8f0ZpzWhseMhpyiRzSO48QQ6TrPo6qgVHKP9CWAPGsS
- 63yXPxj5D8uVMY/ow69wqjjYnwJkjTbETogg5ntk6C93vJv7GET4eoX2ilR7hka91aC0
- STuNKpGmPueekYIq6cgDit7kyWXYMvZZiRVQeR9ajv7N6wELefzKJ9tIaeKhUhwxOM95
- OuOfaTZX8yB9+ZTOShZEIGvUVBzalJsDXvgNus6TqpXxQAGvxx2TCnRLmC7MoycEeRIF
- /Ixg==
-X-Gm-Message-State: AOJu0Yxn5VwnT+jBRj1KQai9jJ1i72KlEh0Z7jWWjF9qpiGvv1CDXxOn
- ujj0Vlg83ELUGjoNpSqFK1SSX3+nqrgLCdKXS3QnJsaFyF4u6GziDidF+YiwOqelNawKh1+Zjpk
- rD7sqABgEhb0C9Ds0sc7CEmFbYCsmHkZvg0p/
-X-Google-Smtp-Source: AGHT+IGs2He9t3KgAFxTwTDhGJEkhmCuvH1cVSWGUZDRSYGDD8XvSJ41GIEYQNxVwXNN4ZhdrTg06mUTnSi9HR2TuFM=
-X-Received: by 2002:a05:6214:3385:b0:6b7:b08e:e7a1 with SMTP id
- 6a1803df08f44-6bb983f94d2mr170703576d6.30.1722981051055; Tue, 06 Aug 2024
- 14:50:51 -0700 (PDT)
+ bh=uGk6aWjX4IKbybBy80Xj6ulpGi50aYumOf+CiG47ol0=;
+ b=KVSjO0CwzvHquIVVoPq/DkFw+KeQn0SsOL892+Zm2FucF36zWCl4l64FFKH1u9w5c/
+ OORuZfDHDMQj1+tGtV01M4RmAPj2PVJbBIb0PCfl/zY+64G4I5vqBG06e+iE71W5mN89
+ LrtyvI4LohJESHRZnE28RzKBea7h2JvvVKbHcXzyLqfp5vm1imer+Z+07VpH9PIOG4uM
+ uThYMWTMHoe95FhM6xNBORHykPgr1ZRxLtojzDIvE0KkZkvB+G0rsU2IfAa1hVHR5H2X
+ wWpN+7iNaXRnXAdTDjqbSWfrjB7lOaxBTi6tBmwgnKdylPp3j+qhBZnrVcj3xWCmXKIe
+ zL7A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWduZswGdr7OC9oP05vYDQXk8P7rX5RquAJGE/DP4NfvIFBguflPGCwYq27HygDG2UbhZoV0BnbZAzrex0K3r29jcKd+w==
+X-Gm-Message-State: AOJu0YzZNJ/OGpjtnsK7b//RX57+WNda7aVqLFT7xa6DkSBnk+Sjn3zJ
+ wTKaNO6MbiPrDt4N+jUUjCciz9A0zc244wz3MwiaeXPIE/WVWpe918FNcME2JRdlpZ4gP34wMt1
+ 5jGy2vI1HpOAHD4vpTBjNi9uj6puliZOV+7QQ
+X-Google-Smtp-Source: AGHT+IFHKVTcuBKddoSpxfJMm4DU41C1r+4aA5aPEbJnEgu4rbQyTxrjeTivhi0eWsU4u4YdK4cMnFjKR5nmXFYJQM8=
+X-Received: by 2002:a17:90b:1e43:b0:2cd:3e75:4e51 with SMTP id
+ 98e67ed59e1d1-2cff955d116mr17298433a91.39.1722981055067; Tue, 06 Aug 2024
+ 14:50:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240802100846.16619-1-richard@nod.at>
-In-Reply-To: <20240802100846.16619-1-richard@nod.at>
+References: <20240802092820.917450-1-admin@hifiphile.com>
+ <20240802092820.917450-2-admin@hifiphile.com>
+In-Reply-To: <20240802092820.917450-2-admin@hifiphile.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 6 Aug 2024 15:50:39 -0600
-Message-ID: <CAFLszThAeNEnCv5kCVvNMUuUEn-p5ip4znsPj_RDUZskrUSVeA@mail.gmail.com>
-Subject: Re: [PATCH 1/4] x86: Fix ptrdiff_t for x86_64
-To: Richard Weinberger <richard@nod.at>
-Cc: u-boot@lists.denx.de, upstream+uboot@sigma-star.at, 
- marek.vasut+renesas@mailbox.org, eugeneuriev@gmail.com, trini@konsulko.com, 
- bmeng.cn@gmail.com
+Date: Tue, 6 Aug 2024 15:50:42 -0600
+Message-ID: <CAFLszTj8Cci7_6vpZ+NXndzKxxvAW6oY9BskFjgji=oi1UtPWA@mail.gmail.com>
+Subject: Re: [PATCH] dm: core: Show device sequence instead in dm_dump_tree()
+To: Zixun LI <admin@hifiphile.com>
+Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,39 +86,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 2 Aug 2024 at 04:08, Richard Weinberger <richard@nod.at> wrote:
+On Fri, 2 Aug 2024 at 03:31, Zixun LI <admin@hifiphile.com> wrote:
 >
-> sbrk() assumes ptrdiff_t is large enough to enlarge/shrink the heap
-> by LONG_MIN/LONG_MAX.
-> So, use the long type, also to match the rest of the Linux ecosystem.
+> Currently uclass index is shown in DM tree dump which ignores alias
+> sequence numbering. The result could be confusing since these 2 numbers
+> could be different. Show device sequence number instead as it's more
+> meaningful.
 >
-> Signed-off-by: Richard Weinberger <richard@nod.at>
+> Also update documentation to use sequence number.
+>
+> Signed-off-by: Zixun LI <admin@hifiphile.com>
 > ---
->  arch/x86/include/asm/posix_types.h | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
+>  doc/usage/cmd/dm.rst | 7 +++----
+>  drivers/core/dump.c  | 4 ++--
+>  2 files changed, 5 insertions(+), 6 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
 
-> diff --git a/arch/x86/include/asm/posix_types.h b/arch/x86/include/asm/posix_types.h
-> index dbcea7f47f..e1ed9bcabc 100644
-> --- a/arch/x86/include/asm/posix_types.h
-> +++ b/arch/x86/include/asm/posix_types.h
-> @@ -20,11 +20,12 @@ typedef unsigned short      __kernel_gid_t;
->  #if defined(__x86_64__)
->  typedef unsigned long  __kernel_size_t;
->  typedef long           __kernel_ssize_t;
-> +typedef long           __kernel_ptrdiff_t;
->  #else
->  typedef unsigned int   __kernel_size_t;
->  typedef int            __kernel_ssize_t;
-> -#endif
->  typedef int            __kernel_ptrdiff_t;
-> +#endif
->  typedef long           __kernel_time_t;
->  typedef long           __kernel_suseconds_t;
->  typedef long           __kernel_clock_t;
+>
+> diff --git a/doc/usage/cmd/dm.rst b/doc/usage/cmd/dm.rst
+> index 7651507937..196b22d137 100644
+> --- a/doc/usage/cmd/dm.rst
+> +++ b/doc/usage/cmd/dm.rst
+> @@ -112,9 +112,8 @@ This shows the full tree of devices including the following fields:
+>  uclass
+>      Shows the name of the uclass for the device
+>
+> -Index
+> -    Shows the index number of the device, within the uclass. This shows the
+> -    ordering within the uclass, but not the sequence number.
+> +Seq
+> +    Shows the sequence number of the device, within the uclass.
+>
+>  Probed
+>      Shows `+` if the device is active
+> @@ -366,7 +365,7 @@ dm tree
+>  This example shows the abridged sandbox output::
+>
+>      => dm tree
+> -    Class     Index  Probed  Driver                Name
+> +    Class     Seq    Probed  Driver                Name
+>      -----------------------------------------------------------
+>      root          0  [ + ]   root_driver           root_driver
+>      demo          0  [   ]   demo_shape_drv        |-- demo_shape_drv
+> diff --git a/drivers/core/dump.c b/drivers/core/dump.c
+> index 5ec30d5b3c..5cbaa97fa3 100644
+> --- a/drivers/core/dump.c
+> +++ b/drivers/core/dump.c
+> @@ -40,7 +40,7 @@ static void show_devices(struct udevice *dev, int depth, int last_flag,
+>         /* print the first 20 characters to not break the tree-format. */
+>         printf(CONFIG_IS_ENABLED(USE_TINY_PRINTF) ? " %s  %d  [ %c ]   %s  " :
+>                " %-10.10s  %3d  [ %c ]   %-20.20s  ", dev->uclass->uc_drv->name,
+> -              dev_get_uclass_index(dev, NULL),
+> +              dev->seq_,
+>                flags & DM_FLAG_ACTIVATED ? '+' : ' ', dev->driver->name);
+>
+>         for (i = depth; i >= 0; i--) {
+> @@ -129,7 +129,7 @@ void dm_dump_tree(char *dev_name, bool extended, bool sort)
+>  {
+>         struct udevice *root;
+>
+> -       printf(" Class     Index  Probed  Driver                Name\n");
+> +       printf(" Class     Seq    Probed  Driver                Name\n");
+>         printf("-----------------------------------------------------------\n");
+>
+>         root = dm_root();
 > --
-> 2.35.3
+> 2.45.2
 >
