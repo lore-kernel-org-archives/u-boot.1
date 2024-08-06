@@ -4,76 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6FA9C3DA64
-	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 13:05:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E501C49EA1
+	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 13:05:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BE5F88ACB;
+	by phobos.denx.de (Postfix) with ESMTP id AD92D88AE6;
 	Tue,  6 Aug 2024 14:59:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nr5e3Grw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fi7kycbC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A3B188B06; Tue,  6 Aug 2024 14:59:52 +0200 (CEST)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id 7B9F588A7B; Tue,  6 Aug 2024 14:59:52 +0200 (CEST)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15E9B88A8F
- for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 14:59:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 51ED387EED
+ for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 14:59:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-81f9339e52cso21755939f.0
- for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 05:59:48 -0700 (PDT)
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-389ccd2f0abso2325665ab.2
+ for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 05:59:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1722949187; x=1723553987; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yzZSEdq27xsTACKG9U6R1IRZchzVcWl4fQRrNpNdfyQ=;
- b=nr5e3GrwCv8bVXmCxrCDV7EdPjPKf9PGxkKdCcU3h2XpIq+KbTL91IRkh1m7FGB+Mr
- Majy+IJMWSdxvE48SdtExhwflOGylOJZjlryPrXPdntYfb7V2CoszWRmJGp7H9hc2m/m
- lD6f7WPi3W1pG1+yHXVsXeAHF3zYWskTSHiM0=
+ bh=o/I9xrQMyhzsmHKOu4e+5lKYn9J7+3vHqpL4u0MIeDk=;
+ b=fi7kycbCNSZ/J5/IZaOecbVFGHDPHc38ejTO5Jvlz/MKbyYEL0CaoZZVvoORGBEZB9
+ ZdxRKfM6rZJ2JfLo5gP0agQ/UqHzTE/BbhjtXH2E5XYZjEHLg4otAbwKQ53eckds8IHV
+ lGcsN3IzaiG3DMC6FweQHlRXUNzmrL+FCbdrw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1722949187; x=1723553987;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yzZSEdq27xsTACKG9U6R1IRZchzVcWl4fQRrNpNdfyQ=;
- b=IYx1Mv45E9Q/xBfcPHBvPM3Q2JDq2Xi7OmYTgpL3GfjkQSmjyN1wW/W8u3kfu0nk91
- UyPyhB428fWYiNd4/GMP5C7FRzJb0aWFsjHiY6oDmmYJp9AmjHVf5tsTwz5VDHVyuyhH
- XGauF2fJuVrzotuMDTZihygeZElRwYXC5cEWaGBuZuF5UReley9vztgGP6VJNLJDxsqB
- CYpRRU/f9n9hvpJPDuWq5+5syqWa2iFxG10ZWSvhgemvDpaEFY8DBWy0IhjHRR+5pMGE
- AQZVRFG0BoO843fzIA0J7Fa2uqRhHU9tlOkXhSrqPkBahpx2AxDT4yWLwj1GbPG8gAS8
- Lg8w==
-X-Gm-Message-State: AOJu0YxFXqt8i3KXWMcrHgB6qbSugWf8Kl7V5FtGJf82HBwV+CwJN2qN
- zbwHAnle6VNEnUyVrKaO/Y72ffGKOHnLm36xyELwbO5DrKLoYNVAwHX4Gy4XRNemcT7R4fQXKVQ
+ bh=o/I9xrQMyhzsmHKOu4e+5lKYn9J7+3vHqpL4u0MIeDk=;
+ b=EAbjcF9qqyD8ANNKkMjgydeTuY9rjw9j5xSw3boapfZIRv3Ty1IIpXmz0jt+8giMql
+ JMQVwPS+DI1T9dO292K38pkQenbao+sGc3zGJ6J9XG4GYxlJdJHviqf6uJOOpxbP7UGt
+ QBx7mE7GpLqJUiTAZZ+GewWa3yP314M0/KdNLoAuY+NXZE2uvMNgd/drt6qt+bn4R2lU
+ /0fFhSscQm9re0yU95q+QKyoJ0AdxPO3vUFTKja07PgiG8+ocKeV0WbyEIjg2TH30jNu
+ ZwKhbTgpnc4Gd3abR2bZoiKwkOmZ+B2bX4YSgohKZ/KZN/yL6cAYhwePiLDlRybPJyVu
+ aOuQ==
+X-Gm-Message-State: AOJu0YyIZTVgMh3/iz+7P+cnh3N4IUnzi4BOXllaUUmnlidyVFPbH5Xk
+ 6WbgucTShGadsPiWUyEGzy2nTFp90kmQgsfdVznrTMwdH75jtUsA3eiF+0u53bgv/auyUFtGL2c
  =
-X-Google-Smtp-Source: AGHT+IGWI2z3fuSPA8HZCEa0VOvXk9IPwYPEGFIKGafG5rFyz3eNuf+uvH2iJiGCPn/ukWQnlPv5ZA==
-X-Received: by 2002:a92:ccd0:0:b0:375:c443:9883 with SMTP id
- e9e14a558f8ab-39b1fc1a5d8mr131358825ab.21.1722949186579; 
- Tue, 06 Aug 2024 05:59:46 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEOhJGC6G4iebQZ67bg8eWPgTftbNnWfYA9D5Bgi+RoAJkzcdzbFBxDvFuF1g3reKM3Wtm6oQ==
+X-Received: by 2002:a05:6e02:1d88:b0:39a:eabf:c28a with SMTP id
+ e9e14a558f8ab-39b1fc11eaemr221893765ab.20.1722949187526; 
+ Tue, 06 Aug 2024 05:59:47 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39b20ab5ccdsm36871565ab.40.2024.08.06.05.59.45
+ e9e14a558f8ab-39b20ab5ccdsm36871565ab.40.2024.08.06.05.59.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Aug 2024 05:59:46 -0700 (PDT)
+ Tue, 06 Aug 2024 05:59:47 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Caleb Connolly <caleb.connolly@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Dragan Simic <dsimic@manjaro.org>, Nam Cao <namcao@linutronix.de>,
- =?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
- Tony Dinh <mibodhi@gmail.com>
-Subject: [PATCH v2 32/39] bootstd: Make bootdev_next_prio() continue after
- failure
-Date: Tue,  6 Aug 2024 06:58:43 -0600
-Message-Id: <20240806125850.2316956-33-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 33/39] efi: Use the same filename for all sandbox builds
+Date: Tue,  6 Aug 2024 06:58:44 -0600
+Message-Id: <20240806125850.2316956-34-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240806125850.2316956-1-sjg@chromium.org>
 References: <20240806125850.2316956-1-sjg@chromium.org>
@@ -95,61 +91,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When a device fails to probe, the next device should be tried, until
-either we find a suitable device or run out of devices. A device
-should never be tried twice.
+Sandbox is not a real architecture, but within U-Boot it is real enough.
+We should not need to pretend it is x86 or ARM anywhere in the code.
 
-When we run out of devices of a particular priority, the hunter should
-be used to generate devices of the next priority. Only if all attempts
-fail should this function return an error.
+Also we want to be able to locate the sandbox app using a single
+filename, 'bootsbox.efi', to avoid needing tests to produce different
+files on each host architecture.
 
-Update the function to use the latent 'found' boolean to determine
-whether another loop iteration is warranted, rather than setting 'dev'
-to NULL, which creates confusion, suggesting that no devices have been
-scanned and the whole process is starting from the beginning.
+Drop the confusing use of host architecture and just let sandbox be
+sandbox.
 
-Note that the upcoming bootflow_efi() test is used to test this
-behaviour.
+Fixes: 3a0654ecd0d ("efi_loader: correctly identify binary name")
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/17
 ---
 
 (no changes since v1)
 
- boot/bootdev-uclass.c | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ include/efi_default_filename.h | 25 ++-----------------------
+ 1 file changed, 2 insertions(+), 23 deletions(-)
 
-diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
-index 15a8a3555c6..807f8dfb064 100644
---- a/boot/bootdev-uclass.c
-+++ b/boot/bootdev-uclass.c
-@@ -640,6 +640,7 @@ int bootdev_next_prio(struct bootflow_iter *iter, struct udevice **devp)
- 	*devp = NULL;
- 	log_debug("next prio %d: dev=%p/%s\n", iter->cur_prio, dev,
- 		  dev ? dev->name : "none");
-+	found = false;
- 	do {
- 		/*
- 		 * Don't probe devices here since they may not be of the
-@@ -682,13 +683,13 @@ int bootdev_next_prio(struct bootflow_iter *iter, struct udevice **devp)
- 			}
- 		} else {
- 			ret = device_probe(dev);
--			if (ret) {
-+			if (ret)
- 				log_debug("Device '%s' failed to probe\n",
- 					  dev->name);
--				dev = NULL;
--			}
-+			else
-+				found = true;
- 		}
--	} while (!dev);
-+	} while (!found);
+diff --git a/include/efi_default_filename.h b/include/efi_default_filename.h
+index 77932984b55..6806c0daa88 100644
+--- a/include/efi_default_filename.h
++++ b/include/efi_default_filename.h
+@@ -5,7 +5,6 @@
+  * file name is defined in this include.
+  *
+  * Copyright (c) 2022, Heinrich Schuchardt <xypron.glpk@gmx.de>
+- * Copyright (c) 2022, Linaro Limited
+  */
  
- 	*devp = dev;
+ #ifndef _EFI_DEFAULT_FILENAME_H
+@@ -16,26 +15,8 @@
+ #undef BOOTEFI_NAME
  
+ #ifdef CONFIG_SANDBOX
+-
+-#if HOST_ARCH == HOST_ARCH_X86_64
+-#define BOOTEFI_NAME "BOOTX64.EFI"
+-#elif HOST_ARCH == HOST_ARCH_X86
+-#define BOOTEFI_NAME "BOOTIA32.EFI"
+-#elif HOST_ARCH == HOST_ARCH_AARCH64
+-#define BOOTEFI_NAME "BOOTAA64.EFI"
+-#elif HOST_ARCH == HOST_ARCH_ARM
+-#define BOOTEFI_NAME "BOOTARM.EFI"
+-#elif HOST_ARCH == HOST_ARCH_RISCV32
+-#define BOOTEFI_NAME "BOOTRISCV32.EFI"
+-#elif HOST_ARCH == HOST_ARCH_RISCV64
+-#define BOOTEFI_NAME "BOOTRISCV64.EFI"
+-#else
+-#error Unsupported UEFI architecture
+-#endif
+-
+-#else
+-
+-#if defined(CONFIG_ARM64)
++#define BOOTEFI_NAME "BOOTSBOX.EFI"
++#elif defined(CONFIG_ARM64)
+ #define BOOTEFI_NAME "BOOTAA64.EFI"
+ #elif defined(CONFIG_ARM)
+ #define BOOTEFI_NAME "BOOTARM.EFI"
+@@ -52,5 +33,3 @@
+ #endif
+ 
+ #endif
+-
+-#endif
 -- 
 2.34.1
 
