@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1123C49EA1
-	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 13:03:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2339DC49EA1
+	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 13:03:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA71C88AC4;
-	Tue,  6 Aug 2024 14:59:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 271BB88AC5;
+	Tue,  6 Aug 2024 14:59:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gehZh+hZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E4obG7gD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3CAF88AC0; Tue,  6 Aug 2024 14:59:47 +0200 (CEST)
-Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
- [IPv6:2607:f8b0:4864:20::d2b])
+ id 13C5A88A8B; Tue,  6 Aug 2024 14:59:48 +0200 (CEST)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D15688A8C
+ by phobos.denx.de (Postfix) with ESMTPS id 262A888A8F
  for <u-boot@lists.denx.de>; Tue,  6 Aug 2024 14:59:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-81f9339e541so20939239f.3
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-81f8f0197abso22497839f.2
  for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 05:59:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1722949179; x=1723553979; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1722949180; x=1723553980; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=J36lRpqplU8SqHlXlwuSQu6Jy6TqAsfo/XbhlY7gdm8=;
- b=gehZh+hZlC5l+MjTsfYPMdva7esathPVyIGT0vx7QvtCjrX5vFqKjN4x3RARNDC5rl
- QGWOPIJWr6I2kE1E42MeQtH9Z0hWBLQwX7UFqOnaqMCUm34dcMpjH3S4J/3yC4Bz0D1M
- QCb/1PoRuVlO+L1XfLYbUASCjqCDtP/Xs8xJk=
+ bh=uJjzM9tGMPYpEbEk1+GUvH796d8fS1/TGJduXx4EOAU=;
+ b=E4obG7gD0JcrN4bDCvbyR8+dNu812AnILoqGsFUNaPPbVOuLikHDjBUAozB9JVECE7
+ l3gNu1zrMzsLTfa6zkURpf3OB/wg07c8JDYwLniST+Z0IdPqzR3jQU46RYnKZPt9EgH6
+ tp8rIU0YcLpE5MJyMc4wopZb0fToisMne5f3g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722949179; x=1723553979;
+ d=1e100.net; s=20230601; t=1722949180; x=1723553980;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=J36lRpqplU8SqHlXlwuSQu6Jy6TqAsfo/XbhlY7gdm8=;
- b=ZiourzTiDv8hnFMOW1PrqCYTM+JhshsNVQYtLG3EzGZ9ps5K11y2uFlTfTz7MahCoo
- Y3wssjqw9VPwlGF88epezg0UxB5DVgGQXpMBN/KgXbwBA73WwZhciQv+yp56f8DNdJiy
- fvYSFoHhNuf5Ir3KMXNZLD4xYo6EKZj6q4MnQCefASZZRqkbb7PrribeoC9nOW+iLM9P
- 1y9tIBJp1mSvPPNBap71M3YUaPLCzRjT7Jh4jbdQSdVG+Gq57myxfKlZ8YfoV3HN9Qt/
- Go6lA8vQasgWMBADiaMk8HBcT7BzHtUMuMr7CtL96B5CJOyAxADKIUAr9mx8cYVhrRsY
- Ocaw==
-X-Gm-Message-State: AOJu0YwlKSFwyIEsI9FkWygUOInNuiJog+Ds5kvLl2N6uCq9AS9INVox
- 9hm4bu6WqYquA9E/mr28XV8gri/VdKKZ5WrXNMe2Ws8FjFH7hmgV+J81k3XIez4My3p1C1vJTJU
+ bh=uJjzM9tGMPYpEbEk1+GUvH796d8fS1/TGJduXx4EOAU=;
+ b=ey1xnOyoeRO7jKfzf6ewa+GgCJ7kZybrBIausMQeQD5pDLueWTu3n14b6AX2nhrCwY
+ qymVqzYbsD8lfflvtRfwG6h4+p1iPcqHgm+K+kwuCM5Riz/nCbM+B/7twb50e2hvtIKI
+ LmkX3D94cZsjzE0D5BSJbN4LVIk/e6aFwjw/1N45eq68Qv6E9aIfx1vwSou1NNpwjcyG
+ O20RwfnwCj7sEo+wEZgxESUTfKkzHepGK+gvaGB8Ow8mqYo1DHTCGcem8DkKXp0Axrr0
+ +7qsjcwW2loR3SFg+HnUT6/KEt/lvQxWCZwcCEeMQis7PGRPkmfQa3kyWB5QKkStcIRE
+ c1gQ==
+X-Gm-Message-State: AOJu0YwDXybzvkEEkFLhbe44EdvsXDb2Rdw8o54OJoFAPetbX/BkhVGn
+ b0E771KfXyc/EZyz04rgdjXNEER1RDbfaXdulzvtQcLOh4eOXyMTWD2EhuUguH4OHvxOLWtKvC8
  =
-X-Google-Smtp-Source: AGHT+IE28ALlWd8rfOh5Wf9cTlwOGohcKFuviA4TM6BOFe7UeFRtmLZlgPmBMIobw1YQdKQwpOXw6Q==
-X-Received: by 2002:a92:6e01:0:b0:374:aa60:a5c3 with SMTP id
- e9e14a558f8ab-39b1fc3b201mr148951555ab.28.1722949178710; 
- Tue, 06 Aug 2024 05:59:38 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF731sPQHFVByywORri9ApBCePmWnksN9SrccqRAo3PIH9EPoB1UIiSaOUk+NjAw7VV6RAzyQ==
+X-Received: by 2002:a05:6e02:1d88:b0:39a:eabf:c28a with SMTP id
+ e9e14a558f8ab-39b1fc11eaemr221889505ab.20.1722949179704; 
+ Tue, 06 Aug 2024 05:59:39 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
  e9e14a558f8ab-39b20ab5ccdsm36871565ab.40.2024.08.06.05.59.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Aug 2024 05:59:38 -0700 (PDT)
+ Tue, 06 Aug 2024 05:59:39 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Caleb Connolly <caleb.connolly@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>, Alexander Gendin <agendin@matrox.com>
-Subject: [PATCH v2 23/39] test: mbr: Use RAM for the buffers
-Date: Tue,  6 Aug 2024 06:58:34 -0600
-Message-Id: <20240806125850.2316956-24-sjg@chromium.org>
+Subject: [PATCH v2 24/39] test: mbr: Drop a duplicate test
+Date: Tue,  6 Aug 2024 06:58:35 -0600
+Message-Id: <20240806125850.2316956-25-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240806125850.2316956-1-sjg@chromium.org>
 References: <20240806125850.2316956-1-sjg@chromium.org>
@@ -91,50 +91,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The normal approach with sandbox is to use a fixed memory address in the
-RAM, to avoid needing to create a map for transient local variables.
-
-Update this test to use this approach.
+The test currently runs twice as it is declared twice. Unwind this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/cmd/mbr.c | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
+ test/cmd/mbr.c | 7 -------
+ 1 file changed, 7 deletions(-)
 
 diff --git a/test/cmd/mbr.c b/test/cmd/mbr.c
-index bab92c3ba00..81ca6f15b2a 100644
+index 81ca6f15b2a..f1fc44051df 100644
 --- a/test/cmd/mbr.c
 +++ b/test/cmd/mbr.c
-@@ -231,9 +231,11 @@ static unsigned build_mbr_parts(char *buf, size_t buf_size, unsigned num_parts)
- static int mbr_test_run(struct unit_test_state *uts)
- {
- 	struct blk_desc *mmc_dev_desc;
--	unsigned char mbr_wbuf[BLKSZ], ebr_wbuf[BLKSZ], rbuf[BLKSZ];
-+	unsigned char *mbr_wbuf, *ebr_wbuf, *rbuf;
- 	char mbr_parts_buf[256];
--	ulong mbr_wa, ebr_wa, ra, ebr_blk, mbr_parts_max;
-+	ulong addr = 0x1000;  /* start address for buffers */
-+	ulong mbr_wa = addr, ebr_wa = addr + BLKSZ, ra = addr + BLKSZ * 2;
-+	ulong ebr_blk, mbr_parts_max;
- 	struct udevice *dev;
- 	ofnode root, node;
+@@ -483,10 +483,3 @@ int do_ut_mbr(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
  
-@@ -257,9 +259,9 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	ut_assertf(sizeof(mbr_parts_buf) >= mbr_parts_max, "Buffer avail: %ld; buffer req: %ld\n",
- 		sizeof(mbr_parts_buf), mbr_parts_max);
- 
--	mbr_wa = map_to_sysmem(mbr_wbuf);
--	ebr_wa = map_to_sysmem(ebr_wbuf);
--	ra = map_to_sysmem(rbuf);
-+	mbr_wbuf = map_sysmem(mbr_wa, BLKSZ);
-+	ebr_wbuf = map_sysmem(ebr_wa, BLKSZ);
-+	rbuf = map_sysmem(ra, BLKSZ);
- 	ebr_blk = (ulong)0xb00000 / BLKSZ;
- 
- 	/* Make sure mmc6 exists */
+ 	return cmd_ut_category("mbr", "mbr_test_", tests, n_ents, argc, argv);
+ }
+-
+-static int dm_test_cmd_mbr(struct unit_test_state *uts)
+-{
+-	return mbr_test_run(uts);
+-}
+-
+-DM_TEST(dm_test_cmd_mbr, UT_TESTF_SCAN_FDT | UT_TESTF_CONSOLE_REC);
 -- 
 2.34.1
 
