@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE634C52D71
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 14:17:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E56AC52D71
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 14:17:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2653E88C06;
-	Wed,  7 Aug 2024 16:17:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 870AD88D0F;
+	Wed,  7 Aug 2024 16:17:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WI7JOc1Y";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H5VpPLOf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A52688CFB; Wed,  7 Aug 2024 16:17:31 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 1D99888BBC; Wed,  7 Aug 2024 16:17:32 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD1FC88CF0
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 16:17:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D82E88B9E
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 16:17:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=max.oss.09@gmail.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5b9d48d1456so1116991a12.1
- for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 07:17:28 -0700 (PDT)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-52f04b3cb33so4312583e87.0
+ for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 07:17:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723040248; x=1723645048; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1723040249; x=1723645049; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=t9NDOuDsJTL7wW9bIpQJG8cNlTDcg98IkTSnRTuSLnA=;
- b=WI7JOc1Y4CJg2RcjNveaWN0o39DphiS9FU4LUH8bMLw+ngyqiV5huf1tzkWYMK3XpW
- mjpjqUSnWm80oL0OTsR6Rfm7fDP6CXTz9PRvtXQ1GBd00eglCbpwvG/04O89wTPNFQgK
- WvcFxi/h/TB4zmJTiMjni7WnMv40ty+zA2VpcEMNl6qWV7j2Qo2CrEOUErO5fLCBhJ2R
- Miz2Piez/4FuXn5S9KtRZp8YdSZxnQR/frkDhmZfuNDY/Zsm/2wz14G7oVqix39Gs1+c
- 0laVTe1YyZEcmrZgTSoIUjXqLlRmuSbzAA0i0xaCSbhfBOFHIqzCfV5NYuUy32ZdAjjV
- PLdA==
+ bh=lrs/SHShY6PJxy4YjQPxLeyI1ShWPv9tmX5cyTt5tu4=;
+ b=H5VpPLOf5WM+WIs6GCJ+K6T8r3KKj72clwHzaJS8O8IuPvaUKUDVB8hjQ8xaDWAaH2
+ xmSlS9nvYJIwImYlxnOo/CqfWdHdiql8txsvLhbpdEhYqaujPzcugy95AJxQJGWtA/+b
+ yHPabtkUfcMs40/84wFtQB4r+W790DNHewn6BqxkxhfnKVcl8Bps48L7G/3ja5QQISnC
+ +s79lBpEWcG7idsq2l+scKjcrRpTPSk/UZKyHlLzoU0iDxE9j2K78wqCaopVn7izBDmf
+ FaP1i5W/m4PdHIKeM2+FtxbvJn/NcX2KUxYdr2K1jcf5xwqHZWDnqk/k6SHvL01Eo/Zh
+ E/kQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723040248; x=1723645048;
+ d=1e100.net; s=20230601; t=1723040249; x=1723645049;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=t9NDOuDsJTL7wW9bIpQJG8cNlTDcg98IkTSnRTuSLnA=;
- b=ox85XIOupw8cshWgQgOQqLDEqX25Jkxekjyfl6mD0sgv7HA5FHM5zDINAyOAw6sUWb
- jv+uUOAm/2mGB2KkmSQW5MBjtCN/ZzmROOlhlwCQ1UY4K6XpEIhwOeexTifVF01Xkzji
- ogruECNKCzr5XJrwHd9ZcgKD658kmrgZPJUZS2oBEspy2Nmxsj+LYlFPb5gJyxZo5+oJ
- AaiYHo9nCSj2VqwBCZKRBD9xqZRGQKwLdUH422xBC0KQEtPZr2Yr49/UDxWdlGuhWf6q
- osHUm7F1jB2aUJFHpW2/BrQnYnVR3tVmtsMrWuTOQ7zggznwDsloloj4qZ0fmn99pbbW
- WxrA==
+ bh=lrs/SHShY6PJxy4YjQPxLeyI1ShWPv9tmX5cyTt5tu4=;
+ b=ioItDaJXkSo2Ht8QHqswhuraWaopTtncZ9XO2XT8eb62YdkwavtcWVGgsHKpFbDELf
+ iylbbZ3/6XwmgrN5wd9ljAjEQIgT1018ZAZXsOSP/2f8WCQQ7c1VPCsc9aPUCi8W2tkm
+ zrGgysasDhIExv45gH7/FntdQ6rwDfyybIealTWFtyagKSf+adIlk4K9AMroNse79QYq
+ yLpXKs2QUhhD+t9Cc5xGYmyrDFcR2Sd/nsVDsuLxA+GUtpDpnUGdnIJBvxeEdlh7SRT7
+ FSmjzBYt2uR72M15rzycyOOfk/hQGZQhFL4mDaMbQ6hXLswJOJnpN5rCgh9j4opP8/Jj
+ Vgww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWkJBnPaAD/LbsR+aej4pvf6TpxS+LvIth7gGeaLZXBOfZePsjM1aAabYR5lLgqVywizcF61azJOou/OkX5zEjxjyh5oA==
-X-Gm-Message-State: AOJu0YxsLm+9p9iGIsLhL20LHn+Y4twNdPptz8F7XMzaJOz0lN52q3C6
- ldTP2urB9tC9NiEgDzvYLQrFoIw12HWWMHW+BXJJbsmbOwQuKfVf6u294g==
-X-Google-Smtp-Source: AGHT+IHBybp1AjSh6OFSohV9FVnAN6NRXnJPtpwI7E2koQneBvAa5jJy7Np4EjjsNSTR23pvRXAMtg==
-X-Received: by 2002:a17:907:e90:b0:a7a:952b:95cf with SMTP id
- a640c23a62f3a-a80791c3a2emr214578566b.32.1723040247939; 
- Wed, 07 Aug 2024 07:17:27 -0700 (PDT)
+ AJvYcCUUntYeyznaFtCbJd1CiapPq1SooDg658NR5lnqYBHSxWQUJuWjkQeTULufQONZo83wZIBSJRvEdNhbuYzjzrOrdWUitw==
+X-Gm-Message-State: AOJu0YzCA/7D6v/VY9A/ewU5yOiaU99jhjmj9PqO9lz3RJOzA+g87HSq
+ JI/H0TqHtwiX2qYvryJRXmJsqJrMzNvfZPpP/iiHEzk8bfln8rA2
+X-Google-Smtp-Source: AGHT+IHfb6GXTrhCNGGatuIiTKglJ+4xbDQbpIWZ9szGVapLrEydkLSQVwnWckH8wOs2bJS+C/IHFg==
+X-Received: by 2002:a05:6512:1585:b0:530:abce:1daf with SMTP id
+ 2adb3069b0e04-530bb373ee0mr15335936e87.6.1723040248975; 
+ Wed, 07 Aug 2024 07:17:28 -0700 (PDT)
 Received: from toolbox.int.toradex.com (31-10-206-125.static.upc.ch.
  [31.10.206.125]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7dc9ec8dafsm644945766b.220.2024.08.07.07.17.26
+ a640c23a62f3a-a7dc9ec8dafsm644945766b.220.2024.08.07.07.17.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 07:17:27 -0700 (PDT)
+ Wed, 07 Aug 2024 07:17:28 -0700 (PDT)
 From: max.oss.09@gmail.com
 To: Max Krummenacher <max.krummenacher@toradex.com>
 Cc: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
  Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Fabio Estevam <festevam@denx.de>,
+ Fabio Estevam <festevam@gmail.com>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Subject: [PATCH v1 1/4] board: apalis-imx8: add reset code
-Date: Wed,  7 Aug 2024 16:16:17 +0200
-Message-ID: <20240807141655.4165667-2-max.oss.09@gmail.com>
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: [PATCH v1 2/4] apalis-imx8: enable i.MX specific BOOTAUX
+Date: Wed,  7 Aug 2024 16:16:18 +0200
+Message-ID: <20240807141655.4165667-3-max.oss.09@gmail.com>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20240807141655.4165667-1-max.oss.09@gmail.com>
 References: <20240807141655.4165667-1-max.oss.09@gmail.com>
@@ -101,37 +99,28 @@ X-Virus-Status: Clean
 
 From: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
 
-With commit 922d4504bcab ("imx: scu_api: update to version 1.16 and
-add more APIs") added the reboot API.
-
-Add the board code to use that.
+commit e8cd1f60d964 ("imx: imx8: bootaux: Add i.MX8 M4 boot support")
+implemented IMX_BOOTAUX. Enable it.
 
 Signed-off-by: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
 Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
 ---
 
- board/toradex/apalis-imx8/apalis-imx8.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ configs/apalis-imx8_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/board/toradex/apalis-imx8/apalis-imx8.c b/board/toradex/apalis-imx8/apalis-imx8.c
-index 72d67d90d418..570bf2a27d4b 100644
---- a/board/toradex/apalis-imx8/apalis-imx8.c
-+++ b/board/toradex/apalis-imx8/apalis-imx8.c
-@@ -290,6 +290,14 @@ int board_init(void)
- 	return 0;
- }
- 
-+void reset_cpu(void)
-+{
-+	sc_pm_reboot(-1, SC_PM_RESET_TYPE_COLD);
-+
-+	do {
-+	} while (1);
-+}
-+
- #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
- int ft_board_setup(void *blob, struct bd_info *bd)
- {
+diff --git a/configs/apalis-imx8_defconfig b/configs/apalis-imx8_defconfig
+index e9fb4c75988a..466147f3bf2a 100644
+--- a/configs/apalis-imx8_defconfig
++++ b/configs/apalis-imx8_defconfig
+@@ -13,6 +13,7 @@ CONFIG_DEFAULT_DEVICE_TREE="fsl-imx8qm-apalis"
+ CONFIG_BOOTAUX_RESERVED_MEM_BASE=0x88000000
+ CONFIG_BOOTAUX_RESERVED_MEM_SIZE=0x08000000
+ CONFIG_TARGET_APALIS_IMX8=y
++CONFIG_IMX_BOOTAUX=y
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_SYS_LOAD_ADDR=0x95400000
+ CONFIG_SYS_MEMTEST_START=0x88000000
 -- 
 2.42.0
 
