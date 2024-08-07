@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85610C52D71
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 14:08:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 349D1C52D71
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 14:13:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 050D388D04;
-	Wed,  7 Aug 2024 16:08:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8DA9E88BE1;
+	Wed,  7 Aug 2024 16:13:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ANL7q6Px";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lXqv/JGG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFBD688D04; Wed,  7 Aug 2024 16:08:42 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id A4C9988BFD; Wed,  7 Aug 2024 16:13:53 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E311588D0E
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 16:08:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B13C88A2A
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 16:13:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=fedorross@gmail.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a7a975fb47eso234102866b.3
- for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 07:08:39 -0700 (PDT)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a7a9185e1c0so193513866b.1
+ for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 07:13:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723039719; x=1723644519; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1723040031; x=1723644831; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MzEG+V+GsA8Zg1qM4QSGr8tZxBvYiFKQrEBd52fh35c=;
- b=ANL7q6PxtfYMw1wKSPYfSOVUZ2Xzi3PR2K+8qKns+EtCNZlOqrlRRw0UGlggUz54IY
- A+xM8y1mrzBAIwc6Luj7hYnuOSwEd6qfwScwBMqGTOyULvmOI6V89SLOKS6zn/FYEV2Z
- Ka4nA5sJdOQTAojijIT0MS4E/Z3PLDEUWwuXlApy+4G97vUyaXrjOL/Dlp67EwnBhv7j
- EBSSu2hnulTK6vSpS0q+aJGiusoIvhcb/HSTydU+q1+udOYuZ0yQXd7ygo0XX+MzCeFN
- qBaq+DMohsO82isH2y2FMfCuLUU+IpZyCMIf2O1s+Cz4eGaXe8X/qX0Q9UN91IaSvMcK
- Gl5Q==
+ bh=42fQMPcs7ZSooJTLGFm6sGpLeLkIGtmgVhQkDduRUeg=;
+ b=lXqv/JGGQ1wscsefom3Ts3EC2e2ycXtPDdlIIJod2+0aZb+fErgUcNP5MqgUgQRFQm
+ s/CUvHFAif7qxKFt33+Gd1YOvK2I6r1P2L48FHs2aF/7XCV5JN3NjA4hFZu7Jr9Egxk8
+ eSe7Vk5PKq3YdK0Y4ma+H9jJECfLHLTQtfqYDhDd4fXvWmUw9snLv1cgy7oD2x4wy0go
+ DmCBtAIQOkz6MBV2rCqMzdqBH64ezIOdt9BzY1agkzAzri22j4a3BPxmt5mYgeegobYJ
+ ou0Vo/pOGuTdnAgYo8OOg8Yhy3VyBJU/jgnPKvimYQw6AFAN0rx6/z5vbJe+V55YLLJH
+ lxCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723039719; x=1723644519;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1723040031; x=1723644831;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MzEG+V+GsA8Zg1qM4QSGr8tZxBvYiFKQrEBd52fh35c=;
- b=ofK9IO4wm87rAb4lqHyFc3+X2Wb/xxduE4VqhhWu5V1b7PjPg74mSkta9uNJ+6XauK
- 9z3UzlFC6UGx62vfFuQGSEV5yKBVjpVpOvcJV98pyWwJX2IdrinKVPLJ711/j8PcJDOA
- Yae6vwtbzVnB78q15wUZKo9OP+L6AkRsDwcuPbosswHgthgYguW0lFbICqF+XAKrKC/j
- ILKCrPDoO9HZ1d9drALxq1qnLP3Tv29Bi7gI5Sd6s9H3DWXeDuCpeXltAmnbshAkhk5W
- A+a26y7rTYRQONQP8e+66kJmyM7MlUByc6cUckQfDIiE2OOPCdP12vKjetq+EsBE8Dfy
- Ib/A==
-X-Gm-Message-State: AOJu0Yyux0dMzJN170BX55AOrL0HUTnLtZcWcixzMUbBNiDy6q8hLYGL
- bYxj71klxRIJITaB5tom7hm/e6HSGwqCOb3VO7qXShxnYQzr0rE1ltCDMg==
-X-Google-Smtp-Source: AGHT+IG1GpPoZTLScGVKZjGklkKG/hw+2taJPTdJ/peXt2oLKvwDGwiskxSCOOAYswNMgCR++zzRFw==
-X-Received: by 2002:a17:907:6e9e:b0:a6f:4a42:1976 with SMTP id
- a640c23a62f3a-a7dc4e75471mr1322974266b.37.1723039718609; 
- Wed, 07 Aug 2024 07:08:38 -0700 (PDT)
-Received: from mafrox3.fritz.box
- (p200300c8071991002a9d74ab3dca2577.dip0.t-ipconnect.de.
- [2003:c8:719:9100:2a9d:74ab:3dca:2577])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7dc9c0ca0bsm641278566b.74.2024.08.07.07.08.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 07:08:38 -0700 (PDT)
-From: fedorross@gmail.com
-X-Google-Original-From: fedor.ross@ifm.com
-To: u-boot@lists.denx.de
-Cc: Fedor Ross <fedor.ross@ifm.com>, Heiko Schocher <hs@denx.de>,
- Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>
-Subject: [PATCH v3 3/3] i2c: imx_lpi2c: Support read transfers longer than 256
- bytes
-Date: Wed,  7 Aug 2024 16:08:01 +0200
-Message-Id: <20240807140801.1718483-3-fedor.ross@ifm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240807140801.1718483-1-fedor.ross@ifm.com>
-References: <20240807140801.1718483-1-fedor.ross@ifm.com>
+ bh=42fQMPcs7ZSooJTLGFm6sGpLeLkIGtmgVhQkDduRUeg=;
+ b=fHt8Ul+TS4aA0dMnKXzRfzzYQcrG6DfWhqDNYOMevd6egRfXQV0LdW57B9Z0nBzO0C
+ iRL0F9z4GLTlhNrq07qV5VnejXIneGRSX8KxmDW5tQSNap2CaqMLZo0eyWvaT+AQ2Sd7
+ 4bXqqvPRtPksn6v7i7eEBvPpUW/eB8rsVt3GN5mfkD284Xs0+HmoEI2n8fsckaXmQ3bY
+ UFWy0ayubhkIJP6ACMUqrf9XpDo5re8w61x2B+jxf4VEX3N3RmLFlOUNgzcXaNKPXqIb
+ izyVjY/EHl7+UMwoE0P1ynbv9wLRacVRBo8vcLcylJ4p+229k+Cl7kZbgHiEae2cRQOL
+ 124A==
+X-Gm-Message-State: AOJu0Yw6T/eZH14vPCGSRcXrLYYQyNe+Qhxr8ZH/zAB1uS8riQnlkiDH
+ kFRY6RpxXXA/+dqbu0ZY7R3zkqi6mz0JHpnlkp/dRDzHu0UsYeEaL+RAqSdIyrhhVOV4rRc7A9W
+ 5cZqaPeFkDnxDUv7EO04tVoT4LAI=
+X-Google-Smtp-Source: AGHT+IHGY5kXcwak/sUKatM4tV9Tgo/2UNB0z1YAE4mmP1sWugpEMpqk+LQHFOfJQfK6yrKKme747RdZNC6RZoZv8dA=
+X-Received: by 2002:a17:906:730f:b0:a6f:501d:c224 with SMTP id
+ a640c23a62f3a-a7dc5100bbcmr1435968666b.57.1723040030413; Wed, 07 Aug 2024
+ 07:13:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240730152529.143651-1-fedor.ross@ifm.com>
+ <20240730152529.143651-3-fedor.ross@ifm.com>
+ <ae537f45-a55f-fe39-bb3f-3d0fbf4603b1@denx.de>
+In-Reply-To: <ae537f45-a55f-fe39-bb3f-3d0fbf4603b1@denx.de>
+From: Fedor Ross <fedorross@gmail.com>
+Date: Wed, 7 Aug 2024 16:13:39 +0200
+Message-ID: <CAEGWRBD3TMH-LPrXtvnuHheL=Pnzn9PCVs=6hyujDfoWjb7Jvw@mail.gmail.com>
+Subject: Re: [PATCHv2 3/3] i2c: imx_lpi2c: Support read transfers longer than
+ 256 bytes
+To: hs@denx.de
+Cc: u-boot@lists.denx.de, Fedor Ross <fedor.ross@ifm.com>,
+ Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,135 +91,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fedor Ross <fedor.ross@ifm.com>
+On Wed, Aug 7, 2024 at 12:50=E2=80=AFPM Heiko Schocher <hs@denx.de> wrote:
 
-The TXFIFO register of LPI2C only has one byte length, and if the length
-of the data that needs to be read exceeds 256 bytes, it needs to be
-written to TXFIFO multiple times.
+Hello Heiko,
 
-Signed-off-by: Fedor Ross <fedor.ross@ifm.com>
----
-Cc: Heiko Schocher <hs@denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marex@denx.de>
----
+> On 30.07.24 17:25, fedorross@gmail.com wrote:
+> > From: Fedor Ross <fedor.ross@ifm.com>
+> >
+> > The TXFIFO register of LPI2C only has one byte length, and if the lengt=
+h
+> > of the data that needs to be read exceeds 256 bytes, it needs to be
+> > written to TXFIFO multiple times.
+> >
+> > Signed-off-by: Fedor Ross <fedor.ross@ifm.com>
+> > ---
+> > Cc: Heiko Schocher <hs@denx.de>
+> > Cc: Tom Rini <trini@konsulko.com>
+> > Cc: Marek Vasut <marex@denx.de>
+> > ---
+> >
+> > Changes in v2:
+> > - Add additional '---' below SoB line to separate Cc list. This way it
+> >    does not get included in the commit message when the patch is applie=
+d.
+> > - Prefix 'CHUNK_DATA' macro with 'LPI2C_' to namespace it.
+> > - Do bit manipulation in writel() function directly and drop the
+> >    'val =3D assignment' .
+> >
+> >   drivers/i2c/imx_lpi2c.c | 71 ++++++++++++++++++++++++++--------------=
+-
+> >   1 file changed, 46 insertions(+), 25 deletions(-)
+>
+> Patch breaks world build, see for example
+>
+> https://dev.azure.com/hs0298/hs/_build/results?buildId=3D114&view=3Dlogs&=
+j=3D9261107f-b16b-528d-034d-a5b366785bfc&t=3Daa057498-3634-5fad-2ef8-82ed58=
+702aca&l=3D1197
+>
+> Find the whole pipeline (with other patches too...)
+>
+> https://dev.azure.com/hs0298/hs/_build/results?buildId=3D114&view=3Dresul=
+ts
+>
+> Could you take a look please?
 
-Changes in v3:
-- Add LPI2C_CHUNK_LEN_MIN
-- Force macros LPI2C_CHUNK_DATA and LPI2C_CHUNK_LEN_MIN to be of
-  unsigned type to satisfy type-check of min()/max()/clamp() macros.
+Done.
+Sorry for the inconvenience.
 
-Changes in v2:
-- Add additional '---' below SoB line to separate Cc list. This way it
-  does not get included in the commit message when the patch is applied.
-- Prefix 'CHUNK_DATA' macro with 'LPI2C_' to namespace it.
-- Do bit manipulation in writel() function directly and drop the 
-  'val = assignment' .
+[...]
 
- drivers/i2c/imx_lpi2c.c | 72 +++++++++++++++++++++++++++--------------
- 1 file changed, 47 insertions(+), 25 deletions(-)
-
-diff --git a/drivers/i2c/imx_lpi2c.c b/drivers/i2c/imx_lpi2c.c
-index 54db6fa863f..4636da9f301 100644
---- a/drivers/i2c/imx_lpi2c.c
-+++ b/drivers/i2c/imx_lpi2c.c
-@@ -19,6 +19,9 @@
- #define LPI2C_NACK_TOUT_MS 1
- #define LPI2C_TIMEOUT_MS 100
- 
-+#define LPI2C_CHUNK_DATA	256U
-+#define LPI2C_CHUNK_LEN_MIN	1U
-+
- static int bus_i2c_init(struct udevice *bus);
- 
- /* Weak linked function for overridden by some SoC power function */
-@@ -118,8 +121,10 @@ static int bus_i2c_send(struct udevice *bus, u8 *txbuf, int len)
- 
- static int bus_i2c_receive(struct udevice *bus, u8 *rxbuf, int len)
- {
-+	struct dm_i2c_bus *i2c = dev_get_uclass_priv(bus);
- 	struct imx_lpi2c_bus *i2c_bus = dev_get_priv(bus);
- 	struct imx_lpi2c_reg *regs = (struct imx_lpi2c_reg *)(i2c_bus->base);
-+	unsigned int chunk_len, rx_remain, timeout;
- 	lpi2c_status_t result = LPI2C_SUCESS;
- 	u32 val;
- 	ulong start_time = get_timer(0);
-@@ -128,33 +133,50 @@ static int bus_i2c_receive(struct udevice *bus, u8 *rxbuf, int len)
- 	if (!len)
- 		return result;
- 
--	result = bus_i2c_wait_for_tx_ready(regs);
--	if (result) {
--		debug("i2c: receive wait for tx ready: %d\n", result);
--		return result;
--	}
-+	/*
-+	 * Extend the timeout for a bulk read if needed.
-+	 * The calculated timeout is the result of multiplying the
-+	 * transfer length with 8 bit + ACK + one clock of extra time,
-+	 * considering the I2C bus frequency.
-+	 */
-+	timeout = max(len * 10 * 1000 / i2c->speed_hz, LPI2C_TIMEOUT_MS);
- 
--	/* clear all status flags */
--	writel(0x7f00, &regs->msr);
--	/* send receive command */
--	val = LPI2C_MTDR_CMD(0x1) | LPI2C_MTDR_DATA(len - 1);
--	writel(val, &regs->mtdr);
-+	rx_remain = len;
-+	while (rx_remain > 0) {
-+		chunk_len = clamp(rx_remain, LPI2C_CHUNK_LEN_MIN, LPI2C_CHUNK_DATA) - 1;
- 
--	while (len--) {
--		do {
--			result = imx_lpci2c_check_clear_error(regs);
--			if (result) {
--				debug("i2c: receive check clear error: %d\n",
--				      result);
--				return result;
--			}
--			if (get_timer(start_time) > LPI2C_TIMEOUT_MS) {
--				debug("i2c: receive mrdr: timeout\n");
--				return -1;
--			}
--			val = readl(&regs->mrdr);
--		} while (val & LPI2C_MRDR_RXEMPTY_MASK);
--		*rxbuf++ = LPI2C_MRDR_DATA(val);
-+		result = bus_i2c_wait_for_tx_ready(regs);
-+		if (result) {
-+			debug("i2c: receive wait for tx ready: %d\n", result);
-+			return result;
-+		}
-+
-+		/* clear all status flags */
-+		writel(0x7f00, &regs->msr);
-+		/* send receive command */
-+		writel(LPI2C_MTDR_CMD(0x1) | LPI2C_MTDR_DATA(chunk_len), &regs->mtdr);
-+		rx_remain = rx_remain - (chunk_len & 0xff) - 1;
-+
-+		while (len--) {
-+			do {
-+				result = imx_lpci2c_check_clear_error(regs);
-+				if (result) {
-+					debug("i2c: receive check clear error: %d\n",
-+					      result);
-+					return result;
-+				}
-+				if (get_timer(start_time) > timeout) {
-+					debug("i2c: receive mrdr: timeout\n");
-+					return -1;
-+				}
-+				val = readl(&regs->mrdr);
-+			} while (val & LPI2C_MRDR_RXEMPTY_MASK);
-+			*rxbuf++ = LPI2C_MRDR_DATA(val);
-+
-+			/* send next receive command before controller NACKs last byte */
-+			if ((len - rx_remain) < 2 && rx_remain > 0)
-+				break;
-+		}
- 	}
- 
- 	return result;
--- 
-2.34.1
-
+Best regards,
+Fedor
