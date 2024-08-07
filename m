@@ -4,77 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5AD3C3DA7F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 13:00:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF714C52D6F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 13:09:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 238DD88C72;
-	Wed,  7 Aug 2024 15:00:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 250CE88A7D;
+	Wed,  7 Aug 2024 15:09:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="S47EjpiD";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F0D688A7D; Wed,  7 Aug 2024 15:00:42 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1723036179;
+	bh=hOnM6m/VySkYjSsH0ZLFeefLvIPUR4MCZ35I86X7rtE=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=zITWfM3gyIvtMcpGNf86Bbs83gIkfS6SxIGSbx/qu8wWke/JPwcqFcvWQc+xZ/rs6
+	 rklzbXJnita4xBeKCj5EliQJLos4syixVYNR7+GllZsdP0FlzbRBYUT6VCssKQF1br
+	 MpaZdSGua4l/k2awT33SFzRIEg8antRb77wVrAXLLrIVaDj8icozCtwpUXz58ZIaiq
+	 qRpn92rBSTHCmQKizCio+RQyN1rSTLDRdtVlXbG2rGoFFkJIpCWM8T4AEegsPr053H
+	 C/SYjqMu33W00CX89+3jnTJKb57fzQIqyfr3PCRmOooGUz2aIbBrW9ZkIbhq7T0svA
+	 DEWERa+wQTaOQ==
+Received: from crub.agik.hopto.org (p508b6395.dip0.t-ipconnect.de
+ [80.139.99.149])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A45B8890F
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 15:00:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a7b2dbd81e3so235377966b.1
- for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 06:00:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723035639; x=1723640439; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=BIZm1KCAfSA2R/kZFLFycBnLtV/vJAlbyaVV0Yu55pc=;
- b=S47EjpiDbBFj3uhpR4va703voFw1e8b02/PQZijWak4zPC7PpBtXO+fg0oRR14v/Q8
- vmAzLOXWBWYVgd0BKEHLVpCkGn7l9MZAPDrY1UHalnAB1oXyo3N5O9pJRYK8tLxQKF78
- CiC7TOpa//DvsNdU7nh8pVg4aTuTAbQqHz3LbQHSIGbFVyhsCyVP/+dzKTlbFHO7B0Xu
- qTVuOPMIV9UPhxHuj6Wysf4nYE7oYX1gAKil3mbGx3eQU/WLeOoA0+e0m53VJou/JGTV
- oEbC6Jsp707PnZQfGNaiq5oiobHYRR0BqktGTMb11xOQf8T6qx4oHpr96W6LiwZhoQk7
- hKlg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723035639; x=1723640439;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=BIZm1KCAfSA2R/kZFLFycBnLtV/vJAlbyaVV0Yu55pc=;
- b=TnJAtVcVgRtCzPyWL5baey7DiXzmzVFWHGFmGUFGsBU1kl8MB1J3PmVEeDJ8nYF8y1
- u5I2RJfAVcNJrkwCEHJZ5PMs9/IDiSQ/+BYXDuFmCq0ppMu9rus5VMsoP+1PkV+p7fyk
- 2e14AT3w33J28U0nH9idaNaORAA5XL3+OWgqvdtu4LN1h2ZR8KdM+vJpJ+j4tayIef5M
- LSIihlMA8hpY7RdNv2NeepRNnyev3mFKez63Aqsa5zgrOGFklRTGmPODD79DXPzoFD1H
- ODnHKe0FvwIwLMypYzTigPcYMqwjZnhUINcSQ0VJdaARcF+uqYuqD23HziP0HCZKFREC
- 2xgg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVmhCmGuDfGdwQh53JpHZvENQ0m990W2cqnPaD2FoDYxNleH58ZV7mUsprl0gEpzroC+HRAC0dDRU2qe1Wk7XiZ6y6DyQ==
-X-Gm-Message-State: AOJu0YziF9svRiTmQrBMbaYRO4rnqt7sF99J4UembwV4unatXAyYTWT6
- 6hlyd7uj/CZ4C4Hux8jV6Anb45OPWhXUu5N7/xsMzrQURQHGJSrfAsJ2VBUDWXA=
-X-Google-Smtp-Source: AGHT+IGGTkYhLZQAkkujxezyCjuI7/UpGwIoUklPHxnpWenZ0z4EHs/1le0YEyFFNh4I+27MSkW55A==
-X-Received: by 2002:a17:907:3207:b0:a75:23bb:6087 with SMTP id
- a640c23a62f3a-a7dc4fa89d4mr1322018466b.29.1723035623133; 
- Wed, 07 Aug 2024 06:00:23 -0700 (PDT)
-Received: from localhost.localdomain (ppp046103060252.access.hol.gr.
- [46.103.60.252]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7dc9c0c0e0sm642823166b.67.2024.08.07.06.00.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 06:00:22 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: xypron.glpk@gmx.de
-Cc: Anton.Antonov@arm.com, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng@tinylab.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH] configs: enable efidebug and EFI http boot on QEMU aarch64
-Date: Wed,  7 Aug 2024 16:00:09 +0300
-Message-ID: <20240807130010.407399-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.45.2
+ (Authenticated sender: agust@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 9DA8588A6B;
+ Wed,  7 Aug 2024 15:09:37 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1723036177;
+ bh=hOnM6m/VySkYjSsH0ZLFeefLvIPUR4MCZ35I86X7rtE=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=mUuSBoj2P5wOYwbQaPfiKbwXUgdLFnjxazj1fUZcvX5l/H1xqtgBopVJsgQYX8md4
+ 0zT2aIMDzPfOmbUFl76HI0DZrEbXRjjHfcS2CPj27a9mLMdROLDwRQkd6ksEL8DRKp
+ LVSdzeBGM8oiFhXeEnRBMDvcFxFejrnqNjzU6U84YpeCHozLKWsULVAp8qeLD1Ovxk
+ ILDLhr+xnw90IJMmxrXB9ppW13f8lpCdnKm5ya/dKbMC2QzBPq1E7Mv1EQMhCeVVd2
+ DhJu8gTDVe3xgiJoXrdiKNR2U/G3wTQHXqaso/9vTDeFJ8pPLw2I++LItnNUApY36v
+ EnbP+NwBMPjng==
+From: Anatolij Gustschin <agust@denx.de>
+To: u-boot@lists.denx.de
+Cc: Nikita Kiryanov <nikita@compulab.co.il>, Fabio Estevam <festevam@denx.de>,
+ Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 10/11] board: cm_fx6: convert to DM_I2C
+Date: Wed,  7 Aug 2024 15:09:33 +0200
+Message-Id: <20240807130933.846385-1-agust@denx.de>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240803161513.486062-10-agust@denx.de>
+References: <20240803161513.486062-10-agust@denx.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -93,33 +68,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-EFI HTTP is a useful option to have by default and is working reliably on
-QEMU. Let's enable it by default, since we have no size limitations.
-While at it enable 'efidebug' as well, which is currently needed to
-configure the EFI HTTP boot options.
+Conversion to DM_I2C is mandatory, enable DM_I2C to fix board
+removal warning. Convert EEPROM access to use DM_I2C API.
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Anatolij Gustschin <agust@denx.de>
 ---
- configs/qemu_arm64_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+Cc: Nikita Kiryanov <nikita@compulab.co.il>
+Cc: Fabio Estevam <festevam@denx.de>
+Cc: Heiko Schocher <hs@denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+---
+Changes in v2: fix trimslice build errors
 
-diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-index 7e166f439087..088ba39f18e1 100644
---- a/configs/qemu_arm64_defconfig
-+++ b/configs/qemu_arm64_defconfig
-@@ -33,6 +33,7 @@ CONFIG_CMD_NVEDIT_EFI=y
- CONFIG_CMD_DFU=y
- CONFIG_CMD_MTD=y
- CONFIG_CMD_PCI=y
-+CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_TPM=y
- CONFIG_CMD_MTDPARTS=y
- CONFIG_ENV_IS_IN_FLASH=y
-@@ -68,3 +69,4 @@ CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_PCI=y
- CONFIG_SEMIHOSTING=y
- CONFIG_TPM=y
-+CONFIG_EFI_HTTP_BOOT=y
+ board/compulab/cm_fx6/cm_fx6.c |  3 ++-
+ board/compulab/common/Makefile |  8 +++++++-
+ board/compulab/common/eeprom.c | 14 +++++---------
+ board/compulab/common/eeprom.h |  2 +-
+ configs/cm_fx6_defconfig       |  2 +-
+ 5 files changed, 16 insertions(+), 13 deletions(-)
+
+diff --git a/board/compulab/cm_fx6/cm_fx6.c b/board/compulab/cm_fx6/cm_fx6.c
+index c6d33c32cc..40047cf678 100644
+--- a/board/compulab/cm_fx6/cm_fx6.c
++++ b/board/compulab/cm_fx6/cm_fx6.c
+@@ -14,6 +14,7 @@
+ #include <env.h>
+ #include <fsl_esdhc_imx.h>
+ #include <init.h>
++#include <i2c.h>
+ #include <miiphy.h>
+ #include <mtd_node.h>
+ #include <net.h>
+@@ -256,7 +257,7 @@ static int cm_fx6_setup_one_i2c(int busnum, struct i2c_pads_info *pads)
+ {
+ 	int ret;
+ 
+-	ret = setup_i2c(busnum, CONFIG_SYS_I2C_SPEED, 0x7f, pads);
++	ret = setup_i2c(busnum, I2C_SPEED_STANDARD_RATE, 0x7f, pads);
+ 	if (ret)
+ 		printf("Warning: I2C%d setup failed: %d\n", busnum, ret);
+ 
+diff --git a/board/compulab/common/Makefile b/board/compulab/common/Makefile
+index 7c8226e6e1..c7b2237e5c 100644
+--- a/board/compulab/common/Makefile
++++ b/board/compulab/common/Makefile
+@@ -4,6 +4,12 @@
+ #
+ # Author: Igor Grinberg <grinberg@compulab.co.il>
+ 
++CL_EEPROM=y
++
++ifdef CONFIG_TARGET_TRIMSLICE
++CL_EEPROM=
++endif
++
+ obj-y				+= common.o
+-obj-$(CONFIG_$(SPL_)SYS_I2C_LEGACY)	+= eeprom.o
++obj-$(CL_EEPROM)		+= eeprom.o
+ obj-$(CONFIG_SMC911X)		+= omap3_smc911x.o
+diff --git a/board/compulab/common/eeprom.c b/board/compulab/common/eeprom.c
+index efdaf342d5..1b12d09604 100644
+--- a/board/compulab/common/eeprom.c
++++ b/board/compulab/common/eeprom.c
+@@ -34,19 +34,15 @@ static int cl_eeprom_layout; /* Implicitly LAYOUT_INVALID */
+ 
+ static int cl_eeprom_read(uint offset, uchar *buf, int len)
+ {
++	struct udevice *eeprom;
+ 	int res;
+-	unsigned int current_i2c_bus = i2c_get_bus_num();
+ 
+-	res = i2c_set_bus_num(cl_eeprom_bus);
+-	if (res < 0)
++	res = i2c_get_chip_for_busnum(cl_eeprom_bus, CONFIG_SYS_I2C_EEPROM_ADDR,
++				      CONFIG_SYS_I2C_EEPROM_ADDR_LEN, &eeprom);
++	if (res)
+ 		return res;
+ 
+-	res = i2c_read(CONFIG_SYS_I2C_EEPROM_ADDR, offset,
+-			CONFIG_SYS_I2C_EEPROM_ADDR_LEN, buf, len);
+-
+-	i2c_set_bus_num(current_i2c_bus);
+-
+-	return res;
++	return dm_i2c_read(eeprom, offset, (uint8_t *)buf, len);
+ }
+ 
+ static int cl_eeprom_setup(uint eeprom_bus)
+diff --git a/board/compulab/common/eeprom.h b/board/compulab/common/eeprom.h
+index 9bd7604a99..0a44926ebd 100644
+--- a/board/compulab/common/eeprom.h
++++ b/board/compulab/common/eeprom.h
+@@ -10,7 +10,7 @@
+ #define _EEPROM_
+ #include <errno.h>
+ 
+-#if CONFIG_IS_ENABLED(SYS_I2C_LEGACY)
++#if !CONFIG_IS_ENABLED(TARGET_TRIMSLICE)
+ int cl_eeprom_read_mac_addr(uchar *buf, uint eeprom_bus);
+ u32 cl_eeprom_get_board_rev(uint eeprom_bus);
+ int cl_eeprom_get_product_name(uchar *buf, uint eeprom_bus);
+diff --git a/configs/cm_fx6_defconfig b/configs/cm_fx6_defconfig
+index 386616cc42..81a39f7073 100644
+--- a/configs/cm_fx6_defconfig
++++ b/configs/cm_fx6_defconfig
+@@ -80,7 +80,7 @@ CONFIG_BOUNCE_BUFFER=y
+ CONFIG_DWC_AHSATA=y
+ # CONFIG_DWC_AHSATA_AHCI is not set
+ CONFIG_LBA48=y
+-CONFIG_SYS_I2C_LEGACY=y
++CONFIG_DM_I2C=y
+ CONFIG_SPL_SYS_I2C_LEGACY=y
+ CONFIG_SYS_I2C_MXC=y
+ CONFIG_SYS_MXC_I2C3_SPEED=400000
 -- 
-2.45.2
+2.25.1
 
