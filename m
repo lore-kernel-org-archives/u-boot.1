@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4861AC52D6F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 19:54:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DD31C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 19:54:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E5C388BD4;
-	Wed,  7 Aug 2024 21:54:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B123B88BC6;
+	Wed,  7 Aug 2024 21:54:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jydtleDz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Z0BVhOR/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E39F88BCC; Wed,  7 Aug 2024 21:54:25 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id A6F7B88C0E; Wed,  7 Aug 2024 21:54:27 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6379C889D4
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 21:54:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A9660889D4
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 21:54:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-42817bee9e8so1604495e9.3
- for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 12:54:23 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-428e3129851so1682255e9.3
+ for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 12:54:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723060462; x=1723665262; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=agL8tcD0WovvcJqaPfx5OrcwS3LrB0IgWFY20vwIEC4=;
- b=jydtleDzUKUNEHIpZVN5GykLA4HBiwxJK99A4WqK2akvBBGFqSzbg38wwUizLKMgpY
- +DO7fPgj+f/+QXJ6huoHr0XTV7Sp7tZ4BmB6NfxO2mMSOHfiVoxrABL7Too/KQ21qOmc
- 0vh7JAknIhzUg+r2SJt15kyM7p7TU6+c5nT0rim7fDWcfVFterfbK0YB0Q2RegpnmKc2
- X2VPwEQ0jsKmSgjZGEzQy55RfG3E2FalVEkOUpu8C/unWxlrDXIbBR1TCpOr74ZyIcLc
- 4cQAsMncayAiC5eVm5bhOA3/zMhMuRZimnzIR5+h3VUbMeyCKQ/J5yxwOtnQiy2lgkqa
- e1sA==
+ d=gmail.com; s=20230601; t=1723060464; x=1723665264; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=7MItkl2Z+Jt8Mvb5HInZTEP3uAkqW6OJugrf2S9IW4A=;
+ b=Z0BVhOR/eVh6OI+9UukcxRAa06dG6+AzYDvE5/y6+rNtUI6SDv4TeTw32rw95BrRII
+ TFEksozfb2KWMUqQeP3xFJnwY9BM4TWWxdvkyDfH5UgCAPTha0HeL0NaESbNM6luzA7s
+ tVIbJnnYmL2xs4pEn+uk50YFwp9usLHcGAXBn1MwKRKT3wzVVSEC9D7x4IrHqKJM/U5d
+ jsH404yOUM+ceVlKj9CyPLZw7BqjeWDDZGjdtMiaEPjRxxKNUxNov+mDs+4eTWgNNRmK
+ z5OSdFOtZfRyIcXW23w9S1yxBKRSpirMB+kJsvbRsRx4w94Mwcs4fh9bumPUyqkmkKo6
+ /Sbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723060462; x=1723665262;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=agL8tcD0WovvcJqaPfx5OrcwS3LrB0IgWFY20vwIEC4=;
- b=CirMdqUoy20G0HQFeCYRUXgQGkkfapwYj71B6Xkki/3eAwkXUHHluDUguYcCTwYQwi
- 9g4GRakG3tV8EbIQKjal5xV0IgPm6cNIWi1FSHH0B+18CUsZ4bdBmy7vLb5Tz3LEiCh/
- fTOES8goYoh1i61xG97l5yqdwskv0nwYMRZZOzX10Fj0s+3cIoHxQjGamyQRWlgm2vpe
- sBwiqCMBAMCyDFX0EkNalMB0kIRV83CZT1mYzjtvx6/kRqMFwzwJtPp+1L8zwgNiZhmn
- n5Ky57Y9YG4c2wDIFsfYdurYD4y1hUkgaujrT70NeDeyhe7GrmTb8bYpBdmm4tksepg6
- QR7A==
+ d=1e100.net; s=20230601; t=1723060464; x=1723665264;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7MItkl2Z+Jt8Mvb5HInZTEP3uAkqW6OJugrf2S9IW4A=;
+ b=Ajqsqs1lfG5BTc2OFRS08VqcKQmCaX2te4O6cHgZyr6TlSvX/ZM41mr0Z3PTcvhmab
+ dYCERvm7F6DXmI128jObm8fT2jWVPdB+W7QdLsCIiY7M3Z/1vxDc3fLHFc1TppJyYqDO
+ TPQYzfNR5CcF/cojS8Z8kwe08tNJdKpj4yanD5ps9VGNBiPr+ecxvSA3OYOWdqpHKDOW
+ EJpZCoeT2dyLJUQo15c6dBqownUeiWjseml6inX+rdtwE/BQ5LxojME/14mJWViEVXvU
+ BbnGtMBUPhnsheRBleX2wVt9z94rX7zmUC9S11/A1LAJF2R25R636ZlOd+gkYG5qadQx
+ sGGQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVfCYEIggDzt2FHrRllNiYovBWYUKt8yMHNxOw3+ar14/pWh6CXunAq8FksVVxo5uNcMEW3+/UKIzasXJlmxlYfbE6YSA==
-X-Gm-Message-State: AOJu0Yw0W8/i+FyO+6DcJ5kLGeNWop8ZjTj9AUbFAiqiP4ggrAep9MQN
- ytzaXhDpMJydxxeC0BhqSW+5XN65fMGvGhVyCOhAjgddlolp1U9k
-X-Google-Smtp-Source: AGHT+IGVKfJWf5y3eyVBRYxZ1S/64TkpwKb1DWFLhPADiwWC4nH0QYvOdufabspsGhmLE1Rd0ENSkQ==
-X-Received: by 2002:a05:600c:470d:b0:428:10ec:e5ca with SMTP id
- 5b1f17b1804b1-428e6b0870emr121021345e9.14.1723060461795; 
- Wed, 07 Aug 2024 12:54:21 -0700 (PDT)
+ AJvYcCWDJbajbwEb4TpCiOeL+z7Hpxyvs2VPNtOchZz9C+9cUvia4s39JOWbCB83IoKlQ/fwOR6KxdWw+pz31yMPmeS7tg+IoQ==
+X-Gm-Message-State: AOJu0YwT5EdSkvUheCam7JDCAAiAqB4NLOctyYH1otPpD6jl/gIjvobh
+ Ch2oSvUPv26/lhtIesZhg8pAMDYOH3ezUkI8ef5t1V9aeRP/OvK2
+X-Google-Smtp-Source: AGHT+IECrUW4YimfG0yYeXPC80HW1cpGAeaIYdKPviJzzJq21nPal7gC1PTNvvAtL9ADaQBJ+8fgTQ==
+X-Received: by 2002:a05:600c:35d2:b0:427:ff7a:79e with SMTP id
+ 5b1f17b1804b1-428e6b08baemr128345175e9.16.1723060463758; 
+ Wed, 07 Aug 2024 12:54:23 -0700 (PDT)
 Received: from localhost.localdomain
  (host-87-6-196-30.retail.telecomitalia.it. [87.6.196.30])
  by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-429057a8802sm44383765e9.21.2024.08.07.12.54.19
+ 5b1f17b1804b1-429057a8802sm44383765e9.21.2024.08.07.12.54.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 12:54:21 -0700 (PDT)
+ Wed, 07 Aug 2024 12:54:23 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
@@ -84,10 +85,12 @@ To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
  Michael Polyntsov <michael.polyntsov@iopsys.eu>,
  Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 0/9] led: introduce LED boot and activity function
-Date: Wed,  7 Aug 2024 21:54:03 +0200
-Message-ID: <20240807195413.30456-1-ansuelsmth@gmail.com>
+Subject: [PATCH v2 1/9] led: turn LED ON on initial SW blink
+Date: Wed,  7 Aug 2024 21:54:04 +0200
+Message-ID: <20240807195413.30456-2-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20240807195413.30456-1-ansuelsmth@gmail.com>
+References: <20240807195413.30456-1-ansuelsmth@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -106,64 +109,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series is a reworked version of the previous seried: 
-misc: introduce STATUS LED activity function
+We currently init the LED OFF when SW blink is triggered when
+on_state_change() is called. This can be problematic for very short
+period as the ON/OFF blink might never trigger.
 
-This series port and expand the legacy concept of LED boot from
-the legacy Status LED API to new LED API.
+Turn LED ON on initial SW blink to handle this corner case and better
+display a LED blink from the user.
 
-One thing that many device need is a way to communicate to the
-user that the device is actually doing something.
+Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+---
+ drivers/led/led_sw_blink.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-This is especially useful for recovery steps where an
-user (for example) insert an USB drive, keep a button pressed
-and the device autorecover.
-
-There is currently no way to signal the user externally that
-the bootloader is processing/recoverying aside from setting
-a LED on.
-
-A solid LED on is not enough and won't actually signal any
-kind of progress.
-Solution is the good old blinking LED but uboot doesn't
-suggest (and support) interrupts and almost all the LED
-are usually GPIO LED that doesn't support HW blink.
-
-Additional Kconfg are also introduced to set the LED boot and
-activity. Those are referenced by label.
-
-A documentation for old and these new LED API is created.
-
-(world tested with the azure pipeline)
-
-Changes v2:
-- Drop GPIO SW implementation
-- Add fix for new LED SW BLINK
-
-Christian Marangi (9):
-  led: turn LED ON on initial SW blink
-  led: implement led_set_state/period_by_label
-  led: implement LED boot API
-  common: board_r: rework BOOT LED handling
-  led: implement LED activity API
-  tftp: implement support for LED activity
-  mtd: implement support for LED activity
-  ubi: implement support for LED activity
-  doc: introduce led.rst documentation
-
- cmd/mtd.c                  |  19 +++++
- cmd/ubi.c                  |  15 +++-
- common/board_r.c           |  25 ++++++-
- doc/api/index.rst          |   1 +
- doc/api/led.rst            |  10 +++
- drivers/led/Kconfig        |  41 +++++++++++
- drivers/led/led-uclass.c   |  28 ++++++++
- drivers/led/led_sw_blink.c |   5 +-
- include/led.h              | 144 +++++++++++++++++++++++++++++++++++++
- net/tftp.c                 |   7 ++
- 10 files changed, 290 insertions(+), 5 deletions(-)
- create mode 100644 doc/api/led.rst
-
+diff --git a/drivers/led/led_sw_blink.c b/drivers/led/led_sw_blink.c
+index 9e36edbee47..853278670b9 100644
+--- a/drivers/led/led_sw_blink.c
++++ b/drivers/led/led_sw_blink.c
+@@ -103,8 +103,11 @@ bool led_sw_on_state_change(struct udevice *dev, enum led_state_t state)
+ 		return false;
+ 
+ 	if (state == LEDST_BLINK) {
++		struct led_ops *ops = led_get_ops(dev);
++
++		ops->set_state(dev, LEDST_ON);
+ 		/* start blinking on next led_sw_blink() call */
+-		sw_blink->state = LED_SW_BLINK_ST_OFF;
++		sw_blink->state = LED_SW_BLINK_ST_ON;
+ 		return true;
+ 	}
+ 
 -- 
 2.45.2
 
