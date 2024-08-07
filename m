@@ -4,59 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 924DAC3DA7F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 11:04:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C816BC3DA7F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 11:17:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCB3288B81;
-	Wed,  7 Aug 2024 13:04:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 42B8F88729;
+	Wed,  7 Aug 2024 13:17:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1723028665;
-	bh=nWnLflveHdoOlHp4m3k50erl1qOzlEt6LEf9Du1LSkg=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
+	s=phobos-20191101; t=1723029426;
+	bh=Hdh1GzXaXIbmoWLdK63ALVv0b642GtnNP+TuId+8DGE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=FQct2YzPTkNHRTMmqRSc5cafzEn3tQZjskOp8yezitSqQKEk/3Zz4n0V1WOO481g1
-	 OcDJOKZ+FY1Ni9atUTUG4ytNBHT+9oxgNcG75JEl6wuNkMh7AX71ieR695snXXv+BF
-	 +4qIGdpZcSVT/IeenfiF87qnaFvPjM5I2NZs+/ZHz64OpgSdgqeNARtRegsqidZ3ni
-	 uoVCFFaOscfQ3H7pT3mlRZktt21xaYzCjji62E1opbEJBW+ugfDhvw00Yie5cUAtMP
-	 6AE0tov5eJ/xceiUgUzCW4kv77AeLsHe6w00Z+Ib4nSSEXVePHSE4B3sPa4HzXP2jv
-	 CuODC5eakqOcg==
-Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 949C188B87;
- Wed,  7 Aug 2024 13:04:24 +0200 (CEST)
+	 Reply-To:From;
+	b=Gnz1lpeD20X5ROKzw1/Ce6wiMaiHa3vX+EyqGJbCAd/ZT5/eJ5dbXTdOHpNvDf2FK
+	 IiC5qtbLDY8bXSd1ttJCuRW2M1H/LACDSUMEb8TcMEvdJBlpxASATBPIzQMOfc4fD/
+	 gcXO6/EbMst8jgcR4o8XLEfzqRSd1F+Tjmm0AeaQQAS23UOV2EwXwCZ5SZ8ziQXvFs
+	 25S64Jl/zCxIncQHNWcfM7xogJzZAr0l4n+jdpnN3TC922qsVcwsgdIPsyYCqMUkpw
+	 zGXUjAlyPMAOfgbWG+TuhV47cLwfHJZUfyzpE+0ofCQoXs8BC1SmFEUDbZMEwG7fvS
+	 fpru84rWZtlyA==
+Received: from [192.168.1.107] (82-131-232-44.pool.digikabel.hu
+ [82.131.232.44])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 9CBDF880F9;
+ Wed,  7 Aug 2024 13:17:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1723028665;
- bh=nWnLflveHdoOlHp4m3k50erl1qOzlEt6LEf9Du1LSkg=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=yF4/A6sZiLByQ4JOlhDUgRkw3m1nl2bEuQ858ZgJTCxrgrV4sQ10/BBVbBoVTo/0q
- wXNxbt38EyRMuDTFC6LUbEE63tuSDmlz3lsEMZUdkAGWKFedjphR/IQYHx4lBzUbsF
- rE86OeSoSMmzISEfp4Cqf8XsSvoVPomQajGBCvYLK5glJdAlVDm1OQpfNtm2zCcg2r
- 4erI0q/VWAtrKI+XeSLdek9fvboazdIFvsnqdGSuORYp4T7mc9mYXJv1m9Uh6E8vBz
- Ws6yz/izTyeCA4pBEBPh1ziwMJSRz0OvgtNuec7td1DrCdhPruoPEC1SyfV4Zrm8N0
- wjh9UUGTFT3Pw==
-Date: Wed, 7 Aug 2024 13:04:23 +0200
-From: Lukasz Majewski <lukma@denx.de>
-To: Benjamin Hahn <B.Hahn@phytec.de>
-Cc: Teresa Remmet <T.Remmet@phytec.de>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, Cem Tenruh
- <C.Tenruh@phytec.de>, "Martyn Welch" <martyn.welch@collabora.com>, Simon
- Glass <sjg@chromium.org>, "Fabio Estevam" <festevam@gmail.com>
-Subject: Re: [PATCH v3] config: Add 'update_bootimg' command to update
- flash.bin on Phytec's imx8mm
-Message-ID: <20240807130423.601a1e47@wsk>
-In-Reply-To: <dd54f3f8-7d80-4d0c-9eaa-639e45ddfdcf@phytec.de>
-References: <20240806081131.4065425-1-lukma@denx.de>
- <dd54f3f8-7d80-4d0c-9eaa-639e45ddfdcf@phytec.de>
-Organization: denx.de
-X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ s=phobos-20191101; t=1723029424;
+ bh=Hdh1GzXaXIbmoWLdK63ALVv0b642GtnNP+TuId+8DGE=;
+ h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
+ b=vVWhuDxmvzFF7YDr0zlaBF5Z5/1qRKBNlqmTr0nYlg+8F96gyqdo95nnvoh51xyWY
+ bf7SVXKMmZrDH5t/eegEOcZcnfGLKuYI23eOpR780tDygw6TjWEcjP3RyCJPc19u4P
+ lGgXSFfCCFFE6653G9eVmNxaRNtPjbab5eE9mknqpEdFQR1aKB3knwbFCacW0UOUr9
+ obyBNKBNARwB0kSJKSbCcstYQ3fDCN1vLQdBwsAlNndjAgJXxI4UnDMOniNL90hLRN
+ g7FrGBd3Up9BdvoR5CE+8+8BY1eaNMtHFDVjXfnxnyAqjCEetxsm1Sce+dU/NL95fm
+ I0taaMYUEJsEQ==
+Message-ID: <ae4dea57-f8b8-b82d-2b31-aeab70b4158c@denx.de>
+Date: Wed, 7 Aug 2024 13:16:21 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/VUoKrMy_bBBoWPugg.GBypq";
- protocol="application/pgp-signature"; micalg=pgp-sha512
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH 10/11] board: cm_fx6: convert to DM_I2C
+Content-Language: en-US
+To: Anatolij Gustschin <agust@denx.de>, u-boot@lists.denx.de
+Cc: Nikita Kiryanov <nikita@compulab.co.il>, Fabio Estevam
+ <festevam@denx.de>, Tom Rini <trini@konsulko.com>
+References: <20240803161513.486062-1-agust@denx.de>
+ <20240803161513.486062-10-agust@denx.de>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <20240803161513.486062-10-agust@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,126 +66,41 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---Sig_/VUoKrMy_bBBoWPugg.GBypq
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+Hello Anatolij,
 
-Hi Benjamin,
+On 03.08.24 18:15, Anatolij Gustschin wrote:
+> Conversion to DM_I2C is mandatory, enable DM_I2C to fix board
+> removal warning. Convert EEPROM access to use DM_I2C API.
+> 
+> Signed-off-by: Anatolij Gustschin <agust@denx.de>
+> ---
+> Cc: Nikita Kiryanov <nikita@compulab.co.il>
+> Cc: Fabio Estevam <festevam@denx.de>
+> Cc: Tom Rini <trini@konsulko.com>
+> ---
+>   board/compulab/cm_fx6/cm_fx6.c |  3 ++-
+>   board/compulab/common/Makefile |  2 +-
+>   board/compulab/common/eeprom.c | 14 +++++---------
+>   board/compulab/common/eeprom.h |  2 +-
+>   configs/cm_fx6_defconfig       |  2 +-
+>   5 files changed, 10 insertions(+), 13 deletions(-)
 
-> Hi Lukasz,
->=20
-> On 06.08.24 10:11, Lukasz Majewski wrote:
-> > This command allows easy update on SD card or eMMC of the flash.bin
-> > generated (with binman) during u-boot build.
-> >
-> > Signed-off-by: Lukasz Majewski <lukma@denx.de>
-> > ---
-> > Changes for v2:
-> > - Remove 'update_mmc_part' variable
-> > - Change path for hostname
-> > - Use full version of dhcp command (${loadaddr} added)
-> >
-> > Changes for v3:
-> > - Remove +1 when calculating the size of binary to be written
-> > ---
-> >   include/configs/phycore_imx8mm.h | 10 ++++++++++
-> >   1 file changed, 10 insertions(+)
-> >
-> > diff --git a/include/configs/phycore_imx8mm.h
-> > b/include/configs/phycore_imx8mm.h index ce6dc87c69..361e665676
-> > 100644 --- a/include/configs/phycore_imx8mm.h
-> > +++ b/include/configs/phycore_imx8mm.h
-> > @@ -29,6 +29,16 @@
-> >   	"mmcdev=3D" __stringify(CONFIG_SYS_MMC_ENV_DEV) "\0" \
-> >   	"mmcpart=3D1\0" \
-> >   	"mmcroot=3D2\0" \
-> > +	"update_offset=3D0x42\0" \
-> > +	"update_filename=3Dflash.bin\0" \
-> > +	"hostname=3D/srv/tftp/\0" \
-> > +	"update_bootimg=3D"
-> > 	\
-> > +		"mmc dev ${mmcdev} ; "		\
-> > +		"if dhcp ${loadaddr}
-> > ${hostname}/${update_filename} ; then "	\ =20
->=20
-> The dhcp and tftp command should take the filepath from the tftp=20
-> directory and get the tftp directory automatically not the absolute
-> path. So this will try to get the file from=20
-> /path_to_tftp_folder/srv/tftp/flash.bin and will fail
+This patch breaks world build ... could you take a look?
 
-And that is why you do have the ${hostname}/${update_filename}, so when
-you have several exported directories - you can specify which one
-without the need to modify the 'update_bootimg' command.
+https://dev.azure.com/hs0298/hs/_build/results?buildId=114&view=logs&j=08d7dacc-cd40-5df3-6db5-bb431d28637a&t=8da0c77f-a38d-54ad-3682-1c9d5ed6f8aa&l=1228
 
-> because it
-> can't find it. So you can drop the ${hostname}.
+Thanks!
 
-I would prefer to keep the ${hostname}/${update_filename} part.
+bye,
+Heiko
 
-> Also drop the initialization of ${hostname} above since it is no
-> longer needed.
->=20
-> Should be like this:
->=20
-> dhcp ${loadaddr} ${update_filename}
->=20
-
-IMHO the line shall be:
-
-dhcp ${loadaddr} ${hostname}/${update_filename}
-
-> > +		"setexpr fw_sz ${filesize} / 0x200 ; "	/*
-> > SD block size */ \
-> > +		"setexpr fw_sz ${fw_sz} ; " =20
-> I think you can drop this line since it does not do anything.
->=20
-
-Ok.
-
-> Benjamin
-> > 				\
-> > +		"mmc write ${loadaddr} ${update_offset} ${fw_sz} ;
-> > "	\
-> > +		"fi\0" \
-> >   	"mmcautodetect=3Dyes\0" \
-> >   	"mmcargs=3Dsetenv bootargs console=3D${console} " \
-> >   		"root=3D/dev/mmcblk${mmcdev}p${mmcroot} rootwait
-> > rw\0" \ =20
->=20
->=20
-
-
-
-
-Best regards,
-
-Lukasz Majewski
-
---
-
+-- 
 DENX Software Engineering GmbH,      Managing Director: Erika Unter
 HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
-
---Sig_/VUoKrMy_bBBoWPugg.GBypq
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmazVLcACgkQAR8vZIA0
-zr3xkAf/Ym1Issqs8Zc8S/JJJLakf5U3ykQwKHgIm6+s2g1OujL5Eggts0Pg7+2D
-p/eohWglxOE7OhiQWg/unobCfFwVcL6rcpELJ5I1kAfGharobbYt9htQElD6IKJJ
-E2T9A4Jb5uAFkSk5Sj84b3XkNZdrobTauapJ/XYpU4pl0Dg7a8nojh/MJHhp3RXq
-JRxc/JZlT2m/8qlEp4Pl13SCaz0yeY1t8uGk4Q+M9AdEiFmHSqpyIzJNG0bA5gyg
-wIgN++FrGSMhzSL1kF82FfNeDuzpoADXmW4EIBfJ5GIDzrNKHmTWHVQWRTQW1MnJ
-jGcS5U0Na9nXjN6sLLJkajaIAjNGCg==
-=zjaZ
------END PGP SIGNATURE-----
-
---Sig_/VUoKrMy_bBBoWPugg.GBypq--
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
