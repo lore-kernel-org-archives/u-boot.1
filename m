@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B147C52D6F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 01:22:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59E96C49EA1
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 01:27:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD919886A6;
-	Wed,  7 Aug 2024 03:22:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D171488B09;
+	Wed,  7 Aug 2024 03:27:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="tlWfnQwS";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="gwZu5fUN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D025F886FD; Wed,  7 Aug 2024 03:22:12 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id 18D4188B0A; Wed,  7 Aug 2024 03:27:26 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E57DD882BE
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 03:22:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2445C88AE0
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 03:27:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1722993722; x=1723598522; i=xypron.glpk@gmx.de;
- bh=lDA0LqhN+XQhkocEYTEl58ubRCyWC3pUlT3IZce5Bgw=;
+ s=s31663417; t=1722994042; x=1723598842; i=xypron.glpk@gmx.de;
+ bh=RQoVFGFPpYQ/Jqtcls1TJ+mCm3WMcnc1RiXz/MW+ncY=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=tlWfnQwSsAfOSCXk60Hr2MwjBWSP5NXNeSDejIpKDQJAVRHWnqzzuJYnSj18XAQ6
- KECaMKbxU7mgo0EnoOGeuR7s4eU4yJAni1WRn/4/t4Nt68VH4JPoY8dMD5LFCnd6v
- K676zn/05kilG62NxvU7hhzR/YKqP6o5U7uGUrzu90OcT20yfhz0enSDxvpTweHWU
- WIY5wf0jiItKGWwYwomSugM5mh6YDd2GiNYQFpRD5ksfp8AMpPyjkjqExtMp1ryUR
- 0Kn/TRj867uw2UgohtnQCwNOAzIhAtkBOhFygN3W6ikC2fCNjJRt8ZUZQeU6TcTf5
- HHXhx0FkQ+5Wyu60Tg==
+ b=gwZu5fUNcOr+UIet8vf7DmHhbepakGzoyikReGnewGgyEaH0e4JUzXOfQx96Ywp/
+ vMs2PgNhg/amSSzkKCvLe368MRUEUOT56ziasmo1zdNelomwh9WUTpBjTsDB548Yv
+ q2kmniLHKkPvilrWYvd3a2np64yby+9kRT5VhQrTPv6m6X64uGk7sKWwe6ppQg7ml
+ mGDHeJKyEdL3QEfUVsbdq4dnaeiHLC5Pxh4SXgGGblveusx2RjzsKt0zLONS2Vr5p
+ OdcRrnoTEzuO+SThOpR79XyfoUJ6VwEwIP2VDFtYyWDqujVQAhNydrudzH0jHnc/D
+ br7wqEKH51E4KggtSg==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.103.101] ([178.202.41.98]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M6lpM-1sZrTY0RRe-000LxI; Wed, 07
- Aug 2024 03:22:02 +0200
-Message-ID: <d3d2206e-0044-456e-bed5-07ec8d74f8cf@gmx.de>
-Date: Wed, 7 Aug 2024 03:22:01 +0200
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MTABZ-1snHfi3V0B-00Ur3t; Wed, 07
+ Aug 2024 03:27:21 +0200
+Message-ID: <1fbea795-45b2-4226-8eec-50647ce06d32@gmx.de>
+Date: Wed, 7 Aug 2024 03:27:20 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 30/39] efi: Show the vendor in helloworld
+Subject: Re: [PATCH v2 31/39] Revert "bootdev: avoid infinite probe loop"
 To: Simon Glass <sjg@chromium.org>
 Cc: Caleb Connolly <caleb.connolly@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
- <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+ <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Dragan Simic <dsimic@manjaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Nam Cao <namcao@linutronix.de>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Tony Dinh <mibodhi@gmail.com>
 References: <20240806125850.2316956-1-sjg@chromium.org>
- <20240806125850.2316956-31-sjg@chromium.org>
+ <20240806125850.2316956-32-sjg@chromium.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240806125850.2316956-31-sjg@chromium.org>
+In-Reply-To: <20240806125850.2316956-32-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:c2FzX6d4VDK/WePt820rZ0hvcH6yUbXSECP/LFKEidgLKHYRDra
- tQljMwzR2MKghC38Fl2RGaEfvLK2vnmdQDrmr7KPhVrS8pzhpfp1rz9ZZvVKVsJb4aa1Mf1
- 3U/kys6GPi66yVCmm6RvQThfKPB8XKnpXBaLL8aIfIe5J7rJ5eX1e41mYjs+5AKzmk0t07V
- SoIaVfjaM4WFNt8T0zIYA==
-UI-OutboundReport: notjunk:1;M01:P0:6wh/BgiHXpc=;L4uIAJs9hmpGOB+55227KsPvSAW
- kmmwozYeyH7obne7Mo8yghv/VzSvPAtrfmAhQJCK7Ezr1LdS7U5MfQIv6p0/PcGETmnZZpH47
- W30fJt5JwLEOdYUl/C9u3mCJF2MroOzyMpIJ1eedNfFjOrbJ0odMFt+8UCbbvLBdNSNfwGany
- +D9RT9rOuoqbUqlxO77qkry6ONPM+y/4ZjDl2HGk1/Kuu4nVSBg8xOPLSnvxmshPVOow/Gb6f
- PWTKgl5X//zUMyyZGadAUUUETQJcKml0ddRlkwP8ld6lxFexfq5ivVg9T2qjTI5RpTioztW6b
- iUxzx2VlYBFM6Dfwsea8CLpQnT7mqpjqcmlBA9IN+wUMbzbGsU5QtB6F6kMGk+ywHjath3cMZ
- SmIozVdiO22L714DzBHxjv9vrzOgAAnxb4/A0uQpddzUQtuOV+rD8NZqtyvDIjiosacySTrF/
- bEpDZUDO4Kt7HqSMoRA2q2xcNkFXuuGcylLk/a4bqlGxFYAM/Ps/xz3IhZBccIQdHpsAPHfeg
- a4ldmrRFw3bXDh39QJ0M3bC/bDGyxebncRe4UaPksldEIg/EOa9sYtZXr+j7NLnxziyYKic3P
- b0SZf2MVDRbAYHULF7mUDagPuEiDCBvHHUwT/WKxkMKj9qmA6eLUO2xNZQwGzKonfIvKBR0C8
- 51LIMdVzCH9T75+lH8XwwTqyHybK4HWPqKM/k+u8pEc25Dmc7AE0/h8zgt8Urih+kKjiIyyH3
- VU60r1FeNPPNnqJ8GV4ukmwZnUcUhFel1vuPn+Z5UUYEve25TpGhuWy0XPa1DslYZBtSeI0xy
- PpCHRKepQGmhDGmAcr78Gwwg==
+X-Provags-ID: V03:K1:ZSsd2C0la+hECw2j0yW2ocD7wZDOSV5MnO/04orjVSpA4zKNeCQ
+ zlemioPpGn5DcLIMcUBZVQKhgXa9qdPVvo86IQhEXiJWtYArtDUPpVmDADwGTcA1e10i08i
+ HeiN7ClAq6eHuwtKeo+Lvsouoz3tPF4FkklUzHV3mTkTFnqpsVX21ijkE0SjEs3bLmvCQe8
+ u2w3w3CRgGeRxPuqk3gzQ==
+UI-OutboundReport: notjunk:1;M01:P0:E/3E+s/inXk=;Ll9n+5hrF3aqkj8cibNDSieetRC
+ cqYFIZEGvBmxmGqeERdzdSPz2XC0OUeLCayRQtVPUJruVtKTGmyK2GDW7oFjYh/IgCkdo1U+A
+ 6PpP0C2jeNtiwI5DDq8au09zPQMsHrWwxj98tssDQSom1CD+NCeAHWakKEnz4ocKIPGzrngsP
+ zWR/E7C4lLNcfJQ2tHBavAwPgELIV3+KWJoRPNq/aY2UfuaZX1WqmLXe/PdfPaR/dXIz3CHRX
+ uq4sueLLUnghWRDksVOnKTSEVLpdnaygOeaK+5aQdJHnLOShgxEna41K/OF2C//TQ8yo3Q6HS
+ 4SQ+BWv2dtas7jL+xwOZYqTe44fRbPbOPatWWpeWl2Avyy6wGiOcSqupoTn6nY4rLv5E9WacY
+ M26ykhQnTjjnyO1QfHLapce0NdxQhVooz1CbMhtPpJE4OywGXHovbOwq5spTR0OODS67jWIaq
+ 0jsE4YF4nsMvUQfYeq3RqSOJTNA0hmsBcf9rzJ+9SCe4fW40sJaAq+Ty2SiLmtwFfeKU0ugu9
+ 6H8WCu2aqN6/pnPPfmNSg5j7XxcVJD+5VZNSzdtBUHTYCmxjK9Xm4tU5y/MaU4CjssU9lspIj
+ k+o1WdOsUuINpmm/GHB3aUVRdaL6icRfF3sXGIuVP/r95mngM6E0dbrpNAuJZt8t+b3yfXWiM
+ 5bawf9iJVIDBaL78TAO6lesBDMlIbSAe3mmmlz7Cgoj+zQFjL7YLRRFwoH4eoR32Yvifz1Slc
+ B+L+E14CH5lMauij8sPMWG5K7Ju5pmrgR7GfzkrGrjNo65v4sdSbAi65QBfYSEgXfW6tDLfWO
+ 5uQI3jjjzKurdZS3Z/l67rnzqbBl76eEkEU7SUBYXpF1s=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,42 +97,80 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 06.08.24 14:58, Simon Glass wrote:
-> Show the vendor name so it is clear that this app has been built by
-> U-Boot.
+> This turns out to be insufficient to fix the problem, since when
+> bootdev_next_prio() exits, the caller has no idea that this really
+> is the end. Nor is it, since there may be other devices which should
+> be checked.
 
-As described in the UEFI specification the system table is provided by
-the UEFI firmware to the entry-point of EFI binaries. So on a Laptop you
-might see "Xiaomi" or "Huawei" displayed when running through the new
-lines. "U-Boot" will only show up when running on U-Boot.
+Please, describe how the original problem will be addressed.
 
+@Caleb:
+
+Do you have instruction how to reproduce the problem?
+
+>
+> The caller iterates which calls iter_incr() which calls
+> bootdev_next_prio() again, which finds the same device and the loop
+> continues.
+>
+> We never did create a test for this[1], which makes it hard to be
+> sure which problem was fixed.
+>
+> The original code had the virtual of staying in the loop looking for
+
+%s/virtual/virtue/
+
+Best regards
+
+Heinrich
+
+> a bootdev, so let's go back to that and try to fix this another way.
+>
+> This reverts commit 9d92c418acfb7576e12e2bd53fed294bb9543724.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
 > (no changes since v1)
 >
->   lib/efi_loader/helloworld.c | 3 +++
->   1 file changed, 3 insertions(+)
+>   boot/bootdev-uclass.c | 14 ++------------
+>   1 file changed, 2 insertions(+), 12 deletions(-)
 >
-> diff --git a/lib/efi_loader/helloworld.c b/lib/efi_loader/helloworld.c
-> index 586177de0c8..f120249126d 100644
-> --- a/lib/efi_loader/helloworld.c
-> +++ b/lib/efi_loader/helloworld.c
-> @@ -237,6 +237,9 @@ efi_status_t EFIAPI efi_main(efi_handle_t handle,
->   			(con_out, u"Missing device path for device handle\r\n");
->   		goto out;
->   	}
-> +	con_out->output_string(con_out, u"Vendor: ");
-
-%s/Vendor/Firmware vendor/
-
-Best regards
-
-Heinrich
-
-> +	con_out->output_string(con_out, systab->fw_vendor);
-> +	con_out->output_string(con_out, u"\n");
->   	con_out->output_string(con_out, u"Boot device: ");
->   	ret =3D print_device_path(device_path, device_path_to_text);
->   	if (ret !=3D EFI_SUCCESS)
+> diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
+> index 7c7bba088c9..15a8a3555c6 100644
+> --- a/boot/bootdev-uclass.c
+> +++ b/boot/bootdev-uclass.c
+> @@ -632,7 +632,7 @@ int bootdev_next_label(struct bootflow_iter *iter, s=
+truct udevice **devp,
+>
+>   int bootdev_next_prio(struct bootflow_iter *iter, struct udevice **dev=
+p)
+>   {
+> -	struct udevice *dev =3D *devp, *last_dev =3D NULL;
+> +	struct udevice *dev =3D *devp;
+>   	bool found;
+>   	int ret;
+>
+> @@ -682,19 +682,9 @@ int bootdev_next_prio(struct bootflow_iter *iter, s=
+truct udevice **devp)
+>   			}
+>   		} else {
+>   			ret =3D device_probe(dev);
+> -			if (!ret)
+> -				last_dev =3D dev;
+>   			if (ret) {
+> -				log_warning("Device '%s' failed to probe\n",
+> +				log_debug("Device '%s' failed to probe\n",
+>   					  dev->name);
+> -				if (last_dev =3D=3D dev) {
+> -					/*
+> -					 * We have already tried this device
+> -					 * and it failed to probe. Give up.
+> -					 */
+> -					return log_msg_ret("probe", ret);
+> -				}
+> -				last_dev =3D dev;
+>   				dev =3D NULL;
+>   			}
+>   		}
 
