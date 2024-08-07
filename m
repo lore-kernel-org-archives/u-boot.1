@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62A1AC3DA7F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 13:45:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7879C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 13:46:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E336C88D0B;
-	Wed,  7 Aug 2024 15:45:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5D32588CF1;
+	Wed,  7 Aug 2024 15:46:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eobX4NM3";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="KnojS7gf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 793AC88D07; Wed,  7 Aug 2024 15:45:10 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5E94D88CEE; Wed,  7 Aug 2024 15:46:12 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D479E88D3A
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 15:44:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DBED88B7E
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 15:46:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-52fcdc2f1b6so252881e87.3
- for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 06:44:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723038296; x=1723643096; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=x7rXieBPEcvTsKK5q6ecR3xe051b33Zz4DKhhjx8JH0=;
- b=eobX4NM3G6cobihDz3AxcnnxRIyFw1w0csFNFQxo9y16viDKx56Hdrb6gp1kqjJPh4
- nshuFEP6J9qP1tQoS9NiH1+rc6RrxwcxPRKCdR+EyUqtv1MMNLv+f2JadOrTsjPXmk8L
- oJxqfqHpjiNH8CCRkma+ULkdp9HzlfHI7zlVSQN0FcCknTITdWNJBFp6dpk+iqF0TjMf
- v7l3hfklUZdIQEQ/4/C3dIxqoX+9gVS4jsOFnKfeRuO5e81OrtDQIriQJ1hUtBJOt8xP
- xjOVUiUUO7AqALysq7t0yiVaBSAYRBewVAY8i/5mZxmnU1SqnC27vEBohS2frPW4eR50
- yCjg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723038296; x=1723643096;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=x7rXieBPEcvTsKK5q6ecR3xe051b33Zz4DKhhjx8JH0=;
- b=GafIvbzCt7rrEh1lDqIBZTIH5yITwNcAAyfFyMZjvlVg4xGU9DJ9gC3DnKuf+D/Oyi
- 4qvckMkHKkcc+txuvEWq53aF0NGn9hoSFYj4vHAFJ762RGlvkPCliMmaIWZhOaGjIp3d
- vEUjFqP5+rKS5V7eydMKe6QUMHQFjCUpYBOAXc4SpYkZmU17cc0UZnTBXS7iNoDDmEAC
- reKJHUWxjzHKALskvepP1pqQ4lSBQmdxfm0pbmoNht5Vu9B1EYGD7c1q92RC3qbEOXml
- OdI4sAKQecuXcj0dyjuglVBwbMIRpEfvmC0nTl0HGokaHmAgUE5SuOiJyTTB3KmxoXmt
- RMbg==
-X-Gm-Message-State: AOJu0Yz3HacClO1O2K6/wfzDRYAFapDejzeXexcQXD0zLZZXkSVuqMzX
- 7PkYWZ/iyVh0U1MnwYtNOAmfqR7pU5FgbC89/EdgljLaHPSCTFgzoxv8ytEArv5K7Z+kG8ebzUv
- TPMB3N9jD637357iJkQF29Fy8U3eArA==
-X-Google-Smtp-Source: AGHT+IF8ya8StOADSTdmyth+Pfjs3njGV00+83bPxVnDuEqbstaXBTA2/bBlLSfzcfOG/g2rh7LKYu865SsnDr96XiI=
-X-Received: by 2002:ac2:5d4b:0:b0:530:e0fd:4a9e with SMTP id
- 2adb3069b0e04-530e0fd4c71mr390992e87.9.1723038295790; Wed, 07 Aug 2024
- 06:44:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1723038363; x=1723643163; i=xypron.glpk@gmx.de;
+ bh=oo4q3NtIUDthbOf0iQ+zOEZjiSTPfIzrFdFD+I0vkYs=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=KnojS7gf50VHy6IrOULWnA4VsGJYuv4dmx8znyqBAk6hx85/sXmgP/WXJ7BYcJWQ
+ h5VcpkXE2NjsK4IAqVhEi9iBs1fHBG3Gp0gq3YqFFeqh9RFR3zFhY0hNEF0iLBds2
+ QIZjHzaYnodDbdfbMvwq+7WksO70HurWPrtDFYLVN4tC4sygSNa3IDrf0YzRA6b17
+ qekV5DDMo/8JLCHSPEIGerqaasnhwjIsW+oxm4zSkYOwMGSgnmhoqvrDHhLR7fQbw
+ 0mL3fQKS7RU1GjCknl/0g8SyPGRnQuspebGpuIBq5+alr6PvLHkaB9w/VFuqYHqBf
+ YRBBXcQ4sxpbXU77xw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([178.202.41.98]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MDysg-1sTxlP39Gu-003EQD; Wed, 07
+ Aug 2024 15:46:03 +0200
+Message-ID: <f12c4ec1-e2b9-44c4-987d-c1bffb47da1b@gmx.de>
+Date: Wed, 7 Aug 2024 15:45:54 +0200
 MIME-Version: 1.0
-References: <20240803161513.486062-10-agust@denx.de>
- <20240807130933.846385-1-agust@denx.de>
-In-Reply-To: <20240807130933.846385-1-agust@denx.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 7 Aug 2024 10:44:44 -0300
-Message-ID: <CAOMZO5DneSby5XRjjFYEqSQpJcXHK2V2ixM4nJsikRymJ1BWQA@mail.gmail.com>
-Subject: Re: [PATCH v2 10/11] board: cm_fx6: convert to DM_I2C
-To: Anatolij Gustschin <agust@denx.de>
-Cc: u-boot@lists.denx.de, Nikita Kiryanov <nikita@compulab.co.il>, 
- Fabio Estevam <festevam@denx.de>, Heiko Schocher <hs@denx.de>,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] configs: enable efidebug and EFI http boot on QEMU aarch64
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Anton.Antonov@arm.com, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Bin Meng <bmeng@tinylab.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ u-boot@lists.denx.de
+References: <20240807130010.407399-1-ilias.apalodimas@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240807130010.407399-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:6Nj90lU+G94e4IYm5HH0c5MMR6QgJMKkELt0eO/kQBNg1D7V7tO
+ rWnKv8zghY9rYt8AGWDw5ADeUN2aBTS5X8zXpv/eqMKWXGCbxHNQ3sIZGWTQfrBYraOtkAR
+ j0nZLxR83Gwwu8vfB4srRQSlUk6UmxjsUWmUoruLKPyevTCPuLv9/vmTAnQY8mR2TddZFl6
+ zVuhYq0kHDZg0lxXbJLRw==
+UI-OutboundReport: notjunk:1;M01:P0:1bFoHcmM+aI=;lpJ63MKosWW4ERQsOPdTldq5abj
+ yQDRm7iGDo014U5Nfz0WrKjI0KGIsxc5zXu2bwGS6lL8syzhtF7G63lRUDdh0MYkRDAEU8aN+
+ frSlOlw0vHNI+TX6Y4DSPW5Qn28xLzpWHBNj8H6Z1ru+W2P8FZzJ7ThrhSoTMBbAAR5BOXPCT
+ jtsMZKhKg3OYLTtptcRbR08ClFYD+uT1fO0u9yXK/VwGAv3vzcIMFslij4VaRzigPg2tENnTz
+ bka5np5/aSOB4jBIF7oLC3XTIYoMNbyQwKxeCpyo3G4tKok3dSf3WWRDWDD197P39X2iTxF8D
+ N1UXTG/sd1/8usU3JKyaccJTA6qHAlkIxdH7oCHuAZSIMm52tvaAbRE9AkA4p4XCXX4u79t4h
+ 2gWBAUAidxtQUo9hqxesN4niIkbC1NWOWI8VqviL8aKoDromoXs6eDVsKp8ClPigt5frER8ik
+ SXHnqM7s595UniPMAna5+kXQbIDiu7dWKF/WYtxxRNpfMWHyRA9pOj/TNPNoxNM6Eo8SYg1lA
+ GZuhM9AfB0AMlgRSTenNKffRj4TqlUvBiL61wQWkZ+R2NkaoiYtqhXO3p4CZquUwbX6yTUjzx
+ nhdQzDr/lcQB4JP23xthW2SQFU+cpQvwR1MEUPB1K4wP6YLDGeyPVfVkRmtFsYT2HzSmRqKQJ
+ GZPZzu3brWDpxtdHpUhYZhgnopL/Omg6tI3EO373zHqT3gfE5OYnAwClPonuYbHjAPImco509
+ C7sZgz1BUPoRQsO3tyHPsxF8jUO00iq0SwctAJ0Pk4R0SIAhosjLELKHSK7LfaB6mr2bN5CfW
+ P1zcQ5P60CekSZr6a55i7Kdp33OrwEYfo3Rb5kQdsRylQ=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,23 +92,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anatolij,
+On 07.08.24 15:00, Ilias Apalodimas wrote:
+> EFI HTTP is a useful option to have by default and is working reliably o=
+n
+> QEMU. Let's enable it by default, since we have no size limitations.
+> While at it enable 'efidebug' as well, which is currently needed to
+> configure the EFI HTTP boot options.
 
-On Wed, Aug 7, 2024 at 10:09=E2=80=AFAM Anatolij Gustschin <agust@denx.de> =
-wrote:
+Should this be added to the efconfig command in future?
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
 >
-> Conversion to DM_I2C is mandatory, enable DM_I2C to fix board
-> removal warning. Convert EEPROM access to use DM_I2C API.
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>   configs/qemu_arm64_defconfig | 2 ++
+>   1 file changed, 2 insertions(+)
 >
-> Signed-off-by: Anatolij Gustschin <agust@denx.de>
-> ---
-> Cc: Nikita Kiryanov <nikita@compulab.co.il>
-> Cc: Fabio Estevam <festevam@denx.de>
-> Cc: Heiko Schocher <hs@denx.de>
-> Cc: Tom Rini <trini@konsulko.com>
-> ---
-> Changes in v2: fix trimslice build errors
+> diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
+> index 7e166f439087..088ba39f18e1 100644
+> --- a/configs/qemu_arm64_defconfig
+> +++ b/configs/qemu_arm64_defconfig
+> @@ -33,6 +33,7 @@ CONFIG_CMD_NVEDIT_EFI=3Dy
+>   CONFIG_CMD_DFU=3Dy
+>   CONFIG_CMD_MTD=3Dy
+>   CONFIG_CMD_PCI=3Dy
+> +CONFIG_CMD_EFIDEBUG=3Dy
+>   CONFIG_CMD_TPM=3Dy
+>   CONFIG_CMD_MTDPARTS=3Dy
+>   CONFIG_ENV_IS_IN_FLASH=3Dy
+> @@ -68,3 +69,4 @@ CONFIG_USB_EHCI_HCD=3Dy
+>   CONFIG_USB_EHCI_PCI=3Dy
+>   CONFIG_SEMIHOSTING=3Dy
+>   CONFIG_TPM=3Dy
+> +CONFIG_EFI_HTTP_BOOT=3Dy
 
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
-
-Thanks
