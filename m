@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 760A1C52D6F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 01:56:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2C82C49EA1
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 01:56:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 901C088B57;
-	Wed,  7 Aug 2024 03:56:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id EDBCD88B6B;
+	Wed,  7 Aug 2024 03:56:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UW7/Re9O";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="anxlSKyy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F66588B57; Wed,  7 Aug 2024 03:56:32 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 78C3B889D2; Wed,  7 Aug 2024 03:56:39 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 578CF88B5F
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 03:56:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B90D88B82
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 03:56:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-3db1657c0fdso807555b6e.1
- for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 18:56:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1722995784; x=1723600584; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=SwBJaq+iBBJy1AQEzc0Vkb4LlLIZqAgjXPzPzn8M6p4=;
- b=UW7/Re9OJIlOtSafQ2cfSs0LsXFM+eiEJhBRxIDnazX+F0zMo2iAFqDG5m8VPkKngC
- nVVUYQ2Nm1CT/FhCfgT8c9c5JK0uY1JDxmKfvQN+UarehIN6/PSxFEPj6kbviT94AqBS
- gK1FY+Q9BukMCHZ7PEv+JjPtU3VlGU38nfWBc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1722995784; x=1723600584;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SwBJaq+iBBJy1AQEzc0Vkb4LlLIZqAgjXPzPzn8M6p4=;
- b=AR0vPw3TvoYjmx1i95qRuA6q65ODpIDgS0rkAkt6PoYeRRKwLPCNdWJDa5Wp7HRlbJ
- i+dOjd4b6R2h5RforcAbkIKIzNMEaGzzXmr2OsommlV+LZEdwXRsxa3UpRTtoiwZmUUz
- H54xpuuEAscGPDfZB1YJObbyOD1TKq7/scVovkGDIMTcwq4C4xrQPnsOxlKqsHeJpKa0
- 0EYtvO7uzNCq5S4IRYGFtIZRwUHvaAZXrXptxiBW7/cMuRVsCWVvUARvDv+y2pdYEq6R
- ODsvhr1g7zcv+/+PZOYRJjBcwo4CCQUZmzrRbXrieb158F7diu2EqxO/BKncW9SpkmDv
- TtCw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVFhs4hp343vFyRjcfvH8sXVu7sqI1GGBVgfd0hb7HG4yNo+AIrgn/rstYBdLRG5b1rqTZ7g4jXpvVea/qogjg3daQOZQ==
-X-Gm-Message-State: AOJu0Yw/VZyIQI8uKk9rAjaHC9T2Y+NfDa7LWzXz8xUkB5ANGXTKls/s
- xK9dLx+hXxckK4+2WCNNAbJcuT8oWFau0hPueM+370c0xioYgRNkez5N7FlKLrk=
-X-Google-Smtp-Source: AGHT+IEJ7mIQX0VHmDdpAvjERLXkmt004n+92453ZxoYfhGeHnBfVOX/1ecQe1FXjj+/Y5gcaN25Rw==
-X-Received: by 2002:a05:6808:1694:b0:3da:a0a5:a26a with SMTP id
- 5614622812f47-3db55807022mr21484227b6e.20.1722995784469; 
- Tue, 06 Aug 2024 18:56:24 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-191-8-236.totalplay.net.
- [187.191.8.236]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70a3a75087dsm4306933a34.50.2024.08.06.18.56.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Aug 2024 18:56:24 -0700 (PDT)
-Date: Tue, 6 Aug 2024 19:56:21 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Richard Weinberger <richard@nod.at>, u-boot@lists.denx.de,
- upstream+uboot@sigma-star.at, marek.vasut+renesas@mailbox.org,
- eugeneuriev@gmail.com, bmeng.cn@gmail.com
-Subject: Re: [PATCH 3/4] dlmalloc: Fix integer overflow in sbrk()
-Message-ID: <20240807015621.GE1626301@bill-the-cat>
-References: <20240802100846.16619-1-richard@nod.at>
- <20240802100846.16619-3-richard@nod.at>
- <CAFLszTgcWPed0JP-oN+JSTc914+yMWxHjR3AeUeyZDtZQ8Bntw@mail.gmail.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1722995791; x=1723600591; i=xypron.glpk@gmx.de;
+ bh=15duvcOVYCNrFIhsiR/UMW2CEYVek/xmjIeZx1RHmao=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=anxlSKyyzPCDfuOXGKkRE3IOk5tq68fWAJXRmdpsSTBAhCY/nwFk0QstM55wOqTJ
+ WK0YzbTcVxBp+J47eup/rBeQyu2x17fn2vMId4GgQ+vuhFpjwQ3OS4/4ZRmgwrnNN
+ qiHHzQD26NQHL/Ow8F7zrEcmpXmeNvKUeZM+RXcrA+sK4LeuPXrxnOFvgZRodSppc
+ hyOitKN+2EMpgADMFB+fdVo4uUSR+agtHtCtr4mVqQ5Ud3mZSqhRx//IDgO0mfQmH
+ T7uH4+4ix1aXuu8VnZGIJa5Ltmxw76n3fjMZzVJzjP2QZBiRIwTrXCiKo0q02zrE9
+ CJg548Q7mHlqnEIMYA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([178.202.41.98]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MA7GS-1sUPRd2u1S-001dWG; Wed, 07
+ Aug 2024 03:56:31 +0200
+Message-ID: <eb48b869-a130-46a0-b35b-22bdb30daa7f@gmx.de>
+Date: Wed, 7 Aug 2024 03:56:31 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5nIXxSIRgreyVYJL"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTgcWPed0JP-oN+JSTc914+yMWxHjR3AeUeyZDtZQ8Bntw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 06/39] bootstd: Create a function to reset USB
+To: Simon Glass <sjg@chromium.org>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Dan Carpenter <dan.carpenter@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20240806125850.2316956-1-sjg@chromium.org>
+ <20240806125850.2316956-7-sjg@chromium.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240806125850.2316956-7-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:pjJfTB2oqXWJN9rlDWO5EyoZClELgQETnvhcZ5pVi4Dg+JxGuAg
+ mSyvd3TzLHJk7wJbmwzhX0uNgFkKT2NPpjNa53IrGqQ74sJpJM96Z94c6x6A92H5sDoUEwk
+ tkNiuUm+wxlcsK0itl9tYFVUHJj3JznbWukWWiiP3uzcuo03OrjOkl0eVuBgoc0A80jQozZ
+ +jXaklDokniKWAEUaTpow==
+UI-OutboundReport: notjunk:1;M01:P0:R642sNuQHOs=;FVaLY1h4V88mfq6Y8DmuUO5pA53
+ cO2YJ8prKlM4iqnoyEaYr9/lVFSaLNqa68pDoGDSk62fIvMJpktbzAVEf4dan9FGfPVl3+ath
+ szjZyfz2tleWwB18xgye2u4eAIIUNEpGOB+QwUNoT46gYO/ZRVcHGaGbIR0UU32x9twjw5Vmq
+ P1t6wsK+SGXXPMqZm8IX+bMpgpO7omnShItCeRrSlW2skE6ndmsIViNL5yRaJHh7rVNcRKPDi
+ 3rbWSNbF87SJtq2iOXfR2V0CEnkZJNA7BavfMR1EASrmE/AsGstAgXCSUc4XIXtBgtlhqlPYo
+ x+dwv5/HO8jhSo9iTTBpl/v9J1yadBzVXEMHcPzqUAHQIzYlmX4UaLJzY3EHUIgQbZtrxUMAT
+ zDMusIPPcsyuht335FOmdY4MEuF88vlibfzE7L37um3LNvIAFEYjmOsBR9qBvTOGELIAZyuA2
+ xPXZAEkJBVyefYy58G8YKp7iEEYfgdAjfiBHnqIfWSivLBcfb6cEG8iUrxusG4KxssYjIK9+M
+ Eig2/0q6ZcRZN8gay6dFDSIu1/KAGy9HyNJlbTh/sedUiMvPzHEyqnyJrn2Ur0cIFog1fCQgH
+ 2wJkN9TSiW6MJlYK4rqR8fiS06yLBMp7ryvO8zz91c1Cny/jNQVB+L2jXBuWgMlQ5aLYQVIfy
+ b6b0OCrP2xSyD1HyZVuFVqj6/rZCUrIpa9RwSpcJi894Ba+tyAnkUV3J/jRHRnCxum8dOVgwB
+ bJJmoM4hIvH+RbV0Kr7k+YXMo1+QnXUfcb4eL2J2OqvbXRp2gUXCmPjmvFIOIga7lEEpBNQEs
+ CJSGcZmLoESYvupl5QDUM00w==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,50 +94,154 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 06.08.24 14:58, Simon Glass wrote:
+> Set up a function for this, since it needs to be used from multiple test
+> files.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> (no changes since v1)
+>
+>   test/boot/bootdev.c        | 19 ++++++-------------
+>   test/boot/bootstd_common.c | 12 ++++++++++++
+>   test/boot/bootstd_common.h |  8 ++++++++
+>   3 files changed, 26 insertions(+), 13 deletions(-)
+>
+> diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
+> index 1bf5929c396..de16a51956d 100644
+> --- a/test/boot/bootdev.c
+> +++ b/test/boot/bootdev.c
+> @@ -16,13 +16,6 @@
+>   #include <test/ut.h>
+>   #include "bootstd_common.h"
+>
+> -/* Allow reseting the USB-started flag */
+> -#if defined(CONFIG_USB_HOST) || defined(CONFIG_USB_GADGET)
+> -extern bool usb_started;
+> -#else
+> -#include <usb.h>
+> -#endif
+> -
+>   /* Check 'bootdev list' command */
+>   static int bootdev_test_cmd_list(struct unit_test_state *uts)
+>   {
+> @@ -201,7 +194,7 @@ static int bootdev_test_order(struct unit_test_state=
+ *uts)
+>   	test_set_skip_delays(true);
+>
+>   	/* Start up USB which gives us three additional bootdevs */
+> -	usb_started =3D false;
+> +	bootstd_reset_usb();
+>   	ut_assertok(run_command("usb start", 0));
+>
+>   	/*
+> @@ -317,7 +310,7 @@ static int bootdev_test_prio(struct unit_test_state =
+*uts)
+>   	test_set_eth_enable(false);
+>
+>   	/* Start up USB which gives us three additional bootdevs */
+> -	usb_started =3D false;
+> +	bootstd_reset_usb();
+>   	ut_assertok(run_command("usb start", 0));
+>
+>   	ut_assertok(bootstd_test_drop_bootdev_order(uts));
+> @@ -357,7 +350,7 @@ static int bootdev_test_hunter(struct unit_test_stat=
+e *uts)
+>   {
+>   	struct bootstd_priv *std;
+>
+> -	usb_started =3D false;
+> +	bootstd_reset_usb();
+>   	test_set_skip_delays(true);
+>
+>   	/* get access to the used hunters */
+> @@ -398,7 +391,7 @@ static int bootdev_test_cmd_hunt(struct unit_test_st=
+ate *uts)
+>   	struct bootstd_priv *std;
+>
+>   	test_set_skip_delays(true);
+> -	usb_started =3D false;
+> +	bootstd_reset_usb();
+>
+>   	/* get access to the used hunters */
+>   	ut_assertok(bootstd_get_priv(&std));
+> @@ -527,7 +520,7 @@ BOOTSTD_TEST(bootdev_test_bootable, UT_TESTF_DM | UT=
+_TESTF_SCAN_FDT);
+>   /* Check hunting for bootdev of a particular priority */
+>   static int bootdev_test_hunt_prio(struct unit_test_state *uts)
+>   {
+> -	usb_started =3D false;
+> +	bootstd_reset_usb();
+>   	test_set_skip_delays(true);
+>
+>   	console_record_reset_enable();
+> @@ -556,7 +549,7 @@ static int bootdev_test_hunt_label(struct unit_test_=
+state *uts)
+>   	struct bootstd_priv *std;
+>   	int mflags;
+>
+> -	usb_started =3D false;
+> +	bootstd_reset_usb();
+>
+>   	/* get access to the used hunters */
+>   	ut_assertok(bootstd_get_priv(&std));
+> diff --git a/test/boot/bootstd_common.c b/test/boot/bootstd_common.c
+> index e50539500a0..ff0aff4bbe7 100644
+> --- a/test/boot/bootstd_common.c
+> +++ b/test/boot/bootstd_common.c
+> @@ -20,6 +20,13 @@
+>   /* tracks whether bootstd_setup_for_tests() has been run yet */
+>   bool vbe_setup_done;
+>
+> +/* Allow resetting the USB-started flag */
+> +#if defined(CONFIG_USB_HOST) || defined(CONFIG_USB_GADGET)
+> +extern bool usb_started;
+> +#else
+> +#include <usb.h>
+> +#endif
 
---5nIXxSIRgreyVYJL
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Why can't you always include usb.h which defines usb_started?
+Is there a bug in usb.h?
 
-On Tue, Aug 06, 2024 at 03:50:41PM -0600, Simon Glass wrote:
-> On Fri, 2 Aug 2024 at 04:08, Richard Weinberger <richard@nod.at> wrote:
-> >
-> > Make sure that the new break is within mem_malloc_start
-> > and mem_malloc_end before making progress.
-> > ulong new =3D old + increment; can overflow for extremely large
-> > increment values and memset() can get wrongly called.
-> >
-> > Signed-off-by: Richard Weinberger <richard@nod.at>
-> > ---
-> >  common/dlmalloc.c | 6 +++---
-> >  1 file changed, 3 insertions(+), 3 deletions(-)
->=20
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->=20
-> Should we update dlmalloc to the new version?
+Best regards
 
-A worthy but non-trivial goal, I think.
+Heinrich
 
---=20
-Tom
+> +
+>   /* set up MMC for VBE tests */
+>   int bootstd_setup_for_tests(void)
+>   {
+> @@ -88,6 +95,11 @@ int bootstd_test_check_mmc_hunter(struct unit_test_st=
+ate *uts)
+>   	return 0;
+>   }
+>
+> +void bootstd_reset_usb(void)
+> +{
+> +	usb_started =3D false;
+> +}
+> +
+>   int do_ut_bootstd(struct cmd_tbl *cmdtp, int flag, int argc, char *con=
+st argv[])
+>   {
+>   	struct unit_test *tests =3D UNIT_TEST_SUITE_START(bootstd_test);
+> diff --git a/test/boot/bootstd_common.h b/test/boot/bootstd_common.h
+> index 4a126e43ff4..e29036c897c 100644
+> --- a/test/boot/bootstd_common.h
+> +++ b/test/boot/bootstd_common.h
+> @@ -53,4 +53,12 @@ int bootstd_setup_for_tests(void);
+>    */
+>   int bootstd_test_check_mmc_hunter(struct unit_test_state *uts);
+>
+> +/**
+> + * bootstd_reset_usb() - Reset the USB subsystem
+> + *
+> + * Resets USB so that it can be started (and scanning) again. This is u=
+seful in
+> + * tests which need to use USB.
+> + */
+> +void bootstd_reset_usb(void);
+> +
+>   #endif
 
---5nIXxSIRgreyVYJL
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmay1EUACgkQFHw5/5Y0
-tyzfVwv/ZcZMEOjHieKCv3XSTcfgLnDcphZorw43Eu9eiKYAJee3sXA2oo1aRxmA
-4xvbStebCJ0520JgWiVDblNpAfgQQYZKz3vQdjcOFMcWdLJtY6N31GPtuIrjc/wu
-AiaO6/ExtKN7kcvZbl7LI+NQvJN0BF1veAYLsB2Hv3/qHDiZIG0qUUM/LRLRsMjc
-PR3YkzTwV3IDCE9/ojV/roELU/lVVHy1niSyBxPVHCbtd1moLegV43keea+3kuOQ
-Vs2pfnWjovuHVrHwipqu5/NPKYMKlGIbD1Yzpb6wzgOv2pC0gADk5/eCn0DkjNre
-Mzbk9DmqR4Lx+J0NWksakiWX1FHqLi/TghYoFq6cyzgF+jkBAALAMCGr0vf1Uwdo
-1mGjiBw/n1kw5cEVI1ImAe4avHs1lU4ZPnt4wtBtXli/hAwB/3X8agkDy0wjcEh8
-bi7tFD5lmJixhwgKsbq3GNnr3nphvwWTf+E15tmuRayX76PTO43PeW9vMZP6Qjtu
-XV52WHZL
-=BIUB
------END PGP SIGNATURE-----
-
---5nIXxSIRgreyVYJL--
