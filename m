@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B2EBC52D6F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 01:05:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B147C52D6F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 01:22:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DF8288AC9;
-	Wed,  7 Aug 2024 03:05:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BD919886A6;
+	Wed,  7 Aug 2024 03:22:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="pkTj7KOY";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="tlWfnQwS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF4F088B39; Wed,  7 Aug 2024 03:05:52 +0200 (CEST)
+ id D025F886FD; Wed,  7 Aug 2024 03:22:12 +0200 (CEST)
 Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFF4688A9E
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 03:05:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E57DD882BE
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 03:22:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1722992748; x=1723597548; i=xypron.glpk@gmx.de;
- bh=LmOhCH2lOLeRQibZG+h1EC/AJwP5uIGr+3A6snGJqXM=;
+ s=s31663417; t=1722993722; x=1723598522; i=xypron.glpk@gmx.de;
+ bh=lDA0LqhN+XQhkocEYTEl58ubRCyWC3pUlT3IZce5Bgw=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=pkTj7KOY6qHRlMayyE85JBfRFz3gORmQGPliTxQyi95Om0sretFe0HYsaVFL3qTZ
- BfqSuP8ZLkB711hUsFO3Y24MqtscMFKJBvX/fwZeZRbl5tNkIc7YM4BaF4wCVbvzX
- CKP+mjKBuXmGrn+4+HJSmRY5yRMehPeXrrkcCKsZW+Mni7HrWEsyO/zKTO6TRmKTt
- AeLMoURDKM1CHGoCR3OEB/BLz29zpfXJm5Jhj32t7McXhTlJM/C9432jF7HRUV5mn
- x3bTtk3aMA+w//VH/ZH5CHU8C63YLvBqpQyUkdJghDjgkyJhtKho9pGGTY0iO89qn
- aicGqbbDMP4t5S9I1w==
+ b=tlWfnQwSsAfOSCXk60Hr2MwjBWSP5NXNeSDejIpKDQJAVRHWnqzzuJYnSj18XAQ6
+ KECaMKbxU7mgo0EnoOGeuR7s4eU4yJAni1WRn/4/t4Nt68VH4JPoY8dMD5LFCnd6v
+ K676zn/05kilG62NxvU7hhzR/YKqP6o5U7uGUrzu90OcT20yfhz0enSDxvpTweHWU
+ WIY5wf0jiItKGWwYwomSugM5mh6YDd2GiNYQFpRD5ksfp8AMpPyjkjqExtMp1ryUR
+ 0Kn/TRj867uw2UgohtnQCwNOAzIhAtkBOhFygN3W6ikC2fCNjJRt8ZUZQeU6TcTf5
+ HHXhx0FkQ+5Wyu60Tg==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.101] ([178.202.41.98]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1My36T-1sIKyh2lPb-013zqc; Wed, 07
- Aug 2024 03:05:48 +0200
-Message-ID: <67cbbfd7-e6fa-4f16-a7e8-c2ac3e36d3fa@gmx.de>
-Date: Wed, 7 Aug 2024 03:05:48 +0200
+Received: from [192.168.103.101] ([178.202.41.98]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M6lpM-1sZrTY0RRe-000LxI; Wed, 07
+ Aug 2024 03:22:02 +0200
+Message-ID: <d3d2206e-0044-456e-bed5-07ec8d74f8cf@gmx.de>
+Date: Wed, 7 Aug 2024 03:22:01 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 29/39] efi_loader: Shorten the app rules further
+Subject: Re: [PATCH v2 30/39] efi: Show the vendor in helloworld
 To: Simon Glass <sjg@chromium.org>
 Cc: Caleb Connolly <caleb.connolly@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini
- <trini@konsulko.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Bin Meng <bmeng.cn@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+ <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 References: <20240806125850.2316956-1-sjg@chromium.org>
- <20240806125850.2316956-30-sjg@chromium.org>
+ <20240806125850.2316956-31-sjg@chromium.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240806125850.2316956-30-sjg@chromium.org>
+In-Reply-To: <20240806125850.2316956-31-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Tm7djg5NohOJa5DKXkXemtCpdSu6omG6ZiKH6F4FmLmLT9gcrRm
- dkwAou2J/xzaCUEnblqdqp/0DP8zj8helOTaTiXP/chjBEiYl+Z38txAvfMb7a9dpeORh4O
- 7+UeloZQCqWocQGPNulKQD2j1beFQJhp3JkZG8ZrClOmnepu/Hon2vfYzBLUS4+Dl86UnDz
- +hh2y7W0KZzJyDsvykjjQ==
-UI-OutboundReport: notjunk:1;M01:P0:HFfNeF8n4a8=;3lRigfYXG5ThfWxpo0RaJEhaxzD
- YhKYP92Ewoxo+24Gv1u7K+/XDbskmdn1R5dOjHi1L7JfgBH0qELuAMNqpn9cCrYLQiY9J1G9c
- ue8VqDUBue69hgWLtE2TqkWu+o2nQj5pcskyPm3ayvSdkFLMlpgg2/ZpPHx0tLDsTxvc8ygEp
- EwoIe0oB4K//p4VayU+sSoktkf6bafLzBoy0XRXXnkcKrB1dz9GgrlHnMalHn9D2kkRjescY6
- trfyuhLA069ZqaLmSEoP27dW2VWN6UePKhqgUvWnsepqa3Expy3D9Hc4JKgJld4EN9fd7IT2B
- X3BW3ahbRnSfMEbjpkS5kefAiipYAZQhuf1G2dMrCehyoG7oHxsVF5xOWAZoDVYzKvT2NupU/
- MybvD+5igzGmgD+KitSdsfuu7CYzODLg1X4ewraaIAfxmfgagNaVPADfxBXdsBVXEGeMZ0h14
- mtHc0m+y8kg/oDPwal5tm42DevVT100qDEmu5YbVLk0Ox3EpJSQ4HgNp6NKSsmNNpQ4bCVnlQ
- kdP6XkRG9IIz1x0kSWp1ak/JwUbLpmHsWwrtOna00QggRM8C6HabHqE+qpGw0KQVNkZPaU+D4
- f9OJblJpHfxj2LiR8iUQ/z20puTU8y4hjYzMuqUbleaKYuxikMIPxPSdP3xB4qEFGkCCGh8Cy
- CC0NFtETQHFZxRfm9tOOadjGAM7NmcdiAHy/HoDSsigUaiwaoYjiko30U+etuNtcLq5TxkXId
- vjORXu5ScANrvterxFA5e2KZwr4WKPWBEO2E+MuYQhwCCFuIu1HreyQmwX4vAA0jPM/7up1SS
- oSxQuUPz/1TV9zWI0xa6R++iD+FGVQZHgr+AH4fONCWTM=
+X-Provags-ID: V03:K1:c2FzX6d4VDK/WePt820rZ0hvcH6yUbXSECP/LFKEidgLKHYRDra
+ tQljMwzR2MKghC38Fl2RGaEfvLK2vnmdQDrmr7KPhVrS8pzhpfp1rz9ZZvVKVsJb4aa1Mf1
+ 3U/kys6GPi66yVCmm6RvQThfKPB8XKnpXBaLL8aIfIe5J7rJ5eX1e41mYjs+5AKzmk0t07V
+ SoIaVfjaM4WFNt8T0zIYA==
+UI-OutboundReport: notjunk:1;M01:P0:6wh/BgiHXpc=;L4uIAJs9hmpGOB+55227KsPvSAW
+ kmmwozYeyH7obne7Mo8yghv/VzSvPAtrfmAhQJCK7Ezr1LdS7U5MfQIv6p0/PcGETmnZZpH47
+ W30fJt5JwLEOdYUl/C9u3mCJF2MroOzyMpIJ1eedNfFjOrbJ0odMFt+8UCbbvLBdNSNfwGany
+ +D9RT9rOuoqbUqlxO77qkry6ONPM+y/4ZjDl2HGk1/Kuu4nVSBg8xOPLSnvxmshPVOow/Gb6f
+ PWTKgl5X//zUMyyZGadAUUUETQJcKml0ddRlkwP8ld6lxFexfq5ivVg9T2qjTI5RpTioztW6b
+ iUxzx2VlYBFM6Dfwsea8CLpQnT7mqpjqcmlBA9IN+wUMbzbGsU5QtB6F6kMGk+ywHjath3cMZ
+ SmIozVdiO22L714DzBHxjv9vrzOgAAnxb4/A0uQpddzUQtuOV+rD8NZqtyvDIjiosacySTrF/
+ bEpDZUDO4Kt7HqSMoRA2q2xcNkFXuuGcylLk/a4bqlGxFYAM/Ps/xz3IhZBccIQdHpsAPHfeg
+ a4ldmrRFw3bXDh39QJ0M3bC/bDGyxebncRe4UaPksldEIg/EOa9sYtZXr+j7NLnxziyYKic3P
+ b0SZf2MVDRbAYHULF7mUDagPuEiDCBvHHUwT/WKxkMKj9qmA6eLUO2xNZQwGzKonfIvKBR0C8
+ 51LIMdVzCH9T75+lH8XwwTqyHybK4HWPqKM/k+u8pEc25Dmc7AE0/h8zgt8Urih+kKjiIyyH3
+ VU60r1FeNPPNnqJ8GV4ukmwZnUcUhFel1vuPn+Z5UUYEve25TpGhuWy0XPa1DslYZBtSeI0xy
+ PpCHRKepQGmhDGmAcr78Gwwg==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,53 +93,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 06.08.24 14:58, Simon Glass wrote:
-> Add a way to factor out the CFLAGS changes for each app, since they are
-> all the same.
+> Show the vendor name so it is clear that this app has been built by
+> U-Boot.
+
+As described in the UEFI specification the system table is provided by
+the UEFI firmware to the entry-point of EFI binaries. So on a Laptop you
+might see "Xiaomi" or "Huawei" displayed when running through the new
+lines. "U-Boot" will only show up when running on U-Boot.
+
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-
-The same could be done in lib/efi_selftest/Makefile.
-
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
-
 > ---
 >
 > (no changes since v1)
 >
->   lib/efi_loader/Makefile | 15 +++++----------
->   1 file changed, 5 insertions(+), 10 deletions(-)
+>   lib/efi_loader/helloworld.c | 3 +++
+>   1 file changed, 3 insertions(+)
 >
-> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-> index 660368b9d8f..00d18966f9e 100644
-> --- a/lib/efi_loader/Makefile
-> +++ b/lib/efi_loader/Makefile
-> @@ -11,16 +11,6 @@ asflags-y +=3D -I.
->   CFLAGS_efi_boottime.o +=3D \
->     -DFW_VERSION=3D"0x$(VERSION)" \
->     -DFW_PATCHLEVEL=3D"0x$(PATCHLEVEL)"
-> -CFLAGS_boothart.o :=3D $(CFLAGS_EFI) -Os -ffreestanding
-> -CFLAGS_REMOVE_boothart.o :=3D $(CFLAGS_NON_EFI)
-> -CFLAGS_helloworld.o :=3D $(CFLAGS_EFI) -Os -ffreestanding
-> -CFLAGS_REMOVE_helloworld.o :=3D $(CFLAGS_NON_EFI)
-> -CFLAGS_smbiosdump.o :=3D $(CFLAGS_EFI) -Os -ffreestanding
-> -CFLAGS_REMOVE_smbiosdump.o :=3D $(CFLAGS_NON_EFI)
-> -CFLAGS_dtbdump.o :=3D $(CFLAGS_EFI) -Os -ffreestanding
-> -CFLAGS_REMOVE_dtbdump.o :=3D $(CFLAGS_NON_EFI)
-> -CFLAGS_initrddump.o :=3D $(CFLAGS_EFI) -Os -ffreestanding
-> -CFLAGS_REMOVE_initrddump.o :=3D $(CFLAGS_NON_EFI)
->
->   # These are the apps that are built
->   apps-$(CONFIG_RISCV) +=3D boothart
-> @@ -80,5 +70,10 @@ obj-$(CONFIG_EFI_ECPT) +=3D efi_conformance.o
->   EFI_VAR_SEED_FILE :=3D $(subst $\",,$(CONFIG_EFI_VAR_SEED_FILE))
->   $(obj)/efi_var_seed.o: $(srctree)/$(EFI_VAR_SEED_FILE)
->
-> +# Set the C flags to add and remove for each app
-> +$(foreach f,$(apps-y),\
-> +	$(eval CFLAGS_$(f).o :=3D $(CFLAGS_EFI) -Os -ffreestanding)\
-> +	$(eval CFLAGS_REMOVE_$(f).o :=3D $(CFLAGS_NON_EFI)))
-> +
->   always +=3D $(foreach f,$(apps-y),$(f).efi)
->   targets +=3D $(foreach f,$(apps-y),$(f).o)
+> diff --git a/lib/efi_loader/helloworld.c b/lib/efi_loader/helloworld.c
+> index 586177de0c8..f120249126d 100644
+> --- a/lib/efi_loader/helloworld.c
+> +++ b/lib/efi_loader/helloworld.c
+> @@ -237,6 +237,9 @@ efi_status_t EFIAPI efi_main(efi_handle_t handle,
+>   			(con_out, u"Missing device path for device handle\r\n");
+>   		goto out;
+>   	}
+> +	con_out->output_string(con_out, u"Vendor: ");
+
+%s/Vendor/Firmware vendor/
+
+Best regards
+
+Heinrich
+
+> +	con_out->output_string(con_out, systab->fw_vendor);
+> +	con_out->output_string(con_out, u"\n");
+>   	con_out->output_string(con_out, u"Boot device: ");
+>   	ret =3D print_device_path(device_path, device_path_to_text);
+>   	if (ret !=3D EFI_SUCCESS)
 
