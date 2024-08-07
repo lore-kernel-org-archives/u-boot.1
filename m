@@ -4,95 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B35EC52D6F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 19:56:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 754E2C52D6F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 20:44:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8803488D8D;
-	Wed,  7 Aug 2024 21:54:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D20E587D2F;
+	Wed,  7 Aug 2024 22:44:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h6n6j1D3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DZ+a+BLR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FD7488BE0; Wed,  7 Aug 2024 21:54:42 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 4C85088108; Wed,  7 Aug 2024 22:44:07 +0200 (CEST)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59A7988D74
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 21:54:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C5B0087A55
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 22:44:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4257d5fc9b7so2402355e9.2
- for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 12:54:40 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-261e543ef35so196421fac.3
+ for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 13:44:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723060479; x=1723665279; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=L3shv0mqVno8ExTRpKcG8NYIykVr1ivHiHnRmpP2dz0=;
- b=h6n6j1D3p66w/ES9LEmkyuwkV6rTXbqGJjyv8SXqGAH1a3pu1WVQL0TPbWmf7X5R4r
- JHZMosCvSIwDBBlLBAAfuIjNACMfSaorKttWGTFBeiE2yN/QTBMY1i+ifED7dqK20oV3
- 021tukVKfUvhUfCRiXOCb+3nQ47/KepkzwdJDvYhDiKVPR9zZOrv3tDqpQBP7Ba2K2Vp
- ePrvk+pKGI9dnrdfBUOgTQIVeIPluTbbJ7OgAIcqOIuZwcNOlmFabuWUzHt22av35td5
- Eoo04s9y0SrtuHiTYuRYxs/3MFn1qVK9MyNHF+Wgr8MYM3PZ/2Xrqm+TbCifI0DfmUuW
- 5+3A==
+ d=konsulko.com; s=google; t=1723063443; x=1723668243; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=fZLRiW97ujcJFnX3I6PJNJCQH2cks/nVqUeNEJy4thE=;
+ b=DZ+a+BLR0+cOdMhNvbpMotU80U72pd0JjGx6Pww09cpbkFHmuRTVNP8jYyncOQ9Pop
+ /0mJMR6Ws3glQ0OcIsR/FA5xVV5UaxxBX170h7b6Svmf777Lv8K0ZfwHT09s2mVZlSzV
+ azmozdzWWQnnQtAJgrf0/qCztHlvc9Fpek/zI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723060479; x=1723665279;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=L3shv0mqVno8ExTRpKcG8NYIykVr1ivHiHnRmpP2dz0=;
- b=JfZAL5cJV25rT8mT/Zq3K4bBftjrnI4fEOxQ9H6wWoAt3gZ7RhlbfxIG7aObZXP7Sz
- Gg3ZJTJKVA9SE75FwKgJYaH6hBrZd6eptUPkjBpDnAixYoLUNNFwz26adxFReqdX6zHP
- G10+ijZiquqS3zNVMHr0+6OEo4rCxnFZ0qWAh9ciMufFCxQ0D/RdVM9bhCoQdckWCNM4
- 3xA9Zv7eyRtP6fcS7ghQv1BfYgAEU2iJYH3Qj9U6OuicHkXUE+HQ+zIzX9k/xLfzUMns
- Q/nnyVNpXsbD8pFF3+1l7ZxAwEcE1p9A6uODyBaDKFX7hmzUZyrWS+tQJZPa3Za5nBm3
- qdcQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWx3QBj0RaobuwtHNJ/p7tgU5LXR6A9rv0z++8fPkPQGIDdxQy42G+blyZpwos9AOrmgR04vdRWfltT86x2EKUK0+zU8g==
-X-Gm-Message-State: AOJu0YwwtZ6JTuZ6brd4WKFiCd3JlaIZo+WL5Adzw15YsmNBrIWqhUzT
- XGqF7KJjOQUIcNG8iozTojnba1LHTCPpqAn9seywpjkBW9KsYVmL
-X-Google-Smtp-Source: AGHT+IFex5pEo8ENBvuwr7+EI3w/h8XtpsvYi9tke1lBjaiqXaGjArcwVUfucaCsifwaaqeNBZL+VQ==
-X-Received: by 2002:a05:600c:4588:b0:428:15b0:c8dd with SMTP id
- 5b1f17b1804b1-428e6b2f14emr185113635e9.20.1723060478903; 
- Wed, 07 Aug 2024 12:54:38 -0700 (PDT)
-Received: from localhost.localdomain
- (host-87-6-196-30.retail.telecomitalia.it. [87.6.196.30])
- by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-429057a8802sm44383765e9.21.2024.08.07.12.54.37
+ d=1e100.net; s=20230601; t=1723063443; x=1723668243;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fZLRiW97ujcJFnX3I6PJNJCQH2cks/nVqUeNEJy4thE=;
+ b=QpbNxL90sfEisb1VdAMbJDBMSRDRvK96kA8gXzoxbqto+ZIewqark/Ibdv4VL9Zn1b
+ aHQMgvGs5n3j1VC3s8EJC6vG3sCOZyeOpgqHrLQKPwPe5fG09lE1ZWifn1tpUBE2nZv1
+ sWL4chw6RwpSzSVlWlUdnTmL6sOsutd/3bQvq4CJa8t5phiktCYIrJ6U2Vmai98qo4cW
+ DTPWzK8jgTBv+u61rISPBPKNdAiuT79nWjNFq23ur6/gGhFZCvUFGZHtkTOvXlEtA/uD
+ vJcyHITLbjOFvstm/4/DECdmm8521i0dk4sMhWHt7rPl6vXO9pNM/DtQ7t9JuaH9Oh87
+ 5yxA==
+X-Gm-Message-State: AOJu0Yx/Dzzu++Hr55BPqxiFeYsrpSv7R4eYbVOtwXmTGWxVAxiAYpG/
+ 7O2zglKGHQua5CkxlCK+AQ4ZCLhNUopZdwyB1DzacENCAWbH/IUNQbFyUNxlDQM=
+X-Google-Smtp-Source: AGHT+IHUnNuIrq9wGasCLgA3sOSxT2TGeGH6YLP/YpJSl4SG30G5uax0PHoxZmTLKtp5Inmx0DSCGQ==
+X-Received: by 2002:a05:6870:f14e:b0:260:fd64:60f2 with SMTP id
+ 586e51a60fabf-26891aa6250mr23551736fac.8.1723063443501; 
+ Wed, 07 Aug 2024 13:44:03 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-191-8-236.totalplay.net.
+ [187.191.8.236]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-70a31d9dd30sm4943804a34.15.2024.08.07.13.44.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 12:54:38 -0700 (PDT)
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Arseniy Krasnov <avkrasnov@salutedevices.com>,
- Martin Kurbanov <mmkurbanov@salutedevices.com>,
- Dmitry Dunaev <dunaev@tecon.ru>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sean Anderson <sean.anderson@seco.com>,
- Shiji Yang <yangshiji66@outlook.com>,
- Vasileios Amoiridis <vassilisamir@gmail.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>,
- Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 9/9] doc: introduce led.rst documentation
-Date: Wed,  7 Aug 2024 21:54:12 +0200
-Message-ID: <20240807195413.30456-10-ansuelsmth@gmail.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240807195413.30456-1-ansuelsmth@gmail.com>
-References: <20240807195413.30456-1-ansuelsmth@gmail.com>
+ Wed, 07 Aug 2024 13:44:02 -0700 (PDT)
+Date: Wed, 7 Aug 2024 14:44:00 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>
+Subject: Re: [PATCH v8 00/23] Introduce the lwIP network stack
+Message-ID: <20240807204400.GJ1626301@bill-the-cat>
+References: <cover.1723050310.git.jerome.forissier@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="WMkN1U6uefC9TREn"
+Content-Disposition: inline
+In-Reply-To: <cover.1723050310.git.jerome.forissier@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,95 +91,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce simple led.rst documentation to document all the additional
-Kconfig and the current limitation of LED_BLINK and GPIO software blink.
 
-Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
----
- doc/api/index.rst |  1 +
- doc/api/led.rst   | 10 ++++++++++
- include/led.h     | 38 ++++++++++++++++++++++++++++++++++++++
- 3 files changed, 49 insertions(+)
- create mode 100644 doc/api/led.rst
+--WMkN1U6uefC9TREn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/doc/api/index.rst b/doc/api/index.rst
-index ec0b8adb2cf..9f7f23f868f 100644
---- a/doc/api/index.rst
-+++ b/doc/api/index.rst
-@@ -14,6 +14,7 @@ U-Boot API documentation
-    event
-    getopt
-    interrupt
-+   led
-    linker_lists
-    lmb
-    logging
-diff --git a/doc/api/led.rst b/doc/api/led.rst
-new file mode 100644
-index 00000000000..e52e350d1bb
---- /dev/null
-+++ b/doc/api/led.rst
-@@ -0,0 +1,10 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+LED
-+===
-+
-+.. kernel-doc:: include/led.h
-+   :doc: Overview
-+
-+.. kernel-doc:: include/led.h
-+   :internal:
-\ No newline at end of file
-diff --git a/include/led.h b/include/led.h
-index 61ece70a975..77b18ddffbf 100644
---- a/include/led.h
-+++ b/include/led.h
-@@ -10,6 +10,44 @@
- #include <stdbool.h>
- #include <cyclic.h>
- 
-+/**
-+ * DOC: Overview
-+ *
-+ * Generic LED API provided when a supported compatible is defined in DeviceTree.
-+ *
-+ * To enable support for LEDs, enable the `CONFIG_LED` Kconfig option.
-+ *
-+ * The most common implementation is for GPIO-connected LEDs. If using GPIO-connected LEDs,
-+ * enable the `LED_GPIO` Kconfig option.
-+ *
-+ * `LED_BLINK` support requires LED driver support and is therefore optional. If LED blink
-+ * functionality is needed, enable the `LED_BLINK` Kconfig option. If LED driver doesn't
-+ * support HW Blink, SW Blink can be used with the Cyclic framework by enabling the
-+ * CONFIG_LED_SW_BLINK.
-+ *
-+ * Boot and Activity LEDs are also supported. These LEDs can signal various system operations
-+ * during runtime, such as boot initialization, file transfers, and flash write/erase operations.
-+ *
-+ * To enable a Boot LED, enable `CONFIG_LED_BOOT_ENABLE` and define `CONFIG_LED_BOOT_LABEL`. This
-+ * will enable the specified LED to blink and turn ON when the bootloader initializes correctly.
-+ *
-+ * To enable an Activity LED, enable `CONFIG_LED_ACTIVITY_ENABLE` and define
-+ * `CONFIG_LED_ACTIVITY_LABEL`.
-+ * This will enable the specified LED to blink and turn ON during file transfers or flash
-+ * write/erase operations.
-+ *
-+ * Both Boot and Activity LEDs provide a simple API to turn the LED ON or OFF:
-+ * `led_boot_on()`, `led_boot_off()`, `led_activity_on()`, and `led_activity_off()`.
-+ *
-+ * Both configurations can optionally define a `_PERIOD` option if `CONFIG_LED_BLINK` or
-+ * `CONFIG_LED_SW_BLINK` is enabled for LED blink operations, which is usually used by
-+ * the Activity LED.
-+ *
-+ * When `CONFIG_LED_BLINK` or `CONFIG_LED_SW_BLINK` is enabled, additional APIs are exposed:
-+ * `led_boot_blink()` and `led_activity_blink()`. Note that if `CONFIG_LED_BLINK` is disabled,
-+ * these APIs will behave like the `led_boot_on()` and `led_activity_on()` APIs, respectively.
-+ */
-+
- struct udevice;
- 
- enum led_state_t {
--- 
-2.45.2
+On Wed, Aug 07, 2024 at 07:11:44PM +0200, Jerome Forissier wrote:
 
+> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+> library for the network stack" [1]. The goal is to introduce the lwIP TCP=
+/IP
+> stack [2] [3] as an alternative to the current implementation in net/,
+> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
+> reasons for doing so are:
+> - Make the support of HTTPS in the wget command easier. Javier T. and
+> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
+> so. With that it becomes possible to fetch and launch a distro installer
+> such as Debian etc. using a secure, authenticated connection directly
+> from the U-Boot shell. Several use cases:
+>   * Authentication: prevent MITM attack (third party replacing the
+> binary with a different one)
+>   * Confidentiality: prevent third parties from grabbing a copy of the
+> image as it is being downloaded
+>   * Allow connection to servers that do not support plain HTTP anymore
+> (this is becoming more and more common on the Internet these days)
+> - Possibly benefit from additional features implemented in lwIP
+> - Less code to maintain in U-Boot
+>=20
+> Prior to applying this series, the lwIP stack needs to be added as a
+> Git subtree with the following command:
+>=20
+>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savannah.=
+gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
+
+For v9, I think it would be good to do a CI run with NET_LWIP default
+and seeing what fails from that too. There's a few problems still
+leading to a lot of failures, in that case. Thanks.
+
+--=20
+Tom
+
+--WMkN1U6uefC9TREn
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmaz3IwACgkQFHw5/5Y0
+tyxGbwwAlGS85HMaiA3mTYozdR6TvoaxOUt+yLLQXLyQBBpIiAZYXj4nOerg9Eyj
+gajUL0a9u8RKWol/UBjVZTsdMoa2mhJwx+Fwz3TSvUGdXDMUPyGc8jMebVn+eFP/
+LwXWWBHYAHeXsGJlLAXl2k+e0UsbgrnoKDDpNod5WkQ2OmiLQzMnBPk3FiZ8xiJ0
+tiMmPW83gJFPFflI4ESvmNvhWuVyHSiXHoWtPTNQrecoVCVXarcAMSSajtvy18NS
+Ev6op6luAPZWhLe4ilz0+GAdS92pwM7r6RkU8cqBdi3tvqcHf7sF7jK6Kbr9FXo6
+VBB4EGqrZzKvbWIeUrie9a9jpdzbahnn+LTEDtgwda+kg3N+vvFjO8qFyzozHZLq
+lRmZEkHjJvV1X3MphdAqTD9Sp++IlFm+y8NoSb6ZprW8igPxVInPZ3nICAVpJy0I
+TR20qSfSQmiETXi7fJgS4xCAneytMTOnxA8iUfeNZ4fJUcrqwPHo5qOElnbaLLvi
+uMgXzXPg
+=cdA/
+-----END PGP SIGNATURE-----
+
+--WMkN1U6uefC9TREn--
