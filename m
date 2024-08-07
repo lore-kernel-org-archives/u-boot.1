@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11DEEC52D6F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 12:11:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13414C52D73
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 12:14:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA23488B9F;
-	Wed,  7 Aug 2024 14:10:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 73ADA88CE1;
+	Wed,  7 Aug 2024 14:14:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dfoVgIbO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k4xDiol9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC6DE866EB; Wed,  7 Aug 2024 14:10:49 +0200 (CEST)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id EC16488CC0; Wed,  7 Aug 2024 14:14:50 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFD3488A6C
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 14:10:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3461888D9
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 14:14:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-52efc60a6e6so2654461e87.1
- for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 05:10:47 -0700 (PDT)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5b8c2a61386so2622710a12.2
+ for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 05:14:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723032647; x=1723637447; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jTl+Mx4HhcYWMHe2WfOVOszTfR4rCGOh/hcKmZHYww4=;
- b=dfoVgIbO5f3Di5cFJqzQiw4tfh6gEgY6Bgos31+nyJsY/8kJGlEerRLzhtmBvI4NRg
- D/bzQPm/ZluEiq3hyHutuAa1ugOvkZOD3muNO5EWGDu9yjCdlagz7ON2gwAidkARMfEi
- 8OGHW5LdCGddCAmgkN92SFaURqUBClxSa7f4woLZKUdUqlZGD8LVSkKdaUij6U0rjv/A
- 7nlA1PFVeC7oq52ciZDfNGkyiVSlnefF12ZHUWnSNyP9xSwAWONR8rc8BeidB3UI7IP5
- 132LyVdoMzdxllyp1BccE/Bv8A15aSFiluyeHkK3a5Vx0Rt9754slRegzt9AU/y3Ok2N
- zZJw==
+ d=gmail.com; s=20230601; t=1723032888; x=1723637688; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XtBdan1UAhIgqxh52F4EbCx2ZDqi2LLw2y8IDQBqr+E=;
+ b=k4xDiol9yNv2qJyBDzNLi9DPSrHa2KTNOEcYoAbtLJngfLBrKxSjwn0Dhj4i2PTH9P
+ FgRa0dswCS5zmgQunNQR9uY00XTIIPYekNEcOY/pCekmoETWyTHRDMwqz94mQTcIyrEG
+ Gj1BqGb8j9kaplKkqbv8LElITQpKBrmr7HbVp/1A23hqMYEN0WhaT+wV8EeElYt2Bb+V
+ iczVcxb3PM6b6gBduAPWRAUvuv/kXKoddRR+AQebY2AvAPUtYoroLlIole1hruJqrJXU
+ yQCFr62rRUhQrXbTSABXormHR6As83mRlUBtOB8fNxGZ5u0aie2YKQ6SGOy3lcPt8MiY
+ aYcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723032647; x=1723637447;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jTl+Mx4HhcYWMHe2WfOVOszTfR4rCGOh/hcKmZHYww4=;
- b=e8HLeLU31di7ljHIRDShYnfxzswkJDB9b6DBsrhFkeiWIKuOFVgEGcpu93rD+DX6nW
- 5lUS06Fl5i6hzWLU/kTrPXlH5Xberr81orlywbR+RavqkKiWYOTxIWYjrfFPxA8vTwFi
- YQdFoIsL1/VODNTPXInItSYhSgaJcPDJvQ6k4X5V+N3TJS+ZcpEBu9JF7JmybGz/pBIC
- 7OmSVTg7FEZu1ZkZoMEvnVYLtqkgNsfsxS6MIrTsQ1+inFBEYk05Xg6VVIt95hz5DJ5n
- FB3SB/H/opEy+f4KeDeksj+TM6psMah2xqMVZtsFB9t7EnWBsELxi3Uve6tSX2GOF40D
- L00A==
-X-Gm-Message-State: AOJu0Yybr5sfgUPBjwWIBIqAWW3MolN3NC5ANDZRjY+TU5j3DEx/Brdi
- LRYp+BxZmMW+o+URPa4COS0Dwhuqp7a2VMzN++sm/fiUTu3hhc3P
-X-Google-Smtp-Source: AGHT+IFs3NwLmTJ4r5xErSUaDcD86dRApiBaHpIlfZLneWYw+Ip3MMuhFjqc/U/C0rZqvA1ayYVilg==
-X-Received: by 2002:a05:6512:ba7:b0:52c:9e82:a971 with SMTP id
- 2adb3069b0e04-530bb36640fmr12511626e87.7.1723032646721; 
- Wed, 07 Aug 2024 05:10:46 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1723032888; x=1723637688;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XtBdan1UAhIgqxh52F4EbCx2ZDqi2LLw2y8IDQBqr+E=;
+ b=pHX0eAcKf6hLgvMHLcW+m4RJOYpYJhwFbJiObQkLrImK9jyFnMx7WksvmXdgx+fGgN
+ 38FqnIUfvbkCQxt9yXaOCELgWUlLOOOPIxPE6Scwlom+jFyf9nbl23LyVK1eGBOo5AbD
+ U7KSTNF1UWRcIoLl44RkdnFS6ZNQklBqqr+D4eUSmedtBaQGO7f371G87RjWNB2rlJxj
+ y6j04yjZu+BD9XsWUHUr/hUDcX51k+rcdr6P6pAxXt2fYXArFROGyWBx7NZuyq/kWNfV
+ OLWigmIKQppJuvZ/opZkeadONP3kcywVI7yiasmXlpxc2RyDi9GWx1xUo2HldvIp8C40
+ CJNg==
+X-Gm-Message-State: AOJu0YzDW6BAR1C8t9fnMYy3r8SQJb6qyAf25W8xgsGBaOov1nBfOoNl
+ u3Ib9MR1KZlqjOiCKO2UdqQOe735Fw5lJ9k2QUocUUmJbnv0yz5R
+X-Google-Smtp-Source: AGHT+IHwdVTR5EYCoIoywY8WCq3HBEY/DtXXVzDZqHSyYEoMaGycgKgLzNjlieZUWYX0OhMrUAs5Qw==
+X-Received: by 2002:a17:907:2daa:b0:a7a:b620:aa2f with SMTP id
+ a640c23a62f3a-a7dc4e44184mr1203411766b.15.1723032888119; 
+ Wed, 07 Aug 2024 05:14:48 -0700 (PDT)
 Received: from xeon.. ([188.163.112.54]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5b83a152e4dsm7026597a12.48.2024.08.07.05.10.46
+ a640c23a62f3a-a7dc9d427b4sm636207966b.130.2024.08.07.05.14.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 05:10:46 -0700 (PDT)
+ Wed, 07 Aug 2024 05:14:47 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Anand Moon <linux.amoon@gmail.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+ =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
+ Thierry Reding <treding@nvidia.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Martyn Welch <martyn.welch@collabora.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 1/1] disk: add TegraPT support
-Date: Wed,  7 Aug 2024 15:10:24 +0300
-Message-ID: <20240807121024.11318-2-clamor95@gmail.com>
+Subject: [PATCH v2 0/1] board: tegra: convert boards to text env
+Date: Wed,  7 Aug 2024 15:14:33 +0300
+Message-ID: <20240807121434.11761-1-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240807121024.11318-1-clamor95@gmail.com>
-References: <20240807121024.11318-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,59 +95,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-TegraPT is compatible with EFI part but it can't pass Protective MBR check.
-Skip this check if CONFIG_TEGRA_PARTITION is enabled, storage uclass is MMC
-and devnum is 0. Note, eMMC on supported devices MUST be aliased to mmc0.
+Move env stuff into dedicated files in boards (1st stage).
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+U-Boot CI passed, boards I own work fine, tests are welcomed.
+
 ---
- disk/Kconfig    |  8 ++++++++
- disk/part_efi.c | 13 +++++++++++++
- 2 files changed, 21 insertions(+)
+Changes from v1
+- parameterized self-update script
+- complete stdboot convertion of Apalis TK1
+---
 
-diff --git a/disk/Kconfig b/disk/Kconfig
-index ffa835eb35..75a849ec8c 100644
---- a/disk/Kconfig
-+++ b/disk/Kconfig
-@@ -49,6 +49,14 @@ config SPL_MAC_PARTITION
- 	default y if MAC_PARTITION
- 	select SPL_PARTITIONS
- 
-+config TEGRA_PARTITION
-+	bool "Enable Nvidia Tegra partition table"
-+	select PARTITIONS
-+	select EFI_PARTITION
-+	help
-+	  Say Y here if you would like to use U-Boot on a device with
-+	  Nvidia Tegra partition table.
-+
- config DOS_PARTITION
- 	bool "Enable MS Dos partition table"
- 	default y if BOOT_DEFAULTS
-diff --git a/disk/part_efi.c b/disk/part_efi.c
-index b1a03bd165..350a8a6dc5 100644
---- a/disk/part_efi.c
-+++ b/disk/part_efi.c
-@@ -318,6 +318,19 @@ static int part_test_efi(struct blk_desc *desc)
- 	/* Read legacy MBR from block 0 and validate it */
- 	if ((blk_dread(desc, 0, 1, (ulong *)legacymbr) != 1)
- 		|| (is_pmbr_valid(legacymbr) != 1)) {
-+
-+		/*
-+		 * TegraPT is compatible with EFI part, but it
-+		 * cannot pass the Protective MBR check. Skip it
-+		 * if CONFIG_TEGRA_PARTITION is enabled and the
-+		 * device in question is eMMC.
-+		 */
-+		if (IS_ENABLED(CONFIG_TEGRA_PARTITION))
-+			if (!is_pmbr_valid(legacymbr) &&
-+			    desc->uclass_id == UCLASS_MMC &&
-+			    !desc->devnum)
-+				return 0;
-+
- 		return -1;
- 	}
- 	return 0;
+Svyatoslav Ryhel (1):
+  board: tegra: convert boards to text env
+
+ board/asus/grouper/grouper.env                | 15 +++
+ .../asus/transformer-t20/transformer-t20.env  | 17 ++++
+ .../transformer-t30/configs/tf600t.config     |  1 +
+ board/asus/transformer-t30/tf600t.env         | 16 ++++
+ .../asus/transformer-t30/transformer-t30.env  | 17 ++++
+ board/htc/endeavoru/endeavoru.env             | 13 +++
+ .../ideapad-yoga-11/ideapad-yoga-11.env       | 16 ++++
+ board/lg/x3-t30/configs/p880.config           |  1 +
+ board/lg/x3-t30/configs/p895.config           |  1 +
+ board/lg/x3-t30/p880.env                      | 15 +++
+ board/lg/x3-t30/p895.env                      | 13 +++
+ board/microsoft/surface-rt/surface-rt.env     | 14 +++
+ board/nvidia/cardhu/cardhu.env                |  2 +
+ board/nvidia/p2771-0000/p2771-0000.env        | 22 +++++
+ board/nvidia/p3450-0000/p3450-0000.env        |  7 ++
+ board/toradex/apalis-tk1/apalis_tk1.env       | 45 +++++++++
+ board/toradex/apalis_t30/apalis_t30.env       |  9 ++
+ board/toradex/colibri_t20/colibri_t20.env     |  3 +
+ board/toradex/colibri_t30/colibri_t30.env     |  9 ++
+ board/wexler/qc750/qc750.env                  | 15 +++
+ configs/apalis-tk1_defconfig                  |  3 +-
+ configs/apalis_t30_defconfig                  |  1 +
+ configs/cardhu_defconfig                      |  1 +
+ configs/colibri_t20_defconfig                 |  1 +
+ configs/colibri_t30_defconfig                 |  1 +
+ configs/endeavoru_defconfig                   |  1 +
+ configs/grouper_common_defconfig              |  1 +
+ configs/ideapad-yoga-11_defconfig             |  1 +
+ configs/p2771-0000-000_defconfig              |  1 +
+ configs/p3450-0000_defconfig                  |  1 +
+ configs/qc750_defconfig                       |  1 +
+ configs/surface-rt_defconfig                  |  1 +
+ configs/transformer_t20_defconfig             |  1 +
+ configs/transformer_t30_defconfig             |  1 +
+ include/configs/apalis-tk1.h                  | 58 ------------
+ include/configs/apalis_t30.h                  | 12 ---
+ include/configs/cardhu.h                      |  4 -
+ include/configs/colibri_t20.h                 | 11 ---
+ include/configs/colibri_t30.h                 | 12 ---
+ include/configs/endeavoru.h                   | 43 ---------
+ include/configs/grouper.h                     | 45 ---------
+ include/configs/ideapad-yoga-11.h             | 58 ------------
+ include/configs/p2771-0000.h                  | 20 ----
+ include/configs/p3450-0000.h                  | 13 ---
+ include/configs/qc750.h                       | 42 ---------
+ include/configs/surface-rt.h                  | 18 ----
+ include/configs/transformer-common.h          | 91 -------------------
+ include/configs/transformer-t20.h             |  4 +-
+ include/configs/transformer-t30.h             |  6 +-
+ include/configs/x3-t30.h                      | 44 ---------
+ include/env/nvidia/prod_upd.env               | 60 ++++++++++++
+ 51 files changed, 332 insertions(+), 476 deletions(-)
+ create mode 100644 board/asus/grouper/grouper.env
+ create mode 100644 board/asus/transformer-t20/transformer-t20.env
+ create mode 100644 board/asus/transformer-t30/tf600t.env
+ create mode 100644 board/asus/transformer-t30/transformer-t30.env
+ create mode 100644 board/htc/endeavoru/endeavoru.env
+ create mode 100644 board/lenovo/ideapad-yoga-11/ideapad-yoga-11.env
+ create mode 100644 board/lg/x3-t30/p880.env
+ create mode 100644 board/lg/x3-t30/p895.env
+ create mode 100644 board/microsoft/surface-rt/surface-rt.env
+ create mode 100644 board/nvidia/cardhu/cardhu.env
+ create mode 100644 board/nvidia/p2771-0000/p2771-0000.env
+ create mode 100644 board/nvidia/p3450-0000/p3450-0000.env
+ create mode 100644 board/toradex/apalis-tk1/apalis_tk1.env
+ create mode 100644 board/toradex/apalis_t30/apalis_t30.env
+ create mode 100644 board/toradex/colibri_t20/colibri_t20.env
+ create mode 100644 board/toradex/colibri_t30/colibri_t30.env
+ create mode 100644 board/wexler/qc750/qc750.env
+ delete mode 100644 include/configs/transformer-common.h
+ create mode 100644 include/env/nvidia/prod_upd.env
+
 -- 
 2.43.0
 
