@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE400C3DA7F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 14:08:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33413C52D71
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 14:08:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23BE088A8C;
-	Wed,  7 Aug 2024 16:08:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 933B988BD3;
+	Wed,  7 Aug 2024 16:08:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Np5rb02H";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h5kH49qr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 704DD889EF; Wed,  7 Aug 2024 16:08:23 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 255D788BD3; Wed,  7 Aug 2024 16:08:34 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E198588BB5
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 16:08:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CA2CB88D09
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 16:08:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=fedorross@gmail.com
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a7a9cf7d3f3so233205866b.1
- for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 07:08:19 -0700 (PDT)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a7ad02501c3so208381466b.2
+ for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 07:08:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723039699; x=1723644499; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=vW/9RFtF6l7pYrnRaUq4KZeVkYPPmUti1cDF7Hb+ftk=;
- b=Np5rb02Hr2Xk/ECLE3S9JKvrgq2WlNT08r2fhjUk6CsiAwubj1nProrHQekGSnYNSy
- 84M59wS9kBkyM7wJ6h0zAIHboWzTm0JwxQmHzMktYTvnSi0w2M2S4Kqi3TJWnNn/QiE5
- nX/j8rp/BWPG9P/5K62ZcD99rzYlnSW3aef5hergg+C0NDAbNpg0orYQfisT5GHF7pmB
- vDEjFuqmwhQDu4l8oi5Z0iI9kg4krPJ4JTrKC+WAkHK3zb++AB0Iecyj2L4PwnBU9C7f
- lrwBl+MH+FVe8QPu11Q7A435YtUjAJIv98iG7UdENgi85C529OXybouA+NRipUCR2kgZ
- fJcw==
+ d=gmail.com; s=20230601; t=1723039709; x=1723644509; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZUGyqzPqOhQZDCGyynktzTS8d/XDVJAnmKrkeHoRc7Y=;
+ b=h5kH49qrjzn72G2Y7MoE/0zECR2h9ygI1RYSr1KDeOvPDiJW0zi7JsM0+Y2ESMrz9x
+ NUvspvwabX/seVrIllEUBQVJDJByZhX7XGDf6ybyV7xuhWVOAKvOk5US7H3wXmSQc+gf
+ 0qwSrgdAGOhknEwt6emLZkhqllhMz/8KQ5YLQaBNAwy2EdbVeo3BCVBEiNMDyFzZTm39
+ lZAU6xjQoy7D3bL5SocTZMz8RX1tJDSA8/NlsEfzdB3JaVcOL4jVP/ZJ7kEMWMMNN6ld
+ d9p7QhiJg40LsmFEUmHJDW9dm3aLCRvKKyc/EadHv7lyL6BEyddaFroPtSjGsyoR0T2F
+ wOUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723039699; x=1723644499;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vW/9RFtF6l7pYrnRaUq4KZeVkYPPmUti1cDF7Hb+ftk=;
- b=jroeFAodmLPUeZqb/ebSBkx5l2r5XglFPkvNe5doOdRejS0AgH93fmy8kMZy4G8xJf
- NJSs+tkIapwuU9qN0T6g11rJeHPYgY0xK9gGIyrDd8QxE1WUux9O9r9tfcDnzq1+atkT
- Q8WoSC10U7q7ab942WGAVjZCSrPwXWiOe/en3AT9IYD8h/VNXWi57KiLj3Y1Vw/sh2CV
- F0NY6cYqkt7BgR2aowVvxX3GkR99m7NHFku3dzLJaaIXO/j6ZH2hCLZ2DUyE7UFMGUib
- YSj+5Tj12F2xgbeGkoX/1PxDUgF7A59vYugQuZBaua4IfurG/JufRJisw0jrsLSwfc/r
- lN7g==
-X-Gm-Message-State: AOJu0Yx9/LFxqlFwIE0PMRRD13KDCIEl0bkPVN8V2XlvoXS1+QmQMl+8
- +ZRfQSmlL61uvKoAgcTCc4C7P6YeGtgTi5gUaQywFcRHjKjApjST739gmg==
-X-Google-Smtp-Source: AGHT+IHkcDq/Ly6A264iLaxMBwpTLc/BIh8bAfmmGGSon3yIHvsSDqeZOEltua71whGTh+5GFExPyg==
-X-Received: by 2002:a17:907:c1e:b0:a7a:9f0f:ab14 with SMTP id
- a640c23a62f3a-a7dc4fa16demr1407520266b.33.1723039698719; 
- Wed, 07 Aug 2024 07:08:18 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1723039709; x=1723644509;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ZUGyqzPqOhQZDCGyynktzTS8d/XDVJAnmKrkeHoRc7Y=;
+ b=ANWTcm19TQeoYmWoxjjzDREn0g+wTcqiSC9ommOV0EQnsS8YBQP30wwGOLvRU4cmiD
+ 5IudR2cpvv9aNEFXTEewNz0RpS1W58jK5ZruYBwArmIDLwgFuMPz8lr7NAB9I1ssvE3w
+ csX4u/80f4gEhTWhYFMvRY6UnBW0N7nfSYQqLD6O+Iw1ItJr9YWWjfTC5mZT7vUsmCCp
+ rk/jF9Cks/uvrjEeDXEH7kNv0B+ACO6cwYDDlotVIPAESCR5cOAECFFTaxCf9l4o2M+1
+ oNkSM0TN8YI6Du56pECp2ngjn/vkF8IuyrTb36fx9GS8UgNwLiLKRb83Mb4QK51cApaY
+ b1Pg==
+X-Gm-Message-State: AOJu0Yyag7lbGgutZ5rDY0I6vhbyGf8w/NXAcv25DBO7z/9oZbmkX/qL
+ 3QK3+yx2c457Z582Dhwf96mQqYBhrh4LsDhhJPqi9H53RbW1pfTOtUr8NQ==
+X-Google-Smtp-Source: AGHT+IHSupyRRH2DF5DJ2tx1aUFR62WRbeqEuz3/oTp+IORj4RYXVv4WBMkIrFeEccic9nFdHWmD4w==
+X-Received: by 2002:a17:906:7315:b0:a7a:af5d:f314 with SMTP id
+ a640c23a62f3a-a7dc51bd623mr1415781866b.63.1723039708711; 
+ Wed, 07 Aug 2024 07:08:28 -0700 (PDT)
 Received: from mafrox3.fritz.box
  (p200300c8071991002a9d74ab3dca2577.dip0.t-ipconnect.de.
  [2003:c8:719:9100:2a9d:74ab:3dca:2577])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7dc9c0ca0bsm641278566b.74.2024.08.07.07.08.18
+ a640c23a62f3a-a7dc9c0ca0bsm641278566b.74.2024.08.07.07.08.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 07:08:18 -0700 (PDT)
+ Wed, 07 Aug 2024 07:08:28 -0700 (PDT)
 From: fedorross@gmail.com
 X-Google-Original-From: fedor.ross@ifm.com
 To: u-boot@lists.denx.de
 Cc: Fedor Ross <fedor.ross@ifm.com>, Heiko Schocher <hs@denx.de>,
  Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>
-Subject: [PATCH v3 1/3] i2c: imx_lpi2c: Fix a typo in bus_i2c_receive
-Date: Wed,  7 Aug 2024 16:07:59 +0200
-Message-Id: <20240807140801.1718483-1-fedor.ross@ifm.com>
+Subject: [PATCH v3 2/3] i2c: imx_lpi2c: Replace hard-coded bus speed value
+ with bus->speed_hz
+Date: Wed,  7 Aug 2024 16:08:00 +0200
+Message-Id: <20240807140801.1718483-2-fedor.ross@ifm.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240807140801.1718483-1-fedor.ross@ifm.com>
+References: <20240807140801.1718483-1-fedor.ross@ifm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,7 +98,10 @@ X-Virus-Status: Clean
 
 From: Fedor Ross <fedor.ross@ifm.com>
 
-Fix a typo in a debug message. It should be 'for' not 'fot' .
+Instead of using the hard-coded bus speed value I2C_SPEED_STANDARD_RATE,
+use the actual configured bus speed. This way the bus speed doesn't
+change suddenly after calling the imx_lpi2c_probe_chip() function for
+example.
 
 Signed-off-by: Fedor Ross <fedor.ross@ifm.com>
 ---
@@ -109,22 +116,73 @@ Changes in v3:
 Changes in v2:
 - Add additional '---' below SoB line to separate Cc list. This way it
   does not get included in the commit message when the patch is applied.
+- Drop the second parameter of bus_i2c_init().
 
- drivers/i2c/imx_lpi2c.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/i2c/imx_lpi2c.c | 15 +++++++++------
+ 1 file changed, 9 insertions(+), 6 deletions(-)
 
 diff --git a/drivers/i2c/imx_lpi2c.c b/drivers/i2c/imx_lpi2c.c
-index a1be841b119..3c43f61d819 100644
+index 3c43f61d819..54db6fa863f 100644
 --- a/drivers/i2c/imx_lpi2c.c
 +++ b/drivers/i2c/imx_lpi2c.c
-@@ -130,7 +130,7 @@ static int bus_i2c_receive(struct udevice *bus, u8 *rxbuf, int len)
+@@ -19,7 +19,7 @@
+ #define LPI2C_NACK_TOUT_MS 1
+ #define LPI2C_TIMEOUT_MS 100
  
- 	result = bus_i2c_wait_for_tx_ready(regs);
+-static int bus_i2c_init(struct udevice *bus, int speed);
++static int bus_i2c_init(struct udevice *bus);
+ 
+ /* Weak linked function for overridden by some SoC power function */
+ int __weak init_i2c_power(unsigned i2c_num)
+@@ -172,7 +172,7 @@ static int bus_i2c_start(struct udevice *bus, u8 addr, u8 dir)
+ 		debug("i2c: start check busy bus: 0x%x\n", result);
+ 
+ 		/* Try to init the lpi2c then check the bus busy again */
+-		bus_i2c_init(bus, I2C_SPEED_STANDARD_RATE);
++		bus_i2c_init(bus);
+ 		result = imx_lpci2c_check_busy_bus(regs);
+ 		if (result) {
+ 			printf("i2c: Error check busy bus: 0x%x\n", result);
+@@ -344,11 +344,14 @@ static int bus_i2c_set_bus_speed(struct udevice *bus, int speed)
+ 	return 0;
+ }
+ 
+-static int bus_i2c_init(struct udevice *bus, int speed)
++static int bus_i2c_init(struct udevice *bus)
+ {
+ 	u32 val;
+ 	int ret;
+ 
++	struct dm_i2c_bus *i2c = dev_get_uclass_priv(bus);
++	int speed = i2c->speed_hz;
++
+ 	struct imx_lpi2c_bus *i2c_bus = dev_get_priv(bus);
+ 	struct imx_lpi2c_reg *regs = (struct imx_lpi2c_reg *)(i2c_bus->base);
+ 	/* reset peripheral */
+@@ -388,13 +391,13 @@ static int imx_lpi2c_probe_chip(struct udevice *bus, u32 chip,
+ 	result = bus_i2c_start(bus, chip, 0);
  	if (result) {
--		debug("i2c: receive wait fot tx ready: %d\n", result);
-+		debug("i2c: receive wait for tx ready: %d\n", result);
+ 		bus_i2c_stop(bus);
+-		bus_i2c_init(bus, I2C_SPEED_STANDARD_RATE);
++		bus_i2c_init(bus);
  		return result;
  	}
+ 
+ 	result = bus_i2c_stop(bus);
+ 	if (result)
+-		bus_i2c_init(bus, I2C_SPEED_STANDARD_RATE);
++		bus_i2c_init(bus);
+ 
+ 	return result;
+ }
+@@ -489,7 +492,7 @@ static int imx_lpi2c_probe(struct udevice *bus)
+ 			return ret;
+ 	}
+ 
+-	ret = bus_i2c_init(bus, I2C_SPEED_STANDARD_RATE);
++	ret = bus_i2c_init(bus);
+ 	if (ret < 0)
+ 		return ret;
  
 -- 
 2.34.1
