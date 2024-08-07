@@ -4,55 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 488B3C3DA7F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 13:12:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75BE9C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 13:40:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B546888714;
-	Wed,  7 Aug 2024 15:12:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 977C988B91;
+	Wed,  7 Aug 2024 15:40:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1723036323;
-	bh=RSBC/abdPefxHUlxd+K4GtxyOk9Ws5rGD5KU8/cjYdE=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=tH1Y0149CBMEuy3l8mWSVsyuOZixJzl7kI9M3s3uPmKO0PC1I4DXkzSPw8ehnxpyD
-	 x6EGVEshHXg1yBRz+61PB/RNFLTHhXjruYPIIa8jDYwOs1/rFofHwWZGBvl1R+Aahd
-	 qKNLivWcqFJrx+ue0UCkngjWdAtVlNwOVKZy5kX7ozRVw0p4Ly49FPapWgI7MFsgeH
-	 aKgGoHmAmZWFr/EidebB9oR61ganyVvIV/L3XZK6DTViO5DUb7rfmeqr9mc8M40acy
-	 K8OxPsHyL+A23Lga//GHJvuZ+E5PxBqBRBTPLqsqFos58jORdUcUd7cNnvvQFDcLbY
-	 4+XOz6znTtAEA==
-Received: from crub (p508b6395.dip0.t-ipconnect.de [80.139.99.149])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WlnlvZY/";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 2234D88B7E; Wed,  7 Aug 2024 15:40:06 +0200 (CEST)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: agust@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 92D6787C86;
- Wed,  7 Aug 2024 15:12:02 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1723036322;
- bh=RSBC/abdPefxHUlxd+K4GtxyOk9Ws5rGD5KU8/cjYdE=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=ax5AW8bAykCBilyS/zPxGC/hKcr9aA/er/w/kSVqRnhFc2xynYwg/+vW/TxXyXGr7
- qfk21XAujnRnIKtqMF8Osih9xKOrImt8CQh8xq6CazPXdgw/AJa5azz6uCnVy3aQYI
- 84uLKKeKsmkXP5QBFRrIsmFa5c+pITJyDNWt9RkB1V3sTh9OgItoLIa6a8/i8m0R0B
- WGRWMitPSOf6Esr/OtXHC5Yca6Wj62QIGtnFaVs8vAhhzXmAuf9Z6vE9km2xgcGod5
- nsOeP7pfVoFiXl1QLdKP2GIf3IG7lJEduSAhlYpzM3LS/RSYyjrC9hru2CsONQLs61
- jHz08BO8j91+Q==
-Date: Wed, 7 Aug 2024 15:11:58 +0200
-From: Anatolij Gustschin <agust@denx.de>
-To: Heiko Schocher <hs@denx.de>
-Cc: u-boot@lists.denx.de, Nikita Kiryanov <nikita@compulab.co.il>, Fabio
- Estevam <festevam@denx.de>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 10/11] board: cm_fx6: convert to DM_I2C
-Message-ID: <20240807151158.1d392095@crub>
-In-Reply-To: <ae4dea57-f8b8-b82d-2b31-aeab70b4158c@denx.de>
-References: <20240803161513.486062-1-agust@denx.de>
- <20240803161513.486062-10-agust@denx.de>
- <ae4dea57-f8b8-b82d-2b31-aeab70b4158c@denx.de>
+ by phobos.denx.de (Postfix) with ESMTPS id 37AD188BA6
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 15:40:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=max.oss.09@gmail.com
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2f16d2f2b68so29097341fa.3
+ for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 06:40:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1723038003; x=1723642803; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=rQXDt47tigEoQ7ei+vXu64hESbcdAVmkKueLCMh64HQ=;
+ b=WlnlvZY/ywhQCeVRpISv4Rl6jt0NF9BzdpOGSncQchSTv8wu4r8LSbkDxzMnmb91AV
+ bNaSzKE/q9dnJURzKSzN0Y3gnCA7m153a/vYJaD4+f4IiMjBGMLNezMuUSA08Fl/mgI2
+ b1DJABn8YFYXnPS8ThrNsDy8xFHBJKT34+57S7okzcLs5p3yaswbRnInSpO1h5PxBKoh
+ vz/YBv0Ra2pug6MJuq6LJlfQq5MvdMm+6Owo1xH6oLBUQrXPiqYB9mXBaPLqNIDY155V
+ wGt/plXM61pI+dPplyi3T6FioATyDVxhEZYbHXYUax5J5vOo2dT6+By5s0d+y4r6iVlv
+ LrUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723038003; x=1723642803;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rQXDt47tigEoQ7ei+vXu64hESbcdAVmkKueLCMh64HQ=;
+ b=MnGn3hbxhw8r9wXMwbSdBqlOw0WMR3UTw7bkdPSEstLuZaEJFXiAuOEUVN7WR1rLgZ
+ JhmbTSy59B+j8hdnInnJXMItWqFN2rb4HEyUG6+NiCPIJMdPRmuuayxXqePKArCwa52l
+ KCar1taLa60Dxh734esbyuq26cRdzSjWvTvfXTI6DrPA1YofB9Vh+/JRB2xDK4yvdojh
+ r6SRUHw+Se25icknNocfET047xiwVOa8xfFO20lpMBwtwGz4me92yprBlqhkmsNecBXy
+ RzHxQkcRfN67rYL1i5Ju3310SF5xZprVZ2Q71NVADF6vOTJz3hnpzsLmgjaVLnyZexHW
+ 655Q==
+X-Gm-Message-State: AOJu0YxqC9xjVpR4nJlPYvNGzMrnP34VMQNLLQBA2Feum6qFYIj74AyZ
+ ppAGPI/PTZ2O4Ygwk1tjPahDQ7Qr7AhuQDudxe4cFJy6I1ovH0nLIVHfnA==
+X-Google-Smtp-Source: AGHT+IGhMml2KhvSsEXnT3KAVDwpul7Zo6DDNOSzxePS4rFOCY8UW2X/mcx/Pwh1io0h/V5roZSeyA==
+X-Received: by 2002:a2e:320b:0:b0:2ef:28ed:1ff2 with SMTP id
+ 38308e7fff4ca-2f15aa88cb7mr149580221fa.9.1723038002243; 
+ Wed, 07 Aug 2024 06:40:02 -0700 (PDT)
+Received: from toolbox.int.toradex.com (31-10-206-125.static.upc.ch.
+ [31.10.206.125]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5b83a03b403sm7181742a12.42.2024.08.07.06.40.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 07 Aug 2024 06:40:02 -0700 (PDT)
+From: max.oss.09@gmail.com
+To: u-boot@lists.denx.de
+Cc: Max Krummenacher <max.krummenacher@toradex.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
+ Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>
+Subject: [PATCH] imx: imx8: fix build when CONFIG_IMX_BOOTAUX is set
+Date: Wed,  7 Aug 2024 15:39:11 +0200
+Message-ID: <20240807133919.4155815-1-max.oss.09@gmail.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,35 +94,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Heiko,
+From: Max Krummenacher <max.krummenacher@toradex.com>
 
-On Wed, 7 Aug 2024 13:16:21 +0200
-Heiko Schocher hs@denx.de wrote:
+Use correct function name.
 
-> Hello Anatolij,
-> 
-> On 03.08.24 18:15, Anatolij Gustschin wrote:
-> > Conversion to DM_I2C is mandatory, enable DM_I2C to fix board
-> > removal warning. Convert EEPROM access to use DM_I2C API.
-> > 
-> > Signed-off-by: Anatolij Gustschin <agust@denx.de>
-> > ---
-> > Cc: Nikita Kiryanov <nikita@compulab.co.il>
-> > Cc: Fabio Estevam <festevam@denx.de>
-> > Cc: Tom Rini <trini@konsulko.com>
-> > ---
-> >   board/compulab/cm_fx6/cm_fx6.c |  3 ++-
-> >   board/compulab/common/Makefile |  2 +-
-> >   board/compulab/common/eeprom.c | 14 +++++---------
-> >   board/compulab/common/eeprom.h |  2 +-
-> >   configs/cm_fx6_defconfig       |  2 +-
-> >   5 files changed, 10 insertions(+), 13 deletions(-)  
-> 
-> This patch breaks world build ... could you take a look?
-> 
-> https://dev.azure.com/hs0298/hs/_build/results?buildId=114&view=logs&j=08d7dacc-cd40-5df3-6db5-bb431d28637a&t=8da0c77f-a38d-54ad-3682-1c9d5ed6f8aa&l=1228
+Fixes: e8cd1f60d964 ("imx: imx8: bootaux: Add i.MX8 M4 boot support")
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+---
 
-I've sent a v2 patch to fix this. Thanks!
+ arch/arm/mach-imx/imx8/cpu.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
---
-Anatolij
+diff --git a/arch/arm/mach-imx/imx8/cpu.c b/arch/arm/mach-imx/imx8/cpu.c
+index accba502e492..834aca82bcfd 100644
+--- a/arch/arm/mach-imx/imx8/cpu.c
++++ b/arch/arm/mach-imx/imx8/cpu.c
+@@ -258,14 +258,14 @@ int arch_auxiliary_core_up(u32 core_id, ulong boot_private_data)
+ 			return -EIO;
+ 		}
+ 
+-		if (!power_domain_lookup_name("audio_sai0", &pd)) {
++		if (!imx8_power_domain_lookup_name("audio_sai0", &pd)) {
+ 			if (power_domain_on(&pd)) {
+ 				printf("Error power on SAI0\n");
+ 				return -EIO;
+ 			}
+ 		}
+ 
+-		if (!power_domain_lookup_name("audio_ocram", &pd)) {
++		if (!imx8_power_domain_lookup_name("audio_ocram", &pd)) {
+ 			if (power_domain_on(&pd)) {
+ 				printf("Error power on HIFI RAM\n");
+ 				return -EIO;
+-- 
+2.42.0
+
