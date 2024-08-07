@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85461C52D6F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 22:48:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48486C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 22:49:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B56FE88A83;
-	Thu,  8 Aug 2024 00:48:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3128788A9E;
+	Thu,  8 Aug 2024 00:48:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FFeYkGtW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HrkJkMYg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CCAB888D7; Thu,  8 Aug 2024 00:48:11 +0200 (CEST)
-Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
- [IPv6:2607:f8b0:4864:20::12e])
+ id 51D9D88A5F; Thu,  8 Aug 2024 00:48:12 +0200 (CEST)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63112888A4
- for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 00:48:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 37684881E7
+ for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 00:48:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12e.google.com with SMTP id
- e9e14a558f8ab-39b3a6a7941so1258255ab.0
- for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 15:48:09 -0700 (PDT)
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-39b38295008so1446625ab.2
+ for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 15:48:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723070888; x=1723675688; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723070889; x=1723675689; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QPbDAUzI587VrP1AwwMmummAN3KXW9KfXtMJzjy7WGs=;
- b=FFeYkGtWHWG6aBYJmBvFj/cj3tw3TlhwExjZRs/1e50VGe1cwR/aCfp/8lzaw1TfE8
- iw0+yIMwzK50d9VemTnQTRVUvGnYGRbpq1Z14Ewrb9GLoEce2obi7zjtwAaTTNUK+mJ2
- nGhiWHrXfdG0Si1G2tiErnNJHowm4nS9fEjFM=
+ bh=n+KspJSEgLGNC+JIS+cgwqgwed39oKyrTYgtpd2+aeE=;
+ b=HrkJkMYgrxnYgTImWqRzC1RZFminL45SaJ0WRoPC2+LF+lzzDDkXsmpTzIu5RLcAVd
+ CP2oUNJyoeL3HEE8UAOrZQI/ZyBqYE4e0GeMUCTuVQEZBk8bgnMr6mDmh/DwrphHXUEL
+ sK4zp9qx6T3/5FtMPFhFkhq64wH6sSveK2Mz0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723070888; x=1723675688;
+ d=1e100.net; s=20230601; t=1723070889; x=1723675689;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QPbDAUzI587VrP1AwwMmummAN3KXW9KfXtMJzjy7WGs=;
- b=oMbeDrdxKlH2RW5RXxApE3zqhy+usl/uGvhB/7rxJ9xNLva7JgHb4yAX2fm9GzwP54
- CYYtWzGZYGdR4v9poTIzEzZUzN4Jg04cAauQjGglEVCHNlW2/ELj/0aZZkpmZiFhlFu4
- NNXPlOXHvp4GER8fyac01ffK0zANVz+EtVr9rE62T2vsjoEwRdjww8D+DqDOdQL7acWI
- 8KbvHJXtuX+HTpb219MsXEr/miojRibwr67AvbfUcsWFm7yeF4MkD8MX47KMuqVYHY9u
- Mz+xNcFBs5+3vgGKzQjDzggRNfhL5fD1lBRwGKtC01Ioyt8Kyt6ZJ8LNNivniWHZN6hK
- NKlg==
-X-Gm-Message-State: AOJu0Yz+mMb0Uz5qYMABfCRhChXVY+ZqWD9AmPNCtM1ln5Z3QFaJ9JrG
- RoojnpryRQ5ozPLefgwYqRt2NC5QsQRDbSpMSRBHOiZvTE2tERsGvkLjfGZc5SUQ/oZNkgYGris
+ bh=n+KspJSEgLGNC+JIS+cgwqgwed39oKyrTYgtpd2+aeE=;
+ b=cqfjNVWAeaYpths5oxt1MwI7hNq9UR0FlFW1uBAtRkCIpU306kgddz2B9xK6O3KQ5i
+ l5KpKiaLIwiOoMBGTfvNHSLu/hYlGbIQBXvVq220MLA0OtSbn2baE5TA65X9UCRdDaXq
+ 9SKrwYTZzaSReSK49LkPGCu792sTx5iT4m5Xaj6H6wu8RWX6c3WWXEWR6RsbL7oJZWBA
+ taXlD4fsexjlUqGHDI6P6zpuZY6ZdxqzQVc3xAZefr2NTy/JL0rFK9lLkFWz/CZYEDrc
+ VuE7p+BAlHU4oYiKphgyMkyty824qhqUhdPUKWXrJk56z5W03PWV4ThkpuVSFkHQLfgg
+ B0HQ==
+X-Gm-Message-State: AOJu0YxXQZVqQ9zIF4yB8e1Fkn5tGhVedup7U33V4cNPX8X2izV3/l8i
+ BZgvDagJQEnKUSA9r1KAbe5UiwbR7s0acDmRg8noLDdP4YJJSeuBRSmq+SjWhdIEx6sNpAoKEGU
  =
-X-Google-Smtp-Source: AGHT+IEtJDqcMc06H0vXBeQnIAvS7Ec/tOvC4swc4+g0n5tHHRm01HVXwJ0hfGJmD5wkb6J6n71zFQ==
-X-Received: by 2002:a05:6e02:1448:b0:398:16d1:610b with SMTP id
- e9e14a558f8ab-39b5ebd38c4mr1477505ab.0.1723070888045; 
+X-Google-Smtp-Source: AGHT+IHuVlvIIRGAfunzfapgMPF35v7+pEL1d8C5THLs1D/lUPJO2qqpwvQkTQ6FSr7ugzhV4FwYZw==
+X-Received: by 2002:a05:6e02:2182:b0:39b:324a:d37f with SMTP id
+ e9e14a558f8ab-39b5ec6fa7cmr975365ab.2.1723070888829; 
  Wed, 07 Aug 2024 15:48:08 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39b20af1528sm48275205ab.80.2024.08.07.15.48.07
+ e9e14a558f8ab-39b20af1528sm48275205ab.80.2024.08.07.15.48.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 15:48:07 -0700 (PDT)
+ Wed, 07 Aug 2024 15:48:08 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
@@ -68,9 +68,9 @@ Cc: Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
  Michal Simek <michal.simek@amd.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Jerry Van Baren <vanbaren@cideas.com>
-Subject: [PATCH v4 04/21] fdt: Don't overwrite bloblist devicetree
-Date: Wed,  7 Aug 2024 16:47:22 -0600
-Message-Id: <20240807224739.3858517-5-sjg@chromium.org>
+Subject: [PATCH v4 05/21] sandbox: fdt: Avoid overwriting an existing fdt
+Date: Wed,  7 Aug 2024 16:47:23 -0600
+Message-Id: <20240807224739.3858517-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240807224739.3858517-1-sjg@chromium.org>
 References: <20240807224739.3858517-1-sjg@chromium.org>
@@ -92,33 +92,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When the devicetree comes from a bloblist, it is currently overwritten
-by the appended one, if present. It should be preserved.
+Since the removal of OF_HOSTFILE logic in board_fdt_blob_setup(), the
+logic for obtaining the DT is handled in the OF_BOARD option. If a
+devicetree comes from a bloblist it is immediately overwritten by this
+function.
 
-Adjust the logic to support this.
+Fix this by skipping the function if a devicetree is already present.
 
-Fixes: 70fe2385943 ("fdt: Allow the devicetree to come from a bloblist")
+This is sort-of a fix for e7fb7896 ("sandbox: Remove OF_HOSTFILE") but
+it has only come to light since bloblist was added, so I have not added
+a Fixes tag.
+
+Unfortunately it is not possible to report the correct FDT source with
+the current code. It might be best to use an error-return code for
+board_fdt_blob_setup() so that an error can be reported if the board
+does not provide the DT.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+(no changes since v3)
 
- lib/fdtdec.c | 1 +
- 1 file changed, 1 insertion(+)
+Changes in v3:
+- Fix 'handed' typo
 
-diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-index 6865f78c70d..5edc8dd2f9f 100644
---- a/lib/fdtdec.c
-+++ b/lib/fdtdec.c
-@@ -1685,6 +1685,7 @@ int fdtdec_setup(void)
- 				gd->fdt_src = FDTSRC_BLOBLIST;
- 				log_debug("Devicetree is in bloblist at %p\n",
- 					  gd->fdt_blob);
-+				ret = 0;
- 			} else {
- 				log_debug("No FDT found in bloblist\n");
- 				ret = -ENOENT;
+ arch/sandbox/cpu/cpu.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/sandbox/cpu/cpu.c b/arch/sandbox/cpu/cpu.c
+index 0ed85b354cf..4f15a560902 100644
+--- a/arch/sandbox/cpu/cpu.c
++++ b/arch/sandbox/cpu/cpu.c
+@@ -340,6 +340,8 @@ void *board_fdt_blob_setup(int *ret)
+ 	int err;
+ 	int fd;
+ 
++	if (gd->fdt_blob)
++		return (void *)gd->fdt_blob;
+ 	blob = map_sysmem(CONFIG_SYS_FDT_LOAD_ADDR, 0);
+ 	*ret = 0;
+ 	if (!state->fdt_fname) {
 -- 
 2.34.1
 
