@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B676BC3DA7F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 14:14:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CC6EC3DA7F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 14:17:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D39088BD5;
-	Wed,  7 Aug 2024 16:14:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B1BFF88D13;
+	Wed,  7 Aug 2024 16:17:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="koUZsSbJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZKTUqr0/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C9BB88CF0; Wed,  7 Aug 2024 16:14:54 +0200 (CEST)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
+ id 3385888D0F; Wed,  7 Aug 2024 16:17:29 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25A2888B9B
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 16:14:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 50BA188BBC
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 16:17:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jpewhacker@gmail.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-26875ace6cbso455520fac.1
- for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 07:14:52 -0700 (PDT)
+ spf=pass smtp.mailfrom=max.oss.09@gmail.com
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a7aa4ca9d72so210571066b.0
+ for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 07:17:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723040090; x=1723644890; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1723040247; x=1723645047; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=TAxqye0nL/tAgsg+fvSvwzPsFbsCGVZbpGamUpj3F4A=;
- b=koUZsSbJXmiZQApcEPO+x+Cj9+XA3HSBwXT1K/7tpn3Z4TFISoQ8gharjdmcZZqqlK
- dnWmAp3f8quneTV7fooJwXvIAnnA7LtXfEh0vgQR5XRFZ/rYVgIa9duBhdZKlH+cZEwu
- l+RmZGlqM2q+zP92rF8KU9jee4jt3u1UI4vnQ90L1IrRCPmJ0vMixtucpDLCFaKiD5ME
- hNlbZZaygjW1TeyGFLIYtRwhHN/XTmoKHQ8aIK3rJbfip/hkTfXjQ5r31jjSFoX5O4YX
- OFHMYc83IHgWutJZLkmEidPNOliFxnFYd5x+kgPI8BwHzZqs/1PfaIsdvluVpXkjvOUL
- yN4g==
+ bh=WS3IYlrGKc0P3qC6C3RlGUvdKaX5aeguKQcS5QIN7EA=;
+ b=ZKTUqr0/lyQ3+JPVp8K2v9wsLad0/kmkcL8CKprseEfWtyYP8jZlKiQN2pqWOi/nYE
+ DikaDnspodXnzw60flG1zLPIL14i3ru6YLDsPggq9w7Cfhi0ZskFVB3tiJ2idLG3kbOe
+ 4h4sEiBgWNpDOxJAKs1MP+W1DwMC+Wk5zYvN9b2v0l34nrW943KjBUySJnbp6vPZVwzr
+ SLvB+NjEHspioRkV+nZRVTWZbym19NRnhDTJdeJszv1/6Od9q56eWvl96YiH0psM4LxG
+ w6se8d+ujGX9rmhVU6+TVOoQtkwSf/ikGqNstxu23M/euYo9kUtzi4Bq0Pp8g5K9LN4w
+ tJdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723040090; x=1723644890;
+ d=1e100.net; s=20230601; t=1723040247; x=1723645047;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=TAxqye0nL/tAgsg+fvSvwzPsFbsCGVZbpGamUpj3F4A=;
- b=AyWidH7JdbrFWmpRHLu88lkTkXAbatDaopcfgCtjIoEpaeJxwnupX7l7EoWJzcY89E
- az+AZCgiK3C6eDdG2VzkxW7GajgdolDDtyzJhJglo7ajizRvqW5y7abdtgdw+EMcLuHL
- s4DmmbUJxFyjQu9DYi1UfVuIE5T5tU3PpxHCtHyg5Gzn027dj8kapLS2oDUgaBhn5RHY
- JYmISrD2RY9J5ATH8dxL5WSxZuvKmfQsWHYhQEZxbGdeJDU+Oi9bBnof9icZYC+o+bGu
- ggB2ku9DFEPcWkzVPVvs9i5QOBc+LDWqFBSISJljDmPPTJPmvjyfW4lzb+De6HpupJLF
- Ph9A==
-X-Gm-Message-State: AOJu0YyqmWlbc9BURJqzhe10tmi6jqFZLBDo6xwGA9Iw8C0E2PMLbXls
- oTa8I/2KnxaLdsR7Innojsvo41WzJ6LNdAC8NF1pkJT5oFNCZ7LaQKb/aA==
-X-Google-Smtp-Source: AGHT+IErt4oL6OYAv4ZKMqp0etBU6ZStPrxtJW5G5IkS75QueAKuOOdu7g0CpWQOBpNCb2P+Pk4KEQ==
-X-Received: by 2002:a05:6870:168b:b0:25e:b6c2:3bcb with SMTP id
- 586e51a60fabf-26911248889mr972355fac.0.1723040089768; 
- Wed, 07 Aug 2024 07:14:49 -0700 (PDT)
-Received: from localhost.localdomain ([2601:282:4300:19e0::d80b])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2689a67fb3bsm3915231fac.49.2024.08.07.07.14.48
+ bh=WS3IYlrGKc0P3qC6C3RlGUvdKaX5aeguKQcS5QIN7EA=;
+ b=MtVBoNOmIdyC6sRQW+T8ux+KbEfPnj9danQs0YRDuYQVwZ2frmpnEmf4+cRrGbB5JC
+ 04VmTzw9Krq+xhpcjAkkaOJnSSSie/ekL0tN/kMzyWmWBYI8rRb71Cr4crc75B3mX7Wh
+ bZOAlJyx5i6JBzIIjtyrecTnzY0bLF8S5MlVQIWDpDfbrKuaONhfpHmZsPZzVnliRWEb
+ 0bQVtEayopmAqr+grckW6uybfb58KrjanrefhTr5T65x6/6ywY20c/1m/RDt7//ce4jo
+ 28sYu50KWIjJUXwjGVj2fpO5xwtdgC3JJP6sQRcMDob/NUVP9UbTguuV/eKGlDIEXQoH
+ obiQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUP66hXTlc4u2k75KmZbObX8zbA+HUnHV3Bln/k8esOwtvRxtyeKLGK9ij8MIjt9qEEjQyqjYtKykzqtgEay8sfGOmVhw==
+X-Gm-Message-State: AOJu0YxsYO87uNA4aTUiYUcpW3I0X0bRsYgn0qjZwstgMvFgVmWyrBJx
+ opyJBR8LlqMGtqObLhZbDxnRSNKk2CPd1GZtnzXVdDWXXtIXNcJt
+X-Google-Smtp-Source: AGHT+IHIoVh4a4Xx4KDSwKztMPJBRhmgLjXVujKUeoMeDhjNH3bNMZan8vH3w5e03ft7ZmoPzQ23mQ==
+X-Received: by 2002:a17:907:d29:b0:a7a:c812:36bb with SMTP id
+ a640c23a62f3a-a7dc4da6efdmr1573597866b.8.1723040246384; 
+ Wed, 07 Aug 2024 07:17:26 -0700 (PDT)
+Received: from toolbox.int.toradex.com (31-10-206-125.static.upc.ch.
+ [31.10.206.125]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a7dc9ec8dafsm644945766b.220.2024.08.07.07.17.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 07:14:49 -0700 (PDT)
-From: Joshua Watt <jpewhacker@gmail.com>
-X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Joshua Watt <JPEWhacker@gmail.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] android_ab: Fix backup offset calculation
-Date: Wed,  7 Aug 2024 08:13:45 -0600
-Message-ID: <20240807141434.733085-1-JPEWhacker@gmail.com>
-X-Mailer: git-send-email 2.45.2
+ Wed, 07 Aug 2024 07:17:26 -0700 (PDT)
+From: max.oss.09@gmail.com
+To: Max Krummenacher <max.krummenacher@toradex.com>
+Cc: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Fabio Estevam <festevam@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Subject: [PATCH v1 0/4] apalis/colibri imx8: enable additional features
+Date: Wed,  7 Aug 2024 16:16:16 +0200
+Message-ID: <20240807141655.4165667-1-max.oss.09@gmail.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,46 +96,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The backup offset is in bytes, but was incorrectly be interpreted as
-blocks, leading to it being written to the wrong location. Fix the
-calculation and clarify that ANDROID_AB_BACKUP_OFFSET is in bytes and
-must be a multiple of the block size.
+From: Max Krummenacher <max.krummenacher@toradex.com>
 
-Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
----
- boot/android_ab.c | 4 ++--
- common/Kconfig    | 3 ++-
- 2 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/boot/android_ab.c b/boot/android_ab.c
-index 143f373aae..b253200161 100644
---- a/boot/android_ab.c
-+++ b/boot/android_ab.c
-@@ -139,8 +139,8 @@ static int ab_control_store(struct blk_desc *dev_desc,
- {
- 	ulong abc_offset, abc_blocks, ret;
- 
--	abc_offset = offset +
--		     offsetof(struct bootloader_message_ab, slot_suffix) /
-+	abc_offset = (offset +
-+		      offsetof(struct bootloader_message_ab, slot_suffix)) /
- 		     part_info->blksz;
- 	abc_blocks = DIV_ROUND_UP(sizeof(struct bootloader_control),
- 				  part_info->blksz);
-diff --git a/common/Kconfig b/common/Kconfig
-index 83c81edac2..e1b8557e0c 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -986,7 +986,8 @@ config ANDROID_AB_BACKUP_OFFSET
- 	help
- 	  If non-zero, a backup bootloader message starting at this offset in
- 	  the partition will tried in the event that the primary one (starting
--	  at offset 0) fails its checksum.
-+	  at offset 0) fails its checksum. The offset is in bytes and must be
-+	  multiple of the block size.
- 
- endmenu
- 
+Enable and use additional features which have been added to U-Boot
+on the Apalis iMX8QM / Colibri iMX8X boards.
+
+
+
+Andrejs Cainikovs (4):
+  board: apalis-imx8: add reset code
+  apalis-imx8: enable i.MX specific BOOTAUX
+  colibri-imx8x: enable i.MX specific BOOTAUX
+  colibri-imx8x: enable i.MX specific SNVS configuration
+
+ board/toradex/apalis-imx8/apalis-imx8.c | 8 ++++++++
+ configs/apalis-imx8_defconfig           | 1 +
+ configs/colibri-imx8x_defconfig         | 2 ++
+ 3 files changed, 11 insertions(+)
+
 -- 
-2.45.2
+2.42.0
 
