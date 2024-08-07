@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BF3FC3DA7F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 22:50:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78434C52D6F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 22:51:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31B4C88B57;
+	by phobos.denx.de (Postfix) with ESMTP id 8CA2C88B77;
 	Thu,  8 Aug 2024 00:48:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gFQvIxdC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BlOVfySF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40B2A888CF; Thu,  8 Aug 2024 00:48:21 +0200 (CEST)
-Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
- [IPv6:2607:f8b0:4864:20::131])
+ id 2C96188AE3; Thu,  8 Aug 2024 00:48:22 +0200 (CEST)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E2E388A65
- for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 00:48:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0256588B09
+ for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 00:48:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x131.google.com with SMTP id
- e9e14a558f8ab-39641271f2aso1427275ab.3
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-81f861f369aso49201939f.0
  for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 15:48:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1723070898; x=1723675698; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uL+Mo7zDnYq8QcayVxxmVZvVDuZ5FFJAov/B/dJaoks=;
- b=gFQvIxdCeJDZgs/M0aQtv7XE4QF6jpKmnHil+9zoXFDmPlOWCSUG7iuHVqMzgGV4zm
- awM06NgFJ6mnXe5aFhXrf8gWKz9QlgX/whMVSV6f0fLo6XLcdtpsRfphIV5IiTK5zrl6
- L38fobdMhsSo7AcKI+Sd6AdOpJbVmCCzJ5wF4=
+ bh=/bLnFuS0aZWJkifhH0Qryx5VpIJGA0hEJ2OTlge3/Os=;
+ b=BlOVfySFqQRHMpTf3VWZLgDGVCqolc9CSublE1VUjggbcrghAuNxFVRC+V+nMoMlt7
+ UyBIF4+JWND+Rj5njE5O/QRaG+4aO3MOnzx919avKFkoWUkM0jDeRkSeDvRig+mIQiTZ
+ 07jAvhWWvT2r0JGdudyS/dWTnspSC+S0cICGE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1723070898; x=1723675698;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uL+Mo7zDnYq8QcayVxxmVZvVDuZ5FFJAov/B/dJaoks=;
- b=UzOfk/30FvuhBCxHOWpW1/HNVF6xVyL7klqcH8IddqT+08kh/anetcC0XPd8sJzX9t
- hQhCrUlLTDAzYvDoDFex5kC2N+Wggpbg88XO4vTLAbvDcSrOoi416btFhcKTa18anGki
- Wa+92dEf6w+cLrEQyQfP2t0jZQAGnYXaji8a9AarpaIagwyfzExuPX+ognpfhzDLpDst
- aL/lVDaiZzl+qnLmOrk205Kjxw22OF3rbj9GfiCkKoqDmHFmx2zz1GZ4VrlgRrrD4oJj
- zD4rPZpIMeRjzr63XEPGXwu750hN6cugyG4ygyJuWnbgscPDIT+C3OjVBZVf9GgDewyB
- PqDA==
-X-Gm-Message-State: AOJu0YxOGn71Rf5WiCTGV2l6JlrkmRIo34s9sVbf+ZVW8TLtowG3oZQl
- Q/DR3Es5thRHG9bHekLlCut/L94t7SoNKa13WdA/5w/zq/CqznEd+eDIVGkPpA6AuacQuQbMaOU
+ bh=/bLnFuS0aZWJkifhH0Qryx5VpIJGA0hEJ2OTlge3/Os=;
+ b=p0fFF9cUaK+xhWHxsSorwMWJAgtPJW8XTq2uSL4OshgQZ/aI81S3ma3emW3mB0C/sm
+ xPslxHQkSsWEExv2YvKHUH02RcAFml6M3ZW2IuCfjB4fgn5ubLJapbhm8HWuCdJ8+L7V
+ MsZk5rne5yW5ExyXpnfKt9hivwfnJwPWBRDhAB2N3B5ZXQy8VMtUXrrBAYk37l6cSynd
+ JNhgDuuf1VWw7+stf46wKWc+mytFUqJaYqs696kcp0U409k3wdx+GNc+AhSn2XfKF8o2
+ cKFFA+oc/Rlv+JIip5TJmdpex6gJp3cKhkq6vKIYb2qlAbVUn7udw8BHtG3HlWfgdWg+
+ Ziog==
+X-Gm-Message-State: AOJu0YwtHvAPi/pm6O6BSqIaCp8BT+Y2AbxsSPzF1ahjScH1rku8ZHYS
+ 3s7ePv4iGShEVvQ0V032q5GwCm/bEjgwBBqdUd5lXrK2F6cTJqu2lNK3piaLW+3mHNEhfpb8CrI
  =
-X-Google-Smtp-Source: AGHT+IFScUGUrSxCDU7kCRmqNP7So7mgf47A0buluDR5QSowFgeGflFHKW7pWwARA5VBYUEdOTF3IQ==
-X-Received: by 2002:a05:6e02:1aaa:b0:39b:3a44:fe8a with SMTP id
- e9e14a558f8ab-39b5ec64cadmr1121495ab.4.1723070897712; 
- Wed, 07 Aug 2024 15:48:17 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFX1Oq3ZuG09XeB4RF77WxCd5hndYZVMiXsQzpCJ4VSIOaDuYPB9xm8HuMxoZoAQLpy2Ln/sw==
+X-Received: by 2002:a05:6e02:154b:b0:39a:ebb8:15d2 with SMTP id
+ e9e14a558f8ab-39b5eedb14dmr161355ab.8.1723070898575; 
+ Wed, 07 Aug 2024 15:48:18 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
  e9e14a558f8ab-39b20af1528sm48275205ab.80.2024.08.07.15.48.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 15:48:17 -0700 (PDT)
+ Wed, 07 Aug 2024 15:48:18 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>,
  Lean Sheng Tan <sheng.tan@9elements.com>,
  Michal Simek <michal.simek@amd.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4 16/21] upl: Plumb in universal payload to the init process
-Date: Wed,  7 Aug 2024 16:47:34 -0600
-Message-Id: <20240807224739.3858517-17-sjg@chromium.org>
+Subject: [PATCH v4 17/21] sandbox_vpl: Enable Universal Payload
+Date: Wed,  7 Aug 2024 16:47:35 -0600
+Message-Id: <20240807224739.3858517-18-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240807224739.3858517-1-sjg@chromium.org>
 References: <20240807224739.3858517-1-sjg@chromium.org>
@@ -91,109 +91,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Read the UPL early in boot so that it is available. For now none of the
-information is used.
+Use the sandbox_vpl build to test UPL since it supports a real devicetree
+in SPL. The sandbox_spl build uses OF_PLATDATA.
+
+Enable writing the UPL handoff in SPL and reading it in U-Boot proper.
+Provide a test to check that this handoff works.
+
+Note that the test uses the standard devicetree rather than the test one,
+since it is a lot smaller and fits in the existing bloblist.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/Kconfig     | 12 +++++++++++-
- common/board_f.c | 22 ++++++++++++++++++++++
- common/board_r.c |  2 ++
- 3 files changed, 35 insertions(+), 1 deletion(-)
+ configs/sandbox_vpl_defconfig |  4 ++++
+ test/py/tests/test_upl.py     | 25 +++++++++++++++++++++++++
+ 2 files changed, 29 insertions(+)
+ create mode 100644 test/py/tests/test_upl.py
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 60a4cddf5ec..7ac34574079 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -763,7 +763,9 @@ config UPL_READ
- 	help
- 	  Provides support for decoding a UPL-format payload into a C structure
- 	  which can be used elsewhere in U-Boot. This is just the reading
--	  implementation, useful for trying it out.
-+	  implementation, useful for trying it out. See UPL_IN for how
-+	  to tell U-Boot to actually read it on startup and use it for memory
-+	  and device information, etc.
- 
- config UPL_WRITE
- 	bool "upl - Support writing a Universal Payload handoff"
-@@ -774,6 +776,14 @@ config UPL_WRITE
- 	  for how to tell U-Boot SPL to actually write it before jumping to
- 	  the next phase.
- 
-+config UPL_IN
-+	bool "upl - Read the UPL handoff on startup"
-+	select UPL_READ
-+	help
-+	  Read an SPL handoff when U-Boot starts and use it to provide
-+	  devices, memory layout, etc. required by U-Boot. This allows U-Boot
-+	  to function as a payload in the meaning of the specification.
+diff --git a/configs/sandbox_vpl_defconfig b/configs/sandbox_vpl_defconfig
+index 72483d8ba10..96e9211bd19 100644
+--- a/configs/sandbox_vpl_defconfig
++++ b/configs/sandbox_vpl_defconfig
+@@ -27,6 +27,9 @@ CONFIG_FIT=y
+ CONFIG_FIT_VERBOSE=y
+ CONFIG_FIT_BEST_MATCH=y
+ CONFIG_SPL_LOAD_FIT=y
++CONFIG_UPL=y
++CONFIG_UPL_IN=y
++CONFIG_SPL_UPL_OUT=y
+ CONFIG_BOOTSTAGE=y
+ CONFIG_BOOTSTAGE_REPORT=y
+ CONFIG_BOOTSTAGE_FDT=y
+@@ -35,6 +38,7 @@ CONFIG_BOOTSTAGE_STASH_SIZE=0x4096
+ CONFIG_CONSOLE_RECORD=y
+ CONFIG_CONSOLE_RECORD_OUT_SIZE=0x1000
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_BLOBLIST_SIZE=0x5000
+ CONFIG_SPL_NO_BSS_LIMIT=y
+ CONFIG_HANDOFF=y
+ CONFIG_SPL_BOARD_INIT=y
+diff --git a/test/py/tests/test_upl.py b/test/py/tests/test_upl.py
+new file mode 100644
+index 00000000000..171079f8dba
+--- /dev/null
++++ b/test/py/tests/test_upl.py
+@@ -0,0 +1,25 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright 2024 Google LLC
++#
++# Test addition of Universal Payload
 +
- if SPL
- 
- config SPL_UPL
-diff --git a/common/board_f.c b/common/board_f.c
-index 29e185137ad..d71005d9f83 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -40,6 +40,7 @@
- #include <sysreset.h>
- #include <timer.h>
- #include <trace.h>
-+#include <upl.h>
- #include <video.h>
- #include <watchdog.h>
- #include <asm/cache.h>
-@@ -859,6 +860,26 @@ __weak int clear_bss(void)
- 	return 0;
- }
- 
-+static int initf_upl(void)
-+{
-+	struct upl *upl;
-+	int ret;
++import os
 +
-+	if (!IS_ENABLED(CONFIG_UPL_IN) || !(gd->flags & GD_FLG_UPL))
-+		return 0;
++import pytest
++import u_boot_utils
 +
-+	upl = malloc(sizeof(struct upl));
-+	if (upl)
-+		ret = upl_read_handoff(upl, oftree_default());
-+	if (ret) {
-+		printf("UPL handoff: read failure (err=%dE)\n", ret);
-+		return ret;
-+	}
-+	gd_set_upl(upl);
++@pytest.mark.boardspec('sandbox_vpl')
++def test_upl_handoff(u_boot_console):
++    cons = u_boot_console
++    ram = os.path.join(cons.config.build_dir, 'ram.bin')
++    fdt = os.path.join(cons.config.build_dir, 'u-boot.dtb')
 +
-+	return 0;
-+}
++    # Remove any existing RAM file, so we don't have old data present
++    if os.path.exists(ram):
++        os.remove(ram)
++    flags = ['-m', ram, '-d', fdt]
++    cons.restart_uboot_with_flags(flags, use_dtb=False)
 +
- static const init_fnc_t init_sequence_f[] = {
- 	setup_mon_len,
- #ifdef CONFIG_OF_CONTROL
-@@ -868,6 +889,7 @@ static const init_fnc_t init_sequence_f[] = {
- 	trace_early_init,
- #endif
- 	initf_malloc,
-+	initf_upl,
- 	log_init,
- 	initf_bootstage,	/* uses its own timer, so does not need DM */
- 	event_init,
-diff --git a/common/board_r.c b/common/board_r.c
-index d4ba245ac69..f445803d7a4 100644
---- a/common/board_r.c
-+++ b/common/board_r.c
-@@ -521,6 +521,8 @@ static int dm_announce(void)
- 		       uclass_count);
- 		if (CONFIG_IS_ENABLED(OF_REAL))
- 			printf(", devicetree: %s", fdtdec_get_srcname());
-+		if (CONFIG_IS_ENABLED(UPL))
-+			printf(", universal payload active");
- 		printf("\n");
- 		if (IS_ENABLED(CONFIG_OF_HAS_PRIOR_STAGE) &&
- 		    (gd->fdt_src == FDTSRC_SEPARATE ||
++    # Make sure that Universal Payload is detected in U-Boot proper
++    output = cons.run_command('upl info')
++    assert output == 'UPL state: active'
 -- 
 2.34.1
 
