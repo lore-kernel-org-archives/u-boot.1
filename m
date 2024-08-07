@@ -4,60 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 124EAC49EA1
-	for <u-boot@archiver.kernel.org>; Tue,  6 Aug 2024 22:33:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52E41C49EA1
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 00:14:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C8AC871C7;
-	Wed,  7 Aug 2024 00:33:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 8791288B28;
+	Wed,  7 Aug 2024 02:14:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="g2gPxyFQ";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="q0uw8ilJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B57238789F; Wed,  7 Aug 2024 00:33:09 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
+ id 3650688A92; Wed,  7 Aug 2024 02:14:07 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AAAF086D4C
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 00:33:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FBBB88A92
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 02:14:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: d674f498-5443-11ef-b63e-00505699b430
-Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id d674f498-5443-11ef-b63e-00505699b430;
- Wed, 07 Aug 2024 00:33:00 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=7IpQL8L/1ceLEYMHr4AOxJdKc2YH3Ripl3ojURbLROY=;
- b=g2gPxyFQPurT038ugLMH8mnWjH3Ao23oTwqv6w4VS7s/7HOsCxKaAEYb4PvW1CnEtNxQGj32Oruik
- Pf4WwINqmBnQ0Y3jAZPJOISao/4RyMFz724GmBllqh9yv/E34aCjvGbRQxpoHDgBHIHZcql19wcJoq
- u+GCmJLscOTokiJ5hoyUMHN10qJNCuqCiQJqzz0SJEea2eleRN7DsqYp69vd5MJLagxhHJclucCmmR
- 9Ia7/KyXlcw0sZ7qKyI/CkuakqWcLw3T/4rlMKnJ5Z+onlBa+gOVxlpmyiuy8LgKreB9O5dJqiAGYA
- z8Ht/9QXUZerlwjQWm/lr4B3QvKuUYg==
-X-KPN-MID: 33|s2T3RbsA/5306JQLN2QHu6vcqyh4LmNa2miRvu+l/eQIwAVyWc0b1JsbxxoswOr
- u/kWwH4dRNz2lsSYECnevRA==
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|hCgiwqsBT6yhoZqTw8VTn9efobbXgmz+Z6Y/fvybGdpqPitjDEo/qaJK98soGMJ
- oWBPOajbzzcD7vs34a6pjnQ==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id d62b3748-5443-11ef-b40c-005056998788;
- Wed, 07 Aug 2024 00:33:01 +0200 (CEST)
-Date: Wed, 07 Aug 2024 00:33:00 +0200
-Message-Id: <87frrhcmeb.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Simon Glass <sjg@chromium.org>
-Cc: fiona.klute@gmx.de, u-boot@lists.denx.de
-In-Reply-To: <CAFLszTh2Am1AuROKKwBr6zCNF4QCZQG2Vd88R2WWYFpGkMwjzQ@mail.gmail.com>
- (message from Simon Glass on Tue, 6 Aug 2024 15:50:44 -0600)
-Subject: Re: Selecting serial device for console
-References: <75114aa0-2de7-4f5c-b764-0953ebf08263@gmx.de>
- <CAFLszTh2Am1AuROKKwBr6zCNF4QCZQG2Vd88R2WWYFpGkMwjzQ@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 24A0A3F17F
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 00:13:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1722989636;
+ bh=RpEr08lkEBNOM5w/vUWJ6LV8EGyBWpXs4+Ov9Vbc0PA=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=q0uw8ilJ0dHvXcojZLA/FfgYoz+miR9QpBl8l45gNZM+HBex9I5+PwwwGuUXflo92
+ 22geWXy3ByxwTvFXwBDeDRRlKCqDmSSzpQRo6XBUhcsSfnZP5ZG9nF2bRRvOBn0yKq
+ xPQ1P0mf+Nh2FRJG9InGUyQn8Q7Akg0tIxRa6jZaQ7H6JW58WPkF6T1+GC9M/xU9qb
+ U7nSHLSgNZftAzuxogGhISdmJ0g3uMwU5EG++rgiSKP/Wo2DpnaI5mHmRw5nSYvT5q
+ Lfb1/PeItA8y7V/nfghN6PEvKg1hGIbk/myd+C3wFi1qn3o/LgYHnz8DXGfN4y7Ts/
+ jUNfk5r4gz+Mw==
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-368374dc565so548478f8f.2
+ for <u-boot@lists.denx.de>; Tue, 06 Aug 2024 17:13:56 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1722989636; x=1723594436;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RpEr08lkEBNOM5w/vUWJ6LV8EGyBWpXs4+Ov9Vbc0PA=;
+ b=dkHRyeNbE2W9ASfaCyRQZPMFnmbDXPsOuiTqRWHKB8lZZk6f8jOrqql7D/Epm0cLN3
+ OgqYS5f3hrmv4bqv0tbFDPLgVCdVEJotIWCcJwBpPmPksiDHtVWjlvXqyu1hZh35IL1h
+ NYKKTOx5joyycQCpE/NUkohZ0/0MNeQLnU2BlGM9ZdosihTSpX6WHGTb3hE+fDmZ5aFo
+ G1y4G5ol6UM7tGe6vjV68kKyknsMxhDd5KaSXZV7CXTOu5upvKX/iCFeIHU0RCkG4nRJ
+ 6gbJgIXW9U86P1JGe76Bw6I8tRZRzjOsYgawHGL5eaPx6W3xnnt9C5Gy5hXj8zqFDdX/
+ 7ezQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW0/D9XZhMSwRjDFzXAfaTpDM9oQvx306ZslEToPGA43jxnkF5RU4bIrAS+AqT7bmfEW9k/JxUpS17hmJGXdxIukKBohQ==
+X-Gm-Message-State: AOJu0Yw8Cw8B9lxMCONejsAKYYgfzKf7OdAENuYrC24oV55RKy4yWl+s
+ Elm5r4TSLIbsTn+fZzfOqr7zHePJ2jxkcO9IqZtty2CJZwel651MU4kAzG0urNhcL/oGR79lEJw
+ I1xD+m1HP7EPY6ZZT5ThKOjbDZruYLPnUP3/WHsyzKkTWT9gCcjFGwsI5ZoJphQV5hcQ=
+X-Received: by 2002:a5d:5274:0:b0:367:8ff5:5858 with SMTP id
+ ffacd0b85a97d-36bbc1d346dmr10773258f8f.56.1722989635707; 
+ Tue, 06 Aug 2024 17:13:55 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHivoHsKA6EHpYI7Zmv38JyIaCVsNcFGx2lBq7HpOgohKjkufqDWbN952vXpgwfPph5eFPs0Q==
+X-Received: by 2002:a5d:5274:0:b0:367:8ff5:5858 with SMTP id
+ ffacd0b85a97d-36bbc1d346dmr10773242f8f.56.1722989635075; 
+ Tue, 06 Aug 2024 17:13:55 -0700 (PDT)
+Received: from localhost.localdomain ([2a02:3031:2e0:52b3:22a6:b8b1:7d3b:dbe7])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-36bbd01945fsm14207572f8f.41.2024.08.06.17.13.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 Aug 2024 17:13:54 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, Shantur Rathore <i@shantur.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] boot: set correct block device name in set_efi_bootdev()
+Date: Wed,  7 Aug 2024 02:13:45 +0200
+Message-ID: <20240807001345.296937-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.45.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,87 +103,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Simon Glass <sjg@chromium.org>
-> Date: Tue, 6 Aug 2024 15:50:44 -0600
+For SATA devices the class name is 'ahci' but the block device name is
+'sata'.
 
-Hi Simon,
+Use function blk_get_uclass_name() to retrieve the correct string.
 
-> Hi Fiona,
-> 
-> On Thu, 1 Aug 2024 at 08:07, Fiona Klute <fiona.klute@gmx.de> wrote:
-> >
-> > Hi everyone,
-> >
-> > how can I configure which of the available serial devices U-Boot will
-> > use for its serial console?
-> >
-> > Background: I have a device based on a Raspberry Pi CM4, which has 6
-> > UARTs (UART1 is a mini UART, the others PL011) [1]. In the default
-> > configuration (including the mainline Linux broadcom/bcm2711-rpi-cm4-io
-> > device tree) the Bluetooth module is attached to UART0. Unless I either
-> > completely disable UART0 (status = "disabled" in the device tree) or
-> > reconfigure it to be a serial console (e.g. using the RPi disable-bt
-> > DTBO) U-Boot fails to boot, I assume (it doesn't get far enough to show
-> > messages over netconsole) because it tries and fails to set up a serial
-> > console where there's a BT chip listening.
-> >
-> > That happens even if another serial console is available: With the RPi
-> > bcm2711-rpi-cm4 DTB plus "disable-bt" (disable the Bluetooth module,
-> > reconfigure UART0 as a serial console) and "uart1" (set up a serial
-> > console on UART1) DTBOs I can see that U-Boot discovers the serial
-> > device on UART1 (serial@7e215040):
-> >
-> > U-Boot> dm uclass serial
-> > uclass 108: serial
-> > 0   * serial@7e201000 @ 3af3b200, seq 0
-> > 1     serial@7e215040 @ 3af3b2d0, seq 1
-> >
-> > However, I can't find a way to make it *use* it instead of UART0
-> > (serial@7e201000). I tried to set CONFIG_CONS_INDEX=1 but didn't see any
-> > change (unfortunately the help does not describe exactly how the number
-> > is mapped to DT UART definitions). If I completely disable UART0 in the
-> > DT as mentioned above U-Boot uses UART1 just fine, so it's not an issue
-> > with UART1 as such.
-> >
-> > To make matters slightly more complicated, the specific device I have is
-> > a RevPi Connect 4, where a vendor overlay [2] describes how to set up an
-> > RS485 serial console using UART5. The pins defined there are wired to
-> > the outside of the box [3], so eventually I'll actually want to use
-> > UART5 for the serial console. Which means I really need a (build-time or
-> > preferably DT-based) way to configure which serial device to use.
-> >
-> > My goal is to create a single DTS which both U-Boot and Linux can use,
-> > and get it upstreamed if possible. If there are configuration options
-> > and they're just missing from the documentation, I'd be happy to send a
-> > patch to add them once I have a solution.
-> 
-> You should be able to update /chosen/stdout-path (in the devicetree)
-> to specify the UART you want, using its alias. So if you have a
-> 'serial1' alias, you can set stdout-path to 'serial1'. This should
-> work in Linux too.
-> 
-> The code in question is serial_find_console_or_panic().
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ boot/bootmeth_efi.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-While this may reflect how modern Linux handles things, this doesn't
-actually make a lot of sense to me.  And the clue is really in the
-name of the node under which the stdout-path resides.  That property
-is supposed to communicate to the OS what the firmware/bootloader
-picked as the console device rather than indicate to the
-firmware/bootloader what the console device should be.  This was how
-things worked back in the days of OpenFirmware where the firmware
-would pick an input and an output device based on firmware variables
-and whether a keyboard was plugged in or not and would set "stdin" and
-"stdout" properties under /chosen to reflect the choice made by the
-firmware.
+diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+index 39232eb2e25..6b41c0999f1 100644
+--- a/boot/bootmeth_efi.c
++++ b/boot/bootmeth_efi.c
+@@ -100,11 +100,10 @@ static void set_efi_bootdev(struct blk_desc *desc, struct bootflow *bflow)
+ 	if (last_slash)
+ 		*last_slash = '\0';
+ 
+-	log_debug("setting bootdev %s, %s, %s, %p, %x\n",
+-		  dev_get_uclass_name(media_dev), devnum_str, bflow->fname,
+-		  bflow->buf, size);
+ 	dev_name = device_get_uclass_id(media_dev) == UCLASS_MASS_STORAGE ?
+-		 "usb" : dev_get_uclass_name(media_dev);
++		 "usb" : blk_get_uclass_name(device_get_uclass_id(media_dev));
++	log_debug("setting bootdev %s, %s, %s, %p, %x\n",
++		  dev_name, devnum_str, bflow->fname, bflow->buf, size);
+ 	efi_set_bootdev(dev_name, devnum_str, bflow->fname, bflow->buf, size);
+ }
+ 
+-- 
+2.45.2
 
-With this in mind it would make total sense to have U-Boot set
-/chosen/stdout-path based on some environment variable or other
-information.  Of course it might still make sense that the device tree
-used by U-Boot sets /chosen/stdout-path to indicate the default choice
-for the console device.  But it doesn't make senso to me to tell users
-that if they want to use a different console device they should go and
-edit the device tree...
-
-Cheers,
-
-Mark
