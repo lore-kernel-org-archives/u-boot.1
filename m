@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DD31C3DA7F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 19:54:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3C2DC3DA7F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 19:54:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B123B88BC6;
-	Wed,  7 Aug 2024 21:54:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2023588C29;
+	Wed,  7 Aug 2024 21:54:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Z0BVhOR/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kXFgxapE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6F7B88C0E; Wed,  7 Aug 2024 21:54:27 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id B6E1A88BF9; Wed,  7 Aug 2024 21:54:28 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9660889D4
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 21:54:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A72DB88BF9
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 21:54:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-428e3129851so1682255e9.3
- for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 12:54:25 -0700 (PDT)
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-428e0d18666so1620205e9.3
+ for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 12:54:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723060464; x=1723665264; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1723060466; x=1723665266; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=7MItkl2Z+Jt8Mvb5HInZTEP3uAkqW6OJugrf2S9IW4A=;
- b=Z0BVhOR/eVh6OI+9UukcxRAa06dG6+AzYDvE5/y6+rNtUI6SDv4TeTw32rw95BrRII
- TFEksozfb2KWMUqQeP3xFJnwY9BM4TWWxdvkyDfH5UgCAPTha0HeL0NaESbNM6luzA7s
- tVIbJnnYmL2xs4pEn+uk50YFwp9usLHcGAXBn1MwKRKT3wzVVSEC9D7x4IrHqKJM/U5d
- jsH404yOUM+ceVlKj9CyPLZw7BqjeWDDZGjdtMiaEPjRxxKNUxNov+mDs+4eTWgNNRmK
- z5OSdFOtZfRyIcXW23w9S1yxBKRSpirMB+kJsvbRsRx4w94Mwcs4fh9bumPUyqkmkKo6
- /Sbw==
+ :reply-to; bh=FZwEhbDpC3QRsL4OcntQ5ExiSIPebNKwOaMYQduXGxg=;
+ b=kXFgxapEshltzGYgmlvNkp8n+ECn7hjnVq7xR4I4T1tkD+P6mZiSZk7eZZBJujRMh4
+ qfcrFZrQF0DFLoXpDlstAD0HxWijSpi8eYjn6hQ4R8I5SgEAOg32PWjGwZnBWkiJXOtr
+ RB8s7LgHEPeNDE/AOsMcZKB701k540FAfeROfyGutgd2I3tPz4IpcgSgfIKBT4kY0WPT
+ JtHN96F/7X8b/H1d4yhLrfoupTdh+4RfqD6LNosUFmfPgoMvgWn5W9lob6kQjF9uOgDM
+ K6N2RmsMaUuZUTVFW1VwdH5DsifyowK9AYVc5b6qbqsJ329YPgrLRo7T1BIpMc6LecLu
+ Wf+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723060464; x=1723665264;
+ d=1e100.net; s=20230601; t=1723060466; x=1723665266;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7MItkl2Z+Jt8Mvb5HInZTEP3uAkqW6OJugrf2S9IW4A=;
- b=Ajqsqs1lfG5BTc2OFRS08VqcKQmCaX2te4O6cHgZyr6TlSvX/ZM41mr0Z3PTcvhmab
- dYCERvm7F6DXmI128jObm8fT2jWVPdB+W7QdLsCIiY7M3Z/1vxDc3fLHFc1TppJyYqDO
- TPQYzfNR5CcF/cojS8Z8kwe08tNJdKpj4yanD5ps9VGNBiPr+ecxvSA3OYOWdqpHKDOW
- EJpZCoeT2dyLJUQo15c6dBqownUeiWjseml6inX+rdtwE/BQ5LxojME/14mJWViEVXvU
- BbnGtMBUPhnsheRBleX2wVt9z94rX7zmUC9S11/A1LAJF2R25R636ZlOd+gkYG5qadQx
- sGGQ==
+ bh=FZwEhbDpC3QRsL4OcntQ5ExiSIPebNKwOaMYQduXGxg=;
+ b=fysRlkajmWy5v7fkFJtkBLPm2CXE+drFVraZix9CjFRFynq09ALq7hk2BLlJUxQlJr
+ VfoaKI5X1WQawq3EDScTwvmd/J1DWXOoaLPRqLSSEuHhe4a40LifyFZINbczRHJCx+jN
+ iAkU6xlyWNmzwjuu1Piok3fOHAzx4stkoOLxYqEZDv5gp/pCM8x6xsXCllTvjK5Xgdvt
+ JtdpwQ3UwT7L8xaWruSm8j5+w+bE4UkfQvpDofd2mA1wheN3q//RW01g8l7klkxa7HHM
+ G+Gpe4CzwquUrh1PCsYE0g25POWZv72g6r2DCahlfELMWErpnOcLEL6HwTDy2ir7R0lK
+ 8LDQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWDJbajbwEb4TpCiOeL+z7Hpxyvs2VPNtOchZz9C+9cUvia4s39JOWbCB83IoKlQ/fwOR6KxdWw+pz31yMPmeS7tg+IoQ==
-X-Gm-Message-State: AOJu0YwT5EdSkvUheCam7JDCAAiAqB4NLOctyYH1otPpD6jl/gIjvobh
- Ch2oSvUPv26/lhtIesZhg8pAMDYOH3ezUkI8ef5t1V9aeRP/OvK2
-X-Google-Smtp-Source: AGHT+IECrUW4YimfG0yYeXPC80HW1cpGAeaIYdKPviJzzJq21nPal7gC1PTNvvAtL9ADaQBJ+8fgTQ==
-X-Received: by 2002:a05:600c:35d2:b0:427:ff7a:79e with SMTP id
- 5b1f17b1804b1-428e6b08baemr128345175e9.16.1723060463758; 
- Wed, 07 Aug 2024 12:54:23 -0700 (PDT)
+ AJvYcCX54JsUYYyp0o5bucNQZi5fO+HcDkF2XwgZKFq5ZQ7Htcvm+VJ0seDcyfYssiR2xKcHV/gm9Ujm+GeyzHyk9uzQnitsMw==
+X-Gm-Message-State: AOJu0Yycgfwp07zJTO/69+Gfudu6FeMTaxih9qh3g2Z5TP+BunVBIq9e
+ FIDQRUSMpZU/9NB+C3NuCvxY5IE1+37WozAu12EIwtdGlc6N2TJb
+X-Google-Smtp-Source: AGHT+IEOY6iOgDzabyO6wcqyyKi0d4lYbp7OxP4pFzrlARLT2i/yKjfhK+2foK9W/1I6xf1Oq+e8HA==
+X-Received: by 2002:a05:600c:4449:b0:426:6618:146a with SMTP id
+ 5b1f17b1804b1-428e6af1afcmr134945775e9.2.1723060465615; 
+ Wed, 07 Aug 2024 12:54:25 -0700 (PDT)
 Received: from localhost.localdomain
  (host-87-6-196-30.retail.telecomitalia.it. [87.6.196.30])
  by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-429057a8802sm44383765e9.21.2024.08.07.12.54.21
+ 5b1f17b1804b1-429057a8802sm44383765e9.21.2024.08.07.12.54.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 12:54:23 -0700 (PDT)
+ Wed, 07 Aug 2024 12:54:25 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
@@ -85,9 +85,9 @@ To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
  Michael Polyntsov <michael.polyntsov@iopsys.eu>,
  Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 1/9] led: turn LED ON on initial SW blink
-Date: Wed,  7 Aug 2024 21:54:04 +0200
-Message-ID: <20240807195413.30456-2-ansuelsmth@gmail.com>
+Subject: [PATCH v2 2/9] led: implement led_set_state/period_by_label
+Date: Wed,  7 Aug 2024 21:54:05 +0200
+Message-ID: <20240807195413.30456-3-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240807195413.30456-1-ansuelsmth@gmail.com>
 References: <20240807195413.30456-1-ansuelsmth@gmail.com>
@@ -109,35 +109,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We currently init the LED OFF when SW blink is triggered when
-on_state_change() is called. This can be problematic for very short
-period as the ON/OFF blink might never trigger.
+Introduce new API led_set_state/period_by label as a shorthand to set
+LED state and LED blink period by referencing them by label.
 
-Turn LED ON on initial SW blink to handle this corner case and better
-display a LED blink from the user.
+This is needed for the upcoming additional API that will declare LED in
+.confg and reference them by their LED label name.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- drivers/led/led_sw_blink.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ drivers/led/led-uclass.c | 28 ++++++++++++++++++++++++++++
+ include/led.h            | 18 ++++++++++++++++++
+ 2 files changed, 46 insertions(+)
 
-diff --git a/drivers/led/led_sw_blink.c b/drivers/led/led_sw_blink.c
-index 9e36edbee47..853278670b9 100644
---- a/drivers/led/led_sw_blink.c
-+++ b/drivers/led/led_sw_blink.c
-@@ -103,8 +103,11 @@ bool led_sw_on_state_change(struct udevice *dev, enum led_state_t state)
- 		return false;
+diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
+index 199d68bc25a..b2b96d7d48b 100644
+--- a/drivers/led/led-uclass.c
++++ b/drivers/led/led-uclass.c
+@@ -65,6 +65,20 @@ int led_set_state(struct udevice *dev, enum led_state_t state)
+ 	return ops->set_state(dev, state);
+ }
  
- 	if (state == LEDST_BLINK) {
-+		struct led_ops *ops = led_get_ops(dev);
++int led_set_state_by_label(const char *label, enum led_state_t state)
++{
++	struct udevice *dev;
++	int ret;
 +
-+		ops->set_state(dev, LEDST_ON);
- 		/* start blinking on next led_sw_blink() call */
--		sw_blink->state = LED_SW_BLINK_ST_OFF;
-+		sw_blink->state = LED_SW_BLINK_ST_ON;
- 		return true;
- 	}
++	ret = led_get_by_label(label, &dev);
++	if (ret) {
++		printf("Failed to get LED by label %s\n", label);
++		return ret;
++	}
++
++	return led_set_state(dev, state);
++}
++
+ enum led_state_t led_get_state(struct udevice *dev)
+ {
+ 	struct led_ops *ops = led_get_ops(dev);
+@@ -94,6 +108,20 @@ int led_set_period(struct udevice *dev, int period_ms)
+ 	return -ENOSYS;
+ }
  
++int led_set_period_by_label(const char *label, int period_ms)
++{
++	struct udevice *dev;
++	int ret;
++
++	ret = led_get_by_label(label, &dev);
++	if (ret) {
++		printf("Failed to get LED by label %s\n", label);
++		return ret;
++	}
++
++	return led_set_period(dev, period_ms);
++}
++
+ static int led_post_bind(struct udevice *dev)
+ {
+ 	struct led_uc_plat *uc_plat = dev_get_uclass_plat(dev);
+diff --git a/include/led.h b/include/led.h
+index 99f93c5ef86..c1f3380f253 100644
+--- a/include/led.h
++++ b/include/led.h
+@@ -111,6 +111,15 @@ int led_get_by_label(const char *label, struct udevice **devp);
+  */
+ int led_set_state(struct udevice *dev, enum led_state_t state);
+ 
++/**
++ * led_set_state_by_label - set the state of an LED referenced by Label
++ *
++ * @label:	LED label
++ * @state:	LED state to set
++ * Return: 0 if OK, -ve on error
++ */
++int led_set_state_by_label(const char *label, enum led_state_t state);
++
+ /**
+  * led_get_state() - get the state of an LED
+  *
+@@ -128,6 +137,15 @@ enum led_state_t led_get_state(struct udevice *dev);
+  */
+ int led_set_period(struct udevice *dev, int period_ms);
+ 
++/**
++ * led_set_period_by_label - set the blink period of an LED referenced by Label
++ *
++ * @label:	LED label
++ * @period_ms:	LED blink period in milliseconds
++ * Return: 0 if OK, -ve on error
++ */
++int led_set_period_by_label(const char *label, int period_ms);
++
+ /**
+  * led_bind_generic() - bind children of parent to given driver
+  *
 -- 
 2.45.2
 
