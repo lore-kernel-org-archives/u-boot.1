@@ -4,54 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F908C3DA7F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 14:18:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBD3EC52D71
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 14:20:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4534886E5;
-	Wed,  7 Aug 2024 16:18:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
+	by phobos.denx.de (Postfix) with ESMTP id 6F7BB88D10;
+	Wed,  7 Aug 2024 16:20:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="CidThazW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ST/TOMst";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C6D18883D; Wed,  7 Aug 2024 16:18:56 +0200 (CEST)
-Received: from mail.thorsis.com (mail.thorsis.com [IPv6:2003:a:e28:26e4::10])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B58D588CFB; Wed,  7 Aug 2024 16:20:23 +0200 (CEST)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCB0587A6D
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 16:18:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=thorsis.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id C6982148740D; Wed,  7 Aug 2024 16:18:51 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
- t=1723040332; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- in-reply-to:references; bh=zLHQcTDQS7PPEEXNtwFjV3pV7Qd48EgZ+j4VGYTsE5c=;
- b=CidThazWkrj24jqvDLMMQ2fn2mezWxYCNPWpe0h9Y162QIkPWyis/ZYYnWgmkAYkVmDtt/
- Y1C68s3YRURBN8DX7imdwfXJqnzgfP/sJ1Xt2UgMoJG3pMb4WEBVb8PfMlMO1d5RMncgvx
- bObmq9Y2TuBtkL0+2L3b0KqIQ7jqz+XKOd3Ohfapd9LSuS7MwrDL+mtsh4zi/OFENcmnqB
- 2umGc/ii90JZqmkvePyGM1kXRhr1JmWUuV3oPU1NUNmbZeI+ROhyD0jVKEQoMKqsQO/ZE7
- iIbU3Dgu4GORWyCNekmLtNayZl0J/CzF9LWt5NfC1UmaYGEELVc7f5s8+i2qMg==
-Date: Wed, 7 Aug 2024 16:18:46 +0200
-From: Alexander Dahl <ada@thorsis.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: eden.hamilton@bt.com, u-boot@lists.denx.de
-Subject: Re: Fw: ECDSA for FIT Files in U-Boot
-Message-ID: <20240807-churn-riptide-7e996b2affc1@thorsis.com>
-Mail-Followup-To: Simon Glass <sjg@chromium.org>, eden.hamilton@bt.com,
- u-boot@lists.denx.de
-References: <LO0P123MB3929703FEE3D03E962D7E6E193BF2@LO0P123MB3929.GBRP123.PROD.OUTLOOK.COM>
- <CAFLszTimGrXLOMOheanvJaJFZZd6QujZCf7fKmG7zcEKBV3nGg@mail.gmail.com>
- <LO0P123MB3929FC2417E806A1B8F1867193B82@LO0P123MB3929.GBRP123.PROD.OUTLOOK.COM>
- <CAFLszThQ5HL7iDYoeVBBZd5aCuFGUDH3zs7+o370gBHcY2RNLQ@mail.gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 5793787A6D
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 16:20:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-260f4c9dfe2so492974fac.0
+ for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 07:20:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1723040420; x=1723645220; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YtLHfjRIp0fmnCEUj5FNmdNjUl9m1ypCuS7I7ZE+n1A=;
+ b=ST/TOMstSVg/1+ac7sImJphEw3u/GFfGmZeJg/JEASn2eJMYAKbYRyVbXBWJxmoWvy
+ LYVilNEmASKIWH3oonu5Pa1C9ySraHgy0VFJHEav19C+PO8hrxTc7jqbHqOuNGMHN34u
+ 7Kvhr8yZZRtAel8b6GbIzc5j0F2dhOdxHCeuo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723040420; x=1723645220;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YtLHfjRIp0fmnCEUj5FNmdNjUl9m1ypCuS7I7ZE+n1A=;
+ b=Vjj4vMTTgSE0RPqpUFoBvRk6OcAaaBCeKXpRRkbfasO/9uH3Yb9qBIDoWcAfwAts0v
+ LrNEb4q7cEw8lC7ivI//mNfNiUACX/0M/nc014amtaFcu6zIoCtBfq9r+bWFdWmocnhB
+ 1kkRkmm9lR600utNR8pyJfc77WzXbzejDBKBbdWY118FeTBEsyNejwL3uMwG8mSzPhep
+ CXQ/Cj6p8aTfYRWDpxnXOAIoga6oLxrdQqqpkW3P/8YZZ9U9jAdwrnoA4MlfAjZeI73y
+ 7npwCDZn1oI0ArON7iJ7TXVdjXXGRs9Zkzqoqb5tn/hhO0WZnupx+AEosbAou0dSU9r8
+ F4Mw==
+X-Gm-Message-State: AOJu0Yywb1DHLfXt2h6JmhGpEZOW7ZHm2btCGfxPl6eNEwpJzM6I/br2
+ VO2EcFVi2FVHj4TKvnPEyx0/p1DqCLDYQUbncBLK0MQiEETd22d3qBNh61bKNa8=
+X-Google-Smtp-Source: AGHT+IFdiaXLtm2jdOU2u2PgpWa5PQTZuaw/RSf05bgYnOStGa4t5uRO54NmYLPunvQ6hS6E8Tyn+Q==
+X-Received: by 2002:a05:6870:9a0c:b0:22a:57da:6fec with SMTP id
+ 586e51a60fabf-26911745244mr1046635fac.16.1723040420035; 
+ Wed, 07 Aug 2024 07:20:20 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-191-8-236.totalplay.net. [187.191.8.236])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2689a6274b8sm3959146fac.42.2024.08.07.07.20.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 07 Aug 2024 07:20:19 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Paul Kocialkowski <paulk@sys-base.io>
+Cc: Yegor Yefremov <yegorslists@googlemail.com>, 
+ Sjoerd Simons <sjoerd.simons@collabora.co.uk>, 
+ Govindaraji Sivanantham <Govindaraji.Sivanantham@in.bosch.com>, 
+ Hiremath Gireesh <Gireesh.Hiremath@in.bosch.com>, 
+ "Andrew F . Davis" <afd@ti.com>, 
+ =?utf-8?q?Javier_Mart=C3=ADnez_Canillas?= <javier@dowhile0.org>, 
+ Felix Brack <fb@ltec.ch>, Heiko Schocher <hs@denx.de>, 
+ Enric Balletbo i Serra <enric.balletbo@collabora.com>, 
+ Adam Ford <aford173@gmail.com>, 
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>, 
+ Marcin Niestroj <m.niestroj@grinn-global.com>, 
+ Nikita Kiryanov <nikita@compulab.co.il>, Thomas Weber <weber@corscience.de>, 
+ Enrico Leto <enrico.leto@siemens.com>, 
+ "Derald D . Woods" <woods.technical@gmail.com>, 
+ "Matwey V . Kornilov" <matwey.kornilov@gmail.com>, 
+ Niel Fourie <lusus@denx.de>, Parthiban Nallathambi <parthiban@linumiz.com>
+In-Reply-To: <20240728202501.3204905-1-paulk@sys-base.io>
+References: <20240728202501.3204905-1-paulk@sys-base.io>
+Subject: Re: [PATCH 00/12] omap configuration cleanups
+Message-Id: <172304041827.1708865.1364514024581159069.b4-ty@konsulko.com>
+Date: Wed, 07 Aug 2024 08:20:18 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAFLszThQ5HL7iDYoeVBBZd5aCuFGUDH3zs7+o370gBHcY2RNLQ@mail.gmail.com>
-User-Agent: Mutt/2.2.12 (2023-09-09)
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,65 +104,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hei Eden,
+On Sun, 28 Jul 2024 22:24:49 +0200, Paul Kocialkowski wrote:
 
-Am Wed, Aug 07, 2024 at 07:59:39AM -0600 schrieb Simon Glass:
-> Hi Eden,
+> Here is a bunch of configuration cleanups for OMAP boards, mostly
+> unifying and moving common configuration from board-specific defconfigs
+> to Kconfig definitions.
 > 
-> I don't see it on the mailing list yet[1].
-
-FWIW in case you did not notice, there's a patch series for
-barebox currently worked on implementing ecdsa support for fit image
-verification.  Maybe that can be helpful for this task?
-
-https://lore.barebox.org/barebox/ZrG9pjqsnWBvfkE2@pengutronix.de/T/#t
-
-Greets
-Alex
-
+> There's also a cleanup of the sniper (LG Optimus Black) defconfig,
+> prior to migrating it to DM/DT in a future follow-up series.
 > 
-> Regards,
-> Simon
-> 
-> [1] https://lists.denx.de/listinfo/u-boot
-> 
-> On Wed, 7 Aug 2024 at 02:21, <eden.hamilton@bt.com> wrote:
-> >
-> > Hi Simon,
-> >
-> > I have forwarded these emails as requested.
-> >
-> > Cheers,
-> > Eden
-> >
-> > ________________________________
-> > From: Simon Glass <sjg@chromium.org>
-> > Sent: 06 August 2024 22:47
-> > To: Eden Hamilton VRC7 C <eden.hamilton@bt.com>
-> > Subject: Re: ECDSA for FIT Files in U-Boot
-> >
-> > Hi Eden,
-> >
-> > Would you mind sending this to the U-Boot mailing list and cc me?
-> > There are quite a few people involved in the security side.
-> >
-> > Regards,
-> > Simon
-> >
-> > On Tue, 6 Aug 2024 at 08:24, <eden.hamilton@bt.com> wrote:
-> > >
-> > > Hi there Simon!
-> > >
-> > > I am Eden, currently at BT trying to get ECDSA verified boot for FIT files working on U-Boot.
-> > >
-> > > I have observed that you have reviewed many patches/updates surrounding ECDSA in U-Boot.
-> > >
-> > > I have been trying to get this working, but it is appearing difficult due to no examples online.
-> > >
-> > > I was wondering, if you have any examples where you have managed to get this working? Perhaps examples of FIT files, DTBs etc - that you would not mind sharing with me.
-> > >
-> > > If you do not, then no worries.
-> > >
-> > > Kind regards,
-> > > Eden
-> > >
+> [...]
+
+Applied to u-boot/next, thanks!
+
+-- 
+Tom
+
+
