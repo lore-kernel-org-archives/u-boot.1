@@ -4,81 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD497C3DA7F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 19:08:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4861AC52D6F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 19:54:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1056688BD1;
-	Wed,  7 Aug 2024 21:08:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4E5C388BD4;
+	Wed,  7 Aug 2024 21:54:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kz0E8m0k";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jydtleDz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 422D488BC6; Wed,  7 Aug 2024 21:08:21 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id 6E39F88BCC; Wed,  7 Aug 2024 21:54:25 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A06188D17
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 21:08:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6379C889D4
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 21:54:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-5d5eec95a74so120806eaf.1
- for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 12:08:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-42817bee9e8so1604495e9.3
+ for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 12:54:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1723057697; x=1723662497; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=md6P15qIOGd4UWhEgwZr3A443HX9G3o2OmsU+vXAC/k=;
- b=kz0E8m0kPIY4hmkvc7XPKCHDz+wzp1/iK6Dq5sW/xf8HZ0/AaPDw5WaFB0kZjRbgm+
- B84EuqVo5zbV8nK+k5Lj88sgC7wYZMJlAy42yk/DAnyJsmXyThOsN0ZswO0cAPhLPMMC
- ayQHqC5Me4QSzFz2HFlHOTlxF9S1Q+DJ29+30=
+ d=gmail.com; s=20230601; t=1723060462; x=1723665262; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=agL8tcD0WovvcJqaPfx5OrcwS3LrB0IgWFY20vwIEC4=;
+ b=jydtleDzUKUNEHIpZVN5GykLA4HBiwxJK99A4WqK2akvBBGFqSzbg38wwUizLKMgpY
+ +DO7fPgj+f/+QXJ6huoHr0XTV7Sp7tZ4BmB6NfxO2mMSOHfiVoxrABL7Too/KQ21qOmc
+ 0vh7JAknIhzUg+r2SJt15kyM7p7TU6+c5nT0rim7fDWcfVFterfbK0YB0Q2RegpnmKc2
+ X2VPwEQ0jsKmSgjZGEzQy55RfG3E2FalVEkOUpu8C/unWxlrDXIbBR1TCpOr74ZyIcLc
+ 4cQAsMncayAiC5eVm5bhOA3/zMhMuRZimnzIR5+h3VUbMeyCKQ/J5yxwOtnQiy2lgkqa
+ e1sA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723057697; x=1723662497;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=md6P15qIOGd4UWhEgwZr3A443HX9G3o2OmsU+vXAC/k=;
- b=lH/Gv27yZxFwDQ9YpYbB1WSsuruxPUlL93dl5u3qnJUbKyZUv8XHA6OiPBTwN7mTi/
- ohQ6na4xKkIyWPsy0olJlo97SBADeZYOBuQm4aDnhHpySpFGuVTW/aM1CPOI1HlXLfx2
- WF6zjUz2tSzsCGJdoRS9T3kL2Wm2w3DQO3OVRXFaGtBBvb+Cfg9OoKGZxpfxgQM7+B8C
- +u3tXsrTDrSkeCEI3qNfh2pH1n1Z1CmzmUhYpgNSP6cWlFefOF+6zS7UVVx6Sg80xe8/
- OUNmU/wraXqwwCJmg+qLYYqM4sqFXMi1yFVAXbutm3WDW0YI380Px7yXf7y4r8bdU1jA
- xmkg==
+ d=1e100.net; s=20230601; t=1723060462; x=1723665262;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=agL8tcD0WovvcJqaPfx5OrcwS3LrB0IgWFY20vwIEC4=;
+ b=CirMdqUoy20G0HQFeCYRUXgQGkkfapwYj71B6Xkki/3eAwkXUHHluDUguYcCTwYQwi
+ 9g4GRakG3tV8EbIQKjal5xV0IgPm6cNIWi1FSHH0B+18CUsZ4bdBmy7vLb5Tz3LEiCh/
+ fTOES8goYoh1i61xG97l5yqdwskv0nwYMRZZOzX10Fj0s+3cIoHxQjGamyQRWlgm2vpe
+ sBwiqCMBAMCyDFX0EkNalMB0kIRV83CZT1mYzjtvx6/kRqMFwzwJtPp+1L8zwgNiZhmn
+ n5Ky57Y9YG4c2wDIFsfYdurYD4y1hUkgaujrT70NeDeyhe7GrmTb8bYpBdmm4tksepg6
+ QR7A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUWWh9FTNSrrXaicRyZdVW2g3ZgIclICgor9aWUcGX0YLC59JWhRGAQ6TGl7LbhKdqaou+5Fpk=@lists.denx.de
-X-Gm-Message-State: AOJu0YzQPW7ZqXh0AEs/Ce+p2IXv6zRNTFzfQqNLjfQfGVj1qf25aVcb
- bkMUQvyzHTjN6RF1XnjG3WAPNBC0rJJWZx3dzzOvnwKvMSiiElV3jY4c9LEacPw=
-X-Google-Smtp-Source: AGHT+IFtDxgr/gsw3dFGAHYf4q7ldB1GFk31H3r5duMijeYeVbIdWsxYas9bmgz+rVl/3AFGplnAqg==
-X-Received: by 2002:a05:6820:2228:b0:5c4:7b18:b8eb with SMTP id
- 006d021491bc7-5d6553365f8mr23312988eaf.2.1723057697123; 
- Wed, 07 Aug 2024 12:08:17 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-191-8-236.totalplay.net.
- [187.191.8.236]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5d7625e9b97sm3349566eaf.34.2024.08.07.12.08.15
+ AJvYcCVfCYEIggDzt2FHrRllNiYovBWYUKt8yMHNxOw3+ar14/pWh6CXunAq8FksVVxo5uNcMEW3+/UKIzasXJlmxlYfbE6YSA==
+X-Gm-Message-State: AOJu0Yw0W8/i+FyO+6DcJ5kLGeNWop8ZjTj9AUbFAiqiP4ggrAep9MQN
+ ytzaXhDpMJydxxeC0BhqSW+5XN65fMGvGhVyCOhAjgddlolp1U9k
+X-Google-Smtp-Source: AGHT+IGVKfJWf5y3eyVBRYxZ1S/64TkpwKb1DWFLhPADiwWC4nH0QYvOdufabspsGhmLE1Rd0ENSkQ==
+X-Received: by 2002:a05:600c:470d:b0:428:10ec:e5ca with SMTP id
+ 5b1f17b1804b1-428e6b0870emr121021345e9.14.1723060461795; 
+ Wed, 07 Aug 2024 12:54:21 -0700 (PDT)
+Received: from localhost.localdomain
+ (host-87-6-196-30.retail.telecomitalia.it. [87.6.196.30])
+ by smtp.googlemail.com with ESMTPSA id
+ 5b1f17b1804b1-429057a8802sm44383765e9.21.2024.08.07.12.54.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 12:08:16 -0700 (PDT)
-Date: Wed, 7 Aug 2024 13:08:13 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>
-Subject: Re: [PATCH v5 00/20] Introduce the lwIP network stack
-Message-ID: <20240807190813.GI1626301@bill-the-cat>
-References: <cover.1721910373.git.jerome.forissier@linaro.org>
- <CAOf5uwkiTwsAPducOJxEBUHKYiT0+q_dH_ZCOdCd7e4b45DS0A@mail.gmail.com>
+ Wed, 07 Aug 2024 12:54:21 -0700 (PDT)
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Arseniy Krasnov <avkrasnov@salutedevices.com>,
+ Martin Kurbanov <mmkurbanov@salutedevices.com>,
+ Dmitry Dunaev <dunaev@tecon.ru>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sean Anderson <sean.anderson@seco.com>,
+ Shiji Yang <yangshiji66@outlook.com>,
+ Vasileios Amoiridis <vassilisamir@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de
+Subject: [PATCH v2 0/9] led: introduce LED boot and activity function
+Date: Wed,  7 Aug 2024 21:54:03 +0200
+Message-ID: <20240807195413.30456-1-ansuelsmth@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7xtk92msdstn6wNO"
-Content-Disposition: inline
-In-Reply-To: <CAOf5uwkiTwsAPducOJxEBUHKYiT0+q_dH_ZCOdCd7e4b45DS0A@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,108 +106,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series is a reworked version of the previous seried: 
+misc: introduce STATUS LED activity function
 
---7xtk92msdstn6wNO
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This series port and expand the legacy concept of LED boot from
+the legacy Status LED API to new LED API.
 
-On Wed, Aug 07, 2024 at 08:54:08PM +0200, Michael Nazzareno Trimarchi wrote:
-> Hi Jerome
->=20
-> On Thu, Jul 25, 2024 at 2:58=E2=80=AFPM Jerome Forissier
-> <jerome.forissier@linaro.org> wrote:
-> >
-> > This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
-> > library for the network stack" [1]. The goal is to introduce the lwIP T=
-CP/IP
-> > stack [2] [3] as an alternative to the current implementation in net/,
-> > selectable with Kconfig, and ultimately keep only lwIP if possible. Some
-> > reasons for doing so are:
-> > - Make the support of HTTPS in the wget command easier. Javier T. and
-> > Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
-> > so. With that it becomes possible to fetch and launch a distro installer
-> > such as Debian etc. using a secure, authenticated connection directly
-> > from the U-Boot shell. Several use cases:
-> >   * Authentication: prevent MITM attack (third party replacing the
-> > binary with a different one)
-> >   * Confidentiality: prevent third parties from grabbing a copy of the
-> > image as it is being downloaded
-> >   * Allow connection to servers that do not support plain HTTP anymore
-> > (this is becoming more and more common on the Internet these days)
-> > - Possibly benefit from additional features implemented in lwIP
-> > - Less code to maintain in U-Boot
-> >
-> > Prior to applying this series, the lwIP stack needs to be added as a
-> > Git subtree with the following command:
-> >
-> >  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savanna=
-h.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
-> >
-> > Notes:
-> >
-> > 1. A number of features are currently incompatible with NET_LWIP: SANDB=
-OX,
-> > DFU_TFTP, FASTBOOT, SPL_NET. All make assumptions on how the network
-> > stack is implemented and/or pull sybols that are not trivially exported
-> > from lwIP. Some interface rework may be needed.
-> >
-> > 2. Due to the above and in order to provide some level of testing, a ne=
-w QEMU
-> > configuration is introduced (qemu_arm64_lwip_defconfig) which is the sa=
-me
-> > as qemu_arm64_defconfig but with NET_LWIP and CMD_*_LWIP enabled.
-> > Tests are added to test/py/tests/test_net.py for that configuration.
-> >
-> > 3. The default QEMU networking doesn't work with NET_LWIP. wget
-> > pauses and resets the connection. Wireshark shows [TCP Window Full] and
-> > [TCP ZeroWindow]. Wen using an emulated e1000 however all is fine
-> > (that is "-nic tap,model=3De1000" on the QEMU command line, with a brid=
-ge
-> > configured on the host).
-> >
-> > Changes in v5:
-> >
-> > - Rebased on next
-> > - Refactor Kconfig options to avoid duplicates
-> > - Library functions use a more consistent naming (dhcp_loop(),
-> > ping_loop() etc.) and take a struct udevice * parameter (Heinrich S.)
-> > - Do not use net_process_receive_packet() for input anymore. Instead of
-> > calling eth_rx() which would invoke net_process_receive_packet(), we
-> > call a new net_lwip_rx(udev) function which invokes the device recv()
-> > and pushes the packets up the lwIP stack. Thus everything is tied to
-> > a udevice now. (Heinrich S.)
-> > - Add "configs: replace '# CONFIG_NET is not set' with CONFIG_NO_NET=3D=
-y"
-> > (Tom R.)
->=20
-> Here I have some questions. You can have CONFIG_NET with two alternatives=
- and
-> the alternatives are exclusive. Why do we need a CONFIG_NO_NET definition?
+One thing that many device need is a way to communicate to the
+user that the device is actually doing something.
 
-For the platforms that today don't enable networking at all (of which
-there are a small but reasonable number). Since it's a "choice"
-statement we need a "none of the above" option.
+This is especially useful for recovery steps where an
+user (for example) insert an USB drive, keep a button pressed
+and the device autorecover.
 
---=20
-Tom
+There is currently no way to signal the user externally that
+the bootloader is processing/recoverying aside from setting
+a LED on.
 
---7xtk92msdstn6wNO
-Content-Type: application/pgp-signature; name="signature.asc"
+A solid LED on is not enough and won't actually signal any
+kind of progress.
+Solution is the good old blinking LED but uboot doesn't
+suggest (and support) interrupts and almost all the LED
+are usually GPIO LED that doesn't support HW blink.
 
------BEGIN PGP SIGNATURE-----
+Additional Kconfg are also introduced to set the LED boot and
+activity. Those are referenced by label.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmazxhoACgkQFHw5/5Y0
-tywjPwv+Nx8RkL5BdV7B0qczJjNnhy8Z3XnXsDsUOyzr+jbI2aUsbNys1ncy9P2f
-nkROeSDYOVMDOxZIPiG3MPhykFroiIiS9PaoJfVkR0iPm5Mk70FMQsY/kvI/GMwT
-1TIEp6vZzn/M2U1tcFlEOU6R314CQmpAo3bxk15k6p7ObyWv3P/SmNaWwXOS2NBb
-037Yt2Hc5DvZRBPw427imXCVP+qkOS/31s/3Tl5zKtDnA31ifo9UBTFke4XKO6/6
-RqKOm0MhkcbXWsNLtCjclR3kMrUC9qh8QLZ/FEfi7n+3+Tb9E9+9DQYyUkn/h3Rt
-r7WXrtg7vkotFrQzvYkPJvfWR2dqwYcCHx+XobWi5uOn0hyk0bM7JENBGO0VWJ5t
-3xfFuJXYJDGoeBWaP5gHra3TDaJeqlCM7a+YfHs5klwD2Jq64qlARbZEQq0LKV/8
-337Qj0sPDzKK0jMfpLOhjgrhuCgqEjhvRZrz598ztnn/Swb5Xmft5oKVCiTn9HUx
-caDyRQEt
-=lOPW
------END PGP SIGNATURE-----
+A documentation for old and these new LED API is created.
 
---7xtk92msdstn6wNO--
+(world tested with the azure pipeline)
+
+Changes v2:
+- Drop GPIO SW implementation
+- Add fix for new LED SW BLINK
+
+Christian Marangi (9):
+  led: turn LED ON on initial SW blink
+  led: implement led_set_state/period_by_label
+  led: implement LED boot API
+  common: board_r: rework BOOT LED handling
+  led: implement LED activity API
+  tftp: implement support for LED activity
+  mtd: implement support for LED activity
+  ubi: implement support for LED activity
+  doc: introduce led.rst documentation
+
+ cmd/mtd.c                  |  19 +++++
+ cmd/ubi.c                  |  15 +++-
+ common/board_r.c           |  25 ++++++-
+ doc/api/index.rst          |   1 +
+ doc/api/led.rst            |  10 +++
+ drivers/led/Kconfig        |  41 +++++++++++
+ drivers/led/led-uclass.c   |  28 ++++++++
+ drivers/led/led_sw_blink.c |   5 +-
+ include/led.h              | 144 +++++++++++++++++++++++++++++++++++++
+ net/tftp.c                 |   7 ++
+ 10 files changed, 290 insertions(+), 5 deletions(-)
+ create mode 100644 doc/api/led.rst
+
+-- 
+2.45.2
+
