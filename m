@@ -4,85 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2BD4C52D71
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 15:07:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DAA5C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 15:14:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26C32888A4;
-	Wed,  7 Aug 2024 17:07:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6D97988BBC;
+	Wed,  7 Aug 2024 17:14:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y3uE0h6t";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 693CA8882F; Wed,  7 Aug 2024 17:07:02 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1723043686;
+	bh=9eKmm89c1fL7XPg1l2XJiqJa/WgKuspc18RmhmTjrYI=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=ng4JCDbjFH4/lq+KOxAPuzK72akCPfvwYbYzajwI/yuHYiKU3qfI4DUP3jpJ/CIbv
+	 UP6s0vIoFvGK1h6Ojwg6acx3ucbqrmLtHTYMQhMQx4Eb+eI/lleVEzBOWHEgV6+8TZ
+	 cNqhz88zu8BqkNN+lHMZuoYapYo715H0nXB/OL2uHrd0y/NQ5Qz73s9YMvvCE3ObPl
+	 LOsQQuqHxcEtIQH5MRsdKpdnuscfVWf7eHglwjd71E6pBgUMnuXHvft8I/suYNxMkG
+	 TLqwQgQgfVm+oyUEcYNe3YZs8QCKG2+DSoPE2A83taKvJRplFqPaSIPYZ7xLIAf4e0
+	 Ln/3p9+Ge9uRg==
+Received: from [192.168.1.107] (82-131-232-44.pool.digikabel.hu
+ [82.131.232.44])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F37D888BC
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 17:07:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a7abe5aa9d5so237435766b.1
- for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 08:07:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723043219; x=1723648019; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=KjKK0dbTInudzCJbi2UFlWFbaTnd2r+VG4m7pm6OeEw=;
- b=y3uE0h6tlQbOOScl79DtW4ofnRL+dlzgOzdf4/xSjXnSsq2QXFQDnmpdZSswdK3H0h
- 2Rot9mx6+yWZgnvwwy8IOEw9ikf8+KDeqgDXSF1zrf5j4ggYyfXb++kmjRbzZywG06XH
- WYxbiqk2gxG4NWb0/kFmRwvz1wfpeXFAoYmjqkvgZIeYc+EyaGLEpAA3BOfhhyIf4FbB
- rPLFKQXA2RzgDOZhnIz29YloBfOrT1hNxjzA/dr+dZmwQ1juYQ0D5Fq62+rz5XFCw5H+
- snq+2tzuHKqvpBNDxAzqJAgpiB7qE5rpRuxofuXZo+bVpy1H6XeNbAxJ3Xi088PpWlhQ
- u3eA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723043219; x=1723648019;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=KjKK0dbTInudzCJbi2UFlWFbaTnd2r+VG4m7pm6OeEw=;
- b=YxjTs4y9/t9hutqO3/sRDtgtFVRMeg1nXqD9LlMURzqNWFXZogHFogAlh6xIsqbzLQ
- NUhWuMNz7bG4CLuWUmaKyy8RIEoRSVLmmos+qefHh/SyDTkJRDnRSwY++MqQIpKll1xc
- 440y4DSoXRhdHZrksP+kY2mVxBu4Es55B62lrIBH19inaS8QdhaXPBz2YVhfI7a9cMJ8
- q9uHNH3f279vS5hZpOpQQlN+/Ezea2NPOcpkID6mUhAocs1a9JeNk0Wc7oLMOn1RTpUh
- Y7TYy3i/A09nR2pEjsd7YO/nO9Shq31FgioDbD8s1lkiQlAorWsRF624LwCthb22RGV+
- nlBA==
-X-Gm-Message-State: AOJu0Yxfgo4blUy+Igz0QkOSTwiUndZ2Fl8/ibVJtwcuIQXxUy7RenEq
- mcizCM7lkSlaH2x+u5exzmF2tyjLdhDKT9qrYryvZ91b9HfcMeayVwQvgpT4HGU=
-X-Google-Smtp-Source: AGHT+IGCsJ4p3w0kXYibkEbrOl/js00KljD+MyUwOVPAqnDUFIfdNzgSxiDgZTReaACKzrqfxhUO6Q==
-X-Received: by 2002:a17:907:a0c8:b0:a7a:cf39:ae73 with SMTP id
- a640c23a62f3a-a7dc510800cmr1314315566b.64.1723043219205; 
- Wed, 07 Aug 2024 08:06:59 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:3c20:d905:6027:2354?
- ([2a01:e0a:3cb:7bb0:3c20:d905:6027:2354])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7dc9ecb1c3sm645295066b.225.2024.08.07.08.06.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 07 Aug 2024 08:06:58 -0700 (PDT)
-Message-ID: <a545a465-81a0-4c58-a932-0db7e53e55af@linaro.org>
-Date: Wed, 7 Aug 2024 17:06:57 +0200
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id CF36B88B92;
+ Wed,  7 Aug 2024 17:14:44 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1723043685;
+ bh=9eKmm89c1fL7XPg1l2XJiqJa/WgKuspc18RmhmTjrYI=;
+ h=Date:Subject:To:References:Reply-To:From:In-Reply-To:From;
+ b=CDCbR8zvX7CpQL8+ZGtMUdz+mZv+AXMv+HmZy45TkI6nuC8YiU3sZ7LBhOI3FLvEG
+ i/WiqEMG042l57UFqMQ7SKipfAtiKMc0Oj+lyxG6p6PtiBY0vNTnErSco5cIlizEid
+ 6FPCcGxXPE2f/Q9ZsjpA3VDzOxTJPqeOA618usIDdR88qnmOm1/cxLXbnU+N8b4mk6
+ ACEMUsBrO9trKHAtu4wEJ6kxqQijGgdtsjb+gCbr2JMtJOd0zwOUql02BohFhutymL
+ Jcub8+4MNaWzsEDa4NuixcI0uvj9/BJJ8ASg5h4Kc+UQg19ozBOKoAdQ7F+0zvF2Bk
+ LW/TmoycTy1wA==
+Message-ID: <b698ec3e-d857-6512-8cc9-4edcab0a41b9@denx.de>
+Date: Wed, 7 Aug 2024 17:14:02 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 00/20] Introduce the lwIP network stack
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>
-References: <cover.1721910373.git.jerome.forissier@linaro.org>
- <20240725172220.GA989285@bill-the-cat> <20240725223401.GD989285@bill-the-cat>
- <ebc992d6-93e8-4e7e-99dc-834cc981f5a3@linaro.org>
- <20240802201635.GQ3794063@bill-the-cat>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [RFC PATCH] ubifs: Call ubifs_iput when ubifs_iget is used
 Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20240802201635.GQ3794063@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+References: <20240805173140.84453-1-michael@amarulasolutions.com>
+ <20240807-pancake-estimate-ea370d7f9dc8@thorsis.com>
+ <CAOf5uwk10U0u-h=Lxkhn026kWKCHMP5JZxzb1KCzHHcJ1B6OHw@mail.gmail.com>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <CAOf5uwk10U0u-h=Lxkhn026kWKCHMP5JZxzb1KCzHHcJ1B6OHw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,6 +68,7 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
@@ -101,67 +76,104 @@ X-Virus-Status: Clean
 
 
 
-On 8/2/24 22:16, Tom Rini wrote:
-> On Thu, Aug 01, 2024 at 04:40:03PM +0200, Jerome Forissier wrote:
->>
->>
->> On 7/26/24 00:34, Tom Rini wrote:
->>> On Thu, Jul 25, 2024 at 11:22:20AM -0600, Tom Rini wrote:
->>>> On Thu, Jul 25, 2024 at 02:57:21PM +0200, Jerome Forissier wrote:
->>>>
->>>>> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
->>>>> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
->>>>> stack [2] [3] as an alternative to the current implementation in net/,
->>>>> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
->>>>> reasons for doing so are:
->>>>> - Make the support of HTTPS in the wget command easier. Javier T. and
->>>>> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
->>>>> so. With that it becomes possible to fetch and launch a distro installer
->>>>> such as Debian etc. using a secure, authenticated connection directly
->>>>> from the U-Boot shell. Several use cases:
->>>>>   * Authentication: prevent MITM attack (third party replacing the
->>>>> binary with a different one)
->>>>>   * Confidentiality: prevent third parties from grabbing a copy of the
->>>>> image as it is being downloaded
->>>>>   * Allow connection to servers that do not support plain HTTP anymore
->>>>> (this is becoming more and more common on the Internet these days)
->>>>> - Possibly benefit from additional features implemented in lwIP
->>>>> - Less code to maintain in U-Boot
->>>>>
->>>>> Prior to applying this series, the lwIP stack needs to be added as a
->>>>> Git subtree with the following command:
->>>>>
->>>>>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savannah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
->>>>
->>>> This is better than v4, and on the hardware platforms I could build and
->>>> boot on (which was most of mine except the am62x_beagleplay), the tests
->>>> ran and completed, including the tftp+boot a Linux kernel.
->>>>
->>>> The bad news is CI blows up, a lot:
->>>> https://source.denx.de/u-boot/u-boot/-/pipelines/21764
->>>> And:
->>>> https://dev.azure.com/u-boot/a1096300-2999-4ec4-a21a-4c22075e3771/_apis/build/builds/9014/logs/106
->>>> which is another Kconfig dependency problem. I don't _think_ I
->>>> introduced that, but since this wasn't against top of tree, I had to
->>>> apply the cmd/Kconfig patch manually.
->>>>
->>>> I have my world build running still and may have more comments based on
->>>> that.
->>>
->>> First, with NET_LWIP being default rather than NET, there's a lot of
->>> other Kconfig dependency issues. Unfortunately I don't see an easy tool
->>> for making sure this is all clean aside from a shell loop like:
->>> for C in `(cd configs;ls)`;do make -s $C;done
->>
->> I have run this loop successfully with the upcoming v6 version. Some
->> configs do print some warnings but there is no error.
+On 07.08.24 16:57, Michael Nazzareno Trimarchi wrote:
+> Hi Alexander
 > 
-> Oh. Right. So, to make the rest of the problems show up, switch the
-> default stack to NET_LWIP and then we see other issues.
+> On Wed, Aug 7, 2024 at 4:55 PM Alexander Dahl <ada@thorsis.com> wrote:
+>>
+>> Hello Michael,
+>>
+>> Am Mon, Aug 05, 2024 at 07:31:40PM +0200 schrieb Michael Trimarchi:
+>>> The inode should be freed after a reference is get to avoid
+>>> memory leak
+>>>
+>>> Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+>>
+>> Tested this on top of my recent ubifs series.  No obvious problems
+>> found on U-Boot command line with various combinations of commands,
+>> no crashes, so …
+>>
+>> Tested-by: Alexander Dahl <ada@thorsis.com>
+>>
+> 
+> I think that we can resend including last heiko remark and let heiko
+> to pick it from his own tree
+> 
+> Heiko I will add CoDevelopment if it's ok for you
 
-Indeed. I fixed a couple "unmet direct dependencies detected" warnings in
-v8.
+Fine for me! Thanks!
 
-Thanks,
+bye,
+Heiko
+> 
+> Michael
+> 
+> 
+>> Greets
+>> Alex
+>>
+>>> ---
+>>>   fs/ubifs/ubifs.c | 9 ++++++---
+>>>   1 file changed, 6 insertions(+), 3 deletions(-)
+>>>
+>>> diff --git a/fs/ubifs/ubifs.c b/fs/ubifs/ubifs.c
+>>> index 048730db7f..6acd6c3776 100644
+>>> --- a/fs/ubifs/ubifs.c
+>>> +++ b/fs/ubifs/ubifs.c
+>>> @@ -319,9 +319,7 @@ static int filldir(struct ubifs_info *c, const char *name, int namlen,
+>>>        }
+>>>        ctime_r((time_t *)&inode->i_mtime, filetime);
+>>>        printf("%9lld  %24.24s  ", inode->i_size, filetime);
+>>> -#ifndef __UBOOT__
+>>>        ubifs_iput(inode);
+>>> -#endif
+>>>
+>>>        printf("%s\n", name);
+>>>
+>>> @@ -557,6 +555,7 @@ static unsigned long ubifs_findfile(struct super_block *sb, char *filename)
+>>>
+>>>                        /* We have some sort of symlink recursion, bail out */
+>>>                        if (symlink_count++ > 8) {
+>>> +                             ubifs_iput(inode);
+>>>                                printf("Symlink recursion, aborting\n");
+>>>                                return 0;
+>>>                        }
+>>> @@ -568,6 +567,7 @@ static unsigned long ubifs_findfile(struct super_block *sb, char *filename)
+>>>                                 * the leading slash */
+>>>                                next = name = link_name + 1;
+>>>                                root_inum = 1;
+>>> +                             ubifs_iput(inode);
+>>>                                continue;
+>>>                        }
+>>>                        /* Relative to cur dir */
+>>> @@ -575,6 +575,7 @@ static unsigned long ubifs_findfile(struct super_block *sb, char *filename)
+>>>                                        link_name, next == NULL ? "" : next);
+>>>                        memcpy(symlinkpath, buf, sizeof(buf));
+>>>                        next = name = symlinkpath;
+>>> +                     ubifs_iput(inode);
+>>>                        continue;
+>>>                }
+>>>
+>>> @@ -583,8 +584,10 @@ static unsigned long ubifs_findfile(struct super_block *sb, char *filename)
+>>>                 */
+>>>
+>>>                /* Found the node!  */
+>>> -             if (!next || *next == '\0')
+>>> +             if (!next || *next == '\0') {
+>>> +                     ubifs_iput(inode);
+>>>                        return inum;
+>>> +             }
+>>>
+>>>                root_inum = inum;
+>>>                name = next;
+>>> --
+>>> 2.43.0
+>>>
+> 
+> 
+> 
+
 -- 
-Jerome
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
