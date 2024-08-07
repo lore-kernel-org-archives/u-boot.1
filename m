@@ -4,78 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E55AAC52D6F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 20:51:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB5A6C3DA7F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 20:51:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A5C288C35;
-	Wed,  7 Aug 2024 22:50:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EA66A88BEA;
+	Wed,  7 Aug 2024 22:50:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Yn2RGmLh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IEqH0WN/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 478CE88C44; Wed,  7 Aug 2024 22:50:46 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id CF94188C27; Wed,  7 Aug 2024 22:50:46 +0200 (CEST)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20C7688C14
+ by phobos.denx.de (Postfix) with ESMTPS id B05FD88BDF
  for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 22:50:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-260f1664fdfso241434fac.1
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-396675b83afso1547905ab.0
  for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 13:50:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1723063843; x=1723668643; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kJyXp7ZeB8ljuGqQh+TkXqtzixe5UFS71xxyO19zjOE=;
- b=Yn2RGmLhYp1ZSWA5t0vrn787XOv3EokunYQ8vDLn1mC/8Qd3/E/M2HnXJvza9AxvnJ
- aaLqfVHAZe+Tk0GazhAHqixOmtQFoLUGn3BLS7qjjczIxU7eV/g2Ogxo9D+95PTJvxAy
- wPzN/2igkcDCIe2cOYuFukUpUiFhgBCz9e+lg=
+ bh=FSqI/cgQsv6OCMiiwNJVHnXJgCuobW4qRIB4eGBHc88=;
+ b=IEqH0WN/b8Foy3E3y/YYspd3vlahbWtnDEgsqQFESBwOg7thtgNG7DO25jLa/jx/Q8
+ s6cqV01CU1kIGAVwLjcWdZoyYmiShugY/HV3DaTpuS5jwYbwbImxp9SdanqLtU8/beNI
+ puC+jTHiHt35bWy85Z1qy+5LPgEGRUggguWXs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1723063843; x=1723668643;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kJyXp7ZeB8ljuGqQh+TkXqtzixe5UFS71xxyO19zjOE=;
- b=pH3iogfprlq4oOaZQjFv1TTiCGa2SWw6BnU/0ncRxyKRRGcwVpbmtC8ONeippUkDVh
- Yqhc3Z4gLSdTlu3bAv2vLc7d6L/EYS2Eai+lVyLN9aOBtpfgUVdIQ3/l8WGcIvvjBUjm
- UHS1JEBfEcjhRAmdRPPNzQbWmk6V3YgYzU3Nk5tMM8Yr7rK1qVZtm9g1Nu/7c1Y++WY4
- Ou49E8l3rI5lpFZfwYod6F7ZHfKkZOv4uz0j060vIe8eps68ClGRy1OSp292e9jvv0vN
- rDthDtIKz/YfhPrzWxswzQQu3lFOAqmWskp5q3u817He9rZdzpE2u0LxbjbhOo7mvcE7
- ijiA==
-X-Gm-Message-State: AOJu0YxMJwVHvF2HjqXitF7pksQLOlGBOH7mDcYRmJyIUL0Nz2sGp3XH
- M4uXD985rBnvDuNq/1ZUELwg5lq5nsXKYFUVm3EqRuzbgP3GIx9oaeszBo1Grw9+gR94RRsRGR8
+ bh=FSqI/cgQsv6OCMiiwNJVHnXJgCuobW4qRIB4eGBHc88=;
+ b=ue2+A4MISRlkfwLrVh5J+0U9yyy/Ic80XgDv7c0ANzREe5Bz4YnIxY57/J1J8uywYa
+ oMu9GnBmV6/29Mud+TGhR9yaIa+iiS/WUUiUzVnx4yOsDIj4XbkEViHG2MHcqlCqjTDB
+ G2u2BgI4JrtPsG1vKoHAH/kIC5WcG4oGdQ8b+AGT6csyapDHQZIFreJQ2Y5gRyWgnaGs
+ OINHvmpcTaEZ48BTLNpwJEeG8kuIK/4USj4snZgdqvfTJJncV8135CwiWU3ghpqRwVPv
+ 2FpP+uJX7mfXF+9UICeHHAX2TgDvk48w8A/c0wSjT777K27zN2IMppPDqC03D/K4erbw
+ DBGw==
+X-Gm-Message-State: AOJu0YwcFBnmY7WKkxJKX01O0GqAcXF7i4jaEEtm52YrJeKgzXYgtAZP
+ aldHxK3n4+nc3JlZQDDy1xgiBAmigRg/brgWW3sMLbSp2/1p7JgHXrm+DAzYLztlYCQ4YKE7kD8
  =
-X-Google-Smtp-Source: AGHT+IGkfRjVushYAHbHg2mQX3l1nBnoy418fpfNCFXxQ5kHS259sbc2EQS1IMg7vsCu3x7tqKFJsw==
-X-Received: by 2002:a05:6870:1699:b0:264:9484:a292 with SMTP id
- 586e51a60fabf-26891e92feemr21172453fac.38.1723063842644; 
- Wed, 07 Aug 2024 13:50:42 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH1IO+ASXzqHyiDddAzqy5DBUyP3JQcQisUMxNR/IM12RZmlCezAHW4DDGNOkV4Bcqh7+Ye5g==
+X-Received: by 2002:a92:c561:0:b0:39a:eb4d:4335 with SMTP id
+ e9e14a558f8ab-39b1fb6e10cmr259973715ab.4.1723063843340; 
+ Wed, 07 Aug 2024 13:50:43 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4c8d6988421sm2912581173.32.2024.08.07.13.50.41
+ 8926c6da1cb9f-4c8d6988421sm2912581173.32.2024.08.07.13.50.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 13:50:42 -0700 (PDT)
+ Wed, 07 Aug 2024 13:50:43 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Andrew Davis <afd@ti.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?= <csokas.bence@prolan.hu>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michal Simek <michal.simek@amd.com>, Peter Robinson <pbrobinson@gmail.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Sumit Garg <sumit.garg@linaro.org>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: [PATCH 3/6] sunxi: Move to bootstd
-Date: Wed,  7 Aug 2024 14:50:29 -0600
-Message-Id: <20240807205032.3745680-4-sjg@chromium.org>
+ Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH 4/6] sunxi: Drop old distro boot variables
+Date: Wed,  7 Aug 2024 14:50:30 -0600
+Message-Id: <20240807205032.3745680-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240807205032.3745680-1-sjg@chromium.org>
 References: <20240807205032.3745680-1-sjg@chromium.org>
@@ -97,27 +89,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop support for distroboot and move to using bootstd instead.
+These are not needed as bootstd handles the boot now. Drop them.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/arm/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ include/configs/sunxi-common.h | 75 +---------------------------------
+ 1 file changed, 1 insertion(+), 74 deletions(-)
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index ba0359fed5a..5fb14cb23c0 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1179,7 +1179,7 @@ config ARCH_SUNXI
- 	imply CMD_DM
- 	imply CMD_GPT
- 	imply CMD_UBI if MTD_RAW_NAND
--	imply DISTRO_DEFAULTS
-+	imply BOOTSTD_DEFAULTS
- 	imply DM_REGULATOR
- 	imply DM_REGULATOR_FIXED
- 	imply FAT_WRITE
+diff --git a/include/configs/sunxi-common.h b/include/configs/sunxi-common.h
+index 6ae6ef1b19c..ac868ebe1d4 100644
+--- a/include/configs/sunxi-common.h
++++ b/include/configs/sunxi-common.h
+@@ -156,78 +156,6 @@
+ 	"fdt ram " FDT_ADDR_R " 0x100000;" \
+ 	"ramdisk ram " RAMDISK_ADDR_R " 0x4000000\0"
+ 
+-/****************************************************************************
+- *                  definitions for the distro boot system                  *
+- ****************************************************************************/
+-#ifdef CONFIG_MMC
+-#if CONFIG_MMC_SUNXI_SLOT_EXTRA != -1
+-#define BOOTENV_DEV_MMC_AUTO(devtypeu, devtypel, instance)		\
+-	BOOTENV_DEV_MMC(MMC, mmc, 0)					\
+-	BOOTENV_DEV_MMC(MMC, mmc, 1)					\
+-	"bootcmd_mmc_auto="						\
+-		"if test ${mmc_bootdev} -eq 1; then "			\
+-			"run bootcmd_mmc1; "				\
+-			"run bootcmd_mmc0; "				\
+-		"elif test ${mmc_bootdev} -eq 0; then "			\
+-			"run bootcmd_mmc0; "				\
+-			"run bootcmd_mmc1; "				\
+-		"fi\0"
+-
+-#define BOOTENV_DEV_NAME_MMC_AUTO(devtypeu, devtypel, instance) \
+-	"mmc_auto "
+-
+-#define BOOT_TARGET_DEVICES_MMC(func) func(MMC_AUTO, mmc_auto, na)
+-#else
+-#define BOOT_TARGET_DEVICES_MMC(func) func(MMC, mmc, 0)
+-#endif
+-#else
+-#define BOOT_TARGET_DEVICES_MMC(func)
+-#endif
+-
+-#ifdef CONFIG_AHCI
+-#define BOOT_TARGET_DEVICES_SCSI(func) func(SCSI, scsi, 0)
+-#else
+-#define BOOT_TARGET_DEVICES_SCSI(func)
+-#endif
+-
+-#ifdef CONFIG_USB_STORAGE
+-#define BOOT_TARGET_DEVICES_USB(func) func(USB, usb, 0)
+-#else
+-#define BOOT_TARGET_DEVICES_USB(func)
+-#endif
+-
+-#ifdef CONFIG_CMD_PXE
+-#define BOOT_TARGET_DEVICES_PXE(func) func(PXE, pxe, na)
+-#else
+-#define BOOT_TARGET_DEVICES_PXE(func)
+-#endif
+-
+-#ifdef CONFIG_CMD_DHCP
+-#define BOOT_TARGET_DEVICES_DHCP(func) func(DHCP, dhcp, na)
+-#else
+-#define BOOT_TARGET_DEVICES_DHCP(func)
+-#endif
+-
+-/* FEL boot support, auto-execute boot.scr if a script address was provided */
+-#define BOOTENV_DEV_FEL(devtypeu, devtypel, instance) \
+-	"bootcmd_fel=" \
+-		"if test -n ${fel_booted} && test -n ${fel_scriptaddr}; then " \
+-			"echo '(FEL boot)'; " \
+-			"source ${fel_scriptaddr}; " \
+-		"fi\0"
+-#define BOOTENV_DEV_NAME_FEL(devtypeu, devtypel, instance) \
+-	"fel "
+-
+-#define BOOT_TARGET_DEVICES(func) \
+-	func(FEL, fel, na) \
+-	BOOT_TARGET_DEVICES_MMC(func) \
+-	BOOT_TARGET_DEVICES_SCSI(func) \
+-	BOOT_TARGET_DEVICES_USB(func) \
+-	BOOT_TARGET_DEVICES_PXE(func) \
+-	BOOT_TARGET_DEVICES_DHCP(func)
+-
+-#include <config_distro_bootcmd.h>
+-
+ #ifdef CONFIG_USB_KEYBOARD
+ #define CONSOLE_STDIN_SETTINGS \
+ 	"stdin=serial,usbkbd\0"
+@@ -279,7 +207,6 @@
+ 	"console=ttyS0,115200\0" \
+ 	"uuid_gpt_esp=" UUID_GPT_ESP "\0" \
+ 	"uuid_gpt_system=" UUID_GPT_SYSTEM "\0" \
+-	"partitions=" PARTS_DEFAULT "\0" \
+-	BOOTENV
++	"partitions=" PARTS_DEFAULT "\0"
+ 
+ #endif /* _SUNXI_COMMON_CONFIG_H */
 -- 
 2.34.1
 
