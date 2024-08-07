@@ -4,80 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CC6EC3DA7F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 14:17:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE634C52D71
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 14:17:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1BFF88D13;
-	Wed,  7 Aug 2024 16:17:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2653E88C06;
+	Wed,  7 Aug 2024 16:17:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZKTUqr0/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WI7JOc1Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3385888D0F; Wed,  7 Aug 2024 16:17:29 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 1A52688CFB; Wed,  7 Aug 2024 16:17:31 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50BA188BBC
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 16:17:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD1FC88CF0
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 16:17:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=max.oss.09@gmail.com
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a7aa4ca9d72so210571066b.0
- for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 07:17:27 -0700 (PDT)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5b9d48d1456so1116991a12.1
+ for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 07:17:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723040247; x=1723645047; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=WS3IYlrGKc0P3qC6C3RlGUvdKaX5aeguKQcS5QIN7EA=;
- b=ZKTUqr0/lyQ3+JPVp8K2v9wsLad0/kmkcL8CKprseEfWtyYP8jZlKiQN2pqWOi/nYE
- DikaDnspodXnzw60flG1zLPIL14i3ru6YLDsPggq9w7Cfhi0ZskFVB3tiJ2idLG3kbOe
- 4h4sEiBgWNpDOxJAKs1MP+W1DwMC+Wk5zYvN9b2v0l34nrW943KjBUySJnbp6vPZVwzr
- SLvB+NjEHspioRkV+nZRVTWZbym19NRnhDTJdeJszv1/6Od9q56eWvl96YiH0psM4LxG
- w6se8d+ujGX9rmhVU6+TVOoQtkwSf/ikGqNstxu23M/euYo9kUtzi4Bq0Pp8g5K9LN4w
- tJdg==
+ d=gmail.com; s=20230601; t=1723040248; x=1723645048; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=t9NDOuDsJTL7wW9bIpQJG8cNlTDcg98IkTSnRTuSLnA=;
+ b=WI7JOc1Y4CJg2RcjNveaWN0o39DphiS9FU4LUH8bMLw+ngyqiV5huf1tzkWYMK3XpW
+ mjpjqUSnWm80oL0OTsR6Rfm7fDP6CXTz9PRvtXQ1GBd00eglCbpwvG/04O89wTPNFQgK
+ WvcFxi/h/TB4zmJTiMjni7WnMv40ty+zA2VpcEMNl6qWV7j2Qo2CrEOUErO5fLCBhJ2R
+ Miz2Piez/4FuXn5S9KtRZp8YdSZxnQR/frkDhmZfuNDY/Zsm/2wz14G7oVqix39Gs1+c
+ 0laVTe1YyZEcmrZgTSoIUjXqLlRmuSbzAA0i0xaCSbhfBOFHIqzCfV5NYuUy32ZdAjjV
+ PLdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723040247; x=1723645047;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WS3IYlrGKc0P3qC6C3RlGUvdKaX5aeguKQcS5QIN7EA=;
- b=MtVBoNOmIdyC6sRQW+T8ux+KbEfPnj9danQs0YRDuYQVwZ2frmpnEmf4+cRrGbB5JC
- 04VmTzw9Krq+xhpcjAkkaOJnSSSie/ekL0tN/kMzyWmWBYI8rRb71Cr4crc75B3mX7Wh
- bZOAlJyx5i6JBzIIjtyrecTnzY0bLF8S5MlVQIWDpDfbrKuaONhfpHmZsPZzVnliRWEb
- 0bQVtEayopmAqr+grckW6uybfb58KrjanrefhTr5T65x6/6ywY20c/1m/RDt7//ce4jo
- 28sYu50KWIjJUXwjGVj2fpO5xwtdgC3JJP6sQRcMDob/NUVP9UbTguuV/eKGlDIEXQoH
- obiQ==
+ d=1e100.net; s=20230601; t=1723040248; x=1723645048;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=t9NDOuDsJTL7wW9bIpQJG8cNlTDcg98IkTSnRTuSLnA=;
+ b=ox85XIOupw8cshWgQgOQqLDEqX25Jkxekjyfl6mD0sgv7HA5FHM5zDINAyOAw6sUWb
+ jv+uUOAm/2mGB2KkmSQW5MBjtCN/ZzmROOlhlwCQ1UY4K6XpEIhwOeexTifVF01Xkzji
+ ogruECNKCzr5XJrwHd9ZcgKD658kmrgZPJUZS2oBEspy2Nmxsj+LYlFPb5gJyxZo5+oJ
+ AaiYHo9nCSj2VqwBCZKRBD9xqZRGQKwLdUH422xBC0KQEtPZr2Yr49/UDxWdlGuhWf6q
+ osHUm7F1jB2aUJFHpW2/BrQnYnVR3tVmtsMrWuTOQ7zggznwDsloloj4qZ0fmn99pbbW
+ WxrA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUP66hXTlc4u2k75KmZbObX8zbA+HUnHV3Bln/k8esOwtvRxtyeKLGK9ij8MIjt9qEEjQyqjYtKykzqtgEay8sfGOmVhw==
-X-Gm-Message-State: AOJu0YxsYO87uNA4aTUiYUcpW3I0X0bRsYgn0qjZwstgMvFgVmWyrBJx
- opyJBR8LlqMGtqObLhZbDxnRSNKk2CPd1GZtnzXVdDWXXtIXNcJt
-X-Google-Smtp-Source: AGHT+IHIoVh4a4Xx4KDSwKztMPJBRhmgLjXVujKUeoMeDhjNH3bNMZan8vH3w5e03ft7ZmoPzQ23mQ==
-X-Received: by 2002:a17:907:d29:b0:a7a:c812:36bb with SMTP id
- a640c23a62f3a-a7dc4da6efdmr1573597866b.8.1723040246384; 
- Wed, 07 Aug 2024 07:17:26 -0700 (PDT)
+ AJvYcCWkJBnPaAD/LbsR+aej4pvf6TpxS+LvIth7gGeaLZXBOfZePsjM1aAabYR5lLgqVywizcF61azJOou/OkX5zEjxjyh5oA==
+X-Gm-Message-State: AOJu0YxsLm+9p9iGIsLhL20LHn+Y4twNdPptz8F7XMzaJOz0lN52q3C6
+ ldTP2urB9tC9NiEgDzvYLQrFoIw12HWWMHW+BXJJbsmbOwQuKfVf6u294g==
+X-Google-Smtp-Source: AGHT+IHBybp1AjSh6OFSohV9FVnAN6NRXnJPtpwI7E2koQneBvAa5jJy7Np4EjjsNSTR23pvRXAMtg==
+X-Received: by 2002:a17:907:e90:b0:a7a:952b:95cf with SMTP id
+ a640c23a62f3a-a80791c3a2emr214578566b.32.1723040247939; 
+ Wed, 07 Aug 2024 07:17:27 -0700 (PDT)
 Received: from toolbox.int.toradex.com (31-10-206-125.static.upc.ch.
  [31.10.206.125]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7dc9ec8dafsm644945766b.220.2024.08.07.07.17.25
+ a640c23a62f3a-a7dc9ec8dafsm644945766b.220.2024.08.07.07.17.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 07:17:26 -0700 (PDT)
+ Wed, 07 Aug 2024 07:17:27 -0700 (PDT)
 From: max.oss.09@gmail.com
 To: Max Krummenacher <max.krummenacher@toradex.com>
 Cc: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
  Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Fabio Estevam <festevam@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ Fabio Estevam <festevam@denx.de>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
  Marcel Ziswiler <marcel.ziswiler@toradex.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  u-boot@lists.denx.de
-Subject: [PATCH v1 0/4] apalis/colibri imx8: enable additional features
-Date: Wed,  7 Aug 2024 16:16:16 +0200
-Message-ID: <20240807141655.4165667-1-max.oss.09@gmail.com>
+Subject: [PATCH v1 1/4] board: apalis-imx8: add reset code
+Date: Wed,  7 Aug 2024 16:16:17 +0200
+Message-ID: <20240807141655.4165667-2-max.oss.09@gmail.com>
 X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20240807141655.4165667-1-max.oss.09@gmail.com>
+References: <20240807141655.4165667-1-max.oss.09@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,25 +99,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Max Krummenacher <max.krummenacher@toradex.com>
+From: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
 
+With commit 922d4504bcab ("imx: scu_api: update to version 1.16 and
+add more APIs") added the reboot API.
 
-Enable and use additional features which have been added to U-Boot
-on the Apalis iMX8QM / Colibri iMX8X boards.
+Add the board code to use that.
 
-
-
-Andrejs Cainikovs (4):
-  board: apalis-imx8: add reset code
-  apalis-imx8: enable i.MX specific BOOTAUX
-  colibri-imx8x: enable i.MX specific BOOTAUX
-  colibri-imx8x: enable i.MX specific SNVS configuration
+Signed-off-by: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+---
 
  board/toradex/apalis-imx8/apalis-imx8.c | 8 ++++++++
- configs/apalis-imx8_defconfig           | 1 +
- configs/colibri-imx8x_defconfig         | 2 ++
- 3 files changed, 11 insertions(+)
+ 1 file changed, 8 insertions(+)
 
+diff --git a/board/toradex/apalis-imx8/apalis-imx8.c b/board/toradex/apalis-imx8/apalis-imx8.c
+index 72d67d90d418..570bf2a27d4b 100644
+--- a/board/toradex/apalis-imx8/apalis-imx8.c
++++ b/board/toradex/apalis-imx8/apalis-imx8.c
+@@ -290,6 +290,14 @@ int board_init(void)
+ 	return 0;
+ }
+ 
++void reset_cpu(void)
++{
++	sc_pm_reboot(-1, SC_PM_RESET_TYPE_COLD);
++
++	do {
++	} while (1);
++}
++
+ #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
+ int ft_board_setup(void *blob, struct bd_info *bd)
+ {
 -- 
 2.42.0
 
