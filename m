@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 493CFC3DA7F
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 17:12:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD716C52D73
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 17:13:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8824188BDC;
+	by phobos.denx.de (Postfix) with ESMTP id E955D88C1B;
 	Wed,  7 Aug 2024 19:12:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ygTGhNTn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lvE44zBW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 169B888C05; Wed,  7 Aug 2024 19:12:43 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 3652E88BD4; Wed,  7 Aug 2024 19:12:43 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29B9488BD4
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 19:12:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AE8588B63
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 19:12:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4281faefea9so695315e9.2
- for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 10:12:40 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4257d5fc9b7so952175e9.2
+ for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 10:12:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723050759; x=1723655559; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723050758; x=1723655558; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=n3p4Z/bdjZuV6/Hz4Fj/7FWj/5Hu0091smaG+T0hGbo=;
- b=ygTGhNTnbVv1S7Kc3oD0mr4nyyVPoWbXDi6kz9ipMlPxhqb+zgfzSfAbDVkDLpvI3f
- f4TTg/JH5Upob3C9JoYI8tNxHXaRaVhdPSdOabRK4P2MXrOce6XhvnwYFt/9+BR+W16g
- azHxPg0z0+uDl4N+qoOFHkgqJR1Fnba3yb5A6A/oPTl0YJBSfzNqVSk9f7TFv3XFbmB/
- gASdoMOlM+nrCtZHHyn6teLX+r9dHJnDcNOXZn0KFQxH4nHg8Yz8xdu9yRyOLrY7P24v
- kqGJH/jpkdUrZyawPd4D+mdp8OZFkpfZi5CpIUMUzF9xQYDqU0OEB3q7A6k214koxkn4
- MKxw==
+ bh=1RUCm8sy2GtMBaE9cyArf0W/WZmq/xfWl2TCC2Aall0=;
+ b=lvE44zBWyC8cXb3VDnWmrsn3SvXdOtdk2unL8zk7sQW5EoUqo66y1yeZUzf+CLcAA8
+ DtYShMX58O+01RAU8J5BgiEmSBZPEEVzrijfa0RRd5iP//+OUcdNskSTEi4K2NJy+eQg
+ 1A0IxBmgT/2yvneoBOvemZuNQ+3NsOTniCbLdLwIcz+wPm80sovebdWPzkLQE+NkKCRl
+ 0xOhvR7h26/NEo7Q4LZLeIWMJHahciEq5oQv011OmO3odnwV7U1/RjxrdPjrEES8zf45
+ J56rZzVW3SF2Zm94i27S/hrFixGDhqvZ3rtlaB8dcE3JpOkY2bDRGFvY6x+IEGKpi7fg
+ Z95A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723050759; x=1723655559;
+ d=1e100.net; s=20230601; t=1723050758; x=1723655558;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=n3p4Z/bdjZuV6/Hz4Fj/7FWj/5Hu0091smaG+T0hGbo=;
- b=kT5Fmab82Tgr2JJzLSdtVssaYxGFI/qEg0XksvwOJ/v0Xo30PyRTUfFPY8esKIfO0v
- 4ZYgw+ZKJy01sJrbyr7Kvhz0qX0akZLrBUatnBgdxeEr0m1i8y+rLDC0FP5n82u+8ekd
- pen6WUU0hFfe5tZPYgyArhBOpYmA68FbkGSqGNiTh3RHNilsj7w55jMQ91z2//WnjtGX
- nFa5mfF3KS+pjbo+CUxmRP2X7x736W7JNvPmfpfaAdeYbQONxEZHjoOvM7boEfWqHP9C
- XRL3jXtLMsUesGDbFvggh/iX2oVhdunWw5+GwQdA6RhKeEdurzuephgG2XHT6mYlPG0d
- BTwQ==
-X-Gm-Message-State: AOJu0YxMkGwF9CGrMzl4UpuQ3TKFK6WekWInaD/1wL+KgOnVYxLjPH2J
- WpDjCK7YoLGigG8HFvvHrMCz0xc96EHGf1rcHTm8+6dP/6RupM51j81YhAruflcLS4mKKKNaAjv
- Jw6yC9EQb
-X-Google-Smtp-Source: AGHT+IGq9NUec7H4aKRUjlcrnYSxV5n5Z3JLDfxI8oGciOjcBm2T65v3LqLOMuyXxs8PybvKIro2hw==
-X-Received: by 2002:a05:6000:1bd2:b0:368:4492:eca9 with SMTP id
- ffacd0b85a97d-36bbc0e41d7mr11437185f8f.20.1723050759351; 
- Wed, 07 Aug 2024 10:12:39 -0700 (PDT)
+ bh=1RUCm8sy2GtMBaE9cyArf0W/WZmq/xfWl2TCC2Aall0=;
+ b=gCDG3dFc5+uQqa9mG+mhOwiqWTotrFu6vOTWG7o5DtxfGvfLlBwFzNfSWeCliuH+XX
+ YTNY0wjScvH3z2XrQecCxrLYYP6ZrvSwmVbcqAOGgdpxLVtQoPLNRm9YEcWfQDhmGgHA
+ cFWe20J2jPNH5zN4FpA8O7Eoz4kdY8lHwvJMsxdwixIhVALvAX11ey486DumFc2ASWdM
+ 2Su9+/nD6EaqKqO4uZzm+loq1MjbpqlmOkN+hrxcnlhq9ieZ7pWcqZPDJ7gbU0GaIJej
+ mFX52obdwNwuX7032ltUhdg9CoKe0kNs726EBg3HVs92BC6pRXqr0YSn9o1DPiHUktYH
+ omRA==
+X-Gm-Message-State: AOJu0YyvskktirhvzF1HT2SYO4wwzIScELmORwvj1c9tRFPUIghyTSzs
+ HUjCGi5Rt/2KSeZyvFuJ8x9CpUEneHrneQwWYOWau8ETN1Ev9KOILGKoAT2BJpHmjrIe0mJ6ONm
+ 1pH2QMoxB
+X-Google-Smtp-Source: AGHT+IESfMZamphPo77U9cF2DcLMIE670fn5VBJU8HmO4ZxT+VUDyAAmC8jD5v5/3zI9zVbukemBPA==
+X-Received: by 2002:a05:600c:450d:b0:428:111a:193 with SMTP id
+ 5b1f17b1804b1-428e6b95386mr151694605e9.37.1723050758369; 
+ Wed, 07 Aug 2024 10:12:38 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:bb3d:43b8:4780:757c])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36bbd0597b2sm16623781f8f.81.2024.08.07.10.12.38
+ ffacd0b85a97d-36bbd0597b2sm16623781f8f.81.2024.08.07.10.12.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 10:12:39 -0700 (PDT)
+ Wed, 07 Aug 2024 10:12:38 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
  Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Simon Glass <sjg@chromium.org>,
- Yasuharu Shibata <yasuharu.shibata@gmail.com>, Marek Vasut <marex@denx.de>
-Subject: [PATCH v8 02/23] net: wget: removed unused function wget_success()
-Date: Wed,  7 Aug 2024 19:11:46 +0200
-Message-Id: <23a2099efe241dd512a615e51e85e1941fc20a0b.1723050310.git.jerome.forissier@linaro.org>
+ Tom Rini <trini@konsulko.com>, Angelo Dureghello <angelo@kernel-space.org>,
+ TsiChung Liew <Tsi-Chung.Liew@nxp.com>, Stefan Roese <sr@denx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
+ Jason Liu <jason.hui.liu@nxp.com>,
+ William Zhang <william.zhang@broadcom.com>
+Subject: [PATCH v8 01/23] flash: prefix error codes with FL_
+Date: Wed,  7 Aug 2024 19:11:45 +0200
+Message-Id: <c6ba7c445d5cabdcce09e414a97cf62577a67faa.1723050310.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1723050310.git.jerome.forissier@linaro.org>
 References: <cover.1723050310.git.jerome.forissier@linaro.org>
@@ -100,31 +100,440 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-wget_success() is used nowhere so remove it.
+Prefix the flash status codes (ERR_*) with FL_ in order to avoid clashes
+with third-party libraries. Case in point: including the lwIP library
+header file <lwip/err.h> which defines err_enum_t as an enum with values
+being ERR_*.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Reviewed-by: Tom Rini <trini@konsulko.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- net/wget.c | 7 -------
- 1 file changed, 7 deletions(-)
+ board/cobra5272/flash.c           | 26 +++++++++---------
+ board/freescale/m5253demo/flash.c |  6 ++---
+ common/flash.c                    | 44 +++++++++++++++----------------
+ drivers/mtd/cfi_flash.c           | 36 ++++++++++++-------------
+ include/flash.h                   | 20 +++++++-------
+ 5 files changed, 66 insertions(+), 66 deletions(-)
 
-diff --git a/net/wget.c b/net/wget.c
-index f1dd7abeff6..0e4dc5159d0 100644
---- a/net/wget.c
-+++ b/net/wget.c
-@@ -199,13 +199,6 @@ void wget_fail(char *error_message, unsigned int tcp_seq_num,
- 	wget_send(action, tcp_seq_num, tcp_ack_num, 0);
+diff --git a/board/cobra5272/flash.c b/board/cobra5272/flash.c
+index 616842e62f4..d324aa6ac11 100644
+--- a/board/cobra5272/flash.c
++++ b/board/cobra5272/flash.c
+@@ -135,22 +135,22 @@ int flash_erase(flash_info_t *info, int s_first, int s_last)
+ {
+ 	ulong result;
+ 	int iflag, cflag, prot, sect;
+-	int rc = ERR_OK;
++	int rc = FL_ERR_OK;
+ 	int chip1;
+ 	ulong start;
+ 
+ 	/* first look for protection bits */
+ 
+ 	if (info->flash_id == FLASH_UNKNOWN)
+-		return ERR_UNKNOWN_FLASH_TYPE;
++		return FL_ERR_UNKNOWN_FLASH_TYPE;
+ 
+ 	if ((s_first < 0) || (s_first > s_last)) {
+-		return ERR_INVAL;
++		return FL_ERR_INVAL;
+ 	}
+ 
+ 	if ((info->flash_id & FLASH_VENDMASK) !=
+ 	    (AMD_MANUFACT & FLASH_VENDMASK)) {
+-		return ERR_UNKNOWN_FLASH_VENDOR;
++		return FL_ERR_UNKNOWN_FLASH_VENDOR;
+ 	}
+ 
+ 	prot = 0;
+@@ -160,7 +160,7 @@ int flash_erase(flash_info_t *info, int s_first, int s_last)
+ 		}
+ 	}
+ 	if (prot)
+-		return ERR_PROTECTED;
++		return FL_ERR_PROTECTED;
+ 
+ 	/*
+ 	 * Disable interrupts which might cause a timeout
+@@ -217,11 +217,11 @@ int flash_erase(flash_info_t *info, int s_first, int s_last)
+ 			MEM_FLASH_ADDR1 = CMD_READ_ARRAY;
+ 
+ 			if (chip1 == ERR) {
+-				rc = ERR_PROG_ERROR;
++				rc = FL_ERR_PROG_ERROR;
+ 				goto outahere;
+ 			}
+ 			if (chip1 == TMO) {
+-				rc = ERR_TIMEOUT;
++				rc = FL_ERR_TIMEOUT;
+ 				goto outahere;
+ 			}
+ 
+@@ -252,7 +252,7 @@ static int write_word(flash_info_t *info, ulong dest, ulong data)
+ {
+ 	volatile u16 *addr = (volatile u16 *) dest;
+ 	ulong result;
+-	int rc = ERR_OK;
++	int rc = FL_ERR_OK;
+ 	int cflag, iflag;
+ 	int chip1;
+ 	ulong start;
+@@ -262,7 +262,7 @@ static int write_word(flash_info_t *info, ulong dest, ulong data)
+ 	 */
+ 	result = *addr;
+ 	if ((result & data) != data)
+-		return ERR_NOT_ERASED;
++		return FL_ERR_NOT_ERASED;
+ 
+ 	/*
+ 	 * Disable interrupts which might cause a timeout
+@@ -302,7 +302,7 @@ static int write_word(flash_info_t *info, ulong dest, ulong data)
+ 	*addr = CMD_READ_ARRAY;
+ 
+ 	if (chip1 == ERR || *addr != data)
+-		rc = ERR_PROG_ERROR;
++		rc = FL_ERR_PROG_ERROR;
+ 
+ 	if (iflag)
+ 		enable_interrupts();
+@@ -320,13 +320,13 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
+ 
+ 	if (addr & 1) {
+ 		printf ("unaligned destination not supported\n");
+-		return ERR_ALIGN;
++		return FL_ERR_ALIGN;
+ 	}
+ 
+ #if 0
+ 	if (cnt & 1) {
+ 		printf ("odd transfer sizes not supported\n");
+-		return ERR_ALIGN;
++		return FL_ERR_ALIGN;
+ 	}
+ #endif
+ 
+@@ -364,5 +364,5 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
+ 		cnt -= 1;
+ 	}
+ 
+-	return ERR_OK;
++	return FL_ERR_OK;
+ }
+diff --git a/board/freescale/m5253demo/flash.c b/board/freescale/m5253demo/flash.c
+index 334518a4bc9..ab5d2ebff64 100644
+--- a/board/freescale/m5253demo/flash.c
++++ b/board/freescale/m5253demo/flash.c
+@@ -72,7 +72,7 @@ int flash_get_offsets(ulong base, flash_info_t * info)
+ 		}
+ 	}
+ 
+-	return ERR_OK;
++	return FL_ERR_OK;
  }
  
--void wget_success(u8 action, unsigned int tcp_seq_num,
--		  unsigned int tcp_ack_num, int len, int packets)
--{
--	printf("Packets received %d, Transfer Successful\n", packets);
--	wget_send(action, tcp_seq_num, tcp_ack_num, len);
--}
--
- /*
-  * Interfaces of U-BOOT
+ void flash_print_info(flash_info_t * info)
+@@ -369,9 +369,9 @@ int write_buff(flash_info_t * info, uchar * src, ulong addr, ulong cnt)
+ 	}
+ 
+ 	if (cnt == 0)
+-		return ERR_OK;
++		return FL_ERR_OK;
+ 
+-	return ERR_OK;
++	return FL_ERR_OK;
+ }
+ 
+ /*-----------------------------------------------------------------------
+diff --git a/common/flash.c b/common/flash.c
+index 24ddc8bee72..a64e51a9b5a 100644
+--- a/common/flash.c
++++ b/common/flash.c
+@@ -110,13 +110,13 @@ addr2info(ulong addr)
+  * Make sure all target addresses are within Flash bounds,
+  * and no protected sectors are hit.
+  * Returns:
+- * ERR_OK          0 - OK
+- * ERR_TIMEOUT     1 - write timeout
+- * ERR_NOT_ERASED  2 - Flash not erased
+- * ERR_PROTECTED   4 - target range includes protected sectors
+- * ERR_INVAL       8 - target address not in Flash memory
+- * ERR_ALIGN       16 - target address not aligned on boundary
+- *			(only some targets require alignment)
++ * FL_ERR_OK          0 - OK
++ * FL_ERR_TIMEOUT     1 - write timeout
++ * FL_ERR_NOT_ERASED  2 - Flash not erased
++ * FL_ERR_PROTECTED   4 - target range includes protected sectors
++ * FL_ERR_INVAL       8 - target address not in Flash memory
++ * FL_ERR_ALIGN       16 - target address not aligned on boundary
++ *			   (only some targets require alignment)
   */
+ int
+ flash_write(char *src, ulong addr, ulong cnt)
+@@ -131,11 +131,11 @@ flash_write(char *src, ulong addr, ulong cnt)
+ 	__maybe_unused ulong cnt_orig = cnt;
+ 
+ 	if (cnt == 0) {
+-		return (ERR_OK);
++		return (FL_ERR_OK);
+ 	}
+ 
+ 	if (!info_first || !info_last) {
+-		return (ERR_INVAL);
++		return (FL_ERR_INVAL);
+ 	}
+ 
+ 	for (info = info_first; info <= info_last; ++info) {
+@@ -146,7 +146,7 @@ flash_write(char *src, ulong addr, ulong cnt)
+ 
+ 			if ((end >= info->start[i]) && (addr < e_addr) &&
+ 			    (info->protect[i] != 0) ) {
+-				return (ERR_PROTECTED);
++				return (FL_ERR_PROTECTED);
+ 			}
+ 		}
+ 	}
+@@ -169,11 +169,11 @@ flash_write(char *src, ulong addr, ulong cnt)
+ #if defined(CONFIG_FLASH_VERIFY)
+ 	if (memcmp(src_orig, addr_orig, cnt_orig)) {
+ 		printf("\nVerify failed!\n");
+-		return ERR_PROG_ERROR;
++		return FL_ERR_PROG_ERROR;
+ 	}
+ #endif /* CONFIG_SYS_FLASH_VERIFY_AFTER_WRITE */
+ 
+-	return (ERR_OK);
++	return (FL_ERR_OK);
+ }
+ 
+ /*-----------------------------------------------------------------------
+@@ -182,33 +182,33 @@ flash_write(char *src, ulong addr, ulong cnt)
+ void flash_perror(int err)
+ {
+ 	switch (err) {
+-	case ERR_OK:
++	case FL_ERR_OK:
+ 		break;
+-	case ERR_TIMEOUT:
++	case FL_ERR_TIMEOUT:
+ 		puts ("Timeout writing to Flash\n");
+ 		break;
+-	case ERR_NOT_ERASED:
++	case FL_ERR_NOT_ERASED:
+ 		puts ("Flash not Erased\n");
+ 		break;
+-	case ERR_PROTECTED:
++	case FL_ERR_PROTECTED:
+ 		puts ("Can't write to protected Flash sectors\n");
+ 		break;
+-	case ERR_INVAL:
++	case FL_ERR_INVAL:
+ 		puts ("Outside available Flash\n");
+ 		break;
+-	case ERR_ALIGN:
++	case FL_ERR_ALIGN:
+ 		puts ("Start and/or end address not on sector boundary\n");
+ 		break;
+-	case ERR_UNKNOWN_FLASH_VENDOR:
++	case FL_ERR_UNKNOWN_FLASH_VENDOR:
+ 		puts ("Unknown Vendor of Flash\n");
+ 		break;
+-	case ERR_UNKNOWN_FLASH_TYPE:
++	case FL_ERR_UNKNOWN_FLASH_TYPE:
+ 		puts ("Unknown Type of Flash\n");
+ 		break;
+-	case ERR_PROG_ERROR:
++	case FL_ERR_PROG_ERROR:
+ 		puts ("General Flash Programming Error\n");
+ 		break;
+-	case ERR_ABORTED:
++	case FL_ERR_ABORTED:
+ 		puts("Flash Programming Aborted\n");
+ 		break;
+ 	default:
+diff --git a/drivers/mtd/cfi_flash.c b/drivers/mtd/cfi_flash.c
+index a7826e81c17..e50502824ac 100644
+--- a/drivers/mtd/cfi_flash.c
++++ b/drivers/mtd/cfi_flash.c
+@@ -593,11 +593,11 @@ static int flash_status_check(flash_info_t *info, flash_sect_t sector,
+ 			       flash_read_long(info, sector, 0));
+ 			flash_write_cmd(info, sector, 0, info->cmd_reset);
+ 			udelay(1);
+-			return ERR_TIMEOUT;
++			return FL_ERR_TIMEOUT;
+ 		}
+ 		udelay(1);		/* also triggers watchdog */
+ 	}
+-	return ERR_OK;
++	return FL_ERR_OK;
+ }
+ 
+ /*-----------------------------------------------------------------------
+@@ -616,9 +616,9 @@ static int flash_full_status_check(flash_info_t *info, flash_sect_t sector,
+ 	case CFI_CMDSET_INTEL_PROG_REGIONS:
+ 	case CFI_CMDSET_INTEL_EXTENDED:
+ 	case CFI_CMDSET_INTEL_STANDARD:
+-		if (retcode == ERR_OK &&
++		if (retcode == FL_ERR_OK &&
+ 		    !flash_isset(info, sector, 0, FLASH_STATUS_DONE)) {
+-			retcode = ERR_INVAL;
++			retcode = FL_ERR_INVAL;
+ 			printf("Flash %s error at address %lx\n", prompt,
+ 			       info->start[sector]);
+ 			if (flash_isset(info, sector, 0, FLASH_STATUS_ECLBS |
+@@ -627,14 +627,14 @@ static int flash_full_status_check(flash_info_t *info, flash_sect_t sector,
+ 			} else if (flash_isset(info, sector, 0,
+ 						FLASH_STATUS_ECLBS)) {
+ 				puts("Block Erase Error.\n");
+-				retcode = ERR_NOT_ERASED;
++				retcode = FL_ERR_NOT_ERASED;
+ 			} else if (flash_isset(info, sector, 0,
+ 						FLASH_STATUS_PSLBS)) {
+ 				puts("Locking Error\n");
+ 			}
+ 			if (flash_isset(info, sector, 0, FLASH_STATUS_DPS)) {
+ 				puts("Block locked.\n");
+-				retcode = ERR_PROTECTED;
++				retcode = FL_ERR_PROTECTED;
+ 			}
+ 			if (flash_isset(info, sector, 0, FLASH_STATUS_VPENS))
+ 				puts("Vpp Low Error.\n");
+@@ -702,12 +702,12 @@ static int flash_status_poll(flash_info_t *info, void *src, void *dst,
+ 		if (get_timer(start) > tout) {
+ 			printf("Flash %s timeout at address %lx data %lx\n",
+ 			       prompt, (ulong)dst, (ulong)flash_read8(dst));
+-			return ERR_TIMEOUT;
++			return FL_ERR_TIMEOUT;
+ 		}
+ 		udelay(1);		/* also triggers watchdog */
+ 	}
+ #endif /* CONFIG_SYS_CFI_FLASH_STATUS_POLL */
+-	return ERR_OK;
++	return FL_ERR_OK;
+ }
+ 
+ /*-----------------------------------------------------------------------
+@@ -810,7 +810,7 @@ static int flash_write_cfiword(flash_info_t *info, ulong dest, cfiword_t cword)
+ 		break;
+ 	}
+ 	if (!flag)
+-		return ERR_NOT_ERASED;
++		return FL_ERR_NOT_ERASED;
+ 
+ 	/* Disable interrupts which might cause a timeout here */
+ 	flag = disable_interrupts();
+@@ -899,7 +899,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
+ 		shift = 3;
+ 		break;
+ 	default:
+-		retcode = ERR_INVAL;
++		retcode = FL_ERR_INVAL;
+ 		goto out_unmap;
+ 	}
+ 
+@@ -930,7 +930,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
+ 		}
+ 	}
+ 	if (!flag) {
+-		retcode = ERR_NOT_ERASED;
++		retcode = FL_ERR_NOT_ERASED;
+ 		goto out_unmap;
+ 	}
+ 
+@@ -950,7 +950,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
+ 		retcode = flash_status_check(info, sector,
+ 					     info->buffer_write_tout,
+ 					     "write to buffer");
+-		if (retcode == ERR_OK) {
++		if (retcode == FL_ERR_OK) {
+ 			/* reduce the number of loops by the width of
+ 			 * the port
+ 			 */
+@@ -975,7 +975,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
+ 					src += 8, dst += 8;
+ 					break;
+ 				default:
+-					retcode = ERR_INVAL;
++					retcode = FL_ERR_INVAL;
+ 					goto out_unmap;
+ 				}
+ 			}
+@@ -1025,7 +1025,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
+ 			}
+ 			break;
+ 		default:
+-			retcode = ERR_INVAL;
++			retcode = FL_ERR_INVAL;
+ 			goto out_unmap;
+ 		}
+ 
+@@ -1043,7 +1043,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
+ 
+ 	default:
+ 		debug("Unknown Command Set\n");
+-		retcode = ERR_INVAL;
++		retcode = FL_ERR_INVAL;
+ 		break;
+ 	}
+ 
+@@ -1389,7 +1389,7 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
+ 		if (i > cnt)
+ 			i = cnt;
+ 		rc = flash_write_cfibuffer(info, wp, src, i);
+-		if (rc != ERR_OK)
++		if (rc != FL_ERR_OK)
+ 			return rc;
+ 		i -= i & (info->portwidth - 1);
+ 		wp += i;
+@@ -1398,7 +1398,7 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
+ 		FLASH_SHOW_PROGRESS(scale, dots, digit, i);
+ 		/* Only check every once in a while */
+ 		if ((cnt & 0xFFFF) < buffered_size && ctrlc())
+-			return ERR_ABORTED;
++			return FL_ERR_ABORTED;
+ 	}
+ #else
+ 	while (cnt >= info->portwidth) {
+@@ -1413,7 +1413,7 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
+ 		FLASH_SHOW_PROGRESS(scale, dots, digit, info->portwidth);
+ 		/* Only check every once in a while */
+ 		if ((cnt & 0xFFFF) < info->portwidth && ctrlc())
+-			return ERR_ABORTED;
++			return FL_ERR_ABORTED;
+ 	}
+ #endif /* CONFIG_SYS_FLASH_USE_BUFFER_WRITE */
+ 
+diff --git a/include/flash.h b/include/flash.h
+index 60babe8a805..32bc65e7b60 100644
+--- a/include/flash.h
++++ b/include/flash.h
+@@ -127,16 +127,16 @@ void flash_perror(int err);
+ /*-----------------------------------------------------------------------
+  * return codes from flash_write():
+  */
+-#define ERR_OK				0
+-#define ERR_TIMEOUT			1
+-#define ERR_NOT_ERASED			2
+-#define ERR_PROTECTED			4
+-#define ERR_INVAL			8
+-#define ERR_ALIGN			16
+-#define ERR_UNKNOWN_FLASH_VENDOR	32
+-#define ERR_UNKNOWN_FLASH_TYPE		64
+-#define ERR_PROG_ERROR			128
+-#define ERR_ABORTED			256
++#define FL_ERR_OK			0
++#define FL_ERR_TIMEOUT			1
++#define FL_ERR_NOT_ERASED		2
++#define FL_ERR_PROTECTED		4
++#define FL_ERR_INVAL			8
++#define FL_ERR_ALIGN			16
++#define FL_ERR_UNKNOWN_FLASH_VENDOR	32
++#define FL_ERR_UNKNOWN_FLASH_TYPE	64
++#define FL_ERR_PROG_ERROR		128
++#define FL_ERR_ABORTED			256
+ 
+ /*-----------------------------------------------------------------------
+  * Protection Flags for flash_protect():
 -- 
 2.40.1
 
