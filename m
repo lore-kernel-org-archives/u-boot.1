@@ -4,123 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63748C52D71
-	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 14:38:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD9DBC3DA7F
+	for <u-boot@archiver.kernel.org>; Wed,  7 Aug 2024 14:38:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE04588D4B;
-	Wed,  7 Aug 2024 16:37:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=ltec.ch
+	by phobos.denx.de (Postfix) with ESMTP id 5DEB988D51;
+	Wed,  7 Aug 2024 16:37:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=permerror (0-bit key) header.d=ltec.ch header.i=@ltec.ch header.b="/naPOdq1";
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=ltec.ch header.i=@ltec.ch header.b="aa57FyhR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Yi5BM49M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70D0588CEE; Wed,  7 Aug 2024 15:59:05 +0200 (CEST)
-Received: from mail.ltec.ch (mail.ltec.ch [95.143.48.181])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C927E88D15; Wed,  7 Aug 2024 16:36:33 +0200 (CEST)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 397C688BB5
- for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 15:59:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9D2588BE7
+ for <u-boot@lists.denx.de>; Wed,  7 Aug 2024 16:36:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=ltec.ch
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=fb@ltec.ch
-DKIM-Signature: v=1; a=ed25519-sha256; q=dns/txt; c=relaxed/relaxed; d=ltec.ch
- ; s=ec-sel;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7RGbqiFEPoXafORu6aEvhSVWU6ZTdmF9kH4fberXM/0=; b=/naPOdq1lJWbKaL0MUwwAwm6W2
- JSOqdIU+mONX82ubwlVqeU1nWQG3eRV7yQHxXOXCuhd3iAKJxUiiPfXQE2BQ==;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=ltec.ch;
- s=rsa-sel; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
- References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7RGbqiFEPoXafORu6aEvhSVWU6ZTdmF9kH4fberXM/0=; b=aa57FyhRQiU/Tl4i8IgWhQh5A1
- 7cCBMbM//HKdCLDehX2SgpF2tUBA5OBecGTyXuj0qV/+MD6gG+l5aoUB+IMqW0b8tSBToL6vwEzRe
- a9Ti+Tn1f6D295cUM5NkEyRXZ1mTRIGjutw0PWQC2JrFgh9KtKccc6atKnAOlEkILEFIgtdKHTIxC
- weICGou403XEII1NpdWQdqd3zn06VrZFB7yLKpJtF+eodLJmlnIWxWS0bIoLXBQVjAH9EC6Gd7MIh
- 3C5srNgV7Tt43xw2ukt5bQWwMlaPaXgx3QcyKWpj3Z2febu8pN8GLLSHgShLzbwWaIMOk+KcsHu+G
- DfhtuF4Q==;
-Received: from nebula.ltec ([172.27.11.2] helo=[172.27.11.24])
- by mail.ltec.ch with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.94.2)
- (envelope-from <fb@ltec.ch>)
- id 1sbhBZ-003sTe-8Y; Wed, 07 Aug 2024 15:58:41 +0200
-Message-ID: <5816ce27-2a8d-4981-afc6-dd7ebd01d72f@ltec.ch>
-Date: Wed, 7 Aug 2024 15:58:40 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6b7a4668f1fso10956746d6.3
+ for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 07:36:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1723041389; x=1723646189; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=pnCIddEdxbgKZ9+C4rJiIW0at1W9mdLZwH/UgWwsjvI=;
+ b=Yi5BM49MP8PGQvj7UDY+WGN45VNpyYyrvpgiQ2JlFujv1EfVrMXpcXteZJsRPkijFV
+ DFul4V3FyUlIP8Iszrd5Lde6vWcmWdItsiFObH+W1H8Y28+/0IdvzJKI5ZERv1YwORb2
+ W+CAEn9/bV1W3goYCvZrYioaOLoFbdqtpKq2s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723041389; x=1723646189;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pnCIddEdxbgKZ9+C4rJiIW0at1W9mdLZwH/UgWwsjvI=;
+ b=V5jgRSK7jav8ARMaXOYDaHJrp68bMbSI3OJFOPHaum/hYsDtAvh3JJMMRf+KpOdxw8
+ vjU6lF4PgGZiFPaLRdDL4D+iWClxxOV8GNSNIQbC+38NrV35pQ1XcQe/X5kN7PIU0O2N
+ 6tnC3jwgn75VdX381Ch91CTx9AiI+x/R14aXHCpVppPPeGhceGQLpCn+gImLvgAsI43a
+ tQNeLA6k1WhmlbBgwNYMdUTbZcueLRgcGpKed/xcfwWg5QFePRYZOZBRZFPDwS/8eUIa
+ UtzU3GYNXWPfjmZlSoNIHjQAGeNrGXWJLn1PaeIuL1aMGtVjG/bQH8981TPY7JNY7Mq/
+ gK3w==
+X-Gm-Message-State: AOJu0YySq1qgmGpBXOT+qOepoxBYlpnfjIhMaffB4NNRU9Vp/Z/0Yabb
+ x7SUISjOvoPWOIjHOaxO33kb0QDjyv/4mdkjP9Dsq1AbaTiSM2DgbRIY+6Ap+z0dxgIwi1VH8Zf
+ HJJVcZ9IDVlD6Xazdfqn5Ket9QAZrE8io4GKF
+X-Google-Smtp-Source: AGHT+IGuN96R94RirRZPxhh0/MzdjVgvyMj3HW0kQmVK3cAmJ5gE8ipGmfFt5I7onzaHUAJn+TqZWuVacZYDD9bXY5E=
+X-Received: by 2002:a05:6214:3384:b0:6b5:7e70:3537 with SMTP id
+ 6a1803df08f44-6bb984192b9mr180734096d6.50.1723041388660; Wed, 07 Aug 2024
+ 07:36:28 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 03/20] configs: replace '# CONFIG_NET is not set' with
- CONFIG_NO_NET=y
-To: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Icenowy Zheng <icenowy@aosc.xyz>,
- Tom Rini <trini@konsulko.com>, Angelo Dureghello <angelo@kernel-space.org>,
- Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
- Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
- Chris Morgan <macromorgan@hotmail.com>, Wills Wang <wills.wang@live.com>,
- Rosy Song <rosysong@rosinson.com>, Mark Kettenis <kettenis@openbsd.org>,
- Wolfgang Wegner <w.wegner@astro-kom.de>, Stelian Pop <stelian@popies.net>,
- Thomas Fitzsimmons <fitzsim@fitzsim.org>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Linus Walleij <linus.walleij@linaro.org>, Simon Glass <sjg@chromium.org>,
- Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
- liuhao <liuhao@phytium.com.cn>, shuyiqi <shuyiqi@phytium.com.cn>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Trevor Woerner <twoerner@gmail.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Alexey Brodkin <abrodkin@synopsys.com>,
- Andy Yan <andy.yan@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Yang Xiwen <firbidden405@outlook.com>,
- Enric Balletbo i Serra <eballetbo@gmail.com>,
- Matthias Winker <matthias.winker@de.bosch.com>,
- Philip Oberfichtner <pro@denx.de>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- David Lechner <david@lechnology.com>, Johan Jonker <jbx6244@gmail.com>,
- Fabio Estevam <festevam@gmail.com>, Otavio Salvador
- <otavio@ossystems.com.br>, Eric Nelson <eric@nelint.com>,
- Peng Fan <peng.fan@nxp.com>, =?UTF-8?Q?=C3=81lvaro_Fern=C3=A1ndez_Rojas?=
- <noltari@gmail.com>, Tianrui Wei <tianrui-wei@outlook.com>,
- Minkyu Kang <mk7.kang@samsung.com>, lixinde <lixinde@phytium.com.cn>,
- weichangzheng <weichangzheng@phytium.com.cn>, Ilko Iliev <iliev@ronetix.at>,
- Stefan Bosch <stefan_b@posteo.net>, Jaehoon Chung <jh80.chung@samsung.com>,
- Greg Gallagher <greg@embeddedgreg.com>, Mihai Sain
- <mihai.sain@microchip.com>, Sean Anderson <seanga2@gmail.com>,
- Stephan Gerhold <stephan@gerhold.net>, Kamil Lulko <kamil.lulko@gmail.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Dillon Min <dillon.minfei@gmail.com>, Wei Fu <wefu@redhat.com>,
- Yixun Lan <dlan@gentoo.org>, Sergey Temerkhanov <s.temerkhanov@gmail.com>,
- Mike Looijmans <mike.looijmans@topic.nl>, Usama Arif <usama.arif@arm.com>,
- Anastasiia Lukianenko <anastasiia_lukianenko@epam.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- Michal Simek <michal.simek@amd.com>,
- Martyn Welch <martyn.welch@collabora.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Andrew Davis <afd@ti.com>,
- Wadim Egorov <w.egorov@phytec.de>, Kever Yang <kever.yang@rock-chips.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Neal Gompa <neal@gompa.dev>,
- Janne Grunau <j@jannau.net>, Hector Martin <marcan@marcan.st>,
- Bin Meng <bmeng.cn@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
- Pegorer Massimo <Massimo.Pegorer@vimar.com>,
- Javier Martinez Canillas <javierm@redhat.com>,
- Patrick Barsanti <patrick.barsanti@amarulasolutions.com>,
- Marek Vasut <marex@denx.de>, TracyMg_Li <TracyMg_Li@outlook.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Andrii Chepurnyi <Andrii_Chepurnyi@epam.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-References: <cover.1721910373.git.jerome.forissier@linaro.org>
- <909b133b5ab321b19f988e904f07f6288ba12117.1721910373.git.jerome.forissier@linaro.org>
-From: Felix Brack <fb@ltec.ch>
-Content-Language: en-US
-In-Reply-To: <909b133b5ab321b19f988e904f07f6288ba12117.1721910373.git.jerome.forissier@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20240713070055.2172883-1-sjg@chromium.org>
+ <87a5iliubh.fsf@bloch.sibelius.xs4all.nl>
+In-Reply-To: <87a5iliubh.fsf@bloch.sibelius.xs4all.nl>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 7 Aug 2024 08:36:18 -0600
+Message-ID: <CAFLszTgssphMZjqkks_KCakMMLsjt_48EEceY2=rWoEaOYOAUg@mail.gmail.com>
+Subject: Re: [PATCH v2 00/21] Universal Payload initial series
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, seanga2@gmail.com, 
+ sheng.tan@9elements.com, akashi.tkhro@gmail.com, abdellatif.elkhlifi@arm.com, 
+ agendin@matrox.com, linux.amoon@gmail.com, andre.przywara@arm.com, afd@ti.com, 
+ artur@conclusive.pl, bmeng.cn@gmail.com, bb@ti.com, caleb.connolly@linaro.org, 
+ chanho61.park@samsung.com, devarsht@ti.com, eajames@linux.ibm.com, 
+ etienne.carriere@foss.st.com, francis.laniel@amarulasolutions.com, 
+ xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, vanbaren@cideas.com, 
+ mr.bossman075@gmail.com, jonas@kwiboo.se, jpewhacker@gmail.com, 
+ kever.yang@rock-chips.com, leon@georgemail.eu, lukas.funke@weidmueller.com, 
+ abbaraju.manojsai@amarulasolutions.com, marek.vasut+renesas@mailbox.org, 
+ marex@denx.de, mkorpershoek@baylibre.com, n-jain1@ti.com, nm@ti.com, 
+ oleksandr.suvorov@foundries.io, pbrobinson@gmail.com, 
+ rasmus.villemoes@prevas.dk, raymond.mao@linaro.org, 
+ semen.protsenko@linaro.org, samuel@sholland.org, yangshiji66@outlook.com, 
+ sughosh.ganu@linaro.org, sumit.garg@linaro.org, sunil@amarulasolutions.com, 
+ tom@tom-fitzhenry.me.uk, trini@konsulko.com, troykiskyboundary@gmail.com
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Wed, 07 Aug 2024 16:37:37 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -138,16 +98,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 25.07.24 14:57, Jerome Forissier wrote:
+Hi Mark,
 
-> The parent patch has made the networking stack a choice between NO_NET,
-> NET and NET_LWIP. Therefore '# CONFIG_NET is not set' is now
-> 'CONFIG_NO_NET=y'. Adjust the defconfigs accordingly. Note that this
-> patch is intended to be folded in but is kept separate separate for now
-> to make review easier.
-> 
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+On Sat, 13 Jul 2024 at 02:12, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
+>
+> > From: Simon Glass <sjg@chromium.org>
+> > Date: Sat, 13 Jul 2024 08:00:34 +0100
+> >
+> > Universal Payload (UPL) is an Industry Standard for firmware
+> > components[1].
+>
+> I think you have some trouble understanding the concept of industry
+> standard ;).  I guess you want this to become an industry standard.
+> Firmly https://xkcd.com/927/ territory if you ask me.
 
-For the pdu001 board.
+Please refrain from snarky comments on the U-Boot mailing list. The
+Linux list might be a better fit but we don't do that here. Yes, I do
+understand that we all have weak moments where we get frustrated with
+something.
 
-Tested-by: Felix Brack <fb@ltec.ch>
+Regards,
+Simon
+
+[..]
