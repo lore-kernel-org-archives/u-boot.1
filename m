@@ -4,51 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2BA4C3DA4A
-	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 09:06:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04055C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 09:14:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC843888D7;
-	Thu,  8 Aug 2024 11:06:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 270688890F;
+	Thu,  8 Aug 2024 11:14:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1723108016;
-	bh=80RVGdD+J6wroW6hfQJgvf8wag8zxhzibgmTSUO3UVs=;
-	h=Date:From:To:Cc:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=EvITMASQL8w4qz3GXPrbbiszixblZd8h3VjOgy8SEueFldiXftOg7Ort8h+XHxDrA
-	 gtF6i+f+M4/0BZl8tJJa0iED0SiQfq6/cBQleRxfacuLk7bYJmGdVQpwSoQUhbyoYM
-	 sOYQembw+7TLPJryzjtOoiHpYXZKG+HexmJFbaEPUknlpcyWolLWKXcfaGa5dNKcxK
-	 uBLjoAbJ+pJk7S0hVCMaIzwzFcvlYc7gMBfQewZTA4DeytMb0zGDUjnvqnLghoBPHh
-	 UOBgju7W+1jcsOCyZKD0n2pK7D6DqjNBWbYbE4UIrcgQYV74VbhYQH6tDqHwhkFVHe
-	 bEidUbqDaur5Q==
-Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 7E85588967; Thu,  8 Aug 2024 11:14:14 +0200 (CEST)
+Received: from smtpbgeu1.qq.com (smtpbgeu1.qq.com [52.59.177.22])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 50A55887BB;
- Thu,  8 Aug 2024 11:06:55 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1723108015;
- bh=80RVGdD+J6wroW6hfQJgvf8wag8zxhzibgmTSUO3UVs=;
- h=Date:From:To:Cc:Subject:From;
- b=LcHCGU2OQ78Us2kNEn6M+qvExQWbAsXQ/NzWCtX+XbAT6+g+PaXLspTx2KWclp4oS
- 9/YsTPCZhke6EBjqZtNPm2/KHTK4YzawaUSPqvbL7MPczwNjVj3dGp/3McO9mdBZHo
- vLLjPfi23ocKatzjg3arGEdbswfB8iL3eJLXKC7LlpnXcjYF0FgcsicCSVjIQzn0wa
- aWJWdat87m64jLZVjY3TBfcCk8+1OIA5XCTcjuWa08OndnnbHdKsz8b22hp9KYQ4L6
- S/zB17VVySURlKfQGR3pvJIAIWRZATvZIg68Ryk/dZ5yPJIzPQ89F4x87aeLrkwdzD
- DzvOhjRrlGe/A==
-Date: Thu, 8 Aug 2024 11:06:54 +0200
-From: Lukasz Majewski <lukma@denx.de>
-To: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Cc: Marek Vasut <marex@denx.de>
-Subject: [Binman] Question regarding SPL symbol offsets generation
-Message-ID: <20240808110654.4215b129@wsk>
-Organization: denx.de
-X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ by phobos.denx.de (Postfix) with ESMTPS id A2C84888D7
+ for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 11:14:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
+X-QQ-mid: bizesmtp85t1723108424tqb0xra4
+X-QQ-Originating-IP: 5YGd4Skp3lV5gcf+sc25ZlSkSBOByZ3XzhyQUY3WYXs=
+Received: from [192.168.159.131] ( [106.150.157.243])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Thu, 08 Aug 2024 17:13:41 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 1874492621267229022
+Message-ID: <2D2113A5558DE435+6e8225c0-9a97-431b-9842-6d1a75b89496@radxa.com>
+Date: Thu, 8 Aug 2024 18:13:41 +0900
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/2mDm5xf_l05z/QchLu7tQ5R";
- protocol="application/pgp-signature"; micalg=pgp-sha512
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5] board: rockchip: add Radxa ROCK 3 Model C
+To: Maxim Moskalets <maximmosk4@gmail.com>, trini@konsulko.com,
+ u-boot@lists.denx.de, sjg@chromium.org
+Cc: Jonas Karlman <jonas@kwiboo.se>
+References: <20240803174024.10358-1-Maxim.Moskalets@kaspersky.com>
+Content-Language: en-US
+From: FUKAUMI Naoki <naoki@radxa.com>
+In-Reply-To: <20240803174024.10358-1-Maxim.Moskalets@kaspersky.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtp:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,98 +61,213 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---Sig_/2mDm5xf_l05z/QchLu7tQ5R
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-Dear Community
+On 8/4/24 02:40, Maxim Moskalets wrote:
+> From: Maxim Moskalets <maximmosk4@gmail.com>
+> 
+> Based on rock-3a-rk3568_defconfig.
+> Tested on v1.31 revision.
+> 
+> Board Specifications:
+> - Rockchip RK3566
+> - 1/2/4GB LPDDR4 2112MT/s
+> - eMMC socket
+> - uSD card slot
+> - M.2 2230 Connector
+> - GbE LAN with POE
+> - 3.5mm jack with mic
+> - HDMI 2.0, MIPI DSI/CSI
+> - USB 3.0 Host, USB 2.0 Host/OTG
+> - 40-pin GPIO expansion ports
+> 
+> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
+> Suggested-by: Jonas Karlman <jonas@kwiboo.se>
+> Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+> ---
+> v5:
+> 	fixed board info
+> v4:
+> 	fixed typo in commit-msg
+> 	moved maintainers record to file for rk3568 boards
+> 	renamed from ROCK 3 Model C to ROCK3C
+> v3:
+> 	add suggested by Jonas Karlman <jonas@kwiboo.se> in
+> 	https://lore.kernel.org/all/bbb81dd1-e318-423d-8258-db7556ce6850@kwiboo.se/
+> v2:
+> 	rebase to updated upstream dts
+> ---
+>   arch/arm/dts/rk3566-rock-3c-u-boot.dtsi | 10 +++
+>   board/rockchip/evb_rk3568/MAINTAINERS   |  7 ++
+>   configs/rock-3c-rk3566_defconfig        | 97 +++++++++++++++++++++++++
+>   doc/board/rockchip/rockchip.rst         |  1 +
+>   4 files changed, 115 insertions(+)
+>   create mode 100644 arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+>   create mode 100644 configs/rock-3c-rk3566_defconfig
+> 
+> diff --git a/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi b/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..fd7f5367b75
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+> @@ -0,0 +1,10 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +#include "rk356x-u-boot.dtsi"
 
-I'd like to ask about one issue with generation of symbol offsets in
-binman [1].
+please add
 
-In my case the CONFIG_FSPI_CONF_HEADER is defined.
+```
+/ {
+	leds {
+		led-0 {
+			default-state = "on";
+		};
+	};
+};
+```
 
-Problem is with generated symbols [2] to point into=20
-ddr-1d-imem-fw/ddr-1d-dmem-fw/ddr-2d-imem-fw/ddr-2d-dmem-fw.
-
-It looks like only symbols have extra offset of 0x1000 (the same as the
-first section introduces) - binaries for training memory are placed
-without this extra offset.
-
-On the other hand - before this change:
-SHA1: 37e50627efacd8dae18b564e9d8886a033e181bc
-
-The u-boot-spl-ddr.bin was a separate binman "entry" (i.e. not section)
-- so e.g. ddr-1d-dmem-fw {} had proper offsets (as this binary was also
-  mangled into spl.bin with mkimage invocation).
-
-
-Now the question - how to properly fix this issue?
-
-I've tried to add pad-before =3D <0x1000>; to ddr-1d-imem-fw property
-hoping to "move" this binary itself by 0x1000. However with it the
-symbol of ddr-1d-dmem-fw is moved up as well.
-
-Another option was to try alignment 'align-size' set to 0x1000 - effect
-is the same as described above.
-
-In the documentation [3] - I've found that I could use
-"ProcessEntryContents()" for tweaking, but this seems to be not
-eligible (as all imx8mX boards, which are going to boot from fspi) are
-affected.
-
-Maybe falling-back to 'multiple-images' [4] and generate the
-u-boot-spl-ddr.bin in that way is a proper solution?
-
-
-Last but not least - this problem is not present when one boots from
-SD/eMMC as in this case the "fspi_conf_block" property is not present
-and everything starts with 0x0 offset.
-
-Thanks in advance for your help.
-
-
-Links:
-
-[1] -
-https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/imx8mm-u-bo=
-ot.dtsi?ref_type=3Dheads#L49
-
-[2] -
-https://source.denx.de/u-boot/u-boot/-/blob/master/drivers/ddr/imx/phy/help=
-er.c#L27
-
-[3] -
-https://github.com/ARM-software/u-boot/blob/master/tools/binman/README#L526
-
-[4] -
-https://github.com/ARM-software/u-boot/blob/master/tools/binman/README#L371
-
+to turn LED on at U-Boot. (make CONFIG_LED_GPIO work)
 
 Best regards,
 
-Lukasz Majewski
-
 --
+FUKAUMI Naoki
+Radxa Computer (Shenzhen) Co., Ltd.
 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
-
---Sig_/2mDm5xf_l05z/QchLu7tQ5R
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAma0iq4ACgkQAR8vZIA0
-zr0rwggAobTt5foT29ZgUdkcY9rtSDDfKu9gPBOuuBI2vzimgTFhzZXUnHLT/IAr
-jF/+lV9nVTuiUUlk848LWfXzvZGX9xMNADgaSStSYP1moaMbPuBCsGlXtlFD94iL
-40I1Hkf4LCGphRzXJ3ncWlJUSVMQuJhLW4e02IolE+GOFt6ZupJsvHwdkPuRYa4W
-T3uFs8qqWtzMBYVoXC+fEISjrG1lnynjD2V5nnmOA19qBGv7cNmxauIzoq5Kr5Lm
-X+8XLzLzm4cHIiqC7O2O6slYkR7Uk0DTab8y6sY+KHClXSWdUxCJPUw70JFal4QB
-pmCbQUE5fpLCrRrq622xI6Rc6ChKtQ==
-=cQeU
------END PGP SIGNATURE-----
-
---Sig_/2mDm5xf_l05z/QchLu7tQ5R--
+> +&sfc {
+> +	flash@0 {
+> +		bootph-pre-ram;
+> +		bootph-some-ram;
+> +	};
+> +};
+> diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/evb_rk3568/MAINTAINERS
+> index e5b0986ead9..ba4884db8e1 100644
+> --- a/board/rockchip/evb_rk3568/MAINTAINERS
+> +++ b/board/rockchip/evb_rk3568/MAINTAINERS
+> @@ -69,3 +69,10 @@ S:	Maintained
+>   F:	configs/rock-3a-rk3568_defconfig
+>   F:	arch/arm/dts/rk3568-rock-3a.dts
+>   F:	arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
+> +
+> +ROCK-3C
+> +M:	Jonas Karlman <jonas@kwiboo.se>
+> +M:	Maxim Moskalets <maximmosk4@gmail.com>
+> +S:	Maintained
+> +F:	arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+> +F:	configs/rock-3c-rk3566_defconfig
+> diff --git a/configs/rock-3c-rk3566_defconfig b/configs/rock-3c-rk3566_defconfig
+> new file mode 100644
+> index 00000000000..f44b202c8c3
+> --- /dev/null
+> +++ b/configs/rock-3c-rk3566_defconfig
+> @@ -0,0 +1,97 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_SPEED=24000000
+> +CONFIG_SF_DEFAULT_MODE=0x2000
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-rock-3c"
+> +CONFIG_ROCKCHIP_RK3568=y
+> +CONFIG_ROCKCHIP_SPI_IMAGE=y
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_DEBUG_UART_BASE=0xFE660000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
+> +CONFIG_SPL_SPI=y
+> +CONFIG_SYS_LOAD_ADDR=0xc00800
+> +CONFIG_PCI=y
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_AHCI=y
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-rock-3c.dtb"
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +CONFIG_SPL_PAD_TO=0x7f8000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_SPL_SPI_LOAD=y
+> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+> +CONFIG_SPL_ATF=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_PCI=y
+> +CONFIG_CMD_POWEROFF=y
+> +CONFIG_CMD_USB=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_PMIC=y
+> +CONFIG_CMD_REGULATOR=y
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_OF_LIVE=y
+> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> +CONFIG_SPL_DM_SEQ_ALIAS=y
+> +CONFIG_SPL_REGMAP=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_SCSI_AHCI=y
+> +CONFIG_AHCI_PCI=y
+> +CONFIG_SPL_CLK=y
+> +CONFIG_ROCKCHIP_GPIO=y
+> +CONFIG_SYS_I2C_ROCKCHIP=y
+> +CONFIG_LED=y
+> +CONFIG_LED_GPIO=y
+> +CONFIG_MISC=y
+> +CONFIG_SUPPORT_EMMC_RPMB=y
+> +CONFIG_MMC_DW=y
+> +CONFIG_MMC_DW_ROCKCHIP=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_BUS=4
+> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+> +CONFIG_SPI_FLASH_GIGADEVICE=y
+> +CONFIG_SPI_FLASH_MACRONIX=y
+> +CONFIG_SPI_FLASH_WINBOND=y
+> +CONFIG_SPI_FLASH_XTX=y
+> +CONFIG_PHY_REALTEK=y
+> +CONFIG_DWC_ETH_QOS=y
+> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+> +CONFIG_NVME_PCI=y
+> +CONFIG_PCIE_DW_ROCKCHIP=y
+> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+> +CONFIG_SPL_PINCTRL=y
+> +CONFIG_DM_PMIC=y
+> +CONFIG_PMIC_RK8XX=y
+> +CONFIG_REGULATOR_RK8XX=y
+> +CONFIG_SPL_RAM=y
+> +CONFIG_SCSI=y
+> +CONFIG_BAUDRATE=1500000
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_ROCKCHIP_SFC=y
+> +CONFIG_SYSRESET=y
+> +CONFIG_USB=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_EHCI_GENERIC=y
+> +CONFIG_USB_OHCI_HCD=y
+> +CONFIG_USB_OHCI_GENERIC=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_ERRNO_STR=y
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+> index bedc52e03e2..60357af6caa 100644
+> --- a/doc/board/rockchip/rockchip.rst
+> +++ b/doc/board/rockchip/rockchip.rst
+> @@ -105,6 +105,7 @@ List of mainline supported Rockchip boards:
+>        - Pine64 SOQuartz on Model A (soquartz-model-a-rk3566)
+>        - Powkiddy X55 (powkiddy-x55-rk3566)
+>        - Radxa CM3 IO Board (radxa-cm3-io-rk3566)
+> +     - Radxa ROCK 3C (rock-3c-rk3566)
+>   
+>   * rk3568
+>        - Rockchip Evb-RK3568 (evb-rk3568)
