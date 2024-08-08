@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3B4EC52D73
-	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 06:22:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B03D0C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 06:34:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42771889D5;
-	Thu,  8 Aug 2024 08:22:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 42005888CF;
+	Thu,  8 Aug 2024 08:34:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DIYqyD6k";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="WnZepZ//";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2CB98890F; Thu,  8 Aug 2024 08:22:37 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D20DA888D7; Thu,  8 Aug 2024 08:34:52 +0200 (CEST)
+Received: from mail.thorsis.com (mail.thorsis.com [217.92.40.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D57DA8890F
- for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 08:22:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5b3fff87e6bso586939a12.0
- for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 23:22:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723098155; x=1723702955; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=pb0Z1Zsk6+ktwfV0cRza7lJXA5/XHgm+H/LZomS0DME=;
- b=DIYqyD6krR5uowoWVmIRPEP9z0XQKt513eFbgEeJOIhbod/ZfU5lLY6NUEaKeBqBkh
- UQvIby+ANlKpqaI5RO0oyfmJB90mzigvCxRzvhX+P+lHIBjzqVe5nCwH2nD3N5zkurd1
- 0ltTVF8O5nQD4HXD+aUv02fVWRha5WN2krqq8YIr2SVNK1DQ/AjLuGKmz1YOK8wIU1Bu
- C0q8HzIQKjezF+sQJrpSl4t5KulM7tdGGHsmT7Y6uyR6R/6V272o0BPvZkSJ2wYA5aTX
- ojjOLmDz91die7apFxvcH2Cwon/LGjzyP9ZMhlXtrbELs3M2IumtcM+o5s2FdM3TM31X
- 2S1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723098155; x=1723702955;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pb0Z1Zsk6+ktwfV0cRza7lJXA5/XHgm+H/LZomS0DME=;
- b=g8irOXt/yDhsRwWcwGUnQJaxn00J1ncuXhS/gHhVLu/cCNVsxaJAdicFC/TNk/kvLR
- kBdXFB9MG3Aej8lrJdunslG3uGlJsAxCIc3p3tSkuPNS7W6MWOIgEn9gqXtvsKPTlYGg
- 7g6ER6g0SyKM76EW+Zb+xclX5D8xGZTFFy55XMpUoxYIDo6BAve4HY7qpGqQ9sRS6lsX
- tXjc+DIAmqTec2P3urltljNVs/j/GkP2bmBHeLQe5bY0oX1n5IF0orVD9yRfjhNEvlHv
- I9NPpeeuCdRs8kg2gKsGlgjtbMvdqsODsDc9BRrASDDEQZsUwhxfajydHUqUQRT8Cmeq
- 8Snw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUB+qnK+JwwhKZKDfiWVrT4AhwIbZm3XVEhUa/uYqIP8XicUUKZoAzrLH3/7DL7BOP/C5lUNq9CQTlOgBCF+0Gj4R4FOQ==
-X-Gm-Message-State: AOJu0YzaBjBO9bw+M4mz/MAk9Xj1QC/uC0af8q6by4eyhmsuPIzWoUYm
- prrZUxYAUrrAJE7iQ537r2qQ53VCDJxTWUSdfTRBhb8TYLZdTEWnI+tcnYEbJnqy2GmTvtOeZzG
- PbQmTIUs1Pecd7NufXVzwFt5NNrVGlsMBbJC/VA==
-X-Google-Smtp-Source: AGHT+IGmw7IbzhuRlpDQR0UML7M9x3wEyZFWVL9v8nj7QfHPDAplQwe2TtaMnNa3DXkiWZBzh3STpWh8UbUU2euZaXI=
-X-Received: by 2002:a05:6402:11cc:b0:5bb:9b09:8c7e with SMTP id
- 4fb4d7f45d1cf-5bbb233e786mr707874a12.26.1723098155049; Wed, 07 Aug 2024
- 23:22:35 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id AB13588667
+ for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 08:34:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=thorsis.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id E57E914874DC; Thu,  8 Aug 2024 08:34:39 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
+ t=1723098888; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ in-reply-to:references; bh=OJNIgaa5RuPHU/olbSuxnXH7ccnNvUehOPu6HwXM3a8=;
+ b=WnZepZ//ZgZFyMNDmhC8OdStOTqeJlsYIDZqmtNR675JPUzZ39FVH59oaZOWi/fWNWwEKt
+ GFWVu0hZXJCjWhU3oZp46WetX8UUJV7Miwh5iiqlrz5KHxhTh3aIk3XJHQs0qy5gI54s4h
+ /FASdK35sQNoagCG/9Slw5obp+Wf7t06xNoTRQpaMVhHXEPpW6C2hY1DZMddS8zovKcRRr
+ b2IpkCJKjybhC8JlJytCCpX1U5wNl7LZt4zfoJ8D0KVfAhqCH1DSmUa5P5evbzjGY6qDK/
+ 4UpJhih75W9PdZOKf9OJbxlDZ3zuaSU7rtOwrmMejmenhu3QukKOZyis4Z5UJQ==
+Date: Thu, 8 Aug 2024 08:34:32 +0200
+From: Alexander Dahl <ada@thorsis.com>
+To: Christian Marangi <ansuelsmth@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Arseniy Krasnov <avkrasnov@salutedevices.com>,
+ Martin Kurbanov <mmkurbanov@salutedevices.com>,
+ Dmitry Dunaev <dunaev@tecon.ru>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sean Anderson <sean.anderson@seco.com>,
+ Shiji Yang <yangshiji66@outlook.com>,
+ Vasileios Amoiridis <vassilisamir@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 9/9] doc: introduce led.rst documentation
+Message-ID: <20240808-ferret-childless-9151f7abae55@thorsis.com>
+Mail-Followup-To: Christian Marangi <ansuelsmth@gmail.com>,
+ Tom Rini <trini@konsulko.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Arseniy Krasnov <avkrasnov@salutedevices.com>,
+ Martin Kurbanov <mmkurbanov@salutedevices.com>,
+ Dmitry Dunaev <dunaev@tecon.ru>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sean Anderson <sean.anderson@seco.com>,
+ Shiji Yang <yangshiji66@outlook.com>,
+ Vasileios Amoiridis <vassilisamir@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de
+References: <20240807195413.30456-1-ansuelsmth@gmail.com>
+ <20240807195413.30456-10-ansuelsmth@gmail.com>
 MIME-Version: 1.0
-References: <20240806120659.686073-1-prasad.kummari@amd.com>
- <20240807211221.GK1626301@bill-the-cat>
- <e62e3c69-e9c4-4a0a-bf65-c21082ce7e27@amd.com>
-In-Reply-To: <e62e3c69-e9c4-4a0a-bf65-c21082ce7e27@amd.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Thu, 8 Aug 2024 11:52:23 +0530
-Message-ID: <CADg8p95DQvRAXdon_Hx+mYst-u9HTfprQ=6jwgSQThWX=GDSZg@mail.gmail.com>
-Subject: Re: [PATCH] cmd: sf: prevent overwriting the reserved memory
-To: Michal Simek <michal.simek@amd.com>
-Cc: Tom Rini <trini@konsulko.com>, Prasad Kummari <prasad.kummari@amd.com>,
- u-boot@lists.denx.de, 
- git@amd.com, venkatesh.abbarapu@amd.com, git@xilinx.com, 
- jagan@amarulasolutions.com, n-francis@ti.com, d-gole@ti.com, 
- Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240807195413.30456-10-ansuelsmth@gmail.com>
+User-Agent: Mutt/2.2.12 (2023-09-09)
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,54 +99,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 8 Aug 2024 at 11:05, Michal Simek <michal.simek@amd.com> wrote:
->
->
->
-> On 8/7/24 23:12, Tom Rini wrote:
-> > On Tue, Aug 06, 2024 at 05:37:00PM +0530, Prasad Kummari wrote:
-> >
-> >> Added LMB API to prevent SF command from overwriting reserved
-> >> memory areas. The current SPI code does not use LMB APIs for
-> >> loading data into memory addresses. To resolve this, LMB APIs
-> >> were added to check the load address of an SF command and ensure it
-> >> does not overwrite reserved memory addresses. Similar checks are
-> >> used in TFTP, serial load, and boot code to prevent overwriting
-> >> reserved memory.
-> >>
-> >> Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
-> >
-> > This is a much more generic issue that should be looked in to with the
-> > LMB rewrite that Sughosh is working on.
->
-> yes. And is it going to be the part of his series?
-> I expect that if he accepts this will be done on the top of it and there is
-> likely no reason to wait.
+Hello Christian,
 
-This change would be needed, but in a different form. The patch, since
-based on the current master branch, is assuming a local lmb memory
-map. My series is doing away with that, and so we will no longer have
-the lmb_init_and_reserve() API, for example. I would suggest that the
-patch be put out either on top of my patches, or ideally, once the lmb
-patches get merged.
+Am Wed, Aug 07, 2024 at 09:54:12PM +0200 schrieb Christian Marangi:
+> Introduce simple led.rst documentation to document all the additional
+> Kconfig and the current limitation of LED_BLINK and GPIO software blink.
 
+This is a good idea.  An overview of all the LED possibilities in the
+Documentation is much appreciated.  Remarks below.
 
-> We find the issue out on system which has more dynamic behavior that spi pytest
-> read the whole memory and rewrite TF-A.
->
-> And currently we are in situation where some commands are checking reserved
-> location and some of them not.
+> 
+> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+> ---
+>  doc/api/index.rst |  1 +
+>  doc/api/led.rst   | 10 ++++++++++
+>  include/led.h     | 38 ++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 49 insertions(+)
+>  create mode 100644 doc/api/led.rst
+> 
+> diff --git a/doc/api/index.rst b/doc/api/index.rst
+> index ec0b8adb2cf..9f7f23f868f 100644
+> --- a/doc/api/index.rst
+> +++ b/doc/api/index.rst
+> @@ -14,6 +14,7 @@ U-Boot API documentation
+>     event
+>     getopt
+>     interrupt
+> +   led
+>     linker_lists
+>     lmb
+>     logging
+> diff --git a/doc/api/led.rst b/doc/api/led.rst
+> new file mode 100644
+> index 00000000000..e52e350d1bb
+> --- /dev/null
+> +++ b/doc/api/led.rst
+> @@ -0,0 +1,10 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +
+> +LED
+> +===
+> +
+> +.. kernel-doc:: include/led.h
+> +   :doc: Overview
+> +
+> +.. kernel-doc:: include/led.h
+> +   :internal:
+> \ No newline at end of file
+> diff --git a/include/led.h b/include/led.h
+> index 61ece70a975..77b18ddffbf 100644
+> --- a/include/led.h
+> +++ b/include/led.h
+> @@ -10,6 +10,44 @@
+>  #include <stdbool.h>
+>  #include <cyclic.h>
+>  
+> +/**
+> + * DOC: Overview
+> + *
+> + * Generic LED API provided when a supported compatible is defined in DeviceTree.
+> + *
+> + * To enable support for LEDs, enable the `CONFIG_LED` Kconfig option.
+> + *
+> + * The most common implementation is for GPIO-connected LEDs. If using GPIO-connected LEDs,
+> + * enable the `LED_GPIO` Kconfig option.
+> + *
+> + * `LED_BLINK` support requires LED driver support and is therefore optional. If LED blink
+> + * functionality is needed, enable the `LED_BLINK` Kconfig option. If LED driver doesn't
+> + * support HW Blink, SW Blink can be used with the Cyclic framework by enabling the
+> + * CONFIG_LED_SW_BLINK.
+> + *
+> + * Boot and Activity LEDs are also supported. These LEDs can signal various system operations
+> + * during runtime, such as boot initialization, file transfers, and flash write/erase operations.
+> + *
+> + * To enable a Boot LED, enable `CONFIG_LED_BOOT_ENABLE` and define `CONFIG_LED_BOOT_LABEL`. This
+> + * will enable the specified LED to blink and turn ON when the bootloader initializes correctly.
 
-Like you mention in another email, there are instances where we have
-commands which are loading images to memory, but are not considering
-the lmb reservations. These should be fixed, similar to what this
-patch is attempting. Maybe we need a common function where the load
-address gets checked with the lmb module, similar to
-fs_read_lmb_check(), and then have this called from the various
-commands?
+This is somehow redundant to defining "u-boot,boot-led" in
+*-u-boot.dtsi snippets, isn't it?  This is documented in
+doc/device-tree-bindings/config.txt and used by roughly a dozen dtsi
+files and five times in board code.  It also stores a LED label, which
+board code can make use of then, but I think it's not further
+integrated in any driver or class code.  Are you aware of that mechanism
+and hwo does it fit into your rework of the boot led?
 
--sughosh
+Greets
+Alex
 
->
-> Thanks,
-> Michal
+> + *
+> + * To enable an Activity LED, enable `CONFIG_LED_ACTIVITY_ENABLE` and define
+> + * `CONFIG_LED_ACTIVITY_LABEL`.
+> + * This will enable the specified LED to blink and turn ON during file transfers or flash
+> + * write/erase operations.
+> + *
+> + * Both Boot and Activity LEDs provide a simple API to turn the LED ON or OFF:
+> + * `led_boot_on()`, `led_boot_off()`, `led_activity_on()`, and `led_activity_off()`.
+> + *
+> + * Both configurations can optionally define a `_PERIOD` option if `CONFIG_LED_BLINK` or
+> + * `CONFIG_LED_SW_BLINK` is enabled for LED blink operations, which is usually used by
+> + * the Activity LED.
+> + *
+> + * When `CONFIG_LED_BLINK` or `CONFIG_LED_SW_BLINK` is enabled, additional APIs are exposed:
+> + * `led_boot_blink()` and `led_activity_blink()`. Note that if `CONFIG_LED_BLINK` is disabled,
+> + * these APIs will behave like the `led_boot_on()` and `led_activity_on()` APIs, respectively.
+> + */
+> +
+>  struct udevice;
+>  
+>  enum led_state_t {
+> -- 
+> 2.45.2
+> 
