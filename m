@@ -4,62 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA374C3DA4A
-	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 10:25:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D11BC3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 10:45:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6738788AF4;
-	Thu,  8 Aug 2024 12:25:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 5F1A488AE5;
+	Thu,  8 Aug 2024 12:44:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1723112727;
-	bh=0bOlh8UEL/kLm9GXDoZiwbgKg0j6mCkVG0Qq0uwmgJI=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=PfQKO+FTFKLHfzZnJs2hqS6JIUVBhDOY506AjUGyOwdqKLVYFLq1DKHKZoaVuoXsJ
-	 Wd6bjE9C1DSenDN1Z41wfWzkhlhK2Lsbrg5edLUf0XqUQO/DyhUqqCEW63aoid0rPy
-	 C40iQn7UtTL3kcNopI3mc3SqcI9TBL1n9RkvuqW7vCGCkQWQys5a70IgBHn20fWv8/
-	 R+wI2OszCcavfOpf4HVUctQQEZCKoUU4C/klldIerAeH6PvcoEmWJfie/+I26U28KU
-	 dyRE4g6v3n5HlGWhj3Hj8JenURrHoSNZdSMXQjM5VPWeQIbiSFa4WvYbdWhS3qqiLZ
-	 3ytI24WLEO61A==
-Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XW4BvLca";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id A677288AE8; Thu,  8 Aug 2024 12:44:56 +0200 (CEST)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id BDEC388A7D;
- Thu,  8 Aug 2024 12:25:25 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1723112726;
- bh=0bOlh8UEL/kLm9GXDoZiwbgKg0j6mCkVG0Qq0uwmgJI=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=Ep+UZAP4zaWIKZpAtl4tF4aMGp3btiSVGdhwRC/i8ZTROnJOo+M7E+PZiywGjDjUA
- T9/fSRePhXOMOsZokOQCNuSjrZXFBqUirk2C27ujlrJ7E72UB+QNv3CGRRlnQyLCrO
- CLuV+f8MEj853NvNCn6YeeTgQWC197DwCmdjX69+rf9RYTnytsnKAt54FtMjn5/um4
- X5sYpXmMRKch8A9zlJfszqVqQKURwoDMolMervAlJIr3rosSVPTp4z0AQki34rqiA5
- qP97YHX6REmH7D9a8HcVmh2Kso6/OzqNMr7mxoCdsmePijAJAdAvw59tuKXmBTRc9B
- 9tdK+bfCCdXdw==
-Date: Thu, 8 Aug 2024 12:25:13 +0200
-From: Lukasz Majewski <lukma@denx.de>
-To: Teresa Remmet <T.Remmet@phytec.de>
-Cc: Benjamin Hahn <B.Hahn@phytec.de>, "sjg@chromium.org" <sjg@chromium.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "trini@konsulko.com"
- <trini@konsulko.com>, "festevam@gmail.com" <festevam@gmail.com>, Cem Tenruh
- <C.Tenruh@phytec.de>, "martyn.welch@collabora.com"
- <martyn.welch@collabora.com>
-Subject: Re: [PATCH v3] config: Add 'update_bootimg' command to update
- flash.bin on Phytec's imx8mm
-Message-ID: <20240808122513.124db960@wsk>
-In-Reply-To: <fbd60aeea9413d7fa9f82ef952530e316e6b9e97.camel@phytec.de>
-References: <20240806081131.4065425-1-lukma@denx.de>
- <dd54f3f8-7d80-4d0c-9eaa-639e45ddfdcf@phytec.de>
- <20240807130423.601a1e47@wsk>
- <fbd60aeea9413d7fa9f82ef952530e316e6b9e97.camel@phytec.de>
-Organization: denx.de
-X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B323886A6
+ for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 12:44:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-70d25b5b6b0so663824b3a.2
+ for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 03:44:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1723113893; x=1723718693; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=fk573JI10tQUZV+dCUuFCuu/1zJE8+0okyZ1EFbMboc=;
+ b=XW4BvLcaWXPsXx8KAeeGKWpa7q4PnAEwvnzYZbRRhfMBNUUO8EGss1Ox5+ZgS99mUR
+ zOi0mtA9Lk+NzypOPpBPa13W46kQ6DcTA002s4lP679VtyXuGaXDQRv2ePADZbQUa4/G
+ C1P/zqM3W5Y7kCe93DcYEPA+0cCV+aOobfYoxnXtbDypiq+6VdzYc5QeES2gZpxkZQUp
+ 3e5EktcDx/sf6azHiS1rWOgfxRRqCSoF4nUO4ZWiiwLrU6HnIsx/2U4mnbpkxJIsof+o
+ gVLSb8511L3YwUytNTP8F4KBC+icywD1WYzOWB0WVpgAsbyhozuTdxDqmrQaXm8hf0lZ
+ WHHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723113893; x=1723718693;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fk573JI10tQUZV+dCUuFCuu/1zJE8+0okyZ1EFbMboc=;
+ b=BINbeY72K/ZgpHCpsmoCrSqe4uC6z3um/I8RyFB58RuP6p35N14JrXBwpIMOFhHsXb
+ TyRxUHZrCxOfgBWZo/rwWijCCUemtp/vrJQ95CiFB5A4N2FwatPvUIDUNArylBFO0zUM
+ scTsc6tAXi8juaKuKMdEQiE5CQ0YfMsUFNiN/W958T9Q4gEzdWk6twJ9LR8ZcUdpRS5e
+ n8lqAIWrcmI+qURa0ia/6eAUTekxqZcme1ulojuEN29kpnzTtVMNCt1dVzKPH0m+wJHx
+ nsyvSzzfRpxqOe6G0FWuxLloMpqFBfbtmBdouo361gD+Ixd74iFYnPjJqce6Qq+JU6tm
+ VN1Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUdOh7Mb4Ijbp8/w2IH9S+5nSvR5rq3AmHIqRIDVmboU/eiuYdQgI3Z3rxogj+qdjpKUcue8Qqk48YNlxB1rCU/C0cxyQ==
+X-Gm-Message-State: AOJu0Yy9t8eOi6gCOG8ov6VMPFIs0FH2e6ajOHgvUY81691eS3HyaDPE
+ SRupFhYwlCvnNOiq2dI+xA8JjyhkKgxisuLEE+juZD4ngdY9PmL+hvO+ug7IwYPou4uuwaGnX1t
+ LlTcvb20wij17V1rhg1DQGlfLDXk6HwyeG5Z9cvNvOuJK5c71
+X-Google-Smtp-Source: AGHT+IHGnrUCxCMu0Y44cSJBWkuDTFZeJ28l4ZFWB2V1h+clIybG9UD/Q8mnjFU4tepjmk2Bo9im8TjxXxMSSRazzis=
+X-Received: by 2002:a05:6a00:2d06:b0:70a:fb91:66d7 with SMTP id
+ d2e1a72fcca58-710cae39f38mr1887328b3a.20.1723113892788; Thu, 08 Aug 2024
+ 03:44:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/hQAfhQBStOfl4ZriUuVEQZu";
- protocol="application/pgp-signature"; micalg=pgp-sha512
+References: <20240807130010.407399-1-ilias.apalodimas@linaro.org>
+ <f12c4ec1-e2b9-44c4-987d-c1bffb47da1b@gmx.de>
+In-Reply-To: <f12c4ec1-e2b9-44c4-987d-c1bffb47da1b@gmx.de>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 8 Aug 2024 13:44:06 +0300
+Message-ID: <CAC_iWjKowaeEALeJO0nSBAbxuja+-i5qP3zpnk6kLpJoM3AeMw@mail.gmail.com>
+Subject: Re: [PATCH] configs: enable efidebug and EFI http boot on QEMU aarch64
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Anton.Antonov@arm.com, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Bin Meng <bmeng@tinylab.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,185 +91,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---Sig_/hQAfhQBStOfl4ZriUuVEQZu
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Hi Heinrich
 
-Hi Teresa,
+On Wed, 7 Aug 2024 at 16:46, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 07.08.24 15:00, Ilias Apalodimas wrote:
+> > EFI HTTP is a useful option to have by default and is working reliably on
+> > QEMU. Let's enable it by default, since we have no size limitations.
+> > While at it enable 'efidebug' as well, which is currently needed to
+> > configure the EFI HTTP boot options.
+>
+> Should this be added to the efconfig command in future?
 
-> Hello Lukasz,
->=20
-> Am Mittwoch, dem 07.08.2024 um 13:04 +0200 schrieb Lukasz Majewski:
-> > Hi Benjamin,
-> >  =20
-> > > Hi Lukasz,
-> > >=20
-> > > On 06.08.24 10:11, Lukasz Majewski wrote: =20
-> > > > This command allows easy update on SD card or eMMC of the
-> > > > flash.bin
-> > > > generated (with binman) during u-boot build.
-> > > >=20
-> > > > Signed-off-by: Lukasz Majewski <lukma@denx.de>
-> > > > ---
-> > > > Changes for v2:
-> > > > - Remove 'update_mmc_part' variable
-> > > > - Change path for hostname
-> > > > - Use full version of dhcp command (${loadaddr} added)
-> > > >=20
-> > > > Changes for v3:
-> > > > - Remove +1 when calculating the size of binary to be written
-> > > > ---
-> > > > =C2=A0 include/configs/phycore_imx8mm.h | 10 ++++++++++
-> > > > =C2=A0 1 file changed, 10 insertions(+)
-> > > >=20
-> > > > diff --git a/include/configs/phycore_imx8mm.h
-> > > > b/include/configs/phycore_imx8mm.h index ce6dc87c69..361e665676
-> > > > 100644 --- a/include/configs/phycore_imx8mm.h
-> > > > +++ b/include/configs/phycore_imx8mm.h
-> > > > @@ -29,6 +29,16 @@
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0"mmcdev=3D" __strin=
-gify(CONFIG_SYS_MMC_ENV_DEV) "\0" \
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0"mmcpart=3D1\0" \
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0"mmcroot=3D2\0" \
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0"update_offset=3D0x42\0"=
- \
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0"update_filename=3Dflash=
-.bin\0" \
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0"hostname=3D/srv/tftp/\0=
-" \
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0"update_bootimg=3D"
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0\
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0"mmc dev ${mmcdev} ; "=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0\
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0"if dhcp ${loadaddr}
-> > > > ${hostname}/${update_filename} ; then "=C2=A0\=C2=A0  =20
-> > >=20
-> > > The dhcp and tftp command should take the filepath from the tftp=20
-> > > directory and get the tftp directory automatically not the
-> > > absolute path. So this will try to get the file from=20
-> > > /path_to_tftp_folder/srv/tftp/flash.bin and will fail =20
-> >=20
-> > And that is why you do have the ${hostname}/${update_filename}, so
-> > when
-> > you have several exported directories - you can specify which one
-> > without the need to modify the 'update_bootimg' command. =20
->=20
-> do I understand it correct that you just want to be able to define sub
-> dirs with a variable?=20
+Yes, absolutely. I'll see what I can do about it
 
-Yes, correct.
+>
+> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-> This does make sense but you should not pre-
-> define them here.
-
-Ok. I will remove the "hostname=3D/srv/tftp" environment variable.
-
->=20
-> And I think the variable name $hostname is kind of miss leading.=C2=A0May=
-be
-> you can find some different name for it?
-
-The ${hostname} is used in a few places already in that way. Maybe you
-have better idea for this variable's name?
-
->=20
-> Regards,
-> Teresa
->=20
-> >  =20
-> > > because it
-> > > can't find it. So you can drop the ${hostname}. =20
-> >=20
-> > I would prefer to keep the ${hostname}/${update_filename} part.
-> >  =20
-> > > Also drop the initialization of ${hostname} above since it is no
-> > > longer needed.
-> > >=20
-> > > Should be like this:
-> > >=20
-> > > dhcp ${loadaddr} ${update_filename}
-> > >  =20
-> >=20
-> > IMHO the line shall be:
-> >=20
-> > dhcp ${loadaddr} ${hostname}/${update_filename}
-> >  =20
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0"setexpr fw_sz ${filesize} / 0x200 ; "=C2=A0=C2=A0/*
-> > > > SD block size */ \
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0"setexpr fw_sz ${fw_sz} ; "=C2=A0  =20
-> > > I think you can drop this line since it does not do anything.
-> > >  =20
-> >=20
-> > Ok.
-> >  =20
-> > > Benjamin =20
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0\
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0"mmc write ${loadaddr} ${update_offset} ${fw_sz}
-> > > > ;
-> > > > "=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0\
-> > > > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0"fi\0" \
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0"mmcautodetect=3Dye=
-s\0" \
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0"mmcargs=3Dsetenv b=
-ootargs console=3D${console} " \
-> > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0"root=3D/dev/mmcblk${mmcdev}p${mmcroot} rootw=
-ait
-> > > > rw\0" \=C2=A0  =20
-> > >=20
-> > >  =20
-> >=20
-> >=20
-> >=20
-> >=20
-> > Best regards,
-> >=20
-> > Lukasz Majewski
-> >=20
-> > --
-> >=20
-> > DENX Software Engineering GmbH,=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Managing =
-Director: Erika Unter
-> > HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell,
-> > Germany Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email:
-> > lukma@denx.de =20
->=20
-
-
-
-
-Best regards,
-
-Lukasz Majewski
-
---
-
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
-
---Sig_/hQAfhQBStOfl4ZriUuVEQZu
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAma0nQkACgkQAR8vZIA0
-zr2Z1ggAqcuFuGC3P4SVudgMPb8/n1lunMryFti/5sKalj6ZAP51izHBInOM5j6O
-i0P+N5i3l+xDSIFR5p9O/sYZJFmo80TpYeQ+T0EJUFyOgEtuGwWWpkmpfMxIJKwG
-SWHz1Q6ibCe6px5QN+rge632mUk2Ly8HRypscQkGbaMmi+axwmf0sCSV+s8sg5Dr
-7X3wcFSgIIc0DsfBfma8MFKFyGPWlup4FkikGAZINfeyopsHH4nQbEwapJHWu/5O
-GPZQr6nD4B3+nX+dolDLUhHyLDiyOtUeVVI6VXA3Shl78rlp/hmwNSjjEbvODa1B
-rPAzAkvgwgPnQ8xJwP/5QqpM9X8exQ==
-=4UiT
------END PGP SIGNATURE-----
-
---Sig_/hQAfhQBStOfl4ZriUuVEQZu--
+Thanks!
+/Ilias
+>
+> >
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> >   configs/qemu_arm64_defconfig | 2 ++
+> >   1 file changed, 2 insertions(+)
+> >
+> > diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
+> > index 7e166f439087..088ba39f18e1 100644
+> > --- a/configs/qemu_arm64_defconfig
+> > +++ b/configs/qemu_arm64_defconfig
+> > @@ -33,6 +33,7 @@ CONFIG_CMD_NVEDIT_EFI=y
+> >   CONFIG_CMD_DFU=y
+> >   CONFIG_CMD_MTD=y
+> >   CONFIG_CMD_PCI=y
+> > +CONFIG_CMD_EFIDEBUG=y
+> >   CONFIG_CMD_TPM=y
+> >   CONFIG_CMD_MTDPARTS=y
+> >   CONFIG_ENV_IS_IN_FLASH=y
+> > @@ -68,3 +69,4 @@ CONFIG_USB_EHCI_HCD=y
+> >   CONFIG_USB_EHCI_PCI=y
+> >   CONFIG_SEMIHOSTING=y
+> >   CONFIG_TPM=y
+> > +CONFIG_EFI_HTTP_BOOT=y
+>
