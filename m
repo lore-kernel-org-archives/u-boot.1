@@ -4,59 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C89CC52D6F
-	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 13:13:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFCE7C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 13:15:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2D8B88AE3;
-	Thu,  8 Aug 2024 15:13:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5DD2988AE3;
+	Thu,  8 Aug 2024 15:15:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="AUTSmE+A";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="B/6YIbUA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D127B88AE8; Thu,  8 Aug 2024 15:13:44 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9792C88AF9; Thu,  8 Aug 2024 15:15:54 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82FA788AAE
- for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 15:13:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 8BB0A88AAE
+ for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 15:15:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-52f04b4abdcso1272531e87.2
+ for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 06:15:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1723122944; x=1723727744; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=5UkkAqbun4lM+EHr6Jo848ti9g4BjmL6W4OEm8dGdxY=;
+ b=B/6YIbUAzZeWcSaArSttUdWG4IOsb2bvOjqEXOppb5ALFqPP9mdnXdK6wL08WKsulm
+ BBlECSH2QIjMvM+HS1VP04WHlqCNKjk4xnXOaj+w5JWRx/1hCUaYh+8xF9kgjr73FxbZ
+ jx6OmMq80xh3U738hDMUa98+sYUKMgdDpbmBMtz9ugfASeS5dfAGVEZ+m+CDLUPHqBYJ
+ Mgdqb1Q2jY30EYDHpVhe1NOG3MPzS6Q2Yfw2+5b4FxUYKEJC71fxXFNP30RL15wD7Ocy
+ azUtojRJqo4iv4fWG7qJLkbQZMjwHy2MSZ+0IQbsrjdCFTeBBP6dFzNZCFC//7+/gf41
+ c/RQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723122944; x=1723727744;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=5UkkAqbun4lM+EHr6Jo848ti9g4BjmL6W4OEm8dGdxY=;
+ b=gmmoT7PV4l4/Uw5Xjm3C8Knf/064RZRN+2aSQy4hWbmHQWJxj7/Thb18iLwLa/q92A
+ O3aeVA0nt+ayXZjrz/aFi6ZcbZWaQeE0iD3o4AfbcaF5WzKR8Qtgqo1MDJ2aSl45hRSa
+ mGYVtkMyDrW5npstsxPZLa3zo8KLXoUjMzw8eq0EEFN7M7IQOts769O/kbQCfWroB0Yd
+ HTNk+aMeaPKHMRieAikDmjrSgBYDMR7mm+OSRqMpV0TuzqSVnwzfhKYC3en25oPuo2wr
+ 9n4jfSGhRrCb43FH3ByGoiP4lZU6BjrE2g5OCK/qwX7+MUMiJX7DFt0TrWctqyWNxcd5
+ hOhA==
+X-Gm-Message-State: AOJu0Yzo2WSddsi8X6/2igp47jh+lJoVX83yzOL9jFKO0X6qCaDgzVXt
+ 2KbS4XH5isQBoTVhJwo6xVVrFVhN83459STTD4jQsA0APXhOw4Kh39yy43i+L34=
+X-Google-Smtp-Source: AGHT+IEeAC5etC93/ZZovA+wi8tyf85HOjIdvTQOiDt3U4C+iSO99x/irPrc2ZMQ+riHiQe2lRpkyw==
+X-Received: by 2002:a05:6512:3d8f:b0:52e:9a91:bba3 with SMTP id
+ 2adb3069b0e04-530e5825822mr1426118e87.15.1723122943554; 
+ Thu, 08 Aug 2024 06:15:43 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:76c8:eeba:d244:1830?
+ ([2a01:e0a:3cb:7bb0:76c8:eeba:d244:1830])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a7dc9bc3bccsm748740866b.16.2024.08.08.06.15.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 08 Aug 2024 06:15:43 -0700 (PDT)
+Message-ID: <d471db54-da50-4530-a41d-44b855e4db29@linaro.org>
+Date: Thu, 8 Aug 2024 15:15:42 +0200
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1723122821;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=/qppaXw1QPaZLbT18wB+zeGbiYh3X4ns+4UUGfb1WH4=;
- b=AUTSmE+ApDk1uD+Z+jPq9Ya7USgLZwcwkgFE+7Lr6XuNE+w7nQiNjw9DyJ+wup0fGrXs4y
- +0WsFZDmRyyIzniK/ReTvZJWgYZ2JgAbj74uVN0Bz11lqRQuZNUafu2HNsWuAhQ87dUMrH
- iUmfi2YwaR2ohCOivI8MFqRqRai4j9yn98p7ks/L/DQNh/CPie19I6j9b7Dpn1/4/vbrLP
- +RtLojfpqlu7G8d0XF36j/GAc2mlGrw1uUX7sKE8RVrC5HU+QhxxCPREtdC9uBAdvt+pa1
- qmed7zFp4nwv0PMcv/IMgRM/FN7SZvtMziIB2x8hGFTvpGxZ6AdQrlvFUv9LlQ==
-Date: Thu, 08 Aug 2024 15:13:40 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: FUKAUMI Naoki <naoki@radxa.com>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, philipp.tomsich@vrull.eu,
- kever.yang@rock-chips.com, banglang.huang@foxmail.com, jonas@kwiboo.se,
- jagan@amarulasolutions.com, gajjar04akash@gmail.com,
- eugen.hristev@collabora.com, chris.obbard@collabora.com
-Subject: Re: [PATCH 2/2] arm: dts: rockchip: turn LEDs on at boot for Radxa
- boards
-In-Reply-To: <20240808092743.1508-2-naoki@radxa.com>
-References: <20240808092743.1508-1-naoki@radxa.com>
- <20240808092743.1508-2-naoki@radxa.com>
-Message-ID: <d5df7805c948eb4725af848b82e2959d@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 22/23] test/py: add HTTP (wget) test for the EFI loader
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+References: <cover.1723050310.git.jerome.forissier@linaro.org>
+ <9b055b18f84755d775bf0cf4064e66801608839c.1723050310.git.jerome.forissier@linaro.org>
+ <20240807175247.GG1626301@bill-the-cat>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20240807175247.GG1626301@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,229 +99,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Fukaumi,
 
-Please see a comment below.
 
-On 2024-08-08 11:27, FUKAUMI Naoki wrote:
-> Basically, Radxa's boards are intended to turn LEDs on at U-Boot.
-> add `default-state = "on"` to u-boot.dtsi.
+On 8/7/24 19:52, Tom Rini wrote:
+> On Wed, Aug 07, 2024 at 07:12:06PM +0200, Jerome Forissier wrote:
 > 
-> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
-> ---
->  .../arm/dts/rk3328-rock-pi-e-base-u-boot.dtsi |  6 +++++
->  arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi  | 25 ++++++++++++++++++-
->  arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi     |  8 ++++++
->  arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi  |  8 ++++++
->  arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi     | 23 +++++++++++++++++
->  arch/arm/dts/rk3568-rock-3a-u-boot.dtsi       |  8 ++++++
->  arch/arm/dts/rk3588-rock-5b-u-boot.dtsi       |  8 ++++++
->  arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi      |  8 ++++++
->  8 files changed, 93 insertions(+), 1 deletion(-)
+>> Add a test to test_efi_loader.py similar to the TFTP test but for HTTP
+>> with the wget command.
+>>
+>> Suggested-by: Tom Rini <trini@konsulko.com>
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> [snip]
+>> +@pytest.mark.buildconfigspec('of_control')
+>> +@pytest.mark.buildconfigspec('cmd_bootefi_hello_compile')
+>> +def test_efi_helloworld_net_tftp(u_boot_console):
 > 
-> diff --git a/arch/arm/dts/rk3328-rock-pi-e-base-u-boot.dtsi
-> b/arch/arm/dts/rk3328-rock-pi-e-base-u-boot.dtsi
-> index 39bb66c4fcb..a30adb0be98 100644
-> --- a/arch/arm/dts/rk3328-rock-pi-e-base-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3328-rock-pi-e-base-u-boot.dtsi
-> @@ -6,6 +6,12 @@
->  #include "rk3328-u-boot.dtsi"
-> 
->  / {
-> +	leds {
-> +		led-0 {
-> +			default-state = "on";
-> +		};
-> +	};
-> +
->  	smbios {
->  		compatible = "u-boot,sysinfo-smbios";
-> 
-> diff --git a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-> b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-> index 5ec15a845c1..614e4ce0fa8 100644
-> --- a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-> @@ -2,7 +2,20 @@
->  /*
->   * Copyright (c) 2023 Radxa Limited
->   */
-> -#include "rk3399-rock-pi-4-u-boot.dtsi"
-> +#include "rk3399-u-boot.dtsi"
-> +#include "rk3399-sdram-lpddr4-100.dtsi"
-> +
-> +/ {
-> +	leds {
-> +		led-0 {
-> +			default-state = "on";
-> +		};
-> +
-> +		led-1 {
-> +			default-state = "on";
-> +		};
-> +	};
-> +};
-> 
->  &pcfg_pull_none_18ma {
->  	bootph-pre-ram;
-> @@ -14,6 +27,12 @@
->  	bootph-some-ram;
->  };
-> 
-> +&sdhci {
-> +	cap-mmc-highspeed;
-> +	mmc-ddr-1_8v;
-> +	mmc-hs200-1_8v;
-> +};
-> +
+> This should also depend on cmd_tftpboot (existing bug).
 
-This change should be taken out of the patch, because it doesn't
-match the patch description.  If the change is still needed, it
-should be submitted as a separate patch.
+Patch added to v9.
+ 
+>> +    """Run the helloworld.efi binary via TFTP.
+>> +
+>> +    The helloworld.efi file is downloaded from the TFTP server and is executed
+>> +    using the fallback device tree at $fdtcontroladdr.
+>> +    """
+>> +
+>> +    do_test_efi_helloworld_net(u_boot_console, PROTO_TFTP);
+>> +
+>> +@pytest.mark.buildconfigspec('of_control')
+>> +@pytest.mark.buildconfigspec('cmd_bootefi_hello_compile')
+>> +def test_efi_helloworld_net_http(u_boot_console):
+> 
+> Then this needs to depend on cmd_wget as well.
 
->  &spi1 {
->  	status = "okay";
-> 
-> @@ -25,3 +44,7 @@
->  		spi-max-frequency = <10000000>;
->  	};
->  };
-> +
-> +&vdd_log {
-> +	regulator-init-microvolt = <950000>;
-> +};
-> diff --git a/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi
-> b/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi
-> index b3bfc77f756..4861574636e 100644
-> --- a/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi
-> @@ -6,6 +6,14 @@
->  #include "rk3399-u-boot.dtsi"
->  #include "rk3399-sdram-lpddr4-100.dtsi"
-> 
-> +/ {
-> +	leds {
-> +		led-0 {
-> +			default-state = "on";
-> +		};
-> +	};
-> +};
-> +
->  &sdhci {
->  	cap-mmc-highspeed;
->  	mmc-ddr-1_8v;
-> diff --git a/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
-> b/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
-> index e0e501deccf..412f9e06aff 100644
-> --- a/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
-> @@ -5,6 +5,14 @@
-> 
->  #include "rk356x-u-boot.dtsi"
-> 
-> +/ {
-> +	leds {
-> +		led-1 {
-> +			default-state = "on";
-> +		};
-> +	};
-> +};
-> +
->  &sdhci {
->  	cap-mmc-highspeed;
->  };
-> diff --git a/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
-> b/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
-> index 74755a44eae..efeab626d8a 100644
-> --- a/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
-> @@ -2,6 +2,29 @@
-> 
->  #include "rk356x-u-boot.dtsi"
-> 
-> +/ {
-> +	gpio-leds {
-> +		led-0 {
-> +			default-state = "on";
-> +		};
-> +
-> +		led-red {
-> +			default-state = "on";
-> +			gpios = <&gpio0 RK_PC0 GPIO_ACTIVE_HIGH>;
-> +		};
-> +
-> +		led-green {
-> +			default-state = "on";
-> +			gpios = <&gpio0 RK_PC1 GPIO_ACTIVE_HIGH>;
-> +		};
-> +
-> +		led-blue {
-> +			default-state = "on";
-> +			gpios = <&gpio4 RK_PC5 GPIO_ACTIVE_HIGH>;
-> +		};
-> +	};
-> +};
-> +
->  &pcie3x1 {
->  	pinctrl-0 = <&pcie30x1_reset_h>;
->  };
-> diff --git a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> index 9d18f5d0b36..c493352abc1 100644
-> --- a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> @@ -6,6 +6,14 @@
-> 
->  #include "rk356x-u-boot.dtsi"
-> 
-> +/ {
-> +	leds {
-> +		led-0 {
-> +			default-state = "on";
-> +		};
-> +	};
-> +};
-> +
->  &pcie3x2 {
->  	pinctrl-0 = <&pcie3x2_reset_h>;
->  };
-> diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> index 8e318e624a8..8ebba36f90a 100644
-> --- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> @@ -5,6 +5,14 @@
-> 
->  #include "rk3588-u-boot.dtsi"
-> 
-> +/ {
-> +	leds {
-> +		led_rgb_b {
-> +			default-state = "on";
-> +		};
-> +	};
-> +};
-> +
->  &fspim2_pins {
->  	bootph-pre-ram;
->  	bootph-some-ram;
-> diff --git a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-> b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-> index efba0c359ba..a75ae296386 100644
-> --- a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-> @@ -5,6 +5,14 @@
-> 
->  #include "rk3588s-u-boot.dtsi"
-> 
-> +/ {
-> +	leds {
-> +		io-led {
-> +			default-state = "on";
-> +		};
-> +	};
-> +};
-> +
->  &sdhci {
->  	cap-mmc-highspeed;
->  	mmc-hs200-1_8v;
+Right. Fixed in v9.
+
+> Kicking my local build
+> scripts to add wget and moving on...
+
+Thanks for testing!
+
+-- 
+Jerome
+ 
