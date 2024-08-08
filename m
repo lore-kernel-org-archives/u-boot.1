@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAC1AC3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 00:00:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E59AC3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 00:00:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C17C188B9B;
-	Fri,  9 Aug 2024 01:59:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3A25688BCB;
+	Fri,  9 Aug 2024 01:59:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DFCi6Hok";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KDyyJfZz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44F7288A44; Fri,  9 Aug 2024 01:59:45 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 4F35788BC1; Fri,  9 Aug 2024 01:59:46 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59EF387A09
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 01:59:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 660A888A2F
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 01:59:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a7a8e73b29cso160112766b.3
- for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 16:59:43 -0700 (PDT)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a728f74c23dso172278666b.1
+ for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 16:59:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723161583; x=1723766383; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723161584; x=1723766384; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=jkesOsPwyP4uWMXO4nnoUtJ7UJX/bGz56xyNc2GQDEc=;
- b=DFCi6HokQXGTh+RuTXcq7zD/L1vf+wVC/ytjubni8nwMS7CzwnEgqcj+si2TI85uzM
- 5OVK9wz2gQz2+putaGXzgbwD1pE4mjVN4xE0RwSyvtN/RQUKeuymYIl2+iqEaTPouVPb
- dtoelYEJ66TFva+SZa81PIRPdv3Vn2L747nNVosZEsEmzUS1nCqTqJPn6AJZUCtW2Lb2
- yo2BnPDcmXNOSpV3VPFBHWnlHu8B3yt+GbAS9pkEaUcP3hHHu4FftdtfLkwGSNjclFtR
- BSt0G+4QPl5TB4roo54xI4z7dDTQbLKhlItoKmlrX6Vi1lPFy0/ddTzDJQ1icBXWvfnN
- hZzw==
+ :reply-to; bh=3G9RhTpI8+/3NayuP0N2elh0qwR/6mBQ4VCSAEH8Kz0=;
+ b=KDyyJfZzo3RTKfmwRFixePsxIMRnITdSr6hRYGSQr9r+cYtxHTxzZEfRzdhquFcRYH
+ YOvRYurm0flmV4A5qfGFbJuApNEJdiAuP8qQRbfCVKNn6L/UxWROREP3MDwiy/VD50ms
+ dU1SMBRYmJrT1w98i2EckCC+zNlGeLTD6e9DdbKFaUI2Zu39KmZCRFFkww5WVR/CtM4a
+ WNCc9EK8wwyC+t3P8kcm44WGuPwNQT0Fhx1r9i0hadMrXBSJ8a/UyuzFU2HFPhxMBK+G
+ 11+CqPBRM8OvliFGLtrGMNr3TerNfW35h9m9C+MqtGkgZL8VcszNuErN7S5KF9pzKznC
+ 9Wrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723161583; x=1723766383;
+ d=1e100.net; s=20230601; t=1723161584; x=1723766384;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jkesOsPwyP4uWMXO4nnoUtJ7UJX/bGz56xyNc2GQDEc=;
- b=kGHGPYAIbWVKjqA01CpKZsJKCxnVTeG84zfQQFSc9skmR4h0oqtbPFoqXK4EJsBLlc
- uIavo/7fVBjhhYrorMg1Ye3X2WYCNCUcG0asoS8Rqig26qGFXAknGoRoR4mm2lRTo0Yx
- b5xUqjkvcBafPjyuS++5HBoyi2befNUOAaKs5Uy9FH32lL8jO8/x26B1QACuZzHwDSp2
- 5D88g3gz/k+zUpj22LkZd+Pe6OuGBnYkazgtuy77VnNNPNHc6ODGDVk6tc4+2TyqV5o2
- UgtC/TQT2Q1TKf6+t13+wHfdtGsyIu6o9JOPGVs/HXgdbaPJ7Gi5+EaMnE3e2hXcANFk
- +VKg==
+ bh=3G9RhTpI8+/3NayuP0N2elh0qwR/6mBQ4VCSAEH8Kz0=;
+ b=ShIUO7YiouRsYeOeAhaMyNpzzjt/Qx4p0O1bnz/WOOEruYmLKe+iZwElbq4SUv2m1u
+ /Ny3haL4Qm4tA2pVrrLhgCnYUxYgdjK4dUJ0I28EaX1eUUzPdNTbDQiwfF8LV5nahDHo
+ S1ZXE8pTtE2jKy27pRzr/geju4FcbrSt5sqCkxLpz9o9DUae9ZfNxlg5NaXE+gPD+0Hq
+ xLCjZmwWm6WehBrC+ELIBByTZvEE360P2npDEY++M0rDF63Ui1lfd3KgOiEtgGIlCJqf
+ Ifcjg7tPIQ/ygEDYfx/ji1oI53gFLT0IK7fH2K2p9nh3WnvaTu5MGF5oP8W/pRpk7y+u
+ 5pyQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUzKNSUUj16yR9GaUugAZRbivF+gMRc0ibXiQnlvsmUelSWQbHybtjOnMspkw5dSFBjiGuKLAS3JfQEcNE4cUyecn+XcA==
-X-Gm-Message-State: AOJu0YyOcJ3NITDxjyCJDTZgJ+Ppcd6ImzIKxhcY30bCIe3qTNC4tIRb
- i0xHuGOytb8JgDUp7Xg5tIo/rxY2WvG4uIHOx+S4mJukkJfCv9h8i3JSRYVR42JmDcK4y+w3Ot1
- I
-X-Google-Smtp-Source: AGHT+IEpoJbr2ilRrHcNg8NJNlCkdbMzrjW8nrD5Huv3LRsSChPxr4mHnLCSAviQt7VLawRwnq+YcA==
-X-Received: by 2002:a17:906:7943:b0:a79:fbf0:8106 with SMTP id
- a640c23a62f3a-a8090c32544mr284643866b.6.1723161582795; 
- Thu, 08 Aug 2024 16:59:42 -0700 (PDT)
+ AJvYcCXyhMjWKB1TSGzWsMthyTTjBn92JrtherdRnyaYirvG59NfReY5zEkmHq9lsDfOT45N7VIGIpc=@lists.denx.de
+X-Gm-Message-State: AOJu0YysFDxATFeeVeYSpQExPiT7pf68CAX6QFZpZAPXSJpF/XPI/PkZ
+ 5AVzn2ILuy+FhuC8auXRYUqpVe4N/tqdXaTQWpyitGAF6C9dWL+PPINkdsLtDUo=
+X-Google-Smtp-Source: AGHT+IE7DADOmh+8QdzbjGCZK1PNXv/vTQAn+J/KdNAy9GC3Fx+7QVgllkeLeTkmJ5Bsj3XclRJBhw==
+X-Received: by 2002:a17:907:720a:b0:a7a:9a78:4b4e with SMTP id
+ a640c23a62f3a-a8090d9684amr248712466b.40.1723161583766; 
+ Thu, 08 Aug 2024 16:59:43 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7dc9d45423sm784047866b.134.2024.08.08.16.59.41
+ a640c23a62f3a-a7dc9d45423sm784047866b.134.2024.08.08.16.59.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Aug 2024 16:59:42 -0700 (PDT)
+ Thu, 08 Aug 2024 16:59:43 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Fri, 09 Aug 2024 01:59:28 +0200
-Subject: [PATCH 05/11] mach-snapdragon: allocate fastboot buffer
- dynamically
+Date: Fri, 09 Aug 2024 01:59:29 +0200
+Subject: [PATCH 06/11] mach-snapdragon: populate fallback FDT
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240809-b4-snapdragon-improvements-v1-5-7c353f3e8f74@linaro.org>
+Message-Id: <20240809-b4-snapdragon-improvements-v1-6-7c353f3e8f74@linaro.org>
 References: <20240809-b4-snapdragon-improvements-v1-0-7c353f3e8f74@linaro.org>
 In-Reply-To: <20240809-b4-snapdragon-improvements-v1-0-7c353f3e8f74@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -82,21 +80,21 @@ To: Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1488;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1623;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=QEEmnRtKXeaUbPt4b6LOBPWMVC6ST33UIa7LHVKtDzo=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmtVvnqkkV18/QFmW5I+AnVBC1Hfhd9fIjcyAfJ
- SVBc3NEiGeJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZrVb5wAKCRAFgzErGV9k
- to6YD/4hTTKm5lHm1Demrpt1IemV0WvdPORjNm76h+x0eEqMnd9GmlD8RgYSJAdBnd/B0yZEGxk
- NAPtrntg0+9Ip/+h9v9uJDiBVqq6AnqNOfciQ9hkL0mIVeXUCF+BPMriJHe5ynUZb62ZJNhZpZ0
- h+84E0iFgJU/WVyUrkFJJQK2+wFIOSjZBtOfb3I+z/NIlF/5e+PlIi7252zDgX2mbX4KzPinbTx
- GogI1/Usg73jR+eAzLq9pNCzWlhQILP/Q1vW0cjZNHVdd6NoaziBgQ2YHLd5mNk8RvOeIygerJf
- m7VGGxbnDqJtVHiavoA+a3s+RVMQ0BIFoArzCNIDY6E/68TPj7+s/c3RJ+FBC8kubh1HSJtrMLc
- iO4tgF/KPwZnrrg7qa9GekwwzAI/an4tU2qnQReT+FjhJ3VQv7jYa8ZSSWbBTtrAQ9Bz5SytI7h
- dDuf8WuJDXPBJp9jVHQ8ndfkdgBTp1r6e+ZDoSCWTE95zrhTAUNN9ChErnhYLlcMG+su5tkP0Z+
- lGsCzXN7hAMKd/OvRpxX42VsNti3kD8IjzAmQp/JtXv8vTcIX3577xppUmkbrnHlX348etgFY2I
- 4W/lqkBa4Y6etukBv3kskHJ568Dl15M2dwYFC5dQ2jK52/K3f0abCoFZ3Yk1QhmeTbuGpdXD6HM
- 4GiJh1lo6lTRFgg==
+ bh=rg6FOSTIuaN7QQZlGRJ0L5q042tTeo5rq40zvWz8PBE=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmtVvnzLpIzvVAgOqLAMcULso3v/l5UEUOs734y
+ v6wpWR0AhmJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZrVb5wAKCRAFgzErGV9k
+ toswEACk74v98PLIW22JoOOoMB0M0QCQRL+jRBXVgdPw/LvTMae5gFQoMlx38KWf3PiBx4C57Y2
+ RJ67NpYRP5XYhaaAQonArmUikyDFj6KHcNB1SZIf/THDe51aS8LwUbk1Sx7VZ7S2JTMPwHmdbMG
+ HSOxFG5UNpdFabY/x4jwNxEytHW55Ackr5iNMonMS5gQTLtRTXKtDRP8so+JkHXcYOtxqgnqtlw
+ NcJg1v4XuO8cF8gyp+yEvUWx8z6s/l4JtqpdB/836fo9LsVfEMlK0c9cck9EL8oVJhCdyCxOjXf
+ AiJ+HV9U9/fRKBE+5m03zvO8mMf6X5mSY6F+PY2k/Qk6oqsFlOOAJQ4UqQ5zklvhyvi3bRocu1G
+ XcCwaOz7aohr5bPhkX30GPAyrETSaD4yechkrfKkZRpyXRpQTJexafO502r3saXNpGgG+2EQkAJ
+ Rn36rvgJJyHLiO4mgPxQaX0zPw0l4n3bGWqg+a7ul0uRjyhqdbCSv+QQ96r2E78BCkHSQFJUU49
+ D9v/k7I/JgqyTBjbExxtTRrY7sxT262CSWhMfz9FMB5i4A7Xv37yASf7dgmT1nzCQYYsQDyWdyb
+ 36K2hXqu7ZHi0ycUV9UYblfYfauFbkRHeL3Dd3V8CkmJ2QF91Z0A49ViMZHJPhZ6tRZrMbSXnra
+ +WU5r0kTNGhhCMA==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -115,43 +113,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We don't know at build time where a sensible place for this is, allocate
-it at runtime like the other variables.
+Set the fdt_addr_r environment variable to a region of LMB allocated
+memory, and populate it by default with a copy of U-Boots FDT. This will
+be used for Linux if no other DT is provided.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/mach-snapdragon/board.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ arch/arm/mach-snapdragon/board.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index 36335627f4ff..37925c40f36f 100644
+index 37925c40f36f..8c0c7394698b 100644
 --- a/arch/arm/mach-snapdragon/board.c
 +++ b/arch/arm/mach-snapdragon/board.c
-@@ -410,8 +410,13 @@ void __weak qcom_late_init(void)
+@@ -423,8 +423,9 @@ void __weak qcom_late_init(void)
+ int board_late_init(void)
  {
- }
+ 	struct lmb lmb;
+ 	u32 status = 0;
++	phys_addr_t fdt_addr;
  
- #define KERNEL_COMP_SIZE	SZ_64M
-+#ifdef CONFIG_FASTBOOT_BUF_SIZE
-+#define FASTBOOT_BUF_SIZE CONFIG_FASTBOOT_BUF_SIZE
-+#else
-+#define FASTBOOT_BUF_SIZE 0
-+#endif
+ 	lmb_init_and_reserve(&lmb, gd->bd, (void *)gd->fdt_blob);
  
- #define addr_alloc(lmb, size) lmb_alloc(lmb, size, SZ_2M)
- 
- /* Stolen from arch/arm/mach-apple/board.c */
-@@ -426,8 +431,10 @@ int board_late_init(void)
- 	status |= env_set_hex("kernel_addr_r", addr_alloc(&lmb, SZ_128M));
- 	status |= env_set_hex("ramdisk_addr_r", addr_alloc(&lmb, SZ_128M));
- 	status |= env_set_hex("kernel_comp_addr_r", addr_alloc(&lmb, KERNEL_COMP_SIZE));
- 	status |= env_set_hex("kernel_comp_size", KERNEL_COMP_SIZE);
-+	if (IS_ENABLED(CONFIG_FASTBOOT))
-+		status |= env_set_hex("fastboot_addr_r", addr_alloc(&lmb, FASTBOOT_BUF_SIZE));
+ 	/* We need to be fairly conservative here as we support boards with just 1G of TOTAL RAM */
+@@ -435,13 +436,17 @@ int board_late_init(void)
+ 	if (IS_ENABLED(CONFIG_FASTBOOT))
+ 		status |= env_set_hex("fastboot_addr_r", addr_alloc(&lmb, FASTBOOT_BUF_SIZE));
  	status |= env_set_hex("scriptaddr", addr_alloc(&lmb, SZ_4M));
  	status |= env_set_hex("pxefile_addr_r", addr_alloc(&lmb, SZ_4M));
- 	status |= env_set_hex("fdt_addr_r", addr_alloc(&lmb, SZ_2M));
+-	status |= env_set_hex("fdt_addr_r", addr_alloc(&lmb, SZ_2M));
++	fdt_addr = addr_alloc(&lmb, SZ_2M);
++	status |= env_set_hex("fdt_addr_r", fdt_addr);
  
+ 	if (status)
+ 		log_warning("%s: Failed to set run time variables\n", __func__);
+ 
++	/* By default copy U-Boots FDT, it will be used as a fallback */
++	memcpy((void *)fdt_addr, (void *)gd->fdt_blob, gd->fdt_size);
++
+ 	configure_env();
+ 	qcom_late_init();
+ 
+ 	return 0;
 
 -- 
 2.46.0
