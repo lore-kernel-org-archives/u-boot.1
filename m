@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C97DFC52D7B
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 00:01:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DB07C52D7B
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 00:01:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5BBA888E7;
-	Fri,  9 Aug 2024 01:59:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5B0AE88BD6;
+	Fri,  9 Aug 2024 01:59:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CSW68MEQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qt3PMB4j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FA9788BD2; Fri,  9 Aug 2024 01:59:51 +0200 (CEST)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id 005DF88BD6; Fri,  9 Aug 2024 01:59:51 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3873388BBD
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 01:59:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F92287A09
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 01:59:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-52ef95ec938so1648531e87.3
- for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 16:59:49 -0700 (PDT)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a7a843bef98so170006066b.2
+ for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 16:59:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723161588; x=1723766388; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723161589; x=1723766389; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=3n/U7bezp4FdaWE2SHroWzelPoINOlsWsoUiLqRfETo=;
- b=CSW68MEQMl0AOWLiTF7nhiiCCeekKiQ84wMREHWeS05USUTl+NRlydVHSWfzJ+Gqqs
- jYgNv9ku7s7TwfqLInjhgtT5cRnTNgZebe5o3YhyxKsR+F9AHHK+3OYyoLxTN+4vYIzz
- tkcuSoa3uutsdhRag8gyE9ddb95ma+AM51QlLFiQFUpsxSyGrrAe4kRSflyADxFXhoMo
- 7A+TsF6TWJ/6uGEtpLQAIMmXE+9DpFjBrj34b5SURSYK+SGzwDicaqJGl8HA5i7W2aYJ
- FK3WAn2eVOs8gTIyp+Pwfx3xBWfAkyo8WjdvRHQBHkkmoW3a6J6y/y64VVl85icx+yVX
- 7JlQ==
+ :reply-to; bh=WgBJo06YVMb8dLpylgA2lYh9LVLr1cX87NfXKpGySbs=;
+ b=qt3PMB4jJA+ECWTmiK/P0x6gTnzi++kmTN2Vipo3DnPdoNouti1qk66ykMjylh9ozf
+ 05+LiqFdbT53hJ4dEQvdW06fkVG1li/KxmyBo06YXw10X86CuwoWBc1h1xZRvunzAr85
+ jtQW/DTMEblEMKQ+ac+N1jGIjlhRehQuQCq440/HtOm3TAPMMcKq9nzRvjrg397ZYhQ0
+ keURgvaCOH4X0W/gT/qoZAUxpgDQabiGP7d2DIRhrtlq/q6JISW/2KBOpnCwIKlShjKU
+ f1apw0Ayw3DGI3jG6MAH8oYCLQJOdzENsZWX0PNgOraudee2nv+q8bNp9pBUPfO2nWFc
+ RBZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723161588; x=1723766388;
+ d=1e100.net; s=20230601; t=1723161589; x=1723766389;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3n/U7bezp4FdaWE2SHroWzelPoINOlsWsoUiLqRfETo=;
- b=jVORkFpvX5/uoqFZ1OvoYIaOG9xH/Yg0au9sPS56M3P+M8LyJ6yKmVtD6KISYdAAq8
- lVxrZkk7zPH5Jasj1xsxNnx5gy8AUspa2MZHnzebZmOkn5BJOJGTDgUZtfTywIuncP6t
- 45++vMsGSrbNcD9EGIXVoqZjdc9k5idi6JYhhjSp76iWREhYtE1oy64mU3uSTv9s/uiq
- P8VATt6mPkDVmMEILlZtajJDhhLJQAbcYqlzZ7hv62B4Vfz6zuEwUUzeFiLC9DBFm1Gq
- IlTPT0YXI77ncWm9T8n6CyQus0hz7KJsgByLhP9vr1g1ABd3tFFQHhMsuWznK7zK2nmk
- 897g==
+ bh=WgBJo06YVMb8dLpylgA2lYh9LVLr1cX87NfXKpGySbs=;
+ b=nZKTuapGZ3e8rLMiWeIabzyU+u6WM24OY1o+cydpCaIAMgp1PZni0eIbe/gXJqMkH5
+ nweUk8QlNxn1k1iB0b7mzX+ol0crCx5g3i/j4/Wcpm8rM2LCn/hLCVApBdYLQ4cfOTyq
+ PESojF7ZLfe/EOFZNkPGO8wShZQsbYKpCBub2xRYhDRoT6+PTiEc0zNSNoH+NRgAAZ7Y
+ IgVYgJePAKCLdIfBfOIIW5z3W2oicRlKKpJNUG6lwJctiaWiSDr9J07nin1Gfuv/Djud
+ ZVcpS+vLACcVndbnaolt+4bIrpOHjAHCG5Qn3OOA9zoDvHKHWVDsq1SlLSmi1j8ft8dy
+ LD2w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVR0/xpAGQ6Y5uC1nsZSFR3zU6qcE1s/tNZInufASJSErrXekuttQuue+AAH2mniXaE1IVFHoe+wTapYKn8CmyKx/eAfQ==
-X-Gm-Message-State: AOJu0YxtFqE5Yx7hj8LSZSma2jucp6L9mD0amdZAxnAPfLJK4UtJeqzI
- GCXPYSSNHBpuYZ04byui5Sq4o8ADsvwJotiEcKUMYWExNvDPPyIZ+lCXZl5hwZE=
-X-Google-Smtp-Source: AGHT+IEoBiuApIwS14rTFTLsXfNhCNubRphxkshXY1gnJb99AkDwvejHYcQe3vde7h01IKT4fJycUA==
-X-Received: by 2002:a05:6512:1149:b0:52c:e012:efad with SMTP id
- 2adb3069b0e04-530e5817260mr2719648e87.12.1723161588252; 
- Thu, 08 Aug 2024 16:59:48 -0700 (PDT)
+ AJvYcCWlW7Y3AsM0H+OcT+iVdgByKoJ3DYaFk0yQhnF4jAL/w+AGf7VKokIj+QA4mR8PLTLKURyjvwNzt2m6OjzqEwT5IhrBWQ==
+X-Gm-Message-State: AOJu0Yw+bQKUQsWtSYm+toIUkFmAdC8OBF7XfbTDoXEaZJnMwUL8SOp8
+ Ma/In6flvZIePrEcP9o+JHTXu/413kAmFiVqhk4MEUvuhKfGC130wSJYjlZ7F+E=
+X-Google-Smtp-Source: AGHT+IEOykOLuneX0Um/eNnARr8wPRDe5O696dzatkQdmAD04tDzUBy+xO3JfFv6M1v4qikwTNsEqA==
+X-Received: by 2002:a17:906:f58a:b0:a7a:be06:d8e3 with SMTP id
+ a640c23a62f3a-a8090e3cd30mr248174066b.46.1723161589589; 
+ Thu, 08 Aug 2024 16:59:49 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7dc9d45423sm784047866b.134.2024.08.08.16.59.47
+ a640c23a62f3a-a7dc9d45423sm784047866b.134.2024.08.08.16.59.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Aug 2024 16:59:47 -0700 (PDT)
+ Thu, 08 Aug 2024 16:59:48 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Fri, 09 Aug 2024 01:59:33 +0200
-Subject: [PATCH 10/11] soc: qcom: cmd-db: map cmd-db region
+Date: Fri, 09 Aug 2024 01:59:34 +0200
+Subject: [PATCH 11/11] qcom_defconfig: bump CONFIG_NR_DRAM_BANKS
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240809-b4-snapdragon-improvements-v1-10-7c353f3e8f74@linaro.org>
+Message-Id: <20240809-b4-snapdragon-improvements-v1-11-7c353f3e8f74@linaro.org>
 References: <20240809-b4-snapdragon-improvements-v1-0-7c353f3e8f74@linaro.org>
 In-Reply-To: <20240809-b4-snapdragon-improvements-v1-0-7c353f3e8f74@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -80,21 +80,21 @@ To: Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1704;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=916;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=nxXveBh4xzdjBB4rEUL354QZZfPHUXxpqjYxKOOFrmc=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmtVvoP3/PhFUqvHIQ+Y6yIcPgWyZmhOqdmZU20
- 29isu6ChVqJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZrVb6AAKCRAFgzErGV9k
- tjV2D/4i8IcoFZ+vpYACKNhtBYcgiiLg3Xc/qfFvUVBNC4n01jsZJCXcbXR9kbGmfkoRHlnUk4C
- ysiBO5le3SlmUs4uycaBe/Sv0jm0vCS+Ma03ipV3w4VhfA75hgOw08oQ+Drtk36GjbOvHrF6eNy
- YevewpiXAKPKkND/6bsTFR6T9106Zl97hJHWMJzKw5jHN/TtuxZdRHZAMj1t+hlWL93epLZ0udt
- 3pY4ORiD7PTBotgzZG9kd25Dg5VjngtqzPFwhWabhMcLEsZLkKmNWWRJPZe0q7+TV31j5ikIPoa
- IMaPw2sphmBbwUmn95k2Omm7738JMno5eqx5I/a8yydQpkj1abuYG9yzWktBAXMQ9FBoD5nwKLO
- x0osbECrjeYa2P8NwKUqWx25oEkRuknkZl9FTL4vuoXOEo4aTsNGSPI/nk0NrQbpY0fgbcv/Yeg
- MQQ+rNx6sLNOZMgS/hfHbbimCNjwFQo18OOLYzTk//8nQFv1CEzJ7xGJDrqR7UIj54xxBevEeKN
- p2TZNd24Oeum3uGcQ01IQtjlfmhZWTW4SbmYn2RE6hM7bFIBsf4fTNumHyvwSCIPFY0+aqgK6I5
- jvPwo7inKyqk0sA8z41CmY1y95Nzxg6phwnPGGo9mSNV3GzAgEPnLHidM4h5+dVm/BA/7xHWoT0
- KC+3lzYrK+HosGg==
+ bh=WS7c264fDxhTs31dn5TjMfqe5va8jMKSCBOGcwH9WMQ=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmtVvo0patOiEj1asJ4mCauiOnlwl4pgh/FCUPs
+ 38+JzIMFi6JAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZrVb6AAKCRAFgzErGV9k
+ tiVwEACiJwNkAwqmExVsDMlXJJJltzgZhRPzgY3lWSJNwBL3nrXlmiHF/W+JkU3wQIdRa4AlI4T
+ qMbdIHvJ8SbTgBtYZipUu9/JwUpwYBjTMnoM9UXtlbwb6XeT1GJuVmqov/20oq68ZtZ/YUZ0dyO
+ qPRYR4k8ZurYl8aC4JMtout3MsS1AdRDjqeLZgi15am32yoWiUq4EjkEa2dqOKs9cAj6NrPH9xh
+ nH/84e5zF5hCCcAum5qqU9jTzzG/afHktC0dFrBdbwPa6195w8XGp1umHqascw2CRYbGhXp0U6g
+ 8jA/6C7LvCpguazyrTOYv9YBGfAnvnwAEMpGlTZwpeSgenCNdloRLSTxRvmNTzILnMp2RTVfXJ0
+ Kh4D9f3Dtg7inP453J8J0FLwAVARX3klwMgE2vuGutcbSV06rJWX7wcWxdzqlRRjM+nbaLYIn0g
+ bYA/QVYYWXCy/1Q2lZ+M18VeNdOGJnHIxz5G7zuKEIZtDvCsMA1LGeMeeiLLcR2sbZh+SLP4dFM
+ Oo5avxk7joxfe2LvxO9sZRqwHUTpFjtX9sratUDLkadjJlOIv63x2IGZCk4aCUeBcK5TDsSMyJt
+ 4ydOTDjBXVxHkt+3UEFrFkwlBhFSiO/4wXlVSPM3eaHeFYBa1VmoQgao7Qp4mJfgYplOI0y/8Bu
+ LbhpyCsyCHSI6JA==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -113,61 +113,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On at least SM8650 this region might not be included in the memory map.
-Use the new mmu_map_region() helper to map it during bind().
+Some newer boards end up with a bunch of holes in the memory map due to
+how Qualcomm's hypervisor and ABL work. The end result is 14+ memory
+regions.
+
+Bump CONFIG_NR_DRAM_BANKS to 24 so we can handle these and any future
+expansion easily.
+
+Yes, this is ridiculous, but there is no other way.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/soc/qcom/cmd-db.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+ configs/qcom_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/soc/qcom/cmd-db.c b/drivers/soc/qcom/cmd-db.c
-index c7c5230983d5..67be18e89f4d 100644
---- a/drivers/soc/qcom/cmd-db.c
-+++ b/drivers/soc/qcom/cmd-db.c
-@@ -5,8 +5,9 @@
-  */
- 
- #define pr_fmt(fmt) "cmd-db: " fmt
- 
-+#include <asm/system.h>
- #include <dm.h>
- #include <dm/ofnode.h>
- #include <dm/device_compat.h>
- #include <linux/kernel.h>
-@@ -181,11 +182,12 @@ u32 cmd_db_read_addr(const char *id)
- 	return ret < 0 ? 0 : le32_to_cpu(ent->addr);
- }
- EXPORT_SYMBOL_GPL(cmd_db_read_addr);
- 
--int cmd_db_bind(struct udevice *dev)
-+static int cmd_db_bind(struct udevice *dev)
- {
- 	void __iomem *base;
-+	fdt_size_t size;
- 	ofnode node;
- 
- 	if (cmd_db_header)
- 		return 0;
-@@ -193,14 +195,17 @@ int cmd_db_bind(struct udevice *dev)
- 	node = dev_ofnode(dev);
- 
- 	debug("%s(%s)\n", __func__, ofnode_get_name(node));
- 
--	base = (void __iomem *)ofnode_get_addr(node);
-+	base = (void __iomem *)ofnode_get_addr_size(node, "reg", &size);
- 	if ((fdt_addr_t)base == FDT_ADDR_T_NONE) {
- 		log_err("%s: Failed to read base address\n", __func__);
- 		return -ENOENT;
- 	}
- 
-+	/* On SM8550/SM8650 and newer SoCs cmd-db might not be mapped */
-+	mmu_map_region((phys_addr_t)base, (phys_size_t)size, false);
-+
- 	cmd_db_header = base;
- 	if (!cmd_db_magic_matches(cmd_db_header)) {
- 		log_err("%s: Invalid Command DB Magic\n", __func__);
- 		return -EINVAL;
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index 8852e83a52b6..24b71ba7be29 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -2,8 +2,9 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_POSITION_INDEPENDENT=y
+ CONFIG_SYS_INIT_SP_BSS_OFFSET=1572864
+ CONFIG_ARCH_SNAPDRAGON=y
++CONFIG_NR_DRAM_BANKS=24
+ CONFIG_DEFAULT_DEVICE_TREE="qcom/sdm845-db845c"
+ CONFIG_SYS_LOAD_ADDR=0xA0000000
+ CONFIG_BUTTON_CMD=y
+ CONFIG_FIT=y
 
 -- 
 2.46.0
