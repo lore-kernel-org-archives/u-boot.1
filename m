@@ -4,54 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE274C3DA4A
-	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 08:43:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 942D3C52D71
+	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 08:50:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA6EC886E7;
-	Thu,  8 Aug 2024 10:43:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id D20C88851E;
+	Thu,  8 Aug 2024 10:50:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1723106612;
-	bh=xLeHKezVYbfRejFhdBo/C7ffdW8MBEJZZdu8eglwtxU=;
-	h=Date:To:Cc:From:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Reply-To:From;
-	b=cYjyvgLv8U4yA3QtN/og+CVzLTgA98Ngq5NTnNcT4Zp18fyaRiFEGn5qhMOEM8lIn
-	 FQ1jDykeyqHIFtPKdlihGFqfPPB6X/197G/iUyG/iBQWq6UAtN+a+EeBxq472tSKrI
-	 4Zh231z3JYz44a9TVmvWRc2+jbJZ+r7d0fBpjkCvjNXb/sZHEiQvFv5Jvru36N0TqK
-	 kfdLOjr6xLl0YvwiqNFM0xrwvYz8e52NrGBqU8kiBYbkrsiAJNm6/2H9pR69Ia/L12
-	 kjGeJOOp6NDwcIZFCGe66PkEsDZrj5Sv7A4ybAJcQmMAeB2KjrhcY1qQxG23hNoHXX
-	 nBPSWxbL1maHw==
-Received: from [192.168.1.107] (89-186-114-92.pool.digikabel.hu
- [89.186.114.92])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="o2DMKcj2";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 0893688A77; Thu,  8 Aug 2024 10:50:06 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E72AA880DE;
- Thu,  8 Aug 2024 10:43:29 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1723106610;
- bh=xLeHKezVYbfRejFhdBo/C7ffdW8MBEJZZdu8eglwtxU=;
- h=Date:To:Cc:Reply-To:From:Subject:From;
- b=eHC/sdYbtR8dRHRnjQUIRvkV0jNT1hIzcngKkGBB+25d064aeiWAEZEiyM4CkHf9w
- mkjbgHsETUsOcbv+UcKXtzKLtSNJrmURzeb6bOyFdldJv2FL0HoyQdfZN4ewKfbm1P
- CebPdmbsQaJLSKjpR5Z/eEqbQr0CKoEeCYsIV9L+cFGXvhvVH5tYTwHdGf2gtXoKQL
- 0GFvSi8pVp66iD4uFSC2MyZwXWJ9nh3iPhKEmc64EVLMUS20imq4RzggLD31G5W33J
- QWKO0xvr7jaVSk7LOwDLst2TliMl++9Uv3Jm4Jep1XC6IOeFinv+1n41j5Yycbvqeg
- HQrIMLAs+5Fog==
-Message-ID: <8d333c2b-2aef-bd73-4489-f79fa6be84ed@denx.de>
-Date: Thu, 8 Aug 2024 10:42:47 +0200
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id AC820881E7
+ for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 10:50:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a7d89bb07e7so90103066b.3
+ for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 01:50:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1723106999; x=1723711799;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=7nWOvPk3exV8lRZUE8rg9Vp4KBRzI7PNGaXxg3ikxHg=;
+ b=o2DMKcj2810BVyFDSNjFQFd/OWhyIMTrPsqSmBrwHUgOZhqqwliWHp8rZ1O3mThy0I
+ ZlSU/jMYDwmVd2kIz/8uUjJ5c3vPg9CujKIsLC4YxHIbYHk2UObb8dOA29/aaq3bUGEo
+ UKb0tdl11STZZJS7roC6a6Soa5taoiYW+R7Yw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723106999; x=1723711799;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=7nWOvPk3exV8lRZUE8rg9Vp4KBRzI7PNGaXxg3ikxHg=;
+ b=oPmix1EYPfjj/6dPAF0sMkzyN+Ni8X7xFwmvympMXaDCU+CYQGGfSSQlScfHXIyocN
+ DZjq3A1FYJEdBJ+hEHXcnjBdZk58FIEJXYTqysRNwJU5hMdxUg+vUdA37CRDw7aIznnd
+ J1mJAdsHH+RjrQl1/PVbVd8Phqw0g155kIQKcCn//WDiU7ow0kfw4d4GGk50lKYnVgG1
+ FBzq9oM9EWVmyrzGnbYyZgYUR+2lpwcBwqC40hsZzid+ezo8WJQ15RNQkGA9KGC1bdIr
+ 6qTuHBaEZe+a4NYcR1J6c39HU3CYbKITsSEuV97elFUf9bra9VQv8N6H5P/g2fX8Jgkj
+ jBLw==
+X-Gm-Message-State: AOJu0YygUGJGnL0EuaESF9c4Di8XCYCeWQm5CLLf5V1RUAthFzNDTzVt
+ 6PvO9Leg4dQrsM1RgwYz0HN1FkML4JuZh7mjHUG32CXf5RTsqu1OWxBhyzoyQWq6RbiGMWcZJOu
+ t/CFjK1lhopPLBKduDLK7pm28omcGzZZUSGjWBGwg+09ZrMTq00c=
+X-Google-Smtp-Source: AGHT+IHPccQvDD/Ynl8UInobhIX+dGJBoomvu1YwHXM88BfI+Vi8LC0gmv2tilNBFKwQrkmIkCXE8JXCzekqgUDZaBk=
+X-Received: by 2002:a17:907:f160:b0:a7a:be06:d8e7 with SMTP id
+ a640c23a62f3a-a8090e9dbedmr85707766b.44.1723106999285; Thu, 08 Aug 2024
+ 01:49:59 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Content-Language: en-US
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Thu, 8 Aug 2024 10:49:48 +0200
+Message-ID: <CAOf5uwk7LP3T79P7qP0DsTKR7WOjq68y7y6QCvC9P=UPgU6-0w@mail.gmail.com>
+Subject: [PULL] Pull request for u-boot-nand-20240808
 To: Tom Rini <trini@konsulko.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Anatolij Gustschin <agust@denx.de>, David Virag <virag.david003@gmail.com>,
- Fedor Ross <fedor.ross@ifm.com>, Michal Simek <michal.simek@amd.com>
-From: Heiko Schocher <hs@denx.de>
-Subject: Please pull u-boot-i2c
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Cc: U-Boot-Denx <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,120 +75,77 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
-
-please pull from u-boot-i2c:
+Hi Tom
 
 The following changes since commit b7d5ce05b1b52136af09cf34541c6a91079a4b86:
 
-   Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-sunxi (2024-08-06 
+  Merge branch 'master' of
+https://source.denx.de/u-boot/custodians/u-boot-sunxi (2024-08-06
 09:36:46 -0600)
 
 are available in the Git repository at:
 
-   https://source.denx.de/u-boot/custodians/u-boot-i2c.git tags/i2cfixes-for-v2024-10-rc3
+  git://source.denx.de:u-boot/custodians/u-boot-nand-flash.git/
+u-boot-nand-20240808
 
-for you to fetch changes up to 3d299c355912e05ba534574ac557ad0c9edd7d99:
+for you to fetch changes up to 855f9b6241407d19f01d4245456be428b5d88f52:
 
-   board: vining_2000: convert to DM_I2C (2024-08-08 05:45:11 +0200)
+  spinand: bind UBI block (2024-08-08 09:28:09 +0200)
+----------------------------------------------------------------
+
+This series adds support for the UBI block device, which allows to read/write
+data block by block. The series was tested by Alexey Romanov on SPI NAND.
+
+The patches pass the pipeline CI:
+https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/pipelines/21933
 
 ----------------------------------------------------------------
-i2c updates for v2024.10-rc3
+Alexey Romanov (9):
+      disk: support MTD partitions
+      drivers: introduce mtdblock abstraction
+      spinand: bind mtdblock
+      ubi: allow to read from volume with offset
+      ubi: allow to write to volume with offset
+      drivers: introduce UBI block abstraction
+      disk: don't try search for partition type if already set
+      disk: support UBI partitions
+      spinand: bind UBI block
 
-- i2c: samsung: Support platforms other than EXYNOS4 and EXYNOS5
-   from David
+ cmd/ubi.c                   |  78 +++++++++++++--
+ disk/part.c                 |  10 +-
+ drivers/block/blk-uclass.c  |   2 +
+ drivers/mtd/Kconfig         |   9 ++
+ drivers/mtd/Makefile        |   1 +
+ drivers/mtd/mtdblock.c      | 227 ++++++++++++++++++++++++++++++++++++++++++++
+ drivers/mtd/mtdpart.c       |  76 +++++++++++++++
+ drivers/mtd/nand/spi/core.c |  29 ++++++
+ drivers/mtd/ubi/Kconfig     |   7 ++
+ drivers/mtd/ubi/Makefile    |   1 +
+ drivers/mtd/ubi/block.c     | 130 +++++++++++++++++++++++++
+ drivers/mtd/ubi/part.c      |  99 +++++++++++++++++++
+ env/ubi.c                   |  16 ++--
+ include/linux/mtd/mtd.h     |  25 +++++
+ include/part.h              |   5 +
+ include/ubi_uboot.h         |  13 ++-
+ 16 files changed, 711 insertions(+), 17 deletions(-)
+ create mode 100644 drivers/mtd/mtdblock.c
+ create mode 100644 drivers/mtd/ubi/block.c
+ create mode 100644 drivers/mtd/ubi/part.c
 
-- imx_lpi2c: cleanups and support read transfers longer than 256 bytes
-   from Fedor
-
-- pca954x: Remove pointer to GD
-   from Michal
-
-- DM_I2C conversion for some remaining boards
-   from Anatolij
-
-- i2c: mux: Fix error path in i2c-arb-gpio
-   from Michal
-
-----------------------------------------------------------------
-Anatolij Gustschin (11):
-       board: shc: convert to DM_I2C
-       board: chiliboard: convert to DM_I2C
-       board: cm-t43: convert to DM_I2C
-       board: igep003x: convert to DM_I2C
-       board: sl50: convert to DM_I2C
-       board: rut: convert to DM_I2C
-       board: novena: convert to DM_I2C
-       board: sniper: convert to DM_I2C
-       board: vf610twr: convert to DM_I2C
-       board: cm_fx6: convert to DM_I2C
-       board: vining_2000: convert to DM_I2C
-
-David Virag (2):
-       i2c: samsung: Drop s3c24x0 specific code.
-       i2c: samsung: Support platforms other than EXYNOS4 and EXYNOS5
-
-Fedor Ross (3):
-       i2c: imx_lpi2c: Fix a typo in bus_i2c_receive
-       i2c: imx_lpi2c: Replace hard-coded bus speed value with bus->speed_hz
-       i2c: imx_lpi2c: Support read transfers longer than 256 bytes
-
-Michal Simek (2):
-       i2c: pca954x: Remove pointer to GD
-       i2c: mux: Fix error path in i2c-arb-gpio
-
-  arch/arm/mach-omap2/omap3/Kconfig          |   1 +
-  board/bosch/shc/board.c                    |  22 +++++++++++-----------
-  board/compulab/cm_fx6/cm_fx6.c             |   3 ++-
-  board/compulab/cm_t43/cm_t43.c             |   2 --
-  board/compulab/common/Makefile             |   8 +++++++-
-  board/compulab/common/eeprom.c             |  14 +++++---------
-  board/compulab/common/eeprom.h             |   2 +-
-  board/kosagi/novena/novena.c               |  10 +++++-----
-  board/kosagi/novena/video.c                | 140 
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-----------------------------------------------------------------
-  board/softing/vining_2000/vining_2000.c    |  25 -------------------------
-  configs/am335x_igep003x_defconfig          |   2 +-
-  configs/am335x_shc_defconfig               |   4 +++-
-  configs/am335x_shc_ict_defconfig           |   4 +++-
-  configs/am335x_shc_netboot_defconfig       |   4 +++-
-  configs/am335x_shc_sdboot_defconfig        |   4 +++-
-  configs/am335x_sl50_defconfig              |   2 +-
-  configs/chiliboard_defconfig               |   2 +-
-  configs/cm_fx6_defconfig                   |   2 +-
-  configs/cm_t43_defconfig                   |   3 ++-
-  configs/novena_defconfig                   |   2 +-
-  configs/rut_defconfig                      |   2 +-
-  configs/sniper_defconfig                   |   6 ++++--
-  configs/vf610twr_defconfig                 |   2 +-
-  configs/vf610twr_nand_defconfig            |   2 +-
-  configs/vining_2000_defconfig              |   2 +-
-  drivers/i2c/Kconfig                        |   2 +-
-  drivers/i2c/exynos_hs_i2c.c                |  25 +++++++++++++++++++++----
-  drivers/i2c/imx_lpi2c.c                    |  87 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++-------------------------------
-  drivers/i2c/muxes/i2c-arb-gpio-challenge.c |  11 ++++-------
-  drivers/i2c/muxes/pca954x.c                |   3 ---
-  drivers/i2c/s3c24x0_i2c.c                  |  32 ++++++++++++++++++++++++--------
-  drivers/i2c/s3c24x0_i2c.h                  |   2 ++
-  32 files changed, 242 insertions(+), 190 deletions(-)
-
-after sorting out some small problems
-
-azure build is now fine:
-https://dev.azure.com/hs0298/hs/_build/results?buildId=116&view=results
-
-Thanks!
-
-bye,
-Heiko
 -- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
