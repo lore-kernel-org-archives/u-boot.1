@@ -4,46 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C06C8C52D7B
-	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 23:46:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FA1FC3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 23:59:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD41A88717;
-	Fri,  9 Aug 2024 01:46:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+	by phobos.denx.de (Postfix) with ESMTP id 8A24C8883D;
+	Fri,  9 Aug 2024 01:59:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F8F388ADE; Fri,  9 Aug 2024 01:46:30 +0200 (CEST)
-Received: from smtpbgsg2.qq.com (smtpbgsg2.qq.com [54.254.200.128])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EC2788599
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 01:46:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
-X-QQ-mid: bizesmtp83t1723160777tlbikgv1
-X-QQ-Originating-IP: kpHLW/QDeNCCmlE/0YFp3G9IX0TkMiAib3V838m+liw=
-Received: from [192.168.159.131] ( [106.150.157.243])
- by bizesmtp.qq.com (ESMTP) with SMTP id 0
- for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 07:46:15 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 4604107742567216680
-Message-ID: <A3197B6C8DC7AE20+de210e19-38e5-4d4c-863b-e8c12880bbf9@radxa.com>
-Date: Fri, 9 Aug 2024 08:46:15 +0900
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CZ6sLMuH";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id ADE1388A2F; Fri,  9 Aug 2024 01:59:40 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 57DAE87A09
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 01:59:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a7aa4bf4d1eso187870566b.0
+ for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 16:59:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1723161578; x=1723766378; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=pj2j22ZFRUzC2Ii2PQHsVioWDBYEijJ0Q5tSejxkErg=;
+ b=CZ6sLMuHrus3v+EGhk7lf+6EWFf00c6wuTN7nmbRHRW+DOw3rxcy4EkuPXmwrDmjlf
+ CGMc4fiyTekBtb7Z5mL0HSHHeaTgH+hRLQJxstTgCDqjTJP8Qj+b6f/eziBbpX+FbSxB
+ 3C+mXBgRgV6einIcKEZ9xXsvEZq4BbtiaXTFZoj53qQ2uXJzsdxgBGW5vrPJa+lbvUI9
+ lwOHcHBD85DpMvqPM53GsjdfHK9M8HcQ7q6yAZgYZk+Sbx8qYNtOZwfxIkBlIR9UWaNc
+ 5raoTN6sQbqIGG15/SHy7zWbsqVk7iArhtbDoOWqhWMvYHxq+NVvlfXG2Gfrom2sWNv9
+ V/Qg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723161578; x=1723766378;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pj2j22ZFRUzC2Ii2PQHsVioWDBYEijJ0Q5tSejxkErg=;
+ b=A5ZVjAMmWNWGc0w6Zg7tOt3gK0fPUiyiZoldb29w5vrfZt/6y1tyFbirmCDrVF/IUT
+ rWy0SGhZBonvbCEnMr79dMQ4ErY1iRxA3RcnERM/vm1uII6mVxgoUVaexvK5Yz9Rw3TD
+ b17HhkD33RyjCTqsh/8hcNwFpAgICThbD+cz51s9Sso9h9p3MXsmsabgX/iQ1xYpEPoA
+ FaxYTWyYaV8E4Vh6/xqECQaX7Q9MECxir38TfZm+zc2FhxkRpKSnApBAOiaGm6RZQ//2
+ PYVKq5w2VvvdvCt0sFJVCP5anFQveUi16xyras2GWbbE2rJsdxLHKV2G3LMOFzvWoCs1
+ igTw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUuOQbK8IRrW4UK+U9n5aHNUfqPBNrJjISuTtdijH6D9l11pfxeMDrwa4Y85eGcEeb9J+ZQrp1QH8zsK5OWH9q7WAtiNw==
+X-Gm-Message-State: AOJu0Yw+x/o++bab9iYvYa4/xi0kX0NL1o5HJPbnVex7D3xVSSECrRJc
+ ptfTJ8aFHVfg9Qfl7iktXXLRLtyHaUNROkqnRdPuTzfNmN69bpyOi170RKFXwzc=
+X-Google-Smtp-Source: AGHT+IETTA+XrcVwI5bLn3El4/xULeBFDTOud4cRZkj+Jmbx5C9+fz56eSK0yNllGyj/pZhcV0Yz5Q==
+X-Received: by 2002:a17:907:94cf:b0:a7a:b9dd:7757 with SMTP id
+ a640c23a62f3a-a8090c25606mr292640366b.12.1723161577609; 
+ Thu, 08 Aug 2024 16:59:37 -0700 (PDT)
+Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a7dc9d45423sm784047866b.134.2024.08.08.16.59.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Aug 2024 16:59:37 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH 00/11] mach-snapdragon: various improvements for newer boards
+Date: Fri, 09 Aug 2024 01:59:23 +0200
+Message-Id: <20240809-b4-snapdragon-improvements-v1-0-7c353f3e8f74@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: dts: rockchip: disable "usb_host0_ohci" to make boot
- faster for Radxa ROCK 3A
-To: u-boot@lists.denx.de
-References: <20240802024949.122688-1-naoki@radxa.com>
-Content-Language: en-US
-From: FUKAUMI Naoki <naoki@radxa.com>
-In-Reply-To: <20240802024949.122688-1-naoki@radxa.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtp:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-B4-Tracking: v=1; b=H4sIANtbtWYC/x3MwQqDMAwA0F+RnBeoUnTbr4wd6pJqDqYlGSKI/
+ 76y47u8E5xN2OHZnWC8i0vRhv7WwWdNujAKNcMQhhju4YFzRNdUydJSFGWrVnbeWL+OmUaa+pi
+ mPBO0oBpnOf75631dP2MMX1VsAAAA
+To: Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2082;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=JTofdLWA9UG4ydo1jb75sAt+e516o13DL1EV1WBUgvk=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmtVvnQcQR4BGkVrczVh4/BmEGrvl/Uw9l/ihEI
+ 8YD1orX5GWJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZrVb5wAKCRAFgzErGV9k
+ tmB4D/wNhjnXxjOlaHp4unH7gEqeXIvJgPs8EK+CvjrbDvpb06AUJ9enO5OQ0csn9K2zsJpDuNS
+ brda3KKad2Od6X/EWxtDoyhs8LPSgOzNk1n5J/OXmQqGzmab4JULWTBASqt+nyC2bBk3WTbxEcZ
+ KX8u0QvEMZ1pWPyz+TJZB++Th0AlQoMayuY385xE6jP2c76eswtFCCv3OVvZ/vZxYGx8rZ39Xtl
+ ZSOwoG8/tk/1c4bmWx5HHlBvFP/7IOStn2FdSVeRT0cfEWJaEd4k+FRVWPo6lAgDogqBb3ggL15
+ crROL8vAEyOWzkh61igSFsFbTLae77g+cP/CLIIAQEo5DvhZfAD4FO03tAS4d2OCMvG0T5FVsZw
+ kl/IJIJ786+MdllsOaLnOxVzgiGt94luWcNo8O75gb0jeVqyoHRg9X3IjZR+0zGxNuUEVpe5Cl9
+ GbPvJ2XyCT/b0bdJSeWmq9Bln6m5/PZMNSv96+KyRlwcD16IF83L8O0mUYsmxMRLlxPBNblKrZX
+ 7chhHoLEUfTToapkRYaGW7nWEhgNOELjEo1PF307b9kAFqccrSr6+jdInZI9YEW67rVP61Q/O0c
+ ikCKR6FBcmnbr8pdkZyo3yLLpWTsOdZplmRWqzKsmD9JuB55GBU2KgbEteDD8+k3UHE+93UbjSy
+ sbRW7iExu0AXrcQ==
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,106 +114,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-sorry, please ignore this patch.
+Supporting the newer SM8550 and SM8650 SoCs unfortunately requires a
+bump in complexity for us. Qualcomm changed a lot about how the memory
+map is handed over to the "kernel", adding many holes, not mapping
+certain regions, and adding regions with 0 size. The SM8650 HDK has a
+whopping 14 memory regions, some as small as 44k.
 
-Best regards,
+Supporting this properly has proven to be a bit of a headache, but I
+think this implementation is "pretty good".
 
---
-FUKAUMI Naoki
-Radxa Computer (Shenzhen) Co., Ltd.
+In addition, we set a valid fallback fdt_addr_r in the U-Boot
+environment, allocate a buffer for fastboot, and set the loadaddr
+variable too.
 
-On 8/2/24 11:49, FUKAUMI Naoki wrote:
-> on-board USB 2.0 hub, FE1.1s, has Transaction Translator which can
-> handle USB 1.x devices via "usb_host0_ehci". so we can omit
-> "usb_host0_ohci" and make boot faster (a little).
-> 
-> => usb start
-> starting USB...
-> Bus usb@fd000000: Register 2000140 NbrPorts 2
-> Starting the controller
-> USB XHCI 1.10
-> Bus usb@fd800000: USB EHCI 1.00
-> Bus usb@fd880000: USB EHCI 1.00
-> Bus usb@fd8c0000: USB OHCI 1.0
-> scanning bus usb@fd000000 for devices... 1 USB Device(s) found
-> scanning bus usb@fd800000 for devices... 2 USB Device(s) found
-> scanning bus usb@fd880000 for devices... 1 USB Device(s) found
-> scanning bus usb@fd8c0000 for devices... 3 USB Device(s) found
->         scanning usb for storage devices... 1 Storage Device(s) found
-> => usb tree
-> USB device tree:
->    1  Hub (5 Gb/s, 0mA)
->       U-Boot XHCI Host Controller
-> 
->    1  Hub (480 Mb/s, 0mA)
->    |  u-boot EHCI Host Controller
->    |
->    +-2  Hub (480 Mb/s, 100mA)
->          USB 2.0 Hub
-> 
->    1  Hub (480 Mb/s, 0mA)
->       u-boot EHCI Host Controller
-> 
->    1  Hub (12 Mb/s, 0mA)
->    |   U-Boot Root Hub
->    |
->    +-2  Hub (12 Mb/s, 100mA)
->      |  ALCOR Generic USB Hub
->      |
->      +-3  Mass Storage (12 Mb/s, 300mA)
->           JetFlash Mass Storage Device 02K1RNH5MJFV4TX6
-> 
-> => usb reset
-> resetting USB...
-> Host not halted after 16000 microseconds.
-> Bus usb@fd000000: Register 2000140 NbrPorts 2
-> Starting the controller
-> USB XHCI 1.10
-> Bus usb@fd800000: USB EHCI 1.00
-> Bus usb@fd880000: USB EHCI 1.00
-> Bus usb@fd8c0000: USB OHCI 1.0
-> scanning bus usb@fd000000 for devices... 1 USB Device(s) found
-> scanning bus usb@fd800000 for devices... 4 USB Device(s) found
-> scanning bus usb@fd880000 for devices... 1 USB Device(s) found
-> scanning bus usb@fd8c0000 for devices... 1 USB Device(s) found
->         scanning usb for storage devices... 1 Storage Device(s) found
-> => usb tree
-> USB device tree:
->    1  Hub (5 Gb/s, 0mA)
->       U-Boot XHCI Host Controller
-> 
->    1  Hub (480 Mb/s, 0mA)
->    |  u-boot EHCI Host Controller
->    |
->    +-2  Hub (480 Mb/s, 100mA)
->      |   USB 2.0 Hub
->      |
->      +-3  Hub (12 Mb/s, 100mA)
->        |  ALCOR Generic USB Hub
->        |
->        +-4  Mass Storage (12 Mb/s, 300mA)
->             JetFlash Mass Storage Device 02K1RNH5MJFV4TX6
-> 
->    1  Hub (480 Mb/s, 0mA)
->       u-boot EHCI Host Controller
-> 
->    1  Hub (12 Mb/s, 0mA)
->        U-Boot Root Hub
-> 
-> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
-> ---
->   arch/arm/dts/rk3568-rock-3a-u-boot.dtsi | 4 ++++
->   1 file changed, 4 insertions(+)
-> 
-> diff --git a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> index 9d18f5d0b36..9078b9a67a2 100644
-> --- a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> @@ -40,3 +40,7 @@
->   		spi-tx-bus-width = <1>;
->   	};
->   };
-> +
-> +&usb_host0_ohci {
-> +	status = "disabled";
-> +};
+board_fdt_blob_setup() is refactored for readability and potential
+future expansion (e.g. if supporting multi-dtb FIT becomes desirable).
+
+Finally, a function is proposed to allow for mapping new memory regions
+at runtime, and the cmd-db driver makes use of it to map itself, since
+SM8650 boards don't seem to include it in their memory map.
+
+Tested on SM8650 HDK, SDM845 OnePlus 6, SM6115 RB2, SM8250 RB5.
+
+---
+Caleb Connolly (10):
+      mach-snapdragon: refactor board_fdt_blob_setup()
+      mach-snapdragon: parse memory ourselves
+      mach-snapdragon: set serial number
+      mach-snapdragon: allocate fastboot buffer dynamically
+      mach-snapdragon: populate fallback FDT
+      mach-snapdragon: set loadaddr
+      armv8: mmu: add a way to map additional regions
+      soc: qcom: cmd-db: use strncmp() instead of memcmp()
+      soc: qcom: cmd-db: map cmd-db region
+      qcom_defconfig: bump CONFIG_NR_DRAM_BANKS
+
+Neil Armstrong (1):
+      mach-snapdragon: use 1MiB for get_page_table_size()
+
+ arch/arm/cpu/armv8/cache_v8.c    |  25 +++++
+ arch/arm/include/asm/system.h    |  10 ++
+ arch/arm/mach-snapdragon/board.c | 203 ++++++++++++++++++++++++++++++++++-----
+ configs/qcom_defconfig           |   1 +
+ drivers/soc/qcom/cmd-db.c        |  11 ++-
+ 5 files changed, 221 insertions(+), 29 deletions(-)
+---
+change-id: 20240809-b4-snapdragon-improvements-fd6d714a7fbd
+base-commit: a2ce853383b18a2cf920268ee341f2585a11adef
+
+// Caleb (they/them)
+
