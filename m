@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC645C52D6F
-	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 03:21:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C68B0C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 03:21:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1354088C25;
+	by phobos.denx.de (Postfix) with ESMTP id 72D9688C4E;
 	Thu,  8 Aug 2024 05:15:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L3Tgegg4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ph7uiruL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B3D888C3E; Thu,  8 Aug 2024 05:15:22 +0200 (CEST)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id 59AF988C26; Thu,  8 Aug 2024 05:15:22 +0200 (CEST)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCB7388C26
+ by phobos.denx.de (Postfix) with ESMTPS id C692188C27
  for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 05:15:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-260e6dfc701so357159fac.3
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-260f94067bcso301654fac.3
  for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 20:15:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723086911; x=1723691711; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723086913; x=1723691713; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rLFXdHGMnWLYnhM9vqaerX9xibelRdBawZDKsXl43no=;
- b=L3Tgegg4y9kBcjDHAoUBC2adutksC91S77Yj0jIfkfizSk06ouIyNMIX4QBl+N/lGI
- AMdeQdrfmP4KVMZ64GiGCLLnBNKT6gljo0Ibdl712+/fXouEvbY1tzixEWsfyAM1yOYD
- DF/XXXeZxUhJoDdqxrIM3efl0pfa1FHz2OnhyxYSiO6WCRQg5B4c/sU7Jaom0ZAL7tTi
- 5+mjtTlNm/g9tJ6bW9TWUGgJsmkYakxjuX/WHdQQgUe5Es5NiTO+CIY5DFOC1MoUuYSF
- oJOTZc2baJYrouZoG/fvhFKg7QWIgBI3Cs9yRsPCCS3SjSJo/xtcE/kSGNf3umUbdCyi
- NoEg==
+ bh=Lz6mHLXj+4xDB7VMFsWWY5w7o85P1WrFzOMBrWDtyfI=;
+ b=ph7uiruLQdHm/XGlDbVHAfVp0ks3FIS1xWJLYZIj5LFDB1ffeHHHZePZRovodXzZro
+ 6qT28C+xoE4t7JP3VMpWfpZQC/FsF+JtsQC18yrHa1snWr3NGugFzkHRYfAXt/tUpKZZ
+ lPab0UsdyPO5pF02vRSEaR9c05QI6YmfF238acUgYPI5LBIwDmZ40NrwolaaPe3WgGKf
+ 6kb3ga7yS2lqP736m/owNTk2aN2k/0H9a0iD4qte+1/gRZ30FwpGPTi0h31TznwHsuT6
+ nHwO+/pJ9UCOmRLivhCFdHI7XwtKRc2weePn7kSVuXpnJ4h7a2AMoOfnb+uaMbM+noX/
+ ahog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723086911; x=1723691711;
+ d=1e100.net; s=20230601; t=1723086913; x=1723691713;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rLFXdHGMnWLYnhM9vqaerX9xibelRdBawZDKsXl43no=;
- b=FQJzvJFINUhi2DagUX1Sh+P4x1Zml5nSdDB5cvsXALeEeBJTtttLYnzUN2g4uIlile
- oChiCGHpO+JFmF6ybNvEeDPOeNkNzhBpfcpBTRDrHBjmphdbb9x+QSIwaIT8T3DPFJqD
- JxVv2gVGhcW6migZinpoAkc8vzHZuxdKwNVl/aie8SJPNFplyiIYvBABfN/uOpZPgPcB
- Y/n/G10NS+Eog6wsE93B8KXgNfys8O/nET8MYOXItI8uGUxgvXaPNo+8pOmZgqsy6HvZ
- zVQVGYArQUcgZdIHrGdqUz79+h/K/a9tSTK2qzgJhpLxpTDFA+uVR/QdviCZtIWlQWFq
- gJqw==
+ bh=Lz6mHLXj+4xDB7VMFsWWY5w7o85P1WrFzOMBrWDtyfI=;
+ b=qHqV642mfwEC3S9gxbC5uF3K52NuHUSMjfMqPbJiP2nvbwy7clxgItWxtJFazEDBMJ
+ R9F5EQTrjbLrq3yRYPj+Yicz8g0MQZ9yeoCiM6gwbG+NfrxuDPmcPYbDM1QgHrfUNNHb
+ NffwtmKRgQJwwA8hmiCUX9OCAxm/YllYhT9XmQMdEHXj0Y6zxlDGpD5+u7WvrJaN5H8O
+ SJagAt8aTouR2OJn8Gu/523xLn1KP36DaQ4I6k2S0TsXnvyXhmRC8IS3Es3tnQoJzMbQ
+ /Xr9poiRfkHgAuk9aZ2ih0RSbVoT/DGKHpxzieQi1KHY2X2Pd9YAOH/kRdgB8eA2rE+0
+ IFsw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXsODarkNZmk7BhhJxcXMGTteZPCoGAAucbPSxEPJQu2vZWL67i5MCDQcU64aCxJ6LpLy79dRwPapEiFY5FpMqIN2FIkw==
-X-Gm-Message-State: AOJu0YwntThoE20wCff88oqfYybcS/UuZfhcSNt5J5fmx4SCg+lHUeSl
- Q+QvPOQPWHzoaKtYnuxHjR8dw1R8ko/PxJk6TvM2XBCnr5l7kZsgPGYDalBcsJI=
-X-Google-Smtp-Source: AGHT+IHOUkFvWWdSiO5arzoS3iAONSrXME0obfdJIK1KNEt8ikC2LWbhpa0EFYymDhPtJbxaAR4uWw==
-X-Received: by 2002:a05:6870:71c3:b0:261:acf:e964 with SMTP id
- 586e51a60fabf-2692b7f270cmr642320fac.48.1723086911047; 
- Wed, 07 Aug 2024 20:15:11 -0700 (PDT)
+ AJvYcCURfRby/MQ9yI33gkTvY4KQpiCuU60VJ5N2hh4NP0k3xsGfawyzg5yjXYS1uQdJ22yFBgJvG34L7tJHf84urOUp/8yAKA==
+X-Gm-Message-State: AOJu0YxTVSUwFYvWGujvTckvQpLHp0htj8PLNAOw3mVFP27aFxKvAKcX
+ zQIwxxgq/d66ecBuDnwIbfbF0CFra8LC0nI9h4DVgraQYM/L4eQjAq+2Rp7VeLk=
+X-Google-Smtp-Source: AGHT+IGavAx23CsJAKtZ9piRKXCoDFCFzWF5+2ZceigHwUNadvXFr0t969NAiK3gB3AGByodzlp/Bw==
+X-Received: by 2002:a05:6870:d293:b0:261:16da:ded9 with SMTP id
+ 586e51a60fabf-2692b61a3f5mr811353fac.6.1723086913347; 
+ Wed, 07 Aug 2024 20:15:13 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2689a2f1af9sm4379180fac.13.2024.08.07.20.15.10
+ 586e51a60fabf-2689a2f2269sm4360057fac.14.2024.08.07.20.15.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 20:15:10 -0700 (PDT)
+ Wed, 07 Aug 2024 20:15:13 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Minkyu Kang <promsoft@gmail.com>, Minkyu Kang <mk7.kang@samsung.com>,
  Jaehoon Chung <jh80.chung@samsung.com>
@@ -79,9 +79,10 @@ Cc: Tom Rini <trini@konsulko.com>, Henrik Grimler <henrik@grimler.se>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v5 35/38] mmc: exynos_dw_mmc: Improve coding style
-Date: Wed,  7 Aug 2024 22:14:41 -0500
-Message-Id: <20240808031444.9619-36-semen.protsenko@linaro.org>
+Subject: [PATCH v5 38/38] doc: samsung: Mention enabled eMMC in E850-96 board
+ doc
+Date: Wed,  7 Aug 2024 22:14:44 -0500
+Message-Id: <20240808031444.9619-39-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240808031444.9619-1-semen.protsenko@linaro.org>
 References: <20240808031444.9619-1-semen.protsenko@linaro.org>
@@ -103,9 +104,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix most of checkpatch warnings and other obvious style issues.
-
-No functional change.
+eMMC is enabled on E850-96 board now. Mention that in the board
+documentation.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
@@ -121,171 +121,29 @@ Changes in v3:
 Changes in v2:
   - (none)
 
- arch/arm/mach-exynos/include/mach/dwmmc.h | 36 +++++++++++++----------
- drivers/mmc/exynos_dw_mmc.c               | 26 ++++++----------
- 2 files changed, 29 insertions(+), 33 deletions(-)
+ doc/board/samsung/e850-96.rst | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/mach-exynos/include/mach/dwmmc.h b/arch/arm/mach-exynos/include/mach/dwmmc.h
-index 7cb71be0d9fd..75d84988b7d6 100644
---- a/arch/arm/mach-exynos/include/mach/dwmmc.h
-+++ b/arch/arm/mach-exynos/include/mach/dwmmc.h
-@@ -7,24 +7,28 @@
- #ifndef __ASM_ARM_ARCH_DWMMC_H
- #define __ASM_ARM_ARCH_DWMMC_H
+diff --git a/doc/board/samsung/e850-96.rst b/doc/board/samsung/e850-96.rst
+index 0cb95473e536..0a7b6fc0c9dd 100644
+--- a/doc/board/samsung/e850-96.rst
++++ b/doc/board/samsung/e850-96.rst
+@@ -47,12 +47,13 @@ Build Procedure
+ ---------------
  
--#define DWMCI_CLKSEL		0x09C
--#define DWMCI_CLKSEL64		0x0a8
--#define DWMCI_SET_SAMPLE_CLK(x)	(x)
--#define DWMCI_SET_DRV_CLK(x)	((x) << 16)
--#define DWMCI_SET_DIV_RATIO(x)	((x) << 24)
-+#include <linux/bitops.h>
+ .. warning::
+-  At the moment both eMMC and USB features are not enabled in U-Boot. Flashing
++  At the moment USB is not enabled in U-Boot for this board. Although eMMC is
++  enabled, you won't be able to flash images over USB (fastboot). So flashing
+   U-Boot binary **WILL** effectively brick your board. The ``dltool`` [8]_ can
+   be used then to perform USB boot and flash LittleKernel bootloader binary [7]_
+   to unbrick and revive the board. Flashing U-Boot binary might be helpful for
+   developers or anybody who want to check current state of U-Boot enablement on
+-  E850-96 (which is mostly serial console and related blocks).
++  E850-96 (which is mostly serial console, eMMC and related blocks).
  
--#define EMMCP_MPSBEGIN0		0x1200
--#define EMMCP_SEND0		0x1204
--#define EMMCP_CTRL0		0x120C
-+#define DWMCI_CLKSEL			0x09c
-+#define DWMCI_CLKSEL64			0x0a8
-+#define DWMCI_SET_SAMPLE_CLK(x)		(x)
-+#define DWMCI_SET_DRV_CLK(x)		((x) << 16)
-+#define DWMCI_SET_DIV_RATIO(x)		((x) << 24)
+ Build U-Boot binary from source code (using AArch64 baremetal GCC toolchain):
  
--#define MPSCTRL_SECURE_READ_BIT		(0x1<<7)
--#define MPSCTRL_SECURE_WRITE_BIT	(0x1<<6)
--#define MPSCTRL_NON_SECURE_READ_BIT	(0x1<<5)
--#define MPSCTRL_NON_SECURE_WRITE_BIT	(0x1<<4)
--#define MPSCTRL_USE_FUSE_KEY		(0x1<<3)
--#define MPSCTRL_ECB_MODE		(0x1<<2)
--#define MPSCTRL_ENCRYPTION		(0x1<<1)
--#define MPSCTRL_VALID			(0x1<<0)
-+/* Protector Register */
-+#define DWMCI_EMMCP_BASE		0x1000
-+#define EMMCP_MPSBEGIN0			(DWMCI_EMMCP_BASE + 0x0200)
-+#define EMMCP_SEND0			(DWMCI_EMMCP_BASE + 0x0204)
-+#define EMMCP_CTRL0			(DWMCI_EMMCP_BASE + 0x020c)
-+
-+#define MPSCTRL_SECURE_READ_BIT		BIT(7)
-+#define MPSCTRL_SECURE_WRITE_BIT	BIT(6)
-+#define MPSCTRL_NON_SECURE_READ_BIT	BIT(5)
-+#define MPSCTRL_NON_SECURE_WRITE_BIT	BIT(4)
-+#define MPSCTRL_USE_FUSE_KEY		BIT(3)
-+#define MPSCTRL_ECB_MODE		BIT(2)
-+#define MPSCTRL_ENCRYPTION		BIT(1)
-+#define MPSCTRL_VALID			BIT(0)
- 
- /* CLKSEL Register */
- #define DWMCI_DIVRATIO_BIT		24
-diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
-index a9e240fd91d6..c8bf89d6d355 100644
---- a/drivers/mmc/exynos_dw_mmc.c
-+++ b/drivers/mmc/exynos_dw_mmc.c
-@@ -45,7 +45,7 @@ struct exynos_dwmmc_variant {
- 	u32 quirks;		/* quirk flags - see DWMCI_QUIRK_... */
- };
- 
--/* Exynos implmentation specific drver private data */
-+/* Exynos implementation specific driver private data */
- struct dwmci_exynos_priv_data {
- #ifdef CONFIG_DM_MMC
- 	struct dwmci_host host;
-@@ -121,10 +121,7 @@ static int exynos_dwmmc_set_sclk(struct dwmci_host *host, unsigned long rate)
- 	return 0;
- }
- 
--/*
-- * Function used as callback function to initialise the
-- * CLKSEL register for every mmc channel.
-- */
-+/* Configure CLKSEL register with chosen timing values */
- static int exynos_dwmci_clksel(struct dwmci_host *host)
- {
- 	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
-@@ -163,7 +160,7 @@ static u8 exynos_dwmmc_get_ciu_div(struct dwmci_host *host)
- 				& DWMCI_DIVRATIO_MASK) + 1;
- }
- 
--unsigned int exynos_dwmci_get_clk(struct dwmci_host *host, uint freq)
-+static unsigned int exynos_dwmci_get_clk(struct dwmci_host *host, uint freq)
- {
- 	unsigned long sclk;
- 	u8 clk_div;
-@@ -204,7 +201,6 @@ static void exynos_dwmci_board_init(struct dwmci_host *host)
- 			     MPSCTRL_NON_SECURE_WRITE_BIT | MPSCTRL_VALID);
- 	}
- 
--	/* Set to timing value at initial time */
- 	if (priv->sdr_timing)
- 		exynos_dwmci_clksel(host);
- }
-@@ -214,8 +210,8 @@ static int exynos_dwmmc_of_to_plat(struct udevice *dev)
- {
- 	struct dwmci_exynos_priv_data *priv = dev_get_priv(dev);
- 	struct dwmci_host *host = &priv->host;
--	int err = 0;
- 	u32 div, timing[2];
-+	int err;
- 
- 	priv->chip = (struct exynos_dwmmc_variant *)dev_get_driver_data(dev);
- 
-@@ -223,9 +219,8 @@ static int exynos_dwmmc_of_to_plat(struct udevice *dev)
- 	const void *blob = gd->fdt_blob;
- 	int node = dev_of_offset(dev);
- 
--	/* Extract device id for each mmc channel */
-+	/* Obtain device ID for current MMC channel */
- 	host->dev_id = pinmux_decode_periph_id(blob, node);
--
- 	host->dev_index = dev_read_u32_default(dev, "index", host->dev_id);
- 	if (host->dev_index == host->dev_id)
- 		host->dev_index = host->dev_id - PERIPH_ID_SDMMC0;
-@@ -241,10 +236,6 @@ static int exynos_dwmmc_of_to_plat(struct udevice *dev)
- 		host->dev_index = 2; /* SD card */
- #endif
- 
--	/* Get the bus width from the device node (Default is 4bit buswidth) */
--	host->buswidth = dev_read_u32_default(dev, "bus-width", 4);
--
--	/* Set the base address from the device node */
- 	host->ioaddr = dev_read_addr_ptr(dev);
- 	if (!host->ioaddr) {
- 		printf("DWMMC%d: Can't get base address\n", host->dev_index);
-@@ -255,17 +246,17 @@ static int exynos_dwmmc_of_to_plat(struct udevice *dev)
- 		div = priv->chip->div;
- 	else
- 		div = dev_read_u32_default(dev, "samsung,dw-mshc-ciu-div", 0);
-+
- 	err = dev_read_u32_array(dev, "samsung,dw-mshc-sdr-timing", timing, 2);
- 	if (err) {
- 		printf("DWMMC%d: Can't get sdr-timings\n", host->dev_index);
- 		return -EINVAL;
- 	}
--
- 	priv->sdr_timing = DWMCI_SET_SAMPLE_CLK(timing[0]) |
- 			   DWMCI_SET_DRV_CLK(timing[1]) |
- 			   DWMCI_SET_DIV_RATIO(div);
- 
--	/* sdr_timing didn't assigned anything, use the default value */
-+	/* sdr_timing wasn't set, use the default value */
- 	if (!priv->sdr_timing) {
- 		if (host->dev_index == 0)
- 			priv->sdr_timing = DWMMC_MMC0_SDR_TIMING_VAL;
-@@ -284,6 +275,7 @@ static int exynos_dwmmc_of_to_plat(struct udevice *dev)
- 				   DWMCI_SET_DIV_RATIO(div);
- 	}
- 
-+	host->buswidth = dev_read_u32_default(dev, "bus-width", 4);
- 	host->fifo_depth = dev_read_u32_default(dev, "fifo-depth", 0);
- 	host->bus_hz = dev_read_u32_default(dev, "clock-frequency", 0);
- 
-@@ -396,8 +388,8 @@ U_BOOT_DRIVER(exynos_dwmmc_drv) = {
- 	.of_match	= exynos_dwmmc_ids,
- 	.of_to_plat	= exynos_dwmmc_of_to_plat,
- 	.bind		= exynos_dwmmc_bind,
--	.ops		= &dm_dwmci_ops,
- 	.probe		= exynos_dwmmc_probe,
-+	.ops		= &dm_dwmci_ops,
- 	.priv_auto	= sizeof(struct dwmci_exynos_priv_data),
- 	.plat_auto	= sizeof(struct exynos_mmc_plat),
- };
 -- 
 2.39.2
 
