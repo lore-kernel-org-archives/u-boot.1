@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80B7EC52D6F
-	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 03:19:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6A96C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 03:19:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24BC288BE6;
+	by phobos.denx.de (Postfix) with ESMTP id 977D688BFC;
 	Thu,  8 Aug 2024 05:15:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="N8tYK29A";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="P8Or0G8K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB6D788B6B; Thu,  8 Aug 2024 05:15:08 +0200 (CEST)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
+ id 8930288B28; Thu,  8 Aug 2024 05:15:10 +0200 (CEST)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 448C788B28
- for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 05:15:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DD0988A8C
+ for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 05:15:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-3db504ab5f3so407138b6e.0
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-3db130a872fso388279b6e.2
  for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 20:15:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723086905; x=1723691705; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723086906; x=1723691706; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BEMddII/dJg7zeqKXZ6gh3nt7UHm8knkyF/Q9SP/yNk=;
- b=N8tYK29A5uvhpMPHaykBQI5oJ00k4o9Z23bhvuLHiFfxVaZsd0oPqko8wmMS3DxXYG
- qiKl3pyUPKBG0foANwcAWCTrPWRmoWcDi8NiFCR7IIr+YZO41Hj9fXa1B1xM/QyIzklk
- Gvoqxl7mhvmZK3JgWXyuqWqMiMp1Kd6FKyb1UMJA9XFbl8o0AB0FT6HkOgP0lesZiq5D
- 52DF0P8R6zCRy8P/KtK5/UNeAgiZpTxhWp2opF9/uu5xust+fybzbn5W8Oe5Hbr4E27i
- 7dW1CBqmJ6FmLVr4aO2m4AiKblX4vPlBgqR6xY6W0kuFVX7PlycgonbgbDSEei2OtO39
- sjwg==
+ bh=crDJTDIWGS2LNY90dpOb7cQutAxy6tgKbBo7wBVDAbM=;
+ b=P8Or0G8KoCtunzFsSC/lmeqejFCP8Gi+5X4+hO75aUxNmBYtUP08RYZnGxBhkdSwAJ
+ I+jAYNvTwNuOdlcFwI5XQFNUR89/KuHRVy/B6+eNiy7d8slWM+QUq1wE3i/NeI4Y/ucd
+ kmKm85PCaL3VoFLiLkcl6UmEtsrNVP6wCTAAcwlDxxQPJU8EZjKFpV/uYrj1zgVjWEHp
+ 05CTMuIEy44D+R6EaTzG7IWGUhTqxsu6So+/EY+wBo0K11I1i7tDjnUkfIvQHkgoK4YQ
+ Ihbmzu24NPJ8NOui9nNfaxNd453Dq+IwbzhuAC2okng+G4Ig1iPcMNgbJEkoSNrqIIUo
+ ZjTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723086905; x=1723691705;
+ d=1e100.net; s=20230601; t=1723086906; x=1723691706;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BEMddII/dJg7zeqKXZ6gh3nt7UHm8knkyF/Q9SP/yNk=;
- b=j/vSn0Z9nYQGztybv2qVRny3+5glFCqLPF3I544sUwRc53IuHZwaJrIViPye7vcfAN
- aylUuouUs7aUI8zklcuRI703tbhDbpLTZFZzdIZ1dXIUdsdlTT7H5c2XU3Y4M6DeSy51
- /5h2qfuTwHQf+sfAyIQwRcMoo9snsXDQYE/7+q0aDMmhXNBldSm26L5XuFN4XSIJC03q
- hbnLFdtB9qBFSg87HpQ30ei7/5+0BPnYtky642VHNqK9iznGsaImR/v3C099ugn6SQQe
- ndqlXh4uSr28rah6gca4rRTe0It8tfNAtBtmGmvhYr5jKEQT3KZV5WefI+7OKajXDRJ2
- 1MmQ==
+ bh=crDJTDIWGS2LNY90dpOb7cQutAxy6tgKbBo7wBVDAbM=;
+ b=h8SJt+V8FbrfBCrzouWyUK64uiVHgNbjPavbEzRVkdbGmqSaa9SHitE2BJD0bsirFR
+ M/Z2QNFNXltfkFyDzXuGX39ISVLE97fZmRUrO5+siwaTG6EyzTqAte1tpW5VDsAIizfX
+ pklCgnGsC/UHY82WQzTKxW6c3/14IkQzd8HRyB09DmZ3W9BcJ0gWNPNyQoLoI4tXk5+p
+ ncsSgD75hMABRyCf7K8Jb/LCUBhtNWRJ14+KbUZkHIFmV5meNBqLVK+IGQezNf90q1fu
+ O4Iv85IsS5LX/8iGFRK8Wn8hbhZWEpWYahC5f2QBBuEP7XZTQ7FVTMzMCHvaM3e7EMA/
+ 7CvQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU9sqAClWtMiih67OydsUsd34xY5LauFuRfxftMIRhXETCfcybEroDvrh9VxtC6yX8j+a+/kXVTa0cHgXVaBARQDzFGVg==
-X-Gm-Message-State: AOJu0YyN+0mRmnzEPGJI2E10c69BOHn3QNOSB7bXw0CIHqCPPzL/PfOC
- ClnOLqKq2zbtZKBJj6Im0A/cXQyzAMS7H/kakXmiCejLZ4vpD7VEMXWtH6Ild5c=
-X-Google-Smtp-Source: AGHT+IGwuKJ4cng6XjBm12jVGL6dEDWc4JcEjNio+/s5PQKYqARb4D7qYh/z8h3+Iir+Hou2Vy4gIQ==
-X-Received: by 2002:a54:4790:0:b0:3da:b3c2:b4c0 with SMTP id
- 5614622812f47-3dc3b455a2amr619017b6e.31.1723086904993; 
- Wed, 07 Aug 2024 20:15:04 -0700 (PDT)
+ AJvYcCW7SiA//l+MYVrbWJ+HCI/sdYKH1VVDrvou/ioQ9L6dle1E4dbVv2P49co+OHf0uS6VF6QG+4jB2YWDu56hxZPPpenm7Q==
+X-Gm-Message-State: AOJu0Yy6fJH90Eoly8YDs3Oq1tfjfIwAhQ19KCvaau9U1ftFB5JRDH4Q
+ ujMDqZPxEwPzHT4U3AVBGwOhJxUWf/A/jI/3NJZJ4Vv1xX2X2UQf50SnkLbhXQE=
+X-Google-Smtp-Source: AGHT+IHeZuoH7hWVCfS2yP2vYAkshIFsunCP8AV/B9zNc9/Bzx4GupIts4R4TTw6IRewW1mtsz0lrA==
+X-Received: by 2002:a05:6808:178e:b0:3d9:2626:c64a with SMTP id
+ 5614622812f47-3dc3b41c71dmr601694b6e.18.1723086905844; 
+ Wed, 07 Aug 2024 20:15:05 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3db563c77b6sm4582401b6e.54.2024.08.07.20.15.04
+ 5614622812f47-3db563b8707sm4625099b6e.36.2024.08.07.20.15.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 20:15:04 -0700 (PDT)
+ Wed, 07 Aug 2024 20:15:05 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Minkyu Kang <promsoft@gmail.com>, Minkyu Kang <mk7.kang@samsung.com>,
  Jaehoon Chung <jh80.chung@samsung.com>
@@ -79,10 +79,10 @@ Cc: Tom Rini <trini@konsulko.com>, Henrik Grimler <henrik@grimler.se>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v5 27/38] mmc: exynos_dw_mmc: Read common clock-frequency
- property
-Date: Wed,  7 Aug 2024 22:14:33 -0500
-Message-Id: <20240808031444.9619-28-semen.protsenko@linaro.org>
+Subject: [PATCH v5 28/38] mmc: exynos_dw_mmc: Move quirks from struct
+ dwmci_host to chip data
+Date: Wed,  7 Aug 2024 22:14:34 -0500
+Message-Id: <20240808031444.9619-29-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240808031444.9619-1-semen.protsenko@linaro.org>
 References: <20240808031444.9619-1-semen.protsenko@linaro.org>
@@ -104,10 +104,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Instead of using non-standard "bus_hz" dts property, read common
-"clock-frequency" property used in upstream Linux kernel. It's safe to
-do so, as "clock-frequency" property was already added to corresponding
-nodes in all affected Exynos device tree files.
+host->quirks field is only used internally in exynos_dw_mmc.c driver.
+To avoid cluttering the scope of struct dwmci_host, move quirks field
+into Exynos driver's chip data, where it can be statically defined.
 
 No functional change.
 
@@ -123,24 +122,95 @@ Changes in v3:
   - (none)
 
 Changes in v2:
-  - (none)
+  - Replaced CONFIG_IS_ENABLED() with #ifdef
 
- drivers/mmc/exynos_dw_mmc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/mmc/exynos_dw_mmc.c | 13 ++++++++-----
+ include/dwmmc.h             |  5 -----
+ 2 files changed, 8 insertions(+), 10 deletions(-)
 
 diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
-index 612c2d0c615d..bed8bd8a0fcf 100644
+index bed8bd8a0fcf..b9d655c0d5c8 100644
 --- a/drivers/mmc/exynos_dw_mmc.c
 +++ b/drivers/mmc/exynos_dw_mmc.c
-@@ -306,7 +306,7 @@ static int exynos_dwmmc_of_to_plat(struct udevice *dev)
+@@ -25,6 +25,9 @@
+ 
+ #define EXYNOS4412_FIXED_CIU_CLK_DIV	4
+ 
++/* Quirks */
++#define DWMCI_QUIRK_DISABLE_SMU		BIT(0)
++
+ #ifdef CONFIG_DM_MMC
+ #include <dm.h>
+ DECLARE_GLOBAL_DATA_PTR;
+@@ -39,6 +42,7 @@ struct exynos_mmc_plat {
+ struct exynos_dwmmc_variant {
+ 	u32 clksel;		/* CLKSEL register offset */
+ 	u8 div;			/* (optional) fixed clock divider value: 0..7 */
++	u32 quirks;		/* quirk flags - see DWMCI_QUIRK_... */
+ };
+ 
+ /* Exynos implmentation specific drver private data */
+@@ -173,7 +177,7 @@ static void exynos_dwmci_board_init(struct dwmci_host *host)
+ {
+ 	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
+ 
+-	if (host->quirks & DWMCI_QUIRK_DISABLE_SMU) {
++	if (priv->chip->quirks & DWMCI_QUIRK_DISABLE_SMU) {
+ 		dwmci_writel(host, EMMCP_MPSBEGIN0, 0);
+ 		dwmci_writel(host, EMMCP_SEND0, 0);
+ 		dwmci_writel(host, EMMCP_CTRL0,
+@@ -205,11 +209,7 @@ static int exynos_dwmci_core_init(struct dwmci_host *host)
  	}
  
- 	host->fifo_depth = dev_read_u32_default(dev, "fifo-depth", 0);
--	host->bus_hz = dev_read_u32_default(dev, "bus_hz", 0);
-+	host->bus_hz = dev_read_u32_default(dev, "clock-frequency", 0);
+ 	host->name = "EXYNOS DWMMC";
+-#ifdef CONFIG_EXYNOS5420
+-	host->quirks = DWMCI_QUIRK_DISABLE_SMU;
+-#endif
+ 	host->board_init = exynos_dwmci_board_init;
+-
+ 	host->caps = MMC_MODE_DDR_52MHz;
+ 	host->clksel = exynos_dwmci_clksel;
+ 	host->get_mmc_clk = exynos_dwmci_get_clk;
+@@ -352,6 +352,9 @@ static const struct exynos_dwmmc_variant exynos4_drv_data = {
  
- 	return 0;
- }
+ static const struct exynos_dwmmc_variant exynos5_drv_data = {
+ 	.clksel	= DWMCI_CLKSEL,
++#ifdef CONFIG_EXYNOS5420
++	.quirks	= DWMCI_QUIRK_DISABLE_SMU,
++#endif
+ };
+ 
+ static const struct udevice_id exynos_dwmmc_ids[] = {
+diff --git a/include/dwmmc.h b/include/dwmmc.h
+index 8c2500da9efe..6edb9e1a59c5 100644
+--- a/include/dwmmc.h
++++ b/include/dwmmc.h
+@@ -149,9 +149,6 @@
+ #define DWMCI_IDINTEN_TI	BIT(0)
+ #define DWMCI_IDINTEN_MASK	(DWMCI_IDINTEN_TI | DWMCI_IDINTEN_RI)
+ 
+-/* Quirks */
+-#define DWMCI_QUIRK_DISABLE_SMU	BIT(0)
+-
+ /**
+  * struct dwmci_idmac_regs - Offsets of IDMAC registers
+  *
+@@ -180,7 +177,6 @@ struct dwmci_idmac_regs {
+  *
+  * @name:	Device name
+  * @ioaddr:	Base I/O address of controller
+- * @quirks:	Quick flags - see DWMCI_QUIRK_...
+  * @caps:	Capabilities - see MMC_MODE_...
+  * @clock:	Current clock frequency (after internal divider), Hz
+  * @bus_hz:	Bus speed in Hz, if @get_mmc_clk() is NULL
+@@ -200,7 +196,6 @@ struct dwmci_idmac_regs {
+ struct dwmci_host {
+ 	const char *name;
+ 	void *ioaddr;
+-	unsigned int quirks;
+ 	unsigned int caps;
+ 	unsigned int clock;
+ 	unsigned int bus_hz;
 -- 
 2.39.2
 
