@@ -4,102 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B143C3DA4A
-	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 16:24:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 232ACC52D7B
+	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 16:30:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB51288C15;
-	Thu,  8 Aug 2024 18:22:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8EB8A88AE4;
+	Thu,  8 Aug 2024 18:30:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="h5I/NyoN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PIYtHmJv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0000988C26; Thu,  8 Aug 2024 18:22:31 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 4AB6F88AE8; Thu,  8 Aug 2024 18:30:46 +0200 (CEST)
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [IPv6:2a00:1450:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0231588BA6
- for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 18:22:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 04AB0889EF
+ for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 18:30:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5bb85e90ad5so1020588a12.3
- for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 09:22:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-2f029e9c9cfso18046001fa.2
+ for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 09:30:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723134149; x=1723738949; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ztwhd2ZuT+o4pxs8M/oCKxJB82w+kU6FY0AHck/2yUU=;
- b=h5I/NyoNj3YeF/sx8s89uXHd8iMrwAqB/BfFWmStkGWrs44amNSpizIDOV/rPGIPtf
- OdmFHBZAJglXd0RGp3KJ4yzArUuX1rKrleJr8x+EFR8mBqEx3eFOplzaZAc9VutygPKq
- eHLWTScjgTOyFzYgfCvOc0om8VVfkEnCxl+8J0pRQ2KS4YiN0Zy15mm4+nbGIrmxpqie
- J/dnV+tp4z+rg3COTIkakCmue2sxjpiqn3V4+TReKkccsqRz4I81EjZxYN66dqYBQbHx
- m2ugEzEYJgh4yDjz3SLqHeIwd3J1PwpX74MWDsEeruk80nrt/x96BCXb2v6BfCDvNwUw
- zkBQ==
+ d=linaro.org; s=google; t=1723134643; x=1723739443; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=4lY1XYcO3UvNQrf1fPgdN0oDjS7kinjwEWxhcmz78Y4=;
+ b=PIYtHmJvlvnVeKQAw2jNuV6m7W8XE+allASLqINWvvbDkBd7OHAY7PgJNko9E/ZgWm
+ BjIwK4yXMUa4ZNz4A51c+6pzFFETHd8jWFPwYNLA3DQ4tpNdXKH466CDnN5htqcqux7+
+ zm8mbs14d8buoxDCTaWNAHhXn9RuhANe//dGQbwqrlELi+64SXUPCWLf1D24L7IdMgJB
+ J7vU0ehnqFUPnBLRnwzvIyuVhfQvqUqOoY8mLsBNdItAkhfDRiz9PubvA6hBvGdM9boY
+ Y0yG3FNuFZ8OKRjbITZWH6YEPux9/XZdmwrXR0C2kY2bv/cZ0+Vy1SHQ54xgpiekeAs3
+ 1UuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723134149; x=1723738949;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ztwhd2ZuT+o4pxs8M/oCKxJB82w+kU6FY0AHck/2yUU=;
- b=eCp5cxK4WzFm0wdbIi9ol6opvoqoGeN0YzoLu6Q75pwHf4tRiMtuhbFaox0u5sjyr+
- Zahl0RyxaGEL0eBgelQV6jlRBQKHN3kMBQxT50T7rSqccnvRRInRlZ9vDs4C5KBLA5e7
- pbfZ0A5ZrTKo3LeNV+8SxHC30jwCR5ozzxX0lWeMT9BrPZvgbtt6pUqb+2LPufJoERdN
- ZuPz7426SNsHTn11qVmdeSgZhEziLMs5Ytbs8/hEXBi8YStkyOf3o/qvkr9Ek8nBh3eL
- F3v707jv+goNhQEeguovd/m84nIL3zDDFdW5R5OpZfYBsMe+EzFDRtx+uqSTDBLkIY8K
- LAVQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWjk0SiipjR3PJ00zNI9fc/eXAZKBh3OzJiceoDjfr9sduAhJQccawI9NPWc3/gr8EXarcUw2WVxvURScB4Van8YHWTNw==
-X-Gm-Message-State: AOJu0Yz+mZPQEskuu9uFAzfYlumeFvhDbd7PYFJ22MzW9Cfva0SWDteL
- bY67unSqXOw7ck5Gp601MWp+VGvNeBN+JVBMhMSl9wvLGyKMP4kTYQ5n6POuGjw=
-X-Google-Smtp-Source: AGHT+IFNTQ3CEoSwk8/pbzpI+a92V6ZyH4kuKYM23XYw1X2hUcZtkT/gAGPRvAjkzhFELtARN6HRtA==
-X-Received: by 2002:a05:6402:5110:b0:5bb:9ae0:4a40 with SMTP id
- 4fb4d7f45d1cf-5bbb218dfa2mr1765979a12.3.1723134126427; 
- Thu, 08 Aug 2024 09:22:06 -0700 (PDT)
-Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
+ d=1e100.net; s=20230601; t=1723134643; x=1723739443;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=4lY1XYcO3UvNQrf1fPgdN0oDjS7kinjwEWxhcmz78Y4=;
+ b=sM/NjCMuH4xI2kHlU4Gr5kDTFd+R04KZpimWQUfqPw7kGAwhxZOAyyKdEF48ta0nx0
+ nLkgtltp4CL4JzLmg94PDF3nm80JMEn/4+EkktnsNqvestD2q0qhHNCwYhoTA03z9xcB
+ o+spMYNGAHGGOdLZSTpUsiQN5DETSYxvxm6GAgVkROeWbUnLTkNI2UyU2SgBhwB4Hxr9
+ EDayPoeCxjMyKC+bKTfBrrb3mSClvjtUg59ieaA826IMmlwPfGdLeILABXYYn6UWPL6F
+ 9p93I6E1VuigvFzSV6/x/j2GqePX1aJ3FKCM90NEgXmU/uHbFTcEgRUb9FcBRADyWJ16
+ R/0A==
+X-Gm-Message-State: AOJu0Yw9rmQjZ3c+uvBgjAESZ61kQwhSxUlrXzo4OFWn4JWjTIbFXb+J
+ KCx41Obcod3GMN6WtUtxtwU6qAMcBJIVt0S6Cjuhf4G6D5cFzTnA20ELFjHVC7k=
+X-Google-Smtp-Source: AGHT+IGePzOytl7Jb/f/IHb80GOmsaUEbzoCv+mlFo3ibBZKSq+Kk1aqLMi0lRT5vM/NnVQmLlhSpg==
+X-Received: by 2002:a2e:859:0:b0:2ef:2e98:9718 with SMTP id
+ 38308e7fff4ca-2f19de2bfa8mr20337861fa.15.1723134642978; 
+ Thu, 08 Aug 2024 09:30:42 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:76c8:eeba:d244:1830?
+ ([2a01:e0a:3cb:7bb0:76c8:eeba:d244:1830])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5bbb2e5c8fbsm812351a12.79.2024.08.08.09.22.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Aug 2024 09:22:05 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 08 Aug 2024 18:21:58 +0200
-Subject: [PATCH v6 11/11] test: lib/uuid: add tests for UUID
- version/variant bits
+ a640c23a62f3a-a7dc9bc3cbesm755504966b.5.2024.08.08.09.30.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 08 Aug 2024 09:30:42 -0700 (PDT)
+Message-ID: <065e1708-99f6-443c-ae0a-6b183737e6f1@linaro.org>
+Date: Thu, 8 Aug 2024 18:30:41 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v8 22/23] test/py: add HTTP (wget) test for the EFI loader
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+References: <cover.1723050310.git.jerome.forissier@linaro.org>
+ <9b055b18f84755d775bf0cf4064e66801608839c.1723050310.git.jerome.forissier@linaro.org>
+ <20240807175740.GH1626301@bill-the-cat>
+ <fbe3c688-1d3a-4e07-8e20-1cefe1989752@linaro.org>
+ <20240808162030.GP1626301@bill-the-cat>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20240808162030.GP1626301@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240808-b4-dynamic-uuid-v6-11-9332e7237119@linaro.org>
-References: <20240808-b4-dynamic-uuid-v6-0-9332e7237119@linaro.org>
-In-Reply-To: <20240808-b4-dynamic-uuid-v6-0-9332e7237119@linaro.org>
-To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-Cc: Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de, 
- Caleb Connolly <caleb.connolly@linaro.org>
-X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1713;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=G4EtFnGoqlTV6gpf/ePg33yHy7zDVAcPqPA5aHctUos=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmtPCg/H8cc0A4r+lvlr/l70Z2HlRyjMuMvFCYq
- 0Iqy7Gl6QCJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZrTwoAAKCRAFgzErGV9k
- tsI1EACRhE25ZxWEAK613GDGiRmV2EygKsgmrTyLyc8XnIarAiw+WLzkZfDbaau0jPb6izMoXI1
- owr9Jn+yNQb1c5Yj7kNqr7e8lSxQXz8a5h6/BJA7/UiqvqegwdrZAW2NxN46zkNNbJm7GpUCpG/
- kdosFQE/wv9SzHelSy3CSUmeJJMKsc5566Hwe04RWgupa/OYAUXUtUs/EAg10mxqge4RotlWV8f
- WQKfoDjWtBy9kizFniVrV1vN/9BEFt0ktpRscJN7ezSM6NjmDAO407uzcft+LtqIiDEDVAzTgGJ
- 8OIQyqrcm0chCvUskTuUrZ2Yb5oqs/I92qlp/aabrHOScAaoGCrsMIaeJ+1nQ7UGYOi2fYQv0jp
- I97pvvYBraybQuS88HQDQokpd85TTl/S4SnD87UfjQFAFqWMooYylCFJBV6MxZSWScwUUqaa0br
- 0rQpAkcM/AxLHCF7H2DE6a2AAizqfhhO6yTZby5yfPA5CdiI+YUodgZmbdRFF82TlzHT3yZYZSs
- CB1QdxLgMZF3joVJClTCWGu2ZAokAVtTRnHhoTL3xOht7nysLJGq1IgaObkaYLPiSsOa5J+8YEr
- I6vX8OkaRTVfZ8Jbprd2pQsmOwWPmogD3qXdtO+SK7UzzOc23I67NJTtjPONwwBv92vtXDENEEG
- FEdeyOr1WXSKLuA==
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,63 +101,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a test to check the version/variant bits of v4 and v5 UUIDs.
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- test/lib/uuid.c | 36 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 36 insertions(+)
 
-diff --git a/test/lib/uuid.c b/test/lib/uuid.c
-index 2c6cfd42ddc3..63d36e120623 100644
---- a/test/lib/uuid.c
-+++ b/test/lib/uuid.c
-@@ -43,8 +43,44 @@ static int lib_test_uuid_to_le(struct unit_test_state *uts)
- }
- 
- LIB_TEST(lib_test_uuid_to_le, 0);
- 
-+/* Test UUID attribute bits (version, variant) */
-+static int lib_test_uuid_bits(struct unit_test_state *uts)
-+{
-+	unsigned char uuid[16];
-+	efi_guid_t guid;
-+	int i;
-+
-+	/*
-+	 * Reduce the chance of a randomly generated UUID disguising
-+	 * a regression by testing multiple times.
-+	 */
-+	for (i = 0; i < 5; i++) {
-+		/* Test UUID v4 */
-+		gen_rand_uuid((unsigned char *)&uuid);
-+
-+		printf("v4 UUID: %pUb\n", (efi_guid_t *)uuid);
-+
-+		ut_assert((uuid[6] & 0xf0) == 0x40); /* version 4 */
-+		ut_assert((uuid[8] & UUID_VARIANT_MASK) == (UUID_VARIANT << UUID_VARIANT_SHIFT)); /* variant 1 */
-+
-+		/* Test v5, use the v4 UUID as the namespace */
-+		gen_v5_guid((struct uuid *)uuid,
-+			&guid, "test", 4, NULL);
-+
-+		printf("v5 GUID: %pUl\n", (efi_guid_t *)uuid);
-+
-+		/* This is a GUID so bits 6 and 7 are swapped (little endian) */
-+		ut_assert((guid.b[7] & 0xf0) == 0x50); /* version 5 */
-+		ut_assert((guid.b[8] & UUID_VARIANT_MASK) == (UUID_VARIANT << UUID_VARIANT_SHIFT)); /* variant 1 */
-+	}
-+
-+	return 0;
-+}
-+
-+LIB_TEST(lib_test_uuid_bits, 0);
-+
- struct dynamic_uuid_test_data {
- 	const char *compatible;
- 	const u16 *images[4];
- 	const char *expected_uuids[4];
+On 8/8/24 18:20, Tom Rini wrote:
+> On Thu, Aug 08, 2024 at 03:06:05PM +0200, Jerome Forissier wrote:
+>>
+>>
+>> On 8/7/24 19:57, Tom Rini wrote:
+>>> On Wed, Aug 07, 2024 at 07:12:06PM +0200, Jerome Forissier wrote:
+>>>> Add a test to test_efi_loader.py similar to the TFTP test but for HTTP
+>>>> with the wget command.
+>>>>
+>>>> Suggested-by: Tom Rini <trini@konsulko.com>
+>>>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>>>> ---
+>>>>  test/py/tests/test_efi_loader.py | 52 +++++++++++++++++++++++---------
+>>>>  1 file changed, 37 insertions(+), 15 deletions(-)
+>>>>
+>>>> diff --git a/test/py/tests/test_efi_loader.py b/test/py/tests/test_efi_loader.py
+>>>> index 85473a9049b..64c994fdf95 100644
+>>>> --- a/test/py/tests/test_efi_loader.py
+>>>> +++ b/test/py/tests/test_efi_loader.py
+>>>> @@ -50,6 +50,8 @@ env__efi_loader_helloworld_file = {
+>>>>  import pytest
+>>>>  import u_boot_utils
+>>>>  
+>>>> +PROTO_TFTP, PROTO_HTTP = range(0, 2)
+>>>> +
+>>>>  net_set_up = False
+>>>>  
+>>>>  def test_efi_pre_commands(u_boot_console):
+>>>> @@ -110,10 +112,10 @@ def test_efi_setup_static(u_boot_console):
+>>>>      global net_set_up
+>>>>      net_set_up = True
+>>>>  
+>>>> -def fetch_tftp_file(u_boot_console, env_conf):
+>>>> -    """Grab an env described file via TFTP and return its address
+>>>> +def fetch_file(u_boot_console, env_conf, proto):
+>>>> +    """Grab an env described file via TFTP or HTTP and return its address
+>>>>  
+>>>> -    A file as described by an env config <env_conf> is downloaded from the TFTP
+>>>> +    A file as described by an env config <env_conf> is downloaded from the
+>>>>      server. The address to that file is returned.
+>>>>      """
+>>>>      if not net_set_up:
+>>>> @@ -128,7 +130,13 @@ def fetch_tftp_file(u_boot_console, env_conf):
+>>>>          addr = u_boot_utils.find_ram_base(u_boot_console)
+>>>>  
+>>>>      fn = f['fn']
+>>>> -    output = u_boot_console.run_command('tftpboot %x %s' % (addr, fn))
+>>>> +    if proto == PROTO_TFTP:
+>>>> +        cmd = 'tftpboot'
+>>>> +    elif proto == PROTO_HTTP:
+>>>> +        cmd = 'wget'
+>>>> +    else:
+>>>> +        assert False
+>>>> +    output = u_boot_console.run_command('%s %x %s' % (cmd, addr, fn))
+>>>>      expected_text = 'Bytes transferred = '
+>>>>      sz = f.get('size', None)
+>>>>      if sz:
+>>>> @@ -147,16 +155,8 @@ def fetch_tftp_file(u_boot_console, env_conf):
+>>>>  
+>>>>      return addr
+>>>>  
+>>>> -@pytest.mark.buildconfigspec('of_control')
+>>>> -@pytest.mark.buildconfigspec('cmd_bootefi_hello_compile')
+>>>> -def test_efi_helloworld_net(u_boot_console):
+>>>> -    """Run the helloworld.efi binary via TFTP.
+>>>> -
+>>>> -    The helloworld.efi file is downloaded from the TFTP server and is executed
+>>>> -    using the fallback device tree at $fdtcontroladdr.
+>>>> -    """
+>>>> -
+>>>> -    addr = fetch_tftp_file(u_boot_console, 'env__efi_loader_helloworld_file')
+>>>> +def do_test_efi_helloworld_net(u_boot_console, proto):
+>>>> +    addr = fetch_file(u_boot_console, 'env__efi_loader_helloworld_file', proto)
+>>>>  
+>>>>      output = u_boot_console.run_command('bootefi %x' % addr)
+>>>>      expected_text = 'Hello, world'
+>>>> @@ -164,6 +164,28 @@ def test_efi_helloworld_net(u_boot_console):
+>>>>      expected_text = '## Application failed'
+>>>>      assert expected_text not in output
+>>>>  
+>>>> +@pytest.mark.buildconfigspec('of_control')
+>>>> +@pytest.mark.buildconfigspec('cmd_bootefi_hello_compile')
+>>>> +def test_efi_helloworld_net_tftp(u_boot_console):
+>>>> +    """Run the helloworld.efi binary via TFTP.
+>>>> +
+>>>> +    The helloworld.efi file is downloaded from the TFTP server and is executed
+>>>> +    using the fallback device tree at $fdtcontroladdr.
+>>>> +    """
+>>>> +
+>>>> +    do_test_efi_helloworld_net(u_boot_console, PROTO_TFTP);
+>>>> +
+>>>> +@pytest.mark.buildconfigspec('of_control')
+>>>> +@pytest.mark.buildconfigspec('cmd_bootefi_hello_compile')
+>>>> +def test_efi_helloworld_net_http(u_boot_console):
+>>>> +    """Run the helloworld.efi binary via HTTP.
+>>>> +
+>>>> +    The helloworld.efi file is downloaded from the HTTP server and is executed
+>>>> +    using the fallback device tree at $fdtcontroladdr.
+>>>> +    """
+>>>> +
+>>>> +    do_test_efi_helloworld_net(u_boot_console, PROTO_HTTP);
+>>>> +
+>>>>  @pytest.mark.buildconfigspec('cmd_bootefi_hello')
+>>>>  def test_efi_helloworld_builtin(u_boot_console):
+>>>>      """Run the builtin helloworld.efi binary.
+>>>> @@ -185,7 +207,7 @@ def test_efi_grub_net(u_boot_console):
+>>>>      executed.
+>>>>      """
+>>>>  
+>>>> -    addr = fetch_tftp_file(u_boot_console, 'env__efi_loader_grub_file')
+>>>> +    addr = fetch_file(u_boot_console, 'env__efi_loader_grub_file', PROTO_TFTP)
+>>>>  
+>>>>      u_boot_console.run_command('bootefi %x' % addr, wait_for_prompt=False)
+>>>
+>>> Looking at this now that I've added wget to my Pi builds, erm:
+>>> U-Boot> wget 200000 EFI/arm64/helloworld.efi
+>>>
+>>> That's not going to work. That's what works fine for a tftp server. I
+>>> think the test is going to need to require some http specific
+>>> configuration added (and I'll locally start firing off the python
+>>> trivial http server or something, for tests).
+>>
+>> It should work because 'wget <addr> <file>' is a valid syntax for the legacy
+>> wget as well as for the new one, now that I have added support for it. It
+>> takes the address of the http server from ${serverip}. Of course you need a
+>> http server listening on the same host as the tfp server, yes.
+>> I have tested this on the RPi3.
+> 
+> OK, so problem. This is intermittent (first I saw it on rpi_3_32b built with
+> clang (LLVM-17) and lwIP and the second was rpi_3_32b with gcc and lwIP):
+> ========================================== FAILURES ===========================================
+> ________________________________ test_efi_helloworld_net_http _________________________________
+> test/py/tests/test_efi_loader.py:187: in test_efi_helloworld_net_http
+>     do_test_efi_helloworld_net(u_boot_console, PROTO_HTTP);
+> test/py/tests/test_efi_loader.py:159: in do_test_efi_helloworld_net
+>     addr = fetch_file(u_boot_console, 'env__efi_loader_helloworld_file', proto)
+> test/py/tests/test_efi_loader.py:139: in fetch_file
+>     output = u_boot_console.run_command('%s %x %s' % (cmd, addr, fn))
+> test/py/u_boot_console_base.py:288: in run_command
+>     raise Exception('Bad pattern found on console: ' +
+> E   Exception: Bad pattern found on console: error_please_reset
+> ------------------------------------ Captured stdout call -------------------------------------
+> U-Boot> wget 200000 EFI/arm/helloworld.efi
+> 2320 bytes transferred in 0 ms (### ERROR ### Please RESET the board ###
+> =================================== short test summary info ===================================
+> 
+> My first guess is the "in 0 ms" leads to a divide by zero later on?
 
+Oops! Yes, that is clearly the reason. Fixed in v9.
+
+Thanks,
 -- 
-2.46.0
-
+Jerome
