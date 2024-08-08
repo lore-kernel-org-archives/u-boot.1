@@ -4,40 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85BD0C52D73
-	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 09:28:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E92B7C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 10:02:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7009E88A9C;
-	Thu,  8 Aug 2024 11:28:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+	by phobos.denx.de (Postfix) with ESMTP id 320CE88A93;
+	Thu,  8 Aug 2024 12:02:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A4B788A68; Thu,  8 Aug 2024 11:28:12 +0200 (CEST)
-Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B039488A77
- for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 11:28:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
-Received: from secure.fukaumi.org ([10.0.0.2])
- by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
- 4789Ro6b030795; Thu, 8 Aug 2024 18:27:50 +0900
-From: FUKAUMI Naoki <naoki@radxa.com>
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- banglang.huang@foxmail.com, jonas@kwiboo.se,
- jagan@amarulasolutions.com, gajjar04akash@gmail.com,
- eugen.hristev@collabora.com, chris.obbard@collabora.com,
- FUKAUMI Naoki <naoki@radxa.com>
-Subject: [PATCH 1/2] configs: rockchip: enable gpio-leds driver for Radxa
- boards
-Date: Thu,  8 Aug 2024 18:27:42 +0900
-Message-ID: <20240808092743.1508-1-naoki@radxa.com>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fc0nPEPO";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 5450888A63; Thu,  8 Aug 2024 12:02:25 +0200 (CEST)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6416388A67
+ for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 12:02:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=max.oss.09@gmail.com
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2eeb1ba0481so9415921fa.2
+ for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 03:02:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1723111334; x=1723716134; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=bBEVHPhTFXMly7+LiaBUCjbyPQx4F8rAtBTII5wFO24=;
+ b=fc0nPEPOXvjgIxHKSltwXQT4nNsnVIejMcnLYBa5EhZ+EBTeRk+aMbTIlRQ5yQ+LAv
+ AOSkvGeC4eU8wCMawXH6CGf3v1Zsmp2bKdE2LB0wZfv2RuN3JfsAoI5cjkUUi8VvWg0v
+ q4ojEtrhxTOnREDgdxXa8FMxRqZTvrYQH5KhjSlbbgMV8UMgfPJhj/x5gd/nSnGn9ONh
+ hy8LyvzoSQkqKfI02+uOarN3EfWGxEN4DtRufSQ/MtH361rnxrkOFbkl+oC4ZEaLGSZZ
+ I1Kx+eGFZSjDlFdowSH4BGLPAGNdw3gJkKJ7+EEacq/L01Q6OgX1tY5iERA03UKohTT7
+ yWJg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723111334; x=1723716134;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bBEVHPhTFXMly7+LiaBUCjbyPQx4F8rAtBTII5wFO24=;
+ b=m4NKKwC6rFm3KfkDF44oC6imgINoNfJNKzHz/XLSWjhK/RAZYUPnpVCiiovUQiqeqe
+ OZSnknuzv2tBjFGMcLfLRYYqSYx4ZxJgquhzF7lWK+w+QOCfk0X5yJEn0xDAnvt5Nv3k
+ Q6XFD3vt3sqTwyW8MHaJdedAHB2yJjOijBuYPTaJCSuKlAYxYQuWRdOuZVTukJ8zmagN
+ ZXqNrSrfeKE1ZImKoi7rYE7ezupuFrQijUu4qSluHrktm1fUXsxXKfurzNIP1nHYmQbX
+ bO+aD7yTvS+fPEHk+VnR2gglgZu6TrZAIzE+wITYn5qi/Cu5g0uj10ALfB1SCwK1TFiu
+ URaA==
+X-Gm-Message-State: AOJu0YxYaUo8awQjdHmAi6unu1oPCXvjjG8QB2clJmwqYlLqXuNNyAvi
+ pMOhE2L3Bk2BMbDmakQtqx32/rj/Mau0CxgWDKZH/TXVS6SEKMDU
+X-Google-Smtp-Source: AGHT+IEUYfWd+KLP+OlniWLOJwIbhRL9CwWKbiNAhYrJYYEqmKpqFuIrorHPGi+7IxBCRchx2TUY9g==
+X-Received: by 2002:a2e:4942:0:b0:2ef:2f53:c300 with SMTP id
+ 38308e7fff4ca-2f19de47dd2mr8467931fa.28.1723111334013; 
+ Thu, 08 Aug 2024 03:02:14 -0700 (PDT)
+Received: from toolbox (31-10-206-125.static.upc.ch. [31.10.206.125])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-429059cbfaesm63503715e9.42.2024.08.08.03.02.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Aug 2024 03:02:13 -0700 (PDT)
+Date: Thu, 8 Aug 2024 12:02:10 +0200
+From: Max Krummenacher <max.oss.09@gmail.com>
+To: Peng Fan <peng.fan@nxp.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ dl-uboot-imx <uboot-imx@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>,
+ Ye Li <ye.li@nxp.com>
+Subject: Re: [PATCH] imx: imx8: fix build when CONFIG_IMX_BOOTAUX is set
+Message-ID: <ZrSXoq7CEEtFMu5G@toolbox>
+References: <20240807133919.4155815-1-max.oss.09@gmail.com>
+ <PAXPR04MB8459DAB001E8D22E23873CB488B92@PAXPR04MB8459.eurprd04.prod.outlook.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <PAXPR04MB8459DAB001E8D22E23873CB488B92@PAXPR04MB8459.eurprd04.prod.outlook.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -54,181 +98,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Basically, Radxa's boards are intended to turn LEDs on at U-Boot.
-enable gpio-leds driver and led command.
+Hello Peng Fan
+On Thu, Aug 08, 2024 at 03:16:54AM +0000, Peng Fan wrote:
+> > Subject: [PATCH] imx: imx8: fix build when CONFIG_IMX_BOOTAUX is
+> > set
+> > 
+> > From: Max Krummenacher <max.krummenacher@toradex.com>
+> > 
+> > Use correct function name.
+> > 
+> > Fixes: e8cd1f60d964 ("imx: imx8: bootaux: Add i.MX8 M4 boot
+> > support")
+> > Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+> > ---
+> > 
+> >  arch/arm/mach-imx/imx8/cpu.c | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> > 
+> > diff --git a/arch/arm/mach-imx/imx8/cpu.c b/arch/arm/mach-
+> > imx/imx8/cpu.c index accba502e492..834aca82bcfd 100644
+> > --- a/arch/arm/mach-imx/imx8/cpu.c
+> > +++ b/arch/arm/mach-imx/imx8/cpu.c
+> > @@ -258,14 +258,14 @@ int arch_auxiliary_core_up(u32 core_id,
+> > ulong boot_private_data)
+> >  			return -EIO;
+> >  		}
+> > 
+> > -		if (!power_domain_lookup_name("audio_sai0", &pd))
+> > {
+> > +		if (!imx8_power_domain_lookup_name("audio_sai0",
+> > &pd)) {
+> 
+> I think need to find a proper fix to this. This API is legacy API.
 
-Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
----
- configs/radxa-cm3-io-rk3566_defconfig | 2 ++
- configs/radxa-e25-rk3568_defconfig    | 2 ++
- configs/rock-3a-rk3568_defconfig      | 2 ++
- configs/rock-4c-plus-rk3399_defconfig | 2 ++
- configs/rock-4se-rk3399_defconfig     | 2 ++
- configs/rock-pi-4-rk3399_defconfig    | 2 ++
- configs/rock-pi-4c-rk3399_defconfig   | 2 ++
- configs/rock-pi-e-rk3328_defconfig    | 2 ++
- configs/rock-pi-e-v3-rk3328_defconfig | 2 ++
- configs/rock-pi-s-rk3308_defconfig    | 2 ++
- configs/rock5a-rk3588s_defconfig      | 2 ++
- configs/rock5b-rk3588_defconfig       | 2 ++
- 12 files changed, 24 insertions(+)
+The current code does call a function which does not exist. Thus the
+compile fails if enabling CONFIG_IMX_BOOTAUX for a i.MX 8X and likely
+always did.
+I think that would merrit fixing it now rather than waiting until the
+more modern API is ported into U-Boot and the code using it changed to
+the new API.
 
-diff --git a/configs/radxa-cm3-io-rk3566_defconfig b/configs/radxa-cm3-io-rk3566_defconfig
-index 48c8fcf5a66..9d8a59dfcbf 100644
---- a/configs/radxa-cm3-io-rk3566_defconfig
-+++ b/configs/radxa-cm3-io-rk3566_defconfig
-@@ -39,6 +39,8 @@ CONFIG_SPL_SYSCON=y
- CONFIG_SPL_CLK=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
- CONFIG_MISC=y
- CONFIG_SUPPORT_EMMC_RPMB=y
- CONFIG_MMC_DW=y
-diff --git a/configs/radxa-e25-rk3568_defconfig b/configs/radxa-e25-rk3568_defconfig
-index 496fee0e0a4..314c3e18908 100644
---- a/configs/radxa-e25-rk3568_defconfig
-+++ b/configs/radxa-e25-rk3568_defconfig
-@@ -44,6 +44,8 @@ CONFIG_DWC_AHCI=y
- CONFIG_SPL_CLK=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
- CONFIG_MISC=y
- CONFIG_SUPPORT_EMMC_RPMB=y
- CONFIG_MMC_DW=y
-diff --git a/configs/rock-3a-rk3568_defconfig b/configs/rock-3a-rk3568_defconfig
-index 66ac2f6d7aa..f07ae545ac5 100644
---- a/configs/rock-3a-rk3568_defconfig
-+++ b/configs/rock-3a-rk3568_defconfig
-@@ -52,6 +52,8 @@ CONFIG_AHCI_PCI=y
- CONFIG_SPL_CLK=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
- CONFIG_MISC=y
- CONFIG_SUPPORT_EMMC_RPMB=y
- CONFIG_MMC_DW=y
-diff --git a/configs/rock-4c-plus-rk3399_defconfig b/configs/rock-4c-plus-rk3399_defconfig
-index 80dc44986e7..018926cead8 100644
---- a/configs/rock-4c-plus-rk3399_defconfig
-+++ b/configs/rock-4c-plus-rk3399_defconfig
-@@ -44,6 +44,8 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_DFU_MMC=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
- CONFIG_ROCKCHIP_IODOMAIN=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
-diff --git a/configs/rock-4se-rk3399_defconfig b/configs/rock-4se-rk3399_defconfig
-index f52d4bf9913..4a31bc3cc58 100644
---- a/configs/rock-4se-rk3399_defconfig
-+++ b/configs/rock-4se-rk3399_defconfig
-@@ -48,6 +48,8 @@ CONFIG_AHCI_PCI=y
- CONFIG_DFU_MMC=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
- CONFIG_ROCKCHIP_IODOMAIN=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
-diff --git a/configs/rock-pi-4-rk3399_defconfig b/configs/rock-pi-4-rk3399_defconfig
-index e71c4588b94..95a60335a43 100644
---- a/configs/rock-pi-4-rk3399_defconfig
-+++ b/configs/rock-pi-4-rk3399_defconfig
-@@ -49,6 +49,8 @@ CONFIG_AHCI_PCI=y
- CONFIG_DFU_MMC=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
- CONFIG_ROCKCHIP_IODOMAIN=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
-diff --git a/configs/rock-pi-4c-rk3399_defconfig b/configs/rock-pi-4c-rk3399_defconfig
-index 14373933a34..9a03474a22a 100644
---- a/configs/rock-pi-4c-rk3399_defconfig
-+++ b/configs/rock-pi-4c-rk3399_defconfig
-@@ -49,6 +49,8 @@ CONFIG_AHCI_PCI=y
- CONFIG_DFU_MMC=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
- CONFIG_ROCKCHIP_IODOMAIN=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
-diff --git a/configs/rock-pi-e-rk3328_defconfig b/configs/rock-pi-e-rk3328_defconfig
-index 5cc54af3ca5..9d4b2c32971 100644
---- a/configs/rock-pi-e-rk3328_defconfig
-+++ b/configs/rock-pi-e-rk3328_defconfig
-@@ -53,6 +53,8 @@ CONFIG_CLK=y
- CONFIG_SPL_CLK=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_PHY_REALTEK=y
-diff --git a/configs/rock-pi-e-v3-rk3328_defconfig b/configs/rock-pi-e-v3-rk3328_defconfig
-index 4c6cc634bd6..c82baceedfe 100644
---- a/configs/rock-pi-e-v3-rk3328_defconfig
-+++ b/configs/rock-pi-e-v3-rk3328_defconfig
-@@ -54,6 +54,8 @@ CONFIG_CLK=y
- CONFIG_SPL_CLK=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_PHY_REALTEK=y
-diff --git a/configs/rock-pi-s-rk3308_defconfig b/configs/rock-pi-s-rk3308_defconfig
-index e450a061802..de45d295fd5 100644
---- a/configs/rock-pi-s-rk3308_defconfig
-+++ b/configs/rock-pi-s-rk3308_defconfig
-@@ -38,6 +38,8 @@ CONFIG_CLK=y
- # CONFIG_USB_FUNCTION_FASTBOOT is not set
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
- CONFIG_SUPPORT_EMMC_RPMB=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
-diff --git a/configs/rock5a-rk3588s_defconfig b/configs/rock5a-rk3588s_defconfig
-index c09e6655f02..6017a1cfecf 100644
---- a/configs/rock5a-rk3588s_defconfig
-+++ b/configs/rock5a-rk3588s_defconfig
-@@ -39,6 +39,8 @@ CONFIG_SPL_SYSCON=y
- CONFIG_SPL_CLK=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
- CONFIG_MISC=y
- CONFIG_SUPPORT_EMMC_RPMB=y
- CONFIG_MMC_DW=y
-diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
-index fc118cea7ba..c664999626b 100644
---- a/configs/rock5b-rk3588_defconfig
-+++ b/configs/rock5b-rk3588_defconfig
-@@ -54,6 +54,8 @@ CONFIG_SPL_CLK=y
- # CONFIG_USB_FUNCTION_FASTBOOT is not set
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
- CONFIG_MISC=y
- CONFIG_SUPPORT_EMMC_RPMB=y
- CONFIG_MMC_DW=y
--- 
-2.43.0
+Alternatively I could remove the handling of the HiFi auxiliary core
+from arch_auxiliary_core_up() and returning EINVAL if someone tried to
+set that core up.
 
+Regards
+Max
+
+> 
+> Thanks
+> Peng
+> 
+> 
