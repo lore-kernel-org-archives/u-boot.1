@@ -4,98 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FA1FC3DA4A
-	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 23:59:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5037C52D7B
+	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 23:59:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A24C8883D;
-	Fri,  9 Aug 2024 01:59:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 03ADC88AF4;
+	Fri,  9 Aug 2024 01:59:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CZ6sLMuH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uZGDcl+a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADE1388A2F; Fri,  9 Aug 2024 01:59:40 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 7EE9A882F0; Fri,  9 Aug 2024 01:59:41 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57DAE87A09
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 01:59:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8866A887E6
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 01:59:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a7aa4bf4d1eso187870566b.0
- for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 16:59:38 -0700 (PDT)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a7a9e25008aso184103666b.0
+ for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 16:59:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723161578; x=1723766378; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=pj2j22ZFRUzC2Ii2PQHsVioWDBYEijJ0Q5tSejxkErg=;
- b=CZ6sLMuHrus3v+EGhk7lf+6EWFf00c6wuTN7nmbRHRW+DOw3rxcy4EkuPXmwrDmjlf
- CGMc4fiyTekBtb7Z5mL0HSHHeaTgH+hRLQJxstTgCDqjTJP8Qj+b6f/eziBbpX+FbSxB
- 3C+mXBgRgV6einIcKEZ9xXsvEZq4BbtiaXTFZoj53qQ2uXJzsdxgBGW5vrPJa+lbvUI9
- lwOHcHBD85DpMvqPM53GsjdfHK9M8HcQ7q6yAZgYZk+Sbx8qYNtOZwfxIkBlIR9UWaNc
- 5raoTN6sQbqIGG15/SHy7zWbsqVk7iArhtbDoOWqhWMvYHxq+NVvlfXG2Gfrom2sWNv9
- V/Qg==
+ d=linaro.org; s=google; t=1723161579; x=1723766379; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=es/KIY6CL6KY9XX8tCEPp9SwT/zLGIVmiGJ0iXx4Zf8=;
+ b=uZGDcl+aetekt5v8hAf/PBRbuGXqL/sWKGeQpZVICsVD/JWQZtHZVSIuaTvgLGG9s4
+ u8mUua+OtgOmaWzmiA7qAmTOON3k4tzqxBCpKhdam/0hH/YZLpSIosFGdrTR7R8U9jXi
+ 24RFtL2e+dU1P4o1F4h8vjaAOiFJiPqBlcCByMLyrlymxXL4tVag5YJRvlfv3l+s5CkI
+ lSub4gO6CysWd0B2iYvFPQXpNpSIN02uMYFiG3J4V0np8CZEEgRLZJhSeF62/xU47BG+
+ t+sBWTwkf4GLFvI5UKUzBoAvAtmbCSoSeLKoyLbw6OS6yIHoJn7wzpSfxxOMEsEptZ0J
+ KjJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723161578; x=1723766378;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pj2j22ZFRUzC2Ii2PQHsVioWDBYEijJ0Q5tSejxkErg=;
- b=A5ZVjAMmWNWGc0w6Zg7tOt3gK0fPUiyiZoldb29w5vrfZt/6y1tyFbirmCDrVF/IUT
- rWy0SGhZBonvbCEnMr79dMQ4ErY1iRxA3RcnERM/vm1uII6mVxgoUVaexvK5Yz9Rw3TD
- b17HhkD33RyjCTqsh/8hcNwFpAgICThbD+cz51s9Sso9h9p3MXsmsabgX/iQ1xYpEPoA
- FaxYTWyYaV8E4Vh6/xqECQaX7Q9MECxir38TfZm+zc2FhxkRpKSnApBAOiaGm6RZQ//2
- PYVKq5w2VvvdvCt0sFJVCP5anFQveUi16xyras2GWbbE2rJsdxLHKV2G3LMOFzvWoCs1
- igTw==
+ d=1e100.net; s=20230601; t=1723161579; x=1723766379;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=es/KIY6CL6KY9XX8tCEPp9SwT/zLGIVmiGJ0iXx4Zf8=;
+ b=V0zzmbLZSgJPPdDm4JW8XVkyO+baNMQDC33vMaihHVEq/uOvzLCUn1GXtROx7v+wxn
+ sZTPOAbWWUARJ3z/F+iMi4TGzuPzKz9xqyv5sd/6jO3pqIIASL211xtwg6/avq9hD7n8
+ lB9JicjuL+SoM5lykZNRNdbfSWgbPYQvCJ9ZDp3Ur/U2HelqauCnIln+YDdTM8fy8NAV
+ 5UBvhnTzQwyxoQVVVpeAIEvUcahcvgfK+PBoiIsh+d0jQpH2/qnVQ3PqW5hpfGqBZeuK
+ 8mZDuDDzOa+529xvDlsy6mTuctnGOmm35b8i6ib6owjFCPxVVREMrEiWjfku3o/OtSbv
+ odpw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUuOQbK8IRrW4UK+U9n5aHNUfqPBNrJjISuTtdijH6D9l11pfxeMDrwa4Y85eGcEeb9J+ZQrp1QH8zsK5OWH9q7WAtiNw==
-X-Gm-Message-State: AOJu0Yw+x/o++bab9iYvYa4/xi0kX0NL1o5HJPbnVex7D3xVSSECrRJc
- ptfTJ8aFHVfg9Qfl7iktXXLRLtyHaUNROkqnRdPuTzfNmN69bpyOi170RKFXwzc=
-X-Google-Smtp-Source: AGHT+IETTA+XrcVwI5bLn3El4/xULeBFDTOud4cRZkj+Jmbx5C9+fz56eSK0yNllGyj/pZhcV0Yz5Q==
-X-Received: by 2002:a17:907:94cf:b0:a7a:b9dd:7757 with SMTP id
- a640c23a62f3a-a8090c25606mr292640366b.12.1723161577609; 
- Thu, 08 Aug 2024 16:59:37 -0700 (PDT)
+ AJvYcCX/0iiISNot/yYJlqiuj9P8xTWKwNB1O5RGs1WbWbsKyD1FqJsWAZ0tvCnTLAAuMtozRLph27pqNiZVQr6rvFKty9lj/g==
+X-Gm-Message-State: AOJu0YwF/WJAQuTHlxjt6E2hK6cEvxqQssfxNOvk4uSHU62ImyUMPf/0
+ fGnBBCWBHlAHZAi0SQyjKmYnM4YeouXyXq88SuiKQ1PslQgYLu1a2ryuXL9r9Js=
+X-Google-Smtp-Source: AGHT+IGuNGH9pm7huia140yvgUsGHFMn3B7OhA5/Noyq7i/uwHL5FmdmwxLko0nSX4enFFkrD9QNeQ==
+X-Received: by 2002:a17:907:e627:b0:a7a:9144:e254 with SMTP id
+ a640c23a62f3a-a8090beb7d4mr231932566b.10.1723161578701; 
+ Thu, 08 Aug 2024 16:59:38 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7dc9d45423sm784047866b.134.2024.08.08.16.59.36
+ a640c23a62f3a-a7dc9d45423sm784047866b.134.2024.08.08.16.59.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Aug 2024 16:59:37 -0700 (PDT)
+ Thu, 08 Aug 2024 16:59:38 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PATCH 00/11] mach-snapdragon: various improvements for newer boards
-Date: Fri, 09 Aug 2024 01:59:23 +0200
-Message-Id: <20240809-b4-snapdragon-improvements-v1-0-7c353f3e8f74@linaro.org>
+Date: Fri, 09 Aug 2024 01:59:24 +0200
+Subject: [PATCH 01/11] mach-snapdragon: refactor board_fdt_blob_setup()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIANtbtWYC/x3MwQqDMAwA0F+RnBeoUnTbr4wd6pJqDqYlGSKI/
- 76y47u8E5xN2OHZnWC8i0vRhv7WwWdNujAKNcMQhhju4YFzRNdUydJSFGWrVnbeWL+OmUaa+pi
- mPBO0oBpnOf75631dP2MMX1VsAAAA
+Message-Id: <20240809-b4-snapdragon-improvements-v1-1-7c353f3e8f74@linaro.org>
+References: <20240809-b4-snapdragon-improvements-v1-0-7c353f3e8f74@linaro.org>
+In-Reply-To: <20240809-b4-snapdragon-improvements-v1-0-7c353f3e8f74@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
  Caleb Connolly <caleb.connolly@linaro.org>, 
  Neil Armstrong <neil.armstrong@linaro.org>, 
  Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2082;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2791;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=JTofdLWA9UG4ydo1jb75sAt+e516o13DL1EV1WBUgvk=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmtVvnQcQR4BGkVrczVh4/BmEGrvl/Uw9l/ihEI
- 8YD1orX5GWJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZrVb5wAKCRAFgzErGV9k
- tmB4D/wNhjnXxjOlaHp4unH7gEqeXIvJgPs8EK+CvjrbDvpb06AUJ9enO5OQ0csn9K2zsJpDuNS
- brda3KKad2Od6X/EWxtDoyhs8LPSgOzNk1n5J/OXmQqGzmab4JULWTBASqt+nyC2bBk3WTbxEcZ
- KX8u0QvEMZ1pWPyz+TJZB++Th0AlQoMayuY385xE6jP2c76eswtFCCv3OVvZ/vZxYGx8rZ39Xtl
- ZSOwoG8/tk/1c4bmWx5HHlBvFP/7IOStn2FdSVeRT0cfEWJaEd4k+FRVWPo6lAgDogqBb3ggL15
- crROL8vAEyOWzkh61igSFsFbTLae77g+cP/CLIIAQEo5DvhZfAD4FO03tAS4d2OCMvG0T5FVsZw
- kl/IJIJ786+MdllsOaLnOxVzgiGt94luWcNo8O75gb0jeVqyoHRg9X3IjZR+0zGxNuUEVpe5Cl9
- GbPvJ2XyCT/b0bdJSeWmq9Bln6m5/PZMNSv96+KyRlwcD16IF83L8O0mUYsmxMRLlxPBNblKrZX
- 7chhHoLEUfTToapkRYaGW7nWEhgNOELjEo1PF307b9kAFqccrSr6+jdInZI9YEW67rVP61Q/O0c
- ikCKR6FBcmnbr8pdkZyo3yLLpWTsOdZplmRWqzKsmD9JuB55GBU2KgbEteDD8+k3UHE+93UbjSy
- sbRW7iExu0AXrcQ==
+ bh=AYiBDIfhJ3LhiwbAt77sIqn/keoGsEaX+pWza/Rdc5Q=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmtVvnvaBE/O7x6V0nIUgyFs1ZB9SbJRas9oIRs
+ vb8tZr+2HyJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZrVb5wAKCRAFgzErGV9k
+ tgunD/97SYatgSHizLC67D0jr3gkS3A4uN2Zrs2FBc3qHKoPFnDM0h65XBzADHs2/l8X45qJLGp
+ 4g95YhfqRCpjlFTsPvGtOe3jndPtjB8kebmlz2o3SfCgfAHch+Xs73J99cKjGP0sD6rgRwTB7m0
+ RIgSyCxS8ZtxkEJ6P9jSStb4lm0Xp8Q4bACqoHdR8A/br/dAd6766H7iQxLY6s9R38Q6ukLsu2Q
+ ZqbF1rCH8A8C3nf8W7MUAgJ2Uuv6bVffFHe9VtPMsYUIIMrRdEEF9vL3+np7dr0ZtxzJIbcWpTD
+ 1vtUq41nklCy+GyS+82p7BprAU/sbfYD+kuMSQH6sDLtlD9FTKk5114vNPFwO7Tl872hMnPNeEe
+ 23CCgNjmhzwDF5Hy5xxhuFd02XheXzw/0IcwH/hAKPIoKl8Dl1gf94bnu0SWyVMdFvHlWY87L2g
+ /FN8auxPbduyygB5ZYz9VmWM5LOBgOwfXb/faFeu6b5/pMwKFQfMQ4jAt9zjoWBVRHbPYQ2iHPB
+ CeA82e8ziwBRgJXcRmDKjix4LXNr5Sbb5aDzJQNOa3Z6uDCfTdkgRMqP5z7KS109wrQoFBiZkZm
+ h3bAyI/+snqRaqvoN9jEDZUkrH8UpaHWkCOUIWYGwgOnVO2uhQx+OYk2CoxeOy0iGoheGLbdASE
+ ayC9HLmDEa/bdWg==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -114,53 +113,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Supporting the newer SM8550 and SM8650 SoCs unfortunately requires a
-bump in complexity for us. Qualcomm changed a lot about how the memory
-map is handed over to the "kernel", adding many holes, not mapping
-certain regions, and adding regions with 0 size. The SM8650 HDK has a
-whopping 14 memory regions, some as small as 44k.
+If U-Boot has a DTB built in (appended to the image directly) then this
+was likely intentional, we should prioritise it over one provided by ABL
+(if there was one).
 
-Supporting this properly has proven to be a bit of a headache, but I
-think this implementation is "pretty good".
+Make this behaviour explicit, and panic if no valid DTB could be found
+anywhere. Returning an error is not useful in this case as U-Boot would
+just crash later in a more confusing way.
 
-In addition, we set a valid fallback fdt_addr_r in the U-Boot
-environment, allocate a buffer for fastboot, and set the loadaddr
-variable too.
-
-board_fdt_blob_setup() is refactored for readability and potential
-future expansion (e.g. if supporting multi-dtb FIT becomes desirable).
-
-Finally, a function is proposed to allow for mapping new memory regions
-at runtime, and the cmd-db driver makes use of it to map itself, since
-SM8650 boards don't seem to include it in their memory map.
-
-Tested on SM8650 HDK, SDM845 OnePlus 6, SM6115 RB2, SM8250 RB5.
-
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
-Caleb Connolly (10):
-      mach-snapdragon: refactor board_fdt_blob_setup()
-      mach-snapdragon: parse memory ourselves
-      mach-snapdragon: set serial number
-      mach-snapdragon: allocate fastboot buffer dynamically
-      mach-snapdragon: populate fallback FDT
-      mach-snapdragon: set loadaddr
-      armv8: mmu: add a way to map additional regions
-      soc: qcom: cmd-db: use strncmp() instead of memcmp()
-      soc: qcom: cmd-db: map cmd-db region
-      qcom_defconfig: bump CONFIG_NR_DRAM_BANKS
+ arch/arm/mach-snapdragon/board.c | 32 +++++++++++++++++++++-----------
+ 1 file changed, 21 insertions(+), 11 deletions(-)
 
-Neil Armstrong (1):
-      mach-snapdragon: use 1MiB for get_page_table_size()
+diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+index b439a19ec7eb..2881de28a0a3 100644
+--- a/arch/arm/mach-snapdragon/board.c
++++ b/arch/arm/mach-snapdragon/board.c
+@@ -17,8 +17,9 @@
+ #include <dm/uclass-internal.h>
+ #include <dm/read.h>
+ #include <power/regulator.h>
+ #include <env.h>
++#include <fdt_support.h>
+ #include <init.h>
+ #include <linux/arm-smccc.h>
+ #include <linux/bug.h>
+ #include <linux/psci.h>
+@@ -84,28 +85,37 @@ static void show_psci_version(void)
+ 	      PSCI_VERSION_MAJOR(res.a0),
+ 	      PSCI_VERSION_MINOR(res.a0));
+ }
+ 
++/* We support booting U-Boot with an internal DT when running as a first-stage bootloader
++ * or for supporting quirky devices where it's easier to leave the downstream DT in place
++ * to improve ABL compatibility. Otherwise, we use the DT provided by ABL.
++ */
+ void *board_fdt_blob_setup(int *err)
+ {
+-	phys_addr_t fdt;
+-	/* Return DTB pointer passed by ABL */
++	struct fdt_header *fdt;
++	bool internal_valid, external_valid;
++
+ 	*err = 0;
+-	fdt = get_prev_bl_fdt_addr();
++	fdt = (struct fdt_header *)get_prev_bl_fdt_addr();
++	external_valid = fdt && !fdt_check_header(fdt);
++	internal_valid = !fdt_check_header(gd->fdt_blob);
+ 
+ 	/*
+-	 * If we bail then the board will simply not boot, instead let's
+-	 * try and use the FDT built into U-Boot if there is one...
+-	 * This avoids having a hard dependency on the previous stage bootloader
++	 * There is no point returning an error here, U-Boot can't do anything useful in this situation.
++	 * Bail out while we can still print a useful error message.
+ 	 */
++	if (!internal_valid && !external_valid)
++		panic("Internal FDT is invalid and no external FDT was provided! (fdt=%#llx)\n",
++		      (phys_addr_t)fdt);
+ 
+-	if (IS_ENABLED(CONFIG_OF_SEPARATE) && (!fdt || fdt != ALIGN(fdt, SZ_4K) ||
+-					       fdt_check_header((void *)fdt))) {
+-		debug("%s: Using built in FDT, bootloader gave us %#llx\n", __func__, fdt);
++	if (internal_valid) {
++		debug("Using built in FDT\n");
+ 		return (void *)gd->fdt_blob;
++	} else {
++		debug("Using external FDT\n");
++		return (void *)fdt;
+ 	}
+-
+-	return (void *)fdt;
+ }
+ 
+ void reset_cpu(void)
+ {
 
- arch/arm/cpu/armv8/cache_v8.c    |  25 +++++
- arch/arm/include/asm/system.h    |  10 ++
- arch/arm/mach-snapdragon/board.c | 203 ++++++++++++++++++++++++++++++++++-----
- configs/qcom_defconfig           |   1 +
- drivers/soc/qcom/cmd-db.c        |  11 ++-
- 5 files changed, 221 insertions(+), 29 deletions(-)
----
-change-id: 20240809-b4-snapdragon-improvements-fd6d714a7fbd
-base-commit: a2ce853383b18a2cf920268ee341f2585a11adef
-
-// Caleb (they/them)
+-- 
+2.46.0
 
