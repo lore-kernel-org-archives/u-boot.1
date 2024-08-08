@@ -4,86 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAEFBC52D71
-	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 18:56:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40DAEC3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 19:37:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BAF487E96;
-	Thu,  8 Aug 2024 20:56:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 8441488AF6;
+	Thu,  8 Aug 2024 21:37:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="nWE6/O9k";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OEERabek";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0B3687919; Thu,  8 Aug 2024 20:56:41 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 702D38881C; Thu,  8 Aug 2024 21:37:18 +0200 (CEST)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 343F788AFF
- for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 20:56:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FB1888ABD
+ for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 21:37:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 3C9353FD39
- for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 18:56:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1723143398;
- bh=C9IBVBSqrUjbugUi5RztPTAl3JYcOHkPinspN83Wcso=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=nWE6/O9kWw5/hnQrPjZToMS5M64IanR6raRmafwtBTxAPCCbkBvzGvnx0/Nzh49H3
- ms7UTfl/oCty2CIQVG+GJn1tw/R7e+FT2ieF3o+O7hRnqKEAz6kdlcu5+drSmnon70
- W4jV5Xm9RallGH169T4kcn0sI3MtauGSivWXBln+rtT/2jrTHkH1ier2weGOFa0u+B
- 8fsCLHszzcRT/lV7/UoWY51hy/2lDpPad8UzSdpAsWYM93tFf4tm+w9Lg/3hrh/LTd
- 8ujdO+9GpXcR1411TiR+M8qi2x2Ku8XAXzWdMKxI0QmoUF3U21QVLK4g54gFFxrRds
- Jvopjy5qDchBw==
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-428e48612acso15207895e9.3
- for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 11:56:38 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=maximmosk4@gmail.com
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2f1798eaee6so12786681fa.0
+ for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 12:37:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1723145833; x=1723750633; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6shwe05ne4whHDG8D6SepSy+SHVj72eEMg35m3uLakQ=;
+ b=OEERabekhKN4wvgjryrbk3LTf/9nCEeYR9PQJrBuTIpYP9k8rh7gTtmUwElacVWfVK
+ MFRsCfDY8Dqc21Tek13/qdh0OvdHsgBsRzi2EIBDMVrF+tgqatyF3gAWx+IcWkUvixkG
+ hczC2teRcuVvjeXxQ3aSmMCh5kymE0m9q4r5jeDRq3ZCUxj3n5QV7jyEH2t1uS/LgDHG
+ 74YhFk5X85w0CnrBaT4fCtg5F+FNDnMSuzn640eXB/GUuyBF7i6Qy2XfQddqB57eZayh
+ WUgCTEGZlz0EfCS0r9sKLpdZpv1iEIR2VLr1OpUFgfsr0FIybc1dPGTQECiZYLspvKHP
+ TLXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723143398; x=1723748198;
+ d=1e100.net; s=20230601; t=1723145833; x=1723750633;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=C9IBVBSqrUjbugUi5RztPTAl3JYcOHkPinspN83Wcso=;
- b=bGI+TaDv8FURBrIgwR7f2UGa1Gw1zVBGV7+mD7JXUCHs9TosLsQeXZ4wIb3u/jLTla
- B93+oGQ26WJm26KohaZCmK1CIYAqxB33Hwl+dg/gbx5+WTubvpPw+kc4Jz38zJHxtpfc
- F5qx+evJrCTQo1EppG5B5UFLViAgRPp/MNs9Vd6IAY62n2ym3OGCm/7PTDJ8ehFIZ+wA
- p/I61LojXkJgQfimt/FF+7BiSd70Ef39TCLV1WqErXQhUWkRPk+N4RqBqnmFGId6jLyz
- PsqXRMfr+CZk9fpk8CzikXYAPINqisMpIDWxYsOWb8XeJBVy0qSQdF9evwuhQKzdUzBO
- gSqQ==
+ bh=6shwe05ne4whHDG8D6SepSy+SHVj72eEMg35m3uLakQ=;
+ b=vatbsQfu4s5ZRH3k0COYVPM5UakVqKKhGfEQaHfF33va37Rnqj9T4iYSuvxq+YTFcF
+ 2EEiAgkNRvQ0Kbr0R+zq2pl8t+1/WbriqngOaPhoRTr2jmCQsqiXJTvzaZFBdA58Kxpx
+ pHqgMjBsVONXOSW5VOmebrePdc+7GCJ1hxMpIKkqI6yeIhX8dhMHM4TyUesy8Lsna7eb
+ ZhHXhgktR3OkN6HD9WDb+/iT5TZHrjPXtjCem1oe7Q8cMDzmKveEZzAw6mE7sepm1/yQ
+ uUmLRD+RrMKiA9w70ZHH99nAPxwfLud8pCH5xqmZBf6Fxkt60oCKsLKE/xQ6pRbH6lmv
+ AgRw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWB/qribL55fLHfG/Xm52u5TOcZbMxNiUejxRZ7MsH3m5P9SJt/SqW3MbqbP3N7GS1dYd19pMT+29HYyxPl4WDJ5H6mUw==
-X-Gm-Message-State: AOJu0YxscF8CspHYbG9dyaEHNvN9JtdpsLUsbwHimlf/NIxyZJIIFyZs
- b3TuWhhBA3+92Hbv3aQuiiMm+JK9Ed4O52EgNZFaGj2/BXYTCS821QqJtB70kx6ca2jC6/4KBH3
- UhIvr567ijJbn1vPYvTEs1Ei4PY5AMeeZgXD+Lbw/BghNeZ2rhbkp/2CvKF7lZcn8exY=
-X-Received: by 2002:a05:600c:c87:b0:426:6ee7:d594 with SMTP id
- 5b1f17b1804b1-4290aedf220mr32693515e9.7.1723143397652; 
- Thu, 08 Aug 2024 11:56:37 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGPvBk4NRBwTxCFcwVSWgVcVl/OaXd5DOeF0P4zIYzcv+J8F43a8HMZyPEjqsSS6t//VV1EtQ==
-X-Received: by 2002:a05:600c:c87:b0:426:6ee7:d594 with SMTP id
- 5b1f17b1804b1-4290aedf220mr32693285e9.7.1723143397133; 
- Thu, 08 Aug 2024 11:56:37 -0700 (PDT)
-Received: from localhost.localdomain ([2a02:3035:ee0:a15:4f42:44a6:1da1:b45a])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36d27156c5esm2804599f8f.13.2024.08.08.11.56.35
+ AJvYcCXFGD2XyoZL0JQ9CZvtAU+8InCixz8A9ttNY9p0tKcOdQxSR9DcGOk70HVGXpD6fXL+/AS3pQ5qgpjtMvIoMR/PdSg6GA==
+X-Gm-Message-State: AOJu0YylqLLyv0Atr0C9tco5lfHcvfFRci7tvp+vavUaUSAVpgOrqq54
+ 2a3JD4ZpXNvC5cKxCGvbcybb2V0UY6TWMk4ss50Dxo6hZvAFNOV2
+X-Google-Smtp-Source: AGHT+IEsjKYeD3qF8V0TJ8YYbWQzl4vKFv39RBFGl+94wPTgUi49mk8pShUz6dgqkkYriri2dkefUQ==
+X-Received: by 2002:a2e:3306:0:b0:2ef:2893:796d with SMTP id
+ 38308e7fff4ca-2f19de8a3c2mr19315931fa.46.1723145833010; 
+ Thu, 08 Aug 2024 12:37:13 -0700 (PDT)
+Received: from localhost.localdomain (109-252-15-116.nat.spd-mgts.ru.
+ [109.252.15.116]) by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-2f15e1c2446sm23358391fa.59.2024.08.08.12.37.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Aug 2024 11:56:36 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Tony Dinh <mibodhi@gmail.com>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/1] ata: sata_rescan must scan for block devices
-Date: Thu,  8 Aug 2024 20:56:27 +0200
-Message-ID: <20240808185627.769049-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
+ Thu, 08 Aug 2024 12:37:12 -0700 (PDT)
+From: Maxim Moskalets <maximmosk4@gmail.com>
+X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
+To: trini@konsulko.com, u-boot@lists.denx.de, sjg@chromium.org, naoki@radxa.com
+Cc: Maxim.Moskalets@kaspersky.com, Maxim Moskalets <maximmosk4@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v6] board: rockchip: add Radxa ROCK 3 Model C
+Date: Thu,  8 Aug 2024 22:37:10 +0300
+Message-Id: <20240808193710.13703-1-Maxim.Moskalets@kaspersky.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -102,94 +92,203 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A system may have multiple SATA controller. Removing the controller with
-the lowest sequence number before probing all SATA controllers makes no
-sense.
+From: Maxim Moskalets <maximmosk4@gmail.com>
 
-In sata_rescan we remove all block devices which are children of SATA
-controllers. We also have to remove the bootdev devices as they will be
-created when scanning for block devices.
+Based on rock-3a-rk3568_defconfig.
+Tested on v1.31 revision.
 
-After probing all SATA controllers we must scan for block devices otherwise
-we end up without any SATA block device.
+Board Specifications:
+- Rockchip RK3566
+- 1/2/4GB LPDDR4 2112MT/s
+- eMMC socket
+- uSD card slot
+- M.2 2230 Connector
+- GbE LAN with POE
+- 3.5mm jack with mic
+- HDMI 2.0, MIPI DSI/CSI
+- USB 3.0 Host, USB 2.0 Host/OTG
+- 40-pin GPIO expansion ports
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
+Suggested-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
 ---
+v6:
+	update dts to turn LED up in U-Boot
+v5:
+	fixed board info
+v4:
+	fixed typo in commit-msg
+	moved maintainers record to file for rk3568 boards
+	renamed from ROCK 3 Model C to ROCK3C
+v3:
+	add suggested by Jonas Karlman <jonas@kwiboo.se> in
+	https://lore.kernel.org/all/bbb81dd1-e318-423d-8258-db7556ce6850@kwiboo.se/
 v2:
-	Scanning for device on an unprobed SATA controller leads
-	to an illegal memory access.
-	Use uclass_foreach_dev_probe() instead of uclass_foreach_dev().
+	rebase to updated upstream dts
 ---
- drivers/ata/sata.c | 46 ++++++++++++++++++++++++----------------------
- 1 file changed, 24 insertions(+), 22 deletions(-)
+ arch/arm/dts/rk3566-rock-3c-u-boot.dtsi | 18 +++++
+ board/rockchip/evb_rk3568/MAINTAINERS   |  7 ++
+ configs/rock-3c-rk3566_defconfig        | 97 +++++++++++++++++++++++++
+ doc/board/rockchip/rockchip.rst         |  1 +
+ 4 files changed, 123 insertions(+)
+ create mode 100644 arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+ create mode 100644 configs/rock-3c-rk3566_defconfig
 
-diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
-index 84437d3d346..2139ae9903e 100644
---- a/drivers/ata/sata.c
-+++ b/drivers/ata/sata.c
-@@ -49,38 +49,40 @@ int sata_scan(struct udevice *dev)
- 
- int sata_rescan(bool verbose)
- {
-+	struct uclass *uc;
-+	struct udevice *dev; /* SATA controller */
- 	int ret;
--	struct udevice *dev;
- 
- 	if (verbose)
--		printf("Removing devices on SATA bus...\n");
--
--	blk_unbind_all(UCLASS_AHCI);
--
--	ret = uclass_find_first_device(UCLASS_AHCI, &dev);
--	if (ret || !dev) {
--		printf("Cannot find SATA device (err=%d)\n", ret);
--		return -ENOENT;
--	}
--
--	ret = device_remove(dev, DM_REMOVE_NORMAL);
--	if (ret) {
--		printf("Cannot remove SATA device '%s' (err=%d)\n", dev->name, ret);
--		return -ENOSYS;
-+		printf("scanning bus for devices...\n");
+diff --git a/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi b/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+new file mode 100644
+index 00000000000..f4124aa48fc
+--- /dev/null
++++ b/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+@@ -0,0 +1,18 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +
-+	ret = uclass_get(UCLASS_AHCI, &uc);
-+	if (ret)
-+		return ret;
++#include "rk356x-u-boot.dtsi"
 +
-+	/* Remove all children of SATA devices (blk and bootdev) */
-+	uclass_foreach_dev(dev, uc) {
-+		log_debug("unbind %s\n", dev->name);
-+		ret = device_chld_remove(dev, NULL, DM_REMOVE_NORMAL);
-+		if (!ret)
-+			ret = device_chld_unbind(dev, NULL);
-+		if (ret) {
-+			if (verbose)
-+				printf("unable to unbind devices (%dE)\n", ret);
-+			return log_msg_ret("unb", ret);
-+		}
- 	}
++&sfc {
++	flash@0 {
++		bootph-pre-ram;
++		bootph-some-ram;
++	};
++};
++
++/ {
++	leds {
++		led-0 {
++			default-state = "on";
++		};
++	};
++};
+diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/evb_rk3568/MAINTAINERS
+index e5b0986ead9..ba4884db8e1 100644
+--- a/board/rockchip/evb_rk3568/MAINTAINERS
++++ b/board/rockchip/evb_rk3568/MAINTAINERS
+@@ -69,3 +69,10 @@ S:	Maintained
+ F:	configs/rock-3a-rk3568_defconfig
+ F:	arch/arm/dts/rk3568-rock-3a.dts
+ F:	arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
++
++ROCK-3C
++M:	Jonas Karlman <jonas@kwiboo.se>
++M:	Maxim Moskalets <maximmosk4@gmail.com>
++S:	Maintained
++F:	arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
++F:	configs/rock-3c-rk3566_defconfig
+diff --git a/configs/rock-3c-rk3566_defconfig b/configs/rock-3c-rk3566_defconfig
+new file mode 100644
+index 00000000000..f44b202c8c3
+--- /dev/null
++++ b/configs/rock-3c-rk3566_defconfig
+@@ -0,0 +1,97 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_SF_DEFAULT_SPEED=24000000
++CONFIG_SF_DEFAULT_MODE=0x2000
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-rock-3c"
++CONFIG_ROCKCHIP_RK3568=y
++CONFIG_ROCKCHIP_SPI_IMAGE=y
++CONFIG_SPL_SERIAL=y
++CONFIG_DEBUG_UART_BASE=0xFE660000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_AHCI=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-rock-3c.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
++CONFIG_SPL_ATF=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_POWEROFF=y
++CONFIG_CMD_USB=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_PMIC=y
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_SCSI_AHCI=y
++CONFIG_AHCI_PCI=y
++CONFIG_SPL_CLK=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_SF_DEFAULT_BUS=4
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_GIGADEVICE=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_SPI_FLASH_XTX=y
++CONFIG_PHY_REALTEK=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_ROCKCHIP=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_RK8XX=y
++CONFIG_REGULATOR_RK8XX=y
++CONFIG_SPL_RAM=y
++CONFIG_SCSI=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SFC=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index bedc52e03e2..60357af6caa 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -105,6 +105,7 @@ List of mainline supported Rockchip boards:
+      - Pine64 SOQuartz on Model A (soquartz-model-a-rk3566)
+      - Powkiddy X55 (powkiddy-x55-rk3566)
+      - Radxa CM3 IO Board (radxa-cm3-io-rk3566)
++     - Radxa ROCK 3C (rock-3c-rk3566)
  
- 	if (verbose)
- 		printf("Rescanning SATA bus for devices...\n");
- 
--	ret = uclass_probe_all(UCLASS_AHCI);
--
--	if (ret == -ENODEV) {
--		if (verbose)
--			printf("No SATA block device found\n");
--		return 0;
-+	uclass_foreach_dev_probe(UCLASS_AHCI, dev) {
-+		ret = sata_scan(dev);
-+		if (ret)
-+			return ret;
- 	}
- 
--	return ret;
-+	return 0;
- }
- 
- static unsigned long sata_bread(struct udevice *dev, lbaint_t start,
+ * rk3568
+      - Rockchip Evb-RK3568 (evb-rk3568)
 -- 
-2.45.2
+2.39.2
 
