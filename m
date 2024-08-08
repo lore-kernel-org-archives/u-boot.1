@@ -4,88 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5B75C52D73
-	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 07:08:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE274C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 08:43:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8282F889A3;
-	Thu,  8 Aug 2024 09:08:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id EA6EC886E7;
+	Thu,  8 Aug 2024 10:43:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="V07/wpSG";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BACF8895B; Thu,  8 Aug 2024 09:08:31 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFCAA889D5
- for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 09:08:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 0B0763FD45
- for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 07:08:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1723100897;
- bh=fbxf8K6CCYnuHawmEpkIa9lZWqi9hvzFHTcZBxr6JrE=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=V07/wpSGEQmbB+XX2uHqI3rsFYJUfCj6oqROTqMDAHBZ5M2mcaOO1GCBuipsYQ+fc
- 5Rp/iPcn3YDKQimGUgiFkxyyMv1bqLACHJ6nHG/+B3UDJAtOq+xEYgxdf2WoMVinfG
- k18gSlT4yPVBFyPRnoLSQ+zZdnm6JBSf+/3GIUHcNnx2pHwotGe2SZUBL9FfiGHdLi
- PPgB7z2uoRjvipovPYyH7nRNi9AWcE8Ly/1lrq3UaViiFNWp3MH46ZqblqRoqPKwwp
- 8o/89lC/BN6JxL+kBopV7YAGmN0PWu9+EgKvFXOhg7Yqxdt7LmCwb8qcmF34gCu6dj
- uZKt6k8s/lLyg==
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-428e48612acso8478475e9.3
- for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 00:08:17 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723100896; x=1723705696;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fbxf8K6CCYnuHawmEpkIa9lZWqi9hvzFHTcZBxr6JrE=;
- b=vdHw6BsqMJYWat9/fnUiE1iGqG7d72ns9Cws4yxjarX3MpVIT07oJvY/BOrz/gVx9T
- VWvR9Qf1P1rBY67VLSWLU7jndTakot6muYwBL51nfHlMyxO0NkR9KtxmOgEcsf0i8j1H
- +3p0YM0MOEFhiA2VqwiB4a8/YMMqOL0VDgp9BYDwXhkO17zEzaKOrbzzRX/G2VX8yibw
- 0np8UdwQU5i5a3LLhLd/2rLROfXRO8C2+WUFJXZMwrcfcgkpq9xrAT8mPhgb2p6QuuhB
- vE3ImK/YAmX7KYL6czyoBY/Ln7WpwPq+JFVfPLYLIm4+1KjijRmNMTNWqXnStHJQ0G7y
- Y38w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXeG9F1dHRJ09LAmBv0l/5goVWBJcZ9TKRQEDc7a1U+eUqXu5omRKnTlkjsqR9cvDkKW5aqNhESIGL02PiR0DyuL5oDgQ==
-X-Gm-Message-State: AOJu0YxB9HE9FU1Ip8GhOa5+DlnhX045XKDHQGGfLmZspTx6O7XweSrk
- 64f+bF7RLVi5ydcup38vslh04lnlXyOs90gMSFJTf7dB2mfQ30gfGOdyX4q8Mp6vlXh6KlnG7w/
- zS6Ue2KoKpZRqHIvEiA3P2IzVK/FpZ8AcpkZPKZrB6XpUWaP7+QwqrjFOKs40XrjdV90=
-X-Received: by 2002:a05:600c:4f95:b0:428:29e:8c42 with SMTP id
- 5b1f17b1804b1-4290aeee05bmr11594435e9.9.1723100896620; 
- Thu, 08 Aug 2024 00:08:16 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IE50qtUODrEGTngH4F6b1h7IlOqhJZErAl+1g+98xQ3BCN3UGO/E+WOsPFOcFhUDB5QekidHA==
-X-Received: by 2002:a05:600c:4f95:b0:428:29e:8c42 with SMTP id
- 5b1f17b1804b1-4290aeee05bmr11594085e9.9.1723100896068; 
- Thu, 08 Aug 2024 00:08:16 -0700 (PDT)
-Received: from localhost.localdomain ([2a02:3037:2e0:4fb6:2b17:1f93:a543:a0b5])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4290c739083sm7157515e9.18.2024.08.08.00.08.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Aug 2024 00:08:15 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng@tinylab.org>,
- Tony Dinh <mibodhi@gmail.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] ata: dwc_ahsata: create boot device
-Date: Thu,  8 Aug 2024 09:08:03 +0200
-Message-ID: <20240808070803.57438-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1723106612;
+	bh=xLeHKezVYbfRejFhdBo/C7ffdW8MBEJZZdu8eglwtxU=;
+	h=Date:To:Cc:From:Subject:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:From;
+	b=cYjyvgLv8U4yA3QtN/og+CVzLTgA98Ngq5NTnNcT4Zp18fyaRiFEGn5qhMOEM8lIn
+	 FQ1jDykeyqHIFtPKdlihGFqfPPB6X/197G/iUyG/iBQWq6UAtN+a+EeBxq472tSKrI
+	 4Zh231z3JYz44a9TVmvWRc2+jbJZ+r7d0fBpjkCvjNXb/sZHEiQvFv5Jvru36N0TqK
+	 kfdLOjr6xLl0YvwiqNFM0xrwvYz8e52NrGBqU8kiBYbkrsiAJNm6/2H9pR69Ia/L12
+	 kjGeJOOp6NDwcIZFCGe66PkEsDZrj5Sv7A4ybAJcQmMAeB2KjrhcY1qQxG23hNoHXX
+	 nBPSWxbL1maHw==
+Received: from [192.168.1.107] (89-186-114-92.pool.digikabel.hu
+ [89.186.114.92])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id E72AA880DE;
+ Thu,  8 Aug 2024 10:43:29 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1723106610;
+ bh=xLeHKezVYbfRejFhdBo/C7ffdW8MBEJZZdu8eglwtxU=;
+ h=Date:To:Cc:Reply-To:From:Subject:From;
+ b=eHC/sdYbtR8dRHRnjQUIRvkV0jNT1hIzcngKkGBB+25d064aeiWAEZEiyM4CkHf9w
+ mkjbgHsETUsOcbv+UcKXtzKLtSNJrmURzeb6bOyFdldJv2FL0HoyQdfZN4ewKfbm1P
+ CebPdmbsQaJLSKjpR5Z/eEqbQr0CKoEeCYsIV9L+cFGXvhvVH5tYTwHdGf2gtXoKQL
+ 0GFvSi8pVp66iD4uFSC2MyZwXWJ9nh3iPhKEmc64EVLMUS20imq4RzggLD31G5W33J
+ QWKO0xvr7jaVSk7LOwDLst2TliMl++9Uv3Jm4Jep1XC6IOeFinv+1n41j5Yycbvqeg
+ HQrIMLAs+5Fog==
+Message-ID: <8d333c2b-2aef-bd73-4489-f79fa6be84ed@denx.de>
+Date: Thu, 8 Aug 2024 10:42:47 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Anatolij Gustschin <agust@denx.de>, David Virag <virag.david003@gmail.com>,
+ Fedor Ross <fedor.ross@ifm.com>, Michal Simek <michal.simek@amd.com>
+From: Heiko Schocher <hs@denx.de>
+Subject: Please pull u-boot-i2c
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,43 +63,120 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For each block device we must create a sibling boot device.
+Hello Tom,
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- drivers/ata/dwc_ahsata.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+please pull from u-boot-i2c:
 
-diff --git a/drivers/ata/dwc_ahsata.c b/drivers/ata/dwc_ahsata.c
-index a29d641343e..203f98edffc 100644
---- a/drivers/ata/dwc_ahsata.c
-+++ b/drivers/ata/dwc_ahsata.c
-@@ -6,6 +6,7 @@
- 
- #include <ahci.h>
- #include <blk.h>
-+#include <bootdev.h>
- #include <cpu_func.h>
- #include <dm.h>
- #include <dwc_ahsata.h>
-@@ -897,7 +898,11 @@ int dwc_ahsata_scan(struct udevice *dev)
- 	ret = blk_probe_or_unbind(dev);
- 	if (ret < 0)
- 		/* TODO: undo create */
--		return ret;
-+		return log_msg_ret("pro", ret);
-+
-+	ret = bootdev_setup_for_sibling_blk(blk, "sata_bootdev");
-+	if (ret)
-+		return log_msg_ret("bd", ret);
- 
- 	return 0;
- }
+The following changes since commit b7d5ce05b1b52136af09cf34541c6a91079a4b86:
+
+   Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-sunxi (2024-08-06 
+09:36:46 -0600)
+
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-i2c.git tags/i2cfixes-for-v2024-10-rc3
+
+for you to fetch changes up to 3d299c355912e05ba534574ac557ad0c9edd7d99:
+
+   board: vining_2000: convert to DM_I2C (2024-08-08 05:45:11 +0200)
+
+----------------------------------------------------------------
+i2c updates for v2024.10-rc3
+
+- i2c: samsung: Support platforms other than EXYNOS4 and EXYNOS5
+   from David
+
+- imx_lpi2c: cleanups and support read transfers longer than 256 bytes
+   from Fedor
+
+- pca954x: Remove pointer to GD
+   from Michal
+
+- DM_I2C conversion for some remaining boards
+   from Anatolij
+
+- i2c: mux: Fix error path in i2c-arb-gpio
+   from Michal
+
+----------------------------------------------------------------
+Anatolij Gustschin (11):
+       board: shc: convert to DM_I2C
+       board: chiliboard: convert to DM_I2C
+       board: cm-t43: convert to DM_I2C
+       board: igep003x: convert to DM_I2C
+       board: sl50: convert to DM_I2C
+       board: rut: convert to DM_I2C
+       board: novena: convert to DM_I2C
+       board: sniper: convert to DM_I2C
+       board: vf610twr: convert to DM_I2C
+       board: cm_fx6: convert to DM_I2C
+       board: vining_2000: convert to DM_I2C
+
+David Virag (2):
+       i2c: samsung: Drop s3c24x0 specific code.
+       i2c: samsung: Support platforms other than EXYNOS4 and EXYNOS5
+
+Fedor Ross (3):
+       i2c: imx_lpi2c: Fix a typo in bus_i2c_receive
+       i2c: imx_lpi2c: Replace hard-coded bus speed value with bus->speed_hz
+       i2c: imx_lpi2c: Support read transfers longer than 256 bytes
+
+Michal Simek (2):
+       i2c: pca954x: Remove pointer to GD
+       i2c: mux: Fix error path in i2c-arb-gpio
+
+  arch/arm/mach-omap2/omap3/Kconfig          |   1 +
+  board/bosch/shc/board.c                    |  22 +++++++++++-----------
+  board/compulab/cm_fx6/cm_fx6.c             |   3 ++-
+  board/compulab/cm_t43/cm_t43.c             |   2 --
+  board/compulab/common/Makefile             |   8 +++++++-
+  board/compulab/common/eeprom.c             |  14 +++++---------
+  board/compulab/common/eeprom.h             |   2 +-
+  board/kosagi/novena/novena.c               |  10 +++++-----
+  board/kosagi/novena/video.c                | 140 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-----------------------------------------------------------------
+  board/softing/vining_2000/vining_2000.c    |  25 -------------------------
+  configs/am335x_igep003x_defconfig          |   2 +-
+  configs/am335x_shc_defconfig               |   4 +++-
+  configs/am335x_shc_ict_defconfig           |   4 +++-
+  configs/am335x_shc_netboot_defconfig       |   4 +++-
+  configs/am335x_shc_sdboot_defconfig        |   4 +++-
+  configs/am335x_sl50_defconfig              |   2 +-
+  configs/chiliboard_defconfig               |   2 +-
+  configs/cm_fx6_defconfig                   |   2 +-
+  configs/cm_t43_defconfig                   |   3 ++-
+  configs/novena_defconfig                   |   2 +-
+  configs/rut_defconfig                      |   2 +-
+  configs/sniper_defconfig                   |   6 ++++--
+  configs/vf610twr_defconfig                 |   2 +-
+  configs/vf610twr_nand_defconfig            |   2 +-
+  configs/vining_2000_defconfig              |   2 +-
+  drivers/i2c/Kconfig                        |   2 +-
+  drivers/i2c/exynos_hs_i2c.c                |  25 +++++++++++++++++++++----
+  drivers/i2c/imx_lpi2c.c                    |  87 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++-------------------------------
+  drivers/i2c/muxes/i2c-arb-gpio-challenge.c |  11 ++++-------
+  drivers/i2c/muxes/pca954x.c                |   3 ---
+  drivers/i2c/s3c24x0_i2c.c                  |  32 ++++++++++++++++++++++++--------
+  drivers/i2c/s3c24x0_i2c.h                  |   2 ++
+  32 files changed, 242 insertions(+), 190 deletions(-)
+
+after sorting out some small problems
+
+azure build is now fine:
+https://dev.azure.com/hs0298/hs/_build/results?buildId=116&view=results
+
+Thanks!
+
+bye,
+Heiko
 -- 
-2.45.2
-
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
