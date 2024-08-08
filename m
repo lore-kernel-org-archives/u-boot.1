@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9483C52D6F
-	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 03:15:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 114A3C52D6F
+	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 03:16:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B767088A83;
-	Thu,  8 Aug 2024 05:14:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3189688A9C;
+	Thu,  8 Aug 2024 05:14:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QBC9gp2t";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sAZa64HT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BF8788641; Thu,  8 Aug 2024 05:14:54 +0200 (CEST)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id F30DD88A2A; Thu,  8 Aug 2024 05:14:54 +0200 (CEST)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9955A88641
+ by phobos.denx.de (Postfix) with ESMTPS id 7D42C8890F
  for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 05:14:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-5c6661bca43so326329eaf.0
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-70942ebcc29so295333a34.0
  for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 20:14:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723086888; x=1723691688; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723086889; x=1723691689; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FRCqD5v1ORpY/kJffGm3A2945sYGmKt5zChbimK5q7M=;
- b=QBC9gp2t6bba8xUEeUvLAeLYKUzoT8B7whRHXTkUi3OXJAX8izhyTRIY6fXA8ZDZOV
- 1uorl78+wDQNCts1aZEqKM1UsUsGJTTN5KPslUNzvv85AShIKIFmAeuhsxMW2a95FzZl
- mDCp8zLmq2nG4ZFO0KYGl0pzbaAKENkc53Dl8cEq8uzj8VECxnd0vRzmxksoYw21O4aI
- m9hplIT7EJ18B84bVkPkUJ26ZxG1w+NkpT+QvIwHAk55j0/pJ7mlapsQU1SIeeS6Y1n3
- WV/wOBhm4Wb89dmUWNqX5sSvsipgDgjWL/oUQS4KdRms0E2K8SLEGgRjHAKumRtl8vUW
- g7OQ==
+ bh=RzPnAW61MjVevF12qCy9+5xM+ky0LjDVg2Oln8L34PY=;
+ b=sAZa64HTe70NZ6P6lprHKZxTKzVBmfubVY/YinDQotRXQw+alVY5SgtqWCsaTr9dq8
+ fNbTYguM3stK6qFlr21RsTGiw2IakGW6rCtW7FyAnIi+9cAE+AxTn749gRbH/w/KJLWN
+ 9j4M4Al/GsBaAznZyCGvHws/O0Kk0s/YFLZtum5lxB98fX3XlLP0kArVKRlK5q1/UI2d
+ zQptkxQ6K+9s9wu4oGuMHKuHxdDAlZd4dJKgwd7a09cy/uZB7Moei9yS0UoQxNwro/PK
+ bV0muY59wJqGTgSWbJ/gwhWBVg8F33FOsyggOPHv+s8WT/bD+Gea7NmPRuFR17oyNZ+V
+ gakw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723086888; x=1723691688;
+ d=1e100.net; s=20230601; t=1723086889; x=1723691689;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FRCqD5v1ORpY/kJffGm3A2945sYGmKt5zChbimK5q7M=;
- b=XVBbDotl/RIRC5471aNQtJVGXKbA1OA1ZDuurFaj58G1uej+cqTmJ9vpqpf1um1tl8
- nn45Aw3kn1wLpb6046x5KGZnmWnw7eezBIrbhfZlkPza7Lz1ZwRmh12G9+QWDnwELjhq
- n1SKST+W/kwT+/XQ9MWpQPooMewb8DX/td6IaTOwNIlszkW6RqXw521OMQNEoF84/QZv
- bugPb3GWpuwD3fyD3alspm4lFuWXOp/wQL4vn+AGjgvhhhMZ2GD9lZrzlWXkc4/05jBZ
- SOf6fbqUfb7c54RUvMWW9nFzANiJZSJ2y5+ajVnDVmMAYqSzeJndDhO8EVJSikgU/8Nx
- 52CA==
+ bh=RzPnAW61MjVevF12qCy9+5xM+ky0LjDVg2Oln8L34PY=;
+ b=u3BG6iQwI8kTEpg/U/J7yYsJmCa4PBgadfoBGZWXdS1sh9ghbqK9a6QjgPj7OJjhdd
+ DQ0lD5FZmkUp0xn5nNOB/zopdp9/S9qW1WCn3wxbKvn/kxct2IcljSqox3+iOVi6OISo
+ ZMI5d9rLz9do42DZEC6cv3GW9l3c0pF5aQo+e5+Fvh5P+2rUGld5vHE9wn47DncFXkH2
+ fC5Ur4XLH+Up4UMJ0nUzMGZLz1D1HgMseCl0OPbFa3FGXCrcUe/F5i0iSif/wg1dGjQa
+ 3TNaTtmKww6I7jGNh0CKElPXpeUIMqxNz7N64EbA6W9/HKyi9opFh++0y/dHEMSAoSyf
+ ZQ0w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXAo1zw8OL+VTydj/Y/dwelsvC6PMvTW23i+PGJeN6mfF/KnONuIhrKHWg2r+/5vlgSvhXv4LG0/T+6U7+eM53lmy9xQA==
-X-Gm-Message-State: AOJu0YxV8PwFVlRcvDDEOTvDc0N101M83FKqslCW+L7ofGingsKDzOi0
- aiqAYtdmTR9akqmskPSCij0L1hE5Aev9uaWgqsZjykNP34hKJ6jzdjCoJ43S1ZE=
-X-Google-Smtp-Source: AGHT+IEHWz/bE5JXHfX++OMQuVjjxPjYS9b0c/rAjQBgjLIX2Y4lC9T/+pWotCRA29r3eo1bn/T3Vw==
-X-Received: by 2002:a05:6820:2782:b0:5d5:c3a9:4010 with SMTP id
- 006d021491bc7-5d855bd447fmr667311eaf.5.1723086888184; 
- Wed, 07 Aug 2024 20:14:48 -0700 (PDT)
+ AJvYcCUB9F4tsyLRwOIAnpIRnlDZMESZ96b7MSrtnJUWyvPiz4U5K85rOSbKc5h3zDq4XPCsMmeeQJv0kLD8fv+k6h2JoBNerQ==
+X-Gm-Message-State: AOJu0YyVW7xk7qFj1oBnJTgkAVl+zzcjkVfw7AMQxez3HGiN3g9q3VHl
+ IjbmZDSX+0NkntSMzG5IFivEkfXsTi3PezQtnEwuBdkblUAiVi1EPfbbpYQXIXA=
+X-Google-Smtp-Source: AGHT+IEp6OCbsTf7zRBWlCiMJLpuG7ueaFPSZ1TS3tYL/37rO6G0tBeXQLrWXIcdYoCl4rL/9LA6lg==
+X-Received: by 2002:a05:6830:6705:b0:709:2721:ad44 with SMTP id
+ 46e09a7af769-70b4fc35a9emr972334a34.12.1723086889517; 
+ Wed, 07 Aug 2024 20:14:49 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5d7478b084csm3481820eaf.0.2024.08.07.20.14.47
+ 46e09a7af769-70a3a76907fsm5163119a34.71.2024.08.07.20.14.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 20:14:47 -0700 (PDT)
+ Wed, 07 Aug 2024 20:14:49 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Minkyu Kang <promsoft@gmail.com>, Minkyu Kang <mk7.kang@samsung.com>,
  Jaehoon Chung <jh80.chung@samsung.com>
@@ -79,10 +79,10 @@ Cc: Tom Rini <trini@konsulko.com>, Henrik Grimler <henrik@grimler.se>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v5 04/38] mmc: dw_mmc: Extract FIFO init into a separate
- routine
-Date: Wed,  7 Aug 2024 22:14:10 -0500
-Message-Id: <20240808031444.9619-5-semen.protsenko@linaro.org>
+Subject: [PATCH v5 06/38] mmc: dw_mmc: Extract FIFO data transfer into a
+ separate routine
+Date: Wed,  7 Aug 2024 22:14:12 -0500
+Message-Id: <20240808031444.9619-7-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240808031444.9619-1-semen.protsenko@linaro.org>
 References: <20240808031444.9619-1-semen.protsenko@linaro.org>
@@ -104,13 +104,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move FIFO threshold initialization into a separate function to make
-dwmci_init() more readable.
+FIFO data transfer is implemented as quite a massive chunk of code.
+Extract it into a dedicated function to make dwmci_data_transfer()
+easier to read and reduce the indentation level of the code.
 
 No functional change.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
 Changes in v5:
   - (none)
@@ -122,54 +122,145 @@ Changes in v3:
   - (none)
 
 Changes in v2:
-  - Added R-b tag from Quentin
+  - (none)
 
- drivers/mmc/dw_mmc.c | 25 +++++++++++++++----------
- 1 file changed, 15 insertions(+), 10 deletions(-)
+ drivers/mmc/dw_mmc.c | 107 +++++++++++++++++++++----------------------
+ 1 file changed, 53 insertions(+), 54 deletions(-)
 
 diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
-index 395b699b0a0a..4a9e57165fbb 100644
+index b9c14fe6857b..b99f63a6f8bd 100644
 --- a/drivers/mmc/dw_mmc.c
 +++ b/drivers/mmc/dw_mmc.c
-@@ -538,6 +538,20 @@ static int dwmci_set_ios(struct mmc *mmc)
- 	return 0;
+@@ -139,25 +139,67 @@ static unsigned int dwmci_get_timeout(struct mmc *mmc, const unsigned int size)
+ 	return timeout;
  }
  
-+static void dwmci_init_fifo(struct dwmci_host *host)
-+{
-+	if (!host->fifoth_val) {
-+		u32 fifo_size;
+-static int dwmci_data_transfer(struct dwmci_host *host, struct mmc_data *data)
++static int dwmci_data_transfer_fifo(struct dwmci_host *host,
++				    struct mmc_data *data, u32 mask)
+ {
+-	struct mmc *mmc = host->mmc;
++	const u32 fifo_depth = (((host->fifoth_val & RX_WMARK_MASK) >>
++				 RX_WMARK_SHIFT) + 1) * 2;
++	const u32 int_rx = mask & (DWMCI_INTMSK_RXDR | DWMCI_INTMSK_DTO);
++	const u32 int_tx = mask & DWMCI_INTMSK_TXDR;
+ 	int ret = 0;
+-	u32 timeout, mask, size, i, len = 0;
+-	u32 *buf = NULL;
+-	ulong start = get_timer(0);
+-	u32 fifo_depth = (((host->fifoth_val & RX_WMARK_MASK) >>
+-			    RX_WMARK_SHIFT) + 1) * 2;
++	u32 len = 0, size, i;
++	u32 *buf;
 +
-+		fifo_size = dwmci_readl(host, DWMCI_FIFOTH);
-+		fifo_size = ((fifo_size & RX_WMARK_MASK) >> RX_WMARK_SHIFT) + 1;
-+		host->fifoth_val = MSIZE(0x2) | RX_WMARK(fifo_size / 2 - 1) |
-+				   TX_WMARK(fifo_size / 2);
++	size = (data->blocksize * data->blocks) / 4;
++	if (!host->fifo_mode || !size)
++		return 0;
+ 
+-	size = data->blocksize * data->blocks;
+ 	if (data->flags == MMC_DATA_READ)
+ 		buf = (unsigned int *)data->dest;
+ 	else
+ 		buf = (unsigned int *)data->src;
+ 
+-	timeout = dwmci_get_timeout(mmc, size);
++	if (data->flags == MMC_DATA_READ && int_rx) {
++		dwmci_writel(host, DWMCI_RINTSTS, int_rx);
++		while (size) {
++			ret = dwmci_fifo_ready(host, DWMCI_FIFO_EMPTY, &len);
++			if (ret < 0)
++				break;
++
++			len = (len >> DWMCI_FIFO_SHIFT) & DWMCI_FIFO_MASK;
++			len = min(size, len);
++			for (i = 0; i < len; i++)
++				*buf++ = dwmci_readl(host, DWMCI_DATA);
++			size = size > len ? (size - len) : 0;
++		}
++	} else if (data->flags == MMC_DATA_WRITE && int_tx) {
++		while (size) {
++			ret = dwmci_fifo_ready(host, DWMCI_FIFO_FULL, &len);
++			if (ret < 0)
++				break;
++
++			len = fifo_depth - ((len >> DWMCI_FIFO_SHIFT) &
++					    DWMCI_FIFO_MASK);
++			len = min(size, len);
++			for (i = 0; i < len; i++)
++				dwmci_writel(host, DWMCI_DATA, *buf++);
++			size = size > len ? (size - len) : 0;
++		}
++		dwmci_writel(host, DWMCI_RINTSTS, DWMCI_INTMSK_TXDR);
 +	}
-+
-+	dwmci_writel(host, DWMCI_FIFOTH, host->fifoth_val);
+ 
+-	size /= 4;
++	return ret;
 +}
 +
- static int dwmci_init(struct mmc *mmc)
- {
- 	struct dwmci_host *host = mmc->priv;
-@@ -562,16 +576,7 @@ static int dwmci_init(struct mmc *mmc)
++static int dwmci_data_transfer(struct dwmci_host *host, struct mmc_data *data)
++{
++	struct mmc *mmc = host->mmc;
++	int ret = 0;
++	u32 timeout, mask, size;
++	ulong start = get_timer(0);
++
++	size = data->blocksize * data->blocks;
++	timeout = dwmci_get_timeout(mmc, size);
  
- 	dwmci_writel(host, DWMCI_IDINTEN, 0);
- 	dwmci_writel(host, DWMCI_BMOD, 1);
--
--	if (!host->fifoth_val) {
--		uint32_t fifo_size;
--
--		fifo_size = dwmci_readl(host, DWMCI_FIFOTH);
--		fifo_size = ((fifo_size & RX_WMARK_MASK) >> RX_WMARK_SHIFT) + 1;
--		host->fifoth_val = MSIZE(0x2) | RX_WMARK(fifo_size / 2 - 1) |
--				TX_WMARK(fifo_size / 2);
--	}
--	dwmci_writel(host, DWMCI_FIFOTH, host->fifoth_val);
-+	dwmci_init_fifo(host);
+ 	for (;;) {
+ 		mask = dwmci_readl(host, DWMCI_RINTSTS);
+@@ -168,50 +210,7 @@ static int dwmci_data_transfer(struct dwmci_host *host, struct mmc_data *data)
+ 			break;
+ 		}
  
- 	dwmci_writel(host, DWMCI_CLKENA, 0);
- 	dwmci_writel(host, DWMCI_CLKSRC, 0);
+-		if (host->fifo_mode && size) {
+-			len = 0;
+-			if (data->flags == MMC_DATA_READ &&
+-			    (mask & (DWMCI_INTMSK_RXDR | DWMCI_INTMSK_DTO))) {
+-				dwmci_writel(host, DWMCI_RINTSTS,
+-					     mask & (DWMCI_INTMSK_RXDR |
+-						     DWMCI_INTMSK_DTO));
+-				while (size) {
+-					ret = dwmci_fifo_ready(host,
+-							DWMCI_FIFO_EMPTY,
+-							&len);
+-					if (ret < 0)
+-						break;
+-
+-					len = (len >> DWMCI_FIFO_SHIFT) &
+-						    DWMCI_FIFO_MASK;
+-					len = min(size, len);
+-					for (i = 0; i < len; i++)
+-						*buf++ =
+-						dwmci_readl(host, DWMCI_DATA);
+-					size = size > len ? (size - len) : 0;
+-				}
+-			} else if (data->flags == MMC_DATA_WRITE &&
+-				   (mask & DWMCI_INTMSK_TXDR)) {
+-				while (size) {
+-					ret = dwmci_fifo_ready(host,
+-							DWMCI_FIFO_FULL,
+-							&len);
+-					if (ret < 0)
+-						break;
+-
+-					len = fifo_depth - ((len >>
+-						   DWMCI_FIFO_SHIFT) &
+-						   DWMCI_FIFO_MASK);
+-					len = min(size, len);
+-					for (i = 0; i < len; i++)
+-						dwmci_writel(host, DWMCI_DATA,
+-							     *buf++);
+-					size = size > len ? (size - len) : 0;
+-				}
+-				dwmci_writel(host, DWMCI_RINTSTS,
+-					     DWMCI_INTMSK_TXDR);
+-			}
+-		}
++		ret = dwmci_data_transfer_fifo(host, data, mask);
+ 
+ 		/* Data arrived correctly. */
+ 		if (mask & DWMCI_INTMSK_DTO) {
 -- 
 2.39.2
 
