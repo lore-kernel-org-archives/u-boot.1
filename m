@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5A85C3DA4A
-	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 21:30:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64DA3C52D73
+	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 21:31:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8256B88B99;
-	Thu,  8 Aug 2024 23:30:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1BE3488BA5;
+	Thu,  8 Aug 2024 23:30:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RQMWdFtt";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tBxdI2og";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D69588AF6; Thu,  8 Aug 2024 23:30:18 +0200 (CEST)
+ id BC01888B36; Thu,  8 Aug 2024 23:30:18 +0200 (CEST)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E06AF88B09
+ by phobos.denx.de (Postfix) with ESMTPS id E1EEB88B0E
  for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 23:30:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 478LTpL6096280;
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 478LTpw3096276;
  Thu, 8 Aug 2024 16:29:51 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1723152591;
- bh=8+iE+ZyL6EvBJE2AV5ia7iX7ArV79Z6+Rkul+6ujWaE=;
+ bh=I5H0SVWFp5Jl0CTVLvRQzW5SdsbW6q0N/LN8YiYMxP0=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=RQMWdFttrz02BHzzywV4pVavhUghUuNkbPEaJtH4DzU67DtiPhxxKBfTTWnIXE7FP
- rvkWGHp0kglKikxQPsyF5/meepP5iFS2rlhdE60rOIEQzCPKrhK0J99letzVZ6r+xp
- autB+eZcWNfK3CfHy1Lfi3S/UAhpqRFFG6/twFWw=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 478LTpRf027957
+ b=tBxdI2ogEPcIGAitIom0TSK6yzB6k0Z+CpGyJGX5m0A2WekuHZ+TL9XMXLDTQVGoM
+ +QQoii6QumIdLvV+fA1RTeMZV9thVdH6ikNQsCXoWsb/VRILm4hSU+6S6LIpVbbMpI
+ 47jBtx92J/o7h2+KnCoBxbWsC9oO1HiwNgZ60jEU=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 478LTprc011934
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Thu, 8 Aug 2024 16:29:51 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 8
  Aug 2024 16:29:51 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Thu, 8 Aug 2024 16:29:51 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 478LTpQE122952;
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 478LTpUU122955;
  Thu, 8 Aug 2024 16:29:51 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Nishanth Menon <nm@ti.com>, Reid Tonking <reidt@ti.com>, Udit Kumar
@@ -58,9 +58,9 @@ To: Nishanth Menon <nm@ti.com>, Reid Tonking <reidt@ti.com>, Udit Kumar
  <n-francis@ti.com>, Sumit Garg <sumit.garg@linaro.org>, Tom Rini
  <trini@konsulko.com>, <afd@ti.com>, <eballetb@redhat.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH 1/5] arch: arm: dts: k3-j784s4-r5-evm: Add missing fss range
-Date: Thu, 8 Aug 2024 16:29:22 -0500
-Message-ID: <20240808212926.3790223-2-j-humphreys@ti.com>
+Subject: [PATCH 2/5] arch: arm: dts: k3-am69-r5-sk: Add missing fss range
+Date: Thu, 8 Aug 2024 16:29:23 -0500
+Message-ID: <20240808212926.3790223-3-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240808212926.3790223-1-j-humphreys@ti.com>
 References: <20240808212926.3790223-1-j-humphreys@ti.com>
@@ -97,13 +97,13 @@ repo [1] into dts/upstream)
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- arch/arm/dts/k3-j784s4-r5-evm.dts | 6 ++++++
+ arch/arm/dts/k3-am69-r5-sk.dts | 6 ++++++
  1 file changed, 6 insertions(+)
 
-diff --git a/arch/arm/dts/k3-j784s4-r5-evm.dts b/arch/arm/dts/k3-j784s4-r5-evm.dts
-index bef4573d3d2..26af72d73f4 100644
---- a/arch/arm/dts/k3-j784s4-r5-evm.dts
-+++ b/arch/arm/dts/k3-j784s4-r5-evm.dts
+diff --git a/arch/arm/dts/k3-am69-r5-sk.dts b/arch/arm/dts/k3-am69-r5-sk.dts
+index f177f563527..d42d7afc637 100644
+--- a/arch/arm/dts/k3-am69-r5-sk.dts
++++ b/arch/arm/dts/k3-am69-r5-sk.dts
 @@ -97,6 +97,12 @@
  	      <0x0 0x58000000 0x0 0x8000000>;
  };
