@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D26A5C3DA4A
-	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 10:08:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B208C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 10:13:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D026886E2;
-	Thu,  8 Aug 2024 12:08:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0BD0B88AE1;
+	Thu,  8 Aug 2024 12:13:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lnsDr6gB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nQO+wPVs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59924888FA; Thu,  8 Aug 2024 12:08:31 +0200 (CEST)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
+ id AF3AF88AE0; Thu,  8 Aug 2024 12:13:51 +0200 (CEST)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DCE887DEA
- for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 12:08:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7348A88A67
+ for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 12:13:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-2cb55ff1007so704072a91.0
- for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 03:08:28 -0700 (PDT)
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-2cb56c2c30eso1360098a91.1
+ for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 03:13:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723111707; x=1723716507; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723112027; x=1723716827; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TiJC2dXkXwHVmJWtPHfDk1WfxB5AKK3Gxzxq1yivrOI=;
- b=lnsDr6gBZ7DLeUlGf6ceFEgX6xjr6KBLq6zONFrAeZwntkPr0N3Urd33q9fvQSmwFX
- ISsKJdWcirBbkf3JMq+m53OxBEviCn6BBrFJ6Z1giC7zwiC/sPrc+/TjXx/ddQROTxYv
- yDMH9kqrmP2ZKKsEkbqaoKOYUo7+ssulP3Ap8oYMD6IT250Wsnbg89lkjbflfPveoKIw
- ACA1vmrZ61DaXlhxTQspSr2iZOycISFIwryGWxV/Wveoa/J6sdq69bY1l4467tiHk0w8
- 7+RVnUQBqS+CfDsvXbHZ24yUrT51VRciIRi7H2KwsZ1AiZ1SRh/sXKi/3GbyKMmLy47O
- WbHQ==
+ bh=+R4v6TuI8JY89C+kmlOQkaIN5wrzxaIJF+5lNMDXJnk=;
+ b=nQO+wPVsm7ZKgqesPo6F38LGwb7k15HpsKm99X3dobxKbJoZJk+W/Pz/rawmBe7HAA
+ gp98y1IHbZixX+iwckOs00SCPx+LhoiCVC66YK2xMC7R4JdXjWv8SHJkUjyMnELmqE/8
+ XVlQw9ctai08CrGE3258tPmLvSnv7VfzfiJuie6RWquUB9xcXZtloP0v3qGOXw7X754g
+ rcMhBf+g6ll2PFt/r2lQf14vaxGswt0Jpvxb0h29P3kSyNw5Me4jCLoiZOS61mDrlW/S
+ 4tSserTKfwWS6yR5qsn1MbMxLe/bL6ymuSvdxKl69TtupxGFvHo51OBous12FQcAJuTR
+ W3pQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723111707; x=1723716507;
+ d=1e100.net; s=20230601; t=1723112027; x=1723716827;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=TiJC2dXkXwHVmJWtPHfDk1WfxB5AKK3Gxzxq1yivrOI=;
- b=h1t8uLIBhaE7WND4kDP7aiOGcbFaTNnKXx2/4ck2TV7n2TbVRTpBC8BWK8OvDSqxaD
- UK8wM7mqH3rNcpkVddELvd5M2RLqxr+J+whGizmLjyjq4YYcynz45ACTAOry5+JFuqDt
- AI+co7udfDUG6svcqJOVYt/0D07y8ZZxlGEBcyWokAYBiTJhAEahEgVwvr5Li31/H0lx
- FfzzxooOUJzXR52HVOtE6ABm9v+6ldR/lINtdd4eYcpKDYFJZURRLLHWuRwVZKYY6Nm3
- kTVQe1Rpfq2CDn2cZ9c6e9fUBwkxxaIkIU3/ZM5OWoTIIzFVyqWegZKw5h889JXFRml/
- mkuw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWH4apoPnIIkOCX1CWA+gB67wN7ZWoo1UgrwjKiTXihTSJNvk1dcGH2GzXOQIm55Z5MX2kKYGY7pLdMiRYW19E4IGzkeA==
-X-Gm-Message-State: AOJu0Yzv7iY8x68QVQTN32FNyeGppsK9Br7A6EUwmtdlEr7D89tJxTPq
- 6u7Bpym3WxASTn87/tixDWXBGl0VcFD3viRLIilspTx+0eAq2AooazSytoOUdLY1b5LHiqE64I7
- vcb3OFMnhvk3xjNTuPY0+eJfmKPuFv0o50O4aPQ==
-X-Google-Smtp-Source: AGHT+IGbLN9/FECJWO4ILaJOrDhu+tpOTkqRADn1W0uLswF0pLVz0wEbmYGMbHFmbq6CEQRbL9f3cNI98EtwhEkxHwI=
-X-Received: by 2002:a17:90a:9a92:b0:2c1:9892:8fb with SMTP id
- 98e67ed59e1d1-2d1c337141amr1405455a91.5.1723111707047; Thu, 08 Aug 2024
- 03:08:27 -0700 (PDT)
+ bh=+R4v6TuI8JY89C+kmlOQkaIN5wrzxaIJF+5lNMDXJnk=;
+ b=HRPfYfReFBvSaumzdCZLRKyUc/diAOBp4e3BkeoglMauUdp8BOhQnuIT5kOBhxFBzm
+ uOS4apgLRBXSSmllOn2X3ASTK/Eb3yyNN3F1RBIzJ9KH0gV5GlzMGrt7PQY6uXEY69Sg
+ 9vdU6n0Leh4Oqp56eHch3wJuiqeCTmY7nL7P3zDyyYhZEU8C5af1DyLNTxXL6yGYwQad
+ ADlCjY+QjkvAlE1gWS+6y67g4hrCi8wsL4b/qgqKAAQ46GNfFUUQeLHVTxISxPSIefZv
+ 24lvlFZvTdjJzvxSvHi59qReYuiz71KhQ0vqwno/mbKD36pZFNGVKzjrWI3lqNUTakch
+ opqg==
+X-Gm-Message-State: AOJu0YxILj2U001GuxvUpDCgC/UVKwkkh/8R4nvclLdppWo86mS1E6t2
+ 6UJzXfcFm84llSMMvjZgtT5Nri0lbbRhalJ0gXjMguBbm6WoCvrerSoSckb+bO2W7qg1I9RlY8t
+ se30Q5XO8isZjAZx0G8G+8ywrMIRInM6N4HDgFg==
+X-Google-Smtp-Source: AGHT+IHcFw9jHaG0vY1y13OTjNL2np7Vn2xxzRs6oEdFTM1Jkvw8PW7XWndeVUzhRmRfe7NB58BSqVNwPt9vTmJnF/8=
+X-Received: by 2002:a17:90a:67ca:b0:2c8:4250:66a7 with SMTP id
+ 98e67ed59e1d1-2d1c4f7fcf3mr1903502a91.1.1723112027299; Thu, 08 Aug 2024
+ 03:13:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240806221138.210530-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240806221138.210530-1-heinrich.schuchardt@canonical.com>
+References: <20240806125850.2316956-1-sjg@chromium.org>
+ <20240806125850.2316956-22-sjg@chromium.org>
+In-Reply-To: <20240806125850.2316956-22-sjg@chromium.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 8 Aug 2024 13:07:50 +0300
-Message-ID: <CAC_iWjKUVPBAge1COJhnDY6ikfXjD+1dZoxJmTeJ6xohxGa7fw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: correct description of
- efi_get_distro_fdt_name
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
+Date: Thu, 8 Aug 2024 13:13:10 +0300
+Message-ID: <CAC_iWj+-2RtLhCFkY27G-SYvbcrWfu4HWMajT4L0WfjEV+uUqw@mail.gmail.com>
+Subject: Re: [PATCH v2 21/39] test: mbr: Unmap the buffers after use
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Alexander Gendin <agendin@matrox.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,31 +89,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 7 Aug 2024 at 01:11, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> Use the correct function name.
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/efi_loader/efi_fdt.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/lib/efi_loader/efi_fdt.c b/lib/efi_loader/efi_fdt.c
-> index c5ecade3aeb..f882622fdad 100644
-> --- a/lib/efi_loader/efi_fdt.c
-> +++ b/lib/efi_loader/efi_fdt.c
-> @@ -14,7 +14,7 @@
->  #include <vsprintf.h>
->
->  /**
-> - * distro_efi_get_fdt_name() - get the filename for reading the .dtb file
-> + * efi_get_distro_fdt_name() - get the filename for reading the .dtb file
->   *
->   * @fname:     buffer for filename
->   * @size:      buffer size
-> --
-> 2.45.2
->
+Hi Simon
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On Tue, 6 Aug 2024 at 15:59, Simon Glass <sjg@chromium.org> wrote:
+>
+> This tests maps some local variables into sandbox's address space. Make
+> sure to unmap them afterwards.
+>
+> Note that the normal approach with sandbox is to use a fixed memory
+> address in the RAM, to avoid needing to create a map for transient local
+> variables.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> (no changes since v1)
+>
+>  test/cmd/mbr.c | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/test/cmd/mbr.c b/test/cmd/mbr.c
+> index 1a35ba3351c..8a4d61b2928 100644
+> --- a/test/cmd/mbr.c
+> +++ b/test/cmd/mbr.c
+> @@ -461,6 +461,9 @@ static int mbr_test_run(struct unit_test_state *uts)
+>                         "5P EBR+0x%04X: expected %#02X, actual: %#02X\n",
+>                         ebr_cmp_start + i, ebr_parts_ref_p5[i], rbuf[ebr_cmp_start + i]);
+>         }
+> +       unmap_sysmem(mbr_wbuf);
+> +       unmap_sysmem(ebr_wbuf);
+> +       unmap_sysmem(rbuf);
+
+Seems like a Fixes: tag is needed?
+
+Thanks
+/Ilias
+>
+>         return 0;
+>  }
+> --
+> 2.34.1
+>
