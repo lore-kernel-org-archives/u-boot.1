@@ -4,82 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52A70C52D7B
-	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 16:20:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 705ECC3DA4A
+	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 16:21:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7479A88AF8;
-	Thu,  8 Aug 2024 18:20:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E798A88BC7;
+	Thu,  8 Aug 2024 18:21:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PJKvASmz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d8jeSANx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 878D688AF9; Thu,  8 Aug 2024 18:20:38 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id C9B8E88BC1; Thu,  8 Aug 2024 18:21:29 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 405D388AE8
- for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 18:20:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9513588B9B
+ for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 18:21:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-261e543ef35so742716fac.3
- for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 09:20:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5ba482282d3so1455288a12.2
+ for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 09:21:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1723134035; x=1723738835; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UYvyo3DSx9ifuHd6s08U1D4PCJp3B4hHZ7x7XyDeeh4=;
- b=PJKvASmzTb6cQ7QeNWiokSMxypILFPlgkdGJ5L5ZFD0Z/ak4xs16KQp1SPawm+ySCV
- u28WVFUej/AaPR337nE0Tjy9m3aZRlMmTIY15Gi+CHBDEGMTacMBUcZC2a0Ehs2f8rOg
- vuV7lbftl+KPjO9Rc1Vapnd/eFvrRkfYI/5Os=
+ d=linaro.org; s=google; t=1723134087; x=1723738887; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ip6TgCcpMt8nf/GRSkOUSlUR6Ev59ND2JfSI8X5le1g=;
+ b=d8jeSANxI8dxnMa7ZuWtLdbt83hOn8jns3EpOLMKP6lS3HXwWBoYXQfAXFGblADGlk
+ pi5BFijaM3EtIgXm75RJqKrpiOKd5WRjmYDG6/QOQNDABSIgireRVIuvjZOxg4O0Na+g
+ ptcCLt5xQ8IWmHvBjltRfCGtaOZZk1jxdPq4p+iC6Hy32LkTSDXZsSueT/ZCXFGul8UH
+ l22dGxWlOPpMVIwpVVY269lE04XZ2052orzzyyYNLbRzjP3XX6Cr1pXqL6VP4ZrJdBFd
+ aOMIpxOCCiclHE+6dwiWAKA9ZCKhcDdCAq5/6ILkgtgz9fo38brmo0Cw3TD3ZMd+WLb3
+ NcLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723134035; x=1723738835;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UYvyo3DSx9ifuHd6s08U1D4PCJp3B4hHZ7x7XyDeeh4=;
- b=n0m4MOPdqbQWdr6Nl4JevnxQCVL3VxqRyoVBNmHl+9IWqozHX6BRUO89YUUjb1HWnw
- 3FzMh70m1REPQbyX2aoHcym7kvCi461O776BDAPnXxaGtZ0Uns+0uVCZNMielJwSTKpq
- 8etfPlFcLF3RLw1vVwkykCsP5t5QHkujGmATQvjb40R8URfOUlTI8ygRVRpjVjNGm2ql
- TSgYz/84leAhIFPPmLRJVn59X8CExZ96bSQVZ8rV8C4acDWcHSom+rYWfa1vPLnZhQND
- DjhaE3ity0qqqoAuQQsQkMthBcK4zUIZPn3hds63yhy8dNYTe2xxLxdM0es+wPycSgDE
- uC/g==
-X-Gm-Message-State: AOJu0YwHMqurEf2fA+XQlzXh8piF6haL2vtttU1MwReCuW33GDOJ/UJH
- 3QVLZ1OeWebz31+CuWRfe/qMNu8PaKULanPHtLVbjy92hdwXWxsjp8pEmFCWsw08UIszeCZyfsv
- C
-X-Google-Smtp-Source: AGHT+IFm9KuqQqNq9aT6ny+LUbYVLSUWoQFkvMwvfJ/oAE6vTyAXBppBKMu65sgh1TXQS48mMW+cqA==
-X-Received: by 2002:a05:6870:9e4d:b0:254:c512:88c6 with SMTP id
- 586e51a60fabf-2692b8616edmr2411700fac.51.1723134034965; 
- Thu, 08 Aug 2024 09:20:34 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-191-8-236.totalplay.net.
- [187.191.8.236]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70a31d9dff9sm5527913a34.2.2024.08.08.09.20.32
+ d=1e100.net; s=20230601; t=1723134087; x=1723738887;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ip6TgCcpMt8nf/GRSkOUSlUR6Ev59ND2JfSI8X5le1g=;
+ b=HzpVgof69uJJxa1wxUi/v/aJd7G2WxL6eXIeXhaR834IPKSMvX0hXNWBIcqYm1AAHq
+ JnA6/nu51xxBfJCM6n3GlN9DgDiY0HDCKNg4SUpfL7dP386aGi/cwQ7Gx/8vVUzbHR0k
+ zFh5tiqCqI64fguwQW6uMoQnlgN8ia8MWDdIUUur6gifCzUUzIiACdcowbR6B7otCNIj
+ hukwhD0w/EN+CbaPmIUxmna4aa2ig6YfMFEMdCyKwhPRQAu5nYN2+oE+FW1X+iPrqoox
+ VjU0mlLpY3ih2qcltg/GMqnw82F8QV1UdhsglG8NjAYW7ZeybxPCmAFOHHczNp7T8BPQ
+ eVvQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVJmVynLp9H9Jp+dekQ+oIz8VC2bfS2gJM8kWXaZd3f+0z7f64vfW7j3vhHijDdqZUcAWqQMe4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzgKtjC1UrzbcXhDG/3W5cbEXST0mBwXJRNx74GxtAH9B59uZWs
+ 1s8q4XG2LJ8tLdUNCqUXgDLQDwGy01UAsPcusQ97L06TBvVgBw1lndwccvTAIayRZZuP4caiq8K
+ dVM4=
+X-Google-Smtp-Source: AGHT+IHL4i736b5HL9BfL5TfJWvjPXTHNqH0HrfJKwGxIaSEqc2N6O+OPGPzmQwtFZKDP6oER4LLKw==
+X-Received: by 2002:a05:6402:518d:b0:5ab:3174:9e1f with SMTP id
+ 4fb4d7f45d1cf-5bbb21a418amr1930030a12.15.1723134086643; 
+ Thu, 08 Aug 2024 09:21:26 -0700 (PDT)
+Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5bbb2e5d76dsm770396a12.80.2024.08.08.09.21.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Aug 2024 09:20:33 -0700 (PDT)
-Date: Thu, 8 Aug 2024 10:20:30 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v8 22/23] test/py: add HTTP (wget) test for the EFI loader
-Message-ID: <20240808162030.GP1626301@bill-the-cat>
-References: <cover.1723050310.git.jerome.forissier@linaro.org>
- <9b055b18f84755d775bf0cf4064e66801608839c.1723050310.git.jerome.forissier@linaro.org>
- <20240807175740.GH1626301@bill-the-cat>
- <fbe3c688-1d3a-4e07-8e20-1cefe1989752@linaro.org>
+ Thu, 08 Aug 2024 09:21:26 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH v2 0/3] ARM64: add symbol name lookup and print a backtrace
+ on exception
+Date: Thu, 08 Aug 2024 18:21:23 +0200
+Message-Id: <20240808-arm64-backtrace-v2-0-29665a2265cf@linaro.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="HRDB3oIPOTXu0YSX"
-Content-Disposition: inline
-In-Reply-To: <fbe3c688-1d3a-4e07-8e20-1cefe1989752@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAITwtGYC/3WNQQ6CMBBFr0JmbU07KaCuvIdhMbQFJio1U0I0p
+ He3snf5XvLf3yAF4ZDgUm0gYeXEcS6AhwrcRPMYFPvCgBqtbo1WJM/Gqp7cfRFyQeEZm6FtrO+
+ 9g7J6SRj4vRdvXeGJ0xLlsx+s5mf/t1ajtKoJe6q1PdXeXx88k8RjlBG6nPMXFUTAs68AAAA=
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Marek Vasut <marex@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, u-boot@lists.denx.de, 
+ Caleb Connolly <caleb.connolly@linaro.org>
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2932;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=g/XScmJ8U4dE2e3gjQH6UVeT6tcCwve7hvULv32gg0o=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmtPCFWe2vVRLAWsaH1uk380TDPoE5M/cYryQFs
+ PGXkAT53BSJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZrTwhQAKCRAFgzErGV9k
+ tmR/EACXPLQQM3XLs4XDIXsVa/CpIU2mXqqzV7v2EOB+0V3nQNecW1r+HjMerTc6hzVouFZt+M1
+ pdJJSN+Srfc/XrK0GjIiTtQ9AGEPXzgmzrGIiJdZWRZGuoajG1NVKgjvK2v2rclw0brbWd8gpvn
+ e9dX3QPTC/8LUq0ugdE+cOc6lU4iMkMNC6xD2j/dg9G6Xoxh81nCG0Xg0qRwfUbPdKGiJv15TSJ
+ zvdaR35QYlaksrNFqYV+s660HJG4JlaVBVrDu2K8JaiI6lh5kCxw4ZVI3LW7VTsyiQIVNPeltkw
+ aN6ZK8AaQkLR0b/7YIgF1SyYdXz/EtjehgBT23py7wVTfz4oM4OIm1DjRdcy7Ye2c3Gu/HDM5gQ
+ 7+s+VT9eNBM2U/XnoiWlYNmUMr12r1Le+hM6XGIX1Xkozrf8ldFt7+RGrXqAPGtdvTXyLdEclS5
+ d+h+ttxTJ1iU/Q0BXjtSeqH+VSdnuRcavMZp2U9KLQjdIj13shdromm6YcuU3VXSZxrDh0oYUV1
+ W/CAFnL4PTH39X7OtGN7loCJn7XMJun/wCM6qy9hgzxnAN074x3kWAqvR6bTTCy1eCa2WQEl2AQ
+ ahFZ67gXxJvTP6cdn/TkYn9Z1PWRFiMRkngkiz8f9jrARZ6fl61K0bAth871W273rdHcNgxXGWz
+ MSSIDVAm4kgGIKQ==
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,203 +117,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+U-Boot already emits frame pointers on ARM64, but lacks the code to
+parse them, as well as a mechanism for looking up symbol names at
+runtime.
 
---HRDB3oIPOTXu0YSX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+There was some (seemingly?) leftover code for symbols lookups in
+common/kallsyms.c and associated parts in the makefile, however it
+appears to be entirely unused and unsupported. It relied on generating
+one long string of all symbol addresses and names.
 
-On Thu, Aug 08, 2024 at 03:06:05PM +0200, Jerome Forissier wrote:
->=20
->=20
-> On 8/7/24 19:57, Tom Rini wrote:
-> > On Wed, Aug 07, 2024 at 07:12:06PM +0200, Jerome Forissier wrote:
-> >> Add a test to test_efi_loader.py similar to the TFTP test but for HTTP
-> >> with the wget command.
-> >>
-> >> Suggested-by: Tom Rini <trini@konsulko.com>
-> >> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> >> ---
-> >>  test/py/tests/test_efi_loader.py | 52 +++++++++++++++++++++++---------
-> >>  1 file changed, 37 insertions(+), 15 deletions(-)
-> >>
-> >> diff --git a/test/py/tests/test_efi_loader.py b/test/py/tests/test_efi=
-_loader.py
-> >> index 85473a9049b..64c994fdf95 100644
-> >> --- a/test/py/tests/test_efi_loader.py
-> >> +++ b/test/py/tests/test_efi_loader.py
-> >> @@ -50,6 +50,8 @@ env__efi_loader_helloworld_file =3D {
-> >>  import pytest
-> >>  import u_boot_utils
-> >> =20
-> >> +PROTO_TFTP, PROTO_HTTP =3D range(0, 2)
-> >> +
-> >>  net_set_up =3D False
-> >> =20
-> >>  def test_efi_pre_commands(u_boot_console):
-> >> @@ -110,10 +112,10 @@ def test_efi_setup_static(u_boot_console):
-> >>      global net_set_up
-> >>      net_set_up =3D True
-> >> =20
-> >> -def fetch_tftp_file(u_boot_console, env_conf):
-> >> -    """Grab an env described file via TFTP and return its address
-> >> +def fetch_file(u_boot_console, env_conf, proto):
-> >> +    """Grab an env described file via TFTP or HTTP and return its add=
-ress
-> >> =20
-> >> -    A file as described by an env config <env_conf> is downloaded fro=
-m the TFTP
-> >> +    A file as described by an env config <env_conf> is downloaded fro=
-m the
-> >>      server. The address to that file is returned.
-> >>      """
-> >>      if not net_set_up:
-> >> @@ -128,7 +130,13 @@ def fetch_tftp_file(u_boot_console, env_conf):
-> >>          addr =3D u_boot_utils.find_ram_base(u_boot_console)
-> >> =20
-> >>      fn =3D f['fn']
-> >> -    output =3D u_boot_console.run_command('tftpboot %x %s' % (addr, f=
-n))
-> >> +    if proto =3D=3D PROTO_TFTP:
-> >> +        cmd =3D 'tftpboot'
-> >> +    elif proto =3D=3D PROTO_HTTP:
-> >> +        cmd =3D 'wget'
-> >> +    else:
-> >> +        assert False
-> >> +    output =3D u_boot_console.run_command('%s %x %s' % (cmd, addr, fn=
-))
-> >>      expected_text =3D 'Bytes transferred =3D '
-> >>      sz =3D f.get('size', None)
-> >>      if sz:
-> >> @@ -147,16 +155,8 @@ def fetch_tftp_file(u_boot_console, env_conf):
-> >> =20
-> >>      return addr
-> >> =20
-> >> -@pytest.mark.buildconfigspec('of_control')
-> >> -@pytest.mark.buildconfigspec('cmd_bootefi_hello_compile')
-> >> -def test_efi_helloworld_net(u_boot_console):
-> >> -    """Run the helloworld.efi binary via TFTP.
-> >> -
-> >> -    The helloworld.efi file is downloaded from the TFTP server and is=
- executed
-> >> -    using the fallback device tree at $fdtcontroladdr.
-> >> -    """
-> >> -
-> >> -    addr =3D fetch_tftp_file(u_boot_console, 'env__efi_loader_hellowo=
-rld_file')
-> >> +def do_test_efi_helloworld_net(u_boot_console, proto):
-> >> +    addr =3D fetch_file(u_boot_console, 'env__efi_loader_helloworld_f=
-ile', proto)
-> >> =20
-> >>      output =3D u_boot_console.run_command('bootefi %x' % addr)
-> >>      expected_text =3D 'Hello, world'
-> >> @@ -164,6 +164,28 @@ def test_efi_helloworld_net(u_boot_console):
-> >>      expected_text =3D '## Application failed'
-> >>      assert expected_text not in output
-> >> =20
-> >> +@pytest.mark.buildconfigspec('of_control')
-> >> +@pytest.mark.buildconfigspec('cmd_bootefi_hello_compile')
-> >> +def test_efi_helloworld_net_tftp(u_boot_console):
-> >> +    """Run the helloworld.efi binary via TFTP.
-> >> +
-> >> +    The helloworld.efi file is downloaded from the TFTP server and is=
- executed
-> >> +    using the fallback device tree at $fdtcontroladdr.
-> >> +    """
-> >> +
-> >> +    do_test_efi_helloworld_net(u_boot_console, PROTO_TFTP);
-> >> +
-> >> +@pytest.mark.buildconfigspec('of_control')
-> >> +@pytest.mark.buildconfigspec('cmd_bootefi_hello_compile')
-> >> +def test_efi_helloworld_net_http(u_boot_console):
-> >> +    """Run the helloworld.efi binary via HTTP.
-> >> +
-> >> +    The helloworld.efi file is downloaded from the HTTP server and is=
- executed
-> >> +    using the fallback device tree at $fdtcontroladdr.
-> >> +    """
-> >> +
-> >> +    do_test_efi_helloworld_net(u_boot_console, PROTO_HTTP);
-> >> +
-> >>  @pytest.mark.buildconfigspec('cmd_bootefi_hello')
-> >>  def test_efi_helloworld_builtin(u_boot_console):
-> >>      """Run the builtin helloworld.efi binary.
-> >> @@ -185,7 +207,7 @@ def test_efi_grub_net(u_boot_console):
-> >>      executed.
-> >>      """
-> >> =20
-> >> -    addr =3D fetch_tftp_file(u_boot_console, 'env__efi_loader_grub_fi=
-le')
-> >> +    addr =3D fetch_file(u_boot_console, 'env__efi_loader_grub_file', =
-PROTO_TFTP)
-> >> =20
-> >>      u_boot_console.run_command('bootefi %x' % addr, wait_for_prompt=
-=3DFalse)
-> >=20
-> > Looking at this now that I've added wget to my Pi builds, erm:
-> > U-Boot> wget 200000 EFI/arm64/helloworld.efi
-> >=20
-> > That's not going to work. That's what works fine for a tftp server. I
-> > think the test is going to need to require some http specific
-> > configuration added (and I'll locally start firing off the python
-> > trivial http server or something, for tests).
->=20
-> It should work because 'wget <addr> <file>' is a valid syntax for the leg=
-acy
-> wget as well as for the new one, now that I have added support for it. It
-> takes the address of the http server from ${serverip}. Of course you need=
- a
-> http server listening on the same host as the tfp server, yes.
-> I have tested this on the RPi3.
+The approach taken here is instead largely based on the implementation
+in the Xen hypervisor, it performs basic compression using non-ASCII
+bytes to tokenize repeated string segments which can later be expanded
+back out at runtime.
 
-OK, so problem. This is intermittent (first I saw it on rpi_3_32b built with
-clang (LLVM-17) and lwIP and the second was rpi_3_32b with gcc and lwIP):
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-________________________________ test_efi_helloworld_net_http _____________=
-____________________
-test/py/tests/test_efi_loader.py:187: in test_efi_helloworld_net_http
-    do_test_efi_helloworld_net(u_boot_console, PROTO_HTTP);
-test/py/tests/test_efi_loader.py:159: in do_test_efi_helloworld_net
-    addr =3D fetch_file(u_boot_console, 'env__efi_loader_helloworld_file', =
-proto)
-test/py/tests/test_efi_loader.py:139: in fetch_file
-    output =3D u_boot_console.run_command('%s %x %s' % (cmd, addr, fn))
-test/py/u_boot_console_base.py:288: in run_command
-    raise Exception('Bad pattern found on console: ' +
-E   Exception: Bad pattern found on console: error_please_reset
------------------------------------- Captured stdout call -----------------=
---------------------
-U-Boot> wget 200000 EFI/arm/helloworld.efi
-2320 bytes transferred in 0 ms (### ERROR ### Please RESET the board ###
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D short test summary info =3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
+This is then utilized in the ARM64 interrupt handling routine to dump a
+backtrace in the show_regs() debug function. As well as providing a
+general purpose unwind_stack() function which can be used for debugging.
 
-My first guess is the "in 0 ms" leads to a divide by zero later on?
+== Relocation ==
 
---=20
-Tom
+Since U-Boot relocates itself at runtime, and can be built to be
+position independent in the first place (effectively "relocating" itself
+when it first starts too), we can't really rely on gd->reloc_off.
 
---HRDB3oIPOTXu0YSX
-Content-Type: application/pgp-signature; name="signature.asc"
+The approach taken here is to subtract CONFIG_TEXT_BASE from the address
+of each symbol in the lookup table (while it's being generated), then
+when decoding we just subtract the address of the _start label. Since
+this label address is updated to make U-Boot position independent and
+during relocation, it allows us to avoid re-implementing the relocation
+state handling stuff in the symbol decoder.
 
------BEGIN PGP SIGNATURE-----
+== Size ==
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAma08EgACgkQFHw5/5Y0
-tywkqgwAki7pkkQWumZnLdPnlWRMkLTGp91iQzTndNySrkR3/tZNd/uVrpf4coUp
-JqmXuLmCGGlOY6VFLjFjYlDc6MGavQsSa+A++MK5eiqAlnTVLvX97J0rHIMqtO+S
-VvL/CT/3kI+1W5wRNKk1E+npx4Jg9C0aYl3kJr9xP8Vm2gWwerrxfblERNlxB4bL
-B65hFKfPOdO5ykgRVOfM1kPofc0V8yFHui1LBBxM+wtDneJHR9ciXCMD0p9aTHNu
-6NSUQujHwv2mXBRUtEhHSrc+1vu6vKASCy0xdtC16rkm5cHLcKwk72+FRAFiLzvY
-M+qgfs6ZQ9NoqP4q2S88hNRB8v57OKaI7NVjZXcd5nkW/8BIIdYnjjUx1Mj31uhV
-JygzYitBF3/vpRNnXFqK51CNKPXcEA47BMJRQ/pt3wD9rzMi4dKc+1eI6LTsqFeY
-Z7NduWkLfUL3hZC2Hd2gNjbsT3k/QL1iNUcweqaDa/hXhnRCo/thTLccw0zok1wG
-NtOkI82Q
-=tAlE
------END PGP SIGNATURE-----
+By default this feature is off, and will not effect the size of U-Boot
+binaries. The generated symbols object file is ~85k with the (fairly
+hefty) qcom_defconfig, so there is certainly a cost to be taken into
+account.
 
---HRDB3oIPOTXu0YSX--
+I hope that this implementation can be later extended for other
+platforms. However this is currently beyond my (skill, time)
+capabilities.
+
+---
+Changes in v2:
+- Remove unused last_fp pointer
+- Apply Tom's suggestions (cleanup hunks, don't guard unwind_stack()).
+- Link to v1: https://lore.kernel.org/r/20240710-arm64-backtrace-v1-0-5a2ba50485dd@linaro.org
+
+---
+Caleb Connolly (3):
+      drop unused kallsyms support
+      add support for symbol lookups
+      arm64: unwind stack on exception
+
+ Makefile                      |  24 +-
+ arch/arm/include/asm/ptrace.h |   2 +
+ arch/arm/lib/interrupts_64.c  |  75 +++++
+ common/Makefile               |   1 -
+ common/kallsyms.c             |  43 ---
+ common/system_map.c           |   8 -
+ include/symbols.h             |  19 ++
+ lib/Kconfig                   |   8 +
+ lib/symbols.c                 | 126 ++++++++
+ tools/Makefile                |   3 +
+ tools/symbols.c               | 646 ++++++++++++++++++++++++++++++++++++++++++
+ 11 files changed, 892 insertions(+), 63 deletions(-)
+---
+change-id: 20240710-arm64-backtrace-2926f764dbdc
+base-commit: 13f9c5668411aa18ef64846d5bc86e9e6be52082
+
+// Caleb (they/them)
+
