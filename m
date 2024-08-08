@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6A96C3DA4A
-	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 03:19:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 460A4C52D6F
+	for <u-boot@archiver.kernel.org>; Thu,  8 Aug 2024 03:20:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 977D688BFC;
-	Thu,  8 Aug 2024 05:15:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 13C7788C0F;
+	Thu,  8 Aug 2024 05:15:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="P8Or0G8K";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FiCcR0Aj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8930288B28; Thu,  8 Aug 2024 05:15:10 +0200 (CEST)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
+ id D40D588B8D; Thu,  8 Aug 2024 05:15:10 +0200 (CEST)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DD0988A8C
- for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 05:15:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C20E88B1E
+ for <u-boot@lists.denx.de>; Thu,  8 Aug 2024 05:15:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-3db130a872fso388279b6e.2
- for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 20:15:06 -0700 (PDT)
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-5d5b986a806so736522eaf.1
+ for <u-boot@lists.denx.de>; Wed, 07 Aug 2024 20:15:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723086906; x=1723691706; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723086907; x=1723691707; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=crDJTDIWGS2LNY90dpOb7cQutAxy6tgKbBo7wBVDAbM=;
- b=P8Or0G8KoCtunzFsSC/lmeqejFCP8Gi+5X4+hO75aUxNmBYtUP08RYZnGxBhkdSwAJ
- I+jAYNvTwNuOdlcFwI5XQFNUR89/KuHRVy/B6+eNiy7d8slWM+QUq1wE3i/NeI4Y/ucd
- kmKm85PCaL3VoFLiLkcl6UmEtsrNVP6wCTAAcwlDxxQPJU8EZjKFpV/uYrj1zgVjWEHp
- 05CTMuIEy44D+R6EaTzG7IWGUhTqxsu6So+/EY+wBo0K11I1i7tDjnUkfIvQHkgoK4YQ
- Ihbmzu24NPJ8NOui9nNfaxNd453Dq+IwbzhuAC2okng+G4Ig1iPcMNgbJEkoSNrqIIUo
- ZjTQ==
+ bh=fWrhxoCkEjPUic6kyEGt3ZwqMIeuuOwcuUhFbLTHQ3Q=;
+ b=FiCcR0AjyqDPumbGI9lpf/iYgZ53oSFjVDtRsiNGlzBxjkB7lnt3uc8KH8xiOPfrZ0
+ SDZnlNiktyhdnBBAAPGusQwSKBH2/kSh7IKjh91LZTPO+v2bsgviCNVWET8vmON/NqhR
+ bLQVxMLXLSj9tX6JE7Gne69KAg+lxj2yDOo+US81F20J5jX+u3+v6JykiZPvB82il5+e
+ 98mIiDnFGLGtvwsG/w6fyUi9qTjGEJK2EwB8dj9gDBDj6FrXHL8NQ13R6tI6LQPLeZAd
+ lu+HSiZke11CqjkGIsqk23lxgtBuap0Ws/9JsmHkYfVZCX4UWx3vluWF+s5JLGMs+LKl
+ 9W4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723086906; x=1723691706;
+ d=1e100.net; s=20230601; t=1723086907; x=1723691707;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=crDJTDIWGS2LNY90dpOb7cQutAxy6tgKbBo7wBVDAbM=;
- b=h8SJt+V8FbrfBCrzouWyUK64uiVHgNbjPavbEzRVkdbGmqSaa9SHitE2BJD0bsirFR
- M/Z2QNFNXltfkFyDzXuGX39ISVLE97fZmRUrO5+siwaTG6EyzTqAte1tpW5VDsAIizfX
- pklCgnGsC/UHY82WQzTKxW6c3/14IkQzd8HRyB09DmZ3W9BcJ0gWNPNyQoLoI4tXk5+p
- ncsSgD75hMABRyCf7K8Jb/LCUBhtNWRJ14+KbUZkHIFmV5meNBqLVK+IGQezNf90q1fu
- O4Iv85IsS5LX/8iGFRK8Wn8hbhZWEpWYahC5f2QBBuEP7XZTQ7FVTMzMCHvaM3e7EMA/
- 7CvQ==
+ bh=fWrhxoCkEjPUic6kyEGt3ZwqMIeuuOwcuUhFbLTHQ3Q=;
+ b=V6IuUI4qpiAa71aD/fZPUwHUOl+vAP7NkGXDATMVgREMUU73CBHF53Yqb1iHcpPtWI
+ kBlWFQ+Lk38SRsi7PLbQ51bm8d8xdQzCs85xMUnmYcXJiggYEF3mucS6iGVqKQ84oMr4
+ ymt/Zjthk1sLLLxRQDPEW1LGgD5u9N5T3w6zu9MvYIw5mczuHElCGeSyfIbGanfO25rT
+ uTWdGzBFkjRJ20Nrb+/fVNlbR6gty0hjknLFBghB/RXYIs92+DM4wpWk6KBzMNfGR33+
+ wByLY6kzzRUd4lJB+99Wwrz0+mLId7HV87oGL04nG26obK/C+PyiEkE24jhCTaMFX1cg
+ gxvg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW7SiA//l+MYVrbWJ+HCI/sdYKH1VVDrvou/ioQ9L6dle1E4dbVv2P49co+OHf0uS6VF6QG+4jB2YWDu56hxZPPpenm7Q==
-X-Gm-Message-State: AOJu0Yy6fJH90Eoly8YDs3Oq1tfjfIwAhQ19KCvaau9U1ftFB5JRDH4Q
- ujMDqZPxEwPzHT4U3AVBGwOhJxUWf/A/jI/3NJZJ4Vv1xX2X2UQf50SnkLbhXQE=
-X-Google-Smtp-Source: AGHT+IHeZuoH7hWVCfS2yP2vYAkshIFsunCP8AV/B9zNc9/Bzx4GupIts4R4TTw6IRewW1mtsz0lrA==
-X-Received: by 2002:a05:6808:178e:b0:3d9:2626:c64a with SMTP id
- 5614622812f47-3dc3b41c71dmr601694b6e.18.1723086905844; 
- Wed, 07 Aug 2024 20:15:05 -0700 (PDT)
+ AJvYcCXsPcfGUtCcNWMONHCoRZxh/E8TPyDtCsIMN7/psv18t04mRw2WlkKU3ancak5wpdr4Tdvr2AjJzDMDPSg86sXKgRMlDg==
+X-Gm-Message-State: AOJu0YyLIHqDmvP+kd4j4qFg92yFX3jq+cMchkblEXepDtdMnCelJesO
+ uiAPePEVhmWYliCWhd5iNa6ZTUe8B/GqyRSSZrX+hX+hJ3mNWEYyBiKB+ajgy5g=
+X-Google-Smtp-Source: AGHT+IEYYqqh7zXMVa3eYRMnhKsXTuUUFXjQL8NpOguI3PJEqBDfxuGB1C2Xg6gLnaHSwt6jw3pjhw==
+X-Received: by 2002:a05:6808:16ab:b0:3db:14d0:32c6 with SMTP id
+ 5614622812f47-3dc3bfb13bfmr119546b6e.24.1723086907315; 
+ Wed, 07 Aug 2024 20:15:07 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3db563b8707sm4625099b6e.36.2024.08.07.20.15.05
+ 5614622812f47-3db563b8815sm4621381b6e.39.2024.08.07.20.15.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Aug 2024 20:15:05 -0700 (PDT)
+ Wed, 07 Aug 2024 20:15:07 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Minkyu Kang <promsoft@gmail.com>, Minkyu Kang <mk7.kang@samsung.com>,
  Jaehoon Chung <jh80.chung@samsung.com>
@@ -79,10 +79,10 @@ Cc: Tom Rini <trini@konsulko.com>, Henrik Grimler <henrik@grimler.se>,
  Ferass El Hafidi <vitali64pmemail@protonmail.com>,
  Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
  uboot-snps-arc@synopsys.com
-Subject: [PATCH v5 28/38] mmc: exynos_dw_mmc: Move quirks from struct
- dwmci_host to chip data
-Date: Wed,  7 Aug 2024 22:14:34 -0500
-Message-Id: <20240808031444.9619-29-semen.protsenko@linaro.org>
+Subject: [PATCH v5 30/38] mmc: exynos_dw_mmc: Set requested freq in
+ get_mmc_clk() callback
+Date: Wed,  7 Aug 2024 22:14:36 -0500
+Message-Id: <20240808031444.9619-31-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240808031444.9619-1-semen.protsenko@linaro.org>
 References: <20240808031444.9619-1-semen.protsenko@linaro.org>
@@ -104,11 +104,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-host->quirks field is only used internally in exynos_dw_mmc.c driver.
-To avoid cluttering the scope of struct dwmci_host, move quirks field
-into Exynos driver's chip data, where it can be statically defined.
+By now exynos_dw_mmc driver was relying on the correct CIU clock
+frequency being set on driver init. But dw_mmc core is actually trying
+to change CIU clock rate dynamically, on init and in set_ios() callback,
+which it's requesting via host->get_mmc_clk() callback (the name is
+misleading: although it's called "get_mmc_clk()", it can actually
+request both get and set operations). Implement setting the requested
+rate for CIU clock in Exynos driver to achieve the correct dw_mmc core
+driver operation at all times. DDR mode requires the clock to be twice
+as fast (when 8 bit bus is used), so handle this too, to make DDR
+function properly.
 
-No functional change.
+This change makes the eMMC throughput on E850-96 board twice as fast.
+That's because "clock-frequency" is set to 800 MHz in E850-96 device
+tree, but for DDR52 mode it should be 416 MHz (and TRM states it should
+be 400 MHz for DDR50/8bit mode). The dw_mmc core is requesting 52 MHz
+bus_hz for DDR52 mode, and DDR+8bit mode means it should be x2 fast, so:
+
+    f_ciu = 2 * ciu_div * f_bus = 2 * 4 * 52e6 = 416 MHz,
+
+where f_ciu   - freq of clock fed to DW MMC block from CMU (SDCLKIN), Hz
+      f_bus   - freq of clock fed to the card (CCLKIN), Hz
+      ciu_div - value of internal divider (in DW MMC block).
+
+Another way to work that around would be overriding the
+"clock-frequency" property in corresponding dts. But setting the clock
+frequency dynamically as it's done here looks much neater.
+
+This implementation follows what's done in Linux kernel dw_mmc-exynos
+driver in .set_ios() callback for MMC_TIMING_MMC_DDR52 case.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
@@ -122,95 +146,33 @@ Changes in v3:
   - (none)
 
 Changes in v2:
-  - Replaced CONFIG_IS_ENABLED() with #ifdef
+  - (none)
 
- drivers/mmc/exynos_dw_mmc.c | 13 ++++++++-----
- include/dwmmc.h             |  5 -----
- 2 files changed, 8 insertions(+), 10 deletions(-)
+ drivers/mmc/exynos_dw_mmc.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
 diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
-index bed8bd8a0fcf..b9d655c0d5c8 100644
+index 32f3ea168b6c..ee3ae9f5e650 100644
 --- a/drivers/mmc/exynos_dw_mmc.c
 +++ b/drivers/mmc/exynos_dw_mmc.c
-@@ -25,6 +25,9 @@
+@@ -169,7 +169,17 @@ unsigned int exynos_dwmci_get_clk(struct dwmci_host *host, uint freq)
+ 	u8 clk_div;
+ 	int err;
  
- #define EXYNOS4412_FIXED_CIU_CLK_DIV	4
- 
-+/* Quirks */
-+#define DWMCI_QUIRK_DISABLE_SMU		BIT(0)
++	/* Should be double rate for DDR mode */
++	if (host->mmc->selected_mode == MMC_DDR_52 && host->mmc->bus_width == 8)
++		freq *= 2;
 +
- #ifdef CONFIG_DM_MMC
- #include <dm.h>
- DECLARE_GLOBAL_DATA_PTR;
-@@ -39,6 +42,7 @@ struct exynos_mmc_plat {
- struct exynos_dwmmc_variant {
- 	u32 clksel;		/* CLKSEL register offset */
- 	u8 div;			/* (optional) fixed clock divider value: 0..7 */
-+	u32 quirks;		/* quirk flags - see DWMCI_QUIRK_... */
- };
- 
- /* Exynos implmentation specific drver private data */
-@@ -173,7 +177,7 @@ static void exynos_dwmci_board_init(struct dwmci_host *host)
- {
- 	struct dwmci_exynos_priv_data *priv = exynos_dwmmc_get_priv(host);
- 
--	if (host->quirks & DWMCI_QUIRK_DISABLE_SMU) {
-+	if (priv->chip->quirks & DWMCI_QUIRK_DISABLE_SMU) {
- 		dwmci_writel(host, EMMCP_MPSBEGIN0, 0);
- 		dwmci_writel(host, EMMCP_SEND0, 0);
- 		dwmci_writel(host, EMMCP_CTRL0,
-@@ -205,11 +209,7 @@ static int exynos_dwmci_core_init(struct dwmci_host *host)
- 	}
- 
- 	host->name = "EXYNOS DWMMC";
--#ifdef CONFIG_EXYNOS5420
--	host->quirks = DWMCI_QUIRK_DISABLE_SMU;
--#endif
- 	host->board_init = exynos_dwmci_board_init;
--
- 	host->caps = MMC_MODE_DDR_52MHz;
- 	host->clksel = exynos_dwmci_clksel;
- 	host->get_mmc_clk = exynos_dwmci_get_clk;
-@@ -352,6 +352,9 @@ static const struct exynos_dwmmc_variant exynos4_drv_data = {
- 
- static const struct exynos_dwmmc_variant exynos5_drv_data = {
- 	.clksel	= DWMCI_CLKSEL,
-+#ifdef CONFIG_EXYNOS5420
-+	.quirks	= DWMCI_QUIRK_DISABLE_SMU,
-+#endif
- };
- 
- static const struct udevice_id exynos_dwmmc_ids[] = {
-diff --git a/include/dwmmc.h b/include/dwmmc.h
-index 8c2500da9efe..6edb9e1a59c5 100644
---- a/include/dwmmc.h
-+++ b/include/dwmmc.h
-@@ -149,9 +149,6 @@
- #define DWMCI_IDINTEN_TI	BIT(0)
- #define DWMCI_IDINTEN_MASK	(DWMCI_IDINTEN_TI | DWMCI_IDINTEN_RI)
- 
--/* Quirks */
--#define DWMCI_QUIRK_DISABLE_SMU	BIT(0)
--
- /**
-  * struct dwmci_idmac_regs - Offsets of IDMAC registers
-  *
-@@ -180,7 +177,6 @@ struct dwmci_idmac_regs {
-  *
-  * @name:	Device name
-  * @ioaddr:	Base I/O address of controller
-- * @quirks:	Quick flags - see DWMCI_QUIRK_...
-  * @caps:	Capabilities - see MMC_MODE_...
-  * @clock:	Current clock frequency (after internal divider), Hz
-  * @bus_hz:	Bus speed in Hz, if @get_mmc_clk() is NULL
-@@ -200,7 +196,6 @@ struct dwmci_idmac_regs {
- struct dwmci_host {
- 	const char *name;
- 	void *ioaddr;
--	unsigned int quirks;
- 	unsigned int caps;
- 	unsigned int clock;
- 	unsigned int bus_hz;
+ 	clk_div = exynos_dwmmc_get_ciu_div(host);
++	err = exynos_dwmmc_set_sclk(host, freq * clk_div);
++	if (err) {
++		printf("DWMMC%d: failed to set clock rate (%d); "
++		       "continue anyway\n", host->dev_index, err);
++	}
++
+ 	err = exynos_dwmmc_get_sclk(host, &sclk);
+ 	if (err) {
+ 		printf("DWMMC%d: failed to get clock rate (%d)\n",
 -- 
 2.39.2
 
