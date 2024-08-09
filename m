@@ -4,76 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C22EDC52D7C
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 18:35:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48744C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 18:36:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 096FC88B07;
-	Fri,  9 Aug 2024 20:35:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 86A818895D;
+	Fri,  9 Aug 2024 20:36:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aXDtsHHq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LUxoJXDr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E146A88B07; Fri,  9 Aug 2024 20:35:12 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id B4442879AF; Fri,  9 Aug 2024 20:36:45 +0200 (CEST)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E85CF8895D
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 20:35:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5163488C25
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 20:36:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6b78c980981so13168346d6.2
- for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 11:35:09 -0700 (PDT)
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6b7b349a98aso19363056d6.3
+ for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 11:36:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723228509; x=1723833309; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723228602; x=1723833402; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dYzNqJ9BBIJ6Hkl4bEJuP3kuHE+Xp2sqR2oFLyVG52s=;
- b=aXDtsHHqW7c8GieehhMGp17vNADorfdwzMoZCwgX3+ga1OxyJ/fazFZ7aCyhu3cl3r
- WWInT+CyhXm1+mk0mF6UsKNzaE3F9MjT3ResedIfwyGomG788IChZ0XUTJVoDO1PEqfZ
- WGNMlFRKEoHIYhd5IX1U+PfDgQqgRLP73vXM8=
+ bh=QIP7AfEJj5SFiOK3HXKjxPRLhuiv6I2o8KF6WH+fXIo=;
+ b=LUxoJXDrusrdOCe5RFgpeT40CJsbCUMFTUA3X64SW3jydrTWJCnQvJJcCYEXtoUmlU
+ 0YHzCRsfvO/PCEiU+1+NfhyhOBg0EI/xwmr3o9/toKR8K7lvwVCQ6Wf/LnN+l/+iG7Hf
+ L7AxWXPmTlKdjeKmAtFMaXVgG1CFWDv9Y9FN0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723228509; x=1723833309;
+ d=1e100.net; s=20230601; t=1723228602; x=1723833402;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=dYzNqJ9BBIJ6Hkl4bEJuP3kuHE+Xp2sqR2oFLyVG52s=;
- b=gLMNW9lqItGm23gJ/VnBTOPMbpChGj1OX/c7V0seqh7+BDzdqrQz1XjpIxYG07SsQU
- F1wHkEEyjGnGs16KirPCidrVVyqDwBgGmZgDEwNIhPdcY2RWDVJL3obRQYFju/iw0L8+
- av3dyz0AsmjsYdu3zxEP1N0i3WH/a9Du1KtJ2ThHQf42SO05VEPf/Dgyw8yjBvsgDMjx
- DMA+i27HBhSbWKY6J4Z/s9bLy9e78BJk6NCcNtFuVSWy+XkjSTKBSI1slsUlgYJCpAGi
- dqHiwXednlRikREstNAsiKVXl0q4XdcqdjVSc+FbgZG3DL4Kc3oizok1PzgcLkBPea4u
- cWIg==
+ bh=QIP7AfEJj5SFiOK3HXKjxPRLhuiv6I2o8KF6WH+fXIo=;
+ b=oBnwrVM15S7qpKVYmB/yU/CSDed/ZEnKU2h5L7ifjb0Z8lzqyA4Bi+KQoSNNsVYSg/
+ XEfFNZi+2omxKum7KSxtsi5YHvd6nAsRpYfYTjGRdWosHBhDXkoZHCwXY/tgsvlWtM6u
+ d9fUCdOoRuSYVlltYd7deZwRs3B+2qtLN+PpiicBWTkjLJCrfYpRjj/LTrdBXL7A4MkS
+ XZqqz9fI/E9wpLu+Zq1TO2iB8FS2zwpOM9gXRObFSKHlLoK1gWjDfLeKow1iWKxDU5mT
+ t2BUgHDECm3oXGUJA45oHaSTNS+755WmA8y7IFarfjSrG3NnlyQ5UFCUtZoJXnOiqPsT
+ 8xCA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU/NhhTAbBh/iM5Mo8j2kfBjCX455/M6QbuQWuc1jeEy1KLA//SrIu+Zf4T/miJgB6tfp2HLPHLDeqlHzaGRqmf+WL3Dw==
-X-Gm-Message-State: AOJu0YzZPkWKiLamDjqQYCRMxs4MKY1maUTjQhk647+SlkE4i77r9Qtb
- fU0l6BHDtS/RVAoTycfUwjguVPzMrhFwgvxNG9V4OrLa6dWtoFWPrr4SgUKdBgx9VDTxY+53VD2
- 2LPngOo6RB5mrpk1vlrOgzqG3uwnnqUmX2jhB
-X-Google-Smtp-Source: AGHT+IHlUr2P4qFSRaTEIA3lCSGcSgjQdPJP4DHG3KvbEwaXEE8wfxA+IEnwAegTxeOmblCgS03IceU6/tE1fteA++Q=
-X-Received: by 2002:a05:6214:5c49:b0:6b7:9a1c:713b with SMTP id
- 6a1803df08f44-6bd78e47196mr29215796d6.35.1723228508638; Fri, 09 Aug 2024
- 11:35:08 -0700 (PDT)
+ AJvYcCVGSfpkmPj7toxU0AlX7LB0pzv889hBWahkGYyreiegSpMtriyqbCID4f/SXrcuiaOm8Z38VcgXWqrumje3KQkBJldn8A==
+X-Gm-Message-State: AOJu0YxEH0uRCunWcexCWZM/mB+U4IFPD2E+38PfbHJOFchAUVh9WySE
+ 0BEw46MwPofpaJnuaBe+AOfBT+sTqfDvC96lCCTJULfVRIxmQTKCHzfqL0iJgFObs3PFUgXWsLN
+ Sa7m4gE+S7s2pLTE+FNsI+wv113Jorqujq1sx
+X-Google-Smtp-Source: AGHT+IFkX8CtzxridgG2VvF919RXAvUvJ7rfN/RAQXAZZJVSjF2QDwOfv3Cp9gQi1svcu3oQMeiaV3J9EKXt/RrRrB4=
+X-Received: by 2002:a05:6214:3bc2:b0:6b5:ce93:c3fc with SMTP id
+ 6a1803df08f44-6bd78d53de8mr35108816d6.18.1723228602056; Fri, 09 Aug 2024
+ 11:36:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240808163153.2069650-1-caleb.connolly@linaro.org>
- <CAFLszTjVOgUsjwthBNkn5LgoSRmA7iT4rPy80Gbji1=OZG7nTw@mail.gmail.com>
- <f2385971-cc48-4cc1-9857-d74b09f41338@linaro.org>
-In-Reply-To: <f2385971-cc48-4cc1-9857-d74b09f41338@linaro.org>
+References: <20240801173637.1071068-1-sjg@chromium.org>
+ <20240801173637.1071068-2-sjg@chromium.org>
+ <81a85e93-5712-4262-9f68-cd6a93624beb@gmx.de>
+In-Reply-To: <81a85e93-5712-4262-9f68-cd6a93624beb@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 9 Aug 2024 12:34:57 -0600
-Message-ID: <CAFLszTgD1rh+v5_JzB-_GAEHRsY6AUbQcPQOUhzQ_mNfE3kMsA@mail.gmail.com>
-Subject: Re: [PATCH] cmd: add a fetch utility
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Anand Moon <linux.amoon@gmail.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Johan Jonker <jbx6244@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <michal.simek@amd.com>, 
- Tom Rini <trini@konsulko.com>, u-boot-qcom@groups.io, 
+Date: Fri, 9 Aug 2024 12:36:31 -0600
+Message-ID: <CAFLszTjEnP2jDAyHdMwzFqY4B6LGaio+u-H0xwetCUF2vKQwFA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] efi: Allow use of malloc() for the EFI pool
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -92,416 +87,350 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+Hi Heinrich,
 
-On Fri, 9 Aug 2024 at 11:00, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+On Fri, 9 Aug 2024 at 10:38, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> Hi Simon,
+> On 01.08.24 19:36, Simon Glass wrote:
+> > This API call is intended for allocating small amounts of memory,
+> > similar to malloc(). The current implementation rounds up to whole pages
+> > which can waste large amounts of memory. It also implements its own
+> > malloc()-style header on each block.
+> >
+> > For certain allocations (those of type EFI_BOOT_SERVICES_DATA) we can
+> > use U-Boot's built-in malloc() instead, at least until the app starts.
+> > This avoids poluting the memory space with blocks of data which may
+> > interfere with boot scripts, etc.
+> >
+> > Once the app has started, there is no advantage to using malloc(), since
+> > it doesn't matter what memory is used: everything is under control of
+> > the EFI subsystem. Also, using malloc() after the app starts might
+> > result in running of memory, since U-Boot's malloc() space is typically
+> > quite small.
+> >
+> > In fact, malloc() is already used for most EFI-related allocations, so
+> > the impact of this change is fairly small.
+> >
+> > One side effect is that this seems to be showing up some bugs in the
+> > EFI code, since the malloc() pool becomes corrupted when running some of
+> > the tests.
+> >
+> > This has likely crept in due to the very large gaps between allocations
+> > (around 4KB), which provides a lot of leeway when the allocation size is
+> > too small. Work around this by increasing the size for now, until these
+> > (presumed) bugs are located.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > (no changes since v1)
+> >
+> >   common/dlmalloc.c            |   7 +++
+> >   include/efi_loader.h         |  18 ++++++
+> >   include/malloc.h             |   7 +++
+> >   lib/efi_loader/efi_bootbin.c |   2 +
+> >   lib/efi_loader/efi_memory.c  | 110 ++++++++++++++++++++++++++---------
+> >   5 files changed, 117 insertions(+), 27 deletions(-)
+> >
+> > diff --git a/common/dlmalloc.c b/common/dlmalloc.c
+> > index 62e8557daa7..0bc77395035 100644
+> > --- a/common/dlmalloc.c
+> > +++ b/common/dlmalloc.c
+> > @@ -613,6 +613,13 @@ void mem_malloc_init(ulong start, ulong size)
+> >   #endif
+> >   }
+> >
+> > +bool malloc_check_in_range(void *ptr)
+> > +{
+> > +     ulong val = (ulong)ptr;
+> > +
+> > +     return val >= mem_malloc_start && val < mem_malloc_end;
+> > +}
+> > +
+> >   /* field-extraction macros */
+> >
+> >   #define first(b) ((b)->fd)
+> > diff --git a/include/efi_loader.h b/include/efi_loader.h
+> > index f84852e384f..31899bef99e 100644
+> > --- a/include/efi_loader.h
+> > +++ b/include/efi_loader.h
+> > @@ -796,6 +796,24 @@ int efi_disk_probe(void *ctx, struct event *event);
+> >   int efi_disk_remove(void *ctx, struct event *event);
+> >   /* Called by board init to initialize the EFI memory map */
+> >   int efi_memory_init(void);
+> > +
+> > +/**
+> > + * enum efi_alloc_flags - controls EFI memory allocation
+> > + *
+> > + * @EFIAF_USE_MALLOC: Use malloc() pool for pool allocations of type
+> > + *   EFI_BOOT_SERVICES_DATA, otherwise use page allocation
+> > + */
+> > +enum efi_alloc_flags {
+> > +     EFIAF_USE_MALLOC        = BIT(0),
+> > +};
+> > +
+> > +/**
+> > + * efi_set_alloc() - Set behaviour of EFI memory allocation
+> > + *
+> > + * @flags: new value for allocation flags (see enum efi_alloc_flags)
+> > + */
+> > +void efi_set_alloc(int flags);
+> > +
+> >   /* Adds new or overrides configuration table entry to the system table */
+> >   efi_status_t efi_install_configuration_table(const efi_guid_t *guid, void *table);
+> >   /* Sets up a loaded image */
+> > diff --git a/include/malloc.h b/include/malloc.h
+> > index 07d3e90a855..a64f117e2f2 100644
+> > --- a/include/malloc.h
+> > +++ b/include/malloc.h
+> > @@ -983,6 +983,13 @@ extern ulong mem_malloc_brk;
+> >
+> >   void mem_malloc_init(ulong start, ulong size);
+> >
+> > +/**
+> > + * malloc_check_in_range() - Check if a pointer is within the malloc() region
+> > + *
+> > + * Return: true if within malloc() region
+> > + */
+> > +bool malloc_check_in_range(void *ptr);
+> > +
+> >   #ifdef __cplusplus
+> >   };  /* end of extern "C" */
+> >   #endif
+> > diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
+> > index a87006b3c0e..5bb0fdcf75d 100644
+> > --- a/lib/efi_loader/efi_bootbin.c
+> > +++ b/lib/efi_loader/efi_bootbin.c
+> > @@ -201,6 +201,8 @@ efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
+> >   {
+> >       efi_status_t ret;
+> >
+> > +     efi_set_alloc(0);
+> > +
+> >       /* Initialize EFI drivers */
+> >       ret = efi_init_obj_list();
+> >       if (ret != EFI_SUCCESS) {
+> > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> > index c6f1dd09456..3c3d05eef94 100644
+> > --- a/lib/efi_loader/efi_memory.c
+> > +++ b/lib/efi_loader/efi_memory.c
+> > @@ -24,6 +24,14 @@ DECLARE_GLOBAL_DATA_PTR;
+> >   /* Magic number identifying memory allocated from pool */
+> >   #define EFI_ALLOC_POOL_MAGIC 0x1fe67ddf6491caa2
+> >
+> > +/* Flags controlling EFI memory-allocation - see enum efi_alloc_flags */
+> > +static int alloc_flags;
+> > +
+> > +void efi_set_alloc(int flags)
+> > +{
+> > +     alloc_flags = flags;
+> > +}
+> > +
+> >   efi_uintn_t efi_memory_map_key;
+> >
+> >   struct efi_mem_list {
+> > @@ -57,8 +65,12 @@ void *efi_bounce_buffer;
+> >    * The checksum calculated in function checksum() is used in FreePool() to avoid
+> >    * freeing memory not allocated by AllocatePool() and duplicate freeing.
+> >    *
+> > - * EFI requires 8 byte alignment for pool allocations, so we can
+> > - * prepend each allocation with these header fields.
+> > + * EFI requires 8-byte alignment for pool allocations, so we can prepend each
+> > + * allocation with these header fields.
+> > + *
+> > + * Note that before the EFI app is booted, EFI_BOOT_SERVICES_DATA allocations
+> > + * are served using malloc(), bypassing this struct. This helps to avoid memory
+> > + * fragmentation, since efi_allocate_pages() uses any pages it likes.
+> >    */
+> >   struct efi_pool_allocation {
+> >       u64 num_pages;
+> > @@ -631,18 +643,19 @@ void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align)
+> >   /**
+> >    * efi_allocate_pool - allocate memory from pool
+> >    *
+> > + * This uses malloc() for EFI_BOOT_SERVICES_DATA allocations if EFIAF_USE_MALLOC
+> > + * is enabled
+> > + *
+> >    * @pool_type:      type of the pool from which memory is to be allocated
+> >    * @size:   number of bytes to be allocated
+> >    * @buffer: allocated memory
+> >    * Return:  status code
+> >    */
+> > -efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size, void **buffer)
+> > +efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
+> > +                            void **buffer)
+> >   {
+> >       efi_status_t r;
+> >       u64 addr;
+> > -     struct efi_pool_allocation *alloc;
+> > -     u64 num_pages = efi_size_in_pages(size +
+> > -                                       sizeof(struct efi_pool_allocation));
+> >
+> >       if (!buffer)
+> >               return EFI_INVALID_PARAMETER;
+> > @@ -652,13 +665,43 @@ efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
+> >               return EFI_SUCCESS;
+> >       }
+> >
+> > -     r = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, pool_type, num_pages,
+> > -                            &addr);
+> > -     if (r == EFI_SUCCESS) {
+> > -             alloc = (struct efi_pool_allocation *)(uintptr_t)addr;
+> > -             alloc->num_pages = num_pages;
+> > -             alloc->checksum = checksum(alloc);
+> > -             *buffer = alloc->data;
+> > +     if ((alloc_flags & EFIAF_USE_MALLOC) &&
+> > +         pool_type == EFI_BOOT_SERVICES_DATA) {
+> > +             void *ptr;
+> > +
+> > +             /*
+> > +              * Some tests crash on qemu_arm etc. if the correct size is
+> > +              * allocated.
+> > +              * Adding 0x10 seems to fix test_efi_selftest_device_tree
+> > +              * Increasing it to 0x20 seems to fix test_efi_selftest_base
+> > +              * except * for riscv64 (in CI only). But 0x100 fixes CI too.
+> > +              *
+> > +              * This workaround can be dropped once these problems are
+> > +              * resolved
+> > +              */
+> > +             ptr = memalign(8, size + 0x100);
 >
-> On 09/08/2024 03:55, Simon Glass wrote:
-> > Hi Caleb,
-> >
-> > On Thu, 8 Aug 2024 at 10:32, Caleb Connolly <caleb.connolly@linaro.org
-> > <mailto:caleb.connolly@linaro.org>> wrote:
-> >  >
-> >  > While U-Boot does a pretty good job at printing information at startup
-> >  > about what hardware it's running on, it can be hard to take pretty
-> >  > pictures of this to show off on the internet (by far the most
-> >  > important aspect of porting a device in 2024!).
-> >  >
-> >  > Add a small utility "ufetch" for displaying some information about
-> > U-Boot and
-> >  > the hardware it's running on in a similar fashion to the popular
-> > neofetch tool
-> >  > for *nix's [1].
-> >  >
-> >  > While the output is meant to be useful, it should also be pleasing to
-> > look at
-> >  > and look good in screenshots. The ufetch command brings this to U-Boot,
-> >  > featuring a colorful ASCII art version of the U-Boot logo and a fancy
-> > layout.
-> >  >
-> >  > Finally, tireless device porters can properly show off their hard
-> > work and get
-> >  > the internet points they so deserve!
-> >  >
-> >  > Not everything is fully supported yet, but this seemed good enough
-> > for initial
-> >  > inclusion. Only one MMC device is detected, and other than SCSI other
-> > storage
-> >  > devices aren't supported.
-> >  >
-> >  > [1]: https://en.wikipedia.org/wiki/Neofetch
-> > <https://en.wikipedia.org/wiki/Neofetch>
-> >  >
-> >  > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org
-> > <mailto:caleb.connolly@linaro.org>>
-> >  > ---
-> >  > Ephemeral demo image: https://0x0.st/XVUa.png <https://0x0.st/XVUa.png>
-> >  > ---
-> >  >  cmd/Kconfig  |   7 ++
-> >  >  cmd/Makefile |   1 +
-> >  >  cmd/ufetch.c | 201 +++++++++++++++++++++++++++++++++++++++++++++++++++
-> >  >  3 files changed, 209 insertions(+)
-> >  >  create mode 100644 cmd/ufetch.c
-> >
-> > Very cute!
-> >
-> >  >
-> >  > diff --git a/cmd/Kconfig b/cmd/Kconfig
-> >  > index 978f44eda426..70acb5727b04 100644
-> >  > --- a/cmd/Kconfig
-> >  > +++ b/cmd/Kconfig
-> >  > @@ -175,8 +175,15 @@ config CMD_CPU
-> >  >           number of CPUs, type (e.g. manufacturer, architecture,
-> > product or
-> >  >           internal name) and clock frequency. Other information may be
-> >  >           available depending on the CPU driver.
-> >  >
-> >  > +config CMD_UFETCH
-> >  > +       bool "U-Boot fetch"
-> >
-> > How about default y if SANDBOX so that this gets built for that. You
-> > should also add doc/ and test/ for the command (although the test can be
-> > very basic).
+> We don't want voodoo code. Please, analyze what is going on.
 >
-> I was really aiming for cmd/2048.c levels of expectation and usability
-> here, not to make this a rugged part of U-Boot's feature set (if someone
-> else would like to go the extra mile they're certainly welcome to).
+> The allocations were cache line size aligned (0x40) because our
+> file-system drivers rely on it.
+
+Where is that documented and which allocation call is doing this?
+
 >
-> Making it default y for sandbox so we can at least make sure it compiles
-> sounds reasonable though.
-> >
-> >  > +       depends on BLK
-> >  > +       help
-> >  > +         Fetch utility for U-Boot (akin to neofetch). Prints information
-> >  > +         about U-Boot and the board it is running on in a pleasing
-> > format.
-> >  > +
-> >  >  config CMD_FWU_METADATA
-> >  >         bool "fwu metadata read"
-> >  >         depends on FWU_MULTI_BANK_UPDATE
-> >  >         help
-> >  > diff --git a/cmd/Makefile b/cmd/Makefile
-> >  > index 87133cc27a8a..ffb04c8f2e0a 100644
-> >  > --- a/cmd/Makefile
-> >  > +++ b/cmd/Makefile
-> >  > @@ -53,8 +53,9 @@ obj-$(CONFIG_CMD_CONSOLE) += console.o
-> >  >  obj-$(CONFIG_CMD_CPU) += cpu.o
-> >  >  obj-$(CONFIG_CMD_DATE) += date.o
-> >  >  obj-$(CONFIG_CMD_DEMO) += demo.o
-> >  >  obj-$(CONFIG_CMD_DM) += dm.o
-> >  > +obj-$(CONFIG_CMD_UFETCH) += ufetch.o
-> >  >  obj-$(CONFIG_CMD_SOUND) += sound.o
-> >  >  ifdef CONFIG_POST
-> >  >  obj-$(CONFIG_CMD_DIAG) += diag.o
-> >  >  endif
-> >  > diff --git a/cmd/ufetch.c b/cmd/ufetch.c
-> >  > new file mode 100644
-> >  > index 000000000000..f7374eb2e364
-> >  > --- /dev/null
-> >  > +++ b/cmd/ufetch.c
-> >  > @@ -0,0 +1,201 @@
-> >  > +// SPDX-License-Identifier: GPL-2.0
-> >  > +
-> >  > +/* Small "fetch" utility for U-Boot */
-> >
-> > Isn't it a command, rather than a utility? I think of a utility as a
-> > program I run.
+> > +             if (!ptr)
+> > +                     return EFI_OUT_OF_RESOURCES;
 >
-> I feel like you could ask 5 different people about this and get 5
-> different answers. As a native british english speaker I would view
-> "utilities" as a subset of "commands" in this context. This isn't a high
-> effort contribution for me so I'm really fine with whatever.
+> This will not work for allocating more memory than is in the malloc pool
+> as pointed out in a previous review comment. The malloc pool is 2 MiB or
+> less.
 
-OK I see, fair enough.
+Before the app starts, only a very small amount of memory is
+allocated. Please read the patch thoroughly.
 
-> >
-> >  > +
-> >  > +#include <mmc.h>
-> >  > +#include <time.h>
-> >  > +#include <asm/global_data.h>
-> >  > +#include <cli.h>
-> >  > +#include <command.h>
-> >  > +#include <dm/ofnode.h>
-> >  > +#include <env.h>
-> >  > +#include <rand.h>
-> >  > +#include <vsprintf.h>
-> >  > +#include <linux/delay.h>
-> >  > +#include <linux/kernel.h>
-> >  > +#include <version.h>
-> >
-> > Please check [1]
 >
-> Sure, I'll order these alphabetically.
-> >
-> >  > +
-> >  > +DECLARE_GLOBAL_DATA_PTR;
-> >  > +
-> >  > +#define LINE_WIDTH 40
-> >  > +#define BLUE "\033[38;5;4m"
-> >  > +#define YELLOW "\033[38;5;11m"
-> >  > +#define BOLD "\033[1m"
-> >  > +#define RESET "\033[0m"
-> >  > +static const char *logo_lines[] = {
-> >  > +       BLUE BOLD "                  ......::......                   ",
-> >  > +       BLUE BOLD "             ...::::::::::::::::::...              ",
-> >  > +       BLUE BOLD "          ..::::::::::::::::::::::::::..           ",
-> >  > +       BLUE BOLD "        .::::.:::::::::::::::...::::.::::.         ",
-> >  > +       BLUE BOLD "      .::::::::::::::::::::..::::::::::::::.       ",
-> >  > +       BLUE BOLD "    .::.:::::::::::::::::::" YELLOW "=*%#*" BLUE
-> > "::::::::::.::.     ",
-> >  > +       BLUE BOLD "   .:::::::::::::::::....." YELLOW "*%%*-" BLUE
-> > ":....::::::::::.    ",
-> >  > +       BLUE BOLD "  .:.:::...:::::::::.:-" YELLOW "===##*---==-"
-> > BLUE "::::::::::.:.   ",
-> >  > +       BLUE BOLD " .::::..::::........" YELLOW "-***#****###****-"
-> > BLUE "...::::::.:.  ",
-> >  > +       BLUE BOLD " ::.:.-" YELLOW "+***+=" BLUE "::-" YELLOW
-> > "=+**#%%%%%%%%%%%%###*= " BLUE "-::...::::. ",
-> >  > +       BLUE BOLD ".:.::-" YELLOW
-> > "*****###%%%%%%%%%%%%%%%%%%%%%%%%%%#*=" BLUE ":..:::: ",
-> >  > +       BLUE BOLD ".::" YELLOW "##" BLUE ":" YELLOW
-> > "***#%%%%%%#####%%%%%%%####%%%%%####%%%*" BLUE "-.::. ",
-> >  > +       BLUE BOLD ":.:" YELLOW "#%" BLUE "::" YELLOW
-> > "*%%%%%%%#*****##%%%#*****##%%##*****#%%+" BLUE ".::.",
-> >  > +       BLUE BOLD ".::" YELLOW
-> > "**==#%%%%%%%##****#%%%%##****#%%%%#****###%%" BLUE ":.. ",
-> >  > +       BLUE BOLD "..:" YELLOW "#%" BLUE "::" YELLOW
-> > "*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#%%%%%+ " BLUE ".:.",
-> >  > +       BLUE BOLD " ::" YELLOW "##" BLUE ":" YELLOW
-> > "+**#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%* " BLUE "-.:: ",
-> >  > +       BLUE BOLD " ..::-" YELLOW
-> > "#****#%#%%%%%%%%%%%%%%%%%%%%%%%%%%#*=" BLUE "-..::.  ",
-> >  > +       BLUE BOLD "  ...:=" YELLOW "*****=" BLUE
-> > "::-\033[38;5;7m=+**###%%%%%%%%###**+=  " BLUE "--:...:::  ",
-> >  > +       BLUE BOLD "   .::.::--:........::::::--::::::......::::::.    ",
-> >  > +       BLUE BOLD "    .::.....::::::::::...........:::::::::.::.     ",
-> >  > +       BLUE BOLD "      .::::::::::::::::::::::::::::::::::::.       ",
-> >  > +       BLUE BOLD "        .::::.::::::::::::::::::::::.::::.         ",
-> >  > +       BLUE BOLD "          ..::::::::::::::::::::::::::..           ",
-> >  > +       BLUE BOLD "             ...::::::::::::::::::...              ",
-> >  > +       BLUE BOLD "                  ......::......                   ",
-> >  > +};
-> >  > +
-> >  > +enum output_lines {
-> >  > +       FIRST,
-> >  > +       SECOND,
-> >  > +       KERNEL,
-> >  > +       SYSINFO,
-> >  > +       HOST,
-> >  > +       UPTIME,
-> >  > +       IP,
-> >  > +       CMDS,
-> >  > +       CONSOLES,
-> >  > +       DEVICES,
-> >  > +       FEATURES,
-> >  > +       RELOCATION,
-> >  > +       CORES,
-> >  > +       MEMORY,
-> >  > +       STORAGE,
-> >  > +
-> >  > +       /* Up to 10 storage devices... Should be enough for anyone
-> > right? */
-> >  > +       _LAST_LINE = (STORAGE + 10),
-> >  > +#define LAST_LINE (_LAST_LINE - 1UL)
-> >  > +};
-> >  > +
-> >  > +static int do_ufetch(struct cmd_tbl *cmdtp, int flag, int argc,
-> >  > +                    char *const argv[])
-> >  > +{
-> >  > +       int num_lines = max(LAST_LINE + 1, ARRAY_SIZE(logo_lines));
-> >  > +       const char *model, *compatible;
-> >  > +       char *ipaddr;
-> >  > +       int n_cmds, n_cpus = 0, ret, compatlen;
-> >  > +       ofnode np;
-> >  > +       struct mmc *mmc;
-> >  > +       struct blk_desc *scsi_desc;
-> >  > +       bool skip_ascii = false;
-> >  > +
-> >  > +       if (argc > 1 && strcmp(argv[1], "-n") == 0) {
-> >  > +               skip_ascii = true;
-> >  > +               num_lines = LAST_LINE;
-> >  > +       }
-> >  > +
-> >  > +       for (int i = 0; i < num_lines; i++) {
-> >  > +               if (!skip_ascii) {
-> >  > +                       if (i < ARRAY_SIZE(logo_lines))
-> >  > +                               printf("%s ", logo_lines[i]);
-> >  > +                       else
-> >  > +                               printf("%*c ", LINE_WIDTH, ' ');
-> >  > +               }
-> >  > +               switch (i) {
-> >  > +               case FIRST:
-> >  > +                       compatible =
-> > ofnode_read_string(ofnode_root(), "compatible");
-> >  > +                       if (!compatible)
-> >  > +                               compatible = "unknown";
-> >  > +                       printf(RESET "%s\n", compatible);
-> >  > +                       compatlen = strlen(compatible);
-> >  > +                       break;
-> >  > +               case SECOND:
-> >  > +                       for (int j = 0; j < compatlen; j++)
-> >  > +                               putc('-');
-> >  > +                       putc('\n');
-> >  > +                       break;
-> >  > +               case KERNEL:
-> >  > +                       printf("Kernel:" RESET " %s\n", U_BOOT_VERSION);
-> >  > +                       break;
-> >  > +               case SYSINFO:
-> >  > +                       printf("Config:" RESET " %s_defconfig\n",
-> > CONFIG_SYS_CONFIG_NAME);
-> >  > +                       break;
-> >  > +               case HOST:
-> >  > +                       model = ofnode_read_string(ofnode_root(),
-> > "model");
-> >  > +                       if (model)
-> >  > +                               printf("Host:" RESET " %s\n", model);
-> >  > +                       break;
-> >  > +               case UPTIME:
-> >  > +                       printf("Uptime:" RESET " %ld seconds\n",
-> > get_timer(0) / 1000);
-> >  > +                       break;
-> >  > +               case IP:
-> >  > +                       ipaddr = env_get("ipvaddr");
-> >  > +                       if (!ipaddr)
-> >  > +                               ipaddr = "none";
-> >  > +                       printf("IP Address:" RESET " %s", ipaddr);
-> >  > +                       ipaddr = env_get("ipv6addr");
-> >  > +                       if (ipaddr)
-> >  > +                               printf(", %s\n", ipaddr);
-> >  > +                       else
-> >  > +                               putc('\n');
-> >  > +                       break;
-> >  > +               case CMDS:
-> >  > +                       n_cmds = ll_entry_count(struct cmd_tbl, cmd);
-> >  > +                       printf("Commands:" RESET " %d (help)\n", n_cmds);
-> >  > +                       break;
-> >  > +               case CONSOLES:
-> >  > +                       printf("Consoles:" RESET " %s (%d baud)\n",
-> > env_get("stdout"),
-> >  > +                              gd->baudrate);
-> >  > +                       break;
-> >  > +               case DEVICES:
-> >  > +                       printf("Devices:" RESET " ");
-> >  > +                       /* TODO: walk the DM tree */
-> >  > +                       printf("Uncountable!\n");
-> >
-> > See dm_announce() for how to do that.
-> >
-> >  > +                       break;
-> >  > +               case FEATURES:
-> >  > +                       printf("Features:" RESET " ");
-> >  > +                       if (IS_ENABLED(CONFIG_NET))
-> >  > +                               printf("Net");
-> >  > +                       if (IS_ENABLED(CONFIG_EFI_LOADER))
-> >  > +                               printf(", EFI");
-> >
-> > How about EFI_LOADER ? After all, U-Boot can run as an EFI app so 'EFI'
-> > might be better reserved for that.
-> >
-> >  > +                       printf("\n");
-> >  > +                       break;
-> >  > +               case RELOCATION:
-> >  > +                       if (gd->flags & GD_FLG_SKIP_RELOC)
-> >  > +                               printf("Relocated:" RESET " no\n");
-> >  > +                       else
-> >  > +                               printf("Relocated:" RESET " to
-> > %#09lx\n", gd->relocaddr);
-> >
-> > Not for this patch but I'd really like to figure out a way to
-> > enable/disable ANSI codes globally in U-Boot. For example, we should
-> > disable them in tests, or when redirecting sandbox to a file. It affects
-> > EFI tests too...so if you have any ideas... :-)
+> An EFI program can reasonable expect that the largest chunk of
+> unallocated conventional memory reported in the memory map can be
+> allocated with AllocatePool().
 >
-> Only thing that comes to mind would be adding a compile time flag to
-> printf which teaches it to parse and skip ANSI escape codes.
+> How will this code allocate 6 GiB on a 16 GiB board?
 
-Ideally it would have the option to be run-time, if we want to pay an
-extra penalty. Then we can use the same sandbox build with tests as we
-do for normal usage.
+Again, this is supported by the patch. I can add a test to the testapp
+if you like.
 
-> >
-> >  > +                       break;
-> >  > +               case CORES:
-> >  > +                       ofnode_for_each_subnode(np,
-> > ofnode_path("/cpus")) {
-> >  > +                               if (ofnode_name_eq(np, "cpu"))
-> >  > +                                       n_cpus++;
-> >  > +                       }
-> >
-> > uclass_id_count(UCLASS_CPU)
-> >
-> >  > +                       printf("CPU:" RESET " %d (1 in use)\n", n_cpus);
-> >  > +                       break;
-> >  > +               case MEMORY:
-> >  > +                       printf("Memory:" RESET " %lu MB\n",
-> > (ulong)gd->ram_size >> 20);
-> >  > +                       break;
-> >  > +               case STORAGE:
-> >  > +               default:
-> >  > +                       if (i == STORAGE && get_mmc_num() > 0) {
-> >  > +                               mmc = find_mmc_device(0);
-> >  > +                               if (mmc)
-> >  > +                                       printf("Storage:" RESET "
-> > mmc 0: %llu MB", mmc->capacity >> 20);
-> >  > +                       }
-> >
-> > How about iterating through UCLASS_BLK ?
 >
-> Probably a much more sensible approach tbh, can you easily determine the
-> size of a block device?
+> We should not have different code paths depending on the EFI memory type.
 
-You can do something like this:
+Why is that?
 
-struct udevice *dev;   // block device
-struct blk_desc *desc = dev_get_uclass_plat(dev);
-
-size = desc->lba * desc->blksz
-
-> >
-> >  > +                       if (i >= STORAGE + 1) {
-> >  > +                               ret = blk_get_desc(UCLASS_SCSI, i -
-> > (STORAGE + 1), &scsi_desc);
-> >  > +                               if (!ret && scsi_desc->type !=
-> > DEV_TYPE_UNKNOWN)
-> >  > +                                       /* The calculation here is
-> > really lossy but close enough */
-> >  > +                                       printf("Storage:" RESET "
-> > scsi %d: %lu MB", i - (STORAGE + 1),
-> >  > +                                              ((scsi_desc->lba >> 9)
-> > * scsi_desc->blksz) >> 11);
-> >
-> > You can use print_size() - and same above I suppose
 >
-> haha yeahp i should really do that instead.
->
-> Thanks for the review!
-> >
-> >  > +                       }
-> >  > +                       printf("\n");
-> >  > +               }
-> >  > +       }
-> >  > +
-> >  > +       printf(RESET "\n\n");
-> >  > +
-> >  > +       return 0;
-> >  > +}
-> >  > +
-> >  > +U_BOOT_CMD(ufetch, 2, 1, do_ufetch,
-> >  > +       "U-Boot fetch utility",
-> >  > +       "Print information about your device.\n"
-> >  > +       "    -n    Don't print the ASCII logo"
-> >  > +);
-> >  > --
-> >  > 2.46.0
-> >
+> A reasonable solution would be a single memory allocator replacing
+> malloc(), LMB(), and the EFI memory management which is aware of EFI
+> memory types.
 
-> >
-> > [1]
-> > https://docs.u-boot.org/en/latest/develop/codingstyle.html#include-files
-> > <https://docs.u-boot.org/en/latest/develop/codingstyle.html#include-files>
+Perhaps, although I doubt it very much. We never actually resolved
+that discussion though. So for now I am doing this patch-up series.
 
+Anyway that point has almost nothing to do with this patch, which is
+aimed at avoiding strange allocations 'in space' which no one expects.
 
 Regards,
 Simon
+
+
+>
+> Best regards
+>
+> Heinrich
+>
+> > +
+> > +             *buffer = ptr;
+> > +             r = EFI_SUCCESS;
+> > +             log_debug("EFI pool: malloc(%zx) = %p\n", size, ptr);
+> > +     } else {
+> > +             u64 num_pages = efi_size_in_pages(size +
+> > +                                     sizeof(struct efi_pool_allocation));
+> > +
+> > +             r = efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES, pool_type,
+> > +                                    num_pages, &addr);
+> > +             if (r == EFI_SUCCESS) {
+> > +                     struct efi_pool_allocation *alloc;
+> > +
+> > +                     alloc = (struct efi_pool_allocation *)(uintptr_t)addr;
+> > +                     alloc->num_pages = num_pages;
+> > +                     alloc->checksum = checksum(alloc);
+> > +                     *buffer = alloc->data;
+> > +                     log_debug("EFI pool: pages alloc(%zx) type %d = %p\n",
+> > +                               size, pool_type, *buffer);
+> > +             }
+> >       }
+> >
+> >       return r;
+> > @@ -695,27 +738,37 @@ void *efi_alloc(size_t size)
+> >   efi_status_t efi_free_pool(void *buffer)
+> >   {
+> >       efi_status_t ret;
+> > -     struct efi_pool_allocation *alloc;
+> >
+> >       if (!buffer)
+> >               return EFI_INVALID_PARAMETER;
+> >
+> > -     ret = efi_check_allocated((uintptr_t)buffer, true);
+> > -     if (ret != EFI_SUCCESS)
+> > -             return ret;
+> > +     if (malloc_check_in_range(buffer)) {
+> > +             log_debug("EFI pool: free(%p)\n", buffer);
+> > +             free(buffer);
+> > +             ret = EFI_SUCCESS;
+> > +     } else {
+> > +             struct efi_pool_allocation *alloc;
+> >
+> > -     alloc = container_of(buffer, struct efi_pool_allocation, data);
+> > +             ret = efi_check_allocated((uintptr_t)buffer, true);
+> > +             if (ret != EFI_SUCCESS)
+> > +                     return ret;
+> >
+> > -     /* Check that this memory was allocated by efi_allocate_pool() */
+> > -     if (((uintptr_t)alloc & EFI_PAGE_MASK) ||
+> > -         alloc->checksum != checksum(alloc)) {
+> > -             printf("%s: illegal free 0x%p\n", __func__, buffer);
+> > -             return EFI_INVALID_PARAMETER;
+> > -     }
+> > -     /* Avoid double free */
+> > -     alloc->checksum = 0;
+> > +             alloc = container_of(buffer, struct efi_pool_allocation, data);
+> >
+> > -     ret = efi_free_pages((uintptr_t)alloc, alloc->num_pages);
+> > +             /*
+> > +              * Check that this memory was allocated by efi_allocate_pool()
+> > +              */
+> > +             if (((uintptr_t)alloc & EFI_PAGE_MASK) ||
+> > +                 alloc->checksum != checksum(alloc)) {
+> > +                     printf("%s: illegal free 0x%p\n", __func__, buffer);
+> > +                     return EFI_INVALID_PARAMETER;
+> > +             }
+> > +             /* Avoid double free */
+> > +             alloc->checksum = 0;
+> > +
+> > +             ret = efi_free_pages((uintptr_t)alloc, alloc->num_pages);
+> > +             log_debug("EFI pool: pages free(%p)\n", buffer);
+> > +     }
+> >
+> >       return ret;
+> >   }
+> > @@ -935,6 +988,9 @@ static void add_u_boot_and_runtime(void)
+> >
+> >   int efi_memory_init(void)
+> >   {
+> > +     /* use malloc() pool where possible */
+> > +     efi_set_alloc(EFIAF_USE_MALLOC);
+> > +
+> >       efi_add_known_memory();
+> >
+> >       add_u_boot_and_runtime();
+>
