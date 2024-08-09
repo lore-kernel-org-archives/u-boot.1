@@ -4,86 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F030C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 00:10:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 327CCC52D7B
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 00:39:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07B0E88B63;
-	Fri,  9 Aug 2024 02:10:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6312B88210;
+	Fri,  9 Aug 2024 02:39:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Q676i8Aj";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A04988B63; Fri,  9 Aug 2024 02:10:48 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5C2EB88637; Fri,  9 Aug 2024 02:39:21 +0200 (CEST)
+Received: from smtpbgeu2.qq.com (smtpbgeu2.qq.com [18.194.254.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 082A488AE8
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 02:10:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E0473880E6
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 02:39:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-530e062217eso2010228e87.1
- for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 17:10:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723162245; x=1723767045; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=vF10uGq8k6om67kTM1AiLd+QueCPAXcUfCdbu+FmJA4=;
- b=Q676i8AjROuk74wewGrbf34F6DIjm3OptHjefaox9tJHmim0l8qpz52sM9Nz5kxfa1
- yMbyLE+V62SBeGC/z9A5AXzUK+PhAf1oSKo7lzvZjbBKEbcXB5Iit045rOI3QIQqruFf
- KbvGQFsSU7Qb346pyALPsdxzqDSuS85o1YVvUrC6OFaPLfmgv3SuuXunvX0K55mN+HNm
- g9e24EkE5IvRQt9x3shumfOWVd0WXpanYhLPYYrNYMNoKo2yaUY4T5KDAwXEP2MhdTig
- 12ttSfu8lFIEDa6rOQN9PUzApFDmGkwASM2H5uwB9uFLrnS/UnbcYe7eXokAW2CBQb/T
- BSJw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723162245; x=1723767045;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=vF10uGq8k6om67kTM1AiLd+QueCPAXcUfCdbu+FmJA4=;
- b=fv+XcOZHM+e+U3Y/0Kw/a9gi4b8djj/CQE9WYzuHs2KHn2346cn3npUzqUnHhHaUuC
- VFZZYSUV74xBi4StJh0GDi87NPYPGXL06/hBjQ3LPVfAyNEFds+sbWD+iTi48eOwxiwf
- M1rC0uONUhwODrAHySsJyuVT9zIDFjmN/kXqR04K3ayVipZTmgZiFcmwecxS1ZjNCBpF
- Ud40gkXtkt7K6htlMDE8ynCGYG+JY9tZZIdBhA3nYt467C6Eeb0mnCQFJZpMl2NEdUbI
- M0m0K1luSNOo90rJ7/vaudlAq0qB3G7S1mIZBxoxW7IM78jqMKQirgqjC0WqjFwvJs0z
- jing==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXJCbQcjKREulDD3uPBdB5Y11zf70PW3hE6gMrwrY8OLpfFPTE+eRtpUYiVJgjrtpBMJMBiMShlOJEdpjh6vE/w1aW2jA==
-X-Gm-Message-State: AOJu0YxBlq+YtKyEgSRIh7PA/tWHlK2zEcbV4awV8L7d1IF7OHaSBGHJ
- 0By8vhNRooiFtMmTVP9G/1ifYlZFcjziZkVFcGwz9E1C+l53MgP7503rC+LS7oM=
-X-Google-Smtp-Source: AGHT+IGtygbxFlW6zZvvAYDr+IihaQHAwvMOo8oPbkK2a3Ox5BOVeSUiE0Z9QGVef7FiZYm97Y/6lg==
-X-Received: by 2002:a05:6512:124f:b0:52e:7f09:aaae with SMTP id
- 2adb3069b0e04-530e583c51fmr2294731e87.27.1723162245064; 
- Thu, 08 Aug 2024 17:10:45 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::7424? ([2a02:8109:aa0d:be00::7424])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7dc9bcf044sm785167766b.7.2024.08.08.17.10.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Aug 2024 17:10:44 -0700 (PDT)
-Message-ID: <4f3bf2dd-3843-4a48-a1e9-5261c6830163@linaro.org>
-Date: Fri, 9 Aug 2024 02:10:43 +0200
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
+X-QQ-mid: bizesmtp90t1723163898t5znc2iu
+X-QQ-Originating-IP: W0btba2zSGimeiEuPCBhoO/QJWQF2e25lZmH9W/OC54=
+Received: from [192.168.159.131] ( [106.150.157.243])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Fri, 09 Aug 2024 08:38:16 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 10788729312749832138
+Message-ID: <D9933682DB738EFC+a457519a-931c-4914-b42a-9ea236d79708@radxa.com>
+Date: Fri, 9 Aug 2024 09:38:15 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] usb: dwc3: support USB 3.1 controllers
-To: Igor Prusov <ivprusov@salutedevices.com>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Nishanth Menon <nm@ti.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Stefan Bosch <stefan_b@posteo.net>, Tom Rini <trini@konsulko.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-References: <20240423141551.2410199-1-caleb.connolly@linaro.org>
+Subject: Re: [PATCH v6] board: rockchip: add Radxa ROCK 3 Model C
+To: Maxim Moskalets <maximmosk4@gmail.com>, trini@konsulko.com,
+ u-boot@lists.denx.de, sjg@chromium.org
+Cc: Maxim.Moskalets@kaspersky.com, Jonas Karlman <jonas@kwiboo.se>
+References: <20240808193710.13703-1-Maxim.Moskalets@kaspersky.com>
 Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240423141551.2410199-1-caleb.connolly@linaro.org>
+From: FUKAUMI Naoki <naoki@radxa.com>
+In-Reply-To: <20240808193710.13703-1-Maxim.Moskalets@kaspersky.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtp:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,44 +61,259 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Small ping, I think this patch slipped through the cracks.
+Hi,
 
-On 23/04/2024 16:15, Caleb Connolly wrote:
-> The revision is different for these, add the additional check as in
-> xhci-dwc3 core_init code.
+On 8/9/24 04:37, Maxim Moskalets wrote:
+> From: Maxim Moskalets <maximmosk4@gmail.com>
 > 
-> Equivalent upstream Linux patch:
-> 690fb3718a70 ("usb: dwc3: Support Synopsys USB 3.1 IP")
+> Based on rock-3a-rk3568_defconfig.
+> Tested on v1.31 revision.
 > 
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-> Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Reviewed-by: Marek Vasut <marex@denx.de>
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> Board Specifications:
+> - Rockchip RK3566
+> - 1/2/4GB LPDDR4 2112MT/s
+> - eMMC socket
+> - uSD card slot
+> - M.2 2230 Connector
+> - GbE LAN with POE
+> - 3.5mm jack with mic
+> - HDMI 2.0, MIPI DSI/CSI
+> - USB 3.0 Host, USB 2.0 Host/OTG
+> - 40-pin GPIO expansion ports
+> 
+> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
+> Suggested-by: Jonas Karlman <jonas@kwiboo.se>
+> Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+
+I got following error when `usb start` and `usb reset`
+
+```
+Bus usb@fcc00000: Register 2000140 NbrPorts 2
+Starting the controller
+USB XHCI 1.10
+Bus usb@fd000000: Register 2000140 NbrPorts 2
+Starting the controller
+USB XHCI 1.10
+Bus usb@fd800000: USB EHCI 1.00
+Bus usb@fd840000: USB OHCI 1.0
+Bus usb@fd880000: USB EHCI 1.00
+Bus usb@fd8c0000: USB OHCI 1.0
+scanning bus usb@fcc00000 for devices... 1 USB Device(s) found
+scanning bus usb@fd000000 for devices... 1 USB Device(s) found
+scanning bus usb@fd800000 for devices... 1 USB Device(s) found
+scanning bus usb@fd840000 for devices... ERROR:  USB-error: 
+DEVICENOTRESPONDING: Device did not respond to token (IN) or did
+not provide a handshake (OUT) (5)
+ERROR: USB-error: DEVICENOTRESPONDING: Device did not respond to token 
+(IN) or did
+not provide a handshake (OUT) (5)
+ERROR:  USB-error: DEVICENOTRESPONDING: Device did not respond to token 
+(IN) or did
+not provide a handshake (OUT) (5)
+ERROR: USB-error: DEVICENOTRESPONDING: Device did not respond to token 
+(IN) or did
+not provide a handshake (OUT) (5)
+ERROR:  USB-error: DEVICENOTRESPONDING: Device did not respond to token 
+(IN) or did
+not provide a handshake (OUT) (5)
+ERROR: USB-error: DEVICENOTRESPONDING: Device did not respond to token 
+(IN) or did
+not provide a handshake (OUT) (5)
+unable to get device descriptor (error=-1)
+1 USB Device(s) found
+scanning bus usb@fd880000 for devices... 1 USB Device(s) found
+scanning bus usb@fd8c0000 for devices... 1 USB Device(s) found
+```
+
+but it happens only when no USB device is connected at usb@fd840000 
+(upper right port). if some device is connected, it doesn't happen, 
+device is recognized properly.
+
+if it's okay,
+
+Tested-by: FUKAUMI Naoki <naoki@radxa.com>
+
+
+Best regards,
+
+--
+FUKAUMI Naoki
+Radxa Computer (Shenzhen) Co., Ltd.
+
 > ---
-> Changes since v1:
-> * Reference Linux patch
-> * V1: https://lore.kernel.org/u-boot/20240411160527.835767-1-caleb.connolly@linaro.org
+> v6:
+> 	update dts to turn LED up in U-Boot
+> v5:
+> 	fixed board info
+> v4:
+> 	fixed typo in commit-msg
+> 	moved maintainers record to file for rk3568 boards
+> 	renamed from ROCK 3 Model C to ROCK3C
+> v3:
+> 	add suggested by Jonas Karlman <jonas@kwiboo.se> in
+> 	https://lore.kernel.org/all/bbb81dd1-e318-423d-8258-db7556ce6850@kwiboo.se/
+> v2:
+> 	rebase to updated upstream dts
 > ---
->   drivers/usb/dwc3/core.c | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
+>   arch/arm/dts/rk3566-rock-3c-u-boot.dtsi | 18 +++++
+>   board/rockchip/evb_rk3568/MAINTAINERS   |  7 ++
+>   configs/rock-3c-rk3566_defconfig        | 97 +++++++++++++++++++++++++
+>   doc/board/rockchip/rockchip.rst         |  1 +
+>   4 files changed, 123 insertions(+)
+>   create mode 100644 arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+>   create mode 100644 configs/rock-3c-rk3566_defconfig
 > 
-> diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-> index 96e850b7170f..db045f5822d4 100644
-> --- a/drivers/usb/dwc3/core.c
-> +++ b/drivers/usb/dwc3/core.c
-> @@ -594,9 +594,10 @@ static int dwc3_core_init(struct dwc3 *dwc)
->   	int			ret;
+> diff --git a/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi b/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..f4124aa48fc
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+> @@ -0,0 +1,18 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +#include "rk356x-u-boot.dtsi"
+> +
+> +&sfc {
+> +	flash@0 {
+> +		bootph-pre-ram;
+> +		bootph-some-ram;
+> +	};
+> +};
+> +
+> +/ {
+> +	leds {
+> +		led-0 {
+> +			default-state = "on";
+> +		};
+> +	};
+> +};
+> diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/evb_rk3568/MAINTAINERS
+> index e5b0986ead9..ba4884db8e1 100644
+> --- a/board/rockchip/evb_rk3568/MAINTAINERS
+> +++ b/board/rockchip/evb_rk3568/MAINTAINERS
+> @@ -69,3 +69,10 @@ S:	Maintained
+>   F:	configs/rock-3a-rk3568_defconfig
+>   F:	arch/arm/dts/rk3568-rock-3a.dts
+>   F:	arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
+> +
+> +ROCK-3C
+> +M:	Jonas Karlman <jonas@kwiboo.se>
+> +M:	Maxim Moskalets <maximmosk4@gmail.com>
+> +S:	Maintained
+> +F:	arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
+> +F:	configs/rock-3c-rk3566_defconfig
+> diff --git a/configs/rock-3c-rk3566_defconfig b/configs/rock-3c-rk3566_defconfig
+> new file mode 100644
+> index 00000000000..f44b202c8c3
+> --- /dev/null
+> +++ b/configs/rock-3c-rk3566_defconfig
+> @@ -0,0 +1,97 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_SPEED=24000000
+> +CONFIG_SF_DEFAULT_MODE=0x2000
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-rock-3c"
+> +CONFIG_ROCKCHIP_RK3568=y
+> +CONFIG_ROCKCHIP_SPI_IMAGE=y
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_DEBUG_UART_BASE=0xFE660000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
+> +CONFIG_SPL_SPI=y
+> +CONFIG_SYS_LOAD_ADDR=0xc00800
+> +CONFIG_PCI=y
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_AHCI=y
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-rock-3c.dtb"
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +CONFIG_SPL_PAD_TO=0x7f8000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_SPL_SPI_LOAD=y
+> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+> +CONFIG_SPL_ATF=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_PCI=y
+> +CONFIG_CMD_POWEROFF=y
+> +CONFIG_CMD_USB=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_PMIC=y
+> +CONFIG_CMD_REGULATOR=y
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_OF_LIVE=y
+> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> +CONFIG_SPL_DM_SEQ_ALIAS=y
+> +CONFIG_SPL_REGMAP=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_SCSI_AHCI=y
+> +CONFIG_AHCI_PCI=y
+> +CONFIG_SPL_CLK=y
+> +CONFIG_ROCKCHIP_GPIO=y
+> +CONFIG_SYS_I2C_ROCKCHIP=y
+> +CONFIG_LED=y
+> +CONFIG_LED_GPIO=y
+> +CONFIG_MISC=y
+> +CONFIG_SUPPORT_EMMC_RPMB=y
+> +CONFIG_MMC_DW=y
+> +CONFIG_MMC_DW_ROCKCHIP=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_BUS=4
+> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+> +CONFIG_SPI_FLASH_GIGADEVICE=y
+> +CONFIG_SPI_FLASH_MACRONIX=y
+> +CONFIG_SPI_FLASH_WINBOND=y
+> +CONFIG_SPI_FLASH_XTX=y
+> +CONFIG_PHY_REALTEK=y
+> +CONFIG_DWC_ETH_QOS=y
+> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+> +CONFIG_NVME_PCI=y
+> +CONFIG_PCIE_DW_ROCKCHIP=y
+> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+> +CONFIG_SPL_PINCTRL=y
+> +CONFIG_DM_PMIC=y
+> +CONFIG_PMIC_RK8XX=y
+> +CONFIG_REGULATOR_RK8XX=y
+> +CONFIG_SPL_RAM=y
+> +CONFIG_SCSI=y
+> +CONFIG_BAUDRATE=1500000
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_ROCKCHIP_SFC=y
+> +CONFIG_SYSRESET=y
+> +CONFIG_USB=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_EHCI_GENERIC=y
+> +CONFIG_USB_OHCI_HCD=y
+> +CONFIG_USB_OHCI_GENERIC=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_ERRNO_STR=y
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+> index bedc52e03e2..60357af6caa 100644
+> --- a/doc/board/rockchip/rockchip.rst
+> +++ b/doc/board/rockchip/rockchip.rst
+> @@ -105,6 +105,7 @@ List of mainline supported Rockchip boards:
+>        - Pine64 SOQuartz on Model A (soquartz-model-a-rk3566)
+>        - Powkiddy X55 (powkiddy-x55-rk3566)
+>        - Radxa CM3 IO Board (radxa-cm3-io-rk3566)
+> +     - Radxa ROCK 3C (rock-3c-rk3566)
 >   
->   	reg = dwc3_readl(dwc->regs, DWC3_GSNPSID);
->   	/* This should read as U3 followed by revision number */
-> -	if ((reg & DWC3_GSNPSID_MASK) != 0x55330000) {
-> +	if ((reg & DWC3_GSNPSID_MASK) != 0x55330000 &&
-> +	    (reg & DWC3_GSNPSID_MASK) != 0x33310000) {
->   		dev_err(dwc->dev, "this is not a DesignWare USB3 DRD Core\n");
->   		ret = -ENODEV;
->   		goto err0;
->   	}
-
--- 
-// Caleb (they/them)
+>   * rk3568
+>        - Rockchip Evb-RK3568 (evb-rk3568)
