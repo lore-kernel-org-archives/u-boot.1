@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB525C52D7C
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 22:03:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 475DFC52D7C
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 22:03:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 703AB88C39;
-	Sat, 10 Aug 2024 00:02:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D510288C55;
+	Sat, 10 Aug 2024 00:03:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DoGNTN2t";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NEccqvOZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8695488C39; Sat, 10 Aug 2024 00:02:56 +0200 (CEST)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id 996DB8641A; Sat, 10 Aug 2024 00:03:01 +0200 (CEST)
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
+ [IPv6:2607:f8b0:4864:20::c2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1960A8641A
- for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 00:02:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7075D88C3D
+ for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 00:02:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-3db145c8010so1666506b6e.3
- for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 15:02:54 -0700 (PDT)
+Received: by mail-oo1-xc2d.google.com with SMTP id
+ 006d021491bc7-5d5d4d07babso1512013eaf.3
+ for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 15:02:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1723240973; x=1723845773; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1723240978; x=1723845778; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uXv8tw8uIm5Mm2GQsrNCjq/1qEv0QnhScQ40sWBxg8s=;
- b=DoGNTN2tN0KFgn3Kngu96quRtdZZl5aj5mwpnsNomH91GPVsZxoSCt1GP8QA2eMo3S
- qeVwF0lrWoJPadaEMqMaBGrXF8KldYN27ixBbXaz1AmkeE4URRLO4dG96FAMKOvB+DzQ
- pPBk2+m0j5Gory44hyDyr1IkWhy0C88wxGkn0=
+ bh=CMHfVfSMeZwBFudjMxBbX+qrCe+KQOBHsHXF/dE7Yvo=;
+ b=NEccqvOZxzXec1vez9ZeKVo2t6VgXO4TuJ6PMCV7kYSpn9s/mP8F17pSMD/MI63j9p
+ HKi886yufox5JEFvDzP5cm8xakx+C0Q7YUUAW1yoDQXJoZ3b6UvFEivAcgeJTZSMx39K
+ oEtWHw/k2rzTb506TntqskA5WifsamuVwF/Vw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723240973; x=1723845773;
+ d=1e100.net; s=20230601; t=1723240978; x=1723845778;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uXv8tw8uIm5Mm2GQsrNCjq/1qEv0QnhScQ40sWBxg8s=;
- b=JJR2CPRjxAO9RTIC/7EpQoxFG9AwvJIQu7TpicVTC5it9G+nVUPbupF5f2RbOpLSkG
- dH0L3sw0lznC1HhAW8j8lGlceAvUk77kh1zRBRY2QrqKWE2G9jBE0Mel0BmwtGEAUSIx
- 20c8oKlsH8Pnt6LjcFmkEaHGQM7Lu8EPneIo4xdkwxCIuGRPBkSkRHnFWATMR4xCPnap
- zKcu7VAiL+ClF54JyQVcmppQXABF1kASf5IkkWjRCv/YMeGg40qDeQmRdm39aTK9vYuW
- Nrd/ICldH545wGfkRdvNyWQ6bDFFvhEvLmPXaqSogBwyr2GkszhjeY2kiVseBzw/XxuN
- Vj8w==
+ bh=CMHfVfSMeZwBFudjMxBbX+qrCe+KQOBHsHXF/dE7Yvo=;
+ b=Cli+3GAVcDCo5BFb/f1WUTJx5aiDuCJHI1c7/U29GAMd1wPMC2RXoaU5pJMdzYiqtr
+ raWhFSZNwsVtzGIz1f60efgnim+wgDIbEbsIBsBDZ872i+4z53aU4mWuoNcBP2o+iC6Z
+ X4GQt2xSqJUSlW5j4aaBpa46OuMWhTEZWgnTP+mRsQ1s9PKVn4VX9JY5CxTLhi7OFwY1
+ fmvw73WJHROTGrM8N+od0TYTIOKrf7EQI8ea2Vt3fOboiY71H/6qQTPqm8E4os+wSFZM
+ xfSxmZ+PZa0GKKwoNV+2DjirBIBEfOMslmjDYtS+2Nb6m74m7FVNfbXCmE/8hVKhnZg8
+ Tgdw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVJ57CRTy7uB6+HNIoTGYuwv9n6uPAKEwh8LBcp5G6+r5f18ma6XCnEp11vxJA5jz8CF9paRttJVtr++rxJe2Cm546DuA==
-X-Gm-Message-State: AOJu0Yzd8ZOzP2IOW+vharZ0j1gVmnAuCMqyeiqm6v8RTznAOzf+oaO4
- bHKidVxiSHOCBxWX8NJouN0nitsyii6aDvZob3wMzEq4D6WZ3Apja4Ylq1TKU2s=
-X-Google-Smtp-Source: AGHT+IH7NmpBP670OZc2rv3XV8WO0f5rDAcBWRbOChVjB8guF1MWEnhvlFDeFInw+ZnW4ufR8VB3zQ==
-X-Received: by 2002:a05:6870:148e:b0:260:faa1:4453 with SMTP id
- 586e51a60fabf-26c62c42c27mr3837711fac.8.1723240972835; 
- Fri, 09 Aug 2024 15:02:52 -0700 (PDT)
+ AJvYcCWmRvAZtj5nWA9ojxh+9m4D1qStHygwZIoX+K78jJOhEFIFqYJWH9butGPjeXiPierNzcby43A=@lists.denx.de
+X-Gm-Message-State: AOJu0YwA3nXnNajNbmUKsLXDDmA2xBrLdW7DEUXo267oQxLUmkOMJAcv
+ y8SqUYj4O3r2tejjlDbElFrxR42lzawHnXtryvaRqO0r/VQZUnkJpX0g+/FgC7E=
+X-Google-Smtp-Source: AGHT+IHiX7+No7DZJsuQ2LXLymw/n5Sq/xWDCyjxhy8hdLvIdnZRHbndLdZWtXTCeiLlKPDpNsgnuQ==
+X-Received: by 2002:a05:6820:820:b0:5d5:a28b:f4a3 with SMTP id
+ 006d021491bc7-5d87d67c93fmr3417101eaf.7.1723240978206; 
+ Fri, 09 Aug 2024 15:02:58 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-191-8-236.totalplay.net.
  [187.191.8.236]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70c7b81db6fsm182189a34.25.2024.08.09.15.02.51
+ 006d021491bc7-5da3e71866dsm113252eaf.38.2024.08.09.15.02.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Aug 2024 15:02:52 -0700 (PDT)
-Date: Fri, 9 Aug 2024 16:02:50 -0600
+ Fri, 09 Aug 2024 15:02:57 -0700 (PDT)
+Date: Fri, 9 Aug 2024 16:02:55 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Richard Weinberger <richard@sigma-star.at>
-Cc: Richard Weinberger <richard@nod.at>, upstream@sigma-star.at,
- sjg@chromium.org, Jixiong.Hu@mediatek.com,
- marek.vasut+renesas@mailbox.org, patrick.delaunay@foss.st.com,
- ilias.apalodimas@linaro.org, seanga2@gmail.com,
- upstream+uboot@sigma-star.at, u-boot@lists.denx.de,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v2 1/3] ext4: Fix integer overflow in ext4fs_read_symlink()
-Message-ID: <20240809220250.GB1626301@bill-the-cat>
-References: <20240809095430.3656-1-richard@nod.at>
- <04ba0220-864c-40cf-bdc4-73ae6137b704@gmx.de>
- <39167592.RpJgFE2GTS@somecomputer>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Anand Moon <linux.amoon@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Johan Jonker <jbx6244@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+Subject: Re: [PATCH] cmd: add a fetch utility
+Message-ID: <20240809220255.GC1626301@bill-the-cat>
+References: <20240808163153.2069650-1-caleb.connolly@linaro.org>
+ <0194AFA0-5D56-46F8-A385-D23AF7CDDD43@gmx.de>
+ <c25c559d-97ab-4abf-bee3-77dc38802e71@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="yumx3C/l3J1mVCP/"
+ protocol="application/pgp-signature"; boundary="lTRhmW2WSliX30AV"
 Content-Disposition: inline
-In-Reply-To: <39167592.RpJgFE2GTS@somecomputer>
+In-Reply-To: <c25c559d-97ab-4abf-bee3-77dc38802e71@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,83 +101,104 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---yumx3C/l3J1mVCP/
+--lTRhmW2WSliX30AV
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 09, 2024 at 06:29:34PM +0200, Richard Weinberger wrote:
-> Heinrich,
+On Fri, Aug 09, 2024 at 07:23:42PM +0200, Caleb Connolly wrote:
 >=20
-> Am Freitag, 9. August 2024, 18:13:27 CEST schrieb 'Heinrich Schuchardt' v=
-ia upstream:
-> > Thank you for pointing at the problematic code.
+>=20
+> On 09/08/2024 08:18, Heinrich Schuchardt wrote:
 > >=20
-> > You are calling __builtin_add_overflow(int, int, size_t *).
 > >=20
-> > __builtin_add_overflow() is not defined in the C-standard.
+> > Am 8. August 2024 18:24:24 MESZ schrieb Caleb Connolly <caleb.connolly@=
+linaro.org>:
+> > > While U-Boot does a pretty good job at printing information at startup
+> > > about what hardware it's running on, it can be hard to take pretty
+> > > pictures of this to show off on the internet (by far the most
+> > > important aspect of porting a device in 2024!).
+> > >=20
+> > > Add a small utility "ufetch" for displaying some information about U-=
+Boot and
+> > > the hardware it's running on in a similar fashion to the popular neof=
+etch tool
+> > > for *nix's [1].
+> > >=20
+> > > While the output is meant to be useful, it should also be pleasing to=
+ look at
+> > > and look good in screenshots. The ufetch command brings this to U-Boo=
+t,
+> > > featuring a colorful ASCII art version of the U-Boot logo and a fancy=
+ layout.
+> > >=20
+> > > Finally, tireless device porters can properly show off their hard wor=
+k and get
+> > > the internet points they so deserve!
+> > >=20
+> > > Not everything is fully supported yet, but this seemed good enough fo=
+r initial
+> > > inclusion. Only one MMC device is detected, and other than SCSI other=
+ storage
+> > > devices aren't supported.
 > >=20
-> > Is there any well defined behavior for this on systems where size_t has
-> > more bits than int?
->=20
-> https://gcc.gnu.org/onlinedocs/gcc/Integer-Overflow-Builtins.html says:
->=20
-> Built-in Function: bool __builtin_add_overflow (type1 a, type2 b, type3 *=
-res)
->=20
-> These built-in functions promote the first two operands into infinite pre=
-cision signed type and perform addition on those promoted operands.
-> The result is then cast to the type the third pointer argument points to =
-and stored there.
-> If the stored result is equal to the infinite precision result, the built=
--in functions return false, otherwise they return true.
-> As the addition is performed in infinite signed precision, these built-in=
- functions have fully defined behavior for all argument values.=20
->=20
-> So, I don't really see a problem here.
->=20
-> > I could imagine implementations just copying an int to the first 32 bits
-> > of alloc_size and leaving the other bits untouched.
 > >=20
-> > Hopefully your C-compiler simply refuses to compile this code.
-> >=20
-> > I would prefer to stick to standard C:
-> >=20
-> > alloc_size =3D le32_to_cpu(diro->inode.size) + 1UL;
-> > if (!alloc_size)
-> > 	return NULL;
-> >=20
-> > Here an overflow can only occur on 32bit systems.
+> > This command is not very generic. E.g. it supports SCSI drives but not =
+SATA. Many boards have eMMC and SD-card. This lks more ike an RFC tan somet=
+hing ready to merge.
 >=20
-> In this specific case we could avoid the builtis, yes.
-> But I prefer using __builtin_add_overflow() as it offers a generic
-> and bullet prove mechanism to avoid these kind of bugs.
+> Honestly it didn't even occur to me to send an RFC since this is purely a
+> vanity thing...
 >=20
-> It's not that they are something new and funky.
-> Other projects use them since ages.
+> I'll make it generic over UCLASS_BLK if possible for the next revision.
+> >=20
+> > Why don't you use a script or an EFI program to print whatever informat=
+ion you need?
+>=20
+> Well , then you'd need to have a way to load the script or EFI binary, wh=
+ich
+> might not be possible for an early U-Boot port which doesn't have storage
+> support yet (or at least, be a bunch of effort).
+>=20
+> The only motivation to have this in U-Boot is really because
+>=20
+> a) it's cute
+> b) it motivates "reward oriented" people like myself to get U-Boot booting
+> on new/interesting devices because now it can be really easily shown off.
+>=20
+> Maybe it's a cynical take, but I think stuff like this really has the
+> potential to get more folks interested. Nobody likes doing the invisible
+> background work, so why not bring some visibility to things?
+>=20
+> Assuming I did a bad job at conveying my intent in the patch description:
+> the point here is not to convey useful debugging information to developer=
+s,
+> it's to show off, look pretty, and be amusing. Plenty of other U-Boot
+> commands can convey information, this one is more like the 2048 port.
 
-I'm fine with using this buildin, it's widely enough implemented, for
-good reason.
+So, at the high level, yes, this is something that ought to get merged
+as it's handy enough, but not intended to replace for example smbios
+information.
 
 --=20
 Tom
 
---yumx3C/l3J1mVCP/
+--lTRhmW2WSliX30AV
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAma2kgoACgkQFHw5/5Y0
-tyzB3gv8DG2g5TePuu3QcmYf03RpiB/5tnapbY1/+yXc0MzMSnUHG++o3x/7xuzg
-Y97QJhVPZjHP95yQamq6S0v5NJFE4xEPsccP3C1FrKYdLW78P5zOyNdHpRCDtV4x
-mFFin0lPYsZVgbjVst1gJjl8M2XdtRmNJa+TFde5jyvNvPxXV6Sj76k8cZ0oo36S
-2Y7Mas3nlZOZrVy0NLalr7LP/Rv682ODFE5zgkZkYg8sHRycaGVmH3BQS5ccYZ21
-UEgpNtTmP2MPHhd/S6kEBiYxtoPtGchVzUPDI6kiabeXGTKFD0n7H0bkT4LloOwA
-avZrz3Ou+sXlMwv3zuatI67hRT+q4aBtdF35S6JMF3hHkHVCSHOyNk6zQZ9xsd1f
-VqwruZjoCv2+OjxDXyuLzs3UyMr49UGUxWgtuIukJxcvfqIvA5ktnOPWiH0FpEjL
-NpoOQmG7Fkip1sFxmMs5DdthIbZApKb1FewUNl6Ao7L00SnoDO1UR8KaSswvjpWK
-Lv8wDt5y
-=bTCJ
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAma2kg8ACgkQFHw5/5Y0
+tyzzWAwAnp49P07kUVXq/oRJGs0J63D3htP7pespZI+xh4+DRwu2xEHHIdwflv1e
+d1rr/XoilV7/dV3fqvQHJO2wmrKGg+09W34ljiDP34ZROSRGaYyblBgYkPqqWyCq
+ZnVh+VMol5Dhmpq7WX80NbZy89usosJPr4z8TXT9UgyXE6+Fava+7pAcNYVluxOs
+8KgMgUG+7Kq92ltAKdA/vJIgH3uZZQjW/rLbsJU1Dr6CWW8dyWEC3vY+qCYSXsXJ
+tLlK/lYKosr/HbikrrX+zX6NkPGI9LGtwHa1G2AqscUKTuJqnPbpHQkdl/2w6jj9
+8PNbrGLYJcFlyk8DIQctU3RFnUjbNElgelgblSuMGJPnO9OPD85I/TzmVL17zgAp
+qhge7hLyIad/3AjWSVaa89IOWfasm1fdtw+YiT3Gm0Hld/ftHu9GkH/mHnZfYGAR
+0aoJemEtuCP8qYt8s0hOhpV+HlWhror86aemYgDCJnBpSmtnSp3HvvH5lGV7aPJ7
+VQzU7kjO
+=kMUR
 -----END PGP SIGNATURE-----
 
---yumx3C/l3J1mVCP/--
+--lTRhmW2WSliX30AV--
