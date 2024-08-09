@@ -4,60 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBDBFC3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 09:15:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 596FEC52D71
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 09:17:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5670F88100;
-	Fri,  9 Aug 2024 11:15:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D67CA8708B;
+	Fri,  9 Aug 2024 11:17:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Yg3ZrukH";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="JyvGXSKz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83557881C3; Fri,  9 Aug 2024 11:15:13 +0200 (CEST)
-Received: from mail-m12784.qiye.163.com (mail-m12784.qiye.163.com
- [115.236.127.84])
+ id B98588708B; Fri,  9 Aug 2024 11:17:10 +0200 (CEST)
+Received: from mail-m3291.qiye.163.com (mail-m3291.qiye.163.com
+ [220.197.32.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2067D880D1
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 11:15:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FFCF86BF1
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 11:17:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=Yg3ZrukHf/DE49eVN4zOrDyl5Tyya5RJpDraZIc/53OB444hfxBgK/fCdLAximx30KTLqsy20WRjKZktUjCHuK5Z3LG9Lf14s0YuYx1SLlBWlO0tYAjcr/T9bdnfLRd8Ym22RRSc9T2kuJU1g5iazZgkyKVDQYa+sMklpO2wG+Q=;
+ b=JyvGXSKz5xi9R2NA/7ixY6SYlnFnoJaVHAWZXmB7tYzEqY2UsQUn3dfTUVBSHQpeRyqCiDxv3T1vzosm0yeI9b3XuL/cFmWOPRbmUfFMaF0kdM/EvrvdxAc1CiWfiQsGkdxMoXoQHobWbFZOqeOG7Nh4euUYMnUMTVjNMbrTYP4=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=3ycsss0+2yFxpDDdGdcfzgA7KmcF637UhWfVnFFKoog=;
+ bh=nfKpwui+iN7Xh8aq7YYM3dyYnl2vvcvKCWsiJ67W1T4=;
  h=date:mime-version:subject:message-id:from;
 Received: from [192.168.60.65] (unknown [103.29.142.67])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 7BFDB900588;
- Fri,  9 Aug 2024 17:14:56 +0800 (CST)
-Message-ID: <317839d3-ab28-426d-8869-f9783ad5aabb@rock-chips.com>
-Date: Fri, 9 Aug 2024 17:14:49 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id E2042900608;
+ Fri,  9 Aug 2024 17:16:45 +0800 (CST)
+Message-ID: <ea8287b6-352d-48cf-b370-0d90d2990f08@rock-chips.com>
+Date: Fri, 9 Aug 2024 17:16:45 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm: dts: rockchip: disable "usb_host0_ohci" to make boot
- faster for Radxa ROCK 3A
+Subject: Re: [PATCH] arm: dts: rockchip: fix dts for Radxa ROCK 4C+
 To: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, gajjar04akash@gmail.com,
- jonas@kwiboo.se
-References: <20240802024949.122688-1-naoki@radxa.com>
+Cc: jonas@kwiboo.se, sjg@chromium.org, philipp.tomsich@vrull.eu,
+ dsimic@manjaro.org
+References: <20240808221902.2006-1-naoki@radxa.com>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240802024949.122688-1-naoki@radxa.com>
+In-Reply-To: <20240808221902.2006-1-naoki@radxa.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZS0JKVk9DHUsaSRpLGBhJQlYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDSBpPVk9LSU9MHU5LQh0dTFYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKS0hVSUJVSk9JVU1MWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
-X-HM-Tid: 0a91366b732803a9kunm7bfdb900588
+X-HM-Tid: 0a91366d1df603a9kunme2042900608
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PTo6Thw*TzI6SA4BEkIBEBcC
- CygwFE5VSlVKTElISkJPQ0JMTUpPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQU9PTEM3Bg++
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MlE6Mgw5MTI#SA5CPzw6NAg6
+ MhoaCkJVSlVKTElISkJOS0tMS01JVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUlMT0k3Bg++
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,111 +73,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Naoki,
 
-On 2024/8/2 10:49, FUKAUMI Naoki wrote:
-> on-board USB 2.0 hub, FE1.1s, has Transaction Translator which can
-> handle USB 1.x devices via "usb_host0_ehci". so we can omit
-> "usb_host0_ohci" and make boot faster (a little).
+On 2024/8/9 06:19, FUKAUMI Naoki wrote:
+> Radxa ROCK Pi 4 series and Radxa ROCK 4C+ are not compatible.
 
-The OHCI is in use when the direct connect device is USB1.1; and if the 
-board
+A little bit more detail about why not compatible?
 
-connect with usb2.0 hub, then only EHCI is working and OHCI has no use.
-
-
->
-> => usb start
-> starting USB...
-> Bus usb@fd000000: Register 2000140 NbrPorts 2
-> Starting the controller
-> USB XHCI 1.10
-> Bus usb@fd800000: USB EHCI 1.00
-> Bus usb@fd880000: USB EHCI 1.00
-> Bus usb@fd8c0000: USB OHCI 1.0
-> scanning bus usb@fd000000 for devices... 1 USB Device(s) found
-> scanning bus usb@fd800000 for devices... 2 USB Device(s) found
-> scanning bus usb@fd880000 for devices... 1 USB Device(s) found
-> scanning bus usb@fd8c0000 for devices... 3 USB Device(s) found
->         scanning usb for storage devices... 1 Storage Device(s) found
-> => usb tree
-> USB device tree:
->    1  Hub (5 Gb/s, 0mA)
->       U-Boot XHCI Host Controller
->
->    1  Hub (480 Mb/s, 0mA)
->    |  u-boot EHCI Host Controller
->    |
->    +-2  Hub (480 Mb/s, 100mA)
->          USB 2.0 Hub
->
->    1  Hub (480 Mb/s, 0mA)
->       u-boot EHCI Host Controller
->
->    1  Hub (12 Mb/s, 0mA)
->    |   U-Boot Root Hub
->    |
->    +-2  Hub (12 Mb/s, 100mA)
->      |  ALCOR Generic USB Hub
->      |
->      +-3  Mass Storage (12 Mb/s, 300mA)
->           JetFlash Mass Storage Device 02K1RNH5MJFV4TX6
->
-> => usb reset
-> resetting USB...
-> Host not halted after 16000 microseconds.
-> Bus usb@fd000000: Register 2000140 NbrPorts 2
-> Starting the controller
-> USB XHCI 1.10
-> Bus usb@fd800000: USB EHCI 1.00
-> Bus usb@fd880000: USB EHCI 1.00
-> Bus usb@fd8c0000: USB OHCI 1.0
-> scanning bus usb@fd000000 for devices... 1 USB Device(s) found
-> scanning bus usb@fd800000 for devices... 4 USB Device(s) found
-> scanning bus usb@fd880000 for devices... 1 USB Device(s) found
-> scanning bus usb@fd8c0000 for devices... 1 USB Device(s) found
->         scanning usb for storage devices... 1 Storage Device(s) found
-> => usb tree
-> USB device tree:
->    1  Hub (5 Gb/s, 0mA)
->       U-Boot XHCI Host Controller
->
->    1  Hub (480 Mb/s, 0mA)
->    |  u-boot EHCI Host Controller
->    |
->    +-2  Hub (480 Mb/s, 100mA)
->      |   USB 2.0 Hub
->      |
->      +-3  Hub (12 Mb/s, 100mA)
->        |  ALCOR Generic USB Hub
->        |
->        +-4  Mass Storage (12 Mb/s, 300mA)
->             JetFlash Mass Storage Device 02K1RNH5MJFV4TX6
->
->    1  Hub (480 Mb/s, 0mA)
->       u-boot EHCI Host Controller
->
->    1  Hub (12 Mb/s, 0mA)
->        U-Boot Root Hub
->
-> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+The eMMC is different?
 
 Thanks,
+
 - Kever
-> ---
->   arch/arm/dts/rk3568-rock-3a-u-boot.dtsi | 4 ++++
->   1 file changed, 4 insertions(+)
+
+> add
+> rk3399-rock-pi-4-u-boot.dtsi contents and remove dependency of it.
 >
-> diff --git a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> index 9d18f5d0b36..9078b9a67a2 100644
-> --- a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> @@ -40,3 +40,7 @@
->   		spi-tx-bus-width = <1>;
+> no functional change is intended.
+>
+> Fixes: 71a95e2efd30 ("arm: dts: rockchip: add Radxa ROCK 4C+")
+> Suggested-by: Dragan Simic <dsimic@manjaro.org>
+> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+> ---
+>   arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi | 16 ++++++++++++++--
+>   1 file changed, 14 insertions(+), 2 deletions(-)
+>
+> diff --git a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
+> index 5ec15a845c1..50dae5cb5ef 100644
+> --- a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
+> @@ -1,8 +1,10 @@
+> -// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +// SPDX-License-Identifier: GPL-2.0+
+>   /*
+> + * Copyright (C) 2019 Jagan Teki <jagan@amarulasolutions.com>
+>    * Copyright (c) 2023 Radxa Limited
+>    */
+> -#include "rk3399-rock-pi-4-u-boot.dtsi"
+> +#include "rk3399-u-boot.dtsi"
+> +#include "rk3399-sdram-lpddr4-100.dtsi"
+>   
+>   &pcfg_pull_none_18ma {
+>   	bootph-pre-ram;
+> @@ -14,6 +16,12 @@
+>   	bootph-some-ram;
+>   };
+>   
+> +&sdhci {
+> +	cap-mmc-highspeed;
+> +	mmc-ddr-1_8v;
+> +	mmc-hs200-1_8v;
+> +};
+> +
+>   &spi1 {
+>   	status = "okay";
+>   
+> @@ -25,3 +33,7 @@
+>   		spi-max-frequency = <10000000>;
 >   	};
 >   };
 > +
-> +&usb_host0_ohci {
-> +	status = "disabled";
+> +&vdd_log {
+> +	regulator-init-microvolt = <950000>;
 > +};
