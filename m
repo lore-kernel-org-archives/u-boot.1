@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE8F6C52D7C
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 18:56:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1EE5C52D7C
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 19:02:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F826884A9;
-	Fri,  9 Aug 2024 20:56:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4634988521;
+	Fri,  9 Aug 2024 21:02:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GaXZiyUz";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="OtjzimkZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8006F88B07; Fri,  9 Aug 2024 20:56:48 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2B2B28863B; Fri,  9 Aug 2024 21:02:08 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D8EB884A9
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 20:56:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2881A884A9
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 21:02:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-3db157d3bb9so1612100b6e.2
- for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 11:56:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1723229805; x=1723834605; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RIMJI1S7qR9479PsTtyPDGeXqRrufQXIh9mAR+dQBRk=;
- b=GaXZiyUzBG3cBMUavVS/O6yyR253VTA2HUP0pIAaRTQKBfLtTlw/kbzrl0PczH63+T
- gP4egyjTMGLgKO6NpiHjjOR5RYpmGuyjg6uFnNH+NGrgPJwzbPf2PHR7n1NwjQlPfvSM
- 6ZWeMviUr/p3L6tS7LNMsEjKn8Eg8qb3MIjGE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723229805; x=1723834605;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RIMJI1S7qR9479PsTtyPDGeXqRrufQXIh9mAR+dQBRk=;
- b=AgDy4jrMPEjC/4PW41EVZodjJAuNY4jpqwUnzjI8LBscHhoPt7SC9AenFWVYdDsK0J
- FDwSrNFv3iBcWN0tujCy/TLgCF06if9NKxs430GMbqKd/WzPuRCZ8GInu9Q2Fv5yX0Iv
- ZWM1fIRgnKBu8ZVYiiCJLqvcli4ciDRWBbaylLIPZmmLT+BpbDJsrdigVJLcs5vKCABK
- O6vF8UeAxQdFABGSEcfHcqqCaVK0QLLYkvUB9Tjcjx8NpxwN8G1vtt6pjWUyU7/JyCX8
- CmizPju45cHWONoAqtaSRoKsK5KA1IaxzuS/mA6tt4C/wdUDd6HSKxOkXhjsrSTrSVCM
- nu+w==
-X-Gm-Message-State: AOJu0YzqRTXEf2ea7LPxoN8nwQ/8I0Byn8HUJpK/9YUSYHGp2Wn8YoS1
- i0oSfxogWDB/RHRUOQ1RgR4n/CRM0cY1avY6tng4uMnz980SmVUicoyD6L2TY9o=
-X-Google-Smtp-Source: AGHT+IEM43GrLokOt/UFaIaiYaHtRXOC51eJxViXbhNgviUoSAzMsmyvjfft4r1kp9C5/EONL5dqtg==
-X-Received: by 2002:a05:6871:520d:b0:25d:ff1b:3793 with SMTP id
- 586e51a60fabf-26c62f16f25mr3136453fac.35.1723229804853; 
- Fri, 09 Aug 2024 11:56:44 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-191-8-236.totalplay.net.
- [187.191.8.236]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70c7b81daedsm83058a34.18.2024.08.09.11.56.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Aug 2024 11:56:44 -0700 (PDT)
-Date: Fri, 9 Aug 2024 12:56:41 -0600
-From: Tom Rini <trini@konsulko.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1723230124; x=1723834924; i=xypron.glpk@gmx.de;
+ bh=GCnES4SY4S9Snavx3OVzlhqC8UTAFDKdcDmcQC1ZxnA=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=OtjzimkZkhU4+W7GYLq3glc+K97DOQqDTKtHC/EspWOPvpAJH8YA3HAo3JNzAKKQ
+ dcK1zm94RcEWI8wEuhXKREvYv9+RU4UxtRmipM+YvjLlrWPtEJj7kzbX0nFNGkMYJ
+ ztYR7y0HomLAJXUw2UYxvBjo5NXggmqBQkSdDCLNbozNtqpSf7gEAchjnVD3KOzFy
+ szh7Mofp3mzGMQI/p+710eh16MWhDVr56V9TZ/mU+RqmJV6AFcm0iV7VcnTOtCmVB
+ b2kbHwp9XlKZCEyGY7PZjo+6z3IrC42xifBpB/b4KTz/JCOadoCY6YHFkmd/9ZS3u
+ gNSO0FTbTwYyTf5S6g==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([178.202.41.98]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N2Dx8-1sCgVu07qw-0117SK; Fri, 09
+ Aug 2024 21:02:04 +0200
+Date: Fri, 09 Aug 2024 21:02:01 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Heiko Schocher <hs@denx.de>
-Subject: Re: [PATCH 00/20] i2c: Chip away at some old code
-Message-ID: <20240809185641.GU1626301@bill-the-cat>
-References: <20240718173611.4014274-1-sjg@chromium.org>
- <CAFLszTj3JsUHFvWUmP07mGwK315qO=Bt0uQ=JGeKrLgBOQxoJA@mail.gmail.com>
+CC: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v2 3/3] efi: Show the location of the bounce buffer
+User-Agent: K-9 Mail for Android
+In-Reply-To: <CAFLszTgmRMCK9E==O-sz51ONfaGENnoStXPY4LL5HS0F-=cDfA@mail.gmail.com>
+References: <20240801173637.1071068-1-sjg@chromium.org>
+ <20240801173637.1071068-4-sjg@chromium.org>
+ <4594d522-bb63-45ee-b660-0130ae55d341@gmx.de>
+ <CAFLszTgmRMCK9E==O-sz51ONfaGENnoStXPY4LL5HS0F-=cDfA@mail.gmail.com>
+Message-ID: <5EA6AA2B-533E-424D-B2E9-13A4CA8C2E9A@gmx.de>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Iffoq89iKcoLON4X"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTj3JsUHFvWUmP07mGwK315qO=Bt0uQ=JGeKrLgBOQxoJA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:29l96b4sPPcxjh6rvucTf26DUGunCc1Q+V9Yo6wsZEpwlac79Rh
+ K+dCwHH0Zq0VOZf87OscAU79JHI5Wj1U1aGDt1Lm3iThqt+MqF7vx5ICad66EOtaNpZh6+B
+ PPET9itHgKWmyVfKcJTxf070XYugfQ9am6pYxH00ZmfibgGwQfNOXawt6cWelWKDYkovEms
+ kypP9rt9KBxqaO0iLbEpw==
+UI-OutboundReport: notjunk:1;M01:P0:G5BTLsCFLts=;BUd/KQqFadOzoG3Pznsz8INWt2h
+ gdaOjz+JkMqY6u4rs3t6Whsups29efCZadF7biFYuGePhX1kqHKVOBKyod07dNkj7PUm6UQMe
+ tMZvy0nWYi9fjbKlcrwfBZSxUCOZ3C7Cky7lGkqCJjcErj/91fE/BVTvFQSa9NoTt5EfkhFGt
+ iU5g7vQrQ850qJb4xZmPuVUtjPC9YAZoK5Dir+RyVPgD7kAsWzduiD/58Y5PMpYF7MGdtyT11
+ yZykt5ckofRMEEtUyFKLh/UOzba0qh4PLTv23/Arzl/Zy+e5pqrd3jHMrvI3aMzTA28EdA54Z
+ IXLFmMooooTRkBq3iKyPCWTurZacrRTCIq71Uyo1NeB9mA0VjMaVYaJRH0H0K28GNa+DkfHd6
+ bKW+Ht5hNh2FJwNherFbSYo3UMOIctsIVGEK+mwCQTnMoaSK4+Nyr56I7AijA1NHR+DTzN6nU
+ 3UCxDTiRcEdjMKKSoVeAIWLsZz85hpKER7MhXIUw1K5+o0VaIEjIPIRcCNt5kpgOMm9vWNayh
+ uEHjXobnU3Y6NV6PyVr7Q0jkT9My303SYdsiplMcR67ES8YLVI09A4c66o8TZ67cH72NhSw+D
+ dNLIPtTjwYJslzp6YaPgBiPN+dqZp4jKNzJjiMQ6Gp8hkmvR3jGc+AY6N5T2ntNYFrSqfhV5l
+ /ifvpWOMNbJ7USLrv7P1mTd9txthHnhsckMo+Vio+B6sC/nkCsZDUHT5HdobjninBeHDYaZTf
+ 2rcjin5YzrFgzE5+z1XwXxgWqjbA7Gxm4kRronu+P5uZXgL3O2eGzUgg9zOrwv5Pa/nw+hCLT
+ k4MYT5VIhKHf+8rfrlZnAerA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,142 +94,124 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Iffoq89iKcoLON4X
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 09, 2024 at 12:37:52PM -0600, Simon Glass wrote:
-> -cc most
->=20
-> Hi,
->=20
-> On Thu, 18 Jul 2024 at 11:36, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > This series aims to remove some of the older contents of i2c.h so that
-> > we can move towards having just the dm API.
-> >
-> > It removes four boards which are getting in the way.
-> >
-> >
-> > Simon Glass (20):
-> >   arm: Remove pg_wcom boards
-> >   i2c: Remove board_i2c_init()
-> >   i2c: Remove IC2_xxx enum
-> >   i2c: Remove CFG_I2C_MULTI_BUS
-> >   mips: malta: Drop CMD_DATE
-> >   armv8: ls2085a: Drop CMD_DATE
-> >   mx28 / mx51: Drop CMD_DATE
-> >   MPC837XERDB: ethernut5: work_92105: Drop CMD_DATE
-> >   rtc: Drop CFG_SYS_RTC_BUS_NUM
-> >   date: Drop the legacy I2C code
-> >   keymile: Remove use of legacy I2C
-> >   i2c: mxc: pg_wcom: Drop legacy I2c
-> >   i2c: Drop reference to SYS_I2C_INIT_BOARD
-> >   octeon: Drop OCTEON_I2C_FDT dead code
-> >   i2c: Remove I2C_SET_BUS()
-> >   i2c: Remove I2C_GET_BUS()
-> >   i2c: Drop CFG_SYS_MAX_I2C_BUS
-> >   i2c: Drop i2c_get_bus_num_fdt() and i2c_reset_port_fdt()
-> >   i2c: Remove CFG_SYS_I2C_MAX_HOPS
-> >   i2c: Remove CFG_SYS_I2C_DIRECT_BUS
-> >
-> >  README                                        |  27 +--
-> >  arch/arm/dts/ls1021a-pg-wcom-expu1.dts        | 141 -----------
-> >  arch/arm/dts/ls1021a-pg-wcom-seli8.dts        | 124 ----------
-> >  arch/mips/mach-octeon/octeon_fdt.c            |  22 --
-> >  board/keymile/Kconfig                         |   4 -
-> >  board/keymile/common/common.c                 |  69 ------
-> >  board/keymile/pg-wcom-ls102xa/Kconfig         |  39 ----
-> >  board/keymile/pg-wcom-ls102xa/MAINTAINERS     |  16 --
-> >  board/keymile/pg-wcom-ls102xa/Makefile        |  11 -
-> >  board/keymile/pg-wcom-ls102xa/ddr.c           |  91 --------
-> >  .../keymile/pg-wcom-ls102xa/pg-wcom-expu1.env |   3 -
-> >  .../keymile/pg-wcom-ls102xa/pg-wcom-ls102xa.c | 218 ------------------
-> >  .../keymile/pg-wcom-ls102xa/pg-wcom-seli8.env |   3 -
-> >  cmd/date.c                                    |  32 ---
-> >  cmd/i2c.c                                     |  23 --
-> >  configs/MPC837XERDB_defconfig                 |   1 -
-> >  configs/ethernut5_defconfig                   |   1 -
-> >  configs/ls2080aqds_nand_defconfig             |   1 -
-> >  configs/ls2080aqds_qspi_defconfig             |   1 -
-> >  configs/ls2080ardb_nand_defconfig             |   1 -
-> >  configs/malta64_defconfig                     |   1 -
-> >  configs/malta64el_defconfig                   |   1 -
-> >  configs/malta_defconfig                       |   1 -
-> >  configs/maltael_defconfig                     |   1 -
-> >  configs/mx28evk_defconfig                     |   1 -
-> >  configs/mx51evk_defconfig                     |   1 -
-> >  configs/pg_wcom_expu1_defconfig               | 109 ---------
-> >  configs/pg_wcom_expu1_update_defconfig        | 107 ---------
-> >  configs/pg_wcom_seli8_defconfig               | 109 ---------
-> >  configs/pg_wcom_seli8_update_defconfig        | 107 ---------
-> >  configs/work_92105_defconfig                  |   1 -
-> >  doc/I2C_Edge_Conditions                       |  10 +-
-> >  drivers/ddr/fsl/main.c                        |   3 +-
-> >  drivers/i2c/i2c_core.c                        | 141 -----------
-> >  drivers/i2c/soft_i2c.c                        |  11 -
-> >  drivers/power/power_i2c.c                     |   5 -
-> >  drivers/usb/host/ohci-lpc32xx.c               |   4 -
-> >  include/configs/ethernut5.h                   |   3 -
-> >  include/configs/km/pg-wcom-ls102xa.h          | 167 --------------
-> >  include/configs/ls1028aqds.h                  |   1 -
-> >  include/configs/ls1028ardb.h                  |   2 -
-> >  include/configs/ls1046afrwy.h                 |   1 -
-> >  include/configs/lx2160aqds.h                  |   3 -
-> >  include/configs/lx2160ardb.h                  |   3 -
-> >  include/configs/lx2162aqds.h                  |   3 -
-> >  include/configs/m53menlo.h                    |   2 -
-> >  include/configs/omap3_beagle.h                |   3 -
-> >  include/configs/pg-wcom-expu1.h               |  49 ----
-> >  include/configs/pg-wcom-seli8.h               |  40 ----
-> >  include/configs/sniper.h                      |  14 --
-> >  include/configs/tqma6.h                       |   3 -
-> >  include/configs/tqma6_wru4.h                  |   1 -
-> >  include/i2c.h                                 | 107 ---------
-> >  53 files changed, 6 insertions(+), 1837 deletions(-)
-> >  delete mode 100644 arch/arm/dts/ls1021a-pg-wcom-expu1.dts
-> >  delete mode 100644 arch/arm/dts/ls1021a-pg-wcom-seli8.dts
-> >  delete mode 100644 board/keymile/pg-wcom-ls102xa/Kconfig
-> >  delete mode 100644 board/keymile/pg-wcom-ls102xa/MAINTAINERS
-> >  delete mode 100644 board/keymile/pg-wcom-ls102xa/Makefile
-> >  delete mode 100644 board/keymile/pg-wcom-ls102xa/ddr.c
-> >  delete mode 100644 board/keymile/pg-wcom-ls102xa/pg-wcom-expu1.env
-> >  delete mode 100644 board/keymile/pg-wcom-ls102xa/pg-wcom-ls102xa.c
-> >  delete mode 100644 board/keymile/pg-wcom-ls102xa/pg-wcom-seli8.env
-> >  delete mode 100644 configs/pg_wcom_expu1_defconfig
-> >  delete mode 100644 configs/pg_wcom_expu1_update_defconfig
-> >  delete mode 100644 configs/pg_wcom_seli8_defconfig
-> >  delete mode 100644 configs/pg_wcom_seli8_update_defconfig
-> >  delete mode 100644 include/configs/km/pg-wcom-ls102xa.h
-> >  delete mode 100644 include/configs/pg-wcom-expu1.h
-> >  delete mode 100644 include/configs/pg-wcom-seli8.h
->=20
-> What shall we do with this series?
+Am 9=2E August 2024 20:36:35 MESZ schrieb Simon Glass <sjg@chromium=2Eorg>=
+:
+>Hi Heinrich,
+>
+>On Fri, 9 Aug 2024 at 11:32, Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>=
+ wrote:
+>>
+>> On 01=2E08=2E24 19:36, Simon Glass wrote:
+>> > The EFI_LOADER_BOUNCE_BUFFER feature was added many years ago=2E It i=
+s not
+>> > clear whether it is still needed, but 24 boards (lx2160ardb_tfa_stmm,
+>> > lx2162aqds_tfa_SECURE_BOOT and the like) use it=2E
+>> >
+>> > This feature uses EFI page allocation to create a 64MB buffer 'in spa=
+ce'
+>> > without any knowledge of where boards intend to load their images=2E =
+This
+>> > may result in image corruption or other problems=2E
+>> >
+>> > For example, if the feature is enabled on qemu_arm64 it puts the EFI
+>> > bounce buffer at 1045MB, with the kernel at 1028MB and the ramdisk at
+>> > 1088MB=2E The kernel is probably smaller than 27MB but the buffer doe=
+s
+>> > overlap the ramdisk=2E
+>> >
+>> > The solution is probably to use BOUNCE_BUFFER instead, with the EFI
+>> > version being dropped=2E For now, show the address of the EFI bounce
+>> > buffer so people have a better chance to detect the problem=2E
+>> >
+>> > Note: I avoided converting this #ifdef to use IS_ENABLED() since I ho=
+pe
+>> > that the feature may be removed=2E
+>>
+>> EFI_BLOCK_IO_PROTOCOL=2EReadBlocks() and
+>> EFI_BLOCK_IO_PROTOCOL=2EWriteBlocks() are expected to block until all
+>> bytes are transferred=2E
+>>
+>> The complete file transfer is chunked according to the size of the EFI
+>> bounce buffer=2E
+>>
+>> Taking care of alignment issues would best handled by the block uclass=
+=2E
+>>
+>> When CONFIG_BOUNCE_BUFFER=3Dy, bounce_buffer_start_extalign() uses
+>> memalign() which limits the bounce buffer to available malloc() memory
+>> (typically < 2 MiB)=2E
+>>
+>> I cannot see how blk_read() with CONFIG_BOUNCE_BUFFER=3Dy will work if
+>> blkcnt * desc->blksz is greater than the available malloc memory=2E
+>
+>Yes, it uses malloc()=2E The maximum read length on MMC, for example,
+>seems to default to 32MB, although it is only 128KB on a few
+>platforms=2E
+>
+>I am thinking we should be allocating space in the bloblist to hold
+>all these sorts of things=2E=2E=2Eit can be as large as needed and we can
+>allocate space for it during relocation=2E
+>
+>>
+>> Shouldn't the block uclass support chunking?
+>
+>It only supports readling whole blocks, if that is what you mean=2E Are
+>you suggesting changing the blk API, or something else?
 
-Later today once I merge Heiko's PR for -next to -next, rebase on top
-there please, I believe all of the platforms have been converted now.
-Thanks.
+It supports reading multiple blocks=2E If not all blocks fit into the memo=
+ry that can be assigned via memalgn, the block layer coud separate the bloc=
+ks into chunks=2E This would replace the EFI bounce buffer=2E
 
---=20
-Tom
 
---Iffoq89iKcoLON4X
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAma2ZmYACgkQFHw5/5Y0
-tyxK5Qv9EWQUisJIOXmLnfmZDOKoCKyaBxHkTl0o+hH6kDpIvDqnEnAN+osYrnyZ
-n/BgqLst+J7BlBAUBQVwHPr6Jy2N7vTdKAhU2A7uCdzfa+0RUV3Yk51qdLfv5+4w
-DWOpnv2mQ/qZy+QfxKI2hPwL6rQPVooGu6VByiTcrnArkfzaqt1Na5L0o4pwPFXp
-5Bs1+2qoJRdOZ1JUq9QholGuscS2gt4848Ui93au7VRP1bAsa9GPnoopCvSog2Ay
-N5qlzp8Bpc7h/LvdV+FhsaQSKr+DSMMstbnsdLvcxrZGo6odZjYx2qge9HbkON1A
-1GV96fkl4Oz+bg9JTnJw9hcHAn3/2tg1mQoyxOnfJXU8Aokn4OcjszDkWQi/aX5t
-29shL/0Dv6d/kmc2ts08XM2QuvcLwjWhKrDKaZEvHB9ylt/t4hYPJ1nvD0Iwjvn1
-4jMK5F1tFDtyA5HbxeLnL+SaO5BwO5DtON7yo+/Mhd/0MCN6QZNOQ/Zny8U/c7CK
-c5z/RqOT
-=85Ed
------END PGP SIGNATURE-----
-
---Iffoq89iKcoLON4X--
+>
+>Regards,
+>Simon
+>
+>
+>
+>>
+>> Best regards
+>>
+>> Heinrich
+>>
+>> >
+>> > Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
+>> > ---
+>> >
+>> > Changes in v2:
+>> > - Drop patch 'Show more information in efi index'
+>> > - Drop patch 'Avoid pool allocation in efi_get_memory_map_alloc()'
+>> > - Add the word 'warning', use log_warning() and show the end address
+>> > - Reorder patches a little
+>> >
+>> >   lib/efi_loader/efi_bootbin=2Ec | 9 +++++++++
+>> >   1 file changed, 9 insertions(+)
+>> >
+>> > diff --git a/lib/efi_loader/efi_bootbin=2Ec b/lib/efi_loader/efi_boot=
+bin=2Ec
+>> > index 5bb0fdcf75d=2E=2E9779dc09b5e 100644
+>> > --- a/lib/efi_loader/efi_bootbin=2Ec
+>> > +++ b/lib/efi_loader/efi_bootbin=2Ec
+>> > @@ -211,6 +211,15 @@ efi_status_t efi_binary_run(void *image, size_t =
+size, void *fdt)
+>> >               return -1;
+>> >       }
+>> >
+>> > +#ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
+>> > +     /*
+>> > +      * Add a warning about this buffer, since it may conflict with =
+other
+>> > +      * things
+>> > +      */
+>> > +     log_warning("Warning: EFI bounce buffer %p-%p\n", efi_bounce_bu=
+ffer,
+>> > +                 efi_bounce_buffer + EFI_LOADER_BOUNCE_BUFFER_SIZE);
+>> > +#endif
+>> > +
+>> >       ret =3D efi_install_fdt(fdt);
+>> >       if (ret !=3D EFI_SUCCESS)
+>> >               return ret;
+>>
