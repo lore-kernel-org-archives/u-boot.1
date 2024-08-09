@@ -4,75 +4,168 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDA7EC3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 15:26:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F508C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 15:38:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1AD0C88BA5;
-	Fri,  9 Aug 2024 17:26:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5C472886B1;
+	Fri,  9 Aug 2024 17:38:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=marvell.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N/GiJ6BB";
+	dkim=pass (1024-bit key; unprotected) header.d=marvell.com header.i=@marvell.com header.b="fM6Ede2h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECD2088A6B; Fri,  9 Aug 2024 17:26:06 +0200 (CEST)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6E9D288B36; Fri,  9 Aug 2024 17:38:31 +0200 (CEST)
+Received: from mx0b-0016f401.pphosted.com (mx0b-0016f401.pphosted.com
+ [67.231.156.173])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9818288BC6
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 17:26:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 384B788670
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 17:38:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=marvell.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2cb80633dcfso409200a91.0
- for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 08:26:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723217162; x=1723821962; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=LDD0OnGe20L0PRXgdK3YmsoHQpDrytANItnVfEZsXsE=;
- b=N/GiJ6BBHBoxOzTp5pGKOhxWANOEbhr9I9ymiUlTDSgC/b2QKT6QBZXsgPOjylHM3F
- yGPxxJmKgC37f8pZfqkuGHm5/B0SboP81q0kVNwEtxvz+zfdiWTxQsUjexl5U2O8ho7+
- vHjomRMHv8BwlvJUSVtY5fWQvBlQ4smPD+8nsqqRm9KrA9LuBsNWZrCHM9zsNJkJa+ZZ
- F/QUL3BsmWpwOja0laH2hQW/nQ/87zqdiBgeT57Il+/Xf/1xblSNOPuiCcVYs9VJgzIZ
- qIoQ4nW/Mo6pLhgnjYOfsam4Y9aukkKctMKW8tVFpkByhKY4OdcsY2zm0N5qPHidypKD
- /+dw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723217162; x=1723821962;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=LDD0OnGe20L0PRXgdK3YmsoHQpDrytANItnVfEZsXsE=;
- b=tuWk5r9ynh/zVYwpNlw1elKLjpWtQSJ4OQr5XOspZQF8b7ixkseTITIWiCmmaIk+7Q
- LvwCvAmFgOdRa16qfJvr2cilAiCvCrgxlfU1v8cvxwtEt3fM9+f7vZvc7rHZgaiol5Oj
- hRBfsgDh05tZ+HQ7pwefiB94O7XeWRwPoBv81+jYeX7OrzRnBXmXwdnJeJih7OOLgi1T
- 9OHxSuzdav8xPHeweUta86Ile5H0f1h4Cw3gFHRb8lPZ/UEH8285M6Qy2q0RAlDqk3AU
- NYQF1ysHZZ5x7Zt9H96Cp4jJ8mVzNZn+oGZ+2GspqCgaE2RLm1S8AGAm+P1dxswdIc1w
- UqTw==
-X-Gm-Message-State: AOJu0YyI7MMcyZ3DolqZnSndZ37u8AXxlbHdHWBAiw5a35r76YDDYAgn
- dYB/DrqrIf/3DM7GQ5cAfzcRLaIqKW+aiajInq/PIqlgdSOD+E40
-X-Google-Smtp-Source: AGHT+IHinkqVlKpRXRckaI0wYU+GPswmNZ4OUmGOmaS3+qNXrrRR93VLe7boX//3ugCA7ek3ei4/sw==
-X-Received: by 2002:a17:902:e5d1:b0:1fc:52f4:d7c8 with SMTP id
- d9443c01a7336-200ae67a57fmr11376625ad.10.1723217161900; 
- Fri, 09 Aug 2024 08:26:01 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:c7cd:c377:d374:237c])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-1ff58f19eafsm144470995ad.53.2024.08.09.08.25.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Aug 2024 08:26:01 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: Markus.Niebel@tq-group.com
-Cc: u-boot@lists.denx.de,
-	Fabio Estevam <festevam@denx.de>
-Subject: [PATCH] imx6-tqma6: Convert to OF_UPSTREAM
-Date: Fri,  9 Aug 2024 12:25:48 -0300
-Message-Id: <20240809152548.552796-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=rminnikanti@marvell.com
+Received: from pps.filterd (m0045851.ppops.net [127.0.0.1])
+ by mx0b-0016f401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 479CJQLH000601;
+ Fri, 9 Aug 2024 08:38:25 -0700
+Received: from nam10-bn7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10lp2043.outbound.protection.outlook.com [104.47.70.43])
+ by mx0b-0016f401.pphosted.com (PPS) with ESMTPS id 40wdpxhrx8-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 09 Aug 2024 08:38:25 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=n5UbRTOuGWy5lQ0U7nZucCeQig9pqmBw1Ct35h85Y1VUDfAnhPemESGRhth0c86HVoDeWY327NAy0sqsv1EQEUavI9f6qZdmJ9b0FeoLnmM+sGBLYBscKCOEvoTLPCIJjAg4uDZRCz67WgK3L9z1fvefo7/yjhRvo7xy/htgjwvHzZzvVmKOZoPYmQr8kpHHyJXA5t8MU00S0RyZWbV4FQSt0JrVlKv1xF3GS4+8wmkPU68+c/a9dWLtU9Q/Ql1fq7b8FjbHwF/+8+76+bvocQONE5RIPSqVHaxyatV9GEBaNzWniinaP/kWhjfIV8GEGCxsKktV44aOjae2fcgcSQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=m+ML6wAQRnb1sCCwbrwB97J/Khg3+AQK1lLvKJAFJvM=;
+ b=OS0dAgUqaV/6B9HfcxDNrWojyQhSLIx+F7Ux2nQgM6YtbNDMMpcHjkvN9O/K8XbFgu2FLfY67N5+kPKgzCCEm/PGJmnBvnkwUMkYaSiHX0FEK0QpBX9XQ+E81gkgSmnlWY7FynE8RTIsbGLBBFrGxa2sKmfaJWNuRk49je5eeCALrZkipeOcI/Ucw3QvspnjMdUHp624lu2IwG5+DQkmlDcVhpJ4VOKiBrrd6cK2gYFtqYalVCqIy9xB82wOz8G5bD0H/I2W/GAWVseMSRYasa+KrTwXjxaanOqojEB6DoH0KW58ngKIEmbxqDH5KxagUSeeW5Lt3rBXg0WO0FF3Ag==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=marvell.com; dmarc=pass action=none header.from=marvell.com;
+ dkim=pass header.d=marvell.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=marvell.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=m+ML6wAQRnb1sCCwbrwB97J/Khg3+AQK1lLvKJAFJvM=;
+ b=fM6Ede2hqzkTHT9/FrG+Rbq2DcJQ3CvlUMgUrhLEI4VmcHDG1rOwXsDutWo4CICBdrOCJW3behhhEIMGotjc6MTiASWuXezgA2tTIylsbi9rOVNLn2LqTh7ai76l/aaSsXpeOsgbwivt3q5OpWR/rHOSZSGIWxBVFsHzpG7T68o=
+Received: from CO6PR18MB4451.namprd18.prod.outlook.com (2603:10b6:303:138::12)
+ by SA1PR18MB6035.namprd18.prod.outlook.com (2603:10b6:806:3eb::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7849.14; Fri, 9 Aug
+ 2024 15:38:21 +0000
+Received: from CO6PR18MB4451.namprd18.prod.outlook.com
+ ([fe80::4c2b:70d5:95ac:1d6c]) by CO6PR18MB4451.namprd18.prod.outlook.com
+ ([fe80::4c2b:70d5:95ac:1d6c%6]) with mapi id 15.20.7849.015; Fri, 9 Aug 2024
+ 15:38:21 +0000
+Message-ID: <03cdd29b-331c-76b0-f6d7-a064552ffd67@marvell.com>
+Date: Fri, 9 Aug 2024 08:38:18 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.0
+Content-Language: en-US
+To: sjg@chromium.org, Tom Rini <trini@konsulko.com>,
+ quentin.schulz@bootlin.com, U-Boot-Denx <u-boot@lists.denx.de>
+From: Ravi Minnikanti <rminnikanti@marvell.com>
+Subject: [PATCH] env: remove vars that are not in default env
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: SJ0PR13CA0105.namprd13.prod.outlook.com
+ (2603:10b6:a03:2c5::20) To CO6PR18MB4451.namprd18.prod.outlook.com
+ (2603:10b6:303:138::12)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO6PR18MB4451:EE_|SA1PR18MB6035:EE_
+X-MS-Office365-Filtering-Correlation-Id: 06453833-4776-4b3e-168d-08dcb8894c73
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dlBSeW5QTktzV0VteWRMQ2phUkpoU3hDQXlkczB3Zmg0eUdReGFZZGlCdjc3?=
+ =?utf-8?B?cXFNdVhKc2o5WnN0WDRVMmRNTFJiUExqYjhDSENEcFdvZ0VraFhaUGZwUmVP?=
+ =?utf-8?B?Q29WdEZzTy9iV3d2enE4SjZhb2NCYmNYS3NCQVFmRytCZ2UwTmJvdVZNa3Qy?=
+ =?utf-8?B?ZExaUjh1aE41L0U5REJPeDZoNWhzdjRCTTdXZTUyZ24wK0dickU3WDZaWFhH?=
+ =?utf-8?B?RnBzR3pNeWFxODVUMnN6bk5Qd3ZhUk1jTGd3WGRHbGp6ZnpuSndOSXF5NzZP?=
+ =?utf-8?B?QmNMcUtINXZUS0l2Rm94cERpRXVBKzk0UEQ2TGlhTnlKVkliMDNmRERMa1Ny?=
+ =?utf-8?B?aGNBNm5jNmgrcE9SWUJvQkhyb09scExHcWdzMjNFTXhZMFFPRDdLbkNnWUw1?=
+ =?utf-8?B?THR5ZWJpS2pkVFh1RnJJbk9oT2dDOWd3aEhGYzh1ODViQXcyNXVxYStwSWpv?=
+ =?utf-8?B?Ri9Zb1RyYlQ2OXdjUEI3eVBaaFM5SmlhMlh3Z1REWW1wb1pLZTd6azVUUzdI?=
+ =?utf-8?B?L252YmdPekN4dmJVeTRPQzYxL21EcVRHQ3g1bjJZdTVvakNUMzZORERGRDFO?=
+ =?utf-8?B?YnVOQ3J5ZWJlc29HUTVaR1VnOHZmSmxoTk8yWlY5Z3FNVlRTRzQ4M2MrZVZH?=
+ =?utf-8?B?Vmw0aXU3K3pDQlJvZDJkYW1NQnRGeSt3YTNXL0UveFFzWElqS3Y3Zk9oVjEr?=
+ =?utf-8?B?MTM0VUZGN1ZkNlhSRFZ0R3NGa29uVzVSaHArRTRlcFhPN3Qvbkpua1RRdVhW?=
+ =?utf-8?B?aFVtRzVhRzZIOUg3STZjSWdjWDlBd25ONjFrMUxoK0tvbzR3MGQ4YS9iVUpi?=
+ =?utf-8?B?dlVvc05WOFc4SG5Qamdhb1dPUHdnZ1dISkRsMW1tSm9WYWtSemlseXMycHdX?=
+ =?utf-8?B?Uk9YWWZnTXpubE9kQmRaN0JXblBTUEtpTnBFT05HNUR2RmlCeXk3eC83MjAz?=
+ =?utf-8?B?a0Z6Z2VqaHFuVjhsNmxaOVcvSmF2V1VYUndhYldHQ05aaXh1NWk5WmhxYktK?=
+ =?utf-8?B?WnpGb3A1ei9tZ1pXaytVWVFNODdKZTlRdWd6UkhaSCtHQlBkd3Rwd3ZmclNn?=
+ =?utf-8?B?MXplK1E0ODRCbFBsY0s3SWc1K1ZYWU5rWWZyWk1CWE9NQlAzbTdFS2JrZEVN?=
+ =?utf-8?B?UVBXZmowVVlYZEJBVVFWM1BCbkxWODhJK250VUlpZXdkVGN4QXFDSDZmSzRz?=
+ =?utf-8?B?VTlFbWwyakViaFloL080eTlmUVVPUE56cy9jeG9rM2h5Y2d0Yzh2Ri9wczd3?=
+ =?utf-8?B?NFhMMHVXemVzTloyTGlveUhYOGhnRkRpQW5vR0Yrb2RNY25LVTVMejFlNGNq?=
+ =?utf-8?B?VXN5NE0vcXVBSVJLNlQyaFhZbEF2SUhYTDFMVkJqTk5RZkFRVjdVMVZkek5q?=
+ =?utf-8?B?T1l4ck5tQ1BVeHFHaXlSYU5sbE5XZTl2ZGVwSDJoY0JTVFlzK0FSczhKa3Bj?=
+ =?utf-8?B?NjFLSHZKNXliTXRuYkRSYjNMSjBqT2grQXk4SjlNTnQ5MURTV2dCdGN1THVm?=
+ =?utf-8?B?SHJ3MzVDazBvWHZlQU8vdjNiaXpVdW1tMU1Nc0xYRUhaYmQxSXdyY050cytQ?=
+ =?utf-8?B?REloNU5xenkwQnlTdFNZRy81bUVaU2lmb0ljREdDZ3JjbThZOW1yOStpOUph?=
+ =?utf-8?B?SlM3L2pnSW1aL2ptM3RWVGdZdElDNU5oZlY2WlYwMlhiR3RPR2FMYkthSGdv?=
+ =?utf-8?B?Tkhib2xVbmtyV0VGZ2V1SlMydjVLQjlUL1VOK1BQbzhBSWpJQWY0b1E2d3ZV?=
+ =?utf-8?B?dFJvWnkzalJoWGlxZm9MZEExaGk0U3BBRWNIeGNINnFrcXhWcXV0Y3FVVm41?=
+ =?utf-8?B?RTB3RjBoaTJORGJKN1czdz09?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CO6PR18MB4451.namprd18.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MDhqb0RYNzBHd0U3YTZPYmxqTnEycjhqblJMK3ZmTXlCcG5lSFdNQkh3U05u?=
+ =?utf-8?B?YkZLQkMvbENrL0NKcFlBR3JqUSthbzEwWm9TNVhKekZXbm9Bc3d4a3kzN0do?=
+ =?utf-8?B?Qy80L0pIMyt5SnVWN0hoZEs1L2hiNWVJTnNGWWN6YVNaTVdSZllUWmxUNlN5?=
+ =?utf-8?B?UkRKUVBKaHdkUGp4M0xpeVY3bHcyWW8zd1Q5dUFBeTdmWUhxM01lNDFJUExS?=
+ =?utf-8?B?UjdZK1hKcjlzdVdtbnlxbllZNzVWMDVxVEY3djgxcUhWRmh2dS8zaUxnWU15?=
+ =?utf-8?B?eE1tYjM4UlVGaStkNVdYdFowcFZaK0F3TkN3ZWJKTm1nY0ZwbHNrQXZWb2Vj?=
+ =?utf-8?B?RXFsVk81Q2NURXpKQmlES25DZ051aGZ6ZGRMc1gvZllYcllYZ2ZSKzQyNytF?=
+ =?utf-8?B?b2JhWHFmOEpseC9qK2RkUTQraUI4dE9tMWVMb2FpalhlbjN5WjQxbVhYcC9M?=
+ =?utf-8?B?c05NTktWYVAwWlVIMHRSRDhPc0pqaTRZamgwWlFzbURqWmFHU0huQkRYNjda?=
+ =?utf-8?B?RWVvVDNKQ0Y2TXNzOE11WUV4L2hjYjdWbjFMWWYybUw5TWFDdmdsRkoyT3My?=
+ =?utf-8?B?c1lJUEZsUk9WUHVrRmx3WTJqbUVORjRHUUY0WWJWUnFMdFFKajJNWGpLaFBX?=
+ =?utf-8?B?TkEraURGTnhKVzZCZnJ0NDhyYUdjNCs2MUxUb0FuS3M4SFZhdXBwTFptUXA5?=
+ =?utf-8?B?d2JCUVQ5RnBQZFhCU1Z4MHlNVkJOZ0ZDa0cvK2FsSFJuVERaWDBwQ3g1S3JX?=
+ =?utf-8?B?WkVyVVFrS3VIeFlDMHViNVQxRTlpSHZVNE5qdC9sMklSd0d6VWhSNGx1cVFm?=
+ =?utf-8?B?ZVRRS2JydVNuTU9URWhVMmRiWVhwbDJQU05jMEh1QUVmeTZpTWpUZERDTXlx?=
+ =?utf-8?B?c2lrd2RVVGhpbVlrQkZHZXVtQWFzcjBzV3h5WnpuMmlzMjhXdW9wbmhvVTFM?=
+ =?utf-8?B?L1pYM1o1YW42NWVoWUNTbHVmL0ttR3NEeGEveTJLSmcya1JKakREdjJXdXE3?=
+ =?utf-8?B?R2VkQlpTeU5aK05yV2RsZW04ZG8vM0RHMnB4WmVmM1phcTBmT1gvVFg2Snd3?=
+ =?utf-8?B?OEROb093bTZHZXdpWUhXVHNxWVRTekJrMnllQnB0WldMeXZ3TlZYakczMFo1?=
+ =?utf-8?B?UkNMeGZxcXFyVzVVZVFkakZvZ2g0Q1U4cEd2MnRaakJWcFMzbVI2L1hFUGdh?=
+ =?utf-8?B?NEEvN3BUT3pQdjlKNG5jWTdHUElXQ1F6ZnkvUHZYSVlQalNnczlxRUJ2N2lY?=
+ =?utf-8?B?VE5mV05UVFhxSytrSVR4bjJES0k3dk14cXVEMk16bEE1WHdFcys2bnhhZGpr?=
+ =?utf-8?B?RzVkT1N4aG9kbmhCSUJxTThkTFhldzR6TTM3VENsaHp4a2NuOG53TkJMdEZU?=
+ =?utf-8?B?RHZWVmtFN01EcXB6emtpK3dBSXorQUhDcCtJZFJxWlBvSzZFazZHNlFIcHgx?=
+ =?utf-8?B?aGNSRHhySENKN0tEMmJ0K0QwdmUyNFE1TVBuNnlCbDYrWEVjWnkwbmhWbU53?=
+ =?utf-8?B?Mll5NmRUcUJoZEVEQXZkcUF1Z0tFT25VNUtzUk8xUi9YK1VGVzF5eEpmdHda?=
+ =?utf-8?B?VDJKUXBkOFdvdFdsa25VWGdpRlNweGdOTGUvY29ha0NzOHNYVms5SC9CYmlk?=
+ =?utf-8?B?b3RtcUFqZEV4R2YxR0hTaW8zRXFDWXNPU1FDcTBEdzBJbUgyTzdFb2V1RVVV?=
+ =?utf-8?B?NTk3a2l6ckJHNEtBZkJLdmdXeXZKOXpwa09Nb3RoVzZNZjUwamQrcER1SWJo?=
+ =?utf-8?B?dlRsVlZJdUdnKytlRFhpLzBOOGRoblFhYTRBaWlBem9KV2VvNUdxYU83bkpw?=
+ =?utf-8?B?ZWFlblBCN2RDb0o5SnRaRTBvOUxCWGxWTHVzK1lNazdDNXNpeDh6MkhSaWNR?=
+ =?utf-8?B?Z1NJd2s3OVpKcTVGRVFaVGRLdWREcVdIYkIwSWRyWXhqbVY3WG0rV05xWERl?=
+ =?utf-8?B?OUtVbE5XcWhvUFNxaVRXeVhTbDhleVVZcDNaRG8zbVB1Y0F0LzBoSUM0QkxS?=
+ =?utf-8?B?clRCVmptLzByTldaM0xBOXlmbUJGSjRYMUlkSzN6TGplS1Q1aDY5bkhEWGwy?=
+ =?utf-8?B?cHpBdmJhU2JBWE51U1dQQzEwdCtGdFVaeG1ac2c3anEzaDFBZG1oOHRPdVNI?=
+ =?utf-8?B?TGlmWUd6bThjU2RUYWhieXhERWlya2h0Nk9OK2srcERqeTBwM0crMjN4ZGJG?=
+ =?utf-8?B?SVE9PQ==?=
+X-OriginatorOrg: marvell.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 06453833-4776-4b3e-168d-08dcb8894c73
+X-MS-Exchange-CrossTenant-AuthSource: CO6PR18MB4451.namprd18.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Aug 2024 15:38:21.3956 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 70e1fb47-1155-421d-87fc-2e58f638b6e0
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8o0Iv4qJYe0JHq3BKBw/VI7Lei33htVkTFCugPPIKnI4JX0dL1qA6PCD46FxuPVc2AYo8c/wBwcSVx58g6O2Nw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR18MB6035
+X-Proofpoint-ORIG-GUID: yK-861I8bl5tpzeklul8JsQkxjdhgOQC
+X-Proofpoint-GUID: yK-861I8bl5tpzeklul8JsQkxjdhgOQC
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
+ definitions=2024-08-09_12,2024-08-07_01,2024-05-17_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,622 +182,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
 
-Instead of using the local imx6-tqma6 devicetree copies from U-Boot,
-convert the imx6-tqma6 target to OF_UPSTREAM so that the upstream
-kernel devicetrees can be used instead.
+current env_set_default_vars() doesn't delete
+var that are not in the imported env. hashtable
+removes vars that are not in the imported
+env but present in the current env only if H_NOCLEAR
+flag is not set.
 
-Signed-off-by: Fabio Estevam <festevam@denx.de>
+This change is to avoid passing H_NOCLEAR flag if
+specific vars are passed to env_set_default_vars()
+
+Test:
+
+Without this change:
+Marvell>> env default boot_mode
+Marvell>>
+
+With the change:
+Marvell>> env default boot_mode
+WARNING: 'boot_mode' not in imported env, deleting it!
+
+Signed-off-by: rminnikanti <rminnikanti@marvell.com>
 ---
- arch/arm/dts/Makefile              |   4 -
- arch/arm/dts/imx6dl-mba6b.dts      |  21 ---
- arch/arm/dts/imx6dl-tqma6a.dtsi    |  16 ---
- arch/arm/dts/imx6dl-tqma6b.dtsi    |  16 ---
- arch/arm/dts/imx6q-mba6b.dts       |  20 ---
- arch/arm/dts/imx6q-tqma6a.dtsi     |  16 ---
- arch/arm/dts/imx6q-tqma6b.dtsi     |  15 --
- arch/arm/dts/imx6qdl-tqma6.dtsi    | 215 -----------------------------
- arch/arm/dts/imx6qdl-tqma6a.dtsi   |  53 -------
- arch/arm/dts/imx6qdl-tqma6b.dtsi   |  33 -----
- board/tq/tqma6/Kconfig             |   1 +
- configs/tqma6dl_mba6_mmc_defconfig |   2 +-
- configs/tqma6dl_mba6_spi_defconfig |   2 +-
- configs/tqma6q_mba6_mmc_defconfig  |   2 +-
- configs/tqma6q_mba6_spi_defconfig  |   4 +-
- configs/tqma6s_mba6_mmc_defconfig  |   2 +-
- configs/tqma6s_mba6_spi_defconfig  |   2 +-
- 17 files changed, 8 insertions(+), 416 deletions(-)
- delete mode 100644 arch/arm/dts/imx6dl-mba6b.dts
- delete mode 100644 arch/arm/dts/imx6dl-tqma6a.dtsi
- delete mode 100644 arch/arm/dts/imx6dl-tqma6b.dtsi
- delete mode 100644 arch/arm/dts/imx6q-mba6b.dts
- delete mode 100644 arch/arm/dts/imx6q-tqma6a.dtsi
- delete mode 100644 arch/arm/dts/imx6q-tqma6b.dtsi
- delete mode 100644 arch/arm/dts/imx6qdl-tqma6.dtsi
- delete mode 100644 arch/arm/dts/imx6qdl-tqma6a.dtsi
- delete mode 100644 arch/arm/dts/imx6qdl-tqma6b.dtsi
+ env/common.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 871cfbbebabd..2d931c23fc83 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -764,8 +764,6 @@ dtb-y += \
- 	imx6dl-icore.dtb \
- 	imx6dl-icore-mipi.dtb \
- 	imx6dl-icore-rqs.dtb \
--	imx6dl-mba6a.dtb \
--	imx6dl-mba6b.dtb \
- 	imx6dl-mamoj.dtb \
- 	imx6dl-nitrogen6x.dtb \
- 	imx6dl-pico.dtb \
-@@ -815,8 +813,6 @@ dtb-y += \
- 	imx6q-kp.dtb \
- 	imx6q-logicpd.dtb \
- 	imx6q-marsboard.dtb \
--	imx6q-mba6a.dtb \
--	imx6q-mba6b.dtb \
- 	imx6q-mccmon6.dtb\
- 	imx6q-nitrogen6x.dtb \
- 	imx6q-novena.dtb \
-diff --git a/arch/arm/dts/imx6dl-mba6b.dts b/arch/arm/dts/imx6dl-mba6b.dts
-deleted file mode 100644
-index 610b19d2db0f..000000000000
---- a/arch/arm/dts/imx6dl-mba6b.dts
-+++ /dev/null
-@@ -1,21 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-only
--/*
-- * Copyright 2013 Sascha Hauer, Pengutronix
-- *
-- * Copyright 2013-2021 TQ-Systems GmbH
-- * Author: Markus Niebel <Markus.Niebel@tq-group.com>
-- */
--
--/dts-v1/;
--
--#include <dt-bindings/gpio/gpio.h>
--#include "imx6dl-tqma6b.dtsi"
--#include "imx6qdl-mba6.dtsi"
--#include "imx6qdl-mba6b.dtsi"
--#include "imx6dl-mba6.dtsi"
--
--/ {
--	model = "TQ TQMa6S/DL on MBa6x";
--	compatible = "tq,imx6dl-mba6x-b", "tq,mba6b",
--		     "tq,imx6dl-tqma6dl-b", "fsl,imx6dl";
--};
-diff --git a/arch/arm/dts/imx6dl-tqma6a.dtsi b/arch/arm/dts/imx6dl-tqma6a.dtsi
-deleted file mode 100644
-index e891ef9b0091..000000000000
---- a/arch/arm/dts/imx6dl-tqma6a.dtsi
-+++ /dev/null
-@@ -1,16 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-or-later
--/*
-- * Copyright 2013 Sascha Hauer, Pengutronix
-- * Copyright 2013-2017 Markus Niebel <Markus.Niebel@tq-group.com>
-- */
--
--#include "imx6dl.dtsi"
--#include "imx6qdl-tqma6a.dtsi"
--#include "imx6qdl-tqma6.dtsi"
--
--/ {
--	memory@10000000 {
--		device_type = "memory";
--		reg = <0x10000000 0x20000000>;
--	};
--};
-diff --git a/arch/arm/dts/imx6dl-tqma6b.dtsi b/arch/arm/dts/imx6dl-tqma6b.dtsi
-deleted file mode 100644
-index 38cd8501a886..000000000000
---- a/arch/arm/dts/imx6dl-tqma6b.dtsi
-+++ /dev/null
-@@ -1,16 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-or-later
--/*
-- * Copyright 2013 Sascha Hauer, Pengutronix
-- * Copyright 2013-2017 Markus Niebel <Markus.Niebel@tq-group.com>
-- */
--
--#include "imx6dl.dtsi"
--#include "imx6qdl-tqma6b.dtsi"
--#include "imx6qdl-tqma6.dtsi"
--
--/ {
--	memory@10000000 {
--		device_type = "memory";
--		reg = <0x10000000 0x20000000>;
--	};
--};
-diff --git a/arch/arm/dts/imx6q-mba6b.dts b/arch/arm/dts/imx6q-mba6b.dts
-deleted file mode 100644
-index 02c9f3e91b8f..000000000000
---- a/arch/arm/dts/imx6q-mba6b.dts
-+++ /dev/null
-@@ -1,20 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-only
--/*
-- * Copyright 2013 Sascha Hauer, Pengutronix
-- *
-- * Copyright 2013-2021 TQ-Systems GmbH
-- * Author: Markus Niebel <Markus.Niebel@tq-group.com>
-- */
--
--/dts-v1/;
--
--#include "imx6q-tqma6b.dtsi"
--#include "imx6qdl-mba6.dtsi"
--#include "imx6qdl-mba6b.dtsi"
--#include "imx6q-mba6.dtsi"
--
--/ {
--	model = "TQ TQMa6Q on MBa6x";
--	compatible = "tq,imx6q-mba6x-b", "tq,mba6b",
--		     "tq,imx6q-tqma6q-b", "fsl,imx6q";
--};
-diff --git a/arch/arm/dts/imx6q-tqma6a.dtsi b/arch/arm/dts/imx6q-tqma6a.dtsi
-deleted file mode 100644
-index ab4c07c13a13..000000000000
---- a/arch/arm/dts/imx6q-tqma6a.dtsi
-+++ /dev/null
-@@ -1,16 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-or-later
--/*
-- * Copyright 2013 Sascha Hauer, Pengutronix
-- * Copyright 2013-2017 Markus Niebel <Markus.Niebel@tq-group.com>
-- */
--
--#include "imx6q.dtsi"
--#include "imx6qdl-tqma6a.dtsi"
--#include "imx6qdl-tqma6.dtsi"
--
--/ {
--	memory@10000000 {
--		device_type = "memory";
--		reg = <0x10000000 0x40000000>;
--	};
--};
-diff --git a/arch/arm/dts/imx6q-tqma6b.dtsi b/arch/arm/dts/imx6q-tqma6b.dtsi
-deleted file mode 100644
-index 7224c376c318..000000000000
---- a/arch/arm/dts/imx6q-tqma6b.dtsi
-+++ /dev/null
-@@ -1,15 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-or-later
--/*
-- * Copyright 2013 Sascha Hauer, Pengutronix
-- */
--
--#include "imx6q.dtsi"
--#include "imx6qdl-tqma6b.dtsi"
--#include "imx6qdl-tqma6.dtsi"
--
--/ {
--	memory@10000000 {
--		device_type = "memory";
--		reg = <0x10000000 0x40000000>;
--	};
--};
-diff --git a/arch/arm/dts/imx6qdl-tqma6.dtsi b/arch/arm/dts/imx6qdl-tqma6.dtsi
-deleted file mode 100644
-index 344ea935c7da..000000000000
---- a/arch/arm/dts/imx6qdl-tqma6.dtsi
-+++ /dev/null
-@@ -1,215 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-or-later
--/*
-- * Copyright 2013 Sascha Hauer, Pengutronix
-- * Copyright 2013-2017 Markus Niebel <Markus.Niebel@tq-group.com>
-- */
--
--#include <dt-bindings/gpio/gpio.h>
--#include <dt-bindings/interrupt-controller/irq.h>
--
--/ {
--	reg_3p3v: regulator-3p3v {
--		compatible = "regulator-fixed";
--		regulator-name = "supply-3p3v";
--		regulator-min-microvolt = <3300000>;
--		regulator-max-microvolt = <3300000>;
--		regulator-always-on;
--	};
--};
--
--&ecspi1 {
--	pinctrl-names = "default";
--	pinctrl-0 = <&pinctrl_ecspi1>;
--	cs-gpios = <&gpio3 19 GPIO_ACTIVE_LOW>;
--	status = "okay";
--
--	m25p80: flash@0 {
--		compatible = "jedec,spi-nor";
--		spi-max-frequency = <50000000>;
--		reg = <0>;
--		#address-cells = <1>;
--		#size-cells = <1>;
--		m25p,fast-read;
--	};
--};
--
--&iomuxc {
--	pinctrl_ecspi1: ecspi1grp {
--		fsl,pins = <
--			/* HYS, SPEED = MED, 100k up, DSE = 011, SRE_FAST */
--			MX6QDL_PAD_EIM_D17__ECSPI1_MISO 0x1b099
--			MX6QDL_PAD_EIM_D18__ECSPI1_MOSI 0xb099
--			MX6QDL_PAD_EIM_D16__ECSPI1_SCLK 0xb099
--			 /* eCSPI1 SS1 */
--			MX6QDL_PAD_EIM_D19__GPIO3_IO19 0xb099
--		>;
--	};
--
--	pinctrl_i2c1: i2c1grp {
--		fsl,pins = <
--			MX6QDL_PAD_CSI0_DAT8__I2C1_SDA 0x4001b899
--			MX6QDL_PAD_CSI0_DAT9__I2C1_SCL 0x4001b899
--		>;
--	};
--
--	pinctrl_i2c1_recovery: i2c1recoverygrp {
--		fsl,pins = <
--			MX6QDL_PAD_CSI0_DAT8__GPIO5_IO26 0x4001b899
--			MX6QDL_PAD_CSI0_DAT9__GPIO5_IO27 0x4001b899
--		>;
--	};
--
--	pinctrl_i2c3: i2c3grp {
--		fsl,pins = <
--			MX6QDL_PAD_GPIO_5__I2C3_SCL 0x4001b899
--			MX6QDL_PAD_GPIO_6__I2C3_SDA 0x4001b899
--		>;
--	};
--
--	pinctrl_i2c3_recovery: i2c3recoverygrp {
--		fsl,pins = <
--			MX6QDL_PAD_GPIO_5__GPIO1_IO05 0x4001b899
--			MX6QDL_PAD_GPIO_6__GPIO1_IO06 0x4001b899
--		>;
--	};
--
--	pinctrl_pmic: pmicgrp {
--		fsl,pins = <
--			MX6QDL_PAD_NANDF_RB0__GPIO6_IO10 0x1b099 /* PMIC irq */
--		>;
--	};
--
--	pinctrl_usdhc3: usdhc3grp {
--		fsl,pins = <
--			MX6QDL_PAD_SD3_CMD__SD3_CMD    0x17059
--			MX6QDL_PAD_SD3_CLK__SD3_CLK    0x10059
--			MX6QDL_PAD_SD3_DAT0__SD3_DATA0 0x17059
--			MX6QDL_PAD_SD3_DAT1__SD3_DATA1 0x17059
--			MX6QDL_PAD_SD3_DAT2__SD3_DATA2 0x17059
--			MX6QDL_PAD_SD3_DAT3__SD3_DATA3 0x17059
--			MX6QDL_PAD_SD3_DAT4__SD3_DATA4 0x17059
--			MX6QDL_PAD_SD3_DAT5__SD3_DATA5 0x17059
--			MX6QDL_PAD_SD3_DAT6__SD3_DATA6 0x17059
--			MX6QDL_PAD_SD3_DAT7__SD3_DATA7 0x17059
--		>;
--	};
--};
--
--&pmic {
--	pinctrl-names = "default";
--	pinctrl-0 = <&pinctrl_pmic>;
--	interrupt-parent = <&gpio6>;
--	interrupts = <10 IRQ_TYPE_LEVEL_LOW>;
--
--	regulators {
--		reg_vddcore: sw1ab {
--			regulator-min-microvolt = <300000>;
--			regulator-max-microvolt = <1875000>;
--			regulator-always-on;
--		};
--
--		reg_vddsoc: sw1c {
--			regulator-min-microvolt = <300000>;
--			regulator-max-microvolt = <1875000>;
--			regulator-always-on;
--		};
--
--		reg_gen_3v3: sw2 {
--			regulator-min-microvolt = <800000>;
--			regulator-max-microvolt = <3300000>;
--			regulator-always-on;
--		};
--
--		reg_ddr_1v5a: sw3a {
--			regulator-min-microvolt = <400000>;
--			regulator-max-microvolt = <1975000>;
--			regulator-always-on;
--		};
--
--		reg_ddr_1v5b: sw3b {
--			regulator-min-microvolt = <400000>;
--			regulator-max-microvolt = <1975000>;
--			regulator-always-on;
--		};
--
--		sw4_reg: sw4 {
--			regulator-min-microvolt = <800000>;
--			regulator-max-microvolt = <3300000>;
--			regulator-always-on;
--		};
--
--		reg_5v_600mA: swbst {
--			regulator-min-microvolt = <5000000>;
--			regulator-max-microvolt = <5150000>;
--			regulator-always-on;
--		};
--
--		reg_snvs_3v: vsnvs {
--			regulator-min-microvolt = <1500000>;
--			regulator-max-microvolt = <3000000>;
--			regulator-always-on;
--		};
--
--		reg_vrefddr: vrefddr {
--			regulator-boot-on;
--			regulator-always-on;
--		};
--
--		reg_vgen1_1v5: vgen1 {
--			regulator-min-microvolt = <800000>;
--			regulator-max-microvolt = <1550000>;
--			/* not used */
--		};
--
--		reg_vgen2_1v2_eth: vgen2 {
--			regulator-min-microvolt = <800000>;
--			regulator-max-microvolt = <1550000>;
--			regulator-always-on;
--		};
--
--		reg_vgen3_2v8: vgen3 {
--			regulator-min-microvolt = <1800000>;
--			regulator-max-microvolt = <3300000>;
--			regulator-always-on;
--		};
--
--		reg_vgen4_1v8: vgen4 {
--			regulator-min-microvolt = <1800000>;
--			regulator-max-microvolt = <3300000>;
--			regulator-always-on;
--		};
--
--		reg_vgen5_1v8_eth: vgen5 {
--			regulator-min-microvolt = <1800000>;
--			regulator-max-microvolt = <3300000>;
--			regulator-always-on;
--		};
--
--		reg_vgen6_3v3: vgen6 {
--			regulator-min-microvolt = <1800000>;
--			regulator-max-microvolt = <3300000>;
--			regulator-always-on;
--		};
--	};
--};
--
--/* eMMC */
--&usdhc3 {
--	pinctrl-names = "default";
--	pinctrl-0 = <&pinctrl_usdhc3>;
--	vmmc-supply = <&reg_3p3v>;
--	non-removable;
--	disable-wp;
--	no-sd;
--	no-sdio;
--	bus-width = <8>;
--	#address-cells = <1>;
--	#size-cells = <0>;
--	status = "okay";
--
--	mmccard: mmccard@0 {
--		reg = <0>;
--		compatible = "mmc-card";
--		broken-hpi;
--	};
--};
-diff --git a/arch/arm/dts/imx6qdl-tqma6a.dtsi b/arch/arm/dts/imx6qdl-tqma6a.dtsi
-deleted file mode 100644
-index 7dc3f0005b0f..000000000000
---- a/arch/arm/dts/imx6qdl-tqma6a.dtsi
-+++ /dev/null
-@@ -1,53 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-or-later
--/*
-- * Copyright 2013 Sascha Hauer, Pengutronix
-- * Copyright 2013-2017 Markus Niebel <Markus.Niebel@tq-group.com>
-- */
--
--#include <dt-bindings/gpio/gpio.h>
--
--&fec {
--	interrupts-extended = <&gpio1 6 IRQ_TYPE_LEVEL_HIGH>,
--			      <&intc 0 119 IRQ_TYPE_LEVEL_HIGH>;
--	fsl,err006687-workaround-present;
--};
--
--&i2c1 {
--	pinctrl-names = "default", "gpio";
--	pinctrl-0 = <&pinctrl_i2c1>;
--	pinctrl-1 = <&pinctrl_i2c1_recovery>;
--	scl-gpios = <&gpio5 27 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
--	sda-gpios = <&gpio5 26 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
--	clock-frequency = <100000>;
--	status = "okay";
--
--	pmic: pmic@8 {
--		compatible = "fsl,pfuze100";
--		reg = <0x08>;
--	};
--
--	sensor@48 {
--		compatible = "national,lm75";
--		reg = <0x48>;
--	};
--
--	eeprom@50 {
--		compatible = "st,24c64", "atmel,24c64";
--		reg = <0x50>;
--		pagesize = <32>;
--	};
--};
--
--&iomuxc {
--	/*
--	 * This pinmuxing is required for the ERR006687 workaround. Board
--	 * DTS files that enable the FEC controller with
--	 * fsl,err006687-workaround-present must include this group.
--	 */
--	pinctrl_enet_fix: enetfixgrp {
--		fsl,pins = <
--			/* ENET ping patch */
--			MX6QDL_PAD_GPIO_6__ENET_IRQ 0x000b1
--		>;
--	};
--};
-diff --git a/arch/arm/dts/imx6qdl-tqma6b.dtsi b/arch/arm/dts/imx6qdl-tqma6b.dtsi
-deleted file mode 100644
-index dd0925766440..000000000000
---- a/arch/arm/dts/imx6qdl-tqma6b.dtsi
-+++ /dev/null
-@@ -1,33 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-or-later
--/*
-- * Copyright 2013 Sascha Hauer, Pengutronix
-- * Copyright 2013-2017 Markus Niebel <Markus.Niebel@tq-group.com>
-- */
--
--#include <dt-bindings/gpio/gpio.h>
--
--&i2c3 {
--	pinctrl-names = "default", "gpio";
--	pinctrl-0 = <&pinctrl_i2c3>;
--	pinctrl-1 = <&pinctrl_i2c3_recovery>;
--	scl-gpios = <&gpio1 5 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
--	sda-gpios = <&gpio1 6 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
--	clock-frequency = <100000>;
--	status = "okay";
--
--	pmic: pmic@8 {
--		compatible = "fsl,pfuze100";
--		reg = <0x08>;
--	};
--
--	sensor@48 {
--		compatible = "national,lm75";
--		reg = <0x48>;
--	};
--
--	eeprom@50 {
--		compatible = "st,24c64", "atmel,24c64";
--		reg = <0x50>;
--		pagesize = <32>;
--	};
--};
-diff --git a/board/tq/tqma6/Kconfig b/board/tq/tqma6/Kconfig
-index e7f23367afd2..b42c8e24ade3 100644
---- a/board/tq/tqma6/Kconfig
-+++ b/board/tq/tqma6/Kconfig
-@@ -72,6 +72,7 @@ config MBA6
- 	select PHY_MICREL
- 	select PHY_MICREL_KSZ90X1
- 	select MXC_UART
-+	imply OF_UPSTREAM
- 	help
- 	  Select the MBa6 starterkit. This features a GigE Phy, USB, SD-Card
- 	  etc.
-diff --git a/configs/tqma6dl_mba6_mmc_defconfig b/configs/tqma6dl_mba6_mmc_defconfig
-index 1534a2e9262a..be891d24537f 100644
---- a/configs/tqma6dl_mba6_mmc_defconfig
-+++ b/configs/tqma6dl_mba6_mmc_defconfig
-@@ -7,7 +7,7 @@ CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0x100000
- CONFIG_MX6DL=y
- CONFIG_TARGET_TQMA6=y
--CONFIG_DEFAULT_DEVICE_TREE="imx6dl-mba6b"
-+CONFIG_DEFAULT_DEVICE_TREE="nxp/imx/imx6dl-mba6b"
- CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_SUPPORT_RAW_INITRD=y
-diff --git a/configs/tqma6dl_mba6_spi_defconfig b/configs/tqma6dl_mba6_spi_defconfig
-index 5eaa9eb270ce..953ceba66260 100644
---- a/configs/tqma6dl_mba6_spi_defconfig
-+++ b/configs/tqma6dl_mba6_spi_defconfig
-@@ -9,7 +9,7 @@ CONFIG_ENV_SECT_SIZE=0x10000
- CONFIG_MX6DL=y
- CONFIG_TARGET_TQMA6=y
- CONFIG_TQMA6X_SPI_BOOT=y
--CONFIG_DEFAULT_DEVICE_TREE="imx6dl-mba6b"
-+CONFIG_DEFAULT_DEVICE_TREE="nxp/imx/imx6dl-mba6b"
- CONFIG_ENV_OFFSET_REDUND=0x90000
- CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
-diff --git a/configs/tqma6q_mba6_mmc_defconfig b/configs/tqma6q_mba6_mmc_defconfig
-index 3fcc1f8d54e1..d6706afe0406 100644
---- a/configs/tqma6q_mba6_mmc_defconfig
-+++ b/configs/tqma6q_mba6_mmc_defconfig
-@@ -7,7 +7,7 @@ CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0x100000
- CONFIG_MX6Q=y
- CONFIG_TARGET_TQMA6=y
--CONFIG_DEFAULT_DEVICE_TREE="imx6q-mba6b"
-+CONFIG_DEFAULT_DEVICE_TREE="nxp/imx/imx6q-mba6b"
- CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_SUPPORT_RAW_INITRD=y
-diff --git a/configs/tqma6q_mba6_spi_defconfig b/configs/tqma6q_mba6_spi_defconfig
-index a7ffc9edb5b4..28b1bfc41f45 100644
---- a/configs/tqma6q_mba6_spi_defconfig
-+++ b/configs/tqma6q_mba6_spi_defconfig
-@@ -9,7 +9,7 @@ CONFIG_ENV_SECT_SIZE=0x10000
- CONFIG_MX6Q=y
- CONFIG_TARGET_TQMA6=y
- CONFIG_TQMA6X_SPI_BOOT=y
--CONFIG_DEFAULT_DEVICE_TREE="imx6q-mba6b"
-+CONFIG_DEFAULT_DEVICE_TREE="nxp/imx/imx6q-mba6b"
- CONFIG_ENV_OFFSET_REDUND=0x90000
- CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
-@@ -18,7 +18,7 @@ CONFIG_BOOTDELAY=3
- CONFIG_OF_BOARD_SETUP=y
- CONFIG_USE_BOOTCOMMAND=y
- CONFIG_BOOTCOMMAND="sf probe; run mmcboot; run netboot; run panicboot"
--CONFIG_DEFAULT_FDT_FILE="imx6q-mba6x.dtb"
-+CONFIG_DEFAULT_FDT_FILE="nxp/imx/imx6q-mba6x.dtb"
- CONFIG_SYS_PBSIZE=532
- CONFIG_HUSH_PARSER=y
- CONFIG_SYS_MAXARGS=32
-diff --git a/configs/tqma6s_mba6_mmc_defconfig b/configs/tqma6s_mba6_mmc_defconfig
-index 7839c4858478..7bed776507ab 100644
---- a/configs/tqma6s_mba6_mmc_defconfig
-+++ b/configs/tqma6s_mba6_mmc_defconfig
-@@ -7,7 +7,7 @@ CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0x100000
- CONFIG_MX6S=y
- CONFIG_TARGET_TQMA6=y
--CONFIG_DEFAULT_DEVICE_TREE="imx6dl-mba6b"
-+CONFIG_DEFAULT_DEVICE_TREE="nxp/imx/imx6dl-mba6b"
- CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_SUPPORT_RAW_INITRD=y
-diff --git a/configs/tqma6s_mba6_spi_defconfig b/configs/tqma6s_mba6_spi_defconfig
-index c3bb44025b34..0af80d5c2e10 100644
---- a/configs/tqma6s_mba6_spi_defconfig
-+++ b/configs/tqma6s_mba6_spi_defconfig
-@@ -9,7 +9,7 @@ CONFIG_ENV_SECT_SIZE=0x10000
- CONFIG_MX6S=y
- CONFIG_TARGET_TQMA6=y
- CONFIG_TQMA6X_SPI_BOOT=y
--CONFIG_DEFAULT_DEVICE_TREE="imx6dl-mba6b"
-+CONFIG_DEFAULT_DEVICE_TREE="nxp/imx/imx6dl-mba6b"
- CONFIG_ENV_OFFSET_REDUND=0x90000
- CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
+diff --git a/env/common.c b/env/common.c
+index 8d47d72605..2f783e3a69 100644
+--- a/env/common.c
++++ b/env/common.c
+@@ -401,7 +401,15 @@ int env_set_default_vars(int nvars, char * const vars[], int flags)
+ 	 * Special use-case: import from default environment
+ 	 * (and use \0 as a separator)
+ 	 */
+-	flags |= H_NOCLEAR | H_DEFAULT;
++
++	/* 
++	 * When vars are passed remove variables that are not in
++	 * the default environment.
++	 */
++	if (!nvars)
++		flags |= H_NOCLEAR;
++
++	flags |= H_DEFAULT;
+ 	return himport_r(&env_htab, default_environment,
+ 				sizeof(default_environment), '\0',
+ 				flags, 0, nvars, vars);
 -- 
-2.34.1
+2.25.1
 
+Thanks,
+Ravi
