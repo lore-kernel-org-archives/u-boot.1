@@ -4,77 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C84ECC3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 10:54:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FF3AC3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 11:22:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57B36889F1;
-	Fri,  9 Aug 2024 12:54:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0CCDA88BF9;
+	Fri,  9 Aug 2024 13:22:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ncwo4gxz";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="BWeR/9Pv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA50B889F1; Fri,  9 Aug 2024 12:54:10 +0200 (CEST)
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
- [IPv6:2607:f8b0:4864:20::432])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 41CE288BFB; Fri,  9 Aug 2024 13:22:39 +0200 (CEST)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EB6A887EB
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 12:54:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 45C3F88BB6
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 13:22:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-710ced3642dso1140684b3a.2
- for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 03:54:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723200846; x=1723805646; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TGS/RaCHAgU0yeTL8SNQIRCmlp7DNNNwEF0X405ZNEg=;
- b=ncwo4gxz7hYmxMwH8WU0N/l8ylpPuO2HYwzHfUf1ayQ8akt/ny3VXXU6UU/9li9iO2
- NgINCbLopvcMfjbZ96A6mYExt4uCA65kM+OjzVMt9s3Kr2kW7lhjY75Du5V1CYA3acvK
- pxCrjngheFbapIGgzLnR4+SVG/aGnh43zkg0rpkzj2Ay6IKVtUJOWBjHDii929vNerOv
- uBDkrVAUtchXJhozMebGj+KOsSz/kN/fYeeSuEkEC1ju5dpPVZnm/wMxZSH5FDLLbxvF
- cPyyxcIqZjNV4LJIpfyGqpBAmUudtrssWDD4npcDfyk7UuxU8C89ppltf2nfNJ94Nocd
- Rn4Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723200846; x=1723805646;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TGS/RaCHAgU0yeTL8SNQIRCmlp7DNNNwEF0X405ZNEg=;
- b=REEa6vX2aDVhLn0PnUNFY4h10ci+R2trgRNsir7TdHa4TP+b5x7FyT25A9kNRm1Oa0
- oTWvM/HJ2JeWArciS3R5ckkEm2rjhYaldvmmagmh+lqOmWNGu46KPgzzb2+3vfeBLflP
- wFniJn09AdZ+JOT2KiqB3+AfddcG/wqFoHDUUJ69wO3C6CSWlIOE1HXOVj1WO5ZqVHjk
- +hBscrBOG43/w0pZHRxUbEP6yczhZAh4ke0QDejxFY5nD9CSsvpR0uVcvRVjifZMdLUx
- af/LIUAYCY3WpyIHjrOPGJfyEpaFYdct4RuOSdOMBIYIjjfcfKv17sgCf52iAw4ZDHXD
- JyiQ==
-X-Gm-Message-State: AOJu0YxdlkYdx8/NmoAwKwpm7EBcsU7Mo6/wovHVN0rftCZMMZsuQ/J0
- QQo0h9xu4hfRpvKtqEJ1CKiUH93ebGnYtDsFePDJVdbndqT8cgFyaQ55utgeoKG7c7TagyJTPZX
- fYtdKaypeMGK601+PIkbhkSKLss8x4+tYCC7Cxg==
-X-Google-Smtp-Source: AGHT+IHANQfJJzfqEiiIOtp0BbaGPqit4nCFxwCAH0SjQ9s5ibOIm/NbHe9pdadyRLXEF+9v7metb2w0PI7ajNbeBQQ=
-X-Received: by 2002:a05:6a21:6f83:b0:1c4:87b2:e069 with SMTP id
- adf61e73a8af0-1c89ff44437mr1390535637.36.1723200845879; Fri, 09 Aug 2024
- 03:54:05 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.. (dynamic-046-114-170-249.46.114.pool.telefonica.de
+ [46.114.170.249])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 228433F20D; 
+ Fri,  9 Aug 2024 11:22:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1723202554;
+ bh=pkbNNYbGxkzD65UpKpZt7j3ujKB1CTIeNSEfs5hYuiM=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type;
+ b=BWeR/9PvGj4irsT9fnTEILOEYjsAhEyaq3P4t/myey4mUdEeqZrcZkP13NDa7tGgH
+ sb+bXLgIFkDTbmhZ3Qs6fWnqhF96vL4HCZ8+vIt3423ByxG/CCyAeZ6F9Hd73kmf6s
+ DkLTOhc65mvr4hqAbfUK2o2P7554Eu+wmRUU20a2c+iYEIk2CQPI9IMj0zFFgU/x0A
+ /OClogovVDn7ukxi03YHaxHu7IbTdv4cz3TI5FbOoAEMZp3ggxYUs0U/Q3ArvmNX8x
+ AGVdSmeKpaQ4etcHkzWp1wxdwTU1a/TjRcvmsu/TO6E4adEeqKHmSGRlLKpPffVOwX
+ 6M9c39gAyTxKw==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>
+Cc: u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] tools: fix signature of toc0_verify_cert_item()
+Date: Fri,  9 Aug 2024 13:22:16 +0200
+Message-ID: <20240809112216.36587-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-References: <cover.1723050310.git.jerome.forissier@linaro.org>
- <b02ec5e623fd4c80201c92630780ed7e4f557191.1723050310.git.jerome.forissier@linaro.org>
-In-Reply-To: <b02ec5e623fd4c80201c92630780ed7e4f557191.1723050310.git.jerome.forissier@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 9 Aug 2024 13:53:29 +0300
-Message-ID: <CAC_iWjL-GbO=FFbAyn-OFm5te63zGwwBMAsGv7orGC+oBObb_w@mail.gmail.com>
-Subject: Re: [PATCH v8 03/23] net: wget: allow EFI boot
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
- Raymond Mao <raymond.mao@linaro.org>, Maxim Uvarov <muvarov@gmail.com>, 
- Tim Harvey <tharvey@gateworks.com>, Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>, Simon Glass <sjg@chromium.org>,
- Yasuharu Shibata <yasuharu.shibata@gmail.com>, Marek Vasut <marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,54 +71,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 7 Aug 2024 at 20:12, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
-> wget followed by bootefi currently fails as follows:
->
->  U-Boot> wget 200000 192.168.0.30:helloworld.efi
->  Waiting for Ethernet connection... done.
->  HTTP/1.0 200 OK
->  Packets received 13, Transfer Successful
->  Bytes transferred = 12720 (31b0 hex)
->  U-Boot> bootefi 200000
->  No UEFI binary known at 200000
->  U-Boot>
->
-> Fix the problem by adding the missing efi_set_bootdev() call.
->
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> ---
->  net/wget.c | 4 ++++
->  1 file changed, 4 insertions(+)
->
-> diff --git a/net/wget.c b/net/wget.c
-> index 0e4dc5159d0..cf7681a4e79 100644
-> --- a/net/wget.c
-> +++ b/net/wget.c
-> @@ -8,6 +8,7 @@
->  #include <command.h>
->  #include <display_options.h>
->  #include <env.h>
-> +#include <efi_loader.h>
->  #include <image.h>
->  #include <lmb.h>
->  #include <mapmem.h>
-> @@ -429,6 +430,9 @@ static void wget_handler(uchar *pkt, u16 dport,
->         case WGET_TRANSFERRED:
->                 printf("Packets received %d, Transfer Successful\n", packets);
->                 net_set_state(wget_loop_state);
-> +               efi_set_bootdev("Net", "", image_url,
-> +                               map_sysmem(image_load_addr, 0),
-> +                               net_boot_file_size);
+Avoid a build warning with GCC 14.2
 
-Don't you need an unmap_sysmem() once this completes?
+    tools/sunxi_toc0.c: In function ‘toc0_verify_cert_item’:
+    tools/sunxi_toc0.c:447:12: warning: ‘nonnull’ argument ‘digest’
+    compared to NULL [-Wnonnull-compare]
+      447 | if (digest && memcmp(&extension->digest, digest, SHA256_DIGEST_LENGTH)) {
+          |    ^
 
-Thanks
-/Ilias
->                 break;
->         }
->  }
-> --
-> 2.40.1
->
+Use a pointer instead of an array to signal that the argument might be
+NULL.
+
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ tools/sunxi_toc0.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tools/sunxi_toc0.c b/tools/sunxi_toc0.c
+index 292649fe90f..545c3771853 100644
+--- a/tools/sunxi_toc0.c
++++ b/tools/sunxi_toc0.c
+@@ -412,7 +412,7 @@ err:
+  * This function is only expected to work with images created by mkimage.
+  */
+ static int toc0_verify_cert_item(const uint8_t *buf, uint32_t len, RSA *fw_key,
+-				 uint8_t digest[static SHA256_DIGEST_LENGTH])
++				 uint8_t *digest)
+ {
+ 	const struct toc0_cert_item *cert_item = (const void *)buf;
+ 	uint8_t cert_digest[SHA256_DIGEST_LENGTH];
+-- 
+2.45.2
+
