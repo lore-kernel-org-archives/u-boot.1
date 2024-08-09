@@ -4,61 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6672C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 12:25:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0263DC3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 12:28:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 040DC8895D;
-	Fri,  9 Aug 2024 14:25:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
+	by phobos.denx.de (Postfix) with ESMTP id 29E07887FF;
+	Fri,  9 Aug 2024 14:28:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="cFPWM4h9";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A1F1889B8; Fri,  9 Aug 2024 14:25:15 +0200 (CEST)
-Received: from mail.thorsis.com (mail.thorsis.com [IPv6:2003:a:e28:26e4::10])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B33488600
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 14:25:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=thorsis.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 4D892148778D; Fri,  9 Aug 2024 14:25:09 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
- t=1723206312; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- in-reply-to:references; bh=i9g2N7DRcNRLsYPPx5RLumUqwwFTpAaJb8pM2giKSeU=;
- b=cFPWM4h9r1cIsL/mvE3qvGAoUMadScLevzjSjUCwQY1aGDtKYkVfLDEgAMe+u/Rycwr+Mb
- eySUsHKxe52ObeXzH/JCJMSK/iyFiwPcZVnSo1WdVqeOq2G24Np0Qh6VL62iZhrkdq08Xc
- wy4HhFbGHJ69IWFcbF4SfcfHBxLgzt+miJc7dW4c72s+4L318rqJesDgGtu+D34JMopdJc
- fN1p2OG1ouCrSXg/e6heejcQDvLtFdKPkAbj5V9yOUL+ZXKsUlU2QFfXGaUAzNmw5Q4MVl
- Us65fya4xesI41CLgdJjteM7/fCa2xrzOBvB/C2oeziOoaWhru1k1m3bBMzc/g==
-Date: Fri, 9 Aug 2024 14:25:04 +0200
-From: Alexander Dahl <ada@thorsis.com>
-To: Marcus Folkesson <marcus.folkesson@gmail.com>
-Cc: u-boot@lists.denx.de, Alexander Dahl <ada@thorsis.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Igor Prusov <ivprusov@salutedevices.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] mtd: nand: raw: atmel: remove unnecessary return value
-Message-ID: <20240809-challenge-causation-20cf58794b33@thorsis.com>
-Mail-Followup-To: Marcus Folkesson <marcus.folkesson@gmail.com>,
- u-boot@lists.denx.de,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Igor Prusov <ivprusov@salutedevices.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20240809121556.3215132-1-marcus.folkesson@gmail.com>
+ id F22D28895D; Fri,  9 Aug 2024 14:28:44 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 7D8E788606
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 14:28:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 76DE213D5;
+ Fri,  9 Aug 2024 05:29:07 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E87D33F6A8;
+ Fri,  9 Aug 2024 05:28:40 -0700 (PDT)
+Date: Fri, 9 Aug 2024 13:28:36 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, u-boot@lists.denx.de, Seung-Woo
+ Kim <sw0312.kim@samsung.com>
+Subject: Re: [PATCH 1/1] tools: fix signature of toc0_verify_cert_item()
+Message-ID: <20240809132836.1ac2b1fd@donnerap.manchester.arm.com>
+In-Reply-To: <20240809112216.36587-1-heinrich.schuchardt@canonical.com>
+References: <20240809112216.36587-1-heinrich.schuchardt@canonical.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240809121556.3215132-1-marcus.folkesson@gmail.com>
-User-Agent: Mutt/2.2.12 (2023-09-09)
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,66 +57,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Marcus,
+On Fri,  9 Aug 2024 13:22:16 +0200
+Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
 
-Am Fri, Aug 09, 2024 at 02:15:43PM +0200 schrieb Marcus Folkesson:
-> The condition 'ret' is always true as it is never set to other than
-> -EIO.
+Hi Heinrich,
 
-Technically, you're right.
+> Avoid a build warning with GCC 14.2
+>=20
+>     tools/sunxi_toc0.c: In function =E2=80=98toc0_verify_cert_item=E2=80=
+=99:
+>     tools/sunxi_toc0.c:447:12: warning: =E2=80=98nonnull=E2=80=99 argumen=
+t =E2=80=98digest=E2=80=99
+>     compared to NULL [-Wnonnull-compare]
+>       447 | if (digest && memcmp(&extension->digest, digest, SHA256_DIGES=
+T_LENGTH)) {
+>           |    ^
+>=20
+> Use a pointer instead of an array to signal that the argument might be
+> NULL.
 
-I quickly compared with the same driver in Linux.  That has some
-additional lines for DMA transfers which probably got removed when
-porting the driver.
+Seung-Woo Kim sent a different patch for the same problem last week, and
+Tom merged it earlier this week:
+https://source.denx.de/u-boot/u-boot/-/commit/59fff91f2bea2215c7b16415b9a0e=
+6714fac5573
 
-Does the code before your patch throw compiler warnings?  If not, I
-would keep it as is.  The compiler will probably optimize it away
-anyway, and it would make future ports from Linux easier.
+Thanks for reporting anyways!
 
-Greets
-Alex
+Cheers,
+Andre
 
-> 
-> Remove 'ret' and the condition for copy.
-> 
-> Signed-off-by: Marcus Folkesson <marcus.folkesson@gmail.com>
+>=20
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+
+
 > ---
-> 
->  drivers/mtd/nand/raw/atmel/nand-controller.c | 10 ++--------
->  1 file changed, 2 insertions(+), 8 deletions(-)
-> 
-> diff --git a/drivers/mtd/nand/raw/atmel/nand-controller.c b/drivers/mtd/nand/raw/atmel/nand-controller.c
-> index ee4ec6da58..00d7e177b9 100644
-> --- a/drivers/mtd/nand/raw/atmel/nand-controller.c
-> +++ b/drivers/mtd/nand/raw/atmel/nand-controller.c
-> @@ -568,12 +568,9 @@ static void atmel_nfc_copy_to_sram(struct nand_chip *chip, const u8 *buf,
->  	struct mtd_info *mtd = nand_to_mtd(chip);
->  	struct atmel_nand *nand = to_atmel_nand(chip);
->  	struct atmel_hsmc_nand_controller *nc;
-> -	int ret = -EIO;
->  
->  	nc = to_hsmc_nand_controller(nand->controller);
-> -
-> -	if (ret)
-> -		memcpy_toio(nc->sram.virt, buf, mtd->writesize);
-> +	memcpy_toio(nc->sram.virt, buf, mtd->writesize);
->  
->  	if (oob_required)
->  		memcpy_toio(nc->sram.virt + mtd->writesize, chip->oob_poi,
-> @@ -586,12 +583,9 @@ static void atmel_nfc_copy_from_sram(struct nand_chip *chip, u8 *buf,
->  	struct mtd_info *mtd = nand_to_mtd(chip);
->  	struct atmel_nand *nand = to_atmel_nand(chip);
->  	struct atmel_hsmc_nand_controller *nc;
-> -	int ret = -EIO;
->  
->  	nc = to_hsmc_nand_controller(nand->controller);
-> -
-> -	if (ret)
-> -		memcpy_fromio(buf, nc->sram.virt, mtd->writesize);
-> +	memcpy_fromio(buf, nc->sram.virt, mtd->writesize);
->  
->  	if (oob_required)
->  		memcpy_fromio(chip->oob_poi, nc->sram.virt + mtd->writesize,
-> -- 
-> 2.45.1
-> 
+>  tools/sunxi_toc0.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/tools/sunxi_toc0.c b/tools/sunxi_toc0.c
+> index 292649fe90f..545c3771853 100644
+> --- a/tools/sunxi_toc0.c
+> +++ b/tools/sunxi_toc0.c
+> @@ -412,7 +412,7 @@ err:
+>   * This function is only expected to work with images created by mkimage.
+>   */
+>  static int toc0_verify_cert_item(const uint8_t *buf, uint32_t len, RSA *=
+fw_key,
+> -				 uint8_t digest[static SHA256_DIGEST_LENGTH])
+> +				 uint8_t *digest)
+>  {
+>  	const struct toc0_cert_item *cert_item =3D (const void *)buf;
+>  	uint8_t cert_digest[SHA256_DIGEST_LENGTH];
+
