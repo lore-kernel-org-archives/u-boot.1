@@ -4,47 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 327CCC52D7B
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 00:39:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B2EEC3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 00:48:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6312B88210;
-	Fri,  9 Aug 2024 02:39:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+	by phobos.denx.de (Postfix) with ESMTP id 8E2BC88B99;
+	Fri,  9 Aug 2024 02:48:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C2EB88637; Fri,  9 Aug 2024 02:39:21 +0200 (CEST)
-Received: from smtpbgeu2.qq.com (smtpbgeu2.qq.com [18.194.254.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0473880E6
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 02:39:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
-X-QQ-mid: bizesmtp90t1723163898t5znc2iu
-X-QQ-Originating-IP: W0btba2zSGimeiEuPCBhoO/QJWQF2e25lZmH9W/OC54=
-Received: from [192.168.159.131] ( [106.150.157.243])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Fri, 09 Aug 2024 08:38:16 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 10788729312749832138
-Message-ID: <D9933682DB738EFC+a457519a-931c-4914-b42a-9ea236d79708@radxa.com>
-Date: Fri, 9 Aug 2024 09:38:15 +0900
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LnFK9lBb";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id DD460889AF; Fri,  9 Aug 2024 02:48:52 +0200 (CEST)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C9AF889AF
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 02:48:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2ef2d96164aso15462141fa.3
+ for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 17:48:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1723164530; x=1723769330; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WeB0Cm2W/GZwIb0moyk3gPKAho6BYi/88ETKZb3h7ew=;
+ b=LnFK9lBbdWVxWL6vU2dZETAmDQ7Ypz6Z1n73eW5DvVUvJYnpKJOeFcrSoBKiwm74fi
+ OanrNDFlQDOx1RnxDjNtW1/c9rzI6uTCO0SRFXl6zubBI3rltNbzZ1/oEOqo7Bwysgzw
+ Dq0VUadcFBPG+xeNmieot3tPdBnjBtv5lyV9Eu9FnIA2wCzV0PSelf+XOGtTRCOYP6bo
+ j24ESWiNWgGwQZyqRqDe/GGlsLa9pK+24kl+YVxijVuBrJh2cZ5ROGyi69TBpuX/QQSV
+ Q4o+WXFyldSlkqBEb6CzDAwDzTH0Jt5cDDQXnthT8uYdDzSKi3NFSl8aoEiHV3WJkMB4
+ 8FcQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723164530; x=1723769330;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WeB0Cm2W/GZwIb0moyk3gPKAho6BYi/88ETKZb3h7ew=;
+ b=upfdxyiqcPHp4eaL/DbTTMtcaW/lzyCpbB7kv9jGUfSYly6CFyYHzRT46YK+uMDYRd
+ tm4yoNN4xC5l2BApQF6adwD4IPSlxUFoWcPk1m7mpKrIXz1IFjUNnCkg1IWOjUp15vYH
+ IzEbWMdO7OuUnwv+Fk5zRG8SfIByrBc73qdaKNRl2sltCesb6ROFlJqrrwLEnZO6KB6W
+ KGeWixDhb1OT/QimbUZtYRPN6apEjTzvWu1xozSF6Z/18VvwBT3WbSxVjvw59tFndsIm
+ djnSl2eeIFoy5B3iQE+LP8mHgUQyPf7SyuTxdl0inqNm5amOOOGpONV7S6poZoymyUqn
+ ZOzQ==
+X-Gm-Message-State: AOJu0YwMyeZtDCkKvFb9HOaYNQc2MH2X/ZPZGxFQu+i3H7aiMttuntdt
+ kBDFiJsE6g/1BKyQUDlDXHLL0UmUGjIyPmcqK3O37p847TfSXzCVLu1lPw7RRtM=
+X-Google-Smtp-Source: AGHT+IG5Um3VpTwU9JviUhGPyfU0DM8wkzuOzJK+Tnwn9V1yKxjZmh1hzckIhR/jL0iEEMKUIl3iTQ==
+X-Received: by 2002:a05:6512:3a84:b0:530:ab68:25e6 with SMTP id
+ 2adb3069b0e04-530e58900aamr2266616e87.48.1723164529704; 
+ Thu, 08 Aug 2024 17:48:49 -0700 (PDT)
+Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a7dc9c0c9f5sm789811466b.50.2024.08.08.17.48.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 08 Aug 2024 17:48:49 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH 0/7] Qualcomm: add support for SC7280 and the RB3 Gen 2
+Date: Fri, 09 Aug 2024 02:48:43 +0200
+Message-Id: <20240809-b4-rb3gen2-v1-0-7c73fe05b37a@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6] board: rockchip: add Radxa ROCK 3 Model C
-To: Maxim Moskalets <maximmosk4@gmail.com>, trini@konsulko.com,
- u-boot@lists.denx.de, sjg@chromium.org
-Cc: Maxim.Moskalets@kaspersky.com, Jonas Karlman <jonas@kwiboo.se>
-References: <20240808193710.13703-1-Maxim.Moskalets@kaspersky.com>
-Content-Language: en-US
-From: FUKAUMI Naoki <naoki@radxa.com>
-In-Reply-To: <20240808193710.13703-1-Maxim.Moskalets@kaspersky.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtp:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+X-B4-Tracking: v=1; b=H4sIAGtntWYC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxMDCwNL3SQT3aIk4/TUPCNdC/OkFAszs8SklFRDJaCGgqLUtMwKsGHRsbW
+ 1AEOsv3BcAAAA
+To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1709;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=78vwYtanK5DXcjOQHy7PEYcHYJLmE+3C72d/MoOz5rY=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmtWdv4hFxYXddb6NoCbaG95XXlJdVMWMZp/PnF
+ o5ZzUcBkcOJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZrVnbwAKCRAFgzErGV9k
+ tnJKEACfjQ0dSaPA6vSD+HWwMNhjrjDdEkONl4k0BXhmeEmWikluDRfQbKGcQaQ0l3goHPnUXQ7
+ ED8LZ2D1cUoQRM09KwKoThNl2hR5QfTSZBnn8gpckAvGLFjCRW8vVq4BoF1V17UXEOmCcvoOTeS
+ fkFi64Q0MmklOJc6d56ghZrJ07x9UmsvtVLTTGQ1cGnj55dTChJtLyjv6wDmKM95hiHcOyDDDSC
+ VHnipxfFyp+ot5Nn5NloUICkr0KmBt2WOtBIHcrSSDF/TLLJdX3bbgmgc8VZ1KixDUxACMy3+yu
+ y/5/BDQOStrtlyybXqhGodVO8LMaFBNA/3pFLE/ZeBF5K+LUjeLVHw8y32FgcOqn/wB3DQR/537
+ siJLzHRa4v4jlPnOmo1SDqRee/4eka5mpHKwvVRRhYQI2FTo74NVMrFuaX0wnPLaYoGDwTqxaZx
+ Qqbg+MqcKD+VGoAG9nCCj/pYRbY1/iHjlR0WXv9HEmJWCw1WQ5Vc46qwzR29uSNLE8QSHUVjyk6
+ hgc5tTx7H/4yf3RshxOSiLzcg8N47CI9fX7UmWoOEi9WBQltFERYakugHWzqa0zD++IeO8HgJez
+ YwpBbz2iiDGudv8uLiMa0Lj9w1T12LWDkHURE94UlSmE+tcNCOKIRERVZIxR/g7VIVaeZNm1zcv
+ H1FHsXn5ta2Yd2g==
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,259 +113,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Introduce support for the SC7280 platform and specifically the RB3 Gen 2
+development board.
 
-On 8/9/24 04:37, Maxim Moskalets wrote:
-> From: Maxim Moskalets <maximmosk4@gmail.com>
-> 
-> Based on rock-3a-rk3568_defconfig.
-> Tested on v1.31 revision.
-> 
-> Board Specifications:
-> - Rockchip RK3566
-> - 1/2/4GB LPDDR4 2112MT/s
-> - eMMC socket
-> - uSD card slot
-> - M.2 2230 Connector
-> - GbE LAN with POE
-> - 3.5mm jack with mic
-> - HDMI 2.0, MIPI DSI/CSI
-> - USB 3.0 Host, USB 2.0 Host/OTG
-> - 40-pin GPIO expansion ports
-> 
-> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
-> Suggested-by: Jonas Karlman <jonas@kwiboo.se>
-> Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+The RB3 Gen 2 is the latest robotics board from Qualcomm, featuring a
+QCM6490 SoC (the same SoC found in the Fairphone 5), 6GB of RAM, and
+128GB of UFS storage, as well as a whole lot of I/O.
 
-I got following error when `usb start` and `usb reset`
+Most of the I/O is attached via a custom PCIe bridge chip, and as such
+is not yet supported. However it is possible to boot from USB via the
+Type-C port, which is hardcoded to host mode for this initial support.
 
-```
-Bus usb@fcc00000: Register 2000140 NbrPorts 2
-Starting the controller
-USB XHCI 1.10
-Bus usb@fd000000: Register 2000140 NbrPorts 2
-Starting the controller
-USB XHCI 1.10
-Bus usb@fd800000: USB EHCI 1.00
-Bus usb@fd840000: USB OHCI 1.0
-Bus usb@fd880000: USB EHCI 1.00
-Bus usb@fd8c0000: USB OHCI 1.0
-scanning bus usb@fcc00000 for devices... 1 USB Device(s) found
-scanning bus usb@fd000000 for devices... 1 USB Device(s) found
-scanning bus usb@fd800000 for devices... 1 USB Device(s) found
-scanning bus usb@fd840000 for devices... ERROR:  USB-error: 
-DEVICENOTRESPONDING: Device did not respond to token (IN) or did
-not provide a handshake (OUT) (5)
-ERROR: USB-error: DEVICENOTRESPONDING: Device did not respond to token 
-(IN) or did
-not provide a handshake (OUT) (5)
-ERROR:  USB-error: DEVICENOTRESPONDING: Device did not respond to token 
-(IN) or did
-not provide a handshake (OUT) (5)
-ERROR: USB-error: DEVICENOTRESPONDING: Device did not respond to token 
-(IN) or did
-not provide a handshake (OUT) (5)
-ERROR:  USB-error: DEVICENOTRESPONDING: Device did not respond to token 
-(IN) or did
-not provide a handshake (OUT) (5)
-ERROR: USB-error: DEVICENOTRESPONDING: Device did not respond to token 
-(IN) or did
-not provide a handshake (OUT) (5)
-unable to get device descriptor (error=-1)
-1 USB Device(s) found
-scanning bus usb@fd880000 for devices... 1 USB Device(s) found
-scanning bus usb@fd8c0000 for devices... 1 USB Device(s) found
-```
+USB support additionally requires this patch:
+  https://lore.kernel.org/u-boot/20240423141551.2410199-1-caleb.connolly@linaro.org/
 
-but it happens only when no USB device is connected at usb@fd840000 
-(upper right port). if some device is connected, it doesn't happen, 
-device is recognized properly.
+---
+Caleb Connolly (7):
+      clk/qcom: add initial clock driver for sc7280
+      dts: qcs6490-rb3gen2-u-boot: add override dtsi
+      dts: qcs6490-rb3gen2-u-boot: USB host mode
+      iommu: qcom-smmu: add sc7280-smmu-500 compatible
+      qcom_defconfig: enable SC7280 clocks
+      configs: add qcm6490_defconfig
+      doc: board/qualcomm: document rb3gen2 building/flashing
 
-if it's okay,
+ arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi |  28 +++++++
+ configs/qcm6490_defconfig                |  18 +++++
+ configs/qcom_defconfig                   |   1 +
+ doc/board/qualcomm/rb3gen2.rst           |  53 +++++++++++++
+ drivers/clk/qcom/Kconfig                 |   8 ++
+ drivers/clk/qcom/Makefile                |   1 +
+ drivers/clk/qcom/clock-qcom.h            |   1 +
+ drivers/clk/qcom/clock-sc7280.c          | 132 +++++++++++++++++++++++++++++++
+ drivers/iommu/qcom-hyp-smmu.c            |   1 +
+ 9 files changed, 243 insertions(+)
+---
+change-id: 20240809-b4-rb3gen2-87bd866abde1
+base-commit: 428e11e6e36aa0a13f85961c64af24751c4d1bb7
 
-Tested-by: FUKAUMI Naoki <naoki@radxa.com>
+// Caleb (they/them)
 
-
-Best regards,
-
---
-FUKAUMI Naoki
-Radxa Computer (Shenzhen) Co., Ltd.
-
-> ---
-> v6:
-> 	update dts to turn LED up in U-Boot
-> v5:
-> 	fixed board info
-> v4:
-> 	fixed typo in commit-msg
-> 	moved maintainers record to file for rk3568 boards
-> 	renamed from ROCK 3 Model C to ROCK3C
-> v3:
-> 	add suggested by Jonas Karlman <jonas@kwiboo.se> in
-> 	https://lore.kernel.org/all/bbb81dd1-e318-423d-8258-db7556ce6850@kwiboo.se/
-> v2:
-> 	rebase to updated upstream dts
-> ---
->   arch/arm/dts/rk3566-rock-3c-u-boot.dtsi | 18 +++++
->   board/rockchip/evb_rk3568/MAINTAINERS   |  7 ++
->   configs/rock-3c-rk3566_defconfig        | 97 +++++++++++++++++++++++++
->   doc/board/rockchip/rockchip.rst         |  1 +
->   4 files changed, 123 insertions(+)
->   create mode 100644 arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
->   create mode 100644 configs/rock-3c-rk3566_defconfig
-> 
-> diff --git a/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi b/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
-> new file mode 100644
-> index 00000000000..f4124aa48fc
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
-> @@ -0,0 +1,18 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +
-> +#include "rk356x-u-boot.dtsi"
-> +
-> +&sfc {
-> +	flash@0 {
-> +		bootph-pre-ram;
-> +		bootph-some-ram;
-> +	};
-> +};
-> +
-> +/ {
-> +	leds {
-> +		led-0 {
-> +			default-state = "on";
-> +		};
-> +	};
-> +};
-> diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/evb_rk3568/MAINTAINERS
-> index e5b0986ead9..ba4884db8e1 100644
-> --- a/board/rockchip/evb_rk3568/MAINTAINERS
-> +++ b/board/rockchip/evb_rk3568/MAINTAINERS
-> @@ -69,3 +69,10 @@ S:	Maintained
->   F:	configs/rock-3a-rk3568_defconfig
->   F:	arch/arm/dts/rk3568-rock-3a.dts
->   F:	arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> +
-> +ROCK-3C
-> +M:	Jonas Karlman <jonas@kwiboo.se>
-> +M:	Maxim Moskalets <maximmosk4@gmail.com>
-> +S:	Maintained
-> +F:	arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
-> +F:	configs/rock-3c-rk3566_defconfig
-> diff --git a/configs/rock-3c-rk3566_defconfig b/configs/rock-3c-rk3566_defconfig
-> new file mode 100644
-> index 00000000000..f44b202c8c3
-> --- /dev/null
-> +++ b/configs/rock-3c-rk3566_defconfig
-> @@ -0,0 +1,97 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_SF_DEFAULT_SPEED=24000000
-> +CONFIG_SF_DEFAULT_MODE=0x2000
-> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3566-rock-3c"
-> +CONFIG_ROCKCHIP_RK3568=y
-> +CONFIG_ROCKCHIP_SPI_IMAGE=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_DEBUG_UART_BASE=0xFE660000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
-> +CONFIG_SPL_SPI=y
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_PCI=y
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_AHCI=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3566-rock-3c.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_SPI_LOAD=y
-> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
-> +CONFIG_SPL_ATF=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PCI=y
-> +CONFIG_CMD_POWEROFF=y
-> +CONFIG_CMD_USB=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +CONFIG_CMD_PMIC=y
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_SCSI_AHCI=y
-> +CONFIG_AHCI_PCI=y
-> +CONFIG_SPL_CLK=y
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_LED=y
-> +CONFIG_LED_GPIO=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_SF_DEFAULT_BUS=4
-> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-> +CONFIG_SPI_FLASH_GIGADEVICE=y
-> +CONFIG_SPI_FLASH_MACRONIX=y
-> +CONFIG_SPI_FLASH_WINBOND=y
-> +CONFIG_SPI_FLASH_XTX=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-> +CONFIG_NVME_PCI=y
-> +CONFIG_PCIE_DW_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_PMIC_RK8XX=y
-> +CONFIG_REGULATOR_RK8XX=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_SCSI=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_ROCKCHIP_SFC=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_ERRNO_STR=y
-> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-> index bedc52e03e2..60357af6caa 100644
-> --- a/doc/board/rockchip/rockchip.rst
-> +++ b/doc/board/rockchip/rockchip.rst
-> @@ -105,6 +105,7 @@ List of mainline supported Rockchip boards:
->        - Pine64 SOQuartz on Model A (soquartz-model-a-rk3566)
->        - Powkiddy X55 (powkiddy-x55-rk3566)
->        - Radxa CM3 IO Board (radxa-cm3-io-rk3566)
-> +     - Radxa ROCK 3C (rock-3c-rk3566)
->   
->   * rk3568
->        - Rockchip Evb-RK3568 (evb-rk3568)
