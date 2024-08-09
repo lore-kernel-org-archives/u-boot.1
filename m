@@ -4,48 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F8E5C52D71
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 09:55:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A5CBC3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 09:55:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EEA988BF0;
-	Fri,  9 Aug 2024 11:55:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E8DF888C04;
+	Fri,  9 Aug 2024 11:55:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nod.at
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02EF9887B4; Fri,  9 Aug 2024 11:55:05 +0200 (CEST)
+ id C46BB88BD9; Fri,  9 Aug 2024 11:55:06 +0200 (CEST)
 Received: from lithops.sigma-star.at (lithops.sigma-star.at [195.201.40.130])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A31A885B3
+ by phobos.denx.de (Postfix) with ESMTPS id 54A0688BD9
  for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 11:55:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=nod.at
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=richard@nod.at
 Received: from localhost (localhost [127.0.0.1])
- by lithops.sigma-star.at (Postfix) with ESMTP id 9FB1761966A0;
- Fri,  9 Aug 2024 11:55:02 +0200 (CEST)
+ by lithops.sigma-star.at (Postfix) with ESMTP id 2CFF16195FD7;
+ Fri,  9 Aug 2024 11:55:03 +0200 (CEST)
 Received: from lithops.sigma-star.at ([127.0.0.1])
  by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id gSz17Hbb66AH; Fri,  9 Aug 2024 11:55:02 +0200 (CEST)
+ with ESMTP id OhiKQgnmC4TX; Fri,  9 Aug 2024 11:55:02 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by lithops.sigma-star.at (Postfix) with ESMTP id 1050C6196A56;
+ by lithops.sigma-star.at (Postfix) with ESMTP id A46C061966C1;
  Fri,  9 Aug 2024 11:55:02 +0200 (CEST)
 Received: from lithops.sigma-star.at ([127.0.0.1])
  by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id o-2qfNQl8Mhn; Fri,  9 Aug 2024 11:55:01 +0200 (CEST)
+ with ESMTP id A1FFsfzv_2xc; Fri,  9 Aug 2024 11:55:02 +0200 (CEST)
 Received: from foxxylove.corp.sigma-star.at (unknown [82.150.214.1])
- by lithops.sigma-star.at (Postfix) with ESMTPSA id AF2C361966A0;
- Fri,  9 Aug 2024 11:55:01 +0200 (CEST)
+ by lithops.sigma-star.at (Postfix) with ESMTPSA id 404C664D5E3D;
+ Fri,  9 Aug 2024 11:55:02 +0200 (CEST)
 From: Richard Weinberger <richard@nod.at>
 To: u-boot@lists.denx.de
 Cc: sjg@chromium.org, Jixiong.Hu@mediatek.com, marek.vasut+renesas@mailbox.org,
  patrick.delaunay@foss.st.com, ilias.apalodimas@linaro.org,
  xypron.glpk@gmx.de, seanga2@gmail.com, trini@konsulko.com,
  upstream+uboot@sigma-star.at, Richard Weinberger <richard@nod.at>
-Subject: [PATCH v2 1/3] ext4: Fix integer overflow in ext4fs_read_symlink()
-Date: Fri,  9 Aug 2024 11:54:28 +0200
-Message-Id: <20240809095430.3656-1-richard@nod.at>
+Subject: [PATCH v2 3/3] ext4: Fix zalloc()
+Date: Fri,  9 Aug 2024 11:54:30 +0200
+Message-Id: <20240809095430.3656-3-richard@nod.at>
 X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20240809095430.3656-1-richard@nod.at>
+References: <20240809095430.3656-1-richard@nod.at>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -64,48 +66,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-While zalloc() takes a size_t type, adding 1 to the le32 variable
-will overflow.
-A carefully crafted ext4 filesystem can exhibit an inode size of 0xffffff=
-ff
-and as consequence zalloc() will do a zero allocation.
+Currently, zalloc() calls uncondtionally memset(),
+if the allocation failes, memset() will write to a null pointer.
 
-Later in the function the inode size is again used for copying data.
-So an attacker can overwrite memory.
-
-Avoid the overflow by using the __builtin_add_overflow() helper.
+Fix by using kzalloc().
 
 Signed-off-by: Richard Weinberger <richard@nod.at>
 ---
- fs/ext4/ext4_common.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ fs/ext4/ext4_common.h | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
-index 52152a2295..36999b608f 100644
---- a/fs/ext4/ext4_common.c
-+++ b/fs/ext4/ext4_common.c
-@@ -2181,13 +2181,18 @@ static char *ext4fs_read_symlink(struct ext2fs_no=
-de *node)
- 	struct ext2fs_node *diro =3D node;
- 	int status;
- 	loff_t actread;
-+	size_t alloc_size;
+diff --git a/fs/ext4/ext4_common.h b/fs/ext4/ext4_common.h
+index 84500e990a..346752092b 100644
+--- a/fs/ext4/ext4_common.h
++++ b/fs/ext4/ext4_common.h
+@@ -24,6 +24,7 @@
+ #include <ext4fs.h>
+ #include <malloc.h>
+ #include <asm/cache.h>
++#include <linux/compat.h>
+ #include <linux/errno.h>
+ #if defined(CONFIG_EXT4_WRITE)
+ #include "ext4_journal.h"
+@@ -43,9 +44,7 @@
 =20
- 	if (!diro->inode_read) {
- 		status =3D ext4fs_read_inode(diro->data, diro->ino, &diro->inode);
- 		if (status =3D=3D 0)
- 			return NULL;
- 	}
--	symlink =3D zalloc(le32_to_cpu(diro->inode.size) + 1);
-+
-+	if (__builtin_add_overflow(le32_to_cpu(diro->inode.size), 1, &alloc_siz=
-e))
-+		return NULL;
-+
-+	symlink =3D zalloc(alloc_size);
- 	if (!symlink)
- 		return NULL;
+ static inline void *zalloc(size_t size)
+ {
+-	void *p =3D memalign(ARCH_DMA_MINALIGN, size);
+-	memset(p, 0, size);
+-	return p;
++	return kzalloc(size, 0);
+ }
 =20
+ int ext4fs_read_inode(struct ext2_data *data, int ino,
 --=20
 2.35.3
 
