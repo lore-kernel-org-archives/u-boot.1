@@ -4,81 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D199C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 22:02:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB525C52D7C
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 22:03:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1317F88C4B;
-	Sat, 10 Aug 2024 00:02:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 703AB88C39;
+	Sat, 10 Aug 2024 00:02:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BPXXP05A";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DoGNTN2t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE4C78641A; Sat, 10 Aug 2024 00:02:50 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 8695488C39; Sat, 10 Aug 2024 00:02:56 +0200 (CEST)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBCB188C39
- for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 00:02:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1960A8641A
+ for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 00:02:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-261112c303bso1874442fac.1
- for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 15:02:48 -0700 (PDT)
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-3db145c8010so1666506b6e.3
+ for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 15:02:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1723240967; x=1723845767; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1723240973; x=1723845773; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KZ7vijAnU7x8L+En8NZP5g7xjCiGPul6fXPRtK1D174=;
- b=BPXXP05AeQg7os2c/dMXmaE9nTipoIrz0ypJDgrafW9sBQowiRVcNNgSDr9MUcqjFL
- HqYdiBFuhwgKfrmhCllCNfoM/bv4MFxDOPLYOpNoL2cVfHYLyHryoBCtwxiNyhLTDo9W
- DqPcWNlFMFSlSyM92rwds9jmz0fUFVGHAtN4E=
+ bh=uXv8tw8uIm5Mm2GQsrNCjq/1qEv0QnhScQ40sWBxg8s=;
+ b=DoGNTN2tN0KFgn3Kngu96quRtdZZl5aj5mwpnsNomH91GPVsZxoSCt1GP8QA2eMo3S
+ qeVwF0lrWoJPadaEMqMaBGrXF8KldYN27ixBbXaz1AmkeE4URRLO4dG96FAMKOvB+DzQ
+ pPBk2+m0j5Gory44hyDyr1IkWhy0C88wxGkn0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723240967; x=1723845767;
+ d=1e100.net; s=20230601; t=1723240973; x=1723845773;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KZ7vijAnU7x8L+En8NZP5g7xjCiGPul6fXPRtK1D174=;
- b=XiOWHEo/Pz9KQrX03EDoxHjF6b2OfhyOcpVhKSkCc9WCSDP3zHV5dzP6Bph5Im2nId
- OnasPlM1P77mTeS77YZGkAg0e3g8uVAcgoKNVjLNkoLGgpCeTCzJdpFBQQYTcWMNTEO3
- iYOVeyn43mltj89M48RMkPjf9JpyMA6i/ATEswq8u286jBmLzWHgAWXA8ICi9aGKkcRC
- hheCWS7hRaym/CxkNUSWr+nQAeTXp6VB9ueUPcqB3iBRs6v54uy2POm8BOjHwfw/zM0S
- msmek0gDw15M+gl6bO/tgH8iksr0N3sqPQxve+49s1+ueO2IAXBS4FCddFV5na/jBuH9
- TokA==
+ bh=uXv8tw8uIm5Mm2GQsrNCjq/1qEv0QnhScQ40sWBxg8s=;
+ b=JJR2CPRjxAO9RTIC/7EpQoxFG9AwvJIQu7TpicVTC5it9G+nVUPbupF5f2RbOpLSkG
+ dH0L3sw0lznC1HhAW8j8lGlceAvUk77kh1zRBRY2QrqKWE2G9jBE0Mel0BmwtGEAUSIx
+ 20c8oKlsH8Pnt6LjcFmkEaHGQM7Lu8EPneIo4xdkwxCIuGRPBkSkRHnFWATMR4xCPnap
+ zKcu7VAiL+ClF54JyQVcmppQXABF1kASf5IkkWjRCv/YMeGg40qDeQmRdm39aTK9vYuW
+ Nrd/ICldH545wGfkRdvNyWQ6bDFFvhEvLmPXaqSogBwyr2GkszhjeY2kiVseBzw/XxuN
+ Vj8w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWyjuKIpEtv870OQqpqyDF3fZX1n8WZBiygIitQ7JHgMEzdcmpk+1PkOywdlj4aFquGb4LkiCj/TKnFF26WR8LFCGJ9iw==
-X-Gm-Message-State: AOJu0YxYWFjVzMfAAYOA/HhSZeCAmO1oZBtgiGIxkCaMmjKwdkn/vxUc
- +P5QzF2klyD/zePwn9M+ad7NRG6Wtgqw3u6dMuVbU8DOS++nB70BvQydm08xNT8=
-X-Google-Smtp-Source: AGHT+IEOrRMI+lnp2JqQOgr5DOSoR6jDrDiYUR9chrN43bycXvlq0L5xs5+9WXDNfVsv5YoOOcCJRA==
-X-Received: by 2002:a05:6870:e38a:b0:25e:d62:f297 with SMTP id
- 586e51a60fabf-26c62ff3542mr3899622fac.45.1723240967433; 
- Fri, 09 Aug 2024 15:02:47 -0700 (PDT)
+ AJvYcCVJ57CRTy7uB6+HNIoTGYuwv9n6uPAKEwh8LBcp5G6+r5f18ma6XCnEp11vxJA5jz8CF9paRttJVtr++rxJe2Cm546DuA==
+X-Gm-Message-State: AOJu0Yzd8ZOzP2IOW+vharZ0j1gVmnAuCMqyeiqm6v8RTznAOzf+oaO4
+ bHKidVxiSHOCBxWX8NJouN0nitsyii6aDvZob3wMzEq4D6WZ3Apja4Ylq1TKU2s=
+X-Google-Smtp-Source: AGHT+IH7NmpBP670OZc2rv3XV8WO0f5rDAcBWRbOChVjB8guF1MWEnhvlFDeFInw+ZnW4ufR8VB3zQ==
+X-Received: by 2002:a05:6870:148e:b0:260:faa1:4453 with SMTP id
+ 586e51a60fabf-26c62c42c27mr3837711fac.8.1723240972835; 
+ Fri, 09 Aug 2024 15:02:52 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-191-8-236.totalplay.net.
  [187.191.8.236]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70c7b83c7a5sm182464a34.48.2024.08.09.15.02.46
+ 46e09a7af769-70c7b81db6fsm182189a34.25.2024.08.09.15.02.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Aug 2024 15:02:46 -0700 (PDT)
-Date: Fri, 9 Aug 2024 16:02:44 -0600
+ Fri, 09 Aug 2024 15:02:52 -0700 (PDT)
+Date: Fri, 9 Aug 2024 16:02:50 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Anand Moon <linux.amoon@gmail.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/1] disk: add TegraPT support
-Message-ID: <20240809220244.GA1626301@bill-the-cat>
-References: <20240807121024.11318-1-clamor95@gmail.com>
- <20240807121024.11318-2-clamor95@gmail.com>
- <0C2B63EE-A95F-424A-9143-6A0C2164F666@gmx.de>
- <CAPVz0n1CvhkCCNDPSrPvUweBTzTFEUDFHcAP5B7Wno8RefKpPA@mail.gmail.com>
+To: Richard Weinberger <richard@sigma-star.at>
+Cc: Richard Weinberger <richard@nod.at>, upstream@sigma-star.at,
+ sjg@chromium.org, Jixiong.Hu@mediatek.com,
+ marek.vasut+renesas@mailbox.org, patrick.delaunay@foss.st.com,
+ ilias.apalodimas@linaro.org, seanga2@gmail.com,
+ upstream+uboot@sigma-star.at, u-boot@lists.denx.de,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH v2 1/3] ext4: Fix integer overflow in ext4fs_read_symlink()
+Message-ID: <20240809220250.GB1626301@bill-the-cat>
+References: <20240809095430.3656-1-richard@nod.at>
+ <04ba0220-864c-40cf-bdc4-73ae6137b704@gmx.de>
+ <39167592.RpJgFE2GTS@somecomputer>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="GfaXJ/nqGh62j9lC"
+ protocol="application/pgp-signature"; boundary="yumx3C/l3J1mVCP/"
 Content-Disposition: inline
-In-Reply-To: <CAPVz0n1CvhkCCNDPSrPvUweBTzTFEUDFHcAP5B7Wno8RefKpPA@mail.gmail.com>
+In-Reply-To: <39167592.RpJgFE2GTS@somecomputer>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,59 +99,83 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---GfaXJ/nqGh62j9lC
-Content-Type: text/plain; charset=utf-8
+--yumx3C/l3J1mVCP/
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 09, 2024 at 08:57:03AM +0300, Svyatoslav Ryhel wrote:
-> =D0=BF=D1=82, 9 =D1=81=D0=B5=D1=80=D0=BF. 2024=E2=80=AF=D1=80. =D0=BE 08:=
-49 Heinrich Schuchardt <xypron.glpk@gmx.de> =D0=BF=D0=B8=D1=88=D0=B5:
-> >
-> >
-> >
-> > Am 7. August 2024 14:10:24 MESZ schrieb Svyatoslav Ryhel <clamor95@gmai=
-l.com>:
-> > >TegraPT is compatible with EFI part but it can't pass Protective MBR c=
-heck.
-> > >Skip this check if CONFIG_TEGRA_PARTITION is enabled, storage uclass i=
-s MMC
-> > >and devnum is 0. Note, eMMC on supported devices MUST be aliased to mm=
-c0.
-> >
-> > Why wouldn't you use U-Boot's gpt command to fix the non-conformant par=
-tition table?
-> >
+On Fri, Aug 09, 2024 at 06:29:34PM +0200, Richard Weinberger wrote:
+> Heinrich,
 >=20
-> I would love to, but I am forced to use TegraPT and DON'T modify it.
-> Tegra114 bootloader is RSA signed and there is no possible way to
-> replace it with open source one unless vendor allows this. SO I am
-> stuck with vendor bootloader to chainload from which enforces TegraPT
-> as well. Modification of existing partition table can irreversibly
-> brick the device.
+> Am Freitag, 9. August 2024, 18:13:27 CEST schrieb 'Heinrich Schuchardt' v=
+ia upstream:
+> > Thank you for pointing at the problematic code.
+> >=20
+> > You are calling __builtin_add_overflow(int, int, size_t *).
+> >=20
+> > __builtin_add_overflow() is not defined in the C-standard.
+> >=20
+> > Is there any well defined behavior for this on systems where size_t has
+> > more bits than int?
+>=20
+> https://gcc.gnu.org/onlinedocs/gcc/Integer-Overflow-Builtins.html says:
+>=20
+> Built-in Function: bool __builtin_add_overflow (type1 a, type2 b, type3 *=
+res)
+>=20
+> These built-in functions promote the first two operands into infinite pre=
+cision signed type and perform addition on those promoted operands.
+> The result is then cast to the type the third pointer argument points to =
+and stored there.
+> If the stored result is equal to the infinite precision result, the built=
+-in functions return false, otherwise they return true.
+> As the addition is performed in infinite signed precision, these built-in=
+ functions have fully defined behavior for all argument values.=20
+>=20
+> So, I don't really see a problem here.
+>=20
+> > I could imagine implementations just copying an int to the first 32 bits
+> > of alloc_size and leaving the other bits untouched.
+> >=20
+> > Hopefully your C-compiler simply refuses to compile this code.
+> >=20
+> > I would prefer to stick to standard C:
+> >=20
+> > alloc_size =3D le32_to_cpu(diro->inode.size) + 1UL;
+> > if (!alloc_size)
+> > 	return NULL;
+> >=20
+> > Here an overflow can only occur on 32bit systems.
+>=20
+> In this specific case we could avoid the builtis, yes.
+> But I prefer using __builtin_add_overflow() as it offers a generic
+> and bullet prove mechanism to avoid these kind of bugs.
+>=20
+> It's not that they are something new and funky.
+> Other projects use them since ages.
 
-Can we please incorporate some of this information to the help text, so
-it's clear what the use case is? Thanks.
+I'm fine with using this buildin, it's widely enough implemented, for
+good reason.
 
 --=20
 Tom
 
---GfaXJ/nqGh62j9lC
+--yumx3C/l3J1mVCP/
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAma2kgQACgkQFHw5/5Y0
-tyyLmAv+PSz15qqaHRPpca8m+3draeC71WlgTiAqLktfh06LNmYqPbZ2/QxifQO5
-xw44Lt5H2r1sgKDEfTNLF36mlZYo9MdNHAiaJ4djDVTauZrS5T9wGkmDfBqo8W5M
-sVkdr4J3+zD7avhPSwVSz9csUnMowaMCEukAHAtnPhM2tMk/qoBnQxDK2Qjpm+O9
-JzJumt79sycCB6894GjrdogeViErySuW/eudKnk6Y5Snzk9DDMx+iR6Zzdk5dT3d
-joCvDOwieivb1zewGwEj2zH3CgdCvhtVz1xCkFfzJJO5mYMR9qc+vQucHkoWsmx2
-uMFHFOOyswcG5ZLSIJY09seSkiNQGPsz0XFDxvYGgJYNF8gm1uRftkMBUhzbEN6R
-lkjxj/ze9vRl0YSyhLVPzpOM0GoQdGxq14Tr9XesRFNQajyeBxvhnz1bsiZkAD+f
-YdtEg02vaTzkl1sHRO80YGoDAx2mgU8HYny7KWTT1pQXfqafbiTrkrnIuC2cuNfb
-YbYUlh6l
-=d4Iu
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAma2kgoACgkQFHw5/5Y0
+tyzB3gv8DG2g5TePuu3QcmYf03RpiB/5tnapbY1/+yXc0MzMSnUHG++o3x/7xuzg
+Y97QJhVPZjHP95yQamq6S0v5NJFE4xEPsccP3C1FrKYdLW78P5zOyNdHpRCDtV4x
+mFFin0lPYsZVgbjVst1gJjl8M2XdtRmNJa+TFde5jyvNvPxXV6Sj76k8cZ0oo36S
+2Y7Mas3nlZOZrVy0NLalr7LP/Rv682ODFE5zgkZkYg8sHRycaGVmH3BQS5ccYZ21
+UEgpNtTmP2MPHhd/S6kEBiYxtoPtGchVzUPDI6kiabeXGTKFD0n7H0bkT4LloOwA
+avZrz3Ou+sXlMwv3zuatI67hRT+q4aBtdF35S6JMF3hHkHVCSHOyNk6zQZ9xsd1f
+VqwruZjoCv2+OjxDXyuLzs3UyMr49UGUxWgtuIukJxcvfqIvA5ktnOPWiH0FpEjL
+NpoOQmG7Fkip1sFxmMs5DdthIbZApKb1FewUNl6Ao7L00SnoDO1UR8KaSswvjpWK
+Lv8wDt5y
+=bTCJ
 -----END PGP SIGNATURE-----
 
---GfaXJ/nqGh62j9lC--
+--yumx3C/l3J1mVCP/--
