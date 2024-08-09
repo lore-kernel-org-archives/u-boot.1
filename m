@@ -4,81 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD524C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 06:18:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DA7AC3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 08:25:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F0B588732;
-	Fri,  9 Aug 2024 08:18:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 26FED8892F;
+	Fri,  9 Aug 2024 10:25:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Gv6x1ES5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="v6Ux8/k6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88ED988770; Fri,  9 Aug 2024 08:18:57 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9603488581; Fri,  9 Aug 2024 10:25:08 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14E7C886FD
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 08:18:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1265D889B8
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 10:25:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1723184329; x=1723789129; i=xypron.glpk@gmx.de;
- bh=jHT0UxIxmdCNgvDHpjQ4vGAjFoZ0YhDQWX4cC10fRik=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=Gv6x1ES5Po+nJWpJCef+1QdlMxasHIbo9ny8xXla0oGKFKvFGG23POMvcdeuXenA
- Wxh8bxwkUD4pXK+oCRPoHOrV1lK/Vwegs2i7cB+uBzOTSzzBocRmF9RczS/W+Smq/
- LwHnMglzR2Wew8SUJCN2SCSNYIH3zDZaqtcpztf7vCFz4XTphIaRK6fqa4SJtZAjf
- vnPPxZe50WEP09vgiYtXktWvDZdfDsdKvWL/2En9MMF/5yMby+D8GOD+IHElOB2h2
- 0AZCjeFzrs7897F7LJais8qSVvgPHoZmSh0k2OkFhhFiY2Kw4Jzcp8L0rdPnccF14
- wwsKNk7X2v5QwXI2mw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([46.114.164.168]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mt757-1sMZST2aU5-00uOVc; Fri, 09
- Aug 2024 08:18:49 +0200
-Date: Fri, 09 Aug 2024 08:18:43 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Caleb Connolly <caleb.connolly@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Anand Moon <linux.amoon@gmail.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Johan Jonker <jbx6244@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-CC: u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: Re: [PATCH] cmd: add a fetch utility
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20240808163153.2069650-1-caleb.connolly@linaro.org>
-References: <20240808163153.2069650-1-caleb.connolly@linaro.org>
-Message-ID: <0194AFA0-5D56-46F8-A385-D23AF7CDDD43@gmx.de>
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5a156556fb4so2169756a12.3
+ for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 01:25:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1723191905; x=1723796705; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=bz4kf34hMMAbbP8SbPReKJqiCmfw6Qvf+hQA2Ft3LkE=;
+ b=v6Ux8/k6IT0NOIrNBOAolols4CtzBhzaK0kaqf61UdNMOpanEoUybt2m0+Ord3VeG5
+ rCWOX5dOGYLqzxu/A2dFm7Jt011eCa0CJ7RDPX4w0l7BMAs6amiXiUeySTfh5T6DBDkZ
+ JNMyrkDZQiQNkEu+gX+u7j5LZHA9LmeFi3C06EB7yCPlncxmz+gHqXezRDb8SveJV1q3
+ 2Sdr43ARszGJpaZTkPGyyrFRN6EzWFQE2V3f/1V38ZVt4B3uAXougGlA+R2Tfezs2Ylj
+ z6/2J3nV1RB1TAyfUY0bvxWeIjMcFyLgBOs+ey9EQawz/fHKi7lwLDU0xb9HmpNNHVHL
+ G35Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723191905; x=1723796705;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bz4kf34hMMAbbP8SbPReKJqiCmfw6Qvf+hQA2Ft3LkE=;
+ b=P1CtVEj2UrMaHKsPiL1bbBF14uw3HUF1TobF+lLcjHbTLcCHNwlZOGC/BmniGXLw/V
+ UL4g/tVKuMPNyqHg2TBlEzYzh17V7e8ra8AaABhHjAJcLKiD5PDw/0vLsMSFr9uqhSnQ
+ L7Ou+GhL4ENf+hTNF6heIB8ODdM9MJ3z/DKJ/bHWcCoNTt0sjmJUk0YxMvlUApLBVq5H
+ PO1vJTtDkLfLupc0gMu+1tv8kAUEk3FdH4O3Cebaa9gNXwBYNLFQoLNqdoyEfgTvKjuw
+ XOlo2qmYDEiW2zTYVvXfqX6WQH4xi0Ww6+6uuhTVAGZOoVCvCGVvYpcBpoDLNN2Z9fPI
+ oBGA==
+X-Gm-Message-State: AOJu0YzETPmbmilct1WxWRw7S6gPbcJ2gNx7BD/ts4ZgZuADLmmQolcc
+ pcPXSwkdbsAzHWI586BX+czjtLdfog/HhicqqRzAkbDIRFBY+QLYV/tXCU7UFxKT1Q6DZA4/LDJ
+ V87FblhVvUYdNd/dArkg4b34Xc6UpnbzYG0kKdw==
+X-Google-Smtp-Source: AGHT+IFqRldML3GkRJrdZRGwKYzYTI8NS2zQNNsours1QEArSL0LSEJ8h9RvLqE40eGbyDQMkYnJK7WopT63XYfdkZ0=
+X-Received: by 2002:a05:6402:1d52:b0:5a2:c1b1:4cc with SMTP id
+ 4fb4d7f45d1cf-5bd0a617c06mr725963a12.26.1723191905246; Fri, 09 Aug 2024
+ 01:25:05 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:9z++ORWBYYhhDn9Wzr3udnwlpuvoWtQ8j5rc+9/uNUslFmyJ8wr
- CYrbNuOKye6EcqPFFugXbn9dvIfgP2a219G9tLC28rQt4GQemm+MS83mm1C/htby6SejiFu
- CB90fqcjh1StkPL57NjTl/gt2qEwfuwNjugrzWo/Djxm+kD0A4OF3Sm9I2J2j/FBOWIQrk8
- CoL3qpiqsqsnHTg5XP5dA==
-UI-OutboundReport: notjunk:1;M01:P0:Tyv/0Y8O6bc=;veBsTmtsRRI5icuDb3SEhGCjpD6
- jicGne8wQlZD+S/61IbcfXyG4lXC+6s0m5kvCupnfvBLnZulW/34YAnB0cyQzYyiudCO0UzW5
- 74zkqJUo/6dCmQfuoxqofLjx4wby5kKEYy97TkSmmsLOPBEMilW+gy0HDfi+KtEpXBoAioqnF
- 23qlPS2sJ8OvPH/Rpi9Z4zC3+6m4oLS8BIoSbIbL4fmeiEGx18ceDcUKA2nHHkPtGhloS5rpS
- mwkBjd6B2VWBDo7IJmV2jAzUkALe+0coS2+BYRzESiXYTsgERZ+pz0mRhSzdDnJp0vV/4RFwf
- ixoK43u8poAuSO6v7Wim9folMCVSRC19W33IIjVjqRRz5R3rZbYLJ+eXRnNM8Y2GIr9WJkK3g
- o/s9/wvOuQ0rHeyEzIhKitq12bxct4bj9WrMpAni+bb/ZrB/wtatuRShiFYFZbcV4WJi9ZLAD
- YLnjIU8Sg2oWyIxSZ1VZF520aQerdm/5yPpNQ4Ksfagt2n/sFQaJcdVtZIMPBdZ2lTp2AQ/zD
- CaF0YazaLIXHJaXRhhJHudDeZMCyhrYQxDH3lWFUB7PevuD9inn9FTUjeTne4uGHYQ9rokkZo
- TUCpXPs6MX5Gw84h5c5W5H9l1R9CyztCB2RF36EGyt+/jwIUFtIQ6JwQO5afYTKBsnPtgRf2e
- 7C9+CgzkFyPXrHWu7kqpJxHR0+OZUEqkU3goRurMeorYb//KZnJoqgxo5L/MZSDuAjZ2n7Tlb
- Ra107ceBBBYpz43lLkHM8y/zsAzLyeWoJOvI+9t0ITU1cVSedHiGFw3JzOKH270/xsvHNW5eL
- YgXRHzv5o7CO/IjxhP4O29rZz0NClksZEAAHBPIafqsGEUopGq6SHyrkco5sWWlNTXm9wRikI
- qFLyWAXfE/ops8A==
+References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
+ <20240724060224.3071065-24-sughosh.ganu@linaro.org>
+ <CAFLszTibBKMmPWjApmRUxRLWj11=Nf5NTz7+bGP+n5guYeFqYw@mail.gmail.com>
+ <CADg8p94pVzK4AaBsCVg4PoQmbBHMKTdzB2MiBxuOzA6=Um3kmg@mail.gmail.com>
+ <CAFLszTjRMsOsxKLdhbgH3yY8Rv6yR-r3uoHycjuGh+zTAKqsZA@mail.gmail.com>
+ <CADg8p96wT2tfXU8o+M+8CuoyP1YF4OwKdg1ZS+2rkZzknMKGdA@mail.gmail.com>
+ <CAFLszTjShbhdrjz-p37LOkZqii2Nbdupm0BHCkGqGAAQ5+RNxg@mail.gmail.com>
+ <CADg8p97+R_o0ph2ycceDp2rsxC0bD8mhU+Y=BN6=tvDOUEvFWw@mail.gmail.com>
+ <CAFLszTgCVfTE7J8hPbosck2VYXaG6W9XMA=XyQJCETkThq+YmQ@mail.gmail.com>
+In-Reply-To: <CAFLszTgCVfTE7J8hPbosck2VYXaG6W9XMA=XyQJCETkThq+YmQ@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Fri, 9 Aug 2024 13:54:53 +0530
+Message-ID: <CADg8p95qdLUWSyMQM3uQ+szPHoe2H=SxvdEczyNCFWG2ZdK5JQ@mail.gmail.com>
+Subject: Re: [PATCH 23/40] lmb: add a flags parameter to the API's
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
+ Max Filippov <jcmvbkbc@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,344 +101,247 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-Am 8=2E August 2024 18:24:24 MESZ schrieb Caleb Connolly <caleb=2Econnolly=
-@linaro=2Eorg>:
->While U-Boot does a pretty good job at printing information at startup
->about what hardware it's running on, it can be hard to take pretty
->pictures of this to show off on the internet (by far the most
->important aspect of porting a device in 2024!)=2E
+On Thu, 8 Aug 2024 at 19:58, Simon Glass <sjg@chromium.org> wrote:
 >
->Add a small utility "ufetch" for displaying some information about U-Boot=
- and
->the hardware it's running on in a similar fashion to the popular neofetch=
- tool
->for *nix's [1]=2E
+> Hi Sughosh,
 >
->While the output is meant to be useful, it should also be pleasing to loo=
-k at
->and look good in screenshots=2E The ufetch command brings this to U-Boot,
->featuring a colorful ASCII art version of the U-Boot logo and a fancy lay=
-out=2E
+> On Wed, 7 Aug 2024 at 00:32, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> >
+> > On Wed, 7 Aug 2024 at 03:21, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Sughosh,
+> > >
+> > > On Mon, 5 Aug 2024 at 05:55, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > >
+> > > > On Mon, 29 Jul 2024 at 20:56, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > Hi Sughosh,
+> > > > >
+> > > > > On Mon, 29 Jul 2024 at 02:40, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > > > >
+> > > > > > On Fri, 26 Jul 2024 at 05:02, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > >
+> > > > > > > Hi Sughosh,
+> > > > > > >
+> > > > > > > On Wed, 24 Jul 2024 at 00:04, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > > > > > >
+> > > > > > > > Add a flags parameter to the LMB API functions. The parameter can then
+> > > > > > > > be used to pass any other type of reservations or allocations needed
+> > > > > > > > by the callers. These will be used in a subsequent set of changes for
+> > > > > > > > allocation requests coming from the EFI subsystem.
+> > > > > > > >
+> > > > > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > > > > > ---
+> > > > > > > > Changes since rfc: New patch
+> > > > > > > >
+> > > > > > > >  arch/arm/mach-apple/board.c       |  17 ++--
+> > > > > > > >  arch/arm/mach-snapdragon/board.c  |   2 +-
+> > > > > > > >  arch/arm/mach-stm32mp/dram_init.c |   4 +-
+> > > > > > > >  arch/powerpc/cpu/mpc85xx/mp.c     |   2 +-
+> > > > > > > >  arch/powerpc/lib/bootm.c          |   2 +-
+> > > > > > > >  board/xilinx/common/board.c       |   4 +-
+> > > > > > > >  boot/bootm.c                      |   5 +-
+> > > > > > > >  boot/image-board.c                |  15 ++-
+> > > > > > > >  boot/image-fdt.c                  |  15 +--
+> > > > > > > >  cmd/booti.c                       |   2 +-
+> > > > > > > >  cmd/bootz.c                       |   2 +-
+> > > > > > > >  cmd/load.c                        |   4 +-
+> > > > > > > >  drivers/iommu/apple_dart.c        |   6 +-
+> > > > > > > >  drivers/iommu/sandbox_iommu.c     |   6 +-
+> > > > > > > >  fs/fs.c                           |   2 +-
+> > > > > > > >  include/lmb.h                     |  23 ++---
+> > > > > > > >  lib/lmb.c                         |  48 ++++------
+> > > > > > > >  test/lib/lmb.c                    | 150 +++++++++++++++---------------
+> > > > > > > >  18 files changed, 150 insertions(+), 159 deletions(-)
+> > > > > > >
+> > > > > > > This negates any code-size advantage of dropping the lmb parameter.
+> > > > > > >
+> > > > > > > All of these are LMB_NONE. Can we have a separate function (e.g.
+> > > > > > > lmb_alloc_type()) for when we actually need to specify the type?
+> > > > > >
+> > > > > > We will be passing different values when we call the LMB API's from
+> > > > > > the EFI allocation function. This is only adding a parameter to the
+> > > > > > allocation API's, which I believe is better than adding separate
+> > > > > > functions which take a flag parameter only to be called from the EFI
+> > > > > > subsystem.
+> > > > >
+> > > > > No i believe it is worse, unless there are a lot of such functions.
+> > > > > The flags are a special case, not the common case.
+> > > >
+> > > > I have done some size impact tests on the two scenarios, one where we
+> > > > have a common set of lmb allocation API functions, with an added flags
+> > > > parameter, and second where we have separate API's to be called from
+> > > > the EFI memory module. I have put out the results of the size impact
+> > > > [1].
+> > > >
+> > > > You will see that with common API's, we are not losing much even on
+> > > > boards with EFI_LOADER disabled. But otoh, on boards which have
+> > > > EFI_LOADER enabled, the gains are pretty significant. I believe we
+> > > > should reconsider using a common LMB API with the flags parameter.
+> > >
+> > > Thanks for looking at it.
+> > >
+> > > Did you do special versions of just lmb_alloc() and lmb_add() which
+> > > call the flags versions? It seems that there is no size advantage with
+> > > EFI_LOADER and only a small one with !EFI_LOADER. Can you please point
+> > > me to the code?
+> >
+> > For the separate API version, I introduced new versions
+> > lmb_alloc_flags(), lmb_alloc_base_flags(), lmb_alloc_addr_flags() and
+> > lmb_free_flags(), which are being called from the EFI memory module. I
+> > have pushed the two branches [1] [2] on my github. Please take a look.
+> >
+> > Btw, both these branches are based on your v5 of the alist patches,
+> > and also incorporate the stack based implementation for running the
+> > lmb tests. So except for either having common API's, or not, there are
+> > no other differences between the two. Thanks.
 >
->Finally, tireless device porters can properly show off their hard work an=
-d get
->the internet points they so deserve!
+> Thanks for the info.
 >
->Not everything is fully supported yet, but this seemed good enough for in=
-itial
->inclusion=2E Only one MMC device is detected, and other than SCSI other s=
-torage
->devices aren't supported=2E
+> The non-flags functions can call the flags functions, so that you
+> don't create a new code path. Something like this:
+>
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index 726e6c38227..0a251c587fe 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -528,7 +528,7 @@ long lmb_free_flags(phys_addr_t base, phys_size_t size,
+>
+>  long lmb_free(phys_addr_t base, phys_size_t size)
+>  {
+> -       return __lmb_free(base, size);
+> +       return lmb_free_flags(base, size, LMB_NONE);
+>  }
+>
+>  long lmb_reserve_flags(phys_addr_t base, phys_size_t size, enum
+> lmb_flags flags)
+> @@ -624,7 +624,7 @@ static phys_addr_t __lmb_alloc_base(phys_size_t
+> size, ulong align,
+>
+>  phys_addr_t lmb_alloc(phys_size_t size, ulong align)
+>  {
+> -       return lmb_alloc_base(size, align, LMB_ALLOC_ANYWHERE);
+> +       return lmb_alloc_flags(size, align, LMB_NONE);
+>  }
+>
+>  phys_addr_t lmb_alloc_flags(phys_size_t size, ulong align, uint flags)
+> @@ -635,15 +635,7 @@ phys_addr_t lmb_alloc_flags(phys_size_t size,
+> ulong align, uint flags)
+>
+>  phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
+>  {
+> -       phys_addr_t alloc;
+> -
+> -       alloc = __lmb_alloc_base(size, align, max_addr, LMB_NONE);
+> -
+> -       if (alloc == 0)
+> -               printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
+> -                      (ulong)size, (ulong)max_addr);
+> -
+> -       return alloc;
+> +       return lmb_alloc_base_flags(size, align, max_addr, LMB_NONE);
+>  }
+>
+>  phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
+> @@ -691,7 +683,7 @@ static phys_addr_t __lmb_alloc_addr(phys_addr_t
+> base, phys_size_t size,
+>   */
+>  phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
+>  {
+> -       return __lmb_alloc_addr(base, size, LMB_NONE);
+> +       return lmb_alloc_addr_flags(base, size, LMB_NONE);
+>  }
+>
+>  phys_addr_t lmb_alloc_addr_flags(phys_addr_t base, phys_size_t size,
+>
+> But it only saves about 40 bytes on Thumb2. You can save another 16 by
+> using the placeholder API:
 
+Can you please explain the issue that you see with having a common set
+of API's with the flags parameter added? The way I see it, the API's
+are already undergoing a change where we are removing the struct lmb
+instance as a parameter from all the API functions. With the change
+that I propose, we are simply replacing the lmb instance parameter
+with the flags parameter. So arguably we are not adding any additional
+size here. Also, like the size tests show, we get a pretty good size
+benefit when the EFI_LOADER is enabled.
 
-This command is not very generic=2E E=2Eg=2E it supports SCSI drives but n=
-ot SATA=2E Many boards have eMMC and SD-card=2E This lks more ike an RFC ta=
-n something ready to merge=2E
+So, if your argument is to keep the API's similar to their earlier
+form, I think that they are undergoing a change in any case, so adding
+the flags parameter is not so much of an issue. If there is any
+problem that I am missing, I would like to understand that before we
+go with separate API's. Thanks.
 
-Why don't you use a script or an EFI program to print whatever information=
- you need?
+-sughosh
 
 >
->[1]: https://en=2Ewikipedia=2Eorg/wiki/Neofetch
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index 0a251c587fe..f6c8f06629c 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -416,13 +416,12 @@ static long lmb_add_region_flags(struct alist
+> *lmb_rgn_lst, phys_addr_t base,
+>         if (coalesced)
+>                 return coalesced;
 >
->Signed-off-by: Caleb Connolly <caleb=2Econnolly@linaro=2Eorg>
->---
->Ephemeral demo image: https://0x0=2Est/XVUa=2Epng
->---
-> cmd/Kconfig  |   7 ++
-> cmd/Makefile |   1 +
-> cmd/ufetch=2Ec | 201 +++++++++++++++++++++++++++++++++++++++++++++++++++
-> 3 files changed, 209 insertions(+)
-> create mode 100644 cmd/ufetch=2Ec
+> -       if (alist_full(lmb_rgn_lst) &&
+> -           !alist_expand_by(lmb_rgn_lst, lmb_rgn_lst->alloc))
+> +       if (!alist_add_placeholder(lmb_rgn_lst))
+>                 return -1;
+>         rgn = lmb_rgn_lst->data;
 >
->diff --git a/cmd/Kconfig b/cmd/Kconfig
->index 978f44eda426=2E=2E70acb5727b04 100644
->--- a/cmd/Kconfig
->+++ b/cmd/Kconfig
->@@ -175,8 +175,15 @@ config CMD_CPU
-> 	  number of CPUs, type (e=2Eg=2E manufacturer, architecture, product or
-> 	  internal name) and clock frequency=2E Other information may be
-> 	  available depending on the CPU driver=2E
->=20
->+config CMD_UFETCH
->+	bool "U-Boot fetch"
->+	depends on BLK
->+	help
->+	  Fetch utility for U-Boot (akin to neofetch)=2E Prints information
->+	  about U-Boot and the board it is running on in a pleasing format=2E
->+
-> config CMD_FWU_METADATA
-> 	bool "fwu metadata read"
-> 	depends on FWU_MULTI_BANK_UPDATE
-> 	help
->diff --git a/cmd/Makefile b/cmd/Makefile
->index 87133cc27a8a=2E=2Effb04c8f2e0a 100644
->--- a/cmd/Makefile
->+++ b/cmd/Makefile
->@@ -53,8 +53,9 @@ obj-$(CONFIG_CMD_CONSOLE) +=3D console=2Eo
-> obj-$(CONFIG_CMD_CPU) +=3D cpu=2Eo
-> obj-$(CONFIG_CMD_DATE) +=3D date=2Eo
-> obj-$(CONFIG_CMD_DEMO) +=3D demo=2Eo
-> obj-$(CONFIG_CMD_DM) +=3D dm=2Eo
->+obj-$(CONFIG_CMD_UFETCH) +=3D ufetch=2Eo
-> obj-$(CONFIG_CMD_SOUND) +=3D sound=2Eo
-> ifdef CONFIG_POST
-> obj-$(CONFIG_CMD_DIAG) +=3D diag=2Eo
-> endif
->diff --git a/cmd/ufetch=2Ec b/cmd/ufetch=2Ec
->new file mode 100644
->index 000000000000=2E=2Ef7374eb2e364
->--- /dev/null
->+++ b/cmd/ufetch=2Ec
->@@ -0,0 +1,201 @@
->+// SPDX-License-Identifier: GPL-2=2E0
->+
->+/* Small "fetch" utility for U-Boot */
->+
->+#include <mmc=2Eh>
->+#include <time=2Eh>
->+#include <asm/global_data=2Eh>
->+#include <cli=2Eh>
->+#include <command=2Eh>
->+#include <dm/ofnode=2Eh>
->+#include <env=2Eh>
->+#include <rand=2Eh>
->+#include <vsprintf=2Eh>
->+#include <linux/delay=2Eh>
->+#include <linux/kernel=2Eh>
->+#include <version=2Eh>
->+
->+DECLARE_GLOBAL_DATA_PTR;
->+
->+#define LINE_WIDTH 40
->+#define BLUE "\033[38;5;4m"
->+#define YELLOW "\033[38;5;11m"
->+#define BOLD "\033[1m"
->+#define RESET "\033[0m"
->+static const char *logo_lines[] =3D {
->+	BLUE BOLD "                  =2E=2E=2E=2E=2E=2E::=2E=2E=2E=2E=2E=2E    =
-               ",
->+	BLUE BOLD "             =2E=2E=2E::::::::::::::::::=2E=2E=2E           =
-   ",
->+	BLUE BOLD "          =2E=2E::::::::::::::::::::::::::=2E=2E           "=
-,
->+	BLUE BOLD "        =2E::::=2E:::::::::::::::=2E=2E=2E::::=2E::::=2E    =
-     ",
->+	BLUE BOLD "      =2E::::::::::::::::::::=2E=2E::::::::::::::=2E       "=
-,
->+	BLUE BOLD "    =2E::=2E:::::::::::::::::::" YELLOW "=3D*%#*" BLUE "::::=
-::::::=2E::=2E     ",
->+	BLUE BOLD "   =2E:::::::::::::::::=2E=2E=2E=2E=2E" YELLOW "*%%*-" BLUE =
-":=2E=2E=2E=2E::::::::::=2E    ",
->+	BLUE BOLD "  =2E:=2E:::=2E=2E=2E:::::::::=2E:-" YELLOW "=3D=3D=3D##*---=
-=3D=3D-" BLUE "::::::::::=2E:=2E   ",
->+	BLUE BOLD " =2E::::=2E=2E::::=2E=2E=2E=2E=2E=2E=2E=2E" YELLOW "-***#***=
-*###****-" BLUE "=2E=2E=2E::::::=2E:=2E  ",
->+	BLUE BOLD " ::=2E:=2E-" YELLOW "+***+=3D" BLUE "::-" YELLOW "=3D+**#%%%=
-%%%%%%%%%###*=3D " BLUE "-::=2E=2E=2E::::=2E ",
->+	BLUE BOLD "=2E:=2E::-" YELLOW "*****###%%%%%%%%%%%%%%%%%%%%%%%%%%#*=3D"=
- BLUE ":=2E=2E:::: ",
->+	BLUE BOLD "=2E::" YELLOW "##" BLUE ":" YELLOW "***#%%%%%%#####%%%%%%%##=
-##%%%%%####%%%*" BLUE "-=2E::=2E ",
->+	BLUE BOLD ":=2E:" YELLOW "#%" BLUE "::" YELLOW "*%%%%%%%#*****##%%%#***=
-**##%%##*****#%%+" BLUE "=2E::=2E",
->+	BLUE BOLD "=2E::" YELLOW "**=3D=3D#%%%%%%%##****#%%%%##****#%%%%#****##=
-#%%" BLUE ":=2E=2E ",
->+	BLUE BOLD "=2E=2E:" YELLOW "#%" BLUE "::" YELLOW "*%%%%%%%%%%%%%%%%%%%%=
-%%%%%%%%%%%%#%%%%%+ " BLUE "=2E:=2E",
->+	BLUE BOLD " ::" YELLOW "##" BLUE ":" YELLOW "+**#%%%%%%%%%%%%%%%%%%%%%%=
-%%%%%%%%%%%%* " BLUE "-=2E:: ",
->+	BLUE BOLD " =2E=2E::-" YELLOW "#****#%#%%%%%%%%%%%%%%%%%%%%%%%%%%#*=3D"=
- BLUE "-=2E=2E::=2E  ",
->+	BLUE BOLD "  =2E=2E=2E:=3D" YELLOW "*****=3D" BLUE "::-\033[38;5;7m=3D+=
-**###%%%%%%%%###**+=3D  " BLUE "--:=2E=2E=2E:::  ",
->+	BLUE BOLD "   =2E::=2E::--:=2E=2E=2E=2E=2E=2E=2E=2E::::::--::::::=2E=2E=
-=2E=2E=2E=2E::::::=2E    ",
->+	BLUE BOLD "    =2E::=2E=2E=2E=2E=2E::::::::::=2E=2E=2E=2E=2E=2E=2E=2E=
-=2E=2E=2E:::::::::=2E::=2E     ",
->+	BLUE BOLD "      =2E::::::::::::::::::::::::::::::::::::=2E       ",
->+	BLUE BOLD "        =2E::::=2E::::::::::::::::::::::=2E::::=2E         "=
-,
->+	BLUE BOLD "          =2E=2E::::::::::::::::::::::::::=2E=2E           "=
-,
->+	BLUE BOLD "             =2E=2E=2E::::::::::::::::::=2E=2E=2E           =
-   ",
->+	BLUE BOLD "                  =2E=2E=2E=2E=2E=2E::=2E=2E=2E=2E=2E=2E    =
-               ",
->+};
->+
->+enum output_lines {
->+	FIRST,
->+	SECOND,
->+	KERNEL,
->+	SYSINFO,
->+	HOST,
->+	UPTIME,
->+	IP,
->+	CMDS,
->+	CONSOLES,
->+	DEVICES,
->+	FEATURES,
->+	RELOCATION,
->+	CORES,
->+	MEMORY,
->+	STORAGE,
->+
->+	/* Up to 10 storage devices=2E=2E=2E Should be enough for anyone right?=
- */
->+	_LAST_LINE =3D (STORAGE + 10),
->+#define LAST_LINE (_LAST_LINE - 1UL)
->+};
->+
->+static int do_ufetch(struct cmd_tbl *cmdtp, int flag, int argc,
->+		     char *const argv[])
->+{
->+	int num_lines =3D max(LAST_LINE + 1, ARRAY_SIZE(logo_lines));
->+	const char *model, *compatible;
->+	char *ipaddr;
->+	int n_cmds, n_cpus =3D 0, ret, compatlen;
->+	ofnode np;
->+	struct mmc *mmc;
->+	struct blk_desc *scsi_desc;
->+	bool skip_ascii =3D false;
->+
->+	if (argc > 1 && strcmp(argv[1], "-n") =3D=3D 0) {
->+		skip_ascii =3D true;
->+		num_lines =3D LAST_LINE;
->+	}
->+
->+	for (int i =3D 0; i < num_lines; i++) {
->+		if (!skip_ascii) {
->+			if (i < ARRAY_SIZE(logo_lines))
->+				printf("%s ", logo_lines[i]);
->+			else
->+				printf("%*c ", LINE_WIDTH, ' ');
->+		}
->+		switch (i) {
->+		case FIRST:
->+			compatible =3D ofnode_read_string(ofnode_root(), "compatible");
->+			if (!compatible)
->+				compatible =3D "unknown";
->+			printf(RESET "%s\n", compatible);
->+			compatlen =3D strlen(compatible);
->+			break;
->+		case SECOND:
->+			for (int j =3D 0; j < compatlen; j++)
->+				putc('-');
->+			putc('\n');
->+			break;
->+		case KERNEL:
-
-Please, do not use misleading variable names=2E
-
-
->+			printf("Kernel:" RESET " %s\n", U_BOOT_VERSION);
->+			break;
->+		case SYSINFO:
->+			printf("Config:" RESET " %s_defconfig\n", CONFIG_SYS_CONFIG_NAME);
->+			break;
->+		case HOST:
->+			model =3D ofnode_read_string(ofnode_root(), "model");
->+			if (model)
->+				printf("Host:" RESET " %s\n", model);
->+			break;
->+		case UPTIME:
->+			printf("Uptime:" RESET " %ld seconds\n", get_timer(0) / 1000);
->+			break;
->+		case IP:
->+			ipaddr =3D env_get("ipvaddr");
->+			if (!ipaddr)
->+				ipaddr =3D "none";
->+			printf("IP Address:" RESET " %s", ipaddr);
->+			ipaddr =3D env_get("ipv6addr");
->+			if (ipaddr)
->+				printf(", %s\n", ipaddr);
->+			else
->+				putc('\n');
->+			break;
->+		case CMDS:
->+			n_cmds =3D ll_entry_count(struct cmd_tbl, cmd);
-
-Who cares if you have 50 commands or 51 if you don't know which?
-
-
->+			printf("Commands:" RESET " %d (help)\n", n_cmds);
->+			break;
->+		case CONSOLES:
->+			printf("Consoles:" RESET " %s (%d baud)\n", env_get("stdout"),
->+			       gd->baudrate);
->+			break;
->+		case DEVICES:
->+			printf("Devices:" RESET " ");
->+			/* TODO: walk the DM tree */
->+			printf("Uncountable!\n");
-
-Nothing we should merge=2E
-
->+			break;
->+		case FEATURES:
->+			printf("Features:" RESET " ");
->+			if (IS_ENABLED(CONFIG_NET))
->+				printf("Net");
-
-Wouuldn't you want to know which devices where detected?
-
->+			if (IS_ENABLED(CONFIG_EFI_LOADER))
->+				printf(", EFI");
->+			printf("\n");
->+			break;
->+		case RELOCATION:
->+			if (gd->flags & GD_FLG_SKIP_RELOC)
->+				printf("Relocated:" RESET " no\n");
->+			else
->+				printf("Relocated:" RESET " to %#09lx\n", gd->relocaddr);
->+			break;
->+		case CORES:
->+			ofnode_for_each_subnode(np, ofnode_path("/cpus")) {
->+				if (ofnode_name_eq(np, "cpu"))
->+					n_cpus++;
->+			}
->+			printf("CPU:" RESET " %d (1 in use)\n", n_cpus);
->+			break;
->+		case MEMORY:
->+			printf("Memory:" RESET " %lu MB\n", (ulong)gd->ram_size >> 20);
->+			break;
->+		case STORAGE:
->+		default:
->+			if (i =3D=3D STORAGE && get_mmc_num() > 0) {
->+				mmc =3D find_mmc_device(0);
->+				if (mmc)
->+					printf("Storage:" RESET "  mmc 0: %llu MB", mmc->capacity >> 20);
-
-And if my eMMC is device 1 and SD card is 0?
-
-Why wouldn't you iterate over all UCLASS_BLK devices?
-
-Best regards
-
-Heinrich
-
->+			}
->+			if (i >=3D STORAGE + 1) {
->+				ret =3D blk_get_desc(UCLASS_SCSI, i - (STORAGE + 1), &scsi_desc);
->+				if (!ret && scsi_desc->type !=3D DEV_TYPE_UNKNOWN)
->+					/* The calculation here is really lossy but close enough */
->+					printf("Storage:" RESET " scsi %d: %lu MB", i - (STORAGE + 1),
->+					       ((scsi_desc->lba >> 9) * scsi_desc->blksz) >> 11);
->+			}
->+			printf("\n");
->+		}
->+	}
->+
->+	printf(RESET "\n\n");
->+
->+	return 0;
->+}
->+
->+U_BOOT_CMD(ufetch, 2, 1, do_ufetch,
->+	"U-Boot fetch utility",
->+	"Print information about your device=2E\n"
->+	"    -n    Don't print the ASCII logo"
->+);
+>         /* Couldn't coalesce the LMB, so add it to the sorted table. */
+> -       for (i = lmb_rgn_lst->count; i >= 0; i--) {
+> +       for (i = lmb_rgn_lst->count - 1; i >= 0; i--) {
+>                 if (i && base < rgn[i - 1].base) {
+>                         rgn[i] = rgn[i - 1];
+>                 } else {
+> @@ -433,8 +432,6 @@ static long lmb_add_region_flags(struct alist
+> *lmb_rgn_lst, phys_addr_t base,
+>                 }
+>         }
+>
+> -       lmb_rgn_lst->count++;
+> -
+>         return 0;
+>  }
+>
+> @@ -444,7 +441,6 @@ static long lmb_add_region(struct alist
+> *lmb_rgn_lst, phys_addr_t base,
+>         return lmb_add_region_flags(lmb_rgn_lst, base, size, LMB_NONE);
+>  }
+>
+> -/* This routine may be called with relocation disabled. */
+>  long lmb_add(phys_addr_t base, phys_size_t size)
+>  {
+>         long ret;
+>
+> --
+> 2.34.1
+>
+> (patches are a bit rough, but I didn't think it worth sending them to
+> the ML as real patches)
+>
+> If I am correct and we don't need to publish events, then that will
+> save a little more space.
+>
+> Regards,
+> Simon
+>
+> >
+> > -sughosh
+> >
+> > [1] - https://github.com/sughoshg/u-boot/tree/lmb_efi_common_apis_nrfc_v2
+> > [2] - https://github.com/sughoshg/u-boot/tree/lmb_efi_separate_flags_apis_nrfc_v2
+> >
+> > >
+> > > Regards,
+> > > Simon
+> > >
+> > >
+> > > >
+> > > > [1] - https://gist.github.com/sughoshg/a20207f26e19238fef86f710134d6efd
+> > > >
+> > > > >
+> > > > > Regards,
+> > > > > SImon
