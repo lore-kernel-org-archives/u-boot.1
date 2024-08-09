@@ -4,70 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 786E4C52D7C
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 13:14:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46D94C52D7C
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 13:19:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFFF388859;
-	Fri,  9 Aug 2024 15:14:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 8ABC488859;
+	Fri,  9 Aug 2024 15:19:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="acb3gmDt";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eA3typzK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AC3888A2F; Fri,  9 Aug 2024 15:14:52 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id A4A6788A0E; Fri,  9 Aug 2024 15:19:07 +0200 (CEST)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 444ED8871E
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 15:14:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 210B68883D
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 15:19:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 479DEejl100936;
- Fri, 9 Aug 2024 08:14:40 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1723209280;
- bh=TpmNbuaMHnKygs2oiI+4+uUCBXyNZuPCE4HddIU9JkE=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=acb3gmDtr9Kdkmh7KnT6eK6AZWkNn3YjMDtSk9PCkxq6zRuSzytcZeMUQfR4Z8YXE
- PiVytT1ASBkAH/klTO51MrLFGia6ugXg2eFRFuIp9Qg4Y5yRhBovBJZFSivbSph3TZ
- +kqEs5uj7pw2lOTlZItccU2/3s2SJAhYl43giyQc=
-Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 479DEeOF033862
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 9 Aug 2024 08:14:40 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 9
- Aug 2024 08:14:39 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 9 Aug 2024 08:14:40 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 479DEdpE086040;
- Fri, 9 Aug 2024 08:14:39 -0500
-Message-ID: <51385cfa-1d73-4365-90be-2a46010b15ea@ti.com>
-Date: Fri, 9 Aug 2024 08:14:39 -0500
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2ef7fef3ccfso21502891fa.3
+ for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 06:19:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1723209544; x=1723814344; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=dKOp7+uMH8jSivqg1YfaYD7afKlqNjkPrrl3bxyR8xQ=;
+ b=eA3typzK8r1LnJA2Oc6GyQ3oQJ2bPIC6S0q64Zfd+amFlmszvWFsAqUvldBFbuNwqG
+ L5Jhocfsza3445cTyo0Qw4/yIg/5Xjr3FZDvZvdlcNf/t31zje0/SxYoQr2+By4aZRon
+ 7ljTy6TE0DZWynIrVOLh6R5bi8IEMT7sB3DtZEy8sZEebPIu7y9gdCLvg43DoNWzer7r
+ DHuum+RBfDa1L7pEfRaXpb9M1W3C5WKZvlndxEzXN2M36sVsEcW/r1tJzOUKcE28bQ72
+ MCZbDJxjFwh3hCdSFMavs1VOUhKz/I3GhIrtQmxH9FJpGMg589KxZWbnchx0/0PeyeWZ
+ Vhsg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723209544; x=1723814344;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=dKOp7+uMH8jSivqg1YfaYD7afKlqNjkPrrl3bxyR8xQ=;
+ b=X+WIjiLdUUGBKW7LAZ4gZubGZE/JXN/tUWNIWTxl68YjWXVlyaRnigQNe2UImc37mj
+ C8cavyrbmVzduJx3tnG17ScIfSkhcDBikSfMxQTK/jvGvJLNNtHq9Q2EOFwdXUGp6ZRa
+ qhy5s1C3udki9fZaMMiT1ZXbKXOqWdU6JnxTT2xnQCcHReeMRiXZ5RSA9y6qKmONUXko
+ dMWp4TeS03XPVKy6jeRCStNJqfTi1E4oT0+tbFcmdyudUAmoP69qme07qE6ExeyC83jq
+ /mqO2GjvpabSwmOgaFDCD64DbIbBZapYlTQTV5cv/ZqqbI1mggPhkvdDHgOb/MFfbyeK
+ msag==
+X-Gm-Message-State: AOJu0YwW8ihvSyhHM1lEEZfLSqti3P/I//Kuy/FyB0wqBrClGVwHtqrO
+ NA8/smAEOO2fYmaMlWCWVeIUxKvqqmzqQ6sUDCNmbq5Tnk7JyX5IDBkew1n0nsg=
+X-Google-Smtp-Source: AGHT+IHzr7KSr078OqTRc186+AXKB2xrUR05NfB6F2Znc+2PwT+d4Hna6Eoz074dnGGzPwIG85fRjQ==
+X-Received: by 2002:a05:6512:693:b0:52f:c0ee:3b5f with SMTP id
+ 2adb3069b0e04-530ee96bed0mr1273677e87.10.1723209543955; 
+ Fri, 09 Aug 2024 06:19:03 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:f3b8:f3a:8a2b:6d6?
+ ([2a01:e0a:3cb:7bb0:f3b8:f3a:8a2b:6d6])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a7dc9ec6b25sm834469366b.198.2024.08.09.06.19.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 09 Aug 2024 06:19:03 -0700 (PDT)
+Message-ID: <44d9347a-974c-41b3-a6d8-00f4d1b86adb@linaro.org>
+Date: Fri, 9 Aug 2024 15:19:02 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] remoteproc: uclass: Modify uc_pdata->name to use
- combination of device name and device's parent name
-To: MD Danish Anwar <danishanwar@ti.com>, Nishanth Menon <nm@ti.com>, "Marek
- Vasut" <marek.vasut+renesas@mailbox.org>, Dan Carpenter
- <dan.carpenter@linaro.org>, Roger Quadros <rogerq@kernel.org>, "Ravi
- Gunasekaran" <r-gunasekaran@ti.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>
-References: <20240807090829.530865-1-danishanwar@ti.com>
+Subject: Re: [PATCH v8 00/23] Introduce the lwIP network stack
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>
+References: <cover.1723050310.git.jerome.forissier@linaro.org>
+ <20240807204400.GJ1626301@bill-the-cat>
+ <2a23d370-82a0-446e-8ab5-00fa9005fdbf@linaro.org>
+ <20240808172454.GQ1626301@bill-the-cat>
 Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20240807090829.530865-1-danishanwar@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20240808172454.GQ1626301@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,91 +99,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/7/24 4:08 AM, MD Danish Anwar wrote:
-> uc_pdata->name is populated from device tree property "remoteproc-name".
-> For those devcices that don't set "remoteproc-name", uc_pdata->name
-> falls back to dev->name.
-> 
-> If two devices have same name, this will result into uc_pdata->name not
-> being unique and rproc_init() will fail.
-> 
-> Fix this by using combination of dev->name and dev->parent->name instead
-> of using just the dev->name to populate uc_pdata->name.
-> 
-> Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
-> ---
 
-Reviewed-by: Andrew Davis <afd@ti.com>
 
-> Cc: Andrew Davis <afd@ti.com>
+On 8/8/24 19:24, Tom Rini wrote:
+> On Thu, Aug 08, 2024 at 06:41:02PM +0200, Jerome Forissier wrote:
+>>
+>>
+>> On 8/7/24 22:44, Tom Rini wrote:
+>>> On Wed, Aug 07, 2024 at 07:11:44PM +0200, Jerome Forissier wrote:
+>>>
+>>>> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+>>>> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
+>>>> stack [2] [3] as an alternative to the current implementation in net/,
+>>>> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
+>>>> reasons for doing so are:
+>>>> - Make the support of HTTPS in the wget command easier. Javier T. and
+>>>> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
+>>>> so. With that it becomes possible to fetch and launch a distro installer
+>>>> such as Debian etc. using a secure, authenticated connection directly
+>>>> from the U-Boot shell. Several use cases:
+>>>>   * Authentication: prevent MITM attack (third party replacing the
+>>>> binary with a different one)
+>>>>   * Confidentiality: prevent third parties from grabbing a copy of the
+>>>> image as it is being downloaded
+>>>>   * Allow connection to servers that do not support plain HTTP anymore
+>>>> (this is becoming more and more common on the Internet these days)
+>>>> - Possibly benefit from additional features implemented in lwIP
+>>>> - Less code to maintain in U-Boot
+>>>>
+>>>> Prior to applying this series, the lwIP stack needs to be added as a
+>>>> Git subtree with the following command:
+>>>>
+>>>>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savannah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
+>>>
+>>> For v9, I think it would be good to do a CI run with NET_LWIP default
+>>> and seeing what fails from that too. There's a few problems still
+>>> leading to a lot of failures, in that case. Thanks.
+>>
+>> I pushed my branch to GitHub [1] and there's a failure in the
+>> tools_only_macOS job [2]. Any idea what is going on? I tried twice and
+>> it failed twice :-/
+>> Om my Linux machine, "make tools-only_config tools-only" works
+>> fine.
+>>
+>> [1] https://github.com/u-boot/u-boot/pull/635
+>> [2] https://dev.azure.com/u-boot/u-boot/_build/results?buildId=9105&view=results
 > 
-> Failure Example:
-> In k3-am64-main.dtsi, both pru0_0 [1] and pru1_0 [2] will have
-> dev->name as "pru@34000" although their parent name is different.
+> Alright so from [2] going to the job and then downloading the raw log (it's
+> huge, firefox gets mad for me), scrolling down until it's not the git clone we
+> see:
+> 2024-08-08T14:36:30.0865130Z   HOSTCC  scripts/basic/fixdep
+> 2024-08-08T14:36:30.8641660Z   HOSTCC  scripts/kconfig/conf.o
+> 2024-08-08T14:36:30.9645180Z   LEX     scripts/kconfig/zconf.lex.c
+> 2024-08-08T14:36:31.0545650Z   YACC    scripts/kconfig/zconf.tab.c
+> 2024-08-08T14:36:33.2374910Z   HOSTCC  scripts/kconfig/zconf.tab.o
+> 2024-08-08T14:36:34.9997050Z   HOSTLD  scripts/kconfig/conf
+> 2024-08-08T14:36:36.5552790Z generated_defconfig:7:warning: unexpected data:  # CONFIG_SANDBOX_
+> SDL is not set
+> 2024-08-08T14:36:36.5666380Z generated_defconfig:12:warning: unexpected data:  # CONFIG_BOOTSTD
+> _FULL is not set
+> 2024-08-08T14:36:36.5724560Z generated_defconfig:13:warning: unexpected data:  # CONFIG_BOOTMET
+> H_CROS is not set
+> 2024-08-08T14:36:36.5742720Z generated_defconfig:14:warning: unexpected data:  # CONFIG_BOOTMET
+> H_VBE is not set
+> 2024-08-08T14:36:36.5752700Z generated_defconfig:17:warning: unexpected data:  # CONFIG_CMD_BOO
+> TD is not set
+> 2024-08-08T14:36:36.5772400Z generated_defconfig:18:warning: unexpected data:  # CONFIG_CMD_BOO
+> TM is not set
+> 2024-08-08T14:36:36.5788060Z generated_defconfig:19:warning: unexpected data:  # CONFIG_CMD_BOO
+> TI is not set
+> 2024-08-08T14:36:36.5792360Z generated_defconfig:20:warning: unexpected data:  # CONFIG_CMD_ELF
+>  is not set
+> 2024-08-08T14:36:36.5828400Z generated_defconfig:21:warning: unexpected data:  # CONFIG_CMD_EXTENSION is not set
+> 2024-08-08T14:36:36.5840470Z generated_defconfig:22:warning: unexpected data:  # CONFIG_CMD_DAT
+> E is not set
+> 2024-08-08T14:36:36.5938540Z generated_defconfig:26:warning: unexpected data:  # CONFIG_ACPIGEN
+>  is not set
+> 2024-08-08T14:36:36.5974000Z generated_defconfig:35:warning: unexpected data:  # CONFIG_VIRTIO_MMIO is not set
+> 2024-08-08T14:36:36.5985430Z generated_defconfig:36:warning: unexpected data:  # CONFIG_VIRTIO_PCI is not set
+> 2024-08-08T14:36:36.6045140Z generated_defconfig:37:warning: unexpected data:  # CONFIG_VIRTIO_SANDBOX is not set
+> 2024-08-08T14:36:36.6053060Z generated_defconfig:38:warning: unexpected data:  # CONFIG_GENERATE_ACPI_TABLE is not set
+> 2024-08-08T14:36:36.6068760Z generated_defconfig:39:warning: unexpected data:  # CONFIG_EFI_LOADER is not set
+> 2024-08-08T14:36:36.6088140Z #
+> 2024-08-08T14:36:36.6121560Z # configuration written to .config
+> 2024-08-08T14:36:36.6130190Z #
+> 2024-08-08T14:36:42.5830900Z scripts/kconfig/conf  --syncconfig Kconfig
+> 2024-08-08T14:36:43.9105630Z .config:284:warning: symbol value '' invalid for AVB_BUF_ADDR
+> 2024-08-08T14:36:43.9121120Z .config:285:warning: symbol value '' invalid for AVB_BUF_SIZE
+> 2024-08-08T14:36:43.9142940Z *
+> 2024-08-08T14:36:43.9172380Z * Restart config...
+> 2024-08-08T14:36:43.9257450Z *
+> 2024-08-08T14:36:43.9288610Z *
+> 2024-08-08T14:36:43.9332910Z * Security support
+> 2024-08-08T14:36:43.9366750Z *
+> 2024-08-08T14:36:43.9399770Z Build Android Verified Boot operations (AVB_VERIFY) [Y/n/?] y
+> 2024-08-08T15:35:07.9280210Z ##[error]The Operation will be canceled. The next steps may not contain expected logs.
 > 
-> pru0_0 has dev->name as "pru@34000" and parent name as "icssg@30000000"
-> pru1_0 has dev->name as "pru@34000" and parent name as "icssg@30080000"
-> 
-> rproc_init() fails for pru1_0 as the the uc_pdata->name becomes same as the pru0_0.
-> More details on this issue can be found here [3]. It was suggested to use a
-> different combination if `dev->name` is not unique by Andrew Davis <afd@ti.com> [4]
-> 
-> Failure Logs:
-> 	rproc_pre_probe: 'pru@34000': using fdt
-> 	rproc_pre_probe: 'pru@34000': using fdt
-> 	rproc_pre_probe: pru@34000 duplicate name 'pru@34000'
-> 	_rproc_probe_dev: pru@34000: Failed to initialize - -22
-> 	rproc_boot: rproc_init() failed: -22
-> 
-> To fix it, this commit uses combination of dev and dev's parent name.
-> 
-> After this commit,
-> pru0_0 uc->pdata->name = "pru@34000-icssg@30000000"
-> pru1_0 uc->pdata->name = "pru@34000-icssg@30080000"
-> 
-> Both the names are unique, thus rproc_init() succeeds.
-> 
-> Changes since v1:
-> *) Instead of hardcoding rproc_name_size to 256, changed it to be equal to
->     strlen(dev->name) + strlen(dev->parent->name) + 2 as suggested by
->     Roger Quadros <rogerq@kernel.org>
->   *) Added check for malloc failure as suggested by Roger Quadros <rogerq@kernel.org>
-> 
-> [v1] https://lore.kernel.org/all/20240719085908.3564171-1-danishanwar@ti.com/
-> [1] https://elixir.bootlin.com/u-boot/v2024.07-rc3/source/dts/upstream/src/arm64/ti/k3-am64-main.dtsi#L1276
-> [2] https://elixir.bootlin.com/u-boot/v2024.07-rc3/source/dts/upstream/src/arm64/ti/k3-am64-main.dtsi#L1417
-> [3] https://lore.kernel.org/all/5cda289f-1d14-41f6-84e3-ff1d1034be13@ti.com/
-> [4] https://lore.kernel.org/all/e48f5818-182c-47ab-b384-379659830d38@ti.com/
-> 
->   drivers/remoteproc/rproc-uclass.c | 16 +++++++++++++---
->   1 file changed, 13 insertions(+), 3 deletions(-)
-> 
-> diff --git a/drivers/remoteproc/rproc-uclass.c b/drivers/remoteproc/rproc-uclass.c
-> index e64354dd52..3233ff8041 100644
-> --- a/drivers/remoteproc/rproc-uclass.c
-> +++ b/drivers/remoteproc/rproc-uclass.c
-> @@ -158,9 +158,19 @@ static int rproc_pre_probe(struct udevice *dev)
->   		uc_pdata->driver_plat_data = pdata->driver_plat_data;
->   	}
->   
-> -	/* Else try using device Name */
-> -	if (!uc_pdata->name)
-> -		uc_pdata->name = dev->name;
-> +	/* Else try using a combination of device Name and devices's parent's name */
-> +	if (!uc_pdata->name) {
-> +		/* 2 in the rproc_name_size indicates 1 for null and one for '-' */
-> +		int rproc_name_size = strlen(dev->name) + strlen(dev->parent->name) + 2;
-> +		char *buf;
-> +
-> +		buf = malloc(rproc_name_size);
-> +		if (!buf)
-> +			return -ENOMEM;
-> +
-> +		snprintf(buf, rproc_name_size, "%s-%s", dev->name, dev->parent->name);
-> +		uc_pdata->name = buf;
-> +	}
->   	if (!uc_pdata->name) {
->   		debug("Unnamed device!");
->   		return -EINVAL;
-> 
-> base-commit: 6f4c31c2b658358628b5b0fa801f55c7477c7585
+> And indeed, most of that is "normal" if we look at a current build for
+> tools-only on macOS. We're being hit by the fact that the host CC isn't
+> gcc and is llvm and https://github.com/llvm/llvm-project/issues/78778
+> applies, I believe. Now how do we work around this? Hum...
+
+That's an "interesting" bug...
+ 
+> If you go an change "# CONFIG_FOO is not set" to CONFIG_FOO=n in
+> configs/tools-only_defconfig, I assume your build moves on?
+
+Yep, it does.
+
+> This is
+> valid syntax and fixing a more generic issue we have on macOS today.
+
+I am adding a new patch to v9: "configs: use syntax CONFIG_FOO=n in
+tools-only_defconfig". It means one extra step when syncing the
+defconfigs though... It is just a simple sed command but perhaps you
+have a better idea?
+
+Thanks again for testing and for your help,
+-- 
+Jerome
