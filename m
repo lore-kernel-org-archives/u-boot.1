@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B34BFC52D71
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 09:55:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F8E5C52D71
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 09:55:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18DBE88BAE;
+	by phobos.denx.de (Postfix) with ESMTP id 7EEA988BF0;
 	Fri,  9 Aug 2024 11:55:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nod.at
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F062788BE6; Fri,  9 Aug 2024 11:55:04 +0200 (CEST)
+ id 02EF9887B4; Fri,  9 Aug 2024 11:55:05 +0200 (CEST)
 Received: from lithops.sigma-star.at (lithops.sigma-star.at [195.201.40.130])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A338887B4
+ by phobos.denx.de (Postfix) with ESMTPS id 1A31A885B3
  for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 11:55:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=nod.at
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=richard@nod.at
 Received: from localhost (localhost [127.0.0.1])
- by lithops.sigma-star.at (Postfix) with ESMTP id B30496196A56;
+ by lithops.sigma-star.at (Postfix) with ESMTP id 9FB1761966A0;
  Fri,  9 Aug 2024 11:55:02 +0200 (CEST)
 Received: from lithops.sigma-star.at ([127.0.0.1])
  by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id sacpgNlcminp; Fri,  9 Aug 2024 11:55:02 +0200 (CEST)
+ with ESMTP id gSz17Hbb66AH; Fri,  9 Aug 2024 11:55:02 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by lithops.sigma-star.at (Postfix) with ESMTP id 4D94D6195FD7;
+ by lithops.sigma-star.at (Postfix) with ESMTP id 1050C6196A56;
  Fri,  9 Aug 2024 11:55:02 +0200 (CEST)
 Received: from lithops.sigma-star.at ([127.0.0.1])
  by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id KdKPfpOXh_DQ; Fri,  9 Aug 2024 11:55:02 +0200 (CEST)
+ with ESMTP id o-2qfNQl8Mhn; Fri,  9 Aug 2024 11:55:01 +0200 (CEST)
 Received: from foxxylove.corp.sigma-star.at (unknown [82.150.214.1])
- by lithops.sigma-star.at (Postfix) with ESMTPSA id F3DC161966C1;
+ by lithops.sigma-star.at (Postfix) with ESMTPSA id AF2C361966A0;
  Fri,  9 Aug 2024 11:55:01 +0200 (CEST)
 From: Richard Weinberger <richard@nod.at>
 To: u-boot@lists.denx.de
@@ -42,12 +42,10 @@ Cc: sjg@chromium.org, Jixiong.Hu@mediatek.com, marek.vasut+renesas@mailbox.org,
  patrick.delaunay@foss.st.com, ilias.apalodimas@linaro.org,
  xypron.glpk@gmx.de, seanga2@gmail.com, trini@konsulko.com,
  upstream+uboot@sigma-star.at, Richard Weinberger <richard@nod.at>
-Subject: [PATCH v2 2/3] compiler: Ensure __builtin_*_overflow() support
-Date: Fri,  9 Aug 2024 11:54:29 +0200
-Message-Id: <20240809095430.3656-2-richard@nod.at>
+Subject: [PATCH v2 1/3] ext4: Fix integer overflow in ext4fs_read_symlink()
+Date: Fri,  9 Aug 2024 11:54:28 +0200
+Message-Id: <20240809095430.3656-1-richard@nod.at>
 X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20240809095430.3656-1-richard@nod.at>
-References: <20240809095430.3656-1-richard@nod.at>
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -66,36 +64,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Both gcc and clang support this for a long time.
-Make sure the feature is present.
+While zalloc() takes a size_t type, adding 1 to the le32 variable
+will overflow.
+A carefully crafted ext4 filesystem can exhibit an inode size of 0xffffff=
+ff
+and as consequence zalloc() will do a zero allocation.
+
+Later in the function the inode size is again used for copying data.
+So an attacker can overwrite memory.
+
+Avoid the overflow by using the __builtin_add_overflow() helper.
 
 Signed-off-by: Richard Weinberger <richard@nod.at>
 ---
- include/linux/compiler_types.h | 7 +++++++
- 1 file changed, 7 insertions(+)
+ fs/ext4/ext4_common.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/include/linux/compiler_types.h b/include/linux/compiler_type=
-s.h
-index 1a3060117f..8b6ce9c11c 100644
---- a/include/linux/compiler_types.h
-+++ b/include/linux/compiler_types.h
-@@ -70,6 +70,13 @@ extern void __chk_io_ptr(const volatile void __iomem *=
-);
- #error "Unknown compiler"
- #endif
+diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
+index 52152a2295..36999b608f 100644
+--- a/fs/ext4/ext4_common.c
++++ b/fs/ext4/ext4_common.c
+@@ -2181,13 +2181,18 @@ static char *ext4fs_read_symlink(struct ext2fs_no=
+de *node)
+ 	struct ext2fs_node *diro =3D node;
+ 	int status;
+ 	loff_t actread;
++	size_t alloc_size;
 =20
-+/*
-+ * At least gcc 5.1 or clang 8 are needed.
-+ */
-+#ifndef COMPILER_HAS_GENERIC_BUILTIN_OVERFLOW
-+#error Unsupported compiler
-+#endif
+ 	if (!diro->inode_read) {
+ 		status =3D ext4fs_read_inode(diro->data, diro->ino, &diro->inode);
+ 		if (status =3D=3D 0)
+ 			return NULL;
+ 	}
+-	symlink =3D zalloc(le32_to_cpu(diro->inode.size) + 1);
 +
- /*
-  * Some architectures need to provide custom definitions of macros provi=
-ded
-  * by linux/compiler-*.h, and can do so using asm/compiler.h. We include=
- that
++	if (__builtin_add_overflow(le32_to_cpu(diro->inode.size), 1, &alloc_siz=
+e))
++		return NULL;
++
++	symlink =3D zalloc(alloc_size);
+ 	if (!symlink)
+ 		return NULL;
+=20
 --=20
 2.35.3
 
