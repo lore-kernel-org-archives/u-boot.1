@@ -4,58 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A453C52D7F
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 09:55:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C6A6C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 10:45:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7081088C19;
-	Fri,  9 Aug 2024 11:55:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 74D2388A2F;
+	Fri,  9 Aug 2024 12:45:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="T7mxd21B";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="jKd4eoyy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 294A0885B3; Fri,  9 Aug 2024 11:55:09 +0200 (CEST)
-Received: from mail-m127169.xmail.ntesmail.com
- (mail-m127169.xmail.ntesmail.com [115.236.127.169])
+ id 2D2AC88BB6; Fri,  9 Aug 2024 12:45:29 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C74F4885B3
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 11:55:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 45CEA889F1
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 12:45:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=T7mxd21BdCrvEdXMqD/XZ+PKOgSedn6nYkDpxKWD636sSOgH0y1Rrb6FO3t6HNNjdEvTkTvVL6GYdJ1uU7GcabOEnHOAMqYenh+ebyy+13XN5ijEOr7N6smdvT1WICvQ+lc9y1Okzvhjbmhm8vQiWcIiHnZ1QeXYNP6WbAMwPes=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=h75KZjJuc5+nH4rQygMWzpts2xJ0n9O374hq8gqmKXQ=;
- h=date:mime-version:subject:message-id:from;
-Received: from [192.168.60.65] (unknown [103.29.142.67])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 639AC900652;
- Fri,  9 Aug 2024 17:54:57 +0800 (CST)
-Message-ID: <0c36492b-8e10-4e2d-a55a-1c1bb9e51a66@rock-chips.com>
-Date: Fri, 9 Aug 2024 17:54:51 +0800
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1723200313; x=1723805113; i=xypron.glpk@gmx.de;
+ bh=CBRNF3Owarrii5wWAWS5f/e40OCtwvuaPPBWWojzjaI=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=jKd4eoyyy86OtwhDGgpVp01hwa5CP9XXKX1HsyjS/tPexcRgQcjc3fbr3U8W6k/Z
+ w8LNdGnvjmuzrGzOMCQYBcOic1UfFFynFaoiTxYv51E09T21e7H/eI2sMlYZYMP7R
+ OyN/bFEbqcMZG1C0KEopPKPetzVLnc9TZGFhIOhducWVAg3E4zdr9K3KAJgcOcho+
+ NeDPHEB3y+C5amU1INmmQjK1zMNu/9pYrZTcKfvJdn1Y+hwxJhmCMgPmSfXGv6tBK
+ XzmZHjU7NaltKelWOnnIyDaVcX8JDRxqebYfj/JmDs256ODsvOFpVyk+VuhaT7X47
+ vaEQ9li4HTo0S30ItQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.143.105] ([46.114.170.249]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mw9Q6-1sJTK83c9M-00roG4; Fri, 09
+ Aug 2024 12:45:13 +0200
+Message-ID: <88cba98c-527c-49e0-b99a-eaaf071c302d@gmx.de>
+Date: Fri, 9 Aug 2024 12:45:07 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] configs: rockchip: enable "ums" command for Radxa ROCK 5B
-To: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-Cc: eugen.hristev@collabora.com, jonas@kwiboo.se
-References: <20240806034759.50646-1-naoki@radxa.com>
+Subject: Re: [PATCH v2 3/3] ext4: Fix zalloc()
+To: Richard Weinberger <richard@nod.at>
+Cc: sjg@chromium.org, Jixiong.Hu@mediatek.com,
+ marek.vasut+renesas@mailbox.org, patrick.delaunay@foss.st.com,
+ ilias.apalodimas@linaro.org, seanga2@gmail.com, trini@konsulko.com,
+ upstream+uboot@sigma-star.at, u-boot@lists.denx.de
+References: <20240809095430.3656-1-richard@nod.at>
+ <20240809095430.3656-3-richard@nod.at>
 Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240806034759.50646-1-naoki@radxa.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240809095430.3656-3-richard@nod.at>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCHU1DVk4YSE0ZQxgYGUwdSVYVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlKS0hVSUJVSk9JVU1MWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
- VKQktLWQY+
-X-HM-Tid: 0a91369016a303a9kunm639ac900652
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PE06Kjo4NTI2NQ5NSyEPOT8a
- MTQKFApVSlVKTElISkJMSUJDQkxKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUpCSEI3Bg++
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:94wYX5g48gOGLmBRUoZMAow1RKzBIvDCpw+yHxUEI4cc0mRKjji
+ atx82AH7vaUZEMrtmAgjL8HEA8hxXfvj+cEkR7IiwTcjZvL7O7SOTV4BTLzmLaM9UhJmRVB
+ 3g6H+jVgx6k4lH8ICz42tUOBCs4SLRTAzXQJ6Epo1UvsaP07XerGC0fLKWmJfbei+jvT3u0
+ T0V6vNBSiPHq7PBc0WJ2w==
+UI-OutboundReport: notjunk:1;M01:P0:fglGP9ZhgZg=;fx9qDBzdk5g8TOkFXm8SQW5Wbwz
+ +cq4DaLfR5YjUQH/y6mPfCKTUZyfN+fSTR6sCq1kmqDNEmziGhsLD+wktWFhmupaZSEuRomUg
+ GdpT2Jj+khWPE/NVsJw6hFCckKuJwKY/Rh17vn0jR13FTWBUnnwMu4oj75Pnigq+ArJEYDtNu
+ yVPH8sAbtbcPaTKWa8e2oa5yYQ2NoOuS0PakhsvRBWGciZoFOXWDt4uy3PUL/NVwoyIoqME6X
+ LNd4jR9+aZoogGrCbmC/NTtYMHBe3YGnDwhj0nWWkxPY7kzQdSUF4FsZifKKwr2+6Gv7fuwAt
+ suYBn7cI3580e2JlNDvBv7E54kWOmov2wAp4T2i02bJfQ6W/4mGDHLsNGU+Uq8UWfSBBdFGAi
+ ssoAw6tkB/ooV8YQydamzj8Cqwvi+7nmCyERja0Rw/C3Fzrc6X8yYmQvKR1xcqn8JP9XOZ0n0
+ j8nK3O4QsofAMcp+Qt0V70xZ6yz77Aa7crACfdr+yn3ucbQ/+4W9Wh3f850/oFxWWbBL7GX4l
+ 6Y6/ZeCLDj4MoMK0yrgp7z+M2LeAYpSPxccbSgiBoqD5vHIVsbR0gDt7VVVBM05mLcJXoXYSp
+ KlfpbqZsXAlzakl8KZf2BJayrhsa0CP90mxrAxWdOGO5CQvfFi5ym/pGFDvXms0P/h9MhnzG6
+ v+P4OpPcV13buc7kO/e9PqS1MHJRiv/4qKq+QQwgo6Gs/KrIVGj38vB2e7YIGVBlk2spUbcYh
+ XH/tUZuyRAarcEYyaRRIY5egU8KUkoqEs/rB+Y4dddp8Y6RRnVXBnv8f6aEDePh0fGCJtFW1w
+ OZIlqC4EkaL3aXPggLEKlJZA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,30 +93,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-On 2024/8/6 11:47, FUKAUMI Naoki wrote:
-> USB Type-C port is configured as "peripheral" port. so enable "ums"
-> command to use as USB Mass Storage device.
-> ("rockusb" command is already enabled and working)
+On 8/9/24 11:54, Richard Weinberger wrote:
+> Currently, zalloc() calls uncondtionally memset(),
+> if the allocation failes, memset() will write to a null pointer.
 >
-> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> Fix by using kzalloc().
+>
+> Signed-off-by: Richard Weinberger <richard@nod.at>
 
-Thanks,
-- Kever
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
 > ---
->   configs/rock5b-rk3588_defconfig | 1 +
->   1 file changed, 1 insertion(+)
+>   fs/ext4/ext4_common.h | 5 ++---
+>   1 file changed, 2 insertions(+), 3 deletions(-)
 >
-> diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
-> index fc118cea7ba..80a2f2fed58 100644
-> --- a/configs/rock5b-rk3588_defconfig
-> +++ b/configs/rock5b-rk3588_defconfig
-> @@ -39,6 +39,7 @@ CONFIG_CMD_MMC=y
->   CONFIG_CMD_PCI=y
->   CONFIG_CMD_USB=y
->   CONFIG_CMD_ROCKUSB=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
->   # CONFIG_CMD_SETEXPR is not set
->   CONFIG_CMD_REGULATOR=y
->   # CONFIG_SPL_DOS_PARTITION is not set
+> diff --git a/fs/ext4/ext4_common.h b/fs/ext4/ext4_common.h
+> index 84500e990a..346752092b 100644
+> --- a/fs/ext4/ext4_common.h
+> +++ b/fs/ext4/ext4_common.h
+> @@ -24,6 +24,7 @@
+>   #include <ext4fs.h>
+>   #include <malloc.h>
+>   #include <asm/cache.h>
+> +#include <linux/compat.h>
+>   #include <linux/errno.h>
+>   #if defined(CONFIG_EXT4_WRITE)
+>   #include "ext4_journal.h"
+> @@ -43,9 +44,7 @@
+>
+>   static inline void *zalloc(size_t size)
+>   {
+> -	void *p =3D memalign(ARCH_DMA_MINALIGN, size);
+> -	memset(p, 0, size);
+> -	return p;
+> +	return kzalloc(size, 0);
+>   }
+>
+>   int ext4fs_read_inode(struct ext2_data *data, int ino,
+
