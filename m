@@ -4,69 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57FA6C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 16:11:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1F31C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 16:13:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80C028870D;
-	Fri,  9 Aug 2024 18:11:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 179648880E;
+	Fri,  9 Aug 2024 18:13:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FhttAgJ2";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="tHw3jqjK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56F0088B9E; Fri,  9 Aug 2024 18:11:12 +0200 (CEST)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 813ED8895D; Fri,  9 Aug 2024 18:13:44 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDEB88876E
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 18:11:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E5368870D
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 18:13:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6b78c980981so12365806d6.2
- for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 09:11:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723219869; x=1723824669; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=u+e+iDBk6mkjcRsHF47ORntCLHLj+ujTarT5qvKt43I=;
- b=FhttAgJ26TVYh+Obf2f1ajLjyiLJ64kpC3q2NwvSZz22hVW0R8yjuz9+2rMizR4GOI
- JMHZBwsiw745tKOE3atm02QkTFS9TGUB7rY738VCO5Ue5h4E8m9JiTaAvhTMSYU4TYfI
- W5kNadN1XxjimduPRDSXh9s4ejZpKhr+aE+y8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723219869; x=1723824669;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=u+e+iDBk6mkjcRsHF47ORntCLHLj+ujTarT5qvKt43I=;
- b=jhbnIQRlU8M9dVG/ts7Ms1XhqfmyE2PN6Bpj/6FFu8H93E0wycW0iXydvi4bjvJkSg
- ZkY8MBLPG6spi6dzbbDzOXq8POBMXReRz2yIa4kGfg0YtKciYgbaDqHv1mgbVPPM/l5A
- PHSc9lw5+FYtd2RWbXjI9K9zgbfOTFMgKx6TrQXmOjAeCeoM3/yVncRr/2fPB9Md5Eiy
- nO29LcYLhwfvEeW5hYKyLs7atPkgFXyN4DphyB4HqR/YZOZTHKrLhepGF06VqVSj8Wvp
- Skze/KA0ILgJv124I5TJsvFEfvUvgInvLiqYyH7Xl01Wm7WDDwhs2BEnGBKNJVkI5fAl
- PfAA==
-X-Gm-Message-State: AOJu0YyKQHUd/GmoZXc/lnihE+ANmYQT3KAq7WECZZjdBNY6s0KcmAKQ
- MCPVerAL+i/VqprwhIGrm/rMK6F/ak1n1a0plNP8E7Put7TotAlcsc1Us3pSIM9nL7pZyN4NPXo
- UGYNOtWjnkVFc7i78m1AG/CVOBCmZxfTUu/zxlQYCEUjuIzo=
-X-Google-Smtp-Source: AGHT+IGP/HzBIsp8YHSufDXrLILO8cv1plXNXJZrkyDTWevV/oCIenB5RqRXK01iJWBufG9zMIPJdwzXYn/AH+wmAwU=
-X-Received: by 2002:a05:6214:3291:b0:6bb:99d4:e3f7 with SMTP id
- 6a1803df08f44-6bd78d5563bmr22724296d6.29.1723219868723; Fri, 09 Aug 2024
- 09:11:08 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1723220014; x=1723824814; i=xypron.glpk@gmx.de;
+ bh=Kj8mRrreSD7e5wT2tz4mHn1z1Pj8n5DNSnfw4L+UZ58=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=tHw3jqjKiLHhJBnbyXU/nNAoJamqAc7oM7dWayGiG1jJSVkWwAtmGzoQ/F1ujqfQ
+ 4IQ86QjpsrP7ZmfRQVhn6iWaAqfMkwa/U2hIWK4EphrnOKp9Ig4hTHlBjIDIfVprS
+ /YLPjfE/qezzMbfgrBnZf9dwR2DqLwj0LStbJ+hWYzzxYr6gb+g3SelNVlG7LaY98
+ DgqKEskhMyx9zlqjaqaLEttHIEMZsINNjDaHfUnS+U3YY/d8ahXNKWrFEqXa2Bt5T
+ f4ZWt3/p+mp6wCj6rUY1lbJNMfk10jdAiNIjzV+3ZpQup5nSFg+nOj9PiV0C1v10X
+ hxzv7waQpXz68V1KFg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([178.202.41.98]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MUXtS-1slDgc1r6W-00QejV; Fri, 09
+ Aug 2024 18:13:34 +0200
+Message-ID: <04ba0220-864c-40cf-bdc4-73ae6137b704@gmx.de>
+Date: Fri, 9 Aug 2024 18:13:27 +0200
 MIME-Version: 1.0
-References: <20240801173637.1071068-1-sjg@chromium.org>
-In-Reply-To: <20240801173637.1071068-1-sjg@chromium.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 9 Aug 2024 10:10:58 -0600
-Message-ID: <CAFLszTguiXRLhCApXTX__KoD3a==cyKRVMXyu8NFtYbk1N2k-g@mail.gmail.com>
-Subject: Re: [PATCH v2 0/3] efi: Start tidying up memory management
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/3] ext4: Fix integer overflow in ext4fs_read_symlink()
+To: Richard Weinberger <richard@nod.at>
+Cc: sjg@chromium.org, Jixiong.Hu@mediatek.com,
+ marek.vasut+renesas@mailbox.org, patrick.delaunay@foss.st.com,
+ ilias.apalodimas@linaro.org, seanga2@gmail.com, trini@konsulko.com,
+ upstream+uboot@sigma-star.at, u-boot@lists.denx.de
+References: <20240809095430.3656-1-richard@nod.at>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240809095430.3656-1-richard@nod.at>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:E65PhAe7UA280KbmecA/5CRgxL2T16dmb31XvEBa9YzMTFmQ1tY
+ VecExHdpPSHJhwqFBg4ezv8DMh/cGblRHa1fb6lMLUi2Rht1I7mPoNgQPztiyoLJB7Y0chM
+ TkJsyqeUUmKjGhUAmgvwYhGvvtMHcplFCaKdMrmKCLIxJlApffNTYwx2wKeeVoNmUaWHTRs
+ /mYztHQjy0w6EHBRgoMmA==
+UI-OutboundReport: notjunk:1;M01:P0:sUmzo7BbcHA=;kYtub8KActI/XXzsO0QONb6Vxvx
+ n4r3PZy/xd7AdqXWW92PYIwARXrGKM7gekdzaQImU+0+yjE0ZsFa5cJjQ9dGPLlcWN6IcKlFO
+ zx21xMURmZoLJB31UBu8nnvLjSbhXkIk7bsWIlH7pGvfE+Hs+OIb4a1iZ4lMUcDY1atyWvccN
+ itlZMlEcB2pupOELgX/mM0pdCYXqn/rKkxnCAHwOdvou5vJh6+NB5Hxmnrk5KnK24saLB+oQ0
+ 5e37z1YrhohJJr75vL1XReViPO/8OzLq7mUz9S5nFYKEQ7MwkD+93cVtHxFSBZRNu1wNfKYuF
+ 3HyIoOCZK15eA3sdFFgcIU+0JTp2/oTBHJaIeMeYgdRzfiZfeFISp7BmESUohFyXofSOCZO20
+ b6nODWDuCcQvb6BpyN7ALyPMLSb8F0QCzaUW/H0jNJjVoTFbNB2MW/h4X4FhLAT3XCtVz780Y
+ hxqjCucPS35KCTLrFINi8oQiDIMMqZCypDVRHa3WzyrzRt5zutWyf3OcMTDv766kPgJFBxzFK
+ Y2qLZVhyE3iikbxE0/4uCEMB6UF/GlnsoxwM7bgYGa2Eez8jIed56mxp+ZKJCmVGxido4t/Hb
+ GMfitpnXJamTNvOkFnOd+yQbyxOCa0axJfsLNPINlnIF1QfAnvr1S9Nezn5Ukxp1mPXzeThKG
+ Nfl2N0jHqJ0f6D6ILKGDR/2ad90h6OEP4grZzrwTSm1OSBx8rAmnhek+gMjwZ/yeElNGAARHq
+ gF0JB2/V2UvgEN/MV8oScLHY/r/nUJp6PARzzbaoMXX+9CL/HkybL5fL9ZbGEDk21TeDnfJyl
+ f2H+ih/zT6Dwchb8TyzxSi8g==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,65 +92,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On 09.08.24 11:54, Richard Weinberger wrote:
+> While zalloc() takes a size_t type, adding 1 to the le32 variable
+> will overflow.
+> A carefully crafted ext4 filesystem can exhibit an inode size of 0xfffff=
+fff
+> and as consequence zalloc() will do a zero allocation.
+>
+> Later in the function the inode size is again used for copying data.
+> So an attacker can overwrite memory.
+>
+> Avoid the overflow by using the __builtin_add_overflow() helper.
+>
+> Signed-off-by: Richard Weinberger <richard@nod.at>
+> ---
+>   fs/ext4/ext4_common.c | 7 ++++++-
+>   1 file changed, 6 insertions(+), 1 deletion(-)
+>
+> diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
+> index 52152a2295..36999b608f 100644
+> --- a/fs/ext4/ext4_common.c
+> +++ b/fs/ext4/ext4_common.c
+> @@ -2181,13 +2181,18 @@ static char *ext4fs_read_symlink(struct ext2fs_n=
+ode *node)
+>   	struct ext2fs_node *diro =3D node;
+>   	int status;
+>   	loff_t actread;
+> +	size_t alloc_size;
+>
+>   	if (!diro->inode_read) {
+>   		status =3D ext4fs_read_inode(diro->data, diro->ino, &diro->inode);
+>   		if (status =3D=3D 0)
+>   			return NULL;
+>   	}
+> -	symlink =3D zalloc(le32_to_cpu(diro->inode.size) + 1);
+> +
+> +	if (__builtin_add_overflow(le32_to_cpu(diro->inode.size), 1, &alloc_si=
+ze))
+> +		return NULL;
 
-On Thu, 1 Aug 2024 at 11:36, Simon Glass <sjg@chromium.org> wrote:
->
-> We have been discussing the state of EFI memory management for some
-> years so I thought it might be best to send a short series showing some
-> of the issues we have talked about.
->
-> This one just deals with memory allocation. It updates EFI to use
-> U-Boot memory allocation for the pool where possible. Most functions use
-> that anyway and it is much more efficient. It also avoids allocating
-> things 'in space' in conflict with the loaded images.
->
-> For v2 I have dropped patches which are not germane to the main idea.
->
-> Note that this series is independent from Sugosh's lmb series[1],
-> although I believe it will point the way to simplifying some of the
-> later patches in that series.
->
-> Overall, some issues which should be resolved in future are:
-> - allocation inconsistency, e.g. efi_add_protocol() uses malloc() but
->   efi_dp_dup() does not (this series makes a start)
-> - change efi_bl_init() to register events later, when the devices are
->   actually used
-> - rather than efi_set_bootdev(), provide a bootstd way to take note of
->   the device images came from and allow EFI to query that when needed
-> - EFI_LOADER_BOUNCE_BUFFER - can use U-Boot bounce buffers?
->
-> Minor questions on my mind:
-> - is unaligned access useful? Is there a performance penalty?
-> - API confusion about whether something is an address or a pointer
->
-> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=416441
->
-> Changes in v2:
-> - Drop patch 'Show more information in efi index'
-> - Drop patch 'Avoid pool allocation in efi_get_memory_map_alloc()'
-> - Add the word 'warning', use log_warning() and show the end address
-> - Reorder patches a little
->
-> Simon Glass (3):
->   efi: Allow use of malloc() for the EFI pool
->   efi: Convert device_path allocation to use malloc()
->   efi: Show the location of the bounce buffer
->
->  common/dlmalloc.c                        |   7 ++
->  include/efi_loader.h                     |  18 ++++
->  include/malloc.h                         |   7 ++
->  lib/efi_loader/efi_bootbin.c             |  11 +++
->  lib/efi_loader/efi_device_path.c         |  43 +++++----
->  lib/efi_loader/efi_device_path_to_text.c |   2 +-
->  lib/efi_loader/efi_memory.c              | 110 +++++++++++++++++------
->  7 files changed, 148 insertions(+), 50 deletions(-)
->
-> --
-> 2.34.1
+Thank you for pointing at the problematic code.
+
+You are calling __builtin_add_overflow(int, int, size_t *).
+
+__builtin_add_overflow() is not defined in the C-standard.
+
+Is there any well defined behavior for this on systems where size_t has
+more bits than int?
+
+I could imagine implementations just copying an int to the first 32 bits
+of alloc_size and leaving the other bits untouched.
+
+Hopefully your C-compiler simply refuses to compile this code.
+
+I would prefer to stick to standard C:
+
+alloc_size =3D le32_to_cpu(diro->inode.size) + 1UL;
+if (!alloc_size)
+	return NULL;
+
+Here an overflow can only occur on 32bit systems.
+
+Best regards
+
+Heinrich
+
+> +
+> +	symlink =3D zalloc(alloc_size);
+>   	if (!symlink)
+>   		return NULL;
 >
 
-Are there any comments on this series, please?
-
-Regards,
-Simon
