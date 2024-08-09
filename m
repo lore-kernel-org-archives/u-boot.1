@@ -4,60 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5D75C52D7F
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 09:35:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BB08C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 09:37:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4097688B80;
-	Fri,  9 Aug 2024 11:35:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id C864A88702;
+	Fri,  9 Aug 2024 11:37:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="B8J9S3uU";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="T4SDoF91";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5CDA88B9F; Fri,  9 Aug 2024 11:35:50 +0200 (CEST)
-Received: from mail-m92232.xmail.ntesmail.com (mail-m92232.xmail.ntesmail.com
- [103.126.92.232])
+ id D979688A0E; Fri,  9 Aug 2024 11:37:23 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EBE4881C3
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 11:35:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 84EDF88581
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 11:37:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=B8J9S3uUze4qewRxeVZJZLkZA+PK7IGtzsKgyllU527se79tL+lgxIi26iT26xUTSda0q5ZsPRC4dVL3NoKoZK5Gf3/2JyHXgFvQzyrC6I++0eskg1tyrQzkhrf+yMEIh2iVNtOZGQIYOlXtfLd9Ko4pbQXJBWT6UhZsnbxxD3I=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=dgZ7858GzH400eIJibkynTL3VJoKIQTEqmEJG1BiwHE=;
- h=date:mime-version:subject:message-id:from;
-Received: from [192.168.60.65] (unknown [103.29.142.67])
- by smtp.qiye.163.com (Hmail) with ESMTPA id BF577900620;
- Fri,  9 Aug 2024 17:35:36 +0800 (CST)
-Message-ID: <b8b5d3aa-a10a-4cb9-96a3-298d0a9a980e@rock-chips.com>
-Date: Fri, 9 Aug 2024 17:35:35 +0800
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=a81f=PI=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1723196232;
+ bh=2IXey5qanib7+QkKttQwccaH/tUvbRdGo95Bsz2IRQw=;
+ b=T4SDoF914OGz451hNu89ocymnVqwRaBfFBadOQsmH+9I9MkZv2+xEIe2fvnWuoXuXPKKjLanx
+ kTg65OzCO28GFMWUhifh+xzIeZHEMJnLB5UVKtJdvlEEvSAIBMdvCyRAxNKqiyFU7gAhFcGozem
+ N0SjNQtLJbNfq8pZaFfs8uZUJSw3iYlXaXGpLqwSsDfn7EIR22cYA+GTZB2CJEvyGueQBNAMT/K
+ P+bqI/B2qG3qxeGldgthPITX38GBgoEHVXoup+2EUw7dmqzMzRpsOdDhhfG5ryNiAFr0Yv9SGrH
+ qbVpPX6L2+gDOrlyEjEdBQ8ciM6sKn5kUnb55H0FcjLw==
+Message-ID: <56322afa-1595-4228-8259-728a92531025@kwiboo.se>
+Date: Fri, 9 Aug 2024 11:37:07 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 02/10] pinctrl: rockchip: Add a pin_to_bank() helper
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20240802225705.2640999-1-jonas@kwiboo.se>
- <20240802225705.2640999-3-jonas@kwiboo.se>
+Subject: Re: [PATCH v3 4/7] board: rock5b-rk3588: enable USB-C in operating
+ system
+To: Sebastian Reichel <sre@kernel.org>, Kever Yang <kever.yang@rock-chips.com>
+Cc: Marek Vasut <marex@denx.de>, Eugen Hristev
+ <eugen.hristev@collabora.com>, Tim Harvey <tharvey@gateworks.com>, Philipp
+ Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>, Soeren
+ Moch <smoch@web.de>, u-boot@lists.denx.de
+References: <20240802180027.139193-1-sebastian.reichel@collabora.com>
+ <20240802180027.139193-5-sebastian.reichel@collabora.com>
+ <88da35e4-77d8-4360-8be2-5efa6ae0d5cf@kwiboo.se>
+ <j654dnoy5yu57do2nmdssfykvnw74hayl53nlqvn5jlycr6ny2@h5pprs7sjfds>
 Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240802225705.2640999-3-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <j654dnoy5yu57do2nmdssfykvnw74hayl53nlqvn5jlycr6ny2@h5pprs7sjfds>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCTU1CVkMdT0NJHUgaTB9MTFYVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlKS0hVSUJVSk9JVU1MWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
- VKQktLWQY+
-X-HM-Tid: 0a91367e5f0203a9kunmbf577900620
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Ky46Szo*UTI9PQ4TLklKIzUX
- TikaCQhVSlVKTElISkJNSkhMTUJCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUhITEs3Bg++
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66b5e347527e81fbd6225d4f
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,59 +78,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Sebastian,
 
-On 2024/8/3 06:56, Jonas Karlman wrote:
-> Add a pin_to_bank() helper that can locate a pin bank based on the pin
-> offset, to be used in get_gpio_mux() and gpio_request_enable() ops.
->
-> Reset ctrl->nr_pins to 0 so that pin_to_bank() can locate a bank after
-> the second probe in U-Boot proper.
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+On 2024-08-03 18:09, Sebastian Reichel wrote:
+> Hi Jonas,
+> 
+> On Fri, Aug 02, 2024 at 11:04:05PM GMT, Jonas Karlman wrote:
+>> Hi Sebastian,
+>>
+>> On 2024-08-02 19:59, Sebastian Reichel wrote:
+>>> Since older U-Boot releases do not negotiate USB PD, the kernel
+>>> DT may not enable the USB-C controller by default to avoid a
+>>> regression. The plan is to upstream it with 'status = "fail";'
+>>> instead. U-Boot should then mark it as 'status = "okay";' if
+>>> it negotiated USB PD. Currently existing upstream kernel DTs do
+>>> not yet have the USB-C controller at all, so we ignore any
+>>> failures.
+>>
+>> I do not really understand why you need to upstream it this way, there
+>> are plenty of other rk3588 boards with fcs,fusb302 already having status
+>> "okay" that possible are affected by same USB PD issue that ROCK 5B
+>> have.
+>>
+>> I guess you want to try and protect users that upgrade kernel DT and
+>> ignore upgrading to a newer U-Boot, use vendor U-Boot or any other
+>> bootloader from having possible issues with those USB PD power supplies
+>> that have issues?
+> 
+> Correct. Existing upstream U-Boot with new kernel would result in a
+> boot loop. That's precisly why we need this U-Boot series. Since the
+> Rock 5B is usually powered via USB-C and Radxa explicitly requests a
+> USB-C PD power-supply almost everyone would be affected. IDK how
+> other boards solve this considering U-Boot does not yet have a
+> fusb302 driver. For me **all** of my power-supplies trigger a hard
+> reset and thus a power-loss when booting a kernel with fusb302
+> combined with an old U-Boot version not supporting fusb302.
+> 
+> -- Sebastian
+> 
+>>> Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+>>> ---
+>>>  board/radxa/rock5b-rk3588/rock5b-rk3588.c | 11 +++++++++++
+>>>  1 file changed, 11 insertions(+)
+>>>
+>>> diff --git a/board/radxa/rock5b-rk3588/rock5b-rk3588.c b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
+>>> index 1c17ae93c76c..4e926ebf2cb0 100644
+>>> --- a/board/radxa/rock5b-rk3588/rock5b-rk3588.c
+>>> +++ b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
+>>> @@ -3,6 +3,8 @@
+>>>   * Copyright (c) 2023-2024 Collabora Ltd.
+>>>   */
+>>>  
+>>> +#include <fdtdec.h>
+>>> +#include <fdt_support.h>
+>>>  #include <usb/tcpm.h>
+>>>  
+>>>  #ifdef CONFIG_MISC_INIT_R
+>>> @@ -33,3 +35,12 @@ int misc_init_r(void)
+>>>  	return 0;
+>>>  }
+>>>  #endif
+>>> +
+>>> +#ifdef CONFIG_OF_BOARD_SETUP
+>>> +int ft_board_setup(void *blob, struct bd_info *bd)
+>>> +{
+>>> +	if (IS_ENABLED(CONFIG_MISC_INIT_R))
+>>
+>> It make very little sense to check for this, it is implied for almost
+>> all Rockchip boards since it is used in rockchip board common code
+>> to setup serial and Ethernet mac addresses env vars.
 
-Thanks,
-- Kever
-> ---
-> v2: New patch split from "pinctrl: rockchip: Add gpio_request_enable()
->      ops" of "rockchip: Add gpio request() ops" series
-> ---
->   .../pinctrl/rockchip/pinctrl-rockchip-core.c   | 18 ++++++++++++++++++
->   1 file changed, 18 insertions(+)
->
-> diff --git a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
-> index f6af22501c36..894ff74aee98 100644
-> --- a/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
-> +++ b/drivers/pinctrl/rockchip/pinctrl-rockchip-core.c
-> @@ -176,6 +176,23 @@ static int rockchip_get_mux(struct rockchip_pin_bank *bank, int pin)
->   	return ((val >> bit) & mask);
->   }
->   
-> +static struct rockchip_pin_bank *rockchip_pin_to_bank(struct udevice *dev,
-> +						      unsigned int pin)
-> +{
-> +	struct rockchip_pinctrl_priv *priv = dev_get_priv(dev);
-> +	struct rockchip_pin_ctrl *ctrl = priv->ctrl;
-> +	struct rockchip_pin_bank *bank = ctrl->pin_banks;
-> +	int i;
-> +
-> +	for (i = 0; i < ctrl->nr_banks; ++i, ++bank) {
-> +		if (pin >= bank->pin_base &&
-> +		    pin < bank->pin_base + bank->nr_pins)
-> +			return bank;
-> +	}
-> +
-> +	return NULL;
-> +}
-> +
->   static int rockchip_pinctrl_get_gpio_mux(struct udevice *dev, int banknum,
->   					 int index)
->   {	struct rockchip_pinctrl_priv *priv = dev_get_priv(dev);
-> @@ -539,6 +556,7 @@ static struct rockchip_pin_ctrl *rockchip_pinctrl_get_soc_data(struct udevice *d
->   	drv_pmu_offs = ctrl->pmu_drv_offset;
->   	drv_grf_offs = ctrl->grf_drv_offset;
->   	bank = ctrl->pin_banks;
-> +	ctrl->nr_pins = 0;
->   
->   	for (i = 0; i < ctrl->nr_banks; ++i, ++bank) {
->   		int bank_pins = 0;
+As noted, please drop this check, MISC_INIT_R is implied for almost all
+Rockchip targets and has nothing to do with when status should change
+for fcs,fusb302.
+
+Regards,
+Jonas
+
+>>
+>> Regards,
+>> Jonas
+>>
+>>> +		fdt_status_okay_by_compatible(blob, "fcs,fusb302");
+>>> +	return 0;
+>>> +}
+>>> +#endif
+>>
+
