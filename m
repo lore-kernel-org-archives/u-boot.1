@@ -4,79 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1EE5C52D7C
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 19:02:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8741EC3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 19:12:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4634988521;
-	Fri,  9 Aug 2024 21:02:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id E91F288663;
+	Fri,  9 Aug 2024 21:12:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="OtjzimkZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZFNwWkv1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B2B28863B; Fri,  9 Aug 2024 21:02:08 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D548F88663; Fri,  9 Aug 2024 21:12:44 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2881A884A9
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 21:02:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D220A88581
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 21:12:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1723230124; x=1723834924; i=xypron.glpk@gmx.de;
- bh=GCnES4SY4S9Snavx3OVzlhqC8UTAFDKdcDmcQC1ZxnA=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=OtjzimkZkhU4+W7GYLq3glc+K97DOQqDTKtHC/EspWOPvpAJH8YA3HAo3JNzAKKQ
- dcK1zm94RcEWI8wEuhXKREvYv9+RU4UxtRmipM+YvjLlrWPtEJj7kzbX0nFNGkMYJ
- ztYR7y0HomLAJXUw2UYxvBjo5NXggmqBQkSdDCLNbozNtqpSf7gEAchjnVD3KOzFy
- szh7Mofp3mzGMQI/p+710eh16MWhDVr56V9TZ/mU+RqmJV6AFcm0iV7VcnTOtCmVB
- b2kbHwp9XlKZCEyGY7PZjo+6z3IrC42xifBpB/b4KTz/JCOadoCY6YHFkmd/9ZS3u
- gNSO0FTbTwYyTf5S6g==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([178.202.41.98]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N2Dx8-1sCgVu07qw-0117SK; Fri, 09
- Aug 2024 21:02:04 +0200
-Date: Fri, 09 Aug 2024 21:02:01 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>
-CC: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 3/3] efi: Show the location of the bounce buffer
-User-Agent: K-9 Mail for Android
-In-Reply-To: <CAFLszTgmRMCK9E==O-sz51ONfaGENnoStXPY4LL5HS0F-=cDfA@mail.gmail.com>
-References: <20240801173637.1071068-1-sjg@chromium.org>
- <20240801173637.1071068-4-sjg@chromium.org>
- <4594d522-bb63-45ee-b660-0130ae55d341@gmx.de>
- <CAFLszTgmRMCK9E==O-sz51ONfaGENnoStXPY4LL5HS0F-=cDfA@mail.gmail.com>
-Message-ID: <5EA6AA2B-533E-424D-B2E9-13A4CA8C2E9A@gmx.de>
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-36868fcb919so1440821f8f.2
+ for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 12:12:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1723230762; x=1723835562; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:subject:to
+ :from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=IzXbVzwoSkVU0jZd3aqwPaE3B+VM2x0xn1Ovd+xdtMA=;
+ b=ZFNwWkv1G681uk+4dsmjyjVZp2xLQrGA7JjGo0A3QyQ78nOQoHtMFTD/duGDFTyDQZ
+ TxM/oIF01nLpZwKXs3yWJHWIw6vkcPPZngquwu5xk5MxFBR+SHo32EEu6A/mSQxW1kFz
+ RuVZleUsMtOBSxMP+ujcW0hXAsLwsMnFiazNQiCZAooDy/3ZI8ipKZe0Z4EFIOGwYHU3
+ 5ILfoguJtJeH8BEJmgZyZujGHpk9EdQ6T3q/THoNOmS7ES7YZW1e3v6bYEsAEG8v+a4r
+ KnJf1i/wT7wf+aE5xWdQX8AT0ppc4ENOX0OIUpZoFW3GgSWmYpm7gVdQDWZW/9xAMicz
+ 2/uQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723230762; x=1723835562;
+ h=in-reply-to:content-disposition:mime-version:references:subject:to
+ :from:date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IzXbVzwoSkVU0jZd3aqwPaE3B+VM2x0xn1Ovd+xdtMA=;
+ b=k+WRQh8Oea4eCtrIp8++I1FsU6cuje4sLYRYpsr8hQKTQQID9tow1a3xNQtQNZoVaN
+ ReI9+Ya785QIov7KHLoyUoAP3xS5hv3XeAtP+tMbd3uVX2c6Z2MMSG3IPnSFTRTnEhyd
+ qH1dPrnQU05KizJeJzoXkeRrfiLAEcMK1BKLtkOewbQRmcJdBl0goYmnxxFpCskyvvUD
+ MLsmKeT/jBdCJ5yxm0vyRT7mV7IENefCIyWgf6iIDx14tQTGL9GRKHQVonnQfwlEUY5w
+ y1SrA/hBP4n6AWTOejIDjQjTLrKGXS0VG4s8HAXl9ViZSf8hswWUcApC4pZ53B6SZvUD
+ NaPg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVEjwSAiEmriEkjE1mrZVjnoQRccntVjJHH9LzRZ3f0YfoiS4oyWgZEMaee3OJlt7UzZHLIdeFQrZtww8bnZqqEkunZqQ==
+X-Gm-Message-State: AOJu0Yz+BLx8xlZHlUtsLG0GLUiLZlxHw1zrrHk3Cr9cZRjKOd6vupFf
+ K3LDA5MGD3w1eKU8w1eEcmyJBeGkdXOiWUzzmaFUIun7jD4jB6dO
+X-Google-Smtp-Source: AGHT+IHyVrDcpdSeTuWIJqXzPj48v0B8glDZ854Ed0PBrHdNJ/02n0y8mSUjJAo0MduxBOjss99CEg==
+X-Received: by 2002:a5d:453a:0:b0:367:9d2c:9602 with SMTP id
+ ffacd0b85a97d-36d616e2b48mr1978605f8f.49.1723230761807; 
+ Fri, 09 Aug 2024 12:12:41 -0700 (PDT)
+Received: from Ansuel-XPS. (host-87-10-253-138.retail.telecomitalia.it.
+ [87.10.253.138]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-36e4cfeef22sm242719f8f.52.2024.08.09.12.12.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 09 Aug 2024 12:12:41 -0700 (PDT)
+Message-ID: <66b66a29.df0a0220.208aae.0bba@mx.google.com>
+X-Google-Original-Message-ID: <ZrYgzcXcDpa99mtO@Ansuel-XPS.>
+Date: Fri, 9 Aug 2024 15:59:41 +0200
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Arseniy Krasnov <avkrasnov@salutedevices.com>,
+ Martin Kurbanov <mmkurbanov@salutedevices.com>,
+ Dmitry Dunaev <dunaev@tecon.ru>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sean Anderson <sean.anderson@seco.com>,
+ Shiji Yang <yangshiji66@outlook.com>,
+ Vasileios Amoiridis <vassilisamir@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 9/9] doc: introduce led.rst documentation
+References: <20240807195413.30456-1-ansuelsmth@gmail.com>
+ <20240807195413.30456-10-ansuelsmth@gmail.com>
+ <20240808-ferret-childless-9151f7abae55@thorsis.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:29l96b4sPPcxjh6rvucTf26DUGunCc1Q+V9Yo6wsZEpwlac79Rh
- K+dCwHH0Zq0VOZf87OscAU79JHI5Wj1U1aGDt1Lm3iThqt+MqF7vx5ICad66EOtaNpZh6+B
- PPET9itHgKWmyVfKcJTxf070XYugfQ9am6pYxH00ZmfibgGwQfNOXawt6cWelWKDYkovEms
- kypP9rt9KBxqaO0iLbEpw==
-UI-OutboundReport: notjunk:1;M01:P0:G5BTLsCFLts=;BUd/KQqFadOzoG3Pznsz8INWt2h
- gdaOjz+JkMqY6u4rs3t6Whsups29efCZadF7biFYuGePhX1kqHKVOBKyod07dNkj7PUm6UQMe
- tMZvy0nWYi9fjbKlcrwfBZSxUCOZ3C7Cky7lGkqCJjcErj/91fE/BVTvFQSa9NoTt5EfkhFGt
- iU5g7vQrQ850qJb4xZmPuVUtjPC9YAZoK5Dir+RyVPgD7kAsWzduiD/58Y5PMpYF7MGdtyT11
- yZykt5ckofRMEEtUyFKLh/UOzba0qh4PLTv23/Arzl/Zy+e5pqrd3jHMrvI3aMzTA28EdA54Z
- IXLFmMooooTRkBq3iKyPCWTurZacrRTCIq71Uyo1NeB9mA0VjMaVYaJRH0H0K28GNa+DkfHd6
- bKW+Ht5hNh2FJwNherFbSYo3UMOIctsIVGEK+mwCQTnMoaSK4+Nyr56I7AijA1NHR+DTzN6nU
- 3UCxDTiRcEdjMKKSoVeAIWLsZz85hpKER7MhXIUw1K5+o0VaIEjIPIRcCNt5kpgOMm9vWNayh
- uEHjXobnU3Y6NV6PyVr7Q0jkT9My303SYdsiplMcR67ES8YLVI09A4c66o8TZ67cH72NhSw+D
- dNLIPtTjwYJslzp6YaPgBiPN+dqZp4jKNzJjiMQ6Gp8hkmvR3jGc+AY6N5T2ntNYFrSqfhV5l
- /ifvpWOMNbJ7USLrv7P1mTd9txthHnhsckMo+Vio+B6sC/nkCsZDUHT5HdobjninBeHDYaZTf
- 2rcjin5YzrFgzE5+z1XwXxgWqjbA7Gxm4kRronu+P5uZXgL3O2eGzUgg9zOrwv5Pa/nw+hCLT
- k4MYT5VIhKHf+8rfrlZnAerA==
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240808-ferret-childless-9151f7abae55@thorsis.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,125 +110,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Aug 08, 2024 at 08:34:32AM +0200, Alexander Dahl wrote:
+> Hello Christian,
+> 
+> Am Wed, Aug 07, 2024 at 09:54:12PM +0200 schrieb Christian Marangi:
+> > Introduce simple led.rst documentation to document all the additional
+> > Kconfig and the current limitation of LED_BLINK and GPIO software blink.
+> 
+> This is a good idea.  An overview of all the LED possibilities in the
+> Documentation is much appreciated.  Remarks below.
+> 
+> > 
+> > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+> > ---
+> >  doc/api/index.rst |  1 +
+> >  doc/api/led.rst   | 10 ++++++++++
+> >  include/led.h     | 38 ++++++++++++++++++++++++++++++++++++++
+> >  3 files changed, 49 insertions(+)
+> >  create mode 100644 doc/api/led.rst
+> > 
+> > diff --git a/doc/api/index.rst b/doc/api/index.rst
+> > index ec0b8adb2cf..9f7f23f868f 100644
+> > --- a/doc/api/index.rst
+> > +++ b/doc/api/index.rst
+> > @@ -14,6 +14,7 @@ U-Boot API documentation
+> >     event
+> >     getopt
+> >     interrupt
+> > +   led
+> >     linker_lists
+> >     lmb
+> >     logging
+> > diff --git a/doc/api/led.rst b/doc/api/led.rst
+> > new file mode 100644
+> > index 00000000000..e52e350d1bb
+> > --- /dev/null
+> > +++ b/doc/api/led.rst
+> > @@ -0,0 +1,10 @@
+> > +.. SPDX-License-Identifier: GPL-2.0+
+> > +
+> > +LED
+> > +===
+> > +
+> > +.. kernel-doc:: include/led.h
+> > +   :doc: Overview
+> > +
+> > +.. kernel-doc:: include/led.h
+> > +   :internal:
+> > \ No newline at end of file
+> > diff --git a/include/led.h b/include/led.h
+> > index 61ece70a975..77b18ddffbf 100644
+> > --- a/include/led.h
+> > +++ b/include/led.h
+> > @@ -10,6 +10,44 @@
+> >  #include <stdbool.h>
+> >  #include <cyclic.h>
+> >  
+> > +/**
+> > + * DOC: Overview
+> > + *
+> > + * Generic LED API provided when a supported compatible is defined in DeviceTree.
+> > + *
+> > + * To enable support for LEDs, enable the `CONFIG_LED` Kconfig option.
+> > + *
+> > + * The most common implementation is for GPIO-connected LEDs. If using GPIO-connected LEDs,
+> > + * enable the `LED_GPIO` Kconfig option.
+> > + *
+> > + * `LED_BLINK` support requires LED driver support and is therefore optional. If LED blink
+> > + * functionality is needed, enable the `LED_BLINK` Kconfig option. If LED driver doesn't
+> > + * support HW Blink, SW Blink can be used with the Cyclic framework by enabling the
+> > + * CONFIG_LED_SW_BLINK.
+> > + *
+> > + * Boot and Activity LEDs are also supported. These LEDs can signal various system operations
+> > + * during runtime, such as boot initialization, file transfers, and flash write/erase operations.
+> > + *
+> > + * To enable a Boot LED, enable `CONFIG_LED_BOOT_ENABLE` and define `CONFIG_LED_BOOT_LABEL`. This
+> > + * will enable the specified LED to blink and turn ON when the bootloader initializes correctly.
+> 
+> This is somehow redundant to defining "u-boot,boot-led" in
+> *-u-boot.dtsi snippets, isn't it?  This is documented in
+> doc/device-tree-bindings/config.txt and used by roughly a dozen dtsi
+> files and five times in board code.  It also stores a LED label, which
+> board code can make use of then, but I think it's not further
+> integrated in any driver or class code.  Are you aware of that mechanism
+> and hwo does it fit into your rework of the boot led?
+>
 
+No I wasn't aware of those property. I will check how that can be
+expanded and implemented here as it seems a better way than raw configs.
 
-Am 9=2E August 2024 20:36:35 MESZ schrieb Simon Glass <sjg@chromium=2Eorg>=
-:
->Hi Heinrich,
->
->On Fri, 9 Aug 2024 at 11:32, Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>=
- wrote:
->>
->> On 01=2E08=2E24 19:36, Simon Glass wrote:
->> > The EFI_LOADER_BOUNCE_BUFFER feature was added many years ago=2E It i=
-s not
->> > clear whether it is still needed, but 24 boards (lx2160ardb_tfa_stmm,
->> > lx2162aqds_tfa_SECURE_BOOT and the like) use it=2E
->> >
->> > This feature uses EFI page allocation to create a 64MB buffer 'in spa=
-ce'
->> > without any knowledge of where boards intend to load their images=2E =
-This
->> > may result in image corruption or other problems=2E
->> >
->> > For example, if the feature is enabled on qemu_arm64 it puts the EFI
->> > bounce buffer at 1045MB, with the kernel at 1028MB and the ramdisk at
->> > 1088MB=2E The kernel is probably smaller than 27MB but the buffer doe=
-s
->> > overlap the ramdisk=2E
->> >
->> > The solution is probably to use BOUNCE_BUFFER instead, with the EFI
->> > version being dropped=2E For now, show the address of the EFI bounce
->> > buffer so people have a better chance to detect the problem=2E
->> >
->> > Note: I avoided converting this #ifdef to use IS_ENABLED() since I ho=
-pe
->> > that the feature may be removed=2E
->>
->> EFI_BLOCK_IO_PROTOCOL=2EReadBlocks() and
->> EFI_BLOCK_IO_PROTOCOL=2EWriteBlocks() are expected to block until all
->> bytes are transferred=2E
->>
->> The complete file transfer is chunked according to the size of the EFI
->> bounce buffer=2E
->>
->> Taking care of alignment issues would best handled by the block uclass=
-=2E
->>
->> When CONFIG_BOUNCE_BUFFER=3Dy, bounce_buffer_start_extalign() uses
->> memalign() which limits the bounce buffer to available malloc() memory
->> (typically < 2 MiB)=2E
->>
->> I cannot see how blk_read() with CONFIG_BOUNCE_BUFFER=3Dy will work if
->> blkcnt * desc->blksz is greater than the available malloc memory=2E
->
->Yes, it uses malloc()=2E The maximum read length on MMC, for example,
->seems to default to 32MB, although it is only 128KB on a few
->platforms=2E
->
->I am thinking we should be allocating space in the bloblist to hold
->all these sorts of things=2E=2E=2Eit can be as large as needed and we can
->allocate space for it during relocation=2E
->
->>
->> Shouldn't the block uclass support chunking?
->
->It only supports readling whole blocks, if that is what you mean=2E Are
->you suggesting changing the blk API, or something else?
+> 
+> > + *
+> > + * To enable an Activity LED, enable `CONFIG_LED_ACTIVITY_ENABLE` and define
+> > + * `CONFIG_LED_ACTIVITY_LABEL`.
+> > + * This will enable the specified LED to blink and turn ON during file transfers or flash
+> > + * write/erase operations.
+> > + *
+> > + * Both Boot and Activity LEDs provide a simple API to turn the LED ON or OFF:
+> > + * `led_boot_on()`, `led_boot_off()`, `led_activity_on()`, and `led_activity_off()`.
+> > + *
+> > + * Both configurations can optionally define a `_PERIOD` option if `CONFIG_LED_BLINK` or
+> > + * `CONFIG_LED_SW_BLINK` is enabled for LED blink operations, which is usually used by
+> > + * the Activity LED.
+> > + *
+> > + * When `CONFIG_LED_BLINK` or `CONFIG_LED_SW_BLINK` is enabled, additional APIs are exposed:
+> > + * `led_boot_blink()` and `led_activity_blink()`. Note that if `CONFIG_LED_BLINK` is disabled,
+> > + * these APIs will behave like the `led_boot_on()` and `led_activity_on()` APIs, respectively.
+> > + */
+> > +
+> >  struct udevice;
+> >  
+> >  enum led_state_t {
+> > -- 
+> > 2.45.2
+> > 
 
-It supports reading multiple blocks=2E If not all blocks fit into the memo=
-ry that can be assigned via memalgn, the block layer coud separate the bloc=
-ks into chunks=2E This would replace the EFI bounce buffer=2E
-
-
-
-
->
->Regards,
->Simon
->
->
->
->>
->> Best regards
->>
->> Heinrich
->>
->> >
->> > Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
->> > ---
->> >
->> > Changes in v2:
->> > - Drop patch 'Show more information in efi index'
->> > - Drop patch 'Avoid pool allocation in efi_get_memory_map_alloc()'
->> > - Add the word 'warning', use log_warning() and show the end address
->> > - Reorder patches a little
->> >
->> >   lib/efi_loader/efi_bootbin=2Ec | 9 +++++++++
->> >   1 file changed, 9 insertions(+)
->> >
->> > diff --git a/lib/efi_loader/efi_bootbin=2Ec b/lib/efi_loader/efi_boot=
-bin=2Ec
->> > index 5bb0fdcf75d=2E=2E9779dc09b5e 100644
->> > --- a/lib/efi_loader/efi_bootbin=2Ec
->> > +++ b/lib/efi_loader/efi_bootbin=2Ec
->> > @@ -211,6 +211,15 @@ efi_status_t efi_binary_run(void *image, size_t =
-size, void *fdt)
->> >               return -1;
->> >       }
->> >
->> > +#ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
->> > +     /*
->> > +      * Add a warning about this buffer, since it may conflict with =
-other
->> > +      * things
->> > +      */
->> > +     log_warning("Warning: EFI bounce buffer %p-%p\n", efi_bounce_bu=
-ffer,
->> > +                 efi_bounce_buffer + EFI_LOADER_BOUNCE_BUFFER_SIZE);
->> > +#endif
->> > +
->> >       ret =3D efi_install_fdt(fdt);
->> >       if (ret !=3D EFI_SUCCESS)
->> >               return ret;
->>
+-- 
+	Ansuel
