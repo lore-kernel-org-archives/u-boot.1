@@ -4,72 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05195C52D7C
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 18:36:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8CBFC52D7C
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 18:38:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC8B688C3D;
-	Fri,  9 Aug 2024 20:36:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6BC6288C2F;
+	Fri,  9 Aug 2024 20:38:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l0eiSXbR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eWpd0pt9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8673C880E6; Fri,  9 Aug 2024 20:36:49 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id E3625880E6; Fri,  9 Aug 2024 20:38:06 +0200 (CEST)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CC0D88C29
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 20:36:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BCFBD88C35
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 20:38:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6b7a8cada97so13745416d6.3
- for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 11:36:47 -0700 (PDT)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-6b795574f9dso13106756d6.0
+ for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 11:38:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723228606; x=1723833406; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723228683; x=1723833483; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gIU+vpN/qlaoJfk6mkzTu7lKbfnaiX/puXBztyBsWyo=;
- b=l0eiSXbR4GwikNSMUjzfZEds7U/A3/SeXMzGh3HyD1ky8u8Tkm2ewox9YJtl8aAx80
- 7IYpHjLQIjv623lvodZaAw6hsrW7l11RKK89/e/zeAu8e5jDASAIyXg2aKi6E+UUqnVV
- 3LKEMzhEY5H6jqi0fnBPE4kphq73IPipgcL/s=
+ bh=OoYTwD+kUkV57vHwE6U5IOYZg7M+vRKYPtEHoOtoINE=;
+ b=eWpd0pt9/FLlFKpJLo+44CajRrfvjQiz3bwEoGIt9jtUbGU1rLDKZdgt44sPTcrnv1
+ UyoDHj0StLkPzxQ5xUh1lIQ1cyVgrwTVcgw/4IXo6lqmBJ6LTXpgUJgDkMF0BfmcV3Vy
+ 17MY+nYRSSRzrM+A4wcr/AnX/wrB7gYiCUXaU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723228606; x=1723833406;
+ d=1e100.net; s=20230601; t=1723228683; x=1723833483;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=gIU+vpN/qlaoJfk6mkzTu7lKbfnaiX/puXBztyBsWyo=;
- b=mNFPDntW4EmNT0qyR/np0UNHx0J5zxg3y2/bUBzIBWXIFKBIz7ypF5knakEKYAaKrG
- 5/lCHdd8KMUHMiCfF3EtgOQEcWcDdqNKS/5Gdcz8nuNJ9wP06eyU9QQYEPjLPpZ5bLXz
- XHzgykJYJljc5fL/pkTPeAw5bPdChThyplArANOhppWbCWkp+59hw9KEZv40b6/4eBWH
- TPIMttLiZNFgovbLLq9iBO+zaxSZmNRJlyB7FV5D/O0HuaHB+WbdfVTpxX7v3Sxbuc+l
- D4kTW7nbFtGxMKIqBnY5kVvZWeqgD30+o4FOsSWLsZ3ZgoL3KaOpA1CC/MYbW2i/q9AH
- A0vw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXRrKJLBrfhgTFz7HfbCsGsh0oSvADCzC1Q2zH57M2VQoSo9opXe7Yo8Mkor9X76raBJcsRe23IpsqHwgdnn15HBnsHKQ==
-X-Gm-Message-State: AOJu0Yz3qrZ562e4oWdVPSpl0lXiFJkWgWtPKcprhi8IJvopzf0ijDZU
- QLaGQX5UNrLdzA4Mugj74hb6yjGgvbnKqWLHr8cL2qjBz+MQKnYKZgmtOXa2LQub7h/UM8TKPDx
- utyUE2OSrp2c0AMXXIffKJtQi6oevrGomt5ny
-X-Google-Smtp-Source: AGHT+IGkjj3wgqso8HhJ/b/kKysmWkPN7Mv9HiEZvzCygOUonOxPKiigTyWfd89UXSwWniUvJZgjvfQw0Mv9S26FqTY=
-X-Received: by 2002:a05:6214:3d11:b0:6b2:da7e:5cb7 with SMTP id
- 6a1803df08f44-6bd78cf78c3mr33893696d6.5.1723228606197; Fri, 09 Aug 2024
- 11:36:46 -0700 (PDT)
+ bh=OoYTwD+kUkV57vHwE6U5IOYZg7M+vRKYPtEHoOtoINE=;
+ b=EiBwaoL8qeEujUm+23YyxN4BAs50rO0UtdSwuRw2pb5re+YyHjMtCJ2wrBHEBhLeN7
+ f/7h35szh0elYUH0zpin8bOD1wtJqFKGvDMIGHfK/CAqThgncF5nZTBPvr3bZlAu9q9C
+ +IjanCJShEUO74BHGT9xW7zjjEjpFoxshkq3c+sfVIcdqzVTTpiuKzCt0zktsCbYjR87
+ P6+6HC4LDwB0P7ExuaayNpnYJ5mEMW+h4WkbkWc22PE8LkU229BYrDY0nVX7O5FJlYiH
+ O3tM14+aEprf2qEvJceOKN/4wivZzC4nR1CA0Is5ruizil9EHMXJlc6nxJVIO+coT9Bx
+ UUyg==
+X-Gm-Message-State: AOJu0YwLAYzKZ2NpBxfIEHrHPGqMVr+6OXJM7F0a7E0e0BxsLQRXiQCX
+ N2GE3smQkJTYpJHvvDFdoujWNnt7jAwZrJ2+hczRrPMCi2Sd6TBd0udkJgHaBtZCHuESrfOOpMm
+ A+NyMIqU+AG1GPu+FkjAGuMoknPUY7LuBOHhWybDteVBRSNE=
+X-Google-Smtp-Source: AGHT+IFbU7IzCt/gkqQnxJNexs7OuUQarxpa/V1bdUKWQpwUpdKjvxfn5qz+tWMDal/vqJUJwjoChUjEKNtExbAltaA=
+X-Received: by 2002:a05:6214:5c09:b0:6b0:72c7:88d8 with SMTP id
+ 6a1803df08f44-6bd78edf71bmr26230706d6.35.1723228683272; Fri, 09 Aug 2024
+ 11:38:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240801173637.1071068-1-sjg@chromium.org>
- <20240801173637.1071068-4-sjg@chromium.org>
- <4594d522-bb63-45ee-b660-0130ae55d341@gmx.de>
-In-Reply-To: <4594d522-bb63-45ee-b660-0130ae55d341@gmx.de>
+References: <20240718173611.4014274-1-sjg@chromium.org>
+In-Reply-To: <20240718173611.4014274-1-sjg@chromium.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 9 Aug 2024 12:36:35 -0600
-Message-ID: <CAFLszTgmRMCK9E==O-sz51ONfaGENnoStXPY4LL5HS0F-=cDfA@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] efi: Show the location of the bounce buffer
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Fri, 9 Aug 2024 12:37:52 -0600
+Message-ID: <CAFLszTj3JsUHFvWUmP07mGwK315qO=Bt0uQ=JGeKrLgBOQxoJA@mail.gmail.com>
+Subject: Re: [PATCH 00/20] i2c: Chip away at some old code
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,102 +81,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+-cc most
 
-On Fri, 9 Aug 2024 at 11:32, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 01.08.24 19:36, Simon Glass wrote:
-> > The EFI_LOADER_BOUNCE_BUFFER feature was added many years ago. It is not
-> > clear whether it is still needed, but 24 boards (lx2160ardb_tfa_stmm,
-> > lx2162aqds_tfa_SECURE_BOOT and the like) use it.
-> >
-> > This feature uses EFI page allocation to create a 64MB buffer 'in space'
-> > without any knowledge of where boards intend to load their images. This
-> > may result in image corruption or other problems.
-> >
-> > For example, if the feature is enabled on qemu_arm64 it puts the EFI
-> > bounce buffer at 1045MB, with the kernel at 1028MB and the ramdisk at
-> > 1088MB. The kernel is probably smaller than 27MB but the buffer does
-> > overlap the ramdisk.
-> >
-> > The solution is probably to use BOUNCE_BUFFER instead, with the EFI
-> > version being dropped. For now, show the address of the EFI bounce
-> > buffer so people have a better chance to detect the problem.
-> >
-> > Note: I avoided converting this #ifdef to use IS_ENABLED() since I hope
-> > that the feature may be removed.
->
-> EFI_BLOCK_IO_PROTOCOL.ReadBlocks() and
-> EFI_BLOCK_IO_PROTOCOL.WriteBlocks() are expected to block until all
-> bytes are transferred.
->
-> The complete file transfer is chunked according to the size of the EFI
-> bounce buffer.
->
-> Taking care of alignment issues would best handled by the block uclass.
->
-> When CONFIG_BOUNCE_BUFFER=y, bounce_buffer_start_extalign() uses
-> memalign() which limits the bounce buffer to available malloc() memory
-> (typically < 2 MiB).
->
-> I cannot see how blk_read() with CONFIG_BOUNCE_BUFFER=y will work if
-> blkcnt * desc->blksz is greater than the available malloc memory.
+Hi,
 
-Yes, it uses malloc(). The maximum read length on MMC, for example,
-seems to default to 32MB, although it is only 128KB on a few
-platforms.
-
-I am thinking we should be allocating space in the bloblist to hold
-all these sorts of things...it can be as large as needed and we can
-allocate space for it during relocation.
-
+On Thu, 18 Jul 2024 at 11:36, Simon Glass <sjg@chromium.org> wrote:
 >
-> Shouldn't the block uclass support chunking?
+> This series aims to remove some of the older contents of i2c.h so that
+> we can move towards having just the dm API.
+>
+> It removes four boards which are getting in the way.
+>
+>
+> Simon Glass (20):
+>   arm: Remove pg_wcom boards
+>   i2c: Remove board_i2c_init()
+>   i2c: Remove IC2_xxx enum
+>   i2c: Remove CFG_I2C_MULTI_BUS
+>   mips: malta: Drop CMD_DATE
+>   armv8: ls2085a: Drop CMD_DATE
+>   mx28 / mx51: Drop CMD_DATE
+>   MPC837XERDB: ethernut5: work_92105: Drop CMD_DATE
+>   rtc: Drop CFG_SYS_RTC_BUS_NUM
+>   date: Drop the legacy I2C code
+>   keymile: Remove use of legacy I2C
+>   i2c: mxc: pg_wcom: Drop legacy I2c
+>   i2c: Drop reference to SYS_I2C_INIT_BOARD
+>   octeon: Drop OCTEON_I2C_FDT dead code
+>   i2c: Remove I2C_SET_BUS()
+>   i2c: Remove I2C_GET_BUS()
+>   i2c: Drop CFG_SYS_MAX_I2C_BUS
+>   i2c: Drop i2c_get_bus_num_fdt() and i2c_reset_port_fdt()
+>   i2c: Remove CFG_SYS_I2C_MAX_HOPS
+>   i2c: Remove CFG_SYS_I2C_DIRECT_BUS
+>
+>  README                                        |  27 +--
+>  arch/arm/dts/ls1021a-pg-wcom-expu1.dts        | 141 -----------
+>  arch/arm/dts/ls1021a-pg-wcom-seli8.dts        | 124 ----------
+>  arch/mips/mach-octeon/octeon_fdt.c            |  22 --
+>  board/keymile/Kconfig                         |   4 -
+>  board/keymile/common/common.c                 |  69 ------
+>  board/keymile/pg-wcom-ls102xa/Kconfig         |  39 ----
+>  board/keymile/pg-wcom-ls102xa/MAINTAINERS     |  16 --
+>  board/keymile/pg-wcom-ls102xa/Makefile        |  11 -
+>  board/keymile/pg-wcom-ls102xa/ddr.c           |  91 --------
+>  .../keymile/pg-wcom-ls102xa/pg-wcom-expu1.env |   3 -
+>  .../keymile/pg-wcom-ls102xa/pg-wcom-ls102xa.c | 218 ------------------
+>  .../keymile/pg-wcom-ls102xa/pg-wcom-seli8.env |   3 -
+>  cmd/date.c                                    |  32 ---
+>  cmd/i2c.c                                     |  23 --
+>  configs/MPC837XERDB_defconfig                 |   1 -
+>  configs/ethernut5_defconfig                   |   1 -
+>  configs/ls2080aqds_nand_defconfig             |   1 -
+>  configs/ls2080aqds_qspi_defconfig             |   1 -
+>  configs/ls2080ardb_nand_defconfig             |   1 -
+>  configs/malta64_defconfig                     |   1 -
+>  configs/malta64el_defconfig                   |   1 -
+>  configs/malta_defconfig                       |   1 -
+>  configs/maltael_defconfig                     |   1 -
+>  configs/mx28evk_defconfig                     |   1 -
+>  configs/mx51evk_defconfig                     |   1 -
+>  configs/pg_wcom_expu1_defconfig               | 109 ---------
+>  configs/pg_wcom_expu1_update_defconfig        | 107 ---------
+>  configs/pg_wcom_seli8_defconfig               | 109 ---------
+>  configs/pg_wcom_seli8_update_defconfig        | 107 ---------
+>  configs/work_92105_defconfig                  |   1 -
+>  doc/I2C_Edge_Conditions                       |  10 +-
+>  drivers/ddr/fsl/main.c                        |   3 +-
+>  drivers/i2c/i2c_core.c                        | 141 -----------
+>  drivers/i2c/soft_i2c.c                        |  11 -
+>  drivers/power/power_i2c.c                     |   5 -
+>  drivers/usb/host/ohci-lpc32xx.c               |   4 -
+>  include/configs/ethernut5.h                   |   3 -
+>  include/configs/km/pg-wcom-ls102xa.h          | 167 --------------
+>  include/configs/ls1028aqds.h                  |   1 -
+>  include/configs/ls1028ardb.h                  |   2 -
+>  include/configs/ls1046afrwy.h                 |   1 -
+>  include/configs/lx2160aqds.h                  |   3 -
+>  include/configs/lx2160ardb.h                  |   3 -
+>  include/configs/lx2162aqds.h                  |   3 -
+>  include/configs/m53menlo.h                    |   2 -
+>  include/configs/omap3_beagle.h                |   3 -
+>  include/configs/pg-wcom-expu1.h               |  49 ----
+>  include/configs/pg-wcom-seli8.h               |  40 ----
+>  include/configs/sniper.h                      |  14 --
+>  include/configs/tqma6.h                       |   3 -
+>  include/configs/tqma6_wru4.h                  |   1 -
+>  include/i2c.h                                 | 107 ---------
+>  53 files changed, 6 insertions(+), 1837 deletions(-)
+>  delete mode 100644 arch/arm/dts/ls1021a-pg-wcom-expu1.dts
+>  delete mode 100644 arch/arm/dts/ls1021a-pg-wcom-seli8.dts
+>  delete mode 100644 board/keymile/pg-wcom-ls102xa/Kconfig
+>  delete mode 100644 board/keymile/pg-wcom-ls102xa/MAINTAINERS
+>  delete mode 100644 board/keymile/pg-wcom-ls102xa/Makefile
+>  delete mode 100644 board/keymile/pg-wcom-ls102xa/ddr.c
+>  delete mode 100644 board/keymile/pg-wcom-ls102xa/pg-wcom-expu1.env
+>  delete mode 100644 board/keymile/pg-wcom-ls102xa/pg-wcom-ls102xa.c
+>  delete mode 100644 board/keymile/pg-wcom-ls102xa/pg-wcom-seli8.env
+>  delete mode 100644 configs/pg_wcom_expu1_defconfig
+>  delete mode 100644 configs/pg_wcom_expu1_update_defconfig
+>  delete mode 100644 configs/pg_wcom_seli8_defconfig
+>  delete mode 100644 configs/pg_wcom_seli8_update_defconfig
+>  delete mode 100644 include/configs/km/pg-wcom-ls102xa.h
+>  delete mode 100644 include/configs/pg-wcom-expu1.h
+>  delete mode 100644 include/configs/pg-wcom-seli8.h
+>
+> --
+> 2.34.1
+>
 
-It only supports readling whole blocks, if that is what you mean. Are
-you suggesting changing the blk API, or something else?
+What shall we do with this series?
 
 Regards,
 Simon
-
-
-
->
-> Best regards
->
-> Heinrich
->
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > Changes in v2:
-> > - Drop patch 'Show more information in efi index'
-> > - Drop patch 'Avoid pool allocation in efi_get_memory_map_alloc()'
-> > - Add the word 'warning', use log_warning() and show the end address
-> > - Reorder patches a little
-> >
-> >   lib/efi_loader/efi_bootbin.c | 9 +++++++++
-> >   1 file changed, 9 insertions(+)
-> >
-> > diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-> > index 5bb0fdcf75d..9779dc09b5e 100644
-> > --- a/lib/efi_loader/efi_bootbin.c
-> > +++ b/lib/efi_loader/efi_bootbin.c
-> > @@ -211,6 +211,15 @@ efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
-> >               return -1;
-> >       }
-> >
-> > +#ifdef CONFIG_EFI_LOADER_BOUNCE_BUFFER
-> > +     /*
-> > +      * Add a warning about this buffer, since it may conflict with other
-> > +      * things
-> > +      */
-> > +     log_warning("Warning: EFI bounce buffer %p-%p\n", efi_bounce_buffer,
-> > +                 efi_bounce_buffer + EFI_LOADER_BOUNCE_BUFFER_SIZE);
-> > +#endif
-> > +
-> >       ret = efi_install_fdt(fdt);
-> >       if (ret != EFI_SUCCESS)
-> >               return ret;
->
