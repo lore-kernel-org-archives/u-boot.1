@@ -4,53 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 078B0C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 14:10:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB92CC3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 14:44:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80B3F88BC4;
-	Fri,  9 Aug 2024 16:10:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 00D5B88B9E;
+	Fri,  9 Aug 2024 16:44:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1723212605;
-	bh=a3f/K8x1A0URoBIM78Sylwg3/J35BBMtwMuunC95GCw=;
-	h=Date:To:Cc:From:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Reply-To:From;
-	b=S93gh1wChP0DVx5UdB4T1ZV/h+is1K2TmdBQQiN101ID5VDhU636zpjhiMuYa0Orw
-	 wglUSg3CJxKrldw9m4tIKh1LME0oCKfHVwkPN2plh9I31HRA0ScGkXCKJlwjZxiviQ
-	 FLtMNjClJCe41HQVqEgjDBjXCj72n9VQb3hjeMEsBBmLOQRRuI7Q2M8+nd/DZsfN+B
-	 adIjXvddX5gttIlcKldydsju4ayW/KCpotGjX3jVtjcTcwhpdi8VwTzUDqhuCBNnWi
-	 +IRjtx32120odiEsjX1YRoCw54Qb9Vd1ZIyJ3Hr2sMEsxT98f58Cf2fhAKJurz924l
-	 av9ZlVn7Ux4mQ==
-Received: from [192.168.1.107] (89-186-114-92.pool.digikabel.hu
- [89.186.114.92])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZgFd1jJk";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 2B73288BA5; Fri,  9 Aug 2024 16:44:13 +0200 (CEST)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 40ED088B99;
- Fri,  9 Aug 2024 16:10:03 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1723212603;
- bh=a3f/K8x1A0URoBIM78Sylwg3/J35BBMtwMuunC95GCw=;
- h=Date:To:Cc:Reply-To:From:Subject:From;
- b=KRc3Aal34cgHEHJDH0ScJmQrR/k00LpbJbGk54bTTPbI1DgScmEPwIVQ8z3QLM78q
- Re2HOFXuIcsDeiip1eoFPqOPghT86lqrzLNTabfSiZpJT7BuKxnQWFDeHYWzi0TilC
- 8IPx936lNIR3zSyoDtz/MFywm88CwdiW/FOySDF99SwJmeCBPPJ137gd9ncuB5lNuE
- H9RdwW3zyBtEDEMfW8ZX4j+NbOFZHsKvU19emLN7WcAseN/RkG1AvGTsMcYme9UsSj
- p+l/KwQ7ip3CF1NJFn+EFKjPPEqlET6iobGciUBAgpWGQDlf+GVxOgmXCfeiZixiWw
- 16WFoxTcDZSvA==
-Message-ID: <9152974c-7022-1db7-19ed-9576b88d3630@denx.de>
-Date: Fri, 9 Aug 2024 16:09:19 +0200
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id BB0B38641A
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 16:44:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-6b79c27dd01so12176166d6.3
+ for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 07:44:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1723214649; x=1723819449; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=298hmhrjEqDY2oHT3eO92asmCaHZiI9eCW9wAz5SZos=;
+ b=ZgFd1jJk/tDKSzLZqHMVTKzHJQt+cjgjyIWNhTliJKe46B6gocaDXHHSBz9G8i6Njx
+ RvKVXyOrYcuJOxHVua4XYk9TeGN3xALdq/gu3EDky71yDLwDqvUHHtqe+igLB/rPKIyF
+ I9PK1gt1wG4cHLP3lAFhYlbrBd316Q1CxfbLg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723214649; x=1723819449;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=298hmhrjEqDY2oHT3eO92asmCaHZiI9eCW9wAz5SZos=;
+ b=b7zMP3d65dj/gqDE/ITMxD8jbHMdF/ft80SYUwKhGREVh3h02OKcnEMLT7DwO31HH5
+ zSx97LQrkZga20gImiv2iodrH3I+peKmn8iAaMc9dgaMFtV78ldgALywrCyKpPZVq3Rz
+ /1Q03Egl0F1hOU6IthB41tECJhb0Kczim88qhboJuNW6vPVUwPvwDQf5GDYIOFk8srSm
+ +Z9HXrObN0TJaaX3ljVY5YEs3Kdkw+A9Y0sMZ9r/IKOKzF4VZzMsQXXt1Mkya88eVGLS
+ jwRFWc9BSuU/Q/0o44IReMQoYcgdUDrM/VI40q9/MHhlhnzU5BGpUubzi8eAPoso2xlZ
+ oPgA==
+X-Gm-Message-State: AOJu0Yy2MzyxG/EdT3ZrUs+LX9o/BfzzBCiGG6Fov0VA2f+1o2xoOmuZ
+ j/w4YZYQz+iJX/pL28l/Y5eez9/zv7asHKDdcVpuu0SdA4ssnseWGrIHWIWxxd+ZYgJbbv6gOTG
+ C1kS7yKZHY+nyitnFk1y7nDVWZuKTbzDUpLJd
+X-Google-Smtp-Source: AGHT+IHInbL1iXrxyzqNkHQO7LB+T9pqT01Gp8mnOfh1+7OgAJH9IL42dtf6yZBGSMh2bFz3zT4ivp7w6CphJYqfSbg=
+X-Received: by 2002:a05:6214:5d87:b0:6b4:fdfd:fece with SMTP id
+ 6a1803df08f44-6bd78ea443bmr21400266d6.44.1723214649550; Fri, 09 Aug 2024
+ 07:44:09 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Anatolij Gustschin <agust@denx.de>
-From: Heiko Schocher <hs@denx.de>
-Subject: Please pull u-boot-i2c next
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <CAFLszTj5oQwuMDbd_AXbYFsuQ=Yt+MzWeEOvcbqTuws2D2CPOQ@mail.gmail.com>
+ <d2d39b09-6070-002c-0e74-54f5311009f5@gmail.com>
+In-Reply-To: <d2d39b09-6070-002c-0e74-54f5311009f5@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 9 Aug 2024 08:43:58 -0600
+Message-ID: <CAFLszTgrvBOcrK2CLpTjJxzL_Tc4ZhC=0TJ35YNT=2SwqDF3Yw@mail.gmail.com>
+Subject: Re: pinctrl warning on sandbox
+To: Sean Anderson <seanga2@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,82 +77,70 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
+Hi Sean,
 
-please pull from u-boot-i2c next
+On Fri, 9 Aug 2024 at 07:31, Sean Anderson <seanga2@gmail.com> wrote:
+>
+> Hi Simon,
+>
+> On 8/7/24 19:17, Simon Glass wrote:
+> > Hi Sean,
+> >
+> > I was looking at [1] and bisected the message to this commit:
+> >
+> > 7f0f1806e3a (refs/bisect/bad) test: pinmux: Add test for pin muxing
+> >
+> > I'm not quite sure what is going on, but could you please take a look?
+> >
+> > Regards,
+> > Simon
+> >
+> > [1] https://source.denx.de/u-boot/u-boot/-/issues/2
+>
+> That test run is pretty old. Does the error always occur during EFI tests?
+> You said in IRC it occurs on current master; can you send a link?
 
-The following changes since commit 2078abaf00b63fc4f70f8a599b61a476e22352f3:
+Yes, it happens whenever sandbox is run with the device tree. This is
+sandbox build from -next:
 
-   Merge patch series "alist: Implement a pointer list / array of structs" (2024-08-07 08:51:25 -0600)
+$ /tmp/b/sandbox/u-boot -D
+Bloblist at b000 not found (err=-2)
+sandbox_serial serial: pinctrl_select_state_full:
+uclass_get_device_by_phandle_id: err=-19
 
-are available in the Git repository at:
 
-   https://source.denx.de/u-boot/custodians/u-boot-i2c.git tags/i2cupdates-for-v2024-10-next
+U-Boot 2024.10-rc2-00021-gb63f30d4ae6a-dirty (Aug 08 2024 - 12:46:24 -0600)
 
-for you to fetch changes up to b08ee931ba55cf6196faf7f9d0613e325971f31f:
+Reset Status: COLD
+Model: sandbox
+DRAM:  256 MiB
 
-   board: vining_2000: convert to DM_I2C (2024-08-09 06:27:27 +0200)
+Warning: host_lo MAC addresses don't match:
+Address in ROM is b2:e9:3c:a1:b3:05
+Address in environment is 02:00:11:22:33:44
+sandbox_serial serial: pinctrl_select_state_full: pinctrl_config_one: err=-38
+Core:  117 devices, 61 uclasses, devicetree: board
+WDT:   Started alarm-wdt with servicing every 1000ms (5s timeout)
+NAND:  0 MiB
+MMC:
+Loading Environment from nowhere... OK
+Warning: device tree node '/config/environment' not found
+In:    serial,cros-ec-keyb,usbkbd
+Out:   serial,vidconsole
+Err:   serial,vidconsole
+Model: sandbox
+Net:   eth0: host_lo, eth1: host_enp14s0, eth2: host_eth6, eth3:
+host_wlp15s0, eth4: host_docker0
+Error: eth@10002000 No valid MAC address found.
 
-----------------------------------------------------------------
-i2c updates for v2024.10 next
 
-- DM_I2C conversion for some remaining boards
-   from Anatolij
+Hit any key to stop autoboot:  0
+=>
 
-----------------------------------------------------------------
-Anatolij Gustschin (10):
-       board: shc: convert to DM_I2C
-       board: chiliboard: convert to DM_I2C
-       board: cm-t43: convert to DM_I2C
-       board: igep003x: convert to DM_I2C
-       board: sl50: convert to DM_I2C
-       board: rut: convert to DM_I2C
-       board: novena: convert to DM_I2C
-       board: vf610twr: convert to DM_I2C
-       board: cm_fx6: convert to DM_I2C
-       board: vining_2000: convert to DM_I2C
-
-  board/bosch/shc/board.c                 |  22 +++++++++++-----------
-  board/compulab/cm_fx6/cm_fx6.c          |   3 ++-
-  board/compulab/cm_t43/cm_t43.c          |   2 --
-  board/compulab/common/Makefile          |   8 +++++++-
-  board/compulab/common/eeprom.c          |  14 +++++---------
-  board/compulab/common/eeprom.h          |   2 +-
-  board/kosagi/novena/novena.c            |  10 +++++-----
-  board/kosagi/novena/video.c             | 140 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-----------------------------------------------------------------
-  board/softing/vining_2000/vining_2000.c |  25 -------------------------
-  configs/am335x_igep003x_defconfig       |   2 +-
-  configs/am335x_shc_defconfig            |   4 +++-
-  configs/am335x_shc_ict_defconfig        |   4 +++-
-  configs/am335x_shc_netboot_defconfig    |   4 +++-
-  configs/am335x_shc_sdboot_defconfig     |   4 +++-
-  configs/am335x_sl50_defconfig           |   2 +-
-  configs/chiliboard_defconfig            |   2 +-
-  configs/cm_fx6_defconfig                |   2 +-
-  configs/cm_t43_defconfig                |   3 ++-
-  configs/novena_defconfig                |   2 +-
-  configs/rut_defconfig                   |   2 +-
-  configs/vf610twr_defconfig              |   2 +-
-  configs/vf610twr_nand_defconfig         |   2 +-
-  configs/vining_2000_defconfig           |   2 +-
-  23 files changed, 129 insertions(+), 134 deletions(-)
-
-Azure build:
-https://dev.azure.com/hs0298/hs/_build/results?buildId=118&view=results
-
-Thanks!
-
-bye,
-Heiko
-
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+Regards,
+Simon
