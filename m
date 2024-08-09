@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC6CEC3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 00:56:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55139C52D7B
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 00:57:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C04388BE6;
-	Fri,  9 Aug 2024 02:56:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1E30988BF9;
+	Fri,  9 Aug 2024 02:56:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xW1UebO/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LJb6jb/y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F06CA88BD1; Fri,  9 Aug 2024 02:56:35 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id A099B88BB0; Fri,  9 Aug 2024 02:56:36 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C91C88B9F
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 02:56:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 914D688B63
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 02:56:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a7a9185e1c0so152608666b.1
- for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 17:56:33 -0700 (PDT)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5af326eddb2so4279780a12.1
+ for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 17:56:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723164993; x=1723769793; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723164994; x=1723769794; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=egA3xRpkyqDRzibem82Wk57TPGhBhb+v8n5ItP4pcqI=;
- b=xW1UebO/JBG4AdfdjR4AtTm6dd3zWNJ002we3lHyhUAONKAid7DD8QzEgkNUTv6PJt
- F8cq7jYBKBEIOgw7irovxBV3TIplY2Bl5LNECERqFkk0E//klevnWvk+1ifCSOHKlvui
- zROieo9EerTqlcnS6vI+le0tZCHA+b3ABjYpTdNtM0tStRFspzjXwymR7Li4N/5Q84lg
- ydkvTvjKJzeiq/cXfEDQTR2dtxfUVtJmNOKCFRR3fu2WqTXjH9DegQWHvKP9zeaBhAWG
- ZQndTzPrcIWRAuJYd5EvE7MILl0e/xtiXMh8mnDQbsu9n/41ZpNEIsis8c70C5JrRtVd
- QB/Q==
+ :reply-to; bh=gIscCG1WFbxRNqwDTcTD0Z+2J8C6jKPkaxE8BsmFV/U=;
+ b=LJb6jb/y572R89DpTiN4DrB1+eiImxCcqwf138vhY36eQ4vm/1thN12oM9LmI2cFqd
+ VU65bNEKe9WLA4vFkSxOAimRDw+ZzGjWdr7uoIXksjXP7UvIKXFF0Bnw69k5vxXkg+UC
+ j1ySnXoViH2wtAAMzp1LUryJzVV6/c1mXyuvYwgXqQWs/CJTMBvhfQA97KkgcTzhUF6e
+ gdKoCvFLWSKhcXK45CjDIBKC28jsVpO1ooCz2hujyPMuQkYXvdZaiCd1b6t8DgzXRCXZ
+ YI2FL1zVSE+El9v246xejFIN1iFEUrrxhd4ZNx/keQHhmFPjp3BqxH+EqbrGggXINqWH
+ G9YA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723164993; x=1723769793;
+ d=1e100.net; s=20230601; t=1723164994; x=1723769794;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=egA3xRpkyqDRzibem82Wk57TPGhBhb+v8n5ItP4pcqI=;
- b=HcgEEbtnnN+KJRlc7Ui5c666cO6AltoLIgkHVFJPDEQl22xO8Q+Gu4OgOWoYEgxjWm
- eId3YzElp27BUMAQOxlwm+qwYWz9XYjBwhR2VhKezfvZUyJykEKNqdSioeHHRsfFmtTq
- tsgOVCP9sDJf1UZ5y808VHiV3yUo6c4pQSKh9dmqsD/vaejmdSNxOIRxRs3jNGgD1Kzb
- hiF2Wp4WsGwEXc6pZ3jXLpz3MPGeeOT/6dy5bOC9hwi71ON/PdXitzxzgJNeoArLkUM8
- Z+qEeoWgjkeq4ryuj8wlgxR26cX6ExsnSbD6qnIbaNNPhkNLdPjjfSt6sNg6G/12kKDg
- ylXQ==
+ bh=gIscCG1WFbxRNqwDTcTD0Z+2J8C6jKPkaxE8BsmFV/U=;
+ b=GAKFLOOLajV7APlVXxeczBTLwCGK6vUOn0/GrXw+cfIw21JiIlgI67WEyzVtA0hdM8
+ 4mjfkAh0Itak08JUoqeMwV7zYL6VvHy/pbnQgSHruq/d/YmFdKY06Yf1LDh+rd/tqihb
+ x3QJkjzUa4FI7iLScVI7fQmYVUeND25rbq/QyuIOoLGrGRjYPM4VUT1YpalW4W2qjon/
+ Me60E9TuZLrnvNyyMR6KfVadRKPhGRN8dvVXMHatn4K1IDrvHajl1uS/puLgHy+pyfsm
+ 7mjsCwyaSPu5WArpr/qiF6m3BXV5wAzq57UaG8mVrDPkMt68YNt4HqauCp/L2naokovj
+ Jj6w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUTjX1v4+g2A76zqgGkuR8MchlsYp308JCF6nsCZiW8CdcEgQOal5usCgJpeZtJmoZAzyLQORCsjVtJbdxkTTo6KVXSbw==
-X-Gm-Message-State: AOJu0Ywx8TpqyFzTWfM3+t45mmKfkEF9FsUK2gAlwJCjcl9p0WziVrax
- Wda9RPikBHyQFzzRrWkW3KmwjsFzyoWzHbf+7xFcWlTrYqjRtKP6BMrvdAW4wVE=
-X-Google-Smtp-Source: AGHT+IFenvWTCrvCRzU+/7trLcVi3K/Ou4s6atiXa9SVK6JwE6dytr+r5x8j9c/wRBri4oiJMdtp5Q==
-X-Received: by 2002:a17:907:8690:b0:a7a:847d:63b7 with SMTP id
- a640c23a62f3a-a80aa67b2eamr92366b.59.1723164992847; 
- Thu, 08 Aug 2024 17:56:32 -0700 (PDT)
+ AJvYcCVRcCUscOOv/0zq3G/ucHz4n5FsrJx/E4mh76+bmtorRVHFCySGUoTcSzR76lpiw/EeZbb6e4TrOWukRHnHHFSEikveRg==
+X-Gm-Message-State: AOJu0Yys/wCIRlLuiRCnlwWymkZuBoxCBZ/8inLepVi2qkPxz94cMrMz
+ 962JSTrAI4nIhfWV3WhUQx/E+ZxW+IckTs7J7cMgN927u3hBFXDFOzZZDgVwtig=
+X-Google-Smtp-Source: AGHT+IGVFy0+/VbAnNgFNhNl/Rq4fnC48NKACNwGhjbGMgjTq4iqM58CG2+ru7Ar0ehoHfPmNZADLQ==
+X-Received: by 2002:a17:907:7256:b0:a75:7a8:d70c with SMTP id
+ a640c23a62f3a-a8091ed6f3fmr286400766b.4.1723164993903; 
+ Thu, 08 Aug 2024 17:56:33 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7dc9e80e54sm790680266b.167.2024.08.08.17.56.31
+ a640c23a62f3a-a7dc9e80e54sm790680266b.167.2024.08.08.17.56.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Aug 2024 17:56:32 -0700 (PDT)
+ Thu, 08 Aug 2024 17:56:33 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Fri, 09 Aug 2024 02:56:21 +0200
-Subject: [PATCH v7 02/11] lib: uuid: add UUID v5 support
+Date: Fri, 09 Aug 2024 02:56:22 +0200
+Subject: [PATCH v7 03/11] efi: add a helper to generate dynamic UUIDs
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240809-b4-dynamic-uuid-v7-2-8c44ab1f06a5@linaro.org>
+Message-Id: <20240809-b4-dynamic-uuid-v7-3-8c44ab1f06a5@linaro.org>
 References: <20240809-b4-dynamic-uuid-v7-0-8c44ab1f06a5@linaro.org>
 In-Reply-To: <20240809-b4-dynamic-uuid-v7-0-8c44ab1f06a5@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
@@ -82,21 +82,21 @@ To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
 Cc: Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de, 
  Caleb Connolly <caleb.connolly@linaro.org>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5441;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4865;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=JSqqjukXOTthTri0V10jRsBkn3907XaleehDt877lBY=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmtWk8UE9IZvJrFc+fG2gpznFdOyqNTWDT2SVJ7
- jfKYMjw3ZmJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZrVpPAAKCRAFgzErGV9k
- tmXqD/9d6aQss7/Kl9KwDShdduArvb90ka2+nX49xpsvlEUosNMCcidS189kHUx/fEJTem9rMF0
- grujOsXiJGCFj5a8nrdxIH6k3iwSqSGPt9BjreKw48tBfw4CQxHvMy5x0YgLUVbwXsnI5b5wrp/
- P1mA4JE1/s48NrCkcSApGGVHdM1M1MO86alJrYCGF7kOuhTNlMGOI1SrlrjWAtYPkFV3ASYHeqj
- C50amPorCojAiS7DGD1/zHQsR+vAVQz8H0wrzXv+Le22idUqlv//cJNoS7k2y5L9kZHMBuuUk2o
- uLRz3SAj0gAz1hu/eGLm0bDEn6+l9Nc+XvzIPCvg39hJbrKN++AqsSlKbZ72n3UfmL4c8UH/Fta
- gIe29IZJLoMbipfv3tX63ndxPr3P/ATzrqa0hGvUXopZUZ3bY4g0nyqSriOyKGYHYMeuU3EBFtV
- m/XGMlD56nw5BHcOfYhcVENIOqSgHV/3djPtX6hLBsT87wwTwgodDnKRiIb0vn7aOUNYPbYZbOU
- Y5u6ixE/ax3hW+06q1SrIFCLQEtHTPb/sDqJKySL4GKZ+sSQW29XHM+3uj5Il8kl8v5z5+KeYt6
- heOtI043mlkGbKANvKtm0JY5AD9OOyGPyQEMPjFmraSBLPbdEdUMeucFvcJS+jbWI9ee0N/EVya
- ZwtwHNe1BL23ALQ==
+ bh=dusThMI9yKohZk7FRpXJrRXE4relVzw/dtal3KcFB+4=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmtWk8BkA+Mppo3GlXF9wXF5Dn6AfCgkUr+PptN
+ hu/l7zmeYqJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZrVpPAAKCRAFgzErGV9k
+ tgCpEACX6GiLo50bdnhmVX4Qo6gBoICTXVbHGE8D6c8x0dK0/BCBze9dIfQ2FRLWKaTlmizPnqK
+ LhFuj7K1bwu6ta89N7CgiPpv/Rx3nFpe2x7wHwUbSj2i3/1NQKyqayderYJI6wfl9AZwMmqOqEz
+ irZKJWiSh5qISIwcn89zsdGyD8rT3j5koV5BAwswvJr81PunbYbDLDICE639zE1xX23bOJERJh6
+ w1NX7zwX3R4IRJEz3qtombFk+16JR8DlUZtm8I1xBd62Qml0fqPqZtYVQeEZcjbYUtACUQ9mISB
+ 82UpUDL0GX+j/ZMtmhXuHNJybOgWjLq/AatKxjh15nTMvbfnVwYCdNHX5ayT8/kIGQsIIc9CtuW
+ aEA9BFwnxtkaBuxp5RTdZRGrIJbD2rsTDydmnARgU0fMYK/h9dinYlhnJXyquJU+1YC4lExh8GP
+ LLLGilL0RufUBWmN4mD/lciQG2SeNZQpbHqEqiR1+plBG6Sk2BENIYUEgh6t06pTH6H7lzAF1oh
+ q0OsjkX5u7MpobgD+Nwgza17q81HOlQJDclRVnqPbsIg7I8QuHqDup1ztbMqB6NRpy3fZdQJyOv
+ dFf3YMOPpfuVbgeA2oAAQV07A+WnGxD2QzJxI/LBU/eCkkXMeNHZLPk9AUFfFp9IEvCJY6woFcD
+ vOmUzqwEFKv9V7g==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -115,176 +115,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for generating version 5 UUIDs, these are determistic and work
-by hashing a "namespace" UUID together with some unique data. One intended
-usecase is to allow for dynamically generate payload UUIDs for UEFI
-capsule updates, so that supported boards can have their own UUIDs
-without needing to hardcode them.
+Introduce a new helper efi_capsule_update_info_gen_ids() which populates
+the capsule update fw images image_type_id field. This allows for
+determinstic UUIDs to be used that can scale to a large number of
+different boards and board variants without the need to maintain a big
+list.
 
-In addition, move the common bit twiddling code from gen_ran_uuid into a
-separate function and rewrite it not to use clrsetbits (which is not
-available when building as part of host tools).
-
-Tests for this are added in an upcoming patch.
+We call this from efi_fill_image_desc_array() to populate the UUIDs
+lazily on-demand.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- include/uuid.h | 17 +++++++++++++++--
- lib/Kconfig    |  1 +
- lib/uuid.c     | 58 +++++++++++++++++++++++++++++++++++++++++++++++++++-------
- 3 files changed, 67 insertions(+), 9 deletions(-)
+ lib/efi_loader/Kconfig        | 12 ++++++++++
+ lib/efi_loader/efi_capsule.c  |  1 +
+ lib/efi_loader/efi_firmware.c | 55 ++++++++++++++++++++++++++++++++++++++++++-
+ 3 files changed, 67 insertions(+), 1 deletion(-)
 
-diff --git a/include/uuid.h b/include/uuid.h
-index f5a941250f48..1f4fa103b5e9 100644
---- a/include/uuid.h
-+++ b/include/uuid.h
-@@ -10,8 +10,9 @@
- #ifndef __UUID_H__
- #define __UUID_H__
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index 1179c31bb136..85a31113fcf0 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -236,8 +236,20 @@ config EFI_CAPSULE_ON_DISK_EARLY
+ 	  If this option is enabled, capsules will be enforced to be
+ 	  executed as part of U-Boot initialisation so that they will
+ 	  surely take place whatever is set to distro_bootcmd.
  
- #include <linux/bitops.h>
-+#include <linux/kconfig.h>
- 
- /*
-  * UUID - Universally Unique IDentifier - 128 bits unique number.
-  *        There are 5 versions and one variant of UUID defined by RFC4122
-@@ -45,10 +46,10 @@
-  * where x is a hexadecimal character. Fields are separated by '-'s.
-  * When converting to a binary UUID, le means the field should be converted
-  * to little endian and be means it should be converted to big endian.
-  *
-- * UUID is also used as GUID (Globally Unique Identifier) with the same binary
-- * format but it differs in string format like below.
-+ * UUID is also used as GUID (Globally Unique Identifier) with the same format
-+ * but with some fields stored in little endian.
-  *
-  * GUID:
-  * 0        9    14   19   24
-  * xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-@@ -142,8 +143,20 @@ void gen_rand_uuid(unsigned char *uuid_bin);
-  * @param          - uuid output type: UUID - 0, GUID - 1
-  */
- void gen_rand_uuid_str(char *uuid_str, int str_format);
- 
-+struct efi_guid;
++config EFI_CAPSULE_NAMESPACE_GUID
++	string "Namespace for dynamic capsule GUIDs"
++	# v4 UUID as a default for upstream U-Boot boards
++	default "8c9f137e-91dc-427b-b2d6-b420faebaf2a"
++	depends on EFI_HAVE_CAPSULE_SUPPORT
++	help
++	  Define the namespace or "salt" GUID used to generate the per-image
++	  GUIDs. This should be a GUID in the standard 8-4-4-4-12 format.
 +
-+/**
-+ * gen_v5_guid() - generate little endian v5 GUID from namespace and other seed data.
-+ *
-+ * @namespace:   pointer to UUID namespace salt
-+ * @guid:        pointer to allocated GUID output
-+ * @...:         NULL terminated list of seed data as pairs of pointers
-+ *               to data and their lengths
-+ */
-+void gen_v5_guid(const struct uuid *namespace, struct efi_guid *guid, ...);
++	  Device vendors are expected to generate their own namespace GUID
++	  to avoid conflicts with upstream/community images.
 +
- /**
-  * uuid_str_to_le_bin() - Convert string UUID to little endian binary data.
-  * @uuid_str:	pointer to UUID string
-  * @uuid_bin:	pointer to allocated array for little endian output [16B]
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 2059219a1207..5a48c016d2c5 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -72,8 +72,9 @@ config HAVE_PRIVATE_LIBGCC
+ config EFI_CAPSULE_FIRMWARE
  	bool
  
- config LIB_UUID
- 	bool
-+	select SHA1
+ config EFI_CAPSULE_FIRMWARE_MANAGEMENT
+diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
+index 635088f25a13..f3a2388506cc 100644
+--- a/lib/efi_loader/efi_capsule.c
++++ b/lib/efi_loader/efi_capsule.c
+@@ -19,8 +19,9 @@
+ #include <mapmem.h>
+ #include <sort.h>
+ #include <sysreset.h>
+ #include <asm/global_data.h>
++#include <uuid.h>
  
- config RANDOM_UUID
- 	bool "GPT Random UUID generation"
- 	select LIB_UUID
-diff --git a/lib/uuid.c b/lib/uuid.c
-index dfa2320ba267..24b5881600fd 100644
---- a/lib/uuid.c
-+++ b/lib/uuid.c
-@@ -21,8 +21,9 @@
- #include <part_efi.h>
- #include <malloc.h>
- #include <dm/uclass.h>
- #include <rng.h>
-+#include <u-boot/sha1.h>
+ #include <crypto/pkcs7.h>
+ #include <crypto/pkcs7_parser.h>
+ #include <linux/err.h>
+diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
+index ba5aba098c0f..c0240e95cf13 100644
+--- a/lib/efi_loader/efi_firmware.c
++++ b/lib/efi_loader/efi_firmware.c
+@@ -244,8 +244,57 @@ void efi_firmware_fill_version_info(struct efi_firmware_image_descriptor *image_
  
- int uuid_str_valid(const char *uuid)
- {
- 	int i, valid;
-@@ -368,8 +369,57 @@ void uuid_bin_to_str(const unsigned char *uuid_bin, char *uuid_str,
- 		}
- 	}
+ 	free(var_state);
  }
  
-+static void configure_uuid(struct uuid *uuid, unsigned char version)
++/**
++ * efi_gen_capsule_guids - generate GUIDs for the images
++ *
++ * Generate the image_type_id for each image in the update_info.images array
++ * using the first compatible from the device tree and a salt
++ * UUID defined at build time.
++ *
++ * Returns:		status code
++ */
++static efi_status_t efi_gen_capsule_guids(void)
 +{
-+	uint16_t tmp;
++	int ret, i;
++	struct uuid namespace;
++	const char *compatible; /* Full array including null bytes */
++	struct efi_fw_image *fw_array;
 +
-+	/* Configure variant/version bits */
-+	tmp = be16_to_cpu(uuid->time_hi_and_version);
-+	tmp = (tmp & ~UUID_VERSION_MASK) | (version << UUID_VERSION_SHIFT);
-+	uuid->time_hi_and_version = cpu_to_be16(tmp);
++	fw_array = update_info.images;
++	/* Check if we need to run (there are images and we didn't already generate their IDs) */
++	if (!update_info.num_images ||
++	    memchr_inv(&fw_array[0].image_type_id, 0, sizeof(fw_array[0].image_type_id)))
++		return EFI_SUCCESS;
 +
-+	uuid->clock_seq_hi_and_reserved &= ~UUID_VARIANT_MASK;
-+	uuid->clock_seq_hi_and_reserved |= (UUID_VARIANT << UUID_VARIANT_SHIFT);
-+}
-+
-+void gen_v5_guid(const struct uuid *namespace, struct efi_guid *guid, ...)
-+{
-+	sha1_context ctx;
-+	va_list args;
-+	const uint8_t *data;
-+	uint32_t *tmp32;
-+	uint16_t *tmp16;
-+	uint8_t hash[SHA1_SUM_LEN];
-+
-+	sha1_starts(&ctx);
-+	/* Hash the namespace UUID as salt */
-+	sha1_update(&ctx, (unsigned char *)namespace, UUID_BIN_LEN);
-+	va_start(args, guid);
-+
-+	while ((data = va_arg(args, const uint8_t *))) {
-+		unsigned int len = va_arg(args, size_t);
-+		sha1_update(&ctx, data, len);
++	ret = uuid_str_to_bin(CONFIG_EFI_CAPSULE_NAMESPACE_GUID,
++			(unsigned char *)&namespace, UUID_STR_FORMAT_GUID);
++	if (ret) {
++		log_debug("%s: EFI_CAPSULE_NAMESPACE_GUID is invalid: %d\n", __func__, ret);
++		return EFI_INVALID_PARAMETER;
 +	}
 +
-+	va_end(args);
-+	sha1_finish(&ctx, hash);
++	compatible = ofnode_read_string(ofnode_root(), "compatible");
++	if (!compatible) {
++		log_debug("%s: model or compatible not defined\n", __func__);
++		return EFI_INVALID_PARAMETER;
++	}
 +
-+	/* Truncate the hash into output UUID, it is already big endian */
-+	memcpy(guid, hash, sizeof(*guid));
++	for (i = 0; i < update_info.num_images; i++) {
++		gen_v5_guid(&namespace,
++			    &fw_array[i].image_type_id,
++			    compatible, strlen(compatible),
++			    fw_array[i].fw_name, u16_strlen(fw_array[i].fw_name) * sizeof(uint16_t),
++			    NULL);
 +
-+	configure_uuid((struct uuid *)guid, 5);
++		log_debug("Image %ls UUID %pUl\n", fw_array[i].fw_name,
++			  &fw_array[i].image_type_id);
++	}
 +
-+	/* Make little endian */
-+	tmp32 = (uint32_t *)&guid->b[0];
-+	*tmp32 = cpu_to_le32(be32_to_cpu(*tmp32));
-+	tmp16 = (uint16_t *)&guid->b[4];
-+	*tmp16 = cpu_to_le16(be16_to_cpu(*tmp16));
-+	tmp16 = (uint16_t *)&guid->b[6];
-+	*tmp16 = cpu_to_le16(be16_to_cpu(*tmp16));
++	return EFI_SUCCESS;
 +}
 +
- #if defined(CONFIG_RANDOM_UUID) || defined(CONFIG_CMD_UUID)
- void gen_rand_uuid(unsigned char *uuid_bin)
+ /**
+  * efi_fill_image_desc_array - populate image descriptor array
+  * @image_info_size:		Size of @image_info
+  * @image_info:			Image information
+@@ -271,9 +320,9 @@ static efi_status_t efi_fill_image_desc_array(
+ 	u16 **package_version_name)
  {
- 	u32 ptr[4];
-@@ -394,15 +444,9 @@ void gen_rand_uuid(unsigned char *uuid_bin)
- 	/* Set all fields randomly */
- 	for (i = 0; i < 4; i++)
- 		ptr[i] = rand();
+ 	size_t total_size;
+ 	struct efi_fw_image *fw_array;
+-	int i;
++	int i, ret;
  
--	clrsetbits_be16(&uuid->time_hi_and_version,
--			UUID_VERSION_MASK,
--			UUID_VERSION << UUID_VERSION_SHIFT);
--
--	clrsetbits_8(&uuid->clock_seq_hi_and_reserved,
--		     UUID_VARIANT_MASK,
--		     UUID_VARIANT << UUID_VARIANT_SHIFT);
-+	configure_uuid(uuid, UUID_VERSION);
+ 	total_size = sizeof(*image_info) * update_info.num_images;
  
- 	memcpy(uuid_bin, uuid, 16);
- }
+ 	if (*image_info_size < total_size) {
+@@ -282,8 +331,12 @@ static efi_status_t efi_fill_image_desc_array(
+ 		return EFI_BUFFER_TOO_SMALL;
+ 	}
+ 	*image_info_size = total_size;
  
++	ret = efi_gen_capsule_guids();
++	if (ret != EFI_SUCCESS)
++		return ret;
++
+ 	fw_array = update_info.images;
+ 	*descriptor_count = update_info.num_images;
+ 	*descriptor_version = EFI_FIRMWARE_IMAGE_DESCRIPTOR_VERSION;
+ 	*descriptor_size = sizeof(*image_info);
 
 -- 
 2.46.0
