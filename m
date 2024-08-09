@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF622C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 08:59:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E724C52D71
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 08:59:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 108FF88B9F;
-	Fri,  9 Aug 2024 10:59:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6A44888BBF;
+	Fri,  9 Aug 2024 10:59:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="g2Db8lN2";
+	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="kDpdE2vH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B4B888B9E; Fri,  9 Aug 2024 10:59:04 +0200 (CEST)
-Received: from out203-205-221-149.mail.qq.com (out203-205-221-149.mail.qq.com
- [203.205.221.149])
+ id 763C788BB6; Fri,  9 Aug 2024 10:59:05 +0200 (CEST)
+Received: from out203-205-221-242.mail.qq.com (out203-205-221-242.mail.qq.com
+ [203.205.221.242])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E78D889B8
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 10:58:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A17E788B81
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 10:59:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hanyuan-z@qq.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1723193931; bh=UiUYuioP8UeBH7S8EW5eZL9Kl8sOUq5qdJg6dDxzM5c=;
+ t=1723193924; bh=4MVJ2w9JCTJjoVdXyK+UfuwK5yATTvXj6aTk1+VOwIM=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=g2Db8lN2qJ9GWG8+g6ttF8X7vzgmwJch+yu2gvsbgwHqEPXr2Qj1q/9O+Y85olNIB
- J+A5COr6goFcd3yftWiHf+Y5WzeMM4uPquLtwlw5PhwfZ/1RPNotvx/q7M+Q2M1eGO
- lw5zLqHfEngGzENYCI2shsknZBm8LZv3Vw7ar3Fk=
+ b=kDpdE2vHM1NyZAqR+2/Td3MnaTrgQe2XEO8KjklIMzCBnlhu9tN1d+BSEhdB2qsT1
+ yrK7JuBQn6ISxN0Dai8w+q97M9scwXLZ/LUtAdWrvAKuaWWbB1OBggGfjfVETdx/mm
+ sxdhQ92xGPxBq2mdSFRQaqtP3F141NfshyA7hJwg=
 Received: from hyz-wsl.www.tendawifi.com ([166.111.226.87])
  by newxmesmtplogicsvrszb9-0.qq.com (NewEsmtp) with SMTP
  id EA28703C; Fri, 09 Aug 2024 16:58:34 +0800
-X-QQ-mid: xmsmtpt1723193924txyvkn8zv
-Message-ID: <tencent_6DC713409F31C517AB25D8A6CD7F5EC92506@qq.com>
-X-QQ-XMAILINFO: MDlC9u6qHHGc/jx5r9dnZxAMqDkapxXGpf54YZM8t7UAU5OnveesJdfUnLmJyr
- VbH0+/bUD3w6TEIjqob+a+ZhHyDLx4ontucm/TnZVojll3EsCPNiiOYjPNd3FS5wb9kc43Qvnrvx
- +5u1kwWZvFQlXLExKtoKWHDG6oDfRDe1xOF4wByG0CLim05L+CGKXm/BX62Aex85i9io5v/2ynvP
- JRzGcAJo6yn54qe7gshTiN7nWgVqi/zUfWH6hcaeLE6JM06Vk7ez0R/HemQosWcF2rlZuBQQ5Eos
- 0PrrMwUOfdU6sZz742iev9xJY59p+r8qSMZBUj6NK40HzD5QfvaJ5IuQCiAbJ3inKZT7mzws3eLk
- TOfQlotIbYpvvLqwq0GsP0vVCarSYGq3Ej7dA6ltUb31amYd7ByB5m5d22GVzfMroIGOh4Q2nCeI
- BneKMUw33FVXvl0yEXVqiqT4xLai8LMapqs1ftwptn20mshuYiH6GPzwSSqnVgdiyqNH4h0QGtDf
- kpAg32UQSXl2/Xaua7fcOvBYhV9A6XpUB/ZyeQRytuvcgEphp2P47CyCF2Z2qFHYK1+A10wRiLA6
- O07laAm+qeMfX7kufmJsI/WDGTXgYSfRQnuH7QrnWvi5fEjJJDkZBE4gWtiySnqam3RbPsqi0h3X
- YdFSSdhht6clnwk2pP3j3kuMr4Vdtkbh+h6vgK3rGj97xIaN4jfOXbDrgPYbiOSwTdrMHAeFSTvy
- Wv6xiA3eyE01iuHp41pc39ev2CuNH9+JoB6YzjvRGdgjIkYuUyKQEHs86u6K7JwJBMMo8r4+2dPt
- Ybe+0YPG1J3F1uw17bwahVoOEn0n06RgVD/m7t1mWhkLbDVXQ5j2ge32Rbg9X0+IOSQIMWQTUT15
- 0+DZKtFrfD/fH4ZnmBfUY6X4n/QBGso5FbUG/AeccmOuv8gO0NjtxDPncQOzzlUQ3dBVf9RuxuVV
- UPB6lgO7+ifSxa/BPcVp5avk79GQHh5YFVVP8SFsAA30or2yz35gWJg/maMZ2JSVJVDE/YKZg=
-X-QQ-XMRINFO: NI4Ajvh11aEj8Xl/2s1/T8w=
+X-QQ-mid: xmsmtpt1723193916t2flw4fiy
+Message-ID: <tencent_4B92368E75002463D6AF2B4BEA4DEB7FA407@qq.com>
+X-QQ-XMAILINFO: OKkKo7I1HxIe7uQJveHYKG/KaJnypOQWX5P9OFOdTrP/SWR03DtEhQ0/oAhrrI
+ pnEAWa19NUECFzY8WjkwMiVV/MCwwDsn2++Dw2ZKiZzSEmMZh0Hqyp45L5jn6Pfe5B0pisdH+FCx
+ zkc4MzTnQz97OcbBHydB59zT2Y1gd/MjN2U1gFiAC47e7Cs3q88U2rQ1RG91iFjxFFDkBSFMfrku
+ N9KcPbwU8gmEdAkdvZWbvUCr/ktEQFG/BUZ/WyGfhggh2xfsqw3cZyQ26EWv8SHWHrSyKaYMVcQ7
+ txkGURZgFn3vLuV0yBTbMt5mGsb4xEDlHQTRoc5tzxm9O26A7P4KRKpdGTsE4bdI+/jYMf3kw3gQ
+ N3SxXFtvSh6jZukFuY573cfrNjZ/fftabmcAXU6MwVfx1IDMLKHp4aRM69DOHZPDxc1VytGNtugy
+ FsirPX8M24+Nfz4Znvrh9mb/akcDX69va3S6lxENRi1GvzKFMMKuEVTemgO8y4yXey8ealOTHlYx
+ T0umQJl5Dno5Kqbembroc0R8zuEZSsCGaFtRGMj8hsR/qPpeDf33oC16YQVpmDP7921Oqt3+AB4D
+ 0fdcaYtKEtKBy6IK9uuLJEber60qJtkaUA3Zc67RdR8O5JDWorf7iz47nQ97QYUGXiIUgggZLtM0
+ ThW8MmCjI+xYoXl6Ts03YffTTXjSF53OgRa+QeKflzV6mAoEORoFkdTAinkL2WpctLLon25ciDse
+ b+CYh//FggdVWhzibcf6XELKEFVaEigjPV7QszudlOsVbZRp8zG4OOGMR2KRux3nuFo/CXOlvhBL
+ D/p3rxFUkBh0GaggIIitkQXpsytgLriBuFgPiaDOc2NR7q9edsTFXHsWUgu45W3DJa15iwyNbie3
+ 5cjbdxR4SRzhFz4W2fTJpR1EaA5sMKYopx/r72uj3JK9T21B4fRGB4IKeMo3x1C6CEaYmheECPkC
+ RwxdyKGFiqFXFuaSzy0PM9UcKG9W2uPnpxmI+VrHnxtqHNEyKYmmqGql/jYfRFE/1iPLbaafk=
+X-QQ-XMRINFO: OD9hHCdaPRBwq3WW+NvGbIU=
 From: Hanyuan Zhao <hanyuan-z@qq.com>
 To: u-boot@lists.denx.de
 Cc: Joe Hershberger <joe.hershberger@ni.com>,
@@ -58,9 +58,9 @@ Cc: Joe Hershberger <joe.hershberger@ni.com>,
  Marek Vasut <marek.vasut+renesas@gmail.com>,
  Hanyuan Zhao <hanyuan-z@qq.com>,
  Hanyuan Zhao <zhaohy22@mails.tsinghua.edu.cn>
-Subject: [PATCH 3/8] net: dc2114x: set the card number to start at zero
-Date: Fri,  9 Aug 2024 16:56:56 +0800
-X-OQ-MSGID: <20240809085701.22183-3-hanyuan-z@qq.com>
+Subject: [PATCH 2/8] net: dc2114x: get mac address from environment
+Date: Fri,  9 Aug 2024 16:56:55 +0800
+X-OQ-MSGID: <20240809085701.22183-2-hanyuan-z@qq.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240809085701.22183-1-hanyuan-z@qq.com>
 References: <20240809085701.22183-1-hanyuan-z@qq.com>
@@ -82,26 +82,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Otherwise the number might get kind of weird.
+Let this old driver work like the other newer network card drivers, loading the
+MAC address from environment, which could be more flexible to set.
 
 Signed-off-by: Hanyuan Zhao <zhaohy22@mails.tsinghua.edu.cn>
 ---
- drivers/net/dc2114x.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/net/dc2114x.c | 16 ++++++++++++----
+ 1 file changed, 12 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/net/dc2114x.c b/drivers/net/dc2114x.c
-index 7f0715429f..cf9f78163a 100644
+index 3704d2e655..7f0715429f 100644
 --- a/drivers/net/dc2114x.c
 +++ b/drivers/net/dc2114x.c
-@@ -561,7 +561,7 @@ static int dc2114x_read_rom_hwaddr(struct udevice *dev)
- 
- static int dc2114x_bind(struct udevice *dev)
+@@ -478,8 +478,16 @@ static int dc2114x_start(struct udevice *dev)
  {
--	static int card_number;
-+	static int card_number = 0;
- 	char name[16];
+ 	struct eth_pdata *plat = dev_get_plat(dev);
+ 	struct dc2114x_priv *priv = dev_get_priv(dev);
++	int rval;
  
- 	sprintf(name, "dc2114x#%u", card_number++);
+-	memcpy(priv->enetaddr, plat->enetaddr, sizeof(plat->enetaddr));
++	if(!priv->enetaddr) {
++		rval = eth_env_get_enetaddr("ethaddr", priv->enetaddr);
++
++		if (!rval) {
++			printf("dc2114x: Err: please set a valid MAC address\n");
++			return -EINVAL;
++		}
++	}
+ 
+ #if !CONFIG_IS_ENABLED(TULIP_SUPPORT_NON_PCI)
+ 	/* Ensure we're not sleeping. */
+@@ -574,9 +582,6 @@ static int dc2114x_probe(struct udevice *dev)
+ 	iobase &= ~0xf;
+ 
+ 	debug("dc2114x: DEC 2114x PCI Device @0x%x\n", iobase);
+-
+-	priv->devno = dev;
+-	priv->enetaddr = plat->enetaddr;
+ 	priv->iobase = (void __iomem *)dm_pci_mem_to_phys(dev, iobase);
+ 
+ 	command = PCI_COMMAND_MEMORY | PCI_COMMAND_MASTER;
+@@ -589,6 +594,9 @@ static int dc2114x_probe(struct udevice *dev)
+ 
+ 	dm_pci_write_config8(dev, PCI_LATENCY_TIMER, 0x60);
+ #endif
++
++	priv->devno = dev;
++	priv->enetaddr = plat->enetaddr;
+ 	return 0;
+ }
+ 
 -- 
 2.39.2
 
