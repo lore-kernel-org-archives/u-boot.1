@@ -4,79 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FC18C52D7C
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 13:31:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E42ABC3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 14:09:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AE8C88A2F;
-	Fri,  9 Aug 2024 15:31:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2214E88B9F;
+	Fri,  9 Aug 2024 16:09:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="d3u8BTnM";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id A086388A2F; Fri,  9 Aug 2024 15:31:27 +0200 (CEST)
-Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
- [IPv6:2607:f8b0:4864:20::834])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1723212595;
+	bh=efRyObPOaWEBCrXAx0cY8Yr558UzQtF59GffZ7AKOOY=;
+	h=Date:To:From:Subject:Cc:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:Reply-To:From;
+	b=Afmvqk8TNHE8cEO6glUnjWVgla8+HeaB84zXMewdFT9X6nhOOHrq/PrTvF0ISBkc0
+	 DjOYQMezV4ajBXkYu71OQsJeo5x4ug9iS53ysMi9Ewd1X2Hjv+jft0e3oHBx5tkqgT
+	 HNbCiK8InKDGp2DD8sYaQ4D5jaumDq92dlCtgWL7g7QrsfUHvKXLQ3bf+Tk3BnmAc5
+	 hpbro5UbKPDZZ0jaBmSw9Etw56wSu8dCzYXvHRe6zs2J85FFW31GIwhEQjU0f21sPk
+	 qvMtvTRAAiGuVrx0/Hq3l8f3oMAwAf5AKsfxXXdp8MjJdAFI80KXvyAHXfXzmk8uRS
+	 w7+nXg1Q3VhVA==
+Received: from [192.168.1.107] (89-186-114-92.pool.digikabel.hu
+ [89.186.114.92])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DA9A88A0E
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 15:31:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x834.google.com with SMTP id
- d75a77b69052e-44ff132ff9cso11295551cf.2
- for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 06:31:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723210284; x=1723815084; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=NxB1CH1w4QWyXcUgNUIndxjtQ6DwGTVIFy9hzNvDAg8=;
- b=d3u8BTnMePxgV5lli84XKZhiw+FPNOFmC7mirpjs1Dc2rtwypHjyqxu8ZOaTz3ckGc
- y1ENkr+s1kjp+JIGXwOarIOctDmUOvM8tAwXXk9fS0rmmqtw3cnP/ZfXVw5jEGjco4Ku
- NAIWAlzr5Z1bypp7w2Y4sLV0xFYoGVCaT4w8dE/T63sMhjMSIpIVM47kHnujVfVyZqGh
- NG7FuBcUjoDNUHvt0jbkTkIXrx7APPjFnh7MFlunCFl/AvP+XCT+UmyS/R9Y2RmoFKlv
- nLYm0hw5Vj4N4HTHswJrvcwFdFuh6GvVA3orze4gJ9kTvy/pWmhuxTlW/1avlm2WHvn1
- kaaA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723210284; x=1723815084;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NxB1CH1w4QWyXcUgNUIndxjtQ6DwGTVIFy9hzNvDAg8=;
- b=O65+HwSVUykzrMMJT8LQOz/wrhOFQ6eSOMFG7tdTCEFFCBrwjluXBI636P3FC6PYUK
- iSBzKru7zb74ODxzhFNwEafwb7BdxsxfRVfXNTdcB55jHgvW0gH/9qmfTlfaco0BZtco
- fxgAoAIfskO3wY8j5RPkLJRP+R0cx1bT57JtUXGTVIAVmN3N6YvBVqA9JALN4xw6ft2W
- mUIRs5kgPVwIAO0qEnPQw+JQaUIsk5iSidleGb1HCeMxJi2ryk/NcLz1ktIeQZYYAbbr
- mEVHMAHnVK6ICU3UfKBZYWS4SNqxUK+t9JrR0eXxTgnjFh1a1evbBEzFgNODWtDy2J38
- GKug==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXBuQBtwdl6ZBemL4rm2Je78rtqNN6agccenYQwyxBm3Qz4UN+h3xilTIwd3dFAXWhlM1eViQokjqOOWAmzfKEGWI6t2w==
-X-Gm-Message-State: AOJu0Yzpv+2hD2xxaw20WizTurPJGciC/5t79OKPbrr5wJZj+4uLtQEP
- 4O5NLTgLTzzXqNTjSQ9GlwAx6mwqelbbVlprGPMKik50A/2W3Oyt
-X-Google-Smtp-Source: AGHT+IHy2wvR3Waqizt7l9SDNYZCX9E4uDpZs+tWHtiJMiI5RrIIQdu14ipCQJqEX2raszg9y2PEEw==
-X-Received: by 2002:a05:622a:4011:b0:44f:e9df:2a24 with SMTP id
- d75a77b69052e-453125c9da5mr20805361cf.32.1723210284026; 
- Fri, 09 Aug 2024 06:31:24 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-451c87ffa80sm21633861cf.86.2024.08.09.06.31.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 09 Aug 2024 06:31:23 -0700 (PDT)
-Message-ID: <d2d39b09-6070-002c-0e74-54f5311009f5@gmail.com>
-Date: Fri, 9 Aug 2024 09:31:22 -0400
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id CE28A88B99;
+ Fri,  9 Aug 2024 16:09:53 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1723212594;
+ bh=efRyObPOaWEBCrXAx0cY8Yr558UzQtF59GffZ7AKOOY=;
+ h=Date:To:Reply-To:From:Subject:Cc:From;
+ b=JHrRJRb8o3rI4PttUp+x3Adjx+wsvPypHxYzYJUmqJgejKEJq806jIQ1oe9xlNTnk
+ c2bOl8EdTayYWj+0aHE0xV/P12EHEMAa7C56e1jmg6q9pSLd2Iphy0FzREX8lZVENL
+ XTwxkft0FHV4Z40D422SVt6pUccd/8i+hyb0frV5eEiNK90EaLjQj6y4FT6WEhs2Dh
+ SeL3yAc78ni11Xm+0Vv4tWoTumgDC5N5GYIqRZXy7tOvFkxBTbYNUuTEQHo1WxOJMs
+ 7L7o/KsBX7LuES6Mka89hVORsrwwU5f0lu/LXRsN10iHRdMc58010SAOBriEuk1wyF
+ wcotZ3nfPmF9Q==
+Message-ID: <09a3ff7e-d7bd-8dd5-82ea-a62a90b9054b@denx.de>
+Date: Fri, 9 Aug 2024 16:09:09 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: pinctrl warning on sandbox
+ Thunderbird/91.2.0
 Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-References: <CAFLszTj5oQwuMDbd_AXbYFsuQ=Yt+MzWeEOvcbqTuws2D2CPOQ@mail.gmail.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <CAFLszTj5oQwuMDbd_AXbYFsuQ=Yt+MzWeEOvcbqTuws2D2CPOQ@mail.gmail.com>
+To: Tom Rini <trini@konsulko.com>
+From: Heiko Schocher <hs@denx.de>
+Subject: Please pull v2 u-boot-i2c
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Michal Simek <michal.simek@amd.com>, Fedor Ross <fedor.ross@ifm.com>,
+ David Virag <virag.david003@gmail.com>, Anatolij Gustschin <agust@denx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -90,28 +63,78 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hello Tom,
 
-On 8/7/24 19:17, Simon Glass wrote:
-> Hi Sean,
-> 
-> I was looking at [1] and bisected the message to this commit:
-> 
-> 7f0f1806e3a (refs/bisect/bad) test: pinmux: Add test for pin muxing
-> 
-> I'm not quite sure what is going on, but could you please take a look?
-> 
-> Regards,
-> Simon
-> 
-> [1] https://source.denx.de/u-boot/u-boot/-/issues/2
+please pull from u-boot-i2c master, sorted out the DM_I2C patches from Anatolij,
+to seperate pull request for next.
 
-That test run is pretty old. Does the error always occur during EFI tests?
-You said in IRC it occurs on current master; can you send a link?
+The following changes since commit eb8e25c000d185ece0136b13cca73084eb980253:
 
---Sean
+   Merge tag 'u-boot-nand-20240808' of https://source.denx.de/u-boot/custodians/u-boot-nand-flash 
+(2024-08-08 16:15:06 -0600)
+
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-i2c.git tags/i2cfixes-v2-for-v2024-10-rc3
+
+for you to fetch changes up to ec07bcc8eafb8d201d15facc969fe96600660095:
+
+   i2c: imx_lpi2c: Support read transfers longer than 256 bytes (2024-08-09 14:46:49 +0200)
+
+----------------------------------------------------------------
+i2c updates for v2024.10-rc3 (second try)
+
+- i2c: samsung: Support platforms other than EXYNOS4 and EXYNOS5
+   from David
+
+- imx_lpi2c: cleanups and support read transfers longer than 256 bytes
+   from Fedor
+
+- pca954x: Remove pointer to GD
+   from Michal
+
+- i2c: mux: Fix error path in i2c-arb-gpio
+   from Michal
+
+----------------------------------------------------------------
+David Virag (2):
+       i2c: samsung: Drop s3c24x0 specific code.
+       i2c: samsung: Support platforms other than EXYNOS4 and EXYNOS5
+
+Fedor Ross (3):
+       i2c: imx_lpi2c: Fix a typo in bus_i2c_receive
+       i2c: imx_lpi2c: Replace hard-coded bus speed value with bus->speed_hz
+       i2c: imx_lpi2c: Support read transfers longer than 256 bytes
+
+Michal Simek (2):
+       i2c: pca954x: Remove pointer to GD
+       i2c: mux: Fix error path in i2c-arb-gpio
+
+  drivers/i2c/Kconfig                        |  2 +-
+  drivers/i2c/exynos_hs_i2c.c                | 25 +++++++++++++++++++++----
+  drivers/i2c/imx_lpi2c.c                    | 87 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++-------------------------------
+  drivers/i2c/muxes/i2c-arb-gpio-challenge.c | 11 ++++-------
+  drivers/i2c/muxes/pca954x.c                |  3 ---
+  drivers/i2c/s3c24x0_i2c.c                  | 32 ++++++++++++++++++++++++--------
+  drivers/i2c/s3c24x0_i2c.h                  |  2 ++
+  7 files changed, 108 insertions(+), 54 deletions(-)
+
+
+Azure build:
+https://dev.azure.com/hs0298/hs/_build/results?buildId=117&view=results
+
+Thanks!
+
+bye,
+Heiko
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
