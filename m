@@ -4,81 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 804E7C531DA
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 19:46:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DA8EC3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 19:58:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 417B688C36;
-	Fri,  9 Aug 2024 21:46:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DEA458880E;
+	Fri,  9 Aug 2024 21:58:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BwSYbQUb";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id BC55288C39; Fri,  9 Aug 2024 21:46:09 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1723233521;
+	bh=ak2RCDFVw8J+ZXv2ee9fYBjK1Ona1/HrFk/4jN5QcdU=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=FuwIl1uIaOzvlw2Xn1PviyAtpBVO9C4j777+/DkJtprYABWlvJkP6Ke8VSm6xtiUb
+	 2V2AYYXNCE+MZCJmGhDpykxm1qWRLGa5mecIsUK+EBuzlL3TaRyYJP2Jg+1Q8p2QEr
+	 Zs0HyB/PZP2ehHShHqrl3Pb+tq3X3SMfn/HaW81ARNfHs/uZvMwyBg4vxz+RLNu+Di
+	 Buy1ksL72MzcR5t9HJ9prsIMOV/nrFxiix2tfON6NQw+SUrYy80AnQmp7dsNiYtv5W
+	 OOL4OOzRqN9KEjxYshRrQXr4D7wIzCGVFDJw7bV5sU0WUkDgzLzVClk2M8y3YemdoM
+	 xKyc2tWAoF+oA==
+Received: from crub (p508b6395.dip0.t-ipconnect.de [80.139.99.149])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BFA888618
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 21:46:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-3d9e13ef8edso1739629b6e.2
- for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 12:46:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1723232765; x=1723837565; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=OKVQJWBDpxWaB7vl+NaAe4IgNmu4KtDybrIKAPLmXWQ=;
- b=BwSYbQUbql3VIod9mVhfK91FfyYJrJSIvlbU5rUMvVkfDTmVZCk5JKdgCDFM9ZZXJG
- yfIpkXb63UXmY9AD7kwJ+ERu3p6sjygUTq5ZC5NS47bq9kSsJZznJs1jnxxpbBKPeq3K
- vNpFjQyVVjByMviAjK4RBXujbxHKHXNExyB/8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723232765; x=1723837565;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OKVQJWBDpxWaB7vl+NaAe4IgNmu4KtDybrIKAPLmXWQ=;
- b=I4TQx7JpJnmQUzrrruvvcStV5Ak+FIfpo3yEMBW8r9ClLjjQwJqXRd/wBk5xOfk7eM
- +cG7cckoVRNxntJCqdFEyJbiKFttVFYfPjkzbebihR7saaIkGtjb3OilSaygoAk3a+qm
- DCblK18PrRtkuauBKpp705Xw/FOvO8/8uZJs1zWWmm1bm0GFRtAjJ4jBhctqlLQST1Nw
- E8pm4vcOJ0wuQQVmpp3Grf1mSh0k2Rm6mH1CmwEdawWXphJdRD2CBVI6RchjYeW4eead
- We85/wNxvJtjgb/F1l36LO2Mx17uWkPYpTXGX8PkachF5bUo16k2aNTYttqy4brax0mu
- P54Q==
-X-Gm-Message-State: AOJu0YwS8JvpGBVeTdm9WaS6EobB+3Ri67pvOUC1/8t5sYn4UHPAFrQc
- 6Qqfcb3ac1T5ZIL/US5fNyXxNrAgS6hruX/NVCaaqxwxxGrJol/JA6EpX0Mn1NU=
-X-Google-Smtp-Source: AGHT+IEgWBb3RpskodcWLjPxNCnZQHtIN7khwuo3og8c8zH47sp8z2UO3P9IgK2P3cRrJBh1qB12hQ==
-X-Received: by 2002:a05:6808:1387:b0:3db:251b:c16 with SMTP id
- 5614622812f47-3dc416e3ac8mr2653854b6e.42.1723232764917; 
- Fri, 09 Aug 2024 12:46:04 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-191-8-236.totalplay.net.
- [187.191.8.236]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3dd06069f05sm35758b6e.4.2024.08.09.12.46.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Aug 2024 12:46:04 -0700 (PDT)
-Date: Fri, 9 Aug 2024 13:46:02 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>
-Subject: Re: [PATCH v8 00/23] Introduce the lwIP network stack
-Message-ID: <20240809194602.GX1626301@bill-the-cat>
-References: <cover.1723050310.git.jerome.forissier@linaro.org>
- <20240807204400.GJ1626301@bill-the-cat>
- <2a23d370-82a0-446e-8ab5-00fa9005fdbf@linaro.org>
- <20240808172454.GQ1626301@bill-the-cat>
- <44d9347a-974c-41b3-a6d8-00f4d1b86adb@linaro.org>
+ (Authenticated sender: agust@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 63512887E4;
+ Fri,  9 Aug 2024 21:58:40 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1723233520;
+ bh=ak2RCDFVw8J+ZXv2ee9fYBjK1Ona1/HrFk/4jN5QcdU=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=wRdT3yzO4+GLvPOLWk7lPIFeYdpDPTw/02l2RdEye3SoNEMEu4WnwkR8KnfpUTE7S
+ tOqTMoSfY41HpQ9SJlYw1etPkEpLbIkaLE+GsMz2kdiL3XYFTrCnuIDdxqIhHMG027
+ et+dbuWal04ONWVSwK3wJ/V02YxF/l/LlehLOm/XyTF4/VCv5kNiev9PHmGgSYvKit
+ ljS1k4/4HsEBGz/5nqzNrr/+ug86giUSEvkip0dhrlXOyMqlvNwP+u7e9WvAHtmuUK
+ SwQUIdJCQrzR2Yww8wxecpV7FN+nfFwwccggHwz1XE7SBH1XLp2+h32N+yz9Yj/qYV
+ VDZTgq1fCMZdQ==
+Date: Fri, 9 Aug 2024 21:58:34 +0200
+From: Anatolij Gustschin <agust@denx.de>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List
+ <u-boot@lists.denx.de>, Heiko Schocher <hs@denx.de>
+Subject: Re: [PATCH 00/20] i2c: Chip away at some old code
+Message-ID: <20240809215834.62643ccb@crub>
+In-Reply-To: <20240809185641.GU1626301@bill-the-cat>
+References: <20240718173611.4014274-1-sjg@chromium.org>
+ <CAFLszTj3JsUHFvWUmP07mGwK315qO=Bt0uQ=JGeKrLgBOQxoJA@mail.gmail.com>
+ <20240809185641.GU1626301@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8628pnV4/bdeaWmn"
-Content-Disposition: inline
-In-Reply-To: <44d9347a-974c-41b3-a6d8-00f4d1b86adb@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,188 +69,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 9 Aug 2024 12:56:41 -0600
+Tom Rini trini@konsulko.com wrote:
+...
+> > What shall we do with this series?  
+> 
+> Later today once I merge Heiko's PR for -next to -next, rebase on top
+> there please, I believe all of the platforms have been converted now.
+> Thanks.
 
---8628pnV4/bdeaWmn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+there are still a few arm/arm64/powerpc boards that need DM_I2C
+conversion. I think we can disable date command for these boards
+until the rtc drivers are converted to DM_RTC. After that we can
+finish DM_I2C conversion.
 
-On Fri, Aug 09, 2024 at 03:19:02PM +0200, Jerome Forissier wrote:
->=20
->=20
-> On 8/8/24 19:24, Tom Rini wrote:
-> > On Thu, Aug 08, 2024 at 06:41:02PM +0200, Jerome Forissier wrote:
-> >>
-> >>
-> >> On 8/7/24 22:44, Tom Rini wrote:
-> >>> On Wed, Aug 07, 2024 at 07:11:44PM +0200, Jerome Forissier wrote:
-> >>>
-> >>>> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add l=
-wip
-> >>>> library for the network stack" [1]. The goal is to introduce the lwI=
-P TCP/IP
-> >>>> stack [2] [3] as an alternative to the current implementation in net=
-/,
-> >>>> selectable with Kconfig, and ultimately keep only lwIP if possible. =
-Some
-> >>>> reasons for doing so are:
-> >>>> - Make the support of HTTPS in the wget command easier. Javier T. and
-> >>>> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to =
-do
-> >>>> so. With that it becomes possible to fetch and launch a distro insta=
-ller
-> >>>> such as Debian etc. using a secure, authenticated connection directly
-> >>>> from the U-Boot shell. Several use cases:
-> >>>>   * Authentication: prevent MITM attack (third party replacing the
-> >>>> binary with a different one)
-> >>>>   * Confidentiality: prevent third parties from grabbing a copy of t=
-he
-> >>>> image as it is being downloaded
-> >>>>   * Allow connection to servers that do not support plain HTTP anymo=
-re
-> >>>> (this is becoming more and more common on the Internet these days)
-> >>>> - Possibly benefit from additional features implemented in lwIP
-> >>>> - Less code to maintain in U-Boot
-> >>>>
-> >>>> Prior to applying this series, the lwIP stack needs to be added as a
-> >>>> Git subtree with the following command:
-> >>>>
-> >>>>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.sava=
-nnah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
-> >>>
-> >>> For v9, I think it would be good to do a CI run with NET_LWIP default
-> >>> and seeing what fails from that too. There's a few problems still
-> >>> leading to a lot of failures, in that case. Thanks.
-> >>
-> >> I pushed my branch to GitHub [1] and there's a failure in the
-> >> tools_only_macOS job [2]. Any idea what is going on? I tried twice and
-> >> it failed twice :-/
-> >> Om my Linux machine, "make tools-only_config tools-only" works
-> >> fine.
-> >>
-> >> [1] https://github.com/u-boot/u-boot/pull/635
-> >> [2] https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D9105&=
-view=3Dresults
-> >=20
-> > Alright so from [2] going to the job and then downloading the raw log (=
-it's
-> > huge, firefox gets mad for me), scrolling down until it's not the git c=
-lone we
-> > see:
-> > 2024-08-08T14:36:30.0865130Z   HOSTCC  scripts/basic/fixdep
-> > 2024-08-08T14:36:30.8641660Z   HOSTCC  scripts/kconfig/conf.o
-> > 2024-08-08T14:36:30.9645180Z   LEX     scripts/kconfig/zconf.lex.c
-> > 2024-08-08T14:36:31.0545650Z   YACC    scripts/kconfig/zconf.tab.c
-> > 2024-08-08T14:36:33.2374910Z   HOSTCC  scripts/kconfig/zconf.tab.o
-> > 2024-08-08T14:36:34.9997050Z   HOSTLD  scripts/kconfig/conf
-> > 2024-08-08T14:36:36.5552790Z generated_defconfig:7:warning: unexpected =
-data:  # CONFIG_SANDBOX_
-> > SDL is not set
-> > 2024-08-08T14:36:36.5666380Z generated_defconfig:12:warning: unexpected=
- data:  # CONFIG_BOOTSTD
-> > _FULL is not set
-> > 2024-08-08T14:36:36.5724560Z generated_defconfig:13:warning: unexpected=
- data:  # CONFIG_BOOTMET
-> > H_CROS is not set
-> > 2024-08-08T14:36:36.5742720Z generated_defconfig:14:warning: unexpected=
- data:  # CONFIG_BOOTMET
-> > H_VBE is not set
-> > 2024-08-08T14:36:36.5752700Z generated_defconfig:17:warning: unexpected=
- data:  # CONFIG_CMD_BOO
-> > TD is not set
-> > 2024-08-08T14:36:36.5772400Z generated_defconfig:18:warning: unexpected=
- data:  # CONFIG_CMD_BOO
-> > TM is not set
-> > 2024-08-08T14:36:36.5788060Z generated_defconfig:19:warning: unexpected=
- data:  # CONFIG_CMD_BOO
-> > TI is not set
-> > 2024-08-08T14:36:36.5792360Z generated_defconfig:20:warning: unexpected=
- data:  # CONFIG_CMD_ELF
-> >  is not set
-> > 2024-08-08T14:36:36.5828400Z generated_defconfig:21:warning: unexpected=
- data:  # CONFIG_CMD_EXTENSION is not set
-> > 2024-08-08T14:36:36.5840470Z generated_defconfig:22:warning: unexpected=
- data:  # CONFIG_CMD_DAT
-> > E is not set
-> > 2024-08-08T14:36:36.5938540Z generated_defconfig:26:warning: unexpected=
- data:  # CONFIG_ACPIGEN
-> >  is not set
-> > 2024-08-08T14:36:36.5974000Z generated_defconfig:35:warning: unexpected=
- data:  # CONFIG_VIRTIO_MMIO is not set
-> > 2024-08-08T14:36:36.5985430Z generated_defconfig:36:warning: unexpected=
- data:  # CONFIG_VIRTIO_PCI is not set
-> > 2024-08-08T14:36:36.6045140Z generated_defconfig:37:warning: unexpected=
- data:  # CONFIG_VIRTIO_SANDBOX is not set
-> > 2024-08-08T14:36:36.6053060Z generated_defconfig:38:warning: unexpected=
- data:  # CONFIG_GENERATE_ACPI_TABLE is not set
-> > 2024-08-08T14:36:36.6068760Z generated_defconfig:39:warning: unexpected=
- data:  # CONFIG_EFI_LOADER is not set
-> > 2024-08-08T14:36:36.6088140Z #
-> > 2024-08-08T14:36:36.6121560Z # configuration written to .config
-> > 2024-08-08T14:36:36.6130190Z #
-> > 2024-08-08T14:36:42.5830900Z scripts/kconfig/conf  --syncconfig Kconfig
-> > 2024-08-08T14:36:43.9105630Z .config:284:warning: symbol value '' inval=
-id for AVB_BUF_ADDR
-> > 2024-08-08T14:36:43.9121120Z .config:285:warning: symbol value '' inval=
-id for AVB_BUF_SIZE
-> > 2024-08-08T14:36:43.9142940Z *
-> > 2024-08-08T14:36:43.9172380Z * Restart config...
-> > 2024-08-08T14:36:43.9257450Z *
-> > 2024-08-08T14:36:43.9288610Z *
-> > 2024-08-08T14:36:43.9332910Z * Security support
-> > 2024-08-08T14:36:43.9366750Z *
-> > 2024-08-08T14:36:43.9399770Z Build Android Verified Boot operations (AV=
-B_VERIFY) [Y/n/?] y
-> > 2024-08-08T15:35:07.9280210Z ##[error]The Operation will be canceled. T=
-he next steps may not contain expected logs.
-> >=20
-> > And indeed, most of that is "normal" if we look at a current build for
-> > tools-only on macOS. We're being hit by the fact that the host CC isn't
-> > gcc and is llvm and https://github.com/llvm/llvm-project/issues/78778
-> > applies, I believe. Now how do we work around this? Hum...
->=20
-> That's an "interesting" bug...
-> =20
-> > If you go an change "# CONFIG_FOO is not set" to CONFIG_FOO=3Dn in
-> > configs/tools-only_defconfig, I assume your build moves on?
->=20
-> Yep, it does.
-
-OK, good.
-
-> > This is
-> > valid syntax and fixing a more generic issue we have on macOS today.
->=20
-> I am adding a new patch to v9: "configs: use syntax CONFIG_FOO=3Dn in
-> tools-only_defconfig". It means one extra step when syncing the
-> defconfigs though... It is just a simple sed command but perhaps you
-> have a better idea?
-
-This should be fine, there's already a number of configs I have to
-un-sync when I do a re-sync.
-
-> Thanks again for testing and for your help,
-
-You're welcome.
-
-Tom
-
---8628pnV4/bdeaWmn
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAma2cfoACgkQFHw5/5Y0
-tyzqywv/SC+KhgQTigpzKFcHgbiBHMTYBQzELon1Y8w7oaeUcEU4OBgln97ClSSE
-izBiwwIR541b/dQHUyz4aZ8bWDkTdVcP1f/WYyMr9EPgWq/wZg8cYBPOPm0vimO1
-Qo9qVX0TS638n8L7NdtM1AOxWxvIa0Ug+HNB3+DzT/ce/WiMuOAIOVViJYbHnIun
-q4FYaL70jD6KXDZrvrFIzY5EqkTOzCgEJ6SDqVYJ0wIIj7CvFjfoeHD9TFWgyoxk
-YMhoujVQiSXgqfd6OqNPR8EkASJ0VDLc4rd89dsk82swbCMkWz9VYXag3T8xXBBa
-0heMkF39k2clK+M05O0vzQQXjEFJRf/jVrwkmSm6GaZfKL2NFc2KGpTqBhGkjCmm
-M1c9ZIGSDmnRM4VE65obkjW0z8WVKQPN5N9G9prEnlqnPerZrJqYsg2MubnDdG1x
-UZvqusS7wmChjqEQ5+g+aUgKW1h99BToxuRMbYKjlIkatfIsri6cnOAqbTln3mlD
-VTq51YUr
-=XPau
------END PGP SIGNATURE-----
-
---8628pnV4/bdeaWmn--
+--
+Anatolij
