@@ -4,58 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65DE3C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 21:08:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 732CFC52D7C
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 21:17:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D876885F5;
-	Fri,  9 Aug 2024 23:08:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=grimler.se
+	by phobos.denx.de (Postfix) with ESMTP id C348A88C30;
+	Fri,  9 Aug 2024 23:17:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="RZ6xTqhg";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Hpn1i/Q2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7902C884EA; Fri,  9 Aug 2024 23:08:27 +0200 (CEST)
-Received: from out-183.mta1.migadu.com (out-183.mta1.migadu.com
- [95.215.58.183])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2AE9888C42; Fri,  9 Aug 2024 23:17:34 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28FFA88C30
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 23:08:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=grimler.se
+ by phobos.denx.de (Postfix) with ESMTPS id CD02B8875C
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 23:17:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=henrik@grimler.se
-Date: Fri, 9 Aug 2024 23:08:18 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=grimler.se; s=key1;
- t=1723237701;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=z6FSYI/V85Y7Hrqd2CnU7T7fscGPeZ52hmZXGMRbUGM=;
- b=RZ6xTqhgr3d/UeAQ/rfurRLztlTPPirI34+8hx2nXawuvqhgrpLP59NwfezakhadFUuXgb
- 4wCzw0HSvNiUlf9SLqIHmR35p3AIwZ5j1EzGpUYQR9e1Lq5hsEGKtHQVs22yhRGS5u2chG
- SE7mqyleYV4qo3CsiQV7pEhQibtxnwo=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Henrik Grimler <henrik@grimler.se>
-To: David Virag <virag.david003@gmail.com>
-Cc: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass <sjg@chromium.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sam Protsenko <semen.protsenko@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 2/2] i2c: samsung: Support platforms other than
- EXYNOS4 and EXYNOS5
-Message-ID: <20240809210818.GA14190@l14.localdomain>
-References: <20240802191920.132133-1-virag.david003@gmail.com>
- <20240802191920.132133-3-virag.david003@gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 479LHT9t116131;
+ Fri, 9 Aug 2024 16:17:29 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1723238249;
+ bh=O3lxv81naABKxJEzpxON5DayuXLgP2HgFRE9F+acPIc=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=Hpn1i/Q2t93uVpGqCGC9Civdz6B06uIhWiMN04VJ4WIdFTkIelSff5u4lE2raMThu
+ uVo4GMlLdr6PuTt5GqFowxajsOWSykY/Z7ZAB6swfDpW2rVOStuMI6qZvgdnhmAHy4
+ 16U+lLd93KVPEVanXZkFzqfkq+vw9w2uT/K7uSU8=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 479LHTGH055282
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 9 Aug 2024 16:17:29 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 9
+ Aug 2024 16:17:28 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 9 Aug 2024 16:17:28 -0500
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 479LHSsB045087;
+ Fri, 9 Aug 2024 16:17:28 -0500
+From: Jonathan Humphreys <j-humphreys@ti.com>
+To: Nishanth Menon <nm@ti.com>, Reid Tonking <reidt@ti.com>, Udit Kumar
+ <u-kumar1@ti.com>, Aniket Limaye <a-limaye@ti.com>, Jonathan Humphreys
+ <j-humphreys@ti.com>, Hari Nagalla <hnagalla@ti.com>, Manorit Chawdhry
+ <m-chawdhry@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Sumit Garg <sumit.garg@linaro.org>, Tom Rini
+ <trini@konsulko.com>, <afd@ti.com>, <eballetb@redhat.com>
+CC: <u-boot@lists.denx.de>
+Subject: [PATCH v2 3/5] arch: arm: dts: k3-j7200-r5-evm: Add missing fss range
+Date: Fri, 9 Aug 2024 16:17:15 -0500
+Message-ID: <20240809211717.3887859-4-j-humphreys@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240809211717.3887859-1-j-humphreys@ti.com>
+References: <20240809211717.3887859-1-j-humphreys@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240802191920.132133-3-virag.david003@gmail.com>
-X-Migadu-Flow: FLOW_OUT
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,259 +84,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi David,
+Upstream DTS added explicit ranges to the fss node.  It did not include the
+32 bit memory space needed by the R5 to access OSPI.  With the upstream DTS
+sync, OSPI boot no longer works.
 
-Thinking about this a bit more...
+Adding the missing range here. It is also being added in the upstream DTS,
+so after the next upstream DTS sync, this patch can be removed. See
+f00e626085 (arm64: dts: ti: k3-j7200: Use exact ranges for FSS node)
 
-On Fri, Aug 02, 2024 at 09:19:16PM +0200, David Virag wrote:
-> Newer Samsung SoCs (including newer Exynos, ExynosAuto, Google Tensor)
-> still use these IPs, or slightly newer versions of it.
-> 
-> Make these drivers available on these platforms by guarding
-> EXYNOS4/EXYNOS5 specific code behind their configs, and using CCF for
-> clocks on other platforms.
-> 
-> Tested S3C I2C driver on Exynos7885.
-> This along with extended clock driver should enable S3C I2C on
-> Exynos850.
-> 
-> Signed-off-by: David Virag <virag.david003@gmail.com>
-> ---
->  drivers/i2c/Kconfig         |  2 +-
->  drivers/i2c/exynos_hs_i2c.c | 25 +++++++++++++++++++++++--
->  drivers/i2c/s3c24x0_i2c.c   | 30 +++++++++++++++++++++++++++---
->  drivers/i2c/s3c24x0_i2c.h   |  2 ++
->  4 files changed, 53 insertions(+), 6 deletions(-)
-> 
-> diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
-> index cba7f84894..52067fa7c1 100644
-> --- a/drivers/i2c/Kconfig
-> +++ b/drivers/i2c/Kconfig
-> @@ -650,7 +650,7 @@ config SYS_I2C_GENI
->  
->  config SYS_I2C_S3C24X0
->  	bool "Samsung I2C driver"
-> -	depends on (ARCH_EXYNOS4 || ARCH_EXYNOS5) && DM_I2C
-> +	depends on DM_I2C
->  	help
->  	  Support for Samsung I2C controller as Samsung SoCs.
->  
-> diff --git a/drivers/i2c/exynos_hs_i2c.c b/drivers/i2c/exynos_hs_i2c.c
-> index 189ce6d509..fa0d1c8f64 100644
-> --- a/drivers/i2c/exynos_hs_i2c.c
-> +++ b/drivers/i2c/exynos_hs_i2c.c
-> @@ -9,11 +9,15 @@
->  #include <dm.h>
->  #include <i2c.h>
->  #include <log.h>
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
->  #include <asm/arch/clk.h>
->  #include <asm/arch/cpu.h>
->  #include <asm/arch/pinmux.h>
-> +#endif
+Fixes: 5024a96db8e (Subtree merge tag 'v6.10-dts' of devicetree-rebasing
+repo [1] into dts/upstream)
 
-We want to try to move the Exynos 4 and 5 devices to CCF and
-OF_UPSTREAM as well, which will make this messy.  Can we check
-CONFIG_CLK_EXYNOS and CONFIG_PINCTRL_EXYNOS instead?
+Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+---
+ arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
->  #include <asm/global_data.h>
-> +#include <asm/io.h>
->  #include <linux/delay.h>
-> +#include <clk.h>
->  #include "s3c24x0_i2c.h"
->  
->  DECLARE_GLOBAL_DATA_PTR;
-> @@ -137,15 +141,26 @@ static int hsi2c_wait_for_trx(struct exynos5_hsi2c *i2c)
->  	return I2C_NOK_TOUT;
->  }
->  
-> -static int hsi2c_get_clk_details(struct s3c24x0_i2c_bus *i2c_bus)
-> +static int hsi2c_get_clk_details(struct udevice *dev)
->  {
-> +	struct s3c24x0_i2c_bus *i2c_bus = dev_get_priv(dev);
->  	struct exynos5_hsi2c *hsregs = i2c_bus->hsregs;
->  	ulong clkin;
->  	unsigned int op_clk = i2c_bus->clock_frequency;
->  	unsigned int i = 0, utemp0 = 0, utemp1 = 0;
->  	unsigned int t_ftl_cycle;
->  
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
+diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+index fb7e2e50239..2061adbcea3 100644
+--- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
++++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+@@ -89,6 +89,12 @@
+           <0x0 0x50000000 0x0 0x8000000>;
+ };
+ 
++&fss {
++	/* enable ranges missing from the fss node */
++	ranges = <0x0 0x47000000 0x0 0x47000000 0x0 0x00068400>,
++	         <0x0 0x50000000 0x0 0x50000000 0x0 0x08000000>;
++};
++
+ &mcu_ringacc {
+     ti,sci = <&dm_tifs>;
+ };
+-- 
+2.34.1
 
-As above, can we check CONFIG_CLK_EXYNOS instead?
-
->  	clkin = get_i2c_clk();
-> +#else
-> +	struct clk clk;
-> +	int ret;
-> +
-> +	ret = clk_get_by_name(dev, "hsi2c", &clk);
-> +	if (ret < 0)
-> +		return ret;
-> +	clkin = clk_get_rate(&clk);
-> +#endif
->  	/* FPCLK / FI2C =
->  	 * (CLK_DIV + 1) * (TSCLK_L + TSCLK_H + 2) + 8 + 2 * FLT_CYCLE
->  	 * uTemp0 = (CLK_DIV + 1) * (TSCLK_L + TSCLK_H + 2)
-> @@ -487,7 +502,7 @@ static int s3c24x0_i2c_set_bus_speed(struct udevice *dev, unsigned int speed)
->  
->  	i2c_bus->clock_frequency = speed;
->  
-> -	if (hsi2c_get_clk_details(i2c_bus))
-> +	if (hsi2c_get_clk_details(dev))
->  		return -EFAULT;
->  	hsi2c_ch_init(i2c_bus);
->  
-> @@ -514,7 +529,9 @@ static int s3c24x0_i2c_probe(struct udevice *dev, uint chip, uint chip_flags)
->  
->  static int s3c_i2c_of_to_plat(struct udevice *dev)
->  {
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
->  	const void *blob = gd->fdt_blob;
-> +#endif
->  	struct s3c24x0_i2c_bus *i2c_bus = dev_get_priv(dev);
->  	int node;
->  
-> @@ -522,7 +539,9 @@ static int s3c_i2c_of_to_plat(struct udevice *dev)
->  
->  	i2c_bus->hsregs = dev_read_addr_ptr(dev);
->  
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
->  	i2c_bus->id = pinmux_decode_periph_id(blob, node);
-> +#endif
->  
->  	i2c_bus->clock_frequency =
->  		dev_read_u32_default(dev, "clock-frequency",
-> @@ -530,7 +549,9 @@ static int s3c_i2c_of_to_plat(struct udevice *dev)
->  	i2c_bus->node = node;
->  	i2c_bus->bus_num = dev_seq(dev);
->  
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
->  	exynos_pinmux_config(i2c_bus->id, PINMUX_FLAG_HS_MODE);
-> +#endif
-
-I think these three #if def's can be consolidated in one #if def group
-towards the end of s3c_i2c_of_to_plat to make it easier to follow.
-
-Also, can we check CONFIG_PINCTRL_EXYNOS instead?  That would make it
-easier when migrating Exynos 4 and 5 devices to pinctrl driver and
-OF_UPSTREAM.
-
-Same comments apply to s3c24x0_i2c.c below.
-
-Best regards,
-Henrik Grimler
-
->  	i2c_bus->active = true;
->  
-> diff --git a/drivers/i2c/s3c24x0_i2c.c b/drivers/i2c/s3c24x0_i2c.c
-> index ae3a801cad..ade1ad6cef 100644
-> --- a/drivers/i2c/s3c24x0_i2c.c
-> +++ b/drivers/i2c/s3c24x0_i2c.c
-> @@ -9,12 +9,15 @@
->  #include <fdtdec.h>
->  #include <time.h>
->  #include <log.h>
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
->  #include <asm/arch/clk.h>
->  #include <asm/arch/cpu.h>
->  #include <asm/arch/pinmux.h>
-> +#endif
->  #include <asm/global_data.h>
->  #include <asm/io.h>
->  #include <i2c.h>
-> +#include <clk.h>
->  #include "s3c24x0_i2c.h"
->  
->  DECLARE_GLOBAL_DATA_PTR;
-> @@ -46,10 +49,23 @@ static void read_write_byte(struct s3c24x0_i2c *i2c)
->  	clrbits_le32(&i2c->iiccon, I2CCON_IRPND);
->  }
->  
-> -static void i2c_ch_init(struct s3c24x0_i2c *i2c, int speed, int slaveadd)
-> +static int i2c_ch_init(struct udevice *dev, int speed, int slaveadd)
->  {
-> +	struct s3c24x0_i2c_bus *i2c_bus = dev_get_priv(dev);
-> +	struct s3c24x0_i2c *i2c = i2c_bus->regs;
->  	ulong freq, pres = 16, div;
-> +
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || defined(CONFIG_ARCH_EXYNOS5)
->  	freq = get_i2c_clk();
-> +#else
-> +	struct clk clk;
-> +	int ret;
-> +
-> +	ret = clk_get_by_name(dev, "i2c", &clk);
-> +	if (ret < 0)
-> +		return ret;
-> +	freq = clk_get_rate(&clk);
-> +#endif
->  	/* calculate prescaler and divisor values */
->  	if ((freq / pres / (16 + 1)) > speed)
->  		/* set prescaler to 512 */
-> @@ -67,6 +83,7 @@ static void i2c_ch_init(struct s3c24x0_i2c *i2c, int speed, int slaveadd)
->  	writel(slaveadd, &i2c->iicadd);
->  	/* program Master Transmit (and implicit STOP) */
->  	writel(I2C_MODE_MT | I2C_TXRX_ENA, &i2c->iicstat);
-> +	return 0;
->  }
->  
->  #define SYS_I2C_S3C24X0_SLAVE_ADDR	0
-> @@ -77,8 +94,9 @@ static int s3c24x0_i2c_set_bus_speed(struct udevice *dev, unsigned int speed)
->  
->  	i2c_bus->clock_frequency = speed;
->  
-> -	i2c_ch_init(i2c_bus->regs, i2c_bus->clock_frequency,
-> -		    SYS_I2C_S3C24X0_SLAVE_ADDR);
-> +	if (i2c_ch_init(dev, i2c_bus->clock_frequency,
-> +			SYS_I2C_S3C24X0_SLAVE_ADDR))
-> +		return -EFAULT;
->  
->  	return 0;
->  }
-> @@ -293,7 +311,9 @@ static int s3c24x0_i2c_xfer(struct udevice *dev, struct i2c_msg *msg,
->  
->  static int s3c_i2c_of_to_plat(struct udevice *dev)
->  {
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
->  	const void *blob = gd->fdt_blob;
-> +#endif
->  	struct s3c24x0_i2c_bus *i2c_bus = dev_get_priv(dev);
->  	int node;
->  
-> @@ -301,7 +321,9 @@ static int s3c_i2c_of_to_plat(struct udevice *dev)
->  
->  	i2c_bus->regs = dev_read_addr_ptr(dev);
->  
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
->  	i2c_bus->id = pinmux_decode_periph_id(blob, node);
-> +#endif
->  
->  	i2c_bus->clock_frequency =
->  		dev_read_u32_default(dev, "clock-frequency",
-> @@ -309,7 +331,9 @@ static int s3c_i2c_of_to_plat(struct udevice *dev)
->  	i2c_bus->node = node;
->  	i2c_bus->bus_num = dev_seq(dev);
->  
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
->  	exynos_pinmux_config(i2c_bus->id, 0);
-> +#endif
->  
->  	i2c_bus->active = true;
->  
-> diff --git a/drivers/i2c/s3c24x0_i2c.h b/drivers/i2c/s3c24x0_i2c.h
-> index ec8f1acaef..12249d5c14 100644
-> --- a/drivers/i2c/s3c24x0_i2c.h
-> +++ b/drivers/i2c/s3c24x0_i2c.h
-> @@ -54,7 +54,9 @@ struct s3c24x0_i2c_bus {
->  	struct exynos5_hsi2c *hsregs;
->  	int is_highspeed;	/* High speed type, rather than I2C */
->  	unsigned clock_frequency;
-> +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) || IS_ENABLED(CONFIG_ARCH_EXYNOS5)
->  	int id;
-> +#endif
->  	unsigned clk_cycle;
->  	unsigned clk_div;
->  };
-> -- 
-> 2.46.0
-> 
