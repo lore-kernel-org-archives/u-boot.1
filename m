@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43AEDC3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 00:50:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3089CC3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 00:50:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D54E88B8B;
-	Fri,  9 Aug 2024 02:49:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6E6A188B63;
+	Fri,  9 Aug 2024 02:49:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="T38HgojL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="G8x2jMmV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA04988AF4; Fri,  9 Aug 2024 02:48:59 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 1E92988B8B; Fri,  9 Aug 2024 02:49:01 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9B3888B09
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 02:48:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF11E88B81
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 02:48:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a7a9a369055so149540066b.3
- for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 17:48:57 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a7ac469e4c4so251518566b.0
+ for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 17:48:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723164537; x=1723769337; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723164538; x=1723769338; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ozzBbMV0QmkNampH7bqGU016FQNtqxe+zTuFfricKLM=;
- b=T38HgojLzUmOxbn9u269NYstOaJoO+6+CjgwZKPoBA+7VJabGWO5KtGL9YeVALcnPp
- 1yU1kUlCNNXMLC9p0m26cwzFMpVHWqs23daCdAZkxnNtbLxBigTmVIkMfUwtpH6kyq6j
- XXoZCeavVUHZiOWeIdDmhm4f0PdsHwUotV12SzwOlayvq5ocDwdKqyztVjvt864X63O8
- YET4NiGF4DnxSeo6XOMxJanhiWTrpWtRHWMPdZwoEMhZjcSHyriE+iHUyoem1te0wkCy
- T36eIAAleoBVYuADaHXEzHJzpArGr9pfLb3juYhsyvV3NuoUr32Cimp4/cwBtRblN+9d
- Lsag==
+ :reply-to; bh=NUIaIDYuarjZ2xvaAjlE4GF6abjF8tFPSzm38GjGbjU=;
+ b=G8x2jMmVKM94AqLASjd7VxHrESTRRKO+QCOfaXOlvWM97Qcbqd3RiVfZpgXrKbKhYS
+ 6u4B5vJzTKJ6wS5sDsEvRbQm942uj6eU/Y9PXwLx0ZC+KiYA8pjvT75qGIWnpR9iefUL
+ ISaFOdf6A5fvqc8g3e73cZZTkisetl3SX+fpqBXdG1Dzmp9MJAE89Q6clGSDKAmdzwMf
+ u1u7ee7Z2FXeWXvZqhqy0uFHuRpUpRw6/KVNJlPo2hNdGEX4SVY2l4kTrc9CzhZ3d5oh
+ sQx8UrqmErP8MMr06aMm8ENXA32wrNRQdjrkMPS4UYqx3KoP8cRh7VYAEmfQDJRBUUFP
+ wbtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723164537; x=1723769337;
+ d=1e100.net; s=20230601; t=1723164538; x=1723769338;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ozzBbMV0QmkNampH7bqGU016FQNtqxe+zTuFfricKLM=;
- b=H4QT6qlI5aYHtwCjM/7CbqM9ycM3OJJGOrF8ftEc1YERC/FhpxjtO35mfSjRK3QJ8A
- jEvvodgkgNuw5CPkPUiDWLRV7KonCH58lfQAm0eppHorSHwv6yzIAxG4ehJxs4j71b/J
- llE3uQTobXx97HN4XpQilX1CEaEwbeMdohGTzqgLQ+UDO0bZHX7zS/3qPdDHR8a2xNkl
- eBZp7srfbFl6BOzJzlmSYZYjY1OXZqC1KYfHwjZaJvOAar1MyVD3Q8T5cZAMESgPuSRf
- jnceR4Y6IggDsu4ZPXartlBAXKUgoG800WImDTlEP3DvC2JpL5e7lUbA66yKsM6gEAQ9
- nrAw==
-X-Gm-Message-State: AOJu0YzaUE4mL2eG0V2uQEJWQec8zw0+JCnnLUOQTj6IE49vfDTVEjgW
- tsFW+dFuf6B24irAxyDj1nMyGYYbV52UtQ9RjW26Oms3Tn96vWyKDgIJUW8wsFg=
-X-Google-Smtp-Source: AGHT+IH4a1U7euTQY3l+Ph1B4xkc57UW+tEPQHvY+ZqUsT74H67qfghMZx4Exc98MqypaagcZm2Ilw==
-X-Received: by 2002:a17:907:e93:b0:a7a:a5ae:11b7 with SMTP id
- a640c23a62f3a-a8090e41996mr277731866b.49.1723164537194; 
- Thu, 08 Aug 2024 17:48:57 -0700 (PDT)
+ bh=NUIaIDYuarjZ2xvaAjlE4GF6abjF8tFPSzm38GjGbjU=;
+ b=sXtdpUq1FKBM8rlwyp3oWaYCIAbSzEEx0l3+i9GmkJpBhwXQpT2PsZbMeJ8pBsUw49
+ CW3ICHs0wvhzltHMNBM7Jvn2JGmgaqkKha5EXAfvtTvc3iWcZFesQ9Ns6HHB9J8we2Es
+ 1yc5HUqGB5VbmP/zDAr4ckTh3fsENkpwzXl+4tx8qUA4D6Wxy55gq3h3qYys8njdRYLj
+ VvUNnC8ABcqJpnH2IwHcysnEhlCA5vEH4ZSn3vZgMeam6Tiros1guse9J4c08Tx/76+D
+ s6vp9m+DX2vOmyUATa38hS4tqD9tdnIWNYTx+8GWOKF4baxYTLqvkRHUVTs35L2Th9yX
+ OBWQ==
+X-Gm-Message-State: AOJu0YxDbFuxDKxx5rIMNYL7cy+z40P8mfvoXxQ+zHHhHMa3DXPaIgTu
+ aKfkzaWLNdC5XeP+SyEbwjngsmNSm8yqvzdxcrR9bD3iIr4gbMs1VpP/q5zDIIY=
+X-Google-Smtp-Source: AGHT+IHOGQh+ZfEqqLsTf/XK2eF5MEx2wL6T71ZAtucC1DyM5A+yHd7DWkpfY98nr996hYKA3XXvCg==
+X-Received: by 2002:a17:907:8692:b0:a7c:d284:4f1d with SMTP id
+ a640c23a62f3a-a8091fd825emr299663466b.28.1723164538202; 
+ Thu, 08 Aug 2024 17:48:58 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7dc9c0c9f5sm789811466b.50.2024.08.08.17.48.55
+ a640c23a62f3a-a7dc9c0c9f5sm789811466b.50.2024.08.08.17.48.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Aug 2024 17:48:56 -0700 (PDT)
+ Thu, 08 Aug 2024 17:48:57 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Fri, 09 Aug 2024 02:48:49 +0200
-Subject: [PATCH 6/7] configs: add qcm6490_defconfig
+Date: Fri, 09 Aug 2024 02:48:50 +0200
+Subject: [PATCH 7/7] doc: board/qualcomm: document rb3gen2
+ building/flashing
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240809-b4-rb3gen2-v1-6-7c73fe05b37a@linaro.org>
+Message-Id: <20240809-b4-rb3gen2-v1-7-7c73fe05b37a@linaro.org>
 References: <20240809-b4-rb3gen2-v1-0-7c73fe05b37a@linaro.org>
 In-Reply-To: <20240809-b4-rb3gen2-v1-0-7c73fe05b37a@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
@@ -79,21 +80,21 @@ To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1051;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2652;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=gUVH5jOKulVjjbsx+zTpjMHg8G3TBxJ1JzT6pmREvD0=;
- b=kA0DAAgBBYMxKxlfZLYByyZiAGa1Z3Cjlj+SNg5alDahemBmvoEd1hw31xpaN5TdpGzHx70cI
- okCMwQAAQgAHRYhBLZRoUY8ar7QaQxVzQWDMSsZX2S2BQJmtWdwAAoJEAWDMSsZX2S2yIkP/jBq
- +0vr56asKbu99JxTmXIqI2j9myhhArtB1A5AjwUUtVPLWESJRzNldWm5C62aiQhpRwxlLoBGDkf
- 7jAoUSUAn9DmW5+M67mcLEghOMtSiVOJJ8Khi6/GSKsAumabdeWd3sfqt1c6xwPBIqSWHnbywVI
- RlzD3ckbJ0x+nd3ZWa5Td+f9eqRIwSxcImDmcuFjx4LjEBljviMHd2PYxV8a4a1OwYh1rfJvxDM
- ctdUVmLQsShaDVt4+/Kp5XU0mS550e0OnhzDU4ZjaNBw6uAKnIQAk2Wotx6zPbMu89SUzZJlIWN
- 7WO4q0Dr0+1stKTu9s1rnGHTtEmz6oHjIRLTXXh/CjlBrQdformtBf8EAse77qXwfGIBSTuOBk1
- Cf7md0Csk/hhoSAYAYClPdNxKopXs8tuv1K/kfzvn5bP/BrcuwY5Ze+LryYpjuoi7FhzY1y2cue
- j1HP7pN4AiDi+hJ/qtBAjT3i64tvSYHpwgP+MxeoSTPI0QynbjioGAaSuEeUdin6NwRLeropZqj
- wjXSInZEHbtk5Ck7RMqOVPd9KwOI9gxX3MFwP7a/EmuoLwysgnvC3X24AD4lED0s6ts8e6NxhUa
- dEoWaGCFVRHGKcY7WEi8R6LRvroM6j+hwEmTSnWoisLmxBEiSaVAUtSrQaDzY6l6pg5jYSmv3oE
- O2YOM
+ bh=fa/zwrgeBCF/rj9hYeapEO2qsL2gMploXGaV1bqs5n0=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmtWdwDbDFcSMC7Qy6n4f8cEfUDtoAcY/uwczEQ
+ nmSCYP8ZGeJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZrVncAAKCRAFgzErGV9k
+ tmByD/9swVPZ0LryqY/GV8lk50fCIwc5XNT1gFkFGnhv6OM7sYflnpqI4+esT4FAa0J7PURDrgq
+ exYXro0iJ8/Apf3na6hQ9yFW/7CrHdl8ZTb9rU9kpe8+DDQ43/M/MhvG9onkMTL+SCLzMGVRT1N
+ vU6kaMekeNTTpyjuNmTk8n1zD8tJmLrXy9EaHgYLikBK8hF3cPxnebpHjvtgh9HocDqLr/ByZ0x
+ zazk8dPBnFMEpP4OqNcZvrOLXfZWb+iCnbTkFbXLS4i1oAUcV79DDGJ+945OL7K6htX5MSa9Vpj
+ Jd+7giiVUxEY3OmS/fFEcX6k7kl6ZB4za3GgjHslBXYvg/H8I1BGo09uBWJ3TS8PVrTpmW2cB3w
+ cvPWoxtlBgdOASh3UKG3igf73mLtHietMgtQqxXprBRxXLzKHXUlUf+WIhlEhHc80hpuzkJ3s/8
+ qFlBjiBmmoVmh55ymG+bnKW+AGqmnHsEG/zIZdfXvYgecyr/4Tf3XD7R88CAmRYiUgbGV7V3ZU8
+ yUQEFCbUv6ZobKXQJ5A7sIxDcaqA/hHYrGst0UcqTrfsCsg8dbIN/xRoABtDwUSJwZuGGgDvlVH
+ isXWgWAAGzmYMyGHRZ2G+65Grdob31viWVm4x2q1j1dinEqmiwxfPTwn4tD0BpCO80MHzSg4Fh2
+ QngBiG2M4bfTINA==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -112,38 +113,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce a defconfig for the RB3 Gen 2 and other QCM6490 boards with a
-dedicated uefi partition. These can replace EDK2 entirely with U-Boot.
+The process here is almost identical to the Dragonboard 410c, we've come
+full circle!
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- configs/qcm6490_defconfig | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+ doc/board/qualcomm/rb3gen2.rst | 53 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 53 insertions(+)
 
-diff --git a/configs/qcm6490_defconfig b/configs/qcm6490_defconfig
+diff --git a/doc/board/qualcomm/rb3gen2.rst b/doc/board/qualcomm/rb3gen2.rst
 new file mode 100644
-index 000000000000..25413ac9ed5a
+index 000000000000..4240606224f5
 --- /dev/null
-+++ b/configs/qcm6490_defconfig
-@@ -0,0 +1,18 @@
-+# Configuration for building U-Boot to be flashed
-+# to the uefi partition of QCM6490 dev boards with
-+# the "Linux Embedded" partition layout (which have
-+# a dedicated "uefi" partition for edk2/U-Boot)
++++ b/doc/board/qualcomm/rb3gen2.rst
+@@ -0,0 +1,53 @@
++.. SPDX-License-Identifier: GPL-2.0+
++.. sectionauthor:: Caleb Connolly <caleb.connolly@linaro.org>
 +
-+#include "qcom_defconfig"
++Qualcomm Robotics RB3 Gen 2
++===========================
 +
-+CONFIG_DEBUG_UART=y
-+CONFIG_DEBUG_UART_ANNOUNCE=y
-+CONFIG_DEBUG_UART_BASE=0x994000
-+CONFIG_DEBUG_UART_MSM_GENI=y
-+CONFIG_DEBUG_UART_CLOCK=14745600
++The RB3 Gen 2 is a development board based on the Qualcomm QCM6490 SoC (a derivative
++of SC7280). More information can be found on `Qualcomm's product page`_.
 +
-+# Address where U-Boot will be loaded
-+CONFIG_TEXT_BASE=0x9fc00000
-+CONFIG_REMAKE_ELF=y
++U-Boot can be used as a replacement for Qualcomm's original EDK2 bootloader by
++flashing it directly to the uefi_a (or _b) partition.
 +
-+CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-rb3gen2"
++.. _Qualcomm's product page: https://www.qualcomm.com/developer/hardware/rb3-gen-2-development-kit
++
++Installation
++------------
++First, setup ``CROSS_COMPILE`` for aarch64. Then, build U-Boot for ``qcm6490``::
++
++  $ export CROSS_COMPILE=<aarch64 toolchain prefix>
++  $ make qcm6490_defconfig
++  $ make -j8
++
++This will build ``u-boot.elf`` in the configured output directory.
++
++Although the RB3 Gen 2 does not have secure boot set up by default,
++the firmware still expects firmware ELF images to be "signed". The signature
++does not provide any security in this case, but it provides the firmware with
++some required metadata.
++
++To "sign" ``u-boot.elf`` you can use e.g. `qtestsign`_::
++
++  $ qtestsign -v6 aboot -o u-boot.mbn u-boot.elf
++
++Then install the resulting ``u-boot.mbn`` to the ``uefi_a`` partition
++on your device with ``fastboot flash uefi_a u-boot.mbn``.
++
++U-Boot should be running after a reboot (``fastboot reboot``).
++
++Note that fastboot is not yet supported in U-Boot on this board, as a result,
++to flash back the original firmware, or new versoins of the U-Boot, EDL mode
++must be used. This can be accessed by pressing the EDL mode button as described
++in the Qualcomm Linux documentation. A tool like bkerler's `edl`_ can be used
++for flashing with the firehose loader binary appropriate for the board.
++
++.. _qtestsign: https://github.com/msm8916-mainline/qtestsign
++.. _edl: https://github.com/bkerler/edl
++
++Usage
++-----
++
++The USB Type-A ports are connected via a PCIe USB hub, which is not supported yet.
++However, the Type-C port can be used with a powered USB dock to connect peripherals
++like a USB stick.
 
 -- 
 2.46.0
