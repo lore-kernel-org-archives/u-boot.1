@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D47B7C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 00:58:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27223C52D7B
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 00:58:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B605688C16;
-	Fri,  9 Aug 2024 02:56:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2CE0A8789F;
+	Fri,  9 Aug 2024 02:56:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="E3xYWWda";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tVORD3BF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB02588BB0; Fri,  9 Aug 2024 02:56:43 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 3677088C08; Fri,  9 Aug 2024 02:56:44 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48DFF88C1F
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 02:56:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 432D488B63
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 02:56:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5b8c2a6135dso2018925a12.1
- for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 17:56:41 -0700 (PDT)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a6265d3ba8fso132939966b.0
+ for <u-boot@lists.denx.de>; Thu, 08 Aug 2024 17:56:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723165001; x=1723769801; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723165002; x=1723769802; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=NdgpS2fGbKq3qCEqgboAL3IJ+7tYWgj1dTT5gC8wErI=;
- b=E3xYWWda8ofIs9vd3xSQuLec/iYCkIEJ7sip9aqd5tN2a2XM8A3qfeVP7UnNM3KoyC
- OPrT9Ja8NO0fYG/BDTaf03S+2oZvH5fjxusehcuqAhGHe0gvudqtVL28dnCIFpH/uxK2
- zSyZNysJEgu4ZBXW3tdcewR3GUqc08idpN/vTfAkxpNnPoA4wm3cxuxHVnWRDh0wAj+o
- llt+mxV5Dq2IDBpsnfZAF5DrawBLrVpAlHfC+1/1+CVHtH9Qd3mtt+8ikvh1v3aSJRR0
- jvYMmuCyFvH97dIsGJvkbk9aUfgCqirb3R5sU4vtuQsld4crc9eqfBO10N6bj7WVvrwX
- fa9g==
+ :reply-to; bh=nJdu383bEZmoEf0jaSYoXbeYDyVA149Dgz3Uuc+tKw8=;
+ b=tVORD3BF06UYL4gGUJFZ99AtgZtgssE+J5zOrCQYRNTPYege8tvWOeWMdCB/w+zqVV
+ tYXSap8mfCANlRUwGHgc3yFS7tBItJMsmi6jj2OoEkHejImaweU4gK18npUWQzDQyRFM
+ hIfpvk9tL89jSjnenJiHTLQ2TnXAi4Zo4U9HptLrhIhc9MUpZoywsnWgeukMMqUI3Nc7
+ ouff1xb3kr/SZIaxvM6QFlOwaJIAtQIJW9rdSqgjrj+xdWIRbpQkHOGlLiSV+N+LUAur
+ y09MT4m7mTaoRFfEQc3HOB2FFoHxb1oRuXehRIoWAP9IBAzVkVhEbtGL7J8KfcIFaFWQ
+ zD+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723165001; x=1723769801;
+ d=1e100.net; s=20230601; t=1723165002; x=1723769802;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NdgpS2fGbKq3qCEqgboAL3IJ+7tYWgj1dTT5gC8wErI=;
- b=KdJbhCgU5MqpBCxhYDSVNHr0g6hTbP/rxBYgo4EbBp9q9KEAstYOy2nMH2zfo+5XZX
- LKaPbZqLq30sj9QMtTZrb3lLoWtc+PYEWCKucLvwmYIDDrXOE1qhT82Gfn1yNwLNAihj
- w6wmrUOIBu98qWWT2atbVHS558F61hgWtczezry6MhEKhkzIMfXoJGT+4EusYmDt7PUD
- Date0AIr8fiZ3NQJyuK8+Rhb+ATwfKAVEHcDU8TRJQrcYNrJhzB7Mnp4K4bSkZ0R9Umk
- tDitrTiKgQ55qkofQb9XfdVELn6c6iUenY7W8yRyGOqb14yhAWUkvftR/JGmjwZtoGwy
- 78DA==
+ bh=nJdu383bEZmoEf0jaSYoXbeYDyVA149Dgz3Uuc+tKw8=;
+ b=MxJsdxsyZNUcH+CFh1jwigNZgbrCdwMfp6xoVo1EWDybXeFldHAUyIXMevfM9bSfw8
+ U090xfCOooCEUV1Fw5XtKFPhrQ9oWN/kOiQOu27V5zsz4y3jny8w9hygYlvVUimoA5yv
+ Hs8SbgwC5lHaXlmQCGPI99n9IqAR03lNMc3hNnUp8cF6TMDgwiwH8L/+yBOZAhi2iQx4
+ M5puEnB3brEXhyAPGl/bq2g8Yq8WwQq+PN5YElZ/OaH/UCwnxZTajZahF07BI3E01ASF
+ RDNVfrySN+rI6n8We5X2ExViPvARo7ol5L2J08ZXLfQJ2MydyW1/q/a5fzq9HhEj5nM7
+ KdnA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVMBQbkYj0H2Lw1ivU0nqC7gb+WLIVfbYnhWvNq7syDdg3CyIRoAkPgaOR+YO951/SCXzsVFNxXIxjvcuqfpClLcoXy5g==
-X-Gm-Message-State: AOJu0Yx2i4E840wvvHiCY2ACFNRBVgPDQHhrZRCbQlfco7+dlHniAdfB
- xXTtvc9T0hOyZZqfqXwwvymmyhwuptuS6hvlNeqjE7/JMObUo7kVCGu4tDc1EQo=
-X-Google-Smtp-Source: AGHT+IEuQzgbu6gav05OfBwJ7+QDYBkjO7jQmhWr0D93L3ca4+tTS/F73RrbhUngZLagOB7+QLDkvw==
-X-Received: by 2002:a17:906:eec1:b0:a77:c26c:a571 with SMTP id
- a640c23a62f3a-a80aa65ce27mr311666b.54.1723165000563; 
- Thu, 08 Aug 2024 17:56:40 -0700 (PDT)
+ AJvYcCUbS2EhojhyT1ZROwUrdnpO9/tp2L5oZO8Ac53gUxQqIegUfHJ3if7q1RIF+yDM2rYV+hCqRtZcqYxUII1YkfFw3+ZkMw==
+X-Gm-Message-State: AOJu0Yx1UAOxxEvMqPGif9aPg1yZaOkOWHMkbgTX3kgspFoJ6LveEHsC
+ rWDRoPGLt7B756d5DdyB77Y2tNmbQwl9/8AQVE4ajtSeLkHgOXpMt4wyz8r0r6s=
+X-Google-Smtp-Source: AGHT+IHLmeAmkIeyUN6ZdoF/sOdYYgCh0ckJQRMETJIts5JhhNhwikM2O9PmvYxpmu28j9VT/cdjBA==
+X-Received: by 2002:a17:907:f1c5:b0:a77:e55a:9e91 with SMTP id
+ a640c23a62f3a-a80aa595caemr912766b.19.1723165001604; 
+ Thu, 08 Aug 2024 17:56:41 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::7424])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a7dc9e80e54sm790680266b.167.2024.08.08.17.56.39
+ a640c23a62f3a-a7dc9e80e54sm790680266b.167.2024.08.08.17.56.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Aug 2024 17:56:40 -0700 (PDT)
+ Thu, 08 Aug 2024 17:56:41 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Fri, 09 Aug 2024 02:56:28 +0200
-Subject: [PATCH v7 09/11] tools: mkeficapsule: support generating dynamic GUIDs
+Date: Fri, 09 Aug 2024 02:56:29 +0200
+Subject: [PATCH v7 10/11] test: lib/uuid: add unit tests for dynamic UUIDs
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240809-b4-dynamic-uuid-v7-9-8c44ab1f06a5@linaro.org>
+Message-Id: <20240809-b4-dynamic-uuid-v7-10-8c44ab1f06a5@linaro.org>
 References: <20240809-b4-dynamic-uuid-v7-0-8c44ab1f06a5@linaro.org>
 In-Reply-To: <20240809-b4-dynamic-uuid-v7-0-8c44ab1f06a5@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
@@ -82,21 +82,21 @@ To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
 Cc: Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de, 
  Caleb Connolly <caleb.connolly@linaro.org>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8305;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3066;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=1ZmbfsFZL7+YgnLzHPJx2Z7jaIpmmM85jwfL28p3NJ8=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmtWk9+e44ZDR/tjb0sY3yVQwe/z0JgLSLI8Ljf
- 9e7is93fTiJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZrVpPQAKCRAFgzErGV9k
- tkCOD/4uJVoaUhTAAtn4zYWI59uRDZa7deR2/Zm1/Hz7LRA+vNrLZMLEzaBDHYcYx4BJY9fNHhP
- jljrJu9ShAEldcdjwJL+8j9RTho4L8TFWELs54ZM5dcw76GZ71D3qA8Xu8hzSIDzjKATMymDmDV
- KozZGJftkARY/1uU47iNeJ9zePKZ/aPJRwuiAxE5Rg47vDloDb2p/Gja/Sr3tJhnI7/t/Bz9QDU
- rNTX+sTeXV1klSJY5vWIWqeXb3NPfDi1+nGbwxbnjCfmLHYoSysVCQ8xAi7l9h7ckqdaL3HQRVQ
- c4xLPFNYcvoU3+pPCL2CbxWUL5c4dTLKU1j/5ML9HPboS7HZe1KjrJ5wqqbz/XObyouChcCeiVf
- JnGWp1FYytZDFQCZsxNfqlIxKg+Q7ua6nszbfUHS8DdT4Bp74gQh94yIiHdxzqyxfkUQimyWu4e
- jBZs68//bnu7x8D+IqykriWEVIX5/RqLvYmhaAzcl2xsNEVlbvLR54N3QfQjS9Gzqk/uaZDZp3R
- VuoRZmJJnjib5d1mG8v57YLiY2In0HYL8Erd624NHsLh7k3S6bkT/u/KZDU4xyI+KWRuK+VlBqW
- 9ogC7eCVsY6kbll9geSNnDWfLuWmQN13bXm4DMLYzqgu2xFvxZhCyjDx4XtAVxh0QcwD6kjXjwX
- qBZ5YDklEJxGQqg==
+ bh=F5O31Nk7Cky+OrDFFf3eaBrzcyso+9+tOqyXI5DtTgE=;
+ b=kA0DAAgBBYMxKxlfZLYByyZiAGa1aT2iyiPjlbH6l9OVhma1xM5fr2BRXTmZzv/lYGRQbhX4s
+ 4kCMwQAAQgAHRYhBLZRoUY8ar7QaQxVzQWDMSsZX2S2BQJmtWk9AAoJEAWDMSsZX2S2n8wP/1UO
+ Fhf4HrOvCX+xvyabbdY86Ip3FO/yjvf2/lv8hk79xhjQPMK03oWmNZO04b0WbnyIIyRMgEUSG/g
+ QTNQAsXaP8e5886WlvUU9J62gXNL9Actbo8prXg07DsTV7V1Z6fB4nDchEs52woTGdcdSR57Hdi
+ meVN+uk9Xl4ukIaeJO4oMhm0b0ejlcmhQ/F87MRu4pblRpv/3o8HEIis4I9Nck9vOqKe0BHoDre
+ 04P/hJdxYCHv5Dd+M6JcIBhpZfbMxat7l01idO1GN7IqU17NXt/keseY2tHHie8bc0w99cNKAUi
+ wwlNE4CpBIaqXqy99LOuY8yjsKxUFMUtXUAIy8TmNwBrbqLxdEiL/KXD2Go0KLdbv8Dr4PcASzM
+ XwnFRfPg1KG6nBq7lRG1XjNNRy6Xi8xNNFitPmE9QYQc0mQVQppFmrcc5WN6R1jBirXofooW1Uk
+ mQ0JTnYmWD/u/1PfCDq4OdbyyNB/A6kZRw+C7KkC9vU6fcp4ENixl+RA20km3qXf/6CQIFKY+xC
+ +U1gF0EoEqGycNh8I6pRGoD8+f7PNNyMpuzQpcQ6lpsqoiqfQv0+G0fG0pFaGybLcF2wAfU6HwO
+ BsqGgOMbUUgofgUDAU6zD3TXDiVMWN15Z30KgkVim3GXycY025lR7mdBqeZo4xQDVUpq3NGjRvR
+ ACQq1
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -115,303 +115,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for generating GUIDs that match those generated internally
-by U-Boot for capsule update fw_images when using dynamic UUIDs.
+Add some basic unit tests to validate that the UUID generation behaves
+as expected. This matches the implementation in efi_loader for sandbox
+and a Qualcomm board and should catch any regressions.
 
-Dynamic UUIDs in U-Boot work by taking a namespace UUID and hashing it
-with the board compatible and fw_image name. This feature just provides
-a way to determine the UUIDs for a particular board without having to
-actually boot U-Boot on it.
-
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- doc/mkeficapsule.1   |  23 ++++++++
- tools/mkeficapsule.c | 156 +++++++++++++++++++++++++++++++++++++++++++++++++--
- 2 files changed, 174 insertions(+), 5 deletions(-)
+ test/lib/uuid.c | 82 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 82 insertions(+)
 
-diff --git a/doc/mkeficapsule.1 b/doc/mkeficapsule.1
-index c4c2057d5c7a..bf735295effa 100644
---- a/doc/mkeficapsule.1
-+++ b/doc/mkeficapsule.1
-@@ -9,8 +9,11 @@ mkeficapsule \- Generate EFI capsule file for U-Boot
- .SH SYNOPSIS
- .B mkeficapsule
- .RI [ options ] " " [ image-blob ] " " capsule-file
+diff --git a/test/lib/uuid.c b/test/lib/uuid.c
+index 9629d378c329..2c6cfd42ddc3 100644
+--- a/test/lib/uuid.c
++++ b/test/lib/uuid.c
+@@ -7,15 +7,20 @@
+  * Authors:
+  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+  */
  
-+.B mkeficapsule
-+.RI guidgen " " [ GUID ] " " DTB " " IMAGE_NAME...
-+
- .SH "DESCRIPTION"
- The
- .B mkeficapsule
- command is used to create an EFI capsule file to be used by U-Boot for firmware
-@@ -41,8 +44,12 @@ format is the same as used in the new uImage format and allows for
- multiple binary blobs in a single capsule file.
- This type of image file can be generated by
- .BR mkimage .
- 
-+mkeficapsule can also be used to simulate the dynamic GUID generation used to
-+identify firmware images in capsule updates by providing the namespace guid, dtb
-+for the board, and a list of firmware images.
-+
- .SH "OPTIONS"
- 
- .TP
- .BI "-g\fR,\fB --guid " guid-string
-@@ -112,8 +119,24 @@ at every firmware update.
- .TP
- .B "-d\fR,\fB --dump_sig"
- Dump signature data into *.p7 file
- 
-+.SH "GUIDGEN OPTIONS"
-+
-+.TP
-+.B "[GUID]"
-+The namespace/salt GUID, by default this is EFI_CAPSULE_NAMESPACE_GUID.
-+The format is:
-+    xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-+
-+.TP
-+.B DTB
-+The device tree blob file for the board.
-+
-+.TP
-+.B IMAGE_NAME...
-+The names of the firmware images to generate GUIDs for.
-+
- .PP
- .SH FILES
- .TP
- .I /EFI/UpdateCapsule
-diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
-index 54fb4dee3ee5..8dfc09ffaf4f 100644
---- a/tools/mkeficapsule.c
-+++ b/tools/mkeficapsule.c
-@@ -19,12 +19,16 @@
- #include <gnutls/gnutls.h>
- #include <gnutls/pkcs7.h>
- #include <gnutls/abstract.h>
- 
-+#include <libfdt.h>
++#include <charset.h>
  #include <u-boot/uuid.h>
+ #include <test/lib.h>
+ #include <test/test.h>
+ #include <test/ut.h>
  
- #include "eficapsule.h"
- 
-+// Matches CONFIG_EFI_CAPSULE_NAMESPACE_GUID
-+#define DEFAULT_NAMESPACE_GUID "8c9f137e-91dc-427b-b2d6-b420faebaf2a"
++#include <efi.h>
 +
- static const char *tool_name = "mkeficapsule";
+ /* test UUID */
+ #define TEST_SVC_UUID	"ed32d533-4209-99e6-2d72-cdd998a79cc0"
++/* U-Boot default fw image namespace */
++#define DEFAULT_FW_IMAGE_NAMESPACE "8c9f137e-91dc-427b-b2d6-b420faebaf2a"
  
- efi_guid_t efi_guid_fm_capsule = EFI_FIRMWARE_MANAGEMENT_CAPSULE_ID_GUID;
- efi_guid_t efi_guid_cert_type_pkcs7 = EFI_CERT_TYPE_PKCS7_GUID;
-@@ -53,11 +57,23 @@ static struct option options[] = {
- 	{"help", no_argument, NULL, 'h'},
- 	{NULL, 0, NULL, 0},
- };
+ #define UUID_SIZE 16
  
--static void print_usage(void)
-+
-+static void print_usage_guidgen(void)
- {
--	fprintf(stderr, "Usage: %s [options] <image blob> <output file>\n"
-+	fprintf(stderr, "%s guidgen [GUID] DTB IMAGE_NAME...\n"
-+		"Options:\n"
-+
-+		"\tGUID                        Namespace GUID (default: %s)\n"
-+		"\tDTB                         Device Tree Blob\n"
-+		"\tIMAGE_NAME...               One or more names of fw_images to generate GUIDs for\n",
-+		tool_name, DEFAULT_NAMESPACE_GUID);
-+}
-+
-+static void print_usage_mkeficapsule(void)
-+{
-+	fprintf(stderr, "Usage: \n\n%s [options] <image blob> <output file>\n"
- 		"Options:\n"
- 
- 		"\t-g, --guid <guid string>    guid for image blob type\n"
- 		"\t-i, --index <index>         update image index\n"
-@@ -70,10 +86,11 @@ static void print_usage(void)
- 		"\t-A, --fw-accept  firmware accept capsule, requires GUID, no image blob\n"
- 		"\t-R, --fw-revert  firmware revert capsule, takes no GUID, no image blob\n"
- 		"\t-o, --capoemflag Capsule OEM Flag, an integer between 0x0000 and 0xffff\n"
- 		"\t-D, --dump-capsule          dump the contents of the capsule headers\n"
--		"\t-h, --help                  print a help message\n",
-+		"\t-h, --help                  print a help message\n\n",
- 		tool_name);
-+	print_usage_guidgen();
+ /* The UUID binary data (little-endian format) */
+@@ -37,4 +42,81 @@ static int lib_test_uuid_to_le(struct unit_test_state *uts)
+ 	return 0;
  }
  
- /**
-  * auth_context - authentication context
-@@ -816,8 +833,130 @@ static void dump_capsule_contents(char *capsule_file)
- 		exit(EXIT_FAILURE);
- 	}
- }
- 
-+static struct fdt_header *load_dtb(const char *path)
-+{
-+	struct fdt_header *dtb;
-+	ssize_t dtb_size;
-+	FILE *f;
+ LIB_TEST(lib_test_uuid_to_le, 0);
 +
-+	/* Open and parse DTB */
-+	f = fopen(path, "r");
-+	if (!f) {
-+		fprintf(stderr, "Cannot open %s\n", path);
-+		return NULL;
-+	}
-+
-+	if (fseek(f, 0, SEEK_END)) {
-+		fprintf(stderr, "Cannot seek to the end of %s: %s\n",
-+			path, strerror(errno));
-+		return NULL;
-+	}
-+
-+	dtb_size = ftell(f);
-+	if (dtb_size < 0) {
-+		fprintf(stderr, "Cannot ftell %s: %s\n",
-+			path, strerror(errno));
-+		return NULL;
-+	}
-+
-+	fseek(f, 0, SEEK_SET);
-+
-+	dtb = malloc(dtb_size);
-+	if (!dtb) {
-+		fprintf(stderr, "Can't allocated %ld\n", dtb_size);
-+		return NULL;
-+	}
-+
-+	if (fread(dtb, dtb_size, 1, f) != 1) {
-+		fprintf(stderr, "Can't read %ld bytes from %s\n",
-+			dtb_size, path);
-+		free(dtb);
-+		return NULL;
-+	}
-+
-+	fclose(f);
-+
-+	return dtb;
-+}
-+
-+#define MAX_IMAGE_NAME_LEN 128
-+static int genguid(int argc, char **argv)
-+{
-+	int idx = 2, ret;
-+	unsigned char namespace[16];
-+	struct efi_guid image_type_id;
-+	const char *dtb_path;
-+	struct fdt_header *dtb;
++struct dynamic_uuid_test_data {
 +	const char *compatible;
-+	int compatlen, namelen;
-+	uint16_t fw_image[MAX_IMAGE_NAME_LEN];
++	const u16 *images[4];
++	const char *expected_uuids[4];
++};
 +
-+	if (argc < 2) {
-+		fprintf(stderr, "Usage: ");
-+		print_usage_guidgen();
-+		return -1;
-+	}
++static int lib_test_dynamic_uuid_case(struct unit_test_state *uts,
++				      const struct dynamic_uuid_test_data *data)
++{
++	struct uuid namespace;
++	int j;
 +
-+	if (uuid_str_to_bin(argv[1], namespace, UUID_STR_FORMAT_GUID)) {
-+		uuid_str_to_bin(DEFAULT_NAMESPACE_GUID, namespace, UUID_STR_FORMAT_GUID);
-+		dtb_path = argv[1];
-+	} else {
-+		dtb_path = argv[2];
-+		idx = 3;
-+	}
++	ut_assertok(uuid_str_to_bin(DEFAULT_FW_IMAGE_NAMESPACE, (unsigned char *)&namespace,
++				    UUID_STR_FORMAT_GUID));
 +
-+	if (idx == argc) {
-+		fprintf(stderr, "Usage: ");
-+		print_usage_guidgen();
-+		return -1;
-+	}
++	for (j = 0; data->images[j]; j++) {
++		const char *expected_uuid = data->expected_uuids[j];
++		const u16 *image = data->images[j];
++		efi_guid_t uuid;
++		char uuid_str[37];
 +
-+	dtb = load_dtb(dtb_path);
-+	if (!dtb)
-+		return -1;
-+
-+	if ((ret = fdt_check_header(dtb))) {
-+		fprintf(stderr, "Invalid DTB header: %d\n", ret);
-+		return -1;
-+	}
-+
-+	compatible = fdt_getprop(dtb, 0, "compatible", &compatlen);
-+	if (!compatible) {
-+		fprintf(stderr, "No compatible string found in DTB\n");
-+		return -1;
-+	}
-+	if (strnlen(compatible, compatlen) >= compatlen) {
-+		fprintf(stderr, "Compatible string not null-terminated\n");
-+		return -1;
-+	}
-+
-+	printf("Generating GUIDs for %s with namespace %s:\n",
-+	       compatible, DEFAULT_NAMESPACE_GUID);
-+	for (; idx < argc; idx++) {
-+		memset(fw_image, 0, sizeof(fw_image));
-+		namelen = strlen(argv[idx]);
-+		if (namelen > MAX_IMAGE_NAME_LEN) {
-+			fprintf(stderr, "Image name too long: %s\n", argv[idx]);
-+			return -1;
-+		}
-+
-+		for (int i = 0; i < namelen; i++)
-+			fw_image[i] = (uint16_t)argv[idx][i];
-+
-+		gen_v5_guid((struct uuid *)&namespace, &image_type_id,
-+			    compatible, strlen(compatible),
-+			    fw_image, namelen * sizeof(uint16_t),
++		gen_v5_guid(&namespace, &uuid,
++			    data->compatible, strlen(data->compatible),
++			    image, u16_strlen(image) * sizeof(uint16_t),
 +			    NULL);
++		uuid_bin_to_str((unsigned char *)&uuid, uuid_str, UUID_STR_FORMAT_GUID);
 +
-+		printf("%s: ", argv[idx]);
-+		print_guid(&image_type_id);
++		ut_asserteq_str(expected_uuid, uuid_str);
 +	}
 +
 +	return 0;
 +}
 +
- /**
-  * main - main entry function of mkeficapsule
-  * @argc:	Number of arguments
-  * @argv:	Array of pointers to arguments
-@@ -840,8 +979,15 @@ int main(int argc, char **argv)
- 	char *privkey_file, *cert_file;
- 	int c, idx;
- 	struct fmp_payload_header_params fmp_ph_params = { 0 };
- 
-+	/* Generate dynamic GUIDs */
-+	if (argc > 1 && !strcmp(argv[1], "guidgen")) {
-+		if (genguid(argc - 1, argv + 1))
-+			exit(EXIT_FAILURE);
-+		exit(EXIT_SUCCESS);
++static int lib_test_dynamic_uuid(struct unit_test_state *uts)
++{
++	int ret, i;
++	const struct dynamic_uuid_test_data test_data[] = {
++		{
++			.compatible = "sandbox",
++			.images = {
++				u"SANDBOX-UBOOT",
++				u"SANDBOX-UBOOT-ENV",
++				u"SANDBOX-FIT",
++				NULL,
++			},
++			.expected_uuids = {
++				"985f2937-7c2e-5e9a-8a5e-8e063312964b",
++				"9e339473-c2eb-530a-a69b-0cd6bbbed40e",
++				"46610520-469e-59dc-a8dd-c11832b877ea",
++				NULL,
++			}
++		},
++		{
++			.compatible = "qcom,qrb4210-rb2",
++			.images = {
++				u"QUALCOMM-UBOOT",
++				NULL,
++			},
++			.expected_uuids = {
++				"d5021fac-8dd0-5ed7-90c2-763c304aaf86",
++				NULL,
++			}
++		},
++	};
++
++	for (i = 0; i < ARRAY_SIZE(test_data); i++) {
++		ret = lib_test_dynamic_uuid_case(uts, &test_data[i]);
++		if (ret)
++			return ret;
 +	}
 +
- 	guid = NULL;
- 	index = 0;
- 	instance = 0;
- 	mcount = 0;
-@@ -928,9 +1074,9 @@ int main(int argc, char **argv)
- 		case 'D':
- 			capsule_dump = true;
- 			break;
- 		default:
--			print_usage();
-+			print_usage_mkeficapsule();
- 			exit(EXIT_SUCCESS);
- 		}
- 	}
- 
-@@ -951,9 +1097,9 @@ int main(int argc, char **argv)
- 	    (capsule_type != CAPSULE_NORMAL_BLOB &&
- 	    ((argc != optind + 1) ||
- 	     ((capsule_type == CAPSULE_ACCEPT) && !guid) ||
- 	     ((capsule_type == CAPSULE_REVERT) && guid)))) {
--		print_usage();
-+		print_usage_mkeficapsule();
- 		exit(EXIT_FAILURE);
- 	}
- 
- 	if (capsule_type != CAPSULE_NORMAL_BLOB) {
++	return 0;
++}
++
++LIB_TEST(lib_test_dynamic_uuid, 0);
++
 
 -- 
 2.46.0
