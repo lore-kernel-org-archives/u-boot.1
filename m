@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C133CC52D71
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 08:59:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65708C52D71
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 09:00:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A742188B89;
-	Fri,  9 Aug 2024 10:59:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 113C688BD5;
+	Fri,  9 Aug 2024 10:59:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="ISpCesgL";
+	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="DwUQfPj4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69ACE88AF4; Fri,  9 Aug 2024 10:59:18 +0200 (CEST)
-Received: from out203-205-221-149.mail.qq.com (out203-205-221-149.mail.qq.com
- [203.205.221.149])
+ id 210D588BD4; Fri,  9 Aug 2024 10:59:25 +0200 (CEST)
+Received: from out203-205-221-236.mail.qq.com (out203-205-221-236.mail.qq.com
+ [203.205.221.236])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B48FF88BCD
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 10:59:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AC5B388BD2
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 10:59:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hanyuan-z@qq.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1723193953; bh=kWrVDZ+JEXFDm+b2501J40GY11doJB+bZG7d0g7pxJc=;
+ t=1723193941; bh=GGp6lDsL5HZnr89c7oiE1uohsiXZBF1NeedqwU/05wA=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=ISpCesgLnjX0Bel25qbzF3rt2/K5HjhjUpAgBnzEPqeXOWj119h9lXfyU8+oO+U9w
- nWFn+BieclyRHY2OyU9Av8+sn78/Wzatwd/Qm2Wl+Qob7yXHYDjugsw+ce7Q2B7Sf4
- CwDFwIF08/J8Jx8HQEjSSAw7nMH6eWYd1oadsy6k=
+ b=DwUQfPj4uJl2lE55dPf/DwrEISaR774t3/OQq8US4p1eHfUiaPGoBovHRfL54LjGP
+ m4wXE/QS/a0X+cZEJA+Ikt58kfqUXnV4/4ROaOnMS8OV6gKHB6I9o5b7YAZRDnv1da
+ Tbsns1k7PqpWzXkmSAoEXT2MX9okUdebKrNCWQBg=
 Received: from hyz-wsl.www.tendawifi.com ([166.111.226.87])
  by newxmesmtplogicsvrszb9-0.qq.com (NewEsmtp) with SMTP
  id EA28703C; Fri, 09 Aug 2024 16:58:34 +0800
-X-QQ-mid: xmsmtpt1723193941tf4www44g
-Message-ID: <tencent_57E89FA08481630DE0DE98E0EBC8B269B305@qq.com>
-X-QQ-XMAILINFO: N7h1OCCDntujAVUbdhU51/kUym5LtFJwUtdpSZY+lp5tE4FlMsFB6AWgdhy1+i
- moCnI1CGi/FbThmRgMlbrgMer3bMbwU57HWjkaV4GPnvZ7I1Mt95L8mEPNNNsNy+kf7wO8o7L2qV
- n+3UXTXWQ6FS1mMs+fKRPdJ+o4OnNJDfRQN/wDRstKV1q0+zG6TCZwnkO+SSQgNnSdWHy/usmydC
- /+GhPOD0URut3uzxZntjgP8ph43tHBnWYMj/5FQGhWbKDj0SKfsycwSRjm6C/Mq5WH0PjXknSlax
- j27wA4/GERQUTumyzn6frLOKuNomVcfpLw3IKBPU4fY2x/4ZL4tfmKLJ11rBLqo/gglbf6mlAjUk
- y4AzdJFoAcYGWPa8yDgKWv2PmcqHG+OnomxlxkAtGNnDgJQSdrJ9GOfkMz5J/ImrQW64AUdn+gjL
- xC5oD4bkId/jbUpTMRFvPpx7jTuzKxX4LsOdH7PXz6TLinkQES6n8SQ2c9wffpRv4ev2PxlVe4G3
- h6D7euN+ls1CCglxT/LPozvbFRPVW65zzC89tZDm3oLqoiAEp48y6BTEft5Pdiqno3SOYzVhICBx
- 4r+yVKZjz4fEc5oTVW8nAZkV8qfwC9mH9SuXU7YzUqSpw/yrRX9L0kiLfGg7bnyHcwNuTKzmJhMS
- 2xKmCre1cJoZVslHiyJNXBbAYHLLS+KTbnq1ZUGLHIfpk7wdPEkcAg9viwMRgNdoRUI3/Yh6XEty
- zqrZ7TBD+Kwy0BsU2y2lQzAaHmQ24NNnOiUnzE54coLWNe73XoxK3wPfEK5q0t9/D8wudcetV+ga
- H5P4ZwxU0IpdgnbzGo8Yjhk3gAdtbtuz3fbZaQ24nfCr6gv/HxoxFC6bpB24CBQbVDYsJhn2IJnA
- KaXs7OOVIalunI3wzhl5TzIiUVB3uMacHc8jk5TUu+EMhY2FV8yjYoiuthJy7zWFjeiEsd2rgXAp
- UpEIw/2t2WrCdUcCgEtsppSgJJJT/HrQqbvuW1PKxdnoyh9LhMK7Zt1t6bdKXC05SCs0d3vJ37xg
- Ex0kxVk6yBMiWLcDcLIoko94Pn/xE=
-X-QQ-XMRINFO: MPJ6Tf5t3I/ycC2BItcBVIA=
+X-QQ-mid: xmsmtpt1723193937top6znw9c
+Message-ID: <tencent_530296729B25FF3F25431C450033C6E75F08@qq.com>
+X-QQ-XMAILINFO: OATpkVjS499u6Rs4khUCgzQ6UIksu3Bn6kjAN/Sy1dHhloq1QsTCOgJhSMRrtb
+ KUk3TpuurHc2K05T5I7x/ytGk3clEOn0Yp2akxb98bMbH4LlLifszyKeRPXFouI3a7mo/E2O+GT7
+ sdbWN/R6G8QqyZIz4S0YW1gkG24wFmeer6QMXI96I3dEo3pdC8pAd9LE+3nD096QaXI8mBlNChDc
+ ski96/s5IuAP+yig5bmpntapkiwu4mzrybA8WI278dCIw36K3egsjFwJckAjhvoj/62yqOAUUrwb
+ FgG/s8w3Z9L6cPlM91H2eHUrwuUOCWBqq3mVziIMBACq8m6UDofn/lectV+qcXURs8itdW3oSNcp
+ yV2NZxlnzn+O8HT7RGLxRzc40Ye4QUcsIivKLVNcYgfHiQq1eok2EvfhHTNCygTI0l1Rq+1XHmEn
+ rU65JBBZwpI/HcO5ow1rEmsZjaWt9Ff1pjan8Q0jLvruesIoiv20DAD7M/PFzhQINQ8KxVg5KcmO
+ GL7DiyvJ5TSzCI4B2jwRMwiQhBvBP6wcOtMxCJH3qRxvzfnemUg8Ie8TOU/xS5Jc3L3P+GyEPf32
+ JQa5386P7XwQAsVxe9B1qJb4DEyRqgfGkELALJle54E3zC6tR1ny//EQwBVRCVh5LrE2o4cInwSz
+ R2znxclwNcrIDYAuTClYFaIqlotzvHyfFyBe2ZlocXqKypewYTlhLwYYFEmyqsXSNDXHJ65e0eom
+ gE99XRI2IdQiXxXUDKInRu0s1fh8If9frgdBBmD2TgF4KoJv52EyR4B6A00YzG8LFFmxBUSLFMNY
+ K+o/9A7EFo7KZVIAPr0F15E0MjjZsw+1zGBhtlQe//ROflKioD3stihTuZVKzLhUgJj+hn2pGPcu
+ vDWMuS1Ga6RCVrcTHm10gf6X0uZzEsSgAhROL6fhTAMyqXbcA6C60VyT62V4a5pO1aFeTiP0f9m8
+ hDzp6w1eki/O3BE9hMQSXPnl+5/5+iJ2yd7LaQ6OyQl6J2LcWT3Q+5h2KGAo/zWMc12CkbADHo/t
+ FV4Cn+ZEhnTdLday2sq9aIKuvyY2bML8Jo+Dd189YFU8kV9fygEm0HSInf3g2QbKBnYnswpg==
+X-QQ-XMRINFO: NI4Ajvh11aEj8Xl/2s1/T8w=
 From: Hanyuan Zhao <hanyuan-z@qq.com>
 To: u-boot@lists.denx.de
 Cc: Joe Hershberger <joe.hershberger@ni.com>,
@@ -59,10 +59,10 @@ Cc: Joe Hershberger <joe.hershberger@ni.com>,
  Marek Vasut <marek.vasut+renesas@gmail.com>,
  Hanyuan Zhao <hanyuan-z@qq.com>,
  Hanyuan Zhao <zhaohy22@mails.tsinghua.edu.cn>
-Subject: [PATCH 7/8] net: dc2114x: allow users to decide how to tx packets
- according to IP core
-Date: Fri,  9 Aug 2024 16:57:00 +0800
-X-OQ-MSGID: <20240809085701.22183-7-hanyuan-z@qq.com>
+Subject: [PATCH 6/8] net: dc2114x: allow users to decide whether to detect the
+ tx No Carrier errors
+Date: Fri,  9 Aug 2024 16:56:59 +0800
+X-OQ-MSGID: <20240809085701.22183-6-hanyuan-z@qq.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240809085701.22183-1-hanyuan-z@qq.com>
 References: <20240809085701.22183-1-hanyuan-z@qq.com>
@@ -85,90 +85,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Some IP cores of dc2114x or its variants do not comply so well with
-the behaviors described by the official document. Originally this
-driver uses only one tx descriptor and organizes it as a ring buffer,
-which would lead to a problem that one packet would be sent twice.
-This commit adds support to prevent this bug if you are using IP
-cores with this issue, by using multiple tx descriptors and
-organizing them as a real well-defined ring buffer.
+the behaviors described by the official document. A packet could be
+sent successfully but reported with No Carrier error. Latest drivers
+of this IP core have not detect this error anymore.
 
 Signed-off-by: Hanyuan Zhao <zhaohy22@mails.tsinghua.edu.cn>
 ---
- drivers/net/Kconfig   | 13 +++++++++++++
- drivers/net/dc2114x.c | 17 ++++++++++++++++-
- 2 files changed, 29 insertions(+), 1 deletion(-)
+ drivers/net/Kconfig   | 11 +++++++++++
+ drivers/net/dc2114x.c |  2 ++
+ 2 files changed, 13 insertions(+)
 
 diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index d79d8ad9c4..89bd77da19 100644
+index 41b7c66105..d79d8ad9c4 100644
 --- a/drivers/net/Kconfig
 +++ b/drivers/net/Kconfig
-@@ -759,6 +759,19 @@ config TULIP_IGNORE_TX_NO_CARRIER
- 	  of this IP core do not detect this error anymore. Say Y to this could
- 	  disable handling of this error.
+@@ -748,6 +748,17 @@ config TULIP_SUPPORT_NON_PCI
+ 	  Say Y to this and you can run this driver on platforms that do not
+ 	  have PCI controllers.
  
-+config TULIP_MULTIPLE_TX_DESC
-+	bool "Use multiple tx descriptors"
++config TULIP_IGNORE_TX_NO_CARRIER
++	bool "Ignore tx no carrier error"
 +	depends on TULIP
 +	default n
 +	help
 +	  Some IP cores of dc2114x or its variants do not comply so well with
-+	  the behaviors described by the official document. Originally this
-+	  driver uses only one tx descriptor and organizes it as a ring buffer,
-+	  which would lead to a problem that one packet would be sent twice.
-+	  Say Y to this could prevent this bug if you are using IP cores with
-+	  this issue, by using multiple tx descriptors and organizing them as
-+	  a real well-defined ring buffer.
++	  the behaviors described by the official document. A packet could be
++	  sent successfully but reported with No Carrier error. Latest drivers
++	  of this IP core do not detect this error anymore. Say Y to this could
++	  disable handling of this error.
 +
  config XILINX_AXIEMAC
  	select PHYLIB
  	select MII
 diff --git a/drivers/net/dc2114x.c b/drivers/net/dc2114x.c
-index dc28712221..11dea9b4d7 100644
+index 8a285742a1..dc28712221 100644
 --- a/drivers/net/dc2114x.c
 +++ b/drivers/net/dc2114x.c
-@@ -78,10 +78,15 @@
- #else
- #define phys_to_bus(dev, a)	dm_pci_phys_to_mem((dev), (a))
- #endif
-+
-+/* Number of TX descriptors   */
-+#if CONFIG_IS_ENABLED(TULIP_MULTIPLE_TX_DESC)
-+#define NUM_TX_DESC 4
-+#else
-+#define NUM_TX_DESC 1
- #endif
+@@ -371,7 +371,9 @@ static int dc21x4x_send_common(struct dc2114x_priv *priv, void *packet, int leng
  
- #define NUM_RX_DESC PKTBUFSRX
--#define NUM_TX_DESC 1			/* Number of TX descriptors   */
- #define RX_BUFF_SZ  PKTSIZE_ALIGN
- 
- #define TOUT_LOOP   1000000
-@@ -312,7 +317,12 @@ static void send_setup_frame(struct dc2114x_priv *priv)
- 
- 	priv->tx_ring[priv->tx_new].buf = cpu_to_le32(phys_to_bus(priv->devno,
- 						      (phys_addr_t)&setup_frame[0]));
-+#if CONFIG_IS_ENABLED(TULIP_MULTIPLE_TX_DESC)
-+	priv->tx_ring[priv->tx_new].des1 = cpu_to_le32(TD_SET | SETUP_FRAME_LEN);
-+	priv->tx_ring[priv->tx_ring_size - 1].des1 |= cpu_to_le32(TD_TER);
-+#else
- 	priv->tx_ring[priv->tx_new].des1 = cpu_to_le32(TD_TER | TD_SET | SETUP_FRAME_LEN);
+ 	if (le32_to_cpu(priv->tx_ring[priv->tx_new].status) & TD_ES) {
+ 		priv->tx_ring[priv->tx_new].status = 0x0;
++#if !CONFIG_IS_ENABLED(TULIP_IGNORE_TX_NO_CARRIER)
+ 		goto done;
 +#endif
- 	priv->tx_ring[priv->tx_new].status = cpu_to_le32(T_OWN);
+ 	}
  
- 	dc2114x_outl(priv, POLL_DEMAND, DE4X5_TPD);
-@@ -356,7 +366,12 @@ static int dc21x4x_send_common(struct dc2114x_priv *priv, void *packet, int leng
- 
- 	priv->tx_ring[priv->tx_new].buf = cpu_to_le32(phys_to_bus(priv->devno,
- 						      (phys_addr_t)packet));
-+#if CONFIG_IS_ENABLED(TULIP_MULTIPLE_TX_DESC)
-+	priv->tx_ring[priv->tx_new].des1 = cpu_to_le32(TD_LS | TD_FS | length);
-+	priv->tx_ring[priv->tx_ring_size - 1].des1 |= cpu_to_le32(TD_TER);
-+#else
- 	priv->tx_ring[priv->tx_new].des1 = cpu_to_le32(TD_TER | TD_LS | TD_FS | length);
-+#endif
- 	priv->tx_ring[priv->tx_new].status = cpu_to_le32(T_OWN);
- 
- 	dc2114x_outl(priv, POLL_DEMAND, DE4X5_TPD);
+ 	status = length;
 -- 
 2.39.2
 
