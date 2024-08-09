@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C6A6C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 10:45:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12CC6C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 10:51:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74D2388A2F;
-	Fri,  9 Aug 2024 12:45:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 5084088A2F;
+	Fri,  9 Aug 2024 12:51:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="jKd4eoyy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CSZPIyMJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D2AC88BB6; Fri,  9 Aug 2024 12:45:29 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 82EA088BD6; Fri,  9 Aug 2024 12:51:25 +0200 (CEST)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45CEA889F1
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 12:45:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 43FD8889F1
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 12:51:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1723200313; x=1723805113; i=xypron.glpk@gmx.de;
- bh=CBRNF3Owarrii5wWAWS5f/e40OCtwvuaPPBWWojzjaI=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=jKd4eoyyy86OtwhDGgpVp01hwa5CP9XXKX1HsyjS/tPexcRgQcjc3fbr3U8W6k/Z
- w8LNdGnvjmuzrGzOMCQYBcOic1UfFFynFaoiTxYv51E09T21e7H/eI2sMlYZYMP7R
- OyN/bFEbqcMZG1C0KEopPKPetzVLnc9TZGFhIOhducWVAg3E4zdr9K3KAJgcOcho+
- NeDPHEB3y+C5amU1INmmQjK1zMNu/9pYrZTcKfvJdn1Y+hwxJhmCMgPmSfXGv6tBK
- XzmZHjU7NaltKelWOnnIyDaVcX8JDRxqebYfj/JmDs256ODsvOFpVyk+VuhaT7X47
- vaEQ9li4HTo0S30ItQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.105] ([46.114.170.249]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mw9Q6-1sJTK83c9M-00roG4; Fri, 09
- Aug 2024 12:45:13 +0200
-Message-ID: <88cba98c-527c-49e0-b99a-eaaf071c302d@gmx.de>
-Date: Fri, 9 Aug 2024 12:45:07 +0200
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-2d1bb65e906so1478013a91.3
+ for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 03:51:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1723200682; x=1723805482; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=XwcjA/e74UfRO+6iCZSxhq/Vs7O1xjGNKgdrznMmjI8=;
+ b=CSZPIyMJ35fWxi1g7Eur5MiJRpq2gE+29v/kLsgpgDQV6LIo2AwoS7veupIRN8eNhf
+ ecEpqOw01Rkng9LJMEg4B5yOww7yVH+T+wUWMcXfAzexIYR1EuncsevweCFINk/K8ZYt
+ FCSZ9ay9xIrvQDRdvCal6c8LQwlwANaGsA2iilsu9HoVzeFEWrzyLUNuElJRXey0OpVN
+ pFbuKUhX9QHh/qYh0vumqYebYcY7hmBCJQ+U4ZY0jlmS0X0chdaZg9LhA5Njkj3ntwcA
+ +IMMAdP/eLt81CCGheMJNK/lCj/YrqfOwOlvQ4wouCm4NeOIHWMOIv03Z+4zoMuAdLDK
+ +agg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723200682; x=1723805482;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XwcjA/e74UfRO+6iCZSxhq/Vs7O1xjGNKgdrznMmjI8=;
+ b=LZkxDyC04uddWW40/XF8nmR8vbl9BH52Ye+SUd7hk4DYHld/SPeoI2hqsRkfXdZUcs
+ qVU1g0Y+B5kV32/QGYgISJSWWrK38voQbhWmtkrcn8rkAYuTA5y2KU68/5YH5XVjbGik
+ GRmrGCLgkXugUNVmitEsrFkg41y1dI1Uvfu6eR8fsTxgJ5uA8vOf5nhotWnImK6SsQF9
+ EAM1ynoszPenleXEbOHLySqS+myWOMmpRuFA6k7tVfvcCNMp1O2eBA3BcJUDCNv+jkO3
+ jX0i1nonUtuLbiEZolmBYx6grR+zpHyNhtEO+57rI0GeeOv3N/eN/M9VgJUeA5gxcxzR
+ EAaw==
+X-Gm-Message-State: AOJu0Yz7DFnPL2DSZhV36kw/WBvFbssn1M+tI7xeAYldqQQUqThqf9UO
+ s8amIh0UKQpa3GfeBuFlduPWiYHaRcuRGPGtbvsdMzi73R/MbO+v1LPchGXGn6vukSm7wqyPjQ3
+ 0HlX0uxrrXMcsp+vuuIllr3go4sIpXSw9ggPo1w==
+X-Google-Smtp-Source: AGHT+IENO9cYFg8CrLvXw8Vt22mPkQ6uV0L3YurREch2idnQfvegtE7Fe3XZHiYZCPeIMvhXBXWlXTqI2PifBg94GcU=
+X-Received: by 2002:a17:90b:f81:b0:2d1:b368:83d1 with SMTP id
+ 98e67ed59e1d1-2d1e805fb23mr1062809a91.30.1723200681328; Fri, 09 Aug 2024
+ 03:51:21 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] ext4: Fix zalloc()
-To: Richard Weinberger <richard@nod.at>
-Cc: sjg@chromium.org, Jixiong.Hu@mediatek.com,
- marek.vasut+renesas@mailbox.org, patrick.delaunay@foss.st.com,
- ilias.apalodimas@linaro.org, seanga2@gmail.com, trini@konsulko.com,
- upstream+uboot@sigma-star.at, u-boot@lists.denx.de
-References: <20240809095430.3656-1-richard@nod.at>
- <20240809095430.3656-3-richard@nod.at>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240809095430.3656-3-richard@nod.at>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:94wYX5g48gOGLmBRUoZMAow1RKzBIvDCpw+yHxUEI4cc0mRKjji
- atx82AH7vaUZEMrtmAgjL8HEA8hxXfvj+cEkR7IiwTcjZvL7O7SOTV4BTLzmLaM9UhJmRVB
- 3g6H+jVgx6k4lH8ICz42tUOBCs4SLRTAzXQJ6Epo1UvsaP07XerGC0fLKWmJfbei+jvT3u0
- T0V6vNBSiPHq7PBc0WJ2w==
-UI-OutboundReport: notjunk:1;M01:P0:fglGP9ZhgZg=;fx9qDBzdk5g8TOkFXm8SQW5Wbwz
- +cq4DaLfR5YjUQH/y6mPfCKTUZyfN+fSTR6sCq1kmqDNEmziGhsLD+wktWFhmupaZSEuRomUg
- GdpT2Jj+khWPE/NVsJw6hFCckKuJwKY/Rh17vn0jR13FTWBUnnwMu4oj75Pnigq+ArJEYDtNu
- yVPH8sAbtbcPaTKWa8e2oa5yYQ2NoOuS0PakhsvRBWGciZoFOXWDt4uy3PUL/NVwoyIoqME6X
- LNd4jR9+aZoogGrCbmC/NTtYMHBe3YGnDwhj0nWWkxPY7kzQdSUF4FsZifKKwr2+6Gv7fuwAt
- suYBn7cI3580e2JlNDvBv7E54kWOmov2wAp4T2i02bJfQ6W/4mGDHLsNGU+Uq8UWfSBBdFGAi
- ssoAw6tkB/ooV8YQydamzj8Cqwvi+7nmCyERja0Rw/C3Fzrc6X8yYmQvKR1xcqn8JP9XOZ0n0
- j8nK3O4QsofAMcp+Qt0V70xZ6yz77Aa7crACfdr+yn3ucbQ/+4W9Wh3f850/oFxWWbBL7GX4l
- 6Y6/ZeCLDj4MoMK0yrgp7z+M2LeAYpSPxccbSgiBoqD5vHIVsbR0gDt7VVVBM05mLcJXoXYSp
- KlfpbqZsXAlzakl8KZf2BJayrhsa0CP90mxrAxWdOGO5CQvfFi5ym/pGFDvXms0P/h9MhnzG6
- v+P4OpPcV13buc7kO/e9PqS1MHJRiv/4qKq+QQwgo6Gs/KrIVGj38vB2e7YIGVBlk2spUbcYh
- XH/tUZuyRAarcEYyaRRIY5egU8KUkoqEs/rB+Y4dddp8Y6RRnVXBnv8f6aEDePh0fGCJtFW1w
- OZIlqC4EkaL3aXPggLEKlJZA==
+References: <cover.1723050310.git.jerome.forissier@linaro.org>
+ <23a2099efe241dd512a615e51e85e1941fc20a0b.1723050310.git.jerome.forissier@linaro.org>
+In-Reply-To: <23a2099efe241dd512a615e51e85e1941fc20a0b.1723050310.git.jerome.forissier@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 9 Aug 2024 13:50:45 +0300
+Message-ID: <CAC_iWjK1+Lw0TXzUTQHrE3K12XfMtgoriEqZvEYYMohUcymCcw@mail.gmail.com>
+Subject: Re: [PATCH v8 02/23] net: wget: removed unused function wget_success()
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
+ Raymond Mao <raymond.mao@linaro.org>, Maxim Uvarov <muvarov@gmail.com>, 
+ Tim Harvey <tharvey@gateworks.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, Simon Glass <sjg@chromium.org>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, Marek Vasut <marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,41 +91,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/9/24 11:54, Richard Weinberger wrote:
-> Currently, zalloc() calls uncondtionally memset(),
-> if the allocation failes, memset() will write to a null pointer.
+On Wed, 7 Aug 2024 at 20:12, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
 >
-> Fix by using kzalloc().
+> wget_success() is used nowhere so remove it.
 >
-> Signed-off-by: Richard Weinberger <richard@nod.at>
-
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 > ---
->   fs/ext4/ext4_common.h | 5 ++---
->   1 file changed, 2 insertions(+), 3 deletions(-)
+>  net/wget.c | 7 -------
+>  1 file changed, 7 deletions(-)
 >
-> diff --git a/fs/ext4/ext4_common.h b/fs/ext4/ext4_common.h
-> index 84500e990a..346752092b 100644
-> --- a/fs/ext4/ext4_common.h
-> +++ b/fs/ext4/ext4_common.h
-> @@ -24,6 +24,7 @@
->   #include <ext4fs.h>
->   #include <malloc.h>
->   #include <asm/cache.h>
-> +#include <linux/compat.h>
->   #include <linux/errno.h>
->   #if defined(CONFIG_EXT4_WRITE)
->   #include "ext4_journal.h"
-> @@ -43,9 +44,7 @@
+> diff --git a/net/wget.c b/net/wget.c
+> index f1dd7abeff6..0e4dc5159d0 100644
+> --- a/net/wget.c
+> +++ b/net/wget.c
+> @@ -199,13 +199,6 @@ void wget_fail(char *error_message, unsigned int tcp_seq_num,
+>         wget_send(action, tcp_seq_num, tcp_ack_num, 0);
+>  }
 >
->   static inline void *zalloc(size_t size)
->   {
-> -	void *p =3D memalign(ARCH_DMA_MINALIGN, size);
-> -	memset(p, 0, size);
-> -	return p;
-> +	return kzalloc(size, 0);
->   }
+> -void wget_success(u8 action, unsigned int tcp_seq_num,
+> -                 unsigned int tcp_ack_num, int len, int packets)
+> -{
+> -       printf("Packets received %d, Transfer Successful\n", packets);
+> -       wget_send(action, tcp_seq_num, tcp_ack_num, len);
+> -}
+> -
+>  /*
+>   * Interfaces of U-BOOT
+>   */
+> --
+> 2.40.1
 >
->   int ext4fs_read_inode(struct ext2_data *data, int ino,
 
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
