@@ -4,63 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F0B4C52D71
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 09:34:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D830C52D71
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 09:34:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0BC788BC7;
-	Fri,  9 Aug 2024 11:34:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 51B3588B80;
+	Fri,  9 Aug 2024 11:34:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Q+ZfnqBq";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="jxKCQu6Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C849688BD1; Fri,  9 Aug 2024 11:34:00 +0200 (CEST)
-Received: from mail-m127161.xmail.ntesmail.com
- (mail-m127161.xmail.ntesmail.com [115.236.127.161])
+ id C0D5988BC8; Fri,  9 Aug 2024 11:34:07 +0200 (CEST)
+Received: from mail-m12771.qiye.163.com (mail-m12771.qiye.163.com
+ [115.236.127.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FCEC88B80
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 11:33:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 093DA881C3
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 11:34:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=Q+ZfnqBqBMC9qyE8SqZc58of2xHhaaS0Gl3tvs7EDo4pg+pMkmQ35LeGd46FdapPM9q7EZdbppecH9KVnUXhsbNAg8mjqKDG7tf7Ib/qVIA8EumJwjzOZjO/V2PVdhdB1Txj5J9qtzoQ1jmzv23a7wS027TGPs3ijdgBTCm9oCs=;
+ b=jxKCQu6Z46HIvLXyJEYTUYa9TBoy/Ebd09Z89xthw+csKlHz1mYVcBf6qDUcj1QBIDq756T5+qnK0FPyKz11yOombDWLUIcStOrHYDc2wErjh0Vca8v53iVoMXHJUPCdUYcfSthoybqWvYbRKg9yqu4i0tcmCkKhajFNScneNOs=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=m7VncWY1ueARZ9QzKbZ/2kfbX/wzwgboqTDG1L998mA=;
+ bh=Gb+lrN2n9pCNa6r43C2jAtFQ7e1YBV8nPvJE9ZHF/8U=;
  h=date:mime-version:subject:message-id:from;
 Received: from [192.168.60.65] (unknown [103.29.142.67])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 6FC3390063C;
- Fri,  9 Aug 2024 17:33:44 +0800 (CST)
-Message-ID: <f30f3b85-14ac-4ecf-bfe5-352d03736de0@rock-chips.com>
-Date: Fri, 9 Aug 2024 17:33:43 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 895F19004AB;
+ Fri,  9 Aug 2024 17:33:53 +0800 (CST)
+Message-ID: <0d9e9936-bdec-4e68-b3d4-462377c16bd7@rock-chips.com>
+Date: Fri, 9 Aug 2024 17:33:52 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/5] arm64: dts: rockchip: add gpio-line-names to
- radxa-zero-3
+Subject: Re: [PATCH v2 4/5] dm: adc: Add SPL_ADC Kconfig symbol for use of ADC
+ in SPL
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Sumit Garg <sumit.garg@linaro.org>
-Cc: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de,
- Trevor Woerner <twoerner@gmail.com>, Heiko Stuebner <heiko@sntech.de>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
 References: <20240802221231.2629416-1-jonas@kwiboo.se>
- <20240802221231.2629416-4-jonas@kwiboo.se>
+ <20240802221231.2629416-5-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240802221231.2629416-4-jonas@kwiboo.se>
+In-Reply-To: <20240802221231.2629416-5-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDTxhDVk9CTEgaGh0ZQkgZGlYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCHR5NVh8eSB5MSxhMTh4aQ1YVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKS0hVSUJVSk9JVU1MWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
-X-HM-Tid: 0a91367caa8103a9kunm6fc3390063c
+X-HM-Tid: 0a91367ccc8503a9kunm895f19004ab
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Ok06Nww*MDI4MQ45Lg40MhBJ
- KioaCiJVSlVKTElISkJNS0lNSk5IVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQU5ITks3Bg++
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pi46STo6NzI2MQ4NEA40Mhwe
+ GkIaCxJVSlVKTElISkJNS0hPTE5CVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUhDQk83Bg++
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,114 +77,78 @@ X-Virus-Status: Clean
 
 
 On 2024/8/3 06:12, Jonas Karlman wrote:
-> From: Trevor Woerner <twoerner@gmail.com>
+> What model of Radxa ZERO 3W/3E board can be identified using ADC at
+> runtime, add a Kconfig symbol to allow use of ADC in SPL.
 >
-> Add names to the pins of the general-purpose expansion header as given
-> in the Radxa documentation[1] following the conventions in the kernel[2]
-> to make it easier for users to correlate pins with functions when using
-> utilities such as 'gpioinfo'.
+> This will be used to identify board model in SPL to allow loading
+> correct FIT configuration and FDT for U-Boot proper at SPL phase.
 >
-> [1] https://docs.radxa.com/en/zero/zero3/hardware-design/hardware-interface
-> [2] https://www.kernel.org/doc/Documentation/devicetree/bindings/gpio/gpio.txt
->
-> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
-> Link: https://lore.kernel.org/r/20240620013301.33653-1-twoerner@gmail.com
-> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
->
-> [ upstream commit: f7c742cbe664ebdedc075945e75443683d1175f7 ]
->
-> (cherry picked from commit 8b26cf42ba0c74a9c86cebe591a9195f75151d97)
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
-> v2: Add Signed-off-by tag
+> v2:
+> - Drop depends on ADC and instead use $(SPL_TPL_) for adc-uclass.o
+> - Add depends on DM/SPL_DM to ADC/SPL_ADC
 > ---
->   .../arm64/rockchip/rk3566-radxa-zero-3.dtsi   | 72 +++++++++++++++++++
->   1 file changed, 72 insertions(+)
+>   drivers/Makefile     | 2 +-
+>   drivers/adc/Kconfig  | 5 +++++
+>   drivers/adc/Makefile | 2 +-
+>   3 files changed, 7 insertions(+), 2 deletions(-)
 >
-> diff --git a/dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3.dtsi b/dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3.dtsi
-> index 081be841b286..9cc7aa3298d0 100644
-> --- a/dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3.dtsi
-> +++ b/dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3.dtsi
-> @@ -105,6 +105,78 @@
->   	cpu-supply = <&vdd_cpu>;
->   };
+> diff --git a/drivers/Makefile b/drivers/Makefile
+> index 9195dafd37e0..1acd94f3c17e 100644
+> --- a/drivers/Makefile
+> +++ b/drivers/Makefile
+> @@ -1,5 +1,6 @@
+>   # SPDX-License-Identifier: GPL-2.0+
 >   
-> +&gpio0 {
-> +	gpio-line-names =
-> +		/* GPIO0_A0 - A7 */
-> +		"", "", "", "", "", "", "", "",
-> +		/* GPIO0_B0 - B7 */
-> +		"", "", "", "", "", "", "", "",
-> +		/* GPIO0_C0 - C7 */
-> +		"", "", "", "", "", "", "", "",
-> +		/* GPIO0_D0 - D7 */
-> +		"pin-10 [GPIO0_D0]", "pin-08 [GPIO0_D1]", "",
-> +		"", "", "", "", "";
-> +};
+> +obj-$(CONFIG_$(SPL_TPL_)ADC) += adc/
+>   obj-$(CONFIG_$(SPL_TPL_)BIOSEMU) += bios_emulator/
+>   obj-$(CONFIG_$(SPL_TPL_)BLK) += block/
+>   obj-$(CONFIG_$(SPL_TPL_)BOOTCOUNT_LIMIT) += bootcount/
+> @@ -81,7 +82,6 @@ endif
+>   
+>   ifeq ($(CONFIG_SPL_BUILD)$(CONFIG_TPL_BUILD),)
+>   
+> -obj-y += adc/
+>   obj-y += ata/
+>   obj-$(CONFIG_DM_DEMO) += demo/
+>   obj-y += block/
+> diff --git a/drivers/adc/Kconfig b/drivers/adc/Kconfig
+> index c9cdbe6942de..37235f557a3c 100644
+> --- a/drivers/adc/Kconfig
+> +++ b/drivers/adc/Kconfig
+> @@ -1,5 +1,6 @@
+>   config ADC
+>   	bool "Enable ADC drivers using Driver Model"
+> +	depends on DM
+>   	help
+>   	  This enables ADC API for drivers, which allows driving ADC features
+>   	  by single and multi-channel methods for:
+> @@ -11,6 +12,10 @@ config ADC
+>   	  - support supply's phandle with auto-enable
+>   	  - supply polarity setting in fdt
+>   
+> +config SPL_ADC
+> +	bool "Enable ADC drivers using Driver Model in SPL"
+> +	depends on SPL_DM
 > +
-> +&gpio1 {
-> +	gpio-line-names =
-> +		/* GPIO1_A0 - A7 */
-> +		"pin-03 [GPIO1_A0]", "pin-05 [GPIO1_A1]", "",
-> +		"",                  "pin-37 [GPIO1_A4]", "",
-> +		"",                  "",
-> +		/* GPIO1_B0 - B7 */
-> +		"", "", "", "", "", "", "", "",
-> +		/* GPIO1_C0 - C7 */
-> +		"", "", "", "", "", "", "", "",
-> +		/* GPIO1_D0 - D7 */
-> +		"", "", "", "", "", "", "", "";
-> +};
-> +
-> +&gpio2 {
-> +	gpio-line-names =
-> +		/* GPIO2_A0 - A7 */
-> +		"", "", "", "", "", "", "", "",
-> +		/* GPIO2_B0 - B7 */
-> +		"", "", "", "", "", "", "", "",
-> +		/* GPIO2_C0 - C7 */
-> +		"", "", "", "", "", "", "", "",
-> +		/* GPIO2_D0 - D7 */
-> +		"", "", "", "", "", "", "", "";
-> +};
-> +
-> +&gpio3 {
-> +	gpio-line-names =
-> +		/* GPIO3_A0 - A7 */
-> +		"",                  "pin-11 [GPIO3_A1]", "pin-13 [GPIO3_A2]",
-> +		"pin-12 [GPIO3_A3]", "pin-35 [GPIO3_A4]", "pin-40 [GPIO3_A5]",
-> +		"pin-38 [GPIO3_A6]", "pin-36 [GPIO3_A7]",
-> +		/* GPIO3_B0 - B7 */
-> +		"pin-15 [GPIO3_B0]", "pin-16 [GPIO3_B1]", "pin-18 [GPIO3_B2]",
-> +		"pin-29 [GPIO3_B3]", "pin-31 [GPIO3_B4]", "",
-> +		"", "",
-> +		/* GPIO3_C0 - C7 */
-> +		"",                  "pin-22 [GPIO3_C1]", "pin-32 [GPIO3_C2]",
-> +		"pin-33 [GPIO3_C3]", "pin-07 [GPIO3_C4]", "",
-> +		"", "",
-> +		/* GPIO3_D0 - D7 */
-> +		"", "", "", "", "", "", "", "";
-> +};
-> +
-> +&gpio4 {
-> +	gpio-line-names =
-> +		/* GPIO4_A0 - A7 */
-> +		"", "", "", "", "", "", "", "",
-> +		/* GPIO4_B0 - B7 */
-> +		"",                  "",                  "pin-27 [GPIO4_B2]",
-> +		"pin-28 [GPIO4_B3]", "", "", "", "",
-> +		/* GPIO4_C0 - C7 */
-> +		"",                  "",                  "pin-23 [GPIO4_C2]",
-> +		"pin-19 [GPIO4_C3]", "",                  "pin-21 [GPIO4_C5]",
-> +		"pin-24 [GPIO4_C6]", "",
-> +		/* GPIO4_D0 - D7 */
-> +		"", "", "", "", "", "", "", "";
-> +};
-> +
->   &gpu {
->   	mali-supply = <&vdd_gpu_npu>;
->   	status = "okay";
+>   config ADC_EXYNOS
+>   	bool "Enable Exynos 54xx ADC driver"
+>   	depends on ADC
+> diff --git a/drivers/adc/Makefile b/drivers/adc/Makefile
+> index 5336c820973a..dca0b39c2e27 100644
+> --- a/drivers/adc/Makefile
+> +++ b/drivers/adc/Makefile
+> @@ -4,7 +4,7 @@
+>   # Przemyslaw Marczak <p.marczak@samsung.com>
+>   #
+>   
+> -obj-$(CONFIG_ADC) += adc-uclass.o
+> +obj-$(CONFIG_$(SPL_TPL_)ADC) += adc-uclass.o
+>   obj-$(CONFIG_ADC_EXYNOS) += exynos-adc.o
+>   obj-$(CONFIG_ADC_SANDBOX) += sandbox.o
+>   obj-$(CONFIG_SARADC_ROCKCHIP) += rockchip-saradc.o
