@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E724C52D71
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 08:59:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC93FC3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 08:59:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A44888BBF;
-	Fri,  9 Aug 2024 10:59:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C699F88BB6;
+	Fri,  9 Aug 2024 10:59:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="kDpdE2vH";
+	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="JtERtB6R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 763C788BB6; Fri,  9 Aug 2024 10:59:05 +0200 (CEST)
-Received: from out203-205-221-242.mail.qq.com (out203-205-221-242.mail.qq.com
- [203.205.221.242])
+ id 52CAE88BD2; Fri,  9 Aug 2024 10:59:10 +0200 (CEST)
+Received: from out203-205-221-233.mail.qq.com (out203-205-221-233.mail.qq.com
+ [203.205.221.233])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A17E788B81
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 10:59:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DAD888AF4
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 10:59:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hanyuan-z@qq.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1723193924; bh=4MVJ2w9JCTJjoVdXyK+UfuwK5yATTvXj6aTk1+VOwIM=;
+ t=1723193934; bh=Z1eHy0CgabbN59QbmZAAX8bexKw9UkXCKufX4ULY5j0=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=kDpdE2vHM1NyZAqR+2/Td3MnaTrgQe2XEO8KjklIMzCBnlhu9tN1d+BSEhdB2qsT1
- yrK7JuBQn6ISxN0Dai8w+q97M9scwXLZ/LUtAdWrvAKuaWWbB1OBggGfjfVETdx/mm
- sxdhQ92xGPxBq2mdSFRQaqtP3F141NfshyA7hJwg=
+ b=JtERtB6RcRszS7zg08k4taz2JrISRvuqrbkcAsunJuTjVDF8J6VBbAtJG81XkP+ZU
+ +VJB3rEP9c9JgUbXaxztAc4gz6+fTs6jEdwTJGOmvb2DAeCLSbC7pnc0lWv1irNAug
+ 7IRdlKgH4eJoCICvWd5n+8oVcvV8v+nV+0QivzfY=
 Received: from hyz-wsl.www.tendawifi.com ([166.111.226.87])
  by newxmesmtplogicsvrszb9-0.qq.com (NewEsmtp) with SMTP
  id EA28703C; Fri, 09 Aug 2024 16:58:34 +0800
-X-QQ-mid: xmsmtpt1723193916t2flw4fiy
-Message-ID: <tencent_4B92368E75002463D6AF2B4BEA4DEB7FA407@qq.com>
-X-QQ-XMAILINFO: OKkKo7I1HxIe7uQJveHYKG/KaJnypOQWX5P9OFOdTrP/SWR03DtEhQ0/oAhrrI
- pnEAWa19NUECFzY8WjkwMiVV/MCwwDsn2++Dw2ZKiZzSEmMZh0Hqyp45L5jn6Pfe5B0pisdH+FCx
- zkc4MzTnQz97OcbBHydB59zT2Y1gd/MjN2U1gFiAC47e7Cs3q88U2rQ1RG91iFjxFFDkBSFMfrku
- N9KcPbwU8gmEdAkdvZWbvUCr/ktEQFG/BUZ/WyGfhggh2xfsqw3cZyQ26EWv8SHWHrSyKaYMVcQ7
- txkGURZgFn3vLuV0yBTbMt5mGsb4xEDlHQTRoc5tzxm9O26A7P4KRKpdGTsE4bdI+/jYMf3kw3gQ
- N3SxXFtvSh6jZukFuY573cfrNjZ/fftabmcAXU6MwVfx1IDMLKHp4aRM69DOHZPDxc1VytGNtugy
- FsirPX8M24+Nfz4Znvrh9mb/akcDX69va3S6lxENRi1GvzKFMMKuEVTemgO8y4yXey8ealOTHlYx
- T0umQJl5Dno5Kqbembroc0R8zuEZSsCGaFtRGMj8hsR/qPpeDf33oC16YQVpmDP7921Oqt3+AB4D
- 0fdcaYtKEtKBy6IK9uuLJEber60qJtkaUA3Zc67RdR8O5JDWorf7iz47nQ97QYUGXiIUgggZLtM0
- ThW8MmCjI+xYoXl6Ts03YffTTXjSF53OgRa+QeKflzV6mAoEORoFkdTAinkL2WpctLLon25ciDse
- b+CYh//FggdVWhzibcf6XELKEFVaEigjPV7QszudlOsVbZRp8zG4OOGMR2KRux3nuFo/CXOlvhBL
- D/p3rxFUkBh0GaggIIitkQXpsytgLriBuFgPiaDOc2NR7q9edsTFXHsWUgu45W3DJa15iwyNbie3
- 5cjbdxR4SRzhFz4W2fTJpR1EaA5sMKYopx/r72uj3JK9T21B4fRGB4IKeMo3x1C6CEaYmheECPkC
- RwxdyKGFiqFXFuaSzy0PM9UcKG9W2uPnpxmI+VrHnxtqHNEyKYmmqGql/jYfRFE/1iPLbaafk=
-X-QQ-XMRINFO: OD9hHCdaPRBwq3WW+NvGbIU=
+X-QQ-mid: xmsmtpt1723193930tm2hsj61k
+Message-ID: <tencent_AAA14493C30360CC18ED4BD3D27DB3EDFF05@qq.com>
+X-QQ-XMAILINFO: OUUXHEo9i1ukkWyaY0ggVBXe7NQGUxrbEEhLnYxpMYlva7ro24F/w6OoUZBmTD
+ Ymol/GxoWZGvTNl1d3EWO+GWYtZUs+6flcJrUtaaBrM8v23WSk/1W+Fa5WrBezxf/8Y2Xnpfkgel
+ Fyk3AaoO9EREamW6UmZcZPGSioTG5xB8VseUu5jo0F61hiasXCMKF7vnDkQlMlvjMY0vS2PsUd3o
+ 7XjKu2A/rETkZVdwqmxoSjk3HvyV00meZo1P62g/kmqPmZbqrAhwuvcoBUJ8hfP3aXfXUJBHtbIt
+ Zu1tpEGzibPztuaku1bYM+snabZr/bdD3Cr6TGNTUkFOlVw97+FMF7n7x1TlI0acfI8lhpmXjTON
+ 6hParoHhS+LK9XobAnI1oBM9K/SktUMYxtOBJmAsl7zjCbeI+zFrS3UnT3MOW0mR5hiEHWoJeZRh
+ XP315T/QwItzun9UEL0croI6YA3DaGX0S/CqZKpBsmO4HVQqtqFMRIx7/TnMEC7cUCqsIjGftBY3
+ 0t+G1mxCemI/pZNe2mIiz0MLHhQk4TKF1alXRelGmvwCQiK1GHi8eilxmHtwYWRWZz/hpE/MTrIz
+ mAh+5H9hupvl9y5rm8DFUolVaJ8BTR5XJY2EN8EHGXdA4hOT8nl6I4KlfHDshtSvtMsBpngUmAvt
+ NUnuBcl3bdAp0hTT+mumnVz1r8yo54vV18KbPXBu3GAjW/qmwQC99CwwNz2QgE3jj9YmopTC4n86
+ UhCN52OBL0WjfGYOhi28VkMlQafPyOSVpbljdR6j4ySUw/+smgOsC8sbfjVITSa/+PZ52vKuhWIF
+ mHXk2loRLkI6koCRBl8LqV74akYnI+j2AcIsOtxeYfRq0hiAvO2vLwsM92H8qOerjofbtKEhTP6b
+ gvk+lRrVuZGOjP3vZhq4Brr7sXtovE17gUqwS2LqNxyiHvx7/6cB4JCvtepBEmJAAUowK0EK+Tqe
+ 3aeTJNyrtAU6aQViijkdWiIQyK/+juVLGoyR2N+n4iN2G5Vk1N4dj0Cm3TFHRrETYoEPgsSGs=
+X-QQ-XMRINFO: OWPUhxQsoeAVDbp3OJHYyFg=
 From: Hanyuan Zhao <hanyuan-z@qq.com>
 To: u-boot@lists.denx.de
 Cc: Joe Hershberger <joe.hershberger@ni.com>,
@@ -58,9 +58,10 @@ Cc: Joe Hershberger <joe.hershberger@ni.com>,
  Marek Vasut <marek.vasut+renesas@gmail.com>,
  Hanyuan Zhao <hanyuan-z@qq.com>,
  Hanyuan Zhao <zhaohy22@mails.tsinghua.edu.cn>
-Subject: [PATCH 2/8] net: dc2114x: get mac address from environment
-Date: Fri,  9 Aug 2024 16:56:55 +0800
-X-OQ-MSGID: <20240809085701.22183-2-hanyuan-z@qq.com>
+Subject: [PATCH 4/8] net: dc2114x: add support for CPUs that have cache
+ between the memory and the card
+Date: Fri,  9 Aug 2024 16:56:57 +0800
+X-OQ-MSGID: <20240809085701.22183-4-hanyuan-z@qq.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240809085701.22183-1-hanyuan-z@qq.com>
 References: <20240809085701.22183-1-hanyuan-z@qq.com>
@@ -82,53 +83,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Let this old driver work like the other newer network card drivers, loading the
-MAC address from environment, which could be more flexible to set.
+This commit adds support for the MIPS and LoongArch CPUs, which would use cache
+after they jump into U-Boot. This commit requests the CPU to return the
+addresses in uncached windows and flushes the cache in need, to make sure the
+memory between the CPU and the network card is in consistency.
 
 Signed-off-by: Hanyuan Zhao <zhaohy22@mails.tsinghua.edu.cn>
 ---
- drivers/net/dc2114x.c | 16 ++++++++++++----
- 1 file changed, 12 insertions(+), 4 deletions(-)
+ drivers/net/dc2114x.c | 29 +++++++++++++++++++++++++----
+ 1 file changed, 25 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/net/dc2114x.c b/drivers/net/dc2114x.c
-index 3704d2e655..7f0715429f 100644
+index cf9f78163a..0b3000cc1d 100644
 --- a/drivers/net/dc2114x.c
 +++ b/drivers/net/dc2114x.c
-@@ -478,8 +478,16 @@ static int dc2114x_start(struct udevice *dev)
+@@ -1,6 +1,7 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ 
+ #include <asm/io.h>
++#include <cpu_func.h>
+ #include <dm.h>
+ #include <malloc.h>
+ #include <net.h>
+@@ -94,9 +95,17 @@ struct de4x5_desc {
+ 	u32 next;
+ };
+ 
++/* Assigned for network card's ring buffer:
++ * Some CPU might treat these memories as cached, and changes to these memories
++ * won't immediately be visible to each other. It is necessary to ensure that
++ * these memories between the CPU and the network card are marked as uncached.
++ */
++static struct de4x5_desc rx_ring[NUM_RX_DESC] __aligned(32);
++static struct de4x5_desc tx_ring[NUM_TX_DESC] __aligned(32);
++
+ struct dc2114x_priv {
+-	struct de4x5_desc rx_ring[NUM_RX_DESC] __aligned(32);
+-	struct de4x5_desc tx_ring[NUM_TX_DESC] __aligned(32);
++	struct de4x5_desc *rx_ring; /* Must be uncached to CPU */
++	struct de4x5_desc *tx_ring; /* Must be uncached to CPU */
+ 	int rx_new;	/* RX descriptor ring pointer */
+ 	int tx_new;	/* TX descriptor ring pointer */
+ 	char rx_ring_size;
+@@ -276,7 +285,12 @@ static int read_srom(struct dc2114x_priv *priv, u_long ioaddr, int index)
+ 
+ static void send_setup_frame(struct dc2114x_priv *priv)
  {
- 	struct eth_pdata *plat = dev_get_plat(dev);
- 	struct dc2114x_priv *priv = dev_get_priv(dev);
-+	int rval;
+-	char setup_frame[SETUP_FRAME_LEN];
++	/* We are writing setup frame and these changes should be visible to the
++	 * network card immediately. So let's directly read/write through the
++	 * uncached window.
++	 */
++	char __setup_frame[SETUP_FRAME_LEN] __aligned(32);
++	char *setup_frame = (char *)map_physmem((phys_addr_t)virt_to_phys(__setup_frame), 0, MAP_NOCACHE);
+ 	char *pa = &setup_frame[0];
+ 	int i;
  
--	memcpy(priv->enetaddr, plat->enetaddr, sizeof(plat->enetaddr));
-+	if(!priv->enetaddr) {
-+		rval = eth_env_get_enetaddr("ethaddr", priv->enetaddr);
+@@ -337,6 +351,9 @@ static int dc21x4x_send_common(struct dc2114x_priv *priv, void *packet, int leng
+ 		goto done;
+ 	}
+ 
++	/* Packet should be visible to the network card */
++	flush_dcache_range((phys_addr_t)packet, (phys_addr_t)(packet + RX_BUFF_SZ));
 +
-+		if (!rval) {
-+			printf("dc2114x: Err: please set a valid MAC address\n");
-+			return -EINVAL;
-+		}
-+	}
+ 	priv->tx_ring[priv->tx_new].buf = cpu_to_le32(phys_to_bus(priv->devno,
+ 						      (u32)packet));
+ 	priv->tx_ring[priv->tx_new].des1 = cpu_to_le32(TD_TER | TD_LS | TD_FS | length);
+@@ -533,7 +550,8 @@ static int dc2114x_recv(struct udevice *dev, int flags, uchar **packetp)
+ 	if (!ret)
+ 		return 0;
  
- #if !CONFIG_IS_ENABLED(TULIP_SUPPORT_NON_PCI)
- 	/* Ensure we're not sleeping. */
-@@ -574,9 +582,6 @@ static int dc2114x_probe(struct udevice *dev)
- 	iobase &= ~0xf;
+-	*packetp = net_rx_packets[priv->rx_new];
++	invalidate_dcache_range((phys_addr_t)net_rx_packets[priv->rx_new], (phys_addr_t)(net_rx_packets[priv->rx_new] + RX_BUFF_SZ));
++	*packetp = (uchar *)net_rx_packets[priv->rx_new];
  
- 	debug("dc2114x: DEC 2114x PCI Device @0x%x\n", iobase);
--
--	priv->devno = dev;
--	priv->enetaddr = plat->enetaddr;
- 	priv->iobase = (void __iomem *)dm_pci_mem_to_phys(dev, iobase);
+ 	return ret - 4;
+ }
+@@ -597,6 +615,9 @@ static int dc2114x_probe(struct udevice *dev)
  
- 	command = PCI_COMMAND_MEMORY | PCI_COMMAND_MASTER;
-@@ -589,6 +594,9 @@ static int dc2114x_probe(struct udevice *dev)
- 
- 	dm_pci_write_config8(dev, PCI_LATENCY_TIMER, 0x60);
- #endif
+ 	priv->devno = dev;
+ 	priv->enetaddr = plat->enetaddr;
++	priv->rx_ring = (struct de4x5_desc *)map_physmem((phys_addr_t)virt_to_phys(rx_ring), 0, MAP_NOCACHE);
++	priv->tx_ring = (struct de4x5_desc *)map_physmem((phys_addr_t)virt_to_phys(tx_ring), 0, MAP_NOCACHE);
 +
-+	priv->devno = dev;
-+	priv->enetaddr = plat->enetaddr;
  	return 0;
  }
  
