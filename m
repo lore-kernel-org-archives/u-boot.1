@@ -4,77 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12CC6C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 10:51:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F85FC3DA4A
+	for <u-boot@archiver.kernel.org>; Fri,  9 Aug 2024 10:53:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5084088A2F;
-	Fri,  9 Aug 2024 12:51:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D9C3A889F1;
+	Fri,  9 Aug 2024 12:53:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CSZPIyMJ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82EA088BD6; Fri,  9 Aug 2024 12:51:25 +0200 (CEST)
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B4DAD88A2F; Fri,  9 Aug 2024 12:53:16 +0200 (CEST)
+Received: from smtpbgsg1.qq.com (smtpbgsg1.qq.com [54.254.200.92])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43FD8889F1
- for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 12:51:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ABEA2887EB
+ for <u-boot@lists.denx.de>; Fri,  9 Aug 2024 12:53:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-2d1bb65e906so1478013a91.3
- for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 03:51:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723200682; x=1723805482; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XwcjA/e74UfRO+6iCZSxhq/Vs7O1xjGNKgdrznMmjI8=;
- b=CSZPIyMJ35fWxi1g7Eur5MiJRpq2gE+29v/kLsgpgDQV6LIo2AwoS7veupIRN8eNhf
- ecEpqOw01Rkng9LJMEg4B5yOww7yVH+T+wUWMcXfAzexIYR1EuncsevweCFINk/K8ZYt
- FCSZ9ay9xIrvQDRdvCal6c8LQwlwANaGsA2iilsu9HoVzeFEWrzyLUNuElJRXey0OpVN
- pFbuKUhX9QHh/qYh0vumqYebYcY7hmBCJQ+U4ZY0jlmS0X0chdaZg9LhA5Njkj3ntwcA
- +IMMAdP/eLt81CCGheMJNK/lCj/YrqfOwOlvQ4wouCm4NeOIHWMOIv03Z+4zoMuAdLDK
- +agg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723200682; x=1723805482;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=XwcjA/e74UfRO+6iCZSxhq/Vs7O1xjGNKgdrznMmjI8=;
- b=LZkxDyC04uddWW40/XF8nmR8vbl9BH52Ye+SUd7hk4DYHld/SPeoI2hqsRkfXdZUcs
- qVU1g0Y+B5kV32/QGYgISJSWWrK38voQbhWmtkrcn8rkAYuTA5y2KU68/5YH5XVjbGik
- GRmrGCLgkXugUNVmitEsrFkg41y1dI1Uvfu6eR8fsTxgJ5uA8vOf5nhotWnImK6SsQF9
- EAM1ynoszPenleXEbOHLySqS+myWOMmpRuFA6k7tVfvcCNMp1O2eBA3BcJUDCNv+jkO3
- jX0i1nonUtuLbiEZolmBYx6grR+zpHyNhtEO+57rI0GeeOv3N/eN/M9VgJUeA5gxcxzR
- EAaw==
-X-Gm-Message-State: AOJu0Yz7DFnPL2DSZhV36kw/WBvFbssn1M+tI7xeAYldqQQUqThqf9UO
- s8amIh0UKQpa3GfeBuFlduPWiYHaRcuRGPGtbvsdMzi73R/MbO+v1LPchGXGn6vukSm7wqyPjQ3
- 0HlX0uxrrXMcsp+vuuIllr3go4sIpXSw9ggPo1w==
-X-Google-Smtp-Source: AGHT+IENO9cYFg8CrLvXw8Vt22mPkQ6uV0L3YurREch2idnQfvegtE7Fe3XZHiYZCPeIMvhXBXWlXTqI2PifBg94GcU=
-X-Received: by 2002:a17:90b:f81:b0:2d1:b368:83d1 with SMTP id
- 98e67ed59e1d1-2d1e805fb23mr1062809a91.30.1723200681328; Fri, 09 Aug 2024
- 03:51:21 -0700 (PDT)
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
+X-QQ-mid: bizesmtp88t1723200769trr8miuj
+X-QQ-Originating-IP: PWqee5fxwVA5uVMe0UNPhoveWD/VEd8LYI49PMJ5qNc=
+Received: from [192.168.159.131] ( [106.150.157.243])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Fri, 09 Aug 2024 18:52:46 +0800 (CST)
+X-QQ-SSF: 01100000000000C0H000000A0000000
+X-QQ-FEAT: 3noRBwZIihhH6z2ATA+FeST1KCtagS4Vs/PwA0BTXkCPXRUj4XwRdNiZVtdAe
+ 0Yrg0B7xhGGWWXVtCG9go4TcjkuWhJ2Ctzxqg+ZIfNaYJtJxY59zgO4coCPlF0oI8TpSqwW
+ VuJLue38Qp8egztvOJ8iT6nRK8u4CNqWpheeP2M99zPCcZDLsLjMscGiE9icGQuMJvzDSXU
+ fJ1VPvxWJ/KcsRP40SD/plc0bitZQ3kADuA35D8RJsnhks2bEKnBx+LM6z9eZdjY9Ex+n7A
+ ut/OmUSios2KPpcPKQr0srny1iLNtZTltEyERBg76/MJjvMWRfpUcTNK0PcgOPF7lM0hvYU
+ HDZBcKKERf8xkBrwOKuflJL3wuYri99S3YB/+IHllY37Ep+tpQ=
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 6576178683978542876
+Message-ID: <B79155DA370A80B0+9fbe189c-1b5e-4454-a60a-75043b8f9831@radxa.com>
+Date: Fri, 9 Aug 2024 19:52:46 +0900
 MIME-Version: 1.0
-References: <cover.1723050310.git.jerome.forissier@linaro.org>
- <23a2099efe241dd512a615e51e85e1941fc20a0b.1723050310.git.jerome.forissier@linaro.org>
-In-Reply-To: <23a2099efe241dd512a615e51e85e1941fc20a0b.1723050310.git.jerome.forissier@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 9 Aug 2024 13:50:45 +0300
-Message-ID: <CAC_iWjK1+Lw0TXzUTQHrE3K12XfMtgoriEqZvEYYMohUcymCcw@mail.gmail.com>
-Subject: Re: [PATCH v8 02/23] net: wget: removed unused function wget_success()
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>, 
- Raymond Mao <raymond.mao@linaro.org>, Maxim Uvarov <muvarov@gmail.com>, 
- Tim Harvey <tharvey@gateworks.com>, Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>, Simon Glass <sjg@chromium.org>,
- Yasuharu Shibata <yasuharu.shibata@gmail.com>, Marek Vasut <marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: dts: rockchip: fix dts for Radxa ROCK 4C+
+To: Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
+Cc: jonas@kwiboo.se, sjg@chromium.org, philipp.tomsich@vrull.eu,
+ dsimic@manjaro.org
+References: <20240808221902.2006-1-naoki@radxa.com>
+ <ea8287b6-352d-48cf-b370-0d90d2990f08@rock-chips.com>
+Content-Language: en-US
+From: FUKAUMI Naoki <naoki@radxa.com>
+In-Reply-To: <ea8287b6-352d-48cf-b370-0d90d2990f08@rock-chips.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtp:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,36 +68,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 7 Aug 2024 at 20:12, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
-> wget_success() is used nowhere so remove it.
->
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> ---
->  net/wget.c | 7 -------
->  1 file changed, 7 deletions(-)
->
-> diff --git a/net/wget.c b/net/wget.c
-> index f1dd7abeff6..0e4dc5159d0 100644
-> --- a/net/wget.c
-> +++ b/net/wget.c
-> @@ -199,13 +199,6 @@ void wget_fail(char *error_message, unsigned int tcp_seq_num,
->         wget_send(action, tcp_seq_num, tcp_ack_num, 0);
->  }
->
-> -void wget_success(u8 action, unsigned int tcp_seq_num,
-> -                 unsigned int tcp_ack_num, int len, int packets)
-> -{
-> -       printf("Packets received %d, Transfer Successful\n", packets);
-> -       wget_send(action, tcp_seq_num, tcp_ack_num, len);
-> -}
-> -
->  /*
->   * Interfaces of U-BOOT
->   */
-> --
-> 2.40.1
->
+Hi,
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On 8/9/24 18:16, Kever Yang wrote:
+> 
+> On 2024/8/9 06:19, FUKAUMI Naoki wrote:
+>> Radxa ROCK Pi 4 series and Radxa ROCK 4C+ are not compatible.
+> 
+> A little bit more detail about why not compatible?
+> 
+> The eMMC is different?
+
+I should say "ROCK Pi 4 series and ROCK 4C+ cannot share dts file."
+
+$ grep rk3399-rock-pi-4.dtsi dts/upstream/src/arm64/rockchip/*
+dts/upstream/src/arm64/rockchip/rk3399-rock-4se.dts:#include 
+"rk3399-rock-pi-4.dtsi"
+dts/upstream/src/arm64/rockchip/rk3399-rock-pi-4a-plus.dts:#include 
+"rk3399-rock-pi-4.dtsi"
+dts/upstream/src/arm64/rockchip/rk3399-rock-pi-4a.dts:#include 
+"rk3399-rock-pi-4.dtsi"
+dts/upstream/src/arm64/rockchip/rk3399-rock-pi-4b-plus.dts:#include 
+"rk3399-rock-pi-4.dtsi"
+dts/upstream/src/arm64/rockchip/rk3399-rock-pi-4b.dts:#include 
+"rk3399-rock-pi-4.dtsi"
+dts/upstream/src/arm64/rockchip/rk3399-rock-pi-4c.dts:#include 
+"rk3399-rock-pi-4.dtsi"
+
+4C+ is different board.
+
+Best regards,
+
+--
+FUKAUMI Naoki
+Radxa Computer (Shenzhen) Co., Ltd.
+
+> Thanks,
+> 
+> - Kever
+> 
+>> add
+>> rk3399-rock-pi-4-u-boot.dtsi contents and remove dependency of it.
+>>
+>> no functional change is intended.
+>>
+>> Fixes: 71a95e2efd30 ("arm: dts: rockchip: add Radxa ROCK 4C+")
+>> Suggested-by: Dragan Simic <dsimic@manjaro.org>
+>> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+>> ---
+>>   arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi | 16 ++++++++++++++--
+>>   1 file changed, 14 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi 
+>> b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
+>> index 5ec15a845c1..50dae5cb5ef 100644
+>> --- a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
+>> +++ b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
+>> @@ -1,8 +1,10 @@
+>> -// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+>> +// SPDX-License-Identifier: GPL-2.0+
+>>   /*
+>> + * Copyright (C) 2019 Jagan Teki <jagan@amarulasolutions.com>
+>>    * Copyright (c) 2023 Radxa Limited
+>>    */
+>> -#include "rk3399-rock-pi-4-u-boot.dtsi"
+>> +#include "rk3399-u-boot.dtsi"
+>> +#include "rk3399-sdram-lpddr4-100.dtsi"
+>>   &pcfg_pull_none_18ma {
+>>       bootph-pre-ram;
+>> @@ -14,6 +16,12 @@
+>>       bootph-some-ram;
+>>   };
+>> +&sdhci {
+>> +    cap-mmc-highspeed;
+>> +    mmc-ddr-1_8v;
+>> +    mmc-hs200-1_8v;
+>> +};
+>> +
+>>   &spi1 {
+>>       status = "okay";
+>> @@ -25,3 +33,7 @@
+>>           spi-max-frequency = <10000000>;
+>>       };
+>>   };
+>> +
+>> +&vdd_log {
+>> +    regulator-init-microvolt = <950000>;
+>> +};
+> 
