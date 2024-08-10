@@ -4,77 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEAEAC3DA7F
-	for <u-boot@archiver.kernel.org>; Sat, 10 Aug 2024 20:52:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 890AEC3DA7F
+	for <u-boot@archiver.kernel.org>; Sat, 10 Aug 2024 20:52:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AF42888AB;
-	Sat, 10 Aug 2024 22:52:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1DB578891E;
+	Sat, 10 Aug 2024 22:52:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LshJ9nFX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y3HlAJc8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88093888A0; Sat, 10 Aug 2024 22:52:24 +0200 (CEST)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id 86AAA88914; Sat, 10 Aug 2024 22:52:34 +0200 (CEST)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C5D788881
- for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 22:52:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 97410888C2
+ for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 22:52:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-81fda7d7a48so131849339f.3
- for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 13:52:22 -0700 (PDT)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-81f9339e534so110154139f.3
+ for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 13:52:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723323141; x=1723927941; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723323146; x=1723927946; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0aWeVxlPsk9/PktGPADIUlhZ0Z89L/OW/ELEF1BycUA=;
- b=LshJ9nFXnuaTfuWjdGH64GhdPqZwMmYRUy18DSznUe7MffPxUKq3PEc6rShbY3ncKc
- 5qDpuP99YR8iZDuGbF7HZF7zI1dZvvAmCdSSeIXIvzdyyyZ0jK5uk0a5sHRpKpL37gDp
- 8bTAt4Lt7b+vhEoh7qz0ktF5J/t9o6Q9D3OyY=
+ bh=VM4IfJjVdzGsAoOd7J03TO5hZsSt8+a1MfHxZDs/Iik=;
+ b=Y3HlAJc85+cxWnti1JGS+n068bR0suAsfG4oaHg7fCn1PERObC59qMxvMtYAtqadD3
+ f97ehhAnfuhaWKa9G2HDZefAMu+/tcl+Gv5VZF5i3z9NdgjpBPXNZAc1/QapNcxBMFqh
+ YjS1n+Vp+MmRXxF7Xdd3WiClF193pMZEnIPJ4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723323141; x=1723927941;
+ d=1e100.net; s=20230601; t=1723323146; x=1723927946;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0aWeVxlPsk9/PktGPADIUlhZ0Z89L/OW/ELEF1BycUA=;
- b=i2qa/hQQH11z72qUtjagu3LXLltH/hhh5qvWQbp0LsFszkMWljDCSL/CET0hXhSM/c
- zxmk9hWItkMI0xF/dmJBP0NaN9SIM65QQTrfeAlaOWUlZSgY3FMkB4JKif9PG4kpDP7J
- nj8lwkEV+7SNrnlW54FRP3AEht+YA8EWDsI2PKAmlIzR5+ZDf+T8sPERsZXfbgISKLw8
- d6RRTT2NIzcGO5rKHCD3RomH8UbzO9wwV0J5jthrV8rxhNO0CxtXpvazPD/hhyJJC3aG
- LbZc5Sq2utXTzl4xBhLAfiWJ39mprChLQS2iJ7OdFf1D/2anjk6fh64X8T3GIPbqXsUq
- gusw==
-X-Gm-Message-State: AOJu0Yyfm+9slA/OdoUq7Yn314g/I/5Xv6mBxwn8CSSGBSFg5MMV2iJM
- Yo44Je3/xg41F1b6uegR6TGtxBtVnDcvnX8hpDY3M4mgZUx7CGNmTw3gxNdRvysFP49T6I/RIzo
+ bh=VM4IfJjVdzGsAoOd7J03TO5hZsSt8+a1MfHxZDs/Iik=;
+ b=q+JGk947MchyEVV4SnJF6s9a2c4O5JfEdxeKLdgcClBHDjks1Su3NWdmMc0Rn5ICzX
+ IORw6ezjR9CN72Ba8pdVy1TasOpJcIA8mVAaQXfqj9Mu8hxFltTNo9jkm2fPtoYvUOde
+ 1J6G++Y8XsNHWgyalrMXDD4+bVVwTn9RcZWWT7YeCh4fzVQMWCpx9YNPbUXbiCSsVfcR
+ FpkGljcfb3VT7pBhjFL5nYNJki3o/mqSfCV/4PySwa+7LLmNxRjC1FgrPo9zgNDBUfWG
+ W3ERp70MEP+l39PFkHYPDn/nRvaK2b1UmjqbJEyBYjcBAG/UavDIiky7n8xFk5VWsCvy
+ 8m5Q==
+X-Gm-Message-State: AOJu0Yy2mL4bUK/UmHocV1yZRK0Gl9ZvTlQI5wjJKOg4flRgfPbkDBcz
+ Q6cKrq0cRaZJxoht+Cji0NMi8EvT+vqnC5/1ei36QfkVBHKN7C37FYHZyn65XIVoBTjM+q/NzPA
  =
-X-Google-Smtp-Source: AGHT+IFPCawBrb2368Y92zNlzbMA8Q4D+A4zsOP++u2xCMOs1YkFisrwlk4MsDFQRAZbmnDAM9tVWg==
-X-Received: by 2002:a05:6602:1493:b0:81f:dcd6:200c with SMTP id
- ca18e2360f4ac-8225eec7816mr710171339f.12.1723323141000; 
- Sat, 10 Aug 2024 13:52:21 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE6ZcfenyME9N2vgSnq2sSUPt2OoN13BkzStBGB94R33fjI9tw4OdXAKuPXDcxfrgTj6fbFGA==
+X-Received: by 2002:a05:6602:3fc3:b0:81f:880d:ec18 with SMTP id
+ ca18e2360f4ac-8225ee694fdmr735229739f.3.1723323146190; 
+ Sat, 10 Aug 2024 13:52:26 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-82266f56333sm82893139f.0.2024.08.10.13.52.20
+ ca18e2360f4ac-82266f56333sm82893139f.0.2024.08.10.13.52.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 Aug 2024 13:52:20 -0700 (PDT)
+ Sat, 10 Aug 2024 13:52:25 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ion Agorria <ion@agorria.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Subject: [PATCH 02/21] test: Fail when an empty line is expected but not
- present
-Date: Sat, 10 Aug 2024 14:51:46 -0600
-Message-Id: <20240810205205.3403177-3-sjg@chromium.org>
+ Fabio Estevam <festevam@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Marek Vasut <marex@denx.de>, Peng Fan <peng.fan@nxp.com>
+Subject: [PATCH 06/21] mmc: Drop the blank line before accesses
+Date: Sat, 10 Aug 2024 14:51:50 -0600
+Message-Id: <20240810205205.3403177-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240810205205.3403177-1-sjg@chromium.org>
 References: <20240810205205.3403177-1-sjg@chromium.org>
@@ -96,93 +90,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The existing implementation of ut_assert_nextline_empty() cannot
-distinguish between an empty line and no line at all. It can in fact be
-called at the end of the recorded output and will happily return
-success.
+Several mmc subcommand print a blank line before starting and after
+finishing. It isn't necessary to do both, so drop the first one.
 
-Adjust the logic so that this condition is detected. Show a failure
-message in this case.
-
-Fix the one test which falls foul of this fix.
+It is questionable whether these command should produce any output at
+all, but leave it for now.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: 400175b0a7d ("test: Add a way to check each line of console...")
 ---
 
- common/console.c     | 2 ++
- include/console.h    | 2 +-
- test/boot/bootflow.c | 2 --
- test/ut.c            | 8 +++++---
- 4 files changed, 8 insertions(+), 6 deletions(-)
+ cmd/mmc.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/common/console.c b/common/console.c
-index 63f78004fdb..85f627297ed 100644
---- a/common/console.c
-+++ b/common/console.c
-@@ -845,6 +845,8 @@ int console_record_readline(char *str, int maxlen)
- {
- 	if (gd->flags & GD_FLG_RECORD_OVF)
- 		return -ENOSPC;
-+	if (console_record_isempty())
-+		return -ENOENT;
+diff --git a/cmd/mmc.c b/cmd/mmc.c
+index 7244a90f4dc..ff7b8e555ba 100644
+--- a/cmd/mmc.c
++++ b/cmd/mmc.c
+@@ -238,7 +238,7 @@ static int do_mmcrpmb_read(struct cmd_tbl *cmdtp, int flag,
+ 	if (argc == 5)
+ 		key_addr = (void *)hextoul(argv[4], NULL);
  
- 	return membuff_readline((struct membuff *)&gd->console_out, str,
- 				maxlen, '\0', false);
-diff --git a/include/console.h b/include/console.h
-index 2617e160073..6b6d0f9de73 100644
---- a/include/console.h
-+++ b/include/console.h
-@@ -73,7 +73,7 @@ int console_record_reset_enable(void);
-  * @str: Place to put string
-  * @maxlen: Maximum length of @str including nul terminator
-  * Return: length of string returned, or -ENOSPC if the console buffer was
-- *	overflowed by the output
-+ *	overflowed by the output, or -ENOENT if there was nothing to read
-  */
- int console_record_readline(char *str, int maxlen);
+-	printf("\nMMC RPMB read: dev # %d, block # %d, count %d ... ",
++	printf("MMC RPMB read: dev # %d, block # %d, count %d ... ",
+ 	       curr_device, blk, cnt);
+ 	n =  mmc_rpmb_read(mmc, addr, blk, cnt, key_addr);
  
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 8b46256fa48..8bfc2a1b9b4 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -1151,8 +1151,6 @@ static int bootflow_cmdline(struct unit_test_state *uts)
+@@ -265,7 +265,7 @@ static int do_mmcrpmb_write(struct cmd_tbl *cmdtp, int flag,
+ 	cnt = hextoul(argv[3], NULL);
+ 	key_addr = (void *)hextoul(argv[4], NULL);
  
- 	ut_asserteq(0, run_command("bootflow cmdline set mary abc", 0));
- 	ut_asserteq(0, run_command("bootflow cmdline set mary", 0));
--	ut_assert_nextline_empty();
--
- 	ut_assert_console_end();
+-	printf("\nMMC RPMB write: dev # %d, block # %d, count %d ... ",
++	printf("MMC RPMB write: dev # %d, block # %d, count %d ... ",
+ 	       curr_device, blk, cnt);
+ 	n =  mmc_rpmb_write(mmc, addr, blk, cnt, key_addr);
  
- 	return 0;
-diff --git a/test/ut.c b/test/ut.c
-index ae99831ac8f..7454da3e001 100644
---- a/test/ut.c
-+++ b/test/ut.c
-@@ -59,9 +59,11 @@ static int readline_check(struct unit_test_state *uts)
- 		ut_fail(uts, __FILE__, __LINE__, __func__,
- 			"Console record buffer too small - increase CONFIG_CONSOLE_RECORD_OUT_SIZE");
- 		return ret;
-+	} else if (ret == -ENOENT) {
-+		strcpy(uts->actual_str, "<no-more-output>");
- 	}
+@@ -362,7 +362,7 @@ static int do_mmc_read(struct cmd_tbl *cmdtp, int flag,
+ 	if (!mmc)
+ 		return CMD_RET_FAILURE;
  
--	return 0;
-+	return ret;
- }
+-	printf("\nMMC read: dev # %d, block # %d, count %d ... ",
++	printf("MMC read: dev # %d, block # %d, count %d ... ",
+ 	       curr_device, blk, cnt);
  
- int ut_check_console_line(struct unit_test_state *uts, const char *fmt, ...)
-@@ -79,8 +81,8 @@ int ut_check_console_line(struct unit_test_state *uts, const char *fmt, ...)
- 		return -EOVERFLOW;
- 	}
- 	ret = readline_check(uts);
--	if (ret < 0)
--		return ret;
-+	if (ret == -ENOENT)
-+		return 1;
+ 	n = blk_dread(mmc_get_blk_desc(mmc), blk, cnt, addr);
+@@ -411,7 +411,7 @@ static int do_mmc_sparse_write(struct cmd_tbl *cmdtp, int flag,
+ 	if (!mmc)
+ 		return CMD_RET_FAILURE;
  
- 	return strcmp(uts->expect_str, uts->actual_str);
- }
+-	printf("\nMMC Sparse write: dev # %d, block # %d ... ",
++	printf("MMC Sparse write: dev # %d, block # %d ... ",
+ 	       curr_device, blk);
+ 
+ 	if (mmc_getwp(mmc) == 1) {
+@@ -455,7 +455,7 @@ static int do_mmc_write(struct cmd_tbl *cmdtp, int flag,
+ 	if (!mmc)
+ 		return CMD_RET_FAILURE;
+ 
+-	printf("\nMMC write: dev # %d, block # %d, count %d ... ",
++	printf("MMC write: dev # %d, block # %d, count %d ... ",
+ 	       curr_device, blk, cnt);
+ 
+ 	if (mmc_getwp(mmc) == 1) {
+@@ -484,7 +484,7 @@ static int do_mmc_erase(struct cmd_tbl *cmdtp, int flag,
+ 	if (!mmc)
+ 		return CMD_RET_FAILURE;
+ 
+-	printf("\nMMC erase: dev # %d, block # %d, count %d ... ",
++	printf("MMC erase: dev # %d, block # %d, count %d ... ",
+ 	       curr_device, blk, cnt);
+ 
+ 	if (mmc_getwp(mmc) == 1) {
 -- 
 2.34.1
 
