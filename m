@@ -4,69 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A87EC3DA4A
-	for <u-boot@archiver.kernel.org>; Sat, 10 Aug 2024 13:40:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8F1EC3DA4A
+	for <u-boot@archiver.kernel.org>; Sat, 10 Aug 2024 13:52:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04D1D8887A;
-	Sat, 10 Aug 2024 15:40:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5A1148870B;
+	Sat, 10 Aug 2024 15:52:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OOV7TZfl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ikysXS0k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6726F8860D; Sat, 10 Aug 2024 08:52:52 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id 835F288802; Sat, 10 Aug 2024 15:52:54 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F8B1885C5
- for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 08:52:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 636DD881C3
+ for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 15:52:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kimth0312@gmail.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-52f04b4abdcso3999951e87.2
- for <u-boot@lists.denx.de>; Fri, 09 Aug 2024 23:52:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-690404fd27eso28039717b3.2
+ for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 06:52:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723272769; x=1723877569; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=E3qZTo9ZlceunSGdNZJxiD4DoDBryqdci1bQDaggjxs=;
- b=OOV7TZfleZSMTAqHpqWZVZsFpir0R4/Uv6pSRnNBwRAYUzZAQW3J3DDFEDZNU8Wpj6
- szH8N2GPNPKgP+NTr2SjLJ/W8fWjFIKVftKEwoqTz9g4+2amkpIOQmjfk/E/T+yqQYYi
- +4nD5hfD8iJWTe/ZSzmqGXbwNZ+BpPpeipEfgB8sgUKGfXk6ksEL6R/C1h2Hl2WPbU70
- tk4I0GPVq5IrONfcthFs9C6QzrvsxbvtGcFgs9xKKUsKjTTDXtsTkAPcSuPm3l+pQxan
- /5dgGmLE9S0+bG5oCQQp7aNMY9Vv3U2fimD1Dh/Akunme+pNS+uozFxuzaE1uaLPZyzn
- G0ww==
+ d=gmail.com; s=20230601; t=1723297971; x=1723902771; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=eWpfSQc7UMERzYm4Tb7bTvnLtWGsKpZVD9A2IvqjFiw=;
+ b=ikysXS0kbH2BleA6q+O/m2v/ymi4Y/1qz2Ac07Md5MinlSL+C72XF2Ssv2tgmjoWLc
+ 51r9mdW0/LP2HR3ONTEK4bB9ITsM2HxNLXuT0i10fbgfk+kG61G4TSeWj6CTrXUSVnjz
+ zofEnwCvglkRlEY4PHH+F2vOzH6eN/tLsZ8UmaNRaW91JXKy65KlZxj5unAeDQxrvhI2
+ GaRHqNV1vuI8vnbBc15ihK4boVBjoUZkwyGy3hTm62bV7obdKEqavo0HjhsqJXLb7KwJ
+ j2bEMLWZ/RoAfQgDDGUrp08VmWSBgfVNYBYqsdS4y1axITOE9Qm1Up4O1YolHKahPqga
+ o/Yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723272769; x=1723877569;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=E3qZTo9ZlceunSGdNZJxiD4DoDBryqdci1bQDaggjxs=;
- b=fXkoIImsEKh9umD1ROtU2vjHuAwddD7o7KlE8tgkhEBh2bu0SK6LuEnvADrcNwOTgP
- Lc9vmPdF7RCwdSAoUgzKAi5+7T4OuRyKAfUQ7LXuCgU9NCKm7WrFew5RzSTwAJ209iFR
- nhQ/PCy0mRIERb9NwPzhSt2Vehut2EB66R0EzZnLOJsDi3MKLfEEoMx6M95IAPr3X6r8
- m0h7dpCpM10BCJvkYqfym0YRG9PeVJ3XmdV5mPrBobAv4MXm907kqSBxIFLCu71jbZrt
- asgsmUMuNZg5EfWjAHOcvCVGv3xB+u6xT6arD39APN6SVjZtGfaXgAq9cIhIvjS6AgeO
- 83Iw==
-X-Gm-Message-State: AOJu0Yzw5IjaC/X/oBFOwRHi1YucS62R/zPBipIycD63tiM5F18o4knl
- o1GwWxvtZAUPE7HP/easkilZX2JxKZQ11RDT4DMqoUcsLFZaMV4Zfg5Ac6TS5uP4Iai49unQY4o
- ofWpxGnKVSdeBNLeaDePU4Cu/Mh4zFg==
-X-Google-Smtp-Source: AGHT+IEArACWEDqk8Yf7UehHKU2mOgYVjC/q2hFycf/xLLRIQn6ywLffyb96Y21VGIAfFLoVDQ4WLRSySYzVSzeWr1M=
-X-Received: by 2002:a05:6512:2354:b0:52c:e05e:849b with SMTP id
- 2adb3069b0e04-530ee9e0416mr2632432e87.39.1723272769177; Fri, 09 Aug 2024
- 23:52:49 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1723297971; x=1723902771;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=eWpfSQc7UMERzYm4Tb7bTvnLtWGsKpZVD9A2IvqjFiw=;
+ b=pkllEgKcrc3tlFb6+0RshgaqeTvMfsBfY27OU8RYkWapZOu0HWRBM9T9CkIX+VS5CQ
+ HyKAECuTsIdykTTqOWugxLmr0PJvl9EP2UBQ/6gRKiKx6wLa0O/GTWOntWI5kgKgHktd
+ pBjeqGV+QwTAYLahIR/cqydEP6a+rne7kwHMDZhdx1S7oHlTTStfQYypSpnlzFQR9Ymf
+ RMfO9MZmMERsXzl2HgLvBWeN1w7IGCYUzUGTXdy1UqEHs0RLBHtJin58WKPqrX94PENw
+ 3WPzl4eI8qfuFyfmy+jU3pYt8UmLrsziS5yhzKtD7UYswwsvcLukOIqgOKIi/TK1BCVE
+ U4mw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWWZGMzBl/Kptnn/DImQ3BeNWeSiJho77CVoFno8AuQXXBoTol+Ir6A9Inv5xFJy5ODl6K+H6Y9UzFiI/tjAp0srnkP2Q==
+X-Gm-Message-State: AOJu0YzhvAzAK0+Iztn0jXbamGkk/E2BUDpsR6Ge3lxsDc++AZwvcqz4
+ PtgoTLoW4oXDExrayQB1yDirPABz9NhaG8cOkgknFPD0dKVxPvuZ/A5QaQ==
+X-Google-Smtp-Source: AGHT+IGxxbkidRBQ4jPQzxzWvkM9kqpvCepjHxEXxVDjm14+wiur2YuKk615JOqyxEutRt4V6/aysQ==
+X-Received: by 2002:a05:6902:2292:b0:e0b:e2df:b422 with SMTP id
+ 3f1490d57ef6-e0eb9994b16mr5297270276.24.1723297971141; 
+ Sat, 10 Aug 2024 06:52:51 -0700 (PDT)
+Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
+ af79cd13be357-7a4c7e115c0sm68589085a.133.2024.08.10.06.52.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 10 Aug 2024 06:52:50 -0700 (PDT)
+From: Sean Anderson <seanga2@gmail.com>
+To: Simon Glass <sjg@chromium.org>,
+	u-boot@lists.denx.de
+Cc: Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH] sandbox: Fix pinmux warnings with non-test devicetrees
+Date: Sat, 10 Aug 2024 09:52:49 -0400
+Message-Id: <20240810135249.4037082-1-seanga2@gmail.com>
+X-Mailer: git-send-email 2.37.1
 MIME-Version: 1.0
-From: =?UTF-8?B?6rmA7YOc7ZiE?= <kimth0312@gmail.com>
-Date: Sat, 10 Aug 2024 15:52:38 +0900
-Message-ID: <CAEttap-5P=x0WMjVNwVUVhYe8eHtuQKyzbWcSOFjTahOLbZYgA@mail.gmail.com>
-Subject: I think I found a typographical error
-To: u-boot@lists.denx.de
-X-Mailman-Approved-At: Sat, 10 Aug 2024 15:40:19 +0200
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,13 +91,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi, I was looking in the 'arch > arm > cpu > armv7 > start.S' and I think I
-found a typographical error.
+The sandbox pinmux driver is used in the non-test devicetree as well as
+the test one. I didn't realize this when I modified the driver for
+tests, and so broke the regular use case (which only resulted in
+warnings). First, making the pinmux and the UART group available in all
+boot phases to avoid ENODEV errors. Then, convert the pin groups and
+functions to the new style, adding onewire group as well.
 
-On line 45, 'This allows U-Boot to loaded to ...' should be 'This allows
-U-Boot to *be* loaded to ...'
+Fixes: 7f0f1806e3a ("test: pinmux: Add test for pin muxing")
+Signed-off-by: Sean Anderson <seanga2@gmail.com>
+---
 
-Please check if it's right or not.
+ arch/sandbox/dts/sandbox.dtsi                | 14 ++++++++------
+ drivers/pinctrl/pinctrl-sandbox.c            |  4 +++-
+ include/dt-bindings/pinctrl/sandbox-pinmux.h |  1 +
+ 3 files changed, 12 insertions(+), 7 deletions(-)
 
-Best regards,
-Tae Hyun Kim
+diff --git a/arch/sandbox/dts/sandbox.dtsi b/arch/sandbox/dts/sandbox.dtsi
+index c93ce712894..06ba4f031fa 100644
+--- a/arch/sandbox/dts/sandbox.dtsi
++++ b/arch/sandbox/dts/sandbox.dtsi
+@@ -231,23 +231,25 @@
+ 	};
+ 
+ 	pinctrl {
++		bootph-all;
+ 		compatible = "sandbox,pinctrl";
+ 		status = "okay";
+ 
+ 		pinctrl_i2c0: i2c0 {
+-			groups = "i2c";
+-			function = "i2c";
++			groups = "I2C_UART";
++			function = "I2C";
+ 			bias-pull-up;
+ 		};
+ 
+ 		pinctrl_serial0: uart0 {
+-			groups = "serial_a";
+-			function = "serial";
++			bootph-all;
++			groups = "I2C_UART";
++			function = "UART";
+ 		};
+ 
+ 		pinctrl_onewire0: onewire0 {
+-			groups = "w1";
+-			function = "w1";
++			pins = "P8";
++			function = "ONEWIRE";
+ 			bias-pull-up;
+ 		};
+ 	};
+diff --git a/drivers/pinctrl/pinctrl-sandbox.c b/drivers/pinctrl/pinctrl-sandbox.c
+index a5d056643a0..f6921b56ceb 100644
+--- a/drivers/pinctrl/pinctrl-sandbox.c
++++ b/drivers/pinctrl/pinctrl-sandbox.c
+@@ -42,7 +42,7 @@ static const char * const sandbox_pins_muxing[][2] = {
+ 	{ "GPIO0", "SPI CS0" },
+ 	{ "GPIO1", "SPI CS1" },
+ 	{ "GPIO2", "PWM0" },
+-	{ "GPIO3", "PWM1" },
++	{ "GPIO3", "ONEWIRE" },
+ };
+ 
+ #define SANDBOX_GROUP_I2C_UART 0
+@@ -63,6 +63,7 @@ static const char * const sandbox_functions[] = {
+ 	FUNC(GPIO),
+ 	FUNC(CS),
+ 	FUNC(PWM),
++	FUNC(ONEWIRE),
+ #undef FUNC
+ };
+ 
+@@ -166,6 +167,7 @@ static int sandbox_pinmux_set(struct udevice *dev, unsigned pin_selector,
+ 		break;
+ 	case SANDBOX_PINMUX_CS:
+ 	case SANDBOX_PINMUX_PWM:
++	case SANDBOX_PINMUX_ONEWIRE:
+ 		mux = BIT(pin_selector);
+ 		break;
+ 	default:
+diff --git a/include/dt-bindings/pinctrl/sandbox-pinmux.h b/include/dt-bindings/pinctrl/sandbox-pinmux.h
+index 891af072e52..21c5a1762ab 100644
+--- a/include/dt-bindings/pinctrl/sandbox-pinmux.h
++++ b/include/dt-bindings/pinctrl/sandbox-pinmux.h
+@@ -13,6 +13,7 @@
+ #define SANDBOX_PINMUX_GPIO 4
+ #define SANDBOX_PINMUX_CS   5
+ #define SANDBOX_PINMUX_PWM  6
++#define SANDBOX_PINMUX_ONEWIRE 7
+ 
+ #define SANDBOX_PINMUX(pin, func) ((func) << 16 | (pin))
+ 
+-- 
+2.37.1
+
