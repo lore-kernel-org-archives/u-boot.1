@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EF51C3DA7F
-	for <u-boot@archiver.kernel.org>; Sat, 10 Aug 2024 20:53:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC3C8C3DA4A
+	for <u-boot@archiver.kernel.org>; Sat, 10 Aug 2024 20:54:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80A80888AA;
+	by phobos.denx.de (Postfix) with ESMTP id DB4268890D;
 	Sat, 10 Aug 2024 22:52:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kCnpQQFK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gRrtENjB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FFCA888A0; Sat, 10 Aug 2024 22:52:39 +0200 (CEST)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id 39C5B8898A; Sat, 10 Aug 2024 22:52:40 +0200 (CEST)
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7CFF88905
- for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 22:52:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D5C6A88907
+ for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 22:52:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-81f8f0197abso153341739f.2
- for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 13:52:30 -0700 (PDT)
+Received: by mail-io1-xd2d.google.com with SMTP id
+ ca18e2360f4ac-81f8f0197abso153342439f.2
+ for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 13:52:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723323149; x=1723927949; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723323150; x=1723927950; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/9fCDARGClrtvaV6RYk3aEGgoh5ButGLsr99j0PTG+Y=;
- b=kCnpQQFKQErwP/cnDciDlNAFeExnS2ZDPXDOtme2V272CD7qlFU1aJWV0linWVOvDQ
- iX4T8MyQ657wb3iuD1XGvflMKKbKW6keoWLuMDjylR/j5V8MXHNSqyBRsIEGux/oMX5d
- dP246OSJOySZdhtqm0VTJC2ybh1njzAkGVWt0=
+ bh=eyUtFxoyErx1YK2nC/7cS1MOE2tqar2nMHwbB/UPUKs=;
+ b=gRrtENjBp1qfwUihDz3pkxe6AcQyZMISTx0FW2eJb6hzxn51oIfeYbz/MvYRgFXHea
+ HqHttIuJGeMI80tsa9qmxfAJxw5OEbUHepZpUvmVYNfWc8U8Br54jIJIBbJdI9vktJK6
+ zy9yqypTS9/a+cPrg7OWHSbgjOWOl9CL4Eyys=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723323149; x=1723927949;
+ d=1e100.net; s=20230601; t=1723323150; x=1723927950;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/9fCDARGClrtvaV6RYk3aEGgoh5ButGLsr99j0PTG+Y=;
- b=MjXY0x1nm9YONz6UYvzNC3Zhy3mdG/3pVZq1spAiYZ87nTqcZnv+PZE84nEOTzN5rz
- U+Mmz3ksQF2ae7QEr5q1IOxkqRmA0w1W+5t9gCa8XZ3epT5NY0p2D8morvQS+c17Z4Vc
- /EAzNi1hlxjYaOs1tyfU6g8X29KffLC5PwU2arq91ueep+dBtPe/x8xyrtN8H1I2GVXm
- RoR1C+8QTTf/mTMhLUxN7NJwW9+pD5AKFBmaH/R3u4h/6rG60/qax2iiVHyU1WTlDDq8
- vWs7FBQB22I6UGINu6eg6xQwhDoN8yZPe3d7DD4T58EPXKWBR+IvlIPKCqaFp9yE6Lsz
- 9WSA==
-X-Gm-Message-State: AOJu0Yx6AjeEmvB+jZhRs9zoUT+YZuQSgbw67aBh07CUVeNaG2uZMrlJ
- aCacG1+dg8PSW5XS+vyhzxGtOcJdROFvfUu//NPZr6o566MCcMaXlHzrvvC8uQ7Z7xbF0XlTDYA
+ bh=eyUtFxoyErx1YK2nC/7cS1MOE2tqar2nMHwbB/UPUKs=;
+ b=tZ49cP7i9Tx7pM4qmTDaaOltHn0heHo5qZFCKxiV/p7sUTCPzLO1Q2Ievl3Px/aosF
+ 97w1gjlgBa6BlnOX/9Nx7gvyKRbeueFpSl8FSzCSujM0sneOApUi4P4pYfpJYKnfcWX4
+ wFu5qCMC3QMcowZXA1gP/iAl1W2TfU5upU+gE/iiC+HX4rY8kF15pReGAMwPxWtjuUfD
+ /lQG/b6qKk/xWcXMoZ/UKhogmrt7o3qx18jpYi2hXjcn+YO00CGByXId573BnswR/Adi
+ 5SEDlpPOaKb9yrZS7D1sqIQUdugHTaFLa5wFd42+CoFRAPxV+6Wq6RkWDa5jghbTVAb2
+ RyQg==
+X-Gm-Message-State: AOJu0Yyz6W1Jm4+WMDvmHzpp9lGK7GiiXvRtQ6xDteX8Xfm21bRXQGus
+ KhhOD/4vUSU4fYib+LjipoKqgEZdI4G/N9PhFfZjwnvlk/mbTxsACjgVxBeDpWaX7MjXXJr8Wm0
  =
-X-Google-Smtp-Source: AGHT+IHto0wsEYdCtkKUHMA3an5VpwaVmQTJePKlZubBTsjBlP93UU5cuJ5WQ0tfG/KyxhPC4PMSQg==
-X-Received: by 2002:a05:6602:6199:b0:804:f2be:ee33 with SMTP id
- ca18e2360f4ac-8225ee680a1mr698422139f.2.1723323149414; 
- Sat, 10 Aug 2024 13:52:29 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IG/WVkQC7KYY5FRJk2PhkF2UtP3NeTrJGCP/X15qEE9d9d7vgk8sycrLSg/oUirQP1eoQSloA==
+X-Received: by 2002:a05:6602:1553:b0:7f6:4c4d:5dd4 with SMTP id
+ ca18e2360f4ac-8225eec7a1emr797193539f.14.1723323150415; 
+ Sat, 10 Aug 2024 13:52:30 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-82266f56333sm82893139f.0.2024.08.10.13.52.28
+ ca18e2360f4ac-82266f56333sm82893139f.0.2024.08.10.13.52.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Sat, 10 Aug 2024 13:52:29 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>
-Subject: [PATCH 10/21] test: bloblist: Use UTF_CONSOLE in tests
-Date: Sat, 10 Aug 2024 14:51:54 -0600
-Message-Id: <20240810205205.3403177-11-sjg@chromium.org>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: [PATCH 11/21] test: boot: Use UTF_CONSOLE in tests
+Date: Sat, 10 Aug 2024 14:51:55 -0600
+Message-Id: <20240810205205.3403177-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240810205205.3403177-1-sjg@chromium.org>
 References: <20240810205205.3403177-1-sjg@chromium.org>
@@ -92,63 +95,610 @@ X-Virus-Status: Clean
 
 Set this flag rather than doing things manually in the test.
 
-Drop the code which is now unnecessary.
+Drop unnecessary calls to console_record_reset_enable()
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/bloblist.c | 14 ++------------
- 1 file changed, 2 insertions(+), 12 deletions(-)
+ test/boot/bootdev.c  | 31 ++++++++++----------------
+ test/boot/bootflow.c | 53 ++++++++++++++++++--------------------------
+ test/boot/bootmeth.c | 12 ++++------
+ test/boot/cedit.c    | 13 ++++-------
+ test/boot/expo.c     |  3 +--
+ 5 files changed, 42 insertions(+), 70 deletions(-)
 
-diff --git a/test/bloblist.c b/test/bloblist.c
-index 7c63682908a..fd85c7ab79e 100644
---- a/test/bloblist.c
-+++ b/test/bloblist.c
-@@ -270,20 +270,15 @@ static int bloblist_test_cmd_info(struct unit_test_state *uts)
- 	data = bloblist_ensure(TEST_TAG, TEST_SIZE);
- 	data2 = bloblist_ensure(TEST_TAG2, TEST_SIZE2);
+diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
+index 9a364d0f267..23ebc61ff52 100644
+--- a/test/boot/bootdev.c
++++ b/test/boot/bootdev.c
+@@ -28,7 +28,6 @@ static int bootdev_test_cmd_list(struct unit_test_state *uts)
+ {
+ 	int probed;
  
 -	console_record_reset_enable();
--	ut_silence_console(uts);
--	console_record_reset();
- 	run_command("bloblist info", 0);
- 	ut_assert_nextline("base:       %lx", (ulong)map_to_sysmem(hdr));
- 	ut_assert_nextline("total size: 400    1 KiB");
- 	ut_assert_nextline("used size:  50     80 Bytes");
- 	ut_assert_nextline("free:       3b0    944 Bytes");
--	ut_assert_console_end();
--	ut_unsilence_console(uts);
+ 	for (probed = 0; probed < 2; probed++) {
+ 		int probe_ch = probed ? '+' : ' ';
+ 
+@@ -49,7 +48,7 @@ static int bootdev_test_cmd_list(struct unit_test_state *uts)
  
  	return 0;
  }
--BLOBLIST_TEST(bloblist_test_cmd_info, 0);
-+BLOBLIST_TEST(bloblist_test_cmd_info, UTF_CONSOLE);
+-BOOTSTD_TEST(bootdev_test_cmd_list, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootdev_test_cmd_list, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
  
- /* Test the 'bloblist list' command */
- static int bloblist_test_cmd_list(struct unit_test_state *uts)
-@@ -296,21 +291,16 @@ static int bloblist_test_cmd_list(struct unit_test_state *uts)
- 	data = bloblist_ensure(TEST_TAG, TEST_SIZE);
- 	data2 = bloblist_ensure(TEST_TAG2, TEST_SIZE2);
+ /* Check 'bootdev select' and 'info' commands */
+ static int bootdev_test_cmd_select(struct unit_test_state *uts)
+@@ -59,7 +58,6 @@ static int bootdev_test_cmd_select(struct unit_test_state *uts)
+ 	/* get access to the CLI's cur_bootdev */
+ 	ut_assertok(bootstd_get_priv(&std));
  
 -	console_record_reset_enable();
--	ut_silence_console(uts);
--	console_record_reset();
- 	run_command("bloblist list", 0);
- 	ut_assert_nextline("Address       Size   Tag Name");
- 	ut_assert_nextline("%08lx  %8x  fff000 SPL hand-off",
- 			   (ulong)map_to_sysmem(data), TEST_SIZE);
- 	ut_assert_nextline("%08lx  %8x   202 Chrome OS vboot context",
- 			   (ulong)map_to_sysmem(data2), TEST_SIZE2);
--	ut_assert_console_end();
--	ut_unsilence_console(uts);
+ 	ut_asserteq(1, run_command("bootdev info", 0));
+ 	ut_assert_nextlinen("Please use");
+ 	ut_assert_console_end();
+@@ -99,7 +97,7 @@ static int bootdev_test_cmd_select(struct unit_test_state *uts)
  
  	return 0;
  }
--BLOBLIST_TEST(bloblist_test_cmd_list, 0);
-+BLOBLIST_TEST(bloblist_test_cmd_list, UTF_CONSOLE);
+-BOOTSTD_TEST(bootdev_test_cmd_select, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootdev_test_cmd_select, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
  
- /* Test alignment of bloblist blobs */
- static int bloblist_test_align(struct unit_test_state *uts)
+ /* Check bootdev labels */
+ static int bootdev_test_labels(struct unit_test_state *uts)
+@@ -157,7 +155,6 @@ static int bootdev_test_any(struct unit_test_state *uts)
+ 	 * 9   [ + ]      OK  mmc       mmc1.bootdev
+ 	 * a   [   ]      OK  mmc       mmc0.bootdev
+ 	 */
+-	console_record_reset_enable();
+ 	ut_assertok(bootdev_find_by_any("8", &dev, &mflags));
+ 	ut_asserteq(UCLASS_BOOTDEV, device_get_uclass_id(dev));
+ 	ut_asserteq(BOOTFLOW_METHF_SINGLE_DEV, mflags);
+@@ -185,7 +182,8 @@ static int bootdev_test_any(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootdev_test_any, UTF_DM | UTF_SCAN_FDT | UTF_ETH_BOOTDEV);
++BOOTSTD_TEST(bootdev_test_any, UTF_DM | UTF_SCAN_FDT | UTF_ETH_BOOTDEV |
++	     UTF_CONSOLE);
+ 
+ /*
+  * Check bootdev ordering with the bootdev-order property and boot_targets
+@@ -321,7 +319,6 @@ static int bootdev_test_prio(struct unit_test_state *uts)
+ 	ut_assertok(bootstd_test_drop_bootdev_order(uts));
+ 
+ 	/* 3 MMC and 3 USB bootdevs: MMC should come before USB */
+-	console_record_reset_enable();
+ 	ut_assertok(bootflow_scan_first(NULL, NULL, &iter, 0, &bflow));
+ 	ut_asserteq(-ENODEV, bootflow_scan_next(&iter, &bflow));
+ 	ut_asserteq(6, iter.num_devs);
+@@ -361,7 +358,6 @@ static int bootdev_test_hunter(struct unit_test_state *uts)
+ 	/* get access to the used hunters */
+ 	ut_assertok(bootstd_get_priv(&std));
+ 
+-	console_record_reset_enable();
+ 	bootdev_list_hunters(std);
+ 	ut_assert_nextline("Prio  Used  Uclass           Hunter");
+ 	ut_assert_nextlinen("----");
+@@ -388,7 +384,7 @@ static int bootdev_test_hunter(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootdev_test_hunter, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootdev_test_hunter, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ /* Check 'bootdev hunt' command */
+ static int bootdev_test_cmd_hunt(struct unit_test_state *uts)
+@@ -401,7 +397,6 @@ static int bootdev_test_cmd_hunt(struct unit_test_state *uts)
+ 	/* get access to the used hunters */
+ 	ut_assertok(bootstd_get_priv(&std));
+ 
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootdev hunt -l", 0));
+ 	ut_assert_nextline("Prio  Used  Uclass           Hunter");
+ 	ut_assert_nextlinen("----");
+@@ -462,7 +457,8 @@ static int bootdev_test_cmd_hunt(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootdev_test_cmd_hunt, UTF_DM | UTF_SCAN_FDT | UTF_ETH_BOOTDEV);
++BOOTSTD_TEST(bootdev_test_cmd_hunt, UTF_DM | UTF_SCAN_FDT | UTF_ETH_BOOTDEV |
++	     UTF_CONSOLE);
+ 
+ /* Check searching for bootdevs using the hunters */
+ static int bootdev_test_hunt_scan(struct unit_test_state *uts)
+@@ -527,7 +523,6 @@ static int bootdev_test_hunt_prio(struct unit_test_state *uts)
+ 	usb_started = false;
+ 	test_set_skip_delays(true);
+ 
+-	console_record_reset_enable();
+ 	ut_assertok(bootdev_hunt_prio(BOOTDEVP_4_SCAN_FAST, false));
+ 	ut_assert_nextline("scanning bus for devices...");
+ 	ut_assert_skip_to_line("            Type: Hard Disk");
+@@ -544,7 +539,7 @@ static int bootdev_test_hunt_prio(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootdev_test_hunt_prio, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootdev_test_hunt_prio, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ /* Check hunting for bootdevs with a particular label */
+ static int bootdev_test_hunt_label(struct unit_test_state *uts)
+@@ -559,7 +554,6 @@ static int bootdev_test_hunt_label(struct unit_test_state *uts)
+ 	ut_assertok(bootstd_get_priv(&std));
+ 
+ 	/* scan an unknown uclass */
+-	console_record_reset_enable();
+ 	old = (void *)&mflags;   /* arbitrary pointer to check against dev */
+ 	dev = old;
+ 	mflags = 123;
+@@ -597,7 +591,7 @@ static int bootdev_test_hunt_label(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootdev_test_hunt_label, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootdev_test_hunt_label, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ /* Check iterating to the next label in a list */
+ static int bootdev_test_next_label(struct unit_test_state *uts)
+@@ -624,7 +618,6 @@ static int bootdev_test_next_label(struct unit_test_state *uts)
+ 	dev = NULL;
+ 	mflags = 123;
+ 	ut_assertok(bootdev_next_label(&iter, &dev, &mflags));
+-	console_record_reset_enable();
+ 	ut_assert_console_end();
+ 	ut_assertnonnull(dev);
+ 	ut_asserteq_str("mmc0.bootdev", dev->name);
+@@ -675,7 +668,7 @@ static int bootdev_test_next_label(struct unit_test_state *uts)
+ 	return 0;
+ }
+ BOOTSTD_TEST(bootdev_test_next_label, UTF_DM | UTF_SCAN_FDT | UTF_ETH_BOOTDEV |
+-	     UTF_SF_BOOTDEV);
++	     UTF_SF_BOOTDEV | UTF_CONSOLE);
+ 
+ /* Check iterating to the next prioirty in a list */
+ static int bootdev_test_next_prio(struct unit_test_state *uts)
+@@ -700,7 +693,6 @@ static int bootdev_test_next_prio(struct unit_test_state *uts)
+ 	iter.flags = BOOTFLOWIF_SHOW;
+ 
+ 	dev = NULL;
+-	console_record_reset_enable();
+ 	ut_assertok(bootdev_next_prio(&iter, &dev));
+ 	ut_assertnonnull(dev);
+ 	ut_asserteq_str("mmc2.bootdev", dev->name);
+@@ -759,4 +751,5 @@ static int bootdev_test_next_prio(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootdev_test_next_prio, UTF_DM | UTF_SCAN_FDT | UTF_SF_BOOTDEV);
++BOOTSTD_TEST(bootdev_test_next_prio, UTF_DM | UTF_SCAN_FDT | UTF_SF_BOOTDEV |
++	     UTF_CONSOLE);
+diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+index f53e20e4c86..6ad63afe90a 100644
+--- a/test/boot/bootflow.c
++++ b/test/boot/bootflow.c
+@@ -50,7 +50,6 @@ static int inject_response(struct unit_test_state *uts)
+ /* Check 'bootflow scan/list' commands */
+ static int bootflow_cmd(struct unit_test_state *uts)
+ {
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootdev select 1", 0));
+ 	ut_assert_console_end();
+ 	ut_assertok(run_command("bootflow scan -lH", 0));
+@@ -76,14 +75,13 @@ static int bootflow_cmd(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cmd, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_cmd, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ /* Check 'bootflow scan' with a label / seq */
+ static int bootflow_cmd_label(struct unit_test_state *uts)
+ {
+ 	test_set_eth_enable(false);
+ 
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootflow scan -lH mmc1", 0));
+ 	ut_assert_nextline("Scanning for bootflows with label 'mmc1'");
+ 	ut_assert_skip_to_line("(1 bootflow, 1 valid)");
+@@ -123,14 +121,14 @@ static int bootflow_cmd_label(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cmd_label, UTF_DM | UTF_SCAN_FDT | UTF_ETH_BOOTDEV);
++BOOTSTD_TEST(bootflow_cmd_label, UTF_DM | UTF_SCAN_FDT | UTF_ETH_BOOTDEV |
++	     UTF_CONSOLE);
+ 
+ /* Check 'bootflow scan/list' commands using all bootdevs */
+ static int bootflow_cmd_glob(struct unit_test_state *uts)
+ {
+ 	ut_assertok(bootstd_test_drop_bootdev_order(uts));
+ 
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootflow scan -lGH", 0));
+ 	ut_assert_nextline("Scanning for bootflows in all bootdevs");
+ 	ut_assert_nextline("Seq  Method       State   Uclass    Part  Name                      Filename");
+@@ -155,14 +153,13 @@ static int bootflow_cmd_glob(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cmd_glob, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_cmd_glob, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ /* Check 'bootflow scan -e' */
+ static int bootflow_cmd_scan_e(struct unit_test_state *uts)
+ {
+ 	ut_assertok(bootstd_test_drop_bootdev_order(uts));
+ 
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootflow scan -aleGH", 0));
+ 	ut_assert_nextline("Scanning for bootflows in all bootdevs");
+ 	ut_assert_nextline("Seq  Method       State   Uclass    Part  Name                      Filename");
+@@ -206,12 +203,11 @@ static int bootflow_cmd_scan_e(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cmd_scan_e, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_cmd_scan_e, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ /* Check 'bootflow info' */
+ static int bootflow_cmd_info(struct unit_test_state *uts)
+ {
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootdev select 1", 0));
+ 	ut_assert_console_end();
+ 	ut_assertok(run_command("bootflow scan", 0));
+@@ -247,12 +243,11 @@ static int bootflow_cmd_info(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cmd_info, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_cmd_info, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ /* Check 'bootflow scan -b' to boot the first available bootdev */
+ static int bootflow_scan_boot(struct unit_test_state *uts)
+ {
+-	console_record_reset_enable();
+ 	ut_assertok(inject_response(uts));
+ 	ut_assertok(run_command("bootflow scan -b", 0));
+ 	ut_assert_nextline(
+@@ -269,7 +264,7 @@ static int bootflow_scan_boot(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_scan_boot, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_scan_boot, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ /* Check iterating through available bootflows */
+ static int bootflow_iter(struct unit_test_state *uts)
+@@ -385,7 +380,6 @@ static int bootflow_system(struct unit_test_state *uts)
+ 
+ 	/* We should get a single 'bootmgr' method right at the end */
+ 	bootstd_clear_glob();
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootflow scan -lH", 0));
+ 	ut_assert_skip_to_line(
+ 		"  0  efi_mgr      ready   (none)       0  <NULL>                    ");
+@@ -395,7 +389,8 @@ static int bootflow_system(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_system, UTF_DM | UTF_SCAN_PDATA | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_system, UTF_DM | UTF_SCAN_PDATA | UTF_SCAN_FDT |
++	     UTF_CONSOLE);
+ #endif
+ 
+ /* Check disabling a bootmethod if it requests it */
+@@ -414,7 +409,6 @@ static int bootflow_iter_disable(struct unit_test_state *uts)
+ 	ut_assertok(bootstd_test_drop_bootdev_order(uts));
+ 
+ 	bootstd_clear_glob();
+-	console_record_reset_enable();
+ 	ut_assertok(inject_response(uts));
+ 	ut_assertok(run_command("bootflow scan -lbH", 0));
+ 
+@@ -436,7 +430,7 @@ static int bootflow_iter_disable(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_iter_disable, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_iter_disable, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ /* Check 'bootflow scan' with a bootmeth ordering including a global bootmeth */
+ static int bootflow_scan_glob_bootmeth(struct unit_test_state *uts)
+@@ -450,7 +444,6 @@ static int bootflow_scan_glob_bootmeth(struct unit_test_state *uts)
+ 	 * Make sure that the -G flag makes the scan fail, since this is not
+ 	 * supported when an ordering is provided
+ 	 */
+-	console_record_reset_enable();
+ 	ut_assertok(bootmeth_set_order("efi firmware0"));
+ 	ut_assertok(run_command("bootflow scan -lGH", 0));
+ 	ut_assert_nextline("Scanning for bootflows in all bootdevs");
+@@ -477,12 +470,12 @@ static int bootflow_scan_glob_bootmeth(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_scan_glob_bootmeth, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_scan_glob_bootmeth, UTF_DM | UTF_SCAN_FDT |
++	     UTF_CONSOLE);
+ 
+ /* Check 'bootflow boot' to boot a selected bootflow */
+ static int bootflow_cmd_boot(struct unit_test_state *uts)
+ {
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootdev select 1", 0));
+ 	ut_assert_console_end();
+ 	ut_assertok(run_command("bootflow scan", 0));
+@@ -506,7 +499,7 @@ static int bootflow_cmd_boot(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cmd_boot, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_cmd_boot, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ /**
+  * prep_mmc_bootdev() - Set up an mmc bootdev so we can access other distros
+@@ -583,7 +576,6 @@ static int scan_mmc_bootdev(struct unit_test_state *uts, const char *mmc_dev,
+ 
+ 	ut_assertok(prep_mmc_bootdev(uts, mmc_dev, bind_cros, &old_order));
+ 
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootflow scan", 0));
+ 	ut_assert_console_end();
+ 
+@@ -611,7 +603,6 @@ static int scan_mmc_android_bootdev(struct unit_test_state *uts, const char *mmc
+ 
+ 	ut_assertok(prep_mmc_bootdev(uts, mmc_dev, true, &old_order));
+ 
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootflow scan", 0));
+ 	/* Android bootflow might print one or two 'ANDROID:*' logs */
+ 	ut_check_skipline(uts);
+@@ -673,7 +664,7 @@ static int bootflow_cmd_menu(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cmd_menu, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_cmd_menu, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ /* Check 'bootflow scan -m' to select a bootflow using a menu */
+ static int bootflow_scan_menu(struct unit_test_state *uts)
+@@ -779,7 +770,6 @@ static int bootflow_cmd_hunt_single(struct unit_test_state *uts)
+ 
+ 	ut_assertok(bootstd_test_drop_bootdev_order(uts));
+ 
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootflow scan -l mmc1", 0));
+ 	ut_assert_nextline("Scanning for bootflows with label 'mmc1'");
+ 	ut_assert_skip_to_line("(1 bootflow, 1 valid)");
+@@ -790,7 +780,8 @@ static int bootflow_cmd_hunt_single(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cmd_hunt_single, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_cmd_hunt_single, UTF_DM | UTF_SCAN_FDT |
++	     UTF_CONSOLE);
+ 
+ /* Check searching for a uclass label using the hunters */
+ static int bootflow_cmd_hunt_label(struct unit_test_state *uts)
+@@ -804,7 +795,6 @@ static int bootflow_cmd_hunt_label(struct unit_test_state *uts)
+ 	test_set_eth_enable(false);
+ 	ut_assertok(bootstd_test_drop_bootdev_order(uts));
+ 
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootflow scan -l mmc", 0));
+ 
+ 	/* check that the hunter was used */
+@@ -827,7 +817,7 @@ static int bootflow_cmd_hunt_label(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cmd_hunt_label, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_cmd_hunt_label, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ /**
+  * check_font() - Check that the font size for an item matches expectations
+@@ -887,7 +877,7 @@ static int bootflow_menu_theme(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_menu_theme, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_menu_theme, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ /**
+  * check_arg() - Check both the normal case and the buffer-overflow case
+@@ -1123,7 +1113,6 @@ static int bootflow_cmdline(struct unit_test_state *uts)
+ {
+ 	ut_assertok(run_command("bootflow scan mmc", 0));
+ 	ut_assertok(run_command("bootflow sel 0", 0));
+-	console_record_reset_enable();
+ 
+ 	ut_asserteq(1, run_command("bootflow cmdline get fred", 0));
+ 	ut_assert_nextline("Argument not found");
+@@ -1151,7 +1140,7 @@ static int bootflow_cmdline(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cmdline, 0);
++BOOTSTD_TEST(bootflow_cmdline, UTF_CONSOLE);
+ 
+ /* test a few special changes to a long command line */
+ static int bootflow_cmdline_special(struct unit_test_state *uts)
+@@ -1192,7 +1181,7 @@ static int bootflow_cros(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cros, 0);
++BOOTSTD_TEST(bootflow_cros, UTF_CONSOLE);
+ 
+ /* Test Android bootmeth  */
+ static int bootflow_android(struct unit_test_state *uts)
+@@ -1215,4 +1204,4 @@ static int bootflow_android(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_android, 0);
++BOOTSTD_TEST(bootflow_android, UTF_CONSOLE);
+diff --git a/test/boot/bootmeth.c b/test/boot/bootmeth.c
+index ae133cdb423..518d99c4a27 100644
+--- a/test/boot/bootmeth.c
++++ b/test/boot/bootmeth.c
+@@ -16,7 +16,6 @@
+ /* Check 'bootmeth list' command */
+ static int bootmeth_cmd_list(struct unit_test_state *uts)
+ {
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootmeth list", 0));
+ 	ut_assert_nextline("Order  Seq  Name                Description");
+ 	ut_assert_nextlinen("---");
+@@ -31,13 +30,12 @@ static int bootmeth_cmd_list(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootmeth_cmd_list, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootmeth_cmd_list, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ /* Check 'bootmeth order' command */
+ static int bootmeth_cmd_order(struct unit_test_state *uts)
+ {
+ 	/* Select just one bootmethod */
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootmeth order extlinux", 0));
+ 	ut_assert_console_end();
+ 	ut_assertnonnull(env_get("bootmeths"));
+@@ -104,7 +102,7 @@ static int bootmeth_cmd_order(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootmeth_cmd_order, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootmeth_cmd_order, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ /* Check 'bootmeth order' command with global bootmeths */
+ static int bootmeth_cmd_order_glob(struct unit_test_state *uts)
+@@ -112,7 +110,6 @@ static int bootmeth_cmd_order_glob(struct unit_test_state *uts)
+ 	if (!IS_ENABLED(CONFIG_BOOTMETH_GLOBAL))
+ 		return -EAGAIN;
+ 
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootmeth order \"efi firmware0\"", 0));
+ 	ut_assert_console_end();
+ 	ut_assertok(run_command("bootmeth list", 0));
+@@ -128,7 +125,7 @@ static int bootmeth_cmd_order_glob(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootmeth_cmd_order_glob, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootmeth_cmd_order_glob, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ /* Check 'bootmeths' env var */
+ static int bootmeth_env(struct unit_test_state *uts)
+@@ -138,7 +135,6 @@ static int bootmeth_env(struct unit_test_state *uts)
+ 	ut_assertok(bootstd_get_priv(&std));
+ 
+ 	/* Select just one bootmethod */
+-	console_record_reset_enable();
+ 	ut_assertok(env_set("bootmeths", "extlinux"));
+ 	ut_asserteq(1, std->bootmeth_count);
+ 
+@@ -154,7 +150,7 @@ static int bootmeth_env(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootmeth_env, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(bootmeth_env, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ /* Check the get_state_desc() method */
+ static int bootmeth_state(struct unit_test_state *uts)
+diff --git a/test/boot/cedit.c b/test/boot/cedit.c
+index fd19da0a0c0..1f7af8e5d79 100644
+--- a/test/boot/cedit.c
++++ b/test/boot/cedit.c
+@@ -25,8 +25,6 @@ static int cedit_base(struct unit_test_state *uts)
+ 
+ 	ut_assertok(run_command("cedit load hostfs - cedit.dtb", 0));
+ 
+-	console_record_reset_enable();
+-
+ 	/*
+ 	 * ^N  Move down to second menu
+ 	 * ^M  Open menu
+@@ -52,7 +50,7 @@ static int cedit_base(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(cedit_base, 0);
++BOOTSTD_TEST(cedit_base, UTF_CONSOLE);
+ 
+ /* Check the cedit write_fdt and read_fdt commands */
+ static int cedit_fdt(struct unit_test_state *uts)
+@@ -70,7 +68,6 @@ static int cedit_fdt(struct unit_test_state *uts)
+ 	void *fdt;
+ 	int i;
+ 
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("cedit load hostfs - cedit.dtb", 0));
+ 
+ 	ut_asserteq(ID_SCENE1, cedit_prepare(cur_exp, &vid_priv, &scn));
+@@ -122,7 +119,7 @@ static int cedit_fdt(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(cedit_fdt, 0);
++BOOTSTD_TEST(cedit_fdt, UTF_CONSOLE);
+ 
+ /* Check the cedit write_env and read_env commands */
+ static int cedit_env(struct unit_test_state *uts)
+@@ -134,7 +131,6 @@ static int cedit_env(struct unit_test_state *uts)
+ 	struct scene *scn;
+ 	char *str;
+ 
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("cedit load hostfs - cedit.dtb", 0));
+ 
+ 	ut_asserteq(ID_SCENE1, cedit_prepare(cur_exp, &vid_priv, &scn));
+@@ -177,7 +173,7 @@ static int cedit_env(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(cedit_env, 0);
++BOOTSTD_TEST(cedit_env, UTF_CONSOLE);
+ 
+ /* Check the cedit write_cmos and read_cmos commands */
+ static int cedit_cmos(struct unit_test_state *uts)
+@@ -187,7 +183,6 @@ static int cedit_cmos(struct unit_test_state *uts)
+ 	extern struct expo *cur_exp;
+ 	struct scene *scn;
+ 
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("cedit load hostfs - cedit.dtb", 0));
+ 
+ 	ut_asserteq(ID_SCENE1, cedit_prepare(cur_exp, &vid_priv, &scn));
+@@ -218,4 +213,4 @@ static int cedit_cmos(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(cedit_cmos, 0);
++BOOTSTD_TEST(cedit_cmos, UTF_CONSOLE);
+diff --git a/test/boot/expo.c b/test/boot/expo.c
+index 3fe06a4436e..4b24f504e21 100644
+--- a/test/boot/expo.c
++++ b/test/boot/expo.c
+@@ -445,7 +445,6 @@ static int expo_render_image(struct unit_test_state *uts)
+ 	struct expo *exp;
+ 	int id;
+ 
+-	console_record_reset_enable();
+ 	ut_assertok(uclass_first_device_err(UCLASS_VIDEO, &dev));
+ 
+ 	ut_assertok(expo_new(EXPO_NAME, NULL, &exp));
+@@ -633,7 +632,7 @@ static int expo_render_image(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(expo_render_image, UTF_DM | UTF_SCAN_FDT);
++BOOTSTD_TEST(expo_render_image, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+ 
+ /* Check building an expo from a devicetree description */
+ static int expo_test_build(struct unit_test_state *uts)
 -- 
 2.34.1
 
