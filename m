@@ -4,73 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEDACC3DA7F
-	for <u-boot@archiver.kernel.org>; Sat, 10 Aug 2024 20:55:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE672C3DA7F
+	for <u-boot@archiver.kernel.org>; Sat, 10 Aug 2024 20:55:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27EC68896C;
+	by phobos.denx.de (Postfix) with ESMTP id 7FD4088C01;
 	Sat, 10 Aug 2024 22:52:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fPHlX/+r";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gD4eq2l0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9520F888BF; Sat, 10 Aug 2024 22:52:42 +0200 (CEST)
-Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
- [IPv6:2607:f8b0:4864:20::d2f])
+ id 082558895D; Sat, 10 Aug 2024 22:52:43 +0200 (CEST)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC211888F6
- for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 22:52:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7934088896
+ for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 22:52:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2f.google.com with SMTP id
- ca18e2360f4ac-81f94ce2272so121552139f.2
- for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 13:52:36 -0700 (PDT)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-81f9339e537so127872639f.2
+ for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 13:52:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723323155; x=1723927955; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723323156; x=1723927956; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UQZYJSS791ZDVxAD0/XLbE5qlGSjJhCIlmaEFnqV+c4=;
- b=fPHlX/+rDLzLE/qWp1z9UNwoaBo/pkZ5YNvUNTmBpROg3xirBo3cqiEUgIlf/PX8rf
- h+3rcegI56MkwF+crJuN54/KCrkijQWMIdNpt8PjY0zHuQLNFMrh5XFXpKBjzxxJXmYu
- iiH+XQrVAdINJoaeLURubW9+HkImOd+m2Fs5w=
+ bh=uY6hN1XWDgk+FPUD5XaaKpZIOmvq4c8edul/D/0B3rQ=;
+ b=gD4eq2l07RYJNo5zGSioQbhScllj9m194575rkrTTGjVKGw7IuxCo0TbTIgxrAbZjl
+ LggejZR55cX306E83eM2k2CsCsikEVM1579RLR+RN241nzMdTLz6GPqwYPknRlAZSniN
+ E4cPBBwyJDNwpjGOWPvDFMowmSXt6EWxVhTkU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723323155; x=1723927955;
+ d=1e100.net; s=20230601; t=1723323156; x=1723927956;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UQZYJSS791ZDVxAD0/XLbE5qlGSjJhCIlmaEFnqV+c4=;
- b=e/e407C1jyBBrd7DeaAyvhrqa/zGYAF6dAlOTrFA1UICIyLZuxjyYDcVei0B+91LDM
- ORq/io34J5iNSLne8c5upK9aIQdMDYNWYZJF57VCBsRvs7jgdhPjSSVsjhwMdIkb1SD8
- QkbYsqGuj6sYUWBksFBSKe/E8oqhI7sgmEzOK5UfjK3pUNKRWU0KR5v+WBRGqfghMGEa
- zJ7F0YGYGuBKdQZ5kXuaiRaHIZEAJNx9ebfQYpSDgitWkZmvArmmFga1qphCLxSfqi2/
- WSJnY9n9yhBfGSW660LU4jwcWLJlAW9IScDgJ+mDhc+dkKOlhP7lP3qVyqejoQPm0tAG
- bEMw==
-X-Gm-Message-State: AOJu0YxNLORzCuMpTCRD2i448iQQ4z8vBwMNptJVUeibrUrRcKAmmAbj
- +ajUbqwZuwA0QkRPGu0Eg9UkjtoFUumqgYtmCIBlJnLSGhO5wJzqlxgT2Y7d6EkM/fJqoiBz5bw
+ bh=uY6hN1XWDgk+FPUD5XaaKpZIOmvq4c8edul/D/0B3rQ=;
+ b=TJFa2JK5FGgRZf1FpT6sFDq7plc8l1FRi0i1G6MhpRdrzgj/f9ywXGC+g6QWgthqYu
+ phfv5XzaW1RFcksfuutx6iNIDHdR7gBeItMWfE/ZsE0a7wDGPHy+8ztHHyApEjhF2/+Z
+ TJ0dCDa2NV+hzTTfzjJotZjPW2FL6zfwoYJG6qf24JGBkn0xRx5wcRYjx/DLNTMZrBwi
+ wH/Sclq40jv4vMBpPn/Ry8Sf1aZ58dvgtLB0ZpKfRXSisWRNEoDH1jOf0Z0krkgPzBvC
+ f4aD4w7ycctOknbHAWDAWhMcoZtJ0cBt/r4kMa8KiaTkgkbzWLvoPCSKP9hE2Yuvxo9b
+ x1Ww==
+X-Gm-Message-State: AOJu0YwAT2OwpfPX0aq3XIR4ZPCm5RE4tPNHJ+ntCGqhdqr74Q2m1rFp
+ QQDDui8fF4aH2xgg60dvjdFw0ucNxnjHg6+vR+/SObhg1C6M1XOmoLNgSeRUJRsUHUQcJtCoulo
  =
-X-Google-Smtp-Source: AGHT+IENJBCOvma3Llx9vD9+Q53K187PgWXaifPJm8zHuqPQH2uFSwgVbqQ9BbAJUUJHsXVI9Hl/Iw==
-X-Received: by 2002:a05:6602:6b89:b0:805:e2bf:f303 with SMTP id
- ca18e2360f4ac-8225ee77227mr593123739f.8.1723323155320; 
- Sat, 10 Aug 2024 13:52:35 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHCi8f17pIWV+u8pbRG4ST5HOI4249ygk0WkXGVPKUz3bUikPOYBStIxrrM+jHnnmCrKwX/DA==
+X-Received: by 2002:a05:6602:3424:b0:81f:8bed:7035 with SMTP id
+ ca18e2360f4ac-8225ee53e48mr662440339f.3.1723323156099; 
+ Sat, 10 Aug 2024 13:52:36 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-82266f56333sm82893139f.0.2024.08.10.13.52.34
+ ca18e2360f4ac-82266f56333sm82893139f.0.2024.08.10.13.52.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Sat, 10 Aug 2024 13:52:35 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Ion Agorria <ion@agorria.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Subject: [PATCH 17/21] test: hush: Use UTF_CONSOLE in tests
-Date: Sat, 10 Aug 2024 14:52:01 -0600
-Message-Id: <20240810205205.3403177-18-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH 18/21] test: log: Use UTF_CONSOLE in tests
+Date: Sat, 10 Aug 2024 14:52:02 -0600
+Message-Id: <20240810205205.3403177-19-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240810205205.3403177-1-sjg@chromium.org>
 References: <20240810205205.3403177-1-sjg@chromium.org>
@@ -97,102 +94,303 @@ Set this flag rather than doing things manually in the test.
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/hush/dollar.c | 10 +++-------
- test/hush/loop.c   | 11 +++--------
- 2 files changed, 6 insertions(+), 15 deletions(-)
+ include/test/log.h      |  5 +++--
+ test/log/cont_test.c    |  1 -
+ test/log/log_filter.c   |  3 ---
+ test/log/log_test.c     | 19 -------------------
+ test/log/nolog_ndebug.c |  1 -
+ test/log/nolog_test.c   |  8 --------
+ test/log/pr_cont_test.c |  1 -
+ 7 files changed, 3 insertions(+), 35 deletions(-)
 
-diff --git a/test/hush/dollar.c b/test/hush/dollar.c
-index 4caa07c192a..91b097017c2 100644
---- a/test/hush/dollar.c
-+++ b/test/hush/dollar.c
-@@ -14,7 +14,6 @@ DECLARE_GLOBAL_DATA_PTR;
+diff --git a/include/test/log.h b/include/test/log.h
+index e9028914500..e3362b85e99 100644
+--- a/include/test/log.h
++++ b/include/test/log.h
+@@ -13,7 +13,8 @@
+ #define LOGF_TEST (BIT(LOGF_FUNC) | BIT(LOGF_MSG))
  
- static int hush_test_simple_dollar(struct unit_test_state *uts)
- {
+ /* Declare a new logging test */
+-#define LOG_TEST(_name) UNIT_TEST(_name, 0, log_test)
+-#define LOG_TEST_FLAGS(_name, _flags) UNIT_TEST(_name, _flags, log_test)
++#define LOG_TEST(_name) UNIT_TEST(_name, UTF_CONSOLE, log_test)
++#define LOG_TEST_FLAGS(_name, _flags) \
++		UNIT_TEST(_name, _flags | UTF_CONSOLE, log_test)
+ 
+ #endif /* __TEST_LOG_H__ */
+diff --git a/test/log/cont_test.c b/test/log/cont_test.c
+index 036d44b9d73..395a6587fa2 100644
+--- a/test/log/cont_test.c
++++ b/test/log/cont_test.c
+@@ -25,7 +25,6 @@ static int log_test_cont(struct unit_test_state *uts)
+ 	/* Write two messages, the second continuing the first */
+ 	gd->log_fmt = (1 << LOGF_CAT) | (1 << LOGF_LEVEL) | (1 << LOGF_MSG);
+ 	gd->default_log_level = LOGL_INFO;
 -	console_record_reset_enable();
- 	ut_assertok(run_command("echo $dollar_foo", 0));
- 	ut_assert_nextline_empty();
+ 	log(LOGC_ARCH, LOGL_ERR, "ea%d\n", 1);
+ 	log(LOGC_CONT, LOGL_CONT, "cc%d\n", 2);
+ 	gd->default_log_level = log_level;
+diff --git a/test/log/log_filter.c b/test/log/log_filter.c
+index e175f409c9b..d36e9d9714e 100644
+--- a/test/log/log_filter.c
++++ b/test/log/log_filter.c
+@@ -38,7 +38,6 @@ static int log_test_filter(struct unit_test_state *uts)
+ 	ulong filt1, filt2;
+ 
+ #define create_filter(args, filter_num) do {\
+-	ut_assertok(console_record_reset_enable()); \
+ 	ut_assertok(run_command("log filter-add -p " args, 0)); \
+ 	ut_assert_skipline(); \
+ 	ut_assertok(strict_strtoul(uts->actual_str, 10, &(filter_num))); \
+@@ -72,7 +71,6 @@ static int log_test_filter(struct unit_test_state *uts)
+ 	ut_asserteq(true, filt2_found);
+ 
+ #define remove_filter(filter_num) do { \
+-	ut_assertok(console_record_reset_enable()); \
+ 	snprintf(cmd, sizeof(cmd), "log filter-remove %lu", filter_num); \
+ 	ut_assertok(run_command(cmd, 0)); \
+ 	ut_assert_console_end(); \
+@@ -95,7 +93,6 @@ static int log_test_filter(struct unit_test_state *uts)
+ 	create_filter("", filt1);
+ 	create_filter("", filt2);
+ 
+-	ut_assertok(console_record_reset_enable());
+ 	ut_assertok(run_command("log filter-remove -a", 0));
  	ut_assert_console_end();
-@@ -121,12 +120,11 @@ static int hush_test_simple_dollar(struct unit_test_state *uts)
  
- 	return 0;
- }
--HUSH_TEST(hush_test_simple_dollar, 0);
-+HUSH_TEST(hush_test_simple_dollar, UTF_CONSOLE);
+diff --git a/test/log/log_test.c b/test/log/log_test.c
+index 357a3b57feb..59040c1327c 100644
+--- a/test/log/log_test.c
++++ b/test/log/log_test.c
+@@ -110,11 +110,9 @@ int log_test_cat_allow(struct unit_test_state *uts)
+ 	filt = log_add_filter("console", cat_list, LOGL_MAX, NULL);
+ 	ut_assert(filt >= 0);
  
- static int hush_test_env_dollar(struct unit_test_state *uts)
+-	ut_assertok(console_record_reset_enable());
+ 	log_run_cat(UCLASS_MMC);
+ 	check_log_entries_extra();
+ 
+-	ut_assertok(console_record_reset_enable());
+ 	log_run_cat(UCLASS_SPI);
+ 	check_log_entries_extra();
+ 
+@@ -134,7 +132,6 @@ int log_test_cat_deny_implicit(struct unit_test_state *uts)
+ 	filt = log_add_filter("console", cat_list, LOGL_MAX, NULL);
+ 	ut_assert(filt >= 0);
+ 
+-	ut_assertok(console_record_reset_enable());
+ 	log_run_cat(UCLASS_SPI);
+ 	check_log_entries_none();
+ 
+@@ -151,11 +148,9 @@ int log_test_file(struct unit_test_state *uts)
+ 	filt = log_add_filter("console", NULL, LOGL_MAX, "file");
+ 	ut_assert(filt >= 0);
+ 
+-	ut_assertok(console_record_reset_enable());
+ 	log_run_file("file");
+ 	check_log_entries_flags(EXPECT_DIRECT | EXPECT_EXTRA | EXPECT_FORCE);
+ 
+-	ut_assertok(console_record_reset_enable());
+ 	log_run_file("file2");
+ 	check_log_entries_none();
+ 
+@@ -172,7 +167,6 @@ int log_test_file_second(struct unit_test_state *uts)
+ 	filt = log_add_filter("console", NULL, LOGL_MAX, "file,file2");
+ 	ut_assert(filt >= 0);
+ 
+-	ut_assertok(console_record_reset_enable());
+ 	log_run_file("file2");
+ 	check_log_entries_flags(EXPECT_DIRECT | EXPECT_EXTRA | EXPECT_FORCE);
+ 
+@@ -190,7 +184,6 @@ int log_test_file_mid(struct unit_test_state *uts)
+ 			      "file,file2,log/log_test.c");
+ 	ut_assert(filt >= 0);
+ 
+-	ut_assertok(console_record_reset_enable());
+ 	log_run_file("file2");
+ 	check_log_entries_extra();
+ 
+@@ -207,7 +200,6 @@ int log_test_level(struct unit_test_state *uts)
+ 	filt = log_add_filter("console", NULL, LOGL_WARNING, NULL);
+ 	ut_assert(filt >= 0);
+ 
+-	ut_assertok(console_record_reset_enable());
+ 	log_run();
+ 	check_log_entries_flags_levels(EXPECT_LOG | EXPECT_DIRECT | EXPECT_FORCE,
+ 				       LOGL_FIRST, LOGL_WARNING);
+@@ -227,7 +219,6 @@ int log_test_double(struct unit_test_state *uts)
+ 	filt2 = log_add_filter("console", NULL, LOGL_MAX, NULL);
+ 	ut_assert(filt2 >= 0);
+ 
+-	ut_assertok(console_record_reset_enable());
+ 	log_run();
+ 	check_log_entries_extra();
+ 
+@@ -249,7 +240,6 @@ int log_test_triple(struct unit_test_state *uts)
+ 	filt3 = log_add_filter("console", NULL, LOGL_MAX, "log/log_test.c");
+ 	ut_assert(filt3 >= 0);
+ 
+-	ut_assertok(console_record_reset_enable());
+ 	log_run_file("file2");
+ 	check_log_entries_extra();
+ 
+@@ -264,7 +254,6 @@ int do_log_test_helpers(struct unit_test_state *uts)
  {
- 	env_set("env_foo", "bar");
--	console_record_reset_enable();
+ 	int i;
  
- 	ut_assertok(run_command("echo $env_foo", 0));
- 	ut_assert_nextline("bar");
-@@ -154,12 +152,10 @@ static int hush_test_env_dollar(struct unit_test_state *uts)
+-	ut_assertok(console_record_reset_enable());
+ 	log_err("level %d\n", LOGL_EMERG);
+ 	log_err("level %d\n", LOGL_ALERT);
+ 	log_err("level %d\n", LOGL_CRIT);
+@@ -296,7 +285,6 @@ LOG_TEST_FLAGS(log_test_helpers, UTF_CONSOLE);
  
- 	return 0;
- }
--HUSH_TEST(hush_test_env_dollar, 0);
-+HUSH_TEST(hush_test_env_dollar, UTF_CONSOLE);
- 
- static int hush_test_command_dollar(struct unit_test_state *uts)
+ int do_log_test_disable(struct unit_test_state *uts)
  {
--	console_record_reset_enable();
+-	ut_assertok(console_record_reset_enable());
+ 	log_err("default\n");
+ 	ut_assert_nextline("%*s() default", CONFIG_LOGF_FUNC_PAD, __func__);
+ 
+@@ -335,7 +323,6 @@ int log_test_cat_deny(struct unit_test_state *uts)
+ 				     LOGFF_DENY);
+ 	ut_assert(filt2 >= 0);
+ 
+-	ut_assertok(console_record_reset_enable());
+ 	log_run_cat(UCLASS_SPI);
+ 	check_log_entries_none();
+ 
+@@ -356,7 +343,6 @@ int log_test_file_deny(struct unit_test_state *uts)
+ 				     LOGFF_DENY);
+ 	ut_assert(filt2 >= 0);
+ 
+-	ut_assertok(console_record_reset_enable());
+ 	log_run_file("file");
+ 	check_log_entries_none();
+ 
+@@ -377,7 +363,6 @@ int log_test_level_deny(struct unit_test_state *uts)
+ 				     LOGFF_DENY);
+ 	ut_assert(filt2 >= 0);
+ 
+-	ut_assertok(console_record_reset_enable());
+ 	log_run();
+ 	check_log_entries_flags_levels(EXPECT_LOG | EXPECT_DIRECT | EXPECT_FORCE,
+ 				       LOGL_WARNING + 1,
+@@ -401,7 +386,6 @@ int log_test_min(struct unit_test_state *uts)
+ 				     LOGFF_DENY | LOGFF_LEVEL_MIN);
+ 	ut_assert(filt2 >= 0);
+ 
+-	ut_assertok(console_record_reset_enable());
+ 	log_run();
+ 	check_log_entries_flags_levels(EXPECT_LOG | EXPECT_DIRECT | EXPECT_FORCE,
+ 				       LOGL_WARNING, LOGL_INFO - 1);
+@@ -419,8 +403,6 @@ int log_test_dropped(struct unit_test_state *uts)
+ 	gd->flags &= ~(GD_FLG_LOG_READY);
+ 	gd->log_drop_count = 0;
+ 
+-	ut_assertok(console_record_reset_enable());
 -
- 	ut_assertok(run_command("dollar_bar=\"echo bar\"", 0));
+ 	log_run();
+ 	ut_asserteq(2 * (LOGL_COUNT - LOGL_FIRST) +
+ 		    _LOG_MAX_LEVEL - LOGL_FIRST + 1,
+@@ -446,7 +428,6 @@ int log_test_buffer(struct unit_test_state *uts)
+ 	for (i = 0; i < 0x11; i++)
+ 		buf[i] = i * 0x11;
  
- 	ut_assertok(run_command("$dollar_bar", 0));
-@@ -222,4 +218,4 @@ static int hush_test_command_dollar(struct unit_test_state *uts)
+-	ut_assertok(console_record_reset_enable());
+ 	log_buffer(LOGC_BOOT, LOGL_INFO, 0, buf, 1, 0x12, 0);
  
- 	return 0;
- }
--HUSH_TEST(hush_test_command_dollar, 0);
-+HUSH_TEST(hush_test_command_dollar, UTF_CONSOLE);
-diff --git a/test/hush/loop.c b/test/hush/loop.c
-index d734abf136d..a9b6a8edf24 100644
---- a/test/hush/loop.c
-+++ b/test/hush/loop.c
-@@ -14,8 +14,6 @@ DECLARE_GLOBAL_DATA_PTR;
+ 	/* This one should product no output due to the debug level */
+diff --git a/test/log/nolog_ndebug.c b/test/log/nolog_ndebug.c
+index b714a16d2e7..d33359d59b7 100644
+--- a/test/log/nolog_ndebug.c
++++ b/test/log/nolog_ndebug.c
+@@ -21,7 +21,6 @@ static int log_test_log_disabled_ndebug(struct unit_test_state *uts)
+ 	int i;
  
- static int hush_test_for(struct unit_test_state *uts)
- {
+ 	memset(buf, 0, BUFFSIZE);
 -	console_record_reset_enable();
--
- 	ut_assertok(run_command("for loop_i in foo bar quux quux; do echo $loop_i; done", 0));
- 	ut_assert_nextline("foo");
- 	ut_assert_nextline("bar");
-@@ -32,12 +30,10 @@ static int hush_test_for(struct unit_test_state *uts)
  
- 	return 0;
- }
--HUSH_TEST(hush_test_for, 0);
-+HUSH_TEST(hush_test_for, UTF_CONSOLE);
+ 	/* Output a log record at every level */
+ 	for (i = LOGL_EMERG; i < LOGL_COUNT; i++)
+diff --git a/test/log/nolog_test.c b/test/log/nolog_test.c
+index c4c0fa6cf81..e9cfea99026 100644
+--- a/test/log/nolog_test.c
++++ b/test/log/nolog_test.c
+@@ -25,7 +25,6 @@ static int log_test_nolog_err(struct unit_test_state *uts)
+ 	char buf[BUFFSIZE];
  
- static int hush_test_while(struct unit_test_state *uts)
- {
+ 	memset(buf, 0, BUFFSIZE);
 -	console_record_reset_enable();
--
- 	if (gd->flags & GD_FLG_HUSH_MODERN_PARSER) {
- 		/*
- 		 * Hush 2021 always returns 0 from while loop...
-@@ -65,11 +61,10 @@ static int hush_test_while(struct unit_test_state *uts)
+ 	log_err("testing %s\n", "log_err");
+ 	gd->flags &= ~GD_FLG_RECORD;
+ 	ut_assertok(ut_check_console_line(uts, "testing log_err"));
+@@ -39,7 +38,6 @@ static int log_test_nolog_warning(struct unit_test_state *uts)
+ 	char buf[BUFFSIZE];
  
- 	return 0;
- }
--HUSH_TEST(hush_test_while, 0);
-+HUSH_TEST(hush_test_while, UTF_CONSOLE);
- 
- static int hush_test_until(struct unit_test_state *uts)
- {
+ 	memset(buf, 0, BUFFSIZE);
 -	console_record_reset_enable();
- 	env_set("loop_bar", "bar");
+ 	log_warning("testing %s\n", "log_warning");
+ 	gd->flags &= ~GD_FLG_RECORD;
+ 	ut_assertok(ut_check_console_line(uts, "testing log_warning"));
+@@ -53,7 +51,6 @@ static int log_test_nolog_notice(struct unit_test_state *uts)
+ 	char buf[BUFFSIZE];
  
- 	/*
-@@ -87,4 +82,4 @@ static int hush_test_until(struct unit_test_state *uts)
- 	env_set("loop_bar", NULL);
- 	return 0;
- }
--HUSH_TEST(hush_test_until, 0);
-+HUSH_TEST(hush_test_until, UTF_CONSOLE);
+ 	memset(buf, 0, BUFFSIZE);
+-	console_record_reset_enable();
+ 	log_notice("testing %s\n", "log_notice");
+ 	gd->flags &= ~GD_FLG_RECORD;
+ 	ut_assertok(ut_check_console_line(uts, "testing log_notice"));
+@@ -67,7 +64,6 @@ static int log_test_nolog_info(struct unit_test_state *uts)
+ 	char buf[BUFFSIZE];
+ 
+ 	memset(buf, 0, BUFFSIZE);
+-	console_record_reset_enable();
+ 	log_err("testing %s\n", "log_info");
+ 	gd->flags &= ~GD_FLG_RECORD;
+ 	ut_assertok(ut_check_console_line(uts, "testing log_info"));
+@@ -83,7 +79,6 @@ static int nolog_test_nodebug(struct unit_test_state *uts)
+ 	char buf[BUFFSIZE];
+ 
+ 	memset(buf, 0, BUFFSIZE);
+-	console_record_reset_enable();
+ 	debug("testing %s\n", "debug");
+ 	gd->flags &= ~GD_FLG_RECORD;
+ 	ut_assertok(ut_check_console_end(uts));
+@@ -96,7 +91,6 @@ static int log_test_nolog_nodebug(struct unit_test_state *uts)
+ 	char buf[BUFFSIZE];
+ 
+ 	memset(buf, 0, BUFFSIZE);
+-	console_record_reset_enable();
+ 	log_debug("testing %s\n", "log_debug");
+ 	gd->flags &= ~GD_FLG_RECORD;
+ 	ut_assert(!strcmp(buf, ""));
+@@ -112,7 +106,6 @@ static int nolog_test_debug(struct unit_test_state *uts)
+ 	char buf[BUFFSIZE];
+ 
+ 	memset(buf, 0, BUFFSIZE);
+-	console_record_reset_enable();
+ 	debug("testing %s\n", "debug");
+ 	gd->flags &= ~GD_FLG_RECORD;
+ 	ut_assertok(ut_check_console_line(uts, "testing debug"));
+@@ -126,7 +119,6 @@ static int log_test_nolog_debug(struct unit_test_state *uts)
+ 	char buf[BUFFSIZE];
+ 
+ 	memset(buf, 0, BUFFSIZE);
+-	console_record_reset_enable();
+ 	log_debug("testing %s\n", "log_debug");
+ 	log(LOGC_NONE, LOGL_DEBUG, "more %s\n", "log_debug");
+ 	gd->flags &= ~GD_FLG_RECORD;
+diff --git a/test/log/pr_cont_test.c b/test/log/pr_cont_test.c
+index 30f30d98fe1..467ecf28601 100644
+--- a/test/log/pr_cont_test.c
++++ b/test/log/pr_cont_test.c
+@@ -28,7 +28,6 @@ static int log_test_pr_cont(struct unit_test_state *uts)
+ 	/* Write two messages, the second continuing the first */
+ 	gd->log_fmt = BIT(LOGF_MSG);
+ 	gd->default_log_level = LOGL_INFO;
+-	console_record_reset_enable();
+ 	pr_err("ea%d ", 1);
+ 	pr_cont("cc%d\n", 2);
+ 	gd->default_log_level = log_level;
 -- 
 2.34.1
 
