@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88DEEC3DA7F
-	for <u-boot@archiver.kernel.org>; Sat, 10 Aug 2024 20:54:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D4F5C3DA7F
+	for <u-boot@archiver.kernel.org>; Sat, 10 Aug 2024 20:54:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42F768895D;
+	by phobos.denx.de (Postfix) with ESMTP id A32FD889C3;
 	Sat, 10 Aug 2024 22:52:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lPhs8GrB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IsRL0N2k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACADB88960; Sat, 10 Aug 2024 22:52:40 +0200 (CEST)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id EADE588709; Sat, 10 Aug 2024 22:52:40 +0200 (CEST)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C515E88709
- for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 22:52:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BC7678890D
+ for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 22:52:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-81f96eaa02aso150242239f.2
- for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 13:52:32 -0700 (PDT)
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-81f94ce2272so121551339f.2
+ for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 13:52:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723323151; x=1723927951; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723323152; x=1723927952; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0njl8yqJX01Yq+s/niiQGUvL86siz333V5iJssWIWjI=;
- b=lPhs8GrB0jWezLbm2rtHncACYUSYOnREYd/FTQU+d9Kc/1xmRsLehQjmJ26CXmrVQb
- WqA9NqZkacwe+YQ1NLPffQzfuFj4pWwzvK/C8rpozrIXz3XkdPb1M4dMM4FMOdulkmyG
- GEnsDIsxbsFMaDH6om6x0MMmKEt/vFVwutY64=
+ bh=CM1xwYayrIT8T1MX3HFybzlIHBSymDo60/2zwcNXqSQ=;
+ b=IsRL0N2kTYXkuRicIec4FmU3HzwEbMDErEwpfGDcn8Qv3wOpHHRBKyusbxCAkbGmBu
+ MiXNrUIDVPji4tKN8Bga6tG0qAukSOFLDbp/e8x4y+xqAcJGJjyrjVucfNaHroe3cD1t
+ IiSfTBcKTGGBWI8/sJ7IvmNJW2G5fDy1zDdEw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723323151; x=1723927951;
+ d=1e100.net; s=20230601; t=1723323152; x=1723927952;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0njl8yqJX01Yq+s/niiQGUvL86siz333V5iJssWIWjI=;
- b=s9W6BKg5dGOqAD+b9iGpUhsDiXphSg/YXjY30pVwWPIOZ5eMmjnTjSvPbyROmFpFjI
- Z4ugUdQ3EBT6IWokXopZHx9gpXziNdCg0ojyI6KSc5RDU5SKeYa7cz/cGhWswIqPowIk
- Dy+9gSQEOsYS5P/4jF2bFryT8zfXFxb4RZAnS1RVR4L86wczD4UEKM8HDbSJfzbkoqdE
- ReB3QyNWhvMrNR+J0wZprkR6yu+06ZHx844r37Uw/hdZKD55Otgtpb6f9p+nLYVdhyfm
- mSk+1+4ONzA3blxseB7zVjySL0MVU9nQdzkqJmEvEYGWpgv0I/K9IvgLOsjpx1rxSOD4
- XPAQ==
-X-Gm-Message-State: AOJu0YyhuEzxqgjfHg+NOf4oGAwqcJyWgaghoHhsT92a/4RYbvu96AUG
- gjiHKWG4sfD/6XgrtkhsFQwgZpQ7mhp5aA5Me7JlIuBXXjXsjA2cGvS+fF64YoSDk5lBRmegomw
+ bh=CM1xwYayrIT8T1MX3HFybzlIHBSymDo60/2zwcNXqSQ=;
+ b=ZISPziry10Gb6kxGWwuPiZKDoOj3CrdjVn7yL0t1VScqgnarUbzDRsgEhaeeSClDnY
+ F7uLYk6wMNeMvA7ytFf1Zn+X62e1yChv+DyUj7G2p1C+axbereq++Ici4sgZ/WXfADgi
+ EUvd77H6Nb1tvC0xky5Llft3tgyc/FCSfWPTJYFsOr0I2FJurB7AaBsoA9Zz7d6BxC1C
+ k4S6mzzAaI+E7qH76qP+Ingt3jm6B9O5cqIY73b68dYb3GlHJpAHykHhKDTF4BusTApx
+ OE0+9TVpUr204po55reO+66FjCPR6EddfnJXhLSgYwf14AZNYL+RZbQPoNM7fhs6n2ax
+ apkA==
+X-Gm-Message-State: AOJu0YwLh0NOPpzRoVi7STMv7g2fPaRYsB55ONcarNgd6a1lUaj+LFON
+ gFABgFfnNFteMHsbTov1sLFawK/ls0JVdrVZMwf2NlVKn2BVvC9xs1o+tPJHU2xQ6jtGyNwuCSs
  =
-X-Google-Smtp-Source: AGHT+IHCdfQiOB6f3J8vUgf6Yn698f0XEyAabF7fpu9dwo+M37neNO362i7sqN0/S7SBg8wdaLHVNg==
-X-Received: by 2002:a05:6602:2c82:b0:807:f0fb:11a2 with SMTP id
- ca18e2360f4ac-8225ee39362mr850167539f.13.1723323151317; 
- Sat, 10 Aug 2024 13:52:31 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGEwZ9GWe/UXCUSGUQTLkA2Bm7axtJDh2xhwAlceBvlLBeTk+h4eOSYNWayn0n9jbaMDiPy5w==
+X-Received: by 2002:a05:6602:6207:b0:822:6d2a:e52d with SMTP id
+ ca18e2360f4ac-8226d2ae6ffmr238151239f.1.1723323152241; 
+ Sat, 10 Aug 2024 13:52:32 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-82266f56333sm82893139f.0.2024.08.10.13.52.30
+ ca18e2360f4ac-82266f56333sm82893139f.0.2024.08.10.13.52.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 Aug 2024 13:52:30 -0700 (PDT)
+ Sat, 10 Aug 2024 13:52:31 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Jerry Van Baren <vanbaren@cideas.com>, Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH 12/21] test: fdt: Check internal-function return values
-Date: Sat, 10 Aug 2024 14:51:56 -0600
-Message-Id: <20240810205205.3403177-13-sjg@chromium.org>
+Subject: [PATCH 13/21] test: fdt: Move common code into the setup functions
+Date: Sat, 10 Aug 2024 14:51:57 -0600
+Message-Id: <20240810205205.3403177-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240810205205.3403177-1-sjg@chromium.org>
 References: <20240810205205.3403177-1-sjg@chromium.org>
@@ -89,288 +89,274 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some functions are using asserts but the result of the functions
-themselves is not checked. This means that if a test fails, the result
-is not noticed until later, which can be confusing to debug.
+Quite a lot of tests have the same two lines of code at the start. Move
+this into the two setup functions to reduce redundancy.
 
-Add the missing asserts.
+Add a line to check the output from set_working_fdt_addr() since this is
+always emitted.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/cmd/fdt.c | 153 +++++++++++++++++++++++++++++--------------------
- 1 file changed, 90 insertions(+), 63 deletions(-)
+ test/cmd/fdt.c | 92 +++++++++++++++++++++-----------------------------
+ 1 file changed, 39 insertions(+), 53 deletions(-)
 
 diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
-index 721345f0288..35d9e84c3d1 100644
+index 35d9e84c3d1..d7b96bc5725 100644
 --- a/test/cmd/fdt.c
 +++ b/test/cmd/fdt.c
-@@ -459,11 +459,10 @@ static int fdt_test_get_value_string(struct unit_test_state *uts,
- 	ut_assertok(console_record_reset_enable());
- 	ut_assertok(run_commandf("fdt get value var %s %s %s",
- 				 node, prop, idx ? : ""));
--	if (strres) {
-+	if (strres)
- 		ut_asserteq_str(strres, env_get("var"));
--	} else {
-+	else
- 		ut_asserteq(intres, env_get_hex("var", 0x1234));
--	}
- 	ut_assertok(ut_check_console_end(uts));
- 
- 	return 0;
-@@ -473,16 +472,20 @@ static int fdt_test_get_value_common(struct unit_test_state *uts,
- 				     const char *node)
+@@ -28,35 +28,49 @@ DECLARE_GLOBAL_DATA_PTR;
+ /**
+  * make_test_fdt() - Create an FDT with just a root node
+  *
+- * The size is set to the minimum needed
++ * The size is set to the minimum needed. This also sets the working FDT and
++ * checks that the expected output is received from doing so.
+  *
+  * @uts: Test state
+  * @fdt: Place to write FDT
+  * @size: Maximum size of space for fdt
++ * @addrp: Returns address of the devicetree
+  */
+-static int make_test_fdt(struct unit_test_state *uts, void *fdt, int size)
++static int make_test_fdt(struct unit_test_state *uts, void *fdt, int size,
++			 ulong *addrp)
  {
- 	/* Test getting default element of $node node clock-names property */
--	fdt_test_get_value_string(uts, node, "clock-names", NULL, "fixed", 0);
-+	ut_assertok(fdt_test_get_value_string(uts, node, "clock-names", NULL,
-+					      "fixed", 0));
++	ulong addr;
++
+ 	ut_assertok(fdt_create(fdt, size));
+ 	ut_assertok(fdt_finish_reservemap(fdt));
+ 	ut_assert(fdt_begin_node(fdt, "") >= 0);
+ 	ut_assertok(fdt_end_node(fdt));
+ 	ut_assertok(fdt_finish(fdt));
  
- 	/* Test getting 0th element of $node node clock-names property */
--	fdt_test_get_value_string(uts, node, "clock-names", "0", "fixed", 0);
-+	ut_assertok(fdt_test_get_value_string(uts, node, "clock-names", "0",
-+					      "fixed", 0));
++	addr = map_to_sysmem(fdt);
++	set_working_fdt_addr(addr);
++	ut_assert_nextline("Working FDT set to %lx", addr);
++	*addrp = addr;
++
+ 	return 0;
+ }
  
- 	/* Test getting 1st element of $node node clock-names property */
--	fdt_test_get_value_string(uts, node, "clock-names", "1", "i2c", 0);
-+	ut_assertok(fdt_test_get_value_string(uts, node, "clock-names", "1",
-+					      "i2c", 0));
- 
- 	/* Test getting 2nd element of $node node clock-names property */
--	fdt_test_get_value_string(uts, node, "clock-names", "2", "spi", 0);
-+	ut_assertok(fdt_test_get_value_string(uts, node, "clock-names", "2",
-+					      "spi", 0));
+ /**
+  * make_fuller_fdt() - Create an FDT with root node and properties
+  *
+- * The size is set to the minimum needed
++ * The size is set to the minimum needed. This also sets the working FDT and
++ * checks that the expected output is received from doing so.
+  *
+  * @uts: Test state
+  * @fdt: Place to write FDT
+  * @size: Maximum size of space for fdt
++ * @addrp: Returns address of the devicetree
+  */
+-static int make_fuller_fdt(struct unit_test_state *uts, void *fdt, int size)
++static int make_fuller_fdt(struct unit_test_state *uts, void *fdt, int size,
++			   ulong *addrp)
+ {
+ 	fdt32_t regs[2] = { cpu_to_fdt32(0x1234), cpu_to_fdt32(0x1000) };
++	ulong addr;
  
  	/*
- 	 * Test getting default element of $node node regs property.
-@@ -491,13 +494,16 @@ static int fdt_test_get_value_common(struct unit_test_state *uts,
- 	 * but only if the array is shorter than 40 characters. Anything
- 	 * longer is an error. This is a special case for handling hashes.
- 	 */
--	fdt_test_get_value_string(uts, node, "regs", NULL, "3412000000100000", 0);
-+	ut_assertok(fdt_test_get_value_string(uts, node, "regs", NULL,
-+					      "3412000000100000", 0));
+ 	 * Assemble the following DT for test purposes:
+@@ -138,6 +152,11 @@ static int make_fuller_fdt(struct unit_test_state *uts, void *fdt, int size)
+ 	ut_assertok(fdt_end_node(fdt));
+ 	ut_assertok(fdt_finish(fdt));
  
- 	/* Test getting 0th element of $node node regs property */
--	fdt_test_get_value_string(uts, node, "regs", "0", NULL, 0x1234);
-+	ut_assertok(fdt_test_get_value_string(uts, node, "regs", "0", NULL,
-+					      0x1234));
++	addr = map_to_sysmem(fdt);
++	set_working_fdt_addr(addr);
++	ut_assert_nextline("Working FDT set to %lx", addr);
++	*addrp = addr;
++
+ 	return 0;
+ }
  
- 	/* Test getting 1st element of $node node regs property */
--	fdt_test_get_value_string(uts, node, "regs", "1", NULL, 0x1000);
-+	ut_assertok(fdt_test_get_value_string(uts, node, "regs", "1", NULL,
-+					      0x1000));
+@@ -169,10 +188,7 @@ static int fdt_test_addr(struct unit_test_state *uts)
+ 	ut_assertok(ut_check_console_end(uts));
  
- 	/* Test missing 10th element of $node node clock-names property */
+ 	/* Set up a working FDT and try again */
+-	ut_assertok(make_test_fdt(uts, fdt, sizeof(fdt)));
+-	addr = map_to_sysmem(fdt);
+-	set_working_fdt_addr(addr);
+-	ut_assert_nextline("Working FDT set to %lx", addr);
++	ut_assertok(make_test_fdt(uts, fdt, sizeof(fdt), &addr));
+ 	ut_assertok(run_command("fdt addr", 0));
+ 	ut_assert_nextline("Working fdt: %08lx", (ulong)map_to_sysmem(fdt));
+ 	ut_assertok(ut_check_console_end(uts));
+@@ -222,9 +238,7 @@ static int fdt_test_addr_resize(struct unit_test_state *uts)
+ 	const int newsize = sizeof(fdt) / 2;
+ 	ulong addr;
+ 
+-	ut_assertok(make_test_fdt(uts, fdt, sizeof(fdt)));
+-	addr = map_to_sysmem(fdt);
+-	set_working_fdt_addr(addr);
++	ut_assertok(make_test_fdt(uts, fdt, sizeof(fdt), &addr));
+ 
+ 	/* Test setting and resizing the working FDT to a larger size */
  	ut_assertok(console_record_reset_enable());
-@@ -522,17 +528,13 @@ static int fdt_test_get_value(struct unit_test_state *uts)
- {
+@@ -258,10 +272,8 @@ static int fdt_test_move(struct unit_test_state *uts)
+ 	void *buf;
+ 
+ 	/* Original source DT */
+-	ut_assertok(make_test_fdt(uts, fdt, size));
++	ut_assertok(make_test_fdt(uts, fdt, size, &addr));
+ 	ts = fdt_totalsize(fdt);
+-	addr = map_to_sysmem(fdt);
+-	set_working_fdt_addr(addr);
+ 
+ 	/* Moved target DT location */
+ 	buf = map_sysmem(newaddr, size);
+@@ -291,11 +303,9 @@ static int fdt_test_resize(struct unit_test_state *uts)
+ 	ulong addr;
+ 
+ 	/* Original source DT */
+-	ut_assertok(make_test_fdt(uts, fdt, sizeof(fdt)));
++	ut_assertok(make_test_fdt(uts, fdt, sizeof(fdt), &addr));
+ 	fdt_shrink_to_minimum(fdt, 0);	/* Resize with 0 extra bytes */
+ 	ts = fdt_totalsize(fdt);
+-	addr = map_to_sysmem(fdt);
+-	set_working_fdt_addr(addr);
+ 
+ 	/* Test resizing the working FDT and verify the new space was added */
+ 	ut_assertok(console_record_reset_enable());
+@@ -393,9 +403,7 @@ static int fdt_test_print_list(struct unit_test_state *uts, bool print)
+ 	int ret;
+ 
+ 	/* Original source DT */
+-	ut_assertok(make_fuller_fdt(uts, fdt, sizeof(fdt)));
+-	addr = map_to_sysmem(fdt);
+-	set_working_fdt_addr(addr);
++	ut_assertok(make_fuller_fdt(uts, fdt, sizeof(fdt), &addr));
+ 
+ 	/* Test printing/listing the working FDT -- node / */
+ 	ut_assertok(console_record_reset_enable());
+@@ -529,9 +537,7 @@ static int fdt_test_get_value(struct unit_test_state *uts)
  	char fdt[4096];
  	ulong addr;
--	int ret;
  
- 	ut_assertok(make_fuller_fdt(uts, fdt, sizeof(fdt)));
- 	addr = map_to_sysmem(fdt);
- 	set_working_fdt_addr(addr);
+-	ut_assertok(make_fuller_fdt(uts, fdt, sizeof(fdt)));
+-	addr = map_to_sysmem(fdt);
+-	set_working_fdt_addr(addr);
++	ut_assertok(make_fuller_fdt(uts, fdt, sizeof(fdt), &addr));
  
--	ret = fdt_test_get_value_common(uts, "/test-node@1234");
--	if (!ret)
--		ret = fdt_test_get_value_common(uts, "testnodealias");
--	if (ret)
--		return ret;
-+	ut_assertok(fdt_test_get_value_common(uts, "/test-node@1234"));
-+	ut_assertok(fdt_test_get_value_common(uts, "testnodealias"));
+ 	ut_assertok(fdt_test_get_value_common(uts, "/test-node@1234"));
+ 	ut_assertok(fdt_test_get_value_common(uts, "testnodealias"));
+@@ -563,9 +569,7 @@ static int fdt_test_get_name(struct unit_test_state *uts)
+ 	char fdt[4096];
+ 	ulong addr;
  
- 	/* Test getting default element of /nonexistent node */
+-	ut_assertok(make_fuller_fdt(uts, fdt, sizeof(fdt)));
+-	addr = map_to_sysmem(fdt);
+-	set_working_fdt_addr(addr);
++	ut_assertok(make_fuller_fdt(uts, fdt, sizeof(fdt), &addr));
+ 
+ 	/* Test getting name of node 0 in /, which is /aliases node */
  	ut_assertok(console_record_reset_enable());
-@@ -668,23 +670,31 @@ static int fdt_test_get_addr(struct unit_test_state *uts)
- 	set_working_fdt_addr(addr);
+@@ -665,9 +669,7 @@ static int fdt_test_get_addr(struct unit_test_state *uts)
+ 	char fdt[4096];
+ 	ulong addr;
+ 
+-	ut_assertok(make_fuller_fdt(uts, fdt, sizeof(fdt)));
+-	addr = map_to_sysmem(fdt);
+-	set_working_fdt_addr(addr);
++	ut_assertok(make_fuller_fdt(uts, fdt, sizeof(fdt), &addr));
  
  	/* Test getting address of root node / string property "compatible" */
--	fdt_test_get_addr_common(uts, fdt, "/", "compatible");
-+	ut_assertok(fdt_test_get_addr_common(uts, fdt, "/", "compatible"));
+ 	ut_assertok(fdt_test_get_addr_common(uts, fdt, "/", "compatible"));
+@@ -733,9 +735,7 @@ static int fdt_test_get_size(struct unit_test_state *uts)
+ 	char fdt[4096];
+ 	ulong addr;
  
- 	/* Test getting address of node /test-node@1234 stringlist property "clock-names" */
--	fdt_test_get_addr_common(uts, fdt, "/test-node@1234", "clock-names");
--	fdt_test_get_addr_common(uts, fdt, "testnodealias", "clock-names");
-+	ut_assertok(fdt_test_get_addr_common(uts, fdt, "/test-node@1234",
-+					     "clock-names"));
-+	ut_assertok(fdt_test_get_addr_common(uts, fdt, "testnodealias",
-+					     "clock-names"));
- 
- 	/* Test getting address of node /test-node@1234 u32 property "clock-frequency" */
--	fdt_test_get_addr_common(uts, fdt, "/test-node@1234", "clock-frequency");
--	fdt_test_get_addr_common(uts, fdt, "testnodealias", "clock-frequency");
-+	ut_assertok(fdt_test_get_addr_common(uts, fdt, "/test-node@1234",
-+					     "clock-frequency"));
-+	ut_assertok(fdt_test_get_addr_common(uts, fdt, "testnodealias",
-+					     "clock-frequency"));
- 
- 	/* Test getting address of node /test-node@1234 empty property "u-boot,empty-property" */
--	fdt_test_get_addr_common(uts, fdt, "/test-node@1234", "u-boot,empty-property");
--	fdt_test_get_addr_common(uts, fdt, "testnodealias", "u-boot,empty-property");
-+	ut_assertok(fdt_test_get_addr_common(uts, fdt, "/test-node@1234",
-+					     "u-boot,empty-property"));
-+	ut_assertok(fdt_test_get_addr_common(uts, fdt, "testnodealias",
-+					     "u-boot,empty-property"));
- 
- 	/* Test getting address of node /test-node@1234 array property "regs" */
--	fdt_test_get_addr_common(uts, fdt, "/test-node@1234", "regs");
--	fdt_test_get_addr_common(uts, fdt, "testnodealias", "regs");
-+	ut_assertok(fdt_test_get_addr_common(uts, fdt, "/test-node@1234",
-+					     "regs"));
-+	ut_assertok(fdt_test_get_addr_common(uts, fdt, "testnodealias",
-+					     "regs"));
- 
- 	/* Test getting address of node /test-node@1234/subnode non-existent property "noprop" */
- 	ut_assertok(console_record_reset_enable());
-@@ -728,30 +738,38 @@ static int fdt_test_get_size(struct unit_test_state *uts)
- 	set_working_fdt_addr(addr);
+-	ut_assertok(make_fuller_fdt(uts, fdt, sizeof(fdt)));
+-	addr = map_to_sysmem(fdt);
+-	set_working_fdt_addr(addr);
++	ut_assertok(make_fuller_fdt(uts, fdt, sizeof(fdt), &addr));
  
  	/* Test getting size of root node / string property "compatible" */
--	fdt_test_get_size_common(uts, "/", "compatible", 16);
-+	ut_assertok(fdt_test_get_size_common(uts, "/", "compatible", 16));
+ 	ut_assertok(fdt_test_get_size_common(uts, "/", "compatible", 16));
+@@ -908,10 +908,8 @@ static int fdt_test_set(struct unit_test_state *uts)
+ 	char fdt[8192];
+ 	ulong addr;
  
- 	/* Test getting size of node /test-node@1234 stringlist property "clock-names" */
--	fdt_test_get_size_common(uts, "/test-node@1234", "clock-names", 26);
--	fdt_test_get_size_common(uts, "testnodealias", "clock-names", 26);
-+	ut_assertok(fdt_test_get_size_common(uts, "/test-node@1234",
-+					     "clock-names", 26));
-+	ut_assertok(fdt_test_get_size_common(uts, "testnodealias",
-+					     "clock-names", 26));
- 
- 	/* Test getting size of node /test-node@1234 u32 property "clock-frequency" */
--	fdt_test_get_size_common(uts, "/test-node@1234", "clock-frequency", 4);
--	fdt_test_get_size_common(uts, "testnodealias", "clock-frequency", 4);
-+	ut_assertok(fdt_test_get_size_common(uts, "/test-node@1234",
-+					     "clock-frequency", 4));
-+	ut_assertok(fdt_test_get_size_common(uts, "testnodealias",
-+					     "clock-frequency", 4));
- 
- 	/* Test getting size of node /test-node@1234 empty property "u-boot,empty-property" */
--	fdt_test_get_size_common(uts, "/test-node@1234", "u-boot,empty-property", 0);
--	fdt_test_get_size_common(uts, "testnodealias", "u-boot,empty-property", 0);
-+	ut_assertok(fdt_test_get_size_common(uts, "/test-node@1234",
-+					     "u-boot,empty-property", 0));
-+	ut_assertok(fdt_test_get_size_common(uts, "testnodealias",
-+					     "u-boot,empty-property", 0));
- 
- 	/* Test getting size of node /test-node@1234 array property "regs" */
--	fdt_test_get_size_common(uts, "/test-node@1234", "regs", 8);
--	fdt_test_get_size_common(uts, "testnodealias", "regs", 8);
-+	ut_assertok(fdt_test_get_size_common(uts, "/test-node@1234", "regs",
-+					     8));
-+	ut_assertok(fdt_test_get_size_common(uts, "testnodealias", "regs", 8));
- 
- 	/* Test getting node count of node / */
--	fdt_test_get_size_common(uts, "/", NULL, 2);
-+	ut_assertok(fdt_test_get_size_common(uts, "/", NULL, 2));
- 
- 	/* Test getting node count of node /test-node@1234/subnode */
--	fdt_test_get_size_common(uts, "/test-node@1234/subnode", NULL, 0);
--	fdt_test_get_size_common(uts, "subnodealias", NULL, 0);
-+	ut_assertok(fdt_test_get_size_common(uts, "/test-node@1234/subnode",
-+					     NULL, 0));
-+	ut_assertok(fdt_test_get_size_common(uts, "subnodealias", NULL, 0));
- 
- 	/* Test getting size of node /test-node@1234/subnode non-existent property "noprop" */
- 	ut_assertok(console_record_reset_enable());
-@@ -873,14 +891,14 @@ static int fdt_test_set_multi(struct unit_test_state *uts,
- static int fdt_test_set_node(struct unit_test_state *uts,
- 			     const char *path, const char *prop)
- {
--	fdt_test_set_single(uts, path, prop, "new", 0, false);
--	fdt_test_set_single(uts, path, prop, "rewrite", 0, false);
--	fdt_test_set_single(uts, path, prop, NULL, 42, true);
--	fdt_test_set_single(uts, path, prop, NULL, 0, false);
--	fdt_test_set_multi(uts, path, prop, NULL, NULL, 42, 1701);
--	fdt_test_set_multi(uts, path, prop, NULL, NULL, 74656, 9);
--	fdt_test_set_multi(uts, path, prop, "42", "1701", 0, 0);
--	fdt_test_set_multi(uts, path, prop, "74656", "9", 0, 0);
-+	ut_assertok(fdt_test_set_single(uts, path, prop, "new", 0, false));
-+	ut_assertok(fdt_test_set_single(uts, path, prop, "rewrite", 0, false));
-+	ut_assertok(fdt_test_set_single(uts, path, prop, NULL, 42, true));
-+	ut_assertok(fdt_test_set_single(uts, path, prop, NULL, 0, false));
-+	ut_assertok(fdt_test_set_multi(uts, path, prop, NULL, NULL, 42, 1701));
-+	ut_assertok(fdt_test_set_multi(uts, path, prop, NULL, NULL, 74656, 9));
-+	ut_assertok(fdt_test_set_multi(uts, path, prop, "42", "1701", 0, 0));
-+	ut_assertok(fdt_test_set_multi(uts, path, prop, "74656", "9", 0, 0));
- 
- 	return 0;
- }
-@@ -896,18 +914,20 @@ static int fdt_test_set(struct unit_test_state *uts)
- 	set_working_fdt_addr(addr);
+-	ut_assertok(make_fuller_fdt(uts, fdt, sizeof(fdt)));
++	ut_assertok(make_fuller_fdt(uts, fdt, sizeof(fdt), &addr));
+ 	fdt_shrink_to_minimum(fdt, 4096);	/* Resize with 4096 extra bytes */
+-	addr = map_to_sysmem(fdt);
+-	set_working_fdt_addr(addr);
  
  	/* Test setting of root node / existing property "compatible" */
--	fdt_test_set_node(uts, "/", "compatible");
-+	ut_assertok(fdt_test_set_node(uts, "/", "compatible"));
+ 	ut_assertok(fdt_test_set_node(uts, "/", "compatible"));
+@@ -956,10 +954,8 @@ static int fdt_test_mknode(struct unit_test_state *uts)
+ 	char fdt[8192];
+ 	ulong addr;
  
- 	/* Test setting of root node / new property "newproperty" */
--	fdt_test_set_node(uts, "/", "newproperty");
-+	ut_assertok(fdt_test_set_node(uts, "/", "newproperty"));
+-	ut_assertok(make_fuller_fdt(uts, fdt, sizeof(fdt)));
++	ut_assertok(make_fuller_fdt(uts, fdt, sizeof(fdt), &addr));
+ 	fdt_shrink_to_minimum(fdt, 4096);	/* Resize with 4096 extra bytes */
+-	addr = map_to_sysmem(fdt);
+-	set_working_fdt_addr(addr);
  
- 	/* Test setting of subnode existing property "compatible" */
--	fdt_test_set_node(uts, "/test-node@1234/subnode", "compatible");
--	fdt_test_set_node(uts, "subnodealias", "compatible");
-+	ut_assertok(fdt_test_set_node(uts, "/test-node@1234/subnode",
-+				      "compatible"));
-+	ut_assertok(fdt_test_set_node(uts, "subnodealias", "compatible"));
- 
- 	/* Test setting of subnode new property "newproperty" */
--	fdt_test_set_node(uts, "/test-node@1234/subnode", "newproperty");
--	fdt_test_set_node(uts, "subnodealias", "newproperty");
-+	ut_assertok(fdt_test_set_node(uts, "/test-node@1234/subnode",
-+				      "newproperty"));
-+	ut_assertok(fdt_test_set_node(uts, "subnodealias", "newproperty"));
- 
- 	/* Test setting property of non-existent node */
+ 	/* Test creation of new node in / */
  	ut_assertok(console_record_reset_enable());
-@@ -1160,16 +1180,23 @@ static int fdt_test_header(struct unit_test_state *uts)
- 	ut_assertok(ut_check_console_end(uts));
+@@ -1024,9 +1020,7 @@ static int fdt_test_rm(struct unit_test_state *uts)
+ 	char fdt[4096];
+ 	ulong addr;
  
- 	/* Test header get */
--	fdt_test_header_get(uts, "magic", fdt_magic(fdt));
--	fdt_test_header_get(uts, "totalsize", fdt_totalsize(fdt));
--	fdt_test_header_get(uts, "off_dt_struct", fdt_off_dt_struct(fdt));
--	fdt_test_header_get(uts, "off_dt_strings", fdt_off_dt_strings(fdt));
--	fdt_test_header_get(uts, "off_mem_rsvmap", fdt_off_mem_rsvmap(fdt));
--	fdt_test_header_get(uts, "version", fdt_version(fdt));
--	fdt_test_header_get(uts, "last_comp_version", fdt_last_comp_version(fdt));
--	fdt_test_header_get(uts, "boot_cpuid_phys", fdt_boot_cpuid_phys(fdt));
--	fdt_test_header_get(uts, "size_dt_strings", fdt_size_dt_strings(fdt));
--	fdt_test_header_get(uts, "size_dt_struct", fdt_size_dt_struct(fdt));
-+	ut_assertok(fdt_test_header_get(uts, "magic", fdt_magic(fdt)));
-+	ut_assertok(fdt_test_header_get(uts, "totalsize", fdt_totalsize(fdt)));
-+	ut_assertok(fdt_test_header_get(uts, "off_dt_struct",
-+					fdt_off_dt_struct(fdt)));
-+	ut_assertok(fdt_test_header_get(uts, "off_dt_strings",
-+					fdt_off_dt_strings(fdt)));
-+	ut_assertok(fdt_test_header_get(uts, "off_mem_rsvmap",
-+					fdt_off_mem_rsvmap(fdt)));
-+	ut_assertok(fdt_test_header_get(uts, "version", fdt_version(fdt)));
-+	ut_assertok(fdt_test_header_get(uts, "last_comp_version",
-+					fdt_last_comp_version(fdt)));
-+	ut_assertok(fdt_test_header_get(uts, "boot_cpuid_phys",
-+					fdt_boot_cpuid_phys(fdt)));
-+	ut_assertok(fdt_test_header_get(uts, "size_dt_strings",
-+					fdt_size_dt_strings(fdt)));
-+	ut_assertok(fdt_test_header_get(uts, "size_dt_struct",
-+					fdt_size_dt_struct(fdt)));
+-	ut_assertok(make_fuller_fdt(uts, fdt, sizeof(fdt)));
+-	addr = map_to_sysmem(fdt);
+-	set_working_fdt_addr(addr);
++	ut_assertok(make_fuller_fdt(uts, fdt, sizeof(fdt), &addr));
  
- 	return 0;
- }
-@@ -1244,8 +1271,8 @@ static int fdt_test_memory(struct unit_test_state *uts)
- 	 * so far unsupported and fails because of simple_stroull() being
- 	 * 64bit tops in the 'fdt memory' command implementation.
- 	 */
--	fdt_test_memory_cells(uts, 1);
--	fdt_test_memory_cells(uts, 2);
-+	ut_assertok(fdt_test_memory_cells(uts, 1));
-+	ut_assertok(fdt_test_memory_cells(uts, 2));
+ 	/* Test removal of property in root node / */
+ 	ut_assertok(console_record_reset_enable());
+@@ -1109,9 +1103,7 @@ static int fdt_test_bootcpu(struct unit_test_state *uts)
+ 	ulong addr;
+ 	int i;
  
- 	/*
- 	 * The 'fdt memory' command is limited to /memory node, it does
+-	ut_assertok(make_test_fdt(uts, fdt, sizeof(fdt)));
+-	addr = map_to_sysmem(fdt);
+-	set_working_fdt_addr(addr);
++	ut_assertok(make_test_fdt(uts, fdt, sizeof(fdt), &addr));
+ 
+ 	/* Test getting default bootcpu entry */
+ 	ut_assertok(console_record_reset_enable());
+@@ -1158,9 +1150,7 @@ static int fdt_test_header(struct unit_test_state *uts)
+ 	char fdt[256];
+ 	ulong addr;
+ 
+-	ut_assertok(make_test_fdt(uts, fdt, sizeof(fdt)));
+-	addr = map_to_sysmem(fdt);
+-	set_working_fdt_addr(addr);
++	ut_assertok(make_test_fdt(uts, fdt, sizeof(fdt), &addr));
+ 
+ 	/* Test header print */
+ 	ut_assertok(console_record_reset_enable());
+@@ -1290,12 +1280,10 @@ static int fdt_test_rsvmem(struct unit_test_state *uts)
+ 	char fdt[8192];
+ 	ulong addr;
+ 
+-	ut_assertok(make_test_fdt(uts, fdt, sizeof(fdt)));
++	ut_assertok(make_test_fdt(uts, fdt, sizeof(fdt), &addr));
+ 	fdt_shrink_to_minimum(fdt, 4096);	/* Resize with 4096 extra bytes */
+ 	fdt_add_mem_rsv(fdt, 0x42, 0x1701);
+ 	fdt_add_mem_rsv(fdt, 0x74656, 0x9);
+-	addr = map_to_sysmem(fdt);
+-	set_working_fdt_addr(addr);
+ 
+ 	/* Test default reserved memory node presence */
+ 	ut_assertok(console_record_reset_enable());
+@@ -1354,10 +1342,8 @@ static int fdt_test_chosen(struct unit_test_state *uts)
+ 	char fdt[8192];
+ 	ulong addr;
+ 
+-	ut_assertok(make_test_fdt(uts, fdt, sizeof(fdt)));
++	ut_assertok(make_test_fdt(uts, fdt, sizeof(fdt), &addr));
+ 	fdt_shrink_to_minimum(fdt, 4096);	/* Resize with 4096 extra bytes */
+-	addr = map_to_sysmem(fdt);
+-	set_working_fdt_addr(addr);
+ 
+ 	/* Test default chosen node presence, fail as there is no /chosen node */
+ 	ut_assertok(console_record_reset_enable());
 -- 
 2.34.1
 
