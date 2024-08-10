@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E32A5C3DA7F
-	for <u-boot@archiver.kernel.org>; Sat, 10 Aug 2024 13:59:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D029C3DA7F
+	for <u-boot@archiver.kernel.org>; Sat, 10 Aug 2024 18:25:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A0828870B;
-	Sat, 10 Aug 2024 15:59:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6B9D48870B;
+	Sat, 10 Aug 2024 20:25:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cSH4LVcS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hEJa2bF6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F621887E8; Sat, 10 Aug 2024 15:59:50 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id 3142588755; Sat, 10 Aug 2024 20:25:44 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E89C688327
- for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 15:59:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 141AF88709
+ for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 20:25:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6b7a3773a95so16721146d6.2
- for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 06:59:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-709345dd01dso1883554a34.0
+ for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 11:25:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723298387; x=1723903187; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=kZHV4LCFZT8c6Y+lq7Hg6pD9bv1nqY8tOaoUwSAyHHA=;
- b=cSH4LVcSuBvfhIFtCRXFQCBvxdfysdYcgchfk5VciBidIdGknGR+ZjUgA/J4y6yPOI
- MFBIOCnasOrLaATYAas5vn0gS6r2GyN7OpLPIfrPe4qVImmffU5y9JEfRtETKywJ8ffN
- lcS3dKwgiJMJ8NGsMAYCin8lrd7KYCqSt0h7QpVOpMSQjdtzAwUQzswIP6EZ8iEjI5Lk
- g3LxC0Qbdx0gmMzXmPHHOSDH6idRQsbR6gte4KQsOCWeFXGC1Kg510TH9v9CiDmDzZVL
- r7YlVm4WBANh9bFOXTUjYbwwrMsdfMi9SsNrU32oM5Up+iogWGjP5MXA8uV6maqHQiYg
- nvcA==
+ d=konsulko.com; s=google; t=1723314340; x=1723919140; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cnyea/X+jK64pXckNi+hVyyOIjZlAYuX/XtWJWSGrzo=;
+ b=hEJa2bF6zHRu580E3HEoiQf1r1YTn3iHrErVQn98Jjotlt8op4/SMEJz4gT9YDtheb
+ x4geel7cekWP0mb8eSwn2OdA3WqzVmEmZI3de/udwC4WuaUb3B+t5LqerEOA9DE4I5DB
+ K6g6WHZnMXmtaBXj0MI/JsCV6kdDhNr3NIqFU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723298387; x=1723903187;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=kZHV4LCFZT8c6Y+lq7Hg6pD9bv1nqY8tOaoUwSAyHHA=;
- b=bYF+BmeVx9C7q4aWcj4bBcSOrEmIGGmGp5hRPAuH2tvDQmNAYSfGUswOpK4hhi15rf
- dELzHyPVTGABpa5pd1Qnf7WIoOnm83D2y6xgY4Q4IKZlI1v25LXHe9fzhpaxRJzXRPmA
- ETkX5d3r4zycqp/XpPvpeyXOnkqV/F7HqAzs/E6eva/2UFLdE+XKogXSVlECcaZ6zZbV
- Ymsl99CPto6hRjJmXBbGoKPQyNTLq9Lmy9a336bnwrhpjNT9bQRj+hJgQ7oS992VSjda
- mTWGf7G4FNsqAFDCwzNbsDLdvZQ5rktKXWUUhkl07Y85/JGrZfsLEuv4CMI4IJcNSBbX
- HtOA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWfHLakVnyDEwnps+gMfYipHLIfR0bJNlg/k/uN9N08/DPRe6Vbk0oSnmuNmYCP6+1m3fj8XuQpRljy17JThxmAHYqYsg==
-X-Gm-Message-State: AOJu0YyVkR+KR9Pqjv9kIOKjanPi7gyOw0cyi8zJ8QXFBFMWcyPHUgVE
- NMQlUDyYGFYxAU1x5nf3Ts4m/yCgZQTH0z87hFCDQRkvTnhraRZ0awGq8g==
-X-Google-Smtp-Source: AGHT+IHySXc6OO1gY67Z2ct4u3obr1V2B4WjZB4GKrkZw/yMUXnui71XVwbHzFnRLbOXfIDfXpjh3Q==
-X-Received: by 2002:a05:6214:4985:b0:6b2:d69d:a2d7 with SMTP id
- 6a1803df08f44-6bd78e060d2mr48474026d6.19.1723298386596; 
- Sat, 10 Aug 2024 06:59:46 -0700 (PDT)
-Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- 6a1803df08f44-6bd82e67d2bsm7327006d6.133.2024.08.10.06.59.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 10 Aug 2024 06:59:46 -0700 (PDT)
-From: Sean Anderson <seanga2@gmail.com>
-To: Simon Glass <sjg@chromium.org>,
-	u-boot@lists.denx.de
-Cc: Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH] pinmux: generic: Use ENOENT instead of ENOSYS
-Date: Sat, 10 Aug 2024 09:59:37 -0400
-Message-Id: <20240810135937.4041797-1-seanga2@gmail.com>
-X-Mailer: git-send-email 2.37.1
+ d=1e100.net; s=20230601; t=1723314340; x=1723919140;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cnyea/X+jK64pXckNi+hVyyOIjZlAYuX/XtWJWSGrzo=;
+ b=whaxst0dod4s2q+PM76ZaTe5CH1A91ubhqGbfbdSIRIoqf0XPP35Mrdlyxt52OKIxN
+ H4IG+w1kxLEOnzGsUFjqSLmr1+IbL8hjPd+IgZi8JoefAdOPBhT/o16hGg+qGSYcHUZr
+ v7OK0I83ixziRC0jvQ0WTrDSsuUF+TNZGdN3IqhhBcTYRgMeztPBObHCaG3fTrcrqPpC
+ e+01v42mRDbf9RLgHvVZFkbzyiB2pUMlJWZFPY7B3NBkGnIPH5tMpXkEppJmVntgjnV1
+ cMp3J1+bono3qr1ki0/1T6f1nhb+mxeszwAUxO1nuKAYPRzukiEYxfAwtPVsIQf7VM6w
+ jDaQ==
+X-Gm-Message-State: AOJu0YwhJfZYG6T66vnFd9KSpWULZbsN6v2WllWEX69deeUqi+N6uV0Q
+ EsVS1J7K3B8gKXafiIPcyA6wl61jSV0pWEAO0Ssbh8+TutlDw2W5UP9Eeqe/Br6FjM8pk9gu31B
+ Fxz8=
+X-Google-Smtp-Source: AGHT+IF8QEbrLtf1BvQ9Tub60g0oWWSWRaoGnzR1/YzPmaw7J2pX8NhrZ+8cVfyxiM7CaZJZTqEebQ==
+X-Received: by 2002:a05:6830:369a:b0:703:6dba:afc7 with SMTP id
+ 46e09a7af769-70b50ae0a67mr4055075a34.8.1723314340657; 
+ Sat, 10 Aug 2024 11:25:40 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-236.totalplay.net.
+ [189.203.97.236]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-70c7b88ff2dsm663268a34.67.2024.08.10.11.25.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 10 Aug 2024 11:25:39 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Cc: Sean Anderson <seanga2@gmail.com>, 
+ Lean Sheng Tan <sheng.tan@9elements.com>, 
+ Michal Simek <michal.simek@amd.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jerry Van Baren <vanbaren@cideas.com>
+In-Reply-To: <20240807224739.3858517-1-sjg@chromium.org>
+References: <20240807224739.3858517-1-sjg@chromium.org>
+Subject: Re: [PATCH v4 00/21] Universal Payload initial series
+Message-Id: <172331433904.2030825.13281690460193478199.b4-ty@konsulko.com>
+Date: Sat, 10 Aug 2024 12:25:39 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,136 +94,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ENOSYS should only be used when a subsystem is completely absent.
-Convert its use in pinctrl-generic to ENOENT, which better reflects the
-error condition (that a function/group/pin is missing).
+On Wed, 07 Aug 2024 16:47:18 -0600, Simon Glass wrote:
 
-Signed-off-by: Sean Anderson <seanga2@gmail.com>
----
+> Universal Payload (UPL) is an Industry Standard for firmware
+> components[1]. UPL is designed to improve interoperability within the
+> firmware industry, allowing mixing and matching of projects with less
+> friction and fewer project-specific implementations. UPL is
+> cross-platform, supporting ARM, x86 and RISC-V initially.
+> 
+> This series provides some initial support for this, targeting 0.9.1 and
+> sandbox only.
+> 
+> [...]
 
- drivers/pinctrl/pinctrl-generic.c | 26 +++++++++++++-------------
- 1 file changed, 13 insertions(+), 13 deletions(-)
+Applied to u-boot/next, thanks!
 
-diff --git a/drivers/pinctrl/pinctrl-generic.c b/drivers/pinctrl/pinctrl-generic.c
-index 2464acf0b85..81a9327eb35 100644
---- a/drivers/pinctrl/pinctrl-generic.c
-+++ b/drivers/pinctrl/pinctrl-generic.c
-@@ -22,7 +22,7 @@ static int pinctrl_pin_name_to_selector(struct udevice *dev, const char *pin)
- 
- 	if (!ops->get_pins_count || !ops->get_pin_name) {
- 		dev_dbg(dev, "get_pins_count or get_pin_name missing\n");
--		return -ENOSYS;
-+		return -ENOENT;
- 	}
- 
- 	npins = ops->get_pins_count(dev);
-@@ -35,7 +35,7 @@ static int pinctrl_pin_name_to_selector(struct udevice *dev, const char *pin)
- 			return selector;
- 	}
- 
--	return -ENOSYS;
-+	return -ENOENT;
- }
- 
- /**
-@@ -53,7 +53,7 @@ static int pinctrl_group_name_to_selector(struct udevice *dev,
- 
- 	if (!ops->get_groups_count || !ops->get_group_name) {
- 		dev_dbg(dev, "get_groups_count or get_group_name missing\n");
--		return -ENOSYS;
-+		return -ENOENT;
- 	}
- 
- 	ngroups = ops->get_groups_count(dev);
-@@ -66,7 +66,7 @@ static int pinctrl_group_name_to_selector(struct udevice *dev,
- 			return selector;
- 	}
- 
--	return -ENOSYS;
-+	return -ENOENT;
- }
- 
- #if CONFIG_IS_ENABLED(PINMUX)
-@@ -86,7 +86,7 @@ static int pinmux_func_name_to_selector(struct udevice *dev,
- 	if (!ops->get_functions_count || !ops->get_function_name) {
- 		dev_dbg(dev,
- 			"get_functions_count or get_function_name missing\n");
--		return -ENOSYS;
-+		return -ENOENT;
- 	}
- 
- 	nfuncs = ops->get_functions_count(dev);
-@@ -99,7 +99,7 @@ static int pinmux_func_name_to_selector(struct udevice *dev,
- 			return selector;
- 	}
- 
--	return -ENOSYS;
-+	return -ENOENT;
- }
- 
- /**
-@@ -119,14 +119,14 @@ static int pinmux_enable_setting(struct udevice *dev, bool is_group,
- 	if (is_group) {
- 		if (!ops->pinmux_group_set) {
- 			dev_dbg(dev, "pinmux_group_set op missing\n");
--			return -ENOSYS;
-+			return -ENOENT;
- 		}
- 
- 		return ops->pinmux_group_set(dev, selector, func_selector);
- 	} else {
- 		if (!ops->pinmux_set) {
- 			dev_dbg(dev, "pinmux_set op missing\n");
--			return -ENOSYS;
-+			return -ENOENT;
- 		}
- 		return ops->pinmux_set(dev, selector, func_selector);
- 	}
-@@ -162,7 +162,7 @@ static int pinconf_prop_name_to_param(struct udevice *dev,
- 
- 	if (!ops->pinconf_num_params || !ops->pinconf_params) {
- 		dev_dbg(dev, "pinconf_num_params or pinconf_params missing\n");
--		return -ENOSYS;
-+		return -ENOENT;
- 	}
- 
- 	p = ops->pinconf_params;
-@@ -176,7 +176,7 @@ static int pinconf_prop_name_to_param(struct udevice *dev,
- 		}
- 	}
- 
--	return -ENOSYS;
-+	return -ENOENT;
- }
- 
- /**
-@@ -198,7 +198,7 @@ static int pinconf_enable_setting(struct udevice *dev, bool is_group,
- 	if (is_group) {
- 		if (!ops->pinconf_group_set) {
- 			dev_dbg(dev, "pinconf_group_set op missing\n");
--			return -ENOSYS;
-+			return -ENOENT;
- 		}
- 
- 		return ops->pinconf_group_set(dev, selector, param,
-@@ -206,7 +206,7 @@ static int pinconf_enable_setting(struct udevice *dev, bool is_group,
- 	} else {
- 		if (!ops->pinconf_set) {
- 			dev_dbg(dev, "pinconf_set op missing\n");
--			return -ENOSYS;
-+			return -ENOENT;
- 		}
- 		return ops->pinconf_set(dev, selector, param, argument);
- 	}
-@@ -215,7 +215,7 @@ static int pinconf_enable_setting(struct udevice *dev, bool is_group,
- static int pinconf_prop_name_to_param(struct udevice *dev,
- 				      const char *property, u32 *default_value)
- {
--	return -ENOSYS;
-+	return -ENOENT;
- }
- 
- static int pinconf_enable_setting(struct udevice *dev, bool is_group,
 -- 
-2.37.1
+Tom
+
 
