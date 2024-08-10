@@ -4,78 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38732C3DA4A
-	for <u-boot@archiver.kernel.org>; Sat, 10 Aug 2024 20:55:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C193AC3DA7F
+	for <u-boot@archiver.kernel.org>; Sat, 10 Aug 2024 21:14:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A067F88881;
-	Sat, 10 Aug 2024 22:52:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 3D21D8852D;
+	Sat, 10 Aug 2024 23:14:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=grimler.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DVphXP+7";
+	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="RjMIj0vQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE5C98897E; Sat, 10 Aug 2024 22:52:46 +0200 (CEST)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CC7CD88521; Sat, 10 Aug 2024 23:14:09 +0200 (CEST)
+Received: from out-188.mta0.migadu.com (out-188.mta0.migadu.com
+ [91.218.175.188])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE0F888950
- for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 22:52:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E553A8852D
+ for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 23:14:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=grimler.se
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-81f95052c2cso133380039f.0
- for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 13:52:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723323158; x=1723927958; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=aOwQIwFnYNIjeDbj0Xg+NRrVI6zZcUlELAGdEdiCSUg=;
- b=DVphXP+7Deo/JXTALUs+/OJb0JAogEFHUGSftytaFYOFCAvQ40G6h0HzsmEUwFrUda
- SJL+Pl8+RN8V5IxnbjGuDnDy/V4ZZXS/hwWgZCy4L6P9vGuPDKlOtE+0ZeCoDYjRUJXD
- ztapYBz0LRxxT/g4p2qy8dFh8RWX+r86PagjA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723323158; x=1723927958;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=aOwQIwFnYNIjeDbj0Xg+NRrVI6zZcUlELAGdEdiCSUg=;
- b=t4Zu5JmPyMrBi22LiEUK6IY/ipwMUw/G8QToz/koORycoOP8+nm5tJLCruF4h3pEoY
- VW6/CPxs0NhMXctO/Jdm//BQ6TAIYswjQ5G9QQdAqz+Jg1Z62L6KCNN28Adg0eNt75Cg
- k+J2kQVoHdsZw2OGRWIE6kMnzXZUVM91hlWIGijYtKkTkagAAQ86+tC/gHBcoaxaFMSX
- GqxRtF35/gJj9J9/jpdgTEOgnq0n6UPeNZUtZ7wmus2hQnuJEv60gcD2Lbv1RHQmWJ0B
- 884Ag9pHxF4WZMYSbp9Ty2TV5pdZYe6HFr29Vi3gyut8PiiSwYpYuwrzZa0Y8NVdFPC0
- mW1A==
-X-Gm-Message-State: AOJu0YyHc/bGMAs+as3CW6tZoj1vK0EXPFEbSjBwMcYjXjXxgTfH7HFn
- It4oJIbTrdLbyLOILkZbmniY/J2QGvARmuQys/VfGnA/jRGHnLKJDNw2k3NVw1AS/fSlsRUTdUU
- =
-X-Google-Smtp-Source: AGHT+IGXlLmk5yOcXPaZB0GhAhJKXsZA/nifJAdNY2L+uINRB/vwapsmKKr7H3o2h4IZR4UCvV5uVA==
-X-Received: by 2002:a05:6602:1493:b0:81f:803d:cbe7 with SMTP id
- ca18e2360f4ac-8225ee3c404mr673534839f.12.1723323157828; 
- Sat, 10 Aug 2024 13:52:37 -0700 (PDT)
-Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
- [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-82266f56333sm82893139f.0.2024.08.10.13.52.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 10 Aug 2024 13:52:37 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Alexander Gendin <agendin@matrox.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ spf=pass smtp.mailfrom=henrik@grimler.se
+Date: Sat, 10 Aug 2024 23:14:04 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=grimler.se; s=key1;
+ t=1723324446;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=bsGf9vm+XdVhq1qki6LMfeE6cod1MCBNdrq6SoOIX2A=;
+ b=RjMIj0vQq2XUWwFzxZHcr08eQjWPZzRc8nnIZzdrQnz/8MvPxZBbVxE7S3oTmoHfK33QWe
+ pQuzAkWaQFrUbPDOTBZn05JTfqsBD+yQcJm8RLKWH55I7MkaCUHD1s/R+NqK7lxqHFsGGF
+ iMyBMnyLF9l4Yl8sh+QjUBUkwCJ47V4=
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: Henrik Grimler <henrik@grimler.se>
+To: David Virag <virag.david003@gmail.com>
+Cc: Heiko Schocher <hs@denx.de>, Tom Rini <trini@konsulko.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH 20/21] test: Tidy up checking for console end
-Date: Sat, 10 Aug 2024 14:52:04 -0600
-Message-Id: <20240810205205.3403177-21-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240810205205.3403177-1-sjg@chromium.org>
-References: <20240810205205.3403177-1-sjg@chromium.org>
+ Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 2/2] i2c: samsung: Support platforms other than
+ EXYNOS4 and EXYNOS5
+Message-ID: <20240810211404.GA3012@l14.localdomain>
+References: <20240802191920.132133-1-virag.david003@gmail.com>
+ <20240802191920.132133-3-virag.david003@gmail.com>
+ <20240809210818.GA14190@l14.localdomain>
+ <a7bfd187c3769f3e8f50a8cc842a749c67d836a4.camel@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <a7bfd187c3769f3e8f50a8cc842a749c67d836a4.camel@gmail.com>
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,1146 +76,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the ut_assert_console_end() function provided, rather than doing it
-separately.
+Hi David,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On Sat, Aug 10, 2024 at 01:05:06AM +0200, David Virag wrote:
+> Hi Henrik,
+> 
+> On Fri, 2024-08-09 at 23:08 +0200, Henrik Grimler wrote:
+> > Hi David,
+> > 
+> > Thinking about this a bit more...
+> > 
+> > On Fri, Aug 02, 2024 at 09:19:16PM +0200, David Virag wrote:
+> [snip]
+> > > @@ -9,11 +9,15 @@
+> > >  #include <dm.h>
+> > >  #include <i2c.h>
+> > >  #include <log.h>
+> > > +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) ||
+> > > IS_ENABLED(CONFIG_ARCH_EXYNOS5)
+> > >  #include <asm/arch/clk.h>
+> > >  #include <asm/arch/cpu.h>
+> > >  #include <asm/arch/pinmux.h>
+> > > +#endif
+> > 
+> > We want to try to move the Exynos 4 and 5 devices to CCF and
+> > OF_UPSTREAM as well, which will make this messy.  Can we check
+> > CONFIG_CLK_EXYNOS and CONFIG_PINCTRL_EXYNOS instead?
+> > 
+> 
+> Happy to hear that move, but you are a bit late, this got merged into
+> master not long ago. Sending a patch for changing it should be fine,
+> the 7885 port I'm working on uses mostly the same things as the E850-
+> 96board (just has some support for 2 boards right now, though I may
+> submit jackpotlte only first, will see)
 
- test/cmd/bdinfo.c       |   8 +-
- test/cmd/exit.c         |  24 +++---
- test/cmd/fdt.c          | 178 ++++++++++++++++++++--------------------
- test/cmd/font.c         |   8 +-
- test/cmd/mbr.c          |  12 +--
- test/cmd/test_echo.c    |   2 +-
- test/cmd/test_pause.c   |   4 +-
- test/cmd/wget.c         |   2 +-
- test/lib/test_print.c   |   4 +-
- test/log/cont_test.c    |   6 +-
- test/log/nolog_ndebug.c |   2 +-
- test/log/nolog_test.c   |  16 ++--
- test/log/pr_cont_test.c |   2 +-
- 13 files changed, 134 insertions(+), 134 deletions(-)
+Ah, oops, missed that!  Yeah, no problem, I will touch it in an
+upcoming patchset.
 
-diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
-index 810174fe8d1..199b461be2c 100644
---- a/test/cmd/bdinfo.c
-+++ b/test/cmd/bdinfo.c
-@@ -239,7 +239,7 @@ static int bdinfo_test_full(struct unit_test_state *uts)
- 	ut_assertok(bdinfo_test_all(uts));
- 	ut_assertok(run_commandf("bdinfo -a"));
- 	ut_assertok(bdinfo_test_all(uts));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -259,7 +259,7 @@ static int bdinfo_test_help(struct unit_test_state *uts)
- 		ut_assert_nextlinen("Usage:");
- 		ut_assert_nextlinen("bdinfo");
- 	}
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -273,7 +273,7 @@ static int bdinfo_test_memory(struct unit_test_state *uts)
- 		ut_assertok(bdinfo_test_all(uts));
- 	else
- 		ut_assertok(bdinfo_check_mem(uts));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -287,7 +287,7 @@ static int bdinfo_test_eth(struct unit_test_state *uts)
- 		ut_assertok(bdinfo_test_all(uts));
- 	else if (IS_ENABLED(CONFIG_CMD_NET))
- 		ut_assertok(test_eth(uts));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-diff --git a/test/cmd/exit.c b/test/cmd/exit.c
-index 093f51b4dfc..af58a57fca7 100644
---- a/test/cmd/exit.c
-+++ b/test/cmd/exit.c
-@@ -36,14 +36,14 @@ static int cmd_exit_test(struct unit_test_state *uts)
- 		ut_assertok(run_commandf("setenv foo 'echo bar ; exit %d ; echo baz' ; run foo ; echo $?", i));
- 		ut_assert_nextline("bar");
- 		ut_assert_nextline("%d", i > 0 ? i : 0);
--		ut_assertok(ut_check_console_end(uts));
-+		ut_assert_console_end();
- 
- 		ut_assertok(run_commandf("setenv foo 'echo bar ; exit %d ; echo baz' ; run foo && echo quux ; echo $?", i));
- 		ut_assert_nextline("bar");
- 		if (i <= 0)
- 			ut_assert_nextline("quux");
- 		ut_assert_nextline("%d", i > 0 ? i : 0);
--		ut_assertok(ut_check_console_end(uts));
-+		ut_assert_console_end();
- 
- 		ut_assertok(run_commandf("setenv foo 'echo bar ; exit %d ; echo baz' ; run foo || echo quux ; echo $?", i));
- 		ut_assert_nextline("bar");
-@@ -51,61 +51,61 @@ static int cmd_exit_test(struct unit_test_state *uts)
- 			ut_assert_nextline("quux");
- 		/* Either 'exit' returns 0, or 'echo quux' returns 0 */
- 		ut_assert_nextline("0");
--		ut_assertok(ut_check_console_end(uts));
-+		ut_assert_console_end();
- 	}
- 
- 	/* Validate that 'exit' behaves the same way as 'exit 0' */
- 	ut_assertok(run_commandf("setenv foo 'echo bar ; exit ; echo baz' ; run foo ; echo $?"));
- 	ut_assert_nextline("bar");
- 	ut_assert_nextline("0");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	ut_assertok(run_commandf("setenv foo 'echo bar ; exit ; echo baz' ; run foo && echo quux ; echo $?"));
- 	ut_assert_nextline("bar");
- 	ut_assert_nextline("quux");
- 	ut_assert_nextline("0");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	ut_assertok(run_commandf("setenv foo 'echo bar ; exit ; echo baz' ; run foo || echo quux ; echo $?"));
- 	ut_assert_nextline("bar");
- 	/* Either 'exit' returns 0, or 'echo quux' returns 0 */
- 	ut_assert_nextline("0");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Validate that return value still propagates from 'run' command */
- 	ut_assertok(run_commandf("setenv foo 'echo bar ; true' ; run foo ; echo $?"));
- 	ut_assert_nextline("bar");
- 	ut_assert_nextline("0");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	ut_assertok(run_commandf("setenv foo 'echo bar ; true' ; run foo && echo quux ; echo $?"));
- 	ut_assert_nextline("bar");
- 	ut_assert_nextline("quux");
- 	ut_assert_nextline("0");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	ut_assertok(run_commandf("setenv foo 'echo bar ; true' ; run foo || echo quux ; echo $?"));
- 	ut_assert_nextline("bar");
- 	/* The 'true' returns 0 */
- 	ut_assert_nextline("0");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	ut_assertok(run_commandf("setenv foo 'echo bar ; false' ; run foo ; echo $?"));
- 	ut_assert_nextline("bar");
- 	ut_assert_nextline("1");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	ut_assertok(run_commandf("setenv foo 'echo bar ; false' ; run foo && echo quux ; echo $?"));
- 	ut_assert_nextline("bar");
- 	ut_assert_nextline("1");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	ut_assertok(run_commandf("setenv foo 'echo bar ; false' ; run foo || echo quux ; echo $?"));
- 	ut_assert_nextline("bar");
- 	ut_assert_nextline("quux");
- 	/* The 'echo quux' returns 0 */
- 	ut_assert_nextline("0");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
-index ac0d6f06150..e64785101cd 100644
---- a/test/cmd/fdt.c
-+++ b/test/cmd/fdt.c
-@@ -171,7 +171,7 @@ static int fdt_test_addr(struct unit_test_state *uts)
- 	ut_assertok(run_command("fdt addr -c", 0));
- 	ut_assert_nextline("Control fdt: %08lx",
- 			   (ulong)map_to_sysmem(gd->fdt_blob));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* The working fdt is not set, so this should fail */
- 	set_working_fdt_addr(0);
-@@ -184,13 +184,13 @@ static int fdt_test_addr(struct unit_test_state *uts)
- 	 */
- 	if (IS_ENABLED(CONFIG_SANDBOX))
- 		ut_assert_nextline("libfdt fdt_check_header(): FDT_ERR_BADMAGIC");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Set up a working FDT and try again */
- 	ut_assertok(make_test_fdt(uts, fdt, sizeof(fdt), &addr));
- 	ut_assertok(run_command("fdt addr", 0));
- 	ut_assert_nextline("Working fdt: %08lx", (ulong)map_to_sysmem(fdt));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Set the working FDT */
- 	set_working_fdt_addr(0);
-@@ -198,7 +198,7 @@ static int fdt_test_addr(struct unit_test_state *uts)
- 	ut_assertok(run_commandf("fdt addr %08lx", addr));
- 	ut_assert_nextline("Working FDT set to %lx", addr);
- 	ut_asserteq(addr, map_to_sysmem(working_fdt));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 	set_working_fdt_addr(0);
- 	ut_assert_nextline("Working FDT set to 0");
- 
-@@ -210,13 +210,13 @@ static int fdt_test_addr(struct unit_test_state *uts)
- 	gd->fdt_blob = fdt_blob;
- 	ut_assertok(ret);
- 	ut_asserteq(addr, map_to_sysmem(new_fdt));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test setting an invalid FDT */
- 	fdt[0] = 123;
- 	ut_asserteq(1, run_commandf("fdt addr %08lx", addr));
- 	ut_assert_nextline("libfdt fdt_check_header(): FDT_ERR_BADMAGIC");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test detecting an invalid FDT */
- 	fdt[0] = 123;
-@@ -224,7 +224,7 @@ static int fdt_test_addr(struct unit_test_state *uts)
- 	ut_assert_nextline("Working FDT set to %lx", addr);
- 	ut_asserteq(1, run_commandf("fdt addr"));
- 	ut_assert_nextline("libfdt fdt_check_header(): FDT_ERR_BADMAGIC");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -242,18 +242,18 @@ static int fdt_test_addr_resize(struct unit_test_state *uts)
- 	/* Test setting and resizing the working FDT to a larger size */
- 	ut_assertok(run_commandf("fdt addr %08lx %x", addr, newsize));
- 	ut_assert_nextline("Working FDT set to %lx", addr);
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Try shrinking it */
- 	ut_assertok(run_commandf("fdt addr %08lx %zx", addr, sizeof(fdt) / 4));
- 	ut_assert_nextline("Working FDT set to %lx", addr);
- 	ut_assert_nextline("New length %d < existing length %d, ignoring",
- 			   (int)sizeof(fdt) / 4, newsize);
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* ...quietly */
- 	ut_assertok(run_commandf("fdt addr -q %08lx %zx", addr, sizeof(fdt) / 4));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* We cannot easily provoke errors in fdt_open_into(), so ignore that */
- 
-@@ -280,12 +280,12 @@ static int fdt_test_move(struct unit_test_state *uts)
- 	/* Test moving the working FDT to a new location */
- 	ut_assertok(run_commandf("fdt move %08lx %08lx %x", addr, newaddr, ts));
- 	ut_assert_nextline("Working FDT set to %lx", newaddr);
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Compare the source and destination DTs */
- 	ut_assertok(run_commandf("cmp.b %08lx %08lx %x", addr, newaddr, ts));
- 	ut_assert_nextline("Total of %d byte(s) were the same", ts);
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -306,7 +306,7 @@ static int fdt_test_resize(struct unit_test_state *uts)
- 	/* Test resizing the working FDT and verify the new space was added */
- 	ut_assertok(run_commandf("fdt resize %x", newsize));
- 	ut_asserteq(ts + newsize, fdt_totalsize(fdt));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -325,7 +325,7 @@ static int fdt_test_print_list_common(struct unit_test_state *uts,
- 	ut_assert_nextline("\t#size-cells = <0x00000000>;");
- 	ut_assert_nextline("\tcompatible = \"u-boot,fdt-subnode-test-device\";");
- 	ut_assert_nextline("};");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/*
- 	 * Test printing/listing the working FDT
-@@ -333,7 +333,7 @@ static int fdt_test_print_list_common(struct unit_test_state *uts,
- 	 */
- 	ut_assertok(run_commandf("fdt %s / model", opc));
- 	ut_assert_nextline("model = \"U-Boot FDT test\"");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/*
- 	 * Test printing/listing the working FDT
-@@ -341,7 +341,7 @@ static int fdt_test_print_list_common(struct unit_test_state *uts,
- 	 */
- 	ut_assertok(run_commandf("fdt %s %s compatible", opc, node));
- 	ut_assert_nextline("compatible = \"u-boot,fdt-test-device1\"");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/*
- 	 * Test printing/listing the working FDT
-@@ -349,7 +349,7 @@ static int fdt_test_print_list_common(struct unit_test_state *uts,
- 	 */
- 	ut_assertok(run_commandf("fdt %s %s clock-names", opc, node));
- 	ut_assert_nextline("clock-names = \"fixed\", \"i2c\", \"spi\", \"uart2\", \"uart1\"");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/*
- 	 * Test printing/listing the working FDT
-@@ -357,7 +357,7 @@ static int fdt_test_print_list_common(struct unit_test_state *uts,
- 	 */
- 	ut_assertok(run_commandf("fdt %s %s clock-frequency", opc, node));
- 	ut_assert_nextline("clock-frequency = <0x00fde800>");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/*
- 	 * Test printing/listing the working FDT
-@@ -370,7 +370,7 @@ static int fdt_test_print_list_common(struct unit_test_state *uts,
- 	 * since the beginning of the command 'fdt', keep it.
- 	 */
- 	ut_assert_nextline("%s u-boot,empty-property", node);
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/*
- 	 * Test printing/listing the working FDT
-@@ -378,7 +378,7 @@ static int fdt_test_print_list_common(struct unit_test_state *uts,
- 	 */
- 	ut_assertok(run_commandf("fdt %s %s regs", opc, node));
- 	ut_assert_nextline("regs = <0x00001234 0x00001000>");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -424,7 +424,7 @@ static int fdt_test_print_list(struct unit_test_state *uts, bool print)
- 	}
- 	ut_assert_nextline("\t};");
- 	ut_assert_nextline("};");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	ret = fdt_test_print_list_common(uts, opc, "/test-node@1234");
- 	if (!ret)
-@@ -457,7 +457,7 @@ static int fdt_test_get_value_string(struct unit_test_state *uts,
- 		ut_asserteq_str(strres, env_get("var"));
- 	else
- 		ut_asserteq(intres, env_get_hex("var", 0x1234));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -501,16 +501,16 @@ static int fdt_test_get_value_common(struct unit_test_state *uts,
- 
- 	/* Test missing 10th element of $node node clock-names property */
- 	ut_asserteq(1, run_commandf("fdt get value ften %s clock-names 10", node));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test missing 10th element of $node node regs property */
- 	ut_asserteq(1, run_commandf("fdt get value ften %s regs 10", node));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test getting default element of $node node nonexistent property */
- 	ut_asserteq(1, run_commandf("fdt get value fnone %s nonexistent", node));
- 	ut_assert_nextline("libfdt fdt_getprop(): FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -528,17 +528,17 @@ static int fdt_test_get_value(struct unit_test_state *uts)
- 	/* Test getting default element of /nonexistent node */
- 	ut_asserteq(1, run_command("fdt get value fnode /nonexistent nonexistent", 1));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test getting default element of bad alias */
- 	ut_asserteq(1, run_command("fdt get value vbadalias badalias nonexistent", 1));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test getting default element of nonexistent alias */
- 	ut_asserteq(1, run_command("fdt get value vnoalias noalias nonexistent", 1));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_BADPATH");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -554,58 +554,58 @@ static int fdt_test_get_name(struct unit_test_state *uts)
- 	/* Test getting name of node 0 in /, which is /aliases node */
- 	ut_assertok(run_command("fdt get name nzero / 0", 0));
- 	ut_asserteq_str("aliases", env_get("nzero"));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test getting name of node 1 in /, which is /test-node@1234 node */
- 	ut_assertok(run_command("fdt get name none / 1", 0));
- 	ut_asserteq_str("test-node@1234", env_get("none"));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test getting name of node -1 in /, which is /aliases node, same as 0 */
- 	ut_assertok(run_command("fdt get name nmone / -1", 0));
- 	ut_asserteq_str("aliases", env_get("nmone"));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test getting name of node 2 in /, which does not exist */
- 	ut_asserteq(1, run_command("fdt get name ntwo / 2", 1));
- 	ut_assert_nextline("libfdt node not found");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test getting name of node 0 in /test-node@1234, which is /subnode node */
- 	ut_assertok(run_command("fdt get name snzero /test-node@1234 0", 0));
- 	ut_asserteq_str("subnode", env_get("snzero"));
- 	ut_assertok(run_command("fdt get name asnzero testnodealias 0", 0));
- 	ut_asserteq_str("subnode", env_get("asnzero"));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test getting name of node 1 in /test-node@1234, which does not exist */
- 	ut_asserteq(1, run_command("fdt get name snone /test-node@1234 1", 1));
- 	ut_assert_nextline("libfdt node not found");
- 	ut_asserteq(1, run_command("fdt get name asnone testnodealias 1", 1));
- 	ut_assert_nextline("libfdt node not found");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test getting name of node -1 in /test-node@1234, which is /subnode node, same as 0 */
- 	ut_assertok(run_command("fdt get name snmone /test-node@1234 -1", 0));
- 	ut_asserteq_str("subnode", env_get("snmone"));
- 	ut_assertok(run_command("fdt get name asnmone testnodealias -1", 0));
- 	ut_asserteq_str("subnode", env_get("asnmone"));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test getting name of nonexistent node */
- 	ut_asserteq(1, run_command("fdt get name nonode /nonexistent 0", 1));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test getting name of bad alias */
- 	ut_asserteq(1, run_command("fdt get name vbadalias badalias 0", 1));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test getting name of nonexistent alias */
- 	ut_asserteq(1, run_command("fdt get name vnoalias noalias 0", 1));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_BADPATH");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -628,7 +628,7 @@ static int fdt_test_get_addr_common(struct unit_test_state *uts, char *fdt,
- 	ut_assertok(run_commandf("fdt get addr pstr %s %s", path, prop));
- 	ut_asserteq((ulong)map_sysmem(env_get_hex("fdtaddr", 0x1234), 0),
- 		    (ulong)(map_sysmem(env_get_hex("pstr", 0x1234), 0) - offset));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -670,12 +670,12 @@ static int fdt_test_get_addr(struct unit_test_state *uts)
- 	/* Test getting address of node /test-node@1234/subnode non-existent property "noprop" */
- 	ut_asserteq(1, run_command("fdt get addr pnoprop /test-node@1234/subnode noprop", 1));
- 	ut_assert_nextline("libfdt fdt_getprop(): FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test getting address of non-existent node /test-node@1234/nonode@1 property "noprop" */
- 	ut_asserteq(1, run_command("fdt get addr pnonode /test-node@1234/nonode@1 noprop", 1));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -691,7 +691,7 @@ static int fdt_test_get_size_common(struct unit_test_state *uts,
- 		ut_assertok(run_commandf("fdt get size sstr %s", path));
- 	}
- 	ut_asserteq(val, env_get_hex("sstr", 0x1234));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -742,27 +742,27 @@ static int fdt_test_get_size(struct unit_test_state *uts)
- 	ut_assert_nextline("libfdt fdt_getprop(): FDT_ERR_NOTFOUND");
- 	ut_asserteq(1, run_command("fdt get size pnoprop subnodealias noprop", 1));
- 	ut_assert_nextline("libfdt fdt_getprop(): FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test getting size of non-existent node /test-node@1234/nonode@1 property "noprop" */
- 	ut_asserteq(1, run_command("fdt get size pnonode /test-node@1234/nonode@1 noprop", 1));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test getting node count of non-existent node /test-node@1234/nonode@1 */
- 	ut_asserteq(1, run_command("fdt get size pnonode /test-node@1234/nonode@1", 1));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test getting node count of bad alias badalias */
- 	ut_asserteq(1, run_command("fdt get size pnonode badalias noprop", 1));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test getting node count of non-existent alias noalias */
- 	ut_asserteq(1, run_command("fdt get size pnonode noalias", 1));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_BADPATH");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -793,7 +793,7 @@ static int fdt_test_set_single(struct unit_test_state *uts,
- 		ut_asserteq(ival, env_get_hex("svar", 0x1234));
- 	else
- 		ut_assertnull(env_get("svar"));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -842,7 +842,7 @@ static int fdt_test_set_multi(struct unit_test_state *uts,
- 		ut_asserteq(ival2, env_get_hex("svar2", 0x1234));
- 		ut_assertnull(env_get("svarn"));
- 	}
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -889,17 +889,17 @@ static int fdt_test_set(struct unit_test_state *uts)
- 	/* Test setting property of non-existent node */
- 	ut_asserteq(1, run_command("fdt set /no-node noprop", 1));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test setting property of non-existent alias */
- 	ut_asserteq(1, run_command("fdt set noalias noprop", 1));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_BADPATH");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test setting property of bad alias */
- 	ut_asserteq(1, run_command("fdt set badalias noprop", 1));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -918,46 +918,46 @@ static int fdt_test_mknode(struct unit_test_state *uts)
- 	ut_assertok(run_commandf("fdt list /newnode"));
- 	ut_assert_nextline("newnode {");
- 	ut_assert_nextline("};");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test creation of new node in /test-node@1234 */
- 	ut_assertok(run_commandf("fdt mknode /test-node@1234 newsubnode"));
- 	ut_assertok(run_commandf("fdt list /test-node@1234/newsubnode"));
- 	ut_assert_nextline("newsubnode {");
- 	ut_assert_nextline("};");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test creation of new node in /test-node@1234 by alias */
- 	ut_assertok(run_commandf("fdt mknode testnodealias newersubnode"));
- 	ut_assertok(run_commandf("fdt list testnodealias/newersubnode"));
- 	ut_assert_nextline("newersubnode {");
- 	ut_assert_nextline("};");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test creation of new node in /test-node@1234 over existing node */
- 	ut_asserteq(1, run_commandf("fdt mknode testnodealias newsubnode"));
- 	ut_assert_nextline("libfdt fdt_add_subnode(): FDT_ERR_EXISTS");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test creation of new node in /test-node@1234 by alias over existing node */
- 	ut_asserteq(1, run_commandf("fdt mknode testnodealias newersubnode"));
- 	ut_assert_nextline("libfdt fdt_add_subnode(): FDT_ERR_EXISTS");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test creation of new node in non-existent node */
- 	ut_asserteq(1, run_commandf("fdt mknode /no-node newnosubnode"));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test creation of new node in non-existent alias */
- 	ut_asserteq(1, run_commandf("fdt mknode noalias newfailsubnode"));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_BADPATH");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test creation of new node in bad alias */
- 	ut_asserteq(1, run_commandf("fdt mknode badalias newbadsubnode"));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -976,7 +976,7 @@ static int fdt_test_rm(struct unit_test_state *uts)
- 	ut_assertok(run_commandf("fdt rm / compatible"));
- 	ut_asserteq(1, run_commandf("fdt print / compatible"));
- 	ut_assert_nextline("libfdt fdt_getprop(): FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test removal of property clock-names in subnode /test-node@1234 */
- 	ut_assertok(run_commandf("fdt print /test-node@1234 clock-names"));
-@@ -984,7 +984,7 @@ static int fdt_test_rm(struct unit_test_state *uts)
- 	ut_assertok(run_commandf("fdt rm /test-node@1234 clock-names"));
- 	ut_asserteq(1, run_commandf("fdt print /test-node@1234 clock-names"));
- 	ut_assert_nextline("libfdt fdt_getprop(): FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test removal of property u-boot,empty-property in subnode /test-node@1234 by alias */
- 	ut_assertok(run_commandf("fdt print testnodealias u-boot,empty-property"));
-@@ -992,44 +992,44 @@ static int fdt_test_rm(struct unit_test_state *uts)
- 	ut_assertok(run_commandf("fdt rm testnodealias u-boot,empty-property"));
- 	ut_asserteq(1, run_commandf("fdt print testnodealias u-boot,empty-property"));
- 	ut_assert_nextline("libfdt fdt_getprop(): FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test removal of non-existent property noprop in subnode /test-node@1234 */
- 	ut_asserteq(1, run_commandf("fdt rm /test-node@1234 noprop"));
- 	ut_assert_nextline("libfdt fdt_delprop(): FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test removal of non-existent node /no-node@5678 */
- 	ut_asserteq(1, run_commandf("fdt rm /no-node@5678"));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test removal of subnode /test-node@1234/subnode by alias */
- 	ut_assertok(run_commandf("fdt rm subnodealias"));
- 	ut_asserteq(1, run_commandf("fdt print /test-node@1234/subnode"));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test removal of node by non-existent alias */
- 	ut_asserteq(1, run_commandf("fdt rm noalias"));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_BADPATH");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test removal of node by bad alias */
- 	ut_asserteq(1, run_commandf("fdt rm noalias"));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_BADPATH");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test removal of node /test-node@1234 */
- 	ut_assertok(run_commandf("fdt rm /test-node@1234"));
- 	ut_asserteq(1, run_commandf("fdt print /test-node@1234"));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test removal of node / */
- 	ut_assertok(run_commandf("fdt rm /"));
- 	ut_asserteq(1, run_commandf("fdt print /"));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -1046,17 +1046,17 @@ static int fdt_test_bootcpu(struct unit_test_state *uts)
- 	/* Test getting default bootcpu entry */
- 	ut_assertok(run_commandf("fdt header get bootcpu boot_cpuid_phys"));
- 	ut_asserteq(0, env_get_ulong("bootcpu", 10, 0x1234));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test setting and getting new bootcpu entry, twice, to test overwrite */
- 	for (i = 42; i <= 43; i++) {
- 		ut_assertok(run_commandf("fdt bootcpu %d", i));
--		ut_assertok(ut_check_console_end(uts));
-+		ut_assert_console_end();
- 
- 		/* Test getting new bootcpu entry */
- 		ut_assertok(run_commandf("fdt header get bootcpu boot_cpuid_phys"));
- 		ut_asserteq(i, env_get_ulong("bootcpu", 10, 0x1234));
--		ut_assertok(ut_check_console_end(uts));
-+		ut_assert_console_end();
- 	}
- 
- 	return 0;
-@@ -1069,11 +1069,11 @@ static int fdt_test_header_get(struct unit_test_state *uts,
- 	/* Test getting valid header entry */
- 	ut_assertok(run_commandf("fdt header get fvar %s", field));
- 	ut_asserteq(val, env_get_hex("fvar", 0x1234));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test getting malformed header entry */
- 	ut_asserteq(1, run_commandf("fdt header get fvar typo%stypo", field));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -1099,7 +1099,7 @@ static int fdt_test_header(struct unit_test_state *uts)
- 	ut_assert_nextline("size_dt_struct:\t\t0x%x", fdt_size_dt_struct(fdt));
- 	ut_assert_nextline("number mem_rsv:\t\t0x%x", fdt_num_mem_rsv(fdt));
- 	ut_assert_nextline_empty();
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test header get */
- 	ut_assertok(fdt_test_header_get(uts, "magic", fdt_magic(fdt)));
-@@ -1175,7 +1175,7 @@ static int fdt_test_memory_cells(struct unit_test_state *uts,
- 	ut_assert_nextline("\tdevice_type = \"memory\";");
- 	ut_assert_nextline("\treg = <%s %s>;", pada, pads);
- 	ut_assert_nextline("};");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	free(sets);
- 	free(seta);
-@@ -1223,7 +1223,7 @@ static int fdt_test_rsvmem(struct unit_test_state *uts)
- 	ut_assert_nextline("------------------------------------------------");
- 	ut_assert_nextline("    %x\t%016x\t%016x", 0, 0x42, 0x1701);
- 	ut_assert_nextline("    %x\t%016x\t%016x", 1, 0x74656, 0x9);
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test add new reserved memory node */
- 	ut_assertok(run_commandf("fdt rsvmem add 0x1234 0x5678"));
-@@ -1233,7 +1233,7 @@ static int fdt_test_rsvmem(struct unit_test_state *uts)
- 	ut_assert_nextline("    %x\t%016x\t%016x", 0, 0x42, 0x1701);
- 	ut_assert_nextline("    %x\t%016x\t%016x", 1, 0x74656, 0x9);
- 	ut_assert_nextline("    %x\t%016x\t%016x", 2, 0x1234, 0x5678);
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test delete reserved memory node */
- 	ut_assertok(run_commandf("fdt rsvmem delete 0"));
-@@ -1242,7 +1242,7 @@ static int fdt_test_rsvmem(struct unit_test_state *uts)
- 	ut_assert_nextline("------------------------------------------------");
- 	ut_assert_nextline("    %x\t%016x\t%016x", 0, 0x74656, 0x9);
- 	ut_assert_nextline("    %x\t%016x\t%016x", 1, 0x1234, 0x5678);
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test re-add new reserved memory node */
- 	ut_assertok(run_commandf("fdt rsvmem add 0x42 0x1701"));
-@@ -1252,12 +1252,12 @@ static int fdt_test_rsvmem(struct unit_test_state *uts)
- 	ut_assert_nextline("    %x\t%016x\t%016x", 0, 0x74656, 0x9);
- 	ut_assert_nextline("    %x\t%016x\t%016x", 1, 0x1234, 0x5678);
- 	ut_assert_nextline("    %x\t%016x\t%016x", 2, 0x42, 0x1701);
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test delete nonexistent reserved memory node */
- 	ut_asserteq(1, run_commandf("fdt rsvmem delete 10"));
- 	ut_assert_nextline("libfdt fdt_del_mem_rsv(): FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -1275,7 +1275,7 @@ static int fdt_test_chosen(struct unit_test_state *uts)
- 	/* Test default chosen node presence, fail as there is no /chosen node */
- 	ut_asserteq(1, run_commandf("fdt print /chosen"));
- 	ut_assert_nextline("libfdt fdt_path_offset() returned FDT_ERR_NOTFOUND");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test add new chosen node without initrd */
- 	ut_assertok(run_commandf("fdt chosen"));
-@@ -1289,7 +1289,7 @@ static int fdt_test_chosen(struct unit_test_state *uts)
- 	    !IS_ENABLED(CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT))
- 		ut_assert_nextlinen("\tkaslr-seed = ");
- 	ut_assert_nextline("};");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test add new chosen node with initrd */
- 	ut_assertok(run_commandf("fdt chosen 0x1234 0x5678"));
-@@ -1308,7 +1308,7 @@ static int fdt_test_chosen(struct unit_test_state *uts)
- 	    !IS_ENABLED(CONFIG_ARMV8_SEC_FIRMWARE_SUPPORT))
- 		ut_assert_nextlinen("\tkaslr-seed = ");
- 	ut_assert_nextline("};");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -1351,7 +1351,7 @@ static int fdt_test_apply(struct unit_test_state *uts)
- 	ut_assert_nextline("\t__symbols__ {");
- 	ut_assert_nextline("\t};");
- 	ut_assert_nextline("};");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test simple DTO application */
- 	ut_assertok(run_commandf("fdt apply 0x%08lx", addro));
-@@ -1361,7 +1361,7 @@ static int fdt_test_apply(struct unit_test_state *uts)
- 	ut_assert_nextline("\t__symbols__ {");
- 	ut_assert_nextline("\t};");
- 	ut_assert_nextline("};");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/*
- 	 * Create complex DTO which:
-@@ -1414,7 +1414,7 @@ static int fdt_test_apply(struct unit_test_state *uts)
- 	ut_assert_nextline("\t\tsubnodephandle = \"/subnode\";");
- 	ut_assert_nextline("\t};");
- 	ut_assert_nextline("};");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/*
- 	 * Create complex DTO which:
-@@ -1457,7 +1457,7 @@ static int fdt_test_apply(struct unit_test_state *uts)
- 	ut_assert_nextline("\t\tsubnodephandle = \"/subnode\";");
- 	ut_assert_nextline("\t};");
- 	ut_assert_nextline("};");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-diff --git a/test/cmd/font.c b/test/cmd/font.c
-index 6f4e54e7f3f..25d365dedd2 100644
---- a/test/cmd/font.c
-+++ b/test/cmd/font.c
-@@ -30,7 +30,7 @@ static int font_test_base(struct unit_test_state *uts)
- 	ut_assert_nextline("nimbus_sans_l_regular");
- 	if (IS_ENABLED(CONFIG_CONSOLE_TRUETYPE_CANTORAONE))
- 		ut_assert_nextline("cantoraone_regular");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	ut_assertok(vidconsole_get_font_size(dev, &name, &size));
- 	ut_asserteq_str("nimbus_sans_l_regular", name);
-@@ -48,19 +48,19 @@ static int font_test_base(struct unit_test_state *uts)
- 	if (max_metrics < 2) {
- 		ut_asserteq(1, ret);
- 		ut_assert_nextline("Failed (error -7)");
--		ut_assertok(ut_check_console_end(uts));
-+		ut_assert_console_end();
- 		return 0;
- 	}
- 
- 	ut_assertok(ret);
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	ut_assertok(vidconsole_get_font_size(dev, &name, &size));
- 	ut_asserteq_str("cantoraone_regular", name);
- 	ut_asserteq(40, size);
- 
- 	ut_assertok(run_command("font size 30", 0));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	ut_assertok(vidconsole_get_font_size(dev, &name, &size));
- 	ut_asserteq_str("cantoraone_regular", name);
-diff --git a/test/cmd/mbr.c b/test/cmd/mbr.c
-index 8c9d01130a3..e1a9cdffb04 100644
---- a/test/cmd/mbr.c
-+++ b/test/cmd/mbr.c
-@@ -264,7 +264,7 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	ut_assertok(run_commandf("mmc dev 6"));
- 	ut_assert_nextline("switch to partitions #0, OK");
- 	ut_assert_nextline("mmc6 is current device");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Make sure mmc6 is 12+ MiB in size */
- 	ut_assertok(run_commandf("mmc read 0x%lx 0x%lx 1", ra, (ulong)0xBFFE00 / 0x200));
-@@ -289,7 +289,7 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	memset(rbuf, 0, sizeof(rbuf));
- 	ut_assertok(run_commandf("read mmc 6:0 0x%lx 0x%lx 1", ra, ebr_blk));
- 	ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 	/*
- 	000001b0  00 00 00 00 00 00 00 00  78 56 34 12 00 00 80 05  |........xV4.....|
- 	000001c0  05 01 0e 25 24 01 00 40  00 00 00 08 00 00 00 00  |...%$..@........|
-@@ -324,7 +324,7 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	memset(rbuf, 0, sizeof(rbuf));
- 	ut_assertok(run_commandf("read mmc 6:0 0x%lx 0x%lx 1", ra, ebr_blk));
- 	ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 	/*
- 	000001b0  00 00 00 00 00 00 00 00  78 56 34 12 00 00 80 05  |........xV4.....|
- 	000001c0  05 01 0e 25 24 01 00 40  00 00 00 08 00 00 00 25  |...%$..@.......%|
-@@ -359,7 +359,7 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	memset(rbuf, 0, sizeof(rbuf));
- 	ut_assertok(run_commandf("read mmc 6:0 0x%lx 0x%lx 1", ra, ebr_blk));
- 	ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 	/*
- 	000001b0  00 00 00 00 00 00 00 00  78 56 34 12 00 00 80 05  |........xV4.....|
- 	000001c0  05 01 0e 25 24 01 00 40  00 00 00 08 00 00 00 25  |...%$..@.......%|
-@@ -394,7 +394,7 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	memset(rbuf, 0, sizeof(rbuf));
- 	ut_assertok(run_commandf("read mmc 6:0 0x%lx 0x%lx 1", ra, ebr_blk));
- 	ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 	/*
- 	000001b0  00 00 00 00 00 00 00 00  78 56 34 12 00 00 80 05  |........xV4.....|
- 	000001c0  05 01 0e 25 24 01 00 40  00 00 00 08 00 00 00 25  |...%$..@.......%|
-@@ -426,7 +426,7 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	ut_assert_nextline("MBR: write success!");
- 	ut_assertok(run_commandf("mbr verify mmc 6"));
- 	ut_assert_nextline("MBR: verify success!");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 	/*
- 	000001b0  00 00 00 00 00 00 00 00  78 56 34 12 00 00 80 05  |........xV4.....|
- 	000001c0  05 01 0e 25 24 01 00 40  00 00 00 08 00 00 00 25  |...%$..@.......%|
-diff --git a/test/cmd/test_echo.c b/test/cmd/test_echo.c
-index b829f71c591..8b306cc907f 100644
---- a/test/cmd/test_echo.c
-+++ b/test/cmd/test_echo.c
-@@ -49,7 +49,7 @@ static int lib_test_hush_echo(struct unit_test_state *uts)
- 		console_record_readline(uts->actual_str,
- 					sizeof(uts->actual_str));
- 		ut_asserteq_str(echo_data[i].expected, uts->actual_str);
--		ut_assertok(ut_check_console_end(uts));
-+		ut_assert_console_end();
- 	}
- 	return 0;
- }
-diff --git a/test/cmd/test_pause.c b/test/cmd/test_pause.c
-index 927fe174d74..174c31a3852 100644
---- a/test/cmd/test_pause.c
-+++ b/test/cmd/test_pause.c
-@@ -19,7 +19,7 @@ static int lib_test_hush_pause(struct unit_test_state *uts)
- 	ut_assertok(run_command("pause", 0));
- 	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
- 	ut_asserteq_str("Press any key to continue...", uts->actual_str);
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test provided message */
- 	/* Cook a newline when the command is expected to pause */
-@@ -27,7 +27,7 @@ static int lib_test_hush_pause(struct unit_test_state *uts)
- 	ut_assertok(run_command("pause 'Prompt for pause...'", 0));
- 	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
- 	ut_asserteq_str("Prompt for pause...", uts->actual_str);
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Test providing more than one params */
- 	/* No newline cooked here since the command is expected to fail */
-diff --git a/test/cmd/wget.c b/test/cmd/wget.c
-index 8f76f7c527e..c1ae71791b7 100644
---- a/test/cmd/wget.c
-+++ b/test/cmd/wget.c
-@@ -199,7 +199,7 @@ static int net_test_wget(struct unit_test_state *uts)
- 
- 	run_command("md5sum ${loadaddr} ${filesize}", 0);
- 	ut_assert_nextline("md5 for 00020000 ... 0002001f ==> 234af48e94b0085060249ecb5942ab57");
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-diff --git a/test/lib/test_print.c b/test/lib/test_print.c
-index 55e3ea1ed59..cd7f3f85769 100644
---- a/test/lib/test_print.c
-+++ b/test/lib/test_print.c
-@@ -20,7 +20,7 @@ static int test_print_freq(struct unit_test_state *uts,
- 	print_freq(freq, ";\n");
- 	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
- 	ut_asserteq_str(expected, uts->actual_str);
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-@@ -46,7 +46,7 @@ static int test_print_size(struct unit_test_state *uts,
- 	print_size(freq, ";\n");
- 	console_record_readline(uts->actual_str, sizeof(uts->actual_str));
- 	ut_asserteq_str(expected, uts->actual_str);
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-diff --git a/test/log/cont_test.c b/test/log/cont_test.c
-index 395a6587fa2..32b1c792367 100644
---- a/test/log/cont_test.c
-+++ b/test/log/cont_test.c
-@@ -32,7 +32,7 @@ static int log_test_cont(struct unit_test_state *uts)
- 	gd->flags &= ~GD_FLG_RECORD;
- 	ut_assertok(ut_check_console_line(uts, "ERR.arch, ea1"));
- 	ut_assertok(ut_check_console_line(uts, "ERR.arch, cc2"));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Write a third message which is not a continuation */
- 	gd->log_fmt = (1 << LOGF_CAT) | (1 << LOGF_LEVEL) | (1 << LOGF_MSG);
-@@ -43,7 +43,7 @@ static int log_test_cont(struct unit_test_state *uts)
- 	gd->log_fmt = log_fmt;
- 	gd->flags &= ~GD_FLG_RECORD;
- 	ut_assertok(ut_check_console_line(uts, "INFO.efi, ie3"));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	/* Write two messages without a newline between them */
- 	gd->log_fmt = (1 << LOGF_CAT) | (1 << LOGF_LEVEL) | (1 << LOGF_MSG);
-@@ -55,7 +55,7 @@ static int log_test_cont(struct unit_test_state *uts)
- 	gd->log_fmt = log_fmt;
- 	gd->flags &= ~GD_FLG_RECORD;
- 	ut_assertok(ut_check_console_line(uts, "ERR.arch, ea1 cc2"));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-diff --git a/test/log/nolog_ndebug.c b/test/log/nolog_ndebug.c
-index d33359d59b7..4dc0f2d3a33 100644
---- a/test/log/nolog_ndebug.c
-+++ b/test/log/nolog_ndebug.c
-@@ -30,7 +30,7 @@ static int log_test_log_disabled_ndebug(struct unit_test_state *uts)
- 	/* Since DEBUG is not defined, we expect to not get debug output */
- 	for (i = LOGL_EMERG; i < LOGL_DEBUG; i++)
- 		ut_assertok(ut_check_console_line(uts, "testing level %d", i));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
-diff --git a/test/log/nolog_test.c b/test/log/nolog_test.c
-index e9cfea99026..341dbfc9310 100644
---- a/test/log/nolog_test.c
-+++ b/test/log/nolog_test.c
-@@ -28,7 +28,7 @@ static int log_test_nolog_err(struct unit_test_state *uts)
- 	log_err("testing %s\n", "log_err");
- 	gd->flags &= ~GD_FLG_RECORD;
- 	ut_assertok(ut_check_console_line(uts, "testing log_err"));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 	return 0;
- }
- LOG_TEST(log_test_nolog_err);
-@@ -41,7 +41,7 @@ static int log_test_nolog_warning(struct unit_test_state *uts)
- 	log_warning("testing %s\n", "log_warning");
- 	gd->flags &= ~GD_FLG_RECORD;
- 	ut_assertok(ut_check_console_line(uts, "testing log_warning"));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 	return 0;
- }
- LOG_TEST(log_test_nolog_warning);
-@@ -54,7 +54,7 @@ static int log_test_nolog_notice(struct unit_test_state *uts)
- 	log_notice("testing %s\n", "log_notice");
- 	gd->flags &= ~GD_FLG_RECORD;
- 	ut_assertok(ut_check_console_line(uts, "testing log_notice"));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 	return 0;
- }
- LOG_TEST(log_test_nolog_notice);
-@@ -67,7 +67,7 @@ static int log_test_nolog_info(struct unit_test_state *uts)
- 	log_err("testing %s\n", "log_info");
- 	gd->flags &= ~GD_FLG_RECORD;
- 	ut_assertok(ut_check_console_line(uts, "testing log_info"));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 	return 0;
- }
- LOG_TEST(log_test_nolog_info);
-@@ -81,7 +81,7 @@ static int nolog_test_nodebug(struct unit_test_state *uts)
- 	memset(buf, 0, BUFFSIZE);
- 	debug("testing %s\n", "debug");
- 	gd->flags &= ~GD_FLG_RECORD;
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 	return 0;
- }
- LOG_TEST(nolog_test_nodebug);
-@@ -94,7 +94,7 @@ static int log_test_nolog_nodebug(struct unit_test_state *uts)
- 	log_debug("testing %s\n", "log_debug");
- 	gd->flags &= ~GD_FLG_RECORD;
- 	ut_assert(!strcmp(buf, ""));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 	return 0;
- }
- LOG_TEST(log_test_nolog_nodebug);
-@@ -109,7 +109,7 @@ static int nolog_test_debug(struct unit_test_state *uts)
- 	debug("testing %s\n", "debug");
- 	gd->flags &= ~GD_FLG_RECORD;
- 	ut_assertok(ut_check_console_line(uts, "testing debug"));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 	return 0;
- }
- LOG_TEST(nolog_test_debug);
-@@ -124,7 +124,7 @@ static int log_test_nolog_debug(struct unit_test_state *uts)
- 	gd->flags &= ~GD_FLG_RECORD;
- 	ut_assertok(ut_check_console_line(uts, "testing log_debug"));
- 	ut_assertok(ut_check_console_line(uts, "more log_debug"));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 	return 0;
- }
- LOG_TEST(log_test_nolog_debug);
-diff --git a/test/log/pr_cont_test.c b/test/log/pr_cont_test.c
-index 467ecf28601..7734e927f98 100644
---- a/test/log/pr_cont_test.c
-+++ b/test/log/pr_cont_test.c
-@@ -34,7 +34,7 @@ static int log_test_pr_cont(struct unit_test_state *uts)
- 	gd->log_fmt = log_fmt;
- 	gd->flags &= ~GD_FLG_RECORD;
- 	ut_assertok(ut_check_console_line(uts, "ea1 cc2"));
--	ut_assertok(ut_check_console_end(uts));
-+	ut_assert_console_end();
- 
- 	return 0;
- }
--- 
-2.34.1
+> > >  #include <asm/global_data.h>
+> > > +#include <asm/io.h>
+> > >  #include <linux/delay.h>
+> > > +#include <clk.h>
+> > >  #include "s3c24x0_i2c.h"
+> > >  
+> > >  DECLARE_GLOBAL_DATA_PTR;
+> > > @@ -137,15 +141,26 @@ static int hsi2c_wait_for_trx(struct
+> > > exynos5_hsi2c *i2c)
+> > >  	return I2C_NOK_TOUT;
+> > >  }
+> > >  
+> > > -static int hsi2c_get_clk_details(struct s3c24x0_i2c_bus *i2c_bus)
+> > > +static int hsi2c_get_clk_details(struct udevice *dev)
+> > >  {
+> > > +	struct s3c24x0_i2c_bus *i2c_bus = dev_get_priv(dev);
+> > >  	struct exynos5_hsi2c *hsregs = i2c_bus->hsregs;
+> > >  	ulong clkin;
+> > >  	unsigned int op_clk = i2c_bus->clock_frequency;
+> > >  	unsigned int i = 0, utemp0 = 0, utemp1 = 0;
+> > >  	unsigned int t_ftl_cycle;
+> > >  
+> > > +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) ||
+> > > IS_ENABLED(CONFIG_ARCH_EXYNOS5)
+> > 
+> > As above, can we check CONFIG_CLK_EXYNOS instead?
+> > 
+> 
+> Should be fine
+> 
+> > >  	clkin = get_i2c_clk();
+> > > +#else
+> > > +	struct clk clk;
+> > > +	int ret;
+> > > +
+> > > +	ret = clk_get_by_name(dev, "hsi2c", &clk);
+> > > +	if (ret < 0)
+> > > +		return ret;
+> > > +	clkin = clk_get_rate(&clk);
+> > > +#endif
+> > >  	/* FPCLK / FI2C =
+> > >  	 * (CLK_DIV + 1) * (TSCLK_L + TSCLK_H + 2) + 8 + 2 *
+> > > FLT_CYCLE
+> > >  	 * uTemp0 = (CLK_DIV + 1) * (TSCLK_L + TSCLK_H + 2)
+> > > @@ -487,7 +502,7 @@ static int s3c24x0_i2c_set_bus_speed(struct
+> > > udevice *dev, unsigned int speed)
+> > >  
+> > >  	i2c_bus->clock_frequency = speed;
+> > >  
+> > > -	if (hsi2c_get_clk_details(i2c_bus))
+> > > +	if (hsi2c_get_clk_details(dev))
+> > >  		return -EFAULT;
+> > >  	hsi2c_ch_init(i2c_bus);
+> > >  
+> > > @@ -514,7 +529,9 @@ static int s3c24x0_i2c_probe(struct udevice
+> > > *dev, uint chip, uint chip_flags)
+> > >  
+> > >  static int s3c_i2c_of_to_plat(struct udevice *dev)
+> > >  {
+> > > +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) ||
+> > > IS_ENABLED(CONFIG_ARCH_EXYNOS5)
+> > >  	const void *blob = gd->fdt_blob;
+> > > +#endif
+> > >  	struct s3c24x0_i2c_bus *i2c_bus = dev_get_priv(dev);
+> > >  	int node;
+> > >  
+> > > @@ -522,7 +539,9 @@ static int s3c_i2c_of_to_plat(struct udevice
+> > > *dev)
+> > >  
+> > >  	i2c_bus->hsregs = dev_read_addr_ptr(dev);
+> > >  
+> > > +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) ||
+> > > IS_ENABLED(CONFIG_ARCH_EXYNOS5)
+> > >  	i2c_bus->id = pinmux_decode_periph_id(blob, node);
+> > > +#endif
+> > >  
+> > >  	i2c_bus->clock_frequency =
+> > >  		dev_read_u32_default(dev, "clock-frequency",
+> > > @@ -530,7 +549,9 @@ static int s3c_i2c_of_to_plat(struct udevice
+> > > *dev)
+> > >  	i2c_bus->node = node;
+> > >  	i2c_bus->bus_num = dev_seq(dev);
+> > >  
+> > > +#if IS_ENABLED(CONFIG_ARCH_EXYNOS4) ||
+> > > IS_ENABLED(CONFIG_ARCH_EXYNOS5)
+> > >  	exynos_pinmux_config(i2c_bus->id, PINMUX_FLAG_HS_MODE);
+> > > +#endif
+> > 
+> > I think these three #if def's can be consolidated in one #if def
+> > group
+> > towards the end of s3c_i2c_of_to_plat to make it easier to follow.
+> 
+> Hm, sounds good, though I don't know if moving the variable declaration
+> from the top would work. I don't know which C standard uboot is
+> compiled with, but I do know that some don't like that. If it works, it
+> works.
 
+We can probably drop "const void *blob" altogether and use
+gd->fdt_blob straight away.
+
+> > 
+> > Also, can we check CONFIG_PINCTRL_EXYNOS instead?  That would make it
+> > easier when migrating Exynos 4 and 5 devices to pinctrl driver and
+> > OF_UPSTREAM.
+> 
+> Yeah, that works too.
+> Only reason I used EXYNOS4/5 is that that's really what it directly
+> depends on, and I didn't know it was planned to move Exynos4/5 specific
+> stuff to CCF/pinctrl.
+
+I am working on migrating exynos4412-odroid-u2 and
+exyno5422-odroid-xu4, as well as adding support for exynos4210-i9100.
+
+> My only real nitpick is that these changes would mean we'd have to
+> reintroduce the dependency on exynos platforms, since if we say "if we
+> don't have exynos ccf driver, use exynos specific stuff", then if we
+> just add the driver to some other non-exynos platform without exynos
+> ccf driver enabled for some reason, it would not compile, since it'd be
+> trying to use the old exynos4/5 stuff.
+> Though for now it should be fine if we limit it to Exynos only.
+
+I guess only exynos and older s3c/s5p devices will ever use the
+driver, based on current situation in Linux at least.  Even if we fix
+compilation for a none-exynos4/5 device without CCF I suppose driver
+would not work without modifications to deal with clocks.
+
+Anyways, thanks!  Will CC you on future changes!
+
+Best regards,
+Henrik Grimler
