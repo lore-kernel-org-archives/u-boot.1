@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8F1EC3DA4A
-	for <u-boot@archiver.kernel.org>; Sat, 10 Aug 2024 13:52:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E32A5C3DA7F
+	for <u-boot@archiver.kernel.org>; Sat, 10 Aug 2024 13:59:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A1148870B;
-	Sat, 10 Aug 2024 15:52:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4A0828870B;
+	Sat, 10 Aug 2024 15:59:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ikysXS0k";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cSH4LVcS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 835F288802; Sat, 10 Aug 2024 15:52:54 +0200 (CEST)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id 0F621887E8; Sat, 10 Aug 2024 15:59:50 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 636DD881C3
- for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 15:52:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E89C688327
+ for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 15:59:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-690404fd27eso28039717b3.2
- for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 06:52:52 -0700 (PDT)
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6b7a3773a95so16721146d6.2
+ for <u-boot@lists.denx.de>; Sat, 10 Aug 2024 06:59:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723297971; x=1723902771; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1723298387; x=1723903187; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=eWpfSQc7UMERzYm4Tb7bTvnLtWGsKpZVD9A2IvqjFiw=;
- b=ikysXS0kbH2BleA6q+O/m2v/ymi4Y/1qz2Ac07Md5MinlSL+C72XF2Ssv2tgmjoWLc
- 51r9mdW0/LP2HR3ONTEK4bB9ITsM2HxNLXuT0i10fbgfk+kG61G4TSeWj6CTrXUSVnjz
- zofEnwCvglkRlEY4PHH+F2vOzH6eN/tLsZ8UmaNRaW91JXKy65KlZxj5unAeDQxrvhI2
- GaRHqNV1vuI8vnbBc15ihK4boVBjoUZkwyGy3hTm62bV7obdKEqavo0HjhsqJXLb7KwJ
- j2bEMLWZ/RoAfQgDDGUrp08VmWSBgfVNYBYqsdS4y1axITOE9Qm1Up4O1YolHKahPqga
- o/Yg==
+ bh=kZHV4LCFZT8c6Y+lq7Hg6pD9bv1nqY8tOaoUwSAyHHA=;
+ b=cSH4LVcSuBvfhIFtCRXFQCBvxdfysdYcgchfk5VciBidIdGknGR+ZjUgA/J4y6yPOI
+ MFBIOCnasOrLaATYAas5vn0gS6r2GyN7OpLPIfrPe4qVImmffU5y9JEfRtETKywJ8ffN
+ lcS3dKwgiJMJ8NGsMAYCin8lrd7KYCqSt0h7QpVOpMSQjdtzAwUQzswIP6EZ8iEjI5Lk
+ g3LxC0Qbdx0gmMzXmPHHOSDH6idRQsbR6gte4KQsOCWeFXGC1Kg510TH9v9CiDmDzZVL
+ r7YlVm4WBANh9bFOXTUjYbwwrMsdfMi9SsNrU32oM5Up+iogWGjP5MXA8uV6maqHQiYg
+ nvcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723297971; x=1723902771;
+ d=1e100.net; s=20230601; t=1723298387; x=1723903187;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=eWpfSQc7UMERzYm4Tb7bTvnLtWGsKpZVD9A2IvqjFiw=;
- b=pkllEgKcrc3tlFb6+0RshgaqeTvMfsBfY27OU8RYkWapZOu0HWRBM9T9CkIX+VS5CQ
- HyKAECuTsIdykTTqOWugxLmr0PJvl9EP2UBQ/6gRKiKx6wLa0O/GTWOntWI5kgKgHktd
- pBjeqGV+QwTAYLahIR/cqydEP6a+rne7kwHMDZhdx1S7oHlTTStfQYypSpnlzFQR9Ymf
- RMfO9MZmMERsXzl2HgLvBWeN1w7IGCYUzUGTXdy1UqEHs0RLBHtJin58WKPqrX94PENw
- 3WPzl4eI8qfuFyfmy+jU3pYt8UmLrsziS5yhzKtD7UYswwsvcLukOIqgOKIi/TK1BCVE
- U4mw==
+ bh=kZHV4LCFZT8c6Y+lq7Hg6pD9bv1nqY8tOaoUwSAyHHA=;
+ b=bYF+BmeVx9C7q4aWcj4bBcSOrEmIGGmGp5hRPAuH2tvDQmNAYSfGUswOpK4hhi15rf
+ dELzHyPVTGABpa5pd1Qnf7WIoOnm83D2y6xgY4Q4IKZlI1v25LXHe9fzhpaxRJzXRPmA
+ ETkX5d3r4zycqp/XpPvpeyXOnkqV/F7HqAzs/E6eva/2UFLdE+XKogXSVlECcaZ6zZbV
+ Ymsl99CPto6hRjJmXBbGoKPQyNTLq9Lmy9a336bnwrhpjNT9bQRj+hJgQ7oS992VSjda
+ mTWGf7G4FNsqAFDCwzNbsDLdvZQ5rktKXWUUhkl07Y85/JGrZfsLEuv4CMI4IJcNSBbX
+ HtOA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWWZGMzBl/Kptnn/DImQ3BeNWeSiJho77CVoFno8AuQXXBoTol+Ir6A9Inv5xFJy5ODl6K+H6Y9UzFiI/tjAp0srnkP2Q==
-X-Gm-Message-State: AOJu0YzhvAzAK0+Iztn0jXbamGkk/E2BUDpsR6Ge3lxsDc++AZwvcqz4
- PtgoTLoW4oXDExrayQB1yDirPABz9NhaG8cOkgknFPD0dKVxPvuZ/A5QaQ==
-X-Google-Smtp-Source: AGHT+IGxxbkidRBQ4jPQzxzWvkM9kqpvCepjHxEXxVDjm14+wiur2YuKk615JOqyxEutRt4V6/aysQ==
-X-Received: by 2002:a05:6902:2292:b0:e0b:e2df:b422 with SMTP id
- 3f1490d57ef6-e0eb9994b16mr5297270276.24.1723297971141; 
- Sat, 10 Aug 2024 06:52:51 -0700 (PDT)
+ AJvYcCWfHLakVnyDEwnps+gMfYipHLIfR0bJNlg/k/uN9N08/DPRe6Vbk0oSnmuNmYCP6+1m3fj8XuQpRljy17JThxmAHYqYsg==
+X-Gm-Message-State: AOJu0YyVkR+KR9Pqjv9kIOKjanPi7gyOw0cyi8zJ8QXFBFMWcyPHUgVE
+ NMQlUDyYGFYxAU1x5nf3Ts4m/yCgZQTH0z87hFCDQRkvTnhraRZ0awGq8g==
+X-Google-Smtp-Source: AGHT+IHySXc6OO1gY67Z2ct4u3obr1V2B4WjZB4GKrkZw/yMUXnui71XVwbHzFnRLbOXfIDfXpjh3Q==
+X-Received: by 2002:a05:6214:4985:b0:6b2:d69d:a2d7 with SMTP id
+ 6a1803df08f44-6bd78e060d2mr48474026d6.19.1723298386596; 
+ Sat, 10 Aug 2024 06:59:46 -0700 (PDT)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- af79cd13be357-7a4c7e115c0sm68589085a.133.2024.08.10.06.52.50
+ 6a1803df08f44-6bd82e67d2bsm7327006d6.133.2024.08.10.06.59.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 10 Aug 2024 06:52:50 -0700 (PDT)
+ Sat, 10 Aug 2024 06:59:46 -0700 (PDT)
 From: Sean Anderson <seanga2@gmail.com>
 To: Simon Glass <sjg@chromium.org>,
 	u-boot@lists.denx.de
 Cc: Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH] sandbox: Fix pinmux warnings with non-test devicetrees
-Date: Sat, 10 Aug 2024 09:52:49 -0400
-Message-Id: <20240810135249.4037082-1-seanga2@gmail.com>
+Subject: [PATCH] pinmux: generic: Use ENOENT instead of ENOSYS
+Date: Sat, 10 Aug 2024 09:59:37 -0400
+Message-Id: <20240810135937.4041797-1-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,99 +91,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The sandbox pinmux driver is used in the non-test devicetree as well as
-the test one. I didn't realize this when I modified the driver for
-tests, and so broke the regular use case (which only resulted in
-warnings). First, making the pinmux and the UART group available in all
-boot phases to avoid ENODEV errors. Then, convert the pin groups and
-functions to the new style, adding onewire group as well.
+ENOSYS should only be used when a subsystem is completely absent.
+Convert its use in pinctrl-generic to ENOENT, which better reflects the
+error condition (that a function/group/pin is missing).
 
-Fixes: 7f0f1806e3a ("test: pinmux: Add test for pin muxing")
 Signed-off-by: Sean Anderson <seanga2@gmail.com>
 ---
 
- arch/sandbox/dts/sandbox.dtsi                | 14 ++++++++------
- drivers/pinctrl/pinctrl-sandbox.c            |  4 +++-
- include/dt-bindings/pinctrl/sandbox-pinmux.h |  1 +
- 3 files changed, 12 insertions(+), 7 deletions(-)
+ drivers/pinctrl/pinctrl-generic.c | 26 +++++++++++++-------------
+ 1 file changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/arch/sandbox/dts/sandbox.dtsi b/arch/sandbox/dts/sandbox.dtsi
-index c93ce712894..06ba4f031fa 100644
---- a/arch/sandbox/dts/sandbox.dtsi
-+++ b/arch/sandbox/dts/sandbox.dtsi
-@@ -231,23 +231,25 @@
- 	};
+diff --git a/drivers/pinctrl/pinctrl-generic.c b/drivers/pinctrl/pinctrl-generic.c
+index 2464acf0b85..81a9327eb35 100644
+--- a/drivers/pinctrl/pinctrl-generic.c
++++ b/drivers/pinctrl/pinctrl-generic.c
+@@ -22,7 +22,7 @@ static int pinctrl_pin_name_to_selector(struct udevice *dev, const char *pin)
  
- 	pinctrl {
-+		bootph-all;
- 		compatible = "sandbox,pinctrl";
- 		status = "okay";
+ 	if (!ops->get_pins_count || !ops->get_pin_name) {
+ 		dev_dbg(dev, "get_pins_count or get_pin_name missing\n");
+-		return -ENOSYS;
++		return -ENOENT;
+ 	}
  
- 		pinctrl_i2c0: i2c0 {
--			groups = "i2c";
--			function = "i2c";
-+			groups = "I2C_UART";
-+			function = "I2C";
- 			bias-pull-up;
- 		};
+ 	npins = ops->get_pins_count(dev);
+@@ -35,7 +35,7 @@ static int pinctrl_pin_name_to_selector(struct udevice *dev, const char *pin)
+ 			return selector;
+ 	}
  
- 		pinctrl_serial0: uart0 {
--			groups = "serial_a";
--			function = "serial";
-+			bootph-all;
-+			groups = "I2C_UART";
-+			function = "UART";
- 		};
+-	return -ENOSYS;
++	return -ENOENT;
+ }
  
- 		pinctrl_onewire0: onewire0 {
--			groups = "w1";
--			function = "w1";
-+			pins = "P8";
-+			function = "ONEWIRE";
- 			bias-pull-up;
- 		};
- 	};
-diff --git a/drivers/pinctrl/pinctrl-sandbox.c b/drivers/pinctrl/pinctrl-sandbox.c
-index a5d056643a0..f6921b56ceb 100644
---- a/drivers/pinctrl/pinctrl-sandbox.c
-+++ b/drivers/pinctrl/pinctrl-sandbox.c
-@@ -42,7 +42,7 @@ static const char * const sandbox_pins_muxing[][2] = {
- 	{ "GPIO0", "SPI CS0" },
- 	{ "GPIO1", "SPI CS1" },
- 	{ "GPIO2", "PWM0" },
--	{ "GPIO3", "PWM1" },
-+	{ "GPIO3", "ONEWIRE" },
- };
+ /**
+@@ -53,7 +53,7 @@ static int pinctrl_group_name_to_selector(struct udevice *dev,
  
- #define SANDBOX_GROUP_I2C_UART 0
-@@ -63,6 +63,7 @@ static const char * const sandbox_functions[] = {
- 	FUNC(GPIO),
- 	FUNC(CS),
- 	FUNC(PWM),
-+	FUNC(ONEWIRE),
- #undef FUNC
- };
+ 	if (!ops->get_groups_count || !ops->get_group_name) {
+ 		dev_dbg(dev, "get_groups_count or get_group_name missing\n");
+-		return -ENOSYS;
++		return -ENOENT;
+ 	}
  
-@@ -166,6 +167,7 @@ static int sandbox_pinmux_set(struct udevice *dev, unsigned pin_selector,
- 		break;
- 	case SANDBOX_PINMUX_CS:
- 	case SANDBOX_PINMUX_PWM:
-+	case SANDBOX_PINMUX_ONEWIRE:
- 		mux = BIT(pin_selector);
- 		break;
- 	default:
-diff --git a/include/dt-bindings/pinctrl/sandbox-pinmux.h b/include/dt-bindings/pinctrl/sandbox-pinmux.h
-index 891af072e52..21c5a1762ab 100644
---- a/include/dt-bindings/pinctrl/sandbox-pinmux.h
-+++ b/include/dt-bindings/pinctrl/sandbox-pinmux.h
-@@ -13,6 +13,7 @@
- #define SANDBOX_PINMUX_GPIO 4
- #define SANDBOX_PINMUX_CS   5
- #define SANDBOX_PINMUX_PWM  6
-+#define SANDBOX_PINMUX_ONEWIRE 7
+ 	ngroups = ops->get_groups_count(dev);
+@@ -66,7 +66,7 @@ static int pinctrl_group_name_to_selector(struct udevice *dev,
+ 			return selector;
+ 	}
  
- #define SANDBOX_PINMUX(pin, func) ((func) << 16 | (pin))
+-	return -ENOSYS;
++	return -ENOENT;
+ }
  
+ #if CONFIG_IS_ENABLED(PINMUX)
+@@ -86,7 +86,7 @@ static int pinmux_func_name_to_selector(struct udevice *dev,
+ 	if (!ops->get_functions_count || !ops->get_function_name) {
+ 		dev_dbg(dev,
+ 			"get_functions_count or get_function_name missing\n");
+-		return -ENOSYS;
++		return -ENOENT;
+ 	}
+ 
+ 	nfuncs = ops->get_functions_count(dev);
+@@ -99,7 +99,7 @@ static int pinmux_func_name_to_selector(struct udevice *dev,
+ 			return selector;
+ 	}
+ 
+-	return -ENOSYS;
++	return -ENOENT;
+ }
+ 
+ /**
+@@ -119,14 +119,14 @@ static int pinmux_enable_setting(struct udevice *dev, bool is_group,
+ 	if (is_group) {
+ 		if (!ops->pinmux_group_set) {
+ 			dev_dbg(dev, "pinmux_group_set op missing\n");
+-			return -ENOSYS;
++			return -ENOENT;
+ 		}
+ 
+ 		return ops->pinmux_group_set(dev, selector, func_selector);
+ 	} else {
+ 		if (!ops->pinmux_set) {
+ 			dev_dbg(dev, "pinmux_set op missing\n");
+-			return -ENOSYS;
++			return -ENOENT;
+ 		}
+ 		return ops->pinmux_set(dev, selector, func_selector);
+ 	}
+@@ -162,7 +162,7 @@ static int pinconf_prop_name_to_param(struct udevice *dev,
+ 
+ 	if (!ops->pinconf_num_params || !ops->pinconf_params) {
+ 		dev_dbg(dev, "pinconf_num_params or pinconf_params missing\n");
+-		return -ENOSYS;
++		return -ENOENT;
+ 	}
+ 
+ 	p = ops->pinconf_params;
+@@ -176,7 +176,7 @@ static int pinconf_prop_name_to_param(struct udevice *dev,
+ 		}
+ 	}
+ 
+-	return -ENOSYS;
++	return -ENOENT;
+ }
+ 
+ /**
+@@ -198,7 +198,7 @@ static int pinconf_enable_setting(struct udevice *dev, bool is_group,
+ 	if (is_group) {
+ 		if (!ops->pinconf_group_set) {
+ 			dev_dbg(dev, "pinconf_group_set op missing\n");
+-			return -ENOSYS;
++			return -ENOENT;
+ 		}
+ 
+ 		return ops->pinconf_group_set(dev, selector, param,
+@@ -206,7 +206,7 @@ static int pinconf_enable_setting(struct udevice *dev, bool is_group,
+ 	} else {
+ 		if (!ops->pinconf_set) {
+ 			dev_dbg(dev, "pinconf_set op missing\n");
+-			return -ENOSYS;
++			return -ENOENT;
+ 		}
+ 		return ops->pinconf_set(dev, selector, param, argument);
+ 	}
+@@ -215,7 +215,7 @@ static int pinconf_enable_setting(struct udevice *dev, bool is_group,
+ static int pinconf_prop_name_to_param(struct udevice *dev,
+ 				      const char *property, u32 *default_value)
+ {
+-	return -ENOSYS;
++	return -ENOENT;
+ }
+ 
+ static int pinconf_enable_setting(struct udevice *dev, bool is_group,
 -- 
 2.37.1
 
