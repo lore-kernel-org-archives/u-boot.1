@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56469C52D7B
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:52:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 742F1C52D7B
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:52:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39CA8888B7;
-	Sun, 11 Aug 2024 16:50:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9239588100;
+	Sun, 11 Aug 2024 16:50:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KYw42Vw3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RgmE4m3Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86EBE888A7; Sun, 11 Aug 2024 16:50:34 +0200 (CEST)
-Received: from mail-ua1-x92f.google.com (mail-ua1-x92f.google.com
- [IPv6:2607:f8b0:4864:20::92f])
+ id C8B1B888A7; Sun, 11 Aug 2024 16:50:35 +0200 (CEST)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 002FC87E9D
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:50:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9687088100
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:50:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ua1-x92f.google.com with SMTP id
- a1e0cc1a2514c-8205ceff95cso1172942241.1
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:50:31 -0700 (PDT)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6b95b710e2cso23642136d6.2
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:50:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723387831; x=1723992631; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723387832; x=1723992632; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5WLgr1ZMkYRUpojjm7lrChDJnV7edvKOO8FPdAGLUw0=;
- b=KYw42Vw3iIa6gCelFnR6qdCDNoC2TWeaXM+a64xfiGur90P58EdQLlm54eRwpGo1sI
- ZE8ORKP7bHI4l8ZKbmQWSr9PkJSC5v97aqe2/tW81LRYp0NzLzAhsdEimi7RvBgnXkKP
- S5/TIpGz7RYDdab+K0PPCV9BFpo+g6SL94yvk=
+ bh=6nNDFlTQFX0vEpPIuoMohJA6KzS6mszYHymi/M5T4Vk=;
+ b=RgmE4m3ZK+16uLUB+Q+7Bok9/ryV44XqJhxoLJYu/2Uqd57YKpxtUsP6K8I5RPZ2Qv
+ RHC1Ku8mnvOmd0kAQUinR6ZOIAaMcLr6s9vwOSrCGfTP03sKAfxZW7zHGTZwjxPCbVwd
+ 5X13lmTio+UJfMFZ6ZYhjFsgnSAm3KifJhc/8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723387831; x=1723992631;
+ d=1e100.net; s=20230601; t=1723387832; x=1723992632;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5WLgr1ZMkYRUpojjm7lrChDJnV7edvKOO8FPdAGLUw0=;
- b=qvkOHYdiWpEOGMFRyDSzznciecZUGk0AoDMslHBXPBuifZmKzin9P5rRSvdl1GNZqg
- 9CPMSjcVaOKdJ1V/+Isytc3y+HY/mKbgkQyLIaXoDRBzvHAdPEbTtDAqUo1iMYF4tJay
- g0Y/rGL95o2kEHp+f+0WsDtNV8G+hwnoB4L1hn5qXNEhrZQS1dqMsb0W9yImP+P2SyvU
- HGQiSdkmQeRcL2ICqn84Ppc4Gr23+R6PJlivvny7/m8MhKTggcFzhEZHt9eLFPCXQGPk
- aHDeVbBEh2HTxaDv5Uee16IIII0FhEMVHsf+U5o0I4yGZbQfkQspOGwsj8UVaXeVrGQs
- ArEQ==
+ bh=6nNDFlTQFX0vEpPIuoMohJA6KzS6mszYHymi/M5T4Vk=;
+ b=Ka9DiNxDvJXqFRTElJS5g1ACV4K24Ww4UiVx8b0EREHe/1LNI0269yRxUnlHAPr0/0
+ TT4qQ/6rixgUKkq/QfpQ3PVC1gCY2ep3tNA/hm4GfPEUtCmB/1F25TJvGhTnskOxvwn2
+ JAUt04pejn8nCEb5QG6iQWQp5eW5qx0BbbkA6b0fSLaYKULxkkvNWMXbylQQUIjrhjsQ
+ ta8rGg8jG6W0o4REdlt5y0xhmWiIjxJRjBm6mPa2NwLwNnJMDRaE/L72Y5UDn+9kpm2W
+ bGvYb6mhLXNGv22huNcAVZMqBLVcYZ4u4y2j6pJuzmsFQA/kv4tl9RojCR46SUxPgnBl
+ 12Ig==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVA4DUE1SlLc9WogDkHL63QY1l6otCJQCVoEYcmfE8zlBsiQbBTcGNY2wKhm6rDYbTRtumQ7jYNMhx8bbZ+CxxDOKT/rA==
-X-Gm-Message-State: AOJu0Yw0oMZb3VEnIzeQ8qlAO0d768zEMtS4+spclaRj3d7J5SjWo2hf
- xBg4fxFj15P4TeMQwJzymYUr1Do4C8eUM5uwkPO5wOBluEvoDGe/EZAu6s9QQic4ijFElByx36P
- bjAGD5Imt21BFrdvJubMnBkLOHmX1iDlHs5Rf
-X-Google-Smtp-Source: AGHT+IFn47WcVeffH+2SUfXirViByWOvREGb1B9HE6HvESP7Eloa+hqNT6pUUhTDWODU3BcnS5+/aoH1s74KFIyEUuY=
-X-Received: by 2002:a05:6102:cd1:b0:494:829:835b with SMTP id
- ada2fe7eead31-495d8404772mr7947817137.9.1723387830776; Sun, 11 Aug 2024
- 07:50:30 -0700 (PDT)
+ AJvYcCXUFJlzwyarVMXX23vGkKRQVPlqZRflnz0GFJEvX/udvdwHa6p8sS/eZS1UPfv8hKFvLX0GMBnmCWwRNc93LKn3Ye/daA==
+X-Gm-Message-State: AOJu0YwzDtCcJGFaLx4zS9TSHvK/BOUHyWe2sYXVLf71LtdndrjET4uq
+ nv1CraPTIXpowz5DCpLNWJFN8t0dglJxq+4YW1f0ugam8Aq4EIFy9VDoP3ZhbiHM4QsI3rTMh53
+ 1iwoW4xoZvurRg150vQcE6F8Y/8YiyP3bkZ2h
+X-Google-Smtp-Source: AGHT+IFQ0T/C8vcqBX6TjAHzt5erKWy/FEq1/abg4uLP3TDEO/A2uZgfhn1kW0vL11/k4bExVEkwFkrNJ4ntThkQiK0=
+X-Received: by 2002:a05:6214:5413:b0:6bb:bc46:fb79 with SMTP id
+ 6a1803df08f44-6bd78e84162mr81768446d6.47.1723387832424; Sun, 11 Aug 2024
+ 07:50:32 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240806125850.2316956-1-sjg@chromium.org>
- <20240806125850.2316956-7-sjg@chromium.org>
- <eb48b869-a130-46a0-b35b-22bdb30daa7f@gmx.de>
- <CAFLszTgngCiS-Ajws3z8gXZAZM771iBLvT5Zn9oAaoqM_0B=jQ@mail.gmail.com>
- <ecbf0aab-0632-4848-8c68-b612c907ec23@gmx.de>
-In-Reply-To: <ecbf0aab-0632-4848-8c68-b612c907ec23@gmx.de>
+ <20240806125850.2316956-38-sjg@chromium.org>
+ <23093165-6af9-4582-8448-7bbae3c86be2@gmx.de>
+ <20240807015613.GD1626301@bill-the-cat>
+ <CAFLszThhn0240xt1j6GQB9QTKxiHiAg6J3vMXCnHBE15iYZSkA@mail.gmail.com>
+ <20240808200634.GR1626301@bill-the-cat>
+In-Reply-To: <20240808200634.GR1626301@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 11 Aug 2024 08:50:20 -0600
-Message-ID: <CAFLszThkZXD_0NF9nBOFgKj9F58TXZwS2rrOs-VoBQyonfHQag@mail.gmail.com>
-Subject: Re: [PATCH v2 06/39] bootstd: Create a function to reset USB
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Dan Carpenter <dan.carpenter@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+Date: Sun, 11 Aug 2024 08:50:21 -0600
+Message-ID: <CAFLszThM=23AXCOfZ_uOyGGDQTRurDpAjR-t8X_NHjz4LgQ9SA@mail.gmail.com>
+Subject: Re: [PATCH v2 37/39] efi: Avoid using sandbox virtio devices
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Raymond Mao <raymond.mao@linaro.org>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -91,129 +93,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Thu, 8 Aug 2024 at 15:12, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Thu, 8 Aug 2024 at 14:06, Tom Rini <trini@konsulko.com> wrote:
 >
-> On 07.08.24 16:36, Simon Glass wrote:
-> > Hi Heinrich,
+> On Thu, Aug 08, 2024 at 12:44:05PM -0600, Simon Glass wrote:
+> > Hi Heinrick, Tom,
 > >
-> > On Tue, 6 Aug 2024 at 19:56, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >>
-> >> On 06.08.24 14:58, Simon Glass wrote:
-> >>> Set up a function for this, since it needs to be used from multiple test
-> >>> files.
-> >>>
-> >>> Signed-off-by: Simon Glass <sjg@chromium.org>
-> >>> ---
-> >>>
-> >>> (no changes since v1)
-> >>>
-> >>>    test/boot/bootdev.c        | 19 ++++++-------------
-> >>>    test/boot/bootstd_common.c | 12 ++++++++++++
-> >>>    test/boot/bootstd_common.h |  8 ++++++++
-> >>>    3 files changed, 26 insertions(+), 13 deletions(-)
-> >>>
-> >>> diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
-> >>> index 1bf5929c396..de16a51956d 100644
-> >>> --- a/test/boot/bootdev.c
-> >>> +++ b/test/boot/bootdev.c
-> >>> @@ -16,13 +16,6 @@
-> >>>    #include <test/ut.h>
-> >>>    #include "bootstd_common.h"
-> >>>
-> >>> -/* Allow reseting the USB-started flag */
-> >>> -#if defined(CONFIG_USB_HOST) || defined(CONFIG_USB_GADGET)
-> >>> -extern bool usb_started;
-> >>> -#else
-> >>> -#include <usb.h>
-> >>> -#endif
-> >>> -
-> >>>    /* Check 'bootdev list' command */
-> >>>    static int bootdev_test_cmd_list(struct unit_test_state *uts)
-> >>>    {
-> >>> @@ -201,7 +194,7 @@ static int bootdev_test_order(struct unit_test_state *uts)
-> >>>        test_set_skip_delays(true);
-> >>>
-> >>>        /* Start up USB which gives us three additional bootdevs */
-> >>> -     usb_started = false;
-> >>> +     bootstd_reset_usb();
-> >>>        ut_assertok(run_command("usb start", 0));
-> >>>
-> >>>        /*
-> >>> @@ -317,7 +310,7 @@ static int bootdev_test_prio(struct unit_test_state *uts)
-> >>>        test_set_eth_enable(false);
-> >>>
-> >>>        /* Start up USB which gives us three additional bootdevs */
-> >>> -     usb_started = false;
-> >>> +     bootstd_reset_usb();
-> >>>        ut_assertok(run_command("usb start", 0));
-> >>>
-> >>>        ut_assertok(bootstd_test_drop_bootdev_order(uts));
-> >>> @@ -357,7 +350,7 @@ static int bootdev_test_hunter(struct unit_test_state *uts)
-> >>>    {
-> >>>        struct bootstd_priv *std;
-> >>>
-> >>> -     usb_started = false;
-> >>> +     bootstd_reset_usb();
-> >>>        test_set_skip_delays(true);
-> >>>
-> >>>        /* get access to the used hunters */
-> >>> @@ -398,7 +391,7 @@ static int bootdev_test_cmd_hunt(struct unit_test_state *uts)
-> >>>        struct bootstd_priv *std;
-> >>>
-> >>>        test_set_skip_delays(true);
-> >>> -     usb_started = false;
-> >>> +     bootstd_reset_usb();
-> >>>
-> >>>        /* get access to the used hunters */
-> >>>        ut_assertok(bootstd_get_priv(&std));
-> >>> @@ -527,7 +520,7 @@ BOOTSTD_TEST(bootdev_test_bootable, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
-> >>>    /* Check hunting for bootdev of a particular priority */
-> >>>    static int bootdev_test_hunt_prio(struct unit_test_state *uts)
-> >>>    {
-> >>> -     usb_started = false;
-> >>> +     bootstd_reset_usb();
-> >>>        test_set_skip_delays(true);
-> >>>
-> >>>        console_record_reset_enable();
-> >>> @@ -556,7 +549,7 @@ static int bootdev_test_hunt_label(struct unit_test_state *uts)
-> >>>        struct bootstd_priv *std;
-> >>>        int mflags;
-> >>>
-> >>> -     usb_started = false;
-> >>> +     bootstd_reset_usb();
-> >>>
-> >>>        /* get access to the used hunters */
-> >>>        ut_assertok(bootstd_get_priv(&std));
-> >>> diff --git a/test/boot/bootstd_common.c b/test/boot/bootstd_common.c
-> >>> index e50539500a0..ff0aff4bbe7 100644
-> >>> --- a/test/boot/bootstd_common.c
-> >>> +++ b/test/boot/bootstd_common.c
-> >>> @@ -20,6 +20,13 @@
-> >>>    /* tracks whether bootstd_setup_for_tests() has been run yet */
-> >>>    bool vbe_setup_done;
-> >>>
-> >>> +/* Allow resetting the USB-started flag */
-> >>> +#if defined(CONFIG_USB_HOST) || defined(CONFIG_USB_GADGET)
-> >>> +extern bool usb_started;
-> >>> +#else
-> >>> +#include <usb.h>
-> >>> +#endif
-> >>
-> >> Why can't you always include usb.h which defines usb_started?
-> >> Is there a bug in usb.h?
+> > On Tue, 6 Aug 2024 at 19:56, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Wed, Aug 07, 2024 at 03:47:21AM +0200, Heinrich Schuchardt wrote:
+> > > > On 06.08.24 14:58, Simon Glass wrote:
+> > > > > While sandbox supports virtio it cannot support actually using the block
+> > > > > devices to read files, since there is nothing on the other end of the
+> > > > > 'virtqueue'.
+> > > > >
+> > > > > A recent change makes EFI probe all block devices, whether used or not.
+> > > > > This is apparently required by EFI, although it violates U-Boot's
+> > > > > lazy-init principle.
+> > > > >
+> > > > > We cannot just drop the virtio devices as they are used in sandbox tests.
+> > > > >
+> > > > > So for now just add a special case to work around this.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
+> > > > >
+> > > > > (no changes since v1)
+> > > > >
+> > > > >   lib/efi_loader/efi_disk.c | 14 +++++++++++++-
+> > > > >   1 file changed, 13 insertions(+), 1 deletion(-)
+> > > > >
+> > > > > diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+> > > > > index 93a9a5ac025..2e1d37848fc 100644
+> > > > > --- a/lib/efi_loader/efi_disk.c
+> > > > > +++ b/lib/efi_loader/efi_disk.c
+> > > > > @@ -838,8 +838,20 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
+> > > > >   efi_status_t efi_disks_register(void)
+> > > > >   {
+> > > > >     struct udevice *dev;
+> > > > > +   struct uclass *uc;
+> > > > >
+> > > > > -   uclass_foreach_dev_probe(UCLASS_BLK, dev) {
+> > > > > +   uclass_id_foreach_dev(UCLASS_BLK, dev, uc) {
+> > > > > +           /*
+> > > > > +            * The virtio block-device hangs on sandbox when accessed since
+> > > > > +            * there is nothing listening to the mailbox
+> > > > > +            */
+> > > > > +           if (IS_ENABLED(CONFIG_SANDBOX)) {
+> > > > > +                   struct blk_desc *desc = dev_get_uclass_plat(dev);
+> > > > > +
+> > > > > +                   if (desc->uclass_id == UCLASS_VIRTIO)
+> > > > > +                           continue;
+> > > >
+> > > > We should avoid depending on the sandbox everywhere.
+> > > >
+> > > > Please, fix the problem in the sandbox driver.
+> > > >
+> > > > If you cannot fix it, run the tests involving virtio on QEMU instead of
+> > > > the sandbox.
 > >
-> > I can, but even in tests it is not great to access globals. Having it
-> > in a function lets us call out these particular settings better, which
-> > has aided debugging, at least for me. These tests are special in that
-> > they are not DM tests, but do stop USB.
+> > Which test? All of the EFI tests fail due to this problem. The test
+> > actually has nothing to do with virtio, it is just that EFI goes and
+> > probes every single block device, since [1].
 >
-> I was just wondering if we can can rid of the #if here. That should not
-> stop you from creating a function to access the variable.
+> Aren't we running "the tests" on other platforms such as QEMU today?
+>
+> > > This is an area we go back-and-forth on but, yes, IMHO, if we can't
+> > > easily provide a virtio device for sandbox, QEMU is right there and what
+> > > this is for, so I see sandbox as more useful as build rather than
+> > > runtime checking in this case.
+> >
+> > The best solution would be to implement a simple emulator, like we do
+> > in other places for sandbox. At present virtio_sandbox_notify() is
+> > empty.
+> >
+> > I don't mind working on that, but would like to get a temporary
+> > solution here so this test can land.
+> >
+> > Talking about virtio for QEMU is missing the point of this test, which
+> > is after all a test of booting an EFI app. I do wish more people would
+> > see the value in these unit tests. There is a talk at [2] which shows
+> > how emulators are used in Zephyr.
+>
+> So that talk is interesting, yes. So, yes, implement the bus driver for
+> sandbox for virtio, and until then we shouldn't have the tests running
+> on sandbox? Or am I still missing something?
 
-Ah, I see. Yes, it is an artifact of it being built for boards without
-USB, but now we only build for sandbox, so I can drop that.
+Sure, but perhaps there is a way to get this test landed without doing
+that work right away?
+
+I'm not sure if we actually need d5391bf02b9 ("efi_loader: ensure all
+block devices are probed"). It seems to fix a real problem, though.
+
+>
+> But I also still say that given that we as a project are more resource
+> constrained than Zephyr, for things that are QEMU-centric, there's
+> already a wealth of information on debugging QEMU since it too is
+> software. There's only so many hours in the day after all.
+
+One of Zephyr's challenges is that it relied on QEMU for almost all
+testing for a long time. As a result it takes a huge amount of CPU
+power to run tests - last I checked it was something like an hour on a
+64-core machine. U-Boot's unit tests ('ut all') run in about 12
+seconds on my machine. I could go on for hours about the different
+types of tests and the benefits of one versus the other, but the
+cheapest answer is not necessarily just to do a 'happy path' test and
+call it good.
+
+For this particular test, I do want to have tests for each bootmeth,
+to the point of running the target, so far as possible. It turns out
+that we can launch an EFI app on sandbox, so connecting it up to
+bootstd seems valuable to me.
+
+I've filed an issue for the virtio improvements.
 
 Regards,
 Simon
