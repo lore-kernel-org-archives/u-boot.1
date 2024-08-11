@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDF8BC52D7B
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 15:03:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0248C3DA4A
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 15:03:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C44988C4A;
-	Sun, 11 Aug 2024 16:53:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 60AFA888AB;
+	Sun, 11 Aug 2024 16:53:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cCqJgkrX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Oh1sVEJC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94A2F88898; Sun, 11 Aug 2024 16:53:04 +0200 (CEST)
-Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
- [IPv6:2607:f8b0:4864:20::12e])
+ id B8B8388898; Sun, 11 Aug 2024 16:53:04 +0200 (CEST)
+Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
+ [IPv6:2607:f8b0:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 251F0889E3
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:52:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 24DF088C16
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:52:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12e.google.com with SMTP id
- e9e14a558f8ab-396675b83afso16623325ab.0
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:52:59 -0700 (PDT)
+Received: by mail-il1-x132.google.com with SMTP id
+ e9e14a558f8ab-39b38295008so10986245ab.2
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:52:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723387978; x=1723992778; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723387976; x=1723992776; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9fHFqiEb/an93PtFX+BLCkE6/YVYMa2Q9B8rwdB3tC4=;
- b=cCqJgkrXCiVDk2K3uSd35N4vT85tV+EGNJP0fYN+W7+1VYK1riSR5W9RxoVCqdz9Vm
- ze/y0/AX9oc75q/GsjYWOtn92IDpbjNnWHuwqr1App/JkrmJ7WesdkV2TyfYQIWMsisa
- nhtAp83/PvoZf4Jj6rFlqwAbxmhkxdcwbEfc8=
+ bh=yzZSEdq27xsTACKG9U6R1IRZchzVcWl4fQRrNpNdfyQ=;
+ b=Oh1sVEJCA9Yb5ou6aoeiY72oGbYevQpkKqx/Jgxs5YgDJB3LhC1R8BtJbXBGLBe/OW
+ Ew1+3BUmkGP3GJ/OrOxOvvjWOGm7sa30VU3yaTUQAuGTAcN5crl8KQscUjcEIaDn4Hun
+ lR+co6hA72q2M+KUGkOX3q6r9nHqysncMEKTc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723387978; x=1723992778;
+ d=1e100.net; s=20230601; t=1723387976; x=1723992776;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9fHFqiEb/an93PtFX+BLCkE6/YVYMa2Q9B8rwdB3tC4=;
- b=fQ5bCuCiWfPyrQm7RETHhd4wOeixe1a0o5py0G6tMv+U+ILpjGgm8Zm7s+6KBI/5Ut
- yvNx2Q3fQhOQVwxiQ45OxSurfVbSfloKd7JHPqEY4Sh3uAcNEuAZs/80iSnSuTlKx+qT
- s2SI4ySnUw56yTsh+dU69mFws+WNHj0/UMYORbAxHNJHKC00asZdpohw6X7q7G/RK929
- Wd5E/a3/CnUEqipAoUA6oxTC0TVQLWY1q/d3LZfzrf6wmuGh9IK2y8VJ7+nzp+G2IQIt
- o7tVjoTdT4/KQpwcV5ofrRp6atIDxydp3f3sb/wtku/hCUCZwP5tnHoEHfzJKX218TTT
- v1UQ==
-X-Gm-Message-State: AOJu0YznOtxvmRLR9yRRCC3XG18HuZ+oWWM9NJFTvt/gxEcvBI3s/Yye
- Ycp540nhRCt90DU4HL9oX+ghjtQus4zlXgvPa3ySxtI6ZA8fU0Ercuv0szmZ88mwuShBAnhg6RA
+ bh=yzZSEdq27xsTACKG9U6R1IRZchzVcWl4fQRrNpNdfyQ=;
+ b=vQeFFkZZWzgB/MdiQ3RZp9PHcu+isFsLu3vXuqtJ5gS3PUn0YNqw23ZE0oQvjVaPBY
+ TB7cjryyFHHrJqOUCzyKPxwNWnSX8SURzbFBWcW6emb0CLlMBZtATxDmcjrJT1OwxG3r
+ h5hPnq2NqXDcul27gnGB0LSidRpiOm7TgTc0Z/rC0n1kcugXbqhsMh9v39RXfAIwq8AI
+ K3IK/JrpogCNsfLOHbpjmnmQiIN+TP6w+npA9kQcdInOTWBp2EGsTtiBcrIxx0CR9RDS
+ KDD0C6jT6oi4StP8t4jy6Noy/ffkbr3VstCdraiu8t5yy93bZfSQAjj/JDma5h30vzjb
+ wySA==
+X-Gm-Message-State: AOJu0YwMIBmbvg+os/7qPv5pAieab4PNVPQqw1TdPN8ZkJdSZeVWsIDF
+ GlwUx7WGpyRXJe8YRwZmFwVw8156cH5/5MzegpQlMORKIXyapKn4/5dGLlt19R/PC9Y+kyZhl2I
  =
-X-Google-Smtp-Source: AGHT+IHpz09dKxPWXW3kDi/XuIB4k/3XldBle2JrGQYR7Q4UeGUVbO/W9izLQA409IfsiSw8SPl5XQ==
-X-Received: by 2002:a05:6e02:13a2:b0:39b:20d8:601e with SMTP id
- e9e14a558f8ab-39b7a4757aemr95218785ab.3.1723387977840; 
- Sun, 11 Aug 2024 07:52:57 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEM4+BQJoxsZYBF2cIs6xsBdqDD1d+BaV5dGPCUHR3Im7EwI0dg73V3kYvdcRrFM3J2L4sisA==
+X-Received: by 2002:a05:6e02:1525:b0:374:ac3a:e32c with SMTP id
+ e9e14a558f8ab-39b78492e8emr86299605ab.16.1723387975815; 
+ Sun, 11 Aug 2024 07:52:55 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39c30a9a2c8sm11195855ab.43.2024.08.11.07.52.57
+ e9e14a558f8ab-39c30a9a2c8sm11195855ab.43.2024.08.11.07.52.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Aug 2024 07:52:57 -0700 (PDT)
+ Sun, 11 Aug 2024 07:52:55 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 36/40] efi: Disable ANSI output for tests
-Date: Sun, 11 Aug 2024 08:52:05 -0600
-Message-Id: <20240811145209.4191404-37-sjg@chromium.org>
+Subject: [PATCH v3 33/40] bootstd: Make bootdev_next_prio() continue after
+ failure
+Date: Sun, 11 Aug 2024 08:52:02 -0600
+Message-Id: <20240811145209.4191404-34-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240811145209.4191404-1-sjg@chromium.org>
 References: <20240811145209.4191404-1-sjg@chromium.org>
@@ -90,105 +91,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We don't want ANSI characters written in tests since it is a pain to
-check the output with ut_assert_nextline() et al.
+When a device fails to probe, the next device should be tried, until
+either we find a suitable device or run out of devices. A device
+should never be tried twice.
 
-Provide a way to tests to request that ANSI characters not be sent.
+When we run out of devices of a particular priority, the hunter should
+be used to generate devices of the next priority. Only if all attempts
+fail should this function return an error.
 
-Add a proper function comment while we are here, to encourage others.
+Update the function to use the latent 'found' boolean to determine
+whether another loop iteration is warranted, rather than setting 'dev'
+to NULL, which creates confusion, suggesting that no devices have been
+scanned and the whole process is starting from the beginning.
+
+Note that the upcoming bootflow_efi() test is used to test this
+behaviour.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Fixes: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/17
 ---
 
 (no changes since v1)
 
- include/efi_loader.h         | 21 ++++++++++++++++++++-
- lib/efi_loader/efi_console.c | 26 +++++++++++++++++---------
- 2 files changed, 37 insertions(+), 10 deletions(-)
+ boot/bootdev-uclass.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index f84852e384f..82b90ee0f1d 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -531,8 +531,27 @@ efi_status_t efi_bootmgr_delete_boot_option(u16 boot_index);
- efi_status_t efi_bootmgr_run(void *fdt);
- /* search the boot option index in BootOrder */
- bool efi_search_bootorder(u16 *bootorder, efi_uintn_t num, u32 target, u32 *index);
--/* Set up console modes */
-+
-+/**
-+ * efi_setup_console_size() - update the mode table.
-+ *
-+ * By default the only mode available is 80x25. If the console has at least 50
-+ * lines, enable mode 80x50. If we can query the console size and it is neither
-+ * 80x25 nor 80x50, set it as an additional mode.
-+ */
- void efi_setup_console_size(void);
-+
-+/**
-+ * efi_console_set_ansi() - Set whether ANSI characters should be emitted
-+ *
-+ * These characters mess up tests which use ut_assert_nextline(). Call this
-+ * function to tell efi_loader not to emit these characters when starting up the
-+ * terminal
-+ *
-+ * @allow_ansi: Allow emitting ANSI characters
-+ */
-+void efi_console_set_ansi(bool allow_ansi);
-+
- /* Set up load options from environment variable */
- efi_status_t efi_env_set_load_options(efi_handle_t handle, const char *env_var,
- 				      u16 **load_options);
-diff --git a/lib/efi_loader/efi_console.c b/lib/efi_loader/efi_console.c
-index cea50c748aa..569fc9199bc 100644
---- a/lib/efi_loader/efi_console.c
-+++ b/lib/efi_loader/efi_console.c
-@@ -30,6 +30,17 @@ struct cout_mode {
+diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
+index 15a8a3555c6..807f8dfb064 100644
+--- a/boot/bootdev-uclass.c
++++ b/boot/bootdev-uclass.c
+@@ -640,6 +640,7 @@ int bootdev_next_prio(struct bootflow_iter *iter, struct udevice **devp)
+ 	*devp = NULL;
+ 	log_debug("next prio %d: dev=%p/%s\n", iter->cur_prio, dev,
+ 		  dev ? dev->name : "none");
++	found = false;
+ 	do {
+ 		/*
+ 		 * Don't probe devices here since they may not be of the
+@@ -682,13 +683,13 @@ int bootdev_next_prio(struct bootflow_iter *iter, struct udevice **devp)
+ 			}
+ 		} else {
+ 			ret = device_probe(dev);
+-			if (ret) {
++			if (ret)
+ 				log_debug("Device '%s' failed to probe\n",
+ 					  dev->name);
+-				dev = NULL;
+-			}
++			else
++				found = true;
+ 		}
+-	} while (!dev);
++	} while (!found);
  
- __maybe_unused static struct efi_object uart_obj;
- 
-+/*
-+ * suppress emission of ANSI codes for use by unit tests. Leave it as 0 for the
-+ * default behaviour
-+ */
-+static bool no_ansi;
-+
-+void efi_console_set_ansi(bool allow_ansi)
-+{
-+	no_ansi = !allow_ansi;
-+}
-+
- static struct cout_mode efi_cout_modes[] = {
- 	/* EFI Mode 0 is 80x25 and always present */
- 	{
-@@ -348,13 +359,6 @@ static int __maybe_unused query_vidconsole(int *rows, int *cols)
- 	return 0;
- }
- 
--/**
-- * efi_setup_console_size() - update the mode table.
-- *
-- * By default the only mode available is 80x25. If the console has at least 50
-- * lines, enable mode 80x50. If we can query the console size and it is neither
-- * 80x25 nor 80x50, set it as an additional mode.
-- */
- void efi_setup_console_size(void)
- {
- 	int rows = 25, cols = 80;
-@@ -362,8 +366,12 @@ void efi_setup_console_size(void)
- 
- 	if (IS_ENABLED(CONFIG_VIDEO))
- 		ret = query_vidconsole(&rows, &cols);
--	if (ret)
--		ret = query_console_serial(&rows, &cols);
-+	if (ret) {
-+		if (no_ansi)
-+			ret = 0;
-+		else
-+			ret = query_console_serial(&rows, &cols);
-+	}
- 	if (ret)
- 		return;
+ 	*devp = dev;
  
 -- 
 2.34.1
