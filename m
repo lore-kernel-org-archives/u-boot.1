@@ -4,74 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D330C52D7C
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 12:30:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D94E9C52D7C
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 12:30:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FC568855C;
+	by phobos.denx.de (Postfix) with ESMTP id 69EC388755;
 	Sun, 11 Aug 2024 14:29:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KSSl7k0d";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R4WBP1gw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AC2888617; Sun, 11 Aug 2024 14:29:39 +0200 (CEST)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id 9274288680; Sun, 11 Aug 2024 14:29:40 +0200 (CEST)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 216F18852E
+ by phobos.denx.de (Postfix) with ESMTPS id DC8188837D
  for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 14:29:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-81f8f01981aso136132839f.2
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-81f9339e534so120451639f.3
  for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 05:29:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1723379376; x=1723984176; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8vTSWX4XsUv7hazuNMwfv8h9SJvWHPcc9YieR9CkCrI=;
- b=KSSl7k0dGhxZfYuuqmQ1e2nY/C6j9Naok7Eke8paFuSUMsHDTmOEKl53Nj0amq32gB
- Ws1prp8syY7/imudQPfjMCDl1yHjU54iScJmi4cmsu0kQKaiQ8edbLQN3VIef2F9lqkU
- PrGpggyToOfOp/PLZGhmp42igMHXTpAmnCas0=
+ bh=qf7fcrtYbSX8z2HBiPAuNHc7m1MrGdeZ0jMc562veCQ=;
+ b=R4WBP1gw6G12740FnK8xzmTOWtbVVNrwspRyn3mNoZErgWH0ncDiTm+ETfESzHDMkd
+ R/13iOHXpRQj/qQaaYFA/YIzfX/R3BSWHhNUBjFnDBR2rgryWKJgx77VHP+GGvr8hZzZ
+ lF5WP65sbAxDwOCNrTJxLH+pEVfYYgYjEHlsQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1723379376; x=1723984176;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8vTSWX4XsUv7hazuNMwfv8h9SJvWHPcc9YieR9CkCrI=;
- b=QEfvSssOySSGfkfAy+jgUo20A8pohKxuGBxm0DAwdAqZrJ9Wxls8l14YpOA7L4b2na
- 6U7NnuxFlBpMhp6FrVVTHNrBtsuaxXA+Kofx9Amjeqg+7ONzXbWXAPdaF6p0nt2Wz8fs
- HYD2zqRwoHytP4+G6iH4LOJpgR79EojMxCLeWHJ+U/LZkJqmR21iyYJKDEWuH4yiqocc
- YHfLJMBZKVEJk0b6C+WL5iJSyxwbylGAHIa75hgyL/WO/v4YjUH/8N0tWTjG9Jjuewgo
- gHgN2k7xnBbb8GLhQ4ArlFpDtmrXcxRXovlEyIBlLOiNRsNzmB4f7/qa5fp9PaLgX5xD
- bI8w==
-X-Gm-Message-State: AOJu0YxYHwM192ukFqaZMQT7c2Db3DSL70Jt3pyi7qx2sg6AXqZO2gX+
- h5K8WQAhwPjl37g/4ZaSv/pzm7MSBMOVzH4S1etXkwcuUH5EywAY8pu1oXWhX5KZW5Ztwwgn3Nc
+ bh=qf7fcrtYbSX8z2HBiPAuNHc7m1MrGdeZ0jMc562veCQ=;
+ b=emzcsIQOHBSy6IUaf5aacYOsGBkVy3vJ3T9NdWG65LXMlEdun838E6aLEaVwgzAu+E
+ 9/CdI7eZkzuY9UJgV6I+I/R/vZndBl7eyf+RmJ67YAm+s9O6DNdeFTTkyHFsbwxCUNmu
+ jFd1XsdPyThkRKoeFx3t0+JUusdmBDzudlZgmcrZ12K92O+An7e1T8r7eYAo0Nrcrlac
+ nLLO5j0LzpVtJWZgquXmqN7EcbuQEPfZaKRm/vp5dej9VXaDIYwyJ+qUm1F4/xbKNmzq
+ zZUrVMOjbqksoVUJa32LoEuI9hJ9gpuWVAX+EQjV7T3DtJvlH7JYqtONIkpVB/VGe138
+ 40ZA==
+X-Gm-Message-State: AOJu0Yw5Xa+tAVa+AUN0/5uM5dU2lGR8yeSPeqPngKXTwJ5MiSUtZrXD
+ +/FrOB/NlE6K7riFNmv8gG1gUxcOSvs4iaDe86S4qQqzFe2Oo2R7Lb9bYBIC/2kqwQI6wvL+AQk
  =
-X-Google-Smtp-Source: AGHT+IGxuWhvOjnlOkQe8dBa8g0x8j+IYRmcmx7MQbvwo+77zL4dmgSeevHEGPlP5/Qe6GQRbXLLgw==
-X-Received: by 2002:a05:6602:341c:b0:803:83c0:6422 with SMTP id
- ca18e2360f4ac-8225ee8437dmr989249939f.9.1723379375684; 
- Sun, 11 Aug 2024 05:29:35 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGm1kM7m7CXYLvOry2iNy1QDZKXuJlyX12BuvsfE6YXw49HzNblhI5Je/NUf4M5pO1kTlsqVg==
+X-Received: by 2002:a05:6602:13c8:b0:7f6:2d58:8d6a with SMTP id
+ ca18e2360f4ac-8225ee7a6a6mr923137139f.7.1723379376467; 
+ Sun, 11 Aug 2024 05:29:36 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
  8926c6da1cb9f-4ca76940448sm1017935173.45.2024.08.11.05.29.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Aug 2024 05:29:35 -0700 (PDT)
+ Sun, 11 Aug 2024 05:29:36 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Dragan Simic <dsimic@manjaro.org>,
  Quentin Schulz <quentin.schulz@cherry.de>,
- Jeffy Chen <jeffy.chen@rock-chips.com>,
- Kever Yang <kever.yang@rock-chips.com>, huang lin <hl@rock-chips.com>
-Subject: [PATCH v3 02/15] rockchip: Move the default timer init to a common
- file
-Date: Sun, 11 Aug 2024 06:29:11 -0600
-Message-Id: <20240811122924.4035982-3-sjg@chromium.org>
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Subject: [PATCH v3 03/15] spl: Correct use of CMD_BOOTI and CMD_BOOTZ
+Date: Sun, 11 Aug 2024 06:29:12 -0600
+Message-Id: <20240811122924.4035982-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240811122924.4035982-1-sjg@chromium.org>
 References: <20240811122924.4035982-1-sjg@chromium.org>
@@ -93,190 +90,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rather than repeating the same code in two files (SPL and TPL), move it
-to a shared filed.
+These should have a CONFIG_ prefix. Add it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+Fixes: 7a0d88076b9 ("Add in the ability to load and boot an uncompr...")
+Reviewed-by: Sean Anderson <seanga2@gmail.com>
 Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- Drop unused constants from spl.c file
+ common/spl/spl.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- arch/arm/include/asm/arch-rockchip/timer.h |  3 ++
- arch/arm/mach-rockchip/Makefile            |  4 +--
- arch/arm/mach-rockchip/spl.c               | 28 +----------------
- arch/arm/mach-rockchip/spl_common.c        | 36 ++++++++++++++++++++++
- arch/arm/mach-rockchip/tpl.c               | 30 +-----------------
- 5 files changed, 43 insertions(+), 58 deletions(-)
- create mode 100644 arch/arm/mach-rockchip/spl_common.c
-
-diff --git a/arch/arm/include/asm/arch-rockchip/timer.h b/arch/arm/include/asm/arch-rockchip/timer.h
-index 77b54220447..b5fc738c98c 100644
---- a/arch/arm/include/asm/arch-rockchip/timer.h
-+++ b/arch/arm/include/asm/arch-rockchip/timer.h
-@@ -15,4 +15,7 @@ struct rk_timer {
- 	u32 timer_int_status;
- };
- 
-+/** rockchip_stimer_init() - Set up the timer ready for use */
-+void rockchip_stimer_init(void);
-+
- #endif
-diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-rockchip/Makefile
-index c07bdaee4c3..3b13891ec24 100644
---- a/arch/arm/mach-rockchip/Makefile
-+++ b/arch/arm/mach-rockchip/Makefile
-@@ -8,9 +8,9 @@
- # inaccessible/protected memory (and the bootrom-helper assumes that
- # the stack-pointer is valid before switching to the U-Boot stack).
- obj-spl-$(CONFIG_ROCKCHIP_BROM_HELPER) += bootrom.o
--obj-spl-$(CONFIG_SPL_ROCKCHIP_COMMON_BOARD) += spl.o spl-boot-order.o
-+obj-spl-$(CONFIG_SPL_ROCKCHIP_COMMON_BOARD) += spl.o spl-boot-order.o spl_common.o
- obj-tpl-$(CONFIG_ROCKCHIP_BROM_HELPER) += bootrom.o
--obj-tpl-$(CONFIG_TPL_ROCKCHIP_COMMON_BOARD) += tpl.o
-+obj-tpl-$(CONFIG_TPL_ROCKCHIP_COMMON_BOARD) += tpl.o spl_common.o
- obj-tpl-$(CONFIG_ROCKCHIP_PX30) += px30-board-tpl.o
- 
- obj-spl-$(CONFIG_ROCKCHIP_RK3036) += rk3036-board-spl.o
-diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
-index 3ce7e792b5a..f4d29bbdd17 100644
---- a/arch/arm/mach-rockchip/spl.c
-+++ b/arch/arm/mach-rockchip/spl.c
-@@ -13,6 +13,7 @@
- #include <ram.h>
- #include <spl.h>
- #include <asm/arch-rockchip/bootrom.h>
-+#include <asm/arch-rockchip/timer.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <linux/bitops.h>
-@@ -79,33 +80,6 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
- 	return MMCSD_MODE_RAW;
- }
- 
--#define TIMER_LOAD_COUNT_L	0x00
--#define TIMER_LOAD_COUNT_H	0x04
--#define TIMER_CONTROL_REG	0x10
--#define TIMER_EN	0x1
--#define	TIMER_FMODE	BIT(0)
--#define	TIMER_RMODE	BIT(1)
--
--__weak void rockchip_stimer_init(void)
--{
--#if defined(CONFIG_ROCKCHIP_STIMER_BASE)
--	/* If Timer already enabled, don't re-init it */
--	u32 reg = readl(CONFIG_ROCKCHIP_STIMER_BASE + TIMER_CONTROL_REG);
--
--	if (reg & TIMER_EN)
--		return;
--#ifndef CONFIG_ARM64
--	asm volatile("mcr p15, 0, %0, c14, c0, 0"
--		     : : "r"(CONFIG_COUNTER_FREQUENCY));
--#endif
--	writel(0, CONFIG_ROCKCHIP_STIMER_BASE + TIMER_CONTROL_REG);
--	writel(0xffffffff, CONFIG_ROCKCHIP_STIMER_BASE);
--	writel(0xffffffff, CONFIG_ROCKCHIP_STIMER_BASE + 4);
--	writel(TIMER_EN | TIMER_FMODE, CONFIG_ROCKCHIP_STIMER_BASE +
--	       TIMER_CONTROL_REG);
--#endif
--}
--
- __weak int board_early_init_f(void)
- {
- 	return 0;
-diff --git a/arch/arm/mach-rockchip/spl_common.c b/arch/arm/mach-rockchip/spl_common.c
-new file mode 100644
-index 00000000000..b29f33448ab
---- /dev/null
-+++ b/arch/arm/mach-rockchip/spl_common.c
-@@ -0,0 +1,36 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * (C) Copyright 2019 Rockchip Electronics Co., Ltd
-+ */
-+
-+#include <asm/io.h>
-+#include <linux/bitops.h>
-+
-+#define TIMER_LOAD_COUNT_L	0x00
-+#define TIMER_LOAD_COUNT_H	0x04
-+#define TIMER_CONTROL_REG	0x10
-+#define TIMER_EN	0x1
-+#define	TIMER_FMODE	BIT(0)
-+#define	TIMER_RMODE	BIT(1)
-+
-+__weak void rockchip_stimer_init(void)
-+{
-+#if defined(CONFIG_ROCKCHIP_STIMER_BASE)
-+	/* If Timer already enabled, don't re-init it */
-+	u32 reg = readl(CONFIG_ROCKCHIP_STIMER_BASE + TIMER_CONTROL_REG);
-+
-+	if (reg & TIMER_EN)
-+		return;
-+
-+#ifndef CONFIG_ARM64
-+	asm volatile("mcr p15, 0, %0, c14, c0, 0"
-+		     : : "r"(CONFIG_COUNTER_FREQUENCY));
-+#endif
-+
-+	writel(0, CONFIG_ROCKCHIP_STIMER_BASE + TIMER_CONTROL_REG);
-+	writel(0xffffffff, CONFIG_ROCKCHIP_STIMER_BASE);
-+	writel(0xffffffff, CONFIG_ROCKCHIP_STIMER_BASE + 4);
-+	writel(TIMER_EN | TIMER_FMODE, CONFIG_ROCKCHIP_STIMER_BASE +
-+	       TIMER_CONTROL_REG);
-+#endif
-+}
-diff --git a/arch/arm/mach-rockchip/tpl.c b/arch/arm/mach-rockchip/tpl.c
-index 597a5caa84b..bbb9329e725 100644
---- a/arch/arm/mach-rockchip/tpl.c
-+++ b/arch/arm/mach-rockchip/tpl.c
-@@ -14,41 +14,13 @@
- #include <version.h>
- #include <asm/io.h>
- #include <asm/arch-rockchip/bootrom.h>
-+#include <asm/arch-rockchip/timer.h>
- #include <linux/bitops.h>
- 
- #if CONFIG_IS_ENABLED(BANNER_PRINT)
- #include <timestamp.h>
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index d6a364de6ee..028cba964fb 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -322,7 +322,7 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
  #endif
  
--#define TIMER_LOAD_COUNT_L	0x00
--#define TIMER_LOAD_COUNT_H	0x04
--#define TIMER_CONTROL_REG	0x10
--#define TIMER_EN	0x1
--#define	TIMER_FMODE	BIT(0)
--#define	TIMER_RMODE	BIT(1)
--
--__weak void rockchip_stimer_init(void)
--{
--#if defined(CONFIG_ROCKCHIP_STIMER_BASE)
--	/* If Timer already enabled, don't re-init it */
--	u32 reg = readl(CONFIG_ROCKCHIP_STIMER_BASE + TIMER_CONTROL_REG);
--
--	if (reg & TIMER_EN)
--		return;
--
--#ifndef CONFIG_ARM64
--	asm volatile("mcr p15, 0, %0, c14, c0, 0"
--		     : : "r"(CONFIG_COUNTER_FREQUENCY));
--#endif
--
--	writel(0, CONFIG_ROCKCHIP_STIMER_BASE + TIMER_CONTROL_REG);
--	writel(0xffffffff, CONFIG_ROCKCHIP_STIMER_BASE);
--	writel(0xffffffff, CONFIG_ROCKCHIP_STIMER_BASE + 4);
--	writel(TIMER_EN | TIMER_FMODE, CONFIG_ROCKCHIP_STIMER_BASE +
--	       TIMER_CONTROL_REG);
--#endif
--}
--
- void board_init_f(ulong dummy)
- {
- 	struct udevice *dev;
+ #if CONFIG_IS_ENABLED(OS_BOOT)
+-#if defined(CMD_BOOTI)
++#if defined(CONFIG_CMD_BOOTI)
+ 		ulong start, size;
+ 
+ 		if (!booti_setup((ulong)header, &start, &size, 0)) {
+@@ -336,7 +336,7 @@ int spl_parse_image_header(struct spl_image_info *spl_image,
+ 			      spl_image->load_addr, spl_image->size);
+ 			return 0;
+ 		}
+-#elif defined(CMD_BOOTZ)
++#elif defined(CONFIG_CMD_BOOTZ)
+ 		ulong start, end;
+ 
+ 		if (!bootz_setup((ulong)header, &start, &end)) {
 -- 
 2.34.1
 
