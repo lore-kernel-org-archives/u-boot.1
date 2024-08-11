@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2236EC3DA4A
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:50:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBEE8C52D7B
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:50:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6440B885F4;
+	by phobos.denx.de (Postfix) with ESMTP id C83C188617;
 	Sun, 11 Aug 2024 16:50:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OAv5ZgTL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XK5oIYCm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 757DD88580; Sun, 11 Aug 2024 16:50:15 +0200 (CEST)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id 69D5C885B3; Sun, 11 Aug 2024 16:50:16 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0083787E9D
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:50:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 48DDA88176
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:50:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-6b7b23793c1so22159286d6.0
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:50:12 -0700 (PDT)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6bf42a563c8so202896d6.1
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:50:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723387812; x=1723992612; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6c3NzLRSVdNOFX9HBBZ6d4nN1mdvUu0jBhOtkkJCHEk=;
- b=OAv5ZgTLGLsTOxcCn6GeIn9ZeWh/eq1mX8WJi0I2aRAt1tKuPqi+8xUiFQ6/GMLyO2
- Ao4AwLbBPU8obYykKwEU8OHjLWDbRcbKABsFEqq/51Dcf+a72pno6ZQBm3WUBOyhzD/G
- UHs8zeUyydpTF5gtYVlqPGPOMlnRL8v59xr0k=
+ d=chromium.org; s=google; t=1723387813; x=1723992613; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=YUT1eyH/snTUQx7Mpmqh16o6mnv7afKFV1q4XTU+LM0=;
+ b=XK5oIYCmDGvnuWV/0oTGL9qTk9htfsdGZI1KRoqRwwS26VuS+5O5ShIx/tvlWzSKKy
+ jyJt5+9EvyhLUrDk7FIQ8X8HriUvnAatMirhx7jWF4iAaBEn+BlE2XHjLxV/nFYedhXT
+ Q4PHHbxbxQcWSkMTiXrXy4GwtLoMe9gXi9Yu0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723387812; x=1723992612;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6c3NzLRSVdNOFX9HBBZ6d4nN1mdvUu0jBhOtkkJCHEk=;
- b=OawR+zMgoYbkVaVTUzGXp1vFraPJfRTakzUOrF0QmhdFLNseHcuJ/VrXLkkfaJd6pv
- 3YbZwAzqMX+jbTSjglrXBeiJpjEn9etnWVRGNvdBHnNlaP3If4dXHWmPlzV3ybkCaK2r
- e59g8mOppiu2Kyzl+nDTnRuZrjsL6xsjrwljSVC0V1olvyhLj/641NPM3uewU3yqtmK/
- 8NO+Bt6bmM2bYonLEQdFNBBzXUZn5MpRBDhnSyci2WKytQlR8OfTK7MfRqssfT/GvbGt
- 6FMUE2HdrMNXzmOHQ3HQy007E1m3cfxO7WzgjMhq7cnGxiLgaU5DePSvMV4WmXCtmmg/
- 2TzA==
+ d=1e100.net; s=20230601; t=1723387813; x=1723992613;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YUT1eyH/snTUQx7Mpmqh16o6mnv7afKFV1q4XTU+LM0=;
+ b=B8WcaYU7oiCGnVtxJmrR+EQAmaPjQt+OE7FiIRT9ErOKPvIGI3624lXqgkyAdaKn4c
+ 5xxCVE7VNgLdJPH9zmHef2JNuQXz8SukF5+FFiGPyvZPvuQgtlORQD53sjtK6EQv/N4y
+ FKGpczMxSO/wxvICFFZSC0FMFZVU/5uqjqeYx/XPo/V866DOUi/wqh9yY/SwH6j2GeY7
+ +YVBJh9nItQieNrJR8EwCIzYWwueZAIjVcjYFZV07UTp4dJppvEjv545sKjMWv9s7sDt
+ opKiofJCGllygExmKYXFb5h+k4t/r9Pk4HaWdNwZmDL56GpZBjWKq4TA5IrhwvufWiki
+ TjvQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVL2Af8fbSRlb4ubXx+AVbYY40dQiLPySoVhaq4cTF9fw/YL8Nb5AfLh00smrVGZX6PtbGdWUA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy6/4CbtunyjCWLijNbDoBvItscSwthemOETKqoHebbQ5uRNjF2
- 9XGJQXfLxkhQFvNv+89hEMU0K7OnC7aMdzTACdhOe5UR4N+waDyzawA0l5mwZ3KbdGiQRHv95Ho
- SRkzTI0Quc2v0ldWDXJ9gBMIKwOQsW29MfCoy
-X-Google-Smtp-Source: AGHT+IFhQMS33c+Qw5AcY+M+ElvqfAPyNYcNhlK5E3eZ2cThqgcerKLKkEma6482R41cxRnmFTz4HDtHIPJ1F185m8k=
-X-Received: by 2002:a0c:f40e:0:b0:6bb:84af:d632 with SMTP id
- 6a1803df08f44-6bd78da58a8mr73692116d6.5.1723387811714; Sun, 11 Aug 2024
- 07:50:11 -0700 (PDT)
+ AJvYcCVYMcJpOkGX2ZA65MalnDrXynufQ3fI57LPYkqzbtDutf4/tIIL7Hh9S6aeem1bVbZd/fRTsIBPuZ4zqHsdFuRokaGB7w==
+X-Gm-Message-State: AOJu0YwF543hIpiU1hXigMMdNEDkNu6d3XtnL0SbDTkgnjPEMpN7dWOq
+ VWOtsaiKqoCXI9NPV69Yuf028D4aOAu5uwXsf6eciNl1CXtPv5neRcMz3l3bmf2puNbWCUhA/cr
+ XQJ37hMHrkhdvo+q9VBMXPtKA1Ifk9bnrvQ9L
+X-Google-Smtp-Source: AGHT+IGGrj6SgJrTwuR7yEOkwAGj2bwVjt/PT6GPd8pqO8GZsSrpJ3RQg89GwJ2MVWjDnyp9Km8dBCUANjq0Ja5Hn3k=
+X-Received: by 2002:a0c:c487:0:b0:6bd:88d5:fa87 with SMTP id
+ 6a1803df08f44-6bd88d5fad3mr45317056d6.55.1723387813094; Sun, 11 Aug 2024
+ 07:50:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <03cdd29b-331c-76b0-f6d7-a064552ffd67@marvell.com>
- <CAFLszTiCS-jRfL__PJ=uEQf0rUKcw4J8czp-=khzkHB=q9ySOg@mail.gmail.com>
- <b4d4fe48-c3b0-98cc-dccf-8b96318ec204@marvell.com>
-In-Reply-To: <b4d4fe48-c3b0-98cc-dccf-8b96318ec204@marvell.com>
+References: <20240801173637.1071068-1-sjg@chromium.org>
+ <20240801173637.1071068-4-sjg@chromium.org>
+ <4594d522-bb63-45ee-b660-0130ae55d341@gmx.de>
+ <CAFLszTgmRMCK9E==O-sz51ONfaGENnoStXPY4LL5HS0F-=cDfA@mail.gmail.com>
+ <5EA6AA2B-533E-424D-B2E9-13A4CA8C2E9A@gmx.de>
+In-Reply-To: <5EA6AA2B-533E-424D-B2E9-13A4CA8C2E9A@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 11 Aug 2024 08:50:01 -0600
-Message-ID: <CAFLszTgN3AqhPzT+Zpe=sfM_cOZOmOQPseG_ipwMcNYzLbGUdQ@mail.gmail.com>
-Subject: Re: [PATCH v2] env: remove vars that are not in default env
-To: Ravi Minnikanti <rminnikanti@marvell.com>
-Cc: Tom Rini <trini@konsulko.com>, quentin.schulz@bootlin.com, 
- U-Boot-Denx <u-boot@lists.denx.de>
+Date: Sun, 11 Aug 2024 08:50:02 -0600
+Message-ID: <CAFLszTiYdE4CK2tf3=mxgZBatg4r55=G0X=LxDhofuqZU1TQNw@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] efi: Show the location of the bounce buffer
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,248 +89,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ravi,
++Marek Vasut too
 
-On Fri, 9 Aug 2024 at 13:36, Ravi Minnikanti <rminnikanti@marvell.com> wrot=
-e:
+Hi Heinrich,
+
+On Fri, 9 Aug 2024 at 13:02, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
 >
-> current env_set_default_vars() doesn't delete
-> var that are not in the imported env. hashtable
-> removes vars that are not in the imported
-> env but present in the current env only if H_NOCLEAR
-> flag is not set.
 >
-> This change is to avoid passing H_NOCLEAR flag if
-> specific vars are passed to env_set_default_vars()
->
-> Without this change:
-> Marvell>> env default boot_mode
-> Marvell>>
->
-> With the change:
-> Marvell>> env default boot_mode
-> WARNING: 'boot_mode' not in imported env, deleting it!
->
-> Signed-off-by: rminnikanti <rminnikanti@marvell.com>
-
-That should have your name at the start
-
-> ---
-> Changes in v2:
-> - Added env ut to test the scenario
-> - Updated doc usage/cmd/env.rst
->
-> =3D> ut env
-> Running 5 environment tests
-> Test: env_test_attrs_lookup: attr.c
-> Test: env_test_attrs_lookup_regex: attr.c
-> Test: env_test_env_cmd: cmd_ut_env.c
-> Test: env_test_htab_deletes: hashtable.c
-> Test: env_test_htab_fill: hashtable.c
-> Failures: 0
->
->  doc/usage/cmd/env.rst |  4 +++-
->  env/common.c          | 10 +++++++++-
->  test/env/cmd_ut_env.c | 36 ++++++++++++++++++++++++++++++++++++
->  3 files changed, 48 insertions(+), 2 deletions(-)
-
-Just some nits below
-
->
-> diff --git a/doc/usage/cmd/env.rst b/doc/usage/cmd/env.rst
-> index 9629f97ffc..9104c88525 100644
-> --- a/doc/usage/cmd/env.rst
-> +++ b/doc/usage/cmd/env.rst
-> @@ -79,7 +79,8 @@ The *env default* command resets the selected variables=
- in the U-Boot
->  environment to their default values.
->
->      var
-> -        list of variable name.
-> +        list of variable name. If variable is not part of default
-
-list of variable names. If a variable is not ...
-
-> +        environment, it is deleted with a warning message on console.
->      \-a
->          all U-Boot environment.
->      \-f
-> @@ -309,6 +310,7 @@ Delete environment variable in memory::
->  Reset environment variable to default value, in memory::
->
->      =3D> env default bootcmd
-> +    =3D> env default ipaddr serverip
->      =3D> env default -a
->
->  Save current environment in persistent storage::
-> diff --git a/env/common.c b/env/common.c
-> index 8d47d72605..2f783e3a69 100644
-> --- a/env/common.c
-> +++ b/env/common.c
-> @@ -401,7 +401,15 @@ int env_set_default_vars(int nvars, char * const var=
-s[], int flags)
->          * Special use-case: import from default environment
->          * (and use \0 as a separator)
->          */
-> -       flags |=3D H_NOCLEAR | H_DEFAULT;
-> +
-> +       /*
-
-There is a trailing space on the end of that line. Be sure to check
-your patch with patman/checkpatch.pl
-
-> +        * When vars are passed remove variables that are not in
-> +        * the default environment.
-> +        */
-> +       if (!nvars)
-> +               flags |=3D H_NOCLEAR;
-> +
-> +       flags |=3D H_DEFAULT;
->         return himport_r(&env_htab, default_environment,
->                                 sizeof(default_environment), '\0',
->                                 flags, 0, nvars, vars);
-> diff --git a/test/env/cmd_ut_env.c b/test/env/cmd_ut_env.c
-> index 13e0998341..99961311aa 100644
-> --- a/test/env/cmd_ut_env.c
-> +++ b/test/env/cmd_ut_env.c
-> @@ -9,6 +9,42 @@
->  #include <test/suites.h>
->  #include <test/ut.h>
->
-> +static int env_test_env_cmd(struct unit_test_state *uts)
-> +{
-> +       console_record_reset_enable();
-> +       ut_assertok(run_command("setenv non_default_var1 1", 0));
-> +       ut_assert_console_end();
-> +
-> +       console_record_reset_enable();
-> +       ut_assertok(run_command("setenv non_default_var2 1", 0));
-> +       ut_assert_console_end();
-> +
-> +       console_record_reset_enable();
-> +       ut_assertok(run_command("env print non_default_var1", 0));
-> +       ut_assert_nextline("non_default_var1=3D1");
-> +       ut_assert_console_end();
-> +
-> +       console_record_reset_enable();
-> +       ut_assertok(run_command("env default non_default_var1 non_default=
-_var2", 0));
-> +       ut_assert_nextline("WARNING: 'non_default_var1' not in imported e=
-nv, deleting it!");
-> +       ut_assert_nextline("WARNING: 'non_default_var2' not in imported e=
-nv, deleting it!");
-> +       ut_assert_console_end();
-> +
-> +       console_record_reset_enable();
-> +       ut_asserteq(1, run_command("env exists non_default_var1", 0));
-> +       ut_assert_nextline_empty();
-
-You don't need that line. It means that the next line should exist,
-but be empty. In fact this exposes a bug in console checking which I
-will fix.
-
-> +       ut_assert_console_end();
-> +
-> +       console_record_reset_enable();
-> +       ut_asserteq(1, run_command("env exists non_default_var2", 0));
-> +       ut_assert_nextline_empty();
-
-same here
-
-> +       ut_assert_console_end();
-> +
-> +       return 0;
-> +}
-> +
-> +ENV_TEST(env_test_env_cmd, 0);
-
-Set the flags to UT_TESTF_CONSOLE_REC and you can drop all the
-console_record_reset_enable() calls above. Unfortunately many of the
-tests don't do this as the flag was added later.
-
-
-> +
->  int do_ut_env(struct cmd_tbl *cmdtp, int flag, int argc, char *const arg=
-v[])
->  {
->         struct unit_test *tests =3D UNIT_TEST_SUITE_START(env_test);
-> --
-> 2.25.1
->
-> Thanks,
-> Ravi
->
-> On 8/9/24 08:58, Simon Glass wrote:
-> > Hi Ravi, On Fri, 9 Aug 2024 at 09:=E2=80=8A38, Ravi Minnikanti <rminnik=
-anti@=E2=80=8Amarvell.
-> > com> wrote: > > > current env_set_default_vars() doesn't delete > var t=
-hat are
-> > not in the imported env. hashtable > removes vars that are not in
+> Am 9. August 2024 20:36:35 MESZ schrieb Simon Glass <sjg@chromium.org>:
+> >Hi Heinrich,
 > >
+> >On Fri, 9 Aug 2024 at 11:32, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> >>
+> >> On 01.08.24 19:36, Simon Glass wrote:
+> >> > The EFI_LOADER_BOUNCE_BUFFER feature was added many years ago. It is not
+> >> > clear whether it is still needed, but 24 boards (lx2160ardb_tfa_stmm,
+> >> > lx2162aqds_tfa_SECURE_BOOT and the like) use it.
+> >> >
+> >> > This feature uses EFI page allocation to create a 64MB buffer 'in space'
+> >> > without any knowledge of where boards intend to load their images. This
+> >> > may result in image corruption or other problems.
+> >> >
+> >> > For example, if the feature is enabled on qemu_arm64 it puts the EFI
+> >> > bounce buffer at 1045MB, with the kernel at 1028MB and the ramdisk at
+> >> > 1088MB. The kernel is probably smaller than 27MB but the buffer does
+> >> > overlap the ramdisk.
+> >> >
+> >> > The solution is probably to use BOUNCE_BUFFER instead, with the EFI
+> >> > version being dropped. For now, show the address of the EFI bounce
+> >> > buffer so people have a better chance to detect the problem.
+> >> >
+> >> > Note: I avoided converting this #ifdef to use IS_ENABLED() since I hope
+> >> > that the feature may be removed.
+> >>
+> >> EFI_BLOCK_IO_PROTOCOL.ReadBlocks() and
+> >> EFI_BLOCK_IO_PROTOCOL.WriteBlocks() are expected to block until all
+> >> bytes are transferred.
+> >>
+> >> The complete file transfer is chunked according to the size of the EFI
+> >> bounce buffer.
+> >>
+> >> Taking care of alignment issues would best handled by the block uclass.
+> >>
+> >> When CONFIG_BOUNCE_BUFFER=y, bounce_buffer_start_extalign() uses
+> >> memalign() which limits the bounce buffer to available malloc() memory
+> >> (typically < 2 MiB).
+> >>
+> >> I cannot see how blk_read() with CONFIG_BOUNCE_BUFFER=y will work if
+> >> blkcnt * desc->blksz is greater than the available malloc memory.
 > >
-> > Hi Ravi,
+> >Yes, it uses malloc(). The maximum read length on MMC, for example,
+> >seems to default to 32MB, although it is only 128KB on a few
+> >platforms.
 > >
-> > On Fri, 9 Aug 2024 at 09:38, Ravi Minnikanti <rminnikanti@marvell.com> =
-wrote:
-> >>
-> >>
-> >> current env_set_default_vars() doesn't delete
-> >> var that are not in the imported env. hashtable
-> >> removes vars that are not in the imported
-> >> env but present in the current env only if H_NOCLEAR
-> >> flag is not set.
-> >>
-> >> This change is to avoid passing H_NOCLEAR flag if
-> >> specific vars are passed to env_set_default_vars()
-> >>
-> >> Test:
-> >>
-> >> Without this change:
-> >> Marvell>> env default boot_mode
-> >> Marvell>>
-> >>
-> >> With the change:
-> >> Marvell>> env default boot_mode
-> >> WARNING: 'boot_mode' not in imported env, deleting it!
-> >>
-> >> Signed-off-by: rminnikanti <rminnikanti@marvell.com>
-> >> ---
-> >>  env/common.c | 10 +++++++++-
-> >>  1 file changed, 9 insertions(+), 1 deletion(-)
-> >
-> > Could you add to usage/environment.rst and also update the tests for
-> > this - test/env/ - I suppose your patch fixes a bug, but it is hard to
-> > figure out what it is supposed to do from the docs.
-> >
-> > See for example dm_test_acpi_cmd_set() for how to check output from a c=
-ommand.
+> >I am thinking we should be allocating space in the bloblist to hold
+> >all these sorts of things...it can be as large as needed and we can
+> >allocate space for it during relocation.
 > >
 > >>
-> >> diff --git a/env/common.c b/env/common.c
-> >> index 8d47d72605..2f783e3a69 100644
-> >> --- a/env/common.c
-> >> +++ b/env/common.c
-> >> @@ -401,7 +401,15 @@ int env_set_default_vars(int nvars, char * const =
-vars[], int flags)
-> >>          * Special use-case: import from default environment
-> >>          * (and use \0 as a separator)
-> >>          */
-> >> -       flags |=3D H_NOCLEAR | H_DEFAULT;
-> >> +
-> >> +       /*
-> >> +        * When vars are passed remove variables that are not in
-> >> +        * the default environment.
-> >> +        */
-> >> +       if (!nvars)
-> >> +               flags |=3D H_NOCLEAR;
-> >> +
-> >> +       flags |=3D H_DEFAULT;
-> >>         return himport_r(&env_htab, default_environment,
-> >>                                 sizeof(default_environment), '\0',
-> >>                                 flags, 0, nvars, vars);
-> >> --
-> >> 2.25.1
+> >> Shouldn't the block uclass support chunking?
+> >
+> >It only supports readling whole blocks, if that is what you mean. Are
+> >you suggesting changing the blk API, or something else?
+>
+> It supports reading multiple blocks. If not all blocks fit into the memory that can be assigned via memalgn, the block layer coud separate the blocks into chunks. This would replace the EFI bounce buffer.
+
+Ah OK, yes it could do that.
 
 Regards,
 Simon
