@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7C38C3DA4A
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:51:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A781AC52D7B
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:51:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D2298860B;
-	Sun, 11 Aug 2024 16:50:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6667888845;
+	Sun, 11 Aug 2024 16:50:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LddPBgi5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HkZgZHAS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 770DA88808; Sun, 11 Aug 2024 16:50:25 +0200 (CEST)
-Received: from mail-vs1-xe2c.google.com (mail-vs1-xe2c.google.com
- [IPv6:2607:f8b0:4864:20::e2c])
+ id BE10488874; Sun, 11 Aug 2024 16:50:26 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F137688100
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:50:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 85E4F87E9D
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:50:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-vs1-xe2c.google.com with SMTP id
- ada2fe7eead31-493d7455231so1097949137.0
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:50:22 -0700 (PDT)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6bb687c3cceso21187406d6.0
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:50:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723387822; x=1723992622; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723387823; x=1723992623; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=t7mGGEsHxNf1vrZ9FOkZ8+X9/u7UBapzEmhOet4IKuk=;
- b=LddPBgi5GSywtbKb/TE301wluuMHi3V/9ogFKvhn6YlJaCkYeM7BznPhFIJAJ1zxdZ
- KK6fBoIVTfddzD7/upUK06gWofyuFsLguNwTlROWh1H/cLWKCf8QbpmohM6i6e8z3IYv
- k+cDjin83sRYN/V14KSKJekImPVjSjZWW5C0o=
+ bh=pF97MubVqSMmCSWC7mobq9gyUfDhYIsAg/Rvnfylcqc=;
+ b=HkZgZHASGBooHODQ79367bjpD5bil2pJ/84N5Oa4hlax43aIK6r6LUdCpNwz2IOkim
+ qwlkH+4G9ZYX/xF8yF+DaBGJ6ciDYneznGtyY7bUAmADk/mUa15Yc66KJGqtRhmhCW91
+ yjFlRExSTnGBqeBmNd9uY/bOPk77ayP8crMpg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723387822; x=1723992622;
+ d=1e100.net; s=20230601; t=1723387823; x=1723992623;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=t7mGGEsHxNf1vrZ9FOkZ8+X9/u7UBapzEmhOet4IKuk=;
- b=QaBevguO/+kstJ4xgxQpba0YW4pAgsZAL0LmaEleinbvESP9g+0hdZM2sr32AD0NoF
- D2vEhZyY0Hz/2Q9XSkosFXRcV+7bXP7N+VW6nk8ZMOoyr/jt8/REF5jp7VJi0JgTPa0t
- VRxIFnekr5eO2hPwDp6+I6oulS7CuGFhwbTTi3E6RkBZP0k+1MHDh+6jeCZ4veTDWWHw
- kEzOv3PCr52sP6XuZZ9w/2J43s0IaFGXqGABUM5ejDSm27aKEYjkcTsDIIVJJ0D4F3Sx
- Ex9FXdKMcfFm9Y7KsU2U6IcOMS0ldP1cK63wjUMQXSd2s7kRyXs0OEIAmqMC3vAs5V/p
- Y0yw==
-X-Gm-Message-State: AOJu0YyH7QSqjfLJfy3RxevGZoe76wlkmVV2JqVrkhqIllyfg4ZjxYIz
- jDui0fabq7TFstvTcWOxFodWrvURU8uxaOuFxESD4YP48YPy3iYmcT/2iYovh49Zb8YzUSxl5cz
- DdPREJDk5RBc/xhMf1bbS0uCHKNTFgXdpUhc6
-X-Google-Smtp-Source: AGHT+IEp/Zm/gVlUcIhWcWhmuH/NhQD3xo/r5zuziYbBtQCd9HoQVA2qdVqbsdYMy8kabK7Be/2MvD62a4VBYwomV8o=
-X-Received: by 2002:a05:6102:1607:b0:493:f8e4:4382 with SMTP id
- ada2fe7eead31-495d83c630emr8236672137.4.1723387821790; Sun, 11 Aug 2024
- 07:50:21 -0700 (PDT)
+ bh=pF97MubVqSMmCSWC7mobq9gyUfDhYIsAg/Rvnfylcqc=;
+ b=hwR2PKO43d3HJ6P3dORuWh+hnYxijqSUFsKdNyKdI0QzadeKFzKsjUlAcFT+hncGVu
+ pzxSrQUcHjy/fKTK06V4qCtlUkEP+b/UMtZ7lU39Gm6mwk3jyoh9HEgooIZQ1RFMusCq
+ 3Gt5wahpkoCc+r/NvUdYOgAwwBmDtlmlnHZXHHHS/VwScNmg7pZjkaT7dr9goCh/kchH
+ KYh2/G35+Gsuh+jp3ojbxoJLUFyrnM48eu4E6FoHFWP5EYzmGSCPxAuhBFEW7jdew7hx
+ 2BRRjIkHvhgYSIC1ZyoPWhDJchlrPpAlzaH41NF67H7nPDoPzM4GedSiBYL4KgvyB3TW
+ bQDw==
+X-Gm-Message-State: AOJu0YxH+dgmpESe5+u3cnnyLpEhweJPOSeWpSb0QY2QEdx/w+W7keGU
+ 8DmPnOkQGpj+sXAc5qtZy4kVfkcsR9ckFIOq8s0bqJp/j4WZtMUyCJgiyHWl4aEcJAkwQfMmc/7
+ hA9sXwPQ5Dr5WiemILvKyQfbNYiHK+mm/O1Hx
+X-Google-Smtp-Source: AGHT+IH2x3fMvDB7WaED0GJwwjcArBnStCFtNEPgnq2wG4hazYnwsBAG21zVASPpX9MaZENbyn88z2FLkx/A6Z3Sc+I=
+X-Received: by 2002:a05:6214:4587:b0:6b7:9c52:db53 with SMTP id
+ 6a1803df08f44-6bd78e7de17mr85714296d6.48.1723387823412; Sun, 11 Aug 2024
+ 07:50:23 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240721152600.3212917-1-sjg@chromium.org>
- <20240721152600.3212917-6-sjg@chromium.org>
- <3b1daa72-5259-4b6f-af5c-053d03dbf4ad@cherry.de>
-In-Reply-To: <3b1daa72-5259-4b6f-af5c-053d03dbf4ad@cherry.de>
+ <20240721152600.3212917-7-sjg@chromium.org>
+ <4d3f9b1c-5be6-454d-8cd4-28bd67ded364@cherry.de>
+In-Reply-To: <4d3f9b1c-5be6-454d-8cd4-28bd67ded364@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 11 Aug 2024 08:50:11 -0600
-Message-ID: <CAFLszThku=XhLdsMZBd16-5w57n=mgzCJsHUN8qG=7-XXtWUsw@mail.gmail.com>
-Subject: Re: [PATCH v2 05/14] mmc: Use logging instead of printf()
+Date: Sun, 11 Aug 2024 08:50:12 -0600
+Message-ID: <CAFLszTj-szBqxPVi8CiWb2jDnKdcx128C8Xk7XUL0a2QoccWbA@mail.gmail.com>
+Subject: Re: [PATCH v2 06/14] mmc: Use logging instead of pr_err()
 To: Quentin Schulz <quentin.schulz@cherry.de>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
  Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -86,154 +87,193 @@ X-Virus-Status: Clean
 
 Hi Quentin,
 
-On Tue, 6 Aug 2024 at 08:01, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+On Tue, 6 Aug 2024 at 08:10, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 >
 > Hi Simon,
 >
 > On 7/21/24 5:25 PM, Simon Glass wrote:
-> > The code makes quite a few uses of __func__ which puts the function
-> > name into the resulting SPL image. Use the log subsystem instead, to
-> > reduce size.
+> > Use the log subsystem instead of dev, to avoid including function names
+> > in the code.
 > >
 > > The CONFIG_LOGF_FUNC option can be used to enable the function name.
 > >
->
-> If I didn't misread the code, I believe that __func__ is **always** in
-> the image whenever LOG is defined, just that it may not be printed?
->
-> c.f.
-> https://source.denx.de/u-boot/u-boot/-/blob/master/include/log.h?ref_type=heads#L196-L206
-
-Yes that's right. It is fixed by [1]
-
->
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Reviewed-by: Sean Anderson <seanga2@gmail.com>
 > > ---
 > >
-> > Changes in v2:
-> > - Various updates to log messages
-> > - Drop an unnecessary cast
+> > (no changes since v1)
 > >
-> >   drivers/mmc/sdhci.c | 46 +++++++++++++++++++--------------------------
-> >   1 file changed, 19 insertions(+), 27 deletions(-)
+> >   drivers/mmc/mmc.c | 49 ++++++++++++++++++++++++-----------------------
+> >   1 file changed, 25 insertions(+), 24 deletions(-)
 > >
-> > diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
-> > index 560b7e889c7..eb5a144f8d4 100644
-> > --- a/drivers/mmc/sdhci.c
-> > +++ b/drivers/mmc/sdhci.c
-> > @@ -32,8 +32,7 @@ static void sdhci_reset(struct sdhci_host *host, u8 mask)
-> >       sdhci_writeb(host, mask, SDHCI_SOFTWARE_RESET);
-> >       while (sdhci_readb(host, SDHCI_SOFTWARE_RESET) & mask) {
-> >               if (timeout == 0) {
-> > -                     printf("%s: Reset 0x%x never completed.\n",
-> > -                            __func__, (int)mask);
-> > +                     log_warning("Reset %x never completed\n", mask);
->
-> If log_* functions aren't changing the meaning of printf formats, please
-> keep the 0x prefix to highlight it is hex digits as there's some overlap
-> in hex and dec digits. This applies to all 0x%x that were changed to %x
-> in this patch.
->
-> >                       return;
-> >               }
-> >               timeout--;
-> > @@ -139,8 +138,7 @@ static int sdhci_transfer_data(struct sdhci_host *host, struct mmc_data *data)
-> >       do {
-> >               stat = sdhci_readl(host, SDHCI_INT_STATUS);
-> >               if (stat & SDHCI_INT_ERROR) {
-> > -                     pr_debug("%s: Error detected in status(0x%X)!\n",
-> > -                              __func__, stat);
-> > +                     log_debug("Error detected in status(%x)!\n", stat);
-> >                       return -EIO;
-> >               }
-> >               if (!transfer_done && (stat & rdy)) {
-> > @@ -173,7 +171,7 @@ static int sdhci_transfer_data(struct sdhci_host *host, struct mmc_data *data)
-> >               if (timeout-- > 0)
-> >                       udelay(10);
-> >               else {
-> > -                     printf("%s: Transfer data timeout\n", __func__);
-> > +                     log_err("Transfer data timeout\n");
-> >                       return -ETIMEDOUT;
-> >               }
-> >       } while (!(stat & SDHCI_INT_DATA_END));
-> > @@ -232,7 +230,7 @@ static int sdhci_send_command(struct mmc *mmc, struct mmc_cmd *cmd,
+> > diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+> > index b18dc331f78..b0105afe5d6 100644
+> > --- a/drivers/mmc/mmc.c
+> > +++ b/drivers/mmc/mmc.c
+> > @@ -294,7 +294,7 @@ int mmc_poll_for_busy(struct mmc *mmc, int timeout_ms)
 > >
-> >       while (sdhci_readl(host, SDHCI_PRESENT_STATE) & mask) {
-> >               if (time >= cmd_timeout) {
-> > -                     printf("%s: MMC: %d busy ", __func__, mmc_dev);
-> > +                     log_warning("mmc%d busy ", mmc_dev);
-> >                       if (2 * cmd_timeout <= SDHCI_CMD_MAX_TIMEOUT) {
-> >                               cmd_timeout += cmd_timeout;
-> >                               printf("timeout increasing to: %u ms.\n",
+> >               if (status & MMC_STATUS_MASK) {
+> >   #if !defined(CONFIG_SPL_BUILD) || defined(CONFIG_SPL_LIBCOMMON_SUPPORT)
+> > -                     pr_err("Status Error: 0x%08x\n", status);
+> > +                     log_err("Status Error: %08x\n", status);
 >
-> I would suggest to migrate this to the same log level as the busy
-> message. Same for the puts(timeout) which is outside of this git context.
->
-> > @@ -316,8 +314,8 @@ static int sdhci_send_command(struct mmc *mmc, struct mmc_cmd *cmd,
-> >               }
-> >
-> >               if (get_timer(start) >= SDHCI_READ_STATUS_TIMEOUT) {
-> > -                     printf("%s: Timeout for status update: %08x %08x\n",
-> > -                            __func__, stat, mask);
-> > +                     log_warning("Timeout for status update: %08x %08x\n",
-> > +                                 stat, mask);
-> >                       return -ETIMEDOUT;
-> >               }
-> >       } while ((stat & mask) != mask);
-> > @@ -358,7 +356,7 @@ static int sdhci_execute_tuning(struct udevice *dev, uint opcode)
-> >       struct mmc *mmc = mmc_get_mmc_dev(dev);
-> >       struct sdhci_host *host = mmc->priv;
-> >
-> > -     debug("%s\n", __func__);
-> > +     log_debug("sdhci tuning\n");
-> >
-> >       if (host->ops && host->ops->platform_execute_tuning) {
-> >               err = host->ops->platform_execute_tuning(mmc, opcode);
-> > @@ -380,8 +378,7 @@ int sdhci_set_clock(struct mmc *mmc, unsigned int clock)
-> >       while (sdhci_readl(host, SDHCI_PRESENT_STATE) &
-> >                          (SDHCI_CMD_INHIBIT | SDHCI_DATA_INHIBIT)) {
-> >               if (timeout == 0) {
-> > -                     printf("%s: Timeout to wait cmd & data inhibit\n",
-> > -                            __func__);
-> > +                     log_err("Timeout waiting for cmd & data inhibit\n");
-> >                       return -EBUSY;
-> >               }
-> >
-> > @@ -397,7 +394,7 @@ int sdhci_set_clock(struct mmc *mmc, unsigned int clock)
-> >       if (host->ops && host->ops->set_delay) {
-> >               ret = host->ops->set_delay(host);
-> >               if (ret) {
-> > -                     printf("%s: Error while setting tap delay\n", __func__);
-> > +                     log_err("Error while setting tap delay\n");
-> >                       return ret;
-> >               }
-> >       }
-> > @@ -405,7 +402,7 @@ int sdhci_set_clock(struct mmc *mmc, unsigned int clock)
-> >       if (host->ops && host->ops->config_dll) {
-> >               ret = host->ops->config_dll(host, clock, false);
-> >               if (ret) {
-> > -                     printf("%s: Error while configuring dll\n", __func__);
-> > +                     log_err("Error configuring dll\n");
-> >                       return ret;
-> >               }
-> >       }
-> > @@ -456,7 +453,7 @@ int sdhci_set_clock(struct mmc *mmc, unsigned int clock)
-> >       if (host->ops && host->ops->config_dll) {
-> >               ret = host->ops->config_dll(host, clock, true);
-> >               if (ret) {
-> > -                     printf("%s: Error while configuring dll\n", __func__);
-> > +                     log_err("Error enabling dll\n");
->
-> Is this really only about enabling the DLL?
->
-> In rockchip_sdhci, the function does a lot more when enable=true than
-> enable=false so I feel like it's a bit disingenuous to downgrade
-> config_dll(..., 1) to "enabling dll".
->
-> Also not sure what made you decide on the log level but aside from the
-> aforementioned issues, looks good to me.
->
-> Cheers,
-> Quentin
+> Please don't remove the 0x prefix (will not comment on other patches in
+> this series if it happens again, please check :) ).
 
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20240721152600.3212917-8-sjg@chromium.org/
+OK...hex is the default though.
+
+>
+> >   #endif
+> >                       return -ECOMM;
+> >               }
+> > @@ -307,7 +307,7 @@ int mmc_poll_for_busy(struct mmc *mmc, int timeout_ms)
+> >
+> >       if (timeout_ms <= 0) {
+> >   #if !defined(CONFIG_SPL_BUILD) || defined(CONFIG_SPL_LIBCOMMON_SUPPORT)
+> > -             pr_err("Timeout waiting card ready\n");
+> > +             log_err("Timeout waiting card ready\n");
+> >   #endif
+> >               return -ETIMEDOUT;
+> >       }
+> > @@ -449,7 +449,7 @@ static int mmc_read_blocks(struct mmc *mmc, void *dst, lbaint_t start,
+> >       if (blkcnt > 1) {
+> >               if (mmc_send_stop_transmission(mmc, false)) {
+> >   #if !defined(CONFIG_SPL_BUILD) || defined(CONFIG_SPL_LIBCOMMON_SUPPORT)
+> > -                     pr_err("mmc fail to send stop cmd\n");
+> > +                     log_err("mmc fail to send stop cmd\n");
+> >   #endif
+> >                       return 0;
+> >               }
+> > @@ -500,8 +500,8 @@ ulong mmc_bread(struct blk_desc *block_dev, lbaint_t start, lbaint_t blkcnt,
+> >
+> >       if ((start + blkcnt) > block_dev->lba) {
+> >   #if !defined(CONFIG_SPL_BUILD) || defined(CONFIG_SPL_LIBCOMMON_SUPPORT)
+> > -             pr_err("MMC: block number 0x" LBAF " exceeds max(0x" LBAF ")\n",
+> > -                    start + blkcnt, block_dev->lba);
+> > +             log_err("MMC: block number " LBAF " exceeds max(" LBAF ")\n",
+>
+> DOn't remove the 0x prefix please.
+>
+> > +                     start + blkcnt, block_dev->lba);
+> >   #endif
+> >               return 0;
+> >       }
+> > @@ -997,7 +997,7 @@ static int mmc_get_capabilities(struct mmc *mmc)
+> >               return 0;
+> >
+> >       if (!ext_csd) {
+> > -             pr_err("No ext_csd found!\n"); /* this should enver happen */
+> > +             log_err("No ext_csd found!\n"); /* this should enver happen */
+> >               return -ENOTSUPP;
+> >       }
+> >
+> > @@ -1109,17 +1109,17 @@ int mmc_hwpart_config(struct mmc *mmc,
+> >               return -EINVAL;
+> >
+> >       if (IS_SD(mmc) || (mmc->version < MMC_VERSION_4_41)) {
+> > -             pr_err("eMMC >= 4.4 required for enhanced user data area\n");
+> > +             log_err("eMMC >= 4.4 required for enhanced user data area\n");
+> >               return -EMEDIUMTYPE;
+> >       }
+> >
+> >       if (!(mmc->part_support & PART_SUPPORT)) {
+> > -             pr_err("Card does not support partitioning\n");
+> > +             log_err("Card does not support partitioning\n");
+> >               return -EMEDIUMTYPE;
+> >       }
+> >
+> >       if (!mmc->hc_wp_grp_size) {
+> > -             pr_err("Card does not define HC WP group size\n");
+> > +             log_err("Card does not define HC WP group size\n");
+> >               return -EMEDIUMTYPE;
+> >       }
+> >
+> > @@ -1127,8 +1127,7 @@ int mmc_hwpart_config(struct mmc *mmc,
+> >       if (conf->user.enh_size) {
+> >               if (conf->user.enh_size % mmc->hc_wp_grp_size ||
+> >                   conf->user.enh_start % mmc->hc_wp_grp_size) {
+> > -                     pr_err("User data enhanced area not HC WP group "
+> > -                            "size aligned\n");
+> > +                     log_err("User data enhanced area not HC WP group size aligned\n");
+> >                       return -EINVAL;
+> >               }
+> >               part_attrs |= EXT_CSD_ENH_USR;
+> > @@ -1146,8 +1145,8 @@ int mmc_hwpart_config(struct mmc *mmc,
+> >
+> >       for (pidx = 0; pidx < 4; pidx++) {
+> >               if (conf->gp_part[pidx].size % mmc->hc_wp_grp_size) {
+> > -                     pr_err("GP%i partition not HC WP group size "
+> > -                            "aligned\n", pidx+1);
+> > +                     log_err("GP%i partition not HC WP group-size aligned\n",
+> > +                             pidx + 1);
+> >                       return -EINVAL;
+> >               }
+> >               gp_size_mult[pidx] = conf->gp_part[pidx].size / mmc->hc_wp_grp_size;
+> > @@ -1158,7 +1157,7 @@ int mmc_hwpart_config(struct mmc *mmc,
+> >       }
+> >
+> >       if (part_attrs && ! (mmc->part_support & ENHNCD_SUPPORT)) {
+> > -             pr_err("Card does not support enhanced attribute\n");
+> > +             log_err("Card does not support enhanced attribute\n");
+> >               return -EMEDIUMTYPE;
+> >       }
+> >
+> > @@ -1171,8 +1170,8 @@ int mmc_hwpart_config(struct mmc *mmc,
+> >               (ext_csd[EXT_CSD_MAX_ENH_SIZE_MULT+1] << 8) +
+> >               ext_csd[EXT_CSD_MAX_ENH_SIZE_MULT];
+> >       if (tot_enh_size_mult > max_enh_size_mult) {
+> > -             pr_err("Total enhanced size exceeds maximum (%u > %u)\n",
+> > -                    tot_enh_size_mult, max_enh_size_mult);
+> > +             log_err("Total enhanced size exceeds maximum (%x > %x)\n",
+>
+> If you change the type (why?) to hex, please add 0x prefix to explicit
+> the base.
+>
+> > +                     tot_enh_size_mult, max_enh_size_mult);
+> >               return -EMEDIUMTYPE;
+> >       }
+> >
+> > @@ -1205,7 +1204,7 @@ int mmc_hwpart_config(struct mmc *mmc,
+> >
+> >       if (ext_csd[EXT_CSD_PARTITION_SETTING] &
+> >           EXT_CSD_PARTITION_SETTING_COMPLETED) {
+> > -             pr_err("Card already partitioned\n");
+> > +             log_err("Card already partitioned\n");
+> >               return -EPERM;
+> >       }
+> >
+> > @@ -1876,7 +1875,7 @@ error:
+> >               }
+> >       }
+> >
+> > -     pr_err("unable to select a mode\n");
+> > +     log_err("unable to select a mode\n");
+> >       return -ENOTSUPP;
+> >   }
+> >
+> > @@ -2254,7 +2253,7 @@ error:
+> >               }
+> >       }
+> >
+> > -     pr_err("unable to select a mode : %d\n", err);
+> > +     log_err("unable to select a mode: %d\n", err);
+> >
+> >       return -ENOTSUPP;
+> >   }
+> > @@ -2921,8 +2920,10 @@ retry:
+> >
+> >               if (err) {
+> >   #if !defined(CONFIG_SPL_BUILD) || defined(CONFIG_SPL_LIBCOMMON_SUPPORT)
+> > -                     if (!quiet)
+> > -                             pr_err("Card did not respond to voltage select! : %d\n", err);
+> > +                     if (!quiet) {
+> > +                             log_err("Card did not respond to voltage select! : %d\n",
+> > +                                     err);
+> > +                     }
+>
+> We still don't need the curly brackets here.
+>
+> Looking good otherwise,
+
+Regards,
+Simon
