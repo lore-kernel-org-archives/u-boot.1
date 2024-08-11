@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E051C3DA4A
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 15:00:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EE75C3DA4A
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 15:00:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0BB688AB6;
-	Sun, 11 Aug 2024 16:52:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1141B88B2A;
+	Sun, 11 Aug 2024 16:52:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cFT7HAcv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dwUQaFOV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC91D88ABA; Sun, 11 Aug 2024 16:52:51 +0200 (CEST)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id AE15688AC0; Sun, 11 Aug 2024 16:52:52 +0200 (CEST)
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
+ [IPv6:2607:f8b0:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8790D8889C
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:52:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C0BC88A4B
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:52:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-81fd520fe0dso139977739f.3
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:52:49 -0700 (PDT)
+Received: by mail-il1-x129.google.com with SMTP id
+ e9e14a558f8ab-39b32f258c8so15336105ab.1
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:52:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723387968; x=1723992768; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723387969; x=1723992769; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Hv5CQZtvqIcRAzXF4f4WtoI+4p46tzX/HHM7gwIf1Y8=;
- b=cFT7HAcvG7lKGSr8EkgpzSQQiYthknM4sECvhdByiuZ5Nm3el1TH7M5TGVobMkCTEl
- y5s0+aJ2SCDGmo9VsLMZ3HOFmlzBM0lZBeUZ6m/j4Sr9YYaB0iWkZrUQp10qvZ6Sz/+T
- EuZgBaiewvjMO9DptgG3ThrzfK2fh1f2/2lLI=
+ bh=0vcNh4A/0Y2cDSZmNL1fx6L/Fv+ZKklzesoZR46WLOc=;
+ b=dwUQaFOV7FGVvS/8GG6tEnseNB65r00B4CIQYMcgwrD2qZurzTxtPEQamZH4MRvlhs
+ H+NWmevGpyfbxkzRDfsbINMtobvzLRV3a36Mu5PwrJN6L6C+9cCUb1w3qfT283pyhaYo
+ R/mTuzKO7/bUm1rWFx1pE4Wl+lhnOpwTSOw2I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723387968; x=1723992768;
+ d=1e100.net; s=20230601; t=1723387969; x=1723992769;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Hv5CQZtvqIcRAzXF4f4WtoI+4p46tzX/HHM7gwIf1Y8=;
- b=RUcQRXmN6ZujVl0vbIqIA8P65AU1xHHSTxJAYo7qQ6XXp+JoCtgaxV2ev8zZvtHdlN
- LZzqEiKDGXUsrBB8jBd1nZ0dpVLuBnel37YSkSc5lIztUCAZy60Dq/3WGFktxLFGScyK
- p5DQZ9Z24gzEilQef60nPK0cofA1An97xX7dkRTq71P3AYQniXR9+eKjxIpo/lnRE+vA
- AZ0fYGDV5jHoKK2xGXvwzxYJ+Z1jb2KWIY/giUo1eH+uj0lIGWJnxI8oa0tez1UKmVVI
- kYeELQefCFRGJs+q2roCxsJ3cmI4aDUbS9QjUkkOMoisXO2RsQrVBKAC1bWVY+LC3Sna
- qUNw==
-X-Gm-Message-State: AOJu0YyMu4VUkH/Cd/DN2xNxHBwsnOBMOtjqpGOxiYsuULZNhiKcx1rx
- xwNAUodaFbmIVwUv5ZEmMXEhtzVUbKbmo/CJXk3655hKe7wiUlcVtKnR/wQ8OLivnsT4vKe44M0
+ bh=0vcNh4A/0Y2cDSZmNL1fx6L/Fv+ZKklzesoZR46WLOc=;
+ b=Kjs7++Z1xqJPdSjI4KmDnp9gRMTtb9W5hXuv0X1BP/3Hzuns7mKaMjF1pb1T0U1Q7u
+ IOClKTZkk5NeRwUCBmyF5emj4szt9kYIJ42GxvOhNPx/51j/NfiZHfNmHBIeDbP+cU13
+ +BWUroFjxQ4Bgmg40+m9Iw+kcLI6ILZOVJKA0sCqwiji6A6YqejNuSNgyoSuL5rfMgf+
+ W2Qeauabk2hvx6NjWqnuFGsHyo8qFuopywS8C/lUAnujGbOLkD3do3uzBp38D9VQkvZ4
+ rudWe/C6SX1Olg3uuIrG2BU2OMME5tZbgUQ7ey4Ohn6YXmxrlGTcvUehVBqjQT85Dn+x
+ VhPA==
+X-Gm-Message-State: AOJu0YysrZ47j7pLY9ijf71PkMiAWjymbCIyQoQ2vmcY4hzOo7nFr8bM
+ qTlfBMRQSk5kfx/lZqK0Uwl/yNHqm5ASfonQV66YNzYmwZ45cSuQ2YjbcONLFADE426sgsOP6WQ
  =
-X-Google-Smtp-Source: AGHT+IGRyrTFC12zbJKJo8K1HPxiv94RhfQb/Nmt0JJnvKUGbUNcchuqYJSW2ngRVUAk8w5fN/YbfA==
-X-Received: by 2002:a92:cd8d:0:b0:398:16d1:610b with SMTP id
- e9e14a558f8ab-39b6c11b903mr107661565ab.0.1723387968291; 
+X-Google-Smtp-Source: AGHT+IHelvCfJe2Zhr9CtLja0TzUd4sQVtie4NzdnYDtFakHKEouX8eDRny2KO3O7flW9SRa3blKPA==
+X-Received: by 2002:a05:6e02:1c05:b0:398:a9b3:d6b1 with SMTP id
+ e9e14a558f8ab-39bd8c50832mr66423365ab.12.1723387968929; 
  Sun, 11 Aug 2024 07:52:48 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39c30a9a2c8sm11195855ab.43.2024.08.11.07.52.47
+ e9e14a558f8ab-39c30a9a2c8sm11195855ab.43.2024.08.11.07.52.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Sun, 11 Aug 2024 07:52:48 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
@@ -66,9 +66,9 @@ To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 22/40] test: mbr: Use a constant for the block size
-Date: Sun, 11 Aug 2024 08:51:51 -0600
-Message-Id: <20240811145209.4191404-23-sjg@chromium.org>
+Subject: [PATCH v3 23/40] test: mbr: Use RAM for the buffers
+Date: Sun, 11 Aug 2024 08:51:52 -0600
+Message-Id: <20240811145209.4191404-24-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240811145209.4191404-1-sjg@chromium.org>
 References: <20240811145209.4191404-1-sjg@chromium.org>
@@ -90,172 +90,210 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It isn't that important to factor out constants in tests, but in this
-case we have 0x200 and 512 used. The commands don't use the constant
-as they use a block count ('1'). It doesn't create more code to use a
-constant, so create one.
+The normal approach with sandbox is to use a fixed memory address in the
+RAM, to avoid needing to create a map for transient local variables.
+
+Update this test to use this approach.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v3:
-- use SZ_512 instead of 0x200
+(no changes since v1)
 
- test/cmd/mbr.c | 38 +++++++++++++++++++++-----------------
- 1 file changed, 21 insertions(+), 17 deletions(-)
+ test/cmd/mbr.c | 52 ++++++++++++++++++++++++++------------------------
+ 1 file changed, 27 insertions(+), 25 deletions(-)
 
 diff --git a/test/cmd/mbr.c b/test/cmd/mbr.c
-index 8a4d61b2928..e2a7cc35500 100644
+index e2a7cc35500..ec19cf3793c 100644
 --- a/test/cmd/mbr.c
 +++ b/test/cmd/mbr.c
-@@ -14,10 +14,14 @@
- #include <asm/global_data.h>
- #include <dm/device-internal.h>
- #include <dm/lists.h>
-+#include <linux/sizes.h>
- #include <test/suites.h>
- #include <test/ut.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
-+
-+#define BLKSZ	SZ_512	/* block size */
-+
- /*
-  * Requirements for running test manually:
-  * mmc6.img - File size needs to be at least 12 MiB
-@@ -228,7 +232,7 @@ static unsigned build_mbr_parts(char *buf, size_t buf_size, unsigned num_parts)
+@@ -232,9 +232,11 @@ static unsigned build_mbr_parts(char *buf, size_t buf_size, unsigned num_parts)
  static int mbr_test_run(struct unit_test_state *uts)
  {
  	struct blk_desc *mmc_dev_desc;
--	unsigned char mbr_wbuf[512], ebr_wbuf[512], rbuf[512];
-+	unsigned char mbr_wbuf[BLKSZ], ebr_wbuf[BLKSZ], rbuf[BLKSZ];
+-	unsigned char mbr_wbuf[BLKSZ], ebr_wbuf[BLKSZ], rbuf[BLKSZ];
++	unsigned char *mbr_wbuf, *ebr_wbuf, *rbuf;
  	char mbr_parts_buf[256];
- 	ulong mbr_wa, ebr_wa, ra, ebr_blk, mbr_parts_max;
+-	ulong mbr_wa, ebr_wa, ra, ebr_blk, mbr_parts_max;
++	ulong addr = 0x1000;  /* start address for buffers */
++	ulong mbr_wa = addr, ebr_wa = addr + BLKSZ, ra = addr + BLKSZ * 2;
++	ulong ebr_blk, mbr_parts_max;
  	struct udevice *dev;
-@@ -257,7 +261,7 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	mbr_wa = map_to_sysmem(mbr_wbuf);
- 	ebr_wa = map_to_sysmem(ebr_wbuf);
- 	ra = map_to_sysmem(rbuf);
--	ebr_blk = (ulong)0xb00000 / 0x200;
-+	ebr_blk = (ulong)0xb00000 / BLKSZ;
+ 	ofnode root, node;
+ 
+@@ -258,9 +260,9 @@ static int mbr_test_run(struct unit_test_state *uts)
+ 	ut_assertf(sizeof(mbr_parts_buf) >= mbr_parts_max, "Buffer avail: %ld; buffer req: %ld\n",
+ 		sizeof(mbr_parts_buf), mbr_parts_max);
+ 
+-	mbr_wa = map_to_sysmem(mbr_wbuf);
+-	ebr_wa = map_to_sysmem(ebr_wbuf);
+-	ra = map_to_sysmem(rbuf);
++	mbr_wbuf = map_sysmem(mbr_wa, BLKSZ);
++	ebr_wbuf = map_sysmem(ebr_wa, BLKSZ);
++	rbuf = map_sysmem(ra, BLKSZ);
+ 	ebr_blk = (ulong)0xb00000 / BLKSZ;
  
  	/* Make sure mmc6 exists */
- 	ut_asserteq(6, blk_get_device_by_str("mmc", "6", &mmc_dev_desc));
-@@ -269,7 +273,7 @@ static int mbr_test_run(struct unit_test_state *uts)
- 
- 	/* Make sure mmc6 is 12+ MiB in size */
- 	ut_assertok(run_commandf("mmc read %lx %lx 1", ra,
--				 (ulong)0xbffe00 / 0x200));
-+				 (ulong)0xbffe00 / BLKSZ));
- 
- 	/* Test one MBR partition */
+@@ -279,11 +281,11 @@ static int mbr_test_run(struct unit_test_state *uts)
  	init_write_buffers(mbr_wbuf, sizeof(mbr_wbuf), ebr_wbuf, sizeof(ebr_wbuf), __LINE__);
-@@ -277,11 +281,11 @@ static int mbr_test_run(struct unit_test_state *uts)
+ 	ut_assertok(build_mbr_parts(mbr_parts_buf, sizeof(mbr_parts_buf), 1));
  	ut_assertok(run_commandf("write mmc 6:0 %lx 0 1", mbr_wa));
- 	memset(rbuf, 0, sizeof(rbuf));
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
  	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
--	ut_assertok(memcmp(mbr_wbuf, rbuf, 512));
-+	ut_assertok(memcmp(mbr_wbuf, rbuf, BLKSZ));
+ 	ut_assertok(memcmp(mbr_wbuf, rbuf, BLKSZ));
  	ut_assertok(run_commandf("write mmc 6:0 %lx %lx 1", ebr_wa, ebr_blk));
- 	memset(rbuf, 0, sizeof(rbuf));
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
  	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
--	ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
-+	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
+ 	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
  	ut_assertok(console_record_reset_enable());
- 	ut_assertf(0 == run_commandf(mbr_parts_buf), "Invalid partitions string: %s\n", mbr_parts_buf);
- 	ut_assertok(run_commandf("mbr write mmc 6"));
-@@ -290,7 +294,7 @@ static int mbr_test_run(struct unit_test_state *uts)
+@@ -292,7 +294,7 @@ static int mbr_test_run(struct unit_test_state *uts)
+ 	ut_assert_nextline("MBR: write success!");
+ 	ut_assertok(run_commandf("mbr verify mmc 6"));
  	ut_assert_nextline("MBR: verify success!");
- 	memset(rbuf, 0, sizeof(rbuf));
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
  	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
--	ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
-+	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
+ 	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
  	ut_assertok(ut_check_console_end(uts));
- 	/*
- 	000001b0  00 00 00 00 00 00 00 00  78 56 34 12 00 00 80 05  |........xV4.....|
-@@ -313,11 +317,11 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	ut_assertok(run_commandf("write mmc 6:0 %lx 0 1", mbr_wa));
- 	memset(rbuf, 0, sizeof(rbuf));
+@@ -303,7 +305,7 @@ static int mbr_test_run(struct unit_test_state *uts)
+ 	000001e0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+ 	000001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa  |..............U.|
+ 	*/
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
  	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
--	ut_assertok(memcmp(mbr_wbuf, rbuf, 512));
-+	ut_assertok(memcmp(mbr_wbuf, rbuf, BLKSZ));
+ 	for (unsigned i = 0; i < mbr_cmp_size; i++) {
+ 		ut_assertf(rbuf[mbr_cmp_start + i] == mbr_parts_ref_p1[i],
+@@ -315,11 +317,11 @@ static int mbr_test_run(struct unit_test_state *uts)
+ 	init_write_buffers(mbr_wbuf, sizeof(mbr_wbuf), ebr_wbuf, sizeof(ebr_wbuf), __LINE__);
+ 	ut_assertok(build_mbr_parts(mbr_parts_buf, sizeof(mbr_parts_buf), 2));
+ 	ut_assertok(run_commandf("write mmc 6:0 %lx 0 1", mbr_wa));
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
+ 	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
+ 	ut_assertok(memcmp(mbr_wbuf, rbuf, BLKSZ));
  	ut_assertok(run_commandf("write mmc 6:0 %lx %lx 1", ebr_wa, ebr_blk));
- 	memset(rbuf, 0, sizeof(rbuf));
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
  	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
--	ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
-+	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
+ 	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
  	ut_assertok(console_record_reset_enable());
- 	ut_assertf(0 == run_commandf(mbr_parts_buf), "Invalid partitions string: %s\n", mbr_parts_buf);
- 	ut_assertok(run_commandf("mbr write mmc 6"));
-@@ -326,7 +330,7 @@ static int mbr_test_run(struct unit_test_state *uts)
+@@ -328,7 +330,7 @@ static int mbr_test_run(struct unit_test_state *uts)
+ 	ut_assert_nextline("MBR: write success!");
+ 	ut_assertok(run_commandf("mbr verify mmc 6"));
  	ut_assert_nextline("MBR: verify success!");
- 	memset(rbuf, 0, sizeof(rbuf));
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
  	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
--	ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
-+	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
+ 	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
  	ut_assertok(ut_check_console_end(uts));
- 	/*
- 	000001b0  00 00 00 00 00 00 00 00  78 56 34 12 00 00 80 05  |........xV4.....|
-@@ -349,11 +353,11 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	ut_assertok(run_commandf("write mmc 6:0 %lx 0 1", mbr_wa));
- 	memset(rbuf, 0, sizeof(rbuf));
+@@ -339,7 +341,7 @@ static int mbr_test_run(struct unit_test_state *uts)
+ 	000001e0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+ 	000001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa  |..............U.|
+ 	*/
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
  	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
--	ut_assertok(memcmp(mbr_wbuf, rbuf, 512));
-+	ut_assertok(memcmp(mbr_wbuf, rbuf, BLKSZ));
+ 	for (unsigned i = 0; i < mbr_cmp_size; i++) {
+ 		ut_assertf(rbuf[mbr_cmp_start + i] == mbr_parts_ref_p2[i],
+@@ -351,11 +353,11 @@ static int mbr_test_run(struct unit_test_state *uts)
+ 	init_write_buffers(mbr_wbuf, sizeof(mbr_wbuf), ebr_wbuf, sizeof(ebr_wbuf), __LINE__);
+ 	ut_assertok(build_mbr_parts(mbr_parts_buf, sizeof(mbr_parts_buf), 3));
+ 	ut_assertok(run_commandf("write mmc 6:0 %lx 0 1", mbr_wa));
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
+ 	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
+ 	ut_assertok(memcmp(mbr_wbuf, rbuf, BLKSZ));
  	ut_assertok(run_commandf("write mmc 6:0 %lx %lx 1", ebr_wa, ebr_blk));
- 	memset(rbuf, 0, sizeof(rbuf));
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
  	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
--	ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
-+	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
+ 	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
  	ut_assertok(console_record_reset_enable());
- 	ut_assertf(0 == run_commandf(mbr_parts_buf), "Invalid partitions string: %s\n", mbr_parts_buf);
- 	ut_assertok(run_commandf("mbr write mmc 6"));
-@@ -362,7 +366,7 @@ static int mbr_test_run(struct unit_test_state *uts)
+@@ -364,7 +366,7 @@ static int mbr_test_run(struct unit_test_state *uts)
+ 	ut_assert_nextline("MBR: write success!");
+ 	ut_assertok(run_commandf("mbr verify mmc 6"));
  	ut_assert_nextline("MBR: verify success!");
- 	memset(rbuf, 0, sizeof(rbuf));
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
  	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
--	ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
-+	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
+ 	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
  	ut_assertok(ut_check_console_end(uts));
- 	/*
- 	000001b0  00 00 00 00 00 00 00 00  78 56 34 12 00 00 80 05  |........xV4.....|
-@@ -385,11 +389,11 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	ut_assertok(run_commandf("write mmc 6:0 %lx 0 1", mbr_wa));
- 	memset(rbuf, 0, sizeof(rbuf));
+@@ -375,7 +377,7 @@ static int mbr_test_run(struct unit_test_state *uts)
+ 	000001e0  06 01 0e 66 25 01 00 50  00 00 00 08 00 00 00 00  |...f%..P........|
+ 	000001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa  |..............U.|
+ 	*/
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
  	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
--	ut_assertok(memcmp(mbr_wbuf, rbuf, 512));
-+	ut_assertok(memcmp(mbr_wbuf, rbuf, BLKSZ));
+ 	for (unsigned i = 0; i < mbr_cmp_size; i++) {
+ 		ut_assertf(rbuf[mbr_cmp_start + i] == mbr_parts_ref_p3[i],
+@@ -387,11 +389,11 @@ static int mbr_test_run(struct unit_test_state *uts)
+ 	init_write_buffers(mbr_wbuf, sizeof(mbr_wbuf), ebr_wbuf, sizeof(ebr_wbuf), __LINE__);
+ 	ut_assertok(build_mbr_parts(mbr_parts_buf, sizeof(mbr_parts_buf), 4));
+ 	ut_assertok(run_commandf("write mmc 6:0 %lx 0 1", mbr_wa));
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
+ 	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
+ 	ut_assertok(memcmp(mbr_wbuf, rbuf, BLKSZ));
  	ut_assertok(run_commandf("write mmc 6:0 %lx %lx 1", ebr_wa, ebr_blk));
- 	memset(rbuf, 0, sizeof(rbuf));
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
  	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
--	ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
-+	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
+ 	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
  	ut_assertok(console_record_reset_enable());
- 	ut_assertf(0 == run_commandf(mbr_parts_buf), "Invalid partitions string: %s\n", mbr_parts_buf);
- 	ut_assertok(run_commandf("mbr write mmc 6"));
-@@ -398,7 +402,7 @@ static int mbr_test_run(struct unit_test_state *uts)
+@@ -400,7 +402,7 @@ static int mbr_test_run(struct unit_test_state *uts)
+ 	ut_assert_nextline("MBR: write success!");
+ 	ut_assertok(run_commandf("mbr verify mmc 6"));
  	ut_assert_nextline("MBR: verify success!");
- 	memset(rbuf, 0, sizeof(rbuf));
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
  	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
--	ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
-+	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
+ 	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
  	ut_assertok(ut_check_console_end(uts));
- 	/*
- 	000001b0  00 00 00 00 00 00 00 00  78 56 34 12 00 00 80 05  |........xV4.....|
-@@ -421,11 +425,11 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	ut_assertok(run_commandf("write mmc 6:0 %lx 0 1", mbr_wa));
- 	memset(rbuf, 0, sizeof(rbuf));
+@@ -411,7 +413,7 @@ static int mbr_test_run(struct unit_test_state *uts)
+ 	000001e0  06 01 0e 66 25 01 00 50  00 00 00 08 00 00 00 66  |...f%..P.......f|
+ 	000001f0  26 01 0e 87 06 01 00 58  00 00 00 08 00 00 55 aa  |&......X......U.|
+ 	*/
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
  	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
--	ut_assertok(memcmp(mbr_wbuf, rbuf, 512));
-+	ut_assertok(memcmp(mbr_wbuf, rbuf, BLKSZ));
+ 	for (unsigned i = 0; i < mbr_cmp_size; i++) {
+ 		ut_assertf(rbuf[mbr_cmp_start + i] == mbr_parts_ref_p4[i],
+@@ -423,11 +425,11 @@ static int mbr_test_run(struct unit_test_state *uts)
+ 	init_write_buffers(mbr_wbuf, sizeof(mbr_wbuf), ebr_wbuf, sizeof(ebr_wbuf), __LINE__);
+ 	ut_assertok(build_mbr_parts(mbr_parts_buf, sizeof(mbr_parts_buf), 5));
+ 	ut_assertok(run_commandf("write mmc 6:0 %lx 0 1", mbr_wa));
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
+ 	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
+ 	ut_assertok(memcmp(mbr_wbuf, rbuf, BLKSZ));
  	ut_assertok(run_commandf("write mmc 6:0 %lx %lx 1", ebr_wa, ebr_blk));
- 	memset(rbuf, 0, sizeof(rbuf));
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
  	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
--	ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
-+	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
+ 	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
  	ut_assertok(console_record_reset_enable());
- 	ut_assertf(0 == run_commandf(mbr_parts_buf), "Invalid partitions string: %s\n", mbr_parts_buf);
- 	ut_assertf(0 == run_commandf("mbr write mmc 6"), "Invalid partitions string: %s\n", mbr_parts_buf);
+@@ -444,7 +446,7 @@ static int mbr_test_run(struct unit_test_state *uts)
+ 	000001e0  06 01 0e 66 25 01 00 50  00 00 00 08 00 00 00 66  |...f%..P.......f|
+ 	000001f0  26 01 05 a7 26 01 00 58  00 00 00 10 00 00 55 aa  |&...&..X......U.|
+ 	*/
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
+ 	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
+ 	for (unsigned i = 0; i < mbr_cmp_size; i++) {
+ 		ut_assertf(rbuf[mbr_cmp_start + i] == mbr_parts_ref_p5[i],
+@@ -458,7 +460,7 @@ static int mbr_test_run(struct unit_test_state *uts)
+ 	00b001e0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+ 	00b001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa  |..............U.|
+ 	*/
+-	memset(rbuf, 0, sizeof(rbuf));
++	memset(rbuf, '\0', BLKSZ);
+ 	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
+ 	for (unsigned i = 0; i < ebr_cmp_size; i++) {
+ 		ut_assertf(rbuf[ebr_cmp_start + i] == ebr_parts_ref_p5[i],
 -- 
 2.34.1
 
