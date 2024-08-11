@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 007E7C52D7B
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 15:02:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDF8BC52D7B
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 15:03:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0EAF88C40;
-	Sun, 11 Aug 2024 16:53:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0C44988C4A;
+	Sun, 11 Aug 2024 16:53:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OSn0VeVS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cCqJgkrX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B4E988C3F; Sun, 11 Aug 2024 16:53:04 +0200 (CEST)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
+ id 94A2F88898; Sun, 11 Aug 2024 16:53:04 +0200 (CEST)
+Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
+ [IPv6:2607:f8b0:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB4D688BE1
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:53:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 251F0889E3
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:52:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-39b37b63834so14084055ab.0
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:53:01 -0700 (PDT)
+Received: by mail-il1-x12e.google.com with SMTP id
+ e9e14a558f8ab-396675b83afso16623325ab.0
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:52:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723387980; x=1723992780; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723387978; x=1723992778; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MLB/rlCl2CQkjdoVqrRBTFn6YNhlaDFKNnr8F1hsgag=;
- b=OSn0VeVS75o8HZ7kF6pI6RWlqQXxsh72Q5xvSpR94eceYhiY8wK/3ApcFLZVgy2M98
- SIi1VE3UOlbzEAJqkjjZfMu3vfGq8Q0Ztq/PtMTWZjTBGfz6C7Ztn7Ca6t+DdiLiMC/x
- LyjiGy6DMW0BBsA9cnZTUyjF3sUzVpVkIGSjc=
+ bh=9fHFqiEb/an93PtFX+BLCkE6/YVYMa2Q9B8rwdB3tC4=;
+ b=cCqJgkrXCiVDk2K3uSd35N4vT85tV+EGNJP0fYN+W7+1VYK1riSR5W9RxoVCqdz9Vm
+ ze/y0/AX9oc75q/GsjYWOtn92IDpbjNnWHuwqr1App/JkrmJ7WesdkV2TyfYQIWMsisa
+ nhtAp83/PvoZf4Jj6rFlqwAbxmhkxdcwbEfc8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723387980; x=1723992780;
+ d=1e100.net; s=20230601; t=1723387978; x=1723992778;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MLB/rlCl2CQkjdoVqrRBTFn6YNhlaDFKNnr8F1hsgag=;
- b=wqNCxiLmPyLhXIpnIKl6WL8T9NU3Cdjemst8othEyPD9M/ipWj/flP3RlGN6J4sn/Y
- XmpccvsbhjFerv/3s60ypVqLo84UFc9Rxbk+PL8v7AgtQ4me9kj6Xl9qAWKCfisSQwqd
- eCaNS1XVuTyakSUyPjh5kt2W5LyilDQ+Ec3pyLoGtK2a6eAgBkA4MpRG41r1U9ksPu2U
- 1VKCA2a+cLcKFT1DqgbxMP5A3BNT6U+90COmA37cxsDof6c2ljB/ivbAQ194/L0c/tQS
- 9v3adt6TwOEwAvCg8Rcklc8KExzCnL/YmOxlWwj/7ruj6Kl8mppWIicA6qGfc6cM/jUi
- vvGA==
-X-Gm-Message-State: AOJu0YxBjTD3+fz0x5I4bdVdTb6s2F7QDmiQ8XRAUzcU9S5AP/L5Lf8T
- VtLPt3AWUbVzljIySZuvxS+lQpTqOobo1c1Ks3hp2XD5wqc118dYhmS/CeDwURtqUfGUCPZM3xI
+ bh=9fHFqiEb/an93PtFX+BLCkE6/YVYMa2Q9B8rwdB3tC4=;
+ b=fQ5bCuCiWfPyrQm7RETHhd4wOeixe1a0o5py0G6tMv+U+ILpjGgm8Zm7s+6KBI/5Ut
+ yvNx2Q3fQhOQVwxiQ45OxSurfVbSfloKd7JHPqEY4Sh3uAcNEuAZs/80iSnSuTlKx+qT
+ s2SI4ySnUw56yTsh+dU69mFws+WNHj0/UMYORbAxHNJHKC00asZdpohw6X7q7G/RK929
+ Wd5E/a3/CnUEqipAoUA6oxTC0TVQLWY1q/d3LZfzrf6wmuGh9IK2y8VJ7+nzp+G2IQIt
+ o7tVjoTdT4/KQpwcV5ofrRp6atIDxydp3f3sb/wtku/hCUCZwP5tnHoEHfzJKX218TTT
+ v1UQ==
+X-Gm-Message-State: AOJu0YznOtxvmRLR9yRRCC3XG18HuZ+oWWM9NJFTvt/gxEcvBI3s/Yye
+ Ycp540nhRCt90DU4HL9oX+ghjtQus4zlXgvPa3ySxtI6ZA8fU0Ercuv0szmZ88mwuShBAnhg6RA
  =
-X-Google-Smtp-Source: AGHT+IFXXkf/vwlqMKbL0YcSR3XCZolqhQ2c9Z3UPD9A0Qu7N3N3InNrBfCxPVuUmI9YEJfQDFT96g==
-X-Received: by 2002:a05:6e02:20eb:b0:398:4bda:cf66 with SMTP id
- e9e14a558f8ab-39b8159e1ccmr80249435ab.18.1723387980571; 
- Sun, 11 Aug 2024 07:53:00 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHpz09dKxPWXW3kDi/XuIB4k/3XldBle2JrGQYR7Q4UeGUVbO/W9izLQA409IfsiSw8SPl5XQ==
+X-Received: by 2002:a05:6e02:13a2:b0:39b:20d8:601e with SMTP id
+ e9e14a558f8ab-39b7a4757aemr95218785ab.3.1723387977840; 
+ Sun, 11 Aug 2024 07:52:57 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39c30a9a2c8sm11195855ab.43.2024.08.11.07.53.00
+ e9e14a558f8ab-39c30a9a2c8sm11195855ab.43.2024.08.11.07.52.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Aug 2024 07:53:00 -0700 (PDT)
+ Sun, 11 Aug 2024 07:52:57 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 40/40] efi: Add a test for the efi bootmeth
-Date: Sun, 11 Aug 2024 08:52:09 -0600
-Message-Id: <20240811145209.4191404-41-sjg@chromium.org>
+Subject: [PATCH v3 36/40] efi: Disable ANSI output for tests
+Date: Sun, 11 Aug 2024 08:52:05 -0600
+Message-Id: <20240811145209.4191404-37-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240811145209.4191404-1-sjg@chromium.org>
 References: <20240811145209.4191404-1-sjg@chromium.org>
@@ -90,106 +90,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a simple test of booting with the EFI bootmeth, which runs the app
-and checks that it can call 'exit boot-services' (to check that all the
-device-removal code doesn't break anything) and then exit back to
-U-Boot.
+We don't want ANSI characters written in tests since it is a pain to
+check the output with ut_assert_nextline() et al.
 
-This uses a disk image containing the testapp, ready for execution by
-sandbox when needed.
+Provide a way to tests to request that ANSI characters not be sent.
+
+Add a proper function comment while we are here, to encourage others.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- Add many new patches to resolve all the outstanding test issues
+ include/efi_loader.h         | 21 ++++++++++++++++++++-
+ lib/efi_loader/efi_console.c | 26 +++++++++++++++++---------
+ 2 files changed, 37 insertions(+), 10 deletions(-)
 
- test/boot/bootflow.c | 58 ++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 58 insertions(+)
-
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 6d85cf20dd5..8822dac8503 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -13,6 +13,7 @@
- #include <cli.h>
- #include <dm.h>
- #include <efi_default_filename.h>
-+#include <efi_loader.h>
- #include <expo.h>
- #ifdef CONFIG_SANDBOX
- #include <asm/test.h>
-@@ -31,6 +32,9 @@ extern U_BOOT_DRIVER(bootmeth_android);
- extern U_BOOT_DRIVER(bootmeth_cros);
- extern U_BOOT_DRIVER(bootmeth_2script);
- 
-+/* Use this as the vendor for EFI to tell the app to exit boot services */
-+static u16 __efi_runtime_data test_vendor[] = u"U-Boot testing";
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index f84852e384f..82b90ee0f1d 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -531,8 +531,27 @@ efi_status_t efi_bootmgr_delete_boot_option(u16 boot_index);
+ efi_status_t efi_bootmgr_run(void *fdt);
+ /* search the boot option index in BootOrder */
+ bool efi_search_bootorder(u16 *bootorder, efi_uintn_t num, u32 target, u32 *index);
+-/* Set up console modes */
 +
- static int inject_response(struct unit_test_state *uts)
- {
- 	/*
-@@ -1225,3 +1229,57 @@ static int bootflow_android(struct unit_test_state *uts)
++/**
++ * efi_setup_console_size() - update the mode table.
++ *
++ * By default the only mode available is 80x25. If the console has at least 50
++ * lines, enable mode 80x50. If we can query the console size and it is neither
++ * 80x25 nor 80x50, set it as an additional mode.
++ */
+ void efi_setup_console_size(void);
++
++/**
++ * efi_console_set_ansi() - Set whether ANSI characters should be emitted
++ *
++ * These characters mess up tests which use ut_assert_nextline(). Call this
++ * function to tell efi_loader not to emit these characters when starting up the
++ * terminal
++ *
++ * @allow_ansi: Allow emitting ANSI characters
++ */
++void efi_console_set_ansi(bool allow_ansi);
++
+ /* Set up load options from environment variable */
+ efi_status_t efi_env_set_load_options(efi_handle_t handle, const char *env_var,
+ 				      u16 **load_options);
+diff --git a/lib/efi_loader/efi_console.c b/lib/efi_loader/efi_console.c
+index cea50c748aa..569fc9199bc 100644
+--- a/lib/efi_loader/efi_console.c
++++ b/lib/efi_loader/efi_console.c
+@@ -30,6 +30,17 @@ struct cout_mode {
+ 
+ __maybe_unused static struct efi_object uart_obj;
+ 
++/*
++ * suppress emission of ANSI codes for use by unit tests. Leave it as 0 for the
++ * default behaviour
++ */
++static bool no_ansi;
++
++void efi_console_set_ansi(bool allow_ansi)
++{
++	no_ansi = !allow_ansi;
++}
++
+ static struct cout_mode efi_cout_modes[] = {
+ 	/* EFI Mode 0 is 80x25 and always present */
+ 	{
+@@ -348,13 +359,6 @@ static int __maybe_unused query_vidconsole(int *rows, int *cols)
  	return 0;
  }
- BOOTSTD_TEST(bootflow_android, UT_TESTF_CONSOLE_REC);
-+
-+/* Test EFI bootmeth */
-+static int bootflow_efi(struct unit_test_state *uts)
-+{
-+	/* disable ethernet since the hunter will run dhcp */
-+	test_set_eth_enable(false);
-+
-+	/* make USB scan without delays */
-+	test_set_skip_delays(true);
-+
-+	bootstd_reset_usb();
-+
-+	/* Avoid outputting ANSI characters which mess with our asserts */
-+	efi_console_set_ansi(false);
-+
-+	ut_assertok(bootstd_test_drop_bootdev_order(uts));
-+	ut_assertok(run_command("bootflow scan", 0));
-+	ut_assert_skip_to_line(
-+		"Bus usb@1: scanning bus usb@1 for devices... 5 USB Device(s) found");
-+
-+	ut_assertok(run_command("bootflow list", 0));
-+
-+	ut_assert_nextlinen("Showing all");
-+	ut_assert_nextlinen("Seq");
-+	ut_assert_nextlinen("---");
-+	ut_assert_nextlinen("  0  extlinux");
-+	ut_assert_nextlinen(
-+		"  1  efi          ready   usb_mass_    1  usb_mass_storage.lun0.boo /EFI/BOOT/BOOTSBOX.EFI");
-+	ut_assert_nextlinen("---");
-+	ut_assert_skip_to_line("(2 bootflows, 2 valid)");
-+	ut_assert_console_end();
-+
-+	ut_assertok(run_command("bootflow select 1", 0));
-+	ut_assert_console_end();
-+
-+	/* signal to helloworld to exit boot services */
-+	systab.fw_vendor = test_vendor;
-+
-+	ut_asserteq(1, run_command("bootflow boot", 0));
-+	ut_assert_nextline(
-+		"** Booting bootflow 'usb_mass_storage.lun0.bootdev.part_1' with efi");
-+	ut_assert_skip_to_line("Booting /\\EFI\\BOOT\\BOOTSBOX.EFI");
-+
-+	/* TODO: Why the \r ? */
-+	ut_assert_nextline("U-Boot test app for EFI_LOADER\r");
-+	ut_assert_nextline("Exiting boot sevices");
-+	ut_assert_nextline("## Application failed, r = 5");
-+	ut_assert_nextline("Boot failed (err=-22)");
-+
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+BOOTSTD_TEST(bootflow_efi, UT_TESTF_CONSOLE_REC);
+ 
+-/**
+- * efi_setup_console_size() - update the mode table.
+- *
+- * By default the only mode available is 80x25. If the console has at least 50
+- * lines, enable mode 80x50. If we can query the console size and it is neither
+- * 80x25 nor 80x50, set it as an additional mode.
+- */
+ void efi_setup_console_size(void)
+ {
+ 	int rows = 25, cols = 80;
+@@ -362,8 +366,12 @@ void efi_setup_console_size(void)
+ 
+ 	if (IS_ENABLED(CONFIG_VIDEO))
+ 		ret = query_vidconsole(&rows, &cols);
+-	if (ret)
+-		ret = query_console_serial(&rows, &cols);
++	if (ret) {
++		if (no_ansi)
++			ret = 0;
++		else
++			ret = query_console_serial(&rows, &cols);
++	}
+ 	if (ret)
+ 		return;
+ 
 -- 
 2.34.1
 
