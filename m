@@ -4,78 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 742F1C52D7B
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:52:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6B13C3DA4A
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:53:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9239588100;
+	by phobos.denx.de (Postfix) with ESMTP id EBCC9888D4;
 	Sun, 11 Aug 2024 16:50:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RgmE4m3Z";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BFNt2ntW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8B1B888A7; Sun, 11 Aug 2024 16:50:35 +0200 (CEST)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id ED28B88876; Sun, 11 Aug 2024 16:50:37 +0200 (CEST)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9687088100
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:50:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4654187E9D
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:50:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-6b95b710e2cso23642136d6.2
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:50:33 -0700 (PDT)
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-7a1e0ff6871so210685685a.2
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:50:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723387832; x=1723992632; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723387834; x=1723992634; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6nNDFlTQFX0vEpPIuoMohJA6KzS6mszYHymi/M5T4Vk=;
- b=RgmE4m3ZK+16uLUB+Q+7Bok9/ryV44XqJhxoLJYu/2Uqd57YKpxtUsP6K8I5RPZ2Qv
- RHC1Ku8mnvOmd0kAQUinR6ZOIAaMcLr6s9vwOSrCGfTP03sKAfxZW7zHGTZwjxPCbVwd
- 5X13lmTio+UJfMFZ6ZYhjFsgnSAm3KifJhc/8=
+ bh=1JWC6VgOsybkoXLBdfrAJhxigKTRncLcCmZin07qy5s=;
+ b=BFNt2ntWtUWZlun9ltGvd5aqkJIWHfrg+E2VQLzTXTGm0beR8ONZPFW3rQ/+OHdo4/
+ iCJxuYFCZQJuVbfajUxuv6a2kAJs18W/nNx/S5/qP5txEqQXRDtnFiuxsZ4FXhMjBCCP
+ EoRFjBFWtgC7YZ8xaZbSHSJGF9kuFmOhsnpBI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723387832; x=1723992632;
+ d=1e100.net; s=20230601; t=1723387834; x=1723992634;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6nNDFlTQFX0vEpPIuoMohJA6KzS6mszYHymi/M5T4Vk=;
- b=Ka9DiNxDvJXqFRTElJS5g1ACV4K24Ww4UiVx8b0EREHe/1LNI0269yRxUnlHAPr0/0
- TT4qQ/6rixgUKkq/QfpQ3PVC1gCY2ep3tNA/hm4GfPEUtCmB/1F25TJvGhTnskOxvwn2
- JAUt04pejn8nCEb5QG6iQWQp5eW5qx0BbbkA6b0fSLaYKULxkkvNWMXbylQQUIjrhjsQ
- ta8rGg8jG6W0o4REdlt5y0xhmWiIjxJRjBm6mPa2NwLwNnJMDRaE/L72Y5UDn+9kpm2W
- bGvYb6mhLXNGv22huNcAVZMqBLVcYZ4u4y2j6pJuzmsFQA/kv4tl9RojCR46SUxPgnBl
- 12Ig==
+ bh=1JWC6VgOsybkoXLBdfrAJhxigKTRncLcCmZin07qy5s=;
+ b=BiyhPyoIAGd4KGuaOWD8MPZV1TFnEPfu0DUVed6Hcj4v47v4vbFW8r0iNqkI2LIN2o
+ GXjPzcs9gJn/cYt3JXo2f3sb8jz0X80XKDa0n8SLDG+d4vdbTf8mcVZodfQLVtAucGaY
+ 5FPCTIO3ae+CuAf/jKOBdw+kMPr213QQ8jIPHwE9tG7vHgXPTlcn2kYOFllBNZxUzltp
+ rSvp4yeNHOHbO7Wfr5YW6fu569rArfSRMhJtMgsjvJL1J8/G4bb02huIZ47HVbV+M400
+ FKToVtYgf3tIni+AON7tVEyIvvukBnmUKi7EDTMj0jUXedYDskkiE7H7Ca0W3SDtWrUj
+ OeSA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXUFJlzwyarVMXX23vGkKRQVPlqZRflnz0GFJEvX/udvdwHa6p8sS/eZS1UPfv8hKFvLX0GMBnmCWwRNc93LKn3Ye/daA==
-X-Gm-Message-State: AOJu0YwzDtCcJGFaLx4zS9TSHvK/BOUHyWe2sYXVLf71LtdndrjET4uq
- nv1CraPTIXpowz5DCpLNWJFN8t0dglJxq+4YW1f0ugam8Aq4EIFy9VDoP3ZhbiHM4QsI3rTMh53
- 1iwoW4xoZvurRg150vQcE6F8Y/8YiyP3bkZ2h
-X-Google-Smtp-Source: AGHT+IFQ0T/C8vcqBX6TjAHzt5erKWy/FEq1/abg4uLP3TDEO/A2uZgfhn1kW0vL11/k4bExVEkwFkrNJ4ntThkQiK0=
-X-Received: by 2002:a05:6214:5413:b0:6bb:bc46:fb79 with SMTP id
- 6a1803df08f44-6bd78e84162mr81768446d6.47.1723387832424; Sun, 11 Aug 2024
- 07:50:32 -0700 (PDT)
+ AJvYcCUy33RqkMrIEllPB0kh9+DGiYwC7gvlZyJsKZeWVcR98OpmiHp6TZYxqh2l55ZjLBz9cwLLO8sBO2E7Gnp7mvBJsL/0rQ==
+X-Gm-Message-State: AOJu0YyL+iYBV0Bkk19XXZpB7Ofem9aCAqRxOBLVezN56+9OuZErFJH/
+ F+Md3Zi/u9KNyPsagB5/8NJU9CjS+UMVERv0xqfwmRkJ8G/LzdBL/MYvAiOBnpzkhvQfskuR+jI
+ xiuRB1W7JRW7g/rIhaLaIMOlyv4F548eCxb/JJKfdpCyrZE0=
+X-Google-Smtp-Source: AGHT+IHkRH2kDiIr++ywno3toqAv96CcXlEOmAJ1bvYpx9G7z4wUkuuEp6GjrOcsi6+5Hx1gjJvwABzTvzSUG/G9Y/Y=
+X-Received: by 2002:a05:6214:3991:b0:6b5:485:ea30 with SMTP id
+ 6a1803df08f44-6bd78d035f9mr77045656d6.3.1723387833972; Sun, 11 Aug 2024
+ 07:50:33 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240806125850.2316956-1-sjg@chromium.org>
- <20240806125850.2316956-38-sjg@chromium.org>
- <23093165-6af9-4582-8448-7bbae3c86be2@gmx.de>
- <20240807015613.GD1626301@bill-the-cat>
- <CAFLszThhn0240xt1j6GQB9QTKxiHiAg6J3vMXCnHBE15iYZSkA@mail.gmail.com>
- <20240808200634.GR1626301@bill-the-cat>
-In-Reply-To: <20240808200634.GR1626301@bill-the-cat>
+References: <75114aa0-2de7-4f5c-b764-0953ebf08263@gmx.de>
+ <CAFLszTh2Am1AuROKKwBr6zCNF4QCZQG2Vd88R2WWYFpGkMwjzQ@mail.gmail.com>
+ <87frrhcmeb.fsf@bloch.sibelius.xs4all.nl>
+ <CAFLszThXn0HGj9kEhOaMxcG41tQGR8103waUOmT9ZYk3pcELHw@mail.gmail.com>
+ <71004240-eca8-48f9-8fb0-153d5b3cf7c6@gmx.de>
+In-Reply-To: <71004240-eca8-48f9-8fb0-153d5b3cf7c6@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 11 Aug 2024 08:50:21 -0600
-Message-ID: <CAFLszThM=23AXCOfZ_uOyGGDQTRurDpAjR-t8X_NHjz4LgQ9SA@mail.gmail.com>
-Subject: Re: [PATCH v2 37/39] efi: Avoid using sandbox virtio devices
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Raymond Mao <raymond.mao@linaro.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Sun, 11 Aug 2024 08:50:23 -0600
+Message-ID: <CAFLszTgGzsEs5nUtJhoJRgEDf5E+vN6iwHr3Hd045yRvgX5jmw@mail.gmail.com>
+Subject: Re: Selecting serial device for console
+To: Fiona Klute <fiona.klute@gmx.de>
+Cc: Mark Kettenis <mark.kettenis@xs4all.nl>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,120 +87,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Fiona,
 
-On Thu, 8 Aug 2024 at 14:06, Tom Rini <trini@konsulko.com> wrote:
+On Sat, 10 Aug 2024 at 04:14, Fiona Klute <fiona.klute@gmx.de> wrote:
 >
-> On Thu, Aug 08, 2024 at 12:44:05PM -0600, Simon Glass wrote:
-> > Hi Heinrick, Tom,
-> >
-> > On Tue, 6 Aug 2024 at 19:56, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Wed, Aug 07, 2024 at 03:47:21AM +0200, Heinrich Schuchardt wrote:
-> > > > On 06.08.24 14:58, Simon Glass wrote:
-> > > > > While sandbox supports virtio it cannot support actually using the block
-> > > > > devices to read files, since there is nothing on the other end of the
-> > > > > 'virtqueue'.
-> > > > >
-> > > > > A recent change makes EFI probe all block devices, whether used or not.
-> > > > > This is apparently required by EFI, although it violates U-Boot's
-> > > > > lazy-init principle.
-> > > > >
-> > > > > We cannot just drop the virtio devices as they are used in sandbox tests.
-> > > > >
-> > > > > So for now just add a special case to work around this.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > ---
-> > > > >
-> > > > > (no changes since v1)
-> > > > >
-> > > > >   lib/efi_loader/efi_disk.c | 14 +++++++++++++-
-> > > > >   1 file changed, 13 insertions(+), 1 deletion(-)
-> > > > >
-> > > > > diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-> > > > > index 93a9a5ac025..2e1d37848fc 100644
-> > > > > --- a/lib/efi_loader/efi_disk.c
-> > > > > +++ b/lib/efi_loader/efi_disk.c
-> > > > > @@ -838,8 +838,20 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
-> > > > >   efi_status_t efi_disks_register(void)
-> > > > >   {
-> > > > >     struct udevice *dev;
-> > > > > +   struct uclass *uc;
-> > > > >
-> > > > > -   uclass_foreach_dev_probe(UCLASS_BLK, dev) {
-> > > > > +   uclass_id_foreach_dev(UCLASS_BLK, dev, uc) {
-> > > > > +           /*
-> > > > > +            * The virtio block-device hangs on sandbox when accessed since
-> > > > > +            * there is nothing listening to the mailbox
-> > > > > +            */
-> > > > > +           if (IS_ENABLED(CONFIG_SANDBOX)) {
-> > > > > +                   struct blk_desc *desc = dev_get_uclass_plat(dev);
-> > > > > +
-> > > > > +                   if (desc->uclass_id == UCLASS_VIRTIO)
-> > > > > +                           continue;
-> > > >
-> > > > We should avoid depending on the sandbox everywhere.
-> > > >
-> > > > Please, fix the problem in the sandbox driver.
-> > > >
-> > > > If you cannot fix it, run the tests involving virtio on QEMU instead of
-> > > > the sandbox.
-> >
-> > Which test? All of the EFI tests fail due to this problem. The test
-> > actually has nothing to do with virtio, it is just that EFI goes and
-> > probes every single block device, since [1].
+> Hi Simon, Mark,
 >
-> Aren't we running "the tests" on other platforms such as QEMU today?
+> thanks for your replies!
 >
-> > > This is an area we go back-and-forth on but, yes, IMHO, if we can't
-> > > easily provide a virtio device for sandbox, QEMU is right there and what
-> > > this is for, so I see sandbox as more useful as build rather than
-> > > runtime checking in this case.
+> Am 08.08.24 um 16:28 schrieb Simon Glass:
+> > Hi Mark,
 > >
-> > The best solution would be to implement a simple emulator, like we do
-> > in other places for sandbox. At present virtio_sandbox_notify() is
-> > empty.
-> >
-> > I don't mind working on that, but would like to get a temporary
-> > solution here so this test can land.
-> >
-> > Talking about virtio for QEMU is missing the point of this test, which
-> > is after all a test of booting an EFI app. I do wish more people would
-> > see the value in these unit tests. There is a talk at [2] which shows
-> > how emulators are used in Zephyr.
+> > On Tue, 6 Aug 2024 at 16:33, Mark Kettenis <mark.kettenis@xs4all.nl> wrote:
+> >>
+> >>> From: Simon Glass <sjg@chromium.org>
+> >>> Date: Tue, 6 Aug 2024 15:50:44 -0600
+> >>
+> >> Hi Simon,
+> >>
+> >>> Hi Fiona,
+> >>>
+> >>> On Thu, 1 Aug 2024 at 08:07, Fiona Klute <fiona.klute@gmx.de> wrote:
+> >>>>
+> >>>> Hi everyone,
+> >>>>
+> >>>> how can I configure which of the available serial devices U-Boot will
+> >>>> use for its serial console?
+> >>>>
+> >>>> Background: I have a device based on a Raspberry Pi CM4, which has 6
+> >>>> UARTs (UART1 is a mini UART, the others PL011) [1]. In the default
+> >>>> configuration (including the mainline Linux broadcom/bcm2711-rpi-cm4-io
+> >>>> device tree) the Bluetooth module is attached to UART0. Unless I either
+> >>>> completely disable UART0 (status = "disabled" in the device tree) or
+> >>>> reconfigure it to be a serial console (e.g. using the RPi disable-bt
+> >>>> DTBO) U-Boot fails to boot, I assume (it doesn't get far enough to show
+> >>>> messages over netconsole) because it tries and fails to set up a serial
+> >>>> console where there's a BT chip listening.
+> >>>>
+> >>>> That happens even if another serial console is available: With the RPi
+> >>>> bcm2711-rpi-cm4 DTB plus "disable-bt" (disable the Bluetooth module,
+> >>>> reconfigure UART0 as a serial console) and "uart1" (set up a serial
+> >>>> console on UART1) DTBOs I can see that U-Boot discovers the serial
+> >>>> device on UART1 (serial@7e215040):
+> >>>>
+> >>>> U-Boot> dm uclass serial
+> >>>> uclass 108: serial
+> >>>> 0   * serial@7e201000 @ 3af3b200, seq 0
+> >>>> 1     serial@7e215040 @ 3af3b2d0, seq 1
+> >>>>
+> >>>> However, I can't find a way to make it *use* it instead of UART0
+> >>>> (serial@7e201000). I tried to set CONFIG_CONS_INDEX=1 but didn't see any
+> >>>> change (unfortunately the help does not describe exactly how the number
+> >>>> is mapped to DT UART definitions). If I completely disable UART0 in the
+> >>>> DT as mentioned above U-Boot uses UART1 just fine, so it's not an issue
+> >>>> with UART1 as such.
+> >>>>
+> >>>> To make matters slightly more complicated, the specific device I have is
+> >>>> a RevPi Connect 4, where a vendor overlay [2] describes how to set up an
+> >>>> RS485 serial console using UART5. The pins defined there are wired to
+> >>>> the outside of the box [3], so eventually I'll actually want to use
+> >>>> UART5 for the serial console. Which means I really need a (build-time or
+> >>>> preferably DT-based) way to configure which serial device to use.
+> >>>>
+> >>>> My goal is to create a single DTS which both U-Boot and Linux can use,
+> >>>> and get it upstreamed if possible. If there are configuration options
+> >>>> and they're just missing from the documentation, I'd be happy to send a
+> >>>> patch to add them once I have a solution.
+> >>>
+> >>> You should be able to update /chosen/stdout-path (in the devicetree)
+> >>> to specify the UART you want, using its alias. So if you have a
+> >>> 'serial1' alias, you can set stdout-path to 'serial1'. This should
+> >>> work in Linux too.
+> >>>
+> >>> The code in question is serial_find_console_or_panic().
 >
-> So that talk is interesting, yes. So, yes, implement the bus driver for
-> sandbox for virtio, and until then we shouldn't have the tests running
-> on sandbox? Or am I still missing something?
+> I can see there that it *should* be using the serial device from
+> /chosen/stdout-path with CONFIG_OF_CONTROL=y (which I have set), but if
+> I set it in the described form (alias to UART5:baudrate, I can share my
+> DTS if that helps) U-Boot doesn't start. Unfortunately without the
+> console it's hard to see *why*, I'll have to see if anything appears if
+> I connect an HDMI display.
 
-Sure, but perhaps there is a way to get this test landed without doing
-that work right away?
+Indeed. If you have JTAG access that can help, or you could enable a
+debug UART and use printch(), etc. to see where it gets to.
 
-I'm not sure if we actually need d5391bf02b9 ("efi_loader: ensure all
-block devices are probed"). It seems to fix a real problem, though.
+If the serial driver dies, U-Boot will stop. I have the same issue on
+another board and created hacky patch[2] but have not got around to
+doing it properly.
+
+I suppose you can disable CONFIG_SERIAL_PRESENT but then you will need
+some other way to test the device.
 
 >
-> But I also still say that given that we as a project are more resource
-> constrained than Zephyr, for things that are QEMU-centric, there's
-> already a wealth of information on debugging QEMU since it too is
-> software. There's only so many hours in the day after all.
+> In general, should U-Boot be able to use an RS485 output via UART
+> configured via DT (like [1]), or would I need to do board-specific
+> config for that?
 
-One of Zephyr's challenges is that it relied on QEMU for almost all
-testing for a long time. As a result it takes a huge amount of CPU
-power to run tests - last I checked it was something like an hour on a
-64-core machine. U-Boot's unit tests ('ut all') run in about 12
-seconds on my machine. I could go on for hours about the different
-types of tests and the benefits of one versus the other, but the
-cheapest answer is not necessarily just to do a 'happy path' test and
-call it good.
+I don't know...I thought that was a broadcast type of thing. In Linux
+I believe the UART gets put in a special mode, so U-Boot would need to
+support that too.
 
-For this particular test, I do want to have tests for each bootmeth,
-to the point of running the target, so far as possible. It turns out
-that we can launch an EFI app on sandbox, so connecting it up to
-bootstd seems valuable to me.
+> With the RevPi Connect 4 device I have it's the only
+> serial console that's accessible without opening the box. I have also
+> noticed that both drivers/serial/serial_bcm283x_mu.c and
+> drivers/serial/serial_bcm283x_pl011.c contain some odd checks on whether
+> a serial UART is usable as a console, but I'm not sure if they'd
+> interfere here (because GPIO 15 is part of the RS485 setup).
 
-I've filed an issue for the virtio improvements.
+I'm not sure
+
+>
+> >> While this may reflect how modern Linux handles things, this doesn't
+> >> actually make a lot of sense to me.  And the clue is really in the
+> >> name of the node under which the stdout-path resides.  That property
+> >> is supposed to communicate to the OS what the firmware/bootloader
+> >> picked as the console device rather than indicate to the
+> >> firmware/bootloader what the console device should be.  This was how
+> >> things worked back in the days of OpenFirmware where the firmware
+> >> would pick an input and an output device based on firmware variables
+> >> and whether a keyboard was plugged in or not and would set "stdin" and
+> >> "stdout" properties under /chosen to reflect the choice made by the
+> >> firmware.
+> >>
+> >> With this in mind it would make total sense to have U-Boot set
+> >> /chosen/stdout-path based on some environment variable or other
+> >> information.  Of course it might still make sense that the device tree
+> >> used by U-Boot sets /chosen/stdout-path to indicate the default choice
+> >> for the console device.  But it doesn't make senso to me to tell users
+> >> that if they want to use a different console device they should go and
+> >> edit the device tree...
+>
+> In general I agree, on RPi-based devices having the bootloader apply DT
+> overlays is pretty normal though (whether that's a good idea may be up
+> for debate). That said, another issue I see is that U-Boot seems to fail
+> to boot without a valid serial console even though
+> CONFIG_REQUIRE_SERIAL_CONSOLE is not set. If I had a way around that
+> it'd be enough for my immediate issue, even though a working serial
+> console would be very much preferable. ;-)
+>
+
+Enabling DEBUG_UART on rpi would be a worthy goal. It can be a little
+tricky if there is pinmux, etc. But on another board I figured it out
+by tracking the register writes done in a normal startup, then writing
+new code to include those in the board_debug_uart_init()
 
 Regards,
 Simon
+>
+> [1]
+> https://gitlab.com/revolutionpi/linux/-/blob/4ae9a35871799004300f83694a24359a7b4ef8fa/arch/arm/boot/dts/overlays/revpi-connect4-overlay.dts#L281-292
+>
+
+[2] https://patchwork.ozlabs.org/project/uboot/patch/20231101180447.99361-1-sjg@chromium.org/
