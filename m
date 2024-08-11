@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACA22C52D7B
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 15:02:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22403C3DA4A
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 15:02:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8843688C25;
+	by phobos.denx.de (Postfix) with ESMTP id E264B88C3C;
 	Sun, 11 Aug 2024 16:53:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MMTPS6Fh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TAsLKdvk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C34288B9F; Sun, 11 Aug 2024 16:53:00 +0200 (CEST)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id 254F388BA5; Sun, 11 Aug 2024 16:53:00 +0200 (CEST)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 888A588BCB
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:52:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BC07388C2A
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:52:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-39b3a4d2577so12272165ab.3
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:52:56 -0700 (PDT)
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-81f85130660so143489639f.1
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:52:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723387975; x=1723992775; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723387976; x=1723992776; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Og7RzCRZ6P7JZ73xgqQ33OT1hycWQPRTf3lWUqFTQ7k=;
- b=MMTPS6FhVD2AyFV0k4fKM8hSOHhO2eRCO/F/r82PXZeCgR8zbjoTp8bzLCp4W1YB0/
- 1g9u08eCotD9fq62f6l2WMxm8Zhd6/kyKml77PBXOE0NlP58+KJ/81aM6HydtKtldq+L
- efDVYhCce4exhTkrO9mz20ENKJ3e0FnW3CtbQ=
+ bh=XwxAiFESs65vbo6QNOU8SXLS8pkdRiY6L9eOgLqhNdc=;
+ b=TAsLKdvkRHxNFGvJs+vR8EN0TbY0L4IFRU3E6jTYZhDocR47/D2qwJMrsFwKmFh8jf
+ gHHlIKmT0pUG+UnqVPmYV48D+gf7lIVqJ0/MLp3WsjPKvx4nOGy266nasQeNprnV2wcu
+ yktjMqj+aNYQzLcEUZWh1BZ73cCCZpkE55hiM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723387975; x=1723992775;
+ d=1e100.net; s=20230601; t=1723387976; x=1723992776;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Og7RzCRZ6P7JZ73xgqQ33OT1hycWQPRTf3lWUqFTQ7k=;
- b=wNQPVMy6xHKww81D2miXxVoNgVVW5LsZoW68ELfwDkPdrWhNCIwlIoUx/kQQvQ5vor
- m0uAX6ZLBzlkbb7QCNx5oeyFR0cvqC03cVFFkjOBrkPAJQN9hvQ+UAJ3PqQsOzZyTLG4
- zlMQG2KQqhJkTc2k14xRac9N6y5OMnVeAZ8oulNweceoJnEaR4cznTlOZi5/EzVSPAyf
- +zmVIBZsSBRLljm+DF5wnAuXx4IdZLZcHyI8W6ME9dLLmy4yf7ORzK/YABRavyzGidQQ
- V9ZtTs8wXLlHE2ALCl82LQlkgc+4z89nmHBVvxpgh+Qqs/IGRBeaoIzjuYa9Qjv86tBK
- hUtg==
-X-Gm-Message-State: AOJu0YytFENrFs9BWLwzOMifO/EvUvq4rA4vSLuMRUs1ldRZJLpVjPM3
- f23b8qEIGUHz9d/nG2FEfle0xYO1K43dLsdzvXqg1rI0puCH5NbUf6nyVAnqGPeZRWf6aP8n5KQ
+ bh=XwxAiFESs65vbo6QNOU8SXLS8pkdRiY6L9eOgLqhNdc=;
+ b=SMfdLvwi3X2pZ8JMY9fG0HqcjuEcr1n6WKRTNcEi4OmBZjxmzjLVVIoHCYXDM+CLXf
+ uYctBpNN19MjMJQlLgqMciBRrpXFD+GdgeucjW+LRvshSN0ITTWdu2WkrbcNe+7zFWKW
+ ruGQVAz/Yyr02D8dIXsyZCEf+WoFaFkXZIyh/j1Egoe+20DeciKDv3obfxzrm8j8wwY/
+ QLU9lTPYSW2FyHVVpSwAbyxr8HWuh6GonEHlGSo21WkY8C9fSWWVna5G6l7rJodaUTPo
+ YWPGkotGuwjSEWj8aedbVTHAWDiMO0oiUSd5w0zcXuArmCjTg9jMORZW6cz0uRnZqdH1
+ ZwIg==
+X-Gm-Message-State: AOJu0YxqMwjmiRz36SmCN+rGGhtoau7adHAVWFd5FExO8+6eeKBDGQtH
+ 3eTrPGYSGTCUycCN7V9AVjiwx41NhfO/SsToICtXenLtWISGdipHyRRUUZ3XJRjY5ntp9ecowjM
  =
-X-Google-Smtp-Source: AGHT+IEtVIIj7Rqi/nbk4pCBr+eulC3Ft76BFYjJYjeZ9CTfT9wm+WJbsj0CNhPsoHyyLzUHypRfLA==
-X-Received: by 2002:a05:6e02:2194:b0:376:410b:ae67 with SMTP id
- e9e14a558f8ab-39b7a4205demr109709135ab.16.1723387975161; 
- Sun, 11 Aug 2024 07:52:55 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHtXje9OyFNqb9tbpa0zW37Dp0GTmky/6EkK+4nDEqBzRhhFiYvCjpCWBjdccGYq0BwBflsZQ==
+X-Received: by 2002:a92:c56a:0:b0:375:acd3:31b3 with SMTP id
+ e9e14a558f8ab-39bd419bcbbmr80004615ab.5.1723387976495; 
+ Sun, 11 Aug 2024 07:52:56 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39c30a9a2c8sm11195855ab.43.2024.08.11.07.52.54
+ e9e14a558f8ab-39c30a9a2c8sm11195855ab.43.2024.08.11.07.52.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Aug 2024 07:52:54 -0700 (PDT)
+ Sun, 11 Aug 2024 07:52:56 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 32/40] Revert "bootdev: avoid infinite probe loop"
-Date: Sun, 11 Aug 2024 08:52:01 -0600
-Message-Id: <20240811145209.4191404-33-sjg@chromium.org>
+Subject: [PATCH v3 34/40] efi: Use the same filename for all sandbox builds
+Date: Sun, 11 Aug 2024 08:52:03 -0600
+Message-Id: <20240811145209.4191404-35-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240811145209.4191404-1-sjg@chromium.org>
 References: <20240811145209.4191404-1-sjg@chromium.org>
@@ -90,70 +90,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This turns out to be insufficient to fix the problem, since when
-bootdev_next_prio() exits, the caller has no idea that this really
-is the end. Nor is it, since there may be other devices which should
-be checked.
+Sandbox is not a real architecture, but within U-Boot it is real enough.
+We should not need to pretend it is x86 or ARM anywhere in the code.
 
-The caller iterates which calls iter_incr() which calls
-bootdev_next_prio() again, which finds the same device and the loop
-continues.
+Also we want to be able to locate the sandbox app using a single
+filename, 'bootsbox.efi', to avoid needing tests to produce different
+files on each host architecture.
 
-We never did create a test for this[1], which makes it hard to be
-sure which problem was fixed.
-
-The original code had the virtue of staying in the loop looking for a
-bootdev, so let's go back to that and try to fix this another way.
-
-A future patch will make bootdev_next_prio() continue after failure
-which should provide same effect.
-
-This reverts commit 9d92c418acfb7576e12e2bd53fed294bb9543724.
+Drop the confusing use of host architecture and just let sandbox be
+sandbox.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Fixes: 3a0654ecd0d ("efi_loader: correctly identify binary name")
 ---
 
 Changes in v3:
-- Update commit message to describe how the problem will be addressed
-- Fix 'virtual' typo
+- Put back the Linaro copyright accidentally removed
 
- boot/bootdev-uclass.c | 14 ++------------
- 1 file changed, 2 insertions(+), 12 deletions(-)
+ include/efi_default_filename.h | 24 ++----------------------
+ 1 file changed, 2 insertions(+), 22 deletions(-)
 
-diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
-index 7c7bba088c9..15a8a3555c6 100644
---- a/boot/bootdev-uclass.c
-+++ b/boot/bootdev-uclass.c
-@@ -632,7 +632,7 @@ int bootdev_next_label(struct bootflow_iter *iter, struct udevice **devp,
+diff --git a/include/efi_default_filename.h b/include/efi_default_filename.h
+index 77932984b55..06ca8735002 100644
+--- a/include/efi_default_filename.h
++++ b/include/efi_default_filename.h
+@@ -16,26 +16,8 @@
+ #undef BOOTEFI_NAME
  
- int bootdev_next_prio(struct bootflow_iter *iter, struct udevice **devp)
- {
--	struct udevice *dev = *devp, *last_dev = NULL;
-+	struct udevice *dev = *devp;
- 	bool found;
- 	int ret;
+ #ifdef CONFIG_SANDBOX
+-
+-#if HOST_ARCH == HOST_ARCH_X86_64
+-#define BOOTEFI_NAME "BOOTX64.EFI"
+-#elif HOST_ARCH == HOST_ARCH_X86
+-#define BOOTEFI_NAME "BOOTIA32.EFI"
+-#elif HOST_ARCH == HOST_ARCH_AARCH64
+-#define BOOTEFI_NAME "BOOTAA64.EFI"
+-#elif HOST_ARCH == HOST_ARCH_ARM
+-#define BOOTEFI_NAME "BOOTARM.EFI"
+-#elif HOST_ARCH == HOST_ARCH_RISCV32
+-#define BOOTEFI_NAME "BOOTRISCV32.EFI"
+-#elif HOST_ARCH == HOST_ARCH_RISCV64
+-#define BOOTEFI_NAME "BOOTRISCV64.EFI"
+-#else
+-#error Unsupported UEFI architecture
+-#endif
+-
+-#else
+-
+-#if defined(CONFIG_ARM64)
++#define BOOTEFI_NAME "BOOTSBOX.EFI"
++#elif defined(CONFIG_ARM64)
+ #define BOOTEFI_NAME "BOOTAA64.EFI"
+ #elif defined(CONFIG_ARM)
+ #define BOOTEFI_NAME "BOOTARM.EFI"
+@@ -52,5 +34,3 @@
+ #endif
  
-@@ -682,19 +682,9 @@ int bootdev_next_prio(struct bootflow_iter *iter, struct udevice **devp)
- 			}
- 		} else {
- 			ret = device_probe(dev);
--			if (!ret)
--				last_dev = dev;
- 			if (ret) {
--				log_warning("Device '%s' failed to probe\n",
-+				log_debug("Device '%s' failed to probe\n",
- 					  dev->name);
--				if (last_dev == dev) {
--					/*
--					 * We have already tried this device
--					 * and it failed to probe. Give up.
--					 */
--					return log_msg_ret("probe", ret);
--				}
--				last_dev = dev;
- 				dev = NULL;
- 			}
- 		}
+ #endif
+-
+-#endif
 -- 
 2.34.1
 
