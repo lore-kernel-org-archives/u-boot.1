@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2D17C52D7B
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 15:02:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACA22C52D7B
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 15:02:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29D6288C01;
-	Sun, 11 Aug 2024 16:53:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8843688C25;
+	Sun, 11 Aug 2024 16:53:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m9O3cezk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MMTPS6Fh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E006E88C30; Sun, 11 Aug 2024 16:52:57 +0200 (CEST)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id 1C34288B9F; Sun, 11 Aug 2024 16:53:00 +0200 (CEST)
+Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
+ [IPv6:2607:f8b0:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD32388AD7
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:52:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 888A588BCB
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:52:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-81f8f0197abso176469339f.2
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:52:55 -0700 (PDT)
+Received: by mail-il1-x12b.google.com with SMTP id
+ e9e14a558f8ab-39b3a4d2577so12272165ab.3
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:52:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723387974; x=1723992774; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723387975; x=1723992775; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bcP6BtqafScc0NdTztSLCjfNhuuO7jN51LuoNSQ0VeE=;
- b=m9O3cezk6vmBRoSIoVa2Ouq/SI8F3VpfcvlkxqhJIMDsKPmKKbiYbM3pNZG5hMb/jN
- XDdeGi1QwUcF7rU5MfR9K+Lru5EMvqd+Rev42jkzey6VoDNuBm/Tp2jxDgw/sWJQK+03
- +KVzUsK0waYPeWkOHeKHmS3RtDxKpdNbmNBSI=
+ bh=Og7RzCRZ6P7JZ73xgqQ33OT1hycWQPRTf3lWUqFTQ7k=;
+ b=MMTPS6FhVD2AyFV0k4fKM8hSOHhO2eRCO/F/r82PXZeCgR8zbjoTp8bzLCp4W1YB0/
+ 1g9u08eCotD9fq62f6l2WMxm8Zhd6/kyKml77PBXOE0NlP58+KJ/81aM6HydtKtldq+L
+ efDVYhCce4exhTkrO9mz20ENKJ3e0FnW3CtbQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723387974; x=1723992774;
+ d=1e100.net; s=20230601; t=1723387975; x=1723992775;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bcP6BtqafScc0NdTztSLCjfNhuuO7jN51LuoNSQ0VeE=;
- b=KgIBQC1ZsGnTGQC0uX8Bq7KN8RTrYMDmBH86q5WgWF4kvcqwZ6tXTuAgyOkkW9lwW5
- AlNNpGw+TD701bN7kErl4NJpyfMflPjSFpAocAp/fbvFAW0wN80JmUZhusdFhFzT7MK1
- NZwJ8GcRo6fQ3y/3uVv3j7RF87D/qxpgA4UlXt+/rLF3p4VSH/xn2P9lbmFYGXVBXIRT
- nDpIixXmCkDHHCq4zTSQmvu7mqaO8t7gc4fOzYubw+mvGx9An6RkLsF57olDCYHimgPK
- j0WW9u3QGIQTFsk/TjgD0MxgcMJU1nEnpIJwl4S7vnKfpQ59u58vmD+Ug27x059P766a
- L59A==
-X-Gm-Message-State: AOJu0YyohVCVvFyXlUiNl59McI9R1OfbZa5YQmZg8sVjhSS2+0Vnytr0
- BmZXkQ6m0Dcc/keTcImepPbnMcvPDwaLaCyuCdFr9JNJBsI5rQ/dB+XLTRl0tWO50mcJbdVewKE
+ bh=Og7RzCRZ6P7JZ73xgqQ33OT1hycWQPRTf3lWUqFTQ7k=;
+ b=wNQPVMy6xHKww81D2miXxVoNgVVW5LsZoW68ELfwDkPdrWhNCIwlIoUx/kQQvQ5vor
+ m0uAX6ZLBzlkbb7QCNx5oeyFR0cvqC03cVFFkjOBrkPAJQN9hvQ+UAJ3PqQsOzZyTLG4
+ zlMQG2KQqhJkTc2k14xRac9N6y5OMnVeAZ8oulNweceoJnEaR4cznTlOZi5/EzVSPAyf
+ +zmVIBZsSBRLljm+DF5wnAuXx4IdZLZcHyI8W6ME9dLLmy4yf7ORzK/YABRavyzGidQQ
+ V9ZtTs8wXLlHE2ALCl82LQlkgc+4z89nmHBVvxpgh+Qqs/IGRBeaoIzjuYa9Qjv86tBK
+ hUtg==
+X-Gm-Message-State: AOJu0YytFENrFs9BWLwzOMifO/EvUvq4rA4vSLuMRUs1ldRZJLpVjPM3
+ f23b8qEIGUHz9d/nG2FEfle0xYO1K43dLsdzvXqg1rI0puCH5NbUf6nyVAnqGPeZRWf6aP8n5KQ
  =
-X-Google-Smtp-Source: AGHT+IE6C4tf/fDXZakM1hmi76V4nQxPohnyNNmxMG3RrByn/JvbdSzg06TtMx98/yxX6XAyW0mnpw==
-X-Received: by 2002:a05:6e02:1fe1:b0:39a:14f7:1c1c with SMTP id
- e9e14a558f8ab-39b813286b9mr84260825ab.25.1723387974446; 
- Sun, 11 Aug 2024 07:52:54 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEtVIIj7Rqi/nbk4pCBr+eulC3Ft76BFYjJYjeZ9CTfT9wm+WJbsj0CNhPsoHyyLzUHypRfLA==
+X-Received: by 2002:a05:6e02:2194:b0:376:410b:ae67 with SMTP id
+ e9e14a558f8ab-39b7a4205demr109709135ab.16.1723387975161; 
+ Sun, 11 Aug 2024 07:52:55 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
  e9e14a558f8ab-39c30a9a2c8sm11195855ab.43.2024.08.11.07.52.54
@@ -66,9 +66,9 @@ To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 31/40] efi: Show the vendor in helloworld
-Date: Sun, 11 Aug 2024 08:52:00 -0600
-Message-Id: <20240811145209.4191404-32-sjg@chromium.org>
+Subject: [PATCH v3 32/40] Revert "bootdev: avoid infinite probe loop"
+Date: Sun, 11 Aug 2024 08:52:01 -0600
+Message-Id: <20240811145209.4191404-33-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240811145209.4191404-1-sjg@chromium.org>
 References: <20240811145209.4191404-1-sjg@chromium.org>
@@ -90,35 +90,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Show the vendor name so it is clear which firmware is being used, e.g.
-whether U-Boot is providing the boot services.
+This turns out to be insufficient to fix the problem, since when
+bootdev_next_prio() exits, the caller has no idea that this really
+is the end. Nor is it, since there may be other devices which should
+be checked.
+
+The caller iterates which calls iter_incr() which calls
+bootdev_next_prio() again, which finds the same device and the loop
+continues.
+
+We never did create a test for this[1], which makes it hard to be
+sure which problem was fixed.
+
+The original code had the virtue of staying in the loop looking for a
+bootdev, so let's go back to that and try to fix this another way.
+
+A future patch will make bootdev_next_prio() continue after failure
+which should provide same effect.
+
+This reverts commit 9d92c418acfb7576e12e2bd53fed294bb9543724.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v2)
+Changes in v3:
+- Update commit message to describe how the problem will be addressed
+- Fix 'virtual' typo
 
-Changes in v2:
-- Reword commit message
-- Use 'Firmware vendor' instead of just 'Vendor'
+ boot/bootdev-uclass.c | 14 ++------------
+ 1 file changed, 2 insertions(+), 12 deletions(-)
 
- lib/efi_loader/helloworld.c | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/lib/efi_loader/helloworld.c b/lib/efi_loader/helloworld.c
-index 586177de0c8..c4d2afcb40a 100644
---- a/lib/efi_loader/helloworld.c
-+++ b/lib/efi_loader/helloworld.c
-@@ -237,6 +237,9 @@ efi_status_t EFIAPI efi_main(efi_handle_t handle,
- 			(con_out, u"Missing device path for device handle\r\n");
- 		goto out;
- 	}
-+	con_out->output_string(con_out, u"Firmware vendor: ");
-+	con_out->output_string(con_out, systab->fw_vendor);
-+	con_out->output_string(con_out, u"\n");
- 	con_out->output_string(con_out, u"Boot device: ");
- 	ret = print_device_path(device_path, device_path_to_text);
- 	if (ret != EFI_SUCCESS)
+diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
+index 7c7bba088c9..15a8a3555c6 100644
+--- a/boot/bootdev-uclass.c
++++ b/boot/bootdev-uclass.c
+@@ -632,7 +632,7 @@ int bootdev_next_label(struct bootflow_iter *iter, struct udevice **devp,
+ 
+ int bootdev_next_prio(struct bootflow_iter *iter, struct udevice **devp)
+ {
+-	struct udevice *dev = *devp, *last_dev = NULL;
++	struct udevice *dev = *devp;
+ 	bool found;
+ 	int ret;
+ 
+@@ -682,19 +682,9 @@ int bootdev_next_prio(struct bootflow_iter *iter, struct udevice **devp)
+ 			}
+ 		} else {
+ 			ret = device_probe(dev);
+-			if (!ret)
+-				last_dev = dev;
+ 			if (ret) {
+-				log_warning("Device '%s' failed to probe\n",
++				log_debug("Device '%s' failed to probe\n",
+ 					  dev->name);
+-				if (last_dev == dev) {
+-					/*
+-					 * We have already tried this device
+-					 * and it failed to probe. Give up.
+-					 */
+-					return log_msg_ret("probe", ret);
+-				}
+-				last_dev = dev;
+ 				dev = NULL;
+ 			}
+ 		}
 -- 
 2.34.1
 
