@@ -4,174 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95D75C3DA4A
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 18:44:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BA68C3DA4A
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 21:26:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8B688852E;
-	Sun, 11 Aug 2024 20:44:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=marvell.com
+	by phobos.denx.de (Postfix) with ESMTP id 6FFE3879AF;
+	Sun, 11 Aug 2024 23:26:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=marvell.com header.i=@marvell.com header.b="BRwaU+bA";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="UK/HdDzl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F7298837D; Sun, 11 Aug 2024 20:44:29 +0200 (CEST)
-Received: from mx0b-0016f401.pphosted.com (mx0a-0016f401.pphosted.com
- [67.231.148.174])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id BF56388453; Sun, 11 Aug 2024 23:26:40 +0200 (CEST)
+Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E90F38845A
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 20:44:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C66E86BF1
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 23:26:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=marvell.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rminnikanti@marvell.com
-Received: from pps.filterd (m0045849.ppops.net [127.0.0.1])
- by mx0a-0016f401.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 47BIFZ4k018377;
- Sun, 11 Aug 2024 11:44:21 -0700
-Received: from nam10-bn7-obe.outbound.protection.outlook.com
- (mail-bn7nam10lp2041.outbound.protection.outlook.com [104.47.70.41])
- by mx0a-0016f401.pphosted.com (PPS) with ESMTPS id 40xqkys2p3-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Sun, 11 Aug 2024 11:44:21 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rQTY6qGKJfQ/SA/74EUwNZbfL6VHmoZJRav+YBiVpQomZlOQCiSkLKHqj30yWh99+9HDpouIUtvJP6WMy66WqN1GzfXJP2xv0PaurMX5sFC5aqxB4Sf5EG4QRhQK0GLVZCjYtW81DcMWG5aOM5kvOHugs+1FQoMGzQqhAuHhw3mLHquHuq7zEpBmjEKgzH4h8zrl4fFSqw0fXT89bEhRHuGOLDmUpXZwxMP4fYZ5ApZl9auONQZp/pifGsFyXV0wDmTaFMD8LzVNjqyyhW6tkB1BWY3Aztp2ewEC8WVftfh3NnKLgHzNKnIJZu0wY6ZH6c4I0dHghvz4fjqsZV5uPw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oCSQO/sJfhcGKpOqp0F1vbkHupZaqX8Iu2O/ViojH+c=;
- b=LO4t6VBCuVUsiqTRCFG3z2dmxyE4pAZH9j3Ft4q3ki8L973HTkSAm0Q/s269vRGokneK5f6HFoIoeMNPfCfU864rKy9LIhGm/kY5yfWk2pzRKRR6jVCIswErSRy0YXZnDHk7w+OehqJjePgqlfv0dL/R8ZHptWS551+XbH9z1qwfkQwK5t7mYgN0ilWt4+R9SnfRuxob8BRMvBX/wxU9rK/KxAl3svO4IGPg7hrFR/j4LbEms/xfb7H3SFiOeOkirRL/1F4uQ+da+9WVJqC+wpuBNvgFmctzOJUBUqq2kxseK+qXQjc+gssCVH3JWM2zS41Mo0NWN+zxlwiIZnLvuQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=marvell.com; dmarc=pass action=none header.from=marvell.com;
- dkim=pass header.d=marvell.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=marvell.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oCSQO/sJfhcGKpOqp0F1vbkHupZaqX8Iu2O/ViojH+c=;
- b=BRwaU+bAX/W1bnOTkVEtPGATO3VRkUNvzzps80hGGusdAafa/+zN0ZgWLPUmMrK5VwDogjXFVLT2Ji5Cp1VwLl2UW9Lw4zmLsC5Ua14f8Uui9zOKlhpYKKsF5zB/6qkAQNv6zwKB4ptJVNel37Sc/MegrCxzFO8YrVwDt9+gzXU=
-Received: from CO6PR18MB4451.namprd18.prod.outlook.com (2603:10b6:303:138::12)
- by IA3PR18MB6216.namprd18.prod.outlook.com (2603:10b6:208:522::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7849.20; Sun, 11 Aug
- 2024 18:44:18 +0000
-Received: from CO6PR18MB4451.namprd18.prod.outlook.com
- ([fe80::4c2b:70d5:95ac:1d6c]) by CO6PR18MB4451.namprd18.prod.outlook.com
- ([fe80::4c2b:70d5:95ac:1d6c%6]) with mapi id 15.20.7849.019; Sun, 11 Aug 2024
- 18:44:16 +0000
-Message-ID: <f1a2067c-942c-7e2d-ab28-7906a904a58e@marvell.com>
-Date: Sun, 11 Aug 2024 11:44:15 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.0
-Subject: [PATCH v3] env: remove vars that are not in default env
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, quentin.schulz@bootlin.com,
- U-Boot-Denx <u-boot@lists.denx.de>
-References: <03cdd29b-331c-76b0-f6d7-a064552ffd67@marvell.com>
- <CAFLszTiCS-jRfL__PJ=uEQf0rUKcw4J8czp-=khzkHB=q9ySOg@mail.gmail.com>
- <b4d4fe48-c3b0-98cc-dccf-8b96318ec204@marvell.com>
- <CAFLszTgN3AqhPzT+Zpe=sfM_cOZOmOQPseG_ipwMcNYzLbGUdQ@mail.gmail.com>
-From: Ravi Minnikanti <rminnikanti@marvell.com>
-In-Reply-To: <CAFLszTgN3AqhPzT+Zpe=sfM_cOZOmOQPseG_ipwMcNYzLbGUdQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: BYAPR08CA0013.namprd08.prod.outlook.com
- (2603:10b6:a03:100::26) To CO6PR18MB4451.namprd18.prod.outlook.com
- (2603:10b6:303:138::12)
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO6PR18MB4451:EE_|IA3PR18MB6216:EE_
-X-MS-Office365-Filtering-Correlation-Id: abbb8085-7c7b-48fc-ca14-08dcba359a7a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Yyt0YU9iM1VKQkJ4WnVjYUw1ZFVmN1FRK3dqbjlKRGpldVh3YU41TUxxOG1s?=
- =?utf-8?B?TWNEaWRBK050dVczQ0E3M0w2NFpGZ2hwU1JjV0diZStYQUd3UVZCN1RhZ2RE?=
- =?utf-8?B?KzJKVmlLZytVU2l1N3FPZ0dqZzlXL1BhQXdFdXByZEhnS0NpSzM0MVQ4T3hX?=
- =?utf-8?B?T3Ewb0llV0RvNUExVWoyVnFlc2NycTlqQmY5d2c5T1dYVFlhaHJFdUV0Vyta?=
- =?utf-8?B?TnV4WjZGOXZTbDRxd0lZV21LSlVBQ3VaUmdRU0tRY0lmWmpieUl0OG1KYXJO?=
- =?utf-8?B?WnIvblpuOS9Fa2NuS2VkYm50ZG5YRHROK2tIVEp2RGZzNkZVL3ZLRVgrQUx2?=
- =?utf-8?B?eHFTMG9Sa2tyNGJhN2JYVW1EQkFTZ01CaWRta0VYa1hBMG94eDlRME9rckJl?=
- =?utf-8?B?N3VrN0twcE9scldGQUl4UU5qSyttT2hZMTg1elZpQmVzR1JGVFE1NUIySnRk?=
- =?utf-8?B?VGdvODF3a1JXc09UN09oK1QwUTN0cURoWEhtN1diaGRPZjRoYkxYSURCc1ZN?=
- =?utf-8?B?OWw5WGhWczVTU1ppSjhkTjcxVzlGbGxwanM4WDIzNkxKeGs0RXh5cjRKLzRu?=
- =?utf-8?B?SThPMjdxMjIyUE5WRFhFbTBGT0dKSEh1dmxoNUZ1NWhWREV6d0cvRWVkcW1J?=
- =?utf-8?B?VEp6UktseWlVVnRzSlR3MlVqS09KNVVweVpvdGMydDJBRC8vN3hiTVV3ZGQz?=
- =?utf-8?B?eFFjWkxhcS9jaGZ4ZENIRitlUmZ0NkF0YlJDZnIvRTlaT1N1ZXFSMEFQcjFN?=
- =?utf-8?B?SEtHN3RyWkRMMGs0cWJNTU45QjJRNFBnUE9YKys5dGJuaS8yRHU4SGRwVVhE?=
- =?utf-8?B?cloySjZURHpJcmwyNlNFZCs2dlcvb3RXakhJc3NxWEwzR1hwWmRDaDR2dVdn?=
- =?utf-8?B?WDl6dFFNd1c3cElZYnMxVmRSZkVqdE5yRmpoZlFEMHFXNmxXRk9mZ01od245?=
- =?utf-8?B?YWJkdFpTSW50blJNbTFCTDJaWVA3STVUdFFpcHl2V3Z4dzJRS3VoN3hHeFdT?=
- =?utf-8?B?RSs1aU53bERBcjJUT3I4NkFhWTNQVElydTRGSFQ1dzV6cFl4TDd1S1lJeHRL?=
- =?utf-8?B?KzIyNHN2dzRWaUhkMTRKS213NzdxamJ0NGFERWN3VXpYSGNqR0txYXNwRkdh?=
- =?utf-8?B?QkxveEsyZFlXNjRyRkFGRzZ6ZEhDZWZiSmhOMHJBZ0oyQlArNjMvUGxsSktl?=
- =?utf-8?B?U05MclZhb1RRK0tQY1VybUwrOE1wbzFNZm5KOUNVa29KaU9aWWpIR2JSK0lE?=
- =?utf-8?B?aWZjZWtUTWlrN29mTXlWQ0pyL0J6bVlVNzVNM01LU2lCajJXeVY3bnBrREtM?=
- =?utf-8?B?c2R0dndWby90R1JWUWlFc2xNVkkzL2dZOWlTTU11Ry9ZSXgxcElCdW5icU5K?=
- =?utf-8?B?SytVUU0rNzFwMGo4K0Q3TVpjRlhzSGZ6cWZCNHVRZFpRcU00SEpNZ2hRcFlY?=
- =?utf-8?B?blBBZXRuYVJMcWtYbFAwN3NTeWQ2WFNVYTNkcTA4QmE1TzA1WEk0eXMrb2h3?=
- =?utf-8?B?dGprUThwaXNUU3JGcHRDVHFmNFRDY1JNTVJ4NWR3bDBQZlJPT0pDM01LZUtK?=
- =?utf-8?B?Y29Ka2IyNTBYV3Jyck96SHBlNlNiYWphQTN1Z1pRazR2eGVvdUx2NVduYmFh?=
- =?utf-8?B?c2dpMXl6dVRUdU0wM29kVlF3bVNhd0w3VENyS2VkQm1kYW9Oc1lwaU1vVEtj?=
- =?utf-8?B?UEJaL2pyMEx1MitiL29FL2FPV0R1UTdwbDJsRks0L0ZHdVc3UVIyMHU2ckg4?=
- =?utf-8?B?Z0lHMW0wN1BZS055SGZhK293QytOTVlyWEpEMm4yVENWWExtTGpVY0QyeXFU?=
- =?utf-8?B?Vjg1cnF4V08xZVdsbjQxdz09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CO6PR18MB4451.namprd18.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bVMrbXBhbmFtWFYvU0UrMWRnalhYTEFvTnp4NE9GcXJEREw1Q2xURFE4YUo3?=
- =?utf-8?B?TTVVenlPOXdCRlRURFpNZ1B6NDNCMzBEUVZxNnlzcC9OdWtEaS8xb2krTmtH?=
- =?utf-8?B?LzFUWTdQNEEreXplTlFOcGVsVFVvenhvZjVsK2gyK3lXTUlyczlDV2k0VWha?=
- =?utf-8?B?TXl6UEU1d2hFUUlDVkhCeXY1QmVxT0dCdUZ6bS9MYVpTazlrdjhxSWZab2JR?=
- =?utf-8?B?NzF6aTZRSWQvZUtKOUYvc1ZyMFhzNExFN0Y0Q3V1UlpKaytYdkVkMWtDMXhD?=
- =?utf-8?B?eUxLTmsySkoxd2dXQkVJbUowQmRHVTQyTGlYcHRlN3VveUdtL3dQY1ZMSGho?=
- =?utf-8?B?M3ZNZFNIY2hWRmlSTGorZXJKaWNETU80bG9XRmN3Uy9LYnVXcjk5Z1FGaG9G?=
- =?utf-8?B?U1J5N2NyNFpYVWJQNGQ3K1FqNEltQzAxZTVCalQ2anNLeEdwRU9RcHEyVmNa?=
- =?utf-8?B?TUVzdXdTamxiMnd6WXJuYktuSTUrd1RjT1pHb1hZQ29vTklMQVhDOTBWcll4?=
- =?utf-8?B?VWF2eVh5ak9HSE8zWTl5Wi84bXI0MjNHOTFGV2R0aVR0enBOQnJSK1A5ZFpn?=
- =?utf-8?B?Mk9tbTZkU1Z0eEV1eG4welh4WkhHTVRPdkd4MHo3TmJ3cmY3RG1vcjFqTi9B?=
- =?utf-8?B?TjhHdFNjcWFNa2RrRCt5aFZLcXczcnpDOThpTTZOb1VMTm9TNzRSQ2VmSFFK?=
- =?utf-8?B?MkRvWmRZeGpITThlbHZBM0pyWXkvNVlabWxPRXBNQUpETUx5c2JNdTFkTjcz?=
- =?utf-8?B?N3p2cGpaS28zQk53NXBwcGRtcXpXWTBSMGxvMzNJbHhmNklPRVZZZ1RFWmlT?=
- =?utf-8?B?cEkxVjljYWpEWkNpWmRlVTZMNUl0RXFOS2pQSlVsUXNIMDdBdEJjQythMmVH?=
- =?utf-8?B?Tkw3dmhDQnUwdVF3MkNQOWhxSmswOGJnaTdDNjZYVVpxVGdQbzl5NDM0VGVx?=
- =?utf-8?B?SzcrVFhWUnEwUnF5cjdnd1JWUHlidEg5UlgyTC9oTDdWSWRPbkNuVmUrS2kz?=
- =?utf-8?B?MDk1cFVQTXVwTTNPWnphRHFtNFhrVWU4cmlRdXJjUjI4NGtodTlqY1M3SGl2?=
- =?utf-8?B?ZXgvWXcxR0FGdWdhV3VwMG4vK0U3V1k1Y01IaEtPcVpHem4xUzZDT2ljVkgw?=
- =?utf-8?B?VkdBeVJFK1ZMUEhzVUJnY0RGMVh6TUc0Q0FDeno1dGRkK3k2SzNWOGZjMTZj?=
- =?utf-8?B?WFRJa1BjNzVuck4zbGkwbEFXOXE0L21Sak5WNTdYZWlvWXJMcWdjVm9LZWkw?=
- =?utf-8?B?NWEydDl4OE82MzdPSHdjbURrOVUvRGM0eEhhUFNaaThHVHkyV1JYRGkxa3p4?=
- =?utf-8?B?M2xaRlByOGdudGVLWXdRN05ySFVISWpodEdWek01Z0xtV1ZMMkpIZi9wV2Zh?=
- =?utf-8?B?b1JoaUlBUVQveTdQbHFyaFBmZmlhcDNucU1keGU2ZzdsS2ZacDRKczdYRHJB?=
- =?utf-8?B?UFk3TXpJUjFOKzFGZC9QRTViYTYzazdsUVRhd2NiK00rSXFINy83RWpsRFZj?=
- =?utf-8?B?NGhHTVpUV2Z6VDlQUnA2T0piRVNyUnRoaEpKQVlDL1hVc1RVTmJYUnphS2t1?=
- =?utf-8?B?T3BFeG1kaXk5UFVpZHJCVGpjSVQxQmhuN1cvZTBidHFPVE13b2VUMklQV2kx?=
- =?utf-8?B?bTUvL0ZIc1V4WWJrb2ZXaGQ3amVoNGZ3djM2VE5zMm5ybHhOTkF5U1NqYStM?=
- =?utf-8?B?dHJKQVkwejFrM1lpcjV4UENoTGh5TkQ2dzdBS05lcTRLK0cyMFgwRGExRVcz?=
- =?utf-8?B?T2c5dzBGbUJZNjBIVjR0ZTNGb2hlMCtJMHZFYXZvN015VjdaUVV4WFhYQ01P?=
- =?utf-8?B?Z1VFUTRTLzFDZTlXNVZ5M0dkVXMyb0Ywbk1FRk45M3hlck41NkRBb2xoZ1Z3?=
- =?utf-8?B?cVBJc1h4V01reU1lOFRHMGcwQnc3djh4NG82bDkrTlEyTSs4V2VyOXVETHRJ?=
- =?utf-8?B?TG00MHVFdHdXdi8xdlQ3dDdGajBDR0pucHNnUHFvS1hscWNQUGVRSndUNlRP?=
- =?utf-8?B?T0N1QisyTDJSd2FPVmVYOG5xZE8vYkgrVWRyU0dGVGxRdWNLc1VDWUx2MjRZ?=
- =?utf-8?B?MERmckNtSlEvLzBqMWZnbWQvaUkvSUd2bHlmYnA5V0U1YTVkS01wR2U5KzRt?=
- =?utf-8?B?dkphTlk4OHVQZzRoa09WU28xa0Z3dUNFTUJaVEE2RS9kMk03TkZVUGpVN3R3?=
- =?utf-8?B?Unc9PQ==?=
-X-OriginatorOrg: marvell.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: abbb8085-7c7b-48fc-ca14-08dcba359a7a
-X-MS-Exchange-CrossTenant-AuthSource: CO6PR18MB4451.namprd18.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Aug 2024 18:44:16.9017 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 70e1fb47-1155-421d-87fc-2e58f638b6e0
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: DRS58NTS9tQ36j0XRIcIUlksS2qMeTVayNcLDuPtzDVbKplBwUdOhDoJdrvJOEfBr4HRyM/vT3de9Nd85SwidA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA3PR18MB6216
-X-Proofpoint-ORIG-GUID: AYzupHE5RPhGqYUWgW2WE9Lm4Q6S-3th
-X-Proofpoint-GUID: AYzupHE5RPhGqYUWgW2WE9Lm4Q6S-3th
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.28.16
- definitions=2024-08-11_17,2024-08-07_01,2024-05-17_01
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1723411597;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Mbi1Z4l/BtVtFo3Ylje24KdkM9hK+RfCqNZJ/WbQomM=;
+ b=UK/HdDzlG0vRUcBCSovPW8/u1dDGPysBu8uq1qM8IelhlE1csAU1QFDhf0ehRq+ofkpd8H
+ YX3s6AJyElaLItC04nIL7ZBxrG86u5ESpn1LPgbcre8lBZfEBvfKVWA/myCZgHg6sv/Uu9
+ 4N6cZcb8J7/xm/WgPKvsDNcXTw5QLI9V0235z3afF0CV4Fe1SBE+sXm3uCmxFKhGKuqUyl
+ k2WLM4lR+HjERiGMOS97+Ur1LfOuIPZM1rL8D5zhCF7QQgxeIpIRLJ3buZSUQbv9j0SBPj
+ 5TM0+AOuCZG+a8un95fRTifjx5Z9dWqS2XWVU5lO6SsVOCZsSzROe/1IIEdeXw==
+Date: Sun, 11 Aug 2024 23:26:36 +0200
+From: Dragan Simic <dsimic@manjaro.org>
+To: Andy Yan <andyshrk@163.com>
+Cc: kever.yang@rock-chips.com, jonas@kwiboo.se, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] board: rockchip: Add support for rk3588 GenBook
+In-Reply-To: <20240811100255.1664095-2-andyshrk@163.com>
+References: <20240811100255.1664095-1-andyshrk@163.com>
+ <20240811100255.1664095-2-andyshrk@163.com>
+Message-ID: <04ce9048d54f6d68a46967485c6ccb0e@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -188,369 +69,763 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-current env_set_default_vars() doesn't delete
-var that are not in the imported env. hashtable
-removes vars that are not in the imported
-env but present in the current env only if H_NOCLEAR
-flag is not set.
+Hello Andy,
 
-This change is to avoid passing H_NOCLEAR flag if
-specific vars are passed to env_set_default_vars()
+Please see a few comments below.
 
-Without this change:
-Marvell>> env default boot_mode
-Marvell>>
+On 2024-08-11 12:02, Andy Yan wrote:
+> Add support for Cool Pi GenBook.
+> 
+> Specification:
+> - Rockchip RK3588
+> - LPDDR5X 8/32 GB
+> - eMMC 64 GB
+> - HDMI Type A out x 1
+> - USB 3.0 Host x 1
+> - USB-C 3.0 with DisplayPort AltMode
+> - PCIE M.2 E Key for RTL8852BE Wireless connection
+> - PCIE M.2 M Key for NVME connection
+> - eDP panel with 1920x1080
 
-With the change:
-Marvell>> env default boot_mode
-WARNING: 'boot_mode' not in imported env, deleting it!
+It should be mentioned that it actually uses CM5 SoM.
 
-Signed-off-by: Ravi Minnikanti <rminnikanti@marvell.com>
----
-Changes in v2:
-- Added env ut to test the scenario
-- Updated doc usage/cmd/env.rst
+> 
+> Test by a Armbian boot on USB disk.
+> 
+> Signed-off-by: Andy Yan <andyshrk@163.com>
+> 
+> ---
+> 
+>  .../dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi |  70 ++++
+>  arch/arm/mach-rockchip/rk3588/Kconfig         |   7 +
+>  board/coolpi/genbook/Kconfig                  |  12 +
+>  board/coolpi/genbook/MAINTAINERS              |   7 +
+>  board/coolpi/genbook/README                   |  23 ++
+>  configs/coolpi-genbook-rk3588_defconfig       | 104 ++++++
+>  .../rockchip/rk3588-coolpi-cm5-genbook.dts    | 349 ++++++++++++++++++
+>  include/configs/genbook-rk3588.h              |  28 ++
+>  8 files changed, 600 insertions(+)
+>  create mode 100644 arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+>  create mode 100644 board/coolpi/genbook/Kconfig
+>  create mode 100644 board/coolpi/genbook/MAINTAINERS
+>  create mode 100644 board/coolpi/genbook/README
+>  create mode 100644 configs/coolpi-genbook-rk3588_defconfig
+>  create mode 100644
+> dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5-genbook.dts
+>  create mode 100644 include/configs/genbook-rk3588.h
+> 
+> diff --git a/arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+> b/arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..5835bd4352b
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+> @@ -0,0 +1,70 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +#include "rk3588-u-boot.dtsi"
+> +
+> +&fspim2_pins {
+> +	bootph-pre-ram;
+> +	bootph-some-ram;
+> +};
+> +
+> +&sdhci {
+> +	cap-mmc-highspeed;
+> +	mmc-hs200-1_8v;
+> +};
+> +
+> +&sfc {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&fspim2_pins>;
+> +	status = "okay";
+> +
+> +	flash@0 {
+> +		compatible = "jedec,spi-nor";
+> +		reg = <0>;
+> +		bootph-pre-ram;
+> +		bootph-some-ram;
+> +		spi-max-frequency = <24000000>;
+> +		spi-rx-bus-width = <4>;
+> +		spi-tx-bus-width = <1>;
+> +	};
+> +};
+> +
+> +&u2phy0 {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy0_otg {
+> +	status = "okay";
+> +};
+> +
+> +&usbdp_phy0 {
+> +	status = "okay";
+> +};
+> +
+> +/* For Keypad */
+> +&usb_host0_ehci {
+> +	status = "disabled";
+> +};
+> +
+> +&usb_host0_ohci {
+> +	status = "disabled";
+> +};
+> +
+> +&usb_host0_xhci {
+> +	dr_mode = "peripheral";
+> +	maximum-speed = "high-speed";
+> +	status = "okay";
+> +};
+> +
+> +/* connected to a HUB for camera and BT */
+> +&usb_host1_ehci {
+> +	status = "disabled";
+> +};
+> +
+> +&usb_host1_ohci {
+> +	status = "disabled";
+> +};
+> +
+> +/* USB A out */
+> +&usb_host1_xhci {
+> +	snps,dis_u3_susphy_quirk;
+> +};
+> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig
+> b/arch/arm/mach-rockchip/rk3588/Kconfig
+> index e751d64e1a1..dc53d559ed9 100644
+> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
+> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+> @@ -6,6 +6,12 @@ config TARGET_EVB_RK3588
+>  	help
+>  	  RK3588 EVB is a evaluation board for Rockchp RK3588.
+> 
+> +config TARGET_GENBOOK_RK3588
 
-=> ut env
-Running 5 environment tests
-Test: env_test_attrs_lookup: attr.c
-Test: env_test_attrs_lookup_regex: attr.c
-Test: env_test_env_cmd: cmd_ut_env.c
-Test: env_test_htab_deletes: hashtable.c
-Test: env_test_htab_fill: hashtable.c
-Failures: 0
+It should be better to use "TARGET_GENBOOK_CM5_RK3588" instead,
+to leave room for support for any possible future SoMs that might
+be made available for the GenBook at some point.
 
-Changes in v3:
-- Fixed review comments
-- Ran checkpatch.pl and fixed trailing whitespaces.
-- Used UT_TESTF_CONSOLE_REC flag instead of console_record_reset_enable()
-- Removed unnecessary ut_assert_nextline_empty() check
----
- doc/usage/cmd/env.rst |  4 +++-
- env/common.c          | 10 +++++++++-
- test/env/cmd_ut_env.c | 27 +++++++++++++++++++++++++++
- 3 files changed, 39 insertions(+), 2 deletions(-)
+> +	bool "Cool Pi GenBook"
+> +	select BOARD_LATE_INIT
+> +	help
+> +	  GeenBook is a notebook based on Rockchip RK3588.
 
-diff --git a/doc/usage/cmd/env.rst b/doc/usage/cmd/env.rst
-index 9629f97ffc..b65d85b668 100644
---- a/doc/usage/cmd/env.rst
-+++ b/doc/usage/cmd/env.rst
-@@ -79,7 +79,8 @@ The *env default* command resets the selected variables in the U-Boot
- environment to their default values.
- 
-     var
--        list of variable name.
-+        list of variable names. If variable is not part of default
-+        environment, it is deleted with a warning message on console.
-     \-a
-         all U-Boot environment.
-     \-f
-@@ -309,6 +310,7 @@ Delete environment variable in memory::
- Reset environment variable to default value, in memory::
- 
-     => env default bootcmd
-+    => env default ipaddr serverip
-     => env default -a
- 
- Save current environment in persistent storage::
-diff --git a/env/common.c b/env/common.c
-index 8d47d72605..6cba7f1c18 100644
---- a/env/common.c
-+++ b/env/common.c
-@@ -401,7 +401,15 @@ int env_set_default_vars(int nvars, char * const vars[], int flags)
- 	 * Special use-case: import from default environment
- 	 * (and use \0 as a separator)
- 	 */
--	flags |= H_NOCLEAR | H_DEFAULT;
-+
-+	/*
-+	 * When vars are passed remove variables that are not in
-+	 * the default environment.
-+	 */
-+	if (!nvars)
-+		flags |= H_NOCLEAR;
-+
-+	flags |= H_DEFAULT;
- 	return himport_r(&env_htab, default_environment,
- 				sizeof(default_environment), '\0',
- 				flags, 0, nvars, vars);
-diff --git a/test/env/cmd_ut_env.c b/test/env/cmd_ut_env.c
-index 13e0998341..238cf31036 100644
---- a/test/env/cmd_ut_env.c
-+++ b/test/env/cmd_ut_env.c
-@@ -9,6 +9,33 @@
- #include <test/suites.h>
- #include <test/ut.h>
- 
-+static int env_test_env_cmd(struct unit_test_state *uts)
-+{
-+	ut_assertok(run_command("setenv non_default_var1 1", 0));
-+	ut_assert_console_end();
-+
-+	ut_assertok(run_command("setenv non_default_var2 1", 0));
-+	ut_assert_console_end();
-+
-+	ut_assertok(run_command("env print non_default_var1", 0));
-+	ut_assert_nextline("non_default_var1=1");
-+	ut_assert_console_end();
-+
-+	ut_assertok(run_command("env default non_default_var1 non_default_var2", 0));
-+	ut_assert_nextline("WARNING: 'non_default_var1' not in imported env, deleting it!");
-+	ut_assert_nextline("WARNING: 'non_default_var2' not in imported env, deleting it!");
-+	ut_assert_console_end();
-+
-+	ut_asserteq(1, run_command("env exists non_default_var1", 0));
-+	ut_assert_console_end();
-+
-+	ut_asserteq(1, run_command("env exists non_default_var2", 0));
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+ENV_TEST(env_test_env_cmd, UT_TESTF_CONSOLE_REC);
-+
- int do_ut_env(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- {
- 	struct unit_test *tests = UNIT_TEST_SUITE_START(env_test);
--- 
-2.25.1
+It should be mentioned that it actually uses CM5 SoM.
 
-Thanks,
-Ravi
+> +
+>  config TARGET_JAGUAR_RK3588
+>  	bool "Theobroma Systems SBC-RK3588-AMR (Jaguar)"
+>  	select BOARD_LATE_INIT
+> @@ -323,5 +329,6 @@ source "board/rockchip/evb_rk3588/Kconfig"
+>  source "board/rockchip/toybrick_rk3588/Kconfig"
+>  source "board/theobroma-systems/jaguar_rk3588/Kconfig"
+>  source "board/theobroma-systems/tiger_rk3588/Kconfig"
+> +source "board/coolpi/genbook/Kconfig"
 
-On 8/11/24 07:50, Simon Glass wrote:>
+It should be better to use "genbook_cm5_rk3588" as the directory
+name, for the same reasons as in my previous comment, and to include
+the SoC name in it as well.
+
 > 
-> Hi Ravi,
-> 
-> On Fri, 9 Aug 2024 at 13:36, Ravi Minnikanti <rminnikanti@marvell.com> wrote:
->>
->>
->> current env_set_default_vars() doesn't delete
->> var that are not in the imported env. hashtable
->> removes vars that are not in the imported
->> env but present in the current env only if H_NOCLEAR
->> flag is not set.
->>
->> This change is to avoid passing H_NOCLEAR flag if
->> specific vars are passed to env_set_default_vars()
->>
->> Without this change:
->> Marvell>> env default boot_mode
->> Marvell>>
->>
->> With the change:
->> Marvell>> env default boot_mode
->> WARNING: 'boot_mode' not in imported env, deleting it!
->>
->> Signed-off-by: rminnikanti <rminnikanti@marvell.com>
-> 
-> That should have your name at the start
-> 
->> ---
->> Changes in v2:
->> - Added env ut to test the scenario
->> - Updated doc usage/cmd/env.rst
->>
->> => ut env
->> Running 5 environment tests
->> Test: env_test_attrs_lookup: attr.c
->> Test: env_test_attrs_lookup_regex: attr.c
->> Test: env_test_env_cmd: cmd_ut_env.c
->> Test: env_test_htab_deletes: hashtable.c
->> Test: env_test_htab_fill: hashtable.c
->> Failures: 0
->>
->>  doc/usage/cmd/env.rst |  4 +++-
->>  env/common.c          | 10 +++++++++-
->>  test/env/cmd_ut_env.c | 36 ++++++++++++++++++++++++++++++++++++
->>  3 files changed, 48 insertions(+), 2 deletions(-)
-> 
-> Just some nits below
-> 
->>
->> diff --git a/doc/usage/cmd/env.rst b/doc/usage/cmd/env.rst
->> index 9629f97ffc..9104c88525 100644
->> --- a/doc/usage/cmd/env.rst
->> +++ b/doc/usage/cmd/env.rst
->> @@ -79,7 +79,8 @@ The *env default* command resets the selected variables in the U-Boot
->>  environment to their default values.
->>
->>      var
->> -        list of variable name.
->> +        list of variable name. If variable is not part of default
-> 
-> list of variable names. If a variable is not ...
-> 
->> +        environment, it is deleted with a warning message on console.
->>      \-a
->>          all U-Boot environment.
->>      \-f
->> @@ -309,6 +310,7 @@ Delete environment variable in memory::
->>  Reset environment variable to default value, in memory::
->>
->>      => env default bootcmd
->> +    => env default ipaddr serverip
->>      => env default -a
->>
->>  Save current environment in persistent storage::
->> diff --git a/env/common.c b/env/common.c
->> index 8d47d72605..2f783e3a69 100644
->> --- a/env/common.c
->> +++ b/env/common.c
->> @@ -401,7 +401,15 @@ int env_set_default_vars(int nvars, char * const vars[], int flags)
->>          * Special use-case: import from default environment
->>          * (and use \0 as a separator)
->>          */
->> -       flags |= H_NOCLEAR | H_DEFAULT;
->> +
->> +       /*
-> 
-> There is a trailing space on the end of that line. Be sure to check
-> your patch with patman/checkpatch.pl
-> 
->> +        * When vars are passed remove variables that are not in
->> +        * the default environment.
->> +        */
->> +       if (!nvars)
->> +               flags |= H_NOCLEAR;
->> +
->> +       flags |= H_DEFAULT;
->>         return himport_r(&env_htab, default_environment,
->>                                 sizeof(default_environment), '\0',
->>                                 flags, 0, nvars, vars);
->> diff --git a/test/env/cmd_ut_env.c b/test/env/cmd_ut_env.c
->> index 13e0998341..99961311aa 100644
->> --- a/test/env/cmd_ut_env.c
->> +++ b/test/env/cmd_ut_env.c
->> @@ -9,6 +9,42 @@
->>  #include <test/suites.h>
->>  #include <test/ut.h>
->>
->> +static int env_test_env_cmd(struct unit_test_state *uts)
->> +{
->> +       console_record_reset_enable();
->> +       ut_assertok(run_command("setenv non_default_var1 1", 0));
->> +       ut_assert_console_end();
->> +
->> +       console_record_reset_enable();
->> +       ut_assertok(run_command("setenv non_default_var2 1", 0));
->> +       ut_assert_console_end();
->> +
->> +       console_record_reset_enable();
->> +       ut_assertok(run_command("env print non_default_var1", 0));
->> +       ut_assert_nextline("non_default_var1=1");
->> +       ut_assert_console_end();
->> +
->> +       console_record_reset_enable();
->> +       ut_assertok(run_command("env default non_default_var1 non_default_var2", 0));
->> +       ut_assert_nextline("WARNING: 'non_default_var1' not in imported env, deleting it!");
->> +       ut_assert_nextline("WARNING: 'non_default_var2' not in imported env, deleting it!");
->> +       ut_assert_console_end();
->> +
->> +       console_record_reset_enable();
->> +       ut_asserteq(1, run_command("env exists non_default_var1", 0));
->> +       ut_assert_nextline_empty();
-> 
-> You don't need that line. It means that the next line should exist,
-> but be empty. In fact this exposes a bug in console checking which I
-> will fix.
-> 
->> +       ut_assert_console_end();
->> +
->> +       console_record_reset_enable();
->> +       ut_asserteq(1, run_command("env exists non_default_var2", 0));
->> +       ut_assert_nextline_empty();
-> 
-> same here
-> 
->> +       ut_assert_console_end();
->> +
->> +       return 0;
->> +}
->> +
->> +ENV_TEST(env_test_env_cmd, 0);
-> 
-> Set the flags to UT_TESTF_CONSOLE_REC and you can drop all the
-> console_record_reset_enable() calls above. Unfortunately many of the
-> tests don't do this as the flag was added later.
-> 
-> 
->> +
->>  int do_ut_env(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
->>  {
->>         struct unit_test *tests = UNIT_TEST_SUITE_START(env_test);
->> --
->> 2.25.1
->>
->> Thanks,
->> Ravi
->>
->> On 8/9/24 08:58, Simon Glass wrote:
->> > Hi Ravi, On Fri, 9 Aug 2024 at 09: 38, Ravi Minnikanti <rminnikanti@ marvell.
->> > com> wrote: > > > current env_set_default_vars() doesn't delete > var that are
->> > not in the imported env. hashtable > removes vars that are not in
->> >
->> >
->> > Hi Ravi,
->> >
->> > On Fri, 9 Aug 2024 at 09:38, Ravi Minnikanti <rminnikanti@marvell.com> wrote:
->> >>
->> >>
->> >> current env_set_default_vars() doesn't delete
->> >> var that are not in the imported env. hashtable
->> >> removes vars that are not in the imported
->> >> env but present in the current env only if H_NOCLEAR
->> >> flag is not set.
->> >>
->> >> This change is to avoid passing H_NOCLEAR flag if
->> >> specific vars are passed to env_set_default_vars()
->> >>
->> >> Test:
->> >>
->> >> Without this change:
->> >> Marvell>> env default boot_mode
->> >> Marvell>>
->> >>
->> >> With the change:
->> >> Marvell>> env default boot_mode
->> >> WARNING: 'boot_mode' not in imported env, deleting it!
->> >>
->> >> Signed-off-by: rminnikanti <rminnikanti@marvell.com>
->> >> ---
->> >>  env/common.c | 10 +++++++++-
->> >>  1 file changed, 9 insertions(+), 1 deletion(-)
->> >
->> > Could you add to usage/environment.rst and also update the tests for
->> > this - test/env/ - I suppose your patch fixes a bug, but it is hard to
->> > figure out what it is supposed to do from the docs.
->> >
->> > See for example dm_test_acpi_cmd_set() for how to check output from a command.
->> >
->> >>
->> >> diff --git a/env/common.c b/env/common.c
->> >> index 8d47d72605..2f783e3a69 100644
->> >> --- a/env/common.c
->> >> +++ b/env/common.c
->> >> @@ -401,7 +401,15 @@ int env_set_default_vars(int nvars, char * const vars[], int flags)
->> >>          * Special use-case: import from default environment
->> >>          * (and use \0 as a separator)
->> >>          */
->> >> -       flags |= H_NOCLEAR | H_DEFAULT;
->> >> +
->> >> +       /*
->> >> +        * When vars are passed remove variables that are not in
->> >> +        * the default environment.
->> >> +        */
->> >> +       if (!nvars)
->> >> +               flags |= H_NOCLEAR;
->> >> +
->> >> +       flags |= H_DEFAULT;
->> >>         return himport_r(&env_htab, default_environment,
->> >>                                 sizeof(default_environment), '\0',
->> >>                                 flags, 0, nvars, vars);
->> >> --
->> >> 2.25.1
-> 
-> Regards,
-> Simon
-> 
+>  endif
+> diff --git a/board/coolpi/genbook/Kconfig 
+> b/board/coolpi/genbook/Kconfig
+> new file mode 100644
+> index 00000000000..48a340d79c5
+> --- /dev/null
+> +++ b/board/coolpi/genbook/Kconfig
+> @@ -0,0 +1,12 @@
+> +if TARGET_GENBOOK_RK3588
+> +
+> +config SYS_BOARD
+> +	default "genbook"
+> +
+> +config SYS_VENDOR
+> +	default "coolpi"
+> +
+> +config SYS_CONFIG_NAME
+> +	default "genbook-rk3588"
+
+It should be better to use "genboook-cm5-rk3588" instead, for the same
+reasons as in my other comments above.
+
+> +
+> +endif
+> diff --git a/board/coolpi/genbook/MAINTAINERS 
+> b/board/coolpi/genbook/MAINTAINERS
+> new file mode 100644
+> index 00000000000..45c2ddc5fa1
+> --- /dev/null
+> +++ b/board/coolpi/genbook/MAINTAINERS
+> @@ -0,0 +1,7 @@
+> +GENBOOK-RK3588
+> +M:	andyshrk <andyshrk@163.com>
+> +S:	Maintained
+> +F:	board/coolpi/genbook
+> +F:	include/configs/genbook-rk3588.h
+> +F:	configs/coolpi-genbook-rk3588_defconfig
+> +F:	arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
+> diff --git a/board/coolpi/genbook/README b/board/coolpi/genbook/README
+> new file mode 100644
+> index 00000000000..ba165953154
+> --- /dev/null
+> +++ b/board/coolpi/genbook/README
+
+My earlier comment on "genbook_cm5_rk3588" as the directory name
+applies here as well, obviously.
+
+> @@ -0,0 +1,23 @@
+> +Compile the U-Boot
+> +==================
+> +
+> +  > cd u-boot
+> +  > export
+> ROCKCHIP_TPL=../rkbin/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.17.bin
+> +  > export BL31=../rkbin/bin/rk35/rk3588_bl31_v1.46.elf
+> +  > make coolpi-genbook-rk3588_defconfig
+> +  > make CROSS_COMPILE=aarch64-linux-gnu-
+> +
+> +  Get u-boot-rockchip.bin for eMMC and u-boot-rockchip-spi.bin for SPI 
+> Nor.
+> +
+> +
+> +Write u-boot to eMMC or SPI Nor if you have a bootable linux system
+> on the computer:
+> +
+> +Flash the image to eMMC
+> +==========================
+> +  > dd if=u-boot-rockchip.bin of=/dev/mmcblk0 bs=512 seek=64
+> +
+> +Flash the image to SPI Nor
+> +==========================
+> + > dd if=u-boot-rockchip-spi.bin of=/dev/mtdblock0
+> +
+> +Note: The boot priority of SPI Nor is higher than that of eMMC
+> diff --git a/configs/coolpi-genbook-rk3588_defconfig
+> b/configs/coolpi-genbook-rk3588_defconfig
+
+It should be "coolpi-genbook-cm5-rk3588_defconfig" instead,
+as already described why above.
+
+> new file mode 100644
+> index 00000000000..ae6c6c296cc
+> --- /dev/null
+> +++ b/configs/coolpi-genbook-rk3588_defconfig
+
+It should be better to use "coolpi-genbook-cm5-rk3588_defconfig"
+instead, as already described above.
+
+> @@ -0,0 +1,104 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_SPEED=24000000
+> +CONFIG_SF_DEFAULT_MODE=0x2000
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-coolpi-cm5-genbook"
+> +CONFIG_ROCKCHIP_RK3588=y
+> +CONFIG_ROCKCHIP_SPI_IMAGE=y
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_TARGET_GENBOOK_RK3588=y
+> +CONFIG_DEBUG_UART_BASE=0xFEB50000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
+> +CONFIG_SPL_SPI=y
+> +CONFIG_SYS_LOAD_ADDR=0xc00800
+> +CONFIG_PCI=y
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_AHCI=y
+> +# CONFIG_ANDROID_BOOT_IMAGE is not set
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-coolpi-cm5-genbook.dtb"
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +CONFIG_SPL_PAD_TO=0x7f8000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_SPL_SPI_LOAD=y
+> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+> +CONFIG_SPL_ATF=y
+> +# CONFIG_CMD_BIND is not set
+> +# CONFIG_CMD_FASTBOOT is not set
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_PCI=y
+> +CONFIG_CMD_USB=y
+> +CONFIG_CMD_USB_MASS_STORAGE=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_REGULATOR=y
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_OF_LIVE=y
+> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent
+> assigned-clocks assigned-clock-rates assigned-clock-parents"
+> +CONFIG_SPL_DM_SEQ_ALIAS=y
+> +CONFIG_SPL_REGMAP=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_AHCI_PCI=y
+> +CONFIG_DWC_AHCI=y
+> +CONFIG_SPL_CLK=y
+> +CONFIG_FASTBOOT_BUF_ADDR=0x800800
+> +CONFIG_ROCKCHIP_GPIO=y
+> +CONFIG_SYS_I2C_ROCKCHIP=y
+> +CONFIG_MISC=y
+> +CONFIG_SUPPORT_EMMC_RPMB=y
+> +CONFIG_MMC_IO_VOLTAGE=y
+> +CONFIG_SPL_MMC_IO_VOLTAGE=y
+> +CONFIG_MMC_UHS_SUPPORT=y
+> +CONFIG_SPL_MMC_UHS_SUPPORT=y
+> +CONFIG_MMC_HS400_ES_SUPPORT=y
+> +CONFIG_SPL_MMC_HS400_ES_SUPPORT=y
+> +CONFIG_MMC_HS400_SUPPORT=y
+> +CONFIG_SPL_MMC_HS400_SUPPORT=y
+> +CONFIG_MMC_DW=y
+> +CONFIG_MMC_DW_ROCKCHIP=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_BUS=5
+> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+> +CONFIG_SPI_FLASH_XMC=y
+> +CONFIG_SPI_FLASH_XTX=y
+> +CONFIG_PHY_MOTORCOMM=y
+> +CONFIG_DWC_ETH_QOS=y
+> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+> +CONFIG_NVME_PCI=y
+> +CONFIG_PCIE_DW_ROCKCHIP=y
+> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+> +CONFIG_PHY_ROCKCHIP_USBDP=y
+> +CONFIG_SPL_PINCTRL=y
+> +CONFIG_PWM_ROCKCHIP=y
+> +CONFIG_SPL_RAM=y
+> +CONFIG_SCSI=y
+> +CONFIG_BAUDRATE=1500000
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_ROCKCHIP_SFC=y
+> +CONFIG_SYSRESET=y
+> +CONFIG_USB=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_EHCI_GENERIC=y
+> +CONFIG_USB_OHCI_HCD=y
+> +CONFIG_USB_OHCI_GENERIC=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_USB_GADGET=y
+> +CONFIG_ERRNO_STR=y
+> diff --git
+> a/dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5-genbook.dts
+> b/dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5-genbook.dts
+> new file mode 100644
+> index 00000000000..6418286efe4
+> --- /dev/null
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5-genbook.dts
+
+I believe this should be turned into a separate commit, as a cherry-pick
+of an upstream DT commit.
+
+> @@ -0,0 +1,349 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (c) 2024 Rockchip Electronics Co., Ltd.
+> + *
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include <dt-bindings/leds/common.h>
+> +#include "rk3588-coolpi-cm5.dtsi"
+> +
+> +/ {
+> +	model = "CoolPi CM5 GenBook";
+> +	compatible = "coolpi,pi-cm5-genbook", "coolpi,pi-cm5", 
+> "rockchip,rk3588";
+> +
+> +	backlight: backlight {
+> +		compatible = "pwm-backlight";
+> +		enable-gpios = <&gpio4 RK_PA3 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&bl_en>;
+> +		power-supply = <&vcc12v_dcin>;
+> +		pwms = <&pwm6 0 25000 0>;
+> +	};
+> +
+> +	battery: battery {
+> +		compatible = "simple-battery";
+> +		charge-full-design-microamp-hours = <9800000>;
+> +		voltage-max-design-microvolt = <4350000>;
+> +		voltage-min-design-microvolt = <3000000>;
+> +	};
+> +
+> +	charger: dc-charger {
+> +		compatible = "gpio-charger";
+> +		charger-type = "mains";
+> +		gpios = <&gpio1 RK_PC0 GPIO_ACTIVE_LOW>;
+> +	};
+> +
+> +	leds: leds {
+> +		compatible = "gpio-leds";
+> +
+> +		heartbeat_led: led-0 {
+> +			color = <LED_COLOR_ID_GREEN>;
+> +			function = LED_FUNCTION_STATUS;
+> +			gpios = <&gpio1 RK_PB0 GPIO_ACTIVE_HIGH>;
+> +			linux,default-trigger = "heartbeat";
+> +		};
+> +
+> +		wlan_led: led-1 {
+> +			color = <LED_COLOR_ID_GREEN>;
+> +			function = LED_FUNCTION_WLAN;
+> +			gpios = <&gpio0 RK_PC5 GPIO_ACTIVE_HIGH>;
+> +		};
+> +
+> +		charging_red: led-2 {
+> +			function = LED_FUNCTION_CHARGING;
+> +			color = <LED_COLOR_ID_RED>;
+> +			gpios = <&gpio3 RK_PD2 GPIO_ACTIVE_HIGH>;
+> +		};
+> +	};
+> +
+> +	vcc12v_dcin: vcc12v-dcin-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc12v_dcin";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <12000000>;
+> +		regulator-max-microvolt = <12000000>;
+> +	};
+> +
+> +	vcc_sys: vcc-sys-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc_sys";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <7000000>;
+> +		regulator-max-microvolt = <7000000>;
+> +		vin-supply = <&vcc12v_dcin>;
+> +	};
+> +
+> +	vcc5v0_sys: vcc5v0-sys-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc5v0_sys";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <7000000>;
+> +		regulator-max-microvolt = <7000000>;
+> +		vin-supply = <&vcc_sys>;
+> +	};
+> +
+> +	vcc3v3_sys: vcc3v3-sys-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc3v3_sys";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		vin-supply = <&vcc5v0_sys>;
+> +	};
+> +
+> +	vcc3v3_lcd: vcc3v3-lcd-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc3v3_lcd";
+> +		enable-active-high;
+> +		gpio = <&gpio1 RK_PC4 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&lcdpwr_en>;
+> +		vin-supply = <&vcc3v3_sys>;
+> +	};
+> +
+> +	vcc5v0_usb: vcc5v0-usb-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc5v0_usb";
+> +		regulator-boot-on;
+> +		regulator-always-on;
+> +		enable-active-high;
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +		gpio = <&gpio1 RK_PD5 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&usb_pwren>;
+> +		vin-supply = <&vcc_sys>;
+> +	};
+> +
+> +	vcc5v0_usb_host0: vcc5v0_usb30_host: vcc5v0-usb-host-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc5v0_host";
+> +		regulator-boot-on;
+> +		regulator-always-on;
+> +		enable-active-high;
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +		gpio = <&gpio1 RK_PA7 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&usb_host_pwren>;
+> +		vin-supply = <&vcc5v0_usb>;
+> +	};
+> +};
+> +
+> +&i2c4 {
+> +	status = "okay";
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&i2c4m3_xfer>;
+> +
+> +	cw2015@62 {
+> +		compatible = "cellwise,cw2015";
+> +		reg = <0x62>;
+> +
+> +		cellwise,battery-profile = /bits/ 8 <
+> +			0x17 0x67 0x69 0x63 0x63 0x62 0x62 0x5F
+> +			0x52 0x73 0x4C 0x5A 0x5B 0x4B 0x42 0x3A
+> +			0x33 0x2D 0x29 0x28 0x2E 0x31 0x3C 0x49
+> +			0x2C 0x2C 0x0C 0xCD 0x30 0x51 0x50 0x66
+> +			0x74 0x74 0x75 0x78 0x41 0x1B 0x84 0x5F
+> +			0x0B 0x34 0x1C 0x45 0x89 0x92 0xA0 0x13
+> +			0x2C 0x55 0xAB 0xCB 0x80 0x5E 0x7B 0xCB
+> +			0x2F 0x00 0x64 0xA5 0xB5 0x10 0x18 0x21
+> +			>;
+> +
+> +		cellwise,monitor-interval-ms = <3000>;
+> +		monitored-battery = <&battery>;
+> +		power-supplies = <&charger>;
+> +	};
+> +};
+> +
+> +&i2c5 {
+> +	status = "okay";
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&i2c5m3_xfer>;
+> +
+> +	touchpad: touchpad@2c {
+> +		compatible = "hid-over-i2c";
+> +		reg = <0x2c>;
+> +		interrupt-parent = <&gpio1>;
+> +		interrupts = <RK_PD6 IRQ_TYPE_LEVEL_LOW>;
+> +		hid-descr-addr = <0x0020>;
+> +	};
+> +};
+> +
+> +&gmac0 {
+> +	status = "disabled";
+> +};
+> +
+> +/* M.2 E-Key */
+> +&pcie2x1l0 {
+> +	reset-gpios = <&gpio4 RK_PA2 GPIO_ACTIVE_HIGH>;
+> +	vpcie3v3-supply = <&vcc3v3_sys>;
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&pcie_clkreq &pcie_wake &pcie_rst &wifi_pwron 
+> &bt_pwron>;
+> +	status = "okay";
+> +};
+> +
+> +&pcie2x1l2 {
+> +	status = "disabled";
+> +};
+> +
+> +&pcie30phy {
+> +	status = "okay";
+> +};
+> +
+> +/* M.2 M-Key ssd */
+> +&pcie3x4 {
+> +	reset-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
+> +	vpcie3v3-supply = <&vcc3v3_sys>;
+> +	status = "okay";
+> +};
+> +
+> +&pinctrl {
+> +	lcd {
+> +		lcdpwr_en: lcdpwr-en {
+> +			rockchip,pins = <1 RK_PC4 RK_FUNC_GPIO &pcfg_pull_down>;
+> +		};
+> +
+> +		bl_en: bl-en {
+> +			rockchip,pins = <4 RK_PA3 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +
+> +	usb {
+> +		usb_pwren: usb-pwren {
+> +			rockchip,pins = <1 RK_PD5 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +
+> +		usb_otg_pwren: usb-otg-pwren {
+> +			rockchip,pins = <0 RK_PA0 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +
+> +		usb_host_pwren: usb-host-pwren {
+> +			rockchip,pins = <1 RK_PA7 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +	};
+> +
+> +	wifi {
+> +		bt_pwron: bt-pwron {
+> +			rockchip,pins = <3 RK_PA6 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +
+> +		pcie_clkreq: pcie-clkreq {
+> +			rockchip,pins = <4 RK_PA0 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +
+> +		pcie_rst: pcie-rst {
+> +			rockchip,pins = <4 RK_PA2 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +
+> +		wifi_pwron: wifi-pwron {
+> +			rockchip,pins = <3 RK_PB1 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +
+> +		pcie_wake: pcie-wake {
+> +			rockchip,pins = <4 RK_PA1 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +	};
+> +};
+> +
+> +&pwm6 {
+> +	pinctrl-0 = <&pwm6m1_pins>;
+> +	status = "okay";
+> +};
+> +
+> +&sdmmc {
+> +	status = "disabled";
+> +};
+> +
+> +&sfc {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&fspim2_pins>;
+> +	status = "okay";
+> +
+> +	flash@0 {
+> +		compatible = "jedec,spi-nor";
+> +		reg = <0x0>;
+> +		spi-max-frequency = <100000000>;
+> +		spi-rx-bus-width = <4>;
+> +		spi-tx-bus-width = <1>;
+> +	};
+> +};
+> +
+> +&u2phy0 {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy0_otg {
+> +	status = "okay";
+> +};
+> +
+> +&usbdp_phy0 {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy1 {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy1_otg {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy2 {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy3 {
+> +	status = "okay";
+> +};
+> +
+> +&u2phy2_host {
+> +	phy-supply = <&vcc5v0_usb_host0>;
+> +	status = "okay";
+> +};
+> +
+> +&u2phy3_host {
+> +	phy-supply = <&vcc5v0_usb>;
+> +	status = "okay";
+> +};
+> +
+> +&usbdp_phy1 {
+> +	status = "okay";
+> +};
+> +
+> +/* For Keypad */
+> +&usb_host0_ehci {
+> +	status = "okay";
+> +};
+> +
+> +&usb_host0_ohci {
+> +	status = "okay";
+> +};
+> +
+> +/* Type C port */
+> +&usb_host0_xhci {
+> +	dr_mode = "peripheral";
+> +	maximum-speed = "high-speed";
+> +	status = "okay";
+> +};
+> +
+> +/* connected to a HUB for camera and BT */
+> +&usb_host1_ehci {
+> +	status = "okay";
+> +};
+> +
+> +&usb_host1_ohci {
+> +	status = "okay";
+> +};
+> +
+> +/* USB A out */
+> +&usb_host1_xhci {
+> +	dr_mode = "host";
+> +	status = "okay";
+> +};
+> diff --git a/include/configs/genbook-rk3588.h 
+> b/include/configs/genbook-rk3588.h
+
+As already described why above, it should be better to use
+"genbook-cm5-rk3588.h" instead.
+
+> new file mode 100644
+> index 00000000000..5c5957b8bf5
+> --- /dev/null
+> +++ b/include/configs/genbook-rk3588.h
+> @@ -0,0 +1,28 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + */
+> +
+> +#ifndef __ROCK5B_RK3588_H
+> +#define __ROCK5B_RK3588_H
+
+Obviously, it should be "__GENBOOK_CM5_RK3588_H" instead.
+
+> +
+> +#define ROCKCHIP_DEVICE_SETTINGS \
+> +		"stdout=serial,vidconsole\0" \
+> +		"stderr=serial,vidconsole\0"
+> +
+> +#include <configs/rk3588_common.h>
+> +
+> +#undef CFG_EXTRA_ENV_SETTINGS
+> +
+> +/*
+> + * As a laptop, there is no sdmmc, and we
+> + * want to set usb the highest boot priority
+> + * for third-part os installation.
+> + */
+> +#define CFG_EXTRA_ENV_SETTINGS \
+> +	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
+> +	"partitions=" PARTS_DEFAULT		\
+> +	ENV_MEM_LAYOUT_SETTINGS			\
+> +	ROCKCHIP_DEVICE_SETTINGS \
+> +	"boot_targets=" "usb mmc0" "\0"
+> +
+> +#endif /* __GENBOOK_RK3588_H */
+
+Pleas see the comment above.
