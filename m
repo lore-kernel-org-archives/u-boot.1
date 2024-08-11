@@ -4,51 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1B99C52D7C
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 10:03:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1074C3DA4A
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 11:01:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A413F88580;
-	Sun, 11 Aug 2024 12:03:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=163.com
+	by phobos.denx.de (Postfix) with ESMTP id 1654B8837D;
+	Sun, 11 Aug 2024 13:01:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="C76DFRQ/";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="bX6hPO00";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31D3D88216; Sun, 11 Aug 2024 12:03:12 +0200 (CEST)
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.5])
- by phobos.denx.de (Postfix) with ESMTP id 1821A882EF
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 12:03:08 +0200 (CEST)
+ id C9C40882EF; Sun, 11 Aug 2024 13:01:17 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D7D73881A1
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 13:01:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=andyshrk@163.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=OdGcA
- oFk/PShFTyJDF/uU7cZ+1xGq+50aYUaSxoG5Gs=; b=C76DFRQ/zERL5KcS3r6FL
- g4oi+2nfhTu6xXDXsynPTf7l6pDp5HTnpvNIDG7xpbujrPFuZB/f15ponq1wV8KH
- q8TXSERCb++7E4EqEStl9pzIhcz9XcfsoknPTZfDLJAX/rxvhxJxZIDPjI7wL2Ie
- yNiTAgGTBjN/VrpZPZiUF4=
-Received: from ProDesk.. (unknown [58.22.7.114])
- by gzga-smtp-mta-g2-3 (Coremail) with SMTP id _____wDXXxdQjLhm4hIOBQ--.43417S2;
- Sun, 11 Aug 2024 18:02:59 +0800 (CST)
-From: Andy Yan <andyshrk@163.com>
-To: kever.yang@rock-chips.com
-Cc: jonas@kwiboo.se,
-	u-boot@lists.denx.de,
-	Andy Yan <andyshrk@163.com>
-Subject: [PATCH 0/1]     Add support for Cool Pi GenBook
-Date: Sun, 11 Aug 2024 18:02:54 +0800
-Message-Id: <20240811100255.1664095-1-andyshrk@163.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 58DB04119E
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 11:01:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1723374075;
+ bh=iMhEnm2FvkkaGBpJNQ1VTEYsNIaxsyBTNyLr2TQ2ZHs=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=bX6hPO00lFE7urRkaxHiTPjIqXdmbhC34b7SRgb1tdIunselGRoCB8XNnTQ1hqkG9
+ YRBZouvMfCVX2m7K+s+UTwV8lxJIq574STnh3F9xs7jgDpuAZlTHqSs6Vf87OlXlvC
+ lAJtpPlP1HYwpXMdDfTXeBBFcRsgwBTXdnZNhRu+qhfVfNIRpWGaRehSxOLNzCTq27
+ 3V16GPJSfMaOkj7JV5jMN5+NxYNdC39JZB7smI2SgHk6zXp3oAeXViD8ZEOJNuRny2
+ /Cdw0RW1BoxGX/FxlqEl1O1ZQ7mk6RZyD212NM+nANg1Z8M+NKBiz40LwXzVmtB7NV
+ Dx9L0FjDTxlnw==
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-36878581685so1795557f8f.2
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 04:01:15 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723374075; x=1723978875;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=iMhEnm2FvkkaGBpJNQ1VTEYsNIaxsyBTNyLr2TQ2ZHs=;
+ b=mPPMWeCUr67dN02FXB7hPDjo8zYfkv2UjbHEM9q+tb/d8Bho6RdO+p1znSjvrbCz2A
+ kRBOfnhQcunrYn92VoLMrVrR5YnAV6LwNEmEi92XysWeHPuYjb+g4SKmWfqi3ZjS9rqA
+ e3oXAQek73v5bZsdpVSTXfcgwk2s9uGICEnc635tFVTkYWJZazlc+lETKyiG5WXyB49A
+ xeToZsVaM/cayle6Ic+JdA0PU4Y5wje+Nl2o7XZbC/fLFEMAZFXZhxzg5zITwCgV8OGQ
+ sRFIUJYwQsLRxMn9SzfI7meDj6TnXgsiI26CmS6Br2l5fBErfUZrXaCq8l53oK6xFSrR
+ MnsA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWphwl0tCL/sMXlim9KbYMrRGbIDYeMP/lIBi4H/CB8sBWwd/TxigAhicvR4Z7+kZcDpDdERWWtCYxD03Uj1Pn5Pzx4hQ==
+X-Gm-Message-State: AOJu0YxTdiNWl/58Y6haP7pMCKWb+E1LO+kn3i0/iY8fqCGiJAJMRmHr
+ 6xMIrV3hnF6v3WRctDx9ljaSJOt9+EhawiioZgwMaCPdO31rOeS8fjzg3WyRg/CarAEK2czOP/r
+ sDin0MqxWS0Hl9uTv6Cg5bKHTGQn5SiVkSRl4xsyhBmmh/frKQau2YW0fAV+RGrz1aC8=
+X-Received: by 2002:adf:fe8b:0:b0:363:e0e2:eeff with SMTP id
+ ffacd0b85a97d-36d5fa9d8b5mr5624162f8f.20.1723374074774; 
+ Sun, 11 Aug 2024 04:01:14 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHhr9BUmW8W6aKamPB1EnQeT86gpiWmue6o7RGK0QV3Fd4z6f4X+tgyNhCm4LUB8ZXaA4mRhA==
+X-Received: by 2002:adf:fe8b:0:b0:363:e0e2:eeff with SMTP id
+ ffacd0b85a97d-36d5fa9d8b5mr5624143f8f.20.1723374074215; 
+ Sun, 11 Aug 2024 04:01:14 -0700 (PDT)
+Received: from localhost.localdomain
+ (ip-178-202-041-098.um47.pools.vodafone-ip.de. [178.202.41.98])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-36e4cfee31fsm4604568f8f.47.2024.08.11.04.01.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 11 Aug 2024 04:01:13 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Randolph <randolph@andestech.com>, Michal Simek <michal.simek@amd.com>,
+ =?UTF-8?q?=C5=81ukasz=20Stelmach?= <l.stelmach@samsung.com>,
+ Yu Chien Peter Lin <peterlin@andestech.com>,
+ Ben Dooks <ben.dooks@codethink.co.uk>,
+ Samuel Holland <samuel@sholland.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>, u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 0/2] riscv: show registers in crash dumps by default
+Date: Sun, 11 Aug 2024 13:01:02 +0200
+Message-ID: <20240811110104.143714-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: _____wDXXxdQjLhm4hIOBQ--.43417S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7JFyDWF1xAr1UKrW3CFyxuFg_yoW8JF15pw
- 4kAr1rGFZ7W347trWaga43Cr4ru3Z2qFW5u34xXryxArySvr1DA3WqgFy7tayaqr9F9F48
- Arnagr1jgrWUZaUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pRxR6OUUUUU=
-X-Originating-IP: [58.22.7.114]
-X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/xtbB0hU4XmWXzovLFgABsK
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,32 +108,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-    Support for Cool Pi GenBook is landing linux-rockchip[], so also
-add the support for u-boot here.
+To minimize SPL size it is reasonable to disable SHOW_REGS. For main U-Boot
+the size restrictions are much more relaxed.
 
-[0] https://git.kernel.org/pub/scm/linux/kernel/git/mmind/linux-rockchip.git/commit/?h=v6.12-armsoc/dts64&id=4a8c1161b843c366776fc872a6fe45b743b2983e
+* Provide separate Kconfig symbols for SPL and main U-Boot.
+* Enable showing registers in main U-Boot by default.
 
+Heinrich Schuchardt (2):
+  riscv: allow to enable SHOW_REGS in main U-Boot only
+  riscv: enable showing registers by default
 
-Andy Yan (1):
-  board: rockchip: Add support for rk3588 GenBook
-
- .../dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi |  70 ++++
- arch/arm/mach-rockchip/rk3588/Kconfig         |   7 +
- board/coolpi/genbook/Kconfig                  |  12 +
- board/coolpi/genbook/MAINTAINERS              |   7 +
- board/coolpi/genbook/README                   |  23 ++
- configs/coolpi-genbook-rk3588_defconfig       | 104 ++++++
- .../rockchip/rk3588-coolpi-cm5-genbook.dts    | 349 ++++++++++++++++++
- include/configs/genbook-rk3588.h              |  28 ++
- 8 files changed, 600 insertions(+)
- create mode 100644 arch/arm/dts/rk3588-coolpi-cm5-genbook-u-boot.dtsi
- create mode 100644 board/coolpi/genbook/Kconfig
- create mode 100644 board/coolpi/genbook/MAINTAINERS
- create mode 100644 board/coolpi/genbook/README
- create mode 100644 configs/coolpi-genbook-rk3588_defconfig
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3588-coolpi-cm5-genbook.dts
- create mode 100644 include/configs/genbook-rk3588.h
+ arch/riscv/Kconfig          | 13 +++++++++++++
+ arch/riscv/lib/interrupts.c |  7 +++----
+ 2 files changed, 16 insertions(+), 4 deletions(-)
 
 -- 
-2.34.1
+2.45.2
 
