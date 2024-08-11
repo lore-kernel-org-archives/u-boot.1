@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB981C52D7B
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:53:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E528C3DA4A
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:54:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E88A488960;
-	Sun, 11 Aug 2024 16:51:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5DDD588979;
+	Sun, 11 Aug 2024 16:51:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kFPqfFSM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YADtTl7U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E17428861A; Sun, 11 Aug 2024 16:51:20 +0200 (CEST)
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
- [IPv6:2607:f8b0:4864:20::134])
+ id 1796E8894F; Sun, 11 Aug 2024 16:51:22 +0200 (CEST)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 141E287E9D
+ by phobos.denx.de (Postfix) with ESMTPS id C541088907
  for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:51:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x134.google.com with SMTP id
- e9e14a558f8ab-39b3cae5675so10096975ab.1
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-81fd520fe0dso139952439f.3
  for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:51:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1723387877; x=1723992677; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CIl3NxLT7YG27z9YjQMdHmJ9Ky0fFfDAYgAQsScCXRI=;
- b=kFPqfFSMbxtKdWiQ7gQI1SpEkQvEm8Pj8QftPBTHIgA9Srzyr1TK2X9wafukaoWCAD
- 1CvTwJ2/MkSLvYUwgHE+N4LALwVDQ1dOZFKCkKlgDj+1qTC9JyklyKTb1efP9msSfSfP
- q94bF1SgnAkM/skEATvLaMzHX3QjK2zZaxtZ4=
+ bh=OTItN6IY3GnhSfQxDEJfOubzaE2rCm6TNz/vH2ktr44=;
+ b=YADtTl7UYYzfzTNvp0RbT+MBKC6ducNkR+qkkDdrsN7+bEY8Kkc8Vuf/tgL6sqrddq
+ 9Bk3vRY3MSBEB8g92KPbMKHR8b5d29araDvCTYIJ2ZbkSOnqDzcRLV7nR3v5quPjMsUd
+ NZRBeA7viGYiPYYlzTBWic5ojn3cxjohUXngE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1723387877; x=1723992677;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CIl3NxLT7YG27z9YjQMdHmJ9Ky0fFfDAYgAQsScCXRI=;
- b=LOVi9f8SVhSGGGOFECl6dMFv84QkNMs0bOGhC42J6R2Ff+UVK44Kephu2eRXOw97PI
- 3TszQoD5aeJCW4trhcPfPgX5hh9wRwK0HiqBqIhqMFoQMB8sNPqqn4bx+aZ7xoKJ/j/M
- IV5e/RBF1SKyBzmZS0H/vqncV3UOUfwLtB5i4ezYl8A10CY3oNm0olUHhBIAbRUOTurD
- yyD7aFfGFHOven15GIJdtFPADlBWM/cbsyvWjrFC5Dq8tjDtoCbTrNbgoOWpcJhVC19D
- 70AVdJxo+SLQnWPBxsyyq1n5wbREnM8PraBW7w/vw/tHS3dM/SYLS0D3fw3iOxd7mQoU
- 3xwQ==
-X-Gm-Message-State: AOJu0Yy2lzfdoEKa7blp5dRLEuiyv00Nd5WJObIM5UkSYSwfuNhOTdVE
- qzg0Vb9+FjLgk1PVkh4OTkHBxVRCdmz7WkmgOuKICfPkZCJbiZLWYKOLMkXYCxb3DDxr33YSPaw
+ bh=OTItN6IY3GnhSfQxDEJfOubzaE2rCm6TNz/vH2ktr44=;
+ b=D6qMLtmuxZajSuXxq8qmBVt1W85bS55mTesOADdzhLB5LzuM8i8IqlDqWX/g1IqtG9
+ +IMwc8oIlZAKaVovFQRD5wx6TXN3QvzYWgIAfx0roLZrfjMfQy0vZLP0Sfk2nvG92HGG
+ XKhFO00DHByDUZG3QrCPf6zxxxvXhohjRzdMn4+g9+veCGHNN+6BCYN+US5q9YG3As4A
+ GHvKPUVSpWefyGtrHk1sKF9QTGcbTGMfGk9yl2Mc5ro1kez+PIgdOxx8QH2t2/3lbZsk
+ nijU6rm6+P9HoKaTLculpQ1GwnS5D8D5ypKgY1OLJ9hvb9iGaCj8yZJudBa/cHGvKgEp
+ gi2w==
+X-Gm-Message-State: AOJu0YzkiFvu/QlnaLqkHQXOMNm3NLrp00Cwec51RTD6eKLxxqZzdRus
+ svst9QLGu8dxTOsHI1AvKCbdSmW1MX1i8oJs83VObv27f/equOm4dL1XumTWbFSG6RZmlwZiCVU
  =
-X-Google-Smtp-Source: AGHT+IHjF5qsaViggKybnF8vTLf+4NCxSqgd8mFH9YSOgj2xNl/eh+TEnTemdeI2FXPQE8FPc786tA==
-X-Received: by 2002:a05:6e02:15c6:b0:376:3ece:dc5 with SMTP id
- e9e14a558f8ab-39b5f9e56c2mr118583555ab.4.1723387876681; 
- Sun, 11 Aug 2024 07:51:16 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEqpiIsuvasTOky0zfhNrYYqUgi/6fBDJw3Rl4B1ROyD6mfb+NldbJu6sva5pfE70C7UHmhvA==
+X-Received: by 2002:a05:6602:640f:b0:81f:e0a1:34cb with SMTP id
+ ca18e2360f4ac-8225ee7fecamr1101839639f.10.1723387877356; 
+ Sun, 11 Aug 2024 07:51:17 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
  8926c6da1cb9f-4ca769fbe17sm1076047173.101.2024.08.11.07.51.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Aug 2024 07:51:16 -0700 (PDT)
+ Sun, 11 Aug 2024 07:51:17 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>,
- Simon Glass <sjg@chromium.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
-Subject: [PATCH v2 04/18] mips: malta: Drop CMD_DATE
-Date: Sun, 11 Aug 2024 08:50:33 -0600
-Message-Id: <20240811145047.4189460-5-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 05/18] armv8: ls2085a: Drop CMD_DATE
+Date: Sun, 11 Aug 2024 08:50:34 -0600
+Message-Id: <20240811145047.4189460-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240811145047.4189460-1-sjg@chromium.org>
 References: <20240811145047.4189460-1-sjg@chromium.org>
@@ -99,60 +98,47 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
 
 (no changes since v1)
 
- configs/malta64_defconfig   | 1 -
- configs/malta64el_defconfig | 1 -
- configs/malta_defconfig     | 1 -
- configs/maltael_defconfig   | 1 -
- 4 files changed, 4 deletions(-)
+ configs/ls2080aqds_nand_defconfig | 1 -
+ configs/ls2080aqds_qspi_defconfig | 1 -
+ configs/ls2080ardb_nand_defconfig | 1 -
+ 3 files changed, 3 deletions(-)
 
-diff --git a/configs/malta64_defconfig b/configs/malta64_defconfig
-index ff371daaa0d..8ac29b9289f 100644
---- a/configs/malta64_defconfig
-+++ b/configs/malta64_defconfig
-@@ -27,7 +27,6 @@ CONFIG_CMD_PCI=y
+diff --git a/configs/ls2080aqds_nand_defconfig b/configs/ls2080aqds_nand_defconfig
+index 06e41546d67..0066414f0f5 100644
+--- a/configs/ls2080aqds_nand_defconfig
++++ b/configs/ls2080aqds_nand_defconfig
+@@ -61,7 +61,6 @@ CONFIG_CMD_PCI=y
+ CONFIG_CMD_USB=y
  # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_DHCP=y
- CONFIG_CMD_PING=y
+ CONFIG_CMD_CACHE=y
 -CONFIG_CMD_DATE=y
  # CONFIG_ISO_PARTITION is not set
- CONFIG_ENV_IS_IN_FLASH=y
- CONFIG_SYS_IDE_MAXBUS=1
-diff --git a/configs/malta64el_defconfig b/configs/malta64el_defconfig
-index 5b130bcde9b..0a71013d5fc 100644
---- a/configs/malta64el_defconfig
-+++ b/configs/malta64el_defconfig
-@@ -29,7 +29,6 @@ CONFIG_CMD_PCI=y
+ # CONFIG_SPL_EFI_PARTITION is not set
+ CONFIG_OF_CONTROL=y
+diff --git a/configs/ls2080aqds_qspi_defconfig b/configs/ls2080aqds_qspi_defconfig
+index 0b54bc999e7..44a1459749f 100644
+--- a/configs/ls2080aqds_qspi_defconfig
++++ b/configs/ls2080aqds_qspi_defconfig
+@@ -43,7 +43,6 @@ CONFIG_CMD_PCI=y
+ CONFIG_CMD_USB=y
  # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_DHCP=y
- CONFIG_CMD_PING=y
+ CONFIG_CMD_CACHE=y
 -CONFIG_CMD_DATE=y
  # CONFIG_ISO_PARTITION is not set
- CONFIG_ENV_IS_IN_FLASH=y
- CONFIG_SYS_IDE_MAXBUS=1
-diff --git a/configs/malta_defconfig b/configs/malta_defconfig
-index ce917a69de5..355292ef950 100644
---- a/configs/malta_defconfig
-+++ b/configs/malta_defconfig
-@@ -26,7 +26,6 @@ CONFIG_CMD_PCI=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_OF_EMBED=y
+diff --git a/configs/ls2080ardb_nand_defconfig b/configs/ls2080ardb_nand_defconfig
+index f1009e1738b..cbc8d6a5cf4 100644
+--- a/configs/ls2080ardb_nand_defconfig
++++ b/configs/ls2080ardb_nand_defconfig
+@@ -68,7 +68,6 @@ CONFIG_CMD_PCI=y
+ CONFIG_CMD_USB=y
  # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_DHCP=y
- CONFIG_CMD_PING=y
+ CONFIG_CMD_CACHE=y
 -CONFIG_CMD_DATE=y
- # CONFIG_ISO_PARTITION is not set
- CONFIG_ENV_IS_IN_FLASH=y
- CONFIG_SYS_IDE_MAXBUS=1
-diff --git a/configs/maltael_defconfig b/configs/maltael_defconfig
-index de29a7a3a5b..ffd27713963 100644
---- a/configs/maltael_defconfig
-+++ b/configs/maltael_defconfig
-@@ -28,7 +28,6 @@ CONFIG_CMD_PCI=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_DHCP=y
- CONFIG_CMD_PING=y
--CONFIG_CMD_DATE=y
- # CONFIG_ISO_PARTITION is not set
- CONFIG_ENV_IS_IN_FLASH=y
- CONFIG_SYS_IDE_MAXBUS=1
+ CONFIG_OF_CONTROL=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_NAND=y
 -- 
 2.34.1
 
