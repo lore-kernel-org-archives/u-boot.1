@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 125B0C52D7B
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 15:03:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28AA1C3DA4A
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 15:03:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A2E288C51;
-	Sun, 11 Aug 2024 16:53:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C5E27888AA;
+	Sun, 11 Aug 2024 16:53:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gBNuPSa8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YwSWbPCH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 021B388C4D; Sun, 11 Aug 2024 16:53:07 +0200 (CEST)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id C8CFA88898; Sun, 11 Aug 2024 16:53:07 +0200 (CEST)
+Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
+ [IPv6:2607:f8b0:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD126889E3
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:52:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7061088C16
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:53:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-39b40ab3210so13413755ab.3
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:52:59 -0700 (PDT)
+Received: by mail-il1-x135.google.com with SMTP id
+ e9e14a558f8ab-39834949e42so13585535ab.1
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:53:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723387978; x=1723992778; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723387979; x=1723992779; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zlZkCax0JTI7O6Xx7eXrCZ1Ss/UmtibuO9+isV4O2ng=;
- b=gBNuPSa8o1Od/u03tktn3v6S1T0QW3snHtofTVPQfqQUe7s6la+PfOWvMqfviA6P5A
- +4ozjbIiCnBm9HSm+lmVYMoHe9FWRbRo2x11a2ju5f8dqIfLMNNlicIK2BeH85B/pQlk
- TS760Qw7s+HYrJKMFOII+SjUXpOWNrc+ckyxs=
+ bh=In7yWFGRG7By2lbqiAb68SxAW7P6Ev/u7xa2rSM6srk=;
+ b=YwSWbPCHtM+ZdxwHDs5zFxUFU4OjNrxhnDzNxfwHF5BfNR/JA7AqExvBEpDyJ1uSj4
+ 9JAZlsS6547DPd53n3/kXBc4XqQYtqBrxnHQpELeFdw1jwgfDHEKXrAJi6Uh8zSY7ww5
+ RYLuj4+5X/OPGpFUTVoT/TKi9s7c6fzBIBKz4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723387978; x=1723992778;
+ d=1e100.net; s=20230601; t=1723387979; x=1723992779;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zlZkCax0JTI7O6Xx7eXrCZ1Ss/UmtibuO9+isV4O2ng=;
- b=mX0gyXDJSvLkCAOxuu4xzuWCTc8jCiuv7JrvR0QJfkXvRgVVxzFrVqHpc1fc0YjFkO
- FBYGO9dFjIimPnE/IFMgsB6VIS0KYHgwRpPm8IQFVhNsWV6OlWklU2zUvHiIG85CVy/q
- hy/68uRl1ph1dRxT2yBePk7dZSUIywwqfb2LyioULFnGc7X+7uOIJlGQmcHGg1MAG9gQ
- ODeRPtd/qv+Kn5Qo0gVgbGO148c9JTR9s8xsVJoded4SyBirUOIYW54HsgRKQ7xpZqZL
- 3+KI2BbvRHh8zacXYtOYCT1adyIC/zKTsMXrkwH/UoSTDiSlHTAr9jsrJjRw9EQGjF9u
- FZcQ==
-X-Gm-Message-State: AOJu0YwpmfDondCBCGHWx/q1KbINYCh0DXH5ulsMyoRb4lHOAbyg5ZxG
- 7svsxBr9s+ATGgXCwCNoKObXODbIu+q80o+yt7r6NEGaPMaHxMMm34cJ5dRmNyveOBjR2LSrw2U
+ bh=In7yWFGRG7By2lbqiAb68SxAW7P6Ev/u7xa2rSM6srk=;
+ b=MYTWhsXD1Obm8GjHfyp97XUrr1ru0sObOhksRgaZjLGulxzAJ7pvSXrTtlXKVd8fYT
+ mqA34j3+C2HxNVtagYSB+wVZ+V5aVyZLuKVadYf2iXyym4it/ucgN1dlpayEexNV1W22
+ aLRi3aiQoW2RdXs75DWVC4Qykn2AcMN1SX8pASWEQi7dAXvka1X9NgqRCYzvly79YH8v
+ 4PKnZgX+dpvd5vu+/YNeKIHxU2arQN3juaA8/VfT59dQZ0Gt6kSXBXFfEO0rp51jkAYz
+ IOgFCHrmRIYDvitPEPDXm7CJ+icnl9TYscocyaUxA8/jC3Ggg7J5BYBM6AazBD1kdqpP
+ eb8A==
+X-Gm-Message-State: AOJu0YwoLD7BCsgQ0U2ARnQa/thZBcq27JZQJxEDPpEQAe60OAPG63S6
+ +7EGP4zb2m0snckb+nRoPDFBenYh44QqgdWuNotP8WzRK4ElKWe0ob8lHTmYB7rd7iA3DnKxBYw
  =
-X-Google-Smtp-Source: AGHT+IHtzC3GnsRLqfO6KDTrb6XIotYDEKifKL4hFP0aPQX+ClYcWMXeb7qcWruJNOL0IvVU0aZGxA==
-X-Received: by 2002:a92:cd8d:0:b0:398:16d1:610b with SMTP id
- e9e14a558f8ab-39b6c11b903mr107666255ab.0.1723387978497; 
- Sun, 11 Aug 2024 07:52:58 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IG7J96BJns6JlSR9pDrbGV1rvQogz5s2FicFxK3N55X4sHTpFP8maZQMXcs9brTor83cQlEow==
+X-Received: by 2002:a05:6e02:1a6d:b0:39b:64b9:a4b6 with SMTP id
+ e9e14a558f8ab-39b7a467abbmr91498275ab.18.1723387979149; 
+ Sun, 11 Aug 2024 07:52:59 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
  e9e14a558f8ab-39c30a9a2c8sm11195855ab.43.2024.08.11.07.52.58
@@ -66,9 +66,9 @@ To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 37/40] efi: Add a test app
-Date: Sun, 11 Aug 2024 08:52:06 -0600
-Message-Id: <20240811145209.4191404-38-sjg@chromium.org>
+Subject: [PATCH v3 38/40] efi: Avoid using sandbox virtio devices
+Date: Sun, 11 Aug 2024 08:52:07 -0600
+Message-Id: <20240811145209.4191404-39-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240811145209.4191404-1-sjg@chromium.org>
 References: <20240811145209.4191404-1-sjg@chromium.org>
@@ -90,126 +90,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a simple app to use for testing. This is intended to do whatever it
-needs to for testing purposes. For now it just prints a message and
-exits boot services.
+While sandbox supports virtio it cannot support actually using the block
+devices to read files, since there is nothing on the other end of the
+'virtqueue'.
+
+A recent change makes EFI probe all block devices, whether used or not.
+This is apparently required by EFI, although it violates U-Boot's
+lazy-init principle.
+
+We cannot just drop the virtio devices as they are used in sandbox tests.
+
+So for now just add a special case to work around this.
+
+The eventual fix is likely adding an implementation of
+virtio_sandbox_notify() to actually do the block read. That is tracked
+in [1].
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Fixes: d5391bf02b9 ("efi_loader: ensure all block devices are probed")
+[1] https://source.denx.de/u-boot/u-boot/-/issues/37
 ---
 
-(no changes since v1)
+Changes in v3:
+- Add a Fixes tag
+- Mention the issue created for this problem
 
- lib/efi_loader/Kconfig   | 10 ++++++
- lib/efi_loader/Makefile  |  1 +
- lib/efi_loader/testapp.c | 68 ++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 79 insertions(+)
- create mode 100644 lib/efi_loader/testapp.c
+ lib/efi_loader/efi_disk.c | 14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
 
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index ab2c1c44364..4de05c6f2d6 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -528,4 +528,14 @@ config BOOTEFI_HELLO_COMPILE
- 	  No additional space will be required in the resulting U-Boot binary
- 	  when this option is enabled.
+diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+index 93a9a5ac025..2e1d37848fc 100644
+--- a/lib/efi_loader/efi_disk.c
++++ b/lib/efi_loader/efi_disk.c
+@@ -838,8 +838,20 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
+ efi_status_t efi_disks_register(void)
+ {
+ 	struct udevice *dev;
++	struct uclass *uc;
  
-+config BOOTEFI_TESTAPP_COMPILE
-+	bool "Compile an EFI test app for testing"
-+	default y
-+	help
-+	  This compiles an app designed for testing. It is packed into an image
-+	  by the test.py testing frame in the setup_efi_image() function.
+-	uclass_foreach_dev_probe(UCLASS_BLK, dev) {
++	uclass_id_foreach_dev(UCLASS_BLK, dev, uc) {
++		/*
++		 * The virtio block-device hangs on sandbox when accessed since
++		 * there is nothing listening to the mailbox
++		 */
++		if (IS_ENABLED(CONFIG_SANDBOX)) {
++			struct blk_desc *desc = dev_get_uclass_plat(dev);
 +
-+	  No additional space will be required in the resulting U-Boot binary
-+	  when this option is enabled.
-+
- endif
-diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
-index 00d18966f9e..87131ab911d 100644
---- a/lib/efi_loader/Makefile
-+++ b/lib/efi_loader/Makefile
-@@ -20,6 +20,7 @@ apps-$(CONFIG_EFI_LOAD_FILE2_INITRD) += initrddump
- ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
- apps-y += dtbdump
- endif
-+apps-$(CONFIG_BOOTEFI_TESTAPP_COMPILE) += testapp
++			if (desc->uclass_id == UCLASS_VIRTIO)
++				continue;
++		}
++		device_probe(dev);
+ 	}
  
- obj-$(CONFIG_CMD_BOOTEFI_HELLO) += helloworld_efi.o
- obj-$(CONFIG_EFI_BOOTMGR) += efi_bootmgr.o
-diff --git a/lib/efi_loader/testapp.c b/lib/efi_loader/testapp.c
-new file mode 100644
-index 00000000000..feb444c92e9
---- /dev/null
-+++ b/lib/efi_loader/testapp.c
-@@ -0,0 +1,68 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Hello world EFI application
-+ *
-+ * Copyright 2024 Google LLC
-+ * Written by Simon Glass <sjg@chromium.org>
-+ *
-+ * This test program is used to test the invocation of an EFI application.
-+ * It writes a few messages to the console and then exits boot services
-+ */
-+
-+#include <efi_api.h>
-+
-+static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
-+
-+static struct efi_system_table *systable;
-+static struct efi_boot_services *boottime;
-+static struct efi_simple_text_output_protocol *con_out;
-+
-+/**
-+ * efi_main() - entry point of the EFI application.
-+ *
-+ * @handle:	handle of the loaded image
-+ * @systab:	system table
-+ * Return:	status code
-+ */
-+efi_status_t EFIAPI efi_main(efi_handle_t handle,
-+			     struct efi_system_table *systab)
-+{
-+	struct efi_loaded_image *loaded_image;
-+	efi_status_t ret;
-+	efi_uintn_t map_size;
-+	efi_uintn_t map_key;
-+	efi_uintn_t desc_size;
-+	u32 desc_version;
-+
-+	systable = systab;
-+	boottime = systable->boottime;
-+	con_out = systable->con_out;
-+
-+	/* Get the loaded image protocol */
-+	ret = boottime->open_protocol(handle, &loaded_image_guid,
-+				      (void **)&loaded_image, NULL, NULL,
-+				      EFI_OPEN_PROTOCOL_GET_PROTOCOL);
-+	if (ret != EFI_SUCCESS) {
-+		con_out->output_string
-+			(con_out, u"Cannot open loaded image protocol\r\n");
-+		goto out;
-+	}
-+
-+	/* UEFI requires CR LF */
-+	con_out->output_string(con_out, u"U-Boot test app for EFI_LOADER\r\n");
-+
-+out:
-+	map_size = 0;
-+	ret = boottime->get_memory_map(&map_size, NULL, &map_key, &desc_size,
-+				       &desc_version);
-+	con_out->output_string(con_out, u"Exiting boot sevices\n");
-+
-+	/* exit boot services so that this part of U-Boot can be tested */
-+	boottime->exit_boot_services(handle, map_key);
-+
-+	/* now exit for real */
-+	ret = boottime->exit(handle, ret, 0, NULL);
-+
-+	/* We should never arrive here */
-+	return ret;
-+}
+ 	return EFI_SUCCESS;
 -- 
 2.34.1
 
