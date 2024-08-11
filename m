@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77D91C52D7B
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:57:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD7BDC3DA4A
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:57:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CAE38860B;
+	by phobos.denx.de (Postfix) with ESMTP id 9B313889E0;
 	Sun, 11 Aug 2024 16:52:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fgqZ6DZL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HNVgjDAe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B97DA88861; Sun, 11 Aug 2024 16:52:37 +0200 (CEST)
+ id 1666E88875; Sun, 11 Aug 2024 16:52:38 +0200 (CEST)
 Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
  [IPv6:2607:f8b0:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EECA889CB
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:52:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D8C2889DA
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:52:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-39b3e12754eso11984615ab.1
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:52:34 -0700 (PDT)
+ e9e14a558f8ab-39728bbf949so13945175ab.3
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:52:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723387953; x=1723992753; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723387954; x=1723992754; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=a7DdkER2RHUOjzF7TxOxm/2QRIyR5m8rS9CgKjZAWUo=;
- b=fgqZ6DZLZCCORbdU3viC1wG3EJuLBHHhyzgFOTxCcS7BXu7/DOE1FZHWUrAEWAB/0v
- BHcl+vZTVQfm2m9Kvc+pubaf9Wft1fPmes6pF2dSI/SzpPMFFV9tsAdqUlIPCeKiYGtX
- xGup7VI4DH45LFYCHBBqsUQS3D/VtcXoMnhfc=
+ bh=RP3sjiPcGcA/mi36Kt00Rs5CQbTgbt7wjtg5MSV5d9s=;
+ b=HNVgjDAe+6XV/lc9hPiGtl4yqKVBVrtv67cqepYi09u/EqdoVixp5gTQTa9WRaUDIu
+ VeOUfndLjlhGIpEwFpXX00Lef43Hb1ug18bIlMbZ5PqAqzJ9Mzg6NMT7jPZo3zBpzZBI
+ laHLiHfacndjK2GJn0QcGvyhUH7PcBgNjiV70=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723387953; x=1723992753;
+ d=1e100.net; s=20230601; t=1723387954; x=1723992754;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=a7DdkER2RHUOjzF7TxOxm/2QRIyR5m8rS9CgKjZAWUo=;
- b=Nex74SiWWwgdcfcCiJ26l64C8VijLWo7OrANcjkh/c//q4kmtVm9yyNpHSFiBayt9m
- Ohw+sVSN76CKmUKs1tnQzrcD2fw/9ibFubuWgAWMVADLicxNO6dxIg/xrVg7NwjKDF0P
- +RnKfMgdpRxq8/gY6FVUe5Gkv+sdCP0aMMBfVAKrrpGP36HZ99S3As2O6uYuooSPI4r5
- 3i2OWwwCeQ2qigZUGSihEzdXNF1oHT0qvPv0Msdy4qx0SEyLdFGav56fOdRtq9SRWCEq
- ba67QtRKv+TYxJolRfi/lUQgF1f4zw5nNM3ljHVeAHxtflPGGzZYWLuKz3D/DWoCAi/h
- jFgQ==
-X-Gm-Message-State: AOJu0YyY3VaeoGfVFyZhJDz3fFDffU43CmPmQKPI2Dz6bnk3CQiXL00r
- jQwZwCMnd/Dl+GDxsOTHnD4/ik5M1JPkiU/Cvny9jmYYj3uQ/z6fIwivyL5uNC2zGA+N9ZAUPgw
+ bh=RP3sjiPcGcA/mi36Kt00Rs5CQbTgbt7wjtg5MSV5d9s=;
+ b=HAponJE9i4KTeq04vRT+aXjFh4qUdWMBBn0DbLZyPzfiNyGwpNo5fUvenITpoWhwEO
+ prsbPAyNBdFK4aO8Yki93oITUfxp/XAKJk6a8/GMPck4jnDXZz+FZlZBjnKEXo1zdw0U
+ xk9/iTNOQgZYar6/I9NFDxteNCOfAdjuF/hrQC3SYvMQuB1KfTqTnO8/ymh7WHve+y8X
+ ztC/cJ1OFQdEGgY0nhgF9bYlmDPvCLns6H7tRO1jrsBrwpAlFbLoo/086qoEVWErN/kL
+ Tj5CmIXgXpcCHYNAVBepfF5lOkoo6qmOwPYHvHeUbMu28vrXFFYgJNT2Au9LGm/K4Qhz
+ NcFA==
+X-Gm-Message-State: AOJu0YyndgTyQu5BGsqk0oS/MKwhKgsCp7vauOlcDe+n8D2zrU9xEIW5
+ C5XufN31Dek5bqwDVGlNrqNQLUw5iqA4vj4nvN/CqTZz/H2HlYcTqXj+mDe49aVYeuiBu0wcYe0
  =
-X-Google-Smtp-Source: AGHT+IEtHaPUAqmB9J3cENuqkDkAPq9xbhPGnAyIvyeCauoW83T2rJMrrZrqcjJvBRRynPOW6w7gKg==
-X-Received: by 2002:a05:6e02:1b08:b0:39b:3502:f4f2 with SMTP id
- e9e14a558f8ab-39b815a164emr73442275ab.18.1723387953194; 
+X-Google-Smtp-Source: AGHT+IF/YD8IQ+++vKiCCjjsPqKKg7eGBPcND1o1hqaUTPV9Xb53qKJ4hOHWSlQuGW7p4yZQ6R3Tlg==
+X-Received: by 2002:a92:c564:0:b0:39b:32f2:c34c with SMTP id
+ e9e14a558f8ab-39b813316a7mr85153995ab.8.1723387953961; 
  Sun, 11 Aug 2024 07:52:33 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39c30a9a2c8sm11195855ab.43.2024.08.11.07.52.32
+ e9e14a558f8ab-39c30a9a2c8sm11195855ab.43.2024.08.11.07.52.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Aug 2024 07:52:32 -0700 (PDT)
+ Sun, 11 Aug 2024 07:52:33 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 02/40] nvmxip: Avoid probing on boot
-Date: Sun, 11 Aug 2024 08:51:31 -0600
-Message-Id: <20240811145209.4191404-3-sjg@chromium.org>
+Subject: [PATCH v3 03/40] bootstd: Add UT_TESTF_CONSOLE_REC to bootflow tests
+Date: Sun, 11 Aug 2024 08:51:32 -0600
+Message-Id: <20240811145209.4191404-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240811145209.4191404-1-sjg@chromium.org>
 References: <20240811145209.4191404-1-sjg@chromium.org>
@@ -90,36 +90,262 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Devices should be probed when they are used, not before. Drop this
-boot-time probing.
+Quite a few tests use console recording without indicating this, using
+the UT_TESTF_CONSOLE_REC flag. Fix this to avoid strange failures.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- drivers/mtd/nvmxip/nvmxip-uclass.c | 7 -------
- 1 file changed, 7 deletions(-)
+ test/boot/bootflow.c | 59 +++++++++++++++++++++++---------------------
+ 1 file changed, 31 insertions(+), 28 deletions(-)
 
-diff --git a/drivers/mtd/nvmxip/nvmxip-uclass.c b/drivers/mtd/nvmxip/nvmxip-uclass.c
-index 58e8c3fb74b..d18bd0e3d6b 100644
---- a/drivers/mtd/nvmxip/nvmxip-uclass.c
-+++ b/drivers/mtd/nvmxip/nvmxip-uclass.c
-@@ -53,14 +53,7 @@ int nvmxip_probe(struct udevice *udev)
+diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+index 8b46256fa48..8ea091a36af 100644
+--- a/test/boot/bootflow.c
++++ b/test/boot/bootflow.c
+@@ -50,7 +50,6 @@ static int inject_response(struct unit_test_state *uts)
+ /* Check 'bootflow scan/list' commands */
+ static int bootflow_cmd(struct unit_test_state *uts)
+ {
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootdev select 1", 0));
+ 	ut_assert_console_end();
+ 	ut_assertok(run_command("bootflow scan -lH", 0));
+@@ -76,14 +75,14 @@ static int bootflow_cmd(struct unit_test_state *uts)
+ 
  	return 0;
  }
+-BOOTSTD_TEST(bootflow_cmd, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_cmd, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
++	     UT_TESTF_CONSOLE_REC);
  
--static int nvmxip_post_bind(struct udevice *udev)
--{
--	dev_or_flags(udev, DM_FLAG_PROBE_AFTER_BIND);
--	return 0;
--}
--
- UCLASS_DRIVER(nvmxip) = {
- 	.name	   = "nvmxip",
- 	.id	   = UCLASS_NVMXIP,
--	.post_bind = nvmxip_post_bind,
- };
+ /* Check 'bootflow scan' with a label / seq */
+ static int bootflow_cmd_label(struct unit_test_state *uts)
+ {
+ 	test_set_eth_enable(false);
+ 
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootflow scan -lH mmc1", 0));
+ 	ut_assert_nextline("Scanning for bootflows with label 'mmc1'");
+ 	ut_assert_skip_to_line("(1 bootflow, 1 valid)");
+@@ -124,7 +123,7 @@ static int bootflow_cmd_label(struct unit_test_state *uts)
+ 	return 0;
+ }
+ BOOTSTD_TEST(bootflow_cmd_label, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
+-	     UT_TESTF_ETH_BOOTDEV);
++	     UT_TESTF_ETH_BOOTDEV | UT_TESTF_CONSOLE_REC);
+ 
+ /* Check 'bootflow scan/list' commands using all bootdevs */
+ static int bootflow_cmd_glob(struct unit_test_state *uts)
+@@ -156,14 +155,14 @@ static int bootflow_cmd_glob(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cmd_glob, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_cmd_glob, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
++	     UT_TESTF_CONSOLE_REC);
+ 
+ /* Check 'bootflow scan -e' */
+ static int bootflow_cmd_scan_e(struct unit_test_state *uts)
+ {
+ 	ut_assertok(bootstd_test_drop_bootdev_order(uts));
+ 
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootflow scan -aleGH", 0));
+ 	ut_assert_nextline("Scanning for bootflows in all bootdevs");
+ 	ut_assert_nextline("Seq  Method       State   Uclass    Part  Name                      Filename");
+@@ -207,12 +206,12 @@ static int bootflow_cmd_scan_e(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cmd_scan_e, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_cmd_scan_e, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
++	     UT_TESTF_CONSOLE_REC);
+ 
+ /* Check 'bootflow info' */
+ static int bootflow_cmd_info(struct unit_test_state *uts)
+ {
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootdev select 1", 0));
+ 	ut_assert_console_end();
+ 	ut_assertok(run_command("bootflow scan", 0));
+@@ -248,12 +247,12 @@ static int bootflow_cmd_info(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cmd_info, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_cmd_info, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
++	     UT_TESTF_CONSOLE_REC);
+ 
+ /* Check 'bootflow scan -b' to boot the first available bootdev */
+ static int bootflow_scan_boot(struct unit_test_state *uts)
+ {
+-	console_record_reset_enable();
+ 	ut_assertok(inject_response(uts));
+ 	ut_assertok(run_command("bootflow scan -b", 0));
+ 	ut_assert_nextline(
+@@ -270,7 +269,8 @@ static int bootflow_scan_boot(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_scan_boot, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_scan_boot, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
++	     UT_TESTF_CONSOLE_REC);
+ 
+ /* Check iterating through available bootflows */
+ static int bootflow_iter(struct unit_test_state *uts)
+@@ -368,7 +368,8 @@ static int bootflow_iter(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_iter, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_iter, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
++	     UT_TESTF_CONSOLE_REC);
+ 
+ #if defined(CONFIG_SANDBOX) && defined(CONFIG_BOOTMETH_GLOBAL)
+ /* Check using the system bootdev */
+@@ -386,7 +387,6 @@ static int bootflow_system(struct unit_test_state *uts)
+ 
+ 	/* We should get a single 'bootmgr' method right at the end */
+ 	bootstd_clear_glob();
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootflow scan -lH", 0));
+ 	ut_assert_skip_to_line(
+ 		"  0  efi_mgr      ready   (none)       0  <NULL>                    ");
+@@ -397,7 +397,7 @@ static int bootflow_system(struct unit_test_state *uts)
+ 	return 0;
+ }
+ BOOTSTD_TEST(bootflow_system, UT_TESTF_DM | UT_TESTF_SCAN_PDATA |
+-	     UT_TESTF_SCAN_FDT);
++	     UT_TESTF_SCAN_FDT | UT_TESTF_CONSOLE_REC);
+ #endif
+ 
+ /* Check disabling a bootmethod if it requests it */
+@@ -438,7 +438,9 @@ static int bootflow_iter_disable(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_iter_disable, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_iter_disable, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
++	     UT_TESTF_CONSOLE_REC
++);
+ 
+ /* Check 'bootflow scan' with a bootmeth ordering including a global bootmeth */
+ static int bootflow_scan_glob_bootmeth(struct unit_test_state *uts)
+@@ -452,7 +454,6 @@ static int bootflow_scan_glob_bootmeth(struct unit_test_state *uts)
+ 	 * Make sure that the -G flag makes the scan fail, since this is not
+ 	 * supported when an ordering is provided
+ 	 */
+-	console_record_reset_enable();
+ 	ut_assertok(bootmeth_set_order("efi firmware0"));
+ 	ut_assertok(run_command("bootflow scan -lGH", 0));
+ 	ut_assert_nextline("Scanning for bootflows in all bootdevs");
+@@ -479,12 +480,13 @@ static int bootflow_scan_glob_bootmeth(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_scan_glob_bootmeth, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_scan_glob_bootmeth, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
++	     UT_TESTF_CONSOLE_REC
++);
+ 
+ /* Check 'bootflow boot' to boot a selected bootflow */
+ static int bootflow_cmd_boot(struct unit_test_state *uts)
+ {
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootdev select 1", 0));
+ 	ut_assert_console_end();
+ 	ut_assertok(run_command("bootflow scan", 0));
+@@ -508,7 +510,8 @@ static int bootflow_cmd_boot(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cmd_boot, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_cmd_boot, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
++	     UT_TESTF_CONSOLE_REC);
+ 
+ /**
+  * prep_mmc_bootdev() - Set up an mmc bootdev so we can access other distros
+@@ -675,7 +678,8 @@ static int bootflow_cmd_menu(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cmd_menu, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_cmd_menu, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
++	     UT_TESTF_CONSOLE_REC);
+ 
+ /* Check 'bootflow scan -m' to select a bootflow using a menu */
+ static int bootflow_scan_menu(struct unit_test_state *uts)
+@@ -783,7 +787,6 @@ static int bootflow_cmd_hunt_single(struct unit_test_state *uts)
+ 
+ 	ut_assertok(bootstd_test_drop_bootdev_order(uts));
+ 
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootflow scan -l mmc1", 0));
+ 	ut_assert_nextline("Scanning for bootflows with label 'mmc1'");
+ 	ut_assert_skip_to_line("(1 bootflow, 1 valid)");
+@@ -794,7 +797,8 @@ static int bootflow_cmd_hunt_single(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cmd_hunt_single, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_cmd_hunt_single, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
++	     UT_TESTF_CONSOLE_REC);
+ 
+ /* Check searching for a uclass label using the hunters */
+ static int bootflow_cmd_hunt_label(struct unit_test_state *uts)
+@@ -808,7 +812,6 @@ static int bootflow_cmd_hunt_label(struct unit_test_state *uts)
+ 	test_set_eth_enable(false);
+ 	ut_assertok(bootstd_test_drop_bootdev_order(uts));
+ 
+-	console_record_reset_enable();
+ 	ut_assertok(run_command("bootflow scan -l mmc", 0));
+ 
+ 	/* check that the hunter was used */
+@@ -831,7 +834,8 @@ static int bootflow_cmd_hunt_label(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cmd_hunt_label, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
++BOOTSTD_TEST(bootflow_cmd_hunt_label, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
++	     UT_TESTF_CONSOLE_REC);
+ 
+ /**
+  * check_font() - Check that the font size for an item matches expectations
+@@ -1127,7 +1131,6 @@ static int bootflow_cmdline(struct unit_test_state *uts)
+ {
+ 	ut_assertok(run_command("bootflow scan mmc", 0));
+ 	ut_assertok(run_command("bootflow sel 0", 0));
+-	console_record_reset_enable();
+ 
+ 	ut_asserteq(1, run_command("bootflow cmdline get fred", 0));
+ 	ut_assert_nextline("Argument not found");
+@@ -1157,7 +1160,7 @@ static int bootflow_cmdline(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cmdline, 0);
++BOOTSTD_TEST(bootflow_cmdline, UT_TESTF_CONSOLE_REC);
+ 
+ /* test a few special changes to a long command line */
+ static int bootflow_cmdline_special(struct unit_test_state *uts)
+@@ -1198,7 +1201,7 @@ static int bootflow_cros(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_cros, 0);
++BOOTSTD_TEST(bootflow_cros, UT_TESTF_CONSOLE_REC);
+ 
+ /* Test Android bootmeth  */
+ static int bootflow_android(struct unit_test_state *uts)
+@@ -1221,4 +1224,4 @@ static int bootflow_android(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-BOOTSTD_TEST(bootflow_android, 0);
++BOOTSTD_TEST(bootflow_android, UT_TESTF_CONSOLE_REC);
 -- 
 2.34.1
 
