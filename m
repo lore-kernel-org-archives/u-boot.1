@@ -4,71 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38CDDC3DA4A
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:50:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59BF6C52D7B
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:51:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E772E8885E;
-	Sun, 11 Aug 2024 16:50:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 50B4B8878A;
+	Sun, 11 Aug 2024 16:50:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cZ5zZ0q+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lyYNXELk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C53CD88808; Sun, 11 Aug 2024 16:50:20 +0200 (CEST)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id BB2D088100; Sun, 11 Aug 2024 16:50:22 +0200 (CEST)
+Received: from mail-vs1-xe2b.google.com (mail-vs1-xe2b.google.com
+ [IPv6:2607:f8b0:4864:20::e2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC6ED88100
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:50:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A9109887E8
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:50:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-3db14339fb0so2170427b6e.2
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:50:18 -0700 (PDT)
+Received: by mail-vs1-xe2b.google.com with SMTP id
+ ada2fe7eead31-49291b02e20so1212507137.2
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:50:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723387817; x=1723992617; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IAX0k3rP2+4TjB6je6KPxxr3shcAEmyfxTKCtJIGtWw=;
- b=cZ5zZ0q+leD6tcOMz0CPQN5qb88sGFshIH9xzRxknvnqf4LXwMFTnIV5og59ahWZZY
- RsDNx/eL08AW0Fee1tBTkf/MhaFuhk5zZbh1S84hsI3f2nDmq00TZtSYvZIJ0nX/ug9X
- 66Mpg3+6X1vCXZAvsaVgkHEFfrNH5imo/UirA=
+ d=chromium.org; s=google; t=1723387819; x=1723992619; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+nyM+iDwWYon9F/XodBbfHF6PmiqLNBKbNj3I5wtv1U=;
+ b=lyYNXELknTsI9GRN1nYIRL0vhZH8NnF6h3pGYFqtaWL+OGXitVnYhINGNPFVBNKqF1
+ aGlDgtd0JB4jUf9vrjUuaFDFQZDZhYXx4b+QBuYj+KMyjYbT233mFZrQQOprm8mBnHIC
+ BMRWc5XpQqDKzak7FQUIjn6wCENFNK9d1N88c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723387817; x=1723992617;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=IAX0k3rP2+4TjB6je6KPxxr3shcAEmyfxTKCtJIGtWw=;
- b=UMs1M0hoL5tosRFI6yEykZRdeGWUBIAIJ8eTl3jxGTniFwG0SP/+rRoCQMWNORo2WC
- kUt//FhvbvLXuf5teXq5xRxbP/ixQRQrQ8NaE8QldQ8qJHxJ28VrEFtklbLyq7skVzep
- JwFLupKILhEzAgcpHJPyx0H74ftBjMzu8XUn0ERXvyX7KAksn/qLOVd5zliXSosRRqGL
- ZOgJR+OjjUQ/cInJ1XaQXDUMWn+5ydvahaRkUZ+2S7v+uZi6ayCBNrpC7QkmadN3jukI
- Ml3Pt+bl9gzrYLnab/Slf9BEE3+WN9/gJ1cndt1oylHu9dM70Ligqgr1fhXoDPrjdt7w
- Fj6Q==
-X-Gm-Message-State: AOJu0YzP3+ZoLG7XBkXNGpBjD8Xnv9qvXGkw9hAV2rkCCwY+yMrK1Ife
- vv7ghnPg6gRy0t0VUDPDc2D0ziMwoPdS5xBNncT9xHQPCpCqwO9J1R507cb8uoof5P5HyKh4aWN
- giBcIgSV0Sr9cSEbnFtBv1twMBFNs9qh4C8Gn
-X-Google-Smtp-Source: AGHT+IGV8+gqkKHR5Knh4FKy6CgbJ5pOKXd6nLkthug9uefLXrb9juOQeCXOxf10ASH8AF2LhUs2b20RFWdaRrJuWGA=
-X-Received: by 2002:a05:6358:33a3:b0:1a6:72f2:4d03 with SMTP id
- e5c5f4694b2df-1b176f1c082mr806122055d.9.1723387817488; Sun, 11 Aug 2024
- 07:50:17 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1723387819; x=1723992619;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+nyM+iDwWYon9F/XodBbfHF6PmiqLNBKbNj3I5wtv1U=;
+ b=fXjci5NmqiUBzLydPJ4hNRPakfkhVumRUCCbaq7ZUYAg20GOyOjOqe/CcTYhUPlEz0
+ nt6EqMuqfeyxDFMxLIFvzT9+BDMYnt/pBDgDOxoUHQppGmczDlzdRwO+waIktBe2AwNI
+ eYwhlvq/Yaqk/bhcr0p3Z03YpjpJOH0QXU2dzxq0BOv4S0VK6uqoEoA+p2v5FzWuDlk+
+ r7VUaFYV0SvVihxHvc/sFTKGUF1LABO53+50dmNXESzHnA+1iSaVYZ1kbQFWoSOCmGov
+ T0NYcqldoN2TiqjBmVRvc4x8FRlhnRVFHXgDemKR8gryeq/OiCfVoaLagww2i5azpzZX
+ Xs6Q==
+X-Gm-Message-State: AOJu0YwE8KfLdM5aketO+eAnnUCrsyP5qXAOq5sfyw/divoNAH4MLyki
+ y9bh9Xa4jwRlkyPN/jdn71Tqiox+MmP/rOKy8SpqdV9y3tg9HWHdG0/gkddDTSg1TJB7QpW5ImS
+ 7AKSCmyw3zHc6gbOc1ExElXGCl0QvF+MW58uN
+X-Google-Smtp-Source: AGHT+IHPzBdMTakbQ7kpzF8DVVYIS/+R29wRoXED6cav2hneKCROLmZphavQw4WxsuEFXkmD7W9DyESwfHPWQgmCx+E=
+X-Received: by 2002:a05:6102:2831:b0:497:954:56d with SMTP id
+ ada2fe7eead31-497095425f2mr4117251137.31.1723387819494; Sun, 11 Aug 2024
+ 07:50:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240807224739.3858517-1-sjg@chromium.org>
- <172331433904.2030825.13281690460193478199.b4-ty@konsulko.com>
-In-Reply-To: <172331433904.2030825.13281690460193478199.b4-ty@konsulko.com>
+References: <CAEttap-5P=x0WMjVNwVUVhYe8eHtuQKyzbWcSOFjTahOLbZYgA@mail.gmail.com>
+In-Reply-To: <CAEttap-5P=x0WMjVNwVUVhYe8eHtuQKyzbWcSOFjTahOLbZYgA@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 11 Aug 2024 08:50:07 -0600
-Message-ID: <CAFLszTjDvr9bGa5ioQEYFJAmTV676W8210kVT_fThbSoLRMTvA@mail.gmail.com>
-Subject: Re: [PATCH v4 00/21] Universal Payload initial series
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Sean Anderson <seanga2@gmail.com>, 
- Lean Sheng Tan <sheng.tan@9elements.com>, Michal Simek <michal.simek@amd.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jerry Van Baren <vanbaren@cideas.com>
+Date: Sun, 11 Aug 2024 08:50:08 -0600
+Message-ID: <CAFLszTg3DXEOGFfTgOCkoopZFzdQdbwcduJHGVpt2eqM4nAQfQ@mail.gmail.com>
+Subject: Re: I think I found a typographical error
+To: =?UTF-8?B?6rmA7YOc7ZiE?= <kimth0312@gmail.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,28 +83,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi,
 
-On Sat, 10 Aug 2024 at 12:25, Tom Rini <trini@konsulko.com> wrote:
+On Sat, 10 Aug 2024 at 07:40, =EA=B9=80=ED=83=9C=ED=98=84 <kimth0312@gmail.=
+com> wrote:
 >
-> On Wed, 07 Aug 2024 16:47:18 -0600, Simon Glass wrote:
+> Hi, I was looking in the 'arch > arm > cpu > armv7 > start.S' and I think=
+ I
+> found a typographical error.
 >
-> > Universal Payload (UPL) is an Industry Standard for firmware
-> > components[1]. UPL is designed to improve interoperability within the
-> > firmware industry, allowing mixing and matching of projects with less
-> > friction and fewer project-specific implementations. UPL is
-> > cross-platform, supporting ARM, x86 and RISC-V initially.
-> >
-> > This series provides some initial support for this, targeting 0.9.1 and
-> > sandbox only.
-> >
-> > [...]
+> On line 45, 'This allows U-Boot to loaded to ...' should be 'This allows
+> U-Boot to *be* loaded to ...'
 >
-> Applied to u-boot/next, thanks!
+> Please check if it's right or not.
 
-Thank you for getting this in!
-
-I'll take a look at what else is needed.
+Yes that sounds right. Would you like to send a patch to fix it?
 
 Regards,
 Simon
