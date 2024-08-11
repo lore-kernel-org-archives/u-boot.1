@@ -4,88 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F0E7C3DA4A
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:41:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2236EC3DA4A
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:50:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 540B388453;
-	Sun, 11 Aug 2024 16:41:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 6440B885F4;
+	Sun, 11 Aug 2024 16:50:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="HgV/Pd4N";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OAv5ZgTL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E195F884C3; Sun, 11 Aug 2024 16:41:39 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 757DD88580; Sun, 11 Aug 2024 16:50:15 +0200 (CEST)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D362288176
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:41:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0083787E9D
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:50:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 06A5C3F2EE
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 14:41:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1723387296;
- bh=ZARblk+DsGYe8seZA/dgD4747L+CkxrghBrkKdgE8bc=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=HgV/Pd4NPfAtFK4+ZVF24RRDhBuHsa73l2MccsfNigPXoKXZ7exofhgK7R409sadL
- zCle8XaT3BWnh7N+T1Wu8RXBQv+qYZMz5juTcUfNRWkeAsaOK3+zVgcLFlD1aWhlLK
- 4dELh3CeBnJkvXB+gG0IJMA/6yJLt3r+vBR5tLzt4SMWRKcHHUGd+7qzUc66kgoc2+
- EOtkoYfV6BkIM7Dc7xaj1QF7y/UnOaI1p3H1jjp7BsuuQlX9zo9J5JUJlkqH/LT7y6
- FvLXJ25rGkjfZYe5V2zUdmgYEUUMNOKPoyEI12cDm9lXuXCyl20voF3Q/fLn/xVBoy
- Q0BJD+R1pkY9g==
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-368448dfe12so2139305f8f.1
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:41:36 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-6b7b23793c1so22159286d6.0
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:50:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1723387812; x=1723992612; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6c3NzLRSVdNOFX9HBBZ6d4nN1mdvUu0jBhOtkkJCHEk=;
+ b=OAv5ZgTLGLsTOxcCn6GeIn9ZeWh/eq1mX8WJi0I2aRAt1tKuPqi+8xUiFQ6/GMLyO2
+ Ao4AwLbBPU8obYykKwEU8OHjLWDbRcbKABsFEqq/51Dcf+a72pno6ZQBm3WUBOyhzD/G
+ UHs8zeUyydpTF5gtYVlqPGPOMlnRL8v59xr0k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723387295; x=1723992095;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZARblk+DsGYe8seZA/dgD4747L+CkxrghBrkKdgE8bc=;
- b=aRHR9no94BeuI29qdIvstVi0M5ZgDUdukPUCJC5fv2fcznGvukzPvl2l65z6UdpYQa
- /SdvOzOCnahGky7a380p6+RJGaZ2VySllGzM5WGRddsb2pLGaXFNXyH6tp5Ukw2m38qk
- XrVxfeP0YPZUfiNOOFs0oBgOrN970GMKPwpnEVIGG+127BnyX5W8T4wZ9T1uHFbn6v4R
- DFPeHH3OOWD+lWTD15FanpO1ciYU/B7hxeusfk6efM3L9Ug7iokp0RPyIM81T7Px6vlq
- 2Eeat1Ak6t5bBAW40fHdsCSx/gwyYePnN/rU6xYcOb8tKnz4rBz/IpNMb6H2doxSFmUX
- UStg==
+ d=1e100.net; s=20230601; t=1723387812; x=1723992612;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6c3NzLRSVdNOFX9HBBZ6d4nN1mdvUu0jBhOtkkJCHEk=;
+ b=OawR+zMgoYbkVaVTUzGXp1vFraPJfRTakzUOrF0QmhdFLNseHcuJ/VrXLkkfaJd6pv
+ 3YbZwAzqMX+jbTSjglrXBeiJpjEn9etnWVRGNvdBHnNlaP3If4dXHWmPlzV3ybkCaK2r
+ e59g8mOppiu2Kyzl+nDTnRuZrjsL6xsjrwljSVC0V1olvyhLj/641NPM3uewU3yqtmK/
+ 8NO+Bt6bmM2bYonLEQdFNBBzXUZn5MpRBDhnSyci2WKytQlR8OfTK7MfRqssfT/GvbGt
+ 6FMUE2HdrMNXzmOHQ3HQy007E1m3cfxO7WzgjMhq7cnGxiLgaU5DePSvMV4WmXCtmmg/
+ 2TzA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVSXn4YDDah9RjfdvyQuQYWM9++SJaT+SXHMPVzpxu8n2W/yA1aW9uxWYxh2Vref0LGAzMRX684KPAl+iJ9jTnigBQ+zQ==
-X-Gm-Message-State: AOJu0YwLvyPK5xZt+igFsJHcqI9ZNjafthhxa8WUCTWbkVzXP0Nr6biA
- bL0HB34yL8gXEGIvMO8Vrj0CuDRmGhcJid0XTCCtdcfRQmZo7UTaOsQQiOyaFlC/L6b9ia/yOiX
- qKrBnF2KiP2Mon6rhh5WGKPPCS2I8yxTL27aVVLWW9BaQWPWx7+IIStgPgmtVqTft67g=
-X-Received: by 2002:a5d:6187:0:b0:36b:aa27:3f79 with SMTP id
- ffacd0b85a97d-36d280bc861mr8519189f8f.4.1723387295477; 
- Sun, 11 Aug 2024 07:41:35 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHrCIfskCBM4szj/coflQG5irGHjzzcc0qdQPnbTF9xKMJemObbc4Jynkd1pe/69J4UafulpA==
-X-Received: by 2002:a5d:6187:0:b0:36b:aa27:3f79 with SMTP id
- ffacd0b85a97d-36d280bc861mr8519180f8f.4.1723387294949; 
- Sun, 11 Aug 2024 07:41:34 -0700 (PDT)
-Received: from localhost.localdomain
- (ip-178-202-041-098.um47.pools.vodafone-ip.de. [178.202.41.98])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-429c75042e9sm68151065e9.8.2024.08.11.07.41.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Aug 2024 07:41:34 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Rick Chen <rick@andestech.com>
-Cc: Leo <ycliang@andestech.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] cmd: add rdcycle test to RISC-V exception command
-Date: Sun, 11 Aug 2024 16:41:23 +0200
-Message-ID: <20240811144123.211756-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
+ AJvYcCVL2Af8fbSRlb4ubXx+AVbYY40dQiLPySoVhaq4cTF9fw/YL8Nb5AfLh00smrVGZX6PtbGdWUA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy6/4CbtunyjCWLijNbDoBvItscSwthemOETKqoHebbQ5uRNjF2
+ 9XGJQXfLxkhQFvNv+89hEMU0K7OnC7aMdzTACdhOe5UR4N+waDyzawA0l5mwZ3KbdGiQRHv95Ho
+ SRkzTI0Quc2v0ldWDXJ9gBMIKwOQsW29MfCoy
+X-Google-Smtp-Source: AGHT+IFhQMS33c+Qw5AcY+M+ElvqfAPyNYcNhlK5E3eZ2cThqgcerKLKkEma6482R41cxRnmFTz4HDtHIPJ1F185m8k=
+X-Received: by 2002:a0c:f40e:0:b0:6bb:84af:d632 with SMTP id
+ 6a1803df08f44-6bd78da58a8mr73692116d6.5.1723387811714; Sun, 11 Aug 2024
+ 07:50:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <03cdd29b-331c-76b0-f6d7-a064552ffd67@marvell.com>
+ <CAFLszTiCS-jRfL__PJ=uEQf0rUKcw4J8czp-=khzkHB=q9ySOg@mail.gmail.com>
+ <b4d4fe48-c3b0-98cc-dccf-8b96318ec204@marvell.com>
+In-Reply-To: <b4d4fe48-c3b0-98cc-dccf-8b96318ec204@marvell.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 11 Aug 2024 08:50:01 -0600
+Message-ID: <CAFLszTgN3AqhPzT+Zpe=sfM_cOZOmOQPseG_ipwMcNYzLbGUdQ@mail.gmail.com>
+Subject: Re: [PATCH v2] env: remove vars that are not in default env
+To: Ravi Minnikanti <rminnikanti@marvell.com>
+Cc: Tom Rini <trini@konsulko.com>, quentin.schulz@bootlin.com, 
+ U-Boot-Denx <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,66 +88,248 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some versions of KVM don't allow access to the cycle CSR.
+Hi Ravi,
 
-Provide a command 'exception rdcycle' for testing.
+On Fri, 9 Aug 2024 at 13:36, Ravi Minnikanti <rminnikanti@marvell.com> wrot=
+e:
+>
+>
+> current env_set_default_vars() doesn't delete
+> var that are not in the imported env. hashtable
+> removes vars that are not in the imported
+> env but present in the current env only if H_NOCLEAR
+> flag is not set.
+>
+> This change is to avoid passing H_NOCLEAR flag if
+> specific vars are passed to env_set_default_vars()
+>
+> Without this change:
+> Marvell>> env default boot_mode
+> Marvell>>
+>
+> With the change:
+> Marvell>> env default boot_mode
+> WARNING: 'boot_mode' not in imported env, deleting it!
+>
+> Signed-off-by: rminnikanti <rminnikanti@marvell.com>
 
-If the cycle CSR is accessible, we get an output like:
+That should have your name at the start
 
-    => exception rdcycle
-    cycle = 0x41f7563de
+> ---
+> Changes in v2:
+> - Added env ut to test the scenario
+> - Updated doc usage/cmd/env.rst
+>
+> =3D> ut env
+> Running 5 environment tests
+> Test: env_test_attrs_lookup: attr.c
+> Test: env_test_attrs_lookup_regex: attr.c
+> Test: env_test_env_cmd: cmd_ut_env.c
+> Test: env_test_htab_deletes: hashtable.c
+> Test: env_test_htab_fill: hashtable.c
+> Failures: 0
+>
+>  doc/usage/cmd/env.rst |  4 +++-
+>  env/common.c          | 10 +++++++++-
+>  test/env/cmd_ut_env.c | 36 ++++++++++++++++++++++++++++++++++++
+>  3 files changed, 48 insertions(+), 2 deletions(-)
 
-If the cycle CSR is not accessible, we get an output like:
+Just some nits below
 
-    => exception rdcycle
-    Unhandled exception: Illegal instruction
+>
+> diff --git a/doc/usage/cmd/env.rst b/doc/usage/cmd/env.rst
+> index 9629f97ffc..9104c88525 100644
+> --- a/doc/usage/cmd/env.rst
+> +++ b/doc/usage/cmd/env.rst
+> @@ -79,7 +79,8 @@ The *env default* command resets the selected variables=
+ in the U-Boot
+>  environment to their default values.
+>
+>      var
+> -        list of variable name.
+> +        list of variable name. If variable is not part of default
 
-Put subcommands into alphabetical order in long help.
+list of variable names. If a variable is not ...
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- cmd/riscv/exception.c | 15 +++++++++++++--
- 1 file changed, 13 insertions(+), 2 deletions(-)
+> +        environment, it is deleted with a warning message on console.
+>      \-a
+>          all U-Boot environment.
+>      \-f
+> @@ -309,6 +310,7 @@ Delete environment variable in memory::
+>  Reset environment variable to default value, in memory::
+>
+>      =3D> env default bootcmd
+> +    =3D> env default ipaddr serverip
+>      =3D> env default -a
+>
+>  Save current environment in persistent storage::
+> diff --git a/env/common.c b/env/common.c
+> index 8d47d72605..2f783e3a69 100644
+> --- a/env/common.c
+> +++ b/env/common.c
+> @@ -401,7 +401,15 @@ int env_set_default_vars(int nvars, char * const var=
+s[], int flags)
+>          * Special use-case: import from default environment
+>          * (and use \0 as a separator)
+>          */
+> -       flags |=3D H_NOCLEAR | H_DEFAULT;
+> +
+> +       /*
 
-diff --git a/cmd/riscv/exception.c b/cmd/riscv/exception.c
-index 2b58b1c449c..16e335327f1 100644
---- a/cmd/riscv/exception.c
-+++ b/cmd/riscv/exception.c
-@@ -36,6 +36,14 @@ static int do_ialign16(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return CMD_RET_SUCCESS;
- }
- 
-+static int do_rdcycle(struct cmd_tbl *cmdtp, int flag, int argc,
-+		      char *const argv[])
-+{
-+	printf("cycle = 0x%lx\n", csr_read(CSR_CYCLE));
-+
-+	return CMD_RET_SUCCESS;
-+}
-+
- static int do_unaligned(struct cmd_tbl *cmdtp, int flag, int argc,
- 			char *const argv[])
- {
-@@ -62,6 +70,8 @@ static struct cmd_tbl cmd_sub[] = {
- 			 "", ""),
- 	U_BOOT_CMD_MKENT(ialign16, CONFIG_SYS_MAXARGS, 1, do_ialign16,
- 			 "", ""),
-+	U_BOOT_CMD_MKENT(rdcycle, CONFIG_SYS_MAXARGS, 1, do_rdcycle,
-+			 "", ""),
- 	U_BOOT_CMD_MKENT(unaligned, CONFIG_SYS_MAXARGS, 1, do_unaligned,
- 			 "", ""),
- 	U_BOOT_CMD_MKENT(undefined, CONFIG_SYS_MAXARGS, 1, do_undefined,
-@@ -74,7 +84,8 @@ U_BOOT_LONGHELP(exception,
- 	"  compressed - compressed instruction\n"
- 	"  ebreak     - breakpoint\n"
- 	"  ialign16   - 16 bit aligned instruction\n"
--	"  undefined  - illegal instruction\n"
--	"  unaligned  - load address misaligned\n");
-+	"  rdcycle    - read cycle CSR\n"
-+	"  unaligned  - load address misaligned\n"
-+	"  undefined  - illegal instruction\n");
- 
- #include <exception.h>
--- 
-2.45.2
+There is a trailing space on the end of that line. Be sure to check
+your patch with patman/checkpatch.pl
 
+> +        * When vars are passed remove variables that are not in
+> +        * the default environment.
+> +        */
+> +       if (!nvars)
+> +               flags |=3D H_NOCLEAR;
+> +
+> +       flags |=3D H_DEFAULT;
+>         return himport_r(&env_htab, default_environment,
+>                                 sizeof(default_environment), '\0',
+>                                 flags, 0, nvars, vars);
+> diff --git a/test/env/cmd_ut_env.c b/test/env/cmd_ut_env.c
+> index 13e0998341..99961311aa 100644
+> --- a/test/env/cmd_ut_env.c
+> +++ b/test/env/cmd_ut_env.c
+> @@ -9,6 +9,42 @@
+>  #include <test/suites.h>
+>  #include <test/ut.h>
+>
+> +static int env_test_env_cmd(struct unit_test_state *uts)
+> +{
+> +       console_record_reset_enable();
+> +       ut_assertok(run_command("setenv non_default_var1 1", 0));
+> +       ut_assert_console_end();
+> +
+> +       console_record_reset_enable();
+> +       ut_assertok(run_command("setenv non_default_var2 1", 0));
+> +       ut_assert_console_end();
+> +
+> +       console_record_reset_enable();
+> +       ut_assertok(run_command("env print non_default_var1", 0));
+> +       ut_assert_nextline("non_default_var1=3D1");
+> +       ut_assert_console_end();
+> +
+> +       console_record_reset_enable();
+> +       ut_assertok(run_command("env default non_default_var1 non_default=
+_var2", 0));
+> +       ut_assert_nextline("WARNING: 'non_default_var1' not in imported e=
+nv, deleting it!");
+> +       ut_assert_nextline("WARNING: 'non_default_var2' not in imported e=
+nv, deleting it!");
+> +       ut_assert_console_end();
+> +
+> +       console_record_reset_enable();
+> +       ut_asserteq(1, run_command("env exists non_default_var1", 0));
+> +       ut_assert_nextline_empty();
+
+You don't need that line. It means that the next line should exist,
+but be empty. In fact this exposes a bug in console checking which I
+will fix.
+
+> +       ut_assert_console_end();
+> +
+> +       console_record_reset_enable();
+> +       ut_asserteq(1, run_command("env exists non_default_var2", 0));
+> +       ut_assert_nextline_empty();
+
+same here
+
+> +       ut_assert_console_end();
+> +
+> +       return 0;
+> +}
+> +
+> +ENV_TEST(env_test_env_cmd, 0);
+
+Set the flags to UT_TESTF_CONSOLE_REC and you can drop all the
+console_record_reset_enable() calls above. Unfortunately many of the
+tests don't do this as the flag was added later.
+
+
+> +
+>  int do_ut_env(struct cmd_tbl *cmdtp, int flag, int argc, char *const arg=
+v[])
+>  {
+>         struct unit_test *tests =3D UNIT_TEST_SUITE_START(env_test);
+> --
+> 2.25.1
+>
+> Thanks,
+> Ravi
+>
+> On 8/9/24 08:58, Simon Glass wrote:
+> > Hi Ravi, On Fri, 9 Aug 2024 at 09:=E2=80=8A38, Ravi Minnikanti <rminnik=
+anti@=E2=80=8Amarvell.
+> > com> wrote: > > > current env_set_default_vars() doesn't delete > var t=
+hat are
+> > not in the imported env. hashtable > removes vars that are not in
+> >
+> >
+> > Hi Ravi,
+> >
+> > On Fri, 9 Aug 2024 at 09:38, Ravi Minnikanti <rminnikanti@marvell.com> =
+wrote:
+> >>
+> >>
+> >> current env_set_default_vars() doesn't delete
+> >> var that are not in the imported env. hashtable
+> >> removes vars that are not in the imported
+> >> env but present in the current env only if H_NOCLEAR
+> >> flag is not set.
+> >>
+> >> This change is to avoid passing H_NOCLEAR flag if
+> >> specific vars are passed to env_set_default_vars()
+> >>
+> >> Test:
+> >>
+> >> Without this change:
+> >> Marvell>> env default boot_mode
+> >> Marvell>>
+> >>
+> >> With the change:
+> >> Marvell>> env default boot_mode
+> >> WARNING: 'boot_mode' not in imported env, deleting it!
+> >>
+> >> Signed-off-by: rminnikanti <rminnikanti@marvell.com>
+> >> ---
+> >>  env/common.c | 10 +++++++++-
+> >>  1 file changed, 9 insertions(+), 1 deletion(-)
+> >
+> > Could you add to usage/environment.rst and also update the tests for
+> > this - test/env/ - I suppose your patch fixes a bug, but it is hard to
+> > figure out what it is supposed to do from the docs.
+> >
+> > See for example dm_test_acpi_cmd_set() for how to check output from a c=
+ommand.
+> >
+> >>
+> >> diff --git a/env/common.c b/env/common.c
+> >> index 8d47d72605..2f783e3a69 100644
+> >> --- a/env/common.c
+> >> +++ b/env/common.c
+> >> @@ -401,7 +401,15 @@ int env_set_default_vars(int nvars, char * const =
+vars[], int flags)
+> >>          * Special use-case: import from default environment
+> >>          * (and use \0 as a separator)
+> >>          */
+> >> -       flags |=3D H_NOCLEAR | H_DEFAULT;
+> >> +
+> >> +       /*
+> >> +        * When vars are passed remove variables that are not in
+> >> +        * the default environment.
+> >> +        */
+> >> +       if (!nvars)
+> >> +               flags |=3D H_NOCLEAR;
+> >> +
+> >> +       flags |=3D H_DEFAULT;
+> >>         return himport_r(&env_htab, default_environment,
+> >>                                 sizeof(default_environment), '\0',
+> >>                                 flags, 0, nvars, vars);
+> >> --
+> >> 2.25.1
+
+Regards,
+Simon
