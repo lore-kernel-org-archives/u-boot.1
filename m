@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BC25C3DA4A
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:54:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91D72C52D7B
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:55:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59A6F889B8;
+	by phobos.denx.de (Postfix) with ESMTP id BE7B08896B;
 	Sun, 11 Aug 2024 16:51:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R9iE5gSL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DaurIpEq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E32CE88996; Sun, 11 Aug 2024 16:51:25 +0200 (CEST)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id 8F5EF886F0; Sun, 11 Aug 2024 16:51:26 +0200 (CEST)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28BF588914
+ by phobos.denx.de (Postfix) with ESMTPS id C1F1988916
  for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:51:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-81fd520fee5so137992139f.2
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-81f94ce2272so139828239f.2
  for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:51:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723387881; x=1723992681; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723387882; x=1723992682; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PVvXVHTbA2Zq1QVem+6NFJnoHXC/rRntQ5PeI0eBbU0=;
- b=R9iE5gSLqBi/p2izNQ+KDzRrJWH3QXOWhaU3U2zpN56QDtfgN16b7GTHtOyh4H33KS
- xCJl/wbrnFyKvfZoAZJcDz5r4WATzwE+cSbqEBNo5fLEGHE1rKpFTOUf275gIww6XtuW
- 5eTF+cSDCwctjDMKBt8AiKt6U0f2bYzDqLHi4=
+ bh=yIkKBg9t8jTpP06N86JxD9EckB+xNKNG8PQsnI6APSg=;
+ b=DaurIpEqeaknTX6h6LFqBnb0A61PzgSugVv9XdN6hFNBRB2YD6vOv0Qurx5RPU1m0y
+ KYJj1xpU9M7Ur3INsOnc9CvD7fVUQ3Yf0oZNSs8fZAYHapJ+OxlOqYRMey6VPF/4sQsj
+ D2ZEgpwObTy4SAZoHfbLpxebZJVZS+oeYCyJo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723387881; x=1723992681;
+ d=1e100.net; s=20230601; t=1723387882; x=1723992682;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PVvXVHTbA2Zq1QVem+6NFJnoHXC/rRntQ5PeI0eBbU0=;
- b=QljjrnIie7VHhQMAGJOToAjIRexEx03l7AAWl61I4AzbkZbfeyfByQlBldYYUjdGuU
- b60IGD0Pgc9fH/hKtrpwu9BUgFWtQmcQZQjF1r3uU0z4TH0PoTqClDwcADQ1C8ihRo39
- zXDNCrbqlnC6RvyJqDKLv5tfjLgSROmTobgQxQqIxuXTgfbhSqB9chi1MPY3UHY0Dqem
- JeadkUkDLwYJ/znOZdjnWikt/ZODYcnWo2+MRa+fHHvl9b+dQ1g3EMiYOyPbWb97nse/
- /U+v2f46IjYNgcBO3fB9qWHpsRsQm0sExVSX+GGhBRiX53brSo/3vh6J2tvV7XoFAzHc
- sa/Q==
-X-Gm-Message-State: AOJu0YxeewmT/amPQEHQfUVY+hxxiqIS44G1cXnxVGHIk6n45QcnIvuc
- dJLx3f8/bUZXBiT9MtGYXLKRc/vZFniId0+ItxRE/ny+6kX7BDTuGp/FMmyivREc7fuhRiukv0U
+ bh=yIkKBg9t8jTpP06N86JxD9EckB+xNKNG8PQsnI6APSg=;
+ b=BJKzkKBPpXDIus3ghJRqIvNeqvssaZy2wg2bi+zU9d8yvGG3lK/DMELgg2a4w7Hxds
+ JxlT5sxEdHZwzFNfh78y1vdPtFb4drs5vP7GJs24DVMoLxyAG+cC/e66GCghPFNSFqU/
+ gebX/xO8OIyMN+vFxZaxrPhpRur+YnY5b9+Kb8ovkgXS8fl74aAZvm7guNDC0vvTIBql
+ ecg7g6uR7H2nbjTeO9eURbgtK8F5TDGhD/3rRruaatxz+XSlQoZchBjzUD0GKDGBgagH
+ L9JiTUq910KcHq8k24jZUAmUmkHufeevZeimjprWIwBRBYI+SA20Y9blNug0i5ThtpJT
+ k8qQ==
+X-Gm-Message-State: AOJu0YzPNsKIFcC+Fe2LSVA8Ib/hesb4MAvx8QUUyBjeGnqZF4M0Rs0w
+ ubt9g84SPa5BAY5EWViC9mhQsP35A120JokBN5elnOlCtCl7sDhLTY6FrRtfkif5rouIVaHU1ZM
  =
-X-Google-Smtp-Source: AGHT+IH364/QUa8yeugN1xefF/R4bJFZSdVa1FTe/bvqrTlOmXihvillfjNTOaY9xjM5YhtrqJAezQ==
-X-Received: by 2002:a05:6602:6001:b0:81e:23e8:8d4 with SMTP id
- ca18e2360f4ac-8225ee767a4mr1105543839f.6.1723387881523; 
- Sun, 11 Aug 2024 07:51:21 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF0iTRpYF97MOG9zGSp2Uk21nQ1Qgw20kT8eDTi7tA1RRRCAImZF31FyjZVC01O2oq/vfCz2w==
+X-Received: by 2002:a05:6602:6110:b0:81f:d4db:c7de with SMTP id
+ ca18e2360f4ac-8225eedb210mr786472739f.16.1723387882349; 
+ Sun, 11 Aug 2024 07:51:22 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
  8926c6da1cb9f-4ca769fbe17sm1076047173.101.2024.08.11.07.51.21
@@ -65,9 +65,9 @@ From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 10/18] fsl: mxc: Drop legacy I2c
-Date: Sun, 11 Aug 2024 08:50:39 -0600
-Message-Id: <20240811145047.4189460-11-sjg@chromium.org>
+Subject: [PATCH v2 11/18] i2c: Drop reference to SYS_I2C_INIT_BOARD
+Date: Sun, 11 Aug 2024 08:50:40 -0600
+Message-Id: <20240811145047.4189460-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240811145047.4189460-1-sjg@chromium.org>
 References: <20240811145047.4189460-1-sjg@chromium.org>
@@ -89,52 +89,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop some old code from the mxc_i2c and ddr/fsl drivers. This will allow
-removal of very old common I2C code.
+This is not now used by any boards, so drop it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- Leave pg_wcom alone as its boards were converted
+(no changes since v1)
 
- drivers/ddr/fsl/main.c | 3 +--
- drivers/i2c/mxc_i2c.c  | 1 +
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ doc/I2C_Edge_Conditions | 10 ++++------
+ drivers/i2c/soft_i2c.c  | 11 -----------
+ 2 files changed, 4 insertions(+), 17 deletions(-)
 
-diff --git a/drivers/ddr/fsl/main.c b/drivers/ddr/fsl/main.c
-index 31091bb4495..888dfb7ff33 100644
---- a/drivers/ddr/fsl/main.c
-+++ b/drivers/ddr/fsl/main.c
-@@ -111,7 +111,7 @@ static int ddr_i2c_read(DEV_TYPE *dev, unsigned int addr,
- #if CONFIG_IS_ENABLED(DM_I2C)
- 	ret = dm_i2c_read(dev, 0, buf, len);
- #else
--	ret = i2c_read(dev->chip, addr, alen, buf, len);
-+	ret = 0;
- #endif
+diff --git a/doc/I2C_Edge_Conditions b/doc/I2C_Edge_Conditions
+index f4a99687011..9ccb21c5092 100644
+--- a/doc/I2C_Edge_Conditions
++++ b/doc/I2C_Edge_Conditions
+@@ -31,12 +31,10 @@ Notes
+ !!!THIS IS AN UNDOCUMENTED I2C BUS BUG, NOT A AMCC 4xx BUG!!!
  
- 	return ret;
-@@ -162,7 +162,6 @@ static void __get_spd(generic_spd_eeprom_t *spd, u8 i2c_address)
- 	};
- 	dev = &ldev;
- 
--	i2c_set_bus_num(CONFIG_SYS_SPD_BUS_NUM);
- #endif
- 
- #ifdef CONFIG_SYS_FSL_DDR4
-diff --git a/drivers/i2c/mxc_i2c.c b/drivers/i2c/mxc_i2c.c
-index 84c0050eac0..2f3cb5908c9 100644
---- a/drivers/i2c/mxc_i2c.c
-+++ b/drivers/i2c/mxc_i2c.c
-@@ -620,6 +620,7 @@ int enable_i2c_clk(unsigned char enable, unsigned int i2c_num)
- 	__attribute__((weak, alias("__enable_i2c_clk")));
- 
- #if !CONFIG_IS_ENABLED(DM_I2C)
+ This reset edge condition could possibly be present in every I2C
+-controller and device available. For boards where a I2C bus reset
+-function can be implemented a i2c_init_board() function should be
+-provided and enabled by #define'ing CONFIG_SYS_I2C_INIT_BOARD in your
+-board's config file. Note that this is NOT necessary when using the
+-bit-banging I2C driver (common/soft_i2c.c) as this already includes
+-the I2C bus reset sequence.
++controller and device available.
 +
- /*
-  * Read data from I2C device
-  *
++Note that this problem does not happen when using the bit-banging I2C driver
++(common/soft_i2c.c) as this already includes the I2C bus reset sequence.
+ 
+ 
+ Many thanks to Bill Hunter for finding this serious BUG.
+diff --git a/drivers/i2c/soft_i2c.c b/drivers/i2c/soft_i2c.c
+index 89ddf821063..79f7a320502 100644
+--- a/drivers/i2c/soft_i2c.c
++++ b/drivers/i2c/soft_i2c.c
+@@ -107,16 +107,13 @@ DECLARE_GLOBAL_DATA_PTR;
+ /*-----------------------------------------------------------------------
+  * Local functions
+  */
+-#if !defined(CONFIG_SYS_I2C_INIT_BOARD)
+ static void  send_reset	(void);
+-#endif
+ static void  send_start	(void);
+ static void  send_stop	(void);
+ static void  send_ack	(int);
+ static int   write_byte	(uchar byte);
+ static uchar read_byte	(int);
+ 
+-#if !defined(CONFIG_SYS_I2C_INIT_BOARD)
+ /*-----------------------------------------------------------------------
+  * Send a reset sequence consisting of 9 clocks with the data signal high
+  * to clock any confused device back into an idle state.  Also send a
+@@ -144,7 +141,6 @@ static void send_reset(void)
+ 	send_stop();
+ 	I2C_TRISTATE;
+ }
+-#endif
+ 
+ /*-----------------------------------------------------------------------
+  * START: High -> Low on SDA while SCL is High
+@@ -277,12 +273,6 @@ static uchar read_byte(int ack)
+  */
+ static void soft_i2c_init(struct i2c_adapter *adap, int speed, int slaveaddr)
+ {
+-#if defined(CONFIG_SYS_I2C_INIT_BOARD)
+-	/* call board specific i2c bus reset routine before accessing the   */
+-	/* environment, which might be in a chip on that bus. For details   */
+-	/* about this problem see doc/I2C_Edge_Conditions.                  */
+-	i2c_init_board();
+-#else
+ 	/*
+ 	 * WARNING: Do NOT save speed in a static variable: if the
+ 	 * I2C routines are called before RAM is initialized (to read
+@@ -290,7 +280,6 @@ static void soft_i2c_init(struct i2c_adapter *adap, int speed, int slaveaddr)
+ 	 * system will crash.
+ 	 */
+ 	send_reset ();
+-#endif
+ }
+ 
+ /*-----------------------------------------------------------------------
 -- 
 2.34.1
 
