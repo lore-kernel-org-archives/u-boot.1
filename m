@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ED9BC52D7B
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:57:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA241C3DA4A
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 14:57:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2CA2888C2;
-	Sun, 11 Aug 2024 16:52:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2B8DD88896;
+	Sun, 11 Aug 2024 16:52:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Mxc5RS4t";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H22LxPDu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDCA6887E8; Sun, 11 Aug 2024 16:52:39 +0200 (CEST)
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
- [IPv6:2607:f8b0:4864:20::134])
+ id A3698889E2; Sun, 11 Aug 2024 16:52:40 +0200 (CEST)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 903B88885E
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:52:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 53C6988875
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 16:52:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x134.google.com with SMTP id
- e9e14a558f8ab-39b3e12754eso11984715ab.1
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:52:37 -0700 (PDT)
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-39b3f65b387so14949065ab.1
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 07:52:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723387956; x=1723992756; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723387957; x=1723992757; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ak8OpDqo0cB5My6CyHNGgaMHsy/FXCNcxcdaBj6scSk=;
- b=Mxc5RS4twBeHvGULF92Tq7laiNGRYRPETBSJrcjq4VWUiZMrNhxdSoBlEL1CkAOqah
- tZKGbnU0jus+Fll+WCtgibtKRQDBkTvC8qqQI58dbMF01cXQ8F/DuI32vClR02gMtABD
- BC+7Uw+iFARet9MuSyhRL9+iPWx7ZOyorYFN4=
+ bh=PgWBVMsTfftLFlwvDhcOJuEK4hUTgo7V5EPEbl+KdgI=;
+ b=H22LxPDuNPOf9uNZHOueu3v5x6eP41n2hjTWezuu0NPdIfqfY8bc3ci4admnSqNgQ/
+ hKINs0uR8zupzrSgSUhhzmK9pOowoZnSQ4QmJzraaebs3Nuvl7l/d/j7aiQ2HG/WtaP5
+ UEtLQo5LwJmY/elssU18XMdFeLur41zQuqX2E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723387956; x=1723992756;
+ d=1e100.net; s=20230601; t=1723387957; x=1723992757;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ak8OpDqo0cB5My6CyHNGgaMHsy/FXCNcxcdaBj6scSk=;
- b=FySbU4RlWXuQfpfOfcsS0OxCJtOimqVJSJG9JjWEnlr5Db5YgBxJD+jZBtYa+lM4P4
- iiNR+8kGJjd7pJ12F8ESTV83j5UqiwFVkCT1DVVruwZdBXIupRp/587zT6Rfx2ZjO98B
- GXDyrjm27HVcxwfqjN6ye6S9674Ntmz5sCUxFAtv7bqUqoTNxozKqDwXAButE6YKN/E1
- +70YQLI0zQBoq1L9Q37Ls/R8cKPlrLlhkQCVf1+iwDSF1CcvbvlWsvKB5eOFKLI1vDIX
- g4rSBxq7L3WLtT5uN3YzmdKh/f01Y0p0WTEACdwU39czy85xl950MdP/7yAMXYwJwKeY
- XKvg==
-X-Gm-Message-State: AOJu0Yz6XnJRyDBNui39rXAmMtU7rsOuiF9KdpeMo8xEZ6DA8DAnFmvP
- 3oZTVwyyiLxDFNAqoZ3eNVKUE5Nob1lCWSTHoqf+CVwiuBM9aunYhgA4NFcDViGY1TKYhbJX0Fo
+ bh=PgWBVMsTfftLFlwvDhcOJuEK4hUTgo7V5EPEbl+KdgI=;
+ b=ppm8K+u9inmC8Dxj8ttHBE3vLyxP5TMxVFq+MMXKc+AWLjScmQnDRxqrSiyLOm1kbf
+ LhAiydloEOsLg2vaZ9+jmKEJbfhlXS5E3nsaODOdf8ZcDwDwAEvby67TbDdedWW2SY4O
+ pjFq8+PYirsGyRIJluFa8ed9ZCoPBMe07UBlW0Ln10/Owr+oGN+r7mjp11FKlRgBv0kq
+ WzMhHURyMA7EwQQm6Zy3Z/uF7mAlE54VwNBIT1tOtRJVnWz5Go7qS897FjAl9OhhQWnB
+ AoWD6axc7B4B1k5ad1iRt2XMv1Qh/soqxqfiCgGp3S3GPaNgYkHTVag2L0SnlfpyrwYX
+ MWQg==
+X-Gm-Message-State: AOJu0Yyhr9XIg+EuKMoX3g5PcW/dxMfQg3YY3vcxpC8atpVRpcBkgI5Y
+ lVzidEQotberBQadoiTxiVwhTDGhch7hXVjh21AhQnz6Xqr+LN91x8IKYBjexsEVJlox8niQf3A
  =
-X-Google-Smtp-Source: AGHT+IFpyKwAQ5dYYbdFwTaKrHT+aLKBIp1gY+RBPcn2HOgwJwJqZ0XrwEOHLMSpxBVFoXXBtm0DuA==
-X-Received: by 2002:a05:6e02:1e0a:b0:39b:211f:7bb6 with SMTP id
- e9e14a558f8ab-39b81331bf7mr75390585ab.7.1723387956149; 
+X-Google-Smtp-Source: AGHT+IFvqy3c70TkrRUT5kouKOKtQ87krT+oJc8jzL1hxoS38vUXFYV1LLWsUeBet3MvjRQ5x/ye2A==
+X-Received: by 2002:a05:6e02:1e01:b0:39a:e776:6c5 with SMTP id
+ e9e14a558f8ab-39b748520b1mr97434885ab.1.1723387956966; 
  Sun, 11 Aug 2024 07:52:36 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39c30a9a2c8sm11195855ab.43.2024.08.11.07.52.35
+ e9e14a558f8ab-39c30a9a2c8sm11195855ab.43.2024.08.11.07.52.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Aug 2024 07:52:35 -0700 (PDT)
+ Sun, 11 Aug 2024 07:52:36 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 06/40] bootstd: Create a function to reset USB
-Date: Sun, 11 Aug 2024 08:51:35 -0600
-Message-Id: <20240811145209.4191404-7-sjg@chromium.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>
+Subject: [PATCH v3 07/40] usb: Drop old non-DM code
+Date: Sun, 11 Aug 2024 08:51:36 -0600
+Message-Id: <20240811145209.4191404-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240811145209.4191404-1-sjg@chromium.org>
 References: <20240811145209.4191404-1-sjg@chromium.org>
@@ -90,136 +91,196 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set up a function for this, since it needs to be used from multiple test
-files.
+The driver model deadline for USB was in 2019, so drop the old USB
+keyboard code, to avoid needing to deal with the extra code path.
 
-This test file is only used on sandbox, where USB is enabled, so drop
-the local declaration of usb_started
+Drop the unnecessary #ifdef around USB_KBD_BOOT_REPORT_SIZE while we
+are here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v3:
-- Include the usb.h header file in all cases
+(no changes since v1)
 
- test/boot/bootdev.c        | 19 ++++++-------------
- test/boot/bootstd_common.c |  6 ++++++
- test/boot/bootstd_common.h |  8 ++++++++
- 3 files changed, 20 insertions(+), 13 deletions(-)
+ cmd/usb.c           | 20 --------------
+ common/usb_kbd.c    | 67 ---------------------------------------------
+ drivers/usb/Kconfig |  3 +-
+ include/usb.h       |  8 ------
+ 4 files changed, 2 insertions(+), 96 deletions(-)
 
-diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
-index 1bf5929c396..de16a51956d 100644
---- a/test/boot/bootdev.c
-+++ b/test/boot/bootdev.c
-@@ -16,13 +16,6 @@
- #include <test/ut.h>
- #include "bootstd_common.h"
+diff --git a/cmd/usb.c b/cmd/usb.c
+index 16c081bf128..13a2996c1f0 100644
+--- a/cmd/usb.c
++++ b/cmd/usb.c
+@@ -560,17 +560,6 @@ static int do_usbboot(struct cmd_tbl *cmdtp, int flag, int argc,
+ }
+ #endif /* CONFIG_USB_STORAGE */
  
--/* Allow reseting the USB-started flag */
--#if defined(CONFIG_USB_HOST) || defined(CONFIG_USB_GADGET)
--extern bool usb_started;
--#else
--#include <usb.h>
+-static int do_usb_stop_keyboard(int force)
+-{
+-#if !defined CONFIG_DM_USB && defined CONFIG_USB_KEYBOARD
+-	if (usb_kbd_deregister(force) != 0) {
+-		printf("USB not stopped: usbkbd still using USB\n");
+-		return 1;
+-	}
 -#endif
+-	return 0;
+-}
 -
- /* Check 'bootdev list' command */
- static int bootdev_test_cmd_list(struct unit_test_state *uts)
+ static void do_usb_start(void)
  {
-@@ -201,7 +194,7 @@ static int bootdev_test_order(struct unit_test_state *uts)
- 	test_set_skip_delays(true);
+ 	bootstage_mark_name(BOOTSTAGE_ID_USB_START, "usb_start");
+@@ -583,11 +572,6 @@ static void do_usb_start(void)
+ 	/* try to recognize storage devices immediately */
+ 	usb_stor_curr_dev = usb_stor_scan(1);
+ # endif
+-#ifndef CONFIG_DM_USB
+-# ifdef CONFIG_USB_KEYBOARD
+-	drv_usb_kbd_init();
+-# endif
+-#endif /* !CONFIG_DM_USB */
+ }
  
- 	/* Start up USB which gives us three additional bootdevs */
--	usb_started = false;
-+	bootstd_reset_usb();
- 	ut_assertok(run_command("usb start", 0));
+ #ifdef CONFIG_DM_USB
+@@ -633,8 +617,6 @@ static int do_usb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
  
- 	/*
-@@ -317,7 +310,7 @@ static int bootdev_test_prio(struct unit_test_state *uts)
- 	test_set_eth_enable(false);
- 
- 	/* Start up USB which gives us three additional bootdevs */
--	usb_started = false;
-+	bootstd_reset_usb();
- 	ut_assertok(run_command("usb start", 0));
- 
- 	ut_assertok(bootstd_test_drop_bootdev_order(uts));
-@@ -357,7 +350,7 @@ static int bootdev_test_hunter(struct unit_test_state *uts)
- {
- 	struct bootstd_priv *std;
- 
--	usb_started = false;
-+	bootstd_reset_usb();
- 	test_set_skip_delays(true);
- 
- 	/* get access to the used hunters */
-@@ -398,7 +391,7 @@ static int bootdev_test_cmd_hunt(struct unit_test_state *uts)
- 	struct bootstd_priv *std;
- 
- 	test_set_skip_delays(true);
--	usb_started = false;
-+	bootstd_reset_usb();
- 
- 	/* get access to the used hunters */
- 	ut_assertok(bootstd_get_priv(&std));
-@@ -527,7 +520,7 @@ BOOTSTD_TEST(bootdev_test_bootable, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
- /* Check hunting for bootdev of a particular priority */
- static int bootdev_test_hunt_prio(struct unit_test_state *uts)
- {
--	usb_started = false;
-+	bootstd_reset_usb();
- 	test_set_skip_delays(true);
- 
- 	console_record_reset_enable();
-@@ -556,7 +549,7 @@ static int bootdev_test_hunt_label(struct unit_test_state *uts)
- 	struct bootstd_priv *std;
- 	int mflags;
- 
--	usb_started = false;
-+	bootstd_reset_usb();
- 
- 	/* get access to the used hunters */
- 	ut_assertok(bootstd_get_priv(&std));
-diff --git a/test/boot/bootstd_common.c b/test/boot/bootstd_common.c
-index e50539500a0..ff8ed2303b3 100644
---- a/test/boot/bootstd_common.c
-+++ b/test/boot/bootstd_common.c
-@@ -11,6 +11,7 @@
- #include <dm.h>
- #include <memalign.h>
- #include <mmc.h>
-+#include <usb.h>
- #include <linux/log2.h>
- #include <test/suites.h>
- #include <test/ut.h>
-@@ -88,6 +89,11 @@ int bootstd_test_check_mmc_hunter(struct unit_test_state *uts)
+ 	if (strncmp(argv[1], "reset", 5) == 0) {
+ 		printf("resetting USB...\n");
+-		if (do_usb_stop_keyboard(1) != 0)
+-			return 1;
+ 		usb_stop();
+ 		do_usb_start();
+ 		return 0;
+@@ -642,8 +624,6 @@ static int do_usb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	if (strncmp(argv[1], "stop", 4) == 0) {
+ 		if (argc != 2)
+ 			console_assign(stdin, "serial");
+-		if (do_usb_stop_keyboard(0) != 0)
+-			return 1;
+ 		printf("stopping USB..\n");
+ 		usb_stop();
+ 		return 0;
+diff --git a/common/usb_kbd.c b/common/usb_kbd.c
+index f3b4a3c94e6..b834b2f703d 100644
+--- a/common/usb_kbd.c
++++ b/common/usb_kbd.c
+@@ -643,71 +643,6 @@ static int probe_usb_keyboard(struct usb_device *dev)
  	return 0;
  }
  
-+void bootstd_reset_usb(void)
-+{
-+	usb_started = false;
-+}
-+
- int do_ut_bootstd(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+-#if !CONFIG_IS_ENABLED(DM_USB)
+-/* Search for keyboard and register it if found. */
+-int drv_usb_kbd_init(void)
+-{
+-	int error, i;
+-
+-	debug("%s: Probing for keyboard\n", __func__);
+-	/* Scan all USB Devices */
+-	for (i = 0; i < USB_MAX_DEVICE; i++) {
+-		struct usb_device *dev;
+-
+-		/* Get USB device. */
+-		dev = usb_get_dev_index(i);
+-		if (!dev)
+-			break;
+-
+-		if (dev->devnum == -1)
+-			continue;
+-
+-		error = probe_usb_keyboard(dev);
+-		if (!error)
+-			return 1;
+-		if (error && error != -ENOENT)
+-			return error;
+-	}
+-
+-	/* No USB Keyboard found */
+-	return -1;
+-}
+-
+-/* Deregister the keyboard. */
+-int usb_kbd_deregister(int force)
+-{
+-#if CONFIG_IS_ENABLED(SYS_STDIO_DEREGISTER)
+-	struct stdio_dev *dev;
+-	struct usb_device *usb_kbd_dev;
+-	struct usb_kbd_pdata *data;
+-
+-	dev = stdio_get_by_name(DEVNAME);
+-	if (dev) {
+-		usb_kbd_dev = (struct usb_device *)dev->priv;
+-		data = usb_kbd_dev->privptr;
+-#if CONFIG_IS_ENABLED(CONSOLE_MUX)
+-		if (iomux_replace_device(stdin, DEVNAME, force ? "nulldev" : ""))
+-			return 1;
+-#endif
+-		if (stdio_deregister_dev(dev, force) != 0)
+-			return 1;
+-#ifdef CONFIG_SYS_USB_EVENT_POLL_VIA_INT_QUEUE
+-		destroy_int_queue(usb_kbd_dev, data->intq);
+-#endif
+-		free(data->new);
+-		free(data);
+-	}
+-
+-	return 0;
+-#else
+-	return 1;
+-#endif
+-}
+-
+-#endif
+-
+-#if CONFIG_IS_ENABLED(DM_USB)
+-
+ static int usb_kbd_probe(struct udevice *dev)
  {
- 	struct unit_test *tests = UNIT_TEST_SUITE_START(bootstd_test);
-diff --git a/test/boot/bootstd_common.h b/test/boot/bootstd_common.h
-index 4a126e43ff4..e29036c897c 100644
---- a/test/boot/bootstd_common.h
-+++ b/test/boot/bootstd_common.h
-@@ -53,4 +53,12 @@ int bootstd_setup_for_tests(void);
-  */
- int bootstd_test_check_mmc_hunter(struct unit_test_state *uts);
+ 	struct usb_device *udev = dev_get_parent_priv(dev);
+@@ -788,5 +723,3 @@ static const struct usb_device_id kbd_id_table[] = {
+ };
  
-+/**
-+ * bootstd_reset_usb() - Reset the USB subsystem
-+ *
-+ * Resets USB so that it can be started (and scanning) again. This is useful in
-+ * tests which need to use USB.
-+ */
-+void bootstd_reset_usb(void);
-+
+ U_BOOT_USB_DEVICE(usb_kbd, kbd_id_table);
+-
+-#endif
+diff --git a/drivers/usb/Kconfig b/drivers/usb/Kconfig
+index a972d87c7ad..311aaa7e67f 100644
+--- a/drivers/usb/Kconfig
++++ b/drivers/usb/Kconfig
+@@ -99,7 +99,8 @@ config USB_STORAGE
+ 
+ config USB_KEYBOARD
+ 	bool "USB Keyboard support"
+-	select DM_KEYBOARD if DM_USB
++	depends on DM_USB
++	select DM_KEYBOARD
+ 	select SYS_STDIO_DEREGISTER
+ 	---help---
+ 	  Say Y here if you want to use a USB keyboard for U-Boot command line
+diff --git a/include/usb.h b/include/usb.h
+index fcbe2146f7d..e37f853482c 100644
+--- a/include/usb.h
++++ b/include/usb.h
+@@ -250,20 +250,12 @@ int usb_host_eth_scan(int mode);
+ 
  #endif
+ 
+-#ifdef CONFIG_USB_KEYBOARD
+-
+ /*
+  * USB Keyboard reports are 8 bytes in boot protocol.
+  * Appendix B of HID Device Class Definition 1.11
+  */
+ #define USB_KBD_BOOT_REPORT_SIZE 8
+ 
+-int drv_usb_kbd_init(void);
+-int usb_kbd_deregister(int force);
+-
+-#endif
+-/* routines */
+-
+ /*
+  * usb_init() - initialize the USB Controllers
+  *
 -- 
 2.34.1
 
