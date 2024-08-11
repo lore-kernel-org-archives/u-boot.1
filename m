@@ -4,95 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E52F0C52D7C
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 11:01:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15559C52D7C
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 12:29:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE3A088677;
-	Sun, 11 Aug 2024 13:01:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 4DCDB88581;
+	Sun, 11 Aug 2024 14:29:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="A35Kq/KK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E2VNB6So";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8344F881BA; Sun, 11 Aug 2024 13:01:23 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 419AE88247; Sun, 11 Aug 2024 14:29:37 +0200 (CEST)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96FB7885C5
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 13:01:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9FAF88247
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 14:29:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
- [209.85.208.198])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id D80AE401AC
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 11:01:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1723374077;
- bh=Oval9tyHnY/1xGNWJgiykGFFKsB+sLh1aczU0qyIuMI=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=A35Kq/KKD6EceJno1Zt/G0HUETu4wNS6flBSPvtcoHGRoOjypashn8BI9IKMe5G6e
- smRBq5kBlzR2DD31BvtPshCJ0vUyl8+bgRCOzSi17wf8uiPrMWuMiOxua63jDJnz0b
- +oA0H6fucaX/4bvcy4ZH2P67+8d0xw5TAmFs0v6negoaGbDz1mNFMY4Fw80l5JBPwy
- j+9Qu1shW5fDpbPcZrPSIhZygkgRiZQ54yWW9yzq32wsuDMX/kv1THR/XStaZq2ohB
- tB3m9uyuKhGu1oDuU/BXN4OK8iRC8pcpGzi5lk8Tct3svwfDQaw7pzH0PBPTZs97NA
- sLwdYXmmITzMw==
-Received: by mail-lj1-f198.google.com with SMTP id
- 38308e7fff4ca-2f1752568cfso41223941fa.1
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 04:01:17 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-81fd925287eso135819439f.3
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 05:29:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1723379373; x=1723984173; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=P2Keq315OsLMaqqPozdTtikMCrhXKHSvHPrh56RyXoA=;
+ b=E2VNB6SoztrPBMqnVtM0isX+FTe2kwDE+RPyNsYm3wej9t2LcfrCrJlOm8RK5dUv24
+ 2FfUjSbd++BJfNymXQmzRNHb3/l/roI7zSThzKvJMjSFAwOk/5zuX6MAlP0B3wfPBeVj
+ RtwJiRTjAo5i5b4E6L8GvrIpDTRJkO1611gKI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723374076; x=1723978876;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Oval9tyHnY/1xGNWJgiykGFFKsB+sLh1aczU0qyIuMI=;
- b=q0DVaV43JXZgLsaNYn3I8n5Uby20KYbsoz0F1RlHRAgRUr80jJ4zsRsNmLz/x2Dv3E
- u3SO0FsfkL4X2GuzO33CGT/KAre8aIJ5RiWeUlUrt027xXF4Pmg/fbOtHnO4705iC3tJ
- 7D/zFGXBu/SR3bsCJcGiCZEGbIUAIMJGUIeQl2Ibcnne1KA66OGI36dvVoEWtUj0g7/y
- 3t9VoGL6lrGRMMwyZc9aeaWUNEBF8RkC8HrpYGqHYtEl99xQzVB027XKg95qE2edoko7
- 1WFQGz3f6zC5wm+wi+rjBFUdxn6ontEjg1fL5+1mgU4Ezhdk6HTRsIC56W1r0ZNedw50
- HX3A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUZIFR8kIvEsaROBTZ5mwdWXAn93pDamPo8mZSYNAwchWSPL6K74OrxsPSfAXaqfqZdudDpqFZsP1LDf0886eGYOBlzgw==
-X-Gm-Message-State: AOJu0YyE+T8/Itgk1WDpsNUejkxtB646XtDR4XRCRLJbFELaEarmG6B0
- WsAOBGBMNXIUbR62L2h/6678JrWfCIvCKg8ftmPuE/vsO6HN8JYeSgpNoonMdE/P0ktZbabcpCn
- +taM476qzP3wOixmze/eqDq4i7SAckX7qUarwsg1S48R+OdVyoFruXZ5PDgbHRvsSunE=
-X-Received: by 2002:a2e:a587:0:b0:2ef:22a4:6415 with SMTP id
- 38308e7fff4ca-2f1a6d269a2mr54843201fa.28.1723374076158; 
- Sun, 11 Aug 2024 04:01:16 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHKp2koRnOKLozKwyDef8J0uj3B7MGUsNRG679h1rtwG2mq68Uk3wkvtDlPlqJTEpjaz4jLTA==
-X-Received: by 2002:a2e:a587:0:b0:2ef:22a4:6415 with SMTP id
- 38308e7fff4ca-2f1a6d269a2mr54842791fa.28.1723374075345; 
- Sun, 11 Aug 2024 04:01:15 -0700 (PDT)
-Received: from localhost.localdomain
- (ip-178-202-041-098.um47.pools.vodafone-ip.de. [178.202.41.98])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36e4cfee31fsm4604568f8f.47.2024.08.11.04.01.14
+ d=1e100.net; s=20230601; t=1723379373; x=1723984173;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=P2Keq315OsLMaqqPozdTtikMCrhXKHSvHPrh56RyXoA=;
+ b=dg+WTzzPvFUURLTylc3VyDPLVinJRDgxLLWL/gFpXOA2j6MMYGh3Kx/0LtjwU/UWNu
+ 3Z1EUGqEZuc+wxR2PeZilAlA+MwbDq977FY6+k3/jalpaocfK23EJ7amlVbqGux8R7a6
+ xm/Irmh4C7Rk8mQei0IugGnH8q298bvUsXJSKrXJXzpPGQL6B7AP9w5wiU1ETAYd3T+8
+ hbU0rDccDze2wG1pxKAvew5LZk2XjDDWSL+dlhkTemVPzwjU6eIYjtPi7dim8+YCVs2Y
+ wn1JUG1FSvay9rKq3vx2DeqIF7PIUah1UQ+fBIwVaoky0xynKRCWPQfpZRhr4Aa//M6E
+ jgVw==
+X-Gm-Message-State: AOJu0Yz+iYTvppQeZ/ZO/H72g6WNgJbjhraWzykQW4TYx7hpMwv6c64D
+ qCI576qeQoJu1XI/EnlrKEX8a9pKDb17O+m22IR/0dYptaXRbBucUo8Co3yRoucUvAwi4IDWWF8
+ =
+X-Google-Smtp-Source: AGHT+IFm+V0hqEFSoFFCc98t/L0FJvuZexWrJx6qTuNtwhKKYkFJI2sCwcNBK0d2lh1OuAg80q+BLQ==
+X-Received: by 2002:a05:6602:13d2:b0:81f:94cd:7600 with SMTP id
+ ca18e2360f4ac-8225eec5836mr994676939f.13.1723379373415; 
+ Sun, 11 Aug 2024 05:29:33 -0700 (PDT)
+Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
+ [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4ca76940448sm1017935173.45.2024.08.11.05.29.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Aug 2024 04:01:14 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Kongyang Liu <seashell11234455@gmail.com>,
- Randolph <randolph@andestech.com>, Michal Simek <michal.simek@amd.com>,
- =?UTF-8?q?=C5=81ukasz=20Stelmach?= <l.stelmach@samsung.com>,
- Yu Chien Peter Lin <peterlin@andestech.com>,
- Ben Dooks <ben.dooks@codethink.co.uk>,
- Samuel Holland <samuel@sholland.org>,
- Dan Carpenter <dan.carpenter@linaro.org>, u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/2] riscv: allow to enable SHOW_REGS in main U-Boot only
-Date: Sun, 11 Aug 2024 13:01:03 +0200
-Message-ID: <20240811110104.143714-2-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240811110104.143714-1-heinrich.schuchardt@canonical.com>
-References: <20240811110104.143714-1-heinrich.schuchardt@canonical.com>
+ Sun, 11 Aug 2024 05:29:33 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Peng Fan <peng.fan@nxp.com>, huang lin <hl@rock-chips.com>
+Subject: [PATCH v3 00/15] spl: mmc: Some tweaks for SPL, particularly with MMC
+Date: Sun, 11 Aug 2024 06:29:09 -0600
+Message-Id: <20240811122924.4035982-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -111,74 +90,230 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To minimize SPL size it is reasonable to disable SHOW_REGS. For main U-Boot
-the size restrictions are much more relaxed.
+This series includes various minor fixes and tweaks found when trying
+to reduce the size of MMC code in SPL.
 
-* Provide separate Kconfig symbols for SPL and main U-Boot.
-* Add a help text.
+Changes in v3:
+- Keep hex prefix on values which currently have it
+- Fix up the second parts of the 'mmc%d busy' log_warning()
+- Restore the original error message for configuring DLL
+- Fix 'enver' typo while we are here
+- Put enhanced size back to decimal
+- Drop unnecessary braces around 'Card did not respond' message
+- Drop conditions on SPL_LOAD_BLOCK
+- Drop bad condition on SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION_TYPE
+- Rebase on -next
+- Rebase to -next
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- arch/riscv/Kconfig          | 12 ++++++++++++
- arch/riscv/lib/interrupts.c |  7 +++----
- 2 files changed, 15 insertions(+), 4 deletions(-)
+Changes in v2:
+- Drop unused constants from spl.c file
+- Avoid changing comment
+- Various updates to log messages
+- Drop an unnecessary cast
+- Fix up log_syslog.c too
+- Update commit message to mention the runtime impact
+- Leave assert() alone since it is only compiled in with LOG_DEBUG
+- Update 'return ret' to 'return 0' when ret is known to be 0
+- Use uint for arg to spl_mmc_get_device_index()
 
-diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-index fa3b016c527..66cd512b23f 100644
---- a/arch/riscv/Kconfig
-+++ b/arch/riscv/Kconfig
-@@ -438,6 +438,18 @@ config AVAILABLE_HARTS
- 
- config SHOW_REGS
- 	bool "Show registers on unhandled exception"
-+	help
-+	  By default only the program counter and the return address register
-+	  are shown in crash dumps. Enable this symbol to show all registers in
-+	  main U-Boot.
-+
-+config SPL_SHOW_REGS
-+	bool "In SPL show registers on unhandled exception"
-+	depends on SPL
-+	help
-+	  By default only the program counter and the return address register
-+	  are shown in crash dumps. Enable this symbol to show all registers in
-+	  SPL.
- 
- config RISCV_PRIV_1_9
- 	bool "Use version 1.9 of the RISC-V priviledged specification"
-diff --git a/arch/riscv/lib/interrupts.c b/arch/riscv/lib/interrupts.c
-index f9a1428a486..714cc92d03e 100644
---- a/arch/riscv/lib/interrupts.c
-+++ b/arch/riscv/lib/interrupts.c
-@@ -34,9 +34,8 @@ static void show_efi_loaded_images(uintptr_t epc)
- 	efi_print_image_infos((void *)epc);
- }
- 
--static void show_regs(struct pt_regs *regs)
-+static void __maybe_unused show_regs(struct pt_regs *regs)
- {
--#ifdef CONFIG_SHOW_REGS
- 	printf("\nSP:  " REG_FMT " GP:  " REG_FMT " TP:  " REG_FMT "\n",
- 	       regs->sp, regs->gp, regs->tp);
- 	printf("T0:  " REG_FMT " T1:  " REG_FMT " T2:  " REG_FMT "\n",
-@@ -57,7 +56,6 @@ static void show_regs(struct pt_regs *regs)
- 	       regs->s10, regs->s11, regs->t3);
- 	printf("T4:  " REG_FMT " T5:  " REG_FMT " T6:  " REG_FMT "\n",
- 	       regs->t4, regs->t5, regs->t6);
--#endif
- }
- 
- static void __maybe_unused show_backtrace(struct pt_regs *regs)
-@@ -157,7 +155,8 @@ static void _exit_trap(ulong code, ulong epc, ulong tval, struct pt_regs *regs)
- 		printf("EPC: " REG_FMT " RA: " REG_FMT " reloc adjusted\n",
- 		       epc - gd->reloc_off, regs->ra - gd->reloc_off);
- 
--	show_regs(regs);
-+	if (CONFIG_IS_ENABLED(SHOW_REGS))
-+		show_regs(regs);
- 	if (CONFIG_IS_ENABLED(FRAMEPOINTER))
- 		show_backtrace(regs);
- 	show_code(epc);
+Simon Glass (15):
+  configs: Resync with savedefconfig
+  rockchip: Move the default timer init to a common file
+  spl: Correct use of CMD_BOOTI and CMD_BOOTZ
+  spl: Remove some #ifdefs in spl_parse_image_header()
+  spl: Remove remaining #ifdef in spl_parse_image_header()
+  mmc: Use logging instead of printf()
+  mmc: Use logging instead of pr_err()
+  log: Avoid including function names by default
+  spl: mmc: Drop checks for CONFIG_SPL_LIBCOMMON_SUPPORT
+  spl: mmc: Handle error codes consistently
+  spl: mmc: Adjust args of spl_mmc_find_device()
+  spl: mmc: Try to clean up raw-mode options
+  spl: Use unified inline functions for spl_load_info
+  spl: Create a function to init spl_load_info
+  blk: Correct comment for blk_get_devnum_by_uclass_idname()
+
+ arch/arm/include/asm/arch-rockchip/timer.h    |   3 +
+ arch/arm/mach-imx/imx8m/soc.c                 |   2 +
+ arch/arm/mach-imx/spl_imx_romapi.c            |  27 +--
+ arch/arm/mach-rockchip/Makefile               |   4 +-
+ arch/arm/mach-rockchip/spl.c                  |  28 +--
+ arch/arm/mach-rockchip/spl_common.c           |  36 ++++
+ arch/arm/mach-rockchip/tpl.c                  |  30 +---
+ arch/arm/mach-sunxi/spl_spi_sunxi.c           |   3 +-
+ arch/sandbox/cpu/spl.c                        |   5 +-
+ .../imx8mp_rsb3720a1/imx8mp_rsb3720a1.c       |   4 +-
+ common/log_console.c                          |   4 +-
+ common/log_syslog.c                           |   2 +-
+ common/spl/Kconfig                            |  54 +++---
+ common/spl/spl.c                              |  30 ++--
+ common/spl/spl_blk_fs.c                       |   9 +-
+ common/spl/spl_ext.c                          |   3 +-
+ common/spl/spl_fat.c                          |  10 +-
+ common/spl/spl_mmc.c                          | 159 ++++++++----------
+ common/spl/spl_nand.c                         |   4 +-
+ common/spl/spl_net.c                          |   3 +-
+ common/spl/spl_nor.c                          |   6 +-
+ common/spl/spl_ram.c                          |   3 +-
+ common/spl/spl_semihosting.c                  |   4 +-
+ common/spl/spl_spi.c                          |   4 +-
+ common/spl/spl_ymodem.c                       |   4 +-
+ configs/am335x_guardian_defconfig             |   2 +-
+ configs/am335x_pdu001_defconfig               |   2 +-
+ configs/am3517_evm_defconfig                  |   2 +-
+ configs/am62ax_evm_a53_defconfig              |   1 +
+ configs/am62ax_evm_r5_defconfig               |   1 +
+ configs/am62px_evm_a53_defconfig              |   5 +-
+ configs/am62px_evm_r5_defconfig               |   1 +
+ configs/am62x_beagleplay_a53_defconfig        |   1 +
+ configs/am62x_beagleplay_r5_defconfig         |   1 +
+ configs/am62x_evm_a53_defconfig               |   1 +
+ configs/am62x_evm_r5_defconfig                |   1 +
+ configs/am64x_evm_a53_defconfig               |   7 +-
+ configs/am64x_evm_r5_defconfig                |   1 +
+ configs/am65x_evm_a53_defconfig               |   1 +
+ configs/am65x_evm_r5_defconfig                |   1 +
+ configs/brppt2_defconfig                      |   2 +-
+ configs/brsmarc1_defconfig                    |   2 +-
+ configs/cgtqmx8_defconfig                     |   1 +
+ configs/chromebit_mickey_defconfig            |   2 +-
+ configs/chromebook_jerry_defconfig            |   2 +-
+ configs/chromebook_minnie_defconfig           |   2 +-
+ configs/chromebook_speedy_defconfig           |   2 +-
+ configs/ci20_mmc_defconfig                    |   1 +
+ configs/da850evm_defconfig                    |   2 +-
+ configs/da850evm_nand_defconfig               |   2 +-
+ configs/deneb_defconfig                       |   1 +
+ configs/display5_defconfig                    |   2 +-
+ configs/display5_factory_defconfig            |   2 +-
+ configs/draco-rastaban_defconfig              |   2 +-
+ configs/draco-thuban_defconfig                |   2 +-
+ .../gardena-smart-gateway-at91sam_defconfig   |   2 +-
+ configs/giedi_defconfig                       |   1 +
+ configs/imx28_xea_defconfig                   |   1 +
+ configs/imx28_xea_sb_defconfig                |   1 +
+ configs/imx6q_logic_defconfig                 |   2 +-
+ configs/imx8mm-cl-iot-gate-optee_defconfig    |   1 +
+ configs/imx8mm-cl-iot-gate_defconfig          |   1 +
+ configs/imx8mm-icore-mx8mm-ctouch2_defconfig  |   1 +
+ configs/imx8mm-icore-mx8mm-edimm2.2_defconfig |   1 +
+ configs/imx8mm-mx8menlo_defconfig             |   1 +
+ configs/imx8mm-phygate-tauri-l_defconfig      |   1 +
+ configs/imx8mm_beacon_defconfig               |   1 +
+ configs/imx8mm_beacon_fspi_defconfig          |   1 +
+ configs/imx8mm_data_modul_edm_sbc_defconfig   |   1 +
+ configs/imx8mm_evk_defconfig                  |   1 +
+ configs/imx8mm_evk_fspi_defconfig             |   1 +
+ configs/imx8mm_phg_defconfig                  |   1 +
+ configs/imx8mm_venice_defconfig               |   1 +
+ configs/imx8mn_beacon_2g_defconfig            |   1 +
+ configs/imx8mn_beacon_defconfig               |   1 +
+ configs/imx8mn_beacon_fspi_defconfig          |   1 +
+ configs/imx8mn_bsh_smm_s2_defconfig           |   1 +
+ configs/imx8mn_bsh_smm_s2pro_defconfig        |   1 +
+ configs/imx8mn_ddr4_evk_defconfig             |   1 +
+ configs/imx8mn_evk_defconfig                  |   1 +
+ configs/imx8mn_var_som_defconfig              |   1 +
+ configs/imx8mn_venice_defconfig               |   1 +
+ configs/imx8mp-icore-mx8mp-edimm2.2_defconfig |   1 +
+ configs/imx8mp_beacon_defconfig               |   1 +
+ configs/imx8mp_data_modul_edm_sbc_defconfig   |   1 +
+ configs/imx8mp_debix_model_a_defconfig        |   1 +
+ configs/imx8mp_dhcom_pdk2_defconfig           |   1 +
+ configs/imx8mp_dhcom_pdk3_defconfig           |   1 +
+ configs/imx8mp_evk_defconfig                  |   1 +
+ configs/imx8mp_rsb3720a1_4G_defconfig         |   2 +
+ configs/imx8mp_rsb3720a1_6G_defconfig         |   1 +
+ configs/imx8mp_venice_defconfig               |   1 +
+ configs/imx8mq_cm_defconfig                   |   1 +
+ configs/imx8mq_evk_defconfig                  |   1 +
+ configs/imx8mq_phanbell_defconfig             |   1 +
+ configs/imx8mq_reform2_defconfig              |   1 +
+ configs/imx8qm_mek_defconfig                  |   1 +
+ configs/imx8qxp_mek_defconfig                 |   1 +
+ configs/imx8ulp_evk_defconfig                 |   1 +
+ configs/imx93-phyboard-segin_defconfig        |   1 +
+ configs/imx93_11x11_evk_defconfig             |   1 +
+ configs/imx93_11x11_evk_ld_defconfig          |   1 +
+ configs/imx93_var_som_defconfig               |   1 +
+ configs/imxrt1020-evk_defconfig               |   1 +
+ configs/imxrt1050-evk_defconfig               |   1 +
+ configs/imxrt1050-evk_fspi_defconfig          |   1 +
+ configs/imxrt1170-evk_defconfig               |   1 +
+ configs/iot2050_defconfig                     |   1 +
+ configs/j7200_evm_a72_defconfig               |   1 +
+ configs/j7200_evm_r5_defconfig                |   1 +
+ configs/j721e_beagleboneai64_a72_defconfig    |   5 +-
+ configs/j721e_beagleboneai64_r5_defconfig     |   1 +
+ configs/j721e_evm_a72_defconfig               |   8 +-
+ configs/j721e_evm_r5_defconfig                |   1 +
+ configs/j721s2_evm_a72_defconfig              |   1 +
+ configs/j721s2_evm_r5_defconfig               |   1 +
+ configs/j722s_evm_a53_defconfig               |   1 +
+ configs/j722s_evm_r5_defconfig                |   1 +
+ configs/j784s4_evm_a72_defconfig              |   5 +-
+ configs/j784s4_evm_r5_defconfig               |   1 +
+ configs/kmcent2_defconfig                     |   1 -
+ configs/kmcoge5ne_defconfig                   |   1 -
+ configs/kmeter1_defconfig                     |   1 -
+ configs/kmopti2_defconfig                     |   1 -
+ configs/kmsupx5_defconfig                     |   1 -
+ configs/kmtepr2_defconfig                     |   1 -
+ configs/kontron-sl-mx8mm_defconfig            |   1 +
+ configs/kontron_pitx_imx8m_defconfig          |   1 +
+ configs/kontron_sl28_defconfig                |   1 +
+ configs/librem5_defconfig                     |   1 +
+ configs/ls1021aiot_sdcard_defconfig           |   1 +
+ configs/ls1021aqds_nand_defconfig             |   1 +
+ configs/ls1021aqds_sdcard_ifc_defconfig       |   1 +
+ configs/ls1021aqds_sdcard_qspi_defconfig      |   1 +
+ configs/ls1021atsn_sdcard_defconfig           |   1 +
+ ...s1021atwr_sdcard_ifc_SECURE_BOOT_defconfig |   1 +
+ configs/ls1021atwr_sdcard_ifc_defconfig       |   1 +
+ configs/ls1021atwr_sdcard_qspi_defconfig      |   1 +
+ configs/msc_sm2s_imx8mp_defconfig             |   1 +
+ configs/omap35_logic_defconfig                |   2 +-
+ configs/omap35_logic_somlv_defconfig          |   2 +-
+ configs/omap3_logic_defconfig                 |   2 +-
+ configs/omap3_logic_somlv_defconfig           |   2 +-
+ configs/pg_wcom_expu1_defconfig               |   1 -
+ configs/pg_wcom_expu1_update_defconfig        |   1 -
+ configs/pg_wcom_seli8_defconfig               |   1 -
+ configs/pg_wcom_seli8_update_defconfig        |   1 -
+ configs/phycore-imx8mm_defconfig              |   1 +
+ configs/phycore-imx8mp_defconfig              |   1 +
+ configs/phycore_am62x_a53_defconfig           |   1 +
+ configs/phycore_am62x_r5_defconfig            |   1 +
+ configs/phycore_am64x_a53_defconfig           |   1 +
+ configs/phycore_am64x_r5_defconfig            |   1 +
+ configs/pico-imx8mq_defconfig                 |   1 +
+ configs/qemu-xtensa-dc233c_defconfig          |   1 -
+ configs/sama5d27_wlsom1_ek_mmc_defconfig      |   2 +-
+ .../sama5d27_wlsom1_ek_qspiflash_defconfig    |   2 +-
+ configs/sama5d2_icp_mmc_defconfig             |   2 +-
+ configs/sandbox_defconfig                     |   1 +
+ configs/sandbox_noinst_defconfig              |   1 +
+ configs/sniper_defconfig                      |   2 +-
+ configs/socfpga_secu1_defconfig               |   3 +-
+ configs/tuge1_defconfig                       |   1 -
+ configs/tuxx1_defconfig                       |   1 -
+ configs/verdin-am62_a53_defconfig             |   1 +
+ configs/verdin-am62_r5_defconfig              |   1 +
+ configs/verdin-imx8mm_defconfig               |   1 +
+ configs/verdin-imx8mp_defconfig               |   1 +
+ drivers/mmc/mmc.c                             |  46 ++---
+ drivers/mmc/sdhci.c                           |  52 +++---
+ drivers/usb/gadget/f_sdp.c                    |   8 +-
+ include/blk.h                                 |   4 +-
+ include/log.h                                 |  16 +-
+ include/spl.h                                 |  60 ++++---
+ test/cmd/pinmux.c                             |   8 +-
+ test/image/spl_load.c                         |   4 +-
+ test/image/spl_load_os.c                      |   1 +
+ test/log/log_test.c                           |   6 +-
+ 178 files changed, 448 insertions(+), 394 deletions(-)
+ create mode 100644 arch/arm/mach-rockchip/spl_common.c
+
 -- 
-2.45.2
+2.34.1
 
