@@ -4,55 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15D18C3DA4A
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 08:25:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAD48C3DA4A
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 09:51:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19CAD8843A;
-	Sun, 11 Aug 2024 10:25:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id BAA3F882EF;
+	Sun, 11 Aug 2024 11:51:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1723364704;
-	bh=EhzPmHjrhnHfDhJwsvPE88LAifIvvzxyQbMS3TS2Vp8=;
-	h=Date:To:Cc:From:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:Reply-To:From;
-	b=bSmN53EcoFY0shNWlpYxwgHUsHMm9Oz8pws5Hrx98+rb7Xx26a2osur+TwTj8qhMd
-	 zo1CBNAKOomEqlEIU4uut/0JOk5G88rSWQ4FQpNo3YXn8XfLTT+Ip0lRsBslj4gadk
-	 uVU40yzajIkPmKZiruPDjwMYdwO5BNvNPmlrXHKCaI7T8PD3zqlgwt1bKEioo7KN4B
-	 9ZCjXUTaDdk6SBm/uXRUuM8AS8NJkwCI1jJrxreZqeYKFRl3GtqB9ny+SFU1MdUY0B
-	 /Hro/isoYTqOvO61TzJvFNi5C0mm0H1Ru8KZmg/y/ONUmKPwCTNP0v/ukSx9eRcfyp
-	 1AMjBQrMpBtGw==
-Received: from [192.168.1.107] (89-186-114-92.pool.digikabel.hu
- [89.186.114.92])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id B4C5688365;
- Sun, 11 Aug 2024 10:25:01 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1723364702;
- bh=EhzPmHjrhnHfDhJwsvPE88LAifIvvzxyQbMS3TS2Vp8=;
- h=Date:To:Cc:Reply-To:From:Subject:From;
- b=Kq1NQA+wEF/RwCcclPbhh3irob5S/429UKqRQi7BAO8hHF4avlq0kYFT3ra8bEK8x
- F6XOyEF0KfzSa6Y/dEYf0Cmc2s2hAP/f1pF0B6GncoMW661eR28GIEKkHxC7ywucD5
- PyC9daKjPgXSungjgW45jUoEndI7O5wGh7H7Qmc8K6NMnOi2uX3+Gsp1Wrkpgtk+Bt
- Xp9G31tv5qR3dJDj8G7QNlcJ4S/pPBxDMG4vqAI/vwTAgADzZIXDHqRQLrDfPBYfBS
- cK2L5Jnic4MqhgInuwbY9uNLBxtbYSakOPeQqe8p5KdRqyIsHOtsmTRJjUEjezV+QW
- K0KQxgy8lxUeA==
-Message-ID: <bfabd86c-6fb5-06e9-b0cc-c1aeaa1b1d09@denx.de>
-Date: Sun, 11 Aug 2024 10:24:07 +0200
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="GDvaa/tn";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 7D8C18837D; Sun, 11 Aug 2024 11:51:21 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A35688247
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 11:51:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 68F583FE08
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 09:51:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1723369878;
+ bh=koh1s8bUP1ZYv4sDwwddatU7A641C0SSK6wC1k/DkXo=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=GDvaa/tnDsRuQDEhl45YmZtoNQaVzns/UxsH1NHfibCHy2tqPYkMY3VE4Ah2pWAuH
+ bE9WlqIdLxHJCK5I2PwGVxVWmYnfag7QvoLnF7eaPF/yj+8BHmHpRTV+h1JYMMtFaC
+ yiZqoDxfSpCkeeEjBtOl4fSbUnCyg7UABacDtBbFKC1er55ZE/YV3GxYnFCn8IHWL2
+ 2YFYETE/uZlAYzX6JiJh2KgBJreHdKB/anq541PiITcfJqZa8+NFSbif2QtI/GWCX5
+ ewEgTzfeT+FyaOM0tuU/cxpplLryBKZi9XJnr2jr3P3a0MHLD3YDRWjue/0RECidPT
+ wg+XSNRy8iPLw==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-428076fef5dso25740195e9.2
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 02:51:18 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723369878; x=1723974678;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=koh1s8bUP1ZYv4sDwwddatU7A641C0SSK6wC1k/DkXo=;
+ b=U2RTyaaqToszRy3y7RjLWYJZWr1DQkLioODSwejSyX3sgIhrDeY6AQTmcar8RD+2Mz
+ Gi9lJc2uEjesJ2kBo30HBWXzRm6iiLVZxNKXbxxU8HVLE6as74B2eBfAWakcozs+fwjE
+ 9deMsxSu/ZBd19coGYkCydKQQWsPhB+LSywhhySnSXz/lUJu5cnOiFbsoxWqrOaaAV6h
+ PhCXfaZYImMrO2mXGqFeN1zB71S6ROheuRU4okq6I709dq1WaePVaOlF50+9vmH6NvWf
+ t9fQSS99e9XJ2hFZebuGjtUL7WzbzNLAteeQpSK5gimzcEUvg3hdjV8cWZOuWcMPbkUW
+ UT4Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUgYup+Llmj4msndw/anlcH1iEv14HLc6sLPF0R8g9ATqY/xipAi/RDiR5saEMsonm0jsWTaQtExMbWDFDHkFjliOqesg==
+X-Gm-Message-State: AOJu0Ywmhrxlk/cEImjEfeDggZfPVQxQnedbG1/XoP6m1W1/KAjsdBxm
+ C6hYuIHCZlJ43D4pomSMTsoaA60EBFZscaZf3njWzD/RbMErzRXnMxukhMzpH55uTYsXFdGqot7
+ mSAyRtm7qkrQ099zEQbCwS15XcCkfQpFu2ax5H+NCdMQ/il45vTssjyo59Q1jHGsmcbWAKUXzP5
+ w=
+X-Received: by 2002:a05:600c:1da0:b0:428:16a0:1c3f with SMTP id
+ 5b1f17b1804b1-429c3a5a6femr49007025e9.32.1723369877857; 
+ Sun, 11 Aug 2024 02:51:17 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEDfbqExInwBzuEIp3Jp8445kpV2QPJPg7oHGEEp4vN0dfshLMy1qW4EoITBdBKEusNjtGqvw==
+X-Received: by 2002:a05:600c:1da0:b0:428:16a0:1c3f with SMTP id
+ 5b1f17b1804b1-429c3a5a6femr49006855e9.32.1723369877378; 
+ Sun, 11 Aug 2024 02:51:17 -0700 (PDT)
+Received: from localhost.localdomain
+ (ip-178-202-041-098.um47.pools.vodafone-ip.de. [178.202.41.98])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-429c7734595sm59455215e9.36.2024.08.11.02.51.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 11 Aug 2024 02:51:16 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Rick Chen <rick@andestech.com>,
+	Leo <ycliang@andestech.com>
+Cc: Ben Dooks <ben.dooks@codethink.co.uk>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] riscv: CONFIG_SPL_FRAMEPOINTER must depend on CONFIG_SPL
+Date: Sun, 11 Aug 2024 11:51:09 +0200
+Message-ID: <20240811095109.59526-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Alexander Dahl <ada@thorsis.com>,
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Ravi Minnikanti <rminnikanti@marvell.com>
-From: Heiko Schocher <hs@denx.de>
-Subject: Please pull u-boot-ubi
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,78 +99,30 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
+The CONFIG_SPL_FRAMEPOINTER symbol is only relevant in SPL.
 
-please pull from u-boot-ubi the ubi fixes for 2024.10-rc3
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ arch/riscv/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-The following changes since commit 7bd2559cb30a4e800db519e88a22a25f13c753ec:
-
-   Merge tag 'tpm-master-09082024' of https://source.denx.de/u-boot/custodians/u-boot-tpm.git 
-(2024-08-09 14:00:04 -0600)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-ubi.git tags/ubifixes-for-v2024-10-rc3
-
-for you to fetch changes up to d16bda85ff0762aa96e36fa65d2e3b5342d73d7a:
-
-   ubifs: Call ubifs_iput when ubifs_iget is used (2024-08-11 06:52:15 +0200)
-
-----------------------------------------------------------------
-ubi fixes for v2024.10-rc3
-
-- ubi memleak fixes from Alexander
-
-- ubifs: mount fails after power cycle
-   fixed from Ravi
-   commit ported from kernel commit 304790c038bc4af4f19774705409db27eafb09fc
-
-   HS: fixed checkpatch Error
-
-   ERROR: Remove Gerrit Change-Id's before submitting upstream
-   #213:
-   Change-Id: I487ae4d172e228e72ac31d158d668f209142bce0
-
-   removed this line from commit message.
-
-- memleak fixes from Michael in ubifs, missing ubifs_iput(inode) after
-   ubifs_iget() calls.
-
-special thanks to all of them for detecting/fixing and testing
-this patches!
-
-----------------------------------------------------------------
-Alexander Dahl (4):
-       fs: ubifs: Fix memleak and double free in u-boot wrapper functions
-       fs: ubifs: Set pointers to NULL after free
-       fs: ubifs: Make k(z)alloc/kfree symmetric
-       fs: ubifs: Add volume mounted check
-
-Michael Trimarchi (1):
-       ubifs: Call ubifs_iput when ubifs_iget is used
-
-Ravi Minnikanti (1):
-       ubifs: mount fails after power cycle
-
-  fs/ubifs/replay.c |  2 +-
-  fs/ubifs/super.c  |  9 +++++++--
-  fs/ubifs/ubifs.c  | 40 +++++++++++++++++++++++++---------------
-  3 files changed, 33 insertions(+), 18 deletions(-)
-
-Azure build:
-https://dev.azure.com/hs0298/hs/_build/results?buildId=121&view=results
-
-Thanks!
-
-bye,
-Heiko
+diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+index fa3b016c527..4e228a659f2 100644
+--- a/arch/riscv/Kconfig
++++ b/arch/riscv/Kconfig
+@@ -133,6 +133,7 @@ config FRAMEPOINTER
+ 
+ config SPL_FRAMEPOINTER
+ 	bool "Build SPL with frame pointer for stack unwinding"
++	depends on SPL
+ 	help
+ 	  Choose this option to use the frame pointer so the stack can be
+ 	  unwound if needed. This is useful for tracing where faults came
 -- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+2.45.2
+
