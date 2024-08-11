@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87DC8C52D7C
-	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 12:31:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D0C9C52D7C
+	for <u-boot@archiver.kernel.org>; Sun, 11 Aug 2024 12:31:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5114E88876;
-	Sun, 11 Aug 2024 14:29:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AAF89884CA;
+	Sun, 11 Aug 2024 14:29:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y6CRc5rn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WaNXwC+B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CED3E88847; Sun, 11 Aug 2024 14:29:46 +0200 (CEST)
+ id AFF6A8885D; Sun, 11 Aug 2024 14:29:47 +0200 (CEST)
 Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
  [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1DBE8885D
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 14:29:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C61888875
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 14:29:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-81f921c40a0so133589439f.0
- for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 05:29:43 -0700 (PDT)
+ ca18e2360f4ac-81f94ce2272so137010239f.2
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 05:29:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723379382; x=1723984182; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723379384; x=1723984184; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uKA9BygWuK8ucs9YyTkqi0uoRhd5AMeZwOpaTtqeS3A=;
- b=Y6CRc5rn5S/xCyvEq3F+s7nvxf53bVpiq0YNLxfFJLwJ49saR4dUkRIIFfOUixsK1L
- a+N8T9XKzoNPpaSbN8VTZm70GzW8Iajyc5QvyUdDHxY2bPulrrbOEnBxBh+DKzqGffYa
- haY6GgHW2/GHXCirdXyOoexcxyGbXOUhMsLEw=
+ bh=NGWJdMAfyvTb8HlgvhDn+wOmF7sywth4BqZtm/aortc=;
+ b=WaNXwC+BWm7WDB3PGKOImugWb9pAhviARhJMj+v2973MfrE0WzyqbXzKm2Y88rC75i
+ pHsGdIpe5mktxJ9u/G8QP9nTnJCJuFdbNpzer4KLO4Yq/sJJPCtamLL62TBJ5G4TFkcw
+ CdYjjgeTeCO3VOuUqeGQ2H7+wKJxuPUhOdJ0Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723379382; x=1723984182;
+ d=1e100.net; s=20230601; t=1723379384; x=1723984184;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uKA9BygWuK8ucs9YyTkqi0uoRhd5AMeZwOpaTtqeS3A=;
- b=MBdtKuxlnMaYIUGjTfygZXjww5J2XFfHJJqDkofo9d8z9hwp3/CdulqJWtaY2DrrLE
- rYKRJqNQifvCKJxiJerRXdF8YG+xHpwdWLS4CGmcNuZL/xgwx/WRoX3T+npVu6dAzwNC
- tpbxxpZWgCU0aFORE1bYbidCOkzW2EJcSSLyHA/JlsB2O+ixqX5AfDFH6c/oWc34kfpI
- YPL/dWmoDYxjHOu3YIgMYwBatLt/ymzbxtTkOi71Ogdgp0WpaVx3QWVhuNLv9P9NYRdK
- FXsdUifA/VCW2KYSU3T5m1nEU2I+eu1HKm0WMdcXUBlbDlXMn444ZN2bnjK/1eQxwpXK
- 6Qsg==
-X-Gm-Message-State: AOJu0YwpRxDtHXX34OM46zwXmG78gyothNTvd6V+DhLt3ZP6VoEqPwTK
- sdCAfYrsQy62zutVg10GBKNkXGM6Pj848IkgtaqkFjXXYuZj5NhPT5IFJXAL2ZMFhu8Nt8r1qoA
+ bh=NGWJdMAfyvTb8HlgvhDn+wOmF7sywth4BqZtm/aortc=;
+ b=mt/29HjUzAG+bRK4tobD/WdalM2xcBwaNlZb4Yvss/wnmf3IBp0OMFTBvVi0f3X7UF
+ yI0P95n6/qoY94TX3UpbAaX7tQ9KrxzM8PGHJFGOrafmGzQyfuGMSrv/3DbO/kxu6k5R
+ d0Rj3WJWIpx/70YNqEm9G4g6Vdhff3CwuEwTZCdWRMiXDBJY+snXmJmd0fq6TRUqB5aq
+ vcJ2hfzKQ1fQd+17XZA61AbvEb0LnD8cPRTUfloIbKsJ2C8y4zNvkDqkTLpsSgrD2cxn
+ W3ERnG73F44B7KevuWTZoco2G6W3bjJhXiV2Mtr9hEQKkF0ud9D73o2ILO/7xZTR/j5i
+ L/4Q==
+X-Gm-Message-State: AOJu0Yx1g5A3FYTiG9gbvZmePKB6imTG9l+t/DVgywM1fkA3lq0nf2zF
+ PYQqn74SvveQuBNNQhdz06mrlmmmn+pBuK9ZH2JJ9RCHUywV/SrBVhK6WDePmxsRcr8o9ntuuOA
  =
-X-Google-Smtp-Source: AGHT+IGfu7vd54KPaISbmjZOICf8smlCfa3NWRg30gAOLnns042JTkqXe0Q0UolHhp9upQXWi1b9Ig==
-X-Received: by 2002:a05:6602:3f90:b0:7eb:7f2e:5b3a with SMTP id
- ca18e2360f4ac-8225ece249dmr829364039f.2.1723379382523; 
- Sun, 11 Aug 2024 05:29:42 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IERVfaqLsepdg1fZoAf9V3zCV7chs/OoI2JLF1qOTqoHZe2KDN7NJXB7A0KXCEV+38isPos5w==
+X-Received: by 2002:a05:6602:168d:b0:809:83e3:a35c with SMTP id
+ ca18e2360f4ac-8225ee77040mr779162139f.7.1723379384229; 
+ Sun, 11 Aug 2024 05:29:44 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ca76940448sm1017935173.45.2024.08.11.05.29.41
+ 8926c6da1cb9f-4ca76940448sm1017935173.45.2024.08.11.05.29.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 Aug 2024 05:29:42 -0700 (PDT)
+ Sun, 11 Aug 2024 05:29:43 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH v3 11/15] spl: mmc: Adjust args of spl_mmc_find_device()
-Date: Sun, 11 Aug 2024 06:29:20 -0600
-Message-Id: <20240811122924.4035982-12-sjg@chromium.org>
+ Quentin Schulz <quentin.schulz@cherry.de>
+Subject: [PATCH v3 13/15] spl: Use unified inline functions for spl_load_info
+Date: Sun, 11 Aug 2024 06:29:22 -0600
+Message-Id: <20240811122924.4035982-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240811122924.4035982-1-sjg@chromium.org>
 References: <20240811122924.4035982-1-sjg@chromium.org>
@@ -90,62 +89,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present spl_mmc_load() is the only caller of this function, passing
-it a boot_device, an index into the available MMC devices. Pass the
-device number instead, since it is known by the caller and simplifies
-the code.
+Rather than declaring completely separate functions, put the code for
+each case into the same function. This makes it easier to read.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Sean Anderson <seanga2@gmail.com>
 Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- Use uint for arg to spl_mmc_get_device_index()
+ include/spl.h | 18 +++++++-----------
+ 1 file changed, 7 insertions(+), 11 deletions(-)
 
- common/spl/spl_mmc.c | 12 ++++--------
- 1 file changed, 4 insertions(+), 8 deletions(-)
-
-diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
-index bc6087e88cd..887ea760b84 100644
---- a/common/spl/spl_mmc.c
-+++ b/common/spl/spl_mmc.c
-@@ -58,7 +58,7 @@ int mmc_load_image_raw_sector(struct spl_image_info *spl_image,
- 	return 0;
- }
+diff --git a/include/spl.h b/include/spl.h
+index f92089b69ea..fb26e3f5537 100644
+--- a/include/spl.h
++++ b/include/spl.h
+@@ -306,31 +306,27 @@ struct spl_load_info {
+ 		      void *buf);
+ #if IS_ENABLED(CONFIG_SPL_LOAD_BLOCK)
+ 	int bl_len;
++#endif
+ };
  
--static int spl_mmc_get_device_index(u32 boot_device)
-+static int spl_mmc_get_device_index(uint boot_device)
+ static inline int spl_get_bl_len(struct spl_load_info *info)
  {
- 	switch (boot_device) {
- 	case BOOT_DEVICE_MMC1:
-@@ -73,13 +73,9 @@ static int spl_mmc_get_device_index(u32 boot_device)
- 	return -ENODEV;
- }
- 
--static int spl_mmc_find_device(struct mmc **mmcp, u32 boot_device)
-+static int spl_mmc_find_device(struct mmc **mmcp, int mmc_dev)
- {
--	int ret, mmc_dev;
++#if IS_ENABLED(CONFIG_SPL_LOAD_BLOCK)
+ 	return info->bl_len;
+-}
 -
--	mmc_dev = spl_mmc_get_device_index(boot_device);
--	if (mmc_dev < 0)
--		return mmc_dev;
-+	int ret;
+-static inline void spl_set_bl_len(struct spl_load_info *info, int bl_len)
+-{
+-	info->bl_len = bl_len;
+-}
+ #else
+-};
+-
+-static inline int spl_get_bl_len(struct spl_load_info *info)
+-{
+ 	return 1;
++#endif
+ }
  
- #if CONFIG_IS_ENABLED(DM_MMC)
- 	ret = mmc_init_device(mmc_dev);
-@@ -349,7 +345,7 @@ int spl_mmc_load(struct spl_image_info *spl_image,
- 	/* Perform peripheral init only once for an mmc device */
- 	mmc_dev = spl_mmc_get_device_index(bootdev->boot_device);
- 	if (!mmc || spl_mmc_get_mmc_devnum(mmc) != mmc_dev) {
--		ret = spl_mmc_find_device(&mmc, bootdev->boot_device);
-+		ret = spl_mmc_find_device(&mmc, mmc_dev);
- 		if (ret)
- 			return ret;
+ static inline void spl_set_bl_len(struct spl_load_info *info, int bl_len)
+ {
++#if IS_ENABLED(CONFIG_SPL_LOAD_BLOCK)
++	info->bl_len = bl_len;
++#else
+ 	if (bl_len != 1)
+ 		panic("CONFIG_SPL_LOAD_BLOCK not enabled");
+-}
+ #endif
++}
  
+ /*
+  * We need to know the position of U-Boot in memory so we can jump to it. We
 -- 
 2.34.1
 
