@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A1E0C52D7C
-	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 20:57:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6AD6C52D7C
+	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 20:57:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7551386BF1;
+	by phobos.denx.de (Postfix) with ESMTP id D0579888C6;
 	Mon, 12 Aug 2024 22:56:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YTkGHCjd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xCzo3/fy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 997C1888C1; Mon, 12 Aug 2024 22:56:47 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 4B54888703; Mon, 12 Aug 2024 22:56:49 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6EAE88703
- for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 22:56:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 60960866EE
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 22:56:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a7a9cf7d3f3so557249666b.1
- for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 13:56:44 -0700 (PDT)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5a1c49632deso5317732a12.2
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 13:56:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723496204; x=1724101004; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723496206; x=1724101006; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dSPhPLrkOupbWWvPT5Cpp0+hW/YWwfV0IjHdf2GnvOk=;
- b=YTkGHCjdM9aFFVpmTXWBRB15dy8iTOVTKDXSBWXiOd0Qj2z2RHh2+DPHyj5k2yQT5z
- hpHfGjoNoLWlHPXKZYIPGPji4UdMuT4H65YA4PisnSu/BzLdk2GVx73m+eHwbSIizl7Q
- gKHfUEUSDY/epiaOUeN2Q/XQ2HA45gc3ZB5whXpxBsXdb8mdT6X5pKeHvlJljSu4vVPT
- asmcj5y1eNQoo7H62K06pMhe+BLjJc4t07WWVHfqOOap2iHEZ1Lxr25suzmoG17tgLNi
- kHyHSTefW2j9u5wsFDspSnscWqSTpxIOPW0Z0VVQltLo0MTkafyzLSOyFGrYC6vFGjuX
- /5uQ==
+ bh=1PxyyKOhIhLJM2KgJkvqItP92NBeMNvKC4AN5PkDxq8=;
+ b=xCzo3/fyc4kANwIOVZik9JjffUQmMlkCYmj7pVfgxC5hqeNe3TZYJLeqPLDNKvtZHL
+ Csyt+wzP+c1eRqTzgAU8yFBIQhzuSX2hE08t6MHapZhW35J8QrYDSyD0C3kOBjR0OvWd
+ o8cbf0MjL/ZflcQOW8MaZdyhio6W8nWNANwJnb755Saw1HhQ3QHMPC1NcohlBBbqkP7i
+ co/TreQ0VbuEQxFmtTocSCMxDhPgK1BhdzZ9EBYThHeCkUNUFoY2epa/VpKuxoMvwMoi
+ f7x3RouTAHJkAscuAtB4GnVTnZwE7yl6PtiQZOox8it6+Hpz8rZL3O5CILeHv8jXAolY
+ kogw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723496204; x=1724101004;
+ d=1e100.net; s=20230601; t=1723496206; x=1724101006;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dSPhPLrkOupbWWvPT5Cpp0+hW/YWwfV0IjHdf2GnvOk=;
- b=rj9D5po8ER5RgdL+/XkSsR/ugCe5pOwM/AaHmVkLC48dXDQacfXrmeOupkyEuEgbh0
- q/bayL3Oe0SAp2EJQyAHFzqy8okZm0j2Fqp+z4NtxL+1U9SLODsH2XLGs2iq0dmxOs61
- N61xRcr3KblBbd1uLhkFCNLZDe3uN2Xx8wQ2LNHIZ853FYly8zPVMLhpKtxdjXId+gVW
- jnX4691p8QfuVix0nfCBmadbYo4z9bhTKAnYkxul5oD84zFu/lKHj+kuB6K9abXGDfdE
- wiceTYI4fKFuLJzxG/ictZ8Uqny9PL8k8nAA2mOprb04QBDT7DoFotEqnt09PuHsQKZ+
- y2ZA==
+ bh=1PxyyKOhIhLJM2KgJkvqItP92NBeMNvKC4AN5PkDxq8=;
+ b=b+b31BdDTz6gHDCEOW+aNBsYyk0DFnQ9nySwHmEdsvZxWsfItR5C5HA3F9mHZqpcU8
+ CLxQUxUo8gq9QapwXY1/QgDxAcRYRtHVSaungYME1nWpnUygcLk+j4b2GtRGvFI6aOxt
+ 9NDwgirvA/1kakqXpvRpd4rwViSabOJByDE/YEWX99N3T7LNnD4Zwg2uw2x5Kc3q2/s7
+ u4J/U1rh2UEjtTWMeUFHlpMujJfExZjF1GT/d4SwklA0kr0U55i497ODaqE4576mrVX1
+ qfIUFMYy+dC383GVHJsjaoWhp915XOsp0n3NE2FSmMDwCzmOo+/GeqokNzaN/HqKqLhB
+ QltA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVlmGdIGaFvsTBbCIuXszLB7PJfiuJTDjdu5aTtrJD8KQApIRG9psH/eCBbt9l8OsW9VcnR5ki7iQvwaTW55Wzx1o4ypw==
-X-Gm-Message-State: AOJu0YxMkj0Sn2wfObStkTkKIBNzV30JjDGNZWo6u1A11Es7NKux6/AY
- MQQGZI2XEIcMWGZ0MOXxoxLjZMlq67KJzhykJUfP1HVqFX1/6I9hvneiXMrpMUY=
-X-Google-Smtp-Source: AGHT+IFzael6SCmBPPmpw3DzOQ+EYPNSqHv7/+wIBs3PMzNVzWLVCoYY4x7odcRFI2rGI7cz6DXh/g==
-X-Received: by 2002:a17:906:f599:b0:a77:db36:1ccf with SMTP id
- a640c23a62f3a-a80ed2c87c5mr97191066b.42.1723496204041; 
- Mon, 12 Aug 2024 13:56:44 -0700 (PDT)
+ AJvYcCUTQ18dGJOQATbiOHdYALxnzqxR8KSJEumTQz2HShcj6cfG/WnypyyiFuvw9rdXyL9+w9KsZs4WesmLCJ59+Vp74Lq6bA==
+X-Gm-Message-State: AOJu0YzaaM6bNcpRONkb86t/xBOum76EWn6ElWn0bJ2eN7W0VA1vMe79
+ xkHethObQNvGDq9G9X8O0V1Pv91CIoGkC3iH8hmoDvMCHDSpqDPNBd9MxsH4uz4=
+X-Google-Smtp-Source: AGHT+IHu3NRE8UyZ6UYLQ59IL/10VuUrlo/hH6IeRwB7XqYzwA3D+lBHsd7+UHSdspX04sFvGgBNlA==
+X-Received: by 2002:a17:907:3fa3:b0:a7d:c9fa:e3b3 with SMTP id
+ a640c23a62f3a-a80ed2ca647mr96190166b.54.1723496205337; 
+ Mon, 12 Aug 2024 13:56:45 -0700 (PDT)
 Received: from localhost.localdomain (ppp046103060252.access.hol.gr.
  [46.103.60.252]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a80f411b51esm9491966b.134.2024.08.12.13.56.42
+ a640c23a62f3a-a80f411b51esm9491966b.134.2024.08.12.13.56.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Aug 2024 13:56:43 -0700 (PDT)
+ Mon, 12 Aug 2024 13:56:44 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: xypron.glpk@gmx.de
 Cc: kojima.masahisa@socionext.com, u-boot@lists.denx.de,
  akashi.tkhro@gmail.com, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH 2/3] efi_loader: rename efi_bootmgr_image_return_notify
-Date: Mon, 12 Aug 2024 23:56:37 +0300
-Message-ID: <20240812205638.1732159-2-ilias.apalodimas@linaro.org>
+Subject: [PATCH 3/3] efi_loader: return the correct error in
+ efi_bootmgr_release_uridp()
+Date: Mon, 12 Aug 2024 23:56:38 +0300
+Message-ID: <20240812205638.1732159-3-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240812205638.1732159-1-ilias.apalodimas@linaro.org>
 References: <20240812205638.1732159-1-ilias.apalodimas@linaro.org>
@@ -94,45 +95,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We use this event when returning from an EFI HTTP booted image.
-The name is a bit confusing since it suggests we always run it,
-rename it to make it clearer
+There's currently a chance for this function to overwrite an error if
+one occurred and the subsequent call to
+efi_uninstall_multiple_protocol_interfaces() succedded. Although this
+is an EFI event and we can't do much let's at least set and return
+the correct error
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- lib/efi_loader/efi_bootmgr.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ lib/efi_loader/efi_bootmgr.c | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
 
 diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index 181fc8775b96..03cdee15017d 100644
+index 03cdee15017d..a3aa2b8d1b92 100644
 --- a/lib/efi_loader/efi_bootmgr.c
 +++ b/lib/efi_loader/efi_bootmgr.c
-@@ -421,13 +421,13 @@ efi_status_t efi_bootmgr_release_uridp(struct uridp_context *ctx)
+@@ -388,6 +388,7 @@ err:
+ efi_status_t efi_bootmgr_release_uridp(struct uridp_context *ctx)
+ {
+ 	efi_status_t ret = EFI_SUCCESS;
++	efi_status_t ret2 = EFI_SUCCESS;
+ 
+ 	if (!ctx)
+ 		return ret;
+@@ -407,17 +408,18 @@ efi_status_t efi_bootmgr_release_uridp(struct uridp_context *ctx)
+ 
+ 	/* cleanup for PE-COFF image */
+ 	if (ctx->mem_handle) {
+-		ret = efi_uninstall_multiple_protocol_interfaces(
+-			ctx->mem_handle, &efi_guid_device_path, ctx->loaded_dp,
+-			NULL);
+-		if (ret != EFI_SUCCESS)
++		ret2 = efi_uninstall_multiple_protocol_interfaces(ctx->mem_handle,
++								  &efi_guid_device_path,
++								  ctx->loaded_dp,
++								  NULL);
++		if (ret2 != EFI_SUCCESS)
+ 			log_err("Uninstall device_path protocol failed\n");
+ 	}
+ 
+ 	efi_free_pool(ctx->loaded_dp);
+ 	free(ctx);
+ 
+-	return ret;
++	return ret == EFI_SUCCESS ? ret2 : ret;
  }
  
  /**
-- * efi_bootmgr_image_return_notify() - return to efibootmgr callback
-+ * efi_bootmgr_http_return() - return to efibootmgr callback
-  *
-  * @event:	the event for which this notification function is registered
-  * @context:	event context
-  */
--static void EFIAPI efi_bootmgr_image_return_notify(struct efi_event *event,
--						   void *context)
-+static void EFIAPI efi_bootmgr_http_return(struct efi_event *event,
-+					   void *context)
- {
- 	efi_status_t ret;
- 
-@@ -533,7 +533,7 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
- 
- 	/* create event for cleanup when the image returns or error occurs */
- 	ret = efi_create_event(EVT_NOTIFY_SIGNAL, TPL_CALLBACK,
--			       efi_bootmgr_image_return_notify, ctx,
-+			       efi_bootmgr_http_return, ctx,
- 			       &efi_guid_event_group_return_to_efibootmgr,
- 			       &event);
- 	if (ret != EFI_SUCCESS) {
 -- 
 2.45.2
 
