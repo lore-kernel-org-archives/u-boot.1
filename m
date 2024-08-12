@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD512C3DA7F
-	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 10:33:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E51AC3DA7F
+	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 10:33:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A24A688747;
-	Mon, 12 Aug 2024 12:33:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1DDED88755;
+	Mon, 12 Aug 2024 12:33:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="U2jze8GM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GeGCt1iu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CB0887F19; Mon, 12 Aug 2024 12:33:10 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id 740858880B; Mon, 12 Aug 2024 12:33:12 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70EC487D6B
- for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 12:33:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 12B028884F
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 12:33:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-5314c6dbaa5so3065228e87.2
- for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 03:33:07 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-369c609d0c7so2993823f8f.3
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 03:33:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723458787; x=1724063587; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1723458788; x=1724063588; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ozbQb4FB9CmFfyNx71cGb9eR8igJ78Q3C61YyFsXplE=;
- b=U2jze8GM1DuXwKaTQK9B9m0LCA3nfKPIfpus773vUROjkJ0lGAmfvHoCSe8WjbwNoW
- x2jt4YwklsUqdTK0GL/a+EmGb3OTxj7Ea15Zt0ZdJzlaCHCbTDSbAAg4c97zcWFUwMXV
- MgrRVRiDWHEriuMS/x6c0KzF/i2e6GSfK8rm1z8abwkGnnP0B8WML8GWbIt5Ki5E8CqU
- i5mGuQFcdQJ1tmnMmzRu4zJHHTxM0iMapqFN369HxbWMkueaEK3fiie72MwcjxUROUlg
- r+hkNz9s74wO0omZ0Rpx5Bpe4qQbhDYyJhVFlbgYPSRENNR/+C3+imLqSG3KH2nr1qRW
- LeLQ==
+ :reply-to; bh=F7EzSifg9g5UstZpOxR5pGveBAvWbwJf3eidWqN+PFY=;
+ b=GeGCt1iuCc5jswQrq8b+NaJAeaJMQstHgmfujmXaQg3h+em5NAQv7za1rxto/DHu5Z
+ Z4jVHowYhYHd91e0ppH+hDXJyuQwDh2zLYRJEWh696y7nQlDAg69veAJ/VgPfIWejb+K
+ tSzFErPRy59NHhGvRQojbBJz6HM4WU7jNhh1cnuNZCUyyOqjKYVGk8J/uPjtrbRpPuIs
+ gOp3O4WMEYr2X3mzAZaalaiHlJAvpYhdI2CezrAqQUrL6yDBOrWvW0j/eLG1xMOAt1g2
+ Whcb/eR3TcfFTI31pJ8tJ6j7Ga1P9p3M6/kBNmW3LmDCsZgSCxh7oti5aLWW2U7v49sB
+ wVVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723458787; x=1724063587;
+ d=1e100.net; s=20230601; t=1723458788; x=1724063588;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ozbQb4FB9CmFfyNx71cGb9eR8igJ78Q3C61YyFsXplE=;
- b=ZZzcuiJerS2CJLz2b4FpczgGlups3eSRbm05JcDC8NU2C/5LK9JUuwNzQoWRUepltc
- PV4Yp9w0lsY8vga+w2fD81PXZgIutiDfjESnPL0ZylpIPOn1E3nq5mphhKYzAAGDJxm/
- WjAdKbrrBi7uf1tfGckWO3p+DQwKIPWV9jhSN5D8BqOkpTWDclbMCWTcZK3s8OKnN8Rh
- nzVxecbf5cmZ+ZzaH+nkQwX8sRElXkV+P8Q8VP5pJ3ZHsXdWNJzlb1Xaz48jXfkAqO5H
- hD13JRE23OnumAmwbwGQdOQrOXgZ/wp6FaUci3aCx9HmGSx825QCa6ehkcNwFyZCSOyZ
- rulA==
+ bh=F7EzSifg9g5UstZpOxR5pGveBAvWbwJf3eidWqN+PFY=;
+ b=TFH7PG6SUbyKPx6lifVRQhQ+/7gSvB1q17sz6D6TGFLtyeXuy0IQXpIvzzmAdXWvHX
+ WF/XCYMrZUi63ezvHlythUrcHBGho0LDm6UiBUBTaVwFb0gTPHMkHu7pW73eKG3o1Uv5
+ XEsLo3oaUglCsGTm2Mm2lbyXngpKMTxqV3DlmG12egnumswKoV6ZNlVbos0i7QMpM9B7
+ IucQp/lpKztXO13WLATzvRu1/01i21dM6b1vfiY91KrEzGRsrRP4JVXs+lZoGOMF3KkY
+ 7rmrhd+h7JExXI5ZQ4Wiq1QbRwvWL7eyEtMvyq036TVOiMQtpfcCzf4cymvi7Vp6Shdc
+ QyaQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX0dgQ+EvMXqhq+B0uTW340IaLTnifssQUNjqDBn4UTrTULANzqB3BfPQLf6lfUjCZDpTZvWNQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyri/pxGkP68IO9m7H3sNgGbLAH59sLpr6RJ+yhF0GtMSxam7Tc
- /c6cHud932Kc1Hf18BUFGxHq9H3OT6iLTcOvcu3NACfMXpUVPqxC
-X-Google-Smtp-Source: AGHT+IHT86ewDNqiICgZVWJ+8DgdQjXT5zulAN9TM3PxdNlaVklxyH14G6Um/+K8c9ZzmXZx5ZUxMA==
-X-Received: by 2002:a05:6512:4020:b0:52f:cdb0:11da with SMTP id
- 2adb3069b0e04-530ee995d7amr6397853e87.33.1723458786184; 
- Mon, 12 Aug 2024 03:33:06 -0700 (PDT)
+ AJvYcCWuhWpFyTVdsGs0Iyq+tcPW+yMsdiHMsPbIEw6C1NwY4Tjxzsh+7hm9dVzvaVvARItRSbGA6zM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzOcWosWh0vChwn2RmQqZZpYQKIcjilSCnQGLSGEcLa+LigUUFm
+ DtpHspJZfkE4Fqky+8bVOk0HRM39PGiopo3DfODELrjzWvBgCiH1
+X-Google-Smtp-Source: AGHT+IFNrxeAyY1fNs+ttpV0wE4YJI+joscAhpjAVcXM3vP8Up0zMwci3NDdDCxl0/7nmBr8AqMaXw==
+X-Received: by 2002:a05:6000:2a1:b0:368:4c38:a668 with SMTP id
+ ffacd0b85a97d-36d5db7ac57mr9092366f8f.9.1723458788288; 
+ Mon, 12 Aug 2024 03:33:08 -0700 (PDT)
 Received: from localhost.localdomain
  (host-79-52-250-20.retail.telecomitalia.it. [79.52.250.20])
  by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-4290c77f078sm186016425e9.37.2024.08.12.03.33.04
+ 5b1f17b1804b1-4290c77f078sm186016425e9.37.2024.08.12.03.33.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Aug 2024 03:33:05 -0700 (PDT)
+ Mon, 12 Aug 2024 03:33:07 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
@@ -86,9 +86,9 @@ To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
  Michael Polyntsov <michael.polyntsov@iopsys.eu>,
  Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de
-Subject: [PATCH v3 3/9] led: implement LED boot API
-Date: Mon, 12 Aug 2024 12:32:45 +0200
-Message-ID: <20240812103254.26972-4-ansuelsmth@gmail.com>
+Subject: [PATCH v3 4/9] common: board_r: rework BOOT LED handling
+Date: Mon, 12 Aug 2024 12:32:46 +0200
+Message-ID: <20240812103254.26972-5-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240812103254.26972-1-ansuelsmth@gmail.com>
 References: <20240812103254.26972-1-ansuelsmth@gmail.com>
@@ -110,155 +110,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement LED boot API to signal correct boot of the system.
+Rework BOOT LED handling. There is currently one legacy implementation
+for BOOT LED from Status Led API.
 
-led_boot_on/off/blink() are introduced to turn ON, OFF and BLINK the
-designated boot LED.
+This work on ancient implementation wused by BOOTP by setting the LED
+to Blink on boot and to turn it OFF when the firmware was correctly
+received by network.
 
-New Kconfig are introduced, CONFIG_LED_BOOT_ENABLE to enable the feature.
-This makes use of the /config property "u-boot,boot-led" to the define
-the boot LED.
-It's also introduced a new /config property "u-boot,boot-led-period" to
-define the default period when the LED is set to blink mode.
-
-If "u-boot,boot-led-period" is not defined, the value of 250 (ms) is
-used by default.
-
-If CONFIG_LED_BLINK or CONFIG_LED_SW_BLINK is not enabled,
-led_boot_blink call will fallback to simple LED ON.
+Now that we new LED implementation have support for LED boot, rework
+this by also set the new BOOT LED to blink and also set it to ON before
+entering main loop to confirm successful boot.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- doc/device-tree-bindings/config.txt |  3 ++
- drivers/led/Kconfig                 | 20 +++++++++
- include/led.h                       | 64 +++++++++++++++++++++++++++++
- 3 files changed, 87 insertions(+)
+ common/board_r.c | 25 ++++++++++++++++++++++---
+ 1 file changed, 22 insertions(+), 3 deletions(-)
 
-diff --git a/doc/device-tree-bindings/config.txt b/doc/device-tree-bindings/config.txt
-index f50c68bbdc3..68edd177040 100644
---- a/doc/device-tree-bindings/config.txt
-+++ b/doc/device-tree-bindings/config.txt
-@@ -31,6 +31,9 @@ u-boot,error-led (string)
- 	This is used to specify the label for an LED to indicate an error and
- 	a successful boot, on supported hardware.
- 
-+u-boot,boot-led-period (int)
-+	This is used to specify the default period for an LED in blink mode.
+diff --git a/common/board_r.c b/common/board_r.c
+index d4ba245ac69..57957b4e99b 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -39,6 +39,7 @@
+ #include <initcall.h>
+ #include <kgdb.h>
+ #include <irq_func.h>
++#include <led.h>
+ #include <malloc.h>
+ #include <mapmem.h>
+ #include <miiphy.h>
+@@ -462,14 +463,30 @@ static int initr_malloc_bootparams(void)
+ #if defined(CONFIG_LED_STATUS)
+ static int initr_status_led(void)
+ {
+-#if defined(CONFIG_LED_STATUS_BOOT)
+-	status_led_set(CONFIG_LED_STATUS_BOOT, CONFIG_LED_STATUS_BLINKING);
+-#else
+ 	status_led_init();
 +
- bootsecure (int)
- 	Indicates that U-Boot should use secure_boot_cmd() to run commands,
- 	rather than the normal CLI. This can be used in production images, to
-diff --git a/drivers/led/Kconfig b/drivers/led/Kconfig
-index bee74b25751..fd9442edaf3 100644
---- a/drivers/led/Kconfig
-+++ b/drivers/led/Kconfig
-@@ -9,6 +9,26 @@ config LED
- 	  can provide access to board-specific LEDs. Use of the device tree
- 	  for configuration is encouraged.
- 
-+config LED_BOOT_ENABLE
-+	bool "Enable LED boot support"
-+	help
-+	  Enable LED boot support.
++	return 0;
++}
++#endif
 +
-+	  LED boot is a specific LED assigned to signal boot operation status.
-+
-+config LED_BOOT_LABEL
-+	string "LED boot label"
-+	depends on LED_BOOT_ENABLE
-+	help
-+	  LED label defined in DT to assign for LED boot usage.
-+
-+config LED_BOOT_PERIOD
-+	int "LED boot period"
-+	depends on LED_BOOT_ENABLE && (LED_BLINK || LED_SW_BLINK)
-+	default 2
-+	help
-+	  LED boot blink period in ms.
-+
- config LED_BCM6328
- 	bool "LED Support for BCM6328"
- 	depends on LED && ARCH_BMIPS
-diff --git a/include/led.h b/include/led.h
-index c1f3380f253..2d3b89674e2 100644
---- a/include/led.h
-+++ b/include/led.h
-@@ -9,6 +9,7 @@
- 
- #include <stdbool.h>
- #include <cyclic.h>
-+#include <dm/ofnode.h>
- 
- struct udevice;
- 
-@@ -159,4 +160,67 @@ int led_sw_set_period(struct udevice *dev, int period_ms);
- bool led_sw_is_blinking(struct udevice *dev);
- bool led_sw_on_state_change(struct udevice *dev, enum led_state_t state);
- 
++static int initr_boot_led_blink(void)
++{
++#ifdef CONFIG_LED_STATUS_BOOT
++	status_led_set(CONFIG_LED_STATUS_BOOT, CONFIG_LED_STATUS_BLINKING);
++#endif
 +#ifdef CONFIG_LED_BOOT_ENABLE
-+
-+/**
-+ * led_boot_on() - turn ON the designated LED for booting
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+static inline int led_boot_on(void)
-+{
-+	const char *led_name;
-+
-+	led_name = ofnode_conf_read_str("u-boot,boot-led");
-+	if (!led_name)
-+		return -ENOENT;
-+
-+	return led_set_state_by_label(led_name, LEDST_ON);
-+}
-+
-+/**
-+ * led_boot_off() - turn OFF the designated LED for booting
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+static inline int led_boot_off(void)
-+{
-+	const char *led_name;
-+
-+	led_name = ofnode_conf_read_str("u-boot,boot-led");
-+	if (!led_name)
-+		return -ENOENT;
-+
-+	return led_set_state_by_label(CONFIG_LED_BOOT_LABEL, LEDST_OFF);
-+}
-+
-+#if defined(CONFIG_LED_BLINK) || defined(CONFIG_LED_SW_BLINK)
-+/**
-+ * led_boot_blink() - turn ON the designated LED for booting
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+static inline int led_boot_blink(void)
-+{
-+	const char *led_name;
-+	int led_period, ret;
-+
-+	led_name = ofnode_conf_read_str("u-boot,boot-led");
-+	if (!led_name)
-+		return -ENOENT;
-+
-+	led_period = ofnode_conf_read_int("u-boot,boot-led-period", 250);
-+
-+	ret = led_set_period_by_label(led_name, led_period);
-+	if (ret)
-+		return ret;
-+
-+	return led_set_state_by_label(led_name, LEDST_BLINK);
-+}
-+#else
-+/* If LED BLINK is not supported/enabled, fallback to LED ON */
-+#define led_boot_blink led_boot_on
-+#endif
-+#endif
-+
++	led_boot_blink();
  #endif
+ 	return 0;
+ }
++
++static int initr_boot_led_on(void)
++{
++#ifdef CONFIG_LED_BOOT_ENABLE
++	led_boot_on();
+ #endif
++	return 0;
++}
+ 
+ #ifdef CONFIG_CMD_NET
+ static int initr_net(void)
+@@ -716,6 +733,7 @@ static init_fnc_t init_sequence_r[] = {
+ #if defined(CONFIG_LED_STATUS)
+ 	initr_status_led,
+ #endif
++	initr_boot_led_blink,
+ 	/* PPC has a udelay(20) here dating from 2002. Why? */
+ #ifdef CONFIG_BOARD_LATE_INIT
+ 	board_late_init,
+@@ -738,6 +756,7 @@ static init_fnc_t init_sequence_r[] = {
+ #if defined(CFG_PRAM)
+ 	initr_mem,
+ #endif
++	initr_boot_led_on,
+ 	run_main_loop,
+ };
+ 
 -- 
 2.45.2
 
