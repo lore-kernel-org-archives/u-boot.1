@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03D29C52D7C
-	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 10:33:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A67FEC3DA7F
+	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 10:34:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7991988845;
-	Mon, 12 Aug 2024 12:33:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D728888806;
+	Mon, 12 Aug 2024 12:33:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LY+e0xJh";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OR4IJnI7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5720887D6B; Mon, 12 Aug 2024 12:33:13 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 9BFE987D6B; Mon, 12 Aug 2024 12:33:16 +0200 (CEST)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40A1C87F19
- for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 12:33:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 90F1387F19
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 12:33:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4281faefea9so30546535e9.2
- for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 03:33:11 -0700 (PDT)
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2f149845d81so47152311fa.0
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 03:33:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723458791; x=1724063591; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1723458793; x=1724063593; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=uTp4D3gMYy7OE1wuBDKAirYogref0q7WmKNyHnlQe5Y=;
- b=LY+e0xJh7CRMTuN+UzdFrJndfGqfzIkswpvwTUX3FamhHJhu+A7fo0rNUDxr0cbPPF
- 41+76RfODo382BMuNvevRwr/FXKcgKhDTSWbXjajuhsEM3gQt5i58VFQin1+MctvIufA
- KtAChAiDr6e/RtH5BL60s7yP/CTPOwWjXgcI58Lp1l+4DMaFqXkCKSTAL5Vvc2iIsvf2
- PglvZKrOI7RyUN9LNbgVMqCHLpT+eoznhuG2HVi4zsXqoPzl9MDE4c7IgdXLt36h7CQT
- WskBraNhqTuFRP6elRCDs8045XgKXWVHOeTY0DOnvRfL1pbD3Yc2M6rTCMI/Zv4G0H1/
- 37AA==
+ :reply-to; bh=c7wvb87HMZERBTWLcE0Zw9te/52TrDk6pCneIGETCws=;
+ b=OR4IJnI7CAuM1DfzHpnsFOlxwOZ1+QOogzQdXC6I4lctLyBgnNnsS4An4POFAiN+xK
+ dA/47QM1yNwMq4GxdTNSZ3wxdfbY1h5Vrj90Xhe6ShXUfpt+91aZrRMPJaTlQAoxVan0
+ 8YeZIn66kNpKGaIG/WCaduAF+yV7wwXGKIOON68y/EYtySsuFtPMi3GRvgou+WazFdnD
+ DTJSJ7NgjmeP/hs1WTeho0flDm0B6stLiPgKDOSRCLMmyywswU1bbGLdUhtlgFNYWQ9C
+ bd82VW4QHZHlXdPgdy88XdQKsJgfpSfpjpUBcoR2B4s6fX5PXrMVnCiH/5Dy6d6rUhYq
+ 5DdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723458791; x=1724063591;
+ d=1e100.net; s=20230601; t=1723458793; x=1724063593;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uTp4D3gMYy7OE1wuBDKAirYogref0q7WmKNyHnlQe5Y=;
- b=n0IYMftTi219qeqrSjTgxjRGwXFRrpPE+iGgB6jebSmprETqQLkr0Dl/M4qFV3T5uG
- Z5jP5cMwFKPruSc8Gz0L11P3PqxhZAjcm2/3fF9JnJJtNGF1ZZ2v/nQe6pRGcJbcMGR+
- oDuvnpH1qDLp/7SIhi3GW72Qn4WyWs9yQwGRCr5s/sI5tDf8zB73gh+XYne9P1zI9Mlm
- vZE1rgHL8H0babPi36qv0GHn4q6TiNdLU9WxQiIKcnFpHmtjQMmknMSp502c+kwKLPfC
- ojZxLmLNlUUuxe1sScayzOc7PoifVSXNndzXD2A3Jt7/EpoJ3wbQDn3zj8VuK6Yg4pSg
- 6TRw==
+ bh=c7wvb87HMZERBTWLcE0Zw9te/52TrDk6pCneIGETCws=;
+ b=gInmV5WdeawwB/zZJvgTXhKMDcpenRvCz+ySqdOD2Jtof++5DuorPaRjoZgUkrDBSl
+ 0DhoNeoZpAv4pUngGaKwX5GBQj67o58Nq4g5wKlTzgNRqUOHfhczWPxyisW36F2N0VpG
+ 6+bJYRnhZqqD2IKy6Qh8FqnBVCglWoSXufsWiR8SaPdA2Wio3pBUsMHZYTRT169p9cQy
+ gY9Qh+B+tLQpoRLiTRl8VbLa6Hv4B7cm3dQsSCdM9Ho0eldsbGQ/Yhq5ut4gEYg9ZQSk
+ xcdl5sP6+bXQAopM/giceRPfON39eiXWNXGouhIcweLF1b9AD9IPAmZUmIUUFPiDMSQx
+ ootA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUtD+99z5R9IexL6qvYTLQnEbzW3embXL6jPtcn28qi7FVGS0KFIZxECNab+cTy311aiCm4UetgdwsrlWmbv3gK6i4mjw==
-X-Gm-Message-State: AOJu0YxzOx6RUJ8SR6w7WgLMM8pz6X2woS+9LXSCYFShhp4L1wyig22l
- eQznnqhsjPGiNbcXjkwbZ4PspKVvky58BkVIDFPloXh8fC9WGETn
-X-Google-Smtp-Source: AGHT+IGGgEtQeontU6KXiHeq9TbVYldrHDkUhoptQsr9ETIrgQSAK7vRSpk0SnPHsy/TGurfQgkCHA==
-X-Received: by 2002:a05:600c:4f8f:b0:426:6ea8:5037 with SMTP id
- 5b1f17b1804b1-429c3a643bdmr60411265e9.37.1723458790428; 
- Mon, 12 Aug 2024 03:33:10 -0700 (PDT)
+ AJvYcCUu74O2Clm01bHFmka7fHBXo00gUyzIuAfP9ASql33PAom84Yi/jlvnU7ANw3oNNstaUg5ZCkG5+QFaEBnZ2WXCry+ruw==
+X-Gm-Message-State: AOJu0Yzip1P1G5/mpYHSvIXzWY/HKBH/K5LKU/9h1ICOgnhnjf9GQMpx
+ QuP1f6PV8c3QmSnFaFC/i3N3vvw7XKBfJ101bctKJ7/jGqzGic6b
+X-Google-Smtp-Source: AGHT+IEaz1m49SXILOpzD+2eEGLWKzx9wJQ8aSM3RZI0JPoml+RmTbRrU7OEPcrgmuM5Wstx+W9gYg==
+X-Received: by 2002:a2e:b8c1:0:b0:2ee:974c:596f with SMTP id
+ 38308e7fff4ca-2f1a6c68b39mr65867621fa.28.1723458792454; 
+ Mon, 12 Aug 2024 03:33:12 -0700 (PDT)
 Received: from localhost.localdomain
  (host-79-52-250-20.retail.telecomitalia.it. [79.52.250.20])
  by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-4290c77f078sm186016425e9.37.2024.08.12.03.33.08
+ 5b1f17b1804b1-4290c77f078sm186016425e9.37.2024.08.12.03.33.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Aug 2024 03:33:10 -0700 (PDT)
+ Mon, 12 Aug 2024 03:33:12 -0700 (PDT)
 From: Christian Marangi <ansuelsmth@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
@@ -86,9 +86,9 @@ To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
  Michael Polyntsov <michael.polyntsov@iopsys.eu>,
  Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de
-Subject: [PATCH v3 5/9] led: implement LED activity API
-Date: Mon, 12 Aug 2024 12:32:47 +0200
-Message-ID: <20240812103254.26972-6-ansuelsmth@gmail.com>
+Subject: [PATCH v3 6/9] tftp: implement support for LED activity
+Date: Mon, 12 Aug 2024 12:32:48 +0200
+Message-ID: <20240812103254.26972-7-ansuelsmth@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240812103254.26972-1-ansuelsmth@gmail.com>
 References: <20240812103254.26972-1-ansuelsmth@gmail.com>
@@ -110,154 +110,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement LED activity API similar to BOOT LED API.
-
-Usual activity might be a file transfer with TFTP, a flash write...
-
-User of this API will call led_activity_on/off/blink() to signal these
-kind of activity.
-
-New Kconfig are implemented similar to BOOT LED, LED_ACTIVITY_ENABLE to
-enable support for it.
-
-It's introduced a new /config property "u-boot,activity-led" and
-"u-boot,activity-led-period" to define the activity LED label and the
-default period when the activity LED is set to blink mode.
-
-If "u-boot,activity-led-period" is not defined, the value of 250 (ms) is
-used by default.
-
-If CONFIG_LED_BLINK or CONFIG_LED_SW_BLINK is not enabled,
-led_boot_blink call will fallback to simple LED ON.
+Implement support for LED activity. If the feature is enabled,
+make the defined ACTIVITY LED to signal traffic.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- doc/device-tree-bindings/config.txt |  4 ++
- drivers/led/Kconfig                 | 21 ++++++++++
- include/led.h                       | 63 +++++++++++++++++++++++++++++
- 3 files changed, 88 insertions(+)
+ net/tftp.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/doc/device-tree-bindings/config.txt b/doc/device-tree-bindings/config.txt
-index 68edd177040..cd9ec88909b 100644
---- a/doc/device-tree-bindings/config.txt
-+++ b/doc/device-tree-bindings/config.txt
-@@ -30,8 +30,12 @@ u-boot,boot-led (string)
- u-boot,error-led (string)
- 	This is used to specify the label for an LED to indicate an error and
- 	a successful boot, on supported hardware.
-+u-boot,activity-led (string)
-+	This is used to specify the label for an LED to indicate an activity
-+	if supported by the operation.
- 
- u-boot,boot-led-period (int)
-+u-boot,activity-led-period (int)
- 	This is used to specify the default period for an LED in blink mode.
- 
- bootsecure (int)
-diff --git a/drivers/led/Kconfig b/drivers/led/Kconfig
-index fd9442edaf3..1336f943dab 100644
---- a/drivers/led/Kconfig
-+++ b/drivers/led/Kconfig
-@@ -29,6 +29,27 @@ config LED_BOOT_PERIOD
- 	help
- 	  LED boot blink period in ms.
- 
-+config LED_ACTIVITY_ENABLE
-+	bool "Enable LED activity support"
-+	help
-+	  Enable LED activity support.
-+
-+	  LED activity is a specific LED assigned to signal activity operation
-+	  like file trasnfer, flash write/erase...
-+
-+config LED_ACTIVITY_LABEL
-+	string "LED activity label"
-+	depends on LED_ACTIVITY_ENABLE
-+	help
-+	  LED label defined in DT to assign for LED activity usage.
-+
-+config LED_ACTIVITY_PERIOD
-+	int "LED activity period"
-+	depends on LED_ACTIVITY_ENABLE && (LED_BLINK || LED_SW_BLINK)
-+	default 2
-+	help
-+	  LED activity blink period in ms.
-+
- config LED_BCM6328
- 	bool "LED Support for BCM6328"
- 	depends on LED && ARCH_BMIPS
-diff --git a/include/led.h b/include/led.h
-index 2d3b89674e2..6a1471dae85 100644
---- a/include/led.h
-+++ b/include/led.h
-@@ -223,4 +223,67 @@ static inline int led_boot_blink(void)
+diff --git a/net/tftp.c b/net/tftp.c
+index 2e073183d5a..45c2455336a 100644
+--- a/net/tftp.c
++++ b/net/tftp.c
+@@ -10,6 +10,7 @@
+ #include <efi_loader.h>
+ #include <env.h>
+ #include <image.h>
++#include <led.h>
+ #include <lmb.h>
+ #include <log.h>
+ #include <mapmem.h>
+@@ -192,6 +193,9 @@ static void new_transfer(void)
+ #ifdef CONFIG_CMD_TFTPPUT
+ 	tftp_put_final_block_sent = 0;
  #endif
- #endif
- 
 +#ifdef CONFIG_LED_ACTIVITY_ENABLE
-+
-+/**
-+ * led_activity_on() - turn ON the designated LED for activity
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+static inline int led_activity_on(void)
-+{
-+	const char *led_name;
-+
-+	led_name = ofnode_conf_read_str("u-boot,activity-led");
-+	if (!led_name)
-+		return -ENOENT;
-+
-+	return led_set_state_by_label(led_name, LEDST_ON);
-+}
-+
-+/**
-+ * led_activity_off() - turn OFF the designated LED for activity
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+static inline int led_activity_off(void)
-+{
-+	const char *led_name;
-+
-+	led_name = ofnode_conf_read_str("u-boot,activity-led");
-+	if (!led_name)
-+		return -ENOENT;
-+
-+	return led_set_state_by_label(led_name, LEDST_OFF);
-+}
-+
-+#if defined(CONFIG_LED_BLINK) || defined(CONFIG_LED_SW_BLINK)
-+/**
-+ * led_activity_blink() - turn ON the designated LED for activity
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+static inline int led_activity_blink(void)
-+{
-+	const char *led_name;
-+	int led_period, ret;
-+
-+	led_name = ofnode_conf_read_str("u-boot,activity-led");
-+	if (!led_name)
-+		return -ENOENT;
-+
-+	led_period = ofnode_conf_read_int("u-boot,activity-led-period", 250);
-+
-+	ret = led_set_period_by_label(led_name, led_period);
-+	if (ret)
-+		return ret;
-+
-+	return led_set_state_by_label(led_name, LEDST_BLINK);
-+}
-+#else
-+/* If LED BLINK is not supported/enabled, fallback to LED ON */
-+#define led_activity_blink led_activity_on
++	led_activity_blink();
 +#endif
+ }
+ 
+ #ifdef CONFIG_CMD_TFTPPUT
+@@ -301,6 +305,9 @@ static void tftp_complete(void)
+ 			time_start * 1000, "/s");
+ 	}
+ 	puts("\ndone\n");
++#ifdef CONFIG_LED_ACTIVITY_ENABLE
++	led_activity_off();
 +#endif
-+
- #endif
+ 	if (!tftp_put_active)
+ 		efi_set_bootdev("Net", "", tftp_filename,
+ 				map_sysmem(tftp_load_addr, 0),
 -- 
 2.45.2
 
