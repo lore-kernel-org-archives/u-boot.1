@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D25EAC52D7C
-	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 22:07:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09627C3DA7F
+	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 22:08:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FDD488896;
-	Tue, 13 Aug 2024 00:07:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9CA9488871;
+	Tue, 13 Aug 2024 00:07:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="Uo7w/JbL";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="bLHUaQcw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3371E888C6; Tue, 13 Aug 2024 00:07:46 +0200 (CEST)
-Received: from out-181.mta1.migadu.com (out-181.mta1.migadu.com
- [95.215.58.181])
+ id B8239888D5; Tue, 13 Aug 2024 00:07:47 +0200 (CEST)
+Received: from out-178.mta1.migadu.com (out-178.mta1.migadu.com
+ [95.215.58.178])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 417DB88871
- for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 00:07:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 519A3888AB
+ for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 00:07:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linux.dev
 Authentication-Results: phobos.denx.de;
@@ -29,23 +29,23 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1723500462;
+ t=1723500463;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=IO1RKkw6yKusYjoXU3JQsl3USbwW4BWemVnX0RWN5fw=;
- b=Uo7w/JbLx7icWYChyB3ULhGe7jwtP50FLjjHAowfrQoNOETu/+ZXOUXfiKjpTlLZyH0NxH
- ccvh3k/CMh8KlyCrmGmQhfk82lQKpBQ2dVGoRllH8vgIofMcC2H+DEOzpkzUPPerhQmkNt
- WyqCx+jnh2NmrjqdPUrXZ7jbp04AQ8Y=
+ bh=1r5yu04kKFOYXAM3kgAgKVAWZyK+sQ2r2R6oYcBMtTk=;
+ b=bLHUaQcwPiyKgPSi+yjysu0qmKyHJShM9ePtrTygsJzNqn/RypbhtOC7bwWG52WkIZn3yg
+ KPJ4uJ/TiGRLr6+0AK/u+zcbjRPpJT1J5boRiDTn/KG33wMMxwTfvdsY3WgQes32HtMusG
+ vyfq/mZoNCSFsObsIci9BJTJtx8kW+E=
 From: Sean Anderson <sean.anderson@linux.dev>
 To: Michal Simek <michal.simek@xilinx.com>,
 	u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
 	Sean Anderson <sean.anderson@linux.dev>
-Subject: [PATCH 1/2] zynqmp: Disable secure access for boot devices
-Date: Mon, 12 Aug 2024 18:07:34 -0400
-Message-Id: <20240812220735.3602212-2-sean.anderson@linux.dev>
+Subject: [PATCH 2/2] arm: zynqmp: Enable non-invasive CCI-400 PMU debug
+Date: Mon, 12 Aug 2024 18:07:35 -0400
+Message-Id: <20240812220735.3602212-3-sean.anderson@linux.dev>
 In-Reply-To: <20240812220735.3602212-1-sean.anderson@linux.dev>
 References: <20240812220735.3602212-1-sean.anderson@linux.dev>
 MIME-Version: 1.0
@@ -67,43 +67,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Boot devices (QSPI, MMC, NAND, and Ethernet) use secure access for DMA
-by default. As this causes problems when using the SMMU [1], configure
-them for normal access instead.
-
-[1] https://support.xilinx.com/s/article/72164
+Set NIDEN, enabling non-invasive debug for the CCI-400 PMU. Otherwise,
+the PMU is effectively disabled.
 
 Signed-off-by: Sean Anderson <sean.anderson@linux.dev>
 ---
 
- arch/arm/mach-zynqmp/include/mach/hardware.h | 2 ++
+ arch/arm/mach-zynqmp/include/mach/hardware.h | 3 +++
  board/xilinx/zynqmp/zynqmp.c                 | 4 ++++
- 2 files changed, 6 insertions(+)
+ 2 files changed, 7 insertions(+)
 
 diff --git a/arch/arm/mach-zynqmp/include/mach/hardware.h b/arch/arm/mach-zynqmp/include/mach/hardware.h
-index 8cb6494e52c..f1514d6a869 100644
+index f1514d6a869..51eab3509b8 100644
 --- a/arch/arm/mach-zynqmp/include/mach/hardware.h
 +++ b/arch/arm/mach-zynqmp/include/mach/hardware.h
-@@ -63,6 +63,8 @@ struct crlapb_regs {
+@@ -128,6 +128,9 @@ struct crfapb_regs {
  
- #define crlapb_base ((struct crlapb_regs *)ZYNQMP_CRL_APB_BASEADDR)
+ #define crfapb_base ((struct crfapb_regs *)ZYNQMP_CRF_APB_BASEADDR)
  
-+#define ZYNQMP_IOU_SECURE_SLCR 0xFF240000
++#define ZYNQMP_CCI_REG_CCI_MISC_CTRL	0xFD5E0040
++#define ZYNQMP_CCI_REG_CCI_MISC_CTRL_NIDEN	BIT(1)
 +
- #define ZYNQMP_IOU_SCNTR_SECURE	0xFF260000
- #define ZYNQMP_IOU_SCNTR_COUNTER_CONTROL_REGISTER_EN	0x1
- #define ZYNQMP_IOU_SCNTR_COUNTER_CONTROL_REGISTER_HDBG	0x2
+ #define ZYNQMP_APU_BASEADDR	0xFD5C0000
+ 
+ struct apu_regs {
 diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-index b4c15b041cc..94a66684af2 100644
+index 94a66684af2..e0ff2607952 100644
 --- a/board/xilinx/zynqmp/zynqmp.c
 +++ b/board/xilinx/zynqmp/zynqmp.c
-@@ -72,6 +72,10 @@ int __maybe_unused psu_uboot_init(void)
- 	writel(ZYNQMP_PS_SYSMON_ANALOG_BUS_VAL,
- 	       ZYNQMP_AMS_PS_SYSMON_ANALOG_BUS);
+@@ -76,6 +76,10 @@ int __maybe_unused psu_uboot_init(void)
+ 	writel(0x04920492, ZYNQMP_IOU_SECURE_SLCR);
+ 	writel(0x04920492, ZYNQMP_IOU_SECURE_SLCR + 4);
  
-+	/* Disable secure access for boot devices */
-+	writel(0x04920492, ZYNQMP_IOU_SECURE_SLCR);
-+	writel(0x04920492, ZYNQMP_IOU_SECURE_SLCR + 4);
++	/* Enable CCI PMU events */
++	writel(ZYNQMP_CCI_REG_CCI_MISC_CTRL_NIDEN,
++	       ZYNQMP_CCI_REG_CCI_MISC_CTRL);
 +
  	/* Delay is required for clocks to be propagated */
  	udelay(1000000);
