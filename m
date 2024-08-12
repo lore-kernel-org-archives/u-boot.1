@@ -4,161 +4,163 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3699C52D7C
-	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 08:56:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20775C531DC
+	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 08:58:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9BCE8861A;
-	Mon, 12 Aug 2024 10:56:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7770888680;
+	Mon, 12 Aug 2024 10:58:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="BCXVxOsg";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="I5i8jnfU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8089F88680; Mon, 12 Aug 2024 10:56:36 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
+ id 042B3886B1; Mon, 12 Aug 2024 10:58:18 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170130004.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::4])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AAC388266
- for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 10:56:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ECF108860B
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 10:58:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wJjwS12L9KnlUYVbcLpw3XFiN0/4xWfGg8J7VJbjCHnLc+F1VxZ2+54ngWruFCkRIm6xjM9kRwpxEuUIXKy1pMx7XVLMVZFL9axegy+X2IxGCBvLxbJ2y0bJvaBrhNAaM2BXEtFb3Y4M4ramKjTjQh66GvfFukYqVHU9tWYLRdloNjJgLEi+wYiyg8R4EfDW7EeDYWGE0vhme+BbOG6scQ8B12JxGn1vK7va4Dn/R+vr2xWPkA8ZlouglxnCwG6mTww5F0hVeXk/aTVieVBQy5PYI9WAMja79NNxByUlbkzVXcM8q0pHP4WQKMTeitTdoxLO+kfXrU4IUZ7qNyX0nw==
+ b=UWTa4tHXwbgw2+Qpy8V176F3xDfpRhvWakpk0LWeKUhdavOWq67QiQw9M3pAlp7tx4rJQWXXmeBO++RomsgyKe0jihseAD7UhAOAzYeJpzqL1bWuFjXuufhjYmqYVdZIbVQqd1J1KSaTCh53GsIq0iXQFGqYWDcH3nW6PndJAZNhEXSFiIHlPlAUjzzI6baRkC8OklA2wyNS2Q76i3lAjH50qBUhXW2zRnpTL168X5tLfu5f+29hfAE0AXJQJiel8MXzyuBL28xXDW2sdP9m72k4WoiT0WSed5spprf16SdzRmmRMlDSbgGjlN/BMiSyAFq3rlzqgXMskt7qcNzr/Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8KjxlNKebbSl/F91O/yFs/6UGfOry5fm9/0OystLr1Q=;
- b=E2I3W9vKGFtMbff+giPBXROWOXgmVTjkPsPlCql9LEGiZMidt8JgJa+/RW5a/80jZSZvmNezYIzRL0H0hs1teLdtXQ2ENeX5qOmbl+Rd7lfyO3ZG36L3lrfqT9bEz4GvRgz1iCEeea56emELA5ncdx0XnGRf1EI0q+qurFFufFqG8TTzlckgtxWSNfOAHIF3W6UiLV4VZgnfs+bcN7lCMJuwBp3kvJ2a6I0aSVvCy9PrW0Ft2IDx7yWr2Kb/pklDeXHVRcqxlcc7x7TAh+WFWZjoXgn3IRiUUg2A5Br49C1dUKuoTvDQrWmj5ogF341Zp/lnVyiwWgqUFr9k+yzMlg==
+ bh=yAYV8HnFdeR146R0zlScPr5H4CK9eGAJfHpCy1PO8wU=;
+ b=cGiKKrXLkaH61i9zTqACnmgokql73MJxk85wVBrUDE1MYX3dOsT4VaG4EvpIm2yJ6XR3kQYsmvQpsFMhw3JHjc/8mIreT8xYlfkJqI1yQCfIJG5VM24i6ShLqQlKV8cSRQAa7TE8Hh5UcjvTguVNix1BiDwD0d3bBz4VXvBRNgoKhxPJTlwyAbXOPzjBlfkOavTye3Tq9Uto015wpMmXRByJJZeQeqw38IoHseBJ375pQPmrpwIdnhKTbHEy/PecgJ1RTvZ/LFUXkhUKm5NbqEFW+590EfF/j+wOQkBXtlyBewtOYarcmy6q5duClC0sEHRaJ2tFLaiG9+mhtrJ3GQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8KjxlNKebbSl/F91O/yFs/6UGfOry5fm9/0OystLr1Q=;
- b=BCXVxOsgov7TwA3ar6nW0yPVqDypKXlOcfTIWflbbHNUufDpsEVDn9kQXIgtNPHtDEtzdYKpEkufl8eTaZjn1GkXVN6Mv8pgb5Nws9OrZJeRrVeleUuauIBC98drXefXsWwGXWgoHY+hA4d9PCRDzTFUXjqbXcuat09d9c0jMN8=
+ bh=yAYV8HnFdeR146R0zlScPr5H4CK9eGAJfHpCy1PO8wU=;
+ b=I5i8jnfUai8gmMBhc8zfyjdxx0zuqNZ/BANCGaQuOpMExBH624pZhsH0vw1Kjr2rz4DI0A4vAXoORRNuW5x+meOPTqiK8RgqVlZUFvYHnJh8LIBDnvLd8pIppb8IRHFzCQO77MDbM2seCcKSL9/UUtF6iE7y4DDUFNlkSLt8quk=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from AM9PR04MB8906.eurprd04.prod.outlook.com (2603:10a6:20b:409::9)
- by AM8PR04MB7267.eurprd04.prod.outlook.com (2603:10a6:20b:1df::8)
+ by DB9PR04MB8480.eurprd04.prod.outlook.com (2603:10a6:10:2c6::20)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7849.20; Mon, 12 Aug
- 2024 08:56:33 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7849.15; Mon, 12 Aug
+ 2024 08:58:13 +0000
 Received: from AM9PR04MB8906.eurprd04.prod.outlook.com
  ([fe80::d379:5378:b1:cea]) by AM9PR04MB8906.eurprd04.prod.outlook.com
  ([fe80::d379:5378:b1:cea%3]) with mapi id 15.20.7849.019; Mon, 12 Aug 2024
- 08:56:33 +0000
-Message-ID: <2c9402fa-17c1-45a6-8823-d18d1ffe128b@cherry.de>
-Date: Mon, 12 Aug 2024 10:56:31 +0200
+ 08:58:13 +0000
+Message-ID: <c7483e63-f51d-4b8c-9340-acf75e1f04b8@cherry.de>
+Date: Mon, 12 Aug 2024 10:58:11 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 07/14] log: Avoid including function names by default
+Subject: Re: [PATCH v2 06/14] mmc: Use logging instead of pr_err()
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Peng Fan <peng.fan@nxp.com>
 References: <20240721152600.3212917-1-sjg@chromium.org>
- <20240721152600.3212917-8-sjg@chromium.org>
- <94949f6b-9f82-452c-9d38-5c8683a21ddd@cherry.de>
- <CAFLszThRvPSiZrsQEzbMS+Lg=sB1jijEMj9F=cG3h0MQH76t5A@mail.gmail.com>
+ <20240721152600.3212917-7-sjg@chromium.org>
+ <4d3f9b1c-5be6-454d-8cd4-28bd67ded364@cherry.de>
+ <CAFLszTj-szBqxPVi8CiWb2jDnKdcx128C8Xk7XUL0a2QoccWbA@mail.gmail.com>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <CAFLszThRvPSiZrsQEzbMS+Lg=sB1jijEMj9F=cG3h0MQH76t5A@mail.gmail.com>
+In-Reply-To: <CAFLszTj-szBqxPVi8CiWb2jDnKdcx128C8Xk7XUL0a2QoccWbA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA2P291CA0009.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1e::6) To AM9PR04MB8906.eurprd04.prod.outlook.com
+X-ClientProxiedBy: WA2P291CA0016.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1e::12) To AM9PR04MB8906.eurprd04.prod.outlook.com
  (2603:10a6:20b:409::9)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM9PR04MB8906:EE_|AM8PR04MB7267:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8c6790b2-dab7-4493-2496-08dcbaaca9f2
+X-MS-TrafficTypeDiagnostic: AM9PR04MB8906:EE_|DB9PR04MB8480:EE_
+X-MS-Office365-Filtering-Correlation-Id: ae04704a-2e89-4ef3-d273-08dcbaace5c6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Sm16MXVXZ3RNOGdxSjZacEd0VUdpcy9nQTRuM3dzTzA3d3pmdjZuNXVyUmhM?=
- =?utf-8?B?SDBmS211VWRJOGx6bjlKL2gzcWRBSm1tdFVqamVST1BpdlYvak9sRWRubUp4?=
- =?utf-8?B?aWhUcCs2d3haeGVwdkcvV2p2UzNqcmJ1cXd4VlRoU0J3aG0vS0VxZXlFZVlp?=
- =?utf-8?B?WlQwdWVpNldvVCs5TGdodDczN2R4cy9jU3kzU3JhRERUVkdDT3FJd3A0UUZI?=
- =?utf-8?B?VDhjRVczeGE3cmRudWF6aitYYUtFd3ZXRitGNGI4TjRnNzE1NmtpK2R0NjFa?=
- =?utf-8?B?TEErcXhqVk5JNjRwTUVoTFJVRGszM1JMY3ZXWENyQXdhZWNHcnUrTHlPNlFJ?=
- =?utf-8?B?NVRWSUQ4Z2J4NjJxbklaaUNUWU41bUpjMThUd2FISUMyNXpuaS9WMDB5VlRC?=
- =?utf-8?B?RWpiSEZKbjZjQVQwWTFXbVF6dnZnaHdsQ3lvcU5aY3lVektvRmkwR3RldmdF?=
- =?utf-8?B?TEdwU2JCYUhzdDdkd1VlREl5ZXcyR2ZzcmtWN2NsMHVXeURzS0gwaTV3NkFQ?=
- =?utf-8?B?ZGVFN0JWOG5aQXR1ckZRK0ZKSGNlWm8rbXpZak9zQVRyQ1dpNzNGcFhUQm95?=
- =?utf-8?B?dVE3MWJxZVNBbm1wOXpITDlIWlRaN0lqSlN1NCsrV1daTG9haCt1UUc5UG9X?=
- =?utf-8?B?emx2dUJBNDEzaFpKOFdKTkRBOHdNcytFaFAxYjVUV0ZQQUNkd1hNTUx3SHpU?=
- =?utf-8?B?UUdoS2dOdTNxdldLc2hoSkYyNHNqODNiUktuKyt6dmdxVWxBK3UrS29sYTJC?=
- =?utf-8?B?VXF0ODNBa3lRSk5wSkV4OVQ4TU1id1lNT2pYSWs5a0VhQVJ4UVFkelgwVnNC?=
- =?utf-8?B?bFBDdHR6cXl6TGhIWVl6WkYvRWI5UHBzWjNFQmtYRHpaZ0ZYVHI1VmhRMEdn?=
- =?utf-8?B?VzBVSklydWJVdHFOWnh4SXFXTzFPVHQzbUt3WUdPQTBGMWNsZVg4S1BPWjRO?=
- =?utf-8?B?UFp4RHhLc2o5U0FiUjVCeEdRenQxN0J4TklJSGlzdjMzR2JjclNLZWIrR3ZG?=
- =?utf-8?B?YUpFQWNHRlZUMEZtZDZuRUd1ZXFjUHFJNWNUR3F1SnRkcmErd3k1RTBjekhr?=
- =?utf-8?B?WFhyQUN5OThBc0RuVStSOWJ5emhrQUV2TUQvYTlnWXZhdkpxZC90cHM2b2d2?=
- =?utf-8?B?bUExMmM3VStjeCtSSFE0c1BuQkJxSFl1dlZISW41cWhuVEFQMVR4SlRUNHkz?=
- =?utf-8?B?alVQZ2VVSzFvMDQ3TmsyR1BNWU1rdEdvMGIyZnAya25pbzRKalRYdENhU0ww?=
- =?utf-8?B?ZkZocGlCVS9WTWlkTnd3aDJFeUNlRlR6cHdDbDdDTDl6Vk5KUUV5WU9DeFhG?=
- =?utf-8?B?MEFXcGdhM3o1WlBuVHkvSmsvL2VYdUNxZHptTmVkUXcrWEMweHBFSmxjWFpl?=
- =?utf-8?B?S3M0d2UralVsQkpkY3I0MURHUU1qRGVNa00zamwrMEFBempNV2pDeEY1LzJD?=
- =?utf-8?B?cnQzUW4vUThpZFBCc2p3dkFlaXpiN25CS1g0TEovMzlTN1lFTnBZdVZOeHM4?=
- =?utf-8?B?dlMyZjh0M0NGZnJTK05IU1RHeHR5eHpySmM5aEtaZkhvY2VEVXYxN0VVZUda?=
- =?utf-8?B?dmVzemVIZ3VBRnpUMFZwdm9haVMyc21BWkRVeGI1bEFYdW1ZTWJ5dlhvNytC?=
- =?utf-8?B?MjVvam5iTC9Ra3NZMVpyMThIUEFGZ1VzMEkrczVySmlUSjVYVWVwVk5sekpx?=
- =?utf-8?B?c1Bkd2FkSVF5VGl5QTdiVTdWajdMQXMrMWNCWjB6am1TOFBvYkg5cTNrMms1?=
- =?utf-8?B?MTFNQXhNRHN1aG53ZE9xQmJvR1NrZnFzVkJ4NTQvOFgvbC9tcWVuek8yUlQ2?=
- =?utf-8?B?Q2RWLzR5WXVtQmp0QjJlZz09?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?WCs3V2VTOWh5R21jZGpOZktsWkJNRDBtbTRTWksxOWdzVUpzZFFWNU54Wi9a?=
+ =?utf-8?B?UC9BNFhiTXJFZGlZTE9UUkhGUlJHTGFWWGc3QWdDditjcWpuMFZrR2cwMTht?=
+ =?utf-8?B?L1ZiSzhxRTBBMEJ1OUk4R2cwMkJEcjh2RkpoTGdXcHQ3TzFWUEk4SE5LeFFQ?=
+ =?utf-8?B?SHk0cms1dXdxQlRTZEtZWHNLL2h6WXJlQzk4N1pVTDdEeENpeWVBbmNhYnlB?=
+ =?utf-8?B?YTkrK0VOMzM5L3NBb1hwb3UwR244S3pWVEt1TnlkRUExdE9HRjJVMUFNNVNU?=
+ =?utf-8?B?eSsrbDhSR1JLYk1QSUMwY1ZxSWV6bElYZ0dpNHAzOFNGaU02KzA2T1NEMnhu?=
+ =?utf-8?B?TzFWWGRKc2MvKzN0dGV1VDZidkE4cGV5a3l5NkxwRXhUSnlLZUx6emFyaWVN?=
+ =?utf-8?B?cGdiNlkxZ1BqVnBtMzJDVkFDQiszd3dZR3JqVStCZkRNR3JXZkllRUYrd28w?=
+ =?utf-8?B?em9XTUVmbGd5WUNYdk0raUIwbjl1a1FROGszc1FVcWdzNENBOC9LVnhtSExJ?=
+ =?utf-8?B?dlY3bGlnZS9IaDhIY3hySkNzWEVjQXB2UkQvMzdsMTU1NHBPSTR3ckVKVk01?=
+ =?utf-8?B?cnpMSXREMnJSNC9ob1lERU93NElDYkd2MFhkTDljU1EzbmRXNG42OE50WWla?=
+ =?utf-8?B?TFNQRzh5MG1PcGpxWGZkVXJOcENEZElMa0FCQi9Qd1lxSlIydGZQbEtEZHQ1?=
+ =?utf-8?B?SlEvdmlMdXFFb0RCYUdaNTY4ZExiMDZ0WjhzSnZYSHRjSUcrMGpjZDJaVTR3?=
+ =?utf-8?B?UWFYYnNFUEUxYWYwMzhkQzFNcjBjQTYrcS9kYllwVDVENWFuY21wY0l5UFNI?=
+ =?utf-8?B?NUt2MEJ4ckh4dTRFZWNMMHR3TlloOUpadnFHYmxldjlMTW1vMDJ0bmdmNlZl?=
+ =?utf-8?B?V3dnU0hUKzZ5Ri9OaE5tSXZaa2JCU0pFc1ZWUFRKLzFpMm5pUnNLNHA3QXp3?=
+ =?utf-8?B?Mko3clFlb1B6RW54dnJKNHJvUVpUVWxmK2ViZE5yZVhOcU1IV0FXYmU4dFNV?=
+ =?utf-8?B?S1JERmN6S0F0SFBubVFHZ1RwbVZpZDNKUHpWRExpREJZbFAvRTZ3WXR6Y1hv?=
+ =?utf-8?B?Tk9IemorOFlMOWFVUUJVbHRhKzNLWkVCaDl4aGY3K3hrQ2Fxc2FCVjVLbW9w?=
+ =?utf-8?B?b1U5MEVVN2c1MHA0UlpsL1B4QVNESERySzRnNEJKM0NEbGdQcUJnM0IvNk15?=
+ =?utf-8?B?eERTTmZZNHZVR2hhcmhTRTdDZ3hibktCYkNiYTl4MlFVTUI3V1lseDVHZERa?=
+ =?utf-8?B?bkRZNWFIZTlOd0NWcDg5YnFoVFJ6amduVDJQZDVQNHJNT3BUaTl1WUJ2WUJB?=
+ =?utf-8?B?b0FvcVhBREd2N1RiWjE4OEttOXdlQi9mZStENkRRMDh0blVkVC8zaDIrWGRD?=
+ =?utf-8?B?NlRBWGQ2Q2xFbmNsNDFyU3RIL3pzRWhDbmxTdzNjdkxacVlCdDJDY3ZnTDMv?=
+ =?utf-8?B?Ry9Od0g3My9HSXNheUM4TmFFM1kxVDdhc3puUm9vSFBCM0ZiV0J6RG1OSFFl?=
+ =?utf-8?B?a0RHZzdNbklUMVZGenN5SU90MWpkMG9aRkJhb3ExSmdWNDN1Vm9wMlFxK2xE?=
+ =?utf-8?B?SzkvMVozTCt4VXFYditHM3FFN1ZVVmlpSVNGRi9kWTdGcVhEd1JsQlBLaXBW?=
+ =?utf-8?B?TWhKNWtaemNBdjJweDhRaitreUpBb2Ztb3NQUXJkUFZ4d2x4Rzd6WkJuL1Fi?=
+ =?utf-8?B?d2RMbk9rRm4zK2JFMGdqNC9maG5LZjRLNVFxemErZEJKdncreDZseFhFRk1Y?=
+ =?utf-8?B?UnF5R2w2U2J3RE1oS0d2b1NhY3paMWxSMGlnUERrVytvWVNpM2ZaMUNJOFRE?=
+ =?utf-8?B?UEFPTnhDUWFwdktsRFlOdz09?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AM9PR04MB8906.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ak5BK0xtUzRzMVI3cHkzOEpnci9MYzZCc3hEcm80QUhkMFRJb0hZUTMzZG53?=
- =?utf-8?B?bnN6ZXhFVXllQmQ4ekkzZjBnMm5ZOHZVLzJyNWZOK0FzRFgzT3hBbE5kTEEr?=
- =?utf-8?B?SS8rQ2ZKeC94blF2dUFIeTZnZjZsZXZKd3kxSzRucnZkcW1HUDdWdms0b0tC?=
- =?utf-8?B?b3pBTnY0MkNweUhGYVBSQytkSHVvVWY5TkZPaUtBWmNFZWZkK1g0ZUJGM0lZ?=
- =?utf-8?B?UzVjQnhhRzB6ZHpvUzB4NzlaY1FmZEpTdWFGRWg5OVgvOVZKSEM3SEFybjU1?=
- =?utf-8?B?UzRBZ004MWtmU2ZaOHArMlRzUkVoMTRER1dvUDk3MW9tb0gwd2xtcUtrOURu?=
- =?utf-8?B?bWVyWWUvRFFwNHFMendqRUxrckxJL2dvT2IwNHVMUXNWR3gyOVVVcU9mclRh?=
- =?utf-8?B?VjI3Y0JvVVJQMWdXcFpOak9XRGhDdmNmZEFHd0Q2N3U2SXR1UjFJTlV3NXhr?=
- =?utf-8?B?RFp2YTBNakdwTHN4L2tTNTJGQW0wQmlRdXlidWtKN3RmM2ZUK2kzWVM4OXd6?=
- =?utf-8?B?bGRjNkNNdUgwNktNdStMcnNqMXR5bnhsajNGS2Q4OGM4bldEaTRSak5aQWI0?=
- =?utf-8?B?YkI1MDJNNlJ3TUlzNTQxRGlHVVJzanFZcWNxaDJ0M01OZEY3R09vbGZHS0Nq?=
- =?utf-8?B?QjBxbjlYTnBaK1dhMDdiMU9iYkdOTkFELzRIUWlPSFBjNVR0aG5rM3owMCth?=
- =?utf-8?B?TzJ2Nkppa1JaMXNXV0ZTdGE4Q3ZXalRYZ3pxMDQxbXBnL25Cc2k5RDFoN0I4?=
- =?utf-8?B?R3VLeDJQOHdyb1BKakVGY3hEL3B4bythMG1CSGdic0ZpRmQ0UFV5bklCUHhU?=
- =?utf-8?B?Qno0SnhiTWwweXB0WDZrOG5TYmp2Z01WOUo4Q2pHeDhwZmw2MGFWcFNLekhD?=
- =?utf-8?B?RDZDcjUvWkt2YUJwSEJaSFFha1lhak1PZHRkbkxIeXZSNFZBRWNkWmFlaUtr?=
- =?utf-8?B?Wm9ZNDZIZWtzaHVKSE1hanExaUIwd3FMOTQycmc1TU9xUGtCRGwrSFhiQkF4?=
- =?utf-8?B?SkRURkQ0ck55clE1N1o2alNMUGNEUkZBNWZUcVBpcjFVcGM1SjVjcm0wN3Vk?=
- =?utf-8?B?YUZDbkdpTFliWTNQVCtxcmtsREI5bisxNXljT3JReHg0THpSTG9Zem92dWVV?=
- =?utf-8?B?MVM3S3JUQmplSDlyT05tRGVCc3FrMXNqT0FEbFpXOEJybzNNUWxGYXRMZURI?=
- =?utf-8?B?TVptdTZpbHJ4MjNIQzFJcmZaVGNwS2RPTVVnL015SUI5OG5sc2N2dWQ0c2FV?=
- =?utf-8?B?ODQ2NnZwYllScDJHZy9kYnBLTjA1Qm8ra3V2dXVrVEgveWhZWGZxR0hXNkxv?=
- =?utf-8?B?V244M21wYmJyb2tjbzVVM25RcURzQ3dDeDJlQXFHS3dsK2FPdVkycEhHWUdt?=
- =?utf-8?B?dGYrbmZKRUpEeTN5a0VQWGIrRGFOTUphUm8zaWhZQm5pcjJUOGxRYkxqTDRa?=
- =?utf-8?B?dnpybi9Ma0lxUDZKQ0dEY251KzZvSUJKbkZEVTVsREZPVWJ0bHMydmlsQ0Z4?=
- =?utf-8?B?Q3Y2WVFvejduYUxyeWx0Z1JUWGdKdTlJTVhFTDRLYmdob05DZGIydWp6SnRJ?=
- =?utf-8?B?eVBRNGFrQkxmMmtTQm1lRWkxeXdDZEs3MThXeW43c00wSWZjaWJrNU1LUXNJ?=
- =?utf-8?B?UFROcDNxcFYydHp0eWpqVUZrNCtrMTlhbjVEVFB3c3RtRmQyUDNUOUV6bnVr?=
- =?utf-8?B?MERCODh2U0luSlBNVDVNZ2ZWR2o1ZXFNWEpEQnh2a0UwQUpZUXhBNEdlOFpi?=
- =?utf-8?B?QW81cDA4OTNOeW04aGlWS1NrUG1VNDhoeU5zNU42aXFwS1dwTTJYN3A3SjhS?=
- =?utf-8?B?bEpKNkpISkp1S3Z4NlZlOStScTQ5SmJ5ejFkbzQ5S2Z1TG4vTTRwWUVDY0NH?=
- =?utf-8?B?YTZWVk80dEhkeURkYVViM2w2U1YxTUxNcUVzczlhTWtQQW1Jenc4M1Z6L0M2?=
- =?utf-8?B?NUhaaFdtd0tzeTNvK1I0U2dVYzVtNld3czhTQXF4VXhNMlFkNmthT1VmNXBn?=
- =?utf-8?B?dGdIcEZ2RFlFUFN6d3FaTkdydkdMNjdXSktZckpuTnIzQWJPaDkzN2ZoRUcz?=
- =?utf-8?B?YnFKSW95OFZ1VUFrNGN4bWV2MWp3ZGFTSVVNMW5KeStPbU5MOUxJcCtVUFNx?=
- =?utf-8?B?TVk1M0RkOTFJYkgveGdieEpSMTI2SGpIR3RHbWtMTWxOMDRTQ1Fxd3ZQaktB?=
- =?utf-8?B?NlE9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SHNOeForNkdreGdrN29keWd6YmRId2NEZlRyRGFiYi9jbWlIc1c0Uzd2c25q?=
+ =?utf-8?B?bVlPU3k5c210LzcvMnV2bkJjNWNLTUVMakJXY2ZTempkdUxtTklZYVMrMVdV?=
+ =?utf-8?B?bjlqSVUwZXJsWE5JYW9YaDVIQVR3OFBncUI5WlpjZHJ0V0N0eWhGODk5T2FK?=
+ =?utf-8?B?MDVER0F4MmRaQzVyS1VaOG14Z3VQK3FyKy9Qaml2RDJSVElZZ1RTZWJWTmFa?=
+ =?utf-8?B?RHl0M1BXODlIWHpRWnljRFpwWDcxaE1TT3JZQmxsT2NKdUZOWjFuNFhZQjV3?=
+ =?utf-8?B?aCt2d2UvdHZ1ZTVvODEwdXNJQ3R2NW9RTmo2ZUdFVmNTa3UyRnBNckZXVjQ1?=
+ =?utf-8?B?VnhLK1IwTHk5UXozZ2R5Y3htUVJnQVIxOENobmZxMGUxREhPOTZ0MkNuSzV1?=
+ =?utf-8?B?MkpHU2VGbkppcDFTWE40a2haU2NZemx2OVlPQUYyTXg2SXdVS1hKclJESFc3?=
+ =?utf-8?B?TS9nTmlpek9obGZoTW5xU1NyVHFNMnNIanZ2eVBBV216SGVOaVVsQ1BqRGF3?=
+ =?utf-8?B?V2lDbzRheU1QNDlhdjVWdHVyZWc1MUF4dlBYQ1dudXljQkxBbWYzQy9RZWJT?=
+ =?utf-8?B?aFhVL3hZaFlUYi9SeldrTXoxSnVucjRQdGpqUG90ZGM2N1NPL29uREVNaWhO?=
+ =?utf-8?B?dXg1aEFFMGxPQVpMWFBzbERXVW5tb2RMc252RHZnR2FyQzFrVHlyQ3VySnhC?=
+ =?utf-8?B?aGFjMWhIU1plcXRVTW4xZUNodGk2T1JHbERjUGRmT3grVldJZkNESzJLL0Rn?=
+ =?utf-8?B?R2hJWUFwVEhyc1JqVnNDMVFSK2Q3MjgzV1h6M042Q1RJNTRMeERnUEpNY3pR?=
+ =?utf-8?B?M0VpZlcxWVR2ckFrK0twU0ZKMWNKMWN6K3p0aUVSSVQrZ3lkYWZiMXFuMlg4?=
+ =?utf-8?B?djRyK2Y2blNnN0FRQ0gxTTJJbFh2ZXc1UHpXNzQ4c2w0eDRaamEzMkZhWGZh?=
+ =?utf-8?B?K3Izc2NnVHNxazJlMWdhblhVNVA0R0FUMkw0WTI2S2ZHS1NSLzVXRy9mcjJO?=
+ =?utf-8?B?M0VoRU9PY0doWlZOb0pMSVBGeXc1T1B6MDdkcGZ6QWhGVWhCSmUrTzZ3b1d3?=
+ =?utf-8?B?UEZ6eUk5aTFXMnJIbXBXMUcvZEJnNW9vSXhZdUVtS3J5YWNST1BHbEJ4ejJz?=
+ =?utf-8?B?bmVTMDBBWTJYSGxmaG1IZVh4YWEzVEVoT3N0QUU1cG1JbUhpUjZ3Ryttcjk2?=
+ =?utf-8?B?VVQ0SGlHaTl1ZTFxQURHcGNCOG45enY4ZDhTbnVXRGFGTHhEdXViSjNCV25O?=
+ =?utf-8?B?NU15aXd0c09ZcmZaMWdpTzJqczdFeEJ5R290ZWhCT1M5QkxnVWlpcXNQaW50?=
+ =?utf-8?B?akJWSzNNWUFNTHFsNXhaNmQvZGloTDZtZ09xTHJJYmMrZ2JWYzhOa0MrK21L?=
+ =?utf-8?B?VHRRalVXYXhqdTlvKzV3cUtYOENPS1pQb2wySVdEeHNsNGRlelNzajVBOVRN?=
+ =?utf-8?B?V0s4UXdNcndLY1U1cndtQStUSG9jblE0b2MwVUUxOFVpcHNlalR1N25Idks0?=
+ =?utf-8?B?U2ZGT0xhQk12MWV0aGkrSkRUL0U0VHFFU1JRbks0dXo3RGoyY1lYaTM3Y2dv?=
+ =?utf-8?B?cXI3Q2ludzNPSCt4V0tIK3llWWFieVp2MEZMck9DdlcvV3ZaY0kwWjI3bVVh?=
+ =?utf-8?B?bVdPUlpUQ1lLcEZIT3FONndRc2I2UzI1NEdVc2thQUtqa2RqQ2UrZnFsd1lx?=
+ =?utf-8?B?UlFpVURYeFFSZFExL0Q2OFNoKzQzWmpaMXRpUTh4YlowOG5DZXdncmt2OWRN?=
+ =?utf-8?B?UzRYckhaZ0hQQUZBYnVnMGpwMkFVekVZUjQ4aC84Z29WVEU3b1lST0N6S1Vw?=
+ =?utf-8?B?OUJ1TU1rVE9vU25pa2p1N0V3SE5QdE9mekFKbHl5S2lBSllRbXZsaEd4U21m?=
+ =?utf-8?B?eGJJNE84dm5jeEFlOXVsaXI0cXhydkxQRXdQZUNOVXZJeHowS2NxMTNKSWpN?=
+ =?utf-8?B?K2xNKzRIYzZoVG8vRWNHczhjUHF4ck4rZ3Z6dnlRNFFGcnBCZWpGS0Y4bFkr?=
+ =?utf-8?B?M0sxN1dWcXVXV3M1SG50RG5odFIzVVQ1dEFURS9VbWowWGhVVHQzbWtJdkVN?=
+ =?utf-8?B?UDRBU0loQjhmMy9PVWZFL0RMcU94aGVUeDNOQnBxcGhFMHBCbHFERENJRUxa?=
+ =?utf-8?B?aytlZ0xyaFFGRTJrVXl0ZGp6N0VHOCtsa3hobXkrcXdaNm1kcWE1K25SRmdu?=
+ =?utf-8?B?OXc9PQ==?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8c6790b2-dab7-4493-2496-08dcbaaca9f2
+X-MS-Exchange-CrossTenant-Network-Message-Id: ae04704a-2e89-4ef3-d273-08dcbaace5c6
 X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB8906.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Aug 2024 08:56:33.0704 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Aug 2024 08:58:13.3173 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: eOOy+yDhtJrMcXFszvZllT89edczQ8F+g+mFqYFRpoGsyCNqTvGNdTMsehj13SfcTUME/o+x5KNel/N8I3KEKM+hDRtAa30R6MX8fvE+PQk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7267
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7j/gjKwkW2pdEp/myuiDuyWdoZWVBVrdbpzRz8lwbZyelelU4zpFdLUgqfm9pAlB0YzU5KRYu5utqU+5Wzpg1N6VTIomeDYsHoKeH9QCRNg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8480
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,79 +182,43 @@ Hi Simon,
 On 8/11/24 4:50 PM, Simon Glass wrote:
 > Hi Quentin,
 > 
-> On Tue, 6 Aug 2024 at 08:16, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> On Tue, 6 Aug 2024 at 08:10, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 >>
 >> Hi Simon,
 >>
 >> On 7/21/24 5:25 PM, Simon Glass wrote:
->>> Unless function names are requested, the logging system should not
->>> compile these into the code. Adjust the macros to handle this.
+>>> Use the log subsystem instead of dev, to avoid including function names
+>>> in the code.
 >>>
->>> This means that turning on function names at runtime won't work unless
->>> CONFIG_LOGF_FUNC is enabled. We could perhaps split this into a
->>> separate option if that is a problem.
+>>> The CONFIG_LOGF_FUNC option can be used to enable the function name.
 >>>
->>> Enable CONFIG_LOGF_FUNC logging for sandbox since the tests expect the
->>> function names to be included. Fix up the pinmux test which checks a
->>> logging statement.
->>>
->>
->> I now understand the statement in patches earlier in this series :)
->>
 >>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>>> Reviewed-by: Sean Anderson <seanga2@gmail.com>
 >>> ---
 >>>
->>> Changes in v2:
->>> - Update commit message to mention the runtime impact
->>> - Leave assert() alone since it is only compiled in with LOG_DEBUG
+>>> (no changes since v1)
 >>>
->>>    common/log_console.c      |  4 ++--
->>>    configs/sandbox_defconfig |  1 +
->>>    include/log.h             | 16 +++++++++++-----
->>>    test/cmd/pinmux.c         |  8 +++++++-
->>>    test/log/log_test.c       |  4 ++--
->>>    5 files changed, 23 insertions(+), 10 deletions(-)
+>>>    drivers/mmc/mmc.c | 49 ++++++++++++++++++++++++-----------------------
+>>>    1 file changed, 25 insertions(+), 24 deletions(-)
 >>>
->>> diff --git a/common/log_console.c b/common/log_console.c
->>> index c27101b8fe2..9376baad664 100644
->>> --- a/common/log_console.c
->>> +++ b/common/log_console.c
->>> @@ -38,10 +38,10 @@ static int log_console_emit(struct log_device *ldev, struct log_rec *rec)
->>>                        printf("%d-", rec->line);
->>>                if (fmt & BIT(LOGF_FUNC)) {
->>>                        if (CONFIG_IS_ENABLED(USE_TINY_PRINTF)) {
->>> -                             printf("%s()", rec->func);
->>> +                             printf("%s()", rec->func ?: "?");
+>>> diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+>>> index b18dc331f78..b0105afe5d6 100644
+>>> --- a/drivers/mmc/mmc.c
+>>> +++ b/drivers/mmc/mmc.c
+>>> @@ -294,7 +294,7 @@ int mmc_poll_for_busy(struct mmc *mmc, int timeout_ms)
+>>>
+>>>                if (status & MMC_STATUS_MASK) {
+>>>    #if !defined(CONFIG_SPL_BUILD) || defined(CONFIG_SPL_LIBCOMMON_SUPPORT)
+>>> -                     pr_err("Status Error: 0x%08x\n", status);
+>>> +                     log_err("Status Error: %08x\n", status);
 >>
->> What about setting _log_func to "?" if LOGF_FUNC isn't set?
+>> Please don't remove the 0x prefix (will not comment on other patches in
+>> this series if it happens again, please check :) ).
 > 
-> That would require all call sites to pass a pointer to the string,
-> rather than just NULL. I suspect it would increase code size?
+> OK...hex is the default though.
 > 
 
-I probably missed something, but log_rec->func doesn't seem to be used 
-in many places (common/log_console.c and common/log_syslog.c).
-
-log_console_emit() is only called through log_dispatch() itself only 
-called from _log().
-
-_log is called from:
-- cmd/log.c:do_log_rec(), the func parameter is provided by argv[5] 
-which I assume cannot be NULL because argc<7 is checked.
-- common/log.c:_log_buffer() which is called by log_buffer()
-- include/log.h:log()/log_buffer() which is modified to swap __func__ 
-with _log_func (so __func__ or <insert placeholder> which is NULL or "?" 
-I suggested there). the rec->func argument cannot be changed from any of 
-the caller.
-
-So I assume we would be fine?
-
-As for the size increase, I would hope that the compiler knows it can 
-store the same string at only one place and then reuse it instead of 
-having it in many places, but I know nothing about compilers so it's 
-just me guessing :)
-
-In any case, either is fine by me!
+Can you please clarify what you meant by "it's the default though"?
 
 Cheers,
 Quentin
