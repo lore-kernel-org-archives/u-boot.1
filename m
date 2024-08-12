@@ -4,54 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87E44C3DA7F
-	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 09:45:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FE35C52D7C
+	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 09:53:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB2C7886A7;
-	Mon, 12 Aug 2024 11:45:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id E2A6F884C3;
+	Mon, 12 Aug 2024 11:53:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Sdugj1GE";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="VsI2cz/v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FAEC88703; Mon, 12 Aug 2024 11:45:42 +0200 (CEST)
-Received: from mail-m32122.qiye.163.com (mail-m32122.qiye.163.com
- [220.197.32.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B36A98861A; Mon, 12 Aug 2024 11:53:31 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170130004.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::4])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7CD4886A0
- for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 11:45:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id A85CC881A2
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 11:53:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=Sdugj1GEeucIyvBwAGpJmo5588SEuCcbOi5bb8/AdAvxoVwu97xNGpnYu0r4hVi9/30kv0n03+/eQLg4fEVPcsJF0XPe+URvOoACKfDjF0vmmo3GkFEfbx6lKMB8BYUPp3tqbdTOe5vm/VZaME6Aq8RmO7J2KE6eUUsUebTB7Bs=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=hHikVgBujzUCI+RvI9CEp+Lx2WHbcwsWq45s4GbZF3A=;
- h=date:mime-version:subject:message-id:from;
-Received: from localhost.localdomain (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id A64F09006CC;
- Mon, 12 Aug 2024 17:45:30 +0800 (CST)
-From: Kever Yang <kever.yang@rock-chips.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: Pull request: u-boot-rockchip-20240812
-Date: Mon, 12 Aug 2024 17:45:30 +0800
-Message-Id: <20240812094530.39676-1-kever.yang@rock-chips.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=NoQu4LUw1e9i6ig2KvxXNoTKag+Sh7HFqq8XJdeao7YogDDxIvVLJ+jpDLw1bKxzNk5LdDmd1Cf/zSB2arO7VYKN3JXzk8NJYNCvnjFT/JlDWIWA48hfuCLb3736FXHaQnIzMag3OqDaog7sxPP7R7ULq9Xi0x8Wh7/bQcpOfVdbugO4ufqPJ24UMETyl95+0EZe/xK5JS7K6YkY0eVShEjMbLBCtHFfm4gXtQw8XgS868+EeCifZV8vue9GtwfnhywrB5A8FulR1B7TVq3wrpUxWhvLz7wokNW8RQgIiMlD83Xa1tCV7qB53LHGVlFmZS3E3RR//UKzlBRK1BTTmw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=90YTj9jLzgJ0HEUETHrN80MFZ63RcTYNRM7IynLIywo=;
+ b=rJ6sVQX0sHlfW27rCM2d73i9Lf/qvKIWqJhxrEzgt8d+a0YsR+5FsgsGnU8yLI1/I5rz/fgYDtmcNJA1L3EXvWUYbfR3c1ybXoiamxlwJxhOFocba2xqdEayzNlK0wf0MRltBBFRwPNaI9T8epmQTFnAlWPB94biZOXmmcsKBYumlk2E9KnjB96cAvn4y1PUmrAkA5LKxmLKAD8VchR8JRcCql7qjjPGTG5Q+2vNQ6XJdqmiG0WfMSwnNN3SWpX2dV0htMfVxza3RP6lRALQrleenD7X8q6ZaZELqd8IumEdA9Q+UBbvq0wJQADEcvSMz59ERG3nnlj+6PVzJM8BUA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=90YTj9jLzgJ0HEUETHrN80MFZ63RcTYNRM7IynLIywo=;
+ b=VsI2cz/vnZIUveNjJKMPs/c5l8YpCtbj35j2ptnwMDqpeLqewst8fyfJ4/Xp4lre5m+EfRSHnsNb4ZULdFD4tpqm6CHs2VSYx9myyL2CEgNIc4L1TyIy5lZuCSZc7knpl3hSQdmn0VuQcFEOquVANu0d7q9fIuF7FroyhJIjp6s=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AM9PR04MB8906.eurprd04.prod.outlook.com (2603:10a6:20b:409::9)
+ by VI1PR04MB7150.eurprd04.prod.outlook.com (2603:10a6:800:12a::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7849.20; Mon, 12 Aug
+ 2024 09:53:26 +0000
+Received: from AM9PR04MB8906.eurprd04.prod.outlook.com
+ ([fe80::d379:5378:b1:cea]) by AM9PR04MB8906.eurprd04.prod.outlook.com
+ ([fe80::d379:5378:b1:cea%3]) with mapi id 15.20.7849.019; Mon, 12 Aug 2024
+ 09:53:26 +0000
+Message-ID: <1226caad-ae95-4c5c-be69-f774f01f975f@cherry.de>
+Date: Mon, 12 Aug 2024 11:53:24 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 12/15] spl: mmc: Try to clean up raw-mode options
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
+References: <20240811122924.4035982-1-sjg@chromium.org>
+ <20240811122924.4035982-13-sjg@chromium.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20240811122924.4035982-13-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: WA1P291CA0009.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:19::20) To AM9PR04MB8906.eurprd04.prod.outlook.com
+ (2603:10a6:20b:409::9)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGhpKSVZKGh1NHUlKGk8fQ0hWFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a9145fa81a003a9kunma64f09006cc
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ODI6ITo4QjI8H1EUCQkiKjRM
- IwwKCiFVSlVKTElIT05OQkhKQ0pKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKT0hPTzcG
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM9PR04MB8906:EE_|VI1PR04MB7150:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8570d415-122e-4acf-8cac-08dcbab49c7e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?WGRvQXhmTkUveGhTY3duMjBYSDJFMGx6eHQ1MG9wMTI1RGZJTVJ2U0JoazJQ?=
+ =?utf-8?B?RUZ5bkJoWlV6TVRkdFhPaW0wM1Q1UWpISGRReWNiMVo1SEhrOHdhRlRya3J1?=
+ =?utf-8?B?bmd2ZHBORGF0dWc1ZytvMmxVbWg5WWh1eTJuRWxRWUlMaEt2TnB3NEJ5U3VY?=
+ =?utf-8?B?TkJCcjlxbjY4T0hoVk5Udk5LSW1ST0Q0V0djQ1FMd1d4NWcyZzVTbzh2WG42?=
+ =?utf-8?B?c3BYcGJOcDRxUXNpUVFFWkE4N2k0VXJCRGZIOERqa0tGcTRZOTFUekhmWVpn?=
+ =?utf-8?B?Z3g2Y2toeklsQWdoQmlXby9nMG94QTQzTXJYbWI3TVBUZWZuN0pjNzNRNUE1?=
+ =?utf-8?B?Z3kxMWFoaWd5VGNaUTd6VUhrLzVmaTFlTisvZ0xPbmlJWXhEU2YzK0ZLL1Ew?=
+ =?utf-8?B?TUREOTgzSG9lenEwMC9QaGdZeGRnbStEbDZZZUtxSHNtWm54SzhSOHNWK2N0?=
+ =?utf-8?B?K3JJek9GL0FLZzM1NjA0SUd0eThFTzFBc2JXMFZPNzE0NnR5QUpMMks2cEtV?=
+ =?utf-8?B?d25ZcHRZS3NqcktYOFY1eFlxcXkrdllTTHZFTFJoVVU2WkVOOTV6cXdLZDg5?=
+ =?utf-8?B?bUpGbVNyc1UwUVl3amFucmZ4cDdnSENzMkN4T3FFdW9nWTZ3S2ptRVpoMEhx?=
+ =?utf-8?B?TWY1OWNXN1pGUDQ2TG1Tbms5V3RIcmlLUUpNaGlBZHVIMm8xb0hpNFhrQ2N1?=
+ =?utf-8?B?YVhSTmRUOEMydzRiMFlOS053OVF3QURjeVhLMVBDdnZtYTM2NTlldXZLdkxR?=
+ =?utf-8?B?eFFTMzQyT1VJRVVUNWhhZWVtbk1SUFVjNXh2SzJIN3hFSFRYRzlSQzRGL3BV?=
+ =?utf-8?B?dEpsUXBvb3M2ZE9zY2FUSWpFL0xmdk9VY1l0Q3RHUXlOc2N4VGlvSmhReEJo?=
+ =?utf-8?B?MXQ0QzNiRlZ1L3hqS3JZcGliVTRhR0lJWHZLTDBBRURvclIyUlpReU9IUXJm?=
+ =?utf-8?B?ZWRvSnBoSmRtcTAyS04rRk9vcUVYdXZhRHFNZngwWFRxYk93SmhBUFZVT3p5?=
+ =?utf-8?B?ajdmREY1d3ZpWW1JcEVsNWU5SnVLd2Qxb3o1WHVyMTl5RHpWUTRsNHc2dERV?=
+ =?utf-8?B?a0dFR1BPeDRVWjFka0hEcjZ0RHNEbnM4VGtPTVgvWHhIdzRseGVucEh4UHlo?=
+ =?utf-8?B?RS9JV2lTa0F5aVBoQTZVWGNKelc4cFZiNEhCQWYvSkVCV2ZsWnZibjlkZjU5?=
+ =?utf-8?B?b1FEMG1KWjBYTDdGM3BUMmlLUnM3cjZaWVFUdkh6eDlMeGpzUmdRb05DZ3NH?=
+ =?utf-8?B?dVpRalNmNjluTjU0SGZ5ZWJ4c2Z3dTA2ODhDMlMyeFhudFVNV2RoSWp6Znp0?=
+ =?utf-8?B?VkpJYy9Ib2RlZVRaUkZDN2RJSEh1U0J6THNKNmNVVmt0YTZZSnZLK0xuaUhz?=
+ =?utf-8?B?alI0cHhNNWllYThTMDM3SVdhZnliN013OEc4TzVVdVdacW1ZWVNMMy9HZmg4?=
+ =?utf-8?B?bUw4cUFwQUZBVXlBZFA1ME9VSUZFQVdCdUlGVWhhMlBqTENqdVdzeFp1aVdm?=
+ =?utf-8?B?L2V0NlAwQkxPNVpYWkVvUkd5aFhPdjhPUlpjQWtTZmJzdDBJcVBRSklnbWpl?=
+ =?utf-8?B?cUJHb0tRcTRHdTU1L2l4UUw1YzVUdTBpTUFROGhFSzBQUjN1aXp6TUJsaWlK?=
+ =?utf-8?B?ejd6ZUh5UXIwcyt4a1QrZTM0VkY3MDZZK3VQY3djbi9HWG9Nck53aisxU2lW?=
+ =?utf-8?B?aG4xSGJMQ3BNbjFvNU9VNzJUTTJ4Zm8zQmpVUVRhSlJaZUZmSWh3V3M1TmZy?=
+ =?utf-8?B?TVVQWlNpcU0rTEtUb1VESDN4NzMvemlnYnhYcURzamk4RFZSQkwrU2hOckxx?=
+ =?utf-8?B?VVZBeDNFWTZZL0RvaTR6QT09?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AM9PR04MB8906.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bGJwNWwyNUdzeTJjSmVrUFcyM0t5UE1hN2Fibk9NUVdUKytqaW5YOWpXbjJv?=
+ =?utf-8?B?SDExNE9ZL0NwZFVuNU9JMnlvOE52aVhveDJOSXBVQ3VtcmdZSUVxRTlwOWdu?=
+ =?utf-8?B?eHFLeDVtZEtZNG5TdDRkTFBLL0hlQ3gxVnB0Z09IenZnckduYXFzRUZaMUtC?=
+ =?utf-8?B?dTlHdEd1WU5weFFCQ0JSWUJsNkg4bitweUV4NnNVeUJRRVg1QlRvcFluMkpJ?=
+ =?utf-8?B?TWJueTFzQlN0U2RFend0a0IwdnVTaTNpM1BLK0FHWnVSQWhJZWNmMmxDSjIr?=
+ =?utf-8?B?WEZ4MldvcTQ1OWExS0FDUTg1TXRxb25GK2YyVnh2ZlAzY1IzOERtM3hmTGg1?=
+ =?utf-8?B?K2NvQlNrWG1uQW1QaGxBcHZVQVc0dmFjazUwSFV6YXpmYWF6aGNPVk10bUxl?=
+ =?utf-8?B?TTNNL3c3Qy9zRWEzU0x0SXRaK0thVWlKSVR2aE12MWN3RjhzU3dJbVZDYm5z?=
+ =?utf-8?B?MXN3Z2ZHSmpHSWsyTHlrM3ZCcnFEM1BnekkvVXo2d0k4c2JvZnM2THlDQTFj?=
+ =?utf-8?B?MnlzYUlUL2lSQSs3aFNCbE1EMDRYQlhnOENPS3Z0SlM4WTI4Mk4vdkU0U2p1?=
+ =?utf-8?B?ZVIrRmRta0NPU0lRNVk4eFdIQndpUEdWUkh5TG9vaXdydkp0MjhCZllad29w?=
+ =?utf-8?B?TVBoaG1HS3ZhbERFK2NjSU0yOUNqZC9vV3pONEh4a3FmNGJQbzJCbUNhaFdk?=
+ =?utf-8?B?SDZ5dmhWN01wV2lOYmFUeXI5cHM0U1owa0E3NkRTMDNaaUp3M0dnZTZUNnc2?=
+ =?utf-8?B?SVBPaHE1WVE0YWFqUVZZblVsb1I0ZHl6dm9LSWdSUHNDTm9jUWVFOWdSU0dO?=
+ =?utf-8?B?UUx2S3VBaURkemh0Y0RPZTI4c2hrWi9zYnhDekFaMWlOK2tVd244eVltak9Q?=
+ =?utf-8?B?NXhGOHZ0cW9BZWt6b2M0Um9jelRKM0FZWW5HWXZ4NzFnSlJMKyt5cE5teitp?=
+ =?utf-8?B?M0FOZ0Nsbk43aysxSjN3ckZqK3Z3K1dMZVhiTExJcjVKN3l4YThONG1oZk9R?=
+ =?utf-8?B?Y0NQZEQwRkJDUGpGdzVCeUtNSVVtMnUyMXN4cWtESXpDWkJDcFplU3BqcFFu?=
+ =?utf-8?B?YVBmbHA1eXE0R1dIV0UxR1czZFRMTE5GTSsxb3ljZmFidm1teDlKcnl1RnR4?=
+ =?utf-8?B?Y3g0S2NqSFg0SW5LZXNRcUhNYlpMYmp4eWlZUGhmbStRWnFKUlpzWmVXOVVi?=
+ =?utf-8?B?alBsNHdpNW9LbXZrNzlQbnpLQlJ3N05hR1BjS0VYejZSS0VWS05HdkFkelNi?=
+ =?utf-8?B?c1NZbzRKb3RxZ3MyWFVFeUlmWVMwYnRJeWhkWWEwQWF4bUt4d1pyYjd5ZVhM?=
+ =?utf-8?B?WEtvYVNxWDU5ZXFFMEZMbjBDbVcxdmZPZ3ZzUFg1T0lsVXBpKzZ5Nzl0Y2Np?=
+ =?utf-8?B?ZkNITjd0YUhLWjBQL1pmRmpoZDJnWDdXSkMrTlZDaENCU2xJZ1dQRThOODBo?=
+ =?utf-8?B?S2ZWcUxYN2s5TFNOR29nU1M3K2RDSEg1ZkE1M0I0aFhTRUdhNFd6RWlDNUVk?=
+ =?utf-8?B?Mk9QTVdybHlEdTZERlF5cmhzOWg5M2szTkNiNHdZMkdEZmVkOWhhclVrTUFD?=
+ =?utf-8?B?QmRNZTdGaS9jS0NLcWRhWEFWcUpDSWtlRVdicTF0T3NkWE9QRUVLSlVGYndZ?=
+ =?utf-8?B?OHFNdm9aNGYzK0R6MkhIQ0xwMjFSRUxQb2JSOG5XaDNRSnpTVzJiSm9PaVB0?=
+ =?utf-8?B?Tm5NbFdXZzZhMVVnOERMOE1ubm9DZWw1YmpXOVQ1YzA1TE9kNjNhQjFoSWhm?=
+ =?utf-8?B?TmJmQ3A2MjlaR3ZOUkYyYVZyN1JicTBwQXllTERTODlNenI0UGo5ejcwMit2?=
+ =?utf-8?B?VEhjZURYR3hENzN3RDlDNmFlUDZzdDhSS25mSVgwa205cmhObmFLS3hqN3Fz?=
+ =?utf-8?B?dG5EUnpHWlJXRnZyWkN1clprb2lvSGJVYWhKR09oYXArNjJkdTdNdkFjWnAz?=
+ =?utf-8?B?N2lSMGFaME05ZXVwQmFjZW0xb3hLUVpaNEpEMXhYbS8rOHhzdVk0TldIRGVs?=
+ =?utf-8?B?TGx3UGoxR1dmZlBYY2k2ZHl5Q05CeUgrU1dCZHVZZnowcFRPZFBEeGw5bXB2?=
+ =?utf-8?B?YzdCN1N3bjhrWVlJY0VjQkZ5NnZMQ3h6cE01N2Q0NnE2ZktFdTlxd0lXYU94?=
+ =?utf-8?B?L2NYOUJTZExEb01kS3FYaFdyQ29Cd09mTzl5bktESTZieGpybjdHTTVyRlZZ?=
+ =?utf-8?B?bVE9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8570d415-122e-4acf-8cac-08dcbab49c7e
+X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB8906.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Aug 2024 09:53:26.3010 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: I5OlRl1IfJSRLAcoNGfbPjhBr+ZN32TSwIuE8NjEf059sJDXwBWthPJTc0y58YBPkGvvRkKC0pLNnJjJZ8/rEBB4+xzL7PDjtZaAuhTM44c=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB7150
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,254 +174,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Simon,
 
-Please pull the updates for rockchip platform:
-- Add board support:
-	RK3566: Radxa ROCK 3 Model C
-		Radxa ZERO 3W/3E
-		Xunlong Orange Pi 3B
-	RK3568J: Radxa ROCK 3B
-	RK3308B: Radxa ROCK S0
-	RK3588: Radxa ROCK 5 ITX
-		FriendlyElec CM3588 NAS board
-- dw-mmc: allow 4-bit mode;
-- dts and config updates;
+On 8/11/24 2:29 PM, Simon Glass wrote:
+> Make the raw-mode options depend on SPL_SYS_MMCSD_RAW_MODE in a more
+> direct way. This makes it easier to understand the options with
+> 'make menuconfig'.
+> 
+> There are three different ways of specifying the offset:
+> 
+> - sector offset
+> - partition number
+> - partition type
+> 
+> So make these a choice, so it is more obvious what is going on.
+> 
+> Update existing boards to enable SPL_SYS_MMCSD_RAW_MODE where needed.
+> 
+> Reviewed-by: Sean Anderson <seanga2@gmail.com>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-CI:
-https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/21997
+For the Kconfig part:
 
-Thanks,
-- Kever
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-The following changes since commit 1c5445f190cabfd0e453f583aca44da10156c0d6:
-
-  Merge patch series "Low Power Mode: Package TIFS Stub in BeaglePlay" (2024-08-08 18:37:11 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20240812
-
-for you to fetch changes up to 192318d3dcd42da47b9df532a9bda125ed120e4f:
-
-  configs: rockchip: enable "ums" command for Radxa ROCK 5B (2024-08-12 15:44:04 +0800)
-
-----------------------------------------------------------------
-Alexey Charkov (1):
-      arm64: dts: rockchip: add thermal zones information on RK3588
-
-Dragan Simic (1):
-      arm64: dts: rockchip: Prepare RK3588 SoC dtsi files for per-variant OPPs
-
-FUKAUMI Naoki (6):
-      arm64: dts: rockchip: fix mmc aliases for Radxa ZERO 3E/3W
-      arm: dts: rockchip: disable "usb_host0_ohci" to make boot faster for Radxa ROCK 3A
-      arm64: dts: rockchip: change spi-max-frequency for Radxa ROCK 3C
-      arm: dts: rockchip: remove upstreamed props for Radxa ROCK 3A
-      arm: dts: rockchip: remove upstreamed props for Radxa ROCK 5B
-      configs: rockchip: enable "ums" command for Radxa ROCK 5B
-
-Heiko Stuebner (2):
-      arm64: dts: rockchip: add ROCK 5 ITX board
-      board: rockchip: Add Radxa ROCK 5 ITX
-
-Jonas Karlman (26):
-      mmc: rockchip_dw_mmc: Allow 4-bit mode when 8-bit mode is supported
-      rockchip: io-domain: Add support for RK3308
-      rockchip: rk3566-pinetab2: Migrate to OF_UPSTREAM
-      rockchip: rk3588-toybrick-x0: Migrate to OF_UPSTREAM
-      rockchip: px30/rk3326: Use soc dtsi files from dts/upstream
-      rockchip: Use files from dts/upstream
-      rockchip: rk3308: Remove OTP device node from soc u-boot dtsi
-      arm64: dts: rockchip: Add OTP device node for RK3308
-      arm64: dts: rockchip: Add rk3308 IO voltage domains
-      arm64: dts: rockchip: Add sdmmc related properties on rk3308-rock-pi-s
-      arm64: dts: rockchip: Add pinctrl for UART0 to rk3308-rock-pi-s
-      arm64: dts: rockchip: Add mdio and ethernet-phy nodes to rk3308-rock-pi-s
-      arm64: dts: rockchip: Add io-domains to rk3308-rock-pi-s
-      arm64: dts: rockchip: Update WIFi/BT related nodes on rk3308-rock-pi-s
-      rockchip: rk3308-rock-pi-s: Remove unnecessary u-boot dtsi overrides
-      rockchip: rk3308-rock-pi-s: Enable LED and IO Domain driver
-      arm64: dts: rockchip: Add Radxa ROCK S0
-      board: rockchip: Add Radxa ROCK S0
-      arm64: dts: rockchip: Add Radxa ROCK 3B
-      board: rockchip: Add Radxa ROCK 3B
-      arm64: dts: rockchip: Add Radxa ZERO 3W/3E
-      dm: adc: Add SPL_ADC Kconfig symbol for use of ADC in SPL
-      board: rockchip: Add Radxa ZERO 3W/3E
-      arm64: dts: rockchip: Add Xunlong Orange Pi 3B
-      board: rockchip: Add FriendlyElec CM3588 NAS
-      rockchip: rk3568-nanopi-r5: Disable SPL_DM_WARN Kconfig option
-
-Kever Yang (1):
-      rockchip: dts: rk3568: Sync the evb board name with kernel
-
-Maxim Moskalets (1):
-      board: rockchip: add Radxa ROCK 3 Model C
-
-Quentin Schulz (1):
-      rockchip: configs: puma-rk3399: disable VIDEO support that breaks Linux
-
-Ricardo Pardini (1):
-      board: rockchip: Add Xunlong Orange Pi 3B
-
-Sebastian Kropatsch (2):
-      phy: rockchip: naneng-combphy: Introduce PHY-IDs to fix RK3588 muxing
-      arm64: dts: rockchip: Add FriendlyElec CM3588 NAS board
-
-Trevor Woerner (1):
-      arm64: dts: rockchip: add gpio-line-names to radxa-zero-3
-
- arch/arm/dts/px30-firefly.dts                      |    4 +
- arch/arm/dts/px30-u-boot.dtsi                      |    4 +
- arch/arm/dts/px30.dtsi                             | 2415 -----------------
- arch/arm/dts/rk3308-rock-pi-s-u-boot.dtsi          |   19 -
- arch/arm/dts/rk3308-rock-s0-u-boot.dtsi            |   21 +
- arch/arm/dts/rk3308-u-boot.dtsi                    |   16 -
- arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi         |    4 +
- arch/arm/dts/rk3326.dtsi                           |   15 -
- arch/arm/dts/rk3566-orangepi-3b-u-boot.dtsi        |   14 +
- arch/arm/dts/rk3566-orangepi-3b-v1.1-u-boot.dtsi   |    3 +
- arch/arm/dts/rk3566-orangepi-3b-v1.1.dts           |    3 +
- arch/arm/dts/rk3566-orangepi-3b-v2.1-u-boot.dtsi   |    3 +
- arch/arm/dts/rk3566-orangepi-3b-v2.1.dts           |    3 +
- arch/arm/dts/rk3566-orangepi-3b.dts                |    5 +
- arch/arm/dts/rk3566-pinetab2-v0.1.dts              |   28 -
- arch/arm/dts/rk3566-pinetab2-v2.0.dts              |   48 -
- arch/arm/dts/rk3566-pinetab2.dtsi                  |  943 -------
- arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi      |   15 +
- arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi      |   15 +
- arch/arm/dts/rk3566-rock-3c-u-boot.dtsi            |   18 +
- ...evb-u-boot.dtsi => rk3568-evb1-v10-u-boot.dtsi} |    0
- arch/arm/dts/rk3568-rock-3a-u-boot.dtsi            |   13 +-
- arch/arm/dts/rk3568-rock-3b-u-boot.dtsi            |   15 +
- .../dts/rk3588-friendlyelec-cm3588-nas-u-boot.dtsi |    8 +
- arch/arm/dts/rk3588-rock-5-itx-u-boot.dtsi         |   22 +
- arch/arm/dts/rk3588-rock-5b-u-boot.dtsi            |   17 -
- arch/arm/dts/rockchip-pinconf.dtsi                 |  344 ---
- arch/arm/mach-rockchip/rk3308/syscon_rk3308.c      |    3 +
- arch/arm/mach-rockchip/rk3568/Kconfig              |   12 +
- arch/arm/mach-rockchip/rk3588/Kconfig              |   53 +
- board/friendlyelec/cm3588-nas-rk3588/Kconfig       |   12 +
- board/friendlyelec/cm3588-nas-rk3588/MAINTAINERS   |    6 +
- board/radxa/rock-5-itx-rk3588/Kconfig              |   12 +
- board/radxa/rock-5-itx-rk3588/MAINTAINERS          |    8 +
- board/radxa/zero3-rk3566/Kconfig                   |   12 +
- board/radxa/zero3-rk3566/MAINTAINERS               |    6 +
- board/radxa/zero3-rk3566/Makefile                  |    3 +
- board/radxa/zero3-rk3566/zero3-rk3566.c            |   59 +
- board/rockchip/evb_rk3308/MAINTAINERS              |    6 +
- board/rockchip/evb_rk3568/MAINTAINERS              |   13 +
- board/xunlong/orangepi-3b-rk3566/Kconfig           |   12 +
- board/xunlong/orangepi-3b-rk3566/MAINTAINERS       |    6 +
- board/xunlong/orangepi-3b-rk3566/Makefile          |    3 +
- .../orangepi-3b-rk3566/orangepi-3b-rk3566.c        |   77 +
- configs/cm3588-nas-rk3588_defconfig                |   90 +
- configs/nanopi-r5c-rk3568_defconfig                |    1 -
- configs/nanopi-r5s-rk3568_defconfig                |    1 -
- configs/orangepi-3b-rk3566_defconfig               |   98 +
- configs/pinetab2-rk3566_defconfig                  |    5 +-
- configs/puma-rk3399_defconfig                      |   10 +-
- configs/radxa-zero-3-rk3566_defconfig              |   85 +
- configs/rock-3b-rk3568_defconfig                   |  100 +
- configs/rock-3c-rk3566_defconfig                   |   97 +
- configs/rock-5-itx-rk3588_defconfig                |  111 +
- configs/rock-pi-s-rk3308_defconfig                 |    4 +
- configs/rock-s0-rk3308_defconfig                   |   72 +
- configs/rock5b-rk3588_defconfig                    |    1 +
- configs/toybrick-rk3588_defconfig                  |    3 +-
- doc/board/rockchip/rockchip.rst                    |    9 +-
- drivers/Makefile                                   |    2 +-
- drivers/adc/Kconfig                                |    5 +
- drivers/adc/Makefile                               |    2 +-
- drivers/misc/rockchip-io-domain.c                  |   37 +
- drivers/mmc/rockchip_dw_mmc.c                      |    4 +
- drivers/phy/rockchip/phy-rockchip-naneng-combphy.c |   46 +-
- .../src/arm64/rockchip/rk3308-rock-pi-s.dts        |   81 +-
- dts/upstream/src/arm64/rockchip/rk3308-rock-s0.dts |  293 ++
- dts/upstream/src/arm64/rockchip/rk3308.dtsi        |   29 +
- .../src/arm64/rockchip/rk3566-orangepi-3b-v1.1.dts |   29 +
- .../src/arm64/rockchip/rk3566-orangepi-3b-v2.1.dts |   70 +
- .../src/arm64/rockchip/rk3566-orangepi-3b.dtsi     |  678 +++++
- .../src/arm64/rockchip/rk3566-radxa-zero-3.dtsi    |  531 ++++
- .../src/arm64/rockchip/rk3566-radxa-zero-3e.dts    |   52 +
- .../src/arm64/rockchip/rk3566-radxa-zero-3w.dts    |   92 +
- dts/upstream/src/arm64/rockchip/rk3566-rock-3c.dts |    2 +-
- dts/upstream/src/arm64/rockchip/rk3568-rock-3b.dts |  781 ++++++
- ...3588s-pinctrl.dtsi => rk3588-base-pinctrl.dtsi} |    0
- dts/upstream/src/arm64/rockchip/rk3588-base.dtsi   | 2823 ++++++++++++++++++++
- ...3588-pinctrl.dtsi => rk3588-extra-pinctrl.dtsi} |    0
- dts/upstream/src/arm64/rockchip/rk3588-extra.dtsi  |  413 +++
- .../rockchip/rk3588-friendlyelec-cm3588-nas.dts    |  778 ++++++
- .../arm64/rockchip/rk3588-friendlyelec-cm3588.dtsi |  455 ++--
- .../src/arm64/rockchip/rk3588-rock-5-itx.dts       | 1177 ++++++++
- dts/upstream/src/arm64/rockchip/rk3588.dtsi        |  412 +--
- dts/upstream/src/arm64/rockchip/rk3588j.dtsi       |    2 +-
- dts/upstream/src/arm64/rockchip/rk3588s.dtsi       | 2669 +-----------------
- include/configs/rock-5-itx-rk3588.h                |   15 +
- include/dt-bindings/clock/px30-cru.h               |  389 ---
- include/dt-bindings/clock/rockchip,rk808.h         |   11 -
- include/dt-bindings/power/px30-power.h             |   27 -
- include/dt-bindings/soc/rockchip,boot-mode.h       |   16 -
- include/dt-bindings/soc/rockchip,vop2.h            |   18 -
- 92 files changed, 9278 insertions(+), 7666 deletions(-)
- delete mode 100644 arch/arm/dts/px30.dtsi
- create mode 100644 arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
- delete mode 100644 arch/arm/dts/rk3326.dtsi
- create mode 100644 arch/arm/dts/rk3566-orangepi-3b-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3566-orangepi-3b-v1.1-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3566-orangepi-3b-v1.1.dts
- create mode 100644 arch/arm/dts/rk3566-orangepi-3b-v2.1-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3566-orangepi-3b-v2.1.dts
- create mode 100644 arch/arm/dts/rk3566-orangepi-3b.dts
- delete mode 100644 arch/arm/dts/rk3566-pinetab2-v0.1.dts
- delete mode 100644 arch/arm/dts/rk3566-pinetab2-v2.0.dts
- delete mode 100644 arch/arm/dts/rk3566-pinetab2.dtsi
- create mode 100644 arch/arm/dts/rk3566-radxa-zero-3e-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3566-radxa-zero-3w-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3566-rock-3c-u-boot.dtsi
- rename arch/arm/dts/{rk3568-evb-u-boot.dtsi => rk3568-evb1-v10-u-boot.dtsi} (100%)
- create mode 100644 arch/arm/dts/rk3568-rock-3b-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3588-friendlyelec-cm3588-nas-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3588-rock-5-itx-u-boot.dtsi
- delete mode 100644 arch/arm/dts/rockchip-pinconf.dtsi
- create mode 100644 board/friendlyelec/cm3588-nas-rk3588/Kconfig
- create mode 100644 board/friendlyelec/cm3588-nas-rk3588/MAINTAINERS
- create mode 100644 board/radxa/rock-5-itx-rk3588/Kconfig
- create mode 100644 board/radxa/rock-5-itx-rk3588/MAINTAINERS
- create mode 100644 board/radxa/zero3-rk3566/Kconfig
- create mode 100644 board/radxa/zero3-rk3566/MAINTAINERS
- create mode 100644 board/radxa/zero3-rk3566/Makefile
- create mode 100644 board/radxa/zero3-rk3566/zero3-rk3566.c
- create mode 100644 board/xunlong/orangepi-3b-rk3566/Kconfig
- create mode 100644 board/xunlong/orangepi-3b-rk3566/MAINTAINERS
- create mode 100644 board/xunlong/orangepi-3b-rk3566/Makefile
- create mode 100644 board/xunlong/orangepi-3b-rk3566/orangepi-3b-rk3566.c
- create mode 100644 configs/cm3588-nas-rk3588_defconfig
- create mode 100644 configs/orangepi-3b-rk3566_defconfig
- create mode 100644 configs/radxa-zero-3-rk3566_defconfig
- create mode 100644 configs/rock-3b-rk3568_defconfig
- create mode 100644 configs/rock-3c-rk3566_defconfig
- create mode 100644 configs/rock-5-itx-rk3588_defconfig
- create mode 100644 configs/rock-s0-rk3308_defconfig
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3308-rock-s0.dts
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3566-orangepi-3b-v1.1.dts
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3566-orangepi-3b-v2.1.dts
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3566-orangepi-3b.dtsi
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3.dtsi
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3e.dts
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3566-radxa-zero-3w.dts
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3568-rock-3b.dts
- rename dts/upstream/src/arm64/rockchip/{rk3588s-pinctrl.dtsi => rk3588-base-pinctrl.dtsi} (100%)
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3588-base.dtsi
- rename dts/upstream/src/arm64/rockchip/{rk3588-pinctrl.dtsi => rk3588-extra-pinctrl.dtsi} (100%)
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3588-extra.dtsi
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3588-friendlyelec-cm3588-nas.dts
- rename arch/arm/dts/rk3588-toybrick-x0.dts => dts/upstream/src/arm64/rockchip/rk3588-friendlyelec-cm3588.dtsi (66%)
- create mode 100644 dts/upstream/src/arm64/rockchip/rk3588-rock-5-itx.dts
- create mode 100644 include/configs/rock-5-itx-rk3588.h
- delete mode 100644 include/dt-bindings/clock/px30-cru.h
- delete mode 100644 include/dt-bindings/clock/rockchip,rk808.h
- delete mode 100644 include/dt-bindings/power/px30-power.h
- delete mode 100644 include/dt-bindings/soc/rockchip,boot-mode.h
- delete mode 100644 include/dt-bindings/soc/rockchip,vop2.h
+Thanks!
+Quentin
