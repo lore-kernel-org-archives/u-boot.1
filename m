@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B63BDC3DA7F
-	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 07:58:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19676C52D7C
+	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 07:59:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2843D87F19;
-	Mon, 12 Aug 2024 09:58:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9A3C2886B1;
+	Mon, 12 Aug 2024 09:59:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bUfD4Oqn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OO+5aZRL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 808068861A; Mon, 12 Aug 2024 09:58:45 +0200 (CEST)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
+ id 74DD7886BB; Mon, 12 Aug 2024 09:59:08 +0200 (CEST)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46AAE87CF8
- for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 09:58:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A58387CF8
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 09:59:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-1fd69e44596so27339455ad.1
- for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 00:58:43 -0700 (PDT)
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-70d399da0b5so3293489b3a.3
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 00:59:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723449522; x=1724054322; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723449544; x=1724054344; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6TUhgN+A+7mhKaPy7651v7GF9UaU+5UutmEV8n2VcGg=;
- b=bUfD4Oqn5BU3F0Y69PjMPN6YJM5/CGYHQty/N+l/urXfZVHd7pf12VqCgWrUd6M1As
- tUCX0o59/LeUwqDNjTWumIQqNq3zKB1o6qqmhbzOHaKR9hXZCpQv6gAae601ZmB1umif
- Th+9DPd8eH+KxG6SFd6lCH4lBfjbnYWTrZqzAzLGmUZ5e6RD6sgZspMgE8psHaq5GHGH
- NpPR/juKJBNVfPd+4O6LrgBZqpRXAq9F6uLJQnJPUasny6mLxCT7J9Iwg41M7I+7D2gZ
- R0XrJ8Z/KYkfQPlkkPFNcnRtE8TTHoJfpuERUVhTkCmut7ozgen2WeLknLjD2sesRdIl
- 7DJA==
+ bh=hcYbuGo7mthziyxlqZeRY2L10Syotv8DKZCYUzUyghM=;
+ b=OO+5aZRLy2fpcRtDOSKKad3U9Qt3POD8axbUOAiaT/g23dFk8qhvfvChnbOpUGk4yj
+ qHNEED1IksSKr9BHTGuna+8jZ7qgBCag5apoi1MTZalEkg40HGrSLnplxRVYnor5TiLD
+ l+BcMaQGsgxXQK7PWYv849bvNA9SX/DJweTaOlAyJo46qmMdOC5PyfUS/dPLUmUUFjfy
+ GNTaxEmxQJDuJtN65HPwjE0dPZadTg0CbRb4xN3P0RoMwt8BRbDNnY1FToCmpbhkkbPv
+ zg2nVYv/xMdKxBe77CYXveEfcVfAf+2vvVJiesntoqycpz1JO38L+GTGZA4BG+PMq5t8
+ BFaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723449522; x=1724054322;
+ d=1e100.net; s=20230601; t=1723449544; x=1724054344;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6TUhgN+A+7mhKaPy7651v7GF9UaU+5UutmEV8n2VcGg=;
- b=Sa4P5BOOvS6xLC4YqXfTo2uhPAp9rlv9nMAjIjA6YHhKLv/W3evdN4bK4N+g9hhcNj
- wlhk9CCdY7olgwFK50P4bKdSR/E9XeYMiPz44fFw4BAK7jNj9Wdm43ie4su7dZWcswps
- iScN+sPkjhmVEJ6Uuvjgnk3xT1zEKyOUBI+HicuHNpT1zRCDb/0Tfa2oepyk9i3/UQkN
- oxXzu1eF9pYaBdQJevQxMMx47NTCXX89xeYZNhHmJynFlee3wpivl8wNV/bCidPF9ch3
- X4i+56t6tiB7NiOTjzokiW/Hnk4XTgJj8jJko9ZZUJ3OBr5OARU7wdhpirUKW9ZM1DSu
- FFWA==
-X-Gm-Message-State: AOJu0Yw9bZGANmbmh0e4NxWP70eFWsE1iyJCfcuJxy0keGtSzjZ+eblK
- XGzjYGrttS5MKXhqrlQS9Bn14Kr53ht7dZ+wvUK0hQqHXm1o4TOgXZeMwDhxK5c7Cx1iS2Zcqzo
- Bc/4wh3+gZFPrQ4YLXDLo/tYEWSkkVUFTSuaAxQ==
-X-Google-Smtp-Source: AGHT+IE3/2JhKcevT6shO2x/4Zt+5U17ssa8DI/Wli/JF64MRd4bk7/WrR3A46hSsFHotQ4bZdAV6p0JNmgCgT+3cX8=
-X-Received: by 2002:a17:902:d4c5:b0:1fa:2b11:657d with SMTP id
- d9443c01a7336-200ae5034aamr141984015ad.10.1723449521533; Mon, 12 Aug 2024
- 00:58:41 -0700 (PDT)
+ bh=hcYbuGo7mthziyxlqZeRY2L10Syotv8DKZCYUzUyghM=;
+ b=wLCBUleBg//NIiWXqtQdCvwtoJU95Ubq1NkdLMsfbVcrCo+sY7ffCJT6YjhhImKyXl
+ omGb6+MvZmiy6QOSDT0rqaD5MRdVmZRFztr4gt1fAAbletRHrQR/M1oZh0SzISmplPK8
+ k34n4Rluh/Im20OOCpsRrSvjs+aoBuzubbzdr7S1NAlUBYkJBIb9GC5QnLYz+IfoquKa
+ sg/iK49qM/1BDxxysznZ46nI29bpMxgAib0rj3yIjCDhr68Aynpn4fDxilaM74F13xJS
+ U7ngh6H4IreDHThMv1OADiKQ9+MRyAwhnhlj9X1+iXCAxNWyMQyt8B0dCMK3FowGqTgO
+ l9ug==
+X-Gm-Message-State: AOJu0Yz99rAK2ZBu+Ui/N0ZkZF6QB9zkzZKP1e6RuhEcFqU/2FS05ONa
+ LyZIQPPi6f1CGnO7bvo5o1AC/FAmKBF4H9pcobAm9iQaDR4MQ3nhJlE46CgITFvf1Kf5jLxlYBX
+ +EFurMh0lTujcLzgNiZnoeGLvyFvuIYgKorjSFEE1ir1OaP50GIw=
+X-Google-Smtp-Source: AGHT+IHIcV92PtSymus8i7LWG+lxsI0Z7z22Tv13+il7IuFFhMdHD2dXQIQ+HkC0yixyT54ZaEinXLlIYDzZvMHAcQY=
+X-Received: by 2002:a05:6a20:6f87:b0:1b6:d9fa:8be with SMTP id
+ adf61e73a8af0-1c89fec32aamr10969345637.40.1723449544442; Mon, 12 Aug 2024
+ 00:59:04 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240811145209.4191404-1-sjg@chromium.org>
  <20240811145209.4191404-32-sjg@chromium.org>
 In-Reply-To: <20240811145209.4191404-32-sjg@chromium.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 12 Aug 2024 10:58:05 +0300
-Message-ID: <CAC_iWjLdNHG4ZuT3Ryoob6nec9UiQ-gknDgVLJk4nSdO2g+_Lw@mail.gmail.com>
+Date: Mon, 12 Aug 2024 10:58:28 +0300
+Message-ID: <CAC_iWj+DtHbghAqJWiwm8ZVCXf3mCOOm13YpLSQGGBPcpgnWiQ@mail.gmail.com>
 Subject: Re: [PATCH v3 31/40] efi: Show the vendor in helloworld
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
@@ -122,3 +122,4 @@ On Sun, 11 Aug 2024 at 17:52, Simon Glass <sjg@chromium.org> wrote:
 > --
 > 2.34.1
 >
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
