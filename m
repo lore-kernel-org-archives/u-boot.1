@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 372E1C52D7C
-	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 11:49:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C2F4C3DA7F
+	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 11:50:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B59758880B;
-	Mon, 12 Aug 2024 13:49:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 27817886E7;
+	Mon, 12 Aug 2024 13:50:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kYzTFzvb";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="W4AkQhix";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53A6E87B77; Mon, 12 Aug 2024 13:49:49 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 4E77F88829; Mon, 12 Aug 2024 13:50:03 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BE8D88850
- for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 13:49:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D80D87B77
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 13:50:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47CBnbQS001690;
- Mon, 12 Aug 2024 06:49:37 -0500
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47CBnm1X023030;
+ Mon, 12 Aug 2024 06:49:48 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1723463377;
- bh=6sw5feYNQUwGX+8Ia/gKSU5C7i+jBTrgail1i0EziYs=;
+ s=ti-com-17Q1; t=1723463388;
+ bh=rZ5Pgb1DNnHNhbBOpJqd5a9+/mfSE/N8Xo9+Q9j/wTs=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=kYzTFzvbEV28DiVX8Akv6ipq+A22Mkj0eghp2R6Yg24D9vdGDLIjFqnhcvgPNQMg6
- Y/lRh/1j95VN/l7TK6/JuUf2o1+FB82OD8FEWOnNs8crN+2ppJ0tLmiFMApC9qy7Co
- cFseDCCppRAxgcwt6+vrlLY2N/G47D4P8K+gqnDk=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47CBnaSx091727
+ b=W4AkQhixj6jR7N/bGqVe+fDY89klyKPe6iSKdnYXXt1LHjGBrOyTHSqWlAa9ZHTKk
+ 8L0aoBCJ+HMmYNXvtXxgzhfD7/xBeBXdplXb+6blPkBGqtYZPLxiPiyPc36+S5ReUc
+ AQhO4PwwecAVf0dquMMW0nboy6BZzQOX2Hdgtx3k=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47CBnmjT091834
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 12 Aug 2024 06:49:36 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 12 Aug 2024 06:49:48 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 12
- Aug 2024 06:49:36 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2024 06:49:48 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 12 Aug 2024 06:49:36 -0500
+ Frontend Transport; Mon, 12 Aug 2024 06:49:48 -0500
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47CBnZxH130606;
- Mon, 12 Aug 2024 06:49:36 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47CBnlJR060153;
+ Mon, 12 Aug 2024 06:49:48 -0500
 From: Chintan Vankar <c-vankar@ti.com>
 To: Michal Simek <michal.simek@amd.com>, Bryan Brattlof <bb@ti.com>, "Vignesh
  Raghavendra" <vigneshr@ti.com>, Marek Vasut
@@ -69,10 +69,10 @@ To: Michal Simek <michal.simek@amd.com>, Bryan Brattlof <bb@ti.com>, "Vignesh
  Nishanth Menon <nm@ti.com>, Sumit Garg <sumit.garg@linaro.org>, Tom Rini
  <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH v4 09/10] arm: dts: k3-am625-r5-sk: Enable DM services for
- main_pktdma
-Date: Mon, 12 Aug 2024 17:19:33 +0530
-Message-ID: <20240812114933.3844108-1-c-vankar@ti.com>
+Subject: [PATCH v4 10/10] dts: upstream: src: arm64: ti: k3-am62x-sk-common:
+ Sync DT with Linux v6.11-rc3
+Date: Mon, 12 Aug 2024 17:19:45 +0530
+Message-ID: <20240812114945.3844224-1-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240812113621.3840652-1-c-vankar@ti.com>
 References: <20240812113621.3840652-1-c-vankar@ti.com>
@@ -96,36 +96,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
+Sync Device tree nodes with Linux v6.11-rc3.
 
-Enable DM services for main_pktdma during R5 SPL stage.
+[ upstream commit: ba50141137fae205a731005e70687f4a52289050 ]
 
-Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 ---
 
-Link to v4:
-- https://lore.kernel.org/r/20240705045030.1141934-10-c-vankar@ti.com/
+Link to v3:
+- This link is for the patch which was equivalent to this patch, from
+  this version the node is moved to DT file equivalent to Linux as a
+  part of DT sync.
+  https://lore.kernel.org/r/20240705045030.1141934-11-c-vankar@ti.com/
 
 Changes from v3 to v4:
-- No changes.
+- Updated this patch by syncing "k3-am62x-sk-common.dtsi" file
+  with Linux v6.11-rc3 compared to previous version.
 
- arch/arm/dts/k3-am625-r5-sk.dts | 5 +++++
- 1 file changed, 5 insertions(+)
+ .../src/arm64/ti/k3-am62x-sk-common.dtsi      | 32 ++++++++++---------
+ 1 file changed, 17 insertions(+), 15 deletions(-)
 
-diff --git a/arch/arm/dts/k3-am625-r5-sk.dts b/arch/arm/dts/k3-am625-r5-sk.dts
-index 6b9f40e555..0912b953db 100644
---- a/arch/arm/dts/k3-am625-r5-sk.dts
-+++ b/arch/arm/dts/k3-am625-r5-sk.dts
-@@ -83,3 +83,8 @@
- 	reg = <0x00 0x0fc40000 0x00 0x100>,
- 	      <0x00 0x60000000 0x00 0x08000000>;
- };
+diff --git a/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi b/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
+index 3c45782ab2..44ff67b6bf 100644
+--- a/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
++++ b/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
+@@ -48,6 +48,14 @@
+ 			pmsg-size = <0x8000>;
+ 		};
+ 
++		/* global cma region */
++		linux,cma {
++			compatible = "shared-dma-pool";
++			reusable;
++			size = <0x00 0x8000000>;
++			linux,cma-default;
++		};
 +
-+&main_pktdma {
-+	ti,sci = <&dm_tifs>;
+ 		secure_tfa_ddr: tfa@9e780000 {
+ 			reg = <0x00 0x9e780000 0x00 0x80000>;
+ 			alignment = <0x1000>;
+@@ -128,6 +136,10 @@
+ 	};
+ };
+ 
++&phy_gmii_sel {
 +	bootph-all;
 +};
++
+ &main_pmx0 {
+ 	/* First pad number is ALW package and second is AMC package */
+ 	main_uart0_pins_default: main-uart0-default-pins {
+@@ -156,6 +168,7 @@
+ 	};
+ 
+ 	main_i2c1_pins_default: main-i2c1-default-pins {
++		bootph-all;
+ 		pinctrl-single,pins = <
+ 			AM62X_IOPAD(0x1e8, PIN_INPUT_PULLUP, 0) /* (B17/A17) I2C1_SCL */
+ 			AM62X_IOPAD(0x1ec, PIN_INPUT_PULLUP, 0) /* (A17/A16) I2C1_SDA */
+@@ -335,15 +348,9 @@
+ 			self-powered;
+ 			data-role = "dual";
+ 			power-role = "sink";
+-			ports {
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-
+-				port@0 {
+-					reg = <0>;
+-					usb_con_hs: endpoint {
+-						remote-endpoint = <&usb0_hs_ep>;
+-					};
++			port {
++				usb_con_hs: endpoint {
++					remote-endpoint = <&usb0_hs_ep>;
+ 				};
+ 			};
+ 		};
+@@ -470,12 +477,9 @@
+ 
+ &usb0 {
+ 	bootph-all;
+-	#address-cells = <1>;
+-	#size-cells = <0>;
+ 	usb-role-switch;
+ 
+-	port@0 {
+-		reg = <0>;
++	port {
+ 		usb0_hs_ep: endpoint {
+ 		    remote-endpoint = <&usb_con_hs>;
+ 	       };
+@@ -504,8 +508,6 @@
+ 	       0 0 0 0
+ 	       0 0 0 0
+ 	>;
+-	tx-num-evt = <32>;
+-	rx-num-evt = <32>;
+ };
+ 
+ &dss {
 -- 
 2.34.1
 
