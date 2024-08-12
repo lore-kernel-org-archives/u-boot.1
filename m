@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D67B7C52D7C
-	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 12:56:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BF1CC3DA7F
+	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 13:28:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0F67886A7;
-	Mon, 12 Aug 2024 14:56:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A78C7887B9;
+	Mon, 12 Aug 2024 15:28:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ozwcNg+2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xkDMFKNl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CC73884C3; Mon, 12 Aug 2024 10:32:08 +0200 (CEST)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id C59C388651; Mon, 12 Aug 2024 15:28:33 +0200 (CEST)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13F1D87E30
- for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 10:32:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F26A887B9
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 15:28:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=joakim.bech@linaro.org
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-664b4589b1aso38686737b3.1
- for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 01:32:05 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-7a23fbb372dso2620059a12.0
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 06:28:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723451524; x=1724056324; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723469308; x=1724074108; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=j3rQiVKcuZvKJ3u+TfJN50TD/s+naMvBlNqX4JA1bLM=;
- b=ozwcNg+2axz3daJnah3jpAMLc522DDnvQe9M01fTyUM88tdPAaDtQ4zE3MHjiIgWve
- eBSb5wM5TKv+QD4HCAVqody65F1WuX0KDV49VUIHxLMrvnT6r9ZsoFyP7iMOnpYmJxgG
- rAxRmEHi5WCHBJfklmhZF0rY3SSP+4kdmMImkwkYuAspmdp1Q6ECitzm1Wjn+o06voKD
- 7upf4bkFC1P+XTHg+5/obH3LFn5Gbokerz/FNrUSyrictS8Npd6dNnerLB407ZpyGnf4
- d3K69y/Mwhi6MmOl3YFXffqKWbulv4dAg7sm8jNah64VP5WaawAvEUtiwoVDQvPPIiXF
- +CAA==
+ bh=q/4Rvrd9rq4amxJulx9ZHgMYSRRcLIEuO4jffV1llLs=;
+ b=xkDMFKNlMoRBYI6ZbE+Dh2XBfM8gGGfecjn7GViVn1lojwO5qwe2AhComvQsVmDqTu
+ Qc6szxbcVv1Dlile/OrSg6BV3CF4nz4ZDBMwLwuxrtnfKZbOLe63lD2Lnay6+jUydnEk
+ 6ImGlq5zIpaPtd4eYmdBavGhZHu7zHib6vq1I0WusHRFZq902w0nX7vfPXJtkXhHqaRC
+ PRZia3wtGxMYGaECP7+PGL7InldNE8+K6UHjNuKdDDZ7NMOyn4gezUS+RkYoaaIkU0O+
+ 80ytsI4HH0lZB/JVajoT7BFDNV71DBomNHZP03qsTJIkb71NDg+EZOS1EqcVsS6pPFvI
+ shhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723451524; x=1724056324;
+ d=1e100.net; s=20230601; t=1723469308; x=1724074108;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=j3rQiVKcuZvKJ3u+TfJN50TD/s+naMvBlNqX4JA1bLM=;
- b=izIWqMPpuC6ncE4lsLgrnCoQSFEW9WhUIeNpA6+pEexUIAy0CdKvd3ZAeIpnufoe6O
- LxgKWnzXAwcWfssx72VN3RLFkJ5WS3M8cUQ2skgR2jlc1qJ4VJv+9NfH3GprOq3Tu1rv
- ZrBwqgRE0MB1lKfibZMFgFWbd5imk8SVE9G/4bz1L9u925iyBjyz3ED/ejJkstIiAzcZ
- MciMdqBgyQdkITB2fLfKrpaOk79Cu9Y/mF8YAh10OTeecBbgA35qkUku/Tf1r8kRo/dY
- p4kvOB90VVgt4waBe7gFaSvgLSNzVLb+eWE8z6aKcjvcVE9dOyJqMqTZVIj1jRfYgX7e
- Ji6w==
-X-Gm-Message-State: AOJu0Yy2qr3nAxstyXlFzOc/k4lvHde2UUSF58DwXQ+G9BzaDS2c6fsa
- cv6NQJ+BO53l81NCplvs4eWQ9ZU/xQT+Q0zuY72Hfimtcskigt7OjkKwTCJEKkH0LXSK/LQBiDa
- qTeSeBpamYzIAWc0fQhUzmN6FXpiBr0wCaePH2C1tF2MPt3DmBBU=
-X-Google-Smtp-Source: AGHT+IGKY2USpcBPt2Y+DPbBDkWdJ11KrC6pAHJNfCPMOpAy0Fvhgu2CdUS0SwEIl0W3g6HHj3/t5MA74JagVFOGtwY=
-X-Received: by 2002:a05:690c:6f05:b0:61a:d0d8:75f6 with SMTP id
- 00721157ae682-69c122540eemr96742427b3.24.1723451523734; Mon, 12 Aug 2024
- 01:32:03 -0700 (PDT)
+ bh=q/4Rvrd9rq4amxJulx9ZHgMYSRRcLIEuO4jffV1llLs=;
+ b=Dsl5es3UsQZYJxK3+E5P3f73vRkpn/G1rT+I/S7QTIshGJJYTwEXRZQfCrlAEiJrhN
+ /YPRtPf8byqHnmv81N+6AKVh9pJpOpPnGzqw+C0eg6aA5XCc74bhPBBV3ScUKC7Gzm0j
+ D8oII7M2Up0ue21V0u/FnIi077hPpF0Fk8XbNrV3Dg2yKoQW2cnT993u6i9SiJmLBwMl
+ D6U50egjZY0T9I8/wJnJPIGQ6pqMBN5g6Crdjg5E10ZfygG9qx68GqlBljCME0h6rLdo
+ 7pY8wal8s7p1opwL0EsNNoIQF2AyTwqwJq8bHX6ddBGB7ZipBMR1Tzm1SWnQbi5FzfJ3
+ YPVg==
+X-Gm-Message-State: AOJu0Yzy4SFXuhy7op1OcX6pz5VicnWrrsTPei13DAbqDPxNEeF0p5A1
+ NEMRoEjx/jeWppn+VIacbLzDfrqmvAEWCaXncWoFuCa7df91t3Y8ozxFGQvgV5+/OkbD7q1j4Q7
+ FSX1ccTMsTr6m/KE5biSTclDeXc3YK0bb/8UBzg==
+X-Google-Smtp-Source: AGHT+IHIMyien/VYgvly1cdm44A5bXzC4LgyFZira7EFvPwFM7crYXwt4/qj1fMXU5krtsFoXB7xyW/W32MXSEZznXw=
+X-Received: by 2002:a17:903:244b:b0:1fb:389b:1054 with SMTP id
+ d9443c01a7336-201ca1b12f0mr3405535ad.52.1723469307807; Mon, 12 Aug 2024
+ 06:28:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <CWLP123MB63935507882C09545073EA17E5BA2@CWLP123MB6393.GBRP123.PROD.OUTLOOK.COM>
-In-Reply-To: <CWLP123MB63935507882C09545073EA17E5BA2@CWLP123MB6393.GBRP123.PROD.OUTLOOK.COM>
-From: Joakim Bech <joakim.bech@linaro.org>
-Date: Mon, 12 Aug 2024 10:31:27 +0200
-Message-ID: <CA+Eyddbaq1cXtzrNXc1K2bsWwG3v3G6Zm=7Y0SRGuMDw5Zk0FQ@mail.gmail.com>
-Subject: Re: Verified Boot through U-Boot for RPi3 with OP-TEE
-To: thomas.gymer@bt.com
-Cc: u-boot@lists.denx.de, op-tee@lists.trustedfirmware.org
-X-Mailman-Approved-At: Mon, 12 Aug 2024 14:56:11 +0200
+References: <20240811145209.4191404-1-sjg@chromium.org>
+In-Reply-To: <20240811145209.4191404-1-sjg@chromium.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 12 Aug 2024 16:27:51 +0300
+Message-ID: <CAC_iWjJXXKi5AV6-M+5D8vC5SJrr71T6HyKj-KjTHJ7QGYZUxg@mail.gmail.com>
+Subject: Re: [PATCH v3 00/40] efi: Add a test for EFI bootmeth
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Albert Aribaud <albert.u.boot@aribaud.net>, Bin Meng <bmeng.cn@gmail.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Marek Vasut <marex@denx.de>, 
+ Pavel Herrmann <morpheus.ibis@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
+ Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,144 +91,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Thomas and Eden,
+Hi Simon
 
-On Mon, Aug 12, 2024 at 9:48=E2=80=AFAM thomas.gymer--- via OP-TEE <
-op-tee@lists.trustedfirmware.org> wrote:
+On Sun, 11 Aug 2024 at 17:52, Simon Glass <sjg@chromium.org> wrote:
+>
+> The test coverage for the EFI bootmeth is incomplete since it does not
+> actually boot the application.
+>
+> This series creates a simple test for this purpose. It includes a
+> surprising number patches to make this work:
+>
+> - sandbox memory-mapping conflict with PCI
+> - the fix for that causes the mbr test to crash as it sets up pointers
+>   instead of addresses for its 'mmc' commands
+> - the mmc and read commands which cast addresses to pointers
+> - ANSI output from the EFI loader confusing the unit-testing checker
+> - bug in bootdev_next_prio() which causes an infinite loop in EFI test
+> - Hang in sandbox virtio due to EFI probing all block devices
+> - a tricky bug to do with USB keyboard and stdio
+> - a few other minor things
 
-> Hello all,
->
-> We (Eden and I) have been assigned a summer project exploring the
-> possibility of verified boot for Linux with a view to experiment with a
-> TEE, and would like to share our outcomes from the project so far.
->
-> We've been working on condensing all the information and documentation on
-> TF-A, OP-TEE, and U-Boot verified boot into a trivially workable form, a
-> Makefile, for the Raspberry Pi 3B+. Our aim is a proof of concept pilot
-> project to see what parts of the technology outlined in the NIST standard=
-s
-> for secure boot on IoT is currently available, and thus what needs to be
-> developed. This also leads us to an interest in full crypto algorithm
-> agility to ensure quick adoption of the quantum safe algorithms as they
-> come out.
-> I should note that our boot order here is TF-A to OP-TEE, then TF-A to
-> U-Boot to Linux.
-> This has raised a few areas of note and a couple of issues on our end:
->
-> # Areas of note
-> - U-Boot and Linux DTB's being incompatible has minimal documentation
-> Newer versions of U-Boot do have `CONFIG_OF_UPSTREAM`, but I can't see
-> that as a recommended solution. Perhaps a note in the Kconfig entry for
-> `CONFIG_OF_CONTROL` would be sufficient
-> - U-Boot can fail silently if the DTB used is incompatible
-> No idea what the solution here could be; an invalid DTB inevitably means
-> that the firmware cannot access any of the hardware correctly.
-> - U-Boot unable to find `CONFIG_OF_SEPARATE` DTB's when loaded by TF-A;
-> this is a TF-A problem, but maybe check other possible places for a DTB o=
-n
-> the U-Boot end?
-> - U-Boot itself appears to have good crypto agility (or will in the near
-> future), with a macro and existing algorithms as examples for the additio=
-n
-> of new algorithms
-> - `mkimage` appears to be lacking these same features for crypto agility,
-> which would otherwise set U-Boot up to be ready for the new quantum safe
-> algorithms' release
-> A similar macro system for `mkimage`, or some other schema for defining
-> how to add algorithm keys to the FDT, would provide some amazing
-> flexibility, already being able to define more than one signature as
-> required. Adding keys to the FDT would need to be standardised in someway
-> for this, I would imagine.
->
-As a general comment, the incompatibilities (DTB UBoot/Linux) you've seen
-is well known to the community and it's been a long running effort to
-improve the situation.
+This series is unreviewable and I doubt I am the only one who thinks so.
+There are 40 patches of completely unrelated stuff.
+Please split them up properly.
 
-
+Thanks
+/Ilias
 >
-> I am very aware that some of the below issues are not relevant to all
-> projects, but thought it best to maintain a single list to ensure that th=
-e
-> correct place to make a fix for each issue is not locked project wise too
-> early.
-> # Issues
-> - buildroot build fails when the directory length is greater than ~80
-> characters
+> Changes in v3:
+> - Include the usb.h header file in all cases
+> - Correct the commit subject and message
+> - Add a Fixes tag
+> - use SZ_512 instead of 0x200
+> - Drop the extra- rules since scripts/Makefile.lib takes care of it
+> - Add new patch to drop crt0/relocal extra- rules
+> - Update commit message to describe how the problem will be addressed
+> - Fix 'virtual' typo
+> - Put back the Linaro copyright accidentally removed
+> - Add a Fixes tag
+> - Mention the issue created for this problem
 >
-Interesting, I wasn't aware.
-
-
-> - TF-A does not pass on the DTB address unless `RPI3_DIRECT_LINUX_BOOT` i=
-s
-> set, which also implies a define U-Boot doesn't need
-> - TF-A `LOG_LEVEL=3D50` flag has compatibility issue in xlat tables v2 wh=
-en
-> compiled for 64bit
+> Changes in v2:
+> - Fix 'use' typo
+> - Reword commit message
+> - Use 'Firmware vendor' instead of just 'Vendor'
+> - Add many new patches to resolve all the outstanding test issues
 >
-I believe this one is about the image becoming too big? Or is it actually a
-xlat tables issue?
-
-
-> - `mkimage` ECDSA key adding to FDT fails if there is no signature node
-> pre-added and doesn't set `required` node when `-r` is used
-> - `fit_check_sig`fails to check an ECDSA signed FIT file with
-> corresponding FDT due to `<null>` hash node
-> - `mkimage` expects ECDSA private key only in a `.pem` and not `.der`,
-> which would be standard for a single private key
+> Simon Glass (40):
+>   nvmxip: Drop the message on probe
+>   nvmxip: Avoid probing on boot
+>   bootstd: Add UT_TESTF_CONSOLE_REC to bootflow tests
+>   test/py: Fix some pylint warnings in test_ut.py
+>   scripts: Update pylint.base
+>   bootstd: Create a function to reset USB
+>   usb: Drop old non-DM code
+>   log: Add a new log category for the console
+>   usb: Add DEV_FLAGS_DM to stdio for USB keyboard
+>   dm: usb: Deal with USB keyboard persisting across tests
+>   test: mbr: Adjust test to use lower-case hex
+>   test: mbr: Adjust test to drop 0x
+>   sandbox: Change the range used for memory-mapping tags
+>   sandbox: Update cpu to use logging
+>   sandbox: Unmap old tags
+>   sandbox: Add some debugging to pci_io
+>   sandbox: Implement reference counting for address mapping
+>   mmc: Use map_sysmem() with buffers in the mmc command
+>   read: Tidy up use of map_sysmem() in the read command
+>   cmd: Fix memory-mapping in cmp command
+>   test: mbr: Unmap the buffers after use
+>   test: mbr: Use a constant for the block size
+>   test: mbr: Use RAM for the buffers
+>   test: mbr: Drop a duplicate test
+>   efi: Use puts() in cout so that console recording works
+>   efi_loader: Put back copyright message
+>   efi_loader: Rename and move CMD_BOOTEFI_HELLO_COMPILE
+>   efi: arm: x86: riscv: Drop crt0/relocal extra- rules
+>   efi_loader: Shorten the app rules
+>   efi_loader: Shorten the app rules further
+>   efi: Show the vendor in helloworld
+>   Revert "bootdev: avoid infinite probe loop"
+>   bootstd: Make bootdev_next_prio() continue after failure
+>   efi: Use the same filename for all sandbox builds
+>   bootstd: Add debugging for efi bootmeth
+>   efi: Disable ANSI output for tests
+>   efi: Add a test app
+>   efi: Avoid using sandbox virtio devices
+>   test: Set up an image suitable for EFI testing
+>   efi: Add a test for the efi bootmeth
 >
-> We intend to release the Makefile and accompanying scripts for this on
-> Monday 12th August, likely ~5pm BST to give us time to finalise what we
-> have currently; this will consist of two Makefiles: one for verified boot
-> using `CONFIG_OF_EMBED`, and another using `CONFIG_OF_SEPARATE` on U-Boot
-> v2024.07. We are currently planning on releasing this on GitHub under the
-> same license as the involved projects, but what would be the most helpful
-> way for us to release this to you?
+>  arch/arm/lib/Makefile               |   8 -
+>  arch/riscv/lib/Makefile             |   4 -
+>  arch/sandbox/cpu/cpu.c              |  38 ++-
+>  arch/sandbox/cpu/state.c            |   9 +-
+>  arch/sandbox/dts/test.dts           |   2 +-
+>  arch/sandbox/include/asm/state.h    |   3 +
+>  arch/sandbox/lib/pci_io.c           |   9 +-
+>  arch/x86/lib/Makefile               |  16 -
+>  boot/bootdev-uclass.c               |  23 +-
+>  boot/bootmeth_efi.c                 |  11 +-
+>  cmd/Kconfig                         |  14 +-
+>  cmd/mem.c                           |  26 +-
+>  cmd/mmc.c                           |  15 +-
+>  cmd/read.c                          |  10 +-
+>  cmd/usb.c                           |  20 --
+>  common/console.c                    |  36 +++
+>  common/log.c                        |   1 +
+>  common/usb_kbd.c                    |  74 +----
+>  configs/octeontx2_95xx_defconfig    |   2 +-
+>  configs/octeontx2_96xx_defconfig    |   2 +-
+>  configs/octeontx_81xx_defconfig     |   2 +-
+>  configs/octeontx_83xx_defconfig     |   2 +-
+>  doc/arch/sandbox/sandbox.rst        |  21 +-
+>  doc/develop/uefi/uefi.rst           |   2 +-
+>  drivers/mtd/nvmxip/nvmxip-uclass.c  |  10 +-
+>  drivers/usb/Kconfig                 |   3 +-
+>  include/console.h                   |   8 +
+>  include/efi_default_filename.h      |  24 +-
+>  include/efi_loader.h                |  21 +-
+>  include/log.h                       |   2 +
+>  include/usb.h                       |  20 +-
+>  lib/efi_loader/Kconfig              |  22 ++
+>  lib/efi_loader/Makefile             |  47 +--
+>  lib/efi_loader/efi_console.c        |  28 +-
+>  lib/efi_loader/efi_disk.c           |  14 +-
+>  lib/efi_loader/helloworld.c         |   6 +
+>  lib/efi_loader/testapp.c            |  68 ++++
+>  scripts/pylint.base                 | 462 ++++++++++++++++------------
+>  test/boot/bootdev.c                 |  37 ++-
+>  test/boot/bootflow.c                | 119 +++++--
+>  test/boot/bootstd_common.c          |   6 +
+>  test/boot/bootstd_common.h          |   8 +
+>  test/cmd/mbr.c                      | 173 ++++++-----
+>  test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 5016 bytes
+>  test/py/tests/test_efi_fit.py       |   2 +-
+>  test/py/tests/test_efi_loader.py    |   2 +-
+>  test/py/tests/test_ut.py            | 146 +++++----
+>  test/test-main.c                    |  38 +++
+>  48 files changed, 962 insertions(+), 654 deletions(-)
+>  create mode 100644 lib/efi_loader/testapp.c
+>  create mode 100644 test/py/tests/bootstd/flash1.img.xz
 >
-As one of the maintainers of the OP-TEE project, I'm always in favor of
-having changes done in the official repositories, both code and
-documentation. There is nothing wrong with doing a write up and keep fixes
-elsewhere as such, but it has happened a couple of times that when people
-do these things on their own, other people find the instructions etc on
-internet and when they don't get it to work, they post issues and questions
-at the official OP-TEE issue list. However, since this is code not
-maintained or in the official git, there is little we can do about it. So,
-if you can send fixes upstream to the official projects, that's what I
-would suggest, that's the best in the long run. If you keep it elsewhere,
-may I please just ask you to put some note somewhere in the docs or readme,
-saying that this is work done outside official code, so if people try it
-and if it for some reason wouldn't work, then asking for help upstream
-likely won't lead to anything.
-
-
-> We have, beside the points raised in the Issues section above, no specifi=
-c
-> changes for the exiting repos, focusing instead on Makefiles which pull
-> together parts of the existing releases to produce a working PoC as quick=
-ly
-> as possible. We intend to also release this to the Raspberry Pi community
-> as a TEE solution they can experiment with today.
+> --
+> 2.34.1
 >
-I understand that you have a deadline for a summer project and therefore
-have to prioritize and make decisions. It looks like you've done a great
-deep dive and found various things that can (and should) be improved. For
-OP-TEE, if you have time, please consider sending your findings to the
-various "Issues" list at GitHub. If there is no obvious place to post the
-issue, you can use the one in OP-TEE os (
-https://github.com/OP-TEE/optee_os/issues). For U-Boot I believe it's the
-mailinglist that is the best place to discuss individual issues.
-
-
->
-> This email has been sent to:
-> - u-boot@lists.denx.de
-> - op-tee@lists.trustedfirmware.org
-> and the Makefiles will be sent to Raspberry Pi Foundation and community
-> some point next week
->
-> Thomas Gymer (thomas.gymer@bt.com) & Eden Hamilton (eden.hamilton@bt.com)
->
->
->
---=20
-Regards,
-Joakim
