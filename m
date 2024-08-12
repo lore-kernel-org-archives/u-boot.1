@@ -4,57 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D630C3DA7F
-	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 10:01:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED843C52D7C
+	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 10:33:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DF138861A;
-	Mon, 12 Aug 2024 12:01:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=163.com
+	by phobos.denx.de (Postfix) with ESMTP id 19B8C886FC;
+	Mon, 12 Aug 2024 12:33:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="jMZPRzmA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OweZXTDV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB321886A7; Mon, 12 Aug 2024 12:01:10 +0200 (CEST)
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.3])
- by phobos.denx.de (Postfix) with ESMTP id 06D35884C3
- for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 12:01:06 +0200 (CEST)
+ id C9D04886E7; Mon, 12 Aug 2024 12:33:02 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D897B87F19
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 12:33:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=163.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=andyshrk@163.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=Date:From:Subject:Content-Type:MIME-Version:
- Message-ID; bh=x4pGUbL5hVSMcfqqDGkoZxSr2jzzdF2gyXbDCpb7OwU=; b=j
- MZPRzmAaznE1wFlKoWb8Mkf4xvmCqgvPJGY1Ejsof8KQLdJCjqrxCCy37CJr/LJl
- RFHePg3WNWWqgOz07V/703X+KPc47HI5QBegQJ6MRGGYwKie8Sn2uR7v8TUVnUF4
- lb0KXdE2wLbmnLf/TtuDw/uLinpTZgPTIJV5VVPpgE=
-Received: from andyshrk$163.com ( [58.22.7.114] ) by
- ajax-webmail-wmsvr-40-140 (Coremail) ; Mon, 12 Aug 2024 18:00:55 +0800
- (CST)
-X-Originating-IP: [58.22.7.114]
-Date: Mon, 12 Aug 2024 18:00:55 +0800 (CST)
-From: "Andy Yan" <andyshrk@163.com>
-To: "Quentin Schulz" <quentin.schulz@cherry.de>
-Cc: "Dragan Simic" <dsimic@manjaro.org>, kever.yang@rock-chips.com, 
- jonas@kwiboo.se, u-boot@lists.denx.de
-Subject: Re:Re: [PATCH 1/1] board: rockchip: Add support for rk3588 GenBook
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT5.0.14 build 20230109(dcb5de15)
- Copyright (c) 2002-2024 www.mailtech.cn 163com
-In-Reply-To: <6d73380c-d554-4c33-841d-1f6c0c025b7e@cherry.de>
-References: <20240811100255.1664095-1-andyshrk@163.com>
- <20240811100255.1664095-2-andyshrk@163.com>
- <04ce9048d54f6d68a46967485c6ccb0e@manjaro.org>
- <6d73380c-d554-4c33-841d-1f6c0c025b7e@cherry.de>
-X-NTES-SC: AL_Qu2ZAfieuUAu4yafY+kXn0kXhec2W8Czvvgg34JRP5k0hyXh4w84enhsBWX50cSJNTCNtx+ebhV8+Ol2d45bUprIsdIVwJ2M1f/kGgbOKzLY
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4280bbdad3dso31251415e9.0
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 03:33:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1723458780; x=1724063580; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=DC0w/HkG3A+lbYDVUBoPs0Ps/TGiOzYld7bmOlX5S7A=;
+ b=OweZXTDVwDdUhSjkJ8Fr4O9B4pcB/llAtb4nHSZuEiCLOCc5l9oZmLjEXmfQfr/8VP
+ QnNwdaNhpW6bNVmwUoF7Gz6WLTSlH59yXIWerS1V25xom+siSDNik7lJgNNph4OdzoEZ
+ /TqqBwOcUXqe8FSUYS/XwJcutcyJ4wwz1v29YlAfAMQyQ3jB51R8vcSKwTbC3E82+2cE
+ tVDjyeyOAkPYb3yIQmfKj9to4hNFtf00qQYgnq7YLMk1X83R0r63Cr4AMb+zwByu64FJ
+ n3yItIWDzd6jk0ohD0Okd3bUgDtI7Y2a1X66z7qaywV2uLZo/SL9qW4uk6dyJtma228E
+ e3zA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723458780; x=1724063580;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=DC0w/HkG3A+lbYDVUBoPs0Ps/TGiOzYld7bmOlX5S7A=;
+ b=FItXdMxzvqACaOvpRUZ4/nLWjOdrgSqDOymAbPW3r4Eo+ypNnPPeH9MLQ34JIRZTzD
+ AdK1MvswGukbICWUe8HXX8xkwKtOqCkeU2pQnLdxoaoBhNeXT118GotG6+FKc6NHTu0N
+ +BWkren4PIYwauKPZybh5v8hk3iHKLIYSOrlqVRNRcexCAWIc6zmwgPSyX/3QOyRp0yn
+ JYdk+R6s+AIx7jqjBlvYfgl2ImnoI4y0BOhez7IT0mdF+ZIZZFK7aRBjPjchNi/msDlY
+ oAbnRLmqQBWoPvsdwLmRBGUkMaHMq9fGNoRFV8gvxMQbT+xxV/zL+MKjeu3fZTknXhgS
+ HgJA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVQdTxM8R775ykDvDtOFjhnNu5RR2Co/XBuKvE6UoWNvUMRD+w1okhRftzq0lnAD4UaN/9YS0oYpuGY974rTAGULhw1cg==
+X-Gm-Message-State: AOJu0Yxqiat4i2UMPU49l0Q381xABVarTT5jYyQXw3/yCu+yCxcRP+WR
+ +ARZiQ8eHPwZmedDxdenOPlVX1U7LkS1YIvbL1IzUwMvZswWdCHu
+X-Google-Smtp-Source: AGHT+IHm4Vg081sFEfJkoUGpJYz570Q1okAroiLKu9l8+IznE1XlhRtgRrh5Qlg2Re9oITHWmWdg9A==
+X-Received: by 2002:a05:600c:4f07:b0:426:63b4:73b0 with SMTP id
+ 5b1f17b1804b1-429c3a604a9mr58471195e9.34.1723458779952; 
+ Mon, 12 Aug 2024 03:32:59 -0700 (PDT)
+Received: from localhost.localdomain
+ (host-79-52-250-20.retail.telecomitalia.it. [79.52.250.20])
+ by smtp.googlemail.com with ESMTPSA id
+ 5b1f17b1804b1-4290c77f078sm186016425e9.37.2024.08.12.03.32.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Aug 2024 03:32:59 -0700 (PDT)
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Simon Glass <sjg@chromium.org>, Christian Marangi <ansuelsmth@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Arseniy Krasnov <avkrasnov@salutedevices.com>, Heiko Schocher <hs@denx.de>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Martin Kurbanov <mmkurbanov@salutedevices.com>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Dmitry Dunaev <dunaev@tecon.ru>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <sean.anderson@seco.com>, Artur Rojek <artur@conclusive.pl>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Vasileios Amoiridis <vassilisamir@gmail.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de
+Subject: [PATCH v3 0/9] led: introduce LED boot and activity function
+Date: Mon, 12 Aug 2024 12:32:42 +0200
+Message-ID: <20240812103254.26972-1-ansuelsmth@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Message-ID: <20861389.8bc6.19146089e81.Coremail.andyshrk@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: _____wD3_+NX3blm_YsZAA--.32784W
-X-CM-SenderInfo: 5dqg52xkunqiywtou0bp/xtbB0h85XmWXzqMCpAACsR
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,40 +107,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CgpIaSBRdWV0aW7vvIwK5ZyoIDIwMjQtMDgtMTIgMTY6MjM6MDbvvIwiUXVlbnRpbiBTY2h1bHoi
-IDxxdWVudGluLnNjaHVsekBjaGVycnkuZGU+IOWGmemBk++8mgo+SGkgQW5keSwKPgo+Pj4gQEAg
-LTMyMyw1ICszMjksNiBAQCBzb3VyY2UgImJvYXJkL3JvY2tjaGlwL2V2Yl9yazM1ODgvS2NvbmZp
-ZyIKPj4+IMKgc291cmNlICJib2FyZC9yb2NrY2hpcC90b3licmlja19yazM1ODgvS2NvbmZpZyIK
-Pj4+IMKgc291cmNlICJib2FyZC90aGVvYnJvbWEtc3lzdGVtcy9qYWd1YXJfcmszNTg4L0tjb25m
-aWciCj4+PiDCoHNvdXJjZSAiYm9hcmQvdGhlb2Jyb21hLXN5c3RlbXMvdGlnZXJfcmszNTg4L0tj
-b25maWciCj4+PiArc291cmNlICJib2FyZC9jb29scGkvZ2VuYm9vay9LY29uZmlnIgo+PiAKPgo+
-T3JkZXIgYWxwaGFiZXRpY2FsbHkgaGVyZS4KPgo+Pj4gZGlmZiAtLWdpdCBhL2JvYXJkL2Nvb2xw
-aS9nZW5ib29rL1JFQURNRSBiL2JvYXJkL2Nvb2xwaS9nZW5ib29rL1JFQURNRQo+Pj4gbmV3IGZp
-bGUgbW9kZSAxMDA2NDQKPj4+IGluZGV4IDAwMDAwMDAwMDAwLi5iYTE2NTk1MzE1NAo+Pj4gLS0t
-IC9kZXYvbnVsbAo+Pj4gKysrIGIvYm9hcmQvY29vbHBpL2dlbmJvb2svUkVBRE1FCj4+IAo+Cj5X
-ZSd2ZSBtb3ZlZCB0aGUgUkVBRE1FcyB0byBkb2MvYm9hcmQvIHNvIHBsZWFzZSBkbyB0aGlzIGFz
-IHdlbGwuCj4KPllvdSBtYXkgb25seSB3YW50IHRvIGFkZCB5b3VyIGJvYXJkIHRvIGRvYy9ib2Fy
-ZC9yb2NrY2hpcC9yb2NrY2hpcC5yc3QgCj5pZiB0aGUgaW5zdHJ1Y3Rpb25zIGluIHRoYXQgZmls
-ZSBhcmUgZ29vZCBlbm91Z2ggZm9yIHlvdS4gQ29uc2lkZXIgCj5leHRlbmRpbmcgdGhlIGNvbnRl
-bnQgaWYgaXQgZG9lc24ndCwgYW5kIGlmIGl0J3MgdG9vIG11Y2ggd29yaywgdGhlbiAKPmNyZWF0
-aW5nIHlvdXIgb3duIHJlYWRtZSBpbiBkb2MvYm9hcmQvIHNpbWlsYXIgdG8gaG93IFRoZW9icm9t
-YSBTeXN0ZW1zIAo+Ym9hcmRzIGFyZSBkb2N1bWVudGVkIHdvdWxkIGRvIGp1c3QgZmluZS4KPgo+
-Tm90ZSB0aGF0IHRob3NlIGFyZSBpbiByZVN0cnVjdHVyZWRUZXh0IGZvcm1hdCAoclNUL1NwaGlu
-eCkuCj4KPj4+IGRpZmYgLS1naXQKPj4+IGEvZHRzL3Vwc3RyZWFtL3NyYy9hcm02NC9yb2NrY2hp
-cC9yazM1ODgtY29vbHBpLWNtNS1nZW5ib29rLmR0cwo+Pj4gYi9kdHMvdXBzdHJlYW0vc3JjL2Fy
-bTY0L3JvY2tjaGlwL3JrMzU4OC1jb29scGktY201LWdlbmJvb2suZHRzCj4+PiBuZXcgZmlsZSBt
-b2RlIDEwMDY0NAo+Pj4gaW5kZXggMDAwMDAwMDAwMDAuLjY0MTgyODZlZmU0Cj4+PiAtLS0gL2Rl
-di9udWxsCj4+PiArKysgYi9kdHMvdXBzdHJlYW0vc3JjL2FybTY0L3JvY2tjaGlwL3JrMzU4OC1j
-b29scGktY201LWdlbmJvb2suZHRzCj4+IAo+PiBJIGJlbGlldmUgdGhpcyBzaG91bGQgYmUgdHVy
-bmVkIGludG8gYSBzZXBhcmF0ZSBjb21taXQsIGFzIGEgY2hlcnJ5LXBpY2sKPj4gb2YgYW4gdXBz
-dHJlYW0gRFQgY29tbWl0Lgo+PiAKPgo+WWVzLCBhcyBhIGhpbnQsIHlvdSBzaG91bGQgYmUgdXNp
-bmcgdG9vbHMvdXBkYXRlLXN1YnRyZWUuc2ggcGljayBkdHMgCj48Y29tbWl0PiBhcyBkb2N1bWVu
-dGVkIGhlcmU6IAo+aHR0cHM6Ly9kb2NzLnUtYm9vdC5vcmcvZW4vbGF0ZXN0L2RldmVsb3AvZGV2
-aWNldHJlZS9jb250cm9sLmh0bWwjcmVzeW5jaW5nLXdpdGgtZGV2aWNldHJlZS1yZWJhc2luZwo+
-Cj5Zb3UgbWF5IG5lZWQgdG8gcGljayBtb3JlIHRoYW4gb25lIGNvbW1pdCwgdGhhdCBpcyBmaW5l
-Lgo+Cj5UaGUgY29tbWl0IGlkIGNvbWVzIGZyb20gCj5odHRwczovL2dpdC5rZXJuZWwub3JnL3B1
-Yi9zY20vbGludXgva2VybmVsL2dpdC9kZXZpY2V0cmVlL2RldmljZXRyZWUtcmViYXNpbmcuZ2l0
-Ly4KClRoZSBkdHMganVzdCBsYW5kaW5nIGxpbnV4LXJvY2tjaGlwIGEgZmV3IGRheXMgYWdhb++8
-jHNvIGl0J3Mgbm90IGluIHRoZSBkZXZpY2V0cmVlLXJlYmFzaW5nIHJlcG/vvIwKRG9lcyB0aGF0
-IG1lYW4gIEkgc2hvdWxkIHdhaXQgYmVmb3JlIGl0IGxhbmRpbmcgZGV2aWNldHJlZS1yZWJhc2lu
-ZyByZXBvIO+8nwoKPgo+Cj5DaGVlcnMsCj5RdWVudGluCg==
+This series is a reworked version of the previous seried: 
+misc: introduce STATUS LED activity function
+
+This series port and expand the legacy concept of LED boot from
+the legacy Status LED API to new LED API.
+
+One thing that many device need is a way to communicate to the
+user that the device is actually doing something.
+
+This is especially useful for recovery steps where an
+user (for example) insert an USB drive, keep a button pressed
+and the device autorecover.
+
+There is currently no way to signal the user externally that
+the bootloader is processing/recoverying aside from setting
+a LED on.
+
+A solid LED on is not enough and won't actually signal any
+kind of progress.
+Solution is the good old blinking LED but uboot doesn't
+suggest (and support) interrupts and almost all the LED
+are usually GPIO LED that doesn't support HW blink.
+
+Additional Kconfg are also introduced to set the LED boot and
+activity. Those are referenced by label.
+
+A documentation for old and these new LED API is created.
+
+(world tested with the azure pipeline)
+
+Changes v3:
+- Switch to /config property
+Changes v2:
+- Drop GPIO SW implementation
+- Add fix for new LED SW BLINK
+
+Christian Marangi (9):
+  led: turn LED ON on initial SW blink
+  led: implement led_set_state/period_by_label
+  led: implement LED boot API
+  common: board_r: rework BOOT LED handling
+  led: implement LED activity API
+  tftp: implement support for LED activity
+  mtd: implement support for LED activity
+  ubi: implement support for LED activity
+  doc: introduce led.rst documentation
+
+ cmd/mtd.c                           |  19 +++
+ cmd/ubi.c                           |  17 ++-
+ common/board_r.c                    |  25 +++-
+ doc/api/index.rst                   |   1 +
+ doc/api/led.rst                     |  10 ++
+ doc/device-tree-bindings/config.txt |   7 ++
+ drivers/led/Kconfig                 |  41 +++++++
+ drivers/led/led-uclass.c            |  28 +++++
+ drivers/led/led_sw_blink.c          |   5 +-
+ include/led.h                       | 184 ++++++++++++++++++++++++++++
+ net/tftp.c                          |   7 ++
+ 11 files changed, 338 insertions(+), 6 deletions(-)
+ create mode 100644 doc/api/led.rst
+
+-- 
+2.45.2
+
