@@ -4,53 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FAB9C3DA7F
-	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 07:51:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFC84C52D7C
+	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 07:53:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D13FC8857C;
-	Mon, 12 Aug 2024 09:51:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3F6F78861A;
+	Mon, 12 Aug 2024 09:52:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="jRTZiQLa";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="RsBkHux9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 264C586E85; Mon, 12 Aug 2024 09:51:43 +0200 (CEST)
-Received: from relay6-d.mail.gandi.net (relay6-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::226])
+ id 29E4C86E85; Mon, 12 Aug 2024 09:52:58 +0200 (CEST)
+Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
+ [IPv6:2001:4b98:dc4:8::224])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A3258857C
- for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 09:51:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 46D0988636
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 09:52:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 6826AC0002;
- Mon, 12 Aug 2024 07:51:40 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 85550E0005;
+ Mon, 12 Aug 2024 07:52:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1723449100;
+ t=1723449175;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=laevIuMSeX0B1hCaGQG8QszuWVQXVA/ZFpD6fELIZFE=;
- b=jRTZiQLa/vfmYDMbHAAT+55plQnp5GnGAu5JTj8gNpTAeD8SxtKnSblykqYAm5crzSwLwj
- dwBsx03rPTML+BSvtIlb3xBpRAp3HS+DA+/kfeY+9qeb0FMIbNoKDGevszshn1spWphMJy
- KxUvxNFTWpFoFeky9waaoX2J53mmmmAJryWc6DTBtBgdx4MbhUoh2NHCrAX7BT43xpAUVX
- e9e31lliSFae/D6cmIW3BIZ7Hcbb0HOCYKOTkT6kPndoWX/9dHY8d7evSdgR7NSw95JvMJ
- 97BGf7OudoJJrL5OgLxe0PJECWJTxTICTSrxwmsjDqgMKKE0mcUrP3p7aKe9Dg==
-Date: Mon, 12 Aug 2024 09:51:39 +0200
+ bh=C7PpzaDGHygdrqNUU7mMCnrk/pK60RIbiBDNEjFfHYc=;
+ b=RsBkHux905z4OCUqxG0WXJHjtVA01ppwCHluboE/aY5/yyMIchoRwSvK1enA10qAcDf0tx
+ Ul+JvAVgJZJPGcSVlBE4wfyobnz9L7cnriE5e7/roszbuWErMTSbDu2hT7rz+oz1F7LfXy
+ CtLQdBURG4ilt63k9YNG9BjlXa86VMTqyiauD9svBK4FjWCZ/Hh+qmNBnhKIXAzFPMtVn/
+ J9a6OWAbmQ6lDbjqbMXdx9aC49Ey+I8fDllM6F46qfmrcgSo2kXd8DMe9bjoKEvEBL+DTP
+ ZgqOEtMQlHg8BYSL2v+wPVmzr+s+x0+ejo+8YoNmXgEte937S7wjd/WPXAYP3Q==
+Date: Mon, 12 Aug 2024 09:52:54 +0200
 From: Miquel Raynal <miquel.raynal@bootlin.com>
 To: Richard Weinberger <richard@nod.at>
 Cc: u-boot@lists.denx.de, upstream+uboot@sigma-star.at, trini@konsulko.com,
  thomas.petazzoni@bootlin.com, jmcosta944@gmail.com
-Subject: Re: [PATCH v2 4/4] squashfs: Fix stack overflow while symlink
- resolving
-Message-ID: <20240812095139.32c5cf66@xps-13>
-In-Reply-To: <20240802163647.26674-4-richard@nod.at>
-References: <20240802163647.26674-1-richard@nod.at>
- <20240802163647.26674-4-richard@nod.at>
+Subject: Re: [PATCH] squashfs: Fix heap corruption in sqfs_search_dir()
+Message-ID: <20240812095254.54a82ad4@xps-13>
+In-Reply-To: <20240802200509.2471-1-richard@nod.at>
+References: <20240802200509.2471-1-richard@nod.at>
 Organization: Bootlin
 X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
@@ -75,17 +73,16 @@ X-Virus-Status: Clean
 
 Hi Richard,
 
-richard@nod.at wrote on Fri,  2 Aug 2024 18:36:47 +0200:
+richard@nod.at wrote on Fri,  2 Aug 2024 22:05:09 +0200:
 
-> The squashfs driver blindly follows symlinks, and calls sqfs_size()
-> recursively. So an attacker can create a crafted filesystem and with
-> a deep enough nesting level a stack overflow can be achieved.
->=20
-> Fix by limiting the nesting level to 8.
->=20
-> Signed-off-by: Richard Weinberger <richard@nod.at>
+> res needs to be large enough to store both strings rem and target,
+> plus the path separator and the terminator.
+> Currently the space for the path separator is not accounted, so
+> the heap is corrupted by one byte.
+
+Mmm, subtle.
 
 Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
 
-Thanks,
+Thanks for the fix!
 Miqu=C3=A8l
