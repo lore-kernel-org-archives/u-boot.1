@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5BBEC3DA7F
-	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 11:47:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6E52C3DA7F
+	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 11:48:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C7E688703;
-	Mon, 12 Aug 2024 13:47:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4480C884C3;
+	Mon, 12 Aug 2024 13:48:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hQg3yZCu";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ydtSZ08k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A386188747; Mon, 12 Aug 2024 13:47:36 +0200 (CEST)
+ id 458318861A; Mon, 12 Aug 2024 13:48:03 +0200 (CEST)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E32888680
- for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 13:47:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D175887B77
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 13:48:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47CBlHF2022689;
- Mon, 12 Aug 2024 06:47:17 -0500
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47CBlnGQ022779;
+ Mon, 12 Aug 2024 06:47:49 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1723463237;
- bh=AVsBAdh5QAARQfVVvL1U8W/sXppoF7B478idOi3TnFY=;
+ s=ti-com-17Q1; t=1723463269;
+ bh=x3bORG/lx1guFYd8vpCBRXIaUVvxP/inrgMLfPLnEj8=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=hQg3yZCulzajXZB0B201yG0phRpi0mfIHsWJ2H7OrdeAd8/vJ9HbYbntxfL2Kw6et
- 5aLQm5N0GyTxL6kSLhxj4th1bQjUrxe/EA6mRq0sedjJNPmZQETBm5CLRo0PTU269P
- IoNtMZtqf183x5WqbePT0wQ4HSLhi8D2oqQASAqY=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47CBlHg0008464
+ b=ydtSZ08khMUiDummcTRL5Jr9oaJz6+ChtVb8er8PkRNrQQsOyd7GvcltSqEeM9zbU
+ H7YYJERF2v/z8NiCTYj/f+pKM81wyP5HK9OEJPSriHefgIlZBBUIpIpdbG508/J1nT
+ UNhMx/obgQ73QohHUSk2gxOVMDqvZOWp6RN1TSlI=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47CBlnlG008664
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 12 Aug 2024 06:47:17 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 12 Aug 2024 06:47:49 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 12
- Aug 2024 06:47:17 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2024 06:47:48 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 12 Aug 2024 06:47:17 -0500
+ Frontend Transport; Mon, 12 Aug 2024 06:47:48 -0500
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47CBlGTT128343;
- Mon, 12 Aug 2024 06:47:16 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47CBlm9T128755;
+ Mon, 12 Aug 2024 06:47:48 -0500
 From: Chintan Vankar <c-vankar@ti.com>
 To: Michal Simek <michal.simek@amd.com>, Bryan Brattlof <bb@ti.com>, "Vignesh
  Raghavendra" <vigneshr@ti.com>, Marek Vasut
@@ -69,9 +69,10 @@ To: Michal Simek <michal.simek@amd.com>, Bryan Brattlof <bb@ti.com>, "Vignesh
  Nishanth Menon <nm@ti.com>, Sumit Garg <sumit.garg@linaro.org>, Tom Rini
  <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH v4 02/10] firmware: ti_sci: Add No-OP for "RX_FL_CFG"
-Date: Mon, 12 Aug 2024 17:17:14 +0530
-Message-ID: <20240812114714.3843192-1-c-vankar@ti.com>
+Subject: [PATCH v4 03/10] soc: ti: k3-navss-ringacc: Initialize base address
+ of ring cfg registers
+Date: Mon, 12 Aug 2024 17:17:46 +0530
+Message-ID: <20240812114746.3843395-1-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240812113621.3840652-1-c-vankar@ti.com>
 References: <20240812113621.3840652-1-c-vankar@ti.com>
@@ -97,9 +98,11 @@ X-Virus-Status: Clean
 
 From: Kishon Vijay Abraham I <kishon@ti.com>
 
-RX_FL_CFG message should not be forwarded to TIFS and should be
-handled within R5 SPL (when DM services are not available). Add
-a no-op function to not handle RX_FL_CFG messages.
+Initialize base address of ring config registers required to natively
+setup ring cfg registers in the absence of Device Manager (DM) services
+at R5 SPL stage. Since register property is defined as "ring" for PKTDMA
+and "cfg" for UDMA, configure base address of ring configuration register
+accordingly.
 
 Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
 Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
@@ -107,40 +110,57 @@ Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 ---
 
 Link to v3:
-https://lore.kernel.org/r/20240705045030.1141934-3-c-vankar@ti.com/
+https://lore.kernel.org/r/20240705045030.1141934-4-c-vankar@ti.com/
 
 Changes from v3 to v4:
 - No changes.
 
- drivers/firmware/ti_sci.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ drivers/soc/ti/k3-navss-ringacc.c | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
-index e591333ba3..719cfa771b 100644
---- a/drivers/firmware/ti_sci.c
-+++ b/drivers/firmware/ti_sci.c
-@@ -2450,6 +2450,12 @@ fail:
- 	return ret;
- }
+diff --git a/drivers/soc/ti/k3-navss-ringacc.c b/drivers/soc/ti/k3-navss-ringacc.c
+index b2643a30d3..14114a6583 100644
+--- a/drivers/soc/ti/k3-navss-ringacc.c
++++ b/drivers/soc/ti/k3-navss-ringacc.c
+@@ -1028,8 +1028,8 @@ static int k3_nav_ringacc_init(struct udevice *dev, struct k3_nav_ringacc *ringa
+ struct k3_nav_ringacc *k3_ringacc_dmarings_init(struct udevice *dev,
+ 						struct k3_ringacc_init_data *data)
+ {
++	void __iomem *base_rt, *base_cfg;
+ 	struct k3_nav_ringacc *ringacc;
+-	void __iomem *base_rt;
+ 	int i;
  
-+static int ti_sci_cmd_rm_udmap_rx_flow_cfg_noop(const struct ti_sci_handle *handle,
-+						const struct ti_sci_msg_rm_udmap_flow_cfg *params)
-+{
-+	return 0;
-+}
+ 	ringacc = devm_kzalloc(dev, sizeof(*ringacc), GFP_KERNEL);
+@@ -1047,6 +1047,20 @@ struct k3_nav_ringacc *k3_ringacc_dmarings_init(struct udevice *dev,
+ 	if (!base_rt)
+ 		return ERR_PTR(-EINVAL);
+ 
++	/*
++	 * Since register property is defined as "ring" for PKTDMA and
++	 * "cfg" for UDMA, configure base address of ring configuration
++	 * register accordingly.
++	 */
++	base_cfg = dev_remap_addr_name(dev, "ring");
++	pr_debug("ring %p\n", base_cfg);
++	if (!base_cfg) {
++		base_cfg = dev_remap_addr_name(dev, "cfg");
++		pr_debug("cfg %p\n", base_cfg);
++		if (!base_cfg)
++			return ERR_PTR(-EINVAL);
++	}
 +
- /**
-  * ti_sci_cmd_set_fwl_region() - Request for configuring a firewall region
-  * @handle:    pointer to TI SCI handle
-@@ -2895,7 +2901,7 @@ static __maybe_unused int ti_sci_dm_probe(struct udevice *dev)
- 	udmap_ops = &ops->rm_udmap_ops;
- 	udmap_ops->tx_ch_cfg = ti_sci_cmd_rm_udmap_tx_ch_cfg;
- 	udmap_ops->rx_ch_cfg = ti_sci_cmd_rm_udmap_rx_ch_cfg;
--	udmap_ops->rx_flow_cfg = ti_sci_cmd_rm_udmap_rx_flow_cfg;
-+	udmap_ops->rx_flow_cfg = ti_sci_cmd_rm_udmap_rx_flow_cfg_noop;
+ 	ringacc->rings = devm_kzalloc(dev,
+ 				      sizeof(*ringacc->rings) *
+ 				      ringacc->num_rings * 2,
+@@ -1061,6 +1075,7 @@ struct k3_nav_ringacc *k3_ringacc_dmarings_init(struct udevice *dev,
+ 	for (i = 0; i < ringacc->num_rings; i++) {
+ 		struct k3_nav_ring *ring = &ringacc->rings[i];
  
- 	return ret;
- }
++		ring->cfg = base_cfg + KNAV_RINGACC_CFG_REGS_STEP * i;
+ 		ring->rt = base_rt + K3_DMARING_RING_RT_REGS_STEP * i;
+ 		ring->parent = ringacc;
+ 		ring->ring_id = i;
 -- 
 2.34.1
 
