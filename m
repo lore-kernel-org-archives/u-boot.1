@@ -4,60 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01399C3DA7F
-	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 06:30:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16B02C3DA7F
+	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 06:44:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC2AE88680;
-	Mon, 12 Aug 2024 08:30:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 5208787CF8;
+	Mon, 12 Aug 2024 08:44:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="To+E19ey";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WmgJmNo/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8C98886A0; Mon, 12 Aug 2024 08:30:52 +0200 (CEST)
-Received: from mail-m11880.qiye.163.com (mail-m11880.qiye.163.com
- [115.236.118.80])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C4C398867B; Mon, 12 Aug 2024 08:44:11 +0200 (CEST)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F62E841BC
- for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 08:30:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 755DE841BC
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 08:44:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=To+E19eyOhx7+IrC+ZbZoswkYERJzk+pnGLF9j0HnIa6KsZAAZmoey88YgO7o6TQAIW2T8lSQm++UgEhPn/igiEDw88a8yA+jIHP5eecB/29T5iKWcwtm0SX7WDdW4N+n9dr/nJ8E6utsYnn9Fy4LTmOd/xaqgHApkEi2sbNCOc=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=bbSYGl8+L/ozyMS1D4YQaavJFfbSsV1PsVyywK2OGwY=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.93] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 6AD58900518;
- Mon, 12 Aug 2024 14:30:33 +0800 (CST)
-Message-ID: <2a301686-dffe-4819-abfb-7ef1a93e1f0f@rock-chips.com>
-Date: Mon, 12 Aug 2024 14:30:32 +0800
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1fd640a6454so29854225ad.3
+ for <u-boot@lists.denx.de>; Sun, 11 Aug 2024 23:44:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1723445048; x=1724049848; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=iOtvtSUGOV574xejJGxI+fh8QspJxjZiK22has/k1ws=;
+ b=WmgJmNo/jDuWvejKZ/eOzSnLfOWdUSQ46hEhjZhnPavBBf9Wj96rVrNGZ0/CJFwnYx
+ EYyrHcLW2gaeGSVGwYz2v4/TbY2boxwSxS4uwLUpuFCbIU609UhJ3ECFoUlrrPah4VQB
+ eERIP11hRrdA+Y3W5KxupIu0I3k5VLMznJLyuM4YXSDy8flituytdM71I4fgiKhha1oL
+ cuVDAP0Bzmeiz6UEgep6MpQEmEgJSh5p4lgJia53ohuvZ7Ka2Y3I2dtL6jntb/D5vwoB
+ NaFTRqw+jOUiTalalycorpRuunIm7k+3w675I0eoFZhQlVMZkTh1sHww9LMEIYQT1/Ey
+ 21kg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723445048; x=1724049848;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=iOtvtSUGOV574xejJGxI+fh8QspJxjZiK22has/k1ws=;
+ b=S+0bTkOfpdc6BOm9YEQ0Nh4+XM3k1hwGbSLeAC3zRNLpT7jJP7NzsXjUBbpybjNYL3
+ n4kKhqkmnTNt01vTv6eerV8WBUusJ9JwCtzcE2iNExywccHhrZemW6BczOyEpvMXk3Sz
+ vub0oJJhx93NBfgIvfpq/ljAQyEhuw0oF1JMApUBCj+rAuKLVsQVS4fUpOLRdxrR9m7j
+ zzTFwfshS1BfO0mMkBmhIFw5JifEfU/nUxU6Fwwle8tk7SZpov56STVEx5pfZsHD/sww
+ X69kg1N3+Ht7/K9OnMsivTLx4P5aLBSmf7gt5ifNH82eEOUwKOF8+nmnm08hovDVdnrN
+ EsxA==
+X-Gm-Message-State: AOJu0YyJEpIMieZYdIJmLqPGPKnQFFDsyxeCNtPsidqMzhy+0kVGBPOe
+ AU/EBpn6X32eI9LQyBjvLr5BL3c+rnZrbigm5BNg6Gmv8At8YeNBrbTCI8yVF2/rfq7i+u6iYed
+ NQIzS0HVljuLsrj2TAvHSielTQbw4YZdKIJySgg==
+X-Google-Smtp-Source: AGHT+IGkBfzt7SIADFykTWBa0OxD+7jGJ3iHIJf8U3dujMLvRQAP4UTq0lrqoC5xWUim3CxH9RaH9b7Kd+Fi45KlBUk=
+X-Received: by 2002:a17:902:ced0:b0:1fd:a264:9433 with SMTP id
+ d9443c01a7336-200ae5736ffmr68759605ad.29.1723445047727; Sun, 11 Aug 2024
+ 23:44:07 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 00/10] rockchip: pinctrl: Add support for pinmux status
- cmd
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20240802225705.2640999-1-jonas@kwiboo.se>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240802225705.2640999-1-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGRkaGlZJGh0aHhoYTR0fTB5WFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-X-HM-Tid: 0a91454805ea03a9kunm6ad58900518
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MQg6Dww*FjIxFwEeGTpNNk8P
- S0wwFBlVSlVKTElIT09PSUhPSk1CVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOSE1MNwY+
+References: <20240811145209.4191404-1-sjg@chromium.org>
+ <20240811145209.4191404-30-sjg@chromium.org>
+In-Reply-To: <20240811145209.4191404-30-sjg@chromium.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 12 Aug 2024 09:43:30 +0300
+Message-ID: <CAC_iWjJprkG-H5eKvE1SXc+AeppNgk_FsmNcbMV-L9=k1g=kFQ@mail.gmail.com>
+Subject: Re: [PATCH v3 29/40] efi_loader: Shorten the app rules
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,123 +88,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+On Sun, 11 Aug 2024 at 17:52, Simon Glass <sjg@chromium.org> wrote:
+>
+> We have quite a few apps now, so create a way to specify them as a list
+> rather than repeating the same rules again and again.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> ---
+>
+> (no changes since v1)
+>
+>  lib/efi_loader/Makefile | 31 +++++++++----------------------
+>  1 file changed, 9 insertions(+), 22 deletions(-)
+>
+> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> index 27dbd9e760d..660368b9d8f 100644
+> --- a/lib/efi_loader/Makefile
+> +++ b/lib/efi_loader/Makefile
+> @@ -22,29 +22,13 @@ CFLAGS_REMOVE_dtbdump.o := $(CFLAGS_NON_EFI)
+>  CFLAGS_initrddump.o := $(CFLAGS_EFI) -Os -ffreestanding
+>  CFLAGS_REMOVE_initrddump.o := $(CFLAGS_NON_EFI)
+>
+> -ifdef CONFIG_RISCV
+> -always += boothart.efi
+> -targets += boothart.o
+> -endif
+> -
+> -ifneq ($(CONFIG_BOOTEFI_HELLO_COMPILE),)
+> -always += helloworld.efi
+> -targets += helloworld.o
+> -endif
+> -
+> -ifneq ($(CONFIG_GENERATE_SMBIOS_TABLE),)
+> -always += smbiosdump.efi
+> -targets += smbiosdump.o
+> -endif
+> -
+> +# These are the apps that are built
+> +apps-$(CONFIG_RISCV) += boothart
+> +apps-$(CONFIG_BOOTEFI_HELLO_COMPILE) += helloworld
+> +apps-$(CONFIG_GENERATE_SMBIOS_TABLE) += smbiosdump
+> +apps-$(CONFIG_EFI_LOAD_FILE2_INITRD) += initrddump
+>  ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
+> -always += dtbdump.efi
+> -targets += dtbdump.o
+> -endif
+> -
+> -ifdef CONFIG_EFI_LOAD_FILE2_INITRD
+> -always += initrddump.efi
+> -targets += initrddump.o
+> +apps-y += dtbdump
+>  endif
+>
+>  obj-$(CONFIG_CMD_BOOTEFI_HELLO) += helloworld_efi.o
+> @@ -95,3 +79,6 @@ obj-$(CONFIG_EFI_ECPT) += efi_conformance.o
+>
+>  EFI_VAR_SEED_FILE := $(subst $\",,$(CONFIG_EFI_VAR_SEED_FILE))
+>  $(obj)/efi_var_seed.o: $(srctree)/$(EFI_VAR_SEED_FILE)
+> +
+> +always += $(foreach f,$(apps-y),$(f).efi)
+> +targets += $(foreach f,$(apps-y),$(f).o)
+> --
+> 2.34.1
+>
 
-On 2024/8/3 06:56, Jonas Karlman wrote:
-> This series includes some cleanup, add support for using the pinmux
-> status cmd and add support for the gpio request ops.
->
-> Following is an example on a Radxa ROCK 5A (RK3588S):
->
->    => pinmux dev pinctrl
->    dev: pinctrl
->    => pinmux status
->    GPIO0_A0  : gpio
->    GPIO0_A1  : func-2
->    GPIO0_A2  : gpio
->    GPIO0_A3  : gpio
->    GPIO0_A4  : func-1
->    GPIO0_A5  : func-2
->    GPIO0_A6  : gpio
->    GPIO0_A7  : gpio
->    GPIO0_B0  : gpio
->    GPIO0_B1  : gpio
->    GPIO0_B2  : gpio
->    GPIO0_B3  : gpio
->    GPIO0_B4  : gpio
->    GPIO0_B5  : func-10
->    GPIO0_B6  : func-10
->    GPIO0_B7  : gpio
->    [...]
->
-> and on a ASUS TinkerBoard R2.0 (RK3288W):
->
->    => pinmux dev pinctrl
->    dev: pinctrl
->    => pinmux status
->    [...]
->    GPIO2_C6  : gpio
->    GPIO2_C7  : gpio
->    GPIO2_D0  : unrouted
->    GPIO2_D1  : unrouted
->    GPIO2_D2  : unrouted
->    GPIO2_D3  : unrouted
->    GPIO2_D4  : unrouted
->    GPIO2_D5  : unrouted
->    GPIO2_D6  : unrouted
->    GPIO2_D7  : unrouted
->    GPIO3_A0  : func-2
->    GPIO3_A1  : func-2
->    [...]
->
-> Patch 1 refactor to use syscon_regmap_lookup_by_phandle() helper.
-> Patch 6 refactor to get pinctrl device from gpio-ranges prop.
->
-> Patch 2, 3 and 7 change to use pinctrl pin offset instead of bank num to
-> get current pinmux.
-> Patch 4 add required ops for use of the pinmux status cmd.
->
-> Patch 5 and 8 add gpio_request_enable() and request() ops.
->
-> Patch 9 add gpio-ranges props for remaining RK SoCs, this is strictly
-> not needed for pinmux status cmd to function. However, the change to not
-> require the pin controller offset to be 32 aligned was required to add
-> gpio-ranges props for RK3288.
->
-> Patch 10 add gpio aliases for RK SoCs that is missing alias for gpio
-> controllers.
->
-> Changes in v2:
-> - Drop fixes patches already applied
-> - Split adding pin_to_bank() helper into own patch
-> - Add gpio_request_enable() and request() ops patch from the "rockchip:
->    Add gpio request() ops" series
-> - Add missing gpio aliases
-> - Collect r-b tags
->
-> Jonas Karlman (10):
->    pinctrl: rockchip: Use syscon_regmap_lookup_by_phandle()
->    pinctrl: rockchip: Add a pin_to_bank() helper
->    pinctrl: rockchip: Update get_gpio_mux() ops
->    pinctrl: rockchip: Add pinmux status related ops
->    pinctrl: rockchip: Add gpio_request_enable() ops
->    gpio: rockchip: Get pinctrl device from gpio-ranges prop
->    gpio: rockchip: Use pinctrl pin offset to get_gpio_mux()
->    gpio: rockchip: Add request() ops
->    rockchip: gpio: Add gpio-ranges props
->    rockchip: gpio: Add missing gpio aliases
->
->   arch/arm/dts/px30-u-boot.dtsi                 |   4 +
->   arch/arm/dts/rk3036-u-boot.dtsi               |  12 ++
->   arch/arm/dts/rk3066a-u-boot.dtsi              |  10 +-
->   arch/arm/dts/rk3128-u-boot.dtsi               |  16 ++
->   arch/arm/dts/rk322x-u-boot.dtsi               |  16 ++
->   arch/arm/dts/rk3288-u-boot.dtsi               |  42 ++++--
-
-This series extend the pinctrl driver size and cause a board 
-"miqi-rk3288" build fail:
-
-binman: Error 1 running 'mkimage -d 
-./mkimage-in-simple-bin.mkimage-u-boot-spl -n rk3288 -T rksd 
-./idbloader.img': Error: SPL image is too large (size 0x8800 than 0x8000)
-
-We use to met this kind of issue very frequently, and add 
-"CONFIG_SPL_BUILD" to limit the SPL size in driver, we may need to do 
-this again for this feature.
-
-
-Thanks,
-
-- Kever
-
->   arch/arm/dts/rk3308-u-boot.dtsi               |  20 +++
->   arch/arm/dts/rk3328-u-boot.dtsi               |  13 ++
->   arch/arm/dts/rk3368-u-boot.dtsi               |  16 ++
->   arch/arm/dts/rk3399-u-boot.dtsi               |  20 +++
->   arch/arm/dts/rk3xxx-u-boot.dtsi               |   7 +
->   arch/arm/dts/rv1108-u-boot.dtsi               |  25 +++
->   arch/arm/dts/rv1126-u-boot.dtsi               |  22 +++
->   drivers/gpio/rk_gpio.c                        |  54 +++++--
->   .../pinctrl/rockchip/pinctrl-rockchip-core.c  | 142 ++++++++++++++----
->   15 files changed, 364 insertions(+), 55 deletions(-)
->
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
