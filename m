@@ -4,87 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36271C52D7C
-	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 18:46:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2598AC52D7C
+	for <u-boot@archiver.kernel.org>; Mon, 12 Aug 2024 19:13:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E73A88871;
-	Mon, 12 Aug 2024 20:46:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 52C1B886A7;
+	Mon, 12 Aug 2024 21:13:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eyQUT6EO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e8JXkvAa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B79918886A; Mon, 12 Aug 2024 20:46:21 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
+ id 3C56A886A7; Mon, 12 Aug 2024 21:13:01 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9283D88871
- for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 20:46:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BA6F87E30
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 21:12:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-5d5e97b84fbso2659998eaf.1
- for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 11:46:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-428141be2ddso35377685e9.2
+ for <u-boot@lists.denx.de>; Mon, 12 Aug 2024 12:12:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1723488378; x=1724093178; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=n2EG2OsxhbzkgfLRC2CLZg9eArwsbvPBQCObSPCFHa8=;
- b=eyQUT6EOYkuqfrwPL8HULd706Kfh1xQkhm5XnGOKmrIFUSOJyPbqqEZlUiWbQpM8uX
- VBS0H61UOuhE9mfx4gCCGeGAthM+TqdC7q2pW74Z8h+3JUQ0gl8Fj0RRsLSZdywH27NQ
- qkbEwbVThxZ4s6UxEEj0/f6fiajI/eQhzHbVw=
+ d=gmail.com; s=20230601; t=1723489975; x=1724094775; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=g7dbsCvbcVxZcTCf8u29u7ixViiPR/0NWybzVzBqlJA=;
+ b=e8JXkvAaMSdNJ64/8Eiw9a5z4lYieZfEkr5l3igIJZHEJ88FNrJ4xfDi3kwaeff5kI
+ 9AHh3B3D388idL2391j7sRqIHbP/77qlji19SIu1Nhs3QrW9PIfThE0WyddEsf/89kek
+ rT2/cl4OLYIj0wirMW4+3A6pJbZw+pm0r8RBttyXMJmjjRGTQcRUpTu9S3sMauIdi7PV
+ A28gVeTT11O1q4Mg1fAo29FIz9JupNFVOM0G3P/Pbb+t9n8I2I/clvd8nFd5GhRkM8Wo
+ GzCVQcisfc5nQooxK+INwP4gQaKqrFSLPS+tI+LweC/U1y+z11zDcqx4iS4znz2QNbaJ
+ 5SKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723488378; x=1724093178;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=n2EG2OsxhbzkgfLRC2CLZg9eArwsbvPBQCObSPCFHa8=;
- b=TMoPZCUWHPa/iM7vurn3tPAUAoSUK2YhkeDPIb+SOvBEYlwOmmjJaU0kOGkRP+T9m+
- Q2aHg4G+orj/jtEcd4q9IYHIXKrh7wtLeDnxNgra4kqvOneDGhpvSbvq+ZZh6ojEX0hK
- iFDFGJX9yi1FqsYsB7Y59QEXBDH6zGhOqSn2rEajxKsPbpsbs0VrTEAASorL6k1Nz+W1
- SyUZZlni3CtOWUT0c3uRFi49AL6y7nfqRL9doDG+vINGjEZG8rwfQ6FMubsqlf3Kydc8
- OBgB5E6qE+aYdC9OVmDWv1FxGbI8Zjg5nicSHQiwwEzsMYLnthw2Xa8fH5jaB05dAmew
- hfeA==
+ d=1e100.net; s=20230601; t=1723489975; x=1724094775;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=g7dbsCvbcVxZcTCf8u29u7ixViiPR/0NWybzVzBqlJA=;
+ b=MC123GCVfiH2RNpzLpkKTFVx0SMB2SG8TTD7aWHncNVGJgqbSorSCXZvBQvm6jY4Ll
+ 32SKTPabr39KXEpGIzZ4M+yuuFZOv69hDBdSVfHCm28duJqD2leX/jmcGlLdubqkYlER
+ FPWN8jMPqqLNVz3/xFX/GxvWzlSHVOtcdBYpztfHccSuvZX6w6XK0/MkcVKJLpNzDC8O
+ yfwgRM6fgBmaXxM8RTaAE7iAspdzBtF7roG9xRrHdwGgueoq5ntIC9C9yQCkWRx8xMKn
+ hH1jcZqxaqeFQo0leN+M4bbvZDQqm6toX1x58P4RwUcZvqmAd3h53x2KvRIqBRJ6efnB
+ P8sg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVshOZnnZk3o3Phhe5A/blYl+jsPlrN8nL74aWyHis/bxzvr7EBy+sUJHvEHiJkTdbCyob2NJ4=@lists.denx.de
-X-Gm-Message-State: AOJu0YxJ8dtMkovd6xiyfaQuYjEehLBJgT0/L1FebGXzDqe11PEx58Wn
- qUs8OZmy5kem7uaD5H87zEsK0K9VrC0yG74z3iGidvrBc6CkxOTxEkQ05UyoPeU=
-X-Google-Smtp-Source: AGHT+IFlb/Nng2ytJdbmE3wJRp8XLWS9rJV0PG/+nXx4iwOiOTptg/KCoFHH9ruyjEhhrG0l0lv25Q==
-X-Received: by 2002:a05:6820:221f:b0:5d5:6733:ca74 with SMTP id
- 006d021491bc7-5da685adcc0mr1399188eaf.2.1723488378276; 
- Mon, 12 Aug 2024 11:46:18 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-236.totalplay.net.
- [189.203.97.236]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5da3e59899bsm1364508eaf.26.2024.08.12.11.46.16
+ AJvYcCUUxUO8+7xyIiK1c77nH32aSFirf7uWNjC+6PNIWQi2mtX5+GXQpgKDASg6wz4NwbQrOKbmIHIBkFTZCUlfewHI4HyxBA==
+X-Gm-Message-State: AOJu0YwtWagEUlW5YQvL/aJcNj84GEKZRF1Qi4qf4JlcgL7fDQaBMmaB
+ lrnTdCFU/FhqJIRPMjnG11zzlQUwCWFQSV+/zbQtPNyUVHPCXrHE
+X-Google-Smtp-Source: AGHT+IE4xH3G080NmQTRwznCe+AzOoxJxQ0PRrmaYXXOdOlxpwRwaWprFxxhZouXcKrJYIc+m62vHg==
+X-Received: by 2002:a05:600c:4f12:b0:425:5ec3:570b with SMTP id
+ 5b1f17b1804b1-429d4895270mr9126625e9.35.1723489975089; 
+ Mon, 12 Aug 2024 12:12:55 -0700 (PDT)
+Received: from localhost.localdomain
+ (host-79-52-250-20.retail.telecomitalia.it. [79.52.250.20])
+ by smtp.googlemail.com with ESMTPSA id
+ 5b1f17b1804b1-429c750379asm111879375e9.10.2024.08.12.12.12.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Aug 2024 11:46:17 -0700 (PDT)
-Date: Mon, 12 Aug 2024 12:46:15 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Yasuharu Shibata <yasuharu.shibata@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Marek Vasut <marex@denx.de>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Ramon Fried <rfried.dev@gmail.com>, Richard Weinberger <richard@nod.at>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
-Subject: Re: [PATCH 07/21] Revert "net: wget: Support retransmission a
- dropped packet"
-Message-ID: <20240812184615.GI1626301@bill-the-cat>
-References: <20240810205205.3403177-1-sjg@chromium.org>
- <20240810205205.3403177-8-sjg@chromium.org>
- <CALu9rSbrAcxkGkFHuiFSBd-JMTm0kfEwDuBCDNYZc33eTLVU9w@mail.gmail.com>
- <CAFLszTjujOXs39KMnV-5NNWNqJ8K+FoisPYB=1HmC5QHf671ag@mail.gmail.com>
+ Mon, 12 Aug 2024 12:12:54 -0700 (PDT)
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Heiko Schocher <hs@denx.de>, Christian Marangi <ansuelsmth@gmail.com>,
+ u-boot@lists.denx.de
+Subject: [PATCH] pci: mediatek: add support for upstream split PCIe node
+Date: Mon, 12 Aug 2024 14:31:48 +0200
+Message-ID: <20240812123150.20598-1-ansuelsmth@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="g5p8AQi1RCTPI+dF"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjujOXs39KMnV-5NNWNqJ8K+FoisPYB=1HmC5QHf671ag@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,70 +94,213 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Add support for upstream linux split PCIe node.
 
---g5p8AQi1RCTPI+dF
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Upstream linux have an alternative way to declare PCIe nodes that splits
+them in dedicated nodes for each line instead of putting them all in one
+node.
 
-On Sun, Aug 11, 2024 at 08:50:18AM -0600, Simon Glass wrote:
-> +Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
->=20
-> Hi Yasuharu,
->=20
-> On Sat, 10 Aug 2024 at 20:48, Yasuharu Shibata
-> <yasuharu.shibata@gmail.com> wrote:
-> >
-> > Dear Simon,
-> >
-> > Could you inform me how the wget test was broken?
-> > As I explained in the commit log, I fixed the bug in specific condition=
-s.
-> > Without the details of how the break happened,
-> > it is difficult to find a proper patch.
-> >
-> > Best regards,
-> > Yasuharu Shibata
->=20
-> Yes, I should have mentioned that. It is test/cmd/wget.c - see also [1].
->=20
-> This is a good run:
-> Test: net_test_wget: wget.c
-> HTTP/1.1 200 OK
-> Packets received 5, Transfer Successful
-> Bytes transferred =3D 32 (20 hex)
-> md5 for 00020000 ... 0002001f =3D=3D> 234af48e94b0085060249ecb5942ab57
-> Failures: 0
->=20
-> With your patch it hangs:
->=20
-> Test: net_test_wget: wget.c
-> HTTP/1.1 200 OKT
+Detect this by checking if the mediatek,generic-pciecfg node is passed
+as it's used to reference the common address for all the PCIe lines.
 
-Can you please figure out what's going on with the sandbox test then?
-The change in question fixes wget support on real hardware, and also the
-other wget tests (as part of the lwIP series) work fine as well. This
-seems like something specific to that test.
+Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+---
+ drivers/pci/pcie_mediatek.c | 127 ++++++++++++++++++++++++++++--------
+ 1 file changed, 100 insertions(+), 27 deletions(-)
 
---=20
-Tom
+diff --git a/drivers/pci/pcie_mediatek.c b/drivers/pci/pcie_mediatek.c
+index 04d8cc29afd..d88d850924c 100644
+--- a/drivers/pci/pcie_mediatek.c
++++ b/drivers/pci/pcie_mediatek.c
+@@ -524,7 +524,7 @@ exit:
+ 	mtk_pcie_port_free(port);
+ }
+ 
+-static int mtk_pcie_parse_port(struct udevice *dev, u32 slot)
++static int mtk_pcie_parse_port(struct udevice *dev, u32 slot, int index)
+ {
+ 	struct mtk_pcie *pcie = dev_get_priv(dev);
+ 	struct mtk_pcie_port *port;
+@@ -545,11 +545,11 @@ static int mtk_pcie_parse_port(struct udevice *dev, u32 slot)
+ 	if (err)
+ 		return err;
+ 
+-	err = reset_get_by_index(dev, slot, &port->reset);
++	err = reset_get_by_index(dev, index, &port->reset);
+ 	if (err)
+ 		return err;
+ 
+-	err = generic_phy_get_by_index(dev, slot, &port->phy);
++	err = generic_phy_get_by_index(dev, index, &port->phy);
+ 	if (err)
+ 		return err;
+ 
+@@ -631,18 +631,58 @@ static int mtk_pcie_parse_port_v2(struct udevice *dev, u32 slot)
+ 	return 0;
+ }
+ 
++static int mtk_pcie_subsys_get(struct udevice *dev)
++{
++	struct mtk_pcie *pcie = dev_get_priv(dev);
++	ofnode cfg_node;
++	fdt_addr_t addr;
++
++	cfg_node = ofnode_by_compatible(ofnode_null(),
++					"mediatek,generic-pciecfg");
++	if (!ofnode_valid(cfg_node))
++		return -ENOENT;
++
++	addr = ofnode_get_addr(cfg_node);
++	if (addr == FDT_ADDR_T_NONE)
++		return -ENODEV;
++
++	pcie->base = map_physmem(addr, 0, MAP_NOCACHE);
++	if (!pcie->base)
++		return -ENOENT;
++
++	return 0;
++}
++
+ static int mtk_pcie_probe(struct udevice *dev)
+ {
+ 	struct mtk_pcie *pcie = dev_get_priv(dev);
+ 	struct mtk_pcie_port *port, *tmp;
++	bool split_pcie_node = false;
+ 	ofnode subnode;
++	unsigned int slot;
+ 	int err;
+ 
+ 	INIT_LIST_HEAD(&pcie->ports);
+ 
+-	pcie->base = dev_remap_addr_name(dev, "subsys");
+-	if (!pcie->base)
+-		return -ENOENT;
++	/* Check if upstream implementation is used */
++	err = mtk_pcie_subsys_get(dev);
++	if (!err) {
++		/*
++		 * Assume split port node implementation with "mediatek,generic-pciecfg"
++		 * found. We check reg-names and check if the node is for port0 or port1.
++		 */
++		split_pcie_node = true;
++		if (!strcmp(dev_read_string(dev, "reg-names"), "port0"))
++			slot = 0;
++		else if (!strcmp(dev_read_string(dev, "reg-names"), "port1"))
++			slot = 1;
++		else
++			return -EINVAL;
++	} else {
++		pcie->base = dev_remap_addr_name(dev, "subsys");
++		if (!pcie->base)
++			return -ENOENT;
++	}
+ 
+ 	err = clk_get_by_name(dev, "free_ck", &pcie->free_ck);
+ 	if (err)
+@@ -653,20 +693,27 @@ static int mtk_pcie_probe(struct udevice *dev)
+ 	if (err)
+ 		return err;
+ 
+-	dev_for_each_subnode(subnode, dev) {
+-		struct fdt_pci_addr addr;
+-		u32 slot = 0;
++	if (!split_pcie_node) {
++		dev_for_each_subnode(subnode, dev) {
++			struct fdt_pci_addr addr;
+ 
+-		if (!ofnode_is_enabled(subnode))
+-			continue;
++			slot = 0;
+ 
+-		err = ofnode_read_pci_addr(subnode, 0, "reg", &addr, NULL);
+-		if (err)
+-			return err;
++			if (!ofnode_is_enabled(subnode))
++				continue;
+ 
+-		slot = PCI_DEV(addr.phys_hi);
++			err = ofnode_read_pci_addr(subnode, 0, "reg", &addr, NULL);
++			if (err)
++				return err;
+ 
+-		err = mtk_pcie_parse_port(dev, slot);
++			slot = PCI_DEV(addr.phys_hi);
++
++			err = mtk_pcie_parse_port(dev, slot, slot);
++			if (err)
++				return err;
++		}
++	} else {
++		err = mtk_pcie_parse_port(dev, slot, 0);
+ 		if (err)
+ 			return err;
+ 	}
+@@ -682,28 +729,54 @@ static int mtk_pcie_probe_v2(struct udevice *dev)
+ {
+ 	struct mtk_pcie *pcie = dev_get_priv(dev);
+ 	struct mtk_pcie_port *port, *tmp;
+-	struct fdt_pci_addr addr;
++	bool split_pcie_node = false;
+ 	ofnode subnode;
+ 	unsigned int slot;
+ 	int err;
+ 
+ 	INIT_LIST_HEAD(&pcie->ports);
+ 
+-	pcie->base = dev_remap_addr_name(dev, "subsys");
+-	if (!pcie->base)
+-		return -ENOENT;
++	/* Check if upstream implementation is used */
++	err = mtk_pcie_subsys_get(dev);
++	if (!err) {
++		/*
++		 * Assume split port node implementation with "mediatek,generic-pciecfg"
++		 * found. We check reg-names and check if the node is for port0 or port1.
++		 */
++		split_pcie_node = true;
++		if (!strcmp(dev_read_string(dev, "reg-names"), "port0"))
++			slot = 0;
++		else if (!strcmp(dev_read_string(dev, "reg-names"), "port1"))
++			slot = 1;
++		else
++			return -EINVAL;
++	} else {
++		pcie->base = dev_remap_addr_name(dev, "subsys");
++		if (!pcie->base)
++			return -ENOENT;
++	}
+ 
+ 	pcie->priv = dev;
+ 
+-	dev_for_each_subnode(subnode, dev) {
+-		if (!ofnode_is_enabled(subnode))
+-			continue;
++	if (!split_pcie_node) {
++		dev_for_each_subnode(subnode, dev) {
++			struct fdt_pci_addr addr;
+ 
+-		err = ofnode_read_pci_addr(subnode, 0, "reg", &addr, NULL);
+-		if (err)
+-			return err;
++			slot = 0;
+ 
+-		slot = PCI_DEV(addr.phys_hi);
++			if (!ofnode_is_enabled(subnode))
++				continue;
++
++			err = ofnode_read_pci_addr(subnode, 0, "reg", &addr, NULL);
++			if (err)
++				return err;
++
++			slot = PCI_DEV(addr.phys_hi);
++			err = mtk_pcie_parse_port_v2(dev, slot);
++			if (err)
++				return err;
++		}
++	} else {
+ 		err = mtk_pcie_parse_port_v2(dev, slot);
+ 		if (err)
+ 			return err;
+-- 
+2.45.2
 
---g5p8AQi1RCTPI+dF
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAma6WHcACgkQFHw5/5Y0
-tywItgv/VBKGEj1z+Z31s7FPGOfIoGg53EqeoGF047LNV2GbEDk2+0+X+e5uuzd1
-kqbvK81lTemZ73qAKvFxOiDcziOtD5vO/jkcqsBhUZjJkXeABPnAt6ohCnOjgtZg
-sK3KjXxyNfibCDS1FnPc/xsPGXYaPGIWWbT6SNcGz53oFW0Z7oW5tS8ZcEv6/wvH
-hg29NkjVsvkDeMiI1pOAFifK+XJFbRv4US2MBvf15ZbDPmifUgTanuOhl1jGcNwY
-ni1j+jTZj2VDLvdfDAjLeICRqdM5mjcVXUhUI7VguVEGuFQdu3rdwmOJvBy+ouEC
-2kzVEttAP7NOZez8MKmvKX3SWiTvVRobYVClGOEDgRqjZVy2LIIjwb5SxWI3o9uM
-LrtmVRzULEVRV4f36dZcaTm9OJDzk0rDR3SOv/dn3/8T3GbniE8dDn6YMbcmOYFC
-PVvsaDXjYwRBSd5Pu2JabB2vsTW0JUwDu8K1i/z0CK5/TJx30+RTzz+JE6QkkKZl
-XAd6IrUC
-=Wx/z
------END PGP SIGNATURE-----
-
---g5p8AQi1RCTPI+dF--
