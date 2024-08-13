@@ -4,54 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40CCAC52D7C
-	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 04:06:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92B1BC52D7B
+	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 04:08:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E05488360;
-	Tue, 13 Aug 2024 06:06:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1E58888360;
+	Tue, 13 Aug 2024 06:08:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1723522013;
-	bh=T7FzitIiIndxI/dog3FFWBaSOaqOAygDateGNYt1jho=;
+	s=phobos-20191101; t=1723522085;
+	bh=qrY3H+EsiwyIPB5h2EYL514t91Rco93oc1inHCUspOY=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=hz0z8C8/LEghqDLUiV1UJTMZzFz21hScjMrm0eG0Rz3eK6qhCHo0L+toeBudNM9zn
-	 L7gsGBbp3wY37aadbBNrvdrFUyDpcUUG2PDT2dbbygiArgBeJucTyhgc1d70Q7twBG
-	 xeXi5Ck6E2BNUtuiBnghNbvd3fgdhmb1IuKJX/SHTlUfRp6roE8FM/JWBdNvY9hizY
-	 scdv5gZZupSFIuIEOjHXK9v2bXZulsKf2PLQmX1T6YKnFPGB/3cfl21v9BT8Bzq/X6
-	 LvmEuMYUpFfB3CSQWy6HkpLFITW0OciZCh4+WvXcur3UnnIfAomd9k6fXeTGBdbC5e
-	 baJwb3IzUJ1iA==
+	b=Ia0eE/XL9FakrI/3lLDnOb7HxjSoyPOJmjjNB2sPfekKyOYIxBA0/cBiQ9ZVHehel
+	 MongPuqqCBiMSiFqaAKvhIxrMwDaeFls941Vz6Thvw1VJjU5WRDK0cwjYYps8azuxg
+	 9pf/13sV9ttjjuGSx+AXc9HpOp4JW73gpc37lEg8+gRTIzAqB0iJtMjyMZIOr5T5LJ
+	 N3Bd5PNq7y/7RC+48zQzAmtMbE1kLxkh/evkUuoInOr91TzWgAlgTrV9JHOnrel67g
+	 XxtlExFJDJfcLAKc/OBqcgr1ucHKDTKjEpUr0Vae4HRWJ8f2jIiwU9aWWGCkp5hwWZ
+	 h2BS8oKXMabqg==
 Received: from [192.168.1.107] (89-186-114-92.pool.digikabel.hu
  [89.186.114.92])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 470F287E30;
- Tue, 13 Aug 2024 06:06:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 9BB1D87E30;
+ Tue, 13 Aug 2024 06:08:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1723522011;
- bh=T7FzitIiIndxI/dog3FFWBaSOaqOAygDateGNYt1jho=;
+ s=phobos-20191101; t=1723522084;
+ bh=qrY3H+EsiwyIPB5h2EYL514t91Rco93oc1inHCUspOY=;
  h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
- b=jWJftFjQoYkqqiIBNyQwya3lpkH3xYSCQhv+IMbJB2RXBi3ihn+VmnWQnjR3ax/mw
- 6ihMWYZ7OMW/yOY/Vvw66/7+NOXqE+ysYymqfuSk3ElAjTnjDYQ939Jzix2M2LnAfV
- wV1DuysrQdv53Avwc6+RTIJzsEgfU0+L2g9Fhf4RzkjoCYMFxWaHbXFrdttLb2+axP
- U/8Zumlcg1H18ZlMCIW+1ytzltHW0anbwkCNg7YBu9MvI9mC7OCPsl5eU8Ldfxbn9h
- vIhkBeZr/aTnTGFpEk5nluZMu+JJ+HX5WjUevYJqLT4aDt6WeU9k9lW12CeTXAewK9
- aIBNFXd09umjQ==
-Message-ID: <2dc4f7a7-d2d2-b8f8-1f3e-edcd2aafb762@denx.de>
-Date: Tue, 13 Aug 2024 06:05:56 +0200
+ b=iYn5QQswnk5uuKSx57GcE1ybyVtsGGq5Ycf7H6wm6b00C7VTEDfohfXXOrb1P0Wkv
+ nM9gKIEvHAaxG8XqEbOLYAyoQpEGre245kCpSzKZzbZ3KtV7RAjuXECu4tezxUndom
+ vZY/KsKBk9h20F5YPRihB4mkD2jLj7JdHwzLGm2DMVCe0m0fGoJZ0bmjX2U6bTeX2d
+ bzW0PCTn50CZ+3bGfxhonIFSl8zI93R8PWsU2xJYX8+OraLRF/hTN37Tt84CglFyha
+ P2Rq0d6/N0ePb4HRvUDUIqK/Nvgx1ntsDAAYA6HMOjSDtRauAnW98oqIwy9wuzteAI
+ sgJOYU7Fc4ESg==
+Message-ID: <d0970c04-5a97-9bb8-c77d-fa029b7c5ca6@denx.de>
+Date: Tue, 13 Aug 2024 06:07:08 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH v2 03/18] i2c: Remove CFG_I2C_MULTI_BUS
+Subject: Re: [PATCH v2 04/18] mips: malta: Drop CMD_DATE
 Content-Language: en-US
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
 References: <20240811145047.4189460-1-sjg@chromium.org>
- <20240811145047.4189460-4-sjg@chromium.org>
+ <20240811145047.4189460-5-sjg@chromium.org>
 From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20240811145047.4189460-4-sjg@chromium.org>
+In-Reply-To: <20240811145047.4189460-5-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -74,20 +75,20 @@ X-Virus-Status: Clean
 Hello Simon,
 
 On 11.08.24 16:50, Simon Glass wrote:
-> This is used by a few boards but we are years past the migration date,
-> so let's drop it now.
+> These boards use pre-driver model code and it is several years since the
+> migration deadline. Disable the 'date' command so that this old code can
+> be removed.
 > 
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 > 
-> Changes in v2:
-> - Drop omap3_beagle.h change as that board was removed
+> (no changes since v1)
 > 
->   README                   |  7 -------
->   include/configs/sniper.h | 14 --------------
->   include/configs/tqma6.h  |  3 ---
->   include/i2c.h            |  2 +-
->   4 files changed, 1 insertion(+), 25 deletions(-)
+>   configs/malta64_defconfig   | 1 -
+>   configs/malta64el_defconfig | 1 -
+>   configs/malta_defconfig     | 1 -
+>   configs/maltael_defconfig   | 1 -
+>   4 files changed, 4 deletions(-)
 
 Thanks!
 
