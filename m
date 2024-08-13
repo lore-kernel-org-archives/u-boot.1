@@ -4,67 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8412C52D7B
-	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 13:23:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7829BC52D7C
+	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 13:54:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35A418899D;
-	Tue, 13 Aug 2024 15:22:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id A556C87E15;
+	Tue, 13 Aug 2024 15:54:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ve/8T60/";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE548889A8; Tue, 13 Aug 2024 14:35:26 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 94E59889A1
- for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 14:35:24 +0200 (CEST)
+ id 7887788842; Tue, 13 Aug 2024 15:54:53 +0200 (CEST)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id EBD1287C38
+ for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 15:54:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A99F012FC;
- Tue, 13 Aug 2024 05:35:49 -0700 (PDT)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 499DA3F73B;
- Tue, 13 Aug 2024 05:35:19 -0700 (PDT)
-Date: Tue, 13 Aug 2024 13:35:16 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>, AKASHI
- Takahiro <akashi.tkhro@gmail.com>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Andrew Davis <afd@ti.com>, Andy Shevchenko
- <andriy.shevchenko@linux.intel.com>, Bin Meng <bmeng.cn@gmail.com>, Bryan
- Brattlof <bb@ti.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- =?UTF-8?B?Q3PDs2vDoXM=?= Bence <csokas.bence@prolan.hu>, Eddie James
- <eajames@linux.ibm.com>, Hans de Goede <hdegoede@redhat.com>, Heinrich
- Schuchardt <xypron.glpk@gmx.de>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Janne Grunau <j@jannau.net>, Jernej Skrabec
- <jernej.skrabec@gmail.com>, Jesse Taube <mr.bossman075@gmail.com>, Joe
- Hershberger <joe.hershberger@ni.com>, Julien Masson <jmasson@baylibre.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>, Maksim Kiselev
- <bigunclemax@gmail.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Marek Vasut <marex@denx.de>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Michael Walle <mwalle@kernel.org>, Michal
- Simek <michal.simek@amd.com>, Mikhail Kalashnikov <iuncuim@gmail.com>,
- Peter Robinson <pbrobinson@gmail.com>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, Rayagonda Kokatanur
- <rayagonda.kokatanur@broadcom.com>, Sam Edwards <cfsworks@gmail.com>,
- Samuel Holland <samuel@sholland.org>, Stefan Roese <sr@denx.de>, Sumit Garg
- <sumit.garg@linaro.org>, Venkatesh Yadav Abbarapu
- <venkatesh.abbarapu@amd.com>
-Subject: Re: [PATCH 0/6] bootstd: sunxi: Migrate to standard boot
-Message-ID: <20240813133516.20c04cea@donnerap.manchester.arm.com>
-In-Reply-To: <CAFLszThv2wHzV6FStwb3qfrR+Qq82kdp7qynWC4=xsw5m-JVxg@mail.gmail.com>
-References: <20240807205032.3745680-1-sjg@chromium.org>
- <20240812165952.7d0da18d@donnerap.manchester.arm.com>
- <CAFLszThv2wHzV6FStwb3qfrR+Qq82kdp7qynWC4=xsw5m-JVxg@mail.gmail.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-7b5aacae4f0so898844a12.2
+ for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 06:54:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1723557289; x=1724162089; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=e7QKvCZbfZPrmLmgcGzdrHxD6NZ97GASSTHxKh44q2E=;
+ b=Ve/8T60/F8vX9mzbZujrwfQoW0I40bs5f6oaGpEZ6FkHfaO1ZJevNJlj+i5Il62T3L
+ xuFMXTR1XPGXxZRpe8T17ONMl+sslnjy9BF/ZHsWjaH98vfIBTeF6KVW4LGztHwosV9c
+ OkIU/yd0evWI3nI1Gff9Liwo+kImdqGFnjuPcQp85hbkQCc251/rqEjMTdrL+jQGJqfX
+ DKRXiFlxROp95RWUP8RXdZO0ZaEuXU9RRXNJTh1s0M3fJaVrQrUgMR6B0NVB5gJ8mmMN
+ jP8F6So1Sq72eV7hDG2795A6ba8y6DSDEmD0YaSz1+c+6JHkeIy19sLyIiRdBh7/Vc5z
+ eInw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723557289; x=1724162089;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=e7QKvCZbfZPrmLmgcGzdrHxD6NZ97GASSTHxKh44q2E=;
+ b=gN90JCIEFJs47Y9JW6YZ2kOBfEQELRXp2ULPD4C+cvjZVTQzISKltpgnLWiRfiI0O9
+ 3VtEeznrTzwf4p8JGVb+lFVLkJnzDsY27Y40b4eZ+vJIjrJBJQ0ZIh+Qr6SQR3ekvXb0
+ dVKXer0bzAWVtCmAVb69xcrymMQAqQ5f24uz+DhbqRPH4ky1FKAJvObWEPeVF4V5UloL
+ 5KrMvy/DLZuqOJeInr2mp5IXpHmN9ARJ8qJ3oPRBwfxo/qz/Lec8GNRKxuxONrDR0oEm
+ 38ReYZJmowBNjYlQSGCgQCnjQgDkYrEnct7rr+XtmbiEQNVJitkkAlSK3zlP37cMMq3Q
+ i1Ig==
+X-Gm-Message-State: AOJu0YxqbQ8X975ZmzXZsj/Q71YUvPd0rRKq6cpW6s/7PjTO/f/1OwRM
+ jVlLJCE6CkwvV4XtEVcsEV/hwdLEgL60OfDMWLPV+oa8JnKC62WJsPVQ2Q==
+X-Google-Smtp-Source: AGHT+IGLc+CgwfsZCDATbENSCVlXLFKFy9YRm6qN03leBdZGZMY0S04X4DQxr43BQh5XPdrscotA8w==
+X-Received: by 2002:a05:6a21:3288:b0:1c4:bb9f:c564 with SMTP id
+ adf61e73a8af0-1c8dda1f21bmr1679650637.0.1723557289323; 
+ Tue, 13 Aug 2024 06:54:49 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:e58e:430a:bc55:8500])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2d1fcf0f5f6sm7361672a91.30.2024.08.13.06.54.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 13 Aug 2024 06:54:48 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-master-20240813
+Date: Tue, 13 Aug 2024 10:54:45 -0300
+Message-Id: <20240813135445.396224-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Tue, 13 Aug 2024 15:22:56 +0200
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,103 +88,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 13 Aug 2024 06:17:17 -0600
-Simon Glass <sjg@chromium.org> wrote:
+Hi Tom,
 
-Hi Simon,
+Please pull from u-boot-imx/master, thanks.
 
-I had a bit deeper look yesterday.
+The following changes since commit 06dceeba3d4515ccfbe37b8989ee047a7628aee3:
 
-> Hi Andre,
-> 
-> On Mon, 12 Aug 2024 at 10:00, Andre Przywara <andre.przywara@arm.com> wrote:
-> >
-> > On Wed,  7 Aug 2024 14:50:26 -0600
-> > Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hey Simon,
-> >  
-> > > This series attempts to migrate all sunxi boards to use standard boot,
-> > > along with a text environment.  
-> >
-> > Ah, many thanks for that! I figured that we need a bootmeth for FEL, but
-> > never got around to have a closer look.
-> > On a coarse glance, this looks roughly OK, and doing a super quick boot
-> > test on one board, it seems to still work(TM), though the priority of the
-> > FEL boot is not right?  
-> 
-> Does it need to be the top priority, perhaps?
+  Merge tag 'u-boot-rockchip-20240812' of https://source.denx.de/u-boot/custodians/u-boot-rockchip (2024-08-12 07:58:24 -0600)
 
-Yes, please. It should only trigger when you a) do FEL booting and b)
-upload a boot script via FEL, in which case you surely want to execute
-that before anything else. From what I see the global EFI bootmeth is first
-in the list, but I couldn't find an easy way to fix this in the source
-file. Would that go through a platform specific bootmeths env variable?
+are available in the Git repository at:
 
-> > And I guess ditching the old kernel support might be a bit controversial.
-> > I think this is about the vendor kernels, which some people still rely on?  
-> 
-> OK, perhaps it is. It might be a little tricky to handle it, but I
-> suspect another bootmeth might be enough.
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20240813
 
-Well, I had a look, and it looks like CONFIG_OLD_SUNXI_KERNEL_COMPAT
-covers multiple things:
-- it sets up some clocks slightly differently
-- it enters the kernel (stays?) in secure mode
-- it provides a custom boot script
+for you to fetch changes up to 72801d9971d09734f17056fd4836604d4ffd275f:
 
-I think the latter can be replaced quite easily with something custom, and
-I guess it's the only one biting you? So I am OK with that going, but I
-think we should keep the first two features (and thus the Kconfig symbol).
+  tqma6: Do not print the board name twice (2024-08-13 09:31:35 -0300)
 
+u-boot-imx-master-20240813
+--------------------------
 
-Another thing I discovered: we lose USB support with patch 3/6. The reason
-is that USB support is enabled by having DISTRO_DEFAULTS. Just replacing
-that with BOOTSTD_DEFAULTS didn't work, though, I get a (ridiculous) splat
-about a circular Kconfig dependency. My hunch is that's something else not
-right in Kconfig, but I need to have a closer look.
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/22014
 
-Cheers,
-Andre
+- Convert tqma6q_mba6 to watchdog DM to fix reset.
+- Convert tqma6q_mba6 to PMIC and I2C DM.
+- Convert tqma6q_mba6 to OF_UPSTREAM.
+- Do not print the board name twice on tqma6.
+- Enable CMD_ERASEENV for imx8mm/mp Phytec boards.
+- Add imx8ulp binman support.
+- Fix imx8 build when CONFIG_IMX_BOOTAUX is set.
+----------------------------------------------------------------
+Fabio Estevam (4):
+      tqma6q_mba6: Convert to watchdog driver model
+      imx6-tqma6: Convert to OF_UPSTREAM
+      tqma6: Convert to PMIC and I2C driver model
+      tqma6: Do not print the board name twice
 
-> 
-> >
-> > I will have a closer look this week and give you a review, just wanted to
-> > acknowledge the series and thank you for your efforts.  
-> 
-> OK thank you.
-> 
-> Regards,
-> Simon
-> 
-> 
-> >
-> > Cheers,
-> > Andre
-> >  
-> > > Simon Glass (6):
-> > >   sunxi: Drop BOOTCMD_SUNXI_COMPAT
-> > >   sunxi: Add a bootmeth for FEL
-> > >   sunxi: Move to bootstd
-> > >   sunxi: Drop old distro boot variables
-> > >   env: Provide a work-around for unquoting fdtfile
-> > >   sunxi: Move to text environment
-> > >
-> > >  Makefile                                      |   1 +
-> > >  arch/arm/Kconfig                              |   2 +-
-> > >  arch/arm/include/asm/arch-sunxi/clock_sun4i.h |  10 -
-> > >  arch/arm/mach-sunxi/Kconfig                   |  12 -
-> > >  arch/arm/mach-sunxi/dram_sun4i.c              |   4 -
-> > >  board/sunxi/sunxi.env                         | 138 ++++++++++
-> > >  boot/Kconfig                                  |  14 ++
-> > >  boot/Makefile                                 |   1 +
-> > >  boot/bootmeth_fel.c                           |  81 ++++++
-> > >  configs/icnova-a20-swac_defconfig             |   1 -
-> > >  doc/usage/environment.rst                     |  12 +
-> > >  include/configs/sunxi-common.h                | 238 ------------------
-> > >  12 files changed, 248 insertions(+), 266 deletions(-)
-> > >  create mode 100644 board/sunxi/sunxi.env
-> > >  create mode 100644 boot/bootmeth_fel.c
-> > >  
-> >  
+Gary Bisson (5):
+      tools: imx8image: fix soc variable for ULP
+      tools: imx8image: add upower image support
+      spl: binman: Disable u_boot_any symbols for i.MX 8ULP boards
+      mach-imx: Add i.MX 8ULP binman support
+      imx8ulp_evk: enable binman support
 
+Max Krummenacher (1):
+      imx: imx8: fix build when CONFIG_IMX_BOOTAUX is set
+
+ arch/arm/dts/Makefile                   |   4 -
+ arch/arm/dts/imx6dl-mba6b-u-boot.dtsi   |   3 +
+ arch/arm/dts/imx6dl-mba6b.dts           |  21 ----
+ arch/arm/dts/imx6dl-tqma6a.dtsi         |  16 ---
+ arch/arm/dts/imx6dl-tqma6b.dtsi         |  16 ---
+ arch/arm/dts/imx6q-mba6b-u-boot.dtsi    |   3 +
+ arch/arm/dts/imx6q-mba6b.dts            |  20 ---
+ arch/arm/dts/imx6q-tqma6a.dtsi          |  16 ---
+ arch/arm/dts/imx6q-tqma6b.dtsi          |  15 ---
+ arch/arm/dts/imx6qdl-mba6-u-boot.dtsi   |  15 +++
+ arch/arm/dts/imx6qdl-tqma6.dtsi         | 215 --------------------------------
+ arch/arm/dts/imx6qdl-tqma6a.dtsi        |  53 --------
+ arch/arm/dts/imx6qdl-tqma6b.dtsi        |  33 -----
+ arch/arm/dts/imx8ulp-evk-u-boot.dtsi    |   2 +
+ arch/arm/dts/imx8ulp-u-boot.dtsi        |  63 ++++++++++
+ arch/arm/mach-imx/Makefile              |   4 +-
+ arch/arm/mach-imx/imx8/cpu.c            |   4 +-
+ arch/arm/mach-imx/imx8ulp/Kconfig       |   1 +
+ arch/arm/mach-imx/imx8ulp/container.cfg |   7 ++
+ arch/arm/mach-imx/imx8ulp/imximage.cfg  |   9 ++
+ board/tq/tqma6/Kconfig                  |   1 +
+ board/tq/tqma6/tqma6.c                  |  66 ++--------
+ common/spl/Kconfig                      |   2 +-
+ common/spl/Kconfig.tpl                  |   2 +-
+ common/spl/Kconfig.vpl                  |   2 +-
+ configs/imx8ulp_evk_defconfig           |   3 +-
+ configs/tqma6dl_mba6_mmc_defconfig      |   6 +-
+ configs/tqma6dl_mba6_spi_defconfig      |   5 +-
+ configs/tqma6q_mba6_mmc_defconfig       |   5 +-
+ configs/tqma6q_mba6_spi_defconfig       |   7 +-
+ configs/tqma6s_mba6_mmc_defconfig       |   5 +-
+ configs/tqma6s_mba6_spi_defconfig       |   5 +-
+ doc/board/nxp/imx8ulp_evk.rst           |  79 ++++++++++++
+ doc/board/nxp/index.rst                 |   1 +
+ include/configs/tqma6.h                 |   8 --
+ include/imx8image.h                     |   1 +
+ tools/imx8image.c                       |   7 +-
+ 37 files changed, 236 insertions(+), 489 deletions(-)
+ create mode 100644 arch/arm/dts/imx6dl-mba6b-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/imx6dl-mba6b.dts
+ delete mode 100644 arch/arm/dts/imx6dl-tqma6a.dtsi
+ delete mode 100644 arch/arm/dts/imx6dl-tqma6b.dtsi
+ create mode 100644 arch/arm/dts/imx6q-mba6b-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/imx6q-mba6b.dts
+ delete mode 100644 arch/arm/dts/imx6q-tqma6a.dtsi
+ delete mode 100644 arch/arm/dts/imx6q-tqma6b.dtsi
+ create mode 100644 arch/arm/dts/imx6qdl-mba6-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/imx6qdl-tqma6.dtsi
+ delete mode 100644 arch/arm/dts/imx6qdl-tqma6a.dtsi
+ delete mode 100644 arch/arm/dts/imx6qdl-tqma6b.dtsi
+ create mode 100644 arch/arm/dts/imx8ulp-u-boot.dtsi
+ create mode 100644 arch/arm/mach-imx/imx8ulp/container.cfg
+ create mode 100644 arch/arm/mach-imx/imx8ulp/imximage.cfg
+ create mode 100644 doc/board/nxp/imx8ulp_evk.rst
