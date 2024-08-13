@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F743C52D7C
-	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 12:17:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CAEFC52D7B
+	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 12:17:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AE34889A2;
-	Tue, 13 Aug 2024 14:17:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D09F6889BD;
+	Tue, 13 Aug 2024 14:17:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kaXr3X3s";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ap60ZVNF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27BA6889C3; Tue, 13 Aug 2024 14:17:14 +0200 (CEST)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id E5FFA88997; Tue, 13 Aug 2024 14:17:17 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 184D388997
- for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 14:17:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A4138871A
+ for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 14:17:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6bf42a563c8so10174106d6.1
- for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 05:17:12 -0700 (PDT)
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6b7b349a98aso38844906d6.3
+ for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 05:17:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723551431; x=1724156231; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723551434; x=1724156234; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=b9ZQIz4bEDQXTiKRpoXBdjjw8S3SQDwMBiRt+b8/3UA=;
- b=kaXr3X3sKRT3UQKan2HIYadJdBukBorkze4Y4ejS6ct5BWLA3/lcw+dgNxf7jEme//
- ymHpRMYJcKqI+oHrp/B6T35mqyNe5TK3cpyMUvhIvZU9skfN4ALbvudeX5y7CsjL8ICX
- 60MRrTPGMUs3YN5mmbNlO8JQKP080xe+2wEIk=
+ bh=MEiVfoykWVcXr2nY5noUWCrw1bo+DYavNsa0/biWFg4=;
+ b=Ap60ZVNFrdeh0VMFecYV0FzNjLKwombcEPPrk6T3pLw1RFRRyA1I8KBLICU7fpXazb
+ NTCvabTng1ZGJyyjA5ZErnva9mOTskKJo62qRoLXPST0fJKCn4nUCm1LjugR2FL/LVHr
+ hF2I+1+8sgRtpYhBst6FBuL7VehOIiUTj3+Js=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723551431; x=1724156231;
+ d=1e100.net; s=20230601; t=1723551434; x=1724156234;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=b9ZQIz4bEDQXTiKRpoXBdjjw8S3SQDwMBiRt+b8/3UA=;
- b=txDWqkbPkSTZXtwAa23QcObnbXXsan6UETo/4hDF9HFCR88SYjQlsfwRUqqiPjeVKA
- Lieq7rC7H49TgF7T/fgO2LZvQHXSXsZ/fGTuUuCEvgzJpg8MHcYUA+1f7U+yM3tbBTLO
- CKWfMD0EYvuWmHWApIdFuu24B2VgzVXSPbjuJA0/xdoZ3mX0igMrVvgSo6foBTWv6ixA
- tbwfCay14DS1opjLFV1H1Comkm2BnrIB+c7doXk3EufElyiPbqqX4fVYY5W7cmEvDhvA
- KkR/d5uW/ehN+nd4T3tTLuQH3llEwPlfUb6NhVQr8oIWyROtznlT7MiYHh5AiTuaGXAt
- 4AtA==
-X-Gm-Message-State: AOJu0Yyl105bytwcoA8WkBe9rnpcqG0Ogw3KGVZmyFT2Y/dGN2UwLwvA
- oE7NgvTcitWIkPTV+L81S7gwq2yfkoQZEAAXX+iUAt+d1yYTon/fzPZBXnmLXkhOAVfTLk4HJmc
- nimuj+0C8IpBMmagRXgHkYX4XCfvfpDsP6qey
-X-Google-Smtp-Source: AGHT+IEARfGYVjOgtLFUQl9rHgSvIuWPDikN0IV9glM2LaHXvALkoSZuMcgvjwv0/okDLPj2ZLUcA4OfdgmS3lRbsvo=
-X-Received: by 2002:a05:6214:2e4a:b0:6b2:da7e:5cb7 with SMTP id
- 6a1803df08f44-6bf4f66c465mr46044136d6.5.1723551430979; Tue, 13 Aug 2024
- 05:17:10 -0700 (PDT)
+ bh=MEiVfoykWVcXr2nY5noUWCrw1bo+DYavNsa0/biWFg4=;
+ b=QO/wVHjfCfcCHlmWqfe6GceC98nzcgK4sw57145G9bqKagwTn/m9grWUQ+gbOx3OSu
+ SSXt8MJE3CXp/1HWN/wD6wDVmjKih33MNBQXmeijkpP398CMuOk/zr9LMhN0O9T6IxDM
+ 4AWnbF3nOEY/S6+dHqVHT/na63SSEgP6Ct4yBmQE8XW4Y8vEWid1bkGZ7bmO/TUvXLtK
+ pkWaHyQOarK3aLdtfsxNrhd7fOzVZU95M2vE6DtxgomBGwVVdSpahMF8SLk06oEu4XIM
+ +GvJT8lP4G+TvFOO3kYyA0td+uOAlk5727y73tqZhts3YLKjTGJIqPvWx8knTrB8DI7c
+ 4L4g==
+X-Gm-Message-State: AOJu0Yx0xtA+8OGifNrVqLG3/DaTEdKQlJkInkYbJxZsHYyFuu/W62l6
+ KJh5E8fX9BVUboY0dfNaSaHGhEhmwiO+mObAQxctKMxwUNE6ZBxg33VAAPu7heYWW2VeYWl90Oe
+ bojScCPb4CnFl2SsBhkOGkPip4XJNe1mw2n1rdTxQghJKgT0=
+X-Google-Smtp-Source: AGHT+IHFAMbI2Njl6whhU/BbHlnTAjhZnV1MB2cpHstch6dNoBfLo0HqPWZDiU/B+Cj2ZQAB3RZRJFb6rwaPb5xE0Lw=
+X-Received: by 2002:a05:6214:2f8e:b0:6bb:9b66:f264 with SMTP id
+ 6a1803df08f44-6bf4f443ecemr50950376d6.0.1723551434418; Tue, 13 Aug 2024
+ 05:17:14 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240811122924.4035982-1-sjg@chromium.org>
- <20240811122924.4035982-2-sjg@chromium.org>
- <350b4bdb-4b78-48a1-9c21-b4d968f60500@cherry.de>
-In-Reply-To: <350b4bdb-4b78-48a1-9c21-b4d968f60500@cherry.de>
+ <20240811122924.4035982-7-sjg@chromium.org>
+ <10e67e98-ac80-471a-a4ba-1c4bad88944c@cherry.de>
+In-Reply-To: <10e67e98-ac80-471a-a4ba-1c4bad88944c@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 13 Aug 2024 06:17:00 -0600
-Message-ID: <CAFLszTia3FsQ2DQSaOC9NEmZ5RFVEQ9P1wDDjPyOnnmk7mt8cA@mail.gmail.com>
-Subject: Re: [PATCH v3 01/15] configs: Resync with savedefconfig
+Date: Tue, 13 Aug 2024 06:17:03 -0600
+Message-ID: <CAFLszTjh7W7JiVuxZc8VWZh493RG6=JfH-VfaKYBwH=FjOrWFg@mail.gmail.com>
+Subject: Re: [PATCH v3 06/15] mmc: Use logging instead of printf()
 To: Quentin Schulz <quentin.schulz@cherry.de>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Sean Anderson <seanga2@gmail.com>
+ Sean Anderson <seanga2@gmail.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,57 +87,69 @@ X-Virus-Status: Clean
 
 Hi Quentin,
 
-On Mon, 12 Aug 2024 at 03:05, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+On Mon, 12 Aug 2024 at 03:35, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 >
 > Hi Simon,
 >
 > On 8/11/24 2:29 PM, Simon Glass wrote:
-> > Rsync all defconfig files using moveconfig.py
+> > The code makes quite a few uses of __func__ which puts the function
+> > name into the resulting SPL image. Use the log subsystem instead, to
+> > reduce size.
+> >
+> > The CONFIG_LOGF_FUNC option can be used to enable the function name.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > ---
 > >
-> > (no changes since v1)
+> > Changes in v3:
+> > - Keep hex prefix on values which currently have it
+> > - Fix up the second parts of the 'mmc%d busy' log_warning()
+> > - Restore the original error message for configuring DLL
 > >
-> >   configs/am62px_evm_a53_defconfig           | 4 ++--
-> >   configs/am64x_evm_a53_defconfig            | 6 +++---
-> >   configs/j721e_beagleboneai64_a72_defconfig | 4 ++--
-> >   configs/j721e_evm_a72_defconfig            | 7 +++----
-> >   configs/j784s4_evm_a72_defconfig           | 4 ++--
-> >   configs/kmcent2_defconfig                  | 1 -
-> >   configs/kmcoge5ne_defconfig                | 1 -
-> >   configs/kmeter1_defconfig                  | 1 -
-> >   configs/kmopti2_defconfig                  | 1 -
-> >   configs/kmsupx5_defconfig                  | 1 -
-> >   configs/kmtepr2_defconfig                  | 1 -
-> >   configs/pg_wcom_expu1_defconfig            | 1 -
-> >   configs/pg_wcom_expu1_update_defconfig     | 1 -
-> >   configs/pg_wcom_seli8_defconfig            | 1 -
-> >   configs/pg_wcom_seli8_update_defconfig     | 1 -
-> >   configs/qemu-xtensa-dc233c_defconfig       | 1 -
-> >   configs/socfpga_secu1_defconfig            | 1 -
-> >   configs/tuge1_defconfig                    | 1 -
-> >   configs/tuxx1_defconfig                    | 1 -
-> >   19 files changed, 12 insertions(+), 27 deletions(-)
+> > Changes in v2:
+> > - Various updates to log messages
+> > - Drop an unnecessary cast
 > >
-> > diff --git a/configs/am62px_evm_a53_defconfig b/configs/am62px_evm_a53_defconfig
-> > index 87005d03dee..30d48340249 100644
-> > --- a/configs/am62px_evm_a53_defconfig
-> > +++ b/configs/am62px_evm_a53_defconfig
-> > @@ -180,5 +180,5 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
-> >   CONFIG_SPL_DFU=y
-> >   CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
-> >   CONFIG_EFI_SET_TIME=y
-> > -
-> > -#include <configs/k3_efi_capsule.config>
-> > +CONFIG_EFI_CAPSULE_ON_DISK=y
-> > +CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+> >   drivers/mmc/sdhci.c | 52 +++++++++++++++++++--------------------------
+> >   1 file changed, 22 insertions(+), 30 deletions(-)
+> >
+> > diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
+> > index 560b7e889c7..4833b5158c7 100644
+> > --- a/drivers/mmc/sdhci.c
+> > +++ b/drivers/mmc/sdhci.c
+> > @@ -32,8 +32,7 @@ static void sdhci_reset(struct sdhci_host *host, u8 mask)
+> >       sdhci_writeb(host, mask, SDHCI_SOFTWARE_RESET);
+> >       while (sdhci_readb(host, SDHCI_SOFTWARE_RESET) & mask) {
+> >               if (timeout == 0) {
+> > -                     printf("%s: Reset 0x%x never completed.\n",
+> > -                            __func__, (int)mask);
+> > +                     log_warning("Reset %#x never completed\n", mask);
 >
-> Not sure this is desired?
+> TIL about %#x thanks :)
+>
+> >                       return;
+> >               }
+> >               timeout--;
+> > @@ -139,8 +138,7 @@ static int sdhci_transfer_data(struct sdhci_host *host, struct mmc_data *data)
+> >       do {
+> >               stat = sdhci_readl(host, SDHCI_INT_STATUS);
+> >               if (stat & SDHCI_INT_ERROR) {
+> > -                     pr_debug("%s: Error detected in status(0x%X)!\n",
+> > -                              __func__, stat);
+> > +                     log_debug("Error detected in status(%#x)!\n", stat);
+>
+> It used to be uppercase and is now lowercase, though %#X would probably
+> do the job too (albeit it would apparently write 0X prefix instead of 0x).
 
-This patch was sent by mistake and should be ignored. Sometimes I do a
-resync at the start of a series so that the following patches are
-correct, when they use savedefconfig.
+Right, but we should use lower-case hex in U-Boot.
+
+>
+> Otherwise looks good to me,
+>
+> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+>
+> Thanks!
+> Quentin
 
 Regards,
 Simon
