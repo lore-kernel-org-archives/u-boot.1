@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 482FFC52D7B
-	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 15:12:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F2D9C52D7B
+	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 16:02:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A953886A7;
-	Tue, 13 Aug 2024 17:12:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id E637188842;
+	Tue, 13 Aug 2024 18:02:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K9FLhoX3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J0NSmZao";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4577888981; Tue, 13 Aug 2024 17:12:27 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id 461BF8895B; Tue, 13 Aug 2024 18:02:23 +0200 (CEST)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5D3B88360
- for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 17:12:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0AE748800C
+ for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 18:02:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6b78c980981so31599756d6.2
- for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 08:12:24 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pladow@gmail.com
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-70d2b921cd1so5244922b3a.1
+ for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 09:02:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723561944; x=1724166744; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=aG9mF7KqVYGparbgorQO6PWZaxWVP+TaWAmXRbn/brg=;
- b=K9FLhoX3QRjTNpIwTXOYx3A1DgSsMOfFKV0sjoghHjmgv7tDOAM/D5fj8Tx8KOzwhV
- 1yFmhBsmqVtJxFQk7Oo2sN9rDBRPfi/Gb8PuJcLngYS/Y132DdFalTD4mPvgesS407Vp
- UDsZlEb8AJ2UX0W3xUd7YaQ4d4lzFcp0m2M3I=
+ d=gmail.com; s=20230601; t=1723564939; x=1724169739; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=inOEOCnr7bXoX7dNttJtD1C+6O8yagYccv6pBIcCiwU=;
+ b=J0NSmZaof5DYtEs4hnlPVUrmy6Z5lLvkgEK9LBD6hm+zdglSOtASpqPkDBIfq6v8Ph
+ ciM+xSAFedxQEwQmIHp85KtkvYCU3p8atXKU9rWD91xwibRO52UYldOg0xCbibloKjdy
+ Am7ZPGvbyybs5/XmZjmiBPRWHEryekDc2UwZcaM7dSDxFUhvTYxR4XVDeDA/68lLolvq
+ u0F9X+c7/bZ9PIhwhIqLN4lScZuw/oJdnYh3tuQFwPrQjRxpUJNO1pbSkAK+aO5jdsng
+ lmaSwbgyjCsEjd1Voj0odEAUuby4YW64uR9A69v3fsEnkRqdM2nLVI7jSQUrOTm8wzQX
+ Rhzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723561944; x=1724166744;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=aG9mF7KqVYGparbgorQO6PWZaxWVP+TaWAmXRbn/brg=;
- b=DXZOAU/5JpLftF/TBPWmXZxTrG5lgpCXxcuqS/S9APzGPNZkvF06OvPx6dlFJQbQQg
- 9oPxOWdbn9BpBtTxSDX1B6WCz7NRxognWGjNfsV8euT6JlnkA+nmyW/D0P5HqsxJPYvJ
- SuX8Lkweb+zMKmAVKISLlfRkQpAe+DSjb4nnewIrZIlYZMI5AHcUjFnZGcqnEGDB77Fm
- G5v0IDDCMFeC1NXgmjLGDoWKsbdaABL7mjw4nOJtI6AykSeEd19OT/MDnhrBi9c382rk
- M7+8hwzUG+I4UqJDWIp5BeJS93NLwyaCISBMifd44Jnf2MlomdeKLofwM5xSv/IuLkJ8
- 2TgQ==
+ d=1e100.net; s=20230601; t=1723564939; x=1724169739;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=inOEOCnr7bXoX7dNttJtD1C+6O8yagYccv6pBIcCiwU=;
+ b=R6kAp0MT+y1yAoBWPMkCwzZ2ucgvWg/GaSYjlWovtum36yALtmatLbYJj4jNAS4Xsn
+ olhoDbcK7MIZYUXumfoIUulHfbFPbExrWMzfjWUuqvuT2TJVqP1bL7YdddFnq+7D8ZyQ
+ ddxiNSt8O6Yi4LMY5m6JKQFVUdvvO3XF5wMBVD8Qy5j0/uuHzpF3SCc0LMhXtcBHkVyg
+ 11ckRF8zW2kj1qyWYJtGRm9brn1SCav98Edjyj1DR/i/AK4wGEcCpECYYvIqi136DHGL
+ L7wpe1h7aoX9lAf59Y3j3YxY33zUbd09enDW94dpEQIZMep5qIdOYgNHGDvuCoUI0ryg
+ G+aw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV6u+KvTqjnypu3+CinIPIo44MCoqAXce5EDHgn5iX3YE4opfWLidmw5dHdeg6D6VcZPjkup2bq/7rwvPlb6dHLPsRfmw==
-X-Gm-Message-State: AOJu0Yzk9YJv7XKCn89QGunCEE1BlloEGufAFkLFKY7TuWYSTohpLLqw
- jkPOv3aXp7dlBp7dVXbW83Ptg9Z1gzVw4ymsh5vFekPw2YMKxi2icIScZoGkndX4Jaikc3IfzIi
- Y3kA7ZliUY8EXPGq9sTV20P7tzeBkf3w6oYMF
-X-Google-Smtp-Source: AGHT+IGijX+mMBZPcfy2oFcuWXFp9OeSs9m/CuNGKeZd4zui7VJiC9TUS8nRZFm3HfjCYwT/ky8DvlTGSWE40rmvkvs=
-X-Received: by 2002:a05:6214:5d8f:b0:6b7:9c28:4cc9 with SMTP id
- 6a1803df08f44-6bf4f884dc5mr44329056d6.51.1723561943709; Tue, 13 Aug 2024
- 08:12:23 -0700 (PDT)
+ AJvYcCUIlWayJzTUbtKMz2emI+te3WaDKZUvGdrb6vjCJhmlR87kme43f2AcmtcFRp3oq4ACvGqA/DubMTGOz7Z77bAw/I6ohA==
+X-Gm-Message-State: AOJu0YynASbkZyAa/PxbfoSigI0T8E2MJZ8CAz5LNVzH7iqthlCdHiBG
+ PLBArdfYjV2AdKTpZYRl5n3u3h8qV0v+qTpOJKEc2gNjJzxXPM55ucYvZIowJEINwWwj97b53xf
+ UcuuYM120RFnwqlGlRCjXKbZCf8+E+a6v
+X-Google-Smtp-Source: AGHT+IEyablc/YRY//Yl//Djvfsbpa/b8F2PNNwdidhEoMF+fcmCRG9AqFkp1ULaswcV8anYHGnqHQtV2OveBDi+Yok=
+X-Received: by 2002:a17:902:db0e:b0:1fd:9fd8:1b2f with SMTP id
+ d9443c01a7336-201ca185a29mr47377275ad.8.1723564939263; Tue, 13 Aug 2024
+ 09:02:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240810205205.3403177-1-sjg@chromium.org>
- <20240810205205.3403177-8-sjg@chromium.org>
- <CALu9rSbrAcxkGkFHuiFSBd-JMTm0kfEwDuBCDNYZc33eTLVU9w@mail.gmail.com>
- <CAFLszTjujOXs39KMnV-5NNWNqJ8K+FoisPYB=1HmC5QHf671ag@mail.gmail.com>
- <20240812184615.GI1626301@bill-the-cat>
- <CALu9rSbXMhGkyz5qw7nbCjdP3YuDKEZFR1SpRG0CHcYeQ7-OrA@mail.gmail.com>
- <CAFLszTj0GtiXq6m8Y+SQzH8zhkyp72oU0UMrt5o3RFAhWpMa6Q@mail.gmail.com>
-In-Reply-To: <CAFLszTj0GtiXq6m8Y+SQzH8zhkyp72oU0UMrt5o3RFAhWpMa6Q@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 13 Aug 2024 09:12:12 -0600
-Message-ID: <CAFLszTiSS09fzS_SEwQap+0xO2Ls7+9c9udCWCmg6jkacWQrAw@mail.gmail.com>
-Subject: Re: [PATCH 07/21] Revert "net: wget: Support retransmission a dropped
- packet"
-To: Yasuharu Shibata <yasuharu.shibata@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Marek Vasut <marex@denx.de>, Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Richard Weinberger <richard@nod.at>, 
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+References: <CAN8Q1EeO0C-LcC1jC=XYZM3RbFbs6sUtjbR===VUe6FYe5Utrw@mail.gmail.com>
+ <CAN8Q1Ef=eUs9qfwzhCfHA2YrFFZnKVNQVA=5mQb5Hxqi6hs5cw@mail.gmail.com>
+ <CAOMZO5BT2st6FdSx-QzmOee2pqTZ0PE_-Ek6p4KbZ+JJJ=HAvw@mail.gmail.com>
+ <CAN8Q1EfPghRrKtgeO_gr_VZ26_dHQUpRkBqbfYshZf0KeGm=oA@mail.gmail.com>
+ <CAN8Q1EdCtmCE9HPhhjHakRk77Mw4AQ1-tPLm1SQcS0ELrgy3Lg@mail.gmail.com>
+ <5587ef25-7694-4aa9-8a73-98e589b61cae@kernel-space.org>
+ <CAN8Q1Ee6LhiLadKDjFzBghzENEDaWjLL9OBDiOpK_LnfN=DTdg@mail.gmail.com>
+ <0ca9ef05-1de8-4c30-b1e7-084a57c97828@kernel-space.org>
+ <CAN8Q1EdrY9KfGG=RFGshEZGXhw1JNT6C_X6zs2kW8ecw3yut6w@mail.gmail.com>
+ <CAN8Q1Ed-dxKMLF3enY-zCE57YoQ9yisfyTULWos4JSMA+8qbfQ@mail.gmail.com>
+ <6e3ddc2a-3c7b-4e45-a4a3-99bba6a792fb@kernel-space.org>
+ <CAN8Q1EfugCvbfcNTCAJgOX65UCY=oJpTTuFLuB=nVYowmjioTA@mail.gmail.com>
+In-Reply-To: <CAN8Q1EfugCvbfcNTCAJgOX65UCY=oJpTTuFLuB=nVYowmjioTA@mail.gmail.com>
+From: Peter LaDow <pladow@gmail.com>
+Date: Tue, 13 Aug 2024 09:02:07 -0700
+Message-ID: <CAN8Q1EfivAmTt4WHN23sgOFT+LF8dWrX_91zQjMRp3hRN+CARg@mail.gmail.com>
+Subject: Re: M68K Vectors
+To: Angelo Dureghello <angelo@kernel-space.org>
+Cc: Huan Wang <alison.wang@nxp.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,209 +97,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yasuharu,
+Ok, I worked through the binutils team and identified a few changes to
+get things to link correctly.
 
+The 548x cpu target creates PLT relocations (so does the 53015 target,
+as used on the stmark2 and amcore configs).  Apparently, these rely
+upon the loader to resolve the entries in the PLT table.  Other
+targets (such as 5272) do not use PLT.  This is unclear to me, but
+sounds like it is GCC related.
 
-On Tue, 13 Aug 2024 at 06:20, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Yasuharu,
->
-> On Mon, 12 Aug 2024 at 21:50, Yasuharu Shibata
-> <yasuharu.shibata@gmail.com> wrote:
-> >
-> > Dear Simon and Tom,
-> >
-> > Thank you for your details of the test and your advice.
-> > The test has a problem that tcp_ack isn't calculated by the received da=
-ta size.
-> > sb_ack_handler() in test/cmd/wget.c, tcp_send->tcp_ack calculated by
-> > following code:
-> >
-> >     tcp_send->tcp_seq =3D htonl(ntohl(tcp->tcp_ack));
-> >     tcp_send->tcp_ack =3D htonl(ntohl(tcp->tcp_seq) + 1);
-> >
-> > tcp_ack needs to be calculated by the received TCP payload size.
-> >
-> > Also, wget command may have a problem that
-> > HTTP response from server must be divided into more than two packets.
-> > wget command receive packets and change internal state in
-> > wget_handler() as follows:
-> >
-> > 1. When current_wget_state is WGET_CONNECTED,
-> >     wget_handler() calls wget_connected().
-> >     It receives HTTP response and moves WGET_TRANSFERRING.
-> > 2. When current_wget_state is WGET_TRANSFERRING
-> >     and wget_tcp_state is TCP_ESTABLISHED,
-> >     wget_handler() receives HTTP response and
-> >     wget_loop_state sets NETLOOP_SUCCESS.
-> > 3. When current_wget_state is WGET_TRANSFERRING
-> >     and wget_tcp_state is TCP_CLOSE_WAIT,
-> >     call net_set_state with wget_loop_state.
-> >
-> > If there are more than two HTTP response packets,
-> > wget executes in the order 1 -> 2 -> 3 and terminates properly.
-> > If there is only one HTTP response packet, wget executes in the order 1=
- -> 3,
-> > wget_loop_state remains NETLOOP_CONTINUE and wget doesn't terminate
-> > successfully.
-> >
-> > I wrote the patch at the end of this mail.
-> > The wget issue is temporarily fixed on the test side.
-> > This may need to be fixed on the wget side in the future.
-> > In addition, I fixed the HTTP response returned at the correct timing.
-> > If the patch is OK, I will send format-patch.
->
-> Thank you for looking at this and for all the info. Yes, the patch
-> looks good to me.
+So, they suggested the following changes.  They work and I get proper
+linking (sort of, see below).  There are two changes:
 
-Also, would you mind adding a patch to enable the command for sandbox,
-so the test runs in CI?
+arch/m68k/Makefile:
+-cpuflags-$(CONFIG_MCF5441x)    := -mcpu=54418 -fPIC
++cpuflags-$(CONFIG_MCF5441x)    := -mcpu=54418 -fPIE -fvisibility=hidden
+
+include/asm-generic/sections.h:
+-extern void _start(void);
++extern void _start(void) __attribute__((visibility("hidden")));
+
+This works well for my setup with my board booting via the FlexBus
+with Flash mapped at address 0x0.  I get the vectors properly mapped
+and the calls to functions correctly linked (not through the PLT).
+
+For the stmark2 and amcore, I don't think things are quite right;
+either with or without the above tweaks.
+
+The builds for amcore, this uses the 5307 target.  This creates GOT160
+relocations, which work.It sets up A5 and uses GOT160 relocations.
+However, the _start vector is incorrect.  The build on master for
+amcore produces:
+
+u-boot:     file format elf32-m68k
+
+Contents of section .text:
+ffc00000 00000000 00000000 ffc0051a ffc0051a  ................
+
+Note that at 0xfc000004, the reset vector, points to 0x00000000.  That
+can't be right.  But if I put the hidden visibility attribute on
+_start in sections.h, I get:
+
+u-boot:     file format elf32-m68k
+
+Contents of section .text:
+ffc00000 00000000 ffc00400 ffc0051a ffc0051a  ................
+ffc00010 ffc0051a ffc0051a ffc0051a ffc0051a  ................
+
+Which looks correct; _start is indeed at 0xfc000400:
+
+$ /opt/toolchains/m68k/gcc-14.1.0-nolibc/m68k-linux/bin/m68k-linux-nm -n u
+-boot
+...
+ffc00400 t _start
+
+This solution works for all Coldfire platforms.
+
+But the 548x has the other issue of the PLT table.   But the stmark2
+is closer to the 548x in this regard.  If I compile the stmark2 from
+master, and look at board_init_f_init_reserve:
+
+47e0acbc <board_init_f_init_reserve>:
+47e0acbc:       2f02            movel %d2,%sp@-
+47e0acbe:       242f 0008       movel %sp@(8),%d2
+47e0acc2:       4878 00d0       pea d0 <__fixup_entries+0xd0>
+47e0acc6:       42a7            clrl %sp@-
+47e0acc8:       2f02            movel %d2,%sp@-
+47e0acca:       61ff 0001 4e4c  bsrl 47e1fb18 <.plt+0x2d0>
+
+Note the branch to .plt + 0x2d0.  This is the PLT table.  But the PLT
+table hasn't been fixed up, nor does it contain a call to the loader.
+This can't work without the PLT table fixed up.
+
+But if I turn on -fvisibility=hidden:
+
+47e0ac1a <board_init_f_init_reserve>:
+47e0ac1a:       2f02            movel %d2,%sp@-
+47e0ac1c:       242f 0008       movel %sp@(8),%d2
+47e0ac20:       4878 00d0       pea d0 <__fixup_entries+0xd0>
+47e0ac24:       42a7            clrl %sp@-
+47e0ac26:       2f02            movel %d2,%sp@-
+47e0ac28:       61ff 0001 29f6  bsrl 47e1d620 <memset>
+
+Note here the call is directly to memset:
+
+$ /opt/toolchains/m68k/gcc-14.1.0-nolibc/m68k-linux/bin/m68k-linux-nm -n u
+-boot
+47e1d620 t memset
+
+So, while I'm happy to contribute support for the 548x, I'm not sure
+how to reconcile this with the other Coldfire boards.
+
+I can't find the vendor for STMark2 or AMCore.  I'd like to look at
+their documentation.  I don't know how these boot or how these
+generated binaries could work.
 
 Thanks,
-Simon
+Pete
 
->
-> Regards,
-> Simon
->
-> >
-> > Best regards,
-> > Yasuharu Shibata
-> >
-> > =E2=80=94
-> > diff --git a/test/cmd/wget.c b/test/cmd/wget.c
-> > index 356a4dcd8f..32542cdfe2 100644
-> > --- a/test/cmd/wget.c
-> > +++ b/test/cmd/wget.c
-> > @@ -26,6 +26,8 @@
-> >  #define SHIFT_TO_TCPHDRLEN_FIELD(x) ((x) << 4)
-> >  #define LEN_B_TO_DW(x) ((x) >> 2)
-> >
-> > +int net_set_ack_options(union tcp_build_pkt *b);
-> > +
-> >  static int sb_arp_handler(struct udevice *dev, void *packet,
-> >                           unsigned int len)
-> >  {
-> > @@ -105,6 +107,10 @@ static int sb_ack_handler(struct udevice *dev,
-> > void *packet,
-> >         const char *payload1 =3D "HTTP/1.1 200 OK\r\n"
-> >                 "Content-Length: 30\r\n\r\n\r\n"
-> >                 "<html><body>Hi</body></html>\r\n";
-> > +       union tcp_build_pkt *b =3D (union tcp_build_pkt *)tcp;
-> > +       const int recv_payload_len =3D len - net_set_ack_options(b) -
-> > IP_HDR_SIZE - ETHER_HDR_SIZE;
-> > +       static int next_seq =3D 0;
-> > +       const int bottom_payload_len =3D 10;
-> >
-> >         /* Don't allow the buffer to overrun */
-> >         if (priv->recv_packets >=3D PKTBUFSRX)
-> > @@ -119,13 +125,31 @@ static int sb_ack_handler(struct udevice *dev,
-> > void *packet,
-> >         tcp_send->tcp_dst =3D tcp->tcp_src;
-> >         data =3D (void *)tcp_send + IP_TCP_HDR_SIZE;
-> >
-> > -       if (ntohl(tcp->tcp_seq) =3D=3D 1 && ntohl(tcp->tcp_ack) =3D=3D =
-1) {
-> > +       if (ntohl(tcp->tcp_seq) =3D=3D 1 && ntohl(tcp->tcp_ack) =3D=3D =
-1 &&
-> > recv_payload_len =3D=3D 0) {
-> > +               // ignore ACK for three-way handshaking
-> > +               return 0;
-> > +       } else if (ntohl(tcp->tcp_seq) =3D=3D 1 && ntohl(tcp->tcp_ack) =
-=3D=3D 1) {
-> > +               // recv HTTP request message and reply top half data
-> >                 tcp_send->tcp_seq =3D htonl(ntohl(tcp->tcp_ack));
-> > -               tcp_send->tcp_ack =3D htonl(ntohl(tcp->tcp_seq) + 1);
-> > -               payload_len =3D strlen(payload1);
-> > +               tcp_send->tcp_ack =3D htonl(ntohl(tcp->tcp_seq) +
-> > recv_payload_len);
-> > +
-> > +               payload_len =3D strlen(payload1) - bottom_payload_len;
-> >                 memcpy(data, payload1, payload_len);
-> >                 tcp_send->tcp_flags =3D TCP_ACK;
-> > -       } else if (ntohl(tcp->tcp_seq) =3D=3D 2) {
-> > +
-> > +               next_seq =3D ntohl(tcp_send->tcp_seq) + payload_len;
-> > +       } else if (ntohl(tcp->tcp_ack) =3D=3D next_seq) {
-> > +               // reply bottom half data
-> > +               const int top_payload_len =3D strlen(payload1) -
-> > bottom_payload_len;
-> > +
-> > +               tcp_send->tcp_seq =3D htonl(next_seq);
-> > +               tcp_send->tcp_ack =3D htonl(ntohl(tcp->tcp_seq) +
-> > recv_payload_len);
-> > +
-> > +               payload_len =3D bottom_payload_len;
-> > +               memcpy(data, payload1 + top_payload_len, payload_len);
-> > +               tcp_send->tcp_flags =3D TCP_ACK;
-> > +       } else {
-> > +               // close connection
-> >                 tcp_send->tcp_seq =3D htonl(ntohl(tcp->tcp_ack));
-> >                 tcp_send->tcp_ack =3D htonl(ntohl(tcp->tcp_seq) + 1);
-> >                 payload_len =3D 0;
-> > @@ -148,11 +172,9 @@ static int sb_ack_handler(struct udevice *dev,
-> > void *packet,
-> >                           pkt_len,
-> >                           IPPROTO_TCP);
-> >
-> > -       if (ntohl(tcp->tcp_seq) =3D=3D 1 || ntohl(tcp->tcp_seq) =3D=3D =
-2) {
-> > -               priv->recv_packet_length[priv->recv_packets] =3D
-> > -                       ETHER_HDR_SIZE + IP_TCP_HDR_SIZE + payload_len;
-> > -               ++priv->recv_packets;
-> > -       }
-> > +       priv->recv_packet_length[priv->recv_packets] =3D
-> > +               ETHER_HDR_SIZE + IP_TCP_HDR_SIZE + payload_len;
-> > +       ++priv->recv_packets;
-> >
-> >         return 0;
-> >
-> >
-> >  }
-> >
-> > On Tue, 13 Aug 2024 at 03:46, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sun, Aug 11, 2024 at 08:50:18AM -0600, Simon Glass wrote:
-> > > > +Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-> > > >
-> > > > Hi Yasuharu,
-> > > >
-> > > > On Sat, 10 Aug 2024 at 20:48, Yasuharu Shibata
-> > > > <yasuharu.shibata@gmail.com> wrote:
-> > > > >
-> > > > > Dear Simon,
-> > > > >
-> > > > > Could you inform me how the wget test was broken?
-> > > > > As I explained in the commit log, I fixed the bug in specific con=
-ditions.
-> > > > > Without the details of how the break happened,
-> > > > > it is difficult to find a proper patch.
-> > > > >
-> > > > > Best regards,
-> > > > > Yasuharu Shibata
-> > > >
-> > > > Yes, I should have mentioned that. It is test/cmd/wget.c - see also=
- [1].
-> > > >
-> > > > This is a good run:
-> > > > Test: net_test_wget: wget.c
-> > > > HTTP/1.1 200 OK
-> > > > Packets received 5, Transfer Successful
-> > > > Bytes transferred =3D 32 (20 hex)
-> > > > md5 for 00020000 ... 0002001f =3D=3D> 234af48e94b0085060249ecb5942a=
-b57
-> > > > Failures: 0
-> > > >
-> > > > With your patch it hangs:
-> > > >
-> > > > Test: net_test_wget: wget.c
-> > > > HTTP/1.1 200 OKT
-> > >
-> > > Can you please figure out what's going on with the sandbox test then?
-> > > The change in question fixes wget support on real hardware, and also =
-the
-> > > other wget tests (as part of the lwIP series) work fine as well. This
-> > > seems like something specific to that test.
-> > >
-> > > --
-> > > Tom
+--
+To love for the sake of being loved is human, but to love for the sake
+of loving is angelic. -- Alphonse de Lamartine.
