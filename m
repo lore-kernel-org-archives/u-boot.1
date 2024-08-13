@@ -4,76 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77265C52D7C
-	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 06:12:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98EF3C52D7C
+	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 06:32:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DFBE889C9;
-	Tue, 13 Aug 2024 08:11:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0BBCD8895D;
+	Tue, 13 Aug 2024 08:32:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TVguG9ce";
+	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="fNhcRgnm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2C69889CD; Tue, 13 Aug 2024 08:11:13 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 9B9AB88969; Tue, 13 Aug 2024 08:32:55 +0200 (CEST)
+Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C0648897F
- for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 08:11:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 188908890D
+ for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 08:32:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47D6B9h8097524;
- Tue, 13 Aug 2024 01:11:09 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1723529469;
- bh=2Ei82HyJDmAB7OBzjBgu64DRzrK0whkVTUmMjxGA0u4=;
- h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=TVguG9ceWjxAJec8nABZShS8xgK7gIcT0+/s+3AVOe8Tr4+Z/in6+9+syALf2TjpD
- NhiqU/bPAKpi1PdESO6+z5YvIUp5XdRSEupUjwcgsRn2a5ZT0OEdc1p1ECd06GZULN
- aQRL2JdUjF/g6xWcSq8PGmH7l3ZjofKsK9y1GjbU=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47D6B9DF040015
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 13 Aug 2024 01:11:09 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 13
- Aug 2024 01:11:09 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 13 Aug 2024 01:11:09 -0500
-Received: from [127.0.1.1] (uda0497581.dhcp.ti.com [10.24.68.185])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47D6AgHn016562;
- Tue, 13 Aug 2024 01:11:06 -0500
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Tue, 13 Aug 2024 11:40:47 +0530
-Subject: [PATCH v3 7/7] configs: j721s2_evm_r5_defconfig: Add AVS Configs
+ dmarc=pass (p=none dis=none) header.from=gnu.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
+Received: from fencepost.gnu.org ([2001:470:142:3::e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
+ id 1sdl5O-0005Zv-5Q; Tue, 13 Aug 2024 02:32:50 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
+ s=fencepost-gnu-org; h=MIME-Version:Date:Subject:To:From:in-reply-to:
+ references; bh=D2Fw5v1Q9BqD6IXI665Lan1C+iHXZiLW+eCc+uKnquk=; b=fNhcRgnmd2bTpd
+ nd3aSVZeCN0dQr1QvPJAz8UhkHyVUisDINvs+f1YuvquRbPIlG7+tiOQvmhnGi0DQTv1N4DVZl5AB
+ O/E3babjL7OeZv61HXUMBvClxgpwtQS3MavAFgw96892OkM3+kh5bpWq+BJ3k1Y2EDaHMcD7AatAj
+ niiLbRPznVx+7LWAkpYBBC74tPp5bLN8bFDbFiTdEwOSijdGALXCExIy9YUsJRdtqqpgGuAdnrGoq
+ VL6NtbE7myFAanJijb5SOrbYDuo8hoZbH0IHU+invw9HYUw2Y3lBHrid3CN2kiIVhG7aLVTCrERSL
+ oeJbwffX7tSuDxI8cYRg==;
+From: Mathieu Othacehe <othacehe@gnu.org>
+To: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>
+Cc: "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de,
+ Mathieu Othacehe <othacehe@gnu.org>
+Subject: [PATCH] imx: ele_ahab: Add HUK derivation support
+Date: Tue, 13 Aug 2024 08:32:43 +0200
+Message-ID: <20240813063243.24249-1-othacehe@gnu.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20240813-b4-upstream-j721s2-avs-v3-7-5115d93cdeb2@ti.com>
-References: <20240813-b4-upstream-j721s2-avs-v3-0-5115d93cdeb2@ti.com>
-In-Reply-To: <20240813-b4-upstream-j721s2-avs-v3-0-5115d93cdeb2@ti.com>
-To: Jaehoon Chung <jh80.chung@samsung.com>
-CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Keerthy J
- <j-keerthy@ti.com>, Udit Kumar <u-kumar1@ti.com>, Aniket Limaye
- <a-limaye@ti.com>, Tom Rini <trini@konsulko.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Andrew Davis <afd@ti.com>,
- Nishanth Menon <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
-X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1723529443; l=1498;
- i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
- bh=pywyIIWKpc0ZXiHMJ4RFnrwXqhCNjnCx6KJnnHfbOxY=;
- b=WTw8kEPuHFFrZxKTKbkm3/UA51sJCgzZu9xMoc0MX+BsRmAJvkmJxUB6Upfp1tvDZX1aeUkYK
- 1MRnkQOQCsZCNYUulSVhTgcEKG2VomWapV7JNHXSyMiqv7s50oNR/b3
-X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
- pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,54 +63,182 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add AVS and PMIC regulator configs
+Add a new ahab_derive command that derives the hardware unique key (HUK)
+into a 16 or 32 bytes key and stores it at the given address.
 
-Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+Signed-off-by: Mathieu Othacehe <othacehe@gnu.org>
 ---
- configs/am68_sk_r5_defconfig    | 4 ++++
- configs/j721s2_evm_r5_defconfig | 6 ++++++
- 2 files changed, 10 insertions(+)
+ arch/arm/include/asm/mach-imx/ele_api.h |  2 +
+ arch/arm/mach-imx/ele_ahab.c            | 31 +++++++++++
+ drivers/misc/imx_ele/ele_api.c          | 73 +++++++++++++++++++++++++
+ 3 files changed, 106 insertions(+)
 
-diff --git a/configs/am68_sk_r5_defconfig b/configs/am68_sk_r5_defconfig
-index e9b6882c1f68..f4800ef1b8ac 100644
---- a/configs/am68_sk_r5_defconfig
-+++ b/configs/am68_sk_r5_defconfig
-@@ -5,6 +5,10 @@ CONFIG_ARCH_K3=y
- CONFIG_SOC_K3_J721S2=y
- CONFIG_TARGET_J721S2_R5_EVM=y
+diff --git a/arch/arm/include/asm/mach-imx/ele_api.h b/arch/arm/include/asm/mach-imx/ele_api.h
+index a29b849d903..490292ab023 100644
+--- a/arch/arm/include/asm/mach-imx/ele_api.h
++++ b/arch/arm/include/asm/mach-imx/ele_api.h
+@@ -26,6 +26,7 @@
+ #define ELE_GET_EVENTS_REQ (0xA2)
+ #define ELE_COMMIT_REQ (0xA8)
+ #define ELE_START_RNG (0xA3)
++#define ELE_CMD_DERIVE_KEY (0xA9)
+ #define ELE_GENERATE_DEK_BLOB (0xAF)
+ #define ELE_ENABLE_PATCH_REQ (0xC3)
+ #define ELE_RELEASE_RDC_REQ (0xC4)
+@@ -143,6 +144,7 @@ int ele_read_common_fuse(u16 fuse_id, u32 *fuse_words, u32 fuse_num, u32 *respon
+ int ele_release_caam(u32 core_did, u32 *response);
+ int ele_get_fw_version(u32 *fw_version, u32 *sha1, u32 *response);
+ int ele_get_events(u32 *events, u32 *events_cnt, u32 *response);
++int ele_derive_huk(u8 *key, size_t key_size, u8 *ctx);
+ int ele_commit(u16 fuse_id, u32 *response, u32 *info_type);
+ int ele_generate_dek_blob(u32 key_id, u32 src_paddr, u32 dst_paddr, u32 max_output_size);
+ int ele_dump_buffer(u32 *buffer, u32 buffer_length);
+diff --git a/arch/arm/mach-imx/ele_ahab.c b/arch/arm/mach-imx/ele_ahab.c
+index d02316ed6cb..e1946467468 100644
+--- a/arch/arm/mach-imx/ele_ahab.c
++++ b/arch/arm/mach-imx/ele_ahab.c
+@@ -625,6 +625,31 @@ static int do_ahab_return_lifecycle(struct cmd_tbl *cmdtp, int flag, int argc, c
+ 	return CMD_RET_SUCCESS;
+ }
  
-+CONFIG_K3_AVS0=n
-+CONFIG_DM_REGULATOR_TPS65941=n
-+CONFIG_PMIC_TPS65941=n
++static int do_ahab_derive(struct cmd_tbl *cmdtp, int flag, int argc,
++			  char *const argv[])
++{
++	ulong key;
++	size_t key_size;
++	char *seed = "_ELE_AHAB_SEED_";
 +
- CONFIG_DEFAULT_DEVICE_TREE="k3-am68-sk-r5-base-board"
- CONFIG_SPL_OF_LIST="k3-am68-sk-r5-base-board"
- CONFIG_OF_LIST="k3-am68-sk-r5-base-board"
-diff --git a/configs/j721s2_evm_r5_defconfig b/configs/j721s2_evm_r5_defconfig
-index 6404b1cc3037..288379797432 100644
---- a/configs/j721s2_evm_r5_defconfig
-+++ b/configs/j721s2_evm_r5_defconfig
-@@ -112,6 +112,7 @@ CONFIG_DM_MAILBOX=y
- CONFIG_K3_SEC_PROXY=y
- CONFIG_FS_LOADER=y
- CONFIG_SPL_FS_LOADER=y
-+CONFIG_K3_AVS0=y
- CONFIG_SUPPORT_EMMC_BOOT=y
- CONFIG_SPL_MMC_HS400_SUPPORT=y
- CONFIG_MMC_SDHCI=y
-@@ -141,6 +142,11 @@ CONFIG_SPL_PINCTRL=y
- CONFIG_PINCTRL_SINGLE=y
- CONFIG_POWER_DOMAIN=y
- CONFIG_TI_POWER_DOMAIN=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_TPS65941=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_SPL_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_TPS65941=y
- CONFIG_K3_SYSTEM_CONTROLLER=y
- CONFIG_REMOTEPROC_TI_K3_ARM64=y
- CONFIG_RESET_TI_SCI=y
-
++	if (argc != 3)
++		return CMD_RET_USAGE;
++
++	key = hextoul(argv[1], NULL);
++	key_size = simple_strtoul(argv[2], NULL, 10);
++	if (key_size != 16 && key_size != 32) {
++		printf("key size can only be 16 or 32\n");
++		return CMD_RET_FAILURE;
++	}
++
++	if (ele_derive_huk((u8 *)key, key_size, seed)) {
++		printf("Error in AHAB derive\n");
++		return CMD_RET_FAILURE;
++	}
++
++	return CMD_RET_SUCCESS;
++}
++
+ static int do_ahab_commit(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			  char *const argv[])
+ {
+@@ -681,6 +706,12 @@ U_BOOT_CMD(ahab_return_lifecycle, CONFIG_SYS_MAXARGS, 1, do_ahab_return_lifecycl
+ 	   "addr - Return lifecycle message block signed by OEM SRK\n"
+ );
+ 
++U_BOOT_CMD(ahab_derive, CONFIG_SYS_MAXARGS, 3, do_ahab_derive,
++	   "Derive the hardware unique key",
++	   "addr [16|32]\n"
++	   "Store at addr the derivation of the HUK on 16 or 32 bytes.\n"
++);
++
+ U_BOOT_CMD(ahab_commit, CONFIG_SYS_MAXARGS, 1, do_ahab_commit,
+ 	   "commit into the fuses any new SRK revocation and FW version information\n"
+ 	   "that have been found into the NXP (ELE FW) and OEM containers",
+diff --git a/drivers/misc/imx_ele/ele_api.c b/drivers/misc/imx_ele/ele_api.c
+index e0ec22c7abf..0eaf51e31c8 100644
+--- a/drivers/misc/imx_ele/ele_api.c
++++ b/drivers/misc/imx_ele/ele_api.c
+@@ -1,12 +1,14 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+  * Copyright 2020, 2023 NXP
++ * Copyright 2024 Mathieu Othacehe <othacehe@gnu.org>
+  *
+  */
+ 
+ #include <common.h>
+ #include <hang.h>
+ #include <malloc.h>
++#include <memalign.h>
+ #include <asm/io.h>
+ #include <dm.h>
+ #include <asm/mach-imx/ele_api.h>
+@@ -528,6 +530,77 @@ int ele_start_rng(void)
+ 	return ret;
+ }
+ 
++int ele_derive_huk(u8 *key, size_t key_size, u8 *seed)
++{
++	struct udevice *dev = gd->arch.ele_dev;
++	struct ele_msg msg;
++	int msg_size = sizeof(struct ele_msg);
++	const size_t seed_size = 16;
++	u8 *seed_aligned, *key_aligned;
++	int ret, size;
++
++	if (!dev) {
++		printf("ele dev is not initialized\n");
++		return -ENODEV;
++	}
++
++	if (key_size != 16 && key_size != 32) {
++		printf("key size can only be 16 or 32\n");
++		return -EINVAL;
++	}
++
++	seed_aligned = memalign(ARCH_DMA_MINALIGN, seed_size);
++	if (!seed_aligned) {
++		printf("failed to alloc memory\n");
++		return -EINVAL;
++	}
++	memcpy(seed_aligned, seed, seed_size);
++
++	key_aligned = memalign(ARCH_DMA_MINALIGN, key_size);
++	if (!key_aligned) {
++		printf("failed to alloc memory\n");
++		ret = -EINVAL;
++		goto ret_seed;
++	}
++
++	size = ALIGN(seed_size, ARCH_DMA_MINALIGN);
++	flush_dcache_range((ulong)seed_aligned,
++			   (ulong)seed_aligned + size);
++
++	size = ALIGN(key_size, ARCH_DMA_MINALIGN);
++	invalidate_dcache_range((ulong)key_aligned,
++				(ulong)key_aligned + size);
++
++	msg.version = ELE_VERSION;
++	msg.tag = ELE_CMD_TAG;
++	msg.size = 7;
++	msg.command = ELE_CMD_DERIVE_KEY;
++	msg.data[0] = upper_32_bits((ulong)key_aligned);
++	msg.data[1] = lower_32_bits((ulong)key_aligned);
++	msg.data[2] = upper_32_bits((ulong)seed_aligned);
++	msg.data[3] = lower_32_bits((ulong)seed_aligned);
++	msg.data[4] = seed_size << 16 | key_size;
++	msg.data[5] = compute_crc(&msg);
++
++	ret = misc_call(dev, false, &msg, msg_size, &msg, msg_size);
++	if (ret) {
++		printf("Error: %s: ret %d, response 0x%x\n",
++		       __func__, ret, msg.data[0]);
++		goto ret_key;
++	}
++
++	invalidate_dcache_range((ulong)key_aligned,
++				(ulong)key_aligned + size);
++	memcpy(key, key_aligned, key_size);
++
++ret_key:
++	free(key_aligned);
++ret_seed:
++	free(seed_aligned);
++
++	return ret;
++}
++
+ int ele_commit(u16 fuse_id, u32 *response, u32 *info_type)
+ {
+ 	struct udevice *dev = gd->arch.ele_dev;
 -- 
-2.46.0
+2.45.2
 
