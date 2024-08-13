@@ -4,55 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14C0DC52D7B
-	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 04:16:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AD9AC52D7C
+	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 04:20:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 974BE8896C;
-	Tue, 13 Aug 2024 06:16:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4EB638895A;
+	Tue, 13 Aug 2024 06:20:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1723522604;
-	bh=N9p/CDOT/XnbuL3ctWrLm4VUWHP35/O20/HLOJxuhqM=;
+	s=phobos-20191101; t=1723522823;
+	bh=Nd6y2KpzOjeo3kHBhCbQddqgiOjyi98fxhZFVTydSlk=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=SxBHz35isZZSf8qNvjbJd2VkKWp6s3unarAJIRi5eZiZvEFZ53nHukg4DPeKKIyEY
-	 MizlORVp9rAt56FMirSCbDcYR+pRvI9gCXML4JMSTEUEM8D61ZGlzldwGcExVkeoxi
-	 W9AUUnyaiv3QfsyeDWp6a45sOW0+JBNsQUfi4c98GqZJ2J910D7HNuTPaZIUMtV2AQ
-	 yw0bfDhzc8cvruD60pYRcQ36vdvMwC5pVeiUtyYQ8m0kX861DDKJq3OX+X4I6VWEh9
-	 odb6fXHcNNJXUT90sGTsjJ+icT7ukfqJ7ujqIn4AUrE9PEtQHQY+m7ePuTL6fqulwR
-	 n2t6jXEK2wzPg==
+	b=xYsDAENt8Agehz2n6Kdm5HoyTSqQ+9wO6k0u5jN+4BvysF4EsqARnqObDW5+aQzdu
+	 r28xxio9kS8Bdbe5LjqG3E9gYik2WrsFJ6A4rU3yaz8HGeukceAl1BOdIKQKlSDSfl
+	 dmgV7z2jRK/i5XNIleyTSeJhA5dMkcRL3+g7Y1vXOsg0atxX4OaqrgXLqPYDfQFmdC
+	 abx21HEP/ikyBkMLDaQrAPnUbnhhTbTAS56GW2DW4mYGHrKwWQpaHsHwvvIsthmsrG
+	 DRR4CKWPuwuFy7nEkYNyPIphbo02F4VYzmrNQcQs0MttedsXD/l6xEdimOQgZNk4PF
+	 hHc8Natglt9eA==
 Received: from [192.168.1.107] (89-186-114-92.pool.digikabel.hu
  [89.186.114.92])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id A3E858895A;
- Tue, 13 Aug 2024 06:16:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 2FEFE8657F;
+ Tue, 13 Aug 2024 06:20:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1723522603;
- bh=N9p/CDOT/XnbuL3ctWrLm4VUWHP35/O20/HLOJxuhqM=;
+ s=phobos-20191101; t=1723522822;
+ bh=Nd6y2KpzOjeo3kHBhCbQddqgiOjyi98fxhZFVTydSlk=;
  h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
- b=QzS9kQgTigNOz3ZSKm7q8v3PrFBzH0XdZrhC83Hqmm5nhIOLwL1irmnK3IlF/VXMZ
- vuhfjV4E0GFoxuhQ5CmIam/KJxOj/+XvdTcXGO5YdBvg7HO5aIF1ytL6OIZs/tj5+0
- QDczu78oLaGblUYXe0IPXZxgvHzTZdZp0GdyX8Ju2pXxtzc2SM4jtXoJSSsRhMuK/N
- HpVE9AhMdYdX+di1ust/4OaXudqeU/8sgQwsX4XZ+7VQQmYtLK+cYMM1Wx5nPeOBYy
- u1/Z0yBYGvYkgwwqirWKe/h8iM4Vq8JP+Axuf83mnNIgCG3NQP9FHJBcZm/biPdMh7
- 3LYgDjSyugSnA==
-Message-ID: <2f841d47-a074-30e3-fc1b-3626471acb7a@denx.de>
-Date: Tue, 13 Aug 2024 06:15:47 +0200
+ b=fdCgiRASdeDVafOOdIvRS8qjD8zM1PU/es9uT223x6R9mo/geDZxBLKND+ZBjgmQB
+ fZUyyISqphGtlYvKKE+N3hWXJ/arXtjWeAfXTAwFQwFfPU3YPNc83v9r5zsc1R5k2w
+ w6cmeWnZr9ENwqO6YALeD08Q1d+oZNTDNsDyzWolZdiVvaoQKZ+bm8176nrrH+QGIf
+ mZaZB284qAuV9yGd2lltN1h5NrKIfYWkVVoYw0cxAxCzLxiFx1GvsvhVjV9UXjGhie
+ H5siYJUxleF5cX/FFNrtn3pULNujHhXlVP02XyjbKGQS767VRnxdw5qyOPwh7Z5Im1
+ FyO6jTbhwNkrw==
+Message-ID: <b073215b-c8ef-bcc2-a5e8-181ca0a47031@denx.de>
+Date: Tue, 13 Aug 2024 06:19:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH v2 16/18] i2c: Drop i2c_get_bus_num_fdt() and
- i2c_reset_port_fdt()
+Subject: Re: [PATCH v2 17/18] i2c: Remove CFG_SYS_I2C_MAX_HOPS
 Content-Language: en-US
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>
 References: <20240811145047.4189460-1-sjg@chromium.org>
- <20240811145047.4189460-17-sjg@chromium.org>
+ <20240811145047.4189460-18-sjg@chromium.org>
 From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20240811145047.4189460-17-sjg@chromium.org>
+In-Reply-To: <20240811145047.4189460-18-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,19 +71,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Simon,
+Hello Simon.
 
 On 11.08.24 16:50, Simon Glass wrote:
-> These functions are 11 years old and are only used by one board. Drop
-> them.
+> Now that this is always 0, remove it and the associated dead code.
 > 
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 > 
 > (no changes since v1)
 > 
->   include/i2c.h | 18 ------------------
->   1 file changed, 18 deletions(-)
+>   README                 | 10 +---------
+>   cmd/i2c.c              | 23 -----------------------
+>   drivers/i2c/i2c_core.c | 37 -------------------------------------
+>   include/i2c.h          |  7 -------
+>   4 files changed, 1 insertion(+), 76 deletions(-)
 
 Thanks!
 
