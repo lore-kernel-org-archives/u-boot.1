@@ -4,59 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0538C52D7C
-	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 07:39:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1FFFC52D7B
+	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 08:20:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D42A8896C;
-	Tue, 13 Aug 2024 09:39:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=codethink.co.uk
+	by phobos.denx.de (Postfix) with ESMTP id F3D0188739;
+	Tue, 13 Aug 2024 10:20:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=codethink.co.uk header.i=@codethink.co.uk header.b="i3XGZa6d";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="ra+biX7X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9CF088971; Tue, 13 Aug 2024 09:39:28 +0200 (CEST)
-Received: from imap4.hz.codethink.co.uk (imap4.hz.codethink.co.uk
- [188.40.203.114])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EC169886E5; Tue, 13 Aug 2024 10:20:21 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1828488969
- for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 09:39:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=codethink.co.uk
+ by phobos.denx.de (Postfix) with ESMTPS id 4700188739
+ for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 10:20:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ben.dooks@codethink.co.uk
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=codethink.co.uk; s=imap4-20230908; h=Sender:Content-Transfer-Encoding:
- Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
- Message-ID:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
- List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JtfvmVz+uEPCLDKV7zFHrIy9hHAV+n5NQGUZ1FJ65H8=; b=i3XGZa6dYQ9bEpm+9yqHJ/MYMX
- skokmEmAEfGOFs/JbfjdnxlrXTB+uvWEWloITiptw63uGpxhDB0xlv7gv/lGVveYkSVbjSOPO4l+m
- un2UpAuLEs2PI8U7U6oocx/VFC7/olNC0/6l9bXH0ALB/MfIB0l6Du8xjbAY1aYmnp1Xh5VVSQFHL
- 6H3uKT1fytw1YOscMNNNYMmkjoEPDIMMnptHUdS5YQ2MMAeiQ9gsafwLFtn1MEiJbAfUPNjt3dQhd
- 6GHXjh1WvYt8wmPii1K3XyRbxZej+O7Z5+dYguXDqeqWWI6KjMgKqSl0820lzXHZKDqtQahoHUPqK
- kAl4aicg==;
-Received: from [63.135.74.212] (helo=[192.168.1.184])
- by imap4.hz.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
- id 1sdm7j-00Ajwe-Q1; Tue, 13 Aug 2024 08:39:21 +0100
-Message-ID: <14c1d54f-fdd6-431e-8ff9-17dfdcc35d55@codethink.co.uk>
-Date: Tue, 13 Aug 2024 08:39:20 +0100
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-530e2548dfdso5397556e87.1
+ for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 01:20:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1723537218; x=1724142018;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=RufgXti6jW2+Xwu8RyDcjxQp7qE5Ug/ZP5fX5RbYvOY=;
+ b=ra+biX7X6sco5PUG8PYzzMbaWLwNUTalM6r0RFt45QiF+IiDOMWXfEF7xEpbRK3qpI
+ hz1Nci6yiDFqWz3pexVc/Tfi4ECyrc5q6PAMndqcw42yi7eMW3ztTRZs6afHs7GXAT9f
+ SZo4PSM8Gc1Xsz+OdYXYXTlgKGZu1ykLssG7PMCmVzYQtkClNpZmjikSMJaleylNkfBN
+ 9SUeIXfn+QrClX9XUMsrx/of9RGBSkWwf2ZVwcJ2gXCffnQkEYcS1LDXJJ5M0quQ28a8
+ LZvE2zMw0juvgyK7a1we6pwqY5sZ4zUduYHff/x5pFKYnRMGfyMAh71REJC5sJpo58RW
+ GYSw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723537218; x=1724142018;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RufgXti6jW2+Xwu8RyDcjxQp7qE5Ug/ZP5fX5RbYvOY=;
+ b=LKTLlqJEd7d1yIUwNHj0VF0bdnyKlYXL24Hkb6G4/ZylJxs/s06znh3hH0314vRcHD
+ tuEMgNWQ51q84Bb89+FWldjuUq1aZKukkqQSXdk10jr5zehArzTPhlLOBI1Jo9YAofXE
+ 1xNPvHTUAGqVbQCu9pNWD+LTe0YNKV1S8MJfTuaWsfJutqwaHGofzRqCCwOEyuwhRmpF
+ KP3ybMFB5wTgNyU4T8xK4tz3Z7URTPi6LOe5VJYFITXVNq10vWOHRpoSQsCg6/m+LyAz
+ xy9BoU73F9IK/+o6a2QomQyT8wfPGYT/vxdNzyRmtbVAM8O3aKByBU1Z2ARR69PmIsDl
+ DLHg==
+X-Gm-Message-State: AOJu0YwW3t4TK+TvXY1Wcv2UxgZ+z//WVC9E//hBfz9szVNNKW88Afke
+ qx3BmxPJdRaxSX6naIOFLb9pKlMvkDbOfsBdVxONgzQBMSg0MMTYHPPFy0YVSnyU8ms4UdQzQM6
+ NUgk=
+X-Google-Smtp-Source: AGHT+IFqb59cXFVGBJwKR46z4wy+5r0dUNEWAjFJlNRt+3TY0AgRb1c22zWYdBHjcLB3syji+u3ReA==
+X-Received: by 2002:a05:6512:3d88:b0:52e:fefe:49c9 with SMTP id
+ 2adb3069b0e04-53213667e91mr1923491e87.36.1723537217408; 
+ Tue, 13 Aug 2024 01:20:17 -0700 (PDT)
+Received: from localhost (lfbn-tou-1-402-59.w86-206.abo.wanadoo.fr.
+ [86.206.229.59]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4290c7bf87fsm216833285e9.48.2024.08.13.01.20.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 13 Aug 2024 01:20:16 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Vitaliy Vasylskyy <vitaliy.vasylskyy@globallogic.com>, Jonas Karlman
+ <jonas@kwiboo.se>, Lukasz Majewski <lukma@denx.de>, Miquel Raynal
+ <miquel.raynal@bootlin.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>
+Subject: Re: [PATCH] usb: gadget: usbhs: Add Renesas USBHS device driver
+In-Reply-To: <87cymkolfk.fsf@baylibre.com>
+References: <20240620005608.211147-1-marek.vasut+renesas@mailbox.org>
+ <172301332974.246690.13564435454732613935.b4-ty@baylibre.com>
+ <87cymkolfk.fsf@baylibre.com>
+Date: Tue, 13 Aug 2024 10:20:14 +0200
+Message-ID: <87jzgksukh.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] riscv: CONFIG_SPL_FRAMEPOINTER must depend on
- CONFIG_SPL
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>
-Cc: u-boot@lists.denx.de
-References: <20240811095109.59526-1-heinrich.schuchardt@canonical.com>
-Content-Language: en-GB
-From: Ben Dooks <ben.dooks@codethink.co.uk>
-Organization: Codethink Limited.
-In-Reply-To: <20240811095109.59526-1-heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,35 +97,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11/08/2024 10:51, Heinrich Schuchardt wrote:
-> The CONFIG_SPL_FRAMEPOINTER symbol is only relevant in SPL.
-> 
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Hello,
 
-Thanks for spotting
+On mer., ao=C3=BBt 07, 2024 at 09:13, Mattijs Korpershoek <mkorpershoek@bay=
+libre.com> wrote:
 
-Reviewed-by: Ben Dooks <ben.dooks@codethink.co.uk>
+> Hi Marek,
+>
+> On mer., ao=C3=BBt 07, 2024 at 08:48, Mattijs Korpershoek <mkorpershoek@b=
+aylibre.com> wrote:
+>
+>> Hi,
+>>
+>> On Thu, 20 Jun 2024 02:55:15 +0200, Marek Vasut wrote:
+>>> Add UDC driver for Renesas USBHS controller found in R-Car Gen3 SoCs.
+>>> This is mostly ported from the Linux kernel, with additional porting
+>>> glue. The code has been synchronized with 1b4861e32e46 ("Linux 6.9.3")
+>>> and cleaned up and ported to DM since the original implementation by
+>>> Vitaliy.
+>>>=20
+>>>=20
+>>> [...]
+>>
+>> Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (=
+u-boot-dfu-next)
+>>
+>> [1/1] usb: gadget: usbhs: Add Renesas USBHS device driver
+>>       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/b61ed=
+3c87f977bde4ed47ce1161cebf7fb814765
+>
+> This patch fails CI check "check for new CONFIG symbols outside
+> Kconfig", see:
+> https://source.denx.de/u-boot/custodians/u-boot-dfu/-/jobs/882942
+>
+> Could you have a look when possible, please ?
 
-> ---
->   arch/riscv/Kconfig | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-> index fa3b016c527..4e228a659f2 100644
-> --- a/arch/riscv/Kconfig
-> +++ b/arch/riscv/Kconfig
-> @@ -133,6 +133,7 @@ config FRAMEPOINTER
->   
->   config SPL_FRAMEPOINTER
->   	bool "Build SPL with frame pointer for stack unwinding"
-> +	depends on SPL
->   	help
->   	  Choose this option to use the frame pointer so the stack can be
->   	  unwound if needed. This is useful for tracing where faults came
+I've heard from Marek that this should not be applied yet. I have
+dropped this patch from u-boot-dfu-next to unblock the reported CI
+issues.
 
--- 
-Ben Dooks				http://www.codethink.co.uk/
-Senior Engineer				Codethink - Providing Genius
+Thanks
+Mattijs
 
-https://www.codethink.co.uk/privacy.html
-
+>
+>>
+>> --
+>> Mattijs
