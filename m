@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEA33C52D7C
-	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 18:27:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E427BC52D7C
+	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 20:12:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDC3088763;
-	Tue, 13 Aug 2024 20:27:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2B62C8863E;
+	Tue, 13 Aug 2024 22:12:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="g4pAjrl7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MW1RJ/Qx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD67B8899C; Tue, 13 Aug 2024 20:27:48 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B1DB18899D; Tue, 13 Aug 2024 22:12:43 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FF868839A
- for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 20:27:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A4ACC88387
+ for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 22:12:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47DIRW38027767;
- Tue, 13 Aug 2024 13:27:32 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1723573652;
- bh=Hh1yHO0jkAsOBKKxMoRpor8KDndYebVuW69AulBgR1Q=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=g4pAjrl7BZ7r/Lpe3fENEpJeiNxbY+uFt27/InSa0FQfQpP8J0SWMiPLT+ljkskLw
- Ugqartx8H3osM9J3SQpIfuoxDhABjIz+oRiAPBLnIOW+7cMWmSnioUMjnkzdChiA2L
- VP5QANtUNIw14aa92zciWM/LCWpZKmMN1W+Q4JwM=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47DIRWwY015405
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 13 Aug 2024 13:27:32 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 13
- Aug 2024 13:27:31 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 13 Aug 2024 13:27:31 -0500
-Received: from [128.247.81.8] (ula0226330.dhcp.ti.com [128.247.81.8])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47DIRVDS055015;
- Tue, 13 Aug 2024 13:27:31 -0500
-Message-ID: <2d9d9eae-1bdb-44e8-976b-72ec5bc67aab@ti.com>
-Date: Tue, 13 Aug 2024 13:27:31 -0500
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-52ef9bc3a64so437e87.3
+ for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 13:12:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1723579961; x=1724184761; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LbKvuYxSvjzQjaivBgVoe4yu5C0xLFm/dG7/xdbKU/o=;
+ b=MW1RJ/QxAy7K0apMV8wqinlN9pVwaFIX3IJXEf3NaIidx2pnTdW+NGDAhz6mIIcpx5
+ s0mwL5DYt+Q4lIG6j2j++MZtiP6VNbJSQS05laIyAdDOYP4wjBtNZcbxjNRrDQikg5+r
+ ik5/JrYHWgcAf74PeKXV+X/wb/zptIxkyvEHfLvCmEgdAVeeXGwl15/HXS9soExAZ8J1
+ 8x5gGGJUHiZXOxKZNExrcUTXqIOn42UPv/MEhcjokU581SrDb5GgVL2Ll8Gah4mfrp8q
+ luJNtEiAs8MKyEGU0utOC2Urq3pR+OmFy11apf71Kgdtl4OOomKp0w72JTFRY5hyDqfj
+ smiw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723579961; x=1724184761;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LbKvuYxSvjzQjaivBgVoe4yu5C0xLFm/dG7/xdbKU/o=;
+ b=bf/KMlrgDOrwaxFHFAf/T0vWzQj54Ktk0Don3VI62szEGAgGPbxuUXbA6lCNPQdXbc
+ nELUUiXICWOPBSXcK/OhYIaVbfn9rHYtYDpmmroMg/jIWIJwnPnFnOe+svq3bEMIAGQC
+ c0zPk7ohVIpZvKCpzpe0gtTEwzM8oy+gzIRqJyD3qREGzbCahLNqcw0MfB2RZTOmsuG0
+ X+SBZ0R1O3xZhb8xTuG2RKpibCYPJTgHKxplY5SzdQOWRoaGBnHoY8hQ9TuCCMEY/oAG
+ J/xbEGLyd+G8gwPxRft/ExsmSkC907E/+MN7508jfmFtezUJZvAA9VgsN7QUDxC0Mrp4
+ 1/kQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV+2ddvrevOJsDkzQMg6IliL7P0qbDQ+wuucRRxOccn+NUqt0LERw6NeBTUbJLrmTBRmayCkvdo3EeDXdJyzHKhx4V95w==
+X-Gm-Message-State: AOJu0YwyOwpbt6O8jdKoEiz26WfBuFopE7DpPjjwD+HU8Vqqb7BrkF5n
+ 6TIid8C5yuyQ1+nDhGzmvbVOYfHs/U8thMRNbk/Zlp4olctNTjd5mkSzD8ggefkqO0PzE76HjHd
+ pMRLcyVoRj6V1X/i22XXteUL5M6of/Kc4
+X-Google-Smtp-Source: AGHT+IGn2nz5XLhXkw44MpvbsQkeCAMMnQflY3J5/Dp5a8bJfHu6Ecd6aXYcbvD57Gpvou7E6XaSA+ygllwqCAGzkr4=
+X-Received: by 2002:a05:6512:3b1e:b0:530:baec:3975 with SMTP id
+ 2adb3069b0e04-532eda5b322mr203147e87.1.1723579960362; Tue, 13 Aug 2024
+ 13:12:40 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 06/10] arm: mach-k3: am62x: am625_init: Probe AM65 CPSW
- NUSS
-To: Chintan Vankar <c-vankar@ti.com>, Michal Simek <michal.simek@amd.com>,
- Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, "Marek
- Vasut" <marek.vasut+renesas@mailbox.org>, Neha Malcom Francis
- <n-francis@ti.com>, Udit Kumar <u-kumar1@ti.com>, MD Danish Anwar
- <danishanwar@ti.com>, Ravi Gunasekaran <r-gunasekaran@ti.com>, "Matthias
- Schiffer" <matthias.schiffer@ew.tq-group.com>, Andreas Dannenberg
- <dannenberg@ti.com>, Jonas Karlman <jonas@kwiboo.se>, Devarsh Thakkar
- <devarsht@ti.com>, Sean Anderson <seanga2@gmail.com>, Simon Glass
- <sjg@chromium.org>, Kishon Vijay Abraham I <kishon@ti.com>, "Joao Paulo
- Goncalves" <joao.goncalves@toradex.com>, Wadim Egorov <w.egorov@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Siddharth Vadapalli
- <s-vadapalli@ti.com>, Dhruva Gole <d-gole@ti.com>, Francesco Dolcini
- <francesco.dolcini@toradex.com>, Nishanth Menon <nm@ti.com>, Sumit Garg
- <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>
-References: <20240812113621.3840652-1-c-vankar@ti.com>
- <20240812114856.3843785-1-c-vankar@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20240812114856.3843785-1-c-vankar@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240807155343.122377-1-hs@denx.de>
+ <CAOMZO5A23hR6CbLbvUR-ck111iowq=BKrMz_4PHwL4hQsmyxDQ@mail.gmail.com>
+ <36b5a4e3-0848-7275-134b-a0929a1fea27@denx.de>
+In-Reply-To: <36b5a4e3-0848-7275-134b-a0929a1fea27@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 13 Aug 2024 17:12:28 -0300
+Message-ID: <CAOMZO5AHFdKxNspP1fAzpGmGPABCQeAohepg55Q+YRR-PttbCw@mail.gmail.com>
+Subject: Re: [PATCH v2] driver: pwm: pwm-imx: fix probing on imx6
+To: hs@denx.de
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Anatolij Gustschin <agust@denx.de>,
+ Tommaso Merciai <tommaso.merciai@amarulasolutions.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,49 +93,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/12/24 6:48 AM, Chintan Vankar wrote:
-> From: Kishon Vijay Abraham I <kishon@ti.com>
-> 
-> In order to support Ethernet boot on AM62x, probe AM65 CPSW NUSS
-> driver in board_init_f().
-> 
-> Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
-> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
-> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
-> ---
-> 
-> Link to v4:
-> https://lore.kernel.org/r/20240705045030.1141934-7-c-vankar@ti.com/
-> 
-> Changes from v3 to v4:
-> - No changes.
-> 
->   arch/arm/mach-k3/am62x/am625_init.c | 10 ++++++++++
->   1 file changed, 10 insertions(+)
-> 
-> diff --git a/arch/arm/mach-k3/am62x/am625_init.c b/arch/arm/mach-k3/am62x/am625_init.c
-> index 72a752d38e..0182c153a6 100644
-> --- a/arch/arm/mach-k3/am62x/am625_init.c
-> +++ b/arch/arm/mach-k3/am62x/am625_init.c
-> @@ -280,6 +280,16 @@ void board_init_f(ulong dummy)
->   		if (ret)
->   			panic("DRAM init failed: %d\n", ret);
->   	}
-> +
-> +	if (IS_ENABLED(CONFIG_SPL_ETH) && IS_ENABLED(CONFIG_TI_AM65_CPSW_NUSS) &&
-> +	    spl_boot_device() == BOOT_DEVICE_ETHERNET) {
-> +		struct udevice *cpswdev;
-> +
-> +		if (uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(am65_cpsw_nuss),
-> +						&cpswdev))
-> +			printf("Failed to probe am65_cpsw_nuss driver\n");
-> +	}
-> +
->   	spl_enable_cache();
+Hi Heiko,
 
-Any reason you added this before enabling caches?
+On Tue, Aug 13, 2024 at 10:58=E2=80=AFAM Heiko Schocher <hs@denx.de> wrote:
 
-Andrew
+> Should we revert this patch?
+>
+> I just can say for the aristianetos2 board, that I readded exactly this
+> define in my work for the port to currentmainline ... and with my patch,
+> pwm and so bootlogo works again ...
 
->   
->   	fixup_a53_cpu_freq_by_speed_grade();
+What about the change below on top of your patch?
+
+--- a/drivers/pwm/pwm-imx.c
++++ b/drivers/pwm/pwm-imx.c
+@@ -14,6 +14,8 @@
+ #include <asm/io.h>
+ #include <clk.h>
+
++#define IMX6_PWM_PER_CLK       66000000
++
+ int pwm_config_internal(struct pwm_regs *pwm, unsigned long period_cycles,
+                        unsigned long duty_cycles, unsigned long prescale)
+ {
+@@ -75,7 +77,7 @@ int pwm_imx_get_parms(int period_ns, int duty_ns,
+unsigned long *period_c,
+         * value here as a define. Replace it when we have the clock
+         * framework.
+         */
+-       c =3D CFG_IMX6_PWM_PER_CLK;
++       c =3D IMX6_PWM_PER_CLK;
+        c =3D c * period_ns;
+        do_div(c, 1000000000);
+        *period_c =3D c;
+@@ -162,7 +164,7 @@ int pwm_dm_imx_get_parms(struct imx_pwm_priv
+*priv, int period_ns,
+        if (CONFIG_IS_ENABLED(CLK))
+                c =3D clk_get_rate(&priv->per_clk);
+        else
+-               c =3D CFG_IMX6_PWM_PER_CLK;
++               c =3D IMX6_PWM_PER_CLK;
+
+        c =3D c * period_ns;
+        do_div(c, 1000000000);
