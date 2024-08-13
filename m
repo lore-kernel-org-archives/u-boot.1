@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B20CC52D7B
-	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 04:08:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0423C52D7B
+	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 04:09:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB9F188928;
-	Tue, 13 Aug 2024 06:08:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5712A88360;
+	Tue, 13 Aug 2024 06:09:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1723522110;
-	bh=DeFHTglaemcYA6F5tkFlVGAPbVIybSKbsVuhmq/OI+k=;
+	s=phobos-20191101; t=1723522183;
+	bh=xYG3s4Bun8z1GybmuoOyRlyrf3EU+wfkmgqY9V32N3E=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=voog4NAuhwQmQfa5CACOD+OTauGdiKnnXs2CbAdPkt3EGhux4rz23FwP1ojoRZ6pw
-	 TdiO98cZT6F2/Y7hxmvOf3P4CpEGPE4UynVujHWKEXAkj654451YGNQEE+Uj7ms3oG
-	 2yujwRP1bTQK2GZi7eFHabdWUnzfMhTwnvU8tRsvgoXN9Gqz9flIJUdk2SlDgr6Bgx
-	 LCFMAuK+4hEyRxW/J4eUL/uMJG7mH1HKoL6g3b7oIWZ6MN5/MhI6xxGYjio6WlVYWB
-	 CQzr5u1+S/Efp1Z84Nr7r5+XEt7IpEBvHBaxv09tixcTMtHa7k2L20B70n75XhlcJk
-	 XSfqxzR+44lFA==
+	b=onnIJgHwHaH+GyJabLI4SZSjHpSg6UAG2hFTPuCNhvVHggkVY5CYm6yL27DjwQJzw
+	 u1DxwmNJu5OyMQV3eku2fuZbFmli2ppBKiTVc17aVC4mFEbnQobAs287xrNwJsjRlA
+	 RlHHclc6lQ2yunz+0IQSaUbTz7zkQMKLAeA/vF4k5uaUFxrPjg/SWyCmnxpxB+3Zmt
+	 0jhg7IVVHt+X+0Mr2BNTVlfzB9m/UHsRjky+f0oYJASzPzBpwNvRaMluRtb4uqyW/7
+	 +XTYFQWKa8p3jn9ytg/we4/YwmBSFRsJ7vGv1WBSTZSHNlWcyjnLybRFtyflcu2WAM
+	 U+tCa19tp2N4w==
 Received: from [192.168.1.107] (89-186-114-92.pool.digikabel.hu
  [89.186.114.92])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 7BF3B87E30;
- Tue, 13 Aug 2024 06:08:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 4001587E30;
+ Tue, 13 Aug 2024 06:09:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1723522109;
- bh=DeFHTglaemcYA6F5tkFlVGAPbVIybSKbsVuhmq/OI+k=;
+ s=phobos-20191101; t=1723522181;
+ bh=xYG3s4Bun8z1GybmuoOyRlyrf3EU+wfkmgqY9V32N3E=;
  h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
- b=VtpKZUb0iGPbPkS8Z5REsDflSo2Xp5uYRrIo9inkL514NlYOExCmI+joKjJsfkbi7
- VZEYbzNywwbgWGZVh6mn8NTItFgGFmXJS2Ctxu2WGhHtyuwI3PU+rJZxgVpBCIC0ZG
- 20MAsdVXPau+KmXfI+YjaLshmcE5gFqep6qBvl0+VVOKhzIvxFjntqrzXrHAin1rTB
- pkAkHPkMdbtJ9vU2qmnhPnMjGwniRa+TGOXK/AvUZBqgTwGeN0308mLf7qu0qtkTmw
- R4JBDH5q7442bNwCbVM7lIBqsQvSjd9611iBnOpKDrHSnYiMTUgTYD6s7XUBvtwi1/
- Qk1XVQlPl23Jg==
-Message-ID: <240c47cb-ca78-3c5d-19b9-ff0857c0822e@denx.de>
-Date: Tue, 13 Aug 2024 06:07:33 +0200
+ b=HHP4eKeYoq46ycXOA78uTkpRHSioZuE1ZWd1xWBWKq1kgqVDQegCD4Mj4WnTBVwMM
+ QZh9aGZ4ESyvMukCktIyj3mj2uywDIyapyx2NbZswzMvH2t7jcYK3AcSXZDmpMUEB6
+ /kQDpbs4A24zSXnMmatH02RGPdZ0PpF0lcsY9Dw9xYSE2pk+JDIMg9bcdgGQBr8qmT
+ YQSoVgEbvKpCgDQv1Ofq8JFGUNF00qjJ9Y0dYFxBYD+GNWiDdUBRkaWNk2cEzPzxcm
+ znMT0nXqGsPwQlaGZktj+qeVu8X21NZMRBUvINwUQyobRjB4/LsicMyfIConslzr1n
+ dnj8LOJGHAPug==
+Message-ID: <c1bbbad9-94e9-da8f-040e-aed02a6459d4@denx.de>
+Date: Tue, 13 Aug 2024 06:08:46 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH v2 05/18] armv8: ls2085a: Drop CMD_DATE
+Subject: Re: [PATCH v2 06/18] mx28 / mx51: Drop CMD_DATE
 Content-Language: en-US
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>
 References: <20240811145047.4189460-1-sjg@chromium.org>
- <20240811145047.4189460-6-sjg@chromium.org>
+ <20240811145047.4189460-7-sjg@chromium.org>
 From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20240811145047.4189460-6-sjg@chromium.org>
+In-Reply-To: <20240811145047.4189460-7-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -74,7 +74,7 @@ X-Virus-Status: Clean
 Hello Simon,
 
 On 11.08.24 16:50, Simon Glass wrote:
-> These boards use pre-driver model code and it is several years since the
+> These use pre-driver model code and it is several years since the
 > migration deadline. Disable the 'date' command so that this old code can
 > be removed.
 > 
@@ -83,10 +83,9 @@ On 11.08.24 16:50, Simon Glass wrote:
 > 
 > (no changes since v1)
 > 
->   configs/ls2080aqds_nand_defconfig | 1 -
->   configs/ls2080aqds_qspi_defconfig | 1 -
->   configs/ls2080ardb_nand_defconfig | 1 -
->   3 files changed, 3 deletions(-)
+>   configs/mx28evk_defconfig | 1 -
+>   configs/mx51evk_defconfig | 1 -
+>   2 files changed, 2 deletions(-)
 
 Thanks!
 
