@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E17DC52D7C
-	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 10:54:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9661EC52D7B
+	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 10:55:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBA8A8897C;
-	Tue, 13 Aug 2024 12:54:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5A0318898F;
+	Tue, 13 Aug 2024 12:54:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="k2rxvrfc";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="l4jYKVnH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FC1288966; Tue, 13 Aug 2024 12:54:31 +0200 (CEST)
+ id 63BBF8800C; Tue, 13 Aug 2024 12:54:33 +0200 (CEST)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D5F58897C
- for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 12:54:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B239887BB
+ for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 12:54:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47DAsDHe044488;
- Tue, 13 Aug 2024 05:54:13 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47DAsGXg044498;
+ Tue, 13 Aug 2024 05:54:16 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1723546453;
- bh=KQLiLCVeUs0mV1V8kiV8FQmw2uVJOXFHd4TJej2AGN4=;
+ s=ti-com-17Q1; t=1723546456;
+ bh=cfpkhoQxhp0as3BCLDlgmhJGIsRtG3lPqc8nA64obu0=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=k2rxvrfcRQVxVfvsSjFXnvzWTF1kwDZoFGQ52Y9OsO/+DyeVpq9GzQNX49tyv/Hjl
- nlMxIry+1QOvmZONtnNKM23ylRWVMeQTuFezq8QqQroWltbzr6zIdSqG1zf+z54I2M
- fRv0Fg1A5JorRRzOZyG/LSYOXhsQxPyS9zhQQVa4=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47DAsDd7071805
+ b=l4jYKVnHZ1jOklczFdHowJ+lOwnHGkJcQl9Rq3HMAFpcV1tLfz1rQDAZcmBY24nP7
+ wg8I6otI5VRcQd9Z/1YuIyrrw2up9WUbQi2zDFglgddBh0UX9J4MbQbk1MHpB/g9Ml
+ dAW8EhDAwyHrNOWWdfPxA7LKK4MLxvU30OfMfj3M=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47DAsG1e039441
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 13 Aug 2024 05:54:13 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 13 Aug 2024 05:54:16 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 13
- Aug 2024 05:54:13 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2024 05:54:16 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 13 Aug 2024 05:54:13 -0500
+ Frontend Transport; Tue, 13 Aug 2024 05:54:16 -0500
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47DAsCe0075470;
- Tue, 13 Aug 2024 05:54:13 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47DAsFf8120855;
+ Tue, 13 Aug 2024 05:54:15 -0500
 From: Chintan Vankar <c-vankar@ti.com>
 To: Michal Simek <michal.simek@amd.com>, =?UTF-8?q?Marek=20Beh=C3=BAn?=
  <kabel@kernel.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>, "Neha
@@ -66,11 +66,11 @@ To: Michal Simek <michal.simek@amd.com>, =?UTF-8?q?Marek=20Beh=C3=BAn?=
  <d-gole@ti.com>, Francesco Dolcini <francesco.dolcini@toradex.com>,
  "Nishanth Menon" <nm@ti.com>, Sumit Garg <sumit.garg@linaro.org>, Tom Rini
  <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Kishon Vijay Abraham I <kishon@ti.com>, "Chintan
+CC: <u-boot@lists.denx.de>, Vignesh Raghavendra <vigneshr@ti.com>, "Chintan
  Vankar" <c-vankar@ti.com>
-Subject: [PATCH v5 02/10] firmware: ti_sci: Add No-OP for "RX_FL_CFG"
-Date: Tue, 13 Aug 2024 16:23:52 +0530
-Message-ID: <20240813105400.4054657-3-c-vankar@ti.com>
+Subject: [PATCH v5 04/10] soc: ti: k3-navss-ringacc: Fix reset ring API
+Date: Tue, 13 Aug 2024 16:23:54 +0530
+Message-ID: <20240813105400.4054657-5-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240813105400.4054657-1-c-vankar@ti.com>
 References: <20240813105400.4054657-1-c-vankar@ti.com>
@@ -94,52 +94,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Kishon Vijay Abraham I <kishon@ti.com>
+From: Vignesh Raghavendra <vigneshr@ti.com>
 
-RX_FL_CFG message should not be forwarded to TIFS and should be
-handled within R5 SPL (when DM services are not available). Add
-a no-op function to not handle RX_FL_CFG messages.
+Expectation of k3_ringacc_ring_reset_raw() is to reset the ring to
+requested size and not to 0. Fix this.
 
-Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
+Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
 Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 ---
 
 Link to v4:
-https://lore.kernel.org/r/20240812114714.3843192-1-c-vankar@ti.com/
+https://lore.kernel.org/r/20240812114811.3843528-1-c-vankar@ti.com/
 
 Changes from v4 to v5:
 - No Changes.
 
- drivers/firmware/ti_sci.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ drivers/soc/ti/k3-navss-ringacc-u-boot.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
-index e591333ba38..719cfa771b4 100644
---- a/drivers/firmware/ti_sci.c
-+++ b/drivers/firmware/ti_sci.c
-@@ -2450,6 +2450,12 @@ fail:
- 	return ret;
- }
+diff --git a/drivers/soc/ti/k3-navss-ringacc-u-boot.c b/drivers/soc/ti/k3-navss-ringacc-u-boot.c
+index f958239c2af..5d650b9de79 100644
+--- a/drivers/soc/ti/k3-navss-ringacc-u-boot.c
++++ b/drivers/soc/ti/k3-navss-ringacc-u-boot.c
+@@ -25,9 +25,16 @@ struct k3_nav_ring_cfg_regs {
+ #define KNAV_RINGACC_CFG_RING_SIZE_ELSIZE_MASK		GENMASK(26, 24)
+ #define KNAV_RINGACC_CFG_RING_SIZE_ELSIZE_SHIFT		(24)
  
-+static int ti_sci_cmd_rm_udmap_rx_flow_cfg_noop(const struct ti_sci_handle *handle,
-+						const struct ti_sci_msg_rm_udmap_flow_cfg *params)
-+{
-+	return 0;
-+}
++#define KNAV_RINGACC_CFG_RING_SIZE_MASK			GENMASK(15, 0)
 +
- /**
-  * ti_sci_cmd_set_fwl_region() - Request for configuring a firewall region
-  * @handle:    pointer to TI SCI handle
-@@ -2895,7 +2901,7 @@ static __maybe_unused int ti_sci_dm_probe(struct udevice *dev)
- 	udmap_ops = &ops->rm_udmap_ops;
- 	udmap_ops->tx_ch_cfg = ti_sci_cmd_rm_udmap_tx_ch_cfg;
- 	udmap_ops->rx_ch_cfg = ti_sci_cmd_rm_udmap_rx_ch_cfg;
--	udmap_ops->rx_flow_cfg = ti_sci_cmd_rm_udmap_rx_flow_cfg;
-+	udmap_ops->rx_flow_cfg = ti_sci_cmd_rm_udmap_rx_flow_cfg_noop;
- 
- 	return ret;
+ static void k3_ringacc_ring_reset_raw(struct k3_nav_ring *ring)
+ {
+-	writel(0, &ring->cfg->size);
++	u32 reg;
++
++	reg = readl(&ring->cfg->size);
++	reg &= KNAV_RINGACC_CFG_RING_SIZE_MASK;
++	reg |= ring->size;
++	writel(reg, &ring->cfg->size);
  }
+ 
+ static void k3_ringacc_ring_reconfig_qmode_raw(struct k3_nav_ring *ring, enum k3_nav_ring_mode mode)
 -- 
 2.34.1
 
