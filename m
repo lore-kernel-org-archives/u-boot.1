@@ -4,71 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46AD9C52D7B
-	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 12:12:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D1EAC52D7B
+	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 12:17:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5567B88842;
-	Tue, 13 Aug 2024 14:12:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
+	by phobos.denx.de (Postfix) with ESMTP id 8BC1788747;
+	Tue, 13 Aug 2024 14:17:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="fOuQpw9M";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DMkisyDn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B377688986; Tue, 13 Aug 2024 14:12:22 +0200 (CEST)
-Received: from cpanel.siel.si (cpanel.siel.si [46.19.9.99])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0E97888747; Tue, 13 Aug 2024 14:17:09 +0200 (CEST)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEED88871A
- for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 14:12:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7896388842
+ for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 14:17:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=norik.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=primoz.fiser@norik.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
- s=default;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
- Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=jDOKD0S2R8MCu2WOpe9OLL2S/UdXwW/1B6XSZTvZyE0=; b=fOuQpw9MwgXpxCAHgJT4SCp4xR
- E9hN1bktUuRUcm62O1mZhDFARr09KdlTof6mnWtKWrZENkmRQEyMxBKtsfbttFsnhCri5b+IwvZLS
- gGUmL0/1k8V8iv7b9W3gYQ9v3JLgzZofmQ4nkAVM0oQ+CW6Bf/pHfQGT3wKJ/Nz0e0KFsdExo/FkK
- Ls+fIm9VjSRJ+LR80xhjqeOw2b4v/+B5Di+T/tZcjVWDIrcaNx6QTC0Kb6fyn/AToWgs9eMNIdRii
- doDDj8B40LHKebKkFYpw0oS1afz3IaOlDo9br/5Dz8PVJB5Se+TmT5aiqAdDfSv8ctVyneFGIx2aG
- v1l5qFvA==;
-Received: from [89.212.21.243] (port=46818 helo=localhost.localdomain)
- by cpanel.siel.si with esmtpsa (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96.2)
- (envelope-from <primoz.fiser@norik.com>) id 1sdqNu-00Fkvz-0L;
- Tue, 13 Aug 2024 14:12:18 +0200
-From: Primoz Fiser <primoz.fiser@norik.com>
-To: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>,
- Fabio Estevam <festevam@gmail.com>, uboot-imx@nxp.com,
- Tom Rini <trini@konsulko.com>, Primoz Fiser <primoz.fiser@norik.com>,
- Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Elena Popa <elena.popa@nxp.com>, Marek Vasut <marex@denx.de>,
- Simon Glass <sjg@chromium.org>
-Cc: upstream@lists.phytec.de
-Subject: [PATCH] imx: imx9: Set correct critical temperature
-Date: Tue, 13 Aug 2024 14:12:17 +0200
-Message-Id: <20240813121217.2279187-1-primoz.fiser@norik.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6b7acf213a3so28965626d6.1
+ for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 05:17:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1723551425; x=1724156225; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6+g7Q0fkcd9lJlW3+fZAgovN2D6Os81F9DMEq3JUiaM=;
+ b=DMkisyDnSBiZn2yy0jkHPu8d4svvj7Rj7G3K4xdgue/EToC14ClE+nlK6NsTRygO+Q
+ bWMQ4zUQqphsPkqdaGRYVcL6ST5FdQiQLyLxpVZi0GpZXAq7VVp6HgkhCfoH6FsguLgr
+ SljGwQZjcmiyaqkpCyE8coWmuV8UmrIr/KLcY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723551425; x=1724156225;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6+g7Q0fkcd9lJlW3+fZAgovN2D6Os81F9DMEq3JUiaM=;
+ b=gps8f2ZhCCFKp1bxujkX2R9/n+nDIbSR4Fcjk/fAsuW9lndGDjxTgBvQUd0nKSYU99
+ ztsI3z/w1MQPJl8oHJRySH3ySYjvj/OIHhvngzoXBfB52Gc6bEPhrv17rE1nNBfjSGWH
+ kDJ3WcPBupXDNy6fwYVTUUe280ea2ocWia1GX0M1UaQbqZItjoOhx8UalVfn0DC4tQlg
+ THnafe5hyL1Agpt/l4s4X44ACDBpLoaEAyCJMG1FSdTBaSE9FWwc1eHgq0utnyvglpux
+ CWbMfd6B3UWmM+YcDduQJJurHWRkPEuUhOaTIxeis+IPilQqcUie4c3WU7qFwEtNAc5j
+ G3eA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUaBH+nx82VFDkNsHTmZ0xqzZLJD0iGTP4fRK2vgolYqUXcZPWwFsFiKIlabRnkUXjoWyz1gfCrPpq8DbG8yJ2Rpl2GrA==
+X-Gm-Message-State: AOJu0YwXRo4lvJGDT/eKA9xzzQUIPkNRe8nI5UrwmSJmTrxklY3x8Zra
+ 2UHE9IND8VbE/p/1CZyJO+yxfqgGXzZjyA2Chi54G/I9iQmmzq3vzyevcIQBAvV8quaLqw+ReaM
+ y4lDE0pqTGw+SlSAH1l0EW2g3Cm2oqhguq3Tm
+X-Google-Smtp-Source: AGHT+IHUCCIj4iK154FXL1IhXY7wdZY0zU7yNUU6WTYiX73L7Dz1xM4wvpyeKZivZA43KFnftXAQsH8MeQ1wW7lctnU=
+X-Received: by 2002:a05:6214:5d92:b0:6b5:8e2c:e715 with SMTP id
+ 6a1803df08f44-6bf4f7fbdacmr29671436d6.20.1723551425251; Tue, 13 Aug 2024
+ 05:17:05 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cpanel.siel.si
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - norik.com
-X-Get-Message-Sender-Via: cpanel.siel.si: authenticated_id:
- primoz.fiser@norik.com
-X-Authenticated-Sender: cpanel.siel.si: primoz.fiser@norik.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+References: <20240810205205.3403177-1-sjg@chromium.org>
+ <20240810205205.3403177-8-sjg@chromium.org>
+ <CALu9rSbrAcxkGkFHuiFSBd-JMTm0kfEwDuBCDNYZc33eTLVU9w@mail.gmail.com>
+ <CAFLszTjujOXs39KMnV-5NNWNqJ8K+FoisPYB=1HmC5QHf671ag@mail.gmail.com>
+ <20240812184615.GI1626301@bill-the-cat>
+In-Reply-To: <20240812184615.GI1626301@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 13 Aug 2024 06:16:54 -0600
+Message-ID: <CAFLszThEbk2Jr8OZ6Hj21wPSnJjgJhaDe037RqwHvwt1KjB3_A@mail.gmail.com>
+Subject: Re: [PATCH 07/21] Revert "net: wget: Support retransmission a dropped
+ packet"
+To: Tom Rini <trini@konsulko.com>
+Cc: Yasuharu Shibata <yasuharu.shibata@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Marek Vasut <marex@denx.de>, Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Richard Weinberger <richard@nod.at>, 
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,28 +94,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit 3233349fa6e2 ("imx: imx9: fixup thermal trips from fuses")
-wrongly set critical temperature to (maxc - 5) instead of maxc.
+Hi Tom,
 
-Fixes: 3233349fa6e2 ("imx: imx9: fixup thermal trips from fuses")
-Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
----
- arch/arm/mach-imx/imx9/soc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Mon, 12 Aug 2024 at 12:46, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sun, Aug 11, 2024 at 08:50:18AM -0600, Simon Glass wrote:
+> > +Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
+> >
+> > Hi Yasuharu,
+> >
+> > On Sat, 10 Aug 2024 at 20:48, Yasuharu Shibata
+> > <yasuharu.shibata@gmail.com> wrote:
+> > >
+> > > Dear Simon,
+> > >
+> > > Could you inform me how the wget test was broken?
+> > > As I explained in the commit log, I fixed the bug in specific conditions.
+> > > Without the details of how the break happened,
+> > > it is difficult to find a proper patch.
+> > >
+> > > Best regards,
+> > > Yasuharu Shibata
+> >
+> > Yes, I should have mentioned that. It is test/cmd/wget.c - see also [1].
+> >
+> > This is a good run:
+> > Test: net_test_wget: wget.c
+> > HTTP/1.1 200 OK
+> > Packets received 5, Transfer Successful
+> > Bytes transferred = 32 (20 hex)
+> > md5 for 00020000 ... 0002001f ==> 234af48e94b0085060249ecb5942ab57
+> > Failures: 0
+> >
+> > With your patch it hangs:
+> >
+> > Test: net_test_wget: wget.c
+> > HTTP/1.1 200 OKT
+>
+> Can you please figure out what's going on with the sandbox test then?
+> The change in question fixes wget support on real hardware, and also the
+> other wget tests (as part of the lwIP series) work fine as well. This
+> seems like something specific to that test.
 
-diff --git a/arch/arm/mach-imx/imx9/soc.c b/arch/arm/mach-imx/imx9/soc.c
-index 32208220b207..f88e7a222dd4 100644
---- a/arch/arm/mach-imx/imx9/soc.c
-+++ b/arch/arm/mach-imx/imx9/soc.c
-@@ -536,7 +536,7 @@ static int fixup_thermal_trips(void *blob, const char *name)
- 
- 		temp = 0;
- 		if (!strcmp(type, "critical"))
--			temp = 1000 * (maxc - 5);
-+			temp = 1000 * maxc;
- 		else if (!strcmp(type, "passive"))
- 			temp = 1000 * (maxc - 10);
- 		if (temp) {
--- 
-2.34.1
+The sandbox test is pretty simple, but it seems that something is very
+odd in the wget code. I'm really not sure what it is supposed to be
+doing.
 
+Here is a good run, with both of these reverts:
+(1) 1fd9476ec7d Revert "net: wget: Support retransmission a dropped packet"
+(2) 3ebd131f7af Revert "net: wget: fix TCP sequence number wrap around issue"
+
+
+Test: net_test_wget: wget.c
+wget: Transfer HTTP Server 1.1.2.2; our IP 192.0.2.1
+URL '/index.html'
+
+wget:Load address: 0x20000
+Loading: wget: send SYN
+wget: Connecting In len=0, Seq=0, Ack=1
+wget: Cting, send, len=0
+wget: Connected seq=1, len=47
+wget: Connected HTTP Header 0000560ee4323456
+HTTP/1.1 200 OKwget: Connctd pkt 0000560ee4323456  hlen 27
+wget: Connected Len 0
+wget: offset 0
+wget: Connected Pkt 0000560ee4323456 hlen 27
+wget: Transferring, seq=1, ack=2, init_seq=28, len=47
+wget: Transferring, seq=48, ack=3, init_seq=28, len=0
+wget: offset 20
+
+Packets received 5, Transfer Successful
+Bytes transferred = 32 (20 hex)
+md5 for 00020000 ... 0002001f ==> 234af48e94b0085060249ecb5942ab57
+Failures: 0
+
+Here is a bad run, with only (1) reverted:
+
+Test: net_test_wget: wget.c
+wget: Transfer HTTP Server 1.1.2.2; our IP 192.0.2.1
+URL '/index.html'
+
+wget:Load address: 0x20000
+Loading: wget: send SYN
+wget: Connecting In len=0, Seq=0, Ack=1
+wget: Cting, send, len=0
+wget: Connected seq=1, len=47
+wget: Connected HTTP Header 000055d24b26e456
+HTTP/1.1 200 OKwget: Connctd pkt 000055d24b26e456  hlen 27
+wget: Connected Len 0
+wget: offset 0
+wget: Connected Pkt 000055d24b26e456 hlen 27
+wget: Transferring, seq=1, ack=2, init_seq=28, len=47
+wget: offset ffffffd9
+
+wget error: trying to overwrite reserved memory...
+wget: Transfer Fail - wget: store error
+
+wget: Transferring, seq=48, ack=3, init_seq=28, len=0
+wget: offset 20
+
+Packets received 5, Transfer Successful
+T T
+
+You can see that seq is lower than init_seq so it tries to write to
+memory before the buffer. I suppose in real hardware this would
+normally be OK, but it isn't in sandbox.
+
+With just (2) reverted I see this:
+
+Test: net_test_wget: wget.c
+wget: Transfer HTTP Server 1.1.2.2; our IP 192.0.2.1
+URL '/index.html'
+
+wget:Load address: 0x20000
+Loading: wget: send SYN
+wget: Connecting In len=0, Seq=0, Ack=1
+wget: Cting, send, len=0
+wget: Connected seq=1, len=47
+wget: Connected HTTP Header 000055a5e9a25456
+HTTP/1.1 200 OKwget: Connctd pkt 000055a5e9a25456  hlen 27
+wget: Connected Len 0
+wget: offset 0
+wget: Connected Pkt 000055a5e9a25456 hlen 27
+wget: Transferring, seq=1, ack=2, init_seq=28, len=47
+wget: seq=48 packet was lost
+wget: Transferring, seq=48, ack=3, init_seq=28, len=0
+wget: offset 20
+T T
+
+At least in this case it doesn't write to bad memory, but it still doesn't work.
+
+Regards,
+Simon
