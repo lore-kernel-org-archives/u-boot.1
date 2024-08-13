@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39BB2C52D7B
-	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 12:43:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8516BC52D7C
+	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 12:47:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7950488842;
-	Tue, 13 Aug 2024 14:43:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D921188842;
+	Tue, 13 Aug 2024 14:47:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Aj711ByO";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UBqyg6Wu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C15AB8899B; Tue, 13 Aug 2024 14:43:26 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BD02888997; Tue, 13 Aug 2024 14:47:38 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F1C188842
- for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 14:43:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CE4987E30
+ for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 14:47:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-52fd0904243so542092e87.3
- for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 05:43:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723553004; x=1724157804; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PoxcnenKDT0drQtvswtXBy9nAC5DFoJfVcx12J0/bVo=;
- b=Aj711ByOR49USjjbAAz7mvFaj+FBCtON4PSWoy/wUN5BPtuwNqIzotelp+n3kXV86E
- ozO0+lxPAwwA1OmSCQMib4GhDSs4yeMDcH6YFxD+0GcMpOdCi5IUxy4iozi2IDy4VVxU
- lBh6lLzD42j2vEf0nKLajKysl+GQ2YSiR7bSBeh5FjPpw7fSXsjJva0CWL3bb20Xh0jG
- Nb3itO//kmz5dTcbCr9SscLqG/4XcypHLRhLlikOPa6+AIY7D06XrXQqhZA7CjGYEcqP
- pjVWZfkyvbpdmqc9mJDPIMNnOwngh3i1roRsIVEsT8j+VRPAWdbhcryJslZxeN3323l8
- iRug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723553004; x=1724157804;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PoxcnenKDT0drQtvswtXBy9nAC5DFoJfVcx12J0/bVo=;
- b=nopDiH9+p7MAH2JCn12NyHtC3gCs3Y9JQON1JodZZTJ0F9/b9kXnTdP9teQ4zxRbM5
- lhrE8V2bPvifZag0dVihkxU/UfLhbvKwOCC2Y0gInKPKeJXVi6A/jKG3C4wjVz5L6s7a
- slLSRLF7f5pfoYqbzEglfsUfeyZnfmlsAPvSOAcSF1Um4kygeW6JqnKO7WD/TrMcZfDj
- 275CpSgze0seE4NWPr+R93iTv6sdUdv89qzuEtGeoOjIddvdXrwcbHRz3UlN9jmSxx7M
- +xMqDFlnCrI0v8pHyZMO5L3iYwQGo4eKLz5K+JRTnONQmDZW1hXT6ZrrXs9zqlpLmdqs
- qSzw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVw1z4GKL3h9N5QxIhGnsfrIdorxnGoshbZ6oXI/AvLvOlBlKp1Cfx41hFXjgqEA8m7fKysN74zqLKjJs5xs8snRvnPwA==
-X-Gm-Message-State: AOJu0YwMbxXd3ZBGkfdP4gOyx1h2EpTqIhAKhVLt4aRZqFxI1RBFlGwH
- KdiVK5eQ2MBgLEYKU76tnViDuO2P/dAjNvTceOLc7FJD91zcCNPWGikiOT6qfcoGOccXUPxkmTv
- tM1XnbAP3BG8LaQbY2Be0ueaoTy4=
-X-Google-Smtp-Source: AGHT+IGEAnAO9OFjMK61mbXb4054HOjN+88P8YRldHRE2cslErIQgFPXz5xJnpXc+ry4OQpD6CZuiI0N9cK60A1kI2E=
-X-Received: by 2002:a05:6512:3ca3:b0:52e:9beb:bc09 with SMTP id
- 2adb3069b0e04-53214fddc1dmr902926e87.3.1723553003347; Tue, 13 Aug 2024
- 05:43:23 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47DClImH089434;
+ Tue, 13 Aug 2024 07:47:18 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1723553238;
+ bh=l7fwIWJ6PtgybPe00g+TR1xOAxF5Fwrhf5V5k8zwwyA=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=UBqyg6WuZT86nXjQ6QEnkJcxGQVLvR7LWSKOZ3WO4hPOOASXhQRSoLxv71nurlX6y
+ 3mWbSH+GGFUik3cEv+E3M7hCk+KxZbRKRSKhT+zv772lB0DHno7Izj/1JhIEPw3Uwe
+ 6h54pqecvRiivr4rSIkmc4vOCdav6XSIGinxvv/Q=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47DClIxc097001
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 13 Aug 2024 07:47:18 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 13
+ Aug 2024 07:47:18 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 13 Aug 2024 07:47:18 -0500
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47DClIH8111027;
+ Tue, 13 Aug 2024 07:47:18 -0500
+Date: Tue, 13 Aug 2024 07:47:18 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Chintan Vankar <c-vankar@ti.com>
+CC: Michal Simek <michal.simek@amd.com>, Marek =?utf-8?B?QmVow7pu?=
+ <kabel@kernel.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>, "Neha
+ Malcom Francis" <n-francis@ti.com>, MD Danish Anwar <danishanwar@ti.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Ravi Gunasekaran
+ <r-gunasekaran@ti.com>, Udit Kumar <u-kumar1@ti.com>, Matthias Schiffer
+ <matthias.schiffer@ew.tq-group.com>,
+ Jonas Karlman <jonas@kwiboo.se>, "Devarsh Thakkar" <devarsht@ti.com>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Andrew Davis <afd@ti.com>, Michael Trimarchi
+ <michael@amarulasolutions.com>, Joao Paulo Goncalves
+ <joao.goncalves@toradex.com>, Mattijs Korpershoek
+ <mkorpershoek@baylibre.com>, Wadim Egorov <w.egorov@phytec.de>, Dhruva Gole
+ <d-gole@ti.com>, Francesco Dolcini <francesco.dolcini@toradex.com>, "Sumit
+ Garg" <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ <u-boot@lists.denx.de>, Vignesh Raghavendra <vigneshr@ti.com>
+Subject: Re: [PATCH v5 10/10] arm64: dts: ti: k3-am62x-sk-common: Add
+ bootph-all property in phy_gmii_sel node
+Message-ID: <20240813124718.4zpvz3ryhdexxqdr@sharpness>
+References: <20240813105400.4054657-1-c-vankar@ti.com>
+ <20240813105400.4054657-11-c-vankar@ti.com>
 MIME-Version: 1.0
-References: <20240423141551.2410199-1-caleb.connolly@linaro.org>
- <eb12b7f6-dba1-42ac-adb6-3c180d811130@denx.de> <87ed6ssj5x.fsf@baylibre.com>
-In-Reply-To: <87ed6ssj5x.fsf@baylibre.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 13 Aug 2024 09:43:12 -0300
-Message-ID: <CAOMZO5BWjyy_nuHaRKrh=ct9_e8JqfRZ6qtTmBG_r2-bpHMwPw@mail.gmail.com>
-Subject: Re: [PATCH v2] usb: dwc3: support USB 3.1 controllers
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Marek Vasut <marex@denx.de>, Caleb Connolly <caleb.connolly@linaro.org>, 
- Igor Prusov <ivprusov@salutedevices.com>, Nishanth Menon <nm@ti.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Stefan Bosch <stefan_b@posteo.net>, 
- Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Eugen Hristev <eugen.hristev@collabora.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20240813105400.4054657-11-c-vankar@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,14 +93,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mattijs,
+On 16:24-20240813, Chintan Vankar wrote:
+> Add missing bootph-all property for CPSW MAC's PHY node
+> phy_gmii_sel.
+> 
+> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+> Link: https://lore.kernel.org/r/20240430085048.3143665-1-c-vankar@ti.com
+> Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
+> 
+> [ upstream commit: ba50141137fae205a731005e70687f4a52289050 ]
+> 
+> (cherry picked from commit 2bdd1743a9f6515efe7c3648a25d63b4a9ce4a10)
+> ---
+> 
+> Link to v4:
+> https://lore.kernel.org/r/20240812114945.3844224-1-c-vankar@ti.com/
+> 
+> Changes from v4 to v5:
+> - Updated this patch with the cherry picked patch from
+>   devicetree-rebasing repo as pointed out by Sumit.
+> 
+>  dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi | 4 ++++
+>  1 file changed, 4 insertions(+)
+> 
+> diff --git a/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi b/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
+> index 3c45782ab2b..96378b19c41 100644
+> --- a/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
+> +++ b/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
+> @@ -128,6 +128,10 @@
+>  	};
+>  };
+>  
+> +&phy_gmii_sel {
+> +	bootph-all;
+> +};
+> +
 
-On Tue, Aug 13, 2024 at 9:26=E2=80=AFAM Mattijs Korpershoek
-<mkorpershoek@baylibre.com> wrote:
 
-> Marek, should I pick this up through u-boot-dfu or will you pick it up?
+If you cannot wait for upstream dt sync, why not just do this in R5-sk
+or u-boot.dtsi?
 
-This one is already in master:
 
-https://gitlab.com/u-boot/u-boot/-/commit/ef1e322f3e1d9a221a1ee6109f6571429=
-ee9fb4a
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
