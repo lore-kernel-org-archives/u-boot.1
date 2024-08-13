@@ -4,58 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4B08C52D7C
-	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 13:58:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 147F8C52D7B
+	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 14:29:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4814287E15;
-	Tue, 13 Aug 2024 15:58:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 52D4B8899C;
+	Tue, 13 Aug 2024 16:29:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hifiphile.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1723557486;
-	bh=sD79+uS94atCyDhs5k4gh5/ftptoaOnkWOY5dx9duaU=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=TcOHL4W2xgZfDVTtuHBXiv4aptxaN18SYFetiGwTeL7g5I7P9lxmH8BOMUEV9GnVl
-	 +gyw2u5UDk79kw2DcrUzYAoNPCZYJtxwGxfHdpx7770NNUMXn3j4cznmx+8E6RBRzX
-	 zn22pFABhC5ylcRm/jrbcRkKYerSUcmML3b4fMpFIDnxPn1dqgMdjmG4kBz5e0X3xu
-	 MptdmU0VA7yHayvhlpge1XYM3WPCgs7MVUqwPalTxtnLZ1tg+dUCDgLmXEQ4qiEYZU
-	 URGWy48nXQpPTPNsw8eo6Z4CNuUZJd+KtDu+hn4gN60FBMXBJP0jQqtEeSbqsvAKEL
-	 e2hzg/ZPhOsOQ==
-Received: from [192.168.1.107] (89-186-114-92.pool.digikabel.hu
- [89.186.114.92])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=hifiphile-com.20230601.gappssmtp.com header.i=@hifiphile-com.20230601.gappssmtp.com header.b="0ugWBr7N";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 19ED388842; Tue, 13 Aug 2024 15:39:51 +0200 (CEST)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 3D49887C38;
- Tue, 13 Aug 2024 15:58:04 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1723557484;
- bh=sD79+uS94atCyDhs5k4gh5/ftptoaOnkWOY5dx9duaU=;
- h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
- b=A2FlopJJ6urNl0Ijyn2noEI8i4GcIexRJBfgQMBaRhy/96JNnw3lVyaNvjUBr/Ma3
- uN+HzLaWKmCf0X1GlT8DcFtln62Ypvvd5Q2UfFq9yaOsiEy7kdGAsvQJPNfvBtRQjH
- TfRyo0rQenfAZUxwAhc43XYuZMF4XBanHgdQmlfwHcf6JRy6HH/0LcRLdwYA7+MGGG
- kiZHqTPA3Cm6IaDgiTpTzw8geRr7CAW9iNQc3o2s412W4oa0nMGaXtn5HGu7nAfDfr
- O1lJKEIFqr8tVWRfIi41MaXdLBjvvLIO4eiLlA6v+xc5DdOMgq0nRweYWHcdFgu7ho
- d2qOeXLXSoo7w==
-Message-ID: <36b5a4e3-0848-7275-134b-a0929a1fea27@denx.de>
-Date: Tue, 13 Aug 2024 15:57:08 +0200
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D659A889B4
+ for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 15:39:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=hifiphile.com
+Authentication-Results: phobos.denx.de;
+ spf=none smtp.mailfrom=admin@hifiphile.com
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2ef2d96164aso59788501fa.3
+ for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 06:39:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=hifiphile-com.20230601.gappssmtp.com; s=20230601; t=1723556388; x=1724161188;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ySEvRb6t/tnGlZs0lBaKHXEOdsJU1IT0H18BfIZOGO4=;
+ b=0ugWBr7NbORO1C6dHjzbKJmj5ClmqExTSZaJjcIzaXh/YYh6vZrfrI1UDdZw873REE
+ 4EkUnPxJDTO8deBwhBIiYGEd/f56f79WKi8yDceehIhpnP3mXA0abAdKwGz37RrGb7/J
+ HMwRDJQyUpDcJFAGOd0HXFFxMs7s2IeH7dcc/lwIN1eYTu3sN+9Y5k16C9vKOwG6gU4H
+ seTV/e70P9yOc6O9rg/FG8XOHoocPxIcZSODMVSLJuTilB1FRnJkn6u3POs2C6Jzc0j9
+ 7z8z259135Bw1vnpT6Uj5WLyHz4aWLRrK/wnHSlPxb+Ley0XQzOxKV7ig3o17fVHstZH
+ g4Rw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723556388; x=1724161188;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ySEvRb6t/tnGlZs0lBaKHXEOdsJU1IT0H18BfIZOGO4=;
+ b=lvrwqeU1K4gWn3NeiSgo4rxEGk20W5P0RrnRHfJ5SX0LK2kOfDFY2yv/EXhnH0etXm
+ Lcp2g5syU9dYtZHMrvmZQ0WA/weEYSAtvuanniQzHpw+3IEETrC7HpmYpVss7Yjd9oNi
+ 9KozJXZWpPjvz89SFuzvR+wX3Fb9C3qxgfGQ3ESB7t2NqyYIv43e2S9LQZJlhleiJm9W
+ EFIZyWojM/ry89IEGGutyVOZH1xeXFLmpWjqbSNsnLhpfO1KBE30GWLsNqZ364LyDzpA
+ VTMRZhWNWFM5kJDOPM2yDhTLzIoZwY6oNTBYCVDjKfQqP3sC0zuiKyaMelClKUBCesbm
+ d+kQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWYMzqtbSAfwGTjrgkL4657l49Y7ej94CL3pLPvALBtlA9ICDt0hoCtbEcQKMLjZWlKXoWqYTZdT2EyLjlN1IRNlW/O9A==
+X-Gm-Message-State: AOJu0Yzjymq7lw+zGhA3rpkmmpXDPrfvKMLWQjpZqwgSzDhkECEl+m4W
+ Qmy+NQxUFUKRtEBU71y8f9fh9zatA9lMJ7XOmYufC0NASoX8jiKm88Jj2t2pY/QWKhjDRmZ4xtC
+ WX6WRSMDJIpuJ8/bGltbT+queA70bQIldMAbcUQ==
+X-Google-Smtp-Source: AGHT+IHwfTnluyHBvVbcFFcIcxVJGc8GSiKmj3HsC2WQmPPhQIS5FTtx9NKWCHjJc7s0Dm798yTOzlKlEu0dSbdebdU=
+X-Received: by 2002:a2e:3a03:0:b0:2ef:2f17:9ede with SMTP id
+ 38308e7fff4ca-2f2b727731cmr24096651fa.49.1723556387765; Tue, 13 Aug 2024
+ 06:39:47 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v2] driver: pwm: pwm-imx: fix probing on imx6
-Content-Language: en-US
-To: Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Anatolij Gustschin <agust@denx.de>,
- Tommaso Merciai <tommaso.merciai@amarulasolutions.com>
-References: <20240807155343.122377-1-hs@denx.de>
- <CAOMZO5A23hR6CbLbvUR-ck111iowq=BKrMz_4PHwL4hQsmyxDQ@mail.gmail.com>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <CAOMZO5A23hR6CbLbvUR-ck111iowq=BKrMz_4PHwL4hQsmyxDQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20240802092820.917450-1-admin@hifiphile.com>
+ <87frrgolp3.fsf@baylibre.com>
+ <CA+Gyqeai5OZY96HU7uD0X5tbGVHODo1tOE51RYraMYwcoP2SrA@mail.gmail.com>
+ <87h6bosu6e.fsf@baylibre.com>
+In-Reply-To: <87h6bosu6e.fsf@baylibre.com>
+From: Zixun LI <admin@hifiphile.com>
+Date: Tue, 13 Aug 2024 15:39:35 +0200
+Message-ID: <CA+GyqeZBzMct6nTKQx4k4cyxn8kdoQ69K58WOLdPgtLU_12ciA@mail.gmail.com>
+Subject: Re: [PATCH] usb: gadget: udc: Fix duplicate uclass name
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de, 
+ Jagan Teki <jagan@amarulasolutions.com>, Stefano Babic <sbabic@denx.de>, 
+ Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Tue, 13 Aug 2024 16:29:28 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,83 +93,45 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Fabio, Tom,
+Hi Mattijs,
 
-On 13.08.24 14:27, Fabio Estevam wrote:
-> Hi Heiko,
-> 
-> On Wed, Aug 7, 2024 at 12:53 PM Heiko Schocher <hs@denx.de> wrote:
->>
->> U-Boot 2024.07 drops on aristainetos2 board the following
->> warning:
->>
->>          Failed to enable per_clk
->>
->> and bootlogo is not seen on LVDS display.
->>
->> This patch uses old behaviour for systems without clock framework
->> if CONFIG_CLK is not enabled.
->>
->> Fixes: bfc778cb93a3 ("driver: pwm: pwm-imx: get and enable per/ipg clock using dm")
->>
->> Signed-off-by: Heiko Schocher <hs@denx.de>
->> ---
->>
->> Changes in v2:
->> use CONFIG_IS_ENABLED instead of IS_ENABLED
->> as Anatolij suggested.
-> 
-> This causes build failures:
-> 
-> https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/887503
-> 
-> Please fix and resend.
+On Tue, Aug 13, 2024 at 10:28=E2=80=AFAM Mattijs Korpershoek
+<mkorpershoek@baylibre.com> wrote:
+>
+> Thank you for giving some board examples. I am still a bit unclear on
+> the meaning of:
+>
+> """
+> This breaks the capacity of using "usb" as DT alias sequence numbering
+> which needs a fix afterwards.
+> """
+>
+> I have added Jagan, Stefano, Fabio and the NXP team in CC. Does anyone
+> of you have any concerns with this patch ?
+>
+> If someone could test it, that would be helpful.
 
-Hmm... yes ... I work/worked on aristainetos2 board update for 2024.07
-(or later)  ... and saw this
+The device sequence number is affected by uclass_find_next_free_seq() in
+uclass.c, in this function uclass name is used to determine the number.
 
-   Failed to enable per_clk
+Since the gadget class's name changed to "usb_gadget" from "usb", alias
+binding "usb1 =3D &usbotg;" is not effective anymore. As now it searches fo=
+r
+"usb_gadget1 =3D &usbotg;".
 
-warning when 2024.07 boots ... and bootlogo did not work anymore, as
-backlight is pwm driven on this hardware...
+uclass_find_device_by_seq(UCLASS_USB_GADGET_GENERIC,) would fail as sequenc=
+e
+number is changed.
 
-I bet, for all the boards which fail in the azure run with this patch,
-PWM do not work anymore... because CONFIG_CLK is not enabled for them!
+I made a tentative fix in
+https://lore.kernel.org/u-boot/20240731134257.686017-2-admin@hifiphile.com/
+But Simon doesn't want to modify uclass_driver structure only for gadget
+class.
 
-I am really unhappy, that I have no automated U-Boot runtime tests anymore
-running on real hardware... setup with tbot was very easy, but had no
-time for looking at the bugs poping up...
-
-Hmm... looking in git history, there comes this commit in my eyes:
-
-commit 4eea76574062e9079b6a267229962d6ec0be910a
-Author: Tom Rini <trini@konsulko.com>
-Date:   Sat Nov 19 18:45:18 2022 -0500
-
-     pwm: imx: Remove unused references to CONFIG_IMX6_PWM_PER_CLK
-
-     On platforms that use DM_PWM, we do not need to define this value
-     anymore, so remove it from config files.
-
-     Signed-off-by: Tom Rini <trini@konsulko.com>
-
-which exactly removes for all breaking boards this define...
-
-Should we revert this patch?
-
-I just can say for the aristianetos2 board, that I readded exactly this
-define in my work for the port to currentmainline ... and with my patch,
-pwm and so bootlogo works again ...
-
-bye,
-Heiko
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+Regards,
+Zixun
