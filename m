@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B318EC52D7B
-	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 10:55:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20586C52D7B
+	for <u-boot@archiver.kernel.org>; Tue, 13 Aug 2024 10:56:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1055F88997;
-	Tue, 13 Aug 2024 12:54:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6D9B8889B4;
+	Tue, 13 Aug 2024 12:54:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="p2HelzKW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BwcWyhFi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E001C88747; Tue, 13 Aug 2024 12:54:41 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 3355988747; Tue, 13 Aug 2024 12:54:45 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 861E38800C
- for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 12:54:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAD9E889C3
+ for <u-boot@lists.denx.de>; Tue, 13 Aug 2024 12:54:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47DAsP2B044540;
- Tue, 13 Aug 2024 05:54:25 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47DAsHko099591;
+ Tue, 13 Aug 2024 05:54:17 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1723546465;
- bh=bWNv12nxYuEVFrjFp3cOEMc512RcbPBBHjJumNiiiGk=;
+ s=ti-com-17Q1; t=1723546457;
+ bh=UTM++YMopMqBNgLG932pWwg7E24Nd61P00sK7F2fICA=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=p2HelzKW+R0oj/DxQYVMeAyl2Svlyi27UgqM4PFV9RmfOMeiHeshbf9rKzc1g6HCH
- VU4W7Ptwl6YTy/53PZY2ek0hWQxBQH3eerFTdItgN/eINbakR+DF1fXKO6KqaS7e2W
- HVGRT/uwWId7ypLWYkzxTvOxnLT71ZhioxIDpy8A=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47DAsPtm039482
+ b=BwcWyhFiIRhTuvCUBTVw2642HCDFfLUtdaRd6teMyZMawKdtR5pfnH1bGHVhhKjx7
+ YOMljRKrhVoEdZivij7H4ijQHT7tQtBRTa6Rsy1uib6A51bSZ2tukoyxZ8ARQeqR62
+ 2I7qWKM5jS2KQJ5HvbELcT42awJTo0WQMrE9GapI=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47DAsH5I071823
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 13 Aug 2024 05:54:25 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 13 Aug 2024 05:54:17 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 13
- Aug 2024 05:54:24 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2024 05:54:17 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 13 Aug 2024 05:54:24 -0500
+ Frontend Transport; Tue, 13 Aug 2024 05:54:17 -0500
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47DAsOIg120996;
- Tue, 13 Aug 2024 05:54:24 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47DAsGl3075547;
+ Tue, 13 Aug 2024 05:54:17 -0500
 From: Chintan Vankar <c-vankar@ti.com>
 To: Michal Simek <michal.simek@amd.com>, =?UTF-8?q?Marek=20Beh=C3=BAn?=
  <kabel@kernel.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>, "Neha
@@ -66,12 +66,12 @@ To: Michal Simek <michal.simek@amd.com>, =?UTF-8?q?Marek=20Beh=C3=BAn?=
  <d-gole@ti.com>, Francesco Dolcini <francesco.dolcini@toradex.com>,
  "Nishanth Menon" <nm@ti.com>, Sumit Garg <sumit.garg@linaro.org>, Tom Rini
  <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Chintan Vankar <c-vankar@ti.com>, "Vignesh
- Raghavendra" <vigneshr@ti.com>
-Subject: [PATCH v5 10/10] arm64: dts: ti: k3-am62x-sk-common: Add bootph-all
- property in phy_gmii_sel node
-Date: Tue, 13 Aug 2024 16:24:00 +0530
-Message-ID: <20240813105400.4054657-11-c-vankar@ti.com>
+CC: <u-boot@lists.denx.de>, Kishon Vijay Abraham I <kishon@ti.com>, "Chintan
+ Vankar" <c-vankar@ti.com>
+Subject: [PATCH v5 05/10] dma: ti: k3-udma: Add support for native
+ configuration of chan/flow
+Date: Tue, 13 Aug 2024 16:23:55 +0530
+Message-ID: <20240813105400.4054657-6-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240813105400.4054657-1-c-vankar@ti.com>
 References: <20240813105400.4054657-1-c-vankar@ti.com>
@@ -95,43 +95,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add missing bootph-all property for CPSW MAC's PHY node
-phy_gmii_sel.
+From: Kishon Vijay Abraham I <kishon@ti.com>
 
+In absence of Device Manager (DM) services such as at R5 SPL stage,
+driver will have to natively setup TCHAN/RCHAN/RFLOW cfg registers.
+Existing UDMA driver performed the above mentioned configuration
+for UDMA. Add similar configuration for PKTDMA here.
+
+Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
+Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 Signed-off-by: Chintan Vankar <c-vankar@ti.com>
-Link: https://lore.kernel.org/r/20240430085048.3143665-1-c-vankar@ti.com
-Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
-
-[ upstream commit: ba50141137fae205a731005e70687f4a52289050 ]
-
-(cherry picked from commit 2bdd1743a9f6515efe7c3648a25d63b4a9ce4a10)
 ---
 
 Link to v4:
-https://lore.kernel.org/r/20240812114945.3844224-1-c-vankar@ti.com/
+https://lore.kernel.org/r/20240812114842.3843676-1-c-vankar@ti.com/
 
 Changes from v4 to v5:
-- Updated this patch with the cherry picked patch from
-  devicetree-rebasing repo as pointed out by Sumit.
+- No Changes.
 
- dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi | 4 ++++
- 1 file changed, 4 insertions(+)
+ drivers/dma/ti/k3-udma.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi b/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
-index 3c45782ab2b..96378b19c41 100644
---- a/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
-+++ b/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
-@@ -128,6 +128,10 @@
- 	};
- };
+diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
+index b7e674f2186..e23d09e6b81 100644
+--- a/drivers/dma/ti/k3-udma.c
++++ b/drivers/dma/ti/k3-udma.c
+@@ -2118,6 +2118,9 @@ static int bcdma_tisci_tx_channel_config(struct udma_chan *uc)
+ 	if (ret)
+ 		dev_err(ud->dev, "tchan%d cfg failed %d\n", tchan->id, ret);
  
-+&phy_gmii_sel {
-+	bootph-all;
-+};
++	if (IS_ENABLED(CONFIG_K3_DM_FW))
++		udma_alloc_tchan_raw(uc);
 +
- &main_pmx0 {
- 	/* First pad number is ALW package and second is AMC package */
- 	main_uart0_pins_default: main-uart0-default-pins {
+ 	return ret;
+ }
+ 
+@@ -2166,6 +2169,9 @@ static int pktdma_tisci_rx_channel_config(struct udma_chan *uc)
+ 		dev_err(ud->dev, "flow%d config failed: %d\n", uc->rflow->id,
+ 			ret);
+ 
++	if (IS_ENABLED(CONFIG_K3_DM_FW))
++		udma_alloc_rchan_raw(uc);
++
+ 	return ret;
+ }
+ 
 -- 
 2.34.1
 
