@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96350C3DA4A
-	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 11:03:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB9ADC52D7B
+	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 11:03:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0227288A54;
-	Wed, 14 Aug 2024 13:02:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 98B9788A37;
+	Wed, 14 Aug 2024 13:02:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2284488A64; Wed, 14 Aug 2024 13:02:04 +0200 (CEST)
+ id 9E64A88A35; Wed, 14 Aug 2024 13:02:16 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 8B13C88A54
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 13:01:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id AB56588A37
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 13:02:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F01C3DA7;
- Wed, 14 Aug 2024 04:02:23 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 12DC8DA7;
+ Wed, 14 Aug 2024 04:02:34 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7BE563F58B;
- Wed, 14 Aug 2024 04:01:53 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 93CC73F58B;
+ Wed, 14 Aug 2024 04:02:03 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -40,10 +40,10 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 17/32] lmb: init: initialise the lmb data structures during
- board init
-Date: Wed, 14 Aug 2024 16:29:54 +0530
-Message-Id: <20240814110009.45310-18-sughosh.ganu@linaro.org>
+Subject: [PATCH v2 19/32] sandbox: move the TCG event log to the start of ram
+ memory
+Date: Wed, 14 Aug 2024 16:29:56 +0530
+Message-Id: <20240814110009.45310-20-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240814110009.45310-1-sughosh.ganu@linaro.org>
 References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
@@ -65,78 +65,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The memory map maintained by the LMB module is now persistent and
-global. This memory map is being maintained through the alloced list
-structure which can be extended at runtime -- there is one list for
-the available memory, and one for the used memory. Allocate and
-initialise these lists during the board init.
+The TCG event log buffer is being set at the end of ram memory. This
+region of memory is to be reserved as LMB_NOMAP memory in the LMB
+memory map. The current location of this buffer overlaps with the
+memory region reserved for the U-Boot image, which is at the top of
+the usable memory. This worked earlier as the LMB memory map was not
+global but caller specific, but fails now because of the overlap.
+
+Move the TCG event log buffer to the start of the ram memory region
+instead. Move the location of the bloblist address up by 8KB to
+accomodate the event log buffer, and update the sandbox memory map
+specified in the documentation accordingly.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 Changes since V1:
-* Move the initr_lmb() function to board_r.c
-* Call lmb_init() from spl.c instead of initr_lmb().
+* Rejig the memory map to have the event log at 0xb000 and bloblist at
+  0xd000.
+* Update the memory map in the document accordingly.
 
- common/board_r.c | 17 +++++++++++++++++
- common/spl/spl.c |  3 +++
- 2 files changed, 20 insertions(+)
 
-diff --git a/common/board_r.c b/common/board_r.c
-index f445803d7a..0943ed3d01 100644
---- a/common/board_r.c
-+++ b/common/board_r.c
-@@ -22,6 +22,7 @@
- #include <hang.h>
- #include <image.h>
- #include <irq_func.h>
-+#include <lmb.h>
- #include <log.h>
- #include <net.h>
- #include <asm/cache.h>
-@@ -510,6 +511,21 @@ int initr_mem(void)
- }
- #endif
+ arch/sandbox/dts/test.dts    | 2 +-
+ common/Kconfig               | 2 +-
+ doc/arch/sandbox/sandbox.rst | 3 ++-
+ test/lib/kconfig.c           | 4 ++--
+ 4 files changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index 5fb5eac862..76a9bc3b01 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -78,7 +78,7 @@
  
-+static int initr_lmb(void)
-+{
-+#if CONFIG_IS_ENABLED(LMB)
-+	int ret;
-+
-+	ret = lmb_init();
-+	if (ret)
-+		printf("Unable to initialise the LMB data structures\n");
-+
-+	return ret;
-+#else
-+	return 0;
-+#endif
-+}
-+
- static int dm_announce(void)
- {
- 	int device_count;
-@@ -612,6 +628,7 @@ static init_fnc_t init_sequence_r[] = {
- #ifdef CONFIG_CLOCKS
- 	set_cpu_clk_info, /* Setup clock information */
- #endif
-+	initr_lmb,
- #ifdef CONFIG_EFI_LOADER
- 	efi_memory_init,
- #endif
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index d6a364de6e..4102e25115 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -723,6 +723,9 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 	    IS_ENABLED(CONFIG_SPL_ATF))
- 		dram_init_banksize();
+ 		event_log: tcg_event_log {
+ 			no-map;
+-			reg = <(CFG_SYS_SDRAM_SIZE - 0x2000) 0x2000>;
++			reg = <(CFG_SYS_SDRAM_BASE + 0xb000) 0x2000>;
+ 		};
+ 	};
  
-+	if (IS_ENABLED(CONFIG_SPL_LMB))
-+		lmb_init();
-+
- 	if (CONFIG_IS_ENABLED(PCI) && !(gd->flags & GD_FLG_DM_DEAD)) {
- 		ret = pci_init();
- 		if (ret)
+diff --git a/common/Kconfig b/common/Kconfig
+index 83c81edac2..7762dd216b 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -1054,7 +1054,7 @@ endchoice
+ 
+ config BLOBLIST_ADDR
+ 	hex "Address of bloblist"
+-	default 0xb000 if SANDBOX
++	default 0xd000 if SANDBOX
+ 	depends on BLOBLIST_FIXED
+ 	help
+ 	  Sets the address of the bloblist, set up by the first part of U-Boot
+diff --git a/doc/arch/sandbox/sandbox.rst b/doc/arch/sandbox/sandbox.rst
+index 5f8db12665..698634a65f 100644
+--- a/doc/arch/sandbox/sandbox.rst
++++ b/doc/arch/sandbox/sandbox.rst
+@@ -659,7 +659,8 @@ that are mapped into that memory:
+ Addr      Config                     Usage
+ =======   ========================   ===============================
+     100   CONFIG_SYS_FDT_LOAD_ADDR   Device tree
+-   b000   CONFIG_BLOBLIST_ADDR       Blob list
++   b000   TCG Event log              TCG Event Log
++   d000   CONFIG_BLOBLIST_ADDR       Blob list
+   10000   CFG_MALLOC_F_ADDR          Early memory allocation
+   f0000   CONFIG_PRE_CON_BUF_ADDR    Pre-console buffer
+  100000   CONFIG_TRACE_EARLY_ADDR    Early trace buffer (if enabled). Also used
+diff --git a/test/lib/kconfig.c b/test/lib/kconfig.c
+index 0c463bb794..a3fc56a9ec 100644
+--- a/test/lib/kconfig.c
++++ b/test/lib/kconfig.c
+@@ -21,9 +21,9 @@ static int lib_test_is_enabled(struct unit_test_state *uts)
+ 	ut_asserteq(0, CONFIG_IS_ENABLED(OF_PLATDATA));
+ 	ut_asserteq(0, CONFIG_IS_ENABLED(_UNDEFINED));
+ 
+-	ut_asserteq(0xb000,
++	ut_asserteq(0xd000,
+ 		    IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED, CONFIG_BLOBLIST_ADDR));
+-	ut_asserteq(0xb000,
++	ut_asserteq(0xd000,
+ 		    CONFIG_IF_ENABLED_INT(BLOBLIST_FIXED, BLOBLIST_ADDR));
+ 
+ 	/*
 -- 
 2.34.1
 
