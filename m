@@ -4,88 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDB96C52D7B
-	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 13:06:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0267C52D7B
+	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 13:08:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59CC1889D3;
-	Wed, 14 Aug 2024 15:06:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 06AA1889AA;
+	Wed, 14 Aug 2024 15:08:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MGDI2irM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ByUUk0Nm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E94D0889D3; Wed, 14 Aug 2024 15:06:27 +0200 (CEST)
-Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
- [IPv6:2607:f8b0:4864:20::52f])
+ id 9CFA4889BA; Wed, 14 Aug 2024 15:08:04 +0200 (CEST)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BB09889A1
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 15:06:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5762188440
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 15:07:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yasuharu.shibata@gmail.com
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-7a1be7b7bb5so4763487a12.0
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 06:06:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-201d9fa899dso5054655ad.3
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 06:07:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723640784; x=1724245584; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Xf/vhQX3boRCxnuV4kqUjOFfFPhNe1v6FX4m5nBA4XM=;
- b=MGDI2irM9UYvS0B4n+3JTUkWmFIVVgbeKZJNEIZyJGWs9svpFRSZPsqaCg+9fBRErx
- q7qYy9m7uFNUxw5Y+2BdGcX8LoUV4KW+xDPo3JOdpqFYkCrqeHubsvuA2a17Ldo9CwVm
- EjV/T+cGf7jHYvbBBGspZmQeY8mcFsMeFlSDrMamQ1Wfe7bTdYFW8LSGEcXJvyFJPb1p
- s1b7IVtb7BhR0NrVJCbHiGDOrF76X+DvHtbXPU/8lq/W0w8GH83KyBAiKc8C2Nn137Ht
- zVPdMe5vJzhKSfeSVd6mJoTIikeCd5CeyZlJ4kkFNpH0HHgEjTxre0pyeN0/83+u2G1O
- 2gZA==
+ d=linaro.org; s=google; t=1723640876; x=1724245676; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Tqzz/MXTicnfg3HXbk9UoEx/RQ5hD8b1cwjdd12Sd8c=;
+ b=ByUUk0Nma0L2gTFLZTGZ7/Ki2fVAllzGeAVRTnMf4gvbwWuiaKnHljX3gfdWxZNDHx
+ oAo/lOVPg3QWNytFB7JG14ZfBupJS4Rr97QBZmA/ri7cCVpgL+NJAP6yCuDsQujASdBa
+ 8vcBzXtlnyApQGTvA9Fv7ygnTX3mIJOSOU1V/xVt9YATcuoz3wJrbUToJ7SrJBIi7R6Q
+ 6UF5GbzNdIIqFs4NRz4LWw2cPr0Wa0QuTBb9FUKhmEEGrOUlpAp7/C2T5RXqvkjgCGZU
+ sgI+eFTeRX8O3Ts4ZXSgFFX/O1fU7wZ5TAY9l/2g7XqYyBZOhc0LYkkYVSas96bzZ/PG
+ S8VA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723640784; x=1724245584;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Xf/vhQX3boRCxnuV4kqUjOFfFPhNe1v6FX4m5nBA4XM=;
- b=VTSZ5sYoUG3D9ADK6jR7fiJfaq+76e+XunIb2gYNxp2ofGDO220NyK+xKjb8Co4x1Y
- xXoc+a3LsLbcyV7cMsnhpbjI2CtabaEuNM3ZlFV3prJNhuxFKKz2wXRzB3pO8j74O8TB
- KH29GTI89QbXxtgEt42esG0y8C2UEH0MFJBBF5pBBLM2stS0CgOj8ShB1PA30h044rTM
- 7F7TBlbctUFKsv0ckwkW4DkC+ZTv/MhzOBdZM23UL/szT7CQDpLUnd8MzuplqVT9usBW
- gPD3CoONqiv1aVeFsfuqXI3pXewEuC7rYA80dnNlXw9okjnleMLhuOOIi9rc6tsGaFwt
- sflw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXB5gaAIMem7dJhHNos00x51DScLSS5tOj9nZnWmhdLCjrVNd+ARN3MXvUWs3VWqLMHYKSLeZiBZQs7vL8meHj4SRYGzw==
-X-Gm-Message-State: AOJu0YyOVQJuiQmxrraA1f9R3DkOEnR/C8k/mVQLr0BPDnlqb8wa5jGs
- liDZTtTlgqQ6zU4+OEQeazSIM+gBjfe44stwDC9kc4v3igOQnBPdsjib3x3JELMrquDm2q3zrhn
- /3Pjv/lOgVxeYCzENLm3mwBKVwIWnZA==
-X-Google-Smtp-Source: AGHT+IH6skKsup5nmnuKD2aWzl429IQBeSjMUUL5K4Ss/xeVCH0J0Yi7a8rld8QIdKMRTbdeLhwfZrUBsEIdbWMYBgU=
-X-Received: by 2002:a17:90b:4b03:b0:2cd:40ef:4764 with SMTP id
- 98e67ed59e1d1-2d3aaa99492mr3185392a91.17.1723640783527; Wed, 14 Aug 2024
- 06:06:23 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1723640876; x=1724245676;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Tqzz/MXTicnfg3HXbk9UoEx/RQ5hD8b1cwjdd12Sd8c=;
+ b=NoFVT0efYrZz4a3ELcWbQZKZJ5/Fm5QyEgim0eFCGxyeqdJ8xi53xAfdUQDM9a+iyS
+ xMD3nl1BBry0xs0hHi75+d/UrQG7EC9OnaK3/kFdDRTPjepxt0MSm+Li552Gk9adI3Nc
+ 7nGvk6OhKy8FX9W2X+EeoZ1bbQVpzms8CVKrJ7NXG472ktiCLhuZit/KkMyflzBpnuhh
+ qEWo0T6oOUwAgaXBGlhDKZkXviGehWFVVuWJRhlw9wUc2NX3wD+39vD8T8Kcxpub3YCL
+ PYoWKqLgWVFeNmGMzgR/jGI35Y43AxoWadaWIjx2yLErqBi7ZOxsmdyHhcCqS/kMHZLl
+ Rz5w==
+X-Gm-Message-State: AOJu0YwJWeAglvEzuIRJmqtZrpq7vpFH7wpNMUAFbgMqM5KhZ5JeBzKC
+ 70PlMcULz76vy3cmA5HqL7kZL7V+6CQyGPidJch36Fmvc7ohP6iKcUyt0+e7HWk9xREfZuEh5n0
+ iNBo1qmsFV+PJ4Xzm5ufx/qCB+hbSbbp5Apd6Gg==
+X-Google-Smtp-Source: AGHT+IET6VOYf8qZbj7ijOFp+HK+7+yxKC58jbywvz4ccLJJof4ROAat2LgVHp1o8Smi3etm1oVnfxMOsoWjCy3s4xs=
+X-Received: by 2002:a17:903:1251:b0:1fb:2bed:6418 with SMTP id
+ d9443c01a7336-201d651aa0dmr36695465ad.57.1723640875449; Wed, 14 Aug 2024
+ 06:07:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240810205205.3403177-1-sjg@chromium.org>
- <20240810205205.3403177-8-sjg@chromium.org>
- <CALu9rSbrAcxkGkFHuiFSBd-JMTm0kfEwDuBCDNYZc33eTLVU9w@mail.gmail.com>
- <CAFLszTjujOXs39KMnV-5NNWNqJ8K+FoisPYB=1HmC5QHf671ag@mail.gmail.com>
- <20240812184615.GI1626301@bill-the-cat>
- <CALu9rSbXMhGkyz5qw7nbCjdP3YuDKEZFR1SpRG0CHcYeQ7-OrA@mail.gmail.com>
- <CAFLszTj0GtiXq6m8Y+SQzH8zhkyp72oU0UMrt5o3RFAhWpMa6Q@mail.gmail.com>
- <CAFLszTiSS09fzS_SEwQap+0xO2Ls7+9c9udCWCmg6jkacWQrAw@mail.gmail.com>
-In-Reply-To: <CAFLszTiSS09fzS_SEwQap+0xO2Ls7+9c9udCWCmg6jkacWQrAw@mail.gmail.com>
-From: Yasuharu Shibata <yasuharu.shibata@gmail.com>
-Date: Wed, 14 Aug 2024 22:05:00 +0900
-Message-ID: <CALu9rSaW6jF-LeuF0Z2n713gZ+st2xBi7OrCqkJQGo=8OELczw@mail.gmail.com>
-Subject: Re: [PATCH 07/21] Revert "net: wget: Support retransmission a dropped
- packet"
+References: <20240801173637.1071068-1-sjg@chromium.org>
+ <20240801173637.1071068-3-sjg@chromium.org>
+ <CAC_iWj+6CqPCxN8jSNJSzGiprd+sAw25ooQRaAf=t=Sdio67=A@mail.gmail.com>
+ <CAFLszThVpvHO8Jt2Mz1WB80=fDtYpzieo1eR4k2Jj=e37Gb87g@mail.gmail.com>
+In-Reply-To: <CAFLszThVpvHO8Jt2Mz1WB80=fDtYpzieo1eR4k2Jj=e37Gb87g@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 14 Aug 2024 16:07:19 +0300
+Message-ID: <CAC_iWjJJFygaws2ciBDMT=JJ4yMzhQC41T_Tg1RKFvrxzRTTyw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/3] efi: Convert device_path allocation to use malloc()
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Marek Vasut <marex@denx.de>, Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Richard Weinberger <richard@nod.at>, 
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,229 +90,221 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Simon,
+Hi Simon
 
-Thank you for checking my patch.
-I sent patch series including enabling wget command for sandbox.
-
-https://lore.kernel.org/u-boot/20240814124108.2885-1-yasuharu.shibata@gmail=
-.com/T/#u
-
-Best regards,
-Yasuharu Shibata
-
-
-On Wed, 14 Aug 2024 at 00:12, Simon Glass <sjg@chromium.org> wrote:
+On Wed, 14 Aug 2024 at 15:40, Simon Glass <sjg@chromium.org> wrote:
 >
-> Hi Yasuharu,
+> Hi Ilias,
 >
->
-> On Tue, 13 Aug 2024 at 06:20, Simon Glass <sjg@chromium.org> wrote:
+> On Wed, 14 Aug 2024 at 05:03, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
 > >
-> > Hi Yasuharu,
+> > Hi Simon,
 > >
-> > On Mon, 12 Aug 2024 at 21:50, Yasuharu Shibata
-> > <yasuharu.shibata@gmail.com> wrote:
+> > On Thu, 1 Aug 2024 at 20:36, Simon Glass <sjg@chromium.org> wrote:
 > > >
-> > > Dear Simon and Tom,
+> > > Currently this calls efi_alloc() which reserves a page for each
+> > > allocation and this can overwrite memory that will be used for reading
+> > > images.
 > > >
-> > > Thank you for your details of the test and your advice.
-> > > The test has a problem that tcp_ack isn't calculated by the received =
-data size.
-> > > sb_ack_handler() in test/cmd/wget.c, tcp_send->tcp_ack calculated by
-> > > following code:
+> > > Switch the code to use malloc(), as with other parts of EFI, such as
+> > > efi_add_protocol().
 > > >
-> > >     tcp_send->tcp_seq =3D htonl(ntohl(tcp->tcp_ack));
-> > >     tcp_send->tcp_ack =3D htonl(ntohl(tcp->tcp_seq) + 1);
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
 > > >
-> > > tcp_ack needs to be calculated by the received TCP payload size.
-> > >
-> > > Also, wget command may have a problem that
-> > > HTTP response from server must be divided into more than two packets.
-> > > wget command receive packets and change internal state in
-> > > wget_handler() as follows:
-> > >
-> > > 1. When current_wget_state is WGET_CONNECTED,
-> > >     wget_handler() calls wget_connected().
-> > >     It receives HTTP response and moves WGET_TRANSFERRING.
-> > > 2. When current_wget_state is WGET_TRANSFERRING
-> > >     and wget_tcp_state is TCP_ESTABLISHED,
-> > >     wget_handler() receives HTTP response and
-> > >     wget_loop_state sets NETLOOP_SUCCESS.
-> > > 3. When current_wget_state is WGET_TRANSFERRING
-> > >     and wget_tcp_state is TCP_CLOSE_WAIT,
-> > >     call net_set_state with wget_loop_state.
-> > >
-> > > If there are more than two HTTP response packets,
-> > > wget executes in the order 1 -> 2 -> 3 and terminates properly.
-> > > If there is only one HTTP response packet, wget executes in the order=
- 1 -> 3,
-> > > wget_loop_state remains NETLOOP_CONTINUE and wget doesn't terminate
-> > > successfully.
-> > >
-> > > I wrote the patch at the end of this mail.
-> > > The wget issue is temporarily fixed on the test side.
-> > > This may need to be fixed on the wget side in the future.
-> > > In addition, I fixed the HTTP response returned at the correct timing=
-.
-> > > If the patch is OK, I will send format-patch.
+> > > (no changes since v1)
 > >
-> > Thank you for looking at this and for all the info. Yes, the patch
-> > looks good to me.
+> > What about https://lore.kernel.org/u-boot/CAFLszTjLAKaYK_jLXJ7Z571L-QMtoiqE-oxHCRs186dZ2Qok5g@mail.gmail.com/
+> > ?
 >
-> Also, would you mind adding a patch to enable the command for sandbox,
-> so the test runs in CI?
+> Yes, I reordered the patches in this series.
+
+You don't need to reorder them. As Heinrich already pointed out some
+of these functions are used in EFI protocols. e.g
+duplicate_device_path() requires the memory to be allocated by EFI
+memory services, you can't just replace it with malloc.
+
+Thanks
+/Ilias
 >
-> Thanks,
+> Regards,
 > Simon
 >
+>
 > >
-> > Regards,
-> > Simon
-> >
+> > Thanks
+> > /Ilias
 > > >
-> > > Best regards,
-> > > Yasuharu Shibata
+> > >  lib/efi_loader/efi_device_path.c         | 43 ++++++++++++------------
+> > >  lib/efi_loader/efi_device_path_to_text.c |  2 +-
+> > >  2 files changed, 22 insertions(+), 23 deletions(-)
 > > >
-> > > =E2=80=94
-> > > diff --git a/test/cmd/wget.c b/test/cmd/wget.c
-> > > index 356a4dcd8f..32542cdfe2 100644
-> > > --- a/test/cmd/wget.c
-> > > +++ b/test/cmd/wget.c
-> > > @@ -26,6 +26,8 @@
-> > >  #define SHIFT_TO_TCPHDRLEN_FIELD(x) ((x) << 4)
-> > >  #define LEN_B_TO_DW(x) ((x) >> 2)
+> > > diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
+> > > index 0f684590f22..47038e8e585 100644
+> > > --- a/lib/efi_loader/efi_device_path.c
+> > > +++ b/lib/efi_loader/efi_device_path.c
+> > > @@ -262,7 +262,7 @@ struct efi_device_path *efi_dp_dup(const struct efi_device_path *dp)
+> > >         if (!dp)
+> > >                 return NULL;
 > > >
-> > > +int net_set_ack_options(union tcp_build_pkt *b);
-> > > +
-> > >  static int sb_arp_handler(struct udevice *dev, void *packet,
-> > >                           unsigned int len)
+> > > -       ndp = efi_alloc(sz);
+> > > +       ndp = malloc(sz);
+> > >         if (!ndp)
+> > >                 return NULL;
+> > >         memcpy(ndp, dp, sz);
+> > > @@ -315,7 +315,7 @@ efi_device_path *efi_dp_concat(const struct efi_device_path *dp1,
+> > >                         end_size = 2 * sizeof(END);
+> > >                 else
+> > >                         end_size = sizeof(END);
+> > > -               p = efi_alloc(sz1 + sz2 + end_size);
+> > > +               p = malloc(sz1 + sz2 + end_size);
+> > >                 if (!p)
+> > >                         return NULL;
+> > >                 ret = p;
+> > > @@ -347,7 +347,7 @@ struct efi_device_path *efi_dp_append_node(const struct efi_device_path *dp,
+> > >                 ret = efi_dp_dup(dp);
+> > >         } else if (!dp) {
+> > >                 size_t sz = node->length;
+> > > -               void *p = efi_alloc(sz + sizeof(END));
+> > > +               void *p = malloc(sz + sizeof(END));
+> > >                 if (!p)
+> > >                         return NULL;
+> > >                 memcpy(p, node, sz);
+> > > @@ -356,7 +356,7 @@ struct efi_device_path *efi_dp_append_node(const struct efi_device_path *dp,
+> > >         } else {
+> > >                 /* both dp and node are non-null */
+> > >                 size_t sz = efi_dp_size(dp);
+> > > -               void *p = efi_alloc(sz + node->length + sizeof(END));
+> > > +               void *p = malloc(sz + node->length + sizeof(END));
+> > >                 if (!p)
+> > >                         return NULL;
+> > >                 memcpy(p, dp, sz);
+> > > @@ -377,7 +377,7 @@ struct efi_device_path *efi_dp_create_device_node(const u8 type,
+> > >         if (length < sizeof(struct efi_device_path))
+> > >                 return NULL;
+> > >
+> > > -       ret = efi_alloc(length);
+> > > +       ret = malloc(length);
+> > >         if (!ret)
+> > >                 return ret;
+> > >         ret->type = type;
+> > > @@ -399,7 +399,7 @@ struct efi_device_path *efi_dp_append_instance(
+> > >                 return efi_dp_dup(dpi);
+> > >         sz = efi_dp_size(dp);
+> > >         szi = efi_dp_instance_size(dpi);
+> > > -       p = efi_alloc(sz + szi + 2 * sizeof(END));
+> > > +       p = malloc(sz + szi + 2 * sizeof(END));
+> > >         if (!p)
+> > >                 return NULL;
+> > >         ret = p;
+> > > @@ -424,7 +424,7 @@ struct efi_device_path *efi_dp_get_next_instance(struct efi_device_path **dp,
+> > >         if (!dp || !*dp)
+> > >                 return NULL;
+> > >         sz = efi_dp_instance_size(*dp);
+> > > -       p = efi_alloc(sz + sizeof(END));
+> > > +       p = malloc(sz + sizeof(END));
+> > >         if (!p)
+> > >                 return NULL;
+> > >         memcpy(p, *dp, sz + sizeof(END));
+> > > @@ -825,11 +825,11 @@ struct efi_device_path *efi_dp_from_part(struct blk_desc *desc, int part)
 > > >  {
-> > > @@ -105,6 +107,10 @@ static int sb_ack_handler(struct udevice *dev,
-> > > void *packet,
-> > >         const char *payload1 =3D "HTTP/1.1 200 OK\r\n"
-> > >                 "Content-Length: 30\r\n\r\n\r\n"
-> > >                 "<html><body>Hi</body></html>\r\n";
-> > > +       union tcp_build_pkt *b =3D (union tcp_build_pkt *)tcp;
-> > > +       const int recv_payload_len =3D len - net_set_ack_options(b) -
-> > > IP_HDR_SIZE - ETHER_HDR_SIZE;
-> > > +       static int next_seq =3D 0;
-> > > +       const int bottom_payload_len =3D 10;
+> > >         void *buf, *start;
 > > >
-> > >         /* Don't allow the buffer to overrun */
-> > >         if (priv->recv_packets >=3D PKTBUFSRX)
-> > > @@ -119,13 +125,31 @@ static int sb_ack_handler(struct udevice *dev,
-> > > void *packet,
-> > >         tcp_send->tcp_dst =3D tcp->tcp_src;
-> > >         data =3D (void *)tcp_send + IP_TCP_HDR_SIZE;
+> > > -       start = buf = efi_alloc(dp_part_size(desc, part) + sizeof(END));
+> > > -       if (!buf)
+> > > +       start = malloc(dp_part_size(desc, part) + sizeof(END));
+> > > +       if (!start)
+> > >                 return NULL;
 > > >
-> > > -       if (ntohl(tcp->tcp_seq) =3D=3D 1 && ntohl(tcp->tcp_ack) =3D=
-=3D 1) {
-> > > +       if (ntohl(tcp->tcp_seq) =3D=3D 1 && ntohl(tcp->tcp_ack) =3D=
-=3D 1 &&
-> > > recv_payload_len =3D=3D 0) {
-> > > +               // ignore ACK for three-way handshaking
-> > > +               return 0;
-> > > +       } else if (ntohl(tcp->tcp_seq) =3D=3D 1 && ntohl(tcp->tcp_ack=
-) =3D=3D 1) {
-> > > +               // recv HTTP request message and reply top half data
-> > >                 tcp_send->tcp_seq =3D htonl(ntohl(tcp->tcp_ack));
-> > > -               tcp_send->tcp_ack =3D htonl(ntohl(tcp->tcp_seq) + 1);
-> > > -               payload_len =3D strlen(payload1);
-> > > +               tcp_send->tcp_ack =3D htonl(ntohl(tcp->tcp_seq) +
-> > > recv_payload_len);
-> > > +
-> > > +               payload_len =3D strlen(payload1) - bottom_payload_len=
-;
-> > >                 memcpy(data, payload1, payload_len);
-> > >                 tcp_send->tcp_flags =3D TCP_ACK;
-> > > -       } else if (ntohl(tcp->tcp_seq) =3D=3D 2) {
-> > > +
-> > > +               next_seq =3D ntohl(tcp_send->tcp_seq) + payload_len;
-> > > +       } else if (ntohl(tcp->tcp_ack) =3D=3D next_seq) {
-> > > +               // reply bottom half data
-> > > +               const int top_payload_len =3D strlen(payload1) -
-> > > bottom_payload_len;
-> > > +
-> > > +               tcp_send->tcp_seq =3D htonl(next_seq);
-> > > +               tcp_send->tcp_ack =3D htonl(ntohl(tcp->tcp_seq) +
-> > > recv_payload_len);
-> > > +
-> > > +               payload_len =3D bottom_payload_len;
-> > > +               memcpy(data, payload1 + top_payload_len, payload_len)=
-;
-> > > +               tcp_send->tcp_flags =3D TCP_ACK;
-> > > +       } else {
-> > > +               // close connection
-> > >                 tcp_send->tcp_seq =3D htonl(ntohl(tcp->tcp_ack));
-> > >                 tcp_send->tcp_ack =3D htonl(ntohl(tcp->tcp_seq) + 1);
-> > >                 payload_len =3D 0;
-> > > @@ -148,11 +172,9 @@ static int sb_ack_handler(struct udevice *dev,
-> > > void *packet,
-> > >                           pkt_len,
-> > >                           IPPROTO_TCP);
+> > > -       buf = dp_part_fill(buf, desc, part);
+> > > +       buf = dp_part_fill(start, desc, part);
 > > >
-> > > -       if (ntohl(tcp->tcp_seq) =3D=3D 1 || ntohl(tcp->tcp_seq) =3D=
-=3D 2) {
-> > > -               priv->recv_packet_length[priv->recv_packets] =3D
-> > > -                       ETHER_HDR_SIZE + IP_TCP_HDR_SIZE + payload_le=
-n;
-> > > -               ++priv->recv_packets;
-> > > -       }
-> > > +       priv->recv_packet_length[priv->recv_packets] =3D
-> > > +               ETHER_HDR_SIZE + IP_TCP_HDR_SIZE + payload_len;
-> > > +       ++priv->recv_packets;
+> > >         *((struct efi_device_path *)buf) = END;
 > > >
-> > >         return 0;
+> > > @@ -852,7 +852,7 @@ struct efi_device_path *efi_dp_part_node(struct blk_desc *desc, int part)
+> > >                 dpsize = sizeof(struct efi_device_path_cdrom_path);
+> > >         else
+> > >                 dpsize = sizeof(struct efi_device_path_hard_drive_path);
+> > > -       buf = efi_alloc(dpsize);
+> > > +       buf = malloc(dpsize);
 > > >
+> > >         if (buf)
+> > >                 dp_part_node(buf, desc, part);
+> > > @@ -912,7 +912,7 @@ struct efi_device_path *efi_dp_from_file(const struct efi_device_path *dp,
+> > >         if (fpsize > U16_MAX)
+> > >                 return NULL;
 > > >
+> > > -       buf = efi_alloc(dpsize + fpsize + sizeof(END));
+> > > +       buf = malloc(dpsize + fpsize + sizeof(END));
+> > >         if (!buf)
+> > >                 return NULL;
+> > >
+> > > @@ -940,7 +940,7 @@ struct efi_device_path *efi_dp_from_uart(void)
+> > >         struct efi_device_path_uart *uart;
+> > >         size_t dpsize = dp_size(dm_root()) + sizeof(*uart) + sizeof(END);
+> > >
+> > > -       buf = efi_alloc(dpsize);
+> > > +       buf = malloc(dpsize);
+> > >         if (!buf)
+> > >                 return NULL;
+> > >         pos = dp_fill(buf, dm_root());
+> > > @@ -963,11 +963,11 @@ struct efi_device_path __maybe_unused *efi_dp_from_eth(void)
+> > >
+> > >         dpsize += dp_size(eth_get_dev());
+> > >
+> > > -       start = buf = efi_alloc(dpsize + sizeof(END));
+> > > -       if (!buf)
+> > > +       start = malloc(dpsize + sizeof(END));
+> > > +       if (!start)
+> > >                 return NULL;
+> > >
+> > > -       buf = dp_fill(buf, eth_get_dev());
+> > > +       buf = dp_fill(start, eth_get_dev());
+> > >
+> > >         *((struct efi_device_path *)buf) = END;
+> > >
+> > > @@ -980,22 +980,21 @@ struct efi_device_path *efi_dp_from_mem(uint32_t memory_type,
+> > >                                         uint64_t end_address)
+> > >  {
+> > >         struct efi_device_path_memory *mdp;
+> > > -       void *buf, *start;
+> > > +       void *start;
+> > >
+> > > -       start = buf = efi_alloc(sizeof(*mdp) + sizeof(END));
+> > > -       if (!buf)
+> > > +       start = malloc(sizeof(*mdp) + sizeof(END));
+> > > +       if (!start)
+> > >                 return NULL;
+> > >
+> > > -       mdp = buf;
+> > > +       mdp = start;
+> > >         mdp->dp.type = DEVICE_PATH_TYPE_HARDWARE_DEVICE;
+> > >         mdp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MEMORY;
+> > >         mdp->dp.length = sizeof(*mdp);
+> > >         mdp->memory_type = memory_type;
+> > >         mdp->start_address = start_address;
+> > >         mdp->end_address = end_address;
+> > > -       buf = &mdp[1];
+> > >
+> > > -       *((struct efi_device_path *)buf) = END;
+> > > +       *((struct efi_device_path *)&mdp[1]) = END;
+> > >
+> > >         return start;
 > > >  }
+> > > diff --git a/lib/efi_loader/efi_device_path_to_text.c b/lib/efi_loader/efi_device_path_to_text.c
+> > > index 0c7b30a26e7..4192581ac45 100644
+> > > --- a/lib/efi_loader/efi_device_path_to_text.c
+> > > +++ b/lib/efi_loader/efi_device_path_to_text.c
+> > > @@ -33,7 +33,7 @@ static u16 *efi_str_to_u16(char *str)
+> > >         u16 *out, *dst;
 > > >
-> > > On Tue, 13 Aug 2024 at 03:46, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Sun, Aug 11, 2024 at 08:50:18AM -0600, Simon Glass wrote:
-> > > > > +Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-> > > > >
-> > > > > Hi Yasuharu,
-> > > > >
-> > > > > On Sat, 10 Aug 2024 at 20:48, Yasuharu Shibata
-> > > > > <yasuharu.shibata@gmail.com> wrote:
-> > > > > >
-> > > > > > Dear Simon,
-> > > > > >
-> > > > > > Could you inform me how the wget test was broken?
-> > > > > > As I explained in the commit log, I fixed the bug in specific c=
-onditions.
-> > > > > > Without the details of how the break happened,
-> > > > > > it is difficult to find a proper patch.
-> > > > > >
-> > > > > > Best regards,
-> > > > > > Yasuharu Shibata
-> > > > >
-> > > > > Yes, I should have mentioned that. It is test/cmd/wget.c - see al=
-so [1].
-> > > > >
-> > > > > This is a good run:
-> > > > > Test: net_test_wget: wget.c
-> > > > > HTTP/1.1 200 OK
-> > > > > Packets received 5, Transfer Successful
-> > > > > Bytes transferred =3D 32 (20 hex)
-> > > > > md5 for 00020000 ... 0002001f =3D=3D> 234af48e94b0085060249ecb594=
-2ab57
-> > > > > Failures: 0
-> > > > >
-> > > > > With your patch it hangs:
-> > > > >
-> > > > > Test: net_test_wget: wget.c
-> > > > > HTTP/1.1 200 OKT
-> > > >
-> > > > Can you please figure out what's going on with the sandbox test the=
-n?
-> > > > The change in question fixes wget support on real hardware, and als=
-o the
-> > > > other wget tests (as part of the lwIP series) work fine as well. Th=
-is
-> > > > seems like something specific to that test.
-> > > >
-> > > > --
-> > > > Tom
+> > >         len = sizeof(u16) * (utf8_utf16_strlen(str) + 1);
+> > > -       out = efi_alloc(len);
+> > > +       out = malloc(len);
+> > >         if (!out)
+> > >                 return NULL;
+> > >         dst = out;
+> > > --
+> > > 2.34.1
+> > >
