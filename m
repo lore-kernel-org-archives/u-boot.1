@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B047EC52D7B
-	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 11:03:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91DCEC52D7B
+	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 11:03:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F1F288763;
-	Wed, 14 Aug 2024 13:01:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 99723882E6;
+	Wed, 14 Aug 2024 13:01:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA06B882E6; Wed, 14 Aug 2024 13:01:50 +0200 (CEST)
+ id 8043A882E6; Wed, 14 Aug 2024 13:01:55 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 7309B889DA
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 13:01:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 7EDB388A08
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 13:01:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D7E58DA7;
- Wed, 14 Aug 2024 04:02:13 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E3BA4DA7;
+ Wed, 14 Aug 2024 04:02:18 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 645613F58B;
- Wed, 14 Aug 2024 04:01:43 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 700A53F58B;
+ Wed, 14 Aug 2024 04:01:48 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -40,9 +40,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 15/32] lmb: reserve common areas during board init
-Date: Wed, 14 Aug 2024 16:29:52 +0530
-Message-Id: <20240814110009.45310-16-sughosh.ganu@linaro.org>
+Subject: [PATCH v2 16/32] lmb: bootm: remove superfluous lmb stub functions
+Date: Wed, 14 Aug 2024 16:29:53 +0530
+Message-Id: <20240814110009.45310-17-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240814110009.45310-1-sughosh.ganu@linaro.org>
 References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
@@ -64,94 +64,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The LMB module provides API's for allocating and reserving chunks of
-memory which is then typically used for things like loading images for
-booting. Reserve the portion of memory that is occupied by the U-Boot
-image itself, and other parts of memory that might have been marked as
-reserved in the board's DTB. When executing in SPL, reserve the
-sections that get relocated to the ram memory, the stack and
-the global data structure and also the bss.
-
-Mark these regions of memory with the LMB_NOOVERWRITE flag to indicate
-that these regions cannot be re-requested or overwritten.
+Remove a couple of superfluous LMB stub functions, and instead put a
+check for calling the lmb_reserve() function.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 Changes since V1: None
 
- lib/lmb.c | 36 ++++++++++++++++++++++++++++++++++--
- 1 file changed, 34 insertions(+), 2 deletions(-)
+ boot/bootm.c | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
-diff --git a/lib/lmb.c b/lib/lmb.c
-index f35a94c41b..a661dd2c4c 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -13,6 +13,7 @@
- #include <lmb.h>
- #include <log.h>
- #include <malloc.h>
-+#include <spl.h>
- 
- #include <asm/global_data.h>
- #include <asm/sections.h>
-@@ -172,10 +173,11 @@ void arch_lmb_reserve_generic(ulong sp, ulong end, ulong align)
- 		if (bank_end > end)
- 			bank_end = end - 1;
- 
--		lmb_reserve(sp, bank_end - sp + 1);
-+		lmb_reserve_flags(sp, bank_end - sp + 1, LMB_NOOVERWRITE);
- 
- 		if (gd->flags & GD_FLG_SKIP_RELOC)
--			lmb_reserve((phys_addr_t)(uintptr_t)_start, gd->mon_len);
-+			lmb_reserve_flags((phys_addr_t)(uintptr_t)_start,
-+				    gd->mon_len, LMB_NOOVERWRITE);
- 
- 		break;
- 	}
-@@ -225,6 +227,30 @@ static void lmb_reserve_common(void *fdt_blob)
- 		efi_lmb_reserve();
+diff --git a/boot/bootm.c b/boot/bootm.c
+index ddede08979..a61bbcfb45 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -239,11 +239,6 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
+ 	return 0;
  }
  
-+static __maybe_unused void lmb_reserve_common_spl(void)
-+{
-+	phys_addr_t rsv_start;
-+	phys_size_t rsv_size;
-+
-+	/*
-+	 * Assume a SPL stack of 16KB. This must be
-+	 * more than enough for the SPL stage.
-+	 */
-+	if (IS_ENABLED(CONFIG_SPL_STACK_R_ADDR)) {
-+		rsv_start = gd->start_addr_sp - 16384;
-+		rsv_size = 16384;
-+		lmb_reserve_flags(rsv_start, rsv_size, LMB_NOOVERWRITE);
-+	}
-+
-+	if (IS_ENABLED(CONFIG_SPL_SEPARATE_BSS)) {
-+		/* Reserve the bss region */
-+		rsv_start = (phys_addr_t)(uintptr_t)__bss_start;
-+		rsv_size = (phys_addr_t)(uintptr_t)__bss_end -
-+			(phys_addr_t)(uintptr_t)__bss_start;
-+		lmb_reserve_flags(rsv_start, rsv_size, LMB_NOOVERWRITE);
-+	}
-+}
-+
- /**
-  * lmb_add_memory() - Add memory range for LMB allocations
-  *
-@@ -716,5 +742,11 @@ int lmb_init(void)
+-#if !CONFIG_IS_ENABLED(LMB)
+-#define lmb_reserve(base, size)
+-static inline void boot_start_lmb(void) { }
+-#endif
+-
+ static int bootm_start(void)
+ {
+ 	memset((void *)&images, 0, sizeof(images));
+@@ -700,7 +695,9 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 		images->os.end = relocated_addr + image_size;
+ 	}
  
- 	lmb_add_memory();
- 
-+	/* Reserve the U-Boot image region once U-Boot has relocated */
-+	if (spl_phase() == PHASE_SPL)
-+		lmb_reserve_common_spl();
-+	else if (spl_phase() == PHASE_BOARD_R)
-+		lmb_reserve_common((void *)gd->fdt_blob);
+-	lmb_reserve(images->os.load, (load_end - images->os.load));
++	if (CONFIG_IS_ENABLED(LMB))
++		lmb_reserve(images->os.load, (load_end - images->os.load));
 +
  	return 0;
  }
+ 
 -- 
 2.34.1
 
