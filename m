@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4640FC3DA4A
-	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 11:03:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B047EC52D7B
+	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 11:03:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D447788A4B;
-	Wed, 14 Aug 2024 13:01:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3F1F288763;
+	Wed, 14 Aug 2024 13:01:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 694DE889CA; Wed, 14 Aug 2024 13:01:45 +0200 (CEST)
+ id AA06B882E6; Wed, 14 Aug 2024 13:01:50 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 6830688A2F
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 13:01:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 7309B889DA
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 13:01:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CC591DA7;
- Wed, 14 Aug 2024 04:02:08 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D7E58DA7;
+ Wed, 14 Aug 2024 04:02:13 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 583D13F58B;
- Wed, 14 Aug 2024 04:01:38 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 645613F58B;
+ Wed, 14 Aug 2024 04:01:43 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -40,10 +40,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 14/32] lmb: introduce a function to add memory to the lmb
- memory map
-Date: Wed, 14 Aug 2024 16:29:51 +0530
-Message-Id: <20240814110009.45310-15-sughosh.ganu@linaro.org>
+Subject: [PATCH v2 15/32] lmb: reserve common areas during board init
+Date: Wed, 14 Aug 2024 16:29:52 +0530
+Message-Id: <20240814110009.45310-16-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240814110009.45310-1-sughosh.ganu@linaro.org>
 References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
@@ -65,98 +64,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce a function lmb_add_memory() to add available memory to the
-LMB memory map. Call this function during board init once the LMB data
-structures have been initialised.
+The LMB module provides API's for allocating and reserving chunks of
+memory which is then typically used for things like loading images for
+booting. Reserve the portion of memory that is occupied by the U-Boot
+image itself, and other parts of memory that might have been marked as
+reserved in the board's DTB. When executing in SPL, reserve the
+sections that get relocated to the ram memory, the stack and
+the global data structure and also the bss.
+
+Mark these regions of memory with the LMB_NOOVERWRITE flag to indicate
+that these regions cannot be re-requested or overwritten.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
-Changes since V1:
-* Call the lmb_add_memory() from lmb_init() instead of
-  lmb_mem_regions_init().
+Changes since V1: None
 
+ lib/lmb.c | 36 ++++++++++++++++++++++++++++++++++--
+ 1 file changed, 34 insertions(+), 2 deletions(-)
 
- include/lmb.h | 10 ++++++++++
- lib/lmb.c     | 42 ++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 52 insertions(+)
-
-diff --git a/include/lmb.h b/include/lmb.h
-index f6b2a81546..a82ea63d6c 100644
---- a/include/lmb.h
-+++ b/include/lmb.h
-@@ -63,6 +63,16 @@ struct lmb {
-  */
- int lmb_init(void);
- 
-+/**
-+ * lmb_add_memory() - Add memory range for LMB allocations
-+ *
-+ * Add the entire available memory range to the pool of memory that
-+ * can be used by the LMB module for allocations.
-+ *
-+ * Return: None
-+ */
-+void lmb_add_memory(void);
-+
- long lmb_add(phys_addr_t base, phys_size_t size);
- long lmb_reserve(phys_addr_t base, phys_size_t size);
- /**
 diff --git a/lib/lmb.c b/lib/lmb.c
-index 3ccee26a46..f35a94c41b 100644
+index f35a94c41b..a661dd2c4c 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -225,6 +225,46 @@ static void lmb_reserve_common(void *fdt_blob)
+@@ -13,6 +13,7 @@
+ #include <lmb.h>
+ #include <log.h>
+ #include <malloc.h>
++#include <spl.h>
+ 
+ #include <asm/global_data.h>
+ #include <asm/sections.h>
+@@ -172,10 +173,11 @@ void arch_lmb_reserve_generic(ulong sp, ulong end, ulong align)
+ 		if (bank_end > end)
+ 			bank_end = end - 1;
+ 
+-		lmb_reserve(sp, bank_end - sp + 1);
++		lmb_reserve_flags(sp, bank_end - sp + 1, LMB_NOOVERWRITE);
+ 
+ 		if (gd->flags & GD_FLG_SKIP_RELOC)
+-			lmb_reserve((phys_addr_t)(uintptr_t)_start, gd->mon_len);
++			lmb_reserve_flags((phys_addr_t)(uintptr_t)_start,
++				    gd->mon_len, LMB_NOOVERWRITE);
+ 
+ 		break;
+ 	}
+@@ -225,6 +227,30 @@ static void lmb_reserve_common(void *fdt_blob)
  		efi_lmb_reserve();
  }
  
-+/**
-+ * lmb_add_memory() - Add memory range for LMB allocations
-+ *
-+ * Add the entire available memory range to the pool of memory that
-+ * can be used by the LMB module for allocations.
-+ *
-+ * This can be overridden for specific boards/architectures.
-+ *
-+ * Return: None
-+ *
-+ */
-+__weak void lmb_add_memory(void)
++static __maybe_unused void lmb_reserve_common_spl(void)
 +{
-+	int i;
-+	phys_size_t size;
-+	phys_addr_t rgn_top;
-+	u64 ram_top = gd->ram_top;
-+	struct bd_info *bd = gd->bd;
++	phys_addr_t rsv_start;
++	phys_size_t rsv_size;
 +
-+	/* Assume a 4GB ram_top if not defined */
-+	if (!ram_top)
-+		ram_top = 0x100000000ULL;
++	/*
++	 * Assume a SPL stack of 16KB. This must be
++	 * more than enough for the SPL stage.
++	 */
++	if (IS_ENABLED(CONFIG_SPL_STACK_R_ADDR)) {
++		rsv_start = gd->start_addr_sp - 16384;
++		rsv_size = 16384;
++		lmb_reserve_flags(rsv_start, rsv_size, LMB_NOOVERWRITE);
++	}
 +
-+	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-+		size = bd->bi_dram[i].size;
-+		if (size) {
-+			if (bd->bi_dram[i].start > ram_top)
-+				continue;
-+
-+			rgn_top = bd->bi_dram[i].start +
-+				bd->bi_dram[i].size;
-+
-+			if (rgn_top > ram_top)
-+				size -= rgn_top - ram_top;
-+
-+			lmb_add(bd->bi_dram[i].start, size);
-+		}
++	if (IS_ENABLED(CONFIG_SPL_SEPARATE_BSS)) {
++		/* Reserve the bss region */
++		rsv_start = (phys_addr_t)(uintptr_t)__bss_start;
++		rsv_size = (phys_addr_t)(uintptr_t)__bss_end -
++			(phys_addr_t)(uintptr_t)__bss_start;
++		lmb_reserve_flags(rsv_start, rsv_size, LMB_NOOVERWRITE);
 +	}
 +}
 +
- static long lmb_resize_regions(struct alist *lmb_rgn_lst,
- 			       unsigned long idx_start,
- 			       phys_addr_t base, phys_size_t size)
-@@ -674,5 +714,7 @@ int lmb_init(void)
- 		return ret;
- 	}
+ /**
+  * lmb_add_memory() - Add memory range for LMB allocations
+  *
+@@ -716,5 +742,11 @@ int lmb_init(void)
  
-+	lmb_add_memory();
+ 	lmb_add_memory();
+ 
++	/* Reserve the U-Boot image region once U-Boot has relocated */
++	if (spl_phase() == PHASE_SPL)
++		lmb_reserve_common_spl();
++	else if (spl_phase() == PHASE_BOARD_R)
++		lmb_reserve_common((void *)gd->fdt_blob);
 +
  	return 0;
  }
