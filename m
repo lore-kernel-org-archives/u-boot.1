@@ -4,72 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3B68C3DA4A
-	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 04:34:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C592C3DA4A
+	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 05:18:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9E1A887D2;
-	Wed, 14 Aug 2024 06:34:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 589648800C;
+	Wed, 14 Aug 2024 07:18:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1723610052;
-	bh=q8Wt0BtGeYtE58obmVDSfX4PdLmtP64jxY6KbYRYc7A=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=0DSsiWAJaegLho1jZTYnN76onZnAv3jsLmufkebyvIfLKykMyDOeLpjXhvVtYNz1p
-	 6of5L4Ye7apF35Y5eFDmpNM7GwN39W1THByOzREsq9obIt+NMibA6FBjSHnF7Bz5A4
-	 gByQzkqQk5nqjWc2eMD+FPYJ4d926ECedbSrJ7LZ3p4gLxtXGXYNDVCA33D97Q1b7j
-	 ACWbLta8DlCcJHqWxfKbK8hHUGU5sDAcgc25FHu/odgQa1lA9/oqp7seHECG535l9c
-	 lR/X2hMOkib26/MHfHeeULOoaHp+w8xZMZhQ5wiyf/cErRBKJevqyIy8ErYhkrCigJ
-	 6g0atCAZTbCgQ==
-Received: from [192.168.1.107] (89-186-114-92.pool.digikabel.hu
- [89.186.114.92])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 95E0487D2F;
- Wed, 14 Aug 2024 06:34:08 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1723610051;
- bh=q8Wt0BtGeYtE58obmVDSfX4PdLmtP64jxY6KbYRYc7A=;
- h=Date:Subject:To:References:Reply-To:From:In-Reply-To:From;
- b=ankyX6VhZ/CtNcuVq5J9ytsw4nBoIfh0mz6p0yvAAl6cErJHPlTNqhLNGo6sayH1N
- b6uyM1vw1GcNPkv+6e46pmqv4eC+s4eci8VVjRIEuGFFRnBH81/WEU+R/t9LKPu0XR
- udYte9C9Rob4R8PDPaQznH862YIelhvyfq//+RxBKKk6XU37KgHRN7xds8dTGsQkaK
- aS6pIyVoXHiFUedCvdmyXGZ3jQxG6R++waalyJvOIFZeF3vV/Kr7xiRJadwlBR/5F5
- yohKQbcOZvQ0cyS4yG7ATCl7Fl7HsKT13sxu7Y0lkE3Gi1WzgDG4cc3tt0v9KpXD6U
- lsXcKZYzGzfZA==
-Message-ID: <32d0b8ed-3986-3011-a0a8-e4640ee10ff1@denx.de>
-Date: Wed, 14 Aug 2024 06:33:12 +0200
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ow7/k37s";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 28FA788056; Wed, 14 Aug 2024 07:18:00 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 81A8A87E30
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 07:17:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47E5Hj8h052234;
+ Wed, 14 Aug 2024 00:17:45 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1723612665;
+ bh=RKzfMMtMAAhKqJfwEgtSNPudw57XlYz99L7yComvqgI=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=Ow7/k37sUlXPR5ADMW6eoN1fFm2VB7lImIuwTixVrexYYj9zHs9wc4kykYM+d+0h9
+ 4JVd8SLjdLHRM7ixSmmMN910fFjF0MGz+/oSUcjinKatDWaxF8ak7npTS91SozyK6P
+ c7+c+WBybPaORFeoAReM2jMHLcJbmzIDmL4Au0ic=
+Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47E5HiZY027338
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 14 Aug 2024 00:17:44 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 14
+ Aug 2024 00:17:44 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 14 Aug 2024 00:17:44 -0500
+Received: from [172.24.227.220] (chintan-thinkstation-p360-tower.dhcp.ti.com
+ [172.24.227.220])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47E5HbXq065438;
+ Wed, 14 Aug 2024 00:17:38 -0500
+Message-ID: <30d6c971-3002-48ed-aeab-f01021d4a404@ti.com>
+Date: Wed, 14 Aug 2024 10:47:36 +0530
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v3 8/9] ubi: implement support for LED activity
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 06/10] arm: mach-k3: am62x: am625_init: Probe AM65 CPSW
+ NUSS
+To: Andrew Davis <afd@ti.com>, Michal Simek <michal.simek@amd.com>, "Bryan
+ Brattlof" <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>,
+ Neha Malcom Francis <n-francis@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ MD Danish Anwar <danishanwar@ti.com>, "Ravi
+ Gunasekaran" <r-gunasekaran@ti.com>, Matthias Schiffer
+ <matthias.schiffer@ew.tq-group.com>,
+ Andreas Dannenberg <dannenberg@ti.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Devarsh Thakkar <devarsht@ti.com>, "Sean
+ Anderson" <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ "Kishon Vijay Abraham I" <kishon@ti.com>, Joao Paulo Goncalves
+ <joao.goncalves@toradex.com>, Wadim Egorov <w.egorov@phytec.de>, Mattijs
+ Korpershoek <mkorpershoek@baylibre.com>, Siddharth Vadapalli
+ <s-vadapalli@ti.com>, "Dhruva Gole" <d-gole@ti.com>, Francesco Dolcini
+ <francesco.dolcini@toradex.com>, Nishanth Menon <nm@ti.com>, Sumit Garg
+ <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>
+References: <20240812113621.3840652-1-c-vankar@ti.com>
+ <20240812114856.3843785-1-c-vankar@ti.com>
+ <2d9d9eae-1bdb-44e8-976b-72ec5bc67aab@ti.com>
 Content-Language: en-US
-To: Christian Marangi <ansuelsmth@gmail.com>, Tom Rini <trini@konsulko.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Dario Binacchi
- <dario.binacchi@amarulasolutions.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Arseniy Krasnov <avkrasnov@salutedevices.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Martin Kurbanov <mmkurbanov@salutedevices.com>,
- Alexey Romanov <avromanov@salutedevices.com>, Dmitry Dunaev
- <dunaev@tecon.ru>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <sean.anderson@seco.com>, Artur Rojek <artur@conclusive.pl>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Vasileios Amoiridis <vassilisamir@gmail.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>,
- Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de
-References: <20240812103254.26972-1-ansuelsmth@gmail.com>
- <20240812103254.26972-9-ansuelsmth@gmail.com>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20240812103254.26972-9-ansuelsmth@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+From: Chintan Vankar <c-vankar@ti.com>
+In-Reply-To: <2d9d9eae-1bdb-44e8-976b-72ec5bc67aab@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,70 +93,63 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Christian,
 
-On 12.08.24 12:32, Christian Marangi wrote:
-> Implement support for LED activity. If the feature is enabled,
-> make the defined ACTIVITY LED to signal ubi write operation.
+
+On 13/08/24 23:57, Andrew Davis wrote:
+> On 8/12/24 6:48 AM, Chintan Vankar wrote:
+>> From: Kishon Vijay Abraham I <kishon@ti.com>
+>>
+>> In order to support Ethernet boot on AM62x, probe AM65 CPSW NUSS
+>> driver in board_init_f().
+>>
+>> Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
+>> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+>> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+>> ---
+>>
+>> Link to v4:
+>> https://lore.kernel.org/r/20240705045030.1141934-7-c-vankar@ti.com/
+>>
+>> Changes from v3 to v4:
+>> - No changes.
+>>
+>>   arch/arm/mach-k3/am62x/am625_init.c | 10 ++++++++++
+>>   1 file changed, 10 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-k3/am62x/am625_init.c 
+>> b/arch/arm/mach-k3/am62x/am625_init.c
+>> index 72a752d38e..0182c153a6 100644
+>> --- a/arch/arm/mach-k3/am62x/am625_init.c
+>> +++ b/arch/arm/mach-k3/am62x/am625_init.c
+>> @@ -280,6 +280,16 @@ void board_init_f(ulong dummy)
+>>           if (ret)
+>>               panic("DRAM init failed: %d\n", ret);
+>>       }
+>> +
+>> +    if (IS_ENABLED(CONFIG_SPL_ETH) && 
+>> IS_ENABLED(CONFIG_TI_AM65_CPSW_NUSS) &&
+>> +        spl_boot_device() == BOOT_DEVICE_ETHERNET) {
+>> +        struct udevice *cpswdev;
+>> +
+>> +        if (uclass_get_device_by_driver(UCLASS_MISC, 
+>> DM_DRIVER_GET(am65_cpsw_nuss),
+>> +                        &cpswdev))
+>> +            printf("Failed to probe am65_cpsw_nuss driver\n");
+>> +    }
+>> +
+>>       spl_enable_cache();
 > 
-> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
-> ---
->   cmd/ubi.c | 17 +++++++++++++++--
->   1 file changed, 15 insertions(+), 2 deletions(-)
+> Any reason you added this before enabling caches?
 > 
-> diff --git a/cmd/ubi.c b/cmd/ubi.c
-> index 0e62e449327..6f679eae9c3 100644
-> --- a/cmd/ubi.c
-> +++ b/cmd/ubi.c
-> @@ -14,6 +14,7 @@
->   #include <command.h>
->   #include <env.h>
->   #include <exports.h>
-> +#include <led.h>
->   #include <malloc.h>
->   #include <memalign.h>
->   #include <mtd.h>
-> @@ -488,10 +489,22 @@ exit:
->   
->   int ubi_volume_write(char *volume, void *buf, loff_t offset, size_t size)
->   {
-> +	int ret;
-> +
-> +#ifdef CONFIG_LED_ACTIVITY_ENABLE
-> +	led_activity_blink();
-> +#endif
-
-Do we really need ifdef? May it is possible to declare an empty function
-when CONFIG_LED_ACTIVITY_ENABLE is not set? May this applies for the whole
-series?
-
-> +
->   	if (!offset)
-> -		return ubi_volume_begin_write(volume, buf, size, size);
-> +		ret = ubi_volume_begin_write(volume, buf, size, size);
-> +	else
-> +		ret = ubi_volume_offset_write(volume, buf, offset, size);
->   
-> -	return ubi_volume_offset_write(volume, buf, offset, size);
-> +#ifdef CONFIG_LED_ACTIVITY_ENABLE
-> +	led_activity_off();
-> +#endif
-> +
-> +	return ret;
->   }
->   
->   int ubi_volume_read(char *volume, char *buf, loff_t offset, size_t size)
+> Andrew
 > 
 
-bye,
-Heiko
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+There is no specific reason for it, I can probe CPSW driver after
+enabling cache also.
+
+>>       fixup_a53_cpu_freq_by_speed_grade();
