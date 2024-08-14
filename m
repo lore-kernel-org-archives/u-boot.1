@@ -4,50 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23EE6C52D7B
-	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 11:06:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82019C3DA4A
+	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 11:06:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35B2688AC2;
-	Wed, 14 Aug 2024 13:03:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 22D33889D1;
+	Wed, 14 Aug 2024 13:05:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NxhBkfZP";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75A4A88A27; Wed, 14 Aug 2024 13:03:16 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 4F264889D0
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 13:03:14 +0200 (CEST)
+ id D292E88A27; Wed, 14 Aug 2024 13:05:02 +0200 (CEST)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B7F8688763
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 13:05:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A8BA3DA7;
- Wed, 14 Aug 2024 04:03:39 -0700 (PDT)
-Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3548D3F58B;
- Wed, 14 Aug 2024 04:03:08 -0700 (PDT)
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Mark Kettenis <mark.kettenis@xs4all.nl>,
- Michal Simek <michal.simek@amd.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>,
- Huan Wang <alison.wang@nxp.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
- Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 32/32] lmb: add logic to print lmb flag strings
-Date: Wed, 14 Aug 2024 16:30:09 +0530
-Message-Id: <20240814110009.45310-33-sughosh.ganu@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240814110009.45310-1-sughosh.ganu@linaro.org>
-References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-2ef248ab2aeso101128351fa.0
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 04:05:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1723633500; x=1724238300; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=r2zTanF4GgxBEtPjgAOqcdryl9iQlc+5wIWhHg0GGbg=;
+ b=NxhBkfZPCKxCMsYrTydlRpQKP4P8KfYhByaHKb83dtFAv7r5JtBxV3nBmDWGvTSF4y
+ NzLcfBMdjjXov0GZ25ml04yOSMshT66IlMwTo/wopSr1rziTguxJr+VbYOuq2zHJMpWl
+ BeLHAyD7+TThYzzOLjdKv3D/eEGoHEXDlmq/9OT/FC54+jpc0emv8vC68djmRqEHB5ys
+ smeGUY72CnLvJR0EJXGbdePGE0j/4MmWvyR54zdqiJqrci0He2Kls5JzSzwL8t4wTT20
+ PMNnlaYjLkeii3YM2kXO13Nh3w5oxKpm6CDffxFM3hsXneRExalQfl3SMT5iqhCPeMa3
+ Lzfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723633500; x=1724238300;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=r2zTanF4GgxBEtPjgAOqcdryl9iQlc+5wIWhHg0GGbg=;
+ b=PCqKu1NnVsm2WrVaORG3LJMtFaIab+92Ph7Oac39063HjiA7luokBkxzwjN5rhGGuL
+ NAt0Gg0rJfLOWR+QwmSLo/4HpGh9g/jAd75Hu5B8NxY8Z9YsAPGud2ys43zI7+IS3eWU
+ V2Ci7tdGb+lrXJY7B3Wl6AOScCXcSObkLANSbIHOO3Q3mfS2azMsOuXhhOF/R3pB/iOw
+ txEuQtpmmFCUAP/VXtH1jwundXQooSifBcCH8VWS02dDURsc24znmUHLav5tM6CuXPug
+ FdkWSng9+i/BARz3fxBW5epY6srdKfnvoTq9mq3+w2I0y72vJwR2czlxHW/H5jzEDMUZ
+ 6Fiw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXCysp4UkheuNsk9XyZ93uKOn2lxMwnxX6eGWF7QZ11dWQAJqf15XdyYnxHGeBvv19ODLRj6ur70WQjBx3v3Twk8D7XFw==
+X-Gm-Message-State: AOJu0YzmWRB4Y59IGOp3vRqxt/s9J72vzpTMwz7tBelKJPiO5loATKUv
+ yQhHIfZxd5Y6CBKgt7lQ5SDbDT0dRwombNPDjMMQ9654fje0gKW7gSV42HkUC5YOqs67YFpuQGL
+ Zm5SvCqDAveS1312hDRNaaS+Fl5tXggV5juckkQ==
+X-Google-Smtp-Source: AGHT+IFYRNxoNllbS744F0Q3EZQMhJZna4a3YRrkrWKf6z1Lb32z8/FAsyog3EXj1bxOLnOYj3pmWaNJsBdc5ADVvx0=
+X-Received: by 2002:a05:651c:10b0:b0:2ef:2e98:9718 with SMTP id
+ 38308e7fff4ca-2f3aa1df0f0mr16708531fa.15.1723633499813; Wed, 14 Aug 2024
+ 04:04:59 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240814071422.54193-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240814071422.54193-1-heinrich.schuchardt@canonical.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Wed, 14 Aug 2024 16:34:48 +0530
+Message-ID: <CADg8p94Ku8uVBXPYs9LuRTJgFenmLH-4wbNr4v0HBEEC8_gBzw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] tools/mkeficapsule: correct printf codes
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,70 +90,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Instead of printing the LMB flags as numerical values, print them as
-strings. This makes it easier to understand what flags are associated
-with the lmb region. Also make corresponding changes to the bdinfo
-command's test code.
+On Wed, 14 Aug 2024 at 12:44, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> uint64_t is defined as unsigned long long on 32bit ARM.
+> Convert uint64_t values to unsigned long long and use %llX for printing.
+>
+>     tools/mkeficapsule.c: In function =E2=80=98dump_capsule_auth_header=
+=E2=80=99:
+>     tools/mkeficapsule.c:694:66: warning: format =E2=80=98%lX=E2=80=99 ex=
+pects argument of
+>     type =E2=80=98long unsigned int=E2=80=99, but argument 2 has type =E2=
+=80=98uint64_t=E2=80=99
+>     {aka =E2=80=98long long unsigned int=E2=80=99} [-Wformat=3D]
+>     694 | printf("EFI_FIRMWARE_IMAGE_AUTH.MONOTONIC_COUNT\t\t: %08lX\n",
+>         |                                                      ~~~~^
+>         |                                                          |
+>         |                                                          long u=
+nsigned int
+>         |                                                      %08llX
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  tools/mkeficapsule.c | 12 ++++++------
+>  1 file changed, 6 insertions(+), 6 deletions(-)
 
-Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
----
-Changes since V1: New patch
+Acked-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 
- lib/lmb.c         | 18 ++++++++++++++++--
- test/cmd/bdinfo.c |  4 ++--
- 2 files changed, 18 insertions(+), 4 deletions(-)
+Interesting that the tools are being built on a 32 bit host :)
 
-diff --git a/lib/lmb.c b/lib/lmb.c
-index 37d2a72951..5c5b3e9bb5 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -26,6 +26,19 @@ DECLARE_GLOBAL_DATA_PTR;
- 
- static struct lmb lmb;
- 
-+static void print_region_flags(enum lmb_flags flags)
-+{
-+	uint64_t bitpos;
-+	const char *flag_str[] = { "LMB_NONE", "LMB_NOMAP", "LMB_NOOVERWRITE" };
-+
-+	do {
-+		bitpos = fls(flags) - 1;
-+		printf("%s", flag_str[bitpos]);
-+		flags &= ~(1ull << bitpos);
-+		flags ? puts(", ") : puts("\n");
-+	} while (flags);
-+}
-+
- static void lmb_dump_region(struct alist *lmb_rgn_lst, char *name)
- {
- 	struct lmb_region *rgn = lmb_rgn_lst->data;
-@@ -41,8 +54,9 @@ static void lmb_dump_region(struct alist *lmb_rgn_lst, char *name)
- 		end = base + size - 1;
- 		flags = rgn[i].flags;
- 
--		printf(" %s[%d]\t[0x%llx-0x%llx], 0x%08llx bytes flags: %x\n",
--		       name, i, base, end, size, flags);
-+		printf(" %s[%d]\t[0x%llx-0x%llx], 0x%08llx bytes flags: ",
-+		       name, i, base, end, size);
-+		print_region_flags(flags);
- 	}
- }
- 
-diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
-index 7dd3f7ca5b..887defc28a 100644
---- a/test/cmd/bdinfo.c
-+++ b/test/cmd/bdinfo.c
-@@ -120,8 +120,8 @@ static int lmb_test_dump_region(struct unit_test_state *uts,
- 			ut_assert_nextlinen(" %s[%d]\t[", name, i);
- 			continue;
- 		}
--		ut_assert_nextline(" %s[%d]\t[0x%llx-0x%llx], 0x%08llx bytes flags: %x",
--				   name, i, base, end, size, flags);
-+		ut_assert_nextlinen(" %s[%d]\t[0x%llx-0x%llx], 0x%08llx bytes flags: ",
-+				   name, i, base, end, size);
- 	}
- 
- 	return 0;
--- 
-2.34.1
+-sughosh
 
+>
+> diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
+> index f28008a0829..d346c217f09 100644
+> --- a/tools/mkeficapsule.c
+> +++ b/tools/mkeficapsule.c
+> @@ -691,8 +691,8 @@ static uint32_t dump_fmp_payload_header(
+>  static void dump_capsule_auth_header(
+>         struct efi_firmware_image_authentication *capsule_auth_hdr)
+>  {
+> -       printf("EFI_FIRMWARE_IMAGE_AUTH.MONOTONIC_COUNT\t\t: %08lX\n",
+> -              capsule_auth_hdr->monotonic_count);
+> +       printf("EFI_FIRMWARE_IMAGE_AUTH.MONOTONIC_COUNT\t\t: %08llX\n",
+> +              (unsigned long long)capsule_auth_hdr->monotonic_count);
+>         printf("EFI_FIRMWARE_IMAGE_AUTH.AUTH_INFO.HDR.dwLENGTH\t: %08X\n"=
+,
+>                capsule_auth_hdr->auth_info.hdr.dwLength);
+>         printf("EFI_FIRMWARE_IMAGE_AUTH.AUTH_INFO.HDR.wREVISION\t: %08X\n=
+",
+> @@ -724,10 +724,10 @@ static void dump_fmp_capsule_image_header(
+>                image_hdr->update_image_size);
+>         printf("FMP_CAPSULE_IMAGE_HDR.UPDATE_VENDOR_CODE_SIZE\t: %08X\n",
+>                image_hdr->update_vendor_code_size);
+> -       printf("FMP_CAPSULE_IMAGE_HDR.UPDATE_HARDWARE_INSTANCE\t: %08lX\n=
+",
+> -              image_hdr->update_hardware_instance);
+> -       printf("FMP_CAPSULE_IMAGE_HDR.IMAGE_CAPSULE_SUPPORT\t: %08lX\n",
+> -              image_hdr->image_capsule_support);
+> +       printf("FMP_CAPSULE_IMAGE_HDR.UPDATE_HARDWARE_INSTANCE\t: %08llX\=
+n",
+> +              (unsigned long long)image_hdr->update_hardware_instance);
+> +       printf("FMP_CAPSULE_IMAGE_HDR.IMAGE_CAPSULE_SUPPORT\t: %08llX\n",
+> +              (unsigned long long)image_hdr->image_capsule_support);
+>
+>         printf("--------\n");
+>         if (image_hdr->image_capsule_support & CAPSULE_SUPPORT_AUTHENTICA=
+TION) {
+> --
+> 2.45.2
+>
