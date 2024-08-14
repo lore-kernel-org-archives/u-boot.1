@@ -4,80 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 950FDC3DA4A
-	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 12:48:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB82CC3DA4A
+	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 12:53:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 224BC889B8;
-	Wed, 14 Aug 2024 14:48:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E491B889AA;
+	Wed, 14 Aug 2024 14:53:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZOdTFXBI";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="tlw0OFv/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56D62889BA; Wed, 14 Aug 2024 14:48:04 +0200 (CEST)
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [IPv6:2607:f8b0:4864:20::429])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8A447889AA; Wed, 14 Aug 2024 14:53:47 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD67F87C69
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 14:48:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 67BCC87C69
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 14:53:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yasuharu.shibata@gmail.com
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-70d399da0b5so5385051b3a.3
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 05:48:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723639680; x=1724244480; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Zo9el2NQR6QJ1FfL+fXZ8QzES733LovR7zSDbMYr5Ns=;
- b=ZOdTFXBI/SddKA4nnA8RBQA6FkpY09YpK7g8pk0zktfgDmOTOfcoN0Q1fwV+yYMSFk
- FZilMILSv8PxHcT5sXtK2ph5V8KMDug2M3xLvxXf97ZuvJu9i/+4hmfUwu1LXHD2Dh5l
- RlLg51fFPbPz6kTbcGcS3GCPreCu6z1JB6X13gR3un31UbtH+ZWexyGPlOkcmfBjVA/0
- u0UNXg74xCCG5KaVHgHE8v6oIkVWvjO/zQZX3iAolabMHXuPON5qedRlNNoR5gELqPhb
- YgWsp8hn8JtbjHTB8ES7+mr73p9ovVMIwZXeqxGUbO0RRu80QbXDXTPWzeUEBzBCbsje
- CAzA==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id DC7A0400B2
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 12:53:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1723640024;
+ bh=skPkXkty6p5SUDMDr46GBDhC+iXYlR6TI+tI0rwud0M=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=tlw0OFv/KJxA8Oge9Hs9I1xqpwKlLfI8fsWW6Obk32a/wIZDDeC1664cXLW8hKb4V
+ VE9aTKUr9Y5X4YMk27fZ0er5gSGKC0buzo5XaEACeQyv7jEyyfcJDrMXW1wnuQSsBG
+ I0gWm445055MvngHaeV+4vRWqhjWBRHMCwngad4HgK2DKj27GArMAgPTwmvEKtkb15
+ T7fQ7xGid+eKzdzDLfaAXf7PQgkgpRMEL+fhzxvZVtHcmTL0ceazMfsh+B1aOyiZoU
+ tZwIPl8jZFr2ZojLNtldnW4vEfsOTfGKg0dWhCrKD0D/QYz2Mi5B6Q1hHhAyu2ew5o
+ byqhxzj6J1Ghw==
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-368374dc565so2849097f8f.2
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 05:53:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723639680; x=1724244480;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Zo9el2NQR6QJ1FfL+fXZ8QzES733LovR7zSDbMYr5Ns=;
- b=B2+mRttzlsz/qguAgSfwdYS553v97Zgcuo0EB6oaEwXfVu33/XEzKFIWJEiisUbZ5G
- Fvh4mpu2785MvE2HhMPi591i3zF3Vba06WLMbeY27bDyoEHS1tivkp0MGmuIqfRbk0tr
- /JP0T4LdvP1mg/u+FR9p/Xh/i+MiMOisRw91IILtjPHxgh1a6uBp+HjiLsH1mYocnQxe
- wbfM/1Si1Mup2bkKF4XA8DpEFyDGasoX6wyE3zmZ4gBqsUkEP220Uu2QVXKz0nC/H4Xd
- FFIjGX+xMvMmU8MwO60nHJk72TxMnmn2YO8LwZiksUH7rDPDVXy2f7Xrlyv8lxeB/MO8
- iuhw==
+ d=1e100.net; s=20230601; t=1723640023; x=1724244823;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=skPkXkty6p5SUDMDr46GBDhC+iXYlR6TI+tI0rwud0M=;
+ b=LvsmSLa0lvyHwvLVSAMuwgN2rppAbu9P6fprSNmuG+vVcW2TAosFtVoHTWe8azFgzJ
+ hrLxLFPfj1yF5CUpSJyeg8tr9khDsjgw2TpOa1UJgnaSfgZUOJciAHjcfhfrv6WH3Fl4
+ DQ68H7I2J3vL9drNRpS/XVnOlC00SyNetKS8hOsEHJg/b4hxp2tnXu+rj8CSu7E6X9aC
+ v2HHmcxJne5S0GXQYbUoQdTWGvM+Jd+cs9CCPmZ8YR5gwV/qgbmyXsQxswDIxmVOMChS
+ VAeqSHgemdj3bag3TVOqhiSeV1g+zEBhdPhtI/hEdkMPnQLvXRM0v06l1aPiGcU4+PFP
+ LUPA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWrNSE5o5l9vS0wQMW4KivcW1zX+9YImch1+zocBoN6jiyJKVFDnZN/U3tZoWkFm98cLswyMMQb6D87AJXSdLW8fd8oyg==
-X-Gm-Message-State: AOJu0YwkdH6hTK0T05Y+yh05YAlWoARWTXXd2MhID0d0bcgjdGKTAGZt
- O37rKq1QxGQvTYmI1RLPvvIY5AjoG5RdJUNxMlYUkyOqU4C34+CwWMk1Fw==
-X-Google-Smtp-Source: AGHT+IFNwSRf8KW6KY2U9edb5SBtcQ9rLLaxigaxTMyqU09Z/A0ogcJM95fpk6bNIdUCkGQB545dfg==
-X-Received: by 2002:a05:6a21:e89:b0:1c6:ba8b:1e27 with SMTP id
- adf61e73a8af0-1c8eae4b4c7mr3350306637.10.1723639680099; 
- Wed, 14 Aug 2024 05:48:00 -0700 (PDT)
-Received: from localhost.localdomain ([2409:10:d8a0:1500:813e:3244:5b45:7c7f])
+ AJvYcCV6gO6/s2AnjGu9J0Pk62f/eTP8AiU0Gb6rB44rS0svbkMz5dn/R2lTX9jD1vRfQHegqdW9yjdnN/31USW7C4haajzcTQ==
+X-Gm-Message-State: AOJu0Yy5jbzl165icR/oToz6n/mpMGiwV+VKF/ik7yBWChU9arVvb7+C
+ K7IxO/F/kl3zHVQzdr5zgPJAMU4hiTSyGO08K0c+iQyGQgvLfOEjaA4t4U69wsA/i9ugHiVWlka
+ 7xKZdT5AxIWVdKvIPMtB4xEi6YWwds5kgn8xelh5OO2q3sX6nR7O6B7B4ff0XsY07VbA=
+X-Received: by 2002:adf:ef12:0:b0:367:434f:caa2 with SMTP id
+ ffacd0b85a97d-371776523e0mr1641167f8f.0.1723640022744; 
+ Wed, 14 Aug 2024 05:53:42 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHwxPvP7YOa0nT6YEVguLIk9zumSB6mQH6MX0/IB4/YyLMXaeiLWSRPEE8F4qcdsk+T9GjLqw==
+X-Received: by 2002:adf:ef12:0:b0:367:434f:caa2 with SMTP id
+ ffacd0b85a97d-371776523e0mr1641147f8f.0.1723640022121; 
+ Wed, 14 Aug 2024 05:53:42 -0700 (PDT)
+Received: from [192.168.103.101]
+ (ip-178-202-041-098.um47.pools.vodafone-ip.de. [178.202.41.98])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-201cd1b8417sm28768665ad.187.2024.08.14.05.47.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Aug 2024 05:47:59 -0700 (PDT)
-From: Yasuharu Shibata <yasuharu.shibata@gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Yasuharu Shibata <yasuharu.shibata@gmail.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: [PATCH 2/2] sandbox: fix wget test failure after fixing wget issue
-Date: Wed, 14 Aug 2024 21:41:07 +0900
-Message-Id: <20240814124108.2885-2-yasuharu.shibata@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240814124108.2885-1-yasuharu.shibata@gmail.com>
-References: <20240814124108.2885-1-yasuharu.shibata@gmail.com>
+ ffacd0b85a97d-36e4c36bcf6sm12747056f8f.17.2024.08.14.05.53.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 14 Aug 2024 05:53:41 -0700 (PDT)
+Message-ID: <4b7a4178-1224-44fa-8998-800721728211@canonical.com>
+Date: Wed, 14 Aug 2024 14:53:40 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/1] ata: sata_rescan must scan for block devices
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
+ Stefan Roese <sr@denx.de>, u-boot@lists.denx.de
+References: <20240814071037.34446-1-heinrich.schuchardt@canonical.com>
+ <CAFLszTj29ZXtVSmyA-pDp61UuvvMEVks5barSYjNRqUH+mgSpQ@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAFLszTj29ZXtVSmyA-pDp61UuvvMEVks5barSYjNRqUH+mgSpQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,103 +108,143 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After applying the following patch, wget test on sandbox failed[1].
+On 14.08.24 14:40, Simon Glass wrote:
+> On Wed, 14 Aug 2024 at 01:10, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+>>
+>> A system may have multiple SATA controller. Removing the controller with
+>> the lowest sequence number before probing all SATA controllers makes no
+>> sense.
+>>
+>> In sata_rescan we remove all block devices which are children of SATA
+>> controllers. We also have to remove the bootdev devices as they will be
+>> created when scanning for block devices.
+>>
+>> After probing all SATA controllers we must scan for block devices otherwise
+>> we end up without any SATA block device.
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>> v3:
+>>          continue unbinding and scanning if one device fails
+>>          write a message if scanning fails
+>>          add device name to error message
+>> v2:
+>>          Scanning for device on an unprobed SATA controller leads
+>>          to an illegal memory access.
+>>          Use uclass_foreach_dev_probe() instead of uclass_foreach_dev().
+>> ---
+>>   drivers/ata/sata.c | 48 +++++++++++++++++++++++++---------------------
+>>   1 file changed, 26 insertions(+), 22 deletions(-)
+>>
+>> diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
+>> index 84437d3d346..89cd516f3d6 100644
+>> --- a/drivers/ata/sata.c
+>> +++ b/drivers/ata/sata.c
+>> @@ -9,9 +9,12 @@
+>>    *             Dave Liu <daveliu@freescale.com>
+>>    */
+>>
+>> +#define LOG_CATEGORY UCLASS_AHCI
+>> +
+>>   #include <ahci.h>
+>>   #include <blk.h>
+>>   #include <dm.h>
+>> +#include <log.h>
+>>   #include <part.h>
+>>   #include <sata.h>
+>>   #include <dm/device-internal.h>
+>> @@ -49,38 +52,39 @@ int sata_scan(struct udevice *dev)
+>>
+>>   int sata_rescan(bool verbose)
+>>   {
+>> +       struct uclass *uc;
+>> +       struct udevice *dev; /* SATA controller */
+>>          int ret;
+>> -       struct udevice *dev;
+>>
+>>          if (verbose)
+>> -               printf("Removing devices on SATA bus...\n");
+>> -
+>> -       blk_unbind_all(UCLASS_AHCI);
+>> -
+>> -       ret = uclass_find_first_device(UCLASS_AHCI, &dev);
+>> -       if (ret || !dev) {
+>> -               printf("Cannot find SATA device (err=%d)\n", ret);
+>> -               return -ENOENT;
+>> -       }
+>> -
+>> -       ret = device_remove(dev, DM_REMOVE_NORMAL);
+>> -       if (ret) {
+>> -               printf("Cannot remove SATA device '%s' (err=%d)\n", dev->name, ret);
+>> -               return -ENOSYS;
+>> +               printf("scanning bus for devices...\n");
+>> +
+>> +       ret = uclass_get(UCLASS_AHCI, &uc);
+>> +       if (ret)
+>> +               return ret;
+>> +
+>> +       /* Remove all children of SATA devices (blk and bootdev) */
+>> +       uclass_foreach_dev(dev, uc) {
+>> +               log_debug("unbind %s\n", dev->name);
+>> +               ret = device_chld_remove(dev, NULL, DM_REMOVE_NORMAL);
+>> +               if (!ret)
+>> +                       ret = device_chld_unbind(dev, NULL);
+>> +               if (ret && verbose) {
+>> +                       log_err("Unbinding from %s failed (%dE)\n",
+>> +                               dev->name, ret);
+>> +               }
+>>          }
+> 
+> This code is in usb_stop() to, so please put it in a shared function.
+> How about uclass_unbind_children(enum uclass_id) ?
 
-  Commit: cab7867cff ("net: wget: Support retransmission a dropped packet")
+git grep -A5 -n uclass_foreach_dev | grep device_chld_remove
 
-Here are two reasons why the test is failed and how to fix it:
+only finds
 
-1. tcp_ack is calculated by the wrong value.
-   tcp_ack needs to be calculated by the received TCP payload size.
-2. wget command may have a problem that HTTP response from server
-   must be divided into more than two packets.
-   In this commit, HTTP response is divided into two packets.
+drivers/scsi/scsi.c-571-
+                 ret = device_chld_remove(dev, NULL, DM_REMOVE_NORMAL);
 
-In addition, I fixed the HTTP response returned at the correct timing.
+Where did you see matching USB code?
 
-[1] https://lore.kernel.org/u-boot/CAFLszThEbk2Jr8OZ6Hj21wPSnJjgJhaDe037RqwHvwt1KjB3_A@mail.gmail.com/
+scsi_scan() could also use a rewrite to avoid stopping at the first error.
 
-Signed-off-by: Yasuharu Shibata <yasuharu.shibata@gmail.com>
-Reported-by: Simon Glass <sjg@chromium.org>
----
- test/cmd/wget.c | 40 +++++++++++++++++++++++++++++++---------
- 1 file changed, 31 insertions(+), 9 deletions(-)
+I guess sata_rescan() and scsi_scan() could be the same function taking 
+a uclass ID as an argument?
 
-diff --git a/test/cmd/wget.c b/test/cmd/wget.c
-index 356a4dcd8f..11a07c08f4 100644
---- a/test/cmd/wget.c
-+++ b/test/cmd/wget.c
-@@ -26,6 +26,8 @@
- #define SHIFT_TO_TCPHDRLEN_FIELD(x) ((x) << 4)
- #define LEN_B_TO_DW(x) ((x) >> 2)
- 
-+int net_set_ack_options(union tcp_build_pkt *b);
-+
- static int sb_arp_handler(struct udevice *dev, void *packet,
- 			  unsigned int len)
- {
-@@ -105,6 +107,10 @@ static int sb_ack_handler(struct udevice *dev, void *packet,
- 	const char *payload1 = "HTTP/1.1 200 OK\r\n"
- 		"Content-Length: 30\r\n\r\n\r\n"
- 		"<html><body>Hi</body></html>\r\n";
-+	union tcp_build_pkt *b = (union tcp_build_pkt *)tcp;
-+	const int recv_payload_len = len - net_set_ack_options(b) - IP_HDR_SIZE - ETHER_HDR_SIZE;
-+	static int next_seq;
-+	const int bottom_payload_len = 10;
- 
- 	/* Don't allow the buffer to overrun */
- 	if (priv->recv_packets >= PKTBUFSRX)
-@@ -119,13 +125,31 @@ static int sb_ack_handler(struct udevice *dev, void *packet,
- 	tcp_send->tcp_dst = tcp->tcp_src;
- 	data = (void *)tcp_send + IP_TCP_HDR_SIZE;
- 
--	if (ntohl(tcp->tcp_seq) == 1 && ntohl(tcp->tcp_ack) == 1) {
-+	if (ntohl(tcp->tcp_seq) == 1 && ntohl(tcp->tcp_ack) == 1 && recv_payload_len == 0) {
-+		// ignore ACK for three-way handshaking
-+		return 0;
-+	} else if (ntohl(tcp->tcp_seq) == 1 && ntohl(tcp->tcp_ack) == 1) {
-+		// recv HTTP request message and reply top half data
- 		tcp_send->tcp_seq = htonl(ntohl(tcp->tcp_ack));
--		tcp_send->tcp_ack = htonl(ntohl(tcp->tcp_seq) + 1);
--		payload_len = strlen(payload1);
-+		tcp_send->tcp_ack = htonl(ntohl(tcp->tcp_seq) + recv_payload_len);
-+
-+		payload_len = strlen(payload1) - bottom_payload_len;
- 		memcpy(data, payload1, payload_len);
- 		tcp_send->tcp_flags = TCP_ACK;
--	} else if (ntohl(tcp->tcp_seq) == 2) {
-+
-+		next_seq = ntohl(tcp_send->tcp_seq) + payload_len;
-+	} else if (ntohl(tcp->tcp_ack) == next_seq) {
-+		// reply bottom half data
-+		const int top_payload_len = strlen(payload1) - bottom_payload_len;
-+
-+		tcp_send->tcp_seq = htonl(next_seq);
-+		tcp_send->tcp_ack = htonl(ntohl(tcp->tcp_seq) + recv_payload_len);
-+
-+		payload_len = bottom_payload_len;
-+		memcpy(data, payload1 + top_payload_len, payload_len);
-+		tcp_send->tcp_flags = TCP_ACK;
-+	} else {
-+		// close connection
- 		tcp_send->tcp_seq = htonl(ntohl(tcp->tcp_ack));
- 		tcp_send->tcp_ack = htonl(ntohl(tcp->tcp_seq) + 1);
- 		payload_len = 0;
-@@ -148,11 +172,9 @@ static int sb_ack_handler(struct udevice *dev, void *packet,
- 			  pkt_len,
- 			  IPPROTO_TCP);
- 
--	if (ntohl(tcp->tcp_seq) == 1 || ntohl(tcp->tcp_seq) == 2) {
--		priv->recv_packet_length[priv->recv_packets] =
--			ETHER_HDR_SIZE + IP_TCP_HDR_SIZE + payload_len;
--		++priv->recv_packets;
--	}
-+	priv->recv_packet_length[priv->recv_packets] =
-+		ETHER_HDR_SIZE + IP_TCP_HDR_SIZE + payload_len;
-+	++priv->recv_packets;
- 
- 	return 0;
- }
--- 
-2.20.1
+Best regards
+
+Heinrich
+
+> 
+>>
+>>          if (verbose)
+>>                  printf("Rescanning SATA bus for devices...\n");
+>>
+>> -       ret = uclass_probe_all(UCLASS_AHCI);
+>> -
+>> -       if (ret == -ENODEV) {
+>> -               if (verbose)
+>> -                       printf("No SATA block device found\n");
+>> -               return 0;
+>> +       uclass_foreach_dev_probe(UCLASS_AHCI, dev) {
+>> +               ret = sata_scan(dev);
+>> +               if (ret && verbose)
+>> +                       log_err("Scanning %s failed (%dE)\n", dev->name, ret);
+>>          }
+>>
+>> -       return ret;
+>> +       return 0;
+>>   }
+>>
+>>   static unsigned long sata_bread(struct udevice *dev, lbaint_t start,
+>> --
+>> 2.45.2
+>>
+> 
+> If you have time, please add a test for ahci (dm/test/ahci)
+> 
+> Regards,
+> Simon
 
