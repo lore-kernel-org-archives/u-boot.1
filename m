@@ -4,92 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE551C52D7B
-	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 13:42:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FBDFC3DA4A
+	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 13:45:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2738A8800C;
-	Wed, 14 Aug 2024 15:42:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id ACB8D889A1;
+	Wed, 14 Aug 2024 15:45:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ymOqwVu9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rcXfXZFb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C51E587E30; Wed, 14 Aug 2024 15:42:26 +0200 (CEST)
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
+ id 87B0D889AA; Wed, 14 Aug 2024 15:45:26 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 895E988859
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 15:42:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 50AFA8800C
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 15:45:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-7a103ac7be3so4135146a12.3
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 06:42:23 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a7aada2358fso147633466b.0
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 06:45:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723642942; x=1724247742; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=t4xfoF7R4vQrd3Jc3jbIBmBbAX8a14OB75YX+spkHdE=;
- b=ymOqwVu9cETzkOGY0aIyqRUTgNUvJ1A7VpFZZTDPSlAAhFM/wWVI0w4uG752tvSZZP
- X56elDFYxRAhn1OREONe9fopKdRphDLYDkkwE1R3WImeTlos1uySJ5/NPgPRQxtPYoG4
- pfFII7uYZe0ge1yPjheUxbSd4ylFDEoM/vMo6ga5qX9SRL6j47oJMLl0EjvFINNFAUJb
- 7yJZNzZLDR6CJC7ydU/cJTcCHRiLAk2GQ13cXJZya0Fn+jqbPOjIkG5Ol1H96+HbvLli
- JncnizRN+QZGPfch1AD7ljWpaOJNTDFv8WNmo7uyzwDcgEAk8fKNwMZLIH8f2MHkm+cp
- UBQw==
+ d=linaro.org; s=google; t=1723643124; x=1724247924; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WYvq+6z9nIfhAeMp3Z3ruvOS53QGblg9BL0clQ06/5g=;
+ b=rcXfXZFbVlg4Tw4cHj27B6F97lntjt1NYy0Wd+RIJJyF9MvnzpenXK2VY2PN9FzDta
+ +YEVTbaff4u1fJD5vsOvvely2UfkOtK4o30xAI3pJR3dLP6H7xvCD1Yg9fUnr3G52no5
+ Jg1c8t2A6PCoie7ekWh0YELDmzw0iKmcQMglIB7R4F08hY8rkVwPGXIWfUu94AkQJGU6
+ a4bwOmKwAseJLJKjhoxRAvVGzoNCIJzjKzqWlSx4gITkME01Ac2CUoxj089xCL/pgAjo
+ zdXmyi3UKHk9z9Dbb+XdNmV8qITJH81uWx6+pkMIrSmPH/Yx5xdn0Z2C8yF5uOJnj1HN
+ /MiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723642942; x=1724247742;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1723643124; x=1724247924;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=t4xfoF7R4vQrd3Jc3jbIBmBbAX8a14OB75YX+spkHdE=;
- b=e4tipYXSoUkNL5p1+6lAA5+vTpyO5GdDeZDCq6wGd1dLSjXfpLmGeyZ7kFwLjn+M3i
- KsN1kUAs6WRjrVhdC+lYE7Sj+LrKm0p0Xk/mDvc7fBSKKn5kZVNZ/8uGMb+Wr4jfAorj
- d5owl35DapyuJoxUYn/z8w/4cc1qOO8OHNtwnokHS2NYIvglrE5QV672ipW5u0xbca5b
- g5Kx9wpZ7ffzXgfWSIzCh7JA7+3rNXUoSd4lKzEJ1zE5JaGekNnpsn8gYF4QsCKTLZAE
- o0n9If/Z0jWm+vLZbCs6Czsfb/j3OwgHmUqSTRI/CQXdPON7b0f8x377L3IwLihzGPnn
- WelQ==
-X-Gm-Message-State: AOJu0Yzy4fMxZbjRDt8kbaDd8tq+Y0L0s/ZR01JazPDF94qy+MMj21mM
- 8tOOJ4BoG706HA7eHTcEhUbuO5z4JrAx5q6Z0uJetURiv/Vau/U79ZCnLj7nvh3v/MlZcUrEH+e
- ieLixqp9dthG+HtH/0DDLwxbzjIHX9I9CglZYXg==
-X-Google-Smtp-Source: AGHT+IH6Jt122iA3LLA71KlZeqphTIO947FE+SXSpX7zI33xgZaVHpxdWOmq0wDSbTHs3jMs01M2n8Yp4MiBe4j6ouE=
-X-Received: by 2002:a17:90a:b00a:b0:2c9:7e80:6bc8 with SMTP id
- 98e67ed59e1d1-2d3aab8a2bfmr3240488a91.37.1723642941774; Wed, 14 Aug 2024
- 06:42:21 -0700 (PDT)
+ bh=WYvq+6z9nIfhAeMp3Z3ruvOS53QGblg9BL0clQ06/5g=;
+ b=uT9WVCHC3fhIf0YcHm8r7dcerOsJnUk1JgagQ5Vb6EKOTy9Ctq0LI2xeBDN4ktvSIk
+ 7v6VXc6iI1YfK3mtw/OFrkVDR10ea/12bNcmx216NlFiVYcu60OA61lNMF2sB4jCMX8K
+ LSOuiw5h11E4tlJy3UXbJMAvu5ZKNBchd3lhrUhBV1SsNttWtmWO8VyFbujI49UHUlU6
+ fyoedaKU5tW2n9NwX1vPCTWyaiGv70Ih3EKzGmmJFafToNqIO5gBxjhkfNcbzbumChSR
+ M4WmQZGHgFrUkbkL9kwFmHBL+kBw8J1yfGY/+T47PMq6ESU9Gj6nkGZU+bx9KMMOu1nZ
+ 6rqw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUpB58MlqBBWuApfuV8qLeuMgQMnD5MVx+Z4qDCFakkPjXHn/p4dhZ7fLeEqohtzg+EDSh9ZdU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz5wsh66u/4Q5diIjXPNAsd5GRD1BmKmlMdgEACDrDtC+SX5Ys6
+ xdLBJ6+JJZoCruoU9oosXFNPSb1b3gJb/ZzRpXHGfU8n6UYfdBPbebSUHuWEclA=
+X-Google-Smtp-Source: AGHT+IFr7Wfu0Lj7trthFirRlucH26+AGda/zTcRiDPqVQEqxHIxGwgxFbC1URgZbF9+p/cS+iLqzg==
+X-Received: by 2002:a17:907:60ca:b0:a77:db39:cc04 with SMTP id
+ a640c23a62f3a-a80f0aa2260mr574261166b.11.1723643123025; 
+ Wed, 14 Aug 2024 06:45:23 -0700 (PDT)
+Received: from localhost.localdomain (ppp046103060252.access.hol.gr.
+ [46.103.60.252]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a80f4183f72sm171494866b.205.2024.08.14.06.45.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 14 Aug 2024 06:45:22 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de
+Cc: Anton.Antonov@arm.com, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Ian Roberts <ian.roberts@timesys.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Shengyu Qu <wiagn233@outlook.com>,
+ Jesse Taube <mr.bossman075@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Greg Malysa <greg.malysa@timesys.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Sean Anderson <sean.anderson@seco.com>, Anand Moon <linux.amoon@gmail.com>,
+ Michal Simek <michal.simek@amd.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Eddie James <eajames@linux.ibm.com>, u-boot@lists.denx.de
+Subject: [PATCH] Kconfig: clean up the efi configuration status
+Date: Wed, 14 Aug 2024 16:45:17 +0300
+Message-ID: <20240814134518.82692-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-References: <20240731172556.1348487-1-raymond.mao@linaro.org>
- <20240801204606.GJ3794063@bill-the-cat>
- <CAEfUkU+hDK2z4wJYSBU5_r1Bwa9npDDw0s6AixUBbM=wGGXzfw@mail.gmail.com>
-In-Reply-To: <CAEfUkU+hDK2z4wJYSBU5_r1Bwa9npDDw0s6AixUBbM=wGGXzfw@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Wed, 14 Aug 2024 09:42:08 -0400
-Message-ID: <CAEfUkULc6J_mAqfj7hKS8QQD+-Kw04bO_oU5=7hduF3=h1XUcQ@mail.gmail.com>
-Subject: Re: [PATCH v5 00/27] Integrate MbedTLS v3.6 LTS with U-Boot
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
- Stefan Bosch <stefan_b@posteo.net>, Mario Six <mario.six@gdsys.cc>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Andrew Davis <afd@ti.com>, Sumit Garg <sumit.garg@linaro.org>, 
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Ilya Lukin <4.shket@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Alexander Gendin <agendin@matrox.com>,
- Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>, 
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,310 +99,333 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+The EFI_LOADER and EFI config options are randomly scattered under lib/
+making it cumbersome to navigate and enable options, unless you really
+know what you are doing. On top of that the existing options are in
+random order instead of a logical one.
 
-On Fri, 2 Aug 2024 at 11:34, Raymond Mao <raymond.mao@linaro.org> wrote:
+So let's move things around a bit and present two enties for the
+EFI_LOADER and EFI options in the main config screen.
+While at it add menus for Capsules, Protocols, and Services in the
+EFI_LOADER so people can find their way around easier
 
-> Hi Tom,
->
-> On Thu, 1 Aug 2024 at 16:46, Tom Rini <trini@konsulko.com> wrote:
->
->> On Wed, Jul 31, 2024 at 10:25:10AM -0700, Raymond Mao wrote:
->> >
->> > Integrate MbedTLS v3.6 LTS (currently v3.6.0) with U-Boot.
->> >
->> > Motivations:
->> > ------------
->> >
->> > 1. MbedTLS is well maintained with LTS versions.
->> > 2. LWIP is integrated with MbedTLS and easily to enable HTTPS.
->> > 3. MbedTLS recently switched license back to GPLv2.
->> >
->> > Prerequisite:
->> > -------------
->> >
->> > This patch series requires mbedtls git repo to be added as a
->> > subtree to the main U-Boot repo via:
->> >     $ git subtree add --prefix lib/mbedtls/external/mbedtls \
->> >           https://github.com/Mbed-TLS/mbedtls.git \
->> >           v3.6.0 --squash
->> > Moreover, due to the Windows-style files from mbedtls git repo,
->> > we need to convert the CRLF endings to LF and do a commit manually:
->> >     $ git add --renormalize .
->> >     $ git commit
->> >
->> > New Kconfig options:
->> > --------------------
->> >
->> > `MBEDTLS_LIB` is for MbedTLS general switch.
->> > `MBEDTLS_LIB_CRYPTO` is for replacing original digest and crypto libs
->> with
->> > MbedTLS.
->> > `MBEDTLS_LIB_X509` is for replacing original X509, PKCS7, MSCode, ASN1,
->> > and Pubkey parser with MbedTLS.
->> > `LEGACY_CRYPTO` is introduced as a main switch for legacy crypto
->> library.
->> > `LEGACY_CRYPTO_BASIC` is for the basic crypto functionalities and
->> > `LEGACY_CRYPTO_CERT` is for the certificate related functionalities.
->> > For each of the algorithm, a pair of `<alg>_LEGACY` and `<alg>_MBEDTLS`
->> > Kconfig options are introduced. Meanwhile, `SPL_` Kconfig options are
->> > introduced.
->> >
->> > In this patch set, MBEDTLS_LIB, MBEDTLS_LIB_CRYPTO and MBEDTLS_LIB_X509
->> > are by default enabled in qemu_arm64_defconfig and sandbox_defconfig
->> > for testing purpose.
->> >
->> > Patches for external MbedTLS project:
->> > -------------------------------------
->> >
->> > Since U-Boot uses Microsoft Authentication Code to verify PE/COFFs
->> > executables which is not supported by MbedTLS at the moment,
->> > addtional patches for MbedTLS are created to adapt with the EFI loader:
->> > 1. Decoding of Microsoft Authentication Code.
->> > 2. Decoding of PKCS#9 Authenticate Attributes.
->> > 3. Extending MbedTLS PKCS#7 lib to support multiple signer's
->> certificates.
->> > 4. MbedTLS native test suites for PKCS#7 signer's info.
->> >
->> > All above 4 patches (tagged with `mbedtls/external`) are submitted to
->> > MbedTLS project and being reviewed, eventually they should be part of
->> > MbedTLS LTS release.
->> > But before that, please merge them into U-Boot, otherwise the building
->> > will be broken when MBEDTLS_LIB_X509 is enabled.
->> >
->> > See below PR link for the reference:
->> > https://github.com/Mbed-TLS/mbedtls/pull/9001
->> >
->> > Miscellaneous:
->> > --------------
->> >
->> > Optimized MbedTLS library size by tailoring the config file
->> > and disabling all unnecessary features for EFI loader.
->> > From v2, original libs (rsa, asn1_decoder, rsa_helper, md5, sha1,
->> sha256,
->> > sha512) are completely replaced when MbedTLS is enabled.
->> > From v3, the size-growth is slightly reduced by refactoring Hash
->> functions.
->> >
->> > Target(QEMU arm64) size-growth when enabling MbedTLS:
->> > v1: 6.03%
->> > v2: 4.66%
->> > From v3: 4.55%
->> >
->> > Please see the latest output from buildman for size-growth on QEMU
->> arm64,
->> > Sandbox and Nanopi A64. [1]
->>
->> Let us inline the growth on qemu_arm64 for a moment:
->>    aarch64: (for 1/1 boards) all +6916.0 bss -32.0 data -64.0 rodata
->> +200.0 text +6812.0
->>             qemu_arm64     : all +6916 bss -32 data -64 rodata +200 text
->> +6812
->>                u-boot: add: 28/-17, grow: 12/-16 bytes: 15492/-8304 (7188)
->>                  function                                   old     new
->>  delta
->>                  mbedtls_internal_sha1_process                -    4540
->>  +4540
->>                  mbedtls_internal_md5_process                 -    2928
->>  +2928
->>                  mbedtls_internal_sha256_process              -    2052
->>  +2052
->>                  mbedtls_internal_sha512_process              -    1056
->>  +1056
->>                  K                                            -     896
->>   +896
->>                  mbedtls_sha512_finish                        -     556
->>   +556
->>                  mbedtls_sha256_finish                        -     484
->>   +484
->>                  mbedtls_sha1_finish                          -     420
->>   +420
->>                  mbedtls_sha512_starts                        -     340
->>   +340
->>                  mbedtls_md5_finish                           -     336
->>   +336
->>                  mbedtls_sha512_update                        -     264
->>   +264
->>                  mbedtls_sha256_update                        -     252
->>   +252
->>                  mbedtls_sha1_update                          -     236
->>   +236
->>                  mbedtls_md5_update                           -     236
->>   +236
->>                  mbedtls_sha512                               -     148
->>   +148
->>                  mbedtls_sha256_starts                        -     124
->>   +124
->>                  hash_init_sha512                            52     128
->>    +76
->>                  hash_init_sha256                            52     128
->>    +76
->>                  mbedtls_sha1_starts                          -      72
->>    +72
->>                  mbedtls_md5_starts                           -      60
->>    +60
->>                  hash_init_sha1                              52     112
->>    +60
->>                  mbedtls_platform_zeroize                     -      56
->>    +56
->>                  mbedtls_sha512_free                          -      16
->>    +16
->>                  mbedtls_sha256_free                          -      16
->>    +16
->>                  mbedtls_sha1_free                            -      16
->>    +16
->>                  mbedtls_md5_free                             -      16
->>    +16
->>                  hash_finish_sha512                          72      88
->>    +16
->>                  hash_finish_sha256                          72      88
->>    +16
->>                  hash_finish_sha1                            72      88
->>    +16
->>                  sha512_csum_wd                              68      80
->>    +12
->>                  sha256_csum_wd                              68      80
->>    +12
->>                  sha1_csum_wd                                68      80
->>    +12
->>                  md5_wd                                      68      80
->>    +12
->>                  mbedtls_sha512_init                          -      12
->>    +12
->>                  mbedtls_sha256_init                          -      12
->>    +12
->>                  mbedtls_sha1_init                            -      12
->>    +12
->>                  mbedtls_md5_init                             -      12
->>    +12
->>                  memset_func                                  -       8
->>     +8
->>                  sha512_update                                4       8
->>     +4
->>                  sha384_update                                4       8
->>     +4
->>                  sha256_update                               12       8
->>     -4
->>                  sha1_update                                 12       8
->>     -4
->>                  sha256_process                              16       -
->>    -16
->>                  sha1_process                                16       -
->>    -16
->>                  hash_update_sha512                          36      16
->>    -20
->>                  hash_update_sha256                          36      16
->>    -20
->>                  hash_update_sha1                            36      16
->>    -20
->>                  MD5Init                                     56      36
->>    -20
->>                  sha1_starts                                 60      36
->>    -24
->>                  hash_update_sha384                          36       -
->>    -36
->>                  hash_init_sha384                            52       -
->>    -52
->>                  sha384_csum_wd                              68      12
->>    -56
->>                  sha256_starts                              104      40
->>    -64
->>                  sha256_padding                              64       -
->>    -64
->>                  sha1_padding                                64       -
->>    -64
->>                  hash_finish_sha384                          72       -
->>    -72
->>                  sha512_finish                              152      36
->>   -116
->>                  sha512_starts                              168      40
->>   -128
->>                  sha384_starts                              168      40
->>   -128
->>                  sha384_finish                              152       4
->>   -148
->>                  MD5Final                                   196      44
->>   -152
->>                  sha512_base_do_finalize                    160       -
->>   -160
->>                  static.sha256_update                       228       -
->>   -228
->>                  static.sha1_update                         240       -
->>   -240
->>                  sha512_base_do_update                      244       -
->>   -244
->>                  MD5Update                                  260       -
->>   -260
->>                  sha1_finish                                300      36
->>   -264
->>                  sha256_finish                              404      36
->>   -368
->>                  sha256_armv8_ce_process                    428       -
->>   -428
->>                  sha1_armv8_ce_process                      484       -
->>   -484
->>                  sha512_K                                   640       -
->>   -640
->>                  sha512_block_fn                           1212       -
->>  -1212
->>                  MD5Transform                              2552       -
->>  -2552
->>
->> And to start with, that's not bad. In fact, tossing LTO in before mbedTLS
->> only changes
->> the top-line a little:
->>    aarch64: (for 1/1 boards) all +5120.0 bss -16.0 data -64.0 rodata
->> +200.0 text +5000.0
->>             qemu_arm64     : all +5120 bss -16 data -64 rodata +200 text
->> +5000
->>                u-boot: add: 19/-18, grow: 11/-7 bytes: 14696/-7884 (6812)
->>
->> But, is there something we can do still? mbedTLS is a more robust
->> solution and I'm accepting there will be growth. But still the
->> process/start/finish is much larger. Is there something configurable
->> there?
->>
->> I have investigated all those MbedTLS native functions with big-size
-> (_process/_update/_finish).
-> For MD5 and SHA1, we don't have turnable configs.
-> For SHA256 and SHA512, there are a few configs:
-> 1. Performance configs only for Armv8/a64.
->     I didn't turn that on, which might affect the target size as well.
-> 2. Smaller implementation with lower size (only for non-Armv8/a64) at the
-> expense of losing
->     performance.
-> I didn't enable both, as #1 is more for performance and might potentially
-> increase target size;
-> #2 compromises the performance and only for non-Armv8/a64.
-> Looks like that both don't help in reducing the size of qemu_arm64.
-> But I will try #1 on qemu_arm64 and  #2 on sandbox and let you know
-> the size impact soon.
->
-> The smaller footprint implementation for SHA256/512 can reduce the target
-size significantly on
-those "<hash>_process()" functions. Please see below output from buildman:
-```
-   aarch64: (for 2/2 boards) all -1468.0 bss +16.0 data -64.0 rodata +200.0
-text -1620.0
-            qemu_arm64     : all +4608 bss +80 data -64 rodata +200 text
-+4392
-               u-boot: add: 29/-17, grow: 12/-16 bytes: 13072/-8304 (4768)
-            nanopi_a64     : all -7544 bss -48 data -64 rodata +200 text
--7632
-               u-boot: add: 21/-8, grow: 4/-8 bytes: 10692/-4364 (6328)
-   sandbox: (for 1/1 boards) all +19312.0 data +1440.0 rodata -4128.0 text
-+22000.0
-            sandbox        : all +19312 data +1440 rodata -4128 text +22000
-               u-boot: add: 258/-206, grow: 122/-59 bytes: 90286/-76286
-(14000)
-```
-Since this is a trade-off between size and performance, I will add one more
-kconfig to
-allow the user to turn it on/off. What are your thoughts?
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ Kconfig                |   4 +
+ lib/Kconfig            |   2 -
+ lib/efi/Kconfig        |   5 +
+ lib/efi_loader/Kconfig | 202 +++++++++++++++++++++++------------------
+ 4 files changed, 123 insertions(+), 90 deletions(-)
 
-On the other hand, the "Armv8/a64 only" options depend on NEON
-instructions, so I
-will keep them off.
+diff --git a/Kconfig b/Kconfig
+index 82df59f176ec..62c5441e3576 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -756,3 +756,7 @@ source "lib/Kconfig"
+ source "test/Kconfig"
+ 
+ source "tools/Kconfig"
++
++source "lib/efi_loader/Kconfig"
++
++source "lib/efi/Kconfig"
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 2059219a1207..06b4e9a73135 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -1081,8 +1081,6 @@ config SMBIOS_PARSER
+ 	help
+ 	  A simple parser for SMBIOS data.
+ 
+-source "lib/efi/Kconfig"
+-source "lib/efi_loader/Kconfig"
+ source "lib/optee/Kconfig"
+ 
+ config TEST_FDTDEC
+diff --git a/lib/efi/Kconfig b/lib/efi/Kconfig
+index c2b9bb73f718..81ed3e66b34d 100644
+--- a/lib/efi/Kconfig
++++ b/lib/efi/Kconfig
+@@ -1,3 +1,6 @@
++menu "U-Boot as UEFI application"
++	depends on X86
++
+ config EFI
+ 	bool "Support running U-Boot from EFI"
+ 	depends on X86
+@@ -72,3 +75,5 @@ config EFI_RAM_SIZE
+ 	  use. U-Boot allocates this from EFI on start-up (along with a few
+ 	  other smaller amounts) and it can never be increased after that.
+ 	  It is used as the RAM size in with U-Boot.
++
++endmenu
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index 1179c31bb136..26838d20f2de 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -1,3 +1,5 @@
++menu "UEFI Loader"
++
+ config EFI_LOADER
+ 	bool "Support running UEFI applications"
+ 	depends on OF_LIBFDT && ( \
+@@ -41,13 +43,58 @@ config EFI_BINARY_EXEC
+ 	  You may enable CMD_BOOTEFI_BINARY so that you can use bootefi
+ 	  command to do that.
+ 
+-config EFI_BOOTMGR
+-	bool "UEFI Boot Manager"
++config EFI_SECURE_BOOT
++	bool "Enable EFI secure boot support"
++	depends on EFI_LOADER && FIT_SIGNATURE
++	select HASH
++	select SHA256
++	select RSA
++	select RSA_VERIFY_WITH_PKEY
++	select IMAGE_SIGN_INFO
++	select ASYMMETRIC_KEY_TYPE
++	select ASYMMETRIC_PUBLIC_KEY_SUBTYPE
++	select X509_CERTIFICATE_PARSER
++	select PKCS7_MESSAGE_PARSER
++	select PKCS7_VERIFY
++	select MSCODE_PARSER
++	select EFI_SIGNATURE_SUPPORT
++	help
++	  Select this option to enable EFI secure boot support.
++	  Once SecureBoot mode is enforced, any EFI binary can run only if
++	  it is signed with a trusted key. To do that, you need to install,
++	  at least, PK, KEK and db.
++
++config EFI_SIGNATURE_SUPPORT
++	bool
++
++menu "UEFI services"
++
++config EFI_GET_TIME
++	bool "GetTime() runtime service"
++	depends on DM_RTC
+ 	default y
+ 	help
+-	  Select this option if you want to select the UEFI binary to be booted
+-	  via UEFI variables Boot####, BootOrder, and BootNext. You should also
+-	  normally enable CMD_BOOTEFI_BOOTMGR so that the command is available.
++	  Provide the GetTime() runtime service at boottime. This service
++	  can be used by an EFI application to read the real time clock.
++
++config EFI_SET_TIME
++	bool "SetTime() runtime service"
++	depends on EFI_GET_TIME
++	default y if ARCH_QEMU || SANDBOX
++	help
++	  Provide the SetTime() runtime service at boottime. This service
++	  can be used by an EFI application to adjust the real time clock.
++
++config EFI_HAVE_RUNTIME_RESET
++	# bool "Reset runtime service is available"
++	bool
++	default y
++	depends on ARCH_BCM283X || FSL_LAYERSCAPE || PSCI_RESET || \
++		   SANDBOX || SYSRESET_SBI || SYSRESET_X86
++
++endmenu
++
++menu "UEFI Variables"
+ 
+ choice
+ 	prompt "Store for non-volatile UEFI variables"
+@@ -172,30 +219,18 @@ config EFI_VAR_BUF_SIZE
+ 
+ 	  Minimum 4096, default 131072
+ 
+-config EFI_GET_TIME
+-	bool "GetTime() runtime service"
+-	depends on DM_RTC
+-	default y
++config EFI_PLATFORM_LANG_CODES
++	string "Language codes supported by firmware"
++	default "en-US"
+ 	help
+-	  Provide the GetTime() runtime service at boottime. This service
+-	  can be used by an EFI application to read the real time clock.
++	  This value is used to initialize the PlatformLangCodes variable. Its
++	  value is a semicolon (;) separated list of language codes in native
++	  RFC 4646 format, e.g. "en-US;de-DE". The first language code is used
++	  to initialize the PlatformLang variable.
+ 
+-config EFI_SET_TIME
+-	bool "SetTime() runtime service"
+-	depends on EFI_GET_TIME
+-	default y if ARCH_QEMU || SANDBOX
+-	help
+-	  Provide the SetTime() runtime service at boottime. This service
+-	  can be used by an EFI application to adjust the real time clock.
++endmenu
+ 
+-config EFI_SCROLL_ON_CLEAR_SCREEN
+-	bool "Avoid overwriting previous output on clear screen"
+-	help
+-	  Instead of erasing the screen content when the console screen should
+-	  be cleared, emit blank new lines so that previous output is scrolled
+-	  out of sight rather than overwritten. On serial consoles this allows
+-	  to capture complete boot logs (except for interactive menus etc.)
+-	  and can ease debugging related issues.
++menu "Capsule support"
+ 
+ config EFI_HAVE_CAPSULE_SUPPORT
+ 	bool
+@@ -309,6 +344,10 @@ config EFI_CAPSULE_CRT_FILE
+ 	  embedded in the platform's device tree and used for capsule
+ 	  authentication at the time of capsule update.
+ 
++endmenu
++
++menu "UEFI protocol support"
++
+ config EFI_DEVICE_PATH_TO_TEXT
+ 	bool "Device path to text protocol"
+ 	default y
+@@ -362,40 +401,6 @@ config EFI_UNICODE_CAPITALIZATION
+ 
+ endif
+ 
+-config EFI_LOADER_BOUNCE_BUFFER
+-	bool "EFI Applications use bounce buffers for DMA operations"
+-	depends on ARM64
+-	help
+-	  Some hardware does not support DMA to full 64bit addresses. For this
+-	  hardware we can create a bounce buffer so that payloads don't have to
+-	  worry about platform details.
+-
+-config EFI_PLATFORM_LANG_CODES
+-	string "Language codes supported by firmware"
+-	default "en-US"
+-	help
+-	  This value is used to initialize the PlatformLangCodes variable. Its
+-	  value is a semicolon (;) separated list of language codes in native
+-	  RFC 4646 format, e.g. "en-US;de-DE". The first language code is used
+-	  to initialize the PlatformLang variable.
+-
+-config EFI_HAVE_RUNTIME_RESET
+-	# bool "Reset runtime service is available"
+-	bool
+-	default y
+-	depends on ARCH_BCM283X || FSL_LAYERSCAPE || PSCI_RESET || \
+-		   SANDBOX || SYSRESET_SBI || SYSRESET_X86
+-
+-config EFI_GRUB_ARM32_WORKAROUND
+-	bool "Workaround for GRUB on 32bit ARM"
+-	default n if ARCH_BCM283X || ARCH_SUNXI || ARCH_QEMU
+-	default y
+-	depends on ARM && !ARM64
+-	help
+-	  GRUB prior to version 2.04 requires U-Boot to disable caches. This
+-	  workaround currently is also needed on systems with caches that
+-	  cannot be managed via CP15.
+-
+ config EFI_RNG_PROTOCOL
+ 	bool "EFI_RNG_PROTOCOL support"
+ 	depends on DM_RNG
+@@ -448,29 +453,36 @@ config EFI_LOAD_FILE2_INITRD
+ 	  installed and Linux 5.7+ will ignore any initrd=<ramdisk> command line
+ 	  argument.
+ 
+-config EFI_SECURE_BOOT
+-	bool "Enable EFI secure boot support"
+-	depends on EFI_LOADER && FIT_SIGNATURE
+-	select HASH
+-	select SHA256
+-	select RSA
+-	select RSA_VERIFY_WITH_PKEY
+-	select IMAGE_SIGN_INFO
+-	select ASYMMETRIC_KEY_TYPE
+-	select ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+-	select X509_CERTIFICATE_PARSER
+-	select PKCS7_MESSAGE_PARSER
+-	select PKCS7_VERIFY
+-	select MSCODE_PARSER
+-	select EFI_SIGNATURE_SUPPORT
++config EFI_RISCV_BOOT_PROTOCOL
++	bool "RISCV_EFI_BOOT_PROTOCOL support"
++	default y
++	depends on RISCV
+ 	help
+-	  Select this option to enable EFI secure boot support.
+-	  Once SecureBoot mode is enforced, any EFI binary can run only if
+-	  it is signed with a trusted key. To do that, you need to install,
+-	  at least, PK, KEK and db.
++	  The EFI_RISCV_BOOT_PROTOCOL is used to transfer the boot hart ID
++	  to the next boot stage. It should be enabled as it is meant to
++	  replace the transfer via the device-tree. The latter is not
++	  possible on systems using ACPI.
+ 
+-config EFI_SIGNATURE_SUPPORT
+-	bool
++endmenu
++
++menu "Misc options"
++config EFI_LOADER_BOUNCE_BUFFER
++	bool "EFI Applications use bounce buffers for DMA operations"
++	depends on ARM64
++	help
++	  Some hardware does not support DMA to full 64bit addresses. For this
++	  hardware we can create a bounce buffer so that payloads don't have to
++	  worry about platform details.
++
++config EFI_GRUB_ARM32_WORKAROUND
++	bool "Workaround for GRUB on 32bit ARM"
++	default n if ARCH_BCM283X || ARCH_SUNXI || ARCH_QEMU
++	default y
++	depends on ARM && !ARM64
++	help
++	  GRUB prior to version 2.04 requires U-Boot to disable caches. This
++	  workaround currently is also needed on systems with caches that
++	  cannot be managed via CP15.
+ 
+ config EFI_ESRT
+ 	bool "Enable the UEFI ESRT generation"
+@@ -497,15 +509,26 @@ config EFI_EBBR_2_1_CONFORMANCE
+ 	help
+ 	  Enabling this option adds the EBBRv2.1 conformance entry to the ECPT UEFI table.
+ 
+-config EFI_RISCV_BOOT_PROTOCOL
+-	bool "RISCV_EFI_BOOT_PROTOCOL support"
++config EFI_SCROLL_ON_CLEAR_SCREEN
++	bool "Avoid overwriting previous output on clear screen"
++	help
++	  Instead of erasing the screen content when the console screen should
++	  be cleared, emit blank new lines so that previous output is scrolled
++	  out of sight rather than overwritten. On serial consoles this allows
++	  to capture complete boot logs (except for interactive menus etc.)
++	  and can ease debugging related issues.
++
++endmenu
++
++menu "EFI bootmanager"
++
++config EFI_BOOTMGR
++	bool "UEFI Boot Manager"
+ 	default y
+-	depends on RISCV
+ 	help
+-	  The EFI_RISCV_BOOT_PROTOCOL is used to transfer the boot hart ID
+-	  to the next boot stage. It should be enabled as it is meant to
+-	  replace the transfer via the device-tree. The latter is not
+-	  possible on systems using ACPI.
++	  Select this option if you want to select the UEFI binary to be booted
++	  via UEFI variables Boot####, BootOrder, and BootNext. You should also
++	  normally enable CMD_BOOTEFI_BOOTMGR so that the command is available.
+ 
+ config EFI_HTTP_BOOT
+ 	bool "EFI HTTP Boot support"
+@@ -515,5 +538,8 @@ config EFI_HTTP_BOOT
+ 	help
+ 	  Enabling this option adds EFI HTTP Boot support. It allows to
+ 	  directly boot from network.
++endmenu
+ 
+ endif
++
++endmenu
+-- 
+2.45.2
 
-Regards,
-Raymond
