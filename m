@@ -4,60 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06819C52D7D
-	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 04:11:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3B68C3DA4A
+	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 04:34:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DC7A88155;
-	Wed, 14 Aug 2024 06:11:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D9E1A887D2;
+	Wed, 14 Aug 2024 06:34:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1723608701;
-	bh=3PqHlC+3x8INAjcIQPD9Zg3c7W+uvBbaI4842JThl9I=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	s=phobos-20191101; t=1723610052;
+	bh=q8Wt0BtGeYtE58obmVDSfX4PdLmtP64jxY6KbYRYc7A=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=pZwtpqjcLm+GCnQdjIV2DBOLdKujDB1/7vykNV5ryII0DkajRs/gJZSh2eLsT+cqq
-	 D6yFu1GaxHpR7bI0K5F+JbVMuNL9PJG9IFf0K/fbxwoV6FDcHlp8hb+FtQb6Ambh6m
-	 h+K1ibFBONONUvr8JA73BNHc6qmkL/OUuVezC2O6DwblMeWRY1+tAjt5IBrEurlUj/
-	 xX9W/JYGJ4zcIAk3eWqOs0LHN/ORCKxA4Fw2FEvjV5V7JRObj/v1h6dgrbb2bwGcBC
-	 TBfCdO46TktL8FGAPKZEiiCok8CfkuI0w4sYCZ4vfLF9y/HKNis15zUlmAdSioUjrg
-	 tBKCiAZGO99cg==
+	b=0DSsiWAJaegLho1jZTYnN76onZnAv3jsLmufkebyvIfLKykMyDOeLpjXhvVtYNz1p
+	 6of5L4Ye7apF35Y5eFDmpNM7GwN39W1THByOzREsq9obIt+NMibA6FBjSHnF7Bz5A4
+	 gByQzkqQk5nqjWc2eMD+FPYJ4d926ECedbSrJ7LZ3p4gLxtXGXYNDVCA33D97Q1b7j
+	 ACWbLta8DlCcJHqWxfKbK8hHUGU5sDAcgc25FHu/odgQa1lA9/oqp7seHECG535l9c
+	 lR/X2hMOkib26/MHfHeeULOoaHp+w8xZMZhQ5wiyf/cErRBKJevqyIy8ErYhkrCigJ
+	 6g0atCAZTbCgQ==
 Received: from [192.168.1.107] (89-186-114-92.pool.digikabel.hu
  [89.186.114.92])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id AE43F880A5;
- Wed, 14 Aug 2024 06:11:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 95E0487D2F;
+ Wed, 14 Aug 2024 06:34:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1723608700;
- bh=3PqHlC+3x8INAjcIQPD9Zg3c7W+uvBbaI4842JThl9I=;
- h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
- b=XgmD988TrTVSjy9Zov/I6GcsfFUcuxzx2OiVdOIxCEvTJv1olw7fm81JL6yhKTqDT
- kuOD/u3EreytBB4/uT584Qv9CuGoYbLHbmnijGHReRKh+FB0FfDvtKpyAOaoNDL11B
- vWABS+6mW5swfP+LVVPTBKWM0ES5PT2gA9KLB/tOYnw5baBUcS5F2k5pADUOVRPihT
- wiJdHN4CRqzJtZ1B4BN6SMlNrGR29voQLBKuTxgavfElea8yR/4JpCg8FUcmK7gEuI
- 2IH4Dw4q5hWIH4FdNd9Ah3XRZvJDG5CnmWDZps+ndPWZFtajRJUoxxMeUKSfy22YLq
- CzMIAIqfkoXSg==
-Message-ID: <1ce4c23b-b006-afbb-89ed-dfd844926e22@denx.de>
-Date: Wed, 14 Aug 2024 06:10:44 +0200
+ s=phobos-20191101; t=1723610051;
+ bh=q8Wt0BtGeYtE58obmVDSfX4PdLmtP64jxY6KbYRYc7A=;
+ h=Date:Subject:To:References:Reply-To:From:In-Reply-To:From;
+ b=ankyX6VhZ/CtNcuVq5J9ytsw4nBoIfh0mz6p0yvAAl6cErJHPlTNqhLNGo6sayH1N
+ b6uyM1vw1GcNPkv+6e46pmqv4eC+s4eci8VVjRIEuGFFRnBH81/WEU+R/t9LKPu0XR
+ udYte9C9Rob4R8PDPaQznH862YIelhvyfq//+RxBKKk6XU37KgHRN7xds8dTGsQkaK
+ aS6pIyVoXHiFUedCvdmyXGZ3jQxG6R++waalyJvOIFZeF3vV/Kr7xiRJadwlBR/5F5
+ yohKQbcOZvQ0cyS4yG7ATCl7Fl7HsKT13sxu7Y0lkE3Gi1WzgDG4cc3tt0v9KpXD6U
+ lsXcKZYzGzfZA==
+Message-ID: <32d0b8ed-3986-3011-a0a8-e4640ee10ff1@denx.de>
+Date: Wed, 14 Aug 2024 06:33:12 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH v2] driver: pwm: pwm-imx: fix probing on imx6
+Subject: Re: [PATCH v3 8/9] ubi: implement support for LED activity
 Content-Language: en-US
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List
- <u-boot@lists.denx.de>, Anatolij Gustschin <agust@denx.de>,
- Tommaso Merciai <tommaso.merciai@amarulasolutions.com>
-References: <20240807155343.122377-1-hs@denx.de>
- <CAOMZO5A23hR6CbLbvUR-ck111iowq=BKrMz_4PHwL4hQsmyxDQ@mail.gmail.com>
- <36b5a4e3-0848-7275-134b-a0929a1fea27@denx.de>
- <CAOMZO5AHFdKxNspP1fAzpGmGPABCQeAohepg55Q+YRR-PttbCw@mail.gmail.com>
+To: Christian Marangi <ansuelsmth@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Arseniy Krasnov <avkrasnov@salutedevices.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Martin Kurbanov <mmkurbanov@salutedevices.com>,
+ Alexey Romanov <avromanov@salutedevices.com>, Dmitry Dunaev
+ <dunaev@tecon.ru>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <sean.anderson@seco.com>, Artur Rojek <artur@conclusive.pl>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Vasileios Amoiridis <vassilisamir@gmail.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de
+References: <20240812103254.26972-1-ansuelsmth@gmail.com>
+ <20240812103254.26972-9-ansuelsmth@gmail.com>
 From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <CAOMZO5AHFdKxNspP1fAzpGmGPABCQeAohepg55Q+YRR-PttbCw@mail.gmail.com>
+In-Reply-To: <20240812103254.26972-9-ansuelsmth@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,59 +87,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Fabio,
+Hello Christian,
 
-On 13.08.24 22:12, Fabio Estevam wrote:
-> Hi Heiko,
+On 12.08.24 12:32, Christian Marangi wrote:
+> Implement support for LED activity. If the feature is enabled,
+> make the defined ACTIVITY LED to signal ubi write operation.
 > 
-> On Tue, Aug 13, 2024 at 10:58 AM Heiko Schocher <hs@denx.de> wrote:
+> Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+> ---
+>   cmd/ubi.c | 17 +++++++++++++++--
+>   1 file changed, 15 insertions(+), 2 deletions(-)
 > 
->> Should we revert this patch?
->>
->> I just can say for the aristianetos2 board, that I readded exactly this
->> define in my work for the port to currentmainline ... and with my patch,
->> pwm and so bootlogo works again ...
-> 
-> What about the change below on top of your patch?
-> 
-> --- a/drivers/pwm/pwm-imx.c
-> +++ b/drivers/pwm/pwm-imx.c
-> @@ -14,6 +14,8 @@
->   #include <asm/io.h>
->   #include <clk.h>
-> 
-> +#define IMX6_PWM_PER_CLK       66000000
-> +
->   int pwm_config_internal(struct pwm_regs *pwm, unsigned long period_cycles,
->                          unsigned long duty_cycles, unsigned long prescale)
+> diff --git a/cmd/ubi.c b/cmd/ubi.c
+> index 0e62e449327..6f679eae9c3 100644
+> --- a/cmd/ubi.c
+> +++ b/cmd/ubi.c
+> @@ -14,6 +14,7 @@
+>   #include <command.h>
+>   #include <env.h>
+>   #include <exports.h>
+> +#include <led.h>
+>   #include <malloc.h>
+>   #include <memalign.h>
+>   #include <mtd.h>
+> @@ -488,10 +489,22 @@ exit:
+>   
+>   int ubi_volume_write(char *volume, void *buf, loff_t offset, size_t size)
 >   {
-> @@ -75,7 +77,7 @@ int pwm_imx_get_parms(int period_ns, int duty_ns,
-> unsigned long *period_c,
->           * value here as a define. Replace it when we have the clock
->           * framework.
->           */
-> -       c = CFG_IMX6_PWM_PER_CLK;
-> +       c = IMX6_PWM_PER_CLK;
->          c = c * period_ns;
->          do_div(c, 1000000000);
->          *period_c = c;
-> @@ -162,7 +164,7 @@ int pwm_dm_imx_get_parms(struct imx_pwm_priv
-> *priv, int period_ns,
->          if (CONFIG_IS_ENABLED(CLK))
->                  c = clk_get_rate(&priv->per_clk);
->          else
-> -               c = CFG_IMX6_PWM_PER_CLK;
-> +               c = IMX6_PWM_PER_CLK;
+> +	int ret;
+> +
+> +#ifdef CONFIG_LED_ACTIVITY_ENABLE
+> +	led_activity_blink();
+> +#endif
+
+Do we really need ifdef? May it is possible to declare an empty function
+when CONFIG_LED_ACTIVITY_ENABLE is not set? May this applies for the whole
+series?
+
+> +
+>   	if (!offset)
+> -		return ubi_volume_begin_write(volume, buf, size, size);
+> +		ret = ubi_volume_begin_write(volume, buf, size, size);
+> +	else
+> +		ret = ubi_volume_offset_write(volume, buf, offset, size);
+>   
+> -	return ubi_volume_offset_write(volume, buf, offset, size);
+> +#ifdef CONFIG_LED_ACTIVITY_ENABLE
+> +	led_activity_off();
+> +#endif
+> +
+> +	return ret;
+>   }
+>   
+>   int ubi_volume_read(char *volume, char *buf, loff_t offset, size_t size)
 > 
->          c = c * period_ns;
->          do_div(c, 1000000000);
-
-Hmm.. yes, setting a default value is a good option, so I would add
-a check, if define is not set yet?
-
-And we should simply let the name "CFG_IMX6_PWM_PER_CLK" ?
-
-If okay, I can make a v3 if you want?
 
 bye,
 Heiko
