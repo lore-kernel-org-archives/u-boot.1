@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0B4BC52D7B
-	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 11:02:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D3D1C3DA4A
+	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 11:02:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA5A7889BD;
-	Wed, 14 Aug 2024 13:01:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5635888A24;
+	Wed, 14 Aug 2024 13:01:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 830A5889BD; Wed, 14 Aug 2024 13:01:20 +0200 (CEST)
+ id AED3888A1C; Wed, 14 Aug 2024 13:01:27 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 31B7B88A1B
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 13:01:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 3230287D2F
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 13:01:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8B5D9DA7;
- Wed, 14 Aug 2024 04:01:43 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 97443DA7;
+ Wed, 14 Aug 2024 04:01:48 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 17E4C3F58B;
- Wed, 14 Aug 2024 04:01:12 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 237353F58B;
+ Wed, 14 Aug 2024 04:01:17 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -40,9 +40,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 09/32] test: lmb: remove the test for max regions
-Date: Wed, 14 Aug 2024 16:29:46 +0530
-Message-Id: <20240814110009.45310-10-sughosh.ganu@linaro.org>
+Subject: [PATCH v2 10/32] lmb: config: add lmb config symbols for SPL
+Date: Wed, 14 Aug 2024 16:29:47 +0530
+Message-Id: <20240814110009.45310-11-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240814110009.45310-1-sughosh.ganu@linaro.org>
 References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
@@ -64,97 +64,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The LMB memory map is now persistent and global, and the
-CONFIG_LMB_USE_MAX_REGIONS config symbol has now been removed. Remove
-the corresponding lmb test case.
+Add separate config symbols for enabling the LMB module for the SPL
+phase. The LMB module implementation now relies on alloced list data
+structure which requires heap area to be present. Add specific config
+symbol for the SPL phase of U-Boot so that this can be enabled on
+platforms which support a heap in SPL.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 Changes since V1: None
 
- test/lib/lmb.c | 67 --------------------------------------------------
- 1 file changed, 67 deletions(-)
+ lib/Kconfig | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
 
-diff --git a/test/lib/lmb.c b/test/lib/lmb.c
-index 9f6b5633a7..a3a7ad904c 100644
---- a/test/lib/lmb.c
-+++ b/test/lib/lmb.c
-@@ -648,73 +648,6 @@ static int lib_test_lmb_get_free_size(struct unit_test_state *uts)
- }
- LIB_TEST(lib_test_lmb_get_free_size, 0);
+diff --git a/lib/Kconfig b/lib/Kconfig
+index f8ac8daad3..6a9338390a 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -1103,7 +1103,17 @@ config LMB
+ 	default y if ARC || ARM || M68K || MICROBLAZE || MIPS || \
+ 		     NIOS2 || PPC || RISCV || SANDBOX || SH || X86 || XTENSA
+ 	help
+-	  Support the library logical memory blocks.
++	  Support the library logical memory blocks. This will require
++	  a malloc() implementation for defining the data structures
++	  needed for maintaining the LMB memory map.
++
++config SPL_LMB
++	bool "Enable LMB module for SPL"
++	depends on SPL && SPL_FRAMEWORK && SPL_SYS_MALLOC
++	help
++	  Enable support for Logical Memory Block library routines in
++	  SPL. This will require a malloc() implementation for defining
++	  the data structures needed for maintaining the LMB memory map.
  
--#ifdef CONFIG_LMB_USE_MAX_REGIONS
--static int lib_test_lmb_max_regions(struct unit_test_state *uts)
--{
--	const phys_addr_t ram = 0x00000000;
--	/*
--	 * All of 32bit memory space will contain regions for this test, so
--	 * we need to scale ram_size (which in this case is the size of the lmb
--	 * region) to match.
--	 */
--	const phys_size_t ram_size = ((0xFFFFFFFF >> CONFIG_LMB_MAX_REGIONS)
--			+ 1) * CONFIG_LMB_MAX_REGIONS;
--	const phys_size_t blk_size = 0x10000;
--	phys_addr_t offset;
--	int ret, i;
--
--	ut_asserteq(lmb.memory.cnt, 0);
--	ut_asserteq(lmb.memory.max, CONFIG_LMB_MAX_REGIONS);
--	ut_asserteq(lmb.reserved.cnt, 0);
--	ut_asserteq(lmb.reserved.max, CONFIG_LMB_MAX_REGIONS);
--
--	/*  Add CONFIG_LMB_MAX_REGIONS memory regions */
--	for (i = 0; i < CONFIG_LMB_MAX_REGIONS; i++) {
--		offset = ram + 2 * i * ram_size;
--		ret = lmb_add(offset, ram_size);
--		ut_asserteq(ret, 0);
--	}
--	ut_asserteq(lmb.memory.cnt, CONFIG_LMB_MAX_REGIONS);
--	ut_asserteq(lmb.reserved.cnt, 0);
--
--	/*  error for the (CONFIG_LMB_MAX_REGIONS + 1) memory regions */
--	offset = ram + 2 * (CONFIG_LMB_MAX_REGIONS + 1) * ram_size;
--	ret = lmb_add(offset, ram_size);
--	ut_asserteq(ret, -1);
--
--	ut_asserteq(lmb.memory.cnt, CONFIG_LMB_MAX_REGIONS);
--	ut_asserteq(lmb.reserved.cnt, 0);
--
--	/*  reserve CONFIG_LMB_MAX_REGIONS regions */
--	for (i = 0; i < CONFIG_LMB_MAX_REGIONS; i++) {
--		offset = ram + 2 * i * blk_size;
--		ret = lmb_reserve(offset, blk_size);
--		ut_asserteq(ret, 0);
--	}
--
--	ut_asserteq(lmb.memory.cnt, CONFIG_LMB_MAX_REGIONS);
--	ut_asserteq(lmb.reserved.cnt, CONFIG_LMB_MAX_REGIONS);
--
--	/*  error for the 9th reserved blocks */
--	offset = ram + 2 * (CONFIG_LMB_MAX_REGIONS + 1) * blk_size;
--	ret = lmb_reserve(offset, blk_size);
--	ut_asserteq(ret, -1);
--
--	ut_asserteq(lmb.memory.cnt, CONFIG_LMB_MAX_REGIONS);
--	ut_asserteq(lmb.reserved.cnt, CONFIG_LMB_MAX_REGIONS);
--
--	/*  check each regions */
--	for (i = 0; i < CONFIG_LMB_MAX_REGIONS; i++)
--		ut_asserteq(lmb.memory.region[i].base, ram + 2 * i * ram_size);
--
--	for (i = 0; i < CONFIG_LMB_MAX_REGIONS; i++)
--		ut_asserteq(lmb.reserved.region[i].base, ram + 2 * i * blk_size);
--
--	return 0;
--}
--LIB_TEST(lib_test_lmb_max_regions, 0);
--#endif
--
- static int lib_test_lmb_flags(struct unit_test_state *uts)
- {
- 	const phys_addr_t ram = 0x40000000;
+ config PHANDLE_CHECK_SEQ
+ 	bool "Enable phandle check while getting sequence number"
 -- 
 2.34.1
 
