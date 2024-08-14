@@ -4,58 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9433CC3DA4A
-	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 14:19:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA64EC52D7B
+	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 14:25:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A67C889D3;
-	Wed, 14 Aug 2024 16:19:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=liwest.at
+	by phobos.denx.de (Postfix) with ESMTP id 59C4888967;
+	Wed, 14 Aug 2024 16:25:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=liwest.at header.i=@liwest.at header.b="v6SjRuvh";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j1Tb7QDz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CF5F889ED; Wed, 14 Aug 2024 14:41:08 +0200 (CEST)
-Received: from so.liwest.at (so.liwest.at [212.33.55.13])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E42998899D; Wed, 14 Aug 2024 16:25:05 +0200 (CEST)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C09E48899D
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 14:41:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=liwest.at
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jackie@liwest.at
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=liwest.at; 
- s=20140502;
- h=Content-Type:MIME-Version:Subject:Message-ID:To:From:Date:
- Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=di/omKeg1c+QlKiO8k5on4lqlSsiJxQF7x6vBG8kJHc=; b=v6SjRuvhT75H70rLh+AAheR9sp
- 2uVFVYLSXLkgaX9FSzxTdmyYxvmNW30hNhGJOv1z6wouhKA4IXK5I1z0hmr0N/oTLSTWadsAue2qf
- EDBch8TzTS53hmeUyTdkAuD96nSGwoHMg/jB9WpYVdQgvXjDpQT1Hakn/3J3EoPB28hVHNxjZikLF
- ezUoT/MUFmjh6epArpycsBBVjziOdW5402FkgMud4/aQQDJrJznZD2AOBAyV14dcuXKnb95sEmE3K
- SwPrMgS2kwJx3vqq0EFB3PqyEEJVktmOpjoXK0OUmcW560ZH9g/yVG3f/LWTTtVB7zRsixPUdq1L/
- eVggY4gw==;
-Received: from [192.168.224.101] (helo=ox111.liwestmail.local)
- by so.liwest.at with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
- (Exim 4.94.2) (envelope-from <jackie@liwest.at>) id 1seDJJ-00GQzt-3l
- for u-boot@lists.denx.de; Wed, 14 Aug 2024 14:41:05 +0200
-Date: Wed, 14 Aug 2024 14:41:04 +0200 (CEST)
-From: jackie@liwest.at
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Message-ID: <1285791895.63856.1723639264510@webmail.liwest.at>
-Subject: u-boot does not detect and correct bitflip when loading kernel from
- NAND
+ by phobos.denx.de (Postfix) with ESMTPS id E253087C69
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 16:25:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-e01a6e5da1fso1105470276.0
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 07:25:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1723645503; x=1724250303; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YMj33RJhEXycnLopncvAMyq1yVneKu7kxfKGk1A+n5g=;
+ b=j1Tb7QDzboQ6XMSx2QuzhBBouW++sYwRosBpAImsMgAQQAQbH3VO7rOdRE/DORk92N
+ QEytkGoohWpdJ2Dv23cOY9C4Md02/jXJxkfI3/n+QTw1RTu4Q9Q8LvWHs5Vr0KNUVbZT
+ EXcIiduemEqMAF/UOKFJIT2saraRTOVmVbliZy9/ezMORBktHZ+eSFuCm4wPfi1LlW38
+ DfwHYKWeGfexijqBRZziB2QLLXesR0zt7h7uhn1u9KA19P2Iu3sQ9mfrXrWbnGeq4MK4
+ NouAfdeCyqP8YoBMS4fyijV0sCS+aQPn2V0+J57RrM2lWdy2RG3dP9v66AC/CgIJfVye
+ CktQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723645503; x=1724250303;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YMj33RJhEXycnLopncvAMyq1yVneKu7kxfKGk1A+n5g=;
+ b=Y8TL4yJpYg6IUG4A0gQBgXOU+ZcX8sWOGizZSPgxfHZ2trVLdiNRFOLZ7l8tlhl6C7
+ PMv37bcMnTwF9zFV1cvtweBsjpC5s/8GAhJ0m1jhwnMc70heJzVdKWThetkaMMdfugHn
+ +mTX/Wnz67xncxz554qX3ZrDtQXkFMLB8FOR0/kGT2h5wQfO6KYVrX8Oy0cv75229yNK
+ IdcTg3X83ZIPTjj5SBMaSoxiuGRmv/7ASpbdPk6mFE7j7YMz4Kj+WLU1lBgCSSdm0CFw
+ BD+/8lkJAqTqRmWaUFw2FCEcWZEp886gc3S9NrDsxQmamV4gAZLzRsL0yK4yTm5ZQ9Px
+ 28Lg==
+X-Gm-Message-State: AOJu0Yz18pVn5Tp5y8mz9INgE1mEmQv0SgaCUqAOwcbiwSNK4B6RB0EC
+ hc9lV9OS41IZ+6tPe0f0zg8twuwegmiPz1HLBv4WEra3pVcgfkKrXFsMonKIqza7OzmTCC9vh4H
+ VgDIpbjAqfAuEOo74hpE20zgDs3h6MA==
+X-Google-Smtp-Source: AGHT+IHAa7j7b+yEKS/hskgiLKLJtq8Zl7gXmBXXUUM2EDygqk/gNLcuwuZ0R1mdSlpQjuQPAoTTY4JkT1cos2YxLhk=
+X-Received: by 2002:a05:6902:1389:b0:e0e:c869:693 with SMTP id
+ 3f1490d57ef6-e1155c37b49mr1378820276.9.1723645502472; Wed, 14 Aug 2024
+ 07:25:02 -0700 (PDT)
 MIME-Version: 1.0
-X-Priority: 3
-Importance: Normal
-X-Mailer: Open-Xchange Mailer v7.10.4-Rev30
-X-Originating-Client: open-xchange-appsuite
-X-Mailman-Approved-At: Wed, 14 Aug 2024 16:19:31 +0200
-Content-Type: text/plain; charset=UTF-8
+References: <1285791895.63856.1723639264510@webmail.liwest.at>
+In-Reply-To: <1285791895.63856.1723639264510@webmail.liwest.at>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 14 Aug 2024 11:24:48 -0300
+Message-ID: <CAOMZO5BWsChAJnVDGV2sfSCXtm=Xsb5rp8+1V-eq6mMDphOVdw@mail.gmail.com>
+Subject: Re: u-boot does not detect and correct bitflip when loading kernel
+ from NAND
+To: jackie@liwest.at
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,50 +88,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi to all and especially to Albert ARIBAUD, who is I think the maintainer o=
-f my board.
-I=E2=80=99m new to U-Boot and I=E2=80=99m trying to solve an issue regardin=
-g NAND Flash.
+On Wed, Aug 14, 2024 at 11:19=E2=80=AFAM <jackie@liwest.at> wrote:
 
-Issue:
+> Phytec pcm052 (Vybrid vf610), Micron MT29F4G16 =E2=80=A6., U-Boot Timesys=
+ 2013.07, Kernel 3.13
 
-After system reboot U-Boot loads the same Kernel from NAND into RAM without=
- any error message, whoever the Kernel says =E2=80=98Verifying Checksum ...=
- Bad Data CRC=E2=80=99
+That's super old.
 
-Configuration:
-
-Phytec pcm052 (Vybrid vf610), Micron MT29F4G16 =E2=80=A6., U-Boot Timesys 2=
-013.07, Kernel 3.13
-
-Kernel uses mtdparts to create partitions defined in the device tree, FDT N=
-AND uses ECC hw, on top sits UBIFS
-
-Observations:
-1. Loading both, the Kernel from Flash into RAM and the corresponding origi=
-nal copy from SD-Card revealed one single bitflip.
-2. Writing the correct byte into Flash lets the Kernel start
-3. Timesys U-Boot 2016.09 seems to recognize the bitflip, because after loa=
-ding the Kernel starts to work, but the scheduler of the MQX OS does not wo=
-rk correctly. You introduced a new feature into U-Boot to load and start an=
- image for the M4 core. Maybe this does some initialization which causes so=
-me problems in MQX. Debugging the OS shows that the scheduler starts before=
- the IDLE task has been queued in.
-4. After booting from the 2nd Kernel and a reflashing the partition of 1st =
-one, lets it start without any problems
-5. This issue happens after month and years after flashing and running the =
-system 24/7
-Assumptions about the root cause:
-1. Different ECC calculations in U-Boot and Kernel
-2. Different OOB or Bad Block handling
-Questions:
-
-Are my assumptions correct am I missing something?
-Is this a known issue?
-How can I compare the setting U-Boot/Kernel?
-E.g. Which ECC does U-Boot use (HW NFC or =E2=80=98on die=E2=80=99 ,  SW,  =
-Algorithm BCH ?, how many bit, =E2=80=A6)?
-
-Many thanks in advance
-
-Tanja
+Please run U-Boot 2024.07 with a modern kernel and check if the
+problem still exists.
