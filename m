@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 899F6C52D7B
-	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 11:05:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51D23C52D7B
+	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 11:05:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D658388AA9;
-	Wed, 14 Aug 2024 13:02:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 49FBB889BD;
+	Wed, 14 Aug 2024 13:02:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4283B88A66; Wed, 14 Aug 2024 13:02:46 +0200 (CEST)
+ id 2366E88A77; Wed, 14 Aug 2024 13:02:51 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 05EC588A79
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 13:02:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 0976C88A0D
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 13:02:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 62A29DA7;
- Wed, 14 Aug 2024 04:03:09 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6E2D2DA7;
+ Wed, 14 Aug 2024 04:03:14 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E32B03F58B;
- Wed, 14 Aug 2024 04:02:38 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EEE793F58B;
+ Wed, 14 Aug 2024 04:02:43 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -40,10 +40,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 26/32] stm32mp: compute ram_top based on the optee base
- address
-Date: Wed, 14 Aug 2024 16:30:03 +0530
-Message-Id: <20240814110009.45310-27-sughosh.ganu@linaro.org>
+Subject: [PATCH v2 27/32] test: cedit: use allocated address for reading file
+Date: Wed, 14 Aug 2024 16:30:04 +0530
+Message-Id: <20240814110009.45310-28-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240814110009.45310-1-sughosh.ganu@linaro.org>
 References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
@@ -65,59 +64,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The value of ram_top address currently gets computed in an indirect
-manner. The boot_fdt_add_mem_rsv_regions() function gets called first
-to reserve the memory region occupied by OP-TEE in the LMB memory
-map. This is followed by a call to the lmb_alloc() API, which returns
-an address which is below the OP-TEE base address. This address is the
-value of ram_top returned by the board_get_usable_ram_top() function.
-
-This has now changed, as the LMB memory map, which is no longer local,
-gets set up after relocation. Get the OP-TEE base address by reading
-the device tree, and set the ram_top from this value.
+Instead of a randomly selected address, use an LMB allocated one for
+reading the file into memory. With the LMB map now being persistent
+and global, the address used for reading the file might be already
+allocated as non-overwritable, resulting in a failure. Get a valid
+address from LMB and then read the file to that address.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
-Changes since V1: New patch
+Changes since V1:
+* Don't use the API version with flags parameter.
 
- arch/arm/mach-stm32mp/dram_init.c | 14 +++++---------
- 1 file changed, 5 insertions(+), 9 deletions(-)
+ test/boot/cedit.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-stm32mp/dram_init.c b/arch/arm/mach-stm32mp/dram_init.c
-index b3dbd521b7..32baefca71 100644
---- a/arch/arm/mach-stm32mp/dram_init.c
-+++ b/arch/arm/mach-stm32mp/dram_init.c
-@@ -62,8 +62,10 @@ int dram_init(void)
+diff --git a/test/boot/cedit.c b/test/boot/cedit.c
+index fd19da0a0c..923ddd1481 100644
+--- a/test/boot/cedit.c
++++ b/test/boot/cedit.c
+@@ -7,6 +7,7 @@
+ #include <cedit.h>
+ #include <env.h>
+ #include <expo.h>
++#include <lmb.h>
+ #include <mapmem.h>
+ #include <dm/ofnode.h>
+ #include <test/ut.h>
+@@ -61,7 +62,7 @@ static int cedit_fdt(struct unit_test_state *uts)
+ 	struct video_priv *vid_priv;
+ 	extern struct expo *cur_exp;
+ 	struct scene_obj_menu *menu;
+-	ulong addr = 0x1000;
++	ulong addr;
+ 	struct ofprop prop;
+ 	struct scene *scn;
+ 	oftree tree;
+@@ -86,6 +87,8 @@ static int cedit_fdt(struct unit_test_state *uts)
+ 	str = abuf_data(&tline->buf);
+ 	strcpy(str, "my-machine");
  
- phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- {
-+	int ret;
- 	phys_size_t size;
- 	phys_addr_t reg;
-+	u32 optee_start, optee_size;
++	addr = lmb_alloc(1024, 1024);
++	ut_asserteq(!!addr, !0);
+ 	ut_assertok(run_command("cedit write_fdt hostfs - settings.dtb", 0));
+ 	ut_assertok(run_commandf("load hostfs - %lx settings.dtb", addr));
+ 	ut_assert_nextlinen("1024 bytes read");
+@@ -94,6 +97,7 @@ static int cedit_fdt(struct unit_test_state *uts)
+ 	tree = oftree_from_fdt(fdt);
+ 	node = ofnode_find_subnode(oftree_root(tree), CEDIT_NODE_NAME);
+ 	ut_assert(ofnode_valid(node));
++	lmb_free(addr, 1024);
  
- 	if (!total_size)
- 		return gd->ram_top;
-@@ -73,16 +75,10 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- 	 * if the effective available memory is bigger
- 	 */
- 	gd->ram_top = clamp_val(gd->ram_top, 0, SZ_4G - 1);
-+	size = ALIGN(SZ_8M + CONFIG_SYS_MALLOC_LEN + total_size, MMU_SECTION_SIZE);
- 
--	/* found enough not-reserved memory to relocated U-Boot */
--	lmb_add(gd->ram_base, gd->ram_top - gd->ram_base);
--	boot_fdt_add_mem_rsv_regions((void *)gd->fdt_blob);
--	/* add 8M for reserved memory for display, fdt, gd,... */
--	size = ALIGN(SZ_8M + CONFIG_SYS_MALLOC_LEN + total_size, MMU_SECTION_SIZE),
--	reg = lmb_alloc(size, MMU_SECTION_SIZE);
--
--	if (!reg)
--		reg = gd->ram_top - size;
-+	ret = optee_get_reserved_memory(&optee_start, &optee_size);
-+	reg = (!ret ? optee_start : gd->ram_top) - size;
- 
- 	/* before relocation, mark the U-Boot memory as cacheable by default */
- 	if (!(gd->flags & GD_FLG_RELOC))
+ 	ut_asserteq(ID_CPU_SPEED_2,
+ 		    ofnode_read_u32_default(node, "cpu-speed", 0));
 -- 
 2.34.1
 
