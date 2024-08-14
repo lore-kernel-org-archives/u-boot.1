@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B0F7C52D7B
-	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 11:04:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E867DC3DA4A
+	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 11:04:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA0D688A92;
-	Wed, 14 Aug 2024 13:02:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 417FD889AA;
+	Wed, 14 Aug 2024 13:02:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 361A088A79; Wed, 14 Aug 2024 13:02:22 +0200 (CEST)
+ id AD0A888815; Wed, 14 Aug 2024 13:02:26 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id B80A588A35
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 13:02:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id C40FD88A81
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 13:02:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 28B07DA7;
- Wed, 14 Aug 2024 04:02:44 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 34640DA7;
+ Wed, 14 Aug 2024 04:02:49 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A98933F58B;
- Wed, 14 Aug 2024 04:02:13 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B50A43F58B;
+ Wed, 14 Aug 2024 04:02:18 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -40,9 +40,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 21/32] spl: sandbox: initialise the ram banksize in spl
-Date: Wed, 14 Aug 2024 16:29:58 +0530
-Message-Id: <20240814110009.45310-22-sughosh.ganu@linaro.org>
+Subject: [PATCH v2 22/32] sandbox: spl: enable lmb config for SPL
+Date: Wed, 14 Aug 2024 16:29:59 +0530
+Message-Id: <20240814110009.45310-23-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240814110009.45310-1-sughosh.ganu@linaro.org>
 References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
@@ -64,49 +64,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Initialise the ram bank information for sandbox in SPL. This is needed
-for adding available memory to the LMB memory map, which is done as
-part of the initialisation sequence.
+Enable the LMB config in SPL. This helps in testing the LMB code in
+SPL on sandbox.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
-Changes since V1:
-* Update the commit message to explain why this change is being done.
+Changes since V1: None
 
- arch/sandbox/cpu/spl.c | 13 +++++++++----
- 1 file changed, 9 insertions(+), 4 deletions(-)
+ configs/sandbox_noinst_defconfig | 1 +
+ configs/sandbox_spl_defconfig    | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
-index bcb1ca10a5..1b9896bc68 100644
---- a/arch/sandbox/cpu/spl.c
-+++ b/arch/sandbox/cpu/spl.c
-@@ -127,6 +127,15 @@ static int load_from_image(struct spl_image_info *spl_image,
- }
- SPL_LOAD_IMAGE_METHOD("sandbox_image", 7, BOOT_DEVICE_BOARD, load_from_image);
- 
-+int dram_init_banksize(void)
-+{
-+	/* These are necessary so TFTP can use LMBs to check its load address */
-+	gd->bd->bi_dram[0].start = gd->ram_base;
-+	gd->bd->bi_dram[0].size = get_effective_memsize();
-+
-+	return 0;
-+}
-+
- void spl_board_init(void)
- {
- 	struct sandbox_state *state = state_get_current();
-@@ -134,10 +143,6 @@ void spl_board_init(void)
- 	if (!CONFIG_IS_ENABLED(UNIT_TEST))
- 		return;
- 
--	/* These are necessary so TFTP can use LMBs to check its load address */
--	gd->bd->bi_dram[0].start = gd->ram_base;
--	gd->bd->bi_dram[0].size = get_effective_memsize();
--
- 	if (state->run_unittests) {
- 		struct unit_test *tests = UNIT_TEST_ALL_START();
- 		const int count = UNIT_TEST_ALL_COUNT();
+diff --git a/configs/sandbox_noinst_defconfig b/configs/sandbox_noinst_defconfig
+index 3e5ef854f6..6150f55072 100644
+--- a/configs/sandbox_noinst_defconfig
++++ b/configs/sandbox_noinst_defconfig
+@@ -285,3 +285,4 @@ CONFIG_TPM=y
+ CONFIG_ZSTD=y
+ CONFIG_SPL_LZMA=y
+ CONFIG_ERRNO_STR=y
++CONFIG_SPL_LMB=y
+diff --git a/configs/sandbox_spl_defconfig b/configs/sandbox_spl_defconfig
+index 2823bde492..3dd4c7ab43 100644
+--- a/configs/sandbox_spl_defconfig
++++ b/configs/sandbox_spl_defconfig
+@@ -253,3 +253,4 @@ CONFIG_ZSTD=y
+ CONFIG_SPL_LZMA=y
+ CONFIG_ERRNO_STR=y
+ CONFIG_SPL_HEXDUMP=y
++CONFIG_SPL_LMB=y
 -- 
 2.34.1
 
