@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEDA9C3DA4A
-	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 11:40:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00962C3DA4A
+	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 11:49:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 210DD889AE;
-	Wed, 14 Aug 2024 13:40:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 227DE88967;
+	Wed, 14 Aug 2024 13:49:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GooNiqD5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qCbc1N+e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82C5788440; Wed, 14 Aug 2024 13:40:56 +0200 (CEST)
-Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
- [IPv6:2607:f8b0:4864:20::42f])
+ id 03096889B8; Wed, 14 Aug 2024 13:49:25 +0200 (CEST)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34BA9889B8
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 13:40:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DE91C88763
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 13:49:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-70eaf5874ddso5041607b3a.3
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 04:40:54 -0700 (PDT)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2f1798eaee6so61496471fa.0
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 04:49:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723635653; x=1724240453; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723636162; x=1724240962; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SJJ0IZv+OLK2/SZYHsaKhXfSQWVwOzKTWJVsNUIwiWw=;
- b=GooNiqD5ji8f7W7FoLSSUTYUCUucRj0r9cCf3/pn2rFt2NFWkE90l0OHnVjkBMErQb
- ZPsXFz7vXo8vmJpgEFnnQ/vX344BeZNz6Cz6Y80oIWKUdPrOtyNqLbCc8DzSs4IcoD6l
- XanjTMM2jvcJKuGzqya++kS8GBgdVHvOoaf6k2XPGFVOM4AhbBCCKIio0LPj0ezIMSPS
- pa+0ibllf6VeZFV+LWtJ7GOuAaJHUNGAfdQzdQ/LMmFCydvL6CyBEr1orIk+vOyOetSM
- x46AuqiEH8t6upq0rfwq53ChIMYngmvKQX9+GzJ93c8lbI9VdkVL+MxREU1oko7oUAjn
- XOcw==
+ bh=CAPnpXoxYrgMuwLIJdGsLO8de7c3ysxJVm/6+8fTsXE=;
+ b=qCbc1N+efT9jLaGWeC9zkSu0gMBhDBpBHtFlc1HGvUgxQyblsAPgeqFuiGObNER5xw
+ /+kXhQPJgbPAku5brG3o8gMDX4xFPZ1IZwxyA64Nfs8a0q0CXzshMD8Udg2/Ie7j5gO9
+ AurnaSrCDD6qPNNHcQ3pAbPP9XqQ0bmsJXTJM6Y1+tmvv9AHoyLr7ZzYiRs/rlhHnDXJ
+ h4YlQ5sb6DeV+lujkcLnvoAq0e8AawmqxvcMnrrcynvlA46m/vjEAlm6sC0ttCJdsPN0
+ Pr9/wPJJzh9mKhYo28HI7z/8yimHuFLK00J9SQAVPmbOtFqVjekiUDvOzXJaabXJyRlw
+ fPPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723635653; x=1724240453;
+ d=1e100.net; s=20230601; t=1723636162; x=1724240962;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SJJ0IZv+OLK2/SZYHsaKhXfSQWVwOzKTWJVsNUIwiWw=;
- b=mdm4kA0xxjFQP0gx0/wWEiVcu52vHF0hBcvHegWsQchDfuRVHdkNoET1RhIfFCEVMP
- 3lt6q/YfwZEd8Q00sU2lx6miPWjH344X4xxxiKBEdZmRsn1ujmqAsV20fLQ7wxXR/BoR
- KwqEXcWjAE6XD2OU/u5FKDWZdmu3EdJBeTrO5pseZ8hz9MVn2hfkM42dUZiedSxPjcub
- El/mG08xP6xZ9x7U2yPoHhVi2XiSc/keu5T21eiuc7fyyt0Y4tT51L8DQEZrj0jcboAR
- M5SSkQI3EJOgCePPaQAG/05wkV6t4IQ2+sik6/gMWSnRUejAOIxz9+qEFsh4An16Qx8M
- WKGQ==
+ bh=CAPnpXoxYrgMuwLIJdGsLO8de7c3ysxJVm/6+8fTsXE=;
+ b=r/zbwsztcAReO1j/eXEP+g93L92hBkwSre/1v9VZEoG+C3pGIKY7D7YrMaSgH0/tCy
+ GWfAbIEDsD00KtM43EK8sQQZNuUj69WQpDolji7H4rMieJP6oxtx+Ewnic93WpB9U/gN
+ rJ0vzm9T/O48LQdmUb5Be3YefGHQopP2j7BLHiDQEIPaEg6T/WVyBEt9huNO3csf/XDx
+ 2sVuKZkBC1X8uAjC92u7fSJx8aStDqRlc4H8cEhKfnzaOvfzp1XewCB2XSI9aadyv/nw
+ 1ISa+RWtkdyFRKSYcRK6yFHroOENzKw/5O2BLolpqKnYYhu2lfTahyCs2iVsThdYODT/
+ HrAA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCULjUZDV76zTTqa3X2fCGPEj1yr4HJWxb/XvLE+o4CR0vH95P5CzVwgEMG9nKO9KMMSmfJ1mO8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx1mOu4rqtfUX/Jtk0Wzz4uuPng0EfqDiDSX6pgc1isQK5nYxQS
- EqbsPMsD29LJzd1VG/jxYaIndOrybzMFF7UF9cIczI4Ei2WZcg7R8iQrIICYJMfjYAIBXHxBB4e
- LfQMOEEwh8d6FIoWtyj10VnmeQly8l//xn5nFng==
-X-Google-Smtp-Source: AGHT+IGwDSaVmxj7qhmlaJf5knUCYAkQ5zl9fwwLY6pJ9lsWeQHyOslCeXKeMl5Rhmfn0K/i6Cdt7vL3N3F23s9oc5E=
-X-Received: by 2002:a05:6a20:6f8a:b0:1c4:f299:70b2 with SMTP id
- adf61e73a8af0-1c8eae85ef0mr3315350637.12.1723635652443; Wed, 14 Aug 2024
- 04:40:52 -0700 (PDT)
+ AJvYcCUKmXCqu/HSrJ7MrfsWQdye7WY2ghh4/WvIm33wr0FdhS28J79DKBJzPErcgUDR8XuGS3cXk7FprFdy1yy0CEn8I9uGRQ==
+X-Gm-Message-State: AOJu0YxJGGGcUbFNHbolmXhL+IQq2rRHNqtNYZD4sZyOenME8YsS5+4z
+ mlrZSd5Hvp6t+Ifb8QnsnBzyNw6SzN6QVDA6GF7lud6AQ2xyopb4d0eeCtHnkzuGLJjZsWzhVng
+ XNvr914S/aUA95DMrlHzNeAKpRn3sdSWnPPf7YQ==
+X-Google-Smtp-Source: AGHT+IEVVTRRYLx4uR80LWhRMfnPuRBibfazR8jkyk7alOb3XNDVEYB1txhG3eecFM5RIBLH6Il3NYi61eiOS6OkNLU=
+X-Received: by 2002:a05:651c:19ac:b0:2ef:1db2:c02a with SMTP id
+ 38308e7fff4ca-2f3aa1a5766mr17798941fa.6.1723636161881; Wed, 14 Aug 2024
+ 04:49:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240814071422.54193-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240814071422.54193-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 14 Aug 2024 14:40:16 +0300
-Message-ID: <CAC_iWjJ8iCYb0HyaGWq+yCwfPVk25MUsLjdTEjN+ctxdGnrR+Q@mail.gmail.com>
+ <CAC_iWjJ8iCYb0HyaGWq+yCwfPVk25MUsLjdTEjN+ctxdGnrR+Q@mail.gmail.com>
+In-Reply-To: <CAC_iWjJ8iCYb0HyaGWq+yCwfPVk25MUsLjdTEjN+ctxdGnrR+Q@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Wed, 14 Aug 2024 17:19:10 +0530
+Message-ID: <CADg8p96CR5M30-p1bqof6KewiXAiSWbqK-u2YkKL0s6WEdPhag@mail.gmail.com>
 Subject: Re: [PATCH 1/1] tools/mkeficapsule: correct printf codes
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -90,73 +91,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On Wed, 14 Aug 2024 at 10:14, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Wed, 14 Aug 2024 at 17:10, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> uint64_t is defined as unsigned long long on 32bit ARM.
-> Convert uint64_t values to unsigned long long and use %llX for printing.
-
-Why do we need to convert? uint64_t is a fixed width type
-
-Thanks
-/Ilias
+> Hi Heinrich,
 >
->     tools/mkeficapsule.c: In function =E2=80=98dump_capsule_auth_header=
+> On Wed, 14 Aug 2024 at 10:14, Heinrich Schuchardt
+> <heinrich.schuchardt@canonical.com> wrote:
+> >
+> > uint64_t is defined as unsigned long long on 32bit ARM.
+> > Convert uint64_t values to unsigned long long and use %llX for printing=
+.
+>
+> Why do we need to convert? uint64_t is a fixed width type
+
+We get warnings on a 64 bit host like such
+
+tools/mkeficapsule.c: In function =E2=80=98dump_capsule_auth_header=E2=80=
+=99:
+tools/mkeficapsule.c:694:67: warning: format =E2=80=98%llX=E2=80=99 expects=
+ argument
+of type =E2=80=98long long unsigned int=E2=80=99, but argument 2 has type =
+=E2=80=98uint64_t=E2=80=99
+{aka =E2=80=98long unsigned int=E2=80=99} [-Wformat=3D]
+  694 |         printf("EFI_FIRMWARE_IMAGE_AUTH.MONOTONIC_COUNT\t\t: %08llX=
+\n",
+      |                                                              ~~~~~^
+      |                                                                   |
+      |
+   long long unsigned int
+      |                                                              %08lX
+  695 |                capsule_auth_hdr->monotonic_count);
+      |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                |
+      |                                uint64_t {aka long unsigned int}
+
+
+-sughosh
+
+
+
+>
+> Thanks
+> /Ilias
+> >
+> >     tools/mkeficapsule.c: In function =E2=80=98dump_capsule_auth_header=
 =E2=80=99:
->     tools/mkeficapsule.c:694:66: warning: format =E2=80=98%lX=E2=80=99 ex=
-pects argument of
->     type =E2=80=98long unsigned int=E2=80=99, but argument 2 has type =E2=
-=80=98uint64_t=E2=80=99
->     {aka =E2=80=98long long unsigned int=E2=80=99} [-Wformat=3D]
->     694 | printf("EFI_FIRMWARE_IMAGE_AUTH.MONOTONIC_COUNT\t\t: %08lX\n",
->         |                                                      ~~~~^
->         |                                                          |
->         |                                                          long u=
-nsigned int
->         |                                                      %08llX
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  tools/mkeficapsule.c | 12 ++++++------
->  1 file changed, 6 insertions(+), 6 deletions(-)
->
-> diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
-> index f28008a0829..d346c217f09 100644
-> --- a/tools/mkeficapsule.c
-> +++ b/tools/mkeficapsule.c
-> @@ -691,8 +691,8 @@ static uint32_t dump_fmp_payload_header(
->  static void dump_capsule_auth_header(
->         struct efi_firmware_image_authentication *capsule_auth_hdr)
->  {
-> -       printf("EFI_FIRMWARE_IMAGE_AUTH.MONOTONIC_COUNT\t\t: %08lX\n",
-> -              capsule_auth_hdr->monotonic_count);
-> +       printf("EFI_FIRMWARE_IMAGE_AUTH.MONOTONIC_COUNT\t\t: %08llX\n",
-> +              (unsigned long long)capsule_auth_hdr->monotonic_count);
->         printf("EFI_FIRMWARE_IMAGE_AUTH.AUTH_INFO.HDR.dwLENGTH\t: %08X\n"=
+> >     tools/mkeficapsule.c:694:66: warning: format =E2=80=98%lX=E2=80=99 =
+expects argument of
+> >     type =E2=80=98long unsigned int=E2=80=99, but argument 2 has type =
+=E2=80=98uint64_t=E2=80=99
+> >     {aka =E2=80=98long long unsigned int=E2=80=99} [-Wformat=3D]
+> >     694 | printf("EFI_FIRMWARE_IMAGE_AUTH.MONOTONIC_COUNT\t\t: %08lX\n"=
 ,
->                capsule_auth_hdr->auth_info.hdr.dwLength);
->         printf("EFI_FIRMWARE_IMAGE_AUTH.AUTH_INFO.HDR.wREVISION\t: %08X\n=
-",
-> @@ -724,10 +724,10 @@ static void dump_fmp_capsule_image_header(
->                image_hdr->update_image_size);
->         printf("FMP_CAPSULE_IMAGE_HDR.UPDATE_VENDOR_CODE_SIZE\t: %08X\n",
->                image_hdr->update_vendor_code_size);
-> -       printf("FMP_CAPSULE_IMAGE_HDR.UPDATE_HARDWARE_INSTANCE\t: %08lX\n=
-",
-> -              image_hdr->update_hardware_instance);
-> -       printf("FMP_CAPSULE_IMAGE_HDR.IMAGE_CAPSULE_SUPPORT\t: %08lX\n",
-> -              image_hdr->image_capsule_support);
-> +       printf("FMP_CAPSULE_IMAGE_HDR.UPDATE_HARDWARE_INSTANCE\t: %08llX\=
+> >         |                                                      ~~~~^
+> >         |                                                          |
+> >         |                                                          long=
+ unsigned int
+> >         |                                                      %08llX
+> >
+> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > ---
+> >  tools/mkeficapsule.c | 12 ++++++------
+> >  1 file changed, 6 insertions(+), 6 deletions(-)
+> >
+> > diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
+> > index f28008a0829..d346c217f09 100644
+> > --- a/tools/mkeficapsule.c
+> > +++ b/tools/mkeficapsule.c
+> > @@ -691,8 +691,8 @@ static uint32_t dump_fmp_payload_header(
+> >  static void dump_capsule_auth_header(
+> >         struct efi_firmware_image_authentication *capsule_auth_hdr)
+> >  {
+> > -       printf("EFI_FIRMWARE_IMAGE_AUTH.MONOTONIC_COUNT\t\t: %08lX\n",
+> > -              capsule_auth_hdr->monotonic_count);
+> > +       printf("EFI_FIRMWARE_IMAGE_AUTH.MONOTONIC_COUNT\t\t: %08llX\n",
+> > +              (unsigned long long)capsule_auth_hdr->monotonic_count);
+> >         printf("EFI_FIRMWARE_IMAGE_AUTH.AUTH_INFO.HDR.dwLENGTH\t: %08X\=
 n",
-> +              (unsigned long long)image_hdr->update_hardware_instance);
-> +       printf("FMP_CAPSULE_IMAGE_HDR.IMAGE_CAPSULE_SUPPORT\t: %08llX\n",
-> +              (unsigned long long)image_hdr->image_capsule_support);
->
->         printf("--------\n");
->         if (image_hdr->image_capsule_support & CAPSULE_SUPPORT_AUTHENTICA=
-TION) {
-> --
-> 2.45.2
->
+> >                capsule_auth_hdr->auth_info.hdr.dwLength);
+> >         printf("EFI_FIRMWARE_IMAGE_AUTH.AUTH_INFO.HDR.wREVISION\t: %08X=
+\n",
+> > @@ -724,10 +724,10 @@ static void dump_fmp_capsule_image_header(
+> >                image_hdr->update_image_size);
+> >         printf("FMP_CAPSULE_IMAGE_HDR.UPDATE_VENDOR_CODE_SIZE\t: %08X\n=
+",
+> >                image_hdr->update_vendor_code_size);
+> > -       printf("FMP_CAPSULE_IMAGE_HDR.UPDATE_HARDWARE_INSTANCE\t: %08lX=
+\n",
+> > -              image_hdr->update_hardware_instance);
+> > -       printf("FMP_CAPSULE_IMAGE_HDR.IMAGE_CAPSULE_SUPPORT\t: %08lX\n"=
+,
+> > -              image_hdr->image_capsule_support);
+> > +       printf("FMP_CAPSULE_IMAGE_HDR.UPDATE_HARDWARE_INSTANCE\t: %08ll=
+X\n",
+> > +              (unsigned long long)image_hdr->update_hardware_instance)=
+;
+> > +       printf("FMP_CAPSULE_IMAGE_HDR.IMAGE_CAPSULE_SUPPORT\t: %08llX\n=
+",
+> > +              (unsigned long long)image_hdr->image_capsule_support);
+> >
+> >         printf("--------\n");
+> >         if (image_hdr->image_capsule_support & CAPSULE_SUPPORT_AUTHENTI=
+CATION) {
+> > --
+> > 2.45.2
+> >
