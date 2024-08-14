@@ -4,74 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F095C52D7B
-	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 12:42:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37A8DC3DA4A
+	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 12:47:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACAD987C38;
-	Wed, 14 Aug 2024 14:42:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id AC4DD889BA;
+	Wed, 14 Aug 2024 14:47:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bGrUdNxS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DRlp3aRc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11B48889BD; Wed, 14 Aug 2024 14:42:02 +0200 (CEST)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id 52FD2889D2; Wed, 14 Aug 2024 14:47:18 +0200 (CEST)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0C1787C38
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 14:41:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3170187C69
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 14:47:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6bf66fe9d8bso1069886d6.0
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 05:41:59 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=yasuharu.shibata@gmail.com
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-1fc611a0f8cso47876085ad.2
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 05:47:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723639319; x=1724244119; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nmFEXyh9mw63f1MHUh0l/paWTKAamOWhKF8/chYtxvY=;
- b=bGrUdNxSEQKAH4TRyAWb1BF9RPuUqlYijq09v1N52YEPq/MW+IHjyWRho+lxJPqp9/
- BSogEENbUvyU6IViWcYe6i0f9RGVdYX3dgJhxRnXES4ozdqytYkGAj5S8rkBw26R94G3
- l337ZUgTrhhldNDTnluF8bVHcQh6FPg1yCotw=
+ d=gmail.com; s=20230601; t=1723639634; x=1724244434; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qpS2dT9NcrP5zDUy7TgyqHj0rv0rOHLeAGet64kFsSY=;
+ b=DRlp3aRcdUY5JaGJn8ifwdOA27I9blG58+zjhk60jdyV+ZG105cVo9/8aOyC/HeTym
+ p9yVHoDg5xBPd/7feXaixPfmS16cbEJ01Yu9TXYSR246qlC8SQ6NwERvv/mkktsmSuwC
+ qXHkldv/ya9p3LAzZdzVuWSWR5QahrvXgY26GJCKEqOrEDx8ES211cAGKoPzJ3zFo3Du
+ LfkrZCmCVz9x8QvydOopVJEOUgvIatpibhTLEaMVGrv1Ebd6g4fhRiKcp47LEfjup70s
+ UJhXibcHC6MkZhErSdnjkitRuPl8QaOXrt6IRz4NlsKcmnZjkwFtfDYWNqoOjUJQsPd4
+ DOyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723639319; x=1724244119;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1723639634; x=1724244434;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=nmFEXyh9mw63f1MHUh0l/paWTKAamOWhKF8/chYtxvY=;
- b=kgDNrpwmK4VhrW+8kHMpklrmpjqulp7E/FtZdUiobPCYnSbtsfOFXK5m9d2bSyb4qc
- DcBY6a+vg8MRRzBRtM+sgHwQi4uNozJJQB0pWuQl0k/BspRklQVaQOh/FqORGcO0/5dU
- Efnktj30zT+GvJJuXFHdZZXXkwKwVyYw+xPDAkXouTzprqhgDdw/LdetamqLcSmEbMh+
- r/MiZk5I609PLHEA3eu8y3OijnIv0zFECFse6vYQM60ENy2RwCGxOdP/NaNjFi1MKWy2
- GUd+kYvXmRGykmD3hM9o2jmQXv9W51wJsrLhkinN0EY+TXqsK4UXKaaK55YBoTjwwwsn
- V1jw==
-X-Gm-Message-State: AOJu0Ywo1EbsOYOkzwaErbrlWKNixrfvpUay19yzWb7aqK/CcMDrMMxb
- uxJSd7OojbkAsPtH/lSASwf75FyOac+VTt/IPbWDbrFGNRq+rAEWOoXsGrSxb5QkROlxDG79sQw
- O/wxdcXx/HqzAsdxBk0cZY1RM/yncPw72SQ1tUw3xgJOvseM=
-X-Google-Smtp-Source: AGHT+IESewk2oVEdVcsJ10vU+dqkXsvex0N5xufPO1trVJwwawHmnWgSPuHiFEskqrSoznbGRGDu5SQ/h9Yy/5t2Y+Q=
-X-Received: by 2002:a0c:e888:0:b0:6bf:69c2:1d39 with SMTP id
- 6a1803df08f44-6bf69c21e5fmr4082336d6.7.1723639318761; Wed, 14 Aug 2024
- 05:41:58 -0700 (PDT)
+ bh=qpS2dT9NcrP5zDUy7TgyqHj0rv0rOHLeAGet64kFsSY=;
+ b=C2juUgv/4mVRBM4t/QWR50v0PAQN5PDcJMHo/tdRQllqHQwwqXAAiwXv0HLo/9A1YF
+ 1BHRLNPuYs0cxsbskV0U7Jy0nXV1EpJiovCHN45AMPvEcN5sBD81BU4dHO4ej01y2lsm
+ Pr/ExHB3p9So5xfxhyGOVB/ExMlIQBDpC2Jgj7r/VF6KIjSidta8GuXHcaqQlTTPavPg
+ 9KRWiLZqi/3oe4Ts0+DU1dELCLZxmKKBpV+MLt3+hP2tlidV5finjGXPelmB7+tkJ7bZ
+ 0sdtd3fIARwhNfx/vNAYPxsxSpYrWeMJdvWm/YnycnfOhQjqAfiJneb5B//O4pVop+nR
+ qecg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXe38ieb4fCUwC9XUQe99NAWz4P/2MILms0cgURqySGnjoB7bezkyAPHINxL6kExWo5OXmjkaCngljyPIlQX/faSDWGQg==
+X-Gm-Message-State: AOJu0YywP6Miy66Wf4sToMSAywATk5LVusXbMkjiq+mcxx/kP/EgFo39
+ nbQnia64LrrL+3w+T8axZlFYY6PBFOwj5XFaeGnExBESnEMM5CkKC9nkcw==
+X-Google-Smtp-Source: AGHT+IHnek71LAkowYgHMZ1gl8iLqbzqbqsjYNSAavVAikAx1H1G5VXetWKxrzeQp0TsvTKY5eNjiA==
+X-Received: by 2002:a17:903:1cf:b0:1fb:83c5:cf93 with SMTP id
+ d9443c01a7336-201d644b60bmr30210365ad.27.1723639634466; 
+ Wed, 14 Aug 2024 05:47:14 -0700 (PDT)
+Received: from localhost.localdomain ([2409:10:d8a0:1500:813e:3244:5b45:7c7f])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-201cd1b8417sm28768665ad.187.2024.08.14.05.47.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 14 Aug 2024 05:47:14 -0700 (PDT)
+From: Yasuharu Shibata <yasuharu.shibata@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Cc: Yasuharu Shibata <yasuharu.shibata@gmail.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: [PATCH 1/2] sandbox: Enable wget command
+Date: Wed, 14 Aug 2024 21:41:06 +0900
+Message-Id: <20240814124108.2885-1-yasuharu.shibata@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20240811145209.4191404-1-sjg@chromium.org>
- <CAC_iWjJXXKi5AV6-M+5D8vC5SJrr71T6HyKj-KjTHJ7QGYZUxg@mail.gmail.com>
-In-Reply-To: <CAC_iWjJXXKi5AV6-M+5D8vC5SJrr71T6HyKj-KjTHJ7QGYZUxg@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 14 Aug 2024 06:41:48 -0600
-Message-ID: <CAFLszTgA-iED7B9pzJi9Lr2MyajTMYBy+zfqt_KKa+UXKqNAdw@mail.gmail.com>
-Subject: Re: [PATCH v3 00/40] efi: Add a test for EFI bootmeth
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Albert Aribaud <albert.u.boot@aribaud.net>, Bin Meng <bmeng.cn@gmail.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Marek Vasut <marex@denx.de>, 
- Pavel Herrmann <morpheus.ibis@gmail.com>, Peng Fan <peng.fan@nxp.com>, 
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,157 +92,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Enable this so that the tests run.
 
-On Mon, 12 Aug 2024 at 07:28, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Simon
->
-> On Sun, 11 Aug 2024 at 17:52, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > The test coverage for the EFI bootmeth is incomplete since it does not
-> > actually boot the application.
-> >
-> > This series creates a simple test for this purpose. It includes a
-> > surprising number patches to make this work:
-> >
-> > - sandbox memory-mapping conflict with PCI
-> > - the fix for that causes the mbr test to crash as it sets up pointers
-> >   instead of addresses for its 'mmc' commands
-> > - the mmc and read commands which cast addresses to pointers
-> > - ANSI output from the EFI loader confusing the unit-testing checker
-> > - bug in bootdev_next_prio() which causes an infinite loop in EFI test
-> > - Hang in sandbox virtio due to EFI probing all block devices
-> > - a tricky bug to do with USB keyboard and stdio
-> > - a few other minor things
->
-> This series is unreviewable and I doubt I am the only one who thinks so.
-> There are 40 patches of completely unrelated stuff.
-> Please split them up properly.
+Fix a few warnings in the code so that CI passes.
 
-How about just reviewing the EFI patches? There are only about 14 of those.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Yasuharu Shibata <yasuharu.shibata@gmail.com>
+---
+ cmd/Kconfig | 1 +
+ net/wget.c  | 7 +++----
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-Regards,
-Simon
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 978f44eda4..2562701d1e 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2003,6 +2003,7 @@ config SYS_DISABLE_AUTOLOAD
+ config CMD_WGET
+ 	bool "wget"
+ 	select PROT_TCP
++	default y if SANDBOX
+ 	help
+ 	  wget is a simple command to download kernel, or other files,
+ 	  from a http server over TCP.
+diff --git a/net/wget.c b/net/wget.c
+index f1dd7abeff..945bfd2669 100644
+--- a/net/wget.c
++++ b/net/wget.c
+@@ -244,7 +244,7 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
+ 		pkt_in_q = (void *)image_load_addr + PKT_QUEUE_OFFSET +
+ 			(pkt_q_idx * PKT_QUEUE_PACKET_SIZE);
+ 
+-		ptr1 = map_sysmem((phys_addr_t)pkt_in_q, len);
++		ptr1 = map_sysmem((ulong)pkt_in_q, len);
+ 		memcpy(ptr1, pkt, len);
+ 		unmap_sysmem(ptr1);
+ 
+@@ -314,9 +314,8 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
+ 			for (i = 0; i < pkt_q_idx; i++) {
+ 				int err;
+ 
+-				ptr1 = map_sysmem(
+-					(phys_addr_t)(pkt_q[i].pkt),
+-					pkt_q[i].len);
++				ptr1 = map_sysmem((ulong)pkt_q[i].pkt,
++						  pkt_q[i].len);
+ 				err = store_block(ptr1,
+ 					  pkt_q[i].tcp_seq_num -
+ 					  initial_data_seq_num,
+-- 
+2.20.1
 
->
-> Thanks
-> /Ilias
-> >
-> > Changes in v3:
-> > - Include the usb.h header file in all cases
-> > - Correct the commit subject and message
-> > - Add a Fixes tag
-> > - use SZ_512 instead of 0x200
-> > - Drop the extra- rules since scripts/Makefile.lib takes care of it
-> > - Add new patch to drop crt0/relocal extra- rules
-> > - Update commit message to describe how the problem will be addressed
-> > - Fix 'virtual' typo
-> > - Put back the Linaro copyright accidentally removed
-> > - Add a Fixes tag
-> > - Mention the issue created for this problem
-> >
-> > Changes in v2:
-> > - Fix 'use' typo
-> > - Reword commit message
-> > - Use 'Firmware vendor' instead of just 'Vendor'
-> > - Add many new patches to resolve all the outstanding test issues
-> >
-> > Simon Glass (40):
-> >   nvmxip: Drop the message on probe
-> >   nvmxip: Avoid probing on boot
-> >   bootstd: Add UT_TESTF_CONSOLE_REC to bootflow tests
-> >   test/py: Fix some pylint warnings in test_ut.py
-> >   scripts: Update pylint.base
-> >   bootstd: Create a function to reset USB
-> >   usb: Drop old non-DM code
-> >   log: Add a new log category for the console
-> >   usb: Add DEV_FLAGS_DM to stdio for USB keyboard
-> >   dm: usb: Deal with USB keyboard persisting across tests
-> >   test: mbr: Adjust test to use lower-case hex
-> >   test: mbr: Adjust test to drop 0x
-> >   sandbox: Change the range used for memory-mapping tags
-> >   sandbox: Update cpu to use logging
-> >   sandbox: Unmap old tags
-> >   sandbox: Add some debugging to pci_io
-> >   sandbox: Implement reference counting for address mapping
-> >   mmc: Use map_sysmem() with buffers in the mmc command
-> >   read: Tidy up use of map_sysmem() in the read command
-> >   cmd: Fix memory-mapping in cmp command
-> >   test: mbr: Unmap the buffers after use
-> >   test: mbr: Use a constant for the block size
-> >   test: mbr: Use RAM for the buffers
-> >   test: mbr: Drop a duplicate test
-> >   efi: Use puts() in cout so that console recording works
-> >   efi_loader: Put back copyright message
-> >   efi_loader: Rename and move CMD_BOOTEFI_HELLO_COMPILE
-> >   efi: arm: x86: riscv: Drop crt0/relocal extra- rules
-> >   efi_loader: Shorten the app rules
-> >   efi_loader: Shorten the app rules further
-> >   efi: Show the vendor in helloworld
-> >   Revert "bootdev: avoid infinite probe loop"
-> >   bootstd: Make bootdev_next_prio() continue after failure
-> >   efi: Use the same filename for all sandbox builds
-> >   bootstd: Add debugging for efi bootmeth
-> >   efi: Disable ANSI output for tests
-> >   efi: Add a test app
-> >   efi: Avoid using sandbox virtio devices
-> >   test: Set up an image suitable for EFI testing
-> >   efi: Add a test for the efi bootmeth
-> >
-> >  arch/arm/lib/Makefile               |   8 -
-> >  arch/riscv/lib/Makefile             |   4 -
-> >  arch/sandbox/cpu/cpu.c              |  38 ++-
-> >  arch/sandbox/cpu/state.c            |   9 +-
-> >  arch/sandbox/dts/test.dts           |   2 +-
-> >  arch/sandbox/include/asm/state.h    |   3 +
-> >  arch/sandbox/lib/pci_io.c           |   9 +-
-> >  arch/x86/lib/Makefile               |  16 -
-> >  boot/bootdev-uclass.c               |  23 +-
-> >  boot/bootmeth_efi.c                 |  11 +-
-> >  cmd/Kconfig                         |  14 +-
-> >  cmd/mem.c                           |  26 +-
-> >  cmd/mmc.c                           |  15 +-
-> >  cmd/read.c                          |  10 +-
-> >  cmd/usb.c                           |  20 --
-> >  common/console.c                    |  36 +++
-> >  common/log.c                        |   1 +
-> >  common/usb_kbd.c                    |  74 +----
-> >  configs/octeontx2_95xx_defconfig    |   2 +-
-> >  configs/octeontx2_96xx_defconfig    |   2 +-
-> >  configs/octeontx_81xx_defconfig     |   2 +-
-> >  configs/octeontx_83xx_defconfig     |   2 +-
-> >  doc/arch/sandbox/sandbox.rst        |  21 +-
-> >  doc/develop/uefi/uefi.rst           |   2 +-
-> >  drivers/mtd/nvmxip/nvmxip-uclass.c  |  10 +-
-> >  drivers/usb/Kconfig                 |   3 +-
-> >  include/console.h                   |   8 +
-> >  include/efi_default_filename.h      |  24 +-
-> >  include/efi_loader.h                |  21 +-
-> >  include/log.h                       |   2 +
-> >  include/usb.h                       |  20 +-
-> >  lib/efi_loader/Kconfig              |  22 ++
-> >  lib/efi_loader/Makefile             |  47 +--
-> >  lib/efi_loader/efi_console.c        |  28 +-
-> >  lib/efi_loader/efi_disk.c           |  14 +-
-> >  lib/efi_loader/helloworld.c         |   6 +
-> >  lib/efi_loader/testapp.c            |  68 ++++
-> >  scripts/pylint.base                 | 462 ++++++++++++++++------------
-> >  test/boot/bootdev.c                 |  37 ++-
-> >  test/boot/bootflow.c                | 119 +++++--
-> >  test/boot/bootstd_common.c          |   6 +
-> >  test/boot/bootstd_common.h          |   8 +
-> >  test/cmd/mbr.c                      | 173 ++++++-----
-> >  test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 5016 bytes
-> >  test/py/tests/test_efi_fit.py       |   2 +-
-> >  test/py/tests/test_efi_loader.py    |   2 +-
-> >  test/py/tests/test_ut.py            | 146 +++++----
-> >  test/test-main.c                    |  38 +++
-> >  48 files changed, 962 insertions(+), 654 deletions(-)
-> >  create mode 100644 lib/efi_loader/testapp.c
-> >  create mode 100644 test/py/tests/bootstd/flash1.img.xz
-> >
-> > --
-> > 2.34.1
-> >
