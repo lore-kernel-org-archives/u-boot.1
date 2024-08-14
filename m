@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82019C3DA4A
-	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 11:06:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEDA9C3DA4A
+	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 11:40:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22D33889D1;
-	Wed, 14 Aug 2024 13:05:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 210DD889AE;
+	Wed, 14 Aug 2024 13:40:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NxhBkfZP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GooNiqD5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D292E88A27; Wed, 14 Aug 2024 13:05:02 +0200 (CEST)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
+ id 82C5788440; Wed, 14 Aug 2024 13:40:56 +0200 (CEST)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7F8688763
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 13:05:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 34BA9889B8
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 13:40:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2ef248ab2aeso101128351fa.0
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 04:05:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-70eaf5874ddso5041607b3a.3
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 04:40:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723633500; x=1724238300; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723635653; x=1724240453; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=r2zTanF4GgxBEtPjgAOqcdryl9iQlc+5wIWhHg0GGbg=;
- b=NxhBkfZPCKxCMsYrTydlRpQKP4P8KfYhByaHKb83dtFAv7r5JtBxV3nBmDWGvTSF4y
- NzLcfBMdjjXov0GZ25ml04yOSMshT66IlMwTo/wopSr1rziTguxJr+VbYOuq2zHJMpWl
- BeLHAyD7+TThYzzOLjdKv3D/eEGoHEXDlmq/9OT/FC54+jpc0emv8vC68djmRqEHB5ys
- smeGUY72CnLvJR0EJXGbdePGE0j/4MmWvyR54zdqiJqrci0He2Kls5JzSzwL8t4wTT20
- PMNnlaYjLkeii3YM2kXO13Nh3w5oxKpm6CDffxFM3hsXneRExalQfl3SMT5iqhCPeMa3
- Lzfw==
+ bh=SJJ0IZv+OLK2/SZYHsaKhXfSQWVwOzKTWJVsNUIwiWw=;
+ b=GooNiqD5ji8f7W7FoLSSUTYUCUucRj0r9cCf3/pn2rFt2NFWkE90l0OHnVjkBMErQb
+ ZPsXFz7vXo8vmJpgEFnnQ/vX344BeZNz6Cz6Y80oIWKUdPrOtyNqLbCc8DzSs4IcoD6l
+ XanjTMM2jvcJKuGzqya++kS8GBgdVHvOoaf6k2XPGFVOM4AhbBCCKIio0LPj0ezIMSPS
+ pa+0ibllf6VeZFV+LWtJ7GOuAaJHUNGAfdQzdQ/LMmFCydvL6CyBEr1orIk+vOyOetSM
+ x46AuqiEH8t6upq0rfwq53ChIMYngmvKQX9+GzJ93c8lbI9VdkVL+MxREU1oko7oUAjn
+ XOcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723633500; x=1724238300;
+ d=1e100.net; s=20230601; t=1723635653; x=1724240453;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=r2zTanF4GgxBEtPjgAOqcdryl9iQlc+5wIWhHg0GGbg=;
- b=PCqKu1NnVsm2WrVaORG3LJMtFaIab+92Ph7Oac39063HjiA7luokBkxzwjN5rhGGuL
- NAt0Gg0rJfLOWR+QwmSLo/4HpGh9g/jAd75Hu5B8NxY8Z9YsAPGud2ys43zI7+IS3eWU
- V2Ci7tdGb+lrXJY7B3Wl6AOScCXcSObkLANSbIHOO3Q3mfS2azMsOuXhhOF/R3pB/iOw
- txEuQtpmmFCUAP/VXtH1jwundXQooSifBcCH8VWS02dDURsc24znmUHLav5tM6CuXPug
- FdkWSng9+i/BARz3fxBW5epY6srdKfnvoTq9mq3+w2I0y72vJwR2czlxHW/H5jzEDMUZ
- 6Fiw==
+ bh=SJJ0IZv+OLK2/SZYHsaKhXfSQWVwOzKTWJVsNUIwiWw=;
+ b=mdm4kA0xxjFQP0gx0/wWEiVcu52vHF0hBcvHegWsQchDfuRVHdkNoET1RhIfFCEVMP
+ 3lt6q/YfwZEd8Q00sU2lx6miPWjH344X4xxxiKBEdZmRsn1ujmqAsV20fLQ7wxXR/BoR
+ KwqEXcWjAE6XD2OU/u5FKDWZdmu3EdJBeTrO5pseZ8hz9MVn2hfkM42dUZiedSxPjcub
+ El/mG08xP6xZ9x7U2yPoHhVi2XiSc/keu5T21eiuc7fyyt0Y4tT51L8DQEZrj0jcboAR
+ M5SSkQI3EJOgCePPaQAG/05wkV6t4IQ2+sik6/gMWSnRUejAOIxz9+qEFsh4An16Qx8M
+ WKGQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXCysp4UkheuNsk9XyZ93uKOn2lxMwnxX6eGWF7QZ11dWQAJqf15XdyYnxHGeBvv19ODLRj6ur70WQjBx3v3Twk8D7XFw==
-X-Gm-Message-State: AOJu0YzmWRB4Y59IGOp3vRqxt/s9J72vzpTMwz7tBelKJPiO5loATKUv
- yQhHIfZxd5Y6CBKgt7lQ5SDbDT0dRwombNPDjMMQ9654fje0gKW7gSV42HkUC5YOqs67YFpuQGL
- Zm5SvCqDAveS1312hDRNaaS+Fl5tXggV5juckkQ==
-X-Google-Smtp-Source: AGHT+IFYRNxoNllbS744F0Q3EZQMhJZna4a3YRrkrWKf6z1Lb32z8/FAsyog3EXj1bxOLnOYj3pmWaNJsBdc5ADVvx0=
-X-Received: by 2002:a05:651c:10b0:b0:2ef:2e98:9718 with SMTP id
- 38308e7fff4ca-2f3aa1df0f0mr16708531fa.15.1723633499813; Wed, 14 Aug 2024
- 04:04:59 -0700 (PDT)
+ AJvYcCULjUZDV76zTTqa3X2fCGPEj1yr4HJWxb/XvLE+o4CR0vH95P5CzVwgEMG9nKO9KMMSmfJ1mO8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx1mOu4rqtfUX/Jtk0Wzz4uuPng0EfqDiDSX6pgc1isQK5nYxQS
+ EqbsPMsD29LJzd1VG/jxYaIndOrybzMFF7UF9cIczI4Ei2WZcg7R8iQrIICYJMfjYAIBXHxBB4e
+ LfQMOEEwh8d6FIoWtyj10VnmeQly8l//xn5nFng==
+X-Google-Smtp-Source: AGHT+IGwDSaVmxj7qhmlaJf5knUCYAkQ5zl9fwwLY6pJ9lsWeQHyOslCeXKeMl5Rhmfn0K/i6Cdt7vL3N3F23s9oc5E=
+X-Received: by 2002:a05:6a20:6f8a:b0:1c4:f299:70b2 with SMTP id
+ adf61e73a8af0-1c8eae85ef0mr3315350637.12.1723635652443; Wed, 14 Aug 2024
+ 04:40:52 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240814071422.54193-1-heinrich.schuchardt@canonical.com>
 In-Reply-To: <20240814071422.54193-1-heinrich.schuchardt@canonical.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Wed, 14 Aug 2024 16:34:48 +0530
-Message-ID: <CADg8p94Ku8uVBXPYs9LuRTJgFenmLH-4wbNr4v0HBEEC8_gBzw@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 14 Aug 2024 14:40:16 +0300
+Message-ID: <CAC_iWjJ8iCYb0HyaGWq+yCwfPVk25MUsLjdTEjN+ctxdGnrR+Q@mail.gmail.com>
 Subject: Re: [PATCH 1/1] tools/mkeficapsule: correct printf codes
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -90,11 +90,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 14 Aug 2024 at 12:44, Heinrich Schuchardt
+Hi Heinrich,
+
+On Wed, 14 Aug 2024 at 10:14, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
 > uint64_t is defined as unsigned long long on 32bit ARM.
 > Convert uint64_t values to unsigned long long and use %llX for printing.
+
+Why do we need to convert? uint64_t is a fixed width type
+
+Thanks
+/Ilias
 >
 >     tools/mkeficapsule.c: In function =E2=80=98dump_capsule_auth_header=
 =E2=80=99:
@@ -114,13 +121,6 @@ nsigned int
 > ---
 >  tools/mkeficapsule.c | 12 ++++++------
 >  1 file changed, 6 insertions(+), 6 deletions(-)
-
-Acked-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-
-Interesting that the tools are being built on a 32 bit host :)
-
--sughosh
-
 >
 > diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
 > index f28008a0829..d346c217f09 100644
