@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B9ADC52D7B
-	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 10:24:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F63BC52D7B
+	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 10:25:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52092889D0;
-	Wed, 14 Aug 2024 12:24:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ABD3B889FF;
+	Wed, 14 Aug 2024 12:24:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="JH+y/qpN";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="AV2AxiyI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E25A889C9; Wed, 14 Aug 2024 12:24:45 +0200 (CEST)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on2072c.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::72c])
+ id A140F889D3; Wed, 14 Aug 2024 12:24:47 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::700])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 793E88899D
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 12:24:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9031D889AA
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 12:24:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JskGRgEWccKzHr0s99TLRe0rxzE+61wg6JRxnIZMVqKZqGdDpk6uBcL1QIJEispqxxXf676udQXSdz1b4dTrXLP4CQybz4+PDeIPhZScMx35ouHozj9XUpd5TeQyyOxBgSniJ5G57obeZZZ8lbS6Tjjdt75f89FC3sqcZTA/0xHFcTppy8Nm3RucjYkoMC9h4A4x+W0m+Qx5TqenuVTv4iK01YXOMGBTHWoLgbHLKmLKiO2jJFJxLnQYKH4eBA02tozlr1NqT2S+NV4U8bNFFEVWhvKPNbWDCgKhy4QKx0VD3OQ/WpR8yfzM7rVGqd8ODI9ftmzI42XGm3MnUwuuBA==
+ b=GfWfCBr+rcWi583gu6Cs84A8fbZtr4sI64fYHwzFSd8I+EcFZ+hRWFMmLBjYV7MC10s0mgCPXsMNTdHYrju3mqIM6yCiuiDDvxqSduYZFg9xeOq7qmMHdlyYk7BRUTMgn36nMrySScwY879alBJXv2j09Nxi25ayLEK9L9J1/wGy3/K/w9U7f8f/pFtjy4fN5t3aGgUZzZhDZPkdV6hPjR+TGQBY9/wsw+W6yFOantXhGdYEv/6ejORofo1Oi0uDPXNafjMIa8h/jKetIb21VHIWZAhuOj0/0E8zqA1CRPA5NLD7KJRNDSFH/WCY27FfNUVCejbOvp6oGv1knu0Xww==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DVV4zV7rRxc82rvHTXOKPWgSEPnbxoyyAHNN+pvTp9o=;
- b=Gr1alMDQhv1vVsFu+QuSQ4E3zvHMD7eNNhVqKThusaq3ZxhjfeR4TM3DqTUj5lU4p2apX+rubmDwMMsqQJnMdGaIUU7REEkZXriN2d+IoDqZWoDQHuLHTQA0NUk8/OBeZ1Xop/pu/srBzdHP91seFOLcKEXUMYUwojWiMCMXPv/oKPFN4DJjpE78lH4Dk9kYlMb2yo2oqsFfJqUJe8cJg4tOMKK1Rhe+UVM6n+muSsvdmU/0hKdzGcrSlyy13HUIniDXkcEX1Kvv9KhlYKDV9rLqyPpOlwMDt+u1ZB7/DXrnUULFg1xoz/WqZBJK6F/r2zw6ZgVnSkAZD68C+Y53tA==
+ bh=1d3KkDaW775IMmGfkKZVsxAUMUwmiquC842Y2bw/f9c=;
+ b=Jg0q7Ub4bnsCzuGcY6XiLSAUUThYIYBj4LGFmZvG4VvjTo9WO5FtrOdHu8yUcMJzT4hEHroV/aT2A3slY1xGuB8DMHE0FGmeC8UGFCz7o1U9ToG1BeVf2E2iVUIHT8Mx+vpFSEzqSUjTOsxIVMHGsazMC5KjLkbCdE1AJXne//Gdx95KWCGMFNP3As8+l0YuK3axmLKz85tXDzTUBiUQp9ahkjVvwjl3w7aqASLpudLgF6g1QYIzfrm5XIR38uwIgu19rJBVkDktJL5x1kRe/QgUIT2pQgu9RPcDEWCEocJ+xmdYuq8uEGaFZqj+uqNeCx+jhSXwLUFEiSiyMeD6+w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DVV4zV7rRxc82rvHTXOKPWgSEPnbxoyyAHNN+pvTp9o=;
- b=JH+y/qpN84KDBIprSZ0LD1L5apiXBHqM6660N6HiQ+HTcadOvKGq0PnaJot6QUyYIpaurNiVLJgumZ+hys45V5epMXiLyf77666bGHGNoLpHo1titu8C1rCbsp6SNhKOxKGBpQ8FEK2eTVWpbq1BlC8WKNfDvZgYGeqEZDgnrYsvVjJUZ+nbd9APXCddvGHgG32AvH0f07RZwVbd1ujK288WDci5m76qJC3phmJDa+svjoEamMp0UarH1AjOV62JkL4JaSoEc8FtjsXBUHj9nMuICC5S0UQ6wKg3ESvX5OUWUK5gAPczYCGcL4M72LNmx4mx0AWf4IWVdq19J/FyUA==
+ bh=1d3KkDaW775IMmGfkKZVsxAUMUwmiquC842Y2bw/f9c=;
+ b=AV2AxiyIieex7VqHpeR3V+el0VCKy6w+xUcY8FKpQBHXbfOZ/s9zuAEf9kSqjSC/gP6a5z57teR0K9Q9M2ZArLxoOFfSg3+GR4MDuTIutXq4UIGBJ0e4kDj8ATbIpY3QnTPBZ6P1HbgTVwkk6Cjs4r6KRZRQSTMLmxtVvmWS+ZvDd5QxHz34KIIn/irfa/mYfNpaQZK+hauNVBfdMxn1+YstlEZTeaP/7BPrPkcsSRzc5bbDHsNFbNbpiG3mF0DkFsf/IN9HAz3ucWNQ1WOdJSBn4RBiuh1xCdZIXbfEnSZWsMY674mI6l3rLumjmxnX8aDeeQdtuYZbaDiz6Hfy7w==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
  by AS8PR08MB8491.eurprd08.prod.outlook.com (2603:10a6:20b:566::19)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7875.13; Wed, 14 Aug
- 2024 10:24:42 +0000
+ 2024 10:24:44 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%2]) with mapi id 15.20.7875.012; Wed, 14 Aug 2024
- 10:24:42 +0000
+ 10:24:44 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
@@ -64,9 +64,9 @@ To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Miquel Raynal <miquel.raynal@bootlin.com>,
  Arseniy Krasnov <avkrasnov@salutedevices.com>, u-boot@lists.denx.de
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Subject: [RESEND PATCH v2 1/3] cmd: mtd: add markbad command support
-Date: Wed, 14 Aug 2024 14:24:26 +0400
-Message-Id: <20240814102428.1347425-2-mikhail.kshevetskiy@iopsys.eu>
+Subject: [RESEND PATCH v2 2/3] cmd: mtd: add torture command support
+Date: Wed, 14 Aug 2024 14:24:27 +0400
+Message-Id: <20240814102428.1347425-3-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240814102428.1347425-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20240814102428.1347425-1-mikhail.kshevetskiy@iopsys.eu>
@@ -78,78 +78,78 @@ X-ClientProxiedBy: LO4P265CA0307.GBRP265.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|AS8PR08MB8491:EE_
-X-MS-Office365-Filtering-Correlation-Id: 11d1ad35-8ec6-4c5b-3bb1-08dcbc4b4f3d
+X-MS-Office365-Filtering-Correlation-Id: 026107d6-d200-420b-0eec-08dcbc4b5075
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|52116014|7416014|366016|1800799024|376014|38350700014|921020; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?0oIu6SSJUDF+ssJEE4y9ZpXv+h5IdyyE5arIqszhi2BSXWCVN2wooat3WHWU?=
- =?us-ascii?Q?f686P2Az4vlP3M5hGssFC10mRntuCqJxBS1TCuEzVDyeONHa0atz8mrP2fmA?=
- =?us-ascii?Q?cZIu27JvEC/kofF3ruBMP/QuIhirKMf9cGDrilVa0LJ0Kf3DpRs0OZuQ1KJZ?=
- =?us-ascii?Q?mSgWwO+JrpOtMoEN01rllxvBFXDTwCj90hGPDOoA8vAp0LDlA448SF/cb/IC?=
- =?us-ascii?Q?Q+zfDfJdyYdOKbGadcKdhEsIzE0PpoDvc9hsrDr+CKvKpY30xj74+cc/71KO?=
- =?us-ascii?Q?/UkXgBqBQbvmGb4opIfFyAPXBqQxoI0sg9/zt34cxB9teRTztO0D0HDJjf3V?=
- =?us-ascii?Q?OXiEV1VyYGabI851BCZ+bXbSL6CwJ39+GWpLMTTvQfaQDyAqIj7PIXGlk7up?=
- =?us-ascii?Q?AVWz3SMaVkUAaA1gJs7gt7ENoUxDAoP8cSaW8UAEGrDcjVxS4k3wI5niVBNT?=
- =?us-ascii?Q?SHAUlsutemX277aHgwSbmV3byCZ6ooM4j5NEIuCf120sJObSYH8qYsa8fb41?=
- =?us-ascii?Q?yXHpusWHr7RxmzxhG/zTjAmQVWhFpFJxRhAPVbYU6NIK1Pp3H03kx9QXFO6o?=
- =?us-ascii?Q?aXf9bLAVHU0t2HEjWAmtaDs+06bJF4DyewslVqlR7YoQN5W1FoOfJfnhnJVt?=
- =?us-ascii?Q?mHUjiqAT6nhQPqFsELgQMDJnsZdUriIDCGi+L/H55HJL3sSr6evI2NXK1ROe?=
- =?us-ascii?Q?x/1/4e4KeQdvN7J60/Grtx81yZBjQAyWPTsXRYxf9WG2RMQQ5wlTYLgZ3YE2?=
- =?us-ascii?Q?fJtIMmDUmn9DrEK8tcouWz1jyf3IotUupoiwBX9h6ElxxtpGkqlaSGtuDHUb?=
- =?us-ascii?Q?gA/S78rlPM2Q1dSm8Y5FNN7ZE7BcnzLuyCinEMZmpeoUcMMOsip7GaiUXJCa?=
- =?us-ascii?Q?F5h9R7nvbpPwTBXd5awz9ubdcY7DxEuB6MVteISgNsjADpHk7VCouqmlAlPs?=
- =?us-ascii?Q?gtNzaPAK3oRfuDlVZgQXqFoojwDl6PpzQFKPqUhplb3UjaANNX2c7F551Ymz?=
- =?us-ascii?Q?p412CStQvBXqIaoqr8RoA82VFqGIfcbeaELQAtfyFAObLPYyiHz/rA0XpRfP?=
- =?us-ascii?Q?3BiT3QiYV/MJb98eK9BvYo6HsU0tgyE4kO1UyoWE0FdYftv/ET14XNHxIovI?=
- =?us-ascii?Q?uC0edrKJVyEq/QTYKTeiMpRoprlfNem81hBi+3IXlPbk1gKM9ftualjHJ3o/?=
- =?us-ascii?Q?oK0bkViQ+axi1jGm0c666I/FWksL/SPnxu/8FoxDSqfeNpgSD04W8i5l1pW1?=
- =?us-ascii?Q?nXor3QiV25G7dPSARPbbiseQjKvX2D8QB3+FrUnwS/ZOlLcE6lbA1Jnd+dCs?=
- =?us-ascii?Q?p9hn0k9rMdpi9aIF8/D0M8cAVGAg4CPF3Brh4Yj3le/iy2WdaqjI8kS1dBHC?=
- =?us-ascii?Q?9pEmB9rAyI1eRCdZxurjTqKoOpvruS7ENj8uL/cRwbOKcQgMgKBe5t77ieiJ?=
- =?us-ascii?Q?FWWakpz2VP0=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?eKY6KtQFr7xekvhxl+/3yz5RahHt1ZDFSm5zy4+yzBtZ4jqfWbsNVPbnh6iN?=
+ =?us-ascii?Q?6+uGzGtF3BXhBXjZ4yRZSMEEOZS0PaKY+FeVKDp0pqM++ocHlmVLZl1b7Lr9?=
+ =?us-ascii?Q?NLKXAV/YV8FuKa8hMN3qCT+D6iZ1Wy9VlKTSQNMkAaSFdtRDWpD51e5uN4Oy?=
+ =?us-ascii?Q?FBklMpXGjwONDTzysKO4Sd15Nj5kh+y1gBDTW3QC3f+vv7MzddsLw/PyAE8b?=
+ =?us-ascii?Q?w2a2AdJ5LtW5qeWnpF42/YrE/YJdCg26Guo7ppoWimBluBROdL/WpeTwb+ib?=
+ =?us-ascii?Q?mwdOePcjWW2zGeO2F8awH7vttQEhMsWT4omeAcaJjjlFANu+zxUqV1/Ay1k7?=
+ =?us-ascii?Q?iPh6qhmdA5cJQAZTEHl3/xO2n0ZzFagUWoo0viTYoQMbqeqiJQycjxEwUgQx?=
+ =?us-ascii?Q?IKr5RTUR4+6WJhF+0C7L1s9xDU2uqnrG+bR7GUEZ/akWsJX5PZ8xl3sxNa4T?=
+ =?us-ascii?Q?hxFy1n3v4lK1V6CCq4O083UFxELAy3PPxSJPM5fMjZg88WgnkOtXl1coyLtm?=
+ =?us-ascii?Q?m37AZhA250kqHx6mBN1tqG2VHP8IzVwY8Sh85fB2ljZYd3tuhrEQvi90V2GR?=
+ =?us-ascii?Q?rewBiW71rkyNsFXRawBO+KJ82dXHN5s4tvgYwosX48dfGYZtGBIXvLJ9xVnp?=
+ =?us-ascii?Q?55uub89Q3/LthkacVOc+PHDpJVknZ15A/aRvLgQh/S2ToM9903xHQuWhSB99?=
+ =?us-ascii?Q?zbYyCUCXuWt9rZrIDXmoFXjcxy2RH/jnV2Cpk9oloGLB3ED1k2ya13+XotPR?=
+ =?us-ascii?Q?hI/P6ZLwVWj5U2FtFGLrt/gOi/Cc9OnGA2IBtZ1N1Pu57SebOepnMriM/0/y?=
+ =?us-ascii?Q?+xYXru8jAldRzfaLM97kDHtzBzNWyGGnYh9TFDCTs6fnA9G3BT9BDKFE/oRd?=
+ =?us-ascii?Q?2NSySpYvnlpG3xv/89kvGi+VsHDksiZVgpk0I3l5/RasOBh9NhT02QzTtjeC?=
+ =?us-ascii?Q?PPcgGGKTAvWWCMDaKo2Lg/6JvRYCpGz3JagFU709018/VIhaCxYkV5o8uMoW?=
+ =?us-ascii?Q?eqf0KQlAwHG5u+FjZuIkHaL7TTYmamIj4ODFLtrY5gQxpp9e12TjyfVBetaW?=
+ =?us-ascii?Q?JPHBjelnfvhZPR1dI0PuBye/KE0FoPEKzrpCsURKPOoBMhEQHPx7WteleCGq?=
+ =?us-ascii?Q?ZPXTvjRhd0SZFIbuqZ2jfX3yqAoLTmCe6lg/mnl20bGaZTDJDB1+JmGxvQr9?=
+ =?us-ascii?Q?0ybZt0ZAraGfMjgsbv/PkncZH7t8LsZlBYeHYtcWB/vHcEEREnbWE66eLLHB?=
+ =?us-ascii?Q?MDYpZWP4brCUWrrhBPVTwnSs/kfvcjOcomiHoiT6rPk0FBnAvd8IiuRIQErH?=
+ =?us-ascii?Q?+uCpDLVAchrGL/v7Fjn9fIL0wpdDPBpqjQojqwPEHuKeyng0OZ7/xM+EhZkG?=
+ =?us-ascii?Q?KyRttYcKPdzOPUibd2zneIySisLqhiVGDr5PKTTQ8AtTRfwLavmD04m238GW?=
+ =?us-ascii?Q?VWdK32Vd2qU=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(52116014)(7416014)(366016)(1800799024)(376014)(38350700014)(921020);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?8HoLYpYR+Ot4UrHBJbWHYd0hhRVs8t7ujcmwPeiC+7LmgMuRfsZQ5sAIpK68?=
- =?us-ascii?Q?/eztzspEunKb66HIBrWy49Szipwm46BP5tmzzHNBKsd2WXN28bb3btaDCAu8?=
- =?us-ascii?Q?gfYvlUITSrq2qhziqPT02BIfSuFmDDRtmB+gUM6a+/8qriLKbQoKFFDGepBA?=
- =?us-ascii?Q?B5qBGmkq5FJEd0aLeBriHP67oLZ7V4TSXP5HQsl0R7+clv17hqnviBiWWRC8?=
- =?us-ascii?Q?5i2jbqZoOipx1JjOeQj4HPIon4XqdMYZDigvpBQjP3c+07LHJVycnQk5oWqN?=
- =?us-ascii?Q?NGruACIh2nveGtgwaGRJnJoZ8JZtIHuApLRtbQnMkyM8WVFTrky0+RBmxiX4?=
- =?us-ascii?Q?KQVNjPLxOrNy4kylh7Oq6Ufefu4AgQ9gR/9muvZVxYfX2RNETX5vORH7Nr59?=
- =?us-ascii?Q?JPsw83iUey44agWQ7RE1lHiKYP39XWn0UBWO+GeKqQ5pth9twciHEBouNLb1?=
- =?us-ascii?Q?XPPc6koFQMjFSJDj0oVzPkbp3EeWdSAPoZlWnOWai4lpvXgStRcHZL6NkkMQ?=
- =?us-ascii?Q?VqQ4fr8L/UZBZvm+wNh56Sbp/QQYCQpLKV51wQhKwmMA3LoLEIrxjEz6dhR7?=
- =?us-ascii?Q?HoMRQ7QK+cF4QW2nLknxGplFTa1L1Xu4y7xS8sCBPfxMzpPz9cGF3Z46TT2e?=
- =?us-ascii?Q?n85bOsl2tWL2bfFzE8mxh+4oQgD09zMTdMMt21auW9BuFt04QV6xXm5Ym3qJ?=
- =?us-ascii?Q?1UjIugusfnblVwmQaaLXSMCXNmz9+klW3PjExRO44Qf36pUz+b6d24Nz1FgN?=
- =?us-ascii?Q?C0ra9Hp+/LECBELMHxPB5s3XZhRvxSiZmpmf0rOa3w528rPLXT2BeS9rhj9N?=
- =?us-ascii?Q?qc2jYHo2ja3rIhDa0XRu0GLh47wAKS1012R+5HksBgGRndOShuq5z3KmxWFY?=
- =?us-ascii?Q?z9arDPtzPC+N9FpLyN3A8u9v4Co0SL/PvcKDqba7YE4lVoM/vaYBp+A70pqY?=
- =?us-ascii?Q?Ymh03fxjjXuRSgM6cHcsqwN1FOzYoLZi7HgnktcN8QZORQ++ciH4yzeY+Kyk?=
- =?us-ascii?Q?wT2dLH46mKWveVzau4b7M+PGUadMUcfmfsM1iPDXyASIvcMW9UUvg8vJQQ3K?=
- =?us-ascii?Q?DwhE23pAexpgyNrxqYB+MRd6nq8ye6TIYXcpBVVZiIOHYnuyEKgRQ92Je7Hu?=
- =?us-ascii?Q?EV1ik3sQjPRrJ3VXuN123AbVrS86u91y+KidS8C+mEO8krkGMj0tYCdjT3yL?=
- =?us-ascii?Q?Pg0RjdHHGwUD+5crcM1YwFNFyhAb/vUHmvmx06owAePcz8qDS43TVvzLebRz?=
- =?us-ascii?Q?yLzI/RSf03xWsnyFyn0dIfxssS8KI/VsvB9lIYhEw/zpKVv3YnLySDnZJUC2?=
- =?us-ascii?Q?QHOpbUPKJFjLIk76OQJKJnDR9rn9n9jfna9f+pJLReBNxHSgL889bjvCUkg8?=
- =?us-ascii?Q?XUPJj7TvPucxNUZ8n8wDFGxC6nFMWQd4itfZ2SG698qal7BRR0KVeNNq222d?=
- =?us-ascii?Q?Dothzz9bWNHDxxHmJw85JLB71R8HdVBJJTRimZ1kTLe2fuPbm5v+nC39QkCj?=
- =?us-ascii?Q?h3gMa6zAaO7T4f4P0FQ3GSZgD3taRP+S09W2X5TO+sN9ADc5LtZWRLDTML2w?=
- =?us-ascii?Q?TVfvyADfozluks3ytqy527jfeG4Lymwz6eQC5L0RUlV0Wx2N3gHApGX9f0Wf?=
- =?us-ascii?Q?Pg=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?eAkfBjXzgoGxw0VwArcR1zI9Kh5ErecrnycJ6Twjah9nBLKMA5YARVt/rETo?=
+ =?us-ascii?Q?n78RLfTEngp3tkfUExdu7DqwZMSeDgeodmkRukg/PM3xuFPcMMgIxqq/cyGh?=
+ =?us-ascii?Q?iZJAgDG+FsWtTYE57Um8MYJ9C0982TK/c/78DUuj48qZDRskxRFwnTWbXANC?=
+ =?us-ascii?Q?Ejl/OJez6Emcq4oQkIdetK4xPAPexoxTZn+jKaIW9SJFRsl2oxijakkbNsCG?=
+ =?us-ascii?Q?SnDfu489nuokafdryT6Ys3gKPGdqAGFSImsbV6PRgAshcnbOi+izVSJK9nP+?=
+ =?us-ascii?Q?g8RRy7v1ny7ReadUat5b7zGVDX93L24s4j/hrlE1RJxQWKInSy8ss4Jyb3dc?=
+ =?us-ascii?Q?FLBFJy/s1AzzVyoL2I1E54tjLmYWaQvb0skZXpCFc/3zr8Lpa4iuEBdocAeG?=
+ =?us-ascii?Q?WCYHEtgOhQQDyczIEWPP+ZBrMiYkQ0dmCi+sh5tPZ+2cfVWluW3cPyvqMvpe?=
+ =?us-ascii?Q?37XosOybbpMI4tgHalJTxFYI5GbNwpvbPYvNBdhxojnhf3UM2XUdISCtzAuN?=
+ =?us-ascii?Q?5M43GSicKyzXKX+O8WbwGiZOGGgtuu5z6XyDCPTQvCYTiRFF4ft8UdOsbfQa?=
+ =?us-ascii?Q?YCiZXNUCEpJeNW4gz+He4RMQ5IxtPnQoJqrPpqP05essSIGbkw4/uevxUKzF?=
+ =?us-ascii?Q?g/oaov01d31WOljD91TYoqNA6R6GpqHcPEAg1LmcyrPsMgLnQI7p44JCJ1O+?=
+ =?us-ascii?Q?U0mMtuJHyj7iiYW0sVRblsXRLdIjEJW2lvB2OgoCzsm2JCALumU2eDVMwaKP?=
+ =?us-ascii?Q?3/WkygnPEX4a4mntsu1lNPBWGUWYTiuYZly4U3ivHddrpxwQIlk2HcQy6IYD?=
+ =?us-ascii?Q?oZZRXHhY6uIkqXwHQ68wk4Dr4EeIyYy82rTjzaT9I8wvVWPzR/2lyCLRcVHA?=
+ =?us-ascii?Q?thGKCDr5U+8TD0KUtiYZOazEGFpS7XtWTkWfyBr9qgFdjB5WMAg6G7h0Q7w6?=
+ =?us-ascii?Q?p3VOrRf1wqepVZM5rXgouW44Rbk0Vkvp7TeB/QAwR6Cc/w3HxmMPr1gGHRzr?=
+ =?us-ascii?Q?e8g84e9/qS/r4uQWrWEIj6BBUHFDAR4KIm6Fg8YtZ+NyD3h25Xp+7Y5zmj2A?=
+ =?us-ascii?Q?hJAmeIxDicK6+sSaqhZk1eRh44bbSxVsDGqggYA7PQnlyaqk9ZQx1LfrvMVl?=
+ =?us-ascii?Q?xOrVpiuhcTAyJlbdKhPdM5JT45C6FVMZ8KPNNaHe9635ACidU4JrkY6rgVaw?=
+ =?us-ascii?Q?kldtuURZebhJ9qYSW5dblndRlNUoYjUkldmLGbyrY3hhG982ppIAnN3XmtQ6?=
+ =?us-ascii?Q?SXMLXqSUzdydT5fYd9UqvNzDPGPw1+mkRQy3nC2rwxT+fTHSsD0e9I6BY6dP?=
+ =?us-ascii?Q?Djn3AROLe7rpFoa5WZUDrz83YifxtjpMUFMZI/UsY1xcvKuGjuJ8tANqpcpw?=
+ =?us-ascii?Q?cRWqUH+glaXySF2z4RDc2InXEFfYL8iPZb4P3rWrhNQLB6GUpw0inQ2yhvwR?=
+ =?us-ascii?Q?FY6Il6jhUwB6eTebn2UIXfpp00tcGTcK8Alr+L3YESM2nq0r/2AnhbpvLpT/?=
+ =?us-ascii?Q?zJQwFBCFh0gSiZMqrPutOVodUoisQGJSPWJJeg00p3oi3AmZQ5z1AWsKbg9H?=
+ =?us-ascii?Q?67G4tboS860FIgwMUNlwmBrC7SN4QeEaInNaMOa0iE3GZHTBepBYmEO6sD7y?=
+ =?us-ascii?Q?xA=3D=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 11d1ad35-8ec6-4c5b-3bb1-08dcbc4b4f3d
+X-MS-Exchange-CrossTenant-Network-Message-Id: 026107d6-d200-420b-0eec-08dcbc4b5075
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Aug 2024 10:24:41.9486 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Aug 2024 10:24:44.0296 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: j+tpm6PKOEeqn+dOJr8uDOr7Fk13Llr+Vk9md2BZ9Q0WSNM/j6g4X2BTm88/eHqk/ae6GvHvtbOjwUyFFTSDj8PzJdFhOK8a3IDmcZEn+BQ=
+X-MS-Exchange-CrossTenant-UserPrincipalName: o5+zbnXXMnddhgDLXoUA6jEmAFeZ+K8lQq7felfgEt/IDSqkcESVKL86ms3Ll0jbmIVlDa9CSv61kO/LJpinPDvnchCctBsyMVNhfPIqKts=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB8491
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -171,48 +171,175 @@ Some nand flashes (like spi-nand one) are registered with mtd
 subsystem only, thus nand command can't be used to work with
 such flashes. As result some functionality is missing.
 
-This patch implements 'nand markbad' functionality for mtd command.
+This patch implements 'nand torture' functionality for mtd command.
 
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 ---
- cmd/Kconfig |  6 ++++++
- cmd/mtd.c   | 58 +++++++++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 64 insertions(+)
+ cmd/Kconfig |   6 ++
+ cmd/mtd.c   | 196 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 202 insertions(+)
 
 diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 978f44eda42..53ebafcb610 100644
+index 53ebafcb610..698e0e697f2 100644
 --- a/cmd/Kconfig
 +++ b/cmd/Kconfig
-@@ -1433,6 +1433,12 @@ config CMD_MTD_OTP
+@@ -1439,6 +1439,12 @@ config CMD_MTD_MARKBAD
  	help
- 	  MTD commands for OTP access.
+ 	  MTD markbad command support.
  
-+config CMD_MTD_MARKBAD
-+	bool "mtd markbad"
++config CMD_MTD_TORTURE
++	bool "mtd torture"
 +	depends on CMD_MTD
 +	help
-+	  MTD markbad command support.
++	  MTD torture command support.
 +
  config CMD_MUX
  	bool "mux"
  	depends on MULTIPLEXER
 diff --git a/cmd/mtd.c b/cmd/mtd.c
-index 795aaa2b37d..45084d39d3a 100644
+index 45084d39d3a..69ddfe1d9c6 100644
 --- a/cmd/mtd.c
 +++ b/cmd/mtd.c
-@@ -691,6 +691,57 @@ out_put_mtd:
- 	return ret;
- }
+@@ -18,6 +18,7 @@
+ #include <mtd.h>
+ #include <dm/devres.h>
+ #include <linux/err.h>
++#include <memalign.h>
  
-+#ifdef CONFIG_CMD_MTD_MARKBAD
-+static int do_mtd_markbad(struct cmd_tbl *cmdtp, int flag, int argc,
+ #include <linux/ctype.h>
+ 
+@@ -742,6 +743,194 @@ out_put_mtd:
+ }
+ #endif
+ 
++#ifdef CONFIG_CMD_MTD_TORTURE
++/**
++ * nand_check_pattern:
++ *
++ * Check if buffer contains only a certain byte pattern.
++ *
++ * @param buf buffer to check
++ * @param patt the pattern to check
++ * @param size buffer size in bytes
++ * Return: 1 if there are only patt bytes in buf
++ *         0 if something else was found
++ */
++static int nand_check_pattern(const u_char *buf, u_char patt, int size)
++{
++	int i;
++
++	for (i = 0; i < size; i++)
++		if (buf[i] != patt)
++			return 0;
++	return 1;
++}
++
++/**
++ * nand_torture:
++ *
++ * Torture a block of NAND flash.
++ * This is useful to determine if a block that caused a write error is still
++ * good or should be marked as bad.
++ *
++ * @param mtd nand mtd instance
++ * @param offset offset in flash
++ * Return: 0 if the block is still good
++ */
++static int nand_torture(struct mtd_info *mtd, loff_t offset)
++{
++	u_char patterns[] = {0xa5, 0x5a, 0x00};
++	struct erase_info instr = {
++		.mtd = mtd,
++		.addr = offset,
++		.len = mtd->erasesize,
++	};
++	size_t retlen;
++	int err, ret = -1, i, patt_count;
++	u_char *buf;
++
++	if ((offset & (mtd->erasesize - 1)) != 0) {
++		puts("Attempt to torture a block at a non block-aligned offset\n");
++		return -EINVAL;
++	}
++
++	if (offset + mtd->erasesize > mtd->size) {
++		puts("Attempt to torture a block outside the flash area\n");
++		return -EINVAL;
++	}
++
++	patt_count = ARRAY_SIZE(patterns);
++
++	buf = malloc_cache_aligned(mtd->erasesize);
++	if (buf == NULL) {
++		puts("Out of memory for erase block buffer\n");
++		return -ENOMEM;
++	}
++
++	for (i = 0; i < patt_count; i++) {
++		err = mtd_erase(mtd, &instr);
++		if (err) {
++			printf("%s: erase() failed for block at 0x%llx: %d\n",
++			       mtd->name, instr.addr, err);
++			goto out;
++		}
++
++		/* Make sure the block contains only 0xff bytes */
++		err = mtd_read(mtd, offset, mtd->erasesize, &retlen, buf);
++		if ((err && err != -EUCLEAN) || retlen != mtd->erasesize) {
++			printf("%s: read() failed for block at 0x%llx: %d\n",
++			       mtd->name, instr.addr, err);
++			goto out;
++		}
++
++		err = nand_check_pattern(buf, 0xff, mtd->erasesize);
++		if (!err) {
++			printf("Erased block at 0x%llx, but a non-0xff byte was found\n",
++			       offset);
++			ret = -EIO;
++			goto out;
++		}
++
++		/* Write a pattern and check it */
++		memset(buf, patterns[i], mtd->erasesize);
++		err = mtd_write(mtd, offset, mtd->erasesize, &retlen, buf);
++		if (err || retlen != mtd->erasesize) {
++			printf("%s: write() failed for block at 0x%llx: %d\n",
++			       mtd->name, instr.addr, err);
++			goto out;
++		}
++
++		err = mtd_read(mtd, offset, mtd->erasesize, &retlen, buf);
++		if ((err && err != -EUCLEAN) || retlen != mtd->erasesize) {
++			printf("%s: read() failed for block at 0x%llx: %d\n",
++			       mtd->name, instr.addr, err);
++			goto out;
++		}
++
++		err = nand_check_pattern(buf, patterns[i], mtd->erasesize);
++		if (!err) {
++			printf("Pattern 0x%.2x checking failed for block at "
++			       "0x%llx\n", patterns[i], offset);
++			ret = -EIO;
++			goto out;
++		}
++	}
++
++	ret = 0;
++
++out:
++	free(buf);
++	return ret;
++}
++
++static int do_mtd_torture(struct cmd_tbl *cmdtp, int flag, int argc,
 +			  char *const argv[])
 +{
 +	struct mtd_info *mtd;
-+	loff_t off;
++	loff_t off, len;
 +	int ret = 0;
++	unsigned int failed = 0, passed = 0;
 +
-+	if (argc < 3)
++	if (argc < 2)
 +		return CMD_RET_USAGE;
 +
 +	mtd = get_mtd_by_name(argv[1]);
@@ -220,33 +347,51 @@ index 795aaa2b37d..45084d39d3a 100644
 +		return CMD_RET_FAILURE;
 +
 +	if (!mtd_can_have_bb(mtd)) {
-+		printf("Only NAND-based devices can have bad blocks\n");
++		printf("Only NAND-based devices can be tortured\n");
 +		goto out_put_mtd;
 +	}
 +
 +	argc -= 2;
 +	argv += 2;
-+	while (argc > 0) {
-+		off = hextoul(argv[0], NULL);
-+		if (!mtd_is_aligned_with_block_size(mtd, off)) {
-+			printf("Offset not aligned with a block (0x%x)\n",
-+			       mtd->erasesize);
-+			ret = CMD_RET_FAILURE;
-+			goto out_put_mtd;
-+		}
 +
-+		ret = mtd_block_markbad(mtd, off);
-+		if (ret) {
-+			printf("block 0x%08llx NOT marked as bad! ERROR %d\n",
-+			       off, ret);
-+			ret = CMD_RET_FAILURE;
-+		} else {
-+			printf("block 0x%08llx successfully marked as bad\n",
-+			       off);
-+		}
-+		--argc;
-+		++argv;
++	off = argc > 0 ? hextoul(argv[0], NULL) : 0;
++	len = argc > 1 ? hextoul(argv[1], NULL) : mtd->size;
++
++	if (!mtd_is_aligned_with_block_size(mtd, off)) {
++		printf("Offset not aligned with a block (0x%x)\n",
++		       mtd->erasesize);
++		ret = CMD_RET_FAILURE;
++		goto out_put_mtd;
 +	}
++
++	if (!mtd_is_aligned_with_block_size(mtd, len)) {
++		printf("Size not a multiple of a block (0x%x)\n",
++		       mtd->erasesize);
++		ret = CMD_RET_FAILURE;
++		goto out_put_mtd;
++	}
++
++	printf("\nNAND torture: device '%s' offset 0x%llx size 0x%llx (block size 0x%x)\n",
++	       mtd->name, off, len, mtd->erasesize);
++	while (len > 0) {
++		printf("\r  block at %llx ", off);
++		if (mtd_block_isbad(mtd, off)) {
++			printf("marked bad, skipping\n");
++		} else {
++			ret = nand_torture(mtd, off);
++			if (ret) {
++				failed++;
++				printf("failed\n");
++			} else {
++				passed++;
++			}
++		}
++		off += mtd->erasesize;
++		len -= mtd->erasesize;
++	}
++	printf("\n Passed: %u, failed: %u\n", passed, failed);
++	if (failed != 0)
++		ret = CMD_RET_FAILURE;
 +
 +out_put_mtd:
 +	put_mtd_device(mtd);
@@ -258,24 +403,25 @@ index 795aaa2b37d..45084d39d3a 100644
  static int do_mtd_bad(struct cmd_tbl *cmdtp, int flag, int argc,
  		      char *const argv[])
  {
-@@ -773,6 +824,9 @@ U_BOOT_LONGHELP(mtd,
- 	"mtd otpwrite                          <name> <off> <hex string>\n"
- 	"mtd otplock                           <name> <off> <size>\n"
- 	"mtd otpinfo                           <name> [u|f]\n"
+@@ -827,6 +1016,9 @@ U_BOOT_LONGHELP(mtd,
+ #endif
+ #ifdef CONFIG_CMD_MTD_MARKBAD
+ 	"mtd markbad                           <name>         <off> [<off> ...]\n"
 +#endif
-+#ifdef CONFIG_CMD_MTD_MARKBAD
-+	"mtd markbad                           <name>         <off> [<off> ...]\n"
++#ifdef CONFIG_CMD_MTD_TORTURE
++	"mtd torture                           <name>        [<off> [<size>]]\n"
  #endif
  	"\n"
  	"With:\n"
-@@ -807,5 +861,9 @@ U_BOOT_CMD_WITH_SUBCMDS(mtd, "MTD utils", mtd_help_text,
+@@ -864,6 +1056,10 @@ U_BOOT_CMD_WITH_SUBCMDS(mtd, "MTD utils", mtd_help_text,
+ #ifdef CONFIG_CMD_MTD_MARKBAD
+ 		U_BOOT_SUBCMD_MKENT_COMPLETE(markbad, 20, 0, do_mtd_markbad,
  					     mtd_name_complete),
- 		U_BOOT_SUBCMD_MKENT_COMPLETE(erase, 4, 0, do_mtd_erase,
- 					     mtd_name_complete),
-+#ifdef CONFIG_CMD_MTD_MARKBAD
-+		U_BOOT_SUBCMD_MKENT_COMPLETE(markbad, 20, 0, do_mtd_markbad,
-+					     mtd_name_complete),
 +#endif
++#ifdef CONFIG_CMD_MTD_TORTURE
++		U_BOOT_SUBCMD_MKENT_COMPLETE(torture, 4, 0, do_mtd_torture,
++					     mtd_name_complete),
+ #endif
  		U_BOOT_SUBCMD_MKENT_COMPLETE(bad, 2, 1, do_mtd_bad,
  					     mtd_name_complete));
 -- 
