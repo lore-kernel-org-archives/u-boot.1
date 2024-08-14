@@ -4,90 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DED13C52D7F
-	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 07:14:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A82B4C52D7F
+	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 08:13:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 525DB8899D;
-	Wed, 14 Aug 2024 09:14:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id C22A38876F;
+	Wed, 14 Aug 2024 10:13:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="h9TzDIED";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zfn6phRj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70971889B4; Wed, 14 Aug 2024 09:14:28 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5A3F6889AA; Wed, 14 Aug 2024 10:13:39 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9070687B1A
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 09:14:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BDEFF8876F
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 10:13:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 3D4403F670
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 07:14:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1723619666;
- bh=gIls3TPo87UUYYCwEUT86shm7A/3KlKL87Xmm/tJrks=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type;
- b=h9TzDIEDzI/8a5XyWo2+EvX6gJxnHXto2EUiLfXdjeuJeaeg/5kYQSS82Bgqv0Sz+
- CUupU338kAyPKsOxN0z+n8hOLp3eYEvaTW6ruFj9rAP0iw+FpsBpDzVL4owy6+IODu
- 9PBlYcK7sOYEeyXDOk0zbEL5qUWAP/OlwxUxMLAz6cV8h68rqsE/umg5xg9gj+Q2/V
- /JEBUFqvMNdls8flMy9bUnxFRxf31dstCXuzhmv8s/kEnexFWoa9IFUPHO3mftvpC2
- YL8S69SSdZ8/Et/cYl0OKmIBtXh4EAdRW1zuRSWxnI0atEzxVVgzJsxEuJG27j3Ahs
- cDcHhrQJoDwwg==
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-36832c7023bso3146492f8f.2
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 00:14:26 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5bb85e90ad5so5507799a12.3
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 01:13:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1723623216; x=1724228016; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=1WHAB9l7nceGeN4vmGw+XHoSghQRYI0/xINhIJY73RU=;
+ b=zfn6phRj3B0YfPZug9oqe4EdHJsJ/TweDxhpQmRCfo8CkwmIKc8eoiBwzZgHpS/5Mt
+ cK5eFAfqywNEhiTAGLSrPtlXM4tqADMW7RySYyiRJ+t7+Ljg8MWNo0VylMJT7akc6IFO
+ DmfqEBADyBGLNMEt/7dw7xxmMslGSNdkRqqZBbNB07WTr7NxSTEE/OvfzuX5or/oc5PZ
+ NHO48Igsv5Nb/mcWbX98cMl+9lmre+a7s5WRoPX9Eq9qh4d7b2MLNLlHLWWvD3Dk8vDv
+ 2UuyYIastQZdICfC2VnbMdCgg6N8E6l3DzFzxa9pnN5UnJ+eLDVZQFNUk8skGB26lF5s
+ TDzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723619666; x=1724224466;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1723623216; x=1724228016;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=gIls3TPo87UUYYCwEUT86shm7A/3KlKL87Xmm/tJrks=;
- b=HjsBeE4o9+xzR3w6X3OZHvQCbGbZ6WHlvEDM1EuH7J20egBZllEd6QmsFpZoQiiKMG
- +72FWQfH0nvIFVEn2iq/DmhpqNuMCd+/47D+LL//BMUAb83aAegSB1A9TZjEhxw21xOo
- 4340t/NKk5W6e3AkrXY0hQOsDekBHGGENZFqN6BfkkhxhDSXPuueJgtQrZVKjr998Uqo
- vqnpbzTsZoEGtbh896n0GgqPRVbLEdyDUETXwUlg+mrhSkqzIOi5riw79qZk2awJlAU5
- 2Lpea1Mv8kYTgJ06xBd9BtGu7acequSPPlbfmLknb4TDBxImHCJEXGnn6WmKdNFJNQXe
- FOag==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX8HjchHwHKt+SizuPRw64rEhBYHvJys6kBA0qLOWCFE/lcXLFTR4bsHX85TC+3h6+67846XQBftwzO6469Kl3hYROUTg==
-X-Gm-Message-State: AOJu0YxN+069v8K6DHbe67lTyH6AI0LBRZ4RpzyWbepKgULuQdInDS1W
- X7F6huZ3P2twV1kLntiPmfU+hcYBYPcKhV8VpXfAZxeRCIyAqKJa18y6kO1mmgaVKYCD0lT++6V
- k/4huRRT+UTzJBj0ocsIc9t79RSOKtMXIhXEYz7L96gDjNsMc+K6R/gdLT4N33o7FYg0=
-X-Received: by 2002:a5d:5710:0:b0:368:48b2:95ec with SMTP id
- ffacd0b85a97d-3717775cdadmr1299031f8f.1.1723619665794; 
- Wed, 14 Aug 2024 00:14:25 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGeXfeqRKAu7CcD8d9DUkQ6TSVCoKmpRPzAwL/GhvjcLi55xp0iGS3yCTpyu3yJ0NUcmwjOgA==
-X-Received: by 2002:a5d:5710:0:b0:368:48b2:95ec with SMTP id
- ffacd0b85a97d-3717775cdadmr1299010f8f.1.1723619665310; 
- Wed, 14 Aug 2024 00:14:25 -0700 (PDT)
-Received: from localhost.localdomain
- (ip-178-202-041-098.um47.pools.vodafone-ip.de. [178.202.41.98])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-36e4cfeef76sm11983757f8f.59.2024.08.14.00.14.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Aug 2024 00:14:24 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] tools/mkeficapsule: correct printf codes
-Date: Wed, 14 Aug 2024 09:14:22 +0200
-Message-ID: <20240814071422.54193-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
+ bh=1WHAB9l7nceGeN4vmGw+XHoSghQRYI0/xINhIJY73RU=;
+ b=jZEgGua2+snDwaszyOCZXcQZVpn26EGMqflkK+te3NKI9hMwbu5vI2If2ZuBDTvK2z
+ zWdz1ofZ6hb7wA7OSQ4h4xGkXzpuAfPRouiPXJrc1NpYnt69e05b7C+i/KB4wn879ybS
+ lIEV5D3SwKMQDxyDserINyOsPvAi0u1MfluxbXTmiPoYUbJeLZ/NnDJN/a0kvaImyHzA
+ QXSCw7Egt9SZRRkqD7a93Z56bmEyN1oYRL49Y35RtMlqMl4u7zeH8QHCm0/0ZTKBJk1p
+ NLFxU2rlxo+kDafsORK23rAI0CF0hYJOBDYoOIT3GcrOxpiNJChadTa79IP24C1xPcoJ
+ 2lBg==
+X-Gm-Message-State: AOJu0Yx63NbaHpsTUCht1LYhYr+de59xauyCOkycFbTB+fCrKqHjuKcr
+ gNeMg1K45atS6iJ5eY3t8oUwlACk5vbDig8TMEVZ2NMPQ2f0vUgES/VYyloTvsgxqr6lWBC1adI
+ QAhkuGFrvnNZdr1ADOGFaoLJ/RvDjiNy4gELJ7z2cUrYq/zpp
+X-Google-Smtp-Source: AGHT+IFl6l2JT9wf9ROJOZB0VbibtEbIq4oaxR/b0cTKZER1PWhZ0eXEP8S7u+dgTHX1RmTuLRuih7CbrcVoyACVRgA=
+X-Received: by 2002:a05:6402:354d:b0:5a2:eeeb:9470 with SMTP id
+ 4fb4d7f45d1cf-5bea1c7d55cmr1507013a12.18.1723623215846; Wed, 14 Aug 2024
+ 01:13:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20240724060224.3071065-1-sughosh.ganu@linaro.org>
+ <20240724060224.3071065-24-sughosh.ganu@linaro.org>
+ <CAFLszTibBKMmPWjApmRUxRLWj11=Nf5NTz7+bGP+n5guYeFqYw@mail.gmail.com>
+ <CADg8p94pVzK4AaBsCVg4PoQmbBHMKTdzB2MiBxuOzA6=Um3kmg@mail.gmail.com>
+ <CAFLszTjRMsOsxKLdhbgH3yY8Rv6yR-r3uoHycjuGh+zTAKqsZA@mail.gmail.com>
+ <CADg8p96wT2tfXU8o+M+8CuoyP1YF4OwKdg1ZS+2rkZzknMKGdA@mail.gmail.com>
+ <CAFLszTjShbhdrjz-p37LOkZqii2Nbdupm0BHCkGqGAAQ5+RNxg@mail.gmail.com>
+ <CADg8p97+R_o0ph2ycceDp2rsxC0bD8mhU+Y=BN6=tvDOUEvFWw@mail.gmail.com>
+ <CAFLszTgCVfTE7J8hPbosck2VYXaG6W9XMA=XyQJCETkThq+YmQ@mail.gmail.com>
+ <CADg8p95qdLUWSyMQM3uQ+szPHoe2H=SxvdEczyNCFWG2ZdK5JQ@mail.gmail.com>
+ <CAFLszTi=j=Nnz8JYHRMp+nj7UQYynr218ZJDJz22-cZhWGTO7w@mail.gmail.com>
+In-Reply-To: <CAFLszTi=j=Nnz8JYHRMp+nj7UQYynr218ZJDJz22-cZhWGTO7w@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Wed, 14 Aug 2024 13:43:24 +0530
+Message-ID: <CADg8p97kmwRzizHU3SiPe2_rpzoZYpG4DKZxBnYv-GSAD+ttFg@mail.gmail.com>
+Subject: Re: [PATCH 23/40] lmb: add a flags parameter to the API's
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
+ Max Filippov <jcmvbkbc@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,54 +103,323 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-uint64_t is defined as unsigned long long on 32bit ARM.
-Convert uint64_t values to unsigned long long and use %llX for printing.
+On Fri, 9 Aug 2024 at 21:28, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Sughosh,
+>
+> On Fri, 9 Aug 2024 at 02:25, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> >
+> > On Thu, 8 Aug 2024 at 19:58, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Sughosh,
+> > >
+> > > On Wed, 7 Aug 2024 at 00:32, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > >
+> > > > On Wed, 7 Aug 2024 at 03:21, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > Hi Sughosh,
+> > > > >
+> > > > > On Mon, 5 Aug 2024 at 05:55, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > > > >
+> > > > > > On Mon, 29 Jul 2024 at 20:56, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > >
+> > > > > > > Hi Sughosh,
+> > > > > > >
+> > > > > > > On Mon, 29 Jul 2024 at 02:40, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > > > > > >
+> > > > > > > > On Fri, 26 Jul 2024 at 05:02, Simon Glass <sjg@chromium.org> wrote:
+> > > > > > > > >
+> > > > > > > > > Hi Sughosh,
+> > > > > > > > >
+> > > > > > > > > On Wed, 24 Jul 2024 at 00:04, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > > > > > > > >
+> > > > > > > > > > Add a flags parameter to the LMB API functions. The parameter can then
+> > > > > > > > > > be used to pass any other type of reservations or allocations needed
+> > > > > > > > > > by the callers. These will be used in a subsequent set of changes for
+> > > > > > > > > > allocation requests coming from the EFI subsystem.
+> > > > > > > > > >
+> > > > > > > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > > > > > > > ---
+> > > > > > > > > > Changes since rfc: New patch
+> > > > > > > > > >
+> > > > > > > > > >  arch/arm/mach-apple/board.c       |  17 ++--
+> > > > > > > > > >  arch/arm/mach-snapdragon/board.c  |   2 +-
+> > > > > > > > > >  arch/arm/mach-stm32mp/dram_init.c |   4 +-
+> > > > > > > > > >  arch/powerpc/cpu/mpc85xx/mp.c     |   2 +-
+> > > > > > > > > >  arch/powerpc/lib/bootm.c          |   2 +-
+> > > > > > > > > >  board/xilinx/common/board.c       |   4 +-
+> > > > > > > > > >  boot/bootm.c                      |   5 +-
+> > > > > > > > > >  boot/image-board.c                |  15 ++-
+> > > > > > > > > >  boot/image-fdt.c                  |  15 +--
+> > > > > > > > > >  cmd/booti.c                       |   2 +-
+> > > > > > > > > >  cmd/bootz.c                       |   2 +-
+> > > > > > > > > >  cmd/load.c                        |   4 +-
+> > > > > > > > > >  drivers/iommu/apple_dart.c        |   6 +-
+> > > > > > > > > >  drivers/iommu/sandbox_iommu.c     |   6 +-
+> > > > > > > > > >  fs/fs.c                           |   2 +-
+> > > > > > > > > >  include/lmb.h                     |  23 ++---
+> > > > > > > > > >  lib/lmb.c                         |  48 ++++------
+> > > > > > > > > >  test/lib/lmb.c                    | 150 +++++++++++++++---------------
+> > > > > > > > > >  18 files changed, 150 insertions(+), 159 deletions(-)
+> > > > > > > > >
+> > > > > > > > > This negates any code-size advantage of dropping the lmb parameter.
+> > > > > > > > >
+> > > > > > > > > All of these are LMB_NONE. Can we have a separate function (e.g.
+> > > > > > > > > lmb_alloc_type()) for when we actually need to specify the type?
+> > > > > > > >
+> > > > > > > > We will be passing different values when we call the LMB API's from
+> > > > > > > > the EFI allocation function. This is only adding a parameter to the
+> > > > > > > > allocation API's, which I believe is better than adding separate
+> > > > > > > > functions which take a flag parameter only to be called from the EFI
+> > > > > > > > subsystem.
+> > > > > > >
+> > > > > > > No i believe it is worse, unless there are a lot of such functions.
+> > > > > > > The flags are a special case, not the common case.
+> > > > > >
+> > > > > > I have done some size impact tests on the two scenarios, one where we
+> > > > > > have a common set of lmb allocation API functions, with an added flags
+> > > > > > parameter, and second where we have separate API's to be called from
+> > > > > > the EFI memory module. I have put out the results of the size impact
+> > > > > > [1].
+> > > > > >
+> > > > > > You will see that with common API's, we are not losing much even on
+> > > > > > boards with EFI_LOADER disabled. But otoh, on boards which have
+> > > > > > EFI_LOADER enabled, the gains are pretty significant. I believe we
+> > > > > > should reconsider using a common LMB API with the flags parameter.
+> > > > >
+> > > > > Thanks for looking at it.
+> > > > >
+> > > > > Did you do special versions of just lmb_alloc() and lmb_add() which
+> > > > > call the flags versions? It seems that there is no size advantage with
+> > > > > EFI_LOADER and only a small one with !EFI_LOADER. Can you please point
+> > > > > me to the code?
+> > > >
+> > > > For the separate API version, I introduced new versions
+> > > > lmb_alloc_flags(), lmb_alloc_base_flags(), lmb_alloc_addr_flags() and
+> > > > lmb_free_flags(), which are being called from the EFI memory module. I
+> > > > have pushed the two branches [1] [2] on my github. Please take a look.
+> > > >
+> > > > Btw, both these branches are based on your v5 of the alist patches,
+> > > > and also incorporate the stack based implementation for running the
+> > > > lmb tests. So except for either having common API's, or not, there are
+> > > > no other differences between the two. Thanks.
+> > >
+> > > Thanks for the info.
+> > >
+> > > The non-flags functions can call the flags functions, so that you
+> > > don't create a new code path. Something like this:
+> > >
+> > > diff --git a/lib/lmb.c b/lib/lmb.c
+> > > index 726e6c38227..0a251c587fe 100644
+> > > --- a/lib/lmb.c
+> > > +++ b/lib/lmb.c
+> > > @@ -528,7 +528,7 @@ long lmb_free_flags(phys_addr_t base, phys_size_t size,
+> > >
+> > >  long lmb_free(phys_addr_t base, phys_size_t size)
+> > >  {
+> > > -       return __lmb_free(base, size);
+> > > +       return lmb_free_flags(base, size, LMB_NONE);
+> > >  }
+> > >
+> > >  long lmb_reserve_flags(phys_addr_t base, phys_size_t size, enum
+> > > lmb_flags flags)
+> > > @@ -624,7 +624,7 @@ static phys_addr_t __lmb_alloc_base(phys_size_t
+> > > size, ulong align,
+> > >
+> > >  phys_addr_t lmb_alloc(phys_size_t size, ulong align)
+> > >  {
+> > > -       return lmb_alloc_base(size, align, LMB_ALLOC_ANYWHERE);
+> > > +       return lmb_alloc_flags(size, align, LMB_NONE);
+> > >  }
+> > >
+> > >  phys_addr_t lmb_alloc_flags(phys_size_t size, ulong align, uint flags)
+> > > @@ -635,15 +635,7 @@ phys_addr_t lmb_alloc_flags(phys_size_t size,
+> > > ulong align, uint flags)
+> > >
+> > >  phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
+> > >  {
+> > > -       phys_addr_t alloc;
+> > > -
+> > > -       alloc = __lmb_alloc_base(size, align, max_addr, LMB_NONE);
+> > > -
+> > > -       if (alloc == 0)
+> > > -               printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
+> > > -                      (ulong)size, (ulong)max_addr);
+> > > -
+> > > -       return alloc;
+> > > +       return lmb_alloc_base_flags(size, align, max_addr, LMB_NONE);
+> > >  }
+> > >
+> > >  phys_addr_t lmb_alloc_base_flags(phys_size_t size, ulong align,
+> > > @@ -691,7 +683,7 @@ static phys_addr_t __lmb_alloc_addr(phys_addr_t
+> > > base, phys_size_t size,
+> > >   */
+> > >  phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
+> > >  {
+> > > -       return __lmb_alloc_addr(base, size, LMB_NONE);
+> > > +       return lmb_alloc_addr_flags(base, size, LMB_NONE);
+> > >  }
+> > >
+> > >  phys_addr_t lmb_alloc_addr_flags(phys_addr_t base, phys_size_t size,
+> > >
+> > > But it only saves about 40 bytes on Thumb2. You can save another 16 by
+> > > using the placeholder API:
+> >
+> > Can you please explain the issue that you see with having a common set
+> > of API's with the flags parameter added? The way I see it, the API's
+> > are already undergoing a change where we are removing the struct lmb
+> > instance as a parameter from all the API functions. With the change
+> > that I propose, we are simply replacing the lmb instance parameter
+> > with the flags parameter. So arguably we are not adding any additional
+> > size here. Also, like the size tests show, we get a pretty good size
+> > benefit when the EFI_LOADER is enabled.
+> >
+> > So, if your argument is to keep the API's similar to their earlier
+> > form, I think that they are undergoing a change in any case, so adding
+> > the flags parameter is not so much of an issue. If there is any
+> > problem that I am missing, I would like to understand that before we
+> > go with separate API's. Thanks.
+>
+> I thought I explained this already, but perhaps not. We change APIs
+> all the time, so that is not a problem.
+>
+> Almost all calls don't need to pass flags since it is LMB_NONE (which
+> really should be 0, BTW, not BIT(0)). We already have
+> lmb_reserve_flags() and lmb_reserve() to deal with this difference. So
+> passing a parameter which is almost always the same is not helpful for
+> code size.
 
-    tools/mkeficapsule.c: In function ‘dump_capsule_auth_header’:
-    tools/mkeficapsule.c:694:66: warning: format ‘%lX’ expects argument of
-    type ‘long unsigned int’, but argument 2 has type ‘uint64_t’
-    {aka ‘long long unsigned int’} [-Wformat=]
-    694 | printf("EFI_FIRMWARE_IMAGE_AUTH.MONOTONIC_COUNT\t\t: %08lX\n",
-        |                                                      ~~~~^
-        |                                                          |
-        |                                                          long unsigned int
-        |                                                      %08llX
+Yes, in my earlier response, I did mention this aspect. The size
+impact is not very high on non-EFI platforms, while pretty good with
+platforms that enable EFI_LOADER. But since this is your view, I will
+go with the separate API version so that we make progress.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- tools/mkeficapsule.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+>
+> Outside the tests, only one place (boot/image-fdt.c) uses
+> lmb_reserve_flags() - BTW some of these are using the flags version of
+> the function but passing LMB_NONE.
+>
+> Here are the five functions:
+>
+> lmb_reserve
+> lmb_alloc
+> lmb_alloc_base
+> lmb_alloc_addr
+> lmb_free
+>
+> If some of them aren't worth having two versions, then I suppose we
+> don't need them all. But note that if some of my EFI patches make it
+> through code review, we won't need this circular relationship between
+> EFI and lmb, so some of the 'flags' versions can be dropped again.
 
-diff --git a/tools/mkeficapsule.c b/tools/mkeficapsule.c
-index f28008a0829..d346c217f09 100644
---- a/tools/mkeficapsule.c
-+++ b/tools/mkeficapsule.c
-@@ -691,8 +691,8 @@ static uint32_t dump_fmp_payload_header(
- static void dump_capsule_auth_header(
- 	struct efi_firmware_image_authentication *capsule_auth_hdr)
- {
--	printf("EFI_FIRMWARE_IMAGE_AUTH.MONOTONIC_COUNT\t\t: %08lX\n",
--	       capsule_auth_hdr->monotonic_count);
-+	printf("EFI_FIRMWARE_IMAGE_AUTH.MONOTONIC_COUNT\t\t: %08llX\n",
-+	       (unsigned long long)capsule_auth_hdr->monotonic_count);
- 	printf("EFI_FIRMWARE_IMAGE_AUTH.AUTH_INFO.HDR.dwLENGTH\t: %08X\n",
- 	       capsule_auth_hdr->auth_info.hdr.dwLength);
- 	printf("EFI_FIRMWARE_IMAGE_AUTH.AUTH_INFO.HDR.wREVISION\t: %08X\n",
-@@ -724,10 +724,10 @@ static void dump_fmp_capsule_image_header(
- 	       image_hdr->update_image_size);
- 	printf("FMP_CAPSULE_IMAGE_HDR.UPDATE_VENDOR_CODE_SIZE\t: %08X\n",
- 	       image_hdr->update_vendor_code_size);
--	printf("FMP_CAPSULE_IMAGE_HDR.UPDATE_HARDWARE_INSTANCE\t: %08lX\n",
--	       image_hdr->update_hardware_instance);
--	printf("FMP_CAPSULE_IMAGE_HDR.IMAGE_CAPSULE_SUPPORT\t: %08lX\n",
--	       image_hdr->image_capsule_support);
-+	printf("FMP_CAPSULE_IMAGE_HDR.UPDATE_HARDWARE_INSTANCE\t: %08llX\n",
-+	       (unsigned long long)image_hdr->update_hardware_instance);
-+	printf("FMP_CAPSULE_IMAGE_HDR.IMAGE_CAPSULE_SUPPORT\t: %08llX\n",
-+	       (unsigned long long)image_hdr->image_capsule_support);
- 
- 	printf("--------\n");
- 	if (image_hdr->image_capsule_support & CAPSULE_SUPPORT_AUTHENTICATION) {
--- 
-2.45.2
+Your patch is tweaking the efi_allocate_pool() whereas the changes
+that I am making are in the efi_allocate_pages(). So even if your
+approach gets accepted, this will still be needed for
+efi_allocate_pages() API.
 
+>
+> But EFI only even seems to pass LMB_NOOVERWRITE | LMB_NONOTIFY...?
+>
+> Part of my frustration with all of this is that I created an lmb
+> cleanup series[1] nearly a year ago, which was either ignored or
+> blocked (I'm not sure which). That series tidied up the code quite a
+> lot and took much effort. I'm not sure if you even saw it?
+
+I wasn't aware of these patches. I started looking into the LMB/EFI
+memory management only a few months back.
+
+>
+> Finally, it would help the project if you could do some code reviews.
+> For example, how about [2] and [3] - they are very much in your area.
+
+Okay, will do. I will check the patches in detail, but I believe that
+patch 2 looks fine, but I have concerns about using malloc for
+efi_allocate_pool(). I will respond to the patch though. Thanks.
+
+-sughosh
+
+>
+> Regards,
+> Simon
+>
+> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=371258&state=*
+> [2] https://patchwork.ozlabs.org/project/uboot/list/?series=417669
+> [3] https://patchwork.ozlabs.org/project/uboot/list/?series=418212
+>
+>
+>
+>
+> >
+> > -sughosh
+> >
+> > >
+> > > diff --git a/lib/lmb.c b/lib/lmb.c
+> > > index 0a251c587fe..f6c8f06629c 100644
+> > > --- a/lib/lmb.c
+> > > +++ b/lib/lmb.c
+> > > @@ -416,13 +416,12 @@ static long lmb_add_region_flags(struct alist
+> > > *lmb_rgn_lst, phys_addr_t base,
+> > >         if (coalesced)
+> > >                 return coalesced;
+> > >
+> > > -       if (alist_full(lmb_rgn_lst) &&
+> > > -           !alist_expand_by(lmb_rgn_lst, lmb_rgn_lst->alloc))
+> > > +       if (!alist_add_placeholder(lmb_rgn_lst))
+> > >                 return -1;
+> > >         rgn = lmb_rgn_lst->data;
+> > >
+> > >         /* Couldn't coalesce the LMB, so add it to the sorted table. */
+> > > -       for (i = lmb_rgn_lst->count; i >= 0; i--) {
+> > > +       for (i = lmb_rgn_lst->count - 1; i >= 0; i--) {
+> > >                 if (i && base < rgn[i - 1].base) {
+> > >                         rgn[i] = rgn[i - 1];
+> > >                 } else {
+> > > @@ -433,8 +432,6 @@ static long lmb_add_region_flags(struct alist
+> > > *lmb_rgn_lst, phys_addr_t base,
+> > >                 }
+> > >         }
+> > >
+> > > -       lmb_rgn_lst->count++;
+> > > -
+> > >         return 0;
+> > >  }
+> > >
+> > > @@ -444,7 +441,6 @@ static long lmb_add_region(struct alist
+> > > *lmb_rgn_lst, phys_addr_t base,
+> > >         return lmb_add_region_flags(lmb_rgn_lst, base, size, LMB_NONE);
+> > >  }
+> > >
+> > > -/* This routine may be called with relocation disabled. */
+> > >  long lmb_add(phys_addr_t base, phys_size_t size)
+> > >  {
+> > >         long ret;
+> > >
+> > > --
+> > > 2.34.1
+> > >
+> > > (patches are a bit rough, but I didn't think it worth sending them to
+> > > the ML as real patches)
+> > >
+> > > If I am correct and we don't need to publish events, then that will
+> > > save a little more space.
+> > >
+> > > Regards,
+> > > Simon
+> > >
+> > > >
+> > > > -sughosh
+> > > >
+> > > > [1] - https://github.com/sughoshg/u-boot/tree/lmb_efi_common_apis_nrfc_v2
+> > > > [2] - https://github.com/sughoshg/u-boot/tree/lmb_efi_separate_flags_apis_nrfc_v2
+> > > >
+> > > > >
+> > > > > Regards,
+> > > > > Simon
+> > > > >
+> > > > >
+> > > > > >
+> > > > > > [1] - https://gist.github.com/sughoshg/a20207f26e19238fef86f710134d6efd
+> > > > > >
+> > > > > > >
+> > > > > > > Regards,
+> > > > > > > SImon
