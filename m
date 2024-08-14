@@ -4,97 +4,204 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A52F6C52D7B
-	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 15:07:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9FEAC3DA4A
+	for <u-boot@archiver.kernel.org>; Wed, 14 Aug 2024 16:44:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3F02889A1;
-	Wed, 14 Aug 2024 17:07:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A19A3889BA;
+	Wed, 14 Aug 2024 18:44:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZBriwdmk";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="von4oI6Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FEAD889B8; Wed, 14 Aug 2024 17:07:18 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8A242889E9; Wed, 14 Aug 2024 18:44:50 +0200 (CEST)
+Received: from EUR03-AM7-obe.outbound.protection.outlook.com
+ (mail-am7eur03on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260e::600])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7E9C8895B
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 17:07:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8ADF288859
+ for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 18:44:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-70942ebcc29so4626475a34.0
- for <u-boot@lists.denx.de>; Wed, 14 Aug 2024 08:07:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1723648034; x=1724252834; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DVjHBFhEbgaCvgC4k5+XN8dgBr0kCoF+k58w9o3m07A=;
- b=ZBriwdmkX5AxHLvBC84/E3DdE1tzu7O6hRIfcV4hmsN/0hEg4monLQWBjHyiEqa2iK
- d0ljfkT4x2N1FKfJFRGbPsiL91Xk8kzMxwCKDtNGm6WWxfMcSdBqwR6p+O7f88qkdmT0
- mAl0NnEm+XbN164aH34bq1EUH8fYmyspO4S2U=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723648034; x=1724252834;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DVjHBFhEbgaCvgC4k5+XN8dgBr0kCoF+k58w9o3m07A=;
- b=lKJBPXdB1O/HiPkN/+KNgTCWZA3wjOUeMTKeeP+mckZIHj04dN0ctYyp6XqZNP8L/5
- L5T3Hruvqf/1qZXPkINFajcgmvUEveEHtje2eSuDpIQbF8l6BiQZV6OTJcczxFgooX6+
- sVbBg2NmZPFmSbYAu5Ypvv4iNYKo9p6UL6jyzPsf6BVjAVc4S3CKHUf0vbp3GwNivDwI
- XCh3VSAU9DqxVe84+J9GvwHPvfBwtn7yrWiIGLKUAb2W09GTAJs9YK38Fa5Z6KARfgbi
- EsUcq4ARmVb3hXgmhSe/ygvzbGTktelurr0crP9Ugp5NUHdyg72Bll7Tn+TivRMnxmjj
- LvgQ==
-X-Gm-Message-State: AOJu0YwCw8HAYu65lbpg+eyKYVJ45d2UbANG/SAUfwTWbmOgFMn8j8NA
- dIQG6WGZxJteBBSvSd4Fh5VosDRHrYmQKWQtjqAzpArUdwvcbipTuK8jgeRgk28=
-X-Google-Smtp-Source: AGHT+IHKzTWoVaqF2vgx1IC97gPtRexhlfSeTwZgAMK8dq0jrZJtgGwZ6bJ5iLfyXTdeTSXLqVqhvw==
-X-Received: by 2002:a05:6830:65cb:b0:703:795b:f675 with SMTP id
- 46e09a7af769-70c9da1ef6fmr3954233a34.28.1723648034416; 
- Wed, 14 Aug 2024 08:07:14 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-236.totalplay.net.
- [189.203.97.236]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70c7b81d999sm2242407a34.17.2024.08.14.08.07.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Aug 2024 08:07:13 -0700 (PDT)
-Date: Wed, 14 Aug 2024 09:07:10 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, manish.pandey2@arm.com,
- Stefan Bosch <stefan_b@posteo.net>, Mario Six <mario.six@gdsys.cc>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Andrew Davis <afd@ti.com>, Sumit Garg <sumit.garg@linaro.org>,
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, Ilya Lukin <4.shket@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alexander Gendin <agendin@matrox.com>,
- Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: Re: [PATCH v5 00/27] Integrate MbedTLS v3.6 LTS with U-Boot
-Message-ID: <20240814150710.GO1626301@bill-the-cat>
-References: <20240731172556.1348487-1-raymond.mao@linaro.org>
- <20240801204606.GJ3794063@bill-the-cat>
- <CAEfUkU+hDK2z4wJYSBU5_r1Bwa9npDDw0s6AixUBbM=wGGXzfw@mail.gmail.com>
- <CAEfUkULc6J_mAqfj7hKS8QQD+-Kw04bO_oU5=7hduF3=h1XUcQ@mail.gmail.com>
+ spf=pass smtp.mailfrom=jan.kiszka@siemens.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=LpwzJS0lP9pfN00UxO93x+BboOkn+XNEN7d7/P60cXTzgcJWs6p9VLEIQKW5urOXWiVsYqXzldVxDn8bcB3B2McSBgMBR7HfmFZzuZaXK2q2Fp+kKghNQmYSbRTBFkj8tc/4x7ztKBJdFHSTr6c31Dd+vF1VvF4uovJ7QxOEOi2/r1xI/1CsvgxpyF7idqMk9Z8ULkrNyIz7PA5XlV85EdE0nkL0RsEwT8MxOvz67JQPTf5bA/cbGspwC6ySDdGtL8ixi/IimEWmkpa/zbDB3HgCGKIsgW/UWBTEEeGNQRXuILYyJ3drKh0ALbcm+SYBPQmmZ6ah+q+uHIrSuUAzZg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rHwCWNCSegkRWrlYJODu37Truadq1cI3U8+3isxJGM0=;
+ b=XcpJvEV4OpayjlxiW4D0sGveMSLlEeAwOhNOfEuWQTn1V8mEtrplh0M4WT0EWj3zB4WoY84UQmL1qpJ4nUAczKkarCjFxMMsuMyesYKH1v0VR2Za1Hbs+m92Eh6qn7DCzbBTNDtUX3r80AcMx3oK9XEzZlBQIkBhlfeAYE5KaQfQetx5/zm/e16G7SjkF+rQvLILW33yGtgNICvot42am0XExkpG7vZaWZMqcJVArGSO6jwwZEJgiIUFsMFUk058vE5hfjI+2dP5kQQVqjI2BPDKRUBhYfCSXqubS28N9maOdgYesfnur1yCsvq7C2smznKcep+0hO/1rDtRiwSF8g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
+ dkim=pass header.d=siemens.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rHwCWNCSegkRWrlYJODu37Truadq1cI3U8+3isxJGM0=;
+ b=von4oI6ZCYovuW1Wb18roPvgfXsAGCZfp+3wCjuJZoN0urXwaWzRBtZKty/PM6fGrEdOvv4ECUOPVrQ5IH+b9QYR8si6cchqv8HSaNP4kw7Jl/G0akdS8HiUwNtjy/TdfOXBsRoFeYUo/A3fTzmU+E3KahgXot2o3zrWv38UNK+KEFTovr7+HjzZ7sVA46BD8LaGfGwLz11swWtpK0KpZzQBbaVTaihreNsdP5pRJYXBKpWk5e6w1FPLZ+RqqY3x66Cx57hSxV0tR80XVz9Fxn86Xwx2eCalbDoEtLypqTZow3vEiCZ1pkKp7UHoS7ngLH+N0PqGVyk8Dg2ClGms4g==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=siemens.com;
+Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:588::19)
+ by VI1PR10MB3742.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:803:13c::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7875.16; Wed, 14 Aug
+ 2024 16:44:46 +0000
+Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::8fe1:7e71:cf4a:7408]) by AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::8fe1:7e71:cf4a:7408%4]) with mapi id 15.20.7849.021; Wed, 14 Aug 2024
+ 16:44:46 +0000
+Message-ID: <4ec5108f-b7a4-47db-baa4-edee532c58af@siemens.com>
+Date: Wed, 14 Aug 2024 18:44:43 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: OF_UPSTREAM vs. additional dtbs
+From: Jan Kiszka <jan.kiszka@siemens.com>
+To: Nishanth Menon <nm@ti.com>, Sumit Garg <sumit.garg@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+References: <7765273f-7f36-41e4-a604-1901e4fbec62@siemens.com>
+ <20240813125245.ezlu6me3ljwx6dkj@margarine>
+ <89f8e976-e831-4035-8cd0-ab6284846d0a@siemens.com>
+Content-Language: en-US
+Autocrypt: addr=jan.kiszka@siemens.com; keydata=
+ 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
+In-Reply-To: <89f8e976-e831-4035-8cd0-ab6284846d0a@siemens.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0420.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:d0::17) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:588::19)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="lzxJHwR40QEELkUc"
-Content-Disposition: inline
-In-Reply-To: <CAEfUkULc6J_mAqfj7hKS8QQD+-Kw04bO_oU5=7hduF3=h1XUcQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|VI1PR10MB3742:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8b7f714c-555f-4edc-c645-08dcbc806800
+X-MS-Exchange-AtpMessageProperties: SA
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dEtFTVg5V3Z4bm52RHF1dllXa0VOSVdUeXpTbUZmMlpwaVZqRUM4ZzlHalpF?=
+ =?utf-8?B?R2lHbjIwc3lhc3NpdWtFUHpPSjJjSGp0YTVJVWZ1TVhBMXQxOU1SMXRVSWNF?=
+ =?utf-8?B?NVlvbENzK21CanRYTWFvOVFjVjRCUzFTcGMrdmlieGJPRnAwTVBBQ3Myak41?=
+ =?utf-8?B?THVXczltSTdySmR4VzJsY3k2NmxwUmpDb1RkQTFDcmk0YWxoam9heHpNNmJO?=
+ =?utf-8?B?aGxDWUlGSy9Fa29PbWdPWk44WTJxYkh0RnBOVHVDeUVIcVdKQ25tcVRMMFF1?=
+ =?utf-8?B?RTBzTG5DR29jOUU4cXRVNkdXb3RhZGRyZ2ZHOE0zVEF0RFNLQ3R6YUlMdGZq?=
+ =?utf-8?B?KytTOFN2WXlSSnM1emVPcHNPM04xdjJaNWtDOTJWdlpCaFBETlY3SEFKLzhm?=
+ =?utf-8?B?RWJoLzJkbTIyY0doNVZYdzR2OXJrWjhlK0I4TFl1eGRYT1dSS1cwekpHcFRR?=
+ =?utf-8?B?b3dKcVEwWkxVYktmYzhUZFZXY2E2NDlsVnpyL0NNRlFVZUt4WVBCL0E2eDhU?=
+ =?utf-8?B?anBJeGRFSmtiYVl2bnlheXpFc2tWbXhDcmt5MTdxZ2xrTytXOUNnQWpzRVBX?=
+ =?utf-8?B?MlBPaEdpOVJ0ZVBpRm1nZmQ5TC9NRlkyc3p1KzJJZWN6bEZWb0pxWlBJS3J2?=
+ =?utf-8?B?Qk93aDJmY3FNOEtNVGpWT3h4WmFmTVFiUDFtTVlHZ2h6NC92S21SeDNrQlBI?=
+ =?utf-8?B?czJ0UzlQZytFelRVbmhzbzJiN2hhWjN5RUZaK2VqRS9mZlVuOFUxUXpqZGt1?=
+ =?utf-8?B?QTVjWkIxRUxqcWZ2NHFQUnpHZXdZVm41QzZiS2JJSWVtSjNRazJqUHRhQytu?=
+ =?utf-8?B?d2Y2MExyLzI2MjhYV0QxSXpIUWN3b3M4ZGJBSTAyRTU1YnlVYVp0ZW5mQ1ZP?=
+ =?utf-8?B?aWwyTTN5ZUZsbVU4dFgwdkxIZG1TNU1iMjdvMmVIektGdDBSMDFudThrSXFo?=
+ =?utf-8?B?empiZjVsT0JJckMxa1c5SktBWGs5OEhpMVNhdmQ1bE9XTlROMDhLcUx1TTdZ?=
+ =?utf-8?B?a3V2ckdROGNqUCtGNXRnRC9FSDNQNEtvbmlQaUpLZlhwNTYydm9aS2VoNTlL?=
+ =?utf-8?B?RmZiTnUzalpYSHZDUEJkQXNzSUN4NndkYVljSGNxM3gzMXpDUk9rSTRCSEda?=
+ =?utf-8?B?a09iQk5tRllzVHY0UEpFeDBkK2ZyaFZPYWJhdURPcDMvWXNNODRXYWFtT1pE?=
+ =?utf-8?B?Zm0xVVNBTk1PZmdxQlh2MlZDOHZmR2NyanhaWGhGUlROTkNoeERURi9NWUhu?=
+ =?utf-8?B?VDR6S2NkYmluUUgzdERJRTRDcWdMYUFSZWVuSzdaWGVkWWYvQzc1NENNMUE2?=
+ =?utf-8?B?NUFsMno1RzhTMGlGSlV5L3BwbWVNYzEwaXhvZWhBN1l1d0U2M2RCbmZjRTJS?=
+ =?utf-8?B?R0NRc2RMY0NQZno2V3pjbWRUT21tWnFqcXRNMjh4MFpycno5MFJlYnMxeHBM?=
+ =?utf-8?B?TTUxQWx0QS9OVmtvRXJtTHRXM3o4Vm80YTQzdFdmWVgwMzdETW1rSTlsYk53?=
+ =?utf-8?B?eUNDckpSNnhMWnlYeVlxVE1hTG1yM1c1YXJGaXNUejlVTjhZblFlWFZZQVMz?=
+ =?utf-8?B?cWovYXN0czluODBpSDc5UE5oRjBhVUVnUHBjcG5MQ2w3bWpUSVBvdmpQM1JH?=
+ =?utf-8?B?NVVQVW03bG5PNnhBRU5pVWlabkw2a2lUQUpJUnovSDExRnEyYlQwRjJsYytG?=
+ =?utf-8?B?TkFJc1hWZnRSY21sRVl6VVdUcGZuMlNQTjNyU2JXejFIdnhkR1F1Yk41eTFh?=
+ =?utf-8?B?dE5BOFNKb0JIbC9nbjlndmc2T3hTdmxMb21LS3FlQkFBZHBGMDViMGlzT2Ju?=
+ =?utf-8?B?eW1xaWJKdzV2M0RzZEZTUT09?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SGRGTzBzWFVrUWRncWhVVmFieFQrZEtFeHBhOGhOcDlwUWZTdFZubnBoR3Fo?=
+ =?utf-8?B?aFJLZWJmOVBOSit0Q1hNdmpiMTA3ODYvaXFCUCt1QktDeUpYNFZnUklpN3Ux?=
+ =?utf-8?B?eWU0eStXb3RwYlpScGs2STE0cFF6SERrQTlzcndIQnVSa1hUTXdCc1JPTmNq?=
+ =?utf-8?B?OEJBdkJxTklzTjhyQmpoRmp4R0E0T2dYdUk1SGVOcEEwYmdjS3V6dGtJSERF?=
+ =?utf-8?B?UFY3MkhZakRKMDRyOXZSdThveDhkWkxoS0lIbzQyTitEYTdMSVNVUUwxN2xv?=
+ =?utf-8?B?SURQeGRRbzJsTVV6NTEyRnRWSlBQVkd2bitWN045S000aU1JalpaY3N5blVM?=
+ =?utf-8?B?OWEyYThpUkFLa3FqNWlkS1d0OVhjQzNtV3NOdDlnazlLQTg5THNjV3UzOXpa?=
+ =?utf-8?B?ZVZWRjZhWFV1WktHdFNOMzRmNFRBUW13WW9lMnRLWmJIQnM2eGhzUCt2Y0xT?=
+ =?utf-8?B?bU44a2NSazVpS1gvbzNWRkVZOThzUTJpOFBZNFNzR0xFd1Q1YURINzZMdUNN?=
+ =?utf-8?B?UkNDcTY5dXk0Ry9jcGRsNVRucm8vUG40L1Evblg3ZlgrT0E2KzlnOVZEaVJH?=
+ =?utf-8?B?UmpDZEsxQ1ZVMnJWT0wwRWxpRGxncDcyMEFKV2YzdGswQWlmRGJIcWhsZERN?=
+ =?utf-8?B?cVlCRzE0UGxvRkUyeFNaVzdrQjVYaXo4VUpvS1RKUCtIRUV5TDZXSnArazcy?=
+ =?utf-8?B?Ly9xbTZjS1dhZi95YmNwSThZM3B2ZCsvZy9YM09RYlpaRktMaXIwOE1FODJa?=
+ =?utf-8?B?RmowdlR6d0R4blFQYU1uc1llWXdGUGNpVWZuSGlBdnk5SkJEUXcrNDVJb3BM?=
+ =?utf-8?B?RW00RVdScFd3bTlOY3pGbE1wbGF2bzV6YUFrWU5FVnBtd29oMkIrTjdXTTZH?=
+ =?utf-8?B?ZHZYQXJBWUwraTZJcHhCT1ZMKzYrWHpoQXRpU3NJcXNuR0w3MVp0UEZtb3JW?=
+ =?utf-8?B?enJkODVkMzVTOExlVkdvU2M0NHpTa1M1VjFja0tsdjBoOWJkOElxaXdCQmRU?=
+ =?utf-8?B?cUs5T0x3RnlWZmJUK3JNcFJRM29kMWNNRGh5d3hFK3RwNEdTblN4MlVlZzVu?=
+ =?utf-8?B?TGZMYkVRWWdIdmNOWURobm9BeE4zZ1Y5VWMzdjJTSnN6T3BxMnVjemUrVlYz?=
+ =?utf-8?B?dWdyRDdRV3BUU0hDeXFnY2x4M1VpY0NRZXl5Q2ZjR2cvMTNYNFpMSytuK09L?=
+ =?utf-8?B?dm1kbkJJVG9JeExzV1RHWWFPNnh6TVBRZVdvdklQSExYQ3hzVEFzdytZalF2?=
+ =?utf-8?B?UmhIUlBQYS9uNU5CMmRITTNJdHhESlNvQ242SDEyRnFJZTZCanY4UU53Z0JP?=
+ =?utf-8?B?VCt2bGF4L3pKV3lNVDRiLzhCdlQzWmo0L1JzbnRtTlZzOS81SWdlSEtrZi9T?=
+ =?utf-8?B?TDRMMDVORG9KY1JqV2FDdU9rejc1VjVueWxGclhHTURZY29CaTROZERBbkxW?=
+ =?utf-8?B?ZEIwZHhJR2RPdHVOTTFnSmF3WE5UbFJWY2dWdDVNeXNnbnVxblkwbCtvSW1v?=
+ =?utf-8?B?dEdqZStMbnJYenZZRHhBc25kU2lDS3lScytQNnNLbDFncUQ1L1ZGa25ybHhR?=
+ =?utf-8?B?OG1PN3BBVTlsNGozbFNrV2F4UW8xRW5SVks2Y1I0QUw0dHZITjBRazY3RER4?=
+ =?utf-8?B?T2lWTjl2dGk1SWQ1OUtabzdCdmdwelRSZzFXaWhZTHJpUFdIQmkxUkNNUzZn?=
+ =?utf-8?B?d3J0RmYyUWZMWTZ1TVFPMlBiL2tpRFJaWTVHbXJjdkNZbHlkbWZxWG9sQllk?=
+ =?utf-8?B?NWxsbkEvcS9Xam42Nk5PcURkTjlNUWdXMklvZ01jVWMyQS8wREMzUW1QQjVP?=
+ =?utf-8?B?Ykd1dXR1ZFdlZ3lRcy94QlE2UUtuTm1LTGF3M3duRWNHQy9sOEV4dWM1NUE3?=
+ =?utf-8?B?M3RYOC9sK0NhVyt6K09oWktaaitSYk1MeDhJTFBPVWYvU2NPZ3RNSFd1M09j?=
+ =?utf-8?B?S2xNcHVWdWlPUWpmM3hIOW05TmhsUTRJdFJpbFZ6NklTdm1HTWdhVEVGYVVr?=
+ =?utf-8?B?QnhLbStHUlRGWlpuL29KYmQzcDdadFpuUDkyb1BTdkQwTm9kbDFtRHRTeEtm?=
+ =?utf-8?B?Qm5mS2NRWUp2VkVrUml5TitoalQ0V096UXpRYzNwT3pOR2kzUzJ5c0dSUlhr?=
+ =?utf-8?Q?/e1zb9u+3roX5eW1BrLRhyhLQ?=
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8b7f714c-555f-4edc-c645-08dcbc806800
+X-MS-Exchange-CrossTenant-AuthSource: AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Aug 2024 16:44:46.7881 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9oMACl6OoOW4wclf5dInDR0n0AtnntzWe0JOE3GQ7cGA0oO0/StRMaw8cbmgaT4+q+ugjkJQHCuzbCDYvgt5Mg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB3742
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,360 +218,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 14.08.24 11:41, Jan Kiszka wrote:
+> On 13.08.24 14:52, Nishanth Menon wrote:
+>> On 11:16-20240813, Jan Kiszka wrote:
+>>> Hi all,
+>>>
+>>> I'm trying to migrate the TI AM65x IOT2050 boards to OF_UPSTREAM but I'm
+>>> facing issues because I need to still build the u-boot-only overlays. It
+>>> is also a bit weird (but works) having to specify
+>>>
+>>> CONFIG_SPL_OF_LIST="../../../../arch/arm/dts/k3-am65-iot2050-spl"
+>>>
+> 
+> Actually, this does NOT work: I just had a long morning debugging SPL
+> which no longer started because it picked the non-filtered dtb. The
+> filtered one ended up in a folder outside of the u-boot sources because
+> of all those ../ and hard-wiring to dts/upstream.
+> 
+>>> for our spl dtb.
+>>>
+>>> Are there means to still build certain dtb[o] files in arch/<arch>/dts?
+>>> I'm a bit lost in the Makefile forest.
+>>>
+>>
+>> Sumit: Any suggestions?
+>>
+> 
+> I would really like to hear some better proposals than my local
+> workarounds to far. They don't converge although I already patched some
+> core Makefile (overlays are building now).
+> 
 
---lzxJHwR40QEELkUc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+OK, I side-stepped the spl issue by using one of our variant DTBs for 
+spl as well - happens to work.
 
-On Wed, Aug 14, 2024 at 09:42:08AM -0400, Raymond Mao wrote:
-> Hi Tom,
->=20
-> On Fri, 2 Aug 2024 at 11:34, Raymond Mao <raymond.mao@linaro.org> wrote:
->=20
-> > Hi Tom,
-> >
-> > On Thu, 1 Aug 2024 at 16:46, Tom Rini <trini@konsulko.com> wrote:
-> >
-> >> On Wed, Jul 31, 2024 at 10:25:10AM -0700, Raymond Mao wrote:
-> >> >
-> >> > Integrate MbedTLS v3.6 LTS (currently v3.6.0) with U-Boot.
-> >> >
-> >> > Motivations:
-> >> > ------------
-> >> >
-> >> > 1. MbedTLS is well maintained with LTS versions.
-> >> > 2. LWIP is integrated with MbedTLS and easily to enable HTTPS.
-> >> > 3. MbedTLS recently switched license back to GPLv2.
-> >> >
-> >> > Prerequisite:
-> >> > -------------
-> >> >
-> >> > This patch series requires mbedtls git repo to be added as a
-> >> > subtree to the main U-Boot repo via:
-> >> >     $ git subtree add --prefix lib/mbedtls/external/mbedtls \
-> >> >           https://github.com/Mbed-TLS/mbedtls.git \
-> >> >           v3.6.0 --squash
-> >> > Moreover, due to the Windows-style files from mbedtls git repo,
-> >> > we need to convert the CRLF endings to LF and do a commit manually:
-> >> >     $ git add --renormalize .
-> >> >     $ git commit
-> >> >
-> >> > New Kconfig options:
-> >> > --------------------
-> >> >
-> >> > `MBEDTLS_LIB` is for MbedTLS general switch.
-> >> > `MBEDTLS_LIB_CRYPTO` is for replacing original digest and crypto libs
-> >> with
-> >> > MbedTLS.
-> >> > `MBEDTLS_LIB_X509` is for replacing original X509, PKCS7, MSCode, AS=
-N1,
-> >> > and Pubkey parser with MbedTLS.
-> >> > `LEGACY_CRYPTO` is introduced as a main switch for legacy crypto
-> >> library.
-> >> > `LEGACY_CRYPTO_BASIC` is for the basic crypto functionalities and
-> >> > `LEGACY_CRYPTO_CERT` is for the certificate related functionalities.
-> >> > For each of the algorithm, a pair of `<alg>_LEGACY` and `<alg>_MBEDT=
-LS`
-> >> > Kconfig options are introduced. Meanwhile, `SPL_` Kconfig options are
-> >> > introduced.
-> >> >
-> >> > In this patch set, MBEDTLS_LIB, MBEDTLS_LIB_CRYPTO and MBEDTLS_LIB_X=
-509
-> >> > are by default enabled in qemu_arm64_defconfig and sandbox_defconfig
-> >> > for testing purpose.
-> >> >
-> >> > Patches for external MbedTLS project:
-> >> > -------------------------------------
-> >> >
-> >> > Since U-Boot uses Microsoft Authentication Code to verify PE/COFFs
-> >> > executables which is not supported by MbedTLS at the moment,
-> >> > addtional patches for MbedTLS are created to adapt with the EFI load=
-er:
-> >> > 1. Decoding of Microsoft Authentication Code.
-> >> > 2. Decoding of PKCS#9 Authenticate Attributes.
-> >> > 3. Extending MbedTLS PKCS#7 lib to support multiple signer's
-> >> certificates.
-> >> > 4. MbedTLS native test suites for PKCS#7 signer's info.
-> >> >
-> >> > All above 4 patches (tagged with `mbedtls/external`) are submitted to
-> >> > MbedTLS project and being reviewed, eventually they should be part of
-> >> > MbedTLS LTS release.
-> >> > But before that, please merge them into U-Boot, otherwise the buildi=
-ng
-> >> > will be broken when MBEDTLS_LIB_X509 is enabled.
-> >> >
-> >> > See below PR link for the reference:
-> >> > https://github.com/Mbed-TLS/mbedtls/pull/9001
-> >> >
-> >> > Miscellaneous:
-> >> > --------------
-> >> >
-> >> > Optimized MbedTLS library size by tailoring the config file
-> >> > and disabling all unnecessary features for EFI loader.
-> >> > From v2, original libs (rsa, asn1_decoder, rsa_helper, md5, sha1,
-> >> sha256,
-> >> > sha512) are completely replaced when MbedTLS is enabled.
-> >> > From v3, the size-growth is slightly reduced by refactoring Hash
-> >> functions.
-> >> >
-> >> > Target(QEMU arm64) size-growth when enabling MbedTLS:
-> >> > v1: 6.03%
-> >> > v2: 4.66%
-> >> > From v3: 4.55%
-> >> >
-> >> > Please see the latest output from buildman for size-growth on QEMU
-> >> arm64,
-> >> > Sandbox and Nanopi A64. [1]
-> >>
-> >> Let us inline the growth on qemu_arm64 for a moment:
-> >>    aarch64: (for 1/1 boards) all +6916.0 bss -32.0 data -64.0 rodata
-> >> +200.0 text +6812.0
-> >>             qemu_arm64     : all +6916 bss -32 data -64 rodata +200 te=
-xt
-> >> +6812
-> >>                u-boot: add: 28/-17, grow: 12/-16 bytes: 15492/-8304 (7=
-188)
-> >>                  function                                   old     new
-> >>  delta
-> >>                  mbedtls_internal_sha1_process                -    4540
-> >>  +4540
-> >>                  mbedtls_internal_md5_process                 -    2928
-> >>  +2928
-> >>                  mbedtls_internal_sha256_process              -    2052
-> >>  +2052
-> >>                  mbedtls_internal_sha512_process              -    1056
-> >>  +1056
-> >>                  K                                            -     896
-> >>   +896
-> >>                  mbedtls_sha512_finish                        -     556
-> >>   +556
-> >>                  mbedtls_sha256_finish                        -     484
-> >>   +484
-> >>                  mbedtls_sha1_finish                          -     420
-> >>   +420
-> >>                  mbedtls_sha512_starts                        -     340
-> >>   +340
-> >>                  mbedtls_md5_finish                           -     336
-> >>   +336
-> >>                  mbedtls_sha512_update                        -     264
-> >>   +264
-> >>                  mbedtls_sha256_update                        -     252
-> >>   +252
-> >>                  mbedtls_sha1_update                          -     236
-> >>   +236
-> >>                  mbedtls_md5_update                           -     236
-> >>   +236
-> >>                  mbedtls_sha512                               -     148
-> >>   +148
-> >>                  mbedtls_sha256_starts                        -     124
-> >>   +124
-> >>                  hash_init_sha512                            52     128
-> >>    +76
-> >>                  hash_init_sha256                            52     128
-> >>    +76
-> >>                  mbedtls_sha1_starts                          -      72
-> >>    +72
-> >>                  mbedtls_md5_starts                           -      60
-> >>    +60
-> >>                  hash_init_sha1                              52     112
-> >>    +60
-> >>                  mbedtls_platform_zeroize                     -      56
-> >>    +56
-> >>                  mbedtls_sha512_free                          -      16
-> >>    +16
-> >>                  mbedtls_sha256_free                          -      16
-> >>    +16
-> >>                  mbedtls_sha1_free                            -      16
-> >>    +16
-> >>                  mbedtls_md5_free                             -      16
-> >>    +16
-> >>                  hash_finish_sha512                          72      88
-> >>    +16
-> >>                  hash_finish_sha256                          72      88
-> >>    +16
-> >>                  hash_finish_sha1                            72      88
-> >>    +16
-> >>                  sha512_csum_wd                              68      80
-> >>    +12
-> >>                  sha256_csum_wd                              68      80
-> >>    +12
-> >>                  sha1_csum_wd                                68      80
-> >>    +12
-> >>                  md5_wd                                      68      80
-> >>    +12
-> >>                  mbedtls_sha512_init                          -      12
-> >>    +12
-> >>                  mbedtls_sha256_init                          -      12
-> >>    +12
-> >>                  mbedtls_sha1_init                            -      12
-> >>    +12
-> >>                  mbedtls_md5_init                             -      12
-> >>    +12
-> >>                  memset_func                                  -       8
-> >>     +8
-> >>                  sha512_update                                4       8
-> >>     +4
-> >>                  sha384_update                                4       8
-> >>     +4
-> >>                  sha256_update                               12       8
-> >>     -4
-> >>                  sha1_update                                 12       8
-> >>     -4
-> >>                  sha256_process                              16       -
-> >>    -16
-> >>                  sha1_process                                16       -
-> >>    -16
-> >>                  hash_update_sha512                          36      16
-> >>    -20
-> >>                  hash_update_sha256                          36      16
-> >>    -20
-> >>                  hash_update_sha1                            36      16
-> >>    -20
-> >>                  MD5Init                                     56      36
-> >>    -20
-> >>                  sha1_starts                                 60      36
-> >>    -24
-> >>                  hash_update_sha384                          36       -
-> >>    -36
-> >>                  hash_init_sha384                            52       -
-> >>    -52
-> >>                  sha384_csum_wd                              68      12
-> >>    -56
-> >>                  sha256_starts                              104      40
-> >>    -64
-> >>                  sha256_padding                              64       -
-> >>    -64
-> >>                  sha1_padding                                64       -
-> >>    -64
-> >>                  hash_finish_sha384                          72       -
-> >>    -72
-> >>                  sha512_finish                              152      36
-> >>   -116
-> >>                  sha512_starts                              168      40
-> >>   -128
-> >>                  sha384_starts                              168      40
-> >>   -128
-> >>                  sha384_finish                              152       4
-> >>   -148
-> >>                  MD5Final                                   196      44
-> >>   -152
-> >>                  sha512_base_do_finalize                    160       -
-> >>   -160
-> >>                  static.sha256_update                       228       -
-> >>   -228
-> >>                  static.sha1_update                         240       -
-> >>   -240
-> >>                  sha512_base_do_update                      244       -
-> >>   -244
-> >>                  MD5Update                                  260       -
-> >>   -260
-> >>                  sha1_finish                                300      36
-> >>   -264
-> >>                  sha256_finish                              404      36
-> >>   -368
-> >>                  sha256_armv8_ce_process                    428       -
-> >>   -428
-> >>                  sha1_armv8_ce_process                      484       -
-> >>   -484
-> >>                  sha512_K                                   640       -
-> >>   -640
-> >>                  sha512_block_fn                           1212       -
-> >>  -1212
-> >>                  MD5Transform                              2552       -
-> >>  -2552
-> >>
-> >> And to start with, that's not bad. In fact, tossing LTO in before mbed=
-TLS
-> >> only changes
-> >> the top-line a little:
-> >>    aarch64: (for 1/1 boards) all +5120.0 bss -16.0 data -64.0 rodata
-> >> +200.0 text +5000.0
-> >>             qemu_arm64     : all +5120 bss -16 data -64 rodata +200 te=
-xt
-> >> +5000
-> >>                u-boot: add: 19/-18, grow: 11/-7 bytes: 14696/-7884 (68=
-12)
-> >>
-> >> But, is there something we can do still? mbedTLS is a more robust
-> >> solution and I'm accepting there will be growth. But still the
-> >> process/start/finish is much larger. Is there something configurable
-> >> there?
-> >>
-> >> I have investigated all those MbedTLS native functions with big-size
-> > (_process/_update/_finish).
-> > For MD5 and SHA1, we don't have turnable configs.
-> > For SHA256 and SHA512, there are a few configs:
-> > 1. Performance configs only for Armv8/a64.
-> >     I didn't turn that on, which might affect the target size as well.
-> > 2. Smaller implementation with lower size (only for non-Armv8/a64) at t=
-he
-> > expense of losing
-> >     performance.
-> > I didn't enable both, as #1 is more for performance and might potential=
-ly
-> > increase target size;
-> > #2 compromises the performance and only for non-Armv8/a64.
-> > Looks like that both don't help in reducing the size of qemu_arm64.
-> > But I will try #1 on qemu_arm64 and  #2 on sandbox and let you know
-> > the size impact soon.
-> >
-> > The smaller footprint implementation for SHA256/512 can reduce the targ=
-et
-> size significantly on
-> those "<hash>_process()" functions. Please see below output from buildman:
-> ```
->    aarch64: (for 2/2 boards) all -1468.0 bss +16.0 data -64.0 rodata +200=
-=2E0
-> text -1620.0
->             qemu_arm64     : all +4608 bss +80 data -64 rodata +200 text
-> +4392
->                u-boot: add: 29/-17, grow: 12/-16 bytes: 13072/-8304 (4768)
->             nanopi_a64     : all -7544 bss -48 data -64 rodata +200 text
-> -7632
->                u-boot: add: 21/-8, grow: 4/-8 bytes: 10692/-4364 (6328)
->    sandbox: (for 1/1 boards) all +19312.0 data +1440.0 rodata -4128.0 text
-> +22000.0
->             sandbox        : all +19312 data +1440 rodata -4128 text +220=
-00
->                u-boot: add: 258/-206, grow: 122/-59 bytes: 90286/-76286
-> (14000)
-> ```
-> Since this is a trade-off between size and performance, I will add one mo=
-re
-> kconfig to
-> allow the user to turn it on/off. What are your thoughts?
->=20
-> On the other hand, the "Armv8/a64 only" options depend on NEON
-> instructions, so I
-> will keep them off.
+For the overlays, I need to add
 
-Yes, we should have it as a Kconfig option. Can you perhaps do a
-real-world performance test (so some not-qemu platform) where you sha256
-a big hunk of memory? That might help inform the defaults. Also, sorry,
-I don't understand your comment about NEON instructions. Is it the kind
-of thing where there's too much core variability in terms of who has
-what? If so, it too should be an option, but not enabled by default.
+--- a/scripts/Makefile.dts
++++ b/scripts/Makefile.dts
+@@ -1,5 +1,7 @@
+ # SPDX-License-Identifier: GPL-2.0+
+ 
++include $(srctree)/config.mk
++
+ dtb-y += $(patsubst %,%.dtb,$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $(CONFIG_OF_LIST) $(CONFIG_SPL_OF_LIST)))
+ 
+ ifeq ($(CONFIG_OF_UPSTREAM_BUILD_VENDOR),y)
 
---=20
-Tom
 
---lzxJHwR40QEELkUc
-Content-Type: application/pgp-signature; name="signature.asc"
+in order to then be able to do
 
------BEGIN PGP SIGNATURE-----
+--- a/board/siemens/iot2050/config.mk
++++ b/board/siemens/iot2050/config.mk
+@@ -5,4 +5,12 @@
+ # Authors:
+ #   Jan Kiszka <jan.kiszka@siemens.com>
+ 
++ifneq ($(CONFIG_SPL_BUILD),y)
++dtbo-list = \
++	k3-am6548-iot2050-advanced-m2-bkey-usb3-overlay \
++	k3-am6548-iot2050-advanced-m2-bkey-ekey-pcie-overlay
++
++dtb-y += $(patsubst %,../../../../arch/arm/dts/%.dtbo,$(dtbo-list))
++endif
++
+ flash.bin: all
 
-iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAma8yBsACgkQFHw5/5Y0
-tyyUpgv3eHgcbMtN5VA2JnoSL/hbkfB5XtUmTzJXIsFFWBK71Mv58PgMm9OdApC3
-LHAkdltEKE3JhVCoElhsOlghrig4V+youf3XQyAM+fK0CHI2nNK2oO9/SrliJDbw
-/MDgoWZZNzLFbTvs2xXD+RnhtUMXsyojyXKaA6k0Ki2JRrdwLPwQ756jk1w41uOW
-d5TZMLbbflQmUEfadMmtcGAxCpDAXIQx7ztSJy6e6n96zNaJOL6IDDtzLQU93zvn
-NpqQDQwApeDScUKtdR8na3+VA4zmPsSvOvHo4tMAmx0CWzSocM2Eb5oxHNCvOjGe
-0PvTJ3EQinDLfLLGy3ySyzn5YYL+v33ZtZrMweM+5lMusZeSs3j3yrT88UaH4K0O
-dt3kfeE0YbZQMr0YSRS9g6M9eO90yTROV4KkM3t9ht/KSl09+CJI8eFXKzibgFNX
-mm+EP84JmhwJtPPCjtJdKFi0hX3fO8bVuZpk+iUP+UQv5+vmcDDUlEBbtsTyOowh
-eGTkJw4=
-=qUkY
------END PGP SIGNATURE-----
 
---lzxJHwR40QEELkUc--
+Does that make sense?
+
+Jan
+
+-- 
+Siemens AG, Technology
+Linux Expert Center
+
