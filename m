@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0835AC3DA7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:35:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC8CBC3DA7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:36:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D7E688C63;
+	by phobos.denx.de (Postfix) with ESMTP id D6C7688C3D;
 	Thu, 15 Aug 2024 22:33:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aHXTLFrN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KJuV9jEX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A53CF88B59; Thu, 15 Aug 2024 22:33:47 +0200 (CEST)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
+ id C8A1188C60; Thu, 15 Aug 2024 22:33:48 +0200 (CEST)
+Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
+ [IPv6:2607:f8b0:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB1D58887A
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:33:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A208A88107
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:33:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-2d3c5f769d6so954760a91.3
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:33:43 -0700 (PDT)
+Received: by mail-pg1-x536.google.com with SMTP id
+ 41be03b00d2f7-7c9a2b339a6so17375a12.2
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:33:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723754021; x=1724358821; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723754024; x=1724358824; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kK0bgZmluGzfZf3Ls+0w/w6cIkSJPu/XkeGcFNlMUOU=;
- b=aHXTLFrN5hA3rynv09BqoIpGtka7w+yoSGGoMtcH9720kg5JUXSu517GP3rAGs+hYM
- 4D+Ce0VZvqXBK9quV8AE6pdmeA2WRejKWMMTHwsoG/I25cju1jAq5RA780oD4zDBGfYo
- Uvpp/+RUHOlzXs0fsuwBpFfM/s5dlunQOiITk=
+ bh=WKw3Lb8UwaRa8h4NZLAiFD3fDBUrC8OE3cwmqqfph14=;
+ b=KJuV9jEXJjKY6igM2pWAMSRjUshdrz1pD9hQZv0kki6RYe2zds2NTMW/byJaM+b5fs
+ yVgY7aOtkDrs/Y7zQPd/ymC9tTIJ4rdCiBsfnNsx/g7ACguYmBP93vGxmxFaa4+avETk
+ Z78R1ZaDC5wpLF5xJArAiTtuM2wZ0peUY9FR0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723754021; x=1724358821;
+ d=1e100.net; s=20230601; t=1723754024; x=1724358824;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=kK0bgZmluGzfZf3Ls+0w/w6cIkSJPu/XkeGcFNlMUOU=;
- b=nJIrs6TLJweGXvG/Svk2eE4J0m+IedeAQsz811/MHGOXc/gsMOlG030FzTWBo95yvk
- 4C0/RkR6++WNsdQiNg9WO+2vx46qZ1YZSi20U5aIWvXSXZeOeCjlYrOhtSuQfl8vBuqU
- zs8ZALdmws/SK8PQ1/IM8gTtk4Lmus5wwaGbPrOVVtc+Y37X7+q+KmJsLIg8ntsFZrfZ
- 4k4NN430uTmENvaol5B3d0G/hExX5DE0jKBrYfKIvIIxKTi0eFh3q5P70QFJ2neSPVcZ
- 9kVhVDpPmFiGWvcQM0uA0tkw+qpLcrHSTlasbROh+h6NIjHEQKNlyWQ9Cc4PC5SlmpuU
- v1fA==
-X-Gm-Message-State: AOJu0YyWykqJj1Kuew6w7+Skbvqh/EDqrDb0U/SLhVU3dMrW+5JzKt97
- WKV+IBMOhKriyEMf0cvan8OupKseNZaiMfKRO15x8UnAq4cJmf+YypPb87Vf3LYtGoxWz+hp4VE
- 1EK7tTj5Rp8goMaLMxSf4n3rWn8jTN53tCV8S
-X-Google-Smtp-Source: AGHT+IGfZ7Gn9117+JW1PJxEGicGlgjEvGG8Wtjn5ykmee6uMD0KuabeyruHCzDiCId61wVqEfCvkXhBVWDDwx1hqHE=
-X-Received: by 2002:a17:90b:e0b:b0:2d3:b8eb:9c3c with SMTP id
- 98e67ed59e1d1-2d3dfc3a98cmr901308a91.2.1723754020576; Thu, 15 Aug 2024
- 13:33:40 -0700 (PDT)
+ bh=WKw3Lb8UwaRa8h4NZLAiFD3fDBUrC8OE3cwmqqfph14=;
+ b=A/Dbo0F852QxL/bvE/jIzotG39jKkKl+/agAHUpBOXHQYfKe5PJT+B3YMdYA9KO6Yo
+ j8nXef86o0isQiw/unpqSL8onNDnh6PWCskqbMHC6HE5sVtfMsqCu/MxN54IWrd76Dxc
+ 7lL0qsE48pzI9DpiG7cbApj3bJohCw+axUGVWzTSSHSHYBbrtvTbjqqNIMVf4hFwG2NL
+ LQyt0mQgFhtXQgpYrj9nIOzbiEJJ2YMybqn47zajwQEqyLHZqNBWfVJCMCNLCFbdK58Z
+ gbb8O7i3hUtSCq7u+L2M13RvCPFZU2XX+OnrpfhuHRn3uBLh6eJVnAQDj7GVohY5Sqg2
+ bMjA==
+X-Gm-Message-State: AOJu0YzXUoXWGiV2iyAgPn2MnJQjxuJDykOSFRHcs0WabP+3GmpSzGL5
+ lWMKmcLeHMeET8qOwICOHMiVqepS1gZhu18K7mjGaNjMmJuIWEaSHk3lsoIN8H0on02TAtjqqwn
+ hUbhlD2n/NChiRw7/CkcBxNONLqwWGzwlBFsv
+X-Google-Smtp-Source: AGHT+IELGd9pYtJ1FxOLU0z26egteHAn7ZKaxvxENKbEsv0I4i8qBGFHSIj6CSZzuH8dXCEvf68ayO4UEbUg/rTMgSA=
+X-Received: by 2002:a17:90b:1051:b0:2d3:c976:dd80 with SMTP id
+ 98e67ed59e1d1-2d3e0407ac1mr994588a91.39.1723754023780; Thu, 15 Aug 2024
+ 13:33:43 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
- <20240814110009.45310-3-sughosh.ganu@linaro.org>
-In-Reply-To: <20240814110009.45310-3-sughosh.ganu@linaro.org>
+ <20240814110009.45310-11-sughosh.ganu@linaro.org>
+In-Reply-To: <20240814110009.45310-11-sughosh.ganu@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 15 Aug 2024 21:33:29 +0100
-Message-ID: <CAFLszTi_nDiqxF9fke5My48HjoX0zoZQmKU5SVQiRpQ5EHDv7A@mail.gmail.com>
-Subject: Re: [PATCH v2 02/32] lmb: ut: disable unit tests for lmb changes
+Date: Thu, 15 Aug 2024 21:33:31 +0100
+Message-ID: <CAFLszTh3RaCSsUetT90aDhZyo7z4FgngzvB4H5PozZ+f8jw=Fw@mail.gmail.com>
+Subject: Re: [PATCH v2 10/32] lmb: config: add lmb config symbols for SPL
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
@@ -91,31 +91,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
-
-On Wed, 14 Aug 2024 at 12:00, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Wed, 14 Aug 2024 at 12:01, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> The LMB module code is being overhauled to make it's memory map global
-> and persistent. This involves extensive changes to the LMB
-> code. Disable the unit test code temporarily till the changes are in
-> place. These tests will be enabled in a subsequent commit once all the
-> LMB module and the corresponding test code changes have been made.
+> Add separate config symbols for enabling the LMB module for the SPL
+> phase. The LMB module implementation now relies on alloced list data
+> structure which requires heap area to be present. Add specific config
+> symbol for the SPL phase of U-Boot so that this can be enabled on
+> platforms which support a heap in SPL.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
 > Changes since V1: None
 >
->  configs/sandbox64_defconfig        | 4 +---
->  configs/sandbox_defconfig          | 7 ++++---
->  configs/sandbox_flattree_defconfig | 4 +---
->  configs/sandbox_noinst_defconfig   | 8 ++++----
->  configs/sandbox_spl_defconfig      | 8 ++++----
->  configs/sandbox_vpl_defconfig      | 7 ++-----
->  configs/snow_defconfig             | 2 +-
->  7 files changed, 17 insertions(+), 23 deletions(-)
+>  lib/Kconfig | 12 +++++++++++-
+>  1 file changed, 11 insertions(+), 1 deletion(-)
+>
 
-As mentioned last time, could you update the tests as you update the
-code? That way we can bisect if something goes wrong later.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
