@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE16FC52D7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:27:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88BB9C52D7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:27:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3ABA88B40;
-	Thu, 15 Aug 2024 22:25:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 49E6388ABE;
+	Thu, 15 Aug 2024 22:25:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H4JtQqqL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PLHRQ44A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4226088B49; Thu, 15 Aug 2024 22:25:50 +0200 (CEST)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
+ id 6BA5188B40; Thu, 15 Aug 2024 22:25:50 +0200 (CEST)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F9C788B3F
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:25:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B37488ADC
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:25:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-81fda7d7a48so61671039f.3
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:25:47 -0700 (PDT)
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-39d20c4be2eso3502385ab.1
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:25:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723753544; x=1724358344; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723753545; x=1724358345; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RP3sjiPcGcA/mi36Kt00Rs5CQbTgbt7wjtg5MSV5d9s=;
- b=H4JtQqqLgW1rI7bGu0EC6wip0gXDv7YoBHmYxkC+CgP+V8dYjq2Wc7EWXFdRQQzC/4
- JmEtiOHuRIzlOwesY5chHEZW5TTnuGsx9gOtRe2w73Jiy3jIdoQtusuoCprdQ9fPyucM
- t4pNasoxLj+PdTPg57L8fLCrXWoIu0E+BkdX4=
+ bh=JOKXGXx2O0QuWJLmpb70snzkVoo3Pg5CAS+f/O7nx4k=;
+ b=PLHRQ44AVUOwj2bkunO4CEi9qaQQz5OamEvSIg+z3oXyBorPDpzK47EsKpAn17ci09
+ ekm+Zm3xxepwVpvo7QLL2pahK1TH9ekl00b635eqsoGzqU5tHC85qLADwJs0sXeNqHiw
+ NzlueYGJ75BMRkiYWJVHRb4CQLPP41ayKP8Sc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723753544; x=1724358344;
+ d=1e100.net; s=20230601; t=1723753545; x=1724358345;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RP3sjiPcGcA/mi36Kt00Rs5CQbTgbt7wjtg5MSV5d9s=;
- b=H7SSzqw5FaRY2aISvWwqnBGHrcLBeeKuhiqzkYFAJr4EXtjZLu7KagJkTb7g9LeLWc
- P3/SxerPF6V+l/FAZsIuznpEBWgqy2oIBk0c1p0tAs2AnlrKXniwlEr9S6iL00ptWmFc
- L40NlpnEf6ycRl4qpgKi3nPtUE73Ag4uMvpUzUEbSCktAQBGasNu5hFNmLu6rnLv1iSt
- 0ptOOS3Arq874CMHjW7c4YiVSb0/MPRcaxEv6Qho8XR0SvWQVAvDIiZRPPhmrzqYZTTo
- D0Qwsgj7Nk4AdHBja30UJpk2W1EReudfmaX9E7P5cxsx4SDan46hV64oM3WOaryUUcXy
- fXvw==
-X-Gm-Message-State: AOJu0YxEQdZ4kaQqFVw9BCjfoxq3pln8Aq3TMPLbRq5l4RyRaYnKITsD
- su9PwwBmoC4s/DWkWUePSvF3Llpnv0W05/1f6me2CgbIpUAsHBAUQLRxOV72watILoTOPEXxJP7
- tWw==
-X-Google-Smtp-Source: AGHT+IHKxq+i3HY7m28hm6eAoyG/x7nXkBv7W4TmEwDGFfC49CjRo/NzHn/Rn4i1PQdLuPKGNmOZyA==
-X-Received: by 2002:a05:6e02:180f:b0:39d:1cef:2f1a with SMTP id
- e9e14a558f8ab-39d26ced1d0mr11649595ab.10.1723753544176; 
- Thu, 15 Aug 2024 13:25:44 -0700 (PDT)
+ bh=JOKXGXx2O0QuWJLmpb70snzkVoo3Pg5CAS+f/O7nx4k=;
+ b=nBPjT/7MSGELzw3EK3M0e8ehVs1aeuHpSTG0aKW8cIoEZv7CaPRTu5w1woYq28YOTj
+ WflrZRf1Va8vTQMUJ+vIkMYVr8Y3kb5qy8rYE8wozjFTeKua7sy9d1BpNIivVD/YEHu2
+ jr/DbgrqIzqfRD/EIkQd7r5MB2w8IBEfj+mOkhCk4kE9mTVnEgT8lfk6B+7MtcITpEal
+ VQhMh7DDf8EeFUcvsOaHrhLOWhC/DNwQjE+Kq2P3vJT7GMhLtJ1Y+HYzhykpNREqXMy6
+ AkUDhcqtdZuepnm34mXhWLUYscShGADXJfKqWuW8OXvKwf0f8rRxrgrdNn083xs4NLqG
+ nX1g==
+X-Gm-Message-State: AOJu0YyfqkdwnkQNeW7boG86C6EF5Ii+/vNKUdHmJo87OBC5pTc9rOo+
+ G/mKmiy9glBDfC9czanVXVlgnLEL+G6H11caxcQKRuq9/cvVBS6UgExL1IcwUHNdAQLH64VM3Bo
+ w3Q==
+X-Google-Smtp-Source: AGHT+IG8DyQbsRSgNWuziyMHuamFdloerVi43q8X4TOnsRMd4yGk/FeFh8zPDAbd4UHr16Lj0f3RtA==
+X-Received: by 2002:a05:6e02:138b:b0:39d:2102:3928 with SMTP id
+ e9e14a558f8ab-39d26ced4a2mr11500915ab.8.1723753545032; 
+ Thu, 15 Aug 2024 13:25:45 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39d1ed5db5bsm8014235ab.64.2024.08.15.13.25.43
+ e9e14a558f8ab-39d1ed5db5bsm8014235ab.64.2024.08.15.13.25.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Aug 2024 13:25:43 -0700 (PDT)
+ Thu, 15 Aug 2024 13:25:44 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 03/24] bootstd: Add UT_TESTF_CONSOLE_REC to bootflow tests
-Date: Thu, 15 Aug 2024 14:25:14 -0600
-Message-Id: <20240815202535.767869-4-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
+Subject: [PATCH v3 04/24] test/py: Fix some pylint warnings in test_ut.py
+Date: Thu, 15 Aug 2024 14:25:15 -0600
+Message-Id: <20240815202535.767869-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240815202535.767869-1-sjg@chromium.org>
 References: <20240815202535.767869-1-sjg@chromium.org>
@@ -89,262 +89,250 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Quite a few tests use console recording without indicating this, using
-the UT_TESTF_CONSOLE_REC flag. Fix this to avoid strange failures.
+Tidy up most of these warnings. Remaining are four of these:
+
+   R0914: Too many local variables
+
+which can only by fixed by splitting things into functions, so that is
+left for another time.
+
+Part of this change was done by the flynt tool.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/boot/bootflow.c | 59 +++++++++++++++++++++++---------------------
- 1 file changed, 31 insertions(+), 28 deletions(-)
+ test/py/tests/test_ut.py | 94 ++++++++++++++++++++--------------------
+ 1 file changed, 48 insertions(+), 46 deletions(-)
 
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 8b46256fa48..8ea091a36af 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -50,7 +50,6 @@ static int inject_response(struct unit_test_state *uts)
- /* Check 'bootflow scan/list' commands */
- static int bootflow_cmd(struct unit_test_state *uts)
- {
--	console_record_reset_enable();
- 	ut_assertok(run_command("bootdev select 1", 0));
- 	ut_assert_console_end();
- 	ut_assertok(run_command("bootflow scan -lH", 0));
-@@ -76,14 +75,14 @@ static int bootflow_cmd(struct unit_test_state *uts)
+diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
+index 05e15830590..39aa1035e34 100644
+--- a/test/py/tests/test_ut.py
++++ b/test/py/tests/test_ut.py
+@@ -1,6 +1,12 @@
+ # SPDX-License-Identifier: GPL-2.0
+-# Copyright (c) 2016, NVIDIA CORPORATION. All rights reserved.
++"""
++Unit-test runner
++
++Provides a test_ut() function which is used by conftest.py to run each unit
++test one at a time, as well setting up some files needed by the tests.
  
- 	return 0;
- }
--BOOTSTD_TEST(bootflow_cmd, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
-+BOOTSTD_TEST(bootflow_cmd, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
-+	     UT_TESTF_CONSOLE_REC);
++# Copyright (c) 2016, NVIDIA CORPORATION. All rights reserved.
++"""
+ import collections
+ import getpass
+ import gzip
+@@ -44,8 +50,8 @@ def setup_image(cons, mmc_dev, part_type, second_part=False):
+     if second_part:
+         spec += '\ntype=c'
  
- /* Check 'bootflow scan' with a label / seq */
- static int bootflow_cmd_label(struct unit_test_state *uts)
- {
- 	test_set_eth_enable(false);
+-    u_boot_utils.run_and_log(cons, 'qemu-img create %s 20M' % fname)
+-    u_boot_utils.run_and_log(cons, 'sudo sfdisk %s' % fname,
++    u_boot_utils.run_and_log(cons, f'qemu-img create {fname} 20M')
++    u_boot_utils.run_and_log(cons, f'sudo sfdisk {fname}',
+                              stdin=spec.encode('utf-8'))
+     return fname, mnt
  
--	console_record_reset_enable();
- 	ut_assertok(run_command("bootflow scan -lH mmc1", 0));
- 	ut_assert_nextline("Scanning for bootflows with label 'mmc1'");
- 	ut_assert_skip_to_line("(1 bootflow, 1 valid)");
-@@ -124,7 +123,7 @@ static int bootflow_cmd_label(struct unit_test_state *uts)
- 	return 0;
- }
- BOOTSTD_TEST(bootflow_cmd_label, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
--	     UT_TESTF_ETH_BOOTDEV);
-+	     UT_TESTF_ETH_BOOTDEV | UT_TESTF_CONSOLE_REC);
+@@ -61,13 +67,13 @@ def mount_image(cons, fname, mnt, fstype):
+     Returns:
+         str: Name of loop device used
+     """
+-    out = u_boot_utils.run_and_log(cons, 'sudo losetup --show -f -P %s' % fname)
++    out = u_boot_utils.run_and_log(cons, f'sudo losetup --show -f -P {fname}')
+     loop = out.strip()
+     part = f'{loop}p1'
+     u_boot_utils.run_and_log(cons, f'sudo mkfs.{fstype} {part}')
+     opts = ''
+     if fstype == 'vfat':
+-         opts += f' -o uid={os.getuid()},gid={os.getgid()}'
++        opts += f' -o uid={os.getuid()},gid={os.getgid()}'
+     u_boot_utils.run_and_log(cons, f'sudo mount -o loop {part} {mnt}{opts}')
+     u_boot_utils.run_and_log(cons, f'sudo chown {getpass.getuser()} {mnt}')
+     return loop
+@@ -82,9 +88,7 @@ def copy_prepared_image(cons, mmc_dev, fname):
+     """
+     infname = os.path.join(cons.config.source_dir,
+                            f'test/py/tests/bootstd/mmc{mmc_dev}.img.xz')
+-    u_boot_utils.run_and_log(
+-        cons,
+-        ['sh', '-c', 'xz -dc %s >%s' % (infname, fname)])
++    u_boot_utils.run_and_log(cons, ['sh', '-c', f'xz -dc {infname} >{fname}'])
  
- /* Check 'bootflow scan/list' commands using all bootdevs */
- static int bootflow_cmd_glob(struct unit_test_state *uts)
-@@ -156,14 +155,14 @@ static int bootflow_cmd_glob(struct unit_test_state *uts)
+ def setup_bootmenu_image(cons):
+     """Create a 20MB disk image with a single ext4 partition
+@@ -101,9 +105,6 @@ def setup_bootmenu_image(cons):
+         loop = mount_image(cons, fname, mnt, 'ext4')
+         mounted = True
  
- 	return 0;
- }
--BOOTSTD_TEST(bootflow_cmd_glob, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
-+BOOTSTD_TEST(bootflow_cmd_glob, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
-+	     UT_TESTF_CONSOLE_REC);
+-        vmlinux = 'Image'
+-        initrd = 'uInitrd'
+-        dtbdir = 'dtb'
+         script = '''# DO NOT EDIT THIS FILE
+ #
+ # Please edit /boot/armbianEnv.txt to set supported parameters
+@@ -177,12 +178,12 @@ booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
  
- /* Check 'bootflow scan -e' */
- static int bootflow_cmd_scan_e(struct unit_test_state *uts)
- {
- 	ut_assertok(bootstd_test_drop_bootdev_order(uts));
+ # Recompile with:
+ # mkimage -C none -A arm -T script -d /boot/boot.cmd /boot/boot.scr
+-''' % (mmc_dev)
++'''
+         bootdir = os.path.join(mnt, 'boot')
+         mkdir_cond(bootdir)
+         cmd_fname = os.path.join(bootdir, 'boot.cmd')
+         scr_fname = os.path.join(bootdir, 'boot.scr')
+-        with open(cmd_fname, 'w') as outf:
++        with open(cmd_fname, 'w', encoding='ascii') as outf:
+             print(script, file=outf)
  
--	console_record_reset_enable();
- 	ut_assertok(run_command("bootflow scan -aleGH", 0));
- 	ut_assert_nextline("Scanning for bootflows in all bootdevs");
- 	ut_assert_nextline("Seq  Method       State   Uclass    Part  Name                      Filename");
-@@ -207,12 +206,12 @@ static int bootflow_cmd_scan_e(struct unit_test_state *uts)
+         infname = os.path.join(cons.config.source_dir,
+@@ -212,13 +213,12 @@ booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
+         complete = True
  
- 	return 0;
- }
--BOOTSTD_TEST(bootflow_cmd_scan_e, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
-+BOOTSTD_TEST(bootflow_cmd_scan_e, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
-+	     UT_TESTF_CONSOLE_REC);
+     except ValueError as exc:
+-        print('Falled to create image, failing back to prepared copy: %s',
+-              str(exc))
++        print(f'Falled to create image, failing back to prepared copy: {exc}')
+     finally:
+         if mounted:
+-            u_boot_utils.run_and_log(cons, 'sudo umount --lazy %s' % mnt)
++            u_boot_utils.run_and_log(cons, f'sudo umount --lazy {mnt}')
+         if loop:
+-            u_boot_utils.run_and_log(cons, 'sudo losetup -d %s' % loop)
++            u_boot_utils.run_and_log(cons, f'sudo losetup -d {loop}')
  
- /* Check 'bootflow info' */
- static int bootflow_cmd_info(struct unit_test_state *uts)
- {
--	console_record_reset_enable();
- 	ut_assertok(run_command("bootdev select 1", 0));
- 	ut_assert_console_end();
- 	ut_assertok(run_command("bootflow scan", 0));
-@@ -248,12 +247,12 @@ static int bootflow_cmd_info(struct unit_test_state *uts)
+     if not complete:
+         copy_prepared_image(cons, mmc_dev, fname)
+@@ -254,32 +254,32 @@ label Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
+         ext = os.path.join(mnt, 'extlinux')
+         mkdir_cond(ext)
  
- 	return 0;
- }
--BOOTSTD_TEST(bootflow_cmd_info, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
-+BOOTSTD_TEST(bootflow_cmd_info, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
-+	     UT_TESTF_CONSOLE_REC);
+-        with open(os.path.join(ext, 'extlinux.conf'), 'w') as fd:
++        conf = os.path.join(ext, 'extlinux.conf')
++        with open(conf, 'w', encoding='ascii') as fd:
+             print(script, file=fd)
  
- /* Check 'bootflow scan -b' to boot the first available bootdev */
- static int bootflow_scan_boot(struct unit_test_state *uts)
- {
--	console_record_reset_enable();
- 	ut_assertok(inject_response(uts));
- 	ut_assertok(run_command("bootflow scan -b", 0));
- 	ut_assert_nextline(
-@@ -270,7 +269,8 @@ static int bootflow_scan_boot(struct unit_test_state *uts)
+         inf = os.path.join(cons.config.persistent_data_dir, 'inf')
+         with open(inf, 'wb') as fd:
+             fd.write(gzip.compress(b'vmlinux'))
+-        u_boot_utils.run_and_log(cons, 'mkimage -f auto -d %s %s' %
+-                                 (inf, os.path.join(mnt, vmlinux)))
++        u_boot_utils.run_and_log(
++            cons, f'mkimage -f auto -d {inf} {os.path.join(mnt, vmlinux)}')
  
- 	return 0;
- }
--BOOTSTD_TEST(bootflow_scan_boot, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
-+BOOTSTD_TEST(bootflow_scan_boot, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
-+	     UT_TESTF_CONSOLE_REC);
+-        with open(os.path.join(mnt, initrd), 'w') as fd:
++        with open(os.path.join(mnt, initrd), 'w', encoding='ascii') as fd:
+             print('initrd', file=fd)
  
- /* Check iterating through available bootflows */
- static int bootflow_iter(struct unit_test_state *uts)
-@@ -368,7 +368,8 @@ static int bootflow_iter(struct unit_test_state *uts)
+         mkdir_cond(os.path.join(mnt, dtbdir))
  
- 	return 0;
- }
--BOOTSTD_TEST(bootflow_iter, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
-+BOOTSTD_TEST(bootflow_iter, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
-+	     UT_TESTF_CONSOLE_REC);
+-        dtb_file = os.path.join(mnt, '%s/sandbox.dtb' % dtbdir)
++        dtb_file = os.path.join(mnt, f'{dtbdir}/sandbox.dtb')
+         u_boot_utils.run_and_log(
+-            cons, 'dtc -o %s' % dtb_file, stdin=b'/dts-v1/; / {};')
++            cons, f'dtc -o {dtb_file}', stdin=b'/dts-v1/; / {};')
+         complete = True
+     except ValueError as exc:
+-        print('Falled to create image, failing back to prepared copy: %s',
+-              str(exc))
++        print(f'Falled to create image, failing back to prepared copy: {exc}')
+     finally:
+         if mounted:
+-            u_boot_utils.run_and_log(cons, 'sudo umount --lazy %s' % mnt)
++            u_boot_utils.run_and_log(cons, f'sudo umount --lazy {mnt}')
+         if loop:
+-            u_boot_utils.run_and_log(cons, 'sudo losetup -d %s' % loop)
++            u_boot_utils.run_and_log(cons, f'sudo losetup -d {loop}')
  
- #if defined(CONFIG_SANDBOX) && defined(CONFIG_BOOTMETH_GLOBAL)
- /* Check using the system bootdev */
-@@ -386,7 +387,6 @@ static int bootflow_system(struct unit_test_state *uts)
+     if not complete:
+         copy_prepared_image(cons, mmc_dev, fname)
+@@ -303,7 +303,8 @@ def setup_cros_image(cons):
+         Return:
+             bytes: Packed-kernel data
+         """
+-        kern_part = os.path.join(cons.config.result_dir, 'kern-part-{arch}.bin')
++        kern_part = os.path.join(cons.config.result_dir,
++                                 f'kern-part-{arch}.bin')
+         u_boot_utils.run_and_log(
+             cons,
+             f'futility vbutil_kernel --pack {kern_part} '
+@@ -332,7 +333,7 @@ def setup_cros_image(cons):
  
- 	/* We should get a single 'bootmgr' method right at the end */
- 	bootstd_clear_glob();
--	console_record_reset_enable();
- 	ut_assertok(run_command("bootflow scan -lH", 0));
- 	ut_assert_skip_to_line(
- 		"  0  efi_mgr      ready   (none)       0  <NULL>                    ");
-@@ -397,7 +397,7 @@ static int bootflow_system(struct unit_test_state *uts)
- 	return 0;
- }
- BOOTSTD_TEST(bootflow_system, UT_TESTF_DM | UT_TESTF_SCAN_PDATA |
--	     UT_TESTF_SCAN_FDT);
-+	     UT_TESTF_SCAN_FDT | UT_TESTF_CONSOLE_REC);
- #endif
+     mmc_dev = 5
+     fname = os.path.join(cons.config.source_dir, f'mmc{mmc_dev}.img')
+-    u_boot_utils.run_and_log(cons, 'qemu-img create %s 20M' % fname)
++    u_boot_utils.run_and_log(cons, f'qemu-img create {fname} 20M')
+     #mnt = os.path.join(cons.config.persistent_data_dir, 'mnt')
+     #mkdir_cond(mnt)
+     u_boot_utils.run_and_log(cons, f'cgpt create {fname}')
+@@ -381,20 +382,20 @@ def setup_cros_image(cons):
  
- /* Check disabling a bootmethod if it requests it */
-@@ -438,7 +438,9 @@ static int bootflow_iter_disable(struct unit_test_state *uts)
+     u_boot_utils.run_and_log(cons, f'cgpt boot -p {fname}')
+     out = u_boot_utils.run_and_log(cons, f'cgpt show -q {fname}')
+-    '''We expect something like this:
+-        8239        2048       1  Basic data
+-          45        2048       2  ChromeOS kernel
+-        8238           1       3  ChromeOS rootfs
+-        2093        2048       4  ChromeOS kernel
+-        8237           1       5  ChromeOS rootfs
+-          41           1       6  ChromeOS kernel
+-          42           1       7  ChromeOS rootfs
+-        4141        2048       8  Basic data
+-          43           1       9  ChromeOS reserved
+-          44           1      10  ChromeOS reserved
+-          40           1      11  ChromeOS firmware
+-        6189        2048      12  EFI System Partition
+-    '''
++
++    # We expect something like this:
++    #   8239        2048       1  Basic data
++    #     45        2048       2  ChromeOS kernel
++    #   8238           1       3  ChromeOS rootfs
++    #   2093        2048       4  ChromeOS kernel
++    #   8237           1       5  ChromeOS rootfs
++    #     41           1       6  ChromeOS kernel
++    #     42           1       7  ChromeOS rootfs
++    #   4141        2048       8  Basic data
++    #     43           1       9  ChromeOS reserved
++    #     44           1      10  ChromeOS reserved
++    #     40           1      11  ChromeOS firmware
++    #   6189        2048      12  EFI System Partition
  
- 	return 0;
- }
--BOOTSTD_TEST(bootflow_iter_disable, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
-+BOOTSTD_TEST(bootflow_iter_disable, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
-+	     UT_TESTF_CONSOLE_REC
-+);
+     # Create a dict (indexed by partition number) containing the above info
+     for line in out.splitlines():
+@@ -446,7 +447,7 @@ def setup_android_image(cons):
  
- /* Check 'bootflow scan' with a bootmeth ordering including a global bootmeth */
- static int bootflow_scan_glob_bootmeth(struct unit_test_state *uts)
-@@ -452,7 +454,6 @@ static int bootflow_scan_glob_bootmeth(struct unit_test_state *uts)
- 	 * Make sure that the -G flag makes the scan fail, since this is not
- 	 * supported when an ordering is provided
- 	 */
--	console_record_reset_enable();
- 	ut_assertok(bootmeth_set_order("efi firmware0"));
- 	ut_assertok(run_command("bootflow scan -lGH", 0));
- 	ut_assert_nextline("Scanning for bootflows in all bootdevs");
-@@ -479,12 +480,13 @@ static int bootflow_scan_glob_bootmeth(struct unit_test_state *uts)
+     mmc_dev = 7
+     fname = os.path.join(cons.config.source_dir, f'mmc{mmc_dev}.img')
+-    u_boot_utils.run_and_log(cons, 'qemu-img create %s 20M' % fname)
++    u_boot_utils.run_and_log(cons, f'qemu-img create {fname} 20M')
+     u_boot_utils.run_and_log(cons, f'cgpt create {fname}')
  
- 	return 0;
- }
--BOOTSTD_TEST(bootflow_scan_glob_bootmeth, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
-+BOOTSTD_TEST(bootflow_scan_glob_bootmeth, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
-+	     UT_TESTF_CONSOLE_REC
-+);
+     ptr = 40
+@@ -498,11 +499,12 @@ def setup_android_image(cons):
+     with open(fname, 'wb') as outf:
+         outf.write(disk_data)
  
- /* Check 'bootflow boot' to boot a selected bootflow */
- static int bootflow_cmd_boot(struct unit_test_state *uts)
- {
--	console_record_reset_enable();
- 	ut_assertok(run_command("bootdev select 1", 0));
- 	ut_assert_console_end();
- 	ut_assertok(run_command("bootflow scan", 0));
-@@ -508,7 +510,8 @@ static int bootflow_cmd_boot(struct unit_test_state *uts)
+-    print('wrote to {}'.format(fname))
++    print(f'wrote to {fname}')
  
- 	return 0;
- }
--BOOTSTD_TEST(bootflow_cmd_boot, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
-+BOOTSTD_TEST(bootflow_cmd_boot, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
-+	     UT_TESTF_CONSOLE_REC);
+     return fname
  
- /**
-  * prep_mmc_bootdev() - Set up an mmc bootdev so we can access other distros
-@@ -675,7 +678,8 @@ static int bootflow_cmd_menu(struct unit_test_state *uts)
- 
- 	return 0;
- }
--BOOTSTD_TEST(bootflow_cmd_menu, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
-+BOOTSTD_TEST(bootflow_cmd_menu, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
-+	     UT_TESTF_CONSOLE_REC);
- 
- /* Check 'bootflow scan -m' to select a bootflow using a menu */
- static int bootflow_scan_menu(struct unit_test_state *uts)
-@@ -783,7 +787,6 @@ static int bootflow_cmd_hunt_single(struct unit_test_state *uts)
- 
- 	ut_assertok(bootstd_test_drop_bootdev_order(uts));
- 
--	console_record_reset_enable();
- 	ut_assertok(run_command("bootflow scan -l mmc1", 0));
- 	ut_assert_nextline("Scanning for bootflows with label 'mmc1'");
- 	ut_assert_skip_to_line("(1 bootflow, 1 valid)");
-@@ -794,7 +797,8 @@ static int bootflow_cmd_hunt_single(struct unit_test_state *uts)
- 
- 	return 0;
- }
--BOOTSTD_TEST(bootflow_cmd_hunt_single, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
-+BOOTSTD_TEST(bootflow_cmd_hunt_single, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
-+	     UT_TESTF_CONSOLE_REC);
- 
- /* Check searching for a uclass label using the hunters */
- static int bootflow_cmd_hunt_label(struct unit_test_state *uts)
-@@ -808,7 +812,6 @@ static int bootflow_cmd_hunt_label(struct unit_test_state *uts)
- 	test_set_eth_enable(false);
- 	ut_assertok(bootstd_test_drop_bootdev_order(uts));
- 
--	console_record_reset_enable();
- 	ut_assertok(run_command("bootflow scan -l mmc", 0));
- 
- 	/* check that the hunter was used */
-@@ -831,7 +834,8 @@ static int bootflow_cmd_hunt_label(struct unit_test_state *uts)
- 
- 	return 0;
- }
--BOOTSTD_TEST(bootflow_cmd_hunt_label, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
-+BOOTSTD_TEST(bootflow_cmd_hunt_label, UT_TESTF_DM | UT_TESTF_SCAN_FDT |
-+	     UT_TESTF_CONSOLE_REC);
- 
- /**
-  * check_font() - Check that the font size for an item matches expectations
-@@ -1127,7 +1131,6 @@ static int bootflow_cmdline(struct unit_test_state *uts)
- {
- 	ut_assertok(run_command("bootflow scan mmc", 0));
- 	ut_assertok(run_command("bootflow sel 0", 0));
--	console_record_reset_enable();
- 
- 	ut_asserteq(1, run_command("bootflow cmdline get fred", 0));
- 	ut_assert_nextline("Argument not found");
-@@ -1157,7 +1160,7 @@ static int bootflow_cmdline(struct unit_test_state *uts)
- 
- 	return 0;
- }
--BOOTSTD_TEST(bootflow_cmdline, 0);
-+BOOTSTD_TEST(bootflow_cmdline, UT_TESTF_CONSOLE_REC);
- 
- /* test a few special changes to a long command line */
- static int bootflow_cmdline_special(struct unit_test_state *uts)
-@@ -1198,7 +1201,7 @@ static int bootflow_cros(struct unit_test_state *uts)
- 
- 	return 0;
- }
--BOOTSTD_TEST(bootflow_cros, 0);
-+BOOTSTD_TEST(bootflow_cros, UT_TESTF_CONSOLE_REC);
- 
- /* Test Android bootmeth  */
- static int bootflow_android(struct unit_test_state *uts)
-@@ -1221,4 +1224,4 @@ static int bootflow_android(struct unit_test_state *uts)
- 
- 	return 0;
- }
--BOOTSTD_TEST(bootflow_android, 0);
-+BOOTSTD_TEST(bootflow_android, UT_TESTF_CONSOLE_REC);
+ def setup_cedit_file(cons):
++    """Set up a .dtb file for use with testing expo and configuration editor"""
+     infname = os.path.join(cons.config.source_dir,
+                            'test/boot/files/expo_layout.dts')
+     inhname = os.path.join(cons.config.source_dir,
+@@ -584,7 +586,7 @@ def test_ut(u_boot_console, ut_subtest):
+         # ut hush hush_test_simple_dollar prints "Unknown command" on purpose.
+         with u_boot_console.disable_check('unknown_command'):
+             output = u_boot_console.run_command('ut ' + ut_subtest)
+-        assert('Unknown command \'quux\' - try \'help\'' in output)
++        assert 'Unknown command \'quux\' - try \'help\'' in output
+     else:
+         output = u_boot_console.run_command('ut ' + ut_subtest)
+     assert output.endswith('Failures: 0')
 -- 
 2.34.1
 
