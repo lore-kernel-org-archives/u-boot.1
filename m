@@ -4,78 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E28C7C3DA7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 19:58:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 315F1C3DA7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:14:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BA7F88AA8;
-	Thu, 15 Aug 2024 21:58:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 8112788A76;
+	Thu, 15 Aug 2024 22:14:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Nqs3uy/J";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D04EF88AA7; Thu, 15 Aug 2024 21:58:08 +0200 (CEST)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1723752863;
+	bh=4ZW0BDMg9SG4RlkDbWa3/MvV6f6G0DpOlwFlk16HyC8=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=IrHoOx+fjT2eJIOnFfiJkKtSnWktZCdc954BBADTq8+3umQ/EtFqvN4WDmXJQlROr
+	 1KKDtazBXUa6ohFichRUbHBjqY21itgizgD/pyKejI59CZHqDotnjbqY+2xH2me19l
+	 IZb8M5Kre+n8jXvrActPjr+mdP2HshsWHXokdchIfV209v5BirsHVTPBT4vpAt+6zo
+	 uLfXQBtmitgdEfcHhaE8KQWZr3XcTJLHCwMWbTD8erHpa/Wbb2XbVTx2LXjheD/Pj2
+	 OSDOXA55ZLG4l/kvt0ckPN59bjM25EvevX/u4MBELbpdUmzDdxtE3RtaMFqZQKzGoU
+	 AyK6zOBY0llXA==
+Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E249788A77
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 21:58:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-81f86fd93acso47892539f.1
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 12:58:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723751880; x=1724356680; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BkzvDGwp2fzpvMg69UjmqsH1jrXRU6w3gE/niNUEpJk=;
- b=Nqs3uy/JMfRMD9Y2EZMUwQg5A/XyhZv7U9C9hVlkdacZy23M8rF31cJe3NjL190wkt
- Prqgn8eTZbh6QhNKoTFHbwelW+z7GCNbO+pnrtzlyNFNcDnjkPr7LpMQpMRtQzrZcOfc
- v7ie6TMJ0quRoe/o/svCl+cGWR/b66rmoFnxo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723751880; x=1724356680;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=BkzvDGwp2fzpvMg69UjmqsH1jrXRU6w3gE/niNUEpJk=;
- b=H+0KEi+qfXuq/Z+Suvohp3HYstMVKdZbw5MGw49w+h1E29b6F1AabJgp7iL6A6NBDM
- kEQQKfCs7IsEjBEDxPKDdTBSE/e0y1almf7DVBmBFlPvSP6Wkws0AL6l7KoDv1VyquWs
- OwAwSuaAZilmmkk68UJryuNs6kVO6n+7QFbruWdTiAn1x4obFNCke0AES+uB7CROegVr
- 1FNsqPD5RtYIAT3tffFj526aq0QonIGg2jS8WVvSI4Djj9CbAt7c9SIulRxs0WGW/wuG
- O/HWeTGWZnIncZcC/ChZFEr1vfeNzmT/zCk2PMOZxnKWdjZDiiL9db+YEQyTbKvTZ2Lq
- xunQ==
-X-Gm-Message-State: AOJu0Yz9g7djT2PXQTCCDeGZV/sDZcWdcUzoAW2QLdM306Nrpkb6T5xK
- BRjW5eKSLVlo85AQKs+zPCxeBZBaYb2U7CWE4LdeSmiT/rKMh2hS6wIgP7dmnpdnZH6j2Y7Wk95
- 4pw==
-X-Google-Smtp-Source: AGHT+IG7MKv9JLlg/mT5MhpQzKVWypn/Hz1P8dUX6dhzzHWyyTmMpqodWlkhyAkAa1ZFuXnpVmhV/A==
-X-Received: by 2002:a05:6602:6513:b0:7fb:c0c8:2fc7 with SMTP id
- ca18e2360f4ac-824e78544b6mr380172539f.3.1723751880473; 
- Thu, 15 Aug 2024 12:58:00 -0700 (PDT)
-Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
- [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ccd6f3e3f2sm697372173.100.2024.08.15.12.57.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Aug 2024 12:58:00 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH v3 3/3] RFC: CI: Skip building dtc for world builds
-Date: Thu, 15 Aug 2024 13:57:46 -0600
-Message-Id: <20240815195746.749042-4-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240815195746.749042-1-sjg@chromium.org>
-References: <20240815195746.749042-1-sjg@chromium.org>
+ (Authenticated sender: lukma@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 55E3D8863B;
+ Thu, 15 Aug 2024 22:14:22 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1723752862;
+ bh=4ZW0BDMg9SG4RlkDbWa3/MvV6f6G0DpOlwFlk16HyC8=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=cC6Q9nYzQhKgpY9PxvdlZqgeTwZK6vz/KuIJF0W8nNJi5NlTag+UN2iFPmyFwHtqI
+ osvK6mevCVIY3QJ5Q0iizPEQw3aICmW4dY0ae1oHYtrWoWMsxpzYSq5VpC9+pXrJZI
+ qlQUA7dEibYc6UBaOImcPFx588JvwbbDN7Djcrta1hLxQxf2aS+i91WcXFTMaLY3BJ
+ HN/RhGDo71Rfl8jQbFpbRgsOnbEy01Pz1s0UrCyiD3kGnkMyKz2CCGM/1lOpweQtlf
+ 9w90LhAYjtTai0a36jYZhnuZu/g45GWvMklLzFGTaaiI67cAttcXWxX7tPUNwrdpXF
+ 4h8+MVgqdGRbg==
+Date: Thu, 15 Aug 2024 22:14:21 +0200
+From: Lukasz Majewski <lukma@denx.de>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, Marek Vasut
+ <marex@denx.de>
+Subject: Re: [Binman] Question regarding SPL symbol offsets generation
+Message-ID: <20240815221421.61f64a17@wsk>
+In-Reply-To: <CAOMZO5A74MigLO0qkeXi04=7M70jaiEgk9zdFBjUV74vuZDP0g@mail.gmail.com>
+References: <20240808110654.4215b129@wsk>
+ <CAOMZO5A74MigLO0qkeXi04=7M70jaiEgk9zdFBjUV74vuZDP0g@mail.gmail.com>
+Organization: denx.de
+X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; boundary="Sig_/txxZ.9CNeEwj.X+m_r6IuTP";
+ protocol="application/pgp-signature"; micalg=pgp-sha512
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,76 +70,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is quite a significant waste of time in the world builds as dtc is
-built separately for each board. Skip this to speed up the builds.
+--Sig_/txxZ.9CNeEwj.X+m_r6IuTP
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Unfortunately the newer dtc produces a lot of warnings, which causes CI
-to fail. I am not sure what we can do about this.
+Hi Fabio,
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+> Hi Lukasz,
+>=20
+> On Thu, Aug 8, 2024 at 6:07=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wr=
+ote:
+> >
+> > Dear Community
+> >
+> > I'd like to ask about one issue with generation of symbol offsets in
+> > binman [1].
+> >
+> > In my case the CONFIG_FSPI_CONF_HEADER is defined.
+> >
+> > Problem is with generated symbols [2] to point into
+> > ddr-1d-imem-fw/ddr-1d-dmem-fw/ddr-2d-imem-fw/ddr-2d-dmem-fw.
+> >
+> > It looks like only symbols have extra offset of 0x1000 (the same as
+> > the first section introduces) - binaries for training memory are
+> > placed without this extra offset.
+> >
+> > On the other hand - before this change:
+> > SHA1: 37e50627efacd8dae18b564e9d8886a033e181bc
+> >
+> > The u-boot-spl-ddr.bin was a separate binman "entry" (i.e. not
+> > section)
+> > - so e.g. ddr-1d-dmem-fw {} had proper offsets (as this binary was
+> > also mangled into spl.bin with mkimage invocation).
+> >
+> >
+> > Now the question - how to properly fix this issue? =20
+>=20
+> I assume you fixed the problem with this change:
+> https://patchwork.ozlabs.org/project/uboot/patch/20240815080948.457524-1-=
+lukma@denx.de/
 
-Changes in v3:
-- Drop patches previously applied
-- Add dtc patches
+Unfortunately not - this change is only for properly setting start
+address of the u-boot.
 
- .azure-pipelines.yml | 2 +-
- .gitlab-ci.yml       | 8 ++++----
- 2 files changed, 5 insertions(+), 5 deletions(-)
+The _real_ problem here is the symbol placement generated by binman
+when we try to define the image as a single one.
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index e1b2f87b974..4bdf1daa59c 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -561,7 +561,7 @@ stages:
-           cat << "EOF" >> build.sh
-           if [[ "${BUILDMAN}" != "" ]]; then
-               ret=0;
--              tools/buildman/buildman -o /tmp -PEWM ${BUILDMAN} ${OVERRIDE} || ret=$?;
-+              tools/buildman/buildman -o /tmp -PEWM --dtc-skip ${BUILDMAN} ${OVERRIDE} || ret=$?;
-               if [[ $ret -ne 0 ]]; then
-                   tools/buildman/buildman -o /tmp -seP ${BUILDMAN};
-                   exit $ret;
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 0a15b7352cd..b231b6cd5a4 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -104,7 +104,7 @@ build all 32bit ARM platforms:
-     - ret=0;
-       git config --global --add safe.directory "${CI_PROJECT_DIR}";
-       pip install -r tools/buildman/requirements.txt;
--      ./tools/buildman/buildman -o /tmp -PEWM arm -x aarch64 || ret=$?;
-+      ./tools/buildman/buildman -o /tmp -PEWM --dtc-skip arm -x aarch64 || ret=$?;
-       if [[ $ret -ne 0 ]]; then
-         ./tools/buildman/buildman -o /tmp -seP;
-         exit $ret;
-@@ -118,7 +118,7 @@ build all 64bit ARM platforms:
-     - ret=0;
-       git config --global --add safe.directory "${CI_PROJECT_DIR}";
-       pip install -r tools/buildman/requirements.txt;
--      ./tools/buildman/buildman -o /tmp -PEWM aarch64 || ret=$?;
-+      ./tools/buildman/buildman -o /tmp -PEWM --dtc-skip aarch64 || ret=$?;
-       if [[ $ret -ne 0 ]]; then
-         ./tools/buildman/buildman -o /tmp -seP;
-         exit $ret;
-@@ -129,7 +129,7 @@ build all PowerPC platforms:
-   script:
-     - ret=0;
-       git config --global --add safe.directory "${CI_PROJECT_DIR}";
--      ./tools/buildman/buildman -o /tmp -P -E -W powerpc || ret=$?;
-+      ./tools/buildman/buildman -o /tmp -PEW --dtc-skip powerpc || ret=$?;
-       if [[ $ret -ne 0 ]]; then
-         ./tools/buildman/buildman -o /tmp -seP;
-         exit $ret;
-@@ -140,7 +140,7 @@ build all other platforms:
-   script:
-     - ret=0;
-       git config --global --add safe.directory "${CI_PROJECT_DIR}";
--      ./tools/buildman/buildman -o /tmp -PEWM -x arm,powerpc || ret=$?;
-+      ./tools/buildman/buildman -o /tmp -PEWM --dtc-skip -x arm,powerpc || ret=$?;
-       if [[ $ret -ne 0 ]]; then
-         ./tools/buildman/buildman -o /tmp -seP;
-         exit $ret;
--- 
-2.34.1
+Moreover, this change follows other boards with imx8mm processor -
+./configs/imx8mm_beacon_fspi_defconfig to be specific.
 
+The "fix" (for which I'd been now probably opt) for this issue would be
+to generate two images with binman - one for u-boot-spl-ddr.bin and the
+final flash.bin with the former one included (as it was before SHA1:
+37e50627efacd8dae18b564e9d8886a033e181bc)
+
+
+Best regards,
+
+Lukasz Majewski
+
+--
+
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
+
+--Sig_/txxZ.9CNeEwj.X+m_r6IuTP
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAma+YZ0ACgkQAR8vZIA0
+zr00pQf+IrLJvcLW3E9NFWjGd4zR5DGe2P5ZAQTSXOSTammpJQZ7l1zps85WdGmk
+miS7bcXCnWAYwUku3sL0tnuwLcivT6zC4N1Cf2gd3oVcUWLdCEBCIkyEmjUtEYxA
+XERR0lUk8jHz40Kgoe7JNfypVUxl70DorwI0pVvvbuajBiY955YxdyxOKXq00c2B
+ep9m1xi2AdobHOU/jmh5pxvE63ZiZvF/jY5UBTvSJE6oo/BV0bpA1A/e0Qwqv73Q
+GXF2eV2pseAiJwHcf8h2flVCmobJBEMTNvqgJlh8CLBigA01cxUIYgQ4Q+RuJyjy
+BL7NvLB5tPE0ViJhWSXqLPIGOZvbIg==
+=UqCd
+-----END PGP SIGNATURE-----
+
+--Sig_/txxZ.9CNeEwj.X+m_r6IuTP--
