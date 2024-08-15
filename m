@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCA93C3DA7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:28:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EB7BC3DA7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:28:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79F4888B5D;
-	Thu, 15 Aug 2024 22:25:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E967888B59;
+	Thu, 15 Aug 2024 22:25:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lm4jkg4A";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DxhUrGJU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C960A88B4C; Thu, 15 Aug 2024 22:25:55 +0200 (CEST)
-Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
- [IPv6:2607:f8b0:4864:20::132])
+ id 4DD9E88B5D; Thu, 15 Aug 2024 22:25:57 +0200 (CEST)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C55B88B58
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:25:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 38C6388B5A
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:25:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x132.google.com with SMTP id
- e9e14a558f8ab-39d21fdc11bso3116495ab.2
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:25:53 -0700 (PDT)
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-39c2f653efcso4567695ab.2
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:25:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1723753548; x=1724358348; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PgWBVMsTfftLFlwvDhcOJuEK4hUTgo7V5EPEbl+KdgI=;
- b=lm4jkg4AOjY3ORa8saxBSq4KPURgYcU/QGkVfahHKnkP9yqfNYPXaeWVx9fhFPa8w7
- yRK5pbQmlaKLC71eSqiby/mF1Z7drjYnWgfz6VL4uCrkBOGyR+KUkoF+mQwAPtXiC5Hz
- TJQ+PKGYAywt8vBdfQ+JaUZyxdhBD1hkz8HyQ=
+ bh=VHucv9SvIxlH9ZUiFfnyDS+E5Bs/v1DYrZK8hA8K99E=;
+ b=DxhUrGJUbCpZdNxaqMGqm7B6I3uyeKn5GhkBIK5GHsMzGNKh8KI44YmvgN9DliU5RC
+ LlGMhXA0jfA0+kxtwR9Wo/0J9VuPxks68BXhoVqjrEjg7p3k08l2xhRrFUwqOQ0fPYv+
+ EDUmgtUep0MllGluxRpnY594FRiEqk10r70zA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1723753548; x=1724358348;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PgWBVMsTfftLFlwvDhcOJuEK4hUTgo7V5EPEbl+KdgI=;
- b=UMM9MAahugQWAYIpNG9omU0cQ1kJGsYvKp33noCngYTDSCSmgblAXi9U50msgiA94J
- xrxp8xYTwic5awUqo6Si4INwPI8gBoXOt04bExITmn/v619tgAVM8Yhl5wjIlbma3jez
- b+lD6DimT2AJetuerzTSmc65/eRWLiiD8hghoR1+EijQ+Bnkm9btQqooyFOmLeQ+52n1
- XV8uQe0pGRxbrrjjGPZGTQqrcPy7119n65jiIvGqFfh9L+ODAqDpojxAznvjBOiVMFGU
- tT1v/LOkEQG8joeaKmicZ6QhurBTP/qTTcVxq3rPJ+zXffUsXtuSASGMU8puhQaDIUDP
- U8nw==
-X-Gm-Message-State: AOJu0YzmJF1sAcw9e882XZaTZdYMrn0ixG5EXgxYZfEXw4VrYycnLIZv
- JKrIowBdQsN5z7+bCZVioXGryWCBOkqgMTYxlz0Hu8xA/grJSmOiU3mZh5wxGclyYQlb8xOMElg
- 3SQ==
-X-Google-Smtp-Source: AGHT+IHqXO/Ybk6QzGnIZY5pEoSrfCqz04kGkyQTXhcxJjsC65fyrkqjzucVO4Jfu+fG+ocepxWxkw==
-X-Received: by 2002:a05:6e02:1c04:b0:39b:2133:8ed4 with SMTP id
- e9e14a558f8ab-39d26d04977mr14531635ab.14.1723753547650; 
- Thu, 15 Aug 2024 13:25:47 -0700 (PDT)
+ bh=VHucv9SvIxlH9ZUiFfnyDS+E5Bs/v1DYrZK8hA8K99E=;
+ b=kLdX8kj3FmwrnWdslrPnZvVBQLJjFp6T9EfqiM28IAm7sqMBo+dbGmphmXTKvlwrxW
+ n2oFTxd4AubMEAhLGJQobwUz1aYxrdE7ZCgasNDz1ty6CyFuG+lXrKV/0SDhk5bB69Tg
+ 08OiO/8IyJOCcJX4rCtk+oRnu6oww9jS60zedJvJUkq3sgXARxiB7JvxaRjDbb9LkYuI
+ YOixkVCTGKZggVRU7RK/YkGK1rCG6C2qljrKKim1LdRc0bvacJfNhoXxgQz/rx46nu2M
+ xzcTGjLJ8/LM2OhIwEsPo64IKq5sKqhdljh8HdBfAwRSKeiASlyY2sH8+td3Y5+TbQWy
+ h+Ow==
+X-Gm-Message-State: AOJu0YyWCVPJEbxtY+fOVWn5gVBgUv8fkMR1vtx4sO2+Sabmu+30Wi1q
+ 5HQ7TgVn0WnEQqxN2jrtZj+pD3SpqMcs9m6c2l45OWzuDF/77Bad0DKvB92PULvZRpRI+swri9+
+ 6EA==
+X-Google-Smtp-Source: AGHT+IGy4SlnQTr3d85DC1pM5GYB0Mix7ho8ZQ1pGg371P5COlSDMQr/xI7jg6k7wmK+C6og/cbWtw==
+X-Received: by 2002:a05:6e02:16cf:b0:39a:eb26:45f8 with SMTP id
+ e9e14a558f8ab-39d26d5fbe5mr9357365ab.20.1723753548459; 
+ Thu, 15 Aug 2024 13:25:48 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39d1ed5db5bsm8014235ab.64.2024.08.15.13.25.47
+ e9e14a558f8ab-39d1ed5db5bsm8014235ab.64.2024.08.15.13.25.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Aug 2024 13:25:47 -0700 (PDT)
+ Thu, 15 Aug 2024 13:25:48 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marex@denx.de>
-Subject: [PATCH v3 07/24] usb: Drop old non-DM code
-Date: Thu, 15 Aug 2024 14:25:18 -0600
-Message-Id: <20240815202535.767869-8-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH v3 08/24] log: Add a new log category for the console
+Date: Thu, 15 Aug 2024 14:25:19 -0600
+Message-Id: <20240815202535.767869-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240815202535.767869-1-sjg@chromium.org>
 References: <20240815202535.767869-1-sjg@chromium.org>
@@ -89,196 +89,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The driver model deadline for USB was in 2019, so drop the old USB
-keyboard code, to avoid needing to deal with the extra code path.
-
-Drop the unnecessary #ifdef around USB_KBD_BOOT_REPORT_SIZE while we
-are here.
+Add a new category which covers the console, including the stdio
+drivers.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- cmd/usb.c           | 20 --------------
- common/usb_kbd.c    | 67 ---------------------------------------------
- drivers/usb/Kconfig |  3 +-
- include/usb.h       |  8 ------
- 4 files changed, 2 insertions(+), 96 deletions(-)
+ common/console.c | 2 ++
+ common/log.c     | 1 +
+ include/log.h    | 2 ++
+ 3 files changed, 5 insertions(+)
 
-diff --git a/cmd/usb.c b/cmd/usb.c
-index 16c081bf128..13a2996c1f0 100644
---- a/cmd/usb.c
-+++ b/cmd/usb.c
-@@ -560,17 +560,6 @@ static int do_usbboot(struct cmd_tbl *cmdtp, int flag, int argc,
- }
- #endif /* CONFIG_USB_STORAGE */
+diff --git a/common/console.c b/common/console.c
+index 63f78004fdb..034942ec4a9 100644
+--- a/common/console.c
++++ b/common/console.c
+@@ -4,6 +4,8 @@
+  * Paolo Scaffardi, AIRVENT SAM s.p.a - RIMINI(ITALY), arsenio@tin.it
+  */
  
--static int do_usb_stop_keyboard(int force)
--{
--#if !defined CONFIG_DM_USB && defined CONFIG_USB_KEYBOARD
--	if (usb_kbd_deregister(force) != 0) {
--		printf("USB not stopped: usbkbd still using USB\n");
--		return 1;
--	}
--#endif
--	return 0;
--}
--
- static void do_usb_start(void)
- {
- 	bootstage_mark_name(BOOTSTAGE_ID_USB_START, "usb_start");
-@@ -583,11 +572,6 @@ static void do_usb_start(void)
- 	/* try to recognize storage devices immediately */
- 	usb_stor_curr_dev = usb_stor_scan(1);
- # endif
--#ifndef CONFIG_DM_USB
--# ifdef CONFIG_USB_KEYBOARD
--	drv_usb_kbd_init();
--# endif
--#endif /* !CONFIG_DM_USB */
- }
- 
- #ifdef CONFIG_DM_USB
-@@ -633,8 +617,6 @@ static int do_usb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 
- 	if (strncmp(argv[1], "reset", 5) == 0) {
- 		printf("resetting USB...\n");
--		if (do_usb_stop_keyboard(1) != 0)
--			return 1;
- 		usb_stop();
- 		do_usb_start();
- 		return 0;
-@@ -642,8 +624,6 @@ static int do_usb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	if (strncmp(argv[1], "stop", 4) == 0) {
- 		if (argc != 2)
- 			console_assign(stdin, "serial");
--		if (do_usb_stop_keyboard(0) != 0)
--			return 1;
- 		printf("stopping USB..\n");
- 		usb_stop();
- 		return 0;
-diff --git a/common/usb_kbd.c b/common/usb_kbd.c
-index f3b4a3c94e6..b834b2f703d 100644
---- a/common/usb_kbd.c
-+++ b/common/usb_kbd.c
-@@ -643,71 +643,6 @@ static int probe_usb_keyboard(struct usb_device *dev)
- 	return 0;
- }
- 
--#if !CONFIG_IS_ENABLED(DM_USB)
--/* Search for keyboard and register it if found. */
--int drv_usb_kbd_init(void)
--{
--	int error, i;
--
--	debug("%s: Probing for keyboard\n", __func__);
--	/* Scan all USB Devices */
--	for (i = 0; i < USB_MAX_DEVICE; i++) {
--		struct usb_device *dev;
--
--		/* Get USB device. */
--		dev = usb_get_dev_index(i);
--		if (!dev)
--			break;
--
--		if (dev->devnum == -1)
--			continue;
--
--		error = probe_usb_keyboard(dev);
--		if (!error)
--			return 1;
--		if (error && error != -ENOENT)
--			return error;
--	}
--
--	/* No USB Keyboard found */
--	return -1;
--}
--
--/* Deregister the keyboard. */
--int usb_kbd_deregister(int force)
--{
--#if CONFIG_IS_ENABLED(SYS_STDIO_DEREGISTER)
--	struct stdio_dev *dev;
--	struct usb_device *usb_kbd_dev;
--	struct usb_kbd_pdata *data;
--
--	dev = stdio_get_by_name(DEVNAME);
--	if (dev) {
--		usb_kbd_dev = (struct usb_device *)dev->priv;
--		data = usb_kbd_dev->privptr;
--#if CONFIG_IS_ENABLED(CONSOLE_MUX)
--		if (iomux_replace_device(stdin, DEVNAME, force ? "nulldev" : ""))
--			return 1;
--#endif
--		if (stdio_deregister_dev(dev, force) != 0)
--			return 1;
--#ifdef CONFIG_SYS_USB_EVENT_POLL_VIA_INT_QUEUE
--		destroy_int_queue(usb_kbd_dev, data->intq);
--#endif
--		free(data->new);
--		free(data);
--	}
--
--	return 0;
--#else
--	return 1;
--#endif
--}
--
--#endif
--
--#if CONFIG_IS_ENABLED(DM_USB)
--
- static int usb_kbd_probe(struct udevice *dev)
- {
- 	struct usb_device *udev = dev_get_parent_priv(dev);
-@@ -788,5 +723,3 @@ static const struct usb_device_id kbd_id_table[] = {
++#define LOG_CATEGORY	LOGC_CONSOLE
++
+ #include <console.h>
+ #include <debug_uart.h>
+ #include <display_options.h>
+diff --git a/common/log.c b/common/log.c
+index dfee250b158..b83a6618900 100644
+--- a/common/log.c
++++ b/common/log.c
+@@ -31,6 +31,7 @@ static const char *const log_cat_name[] = {
+ 	"event",
+ 	"fs",
+ 	"expo",
++	"console",
  };
  
- U_BOOT_USB_DEVICE(usb_kbd, kbd_id_table);
--
--#endif
-diff --git a/drivers/usb/Kconfig b/drivers/usb/Kconfig
-index a972d87c7ad..311aaa7e67f 100644
---- a/drivers/usb/Kconfig
-+++ b/drivers/usb/Kconfig
-@@ -99,7 +99,8 @@ config USB_STORAGE
- 
- config USB_KEYBOARD
- 	bool "USB Keyboard support"
--	select DM_KEYBOARD if DM_USB
-+	depends on DM_USB
-+	select DM_KEYBOARD
- 	select SYS_STDIO_DEREGISTER
- 	---help---
- 	  Say Y here if you want to use a USB keyboard for U-Boot command line
-diff --git a/include/usb.h b/include/usb.h
-index fcbe2146f7d..e37f853482c 100644
---- a/include/usb.h
-+++ b/include/usb.h
-@@ -250,20 +250,12 @@ int usb_host_eth_scan(int mode);
- 
- #endif
- 
--#ifdef CONFIG_USB_KEYBOARD
--
- /*
-  * USB Keyboard reports are 8 bytes in boot protocol.
-  * Appendix B of HID Device Class Definition 1.11
-  */
- #define USB_KBD_BOOT_REPORT_SIZE 8
- 
--int drv_usb_kbd_init(void);
--int usb_kbd_deregister(int force);
--
--#endif
--/* routines */
--
- /*
-  * usb_init() - initialize the USB Controllers
-  *
+ _Static_assert(ARRAY_SIZE(log_cat_name) == LOGC_COUNT - LOGC_NONE,
+diff --git a/include/log.h b/include/log.h
+index fc0d5984472..2b86c7da3d4 100644
+--- a/include/log.h
++++ b/include/log.h
+@@ -104,6 +104,8 @@ enum log_category_t {
+ 	LOGC_FS,
+ 	/** @LOGC_EXPO: Related to expo handling */
+ 	LOGC_EXPO,
++	/** @LOGC_CONSOLE: Related to the console and stdio */
++	LOGC_CONSOLE,
+ 	/** @LOGC_COUNT: Number of log categories */
+ 	LOGC_COUNT,
+ 	/** @LOGC_END: Sentinel value for lists of log categories */
 -- 
 2.34.1
 
