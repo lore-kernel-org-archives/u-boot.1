@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0764AC3DA7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:33:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61BDCC3DA7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:33:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2111B88B23;
-	Thu, 15 Aug 2024 22:32:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8EA6888800;
+	Thu, 15 Aug 2024 22:32:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YV3m9Gna";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Xb55F0KR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5932788B9C; Thu, 15 Aug 2024 22:32:37 +0200 (CEST)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
+ id C126B88800; Thu, 15 Aug 2024 22:32:46 +0200 (CEST)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CD998657F
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:32:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 918E188BF3
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:32:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2d3e46ba5bcso110195a91.0
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:32:35 -0700 (PDT)
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-2d3d58d6e08so538987a91.3
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:32:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723753950; x=1724358750; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723753962; x=1724358762; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XAzoQ22z0WK+2fP3FQh52oJ2l1jj8cEMJNjPrl++1NM=;
- b=YV3m9GnacR172sqEfLNEcLWrsz+eYLzy6tYEhBPSnJKtn4adbiBN5F9va6IjOVRCL5
- 47NbPSP5HrR9WCxfcSvwe0kXMdlmTAaWvSH5cYQjzw5gFjYi24vPTntvY+CKRxQmvlM3
- BPTs6Jw+tywkyZC5cX2NBp+QKRlxzkPrxlC+4=
+ bh=NzEb4JuHB54gCXe3qk1AX+H2RkN6uIcpjRYo4WBbe0o=;
+ b=Xb55F0KRhpgxGkozFVr5dnJ4ZLM05cvuwUl8k8+hCZbhM7JutCOqcE2DsJSJINlK34
+ ESPcxakjnxLOr1gwaQeFk4XAnT7i0Rt1BnvTV+oScnQqaU4TZnqe40UXLaICB0X4W5J0
+ rvP6iB5wYMmbLeGyBhxVaywHuowuJ9CSVPHA4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723753950; x=1724358750;
+ d=1e100.net; s=20230601; t=1723753962; x=1724358762;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=XAzoQ22z0WK+2fP3FQh52oJ2l1jj8cEMJNjPrl++1NM=;
- b=avyRBC1WB75m/r3KMDGqCfZqsvqy6vuN6pdl1GWMOglTolL41Izj3vJD4TZuPV3MAF
- BK6NILctwe4WIrs10aMBq+ek3C2u2WXkQxxxQt5zccsTINs8dcWBH001goKjcDa/XbEz
- 1Lwc52Rb8vrsDRw2BLlXhj24L+WNvXR898+esQ5l8K8BPKGuMLE6d4TA2XlmWim4xxoj
- 1HPu6yf5+7eV78y4LASudAAkI5MaSlfxn0DUYe8NoFIj3M1mOryobiLWMWbAh46GGaz2
- L64qXKuz5O5lLVSuTGt8Nox64ykp1sEDgcuIusaTSlsWugsjjd5toe9Ea/4pqqQxyLZo
- 2A4Q==
-X-Gm-Message-State: AOJu0Ywrm4bCHHb8gxZDn73iUXx6PrzlSPHUYMMJ5HHYdwLrfBzL3OAX
- E1N5UKhhOHb70Q2ZkgDikReqL/WwaWHHwTa3ydbk3oNIosw5NqtIYduU/hbDE2/uI2GYaVZLbQT
- EoEgUqnw7o3yfgrD1M/vc41sBNPeygxzgAcMo
-X-Google-Smtp-Source: AGHT+IHI1qkr8YpyxruneZb9to64DgWAGmXRx3TakiyXiRS963mC20l90y+Xlh4bQeCXzMY7Rn8Nx4FRxA+I9+V+yiM=
-X-Received: by 2002:a17:90a:46ce:b0:2c9:5a85:f8dd with SMTP id
- 98e67ed59e1d1-2d3dfc66da0mr978230a91.18.1723753950077; Thu, 15 Aug 2024
- 13:32:30 -0700 (PDT)
+ bh=NzEb4JuHB54gCXe3qk1AX+H2RkN6uIcpjRYo4WBbe0o=;
+ b=BPRJW4ksym8tA5QxS3nK8Dm4ZzPuUCKSS3amQPvbEkcD/+YekyEWgukjUixiO2pYbI
+ Bmr9Gj9K1FxmLOi5EfIfEkxdfu5xMIKc988dC8/WAdlQbIG8M7jNtFt4om+Ux9usExLB
+ XoCkQFf3F6y36QubsdH4H8Is8nVYTYd4AzHtibacvactHu43MU7agF5yPok/pfW2xSEh
+ rZRHH9ToqCOxAJMT3hTOskC/ZlqS2qwo0Z9qDRtZxpp2HA+mTJBNDYezdQr30WaoRJnV
+ e9GzV02poKdi8AFNrG/8RxOz6Ty5gwcwYHNIl6uDruX3c9HxJFFszNuFYBlNVcY78/83
+ SO/A==
+X-Gm-Message-State: AOJu0Yx/Fj0djxBv4x/k8+CPpNrdpjYt6KNkZVmotJ+UXUnshsdRqNSH
+ wrmGS+J8ZGeSmNYy0bkx8gWi+fb8+6jGjKSKprO+PxEYioFi6Lvl+sOfRa3wl5nCoAVOX9vzxvb
+ o3UqO795z7kKs2VUdV+geWKfo0TytyoULl1T1WzD4eDqP3DAMGw==
+X-Google-Smtp-Source: AGHT+IHi/fMCY3/632XYVoTSXB49x3XTeW2eDltxhYOMXP369ITx8LkZB6YqfuAu9ClvxU3UvMYJcP595aMA1yqZLY0=
+X-Received: by 2002:a17:90a:f189:b0:2d3:b49f:ace3 with SMTP id
+ 98e67ed59e1d1-2d3e05628bfmr889835a91.28.1723753962069; Thu, 15 Aug 2024
+ 13:32:42 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
- <20240814110009.45310-24-sughosh.ganu@linaro.org>
-In-Reply-To: <20240814110009.45310-24-sughosh.ganu@linaro.org>
+ <20240814110009.45310-28-sughosh.ganu@linaro.org>
+In-Reply-To: <20240814110009.45310-28-sughosh.ganu@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 15 Aug 2024 21:32:19 +0100
-Message-ID: <CAFLszThQUM9N+r_vKHK5z0Au2WK+R=iX7txeAvtGbESSr6EZgA@mail.gmail.com>
-Subject: Re: [PATCH v2 23/32] sandbox: iommu: remove lmb allocation in the
- driver
+Date: Thu, 15 Aug 2024 21:32:29 +0100
+Message-ID: <CAFLszTh-5c4_OdZs8F_e=giR+ZFjNB1oX8L8cV8hXi9Je6e+5w@mail.gmail.com>
+Subject: Re: [PATCH v2 27/32] test: cedit: use allocated address for reading
+ file
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
@@ -92,26 +92,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Sughosh,
+
 On Wed, 14 Aug 2024 at 05:02, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> The sandbox iommu driver uses the LMB module to allocate a particular
-> range of memory for the device virtual address(DVA). This used to work
-> earlier since the LMB memory map was caller specific and not
-> global. But with the change to make the LMB allocations global and
-> persistent, adding this memory range has other side effects. On the
-> other hand, the sandbox iommu test expects to see this particular
-> value of the DVA. Use the DVA address directly, instead of mapping it
-> in the LMB memory map, and then have it allocated.
+> Instead of a randomly selected address, use an LMB allocated one for
+> reading the file into memory. With the LMB map now being persistent
+> and global, the address used for reading the file might be already
+> allocated as non-overwritable, resulting in a failure. Get a valid
+> address from LMB and then read the file to that address.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
 > Changes since V1:
-> * Move the DVA address and page size as macros to the test.h header
->   file.
+> * Don't use the API version with flags parameter.
 >
+>  test/boot/cedit.c | 6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
 >
->  arch/sandbox/include/asm/test.h |  4 ++++
->  drivers/iommu/sandbox_iommu.c   | 25 ++++++-------------------
->  2 files changed, 10 insertions(+), 19 deletions(-)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+No, this address needs to work fine without using lmb. Same with any
+other tests. Tests make use of the sandbox memory space memory
+addresses and it makes things easier to code and debug.
+
+Regards,
+SImon
