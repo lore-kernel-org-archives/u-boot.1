@@ -4,90 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCD0CC3DA7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:33:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 353F7C3DA7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:33:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2B3088C01;
-	Thu, 15 Aug 2024 22:33:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 3011C88C0B;
+	Thu, 15 Aug 2024 22:33:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lmE20a/6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tZoAgeWX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3338888B63; Thu, 15 Aug 2024 22:33:11 +0200 (CEST)
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
- [IPv6:2607:f8b0:4864:20::42a])
+ id 36A8D88BFD; Thu, 15 Aug 2024 22:33:15 +0200 (CEST)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E84888BF9
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:33:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C15BB88BFF
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:33:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-71275436546so1138123b3a.1
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:33:08 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-5d5ed6f51cfso898775eaf.0
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:33:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723753984; x=1724358784; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=O/ctHgR9omNfE3+5CBSNvjOODrD7zfYuJhz659bq+tk=;
- b=lmE20a/665+AEuAA4r/4Q54KbnxGv7Qyc+Grty6CMcsSucoSy8x4h6PLkVwMNnvBGL
- kZJrAU2OnX3aHdasnxMAp/QgpKbQjxoB+8i+zsFCeRdJUS/K/L//x2NSTkZ9Kc6e5aJ/
- GLZpOzNYlCtRr6OpCP3yFuRypsW0pGsmICmy0=
+ d=konsulko.com; s=google; t=1723753985; x=1724358785; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=JKAcNvvQnzEFd8UP0ICFYn19z44yG1HdbQ3saH4e2mw=;
+ b=tZoAgeWXyrez2OWLm3nwG6CszH5KGMzw2B+pvIVoA/GuNzyJcO+oTQMbEFWHHkNSmR
+ afjq4/o+nfJaErPd2aY8gP6j2KeqqeZ48traMtw1U+xm4HSojsf/6myJlt8lgRDeqG/S
+ cxJn94Gs+OytdLcA9n7gQKnPUik15446j51JE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723753984; x=1724358784;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=O/ctHgR9omNfE3+5CBSNvjOODrD7zfYuJhz659bq+tk=;
- b=uLmr+wJ4ERW6v536vJRX7TGudswfFUgjqNTi5RpHao+nJGwZfuu8Y4Ou1OnNbIylL7
- Vj8Q5RMjvunHX7Mkv6KIQP1IuzQckTQiMXrOn2yImICQO9l43XZbgj93GgKAhGRoBCWk
- qaK3p+kA+ak8hYoJFNCL5igOQTfg4oswYqZnNT9yVOjIBxa9cHCMNYyT51gxJfVrfhTF
- Zjamk90L6bVkH0xEestRPoc8pv0S0QHEc3ilQcFQVHIbFDSFff8bqCws+pWGOk8DW79m
- XZKH5HobOWR6Rukd7DrT5ggFImeiip4yOU36f2rUlprioJN7WPgCXzXkPoR0ScpHX53y
- TmRw==
+ d=1e100.net; s=20230601; t=1723753985; x=1724358785;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JKAcNvvQnzEFd8UP0ICFYn19z44yG1HdbQ3saH4e2mw=;
+ b=uf6LzDkXpI0kiw/Iobf7vfDeeNSHtGoK2VKWZIZoyiwQg61+g4AIz5TP857ClplnHi
+ ZweLEEL6ge96LXAQplreN3HeAZaw5MWgolC53PIFlgMkl28FwofU/8vyuC8W+ofzm1BC
+ LMQ6Bk6iC5Af+YtYDxB23RLXLo2n55YUcY+yr9CFEYaRKhphNbfdcqnqUzpbaFGE0fxo
+ Okr3MkTy9/XmDFHJfJX4Bfda36/tZsMBrc3CYm5bYOAvUg3OKlwQQ3ojhXCYI4Y8zYjh
+ afGpP3JeMpYSGjktN9gi69xKGGyjPhOjIBWb93YKgdbrK+FC1Gz4kGlPCUhaAXGr4uc4
+ pyaA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU96VSA5scxTro5PS4kFfobtqkJ2OxbAYBcP6oQUh0xBJnaCYl5+r3vlWnnf4r0r1XzXTGDyoBd8pdikz7kDxvXbhWjRg==
-X-Gm-Message-State: AOJu0YxgAWd/lGGid+hXvvWHVjkZowmj/S1nT/Z2mhjNl/qZtvaMzJDQ
- zKIMyy6casv587ySOf42e26YMtkuDLOMNJchnUwOCmdF8J2NpBWEY+6nm+J8E7iwnAZOVO/ji4W
- QOTm1djG15fcBvNaYVbpo3kYX/ffxBj7nnyxD
-X-Google-Smtp-Source: AGHT+IEYBQK3xsImYjcpRS3u0fiHYKCJHNf7WCYw6y3RZ7wLXJlzOGVMAILaNrIdA98SGsi/BfaoX34oNa1QtoxP00M=
-X-Received: by 2002:a05:6a21:78d:b0:1c4:9cec:ea0a with SMTP id
- adf61e73a8af0-1c905025efbmr1118672637.37.1723753984343; Thu, 15 Aug 2024
- 13:33:04 -0700 (PDT)
+ AJvYcCXOOGWLOmpLe88kNy2L6OLyX48yUDh8NgHv12he3dd/sjxcjS74KaO5xDRvG/zvqTqK/M1Vd2DykWBgoB/BbJCMXwbnvg==
+X-Gm-Message-State: AOJu0YyJtp/Zyk2ddNNBV4MzqC1N1uQr6iHrnQ8nmPxpVnvVB+K5OPmU
+ c1O9C4oAgJtmeVynvV4qqrJggYVdvaQW28sgdzOAqphXFJVAlLvyulvC4ZWFiUxvCjOBQ6BzrW2
+ D+ho=
+X-Google-Smtp-Source: AGHT+IHitOg+1nqcslzADtMv3lty30nhjJdya2+p6TmuvyyivQysGwqRtFq5V6dCbi4QElA7GVOqtQ==
+X-Received: by 2002:a05:6820:1ca7:b0:5c6:60d9:b0e1 with SMTP id
+ 006d021491bc7-5da97f32e1fmr1198226eaf.2.1723753985089; 
+ Thu, 15 Aug 2024 13:33:05 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-236.totalplay.net.
+ [189.203.97.236]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-5da8cdd9dedsm402006eaf.21.2024.08.15.13.33.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Aug 2024 13:33:04 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
+ William Zhang <william.zhang@broadcom.com>, u-boot@lists.denx.de, 
+ Fabio Estevam <festevam@gmail.com>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+In-Reply-To: <20240731041129.3839918-1-mikhail.kshevetskiy@iopsys.eu>
+References: <20240731041129.3839918-1-mikhail.kshevetskiy@iopsys.eu>
+Subject: Re: [PATCH v2 0/2] spi: dtb parsing fixes
+Message-Id: <172375398422.3490037.4263335235288301999.b4-ty@konsulko.com>
+Date: Thu, 15 Aug 2024 14:33:04 -0600
 MIME-Version: 1.0
-References: <20240521104834.11295-1-marex@denx.de>
- <CAOMZO5DsyuCu+fjpa8GjB6mbp9b5n=YOGxtjgMkdSstGFmEUuA@mail.gmail.com>
- <CAFLszTiwqcPe98gwbt1oVnWYJ0yFQ6rTpdcrB2kw=YRH-9=JJA@mail.gmail.com>
- <CAFLszTg8UHv7WbYKMii_8_6m3m3TR0BCAaEVNWnQJb2otQRScw@mail.gmail.com>
- <d46433c5-f4a6-418a-bc23-1ae5ce6ba63a@denx.de>
- <CAFLszTi9wozfMHVwM-tg5bJGSwSOpreR=D3jardm8z=N621bng@mail.gmail.com>
- <01cf8243-3476-41a8-9d56-bdd2817a4569@denx.de>
- <CAFLszTheX=pbcZZR6dnjgvpg_KzvPUKRk3nC8UeFc-868G9tUA@mail.gmail.com>
- <CAFLszTjyU4L+Lo4bUf3onKAn_G8aPbeknM9COnTG_Ff9xe9dvQ@mail.gmail.com>
-In-Reply-To: <CAFLszTjyU4L+Lo4bUf3onKAn_G8aPbeknM9COnTG_Ff9xe9dvQ@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 15 Aug 2024 21:32:53 +0100
-Message-ID: <CAFLszTjeSM2t6QGc5qLOZsuNnZCt2uPPunLYbb8YuRGARGBXQg@mail.gmail.com>
-Subject: Re: [PATCH v4 1/4] binman: Add nxp_imx8mcst etype for i.MX8M
- flash.bin signing
-To: Marek Vasut <marex@denx.de>
-Cc: Fabio Estevam <festevam@gmail.com>, u-boot@lists.denx.de,
- anton.gres@ifm.com, ch@denx.de, Tim Harvey <tharvey@gateworks.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Angus Ainslie <angus@akkea.ca>, 
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Stefan Eichenberger <stefan.eichenberger@toradex.com>,
- Stefano Babic <sbabic@denx.de>, 
- Tom Rini <trini@konsulko.com>, kernel@puri.sm, u-boot@dh-electronics.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,85 +93,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+On Wed, 31 Jul 2024 08:11:27 +0400, Mikhail Kshevetskiy wrote:
 
-On Fri, 26 Jul 2024 at 08:54, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Marek,
->
-> On Tue, 9 Jul 2024 at 03:24, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Marek,
-> >
-> > On Sun, 7 Jul 2024 at 01:55, Marek Vasut <marex@denx.de> wrote:
-> > >
-> > > On 6/27/24 10:19 AM, Simon Glass wrote:
-> > > > Hi Marek,
-> > >
-> > > Hi,
-> > >
-> > > >>>>>> Add new binman etype which allows signing both the SPL and fitImage sections
-> > > >>>>>> of i.MX8M flash.bin using CST. There are multiple DT properties which govern
-> > > >>>>>> the signing process, nxp,loader-address is the only mandatory one which sets
-> > > >>>>>> the SPL signature start address without the imx8mimage header, this should be
-> > > >>>>>> SPL text base. The key material can be configured using optional DT properties
-> > > >>>>>> nxp,srk-table, nxp,csf-crt, nxp,img-crt, all of which default the key material
-> > > >>>>>> names generated by CST tool scripts. The nxp,unlock property can be used to
-> > > >>>>>> unlock CAAM access in SPL section.
-> > > >>>>>>
-> > > >>>>>> Reviewed-by: Tim Harvey <tharvey@gateworks.com>
-> > > >>>>>> Signed-off-by: Marek Vasut <marex@denx.de>
-> > > >>>>>
-> > > >>>>> Applied the series, thanks.
-> > > >>>>
-> > > >>>> This lacks tests - can you please add sufficient tests in ftest.py to
-> > > >>>> get the cover coverage back to 100%? Please try 'binman test -T' to
-> > > >>>> see this.
-> > > >>>
-> > > >>> Any thoughts on this, please? At present -master is broken for one
-> > > >>> file and -next has three problems.
-> > > >>
-> > > >> It is in the pipeline.
-> > > >>
-> > > >> What exactly is the error you observe ?
-> > > >>
-> > > >> When I run binman test -T , I get a lot of output, but no error reports?
-> > > >
-> > > > Sorry I somehow missed this email.
-> > > >
-> > > > The tests are in ftest.py - there are lots of examples, e.g.
-> > > > testXilinxBootgenSigning() - commit d8a2d3b29
-> > >
-> > > This seems to be testing some out-of-tree tool , not binman ?
-> >
-> > It is testing the etype, which needs the tool to be present, yes, You
-> > can use 'binman tool -f' to fetch tools if you want to try that one.
->
-> We have gone past RC1, so I'm just checking how this is going?
+> Changes from v1:
+>  * patches description was updated
+> 
+> Michael Polyntsov (1):
+>   spi: soft_spi: Parse cs-gpios only if num-chipselects is not <0>
+> 
+> Mikhail Kshevetskiy (1):
+>   spi: soft_spi: fix miso gpio property name
+> 
+> [...]
 
-Are you going to be able to get this test in soon?
+Applied to u-boot/next, thanks!
+
+-- 
+Tom
 
 
->
->
-> >
-> > >
-> > > > Basically you need to create a test .dts file that uses your entry
-> > > > type, then use it in the test code. You can check error handling as
-> > > > well, e.g. by having an invalid dts too if needed.
-> > > >
-> > > > If you run 'binman test -T' you will see the code-coverage problem.
-> > > > You may need to fetch tools with 'binman tool -f missing' to get all
-> > > > the tools*:
-> > > >
-> > > > Coverage error: 96%, but should be 100%
-> > > > ValueError: Test coverage failure
-> > > >
-> > > > It is normally much easier to add an etype using a test than to test
-> > > > it by using it 'for real', since you don't need to worry about the
-> > > > U-Boot integration.
-> > >
-> > > Huh ...
-
-Regards,
-Simon
