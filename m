@@ -4,86 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A820C52D7C
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 12:37:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D68B5C52D7C
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 13:29:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87C2B88A4C;
-	Thu, 15 Aug 2024 14:37:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id D74D4887F5;
+	Thu, 15 Aug 2024 15:29:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=protonmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="soe2dlXC";
+	dkim=pass (2048-bit key; secure) header.d=protonmail.com header.i=@protonmail.com header.b="KnnuRnM1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 906F888A54; Thu, 15 Aug 2024 14:37:37 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 20F2D88A16; Thu, 15 Aug 2024 10:21:31 +0200 (CEST)
+Received: from mail-40131.protonmail.ch (mail-40131.protonmail.ch
+ [185.70.40.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E54388A4C
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 14:37:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 03DCB889C9
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 10:21:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=protonmail.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=T.Remmet@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1723725455; x=1726317455;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=f7+ptvY4lzgMErqp+7A7LkyQU7L59eWPOVU4JJhydPs=;
- b=soe2dlXC2IpFKzlI4Pe9fLlxQopnlPLtfps1+qNqEFuKG3aGGdiGYBS2V6nIW53t
- FJV/VWFl8ZkOSgC1n4XRZ/KQYeLp6pSEnigfaA5904nNEWWoJgXpZMxl6+QjjPZ4
- ybLWjdE8e9aBsCMoR/MZjkagY4/nUqJKBOL44/FiGp4=;
-X-AuditID: ac14000a-03251700000021bc-50-66bdf68edc9b
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id C3.7B.08636.E86FDB66;
- Thu, 15 Aug 2024 14:37:34 +0200 (CEST)
-Received: from Berlix.phytec.de (172.25.0.12) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Thu, 15 Aug
- 2024 14:37:34 +0200
-Received: from Berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4]) by
- berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4%4]) with mapi id 15.01.2507.006;
- Thu, 15 Aug 2024 14:37:34 +0200
-From: Teresa Remmet <T.Remmet@phytec.de>
-To: "festevam@gmail.com" <festevam@gmail.com>, "sbabic@denx.de"
- <sbabic@denx.de>, "lukma@denx.de" <lukma@denx.de>
-CC: "trini@konsulko.com" <trini@konsulko.com>, "uboot-imx@nxp.com"
- <uboot-imx@nxp.com>, "marcel.ziswiler@toradex.com"
- <marcel.ziswiler@toradex.com>, Cem Tenruh <C.Tenruh@phytec.de>, Yannic Moog
- <Y.Moog@phytec.de>, Benjamin Hahn <B.Hahn@phytec.de>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH] config: imx: Add PHYTEC's phycore-imx8mm-fspi_defconfig
-Thread-Topic: [PATCH] config: imx: Add PHYTEC's phycore-imx8mm-fspi_defconfig
-Thread-Index: AQHa7u7JxBcUnACeC0WPj2hFdojJGrIoIGkA
-Date: Thu, 15 Aug 2024 12:37:34 +0000
-Message-ID: <951f63db0af4f3a8072e49009cd7a3336d90736c.camel@phytec.de>
-References: <20240815084012.477436-1-lukma@denx.de>
-In-Reply-To: <20240815084012.477436-1-lukma@denx.de>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.25.0.11]
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <B47E6C107B766F44B56D0A3DBE0E1B14@phytec.de>
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=emil.kronborg@protonmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
+ s=protonmail3; t=1723710088; x=1723969288;
+ bh=fnQI5/5muuCcB11L+xlTbx2XW94Vvbah2UibiVPqsK8=;
+ h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+ Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+ b=KnnuRnM1MjVEHLz3M2xGdBN/ZYZRuYl8gMFqOEnf7pGEklz8eYBQv0dEJZ64fg+UN
+ 6m63EizCxhXTNj6HXnW+mm0f0tSCyw7dqHyedXfQaXsU8ze4RysH81P72IH/RMMGiS
+ eKsT1FNpmkwSWDz+ozjtIff1s1J9FzijE+CVeFKzxR5ZxlMXxnlTXEoJ753FxB9cJM
+ aIZktcXp9rBR9iXFWAd3STPW4pIyzeDGL1hmn9YALr5XTyFP/xND2XIAanC9pVtLcU
+ O9lYUqmlxpwd0g6JodPfLlpVt1M6v8X58UZHOVIugxTByEGtzwexn3/ZFohTgL7Nr3
+ VPl2ebFdY5Yrw==
+Date: Thu, 15 Aug 2024 08:21:22 +0000
+To: trini@konsulko.com
+From: Emil Kronborg <emil.kronborg@protonmail.com>
+Cc: heinrich.schuchardt@canonical.com, quentin.schulz@cherry.de,
+ u-boot@lists.denx.de
+Subject: [PATCH v4] doc: document the pwm command
+Message-ID: <20240815082101.15612-1-emil.kronborg@protonmail.com>
+Feedback-ID: 20949900:user:proton
+X-Pm-Message-ID: 1b36d28f3ab5a6c463c59e90fd83b06d1cb2f43f
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrBIsWRmVeSWpSXmKPExsWyRpKBR7fv2940gxffbSweXvW3eP7uMpNF
- 4+NVTBbtp3wspk7azG7xdm8nu8WUx+vZHdg95s06weKxc9Zddo9XB1axe5y9s4PRY+O7HUwe
- m155BLBFcdmkpOZklqUW6dslcGU83fqMpWCOW8XRJXdYGhi3uHQxcnJICJhIvG04xdrFyMUh
- JLCESWLy1j9sEM59Rokzb7uhnA2MEh9ez2ADaWET0JB4eaKbCcQWESiW2L5qP1gRs8BaJokv
- hz4xgySEBXwkzt3uZoUo8pXo2HqUBcI2kjjyYglYDYuAqkTvrM1gNbwCbhJnphwCs4UEjCV2
- bJoEVsMJdN+b/slgcUYBWYkNG86DxZkFxCU2PfvOCvGDgMSSPRBxCQFRiZeP/0HF5SVO3JoG
- dCgHUL2mxPpd+hCmhcT+AxEQUxQlpnQ/ZIe4QFDi5MwnLBMYxWchWTALoXkWQvMsJM2zkDQv
- YGRdxSiUm5mcnVqUma1XkFFZkpqsl5K6iREUuyIMXDsY++Z4HGJk4mA8xCjBwawkwvv0y940
- Id6UxMqq1KL8+KLSnNTiQ4zSHCxK4ryrO4JThQTSE0tSs1NTC1KLYLJMHJxSDYxeiy0ufArU
- st5vKr7UdEXV1fpoZh9Dm3VukhxVMxiubfWbfvXfp8lui55/2bmyTnmzh4/x70VLjhgsVuaT
- KMsrzPlcx7Gzz/rL6/KFcuX3BBQqY3aetLcoC7StFGgXdfKqmNUdN+NbSaciq7jkLGOTP+6c
- pRv6UmaFn0pnDH83o+Gb7RuuYiWW4oxEQy3mouJEAK1HtfvLAgAA
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Thu, 15 Aug 2024 15:29:55 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,119 +66,143 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGVsbG8gTHVrYXN6LA0KDQpBbSBEb25uZXJzdGFnLCBkZW0gMTUuMDguMjAyNCB1bSAxMDo0MCAr
-MDIwMCBzY2hyaWViIEx1a2FzeiBNYWpld3NraToNCj4gVGhpcyBjb25maWd1cmF0aW9uIGZpbGUg
-cHJvdmlkZXMgc3VwcG9ydCBmb3IgYm9vdGluZyBwaHljb3JlIG1vZHVsZQ0KPiAob24gZS5nLiBw
-b2xpcy1yZGsgYmFzZSBkZXZlbG9wbWVudCBib2FyZCkgZnJvbSBRU1BJIG1lbW9yeS4NCj4gDQo+
-IE1vcmVvdmVyLCB0aGUgU0RQIFNQTCBnYWRnZXQgaXMgc3VwcG9ydGVkLCBzbyBzaW5nbGUgZmxh
-c2guYmluDQo+IGJpbmFyeSBjYW4gYmUgdXNlZCB3aXRoIHV1dSAod2l0aCB1dXUgLXYgLWIgcXNw
-aSB+L3UtYm9vdC9mbGFzaC5iaW4pDQo+IHRvIGZsYXNoIFFTUEkgaW4gdGhlIGZhY3Rvcnkgb3Ig
-ZHVyaW5nIGRlYnJpY2tpbmcuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBMdWthc3ogTWFqZXdza2kg
-PGx1a21hQGRlbnguZGU+DQo+IC0tLQ0KPiDCoGNvbmZpZ3MvcGh5Y29yZS1pbXg4bW0tZnNwaV9k
-ZWZjb25maWcgfCAxNTgNCj4gKysrKysrKysrKysrKysrKysrKysrKysrKysNCj4gwqAxIGZpbGUg
-Y2hhbmdlZCwgMTU4IGluc2VydGlvbnMoKykNCj4gwqBjcmVhdGUgbW9kZSAxMDA2NDQgY29uZmln
-cy9waHljb3JlLWlteDhtbS1mc3BpX2RlZmNvbmZpZw0KPiANCj4gZGlmZiAtLWdpdCBhL2NvbmZp
-Z3MvcGh5Y29yZS1pbXg4bW0tZnNwaV9kZWZjb25maWcgYi9jb25maWdzL3BoeWNvcmUtDQo+IGlt
-eDhtbS1mc3BpX2RlZmNvbmZpZw0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAw
-MDAwMDAwLi43OWEyNjY4MjU0DQo+IC0tLSAvZGV2L251bGwNCj4gKysrIGIvY29uZmlncy9waHlj
-b3JlLWlteDhtbS1mc3BpX2RlZmNvbmZpZw0KPiBAQCAtMCwwICsxLDE1OCBAQA0KPiArQ09ORklH
-X0FSTT15DQo+ICtDT05GSUdfQVJDSF9JTVg4TT15DQo+ICtDT05GSUdfVEVYVF9CQVNFPTB4NDAy
-MDAwMDANCj4gK0NPTkZJR19TWVNfTUFMTE9DX0xFTj0weDIwMDAwMDANCj4gK0NPTkZJR19TUExf
-R1BJTz15DQo+ICtDT05GSUdfU1BMX0xJQkNPTU1PTl9TVVBQT1JUPXkNCj4gK0NPTkZJR19TUExf
-TElCR0VORVJJQ19TVVBQT1JUPXkNCj4gK0NPTkZJR19TRl9ERUZBVUxUX1NQRUVEPTgwMDAwMDAw
-DQo+ICtDT05GSUdfRU5WX1NJWkU9MHgxMDAwMA0KPiArQ09ORklHX0VOVl9PRkZTRVQ9MHgzQzAw
-MDANCj4gK0NPTkZJR19JTVhfQ09ORklHPSJib2FyZC9mcmVlc2NhbGUvaW14OG1tX2V2ay9pbXhp
-bWFnZS04bW0tbHBkZHI0LQ0KPiBmc3BpLmNmZyINCg0KY2FuIHlvdSBjcmVhdGUgYSBjZmcgaW4g
-dGhlIGJvYXJkIGZvbGRlciBhbmQgbm90IHVzZSB0aGUgb25lIGZyb20gdGhlDQpldms/DQoNCj4g
-K0NPTkZJR19ETV9HUElPPXkNCj4gK0NPTkZJR19ERUZBVUxUX0RFVklDRV9UUkVFPSJmcmVlc2Nh
-bGUvaW14OG1tLXBoeWJvYXJkLXBvbGlzLXJkayINCj4gK0NPTkZJR19TUExfVEVYVF9CQVNFPTB4
-N0UyMDAwDQo+ICtDT05GSUdfVEFSR0VUX1BIWUNPUkVfSU1YOE1NPXkNCj4gK0NPTkZJR19ETV9S
-RVNFVD15DQo+ICtDT05GSUdfU1lTX01PTklUT1JfTEVOPTUyNDI4OA0KPiArQ09ORklHX1NQTF9N
-TUM9eQ0KPiArQ09ORklHX1NQTF9TRVJJQUw9eQ0KPiArQ09ORklHX1NQTF9EUklWRVJTX01JU0M9
-eQ0KPiArQ09ORklHX1NQTF9TVEFDSz0weDkyMDAwMA0KPiArQ09ORklHX1NQTF9IQVNfQlNTX0xJ
-TktFUl9TRUNUSU9OPXkNCj4gK0NPTkZJR19TUExfQlNTX1NUQVJUX0FERFI9MHg5MTAwMDANCj4g
-K0NPTkZJR19TUExfQlNTX01BWF9TSVpFPTB4MjAwMA0KPiArQ09ORklHX1NQTD15DQo+ICtDT05G
-SUdfRU5WX09GRlNFVF9SRURVTkQ9MHgzRTAwMDANCj4gK0NPTkZJR19TWVNfTE9BRF9BRERSPTB4
-NDA0ODAwMDANCj4gK0NPTkZJR19QQ0k9eQ0KPiArIyBDT05GSUdfQU5EUk9JRF9CT09UX0lNQUdF
-IGlzIG5vdCBzZXQNCj4gK0NPTkZJR19GSVQ9eQ0KPiArQ09ORklHX0ZJVF9FWFRFUk5BTF9PRkZT
-RVQ9MHgzMDAwDQo+ICtDT05GSUdfU1BMX0xPQURfRklUPXkNCj4gK0NPTkZJR19PRl9TWVNURU1f
-U0VUVVA9eQ0KPiArQ09ORklHX1VTRV9CT09UQ09NTUFORD15DQo+ICtDT05GSUdfQk9PVENPTU1B
-TkQ9Im1tYyBkZXYgJHttbWNkZXZ9OyBpZiBtbWMgcmVzY2FuOyB0aGVuIGlmIHJ1bg0KPiBsb2Fk
-aW1hZ2U7IHRoZW4gcnVuIG1tY2Jvb3Q7IGVsc2UgcnVuIG5ldGJvb3Q7IGZpOyBmaTsiDQo+ICtD
-T05GSUdfREVGQVVMVF9GRFRfRklMRT0ib2Z0cmVlIg0KPiArQ09ORklHX1NZU19DQlNJWkU9MjA0
-OA0KPiArQ09ORklHX1NZU19QQlNJWkU9MjA3NA0KPiArQ09ORklHX0JPQVJEX0xBVEVfSU5JVD15
-DQo+ICtDT05GSUdfU1BMX01BWF9TSVpFPTB4MjUwMDANCg0KVGhpcyBsaW5lDQoNCj4gK0NPTkZJ
-R19TUExfUEFEX1RPPTB4MA0KDQphbmQgdGhpcyBvbmUgaXMgbm90IGF2YWlsYWJsZSBpbiBwaHlj
-b3JlLWlteDhtbV9kZWZjb25maWcuDQpXaHkgaGF2ZSB5b3UgYWRkZWQgdGhlbSBoZXJlPw0KDQo+
-ICsjIENPTkZJR19TUExfU0hBUkVTX0lOSVRfU1BfQUREUiBpcyBub3Qgc2V0DQo+ICtDT05GSUdf
-U1BMX1NZU19NQUxMT0M9eQ0KPiArQ09ORklHX1NQTF9IQVNfQ1VTVE9NX01BTExPQ19TVEFSVD15
-DQo+ICtDT05GSUdfU1BMX0NVU1RPTV9TWVNfTUFMTE9DX0FERFI9MHg0MjIwMDAwMA0KPiArQ09O
-RklHX1NQTF9TWVNfTUFMTE9DX1NJWkU9MHg4MDAwMA0KPiArQ09ORklHX1NZU19NTUNTRF9SQVdf
-TU9ERV9VX0JPT1RfVVNFX1NFQ1RPUj15DQo+ICtDT05GSUdfU1lTX01NQ1NEX1JBV19NT0RFX1Vf
-Qk9PVF9TRUNUT1I9MHgzMDANCj4gK0NPTkZJR19TUExfSTJDPXkNCj4gK0NPTkZJR19TUExfTk9S
-X1NVUFBPUlQ9eQ0KPiArQ09ORklHX1NQTF9QT1dFUj15DQo+ICtDT05GSUdfU1BMX1NQSV9GTEFT
-SF9NVEQ9eQ0KPiArQ09ORklHX1NQTF9XQVRDSERPRz15DQo+ICtDT05GSUdfSFVTSF9QQVJTRVI9
-eQ0KPiArQ09ORklHX1NZU19QUk9NUFQ9InUtYm9vdD0+ICINCj4gKyMgQ09ORklHX0NNRF9FWFBP
-UlRFTlYgaXMgbm90IHNldA0KPiArIyBDT05GSUdfQ01EX0lNUE9SVEVOViBpcyBub3Qgc2V0DQoN
-CkhlcmUgaXMNCg0KQ09ORklHX0NNRF9FUkFTRUVOVj15DQoNCm1pc3NpbmcuIFdoaWNoIHdhcyBh
-ZGRlZCB3aXRoIDYwZTAxYzZkOWY4OTJiZmEwODhhMDQ1M2NkMTlkNmE0MThiMDBhZGQNCmZvciBw
-aHljb3JlLWlteDhtbV9kZWZjb25maWcuIFdoeSBkaWQgeW91IG5vdCBhZGQgaXQ/DQoNCg0KPiAr
-IyBDT05GSUdfQ01EX0NSQzMyIGlzIG5vdCBzZXQNCj4gK0NPTkZJR19DTURfRUVQUk9NPXkNCj4g
-K0NPTkZJR19TWVNfSTJDX0VFUFJPTV9BRERSX0xFTj0yDQo+ICtDT05GSUdfU1lTX0VFUFJPTV9T
-SVpFPTQwOTYNCj4gK0NPTkZJR19TWVNfRUVQUk9NX1BBR0VfV1JJVEVfQklUUz01DQo+ICtDT05G
-SUdfU1lTX0VFUFJPTV9QQUdFX1dSSVRFX0RFTEFZX01TPTUNCg0KQW5kIEkgYWxzbyBtaXNzDQoN
-CiMgQ09ORklHX0NNRF9CSU5EIGlzIG5vdCBzZXQNCkNPTkZJR19GQVNUQk9PVF9CVUZfU0laRT0w
-eDIwMDAwMDAwDQoNCndoaWNoIHlvdSBkaWQgc2V0IGluIHlvdXIgDQoNCiJjb25maWc6IGlteDog
-QWRkIHN1cHBvcnQgZm9yIFBoeXRlYydzIHBoeWNvcmUgaW14OG1tIHJ1bm5pbmcgU0RQDQpnYWRn
-ZXQiDQoNCnBhdGNoIGZvciBwaHljb3JlLWlteDhtbV9kZWZjb25maWcuIEFyZSB0aGV5IG5vdCBy
-ZXF1aXJlZCBmb3IgZnNwaQ0KaW1hZ2U/DQoNClRlcmVzYQ0KDQo+ICtDT05GSUdfQ01EX0NMSz15
-DQo+ICtDT05GSUdfQ01EX0ZVU0U9eQ0KPiArQ09ORklHX0NNRF9HUElPPXkNCj4gK0NPTkZJR19D
-TURfSTJDPXkNCj4gK0NPTkZJR19DTURfTU1DPXkNCj4gK0NPTkZJR19DTURfUENJPXkNCj4gK0NP
-TkZJR19DTURfU0ZfVEVTVD15DQo+ICtDT05GSUdfQ01EX0RIQ1A9eQ0KPiArQ09ORklHX0NNRF9N
-SUk9eQ0KPiArQ09ORklHX0NNRF9QSU5HPXkNCj4gK0NPTkZJR19DTURfQ0FDSEU9eQ0KPiArQ09O
-RklHX0NNRF9SRUdVTEFUT1I9eQ0KPiArQ09ORklHX0NNRF9FWFQyPXkNCj4gK0NPTkZJR19DTURf
-RVhUND15DQo+ICtDT05GSUdfQ01EX0VYVDRfV1JJVEU9eQ0KPiArQ09ORklHX0NNRF9GQVQ9eQ0K
-PiArQ09ORklHX09GX0NPTlRST0w9eQ0KPiArQ09ORklHX1NQTF9PRl9DT05UUk9MPXkNCj4gK0NP
-TkZJR19FTlZfT1ZFUldSSVRFPXkNCj4gK0NPTkZJR19FTlZfSVNfSU5fTU1DPXkNCj4gK0NPTkZJ
-R19TWVNfUkVEVU5EQU5EX0VOVklST05NRU5UPXkNCj4gK0NPTkZJR19TWVNfUkVMT0NfR0RfRU5W
-X0FERFI9eQ0KPiArQ09ORklHX1NZU19NTUNfRU5WX0RFVj0yDQo+ICtDT05GSUdfRU5WX1ZBUlNf
-VUJPT1RfUlVOVElNRV9DT05GSUc9eQ0KPiArQ09ORklHX1NQTF9ETT15DQo+ICtDT05GSUdfU1BM
-X0NMS19DT01QT1NJVEVfQ0NGPXkNCj4gK0NPTkZJR19DTEtfQ09NUE9TSVRFX0NDRj15DQo+ICtD
-T05GSUdfU1BMX0NMS19JTVg4TU09eQ0KPiArQ09ORklHX0NMS19JTVg4TU09eQ0KPiArQ09ORklH
-X1VTQl9GVU5DVElPTl9GQVNUQk9PVD15DQo+ICtDT05GSUdfRkFTVEJPT1RfQlVGX0FERFI9MHg0
-MjgwMDAwMA0KPiArQ09ORklHX0ZBU1RCT09UX1VVVV9TVVBQT1JUPXkNCj4gK0NPTkZJR19NWENf
-R1BJTz15DQo+ICtDT05GSUdfRE1fSTJDPXkNCj4gK0NPTkZJR19NSVNDPXkNCj4gK0NPTkZJR19J
-MkNfRUVQUk9NPXkNCj4gK0NPTkZJR19TWVNfSTJDX0VFUFJPTV9BRERSPTB4NTENCj4gK0NPTkZJ
-R19TVVBQT1JUX0VNTUNfQk9PVD15DQo+ICtDT05GSUdfTU1DX0lPX1ZPTFRBR0U9eQ0KPiArQ09O
-RklHX01NQ19VSFNfU1VQUE9SVD15DQo+ICtDT05GSUdfTU1DX0hTNDAwX0VTX1NVUFBPUlQ9eQ0K
-PiArQ09ORklHX01NQ19IUzQwMF9TVVBQT1JUPXkNCj4gK0NPTkZJR19GU0xfVVNESEM9eQ0KPiAr
-Q09ORklHX01URD15DQo+ICtDT05GSUdfRE1fTVREPXkNCj4gK0NPTkZJR19ETV9TUElfRkxBU0g9
-eQ0KPiArQ09ORklHX1NGX0RFRkFVTFRfQlVTPTMNCj4gK0NPTkZJR19TUElfRkxBU0hfQkFSPXkN
-Cj4gK0NPTkZJR19TUElfRkxBU0hfTUFDUk9OSVg9eQ0KPiArQ09ORklHX1NQSV9GTEFTSF9TUEFO
-U0lPTj15DQo+ICtDT05GSUdfU1BJX0ZMQVNIX1NUTUlDUk89eQ0KPiArQ09ORklHX1NQSV9GTEFT
-SF9TU1Q9eQ0KPiArQ09ORklHX1NQSV9GTEFTSF9XSU5CT05EPXkNCj4gKyMgQ09ORklHX1NQSV9G
-TEFTSF9VU0VfNEtfU0VDVE9SUyBpcyBub3Qgc2V0DQo+ICtDT05GSUdfU1BJX0ZMQVNIX01URD15
-DQo+ICtDT05GSUdfUEhZTElCPXkNCj4gK0NPTkZJR19QSFlfVElfRFA4Mzg2Nz15DQo+ICtDT05G
-SUdfUEhZX0dJR0U9eQ0KPiArQ09ORklHX0ZFQ19NWEM9eQ0KPiArQ09ORklHX01JST15DQo+ICtD
-T05GSUdfTlZNRV9QQ0k9eQ0KPiArQ09ORklHX1BDSUVfRFdfSU1YPXkNCj4gK0NPTkZJR19QSFlf
-SU1YOE1fUENJRT15DQo+ICtDT05GSUdfUElOQ1RSTD15DQo+ICtDT05GSUdfU1BMX1BJTkNUUkw9
-eQ0KPiArQ09ORklHX1BJTkNUUkxfSU1YOE09eQ0KPiArQ09ORklHX1BPV0VSX0RPTUFJTj15DQo+
-ICtDT05GSUdfSU1YOE1fUE9XRVJfRE9NQUlOPXkNCj4gK0NPTkZJR19ETV9SRUdVTEFUT1JfRklY
-RUQ9eQ0KPiArQ09ORklHX0RNX1JFR1VMQVRPUl9HUElPPXkNCj4gK0NPTkZJR19ETV9TRVJJQUw9
-eQ0KPiArQ09ORklHX01YQ19VQVJUPXkNCj4gK0NPTkZJR19TUEk9eQ0KPiArQ09ORklHX0RNX1NQ
-ST15DQo+ICtDT05GSUdfTlhQX0ZTUEk9eQ0KPiArQ09ORklHX1NZU1JFU0VUPXkNCj4gK0NPTkZJ
-R19TUExfU1lTUkVTRVQ9eQ0KPiArQ09ORklHX1NZU1JFU0VUX1BTQ0k9eQ0KPiArQ09ORklHX1NZ
-U1JFU0VUX1dBVENIRE9HPXkNCj4gK0NPTkZJR19ETV9USEVSTUFMPXkNCj4gK0NPTkZJR19JTVhf
-VE1VPXkNCj4gK0NPTkZJR19VU0I9eQ0KPiArQ09ORklHX1NQTF9VU0JfSE9TVD15DQo+ICtDT05G
-SUdfVVNCX0VIQ0lfSENEPXkNCj4gK0NPTkZJR19NWENfVVNCX09UR19IQUNUSVZFPXkNCj4gK0NP
-TkZJR19VU0JfR0FER0VUPXkNCj4gK0NPTkZJR19TUExfVVNCX0dBREdFVD15DQo+ICtDT05GSUdf
-VVNCX0dBREdFVF9WRU5ET1JfTlVNPTB4MDUyNQ0KPiArQ09ORklHX1VTQl9HQURHRVRfUFJPRFVD
-VF9OVU09MHhhNGE1DQo+ICtDT05GSUdfQ0lfVURDPXkNCj4gK0NPTkZJR19TRFBfTE9BREFERFI9
-MHg0MDQwMDAwMA0KPiArQ09ORklHX1NQTF9VU0JfU0RQX1NVUFBPUlQ9eQ0KPiArQ09ORklHX0lN
-WF9XQVRDSERPRz15DQo+ICtDT05GSUdfRlNQSV9DT05GX0hFQURFUj15DQo+ICtDT05GSUdfRlNQ
-SV9DT05GX0ZJTEU9ImZzcGlfaGVhZGVyLmJpbiINCg0KLS0gDQpQSFlURUMgTWVzc3RlY2huaWsg
-R21iSCB8IEJhcmNlbG9uYS1BbGxlZSAxIHwgNTUxMjkgTWFpbnosIEdlcm1hbnkNCg0KR2VzY2jD
-pGZ0c2bDvGhyZXI6IERpcGwuLUluZy4gTWljaGFlbCBNaXRlemtpLCBEaXBsLi1JbmcuIEJvZG8g
-SHViZXIsDQpEaXBsLi1JbmcuIChGSCkgTWFya3VzIExpY2tlcyB8IEhhbmRlbHNyZWdpc3RlciBN
-YWlueiBIUkIgNDY1NiB8DQpGaW5hbnphbXQgTWFpbnogfCBTdC5Oci4gMjY2NTAwNjA4LCBERSAx
-NDkwNTk4NTUNCg==
+Signed-off-by: Emil Kronborg <emil.kronborg@protonmail.com>
+---
+Changes in v4:
+- Changed license from GPL-2.0+ to GPL-2.0-or-later. Also, removed
+  trailing colon.
+- Simplified the descriptions in the Synopsis section by removing the
+  text following the '-'.
+- Reformulated the description of the invert subcommand to be more
+  precise and correct.
+- %s/duty cycle/duty period to be consistent with pwm.h and to ensure
+  correctness, as duty cycle is dimensionless and <duty_ns> is given in
+  nanoseconds.
+- Moved the common parameters, pwm_dev_num and channel, to the bottom of
+  the Description section, and added the remaining parameters.
+- Added a comma in the Examples section and used '=C2=B5s' instead of 'us'.
+- Rebased on top of master.
+
+ doc/usage/cmd/pwm.rst | 91 +++++++++++++++++++++++++++++++++++++++++++
+ doc/usage/index.rst   |  1 +
+ 2 files changed, 92 insertions(+)
+ create mode 100644 doc/usage/cmd/pwm.rst
+
+diff --git a/doc/usage/cmd/pwm.rst b/doc/usage/cmd/pwm.rst
+new file mode 100644
+index 000000000000..522acb5afa33
+--- /dev/null
++++ b/doc/usage/cmd/pwm.rst
+@@ -0,0 +1,91 @@
++.. SPDX-License-Identifier: GPL-2.0-or-later
++
++.. index::
++   single: pwm (command)
++
++pwm command
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++
++Synopsis
++--------
++
++::
++
++    pwm invert <pwm_dev_num> <channel> <polarity>
++    pwm config <pwm_dev_num> <channel> <period_ns> <duty_ns>
++    pwm enable <pwm_dev_num> <channel>
++    pwm disable <pwm_dev_num> <channel>
++
++
++Description
++-----------
++
++The ``pwm`` command is used to access and configure PWM (Pulse Width Modul=
+ation)
++signals.
++
++pwm invert
++----------
++
++* If the value of ``polarity`` is 0, the default polarity is used.
++* If the value of ``polarity`` is 1, the polarity is inverted.
++
++pwm config
++----------
++
++Configure the period and duty period in nanoseconds.
++
++pwm enable
++----------
++
++Enable output on the configured device and channel.
++
++pwm disable
++-----------
++
++Disable output on the configured device and channel.
++
++pwm_dev_num
++    Device number of the pulse width modulation device
++
++channel
++    Output channel of the PWM device
++
++polarity
++    * 0 - Use normal polarity
++    * 1 - Use inverted polarity
++
++duty_ns
++    Duty period in ns
++
++period_ns
++    Period time in ns
++
++Examples
++--------
++
++Configure device 0, channel 0 to 20 =C2=B5s period and 14 =C2=B5s (that is=
+, 70%) duty period::
++
++    =3D> pwm config 0 0 20000 14000
++
++Enable output on the configured device and channel::
++
++    =3D> pwm enable 0 0
++
++Disable output on the configured device and channel::
++
++    =3D> pwm disable 0 0
++
++Invert the signal on the configured device and channel::
++
++    =3D> pwm invert 0 0 1
++
++Configuration
++-------------
++
++The ``pwm`` command is only available if CONFIG_CMD_PWM=3Dy.
++
++Return value
++------------
++
++If the command succeeds, the return value ``$?`` is set to 0. If an error =
+occurs, the
++return value ``$?`` is set to 1.
+diff --git a/doc/usage/index.rst b/doc/usage/index.rst
+index 1f6518b77c4b..6a218c46b4e4 100644
+--- a/doc/usage/index.rst
++++ b/doc/usage/index.rst
+@@ -93,6 +93,7 @@ Shell commands
+    cmd/pinmux
+    cmd/printenv
+    cmd/pstore
++   cmd/pwm
+    cmd/qfw
+    cmd/read
+    cmd/reset
+
+base-commit: 90270e0f71c53cca9c0347ce3baedf26b8ec4cdb
+--=20
+2.46.0
+
+
