@@ -4,59 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BDA7C52D7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:15:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09AECC52D7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:24:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E198388A99;
-	Thu, 15 Aug 2024 22:15:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 38B25889F8;
+	Thu, 15 Aug 2024 22:24:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1723752900;
-	bh=CPhWJtEfjzJ6yl/pBWHO/SyO9pE7VuoM4ffMBSGktbc=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=RWtwit+PQVfWW37S7o0QKiGZRi9gJGI0Z+l+DfEg0pxSUS21Ydx/1Is0/sffieYS1
-	 4hoAEXXyBMiTqmobMdgaq1jnXh9suef8M3eGuEPOX1jF3r7oBZ/5hXtIK4x5xz7GPU
-	 6aBc+9YWyYilb95PVx+90sw9r8DoJq51Cib6VipJGXE1ZPnmkaNVupS+4JzmhCS/oK
-	 mkZptenwuYqCU9IptVdehS8K/YYPP7htiosJVXyFX0nNXLm2JG/WlOKLqJf4M9NRYe
-	 qWX2B2Pt5OsnNjAu4Mf/NclcZTU/Kfpgqbpctfh4u081178jW04ooqAP9pqCH8kBzo
-	 04Rw1N8/AMVPQ==
-Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WsaPIVhz";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D302C8870B; Thu, 15 Aug 2024 22:24:33 +0200 (CEST)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 1D5ED8863B;
- Thu, 15 Aug 2024 22:14:59 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1723752899;
- bh=CPhWJtEfjzJ6yl/pBWHO/SyO9pE7VuoM4ffMBSGktbc=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=inLTsAwPpbh+IEro3JthXdPgPkHniePCvRP7pdjDIoEasoORIFJtZWqc6TnjxyQM4
- l5+f6b8QDi4jydWkBmOYDNkMXt80Op51AYTYNCMD/AZE1cf8cRc80kVFDXQCs8nBG7
- xWtucXy7XoeP9TTWbQUMz1tlMGcBMHRGSTaRkvwwlMQSwQ7Y93IK3QVjKt8Gu/wNPX
- YQvBlMfVJaGJmBnESLrmoMr8dOQGaOoqNTFjZpo0GLF5FLhQzOSUiwEIWXHS6V2V0z
- B3lSX1hUrzbWIIfd3hE67Xi7CRmIcKSsae/T4Np9//983naYxTmtB9RZvJ3XVLDzuN
- LfgnILliYsPFQ==
-Date: Thu, 15 Aug 2024 22:14:58 +0200
-From: Lukasz Majewski <lukma@denx.de>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Teresa Remmet <t.remmet@phytec.de>, Stefano Babic <sbabic@denx.de>,
- uboot-imx@nxp.com, Cem Tenruh <c.tenruh@phytec.de>, Tom Rini
- <trini@konsulko.com>, u-boot@lists.denx.de, Yannic Moog <y.moog@phytec.de>,
- Benjamin Hahn <B.Hahn@phytec.de>, Marcel Ziswiler
- <marcel.ziswiler@toradex.com>
-Subject: Re: [PATCH] config: imx: Add PHYTEC's phycore-imx8mm-fspi_defconfig
-Message-ID: <20240815221458.1ecb4947@wsk>
-In-Reply-To: <CAOMZO5BM0w1aphmZ4D5cEch_eWVT3ebeZa3gfB9TbfGcT_gOdA@mail.gmail.com>
-References: <20240815084012.477436-1-lukma@denx.de>
- <CAOMZO5BM0w1aphmZ4D5cEch_eWVT3ebeZa3gfB9TbfGcT_gOdA@mail.gmail.com>
-Organization: denx.de
-X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ by phobos.denx.de (Postfix) with ESMTPS id 9991F88A76
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:24:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-81f9339e534so51723139f.3
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:24:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1723753467; x=1724358267; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=DKztAFb8qvZRWa4uZhRFNhmnBfXGk2Gj1MZe1Mv1AzM=;
+ b=WsaPIVhzR9BW7MEuK/XM2KttpyYCSSaf6AxI2AJOY71/Y6TCLh+TgVoKXBnvcSKsks
+ xBtYE6uMjlKAHBx9iTdbDNAtzL0RQlYj7+p+ILLlF0n/wX8E8Xp4cCv2STt0vqMg63r9
+ a5JJvogsF5UsJ+aHcZeXsXjm4JL8lCacvpZgM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723753467; x=1724358267;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DKztAFb8qvZRWa4uZhRFNhmnBfXGk2Gj1MZe1Mv1AzM=;
+ b=ORihuaub/emEOYr2QHOyKz0rXCIXKT7yZ+NSGwEcbppPkLe3am5frlS70AJaMRfkKt
+ 3jEQuTgI06S9M7tq789Vwxl6lVq5Krlk9XtynVxfy0rmU1weYDXiq2pKzqVkffu6srxA
+ fZB9OqHj6P44qBn+ESYNPnlilkeFK7bN/1cJFWwaNAuMDab4YoCZ6m/BvqHxsobAEhQh
+ p7JkmnpIKWUo2sA+kO8LlMdmVrLL8E8GqhlhRf2urcOKqTL0VMVi/tNtvfVjXtbOYxaE
+ S/CMpQ8Zk7wuv92dSv7hryLzzXUykjhTM/VgRcOh3QlxzO+bSB9/NZJUnIBRmnl6b7h4
+ 3hQg==
+X-Gm-Message-State: AOJu0YwBqD1iu8U6UD+b4kdD4TmMkFoD+LudBuoo/28BDH8Xz/SjJlvY
+ LDtV4LyCGa5DbYSj7VSkYiUBhtoZlkFaPdJUSJKLj5gl+/zk3IQJnvssjZEw5hrAPD2v/qoOyoc
+ YtA==
+X-Google-Smtp-Source: AGHT+IG1qtUzR/k2ZBAD2leDsHpRMMtyS+s2hydi+HxIT3Da+OKXAOMdgCxb+SeaCu7zTIAfA6XyEw==
+X-Received: by 2002:a05:6e02:1a8f:b0:39a:12d7:2849 with SMTP id
+ e9e14a558f8ab-39d26cdbf47mr13141645ab.5.1723753467281; 
+ Thu, 15 Aug 2024 13:24:27 -0700 (PDT)
+Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
+ [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-39d1ead5597sm8144915ab.7.2024.08.15.13.24.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Aug 2024 13:24:26 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Albert Aribaud <albert.u.boot@aribaud.net>,
+ Bin Meng <bmeng.cn@gmail.com>
+Subject: [PATCH v4 00/14] efi: Add a test for EFI bootmeth
+Date: Thu, 15 Aug 2024 14:24:10 -0600
+Message-Id: <20240815202424.766778-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/owAtGYs6N4Qt6UTo_Xwfwbx";
- protocol="application/pgp-signature"; micalg=pgp-sha512
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,63 +88,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---Sig_/owAtGYs6N4Qt6UTo_Xwfwbx
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+The test coverage for the EFI bootmeth is incomplete since it does not
+actually boot the application.
 
-Hi Fabio,
+This series creates a simple test for this purpose. It includes a few
+patches to make this work:
 
-> Hi Lukasz,
->=20
-> On Thu, Aug 15, 2024 at 5:40=E2=80=AFAM Lukasz Majewski <lukma@denx.de> w=
-rote:
-> >
-> > This configuration file provides support for booting phycore module
-> > (on e.g. polis-rdk base development board) from QSPI memory.
-> >
-> > Moreover, the SDP SPL gadget is supported, so single flash.bin
-> > binary can be used with uuu (with uuu -v -b qspi ~/u-boot/flash.bin)
-> > to flash QSPI in the factory or during debricking. =20
->=20
-> This looks good.
->=20
-> I suggest adding an entry in doc/board/phytec/phycore-imx8mm.rst to
-> explain how to build and flash U-Boot for booting via QSPI.
->=20
-> This can be a separate patch though.
->=20
+- ANSI output from the EFI loader confusing the unit-testing checker
+- Hang in sandbox virtio due to EFI probing all block devices
 
-+1
+Other necessary fixes have been split out into two other series.
 
-> Reviewed-by: Fabio Estevam <festevam@gmail.com>
+Changes in v4:
+- Add efi_loader tag to some patches
+- Split out non-EFI patches into a different series
 
+Changes in v3:
+- Drop the extra- rules since scripts/Makefile.lib takes care of it
+- Add new patch to drop crt0/relocal extra- rules
+- Put back the Linaro copyright accidentally removed
+- Add a Fixes tag
+- Mention the issue created for this problem
 
+Changes in v2:
+- Fix 'use' typo
+- Reword commit message
+- Use 'Firmware vendor' instead of just 'Vendor'
+- Add many new patches to resolve all the outstanding test issues
 
+Simon Glass (14):
+  efi_loader: Use puts() in cout so that console recording works
+  efi_loader: Put back copyright message
+  efi_loader: Rename and move CMD_BOOTEFI_HELLO_COMPILE
+  efi: arm: x86: riscv: Drop crt0/relocal extra- rules
+  efi_loader: Shorten the app rules
+  efi_loader: Shorten the app rules further
+  efi_loader: Show the vendor in helloworld
+  efi: Use the same filename for all sandbox builds
+  bootstd: Add debugging for efi bootmeth
+  efi_loader: Disable ANSI output for tests
+  efi_loader: Add a test app
+  efi_loader: Avoid using sandbox virtio devices
+  test: efi: boot: Set up an image suitable for EFI testing
+  test: efi: boot: Add a test for the efi bootmeth
 
-Best regards,
+ arch/arm/lib/Makefile               |   8 ----
+ arch/riscv/lib/Makefile             |   4 --
+ arch/sandbox/dts/test.dts           |   2 +-
+ arch/x86/lib/Makefile               |  16 -------
+ boot/bootmeth_efi.c                 |  11 ++++-
+ cmd/Kconfig                         |  14 +-----
+ configs/octeontx2_95xx_defconfig    |   2 +-
+ configs/octeontx2_96xx_defconfig    |   2 +-
+ configs/octeontx_81xx_defconfig     |   2 +-
+ configs/octeontx_83xx_defconfig     |   2 +-
+ doc/develop/uefi/uefi.rst           |   2 +-
+ include/efi_default_filename.h      |  24 +---------
+ include/efi_loader.h                |  21 ++++++++-
+ lib/efi_loader/Kconfig              |  22 +++++++++
+ lib/efi_loader/Makefile             |  47 ++++++-------------
+ lib/efi_loader/efi_console.c        |  28 ++++++++----
+ lib/efi_loader/efi_disk.c           |  14 +++++-
+ lib/efi_loader/helloworld.c         |   6 +++
+ lib/efi_loader/testapp.c            |  68 ++++++++++++++++++++++++++++
+ test/boot/bootdev.c                 |  18 +++++++-
+ test/boot/bootflow.c                |  60 +++++++++++++++++++++++-
+ test/py/tests/bootstd/flash1.img.xz | Bin 0 -> 5016 bytes
+ test/py/tests/test_efi_fit.py       |   2 +-
+ test/py/tests/test_efi_loader.py    |   2 +-
+ test/py/tests/test_ut.py            |  52 ++++++++++++++++++---
+ 25 files changed, 304 insertions(+), 125 deletions(-)
+ create mode 100644 lib/efi_loader/testapp.c
+ create mode 100644 test/py/tests/bootstd/flash1.img.xz
 
-Lukasz Majewski
+-- 
+2.34.1
 
---
-
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
-
---Sig_/owAtGYs6N4Qt6UTo_Xwfwbx
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAma+YcIACgkQAR8vZIA0
-zr0qdwf/UUqyGo1XBqoxdLzyYjAn9S6bZkPuNYWjcBglzmpaui2UipAlF5g8X+Ai
-pvipEEWM9Sq1oYmQN9SmvBImzXfLo7+ZVEhtN7gTqYx3vqMwDg5GhlX+zkaXjaMI
-YrMysZn7j3wH8oht4ZzyxyH7fAYfXzJ32HokQdFCaC7jDkopHLH/cGTTP4IqBSEX
-oiSAiR5xm9YV47co+4CWii4VPIMXhu96HXjYC+2+/4zOuloMOrsctYLjHlmQDZvu
-ALwVE2C/+VXIDuNdxssL+tvmp3+aWO4OkL/MPUF9S7V7cRFobZkWqhHOlHenGHq9
-5/YQ6r0jIYdPrc7SIh9dV11VBqjNeg==
-=Phiq
------END PGP SIGNATURE-----
-
---Sig_/owAtGYs6N4Qt6UTo_Xwfwbx--
