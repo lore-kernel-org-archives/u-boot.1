@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11C34C52D7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 19:58:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9988AC52D7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 19:58:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 348CF88A95;
-	Thu, 15 Aug 2024 21:58:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9BFDB88637;
+	Thu, 15 Aug 2024 21:58:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fm3OZg4S";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="afN3iL/l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16E8488A82; Thu, 15 Aug 2024 21:58:07 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id E2A7F88A95; Thu, 15 Aug 2024 21:58:07 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 258B588A95
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 21:58:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 63B5986EE3
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 21:58:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-70b3b62025dso893457a34.0
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 12:58:04 -0700 (PDT)
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7093705c708so1297190a34.1
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 12:58:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1723751879; x=1724356679; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cRZ5Z1BhmjLKxm6Rc4pZ37P8WKoFcZAnCSdQuC5SGik=;
- b=fm3OZg4SrAUimTfz+A9vGZFGI9NzT1dVNvDf5JjE8eMS5S+GS4jrg77NGDFaCLf09J
- 8PKaKxMCgVhj7KhmB58bHP21OzD2GcU8CC+Z8KorDXo+WAzp3qPtDgLdc81XoJvDVaQC
- KWQ4BIn78hM8fdv7iKTgBhikmmsgV4IaVepj4=
+ bh=dUjqd8LsDQeoLU27IN03yd7mgeP6IaViritdUqe0lS4=;
+ b=afN3iL/lDI9YHZhKnYxH0pHIWwf461ElLyHxK1q93s0qZ45w0vyApvnBeswkXUeYHh
+ 4BrS3MV927X02RdtVtj4jcv9EBNZ7k1fCzEm70OkMUwqwOWDxqlPvts5NQqmwkbmZXnx
+ IDzylvOO/53yYLQKBhY/xbFgRsSpX4V248+Cg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1723751879; x=1724356679;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cRZ5Z1BhmjLKxm6Rc4pZ37P8WKoFcZAnCSdQuC5SGik=;
- b=INbXbAWBzQPFAUPiJDxoZnfzZaxllZaoplIdQf9hQBCqtNaT4b2nDn/tjmRxUMuU0I
- TioM65RJx9xXwLbMEr929AHxMJacoc3mRmIC/ZgTKrN4A5oJdIMbmvAa62qsi9qQhd/U
- Ub/ggeww8VNg+hJntIoQ/fNsVTgHyVsf+hVZpzvCvA6xFAXPSBbd2wA2iFfAnZvP1eYv
- AqAlhhC2PdyL4mOVcmn2pvNcEn0XIVjRa3enMah5jZsnH9CCVDOdw92Omy1rG4n/cCep
- fHtNsFjzsAh3+4oE4hmlPyURnY7zMbrMQCqBDAkkjwwOLSXDH/kGbZOGnVeUaoYtKuE0
- qUoQ==
-X-Gm-Message-State: AOJu0YwektQwsu9sa0IiyqL4s8JHy+9AXMAHO3FJV6mV0gIAg9NSScWG
- eCgB21wbE0IjATbYuE96qBmO+G0Cor5mx/1mj4FzCifgpjtQzEP2SlCoivF9FUa0Y1MEiMI0fTO
- eEg==
-X-Google-Smtp-Source: AGHT+IFwjR4mlaMEaUqCtS08WkaYpDct6LIOnQOpF8qmJq0PR5//jlB8meEf9X76MIJnK54P2vRXOA==
-X-Received: by 2002:a05:6830:368b:b0:703:5d5c:3439 with SMTP id
- 46e09a7af769-70cac8b1cdemr904826a34.23.1723751878860; 
- Thu, 15 Aug 2024 12:57:58 -0700 (PDT)
+ bh=dUjqd8LsDQeoLU27IN03yd7mgeP6IaViritdUqe0lS4=;
+ b=PBVpBHpwW68D0BYfAMX9RascxGexYo5DFpfPQurHUXM8y4s6i5Ifb/KTTwwb/k+TGJ
+ KiOjo/2la14qwOr5anNwk951/4ODsNPZ/btzOzqqPb542DGFKH0rrlOM+11Bj4RSqevQ
+ 2s6eX2/2YLBdUB0rBQBe8V7cW38Mee0PoOL7T1hZAXRHS6baSKd0uG3bykrPUoQJksUm
+ QS+2s7prjPHpNcKE9YDU9RUxIf/z0kNUkY5VgXeHTmFl0p1FwBhWPZVzKBBlGdTlJBx5
+ /CenLlTx/KMr9DSqclXkKsKwgVw6tK9ceoCnT8lCC7MwGVXkyfsTbiLSTU4Qzspibey7
+ Vkkg==
+X-Gm-Message-State: AOJu0YxdelW5xGTZ4sANxIAJR1Fph8tKn6mMmHew1Vpt6rZEMYxZN/nB
+ ZT9mz4ccT15401W57xwhlBXkzrl8lMTRo547EunrttWzk31utD+YnPdqWRggaNNN1GiMANSr0MO
+ ORA==
+X-Google-Smtp-Source: AGHT+IEZVzzRRq+IAiwZ+QRkaCVSSgjyM9Qz2HPJBk9n2BNMD+OLdmG88I7FVBATrFHqWV6X5xX5kA==
+X-Received: by 2002:a05:6830:6004:b0:703:7775:c6c2 with SMTP id
+ 46e09a7af769-70cac8c9368mr695297a34.33.1723751879683; 
+ Thu, 15 Aug 2024 12:57:59 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ccd6f3e3f2sm697372173.100.2024.08.15.12.57.58
+ 8926c6da1cb9f-4ccd6f3e3f2sm697372173.100.2024.08.15.12.57.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Aug 2024 12:57:58 -0700 (PDT)
+ Thu, 15 Aug 2024 12:57:59 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
  Brandon Maier <brandon.maier@collins.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH v3 1/3] buildman: Support building within a Python venv
-Date: Thu, 15 Aug 2024 13:57:44 -0600
-Message-Id: <20240815195746.749042-2-sjg@chromium.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH v3 2/3] buildman: Allow skipping the dtc build
+Date: Thu, 15 Aug 2024 13:57:45 -0600
+Message-Id: <20240815195746.749042-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240815195746.749042-1-sjg@chromium.org>
 References: <20240815195746.749042-1-sjg@chromium.org>
@@ -92,219 +91,194 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Python virtualenv tool sets up a few things in the environment,
-putting its path first in the PATH environment variable and setting up
-a sys.prefix different from the sys.base_prefix value.
-
-At present buildman puts the toolchain path first in PATH so that it can
-be found easily during the build. For sandbox this causes problems since
-/usr/bin/gcc (for example) results in '/usr/bin' being prepended to the
-PATH variable. As a result, the venv is partially disabled.
-
-The result is that sandbox builds within a venv ignore the venv, e.g.
-when looking for packages.
-
-Correct this by detecting the venv and adding the toolchain path after
-the venv path.
+For most boards, the device-tree compiler is built in-tree, ignoring the
+system version. Add a special option to skip this build. This can be
+useful when the system dtc is up-to-date, as it speeds up the build.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- Fix 'envronment' typo
+ tools/buildman/builder.py       | 27 ++++++++++++++++++++++++++-
+ tools/buildman/builderthread.py |  4 ++--
+ tools/buildman/buildman.rst     |  3 +++
+ tools/buildman/cmdline.py       |  2 ++
+ tools/buildman/control.py       |  3 ++-
+ tools/buildman/test.py          | 31 +++++++++++++++++++++++++++++++
+ 6 files changed, 66 insertions(+), 4 deletions(-)
 
- tools/buildman/bsettings.py |  3 ++
- tools/buildman/test.py      | 84 +++++++++++++++++++++++++++++++++++++
- tools/buildman/toolchain.py | 31 ++++++++++++--
- 3 files changed, 114 insertions(+), 4 deletions(-)
-
-diff --git a/tools/buildman/bsettings.py b/tools/buildman/bsettings.py
-index aea724fc559..a7358cfc08a 100644
---- a/tools/buildman/bsettings.py
-+++ b/tools/buildman/bsettings.py
-@@ -31,6 +31,9 @@ def setup(fname=''):
- def add_file(data):
-     settings.read_file(io.StringIO(data))
+diff --git a/tools/buildman/builder.py b/tools/buildman/builder.py
+index c4384f53e8d..4090d328b30 100644
+--- a/tools/buildman/builder.py
++++ b/tools/buildman/builder.py
+@@ -22,6 +22,7 @@ from buildman import toolchain
+ from patman import gitutil
+ from u_boot_pylib import command
+ from u_boot_pylib import terminal
++from u_boot_pylib import tools
+ from u_boot_pylib.terminal import tprint
  
-+def add_section(name):
-+    settings.add_section(name)
-+
- def get_items(section):
-     """Get the items from a section of the config.
+ # This indicates an new int or hex Kconfig property with no default
+@@ -263,7 +264,8 @@ class Builder:
+                  adjust_cfg=None, allow_missing=False, no_lto=False,
+                  reproducible_builds=False, force_build=False,
+                  force_build_failures=False, force_reconfig=False,
+-                 in_tree=False, force_config_on_failure=False, make_func=None):
++                 in_tree=False, force_config_on_failure=False, make_func=None,
++                 dtc_skip=False):
+         """Create a new Builder object
  
-diff --git a/tools/buildman/test.py b/tools/buildman/test.py
-index bfad3093030..6191af95445 100644
---- a/tools/buildman/test.py
-+++ b/tools/buildman/test.py
-@@ -148,6 +148,7 @@ class TestBuild(unittest.TestCase):
-         self.toolchains.Add('arm-linux-gcc', test=False)
-         self.toolchains.Add('sparc-linux-gcc', test=False)
-         self.toolchains.Add('powerpc-linux-gcc', test=False)
-+        self.toolchains.Add('/path/to/aarch64-linux-gcc', test=False)
-         self.toolchains.Add('gcc', test=False)
+         Args:
+@@ -312,6 +314,7 @@ class Builder:
+             force_config_on_failure (bool): Reconfigure the build before
+                 retrying a failed build
+             make_func (function): Function to call to run 'make'
++            dtc_skip (bool): True to skip building dtc and use the system one
+         """
+         self.toolchains = toolchains
+         self.base_dir = base_dir
+@@ -354,6 +357,12 @@ class Builder:
+         self.in_tree = in_tree
+         self.force_config_on_failure = force_config_on_failure
+         self.fallback_mrproper = fallback_mrproper
++        if dtc_skip:
++            self.dtc = shutil.which('dtc')
++            if not self.dtc:
++                raise ValueError('Cannot find dtc')
++        else:
++            self.dtc = None
  
-         # Avoid sending any output
-@@ -868,6 +869,89 @@ class TestBuild(unittest.TestCase):
-             self.assertEqual([4, 5], control.read_procs(tmpdir))
-             self.assertEqual(self.finish_time, self.cur_time)
+         if not self.squash_config_y:
+             self.config_filenames += EXTRA_CONFIG_FILENAMES
+@@ -407,6 +416,22 @@ class Builder:
+     def signal_handler(self, signal, frame):
+         sys.exit(1)
  
-+    def call_make_environment(self, tchn, full_path, in_env=None):
-+        """Call Toolchain.MakeEnvironment() and process the result
++    def make_environment(self, toolchain):
++        """Create the environment to use for building
 +
 +        Args:
-+            tchn (Toolchain): Toolchain to use
-+            full_path (bool): True to return the full path in CROSS_COMPILE
-+                rather than adding it to the PATH variable
-+            in_env (dict): Input environment to use, None to use current env
++            toolchain (Toolchain): Toolchain to use for building
 +
 +        Returns:
-+            tuple:
-+                dict: Changes that MakeEnvironment has made to the environment
-+                    key: Environment variable that was changed
-+                    value: New value (for PATH this only includes components
-+                        which were added)
-+                str: Full value of the new PATH variable
++            dict:
++                key (str): Variable name
++                value (str): Variable value
 +        """
-+        env = tchn.MakeEnvironment(full_path, env=in_env)
++        env = toolchain.MakeEnvironment(self.full_path)
++        if self.dtc:
++            env[b'DTC'] = tools.to_bytes(self.dtc)
++        return env
 +
-+        # Get the original environment
-+        orig_env = dict(os.environb if in_env is None else in_env)
-+        orig_path = orig_env[b'PATH'].split(b':')
+     def set_display_options(self, show_errors=False, show_sizes=False,
+                           show_detail=False, show_bloat=False,
+                           list_error_boards=False, show_config=False,
+diff --git a/tools/buildman/builderthread.py b/tools/buildman/builderthread.py
+index bbe2f6f0d24..54f3c02c844 100644
+--- a/tools/buildman/builderthread.py
++++ b/tools/buildman/builderthread.py
+@@ -406,7 +406,7 @@ class BuilderThread(threading.Thread):
+                     the next incremental build
+         """
+         # Set up the environment and command line
+-        env = self.toolchain.MakeEnvironment(self.builder.full_path)
++        env = self.builder.make_environment(self.toolchain)
+         mkdir(out_dir)
+ 
+         args, cwd, src_dir = self._build_args(brd, out_dir, out_rel_dir,
+@@ -574,7 +574,7 @@ class BuilderThread(threading.Thread):
+                 outf.write(f'{result.return_code}')
+ 
+             # Write out the image and function size information and an objdump
+-            env = result.toolchain.MakeEnvironment(self.builder.full_path)
++            env = self.builder.make_environment(self.toolchain)
+             with open(os.path.join(build_dir, 'out-env'), 'wb') as outf:
+                 for var in sorted(env.keys()):
+                     outf.write(b'%s="%s"' % (var, env[var]))
+diff --git a/tools/buildman/buildman.rst b/tools/buildman/buildman.rst
+index b8ff3bf1ab2..e873611e596 100644
+--- a/tools/buildman/buildman.rst
++++ b/tools/buildman/buildman.rst
+@@ -1030,6 +1030,9 @@ of the source tree, thus allowing rapid tested evolution of the code::
+ 
+     ./tools/buildman/buildman -Pr tegra
+ 
++Note also the `--dtc-skip` option which uses the system device-tree compiler to
++avoid needing to build it for each board. This can save 10-20% of build time.
++An alternative is to set DTC=/path/to/dtc when running buildman.
+ 
+ Checking configuration
+ ----------------------
+diff --git a/tools/buildman/cmdline.py b/tools/buildman/cmdline.py
+index 544a391a464..7573e5bdfe8 100644
+--- a/tools/buildman/cmdline.py
++++ b/tools/buildman/cmdline.py
+@@ -46,6 +46,8 @@ def add_upto_m(parser):
+           help='Show detailed size delta for each board in the -S summary')
+     parser.add_argument('-D', '--debug', action='store_true',
+         help='Enabling debugging (provides a full traceback on error)')
++    parser.add_argument('--dtc-skip', action='store_true', default=False,
++          help='Skip building of dtc and use the system version')
+     parser.add_argument('-e', '--show_errors', action='store_true',
+           default=False, help='Show errors and warnings')
+     parser.add_argument('-E', '--warnings-as-errors', action='store_true',
+diff --git a/tools/buildman/control.py b/tools/buildman/control.py
+index d3d027f02ab..55d4d770c5c 100644
+--- a/tools/buildman/control.py
++++ b/tools/buildman/control.py
+@@ -809,7 +809,8 @@ def do_buildman(args, toolchains=None, make_func=None, brds=None,
+             force_build = args.force_build,
+             force_build_failures = args.force_build_failures,
+             force_reconfig = args.force_reconfig, in_tree = args.in_tree,
+-            force_config_on_failure=not args.quick, make_func=make_func)
++            force_config_on_failure=not args.quick, make_func=make_func,
++            dtc_skip=args.dtc_skip)
+ 
+     TEST_BUILDER = builder
+ 
+diff --git a/tools/buildman/test.py b/tools/buildman/test.py
+index 6191af95445..91f7a3a475a 100644
+--- a/tools/buildman/test.py
++++ b/tools/buildman/test.py
+@@ -952,6 +952,37 @@ class TestBuild(unittest.TestCase):
+         self.assertEqual(
+             {b'CROSS_COMPILE': b'fred aarch64-linux-', b'LC_ALL': b'C'}, diff)
+ 
++    def test_skip_dtc(self):
++        """Test skipping building the dtc tool"""
++        old_path = os.getenv('PATH')
++        try:
++            os.environ['PATH'] = self.base_dir
 +
-+        # Find new variables
-+        diff = dict((k, env[k]) for k in env if orig_env.get(k) != env[k])
++            # Check a missing tool
++            with self.assertRaises(ValueError) as exc:
++                builder.Builder(self.toolchains, self.base_dir, None, 0, 2,
++                                dtc_skip=True)
++            self.assertIn('Cannot find dtc', str(exc.exception))
 +
-+        # Find new / different path components
-+        diff_path = None
-+        new_path = None
-+        if b'PATH' in diff:
-+            new_path = diff[b'PATH'].split(b':')
-+            diff_paths = [p for p in new_path if p not in orig_path]
-+            diff_path = b':'.join(p for p in new_path if p not in orig_path)
-+            if diff_path:
-+                diff[b'PATH'] = diff_path
-+            else:
-+                del diff[b'PATH']
-+        return diff, new_path
++            # Create a fake tool to use
++            dtc = os.path.join(self.base_dir, 'dtc')
++            tools.write_file(dtc, b'xx')
++            os.chmod(dtc, 0o777)
 +
-+    def test_toolchain_env(self):
-+        """Test PATH and other environment settings for toolchains"""
-+        # Use a toolchain which has a path, so that full_path makes a difference
-+        tchn = self.toolchains.Select('aarch64')
++            build = builder.Builder(self.toolchains, self.base_dir, None, 0, 2,
++                                    dtc_skip=True)
++            toolchain = self.toolchains.Select('arm')
++            env = build.make_environment(toolchain)
++            self.assertIn(b'DTC', env)
 +
-+        # Normal cases
-+        diff = self.call_make_environment(tchn, full_path=False)[0]
-+        self.assertEqual(
-+            {b'CROSS_COMPILE': b'aarch64-linux-', b'LC_ALL': b'C',
-+             b'PATH': b'/path/to'}, diff)
-+
-+        diff = self.call_make_environment(tchn, full_path=True)[0]
-+        self.assertEqual(
-+            {b'CROSS_COMPILE': b'/path/to/aarch64-linux-', b'LC_ALL': b'C'},
-+            diff)
-+
-+        # When overriding the toolchain, only LC_ALL should be set
-+        tchn.override_toolchain = True
-+        diff = self.call_make_environment(tchn, full_path=True)[0]
-+        self.assertEqual({b'LC_ALL': b'C'}, diff)
-+
-+        # Test that virtualenv is handled correctly
-+        tchn.override_toolchain = False
-+        sys.prefix = '/some/venv'
-+        env = dict(os.environb)
-+        env[b'PATH'] = b'/some/venv/bin:other/things'
-+        tchn.path = '/my/path'
-+        diff, diff_path = self.call_make_environment(tchn, False, env)
-+
-+        self.assertIn(b'PATH', diff)
-+        self.assertEqual([b'/some/venv/bin', b'/my/path', b'other/things'],
-+                         diff_path)
-+        self.assertEqual(
-+            {b'CROSS_COMPILE': b'aarch64-linux-', b'LC_ALL': b'C',
-+             b'PATH': b'/my/path'}, diff)
-+
-+        # Handle a toolchain wrapper
-+        tchn.path = ''
-+        bsettings.add_section('toolchain-wrapper')
-+        bsettings.set_item('toolchain-wrapper', 'my-wrapper', 'fred')
-+        diff = self.call_make_environment(tchn, full_path=True)[0]
-+        self.assertEqual(
-+            {b'CROSS_COMPILE': b'fred aarch64-linux-', b'LC_ALL': b'C'}, diff)
++            # Try the normal case, i.e. not skipping the dtc build
++            build = builder.Builder(self.toolchains, self.base_dir, None, 0, 2)
++            toolchain = self.toolchains.Select('arm')
++            env = build.make_environment(toolchain)
++            self.assertNotIn(b'DTC', env)
++        finally:
++            os.environ['PATH'] = old_path
 +
  
  if __name__ == "__main__":
      unittest.main()
-diff --git a/tools/buildman/toolchain.py b/tools/buildman/toolchain.py
-index 324ad0e0821..6ca79c2c0f9 100644
---- a/tools/buildman/toolchain.py
-+++ b/tools/buildman/toolchain.py
-@@ -172,13 +172,14 @@ class Toolchain:
-         else:
-             raise ValueError('Unknown arg to GetEnvArgs (%d)' % which)
- 
--    def MakeEnvironment(self, full_path):
-+    def MakeEnvironment(self, full_path, env=None):
-         """Returns an environment for using the toolchain.
- 
-         This takes the current environment and adds CROSS_COMPILE so that
-         the tool chain will operate correctly. This also disables localized
-         output and possibly Unicode encoded output of all build tools by
--        adding LC_ALL=C.
-+        adding LC_ALL=C. For the case where full_path is False, it prepends
-+        the toolchain to PATH
- 
-         Note that os.environb is used to obtain the environment, since in some
-         cases the environment many contain non-ASCII characters and we see
-@@ -187,15 +188,21 @@ class Toolchain:
-           UnicodeEncodeError: 'utf-8' codec can't encode characters in position
-              569-570: surrogates not allowed
- 
-+        When running inside a Python venv, care is taken not to put the
-+        toolchain path before the venv path, so that builds initiated by
-+        buildman will still respect the venv.
-+
-         Args:
-             full_path: Return the full path in CROSS_COMPILE and don't set
-                 PATH
-+            env (dict of bytes): Original environment, used for testing
-         Returns:
-             Dict containing the (bytes) environment to use. This is based on the
-             current environment, with changes as needed to CROSS_COMPILE, PATH
-             and LC_ALL.
-         """
--        env = dict(os.environb)
-+        env = dict(env or os.environb)
-+
-         wrapper = self.GetWrapper()
- 
-         if self.override_toolchain:
-@@ -206,7 +213,23 @@ class Toolchain:
-                 wrapper + os.path.join(self.path, self.cross))
-         else:
-             env[b'CROSS_COMPILE'] = tools.to_bytes(wrapper + self.cross)
--            env[b'PATH'] = tools.to_bytes(self.path) + b':' + env[b'PATH']
-+
-+            # Detect a Python virtualenv and avoid defeating it
-+            if sys.prefix != sys.base_prefix:
-+                paths = env[b'PATH'].split(b':')
-+                new_paths = []
-+                to_insert = tools.to_bytes(self.path)
-+                insert_after = tools.to_bytes(sys.prefix)
-+                for path in paths:
-+                    new_paths.append(path)
-+                    if to_insert and path.startswith(insert_after):
-+                        new_paths.append(to_insert)
-+                        to_insert = None
-+                if to_insert:
-+                    new_paths.append(to_insert)
-+                env[b'PATH'] = b':'.join(new_paths)
-+            else:
-+                env[b'PATH'] = tools.to_bytes(self.path) + b':' + env[b'PATH']
- 
-         env[b'LC_ALL'] = b'C'
- 
 -- 
 2.34.1
 
