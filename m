@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02E22C3DA7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:31:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1898EC52D7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:31:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6370A88BF3;
-	Thu, 15 Aug 2024 22:26:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 7FE9788C02;
+	Thu, 15 Aug 2024 22:26:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N1heteFn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Jd7UIF75";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1AC288B0C; Thu, 15 Aug 2024 22:26:08 +0200 (CEST)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id A47F388AFC; Thu, 15 Aug 2024 22:26:39 +0200 (CEST)
+Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
+ [IPv6:2001:4860:4864:20::33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB63A88B5B
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:26:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C7D488A75
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:26:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-39d1b072d94so4947485ab.0
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:26:03 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-26808290f43so1419141fac.0
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:26:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723753560; x=1724358360; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0vcNh4A/0Y2cDSZmNL1fx6L/Fv+ZKklzesoZR46WLOc=;
- b=N1heteFnuPGJSBvqgJdeCKnIpytY8DWBDKFeIGXiwUeKYogGXf1MgLSbFg27CTRMIU
- xKC8OO3JrncK/QS8QAY/ZXogarCYU/drVcZGhLHq+wtPMScXX5g4Y1FdW3IwnIdRkCRO
- v/bUfeDK2yDHQs0RZPiBvIEznDsIfRv54L2nQ=
+ d=konsulko.com; s=google; t=1723753595; x=1724358395; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=bAHLPN1Mvqhniw9bF53B6D+QpslEDP7qvRe/63igTiM=;
+ b=Jd7UIF757hdNeujEPY1QR7R/Apau/z49MG7835mDq8ENZZG75wdWjhMjhh8yKnw+7b
+ hNqaCfLRXBx6HlBiCxGMsGMCzHNvc2KUCDkGjmCtrP+vcX+SHkUXmbXq8sxVlW5eCZI/
+ yWNrooINz5j9zMrAsYqvPCzOm70qDmKi18+XA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723753560; x=1724358360;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0vcNh4A/0Y2cDSZmNL1fx6L/Fv+ZKklzesoZR46WLOc=;
- b=X2WGdlNc8XV4lKyxtpf0tkEgKo8fuGhpgtuaH5Wt1jJ0X1WpANP6OXsg0uyYunl1xv
- 6RFOPpEZcD+s10zTm/8LobVzB6XaibzsyKTHncdfW+g6waocvbQ82/9srdEjWBkRgr1j
- KNAtpbQk1V+cfQ9cVKgqiJUgBZhcUXczpkp3XPcc2aEq+Sc7WLYylkp+YZxFTivmoIEZ
- 9WEn5Bg7nHgYHe5OI4RGl1NBlG2bNNpH1XE6mJryYu10j6UZq9u7c6rjtj5eMfivF8eG
- QBkpR/jdQo9ko+/lh/0rOmlSYgepnKylyWkHMHdWw0ohO0nkBL7hkH4mIGIYtIaheEBO
- CjYg==
-X-Gm-Message-State: AOJu0YzEPJy0fufqz+GFI0l7LMuYELJuBa9SvmoLysdwC6081EiT648J
- 7ibBPX2P5y3+J4NFnXVur61DOcGXw4ueZm/ccz179VB+eRorBKH1j5KwCgiYa0M/AcGCEhc3U/a
- S0w==
-X-Google-Smtp-Source: AGHT+IEkqhKg+0nyAe2XvFMbXDb7rtbod3+UOvfP6Tr98l+ihXeRBGgDWLO9WomK0qDlQq1Gd3vgXw==
-X-Received: by 2002:a05:6e02:1a66:b0:39d:2387:c57a with SMTP id
- e9e14a558f8ab-39d26cf8301mr12364445ab.8.1723753560181; 
- Thu, 15 Aug 2024 13:26:00 -0700 (PDT)
-Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
- [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39d1ed5db5bsm8014235ab.64.2024.08.15.13.25.59
+ d=1e100.net; s=20230601; t=1723753595; x=1724358395;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bAHLPN1Mvqhniw9bF53B6D+QpslEDP7qvRe/63igTiM=;
+ b=Hy8jndQq/LCB3wACoTGQ+p1isYgYN4k1W/qyD7t9S958nnFUSouDf1zFSiBXhhW6qP
+ DOIxtSARGQ0c4vuDAbtvL/JXdDiZiKX0+42jzMXjJHIoxj1JIMJLiFqByHMKxPVJwr1s
+ kZWboiv+/eRFUaaZhxT2knXZLdRqCIpInesHE5/MIGdvD7+E39QAtlTHLUIzKAhFmc/p
+ BsY1oLobW9eA9R1vJqLOe12FWMB66NOxFT6gjoob4lDKuGbQZYvlkW35Z3QKBKGCg5aJ
+ Nmdx03ZtmofK5LhQzgr65ZJGtsgj40h5kzDvURG+Ln3/fUOOxjgrQDzHmLAU2yrOcFFG
+ K4pg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVTFs7cbSWBswcQPk/DGrdmvXBh5YEqI5VhcyV/lhUlq6mMXKMH+UgRIwhVBtzHVtNEVSPdoteSuiHp4OXbj64AAJBV5Q==
+X-Gm-Message-State: AOJu0YwJ4KeildTNDV9oNHYqvtJinBhd+twMzYLsgF+0Jjh9jrLAhq1L
+ Wzx9FRszKWJciOqmYrU+E/J27zlVYUT1AxOiLQLxHx6P6/HFjdYAChkXDyquGTM=
+X-Google-Smtp-Source: AGHT+IF7mDLUTK6W6+bROITFmGsgZpakCu40ChKt37L1aFdwYhW6o9nMFT/aiK3MpKz193ATPBwLnA==
+X-Received: by 2002:a05:6871:e009:b0:24f:e15a:6536 with SMTP id
+ 586e51a60fabf-26fff648028mr1451744fac.18.1723753594663; 
+ Thu, 15 Aug 2024 13:26:34 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-236.totalplay.net.
+ [189.203.97.236]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2700442fe47sm526048fac.8.2024.08.15.13.26.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Aug 2024 13:25:59 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 23/24] test: mbr: Use RAM for the buffers
-Date: Thu, 15 Aug 2024 14:25:34 -0600
-Message-Id: <20240815202535.767869-24-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240815202535.767869-1-sjg@chromium.org>
-References: <20240815202535.767869-1-sjg@chromium.org>
+ Thu, 15 Aug 2024 13:26:33 -0700 (PDT)
+Date: Thu, 15 Aug 2024 14:26:31 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sean Anderson <seanga2@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] sandbox: Fix pinmux warnings with non-test devicetrees
+Message-ID: <20240815202631.GA3407483@bill-the-cat>
+References: <20240810135249.4037082-1-seanga2@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="zVvbS5G4hy72K06j"
+Content-Disposition: inline
+In-Reply-To: <20240810135249.4037082-1-seanga2@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,210 +91,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The normal approach with sandbox is to use a fixed memory address in the
-RAM, to avoid needing to create a map for transient local variables.
 
-Update this test to use this approach.
+--zVvbS5G4hy72K06j
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On Sat, Aug 10, 2024 at 09:52:49AM -0400, Sean Anderson wrote:
 
-(no changes since v1)
+> The sandbox pinmux driver is used in the non-test devicetree as well as
+> the test one. I didn't realize this when I modified the driver for
+> tests, and so broke the regular use case (which only resulted in
+> warnings). First, making the pinmux and the UART group available in all
+> boot phases to avoid ENODEV errors. Then, convert the pin groups and
+> functions to the new style, adding onewire group as well.
+>=20
+> Fixes: 7f0f1806e3a ("test: pinmux: Add test for pin muxing")
+> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+>  arch/sandbox/dts/sandbox.dtsi                | 14 ++++++++------
+>  drivers/pinctrl/pinctrl-sandbox.c            |  4 +++-
+>  include/dt-bindings/pinctrl/sandbox-pinmux.h |  1 +
+>  3 files changed, 12 insertions(+), 7 deletions(-)
 
- test/cmd/mbr.c | 52 ++++++++++++++++++++++++++------------------------
- 1 file changed, 27 insertions(+), 25 deletions(-)
+This introduces failure to build on sandbox_spl and sandbox_vpl.
 
-diff --git a/test/cmd/mbr.c b/test/cmd/mbr.c
-index e2a7cc35500..ec19cf3793c 100644
---- a/test/cmd/mbr.c
-+++ b/test/cmd/mbr.c
-@@ -232,9 +232,11 @@ static unsigned build_mbr_parts(char *buf, size_t buf_size, unsigned num_parts)
- static int mbr_test_run(struct unit_test_state *uts)
- {
- 	struct blk_desc *mmc_dev_desc;
--	unsigned char mbr_wbuf[BLKSZ], ebr_wbuf[BLKSZ], rbuf[BLKSZ];
-+	unsigned char *mbr_wbuf, *ebr_wbuf, *rbuf;
- 	char mbr_parts_buf[256];
--	ulong mbr_wa, ebr_wa, ra, ebr_blk, mbr_parts_max;
-+	ulong addr = 0x1000;  /* start address for buffers */
-+	ulong mbr_wa = addr, ebr_wa = addr + BLKSZ, ra = addr + BLKSZ * 2;
-+	ulong ebr_blk, mbr_parts_max;
- 	struct udevice *dev;
- 	ofnode root, node;
- 
-@@ -258,9 +260,9 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	ut_assertf(sizeof(mbr_parts_buf) >= mbr_parts_max, "Buffer avail: %ld; buffer req: %ld\n",
- 		sizeof(mbr_parts_buf), mbr_parts_max);
- 
--	mbr_wa = map_to_sysmem(mbr_wbuf);
--	ebr_wa = map_to_sysmem(ebr_wbuf);
--	ra = map_to_sysmem(rbuf);
-+	mbr_wbuf = map_sysmem(mbr_wa, BLKSZ);
-+	ebr_wbuf = map_sysmem(ebr_wa, BLKSZ);
-+	rbuf = map_sysmem(ra, BLKSZ);
- 	ebr_blk = (ulong)0xb00000 / BLKSZ;
- 
- 	/* Make sure mmc6 exists */
-@@ -279,11 +281,11 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	init_write_buffers(mbr_wbuf, sizeof(mbr_wbuf), ebr_wbuf, sizeof(ebr_wbuf), __LINE__);
- 	ut_assertok(build_mbr_parts(mbr_parts_buf, sizeof(mbr_parts_buf), 1));
- 	ut_assertok(run_commandf("write mmc 6:0 %lx 0 1", mbr_wa));
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
- 	ut_assertok(memcmp(mbr_wbuf, rbuf, BLKSZ));
- 	ut_assertok(run_commandf("write mmc 6:0 %lx %lx 1", ebr_wa, ebr_blk));
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
- 	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
- 	ut_assertok(console_record_reset_enable());
-@@ -292,7 +294,7 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	ut_assert_nextline("MBR: write success!");
- 	ut_assertok(run_commandf("mbr verify mmc 6"));
- 	ut_assert_nextline("MBR: verify success!");
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
- 	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
- 	ut_assertok(ut_check_console_end(uts));
-@@ -303,7 +305,7 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	000001e0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
- 	000001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa  |..............U.|
- 	*/
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
- 	for (unsigned i = 0; i < mbr_cmp_size; i++) {
- 		ut_assertf(rbuf[mbr_cmp_start + i] == mbr_parts_ref_p1[i],
-@@ -315,11 +317,11 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	init_write_buffers(mbr_wbuf, sizeof(mbr_wbuf), ebr_wbuf, sizeof(ebr_wbuf), __LINE__);
- 	ut_assertok(build_mbr_parts(mbr_parts_buf, sizeof(mbr_parts_buf), 2));
- 	ut_assertok(run_commandf("write mmc 6:0 %lx 0 1", mbr_wa));
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
- 	ut_assertok(memcmp(mbr_wbuf, rbuf, BLKSZ));
- 	ut_assertok(run_commandf("write mmc 6:0 %lx %lx 1", ebr_wa, ebr_blk));
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
- 	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
- 	ut_assertok(console_record_reset_enable());
-@@ -328,7 +330,7 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	ut_assert_nextline("MBR: write success!");
- 	ut_assertok(run_commandf("mbr verify mmc 6"));
- 	ut_assert_nextline("MBR: verify success!");
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
- 	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
- 	ut_assertok(ut_check_console_end(uts));
-@@ -339,7 +341,7 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	000001e0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
- 	000001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa  |..............U.|
- 	*/
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
- 	for (unsigned i = 0; i < mbr_cmp_size; i++) {
- 		ut_assertf(rbuf[mbr_cmp_start + i] == mbr_parts_ref_p2[i],
-@@ -351,11 +353,11 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	init_write_buffers(mbr_wbuf, sizeof(mbr_wbuf), ebr_wbuf, sizeof(ebr_wbuf), __LINE__);
- 	ut_assertok(build_mbr_parts(mbr_parts_buf, sizeof(mbr_parts_buf), 3));
- 	ut_assertok(run_commandf("write mmc 6:0 %lx 0 1", mbr_wa));
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
- 	ut_assertok(memcmp(mbr_wbuf, rbuf, BLKSZ));
- 	ut_assertok(run_commandf("write mmc 6:0 %lx %lx 1", ebr_wa, ebr_blk));
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
- 	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
- 	ut_assertok(console_record_reset_enable());
-@@ -364,7 +366,7 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	ut_assert_nextline("MBR: write success!");
- 	ut_assertok(run_commandf("mbr verify mmc 6"));
- 	ut_assert_nextline("MBR: verify success!");
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
- 	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
- 	ut_assertok(ut_check_console_end(uts));
-@@ -375,7 +377,7 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	000001e0  06 01 0e 66 25 01 00 50  00 00 00 08 00 00 00 00  |...f%..P........|
- 	000001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa  |..............U.|
- 	*/
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
- 	for (unsigned i = 0; i < mbr_cmp_size; i++) {
- 		ut_assertf(rbuf[mbr_cmp_start + i] == mbr_parts_ref_p3[i],
-@@ -387,11 +389,11 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	init_write_buffers(mbr_wbuf, sizeof(mbr_wbuf), ebr_wbuf, sizeof(ebr_wbuf), __LINE__);
- 	ut_assertok(build_mbr_parts(mbr_parts_buf, sizeof(mbr_parts_buf), 4));
- 	ut_assertok(run_commandf("write mmc 6:0 %lx 0 1", mbr_wa));
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
- 	ut_assertok(memcmp(mbr_wbuf, rbuf, BLKSZ));
- 	ut_assertok(run_commandf("write mmc 6:0 %lx %lx 1", ebr_wa, ebr_blk));
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
- 	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
- 	ut_assertok(console_record_reset_enable());
-@@ -400,7 +402,7 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	ut_assert_nextline("MBR: write success!");
- 	ut_assertok(run_commandf("mbr verify mmc 6"));
- 	ut_assert_nextline("MBR: verify success!");
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
- 	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
- 	ut_assertok(ut_check_console_end(uts));
-@@ -411,7 +413,7 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	000001e0  06 01 0e 66 25 01 00 50  00 00 00 08 00 00 00 66  |...f%..P.......f|
- 	000001f0  26 01 0e 87 06 01 00 58  00 00 00 08 00 00 55 aa  |&......X......U.|
- 	*/
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
- 	for (unsigned i = 0; i < mbr_cmp_size; i++) {
- 		ut_assertf(rbuf[mbr_cmp_start + i] == mbr_parts_ref_p4[i],
-@@ -423,11 +425,11 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	init_write_buffers(mbr_wbuf, sizeof(mbr_wbuf), ebr_wbuf, sizeof(ebr_wbuf), __LINE__);
- 	ut_assertok(build_mbr_parts(mbr_parts_buf, sizeof(mbr_parts_buf), 5));
- 	ut_assertok(run_commandf("write mmc 6:0 %lx 0 1", mbr_wa));
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
- 	ut_assertok(memcmp(mbr_wbuf, rbuf, BLKSZ));
- 	ut_assertok(run_commandf("write mmc 6:0 %lx %lx 1", ebr_wa, ebr_blk));
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
- 	ut_assertok(memcmp(ebr_wbuf, rbuf, BLKSZ));
- 	ut_assertok(console_record_reset_enable());
-@@ -444,7 +446,7 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	000001e0  06 01 0e 66 25 01 00 50  00 00 00 08 00 00 00 66  |...f%..P.......f|
- 	000001f0  26 01 05 a7 26 01 00 58  00 00 00 10 00 00 55 aa  |&...&..X......U.|
- 	*/
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx 0 1", ra));
- 	for (unsigned i = 0; i < mbr_cmp_size; i++) {
- 		ut_assertf(rbuf[mbr_cmp_start + i] == mbr_parts_ref_p5[i],
-@@ -458,7 +460,7 @@ static int mbr_test_run(struct unit_test_state *uts)
- 	00b001e0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
- 	00b001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa  |..............U.|
- 	*/
--	memset(rbuf, 0, sizeof(rbuf));
-+	memset(rbuf, '\0', BLKSZ);
- 	ut_assertok(run_commandf("read mmc 6:0 %lx %lx 1", ra, ebr_blk));
- 	for (unsigned i = 0; i < ebr_cmp_size; i++) {
- 		ut_assertf(rbuf[ebr_cmp_start + i] == ebr_parts_ref_p5[i],
--- 
-2.34.1
+--=20
+Tom
 
+--zVvbS5G4hy72K06j
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAma+ZHMACgkQFHw5/5Y0
+tywwQwv+KeS3Vg6LJWLWpwJ+q6WYjZAo8HJEpWzIK/J3kyKZvIsj8koG7otZCMGP
+kHonTq6hzEDkNDqvtrR6+7DByUCX9Nmp+NPWtT62PcPd//66UDpFvaWmRbkSZT4u
++nT0g1VhXyPBR47M340+XOVXD+CQ+SrepiMw5dCjOSCxyAYGR+D9nbi4d91RPnHn
+7TA9PcIxNxf9SbBlGp96H32dNDBQunyfgfV4SwsVlBlDY4qvIrSKdcj+aslw8Rzy
+laGxi+S0GGuMLK6G67i/4o6OG3b7PevK4/Gbrz6nT+bXfvJEi0aMALNf4ZxxdYjg
+INy/AkmDg46stYv0pZRB9tHu0vEP+TY+QB2Cuz/czCTEHem7HwiSkKY1hqxS/3mc
+E+iDkuhmtHa0dXTZNEIaWd4WGGBqsUb/H9p0ZrfUziFJJhZUMf/Qll2T5gcJtLOX
+YLCi5+88Gf/UoU1xnR2Vedmgw/9T1DP6rY6WePNFpeSLzII+bzX9MvOWRIjhbHIr
+uDe2HUIo
+=iO5k
+-----END PGP SIGNATURE-----
+
+--zVvbS5G4hy72K06j--
