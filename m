@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EB8BC3DA7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:25:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3031BC52D7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:25:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D180C88B06;
-	Thu, 15 Aug 2024 22:24:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4370D88AB6;
+	Thu, 15 Aug 2024 22:24:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FsMPqwNK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HHVTK8aF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2741B88AE8; Thu, 15 Aug 2024 22:24:45 +0200 (CEST)
-Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
- [IPv6:2607:f8b0:4864:20::133])
+ id 6927488AE8; Thu, 15 Aug 2024 22:24:45 +0200 (CEST)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BF9788ABA
+ by phobos.denx.de (Postfix) with ESMTPS id 1647A88AB6
  for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:24:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-396e2d21812so5372975ab.2
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-39d20c4be2eso3499545ab.1
  for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:24:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1723753473; x=1724358273; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bcP6BtqafScc0NdTztSLCjfNhuuO7jN51LuoNSQ0VeE=;
- b=FsMPqwNKRdIbuWUaHrK/WMjCpd9HAltRJBhpNqWEoD9ZRLcMExb4M6tKpAPCDdeAnC
- hNyJuQqCr0aeVCBqXAxuo+reH0EClZm5yEnqV4J0588/qb9lg0uLw26bChye0D6j854e
- 5ng1in2K1DQybzjF3398TrvDSK8OE54bh62wM=
+ bh=6J+3K1D32XFzIlqKv8IxwxtO9z9dD+tWb033XYnecns=;
+ b=HHVTK8aFEuwzjyGNFdsPVvblWvn9RkKTdhM6iRzLV1SFMfRSXBBEazFux2PWePGap7
+ /kMYeqOuqm0o/G1YtbuOz2bc/xpAcm+LQzocZLObEVenNoOFLX0FKJvDoCeRG2IYCaOE
+ /lZIg6nlFvSdsdqab1w7ausXTNNsr9RjkU4p4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1723753473; x=1724358273;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bcP6BtqafScc0NdTztSLCjfNhuuO7jN51LuoNSQ0VeE=;
- b=P00xe0cvkgcrIwujFWuyNzp9Ki9geiTtHkvXK6Nv2+1XtEv56lC2qgCFqMWM79D09Q
- 1sRd0REy66HDM/xcZf+lalmfK8i3CjkGJhbGLPoe3BcWdcW4awQC5rUIA+B4uchsWVrM
- smrswcpj5U3txq3anGvorgrOwwSgV7UL/bvJRP8vPRhpPXbUyMsoeURW50+Abv/ADyG2
- QHUx6XMF8ewhrtsdVgjo8/2R3+MdJoxPPh3kSjZ2HZITctXa/PqnFzfAgI5vAFa6r0Is
- bGRYcpV2V1W/1gqvW+06DsEfrCOD4frVAjjgIrfe6J2eFrIY2KWWRhim7vs7bDWf3qsh
- iruQ==
-X-Gm-Message-State: AOJu0YwbZpjhTwObQNnGGDVkPFR6YEUQrd4tWTgqfuo2duKA4kn7aIUo
- tscRcFvPDwbM0XoTmFbui6J28019GD3TI8JL9yKWkcHCUeDreU/y5aF/h0fk4zlQmnRh3HieGbb
- oXA==
-X-Google-Smtp-Source: AGHT+IEaby10u4nn1ioHJXr/yb6OVHEKdnJrqmdX2nG8CkTKGukrEXm1Hj6lm2ujzQxJ2vm6EWuVhA==
-X-Received: by 2002:a05:6e02:1e08:b0:397:a41d:aa8e with SMTP id
- e9e14a558f8ab-39d26c42d03mr16151625ab.0.1723753473550; 
- Thu, 15 Aug 2024 13:24:33 -0700 (PDT)
+ bh=6J+3K1D32XFzIlqKv8IxwxtO9z9dD+tWb033XYnecns=;
+ b=PqbRIVSFNuHBHMA0aqgdphq8lwdceTsxbEnJoXxCEgEWoT+d+QS3oyPcOwaAlHRTYq
+ aAsC7T/RTKfrxdLvhSDhPrizPqoNygSdjqVrBbk6u/FiPeUfIpvUdqFe58kjOoNDLmLY
+ 96hViJWcZZLvR4sqtnmR99VGDJ8AkXPuxlpC1Z9amjPAF9aMjTEXgjGY2paOpr/pJDAi
+ BCrxrAjqdEo00G6AVX1vjINxkfSiJAG9g1UsPhc2FQz7zaE0EC6h0vL3xEYNLs/M7qQ7
+ pEPTsNkjLg3zVaWjTi4MrFmLuSgY3h5gaELIKn5uThOaJYaZ/MBadKxjF5VeYSsNZnw5
+ D0hA==
+X-Gm-Message-State: AOJu0YyvR1T2FPCVriAnqP1waFJngWJmsngKUO6jNrWyXl1nCRaPyqnO
+ YRxXv5hBL5kIsqEJylqVrE8lyOSfkQJ39cv3WZu7cl3HcMMtliNyJ6WwpxXzo9rRJ/YHniehLLg
+ 5+A==
+X-Google-Smtp-Source: AGHT+IFPXVSUfZBpsenIkUIbFNzcyEM675Rk8vX0aq+oXNTRHx5KrBVvUP/gnzyZ79y+bbO9+QrVMg==
+X-Received: by 2002:a05:6e02:1c29:b0:398:3b82:4ac8 with SMTP id
+ e9e14a558f8ab-39d26d74544mr12333445ab.24.1723753472805; 
+ Thu, 15 Aug 2024 13:24:32 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39d1ead5597sm8144915ab.7.2024.08.15.13.24.33
+ e9e14a558f8ab-39d1ead5597sm8144915ab.7.2024.08.15.13.24.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Aug 2024 13:24:33 -0700 (PDT)
+ Thu, 15 Aug 2024 13:24:32 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4 07/14] efi_loader: Show the vendor in helloworld
-Date: Thu, 15 Aug 2024 14:24:17 -0600
-Message-Id: <20240815202424.766778-8-sjg@chromium.org>
+Subject: [PATCH v4 06/14] efi_loader: Shorten the app rules further
+Date: Thu, 15 Aug 2024 14:24:16 -0600
+Message-Id: <20240815202424.766778-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240815202424.766778-1-sjg@chromium.org>
 References: <20240815202424.766778-1-sjg@chromium.org>
@@ -90,35 +90,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Show the vendor name so it is clear which firmware is being used, e.g.
-whether U-Boot is providing the boot services.
+Add a way to factor out the CFLAGS changes for each app, since they are
+all the same.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- Reword commit message
-- Use 'Firmware vendor' instead of just 'Vendor'
+ lib/efi_loader/Makefile | 15 +++++----------
+ 1 file changed, 5 insertions(+), 10 deletions(-)
 
- lib/efi_loader/helloworld.c | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/lib/efi_loader/helloworld.c b/lib/efi_loader/helloworld.c
-index 586177de0c8..c4d2afcb40a 100644
---- a/lib/efi_loader/helloworld.c
-+++ b/lib/efi_loader/helloworld.c
-@@ -237,6 +237,9 @@ efi_status_t EFIAPI efi_main(efi_handle_t handle,
- 			(con_out, u"Missing device path for device handle\r\n");
- 		goto out;
- 	}
-+	con_out->output_string(con_out, u"Firmware vendor: ");
-+	con_out->output_string(con_out, systab->fw_vendor);
-+	con_out->output_string(con_out, u"\n");
- 	con_out->output_string(con_out, u"Boot device: ");
- 	ret = print_device_path(device_path, device_path_to_text);
- 	if (ret != EFI_SUCCESS)
+diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+index 660368b9d8f..00d18966f9e 100644
+--- a/lib/efi_loader/Makefile
++++ b/lib/efi_loader/Makefile
+@@ -11,16 +11,6 @@ asflags-y += -I.
+ CFLAGS_efi_boottime.o += \
+   -DFW_VERSION="0x$(VERSION)" \
+   -DFW_PATCHLEVEL="0x$(PATCHLEVEL)"
+-CFLAGS_boothart.o := $(CFLAGS_EFI) -Os -ffreestanding
+-CFLAGS_REMOVE_boothart.o := $(CFLAGS_NON_EFI)
+-CFLAGS_helloworld.o := $(CFLAGS_EFI) -Os -ffreestanding
+-CFLAGS_REMOVE_helloworld.o := $(CFLAGS_NON_EFI)
+-CFLAGS_smbiosdump.o := $(CFLAGS_EFI) -Os -ffreestanding
+-CFLAGS_REMOVE_smbiosdump.o := $(CFLAGS_NON_EFI)
+-CFLAGS_dtbdump.o := $(CFLAGS_EFI) -Os -ffreestanding
+-CFLAGS_REMOVE_dtbdump.o := $(CFLAGS_NON_EFI)
+-CFLAGS_initrddump.o := $(CFLAGS_EFI) -Os -ffreestanding
+-CFLAGS_REMOVE_initrddump.o := $(CFLAGS_NON_EFI)
+ 
+ # These are the apps that are built
+ apps-$(CONFIG_RISCV) += boothart
+@@ -80,5 +70,10 @@ obj-$(CONFIG_EFI_ECPT) += efi_conformance.o
+ EFI_VAR_SEED_FILE := $(subst $\",,$(CONFIG_EFI_VAR_SEED_FILE))
+ $(obj)/efi_var_seed.o: $(srctree)/$(EFI_VAR_SEED_FILE)
+ 
++# Set the C flags to add and remove for each app
++$(foreach f,$(apps-y),\
++	$(eval CFLAGS_$(f).o := $(CFLAGS_EFI) -Os -ffreestanding)\
++	$(eval CFLAGS_REMOVE_$(f).o := $(CFLAGS_NON_EFI)))
++
+ always += $(foreach f,$(apps-y),$(f).efi)
+ targets += $(foreach f,$(apps-y),$(f).o)
 -- 
 2.34.1
 
