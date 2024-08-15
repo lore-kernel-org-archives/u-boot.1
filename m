@@ -4,50 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE7DEC3DA7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 08:10:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CCF4C3DA7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 08:24:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF70188A29;
-	Thu, 15 Aug 2024 10:10:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5F5A588A16;
+	Thu, 15 Aug 2024 10:24:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1723709405;
-	bh=efJO5G58F0gEctwu3FgAMvIyEfS59IkqA2cUjzguJFA=;
+	s=phobos-20191101; t=1723710277;
+	bh=75GRQ8E8S/GcKsZaCsttoWWjk7OzCFbNQN2p0SMa5p8=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=skn8pHttEfyNeR63UA30jmUg0YJl62of0xppKeroVYI4xp48lEcEpvMackpm4Yb29
-	 pNDKvL+Rd39Ct9cf5YoHlpi2aqDK89RtQnyl79FpJEzkwPV4wKbuLqm7qhG/7tYYzz
-	 gCB0N2ZKMe/sECt2PgshI70RWOXruEAGc56wm1NSkvCPjaFc/WF/6xHbXNYGd5b0g+
-	 CXKE/jUertlrs3c4WSZ6q5O+LB61zYW+6IvfWzslmuBK8gGmjdD4hHAnTn23oJGPb2
-	 e2Yh9iW9txqdz9CecNST5o6HkSDKmkx9MpMW90seGFUgDlJDbRx2KB/5+DiMNP0ykN
-	 qo8xgOBUf+luw==
+	b=zGyoFNrkVkk1js1EHPsjS0mG9rggM21IwxAwHly9uFQ0e7q+stnelZLMYecqVsK+C
+	 WLITdx5oGO/g46ZVa62he58KJTSMTxd5StWIpidkvzk4HpzJp9WLNOQWI7hsGUJzhN
+	 jpwaf5Z1bsgJcJ4E8HmJ4Yi9PrpZ1ZH3pPgjGIvb18ldzYs++bkiiKMOHofyXdmzjg
+	 W87CLDEZFrRSrZqhgthYqjlqJ59cXUj7IpUtuURacvWbPPsSZ+gT+KBPNcq+L1rRI7
+	 LsoMQ/8zMRJja/5FRA6d7LOyb+g1a9Ld3cWoR6BW4QSoW0fXkZL8hsi1wZgOqc1ySt
+	 +ZayBsMOahZBg==
 Received: from localhost.localdomain (85-222-111-42.dynamic.chello.pl
  [85.222.111.42])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E4D36889C9;
- Thu, 15 Aug 2024 10:10:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 233B2889C9;
+ Thu, 15 Aug 2024 10:24:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1723709405;
- bh=efJO5G58F0gEctwu3FgAMvIyEfS59IkqA2cUjzguJFA=;
+ s=phobos-20191101; t=1723710275;
+ bh=75GRQ8E8S/GcKsZaCsttoWWjk7OzCFbNQN2p0SMa5p8=;
  h=From:To:Cc:Subject:Date:From;
- b=YBqXM+9D6aG+ShLXR/f5sXzlMxF+AZfh0AdbFe27gV4Dhf2KcRXJZM4SQCjM3jN8w
- ze7riMQN6LhfiHVr06HRZNgKIyVNGxbaoDH6ru1jA81XsDA+09tkCnyRo6HCj3M0r/
- ULKPrk3mtIyB9h3rg2A2YDIWIamK044yMN0wFBNww5DKrPHyoBKJYlBTsEzYcz3Ve2
- lhQA64Y2c7lWBYzQVL8/zYROI+X9uxkrMTcNW+G3PtYTJxu7bWUaKBcu8vfkS4eEWG
- INBmNLLmTkhCgMoN9y2ucdSbKttRts9A1OcsZ7HhYGRQdqWK3U2SxXtug/uj1jMsOo
- tsvNbCBn0b5+g==
+ b=mFJ9GvmV454I/84tMzgy3wIK+sIetdK7aK1cwGapPOuFgVdu8xJtmazoDpDfoXwG3
+ KcaeXkzgni5QSnRbp1A3hqI8XOdsQ8FzdR5B429tzGXrJF+NMRW4//eh/FYsayl5Yc
+ flj+6sKavyTfxw1zmImbAwI017/Krsvj6d+5MgariXnihl0fmu6hg8x2OwVGmayJrf
+ UxH6E3AxxrHamwj7zrofnbm81Dz2hnHUr6hoeW7O1yKMPZHHXWrBEIobqa/MNz2nVC
+ fEjWAkDlTw/VQjZuQZIZFVvD86SAnmARY4ulWAy42W33nLLuof2r/eD4VIuenZRM2k
+ OG5xmUXZqRNoA==
 From: Lukasz Majewski <lukma@denx.de>
-To: Teresa Remmet <t.remmet@phytec.de>
-Cc: Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+To: Teresa Remmet <t.remmet@phytec.de>, Stefano Babic <sbabic@denx.de>,
+ Fabio Estevam <festevam@gmail.com>
+Cc: uboot-imx@nxp.com, Cem Tenruh <c.tenruh@phytec.de>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
  Lukasz Majewski <lukma@denx.de>
-Subject: [PATCH] config: imx: Define CFG_SYS_UBOOT_BASE for Phytec's imx8mm
- SoM QSPI boot
-Date: Thu, 15 Aug 2024 10:09:48 +0200
-Message-Id: <20240815080948.457524-1-lukma@denx.de>
+Subject: [PATCH] dts: imx: Enable USB support in
+ imx8mm-phyboard-polis-rdk-u-boot.dtsi
+Date: Thu, 15 Aug 2024 10:24:22 +0200
+Message-Id: <20240815082422.470790-1-lukma@denx.de>
 X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -67,37 +68,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The image offset when booting from SPI-NOR (QSPI, FSPI driver) is
-different than one for SD card / eMMC as extra space (0x1000) is consumed
-by FSPI configuration header (CONFIG_FSPI_CONF_HEADER).
+The Phytec's imx8mm-phyboard-polis-rdk-u-boot.dtsi u-boot specific file
+can be extended to support SDP gadget operation in SPL.
+
+It is especially useful when one wants to flash the module via USB with
+uuu program (USB ROM booting enabled).
 
 Signed-off-by: Lukasz Majewski <lukma@denx.de>
 ---
- include/configs/phycore_imx8mm.h | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ arch/arm/dts/imx8mm-phyboard-polis-rdk-u-boot.dtsi | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/include/configs/phycore_imx8mm.h b/include/configs/phycore_imx8mm.h
-index 0910ae2d87..92c30022a8 100644
---- a/include/configs/phycore_imx8mm.h
-+++ b/include/configs/phycore_imx8mm.h
-@@ -11,8 +11,17 @@
- #include <linux/stringify.h>
- #include <asm/arch/imx-regs.h>
+diff --git a/arch/arm/dts/imx8mm-phyboard-polis-rdk-u-boot.dtsi b/arch/arm/dts/imx8mm-phyboard-polis-rdk-u-boot.dtsi
+index 516e52e1f5..4d452d6006 100644
+--- a/arch/arm/dts/imx8mm-phyboard-polis-rdk-u-boot.dtsi
++++ b/arch/arm/dts/imx8mm-phyboard-polis-rdk-u-boot.dtsi
+@@ -34,6 +34,18 @@
+ 	bootph-pre-ram;
+ };
  
-+#define UBOOT_ITB_OFFSET			0x57C00
-+#define FSPI_CONF_BLOCK_SIZE		0x1000
-+#define UBOOT_ITB_OFFSET_FSPI  \
-+	(UBOOT_ITB_OFFSET + FSPI_CONF_BLOCK_SIZE)
-+#ifdef CONFIG_FSPI_CONF_HEADER
-+#define CFG_SYS_UBOOT_BASE  \
-+	(QSPI0_AMBA_BASE + UBOOT_ITB_OFFSET_FSPI)
-+#else
- #define CFG_SYS_UBOOT_BASE \
- 		(QSPI0_AMBA_BASE + CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR * 512)
-+#endif
- 
- #ifdef CONFIG_SPL_BUILD
- /* malloc f used before GD_FLG_FULL_MALLOC_INIT set */
++&usbmisc1 {
++	bootph-pre-ram;
++};
++
++&usbotg1 {
++	bootph-pre-ram;
++};
++
++&usbphynop1 {
++	bootph-pre-ram;
++};
++
+ &gpio1 {
+ 	bootph-pre-ram;
+ };
 -- 
 2.39.2
 
