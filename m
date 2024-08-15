@@ -4,77 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C8BBC3DA7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:34:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F19CC3DA7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:34:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA5BF88C07;
-	Thu, 15 Aug 2024 22:33:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3E55788C24;
+	Thu, 15 Aug 2024 22:33:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Gscm/SGT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JmnyKTtd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE2B888C31; Thu, 15 Aug 2024 22:33:19 +0200 (CEST)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id 4F8C788C31; Thu, 15 Aug 2024 22:33:20 +0200 (CEST)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B12C088BBC
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:33:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2709A88BFF
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:33:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-5d5eec95a74so811718eaf.1
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:33:17 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2d1ecfe88d7so1009885a91.3
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:33:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1723753988; x=1724358788; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=jj3g+FboZ3ybXq/ibxn+QqILLBpCubNkJZce1cA1ccY=;
- b=Gscm/SGT13cczJReYQ3COA29tMgK39Y1t/zwVWUhvFNLABuOBzGei8mp5gveePhcew
- O5AxUAazUtXWlPd3+/GOcZtXm05+zD2JfCwFYjO6IzUpqhhbwLf4B+onjPC4qKCidUFC
- Lbee3aVaeANjAH2lB+x828WfhJJN4elOx4vn4=
+ d=chromium.org; s=google; t=1723753989; x=1724358789; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qdwbv6g6Yf98huaqtU6RLW5BRy59X6I+oCQQUZsDi4M=;
+ b=JmnyKTtdfxEeGJ1yPIdxo1w7KYxlqSGeH70gfk0yGB5MTQeco+cNSnldm7jvAUwkkD
+ mZdlAvfPjZp4DLKDOoQwOv3numXezJAwHHuSWVytBbtPt2nWZXyUt5QzU7LQWvKvm+I5
+ XJmh4USEIM74wyxcL74D3O+b6GG1gJqq+jUdg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723753988; x=1724358788;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1723753989; x=1724358789;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jj3g+FboZ3ybXq/ibxn+QqILLBpCubNkJZce1cA1ccY=;
- b=W5qD+T4cqhyDv9+3zCVszhl74XVjfNnANUaEPMGReZf3jDix+Kw2o8cJOVIeACkbhB
- MXCR1lDVpVsduBLBbrXV68hmZ6rzHP5Erus1cakPBHw2sR7I+/Y+taHvYP5OETwSjKSu
- dtIpQY5xb6KAuKNuVQdg9ZdXae7Qp9DpKd+ZtwNewnoxTdajqTcRnFXHupF7YjawLrNp
- vht1Tz34FhgtQMEcquiNH6jzMbbxKAxBDCPmv5vTBXsYGUuK8iNO58ueRjJLvOeloTeu
- J0MzzLDbwdkJiRLtg89zwDBNwshROIyNMAjAktOecwYXQ4/kJFEjNgJSfHaL/P1lGQ5A
- mktQ==
+ bh=qdwbv6g6Yf98huaqtU6RLW5BRy59X6I+oCQQUZsDi4M=;
+ b=D4gT/aixaKimVShctYs8a9E3xwfJhGoI4CN7Xa34gTvePVyGw4gSDeBe5owBjpujDh
+ CWHwtPxlxBkso+6q92ZsYY4TiXHPo3SiOfXuTN5VlDf3Cz+kXATcsa+Nl67Db48cc85l
+ 2SZHKaG/sEotDpKWglt/WPt2pu6Swo83CA0u1i57TxRndNlDKVe8ZFygtEvl+xvFbzXp
+ bzikfXoftAX6SKnY1XLPlSK/iT/UnsXkbkig2Ihrbyi8zVU0DVwhMO0BkrJKTIBABEsX
+ DrTnSgWR9CL+GUHtqQw8CMgybUzQihIU1OfKwNnh58HATUVHqibDIDZ8JxcmeinjxjmV
+ VohQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWdGfw5/dqIMojtJVL7ohX3gyeTHhIlSBRdNKo6+CQiEKbriyKPHPRgyLQewnRFkwbgLgp+4nk=@lists.denx.de
-X-Gm-Message-State: AOJu0YzHBrzZVZAlNCLx/yaR6qSsbH7cfiEqrsmbAAvfrGdchptDqIHn
- DWkbZNBUVfSTwYm+Y1RTTv8AaPgk2GuCopgvUA7OtYE8OBm5DqT6M12OmNbl1R+dE/1dQjdbwwx
- 0fhg=
-X-Google-Smtp-Source: AGHT+IF97ZMk8cB/7wzToTCa2LiUOmTsPgsuF2MQwaSf2OG9WqvximSGromSJ4X/Zvg36HDKSU9Gvg==
-X-Received: by 2002:a05:6820:6187:b0:5da:9b98:e208 with SMTP id
- 006d021491bc7-5da9b98e4b2mr33851eaf.5.1723753988701; 
- Thu, 15 Aug 2024 13:33:08 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-236.totalplay.net.
- [189.203.97.236]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5da8cdd9dedsm402006eaf.21.2024.08.15.13.33.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Aug 2024 13:33:08 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
- Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20240810135937.4041797-1-seanga2@gmail.com>
-References: <20240810135937.4041797-1-seanga2@gmail.com>
-Subject: Re: [PATCH] pinmux: generic: Use ENOENT instead of ENOSYS
-Message-Id: <172375398802.3490037.5222729105947831065.b4-ty@konsulko.com>
-Date: Thu, 15 Aug 2024 14:33:08 -0600
+ AJvYcCWIw5jMuxMynPGoHNxGaTME7NovzWtrjk6Xrx218DlI+Duh1jHBXNQhTIEHUSupqmNdSFWz1fPh2b2UrlS3ePsEe/J+XA==
+X-Gm-Message-State: AOJu0YyFATnF128VIJW2OmHRC+pU5D8h5iRiuD6Bp2ZAA8i7BLz441mI
+ 7ww7cPsGeeRGj49Or536+H7E2Lowa/isvMG2uAWPb7AX6Lds3Wkp2JcBMrg/EtDmpWcbq24149B
+ +VkNj1AjXqcxosVcuLJrh87FCZoLWnyO+IjTC
+X-Google-Smtp-Source: AGHT+IFXxGu8YTdfdMYziQZgk4eWz4bILJqYdvpztgyqTcjtLZQQbyQBPPFXkI2BLSyq6TLsFgNEgeV/HIHea+P7csM=
+X-Received: by 2002:a17:90a:c28b:b0:2c9:96fc:ac52 with SMTP id
+ 98e67ed59e1d1-2d3dffddd10mr996616a91.26.1723753989190; Thu, 15 Aug 2024
+ 13:33:09 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+References: <20240815082101.15612-1-emil.kronborg@protonmail.com>
+In-Reply-To: <20240815082101.15612-1-emil.kronborg@protonmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 15 Aug 2024 21:32:57 +0100
+Message-ID: <CAFLszTj_qsyRLvkUa-tNPWh0hcVpFWw8CsdLrs-JPNuE=BgGpw@mail.gmail.com>
+Subject: Re: [PATCH v4] doc: document the pwm command
+To: Emil Kronborg <emil.kronborg@protonmail.com>
+Cc: trini@konsulko.com, heinrich.schuchardt@canonical.com, 
+ quentin.schulz@cherry.de, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,17 +86,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 10 Aug 2024 09:59:37 -0400, Sean Anderson wrote:
+On Thu, 15 Aug 2024 at 07:29, Emil Kronborg
+<emil.kronborg@protonmail.com> wrote:
+>
+> Signed-off-by: Emil Kronborg <emil.kronborg@protonmail.com>
+> ---
+> Changes in v4:
+> - Changed license from GPL-2.0+ to GPL-2.0-or-later. Also, removed
+>   trailing colon.
+> - Simplified the descriptions in the Synopsis section by removing the
+>   text following the '-'.
+> - Reformulated the description of the invert subcommand to be more
+>   precise and correct.
+> - %s/duty cycle/duty period to be consistent with pwm.h and to ensure
+>   correctness, as duty cycle is dimensionless and <duty_ns> is given in
+>   nanoseconds.
+> - Moved the common parameters, pwm_dev_num and channel, to the bottom of
+>   the Description section, and added the remaining parameters.
+> - Added a comma in the Examples section and used '=C2=B5s' instead of 'us=
+'.
+> - Rebased on top of master.
+>
+>  doc/usage/cmd/pwm.rst | 91 +++++++++++++++++++++++++++++++++++++++++++
+>  doc/usage/index.rst   |  1 +
+>  2 files changed, 92 insertions(+)
+>  create mode 100644 doc/usage/cmd/pwm.rst
 
-> ENOSYS should only be used when a subsystem is completely absent.
-> Convert its use in pinctrl-generic to ENOENT, which better reflects the
-> error condition (that a function/group/pin is missing).
-> 
-> 
-
-Applied to u-boot/next, thanks!
-
--- 
-Tom
-
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
