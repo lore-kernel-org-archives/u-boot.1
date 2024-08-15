@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D11A9C52D7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:33:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAB80C52D7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:33:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE34088B5D;
-	Thu, 15 Aug 2024 22:32:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5E4C988BCF;
+	Thu, 15 Aug 2024 22:33:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KyjTp4Cs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L5yH3HY4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 279608657F; Thu, 15 Aug 2024 22:32:54 +0200 (CEST)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
+ id B2C968657F; Thu, 15 Aug 2024 22:33:05 +0200 (CEST)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F048188BB8
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:32:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F99288BCF
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:33:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-70b2421471aso1019591a12.0
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:32:51 -0700 (PDT)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-2d3c05dc63eso974524a91.0
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:33:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723753970; x=1724358770; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723753981; x=1724358781; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qANVMzgSC5eB3A5QKkNXsHHgXJ3UJ3QRRlGiJXm8MNs=;
- b=KyjTp4CsKgzYYOsvnAWsnDYoui7szF+aQ6m6W+BuLpMvkDYm/ug4KtFsfVk8LHoFEr
- 1ikXzeMxB5YMO7hnFi6R6G+UJYkCMp76INY4EeZfy9KvjI0EKjGjKtUEUIQhywjeuLdl
- pgi6CC9/3aoVMg7ms2yvpG5drH+W/i0d02Ihg=
+ bh=CAgmFiQqXZJcTN0TejYBV2jDzka/+RDbUgsiS2BE1Jg=;
+ b=L5yH3HY4F6GiormjTdSXk8yzYWNo8ohcLUZosMjx6o5LsywtW6JNrSAcKqtu+zkMB7
+ oeNjqJW9olQCIz5kM8c6dTToreZFlctAcnix6Lk9AMZdO5tqFQ7yTQa/KVKd8f2xlYs1
+ rePhQe2RMaNSt5UjB4Sv51DHph6h2sIMskcIU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723753970; x=1724358770;
+ d=1e100.net; s=20230601; t=1723753981; x=1724358781;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qANVMzgSC5eB3A5QKkNXsHHgXJ3UJ3QRRlGiJXm8MNs=;
- b=mx8phZK2LRidcUBqt6HXo5Wh1jqXGXcbkd+U849erZHqVlZ6iIR9M1TJoXYEStvluj
- 8Dbrnq7BVa5e65YtTA0fpyTzZEZTBnxwS5MLfZPJ7RP/Qk1+UTKHEfOvaoC1PhWEm9QV
- i06TDMEN1kXergVsK+3E4OJynsQ2wPA5cWyA0SSf/ttUCyXAcnnRvTa5wBlv+3+p1NP+
- VLUcb9G5PSGi1Kgei/nbmD4Lzx0R74O15U4UjPO41ux6RQP0YJwSVguEAOGqfG0tcydX
- mOqmV+Eufmn5jhfoLh/NKrX/HLNyYidmfxCSagfULlxVo2N3i2Zb0jq9yq/PLvU8x/Ld
- Y+cg==
-X-Gm-Message-State: AOJu0Yzqkj5hkZAe0U8OtRoSwQFesoj0pYydbflsuxiIW5F7pR6I1pAT
- 0ArvjpNjejpeQeO1Iq8qL2X/WlCgSWHmBGppBQmn0ZPk3C5kTPKVgzfggF1JSVCRvmZkX0L7VIV
- LX30msOhpagqfkRpJOgUUWla8N9EkcyT7i6LH
-X-Google-Smtp-Source: AGHT+IERc3mYM96OEPd2ZIaI2MjdsXtrfZvrGtFNvgGLjAnuYvnz8q1H7RpkShvzj2VL1oONw01XfgeENgi4Sb0Ir2g=
-X-Received: by 2002:a17:90b:238d:b0:2c8:da73:af82 with SMTP id
- 98e67ed59e1d1-2d3dfc6b665mr1017300a91.10.1723753969929; Thu, 15 Aug 2024
- 13:32:49 -0700 (PDT)
+ bh=CAgmFiQqXZJcTN0TejYBV2jDzka/+RDbUgsiS2BE1Jg=;
+ b=cZvGSbC39iRKW5bqiVkPPB4cH2coaYPaomLPZDTIf6vPORgfA+iStcPfQPOeTabJ1G
+ XVEstMxsKs/ZakO7svFz4TkYDqiKE2hexmAW/5/mpcQLq8/XcAz9bWrDronpuGmOrkyF
+ HlN4OQMb71XRydHrf8KrnaCEtitRMtVUFpfruQKbHOiyMyxikIL2IOURqJQFIvRg1XrR
+ 0TUgMYnDmO4xVQzvDD9mcox1UYtqruOHObIREiCRL/SnNnSSEuS9v4W4GT+jAcylZ1dI
+ 9B2v1rJyHR1ncYC3sOPZId6dkOKHV2763bwgdiAytVGXv3iiyC7un2s0eU2d38ctjpXl
+ X3cg==
+X-Gm-Message-State: AOJu0Yx++qLzHU5aikUah0vcvxKuVSqnHSc7DtzgVGSCj1We+B2hcgxq
+ fv06EGwOItleUKE2T392ixGKWVPwRK8WXPivjWUkdscR0MgkJtKRHP0RlkPJcnDnD9kE7ESOHlc
+ u6GvDr+LeE8Z2UAhOBcoe5s8d1GrISeEGh3rq
+X-Google-Smtp-Source: AGHT+IEiHVCJ9p4+2xqr4TT6ceA0ZqTpMk+/TjNhmjBvjIvbp4VKoP78+BPrU8ze+QekbswnsR4sCewHARb4JwihYQA=
+X-Received: by 2002:a17:90a:ad83:b0:2d0:d82:60ae with SMTP id
+ 98e67ed59e1d1-2d3e04007f5mr933279a91.37.1723753981336; Thu, 15 Aug 2024
+ 13:33:01 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
- <20240814110009.45310-31-sughosh.ganu@linaro.org>
-In-Reply-To: <20240814110009.45310-31-sughosh.ganu@linaro.org>
+ <20240814110009.45310-33-sughosh.ganu@linaro.org>
+In-Reply-To: <20240814110009.45310-33-sughosh.ganu@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 15 Aug 2024 21:32:39 +0100
-Message-ID: <CAFLszTgythBDnSSE+bx=xZzp-UFkCASnU_Lo1m8X6F4aE31eyg@mail.gmail.com>
-Subject: Re: [PATCH v2 30/32] sandbox: adjust load address of couple of tests
+Date: Thu, 15 Aug 2024 21:32:49 +0100
+Message-ID: <CAFLszTigDtzrLWzVfrVmq_Uet_GRoQWq7YVQcgerpk8XAT8BvQ@mail.gmail.com>
+Subject: Re: [PATCH v2 32/32] lmb: add logic to print lmb flag strings
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
@@ -95,49 +95,79 @@ Hi Sughosh,
 
 On Wed, 14 Aug 2024 at 05:03, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> The TCG event log has now been moved to the start of the memory, and
-> occupies 8KB of memory. Make a corresponding change to the load
-> address in a couple of tests so that it does not overlap with the TCG
-> event log.
+> Instead of printing the LMB flags as numerical values, print them as
+> strings. This makes it easier to understand what flags are associated
+> with the lmb region. Also make corresponding changes to the bdinfo
+> command's test code.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
-> Changes since V1: None
+> Changes since V1: New patch
 >
->  test/py/tests/test_android/test_abootimg.py | 2 +-
->  test/py/tests/test_vbe.py                   | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
+>  lib/lmb.c         | 18 ++++++++++++++++--
+>  test/cmd/bdinfo.c |  4 ++--
+>  2 files changed, 18 insertions(+), 4 deletions(-)
 
-This is a pain...can we put the TCG high in memory for now, until I do
-a patch to move it to the bloblist?
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+But see below
 
 >
-> diff --git a/test/py/tests/test_android/test_abootimg.py b/test/py/tests/test_android/test_abootimg.py
-> index 6a8ff34538..bf6a19fe4f 100644
-> --- a/test/py/tests/test_android/test_abootimg.py
-> +++ b/test/py/tests/test_android/test_abootimg.py
-> @@ -90,7 +90,7 @@ dtb_dump_resp="""## DTB area contents (concat format):
->            (DTB)model = x2
->       (DTB)compatible = y2,z2"""
->  # Address in RAM where to load the boot image ('abootimg' looks in $loadaddr)
-> -loadaddr = 0x1000
-> +loadaddr = 0x4000
->  # Address in RAM where to load the vendor boot image ('abootimg' looks in $vloadaddr)
->  vloadaddr= 0x10000
->  # Expected DTB #1 offset from the boot image start address
-> diff --git a/test/py/tests/test_vbe.py b/test/py/tests/test_vbe.py
-> index 50b6c1cd91..edeb655c6f 100644
-> --- a/test/py/tests/test_vbe.py
-> +++ b/test/py/tests/test_vbe.py
-> @@ -97,7 +97,7 @@ def test_vbe(u_boot_console):
->      fdt_out = fit_util.make_fname(cons, 'fdt-out.dtb')
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index 37d2a72951..5c5b3e9bb5 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -26,6 +26,19 @@ DECLARE_GLOBAL_DATA_PTR;
 >
->      params = {
-> -        'fit_addr' : 0x1000,
-> +        'fit_addr' : 0x4000,
+>  static struct lmb lmb;
 >
->          'kernel' : kernel,
+> +static void print_region_flags(enum lmb_flags flags)
+> +{
+> +       uint64_t bitpos;
+> +       const char *flag_str[] = { "LMB_NONE", "LMB_NOMAP", "LMB_NOOVERWRITE" };
+
+As mentioned, LMB_NONE shouldn't be a flag. For the other two, how
+about "no-map" and "no-overwrite"?
+
+> +
+> +       do {
+> +               bitpos = fls(flags) - 1;
+> +               printf("%s", flag_str[bitpos]);
+> +               flags &= ~(1ull << bitpos);
+> +               flags ? puts(", ") : puts("\n");
+> +       } while (flags);
+> +}
+> +
+>  static void lmb_dump_region(struct alist *lmb_rgn_lst, char *name)
+>  {
+>         struct lmb_region *rgn = lmb_rgn_lst->data;
+> @@ -41,8 +54,9 @@ static void lmb_dump_region(struct alist *lmb_rgn_lst, char *name)
+>                 end = base + size - 1;
+>                 flags = rgn[i].flags;
 >
+> -               printf(" %s[%d]\t[0x%llx-0x%llx], 0x%08llx bytes flags: %x\n",
+> -                      name, i, base, end, size, flags);
+> +               printf(" %s[%d]\t[0x%llx-0x%llx], 0x%08llx bytes flags: ",
+> +                      name, i, base, end, size);
+> +               print_region_flags(flags);
+>         }
+>  }
+>
+> diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
+> index 7dd3f7ca5b..887defc28a 100644
+> --- a/test/cmd/bdinfo.c
+> +++ b/test/cmd/bdinfo.c
+> @@ -120,8 +120,8 @@ static int lmb_test_dump_region(struct unit_test_state *uts,
+>                         ut_assert_nextlinen(" %s[%d]\t[", name, i);
+>                         continue;
+>                 }
+> -               ut_assert_nextline(" %s[%d]\t[0x%llx-0x%llx], 0x%08llx bytes flags: %x",
+> -                                  name, i, base, end, size, flags);
+> +               ut_assert_nextlinen(" %s[%d]\t[0x%llx-0x%llx], 0x%08llx bytes flags: ",
+> +                                  name, i, base, end, size);
+>         }
+>
+>         return 0;
 > --
 > 2.34.1
 >
