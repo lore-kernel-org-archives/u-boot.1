@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53BF8C3DA7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:37:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A40D0C52D7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:37:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 562E888C0B;
-	Thu, 15 Aug 2024 22:34:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BBA8A88C82;
+	Thu, 15 Aug 2024 22:34:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="T1qBRReH";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m/Gggz1m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EE0788C69; Thu, 15 Aug 2024 22:34:33 +0200 (CEST)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
+ id 953E988107; Thu, 15 Aug 2024 22:34:37 +0200 (CEST)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4856988C6A
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:34:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5ED6988C6E
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:34:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2d1fe3754f4so999949a91.1
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:34:29 -0700 (PDT)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2d3c396787cso979940a91.1
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:34:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723754066; x=1724358866; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723754073; x=1724358873; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7GaXejhIViWG86G8BA4gzqrdcAVomcw2QLw/XHaGKWs=;
- b=T1qBRReH4Y6uud1BFqwZ2jkCLdm7Yints0g/o3fCvilr8GqBuZWPaM5sI075MvEecg
- nLOh20ydQa/7RC+jqu4f0FxdzLE0ddvmuliXIBEI/vbjVxXO57+4Bc4mZ0XT4rmlKub+
- WTY7cR6mXN4IqNihHl6K0Tv6fplu35at+JQPI=
+ bh=+r9j+Dpn6tu2OvfENxzQwDP5SPSs7XOy4QOmrh7joUg=;
+ b=m/Gggz1mqtibX9PaSDTqYueTpGhhWPjfM+Ke4kIhTXcO59NKiuxOsp4aolAkra7iy1
+ MkA/tREUl0ITnDfhIBSn0vmKS4XiVFu/eaDeW6ZcO+ZLn31cRwehlBy3hxpAthbCK5sP
+ z6DdG79iJTVgThfWXX6VbvOPM3Q2iEnJF/d5Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723754066; x=1724358866;
+ d=1e100.net; s=20230601; t=1723754073; x=1724358873;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=7GaXejhIViWG86G8BA4gzqrdcAVomcw2QLw/XHaGKWs=;
- b=bFHis5o2rNhO3Q1Cgf0442UYS37Ahn3DLK/NfztyAI3RPuJNbSZKnRkPIXya0ghdmP
- 4P/SobWurAMcUqecnO88PS9HxTimI8jv8555JxeKJlA2wjMhqFwGQNiPeAikxhkjHW1K
- Qmr0YY2Wz0UAtfPphz6jwLyFh1Ze0YVEnWjalIlXQPCK7CF2phXYIu7X0k96psH1Lrvc
- 64V23lw+ivZbyeN+I8qzNk4ha3wmCQ4dpE+L+ietICaAAclk70LmW6eAgi+lbqvj5US5
- VISBtx1K5PQ+2xEhApeMzI+j4V66a4cLOcJ40Gk48G4fvHAav4sGCQPTprfMgdFHMY6b
- Btng==
-X-Gm-Message-State: AOJu0YzKoBVFcFNyaM1WOsasS52u9UNVd4s4e82XYbECX/WqVu8MTXBh
- og57YLZYzzALbvvN6ZHUldeeEGhe73O/VOmzI8rBI/KpTApBhuYR6TGNKyVv7Wabr89D8hlOdHw
- leKnd/PlOGfWwHP/lEuRx2vfpnxDdLpJtJl+e
-X-Google-Smtp-Source: AGHT+IEx1D9PJb+hJcD24EUwce4GK/f4B6mvlH1J9tWfs6X20gJkSgIpeq/vkNA3QwmeUaR3PcytahSXbluScPC8aX0=
-X-Received: by 2002:a17:90a:c28b:b0:2c9:80fd:a111 with SMTP id
- 98e67ed59e1d1-2d3dfc6c299mr997121a91.18.1723754066363; Thu, 15 Aug 2024
- 13:34:26 -0700 (PDT)
+ bh=+r9j+Dpn6tu2OvfENxzQwDP5SPSs7XOy4QOmrh7joUg=;
+ b=uIG/8TB+3YONfU0hn4hn81plP8vJ4QBq0lnYqH57nZvPgdUAyzq9qOZBqomyQdgkHP
+ 1eXK3TSI2hxcRImOZWrMRqngjYbc5PlRsICphpSGCEstnpIYSEUHIcxt3G98AX8TML5B
+ nS/wlVaaNZHnZWM1Tw4EBX9FSLPLccg5DapQLuZy7YLly3KFeBLldZZcBkMnpVnXBO+Q
+ h0dXvZv0mRoRJuaxubeBjGytaynKSVtb0Dbuv/DgeaboUgdU9QYvT3Fqp0QXpS3XWasd
+ BDgPXNIScKP2cDTymAJ9eOj4U3yFg0gOiNPa9kG0ksD31YhuHA6lwWrNlTr1Dgb+ovMl
+ jYSQ==
+X-Gm-Message-State: AOJu0YxA401va8S5AgTNsFdmP0RZDS82okoITFsNalFJzzvK4kcK+eN5
+ JHfVahKZw3pywtPDQ41E6f1eXLFIbaTG2iMkKWayyJ2iGjlC0KGtBnQkZPbGC6S3AKJHIyOOrtX
+ Q8FYBnaB9c2CB6jUDla8L9xyDC4+kXVRNbfYz
+X-Google-Smtp-Source: AGHT+IGdS3ssj0sTd5f5lpSs43TuYvFheNnECuDOwf057C6lnf/04HzRHMqWdBndCGSsyFzs1bLl+il2+d2mh71vdGQ=
+X-Received: by 2002:a17:90a:e018:b0:2c9:9f2a:2b20 with SMTP id
+ 98e67ed59e1d1-2d3dfc89089mr1002152a91.22.1723754073556; Thu, 15 Aug 2024
+ 13:34:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
- <20240814110009.45310-30-sughosh.ganu@linaro.org>
-In-Reply-To: <20240814110009.45310-30-sughosh.ganu@linaro.org>
+ <20240814110009.45310-18-sughosh.ganu@linaro.org>
+In-Reply-To: <20240814110009.45310-18-sughosh.ganu@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 15 Aug 2024 21:34:15 +0100
-Message-ID: <CAFLszThpgPcJXpu6uFaLYA4uyiM9t6_s1DfsEp=Mbb_nJec9xQ@mail.gmail.com>
-Subject: Re: [PATCH v2 29/32] test: bdinfo: dump the global LMB memory map
+Date: Thu, 15 Aug 2024 21:34:22 +0100
+Message-ID: <CAFLszThRP1Grj3iM9o-LtQFOXm+xPGovdFo6QMaAKF+RvcrNzg@mail.gmail.com>
+Subject: Re: [PATCH v2 17/32] lmb: init: initialise the lmb data structures
+ during board init
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
@@ -93,24 +94,91 @@ X-Virus-Status: Clean
 
 Hi Sughosh,
 
-On Wed, 14 Aug 2024 at 12:02, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Wed, 14 Aug 2024 at 12:01, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> The LMB code has been changed to make the memory reservations
-> persistent and global. Make corresponding change the the
-> lmb_test_dump_all() function to print the global LMB available and
-> used memory.
+> The memory map maintained by the LMB module is now persistent and
+> global. This memory map is being maintained through the alloced list
+> structure which can be extended at runtime -- there is one list for
+> the available memory, and one for the used memory. Allocate and
+> initialise these lists during the board init.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
 > Changes since V1:
-> * Get the alloced lists through the lmb_get() function.
+> * Move the initr_lmb() function to board_r.c
+> * Call lmb_init() from spl.c instead of initr_lmb().
 >
->  test/cmd/bdinfo.c | 27 +++++++++++++++------------
->  1 file changed, 15 insertions(+), 12 deletions(-)
+>  common/board_r.c | 17 +++++++++++++++++
+>  common/spl/spl.c |  3 +++
+>  2 files changed, 20 insertions(+)
 >
 
-As mentioned elsewhere, since this is an existing test, it should be
-kept working throughout your changes.
+Reviewed-by: Simon Glass <sjg@chromium.org>
+
+nit below
+
+> diff --git a/common/board_r.c b/common/board_r.c
+> index f445803d7a..0943ed3d01 100644
+> --- a/common/board_r.c
+> +++ b/common/board_r.c
+> @@ -22,6 +22,7 @@
+>  #include <hang.h>
+>  #include <image.h>
+>  #include <irq_func.h>
+> +#include <lmb.h>
+>  #include <log.h>
+>  #include <net.h>
+>  #include <asm/cache.h>
+> @@ -510,6 +511,21 @@ int initr_mem(void)
+>  }
+>  #endif
+>
+> +static int initr_lmb(void)
+> +{
+> +#if CONFIG_IS_ENABLED(LMB)
+
+This should use if()
+
+> +       int ret;
+> +
+> +       ret = lmb_init();
+> +       if (ret)
+> +               printf("Unable to initialise the LMB data structures\n");
+> +
+> +       return ret;
+> +#else
+> +       return 0;
+> +#endif
+> +}
+> +
+>  static int dm_announce(void)
+>  {
+>         int device_count;
+> @@ -612,6 +628,7 @@ static init_fnc_t init_sequence_r[] = {
+>  #ifdef CONFIG_CLOCKS
+>         set_cpu_clk_info, /* Setup clock information */
+>  #endif
+> +       initr_lmb,
+>  #ifdef CONFIG_EFI_LOADER
+>         efi_memory_init,
+>  #endif
+> diff --git a/common/spl/spl.c b/common/spl/spl.c
+> index d6a364de6e..4102e25115 100644
+> --- a/common/spl/spl.c
+> +++ b/common/spl/spl.c
+> @@ -723,6 +723,9 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+>             IS_ENABLED(CONFIG_SPL_ATF))
+>                 dram_init_banksize();
+>
+> +       if (IS_ENABLED(CONFIG_SPL_LMB))
+> +               lmb_init();
+> +
+>         if (CONFIG_IS_ENABLED(PCI) && !(gd->flags & GD_FLG_DM_DEAD)) {
+>                 ret = pci_init();
+>                 if (ret)
+> --
+> 2.34.1
+>
 
 Regards,
 Simon
