@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D055C52D7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:30:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E7A9C52D7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:30:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CE6688B9B;
+	by phobos.denx.de (Postfix) with ESMTP id DA21988BBC;
 	Thu, 15 Aug 2024 22:26:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="k2KMBXFb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YpL4ccFN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C5CD88BC8; Thu, 15 Aug 2024 22:26:06 +0200 (CEST)
-Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
- [IPv6:2607:f8b0:4864:20::d2a])
+ id C62FE88BC8; Thu, 15 Aug 2024 22:26:06 +0200 (CEST)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38FF788BA4
+ by phobos.denx.de (Postfix) with ESMTPS id 6542088BB2
  for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:26:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2a.google.com with SMTP id
- ca18e2360f4ac-81f921c40f2so46995639f.0
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-39d20c4be31so2881565ab.1
  for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:26:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723753556; x=1724358356; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723753554; x=1724358354; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YI4bJWyLCxGwlWZWxGOuXlqr4nvTB4tkyAOeLVUpIRk=;
- b=k2KMBXFb5i9aYt1QJl8sKJPYi/z2NIhESdWRq9dsRhAzV6XsC3Yyosn1N3NV6Ne4XV
- 4Ry6qHdUNlTmSzhLva0eyY7zUkAcTMiO1v8tGsUWZbcVgYaeIzg9HeAvhQFp8P6+mDDk
- 81g89c37Z9U7jNcKryuw3tqSpv8zFNoJLDh2M=
+ bh=KempVwTGPJGo0sivKvaUCUHvMMsZ7czBFCqaB5M1H0M=;
+ b=YpL4ccFNbCd1Vh4vXcv3YYKL4knc+1NJqadlzLb+KVTx6G9J51wwP+BvepkQ1R9I4b
+ vAgnLp1U9dP/sEuL39EiHvA05qC8/KyaN3j3FZs0h1eX685EjXhvVa/2vXzxhNn7e+4o
+ e0lvExfNOdokUFHM0uhe5y2VlRUVuKsj6NVdU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723753556; x=1724358356;
+ d=1e100.net; s=20230601; t=1723753554; x=1724358354;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YI4bJWyLCxGwlWZWxGOuXlqr4nvTB4tkyAOeLVUpIRk=;
- b=pLkx7n5U2KzREAaIPMaRmTigUzvwgauUcS5221V7Uk39m12rHcVnKo9u796K30kU6n
- Ie5A0ws367AImJZUJAa8zn4/J297LQrlgTDTwHsF/cw46JPp1rM6uS2jolkK60N52ExO
- ULfHEIJwqG1ufYB5LCP0WHy9grbSHL3+N6Y+ygCYmrYRQn8zoxNtlN8La78YHuMJudKH
- id3vMRJqXOrPiy13SY/QFZ9/PsZBBJToIVBdBFGYDke825IWd9f44KOaIxSSGG2yUMDf
- QHejoHD26AN5mYHiwqq+mH7V3TYdSfU01ijTCh1baUHdQXDy7Ql51y2JBeHatg+cZSRK
- 8Hgw==
-X-Gm-Message-State: AOJu0YwkE1IbX8EtiqV9CB/joUSvIVBY1ECLksMURuOSsalGeFVdU/X6
- pGmBiK/wztJzYh8GJvbgPjHRi8yGL/KHlFxoZX3ug0cEeIELziI+GbhGMP//z1BLkqzolH5B8e0
- A7Q==
-X-Google-Smtp-Source: AGHT+IHAMwNaRXVqbdNy1V/UMVnU+oUj1kRBXz9Odh0fuJ/4HU+a+YJxWo0AHgl45Ce5GcxWIjZcRw==
-X-Received: by 2002:a05:6e02:1945:b0:39b:3651:f148 with SMTP id
- e9e14a558f8ab-39d26d644c1mr10007665ab.21.1723753555643; 
- Thu, 15 Aug 2024 13:25:55 -0700 (PDT)
+ bh=KempVwTGPJGo0sivKvaUCUHvMMsZ7czBFCqaB5M1H0M=;
+ b=dIRqqgj3MXmfGmaomJ8v6pwM2uKu5AoyuYIoJl9wbC9occMnS38lN2Oj3tUrt2BOeW
+ Pqo8RujUgTL+VxzkR0EaqN+NhGbXO/gz70b6P0xXEmUobZbsqwcWtnF1afHk86cwi/kA
+ ouqs+08xH7hRgWUG2BBZ2NRMeIfu236gqNlsVleLcR7pqaCtM/lfVoN2AhoN9I/UrlKE
+ 0mvVLz7aPiByQgA7SJ5giCC/nFUKm06qz4GvnVOg4vShfjwLBYwkrBBOF6Wi+gtNLiNA
+ 8RZ58O26VGA/G2uQHT5KyW4i3dR2yFB4l3CcJGjFa8kGUMPRk+IMGo1jzb83V2BTB6tI
+ b6fA==
+X-Gm-Message-State: AOJu0YxmgviomsMzgm5blmoqzrFIt/P+jYSgtFvjYj4eGvdmBtFsGu58
+ A/t8zxGpngewWYbbDL3y9h79rXFQ1LkRP+EYWgxYIce23kpXCqV3UAfvtatakr9TlyRQcNcXju0
+ 6uw==
+X-Google-Smtp-Source: AGHT+IGtvQ79jOnaXL0MOY/rwnQO7UIUChtoBLgMv0R5qVCw5CmEyCcCIhdJcXhif/dhnhpQeTDi5g==
+X-Received: by 2002:a05:6e02:138b:b0:39b:28c0:9427 with SMTP id
+ e9e14a558f8ab-39d26cee4f7mr12223885ab.8.1723753554041; 
+ Thu, 15 Aug 2024 13:25:54 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39d1ed5db5bsm8014235ab.64.2024.08.15.13.25.55
+ e9e14a558f8ab-39d1ed5db5bsm8014235ab.64.2024.08.15.13.25.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Aug 2024 13:25:55 -0700 (PDT)
+ Thu, 15 Aug 2024 13:25:53 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 17/24] sandbox: Implement reference counting for address
- mapping
-Date: Thu, 15 Aug 2024 14:25:28 -0600
-Message-Id: <20240815202535.767869-18-sjg@chromium.org>
+Subject: [PATCH v3 15/24] sandbox: Unmap old tags
+Date: Thu, 15 Aug 2024 14:25:26 -0600
+Message-Id: <20240815202535.767869-16-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240815202535.767869-1-sjg@chromium.org>
 References: <20240815202535.767869-1-sjg@chromium.org>
@@ -90,82 +89,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-An address may be mapped twice and unmapped twice. Delete the mapping
-only when the last user unmaps it.
+So far unmapping has not been implemented. This means that if one test
+maps a pointer to an address with map_sysmem(), then a second test can
+use that same pointer, by mapping the address back to a pointer with
+map_to_sysmem(). This is not really desirable, even if it doesn't
+cause any problems at the moment.
 
-Fix a missing comment while here.
+Implement unmapping, to clean this up.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/sandbox/cpu/cpu.c           | 14 ++++++++++----
- arch/sandbox/include/asm/state.h |  3 +++
- 2 files changed, 13 insertions(+), 4 deletions(-)
+ arch/sandbox/cpu/cpu.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
 diff --git a/arch/sandbox/cpu/cpu.c b/arch/sandbox/cpu/cpu.c
-index 3e1c0dd583e..51ce40e7f08 100644
+index 8eb055d6837..3e1c0dd583e 100644
 --- a/arch/sandbox/cpu/cpu.c
 +++ b/arch/sandbox/cpu/cpu.c
-@@ -111,6 +111,7 @@ void *phys_to_virt(phys_addr_t paddr)
- 		if (mentry->tag == paddr) {
- 			log_debug("Used map from %lx to %p\n", (ulong)paddr,
- 				  mentry->ptr);
-+			mentry->refcnt++;
- 			return mentry->ptr;
- 		}
- 	}
-@@ -200,10 +201,12 @@ void unmap_physmem(const void *ptr, unsigned long flags)
+@@ -185,12 +185,28 @@ void *map_physmem(phys_addr_t paddr, unsigned long len, unsigned long flags)
  
- 	mentry = find_tag(ptr);
- 	if (mentry) {
--		list_del(&mentry->sibling_node);
--		log_debug("Removed map from %p to %lx\n", ptr,
--			  (ulong)mentry->tag);
--		free(mentry);
-+		if (!--mentry->refcnt) {
-+			list_del(&mentry->sibling_node);
-+			log_debug("Removed map from %p to %lx\n", ptr,
-+				  (ulong)mentry->tag);
-+			free(mentry);
-+		}
- 	} else {
- 		log_warning("Address not mapped: %p\n", ptr);
- 	}
-@@ -235,11 +238,14 @@ phys_addr_t map_to_sysmem(const void *ptr)
- 		}
- 		mentry->tag = state->next_tag++;
- 		mentry->ptr = (void *)ptr;
-+		mentry->refcnt = 0;
- 		list_add_tail(&mentry->sibling_node, &state->mapmem_head);
- 		log_debug("Added map from %p to %lx\n", ptr,
- 			  (ulong)mentry->tag);
- 	}
- 
-+	mentry->refcnt++;
+ void unmap_physmem(const void *ptr, unsigned long flags)
+ {
++	struct sandbox_mapmem_entry *mentry;
 +
- 	/*
- 	 * Return the tag as the address to use. A later call to map_sysmem()
- 	 * will return ptr
-diff --git a/arch/sandbox/include/asm/state.h b/arch/sandbox/include/asm/state.h
-index 6b50473ed41..e7dc01759e8 100644
---- a/arch/sandbox/include/asm/state.h
-+++ b/arch/sandbox/include/asm/state.h
-@@ -53,10 +53,13 @@ struct sandbox_wdt_info {
-  * be returned, just as it would for a normal sandbox address.
-  *
-  * @tag: Address tag (a value which U-Boot uses to refer to the address)
-+ * @refcnt: Number of references to this tag
-  * @ptr: Associated pointer for that tag
-+ * @sibling_node: Next node
-  */
- struct sandbox_mapmem_entry {
- 	ulong tag;
-+	uint refcnt;
- 	void *ptr;
- 	struct list_head sibling_node;
- };
+ #ifdef CONFIG_PCI
+ 	if (map_dev) {
+ 		pci_unmap_physmem(ptr, map_len, map_dev);
+ 		map_dev = NULL;
+ 	}
+ #endif
++
++	/* If it is in emulated RAM, we didn't create a tag, so nothing to do */
++	if (is_in_sandbox_mem(ptr))
++		return;
++
++	mentry = find_tag(ptr);
++	if (mentry) {
++		list_del(&mentry->sibling_node);
++		log_debug("Removed map from %p to %lx\n", ptr,
++			  (ulong)mentry->tag);
++		free(mentry);
++	} else {
++		log_warning("Address not mapped: %p\n", ptr);
++	}
+ }
+ 
+ phys_addr_t map_to_sysmem(const void *ptr)
 -- 
 2.34.1
 
