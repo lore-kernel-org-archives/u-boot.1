@@ -4,76 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAB80C52D7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:33:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCD0CC3DA7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:33:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E4C988BCF;
-	Thu, 15 Aug 2024 22:33:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C2B3088C01;
+	Thu, 15 Aug 2024 22:33:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L5yH3HY4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lmE20a/6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2C968657F; Thu, 15 Aug 2024 22:33:05 +0200 (CEST)
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
+ id 3338888B63; Thu, 15 Aug 2024 22:33:11 +0200 (CEST)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F99288BCF
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:33:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E84888BF9
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:33:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-2d3c05dc63eso974524a91.0
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:33:03 -0700 (PDT)
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-71275436546so1138123b3a.1
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:33:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723753981; x=1724358781; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723753984; x=1724358784; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CAgmFiQqXZJcTN0TejYBV2jDzka/+RDbUgsiS2BE1Jg=;
- b=L5yH3HY4F6GiormjTdSXk8yzYWNo8ohcLUZosMjx6o5LsywtW6JNrSAcKqtu+zkMB7
- oeNjqJW9olQCIz5kM8c6dTToreZFlctAcnix6Lk9AMZdO5tqFQ7yTQa/KVKd8f2xlYs1
- rePhQe2RMaNSt5UjB4Sv51DHph6h2sIMskcIU=
+ bh=O/ctHgR9omNfE3+5CBSNvjOODrD7zfYuJhz659bq+tk=;
+ b=lmE20a/665+AEuAA4r/4Q54KbnxGv7Qyc+Grty6CMcsSucoSy8x4h6PLkVwMNnvBGL
+ kZJrAU2OnX3aHdasnxMAp/QgpKbQjxoB+8i+zsFCeRdJUS/K/L//x2NSTkZ9Kc6e5aJ/
+ GLZpOzNYlCtRr6OpCP3yFuRypsW0pGsmICmy0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723753981; x=1724358781;
+ d=1e100.net; s=20230601; t=1723753984; x=1724358784;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=CAgmFiQqXZJcTN0TejYBV2jDzka/+RDbUgsiS2BE1Jg=;
- b=cZvGSbC39iRKW5bqiVkPPB4cH2coaYPaomLPZDTIf6vPORgfA+iStcPfQPOeTabJ1G
- XVEstMxsKs/ZakO7svFz4TkYDqiKE2hexmAW/5/mpcQLq8/XcAz9bWrDronpuGmOrkyF
- HlN4OQMb71XRydHrf8KrnaCEtitRMtVUFpfruQKbHOiyMyxikIL2IOURqJQFIvRg1XrR
- 0TUgMYnDmO4xVQzvDD9mcox1UYtqruOHObIREiCRL/SnNnSSEuS9v4W4GT+jAcylZ1dI
- 9B2v1rJyHR1ncYC3sOPZId6dkOKHV2763bwgdiAytVGXv3iiyC7un2s0eU2d38ctjpXl
- X3cg==
-X-Gm-Message-State: AOJu0Yx++qLzHU5aikUah0vcvxKuVSqnHSc7DtzgVGSCj1We+B2hcgxq
- fv06EGwOItleUKE2T392ixGKWVPwRK8WXPivjWUkdscR0MgkJtKRHP0RlkPJcnDnD9kE7ESOHlc
- u6GvDr+LeE8Z2UAhOBcoe5s8d1GrISeEGh3rq
-X-Google-Smtp-Source: AGHT+IEiHVCJ9p4+2xqr4TT6ceA0ZqTpMk+/TjNhmjBvjIvbp4VKoP78+BPrU8ze+QekbswnsR4sCewHARb4JwihYQA=
-X-Received: by 2002:a17:90a:ad83:b0:2d0:d82:60ae with SMTP id
- 98e67ed59e1d1-2d3e04007f5mr933279a91.37.1723753981336; Thu, 15 Aug 2024
- 13:33:01 -0700 (PDT)
+ bh=O/ctHgR9omNfE3+5CBSNvjOODrD7zfYuJhz659bq+tk=;
+ b=uLmr+wJ4ERW6v536vJRX7TGudswfFUgjqNTi5RpHao+nJGwZfuu8Y4Ou1OnNbIylL7
+ Vj8Q5RMjvunHX7Mkv6KIQP1IuzQckTQiMXrOn2yImICQO9l43XZbgj93GgKAhGRoBCWk
+ qaK3p+kA+ak8hYoJFNCL5igOQTfg4oswYqZnNT9yVOjIBxa9cHCMNYyT51gxJfVrfhTF
+ Zjamk90L6bVkH0xEestRPoc8pv0S0QHEc3ilQcFQVHIbFDSFff8bqCws+pWGOk8DW79m
+ XZKH5HobOWR6Rukd7DrT5ggFImeiip4yOU36f2rUlprioJN7WPgCXzXkPoR0ScpHX53y
+ TmRw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU96VSA5scxTro5PS4kFfobtqkJ2OxbAYBcP6oQUh0xBJnaCYl5+r3vlWnnf4r0r1XzXTGDyoBd8pdikz7kDxvXbhWjRg==
+X-Gm-Message-State: AOJu0YxgAWd/lGGid+hXvvWHVjkZowmj/S1nT/Z2mhjNl/qZtvaMzJDQ
+ zKIMyy6casv587ySOf42e26YMtkuDLOMNJchnUwOCmdF8J2NpBWEY+6nm+J8E7iwnAZOVO/ji4W
+ QOTm1djG15fcBvNaYVbpo3kYX/ffxBj7nnyxD
+X-Google-Smtp-Source: AGHT+IEYBQK3xsImYjcpRS3u0fiHYKCJHNf7WCYw6y3RZ7wLXJlzOGVMAILaNrIdA98SGsi/BfaoX34oNa1QtoxP00M=
+X-Received: by 2002:a05:6a21:78d:b0:1c4:9cec:ea0a with SMTP id
+ adf61e73a8af0-1c905025efbmr1118672637.37.1723753984343; Thu, 15 Aug 2024
+ 13:33:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
- <20240814110009.45310-33-sughosh.ganu@linaro.org>
-In-Reply-To: <20240814110009.45310-33-sughosh.ganu@linaro.org>
+References: <20240521104834.11295-1-marex@denx.de>
+ <CAOMZO5DsyuCu+fjpa8GjB6mbp9b5n=YOGxtjgMkdSstGFmEUuA@mail.gmail.com>
+ <CAFLszTiwqcPe98gwbt1oVnWYJ0yFQ6rTpdcrB2kw=YRH-9=JJA@mail.gmail.com>
+ <CAFLszTg8UHv7WbYKMii_8_6m3m3TR0BCAaEVNWnQJb2otQRScw@mail.gmail.com>
+ <d46433c5-f4a6-418a-bc23-1ae5ce6ba63a@denx.de>
+ <CAFLszTi9wozfMHVwM-tg5bJGSwSOpreR=D3jardm8z=N621bng@mail.gmail.com>
+ <01cf8243-3476-41a8-9d56-bdd2817a4569@denx.de>
+ <CAFLszTheX=pbcZZR6dnjgvpg_KzvPUKRk3nC8UeFc-868G9tUA@mail.gmail.com>
+ <CAFLszTjyU4L+Lo4bUf3onKAn_G8aPbeknM9COnTG_Ff9xe9dvQ@mail.gmail.com>
+In-Reply-To: <CAFLszTjyU4L+Lo4bUf3onKAn_G8aPbeknM9COnTG_Ff9xe9dvQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 15 Aug 2024 21:32:49 +0100
-Message-ID: <CAFLszTigDtzrLWzVfrVmq_Uet_GRoQWq7YVQcgerpk8XAT8BvQ@mail.gmail.com>
-Subject: Re: [PATCH v2 32/32] lmb: add logic to print lmb flag strings
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
- Max Filippov <jcmvbkbc@gmail.com>
+Date: Thu, 15 Aug 2024 21:32:53 +0100
+Message-ID: <CAFLszTjeSM2t6QGc5qLOZsuNnZCt2uPPunLYbb8YuRGARGBXQg@mail.gmail.com>
+Subject: Re: [PATCH v4 1/4] binman: Add nxp_imx8mcst etype for i.MX8M
+ flash.bin signing
+To: Marek Vasut <marex@denx.de>
+Cc: Fabio Estevam <festevam@gmail.com>, u-boot@lists.denx.de,
+ anton.gres@ifm.com, ch@denx.de, Tim Harvey <tharvey@gateworks.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Angus Ainslie <angus@akkea.ca>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Stefan Eichenberger <stefan.eichenberger@toradex.com>,
+ Stefano Babic <sbabic@denx.de>, 
+ Tom Rini <trini@konsulko.com>, kernel@puri.sm, u-boot@dh-electronics.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,86 +104,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
+Hi Marek,
 
-On Wed, 14 Aug 2024 at 05:03, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Fri, 26 Jul 2024 at 08:54, Simon Glass <sjg@chromium.org> wrote:
 >
-> Instead of printing the LMB flags as numerical values, print them as
-> strings. This makes it easier to understand what flags are associated
-> with the lmb region. Also make corresponding changes to the bdinfo
-> command's test code.
+> Hi Marek,
 >
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> ---
-> Changes since V1: New patch
+> On Tue, 9 Jul 2024 at 03:24, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Marek,
+> >
+> > On Sun, 7 Jul 2024 at 01:55, Marek Vasut <marex@denx.de> wrote:
+> > >
+> > > On 6/27/24 10:19 AM, Simon Glass wrote:
+> > > > Hi Marek,
+> > >
+> > > Hi,
+> > >
+> > > >>>>>> Add new binman etype which allows signing both the SPL and fitImage sections
+> > > >>>>>> of i.MX8M flash.bin using CST. There are multiple DT properties which govern
+> > > >>>>>> the signing process, nxp,loader-address is the only mandatory one which sets
+> > > >>>>>> the SPL signature start address without the imx8mimage header, this should be
+> > > >>>>>> SPL text base. The key material can be configured using optional DT properties
+> > > >>>>>> nxp,srk-table, nxp,csf-crt, nxp,img-crt, all of which default the key material
+> > > >>>>>> names generated by CST tool scripts. The nxp,unlock property can be used to
+> > > >>>>>> unlock CAAM access in SPL section.
+> > > >>>>>>
+> > > >>>>>> Reviewed-by: Tim Harvey <tharvey@gateworks.com>
+> > > >>>>>> Signed-off-by: Marek Vasut <marex@denx.de>
+> > > >>>>>
+> > > >>>>> Applied the series, thanks.
+> > > >>>>
+> > > >>>> This lacks tests - can you please add sufficient tests in ftest.py to
+> > > >>>> get the cover coverage back to 100%? Please try 'binman test -T' to
+> > > >>>> see this.
+> > > >>>
+> > > >>> Any thoughts on this, please? At present -master is broken for one
+> > > >>> file and -next has three problems.
+> > > >>
+> > > >> It is in the pipeline.
+> > > >>
+> > > >> What exactly is the error you observe ?
+> > > >>
+> > > >> When I run binman test -T , I get a lot of output, but no error reports?
+> > > >
+> > > > Sorry I somehow missed this email.
+> > > >
+> > > > The tests are in ftest.py - there are lots of examples, e.g.
+> > > > testXilinxBootgenSigning() - commit d8a2d3b29
+> > >
+> > > This seems to be testing some out-of-tree tool , not binman ?
+> >
+> > It is testing the etype, which needs the tool to be present, yes, You
+> > can use 'binman tool -f' to fetch tools if you want to try that one.
 >
->  lib/lmb.c         | 18 ++++++++++++++++--
->  test/cmd/bdinfo.c |  4 ++--
->  2 files changed, 18 insertions(+), 4 deletions(-)
+> We have gone past RC1, so I'm just checking how this is going?
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Are you going to be able to get this test in soon?
 
-But see below
 
 >
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index 37d2a72951..5c5b3e9bb5 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -26,6 +26,19 @@ DECLARE_GLOBAL_DATA_PTR;
 >
->  static struct lmb lmb;
->
-> +static void print_region_flags(enum lmb_flags flags)
-> +{
-> +       uint64_t bitpos;
-> +       const char *flag_str[] = { "LMB_NONE", "LMB_NOMAP", "LMB_NOOVERWRITE" };
-
-As mentioned, LMB_NONE shouldn't be a flag. For the other two, how
-about "no-map" and "no-overwrite"?
-
-> +
-> +       do {
-> +               bitpos = fls(flags) - 1;
-> +               printf("%s", flag_str[bitpos]);
-> +               flags &= ~(1ull << bitpos);
-> +               flags ? puts(", ") : puts("\n");
-> +       } while (flags);
-> +}
-> +
->  static void lmb_dump_region(struct alist *lmb_rgn_lst, char *name)
->  {
->         struct lmb_region *rgn = lmb_rgn_lst->data;
-> @@ -41,8 +54,9 @@ static void lmb_dump_region(struct alist *lmb_rgn_lst, char *name)
->                 end = base + size - 1;
->                 flags = rgn[i].flags;
->
-> -               printf(" %s[%d]\t[0x%llx-0x%llx], 0x%08llx bytes flags: %x\n",
-> -                      name, i, base, end, size, flags);
-> +               printf(" %s[%d]\t[0x%llx-0x%llx], 0x%08llx bytes flags: ",
-> +                      name, i, base, end, size);
-> +               print_region_flags(flags);
->         }
->  }
->
-> diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
-> index 7dd3f7ca5b..887defc28a 100644
-> --- a/test/cmd/bdinfo.c
-> +++ b/test/cmd/bdinfo.c
-> @@ -120,8 +120,8 @@ static int lmb_test_dump_region(struct unit_test_state *uts,
->                         ut_assert_nextlinen(" %s[%d]\t[", name, i);
->                         continue;
->                 }
-> -               ut_assert_nextline(" %s[%d]\t[0x%llx-0x%llx], 0x%08llx bytes flags: %x",
-> -                                  name, i, base, end, size, flags);
-> +               ut_assert_nextlinen(" %s[%d]\t[0x%llx-0x%llx], 0x%08llx bytes flags: ",
-> +                                  name, i, base, end, size);
->         }
->
->         return 0;
-> --
-> 2.34.1
->
+> >
+> > >
+> > > > Basically you need to create a test .dts file that uses your entry
+> > > > type, then use it in the test code. You can check error handling as
+> > > > well, e.g. by having an invalid dts too if needed.
+> > > >
+> > > > If you run 'binman test -T' you will see the code-coverage problem.
+> > > > You may need to fetch tools with 'binman tool -f missing' to get all
+> > > > the tools*:
+> > > >
+> > > > Coverage error: 96%, but should be 100%
+> > > > ValueError: Test coverage failure
+> > > >
+> > > > It is normally much easier to add an etype using a test than to test
+> > > > it by using it 'for real', since you don't need to worry about the
+> > > > U-Boot integration.
+> > >
+> > > Huh ...
 
 Regards,
 Simon
