@@ -4,76 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1254C52D7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:38:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A80FC3DA7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 21:11:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1029A88C01;
-	Thu, 15 Aug 2024 22:35:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 6FF2588ABE;
+	Thu, 15 Aug 2024 23:11:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KtR8p4up";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="atEhUllY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6B6A88B63; Thu, 15 Aug 2024 22:35:22 +0200 (CEST)
-Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
- [IPv6:2607:f8b0:4864:20::536])
+ id 6A04688B1B; Thu, 15 Aug 2024 23:11:18 +0200 (CEST)
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
+ [IPv6:2607:f8b0:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A521888C07
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:35:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CA82871C9
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 23:11:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x536.google.com with SMTP id
- 41be03b00d2f7-6e7b121be30so1062980a12.1
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:35:20 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-7c3e0a3c444so931358a12.1
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 14:11:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723754117; x=1724358917; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723756273; x=1724361073; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hyXaTnlFG4joiLMNekVTOvs5RJtfQuY+xBuve7lCwZY=;
- b=KtR8p4upSpX/nu5NGj1KTpxc0R5GL/+Wm4UNlPgqtEWwdz3AxWi+5Ts5WBGUQZwTWG
- Lj8ZXr6p5llP/eb+Kwh7lnyOzaXbKSZoPzfLHpEXjl/hcK2q3B4X35AQcUGQdlqiJv0Q
- 1fk/Ghlh83kwQ8BRDSfjKdSrNEkbd4zqVZ77U=
+ bh=XCHmZlXoQWN4/WtZEIjrtCPWCRE4ovIfmK9jW/BVWsk=;
+ b=atEhUllYZanuSgbqrmFSDF88EZ41X4CebTRdFM/XEJ/C7Gqn60Wzv6O0yCJGZkA+E8
+ bMjcb/wjQqGZtoMG0ncAfKwzvx/L4iLRj6qcNjGkyUcOp7cWtAiO4pJXf0mEd6Ee05kM
+ w1ESb4rj1nZcMHPVHTkU9p+OYxZD3a0wTA5q9F6OuUMpOSBed3p/CeiXWgfg8dWWFftp
+ x6AyJkr5uwwX7QN6Nmt9x8Af+OY9ghDRI7x6+9Sg6V1PjkehPsGrdZv4UK5T+DjiAalj
+ tpRZjBLnXJLGEw5XSNGfUsnMBNXiNuGcdxuEbLxjKtxtYwlRowxtTeHhUB5tcrqfQSZB
+ Rclg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723754117; x=1724358917;
+ d=1e100.net; s=20230601; t=1723756273; x=1724361073;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=hyXaTnlFG4joiLMNekVTOvs5RJtfQuY+xBuve7lCwZY=;
- b=hUSncz1Fr2X+WcR3Z+TzC4rvOoWfROtyZ3WuioCSmCH2wHghWOcG60ec5Y+uLGCT99
- 8+kvn5ucOobH8sqhWJVK+noj3jGqwxpwjihOQZScbXgN+aGkLDEjd/j+KWkR2CgSKs21
- D1DrjGzhXpUX9EP5mtIfsXbAlEWspSAC6c7gA22yEi/XF/ST6eArdajv1c77Ypg7ovUZ
- hCvJlREgR/UnlCwQ3dPpLqqc6gqF/8jGxph7LS/mk3ntQ0FPYKYjZALdPVZrtcB97aKd
- hy5C7A0GmS7Tsr9YLBXIr5OV7GK7kDg2+E6VIJT1+KnmtiJwyOhTA+xaShbxgXM+SZyi
- 7Cqw==
+ bh=XCHmZlXoQWN4/WtZEIjrtCPWCRE4ovIfmK9jW/BVWsk=;
+ b=Dxg09DP7uhDLtGb65DrNA0hcIqyCXX8Phw5FPyrzS4M+kF6F7XzL5a7w2UslNj9tMB
+ +GzVaX1B0Rs3Lllia6vC/EOsxO1MNr8P27gkErcWj2ALkm88IEynV5eZPEk85XT+Ouj3
+ v+k763KuCtSvrkMckgQGkUn2Uu54KBIlyWK9jXkdYlTaFtGAuDCTlJkJxFqu7jITvkzQ
+ Yhfz5OP2V//YpZTnMoSyn8n0shV1P9DNU0qqeJ8+ubg6n9FU3CT9hyoM+wBVXLitWaru
+ 5n/tRtOtbPtz/kMFipJkB8c9WfdizqoM0mz5KjKtqJvspm9dwWVEUyEFQqyfju15D6bv
+ LZPg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWo6inAn4fun9KX4krflZJ0PXWQ77+f9y7kzBLpmG0w9WBdEWIdKqOF4y9S22DaYRzraUTNyJHEX4P7ChzN3s8KyoWGug==
-X-Gm-Message-State: AOJu0YywoGZmHTjepMBo1cmYxnzBaoTaqntO5S/yQzmkNhk+ae5EMrwq
- 9Beng6Ru8FRVPDvbMIkCMMWp9mMnHdGXqsoKf+zwYA7Aey34f5+dDJv6JKnoa3lCP0sYMfykQKh
- grg6s3W+N9BTkaIzf/y5yT+gs2ITpYstV61Dt
-X-Google-Smtp-Source: AGHT+IH09Efhxms5hGxOyyVi7WjTsPtL/HV6xslx4dEQf2S7t2Szw7/+vn97sZ4+uX9IQwCBShFgg85JjVY+csgoGi8=
-X-Received: by 2002:a17:90a:ca89:b0:2d3:b49f:acd0 with SMTP id
- 98e67ed59e1d1-2d3dfd8d3e0mr916803a91.20.1723754117420; Thu, 15 Aug 2024
- 13:35:17 -0700 (PDT)
+ AJvYcCXSwQKkhWKex3EMj57buvn6DxQjM6tPQPHsVSzyvg4/8NPTXfUNgMcOub4S/TB3Ltg9d1I/pZ6x9UxbTMAkZNXl0XCNKw==
+X-Gm-Message-State: AOJu0YwB74ebk7EK1QCDAdeb3hfelqi/fKRsMC4ex/paLb+5e0n49Ygo
+ GzouNFGofO5RqEdhY12D9GceFSGw62R+1NvxggKQAzMmJQJulngjYtJTIZgLzwJkrFyMHV2+0Sn
+ LHzKLtC4369+6Zgv7y94hvYDq68CH88K5+nBvUW2+GxgM0vQo
+X-Google-Smtp-Source: AGHT+IEMutxghVQ3vVBZGuj6/dwaqFofLW+x2HAzjLA3mgljts1grNxLGPDPnHHa5YwwUkmpURKsJDm6hi+g57D0lLk=
+X-Received: by 2002:a17:90a:43a2:b0:2d3:ca71:dbb3 with SMTP id
+ 98e67ed59e1d1-2d3ca71e1b8mr4843774a91.17.1723756272606; Thu, 15 Aug 2024
+ 14:11:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240801173637.1071068-1-sjg@chromium.org>
- <20240801173637.1071068-4-sjg@chromium.org>
- <4594d522-bb63-45ee-b660-0130ae55d341@gmx.de>
- <CAFLszTgmRMCK9E==O-sz51ONfaGENnoStXPY4LL5HS0F-=cDfA@mail.gmail.com>
- <5EA6AA2B-533E-424D-B2E9-13A4CA8C2E9A@gmx.de>
- <CAFLszTiYdE4CK2tf3=mxgZBatg4r55=G0X=LxDhofuqZU1TQNw@mail.gmail.com>
-In-Reply-To: <CAFLszTiYdE4CK2tf3=mxgZBatg4r55=G0X=LxDhofuqZU1TQNw@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 15 Aug 2024 21:35:06 +0100
-Message-ID: <CAFLszThN27npLDq5tb0gjD5fZTnb+5OTg7OjjksFdEG1=NBAHw@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] efi: Show the location of the bounce buffer
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20240814134518.82692-1-ilias.apalodimas@linaro.org>
+ <CAFLszTjrBL-GonZKqp3Ab5vQPMZ+BZu8V21y4z0qBCGuH64uJw@mail.gmail.com>
+In-Reply-To: <CAFLszTjrBL-GonZKqp3Ab5vQPMZ+BZu8V21y4z0qBCGuH64uJw@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 16 Aug 2024 00:11:00 +0300
+Message-ID: <CAC_iWjKF0DMfJza-ojYXPg_tHL14DTdK+GzhxhEX3etpaNiK8Q@mail.gmail.com>
+Subject: Re: [PATCH] Kconfig: clean up the efi configuration status
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Anton Antonov <Anton.Antonov@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Ian Roberts <ian.roberts@timesys.com>, 
+ Kever Yang <kever.yang@rock-chips.com>, Shengyu Qu <wiagn233@outlook.com>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Greg Malysa <greg.malysa@timesys.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Sean Anderson <sean.anderson@seco.com>, Anand Moon <linux.amoon@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Eddie James <eajames@linux.ibm.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,83 +97,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+On Thu, Aug 15, 2024, 23:33 Simon Glass <sjg@chromium.org> wrote:
 
-On Sun, 11 Aug 2024 at 15:50, Simon Glass <sjg@chromium.org> wrote:
+> Hi Ilias,
 >
-> +Marek Vasut too
+> On Wed, 14 Aug 2024 at 07:45, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > The EFI_LOADER and EFI config options are randomly scattered under lib/
+> > making it cumbersome to navigate and enable options, unless you really
+> > know what you are doing. On top of that the existing options are in
+> > random order instead of a logical one.
+> >
+> > So let's move things around a bit and present two enties for the
 >
-> Hi Heinrich,
+> entries
 >
-> On Fri, 9 Aug 2024 at 13:02, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > EFI_LOADER and EFI options in the main config screen.
+> > While at it add menus for Capsules, Protocols, and Services in the
+> > EFI_LOADER so people can find their way around easier
 > >
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> >  Kconfig                |   4 +
+> >  lib/Kconfig            |   2 -
+> >  lib/efi/Kconfig        |   5 +
+> >  lib/efi_loader/Kconfig | 202 +++++++++++++++++++++++------------------
+> >  4 files changed, 123 insertions(+), 90 deletions(-)
 > >
+> > diff --git a/Kconfig b/Kconfig
+> > index 82df59f176ec..62c5441e3576 100644
+> > --- a/Kconfig
+> > +++ b/Kconfig
+> > @@ -756,3 +756,7 @@ source "lib/Kconfig"
+> >  source "test/Kconfig"
 > >
-> > Am 9. August 2024 20:36:35 MESZ schrieb Simon Glass <sjg@chromium.org>:
-> > >Hi Heinrich,
-> > >
-> > >On Fri, 9 Aug 2024 at 11:32, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > >>
-> > >> On 01.08.24 19:36, Simon Glass wrote:
-> > >> > The EFI_LOADER_BOUNCE_BUFFER feature was added many years ago. It is not
-> > >> > clear whether it is still needed, but 24 boards (lx2160ardb_tfa_stmm,
-> > >> > lx2162aqds_tfa_SECURE_BOOT and the like) use it.
-> > >> >
-> > >> > This feature uses EFI page allocation to create a 64MB buffer 'in space'
-> > >> > without any knowledge of where boards intend to load their images. This
-> > >> > may result in image corruption or other problems.
-> > >> >
-> > >> > For example, if the feature is enabled on qemu_arm64 it puts the EFI
-> > >> > bounce buffer at 1045MB, with the kernel at 1028MB and the ramdisk at
-> > >> > 1088MB. The kernel is probably smaller than 27MB but the buffer does
-> > >> > overlap the ramdisk.
-> > >> >
-> > >> > The solution is probably to use BOUNCE_BUFFER instead, with the EFI
-> > >> > version being dropped. For now, show the address of the EFI bounce
-> > >> > buffer so people have a better chance to detect the problem.
-> > >> >
-> > >> > Note: I avoided converting this #ifdef to use IS_ENABLED() since I hope
-> > >> > that the feature may be removed.
-> > >>
-> > >> EFI_BLOCK_IO_PROTOCOL.ReadBlocks() and
-> > >> EFI_BLOCK_IO_PROTOCOL.WriteBlocks() are expected to block until all
-> > >> bytes are transferred.
-> > >>
-> > >> The complete file transfer is chunked according to the size of the EFI
-> > >> bounce buffer.
-> > >>
-> > >> Taking care of alignment issues would best handled by the block uclass.
-> > >>
-> > >> When CONFIG_BOUNCE_BUFFER=y, bounce_buffer_start_extalign() uses
-> > >> memalign() which limits the bounce buffer to available malloc() memory
-> > >> (typically < 2 MiB).
-> > >>
-> > >> I cannot see how blk_read() with CONFIG_BOUNCE_BUFFER=y will work if
-> > >> blkcnt * desc->blksz is greater than the available malloc memory.
-> > >
-> > >Yes, it uses malloc(). The maximum read length on MMC, for example,
-> > >seems to default to 32MB, although it is only 128KB on a few
-> > >platforms.
-> > >
-> > >I am thinking we should be allocating space in the bloblist to hold
-> > >all these sorts of things...it can be as large as needed and we can
-> > >allocate space for it during relocation.
-> > >
-> > >>
-> > >> Shouldn't the block uclass support chunking?
-> > >
-> > >It only supports readling whole blocks, if that is what you mean. Are
-> > >you suggesting changing the blk API, or something else?
-> >
-> > It supports reading multiple blocks. If not all blocks fit into the memory that can be assigned via memalgn, the block layer coud separate the blocks into chunks. This would replace the EFI bounce buffer.
+> >  source "tools/Kconfig"
+> > +
+> > +source "lib/efi_loader/Kconfig"
+> > +
 >
-> Ah OK, yes it could do that.
+> This should be included from boot/Kconfig as it relates to booting.
+>
 
-I am still not sure what changes are needed with this patch. I cannot
-use malloc() for the bounce buffer, so for now (until we improve
-things) I would like to print this message as a warning to fsl users.
+Hmm why? Booting is one of the things efi does. I prefer having it on the
+main menu since it's a pointer to the entire spec, protocols, services etc
 
-So please can you provide a clear response to the above?
 
-Regards,
-Simon
+
+> The EFI app thing should perhaps be under there too...I'm not sure.
+>
+
+I was toying around with the idea as well. But eventually I decided this
+needs it's own entry since it's about building U-Boot as a pe/coff. I don't
+mind changing this though.
+
+Thanks
+Ilias
+
+>
+> Regards,
+> Simon
+>
