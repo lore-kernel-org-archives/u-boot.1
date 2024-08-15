@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80C88C52D7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:32:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EBDEC3DA7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:32:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42E8B88BBC;
-	Thu, 15 Aug 2024 22:32:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A503F88B6E;
+	Thu, 15 Aug 2024 22:32:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BcxpJwXT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gx66OPtR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E52B88B99; Thu, 15 Aug 2024 22:32:19 +0200 (CEST)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id B788388B6E; Thu, 15 Aug 2024 22:32:35 +0200 (CEST)
+Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
+ [IPv6:2607:f8b0:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BCDB88B9B
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:32:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8FF4188B23
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:32:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-7a1d6f47112so91975985a.0
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:32:15 -0700 (PDT)
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-7bb75419123so1082228a12.3
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:32:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723753923; x=1724358723; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723753949; x=1724358749; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=36vMcjn1yfsHB8ivh6RRvtcVkc/Pgs2w9bQ+B9C6kLM=;
- b=BcxpJwXTQCT4Ou1SE91Jxhe8RveJQWyH9BZAnL2PHuPP5dtF8vVklVVfYNNRh4CXbj
- syGMgMXBWcarfUSGgaMb0dR1CRkSF/AWzztr1diuHg0Xntikfb47Q1wGpCU2z6T6KtCj
- sAXuiIJzRP9lXHBqAwX5whDlIMt+0DuVxP6XI=
+ bh=rP/1mm5clkvQzTykBU5CU807vzw0zGXbymLwSStrhc8=;
+ b=gx66OPtR5gfHLO6cm5LsIJtKenKzA9tb/ybT6+7bOoBAIGODVz+Fq+YZa+PVvIew/0
+ YtAsBt/xfLE/DCnATeksNrjfGy1UTDqUBtM94SHVqwcEVi7UoySuoC7rzCK59dc4qQL1
+ vyXUyBX0uxTlWUXatpDa+Co/tfXURgd4M32VM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723753923; x=1724358723;
+ d=1e100.net; s=20230601; t=1723753949; x=1724358749;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=36vMcjn1yfsHB8ivh6RRvtcVkc/Pgs2w9bQ+B9C6kLM=;
- b=qDIpSmfpH8AGUb7ZTidQxr9SJMexSY9V2k07k+NeEH0MjaFSKbI8itlKKIa8a/XUMw
- rk0BK61RwhMUNvOS0aTbK+WtYgw3xbMpyHPqwlEXPJySKKdUpT36SuWDZElGJYZEda1+
- EbBfSpWzrEjAZ6d9NXmUTTi43EqkTi18h2eHEf8CkArNIqh5xp8n6KSHW37wmrCcDmrn
- mLF4YtgTLxGuy/MdxsqQo3GwAVJNtTGlHnmMwiPf3D8KOtXI2uO4q577g5nIEXeiFapM
- m/cWjbP4YTlrmVV2v6XJjP3jwVtdIZOTBp6Qs9rphzJmyzwHztVaYXEmb16OlcXiTr/b
- fdKw==
-X-Gm-Message-State: AOJu0Yz8QanRLPw+oQiPEL6kAZS63vVe96V0zJnpwlF+2IJnHqkKuSep
- mCvRxJHdjeIcuPWBFvCX9X/zd+Cnt7JfKPq1sfsmEmsR1yS6YUfkE8mIpYKM4XNwZWX+QJ2D/Ip
- woxhL1WZOrzU+LMpKmY3y3HbxGofjMPJB4v5235GgxhoyPU7cZg==
-X-Google-Smtp-Source: AGHT+IGMdQXDkiOGF28Ng/CCnRm2Rnjva/wg9qgCd+mjgSrmPXteDOrXpJUJjDi+289ouQKO3KMu6v8cbogTo4Jf5aA=
-X-Received: by 2002:a05:6214:5c04:b0:6bf:6d7a:11c1 with SMTP id
- 6a1803df08f44-6bf7cd85a93mr8425116d6.7.1723753923471; Thu, 15 Aug 2024
- 13:32:03 -0700 (PDT)
+ bh=rP/1mm5clkvQzTykBU5CU807vzw0zGXbymLwSStrhc8=;
+ b=LkPvCUJve/Sc5P2TaTrou9MJS6/Qv3xjM9rkcYmfy4jpvk+CnWIr0gU7Loys4rwBOe
+ 383UBbasHgntAGILjrwGMMuZKm/VNZD5fB/F8FtI3ENbhqdj5kJNVpvzEz860zBLgc1l
+ 603Qos1xBH2D5gCgh/DPsblwfRlq2KRBYfb90bU8gRMuM7EzQYil+TxOL226QJp2YZ+m
+ 0C4FRvj+TSlXqSWfDJ+QXtqo3siq8Wp+yy8Ha6c+TrgdtCHaMhgwxjVCtM9yI6ftr2cx
+ UoVJqCaH5CusXxTWd34WDjEXuL5BTApsq6P44gC7CpBLehUsYc/Oa4SvN/6SG/b+1gmb
+ 964A==
+X-Gm-Message-State: AOJu0YxaLDrSCQU+qDBfcjCmip+yHdjZBOv8iL+Vwz+Ln2/SzEb0PTrL
+ Okk+hRsZIVh+nBWvzFAVlP3MOaB8nrFogQRXb+uQUV9QZIr2ztMnPKNA/PwTaOWBVtSJWtXLlLh
+ Mi31df9a+oLULEO2ipNoCyFoWMMGxE3qZDXeG
+X-Google-Smtp-Source: AGHT+IGrS1hD88QSd9t996aU8Y4zXXAHv/VRqDqJvsZAoxfBgiOSpV2WfL3YtGbw++Buu+JReRob3oN1bFPOC0FLlNA=
+X-Received: by 2002:a17:90b:14e:b0:2d3:c0d4:2c33 with SMTP id
+ 98e67ed59e1d1-2d3dfc6e82dmr896635a91.17.1723753949431; Thu, 15 Aug 2024
+ 13:32:29 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
- <20240814110009.45310-6-sughosh.ganu@linaro.org>
-In-Reply-To: <20240814110009.45310-6-sughosh.ganu@linaro.org>
+ <20240814110009.45310-20-sughosh.ganu@linaro.org>
+In-Reply-To: <20240814110009.45310-20-sughosh.ganu@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 15 Aug 2024 21:31:53 +0100
-Message-ID: <CAFLszTh_6rdbYRvD+tv1cXKuRuTYxDUTT199cUcS2Xm11bJBHA@mail.gmail.com>
-Subject: Re: [PATCH v2 05/32] lmb: use the BIT macro for lmb flags
+Date: Thu, 15 Aug 2024 21:32:16 +0100
+Message-ID: <CAFLszTiVJ1YXTaf8zoMA8cEzQCS5io9BsxL46WsQ857BvHL+xA@mail.gmail.com>
+Subject: Re: [PATCH v2 19/32] sandbox: move the TCG event log to the start of
+ ram memory
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
@@ -91,17 +92,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 14 Aug 2024 at 05:00, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+Hi Sughosh,
+
+On Wed, 14 Aug 2024 at 05:02, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Use the BIT macro for assigning values to the LMB flags instead of
-> assigning random values to them.
+> The TCG event log buffer is being set at the end of ram memory. This
+> region of memory is to be reserved as LMB_NOMAP memory in the LMB
+> memory map. The current location of this buffer overlaps with the
+> memory region reserved for the U-Boot image, which is at the top of
+> the usable memory. This worked earlier as the LMB memory map was not
+> global but caller specific, but fails now because of the overlap.
+>
+> Move the TCG event log buffer to the start of the ram memory region
+> instead. Move the location of the bloblist address up by 8KB to
+> accomodate the event log buffer, and update the sandbox memory map
+> specified in the documentation accordingly.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
-> Changes since V1: None
+> Changes since V1:
+> * Rejig the memory map to have the event log at 0xb000 and bloblist at
+>   0xd000.
+> * Update the memory map in the document accordingly.
 >
->  include/lmb.h | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
 >
+>  arch/sandbox/dts/test.dts    | 2 +-
+>  common/Kconfig               | 2 +-
+>  doc/arch/sandbox/sandbox.rst | 3 ++-
+>  test/lib/kconfig.c           | 4 ++--
+>  4 files changed, 6 insertions(+), 5 deletions(-)
+
+I think the TCG should be in a bloblist. I can do a patch to do that.
+
+So if you are OK with that:
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+and I will send a patch later.
+
+Regards,
+SImon
