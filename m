@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC8CBC3DA7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:36:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A05DFC3DA7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:36:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6C7688C3D;
-	Thu, 15 Aug 2024 22:33:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 4B8C688800;
+	Thu, 15 Aug 2024 22:33:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KJuV9jEX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Nt0ilhoT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8A1188C60; Thu, 15 Aug 2024 22:33:48 +0200 (CEST)
-Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
- [IPv6:2607:f8b0:4864:20::536])
+ id AA41388C3B; Thu, 15 Aug 2024 22:33:51 +0200 (CEST)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A208A88107
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:33:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 52D6788C52
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:33:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x536.google.com with SMTP id
- 41be03b00d2f7-7c9a2b339a6so17375a12.2
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:33:46 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-3db2315d7ceso761802b6e.1
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:33:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723754024; x=1724358824; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WKw3Lb8UwaRa8h4NZLAiFD3fDBUrC8OE3cwmqqfph14=;
- b=KJuV9jEXJjKY6igM2pWAMSRjUshdrz1pD9hQZv0kki6RYe2zds2NTMW/byJaM+b5fs
- yVgY7aOtkDrs/Y7zQPd/ymC9tTIJ4rdCiBsfnNsx/g7ACguYmBP93vGxmxFaa4+avETk
- Z78R1ZaDC5wpLF5xJArAiTtuM2wZ0peUY9FR0=
+ d=konsulko.com; s=google; t=1723754025; x=1724358825; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SL+GKQFrlpUnvAhphlySxv/BCSAaxSx8yKZsvMB6RyI=;
+ b=Nt0ilhoTryLDMXBhZf3/PhgaiD5eqK6nP3P4Pwv+3g5FF+dn1W4fXdRqo/ZS9SWzuT
+ 4C75+oPo7NfcdnoeQOcwb1bnB/l7cwcfhPQVTY0G97X+8LKn+Ji2YVIctKBco/n9KrHO
+ eyztBWvxv7sPb4Gfyaae2tk6q0rC81ND4bf0w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723754024; x=1724358824;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WKw3Lb8UwaRa8h4NZLAiFD3fDBUrC8OE3cwmqqfph14=;
- b=A/Dbo0F852QxL/bvE/jIzotG39jKkKl+/agAHUpBOXHQYfKe5PJT+B3YMdYA9KO6Yo
- j8nXef86o0isQiw/unpqSL8onNDnh6PWCskqbMHC6HE5sVtfMsqCu/MxN54IWrd76Dxc
- 7lL0qsE48pzI9DpiG7cbApj3bJohCw+axUGVWzTSSHSHYBbrtvTbjqqNIMVf4hFwG2NL
- LQyt0mQgFhtXQgpYrj9nIOzbiEJJ2YMybqn47zajwQEqyLHZqNBWfVJCMCNLCFbdK58Z
- gbb8O7i3hUtSCq7u+L2M13RvCPFZU2XX+OnrpfhuHRn3uBLh6eJVnAQDj7GVohY5Sqg2
- bMjA==
-X-Gm-Message-State: AOJu0YzXUoXWGiV2iyAgPn2MnJQjxuJDykOSFRHcs0WabP+3GmpSzGL5
- lWMKmcLeHMeET8qOwICOHMiVqepS1gZhu18K7mjGaNjMmJuIWEaSHk3lsoIN8H0on02TAtjqqwn
- hUbhlD2n/NChiRw7/CkcBxNONLqwWGzwlBFsv
-X-Google-Smtp-Source: AGHT+IELGd9pYtJ1FxOLU0z26egteHAn7ZKaxvxENKbEsv0I4i8qBGFHSIj6CSZzuH8dXCEvf68ayO4UEbUg/rTMgSA=
-X-Received: by 2002:a17:90b:1051:b0:2d3:c976:dd80 with SMTP id
- 98e67ed59e1d1-2d3e0407ac1mr994588a91.39.1723754023780; Thu, 15 Aug 2024
- 13:33:43 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1723754025; x=1724358825;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=SL+GKQFrlpUnvAhphlySxv/BCSAaxSx8yKZsvMB6RyI=;
+ b=lKipOjwr9q3aWGeHJZLtJ+Oi/9nzSSGH5i9Z/6wq/1VRiAscnqMkTEPgxJ1t+LLM0Y
+ KoI7BK3ExgbYLrkZBghYV3PvQTpm+NcS8DziFB7XZiNuctYzECc/IeLrRomIxhsuEvYq
+ HD9vNZB7fa+DxyLK2elq8ISKZJizo0ejlVju2JR2bIxZqwmnTTVfifVkLR3CvQDd8eCc
+ l2zlWjUdCZhzLzkxbnnUuAS6hnrbd9JnmIH7b8r+jVD32w9mfbDk7Ud55KdUaEQtHnpY
+ NgpKkNPIfnOLqY/lq9DuGk0VnnFiLsggqweQEHTRep4wFZUEXWucvJql2k+2SuCK0YVZ
+ D+pw==
+X-Gm-Message-State: AOJu0Yz0D/Lgz64TyWcB2R9neQumdi7HQKR8YE/UqrszbE2TWH2Oelwb
+ sn7tbtL8xl2Yn6DBqPG62OLesMSonln7e7EmTzPVrm6LIYWVqdqv5zwf5LbBz97PvmZFZ8jXpBj
+ CE68=
+X-Google-Smtp-Source: AGHT+IFoEX0EcEGwegy0eaIcdgKHeHGQQ+Q01bMRgazPjrR8q/s+T+tOPHvqhZB0voW2yyudImy+1g==
+X-Received: by 2002:a05:6808:1528:b0:3da:a779:ab70 with SMTP id
+ 5614622812f47-3dd3ae2278bmr711404b6e.45.1723754024973; 
+ Thu, 15 Aug 2024 13:33:44 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-236.totalplay.net.
+ [189.203.97.236]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3dd33ef4338sm400988b6e.48.2024.08.15.13.33.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Aug 2024 13:33:44 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Hugues KAMBA MPIANA <hugues.kambampiana@arm.com>
+Cc: abdellatif.elkhlifi@arm.com
+In-Reply-To: <20240813155305.446779-1-hugues.kambampiana@arm.com>
+References: <20240813155305.446779-1-hugues.kambampiana@arm.com>
+Subject: Re: [PATCH] maintainers: Update list of maintainers for Corstone-1000
+Message-Id: <172375402425.3490273.14356266946620175696.b4-ty@konsulko.com>
+Date: Thu, 15 Aug 2024 14:33:44 -0600
 MIME-Version: 1.0
-References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
- <20240814110009.45310-11-sughosh.ganu@linaro.org>
-In-Reply-To: <20240814110009.45310-11-sughosh.ganu@linaro.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 15 Aug 2024 21:33:31 +0100
-Message-ID: <CAFLszTh3RaCSsUetT90aDhZyo7z4FgngzvB4H5PozZ+f8jw=Fw@mail.gmail.com>
-Subject: Re: [PATCH v2 10/32] lmb: config: add lmb config symbols for SPL
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
- Max Filippov <jcmvbkbc@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,20 +90,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 14 Aug 2024 at 12:01, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
->
-> Add separate config symbols for enabling the LMB module for the SPL
-> phase. The LMB module implementation now relies on alloced list data
-> structure which requires heap area to be present. Add specific config
-> symbol for the SPL phase of U-Boot so that this can be enabled on
-> platforms which support a heap in SPL.
->
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> ---
-> Changes since V1: None
->
->  lib/Kconfig | 12 +++++++++++-
->  1 file changed, 11 insertions(+), 1 deletion(-)
->
+On Tue, 13 Aug 2024 16:53:05 +0100, Hugues KAMBA MPIANA wrote:
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> - Add new maintainer: Hugues KAMBA MPIANA
+> - Remove maintainer: Xueliang ZHONG
+> - Update contact information for current maintainer.
+> 
+> 
+
+Applied to u-boot/master, thanks!
+
+-- 
+Tom
+
+
