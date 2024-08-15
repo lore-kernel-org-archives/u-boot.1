@@ -4,77 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A40D0C52D7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:37:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1922BC52D7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:38:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBA8A88C82;
-	Thu, 15 Aug 2024 22:34:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 263BA88C8A;
+	Thu, 15 Aug 2024 22:34:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m/Gggz1m";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iEXcoUFy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 953E988107; Thu, 15 Aug 2024 22:34:37 +0200 (CEST)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id E260188C78; Thu, 15 Aug 2024 22:34:54 +0200 (CEST)
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [IPv6:2607:f8b0:4864:20::1031])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5ED6988C6E
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:34:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CF2888B63
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:34:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2d3c396787cso979940a91.1
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:34:35 -0700 (PDT)
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-2d3c05dc63eso975568a91.0
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:34:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723754073; x=1724358873; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723754091; x=1724358891; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+r9j+Dpn6tu2OvfENxzQwDP5SPSs7XOy4QOmrh7joUg=;
- b=m/Gggz1mqtibX9PaSDTqYueTpGhhWPjfM+Ke4kIhTXcO59NKiuxOsp4aolAkra7iy1
- MkA/tREUl0ITnDfhIBSn0vmKS4XiVFu/eaDeW6ZcO+ZLn31cRwehlBy3hxpAthbCK5sP
- z6DdG79iJTVgThfWXX6VbvOPM3Q2iEnJF/d5Q=
+ bh=80oN8aC43iZpqu127zbWKhwroha62cl1Zfk1DUaCldQ=;
+ b=iEXcoUFy3wOmmqtxfBPR/+Te5Nu2SgGSCYq9m2+1VHJCKk5jIyQpS61LYKx08zhknf
+ pV0GYT5ijF6aVSKooDWY4/7yFRgYCc+utdJncXBKOy/hJU3xt+8RDbB+hQ71hg7e5Amc
+ pnIAZkDhDipU7R7b99iFeTmngMAmGp8+L+PSU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723754073; x=1724358873;
+ d=1e100.net; s=20230601; t=1723754091; x=1724358891;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=+r9j+Dpn6tu2OvfENxzQwDP5SPSs7XOy4QOmrh7joUg=;
- b=uIG/8TB+3YONfU0hn4hn81plP8vJ4QBq0lnYqH57nZvPgdUAyzq9qOZBqomyQdgkHP
- 1eXK3TSI2hxcRImOZWrMRqngjYbc5PlRsICphpSGCEstnpIYSEUHIcxt3G98AX8TML5B
- nS/wlVaaNZHnZWM1Tw4EBX9FSLPLccg5DapQLuZy7YLly3KFeBLldZZcBkMnpVnXBO+Q
- h0dXvZv0mRoRJuaxubeBjGytaynKSVtb0Dbuv/DgeaboUgdU9QYvT3Fqp0QXpS3XWasd
- BDgPXNIScKP2cDTymAJ9eOj4U3yFg0gOiNPa9kG0ksD31YhuHA6lwWrNlTr1Dgb+ovMl
- jYSQ==
-X-Gm-Message-State: AOJu0YxA401va8S5AgTNsFdmP0RZDS82okoITFsNalFJzzvK4kcK+eN5
- JHfVahKZw3pywtPDQ41E6f1eXLFIbaTG2iMkKWayyJ2iGjlC0KGtBnQkZPbGC6S3AKJHIyOOrtX
- Q8FYBnaB9c2CB6jUDla8L9xyDC4+kXVRNbfYz
-X-Google-Smtp-Source: AGHT+IGdS3ssj0sTd5f5lpSs43TuYvFheNnECuDOwf057C6lnf/04HzRHMqWdBndCGSsyFzs1bLl+il2+d2mh71vdGQ=
-X-Received: by 2002:a17:90a:e018:b0:2c9:9f2a:2b20 with SMTP id
- 98e67ed59e1d1-2d3dfc89089mr1002152a91.22.1723754073556; Thu, 15 Aug 2024
- 13:34:33 -0700 (PDT)
+ bh=80oN8aC43iZpqu127zbWKhwroha62cl1Zfk1DUaCldQ=;
+ b=E0mgyz1Pepi+zf+nhjk6MxjHdCAd0aIjGxfFoccCXpALUWaZO0iXYtdG0Xnwb0PkHz
+ gD1z49QpleyZmVterdHHZvw0GUk7/c3RA22xG7oBvq8wN5gZcYakODMPOHWbVhn3EOEV
+ 56trWd9C7sMpnU1vP03gpWottH5o6i/tAh2GrBhsQYZ4IncwYp58Tj0H8w079+u9hBQC
+ 9AViTuLO2gLaA70NE24X6GB3IW2jqSrN2HX/mVdwLvWae9uNmP6F5xdXTy5aqsgkhZjo
+ KoZmuEyifV1q3UWnEI6fBv95B0k1lObsla5RiZP+co/VvF1obfJi1ZIOiNGdZQCE3J72
+ LPpQ==
+X-Gm-Message-State: AOJu0YzwwspnopZeuCq7WmvRb6fciMFVNNVnVv2Binhzk4kXcQqylo3y
+ s7qLRVUsm/jcejBzIuhEKQZN1iD7vR+wRbeTvq9+XUVyTlEMbr5muno/RmQC9f2UcsKcIKo2rKQ
+ 9mg9UUUWwCfAxYHy197hzfD/Izv+zJ8ol3yYc
+X-Google-Smtp-Source: AGHT+IExaKGn7J5vmG0wTfovPRlnNvBY9bUqVjkGi/oOU9w140ZxOTmWh1/cSnEHx45KhW7hqikZbIxLVgMFcsfyNKI=
+X-Received: by 2002:a17:90b:802:b0:2c7:ab00:f605 with SMTP id
+ 98e67ed59e1d1-2d3dfc7d183mr938529a91.20.1723754090761; Thu, 15 Aug 2024
+ 13:34:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
- <20240814110009.45310-18-sughosh.ganu@linaro.org>
-In-Reply-To: <20240814110009.45310-18-sughosh.ganu@linaro.org>
+References: <20240810205205.3403177-1-sjg@chromium.org>
+ <20240810205205.3403177-7-sjg@chromium.org>
+ <20240815170108.GU1626301@bill-the-cat>
+In-Reply-To: <20240815170108.GU1626301@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 15 Aug 2024 21:34:22 +0100
-Message-ID: <CAFLszThRP1Grj3iM9o-LtQFOXm+xPGovdFo6QMaAKF+RvcrNzg@mail.gmail.com>
-Subject: Re: [PATCH v2 17/32] lmb: init: initialise the lmb data structures
- during board init
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
- Max Filippov <jcmvbkbc@gmail.com>
+Date: Thu, 15 Aug 2024 21:34:38 +0100
+Message-ID: <CAFLszTgThyq1v+zP2z5znvzbZqTMQuNO1fkSP59KJ8BnZyiQEg@mail.gmail.com>
+Subject: Re: [PATCH 06/21] mmc: Drop the blank line before accesses
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Fabio Estevam <festevam@gmail.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Marek Vasut <marex@denx.de>,
+ Peng Fan <peng.fan@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,93 +86,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
+Hi Tom,
 
-On Wed, 14 Aug 2024 at 12:01, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Thu, 15 Aug 2024 at 18:01, Tom Rini <trini@konsulko.com> wrote:
 >
-> The memory map maintained by the LMB module is now persistent and
-> global. This memory map is being maintained through the alloced list
-> structure which can be extended at runtime -- there is one list for
-> the available memory, and one for the used memory. Allocate and
-> initialise these lists during the board init.
+> On Sat, Aug 10, 2024 at 02:51:50PM -0600, Simon Glass wrote:
 >
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> ---
-> Changes since V1:
-> * Move the initr_lmb() function to board_r.c
-> * Call lmb_init() from spl.c instead of initr_lmb().
+> > Several mmc subcommand print a blank line before starting and after
+> > finishing. It isn't necessary to do both, so drop the first one.
+> >
+> > It is questionable whether these command should produce any output at
+> > all, but leave it for now.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  cmd/mmc.c | 12 ++++++------
+> >  1 file changed, 6 insertions(+), 6 deletions(-)
+> >
+> > diff --git a/cmd/mmc.c b/cmd/mmc.c
+> > index 7244a90f4dc..ff7b8e555ba 100644
+> > --- a/cmd/mmc.c
+> > +++ b/cmd/mmc.c
+> > @@ -238,7 +238,7 @@ static int do_mmcrpmb_read(struct cmd_tbl *cmdtp, int flag,
+> >       if (argc == 5)
+> >               key_addr = (void *)hextoul(argv[4], NULL);
+> >
+> > -     printf("\nMMC RPMB read: dev # %d, block # %d, count %d ... ",
+> > +     printf("MMC RPMB read: dev # %d, block # %d, count %d ... ",
+> >              curr_device, blk, cnt);
+> >       n =  mmc_rpmb_read(mmc, addr, blk, cnt, key_addr);
+> >
+> > @@ -265,7 +265,7 @@ static int do_mmcrpmb_write(struct cmd_tbl *cmdtp, int flag,
+> >       cnt = hextoul(argv[3], NULL);
+> >       key_addr = (void *)hextoul(argv[4], NULL);
+> >
+> > -     printf("\nMMC RPMB write: dev # %d, block # %d, count %d ... ",
+> > +     printf("MMC RPMB write: dev # %d, block # %d, count %d ... ",
+> >              curr_device, blk, cnt);
+> >       n =  mmc_rpmb_write(mmc, addr, blk, cnt, key_addr);
+> >
+> > @@ -362,7 +362,7 @@ static int do_mmc_read(struct cmd_tbl *cmdtp, int flag,
+> >       if (!mmc)
+> >               return CMD_RET_FAILURE;
+> >
+> > -     printf("\nMMC read: dev # %d, block # %d, count %d ... ",
+> > +     printf("MMC read: dev # %d, block # %d, count %d ... ",
+> >              curr_device, blk, cnt);
+> >
+> >       n = blk_dread(mmc_get_blk_desc(mmc), blk, cnt, addr);
+> > @@ -411,7 +411,7 @@ static int do_mmc_sparse_write(struct cmd_tbl *cmdtp, int flag,
+> >       if (!mmc)
+> >               return CMD_RET_FAILURE;
+> >
+> > -     printf("\nMMC Sparse write: dev # %d, block # %d ... ",
+> > +     printf("MMC Sparse write: dev # %d, block # %d ... ",
+> >              curr_device, blk);
+> >
+> >       if (mmc_getwp(mmc) == 1) {
+> > @@ -455,7 +455,7 @@ static int do_mmc_write(struct cmd_tbl *cmdtp, int flag,
+> >       if (!mmc)
+> >               return CMD_RET_FAILURE;
+> >
+> > -     printf("\nMMC write: dev # %d, block # %d, count %d ... ",
+> > +     printf("MMC write: dev # %d, block # %d, count %d ... ",
+> >              curr_device, blk, cnt);
+> >
+> >       if (mmc_getwp(mmc) == 1) {
+> > @@ -484,7 +484,7 @@ static int do_mmc_erase(struct cmd_tbl *cmdtp, int flag,
+> >       if (!mmc)
+> >               return CMD_RET_FAILURE;
+> >
+> > -     printf("\nMMC erase: dev # %d, block # %d, count %d ... ",
+> > +     printf("MMC erase: dev # %d, block # %d, count %d ... ",
+> >              curr_device, blk, cnt);
+> >
+> >       if (mmc_getwp(mmc) == 1) {
 >
->  common/board_r.c | 17 +++++++++++++++++
->  common/spl/spl.c |  3 +++
->  2 files changed, 20 insertions(+)
->
+> Did you confirm things look right still, on hardware?
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Yes that's why I decided to drop it. See here for example:
 
-nit below
+$ ub-int ff3399
+Building U-Boot in sourcedir for firefly-rk3399
+Bootstrapping U-Boot from dir /tmp/b/firefly-rk3399
+Writing U-Boot using method rockchip
 
-> diff --git a/common/board_r.c b/common/board_r.c
-> index f445803d7a..0943ed3d01 100644
-> --- a/common/board_r.c
-> +++ b/common/board_r.c
-> @@ -22,6 +22,7 @@
->  #include <hang.h>
->  #include <image.h>
->  #include <irq_func.h>
-> +#include <lmb.h>
->  #include <log.h>
->  #include <net.h>
->  #include <asm/cache.h>
-> @@ -510,6 +511,21 @@ int initr_mem(void)
->  }
->  #endif
->
-> +static int initr_lmb(void)
-> +{
-> +#if CONFIG_IS_ENABLED(LMB)
+U-Boot TPL 2024.10-rc2-00093-gcbaae70baf39 (Aug 15 2024 - 13:27:51)
+Channel 0: DDR3, 800MHz
+BW=32 Col=10 Bk=8 CS0 Row=15 CS1 Row=15 CS=2 Die BW=16 Size=2048MB
+Channel 1: DDR3, 800MHz
+BW=32 Col=10 Bk=8 CS0 Row=15 CS1 Row=15 CS=2 Die BW=16 Size=2048MB
+256B stride
+Trying to boot from BOOTROM
+Returning to boot ROM...
 
-This should use if()
+U-Boot SPL 2024.10-rc2-00093-gcbaae70baf39 (Aug 15 2024 - 13:27:51 -0600)
+Trying to boot from MMC2
+## Checking hash(es) for config config-1 ... OK
+## Checking hash(es) for Image atf-1 ... sha256+ OK
+## Checking hash(es) for Image u-boot ... sha256+ OK
+## Checking hash(es) for Image fdt-1 ... sha256+ OK
+## Checking hash(es) for Image atf-2 ... sha256+ OK
+## Checking hash(es) for Image atf-3 ... sha256+ OK
+## Checking hash(es) for Image atf-4 ... sha256+ OK
+load_simple_fit: Skip load 'atf-5': image size is 0!
 
-> +       int ret;
-> +
-> +       ret = lmb_init();
-> +       if (ret)
-> +               printf("Unable to initialise the LMB data structures\n");
-> +
-> +       return ret;
-> +#else
-> +       return 0;
-> +#endif
-> +}
-> +
->  static int dm_announce(void)
->  {
->         int device_count;
-> @@ -612,6 +628,7 @@ static init_fnc_t init_sequence_r[] = {
->  #ifdef CONFIG_CLOCKS
->         set_cpu_clk_info, /* Setup clock information */
->  #endif
-> +       initr_lmb,
->  #ifdef CONFIG_EFI_LOADER
->         efi_memory_init,
->  #endif
-> diff --git a/common/spl/spl.c b/common/spl/spl.c
-> index d6a364de6e..4102e25115 100644
-> --- a/common/spl/spl.c
-> +++ b/common/spl/spl.c
-> @@ -723,6 +723,9 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
->             IS_ENABLED(CONFIG_SPL_ATF))
->                 dram_init_banksize();
->
-> +       if (IS_ENABLED(CONFIG_SPL_LMB))
-> +               lmb_init();
-> +
->         if (CONFIG_IS_ENABLED(PCI) && !(gd->flags & GD_FLG_DM_DEAD)) {
->                 ret = pci_init();
->                 if (ret)
-> --
-> 2.34.1
->
+
+U-Boot 2024.10-rc2-00093-gcbaae70baf39 (Aug 15 2024 - 13:27:51 -0600)
+
+SoC: Rockchip rk3399
+Reset cause: POR
+Model: Firefly-RK3399 Board
+DRAM:  4 GiB (effective 3.9 GiB)
+PMIC:  RK808
+Core:  308 devices, 29 uclasses, devicetree: separate
+MMC:   mmc@fe310000: 3, mmc@fe320000: 1, mmc@fe330000: 0
+Loading Environment from MMC... Reading from MMC(1)... *** Warning -
+bad CRC, using default environment
+
+In:    serial@ff1a0000
+Out:   serial@ff1a0000
+Err:   serial@ff1a0000
+Model: Firefly-RK3399 Board
+Net:   eth0: ethernet@fe300000
+Hit any key to stop autoboot:  0
+=> mmc read 1000 0 100
+
+MMC read: dev # 0, block # 0, count 256 ... 256 blocks read: OK
+=>
+
+With this patch, the blank line above is gone.
+
+BTW, this whole series is marked as needing changes. I've dropped the
+wget patches. Should I send it again, or just wait?
 
 Regards,
 Simon
