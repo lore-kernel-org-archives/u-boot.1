@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E7A9C52D7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:30:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80FB7C3DA7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:30:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA21988BBC;
-	Thu, 15 Aug 2024 22:26:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4433988B6D;
+	Thu, 15 Aug 2024 22:26:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YpL4ccFN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lQzM65+z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C62FE88BC8; Thu, 15 Aug 2024 22:26:06 +0200 (CEST)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
+ id AE91C88BD6; Thu, 15 Aug 2024 22:26:07 +0200 (CEST)
+Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
+ [IPv6:2607:f8b0:4864:20::d29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6542088BB2
+ by phobos.denx.de (Postfix) with ESMTPS id 66BFA88BB6
  for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 22:26:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-39d20c4be31so2881565ab.1
+Received: by mail-io1-xd29.google.com with SMTP id
+ ca18e2360f4ac-81f83b14d65so63247339f.1
  for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 13:26:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723753554; x=1724358354; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723753557; x=1724358357; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KempVwTGPJGo0sivKvaUCUHvMMsZ7czBFCqaB5M1H0M=;
- b=YpL4ccFNbCd1Vh4vXcv3YYKL4knc+1NJqadlzLb+KVTx6G9J51wwP+BvepkQ1R9I4b
- vAgnLp1U9dP/sEuL39EiHvA05qC8/KyaN3j3FZs0h1eX685EjXhvVa/2vXzxhNn7e+4o
- e0lvExfNOdokUFHM0uhe5y2VlRUVuKsj6NVdU=
+ bh=gF4L4/LqhTmHLXLs6sfz2g4aPV4zfNGACs/y8Y8HoFs=;
+ b=lQzM65+zmwOGb2OUknh4upI+zYFWzhlDdSKnyg2re4QERdHtTveSKUZJ/Sb4JxvjAG
+ pzr96tj0gNtiZUnynIULoIHN2tYt1N1nLKow/yIpmmUkiAReZTP9mMqvS23Gn+RLK0l8
+ hW8pySa36etRo+hidMIi12GAxIhiYjjrccXqM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723753554; x=1724358354;
+ d=1e100.net; s=20230601; t=1723753557; x=1724358357;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KempVwTGPJGo0sivKvaUCUHvMMsZ7czBFCqaB5M1H0M=;
- b=dIRqqgj3MXmfGmaomJ8v6pwM2uKu5AoyuYIoJl9wbC9occMnS38lN2Oj3tUrt2BOeW
- Pqo8RujUgTL+VxzkR0EaqN+NhGbXO/gz70b6P0xXEmUobZbsqwcWtnF1afHk86cwi/kA
- ouqs+08xH7hRgWUG2BBZ2NRMeIfu236gqNlsVleLcR7pqaCtM/lfVoN2AhoN9I/UrlKE
- 0mvVLz7aPiByQgA7SJ5giCC/nFUKm06qz4GvnVOg4vShfjwLBYwkrBBOF6Wi+gtNLiNA
- 8RZ58O26VGA/G2uQHT5KyW4i3dR2yFB4l3CcJGjFa8kGUMPRk+IMGo1jzb83V2BTB6tI
- b6fA==
-X-Gm-Message-State: AOJu0YxmgviomsMzgm5blmoqzrFIt/P+jYSgtFvjYj4eGvdmBtFsGu58
- A/t8zxGpngewWYbbDL3y9h79rXFQ1LkRP+EYWgxYIce23kpXCqV3UAfvtatakr9TlyRQcNcXju0
- 6uw==
-X-Google-Smtp-Source: AGHT+IGtvQ79jOnaXL0MOY/rwnQO7UIUChtoBLgMv0R5qVCw5CmEyCcCIhdJcXhif/dhnhpQeTDi5g==
-X-Received: by 2002:a05:6e02:138b:b0:39b:28c0:9427 with SMTP id
- e9e14a558f8ab-39d26cee4f7mr12223885ab.8.1723753554041; 
- Thu, 15 Aug 2024 13:25:54 -0700 (PDT)
+ bh=gF4L4/LqhTmHLXLs6sfz2g4aPV4zfNGACs/y8Y8HoFs=;
+ b=QpvbTflkLQo+nF4YvWgk+E3BGRMZc7J8IGcKHmrYz48JaXeYgBpSZJ1IkOhQ9jiVcc
+ 1xn5JddHpDdO/PRmy2oCGmpwPrJg8c+qQsaTkiRVMys7qKg//ofi2U9uVprKVoq7DMRr
+ h+cugoaqs5NHEyf9cAmiKCjqj9mGwsC8rT6YaIFITKWhqSoBCOr9Y9gSmOh0WYIVHxn+
+ Qs92cJzUgziyDLqjOfentnnNVU/SkdiNVs2oRW/8XmyN5RXN8oWYRdlOzeoM4ZFgmpm7
+ 0v1dMSJS2q51ud65zwcIO7iYzrc2wYbnIMi06GO3W0kSNhS9N/pNEqIl2HK0KTOYmduN
+ dbjQ==
+X-Gm-Message-State: AOJu0YzcFVJW301Tk3/ZPFi49L6dvqt7QcuDiiESXy0Hrui2T/fXzF1i
+ 0vhqQl/ADLN2IllbDHJTKaUAF8Qgfh0n7788Llrzd7exZzm2BSkAjQkuYPit9XJj+BIgYCXRwM/
+ 5Dw==
+X-Google-Smtp-Source: AGHT+IG8Lq8AyugIHtO1GVLB7R4VOaCUjk48wJzTe6WC7mXQMsKm3H0nDRzBY9XnIL+62cwjcto/Uw==
+X-Received: by 2002:a05:6e02:15c8:b0:376:4049:69e5 with SMTP id
+ e9e14a558f8ab-39d26d733f9mr13421015ab.23.1723753557177; 
+ Thu, 15 Aug 2024 13:25:57 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39d1ed5db5bsm8014235ab.64.2024.08.15.13.25.53
+ e9e14a558f8ab-39d1ed5db5bsm8014235ab.64.2024.08.15.13.25.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Aug 2024 13:25:53 -0700 (PDT)
+ Thu, 15 Aug 2024 13:25:56 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 15/24] sandbox: Unmap old tags
-Date: Thu, 15 Aug 2024 14:25:26 -0600
-Message-Id: <20240815202535.767869-16-sjg@chromium.org>
+Subject: [PATCH v3 19/24] read: Tidy up use of map_sysmem() in the read command
+Date: Thu, 15 Aug 2024 14:25:30 -0600
+Message-Id: <20240815202535.767869-20-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240815202535.767869-1-sjg@chromium.org>
 References: <20240815202535.767869-1-sjg@chromium.org>
@@ -89,55 +89,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-So far unmapping has not been implemented. This means that if one test
-maps a pointer to an address with map_sysmem(), then a second test can
-use that same pointer, by mapping the address back to a pointer with
-map_to_sysmem(). This is not really desirable, even if it doesn't
-cause any problems at the moment.
-
-Implement unmapping, to clean this up.
+Rename the variable to 'ptr' since it is a pointer, not an address. Make
+sure to unmap the pointer.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v3:
+- Correct the commit subject and message
 
- arch/sandbox/cpu/cpu.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ cmd/read.c | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
-diff --git a/arch/sandbox/cpu/cpu.c b/arch/sandbox/cpu/cpu.c
-index 8eb055d6837..3e1c0dd583e 100644
---- a/arch/sandbox/cpu/cpu.c
-+++ b/arch/sandbox/cpu/cpu.c
-@@ -185,12 +185,28 @@ void *map_physmem(phys_addr_t paddr, unsigned long len, unsigned long flags)
+diff --git a/cmd/read.c b/cmd/read.c
+index af54bd17654..8e21f004423 100644
+--- a/cmd/read.c
++++ b/cmd/read.c
+@@ -20,7 +20,7 @@ do_rw(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	struct disk_partition part_info;
+ 	ulong offset, limit;
+ 	uint blk, cnt, res;
+-	void *addr;
++	void *ptr;
+ 	int part;
  
- void unmap_physmem(const void *ptr, unsigned long flags)
- {
-+	struct sandbox_mapmem_entry *mentry;
-+
- #ifdef CONFIG_PCI
- 	if (map_dev) {
- 		pci_unmap_physmem(ptr, map_len, map_dev);
- 		map_dev = NULL;
+ 	if (argc != 6) {
+@@ -33,7 +33,7 @@ do_rw(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	if (part < 0)
+ 		return 1;
+ 
+-	addr = map_sysmem(hextoul(argv[3], NULL), 0);
++	ptr = map_sysmem(hextoul(argv[3], NULL), 0);
+ 	blk = hextoul(argv[4], NULL);
+ 	cnt = hextoul(argv[5], NULL);
+ 
+@@ -48,13 +48,15 @@ do_rw(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 
+ 	if (cnt + blk > limit) {
+ 		printf("%s out of range\n", cmdtp->name);
++		unmap_sysmem(ptr);
+ 		return 1;
  	}
- #endif
-+
-+	/* If it is in emulated RAM, we didn't create a tag, so nothing to do */
-+	if (is_in_sandbox_mem(ptr))
-+		return;
-+
-+	mentry = find_tag(ptr);
-+	if (mentry) {
-+		list_del(&mentry->sibling_node);
-+		log_debug("Removed map from %p to %lx\n", ptr,
-+			  (ulong)mentry->tag);
-+		free(mentry);
-+	} else {
-+		log_warning("Address not mapped: %p\n", ptr);
-+	}
- }
  
- phys_addr_t map_to_sysmem(const void *ptr)
+ 	if (IS_ENABLED(CONFIG_CMD_WRITE) && !strcmp(cmdtp->name, "write"))
+-		res = blk_dwrite(dev_desc, offset + blk, cnt, addr);
++		res = blk_dwrite(dev_desc, offset + blk, cnt, ptr);
+ 	else
+-		res = blk_dread(dev_desc, offset + blk, cnt, addr);
++		res = blk_dread(dev_desc, offset + blk, cnt, ptr);
++	unmap_sysmem(ptr);
+ 
+ 	if (res != cnt) {
+ 		printf("%s error\n", cmdtp->name);
 -- 
 2.34.1
 
