@@ -4,55 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 315F1C3DA7F
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:14:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BDA7C52D7F
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 20:15:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8112788A76;
-	Thu, 15 Aug 2024 22:14:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E198388A99;
+	Thu, 15 Aug 2024 22:15:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1723752863;
-	bh=4ZW0BDMg9SG4RlkDbWa3/MvV6f6G0DpOlwFlk16HyC8=;
+	s=phobos-20191101; t=1723752900;
+	bh=CPhWJtEfjzJ6yl/pBWHO/SyO9pE7VuoM4ffMBSGktbc=;
 	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=IrHoOx+fjT2eJIOnFfiJkKtSnWktZCdc954BBADTq8+3umQ/EtFqvN4WDmXJQlROr
-	 1KKDtazBXUa6ohFichRUbHBjqY21itgizgD/pyKejI59CZHqDotnjbqY+2xH2me19l
-	 IZb8M5Kre+n8jXvrActPjr+mdP2HshsWHXokdchIfV209v5BirsHVTPBT4vpAt+6zo
-	 uLfXQBtmitgdEfcHhaE8KQWZr3XcTJLHCwMWbTD8erHpa/Wbb2XbVTx2LXjheD/Pj2
-	 OSDOXA55ZLG4l/kvt0ckPN59bjM25EvevX/u4MBELbpdUmzDdxtE3RtaMFqZQKzGoU
-	 AyK6zOBY0llXA==
+	b=RWtwit+PQVfWW37S7o0QKiGZRi9gJGI0Z+l+DfEg0pxSUS21Ydx/1Is0/sffieYS1
+	 4hoAEXXyBMiTqmobMdgaq1jnXh9suef8M3eGuEPOX1jF3r7oBZ/5hXtIK4x5xz7GPU
+	 6aBc+9YWyYilb95PVx+90sw9r8DoJq51Cib6VipJGXE1ZPnmkaNVupS+4JzmhCS/oK
+	 mkZptenwuYqCU9IptVdehS8K/YYPP7htiosJVXyFX0nNXLm2JG/WlOKLqJf4M9NRYe
+	 qWX2B2Pt5OsnNjAu4Mf/NclcZTU/Kfpgqbpctfh4u081178jW04ooqAP9pqCH8kBzo
+	 04Rw1N8/AMVPQ==
 Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 55E3D8863B;
- Thu, 15 Aug 2024 22:14:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 1D5ED8863B;
+ Thu, 15 Aug 2024 22:14:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1723752862;
- bh=4ZW0BDMg9SG4RlkDbWa3/MvV6f6G0DpOlwFlk16HyC8=;
+ s=phobos-20191101; t=1723752899;
+ bh=CPhWJtEfjzJ6yl/pBWHO/SyO9pE7VuoM4ffMBSGktbc=;
  h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=cC6Q9nYzQhKgpY9PxvdlZqgeTwZK6vz/KuIJF0W8nNJi5NlTag+UN2iFPmyFwHtqI
- osvK6mevCVIY3QJ5Q0iizPEQw3aICmW4dY0ae1oHYtrWoWMsxpzYSq5VpC9+pXrJZI
- qlQUA7dEibYc6UBaOImcPFx588JvwbbDN7Djcrta1hLxQxf2aS+i91WcXFTMaLY3BJ
- HN/RhGDo71Rfl8jQbFpbRgsOnbEy01Pz1s0UrCyiD3kGnkMyKz2CCGM/1lOpweQtlf
- 9w90LhAYjtTai0a36jYZhnuZu/g45GWvMklLzFGTaaiI67cAttcXWxX7tPUNwrdpXF
- 4h8+MVgqdGRbg==
-Date: Thu, 15 Aug 2024 22:14:21 +0200
+ b=inLTsAwPpbh+IEro3JthXdPgPkHniePCvRP7pdjDIoEasoORIFJtZWqc6TnjxyQM4
+ l5+f6b8QDi4jydWkBmOYDNkMXt80Op51AYTYNCMD/AZE1cf8cRc80kVFDXQCs8nBG7
+ xWtucXy7XoeP9TTWbQUMz1tlMGcBMHRGSTaRkvwwlMQSwQ7Y93IK3QVjKt8Gu/wNPX
+ YQvBlMfVJaGJmBnESLrmoMr8dOQGaOoqNTFjZpo0GLF5FLhQzOSUiwEIWXHS6V2V0z
+ B3lSX1hUrzbWIIfd3hE67Xi7CRmIcKSsae/T4Np9//983naYxTmtB9RZvJ3XVLDzuN
+ LfgnILliYsPFQ==
+Date: Thu, 15 Aug 2024 22:14:58 +0200
 From: Lukasz Majewski <lukma@denx.de>
 To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, Marek Vasut
- <marex@denx.de>
-Subject: Re: [Binman] Question regarding SPL symbol offsets generation
-Message-ID: <20240815221421.61f64a17@wsk>
-In-Reply-To: <CAOMZO5A74MigLO0qkeXi04=7M70jaiEgk9zdFBjUV74vuZDP0g@mail.gmail.com>
-References: <20240808110654.4215b129@wsk>
- <CAOMZO5A74MigLO0qkeXi04=7M70jaiEgk9zdFBjUV74vuZDP0g@mail.gmail.com>
+Cc: Teresa Remmet <t.remmet@phytec.de>, Stefano Babic <sbabic@denx.de>,
+ uboot-imx@nxp.com, Cem Tenruh <c.tenruh@phytec.de>, Tom Rini
+ <trini@konsulko.com>, u-boot@lists.denx.de, Yannic Moog <y.moog@phytec.de>,
+ Benjamin Hahn <B.Hahn@phytec.de>, Marcel Ziswiler
+ <marcel.ziswiler@toradex.com>
+Subject: Re: [PATCH] config: imx: Add PHYTEC's phycore-imx8mm-fspi_defconfig
+Message-ID: <20240815221458.1ecb4947@wsk>
+In-Reply-To: <CAOMZO5BM0w1aphmZ4D5cEch_eWVT3ebeZa3gfB9TbfGcT_gOdA@mail.gmail.com>
+References: <20240815084012.477436-1-lukma@denx.de>
+ <CAOMZO5BM0w1aphmZ4D5cEch_eWVT3ebeZa3gfB9TbfGcT_gOdA@mail.gmail.com>
 Organization: denx.de
 X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/txxZ.9CNeEwj.X+m_r6IuTP";
+Content-Type: multipart/signed; boundary="Sig_/owAtGYs6N4Qt6UTo_Xwfwbx";
  protocol="application/pgp-signature"; micalg=pgp-sha512
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -70,7 +73,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---Sig_/txxZ.9CNeEwj.X+m_r6IuTP
+--Sig_/owAtGYs6N4Qt6UTo_Xwfwbx
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -78,51 +81,29 @@ Hi Fabio,
 
 > Hi Lukasz,
 >=20
-> On Thu, Aug 8, 2024 at 6:07=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wr=
-ote:
+> On Thu, Aug 15, 2024 at 5:40=E2=80=AFAM Lukasz Majewski <lukma@denx.de> w=
+rote:
 > >
-> > Dear Community
+> > This configuration file provides support for booting phycore module
+> > (on e.g. polis-rdk base development board) from QSPI memory.
 > >
-> > I'd like to ask about one issue with generation of symbol offsets in
-> > binman [1].
-> >
-> > In my case the CONFIG_FSPI_CONF_HEADER is defined.
-> >
-> > Problem is with generated symbols [2] to point into
-> > ddr-1d-imem-fw/ddr-1d-dmem-fw/ddr-2d-imem-fw/ddr-2d-dmem-fw.
-> >
-> > It looks like only symbols have extra offset of 0x1000 (the same as
-> > the first section introduces) - binaries for training memory are
-> > placed without this extra offset.
-> >
-> > On the other hand - before this change:
-> > SHA1: 37e50627efacd8dae18b564e9d8886a033e181bc
-> >
-> > The u-boot-spl-ddr.bin was a separate binman "entry" (i.e. not
-> > section)
-> > - so e.g. ddr-1d-dmem-fw {} had proper offsets (as this binary was
-> > also mangled into spl.bin with mkimage invocation).
-> >
-> >
-> > Now the question - how to properly fix this issue? =20
+> > Moreover, the SDP SPL gadget is supported, so single flash.bin
+> > binary can be used with uuu (with uuu -v -b qspi ~/u-boot/flash.bin)
+> > to flash QSPI in the factory or during debricking. =20
 >=20
-> I assume you fixed the problem with this change:
-> https://patchwork.ozlabs.org/project/uboot/patch/20240815080948.457524-1-=
-lukma@denx.de/
+> This looks good.
+>=20
+> I suggest adding an entry in doc/board/phytec/phycore-imx8mm.rst to
+> explain how to build and flash U-Boot for booting via QSPI.
+>=20
+> This can be a separate patch though.
+>=20
 
-Unfortunately not - this change is only for properly setting start
-address of the u-boot.
++1
 
-The _real_ problem here is the symbol placement generated by binman
-when we try to define the image as a single one.
+> Reviewed-by: Fabio Estevam <festevam@gmail.com>
 
-Moreover, this change follows other boards with imx8mm processor -
-./configs/imx8mm_beacon_fspi_defconfig to be specific.
 
-The "fix" (for which I'd been now probably opt) for this issue would be
-to generate two images with binman - one for u-boot-spl-ddr.bin and the
-final flash.bin with the former one included (as it was before SHA1:
-37e50627efacd8dae18b564e9d8886a033e181bc)
 
 
 Best regards,
@@ -135,20 +116,20 @@ DENX Software Engineering GmbH,      Managing Director: Erika Unter
 HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
 Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
 
---Sig_/txxZ.9CNeEwj.X+m_r6IuTP
+--Sig_/owAtGYs6N4Qt6UTo_Xwfwbx
 Content-Type: application/pgp-signature
 Content-Description: OpenPGP digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAma+YZ0ACgkQAR8vZIA0
-zr00pQf+IrLJvcLW3E9NFWjGd4zR5DGe2P5ZAQTSXOSTammpJQZ7l1zps85WdGmk
-miS7bcXCnWAYwUku3sL0tnuwLcivT6zC4N1Cf2gd3oVcUWLdCEBCIkyEmjUtEYxA
-XERR0lUk8jHz40Kgoe7JNfypVUxl70DorwI0pVvvbuajBiY955YxdyxOKXq00c2B
-ep9m1xi2AdobHOU/jmh5pxvE63ZiZvF/jY5UBTvSJE6oo/BV0bpA1A/e0Qwqv73Q
-GXF2eV2pseAiJwHcf8h2flVCmobJBEMTNvqgJlh8CLBigA01cxUIYgQ4Q+RuJyjy
-BL7NvLB5tPE0ViJhWSXqLPIGOZvbIg==
-=UqCd
+iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAma+YcIACgkQAR8vZIA0
+zr0qdwf/UUqyGo1XBqoxdLzyYjAn9S6bZkPuNYWjcBglzmpaui2UipAlF5g8X+Ai
+pvipEEWM9Sq1oYmQN9SmvBImzXfLo7+ZVEhtN7gTqYx3vqMwDg5GhlX+zkaXjaMI
+YrMysZn7j3wH8oht4ZzyxyH7fAYfXzJ32HokQdFCaC7jDkopHLH/cGTTP4IqBSEX
+oiSAiR5xm9YV47co+4CWii4VPIMXhu96HXjYC+2+/4zOuloMOrsctYLjHlmQDZvu
+ALwVE2C/+VXIDuNdxssL+tvmp3+aWO4OkL/MPUF9S7V7cRFobZkWqhHOlHenGHq9
+5/YQ6r0jIYdPrc7SIh9dV11VBqjNeg==
+=Phiq
 -----END PGP SIGNATURE-----
 
---Sig_/txxZ.9CNeEwj.X+m_r6IuTP--
+--Sig_/owAtGYs6N4Qt6UTo_Xwfwbx--
