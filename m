@@ -4,52 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D68B5C52D7C
-	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 13:29:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B754C52D7C
+	for <u-boot@archiver.kernel.org>; Thu, 15 Aug 2024 14:14:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D74D4887F5;
-	Thu, 15 Aug 2024 15:29:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=protonmail.com
+	by phobos.denx.de (Postfix) with ESMTP id AEB8F88981;
+	Thu, 15 Aug 2024 16:14:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=protonmail.com header.i=@protonmail.com header.b="KnnuRnM1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L0iLqAQO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20F2D88A16; Thu, 15 Aug 2024 10:21:31 +0200 (CEST)
-Received: from mail-40131.protonmail.ch (mail-40131.protonmail.ch
- [185.70.40.131])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AAEE988785; Thu, 15 Aug 2024 16:14:36 +0200 (CEST)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03DCB889C9
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 10:21:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=protonmail.com
+ by phobos.denx.de (Postfix) with ESMTPS id C936688A74
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 16:14:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=emil.kronborg@protonmail.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
- s=protonmail3; t=1723710088; x=1723969288;
- bh=fnQI5/5muuCcB11L+xlTbx2XW94Vvbah2UibiVPqsK8=;
- h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=KnnuRnM1MjVEHLz3M2xGdBN/ZYZRuYl8gMFqOEnf7pGEklz8eYBQv0dEJZ64fg+UN
- 6m63EizCxhXTNj6HXnW+mm0f0tSCyw7dqHyedXfQaXsU8ze4RysH81P72IH/RMMGiS
- eKsT1FNpmkwSWDz+ozjtIff1s1J9FzijE+CVeFKzxR5ZxlMXxnlTXEoJ753FxB9cJM
- aIZktcXp9rBR9iXFWAd3STPW4pIyzeDGL1hmn9YALr5XTyFP/xND2XIAanC9pVtLcU
- O9lYUqmlxpwd0g6JodPfLlpVt1M6v8X58UZHOVIugxTByEGtzwexn3/ZFohTgL7Nr3
- VPl2ebFdY5Yrw==
-Date: Thu, 15 Aug 2024 08:21:22 +0000
-To: trini@konsulko.com
-From: Emil Kronborg <emil.kronborg@protonmail.com>
-Cc: heinrich.schuchardt@canonical.com, quentin.schulz@cherry.de,
- u-boot@lists.denx.de
-Subject: [PATCH v4] doc: document the pwm command
-Message-ID: <20240815082101.15612-1-emil.kronborg@protonmail.com>
-Feedback-ID: 20949900:user:proton
-X-Pm-Message-ID: 1b36d28f3ab5a6c463c59e90fd83b06d1cb2f43f
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-2681941eae0so598498fac.0
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 07:14:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1723731263; x=1724336063; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=EvvNnX3jZjqxFpSqYpbq9Kh7jrVKQeCxJpZ5lD1/idw=;
+ b=L0iLqAQOlL2Kg0bEuLQIxnOERc/wv58rPknfBeeNdDgq2yR/VeESO3KWcLbZgLkoMn
+ f1Wx4vJEySx7OFRfmUE+JZMHzeGSp+csCZcZys5wmQ4MRy42BThLMmaMJd0q2Ht13jKW
+ IdSe0R3WLZRbWJjGfC/YiO7k9b0w5d1I3dOYQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723731263; x=1724336063;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EvvNnX3jZjqxFpSqYpbq9Kh7jrVKQeCxJpZ5lD1/idw=;
+ b=w2AFadDLLyrTnYn5ipg1ZV27TUdc6IrCIRnY7ralExu+IFqLtg6yHZpL2g+yA3QUXB
+ r6OArk4zgfLXms62H9p5q03BAod6sUFHQhkmooceDhQOcNOW5+4fIPuTzJCY6mFzUtgS
+ k/3ajIt2tHkWgCj0bVRTOyz44gotri+az6tWQQWIHr5l5d5B1rRvVKhuAiHFcEQ4SrDX
+ EZEU1f+V9Ap60FVTVc8nzxLXMzuVbmh9N8KqlwLsxiybb5Rsf6YhoTEXyNfvi4Hl/UKV
+ MB4FmehmBgO9s/zQQ5BK16k6cAlDN5AQvEEQdrQa0umUctBmf0llmAb+/MUbsBUMXliX
+ vCIg==
+X-Gm-Message-State: AOJu0YxbczlvDeVXVHi2iFKloaaKVUGjPNHC3SHwFFK8dbxhCxFDJ38V
+ qctxILyRrdqs90EDKUTrXHtrztD7Mfved5Eo5Iprs38m51PUanend1ZlNwIjqHLGEYrugVehrc3
+ /P9A=
+X-Google-Smtp-Source: AGHT+IFroXx6gFFBIHs61OIPWGFMoGS8ugnouoF8PPhw8/6M59B5NrBTQutB6208ojf+2B6kZ0x2tQ==
+X-Received: by 2002:a05:6870:678e:b0:261:1f7d:cf71 with SMTP id
+ 586e51a60fabf-26fe5be0515mr7062281fac.34.1723731262857; 
+ Thu, 15 Aug 2024 07:14:22 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-236.totalplay.net.
+ [189.203.97.236]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-270049fbfb2sm374743fac.55.2024.08.15.07.14.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Aug 2024 07:14:22 -0700 (PDT)
+Date: Thu, 15 Aug 2024 08:14:20 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heiko Schocher <hs@denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Anatolij Gustschin <agust@denx.de>,
+ Tommaso Merciai <tommaso.merciai@amarulasolutions.com>,
+ Fabio Estevam <festevam@denx.de>
+Subject: Re: [PATCH v3] driver: pwm: pwm-imx: fix probing on imx6
+Message-ID: <20240815141420.GR1626301@bill-the-cat>
+References: <20240814121027.3477977-1-hs@denx.de>
+ <20240814141736.GN1626301@bill-the-cat>
+ <d1dbe0e1-ecf5-2ee4-5a64-3e50183d1583@denx.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Thu, 15 Aug 2024 15:29:55 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="58A9beWLbad1fMQB"
+Content-Disposition: inline
+In-Reply-To: <d1dbe0e1-ecf5-2ee4-5a64-3e50183d1583@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,143 +95,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Signed-off-by: Emil Kronborg <emil.kronborg@protonmail.com>
----
-Changes in v4:
-- Changed license from GPL-2.0+ to GPL-2.0-or-later. Also, removed
-  trailing colon.
-- Simplified the descriptions in the Synopsis section by removing the
-  text following the '-'.
-- Reformulated the description of the invert subcommand to be more
-  precise and correct.
-- %s/duty cycle/duty period to be consistent with pwm.h and to ensure
-  correctness, as duty cycle is dimensionless and <duty_ns> is given in
-  nanoseconds.
-- Moved the common parameters, pwm_dev_num and channel, to the bottom of
-  the Description section, and added the remaining parameters.
-- Added a comma in the Examples section and used '=C2=B5s' instead of 'us'.
-- Rebased on top of master.
 
- doc/usage/cmd/pwm.rst | 91 +++++++++++++++++++++++++++++++++++++++++++
- doc/usage/index.rst   |  1 +
- 2 files changed, 92 insertions(+)
- create mode 100644 doc/usage/cmd/pwm.rst
+--58A9beWLbad1fMQB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/doc/usage/cmd/pwm.rst b/doc/usage/cmd/pwm.rst
-new file mode 100644
-index 000000000000..522acb5afa33
---- /dev/null
-+++ b/doc/usage/cmd/pwm.rst
-@@ -0,0 +1,91 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
-+
-+.. index::
-+   single: pwm (command)
-+
-+pwm command
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+
-+Synopsis
-+--------
-+
-+::
-+
-+    pwm invert <pwm_dev_num> <channel> <polarity>
-+    pwm config <pwm_dev_num> <channel> <period_ns> <duty_ns>
-+    pwm enable <pwm_dev_num> <channel>
-+    pwm disable <pwm_dev_num> <channel>
-+
-+
-+Description
-+-----------
-+
-+The ``pwm`` command is used to access and configure PWM (Pulse Width Modul=
-ation)
-+signals.
-+
-+pwm invert
-+----------
-+
-+* If the value of ``polarity`` is 0, the default polarity is used.
-+* If the value of ``polarity`` is 1, the polarity is inverted.
-+
-+pwm config
-+----------
-+
-+Configure the period and duty period in nanoseconds.
-+
-+pwm enable
-+----------
-+
-+Enable output on the configured device and channel.
-+
-+pwm disable
-+-----------
-+
-+Disable output on the configured device and channel.
-+
-+pwm_dev_num
-+    Device number of the pulse width modulation device
-+
-+channel
-+    Output channel of the PWM device
-+
-+polarity
-+    * 0 - Use normal polarity
-+    * 1 - Use inverted polarity
-+
-+duty_ns
-+    Duty period in ns
-+
-+period_ns
-+    Period time in ns
-+
-+Examples
-+--------
-+
-+Configure device 0, channel 0 to 20 =C2=B5s period and 14 =C2=B5s (that is=
-, 70%) duty period::
-+
-+    =3D> pwm config 0 0 20000 14000
-+
-+Enable output on the configured device and channel::
-+
-+    =3D> pwm enable 0 0
-+
-+Disable output on the configured device and channel::
-+
-+    =3D> pwm disable 0 0
-+
-+Invert the signal on the configured device and channel::
-+
-+    =3D> pwm invert 0 0 1
-+
-+Configuration
-+-------------
-+
-+The ``pwm`` command is only available if CONFIG_CMD_PWM=3Dy.
-+
-+Return value
-+------------
-+
-+If the command succeeds, the return value ``$?`` is set to 0. If an error =
-occurs, the
-+return value ``$?`` is set to 1.
-diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-index 1f6518b77c4b..6a218c46b4e4 100644
---- a/doc/usage/index.rst
-+++ b/doc/usage/index.rst
-@@ -93,6 +93,7 @@ Shell commands
-    cmd/pinmux
-    cmd/printenv
-    cmd/pstore
-+   cmd/pwm
-    cmd/qfw
-    cmd/read
-    cmd/reset
+On Thu, Aug 15, 2024 at 01:17:02PM +0200, Heiko Schocher wrote:
+> Hello Tom,
+>=20
+> On 14.08.24 16:17, Tom Rini wrote:
+> > On Wed, Aug 14, 2024 at 02:10:27PM +0200, Heiko Schocher wrote:
+> >=20
+> > > U-Boot 2024.07 drops on aristainetos2 board the following
+> > > warning:
+> > >=20
+> > > 	Failed to enable per_clk
+> > >=20
+> > > and bootlogo is not seen on LVDS display.
+> > >=20
+> > > This patch uses old behaviour for systems without clock framework
+> > > if CONFIG_CLK is not enabled.
+> > >=20
+> > > Fixes: bfc778cb93a3 ("driver: pwm: pwm-imx: get and enable per/ipg cl=
+ock using dm")
+> > > Fixes: 4eea76574062 ("pwm: imx: Remove unused references to CONFIG_IM=
+X6_PWM_PER_CLK")
+> > >=20
+> > > Signed-off-by: Heiko Schocher <hs@denx.de>
+> >=20
+> > I really do not like this and would like to see the clock migration also
+> > enabled / completed on these platforms. Then we can also go and rip out
+> > the non-DM_PWM code here.
+>=20
+> Yes, valid argument, I also thought about this. Anyone working on
+> this part?
+>=20
+> Until this work is not done, this patch is in my eyes a bugfix...
+>=20
+> Just enabled CONFIG_CLK and CONFIG_CLK_IMX6Q on the aristainetos2
+> board and get [1] (as I also have there CONFIG_VIDEO_IPUV3=3Dy)
+>=20
+> Uff... yes, there are such functions in drivers/video/imx/ipu_common.c
+>=20
+> :-(
+>=20
+> and even worser "struct clk" is defined in
+>=20
+> drivers/video/imx/ipu.h#L22
+> and
+> include/clk.h#L63
+>=20
+> completly different ... so this is not a fast job... I fear...
 
-base-commit: 90270e0f71c53cca9c0347ce3baedf26b8ec4cdb
+Yeah, that looks like lots of legacy code that needs to be updated. Is
+someone going to update it? If not, perhaps we should be removing it,
+and boards, instead of adding work-arounds for lack of migration.
+
 --=20
-2.46.0
+Tom
 
+--58A9beWLbad1fMQB
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAma+DTgACgkQFHw5/5Y0
+tywRrAv9GleNGudr9HJELoybi5qcEW/Ucr3Q6yoVmK3QsmMACKwGYn+SADqx2Dw/
++/epGfmDDr9vTlb9L8zYT7bUiG48t/R+sRVoFW94mm6bWYago5LPSHrxonpIOOdO
+cUezk9cCuLDAZiGhCRlaT3tcZAmnEtESgX0IlTpV5UB0OQSiMqAeT2Dbs3mqKaq1
+7+oqUFtfiR7pkEESPPfVwZIJV07x502tTWY5jKpoJ+gCRR8sdKYsAZoPUGCBriNZ
+a6sO3ds0QFbpH1jXs26YpdLPGAQFR7bYnvb6SHwvaKcQEZkyZd38t6MTsjWEuIhn
+ilCl6sVYWBaLSikKtaklvYWPmOi5bBe+KXKjJC+kpi477RB0W9o39iPJpo4ST9R3
+rcRPoFdJSladTk8InRG4H9WRgoSff543h3Pz2CM8nU2gOeaMMYoRl3hOR47ZTNHs
+hkco5c5yG3DCOsUAbrwHG+sZGEZn6q7Hksi+Y1aTl3tkXMCfzp9Oafj5gCqyoOGF
+/bYEOqYO
+=FTym
+-----END PGP SIGNATURE-----
+
+--58A9beWLbad1fMQB--
