@@ -4,97 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4D60C52D7D
-	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 23:01:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9FECC52D7D
+	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 23:01:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4095388CB9;
+	by phobos.denx.de (Postfix) with ESMTP id B323B88CBF;
 	Sat, 17 Aug 2024 00:59:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gp5wmFoL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MOUC9WlB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56B0F88C50; Fri, 16 Aug 2024 23:54:36 +0200 (CEST)
-Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
- [IPv6:2607:f8b0:4864:20::e32])
+ id 7CABD88498; Fri, 16 Aug 2024 23:55:44 +0200 (CEST)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4062288498
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 23:54:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E4A4688C78
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 23:55:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-vs1-xe32.google.com with SMTP id
- ada2fe7eead31-49299323d71so911868137.1
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 14:54:34 -0700 (PDT)
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-6b78c980981so12362576d6.2
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 14:55:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723845272; x=1724450072; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723845340; x=1724450140; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=w7rI1bMdhA051gt7vG9rHzgFfFcI8mItr9FazgjR15A=;
- b=gp5wmFoLAcMYfNQ+GZI4IXW/3pL0ROibjnJiMlup0p3yZYWTrLLChpJ6JPrzVfASHd
- tjUvFWsBfcfSi1Dp4vJwra2LFEHbdfLjVZ/e9Qs/Vm//tQRZm4CBZgPqrDsBWxas/3+X
- Tjgbb6p3pk/OHrxaaZK9XPGZ/XX0LbYhXYS+khMhYa/ymekTo3ft1nR0YRQpa9aWR5F+
- IieaQjNzZagXCipx/XwAmi6BtxXzTV9X69QC4Rgq+LKCPFBp4l4VnuV8SnUF0vdxEdt5
- uay3SRaWMFi0G8VhBrRlE9tzNSHqL3DMjV1Ah4xY2T42c4XwjdBL32yoH4YkQbctwUYu
- QnLw==
+ bh=US3QjRDxgzh6m7OchTNqxOLW6eRUo6/FLFtC9yDCfkI=;
+ b=MOUC9WlBYAONsnc2c3/nBQhlsG+jrEs83OZ+muzuDuHLttKOFn3AVj+M/jMTm4zYd+
+ siaef1AU86HV+p5j1gX/rDhoOmouq3JmCp54hG0XftRKi7GbOLTryNLa5hHuTB2S/ouz
+ 30vlFCFCk1efTS6UIBxeX7k31eHWJuTJlttth1vB9wkcN+qvAmvNg1IiYOJATCc3B5ZA
+ qz22bWzUnEgM+gMH9tg32KYw4SJR6Fglf2PlNjLp9DWTF+Vl8NI4tPT8uktNwHLOmBWl
+ aFMaQMeBqy/3f53IVNPBeizVsCoIWBakDo5XVwOZ6GZTEmR0XeSScx5b0GOVh2tmAzhk
+ xTqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723845272; x=1724450072;
+ d=1e100.net; s=20230601; t=1723845340; x=1724450140;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=w7rI1bMdhA051gt7vG9rHzgFfFcI8mItr9FazgjR15A=;
- b=fAp5dC2QL1u27/GCof0ubml7Mjb+oCYt9J3G3zAo/j5nrRVxCAj6R+Ah3RZ1H9d/dD
- 5IBHkuXdGgyqZ2iUOKtRhSiUBk83iGiyP3y+3Y4QriQpZ/ffm4El0SVoZd7/AuZHhmwO
- cAFmzlAMxiIPB5wzT5xZI1hhJ9MazDUSWakDfUB1Mbl7F47EDrboTfPSxAFRpW/Qjikd
- TkgVvaYKkS5P68tVQk1gZ5IoU4AxAWduN1BrxCXb5e82p+J36K04zVQIjeQ4zaAY14N3
- nD2Vi57FwKXDDPJLZdx9idawa8pBd0Tw5LAgDcujoGyKo9aqLyRPNKGGMaMrCZt3IIUi
- DX7A==
-X-Gm-Message-State: AOJu0YxKazceRmFzCk8Bd10aax4EISOXe1H0gueor/h/E3MYnyYy06R3
- /CLspeph9Mvs3aRGkh5thYOo+aqPgjE9I/MdCx5tegWja4Uk99DYtXvEuHlGcn4nk/YpXfYy9Oi
- VTL4=
-X-Google-Smtp-Source: AGHT+IFMhB9eNm5cgmtbj+3V01PKxjhZgsX/+lBePUECXSxLDPmK2ldf20tgS84AqRM9JuMcf3AFeQ==
-X-Received: by 2002:a05:6102:3a13:b0:493:b3d8:bd8d with SMTP id
- ada2fe7eead31-497799e4d1emr5088662137.26.1723845271957; 
- Fri, 16 Aug 2024 14:54:31 -0700 (PDT)
+ bh=US3QjRDxgzh6m7OchTNqxOLW6eRUo6/FLFtC9yDCfkI=;
+ b=NUebEhTIHc0M+FnoRqgMKBPoUVKZMsql2Yp8ysUAxRM2lWLQt8CZ5C3XJA0kfjeSG2
+ v4+VtRWcObwDwO0zofSljSUyhKbYChch8P/DU4A9uYpcaDykg4/3Moyt9zS6TIrHGtNq
+ OKAej/jkPnQgE9OkHqGow72Cp1ffR25rpz5i0qluClrwKsbZqlSkXwWitLJJYbOqk7T3
+ TYVQb+aQKRaU2n9ij9FywW1dl8v9+Pjg8idmjmBQKjC7HJj+7VXTU3s5cm4in+IMwTVd
+ Bmd//HFBKxDZpJ+hhZ1/ZRiCpsurMYP63vHpCp1izuR2sA6Y6cn+zN0M3/wiYhkUltSj
+ EXkg==
+X-Gm-Message-State: AOJu0YxA4A9KazZIiExp5GzjwesHlaOYAV+orLWdEPeDzMult1kmvvFt
+ +43rblNLiKeqnU8/4ACXyLyk6qvfqjPdNSw2PadjJjWjWuCSjZ38VPhTkI7OWCCUEHmXCMagq9r
+ bbhA=
+X-Google-Smtp-Source: AGHT+IHO7kGzWxv2J9Tg+AKYAoYH4YhWYscKFTH118Fqqlsidq1GD/y7/U4h2AbW+d8722prXjc3Pg==
+X-Received: by 2002:a05:6214:162f:b0:6bf:81a2:2a86 with SMTP id
+ 6a1803df08f44-6bf81a22fb3mr28041246d6.36.1723845339975; 
+ Fri, 16 Aug 2024 14:55:39 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6bf6ff04ffbsm22044196d6.128.2024.08.16.14.54.29
+ 6a1803df08f44-6bf6ff04ffbsm22044196d6.128.2024.08.16.14.55.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Aug 2024 14:54:31 -0700 (PDT)
+ Fri, 16 Aug 2024 14:55:39 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
  Mario Six <mario.six@gdsys.cc>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Michal Simek <michal.simek@amd.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sean Anderson <seanga2@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
- Sumit Garg <sumit.garg@linaro.org>, Jesse Taube <mr.bossman075@gmail.com>,
- Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>,
  Igor Opaniuk <igor.opaniuk@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Alexander Gendin <agendin@matrox.com>,
- Jonathan Humphreys <j-humphreys@ti.com>, Bin Meng <bmeng.cn@gmail.com>,
- Eddie James <eajames@linux.ibm.com>,
- =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Eddie James <eajames@linux.ibm.com>, Anand Moon <linux.amoon@gmail.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: [PATCH v6 25/28] lib/rypto: Adapt rsa_helper to MbedTLS
-Date: Fri, 16 Aug 2024 14:44:14 -0700
-Message-Id: <20240816214436.1877263-26-raymond.mao@linaro.org>
+Subject: [PATCH v6 28/28] configs: enable MbedTLS as default setting
+Date: Fri, 16 Aug 2024 14:44:17 -0700
+Message-Id: <20240816214436.1877263-29-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240816214436.1877263-1-raymond.mao@linaro.org>
 References: <20240816214436.1877263-1-raymond.mao@linaro.org>
@@ -117,39 +117,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Previous patch has introduced MbedTLS porting layer for RSA helper,
-here to adjust the makefile accordingly.
+Enable MbedTLS as default setting for qemu arm64 and sandbox.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 Changes in v2
-- Initial patch.
+- None.
 Changes in v3
-- Update commit message.
+- None.
 Changes in v4
-- Control building legacy library via '_LEGACY' Kconfig.
+- None.
 Changes in v5
-- None.
+- Remove unused config MBEDTLS_LIB_TLS.
+- Remove EFI_SECURE_BOOT from the default config.
 Changes in v6
-- None.
+- Remove MBEDTLS_LIB_CRYPTO and MBEDTLS_LIB_X509.
 
- lib/crypto/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ configs/qemu_arm64_defconfig | 1 +
+ configs/sandbox_defconfig    | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/lib/crypto/Makefile b/lib/crypto/Makefile
-index 3caa45dc2a8..72b413d85a9 100644
---- a/lib/crypto/Makefile
-+++ b/lib/crypto/Makefile
-@@ -13,7 +13,7 @@ obj-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_LEGACY) += public_key.o
- #
- # RSA public key parser
- #
--obj-$(CONFIG_$(SPL_)RSA_PUBLIC_KEY_PARSER) += rsa_public_key.o
-+obj-$(CONFIG_$(SPL_)RSA_PUBLIC_KEY_PARSER_LEGACY) += rsa_public_key.o
- rsa_public_key-y := \
- 	rsapubkey.asn1.o \
- 	rsa_helper.o
+diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
+index 7e166f43908..2a7885d2a68 100644
+--- a/configs/qemu_arm64_defconfig
++++ b/configs/qemu_arm64_defconfig
+@@ -67,4 +67,5 @@ CONFIG_TPM2_MMIO=y
+ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_EHCI_PCI=y
+ CONFIG_SEMIHOSTING=y
++CONFIG_MBEDTLS_LIB=y
+ CONFIG_TPM=y
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 484f9e1bf8d..2ca2e66d1de 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -344,6 +344,7 @@ CONFIG_FS_CBFS=y
+ CONFIG_FS_CRAMFS=y
+ CONFIG_ADDR_MAP=y
+ CONFIG_CMD_DHRYSTONE=y
++CONFIG_MBEDTLS_LIB=y
+ CONFIG_ECDSA=y
+ CONFIG_ECDSA_VERIFY=y
+ CONFIG_TPM=y
 -- 
 2.25.1
 
