@@ -4,97 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78EA6C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 21:49:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DB4EC3DA4A
+	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 21:50:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0035088C21;
-	Fri, 16 Aug 2024 23:49:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A5FDB88C21;
+	Fri, 16 Aug 2024 23:50:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rDRDSVqK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ae1akc0f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C43688C47; Fri, 16 Aug 2024 23:49:20 +0200 (CEST)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id 67BAE88C4D; Fri, 16 Aug 2024 23:50:21 +0200 (CEST)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B30488AA9
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 23:49:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 34A1988AA9
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 23:50:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-6b47ff8a595so2426407b3.0
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 14:49:17 -0700 (PDT)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6b79293a858so12408136d6.3
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 14:50:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723844948; x=1724449748; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723845018; x=1724449818; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pXspFTU+wpQpOH4VILJZaOW7qKU8IPWFgmyBq4BPmOQ=;
- b=rDRDSVqKPvl1yjj7E74RHadtR/o+R2VriQjRHTO0bx8AFPXKUZsgwyx/cGsIM578r4
- xYlZXF8NBZTN6fjViWlmnmzTK0b0lp6BvWk4PgAo2MSMUJx6HJGKnHj4xaWrbkLW4AXs
- lA/0ZQj0M7KOrCAiicDyoO4wQAQOB+r/OEhYNU08oMKwqejJDDLde0jAXAsyyab4jJDN
- 83Hi4NYb0ZZkNdg1Nx/S8OQ1+nrnJhkXi1eyI9h2rsqUjEnCN32qs3XoCKVMf0Kb9iaj
- SgqdPrsxlJCxOEyk1s1RmfS/CHFmg1Ekp/0HL17MtSPnc+eAgashri+O4Uhj5OzBMSHs
- I/FA==
+ bh=YAZYtzLYyECdfdtttrdP0YJc54dxhPLtxN6Cp3Swj6c=;
+ b=Ae1akc0fV5iLLU7XXXMIXzhTX7GfiFk3TYReUYdwcBQ0FEAKIueDleaK8U4AvTy59A
+ dQpGBePER2QLfcVoGIHyDyDyvmFmzPSMkOZdXFqY2X31xkP/tIY9IRc6IZFtf7kkIshf
+ M7CMD6S1K3EAwxHKwhQn9DKr/kgmrHrglXcsJ67njlHqMs8ywgD6JQGbcIZfyOwISEw9
+ nNo6hTkMt1HGp1Vn94j5+pSkiLiYVuuvtBbP7gPjjJEQSUm/sLOosfAMkjVFtXqoJsfd
+ Ym83GWUwStKFA50wqQ2/ef72lOlKt6VsrrN664WYzynJrqR4m726SPmtHCr8R1vaWNyG
+ STMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723844948; x=1724449748;
+ d=1e100.net; s=20230601; t=1723845018; x=1724449818;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pXspFTU+wpQpOH4VILJZaOW7qKU8IPWFgmyBq4BPmOQ=;
- b=sKDIuku+5MYD6SqzAlmrl++NSUJszv7Jh9IXAVCDMBLhzTIrZeowNZWJcGwb4EKwGT
- Voj66TCTUZ4E/q6v+AEmOfThhfd+eRK3v/6x/Ze7I8RWKiY22d6tmp5orTk4/7B+6peG
- mGbpiCfXU/lF63DSzkI+VQBOE+ayhBAL6t8QrJ9Xan+rKCzZ5tQi0wl8r243bPVYwiV8
- 1DPoU9mNubPva7a7YBEnFCs80ZXxW/I+lGP1GEeCfj31X4KoYOoNQXMDVZrIsGO6QCq1
- v0hPKsvOg3ixvlSTeXaaN9Il0Y3Ywu/bnNULsjAxksBYYRJsEms+YyLkh8yUgzfM8MiN
- E24w==
-X-Gm-Message-State: AOJu0YwtIuaRasXUyrAyqBgL1MQI/f7p1dIAvRsEVAYcEld/lUo+t3i1
- hUju7rvYuo2mQwg58oMLAiVyerpca2xYDr7y2s84OQmDnHf1KCWYN+ohjnuH24CRZc6Ixjmg28f
- CE/U=
-X-Google-Smtp-Source: AGHT+IGhBbq9hKN1janjfFsoZxzd7g+Rh+luWOEST+vaC24HL6oH0CVarZ7mb7fTMsulF3yWAGg+Fw==
-X-Received: by 2002:a05:690c:6e07:b0:699:7b60:d349 with SMTP id
- 00721157ae682-6b1b823ef82mr47638157b3.11.1723844948499; 
- Fri, 16 Aug 2024 14:49:08 -0700 (PDT)
+ bh=YAZYtzLYyECdfdtttrdP0YJc54dxhPLtxN6Cp3Swj6c=;
+ b=UruofwxiTtb/pC1kRnc5KA1vRoezkaJHDIzq4sU8/xa66ty1FtHEwrFaey7TU1H69h
+ wMAq/JZUurOAMDYnenzABIrjf47HXZ8mbqUvdbO/QsbXn2nO0XhxvU+q9v9xnpeAeRbV
+ oSoQru/BgzRQJMydeXFtRE75U/VC+YB4FnUNu2TMKcyTH625G2aTCO4HdY004jeMbgmS
+ ubXgjN4Q9TKPBPnr/sofnLvX1QXCwAGlGSUysx6XCckqI0InkMXPOJt5ZAwvlGG40a2W
+ KWIQptyNie4Ldb3AOR8uNgpI5LINDlAFtLIvYBbj+BkloWxvqVIVJkxJ2DI/g4vuGiC0
+ 1alA==
+X-Gm-Message-State: AOJu0YzYIMV34yQZMKdJne2A+dMRZww1v7axii/d9YP8nYkBwIFK2/MV
+ subLEg3ZwvPPhCqQDsn7C4di4Li5bVSMGXy6iec5RuYGydyWjDttfBM9rduYVnK9GMPAgDm35qs
+ zXjU=
+X-Google-Smtp-Source: AGHT+IEeTZAEBquzeU1pTtzJizZu89abpflYnH/G7Ajnb6WBnMXf5TFX5mSDr6E6uoC6oqGXyuT2OQ==
+X-Received: by 2002:a05:6214:5908:b0:6b5:32de:bfe7 with SMTP id
+ 6a1803df08f44-6bf894e1df4mr12916816d6.22.1723845017818; 
+ Fri, 16 Aug 2024 14:50:17 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6bf6ff04ffbsm22044196d6.128.2024.08.16.14.49.06
+ 6a1803df08f44-6bf6ff04ffbsm22044196d6.128.2024.08.16.14.50.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Aug 2024 14:49:07 -0700 (PDT)
+ Fri, 16 Aug 2024 14:50:17 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
  Mario Six <mario.six@gdsys.cc>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Michal Simek <michal.simek@amd.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, Andrew Davis <afd@ti.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sean Anderson <seanga2@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Sumit Garg <sumit.garg@linaro.org>, Jesse Taube <mr.bossman075@gmail.com>,
  Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
  Igor Opaniuk <igor.opaniuk@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Alexander Gendin <agendin@matrox.com>,
- Jonathan Humphreys <j-humphreys@ti.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>, Bin Meng <bmeng.cn@gmail.com>,
  =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: [PATCH v6 11/28] mbedtls/external: support decoding multiple signer's
- cert
-Date: Fri, 16 Aug 2024 14:44:00 -0700
-Message-Id: <20240816214436.1877263-12-raymond.mao@linaro.org>
+Subject: [PATCH v6 14/28] x509: move common functions to x509 helper
+Date: Fri, 16 Aug 2024 14:44:03 -0700
+Message-Id: <20240816214436.1877263-15-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240816214436.1877263-1-raymond.mao@linaro.org>
 References: <20240816214436.1877263-1-raymond.mao@linaro.org>
@@ -116,141 +115,174 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Support decoding multiple signer's cert in the signed data within
-a PKCS7 message.
-
-The PR for this patch is at:
-https://github.com/Mbed-TLS/mbedtls/pull/9001
-
-For enabling EFI loader PKCS7 features with MbedTLS build,
-we need this patch on top of MbedTLS v3.6.0 before it is merged into
-the next MbedTLS LTS release.
+Move x509_check_for_self_signed as a common helper function
+that can be shared by legacy crypto lib and MbedTLS implementation.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
-Changes in v2
-- None.
-Changes in v3
-- Update commit message.
 Changes in v4
-- None.
+- Initial patch.
 Changes in v5
-- None.
+- Removed authorship.
 Changes in v6
 - None.
 
- lib/mbedtls/external/mbedtls/library/pkcs7.c | 75 ++++++++++++--------
- 1 file changed, 47 insertions(+), 28 deletions(-)
+ lib/crypto/Makefile          |  1 +
+ lib/crypto/x509_helper.c     | 64 ++++++++++++++++++++++++++++++++++++
+ lib/crypto/x509_public_key.c | 56 +------------------------------
+ 3 files changed, 66 insertions(+), 55 deletions(-)
+ create mode 100644 lib/crypto/x509_helper.c
 
-diff --git a/lib/mbedtls/external/mbedtls/library/pkcs7.c b/lib/mbedtls/external/mbedtls/library/pkcs7.c
-index da73fb341d6..01105227d7a 100644
---- a/lib/mbedtls/external/mbedtls/library/pkcs7.c
-+++ b/lib/mbedtls/external/mbedtls/library/pkcs7.c
-@@ -61,6 +61,36 @@ static int pkcs7_get_next_content_len(unsigned char **p, unsigned char *end,
-     return ret;
- }
+diff --git a/lib/crypto/Makefile b/lib/crypto/Makefile
+index 4ad1849040d..946cc3a7b59 100644
+--- a/lib/crypto/Makefile
++++ b/lib/crypto/Makefile
+@@ -37,6 +37,7 @@ x509_key_parser-y := \
+ 	x509.asn1.o \
+ 	x509_akid.asn1.o \
+ 	x509_cert_parser.o \
++	x509_helper.o \
+ 	x509_public_key.o
  
-+/**
-+ * Get and decode one cert from a sequence.
-+ * Return 0 for success,
-+ * Return negative error code for failure.
-+ **/
-+static int pkcs7_get_one_cert(unsigned char **p, unsigned char *end,
-+                              mbedtls_x509_crt *certs)
+ $(obj)/x509_cert_parser.o: \
+diff --git a/lib/crypto/x509_helper.c b/lib/crypto/x509_helper.c
+new file mode 100644
+index 00000000000..87e8ff67ae1
+--- /dev/null
++++ b/lib/crypto/x509_helper.c
+@@ -0,0 +1,64 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * X509 helper functions
++ *
++ * Copyright (C) 2012 Red Hat, Inc. All Rights Reserved.
++ * Written by David Howells (dhowells@redhat.com)
++ */
++#include <linux/err.h>
++#include <crypto/public_key.h>
++#include <crypto/x509_parser.h>
++
++/*
++ * Check for self-signedness in an X.509 cert and if found, check the signature
++ * immediately if we can.
++ */
++int x509_check_for_self_signed(struct x509_certificate *cert)
 +{
-+    int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
-+    size_t len = 0;
-+    unsigned char *start = *p;
-+    unsigned char *end_cert;
++	int ret = 0;
 +
-+    ret = mbedtls_asn1_get_tag(p, end, &len, MBEDTLS_ASN1_CONSTRUCTED
-+                               | MBEDTLS_ASN1_SEQUENCE);
-+    if (ret != 0) {
-+        return MBEDTLS_ERROR_ADD(MBEDTLS_ERR_PKCS7_INVALID_CERT, ret);
-+    }
++	if (cert->raw_subject_size != cert->raw_issuer_size ||
++	    memcmp(cert->raw_subject, cert->raw_issuer,
++		   cert->raw_issuer_size))
++		goto not_self_signed;
 +
-+    end_cert = *p + len;
++	if (cert->sig->auth_ids[0] || cert->sig->auth_ids[1]) {
++		/*
++		 * If the AKID is present it may have one or two parts. If
++		 * both are supplied, both must match.
++		 */
++		bool a = asymmetric_key_id_same(cert->skid,
++						cert->sig->auth_ids[1]);
++		bool b = asymmetric_key_id_same(cert->id,
++						cert->sig->auth_ids[0]);
 +
-+    if ((ret = mbedtls_x509_crt_parse_der(certs, start, end_cert - start)) < 0) {
-+        return MBEDTLS_ERR_PKCS7_INVALID_CERT;
-+    }
++		if (!a && !b)
++			goto not_self_signed;
 +
-+    *p = end_cert;
++		ret = -EKEYREJECTED;
++		if (((a && !b) || (b && !a)) &&
++		    cert->sig->auth_ids[0] && cert->sig->auth_ids[1])
++			goto out;
++	}
 +
-+    return 0;
++	ret = -EKEYREJECTED;
++	if (strcmp(cert->pub->pkey_algo, cert->sig->pkey_algo))
++		goto out;
++
++	ret = public_key_verify_signature(cert->pub, cert->sig);
++	if (ret == -ENOPKG) {
++		cert->unsupported_sig = true;
++		goto not_self_signed;
++	}
++	if (ret < 0)
++		goto out;
++
++	pr_devel("Cert Self-signature verified");
++	cert->self_signed = true;
++
++out:
++	return ret;
++
++not_self_signed:
++	return 0;
 +}
-+
- /**
-  * version Version
-  * Version ::= INTEGER
-@@ -178,11 +208,12 @@ static int pkcs7_get_certificates(unsigned char **p, unsigned char *end,
-                                   mbedtls_x509_crt *certs)
- {
-     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
--    size_t len1 = 0;
--    size_t len2 = 0;
--    unsigned char *end_set, *end_cert, *start;
-+    size_t len = 0;
-+    unsigned char *end_set;
-+    int num_of_certs = 0;
- 
--    ret = mbedtls_asn1_get_tag(p, end, &len1, MBEDTLS_ASN1_CONSTRUCTED
-+    /* Get the set of certs */
-+    ret = mbedtls_asn1_get_tag(p, end, &len, MBEDTLS_ASN1_CONSTRUCTED
-                                | MBEDTLS_ASN1_CONTEXT_SPECIFIC);
-     if (ret == MBEDTLS_ERR_ASN1_UNEXPECTED_TAG) {
-         return 0;
-@@ -190,38 +221,26 @@ static int pkcs7_get_certificates(unsigned char **p, unsigned char *end,
-     if (ret != 0) {
-         return MBEDTLS_ERROR_ADD(MBEDTLS_ERR_PKCS7_INVALID_FORMAT, ret);
-     }
--    start = *p;
--    end_set = *p + len1;
-+    end_set = *p + len;
- 
--    ret = mbedtls_asn1_get_tag(p, end_set, &len2, MBEDTLS_ASN1_CONSTRUCTED
--                               | MBEDTLS_ASN1_SEQUENCE);
-+    ret = pkcs7_get_one_cert(p, end_set, certs);
-     if (ret != 0) {
--        return MBEDTLS_ERROR_ADD(MBEDTLS_ERR_PKCS7_INVALID_CERT, ret);
-+        return ret;
-     }
- 
--    end_cert = *p + len2;
-+    num_of_certs++;
- 
--    /*
--     * This is to verify that there is only one signer certificate. It seems it is
--     * not easy to differentiate between the chain vs different signer's certificate.
--     * So, we support only the root certificate and the single signer.
--     * The behaviour would be improved with addition of multiple signer support.
--     */
--    if (end_cert != end_set) {
--        return MBEDTLS_ERR_PKCS7_FEATURE_UNAVAILABLE;
--    }
--
--    if ((ret = mbedtls_x509_crt_parse_der(certs, start, len1)) < 0) {
--        return MBEDTLS_ERR_PKCS7_INVALID_CERT;
-+    while (*p != end_set) {
-+        ret = pkcs7_get_one_cert(p, end_set, certs);
-+        if (ret != 0) {
-+            return ret;
-+        }
-+        num_of_certs++;
-     }
- 
--    *p = end_cert;
-+    *p = end_set;
- 
--    /*
--     * Since in this version we strictly support single certificate, and reaching
--     * here implies we have parsed successfully, we return 1.
--     */
--    return 1;
-+    return num_of_certs;
+diff --git a/lib/crypto/x509_public_key.c b/lib/crypto/x509_public_key.c
+index a10145a7cdc..4ba13c1adc3 100644
+--- a/lib/crypto/x509_public_key.c
++++ b/lib/crypto/x509_public_key.c
+@@ -139,61 +139,7 @@ error:
+ 	return ret;
  }
  
- /**
+-/*
+- * Check for self-signedness in an X.509 cert and if found, check the signature
+- * immediately if we can.
+- */
+-int x509_check_for_self_signed(struct x509_certificate *cert)
+-{
+-	int ret = 0;
+-
+-	pr_devel("==>%s()\n", __func__);
+-
+-	if (cert->raw_subject_size != cert->raw_issuer_size ||
+-	    memcmp(cert->raw_subject, cert->raw_issuer,
+-		   cert->raw_issuer_size) != 0)
+-		goto not_self_signed;
+-
+-	if (cert->sig->auth_ids[0] || cert->sig->auth_ids[1]) {
+-		/* If the AKID is present it may have one or two parts.  If
+-		 * both are supplied, both must match.
+-		 */
+-		bool a = asymmetric_key_id_same(cert->skid, cert->sig->auth_ids[1]);
+-		bool b = asymmetric_key_id_same(cert->id, cert->sig->auth_ids[0]);
+-
+-		if (!a && !b)
+-			goto not_self_signed;
+-
+-		ret = -EKEYREJECTED;
+-		if (((a && !b) || (b && !a)) &&
+-		    cert->sig->auth_ids[0] && cert->sig->auth_ids[1])
+-			goto out;
+-	}
+-
+-	ret = -EKEYREJECTED;
+-	if (strcmp(cert->pub->pkey_algo, cert->sig->pkey_algo) != 0)
+-		goto out;
+-
+-	ret = public_key_verify_signature(cert->pub, cert->sig);
+-	if (ret < 0) {
+-		if (ret == -ENOPKG) {
+-			cert->unsupported_sig = true;
+-			ret = 0;
+-		}
+-		goto out;
+-	}
+-
+-	pr_devel("Cert Self-signature verified");
+-	cert->self_signed = true;
+-
+-out:
+-	pr_devel("<==%s() = %d\n", __func__, ret);
+-	return ret;
+-
+-not_self_signed:
+-	pr_devel("<==%s() = 0 [not]\n", __func__);
+-	return 0;
+-}
++#endif /* !CONFIG_IS_ENABLED(MBEDTLS_LIB_X509) */
+ 
+ #ifndef __UBOOT__
+ /*
 -- 
 2.25.1
 
