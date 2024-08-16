@@ -4,70 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BF60C531DC
-	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 13:23:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1550C531DC
+	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 13:36:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C377D88618;
-	Fri, 16 Aug 2024 15:23:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 224368881C;
+	Fri, 16 Aug 2024 15:36:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=johanneskirchmair.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="p1OeEIP9";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=johanneskirchmair.de header.i=@johanneskirchmair.de header.b="UNxiibhO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 722B488618; Fri, 16 Aug 2024 15:23:50 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id BBE7A88AB9; Fri, 16 Aug 2024 09:35:12 +0200 (CEST)
+Received: from mx8.mail-out.lima-city.de (mx8.mail-out.lima-city.de
+ [91.216.248.210])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76330885C5
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 15:23:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1723814617; x=1726406617;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4svUhisFSzJTbP0gbz72XexzuQiQlUirO2coe2Q312k=;
- b=p1OeEIP9eWBPpUurFUfvlORWP8Jp/C+3W6UbKm1WDpc/BdL31na8A1Btdb/sP4Xe
- 6SWAKZjn4NkRlu5k6OmHPR85l/GfZ89+1E1w9zMYp2alr6ax38/thZlhfYY7kr+V
- pPDQnrxlD2pU0X5UQojS8AB/ljchNbWI2M0c6p9CBew=;
-X-AuditID: ac14000a-03e52700000021bc-af-66bf52d92831
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id C9.61.08636.9D25FB66;
- Fri, 16 Aug 2024 15:23:37 +0200 (CEST)
-Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Fri, 16 Aug
- 2024 15:23:36 +0200
-From: Wadim Egorov <w.egorov@phytec.de>
-To: <u-boot@lists.denx.de>
-CC: <upstream@lists.phytec.de>, <vigneshr@ti.com>, <trini@konsulko.com>
-Subject: [PATCH] configs: am64x*_r5_defconfig: Drop BOOTCOMMAND
-Date: Fri, 16 Aug 2024 15:23:28 +0200
-Message-ID: <20240816132328.928651-1-w.egorov@phytec.de>
-X-Mailer: git-send-email 2.25.1
+ by phobos.denx.de (Postfix) with ESMTPS id C548B889A6
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 09:35:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=johanneskirchmair.de
+Authentication-Results: phobos.denx.de; spf=none
+ smtp.mailfrom=mailinglist1@johanneskirchmair.de
+From: mailinglist1@johanneskirchmair.de
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=johanneskirchmair.de;
+ s=securedbylima-20161106; t=1723793701;
+ bh=8uE3Qmvf6k6Yk06hdiHErYFH3KV+ItNRixWXAul1KbQ=;
+ h=From:To:Cc:Subject:Date:From;
+ b=UNxiibhOHRsqgpp7Ktscr9BOTrI+yaP61VoYGFSJCwW8nhYSwmkQ6xcj0pwYHfPHL
+ zkYHFpHxfx689p6QuvjPztVQwkqNgUklWa1/jNQzbp6sBhD+tk3LnE6W9DMGjrUu4X
+ gtWlRVhTZZUTwv6ANAhHGpPwP8KY7uwobPnq2osw=
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com,
+	Johannes Kirchmair <johannes.kirchmair@skidata.com>
+Subject: [PATCH] spl: fix error handling of spl_fit_read
+Date: Fri, 16 Aug 2024 09:33:32 +0200
+Message-Id: <20240816073332.279025-1-mailinglist1@johanneskirchmair.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrGLMWRmVeSWpSXmKPExsWyRpKBR/dm0P40g663nBZTJ21mt3i7t5Pd
- ovudusX/sx/YHVg8Xh1Yxe5x9s4ORo/+7hZWj+M3tjMFsERx2aSk5mSWpRbp2yVwZfzpXM1S
- cJ+r4nj3E/YGxt2cXYycHBICJhJTt51h7GLk4hASWMIk8bcFxnnMKHFt1RMmkCo2AXWJOxu+
- sYLYIgJSEi87NzJ3MXJwMAu4S9y9FAcSFhawl7gz6ydYCYuAqsTXxo9grbwCFhK7zt9mh1gm
- LzHz0nd2iLigxMmZT1hAbGagePPW2cwQtoTEwRcvwGwhoPiLS8tZYHqnnXvNDGGHShzZtJpp
- AqPALCSjZiEZNQvJqAWMzKsYhXIzk7NTizKz9QoyKktSk/VSUjcxgsJWhIFrB2PfHI9DjEwc
- jIcYJTiYlUR4n37ZmybEm5JYWZValB9fVJqTWnyIUZqDRUmcd3VHcKqQQHpiSWp2ampBahFM
- lomDU6qB0WqF6O7VZ5bu52HxNt1V/C/7bHlj8Wm946cLZuQyG568FScaocJ45KTDxynh15cY
- xsuefXdTNei+ouvC2IdHH0/beTi9K6Q56u2TcpWOF0YV06S1I+4arn/8++Kz58Wf07eymO9a
- +j4jZYaT87wf8t8PSLYHi4fPjnk2W+QWs6qBVYyeKeNMeyWW4oxEQy3mouJEAIzQfXhJAgAA
+X-Mailman-Approved-At: Fri, 16 Aug 2024 15:36:32 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,41 +60,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is no need to define a default for bootcmd in R5 u-boot because
-the R5 is directly booting into the next stage A53 bootloader.
+From: Johannes Kirchmair <johannes.kirchmair@skidata.com>
 
-Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+Returning negative values from spl_fit_read leads to u-boot crashing.
+The return value of spl_fit_read is compared with an unsigned value.
+Returning negative values leads to the check not detecting the error.
+Not detecting the error leads to crashing.
+
+Returning zero in case of an reading error is fine. It indicates that
+nothing was red.
+
+Signed-off-by: Johannes Kirchmair <johannes.kirchmair@skidata.com>
 ---
- configs/am64x_evm_r5_defconfig     | 2 --
- configs/phycore_am64x_r5_defconfig | 2 --
- 2 files changed, 4 deletions(-)
+ common/spl/spl_fat.c | 2 +-
+ include/spl_load.h   | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/configs/am64x_evm_r5_defconfig b/configs/am64x_evm_r5_defconfig
-index 96475d4c1b8..08c9cf2c316 100644
---- a/configs/am64x_evm_r5_defconfig
-+++ b/configs/am64x_evm_r5_defconfig
-@@ -35,8 +35,6 @@ CONFIG_SPL_SPI_FLASH_SUPPORT=y
- CONFIG_SPL_SPI=y
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_SPL_LOAD_FIT_ADDRESS=0x80080000
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="run distro_bootcmd"
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_SPL_SIZE_LIMIT_SUBTRACT_GD=y
- CONFIG_SPL_SIZE_LIMIT_SUBTRACT_MALLOC=y
-diff --git a/configs/phycore_am64x_r5_defconfig b/configs/phycore_am64x_r5_defconfig
-index a0d78241928..24361bb9c1d 100644
---- a/configs/phycore_am64x_r5_defconfig
-+++ b/configs/phycore_am64x_r5_defconfig
-@@ -34,8 +34,6 @@ CONFIG_SPL_SPI_FLASH_SUPPORT=y
- CONFIG_SPL_SPI=y
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_SPL_LOAD_FIT_ADDRESS=0x80080000
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="run distro_bootcmd"
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_SPL_SIZE_LIMIT_SUBTRACT_GD=y
- CONFIG_SPL_SIZE_LIMIT_SUBTRACT_MALLOC=y
+diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c
+index bd8aab253a..345bc55149 100644
+--- a/common/spl/spl_fat.c
++++ b/common/spl/spl_fat.c
+@@ -53,7 +53,7 @@ static ulong spl_fit_read(struct spl_load_info *load, ulong file_offset,
+ 
+ 	ret = fat_read_file(filename, buf, file_offset, size, &actread);
+ 	if (ret)
+-		return ret;
++		return 0;
+ 
+ 	return actread;
+ }
+diff --git a/include/spl_load.h b/include/spl_load.h
+index 1c2b296c0a..b411d9daa1 100644
+--- a/include/spl_load.h
++++ b/include/spl_load.h
+@@ -17,8 +17,8 @@ static inline int _spl_load(struct spl_image_info *spl_image,
+ {
+ 	struct legacy_img_hdr *header =
+ 		spl_get_load_buffer(-sizeof(*header), sizeof(*header));
+-	ulong base_offset, image_offset, overhead;
+-	int read, ret;
++	ulong base_offset, image_offset, overhead, read;
++	int ret;
+ 
+ 	read = info->read(info, offset, ALIGN(sizeof(*header),
+ 					      spl_get_bl_len(info)), header);
 -- 
 2.34.1
 
