@@ -4,88 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 860F4C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 19:39:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3837C52D7D
+	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 21:21:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFD7688BF8;
-	Fri, 16 Aug 2024 21:39:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A383F88B23;
+	Fri, 16 Aug 2024 23:21:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="naM7UwBr";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43A6388881; Fri, 16 Aug 2024 21:38:59 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D1AE588BFD; Fri, 16 Aug 2024 23:21:17 +0200 (CEST)
+Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BCE088BDA
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 21:38:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FF25885F6
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 23:21:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-70945a007f0so1434346a34.2
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 12:38:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1723837124; x=1724441924; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=m8Vwy+21d8b8v6W8JeHg/Mz8of3ykf2D9lrDPSHXuxw=;
- b=naM7UwBriWf/YwxmKP82ksyY+yPHpXf/dGSLPK6Yvzh/5DYGX0NDEX72Ln9O59Ohvv
- uoiXZMRys4T9CjQ4n53CYr/xME1Sb+PzyUWnCzlM1Tq0u2DBJVpXxIEdP9OGnqOuMHCC
- nYFp5ic8+4zrXUiIPwN64S0ibT34266NDtNu4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723837124; x=1724441924;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=m8Vwy+21d8b8v6W8JeHg/Mz8of3ykf2D9lrDPSHXuxw=;
- b=o84UuT5juUC33HFBaB0Fv88p9lkvS2afi0XYMyXwxuFkf4mwUU3EyI2FEaJ45lfrp6
- aabHEmkEI24BkY/rhb0RqyxpZ9ku5afjO0bZI+ce+fGSDyx0v7rIpjxnVrWUQl4dI2ui
- rGsG+asy220V/+vCzaxeZVwMEqH6ZQtApUHJVSBlRhbo4W2GdvhpfegdNRP7wNJ4EZu7
- Hp+713DjosFrNaZian12jiN/AgOB75DEaw4vGL6rD0sSRGfckf6QVqvGw+fCJiCgJLp/
- GZabB/SbTUaU0qpZo2gyXizDH0c7n85Hgcw8LDcvSxeItU4sIMPW8Q4sfM0OkLchqvE9
- QuEQ==
-X-Gm-Message-State: AOJu0YyyVgyCme0rbSqe32HBi8ruioxzmjYLr5QGO4vLPsZaTBBK6f15
- OuXGl22C3WqGJayiPRoNtJ7+t+aPz4CmI/my47sHhbxd7+hi/4XghVYPYYi1sZs=
-X-Google-Smtp-Source: AGHT+IErMng4Zllw73EEDh6b1CokjX8Webe1NOtqDOZ4fmsQoDN7S6VI2jOF1ui5dfPETDPRvy1cJg==
-X-Received: by 2002:a05:6830:2690:b0:709:2fa3:1329 with SMTP id
- 46e09a7af769-70cac86af7amr4579964a34.18.1723837124418; 
- Fri, 16 Aug 2024 12:38:44 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-236.totalplay.net.
- [189.203.97.236]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70ca64b248fsm804878a34.32.2024.08.16.12.38.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Aug 2024 12:38:43 -0700 (PDT)
-Date: Fri, 16 Aug 2024 13:38:40 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- Mark Kettenis <mark.kettenis@xs4all.nl>,
- Michal Simek <michal.simek@amd.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- Patrice CHOTARD <patrice.chotard@foss.st.com>,
- Huan Wang <alison.wang@nxp.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
- Max Filippov <jcmvbkbc@gmail.com>
-Subject: Re: [PATCH v2 19/32] sandbox: move the TCG event log to the start of
- ram memory
-Message-ID: <20240816193840.GE1626301@bill-the-cat>
-References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
- <20240814110009.45310-20-sughosh.ganu@linaro.org>
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
+Received: from secure.fukaumi.org ([10.0.0.2])
+ by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
+ 47GLKtJF026500; Sat, 17 Aug 2024 06:20:58 +0900
+From: FUKAUMI Naoki <naoki@radxa.com>
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ eugen.hristev@collabora.com, jonas@kwiboo.se, sumit.garg@linaro.org,
+ FUKAUMI Naoki <naoki@radxa.com>
+Subject: [PATCH 2/2] arm: dts: rockchip: add support for Radxa ROCK 5A with
+ SPI NOR flash module
+Date: Sat, 17 Aug 2024 06:20:49 +0900
+Message-ID: <20240816212049.500-2-naoki@radxa.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240816212049.500-1-naoki@radxa.com>
+References: <20240816212049.500-1-naoki@radxa.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="VS/jCm323wJEVzp7"
-Content-Disposition: inline
-In-Reply-To: <20240814110009.45310-20-sughosh.ganu@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,46 +54,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+on Radxa ROCK 5A, sdhci(eMMC) and fspim0(SPI NOR flash) share pins
+(i.e. eMMC and SPI NOR flash are exclusive), new defconfig and dts
+specifically for SPI NOR flash is required.
 
---VS/jCm323wJEVzp7
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+---
+ arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi | 24 ++++++
+ arch/arm/dts/rk3588s-rock-5a-spi.dts         |  4 +
+ board/radxa/rock5a-rk3588s/MAINTAINERS       |  5 +-
+ configs/rock5a-spi-rk3588s_defconfig         | 83 ++++++++++++++++++++
+ 4 files changed, 113 insertions(+), 3 deletions(-)
+ create mode 100644 arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3588s-rock-5a-spi.dts
+ create mode 100644 configs/rock5a-spi-rk3588s_defconfig
 
-On Wed, Aug 14, 2024 at 04:29:56PM +0530, Sughosh Ganu wrote:
+diff --git a/arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi
+new file mode 100644
+index 00000000000..5cd131d3cb1
+--- /dev/null
++++ b/arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi
+@@ -0,0 +1,24 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2023 Collabora Ltd.
++ */
++
++#include "rk3588s-u-boot.dtsi"
++
++&fspim0_pins {
++	bootph-pre-ram;
++	bootph-some-ram;
++};
++
++&sdhci {
++	status = "disabled";
++};
++
++&sfc {
++	status = "okay";
++
++	flash@0 {
++		bootph-pre-ram;
++		bootph-some-ram;
++	};
++};
+diff --git a/arch/arm/dts/rk3588s-rock-5a-spi.dts b/arch/arm/dts/rk3588s-rock-5a-spi.dts
+new file mode 100644
+index 00000000000..780e90d041b
+--- /dev/null
++++ b/arch/arm/dts/rk3588s-rock-5a-spi.dts
+@@ -0,0 +1,4 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++/dts-v1/;
++#include "rk3588s-rock-5a.dts"
+diff --git a/board/radxa/rock5a-rk3588s/MAINTAINERS b/board/radxa/rock5a-rk3588s/MAINTAINERS
+index a569efa74e3..06ebc9829f4 100644
+--- a/board/radxa/rock5a-rk3588s/MAINTAINERS
++++ b/board/radxa/rock5a-rk3588s/MAINTAINERS
+@@ -4,6 +4,5 @@ R:	Jonas Karlman <jonas@kwiboo.se>
+ S:	Maintained
+ F:	board/radxa/rock5a-rk3588s
+ F:	include/configs/rock5a-rk3588s.h
+-F:	configs/rock5a-rk3588s_defconfig
+-F:	arch/arm/dts/rk3588s-rock-5a.dts
+-F:	arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
++F:	configs/rock5a*
++F:	arch/arm/dts/rk3588s-rock-5a*
+diff --git a/configs/rock5a-spi-rk3588s_defconfig b/configs/rock5a-spi-rk3588s_defconfig
+new file mode 100644
+index 00000000000..297278c7a06
+--- /dev/null
++++ b/configs/rock5a-spi-rk3588s_defconfig
+@@ -0,0 +1,83 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_SF_DEFAULT_SPEED=24000000
++CONFIG_SF_DEFAULT_MODE=0x2000
++CONFIG_DEFAULT_DEVICE_TREE="rk3588s-rock-5a-spi"
++CONFIG_ROCKCHIP_RK3588=y
++CONFIG_ROCKCHIP_SPI_IMAGE=y
++CONFIG_SPL_SERIAL=y
++CONFIG_TARGET_ROCK5A_RK3588=y
++CONFIG_DEBUG_UART_BASE=0xFEB50000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_DEBUG_UART=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-rock-5a.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
++CONFIG_SPL_ATF=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_USB=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++# CONFIG_OF_UPSTREAM is not set
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_SPL_CLK=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_SF_DEFAULT_BUS=5
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_XTX=y
++CONFIG_PHY_REALTEK=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_PHY_ROCKCHIP_USBDP=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_SPL_RAM=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SFC=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_ERRNO_STR=y
+-- 
+2.43.0
 
-> The TCG event log buffer is being set at the end of ram memory. This
-> region of memory is to be reserved as LMB_NOMAP memory in the LMB
-> memory map. The current location of this buffer overlaps with the
-> memory region reserved for the U-Boot image, which is at the top of
-> the usable memory. This worked earlier as the LMB memory map was not
-> global but caller specific, but fails now because of the overlap.
->=20
-> Move the TCG event log buffer to the start of the ram memory region
-> instead. Move the location of the bloblist address up by 8KB to
-> accomodate the event log buffer, and update the sandbox memory map
-
-With checkpatch.pl we see this should be "accommodate".
-
---=20
-Tom
-
---VS/jCm323wJEVzp7
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAma/qrkACgkQFHw5/5Y0
-tyxL1gv/YIH17d7vArEv0pEypMrf59IeRK2n7epzd6k7W2Ubk+z/I1glFiXqZPMO
-72iM+YksjMcX/8X06qnz/4cM18J+uEseT9hpK/SKw0U6fMt6mJpIzc41CvVn0KrV
-AaKBEMpUZ/KEDEPTK+RMs+EmMS3EOOd2/MDZ3N+JFSctgilve4qAoH0VFci1DZ5z
-egIAiR1zIwvHueSxYDLGs5UMqMBhnTA8NYEpwl6jDn4yDTHm0NOpdb2xwLNYlS2b
-UKjsW7kvt/abRmtmsR2DM60ZKXUOIqhJFJzAIEOBS0Ge5C6nPbfQMcCptLG8vMlJ
-QcvR0xjsjcsalJzBMuFFOxiABeTBzeMDaHmsmE8kYerv62ANOhLVPkS8lWrdY66M
-kjaY2xbulT7rG5A782vboi6dofd5/kNyph+9ovqajOPBetaPxYJ9XGW+OTbOH6ag
-W5u/wf/y/u4ff2BTR8ML1ycp+kVbR13oEaS28hrpS59ddanJutx/q9KkMu1z158A
-RwlAUNGM
-=6yP0
------END PGP SIGNATURE-----
-
---VS/jCm323wJEVzp7--
