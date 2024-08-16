@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90FC4C531DC
-	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 15:48:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2D34C531DC
+	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 15:49:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFAB588C09;
-	Fri, 16 Aug 2024 17:48:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4BD8988BC3;
+	Fri, 16 Aug 2024 17:48:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="j7ZUjhHl";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MeyjqSR/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE751889E9; Fri, 16 Aug 2024 17:48:27 +0200 (CEST)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
+ id 2F46188BFE; Fri, 16 Aug 2024 17:48:33 +0200 (CEST)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAD4288BA4
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 17:48:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B6E488BA4
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 17:48:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-7a1e0ff6871so141873185a.2
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 08:48:24 -0700 (PDT)
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-7a20b8fa6dcso140564385a.3
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 08:48:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723823300; x=1724428100; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723823307; x=1724428107; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xtYO8sIBqQo3XsAFIFT9ACrOFv5k+mW4YVAdg0gERB8=;
- b=j7ZUjhHlZ3fG0JtHNZZiNlRfTqgN086+zoY4G6d+hyvADANB9LbIUki7tVkS4JQ2wm
- J/4sZ7JYogj8DRBgilvTZysRCd9JmIITP5rnVtT0CFQe8V9fXzV4rjAyy2M7zXqh+CCG
- 2CpzD0b9SGHdyOTUC1hT/s2gvLwTufLqOTbaYVG2FQSyLs/plbv6vFJXAJaO/ZqX0fwy
- /mlTfqPhCBYk+I8KGnbBQ4tRTqOG3OVvGYI3gbM63jPNfi4fQPmazBTYCemVshppibcY
- 4ueY8zl1sB7BJBj54OcbcApraMf9lE00Clpz9KHAis9qMZdycP8xnQ+Bc+7RLmcGp+M5
- Cdww==
+ bh=Sl17ktVAsUr1sjkZ2RK2CE7HkfbYfreg3uXPGv2DaWc=;
+ b=MeyjqSR/77HbqhbEXNvg0zltjOb9jx7HofPNF2XD8ShGtZ8uCVDT5k9R8y9KzUSk+e
+ I4G/f2wyX/VVt/an8lrVGomM3+/lmiAQerpNvJ0eN2+RTGDvYv/pDWZ6xFDCAO5/phwi
+ aAVtoTEFjHoJaY8Z7gyXCgNjtnDY3T2h9EdI2iHf4f0QF0rQ8JoKX5M76PIqrQeS25+a
+ 5IDf6EnOWogQMYisHN1sHSSHJK8vENd3iUJ54wdWejOk1qgVJYHZV3wvt/zWLK2421mX
+ qaIpRoPOZ3v6OW7l0KFjaOq4fpNmx+ZJHNH5CtrfdJM83Kvq9wHWDqdV3h06szP4BhG/
+ 5/2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723823300; x=1724428100;
+ d=1e100.net; s=20230601; t=1723823307; x=1724428107;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xtYO8sIBqQo3XsAFIFT9ACrOFv5k+mW4YVAdg0gERB8=;
- b=egntpb4JwUpviEezmHbUikIVxxzmfBGs1hf/wqEdxXHKPwDpw8nkJ8hgxU8MDy0v3u
- 6KXWpUAzzJT2TtFKaxd7xyQ8eSXVl0QImZMBTH3oRwmPYqNwqOzw/qi0NX9ghsZYOrtP
- KhG9T4yqvbeS+I1mXBX+syiXy61k/BTvDXrSTCkjgRRr60pOQBPCFqJNXRLLAQXQtKBf
- qfmcGuPafSgIMo1FZVxlnxegJ5KQFXNJj0rv9Tg8CjaeBhUSH+u/KergQB4r9MMqgrSN
- ln1vhQBLm/TnYduZwF1t0gzTzw8TJUP48/7u9B6a9TQ/dRHthhEe3HuGWsI8akBVxyQ9
- ivZQ==
-X-Gm-Message-State: AOJu0YwARm1AM3PKTk0QtqYLaRYV/7aHAEN2kWWfhcGJVi3nhmZBj0Qd
- AjjVisVW+o++ZgFolk3AJZcSgZ4os7IUvzsXyju6urVxujtlxfLVKNCuAUGnDktjTbUJ9Vq1TXv
- +1nw=
-X-Google-Smtp-Source: AGHT+IFBZU3iZvgvxs98XbOLyNVHmQmDRWsyRGVguH5xnUNwX1ZtApT9//cCSJCBYraWhOTwJv+tqw==
-X-Received: by 2002:a05:620a:c51:b0:7a1:3ffb:e88e with SMTP id
- af79cd13be357-7a64c75a983mr6526285a.9.1723823300567; 
- Fri, 16 Aug 2024 08:48:20 -0700 (PDT)
+ bh=Sl17ktVAsUr1sjkZ2RK2CE7HkfbYfreg3uXPGv2DaWc=;
+ b=mv6ZVyOrJOH38bTKL8Wi2J0Txg4EY9WxoLFmGWPEmHa2qwllakxgOWuRPAAYK8zD/f
+ bhuO/gNepOGNWaXvOMuyRWMzQQU00n6CIOFQJMcxUwxrShJzsvwALzMhPigxMGS7skuV
+ LrbZC2R1QW8SmXCLhrIHUme8kWv9gEsgaC6qJ37WWHAhH8i0Z50t7stwW1ufyJ1Cosf4
+ G0oNtSMS1mBnUVuzMeEIGiEDdCElDpXsTPO1orP554SCAyjCyuwjLzyy2EzDuRhAbSwp
+ HtTbtNb/InnuOBH5V8brpKrS7XTDlgA40WuyTsvqs5O/38bPAIB8PD8kV7Ug/FFQIPZD
+ ieGg==
+X-Gm-Message-State: AOJu0YxtUxKkVM0Z9xFX9rR4+3sc+LyGlb104m+eSqDMsefMU2Reu0Ok
+ SyMd6pJOqofxZgtcyg6IJVYzyltZqJ54wUFaieStazxa3yKdjjqQC3aFCN0pEuZPRYD5YLse4MD
+ m3lw=
+X-Google-Smtp-Source: AGHT+IGJu1GdBri5PS+dUHKsa1Ew+rIoljEvhjtojgEDu6UB4Z+i7XD8ARxn1Sk4u/yxQhtimhRrQw==
+X-Received: by 2002:a05:620a:28cc:b0:7a1:e001:bb1b with SMTP id
+ af79cd13be357-7a5069e0638mr430965385a.60.1723823306886; 
+ Fri, 16 Aug 2024 08:48:26 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a4ff0e53d8sm187041185a.85.2024.08.16.08.48.19
+ af79cd13be357-7a4ff0e53d8sm187041185a.85.2024.08.16.08.48.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Aug 2024 08:48:20 -0700 (PDT)
+ Fri, 16 Aug 2024 08:48:26 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
@@ -73,21 +73,21 @@ Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Stefan Roese <sr@denx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng@tinylab.org>,
+ Stefan Roese <sr@denx.de>, Jonas Karlman <jonas@kwiboo.se>,
  =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Jonas Karlman <jonas@kwiboo.se>, Michal Simek <michal.simek@amd.com>,
- Wan Yee Lau <wan.yee.lau@intel.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, Wan Yee Lau <wan.yee.lau@intel.com>,
  Alexander Gendin <agendin@matrox.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
  Sean Anderson <seanga2@gmail.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
  Peter Robinson <pbrobinson@gmail.com>
-Subject: [PATCH 09/10] configs: Enable sysinfo for QEMU Arm64
-Date: Fri, 16 Aug 2024 08:46:52 -0700
-Message-Id: <20240816154658.1866186-10-raymond.mao@linaro.org>
+Subject: [PATCH 10/10] tests: update smbios pytest
+Date: Fri, 16 Aug 2024 08:46:53 -0700
+Message-Id: <20240816154658.1866186-11-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240816154658.1866186-1-raymond.mao@linaro.org>
 References: <20240816154658.1866186-1-raymond.mao@linaro.org>
@@ -109,41 +109,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable sysinfo smbios by default for Arm64.
-When SYSINFO_SMBIOS is enabled, disable QFW_SMBIOS.
+Update the expected test result to align with the smbios library changes.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
- configs/qemu_arm64_defconfig | 2 ++
- drivers/misc/Kconfig         | 2 +-
- 2 files changed, 3 insertions(+), 1 deletion(-)
+ test/py/tests/test_smbios.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-index 7e166f43908..dac656f5c88 100644
---- a/configs/qemu_arm64_defconfig
-+++ b/configs/qemu_arm64_defconfig
-@@ -60,6 +60,8 @@ CONFIG_PCIE_ECAM_GENERIC=y
- CONFIG_SCSI=y
- CONFIG_DEBUG_UART_PL011=y
- CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYSINFO=y
-+CONFIG_SYSINFO_SMBIOS=y
- CONFIG_SYSRESET=y
- CONFIG_SYSRESET_CMD_POWEROFF=y
- CONFIG_SYSRESET_PSCI=y
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index 6009d55f400..da84b35e804 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -568,7 +568,7 @@ config QFW_MMIO
- config QFW_SMBIOS
- 	bool
- 	default y
--	depends on QFW && SMBIOS && !SANDBOX
-+	depends on QFW && SMBIOS && !SANDBOX && !SYSINFO_SMBIOS
- 	help
- 	  Hidden option to read SMBIOS tables from QEMU.
- 
+diff --git a/test/py/tests/test_smbios.py b/test/py/tests/test_smbios.py
+index 82b0b689830..ffa4ea795ec 100644
+--- a/test/py/tests/test_smbios.py
++++ b/test/py/tests/test_smbios.py
+@@ -32,7 +32,7 @@ def test_cmd_smbios_sandbox(u_boot_console):
+     """Run the smbios command on the sandbox"""
+     output = u_boot_console.run_command('smbios')
+     assert 'DMI type 0,' in output
+-    assert 'String 1: U-Boot' in output
++    assert 'Vendor: U-Boot' in output
+     assert 'DMI type 1,' in output
+     assert 'Manufacturer: sandbox' in output
+     assert 'DMI type 2,' in output
 -- 
 2.25.1
 
