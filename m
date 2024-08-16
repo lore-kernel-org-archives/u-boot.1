@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D1D9C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 16:13:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92CA1C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 16:15:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D32688B88;
-	Fri, 16 Aug 2024 18:13:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 18B0688618;
+	Fri, 16 Aug 2024 18:15:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MIACD1Xc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tK1f5vOc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A47F88B6D; Fri, 16 Aug 2024 18:13:19 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id E53E988B6D; Fri, 16 Aug 2024 18:15:15 +0200 (CEST)
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B4738852A
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 18:13:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B9778852A
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 18:15:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-709428a9469so1350233a34.3
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 09:13:16 -0700 (PDT)
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-5d5b986a806so1784394eaf.1
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 09:15:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1723824794; x=1724429594; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1723824910; x=1724429710; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rGy6xf1FY7jK3fTrCVKw2HpfDDlhw4ZlGBo7SV49k2s=;
- b=MIACD1XcHy/Fx8+mgTiDFvDEDUj57liWaAgRJ3LCcNKvYsnG44mEFXRku8bSqEIMTn
- AsNsNfY/LvFUp6jybDt28b4F+sPlUGyhEtowYziUJu59F8SptQsk6zbMEl4lhurOO6RX
- aTfmS+bZZ/92LPE7A7sRxC0PMzEIa1ATtmYvE=
+ bh=dzP2Hfsf8yW4ss7IZsf1CxiFCgDg9Ud3DkKHnE4dtRo=;
+ b=tK1f5vOcfb1r/IT8NpvyAjLuoB/N7v5Fqph21zD66pUXf4GabCRNeFC/9zXUTl0ENc
+ JSj3rYVs4yoAcRlSi6efiZufvLPhzhx7eXPhnCwlaReBynGsuI0SHrIVY0VsDq9+nwZ2
+ JBQQgHglQ/HTzOmHci4f7QaTOjwhGz6z4MTvc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723824794; x=1724429594;
+ d=1e100.net; s=20230601; t=1723824910; x=1724429710;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rGy6xf1FY7jK3fTrCVKw2HpfDDlhw4ZlGBo7SV49k2s=;
- b=TCUIX9omUtc4eDNWQNUlzcecdnutGWyrACV8QNlfDtcjJtEbT7a17VpZpB8I8xM21n
- uVNuQIW8l3pe31kF8qYQ+KbO6C5EvKJIvVMSzgq/yiJgonxk8/wJ+sQo1uBUXV8WI47p
- RP8oy+Hh+hsFb9ZRYCwTDYm/sqMzrjRe7rIWdj/gtabNaA8hoDaF+mdlPwHnCq8h3Cgl
- 8/lUx6EqS8IPIfbqtxGNHLyRcm9XkLzl6Gxtzg8DUHbU6b7fvsYhJepPvvZhlSprqZOC
- JJLtSZdqbXvRzlsyxkpCnCYpBgFU0swmjTcooble2RIRQ7fMPrUdbt7kxvxWEW+O67Ca
- cfQQ==
-X-Gm-Message-State: AOJu0Yy7BAzpGKhM2RBsPBb9j7GhapbvfFPI4JNjjTNlSV4RNyXZsIbh
- NdPyTBvXVDFCEUOLbxdK3vdf2hE7oKZt+OEihbnmG3ZCh9KpPn+nNaNs3BmhrpQ=
-X-Google-Smtp-Source: AGHT+IGmuSsipHjWeHRYutKwfdnT2L23xlwrkd6kb7ZcSOEPUxhrF3yguYbdQyjdUFfGM4ddwzNnnw==
-X-Received: by 2002:a05:6830:3109:b0:703:79f5:fabb with SMTP id
- 46e09a7af769-70cac84f62dmr2815911a34.11.1723824794358; 
- Fri, 16 Aug 2024 09:13:14 -0700 (PDT)
+ bh=dzP2Hfsf8yW4ss7IZsf1CxiFCgDg9Ud3DkKHnE4dtRo=;
+ b=RXG2IbmepZfLQW5VpQoSDyygT7M4HXmxu88ZGuIAGCCeQoDuiCFdjKzXNhQ1oiYa0o
+ vhPHvuPbGLzwy0JTRVwhN/YX6Jz7A3o0ZvVp4bm3ArYC3zCq2YLPoKAOeF2b4TcTlFrX
+ 7neJVYxkKHrakZ4KLh6aBumgYtfBP6kbYI1BiG6baCZs4/OuQvSS/oikofw3AN6uB+k2
+ V7AWK4hOUBccEhrZb/3sz1geDO5F9+tOTTnrQe8MjFKeICr0jhOdkoB+Q4EyEXW5DTzy
+ C02v7BV7+ewMq4IjjtSCx4BTnWycH+GDQWY19z5UQeaVCEJj7EC59gXOmdQXuh0RoFmY
+ UZ6Q==
+X-Gm-Message-State: AOJu0Yx9+2IfDrcA9L+7lym90xl1ngPXh6VAcMW2D7YDJzkuLSte3V7g
+ InGlzq9nyw+Q8JQi/gAArma3AQUng8NnyImvollP6hPfzgwkPbjXpn1I/twDXJw=
+X-Google-Smtp-Source: AGHT+IEyGE4k+e8VJzs3mtF2tcpXliFNFNLDjvYBLIuBenjCadipTnxjsg1wkK4bZEzX/HpAs4VvvA==
+X-Received: by 2002:a05:6870:639e:b0:25e:b6c2:3bcb with SMTP id
+ 586e51a60fabf-26fff0423eemr2237932fac.0.1723824910531; 
+ Fri, 16 Aug 2024 09:15:10 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-236.totalplay.net.
  [189.203.97.236]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70ca65b8d20sm723217a34.39.2024.08.16.09.13.13
+ 586e51a60fabf-270046c0082sm950175fac.31.2024.08.16.09.15.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Aug 2024 09:13:13 -0700 (PDT)
-Date: Fri, 16 Aug 2024 10:13:11 -0600
+ Fri, 16 Aug 2024 09:15:10 -0700 (PDT)
+Date: Fri, 16 Aug 2024 10:15:08 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v4 13/14] test: efi: boot: Set up an image suitable for
- EFI testing
-Message-ID: <20240816161311.GY1626301@bill-the-cat>
-References: <20240815202424.766778-1-sjg@chromium.org>
- <20240815202424.766778-14-sjg@chromium.org>
+ Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
+Subject: Re: [PATCH v3 04/24] test/py: Fix some pylint warnings in test_ut.py
+Message-ID: <20240816161508.GZ1626301@bill-the-cat>
+References: <20240815202535.767869-1-sjg@chromium.org>
+ <20240815202535.767869-5-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="D23lN5vNGwce5bl7"
+ protocol="application/pgp-signature"; boundary="2p4alcVjsgEb7CwK"
 Content-Disposition: inline
-In-Reply-To: <20240815202424.766778-14-sjg@chromium.org>
+In-Reply-To: <20240815202535.767869-5-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,71 +92,54 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---D23lN5vNGwce5bl7
+--2p4alcVjsgEb7CwK
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Aug 15, 2024 at 02:24:23PM -0600, Simon Glass wrote:
-> Create a new disk for use with tests, which contains the new 'testapp'
-> EFI app specifically intended for testing the EFI loader.
+On Thu, Aug 15, 2024 at 02:25:15PM -0600, Simon Glass wrote:
+
+> Tidy up most of these warnings. Remaining are four of these:
 >=20
-> Attach it to the USB device, since most testing is currently done with
-> mmc.
+>    R0914: Too many local variables
 >=20
-> Initially this image will be used to test the EFI bootmeth.
+> which can only by fixed by splitting things into functions, so that is
+> left for another time.
 >=20
-> Fix a stale comment in prep_mmc_bootdev() while we are here.
+> Part of this change was done by the flynt tool.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 [snip]
-> +    try:
-> +        loop =3D mount_image(cons, fname, mnt, 'ext4')
-> +        mounted =3D True
-> +        efi_dir =3D os.path.join(mnt, 'EFI')
-> +        mkdir_cond(efi_dir)
-> +        bootdir =3D os.path.join(efi_dir, 'BOOT')
-> +        mkdir_cond(bootdir)
-> +        efi_src =3D os.path.join(cons.config.build_dir,
-> +                               f'lib/efi_loader/testapp.efi')
-> +        efi_dst =3D os.path.join(bootdir, 'BOOTSBOX.EFI')
-> +        with open(efi_src, 'rb') as inf:
-> +            with open(efi_dst, 'wb') as outf:
-> +                outf.write(inf.read())
-> +    except ValueError as exc:
-> +        print(f'Falled to create image, failing back to prepared copy: {=
-exc}')
-> +
-> +    finally:
-> +        if mounted:
-> +            u_boot_utils.run_and_log(cons, 'sudo umount --lazy %s' % mnt)
-> +        if loop:
-> +            u_boot_utils.run_and_log(cons, 'sudo losetup -d %s' % loop)
+> -    u_boot_utils.run_and_log(cons, 'qemu-img create %s 20M' % fname)
+> -    u_boot_utils.run_and_log(cons, 'sudo sfdisk %s' % fname,
+> +    u_boot_utils.run_and_log(cons, f'qemu-img create {fname} 20M')
+> +    u_boot_utils.run_and_log(cons, f'sudo sfdisk {fname}',
+>                               stdin=3Dspec.encode('utf-8'))
 
-Please see
+This should be re-done on top of Richard's work (once he fixes the
+pylint issues it introduces) at
 https://patchwork.ozlabs.org/project/uboot/patch/20240802093322.15240-1-ric=
 hard@nod.at/
-for inspiration on making this not require sudo.
 
 --=20
 Tom
 
---D23lN5vNGwce5bl7
+--2p4alcVjsgEb7CwK
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAma/eo0ACgkQFHw5/5Y0
-tywHzQwAqGZjJ3MaEPtbe8l01935uxS2TTWhIkxt+qaMO38rpB1IUpk95DdKDpO/
-/sS6n7lLyYk5IHluA+QZau64rMyJufjLxsJ4cSJ81Bb+cqqBUQrYfNSvqaGm3YOn
-ngijDAecSBQzk5QGZY8K+Ui+1j5k4AkdIW2jPW93DHmMXePJfxjRV7c2CVF1nrJ/
-wgMiSNjG5ktxYwvbySbQiDunG5ZwjPPngg3r6aijtu81+38LTcBeokWYbM4AXCek
-lYK6jPkWzPQY4f+XQdGRZ4MC65uUoDkhsYAjqh2lsaq1/XrqZRGb9mZY0KM+Mth4
-eP0KMFbaqoMX61+bG4EeV85Gs5YJXUmypXwKmePPHDu4r0jbgGdl7oEEOWsxjOPj
-lrs97mVHOgs/eCHsYZRzkc85cXyu2aqzVB3oCxn4D3eI+jLSfxZ+Cb89j5cfu5IA
-m5OjqVJAK96sT2vsUmi/c/Ljdml7YoUekoSBLz0P52i3mbbD89PlmmihB8crizqY
-B1x8w95s
-=9asV
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAma/ewwACgkQFHw5/5Y0
+tywRnQv/ZcC2aoU0t9pBxza71YBf1OndE5ibgRSDSDeD9gwOHnhM9HaOVdV5AN+F
+5ROhtZ0YQ6dUxotYa1Ejq7CH5KWYqE22iZFZj1qpIkqFYffFREgwIE1C5sErt2F1
+aW3EGOX/aCNffkEnTx5TPST5chtWqxMKHFPFe3mwW2Ek7cRIQxMbuP+IZEUAfMQD
+pOeLdfnLnI96z/eQ1CPI8HKyi6QkA2YLp352TFmW3kMgeeRAkVhUVx58fjNaYEuT
+cPFs7qPxMfylNR6drrlCncehD7WNCEzX2N0gSNZhfKBdWzSgTuTuvnYPJIfZpN82
+C25KHTu+ATrjunYM0XDQSYMtCHgrnoYG7E3JUrQ++avhJkwCC6Zg5nTSSMQ7vTo8
+ZsfMZMG3wHFnSCyvhuhNza4mHKAGFdNyn0/Cj8zWQVbraM4ftwhpBTh4tCG7D11d
+ob3Jwta74x8NY704quWGj3Q/PDQahfsBTgMz5Zeh3b2IkXdl/dWcLNMqk2wVBSYb
+2LmxV5Nc
+=8MXp
 -----END PGP SIGNATURE-----
 
---D23lN5vNGwce5bl7--
+--2p4alcVjsgEb7CwK--
