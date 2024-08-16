@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73524C52D7D
-	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 21:46:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCA2BC3DA4A
+	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 21:47:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 066D78752A;
-	Fri, 16 Aug 2024 23:46:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 696B188C33;
+	Fri, 16 Aug 2024 23:47:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d552r9iG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jXdqc/FF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0D92874AC; Fri, 16 Aug 2024 23:46:50 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id 1A7AD88C02; Fri, 16 Aug 2024 23:47:16 +0200 (CEST)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E54388AA9
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 23:46:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C14388C31
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 23:47:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6bf6606363fso13360456d6.3
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 14:46:48 -0700 (PDT)
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-6bf6beda0c0so14234656d6.1
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 14:47:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723844807; x=1724449607; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723844831; x=1724449631; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zLMApzFn732Xv6c8hiYeWRRUiO3PVWyUO8qMudZ2w/M=;
- b=d552r9iGSb9N0h1N9p8dybm87eIaXbofe+eTB6EMrUW9dUfqpgRj7swvTR6hq51YuH
- T0aSOapK9k6fejr3l7H7rC7vXv91R/GeyTW1ckgQunw/qb87gYibFyCGXQFEvmiYNQdo
- xSsu+iBKFGyB1Pe07mYpHoER6yCOWFbwW+NzI/+tLt/X0+GwOeQ303aVtpuhgKS3lwZd
- vZb0e9yuMRnoOWYglM+U4cJEv0goFxbrOcdg/8hEZ6jIzD43Xl17X64X0QTq56h2AkJe
- xFSFzZK49dzW8pm6p+EILs7WLwPw85kDZaJ9BfV3k/Wq5N+FGOVWVH1nJTmNHg58gLbh
- DHnQ==
+ bh=Qm1W0skgI4EiAzvApAylzcwsgSUxkOV6IQmG9D+jU0s=;
+ b=jXdqc/FFtVafeLGZ7Pss7sg9mvjaic1d+Clz9MEcyX4FNDP5pIRh7QqwrBQ57H8XSH
+ MOAf+OWViPHh2YSC9uCEHM74GqzVUBWsQg1D/Q8huE3tdtcmx2zwh7IJTmk6jTTLxtwe
+ nFU/KrkQ3B+arP9ibZHO8BT4ezZsFz3eaVsrQ9yxI2wbGu+xNb3trWf1gTS8O8ujA5de
+ ZCLgotm9gdRtTKzXKFtlDUSLwdDqvQcRfQjJ+HkSgYcXOJYqHH3yfNWfPC5wk/MOI2Mr
+ gwgOXekDMumjGkERw/zRBBCypXKIpHjZSVHMkKEIP0YXRlqRnW/ExTKWDlK28DiR+aqz
+ vZYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723844807; x=1724449607;
+ d=1e100.net; s=20230601; t=1723844831; x=1724449631;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zLMApzFn732Xv6c8hiYeWRRUiO3PVWyUO8qMudZ2w/M=;
- b=T4Wp4F6V3xDQ1VHADBX4B3lWlK6Wg6whnrgsd0s21Y8g3VjYCTRp6Gv5NDPWL4M2Os
- sG+QAlVvm9wln1c9GsC9BqAI6Ra2mfUp8awcoyCJsvZYnzbYWedUQjEEH6hOEv5K5cSc
- yyiTiipftrrWZ1bZQxxr/ymNXq2JWg9RCiEei4cZypj4bjzbu8OMrPBNHvfOoZTG9a/9
- bA4JK7kXJIKzRC5itsbuTpH/PJSLPdZ3jiwqMYVTdxc0xJ9lHWbf0y6TT2z6I57koQwh
- z/fpGU6n+/wUPNzSEA+y+VwB4TVmtqBpCHLH1Pwe4FqdlA4XdukIGqtYP/f8opMQKBKE
- Zzkg==
-X-Gm-Message-State: AOJu0YxQ2fau70ldyQe0w/nZiN+brOtFUUpRtHoM+o4+acELC8GzapK9
- aXbMbxN/WwF/x2YVDIW3Xxe018Evzn1Z+EMcUsu5agMBtIW+AarZ5gzuDxQLVT1ICVx5bqVvImE
- r5pQ=
-X-Google-Smtp-Source: AGHT+IEUL70dgsVcZQnbOxDHe1uSfJVJPvAmsUIvSv5GrwXlIM56Mv2o+eQH4gAHqAyhdXpFR4ORcQ==
-X-Received: by 2002:ad4:4501:0:b0:6bf:7fe5:39ea with SMTP id
- 6a1803df08f44-6bf7fe53aeamr33064896d6.44.1723844807004; 
- Fri, 16 Aug 2024 14:46:47 -0700 (PDT)
+ bh=Qm1W0skgI4EiAzvApAylzcwsgSUxkOV6IQmG9D+jU0s=;
+ b=ruv2VtZ3yrNS6Jvl4vMt61ns8FSamkuVFru5wvtJ89oxgqcop8XwPreCP7VzAYkIMO
+ JBil0izA622INq78W4o5c+e+BTfIAT4LCaSxQZapYIV8HkiPgzTnvRPWamKSFzefgBpy
+ UpMUFx3GGh8E6Ic+pTv+xa+A0DM8lU9JCqpYcWIc7w4IHBWaHEFivsKGUEhSt7XxOyNY
+ kiUyTFTcdWX9CPW43OATUvzHyGGl+4q2q7u+eq7Mw2QlSscFtcCPhXrKx1dBwpJ1HsGH
+ nWOuPFgj4EkptMrlgQ9onJ4C8to6mC08oO1YEYw4CZToC6xyn3FCSuHxxYmIuPfzoZ+B
+ Qa3Q==
+X-Gm-Message-State: AOJu0YxeMIdAe7fRspreTrQzfyqwoXoO0yvkvPbAKLYOp2Crm/USNkZ9
+ Sh4dilzvD6EjIm8t2qQu/dwakIQyt/ChvBvtx5MfCGm+nRRFgRblCwVcUeJN7SxyJdgYK4GN0iK
+ p4uE=
+X-Google-Smtp-Source: AGHT+IFXNohYFM8dPH/HWVIWEWNGxZ37b2W9Q7iNm0LXCWss31n8WmVAy5wSRGSCJYPK0TuJwXEhxQ==
+X-Received: by 2002:a05:6214:3f8b:b0:6b9:5fb9:113f with SMTP id
+ 6a1803df08f44-6bf894e7e0emr11428826d6.27.1723844831299; 
+ Fri, 16 Aug 2024 14:47:11 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6bf6ff04ffbsm22044196d6.128.2024.08.16.14.46.44
+ 6a1803df08f44-6bf6ff04ffbsm22044196d6.128.2024.08.16.14.47.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Aug 2024 14:46:46 -0700 (PDT)
+ Fri, 16 Aug 2024 14:47:10 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
  Mario Six <mario.six@gdsys.cc>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Michal Simek <michal.simek@amd.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sean Anderson <seanga2@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sumit Garg <sumit.garg@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sumit Garg <sumit.garg@linaro.org>, Jesse Taube <mr.bossman075@gmail.com>,
+ Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
  Igor Opaniuk <igor.opaniuk@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
@@ -92,9 +91,9 @@ Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
  Jonathan Humphreys <j-humphreys@ti.com>,
  Eddie James <eajames@linux.ibm.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: [PATCH v6 05/28] sha1: Remove sha1 non-watchdog API
-Date: Fri, 16 Aug 2024 14:43:54 -0700
-Message-Id: <20240816214436.1877263-6-raymond.mao@linaro.org>
+Subject: [PATCH v6 06/28] mbedtls: add digest shim layer for MbedTLS
+Date: Fri, 16 Aug 2024 14:43:55 -0700
+Message-Id: <20240816214436.1877263-7-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240816214436.1877263-1-raymond.mao@linaro.org>
 References: <20240816214436.1877263-1-raymond.mao@linaro.org>
@@ -116,106 +115,524 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We don't need an API specially for non-watchdog since sha1_csum_wd
-supports it by disabling CONFIG_HW_WATCHDOG and CONFIG_WATCHDOG.
-Set 0x10000 as default chunk size for SHA1.
+Implement digest shim layer on top of MbedTLS crypto library.
+Introduce <alg>_MBEDTLS kconfig for MbedTLS crypto implementations.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
+Changes in v2
+- Split the shim layer into separated files and use the original head
+  files instead of creating new ones.
+Changes in v3
+- Refactored sha1_hmac and removed non-watchdog md5 function.
 Changes in v4
-- Initial patch.
+- Refactored hash _wd functions.
+- Introduce <alg>_MBEDTLS kconfig for MbedTLS crypto implementations.
 Changes in v5
-- None.
+- Correct kconfig dependence.
+- Refactored MbedTLS makefile.
 Changes in v6
 - None.
 
- board/gdsys/a38x/hre.c |  2 +-
- include/u-boot/sha1.h  | 12 ++----------
- lib/sha1.c             | 13 -------------
- lib/tpm-v1.c           |  2 +-
- 4 files changed, 4 insertions(+), 25 deletions(-)
+ include/u-boot/sha1.h |  4 ++
+ lib/mbedtls/Kconfig   | 90 +++++++++++++++++++++++++++++++++++++++
+ lib/mbedtls/Makefile  | 14 ++++--
+ lib/mbedtls/md5.c     | 57 +++++++++++++++++++++++++
+ lib/mbedtls/sha1.c    | 99 +++++++++++++++++++++++++++++++++++++++++++
+ lib/mbedtls/sha256.c  | 62 +++++++++++++++++++++++++++
+ lib/mbedtls/sha512.c  | 93 ++++++++++++++++++++++++++++++++++++++++
+ 7 files changed, 415 insertions(+), 4 deletions(-)
+ create mode 100644 lib/mbedtls/md5.c
+ create mode 100644 lib/mbedtls/sha1.c
+ create mode 100644 lib/mbedtls/sha256.c
+ create mode 100644 lib/mbedtls/sha512.c
 
-diff --git a/board/gdsys/a38x/hre.c b/board/gdsys/a38x/hre.c
-index f303793b63b..06856ea36d3 100644
---- a/board/gdsys/a38x/hre.c
-+++ b/board/gdsys/a38x/hre.c
-@@ -166,7 +166,7 @@ static int find_key(struct udevice *tpm, const uint8_t auth[20],
- 			return -1;
- 		if (err)
- 			continue;
--		sha1_csum(buf, buf_len, digest);
-+		sha1_csum_wd(buf, buf_len, digest, SHA1_DEF_CHUNK_SZ);
- 		if (!memcmp(digest, pubkey_digest, 20)) {
- 			*handle = key_handles[i];
- 			return 0;
 diff --git a/include/u-boot/sha1.h b/include/u-boot/sha1.h
-index ab88134fb98..36c3db15e22 100644
+index 36c3db15e22..2fca7f1be16 100644
 --- a/include/u-boot/sha1.h
 +++ b/include/u-boot/sha1.h
-@@ -39,6 +39,8 @@ extern "C" {
- #define SHA1_SUM_LEN	20
- #define SHA1_DER_LEN	15
+@@ -41,6 +41,10 @@ extern "C" {
  
-+#define SHA1_DEF_CHUNK_SZ 0x10000
+ #define SHA1_DEF_CHUNK_SZ 0x10000
+ 
++#define K_IPAD_VAL 0x36
++#define K_OPAD_VAL 0x5C
++#define K_PAD_LEN 64
 +
  extern const uint8_t sha1_der_prefix[];
  
  #if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
-@@ -81,16 +83,6 @@ void sha1_update(sha1_context *ctx, const unsigned char *input,
-  */
- void sha1_finish( sha1_context *ctx, unsigned char output[20] );
+diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+index efae2c4fd72..12f8c965f5a 100644
+--- a/lib/mbedtls/Kconfig
++++ b/lib/mbedtls/Kconfig
+@@ -126,9 +126,99 @@ if MBEDTLS_LIB
  
--/**
-- * \brief	   Output = SHA-1( input buffer )
-- *
-- * \param input    buffer holding the  data
-- * \param ilen	   length of the input data
-- * \param output   SHA-1 checksum result
-- */
--void sha1_csum(const unsigned char *input, unsigned int ilen,
--		unsigned char *output);
--
- /**
-  * \brief	   Output = SHA-1( input buffer ), with watchdog triggering
-  *
-diff --git a/lib/sha1.c b/lib/sha1.c
-index 7ef536f4b5d..81412283b49 100644
---- a/lib/sha1.c
-+++ b/lib/sha1.c
-@@ -304,19 +304,6 @@ void sha1_finish (sha1_context * ctx, unsigned char output[20])
- 	PUT_UINT32_BE (ctx->state[4], output, 16);
- }
+ config MBEDTLS_LIB_CRYPTO
+ 	bool "MbedTLS crypto libraries"
++	select MD5_MBEDTLS if MD5
++	select SHA1_MBEDTLS if SHA1
++	select SHA256_MBEDTLS if SHA256
++	select SHA512_MBEDTLS if SHA512
++	select SHA384_MBEDTLS if SHA384
++	select SPL_MD5_MBEDTLS if SPL_MD5
++	select SPL_SHA1_MBEDTLS if SPL_SHA1
++	select SPL_SHA256_MBEDTLS if SPL_SHA256
++	select SPL_SHA512_MBEDTLS if SPL_SHA512
++	select SPL_SHA384_MBEDTLS if SPL_SHA384
+ 	help
+ 	  Enable MbedTLS crypto libraries.
  
--/*
-- * Output = SHA-1( input buffer )
-- */
--void sha1_csum(const unsigned char *input, unsigned int ilen,
--	       unsigned char *output)
--{
--	sha1_context ctx;
--
--	sha1_starts (&ctx);
--	sha1_update (&ctx, input, ilen);
--	sha1_finish (&ctx, output);
--}
--
- /*
-  * Output = SHA-1( input buffer ). Trigger the watchdog every 'chunk_sz'
-  * bytes of input processed.
-diff --git a/lib/tpm-v1.c b/lib/tpm-v1.c
-index e66023da5e6..a6727c575fd 100644
---- a/lib/tpm-v1.c
-+++ b/lib/tpm-v1.c
-@@ -871,7 +871,7 @@ u32 tpm1_find_key_sha1(struct udevice *dev, const u8 auth[20],
- 			return -1;
- 		if (err)
- 			continue;
--		sha1_csum(buf, buf_len, digest);
-+		sha1_csum_wd(buf, buf_len, digest, SHA1_DEF_CHUNK_SZ);
- 		if (!memcmp(digest, pubkey_digest, 20)) {
- 			*handle = key_handles[i];
- 			return 0;
++if MBEDTLS_LIB_CRYPTO
++
++config SHA1_MBEDTLS
++	bool "Enable SHA1 support with MbedTLS crypto library"
++	depends on MBEDTLS_LIB_CRYPTO && SHA1
++	help
++	  This option enables support of hashing using SHA1 algorithm
++	  with MbedTLS crypto library.
++
++config SHA256_MBEDTLS
++	bool "Enable SHA256 support with MbedTLS crypto library"
++	depends on MBEDTLS_LIB_CRYPTO && SHA256
++	help
++	  This option enables support of hashing using SHA256 algorithm
++	  with MbedTLS crypto library.
++
++config SHA512_MBEDTLS
++	bool "Enable SHA512 support with MbedTLS crypto library"
++	depends on MBEDTLS_LIB_CRYPTO && SHA512
++	default y if TI_SECURE_DEVICE && FIT_SIGNATURE
++	help
++	  This option enables support of hashing using SHA512 algorithm
++	  with MbedTLS crypto library.
++
++config SHA384_MBEDTLS
++	bool "Enable SHA384 support with MbedTLS crypto library"
++	depends on MBEDTLS_LIB_CRYPTO && SHA384
++	select SHA512_MBEDTLS
++	help
++	  This option enables support of hashing using SHA384 algorithm
++	  with MbedTLS crypto library.
++
++config MD5_MBEDTLS
++	bool "Enable MD5 support with MbedTLS crypto library"
++	depends on MBEDTLS_LIB_CRYPTO && MD5
++	help
++	  This option enables support of hashing using MD5 algorithm
++	  with MbedTLS crypto library.
++
++if SPL
++
++config SPL_SHA1_MBEDTLS
++	bool "Enable SHA1 support in SPL with MbedTLS crypto library"
++	depends on MBEDTLS_LIB_CRYPTO && SPL_SHA1
++	help
++	  This option enables support of hashing using SHA1 algorithm
++	  with MbedTLS crypto library.
++
++config SPL_SHA256_MBEDTLS
++	bool "Enable SHA256 support in SPL with MbedTLS crypto library"
++	depends on MBEDTLS_LIB_CRYPTO && SPL_SHA256
++	help
++	  This option enables support of hashing using SHA256 algorithm
++	  with MbedTLS crypto library.
++
++config SPL_SHA512_MBEDTLS
++	bool "Enable SHA512 support in SPL with MbedTLS crypto library"
++	depends on MBEDTLS_LIB_CRYPTO && SPL_SHA512
++	help
++	  This option enables support of hashing using SHA512 algorithm
++	  with MbedTLS crypto library.
++
++config SPL_SHA384_MBEDTLS
++	bool "Enable SHA384 support in SPL with MbedTLS crypto library"
++	depends on MBEDTLS_LIB_CRYPTO && SPL_SHA384
++	select SPL_SHA512
++	help
++	  This option enables support of hashing using SHA384 algorithm
++	  with MbedTLS crypto library.
++
++config SPL_MD5_MBEDTLS
++	bool "Enable MD5 support in SPL with MbedTLS crypto library"
++	depends on MBEDTLS_LIB_CRYPTO && SPL_MD5
++	help
++	  This option enables support of hashing using MD5 algorithm
++	  with MbedTLS crypto library.
++
++endif # SPL
++
++endif # MBEDTLS_LIB_CRYPTO
+ 
+ config MBEDTLS_LIB_X509
+ 	bool "MbedTLS certificate libraries"
+diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
+index e98241b46ab..50c1ba5f88e 100644
+--- a/lib/mbedtls/Makefile
++++ b/lib/mbedtls/Makefile
+@@ -5,17 +5,23 @@
+ 
+ MBEDTLS_LIB_DIR = external/mbedtls/library
+ 
++# shim layer for hash
++obj-$(CONFIG_$(SPL_)MD5_MBEDTLS) += md5.o
++obj-$(CONFIG_$(SPL_)SHA1_MBEDTLS) += sha1.o
++obj-$(CONFIG_$(SPL_)SHA256_MBEDTLS) += sha256.o
++obj-$(CONFIG_$(SPL_)SHA512_MBEDTLS) += sha512.o
++
+ # MbedTLS crypto library
+ obj-$(CONFIG_MBEDTLS_LIB_CRYPTO) += mbedtls_lib_crypto.o
+ mbedtls_lib_crypto-y := \
+ 	$(MBEDTLS_LIB_DIR)/platform_util.o \
+ 	$(MBEDTLS_LIB_DIR)/constant_time.o \
+ 	$(MBEDTLS_LIB_DIR)/md.o
+-mbedtls_lib_crypto-$(CONFIG_$(SPL_)MD5) += $(MBEDTLS_LIB_DIR)/md5.o
+-mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA1) += $(MBEDTLS_LIB_DIR)/sha1.o
+-mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA256) += \
++mbedtls_lib_crypto-$(CONFIG_$(SPL_)MD5_MBEDTLS) += $(MBEDTLS_LIB_DIR)/md5.o
++mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA1_MBEDTLS) += $(MBEDTLS_LIB_DIR)/sha1.o
++mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA256_MBEDTLS) += \
+ 	$(MBEDTLS_LIB_DIR)/sha256.o
+-mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA512) += \
++mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA512_MBEDTLS) += \
+ 	$(MBEDTLS_LIB_DIR)/sha512.o
+ 
+ # MbedTLS X509 library
+diff --git a/lib/mbedtls/md5.c b/lib/mbedtls/md5.c
+new file mode 100644
+index 00000000000..04388fce249
+--- /dev/null
++++ b/lib/mbedtls/md5.c
+@@ -0,0 +1,57 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Hash shim layer on MbedTLS Crypto library
++ *
++ * Copyright (c) 2024 Linaro Limited
++ * Author: Raymond Mao <raymond.mao@linaro.org>
++ */
++#include "compiler.h"
++
++#ifndef USE_HOSTCC
++#include <watchdog.h>
++#endif /* USE_HOSTCC */
++#include <u-boot/md5.h>
++
++void MD5Init(MD5Context *ctx)
++{
++	mbedtls_md5_init(ctx);
++	mbedtls_md5_starts(ctx);
++}
++
++void MD5Update(MD5Context *ctx, unsigned char const *buf, unsigned int len)
++{
++	mbedtls_md5_update(ctx, buf, len);
++}
++
++void MD5Final(unsigned char digest[16], MD5Context *ctx)
++{
++	mbedtls_md5_finish(ctx, digest);
++	mbedtls_md5_free(ctx);
++}
++
++void md5_wd(const unsigned char *input, unsigned int len,
++	    unsigned char output[16], unsigned int chunk_sz)
++{
++	MD5Context context;
++
++	MD5Init(&context);
++
++	if (IS_ENABLED(CONFIG_HW_WATCHDOG) || IS_ENABLED(CONFIG_WATCHDOG)) {
++		const unsigned char *curr = input;
++		const unsigned char *end = input + len;
++		int chunk;
++
++		while (curr < end) {
++			chunk = end - curr;
++			if (chunk > chunk_sz)
++				chunk = chunk_sz;
++			MD5Update(&context, curr, chunk);
++			curr += chunk;
++			schedule();
++		}
++	} else {
++		MD5Update(&context, input, len);
++	}
++
++	MD5Final(output, &context);
++}
+diff --git a/lib/mbedtls/sha1.c b/lib/mbedtls/sha1.c
+new file mode 100644
+index 00000000000..2aee5037795
+--- /dev/null
++++ b/lib/mbedtls/sha1.c
+@@ -0,0 +1,99 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Hash shim layer on MbedTLS Crypto library
++ *
++ * Copyright (c) 2024 Linaro Limited
++ * Author: Raymond Mao <raymond.mao@linaro.org>
++ */
++#ifndef USE_HOSTCC
++#include <cyclic.h>
++#endif /* USE_HOSTCC */
++#include <string.h>
++#include <u-boot/sha1.h>
++
++const u8 sha1_der_prefix[SHA1_DER_LEN] = {
++	0x30, 0x21, 0x30, 0x09, 0x06, 0x05, 0x2b, 0x0e,
++	0x03, 0x02, 0x1a, 0x05, 0x00, 0x04, 0x14
++};
++
++void sha1_starts(sha1_context *ctx)
++{
++	mbedtls_sha1_init(ctx);
++	mbedtls_sha1_starts(ctx);
++}
++
++void sha1_update(sha1_context *ctx, const unsigned char *input,
++		 unsigned int length)
++{
++	mbedtls_sha1_update(ctx, input, length);
++}
++
++void sha1_finish(sha1_context *ctx, unsigned char output[SHA1_SUM_LEN])
++{
++	mbedtls_sha1_finish(ctx, output);
++	mbedtls_sha1_free(ctx);
++}
++
++void sha1_csum_wd(const unsigned char *input, unsigned int ilen,
++		  unsigned char *output, unsigned int chunk_sz)
++{
++	sha1_context ctx;
++
++	sha1_starts(&ctx);
++
++	if (IS_ENABLED(CONFIG_HW_WATCHDOG) || IS_ENABLED(CONFIG_WATCHDOG)) {
++		const unsigned char *curr = input;
++		const unsigned char *end = input + ilen;
++		int chunk;
++
++		while (curr < end) {
++			chunk = end - curr;
++			if (chunk > chunk_sz)
++				chunk = chunk_sz;
++			sha1_update(&ctx, curr, chunk);
++			curr += chunk;
++			schedule();
++		}
++	} else {
++		sha1_update(&ctx, input, ilen);
++	}
++
++	sha1_finish(&ctx, output);
++}
++
++void sha1_hmac(const unsigned char *key, int keylen,
++	       const unsigned char *input, unsigned int ilen,
++	       unsigned char *output)
++{
++	int i;
++	sha1_context ctx;
++	unsigned char k_ipad[K_PAD_LEN];
++	unsigned char k_opad[K_PAD_LEN];
++	unsigned char tmpbuf[20];
++
++	if (keylen > K_PAD_LEN)
++		return;
++
++	memset(k_ipad, K_IPAD_VAL, sizeof(k_ipad));
++	memset(k_opad, K_OPAD_VAL, sizeof(k_opad));
++
++	for (i = 0; i < keylen; i++) {
++		k_ipad[i] ^= key[i];
++		k_opad[i] ^= key[i];
++	}
++
++	sha1_starts(&ctx);
++	sha1_update(&ctx, k_ipad, sizeof(k_ipad));
++	sha1_update(&ctx, input, ilen);
++	sha1_finish(&ctx, tmpbuf);
++
++	sha1_starts(&ctx);
++	sha1_update(&ctx, k_opad, sizeof(k_opad));
++	sha1_update(&ctx, tmpbuf, sizeof(tmpbuf));
++	sha1_finish(&ctx, output);
++
++	memset(k_ipad, 0, sizeof(k_ipad));
++	memset(k_opad, 0, sizeof(k_opad));
++	memset(tmpbuf, 0, sizeof(tmpbuf));
++	memset(&ctx, 0, sizeof(sha1_context));
++}
+diff --git a/lib/mbedtls/sha256.c b/lib/mbedtls/sha256.c
+new file mode 100644
+index 00000000000..24aa58fa674
+--- /dev/null
++++ b/lib/mbedtls/sha256.c
+@@ -0,0 +1,62 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Hash shim layer on MbedTLS Crypto library
++ *
++ * Copyright (c) 2024 Linaro Limited
++ * Author: Raymond Mao <raymond.mao@linaro.org>
++ */
++#ifndef USE_HOSTCC
++#include <cyclic.h>
++#endif /* USE_HOSTCC */
++#include <u-boot/sha256.h>
++
++const u8 sha256_der_prefix[SHA256_DER_LEN] = {
++	0x30, 0x31, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
++	0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 0x05,
++	0x00, 0x04, 0x20
++};
++
++void sha256_starts(sha256_context *ctx)
++{
++	mbedtls_sha256_init(ctx);
++	mbedtls_sha256_starts(ctx, 0);
++}
++
++void
++sha256_update(sha256_context *ctx, const uint8_t *input, uint32_t length)
++{
++	mbedtls_sha256_update(ctx, input, length);
++}
++
++void sha256_finish(sha256_context *ctx, uint8_t digest[SHA256_SUM_LEN])
++{
++	mbedtls_sha256_finish(ctx, digest);
++	mbedtls_sha256_free(ctx);
++}
++
++void sha256_csum_wd(const unsigned char *input, unsigned int ilen,
++		    unsigned char *output, unsigned int chunk_sz)
++{
++	sha256_context ctx;
++
++	sha256_starts(&ctx);
++
++	if (IS_ENABLED(CONFIG_HW_WATCHDOG) || IS_ENABLED(CONFIG_WATCHDOG)) {
++		const unsigned char *curr = input;
++		const unsigned char *end = input + ilen;
++		int chunk;
++
++		while (curr < end) {
++			chunk = end - curr;
++			if (chunk > chunk_sz)
++				chunk = chunk_sz;
++			sha256_update(&ctx, curr, chunk);
++			curr += chunk;
++			schedule();
++		}
++	} else {
++		sha256_update(&ctx, input, ilen);
++	}
++
++	sha256_finish(&ctx, output);
++}
+diff --git a/lib/mbedtls/sha512.c b/lib/mbedtls/sha512.c
+new file mode 100644
+index 00000000000..5615248cb91
+--- /dev/null
++++ b/lib/mbedtls/sha512.c
+@@ -0,0 +1,93 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Hash shim layer on MbedTLS Crypto library
++ *
++ * Copyright (c) 2024 Linaro Limited
++ * Author: Raymond Mao <raymond.mao@linaro.org>
++ */
++#ifndef USE_HOSTCC
++#include <cyclic.h>
++#endif /* USE_HOSTCC */
++#include <compiler.h>
++#include <u-boot/sha512.h>
++
++const u8 sha384_der_prefix[SHA384_DER_LEN] = {
++	0x30, 0x41, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
++	0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x02, 0x05,
++	0x00, 0x04, 0x30
++};
++
++const u8 sha512_der_prefix[SHA512_DER_LEN] = {
++	0x30, 0x51, 0x30, 0x0d, 0x06, 0x09, 0x60, 0x86,
++	0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03, 0x05,
++	0x00, 0x04, 0x40
++};
++
++void sha384_starts(sha512_context *ctx)
++{
++	mbedtls_sha512_init(ctx);
++	mbedtls_sha512_starts(ctx, 1);
++}
++
++void
++sha384_update(sha512_context *ctx, const uint8_t *input, uint32_t length)
++{
++	mbedtls_sha512_update(ctx, input, length);
++}
++
++void sha384_finish(sha512_context *ctx, uint8_t digest[SHA384_SUM_LEN])
++{
++	mbedtls_sha512_finish(ctx, digest);
++	mbedtls_sha512_free(ctx);
++}
++
++void sha384_csum_wd(const unsigned char *input, unsigned int length,
++		    unsigned char *output, unsigned int chunk_sz)
++{
++	mbedtls_sha512(input, length, output, 1);
++}
++
++void sha512_starts(sha512_context *ctx)
++{
++	mbedtls_sha512_init(ctx);
++	mbedtls_sha512_starts(ctx, 0);
++}
++
++void
++sha512_update(sha512_context *ctx, const uint8_t *input, uint32_t length)
++{
++	mbedtls_sha512_update(ctx, input, length);
++}
++
++void sha512_finish(sha512_context *ctx, uint8_t digest[SHA512_SUM_LEN])
++{
++	mbedtls_sha512_finish(ctx, digest);
++	mbedtls_sha512_free(ctx);
++}
++
++void sha512_csum_wd(const unsigned char *input, unsigned int ilen,
++		    unsigned char *output, unsigned int chunk_sz)
++{
++	sha512_context ctx;
++
++	sha512_starts(&ctx);
++
++	if (IS_ENABLED(CONFIG_HW_WATCHDOG) || IS_ENABLED(CONFIG_WATCHDOG)) {
++		const unsigned char *curr = input;
++		const unsigned char *end = input + ilen;
++		int chunk;
++
++		while (curr < end) {
++			chunk = end - curr;
++			if (chunk > chunk_sz)
++				chunk = chunk_sz;
++			sha512_update(&ctx, curr, chunk);
++			curr += chunk;
++			schedule();
++		}
++	} else {
++		sha512_update(&ctx, input, ilen);
++	}
++
++	sha512_finish(&ctx, output);
++}
 -- 
 2.25.1
 
