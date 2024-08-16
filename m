@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4338FC3DA4A
-	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 18:40:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80AEDC3DA4A
+	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 18:49:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9418788BDE;
-	Fri, 16 Aug 2024 20:40:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9C11888BF8;
+	Fri, 16 Aug 2024 20:49:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eSpMx6b2";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fKs8h6s7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59C01889E9; Fri, 16 Aug 2024 20:40:27 +0200 (CEST)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
+ id 4080088BFD; Fri, 16 Aug 2024 20:49:36 +0200 (CEST)
+Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
+ [IPv6:2607:f8b0:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F9E088BE1
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 20:40:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BCDC288BDE
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 20:49:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-26ff21d82e4so1240198fac.2
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 11:40:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x52a.google.com with SMTP id
+ 41be03b00d2f7-7bb75419123so1796880a12.3
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 11:49:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1723833622; x=1724438422; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zWTEJIJk1Zu6UwcwKVeGlrn21qooVzv2kgT9d7af/R4=;
- b=eSpMx6b23CR+E0yRf99mB6U7eqTnQCG/izHQprbXSeUWvaAPoGZCy46s5+IdMenzvk
- xxKOTne9mDRAHWxsIZNOfsToOOS+BDfz6YvCxDR41wLrUOjfYQw/zG0H7sNl2hrtBb0K
- FNROOjmptmZ08+qoZ6o0CgMqvKa6W+GQXc+Co=
+ d=linaro.org; s=google; t=1723834163; x=1724438963; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=BpqQHXufZW1PDIe7KwsIYz8TvN6D/VaWfkmSdhaoQ6g=;
+ b=fKs8h6s7oKrj7c4y0bEbLMKgXTffYIBE3SWLSYGdh94iEBiXgKVjVK9CsV0OW2FS38
+ 1ZN7iGV0yUj3ckMH+zgaZizJloAKGxqy9MjwIgOGDzv+9lVPx+npSZwQKuQGe2T/sw1z
+ 7MGNI0pAQO5JeJtYYMwKUWksI+AyUnUY7yRvHSMz9Qm6zH8AftTD6Ruw0hL8saHV4Yes
+ 8VBpSYxbP0H3HT6DsnDoVcyTLftSTnyp3VfirhAIAa9LkkkPkZlYqHXV5BGF998B24xD
+ gTlCEJlYOkauxcxW0rZA5ei7V4fiCtG13LQJEjv2f2txMyy58nwh66ZF7mQmRAcRG6Gs
+ Oo0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723833622; x=1724438422;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zWTEJIJk1Zu6UwcwKVeGlrn21qooVzv2kgT9d7af/R4=;
- b=mY+G9qboxiGugQUnd+TVq8wVJJhmwVC5Qv6bUIHzaDgfk0YdDsDHWp8rJV/OVbE1iz
- fdg8C3Wu1mPQygWHPiacm00QWGVQdIEsmmoXSiS/wwTa/RMS5x+bWQdbduzc+fRDXyr7
- GEC0CRuVxtP+rYYRH3PnyunY9AvYROl0615Uy1oIojVm5AqppRg6rRD4b5iP8gI8TfV4
- vvkqnaq4D1kafCztXtB70pxeMDYYrMhX6T98u9E4UNN3ekFfVcv+9q6nE4O6vNOaka7x
- XP7wAQuw+gMntOhVX4gJ7thwLDxhm41GnBuEkjynAcseZ0M+H40GQHAw5wBT5qnpJx4s
- giQQ==
-X-Gm-Message-State: AOJu0Yw7jT3wsEbEvT9k6XMy4wAM2inePvSOQq6DOgKW+KsTQW4I/68c
- VvrYrLiNteR9l8Sda3SkWCd/2ujJCDCCvHtKOUwMdTw35eYSZDiPr3Vs761IfRU=
-X-Google-Smtp-Source: AGHT+IFZUs5hwsezkmsyUHqmD5fryB2tKbTqpzlqhjV/LMJKM3gw5vKtaeHXLTfzDQs2r3hsoQupNA==
-X-Received: by 2002:a05:6870:2c90:b0:254:7211:424b with SMTP id
- 586e51a60fabf-27033f2b7ccmr512738fac.6.1723833622254; 
- Fri, 16 Aug 2024 11:40:22 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-236.totalplay.net.
- [189.203.97.236]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-270046a6208sm1019856fac.27.2024.08.16.11.40.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Aug 2024 11:40:21 -0700 (PDT)
-Date: Fri, 16 Aug 2024 12:40:19 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>
-Subject: Re: [PATCH v8 00/23] Introduce the lwIP network stack
-Message-ID: <20240816184019.GD1626301@bill-the-cat>
-References: <cover.1723050310.git.jerome.forissier@linaro.org>
- <20240807204400.GJ1626301@bill-the-cat>
- <d9fe273b-ab60-44eb-bef8-cbde3af8ab1b@linaro.org>
+ d=1e100.net; s=20230601; t=1723834163; x=1724438963;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=BpqQHXufZW1PDIe7KwsIYz8TvN6D/VaWfkmSdhaoQ6g=;
+ b=jTYXEa/fcLmskqdKTauuQ/jEZ7lQ8neSAUH1AFfx64+9uMnRqCjq1Z03wKD8dUoOgH
+ Sb8qTrQW+Fmn0jWx7IY9G1jeo4pAOrsToKbq2iGxjvnnm2CMDh8T1nM0TLmVwBV7rUeG
+ tkOY+htKH7/38/AwQ7e/XR78yfUpF6Du2oXrK3hgdLY1255KA35HiO2HWxN8LNR7whVv
+ Da81/qPMI/ROZbsMWlucn3g+LpRyY7KsgzMjQmfWOScvYxY8mkhGf2HPDi6Xk6rzIlI0
+ +NhPEiQK+ZMQcayW3HEQzusWP//DpzlW9Rwhk9gjYrPeBQIWs7ZMDPaBzqHs3y9pL0t8
+ 6HYQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUNHSH4Y7w2F8ALRCRy0eRBFESLSISOHjQqmOPD7b/qma6KF4hplytkCXgqMta9V0D7zuktfHLoYPBO34WfJskoftxldA==
+X-Gm-Message-State: AOJu0YxbVGYa42Xiw9HZTUCxhW37Pnw+rzSh8m1JZNAFyZjIiI/2FLbY
+ +JDUCuAX7BsLhvYtADEjeVzyP03icjeLfEd6MsjNitXyKrGsXf4FCJAaQr7n9FXtQa6VCwuYKzR
+ XUrCOMR4uNor29aHiAputzF6Y4BWw9Wb2F69u+A==
+X-Google-Smtp-Source: AGHT+IHY/9CO7PjDgfwQ6TtMIsEPEXipbOmya0TejVg8ZHn/oyvoIpHsIVI1u7B4Ha4bchYB9l4MD0rbCApGmdOSg4M=
+X-Received: by 2002:a05:6a20:1810:b0:1c9:1604:cf2 with SMTP id
+ adf61e73a8af0-1c916040f79mr2955859637.0.1723834162795; Fri, 16 Aug 2024
+ 11:49:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qyrmiRHPggQZV7kb"
-Content-Disposition: inline
-In-Reply-To: <d9fe273b-ab60-44eb-bef8-cbde3af8ab1b@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240814134518.82692-1-ilias.apalodimas@linaro.org>
+ <CAFLszTjrBL-GonZKqp3Ab5vQPMZ+BZu8V21y4z0qBCGuH64uJw@mail.gmail.com>
+ <CAC_iWjKF0DMfJza-ojYXPg_tHL14DTdK+GzhxhEX3etpaNiK8Q@mail.gmail.com>
+ <CAFLszTjfhtRqRTdQOi-Dhzpa_aVSVSU8FjWmXEKz5vi=_0i=BA@mail.gmail.com>
+In-Reply-To: <CAFLszTjfhtRqRTdQOi-Dhzpa_aVSVSU8FjWmXEKz5vi=_0i=BA@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 16 Aug 2024 21:49:11 +0300
+Message-ID: <CAC_iWj+gi30VzTFcJiHY9YzUt13Jne9oBVRsESYTknmJZaSXtg@mail.gmail.com>
+Subject: Re: [PATCH] Kconfig: clean up the efi configuration status
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Anton Antonov <Anton.Antonov@arm.com>, 
+ Tom Rini <trini@konsulko.com>, Ian Roberts <ian.roberts@timesys.com>, 
+ Kever Yang <kever.yang@rock-chips.com>, Shengyu Qu <wiagn233@outlook.com>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Greg Malysa <greg.malysa@timesys.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Sean Anderson <sean.anderson@seco.com>, Anand Moon <linux.amoon@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Eddie James <eajames@linux.ibm.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,101 +99,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon
 
---qyrmiRHPggQZV7kb
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On mobile apologies for any weird formatting in advance.
 
-On Fri, Aug 16, 2024 at 06:21:24PM +0200, Jerome Forissier wrote:
->=20
->=20
-> On 8/7/24 22:44, Tom Rini wrote:
-> > On Wed, Aug 07, 2024 at 07:11:44PM +0200, Jerome Forissier wrote:
-> >=20
-> >> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
-> >> library for the network stack" [1]. The goal is to introduce the lwIP =
-TCP/IP
-> >> stack [2] [3] as an alternative to the current implementation in net/,
-> >> selectable with Kconfig, and ultimately keep only lwIP if possible. So=
-me
-> >> reasons for doing so are:
-> >> - Make the support of HTTPS in the wget command easier. Javier T. and
-> >> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
-> >> so. With that it becomes possible to fetch and launch a distro install=
-er
-> >> such as Debian etc. using a secure, authenticated connection directly
-> >> from the U-Boot shell. Several use cases:
-> >>   * Authentication: prevent MITM attack (third party replacing the
-> >> binary with a different one)
-> >>   * Confidentiality: prevent third parties from grabbing a copy of the
-> >> image as it is being downloaded
-> >>   * Allow connection to servers that do not support plain HTTP anymore
-> >> (this is becoming more and more common on the Internet these days)
-> >> - Possibly benefit from additional features implemented in lwIP
-> >> - Less code to maintain in U-Boot
-> >>
-> >> Prior to applying this series, the lwIP stack needs to be added as a
-> >> Git subtree with the following command:
-> >>
-> >>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savann=
-ah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
-> >=20
-> > For v9, I think it would be good to do a CI run with NET_LWIP default
-> > and seeing what fails from that too. There's a few problems still
-> > leading to a lot of failures, in that case. Thanks.
+On Fri, Aug 16, 2024, 04:34 Simon Glass <sjg@chromium.org> wrote:
+
+> Hi Ilias,
+>
+> On Thu, 15 Aug 2024 at 15:11, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
 > >
->=20
-> See here: https://github.com/u-boot/u-boot/pull/635
->=20
-> I fixed a number of issues, see the commit descriptions. As for the
-> remaining ones:
-> - There is no http server in the CI so the wget test I added fails
+> >
+> >
+> > On Thu, Aug 15, 2024, 23:33 Simon Glass <sjg@chromium.org> wrote:
+> >>
+> >> Hi Ilias,
+> >>
+> >> On Wed, 14 Aug 2024 at 07:45, Ilias Apalodimas
+> >> <ilias.apalodimas@linaro.org> wrote:
+> >> >
+> >> > The EFI_LOADER and EFI config options are randomly scattered under
+> lib/
+> >> > making it cumbersome to navigate and enable options, unless you really
+> >> > know what you are doing. On top of that the existing options are in
+> >> > random order instead of a logical one.
+> >> >
+> >> > So let's move things around a bit and present two enties for the
+> >>
+> >> entries
+> >>
+> >> > EFI_LOADER and EFI options in the main config screen.
+> >> > While at it add menus for Capsules, Protocols, and Services in the
+> >> > EFI_LOADER so people can find their way around easier
+> >> >
+> >> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> >> > ---
+> >> >  Kconfig                |   4 +
+> >> >  lib/Kconfig            |   2 -
+> >> >  lib/efi/Kconfig        |   5 +
+> >> >  lib/efi_loader/Kconfig | 202
+> +++++++++++++++++++++++------------------
+> >> >  4 files changed, 123 insertions(+), 90 deletions(-)
+> >> >
+> >> > diff --git a/Kconfig b/Kconfig
+> >> > index 82df59f176ec..62c5441e3576 100644
+> >> > --- a/Kconfig
+> >> > +++ b/Kconfig
+> >> > @@ -756,3 +756,7 @@ source "lib/Kconfig"
+> >> >  source "test/Kconfig"
+> >> >
+> >> >  source "tools/Kconfig"
+> >> > +
+> >> > +source "lib/efi_loader/Kconfig"
+> >> > +
+> >>
+> >> This should be included from boot/Kconfig as it relates to booting.
+> >
+> >
+> > Hmm why? Booting is one of the things efi does. I prefer having it on
+> the main menu since it's a pointer to the entire spec, protocols, services
+> etc
+>
+> True. From a functionality point of view, there is booting and
+> firmware update. Is there anything else? I have thought for a while
+> that we should perhaps have an 'update' menu. Where, for example,
+> would VBE fit in the menus?
+>
 
-Ah yes. So the test needs some enable-me type flag, like other tests
-that require external configuration.
+Why don't we do something similar for VBE? I agree that those are the 2
+main categories, but I think it's far more intuitive to have all in one
+place depending on what to choose to boot and upgrade your device.
 
-> - tftp is super slow in QEMU (~145 KiB/s) which causes timeouts. This is
-> for two reasons: (1) the tftp windowsize option is not supported in lwIP
-> (while the legacy NET does support it) so the sender waits for an ACK
-> before sending a new packet; and (2) the latency is very high due to
-> memcpy() being incredibly slow in QEMU (I am mainly referring to the
-> memcpy() call in tftp_write() in net/lwip/tftp.c). I measured ~20-60 ms
-> to copy a few hundred bytes (!) and if CONFIG_USE_ARCH_MEMCPY is enabled
-> it is slightly better but not much (~15 ms). Also it seems the QEMU
-> networking emulation is fragmenting the UDP packets because with
-> CONFIG_TFTP_BLOCKSIZE=3D1468 the tftp_write() function never receives
-> 1468 bytes but only a few hundreds at a time (max 544 bytes).
+Otherwise you have to enable the 'boot method' and start navigation around
+for updates etc.
 
-I thought you fixed that? Or was that only for on real hardware?
 
-But also, some of those numbers sound unusually terrible to me. We can
-get some bad luck with the free instances, but, still.  Are you sure
-there's nothing else going on?
+> >
+> >
+> >>
+> >> The EFI app thing should perhaps be under there too...I'm not sure.
+> >
+> >
+> > I was toying around with the idea as well. But eventually I decided this
+> needs it's own entry since it's about building U-Boot as a pe/coff. I don't
+> mind changing this though.
+>
+> Yes, building as an app isn't really about booting. It looks very
+> lonely at the end of the menu, though.
+>
 
-> - The r2dplus_* tests fail for reasons I don't understand.
+I'll fold this in to UEFI
 
-Consistently, too?
+Cheers
+Ilias
 
---=20
-Tom
-
---qyrmiRHPggQZV7kb
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAma/nRMACgkQFHw5/5Y0
-tyydIQv/R7sqYGdJHQuPeQ+xq9QEwTOlc/PyPdqnnbDkeNtE1ccMxe6I6pcn4JqG
-ojjBirR7M4BWsDlP+lTffA/tPJ29Bfg6G9sHjdEIfJ7GOjawmL8RtoggDZZe85UO
-VFE0dXjtJbsFD3bhsXUncHNU/I4MzC+Xj/ojen4lhHkz5qhU9a8ENh5et/ZTdQXP
-f1F4KhwFdY6K0e9OOqO8ufN/4Y9Yb8hYn6Z0gDmUIl9sh6DBFkLGerCyg8LiJ/Ol
-cVUPgSxeEdn2LSm53Ba6wMzX2JKscX2Pq0lYPh2kAPV4MYmeSYBRR0D/hEJ0asA9
-SmJleBhNpDZW2Z6s2UHV285XJq3b9C7MRb9i2U0Tjl2l1zo8wRkrDGcbFEEqYct2
-gzTdaBH6eTq2beBBoY0LYWT4MfjN1K6ybti6ZyJ8Xjy9cjtjPIzk8lxXKR1QFJzX
-V4h/y6mdqdxBNQ8cCTrrtLV9qAVpMaAKDeG9nv7euWpMJ9eGWM81LveWoJURAP+L
-FnY6lAOY
-=qFic
------END PGP SIGNATURE-----
-
---qyrmiRHPggQZV7kb--
+>
+> Regards,
+> Simon
+>
+> >
+> > Thanks
+> > Ilias
+> >>
+> >>
+> >> Regards,
+> >> Simon
+>
