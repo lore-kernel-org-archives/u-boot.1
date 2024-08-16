@@ -4,98 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CEE5C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 22:59:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 636E3C52D7D
+	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 22:59:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4380688C7B;
+	by phobos.denx.de (Postfix) with ESMTP id 9ED7088C82;
 	Sat, 17 Aug 2024 00:59:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LG++wCWy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Op0IvzPn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C10B88C50; Fri, 16 Aug 2024 23:49:37 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id 54B5D88C4E; Fri, 16 Aug 2024 23:50:07 +0200 (CEST)
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2154E88AA9
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 23:49:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2067688AA9
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 23:50:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-6bf6ea1d34aso13365886d6.1
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 14:49:35 -0700 (PDT)
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-5d5aecbe0a9so1409025eaf.1
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 14:50:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723844972; x=1724449772; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723844995; x=1724449795; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DWhnxfRKVWzUB1Z472NG1v9RYr5P9d2C1rPDe+ruOic=;
- b=LG++wCWyjfW8grtm63nWmCTtWGVsJO2Nzk3uM48m5NhqqMXqhL9V5aPrufwYADh5jr
- i7miW9JU3cBkK9RmlWvy5XcTlYdE3r96w6B1Z8/+3Ti6QVVrAmgJ3YM6T+2QM2vFFEiQ
- gdNII+lEos9oIb3NqdUrAzaKH5H7QwNTMb2FyF2DWvrD7gPPtKEwyB71P2lzqrHIVefy
- qfKOM6+bQ+G5NStXicLDobnQP+G/oUI42ZuxZvoVUc2hspx2dlFVc3Sr4ZfR/jMCciaw
- YrDc92xcSCF3CxStLbpxgroB7sBEd0vDgv0j3xQC59FcdQN/mq5T8m11s+Hi/ck3ZDJi
- lAyw==
+ bh=5W75xNOJ0rsiOhEe4XkwtkPP1doQXaQtAwh83LM6HZ4=;
+ b=Op0IvzPny5Iep1nxu5Uk0ZsP5w7y0GOGXu7NOjCS8r7PxRrM1P11iO3KUyNzF561eE
+ 9SMVprroTf8xRrXnlCT6XS1Eb4Q6f37Mm70d1QCvVqfi4hqHDqLyCudyBKtKJpIzM1la
+ OdUOAQnv3A6GwiUSsmDm+zdNecYxq+2k5rjph9Saq371PDifIvpVyPLi/klAmpvimG2X
+ kVnRMngzbUvc8NLSuvl5gUGZwggotmbzwVdTVbrjpQScjRIb895wBnVpJmIWyOnJhlMQ
+ zr2uZEGPeI11xNbevyxKbIitHwftLulNIXQ0Vhn43nfkvJBAdDU4o6L7KQ4anKW279fR
+ GBag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723844972; x=1724449772;
+ d=1e100.net; s=20230601; t=1723844995; x=1724449795;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DWhnxfRKVWzUB1Z472NG1v9RYr5P9d2C1rPDe+ruOic=;
- b=fEjq/1j+Z0a8jCKv/RJQtmb8fvoXzLTnESq2oUX3i9b+8R3c29H/5EjTnwe/QJ+0I7
- 2hPNKO+QNbybYSKh69C2rWlsezYqMwsJkOXdDb1p5hlW6S3v1E6ogRugMNHI6MkK+p/J
- JXL8+MI51rkga+tWRqPGhgcmzzN52iwnWenc27zdJ1JnyJrsFAgCaJikxw9Y0eU87R+z
- /z0oVL4x5M1kvL4MzHkyE04rVeYEcLOVSeOuzpAMVeSzg7q7nHEp2VHysp/TGzMEPO36
- P5EW+PsKSbhxBpUCjyVQhKXvS9OnYlUQbN0L1LwQ68fQg22cZGiMQ5wQRZDgtGVPkWoQ
- Wm5g==
-X-Gm-Message-State: AOJu0Ywm326PYbFJMifpfch7MKteYGgjal7eSDAIiuWjyXLgPCzwVazH
- pt0cUysmCgwfoMIhRrDHYKbvJIZs0m+Dpn50Gy30YKueB6k3pFeON8dxWXfIWwFVswxnZFkB6xC
- ifgA=
-X-Google-Smtp-Source: AGHT+IFu6SmVxSVV8JaKuztkKwMMQiB6a8xN+6ZzSyfvaJw/48zT1uduG7JcOwbfgtAVzEDkRD2LJA==
-X-Received: by 2002:a05:6214:41a0:b0:6b7:abe7:5665 with SMTP id
- 6a1803df08f44-6bf7cdd64demr50777616d6.22.1723844972330; 
- Fri, 16 Aug 2024 14:49:32 -0700 (PDT)
+ bh=5W75xNOJ0rsiOhEe4XkwtkPP1doQXaQtAwh83LM6HZ4=;
+ b=HltOOkGonwSS5EurTTIIqWIjwXV3CqflHl+WGZmuWuBhFtSRTcq6dJKg2PYpeUPX9a
+ 6HXRWn2qXc0dmwOPz8kH1g/UP+AkXqnGSoqYSEP/fVbI5jKnR0k39ja24/0QC07hdPo3
+ us03Pn5muXsZl1DMccBEMPmEoZtjePCWBEXczpQkRxgUscBfFwXjLWFQ4A8x1TC+nqee
+ BvHZ5lkWTGyYV6XdpwSNPqqH0KHJD96OgY+awbkTQ5faLJFjjd9lk54ODWHbHMyONit5
+ qepUj9EvmMhD6cXvHJ4xJ0HWVswMx5nzLIPNcAwwTmTEk9Why16QUcFMtB57At/wQN8E
+ jYGA==
+X-Gm-Message-State: AOJu0YwC5pAcksBfYEGXdjVjQSUMeIpQfz96dx9ZDGw/GCTTrPlKEpKX
+ 0cnMYxX9P2HDqQLRnR0itBJ7EhsBIL9pJJJz2+JsGJsb7pOenUWxFRtmVpfrrnbhFq8W4Os2W7t
+ wUgg=
+X-Google-Smtp-Source: AGHT+IFwxksynlFEPv8vgPq8K+BxMrRwEOFCQtquhSwVw2poJx113wwQStfWTlqk3JcJJP+PLONw3Q==
+X-Received: by 2002:a05:6358:419f:b0:1ac:f2bb:8aa6 with SMTP id
+ e5c5f4694b2df-1b39328524amr550680055d.21.1723844995212; 
+ Fri, 16 Aug 2024 14:49:55 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6bf6ff04ffbsm22044196d6.128.2024.08.16.14.49.30
+ 6a1803df08f44-6bf6ff04ffbsm22044196d6.128.2024.08.16.14.49.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Aug 2024 14:49:31 -0700 (PDT)
+ Fri, 16 Aug 2024 14:49:54 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
  Mario Six <mario.six@gdsys.cc>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Michal Simek <michal.simek@amd.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sean Anderson <seanga2@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sumit Garg <sumit.garg@linaro.org>, Andrew Davis <afd@ti.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
  Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
  "Leon M. Busch-George" <leon@georgemail.eu>,
  Igor Opaniuk <igor.opaniuk@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
  Alexander Gendin <agendin@matrox.com>,
- Jonathan Humphreys <j-humphreys@ti.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
  =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
  Anand Moon <linux.amoon@gmail.com>, Eddie James <eajames@linux.ibm.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: [PATCH v6 12/28] mbedtls/external: update MbedTLS PKCS7 test suites
-Date: Fri, 16 Aug 2024 14:44:01 -0700
-Message-Id: <20240816214436.1877263-13-raymond.mao@linaro.org>
+Subject: [PATCH v6 13/28] public_key: move common functions to public key
+ helper
+Date: Fri, 16 Aug 2024 14:44:02 -0700
+Message-Id: <20240816214436.1877263-14-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240816214436.1877263-1-raymond.mao@linaro.org>
 References: <20240816214436.1877263-1-raymond.mao@linaro.org>
@@ -118,47 +119,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the PKCS7 test suites for multiple certs.
-
-The PR for this patch is at:
-https://github.com/Mbed-TLS/mbedtls/pull/9001
-
-For enabling EFI loader PKCS7 features with MbedTLS build,
-we need this patch on top of MbedTLS v3.6.0 before it is merged into
-the next MbedTLS LTS release.
+Move public_key_free and public_key_signature_free as helper
+functions that can be shared by legacy crypto lib and MbedTLS
+implementation.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
-Changes in v2
-- None.
-Changes in v3
-- Update commit message.
 Changes in v4
-- None.
+- Initial patch.
 Changes in v5
-- None.
+- Removed authorship.
 Changes in v6
 - None.
 
- .../external/mbedtls/tests/suites/test_suite_pkcs7.data       | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ lib/crypto/Makefile            |  4 +++-
+ lib/crypto/public_key.c        | 31 ---------------------------
+ lib/crypto/public_key_helper.c | 39 ++++++++++++++++++++++++++++++++++
+ 3 files changed, 42 insertions(+), 32 deletions(-)
+ create mode 100644 lib/crypto/public_key_helper.c
 
-diff --git a/lib/mbedtls/external/mbedtls/tests/suites/test_suite_pkcs7.data b/lib/mbedtls/external/mbedtls/tests/suites/test_suite_pkcs7.data
-index d3b83cdf0aa..2dd1c56109f 100644
---- a/lib/mbedtls/external/mbedtls/tests/suites/test_suite_pkcs7.data
-+++ b/lib/mbedtls/external/mbedtls/tests/suites/test_suite_pkcs7.data
-@@ -14,9 +14,9 @@ PKCS7 Signed Data Parse with zero signers
- depends_on:MBEDTLS_MD_CAN_SHA256
- pkcs7_parse:"data_files/pkcs7_data_no_signers.der":MBEDTLS_PKCS7_SIGNED_DATA
+diff --git a/lib/crypto/Makefile b/lib/crypto/Makefile
+index bec1bc95a65..4ad1849040d 100644
+--- a/lib/crypto/Makefile
++++ b/lib/crypto/Makefile
+@@ -7,7 +7,9 @@ obj-$(CONFIG_$(SPL_)ASYMMETRIC_KEY_TYPE) += asymmetric_keys.o
  
--PKCS7 Signed Data Parse Fail with multiple certs #4
-+PKCS7 Signed Data Parse Pass with multiple certs #4
- depends_on:MBEDTLS_MD_CAN_SHA256:MBEDTLS_RSA_C
--pkcs7_parse:"data_files/pkcs7_data_multiple_certs_signed.der":MBEDTLS_ERR_PKCS7_FEATURE_UNAVAILABLE
-+pkcs7_parse:"data_files/pkcs7_data_multiple_certs_signed.der":MBEDTLS_PKCS7_SIGNED_DATA
+ asymmetric_keys-y := asymmetric_type.o
  
- PKCS7 Signed Data Parse Fail with corrupted cert #5.0
- depends_on:MBEDTLS_MD_CAN_SHA256:MBEDTLS_RSA_C
+-obj-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_SUBTYPE) += public_key.o
++obj-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_SUBTYPE) += \
++	public_key_helper.o \
++	public_key.o
+ 
+ #
+ # RSA public key parser
+diff --git a/lib/crypto/public_key.c b/lib/crypto/public_key.c
+index 6efe951c057..408742907f1 100644
+--- a/lib/crypto/public_key.c
++++ b/lib/crypto/public_key.c
+@@ -51,38 +51,7 @@ static void public_key_describe(const struct key *asymmetric_key,
+ }
+ #endif
+ 
+-/*
+- * Destroy a public key algorithm key.
+- */
+-void public_key_free(struct public_key *key)
+-{
+-	if (key) {
+-		kfree(key->key);
+-		kfree(key->params);
+-		kfree(key);
+-	}
+-}
+-EXPORT_SYMBOL_GPL(public_key_free);
+-
+ #ifdef __UBOOT__
+-/*
+- * from <linux>/crypto/asymmetric_keys/signature.c
+- *
+- * Destroy a public key signature.
+- */
+-void public_key_signature_free(struct public_key_signature *sig)
+-{
+-	int i;
+-
+-	if (sig) {
+-		for (i = 0; i < ARRAY_SIZE(sig->auth_ids); i++)
+-			free(sig->auth_ids[i]);
+-		free(sig->s);
+-		free(sig->digest);
+-		free(sig);
+-	}
+-}
+-EXPORT_SYMBOL_GPL(public_key_signature_free);
+ 
+ /**
+  * public_key_verify_signature - Verify a signature using a public key.
+diff --git a/lib/crypto/public_key_helper.c b/lib/crypto/public_key_helper.c
+new file mode 100644
+index 00000000000..2c55922bdcb
+--- /dev/null
++++ b/lib/crypto/public_key_helper.c
+@@ -0,0 +1,39 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * X509 helper functions
++ *
++ * Copyright (c) 2012 Red Hat, Inc. All Rights Reserved.
++ * Written by David Howells (dhowells@redhat.com)
++ */
++#include <linux/compat.h>
++#include <crypto/public_key.h>
++
++/*
++ * Destroy a public key algorithm key.
++ */
++void public_key_free(struct public_key *key)
++{
++	if (key) {
++		kfree(key->key);
++		kfree(key->params);
++		kfree(key);
++	}
++}
++
++/*
++ * from <linux>/crypto/asymmetric_keys/signature.c
++ *
++ * Destroy a public key signature.
++ */
++void public_key_signature_free(struct public_key_signature *sig)
++{
++	int i;
++
++	if (sig) {
++		for (i = 0; i < ARRAY_SIZE(sig->auth_ids); i++)
++			kfree(sig->auth_ids[i]);
++		kfree(sig->s);
++		kfree(sig->digest);
++		kfree(sig);
++	}
++}
 -- 
 2.25.1
 
