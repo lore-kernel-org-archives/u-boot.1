@@ -4,39 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29838C52D7D
-	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 00:12:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B8CCC52D7F
+	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 00:48:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9B1288B89;
-	Fri, 16 Aug 2024 02:12:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+	by phobos.denx.de (Postfix) with ESMTP id 6CDB988B7A;
+	Fri, 16 Aug 2024 02:48:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0593388B9B; Fri, 16 Aug 2024 02:12:41 +0200 (CEST)
-Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7D8F88BAE
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 02:12:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
-Received: from secure.fukaumi.org ([10.0.0.2])
- by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
- 47G0C973023676; Fri, 16 Aug 2024 09:12:12 +0900
-From: FUKAUMI Naoki <naoki@radxa.com>
-To: u-boot@lists.denx.de
-Cc: banglang.huang@foxmail.com, jonas@kwiboo.se, sjg@chromium.org,
- philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- jagan@amarulasolutions.com, gajjar04akash@gmail.com,
- eugen.hristev@collabora.com, chris.obbard@collabora.com,
- FUKAUMI Naoki <naoki@radxa.com>
-Subject: [PATCH 2/2] arm: dts: rockchip: turn LEDs on at boot for Radxa boards
-Date: Fri, 16 Aug 2024 09:12:04 +0900
-Message-ID: <20240816001204.3038-2-naoki@radxa.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240816001204.3038-1-naoki@radxa.com>
-References: <20240816001204.3038-1-naoki@radxa.com>
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RhtqrWMb";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id E6AEF87C38; Fri, 16 Aug 2024 02:48:30 +0200 (CEST)
+Received: from mail-vs1-xe2b.google.com (mail-vs1-xe2b.google.com
+ [IPv6:2607:f8b0:4864:20::e2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 70E8B88B06
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 02:48:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-vs1-xe2b.google.com with SMTP id
+ ada2fe7eead31-492aae5fde6so550119137.1
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 17:48:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1723769302; x=1724374102; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=x0h1rJI6IM7X/QXq395c1wQ6lBDKPpdoBb0Xc9mHL4U=;
+ b=RhtqrWMbk+xXTqJnDoYYf9jVvNnhKDoFUEfirSG321wQVIPpC2LjjMXpNhk/lDzeHF
+ jBKAWJePrCQs89oH8IKjU41/D/ldJA0hQ6Iq6mF2BgNnKOO3ZYRHoT+Kp9uPaVCcfomB
+ AKXGINa+U43uRwvL9tCcyqvrFBB2bapKelgbtCMh27X46VKBkORLrlYOAHAe5RxjZZyn
+ vVYrrbTkuv3fGebJdtdIhI88jvTD97csLzXvWz0PLWGZlxabbDK8CGiEOSPw6ev971vb
+ 6ivV7PPoUp8rUUnEQj3ZHY5DouiB7qS12GuIR14y2apH3KvBaPrW+je0YzuCSa4mOfIZ
+ buZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723769302; x=1724374102;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=x0h1rJI6IM7X/QXq395c1wQ6lBDKPpdoBb0Xc9mHL4U=;
+ b=a1iBoWdFU6OLvEnjMAUmD42P7qVdrK8wSoJwm6TxwIT4RDhmKu8zqcjRa441D/NBho
+ 4E2WegvxASybBPrk1KIEMOktlWe3ztR8o1NLLXCt01IjX5d2hTfT5otFe6SyD9TvObUL
+ AW6SLoxSTJo71ZdMwSfxep+hldk+y1M26Nt34hdvFTBu2LoEdOfi6oB1+xwx0GNVqnep
+ 9XW6MKP1m8K7EQpe9qSeqDL4QdqKVuUk0jarfXTlel2OEK9HNMJPt0pW63RDUCW3IHG9
+ X10tYzvserCnOrxWTn4f/5t0rEr7DsfZw7iGLyh8khQemFPID9ZrL5gww+MyI2cyPrk7
+ laLw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVaLcJ/m5XTCtSxuXj+nBVhnJYI6vBH2fOW9x0QloUduUqAWDZVnZoAqES1aP+XrYdFbq0jU9xICo7JdoO5JiheQaeJRg==
+X-Gm-Message-State: AOJu0YzYhBFW5zEaHbPlfLVBju361rLeVXvM0QIiLbuu7fM+N++CU6P7
+ QUx5CF9h4Kvdad5Q5oylLr9wlsS/T/5qGr75PsVl1ksgZEmnXhTAF0fUgi7t
+X-Google-Smtp-Source: AGHT+IE6lLKlOXD/x+QWXHPg9O97Hv1a+kKABzWHJC0zWjqUdUTVBUkzoFBo2tkwgRi+3mpd69y/Qg==
+X-Received: by 2002:a05:6102:dcb:b0:48f:82c5:90e7 with SMTP id
+ ada2fe7eead31-49779905e30mr1754574137.14.1723769302388; 
+ Thu, 15 Aug 2024 17:48:22 -0700 (PDT)
+Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
+ af79cd13be357-7a4fef0046fsm118667285a.0.2024.08.15.17.48.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 15 Aug 2024 17:48:21 -0700 (PDT)
+From: Sean Anderson <seanga2@gmail.com>
+To: Simon Glass <sjg@chromium.org>,
+	u-boot@lists.denx.de
+Cc: Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH v2] sandbox: Fix pinmux warnings with non-test devicetrees
+Date: Thu, 15 Aug 2024 20:48:19 -0400
+Message-Id: <20240816004819.635938-1-seanga2@gmail.com>
+X-Mailer: git-send-email 2.37.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -55,193 +91,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Basically, Radxa's boards are intended to turn LEDs on at U-Boot.
-add `default-state = "on"` to u-boot.dtsi.
+The sandbox pinmux driver is used in the non-test devicetree as well as
+the test one. I didn't realize this when I modified the driver for
+tests, and so broke the regular use case (which only resulted in
+warnings). First, making the pinmux and the UART group available in all
+boot phases to avoid ENODEV errors. Then, convert the pin groups and
+functions to the new style, adding onewire group as well.
 
-Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+Fixes: 7f0f1806e3a ("test: pinmux: Add test for pin muxing")
+Closes: https://source.denx.de/u-boot/u-boot/-/issues/2 Please enter the commit message for your changes. Lines starting
+Signed-off-by: Sean Anderson <seanga2@gmail.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
-this patch depends on
- https://patchwork.ozlabs.org/project/uboot/patch/20240815223713.2479-1-naoki@radxa.com/
----
- .../arm/dts/rk3328-rock-pi-e-base-u-boot.dtsi |  6 +++++
- arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi  | 12 ++++++++++
- arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi     |  8 +++++++
- arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi  |  8 +++++++
- arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi     | 23 +++++++++++++++++++
- arch/arm/dts/rk3568-rock-3a-u-boot.dtsi       |  8 +++++++
- arch/arm/dts/rk3588-rock-5b-u-boot.dtsi       |  8 +++++++
- arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi      |  8 +++++++
- 8 files changed, 81 insertions(+)
 
-diff --git a/arch/arm/dts/rk3328-rock-pi-e-base-u-boot.dtsi b/arch/arm/dts/rk3328-rock-pi-e-base-u-boot.dtsi
-index 39bb66c4fcb..a30adb0be98 100644
---- a/arch/arm/dts/rk3328-rock-pi-e-base-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-rock-pi-e-base-u-boot.dtsi
-@@ -6,6 +6,12 @@
- #include "rk3328-u-boot.dtsi"
+Changes in v2:
+- Only add the pinctrl node pre-relocation, as SPL/VPL try to run dtoc on all
+  nodes included in their device trees.
+
+ arch/sandbox/dts/sandbox.dtsi                | 14 ++++++++------
+ drivers/pinctrl/pinctrl-sandbox.c            |  4 +++-
+ include/dt-bindings/pinctrl/sandbox-pinmux.h |  1 +
+ 3 files changed, 12 insertions(+), 7 deletions(-)
+
+diff --git a/arch/sandbox/dts/sandbox.dtsi b/arch/sandbox/dts/sandbox.dtsi
+index c93ce712894..8a115c503dc 100644
+--- a/arch/sandbox/dts/sandbox.dtsi
++++ b/arch/sandbox/dts/sandbox.dtsi
+@@ -231,23 +231,25 @@
+ 	};
  
- / {
-+	leds {
-+		led-0 {
-+			default-state = "on";
-+		};
-+	};
-+
- 	smbios {
- 		compatible = "u-boot,sysinfo-smbios";
+ 	pinctrl {
++		bootph-some-ram;
+ 		compatible = "sandbox,pinctrl";
+ 		status = "okay";
  
-diff --git a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-index 50dae5cb5ef..7a6af430a6f 100644
---- a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-@@ -6,6 +6,18 @@
- #include "rk3399-u-boot.dtsi"
- #include "rk3399-sdram-lpddr4-100.dtsi"
+ 		pinctrl_i2c0: i2c0 {
+-			groups = "i2c";
+-			function = "i2c";
++			groups = "I2C_UART";
++			function = "I2C";
+ 			bias-pull-up;
+ 		};
  
-+/ {
-+	leds {
-+		led-0 {
-+			default-state = "on";
-+		};
-+
-+		led-1 {
-+			default-state = "on";
-+		};
-+	};
-+};
-+
- &pcfg_pull_none_18ma {
- 	bootph-pre-ram;
- 	bootph-some-ram;
-diff --git a/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi b/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi
-index b3bfc77f756..4861574636e 100644
---- a/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi
-@@ -6,6 +6,14 @@
- #include "rk3399-u-boot.dtsi"
- #include "rk3399-sdram-lpddr4-100.dtsi"
+ 		pinctrl_serial0: uart0 {
+-			groups = "serial_a";
+-			function = "serial";
++			bootph-some-ram;
++			groups = "I2C_UART";
++			function = "UART";
+ 		};
  
-+/ {
-+	leds {
-+		led-0 {
-+			default-state = "on";
-+		};
-+	};
-+};
-+
- &sdhci {
- 	cap-mmc-highspeed;
- 	mmc-ddr-1_8v;
-diff --git a/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi b/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
-index e0e501deccf..412f9e06aff 100644
---- a/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
-+++ b/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
-@@ -5,6 +5,14 @@
- 
- #include "rk356x-u-boot.dtsi"
- 
-+/ {
-+	leds {
-+		led-1 {
-+			default-state = "on";
-+		};
-+	};
-+};
-+
- &sdhci {
- 	cap-mmc-highspeed;
+ 		pinctrl_onewire0: onewire0 {
+-			groups = "w1";
+-			function = "w1";
++			pins = "P8";
++			function = "ONEWIRE";
+ 			bias-pull-up;
+ 		};
+ 	};
+diff --git a/drivers/pinctrl/pinctrl-sandbox.c b/drivers/pinctrl/pinctrl-sandbox.c
+index a5d056643a0..f6921b56ceb 100644
+--- a/drivers/pinctrl/pinctrl-sandbox.c
++++ b/drivers/pinctrl/pinctrl-sandbox.c
+@@ -42,7 +42,7 @@ static const char * const sandbox_pins_muxing[][2] = {
+ 	{ "GPIO0", "SPI CS0" },
+ 	{ "GPIO1", "SPI CS1" },
+ 	{ "GPIO2", "PWM0" },
+-	{ "GPIO3", "PWM1" },
++	{ "GPIO3", "ONEWIRE" },
  };
-diff --git a/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi b/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
-index 74755a44eae..efeab626d8a 100644
---- a/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
-+++ b/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
-@@ -2,6 +2,29 @@
  
- #include "rk356x-u-boot.dtsi"
- 
-+/ {
-+	gpio-leds {
-+		led-0 {
-+			default-state = "on";
-+		};
-+
-+		led-red {
-+			default-state = "on";
-+			gpios = <&gpio0 RK_PC0 GPIO_ACTIVE_HIGH>;
-+		};
-+
-+		led-green {
-+			default-state = "on";
-+			gpios = <&gpio0 RK_PC1 GPIO_ACTIVE_HIGH>;
-+		};
-+
-+		led-blue {
-+			default-state = "on";
-+			gpios = <&gpio4 RK_PC5 GPIO_ACTIVE_HIGH>;
-+		};
-+	};
-+};
-+
- &pcie3x1 {
- 	pinctrl-0 = <&pcie30x1_reset_h>;
+ #define SANDBOX_GROUP_I2C_UART 0
+@@ -63,6 +63,7 @@ static const char * const sandbox_functions[] = {
+ 	FUNC(GPIO),
+ 	FUNC(CS),
+ 	FUNC(PWM),
++	FUNC(ONEWIRE),
+ #undef FUNC
  };
-diff --git a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-index 0da3d9c56b8..29c18f5a340 100644
---- a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-+++ b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-@@ -6,6 +6,14 @@
  
- #include "rk356x-u-boot.dtsi"
+@@ -166,6 +167,7 @@ static int sandbox_pinmux_set(struct udevice *dev, unsigned pin_selector,
+ 		break;
+ 	case SANDBOX_PINMUX_CS:
+ 	case SANDBOX_PINMUX_PWM:
++	case SANDBOX_PINMUX_ONEWIRE:
+ 		mux = BIT(pin_selector);
+ 		break;
+ 	default:
+diff --git a/include/dt-bindings/pinctrl/sandbox-pinmux.h b/include/dt-bindings/pinctrl/sandbox-pinmux.h
+index 891af072e52..21c5a1762ab 100644
+--- a/include/dt-bindings/pinctrl/sandbox-pinmux.h
++++ b/include/dt-bindings/pinctrl/sandbox-pinmux.h
+@@ -13,6 +13,7 @@
+ #define SANDBOX_PINMUX_GPIO 4
+ #define SANDBOX_PINMUX_CS   5
+ #define SANDBOX_PINMUX_PWM  6
++#define SANDBOX_PINMUX_ONEWIRE 7
  
-+/ {
-+	leds {
-+		led-0 {
-+			default-state = "on";
-+		};
-+	};
-+};
-+
- &pcie3x2 {
- 	pinctrl-0 = <&pcie3x2_reset_h>;
- };
-diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-index 4dd17ff408c..8cf78b19739 100644
---- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-+++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-@@ -5,6 +5,14 @@
+ #define SANDBOX_PINMUX(pin, func) ((func) << 16 | (pin))
  
- #include "rk3588-u-boot.dtsi"
- 
-+/ {
-+	leds {
-+		led_rgb_b {
-+			default-state = "on";
-+		};
-+	};
-+};
-+
- &fspim2_pins {
- 	bootph-pre-ram;
- 	bootph-some-ram;
-diff --git a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-index efba0c359ba..a75ae296386 100644
---- a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-+++ b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-@@ -5,6 +5,14 @@
- 
- #include "rk3588s-u-boot.dtsi"
- 
-+/ {
-+	leds {
-+		io-led {
-+			default-state = "on";
-+		};
-+	};
-+};
-+
- &sdhci {
- 	cap-mmc-highspeed;
- 	mmc-hs200-1_8v;
 -- 
-2.43.0
+2.37.1
 
