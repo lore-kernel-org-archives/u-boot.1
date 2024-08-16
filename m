@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A975CC52D7D
-	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 23:54:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F127C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 23:54:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3171988C92;
-	Sat, 17 Aug 2024 01:54:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8815388C62;
+	Sat, 17 Aug 2024 01:54:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e75JeOYB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H8bXpHE9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0139388C71; Sat, 17 Aug 2024 01:54:23 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id 8549688C9E; Sat, 17 Aug 2024 01:54:24 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 009C188C62
- for <u-boot@lists.denx.de>; Sat, 17 Aug 2024 01:54:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 04DB488C6B
+ for <u-boot@lists.denx.de>; Sat, 17 Aug 2024 01:54:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6bf7707dbb6so16647826d6.0
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6bf7ba05f75so13135736d6.0
  for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 16:54:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723852449; x=1724457249; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723852450; x=1724457250; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aYp9aB10j8qIDm1s0RpBIaMvgugO5UsEgjdbuYYOHUA=;
- b=e75JeOYBvpPtLyDtMfSJQer09nPPKvhD0CkM3pyPJz9he1V6T1upeXJ69DD/xlaWIA
- vn4qhy+aaCOne7nNMCYbhlNAQVfFlFBav7hiSdgZaWw6aYNoU2dyYXsoHfmCQU9MZUGD
- uePoTtPCdXxIklhpgeejptEMviwF/LLfNJDdc=
+ bh=e22NI1zPL72YFquE4DqT67DumUMdCDpfKfd/p4ev4mA=;
+ b=H8bXpHE9AIB0QneIKPAAW6740O86o+vBsDFDe4pubGnHkpENfyYWh2wF3uLJ2t1tIe
+ pxMOGlURWAYe/yKxcCp3MXKElh/OZ1Qoz6aqBGDvFMV/uIuFyEkiD2O68ScBIuD9rrWL
+ uNCqw33kvGsTGE+3wKnnb3KjVVpgxiS5Rmyec=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723852449; x=1724457249;
+ d=1e100.net; s=20230601; t=1723852450; x=1724457250;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=aYp9aB10j8qIDm1s0RpBIaMvgugO5UsEgjdbuYYOHUA=;
- b=aHemR9EjzK3wo03qfzrk0JN04GyUQQ/RSi8XWTld6lcZpxZgHpZcwkwaBJjsKGvEpG
- iJmtf023N7MgIKZWdZq/Tg1krDy5zvpILS4TML00Tl0v0rxds+Wsf/QbgYeqEE6tP3XM
- UtqWznKhutTCnfLi1YfuDoznKj4kJzBuUIU3shDkj+FaZbXj6MIVVyXPetBrBFE0UvVN
- YZVPrDAw1JikfjRs3IsDMZ204C2syRjAys+rN4xYQ7btHxo+SfCzxYQpeRhvPhUEUca2
- rptiXisUJGs9OmVPUa7H45cUCJwCTX/zxJ3blmVh5SRnhe0tL8lDDxrOgslTPMB1I/AB
- aU2g==
-X-Gm-Message-State: AOJu0Ywi3BikRVMhIK1TSvwWU5afJ9gCbKJVUlWvNwmQy1bqVEw+AHSe
- 78DSvizfoUW/95mESgNw9/PQ40mPArU73N7BgroR0aWNNXbQTq6c90nE4W79zmJhvfyxAQ75bZ0
- 7ZUGVY6T8lIymTAc1TqylOO4Gyi0aEOh9KkVn
-X-Google-Smtp-Source: AGHT+IGSVymwMlQ9XdFAVdrNlL2paByxuardPazU/HlfSO3avOXyDko8MWOMQAOJ7B2RH6XobHlEdq8V3ogb6ClT14Y=
-X-Received: by 2002:a05:6214:2f0d:b0:6b5:7f19:e61d with SMTP id
- 6a1803df08f44-6bf7d50efcbmr119499536d6.6.1723852449642; Fri, 16 Aug 2024
- 16:54:09 -0700 (PDT)
+ bh=e22NI1zPL72YFquE4DqT67DumUMdCDpfKfd/p4ev4mA=;
+ b=SwOwPz8eFWmoFja0BYMOVIivTfeVsVk7HMnsKvu3lwE5Bcn+QYFx7Z7K17nIhkBcYP
+ KAnWnNMUCoUcJC+5QZcyGOy+DG1nsXGdn8I+Y+AygTZMXKDoKpwG3FudIJyMJfe9EE3z
+ AueccNa94EGkATfn6cedjYqrgaVmqxEsRICotZPEq348+c/9b3psgy/pfdOgfSFCGm8m
+ vMYSrH0iaIOXFqv1DbGtfy3lVTXTU84hPKJibXpVxN2tNGNvfBDTUEW9aI+L1Bhfz3lL
+ pirzlOS14A0WAXZAqW+ZlVMAo7bo5KIB+eBAdFC3MNH+7p9LoOraxp8/nFH8TraxaALe
+ UlHw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUQXsQNKFGYqA2OVNbTB/J0arKMiZBf9yjVjWlzAHxW4aULF6a8MvrIfFwZQNdxjLthB7oW+NvwHdYDFyTFiRJYPgZq7Q==
+X-Gm-Message-State: AOJu0YwrPzQuXAmQNpPVeSHQnl/4UQWAyJcj8j8KuYYvNNUbr0E9TzCt
+ 65q4dhF+h5mt2S9SMkDCVlng7G/mUT4eeNNYiGNVBGKaUySTPKo2FaoEAcgOqkq2RSbJ/fJaRfr
+ cbUcNxONQ+Unzp2qQB/uwNWa2pza3NePinwKV
+X-Google-Smtp-Source: AGHT+IFgxxLcoOpGNqtZLfEqYTdhD5owUa9h7m1wzklVv/XMe3NlWQbzXbmYgjTuN4GQpN2EyfMESfbq1iJh7j0/sR0=
+X-Received: by 2002:a05:6214:3203:b0:6b2:9e53:fe50 with SMTP id
+ 6a1803df08f44-6bf7d5b4121mr96569606d6.22.1723852450546; Fri, 16 Aug 2024
+ 16:54:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
- <20240814110009.45310-28-sughosh.ganu@linaro.org>
- <CAFLszTh-5c4_OdZs8F_e=giR+ZFjNB1oX8L8cV8hXi9Je6e+5w@mail.gmail.com>
- <CADg8p954ZtuXpC_b_rfkpWuXBGFV40Kp=DJby_oRsTp2GYbcHw@mail.gmail.com>
- <CAFLszTgsbrBefPQ7EGdLbC8fUO=oZUoQ13TYeo=pJzu2Uro_kQ@mail.gmail.com>
- <CADg8p96ogU8isBs6rs+s5-U4XJOXryPDb-MzHTuxwT8L07HQ3A@mail.gmail.com>
- <CADg8p978HKb1r9D3e_ZbErrfnKnLy7-bOTfuk2Suc-Qvq7n_ig@mail.gmail.com>
-In-Reply-To: <CADg8p978HKb1r9D3e_ZbErrfnKnLy7-bOTfuk2Suc-Qvq7n_ig@mail.gmail.com>
+References: <20240806125850.2316956-1-sjg@chromium.org>
+ <20240806125850.2316956-38-sjg@chromium.org>
+ <23093165-6af9-4582-8448-7bbae3c86be2@gmx.de>
+ <20240807015613.GD1626301@bill-the-cat>
+ <CAFLszThhn0240xt1j6GQB9QTKxiHiAg6J3vMXCnHBE15iYZSkA@mail.gmail.com>
+ <20240808200634.GR1626301@bill-the-cat>
+ <CAFLszThM=23AXCOfZ_uOyGGDQTRurDpAjR-t8X_NHjz4LgQ9SA@mail.gmail.com>
+ <20240814175601.GP1626301@bill-the-cat>
+ <CAFLszThU+vLUm_fveWUgV3Qt3J+F3=Sr1aBgbc4T5z8zJJz5sw@mail.gmail.com>
+In-Reply-To: <CAFLszThU+vLUm_fveWUgV3Qt3J+F3=Sr1aBgbc4T5z8zJJz5sw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 16 Aug 2024 17:53:58 -0600
-Message-ID: <CAFLszThzR=2V=Oqe6iZq8gK1stwEH1_kraFNnSPSQpyGMN3A0A@mail.gmail.com>
-Subject: Re: [PATCH v2 27/32] test: cedit: use allocated address for reading
- file
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
- Max Filippov <jcmvbkbc@gmail.com>
+Date: Fri, 16 Aug 2024 17:53:59 -0600
+Message-ID: <CAFLszThG_oM4B3beUfOrjXD2-B3sMo44U5-G-J8Eky1uZU=bAw@mail.gmail.com>
+Subject: Re: [PATCH v2 37/39] efi: Avoid using sandbox virtio devices
+To: Tom Rini <trini@konsulko.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Raymond Mao <raymond.mao@linaro.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,88 +96,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
+Hi Tom,
 
-On Fri, 16 Aug 2024 at 11:53, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Thu, 15 Aug 2024 at 14:33, Simon Glass <sjg@chromium.org> wrote:
 >
-> On Fri, 16 Aug 2024 at 22:39, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >
-> > On Fri, 16 Aug 2024 at 20:17, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Sughosh,
-> > >
-> > > On Fri, 16 Aug 2024 at 04:34, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > > >
-> > > > On Fri, 16 Aug 2024 at 02:02, Simon Glass <sjg@chromium.org> wrote:
-> > > > >
-> > > > > Hi Sughosh,
-> > > > >
-> > > > > On Wed, 14 Aug 2024 at 05:02, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > > > > >
-> > > > > > Instead of a randomly selected address, use an LMB allocated one for
-> > > > > > reading the file into memory. With the LMB map now being persistent
-> > > > > > and global, the address used for reading the file might be already
-> > > > > > allocated as non-overwritable, resulting in a failure. Get a valid
-> > > > > > address from LMB and then read the file to that address.
-> > > > > >
-> > > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > > > ---
-> > > > > > Changes since V1:
-> > > > > > * Don't use the API version with flags parameter.
-> > > > > >
-> > > > > >  test/boot/cedit.c | 6 +++++-
-> > > > > >  1 file changed, 5 insertions(+), 1 deletion(-)
-> > > > > >
-> > > > >
-> > > > > No, this address needs to work fine without using lmb. Same with any
-> > > > > other tests. Tests make use of the sandbox memory space memory
-> > > > > addresses and it makes things easier to code and debug.
-> > > >
-> > > > Like I had explained earlier [1], not using the LMB API for allocating
-> > > > the address results in issues, since the load command internally
-> > > > checks if the address can be used for reading the dtb. Without this
-> > > > patch, the cmd_ut test fails. I am not sure why you do not like this
-> > > > solution. But in any case, can you propose some other solution? I
-> > > > believe I can tweak the address to some other value, but that would
-> > > > not be a proper solution, but simply kicking the can down the road.
-> > > > Thanks.
-> > >
-> > > But this is why I suggested having lmb_push() and lmb_pop(), so you
-> > > should be able to use those in the few tests which have this problem.
-> >
-> > Ah yes, I forgot about that change. Let me try running the test again
-> > and see what I get. Thanks.
+> Hi Tom,
 >
-> Sorry, I think I was hasty in my reply. This would not work. We have
-> the lmb_push()/lmb_get() functions only for the lmb specific tests. In
-> this scenario, we have the load command which checks the lmb address
-> against reservations, which are the "normal operation" memory map. So,
-> if we have to have this to work, this might need a way of using a new
-> lmb structure instance for every test. So that every test that gets
-> invoked, does so like the way the lmb tests are.
+> On Wed, 14 Aug 2024 at 11:56, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Sun, Aug 11, 2024 at 08:50:21AM -0600, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Thu, 8 Aug 2024 at 14:06, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Thu, Aug 08, 2024 at 12:44:05PM -0600, Simon Glass wrote:
+> > > > > Hi Heinrick, Tom,
+> > > > >
+> > > > > On Tue, 6 Aug 2024 at 19:56, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Wed, Aug 07, 2024 at 03:47:21AM +0200, Heinrich Schuchardt wrote:
+> > > > > > > On 06.08.24 14:58, Simon Glass wrote:
+> > > > > > > > While sandbox supports virtio it cannot support actually using the block
+> > > > > > > > devices to read files, since there is nothing on the other end of the
+> > > > > > > > 'virtqueue'.
+> > > > > > > >
+> > > > > > > > A recent change makes EFI probe all block devices, whether used or not.
+> > > > > > > > This is apparently required by EFI, although it violates U-Boot's
+> > > > > > > > lazy-init principle.
+> > > > > > > >
+> > > > > > > > We cannot just drop the virtio devices as they are used in sandbox tests.
+> > > > > > > >
+> > > > > > > > So for now just add a special case to work around this.
+> > > > > > > >
+> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > ---
+> > > > > > > >
+> > > > > > > > (no changes since v1)
+> > > > > > > >
+> > > > > > > >   lib/efi_loader/efi_disk.c | 14 +++++++++++++-
+> > > > > > > >   1 file changed, 13 insertions(+), 1 deletion(-)
+> > > > > > > >
+> > > > > > > > diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+> > > > > > > > index 93a9a5ac025..2e1d37848fc 100644
+> > > > > > > > --- a/lib/efi_loader/efi_disk.c
+> > > > > > > > +++ b/lib/efi_loader/efi_disk.c
+> > > > > > > > @@ -838,8 +838,20 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
+> > > > > > > >   efi_status_t efi_disks_register(void)
+> > > > > > > >   {
+> > > > > > > >     struct udevice *dev;
+> > > > > > > > +   struct uclass *uc;
+> > > > > > > >
+> > > > > > > > -   uclass_foreach_dev_probe(UCLASS_BLK, dev) {
+> > > > > > > > +   uclass_id_foreach_dev(UCLASS_BLK, dev, uc) {
+> > > > > > > > +           /*
+> > > > > > > > +            * The virtio block-device hangs on sandbox when accessed since
+> > > > > > > > +            * there is nothing listening to the mailbox
+> > > > > > > > +            */
+> > > > > > > > +           if (IS_ENABLED(CONFIG_SANDBOX)) {
+> > > > > > > > +                   struct blk_desc *desc = dev_get_uclass_plat(dev);
+> > > > > > > > +
+> > > > > > > > +                   if (desc->uclass_id == UCLASS_VIRTIO)
+> > > > > > > > +                           continue;
+> > > > > > >
+> > > > > > > We should avoid depending on the sandbox everywhere.
+> > > > > > >
+> > > > > > > Please, fix the problem in the sandbox driver.
+> > > > > > >
+> > > > > > > If you cannot fix it, run the tests involving virtio on QEMU instead of
+> > > > > > > the sandbox.
+> > > > >
+> > > > > Which test? All of the EFI tests fail due to this problem. The test
+> > > > > actually has nothing to do with virtio, it is just that EFI goes and
+> > > > > probes every single block device, since [1].
+> > > >
+> > > > Aren't we running "the tests" on other platforms such as QEMU today?
+> > > >
+> > > > > > This is an area we go back-and-forth on but, yes, IMHO, if we can't
+> > > > > > easily provide a virtio device for sandbox, QEMU is right there and what
+> > > > > > this is for, so I see sandbox as more useful as build rather than
+> > > > > > runtime checking in this case.
+> > > > >
+> > > > > The best solution would be to implement a simple emulator, like we do
+> > > > > in other places for sandbox. At present virtio_sandbox_notify() is
+> > > > > empty.
+> > > > >
+> > > > > I don't mind working on that, but would like to get a temporary
+> > > > > solution here so this test can land.
+> > > > >
+> > > > > Talking about virtio for QEMU is missing the point of this test, which
+> > > > > is after all a test of booting an EFI app. I do wish more people would
+> > > > > see the value in these unit tests. There is a talk at [2] which shows
+> > > > > how emulators are used in Zephyr.
+> > > >
+> > > > So that talk is interesting, yes. So, yes, implement the bus driver for
+> > > > sandbox for virtio, and until then we shouldn't have the tests running
+> > > > on sandbox? Or am I still missing something?
+> > >
+> > > Sure, but perhaps there is a way to get this test landed without doing
+> > > that work right away?
+> >
+> > Maybe? I guess I'm missing how the problem isn't a problem with the
+> > sandbox emulation of it.
+>
+> Basically the virtio block device is probed by EFI (for no useful
+> purpose), but doesn't actually work.
+>
+> >
+> > > I'm not sure if we actually need d5391bf02b9 ("efi_loader: ensure all
+> > > block devices are probed"). It seems to fix a real problem, though.
+> >
+> > That commit seems fairly intentional and I kinda recall that being one
+> > of those challenge points, conceptually. In order for the EFI_LOADER to
+> > do what it needs to do correctly, it needs to know what all exists. This
+> > is contrary to the usual U-Boot practice of not probing something until
+> > it's specifically needed.
+>
+> Indeed, but we have to live with it.
+>
+> >
+> > > > But I also still say that given that we as a project are more resource
+> > > > constrained than Zephyr, for things that are QEMU-centric, there's
+> > > > already a wealth of information on debugging QEMU since it too is
+> > > > software. There's only so many hours in the day after all.
+> > >
+> > > One of Zephyr's challenges is that it relied on QEMU for almost all
+> > > testing for a long time. As a result it takes a huge amount of CPU
+> > > power to run tests - last I checked it was something like an hour on a
+> > > 64-core machine. U-Boot's unit tests ('ut all') run in about 12
+> > > seconds on my machine. I could go on for hours about the different
+> > > types of tests and the benefits of one versus the other, but the
+> > > cheapest answer is not necessarily just to do a 'happy path' test and
+> > > call it good.
+> >
+> > Everything has it's place, yes. For us, sandbox tests take 15-20 minutes
+> > per run in CI and most QEMU platforms finish up in about a minute. And
+> > of course, it would be real nice if we could easily build those
+> > platforms in CI with CONFIG_UNIT_TEST enabled, but I don't think that
+> > would cause the run time to balloon up (nor are they the cause of the
+> > overall time on sandbox, that would be filesystem tests).
+>
+> Right, I normally use 'make qcheck' which skips the FS test and some
+> other slow ones
+>
+> Some notes from a little bit of digging: There are almost 1000 sandbox
+> tests (17-20mins), but qemu_arm only runs 62 (2mins). With 'make
+> qcheck' it runs about 2500 tests in about 4 minutes. I just got 'make
+> pcheck' going again and that is a little faster (2.5 mins). Binman
+> tests run in parallel if you use 'pip install concurrencytest'
 
-Why does the 'load' operation fail? When I revert this patch the tests
-still seem to pass.
+While on this topic I forgot to mention that the sandbox tests (~800
+of them) actually run in about 10 seconds. Try 'ut all' (although
+you'll need my test-fix series to stop it crashing).
+
+The reason pytest is so slow with sandbox is that it talks to U-Boot
+through a pty. Stephen Warren did something clever to stop it being
+horrible, but it is still very slow.
+
+
+>
+> >
+> > > For this particular test, I do want to have tests for each bootmeth,
+> > > to the point of running the target, so far as possible. It turns out
+> > > that we can launch an EFI app on sandbox, so connecting it up to
+> > > bootstd seems valuable to me.
+> > >
+> > > I've filed an issue for the virtio improvements.
+> >
+> > OK, thanks.
 
 Regards,
 Simon
-
-
->
-> -sughosh
->
-> >
-> > -sughosh
-> >
-> > >
-> > > If it becomes more widespread and affects a lot of tests, we could do
-> > > thing automatically in the test framework, but for now, that doesn't
-> > > seem necessary.
-> > >
-> > > >
-> > > > -sughosh
-> > > >
-> > > > [1] - https://lists.denx.de/pipermail/u-boot/2024-July/560569.html
-> > >
-> > > Regards,
-> > > Simon
