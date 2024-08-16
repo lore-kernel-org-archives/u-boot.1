@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6C97C52D7D
-	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 21:46:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE74C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 21:46:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A9D888C14;
-	Fri, 16 Aug 2024 23:46:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9495788C02;
+	Fri, 16 Aug 2024 23:46:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zvSbW6Wq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="m3TgSqhp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70AF588C14; Fri, 16 Aug 2024 23:46:04 +0200 (CEST)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id 855D988C2F; Fri, 16 Aug 2024 23:46:27 +0200 (CEST)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1596788C02
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 23:46:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 53E7188C07
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 23:46:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7a35eff1d06so161343985a.0
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 14:46:02 -0700 (PDT)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6bf6dedbfe1so13556166d6.3
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 14:46:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723844760; x=1724449560; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1723844784; x=1724449584; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mJzW62k70ZKUGF+pO1IGPIm7ms9GqsPQPiwXSbx3w8E=;
- b=zvSbW6WqPLj72XBSh9NPZRJRTXlQ2zKgELAbU4y3qSVOCsvJJWydxF2LkbWXySnB15
- 9CxHQTNV9Cf70Jyciwrh7iFhnvJqJ3wKru8mlxTJuo9Jo8nFh8W24IxRPYrYAWln/t3w
- kE0GHRYJea4hUWJHWoDWO2XK6/rH/K+USg52xR3P+VTSUJPdf4sJw4GtFi4FqAbb2ozy
- nL0EpMNmkxnF52Sw9eMKm0RAHDxNc51I/S4g8o/iDBVF63iovTvaMXWzNx523MU7Xn0c
- rEeYZpTlujQRHFt2Z0RKHmOzHrhix3f2KnU3ShqOr+Z2S9G5eikobNhJSvpVoz4H3Iuw
- zuuw==
+ bh=gQy7b8paOWM4IXSTE5lHrWEjvKCTChFRAcH1tnuZZBY=;
+ b=m3TgSqhp5/Jr0r006g5EMoQaZwrL3UNyegD2H95OtDoag7AoGWaippnzfwmd482nZI
+ S4j0RSXLQ9Xmd+x1qfOLiL9ERsvogg8LQWhJwEOzS7Q4Kz4HGPfRRavW4yUuqYyW6ZXc
+ FvKziyfepR4R+oUtA34idmtyOs/Lynv1w8Dx4BtpeQrQlT5O5w235JbJoJ6Ob5FKjPgA
+ rvS0SEwIRmr1wjS8COY7Fdg55oWKF1ZIi0ueLZjvpT1v0/NQMb+24bBuulMVq3NBu5w/
+ WM9t9ZXZqhhtWt+FONQxXJVjkejqbwRk4/HCSY5CrUQt8ccvnutSvDhKrMJ6PNfKxJkE
+ lYtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723844760; x=1724449560;
+ d=1e100.net; s=20230601; t=1723844784; x=1724449584;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mJzW62k70ZKUGF+pO1IGPIm7ms9GqsPQPiwXSbx3w8E=;
- b=K+u6qoIKKrkTU7yz4OZeDnIAmV6FYe9Ema3zYKK4pg4WNzTeW3HH2x4ixDKkSAEs/6
- iLBS6uqsCPvVyXA2rY69tHM4SE3zmLx1V3GHmU1i4n8qsGmFpaQ5y1HQ/vOLScTRBcPc
- xOqOZ4DokKiVXin219uWlAcpd65fSlEoO/isl3CuiuxVOWxSCzwJj/qls6CMpktEj1PR
- 8AztsR4zxEU+n65Ucl3GyqLRAGq+s7W1FLtrVvn9Kr8WKut5V9t/OmWl4979ruQnvYHT
- smMyuPOpCaT3g7EKOdfT34RKJa3OhOLpbSF3x2Bk3Bm+DzOmsvvrFm/IP2d9dj901rk4
- kgRA==
-X-Gm-Message-State: AOJu0Yx1f+f1VlBwNVqJGR01sggqupS5REbLO5iL36c348blu3noIz6C
- r3tWE96aM4TNfzuZG6aP09UfU8N8+6EV4C/inwDEJpn3YjEhaCsPcfEqE63kRrW8rsh4bRb6oS6
- aAw0=
-X-Google-Smtp-Source: AGHT+IGSRdSS65p1CDszu2wHHcWXXTv7q/c2/GCDvfiLdMbsuq8IFefW0Hu1kR6AIIVqhKaDJD4wIA==
-X-Received: by 2002:a05:6214:5d0b:b0:6bf:5587:f6d3 with SMTP id
- 6a1803df08f44-6bf7ce68e67mr61382736d6.49.1723844759806; 
- Fri, 16 Aug 2024 14:45:59 -0700 (PDT)
+ bh=gQy7b8paOWM4IXSTE5lHrWEjvKCTChFRAcH1tnuZZBY=;
+ b=rOwDsPYarZR11TXNUlQTC1TbArzD7IrQtc6cpAdtfztUvYe8aNixtkQCeL0A/wcAOq
+ z4WpsvFu6hb9ZnzEIt9GtLd3q8JoFHk0R/YaKJFjQSCK1JJca8JCQaq4b6xJspIFnpjN
+ +2N7KNIiujQekjzlOPwo/olJibbaHRo5llSo3EOeDFuvvGyYpWCouichob9aB89tggaA
+ i5exCEoBfbgVGQSxkT8zAXZuUa0tX+j0PyBGPn2hN4F7Mufd2vi6X23JW4Tffh3nWBa/
+ LU7txm9ofbMxM3sn98oQFkqmORPLK6lX3JizfvX9+geha9nCRquLHChLv4H7lSsS/ezG
+ 9igA==
+X-Gm-Message-State: AOJu0YzFpDkHWNB+5AwKJv2RFxKOCGT+cZbU9igJ8qQPr4fHNXCJX1xf
+ 0bp0NjLUVEwqwCqVj0KCD62AYkCdEFdzMPcVwktbL5ziaqZFyedO/YXlI+OWlP5Rli8EBwZUPyT
+ ip20=
+X-Google-Smtp-Source: AGHT+IGZ57w1hcZVBZQdRtXPYh+TH6HfItJs9YX0E3zH6AOZf9jDuK476LKFCGPrmSQtY/yq5Qfy7g==
+X-Received: by 2002:a05:6214:3292:b0:6b2:da3d:999f with SMTP id
+ 6a1803df08f44-6bf7ce61f4dmr45299236d6.41.1723844783906; 
+ Fri, 16 Aug 2024 14:46:23 -0700 (PDT)
 Received: from ubuntu.localdomain
  (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6bf6ff04ffbsm22044196d6.128.2024.08.16.14.45.57
+ 6a1803df08f44-6bf6ff04ffbsm22044196d6.128.2024.08.16.14.46.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Aug 2024 14:45:59 -0700 (PDT)
+ Fri, 16 Aug 2024 14:46:23 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
- Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
- Mario Six <mario.six@gdsys.cc>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
+ Stefan Bosch <stefan_b@posteo.net>, Mario Six <mario.six@gdsys.cc>,
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>,
  Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sean Anderson <seanga2@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Andrew Davis <afd@ti.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sumit Garg <sumit.garg@linaro.org>, Jesse Taube <mr.bossman075@gmail.com>,
- Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>,
  Igor Opaniuk <igor.opaniuk@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
@@ -91,9 +91,9 @@ Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
  Jonathan Humphreys <j-humphreys@ti.com>,
  Anand Moon <linux.amoon@gmail.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: [PATCH v6 03/28] lib: Adapt digest header files to MbedTLS
-Date: Fri, 16 Aug 2024 14:43:52 -0700
-Message-Id: <20240816214436.1877263-4-raymond.mao@linaro.org>
+Subject: [PATCH v6 04/28] md5: Remove md5 non-watchdog API
+Date: Fri, 16 Aug 2024 14:43:53 -0700
+Message-Id: <20240816214436.1877263-5-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240816214436.1877263-1-raymond.mao@linaro.org>
 References: <20240816214436.1877263-1-raymond.mao@linaro.org>
@@ -115,326 +115,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adapt digest header files to support both original libs and MbedTLS
-by switching on/off MBEDTLS_LIB_CRYPTO.
-Introduce <alg>_LEGACY kconfig for legacy hash implementations.
-
-`IS_ENABLED` or `CONFIG_IS_ENABLED` is not applicable here, since
-including <linux/kconfig.h> causes undefined reference on schedule()
-with sandbox build, as <linux/kconfig.h> includes <generated/autoconf.h>
-which enables `CONFIG_HW_WATCHDOG` and `CONFIG_WATCHDOG` but no schedule()
-are defined in sandbox build,
-Thus we use `#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)` instead.
+We don't need an API specially for non-watchdog since md5_wd supports
+it by disabling CONFIG_HW_WATCHDOG and CONFIG_WATCHDOG.
+Set 0x10000 as default chunk size for MD5.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Michal Simek <michal.simek@amd.com>
 ---
-Changes in v2
-- Initial patch.
 Changes in v3
-- Remove the changes that were done in previous clean-up patch set.
+- Initial patch.
 Changes in v4
-- Introduce <alg>_LEGACY kconfig for legacy hash implementations.
-Changes in v5
-- Correct header file include directories.
-- Correct kconfig dependence.
-Changes in v6
 - Update commit message.
-- Rebased on next branch.
+Changes in v5
+- None.
+Changes in v6
+- None.
 
- include/u-boot/md5.h    |  7 ++++
- include/u-boot/sha1.h   | 21 +++++++++-
- include/u-boot/sha256.h | 20 +++++++++
- include/u-boot/sha512.h |  9 ++++
- lib/Makefile            | 10 +++--
- lib/mbedtls/Kconfig     | 91 +++++++++++++++++++++++++++++++++++++++++
- 6 files changed, 153 insertions(+), 5 deletions(-)
+ board/friendlyarm/nanopi2/board.c |  3 ++-
+ board/intel/edison/edison.c       |  3 ++-
+ board/xilinx/zynq/bootimg.c       |  2 +-
+ include/u-boot/md5.h              |  7 +------
+ lib/md5.c                         | 14 --------------
+ 5 files changed, 6 insertions(+), 23 deletions(-)
 
+diff --git a/board/friendlyarm/nanopi2/board.c b/board/friendlyarm/nanopi2/board.c
+index c8cbc5a15fa..2d764e8eef3 100644
+--- a/board/friendlyarm/nanopi2/board.c
++++ b/board/friendlyarm/nanopi2/board.c
+@@ -263,7 +263,8 @@ static void make_ether_addr(u8 *addr)
+ 	hash[6] = readl(PHY_BASEADDR_ECID + 0x08);
+ 	hash[7] = readl(PHY_BASEADDR_ECID + 0x0c);
+ 
+-	md5((unsigned char *)&hash[4], 64, (unsigned char *)hash);
++	md5_wd((unsigned char *)&hash[4], 64, (unsigned char *)hash,
++	       MD5_DEF_CHUNK_SZ);
+ 
+ 	hash[0] ^= hash[2];
+ 	hash[1] ^= hash[3];
+diff --git a/board/intel/edison/edison.c b/board/intel/edison/edison.c
+index 911ffda2fc7..27fda3fc1d2 100644
+--- a/board/intel/edison/edison.c
++++ b/board/intel/edison/edison.c
+@@ -32,7 +32,8 @@ static void assign_serial(void)
+ 	if (!mmc)
+ 		return;
+ 
+-	md5((unsigned char *)mmc->cid, sizeof(mmc->cid), ssn);
++	md5_wd((unsigned char *)mmc->cid, sizeof(mmc->cid), ssn,
++	       MD5_DEF_CHUNK_SZ);
+ 
+ 	snprintf(usb0addr, sizeof(usb0addr), "02:00:86:%02x:%02x:%02x",
+ 		 ssn[13], ssn[14], ssn[15]);
+diff --git a/board/xilinx/zynq/bootimg.c b/board/xilinx/zynq/bootimg.c
+index 79bec3a4cfb..9eb0735f55d 100644
+--- a/board/xilinx/zynq/bootimg.c
++++ b/board/xilinx/zynq/bootimg.c
+@@ -135,7 +135,7 @@ int zynq_validate_partition(u32 start_addr, u32 len, u32 chksum_off)
+ 
+ 	memcpy(&checksum[0], (u32 *)chksum_off, MD5_CHECKSUM_SIZE);
+ 
+-	md5_wd((u8 *)start_addr, len, &calchecksum[0], 0x10000);
++	md5_wd((u8 *)start_addr, len, &calchecksum[0], MD5_DEF_CHUNK_SZ);
+ 
+ 	if (!memcmp(checksum, calchecksum, MD5_CHECKSUM_SIZE))
+ 		return 0;
 diff --git a/include/u-boot/md5.h b/include/u-boot/md5.h
-index c465925ea8d..69898fcbe49 100644
+index 69898fcbe49..c98b1a58088 100644
 --- a/include/u-boot/md5.h
 +++ b/include/u-boot/md5.h
-@@ -6,10 +6,16 @@
- #ifndef _MD5_H
- #define _MD5_H
- 
-+#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
-+#include <mbedtls/md5.h>
-+#endif
+@@ -12,6 +12,7 @@
  #include "compiler.h"
  
  #define MD5_SUM_LEN	16
++#define MD5_DEF_CHUNK_SZ 0x10000
  
-+#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
-+typedef mbedtls_md5_context MD5Context;
-+#else
- typedef struct MD5Context {
- 	__u32 buf[4];
- 	__u32 bits[2];
-@@ -18,6 +24,7 @@ typedef struct MD5Context {
- 		__u32 in32[16];
- 	};
- } MD5Context;
-+#endif
- 
- void MD5Init(MD5Context *ctx);
+ #if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
+ typedef mbedtls_md5_context MD5Context;
+@@ -30,12 +31,6 @@ void MD5Init(MD5Context *ctx);
  void MD5Update(MD5Context *ctx, unsigned char const *buf, unsigned int len);
-diff --git a/include/u-boot/sha1.h b/include/u-boot/sha1.h
-index c1e9f67068d..ab88134fb98 100644
---- a/include/u-boot/sha1.h
-+++ b/include/u-boot/sha1.h
-@@ -16,6 +16,21 @@
+ void MD5Final(unsigned char digest[16], MD5Context *ctx);
  
- #include <linux/types.h>
- 
-+#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
-+/*
-+ * FIXME:
-+ * MbedTLS define the members of "mbedtls_sha256_context" as private,
-+ * but "state" needs to be access by arch/arm/cpu/armv8/sha1_ce_glue.
-+ * MBEDTLS_ALLOW_PRIVATE_ACCESS needs to be enabled to allow the external
-+ * access.
-+ * Directly including <external/mbedtls/library/common.h> is not allowed,
-+ * since this will include <malloc.h> and break the sandbox test.
-+ */
-+#define MBEDTLS_ALLOW_PRIVATE_ACCESS
-+
-+#include <mbedtls/sha1.h>
-+#endif
-+
- #ifdef __cplusplus
- extern "C" {
- #endif
-@@ -26,6 +41,9 @@ extern "C" {
- 
- extern const uint8_t sha1_der_prefix[];
- 
-+#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
-+typedef mbedtls_sha1_context sha1_context;
-+#else
- /**
-  * \brief	   SHA-1 context structure
-  */
-@@ -36,13 +54,14 @@ typedef struct
-     unsigned char buffer[64];	/*!< data block being processed */
+-/*
+- * Calculate and store in 'output' the MD5 digest of 'len' bytes at
+- * 'input'. 'output' must have enough space to hold 16 bytes.
+- */
+-void md5 (unsigned char *input, int len, unsigned char output[16]);
+-
+ /*
+  * Calculate and store in 'output' the MD5 digest of 'len' bytes at 'input'.
+  * 'output' must have enough space to hold 16 bytes. If 'chunk' Trigger the
+diff --git a/lib/md5.c b/lib/md5.c
+index 584463d55ca..2d8977b2e85 100644
+--- a/lib/md5.c
++++ b/lib/md5.c
+@@ -262,20 +262,6 @@ MD5Transform(__u32 buf[4], __u32 const in[16])
+ 	buf[3] += d;
  }
- sha1_context;
-+#endif
  
- /**
-  * \brief	   SHA-1 context setup
-  *
-  * \param ctx	   SHA-1 context to be initialized
-  */
--void sha1_starts( sha1_context *ctx );
-+void sha1_starts(sha1_context *ctx);
- 
- /**
-  * \brief	   SHA-1 process buffer
-diff --git a/include/u-boot/sha256.h b/include/u-boot/sha256.h
-index a4fe176c0b4..b58d5b58d39 100644
---- a/include/u-boot/sha256.h
-+++ b/include/u-boot/sha256.h
-@@ -3,6 +3,22 @@
- 
- #include <linux/types.h>
- 
-+#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
-+/*
-+ * FIXME:
-+ * MbedTLS define the members of "mbedtls_sha256_context" as private,
-+ * but "state" needs to be access by arch/arm/cpu/armv8/sha256_ce_glue.
-+ * MBEDTLS_ALLOW_PRIVATE_ACCESS needs to be enabled to allow the external
-+ * access.
-+ * Directly including <external/mbedtls/library/common.h> is not allowed,
-+ * since this will include <malloc.h> and break the sandbox test.
-+ */
-+#define MBEDTLS_ALLOW_PRIVATE_ACCESS
-+
-+#include <mbedtls/sha256.h>
-+#endif
-+
-+#define SHA224_SUM_LEN	28
- #define SHA256_SUM_LEN	32
- #define SHA256_DER_LEN	19
- 
-@@ -11,11 +27,15 @@ extern const uint8_t sha256_der_prefix[];
- /* Reset watchdog each time we process this many bytes */
- #define CHUNKSZ_SHA256	(64 * 1024)
- 
-+#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
-+typedef mbedtls_sha256_context sha256_context;
-+#else
- typedef struct {
- 	uint32_t total[2];
- 	uint32_t state[8];
- 	uint8_t buffer[64];
- } sha256_context;
-+#endif
- 
- void sha256_starts(sha256_context * ctx);
- void sha256_update(sha256_context *ctx, const uint8_t *input, uint32_t length);
-diff --git a/include/u-boot/sha512.h b/include/u-boot/sha512.h
-index 83c2119cd26..7e10f590a1d 100644
---- a/include/u-boot/sha512.h
-+++ b/include/u-boot/sha512.h
-@@ -3,6 +3,10 @@
- 
- #include <linux/types.h>
- 
-+#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
-+#include <mbedtls/sha512.h>
-+#endif
-+
- #define SHA384_SUM_LEN          48
- #define SHA384_DER_LEN          19
- #define SHA512_SUM_LEN          64
-@@ -12,11 +16,16 @@
- #define CHUNKSZ_SHA384	(16 * 1024)
- #define CHUNKSZ_SHA512	(16 * 1024)
- 
-+#if defined(CONFIG_MBEDTLS_LIB_CRYPTO)
-+typedef mbedtls_sha512_context sha384_context;
-+typedef mbedtls_sha512_context sha512_context;
-+#else
- typedef struct {
- 	uint64_t state[SHA512_SUM_LEN / 8];
- 	uint64_t count[2];
- 	uint8_t buf[SHA512_BLOCK_SIZE];
- } sha512_context;
-+#endif
- 
- extern const uint8_t sha512_der_prefix[];
- 
-diff --git a/lib/Makefile b/lib/Makefile
-index e1ab8dfd503..617f5a55de0 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -71,14 +71,16 @@ obj-$(CONFIG_$(SPL_TPL_)CRC16) += crc16.o
- obj-y += crypto/
- 
- obj-$(CONFIG_$(SPL_TPL_)ACPI) += acpi/
--obj-$(CONFIG_$(SPL_)MD5) += md5.o
- obj-$(CONFIG_ECDSA) += ecdsa/
- obj-$(CONFIG_$(SPL_)RSA) += rsa/
- obj-$(CONFIG_HASH) += hash-checksum.o
- obj-$(CONFIG_BLAKE2) += blake2/blake2b.o
--obj-$(CONFIG_$(SPL_)SHA1) += sha1.o
--obj-$(CONFIG_$(SPL_)SHA256) += sha256.o
--obj-$(CONFIG_$(SPL_)SHA512) += sha512.o
-+
-+obj-$(CONFIG_$(SPL_)MD5_LEGACY) += md5.o
-+obj-$(CONFIG_$(SPL_)SHA1_LEGACY) += sha1.o
-+obj-$(CONFIG_$(SPL_)SHA256_LEGACY) += sha256.o
-+obj-$(CONFIG_$(SPL_)SHA512_LEGACY) += sha512.o
-+
- obj-$(CONFIG_CRYPT_PW) += crypt/
- obj-$(CONFIG_$(SPL_)ASN1_DECODER) += asn1_decoder.o
- 
-diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
-index 3e9057f1acf..efae2c4fd72 100644
---- a/lib/mbedtls/Kconfig
-+++ b/lib/mbedtls/Kconfig
-@@ -21,9 +21,100 @@ if LEGACY_CRYPTO
- 
- config LEGACY_CRYPTO_BASIC
- 	bool "legacy basic crypto libraries"
-+	select MD5_LEGACY if MD5
-+	select SHA1_LEGACY if SHA1
-+	select SHA256_LEGACY if SHA256
-+	select SHA512_LEGACY if SHA512
-+	select SHA384_LEGACY if SHA384
-+	select SPL_MD5_LEGACY if SPL_MD5
-+	select SPL_SHA1_LEGACY if SPL_SHA1
-+	select SPL_SHA256_LEGACY if SPL_SHA256
-+	select SPL_SHA512_LEGACY if SPL_SHA512
-+	select SPL_SHA384_LEGACY if SPL_SHA384
- 	help
- 	  Enable legacy basic crypto libraries.
- 
-+if LEGACY_CRYPTO_BASIC
-+
-+config SHA1_LEGACY
-+	bool "Enable SHA1 support with legacy crypto library"
-+	depends on LEGACY_CRYPTO_BASIC && SHA1
-+	help
-+	  This option enables support of hashing using SHA1 algorithm
-+	  with legacy crypto library.
-+
-+config SHA256_LEGACY
-+	bool "Enable SHA256 support with legacy crypto library"
-+	depends on LEGACY_CRYPTO_BASIC && SHA256
-+	help
-+	  This option enables support of hashing using SHA256 algorithm
-+	  with legacy crypto library.
-+
-+config SHA512_LEGACY
-+	bool "Enable SHA512 support with legacy crypto library"
-+	depends on LEGACY_CRYPTO_BASIC && SHA512
-+	default y if TI_SECURE_DEVICE && FIT_SIGNATURE
-+	help
-+	  This option enables support of hashing using SHA512 algorithm
-+	  with legacy crypto library.
-+
-+config SHA384_LEGACY
-+	bool "Enable SHA384 support with legacy crypto library"
-+	depends on LEGACY_CRYPTO_BASIC && SHA384
-+	select SHA512_LEGACY
-+	help
-+	  This option enables support of hashing using SHA384 algorithm
-+	  with legacy crypto library.
-+
-+config MD5_LEGACY
-+	bool "Enable MD5 support with legacy crypto library"
-+	depends on LEGACY_CRYPTO_BASIC && MD5
-+	help
-+	  This option enables support of hashing using MD5 algorithm
-+	  with legacy crypto library.
-+
-+if SPL
-+
-+config SPL_SHA1_LEGACY
-+	bool "Enable SHA1 support in SPL with legacy crypto library"
-+	depends on LEGACY_CRYPTO_BASIC && SPL_SHA1
-+	help
-+	  This option enables support of hashing using SHA1 algorithm
-+	  with legacy crypto library.
-+
-+config SPL_SHA256_LEGACY
-+	bool "Enable SHA256 support in SPL with legacy crypto library"
-+	depends on LEGACY_CRYPTO_BASIC && SPL_SHA256
-+	help
-+	  This option enables support of hashing using SHA256 algorithm
-+	  with legacy crypto library.
-+
-+config SPL_SHA512_LEGACY
-+	bool "Enable SHA512 support in SPL with legacy crypto library"
-+	depends on LEGACY_CRYPTO_BASIC && SPL_SHA512
-+	help
-+	  This option enables support of hashing using SHA512 algorithm
-+	  with legacy crypto library.
-+
-+config SPL_SHA384_LEGACY
-+	bool "Enable SHA384 support in SPL with legacy crypto library"
-+	depends on LEGACY_CRYPTO_BASIC && SPL_SHA384
-+	select SPL_SHA512_LEGACY
-+	help
-+	  This option enables support of hashing using SHA384 algorithm
-+	  with legacy crypto library.
-+
-+config SPL_MD5_LEGACY
-+	bool "Enable MD5 support in SPL with legacy crypto library"
-+	depends on LEGACY_CRYPTO_BASIC && SPL_MD5
-+	help
-+	  This option enables support of hashing using MD5 algorithm
-+	  with legacy crypto library.
-+
-+endif # SPL
-+
-+endif # LEGACY_CRYPTO_BASIC
-+
- config LEGACY_CRYPTO_CERT
- 	bool "legacy certificate libraries"
- 	help
+-/*
+- * Calculate and store in 'output' the MD5 digest of 'len' bytes at
+- * 'input'. 'output' must have enough space to hold 16 bytes.
+- */
+-void
+-md5 (unsigned char *input, int len, unsigned char output[16])
+-{
+-	MD5Context context;
+-
+-	MD5Init(&context);
+-	MD5Update(&context, input, len);
+-	MD5Final(output, &context);
+-}
+-
+ /*
+  * Calculate and store in 'output' the MD5 digest of 'len' bytes at 'input'.
+  * 'output' must have enough space to hold 16 bytes. If 'chunk' Trigger the
 -- 
 2.25.1
 
