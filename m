@@ -4,74 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3485C52D7D
-	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 03:47:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A110C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 03:48:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A41488B31;
+	by phobos.denx.de (Postfix) with ESMTP id 81AEF88B4C;
 	Fri, 16 Aug 2024 05:47:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fSU0BCnZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ib+7/aNq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3871D88A82; Fri, 16 Aug 2024 05:47:31 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 3020B88A82; Fri, 16 Aug 2024 05:47:32 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2101E88AF4
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 05:47:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 20F0288B0C
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 05:47:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-70936061d0dso1093955a34.2
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 20:47:29 -0700 (PDT)
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-5d5c324267aso971469eaf.0
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 20:47:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1723780048; x=1724384848; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1723780049; x=1724384849; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5bleattASWdW06lWRa+h0ZGl2aRT56IOQAGuhx8F4ZU=;
- b=fSU0BCnZkrsAfWoXyclK4NMsrB21ObyFXtPXOMv6kY77WvqKgrH5JlKwKV/1+SaDPW
- lfOMuXOWE+CRcnSS76AIQpmDzUY3qld+sv2lVJSol84dqCwWlmvphmSPYm07ndm0qyX5
- XEFr9Xcct9Sic1Afk83R4jlQgJ7RUVDeAiiCw=
+ bh=sEkfHy2TWm8KcZaD0OLUVCP1RDM1suxHlpuB9vs9GO8=;
+ b=ib+7/aNqwFxmIg1Oag0Dk3UdqHqA1O9CVwtJDppSyC3aHHaw0FcpYFtzkOao77XZBp
+ fmHOVnfPTXwQcUMGlCSdgOklBmdQIRfursx/KLE3zbajBMOrODugFxxgAUoDVYsVctRY
+ pt6OsXW1SFst6WGCFJ9yKmO/WuAqrEyuOYf2M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723780048; x=1724384848;
+ d=1e100.net; s=20230601; t=1723780049; x=1724384849;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5bleattASWdW06lWRa+h0ZGl2aRT56IOQAGuhx8F4ZU=;
- b=GE3LubONZDauwrvbah1LKcJdXHZHd2vN7ugz10pEIWdXCBeK3SZwh3O7YIcLXyiy4r
- SZwt0rLhMwOTiVJjxXfRNvXoSPyVoOyixfl/XAVSuQSbjtx24DWXIAh3W1euqBjQLL0t
- fYBjR8SW1amZY6Rr1TD7WPqqqntaUJehdOIdq3nExR6ax1R0Yyu5LkKvY0yhmzzkbks1
- PuRfsD45eZecdXKMVARukdPbRD0DLvpgnMr6nxtb8NsbEIQ/Wl4PxONkYjJDQCPMMNdU
- FIW8pMqojfR7yuPNU2vKGQhUU/nSlmWjMhIVpVlps8KSqy8BOppT/i5McaRRz0PhqeOH
- hfiQ==
-X-Gm-Message-State: AOJu0YwJWB/KD9iaI+9JMjr/4D6XiipRwUj3OGmzgUklMZ0R6OhPVwm9
- hyUudJbBhI/E6ImbrEC+qEwGDXVAYU60xoDByuijGVlbNY4jF5p/n2Je6u2DQIsxg8QE3qroyup
- LboI=
-X-Google-Smtp-Source: AGHT+IFfp9KxKxXJXfrhy+lFoFT0iGfhBhdeOS8MfXOT0zcN6pygAC/JHJAog6r55Tb43TWHGKkYPg==
-X-Received: by 2002:a05:6830:40c2:b0:703:64cc:a496 with SMTP id
- 46e09a7af769-70cac88fc7amr1854463a34.23.1723780047704; 
- Thu, 15 Aug 2024 20:47:27 -0700 (PDT)
+ bh=sEkfHy2TWm8KcZaD0OLUVCP1RDM1suxHlpuB9vs9GO8=;
+ b=qs/RMcAKwwoCNZy7erZpf4YOSX1Du8a4fmBtL6Q4JhlwNF8YB5Jo20W7c0Jxy0O8se
+ tLELPrZrrtwWDCj/P3iyC/2bykgE/bZfcw0BrBQlZidfjCxK25Nm2+7jRQFzu0fSkiCH
+ VLWYUXG7/vJgCNlVxydvgmGWyUfBYy7blxhnRspbGxjiklL4wZCFFWNV3LVhpEUp58jK
+ K5X27yRB92idkJr9bq/Rk6vU8ITTO4otJDOEhWUQ0FACowDZ5dsZ3OlKwA8grw0UjfBr
+ HGhJE0s5yQQeyckWqJA59VkqR9l2NeClM+ITISJAp9WjCuajZlLq8bzvpE/ygLUNMxZJ
+ AOtw==
+X-Gm-Message-State: AOJu0YxdW84f5sLBV68E2iBlUEkPis7HH3ZH9ewxW0yzB0Sh/sQyuIeR
+ D7tPP7bIDs/Yp/PG52UrhQaA/WNMI3lnzZ06OQvR8yFLUWYtFx9+SnMM0ZgW9p4=
+X-Google-Smtp-Source: AGHT+IHBH2v5qpdDbQZh0haVLJLK+MJggE+K7saI1kWkgXr5+T7F5PjzIB1w1TE4jlVxp2oUOh8uMw==
+X-Received: by 2002:a05:6820:80e:b0:5da:9204:6724 with SMTP id
+ 006d021491bc7-5da98028adfmr1921388eaf.5.1723780048894; 
+ Thu, 15 Aug 2024 20:47:28 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-236.totalplay.net.
  [189.203.97.236]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5da8cd69811sm541522eaf.4.2024.08.15.20.47.26
+ 006d021491bc7-5da8cd69811sm541522eaf.4.2024.08.15.20.47.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 15 Aug 2024 20:47:27 -0700 (PDT)
+ Thu, 15 Aug 2024 20:47:28 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Richard Weinberger <richard@nod.at>
 Cc: upstream+uboot@sigma-star.at, miquel.raynal@bootlin.com, 
  thomas.petazzoni@bootlin.com, jmcosta944@gmail.com
-In-Reply-To: <20240802163647.26674-1-richard@nod.at>
-References: <20240802163647.26674-1-richard@nod.at>
-Subject: Re: [PATCH v2 1/4] squashfs: Fix integer overflow in
- sqfs_resolve_symlink()
-Message-Id: <172378004680.3540666.3594291040129408266.b4-ty@konsulko.com>
-Date: Thu, 15 Aug 2024 21:47:26 -0600
+In-Reply-To: <20240802200509.2471-1-richard@nod.at>
+References: <20240802200509.2471-1-richard@nod.at>
+Subject: Re: [PATCH] squashfs: Fix heap corruption in sqfs_search_dir()
+Message-Id: <172378004801.3540666.17181059756441978775.b4-ty@konsulko.com>
+Date: Thu, 15 Aug 2024 21:47:28 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -92,16 +90,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 02 Aug 2024 18:36:44 +0200, Richard Weinberger wrote:
+On Fri, 02 Aug 2024 22:05:09 +0200, Richard Weinberger wrote:
 
-> A carefully crafted squashfs filesystem can exhibit an inode size of 0xffffffff,
-> as a consequence malloc() will do a zero allocation.
-> Later in the function the inode size is again used for copying data.
-> So an attacker can overwrite memory.
-> Avoid the overflow by using the __builtin_add_overflow() helper.
+> res needs to be large enough to store both strings rem and target,
+> plus the path separator and the terminator.
+> Currently the space for the path separator is not accounted, so
+> the heap is corrupted by one byte.
 > 
 > 
-> [...]
 
 Applied to u-boot/next, thanks!
 
