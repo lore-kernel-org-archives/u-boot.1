@@ -4,46 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C08A7C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 13:36:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22D05C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 14:47:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82BC988B75;
-	Fri, 16 Aug 2024 15:36:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=johanneskirchmair.de
+	by phobos.denx.de (Postfix) with ESMTP id 5A81F88B6E;
+	Fri, 16 Aug 2024 16:47:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=johanneskirchmair.de header.i=@johanneskirchmair.de header.b="rlVaQ3Mg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SXE96VRS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B22FC88ABF; Fri, 16 Aug 2024 10:20:11 +0200 (CEST)
-Received: from mx8.mail-out.lima-city.de (mx8.mail-out.lima-city.de
- [91.216.248.210])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8BF56889F8; Fri, 16 Aug 2024 16:47:36 +0200 (CEST)
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
+ [IPv6:2607:f8b0:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94BBB88A99
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 10:20:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=johanneskirchmair.de
-Authentication-Results: phobos.denx.de; spf=none
- smtp.mailfrom=mailinglist1@johanneskirchmair.de
-From: mailinglist1@johanneskirchmair.de
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=johanneskirchmair.de;
- s=securedbylima-20161106; t=1723796395;
- bh=JQ5AlgtYulkCf8nUA0jIKHQaQtRgUEtWOpu8R05N33s=;
- h=From:To:Cc:Subject:Date:From;
- b=rlVaQ3Mgk5BWs+Kqu8xVxGwyewF3HpUyQrWfxv+aG9t6Ytg7DcUK6IhzMWFBawIDw
- ilc5JxyXE1nJnZ3uDCkMczLID8aGmZ3VMeRjQY1/AS95JrXkLmUNyG9Z7GXlZfrIcW
- XFhi2v8Sk3Pa34dPJusQqfsIeuKikV7qa/hVtupI=
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com,
-	Johannes Kirchmair <johannes.kirchmair@skidata.com>
-Subject: [PATCH] usb: add reset pin handling to onboard-hub driver
-Date: Fri, 16 Aug 2024 10:19:22 +0200
-Message-Id: <20240816081922.282155-1-mailinglist1@johanneskirchmair.de>
-X-Mailer: git-send-email 2.34.1
+ by phobos.denx.de (Postfix) with ESMTPS id EF8D488B23
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 16:47:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-710ece280b6so1697413b3a.2
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 07:47:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1723819648; x=1724424448; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ogmkjgr0v4nJwyWilU00djDQn495qm1zNwvdNiBXklQ=;
+ b=SXE96VRSk3ZIqj3zIAMMBg5OZeyEUCAs5ghVyyrIt6LcPkbjCoqxAeAMg0Uc+MZWSG
+ wH6J7e1+T0Tz00M37lzLC/Q9claZ0q4yCEk4/XwiUys6ptP7b74reqUrJn4FCcDc/gQB
+ qMQyMU6+XUTJ+ya17ww+fFd0yLNR13Xhoj5KE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1723819648; x=1724424448;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ogmkjgr0v4nJwyWilU00djDQn495qm1zNwvdNiBXklQ=;
+ b=FYE8MWYR1Ge5mXorsNNaiJSnMgXjRseyy/vnLuvtRZ5+vZUt35c8DBp7Pc5A2xpb7m
+ vPvxlelaw3RHWFgvs1bzaPU5jeSIYwSxuSI3esxjZCF/aB2MzQAOCoQw4ISqMJ5rUnpt
+ JmHtrEreXvwmSNUJjyEkTMURrDo0HCkMFOnwYfCDHn+vsUS//aDZwc9ws/GD57+/fzeL
+ uSSP4e6oowI7F51RqTLvAlHvfPjCxF5lgl2SvWZW1S/ZSKxHXs7tcImL7O8fmaF3TUEI
+ mMlSGFqrUhNydHPGcYwb8F3VYq8JXqpyHF9IwjyoUGUhI5j0/9UHI0/MLVg/0hyYEeTS
+ Lz2Q==
+X-Gm-Message-State: AOJu0Yx9YKHKPjTz1KxAZch/6jXPMtn36ap+yZCUani5OXccOglYpP7d
+ qQpgpJ++sIg3yAiJd8M04X5VzAcMEpqrQPxLZ1vE15cbhYhaXUcLeDKExxm/fP4cEW3N/gztNXG
+ 4hW99FBafe86UWlgyaZmZWmYJ117Wsqb35fB8
+X-Google-Smtp-Source: AGHT+IGAZW8hQLy/2PYXM8439X2FazGEpGgOUEhA2eHUqrU0LkYnWfe4Tkq/CsevVp0ng53sLsEgqdxtzr/jiJIy+zo=
+X-Received: by 2002:a05:6a20:9f03:b0:1c8:9749:a4c1 with SMTP id
+ adf61e73a8af0-1c905052afamr3748619637.49.1723819648322; Fri, 16 Aug 2024
+ 07:47:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 16 Aug 2024 15:36:32 +0200
+References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
+ <20240814110009.45310-28-sughosh.ganu@linaro.org>
+ <CAFLszTh-5c4_OdZs8F_e=giR+ZFjNB1oX8L8cV8hXi9Je6e+5w@mail.gmail.com>
+ <CADg8p954ZtuXpC_b_rfkpWuXBGFV40Kp=DJby_oRsTp2GYbcHw@mail.gmail.com>
+In-Reply-To: <CADg8p954ZtuXpC_b_rfkpWuXBGFV40Kp=DJby_oRsTp2GYbcHw@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 16 Aug 2024 08:47:16 -0600
+Message-ID: <CAFLszTgsbrBefPQ7EGdLbC8fUO=oZUoQ13TYeo=pJzu2Uro_kQ@mail.gmail.com>
+Subject: Re: [PATCH v2 27/32] test: cedit: use allocated address for reading
+ file
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
+ Max Filippov <jcmvbkbc@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,85 +94,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Johannes Kirchmair <johannes.kirchmair@skidata.com>
+Hi Sughosh,
 
-Some onboard-hub chips have external reset pins. This patch adds
-handling of said pin to the onboard-hub driver. The naming for the
-devicetree binding is done in the same way as in the Linux kernel to
-ensure good compatibility between u-boot's and Linux's devicetrees.
+On Fri, 16 Aug 2024 at 04:34, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+>
+> On Fri, 16 Aug 2024 at 02:02, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Sughosh,
+> >
+> > On Wed, 14 Aug 2024 at 05:02, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > >
+> > > Instead of a randomly selected address, use an LMB allocated one for
+> > > reading the file into memory. With the LMB map now being persistent
+> > > and global, the address used for reading the file might be already
+> > > allocated as non-overwritable, resulting in a failure. Get a valid
+> > > address from LMB and then read the file to that address.
+> > >
+> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > ---
+> > > Changes since V1:
+> > > * Don't use the API version with flags parameter.
+> > >
+> > >  test/boot/cedit.c | 6 +++++-
+> > >  1 file changed, 5 insertions(+), 1 deletion(-)
+> > >
+> >
+> > No, this address needs to work fine without using lmb. Same with any
+> > other tests. Tests make use of the sandbox memory space memory
+> > addresses and it makes things easier to code and debug.
+>
+> Like I had explained earlier [1], not using the LMB API for allocating
+> the address results in issues, since the load command internally
+> checks if the address can be used for reading the dtb. Without this
+> patch, the cmd_ut test fails. I am not sure why you do not like this
+> solution. But in any case, can you propose some other solution? I
+> believe I can tweak the address to some other value, but that would
+> not be a proper solution, but simply kicking the can down the road.
+> Thanks.
 
-Signed-off-by: Johannes Kirchmair <johannes.kirchmair@skidata.com>
----
- common/usb_onboard_hub.c | 32 +++++++++++++++++++++++++++++++-
- 1 file changed, 31 insertions(+), 1 deletion(-)
+But this is why I suggested having lmb_push() and lmb_pop(), so you
+should be able to use those in the few tests which have this problem.
 
-diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-index 68a04ac041..5b1bb79c55 100644
---- a/common/usb_onboard_hub.c
-+++ b/common/usb_onboard_hub.c
-@@ -10,9 +10,11 @@
- #include <dm.h>
- #include <dm/device_compat.h>
- #include <power/regulator.h>
-+#include <asm/gpio.h>
- 
- struct onboard_hub {
- 	struct udevice *vdd;
-+	struct gpio_desc reset_pin;
- };
- 
- static int usb_onboard_hub_probe(struct udevice *dev)
-@@ -27,8 +29,23 @@ static int usb_onboard_hub_probe(struct udevice *dev)
- 	}
- 
- 	ret = regulator_set_enable_if_allowed(hub->vdd, true);
--	if (ret)
-+	if (ret) {
- 		dev_err(dev, "can't enable vdd-supply: %d\n", ret);
-+		return ret;
-+	}
-+
-+	ret = gpio_request_by_name(dev, "reset-gpios", 0, &hub->reset_pin,
-+				   GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
-+	if (ret && ret != -ENOENT) {
-+		dev_err(dev, "can't get reset-gpios 0: %d\n", ret);
-+		return ret;
-+	}
-+
-+	if (hub->reset_pin.dev) {
-+		ret = dm_gpio_set_value(&hub->reset_pin, 0);
-+		if (ret)
-+			dev_err(dev, "failed setting reset-gpios to 0: %d\n", ret);
-+	}
- 
- 	return ret;
- }
-@@ -42,12 +59,25 @@ static int usb_onboard_hub_remove(struct udevice *dev)
- 	if (ret)
- 		dev_err(dev, "can't disable vdd-supply: %d\n", ret);
- 
-+	if (hub->reset_pin.dev) {
-+		ret = dm_gpio_set_value(&hub->reset_pin, 1);
-+		if (ret)
-+			dev_err(dev, "failed setting reset-gpios to 0: %d\n", ret);
-+	}
-+
-+	if (hub->reset_pin.dev) {
-+		ret = dm_gpio_free(dev, &hub->reset_pin);
-+		if (ret)
-+			dev_err(dev, "can't free reset-gpios: %d\n", ret);
-+	}
-+
- 	return ret;
- }
- 
- static const struct udevice_id usb_onboard_hub_ids[] = {
- 	/* Use generic usbVID,PID dt-bindings (usb-device.yaml) */
- 	{ .compatible = "usb424,2514" }, /* USB2514B USB 2.0 */
-+	{ .compatible = "usb4b4,6504" },
- 	{ }
- };
- 
--- 
-2.34.1
+If it becomes more widespread and affects a lot of tests, we could do
+thing automatically in the test framework, but for now, that doesn't
+seem necessary.
 
+>
+> -sughosh
+>
+> [1] - https://lists.denx.de/pipermail/u-boot/2024-July/560569.html
+
+Regards,
+Simon
