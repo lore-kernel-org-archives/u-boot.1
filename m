@@ -4,68 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C72B6C531DC
-	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 14:50:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4751AC531DC
+	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 15:37:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE7FA88BAE;
-	Fri, 16 Aug 2024 16:49:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 7B11288B23;
+	Fri, 16 Aug 2024 17:37:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XgmoevwQ";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="UzBxHC8z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45E7C88A99; Fri, 16 Aug 2024 16:49:42 +0200 (CEST)
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
- [IPv6:2607:f8b0:4864:20::102a])
+ id CCF7588B88; Fri, 16 Aug 2024 17:37:24 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16E8388B23
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 16:49:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9219F889F8
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 17:37:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-2d3c071d276so1576797a91.1
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 07:49:40 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-429e29933aaso14856585e9.0
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 08:37:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723819778; x=1724424578; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uYKNKYX2v0NoD5RqzmpvGH2qYSNmR6ca8GWSZUoNygc=;
- b=XgmoevwQQcpZHncXRl/+3fP+HlwLaerlDSHHSh2AqiSHyCBLTIlXApbNLC7mGESbyM
- 9aipYilWUxp9xGJsNK6av2DJhOlajCYd/Vnca2BFwcmXi4yLu+D+XMs7zEaa7XOGZUdM
- RnPLwB6K4qu2ZZSqjBuY7rMPBHrMl0Oq+dcpc=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1723822627; x=1724427427;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=/ERAYAHGAkfS6AMs3aeoEVmA0bWiQHS652JC1oB9kNw=;
+ b=UzBxHC8zqFSFO69nrCp4Y3pnHhmxru2kTjkn3uWvGQ7dqUFKfSI3duqVBxOcFkLlrt
+ BYmuPZk1IReMHyejkHkKpskAKDQkmKoA/ZSlZt6vu7/os+Iy6WOau8F08OOWjqzzRcxP
+ MKYZB4ltQva9wxWnD/PncT+hDtW9QShSHglR7qLH9SyuecittB00KOyHxvj8nK/FrZjk
+ PS/8QlBDkugbPshUIsXMTBjftOTJqnSi18FNoijv37QLOd0QWqr7jL0mTQjQs0KImZ4r
+ fDSvb2gPewcSvTKkBMlzCo8K43Zzn+jvB5WO3EuuRl1lMWfsiYQj+yc7zpxVhc+oRd2S
+ Tdrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723819778; x=1724424578;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=uYKNKYX2v0NoD5RqzmpvGH2qYSNmR6ca8GWSZUoNygc=;
- b=Z+02WBFQlF5YPMTa9PDnsPuSv5FcN/dSUBLsarzJ3KYBe2Ef/VmDCVVEadt2Rb+NW0
- yMeu57VxmFkXLttPhtKAXEZCpV7Vy9ijFc6AJdaJMW2jT+uBR/CnHGpKlIKZBKhicpPl
- qYnkHxX9rU6Pz2Tq5qCdBnbb/lWg9w+1oSkLnQW1XtXdk9veXTV/lJyl9HlSsIylKzJ2
- /96x6dg04Gu8IbvgjfucpTFzCgqgVWMLQihiIuYoZH13KqjID2cI2lLvl8q8vKwu2ZbO
- KpPCxL+N6AKangzTFpKcZcOn83GjzHwtEBIAy9kAu1P5KvJwcxH1AL4ftj0jCUoE9mgd
- yAkg==
-X-Gm-Message-State: AOJu0YwnQlGoJN1B3FjYReJbut1rPB8HoeaDA7kNsYX7TSUWVfUxT0Q1
- irFnUT4gWfazgCKXQzB1qk2p9ArFQrmE6orhwcgptGJcIZC1TUaEoczlkHTZDdH4/OCFrzJSLwT
- 8MqnHuF78CtJxvneJHz1AjcVbvzxMpjrk4KQV
-X-Google-Smtp-Source: AGHT+IEvIjly4/ZPyG2nanIyuT74aEYiWRqYhKytiLeXjWQgcF2ntpBECq9khjSWqT7eZmK7pvAAIBhxeL5LiFEdX0g=
-X-Received: by 2002:a17:90a:d983:b0:2c9:923e:faf1 with SMTP id
- 98e67ed59e1d1-2d3dfc6dfbcmr3506170a91.18.1723819777689; Fri, 16 Aug 2024
- 07:49:37 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1723822627; x=1724427427;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/ERAYAHGAkfS6AMs3aeoEVmA0bWiQHS652JC1oB9kNw=;
+ b=ZhYAZNsSqz/31vEY0PzQufsN3zOdRnKhfqPqb5zsqlzFz0KcW8YFie02b+UXkgnVZe
+ jKv2yLV0AZs9Say7SKx+0TVaAY6/sq7q7P8piz+0BSCoivoXXxd9D30Yz0lbqvFhAXLj
+ 8VDbjBBc9NMtLE8EUbw2R0RnwYPojQkEDKGB0iqEAj5GPi8TYIt8seJvGaS7uEbXMwr6
+ kcoyLzH62GS3onQNHzUcuK7qCamMX9DPUrCRND8nVyuGVSFcyx6KGMG2McD2WFeG6xmF
+ 9V90kl0Bvf/lZDhsdFfMgOyl3/+Ia0OUqfSwEE09VmlIYobMymYs3BWai259aMWvMr6/
+ t/Kg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUthWwNEWPyYEL1b8kLIpRcmPHozu5j78GqU9RPxSiSdptcfcc5hChXaWia/D8sLucGhBKGdUE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwpCfO45DEYpgU9ob28KJ5wSRyz52g70AHqxudrNV2bfCz7oriB
+ BTKfKbyTv5J194szGfWIA1/PzzAZFa+LmiSpWmEh34TCPOZreA+T1F1gyuSsosI=
+X-Google-Smtp-Source: AGHT+IFN+28pR0C5IbvOnCUsfh4fcMB0wjjZmTRwiNn9WbMNVNx1jMV1r+3UGpvpNloY28ZxH4tLng==
+X-Received: by 2002:adf:a314:0:b0:371:9121:5643 with SMTP id
+ ffacd0b85a97d-37194314ba6mr2529651f8f.12.1723822626559; 
+ Fri, 16 Aug 2024 08:37:06 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3718989708esm3926363f8f.70.2024.08.16.08.37.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 16 Aug 2024 08:37:06 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Zixun LI <admin@hifiphile.com>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Lukasz
+ Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Stefano
+ Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, "NXP i.MX
+ U-Boot Team" <uboot-imx@nxp.com>
+Subject: Re: [PATCH] usb: gadget: udc: Fix duplicate uclass name
+In-Reply-To: <CA+GyqeZBzMct6nTKQx4k4cyxn8kdoQ69K58WOLdPgtLU_12ciA@mail.gmail.com>
+References: <20240802092820.917450-1-admin@hifiphile.com>
+ <87frrgolp3.fsf@baylibre.com>
+ <CA+Gyqeai5OZY96HU7uD0X5tbGVHODo1tOE51RYraMYwcoP2SrA@mail.gmail.com>
+ <87h6bosu6e.fsf@baylibre.com>
+ <CA+GyqeZBzMct6nTKQx4k4cyxn8kdoQ69K58WOLdPgtLU_12ciA@mail.gmail.com>
+Date: Fri, 16 Aug 2024 17:37:05 +0200
+Message-ID: <87ttfklbry.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20240816034905.3541020-1-trini@konsulko.com>
- <20240816034905.3541020-2-trini@konsulko.com>
-In-Reply-To: <20240816034905.3541020-2-trini@konsulko.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 16 Aug 2024 08:49:23 -0600
-Message-ID: <CAFLszThni1D1Q7ad_4YgpFj6rKASsZO4cSvsn8=3QDx5-TEwNQ@mail.gmail.com>
-Subject: Re: [PATCH 2/3] test/boot: Make BOOTSTD tests depend on UT_BOOTSTD
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,48 +101,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 15 Aug 2024 at 21:49, Tom Rini <trini@konsulko.com> wrote:
->
-> While we have a symbol for controlling if we will be testing BOOTSTD or
-> not, and it depends on SANDBOX, we do not control the building of
-> test/boot/ content correctly. Guard the current bootstd tests with
-> a check for UT_BOOTSTD and leave the measurement test available.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Simon Glass <sjg@chromium.org>
->
-> I'm unsure about the VPL and UPL tests, but they aren't causing failure
-> to build yet, so they can be sorted out later if they're a problem.
-> ---
->  test/boot/Makefile | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
+Hi Zixun,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On mar., ao=C3=BBt 13, 2024 at 15:39, Zixun LI <admin@hifiphile.com> wrote:
 
+> Hi Mattijs,
+>
+> On Tue, Aug 13, 2024 at 10:28=E2=80=AFAM Mattijs Korpershoek
+> <mkorpershoek@baylibre.com> wrote:
+>>
+>> Thank you for giving some board examples. I am still a bit unclear on
+>> the meaning of:
+>>
+>> """
+>> This breaks the capacity of using "usb" as DT alias sequence numbering
+>> which needs a fix afterwards.
+>> """
+>>
+>> I have added Jagan, Stefano, Fabio and the NXP team in CC. Does anyone
+>> of you have any concerns with this patch ?
+>>
+>> If someone could test it, that would be helpful.
+>
+> The device sequence number is affected by uclass_find_next_free_seq() in
+> uclass.c, in this function uclass name is used to determine the number.
+>
+> Since the gadget class's name changed to "usb_gadget" from "usb", alias
+> binding "usb1 =3D &usbotg;" is not effective anymore. As now it searches =
+for
+> "usb_gadget1 =3D &usbotg;".
+>
+> uclass_find_device_by_seq(UCLASS_USB_GADGET_GENERIC,) would fail as seque=
+nce
+> number is changed.
+
+Thank you for the explanation.
+Looking at the code, I don't see anyone calling:
+- uclass_find_device_by_seq(UCLASS_USB_GADGET
+
+And one occurrence of:
+- uclass_get_device_by_seq(UCLASS_USB_GADGET_GENERIC, index, &dev);
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
 >
-> diff --git a/test/boot/Makefile b/test/boot/Makefile
-> index 8ec5daa7bfe7..d8eded20d4ff 100644
-> --- a/test/boot/Makefile
-> +++ b/test/boot/Makefile
-> @@ -2,12 +2,15 @@
->  #
->  # Copyright 2021 Google LLC
+> I made a tentative fix in
+> https://lore.kernel.org/u-boot/20240731134257.686017-2-admin@hifiphile.co=
+m/
+> But Simon doesn't want to modify uclass_driver structure only for gadget
+> class.
 >
-> +ifdef CONFIG_UT_BOOTSTD
->  obj-$(CONFIG_BOOTSTD) += bootdev.o bootstd_common.o bootflow.o bootmeth.o
->  obj-$(CONFIG_FIT) += image.o
-> -obj-$(CONFIG_MEASURED_BOOT) += measurement.o
->
->  obj-$(CONFIG_EXPO) += expo.o
->  obj-$(CONFIG_CEDIT) += cedit.o
-> +endif
-> +
-> +obj-$(CONFIG_MEASURED_BOOT) += measurement.o
->
->  ifdef CONFIG_OF_LIVE
->  obj-$(CONFIG_BOOTMETH_VBE_SIMPLE) += vbe_simple.o
-> --
-> 2.34.1
->
+> Regards,
+> Zixun
