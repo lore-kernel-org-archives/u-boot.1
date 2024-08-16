@@ -4,103 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9FECC52D7D
-	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 23:01:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0A5AC3DA4A
+	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 23:54:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B323B88CBF;
-	Sat, 17 Aug 2024 00:59:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C3C1588C13;
+	Sat, 17 Aug 2024 01:54:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MOUC9WlB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OEjKeGtx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CABD88498; Fri, 16 Aug 2024 23:55:44 +0200 (CEST)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id 6A72E889FD; Sat, 17 Aug 2024 01:54:16 +0200 (CEST)
+Received: from mail-ua1-x930.google.com (mail-ua1-x930.google.com
+ [IPv6:2607:f8b0:4864:20::930])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4A4688C78
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 23:55:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EA52488C19
+ for <u-boot@lists.denx.de>; Sat, 17 Aug 2024 01:54:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-6b78c980981so12362576d6.2
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 14:55:41 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ua1-x930.google.com with SMTP id
+ a1e0cc1a2514c-842fe71877cso694371241.3
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 16:54:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723845340; x=1724450140; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=US3QjRDxgzh6m7OchTNqxOLW6eRUo6/FLFtC9yDCfkI=;
- b=MOUC9WlBYAONsnc2c3/nBQhlsG+jrEs83OZ+muzuDuHLttKOFn3AVj+M/jMTm4zYd+
- siaef1AU86HV+p5j1gX/rDhoOmouq3JmCp54hG0XftRKi7GbOLTryNLa5hHuTB2S/ouz
- 30vlFCFCk1efTS6UIBxeX7k31eHWJuTJlttth1vB9wkcN+qvAmvNg1IiYOJATCc3B5ZA
- qz22bWzUnEgM+gMH9tg32KYw4SJR6Fglf2PlNjLp9DWTF+Vl8NI4tPT8uktNwHLOmBWl
- aFMaQMeBqy/3f53IVNPBeizVsCoIWBakDo5XVwOZ6GZTEmR0XeSScx5b0GOVh2tmAzhk
- xTqA==
+ d=chromium.org; s=google; t=1723852447; x=1724457247; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=hJSAZvhrw2dyY3ZQ1GLIDci/8uELxLTS31S8JHKNt10=;
+ b=OEjKeGtxJfLsS1z5zWB//Ktv6dmIKNMBS4hYkP5vUibVTRMB+57baxX3fZDyLzijTP
+ CUmc6c2Ogl6xMkaCyYUY7nlqReOMej/ryPW5xU9cHFQ04MXXNzXnhKzxvRH9oA1QDQu3
+ qFDOEKWQjlV4DGkauMFgPHlN+IRxM/SyDqchs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723845340; x=1724450140;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=US3QjRDxgzh6m7OchTNqxOLW6eRUo6/FLFtC9yDCfkI=;
- b=NUebEhTIHc0M+FnoRqgMKBPoUVKZMsql2Yp8ysUAxRM2lWLQt8CZ5C3XJA0kfjeSG2
- v4+VtRWcObwDwO0zofSljSUyhKbYChch8P/DU4A9uYpcaDykg4/3Moyt9zS6TIrHGtNq
- OKAej/jkPnQgE9OkHqGow72Cp1ffR25rpz5i0qluClrwKsbZqlSkXwWitLJJYbOqk7T3
- TYVQb+aQKRaU2n9ij9FywW1dl8v9+Pjg8idmjmBQKjC7HJj+7VXTU3s5cm4in+IMwTVd
- Bmd//HFBKxDZpJ+hhZ1/ZRiCpsurMYP63vHpCp1izuR2sA6Y6cn+zN0M3/wiYhkUltSj
- EXkg==
-X-Gm-Message-State: AOJu0YxA4A9KazZIiExp5GzjwesHlaOYAV+orLWdEPeDzMult1kmvvFt
- +43rblNLiKeqnU8/4ACXyLyk6qvfqjPdNSw2PadjJjWjWuCSjZ38VPhTkI7OWCCUEHmXCMagq9r
- bbhA=
-X-Google-Smtp-Source: AGHT+IHO7kGzWxv2J9Tg+AKYAoYH4YhWYscKFTH118Fqqlsidq1GD/y7/U4h2AbW+d8722prXjc3Pg==
-X-Received: by 2002:a05:6214:162f:b0:6bf:81a2:2a86 with SMTP id
- 6a1803df08f44-6bf81a22fb3mr28041246d6.36.1723845339975; 
- Fri, 16 Aug 2024 14:55:39 -0700 (PDT)
-Received: from ubuntu.localdomain
- (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6bf6ff04ffbsm22044196d6.128.2024.08.16.14.55.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Aug 2024 14:55:39 -0700 (PDT)
-From: Raymond Mao <raymond.mao@linaro.org>
-To: u-boot@lists.denx.de
-Cc: manish.pandey2@arm.com, Raymond Mao <raymond.mao@linaro.org>,
- Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
- Mario Six <mario.six@gdsys.cc>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
- Sumit Garg <sumit.garg@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Alexander Gendin <agendin@matrox.com>,
- Jonathan Humphreys <j-humphreys@ti.com>,
- Eddie James <eajames@linux.ibm.com>, Anand Moon <linux.amoon@gmail.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Subject: [PATCH v6 28/28] configs: enable MbedTLS as default setting
-Date: Fri, 16 Aug 2024 14:44:17 -0700
-Message-Id: <20240816214436.1877263-29-raymond.mao@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240816214436.1877263-1-raymond.mao@linaro.org>
-References: <20240816214436.1877263-1-raymond.mao@linaro.org>
+ d=1e100.net; s=20230601; t=1723852447; x=1724457247;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hJSAZvhrw2dyY3ZQ1GLIDci/8uELxLTS31S8JHKNt10=;
+ b=erWg/9lOiKczfzuOebvrMZtIJdlkGWpkbebswWPRbEFFrZE0TGe9ykZxgu02OHOWFF
+ zPCKVrw7VNgk04T7V0lsAYU9gC8oMDyMZHmRq4JhBvOcfDBN4LfJDFpi0yL7qLFOOYGQ
+ p4vkDqzMh9qCrK1WsUtA4N/e55wORLs9yit5Z7wgJ9u4z6DttMJabnHmf9vw8pBYYf8W
+ MeaTc1oukIZL1oPyIohl6ZMi5sMJL5Pul0lcTFc7wFao3NUa58GqKjuwDVq/hDbjazvA
+ rKn7oVf50mO7EXgtREdJ9p5VRmpVsafW8D4A3V1JDiAGKeNZ7ahugUyayFmWiy3Sin9R
+ WObg==
+X-Gm-Message-State: AOJu0YxKYXqpS/TbcEfav8tfDsIZh6wcuojOfpD4cYvZh/x08ynbtrJo
+ /fx3hM/2rQi5/3wXL7Fd1t73wI46m0o1tZK6pqKa4UyswpqB8a58Z0rxjTTyxK5fgWuLjWvcZqu
+ z2rzLjGQvqMT7UNLLvruTbqoblxxSqwAzDzep
+X-Google-Smtp-Source: AGHT+IFI7m8N3VPOjRWtyB6tT/0XUb5uN6qddQZY7/SYAH/LnDfNauquMM7wEHMN7rS5M7ehqEzuZk2uL2EYdI1Qwag=
+X-Received: by 2002:a05:6102:41ac:b0:48f:eb5f:84d8 with SMTP id
+ ada2fe7eead31-497799a0cf5mr5768506137.27.1723852447627; Fri, 16 Aug 2024
+ 16:54:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 17 Aug 2024 00:59:01 +0200
+References: <20240815195746.749042-1-sjg@chromium.org>
+ <20240815195746.749042-3-sjg@chromium.org>
+ <20240816172237.GA1626301@bill-the-cat>
+In-Reply-To: <20240816172237.GA1626301@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 16 Aug 2024 17:53:57 -0600
+Message-ID: <CAFLszTh1Nig-hs+Gtxzg8f-=vE1z4BvNSfEyUGtatZohj0pnuQ@mail.gmail.com>
+Subject: Re: [PATCH v3 2/3] buildman: Allow skipping the dtc build
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Brandon Maier <brandon.maier@collins.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,48 +86,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable MbedTLS as default setting for qemu arm64 and sandbox.
+Hi Tom,
 
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
----
-Changes in v2
-- None.
-Changes in v3
-- None.
-Changes in v4
-- None.
-Changes in v5
-- Remove unused config MBEDTLS_LIB_TLS.
-- Remove EFI_SECURE_BOOT from the default config.
-Changes in v6
-- Remove MBEDTLS_LIB_CRYPTO and MBEDTLS_LIB_X509.
+On Fri, 16 Aug 2024 at 11:22, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Thu, Aug 15, 2024 at 01:57:45PM -0600, Simon Glass wrote:
+>
+> > For most boards, the device-tree compiler is built in-tree, ignoring the
+> > system version. Add a special option to skip this build. This can be
+> > useful when the system dtc is up-to-date, as it speeds up the build.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > (no changes since v1)
+> >
+> >  tools/buildman/builder.py       | 27 ++++++++++++++++++++++++++-
+> >  tools/buildman/builderthread.py |  4 ++--
+> >  tools/buildman/buildman.rst     |  3 +++
+> >  tools/buildman/cmdline.py       |  2 ++
+> >  tools/buildman/control.py       |  3 ++-
+> >  tools/buildman/test.py          | 31 +++++++++++++++++++++++++++++++
+> >  6 files changed, 66 insertions(+), 4 deletions(-)
+>
+> We should probably do this more generically, outside of buildman. We
+> have scripts/dtc-version.sh and if the system version isn't new enough
+> (and we just need to define whatever the minimum version is), then we
+> build our (not currently that new anymore) dtc instead.
 
- configs/qemu_arm64_defconfig | 1 +
- configs/sandbox_defconfig    | 1 +
- 2 files changed, 2 insertions(+)
+Yes I think I did a patch for that ages ago [1], but it was rejected.
 
-diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-index 7e166f43908..2a7885d2a68 100644
---- a/configs/qemu_arm64_defconfig
-+++ b/configs/qemu_arm64_defconfig
-@@ -67,4 +67,5 @@ CONFIG_TPM2_MMIO=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_PCI=y
- CONFIG_SEMIHOSTING=y
-+CONFIG_MBEDTLS_LIB=y
- CONFIG_TPM=y
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 484f9e1bf8d..2ca2e66d1de 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -344,6 +344,7 @@ CONFIG_FS_CBFS=y
- CONFIG_FS_CRAMFS=y
- CONFIG_ADDR_MAP=y
- CONFIG_CMD_DHRYSTONE=y
-+CONFIG_MBEDTLS_LIB=y
- CONFIG_ECDSA=y
- CONFIG_ECDSA_VERIFY=y
- CONFIG_TPM=y
--- 
-2.25.1
+I'd be very happy for it to be applied as I think it is a better
+solution than this one.
 
+I see that some poor sod tried to do this in Linux this morning.
+
+Regards,
+Simon
+
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20200427002929.239379-2-sjg@chromium.org/
