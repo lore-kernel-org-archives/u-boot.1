@@ -4,79 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F889C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 17:22:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 414C1C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 17:43:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 699B088B75;
-	Fri, 16 Aug 2024 19:22:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5FB6E88B83;
+	Fri, 16 Aug 2024 19:43:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lrqRIZRe";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="mCzX8Lor";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD5FC88B83; Fri, 16 Aug 2024 19:22:53 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AD9508870B; Fri, 16 Aug 2024 19:43:35 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 951BF88AA9
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 19:22:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D07788BC4
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 19:43:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-70968db52d0so2385751a34.3
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 10:22:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1723828960; x=1724433760; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=YUZvtWpnXu66NmMK/mC9Xqt0u9I8pEjcH/d7kHcnPkg=;
- b=lrqRIZRe7dnzKHDn2KQhcaV4WJZ4CAYL4dKHIgEVxg/AbOp5dHdR/0govvsC4rd42P
- /J/YMCUfsaAMPrOlga4PgloHKLE2BJ+/ojGFTfhm2Ic1fmSw9vfPZKeLuPIdCeFiB7Ey
- X/inTwWHdAMjn29y01UegB3ngFh63ZlSxyJWQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723828960; x=1724433760;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YUZvtWpnXu66NmMK/mC9Xqt0u9I8pEjcH/d7kHcnPkg=;
- b=Bj8ofHEv8GFkVnFLk4XdE8elQG2RXVbME0e6vjEfFMfufY32T7Umx9ttvceQ+dYP+0
- wwDwUnrB215sLktLnMVtKIQxRkhjTvlKSWL0CH+WggMvspvf1/99zmHTFt7GaWYtmuDd
- rZkXIiNsVMASjglMXRK0ru7jwkoRTENg9gyQCTmYPfjMs4UOXWkDpGp/CY91VTQ16NPR
- ddhnaCsibhapw1l7yyHZCShYTqbxmm5I4AN5ToUsLIYAwFKvj2VawF7V7ZD6gMq89SVO
- VDM0Vk+1yKf64zWKZ+La4OERgdaejJ6dgNMcvgsqo5zqd/WEsFfS4jPnoQwyBKFbz6wd
- 9Lmg==
-X-Gm-Message-State: AOJu0YxeQSKdub8Mc68LcdPU4KF21tEYuhb8LtyushFjp1m1vOhAQQSx
- vnPPBBWhL5+sdCLfvbAWNRjx02RMUsy4i8rYQqC3oRikGtbqSMI+BQ9Ud+SVRQM=
-X-Google-Smtp-Source: AGHT+IFL+KIZPjbeOu8gDYBC7lrxRufN61V0TVAQg4RJ9sHWSaK5Hg2JMlWp8KZYvGaH4BKGGT803Q==
-X-Received: by 2002:a05:6830:7110:b0:70c:a98c:4ed with SMTP id
- 46e09a7af769-70cac878379mr3790071a34.20.1723828960080; 
- Fri, 16 Aug 2024 10:22:40 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-236.totalplay.net.
- [189.203.97.236]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70ca639f414sm768531a34.23.2024.08.16.10.22.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Aug 2024 10:22:39 -0700 (PDT)
-Date: Fri, 16 Aug 2024 11:22:37 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Brandon Maier <brandon.maier@collins.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v3 2/3] buildman: Allow skipping the dtc build
-Message-ID: <20240816172237.GA1626301@bill-the-cat>
-References: <20240815195746.749042-1-sjg@chromium.org>
- <20240815195746.749042-3-sjg@chromium.org>
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 633BD236BB;
+ Fri, 16 Aug 2024 19:43:26 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1723830206;
+ bh=YXJUFf2wIWTkPbThICkbEjukTNbxxMF4IgXp+daOmIk=; h=From:To:Subject;
+ b=mCzX8LorFTOnH6m0tY0Vd1qtYHZzltkTF6sxF8T4olTrEAKuuH0pgJtPAuhKi4BDM
+ UHEM+1AMrgqaSJ8IWpgnbAefxwoxcPtxdPKpByp0ztAplziBUvk9n5CriiEJkcihXx
+ VnHhYAPLXfm8yuIOsjJithcEf1dAncd4ps2XIcvZVovaqJt3fU9EwYIN/IE9A7BItn
+ 5yzs2KwwrkLzUWbr9TFbVpYyHjHBULIWAvNuVkdIUQ79MQe/x7pkmqrAodJtWBaPKO
+ IQU/zLKmfWQP9eVtX347p1kQwsC9QoMfi2ILw9D2P2gojdtiBjZ4cIpOHy3VvBnVqR
+ AKp89OaI+DwiQ==
+Date: Fri, 16 Aug 2024 19:43:22 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Jonas =?iso-8859-1?Q?Schw=F6bel?= <jonasschwoebel@yahoo.de>,
+ Thierry Reding <treding@nvidia.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Martyn Welch <martyn.welch@collabora.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 1/1] board: tegra: convert boards to text env
+Message-ID: <20240816174322.GA4270@francesco-nb>
+References: <20240807121434.11761-1-clamor95@gmail.com>
+ <20240807121434.11761-2-clamor95@gmail.com>
+ <CAFLszTiK=i+_TDQuW3dSgEyZgbhqvzsKD+28WO_+9SQUUoBH4g@mail.gmail.com>
+ <CAPVz0n0_vv4-AXnYrvJy0w1HXBXrT_isNgp2-mehDda4XvzefA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oNLlbl8kcA72rsWE"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20240815195746.749042-3-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <CAPVz0n0_vv4-AXnYrvJy0w1HXBXrT_isNgp2-mehDda4XvzefA@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,55 +75,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello,
 
---oNLlbl8kcA72rsWE
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, Aug 16, 2024 at 07:51:25PM +0300, Svyatoslav Ryhel wrote:
+> > On Wed, 7 Aug 2024 at 06:14, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
+> > >
+> > > Convert boards to use text based env. This is the first stage of
+> > > conversion, common inclusions should be converted next.
+> > >
+> > > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> > > ---
+> > >  board/asus/grouper/grouper.env                | 15 +++
+> > >  .../asus/transformer-t20/transformer-t20.env  | 17 ++++
+> > >  .../transformer-t30/configs/tf600t.config     |  1 +
+> > >  board/asus/transformer-t30/tf600t.env         | 16 ++++
+> > >  .../asus/transformer-t30/transformer-t30.env  | 17 ++++
+> > >  board/htc/endeavoru/endeavoru.env             | 13 +++
+> > >  .../ideapad-yoga-11/ideapad-yoga-11.env       | 16 ++++
+> > >  board/lg/x3-t30/configs/p880.config           |  1 +
+> > >  board/lg/x3-t30/configs/p895.config           |  1 +
+> > >  board/lg/x3-t30/p880.env                      | 15 +++
+> > >  board/lg/x3-t30/p895.env                      | 13 +++
+> > >  board/microsoft/surface-rt/surface-rt.env     | 14 +++
+> > >  board/nvidia/cardhu/cardhu.env                |  2 +
+> > >  board/nvidia/p2771-0000/p2771-0000.env        | 22 +++++
+> > >  board/nvidia/p3450-0000/p3450-0000.env        |  7 ++
+> > >  board/toradex/apalis-tk1/apalis_tk1.env       | 45 +++++++++
+> > >  board/toradex/apalis_t30/apalis_t30.env       |  9 ++
+> > >  board/toradex/colibri_t20/colibri_t20.env     |  3 +
+> > >  board/toradex/colibri_t30/colibri_t30.env     |  9 ++
+> > >  board/wexler/qc750/qc750.env                  | 15 +++
+> > >  configs/apalis-tk1_defconfig                  |  3 +-
+> > >  configs/apalis_t30_defconfig                  |  1 +
+> > >  configs/cardhu_defconfig                      |  1 +
+> > >  configs/colibri_t20_defconfig                 |  1 +
+> > >  configs/colibri_t30_defconfig                 |  1 +
+> > >  configs/endeavoru_defconfig                   |  1 +
+> > >  configs/grouper_common_defconfig              |  1 +
+> > >  configs/ideapad-yoga-11_defconfig             |  1 +
+> > >  configs/p2771-0000-000_defconfig              |  1 +
+> > >  configs/p3450-0000_defconfig                  |  1 +
+> > >  configs/qc750_defconfig                       |  1 +
+> > >  configs/surface-rt_defconfig                  |  1 +
+> > >  configs/transformer_t20_defconfig             |  1 +
+> > >  configs/transformer_t30_defconfig             |  1 +
+> > >  include/configs/apalis-tk1.h                  | 58 ------------
+> > >  include/configs/apalis_t30.h                  | 12 ---
+> > >  include/configs/cardhu.h                      |  4 -
+> > >  include/configs/colibri_t20.h                 | 11 ---
+> > >  include/configs/colibri_t30.h                 | 12 ---
+> > >  include/configs/endeavoru.h                   | 43 ---------
+> > >  include/configs/grouper.h                     | 45 ---------
+> > >  include/configs/ideapad-yoga-11.h             | 58 ------------
+> > >  include/configs/p2771-0000.h                  | 20 ----
+> > >  include/configs/p3450-0000.h                  | 13 ---
+> > >  include/configs/qc750.h                       | 42 ---------
+> > >  include/configs/surface-rt.h                  | 18 ----
+> > >  include/configs/transformer-common.h          | 91 -------------------
+> > >  include/configs/transformer-t20.h             |  4 +-
+> > >  include/configs/transformer-t30.h             |  6 +-
+> > >  include/configs/x3-t30.h                      | 44 ---------
+> > >  include/env/nvidia/prod_upd.env               | 60 ++++++++++++
+> > >  51 files changed, 332 insertions(+), 476 deletions(-)
+> > >  create mode 100644 board/asus/grouper/grouper.env
+> > >  create mode 100644 board/asus/transformer-t20/transformer-t20.env
+> > >  create mode 100644 board/asus/transformer-t30/tf600t.env
+> > >  create mode 100644 board/asus/transformer-t30/transformer-t30.env
+> > >  create mode 100644 board/htc/endeavoru/endeavoru.env
+> > >  create mode 100644 board/lenovo/ideapad-yoga-11/ideapad-yoga-11.env
+> > >  create mode 100644 board/lg/x3-t30/p880.env
+> > >  create mode 100644 board/lg/x3-t30/p895.env
+> > >  create mode 100644 board/microsoft/surface-rt/surface-rt.env
+> > >  create mode 100644 board/nvidia/cardhu/cardhu.env
+> > >  create mode 100644 board/nvidia/p2771-0000/p2771-0000.env
+> > >  create mode 100644 board/nvidia/p3450-0000/p3450-0000.env
+> > >  create mode 100644 board/toradex/apalis-tk1/apalis_tk1.env
 
-On Thu, Aug 15, 2024 at 01:57:45PM -0600, Simon Glass wrote:
+...
 
-> For most boards, the device-tree compiler is built in-tree, ignoring the
-> system version. Add a special option to skip this build. This can be
-> useful when the system dtc is up-to-date, as it speeds up the build.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
-> (no changes since v1)
->=20
->  tools/buildman/builder.py       | 27 ++++++++++++++++++++++++++-
->  tools/buildman/builderthread.py |  4 ++--
->  tools/buildman/buildman.rst     |  3 +++
->  tools/buildman/cmdline.py       |  2 ++
->  tools/buildman/control.py       |  3 ++-
->  tools/buildman/test.py          | 31 +++++++++++++++++++++++++++++++
->  6 files changed, 66 insertions(+), 4 deletions(-)
+> Francesco, have you checked this commit on apalis-tk1?
 
-We should probably do this more generically, outside of buildman. We
-have scripts/dtc-version.sh and if the system version isn't new enough
-(and we just need to define whatever the minimum version is), then we
-build our (not currently that new anymore) dtc instead.
+Nope, I was not able and I do not see myself looking into it in the next
+few weeks because of other personal and work priorities.
 
---=20
-Tom
+I honestly do not expect anybody going to update U-Boot on apalis-tk1
+anytime soon, and the product is discontinued, given that
 
---oNLlbl8kcA72rsWE
-Content-Type: application/pgp-signature; name="signature.asc"
+Acked-by: Francesco Dolcini <francesco.dolcini@toradex.com> # Toradex Apalis TK1
 
------BEGIN PGP SIGNATURE-----
+If we ever find issue, we'll fix those.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAma/itMACgkQFHw5/5Y0
-tyxLBwv/X4u4fs8TZTZF90SXipOM36CqRJPemqC0odLZhxwZ6gtJ0SWsK5tWaGUQ
-uMcPUQrcisAgAD+LO4whaLZRt0uLb6TD67U3qg0KOhGuXwl86eryoZ/10n2aqXcf
-4zMgdrNnJAP2wQKoeOYFKQhCoayPfVV62q9nvzYfmUkkd0+Cvl2xf++EJuFlr1ya
-0sFDroguwtOCDOwpskp8H6s5vTfNJVVEx4ceaGjvzvYpVFAd5xPA+x7dwFg4c+Gj
-d5pyz54VXcGjr6hFX9x9KyN214x/K7jfgER/pNCfMz0xL4+bUVI9z8jtdKPMbOjK
-/37Uqs054xLqsBCwNArSMoT2GdRKe+HWcYk/x+pRt4lAeQ+oY092KMQvKq/FTxKi
-0MpOHGE6JD/8viKsFFMeuhXPNeJXSy/onDAjV9ydW+n5Tr7vNx4dW5mLCe3GLIO8
-YuW4CCQEvEAmaqnZl0OwEo54eHxrPOd6oI1F43DQHtKNI8vd5SX0lwDKm4kmUmLR
-/l6Z/zWz
-=SM8B
------END PGP SIGNATURE-----
+Thanks,
+Francesco
 
---oNLlbl8kcA72rsWE--
