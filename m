@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFCA6C3DA4A
-	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 16:21:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76682C3DA4A
+	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 16:49:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D24C88618;
-	Fri, 16 Aug 2024 18:21:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 982D088B6D;
+	Fri, 16 Aug 2024 18:49:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z2soAGoX";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jnd3e99v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C959E88B6D; Fri, 16 Aug 2024 18:21:39 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id B11DF88B83; Fri, 16 Aug 2024 18:49:20 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C4638852A
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 18:21:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A144188A99
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 18:49:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-3719398eafcso667847f8f.1
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 09:21:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-368440b073bso1202016f8f.0
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 09:49:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1723825286; x=1724430086; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=IIu91GM1o9Tjpoe+vCe614wbBbUiIJB+JAXjwlYnSl8=;
- b=Z2soAGoX6edK2kq3mXL1gVrVy/70mCJ/8Pd9Ftt16NXbvZuuR+NsTMkSzbY0UKIcZc
- a8FHEXxJ/wzB32lY8TRcUklFigvatGkkJKWBDuz0ElaLbYfn6PfmnbVTXHtW/xWB0f+c
- 6G1a/Y0835qq4qPz4RuctzPARqFTDGlklsLB+fJlqY3hNXdWGRp/ITRHV40nXI8OWFSW
- 3mjjHxh7j/ciB+y+bvA/f7HhWeVIlT30oeqbC6JuaMQBM2AhdlfdykOM2hnUfcOzP8hd
- TnyXE18xYuGixQSBaA9XI4SoVd/VE5YRh2z/jnVOuolNf33b6MWaVv1zHil1yR6vWNUc
- O2lA==
+ d=gmail.com; s=20230601; t=1723826954; x=1724431754; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gjoTAoFnbfjcYETe2o7K9loyhEn2KZxwP78OP4cMS4c=;
+ b=jnd3e99vHgdob5YiNsSIPTGbn05DRGSWiKmB1Gqf5OAu9PZVYivhdYQ2aIYsNqko9p
+ sMNz/9LMkGgILDqLWD8qJhr3PgKGSjZnJ2uwxSv+pbUzlkP8mDYKjGQKseFqNrEeQ1DX
+ +3DJY4pcr2yrA9eWoaTjVZcYv8d/cu8JYLT2iFhbta5ZERDRMjjlP1DeiMObE6QSv78K
+ Y+M22gX2IshJsSsYi1J0TIjqQ6Q25stJjyrGZAVZxvE7nM6PNoBbpzppQBWCdlftAVpN
+ 4k3Pt3NnCQqGgJrXiwk++68Yh6qBPRIU+dtYwdnt8MUp2eOB7HJSOS/0+O9hz8fZ6FWN
+ IZhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723825286; x=1724430086;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=IIu91GM1o9Tjpoe+vCe614wbBbUiIJB+JAXjwlYnSl8=;
- b=NKnKLcdEoxYHUKGaOXES+Ifl/95Jkk2/rFKftnzJRVPBMRzDGs9PfuWzT+laPj5txv
- o9Dy3bTj3tRm6umQdigcD97JdDeH9hZGTmnI7Se3ibnpL6j1+eRfFJ65wGfIrGOZXfzo
- wlko6LZtCRBPhLN5kyk0ajH/kJAY5dBd7wVVZo6xdiD1f7oksr51m+R76j/gj1zlJ1kZ
- akeUmcNL5NAlDlVA1OG/7QhPmkJfZg7jnuz1AekRyYBejO+/cS8kHJfAQ3rzp2ydi22m
- DaDMRI/qUasQLJgNswaj+zgkGvJl62Ot1pkxAnJ/wGJbX4KI/9JOogzRXQPzsSJobyIr
- +Iiw==
-X-Gm-Message-State: AOJu0YylxER4h+bkEKBNR9KB11I6yuhNBre9ox0Ekxq3pk3cUyKvI/o4
- 4zBx3d34wAMl5AkhHQTtQRDGs0HzSVfKhqP1vdroY4+/aQznLU7XZ27hk+giF0w=
-X-Google-Smtp-Source: AGHT+IEXTQHo0W1mf28+HYWnJdnh3VaQERMkdfR/00ybJ6LEFULzc3gD8QHGZZ2qjck7cFpvTtLAYA==
-X-Received: by 2002:adf:f8c9:0:b0:36b:bb84:33e2 with SMTP id
- ffacd0b85a97d-3719465f62bmr2616721f8f.37.1723825285712; 
- Fri, 16 Aug 2024 09:21:25 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:1dfa:e7ae:e33:dd21?
- ([2a01:e0a:3cb:7bb0:1dfa:e7ae:e33:dd21])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-371898aadc4sm3945895f8f.96.2024.08.16.09.21.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 16 Aug 2024 09:21:25 -0700 (PDT)
-Message-ID: <d9fe273b-ab60-44eb-bef8-cbde3af8ab1b@linaro.org>
-Date: Fri, 16 Aug 2024 18:21:24 +0200
+ d=1e100.net; s=20230601; t=1723826954; x=1724431754;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gjoTAoFnbfjcYETe2o7K9loyhEn2KZxwP78OP4cMS4c=;
+ b=WuJT/cyvPKip6c/G1IW2kGQz5vfEjnOSVSZKhdYK8YeOTWihWlno85M+u98/B1zXgT
+ Y3seWnDmuf421P4kc0Xvu/8jxKWBRMK7FENJPfimRJPMpqzAgnGgaOLf4k7tv3v13TjM
+ sPQFyR08Mr0ZfcdhiI6G9Fzr2dK6k3NbPbrRB+2UWC1YHbviqrCn4hsbEA/p27FqGd32
+ 6LF6ypvuGhnQigNbegUinCHGkAWSDghqnwemkTVjLYSltanfM3Eg/alOLkNZ0jPu4zTY
+ GxVAkQGrJx0nrp/fqZa+gChMys9n6Wit+zdmE+V6M1986pNCzTaQbqD+6Vtl9VzaAjzQ
+ CMmA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUaPf4R0ijsLYD7xuoFuOQvshaLznZD5SSm6WuJLa7SBb94ATOrD9zSOHIJQgZI+Dd2HpdYQlDlumluCFyfJmBEHs96Wg==
+X-Gm-Message-State: AOJu0YxwvECbdX/f0WkUTdF7qtScos9KK1PlJRbioAPgxjWvMiqLJpkC
+ Xq8Cuk0znzpaqmBJqiTXo3CPp7YAP+eLI0FL6L+3lqUw1+nKUBR9L2aRhGL5XV9xWlwtUKSRCbb
+ V5P9UTMHnO/lhlChogBtpMqxQVes=
+X-Google-Smtp-Source: AGHT+IHMHxrJIcFF4p3hw1M1tcTdma7wTzOq/qvaqYnwWaSOYc3J7ZY0nYuexfKomYKGEKqP2cKR4avUCzCDttZN5GE=
+X-Received: by 2002:a05:6000:2a11:b0:371:938c:6f50 with SMTP id
+ ffacd0b85a97d-371938c70e7mr3104263f8f.16.1723826954172; Fri, 16 Aug 2024
+ 09:49:14 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 00/23] Introduce the lwIP network stack
+References: <20240807121024.11318-1-clamor95@gmail.com>
+ <20240807121024.11318-2-clamor95@gmail.com>
+ <0C2B63EE-A95F-424A-9143-6A0C2164F666@gmx.de>
+ <CAPVz0n1CvhkCCNDPSrPvUweBTzTFEUDFHcAP5B7Wno8RefKpPA@mail.gmail.com>
+ <20240809220244.GA1626301@bill-the-cat>
+ <CAPVz0n3cw3_MrKjHWtrt1mKiDkD4LWcatBHqvKTMna9dKK6KXw@mail.gmail.com>
+ <20240812184209.GH1626301@bill-the-cat>
+In-Reply-To: <20240812184209.GH1626301@bill-the-cat>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Fri, 16 Aug 2024 19:49:03 +0300
+Message-ID: <CAPVz0n1Y5w7K1SWX1y7H+JLcrbgEk90Xg8TiE_BrFYAV==c=uw@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] disk: add TegraPT support
 To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>
-References: <cover.1723050310.git.jerome.forissier@linaro.org>
- <20240807204400.GJ1626301@bill-the-cat>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20240807204400.GJ1626301@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Anand Moon <linux.amoon@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,58 +97,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Since there were no objections (apart help Kconfig expansion which I
+will add) or improvement suggestions to this patch for over 2 weeks
+(first patchset submitted on 01.08.24) I am picking it into Tegra
+custodian tree.
 
-
-On 8/7/24 22:44, Tom Rini wrote:
-> On Wed, Aug 07, 2024 at 07:11:44PM +0200, Jerome Forissier wrote:
-> 
->> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
->> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
->> stack [2] [3] as an alternative to the current implementation in net/,
->> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
->> reasons for doing so are:
->> - Make the support of HTTPS in the wget command easier. Javier T. and
->> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
->> so. With that it becomes possible to fetch and launch a distro installer
->> such as Debian etc. using a secure, authenticated connection directly
->> from the U-Boot shell. Several use cases:
->>   * Authentication: prevent MITM attack (third party replacing the
->> binary with a different one)
->>   * Confidentiality: prevent third parties from grabbing a copy of the
->> image as it is being downloaded
->>   * Allow connection to servers that do not support plain HTTP anymore
->> (this is becoming more and more common on the Internet these days)
->> - Possibly benefit from additional features implemented in lwIP
->> - Less code to maintain in U-Boot
->>
->> Prior to applying this series, the lwIP stack needs to be added as a
->> Git subtree with the following command:
->>
->>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savannah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
-> 
-> For v9, I think it would be good to do a CI run with NET_LWIP default
-> and seeing what fails from that too. There's a few problems still
-> leading to a lot of failures, in that case. Thanks.
+=D0=BF=D0=BD, 12 =D1=81=D0=B5=D1=80=D0=BF. 2024=E2=80=AF=D1=80. =D0=BE 21:4=
+2 Tom Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
 >
-
-See here: https://github.com/u-boot/u-boot/pull/635
-
-I fixed a number of issues, see the commit descriptions. As for the
-remaining ones:
-- There is no http server in the CI so the wget test I added fails
-- tftp is super slow in QEMU (~145 KiB/s) which causes timeouts. This is
-for two reasons: (1) the tftp windowsize option is not supported in lwIP
-(while the legacy NET does support it) so the sender waits for an ACK
-before sending a new packet; and (2) the latency is very high due to
-memcpy() being incredibly slow in QEMU (I am mainly referring to the
-memcpy() call in tftp_write() in net/lwip/tftp.c). I measured ~20-60 ms
-to copy a few hundred bytes (!) and if CONFIG_USE_ARCH_MEMCPY is enabled
-it is slightly better but not much (~15 ms). Also it seems the QEMU
-networking emulation is fragmenting the UDP packets because with
-CONFIG_TFTP_BLOCKSIZE=1468 the tftp_write() function never receives
-1468 bytes but only a few hundreds at a time (max 544 bytes).
-- The r2dplus_* tests fail for reasons I don't understand.
-
-Thanks,
--- 
-Jerome
+> On Sat, Aug 10, 2024 at 08:29:57AM +0300, Svyatoslav Ryhel wrote:
+>
+> > =D1=81=D0=B1, 10 =D1=81=D0=B5=D1=80=D0=BF. 2024=E2=80=AF=D1=80. =D0=BE =
+01:02 Tom Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
+> > >
+> > > On Fri, Aug 09, 2024 at 08:57:03AM +0300, Svyatoslav Ryhel wrote:
+> > > > =D0=BF=D1=82, 9 =D1=81=D0=B5=D1=80=D0=BF. 2024=E2=80=AF=D1=80. =D0=
+=BE 08:49 Heinrich Schuchardt <xypron.glpk@gmx.de> =D0=BF=D0=B8=D1=88=D0=B5=
+:
+> > > > >
+> > > > >
+> > > > >
+> > > > > Am 7. August 2024 14:10:24 MESZ schrieb Svyatoslav Ryhel <clamor9=
+5@gmail.com>:
+> > > > > >TegraPT is compatible with EFI part but it can't pass Protective=
+ MBR check.
+> > > > > >Skip this check if CONFIG_TEGRA_PARTITION is enabled, storage uc=
+lass is MMC
+> > > > > >and devnum is 0. Note, eMMC on supported devices MUST be aliased=
+ to mmc0.
+> > > > >
+> > > > > Why wouldn't you use U-Boot's gpt command to fix the non-conforma=
+nt partition table?
+> > > > >
+> > > >
+> > > > I would love to, but I am forced to use TegraPT and DON'T modify it=
+.
+> > > > Tegra114 bootloader is RSA signed and there is no possible way to
+> > > > replace it with open source one unless vendor allows this. SO I am
+> > > > stuck with vendor bootloader to chainload from which enforces Tegra=
+PT
+> > > > as well. Modification of existing partition table can irreversibly
+> > > > brick the device.
+> > >
+> > > Can we please incorporate some of this information to the help text, =
+so
+> > > it's clear what the use case is? Thanks.
+> >
+> > Sure, though usually those who know what they are dealing with will
+> > understand. BTW, Tom, may I pick patchsets assigned to Thierry (tagr)
+> > via Tegra custodian tree if they pass? Even if they, apart being
+> > related to Tegra, belong to different subsystems (like this patch and,
+> > for example, tegra gpio driver changes).
+>
+> Yes, that's fine.
+>
+> --
+> Tom
