@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6791DC52D7C
-	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 01:34:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18FA2C52D7D
+	for <u-boot@archiver.kernel.org>; Fri, 16 Aug 2024 01:35:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B6CC88A99;
-	Fri, 16 Aug 2024 03:34:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0987488AC0;
+	Fri, 16 Aug 2024 03:34:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GxlqvauH";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="k4qGYB3R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 399A988A54; Fri, 16 Aug 2024 03:34:48 +0200 (CEST)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
+ id 200E088AE8; Fri, 16 Aug 2024 03:34:55 +0200 (CEST)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8946288A9F
- for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 03:34:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 931D488AB9
+ for <u-boot@lists.denx.de>; Fri, 16 Aug 2024 03:34:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-2d1daa2577bso1129743a91.2
- for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 18:34:45 -0700 (PDT)
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-6bce380eb96so1025945a12.0
+ for <u-boot@lists.denx.de>; Thu, 15 Aug 2024 18:34:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723772082; x=1724376882; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1723772085; x=1724376885; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5qMpV+NFYfJS8Jo3cj4bwaHyhGUlye3p+leMkUOl6eI=;
- b=GxlqvauHNZ2WOZyJPmRZOS+lG1k7Y97xEJqdSA/HE7FVrF91M7Cd0JOhZTJWlkpxrv
- 495Hs/MpS1dnM8xGgEkdD387agzRcjuWU0PygZSEFZHgIDqGsveGvmCkKNGrbRf6MLIm
- xSuZdYCIJh9JURgyd7+tRarUJc7vzyAOuYyhE=
+ bh=YTeSmgMK6P2cC8r5X+tpwH5oJB9f5jMDPmWox2K7LtM=;
+ b=k4qGYB3RDkQfLUUfyTp5JtpVh5Mz/z0F0xzkybqW/gfr2piy61S8sibDKMh0ZWROTe
+ 30MjQWxBfdXfISARNKXr03COog976OAiH89DuaUJ5k0yqs0yIOrVbElsp55WEHD/l1vX
+ zOxQe+xEeJkHzE5HXkUIw6Rj6FvEeXnoIuLWI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723772082; x=1724376882;
+ d=1e100.net; s=20230601; t=1723772085; x=1724376885;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5qMpV+NFYfJS8Jo3cj4bwaHyhGUlye3p+leMkUOl6eI=;
- b=qPzNyJZKO9+BdquSr6LpmlCjTuU/wKdRPdsLMwZ1mpSlVSGuJsf2WmmSqktK6nK+RI
- IFg764EH1x+rea6YxfqLAtaNi/SV4Hcp30D8ik+8QPNRZwGIXKDVvTS3bCKzqdYXyE1c
- ozpaWU1vKrinmMOI+Fs9FtUmZamVCugDPHYX1M6ZRdj/t2PZkS4YyM7xP1834pd9+p9v
- ZZbjliQNB9OFiBrEyK6LRCyO2z7DCsShnMNOYSnxL7zMqFa7qMLhlTO+ed72TRRLkoZ6
- zFOSTcK1FCgDOZ3SqnZJm8vB5ilEbco8TQKjSdj/np/dWWbn2W2OnNQzA5lsnch43aNs
- s+qA==
+ bh=YTeSmgMK6P2cC8r5X+tpwH5oJB9f5jMDPmWox2K7LtM=;
+ b=lJY7Kh7Ft9rEFOe2NeGyKJ+s6zExQP4CavNWPVWCRXDGv9lDmbHD1i/8Cmjh70OFEX
+ XgZLuimbzejGFEb2q9uxndpf6YURx8QdMG+J0TstSGCfr7smDRfwRsYugQGq1fuRzr+I
+ Bk6FWEDe4BmqN2YavPsCqDxgaRD6G+CNQIkiL7xpCBwJd9xpcE5BXTjlGFBhadPCGp6R
+ POwlXo8qo+h1Is6zoXxZEeIlue3cnXzqMR8vhtFjv2lihFOA+d/yCDJoTFbjUOb6FtYZ
+ xZKNIoLfOkmkHmhGMRDyRRdmZg4QSmmS21+Pcw0sRf3rnwjsrn/pYPZ2A3mr32SanALW
+ +ZkQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWiI8/yYfwLIc5dtsme8/5Via3QROqM7D3aFQVT7l8EfzlsKSOJ8K9OwnK85Kd0rkShEOnGH1U=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw/HxzcqFW/+9r1Yf3EprfpSkP1cmgwkSTzzRgQ+YWdv/Ic8hhv
- y7HbT3OnrZo9Z6yxFjPbxXIaJE/yM251TNxDh4iAeP/W5cZ+pVDdB86XKnqQYx8kbiYsiNZokpL
- vQncxn7oMDLfnUlR9fE9MwU5Bld+GbIoZAmSB
-X-Google-Smtp-Source: AGHT+IHwfwn6EAS9tYpexqkRQ5N23oULgGKbtpx0rP6QqN1SxEpPcfdLJ97WTq6y3dnxKdGOYlPAjIRnDZRFNuttFIo=
-X-Received: by 2002:a17:90a:f16:b0:2c9:e44:fb98 with SMTP id
- 98e67ed59e1d1-2d3e0870d16mr1620286a91.37.1723772082530; Thu, 15 Aug 2024
- 18:34:42 -0700 (PDT)
+ AJvYcCUWvXzNWre1VzMksDEuqLzb8vuyVSnv7bsN913N0PKnu1t1pOAitdnDljJWwKXxfQ84nm4DNPJFBOQaTc3GycOWTw+lcA==
+X-Gm-Message-State: AOJu0Yzj4gPtRISh+rq7cG+jQhxi+Vrcx5ziRRvnEs4EI7lBkjk0ZMfz
+ u3g6/a3Fbrvjtpry1ScXd7/zP8MjeOIwnU0+B/0uR+SKIAakFaf8Gj23fq69w1wlpQpTcZtNylN
+ F0PQH1Zn9c7XYzwZziHHMieXC3whM9upEuRxY
+X-Google-Smtp-Source: AGHT+IEgy8+c8f2bgZjAURzkQTz4cuo9Bu9eq6SsB5A0vdSAz79bQxpgl9Y+u8rIcalLBj64RGAMEFisizgeQuEOg2E=
+X-Received: by 2002:a17:90b:1d09:b0:2d3:c664:e253 with SMTP id
+ 98e67ed59e1d1-2d3dfc6a12amr1732853a91.10.1723772084945; Thu, 15 Aug 2024
+ 18:34:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240814134518.82692-1-ilias.apalodimas@linaro.org>
- <CAFLszTjrBL-GonZKqp3Ab5vQPMZ+BZu8V21y4z0qBCGuH64uJw@mail.gmail.com>
- <CAC_iWjKF0DMfJza-ojYXPg_tHL14DTdK+GzhxhEX3etpaNiK8Q@mail.gmail.com>
-In-Reply-To: <CAC_iWjKF0DMfJza-ojYXPg_tHL14DTdK+GzhxhEX3etpaNiK8Q@mail.gmail.com>
+References: <20240806125850.2316956-1-sjg@chromium.org>
+ <20240806125850.2316956-38-sjg@chromium.org>
+ <23093165-6af9-4582-8448-7bbae3c86be2@gmx.de>
+ <20240807015613.GD1626301@bill-the-cat>
+ <CAFLszThhn0240xt1j6GQB9QTKxiHiAg6J3vMXCnHBE15iYZSkA@mail.gmail.com>
+ <20240808200634.GR1626301@bill-the-cat>
+ <CAFLszThM=23AXCOfZ_uOyGGDQTRurDpAjR-t8X_NHjz4LgQ9SA@mail.gmail.com>
+ <20240814175601.GP1626301@bill-the-cat>
+ <CAFLszThU+vLUm_fveWUgV3Qt3J+F3=Sr1aBgbc4T5z8zJJz5sw@mail.gmail.com>
+ <20240815225626.GW1626301@bill-the-cat>
+In-Reply-To: <20240815225626.GW1626301@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 15 Aug 2024 19:34:30 -0600
-Message-ID: <CAFLszTjfhtRqRTdQOi-Dhzpa_aVSVSU8FjWmXEKz5vi=_0i=BA@mail.gmail.com>
-Subject: Re: [PATCH] Kconfig: clean up the efi configuration status
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 15 Aug 2024 19:34:33 -0600
+Message-ID: <CAFLszThQy-zVnZxfjcUCaerpWB5-Z1JuAt10o2-i3unbY_Nghw@mail.gmail.com>
+Subject: Re: [PATCH v2 37/39] efi: Avoid using sandbox virtio devices
+To: Tom Rini <trini@konsulko.com>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Anton Antonov <Anton.Antonov@arm.com>, 
- Tom Rini <trini@konsulko.com>, Ian Roberts <ian.roberts@timesys.com>, 
- Kever Yang <kever.yang@rock-chips.com>, Shengyu Qu <wiagn233@outlook.com>, 
- Jesse Taube <mr.bossman075@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Greg Malysa <greg.malysa@timesys.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Sean Anderson <sean.anderson@seco.com>, Anand Moon <linux.amoon@gmail.com>, 
- Michal Simek <michal.simek@amd.com>, AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Eddie James <eajames@linux.ibm.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Raymond Mao <raymond.mao@linaro.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,81 +97,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Tom,
 
-On Thu, 15 Aug 2024 at 15:11, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Thu, 15 Aug 2024 at 16:56, Tom Rini <trini@konsulko.com> wrote:
 >
+> On Thu, Aug 15, 2024 at 09:33:18PM +0100, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Wed, 14 Aug 2024 at 11:56, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Sun, Aug 11, 2024 at 08:50:21AM -0600, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Thu, 8 Aug 2024 at 14:06, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Thu, Aug 08, 2024 at 12:44:05PM -0600, Simon Glass wrote:
+> > > > > > Hi Heinrick, Tom,
+> > > > > >
+> > > > > > On Tue, 6 Aug 2024 at 19:56, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Wed, Aug 07, 2024 at 03:47:21AM +0200, Heinrich Schuchardt wrote:
+> > > > > > > > On 06.08.24 14:58, Simon Glass wrote:
+> > > > > > > > > While sandbox supports virtio it cannot support actually using the block
+> > > > > > > > > devices to read files, since there is nothing on the other end of the
+> > > > > > > > > 'virtqueue'.
+> > > > > > > > >
+> > > > > > > > > A recent change makes EFI probe all block devices, whether used or not.
+> > > > > > > > > This is apparently required by EFI, although it violates U-Boot's
+> > > > > > > > > lazy-init principle.
+> > > > > > > > >
+> > > > > > > > > We cannot just drop the virtio devices as they are used in sandbox tests.
+> > > > > > > > >
+> > > > > > > > > So for now just add a special case to work around this.
+> > > > > > > > >
+> > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > ---
+> > > > > > > > >
+> > > > > > > > > (no changes since v1)
+> > > > > > > > >
+> > > > > > > > >   lib/efi_loader/efi_disk.c | 14 +++++++++++++-
+> > > > > > > > >   1 file changed, 13 insertions(+), 1 deletion(-)
+> > > > > > > > >
+> > > > > > > > > diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+> > > > > > > > > index 93a9a5ac025..2e1d37848fc 100644
+> > > > > > > > > --- a/lib/efi_loader/efi_disk.c
+> > > > > > > > > +++ b/lib/efi_loader/efi_disk.c
+> > > > > > > > > @@ -838,8 +838,20 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
+> > > > > > > > >   efi_status_t efi_disks_register(void)
+> > > > > > > > >   {
+> > > > > > > > >     struct udevice *dev;
+> > > > > > > > > +   struct uclass *uc;
+> > > > > > > > >
+> > > > > > > > > -   uclass_foreach_dev_probe(UCLASS_BLK, dev) {
+> > > > > > > > > +   uclass_id_foreach_dev(UCLASS_BLK, dev, uc) {
+> > > > > > > > > +           /*
+> > > > > > > > > +            * The virtio block-device hangs on sandbox when accessed since
+> > > > > > > > > +            * there is nothing listening to the mailbox
+> > > > > > > > > +            */
+> > > > > > > > > +           if (IS_ENABLED(CONFIG_SANDBOX)) {
+> > > > > > > > > +                   struct blk_desc *desc = dev_get_uclass_plat(dev);
+> > > > > > > > > +
+> > > > > > > > > +                   if (desc->uclass_id == UCLASS_VIRTIO)
+> > > > > > > > > +                           continue;
+> > > > > > > >
+> > > > > > > > We should avoid depending on the sandbox everywhere.
+> > > > > > > >
+> > > > > > > > Please, fix the problem in the sandbox driver.
+> > > > > > > >
+> > > > > > > > If you cannot fix it, run the tests involving virtio on QEMU instead of
+> > > > > > > > the sandbox.
+> > > > > >
+> > > > > > Which test? All of the EFI tests fail due to this problem. The test
+> > > > > > actually has nothing to do with virtio, it is just that EFI goes and
+> > > > > > probes every single block device, since [1].
+> > > > >
+> > > > > Aren't we running "the tests" on other platforms such as QEMU today?
+> > > > >
+> > > > > > > This is an area we go back-and-forth on but, yes, IMHO, if we can't
+> > > > > > > easily provide a virtio device for sandbox, QEMU is right there and what
+> > > > > > > this is for, so I see sandbox as more useful as build rather than
+> > > > > > > runtime checking in this case.
+> > > > > >
+> > > > > > The best solution would be to implement a simple emulator, like we do
+> > > > > > in other places for sandbox. At present virtio_sandbox_notify() is
+> > > > > > empty.
+> > > > > >
+> > > > > > I don't mind working on that, but would like to get a temporary
+> > > > > > solution here so this test can land.
+> > > > > >
+> > > > > > Talking about virtio for QEMU is missing the point of this test, which
+> > > > > > is after all a test of booting an EFI app. I do wish more people would
+> > > > > > see the value in these unit tests. There is a talk at [2] which shows
+> > > > > > how emulators are used in Zephyr.
+> > > > >
+> > > > > So that talk is interesting, yes. So, yes, implement the bus driver for
+> > > > > sandbox for virtio, and until then we shouldn't have the tests running
+> > > > > on sandbox? Or am I still missing something?
+> > > >
+> > > > Sure, but perhaps there is a way to get this test landed without doing
+> > > > that work right away?
+> > >
+> > > Maybe? I guess I'm missing how the problem isn't a problem with the
+> > > sandbox emulation of it.
+> >
+> > Basically the virtio block device is probed by EFI (for no useful
+> > purpose), but doesn't actually work.
+> >
+> > >
+> > > > I'm not sure if we actually need d5391bf02b9 ("efi_loader: ensure all
+> > > > block devices are probed"). It seems to fix a real problem, though.
+> > >
+> > > That commit seems fairly intentional and I kinda recall that being one
+> > > of those challenge points, conceptually. In order for the EFI_LOADER to
+> > > do what it needs to do correctly, it needs to know what all exists. This
+> > > is contrary to the usual U-Boot practice of not probing something until
+> > > it's specifically needed.
+> >
+> > Indeed, but we have to live with it.
 >
->
-> On Thu, Aug 15, 2024, 23:33 Simon Glass <sjg@chromium.org> wrote:
->>
->> Hi Ilias,
->>
->> On Wed, 14 Aug 2024 at 07:45, Ilias Apalodimas
->> <ilias.apalodimas@linaro.org> wrote:
->> >
->> > The EFI_LOADER and EFI config options are randomly scattered under lib/
->> > making it cumbersome to navigate and enable options, unless you really
->> > know what you are doing. On top of that the existing options are in
->> > random order instead of a logical one.
->> >
->> > So let's move things around a bit and present two enties for the
->>
->> entries
->>
->> > EFI_LOADER and EFI options in the main config screen.
->> > While at it add menus for Capsules, Protocols, and Services in the
->> > EFI_LOADER so people can find their way around easier
->> >
->> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->> > ---
->> >  Kconfig                |   4 +
->> >  lib/Kconfig            |   2 -
->> >  lib/efi/Kconfig        |   5 +
->> >  lib/efi_loader/Kconfig | 202 +++++++++++++++++++++++------------------
->> >  4 files changed, 123 insertions(+), 90 deletions(-)
->> >
->> > diff --git a/Kconfig b/Kconfig
->> > index 82df59f176ec..62c5441e3576 100644
->> > --- a/Kconfig
->> > +++ b/Kconfig
->> > @@ -756,3 +756,7 @@ source "lib/Kconfig"
->> >  source "test/Kconfig"
->> >
->> >  source "tools/Kconfig"
->> > +
->> > +source "lib/efi_loader/Kconfig"
->> > +
->>
->> This should be included from boot/Kconfig as it relates to booting.
->
->
-> Hmm why? Booting is one of the things efi does. I prefer having it on the main menu since it's a pointer to the entire spec, protocols, services etc
+> Which gets back to the question I was asking, is the sandbox virtio
+> driver deficient here? It sounds like that doesn't work, and that's the
+> problem.
 
-True. From a functionality point of view, there is booting and
-firmware update. Is there anything else? I have thought for a while
-that we should perhaps have an 'update' menu. Where, for example,
-would VBE fit in the menus?
+Well until the EFI change there was no need to have a virtio block
+device. It just isn't implemented, and that hasn't mattered until now.
 
 >
+> > > > > But I also still say that given that we as a project are more resource
+> > > > > constrained than Zephyr, for things that are QEMU-centric, there's
+> > > > > already a wealth of information on debugging QEMU since it too is
+> > > > > software. There's only so many hours in the day after all.
+> > > >
+> > > > One of Zephyr's challenges is that it relied on QEMU for almost all
+> > > > testing for a long time. As a result it takes a huge amount of CPU
+> > > > power to run tests - last I checked it was something like an hour on a
+> > > > 64-core machine. U-Boot's unit tests ('ut all') run in about 12
+> > > > seconds on my machine. I could go on for hours about the different
+> > > > types of tests and the benefits of one versus the other, but the
+> > > > cheapest answer is not necessarily just to do a 'happy path' test and
+> > > > call it good.
+> > >
+> > > Everything has it's place, yes. For us, sandbox tests take 15-20 minutes
+> > > per run in CI and most QEMU platforms finish up in about a minute. And
+> > > of course, it would be real nice if we could easily build those
+> > > platforms in CI with CONFIG_UNIT_TEST enabled, but I don't think that
+> > > would cause the run time to balloon up (nor are they the cause of the
+> > > overall time on sandbox, that would be filesystem tests).
+> >
+> > Right, I normally use 'make qcheck' which skips the FS test and some
+> > other slow ones
+> >
+> > Some notes from a little bit of digging: There are almost 1000 sandbox
+> > tests (17-20mins), but qemu_arm only runs 62 (2mins). With 'make
+> > qcheck' it runs about 2500 tests in about 4 minutes. I just got 'make
+> > pcheck' going again and that is a little faster (2.5 mins). Binman
+> > tests run in parallel if you use 'pip install concurrencytest'
 >
->>
->> The EFI app thing should perhaps be under there too...I'm not sure.
->
->
-> I was toying around with the idea as well. But eventually I decided this needs it's own entry since it's about building U-Boot as a pe/coff. I don't mind changing this though.
+> Yes, I find it frustrating that I only tend to run ~50 tests on real
+> hardware each iteration and skip ~400. Of course, 250 of them are skips
+> because they only support sandbox. I guess I need to find time to dig in
+> to UNIT_TEST compiling on more platforms again.
 
-Yes, building as an app isn't really about booting. It looks very
-lonely at the end of the menu, though.
+Yes...I just tried on snow and found that quite a lot of tests run
+which cannot pass, such as bloblist. So that needs tidying up at some
+point.
+
+I hope somehow we can make progress on the lab side...I don't see any
+interest from the Labgrid people so far.
 
 Regards,
 Simon
-
->
-> Thanks
-> Ilias
->>
->>
->> Regards,
->> Simon
