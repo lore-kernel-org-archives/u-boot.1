@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A957C52D7D
-	for <u-boot@archiver.kernel.org>; Sat, 17 Aug 2024 13:01:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0C65C52D7F
+	for <u-boot@archiver.kernel.org>; Sat, 17 Aug 2024 15:55:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CF44886F3;
-	Sat, 17 Aug 2024 15:01:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B0F27884AC;
+	Sat, 17 Aug 2024 17:55:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NO+NOaWX";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fbRF8OnI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4350288A4C; Sat, 17 Aug 2024 14:03:46 +0200 (CEST)
-Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
- [IPv6:2607:f8b0:4864:20::132])
+ id CA62C8852E; Sat, 17 Aug 2024 17:55:42 +0200 (CEST)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F1A988580
- for <u-boot@lists.denx.de>; Sat, 17 Aug 2024 14:03:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CFC4088498
+ for <u-boot@lists.denx.de>; Sat, 17 Aug 2024 17:55:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=crausaz.romain@gmail.com
-Received: by mail-il1-x132.google.com with SMTP id
- e9e14a558f8ab-39b0826298cso9850415ab.2
- for <u-boot@lists.denx.de>; Sat, 17 Aug 2024 05:03:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2f3cb747fafso6968281fa.3
+ for <u-boot@lists.denx.de>; Sat, 17 Aug 2024 08:55:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723896223; x=1724501023; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=3MlfGhnpMsuVBULK5rt4S+ACRmZLrbgOwtlUAhoJUOE=;
- b=NO+NOaWX9nXYaPCMCE6QUBhNj6CB/JACYn9D3zaD/T7hKSNJHbk7hcbjsAZOTmPipX
- 1uRjvF7D88RdIlMtRk8ut0YCtzS65ENe3iftYDeEJ2+xcOxGOqy1h3CETQOXFo1ZD6xJ
- BzTmdFIAcdSJ63Wgdmv6r0Ww7kNzRA2TGv3qjZwTZL/rToAe1RMb+xAnNkfZjTkk8/ql
- 2WCDAr777pzlZ0qGhoQuvhrpBh400Eyf6MfdV2FzC2aYPmEQEHzagT7IpXynGlEtXbCt
- UZ/wOaASlDo+BvIWCnhrSJoD4AJAT/uu6lf6pwbsQNgZcmlvCYgEr7FdMo7+BLfRPJrt
- BCvg==
+ d=gmail.com; s=20230601; t=1723910140; x=1724514940; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gXx2sRKYvxfA5mHrLgdqxRHgTQPfM8gN2gKouh0unko=;
+ b=fbRF8OnI4R8MM3LQCf7N4r6xiYo9Wi8Oq2uDaDvri2ouE9ZGNPNfmJmKvRdcNpuhCg
+ ltFqbO2CkLd9aHddFqfORaav7WgnWGWeHdLNhXOCtcbXdrVghDh9ZehNuxEbXTeY/4di
+ 2JOtrd7HKj7Ki2zWhjxI1y7pCALbIQVL85x6zVY/ojj/dxzyMNsvvml+VDYpqlmIVr6/
+ 8NFRVQDNs7DwH/D/So/gg6HGtD/2xnQHUDa2qphPMg5mcHsCQ5uYs7k9hBaGqQs0BpzP
+ ASOx6p4zv7ZBzFoJWeRZQAakGSh5qX8IDVmFOlkKnXwY0FQVdfuiXaiuhbnl2pFr9V1e
+ /4hA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723896223; x=1724501023;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=3MlfGhnpMsuVBULK5rt4S+ACRmZLrbgOwtlUAhoJUOE=;
- b=Z137XCvK8dvQbuQyk73UO2PvYiMLbBXlUjTIMrzuGTv/mE3VgUc5fXfIAr3eD5xNkO
- Agj61ebIaPTihMhJV9CFGopBOkgALCIMHIob2kZupPf5QvFCi//V+00U/Bj5rFwg3rwl
- 6zSN9o16xDXhSz/lFyuwCGDqPh0SDw+sHQTGYS6hZrkibENFgEygyy+8GeE3HpL3kdn0
- S3lWhsrXpa95ALxn3ltMqk94uXcRDBeeYWSce153bUFf8v4ySclJylELurDgSrq3ayR6
- 7yQO0llZQS0Khv1T8V6884c6z59in/zwtZmW2J+zx3wzwUe4XtUjy26xHoA4X3uVmBZr
- eZPQ==
-X-Gm-Message-State: AOJu0YzikNyRT9dkrTiyKKg3flUXpZVaairwW/aF7nGHZhO1uvj1Wzbx
- 8UPIM7ILmed50PtXQNe42cYi5Yy51jX5zQOvcsocNMGTYaHdpkMtQozmibmbuzODBNTAuFddBlS
- oAcpZE/60/IS/ti+BbGcqWpNKMnG4e8qJGzw=
-X-Google-Smtp-Source: AGHT+IGEfNZkjJ6WbxDfV8HIBL/a+Frm9ElB2Oduzz7iogB9W86jyaSjww9nVrQE1G54sotNx2BY2Mp1W2K2L21H5FI=
-X-Received: by 2002:a05:6e02:2184:b0:382:834f:2b9e with SMTP id
- e9e14a558f8ab-39d26cee5bemr61280525ab.11.1723896222597; Sat, 17 Aug 2024
- 05:03:42 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1723910140; x=1724514940;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gXx2sRKYvxfA5mHrLgdqxRHgTQPfM8gN2gKouh0unko=;
+ b=Yt2G5DLIUJHcSqEsaGN7+fY2zef7Ff7Bd49lkufBeQ2WVJIn8rFDDuCp1P7qL5UNj2
+ KfSNx8GRpmOauBNtqWlJA4VBxQ+Dp2w0ZvWPrxfN4NZEl8Lli1rV+bHfxZJlz5sNlRCm
+ 5hwxYL47BDi4fTX3QdW2uPHVK9MD+HaxsgE9OsteV/xXrGVbcN2S7lrUizcnKRDsqHwv
+ HlSatOGN7SzLQz40vHOUUXCOOpqwBrsE0lCPgkXbc2PCc/3jcSo91w0FDQ0n/tilhWxF
+ lUDzCY+mK54G0jxkocGcmg9fduW1XZICiVCutpw0oW43u5DI9t/U1c6bdtgcNhuQXLdG
+ NdNA==
+X-Gm-Message-State: AOJu0YzU6J4X4tl2UP3JKCb5cwxiD7u5lLq1TNEOSeNSzrFFFJxDCO1d
+ vALGT8BwUdsvwayJt8UzhU8fu8yNPe4L2UXQ17dwh+7FrL0US250kV5J2C0hRyqL8dAtBXYhfUI
+ GZ+jOYZfCJJZGZHM7kuhY9Y852VA=
+X-Google-Smtp-Source: AGHT+IEw96qx14HTGSROaW48z6UIYAWZqkcIvEdJ45zUYOOKF8f5zlzYH1GNaW+qFXYqWqONio5ySGmOGNBZh9M0SO8=
+X-Received: by 2002:a05:651c:1549:b0:2ef:24f3:fb9b with SMTP id
+ 38308e7fff4ca-2f3be57578emr44896821fa.7.1723910139292; Sat, 17 Aug 2024
+ 08:55:39 -0700 (PDT)
 MIME-Version: 1.0
-From: Romain Crausaz <crausaz.romain@gmail.com>
-Date: Sat, 17 Aug 2024 14:03:31 +0200
-Message-ID: <CAB=OP5Kb_YMmcn6Zjj3feSPX506zXt7dSb8w_vUaMsSsxWYgzw@mail.gmail.com>
-Subject: RPI CM4 - I2C BUS and Device Tree
-To: u-boot@lists.denx.de
-X-Mailman-Approved-At: Sat, 17 Aug 2024 15:01:10 +0200
+References: <CAB=OP5Kb_YMmcn6Zjj3feSPX506zXt7dSb8w_vUaMsSsxWYgzw@mail.gmail.com>
+In-Reply-To: <CAB=OP5Kb_YMmcn6Zjj3feSPX506zXt7dSb8w_vUaMsSsxWYgzw@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Sat, 17 Aug 2024 16:55:28 +0100
+Message-ID: <CALeDE9PO7nR9=tku-gDDBUkDK9LxoKeFbc4WQwAy70v2Qugvkg@mail.gmail.com>
+Subject: Re: RPI CM4 - I2C BUS and Device Tree
+To: Romain Crausaz <crausaz.romain@gmail.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,52 +87,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+Hi,
 
+> I am currently facing an issue with U-Boot and a raspberry pi CM4. Here i=
+s
+> the setup:
+>
+>
+>
+> 1. Yocto Scarthgap
+>
+> 2. U-Boot 2024.01
+>
+> 3. rpi_arm64_defconfig
+>
+>
+>
+> I am trying to access the i2c bus from U-Boot. I have been trying to modi=
+fy
+> the device tree which is referenced as
+> =E2=80=9CCONFIG_DEFAULT_DEVICE_TREE=3D"bcm2711-rpi-4-b=E2=80=9D=E2=80=9D =
+in the defconfig without
+> success. I can remove everything, set all nodes to disabled and I see no
+> change in U-Boot (I am using dm commands to check the status of the
+> peripherals).
 
+What i2c driver are you using in U-Boot?
 
-I am currently facing an issue with U-Boot and a raspberry pi CM4. Here is
-the setup:
+> It seems that with the rpi, U-Boot will only configure itself against the
+> device tree passed by the bootloader of RPI. Could someone confirm this ?
 
+By default, yes that is the case.
 
+> Is there a way to configure / modify U-Boot to use its own devicetree and
+> simply pass the device tree generated by the rpi bootloader to the kernel=
+ ?
 
-1. Yocto Scarthgap
+You can do the former, but I believe that DT is then passed to the
+kernel, you can't specify differing DTs.
 
-2. U-Boot 2024.01
+> Because the second issue is that the i2c driver defined in the device tre=
+e
+> passed to u-boot is not available in u-boot.
 
-3. rpi_arm64_defconfig
+Well I think that is the main issue, there's not a driver the RPi i2c
+IP in U-Boot, if there was a driver the DT provided by the prior
+fimware should then work for what you're trying to do. There's no
+driver to date likely because no one has needed to access i2c on the
+rpi in U-Boot so it's not been contributed.
 
-
-
-I am trying to access the i2c bus from U-Boot. I have been trying to modify
-the device tree which is referenced as
-=E2=80=9CCONFIG_DEFAULT_DEVICE_TREE=3D"bcm2711-rpi-4-b=E2=80=9D=E2=80=9D in=
- the defconfig without
-success. I can remove everything, set all nodes to disabled and I see no
-change in U-Boot (I am using dm commands to check the status of the
-peripherals).
-
-
-
-It seems that with the rpi, U-Boot will only configure itself against the
-device tree passed by the bootloader of RPI. Could someone confirm this ?
-
-
-
-Is there a way to configure / modify U-Boot to use its own devicetree and
-simply pass the device tree generated by the rpi bootloader to the kernel ?
-
-
-
-Because the second issue is that the i2c driver defined in the device tree
-passed to u-boot is not available in u-boot.
-
-
-
-Thanks for your help
-
-
-
-Best regards
-
-Romain
+Peter
