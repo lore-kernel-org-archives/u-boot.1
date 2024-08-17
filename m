@@ -4,68 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB608C52D7D
-	for <u-boot@archiver.kernel.org>; Sat, 17 Aug 2024 16:00:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BF70C52D7F
+	for <u-boot@archiver.kernel.org>; Sat, 17 Aug 2024 18:18:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15B3888892;
-	Sat, 17 Aug 2024 17:58:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id A2BC988418;
+	Sat, 17 Aug 2024 20:18:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GOQepkRc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SfpB9Mlw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 175AB88898; Sat, 17 Aug 2024 17:58:44 +0200 (CEST)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+ id 54E638845A; Sat, 17 Aug 2024 20:18:43 +0200 (CEST)
+Received: from mail-vs1-xe2d.google.com (mail-vs1-xe2d.google.com
+ [IPv6:2607:f8b0:4864:20::e2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6F2888BB0
- for <u-boot@lists.denx.de>; Sat, 17 Aug 2024 17:58:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E06D188395
+ for <u-boot@lists.denx.de>; Sat, 17 Aug 2024 20:18:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-e026a2238d8so3034333276.0
- for <u-boot@lists.denx.de>; Sat, 17 Aug 2024 08:58:41 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-vs1-xe2d.google.com with SMTP id
+ ada2fe7eead31-4928b5531caso1066428137.3
+ for <u-boot@lists.denx.de>; Sat, 17 Aug 2024 11:18:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723910321; x=1724515121; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EXhkJJo/nOwSuCUmg0dLu4LPAEg+JQylpgS3haCROYU=;
- b=GOQepkRc3XT4yfO6EjNCxCceP2KN6T3TwewlYwyf6hPMwXeK5ccDWj8aKteWNbDZVu
- VjJvLukR3U2dUQPEcY0Bv4+WIKLAbmbZM/SQ9Ja/o+EwxZYfTaPuYWkXECkDq2N7nk7H
- 48xOsNKq51T4W5qSQmRq/gSF6a7k3FfMUxsEI=
+ d=gmail.com; s=20230601; t=1723918720; x=1724523520; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=heOC2fz/9vBzIG23WJpn9eqhnOoQg0NIR50oRGwucMM=;
+ b=SfpB9MlwypPp1Nr07oeic96DjeKNc2lcKil2LQcxSeSuHYjIyrNHlt1zydOQ//VTpn
+ gvxVPxem4jCbGr1k3uxe9RxVpXkpJXbP+ccF7j9FNKGiRrI9utkF3YA5BHoA708cD9Zi
+ rmdBHm09V1SOyd0pmocC8AsvNNymdNPUx7TN0LJLOhaJwoWYBRLicoMRCWwzcAp0boZH
+ U+FUW/WXZzj66xErnPHsHICcgWknGRSz7T1DJBaDrCDpC60GHMYo1aQZkq+CwMF2ezbp
+ H3aNPgybHEpUxO8G0Vd5JeE0ai/hOab4ZPkDe6z1oB1iDPL+ITEOKrxauv2dOCBE1IgO
+ gu8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723910321; x=1724515121;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=EXhkJJo/nOwSuCUmg0dLu4LPAEg+JQylpgS3haCROYU=;
- b=FlZUSPwPunZK45zohADx26Ba3cYJcj3+2XasmKFgr57bRexT2S2mcbk/v58bEA4RMK
- z7WxRPTeE/S258+XIpuv2Eri6e1e54P9HFhusIZQgQfos9t0bJVxK8y6XzRwVHI+//W9
- cjTnbekEhOLTUwF3Bf4U478re6+4q1X/idbMzZdgkMbXmE+L2N28eVtOIjyulp83vYxz
- 9lR4sXYoeNVPRXJzCuqt+LPlUGr3wunPDv4Q5IuE56tX9c1V+nMKJ9v4oYkv1GTHyyqT
- mf2UfJ3+frG0YcgGssr3hGRReFh/a6fmbPyPh2E5iiZUwjKJySS0YvPeDi0g6gpFFX4G
- nSOQ==
-X-Gm-Message-State: AOJu0Yzpzd6uN7NsdCnN9qIO97eJRKnTHg18hjgqIHtnZ+vs4qvFiIBE
- CjPy4xOxo9zBSzqRep4fbNoEfK2kvoIW7LVQtP4y0x1jJBhqYg8z1BdLUdOKTIazz1WauIAp63X
- lPqe2FFCtdy0szjvVAjVPpVqYoGI1iwrVi5Mp
-X-Google-Smtp-Source: AGHT+IHpXNYWYhbdM8CiGPMeBgJQxmGEEmEq5TJLPhvnivIOryva2EXmBuhHsYlYHqvklPhBztmlQvZS3gVmzIxe4Ic=
-X-Received: by 2002:a05:6902:1021:b0:e11:5738:8610 with SMTP id
- 3f1490d57ef6-e1180f831a7mr6132005276.43.1723910320594; Sat, 17 Aug 2024
- 08:58:40 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1723918720; x=1724523520;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=heOC2fz/9vBzIG23WJpn9eqhnOoQg0NIR50oRGwucMM=;
+ b=udZunrODm4+ZePCwdSpSfQb8MB+aYOuuIUxW55ry07nI0RALCqlZRuzJFBUbjvMxAx
+ qR72lqOcmit9+lh7OQDqc2bSSP93fSWpChsBVrHyAa1CLGpLes5c647qJML/HPWYxovk
+ XNnLTGzmTqDGtx7vNbUMGrEY4UtG/cR9PfD444Dx0mgbSyQdvbIajzYoGRCyMHUAI8/H
+ gbsd3S5Ya3YeCtSfwzkuVMDiMbU38dOlQSM2GjZJ2z1yDmLYw32j28kLCAtUbt0mlizW
+ Z+ISqzQ5LSzH+/fdDLUbOa8bBXrRRmsKY/zhWpTI1E7jq6Uq4C9qUTCQaTCpIsOFgvHX
+ kG/w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXrXO+z1pZKvwHTf1cWFDpwcL7On5YTHXPGrj4a/2yylMoPEP8hVpLu9zLUMDwRnTyo6l0CYLI+YS3P/Q/3Af25zr+70Q==
+X-Gm-Message-State: AOJu0Yxdu+qEphVCSD7f2ai6mQgSLnHu8R2fMBi3/QSN8b0uKgLBTvNR
+ MU4cHfUBVosl62V25fCmLwaVpLqNL3MmFxwDojKwZTMAz1v0j/It
+X-Google-Smtp-Source: AGHT+IGnthjqeRuGR2pBCfJXgRrG5jks+7hGw5hIw31vab57xmEjPVNm2mw3CEYdxO/ZSl5RxbyWMQ==
+X-Received: by 2002:a05:6102:3912:b0:492:aa42:e0ce with SMTP id
+ ada2fe7eead31-4977997cd15mr9057556137.20.1723918719713; 
+ Sat, 17 Aug 2024 11:18:39 -0700 (PDT)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7a4ff109f9asm287610985a.119.2024.08.17.11.18.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 17 Aug 2024 11:18:39 -0700 (PDT)
+Message-ID: <10d27df8-d581-0ac0-9b50-50114c7baa20@gmail.com>
+Date: Sat, 17 Aug 2024 14:18:38 -0400
 MIME-Version: 1.0
-References: <20240816081922.282155-1-mailinglist1@johanneskirchmair.de>
-In-Reply-To: <20240816081922.282155-1-mailinglist1@johanneskirchmair.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 17 Aug 2024 09:58:29 -0600
-Message-ID: <CAFLszTi3KLSZro2iHc_CDhxUo5hquxQ+Z_CMGo6LCoJYFUK4eg@mail.gmail.com>
-Subject: Re: [PATCH] usb: add reset pin handling to onboard-hub driver
-To: mailinglist1@johanneskirchmair.de
-Cc: u-boot@lists.denx.de, trini@konsulko.com, 
- Johannes Kirchmair <johannes.kirchmair@skidata.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH] spl: fix error handling of spl_fit_read
+Content-Language: en-US
+To: mailinglist1@johanneskirchmair.de, u-boot@lists.denx.de
+Cc: trini@konsulko.com, Johannes Kirchmair <johannes.kirchmair@skidata.com>
+References: <20240816073332.279025-1-mailinglist1@johanneskirchmair.de>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <20240816073332.279025-1-mailinglist1@johanneskirchmair.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,104 +96,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-On Fri, 16 Aug 2024 at 07:36, <mailinglist1@johanneskirchmair.de> wrote:
->
+On 8/16/24 03:33, mailinglist1@johanneskirchmair.de wrote:
 > From: Johannes Kirchmair <johannes.kirchmair@skidata.com>
->
-> Some onboard-hub chips have external reset pins. This patch adds
-> handling of said pin to the onboard-hub driver. The naming for the
-> devicetree binding is done in the same way as in the Linux kernel to
-> ensure good compatibility between u-boot's and Linux's devicetrees.
-
-U-Boot's
-
->
+> 
+> Returning negative values from spl_fit_read leads to u-boot crashing.
+> The return value of spl_fit_read is compared with an unsigned value.
+> Returning negative values leads to the check not detecting the error.
+> Not detecting the error leads to crashing.
+> 
+> Returning zero in case of an reading error is fine. It indicates that
+> nothing was red.
+> 
 > Signed-off-by: Johannes Kirchmair <johannes.kirchmair@skidata.com>
 > ---
->  common/usb_onboard_hub.c | 32 +++++++++++++++++++++++++++++++-
->  1 file changed, 31 insertions(+), 1 deletion(-)
->
-> diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-> index 68a04ac041..5b1bb79c55 100644
-> --- a/common/usb_onboard_hub.c
-> +++ b/common/usb_onboard_hub.c
-> @@ -10,9 +10,11 @@
->  #include <dm.h>
->  #include <dm/device_compat.h>
->  #include <power/regulator.h>
-> +#include <asm/gpio.h>
->
->  struct onboard_hub {
->         struct udevice *vdd;
-> +       struct gpio_desc reset_pin;
->  };
->
->  static int usb_onboard_hub_probe(struct udevice *dev)
-> @@ -27,8 +29,23 @@ static int usb_onboard_hub_probe(struct udevice *dev)
->         }
->
->         ret = regulator_set_enable_if_allowed(hub->vdd, true);
-> -       if (ret)
-> +       if (ret) {
->                 dev_err(dev, "can't enable vdd-supply: %d\n", ret);
-> +               return ret;
-> +       }
-> +
-> +       ret = gpio_request_by_name(dev, "reset-gpios", 0, &hub->reset_pin,
-> +                                  GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
-> +       if (ret && ret != -ENOENT) {
-> +               dev_err(dev, "can't get reset-gpios 0: %d\n", ret);
-> +               return ret;
-> +       }
-> +
-> +       if (hub->reset_pin.dev) {
-> +               ret = dm_gpio_set_value(&hub->reset_pin, 0);
-> +               if (ret)
-> +                       dev_err(dev, "failed setting reset-gpios to 0: %d\n", ret);
-> +       }
+>   common/spl/spl_fat.c | 2 +-
+>   include/spl_load.h   | 4 ++--
+>   2 files changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c
+> index bd8aab253a..345bc55149 100644
+> --- a/common/spl/spl_fat.c
+> +++ b/common/spl/spl_fat.c
+> @@ -53,7 +53,7 @@ static ulong spl_fit_read(struct spl_load_info *load, ulong file_offset,
+>   
+>   	ret = fat_read_file(filename, buf, file_offset, size, &actread);
+>   	if (ret)
+> -		return ret;
+> +		return 0;
+>   
+>   	return actread;
+>   }
+> diff --git a/include/spl_load.h b/include/spl_load.h
+> index 1c2b296c0a..b411d9daa1 100644
+> --- a/include/spl_load.h
+> +++ b/include/spl_load.h
+> @@ -17,8 +17,8 @@ static inline int _spl_load(struct spl_image_info *spl_image,
+>   {
+>   	struct legacy_img_hdr *header =
+>   		spl_get_load_buffer(-sizeof(*header), sizeof(*header));
+> -	ulong base_offset, image_offset, overhead;
+> -	int read, ret;
+> +	ulong base_offset, image_offset, overhead, read;
+> +	int ret;
+>   
+>   	read = info->read(info, offset, ALIGN(sizeof(*header),
+>   					      spl_get_bl_len(info)), header);
 
-With the GPIOD_... flags above, this should already be done, so you
-don't need this code.
+Does [1] fix your problem?
 
->
->         return ret;
->  }
-> @@ -42,12 +59,25 @@ static int usb_onboard_hub_remove(struct udevice *dev)
->         if (ret)
->                 dev_err(dev, "can't disable vdd-supply: %d\n", ret);
->
-> +       if (hub->reset_pin.dev) {
-> +               ret = dm_gpio_set_value(&hub->reset_pin, 1);
-> +               if (ret)
-> +                       dev_err(dev, "failed setting reset-gpios to 0: %d\n", ret);
+--Sean
 
-1
-
-Is this putting the device in reset? Could you add a comment as to why?
-
-> +       }
-> +
-> +       if (hub->reset_pin.dev) {
-> +               ret = dm_gpio_free(dev, &hub->reset_pin);
-> +               if (ret)
-> +                       dev_err(dev, "can't free reset-gpios: %d\n", ret);
-> +       }
-> +
->         return ret;
->  }
->
->  static const struct udevice_id usb_onboard_hub_ids[] = {
->         /* Use generic usbVID,PID dt-bindings (usb-device.yaml) */
->         { .compatible = "usb424,2514" }, /* USB2514B USB 2.0 */
-> +       { .compatible = "usb4b4,6504" },
->         { }
->  };
->
-> --
-> 2.34.1
->
-
-Regards,
-Simon
+[1] https://lore.kernel.org/u-boot/20240731130913.487121-1-fventuri@comcast.net/
