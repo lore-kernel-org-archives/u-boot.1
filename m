@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BF70C52D7F
-	for <u-boot@archiver.kernel.org>; Sat, 17 Aug 2024 18:18:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 819B8C52D7F
+	for <u-boot@archiver.kernel.org>; Sat, 17 Aug 2024 18:29:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2BC988418;
-	Sat, 17 Aug 2024 20:18:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D844E887E4;
+	Sat, 17 Aug 2024 20:29:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SfpB9Mlw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YwkPJCNn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54E638845A; Sat, 17 Aug 2024 20:18:43 +0200 (CEST)
-Received: from mail-vs1-xe2d.google.com (mail-vs1-xe2d.google.com
- [IPv6:2607:f8b0:4864:20::e2d])
+ id 580A488860; Sat, 17 Aug 2024 20:29:57 +0200 (CEST)
+Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
+ [IPv6:2607:f8b0:4864:20::831])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E06D188395
- for <u-boot@lists.denx.de>; Sat, 17 Aug 2024 20:18:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 408C088533
+ for <u-boot@lists.denx.de>; Sat, 17 Aug 2024 20:29:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-vs1-xe2d.google.com with SMTP id
- ada2fe7eead31-4928b5531caso1066428137.3
- for <u-boot@lists.denx.de>; Sat, 17 Aug 2024 11:18:40 -0700 (PDT)
+Received: by mail-qt1-x831.google.com with SMTP id
+ d75a77b69052e-451b7e1d157so20370281cf.3
+ for <u-boot@lists.denx.de>; Sat, 17 Aug 2024 11:29:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723918720; x=1724523520; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1723919394; x=1724524194; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=heOC2fz/9vBzIG23WJpn9eqhnOoQg0NIR50oRGwucMM=;
- b=SfpB9MlwypPp1Nr07oeic96DjeKNc2lcKil2LQcxSeSuHYjIyrNHlt1zydOQ//VTpn
- gvxVPxem4jCbGr1k3uxe9RxVpXkpJXbP+ccF7j9FNKGiRrI9utkF3YA5BHoA708cD9Zi
- rmdBHm09V1SOyd0pmocC8AsvNNymdNPUx7TN0LJLOhaJwoWYBRLicoMRCWwzcAp0boZH
- U+FUW/WXZzj66xErnPHsHICcgWknGRSz7T1DJBaDrCDpC60GHMYo1aQZkq+CwMF2ezbp
- H3aNPgybHEpUxO8G0Vd5JeE0ai/hOab4ZPkDe6z1oB1iDPL+ITEOKrxauv2dOCBE1IgO
- gu8g==
+ bh=JhP/cF+sQRDHYM7Ue7LdWP7aIvOLETUk7OqQEa/IsJc=;
+ b=YwkPJCNnMk4B/U2NA6wlN4MVom2h95h8b1yuXshsZrqJvis7KYwreVjugB1ydav9R4
+ ll0/yzSsbEgAuwN+Sr57Her2cvzQf/11sTwEL67ZQWWYbnpGsuydgtpP7z7wMDNKj0I1
+ QL+s161tUL1+JpozQT1Z7FAWW0Qz9sb9hIjBCcZcNaT0rH12/mE5BEuC9SGVuYdUUOqL
+ im9gtwQEnkMrCukKsmXi9LO9G2gebHYYdKrkolJwnmB8MEljdfVywXh2bfVHKVGknBb+
+ vRfUq64sL8lQ2+w1cryOnma07oAJlw9tClBswBE+BuhhgM0S3R7gQlkMQxEb/tFuujKz
+ eRBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723918720; x=1724523520;
+ d=1e100.net; s=20230601; t=1723919394; x=1724524194;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=heOC2fz/9vBzIG23WJpn9eqhnOoQg0NIR50oRGwucMM=;
- b=udZunrODm4+ZePCwdSpSfQb8MB+aYOuuIUxW55ry07nI0RALCqlZRuzJFBUbjvMxAx
- qR72lqOcmit9+lh7OQDqc2bSSP93fSWpChsBVrHyAa1CLGpLes5c647qJML/HPWYxovk
- XNnLTGzmTqDGtx7vNbUMGrEY4UtG/cR9PfD444Dx0mgbSyQdvbIajzYoGRCyMHUAI8/H
- gbsd3S5Ya3YeCtSfwzkuVMDiMbU38dOlQSM2GjZJ2z1yDmLYw32j28kLCAtUbt0mlizW
- Z+ISqzQ5LSzH+/fdDLUbOa8bBXrRRmsKY/zhWpTI1E7jq6Uq4C9qUTCQaTCpIsOFgvHX
- kG/w==
+ bh=JhP/cF+sQRDHYM7Ue7LdWP7aIvOLETUk7OqQEa/IsJc=;
+ b=BFgpW9VzOhGJyngLnPlbE9fl5SKW1h+KZts+D4meKHluQvsuubh/hK9pUQiSx0uMAB
+ W2KdyrLLl2fuZKzs2EJA+jfvSE0+2YvmQ748a947N67VeSOSsSgT+uzHPjNYpoe7npR8
+ P0/aeRknDyXszxe19a6DgQIRsJvtGBTdxVxJ2f99Y0tWdGq65WNIXPmX0pCrjg5RQg05
+ s5ubCpnuQSwUiIdCpmwSBbm5egvNippf/c0qTvC/6xEKObWc0t/msbCXQAzH1dvLhg1x
+ hGV+HKD0w1gcNTE3JkHZqkD+iCTHxKcDqz2pLFZINe6Z89CBTmNQnseo+1NzG86IN5Su
+ 134Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXrXO+z1pZKvwHTf1cWFDpwcL7On5YTHXPGrj4a/2yylMoPEP8hVpLu9zLUMDwRnTyo6l0CYLI+YS3P/Q/3Af25zr+70Q==
-X-Gm-Message-State: AOJu0Yxdu+qEphVCSD7f2ai6mQgSLnHu8R2fMBi3/QSN8b0uKgLBTvNR
- MU4cHfUBVosl62V25fCmLwaVpLqNL3MmFxwDojKwZTMAz1v0j/It
-X-Google-Smtp-Source: AGHT+IGnthjqeRuGR2pBCfJXgRrG5jks+7hGw5hIw31vab57xmEjPVNm2mw3CEYdxO/ZSl5RxbyWMQ==
-X-Received: by 2002:a05:6102:3912:b0:492:aa42:e0ce with SMTP id
- ada2fe7eead31-4977997cd15mr9057556137.20.1723918719713; 
- Sat, 17 Aug 2024 11:18:39 -0700 (PDT)
+ AJvYcCV0bH3ZsiJ/wPfsTR6I0ozhr4pbM7e6m2Hhw/blu6AAgqgpuaCS0FpBawW2ECbyh9yavcRVd4jb8xrsBHwkaY2f8Ma5Ug==
+X-Gm-Message-State: AOJu0YyBxeoUwkS8J9Ni72ZsRBFO+2pFyccKpDSJ+vPaOGbMeDjQr4F1
+ C+YgYXYjlnj31zKfgEAhT6lzNFMwltmsK7xIB51vaTVAfEqYEOv1
+X-Google-Smtp-Source: AGHT+IFUfxnoER4qWcY4XcAtDZ+Rcz1wqfxFJdFieUoyzycx93EKjbnHSX6VdUwStukkSr49GO3f5g==
+X-Received: by 2002:a05:622a:1f91:b0:446:5568:a6de with SMTP id
+ d75a77b69052e-4537436682bmr92581571cf.48.1723919394001; 
+ Sat, 17 Aug 2024 11:29:54 -0700 (PDT)
 Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a4ff109f9asm287610985a.119.2024.08.17.11.18.38
+ d75a77b69052e-45369fd8fcasm27328071cf.1.2024.08.17.11.29.53
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 17 Aug 2024 11:18:39 -0700 (PDT)
-Message-ID: <10d27df8-d581-0ac0-9b50-50114c7baa20@gmail.com>
-Date: Sat, 17 Aug 2024 14:18:38 -0400
+ Sat, 17 Aug 2024 11:29:53 -0700 (PDT)
+Message-ID: <cd021589-a6d7-fcaf-83d8-a4af50dd6285@gmail.com>
+Date: Sat, 17 Aug 2024 14:29:52 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
-Subject: Re: [PATCH] spl: fix error handling of spl_fit_read
+Subject: Re: [PATCH 09/21] test: Update NAND test to avoid extra macros
 Content-Language: en-US
-To: mailinglist1@johanneskirchmair.de, u-boot@lists.denx.de
-Cc: trini@konsulko.com, Johannes Kirchmair <johannes.kirchmair@skidata.com>
-References: <20240816073332.279025-1-mailinglist1@johanneskirchmair.de>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+References: <20240810205205.3403177-1-sjg@chromium.org>
+ <20240810205205.3403177-10-sjg@chromium.org>
 From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20240816073332.279025-1-mailinglist1@johanneskirchmair.de>
+In-Reply-To: <20240810205205.3403177-10-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,54 +97,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/16/24 03:33, mailinglist1@johanneskirchmair.de wrote:
-> From: Johannes Kirchmair <johannes.kirchmair@skidata.com>
+On 8/10/24 16:51, Simon Glass wrote:
+> Use a single test function with a for() loop instead of using macros to
+> create multiple test functions. Add a message so it is clear what piece
+> the test is up to, if it fails.
 > 
-> Returning negative values from spl_fit_read leads to u-boot crashing.
-> The return value of spl_fit_read is compared with an unsigned value.
-> Returning negative values leads to the check not detecting the error.
-> Not detecting the error leads to crashing.
-> 
-> Returning zero in case of an reading error is fine. It indicates that
-> nothing was red.
-> 
-> Signed-off-by: Johannes Kirchmair <johannes.kirchmair@skidata.com>
-> ---
->   common/spl/spl_fat.c | 2 +-
->   include/spl_load.h   | 4 ++--
->   2 files changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c
-> index bd8aab253a..345bc55149 100644
-> --- a/common/spl/spl_fat.c
-> +++ b/common/spl/spl_fat.c
-> @@ -53,7 +53,7 @@ static ulong spl_fit_read(struct spl_load_info *load, ulong file_offset,
->   
->   	ret = fat_read_file(filename, buf, file_offset, size, &actread);
->   	if (ret)
-> -		return ret;
-> +		return 0;
->   
->   	return actread;
->   }
-> diff --git a/include/spl_load.h b/include/spl_load.h
-> index 1c2b296c0a..b411d9daa1 100644
-> --- a/include/spl_load.h
-> +++ b/include/spl_load.h
-> @@ -17,8 +17,8 @@ static inline int _spl_load(struct spl_image_info *spl_image,
->   {
->   	struct legacy_img_hdr *header =
->   		spl_get_load_buffer(-sizeof(*header), sizeof(*header));
-> -	ulong base_offset, image_offset, overhead;
-> -	int read, ret;
-> +	ulong base_offset, image_offset, overhead, read;
-> +	int ret;
->   
->   	read = info->read(info, offset, ALIGN(sizeof(*header),
->   					      spl_get_bl_len(info)), header);
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-Does [1] fix your problem?
+Well, the whole reason I wrote it this was was to make sure both tests run
+even if one fails. They flashes have different sizes/geometries/ecc and it's
+definitely possible for some regression to happen for one but not the other.
+Having two test cases makes it easy to see this.
 
 --Sean
-
-[1] https://lore.kernel.org/u-boot/20240731130913.487121-1-fventuri@comcast.net/
