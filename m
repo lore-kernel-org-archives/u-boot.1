@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 802B2C52D7D
-	for <u-boot@archiver.kernel.org>; Sat, 17 Aug 2024 15:58:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A55C2C52D7F
+	for <u-boot@archiver.kernel.org>; Sat, 17 Aug 2024 15:59:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABFAA88872;
-	Sat, 17 Aug 2024 17:58:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 23CA9888AA;
+	Sat, 17 Aug 2024 17:58:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F/XueVEq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y+jKRz+2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DCBB887E4; Sat, 17 Aug 2024 17:58:31 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id 59DDA8882C; Sat, 17 Aug 2024 17:58:32 +0200 (CEST)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A9AC88872
+ by phobos.denx.de (Postfix) with ESMTPS id B4CB588753
  for <u-boot@lists.denx.de>; Sat, 17 Aug 2024 17:58:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6b7a3773a95so17641526d6.2
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7a1d436c95fso181378885a.3
  for <u-boot@lists.denx.de>; Sat, 17 Aug 2024 08:58:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1723910308; x=1724515108; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZRu3ifL9YSRNVQjK1CroqSVgrU84fP3wwRD0zmvJ0rk=;
- b=F/XueVEqiLaWaozZdu2UHMgavYyXAdOR4VDJiPEysN/g1RmyyLqwYw7xVZRRkmA4Xx
- wm2eSWx0Av4GtbGfZzXVLeVq1EKHgrQwbRpHEB1sSYVJ1S67ddxvuPt70M+0O/ncJTwe
- 92aqd7AbuL8CsgupGoEY3POcq/2xMYjdBY/Zc=
+ bh=Aig4ZLUHmGwp3d9Z87YB0eH/ASo2ua1bCWA33x7xV9k=;
+ b=Y+jKRz+2ZmsEUB25a4zV130fDoN+hz1v1aShzcy8EQHZ/nxpOorqtIn0vlHM9DYkIC
+ VFkRqOvCNbxO8Pkn7hLZVK3rxB9bUDVZPwP99CYBKaB646wfwOpbK21jEfBOwfHUUCQj
+ PF5YZJqLg5Nu9jIrSxrTzmewmfpo0ZBHb4zsM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1723910308; x=1724515108;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ZRu3ifL9YSRNVQjK1CroqSVgrU84fP3wwRD0zmvJ0rk=;
- b=vS0zJC524qpKBVjcZkLkC1P+xLvY2hFGDEl8xFTxyHre4mTmyjIaW3gTqRBZvMdn+2
- 9ETAv/h79hrQln0dxCf3oGJGmMI/0yfNTIw3tkBbhSv42BhiUbgW9erQ232W3m8nTa/1
- pHOqz7V1pOnlvOATabkopoffP2pbhkk6bgwJnTmweNwRgWZ6BtFe5EMnmhmE+kClE0rZ
- iTbUSUgOz+luh1rSY63rkocWr8CC7LjVy1tkmmaVOo4xsjgipqmSh4xak0xyp/rtbJRb
- SJyMSIA0p3eoFPd9+tMTpVQyXcjZ+duCEwtxa9pJ+E3kcdKLRBPAcSIkQzJy258Ax+Iz
- YoEg==
+ bh=Aig4ZLUHmGwp3d9Z87YB0eH/ASo2ua1bCWA33x7xV9k=;
+ b=LadMViDHbb7JZJKy370yhMoBQnNhpbIhSsYFSnbNihgHvkRzd7Q/ZwocvdVM0Jwi/f
+ 8jQ/c+TQN9dJpmmi0adG9iYIWCH0mNiHl4xRQwGItEhzH4NGc4UtQJQpvZVVYyy8dWVu
+ RQxN9t/CRGlmGcMHW4Q8S41/BiNfLMcLlB2/QYkQ5zGmnxbWXb9tcwzTRwTsaZNuy/cP
+ /QmHxfjmGUCnkocbQrDbBDh//0WCmEoiDP88Sq1pA525Ukr8WPKher+T8pO/dSRKAL1t
+ UpbJ8GUmGOJ3ebjPXEF0MuLw0Uyg0dnGBp/h+H/02vh0QQ+TDwdkf3HccAymLIvxFvJY
+ AC5w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX1BDKsXFcaE67WZZnEix1JJ7E9LETb9TVIWshK66TyuWmiensra97BN7hhKYLTGAhjZla9LvtK1TYXZ4B2POP8rjk7Cg==
-X-Gm-Message-State: AOJu0YzVSqnxfQARY6qyhNeLII0jyakQpY1xwmnCwjDpnpAQhKqsCZ3m
- G2FPmqcBeKDOvcCPfRL5FPfrCAc2BXMIhf18wkW80a2DqENshN0hNuagdpdiM26WYKF+NrrKJwt
- StelyJtjqSl0/WA7vDkl2oLNIzOAQLMJ/mAQI
-X-Google-Smtp-Source: AGHT+IFSBIzKEldNkl29XKDeLtXqsfDUQ83DUO/uoAwDjrZEPL3ac5v15FQGEUNPeTlMYWP1uj24yXegENTh/ysFX/Y=
-X-Received: by 2002:a05:6214:540a:b0:6bf:700f:a3b7 with SMTP id
- 6a1803df08f44-6bf7cd7ac78mr61005786d6.9.1723910308154; Sat, 17 Aug 2024
+ AJvYcCWsVCzaoHD9ZrvZgXKR0lj7KMguigTxwd+S/WxgqxbILS/LFq2tkUB1wXIb9Fgd0JQYZiUorjnqTCNvsfrkWw3zsHZTnA==
+X-Gm-Message-State: AOJu0Yxt8lKVh30o6Wpv00pwTmSxLwHh/ZpE4XjcZARLusuFOPUCodM6
+ f8MKdzZU/mX6LVPYhNOALY46r+BQDczYFpcnJT8TolE1b+MDl1JmglQo6zoYUVGP5ZTsxLKeaIW
+ apl/j71ELX5BaixjAXD2gSIyfHiI2CClfF5L/
+X-Google-Smtp-Source: AGHT+IGPX30zWYCJG/Lkri3KaUgwsdiRvMKgZgbVO4CiGSJO267wAOOIiHIUu34C6XMYEZYJdhwiMWhJrVNe2mJW02k=
+X-Received: by 2002:a05:6214:3992:b0:6bf:8d05:472c with SMTP id
+ 6a1803df08f44-6bf8d05499dmr18119606d6.1.1723910308465; Sat, 17 Aug 2024
  08:58:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240814101918.1347167-1-mikhail.kshevetskiy@iopsys.eu>
- <20240814101918.1347167-11-mikhail.kshevetskiy@iopsys.eu>
-In-Reply-To: <20240814101918.1347167-11-mikhail.kshevetskiy@iopsys.eu>
+References: <20240814103145.1347645-1-mikhail.kshevetskiy@iopsys.eu>
+ <20240814103145.1347645-2-mikhail.kshevetskiy@iopsys.eu>
+In-Reply-To: <20240814103145.1347645-2-mikhail.kshevetskiy@iopsys.eu>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 17 Aug 2024 09:58:16 -0600
-Message-ID: <CAFLszThDQqaUofT2Jetw7bYc5M_+oBMswc9r8Vq2ZPhC-V9xYg@mail.gmail.com>
-Subject: Re: [RESEND PATCH v4 10/10] mtd: nand: add initial ecc engine support
+Date: Sat, 17 Aug 2024 09:58:17 -0600
+Message-ID: <CAFLszTjUaJ=cEXnLkau3P7puvcE2wvXWimLWyPMcDm9-sP-gTg@mail.gmail.com>
+Subject: Re: [RESEND PATCH v3 1/9] net/tcp: fix TCP options processing
 To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Cc: Tom Rini <trini@konsulko.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- William Zhang <william.zhang@broadcom.com>, Chuanhong Guo <gch981213@gmail.com>,
- Martin Kurbanov <mmkurbanov@sberdevices.ru>,
- Igor Prusov <ivprusov@salutedevices.com>, 
- Bruce Suen <bruce_suen@163.com>, Alexey Romanov <avromanov@salutedevices.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Max Krummenacher <max.krummenacher@toradex.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Anand Moon <linux.amoon@gmail.com>, Marek Vasut <marex@denx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,32 +96,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mikhail,
-
-On Wed, 14 Aug 2024 at 04:20, Mikhail Kshevetskiy
+On Wed, 14 Aug 2024 at 04:32, Mikhail Kshevetskiy
 <mikhail.kshevetskiy@iopsys.eu> wrote:
 >
-> only spinand on_die ecc is supported for a moment
+> Current TCP code may miss an option if TCP_O_NOP option was used before
+> it for proper aligning.
 >
 > Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 > ---
->  drivers/mtd/nand/Makefile       |   2 +-
->  drivers/mtd/nand/core.c         | 130 +++++++++++++++-
->  drivers/mtd/nand/ecc.c          | 249 ++++++++++++++++++++++++++++++
->  drivers/mtd/nand/spi/core.c     | 207 ++++++++++++++++++++-----
->  drivers/mtd/nand/spi/foresee.c  |   2 +-
->  drivers/mtd/nand/spi/macronix.c |   7 +-
->  drivers/mtd/nand/spi/micron.c   |   2 +-
->  drivers/mtd/nand/spi/toshiba.c  |  10 +-
->  drivers/mtd/nand/spi/winbond.c  |  10 +-
->  include/linux/mtd/nand.h        | 261 ++++++++++++++++++++++++++++++--
->  include/linux/mtd/spinand.h     |  13 +-
->  include/spi-mem.h               |   2 +
->  12 files changed, 830 insertions(+), 65 deletions(-)
->  create mode 100644 drivers/mtd/nand/ecc.c
+>  net/tcp.c | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
 
-Somehow this should use driver model (along with a suitable API) for
-the ECC acceleration.
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Regards,
-Simon
+
+>
+> diff --git a/net/tcp.c b/net/tcp.c
+> index b0cc8a1fe3e..3e3118de450 100644
+> --- a/net/tcp.c
+> +++ b/net/tcp.c
+> @@ -475,7 +475,7 @@ void tcp_parse_options(uchar *o, int o_len)
+>          * NOPs are options with a zero length, and thus are special.
+>          * All other options have length fields.
+>          */
+> -       for (p = o; p < (o + o_len); p = p + p[1]) {
+> +       for (p = o; p < (o + o_len); ) {
+>                 if (!p[1])
+>                         return; /* Finished processing options */
+>
+> @@ -490,12 +490,14 @@ void tcp_parse_options(uchar *o, int o_len)
+>                 case TCP_O_TS:
+>                         tsopt = (struct tcp_t_opt *)p;
+>                         rmt_timestamp = tsopt->t_snd;
+> -                       return;
+> +                       break;
+>                 }
+>
+>                 /* Process optional NOPs */
+>                 if (p[0] == TCP_O_NOP)
+>                         p++;
+> +               else
+> +                       p += p[1];
+>         }
+>  }
+>
+> --
+> 2.39.2
+>
