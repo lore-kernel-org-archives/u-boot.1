@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 458EFC52D7C
-	for <u-boot@archiver.kernel.org>; Sun, 18 Aug 2024 16:21:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1440C52D7C
+	for <u-boot@archiver.kernel.org>; Sun, 18 Aug 2024 16:24:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D7CD88928;
-	Sun, 18 Aug 2024 18:21:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 026428895A;
+	Sun, 18 Aug 2024 18:24:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kqOzpRMw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WZ5UWqhd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A61EB88950; Sun, 18 Aug 2024 18:21:28 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id D478E87042; Sun, 18 Aug 2024 18:24:15 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B78DB8886A
- for <u-boot@lists.denx.de>; Sun, 18 Aug 2024 18:21:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D8EA48826E
+ for <u-boot@lists.denx.de>; Sun, 18 Aug 2024 18:24:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-3719398eafcso1604208f8f.1
- for <u-boot@lists.denx.de>; Sun, 18 Aug 2024 09:21:26 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-428119da952so27662775e9.0
+ for <u-boot@lists.denx.de>; Sun, 18 Aug 2024 09:24:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1723998086; x=1724602886; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:subject:cc
- :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=j61/A7yYNy1CIrTkemdntxRqLdF4F8XjhAG9QsE1Dxs=;
- b=kqOzpRMw2lj/m5QFLnu11khIHRGc8ENRPvZMGl3s5axwcuKuPKgjDx1uvBRrgX6OBO
- 7+c/k6/V6Fjp1ilNY3y8cuPFf7/QfgBtQnLuMVPlBlh11rm7e1gRsttP5SU7JGhvl2lR
- GrmyagOEEo1nuLhobitU6A2UgfI8JHaNbywLXDYeeYvfy+6f7HyipZzj83dFItFMuCSo
- Vest81k89I6D49oGdSIkLd/uW0D+rOtedL/dzWdzpuGpVnyiCJgg2SnAemu5wKKNIa6u
- YOx/Jnm7LCDa7DOFAkOBFGy3bjcfk1XszntF08cEByZxAExVwOoyWjem1aAEzpCQ63jY
- iLHw==
+ d=gmail.com; s=20230601; t=1723998253; x=1724603053; darn=lists.denx.de;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:subject:cc:to:from:date:message-id:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=avlX9O+++1P/Bn+JNdQskHLfuvBgrkTG1l74BM6ATAI=;
+ b=WZ5UWqhdZogVzVY+AhbzwPcSYSv1JMzSeEhm2vwsSR1axaZqUQPpezFQ7FHuGRwQe4
+ +mla++MAJwaEdj1sPIUbOgHthb1sqFnihOmzyQz0/esNiGsn/BbwlHyN6HadNknvPu03
+ GZcHJjK9YRvBbnS3znHsh5kJNlk5T4sWUBQtcjYWmTbTXtkIhhBM7ANdQ8BVayZRr23t
+ B6OWxr244nemTkU/LAOX9LX8kAPN3ZHqyCn/Fp08kFmr+AZtbKcnu+xyDBwzK8/szrbe
+ Npoiz8ftX5ngfstVxJPZJ7M1eHoUOO6CEei5Rr1EIvenqXZK425PRWZQlDPn/d0vR9BH
+ cxKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723998086; x=1724602886;
- h=in-reply-to:content-disposition:mime-version:references:subject:cc
- :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=j61/A7yYNy1CIrTkemdntxRqLdF4F8XjhAG9QsE1Dxs=;
- b=LxlPkuEQtjSTtm/NT0+Uw/uojepxKNAn2wv5cDHu6bmqJ+TEuz09+ygurN/JrbXORZ
- GxN3jP2gSBqkyjcAUzLMsIq8n5c0b8WJYgbT+IieEdJPHrfbUUh72uJWlI/WVqf8p8zB
- G+YfEj/aMzMnKIyhWKYPwcNt0dNcgmIUDf/ZRgJoWLEG0i8KjlKn1mdZ0d5zL9WUnIdo
- ruCtkf9Bdp28wCD7b0dxDKH5d6acMxAJNWpO6npIBLfGpHtUNInJd5Nfc9t4/pIvCptz
- CmZWZzTKs6pzm7/CwxsFEzsJEuH8s6/i3cGL4K3HxnCVvuon2LUGm8fCIf7cyPo+MJwZ
- ICCA==
+ d=1e100.net; s=20230601; t=1723998253; x=1724603053;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:subject:cc:to:from:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=avlX9O+++1P/Bn+JNdQskHLfuvBgrkTG1l74BM6ATAI=;
+ b=bF7YMAnFLJigtTeVKmbXpkXVdEzYx8hRliQZV+HTHDYNtr/eQhaeu41wNaqSK18JAN
+ RChiJhvnx2huraWuy5kyrsexOGhy3zasGM0otWyR8kYK5Fko8Z7OSf02SoYYqQdE11Rh
+ 46ZAtzS+VWvFHx1ZOZmFsmaqVUsxxHiG4H+NJ8RoJx26jyryYLfhMAzuaIXtwTgKij2p
+ b0gLaGLIL/zQyk1FY17PDLmzJqnYet0Ae4t2SBpOOsmPDoUkoHDT65VkEPH0wPwxvwFx
+ kPMu/Bk6Pu1kXPicUzk4yEqvtF/YBsmvIpnE8xj1nm54BZUP+5I+7EWbrnfm6ivrpVM4
+ UuOA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVSrVPCPc/i0UdcLFAQeu3uQxt6CJN7QdOvFzJTGcsYltQw93McTey2oRCg3Ks0GYOlhDYtypb8aPzZfJpTK2T5OdlhlA==
-X-Gm-Message-State: AOJu0YyuM4nvYph9WiiiYOBhyUsXObxRlZzhp+kzi5PDcubQxYzLZp9L
- 2RQWqHOg4n1olKq62JGy/UjxGQ5yS1Vy06ZV/gj0soShb4wQfhuu
-X-Google-Smtp-Source: AGHT+IELI2dfVSeu4BFThsuVCSUdz6jTP4qzpD5ZOPMdgWmSmJ/1u6lV38+68rnF3owYFen4ej1WkA==
-X-Received: by 2002:a5d:56c8:0:b0:368:8007:e26c with SMTP id
- ffacd0b85a97d-37194651096mr5058601f8f.29.1723998085686; 
- Sun, 18 Aug 2024 09:21:25 -0700 (PDT)
+ AJvYcCU6zoWETpLrF3dX2OEKV+QLmv8x7HtvUONcwgXmbXpNu0usQvK7o8Bjx3rR4X6miSV/hTesI4JQETX1TUxbRsw/2pahbQ==
+X-Gm-Message-State: AOJu0YxMj1cDdx/ntfeCo1UHnbgEEjPeFIeSK+kHmaH50hr9MARVf8ZJ
+ H+3eC/4EvOcHP40lpSlM5Z+bLmt+cnxbKsw9/lspVp45KGVQlFYE
+X-Google-Smtp-Source: AGHT+IGghnLvizfg77Gk3Do18WR3qXs2fV5XohasYylexxhsXq11lwHuItR7skNLNlwyRaq1XLOqvQ==
+X-Received: by 2002:a05:600c:4f4f:b0:426:64a2:5375 with SMTP id
+ 5b1f17b1804b1-429ed77da5fmr63618505e9.1.1723998252991; 
+ Sun, 18 Aug 2024 09:24:12 -0700 (PDT)
 Received: from Ansuel-XPS. (host-79-47-255-50.retail.telecomitalia.it.
  [79.47.255.50]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-371898aa496sm8350134f8f.89.2024.08.18.09.21.23
+ 5b1f17b1804b1-429ded18468sm132363935e9.2.2024.08.18.09.24.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 18 Aug 2024 09:21:25 -0700 (PDT)
-Message-ID: <66c21f85.5d0a0220.234a1d.799a@mx.google.com>
-X-Google-Original-Message-ID: <ZsIaNykO-cQuZrFN@Ansuel-XPS.>
-Date: Sun, 18 Aug 2024 17:58:47 +0200
+ Sun, 18 Aug 2024 09:24:12 -0700 (PDT)
+Message-ID: <66c2202c.050a0220.241426.5b85@mx.google.com>
+X-Google-Original-Message-ID: <ZsIa7DjG68jMf8Ju@Ansuel-XPS.>
+Date: Sun, 18 Aug 2024 18:01:48 +0200
 From: Christian Marangi <ansuelsmth@gmail.com>
-To: Heiko Schocher <hs@denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: hs@denx.de, Tom Rini <trini@konsulko.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Miquel Raynal <miquel.raynal@bootlin.com>,
  Arseniy Krasnov <avkrasnov@salutedevices.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
  Martin Kurbanov <mmkurbanov@salutedevices.com>,
  Alexey Romanov <avromanov@salutedevices.com>,
  Dmitry Dunaev <dunaev@tecon.ru>,
@@ -92,10 +93,12 @@ Subject: Re: [PATCH v3 8/9] ubi: implement support for LED activity
 References: <20240812103254.26972-1-ansuelsmth@gmail.com>
  <20240812103254.26972-9-ansuelsmth@gmail.com>
  <32d0b8ed-3986-3011-a0a8-e4640ee10ff1@denx.de>
+ <CAOf5uw=x866W0Uw0ZmDrD4eAputNBb3n3b=-TED2ga4H+MfYPw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <32d0b8ed-3986-3011-a0a8-e4640ee10ff1@denx.de>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAOf5uw=x866W0Uw0ZmDrD4eAputNBb3n3b=-TED2ga4H+MfYPw@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,68 +115,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Aug 14, 2024 at 06:33:12AM +0200, Heiko Schocher wrote:
-> Hello Christian,
+On Wed, Aug 14, 2024 at 10:17:18AM +0200, Michael Nazzareno Trimarchi wrote:
+> Hi all
 > 
-> On 12.08.24 12:32, Christian Marangi wrote:
-> > Implement support for LED activity. If the feature is enabled,
-> > make the defined ACTIVITY LED to signal ubi write operation.
-> > 
-> > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
-> > ---
-> >   cmd/ubi.c | 17 +++++++++++++++--
-> >   1 file changed, 15 insertions(+), 2 deletions(-)
-> > 
-> > diff --git a/cmd/ubi.c b/cmd/ubi.c
-> > index 0e62e449327..6f679eae9c3 100644
-> > --- a/cmd/ubi.c
-> > +++ b/cmd/ubi.c
-> > @@ -14,6 +14,7 @@
-> >   #include <command.h>
-> >   #include <env.h>
-> >   #include <exports.h>
-> > +#include <led.h>
-> >   #include <malloc.h>
-> >   #include <memalign.h>
-> >   #include <mtd.h>
-> > @@ -488,10 +489,22 @@ exit:
-> >   int ubi_volume_write(char *volume, void *buf, loff_t offset, size_t size)
-> >   {
-> > +	int ret;
-> > +
-> > +#ifdef CONFIG_LED_ACTIVITY_ENABLE
-> > +	led_activity_blink();
-> > +#endif
-> 
-> Do we really need ifdef? May it is possible to declare an empty function
-> when CONFIG_LED_ACTIVITY_ENABLE is not set? May this applies for the whole
-> series?
+> On Wed, Aug 14, 2024 at 6:34 AM Heiko Schocher <hs@denx.de> wrote:
+> >
+> > Hello Christian,
+> >
+> > On 12.08.24 12:32, Christian Marangi wrote:
+> > > Implement support for LED activity. If the feature is enabled,
+> > > make the defined ACTIVITY LED to signal ubi write operation.
+> > >
+> > > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+> > > ---
+> > >   cmd/ubi.c | 17 +++++++++++++++--
+> > >   1 file changed, 15 insertions(+), 2 deletions(-)
+> > >
+> > > diff --git a/cmd/ubi.c b/cmd/ubi.c
+> > > index 0e62e449327..6f679eae9c3 100644
+> > > --- a/cmd/ubi.c
+> > > +++ b/cmd/ubi.c
+> > > @@ -14,6 +14,7 @@
+> > >   #include <command.h>
+> > >   #include <env.h>
+> > >   #include <exports.h>
+> > > +#include <led.h>
+> > >   #include <malloc.h>
+> > >   #include <memalign.h>
+> > >   #include <mtd.h>
+> > > @@ -488,10 +489,22 @@ exit:
+> > >
+> > >   int ubi_volume_write(char *volume, void *buf, loff_t offset, size_t size)
+> > >   {
+> > > +     int ret;
+> > > +
+> > > +#ifdef CONFIG_LED_ACTIVITY_ENABLE
+> > > +     led_activity_blink();
+> > > +#endif
+> >
+> > Do we really need ifdef? May it is possible to declare an empty function
+> > when CONFIG_LED_ACTIVITY_ENABLE is not set? May this applies for the whole
+> > series?
+> >
+> > > +
+> > >       if (!offset)
+> > > -             return ubi_volume_begin_write(volume, buf, size, size);
+> > > +             ret = ubi_volume_begin_write(volume, buf, size, size);
+> > > +     else
+> > > +             ret = ubi_volume_offset_write(volume, buf, offset, size);
+> > >
+> > > -     return ubi_volume_offset_write(volume, buf, offset, size);
+> > > +#ifdef CONFIG_LED_ACTIVITY_ENABLE
+> > > +     led_activity_off();
+> > > +#endif
+> > > +
+> > > +     return ret;
+> > >   }
+> > >
+> > >   int ubi_volume_read(char *volume, char *buf, loff_t offset, size_t size)
+> > >
+> >
+> I rather prefer to have some registration of events that need to be executed for
+> a particular i/o activity and then a subscription process from led
+> subsystem if that
+> particular event is connected to the dts or just on a board file
 >
 
-Yes can be done.
+My concern is that it might become too complex just for the sake of
+putting a LED intro a state. Do we have other case where such event
+subsystem might be useful?
 
-> > +
-> >   	if (!offset)
-> > -		return ubi_volume_begin_write(volume, buf, size, size);
-> > +		ret = ubi_volume_begin_write(volume, buf, size, size);
-> > +	else
-> > +		ret = ubi_volume_offset_write(volume, buf, offset, size);
-> > -	return ubi_volume_offset_write(volume, buf, offset, size);
-> > +#ifdef CONFIG_LED_ACTIVITY_ENABLE
-> > +	led_activity_off();
-> > +#endif
-> > +
-> > +	return ret;
-> >   }
-> >   int ubi_volume_read(char *volume, char *buf, loff_t offset, size_t size)
-> > 
+Uboot is not really multi thread so we don't expect that much thing to
+happen at the same time. Do we have case where an i/o might happen in
+multiple place? Example transfering data and writing them at the same
+time? The common practice is to first transfer and then handle.
+
 > 
-> bye,
-> Heiko
+> 
+> > bye,
+> > Heiko
+> > --
+> > DENX Software Engineering GmbH,      Managing Director: Erika Unter
+> > HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+> > Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+> 
+> 
+> 
 > -- 
-> DENX Software Engineering GmbH,      Managing Director: Erika Unter
-> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-> Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+> Michael Nazzareno Trimarchi
+> Co-Founder & Chief Executive Officer
+> M. +39 347 913 2170
+> michael@amarulasolutions.com
+> __________________________________
+> 
+> Amarula Solutions BV
+> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+> T. +31 (0)85 111 9172
+> info@amarulasolutions.com
+> www.amarulasolutions.com
 
 -- 
 	Ansuel
