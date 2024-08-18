@@ -4,77 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D273BC52D7C
-	for <u-boot@archiver.kernel.org>; Sun, 18 Aug 2024 15:26:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37A19C52D7C
+	for <u-boot@archiver.kernel.org>; Sun, 18 Aug 2024 15:37:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89F5088906;
-	Sun, 18 Aug 2024 17:25:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id AAC2C88852;
+	Sun, 18 Aug 2024 17:37:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sigma-star.at
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nw0G74ns";
+	dkim=pass (2048-bit key; unprotected) header.d=sigma-star.at header.i=@sigma-star.at header.b="IyjaqW/k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E284E88906; Sun, 18 Aug 2024 17:25:53 +0200 (CEST)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id E5DF08886A; Sun, 18 Aug 2024 17:37:05 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 946A588928
- for <u-boot@lists.denx.de>; Sun, 18 Aug 2024 17:25:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CAA188744
+ for <u-boot@lists.denx.de>; Sun, 18 Aug 2024 17:37:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6bf7a2035d9so26194816d6.1
- for <u-boot@lists.denx.de>; Sun, 18 Aug 2024 08:25:51 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=sigma-star.at
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=richard@sigma-star.at
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5a108354819so4530064a12.0
+ for <u-boot@lists.denx.de>; Sun, 18 Aug 2024 08:37:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1723994750; x=1724599550; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=sigma-star.at; s=google; t=1723995423; x=1724600223; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+PNrmUVhziT2+t5tY69AGt1VmQu2KRNAx6hWTcfV/XA=;
- b=nw0G74nsKD/fmIrtVWWBb2kmjQuPIcEwNgHtEPcOLaAfPinIozOpv0JuTpsrZ0AroJ
- x9AG1BXYHKEyhQWDkmarQUCc9/tevpqDcWw0w9HQ+Rj1zN0yxDa98ekRrB5RiOsEeACE
- Cbighxlucx1PGkTW/dhqGtY8+9PwYMN7p1DQs=
+ bh=sjNCm85s57hSZ22y5VWEzvrL4iLUR1C0Wh9RshsmxRM=;
+ b=IyjaqW/kFPu8Y8CRXi7f6TSUB1jlxfppkQMxg6N0ZwAng7oZCIkPgP871i/92AtUO8
+ 0lVBZ7b+Ks8JwvXxnzRQ8sF2g/NEY1iG2ZdNkFg3M9aQ+hZFuCWMeU5f/5JTZap9YYxQ
+ OT5rS4Ne3IuLGyOzElP1O35oBQSTkG8SPAIBaHwYb9ywQsCHMY30FpjDS5Dz1DZrpUHX
+ VavVB0U1vb+W1ksQbzfif8J2C5DskpL2uDrS8TqNuzKpUp9DjJHKtjTELrSoFS2Kf5Fv
+ uXHbR87wGvjzr7lYwnMJyM8x+a0mSJsoDdGE4I/tFQBeI0hOMT6mjLCKc0VpKOL6wIQJ
+ tq6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723994750; x=1724599550;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1723995423; x=1724600223;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+PNrmUVhziT2+t5tY69AGt1VmQu2KRNAx6hWTcfV/XA=;
- b=brT3sdbwBMMlGHMQcShi1SM2rm+CQX9zU+yvV0bGQeMdOO/Vtsc7l+GHO7tckL9MAM
- KOjvaTgaSGvXGksAIWwCZAVPmcIhtYhoMPaA7/AcDpybMgWBp4jtbtZJKJOaU7VTZUuA
- tASN7g6mIHPLggR16oNpkFyNLNf1fpTnyoFP+30sGz+MzOwGYEMHN9MkrNDwaWpyoNmD
- yxwH/Tx70eWUM1AQGtvDWxkTnqUDAzrqGNngeIS+BqV2gHrQpGqxBiEgEPj+gOgut3Y0
- qngqhCIxCvaRXSyA6Ll8iriqkv7Rlvo/zG7gUdmG4d/RNOA0jpUrGAIgZ53GAClt36+Z
- 9oXw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUfto5GMa0lGkZ4xoqZqUD+P4afXR6yZbQy+ZjrQX+QYpcfTtFVvSpSn3EieEPwkxujg+7VXj0=@lists.denx.de
-X-Gm-Message-State: AOJu0YygbQZg+sO62fpBJ3S2x1gBbDYJnKYa0xz4NQClEE3u+m48OMHV
- ZJ0d8OQtzHTF9JZjd4i3xg+QVtBsSllshDQ7tPKG2uVHQJIpWrpb3ERfRI/eWwubTpUa9L7/OZS
- 6s71k7um1mBPwKz5aFGNFha5BO9xbjvD7ZsIk
-X-Google-Smtp-Source: AGHT+IFqIY8qCOMysFwtRD7nBS2dy9ffmrC3NqfMv5tJfdzlS2A/O62b2iGZKZpp2LpIuGOTkZLCM2ZzhGUK1eLhcQw=
-X-Received: by 2002:a05:6214:d45:b0:6bd:6a90:6472 with SMTP id
- 6a1803df08f44-6bf6dd08cb5mr212299066d6.1.1723994750461; Sun, 18 Aug 2024
- 08:25:50 -0700 (PDT)
+ bh=sjNCm85s57hSZ22y5VWEzvrL4iLUR1C0Wh9RshsmxRM=;
+ b=LRURDkRrjKYwgXwOAoect2CDtlBRSXNivJe2/UzkIKOSrGy/DO2mtmNlC6a5tFpSTR
+ tOK4cipkrQGAIqUfzhiIJfB9qgj0PtTlOWhypCi8brmckEud8yMS155jAZCG764F+G9H
+ oDd/yOf8AKmVyqBPiYg8guFic02diAm/Kf4Z+os1B+HkjTuX1B8msoYlO4xBUTo+PQce
+ F8jR211hbvG77+KmrS1Yl0MYgklIrunaK8yonnLRXUxr+MsFMjRDbvwxtQCHhRMEW9Ef
+ qrkYTlBklLMJ39hl08TWNOY71iOdlyvU8UCU/2TKA+nlf/tlqHtj2Hx2+dcdUH+jsQu9
+ wvkw==
+X-Gm-Message-State: AOJu0Yy9aeo9oZXqd6g4rjWoogj2gZy//Aae7sqrdOtGYhjiNyxzgSLF
+ MS0RH0T3kft+N9kp0FgXhjWc1i1n+v0ua5hJxIVz9lOaIuFLSsZiG81aUYAJF+0=
+X-Google-Smtp-Source: AGHT+IH5vjFlNQX5rWWy1w7UkDdh4dLarPhK+aN3muXwV6gvvJRwJpciv5XeLVXxl5qy8j+yUifFKA==
+X-Received: by 2002:a05:6402:3509:b0:5a2:d411:89fa with SMTP id
+ 4fb4d7f45d1cf-5beca906d71mr4701384a12.36.1723995422460; 
+ Sun, 18 Aug 2024 08:37:02 -0700 (PDT)
+Received: from blindfold.localnet (84-115-238-31.cable.dynamic.surfer.at.
+ [84.115.238.31]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5bebbbe274asm4721221a12.8.2024.08.18.08.37.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 18 Aug 2024 08:37:02 -0700 (PDT)
+From: Richard Weinberger <richard@sigma-star.at>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>,
+ Richard Weinberger <richard@nod.at>, upstream+uboot@sigma-star.at,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Christian Taedcke <christian.taedcke@weidmueller.com>
+Subject: Re: [PATCH 1/3] test_fs: Allow running unprivileged
+Date: Sun, 18 Aug 2024 17:37:01 +0200
+Message-ID: <3292219.QWXsJ6tzlI@somecomputer>
+In-Reply-To: <CAFLszThjZKm+=J2oBGeTUYt_fZxbu5KXzGYXXJnnuXaCD2322w@mail.gmail.com>
+References: <20240802093322.15240-1-richard@nod.at>
+ <1796341.KUTt5R2Mg1@somecomputer>
+ <CAFLszThjZKm+=J2oBGeTUYt_fZxbu5KXzGYXXJnnuXaCD2322w@mail.gmail.com>
 MIME-Version: 1.0
-References: <20240814071037.34446-1-heinrich.schuchardt@canonical.com>
- <CAFLszTj29ZXtVSmyA-pDp61UuvvMEVks5barSYjNRqUH+mgSpQ@mail.gmail.com>
- <4b7a4178-1224-44fa-8998-800721728211@canonical.com>
- <CAFLszTj7S=DpXa_xLcpqYpPZHSmqzzsL0GHtGKuZkB_Qi1hQ=w@mail.gmail.com>
- <CAJaLiFxcHVfLANeGY-UDwELB-1_Dismu7MV8dZJh8J+bXyY8Vg@mail.gmail.com>
-In-Reply-To: <CAJaLiFxcHVfLANeGY-UDwELB-1_Dismu7MV8dZJh8J+bXyY8Vg@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 18 Aug 2024 16:25:38 +0100
-Message-ID: <CAFLszTjFjjouq=TqE0445KtDuSx7aDvTwAsdUkJwUj35xGzYWA@mail.gmail.com>
-Subject: Re: [PATCH v3 1/1] ata: sata_rescan must scan for block devices
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>, 
- Stefan Roese <sr@denx.de>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,199 +98,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tony,
+Simon,
 
-On Sun, 18 Aug 2024 at 06:01, Tony Dinh <mibodhi@gmail.com> wrote:
->
-> Hi Simon,
->
-> On Fri, Aug 16, 2024 at 3:32=E2=80=AFAM Simon Glass <sjg@chromium.org> wr=
-ote:
-> >
-> > Hi Heinrich,
-> >
-> > On Wed, 14 Aug 2024 at 06:53, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> > >
-> > > On 14.08.24 14:40, Simon Glass wrote:
-> > > > On Wed, 14 Aug 2024 at 01:10, Heinrich Schuchardt
-> > > > <heinrich.schuchardt@canonical.com> wrote:
-> > > >>
-> > > >> A system may have multiple SATA controller. Removing the controlle=
-r with
-> > > >> the lowest sequence number before probing all SATA controllers mak=
-es no
-> > > >> sense.
-> > > >>
-> > > >> In sata_rescan we remove all block devices which are children of S=
-ATA
-> > > >> controllers. We also have to remove the bootdev devices as they wi=
-ll be
-> > > >> created when scanning for block devices.
-> > > >>
-> > > >> After probing all SATA controllers we must scan for block devices =
-otherwise
-> > > >> we end up without any SATA block device.
-> > > >>
-> > > >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.=
-com>
-> > > >> ---
-> > > >> v3:
-> > > >>          continue unbinding and scanning if one device fails
-> > > >>          write a message if scanning fails
-> > > >>          add device name to error message
-> > > >> v2:
-> > > >>          Scanning for device on an unprobed SATA controller leads
-> > > >>          to an illegal memory access.
-> > > >>          Use uclass_foreach_dev_probe() instead of uclass_foreach_=
-dev().
-> > > >> ---
-> > > >>   drivers/ata/sata.c | 48 +++++++++++++++++++++++++---------------=
-------
-> > > >>   1 file changed, 26 insertions(+), 22 deletions(-)
-> > > >>
-> > > >> diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
-> > > >> index 84437d3d346..89cd516f3d6 100644
-> > > >> --- a/drivers/ata/sata.c
-> > > >> +++ b/drivers/ata/sata.c
-> > > >> @@ -9,9 +9,12 @@
-> > > >>    *             Dave Liu <daveliu@freescale.com>
-> > > >>    */
-> > > >>
-> > > >> +#define LOG_CATEGORY UCLASS_AHCI
-> > > >> +
-> > > >>   #include <ahci.h>
-> > > >>   #include <blk.h>
-> > > >>   #include <dm.h>
-> > > >> +#include <log.h>
-> > > >>   #include <part.h>
-> > > >>   #include <sata.h>
-> > > >>   #include <dm/device-internal.h>
-> > > >> @@ -49,38 +52,39 @@ int sata_scan(struct udevice *dev)
-> > > >>
-> > > >>   int sata_rescan(bool verbose)
-> > > >>   {
-> > > >> +       struct uclass *uc;
-> > > >> +       struct udevice *dev; /* SATA controller */
-> > > >>          int ret;
-> > > >> -       struct udevice *dev;
-> > > >>
-> > > >>          if (verbose)
-> > > >> -               printf("Removing devices on SATA bus...\n");
-> > > >> -
-> > > >> -       blk_unbind_all(UCLASS_AHCI);
-> > > >> -
-> > > >> -       ret =3D uclass_find_first_device(UCLASS_AHCI, &dev);
-> > > >> -       if (ret || !dev) {
-> > > >> -               printf("Cannot find SATA device (err=3D%d)\n", ret=
-);
-> > > >> -               return -ENOENT;
-> > > >> -       }
-> > > >> -
-> > > >> -       ret =3D device_remove(dev, DM_REMOVE_NORMAL);
-> > > >> -       if (ret) {
-> > > >> -               printf("Cannot remove SATA device '%s' (err=3D%d)\=
-n", dev->name, ret);
-> > > >> -               return -ENOSYS;
-> > > >> +               printf("scanning bus for devices...\n");
-> > > >> +
-> > > >> +       ret =3D uclass_get(UCLASS_AHCI, &uc);
-> > > >> +       if (ret)
-> > > >> +               return ret;
-> > > >> +
-> > > >> +       /* Remove all children of SATA devices (blk and bootdev) *=
-/
-> > > >> +       uclass_foreach_dev(dev, uc) {
-> > > >> +               log_debug("unbind %s\n", dev->name);
-> > > >> +               ret =3D device_chld_remove(dev, NULL, DM_REMOVE_NO=
-RMAL);
-> > > >> +               if (!ret)
-> > > >> +                       ret =3D device_chld_unbind(dev, NULL);
-> > > >> +               if (ret && verbose) {
-> > > >> +                       log_err("Unbinding from %s failed (%dE)\n"=
-,
-> > > >> +                               dev->name, ret);
-> > > >> +               }
-> > > >>          }
-> > > >
-> > > > This code is in usb_stop() to, so please put it in a shared functio=
-n.
-> > > > How about uclass_unbind_children(enum uclass_id) ?
-> > >
-> > > git grep -A5 -n uclass_foreach_dev | grep device_chld_remove
-> > >
-> > > only finds
-> > >
-> > > drivers/scsi/scsi.c-571-
-> > >                  ret =3D device_chld_remove(dev, NULL, DM_REMOVE_NORM=
-AL);
-> > >
-> > > Where did you see matching USB code?
-> >
-> > It is in usb_stop() as I said above. See drivers/usb/host/usb-uclass.c
-> >
-> > There might be other similar code, but what SATA is doing here is
-> > similar to what others do, or want to do.
->
-> IMHO, in the current implementation, the abstraction level is just
-> right for the SATA, SCSI, and USB uclasses. There is no need to
-> commonize further. I would keep the (re)scanning logic separate for
-> each type of these devices.
+Am Sonntag, 18. August 2024, 17:25:37 CEST schrieb Simon Glass:
+> > So, can we please have mkimage inside the Docker image?
+>=20
+> Sorry about all your trouble. Perhaps we should add a comment about
 
-Yes I agree the scanning logic does its own thing...the question is
-what to do about the unbinding logic. Anyway, if Heinrich doesn't see
-any common code, I think it is fine. I'll add my review tag just in
-case.
+No need to worry. :)
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+> specifically what the code is for. Also, once you get all this in, we
+> can perhaps remove the fallbacks. I still get errors from qemu-img on
 
-> >
-> >
-> > >
-> > > scsi_scan() could also use a rewrite to avoid stopping at the first e=
-rror.
-> > >
-> > > I guess sata_rescan() and scsi_scan() could be the same function taki=
-ng
-> > > a uclass ID as an argument?
-> > >
-> > > Best regards
-> > >
-> > > Heinrich
-> > >
-> > > >
-> > > >>
-> > > >>          if (verbose)
-> > > >>                  printf("Rescanning SATA bus for devices...\n");
-> > > >>
-> > > >> -       ret =3D uclass_probe_all(UCLASS_AHCI);
-> > > >> -
-> > > >> -       if (ret =3D=3D -ENODEV) {
-> > > >> -               if (verbose)
-> > > >> -                       printf("No SATA block device found\n");
-> > > >> -               return 0;
-> > > >> +       uclass_foreach_dev_probe(UCLASS_AHCI, dev) {
-> > > >> +               ret =3D sata_scan(dev);
-> > > >> +               if (ret && verbose)
-> > > >> +                       log_err("Scanning %s failed (%dE)\n", dev-=
->name, ret);
-> > > >>          }
-> > > >>
-> > > >> -       return ret;
-> > > >> +       return 0;
-> > > >>   }
-> > > >>
-> > > >>   static unsigned long sata_bread(struct udevice *dev, lbaint_t st=
-art,
-> > > >> --
-> > > >> 2.45.2
-> > > >>
-> > > >
-> > > > If you have time, please add a test for ahci (dm/test/ahci)
-> > > >
-> > > > Regards,
-> > > > Simon
-> > >
+I hope we can remove all these fall backs.
+IMHO, unit tests have to behave always the same way.
 
-Regards,
-Simon
+> Ubuntu unless I chmod a+r /boot/* but presumably you don't use that
+> tool.
+
+On recent Ubuntu releases this should be resolved:
+https://bugs.launchpad.net/ubuntu/+source/libguestfs/+bug/1673431
+
+> For mkinage, it would be better to use the version that is built in
+> CI, for sandbox. That is how the tools tests work.
+
+True that!
+Off the head, I don't know how to achieve this, but my knowledge of
+the Azure pipeline setup is limited.
+
+Thanks,
+//richard
+
+=2D-=20
+=E2=80=8B=E2=80=8B=E2=80=8B=E2=80=8B=E2=80=8Bsigma star gmbh | Eduard-Bodem=
+=2DGasse 6, 6020 Innsbruck, AUT
+UID/VAT Nr: ATU 66964118 | FN: 374287y
+
+
