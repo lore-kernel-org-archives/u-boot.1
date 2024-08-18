@@ -4,92 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 012FAC52D7C
-	for <u-boot@archiver.kernel.org>; Sun, 18 Aug 2024 19:32:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74DEDC52D7C
+	for <u-boot@archiver.kernel.org>; Sun, 18 Aug 2024 20:04:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 106C288100;
-	Sun, 18 Aug 2024 21:32:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 9847F88953;
+	Sun, 18 Aug 2024 22:04:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="cXOagFTC";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="P6Ah/A1S";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="QwmZTdl3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9447D87ED0; Sun, 18 Aug 2024 21:32:48 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2B44788955; Sun, 18 Aug 2024 22:04:13 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A45DA88100
- for <u-boot@lists.denx.de>; Sun, 18 Aug 2024 21:32:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9F62388440
+ for <u-boot@lists.denx.de>; Sun, 18 Aug 2024 22:04:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a7a83a968ddso423889166b.0
- for <u-boot@lists.denx.de>; Sun, 18 Aug 2024 12:32:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1724009565; x=1724614365;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=phEf1gm9B5Q0T/B0qQyqqd+OvQIkn43+9qelkJzhTQg=;
- b=cXOagFTCn5S0Glss01tkFTysNQV8UZDyN3bxYXvtl3HMCsiw0Zs9Ep1M0wf+65aTCx
- h87Vgm7oqd6k2JwPNKaqz2Mc/R80VfeZu82RObtMpZsnOT4wEexQW8WscUR/jdB0NCKX
- g979gR98qE44EGvnc0qAZAyVm3WG/Y2ncfSbY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724009565; x=1724614365;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=phEf1gm9B5Q0T/B0qQyqqd+OvQIkn43+9qelkJzhTQg=;
- b=UvvRH1wK/kZzpSiNV6dig2t+5tjFLvyaoZ5RVPrLZQx4Vw0cIgS3MReWku0Wc2iz5b
- rFW7sRwAwhCGrjf1M02YCECxcnLDL/E1EdR+PbvKbKPrkIPAieA/s3RK17uiwwyKl+7Z
- LLoXNeF37DlrR7bs7iL2IVNLLuby6A/s3hAJOX3R/8IgKRvJKg3/T1C64zToKwG8R6Jo
- E5qUlzLSjEh9zJa9sdCF51rhS21+w2DrekOy1L/aX1LyPbXS0BS13cVKHIbIshAgLtXO
- CFHQqm2f0A6k0SXTpR8smhuF9isTq72ErvtM2AEd35db70QZ7mp+bxL2Llk6fkwN7zwv
- Z7JA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVCafccYs8/L/kC8dkFQmig3zupjK0Y1HQtg6tzW/gW4dSdCX1BorTYfE5jPEym/wUS51hrbKOt18ZNS1CP6iY2krGA+A==
-X-Gm-Message-State: AOJu0Yx4Zfty624ciNy6QCqGonl8SibQsbp193O1apTh3nudlygo4V+G
- QDFzsk+12H5RzK2IE8ocQmCNfLfhZoTWEn6woyOq+QExWr5YVkAHYpF8s+EWhy1B4djY9OSWEhL
- DCS7E8wfBIAILIz+lLWwMFGQvk/p+Or98gkq6BQ==
-X-Google-Smtp-Source: AGHT+IH3biBHwDjvdWlsfwHOsew0RQ6f3+XR0n2vtEo6ooUavTWhbhbe/Npw5iEW6Uh40HtpVq950h04lW8zzTE1OMM=
-X-Received: by 2002:a17:907:e60f:b0:a7d:3c46:f4ae with SMTP id
- a640c23a62f3a-a83929d37acmr610802866b.55.1724009564413; Sun, 18 Aug 2024
- 12:32:44 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4Wn6BL16vgz9sd7;
+ Sun, 18 Aug 2024 22:04:10 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1724011450;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=9Squ7wLqzHieoRCaYdh3vheQkGjY2dKHQvMSzcaXJv8=;
+ b=P6Ah/A1S9rphu1O129Qksm8xNhgrIKe5lhz6fq2O9djPepAL2HVdZvh6Xe95jODkjUyi0e
+ XazB36Skmr5BQzmmFY8/jbUaARkZiFTLRf9acwQTgz/kvihb+32YV2wl4OqKy5arYa3N8K
+ fBmqGQSXWSH1H7fQCmd+QDWGmnyviHy8YZ+1HrJf2avkO6Y5MSQ3P4TuJmZHJnniwwPQMG
+ iTgLi+AX9dMS4m0SNELaknHD04jK9avxB293RY+kkzKPoB7UAGAYT7CEbaxpMdgcyPJkgD
+ kYRU6YjTJ4qhE6y34VPaOT/+xsEzl9lLxNTQLE8vq0k3PajKPuloNmhWBIxHOQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1724011448;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=9Squ7wLqzHieoRCaYdh3vheQkGjY2dKHQvMSzcaXJv8=;
+ b=QwmZTdl3komNMaa/uTa7iiwHBTWgxg2v4mi9bcDOtATRP/Jr+kfTEzsQFBDkTXSbi4qDUW
+ DGiZj8wCUeU1VEqiy3cwrb+rp30bTFxYbfGv4pCP0V+dLVf1OsNhtSQ1u7Q92vlX9we9+g
+ gtI5zLnMHaNn5rQtgZnYrEtl36TA4Hk5PsQZheGC6NFi/M/ppwUFr2lOppAZsvov1kXxpv
+ 4By/RDx8FNa09q9K2w62o4AuyZpKF4QWxW+DbO+mTQoPYdO4Jy5hgf6p+GatLW1ZUZgM8f
+ X4sRRSz6+Hz1QsRHBytcy7+Pt2nhuZqasyFfL//2H1H1VrTvbnRCT0kCxMI3Hw==
+To: u-boot@lists.denx.de
+Cc: francesco.dolcini@toradex.com, seanga2@gmail.com, sjg@chromium.org,
+ trini@konsulko.com, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PATCH] treewide: Scrub trailing space
+Date: Sun, 18 Aug 2024 22:03:20 +0200
+Message-ID: <20240818200356.89000-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20240812103254.26972-1-ansuelsmth@gmail.com>
- <20240812103254.26972-9-ansuelsmth@gmail.com>
- <32d0b8ed-3986-3011-a0a8-e4640ee10ff1@denx.de>
- <CAOf5uw=x866W0Uw0ZmDrD4eAputNBb3n3b=-TED2ga4H+MfYPw@mail.gmail.com>
- <66c2202c.050a0220.241426.5b85@mx.google.com>
-In-Reply-To: <66c2202c.050a0220.241426.5b85@mx.google.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Sun, 18 Aug 2024 21:32:32 +0200
-Message-ID: <CAOf5uwn6EAQREOkj4LtgN60La7jH5kSB3oNj=OSuJj5iPgRASQ@mail.gmail.com>
-Subject: Re: [PATCH v3 8/9] ubi: implement support for LED activity
-To: Christian Marangi <ansuelsmth@gmail.com>
-Cc: hs@denx.de, Tom Rini <trini@konsulko.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Arseniy Krasnov <avkrasnov@salutedevices.com>, 
- Martin Kurbanov <mmkurbanov@salutedevices.com>,
- Alexey Romanov <avromanov@salutedevices.com>, 
- Dmitry Dunaev <dunaev@tecon.ru>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <sean.anderson@seco.com>, Artur Rojek <artur@conclusive.pl>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Vasileios Amoiridis <vassilisamir@gmail.com>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Michael Polyntsov <michael.polyntsov@iopsys.eu>,
- Doug Zobel <douglas.zobel@climate.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 11eb4591a7bcb84b42f
+X-MBO-RS-META: qn7w39b7npqr7zxb4t9padtdxq1aoged
+X-Rspamd-Queue-Id: 4Wn6BL16vgz9sd7
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,159 +84,485 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Remove all trailing space from the code base. No functional change.
+Implemented using the following one-liner:
+$ find . -name \*.c -o -name \*.h -exec sed -i 's@[ \t]\+$@@' {} \;
 
-On Sun, Aug 18, 2024 at 6:24=E2=80=AFPM Christian Marangi <ansuelsmth@gmail=
-.com> wrote:
->
-> On Wed, Aug 14, 2024 at 10:17:18AM +0200, Michael Nazzareno Trimarchi wro=
-te:
-> > Hi all
-> >
-> > On Wed, Aug 14, 2024 at 6:34=E2=80=AFAM Heiko Schocher <hs@denx.de> wro=
-te:
-> > >
-> > > Hello Christian,
-> > >
-> > > On 12.08.24 12:32, Christian Marangi wrote:
-> > > > Implement support for LED activity. If the feature is enabled,
-> > > > make the defined ACTIVITY LED to signal ubi write operation.
-> > > >
-> > > > Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
-> > > > ---
-> > > >   cmd/ubi.c | 17 +++++++++++++++--
-> > > >   1 file changed, 15 insertions(+), 2 deletions(-)
-> > > >
-> > > > diff --git a/cmd/ubi.c b/cmd/ubi.c
-> > > > index 0e62e449327..6f679eae9c3 100644
-> > > > --- a/cmd/ubi.c
-> > > > +++ b/cmd/ubi.c
-> > > > @@ -14,6 +14,7 @@
-> > > >   #include <command.h>
-> > > >   #include <env.h>
-> > > >   #include <exports.h>
-> > > > +#include <led.h>
-> > > >   #include <malloc.h>
-> > > >   #include <memalign.h>
-> > > >   #include <mtd.h>
-> > > > @@ -488,10 +489,22 @@ exit:
-> > > >
-> > > >   int ubi_volume_write(char *volume, void *buf, loff_t offset, size=
-_t size)
-> > > >   {
-> > > > +     int ret;
-> > > > +
-> > > > +#ifdef CONFIG_LED_ACTIVITY_ENABLE
-> > > > +     led_activity_blink();
-> > > > +#endif
-> > >
-> > > Do we really need ifdef? May it is possible to declare an empty funct=
-ion
-> > > when CONFIG_LED_ACTIVITY_ENABLE is not set? May this applies for the =
-whole
-> > > series?
-> > >
-> > > > +
-> > > >       if (!offset)
-> > > > -             return ubi_volume_begin_write(volume, buf, size, size=
-);
-> > > > +             ret =3D ubi_volume_begin_write(volume, buf, size, siz=
-e);
-> > > > +     else
-> > > > +             ret =3D ubi_volume_offset_write(volume, buf, offset, =
-size);
-> > > >
-> > > > -     return ubi_volume_offset_write(volume, buf, offset, size);
-> > > > +#ifdef CONFIG_LED_ACTIVITY_ENABLE
-> > > > +     led_activity_off();
-> > > > +#endif
-> > > > +
-> > > > +     return ret;
-> > > >   }
-> > > >
-> > > >   int ubi_volume_read(char *volume, char *buf, loff_t offset, size_=
-t size)
-> > > >
-> > >
-> > I rather prefer to have some registration of events that need to be exe=
-cuted for
-> > a particular i/o activity and then a subscription process from led
-> > subsystem if that
-> > particular event is connected to the dts or just on a board file
-> >
->
-> My concern is that it might become too complex just for the sake of
-> putting a LED intro a state. Do we have other case where such event
-> subsystem might be useful?
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
+Cc: Sean Anderson <seanga2@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ fs/btrfs/conv-funcs.h       |  2 +-
+ fs/ubifs/ubifs.h            |  2 +-
+ include/linux/rbtree.h      |  4 ++--
+ include/linux/zstd_errors.h |  2 +-
+ include/valgrind/memcheck.h |  8 +++----
+ include/valgrind/valgrind.h | 46 +++++++++++++++++------------------
+ lib/dhry/dhry.h             | 48 ++++++++++++++++++-------------------
+ 7 files changed, 56 insertions(+), 56 deletions(-)
 
-I was thinking of reusing the cyclic subsystem that allows you to
-subscribe to functions
-that are executed periodically. I mean it's not exciting to have
-function call everywhere,
-and anyway I think that
+diff --git a/fs/btrfs/conv-funcs.h b/fs/btrfs/conv-funcs.h
+index 0a7af9dc873..abf87c6df2a 100644
+--- a/fs/btrfs/conv-funcs.h
++++ b/fs/btrfs/conv-funcs.h
+@@ -167,7 +167,7 @@ DEFINE_CONV(btrfs_super_block, bytenr, flags, magic, generation, root,
+ 	    __unused_leafsize, stripesize, sys_chunk_array_size,
+ 	    chunk_root_generation, compat_flags, compat_ro_flags,
+ 	    incompat_flags, csum_type, dev_item, cache_generation,
+-	    uuid_tree_generation, super_roots[0], super_roots[1], 
++	    uuid_tree_generation, super_roots[0], super_roots[1],
+ 	    super_roots[2], super_roots[3])
+ DEFINE_CONV(btrfs_item, key, offset, size)
+ DEFINE_CONV(btrfs_key_ptr, key, blockptr, generation)
+diff --git a/fs/ubifs/ubifs.h b/fs/ubifs/ubifs.h
+index b4e761c3668..6a55584d550 100644
+--- a/fs/ubifs/ubifs.h
++++ b/fs/ubifs/ubifs.h
+@@ -389,7 +389,7 @@ struct super_block {
+ struct file_system_type {
+ 	const char *name;
+ 	int fs_flags;
+-#define FS_REQUIRES_DEV		1 
++#define FS_REQUIRES_DEV		1
+ #define FS_BINARY_MOUNTDATA	2
+ #define FS_HAS_SUBTYPE		4
+ #define FS_USERNS_MOUNT		8	/* Can be mounted by userns root */
+diff --git a/include/linux/rbtree.h b/include/linux/rbtree.h
+index 3809c3fb8ef..4b38d96ead9 100644
+--- a/include/linux/rbtree.h
++++ b/include/linux/rbtree.h
+@@ -2,7 +2,7 @@
+ /*
+   Red Black Trees
+   (C) 1999  Andrea Arcangeli <andrea@suse.de>
+-  
++
+   linux/include/linux/rbtree.h
+ 
+   To use rbtrees you'll have to implement your own insert and search cores.
+@@ -59,7 +59,7 @@ extern struct rb_node *rb_first_postorder(const struct rb_root *);
+ extern struct rb_node *rb_next_postorder(const struct rb_node *);
+ 
+ /* Fast replacement of a single node without remove/rebalance/add/rebalance */
+-extern void rb_replace_node(struct rb_node *victim, struct rb_node *new, 
++extern void rb_replace_node(struct rb_node *victim, struct rb_node *new,
+ 			    struct rb_root *root);
+ 
+ static inline void rb_link_node(struct rb_node * node, struct rb_node * parent,
+diff --git a/include/linux/zstd_errors.h b/include/linux/zstd_errors.h
+index edba6e1fab5..f4a05a76aec 100644
+--- a/include/linux/zstd_errors.h
++++ b/include/linux/zstd_errors.h
+@@ -15,7 +15,7 @@
+ #include <linux/types.h>   /* size_t */
+ 
+ /* =====   ZSTDERRORLIB_API : control library symbols visibility   ===== */
+-#define ZSTDERRORLIB_VISIBILITY 
++#define ZSTDERRORLIB_VISIBILITY
+ #define ZSTDERRORLIB_API ZSTDERRORLIB_VISIBILITY
+ 
+ /*-*********************************************
+diff --git a/include/valgrind/memcheck.h b/include/valgrind/memcheck.h
+index 4e5127a1a22..e5bcb2bfa1e 100644
+--- a/include/valgrind/memcheck.h
++++ b/include/valgrind/memcheck.h
+@@ -19,12 +19,12 @@
+ 
+ #include "valgrind.h"
+ 
+-/* !! ABIWARNING !! ABIWARNING !! ABIWARNING !! ABIWARNING !! 
++/* !! ABIWARNING !! ABIWARNING !! ABIWARNING !! ABIWARNING !!
+    This enum comprises an ABI exported by Valgrind to programs
+    which use client requests.  DO NOT CHANGE THE ORDER OF THESE
+    ENTRIES, NOR DELETE ANY -- add new ones at the end. */
+ typedef
+-   enum { 
++   enum {
+       VG_USERREQ__MAKE_MEM_NOACCESS = VG_USERREQ_TOOL_BASE('M','C'),
+       VG_USERREQ__MAKE_MEM_UNDEFINED,
+       VG_USERREQ__MAKE_MEM_DEFINED,
+@@ -48,7 +48,7 @@ typedef
+       VG_USERREQ__DISABLE_ADDR_ERROR_REPORTING_IN_RANGE,
+ 
+       /* This is just for memcheck's internal use - don't use it */
+-      _VG_USERREQ__MEMCHECK_RECORD_OVERLAP_ERROR 
++      _VG_USERREQ__MEMCHECK_RECORD_OVERLAP_ERROR
+          = VG_USERREQ_TOOL_BASE('M','C') + 256
+    } Vg_MemCheckClientRequest;
+ 
+@@ -59,7 +59,7 @@ typedef
+     VALGRIND_DO_CLIENT_REQUEST_STMT(                             \
+                             VG_USERREQ__MAKE_MEM_NOACCESS,       \
+                             (_qzz_addr), (_qzz_len), 0, 0, 0)
+-      
++
+ /* Similarly, mark memory at _qzz_addr as addressable but undefined
+    for _qzz_len bytes. */
+ #define VALGRIND_MAKE_MEM_UNDEFINED(_qzz_addr,_qzz_len)          \
+diff --git a/include/valgrind/valgrind.h b/include/valgrind/valgrind.h
+index 6114c4a0e10..44fd87ec175 100644
+--- a/include/valgrind/valgrind.h
++++ b/include/valgrind/valgrind.h
+@@ -9,7 +9,7 @@
+ 
+ /* This file is for inclusion into client (your!) code.
+ 
+-   You can use these macros to manipulate and query Valgrind's 
++   You can use these macros to manipulate and query Valgrind's
+    execution inside your own programs.
+ 
+    The resulting executables will still run without Valgrind, just a
+@@ -179,8 +179,8 @@
+    this is executed not under Valgrind.  Args are passed in a memory
+    block, and so there's no intrinsic limit to the number that could
+    be passed, but it's currently five.
+-   
+-   The macro args are: 
++
++   The macro args are:
+       _zzq_rlval    result lvalue
+       _zzq_default  default value (result returned when running on real CPU)
+       _zzq_request  request code
+@@ -208,7 +208,7 @@
+     ||  defined(PLAT_x86_solaris)
+ 
+ typedef
+-   struct { 
++   struct {
+       unsigned int nraddr; /* where's the code? */
+    }
+    OrigFn;
+@@ -273,7 +273,7 @@ typedef
+ #if defined(PLAT_x86_win32) && !defined(__GNUC__)
+ 
+ typedef
+-   struct { 
++   struct {
+       unsigned int nraddr; /* where's the code? */
+    }
+    OrigFn;
+@@ -348,7 +348,7 @@ valgrind_do_client_request_expr(uintptr_t _zzq_default, uintptr_t _zzq_request,
+     ||  (defined(PLAT_amd64_win64) && defined(__GNUC__))
+ 
+ typedef
+-   struct { 
++   struct {
+       unsigned long int nraddr; /* where's the code? */
+    }
+    OrigFn;
+@@ -420,7 +420,7 @@ typedef
+ #if defined(PLAT_ppc32_linux)
+ 
+ typedef
+-   struct { 
++   struct {
+       unsigned int nraddr; /* where's the code? */
+    }
+    OrigFn;
+@@ -489,7 +489,7 @@ typedef
+ #if defined(PLAT_ppc64be_linux)
+ 
+ typedef
+-   struct { 
++   struct {
+       unsigned long int nraddr; /* where's the code? */
+       unsigned long int r2;  /* what tocptr do we need? */
+    }
+@@ -645,7 +645,7 @@ typedef
+ #if defined(PLAT_arm_linux)
+ 
+ typedef
+-   struct { 
++   struct {
+       unsigned int nraddr; /* where's the code? */
+    }
+    OrigFn;
+@@ -713,7 +713,7 @@ typedef
+ #if defined(PLAT_arm64_linux)
+ 
+ typedef
+-   struct { 
++   struct {
+       unsigned long int nraddr; /* where's the code? */
+    }
+    OrigFn;
+@@ -859,7 +859,7 @@ typedef
+ #if defined(PLAT_mips32_linux)
+ 
+ typedef
+-   struct { 
++   struct {
+       unsigned int nraddr; /* where's the code? */
+    }
+    OrigFn;
+@@ -873,7 +873,7 @@ typedef
+                      "srl $0, $0, 29\n\t"       \
+                      "srl $0, $0, 3\n\t"        \
+                      "srl $0, $0, 19\n\t"
+-                    
++
+ #define VALGRIND_DO_CLIENT_REQUEST_EXPR(                          \
+        _zzq_default, _zzq_request,                                \
+        _zzq_arg1, _zzq_arg2, _zzq_arg3, _zzq_arg4, _zzq_arg5)     \
+@@ -2191,7 +2191,7 @@ typedef
+ #define VALGRIND_RESTORE_STACK             \
+       "mr 1,28\n\t"
+ 
+-/* These CALL_FN_ macros assume that on ppc32-linux, 
++/* These CALL_FN_ macros assume that on ppc32-linux,
+    sizeof(unsigned long) == 4. */
+ 
+ #define CALL_FN_W_v(lval, orig)                                   \
+@@ -4716,7 +4716,7 @@ typedef
+       "f0", "f1", "f2", "f3", "f4", "f5", "f6", "f7"
+ #endif
+ 
+-/* Nb: Although r11 is modified in the asm snippets below (inside 
++/* Nb: Although r11 is modified in the asm snippets below (inside
+    VALGRIND_CFI_PROLOGUE) it is not listed in the clobber section, for
+    two reasons:
+    (1) r11 is restored in VALGRIND_CFI_EPILOGUE, so effectively it is not
+@@ -5165,7 +5165,7 @@ typedef
+ #endif /* PLAT_s390x_linux */
+ 
+ /* ------------------------- mips32-linux ----------------------- */
+- 
++
+ #if defined(PLAT_mips32_linux)
+ 
+ /* These regs are trashed by the hidden call. */
+@@ -6558,7 +6558,7 @@ typedef
+ #define VG_IS_TOOL_USERREQ(a, b, v) \
+    (VG_USERREQ_TOOL_BASE(a,b) == ((v) & 0xffff0000))
+ 
+-/* !! ABIWARNING !! ABIWARNING !! ABIWARNING !! ABIWARNING !! 
++/* !! ABIWARNING !! ABIWARNING !! ABIWARNING !! ABIWARNING !!
+    This enum comprises an ABI exported by Valgrind to programs
+    which use client requests.  DO NOT CHANGE THE NUMERIC VALUES OF THESE
+    ENTRIES, NOR DELETE ANY -- add new ones at the end of the most
+@@ -6708,7 +6708,7 @@ VALGRIND_PRINTF(const char *format, ...)
+    _qzz_res = VALGRIND_DO_CLIENT_REQUEST_EXPR(0,
+                               VG_USERREQ__PRINTF_VALIST_BY_REF,
+                               (unsigned long)format,
+-                              (unsigned long)&vargs, 
++                              (unsigned long)&vargs,
+                               0, 0, 0);
+ #endif
+    va_end(vargs);
+@@ -6747,7 +6747,7 @@ VALGRIND_PRINTF_BACKTRACE(const char *format, ...)
+    _qzz_res = VALGRIND_DO_CLIENT_REQUEST_EXPR(0,
+                               VG_USERREQ__PRINTF_BACKTRACE_VALIST_BY_REF,
+                               (unsigned long)format,
+-                              (unsigned long)&vargs, 
++                              (unsigned long)&vargs,
+                               0, 0, 0);
+ #endif
+    va_end(vargs);
+@@ -6757,7 +6757,7 @@ VALGRIND_PRINTF_BACKTRACE(const char *format, ...)
+ 
+ /* These requests allow control to move from the simulated CPU to the
+    real CPU, calling an arbitrary function.
+-   
++
+    Note that the current ThreadId is inserted as the first argument.
+    So this call:
+ 
+@@ -6842,7 +6842,7 @@ VALGRIND_PRINTF_BACKTRACE(const char *format, ...)
+    - It marks the block as being addressable and undefined (if 'is_zeroed' is
+      not set), or addressable and defined (if 'is_zeroed' is set).  This
+      controls how accesses to the block by the program are handled.
+-   
++
+    'addr' is the start of the usable block (ie. after any
+    redzone), 'sizeB' is its size.  'rzB' is the redzone size if the allocator
+    can apply redzones -- these are blocks of padding at the start and end of
+@@ -6850,7 +6850,7 @@ VALGRIND_PRINTF_BACKTRACE(const char *format, ...)
+    Valgrind will spot block overruns.  `is_zeroed' indicates if the memory is
+    zeroed (or filled with another predictable value), as is the case for
+    calloc().
+-   
++
+    VALGRIND_MALLOCLIKE_BLOCK should be put immediately after the point where a
+    heap block -- that will be used by the client program -- is allocated.
+    It's best to put it at the outermost level of the allocator if possible;
+@@ -6938,8 +6938,8 @@ VALGRIND_PRINTF_BACKTRACE(const char *format, ...)
+ 
+ /* Create a memory pool with some flags specifying extended behaviour.
+    When flags is zero, the behaviour is identical to VALGRIND_CREATE_MEMPOOL.
+-   
+-   The flag VALGRIND_MEMPOOL_METAPOOL specifies that the pieces of memory 
++
++   The flag VALGRIND_MEMPOOL_METAPOOL specifies that the pieces of memory
+    associated with the pool using VALGRIND_MEMPOOL_ALLOC  will be used
+    by the application as superblocks to dole out MALLOC_LIKE blocks using
+    VALGRIND_MALLOCLIKE_BLOCK. In other words, a meta pool is a "2 levels"
+diff --git a/lib/dhry/dhry.h b/lib/dhry/dhry.h
+index bd95540eeb2..0d4ff332f51 100644
+--- a/lib/dhry/dhry.h
++++ b/lib/dhry/dhry.h
+@@ -9,7 +9,7 @@
+ /*****************************************************************************
+  *  The BYTE UNIX Benchmarks - Release 3
+  *          Module: dhry.h   SID: 3.4 5/15/91 19:30:21
+- *          
++ *
+  *****************************************************************************
+  * Bug reports, patches, comments, suggestions should be sent to:
+  *
+@@ -23,9 +23,9 @@
+  *
+  *                   "DHRYSTONE" Benchmark Program
+  *                   -----------------------------
+- *                                                                            
++ *
+  *  Version:    C, Version 2.1
+- *                                                                            
++ *
+  *  File:       dhry.h (part 1 of 3)
+  *
+  *  Date:       May 25, 1988
+@@ -53,12 +53,12 @@
+  *
+  *  Collection of Results:
+  *              Reinhold Weicker (address see above) and
+- *              
++ *
+  *              Rick Richardson
+  *              PC Research. Inc.
+  *              94 Apple Orchard Drive
+  *              Tinton Falls, NJ 07724
+- *                      Phone:  (201) 834-1378 (9-17 EST)               
++ *                      Phone:  (201) 834-1378 (9-17 EST)
+  *                      Usenet: ...!seismo!uunet!pcrat!rick
+  *
+  *      Please send results to Rick Richardson and/or Reinhold Weicker.
+@@ -111,7 +111,7 @@
+  *              version previously distributed by Reinhold Weicker.
+  *
+  *              At several places in the benchmark, code has been added,
+- *              but within the measurement loop only in branches that 
++ *              but within the measurement loop only in branches that
+  *              are not executed. The intention is that optimizing compilers
+  *              should be prevented from moving code out of the measurement
+  *              loop, or from removing code altogether. Since the statements
+@@ -121,7 +121,7 @@
+  *              still hold. Except for sophisticated optimizing compilers,
+  *              execution times for this version should be the same as
+  *              for previous versions.
+- *              
++ *
+  *              Since it has proven difficult to subtract the time for the
+  *              measurement loop overhead in a correct way, the loop check
+  *              has been made a part of the benchmark. This does have
+@@ -171,7 +171,7 @@
+  *              -DTIME
+  *                      The "times" function of UNIX (returning process times)
+  *                      or the "time" function (returning wallclock time)
+- *                      is used for measurement. 
++ *                      is used for measurement.
+  *                      For single user machines, "time ()" is adequate. For
+  *                      multi-user machines where you cannot get single-user
+  *                      access, use the "times ()" function. If you have
+@@ -218,23 +218,23 @@
+  *   different from the Ada version.]
+  *
+  *  The following program contains statements of a high level programming
+- *  language (here: C) in a distribution considered representative:           
++ *  language (here: C) in a distribution considered representative:
+  *
+  *    assignments                  52 (51.0 %)
+  *    control statements           33 (32.4 %)
+  *    procedure, function calls    17 (16.7 %)
+  *
+  *  103 statements are dynamically executed. The program is balanced with
+- *  respect to the three aspects:                                             
++ *  respect to the three aspects:
+  *
+  *    - statement type
+  *    - operand type
+  *    - operand locality
+- *         operand global, local, parameter, or constant.                     
++ *         operand global, local, parameter, or constant.
+  *
+- *  The combination of these three aspects is balanced only approximately.    
++ *  The combination of these three aspects is balanced only approximately.
+  *
+- *  1. Statement Type:                                                        
++ *  1. Statement Type:
+  *  -----------------             number
+  *
+  *     V1 = V2                     9
+@@ -278,9 +278,9 @@
+  *       library procedure    1
+  *     X = F (...)
+  *             function  call      6
+- *       user function        5                                         
+- *       library function     1                                               
+- *                                --                                          
++ *       user function        5
++ *       library function     1
++ *                                --
+  *                                17       17
+  *                                        ---
+  *                                        103
+@@ -294,10 +294,10 @@
+  *                          number    approximate
+  *                                    percentage
+  *
+- *    Arithmetic             32          50.8                                 
++ *    Arithmetic             32          50.8
+  *
+- *       +                     21          33.3                              
+- *       -                      7          11.1                              
++ *       +                     21          33.3
++ *       -                      7          11.1
+  *       *                      3           4.8
+  *       / (int div)            1           1.6
+  *
+@@ -315,7 +315,7 @@
+  *       && (AND-THEN)          1            1.6
+  *       |  (OR)                1            1.6
+  *       !  (NOT)               2            3.2
+- * 
++ *
+  *                           --          -----
+  *                           63          100.1
+  *
+@@ -335,10 +335,10 @@
+  *                           242       100.0 %
+  *
+  *  When there is an access path leading to the final operand (e.g. a record
+- *  component), only the final data type on the access path is counted.       
++ *  component), only the final data type on the access path is counted.
+  *
+  *
+- *  4. Operand Locality:                                                      
++ *  4. Operand Locality:
+  *  -------------------
+  *                                number    approximate
+  *                                          percentage
+@@ -397,7 +397,7 @@
+ 
+ /* General definitions: */
+ 
+-#define Null 0 
++#define Null 0
+                 /* Value of a Null pointer */
+ #define true  1
+ #define false 0
+@@ -410,7 +410,7 @@ typedef char    Str_30 [31];
+ typedef int     Arr_1_Dim [50];
+ typedef int     Arr_2_Dim [50] [50];
+ 
+-typedef struct record 
++typedef struct record
+     {
+     struct record *Ptr_Comp;
+     Enumeration    Discr;
+-- 
+2.43.0
 
-#if defined(CONFIG_FOO)
-foo_activity
-#else
-foo_activity() { };
-#endif
-
-This is my preference to not have it ENABLED everywhere. As I
-mentioned I even not
-have experience about having such needs in in code. Most can be implemented
-in a script except blinking like:
-
-led on; ext4load <> ; led off. We can definitely script most of it.
-The only exception can be
-led blink; ext4load <>; led off.
-
->
-> Uboot is not really multi thread so we don't expect that much thing to
-> happen at the same time. Do we have case where an i/o might happen in
-> multiple place? Example transfering data and writing them at the same
-> time? The common practice is to first transfer and then handle.
->
-
-Michael
-
-> >
-> >
-> > > bye,
-> > > Heiko
-> > > --
-> > > DENX Software Engineering GmbH,      Managing Director: Erika Unter
-> > > HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-> > > Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
-> >
-> >
-> >
-> > --
-> > Michael Nazzareno Trimarchi
-> > Co-Founder & Chief Executive Officer
-> > M. +39 347 913 2170
-> > michael@amarulasolutions.com
-> > __________________________________
-> >
-> > Amarula Solutions BV
-> > Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-> > T. +31 (0)85 111 9172
-> > info@amarulasolutions.com
-> > www.amarulasolutions.com
->
-> --
->         Ansuel
-
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
