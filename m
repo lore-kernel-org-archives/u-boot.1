@@ -4,74 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE13FC531DF
-	for <u-boot@archiver.kernel.org>; Sun, 18 Aug 2024 20:51:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D0E3C531DF
+	for <u-boot@archiver.kernel.org>; Sun, 18 Aug 2024 21:43:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECF93889BE;
-	Sun, 18 Aug 2024 22:51:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id BAC798811A;
+	Sun, 18 Aug 2024 23:43:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1724014288;
-	bh=467S4SrRoILKapvwROFHQ0MbzGsLbeaqYwHhDYBQ9Sw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=DnleccR6PfarLm9meUmock8AZiriBnxpXWdP4Rp+I5gUWpqFLSQUTQb3k4S3e7Is4
-	 XwI1U/9VUL9SzDgY1Z4KLzSMCmFTNBZmvTNxxFA+0e/K9yoAvip3IcHR1VqFXhE7dm
-	 +lu/IGfdPPsBN4TpljMF8ai8D2RvuiuTrCjPoAVmyJBd/53st/K17YBTt5Di3lDshN
-	 IFsnwsp5/d2RtiFnxATlDMiKvD41WnQIsT3SF/PFcNmi1GR0ctpa/t7HgNynIw5AMP
-	 5p8CNfc6wnlFEovWFl3YX+SyOINbS30xNFCVI2S1PhQzM9VvHSzDmrBznrxXFbAVaV
-	 VTFb6Ep9Y4+HA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="pVhFBROE";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id CC7ED889BE; Sun, 18 Aug 2024 23:43:51 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 028318839A;
- Sun, 18 Aug 2024 22:51:24 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1724014286;
- bh=467S4SrRoILKapvwROFHQ0MbzGsLbeaqYwHhDYBQ9Sw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=SVTh2aG3Ul/gkSKBbsgPDE9zIlvgCezSj8e6XVm7JrPmxS04VfsldEJHGmCc334Lf
- ZM9RJfwHjAWGJlDNqUtU7au62u85bPSSQTscE5bvslVlU/xRQ2UVZ/+rmxorvD8S92
- sshcmiPkhJ7LBMUG9ZUR8NM5RgS/29UAkMTfKxDgLxiuqb7ZeO1cgNFd1Aa+g/2u25
- MxelIPaPPR5DYoBDd7zMrrMl6ZxDdla2U0bccaWJ8vVoal4Eztcyn1YDUrG5iA7Gqm
- 4+ihu2CTUeDM1BoXRkrCgrisko/ZdQ35uxmFL492WFlD+Q1OUA2AvJr07KoIB6WN8j
- Ozc3XnnlUeXLg==
-Message-ID: <77bd148a-c80e-4d09-b8f0-93c2b8f963f9@denx.de>
-Date: Sun, 18 Aug 2024 22:38:43 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 0F43E880E6
+ for <u-boot@lists.denx.de>; Sun, 18 Aug 2024 23:43:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=618c=PS=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1724017424;
+ bh=LibbBOHf5z+YcrneyVc3JtzF//kGYjy91yzQ27pmIOA=;
+ b=pVhFBROEw7yQuATHdiPEf4NRQ+cJTWkjwUhT/STt5hKlC19HzdGsMroyuVTV5FRWZpqPPgak8
+ gMOBZpDmbdm5bsMjkfktejyi/PZBlPM58+hem+JeUHhEw6OaJJxZDfZQogHiPXuTVz7rLR6u7zF
+ NOzMhcUeTTbwrcYn2lTpIlR6Ft5wxk9x0AKr+PTvW7Qvn44XXl9lupp1/sIGipLLSpYyknPTZM3
+ BgPmNLXc4wYyln7QhFlR+bahldB34um/sDc3wOtVH55HWzJy1NEkpn6dIsON/IPA0wFYF6XiCZ1
+ D58tNWwT+Y2PtTjqlnb+Fftqdy84aZthANPejPunR3iQ==
+Message-ID: <6f42837e-6378-4ded-8120-d642a13e69df@kwiboo.se>
+Date: Sun, 18 Aug 2024 23:43:36 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/4] binman: Add nxp_imx8mcst etype for i.MX8M
- flash.bin signing
-To: Simon Glass <sjg@chromium.org>
-Cc: Fabio Estevam <festevam@gmail.com>, u-boot@lists.denx.de,
- anton.gres@ifm.com, ch@denx.de, Tim Harvey <tharvey@gateworks.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Angus Ainslie <angus@akkea.ca>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Stefan Eichenberger <stefan.eichenberger@toradex.com>,
- Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>,
- kernel@puri.sm, u-boot@dh-electronics.com
-References: <20240521104834.11295-1-marex@denx.de>
- <CAOMZO5DsyuCu+fjpa8GjB6mbp9b5n=YOGxtjgMkdSstGFmEUuA@mail.gmail.com>
- <CAFLszTiwqcPe98gwbt1oVnWYJ0yFQ6rTpdcrB2kw=YRH-9=JJA@mail.gmail.com>
- <CAFLszTg8UHv7WbYKMii_8_6m3m3TR0BCAaEVNWnQJb2otQRScw@mail.gmail.com>
- <d46433c5-f4a6-418a-bc23-1ae5ce6ba63a@denx.de>
- <CAFLszTi9wozfMHVwM-tg5bJGSwSOpreR=D3jardm8z=N621bng@mail.gmail.com>
- <01cf8243-3476-41a8-9d56-bdd2817a4569@denx.de>
- <CAFLszTheX=pbcZZR6dnjgvpg_KzvPUKRk3nC8UeFc-868G9tUA@mail.gmail.com>
+Subject: Re: [PATCH v3 0/7] FUSB302 USB-C controller support
+To: Marek Vasut <marex@denx.de>, Sebastian Reichel
+ <sebastian.reichel@collabora.com>, Eugen Hristev
+ <eugen.hristev@collabora.com>
+Cc: u-boot@lists.denx.de, Tim Harvey <tharvey@gateworks.com>, Kever Yang
+ <kever.yang@rock-chips.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Simon Glass <sjg@chromium.org>, Soeren Moch <smoch@web.de>
+References: <20240802180027.139193-1-sebastian.reichel@collabora.com>
+ <d3c80c56-ebb0-4b6f-ac92-15cd646feb27@denx.de>
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAFLszTheX=pbcZZR6dnjgvpg_KzvPUKRk3nC8UeFc-868G9tUA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <d3c80c56-ebb0-4b6f-ac92-15cd646feb27@denx.de>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66c26b0cdf911e40355fa0ee
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,57 +76,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 7/9/24 11:24 AM, Simon Glass wrote:
-> Hi Marek,
+Hi Marek and Sebastian,
 
-Hi,
-
-> On Sun, 7 Jul 2024 at 01:55, Marek Vasut <marex@denx.de> wrote:
->>
->> On 6/27/24 10:19 AM, Simon Glass wrote:
->>> Hi Marek,
->>
+On 2024-08-18 22:35, Marek Vasut wrote:
+> On 8/2/24 7:59 PM, Sebastian Reichel wrote:
 >> Hi,
->>
->>>>>>>> Add new binman etype which allows signing both the SPL and fitImage sections
->>>>>>>> of i.MX8M flash.bin using CST. There are multiple DT properties which govern
->>>>>>>> the signing process, nxp,loader-address is the only mandatory one which sets
->>>>>>>> the SPL signature start address without the imx8mimage header, this should be
->>>>>>>> SPL text base. The key material can be configured using optional DT properties
->>>>>>>> nxp,srk-table, nxp,csf-crt, nxp,img-crt, all of which default the key material
->>>>>>>> names generated by CST tool scripts. The nxp,unlock property can be used to
->>>>>>>> unlock CAAM access in SPL section.
->>>>>>>>
->>>>>>>> Reviewed-by: Tim Harvey <tharvey@gateworks.com>
->>>>>>>> Signed-off-by: Marek Vasut <marex@denx.de>
->>>>>>>
->>>>>>> Applied the series, thanks.
->>>>>>
->>>>>> This lacks tests - can you please add sufficient tests in ftest.py to
->>>>>> get the cover coverage back to 100%? Please try 'binman test -T' to
->>>>>> see this.
->>>>>
->>>>> Any thoughts on this, please? At present -master is broken for one
->>>>> file and -next has three problems.
->>>>
->>>> It is in the pipeline.
->>>>
->>>> What exactly is the error you observe ?
->>>>
->>>> When I run binman test -T , I get a lot of output, but no error reports?
->>>
->>> Sorry I somehow missed this email.
->>>
->>> The tests are in ftest.py - there are lots of examples, e.g.
->>> testXilinxBootgenSigning() - commit d8a2d3b29
->>
->> This seems to be testing some out-of-tree tool , not binman ?
 > 
-> It is testing the etype, which needs the tool to be present, yes, You
-> can use 'binman tool -f' to fetch tools if you want to try that one.
+> Hello everyone,
+> 
+>> On ROCK 5B power is usually supplied via it's USB-C port. This port has the
+>> data lines connected to RK3588, VBUS connected to the input regulator and
+>> CC pins connected to FUSB302. FUSB302 is a USB-C controller, which can be
+>> accessed via I2C from RK3588. The USB-C controller is needed to figure out
+>> the USB-C cable orientation, but also to do USB PD communication. Thus it
+>> would be great to enable support for it in the operating system.
+>>
+>> But the USB-PD specification requires, that a device reacts to USB-PD messages
+>> send by the power-supply within around 5 seconds. If that does not happen the
+>> power-supply assumes, that the device does not support USB-PD. If a device
+>> later starts sending USB-PD messages it is considered an error, which is solved
+>> by doing a hard reset. A USB-PD hard reset means, that all supply voltages are
+>> removed for a short period of time. For boards, which are solely powered
+>> through their USB-C port, like the Radxa Rock 5B, this results in an machine
+>> reset. This is currently worked around by not describing the FUSB302 in the
+>> kernel DT, so nothing will ever speak USB-PD on the Rock 5B. This means
+>>
+>> 1. the USB-C port cannot be used at all
+>> 2. the board will be running via fallback supply, which provides limited
+>>     power capabilities
+>>
+>> In order to avoid the hard reset, this adds FUSB302 support to U-Boot, so
+>> that we react to the power-supply's queries in time. The code, which is
+>> originally from the Linux kernel, consists of two parts:
+>>
+>> 1. the tcpm state machine, which implements the Type C port manager state
+>>     machine as described in the USB PD specification
+>> 2. the fusb302 driver, which knows about specific registers
+>>
+>> Especially the first part has been heavily modified compared to the
+>> kernel, which makes use of multiple delayed works and threads. For this
+>> I used a priorly ported version from Rockchip, removed their hacks and
+>> any states not necessary in U-Boot (e.g. audio accessory support).
+>>
+>> Sorry for the delay in getting PATCHv3 ready.
+> 
+> I am the one who should be sorry here, really, sorry for the abysmal 
+> delay in my replies.
+> 
+> So ... this series looks good to me. Thank you for working on this !
+> 
+> Jonas, are your concerns resolved ?
 
-I'm not getting anywhere with this, can you please draft some example 
-patch how the fix should look like? Otherwise, this is not going to move 
-anywhere I'm afraid.
+No, for ROCK 5B the full overwrite of the Rockchip common misc_init_r()
+in mach-rockchip/board.c should be fixed, rockchip_early_misc_init_r()
+could probably be used instead (or possible a PREBOOT cmd), see [1].
 
-Thanks
+Also the check for MISC_INIT_R symbol does not make sense and should be
+dropped, see [2].
+
+[1] https://lore.kernel.org/u-boot/34c55a9f-0e49-4439-9360-a706cf60ea2b@kwiboo.se/
+[2] https://lore.kernel.org/u-boot/56322afa-1595-4228-8259-728a92531025@kwiboo.se/
+
+Regards,
+Jonas
