@@ -4,83 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37A19C52D7C
-	for <u-boot@archiver.kernel.org>; Sun, 18 Aug 2024 15:37:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E288C52D7C
+	for <u-boot@archiver.kernel.org>; Sun, 18 Aug 2024 15:47:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AAC2C88852;
-	Sun, 18 Aug 2024 17:37:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sigma-star.at
+	by phobos.denx.de (Postfix) with ESMTP id C054788906;
+	Sun, 18 Aug 2024 17:47:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sigma-star.at header.i=@sigma-star.at header.b="IyjaqW/k";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f3YZqHNe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5DF08886A; Sun, 18 Aug 2024 17:37:05 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id D906288908; Sun, 18 Aug 2024 17:47:15 +0200 (CEST)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CAA188744
- for <u-boot@lists.denx.de>; Sun, 18 Aug 2024 17:37:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 687E088852
+ for <u-boot@lists.denx.de>; Sun, 18 Aug 2024 17:47:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=sigma-star.at
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=richard@sigma-star.at
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5a108354819so4530064a12.0
- for <u-boot@lists.denx.de>; Sun, 18 Aug 2024 08:37:03 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6bf66fe9d8bso18477026d6.0
+ for <u-boot@lists.denx.de>; Sun, 18 Aug 2024 08:47:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sigma-star.at; s=google; t=1723995423; x=1724600223; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sjNCm85s57hSZ22y5VWEzvrL4iLUR1C0Wh9RshsmxRM=;
- b=IyjaqW/kFPu8Y8CRXi7f6TSUB1jlxfppkQMxg6N0ZwAng7oZCIkPgP871i/92AtUO8
- 0lVBZ7b+Ks8JwvXxnzRQ8sF2g/NEY1iG2ZdNkFg3M9aQ+hZFuCWMeU5f/5JTZap9YYxQ
- OT5rS4Ne3IuLGyOzElP1O35oBQSTkG8SPAIBaHwYb9ywQsCHMY30FpjDS5Dz1DZrpUHX
- VavVB0U1vb+W1ksQbzfif8J2C5DskpL2uDrS8TqNuzKpUp9DjJHKtjTELrSoFS2Kf5Fv
- uXHbR87wGvjzr7lYwnMJyM8x+a0mSJsoDdGE4I/tFQBeI0hOMT6mjLCKc0VpKOL6wIQJ
- tq6g==
+ d=chromium.org; s=google; t=1723996032; x=1724600832; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=yeaCw9SDAHWl1jFzyFs8LzEYISIskMB1Dfz9qWOdJ1M=;
+ b=f3YZqHNeYxcWmPFXvjHLCA6TcbkbxTTUwtydr11aIvV8uMVL5qCfgbC4dab8ZWn9fQ
+ xUA7UYQblPl1P85iAulPZUik7w4o16u9qEzCrgUrD/iHcjGF3QVr9TeQIwD3cZ7PgwZc
+ gMhIzEHWR7IF/IBuWQoJ/lMI1ZLoc4KD5Z7rI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1723995423; x=1724600223;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sjNCm85s57hSZ22y5VWEzvrL4iLUR1C0Wh9RshsmxRM=;
- b=LRURDkRrjKYwgXwOAoect2CDtlBRSXNivJe2/UzkIKOSrGy/DO2mtmNlC6a5tFpSTR
- tOK4cipkrQGAIqUfzhiIJfB9qgj0PtTlOWhypCi8brmckEud8yMS155jAZCG764F+G9H
- oDd/yOf8AKmVyqBPiYg8guFic02diAm/Kf4Z+os1B+HkjTuX1B8msoYlO4xBUTo+PQce
- F8jR211hbvG77+KmrS1Yl0MYgklIrunaK8yonnLRXUxr+MsFMjRDbvwxtQCHhRMEW9Ef
- qrkYTlBklLMJ39hl08TWNOY71iOdlyvU8UCU/2TKA+nlf/tlqHtj2Hx2+dcdUH+jsQu9
- wvkw==
-X-Gm-Message-State: AOJu0Yy9aeo9oZXqd6g4rjWoogj2gZy//Aae7sqrdOtGYhjiNyxzgSLF
- MS0RH0T3kft+N9kp0FgXhjWc1i1n+v0ua5hJxIVz9lOaIuFLSsZiG81aUYAJF+0=
-X-Google-Smtp-Source: AGHT+IH5vjFlNQX5rWWy1w7UkDdh4dLarPhK+aN3muXwV6gvvJRwJpciv5XeLVXxl5qy8j+yUifFKA==
-X-Received: by 2002:a05:6402:3509:b0:5a2:d411:89fa with SMTP id
- 4fb4d7f45d1cf-5beca906d71mr4701384a12.36.1723995422460; 
- Sun, 18 Aug 2024 08:37:02 -0700 (PDT)
-Received: from blindfold.localnet (84-115-238-31.cable.dynamic.surfer.at.
- [84.115.238.31]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5bebbbe274asm4721221a12.8.2024.08.18.08.37.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 18 Aug 2024 08:37:02 -0700 (PDT)
-From: Richard Weinberger <richard@sigma-star.at>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>,
- Richard Weinberger <richard@nod.at>, upstream+uboot@sigma-star.at,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Christian Taedcke <christian.taedcke@weidmueller.com>
-Subject: Re: [PATCH 1/3] test_fs: Allow running unprivileged
-Date: Sun, 18 Aug 2024 17:37:01 +0200
-Message-ID: <3292219.QWXsJ6tzlI@somecomputer>
-In-Reply-To: <CAFLszThjZKm+=J2oBGeTUYt_fZxbu5KXzGYXXJnnuXaCD2322w@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1723996032; x=1724600832;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yeaCw9SDAHWl1jFzyFs8LzEYISIskMB1Dfz9qWOdJ1M=;
+ b=HiOId+NJ7ZONg3pPoxehAQSboqWR3FcJghgNGvTUMQ1URCpehN+8EgFYzI9p0DtzZv
+ qyl7LoECZPchS61iEOgcHMz30HODNFAXKGIpz+7jB6dY+iUeOaowCSVxvHBCXX0AOleS
+ wtFOn7fVNiVJD0EUHGHCF8wZ893aEq1aQBu1YZNUHS/LvQ0/KIA/b6dxsvivdGL4pK0b
+ WXuP65PTPWGHM164vA9tl3CWktIXXbzr5GmYfyTwOATrN0P7ozvAzY+fYJxgFE9QjwG1
+ r5UrENSvrI/efDs05zPNYvVX1r5ZIVN8UzjT7UD3n15OiWziY6T1x03kQitBu0PQhHer
+ CIUA==
+X-Gm-Message-State: AOJu0YyWcc73C1DFqBT69Er3FjosOKTKBbvEHMSucFnrODZs8BTZiffH
+ IRP3Z4Kw9R9US1+bYZ8QPh/3a6aD7tq2YBighOyiO5ATwJKsC3R5TKukkJdI+b3byJr6N0pJxhu
+ 09oc5NYTXWQ470DVLbtzC5cow1v1/bIsFcrDy
+X-Google-Smtp-Source: AGHT+IFi1Vyud7fGqxo6cuG5iQMDry1j3CiCwX73ErtMVMWyyYcJyRjanFC9Fqtd/LWP2R3Sf5zvLocuEgavPTCi+mM=
+X-Received: by 2002:a05:6214:53c2:b0:6b7:b286:e826 with SMTP id
+ 6a1803df08f44-6bf7ced5756mr74437226d6.38.1723996032336; Sun, 18 Aug 2024
+ 08:47:12 -0700 (PDT)
+MIME-Version: 1.0
 References: <20240802093322.15240-1-richard@nod.at>
  <1796341.KUTt5R2Mg1@somecomputer>
  <CAFLszThjZKm+=J2oBGeTUYt_fZxbu5KXzGYXXJnnuXaCD2322w@mail.gmail.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+ <3292219.QWXsJ6tzlI@somecomputer>
+In-Reply-To: <3292219.QWXsJ6tzlI@somecomputer>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 18 Aug 2024 16:47:01 +0100
+Message-ID: <CAFLszThXOBKECTPy9nCLR5VYHVz6iauOVFYK9ZCai5CJZa2U3g@mail.gmail.com>
+Subject: Re: [PATCH 1/3] test_fs: Allow running unprivileged
+To: Richard Weinberger <richard@sigma-star.at>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Richard Weinberger <richard@nod.at>, upstream+uboot@sigma-star.at, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Christian Taedcke <christian.taedcke@weidmueller.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,40 +89,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Simon,
+Hi Richard,
 
-Am Sonntag, 18. August 2024, 17:25:37 CEST schrieb Simon Glass:
-> > So, can we please have mkimage inside the Docker image?
->=20
-> Sorry about all your trouble. Perhaps we should add a comment about
+On Sun, 18 Aug 2024 at 16:37, Richard Weinberger <richard@sigma-star.at> wrote:
+>
+> Simon,
+>
+> Am Sonntag, 18. August 2024, 17:25:37 CEST schrieb Simon Glass:
+> > > So, can we please have mkimage inside the Docker image?
+> >
+> > Sorry about all your trouble. Perhaps we should add a comment about
+>
+> No need to worry. :)
+>
+> > specifically what the code is for. Also, once you get all this in, we
+> > can perhaps remove the fallbacks. I still get errors from qemu-img on
+>
+> I hope we can remove all these fall backs.
+> IMHO, unit tests have to behave always the same way.
 
-No need to worry. :)
+Indeed.
 
-> specifically what the code is for. Also, once you get all this in, we
-> can perhaps remove the fallbacks. I still get errors from qemu-img on
+>
+> > Ubuntu unless I chmod a+r /boot/* but presumably you don't use that
+> > tool.
+>
+> On recent Ubuntu releases this should be resolved:
+> https://bugs.launchpad.net/ubuntu/+source/libguestfs/+bug/1673431
+>
+> > For mkinage, it would be better to use the version that is built in
+> > CI, for sandbox. That is how the tools tests work.
+>
+> True that!
+> Off the head, I don't know how to achieve this, but my knowledge of
+> the Azure pipeline setup is limited.
 
-I hope we can remove all these fall backs.
-IMHO, unit tests have to behave always the same way.
+In that file, this is the line that builds the tools:
 
-> Ubuntu unless I chmod a+r /boot/* but presumably you don't use that
-> tool.
+          ./tools/buildman/buildman -T0 -o ${UBOOT_TRAVIS_BUILD_DIR}
+-w --board tools-only
 
-On recent Ubuntu releases this should be resolved:
-https://bugs.launchpad.net/ubuntu/+source/libguestfs/+bug/1673431
+and this adds the built scripts/dtc to the path, but you could just as
+easily add tools/
 
-> For mkinage, it would be better to use the version that is built in
-> CI, for sandbox. That is how the tools tests work.
+          export PATH=${UBOOT_TRAVIS_BUILD_DIR}/scripts/dtc:${PATH}
 
-True that!
-Off the head, I don't know how to achieve this, but my knowledge of
-the Azure pipeline setup is limited.
-
-Thanks,
-//richard
-
-=2D-=20
-=E2=80=8B=E2=80=8B=E2=80=8B=E2=80=8B=E2=80=8Bsigma star gmbh | Eduard-Bodem=
-=2DGasse 6, 6020 Innsbruck, AUT
-UID/VAT Nr: ATU 66964118 | FN: 374287y
-
-
+Regards,
+Simon
