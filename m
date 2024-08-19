@@ -4,85 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 751D9C3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 14:53:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53EE1C3DA4A
+	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 15:02:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF60688ADB;
-	Mon, 19 Aug 2024 16:53:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C732788CD8;
+	Mon, 19 Aug 2024 17:02:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fz0ubw0Q";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Oz49E3j6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EDF388CA0; Mon, 19 Aug 2024 16:53:56 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id BF17C88CD8; Mon, 19 Aug 2024 17:02:04 +0200 (CEST)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 647898843A
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 16:53:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 984018641A
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 17:02:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5beb6ea9ed6so4323822a12.1
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 07:53:53 -0700 (PDT)
+ spf=pass smtp.mailfrom=macroalpha82@gmail.com
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-27022a3536dso1814566fac.2
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 08:02:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724079233; x=1724684033; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ghWdCYjGA5/ht8fljeVBuqwIBmaG/KEMAM7xFBuPT9g=;
- b=fz0ubw0QIb+K0oMZP9fujreAd4HgHe5DFIXepa5nsuaKwlkKOzk5oFGq495lK49RYi
- ZWs1EqOBjwwwakELffL1HcFDSV9co7svkFRmf3fMtkYHPlqz+vW8wE1zJWmOk/6h52uL
- NvOEUo8NcCWSqnrc3NNk8kFwqoNubykH1KrNQxDCpG8o3dpa98cCEqAOAhw0hsQqXA/i
- Dx04C+pD2dkgWKj5nxmqG5q1IHVmQ9gkIjmDQ2PQdzl0n67dnl2KGyVGWNfnh37FiGbj
- JFnFshG5G6KNRDDsg/+RbchpjJQGBMb7pzMwYJ8imurcjWxRSk+UyBJCjqU0WKAtiBs2
- WPRQ==
+ d=gmail.com; s=20230601; t=1724079721; x=1724684521; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WygNCvaEIYbgzexQH3wuWXQ/H3ojwPHvkSmw8wPmawM=;
+ b=Oz49E3j6CTkFH+sQiQrC6dsfN6C0e0ep/5T2IQ01HZmbvfSdu0/T1L9hqdplNoEFNH
+ HxZcKLjSuWefmvdDkydejf/SewU5DpAEbJLIj65zInyw4+qLmZ6b+/GDx1Ei+GShJDz0
+ 78S/LtTDzXDpsvITA3XLcgeawqLUw/TlPbZYWx7yJMFI3P0ONHp2hggk5qzlCkEDJu7D
+ ejR0HS7g6lCFcC1KLKnLHn+B6VfQev+gYkw+LvQiv2HmyCPlFlpwqs26P9DjckIoQcUc
+ PPNnYjafsGLANnhBEmyukPtVOPzQ3zQEJ1+4qNfDpDe1XvEXIkAl1edal0Jcf8uvWLrB
+ WV/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724079233; x=1724684033;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ghWdCYjGA5/ht8fljeVBuqwIBmaG/KEMAM7xFBuPT9g=;
- b=rUhYLT5KT9cMoCIZzVlx1ONFcGiG49onKti5g7b8rXPVATd/PxahoEFcuUVzPNEiht
- Y9mSpIio/wTvv+Dy94IuYhViGkLGHVYOdY1Q5OO3Je4U5ovv0pzuKa6ccR++SZbMSyc0
- 7kQMUkDl2GR8CO7JnLRbcE3XyKVpxZjqbTZY7qVpJ31zcB0w1EQVXH2gYWlwQtZbWk2B
- fQvTXjaah3GE3LzZVkpFLrUmrX8D9da/G3ryLuSxNsEYvbYLe/q6p/vU32DGmjeWfk20
- mnwuI3lCn/37g7hMDeDNa9PgFpqjJmk+7aK5osWh9FXqlEtKnWEo/ZjIRM93TGtZBczn
- hKMg==
-X-Gm-Message-State: AOJu0YwLlMnmTjt0/AG7wbPonAt6+E204O/5i/+J05M3P4WAuIwl08Tq
- qbMmSnx89i5nL+q/afqBmllXk0sQEMrFfq5YwH9dYNkTa9N3KQbNyQjTWHoeK+w=
-X-Google-Smtp-Source: AGHT+IEeQrZhXhm2FMQ74LBLWQgiylY9dEaubJVHG0YShSnlWcDMMvY7oi2GddFmYnNRtx7AR56r5g==
-X-Received: by 2002:a17:907:e207:b0:a7a:bad3:e5b9 with SMTP id
- a640c23a62f3a-a83928a9ea4mr799102666b.11.1724079232641; 
- Mon, 19 Aug 2024 07:53:52 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:6661:2485:9412:52a3?
- ([2a01:e0a:3cb:7bb0:6661:2485:9412:52a3])
+ d=1e100.net; s=20230601; t=1724079721; x=1724684521;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WygNCvaEIYbgzexQH3wuWXQ/H3ojwPHvkSmw8wPmawM=;
+ b=ByclaqNvN6OtVeulZc3wdUtlWU63YbQYlBZzioAS1J8GMKTw0Nm0zOnUhoHi16m7x0
+ GE0NSDGNzdkXMKErr1JAfpyc0NZg3rIllDKpqFRknDPmEYz5Gcqj8w1TfKJb8T0359uP
+ bWYz3QZYg1EzfltXzNslUEKa2eISS49n0B7SjQThb03S8eJg6F2OnUCcYi9XIMCUfSpB
+ GBK5KP1aw8lp5pwbs8zWaTNYOS+ygDszUrih0F50IhXLnRgxQ6k+HLwXcQk9ChPX++Xh
+ 3ZKRr3VHCpwasJhX4MwOQZSvllgzedHDvFgvAEXCQpWo1yMxV8nGj5jyGVfAgWovawZZ
+ 8eWQ==
+X-Gm-Message-State: AOJu0YxcPbPY+gy2U3CXqtQ6n69NJlKY0hcUP9wU/35zVgSmy0q62IC9
+ YvHzjeZugLHe3HzYwOvi0p+bBRkEqJr9xcHqU2jmSUERwQxlEmx7Epe6Og==
+X-Google-Smtp-Source: AGHT+IGKhFEXIwspnD9goXSs9fC3XFF+sokheNUcq2VLzNxwKpUHRJjQdnwDtX8jGkVr9drzEq1Dyg==
+X-Received: by 2002:a05:6870:e8c6:b0:270:1850:f898 with SMTP id
+ 586e51a60fabf-2701c37ed06mr12379633fac.12.1724079720974; 
+ Mon, 19 Aug 2024 08:02:00 -0700 (PDT)
+Received: from localhost.localdomain ([2600:1700:fb0:1bcf::54])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8383947187sm639780166b.166.2024.08.19.07.53.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 19 Aug 2024 07:53:52 -0700 (PDT)
-Message-ID: <7bf0ed1a-96f8-4970-a06d-7a572774b263@linaro.org>
-Date: Mon, 19 Aug 2024 16:53:51 +0200
+ 586e51a60fabf-27004432d18sm2945189fac.7.2024.08.19.08.02.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 19 Aug 2024 08:02:00 -0700 (PDT)
+From: Chris Morgan <macroalpha82@gmail.com>
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, jernej.skrabec@gmail.com, neil.armstrong@linaro.org,
+ hdegoede@redhat.com, andre.przywara@arm.com, jagan@amarulasolutions.com,
+ trini@konsulko.com, ryan@testtoast.com, iuncuim@gmail.com,
+ sumit.garg@linaro.org, Chris Morgan <macromorgan@hotmail.com>
+Subject: [PATCH V2 0/9] Add Anbernic RG35XX-2024
+Date: Mon, 19 Aug 2024 09:59:29 -0500
+Message-Id: <20240819145938.503221-1-macroalpha82@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 00/23] Introduce the lwIP network stack
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>
-References: <cover.1723050310.git.jerome.forissier@linaro.org>
- <20240807204400.GJ1626301@bill-the-cat>
- <d9fe273b-ab60-44eb-bef8-cbde3af8ab1b@linaro.org>
- <20240816184019.GD1626301@bill-the-cat>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20240816184019.GD1626301@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,170 +91,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Chris Morgan <macromorgan@hotmail.com>
 
+Add support for the Anbernic RG35XX-2024.
 
-On 8/16/24 20:40, Tom Rini wrote:
-> On Fri, Aug 16, 2024 at 06:21:24PM +0200, Jerome Forissier wrote:
->>
->>
->> On 8/7/24 22:44, Tom Rini wrote:
->>> On Wed, Aug 07, 2024 at 07:11:44PM +0200, Jerome Forissier wrote:
->>>
->>>> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
->>>> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
->>>> stack [2] [3] as an alternative to the current implementation in net/,
->>>> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
->>>> reasons for doing so are:
->>>> - Make the support of HTTPS in the wget command easier. Javier T. and
->>>> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
->>>> so. With that it becomes possible to fetch and launch a distro installer
->>>> such as Debian etc. using a secure, authenticated connection directly
->>>> from the U-Boot shell. Several use cases:
->>>>   * Authentication: prevent MITM attack (third party replacing the
->>>> binary with a different one)
->>>>   * Confidentiality: prevent third parties from grabbing a copy of the
->>>> image as it is being downloaded
->>>>   * Allow connection to servers that do not support plain HTTP anymore
->>>> (this is becoming more and more common on the Internet these days)
->>>> - Possibly benefit from additional features implemented in lwIP
->>>> - Less code to maintain in U-Boot
->>>>
->>>> Prior to applying this series, the lwIP stack needs to be added as a
->>>> Git subtree with the following command:
->>>>
->>>>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savannah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
->>>
->>> For v9, I think it would be good to do a CI run with NET_LWIP default
->>> and seeing what fails from that too. There's a few problems still
->>> leading to a lot of failures, in that case. Thanks.
->>>
->>
->> See here: https://github.com/u-boot/u-boot/pull/635
->>
->> I fixed a number of issues, see the commit descriptions. As for the
->> remaining ones:
->> - There is no http server in the CI so the wget test I added fails
-> 
-> Ah yes. So the test needs some enable-me type flag, like other tests
-> that require external configuration.
+This device is a handheld gaming console (series) based around the
+Anbernic H700 SoC. It comes with 1GB of RAM and multiple face buttons
+for input.
 
-Can you please suggest how to do that?
- 
->> - tftp is super slow in QEMU (~145 KiB/s) which causes timeouts. This is
->> for two reasons: (1) the tftp windowsize option is not supported in lwIP
->> (while the legacy NET does support it) so the sender waits for an ACK
->> before sending a new packet; and (2) the latency is very high due to
->> memcpy() being incredibly slow in QEMU (I am mainly referring to the
->> memcpy() call in tftp_write() in net/lwip/tftp.c). I measured ~20-60 ms
->> to copy a few hundred bytes (!) and if CONFIG_USE_ARCH_MEMCPY is enabled
->> it is slightly better but not much (~15 ms). Also it seems the QEMU
->> networking emulation is fragmenting the UDP packets because with
->> CONFIG_TFTP_BLOCKSIZE=1468 the tftp_write() function never receives
->> 1468 bytes but only a few hundreds at a time (max 544 bytes).
-> 
-> I thought you fixed that? Or was that only for on real hardware?
+Add support for the simplest model for now, and then iterate later to
+add board detection logic, support the entire device lineup, and
+move to using the mainline device tree.
 
-It works OK on real hardware...
+Changes since V1:
+ - Removed DDR3 and LPDDR3 patches from Jernej Skrabec, as they could
+   not be tested by me and were not required to bring up this device.
+ - Changed the default TPR6 parameter based on a suggestion from
+   Mikhail Kalashnikov.
+ - Cherry picked 2 commits from linux-next and converted devicetree to
+   upstream.
 
-> But also, some of those numbers sound unusually terrible to me. We can
-> get some bad luck with the free instances, but, still.  Are you sure
-> there's nothing else going on?
+Chris Morgan (4):
+  arm64: dts: allwinner: h616: Add r_i2c pinctrl nodes
+  sunxi: Correct TPR6 parameter for H616 DRAM driver
+  arm64: dts: allwinner: h616: Change RG35XX Series from r_rsb to r_i2c
+  sunxi: Add support for Anbernic RG35XX-2024
 
-...and yes that's absolutely terrible. In fact I found something curious.
-With the following patch applied to provide a memcpy() speed test:
+Jernej Skrabec (5):
+  sunxi: H616: dram: LPDDR4: adjust settings
+  sunxi: H616: DRAM: Add alternative pin mapping
+  sunxi: H616: DRAM: Adjust configuration procedure
+  sunxi: H616: DRAM: Adjust size scan procedure
+  sunxi: H616: dram: Update mbus priorities
 
-diff --git a/cmd/test.c b/cmd/test.c
-index b4c3eabf9f6..35b8d62af61 100644
---- a/cmd/test.c
-+++ b/cmd/test.c
-@@ -7,6 +7,8 @@
- #include <command.h>
- #include <fs.h>
- #include <log.h>
-+#include <stdlib.h>
-+#include <time.h>
- #include <vsprintf.h>
- 
- #define OP_INVALID	0
-@@ -215,3 +217,49 @@ U_BOOT_CMD(
- 	"do nothing, successfully",
- 	NULL
- );
-+
-+static int do_mtest(struct cmd_tbl *cmdtp, int flag, int argc,
-+		    char *const argv[])
-+{
-+	ulong t0, delta;
-+	void *src, *dst;
-+	long sz;
-+
-+	if (argc < 2) {
-+		printf("Usage: %s <size_in_bytes> [dst [src]]\n", argv[0]);
-+		return 1;
-+	}
-+	sz = simple_strtol(argv[1], NULL, 10);
-+	if (sz < 0) {
-+		printf("%s: %s: invalid argument\n", argv[0], argv[1]);
-+		return 1;
-+	}
-+	if (argc > 2) {
-+		dst = (void *)hextoul(argv[2], NULL);
-+		if (argc > 3) {
-+			src = (void *)hextoul(argv[3], NULL);
-+		} else {
-+			src = malloc(sz);
-+		}
-+	} else {
-+		dst = malloc(sz);
-+		src = malloc(sz);
-+	}
-+	if (!src || !dst) {
-+		printf("%s: out of memory or NULL address\n", argv[0]);
-+		return 1;
-+	}
-+	printf("%ld bytes from 0x%p to 0x%p: ", sz, src, dst);
-+	t0 = get_timer(0);
-+	memcpy(dst, src, sz);
-+	delta = get_timer(t0);
-+	printf("%ld ms\n", delta);
-+
-+	return 0;
-+}
-+
-+U_BOOT_CMD(
-+	mtest,	CONFIG_SYS_MAXARGS,	0,	do_mtest,
-+	"memcpy() speed test",
-+	NULL
-+);
+ arch/arm/mach-sunxi/Kconfig                   |   2 +-
+ arch/arm/mach-sunxi/dram_sun50i_h616.c        | 174 ++++++++++++------
+ .../dram_timings/h616_lpddr4_2133.c           |   2 +-
+ board/sunxi/MAINTAINERS                       |   5 +
+ configs/anbernic_rg35xx_h700_defconfig        |  52 ++++++
+ .../src/arm64/allwinner/sun50i-h616.dtsi      |   2 +
+ .../sun50i-h700-anbernic-rg35xx-2024.dts      |   6 +-
+ 7 files changed, 179 insertions(+), 64 deletions(-)
+ create mode 100644 configs/anbernic_rg35xx_h700_defconfig
 
-I can see that there are ranges of memory that are very slow to *write*
-to (and the loadaddr used by the tftp test happens to fall in that
-range):
-
-$ make qemu_arm64_defconfig
-$ make -j$(nproc) CROSS_COMPILE="ccache aarch64-linux-gnu-"
-$ qemu-system-aarch64 -M virt -nographic -cpu cortex-a57 -bios u-boot.bin
-
-U-Boot 2024.10-rc1-00195-g35ce7016c9cb-dirty (Aug 19 2024 - 16:42:15 +0200)
-[...]
-=> mtest
-Usage: mtest <size_in_bytes> [dst [src]]
-=> mtest 1000
-1000 bytes from 0x00000000466baed0 to 0x00000000466baae0: 0 ms
-=> mtest 1000 0x2000000 0x00000000466baed0
-1000 bytes from 0x00000000466baed0 to 0x0000000002000000: 22 ms
-=> mtest 1000 0x00000000466baed0 0x2000000
-1000 bytes from 0x0000000002000000 to 0x00000000466baed0: 0 ms
-=> 
-
-
->> - The r2dplus_* tests fail for reasons I don't understand.
-> 
-> Consistently, too?
-
-Yes.
-
-
-Thanks,
 -- 
-Jerome
+2.34.1
+
