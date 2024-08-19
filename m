@@ -4,98 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC975C52D7C
-	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 19:34:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F783C3DA4A
+	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 19:34:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCB5388D22;
-	Mon, 19 Aug 2024 21:34:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 416DD88D21;
+	Mon, 19 Aug 2024 21:34:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Cz3PrPJ2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RaVwsCdm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E435488CD7; Mon, 19 Aug 2024 21:34:24 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id EAC9E88CC9; Mon, 19 Aug 2024 21:34:26 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBAED88CD7
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 21:34:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E4FEC88D16
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 21:34:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a7d89bb07e7so503675666b.3
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 12:34:22 -0700 (PDT)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5bf009cf4c0so1307929a12.1
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 12:34:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724096062; x=1724700862; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=XD+YZ03htDVoBxt0ZNMdWa9ZvwJG1fmW1JSa5Tzfq0w=;
- b=Cz3PrPJ2xLYzHtN+ctmgJ2L0UfMLn8z7HA1sOEFWWMGdn8W4LIiVqnXpHZl5svSkuS
- cKnAUbHEEgHaLdyRM3UDaRIN28/dsIoWt3TxRukby7HiIMFkktVmExyRq8ZKtgQ+e0ax
- ktK7AjAeWdao7FMKvMHsa5o+/jCS431zhsrmzzZWnkAJVDu+9U9j2osq1gMmhYPWtQAB
- i74ASd5x1UJXhjKgVNEQ/Iq3M3Rau/MKqu1zR6Xq671nWK0kBN5qJuUMu8f/iBMzyEro
- /Z3UieuJ0cCVKRRQwA5Fc1pGBhuj+0RuWed9EaYm3qgRSSeZbrlCXJueKr+o71dFp7YE
- x0Ug==
+ d=linaro.org; s=google; t=1724096063; x=1724700863; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=hJfN0hpMVaXnz/L1Q4Hg/y0PeVcJwvBi7boyAKaJ46w=;
+ b=RaVwsCdmtouMfUaKWDyTmy+UBVb0t+TtdPYMrrA0n4puphlHsk78R/StCgJmlfA1sd
+ M3MVuY6ctPNRDB3O1vDs2oBiYMZuZJNDGO1SCUvyseKq7tz0ZZ8A+Ur0FgHZdM2K6tyS
+ 1QOAXtx5TjRuTi+5LnCEgNbGLPVElpxlB9OO8nt/ZwO5PX3K1gzRunLkX2RX8ll5qd8J
+ BUz1J0gVyDWroGIxaOTz9FOP5BN+ip6SVRyucWC5R0XDY5c21EIvNjnPrpgSs7rZG6wM
+ gHkb2ZpaJg85s50ylB2gIIF1MavCFw0rdylikX5olurcygwUyBfpjRKITJzip1/V2nhN
+ nuFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724096062; x=1724700862;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=XD+YZ03htDVoBxt0ZNMdWa9ZvwJG1fmW1JSa5Tzfq0w=;
- b=jLubAgZFbXDbIi6wCqdwDzAFzep+axLmrA8KlNCJxiXcf26IiG94PNYdtYCy3h9qh1
- D81UAEKYYLA+ekBb9bKRRsSbixvDR1vWMceDC+iFsXGxnukxuuY69zu+EXdlWoTQldOt
- TfjpzzOfSVYdoeGeqU+qR3tcFTDawqsDY31XnbKuTMn/HRNoKQvwL75Mizn/n8FhfdVt
- ytidW0wwH5yW4BIiq8Zxnbv3sZSpj7G6nr+8dXmI+HTyt5ra9OooZQiYfJroZ6Kv8Vka
- tmwhzlJuL2mH6LBbmO2nzxMynswkElzyD2n2FWYc0GW1QoDjLDpJHSo46AAm0D8VIPLt
- 7LPg==
+ d=1e100.net; s=20230601; t=1724096063; x=1724700863;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hJfN0hpMVaXnz/L1Q4Hg/y0PeVcJwvBi7boyAKaJ46w=;
+ b=qOr9BYWMMLQcVtzuvM5GzenM5F6YS6PgIzUgW2Djgu/KzWAe8gd18mr2XGdueh/gtZ
+ NBv4VWS6zT1oFOgRq63vMprDCdPhr56pTtudYOOChz0qPcOk1dMcRXqoO2xGUjtAb/ov
+ Qh6u2GqQVBPYzDrFJhyDyj7/bjOEVreRFFfvzu+8mXd3spXvNJ55t8LJHTNnJhI1zaP9
+ eFUr34j3VZweXItMI2GznWBDLDBQQP/ge1Wwo+iEuhjTymp23OGgbp7fiL9E+LXumJ58
+ 0amUJjJwTBs3tX1ScMnnLy3OIphpOj0sPVnO5Zb3XaDTIKqxFqNbOQ0nXwwX01gIdiey
+ 50CA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW6vEiBJBjMl/M9t/cCBAKSg7PIuZ8ELa+Y14nEhZaYNyWOtIiFk1y/orsKquCLfT7sqs7sF/M=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxe5yfvuKI9Y+5N70K3vEotmy5oQ6B6n4oEta3LturqOriarMSG
- RfFi6TswG83724gZgy9HVhro23QBjT+Y5ds8P7veZZ2ogXP/S38nTxMDZH3X/xk=
-X-Google-Smtp-Source: AGHT+IG1AwFyMb2PyoaSznDIkd/UETWbCADAFLQOLIa2f6OC1dzDk6KMp6oBf0n5gh01cj0mMhdgDg==
-X-Received: by 2002:a17:907:9712:b0:a7a:c083:857b with SMTP id
- a640c23a62f3a-a8392a11c5fmr904381966b.42.1724096061874; 
- Mon, 19 Aug 2024 12:34:21 -0700 (PDT)
+ AJvYcCWCDlXYDjBY3UIOltUgjGD5Ct28qjMWz34o5BIK88nq20ocW0xS4zhpJ47kifarR++fTDpFwiG9/IPxN8P8MDHzHqarqA==
+X-Gm-Message-State: AOJu0Yzwy/3THHhoul4LHqTUngbn5rvrQpRkqmD/g1BMIx5R5qjyV8dp
+ PFR7S4wkwbvQF6kLL689MIRH2868dpW3I5bpfMPJi0kbQmc09PPyIGtrslgJGN0=
+X-Google-Smtp-Source: AGHT+IHgb4gf+UbgOIaG1aorQxqYg8zVMPE/lvR8+c2lpY4+JAbjelESkwI3l9goGPNdIbsOQNPhsg==
+X-Received: by 2002:a17:907:f16a:b0:a7a:9f0f:ab2b with SMTP id
+ a640c23a62f3a-a8392954042mr741646466b.32.1724096063114; 
+ Mon, 19 Aug 2024 12:34:23 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::676e])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8383964976sm667783666b.188.2024.08.19.12.34.20
+ a640c23a62f3a-a8383964976sm667783666b.188.2024.08.19.12.34.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Aug 2024 12:34:21 -0700 (PDT)
+ Mon, 19 Aug 2024 12:34:22 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PATCH 0/4] clk/qcom: implement clk dump callback
-Date: Mon, 19 Aug 2024 21:34:16 +0200
-Message-Id: <20240819-b4-qcom-clk-dump-v1-0-182cf77c23a2@linaro.org>
+Date: Mon, 19 Aug 2024 21:34:17 +0200
+Subject: [PATCH 1/4] clk/qcom: implement clk dump
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIADiew2YC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIxMDC0NL3SQT3cLk/Fzd5Jxs3ZTS3ALdVCPTRANDS4s0s2QDJaC2gqLUtMw
- KsJHRsbW1AJguT8xiAAAA
+Message-Id: <20240819-b4-qcom-clk-dump-v1-1-182cf77c23a2@linaro.org>
+References: <20240819-b4-qcom-clk-dump-v1-0-182cf77c23a2@linaro.org>
+In-Reply-To: <20240819-b4-qcom-clk-dump-v1-0-182cf77c23a2@linaro.org>
 To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>, 
  Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
  Caleb Connolly <caleb.connolly@linaro.org>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=9111;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6493;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=KXxZuq9P+ussJpaGzhLu9Y08ZkhUDYRBoiYE8wsFpuo=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmw548dHlpXhg9A/MqQGyFS627yaRgUZ1uiWwgZ
- bLdXuCXyy2JAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZsOePAAKCRAFgzErGV9k
- tr4+D/9wH9WNaI4z0MyhPEWn82Da9pH0SfaLE/8mtC2YTXiaaD9euBrsxZ58V1zPVV+0qIN68O9
- vOgtpU0UNPGYOQC3XGEMXRGrNRV9rxb0Mz4s+eY48l5e1nstuEh2ntogVKPRg1o6sGz6cuBPPy2
- Us8Iero78hIFn9HQFRip2K0ld8cqb/4StsblJVVz+wNrhHtTlDjjue957j8hlwWsG1HzZ+GsBjv
- N9rXucfOSk297Kp393Q/2inuWfrwxmX6ag4sq0ZzV3W1ikRz31b5cQL7/IYaM+i0RxhkDZpffsk
- s5uwMMaWIDy91rk3Jx/gR3eDnGdvsR5+pakhSGeNNxKfgs5G9MT7zb//ha2OS/80b5GPPdGXWKO
- Lubj5O4hr/RoJktKBSSNoc3JJbN/zwWSU2fIeHQUxTubRsAIn3UwoopJqL12/tjQU2YkHGOYwxU
- nUgy6h9g7Fs6ZAXHJJghwy2Q0WCJrcIfzaFnoPRe6CiTgZgHkK2xsOIz5p251DmUXTx3+Nijtwq
- bQ/6Jw8TK9ABPQ4g8Gd+ID27t2hkY7ckAumayes1qVXBCPVmBYko4B4ywdfUWJLciT15wtIoHCQ
- flrzfzVMOcCZbQewx7oWkE6nNms3Y/BlKZRC+Ier+N6RO6SGzytS7RpGN1gzdOVUmUBJ1LArvQ0
- mD7gXbfePnpVEeg==
+ bh=nxK/d88itr3JtU0XB/+xiwMh0xK1wVyYi3ERrQRJ7+o=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmw548lE4+ZYQEf6s4J88uxTA5OLnejqK6CaDLW
+ EeMosZOgyaJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZsOePAAKCRAFgzErGV9k
+ tnQEEACY7XgKSOnyZNWYoAg0JgXGxmLNOSgNqbHEgmdVaA1Hv2N4mFvtsnnsAUbOw6IYQEWTenN
+ d1dULvdBUQnPr8xQtAxIKhPyTOv3iiOLJCVCgPVY7Vnyrmm1Q2oq8ay7FasX7xX+ynEaRXXBzs1
+ DZtUwBcz4wX5XO+yLbFoBzZ/+jpJtN3FTHSg5ZbWQaPzrgGdOCqhQH4OX68hCUsn1ygSIZlS7Sv
+ 1pGAeyxkh5rhYbR9kUPhu5RCTzFrx2Z9bKOUk9niZ/gJMXVz/1vNDKuk8K/Q+np/eU3lB2nnZs5
+ plpPPClTLKEcNn2HC4vidFfoiTVFzaG6Zggp5hm+Lc/QpHnx4tmF0JV2iXrxfL2nIS3YnAyQUyD
+ 31VSrAeK7ZBqonqY0vyiJn/AkOjCUPKSCe38mDDhv5BgF1JkKNP09/LJXEJI0qW9gTqKibfKp0c
+ 6/MvmXlqmkMQ/aclUmG6GIRdo/PYu1S3gcjojqlGMAAQyNSCmKx/9wVgLZlvteVJizk+as8IpY7
+ kmoXPFQ6dNZ59pLy1ZJ1rlkyRlKtZyPh6ixqtSwJDfGqYCx+HnIBWR+YASeMcJV2WjU7zseuPUy
+ ZpAt/O1tmSAK0ELYkiwjVr3Jv8i+bq8bQ8TBRFAz4AMnYhMTedYer01Z7cUI25RDCdv3O0kll/K
+ TR//k9SlrSFhaaw==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -125,9 +124,6 @@ it easy to sanity check that the clocks are programmed correctly.
 Enable CONFIG_CMD_CLK and "#define LOG_DEBUG" at the top of
 qcom-<soc>.c.
 
-If your SoC doesn't yet define the debug data for clocks, it can be
-added using the Linux driver as a reference.
-
 The "clk dump" command should print the states of all the gates, GPLLs
 and RCGs for your SoC.
 
@@ -153,142 +149,174 @@ numbers should roughly line up by they're likely to be out by a handful
 of MHz. They output is formatted so that it can be pasted directly into
 the python interpreter.
 
-== Example output ==
-
-=> clk dump
- Rate               Usecnt      Name
-------------------------------------------
- 38400000             0        |-- xo-board
- 32764                0        |-- sleep-clk
-
-qcom_clk qcom_clk:
-Gate Clocks:
-GCC_AGGRE_USB3_SEC_AXI_CLK      : 
-GCC_CFG_NOC_USB3_SEC_AXI_CLK    : 
-GCC_QUPV3_WRAP0_S0_CLK          : 
-GCC_QUPV3_WRAP0_S1_CLK          : 
-GCC_QUPV3_WRAP0_S2_CLK          : 
-GCC_QUPV3_WRAP0_S3_CLK          : 
-GCC_QUPV3_WRAP0_S4_CLK          : 
-GCC_QUPV3_WRAP0_S5_CLK          : 
-GCC_QUPV3_WRAP0_S6_CLK          : 
-GCC_QUPV3_WRAP0_S7_CLK          : 
-GCC_QUPV3_WRAP1_S0_CLK          : 
-GCC_QUPV3_WRAP1_S1_CLK          : ON
-GCC_QUPV3_WRAP1_S3_CLK          : 
-GCC_QUPV3_WRAP1_S4_CLK          : 
-GCC_QUPV3_WRAP1_S5_CLK          : 
-GCC_QUPV3_WRAP1_S6_CLK          : 
-GCC_QUPV3_WRAP1_S7_CLK          : 
-GCC_QUPV3_WRAP_0_M_AHB_CLK      : 
-GCC_QUPV3_WRAP_0_S_AHB_CLK      : 
-GCC_QUPV3_WRAP_1_M_AHB_CLK      : ON
-GCC_QUPV3_WRAP_1_S_AHB_CLK      : ON
-GCC_SDCC2_AHB_CLK               : ON
-GCC_SDCC2_APPS_CLK              : ON
-GCC_SDCC4_AHB_CLK               : 
-GCC_SDCC4_APPS_CLK              : 
-GCC_UFS_CARD_AHB_CLK            : 
-GCC_UFS_CARD_AXI_CLK            : 
-GCC_UFS_CARD_CLKREF_CLK         : ON
-GCC_UFS_CARD_ICE_CORE_CLK       : 
-GCC_UFS_CARD_PHY_AUX_CLK        : 
-GCC_UFS_CARD_RX_SYMBOL_0_CLK    : 
-GCC_UFS_CARD_RX_SYMBOL_1_CLK    : 
-GCC_UFS_CARD_TX_SYMBOL_0_CLK    : 
-GCC_UFS_CARD_UNIPRO_CORE_CLK    : 
-GCC_UFS_MEM_CLKREF_CLK          : ON
-GCC_UFS_PHY_AHB_CLK             : ON
-GCC_UFS_PHY_AXI_CLK             : ON
-GCC_UFS_PHY_ICE_CORE_CLK        : ON
-GCC_UFS_PHY_PHY_AUX_CLK         : ON
-GCC_UFS_PHY_RX_SYMBOL_0_CLK     : ON
-GCC_UFS_PHY_RX_SYMBOL_1_CLK     : ON
-GCC_UFS_PHY_TX_SYMBOL_0_CLK     : ON
-GCC_UFS_PHY_UNIPRO_CORE_CLK     : ON
-GCC_USB30_PRIM_MASTER_CLK       : ON
-GCC_USB30_PRIM_MOCK_UTMI_CLK    : ON
-GCC_USB30_PRIM_SLEEP_CLK        : ON
-GCC_USB30_SEC_MASTER_CLK        : 
-GCC_USB30_SEC_MOCK_UTMI_CLK     : 
-GCC_USB30_SEC_SLEEP_CLK         : 
-GCC_USB3_PRIM_CLKREF_CLK        : ON
-GCC_USB3_PRIM_PHY_AUX_CLK       : ON
-GCC_USB3_PRIM_PHY_COM_AUX_CLK   : ON
-GCC_USB3_PRIM_PHY_PIPE_CLK      : ON
-GCC_USB3_SEC_CLKREF_CLK         : ON
-GCC_USB3_SEC_PHY_AUX_CLK        : 
-GCC_USB3_SEC_PHY_PIPE_CLK       : 
-GCC_USB3_SEC_PHY_COM_AUX_CLK    : 
-GCC_USB_PHY_CFG_AHB2PHY_CLK     : ON
-
-GPLL clocks:
-| GPLL   | LOCKED | XO_BOARD  |  PLL_L     | ALPHA          |
-+--------+--------+-----------+------------+----------------+
-| GPLL0  | X      |  19200000 * (0x1f      + 0x0            * 2 ** -40 )/ 1000000
-| GPLL1  | X      |  19200000 * (0x37      + 0x0            * 2 ** -40 ) / 1000000
-| GPLL2  |        |  19200000 * (0x14      + 0x0            * 2 ** -40 ) / 1000000
-| GPLL3  |        |  19200000 * (0x30      + 0x0            * 2 ** -40 )/ 1000000
-| GPLL4  | X      |  19200000 * (0x29      + 0x0            * 2 ** -40 ) / 1000000
-| GPLL5  |        |  19200000 * (0x30      + 0x0            * 2 ** -40 ) / 1000000
-| GPLL6  |        |  19200000 * (0x0       + 0x0            * 2 ** -40 )/ 1000000
-
-RCGs:
-| NAME                             | ON | SRC | OUT_FREQ = input_freq * (m/n) * (1/d) | [CMD REG   ] |
-+----------------------------------+----+-----+---------------------------------------+--------------+
-GCC_USB30_PRIM_MASTER              | X  |   1 | input_freq * (   1/    1) * (1/4.5)   | [0x00000000]
-GCC_USB30_PRIM_MOCK_UTMI           | X  |   0 | input_freq * (   1/    1) * (1/1  )   | [0x00000000]
-GCC_USB3_PRIM_PHY_AUX              | X  |   0 | input_freq * (   1/    1) * (1/1  )   | [0x00000000]
-GCC_USB30_SEC_MASTER               |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_USB30_SEC_MOCK_UTMI            |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_USB3_SEC_PHY_AUX               |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_SDCC2_APPS                     | X  |   5 | input_freq * (   1/    1) * (1/4  )   | [0x00000000]
-GCC_SDCC4_APPS                     |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_QUPV3_WRAP0_CORE_2X            | X  |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x00000000]
-GCC_QUPV3_WRAP0_S0                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_QUPV3_WRAP0_S1                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_QUPV3_WRAP0_S2                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_QUPV3_WRAP0_S3                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_QUPV3_WRAP0_S4                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_QUPV3_WRAP0_S5                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_QUPV3_WRAP0_S6                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_QUPV3_WRAP0_S7                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_QUPV3_WRAP1_S0                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_QUPV3_WRAP1_S1                 | X  |   6 | input_freq * ( 384/15625) * (1/1  )   | [0x00000000]
-GCC_QUPV3_WRAP1_S2                 | X  |   0 | input_freq * (   1/    1) * (1/1  )   | [0x00000000]
-GCC_QUPV3_WRAP1_S3                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_QUPV3_WRAP1_S4                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_QUPV3_WRAP1_S5                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_QUPV3_WRAP1_S6                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_QUPV3_WRAP1_S7                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_PCIE_0_AUX                     |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_PCIE_1_AUX                     |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_PCIE_PHY_REFGEN                | X  |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x00000000]
-GCC_UFS_CARD_AXI                   | X  |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x00000000]
-GCC_UFS_CARD_ICE_CORE              |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_UFS_CARD_UNIPRO_CORE           |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_UFS_CARD_PHY_AUX               |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-GCC_UFS_PHY_AXI                    | X  |   1 | input_freq * (   1/    1) * (1/3  )   | [0x00000000]
-GCC_UFS_PHY_ICE_CORE               | X  |   1 | input_freq * (   1/    1) * (1/2  )   | [0x00000000]
-GCC_UFS_PHY_UNIPRO_CORE            | X  |   1 | input_freq * (   1/    1) * (1/4  )   | [0x00000000]
-GCC_UFS_PHY_PHY_AUX                | X  |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x00000000]
-
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
-Caleb Connolly (4):
-      clk/qcom: implement clk dump
-      clk/qcom: sdm845: add dump data
-      clk/qcom: sm6115: add debug data
-      clk/qcom: sm8250: add debug data
+ drivers/clk/qcom/clock-qcom.c | 117 ++++++++++++++++++++++++++++++++++++++++++
+ drivers/clk/qcom/clock-qcom.h |   6 +++
+ 2 files changed, 123 insertions(+)
 
- drivers/clk/qcom/clock-qcom.c   | 117 ++++++++++++++++++++++++++++++++++++++++
- drivers/clk/qcom/clock-qcom.h   |   6 +++
- drivers/clk/qcom/clock-sdm845.c |  93 ++++++++++++++++++++++++++++++++
- drivers/clk/qcom/clock-sm6115.c |  63 ++++++++++++++++++++++
- drivers/clk/qcom/clock-sm8250.c | 115 +++++++++++++++++++++++++++++++++++++++
- 5 files changed, 394 insertions(+)
----
-change-id: 20240819-b4-qcom-clk-dump-e25a0198f6c0
-base-commit: b7d5ce05b1b52136af09cf34541c6a91079a4b86
+diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
+index 79c7606a2253..5727d055e95a 100644
+--- a/drivers/clk/qcom/clock-qcom.c
++++ b/drivers/clk/qcom/clock-qcom.c
+@@ -12,8 +12,9 @@
+  * Based on Little Kernel driver, simplified
+  */
+ 
+ #include <clk-uclass.h>
++#include <linux/clk-provider.h>
+ #include <dm.h>
+ #include <dm/device-internal.h>
+ #include <dm/lists.h>
+ #include <errno.h>
+@@ -214,11 +215,127 @@ static int msm_clk_enable(struct clk *clk)
+ 
+ 	return 0;
+ }
+ 
++static void dump_gplls(struct udevice *dev, phys_addr_t base)
++{
++	struct msm_clk_data *data = (struct msm_clk_data *)dev_get_driver_data(dev);
++	u32 i;
++	bool locked;
++	u64 l, a, xo_rate = 19200000;
++	struct clk *clk = NULL;
++	struct udevice *xodev;
++	const phys_addr_t *gplls = data->dbg_pll_addrs;
++
++	uclass_foreach_dev_probe(UCLASS_CLK, xodev) {
++		if (!strcmp(xodev->name, "xo-board") || !strcmp(xodev->name, "xo_board")) {
++			clk = dev_get_clk_ptr(xodev);
++			break;
++		}
++	}
++
++	if (clk) {
++		xo_rate = clk_get_rate(clk);
++
++		/* On SDM845 this needs to be divided by 2 for some reason */
++		if (xo_rate && of_machine_is_compatible("qcom,sdm845"))
++			xo_rate /= 2;
++	} else {
++		printf("Can't find XO clock, XO_BOARD rate may be wrong\n");
++	}
++
++	printf("GPLL clocks:\n");
++	printf("| GPLL   | LOCKED | XO_BOARD  |  PLL_L     | ALPHA          |\n");
++	printf("+--------+--------+-----------+------------+----------------+\n");
++	for (i = 0; i < data->num_plls; i++) {
++		locked = !!(readl(gplls[i]) & BIT(31));
++		l = readl(gplls[i] + 4) & (BIT(16) - 1);
++		a = readq(gplls[i] + 40) & (BIT(16) - 1);
++		printf("| GPLL%-2d | %-6s | %9llu * (%#-9llx + %#-13llx  * 2 ** -40 ) / 1000000\n",
++		       i, locked ? "X" : "", xo_rate, l, a);
++	}
++}
++
++static void dump_rcgs(struct udevice *dev)
++{
++	struct msm_clk_data *data = (struct msm_clk_data *)dev_get_driver_data(dev);
++	int i;
++	u32 cmd;
++	u32 cfg;
++	u32 not_n_minus_m;
++	u32 src, m, n, div;
++	bool root_on, d_odd;
++
++	printf("\nRCGs:\n");
++
++	/*
++	 * Which GPLL SRC corresponds to depends on the parent map, see gcc-<soc>.c in Linux
++	 * and find the parent map associated with the clock. Note that often there are multiple
++	 * outputs from a single GPLL where one is actually half the rate of the other (_EVEN).
++	 * intput_freq = associated GPLL output freq (potentially divided depending on SRC).
++	 */
++	printf("| NAME                             | ON | SRC | OUT_FREQ = input_freq * (m/n) * (1/d) | [CMD REG   ] |\n");
++	printf("+----------------------------------+----+-----+---------------------------------------+--------------+\n");
++	for (i = 0; i < data->num_rcgs; i++) {
++		cmd = readl(data->dbg_rcg_addrs[i]);
++		cfg = readl(data->dbg_rcg_addrs[i] + 0x4);
++		m = readl(data->dbg_rcg_addrs[i] + 0x8);
++		n = 0;
++		not_n_minus_m = readl(data->dbg_rcg_addrs[i] + 0xc);
++
++		root_on = !(cmd & BIT(31)); // ROOT_OFF
++		src = (cfg >> 8) & 7;
++
++		if (not_n_minus_m) {
++			n = (~not_n_minus_m & 0xffff);
++
++			/* A clumsy assumption that this is an 8-bit MND RCG */
++			if ((n & 0xff00) == 0xff00)
++				n = n & 0xff;
++
++			n += m;
++		}
++
++		div = ((cfg & 0b11111) + 1) / 2;
++		d_odd = ((cfg & 0b11111) + 1) % 2 == 1;
++		printf("%-34s | %-2s | %3d | input_freq * (%4d/%5d) * (1/%1d%-2s)   | [%#010x]\n",
++		       data->dbg_rcg_names[i], root_on ? "X" : "", src,
++		       m ?: 1, n ?: 1, div, d_odd ? ".5" : "", cmd);
++	}
++
++	printf("\n");
++}
++
++static void msm_dump_clks(struct udevice *dev)
++{
++	struct msm_clk_data *data = (struct msm_clk_data *)dev_get_driver_data(dev);
++	struct msm_clk_priv *priv = dev_get_priv(dev);
++	const struct gate_clk *sclk;
++	int val, i;
++
++	if (!data->clks) {
++		printf("No clocks\n");
++		return;
++	}
++
++	printf("Gate Clocks:\n");
++	for (i = 0; i < data->num_clks; i++) {
++		sclk = &data->clks[i];
++		if (!sclk->name)
++			continue;
++		printf("%-32s: ", sclk->name);
++		val = readl(priv->base + sclk->reg) & sclk->en_val;
++		printf("%s\n", val ? "ON" : "");
++	}
++
++	dump_gplls(dev, priv->base);
++	dump_rcgs(dev);
++}
++
+ static struct clk_ops msm_clk_ops = {
+ 	.set_rate = msm_clk_set_rate,
+ 	.enable = msm_clk_enable,
++	.dump = msm_dump_clks,
+ };
+ 
+ U_BOOT_DRIVER(qcom_clk) = {
+ 	.name		= "qcom_clk",
+diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
+index f6445c8f566f..040c0cf29943 100644
+--- a/drivers/clk/qcom/clock-qcom.h
++++ b/drivers/clk/qcom/clock-qcom.h
+@@ -75,8 +75,14 @@ struct msm_clk_data {
+ 	unsigned long			num_resets;
+ 	const struct gate_clk		*clks;
+ 	unsigned long			num_clks;
+ 
++	const phys_addr_t		*dbg_pll_addrs;
++	unsigned long			num_plls;
++	const phys_addr_t		*dbg_rcg_addrs;
++	unsigned long			num_rcgs;
++	const char * const		*dbg_rcg_names;
++
+ 	int (*enable)(struct clk *clk);
+ 	unsigned long (*set_rate)(struct clk *clk, unsigned long rate);
+ };
+ 
 
-// Caleb (they/them)
+-- 
+2.46.0
 
