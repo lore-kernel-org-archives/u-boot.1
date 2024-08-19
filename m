@@ -4,99 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F503C52D7C
-	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 19:35:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 902A8C3DA4A
+	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 21:03:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8338388D34;
-	Mon, 19 Aug 2024 21:34:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B6B8188CA8;
+	Mon, 19 Aug 2024 23:03:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TiPYtFA2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UEu4085X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87B1188D28; Mon, 19 Aug 2024 21:34:29 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id 1F19788D0F; Mon, 19 Aug 2024 23:03:24 +0200 (CEST)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7253488CC9
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 21:34:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C082188A82
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 23:03:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-52efd08e6d9so5608075e87.1
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 12:34:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-3db1657c0fdso3002705b6e.1
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 14:03:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724096067; x=1724700867; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Lr05GnlfvAsxpkamHeIJpnX6FfbX9eMlmBjZxVkUo3g=;
- b=TiPYtFA2+BBbmwDBygCw83AhUCbEkiTOIFDYByXwzskwAcPnd51XQx20YvgLHJxeHV
- 5zOCi/fAKuYUlmh0H9AwzLlRBPU2WvKwI3wUdN5FuxiyUSy+3e/Iu1qVqQLP9WBILQi1
- l0Ky3/vTimcZ2lEuBq81C94+EGU4fF9fSK7BZhvxAVm7XmQTg8TE+QrSvkijdKXvpRB6
- WU7tMaswQDennbf3b6cIHkTurMxPk4DebM2ZQTSIxRlA00CACO/ugJw7qy74iBvMiWb/
- MCI5cdY6y5zQX46gs0OoLMI0Gd0TUq8/HHZvJeghS5lmhNaFkVsD4b0FaxldM3ygIopi
- y6sA==
+ d=konsulko.com; s=google; t=1724101400; x=1724706200; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=bH9EomgQDbS2q9hwcrh8y3tRMAQcBNQayBjkVi9ylUM=;
+ b=UEu4085Xb6W6Q060bGnQbt4m5fXZIolgke4zjmGotCgGG4mHqOE3onjGGhOqR2WYgu
+ 767co/Azq1gT5VDBK4ZgMZqC8mcnZoJVzUMnJ2YHwNwxrM7rZGTWyaXqsteZYhefpxxt
+ nXd0yu+XqT16h5TVdemqSYCBY3iZFhw9VEQnY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724096067; x=1724700867;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Lr05GnlfvAsxpkamHeIJpnX6FfbX9eMlmBjZxVkUo3g=;
- b=PUYqUevlIOVMSxo8z6AG5729dnAA57cYqhxsga04Gmb+ONFYaobKu66pNNT0ofNBHO
- d2pLo5FsK5voRlhX3hjYF8obuOHhWzUF7PlTzAfV9rQXXJvJr8YMk/NnES2KjHbCC4IQ
- 2K+Ztz1qQ8A8D68OVVN0ckUPNyCzU3vsMNzpg1tcF9IS0o2dEhGwJ9doPkBoSVNQKHce
- scvwCiGOYesuxpt+nkUwGlce71exibKsgLL5eh5K9xBUlAXvNtgQ0vuANPczPhNa/6ll
- AlcO9V43vmMDPOSIHt48yc0JR3YC3q1CKGuQ8Cz1Cevi/De4Y56EUPtFolyXvnmAdmOl
- oXdA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU2Cwi0znpdEb5L5F9Bm74tTijtFRURHcj5GCfB7XpxBs7etwy1whxME0OHABKxbNQKeyWJPd1ur+DQBRakTKwlSMs2Sg==
-X-Gm-Message-State: AOJu0Ywa9YyEbOgist5+SvYgveunFOm0j+vGHGAsZ/sf5aKIkF1xgrz6
- DItcP+AhpfIhEQJ2SfcTAYi4db7yS3X4PVfC/OPb+hXmLkgyitaSxwmYKWGsxww=
-X-Google-Smtp-Source: AGHT+IFSUitoEzloQQ4InXmDPR14+wO0hT4BRMdhGxHEknNSUPPF/p+6yH7qNv5g03pUR0kMw8icoA==
-X-Received: by 2002:a05:6512:308a:b0:52c:dac3:392b with SMTP id
- 2adb3069b0e04-5331c6b3705mr8444793e87.33.1724096066311; 
- Mon, 19 Aug 2024 12:34:26 -0700 (PDT)
-Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::676e])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8383964976sm667783666b.188.2024.08.19.12.34.25
+ d=1e100.net; s=20230601; t=1724101400; x=1724706200;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bH9EomgQDbS2q9hwcrh8y3tRMAQcBNQayBjkVi9ylUM=;
+ b=aNDHvD4r9lr4MZMtUTig4KqopQvbauMfy8GWF5PT4PUM+Sv6dXenBvo8/7UUBl8oty
+ D4GOojEMnV+LCjmmsOnZJ2lEqCDZhjN1e2xWFKr7B0caJ2PpI1i10aqYzGgLfOAQsvqJ
+ TiOWXXUVzbSQJSvaSDyKVylr1goFUtiILoDuUZGBF2SbZdVIEJ164B7KqrQn2soW3W+z
+ 1vPrJIiWfa4BnVc09eGwOTnAcrYWgL/LLfCqBtvAu93P6KkqzTEPJEOUymCZhj5FrYwX
+ GWl76YS1GSt0i9UCPa6BqlGPXhH+fFVjqThdZT+4TUYLBOlCa4ur16vFhHZ9MIOvW4uD
+ x0lQ==
+X-Gm-Message-State: AOJu0YzBHcEpDueKN2bGhIzGUzDBsuaBRWMQd/IKwYkukNUe/99SoWxj
+ Z8Hfab8zDi1kVPSsyjq6piZxkRjfyTKLZZ3/OIaox1iNTHXpJWkdaSECg4K0Q2A=
+X-Google-Smtp-Source: AGHT+IEaMQSq0fJGH5or30wB270GtJCGemiGe0c8NVBbAu2IvaG6pk3llpRB/PV/thYoMK/0ic532w==
+X-Received: by 2002:a05:6808:220a:b0:3da:a6ce:f040 with SMTP id
+ 5614622812f47-3dd3ad16804mr13318777b6e.9.1724101400243; 
+ Mon, 19 Aug 2024 14:03:20 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-236.totalplay.net.
+ [189.203.97.236]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3dd33f09cb7sm2502220b6e.57.2024.08.19.14.03.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Aug 2024 12:34:25 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 19 Aug 2024 21:34:20 +0200
-Subject: [PATCH 4/4] clk/qcom: sm8250: add debug data
+ Mon, 19 Aug 2024 14:03:19 -0700 (PDT)
+Date: Mon, 19 Aug 2024 15:03:15 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, manish.pandey2@arm.com,
+ Stefan Bosch <stefan_b@posteo.net>, Mario Six <mario.six@gdsys.cc>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sumit Garg <sumit.garg@linaro.org>, Andrew Davis <afd@ti.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Alexander Gendin <agendin@matrox.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Anand Moon <linux.amoon@gmail.com>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Subject: Re: [PATCH v6 08/28] mbedtls: Enable smaller implementation for
+ SHA256/512
+Message-ID: <20240819210315.GG1626301@bill-the-cat>
+References: <20240816214436.1877263-1-raymond.mao@linaro.org>
+ <20240816214436.1877263-9-raymond.mao@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240819-b4-qcom-clk-dump-v1-4-182cf77c23a2@linaro.org>
-References: <20240819-b4-qcom-clk-dump-v1-0-182cf77c23a2@linaro.org>
-In-Reply-To: <20240819-b4-qcom-clk-dump-v1-0-182cf77c23a2@linaro.org>
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
- Caleb Connolly <caleb.connolly@linaro.org>
-X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5406;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=MOlEeC3YWFagl+NBtYginLvXnge7rLfMOd2qIYaWJmY=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmw548a1bN0ZTLO+E3/+8DLcDW9v7apECmdYxuO
- 2WLT9hzz4KJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZsOePAAKCRAFgzErGV9k
- tlKKD/90Y9SYw7Ubss5t1qodpndsHpf/lunHGrA6LOfobkrctqEF1ky5e4smHrmWwTqRgV5pI1M
- dst+e07pTrg6uG49Ltyg/T9eucgVe1ZlwKU+DgFF8mD66+mpz+gF4L/hNniLZH5xi1kUO5dUzj4
- XciWrXq/EwEncoT+LUb04NrVG5ui0uW5Rd1GNBtX0iCtuWuvsqSO88aOFnUeY8haFBblPWUGrZW
- LpRZrBWavfIDKiuVBGClTM00bZLzqXwGBLjZ/v5bj8FHq1K6afCOT+95zG5a2niCaJQQl4vZPxJ
- nNaMC6NqE11tHNtEbGtNmJsGl5Lg9IB2s2+nnDU1BoIlJouxlP9nJarrsuozC8CgJjNNsIP5dry
- NO72z70xplNx3iyiL6BTpcEK/idKmHLJFSX4+j10y0NN+yy1Ple5XP9dnRt5nHNv1+yU1p8JVVB
- sn6ALRlFyGDgziqwGD7WGeyjYak5xCacBIsakpra8OqNbP+w6w7je53Rk3CFyBa3K/TdZflu+oI
- 4sKx3piuZmmGrb2sOX4G6NHGVo9Xn4IscRNN54Ae5JJYZmsyGUN12ybB3I/BJ4oMFnL4X+KQCoz
- l4gGM6IjGNFWEt7ag4t5dRdt07Q+xpKiomzWP2I+xevfKOTGBj3mKrupngISB8QNE2VcKDwuQqs
- 893ePPPiuxxl47g==
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+9m7hSTKp6spk9AK"
+Content-Disposition: inline
+In-Reply-To: <20240816214436.1877263-9-raymond.mao@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,151 +114,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop in the RCG and GPLL data for debugging these clocks.
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- drivers/clk/qcom/clock-sm8250.c | 115 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 115 insertions(+)
+--+9m7hSTKp6spk9AK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/clk/qcom/clock-sm8250.c b/drivers/clk/qcom/clock-sm8250.c
-index af10fc116219..e322a923a5c0 100644
---- a/drivers/clk/qcom/clock-sm8250.c
-+++ b/drivers/clk/qcom/clock-sm8250.c
-@@ -252,8 +252,117 @@ static const struct qcom_power_map sm8250_gdscs[] = {
- 	[UFS_PHY_GDSC] = { 0x77004 },	[USB30_PRIM_GDSC] = { 0xf004 },
- 	[USB30_SEC_GDSC] = { 0x10004 },
- };
- 
-+static const phys_addr_t sm8250_gpll_addrs[] = {
-+	0x00100000, // GCC_GPLL0_MODE
-+	0x00101000, // GCC_GPLL1_MODE
-+	0x00102000, // GCC_GPLL2_MODE
-+	0x00103000, // GCC_GPLL3_MODE
-+	0x00176000, // GCC_GPLL4_MODE
-+	0x00174000, // GCC_GPLL5_MODE
-+	0x00113000, // GCC_GPLL6_MODE
-+	0x0011a000, // GCC_GPLL7_MODE
-+	0x0011b000, // GCC_GPLL8_MODE
-+	0x0011c000, // GCC_GPLL9_MODE
-+	0x0011d000, // GCC_GPLL10_MODE
-+	0x0014a000, // GCC_GPLL11_MODE
-+};
-+
-+static const phys_addr_t sm8250_rcg_addrs[] = {
-+	0x0010f020, // GCC_USB30_PRIM_MASTER_CMD_RCGR
-+	0x0010f038, // GCC_USB30_PRIM_MOCK_UTMI_CMD_RCGR
-+	0x0010f064, // GCC_USB3_PRIM_PHY_AUX_CMD_RCGR
-+	0x00110020, // GCC_USB30_SEC_MASTER_CMD_RCGR
-+	0x00110038, // GCC_USB30_SEC_MOCK_UTMI_CMD_RCGR
-+	0x00110064, // GCC_USB3_SEC_PHY_AUX_CMD_RCGR
-+	0x0011400c, // GCC_SDCC2_APPS_CMD_RCGR
-+	0x0011600c, // GCC_SDCC4_APPS_CMD_RCGR
-+	0x0012300c, // GCC_QUPV3_WRAP0_CORE_2X_CMD_RCGR
-+	0x00117010, // GCC_QUPV3_WRAP0_S0_CMD_RCGR
-+	0x00117140, // GCC_QUPV3_WRAP0_S1_CMD_RCGR
-+	0x00117270, // GCC_QUPV3_WRAP0_S2_CMD_RCGR
-+	0x001173a0, // GCC_QUPV3_WRAP0_S3_CMD_RCGR
-+	0x001174d0, // GCC_QUPV3_WRAP0_S4_CMD_RCGR
-+	0x00117600, // GCC_QUPV3_WRAP0_S5_CMD_RCGR
-+	0x00117730, // GCC_QUPV3_WRAP0_S6_CMD_RCGR
-+	0x00117860, // GCC_QUPV3_WRAP0_S7_CMD_RCGR
-+	0x00123144, // GCC_QUPV3_WRAP1_CORE_2X_CMD_RCGR
-+	0x00118010, // GCC_QUPV3_WRAP1_S0_CMD_RCGR
-+	0x00118140, // GCC_QUPV3_WRAP1_S1_CMD_RCGR
-+	0x00118270, // GCC_QUPV3_WRAP1_S2_CMD_RCGR
-+	0x001183a0, // GCC_QUPV3_WRAP1_S3_CMD_RCGR
-+	0x001184d0, // GCC_QUPV3_WRAP1_S4_CMD_RCGR
-+	0x00118600, // GCC_QUPV3_WRAP1_S5_CMD_RCGR
-+	0x0016b038, // GCC_PCIE_0_AUX_CMD_RCGR
-+	0x0018d038, // GCC_PCIE_1_AUX_CMD_RCGR
-+	0x0016f014, // GCC_PCIE_PHY_REFGEN_CMD_RCGR
-+	0x00175024, // GCC_UFS_CARD_AXI_CMD_RCGR
-+	0x0017506c, // GCC_UFS_CARD_ICE_CORE_CMD_RCGR
-+	0x00175084, // GCC_UFS_CARD_UNIPRO_CORE_CMD_RCGR
-+	0x001750a0, // GCC_UFS_CARD_PHY_AUX_CMD_RCGR
-+	0x00177024, // GCC_UFS_PHY_AXI_CMD_RCGR
-+	0x0017706c, // GCC_UFS_PHY_ICE_CORE_CMD_RCGR
-+	0x00177084, // GCC_UFS_PHY_UNIPRO_CORE_CMD_RCGR
-+	0x001770a0, // GCC_UFS_PHY_PHY_AUX_CMD_RCGR
-+	0x0012327c, // GCC_QUPV3_WRAP2_CORE_2X_CMD_RCGR
-+	0x0011e010, // GCC_QUPV3_WRAP2_S0_CMD_RCGR
-+	0x0011e140, // GCC_QUPV3_WRAP2_S1_CMD_RCGR
-+	0x0011e270, // GCC_QUPV3_WRAP2_S2_CMD_RCGR
-+	0x0011e3a0, // GCC_QUPV3_WRAP2_S3_CMD_RCGR
-+	0x0011e4d0, // GCC_QUPV3_WRAP2_S4_CMD_RCGR
-+	0x0011e600, // GCC_QUPV3_WRAP2_S5_CMD_RCGR
-+	0x0010d00c, // GCC_RBCPR_MMCX_CMD_RCGR
-+	0x00106038, // GCC_PCIE_2_AUX_CMD_RCGR
-+};
-+
-+static const char *const sm8250_rcg_names[] = {
-+	"GCC_USB30_PRIM_MASTER_CMD_RCGR",
-+	"GCC_USB30_PRIM_MOCK_UTMI_CMD_RCGR",
-+	"GCC_USB3_PRIM_PHY_AUX_CMD_RCGR",
-+	"GCC_USB30_SEC_MASTER_CMD_RCGR",
-+	"GCC_USB30_SEC_MOCK_UTMI_CMD_RCGR",
-+	"GCC_USB3_SEC_PHY_AUX_CMD_RCGR",
-+	"GCC_SDCC2_APPS_CMD_RCGR",
-+	"GCC_SDCC4_APPS_CMD_RCGR",
-+	"GCC_QUPV3_WRAP0_CORE_2X_CMD_RCGR",
-+	"GCC_QUPV3_WRAP0_S0_CMD_RCGR",
-+	"GCC_QUPV3_WRAP0_S1_CMD_RCGR",
-+	"GCC_QUPV3_WRAP0_S2_CMD_RCGR",
-+	"GCC_QUPV3_WRAP0_S3_CMD_RCGR",
-+	"GCC_QUPV3_WRAP0_S4_CMD_RCGR",
-+	"GCC_QUPV3_WRAP0_S5_CMD_RCGR",
-+	"GCC_QUPV3_WRAP0_S6_CMD_RCGR",
-+	"GCC_QUPV3_WRAP0_S7_CMD_RCGR",
-+	"GCC_QUPV3_WRAP1_CORE_2X_CMD_RCGR",
-+	"GCC_QUPV3_WRAP1_S0_CMD_RCGR",
-+	"GCC_QUPV3_WRAP1_S1_CMD_RCGR",
-+	"GCC_QUPV3_WRAP1_S2_CMD_RCGR",
-+	"GCC_QUPV3_WRAP1_S3_CMD_RCGR",
-+	"GCC_QUPV3_WRAP1_S4_CMD_RCGR",
-+	"GCC_QUPV3_WRAP1_S5_CMD_RCGR",
-+	"GCC_PCIE_0_AUX_CMD_RCGR",
-+	"GCC_PCIE_1_AUX_CMD_RCGR",
-+	"GCC_PCIE_PHY_REFGEN_CMD_RCGR",
-+	"GCC_UFS_CARD_AXI_CMD_RCGR",
-+	"GCC_UFS_CARD_ICE_CORE_CMD_RCGR",
-+	"GCC_UFS_CARD_UNIPRO_CORE_CMD_RCGR",
-+	"GCC_UFS_CARD_PHY_AUX_CMD_RCGR",
-+	"GCC_UFS_PHY_AXI_CMD_RCGR",
-+	"GCC_UFS_PHY_ICE_CORE_CMD_RCGR",
-+	"GCC_UFS_PHY_UNIPRO_CORE_CMD_RCGR",
-+	"GCC_UFS_PHY_PHY_AUX_CMD_RCGR",
-+	"GCC_QUPV3_WRAP2_CORE_2X_CMD_RCGR",
-+	"GCC_QUPV3_WRAP2_S0_CMD_RCGR",
-+	"GCC_QUPV3_WRAP2_S1_CMD_RCGR",
-+	"GCC_QUPV3_WRAP2_S2_CMD_RCGR",
-+	"GCC_QUPV3_WRAP2_S3_CMD_RCGR",
-+	"GCC_QUPV3_WRAP2_S4_CMD_RCGR",
-+	"GCC_QUPV3_WRAP2_S5_CMD_RCGR",
-+	"GCC_RBCPR_MMCX_CMD_RCGR",
-+	"GCC_PCIE_2_AUX_CMD_RCGR",
-+};
-+
- static struct msm_clk_data qcs404_gcc_data = {
- 	.resets = sm8250_gcc_resets,
- 	.num_resets = ARRAY_SIZE(sm8250_gcc_resets),
- 	.clks = sm8250_clks,
-@@ -262,8 +371,14 @@ static struct msm_clk_data qcs404_gcc_data = {
- 	.num_power_domains = ARRAY_SIZE(sm8250_gdscs),
- 
- 	.enable = sm8250_enable,
- 	.set_rate = sm8250_set_rate,
-+
-+	.dbg_pll_addrs = sm8250_gpll_addrs,
-+	.num_plls = ARRAY_SIZE(sm8250_gpll_addrs),
-+	.dbg_rcg_addrs = sm8250_rcg_addrs,
-+	.num_rcgs = ARRAY_SIZE(sm8250_rcg_addrs),
-+	.dbg_rcg_names = sm8250_rcg_names,
- };
- 
- static const struct udevice_id gcc_sm8250_of_match[] = {
- 	{
+On Fri, Aug 16, 2024 at 02:43:57PM -0700, Raymond Mao wrote:
 
--- 
-2.46.0
+> Smaller implementation for SHA256 and SHA512 helps to reduce the
+> ROM footprint though it has a certain impact on performance.
+> As a trade-off, enable it as a default config when MbedTLS is
+> enabled can reduce the target size significantly with acceptable
+> performace loss.
+>=20
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+> Changes in v6
+> - Initial patch
+>=20
+>  lib/mbedtls/Kconfig              | 24 ++++++++++++++++++++++++
+>  lib/mbedtls/mbedtls_def_config.h |  6 ++++++
+>  2 files changed, 30 insertions(+)
+>=20
+> diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+> index 12f8c965f5a..0e22edf1b6c 100644
+> --- a/lib/mbedtls/Kconfig
+> +++ b/lib/mbedtls/Kconfig
+> @@ -151,18 +151,42 @@ config SHA1_MBEDTLS
+>  config SHA256_MBEDTLS
+>  	bool "Enable SHA256 support with MbedTLS crypto library"
+>  	depends on MBEDTLS_LIB_CRYPTO && SHA256
+> +	select SHA256_SMALLER
+>  	help
+>  	  This option enables support of hashing using SHA256 algorithm
+>  	  with MbedTLS crypto library.
+> =20
+> +if SHA256_MBEDTLS
+> +
+> +config SHA256_SMALLER
+> +	bool "Enable SHA256 smaller implementation with MbedTLS crypto library"
+> +	depends on SHA256_MBEDTLS
+> +	help
+> +	  This option enables support of hashing using SHA256 algorithm
+> +	  smaller implementation with MbedTLS crypto library.
+> +
+> +endif
 
+For each of these, they shouldn't be select'd, they just need to depends
+on the right option (SHA256_MBEDTLS, etc) and be default y.
+
+--=20
+Tom
+
+--+9m7hSTKp6spk9AK
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbDswwACgkQFHw5/5Y0
+tyw0swv+LhfifVN+3OlGJsgUF1/uEhy8idEp/hfES6LGoUOzgVOY4YZUJmUJatWb
+ZE9VZW4HyvZRwp0UOhAN9w2mJq7lZeN7nqfSyzvpQzUvM0e101i/qPdEhd//NXNk
+w69fLjmIScFvzvNIryXSrm8Cnj3S1haX/9kN68/OWJNddpXPkIflsXQgjJZwzw9o
+Go+CNvj9VAeIAo/eHLVVIP15jGc5iRYw1qlKyDvggmVXuUC00/5GW67DGPxqL6Hs
+XYlf02Rc1U0gvx3CFaztS7XNxmWUhzyOyeLqmy0/MjvzfnisOg5er2PDkh4woPXF
+/HrF021g2PStYvfiOVeesKa0WQsrq2328bU5uphM5CrgGSGq7PQys73KEQL+PIux
+fA0uwvSVnOk6EjWWxEOnkKXrniFY77kQjUlIvEKwJDvvky4vFIHDoxXHQ37TjVUZ
+Y4xfhAvwjhbnk3WdF4FaofiPu2weltXdW3BwwwDSIotdNpo1gft4in9lHxQUJUUN
+NHCGHiqD
+=m/7j
+-----END PGP SIGNATURE-----
+
+--+9m7hSTKp6spk9AK--
