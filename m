@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53EE1C3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 15:02:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C600FC3DA4A
+	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 15:02:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C732788CD8;
-	Mon, 19 Aug 2024 17:02:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 31E6F88CE1;
+	Mon, 19 Aug 2024 17:02:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Oz49E3j6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FuxHE0jy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF17C88CD8; Mon, 19 Aug 2024 17:02:04 +0200 (CEST)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
+ id 3C569871C7; Mon, 19 Aug 2024 17:02:05 +0200 (CEST)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 984018641A
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 17:02:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 165BA87B84
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 17:02:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=macroalpha82@gmail.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-27022a3536dso1814566fac.2
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 08:02:02 -0700 (PDT)
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-2702ed1054fso1039025fac.3
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 08:02:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724079721; x=1724684521; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=WygNCvaEIYbgzexQH3wuWXQ/H3ojwPHvkSmw8wPmawM=;
- b=Oz49E3j6CTkFH+sQiQrC6dsfN6C0e0ep/5T2IQ01HZmbvfSdu0/T1L9hqdplNoEFNH
- HxZcKLjSuWefmvdDkydejf/SewU5DpAEbJLIj65zInyw4+qLmZ6b+/GDx1Ei+GShJDz0
- 78S/LtTDzXDpsvITA3XLcgeawqLUw/TlPbZYWx7yJMFI3P0ONHp2hggk5qzlCkEDJu7D
- ejR0HS7g6lCFcC1KLKnLHn+B6VfQev+gYkw+LvQiv2HmyCPlFlpwqs26P9DjckIoQcUc
- PPNnYjafsGLANnhBEmyukPtVOPzQ3zQEJ1+4qNfDpDe1XvEXIkAl1edal0Jcf8uvWLrB
- WV/g==
+ d=gmail.com; s=20230601; t=1724079722; x=1724684522; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8PH9F1VBK3kWNUHiqkBLlRVWB0H6/h7ZsBfedPxrAx0=;
+ b=FuxHE0jylLRb1Bz4r9q9YPloDxeNJk71cYhuEry4qXKYEMPyRF3wR5BzyHlYUhMuXC
+ P7EFf/9r7EB665GSBdquKEQXjippFQSlfn8O6fBKV/2dZW/wDfRDG81yoscHadQ7IFj+
+ VIbYYz2mOZhisKJIaPs1pgOr8B91xxPzo6YmnNx2dv2YHsy32V71oiWAO1jS+WJa5Gda
+ UztW2EvvQN++QyTmpGwI8afLzpWySHSUJAoJISURvYKHsO2lhgPa68OFimvjK5iRzqaU
+ f4ZDqFyho5DgyjltZ2tdfWNZg/9DO2m+VYO1DMWAhac/fqFBFb6nnoNHMZiPlu1RGf82
+ sC8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724079721; x=1724684521;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WygNCvaEIYbgzexQH3wuWXQ/H3ojwPHvkSmw8wPmawM=;
- b=ByclaqNvN6OtVeulZc3wdUtlWU63YbQYlBZzioAS1J8GMKTw0Nm0zOnUhoHi16m7x0
- GE0NSDGNzdkXMKErr1JAfpyc0NZg3rIllDKpqFRknDPmEYz5Gcqj8w1TfKJb8T0359uP
- bWYz3QZYg1EzfltXzNslUEKa2eISS49n0B7SjQThb03S8eJg6F2OnUCcYi9XIMCUfSpB
- GBK5KP1aw8lp5pwbs8zWaTNYOS+ygDszUrih0F50IhXLnRgxQ6k+HLwXcQk9ChPX++Xh
- 3ZKRr3VHCpwasJhX4MwOQZSvllgzedHDvFgvAEXCQpWo1yMxV8nGj5jyGVfAgWovawZZ
- 8eWQ==
-X-Gm-Message-State: AOJu0YxcPbPY+gy2U3CXqtQ6n69NJlKY0hcUP9wU/35zVgSmy0q62IC9
- YvHzjeZugLHe3HzYwOvi0p+bBRkEqJr9xcHqU2jmSUERwQxlEmx7Epe6Og==
-X-Google-Smtp-Source: AGHT+IGKhFEXIwspnD9goXSs9fC3XFF+sokheNUcq2VLzNxwKpUHRJjQdnwDtX8jGkVr9drzEq1Dyg==
-X-Received: by 2002:a05:6870:e8c6:b0:270:1850:f898 with SMTP id
- 586e51a60fabf-2701c37ed06mr12379633fac.12.1724079720974; 
- Mon, 19 Aug 2024 08:02:00 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1724079722; x=1724684522;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8PH9F1VBK3kWNUHiqkBLlRVWB0H6/h7ZsBfedPxrAx0=;
+ b=qa/JlsUKF2tSeEPVFrXWDyQwRBW24fOEeeEHn0qa5Qn1NUHUBklyhxYdqxmk05uRzc
+ gLGDT4KKyYVFgF68mhVG+I58YFIQ6APPhHSy8vr8ZPJLsDaS5aw5q1WGL+RcPKIl7GpL
+ ffZcFy5mUAJa+8lvrn2QD1XVoXysosboQlwW06I3/M196SQZSMGmtR3/8dGWStnaADpZ
+ mVI2XBHO/4LEPWmD7wAAOmhKbascc+L5O6rJ9u2YDB1FOp9hIomuBGTjLB3w297Pg0Ey
+ kdf8eriqGwMoFq/UjG0XaVt3zS3vuAZ0QyDXgoKwVk2ZfCecvV2okPZ+QMrtdKZWJheq
+ 6qOQ==
+X-Gm-Message-State: AOJu0Yzifl+FzUqppZ0Mq3BgWPbc8RfAil/NGH4YcJEYDPxiZcqAk/ef
+ n8y7eghUvPo6ISXgIC3lRot6/bE43AksQZnKeltKO9uxI+5m5gxO4lf/1A==
+X-Google-Smtp-Source: AGHT+IHcgrH8A2XuEKWQfINMNP2BRnxJ4x0jSbXjW2MyO1GB+sMBEYg0l+JWwbrpHEcQbpWAAuR42g==
+X-Received: by 2002:a05:6870:470c:b0:25d:f0ba:eab7 with SMTP id
+ 586e51a60fabf-2701c37eac4mr13785703fac.18.1724079721580; 
+ Mon, 19 Aug 2024 08:02:01 -0700 (PDT)
 Received: from localhost.localdomain ([2600:1700:fb0:1bcf::54])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-27004432d18sm2945189fac.7.2024.08.19.08.02.00
+ 586e51a60fabf-27004432d18sm2945189fac.7.2024.08.19.08.02.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Aug 2024 08:02:00 -0700 (PDT)
+ Mon, 19 Aug 2024 08:02:01 -0700 (PDT)
 From: Chris Morgan <macroalpha82@gmail.com>
 To: u-boot@lists.denx.de
 Cc: sjg@chromium.org, jernej.skrabec@gmail.com, neil.armstrong@linaro.org,
  hdegoede@redhat.com, andre.przywara@arm.com, jagan@amarulasolutions.com,
  trini@konsulko.com, ryan@testtoast.com, iuncuim@gmail.com,
  sumit.garg@linaro.org, Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH V2 0/9] Add Anbernic RG35XX-2024
-Date: Mon, 19 Aug 2024 09:59:29 -0500
-Message-Id: <20240819145938.503221-1-macroalpha82@gmail.com>
+Subject: [PATCH V2 1/9] sunxi: H616: dram: LPDDR4: adjust settings
+Date: Mon, 19 Aug 2024 09:59:30 -0500
+Message-Id: <20240819145938.503221-2-macroalpha82@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240819145938.503221-1-macroalpha82@gmail.com>
+References: <20240819145938.503221-1-macroalpha82@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,49 +94,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Chris Morgan <macromorgan@hotmail.com>
+From: Jernej Skrabec <jernej.skrabec@gmail.com>
 
-Add support for the Anbernic RG35XX-2024.
+Adjust H616 LPDDR4 DRAM settings to be in line with vendor driver.
 
-This device is a handheld gaming console (series) based around the
-Anbernic H700 SoC. It comes with 1GB of RAM and multiple face buttons
-for input.
+Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+Tested-by: Chris Morgan <macromorgan@hotmail.com>
+---
+ arch/arm/mach-sunxi/dram_sun50i_h616.c        | 33 +++++++++++++------
+ .../dram_timings/h616_lpddr4_2133.c           |  2 +-
+ 2 files changed, 24 insertions(+), 11 deletions(-)
 
-Add support for the simplest model for now, and then iterate later to
-add board detection logic, support the entire device lineup, and
-move to using the mainline device tree.
-
-Changes since V1:
- - Removed DDR3 and LPDDR3 patches from Jernej Skrabec, as they could
-   not be tested by me and were not required to bring up this device.
- - Changed the default TPR6 parameter based on a suggestion from
-   Mikhail Kalashnikov.
- - Cherry picked 2 commits from linux-next and converted devicetree to
-   upstream.
-
-Chris Morgan (4):
-  arm64: dts: allwinner: h616: Add r_i2c pinctrl nodes
-  sunxi: Correct TPR6 parameter for H616 DRAM driver
-  arm64: dts: allwinner: h616: Change RG35XX Series from r_rsb to r_i2c
-  sunxi: Add support for Anbernic RG35XX-2024
-
-Jernej Skrabec (5):
-  sunxi: H616: dram: LPDDR4: adjust settings
-  sunxi: H616: DRAM: Add alternative pin mapping
-  sunxi: H616: DRAM: Adjust configuration procedure
-  sunxi: H616: DRAM: Adjust size scan procedure
-  sunxi: H616: dram: Update mbus priorities
-
- arch/arm/mach-sunxi/Kconfig                   |   2 +-
- arch/arm/mach-sunxi/dram_sun50i_h616.c        | 174 ++++++++++++------
- .../dram_timings/h616_lpddr4_2133.c           |   2 +-
- board/sunxi/MAINTAINERS                       |   5 +
- configs/anbernic_rg35xx_h700_defconfig        |  52 ++++++
- .../src/arm64/allwinner/sun50i-h616.dtsi      |   2 +
- .../sun50i-h700-anbernic-rg35xx-2024.dts      |   6 +-
- 7 files changed, 179 insertions(+), 64 deletions(-)
- create mode 100644 configs/anbernic_rg35xx_h700_defconfig
-
+diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+index 37c139e0ee..5be2887a06 100644
+--- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
++++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+@@ -293,14 +293,22 @@ static void mctl_phy_configure_odt(const struct dram_para *para)
+ 	dmb();
+ }
+ 
+-static bool mctl_phy_write_leveling(const struct dram_config *config)
++static bool mctl_phy_write_leveling(const struct dram_para *para,
++				    const struct dram_config *config)
+ {
+ 	bool result = true;
+ 	u32 val;
+ 
+ 	clrsetbits_le32(SUNXI_DRAM_PHY0_BASE + 8, 0xc0, 0x80);
+-	writel(4, SUNXI_DRAM_PHY0_BASE + 0xc);
+-	writel(0x40, SUNXI_DRAM_PHY0_BASE + 0x10);
++
++	if (para->type == SUNXI_DRAM_TYPE_LPDDR4) {
++		/* MR2 value */
++		writel(0x1b, SUNXI_DRAM_PHY0_BASE + 0xc);
++		writel(0, SUNXI_DRAM_PHY0_BASE + 0x10);
++	} else {
++		writel(4, SUNXI_DRAM_PHY0_BASE + 0xc);
++		writel(0x40, SUNXI_DRAM_PHY0_BASE + 0x10);
++	}
+ 
+ 	setbits_le32(SUNXI_DRAM_PHY0_BASE + 8, 4);
+ 
+@@ -859,9 +867,9 @@ static void mctl_phy_ca_bit_delay_compensation(const struct dram_para *para,
+ 		}
+ 		break;
+ 	case SUNXI_DRAM_TYPE_LPDDR4:
+-		if (para->tpr2 & 1) {
+-			writel(val, SUNXI_DRAM_PHY0_BASE + 0x788);
+-		} else {
++		writel(val, SUNXI_DRAM_PHY0_BASE + 0x788);
++		if (config->ranks == 2) {
++			val = (para->tpr10 >> 11) & 0x1e;
+ 			writel(val, SUNXI_DRAM_PHY0_BASE + 0x794);
+ 		};
+ 		break;
+@@ -1080,19 +1088,27 @@ static bool mctl_phy_init(const struct dram_para *para,
+ 		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
+ 
+ 		writel(0xb04, &mctl_ctl->mrctrl1);
++		udelay(10);
+ 		writel(0x80000030, &mctl_ctl->mrctrl0);
++		udelay(10);
+ 		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
+ 
+ 		writel(0xc72, &mctl_ctl->mrctrl1);
++		udelay(10);
+ 		writel(0x80000030, &mctl_ctl->mrctrl0);
++		udelay(10);
+ 		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
+ 
+ 		writel(0xe09, &mctl_ctl->mrctrl1);
++		udelay(10);
+ 		writel(0x80000030, &mctl_ctl->mrctrl0);
++		udelay(10);
+ 		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
+ 
+ 		writel(0x1624, &mctl_ctl->mrctrl1);
++		udelay(10);
+ 		writel(0x80000030, &mctl_ctl->mrctrl0);
++		udelay(10);
+ 		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
+ 		break;
+ 	case SUNXI_DRAM_TYPE_DDR4:
+@@ -1108,7 +1124,7 @@ static bool mctl_phy_init(const struct dram_para *para,
+ 
+ 	if (para->tpr10 & TPR10_WRITE_LEVELING) {
+ 		for (i = 0; i < 5; i++)
+-			if (mctl_phy_write_leveling(config))
++			if (mctl_phy_write_leveling(para, config))
+ 				break;
+ 		if (i == 5) {
+ 			debug("write leveling failed!\n");
+@@ -1234,9 +1250,6 @@ static bool mctl_ctrl_init(const struct dram_para *para,
+ 	setbits_le32(&mctl_ctl->unk_0x3180, BIT(31) | BIT(30));
+ 	setbits_le32(&mctl_ctl->unk_0x4180, BIT(31) | BIT(30));
+ 
+-	if (para->type == SUNXI_DRAM_TYPE_LPDDR4)
+-		setbits_le32(&mctl_ctl->dbictl, 0x1);
+-
+ 	setbits_le32(&mctl_ctl->rfshctl3, BIT(0));
+ 	clrbits_le32(&mctl_ctl->dfimisc, BIT(0));
+ 
+diff --git a/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c b/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
+index e6446b9180..6f5c4acbd6 100644
+--- a/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
++++ b/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
+@@ -23,7 +23,7 @@ void mctl_set_timing_params(const struct dram_para *para)
+ 	u8 trcd		= max(ns_to_t(18), 2);
+ 	u8 trc		= ns_to_t(65);
+ 	u8 txp		= max(ns_to_t(8), 2);
+-	u8 trtp		= max(ns_to_t(8), 4);
++	u8 trtp		= 4;
+ 	u8 trp		= ns_to_t(21);
+ 	u8 tras		= ns_to_t(42);
+ 	u16 trefi	= ns_to_t(3904) / 32;
 -- 
 2.34.1
 
