@@ -4,107 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02E5FC3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 11:50:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C528EC5320E
+	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 11:56:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FA50887D1;
-	Mon, 19 Aug 2024 13:49:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2179D88B66;
+	Mon, 19 Aug 2024 13:56:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yCwm6LJR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Wkh7Zn+M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E95C887D1; Mon, 19 Aug 2024 13:49:55 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id E2EFF88C14; Mon, 19 Aug 2024 13:56:21 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CAEA87E15
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 13:49:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D942F88993
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 13:56:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-42808071810so33679675e9.1
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 04:49:53 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5bef4d9e7f8so1392787a12.2
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 04:56:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724068193; x=1724672993; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=DZbC1oYQ97gmJAawVPC74gcosqxbQNboua+FgcrsW90=;
- b=yCwm6LJRrDM+JozOJJ2ZOkLS9dx8wWJH/hQeB1KwMsaCRRZT+UnsuSUVyabNeuiDjy
- PtksIB8+wkSkCRFcf1M62yjkbhmwe4x4DWmazVB29yTCmgNDJS/HI6kseajjGKbXHZ1e
- WRNUHvcdvxvhHerHltZ7lKQ56UjodqMbR+2zbzicDk0/AwD2VYLS6+WCeqsNI/cZTgk+
- P3DNBc8SxKPNadru67kyjQq8KiXKFVUV1azNLJtnTT2J11DYnxirLf5EICiMa1lb0+Rb
- eP8zlj5XFPf0iO6J8bR91wHp3cTJD0coYrXBDPHLiC0SYFXuvojMGs3QlrNlxO5ipjqy
- dJuw==
+ d=linaro.org; s=google; t=1724068579; x=1724673379; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=2R1/SqF6JyBDH8RazKQ6ZSgTqH0OSHPa3gbFSRVyUr8=;
+ b=Wkh7Zn+M+S6pfgEsmgg7jGKNR3DfP+20oEAY97YecPRPydQYn5Avb+XyJhl/vfylZA
+ 6C4nuV7rMAbTNf5lHy4Cf8UycDYKi3Nks+JDfUOZsVyks0gdG+zxaa8RPan7L2/xc9Ac
+ P/J2RCBqfKmDrNXs+WU5z+oiLEw8G1dl+tO6aFCCeV/37MQaeawjztxGX7lmDDEmWzao
+ WK97Us9HQrAvPfeB9sR0AlNhg8tktLMdrkgD6Bdc0Ucv4oOUwP3U9BqLs9zruZL/Swja
+ wNI9MnExCsyH69VaOF9TnrJTmFD25k3gypmdbdAZGFNMbh4TNdU8NF+iL8ayeBRwvcxD
+ YZZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724068193; x=1724672993;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=DZbC1oYQ97gmJAawVPC74gcosqxbQNboua+FgcrsW90=;
- b=izkgkMhOAzpEhi/YTRk7xjKLzhjHp/aEezXjyvoLTWP/AgGUfj9+tsAKzndG2uw3Gk
- Pcl47uEZWEE/ySJZClGmvFfUXvtHCZr+VCGoIL4shT2jNb34HdEjkdoSscpURik+MkNP
- HB5smQAxBveIlCFUh1tRt/umlzNQLNBu+MQrVnB2hZmjI88e0keFKOX5OGwySSyDG5lk
- owtS8Qh18ZbG5d085it8WiC+K4b7Vd8uG1M9cLZ6n8aoGOKTFbr8UXXITGGUHhLskPse
- y4AmrxzAoEQL32zN4UwDZYO6Tgl7w/8y2yNFt8zGPA1vK7v+aMPcCoeRIxuVAnwjdNIA
- n3AA==
-X-Gm-Message-State: AOJu0YygnsCDeoKjLNmfAFKQw3veZCcFxTYmCT/A8YWCeHSqQFUQQn1l
- dygEHK5rLx06pu6j74cwpN7cZhVEfdguYFTwA7F2/zyG2tC8wYX91GWTWpcFSCk=
-X-Google-Smtp-Source: AGHT+IFp856eiT7gB1p4bzXh4m24SfHlAWKpNNx8bdwHBTVyhffppNU8ffMGz5gL/6MuTGt5IzY0dg==
-X-Received: by 2002:a05:600c:3114:b0:428:ec2a:8c94 with SMTP id
- 5b1f17b1804b1-429ed79b8d5mr82432605e9.10.1724068192353; 
- Mon, 19 Aug 2024 04:49:52 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:f54e:4b0a:5175:5727?
- ([2a01:e0a:982:cbb0:f54e:4b0a:5175:5727])
+ d=1e100.net; s=20230601; t=1724068579; x=1724673379;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=2R1/SqF6JyBDH8RazKQ6ZSgTqH0OSHPa3gbFSRVyUr8=;
+ b=pyfRrPdnSjYDvWa7jH+y8FKEEqkXq0IOJy3jfzujUyruZixU3h1oFlFCQ6kT4tm6Bu
+ WW4zLIYmIZaGw9JJF59kqPU1AmooEWENNrNgjR05bTQDdChQH9gcaMUrhlwqirVSUr8B
+ In43spdnrRyabL4NrOan1JY5rhEM4IsDDPDFcBls5fAbUh4IT9bvf8SZVV1Ecork4UTN
+ eDcex3P2AjYP7icIMnxCqtbVI9erfdcU2Jzimws60dpH4Zdz2UCVfY0qgJUWTmSwc5Zc
+ YZ3H9TOg95Xis/rLuvYJ4hhLQNLjABw31xuS87+5uZRVq0RYWPT7Zocm+DwEz8UJnOmY
+ CKag==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW2rv45aIcBKhtXnK+qsaTt2QTmI/7F7iTAuDRmJ+0yC6FcLaBbz8TW7h7XYQ34FqsXNAiFxqz8x7m5L8TXQUIhtfsXHw==
+X-Gm-Message-State: AOJu0YwdqdhBOoBKwlI1ckr2BSTz/nfvFMe9jqnIgUXDiwqZS5IH/Hi6
+ tl7xymXb4ZssxlC6gGnzGmrHAn5aPXSUC+bNlN7iBxGYi3Fkqs75UeOhMglk9Wg=
+X-Google-Smtp-Source: AGHT+IHjOvIEydrRBl90R7DJyXx/NAFCDxtDg76qM0ffIommMyXvnhYXSSKJwQ5TCf0aC9oJCiAmIw==
+X-Received: by 2002:a05:6402:5111:b0:5be:db15:b3a9 with SMTP id
+ 4fb4d7f45d1cf-5bedb15b5c8mr4580568a12.23.1724068579095; 
+ Mon, 19 Aug 2024 04:56:19 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:aa0d:be00::676e? ([2a02:8109:aa0d:be00::676e])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-429ed648f0csm107567455e9.9.2024.08.19.04.49.51
+ 4fb4d7f45d1cf-5bebbde5a83sm5553250a12.36.2024.08.19.04.56.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 19 Aug 2024 04:49:51 -0700 (PDT)
-Message-ID: <7edce5a1-ed7c-4d69-be86-13b75806217e@linaro.org>
-Date: Mon, 19 Aug 2024 13:49:51 +0200
+ Mon, 19 Aug 2024 04:56:18 -0700 (PDT)
+Message-ID: <b692118e-7a53-438d-afa6-7109d4d61167@linaro.org>
+Date: Mon, 19 Aug 2024 13:56:17 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 5/7] qcom_defconfig: enable SC7280 clocks
-To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
- <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20240809-b4-rb3gen2-v1-0-7c73fe05b37a@linaro.org>
- <20240809-b4-rb3gen2-v1-5-7c73fe05b37a@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20240809-b4-rb3gen2-v1-5-7c73fe05b37a@linaro.org>
+Subject: Re: [PATCH 00/10] SMBIOS improvements
+To: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen
+ <tuomas.tynkkynen@iki.fi>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng@tinylab.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Stefan Roese <sr@denx.de>, =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
+ Wan Yee Lau <wan.yee.lau@intel.com>, Alexander Gendin <agendin@matrox.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Sean Anderson <seanga2@gmail.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Peter Robinson <pbrobinson@gmail.com>
+References: <20240816154658.1866186-1-raymond.mao@linaro.org>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20240816154658.1866186-1-raymond.mao@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -118,34 +104,74 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 09/08/2024 02:48, Caleb Connolly wrote:
-> Enable clocks on SC7280
+Hi Raymond,
+
+I haven't managed to root cause it yet, but this series seems to make 
+the RB3 Gen 2 Qualcomm board hang during relocation.
+
+How early post-relocation does any code here get called?
+
+On 16/08/2024 17:46, Raymond Mao wrote:
+> Motivations for changes:
+> Current SMBIOS library and command-line tool is not fully matching with
+> the requirements:
+> 1. Missing support for other mandatory types (#7, #9, #16, #17, #19).
+> 2. Only a few platforms support SMBIOS node from the device tree.
+> 3. Values of some fields are hardcoded in the library other than fetching
+>     from the device hardware.
+> 4. Embedded data with dynamic length is not supported (E.g. Contained
+>     Object Handles in Type #2 and Contained Elements in Type #3)
 > 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->   configs/qcom_defconfig | 1 +
->   1 file changed, 1 insertion(+)
+> Changes:
+> 1. Refactor the SMBIOS library and command-line tool to better align with
+>     the SMBIOS spec.
+> 2. Create an arch-specific driver for all aarch64-based platforms to fetch
+>     SMBIOS private data from the device hardware.
+> 3. Create a sysinfo driver to poppulate platform SMBIOS private data.
+> 4. Put device tree SMBIOS node as a fallback solution when SMBIOS data is
+>     missing from sysinfo driver.
+> 5. Add support for Type #7 (Cache Information) and link its handles to
+>     Type #4.
 > 
-> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-> index 24b71ba7be29..1a079264a554 100644
-> --- a/configs/qcom_defconfig
-> +++ b/configs/qcom_defconfig
-> @@ -44,8 +44,9 @@ CONFIG_CLK=y
->   CONFIG_CLK_QCOM_APQ8016=y
->   CONFIG_CLK_QCOM_APQ8096=y
->   CONFIG_CLK_QCOM_QCM2290=y
->   CONFIG_CLK_QCOM_QCS404=y
-> +CONFIG_CLK_QCOM_SC7280=y
->   CONFIG_CLK_QCOM_SDM845=y
->   CONFIG_CLK_QCOM_SM6115=y
->   CONFIG_CLK_QCOM_SM8250=y
->   CONFIG_CLK_QCOM_SM8550=y
+> Once this patch is acceptted, subsequent patch sets will add other missing
+> types (#9, #16, #17, #19).
+> 
+> Raymond Mao (10):
+>    sysinfo: Add sysinfo API for accessing data area
+>    sysinfo: Add sysinfo driver and data structure for SMBIOS
+>    smbios: Refactor SMBIOS library
+>    smbios: ignore the non-existence of platform sysinfo detect
+>    armv8: Add arch-specific sysinfo driver
+>    sysinfo: Add sysinfo driver for SMBIOS type 7
+>    smbios: Add support to SMBIOS type 7
+>    armv8: Add sysinfo driver for cache information
+>    configs: Enable sysinfo for QEMU Arm64
+>    tests: update smbios pytest
+> 
+>   arch/arm/cpu/armv8/Makefile      |   5 +
+>   arch/arm/cpu/armv8/sysinfo.c     | 391 ++++++++++++++++++++++++++
+>   cmd/smbios.c                     | 350 ++++++++++++++++++++++-
+>   configs/qemu_arm64_defconfig     |   2 +
+>   drivers/misc/Kconfig             |   2 +-
+>   drivers/sysinfo/Makefile         |   1 +
+>   drivers/sysinfo/smbios_plat.c    | 442 +++++++++++++++++++++++++++++
+>   drivers/sysinfo/smbios_plat.h    | 131 +++++++++
+>   drivers/sysinfo/sysinfo-uclass.c |  20 ++
+>   include/smbios.h                 | 240 ++++++++++++++--
+>   include/sysinfo.h                | 124 ++++++++-
+>   lib/Makefile                     |   2 +
+>   lib/smbios.c                     | 461 ++++++++++++++++++++++++++-----
+>   test/py/tests/test_smbios.py     |   2 +-
+>   14 files changed, 2058 insertions(+), 115 deletions(-)
+>   create mode 100644 arch/arm/cpu/armv8/sysinfo.c
+>   create mode 100644 drivers/sysinfo/smbios_plat.c
+>   create mode 100644 drivers/sysinfo/smbios_plat.h
 > 
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+-- 
+// Caleb (they/them)
