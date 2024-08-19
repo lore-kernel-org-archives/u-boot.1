@@ -4,59 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49622C52D7C
-	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 17:27:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B632C52D6F
+	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 17:27:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DB7A88D0E;
-	Mon, 19 Aug 2024 19:27:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 16EC288D09;
+	Mon, 19 Aug 2024 19:27:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1724088452;
-	bh=Xd+D8MCcW7JMdt+syxVq009KEqHbSpVVTb+9+Pu6zzg=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	s=phobos-20191101; t=1724088455;
+	bh=+gjvXxqPbLtVEG2pUK74CyMOgOiUPVrve6ZPDJxlDQQ=;
+	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=pWbR/TNAV0L8P8mg3DDWfWecqw2hHYERockHTG4YgNZ686mnfcbeGjLMFnjtZs5Nz
-	 Yy8FPkQbqKa0MzcPdRHulcz6iVxGS2We1OSzQYZuIoHWfu8fuxpCahLIhXr13meK9n
-	 yLS81RoI7GWv7Y4T2PohUD71ebyYeP+NX2rqlAni2uMsYYDlIg29yT22ZvYIKGWFDA
-	 QewbdKbrQLFU3v8IQ327ayTlGzAe/QYNph82wsamVOTusBraBLl1uJhuCN3pDa3jvZ
-	 zU0BEiV0nEC5bQs7+73zGOlt9MdkEFCGIQWCzqb7ztpFECSjuc1loTMRXV+aXtM0dc
-	 CkbKKmH7VePVw==
+	b=ThbvBjE+WHefdQZRvm115bpIW6HhC2MZZGpzuusvZwrUArUU4v1I+uYNWfVeHUAmc
+	 gX9F4xo2h3qMNVebvlrPkerDVbe7E1sD6QEdu+x6t9+TEy+uauTOz0/llr/kYcod8V
+	 04FTI0Q1W8GBTDVASoWjSFYdM9BdY7JQO0OyEVFHBNNejn1jz8UjDJfJu0CRD5qPqi
+	 pnP8vPn+Rv9PP+82/1N4lcRKQKF1HjaiYxgPdhnDKBvp7M7DYaX2o5qNHLi/BEMDyf
+	 3Lht1xcFcLZkdS5MhmNyHk3c2E6rw2eshWMfEAWlOoFNc7HppQI95sKRyGvUHj+bjk
+	 D+GOnTYXMgW0g==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id C2C0E88CFB;
- Mon, 19 Aug 2024 19:27:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id AB91D88D08;
+ Mon, 19 Aug 2024 19:27:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1724088451;
- bh=Xd+D8MCcW7JMdt+syxVq009KEqHbSpVVTb+9+Pu6zzg=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=KM3bJJGkp08F9fWypYRFJmdhOuJ/EsFc/sj7sO51THIOZgEX+qscsWBbjr4AGQeei
- uWsHLoNnlZCK2ZEkfGhibtfjvugVWhkNHA4idIRy8nMXB011XDHPi0k831MlTIfURU
- WxKLpT3xFDZ3pghwIzPIZ3p7Mo/uoLZNbj1vNGoH/Em1JRtMdrMGD/fnuU5/0HhNzD
- MVou1aVX+gfTU59qSLv5WYpSknPCzc4a9vlAjM9Z0A1InNqgD2ceBx36UMxITXqQD6
- RX/i0GYIiVZ341fZMeZBIbo0JCrEUB0nspCLsnvh9WPC/2CPwmNBO5xEkrCpeAJ2aJ
- TJkAajjEfmVgw==
-Message-ID: <baf69a18-e19f-49e5-82d8-c6a128147672@denx.de>
-Date: Mon, 19 Aug 2024 19:08:37 +0200
+ s=phobos-20191101; t=1724088452;
+ bh=+gjvXxqPbLtVEG2pUK74CyMOgOiUPVrve6ZPDJxlDQQ=;
+ h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
+ b=Z+o3xypKoAXKrq2rxJ17Docb2lc+I6l72c/06Wm9OCtDcssggZVcsdeKX3MLIQFUf
+ pDQfdiWpO+LYQL6qo9OVSFRzRPcc80FpUrLxI8rZEaUvvjxo0RnW8ToXvoJHh6Ddka
+ fLg9N1F3QmbfNTnnYFkBoKTUDJNqoc3w3LoD4qtGIPbzfUc2oRZpQL9sN6ZSemnMOo
+ +uImPjU4i/z6HbEJOTN8qjkSenvAPlt6GlXU75gf3EngJUsVI39iJKrrY7wY7e1Odb
+ kY7p9sjABggV8hqHaEOIpc8NK1j1QpKrYPCT6UhdDOlbneG1hLpLDRpKEO0vCkD+xI
+ K0g98fC9ShBPg==
+Message-ID: <45c74c58-98cf-43df-b837-c48b0341c551@denx.de>
+Date: Mon, 19 Aug 2024 19:09:51 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/7] FUSB302 USB-C controller support
-To: Jonas Karlman <jonas@kwiboo.se>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Eugen Hristev <eugen.hristev@collabora.com>
-Cc: u-boot@lists.denx.de, Tim Harvey <tharvey@gateworks.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
- Soeren Moch <smoch@web.de>
-References: <20240802180027.139193-1-sebastian.reichel@collabora.com>
- <d3c80c56-ebb0-4b6f-ac92-15cd646feb27@denx.de>
- <6f42837e-6378-4ded-8120-d642a13e69df@kwiboo.se>
-Content-Language: en-US
+Subject: Re: [PATCH 1/4] power: regulator: Trigger probe of regulators which
+ are always-on or boot-on
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <6f42837e-6378-4ded-8120-d642a13e69df@kwiboo.se>
+To: Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@linaro.org>, uboot-stm32@st-md-mailman.stormreply.com
+References: <20240626235717.272219-1-marex@denx.de>
+ <a73dffe5-87e3-4e96-965f-9d029f2af8ed@denx.de>
+ <CAPVz0n0C6TPdBRUEvJmgAUGAKoetuzr1j=0cMXweP2EqMTwn=g@mail.gmail.com>
+ <0910419d-e8ab-4bf9-a083-dc2783afaca1@denx.de>
+ <4D07A6E5-F156-44C3-A26D-0F2D913CE92D@gmail.com>
+ <18d84528-d2e5-41d6-ae1d-109ee30853b2@denx.de>
+ <CAPVz0n2Jzfih0Z85TSQbnz-8OrX4D6UN=anKGTJ=hckRt8f3xA@mail.gmail.com>
+ <a95f0d60-2883-4c3d-8a53-ee3ef414cc32@denx.de>
+ <CAPVz0n3Ji1sKQK+Lnq8rP3ZqwX3o-kXe2btj93UuVBa3T5C=qw@mail.gmail.com>
+ <eced1020-2157-44a4-98a9-845e218529d9@denx.de>
+Content-Language: en-US
+In-Reply-To: <eced1020-2157-44a4-98a9-845e218529d9@denx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -75,60 +85,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/18/24 11:43 PM, Jonas Karlman wrote:
-
-Hi,
-
->>> On ROCK 5B power is usually supplied via it's USB-C port. This port has the
->>> data lines connected to RK3588, VBUS connected to the input regulator and
->>> CC pins connected to FUSB302. FUSB302 is a USB-C controller, which can be
->>> accessed via I2C from RK3588. The USB-C controller is needed to figure out
->>> the USB-C cable orientation, but also to do USB PD communication. Thus it
->>> would be great to enable support for it in the operating system.
->>>
->>> But the USB-PD specification requires, that a device reacts to USB-PD messages
->>> send by the power-supply within around 5 seconds. If that does not happen the
->>> power-supply assumes, that the device does not support USB-PD. If a device
->>> later starts sending USB-PD messages it is considered an error, which is solved
->>> by doing a hard reset. A USB-PD hard reset means, that all supply voltages are
->>> removed for a short period of time. For boards, which are solely powered
->>> through their USB-C port, like the Radxa Rock 5B, this results in an machine
->>> reset. This is currently worked around by not describing the FUSB302 in the
->>> kernel DT, so nothing will ever speak USB-PD on the Rock 5B. This means
->>>
->>> 1. the USB-C port cannot be used at all
->>> 2. the board will be running via fallback supply, which provides limited
->>>      power capabilities
->>>
->>> In order to avoid the hard reset, this adds FUSB302 support to U-Boot, so
->>> that we react to the power-supply's queries in time. The code, which is
->>> originally from the Linux kernel, consists of two parts:
->>>
->>> 1. the tcpm state machine, which implements the Type C port manager state
->>>      machine as described in the USB PD specification
->>> 2. the fusb302 driver, which knows about specific registers
->>>
->>> Especially the first part has been heavily modified compared to the
->>> kernel, which makes use of multiple delayed works and threads. For this
->>> I used a priorly ported version from Rockchip, removed their hacks and
->>> any states not necessary in U-Boot (e.g. audio accessory support).
->>>
->>> Sorry for the delay in getting PATCHv3 ready.
->>
->> I am the one who should be sorry here, really, sorry for the abysmal
->> delay in my replies.
->>
->> So ... this series looks good to me. Thank you for working on this !
->>
->> Jonas, are your concerns resolved ?
+On 8/1/24 2:28 AM, Marek Vasut wrote:
+> On 7/29/24 1:55 PM, Svyatoslav Ryhel wrote:
 > 
-> No, for ROCK 5B the full overwrite of the Rockchip common misc_init_r()
-> in mach-rockchip/board.c should be fixed, rockchip_early_misc_init_r()
-> could probably be used instead (or possible a PREBOOT cmd), see [1].
+> [...]
+> 
+>>>>> What is the problem you observe on tegra 3 ?
+>>>> i2c line fails since it probes in spl with your patch, but it does not
+>>>> relocate and then probes once more after relocation. Probe fails along
+>>>> with all devices on same line.
+>>>
+>>> Could it be that you either have to:
+>>> - Add DM_I2C to tegra 3 SPL
+>>> - Remove bootph-* from DT to remove the regulator node from SPL
+>>> - /delete-property/ regulator-always-on; and /delete-property/
+>>> regulator-boot-on; in -u-boot.dtsi to prevent the regulator from being
+>>> enabled in SPL ?
+>>>
+>> Obviously NO, you propose nonsense. Same dts is used for both stages.
+> 
+> DT source yes, DT blob likely no.
+> 
+>> And I have to add hack-ish stuff just because you wanna introduce code
+>> which causes known regressions.
+> 
+> I am trying to understand what problem there is on tegra 3, but it is 
+> still not clear to me.
+> 
+> Is the problem somehow related to PMICs (?) being probed in SPL (?) 
+> because they have regulators (?) which are marked as regulator-always-on 
+> ? If so, then this is correct behavior, and if this is not desired in 
+> SPL, then you can remove this property from SPL DT in -u-boot.dtsi using 
+> /delete-property/ .
+> 
+> [...]
+> 
+>> "We must not probe things as we go. There might be other
+>> dependencies not yet bound. It may also take some time. This is not
+>> following driver model design, sorry.
+>>
+>> So please think of a way to do this properly."
+> 
+> What is this quote about ? Where is this from ?
 
-Can you use DM_FLAG_PROBE_AFTER_BIND instead of misc_init_r for this ?
+What is the problem with Tegra 3 and this patchset ?
 
-drivers/led/led-uclass.c: dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
+Can you please explain that so this patchset can move forward ?
 
-This will probe the driver after it got bound, and you won't have to 
-hack around board files or arch files for this.
+Thank you
