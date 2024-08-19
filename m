@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEA39C52D6F
-	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 15:03:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A32D3C3DA4A
+	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 15:03:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 414B188D02;
-	Mon, 19 Aug 2024 17:02:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A461A88CE8;
+	Mon, 19 Aug 2024 17:02:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y/AkHVwj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LV/nmuW+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8118A88CEC; Mon, 19 Aug 2024 17:02:09 +0200 (CEST)
-Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
- [IPv6:2001:4860:4864:20::2a])
+ id 0CCB788CF2; Mon, 19 Aug 2024 17:02:12 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 118248641A
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 17:02:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E6D18641A
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 17:02:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=macroalpha82@gmail.com
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-27012aa4a74so1804278fac.0
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 08:02:07 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7095bfd6346so2427873a34.0
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 08:02:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724079726; x=1724684526; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1724079728; x=1724684528; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XvwJElt4YUfFpBwvQE1FxCIY+djXkU5S5UfwCL3zens=;
- b=Y/AkHVwjcvGGJKGJmB+3QDvpfCgdPLzXPRjhd2ysE1pKK/bcUf4bRezsvJkNTXQxjC
- +XnLkZa1bPuLw5BTLAQ1qJr/NB0i9ls3A3oUhR4NKCfzA6qN6yBaOWBaiQAlptN4armk
- 0stpImgiUBkSpAu9D9FVe7IbkIMnp+0xXEAhCnALibmdxboSFqrPjQYaiZLIGeWKqHjK
- YyFqWhZqztQLtGNUqiCvLgN+Nk7iB6kUunD50LvX1hJfkFa1FHOvoabapZY92AnYBHm+
- +OyJEjQlVtbO7A23GK/mYiFT/j0VBJUjaIm3f+dpRKSxcPJr011tgokNyogWotM9lrhj
- WNpQ==
+ bh=y7L7XYgaJVmhWh8Td1afpcf2JPka7r6HJoVdHQpIxxo=;
+ b=LV/nmuW+K2opTHtgnY8y772ZMs3Fp7+IbpgzgkbJt6jbqODq1HeaqKcJYAG6arAXeh
+ poY0wuAYoIVbK9NlQHPflGawbqC1ZOCoFnb3MzJRKQlZkQkDdhMmV08B5QihkKzRVu9e
+ IBRxyTlKxr/vB2UWiNZgEgYJc1GyIeA6X3IXi3OljBtlczHw4JDTKFhDfjM0LnVJ1xyM
+ KvJTYkp+FfUOxig5Hi5QUt+KkZ9TYrBJloXAznzKv9r3sfimsO4tLyS8Z5UVXJPs+ruw
+ teoEctXN0mu1KN4GrTtmJeNsSMNg8/04noe+d2F1hGwIdN8zpzhuRPGWTW//9VN+gnBX
+ L0Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724079726; x=1724684526;
+ d=1e100.net; s=20230601; t=1724079728; x=1724684528;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XvwJElt4YUfFpBwvQE1FxCIY+djXkU5S5UfwCL3zens=;
- b=R6bK8T6/2UJ4pShQWeX2liVovDfjy8eqCb2euJzUaENTvfd7QKQnH/R5EEnzYtO00k
- Zb93RLcy9+t/l7MIjfSBIdQpMYvaw0gd8Bx4LBjut6U9bBvne++XE5BoqtgXntcR6uR0
- HePqZvCRLV8uiMxL0+f57dE0A/pupnNq1i9K/J9o0MFsitgIJzd8hcozm/ZUWMzz0Luh
- wq4niu8+A0C2KD5iUMnAexLDn2Fj5HuZMBvCbGZ5T+2HdOPG2e3LBNrjTELmHevgTBs+
- iXAU7nJWAZd6zK+nVyLGMfR4oGY2pw6rrcbdydQKXeyW8k7tr843eupW4HibdEC90A+C
- 9N3Q==
-X-Gm-Message-State: AOJu0YyOjcgr9UPytZ5NplgJqbhg7fCVDANhOMUO5m0S/Oi65/NlJDr4
- 63euW2O2eSgmPhmOKnLWNFPmFtKmEwf6x3H1GcHeOhC+3CQBcwsXnZDcJQ==
-X-Google-Smtp-Source: AGHT+IHnTA6//OhariupgMVxqPieNyMDOoc9ieVCe6eN2SSk5WYUpdoMAWgrW21qMgEzRePZWlkAFg==
-X-Received: by 2002:a05:6870:232a:b0:268:b62c:d084 with SMTP id
- 586e51a60fabf-2701c33fb5dmr12971773fac.10.1724079725573; 
- Mon, 19 Aug 2024 08:02:05 -0700 (PDT)
+ bh=y7L7XYgaJVmhWh8Td1afpcf2JPka7r6HJoVdHQpIxxo=;
+ b=oPM/U5+XNp8NqpnU9ZFoywcqCRtz7LB9rwDMQrOJ5dZmSwSRx3JaptpOkMAXltb+bF
+ aFi2ECK5rLssZEIxY9+QU49IJhBr71w1AqFhSBb8im5oergC+QZNVJ+5EwxtctVHItP7
+ 3M6chgrAj9xH50wVf1Tmm3//RbBVp+jHGEKN7fFHgAHKic8TudjGalczUT+EwNedRLmg
+ 2KeBTAujej33ucxMM0/9818ooGErEnKyGl7ZxDqURPL2/jEaJ/wuCOKEFhVFBXBSYd+j
+ Iz61xunqLUR3fj5Nsx2jojBcmWzQbPV49dwfyl/DojiIfGnqb/39jxrbfoQPTI20oS+Q
+ EERw==
+X-Gm-Message-State: AOJu0YyYdDxRYPk96AasTnZfNkeuMOWSTjsY0n0H4szb8KkM+EFalKn/
+ NhQhdDZsCvY8ExnyoTgOmVojdABXALIV986vlcrUsfotcVkE3n6nBn9PCg==
+X-Google-Smtp-Source: AGHT+IF1EMJQi3Gj4vbnERpTMm+6/3nB0U7rkJ6fZFkVwL82+R8VzL3pFHt5nZ6fakvl2RaWSoMgJg==
+X-Received: by 2002:a05:6871:ca14:b0:270:130f:cee3 with SMTP id
+ 586e51a60fabf-2701c3418e1mr8402671fac.10.1724079727884; 
+ Mon, 19 Aug 2024 08:02:07 -0700 (PDT)
 Received: from localhost.localdomain ([2600:1700:fb0:1bcf::54])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-27004432d18sm2945189fac.7.2024.08.19.08.02.04
+ 586e51a60fabf-27004432d18sm2945189fac.7.2024.08.19.08.02.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 19 Aug 2024 08:02:05 -0700 (PDT)
 From: Chris Morgan <macroalpha82@gmail.com>
@@ -70,9 +70,9 @@ Cc: sjg@chromium.org, jernej.skrabec@gmail.com, neil.armstrong@linaro.org,
  hdegoede@redhat.com, andre.przywara@arm.com, jagan@amarulasolutions.com,
  trini@konsulko.com, ryan@testtoast.com, iuncuim@gmail.com,
  sumit.garg@linaro.org, Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH V2 6/9] arm64: dts: allwinner: h616: Add r_i2c pinctrl nodes
-Date: Mon, 19 Aug 2024 09:59:35 -0500
-Message-Id: <20240819145938.503221-7-macroalpha82@gmail.com>
+Subject: [PATCH V2 7/9] sunxi: Correct TPR6 parameter for H616 DRAM driver
+Date: Mon, 19 Aug 2024 09:59:36 -0500
+Message-Id: <20240819145938.503221-8-macroalpha82@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240819145938.503221-1-macroalpha82@gmail.com>
 References: <20240819145938.503221-1-macroalpha82@gmail.com>
@@ -96,32 +96,31 @@ X-Virus-Status: Clean
 
 From: Chris Morgan <macromorgan@hotmail.com>
 
-Add pinctrl nodes for the r_i2c node. Without the pinmux defined the
-r_i2c bus may fail to work, possibly if the bootloader uses rsb mode
-for the PMIC.
+Correct the default TPR6 parameter based on suggestion from Mikhail
+Kalashnikov. [1]
 
-Link: https://lore.kernel.org/linux-sunxi/172252952262.1669767.7675865282122079154.b4-ty@csie.org/
+[1] https://lore.kernel.org/u-boot/4c003cab-c8b8-484d-924d-084e71fe666e@gmail.com/
 
-[ upstream commit: 7c9ea4ab76176f65f4f55aa144f9145a4bccaacb ]
-
+Fixes: 4b02f0120a4b ("sunxi: H616: add LPDDR4 DRAM support")
+Suggested-by: Mikhail Kalashnikov <iuncuim@gmail.com>
 Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
 ---
- dts/upstream/src/arm64/allwinner/sun50i-h616.dtsi | 2 ++
- 1 file changed, 2 insertions(+)
+ arch/arm/mach-sunxi/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/dts/upstream/src/arm64/allwinner/sun50i-h616.dtsi b/dts/upstream/src/arm64/allwinner/sun50i-h616.dtsi
-index 921d5f61d8..41f2c23e07 100644
---- a/dts/upstream/src/arm64/allwinner/sun50i-h616.dtsi
-+++ b/dts/upstream/src/arm64/allwinner/sun50i-h616.dtsi
-@@ -836,6 +836,8 @@
- 			clocks = <&r_ccu CLK_R_APB2_I2C>;
- 			dmas = <&dma 48>, <&dma 48>;
- 			dma-names = "rx", "tx";
-+			pinctrl-names = "default";
-+			pinctrl-0 = <&r_i2c_pins>;
- 			resets = <&r_ccu RST_R_APB2_I2C>;
- 			status = "disabled";
- 			#address-cells = <1>;
+diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+index 17666814c5..f1dcc0d105 100644
+--- a/arch/arm/mach-sunxi/Kconfig
++++ b/arch/arm/mach-sunxi/Kconfig
+@@ -87,7 +87,7 @@ config DRAM_SUN50I_H616_TPR2
+ 
+ config DRAM_SUN50I_H616_TPR6
+ 	hex "H616 DRAM TPR6 parameter"
+-	default 0x3300c080
++	default 0x33c00080
+ 	help
+ 	  TPR6 value from vendor DRAM settings.
+ 
 -- 
 2.34.1
 
