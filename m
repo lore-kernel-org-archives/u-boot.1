@@ -4,92 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D64F5C3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 22:19:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C737DC3DA4A
+	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 23:03:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAC7088CE8;
-	Tue, 20 Aug 2024 00:19:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2C669885FA;
+	Tue, 20 Aug 2024 01:03:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="c5XNSlLh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="F52bRiwu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4761A88D39; Tue, 20 Aug 2024 00:19:36 +0200 (CEST)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 4C11D885FA; Tue, 20 Aug 2024 01:03:22 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A34FE88CE8
- for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 00:19:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E9F488155
+ for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 01:03:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-3db23a6085aso2416062b6e.1
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 15:19:33 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a7a9cf7d3f3so625211766b.1
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 16:03:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724105972; x=1724710772; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ioFzBbIrCFtaZxtxUnnl0ibfi+1/KtN3TY57d0XiRmo=;
- b=c5XNSlLhNPmJ4CWgCbtS7bKZOj55fPUTEViQkcGSwV6Fis/Gfj3vST0nLKR4zjzDSV
- bzewfR5Kr+N8wmhGV7bDC+il7zFmjjk/72QdyXdDaxkHDmhE9jNzSt6eVH6e8XjaikKm
- unWNgk+9BDCjAkX5ft/1R/UZUMPNrE9zw/e1s=
+ d=linaro.org; s=google; t=1724108599; x=1724713399; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ioh976rh3cgM2PWNLrqO15hk5kBjKu6zUdFW4HWWGAc=;
+ b=F52bRiwu6fjMNGoqbcvB7k1LpauYGu6lSxWugvFTRZF+hlhKoG1qUu18nSrN8fg7/C
+ 6K5WdM7M5JpSEjXoVsm7yPpWhlObK8CrSB431bblrFEC9Y8hHvdTie1ur8F5OOCUFRBb
+ FQtnGcex/6w0pwNmK3FFKZbh2t62ZEvETNaG3+gH97N54H0plOlPz9h/jAxo6ondgp02
+ xE0mi5KJIJM4vJOpDbKAw2ZsyqbVNQm7m2sKwY2sh6ICbkx/5e1xCHDG3417kNckEFiQ
+ b/9MBKu67mq4LFMFooMQ+WOP0gvXzAvjaLYa5XA5Sa1oHEqqWk+1QQsaaAPjl3HfPmIW
+ dIKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724105972; x=1724710772;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ioFzBbIrCFtaZxtxUnnl0ibfi+1/KtN3TY57d0XiRmo=;
- b=JK74yXObu2GUox09GdlEPxcTmYNR1T3RXcLNCThvhDw1j66jwsCI1AWa49iRRYuy9f
- j4wCbt7FMUYjeK+SDJCo2EmnA0FdMlH3M0oM40SqZvEhHlFpth1/X8k9ZAjXuHRaxhtM
- S1gTapkVLf42i4ddOdkK2A0yAID5V/DR57R3TaSpwLS56ra9x6bRFepiGJ/d+xoCl8fJ
- KwhM26dFzCNP755YGJ7bLq3MYf66gp91t4zfs5NUL2D1i3tEtQ4pnUG697KlZmiIeUFZ
- ghom6LMWiUT2vLzQZ896h1gGGfG6+5RwFC6FlWe//4ZYaXndukdr/NcffqTKeYHHIvCb
- 4/Mw==
-X-Gm-Message-State: AOJu0Yy/+116P7tMogGEQ8m//a23zHGB8Zc8FCAZx3P4paRo8xWDQSYV
- tZl/Uv3ZEQc3EyQRu6V/5JFEBLrYgA/2JZbe2sFeKq6xhKnX3av55Z9Seb9LRtU=
-X-Google-Smtp-Source: AGHT+IEigzB2sxjByp4zh9Nh2t35KtGwmvJT1MTivbj6L0AfYky1jmldGercTcGTmIqkwcg6f6/yhg==
-X-Received: by 2002:a05:6808:3386:b0:3d9:3427:56b9 with SMTP id
- 5614622812f47-3ddb4d0bb95mr480598b6e.4.1724105972321; 
- Mon, 19 Aug 2024 15:19:32 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-236.totalplay.net.
- [189.203.97.236]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3de10258d42sm72309b6e.30.2024.08.19.15.19.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Aug 2024 15:19:31 -0700 (PDT)
-Date: Mon, 19 Aug 2024 16:19:28 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ d=1e100.net; s=20230601; t=1724108599; x=1724713399;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ioh976rh3cgM2PWNLrqO15hk5kBjKu6zUdFW4HWWGAc=;
+ b=m2abNC+MdMnyswZwAs00KgyPmLR+PhjPDFYpLkEoEAPAIt72vZwLkrIQ9VGoIOfhG5
+ /M6ZagaWlNv5uEsXVcjEc7osuVCQj4kiFdLc4RrVtENYv146YloFEtuFtNzeGPkrrmV6
+ Krtvxl79FWIfxRHMtNej8aPnd//Y3CJ35t+aEtxAlVNr5G3JvdOuYA7RLdfMgYO6zxQ+
+ R9RCPRKIYuSq5CxySG7UmV80sz4x0qO8S7Impgb03fe1TMixxlJPoTRb2KeFHRVo8JeN
+ UKBfCXKyVRnQT99MnSGjDxDx/oTG5dfohTaT10cwOxq0sslT77aQnWvtQEtADzPU5GU8
+ bmlA==
+X-Gm-Message-State: AOJu0YxpEJeq79SCi0Og4Y6D6laYtkftPhJBVAcLw/ZpqHaf0lzJVwH9
+ hAx3VW6H2gMLMsJvWVuLF9pCCQoiNnZb1I2G/92ntd4lTi0sgjDUWN/1TC2C6Og=
+X-Google-Smtp-Source: AGHT+IF24jboCknnP0ynA3qCdD2mnPkIZq7K1ELOAWpLfTFXzdHFx/WkaOP1CgyUYhw9P5FDF4Bo4Q==
+X-Received: by 2002:a17:906:d553:b0:a7a:a5ae:11b7 with SMTP id
+ a640c23a62f3a-a8647b0b096mr30557266b.49.1724108599296; 
+ Mon, 19 Aug 2024 16:03:19 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:aa0d:be00::676e? ([2a02:8109:aa0d:be00::676e])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a83838c6a42sm684552466b.44.2024.08.19.16.03.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 19 Aug 2024 16:03:18 -0700 (PDT)
+Message-ID: <ffeb90f8-4f3b-4455-83db-d7b03b872c84@linaro.org>
+Date: Tue, 20 Aug 2024 01:03:16 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/10] SMBIOS improvements
+To: Simon Glass <sjg@chromium.org>, Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Bin Meng <bmeng@tinylab.org>, Stefan Roese <sr@denx.de>,
- Jonas Karlman <jonas@kwiboo.se>,
- Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Wan Yee Lau <wan.yee.lau@intel.com>,
- Alexander Gendin <agendin@matrox.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Bin Meng
+ <bmeng@tinylab.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Stefan Roese <sr@denx.de>, =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
+ Wan Yee Lau <wan.yee.lau@intel.com>, Alexander Gendin <agendin@matrox.com>,
+ Michal Simek <michal.simek@amd.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
  Max Krummenacher <max.krummenacher@toradex.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
  Sean Anderson <seanga2@gmail.com>,
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
  Peter Robinson <pbrobinson@gmail.com>
-Subject: Re: [PATCH 10/10] tests: update smbios pytest
-Message-ID: <20240819221928.GJ1626301@bill-the-cat>
 References: <20240816154658.1866186-1-raymond.mao@linaro.org>
- <20240816154658.1866186-11-raymond.mao@linaro.org>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zbdrgCIF5y+Urw2a"
-Content-Disposition: inline
-In-Reply-To: <20240816154658.1866186-11-raymond.mao@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+ <CAFLszTjE+8BmdmtFXER94LmEYshNDEA4x_MDTqvyGhHYed2OCw@mail.gmail.com>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAFLszTjE+8BmdmtFXER94LmEYshNDEA4x_MDTqvyGhHYed2OCw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,55 +108,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
---zbdrgCIF5y+Urw2a
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> As a general comment, this is adding a load of code which is used by a
+> lot of platforms. As more and more aarch64 platforms are created, this
+> data grows. Why not use the devicetree for this hardware information?
+> That is what it is for.
 
-On Fri, Aug 16, 2024 at 08:46:53AM -0700, Raymond Mao wrote:
-> Update the expected test result to align with the smbios library changes.
->=20
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
->  test/py/tests/test_smbios.py | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/test/py/tests/test_smbios.py b/test/py/tests/test_smbios.py
-> index 82b0b689830..ffa4ea795ec 100644
-> --- a/test/py/tests/test_smbios.py
-> +++ b/test/py/tests/test_smbios.py
-> @@ -32,7 +32,7 @@ def test_cmd_smbios_sandbox(u_boot_console):
->      """Run the smbios command on the sandbox"""
->      output =3D u_boot_console.run_command('smbios')
->      assert 'DMI type 0,' in output
-> -    assert 'String 1: U-Boot' in output
-> +    assert 'Vendor: U-Boot' in output
->      assert 'DMI type 1,' in output
->      assert 'Manufacturer: sandbox' in output
->      assert 'DMI type 2,' in output
+This data does not belong in devicetree, the various system registers 
+exist to describe this information... Putting it in DT would be 
+duplicating it.
 
-This needs to be done with the change, not by itself.
+Using DT for this would additionally require having bindings accepted 
+upstream and for all SoCs to add them. To what end?
 
---=20
-Tom
+That being said, it would maybe be good to know what the size diff is 
+with this series before getting into the weeds.
 
---zbdrgCIF5y+Urw2a
-Content-Type: application/pgp-signature; name="signature.asc"
+> 
+> Some of the information detected makes sense, such as cache setup, but
+> some of it seems like an approximation, or is missing, but suggests it
+> is authoritative.
 
------BEGIN PGP SIGNATURE-----
+Could you give some examples?
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbDxOgACgkQFHw5/5Y0
-tyy+vAwAn3wstFBwxaLzPKxElA85bN4XhoCmxtuPbklP6LJ92FOB08wRpQMe14dx
-kN7ZqnlYF+4T9SSz8md0JwyIU/zNzcULyI+IrpTIyxORsPDCe3qCpjcpkJZDAaAY
-T/w1YJzhdzdFds2jqqSO9RKPkJ+UGCFCEduFwno17lz1Orwd4PCoHYKnIFHMDlE6
-dY/egHVwEd40lc8o+coeD/EC1rPpEafodqKtLG+Njgygxo+zn7N7BDAU0bw/BoY5
-z3K2ehnhuGOEJJtteSawqgx5dCK/+giwJBOEwMaSqn5gzH47+BiX9YWxpLqAuE4p
-GWSLRJPb/OYyDQIsO/3jbLSSIzx2g/A5M71MEECk7EvNiyps4VP8cHZJPYhNCdEG
-Kog4iepWe5bePz3Jr/6d6hLLGeG8iF1jJDT3ppooYKPEeXwUxUrJ+iir0oF5smmk
-/+ILT4U803p05sjyvT+N4o5cs4U5QRH/mwFMCjkfVV+AXhUpTKrVCdOnWToEcGIm
-bTgqmoZa
-=GqQv
------END PGP SIGNATURE-----
+Kind regards,
+> 
+> Regards,
+> Simon
 
---zbdrgCIF5y+Urw2a--
+-- 
+// Caleb (they/them)
