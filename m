@@ -4,82 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFCE5C5320E
-	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 13:15:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AA59C5321E
+	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 13:29:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDDDF88C9E;
-	Mon, 19 Aug 2024 15:15:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 8DA6E88CAC;
+	Mon, 19 Aug 2024 15:29:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="R87Lykqh";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="OQ8kMIMk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BCE688C9E; Mon, 19 Aug 2024 15:15:44 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3082C88CA8; Mon, 19 Aug 2024 15:29:18 +0200 (CEST)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E51FD88ADB
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 15:15:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 65E0E88993
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 15:29:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-42816ca797fso35124325e9.2
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 06:15:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1724073341; x=1724678141;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=eIPXxx/3+a1yKGv6XizAYoSDt2RIEDztn62s+FPoekA=;
- b=R87LykqhoawWznc5ng2emQoJBo344j5h1EV6ZzjjuFktmNvVuF1x+t/rTrkCRMdfGp
- kwDf0QuStAVU7iXHZn6zZq2wZmVpAImjkc44dzU+wBNemo/Z5dVy4UQ0UT0arR8oncn9
- ohVWa/6w2VaWlrPFCHuYliZummeilRdF96jL0muwP1rhcz1SNhu9rUiZsJ89gPe8O5Mm
- cQEhaG6b/TKs5DUPdxIshFlPj8smdvWDYqPM1v2nAiBNVWQ05FYHrmnkMHUUKXjrYNnz
- Qkd3KkhvNj4+W9mCzdY/unSfx4glzPpmdKzwfX6CfxEJaaLyPTRyf7Oat2TFxuk9En9b
- rtOw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724073341; x=1724678141;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=eIPXxx/3+a1yKGv6XizAYoSDt2RIEDztn62s+FPoekA=;
- b=MW2Pc0el6wj3khlbKMvoi4LJ8rIm4HI2XsQahfbmUTz3Ha56M5nmTH/tO9XlgUrQYH
- wtad8zYSQbRx3KIWpkljHmYSte+3mEbh0nRbsctYKxH6zdCnUzyhMeKeSYAc760GP3lL
- 8D2NW0h914lDJRhqsCdSYT8gUhON+EFNXz3PK0IyJVnzkGBIvGXCTqU52xBgXD9RLGtI
- Tu7cV3JUIydbCuDtPgntlGvbU1FJsmylx7+Vx0i/I+ZGHU8jOdW27ItLeKObhqx9oIOU
- Mny+f5+1zgdAdhJWiwVa4sN3tkgLt0BQ2Puw0mA9KtXLHmtPnOs+ocjkVA1MkC8ZGql0
- MNzA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXFoUNra00vAYzIXUPHLgMydGL51uCihi4MqDFaQ6N3JD3yelAtwPakSYQ/5mt8C5BuaeB2JW80QJIjGNtGimv8P/2ZMA==
-X-Gm-Message-State: AOJu0YyrUKw7GFBWFAExzRrzCqYlYgsAMN2hwPx4K2v8TbBvvkQDd2z3
- DQlWvAFgqYqmRVvE2y9eqN9gYcygm1ZmLMDUnZR+E5P1BcDbLyIyqOMtoEmpikg=
-X-Google-Smtp-Source: AGHT+IGrle1uNHEQcWbsKf0QbjpaVmKeUBSYltkc7gLKjG8khbbZR+3wpXnepC+byfPA45mrN0UXwA==
-X-Received: by 2002:a05:600c:5125:b0:426:6551:3174 with SMTP id
- 5b1f17b1804b1-429ed7e41admr91542635e9.29.1724073340543; 
- Mon, 19 Aug 2024 06:15:40 -0700 (PDT)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-429ded180dcsm164316815e9.4.2024.08.19.06.15.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Aug 2024 06:15:39 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Linus Walleij
- <linus.walleij@linaro.org>, Stephan Gerhold <stephan@gerhold.net>, Tom
- Rini <trini@konsulko.com>
-Subject: Re: [PATCH] usb: gadget: ux500: Do not redefine ops if
- CONFIG_USB_MUSB_HOST set
-In-Reply-To: <20240818200425.89045-1-marek.vasut+renesas@mailbox.org>
-References: <20240818200425.89045-1-marek.vasut+renesas@mailbox.org>
-Date: Mon, 19 Aug 2024 15:15:38 +0200
-Message-ID: <87ed6kwt51.fsf@baylibre.com>
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=B.Hahn@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1724074155; x=1726666155;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=bHwMMj8lFena7BPbs/t/JbjbgdN7c90wVHjqNneVxYs=;
+ b=OQ8kMIMk7wuz6Cfcf3VR1Up7i7ksH0ZdtBw1ZCLUPQjLWarroYc1r0k6oTeQ4vom
+ 78WrhHWtxAvqNbBN65+7Fb0qXlEqbZ6sIe91U6pmeaEycuqTNyF+Mjmkg6RYwrIW
+ ICNu7/Y3vDvNcC94EAbQhaF+G1rC92MhIf4K3ObaEoA=;
+X-AuditID: ac14000a-03251700000021bc-52-66c348abc481
+Received: from florix.phytec.de (Unknown_Domain [172.25.0.13])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id BE.49.08636.BA843C66;
+ Mon, 19 Aug 2024 15:29:15 +0200 (CEST)
+Received: from Berlix.phytec.de (172.25.0.12) by Florix.phytec.de
+ (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 19 Aug
+ 2024 15:29:14 +0200
+Received: from Berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4]) by
+ berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4%4]) with mapi id 15.01.2507.006;
+ Mon, 19 Aug 2024 15:29:14 +0200
+From: Benjamin Hahn <B.Hahn@phytec.de>
+To: Lukasz Majewski <lukma@denx.de>, Teresa Remmet <T.Remmet@phytec.de>,
+ Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>
+CC: "uboot-imx@nxp.com" <uboot-imx@nxp.com>, Cem Tenruh <C.Tenruh@phytec.de>, 
+ Tom Rini <trini@konsulko.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
+ Yannic Moog <Y.Moog@phytec.de>, Svyatoslav Ryhel <clamor95@gmail.com>, "Simon
+ Glass" <sjg@chromium.org>
+Subject: Re: [PATCH] config: imx: Add support for Phytec's phycore imx8mm
+ running SDP gadget
+Thread-Topic: [PATCH] config: imx: Add support for Phytec's phycore imx8mm
+ running SDP gadget
+Thread-Index: AQHa7u93iFU8eIHgjEu003o5gFa44LIueCoA
+Date: Mon, 19 Aug 2024 13:29:14 +0000
+Message-ID: <0ee18119-98ac-4bc8-931e-50e4ac77be65@phytec.de>
+References: <20240815084504.479112-1-lukma@denx.de>
+In-Reply-To: <20240815084504.479112-1-lukma@denx.de>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.25.0.11]
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <D4D1A6C34D43FA4BBB3093D08761998B@phytec.de>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrIIsWRmVeSWpSXmKPExsWyRpKBV3e1x+E0gwt3mC0O9PcyWjy86m/x
+ /N1lJov2Uz4W37ZsY7SYOmkzu8XbvZ3sFlMer2d34PCY3XCRxWPerBMsHjtn3WX3eHVgFbvH
+ 2Ts7GD02vtvBFMAWxWWTkpqTWZZapG+XwJXxf8VfloIez4r2Z6vZGhjnuHcxcnJICJhItC5a
+ w9bFyMUhJLCESWLV9IlMEM59RonzPSugMhuAnO0bGUFa2ATUJHa9ec0KkhAR6GWU2Pt9HyOI
+ wyzQySTx6U8vE0iVsECcxNaGbWwgtohAvMSCk89YIWwjiQ2v/jOD2CwCqhIT/s4Aq+cVsJGY
+ tv0uO4gtJGAs0bbtLNg2TqADb72/C1bDKCArsWHDebBeZgFxiU3PvrNCPCEgsWQPRFxCQFTi
+ 5eN/UHF5iRO3pgH1cgDVa0qs36UP0Woh8ebwV3YIW1FiSvdDdogTBCVOznzCMoFRfBaSDbMQ
+ umch6Z6FpHsWku4FjKyrGIVyM5OzU4sys/UKMipLUpP1UlI3MYKiWYSBawdj3xyPQ4xMHIyH
+ GCU4mJVEeLtfHkwT4k1JrKxKLcqPLyrNSS0+xCjNwaIkzru6IzhVSCA9sSQ1OzW1ILUIJsvE
+ wSnVwDhhrWyt3q0Mud5dhy5Ol2A/YZexb4J0g9vWpUxyb5bcl7g9r2PfLr5NRllCwUl1Xzg2
+ Vj3SOrLb2XHmP67XiVf6Nt6xF77xgPeK3IpU4bep1otj4tcabZ4jX7fScq7gOq4Lobv47mnL
+ fzTz1JpUeMnbf7q36JFznV1LDLZYbtp4dn6wVW/EcTclluKMREMt5qLiRAAPO72J1AIAAA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,55 +101,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
-
-Thank you for the patch.
-
-On dim., ao=C3=BBt 18, 2024 at 22:04, Marek Vasut <marek.vasut+renesas@mail=
-box.org> wrote:
-
-> In case CONFIG_USB_MUSB_HOST is set, the ux500_gadget_ops get overridden
-> to musb_usb_ops . Simply set the ops one way or the other depending on
-> whether CONFIG_USB_MUSB_HOST is set or not.
->
-> Fixes: ac4bf5d48a9e ("usb: gadget: ux500: Convert interrupt handling to u=
-sb_gadget_generic_ops")
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
-> ---
-> Cc: Linus Walleij <linus.walleij@linaro.org>
-> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Cc: Stephan Gerhold <stephan@gerhold.net>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  drivers/usb/musb-new/ux500.c | 6 ++----
->  1 file changed, 2 insertions(+), 4 deletions(-)
->
-> diff --git a/drivers/usb/musb-new/ux500.c b/drivers/usb/musb-new/ux500.c
-> index 89dd75b7d05..be0085f403d 100644
-> --- a/drivers/usb/musb-new/ux500.c
-> +++ b/drivers/usb/musb-new/ux500.c
-> @@ -169,16 +169,14 @@ U_BOOT_DRIVER(ux500_musb) =3D {
->  	.name		=3D "ux500-musb",
->  #ifdef CONFIG_USB_MUSB_HOST
->  	.id		=3D UCLASS_USB,
-> +	.ops		=3D &musb_usb_ops,
->  #else
->  	.id		=3D UCLASS_USB_GADGET_GENERIC,
-> +	.ops		=3D &ux500_gadget_ops,
->  #endif
->  	.of_match	=3D ux500_musb_ids,
-> -	.ops		=3D &ux500_gadget_ops,
->  	.probe		=3D ux500_musb_probe,
->  	.remove		=3D ux500_musb_remove,
-> -#ifdef CONFIG_USB_MUSB_HOST
-> -	.ops		=3D &musb_usb_ops,
-> -#endif
->  	.plat_auto	=3D sizeof(struct usb_plat),
->  	.priv_auto	=3D sizeof(struct ux500_glue),
->  };
-> --=20
-> 2.43.0
+SGkgTHVrYXN6LA0KZGlkIHlvdSB0ZXN0IHRoaXM/IEl0IGRvZXMgbm90IHdvcmsgZm9yIG1lLiBX
+aGVuIEkgdHJ5IGl0LCB0aGUgVS1Cb290IA0KaGFuZ3MgaW4gU1BMLiBIZXJlIGlzIHdoYXQgSSBn
+b3Q6DQogRnJvbSBIb3N0Og0KDQpiaGFobkBsbHAtaGFobjp+L2dpdC1yZXBvcy91LWJvb3QkIHN1
+ZG8gdXV1IC1iIHNwbCBidWlsZC9taW5pL2ZsYXNoLmJpbg0KdXV1IChVbml2ZXJzYWwgVXBkYXRl
+IFV0aWxpdHkpIGZvciBueHAgaW14IGNoaXBzIC0tIGxpYjEuNC4xOTMNCg0KU3VjY2VzcyAwwqDC
+oMKgIEZhaWx1cmUgMA0KDQoNCjc6M8KgwqDCoMKgwqAgMS8gMSBbPT09PT09PT09PT09PT09PT0x
+MDAlPT09PT09PT09PT09PT09PT1dIFNEUDogYm9vdCAtZiANCmJ1aWxkL21pbmkvZmxhc2guYmlu
+DQoNCg0KTG9nIG9uIHRhcmdldDoNCg0KVS1Cb290IFNQTCAyMDI0LjEwLXJjMi0wMDEzMS1nMDMw
+M2YyMjQwMzc2IChBdWcgMTkgMjAyNCAtIDE1OjE4OjM2ICswMjAwKQ0KV0RUOsKgwqAgU3RhcnRl
+ZCB3YXRjaGRvZ0AzMDI4MDAwMCB3aXRoIHNlcnZpY2luZyBldmVyeSAxMDAwbXMgKDYwcyB0aW1l
+b3V0KQ0KVHJ5aW5nIHRvIGJvb3QgZnJvbSBVU0IgU0RQDQoNClUtQm9vdCBTUEwgMjAyNC4xMC1y
+YzItMDAxMzEtZzAzMDNmMjI0MDM3NiAoQXVnIDE5IDIwMjQgLSAxNToxODozNiArMDIwMCkNCldE
+VDrCoMKgIFN0YXJ0ZWQgd2F0Y2hkb2dAMzAyODAwMDAgd2l0aCBzZXJ2aWNpbmcgZXZlcnkgMTAw
+MG1zICg2MHMgdGltZW91dCkNClRyeWluZyB0byBib290IGZyb20gVVNCIFNEUA0KDQpUbyBtZSBp
+dCBsb29rcyBsaWtlIHRoZXJlIGFyZSBzb21lIGNoYW5nZXMgbWlzc2luZyB0byBnZXQgdGhpcyBm
+ZWF0dXJlIA0KdG8gd29yay4NCllvdSBjYW4gdGFrZSBhIGxvb2sgYXQgbXkgY29tbWl0cyB3aGVy
+ZSBJIGFkZGVkIHRoaXMgZmVhdHVyZSBmb3IgaW14OG1wLg0KMTk5MjI5ZTI4YjJiMmRhNTdjNTJl
+ZTQ2NDUyZjkzMDc4NWNmNjAwMiAoInBoeWNvcmUtaW14OG1wOiBhZGQgVVNCIG1hc3MgDQpzdG9y
+YWdlIHN1cHBvcnQiKQ0KOGRjZjFkZjQ4ZGZmMzM5YjE3MmQxYmNlMmEzOGE5NjVlZTRhYWZjYSAo
+InBoeWNvcmUtaW14OG1wOiBhZGQgc3VwcG9ydCANCmZvciBib290aW5nIGFuZCBmbGFzaGluZyBl
+bW1jIHZpYSBVVVUiKQ0KDQoNCkhlcmUgYXJlIHRoZSBjaGFuZ2VzIEkgbmVlZGVkIHRvIGRvIG9u
+IHRvcCBvZiB5b3VyIHBhdGNoIHRvIGdldCB0aGlzIA0KZmVhdHVyZSB0byB3b3JrIGZvciBtaW5p
+Og0KDQpkaWZmIC0tZ2l0IGEvYXJjaC9hcm0vZHRzL2lteDhtbS1waHlib2FyZC1wb2xpcy1yZGst
+dS1ib290LmR0c2kgDQpiL2FyY2gvYXJtL2R0cy9pbXg4bW0tcGh5Ym9hcmQtcG9saXMtcmRrLXUt
+Ym9vdC5kdHNpDQppbmRleCA1MTZlNTJlMWY1ZGUuLmNkYWZmMmY4ZGE5YiAxMDA2NDQNCi0tLSBh
+L2FyY2gvYXJtL2R0cy9pbXg4bW0tcGh5Ym9hcmQtcG9saXMtcmRrLXUtYm9vdC5kdHNpDQorKysg
+Yi9hcmNoL2FybS9kdHMvaW14OG1tLXBoeWJvYXJkLXBvbGlzLXJkay11LWJvb3QuZHRzaQ0KQEAg
+LTY5LDMgKzY5LDggQEANCiDCoCZ3ZG9nMSB7DQogwqDCoMKgwqDCoMKgwqAgYm9vdHBoLXByZS1y
+YW07DQogwqB9Ow0KKw0KKyZ1c2JvdGcxIHsNCivCoMKgwqDCoMKgwqAgZHJfbW9kZSA9ICJwZXJp
+cGhlcmFsIjsNCivCoMKgwqDCoMKgwqAgdS1ib290LGRtLXNwbDsNCit9Ow0KZGlmZiAtLWdpdCBh
+L2JvYXJkL3BoeXRlYy9waHljb3JlX2lteDhtbS9waHljb3JlLWlteDhtbS5jIA0KYi9ib2FyZC9w
+aHl0ZWMvcGh5Y29yZV9pbXg4bW0vcGh5Y29yZS1pbXg4bW0uYw0KaW5kZXggMDZjZmZiY2EzYTY5
+Li4wMGZkZDRlZGJlMzYgMTAwNjQ0DQotLS0gYS9ib2FyZC9waHl0ZWMvcGh5Y29yZV9pbXg4bW0v
+cGh5Y29yZS1pbXg4bW0uYw0KKysrIGIvYm9hcmQvcGh5dGVjL3BoeWNvcmVfaW14OG1tL3BoeWNv
+cmUtaW14OG1tLmMNCkBAIC00NSw2ICs0NSwxMCBAQCBpbnQgYm9hcmRfbGF0ZV9pbml0KHZvaWQp
+DQogwqDCoMKgwqDCoMKgwqAgY2FzZSBNTUMzX0JPT1Q6DQogwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIGVudl9zZXRfdWxvbmcoIm1tY2RldiIsIDIpOw0KIMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoCBicmVhazsNCivCoMKgwqDCoMKgwqAgY2FzZSBVU0JfQk9PVDoNCivCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHByaW50ZigiRGV0ZWN0IFVTQiBib290LiBXaWxsIGVu
+dGVyIGZhc3Rib290IG1vZGUhXG4iKTsNCivCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGVu
+dl9zZXRfdWxvbmcoImRvZmFzdGJvb3QiLCAxKTsNCivCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIGJyZWFrOw0KIMKgwqDCoMKgwqDCoMKgIGRlZmF1bHQ6DQogwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIGJyZWFrOw0KIMKgwqDCoMKgwqDCoMKgIH0NCmRpZmYgLS1naXQgYS9jb25m
+aWdzL3BoeWNvcmUtaW14OG1tX2RlZmNvbmZpZyANCmIvY29uZmlncy9waHljb3JlLWlteDhtbV9k
+ZWZjb25maWcNCmluZGV4IGJlYjJmMWU5ZjAzMS4uZThkM2ZmZThjMDVkIDEwMDY0NA0KLS0tIGEv
+Y29uZmlncy9waHljb3JlLWlteDhtbV9kZWZjb25maWcNCisrKyBiL2NvbmZpZ3MvcGh5Y29yZS1p
+bXg4bW1fZGVmY29uZmlnDQpAQCAtMzEsNyArMzEsNyBAQCBDT05GSUdfRklUX0VYVEVSTkFMX09G
+RlNFVD0weDMwMDANCiDCoENPTkZJR19TUExfTE9BRF9GSVQ9eQ0KIMKgQ09ORklHX09GX1NZU1RF
+TV9TRVRVUD15DQogwqBDT05GSUdfVVNFX0JPT1RDT01NQU5EPXkNCi1DT05GSUdfQk9PVENPTU1B
+TkQ9Im1tYyBkZXYgJHttbWNkZXZ9OyBpZiBtbWMgcmVzY2FuOyB0aGVuIGlmIHJ1biANCmxvYWRp
+bWFnZTsgdGhlbiBydW4gbW1jYm9vdDsgZWxzZSBydW4gbmV0Ym9vdDsgZmk7IGZpOyINCitDT05G
+SUdfQk9PVENPTU1BTkQ9ImlmIHRlc3QgJHtkb2Zhc3Rib290fSA9IDE7IHRoZW4gZmFzdGJvb3Qg
+MDsgZmk7IG1tYyANCmRldiAke21tY2Rldn07IGlmIG1tYyByZXNjYW47IHRoZW4gaWYgcnVuIGxv
+YWRpbWFnZTsgdGhlbiBydW4gbW1jYm9vdDsgDQplbHNlIHJ1biBuZXRib290OyBmaTsgZmk7Ig0K
+IMKgQ09ORklHX0RFRkFVTFRfRkRUX0ZJTEU9Im9mdHJlZSINCiDCoENPTkZJR19TWVNfQ0JTSVpF
+PTIwNDgNCiDCoENPTkZJR19TWVNfUEJTSVpFPTIwNzQNCkBAIC0xNTMsMyArMTUzLDExIEBAIENP
+TkZJR19DSV9VREM9eQ0KIMKgQ09ORklHX1NEUF9MT0FEQUREUj0weDQwNDAwMDAwDQogwqBDT05G
+SUdfU1BMX1VTQl9TRFBfU1VQUE9SVD15DQogwqBDT05GSUdfSU1YX1dBVENIRE9HPXkNCitDT05G
+SUdfQ01EX1VTQl9TRFA9eQ0KK0NPTkZJR19GQVNUQk9PVF9GTEFTSD15DQorQ09ORklHX0ZBU1RC
+T09UX0ZMQVNIX01NQ19ERVY9Mg0KK0NPTkZJR19GQVNUQk9PVF9NTUNfQk9PVF9TVVBQT1JUPXkN
+CitDT05GSUdfRkFTVEJPT1RfTU1DX0JPT1QxX05BTUU9Im1tYzJib290MCINCitDT05GSUdfRkFT
+VEJPT1RfTU1DX0JPT1QyX05BTUU9Im1tYzJib290MSINCitDT05GSUdfRkFTVEJPT1RfTU1DX1VT
+RVJfU1VQUE9SVD15DQorQ09ORklHX0ZBU1RCT09UX01NQ19VU0VSX05BTUU9Im1tYzIiDQpkaWZm
+IC0tZ2l0IGEvaW5jbHVkZS9jb25maWdzL3BoeWNvcmVfaW14OG1tLmggDQpiL2luY2x1ZGUvY29u
+Zmlncy9waHljb3JlX2lteDhtbS5oDQppbmRleCBkZDdjZmRiYTUyZDIuLmYzYTc1MDA4OWRkNSAx
+MDA2NDQNCi0tLSBhL2luY2x1ZGUvY29uZmlncy9waHljb3JlX2lteDhtbS5oDQorKysgYi9pbmNs
+dWRlL2NvbmZpZ3MvcGh5Y29yZV9pbXg4bW0uaA0KQEAgLTI2LDYgKzI2LDExIEBADQogwqDCoMKg
+wqDCoMKgwqAgImZkdF9hZGRyPTB4NDgwMDAwMDBcMCIgXA0KIMKgwqDCoMKgwqDCoMKgICJmZHRf
+ZmlsZT0iIENPTkZJR19ERUZBVUxUX0ZEVF9GSUxFICJcMCIgXA0KIMKgwqDCoMKgwqDCoMKgICJp
+cF9keW49eWVzXDAiIFwNCivCoMKgwqDCoMKgwqAgImRvZmFzdGJvb3Q9MFwwIiBcDQorwqDCoMKg
+wqDCoMKgICJmYXN0Ym9vdF9yYXdfcGFydGl0aW9uX2Jvb3Rsb2FkZXI9NjYgODEyOFwwIiBcDQor
+wqDCoMKgwqDCoMKgICJmYXN0Ym9vdF9yYXdfcGFydGl0aW9uX2FsbD0wIDQxOTQzMDRcMCIgXA0K
+K8KgwqDCoMKgwqDCoCAiZW1tY19kZXY9MlwwIiBcDQorwqDCoMKgwqDCoMKgICJzZF9kZXY9MVww
+IiBcDQogwqDCoMKgwqDCoMKgwqAgIm1tY2Rldj0iIF9fc3RyaW5naWZ5KENPTkZJR19TWVNfTU1D
+X0VOVl9ERVYpICJcMCIgXA0KIMKgwqDCoMKgwqDCoMKgICJtbWNwYXJ0PTFcMCIgXA0KIMKgwqDC
+oMKgwqDCoMKgICJtbWNyb290PTJcMCIgXA0KDQoNCldpdGggdGhlc2UgY2hhbmdlcyBib290aW5n
+IHZpYSBTRFAgd2l0aCB1dXUgYW5kIGZsYXNoaW5nIGVtbWMgd2l0aCB1dXUgDQpzaG91bGQgd29y
+ay4gU2FkbHkgSSBkaWQgbm90IGZpbmQgYSB3YXkgdG8gYmUgYWJsZSB0byBmbGFzaCBlTU1DIGFu
+ZCANClNELUNhcmQgb3ZlciB1dXUgd2l0aCB0aGUgc2FtZSBib290bG9hZGVyIGJlY2F1c2UgaXQg
+d2FzIG5lY2Vzc2FyeSBmb3IgDQptZSB0byBzcGVjaWZ5IHRoZSBkZXZpY2UgdG8gZmxhc2ggaW4g
+Q09ORklHX0ZBU1RCT09UX0ZMQVNIX01NQ19ERVYuDQoNCndpdGgga2luZCByZWdhcmRzLA0KQmVu
+amFtaW4NCg0KT24gMTUuMDguMjQgMTA6NDUsIEx1a2FzeiBNYWpld3NraSB3cm90ZToNCj4gQWZ0
+ZXIgdGhpcyBjaGFuZ2UgaXQgd291bGQgYmUgcG9zc2libGUgdG8gYm9vdCBTRFAgZ2FkZ2V0IHdo
+ZW4gUGh5dGVjJ3MNCj4gUGh5Y29yZSBpbXg4bW0gbW9kdWxlIGhhcyBVU0IgUk9NIGJvb3Qgc2Vs
+ZWN0ZWQuDQo+DQo+IFdpdGggdGhpcyBjaGFuZ2UgaXQgc2hhbGwgYmUgcG9zc2libGUgdG8gZmxh
+c2ggZU1NQy9TRCBjYXJkIGNvbnRlbnQgd2l0aA0KPiB1dXUgcHJvZ3JhbS4NCj4NCj4gU2lnbmVk
+LW9mZi1ieTogTHVrYXN6IE1hamV3c2tpIDxsdWttYUBkZW54LmRlPg0KPiAtLS0NCj4gICBjb25m
+aWdzL3BoeWNvcmUtaW14OG1tX2RlZmNvbmZpZyB8IDE4ICsrKysrKysrKysrKysrKysrLQ0KPiAg
+IDEgZmlsZSBjaGFuZ2VkLCAxNyBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pDQo+DQo+IGRp
+ZmYgLS1naXQgYS9jb25maWdzL3BoeWNvcmUtaW14OG1tX2RlZmNvbmZpZyBiL2NvbmZpZ3MvcGh5
+Y29yZS1pbXg4bW1fZGVmY29uZmlnDQo+IGluZGV4IDY3NDhlNmZhZmIuLmJlYjJmMWU5ZjAgMTAw
+NjQ0DQo+IC0tLSBhL2NvbmZpZ3MvcGh5Y29yZS1pbXg4bW1fZGVmY29uZmlnDQo+ICsrKyBiL2Nv
+bmZpZ3MvcGh5Y29yZS1pbXg4bW1fZGVmY29uZmlnDQo+IEBAIC0yNSw2ICsyNSw3IEBAIENPTkZJ
+R19TUEw9eQ0KPiAgIENPTkZJR19FTlZfT0ZGU0VUX1JFRFVORD0weDNFMDAwMA0KPiAgIENPTkZJ
+R19TWVNfTE9BRF9BRERSPTB4NDA0ODAwMDANCj4gICBDT05GSUdfUENJPXkNCj4gKyMgQ09ORklH
+X0FORFJPSURfQk9PVF9JTUFHRSBpcyBub3Qgc2V0DQo+ICAgQ09ORklHX0ZJVD15DQo+ICAgQ09O
+RklHX0ZJVF9FWFRFUk5BTF9PRkZTRVQ9MHgzMDAwDQo+ICAgQ09ORklHX1NQTF9MT0FEX0ZJVD15
+DQo+IEBAIC01Nyw2ICs1OCw3IEBAIENPTkZJR19TWVNfSTJDX0VFUFJPTV9BRERSX0xFTj0yDQo+
+ICAgQ09ORklHX1NZU19FRVBST01fU0laRT00MDk2DQo+ICAgQ09ORklHX1NZU19FRVBST01fUEFH
+RV9XUklURV9CSVRTPTUNCj4gICBDT05GSUdfU1lTX0VFUFJPTV9QQUdFX1dSSVRFX0RFTEFZX01T
+PTUNCj4gKyMgQ09ORklHX0NNRF9CSU5EIGlzIG5vdCBzZXQNCj4gICBDT05GSUdfQ01EX0NMSz15
+DQo+ICAgQ09ORklHX0NNRF9GVVNFPXkNCj4gICBDT05GSUdfQ01EX0dQSU89eQ0KPiBAQCAtODYs
+NiArODgsMTAgQEAgQ09ORklHX1NQTF9DTEtfQ09NUE9TSVRFX0NDRj15DQo+ICAgQ09ORklHX0NM
+S19DT01QT1NJVEVfQ0NGPXkNCj4gICBDT05GSUdfU1BMX0NMS19JTVg4TU09eQ0KPiAgIENPTkZJ
+R19DTEtfSU1YOE1NPXkNCj4gK0NPTkZJR19VU0JfRlVOQ1RJT05fRkFTVEJPT1Q9eQ0KPiArQ09O
+RklHX0ZBU1RCT09UX0JVRl9BRERSPTB4NDI4MDAwMDANCj4gK0NPTkZJR19GQVNUQk9PVF9CVUZf
+U0laRT0weDIwMDAwMDAwDQo+ICtDT05GSUdfRkFTVEJPT1RfVVVVX1NVUFBPUlQ9eQ0KPiAgIENP
+TkZJR19NWENfR1BJTz15DQo+ICAgQ09ORklHX0RNX0kyQz15DQo+ICAgQ09ORklHX01JU0M9eQ0K
+PiBAQCAtMTE2LDcgKzEyMiw2IEBAIENPTkZJR19GRUNfTVhDPXkNCj4gICBDT05GSUdfTUlJPXkN
+Cj4gICBDT05GSUdfTlZNRV9QQ0k9eQ0KPiAgIENPTkZJR19QQ0lFX0RXX0lNWD15DQo+IC1DT05G
+SUdfUEhZPXkNCj4gICBDT05GSUdfUEhZX0lNWDhNX1BDSUU9eQ0KPiAgIENPTkZJR19QSU5DVFJM
+PXkNCj4gICBDT05GSUdfU1BMX1BJTkNUUkw9eQ0KPiBAQCAtMTM2LDQgKzE0MSwxNSBAQCBDT05G
+SUdfU1lTUkVTRVRfUFNDST15DQo+ICAgQ09ORklHX1NZU1JFU0VUX1dBVENIRE9HPXkNCj4gICBD
+T05GSUdfRE1fVEhFUk1BTD15DQo+ICAgQ09ORklHX0lNWF9UTVU9eQ0KPiArQ09ORklHX1VTQj15
+DQo+ICtDT05GSUdfU1BMX1VTQl9IT1NUPXkNCj4gK0NPTkZJR19VU0JfRUhDSV9IQ0Q9eQ0KPiAr
+Q09ORklHX01YQ19VU0JfT1RHX0hBQ1RJVkU9eQ0KPiArQ09ORklHX1VTQl9HQURHRVQ9eQ0KPiAr
+Q09ORklHX1NQTF9VU0JfR0FER0VUPXkNCj4gK0NPTkZJR19VU0JfR0FER0VUX1ZFTkRPUl9OVU09
+MHgwNTI1DQo+ICtDT05GSUdfVVNCX0dBREdFVF9QUk9EVUNUX05VTT0weGE0YTUNCj4gK0NPTkZJ
+R19DSV9VREM9eQ0KPiArQ09ORklHX1NEUF9MT0FEQUREUj0weDQwNDAwMDAwDQo+ICtDT05GSUdf
+U1BMX1VTQl9TRFBfU1VQUE9SVD15DQo+ICAgQ09ORklHX0lNWF9XQVRDSERPRz15DQoNCg0K
