@@ -4,76 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C59CC3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 13:55:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26842C52D6F
+	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 13:55:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6ED6988CC5;
+	by phobos.denx.de (Postfix) with ESMTP id F357988CCA;
 	Mon, 19 Aug 2024 15:54:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=schutzwerk.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="baqOuhvR";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=schutzwerk.com header.i=@schutzwerk.com header.b="oE5uQki2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24FA388356; Mon, 19 Aug 2024 09:15:56 +0200 (CEST)
-Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
- [IPv6:2607:f8b0:4864:20::12e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 14B46886B3; Mon, 19 Aug 2024 11:30:36 +0200 (CEST)
+Received: from mail.schutzwerk.net (mx0.schutzwerk.net [188.40.136.99])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB01788113
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 09:15:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CBE688155
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 11:30:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=schutzwerk.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=crausaz.romain@gmail.com
-Received: by mail-il1-x12e.google.com with SMTP id
- e9e14a558f8ab-39d2256ee95so17029285ab.2
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 00:15:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724051752; x=1724656552; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=h+HBo0Lo8GjeCjRvqc2U59MeRe1eprTDubIsw/9ONUE=;
- b=baqOuhvRPP4/0t6ISzNzaDcycTD55LEA4lb6pRRMeBpBoIt7oP1FgIIYzB80+MmmVT
- AZhQtyhFLbdW59kU5+ULlmkhOgdEBpa8LIqxsRqV+OeMvZJe5aRo23IIBqzhXA2K1VyI
- YZ7AHl6OnWsoI5zwM6pDUUAA6QytyksyEOkuvaOBGi0zBAMB6Rv+scLoN3rm1nHLdynS
- EQa5GACnE1uY0dq1nVdOIp4h7/Nbyt3r/HbnYEZtQYbCUfJ5U3l4YFUaDt2bAWI0/tAv
- 062JvbUye5Y1TNWuegqnNaeVE8/fzNczFJdYpDDKCZ9qD7InWQe77VAFtvytvRhFF4Wz
- pJpA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724051752; x=1724656552;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=h+HBo0Lo8GjeCjRvqc2U59MeRe1eprTDubIsw/9ONUE=;
- b=FHtkPmeWCGGIW+eGFdoa0GnFkOQwErydaRh8lD/pKKehyd9DLHsRFbyeYsb+3a/tn/
- ZswN3twHFJP1WUZ9fQTI96HgySeHicVU+ouUl7XD7patR2xQJx4nL2zgU5zXc7LUYUyk
- y6j+YF9cBOtsaKyIrMGAOBYphIDy/xjvaFJQxLZUuKhH2yu5m8eYmFH6VQbvoTI0H3zS
- 1Knv/dvlxNhrXtKDJeSN1Eenl5sJIqJhjMCKWy/bnsk1y85cPiYfx64g171GCPfhTBg9
- vDGXISWCnPMOOLg5SlvopNOLFZGPskbvB4z/JJeupJWJH4wdH2R+7SN8UTogDvaYnE0S
- /9Nw==
-X-Gm-Message-State: AOJu0YyCyF0/RtxucibdXqy3T9v/AzQK6rmQ7XGk5lvsSkkql2wXYFHJ
- hDBspK3yvM30JkgkkVN7cC+Nuv21aGJnHJaD0FJukh+7mmyY9V2vM083pwexOg1if2+xVbYOjMG
- kr88b3p/TmJkijupLxHepvBjGbGLZeWdl
-X-Google-Smtp-Source: AGHT+IEPIVdanIigWfygTi+s8hO9ouI/NVwvrJyd1BN1GVR1hYcug0Roy7REhEboaPXU7+mTO/LGLNVeUmzT2oXa4H4=
-X-Received: by 2002:a05:6e02:152b:b0:396:c825:4db6 with SMTP id
- e9e14a558f8ab-39d26d64999mr131705755ab.26.1724051752522; Mon, 19 Aug 2024
- 00:15:52 -0700 (PDT)
+ spf=pass smtp.mailfrom=sdiepold@schutzwerk.com
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=schutzwerk.com;
+ s=dkim; t=1724059832;
+ bh=Ozv+F++PqBaLenMcFzvTyxE9sFNSkdlJEBlnEGzwfEw=;
+ h=Date:To:From:Cc:Subject:From;
+ b=oE5uQki20/xSAlREhHyhJT0IpXd/mph4FDdUyCNTOgErf5ZV+ZEk0QgFIEIQ1j6EC
+ JA0dJHWELsPB4BRnXU8X54FvNonOIMnxZ2rd0NRWjGfUbX6Yqk5k/St6L/k+1vif12
+ MLBl36IVo30yxU8OYy6JzGjMyB60prNiD71SKtLYjEbgxdz50r1UKfKUUNtAL8xcEr
+ ngYjqUj7CA8vFaSzSPJLleNlez4AG7evCHv2aNu/Culs/fNYGnt/9Bz6bQcdf/F7Bs
+ fhdNMNLLCgpQX3W6HL1zi23vNoTWLtEOhgE+LnKBtrPD+QJRxlhk9Ub0zieJIzjH0c
+ EPl/40SMXkaAw==
+Message-ID: <185aa481-9e4e-40ef-9f7a-a590fb3b79c0@schutzwerk.com>
+Date: Mon, 19 Aug 2024 11:30:31 +0200
 MIME-Version: 1.0
-References: <CAB=OP5Kb_YMmcn6Zjj3feSPX506zXt7dSb8w_vUaMsSsxWYgzw@mail.gmail.com>
- <CAFLszTjHCbekGwJBvfw70iejhM6XeQ9kYc8+sHsdAfTyCq7DXw@mail.gmail.com>
-In-Reply-To: <CAFLszTjHCbekGwJBvfw70iejhM6XeQ9kYc8+sHsdAfTyCq7DXw@mail.gmail.com>
-From: Romain Crausaz <crausaz.romain@gmail.com>
-Date: Mon, 19 Aug 2024 09:15:41 +0200
-Message-ID: <CAB=OP5KesR5creSZ4C20v0dn3kmH_ZRRtj=L8uiK7K0dzV6hbw@mail.gmail.com>
-Subject: Re: RPI CM4 - I2C BUS and Device Tree
-To: Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>, 
- Matthias Brugger <mbrugger@suse.com>
-Cc: u-boot@lists.denx.de
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, trini@konsulko.com
+From: Simon Diepold <sdiepold@schutzwerk.com>
+Autocrypt: addr=sdiepold@schutzwerk.com; keydata=
+ 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
+ /F9VVnpF
+Cc: mschaefer@schutzwerk.com
+Subject: Advisory: Buffer overread in U-Boot DHCP
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------943AsCtZH76dO4hocIJRXNzq"
 X-Mailman-Approved-At: Mon, 19 Aug 2024 15:54:55 +0200
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,117 +109,309 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon, Hi Peter,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------943AsCtZH76dO4hocIJRXNzq
+Content-Type: multipart/mixed; boundary="------------0e3ReY3vtX0VdUsZXiYEj06V";
+ protected-headers="v1"
+From: Simon Diepold <sdiepold@schutzwerk.com>
+To: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, trini@konsulko.com
+Cc: mschaefer@schutzwerk.com
+Message-ID: <185aa481-9e4e-40ef-9f7a-a590fb3b79c0@schutzwerk.com>
+Subject: Advisory: Buffer overread in U-Boot DHCP
+Autocrypt-Gossip: addr=mschaefer@schutzwerk.com; keydata=
+ xsBNBEv/mFEBCACevd5Rb5GSjB1aQ5R4fEJh31Su7cam3/L6XnT7t6tBHUjIhgJ8KJNI0+HL
+ rxRbUKeUhvoHurD2foY3URd1arizkWBCofY+XwJARfEl1AnpoJ0iKYnPIuuIp3u5k62sXosf
+ vlEKnbmlYses2oiZYlZmjOd9ugjNVM/2jdWRbg6jcSgPy0HlY9Ps4cXVvKGkLfmCCAd72uiV
+ oe9GPEc87Gvl08Rx+SQaTTivPPUXmvbntrAjxYy1pydJ8nw0dKWPn3QtODpmpEfynvRDKqc8
+ pa0yah9yCoruBS0U+bxCfCPZe93E3130l345AvBFOnD5H7JpqzMwvggTdoxNU86XH715ABEB
+ AAHNPU1pY2hhZWwgU2NoYWVmZXIgKFNDSFVUWldFUksgR21iSCkgPG1zY2hhZWZlckBzY2h1
+ dHp3ZXJrLmNvbT7CwJUEEwEKAD8CGwMGCwkIBwMCBhUIAgkKCwQWAgMBAh4BAheAFiEE/auX
+ zWSidEVF7/DXc+WdFRJdkc4FAmUdLKIFCRr+x9EACgkQc+WdFRJdkc4sbgf/fF4BtdTLJsZy
+ m72aTVBrE9E5aiMTeRx/VoHscVCWugiJ85nYJFLqMTvPR5hsxp6H52uyra2GvwcWGnbGi+YD
+ MozA4DVsSyR4hR+tUcDZFHLo4weTtn2KSPn50MLjAipxP17zRYh3mVEZky/tdsiqFqsRTJLI
+ Nu8XMkoDrwF96w+CT9dNv+JkfZVFX0aCM6G5iYvS7Zhb2zt9KuQgf6xBBzAdvijYmhzyiXdf
+ Z5dHreI1f7LTHlNiA/+9I5TgXOsksERBPE+aVPb4JaMATgkXpS7sE5TjChk6+h/PGJ+8RNzp
+ 96DvmyNvC65HpMPOz2EliaN2ZfTh1tIXDNOkgFlSVM7ATQRL/5hRAQgA8ap/ObqcmRT+v1fi
+ /UfeuP2OoUy2afSsL1nTnh0ME9Hmp5qACwJTGy56V4wh9/elQ9qDCyclUWYSFSZU9xAIj/wE
+ nPuVzSFHfSl2BkQDXRAHX0RcF7cFdO12fGJpLpGq1rMrJLj6LvEtyBhRRKA2+1v4wbSPmmoQ
+ IDun4E4Eut8GR9Uh4RSyrkpZLavZk5nZJVpa3X01+0XCmvJMMDY8K98I7NNoWCjDr+rRo4GD
+ bJfdNFAiFSrXm++XzZ2j0hzmdQFnwWRPsPFlbf4PMK+kEsIbOFRYyEzINm7RvvYPo+ueEsML
+ ZSZOUMKH5ucFllsSPP4BDL9MbURdXjwTs68cSwARAQABwsB8BBgBCgAmAhsMFiEE/auXzWSi
+ dEVF7/DXc+WdFRJdkc4FAmUdLLUFCRr+x+QACgkQc+WdFRJdkc4/+wf9FJDBaNenaIvDAZTk
+ mhuDTqxYs0kf8EM/iq1ikJAyW/tT2SSCZoMssEHMczdU+38ymmxDuu7fHjxAZunJ0hegFzPg
+ qJ/63CsShmv2Yvzcg0sCyhpxQ2LyTTM0zATVrRYx4av9kBDMcvvfoWS8dywsw+plHHrh9LCn
+ 9eX+yCGTsyyYHnXw4T4NWx6yk7dKu/hoLe2WvyZiLKGadQ/lVz391kEr7TAylRSIuWa4yCGT
+ 8mkNirzpkUlF/a4LOSnhNjipX8/qdvMaFilTVwLxyDtXvuAnObIrDqGixe931N9hPWNaD5wN
+ w2n7yIAB/Rhh3bcob92c94KaN0yzAbk9U4jihA==
 
-First of all, thanks a lot for your answers.
+--------------0e3ReY3vtX0VdUsZXiYEj06V
+Content-Type: multipart/mixed; boundary="------------wLWC2UdnzG6GMal60WKPEPK4"
 
-1. When I enable the i2c bus in the config.txt (which is parsed by the rpi
-first stage bootloader), the overlay put this as compatible:"brcm,bcm2835".
-I checked in the source of U-Boot and the driver is not available.
-2. One solution could be to use the i2c-gpio driver instead of the default
-i2c controller. U-Boot has this driver.
-3. Since the device tree passed by the rpi bootloader is stored in the
-variable fw_dtb_pointer (see the lowlevel_init.S) would I be able to do the
-following:
-    3.1 remove the automatic selection for the device tree passed by the
-rpi bootload
-    3.2 system starts and use the default device tree where the i2c bus is
-defined with i2c-gpio, access the device I need and store the information
-needed
-    3.3 get the device tree address from fw_dtb_pointer, set fdt address
-fdt addr with the new device tree and then start the kernel
+--------------wLWC2UdnzG6GMal60WKPEPK4
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-I have another question, what triggers the DM to check for the device (with
-dm tree command there is a X under the column probed). Because here we
-could have a really simple device tree with the minimum configuration for
-just the i2c and load it from U-Boot, perform the action needed and then
-boot the kernel by passing the device tree provided by the first stage
-bootloder.
+SGVsbG8gZGVhciBVLUJvb3QgbWFpbnRhaW5lcnMgYW5kIGRldmVsb3BlcnMsDQoNCkkgaG9w
+ZSB5b3UgYXJlIGFsbCBkb2luZyB3ZWxsLg0KDQpEdXJpbmcgb25lIG9mIG91ciBhc3Nlc3Nt
+ZW50cyB3ZSBmb3VuZCBhIGxvdyBpbXBhY3QgYnVmZmVyIG92ZXJyZWFkIA0KdnVsbmVyYWJp
+bGl0eSBpbiB0aGUgREhDUCBpbXBsZW1lbnRhdGlvbiBvZiBVLUJvb3QuDQoNCkFjY29yZGlu
+ZyB0byB0aGUgcG9saWN5IG9mIHRoZSBwcm9qZWN0IFswXSB0aGUgYXR0YWNoZWQgdnVsbmVy
+YWJpbGl0eSANCmFkdmlzb3J5IGlzIGhlcmVieSBkaXNjbG9zZWQgdG8gdGhlIHB1YmxpYyBt
+YWlsaW5nIGxpc3QgYW5kIHRoZSANCmFjY29yZGluZyBtYWludGFpbmVycy4NCg0KV2Ugd2ls
+bCBwdWJsaXNoIHRoZSBhZHZpc29yeSBpbiB0aGUgbmV4dCBmZXcgaG91cnMgb24gb3VyIHdl
+YnNpdGUgYXMgDQp3ZWxsLiAoc2VlIGxpbmtzIGluIHRoZSBhZHZpc29yeSkNCg0KSWYgeW91
+IGhhdmUgYW55IHF1ZXN0aW9ucyBmZWVsIGZyZWUgdG8gY29udGFjdCBtZS4NCg0KQmVzdCBS
+ZWdhcmRzDQoNClNpbW9uIERpZXBvbGQNCg0KDQpbMF06IGh0dHBzOi8vZG9jcy51LWJvb3Qu
+b3JnL2VuL2xhdGVzdC9kZXZlbG9wL3NlY3VyaXR5Lmh0bWwNCg0KLS0gDQpTaW1vbiBEaWVw
+b2xkDQpTZWN1cml0eSBDb25zdWx0YW50DQpPU0NQDQoNClNDSFVUWldFUksgR21iSCwgUGZh
+cnJlci1XZWnDny1XZWcgMTIsIDg5MDc3IFVsbSwgR2VybWFueQ0KWmVydGlmaXppZXJ0IC8g
+Q2VydGlmaWVkIElTTyAyNzAwMSwgOTAwMSBhbmQgVElTQVgNCg0KUGhvbmUgKzQ5IDczMSA5
+NzcgMTkxIDANCk1vYmlsZSArNDkgMTUxIDQzMSA0NDYgNjcNCnNkaWVwb2xkQHNjaHV0endl
+cmsuY29tIC8gd3d3LnNjaHV0endlcmsuY29tDQoNCkdlc2Now6RmdHNmw7xocmVyIC8gTWFu
+YWdpbmcgRGlyZWN0b3JzOg0KSmFrb2IgUGlldHprYSwgTWljaGFlbCBTY2jDpGZlcg0KDQpB
+bXRzZ2VyaWNodCBVbG0gLyBIUkIgNzI3MzkxDQpEYXRlbnNjaHV0eiAvIERhdGEgUHJvdGVj
+dGlvbiB3d3cuc2NodXR6d2Vyay5jb20vZGF0ZW5zY2h1dHoNCg0K
+--------------wLWC2UdnzG6GMal60WKPEPK4
+Content-Type: text/plain; charset=UTF-8; name="SCHUTZWERK-SA-2024-004.txt"
+Content-Disposition: attachment; filename="SCHUTZWERK-SA-2024-004.txt"
+Content-Transfer-Encoding: base64
 
-Regards
-Romain
+LS0tLS1CRUdJTiBQR1AgU0lHTkVEIE1FU1NBR0UtLS0tLQpIYXNoOiBTSEE1MTIKClRpdGxl
+Cj09PT09CgpTQ0hVVFpXRVJLLVNBLTIwMjQtMDA0OiBCdWZmZXIgb3ZlcnJlYWQgaW4gVS1C
+b290IERIQ1AKClN0YXR1cwo9PT09PT0KClBVQkxJU0hFRAoKVmVyc2lvbgo9PT09PT09Cgox
+LjAKCkNWRSByZWZlcmVuY2UKPT09PT09PT09PT09PQoKQ1ZFLTIwMjQtNDIwNDAKCkxpbmsK
+PT09PQoKaHR0cHM6Ly93d3cuc2NodXR6d2Vyay5jb20vYWR2aXNvcmllcy9zY2h1dHp3ZXJr
+LXNhLTIwMjQtMDA0LwoKVGV4dC1vbmx5IHZlcnNpb246Cmh0dHBzOi8vd3d3LnNjaHV0endl
+cmsuY29tL2Fkdmlzb3JpZXMvU0NIVVRaV0VSSy1TQS0yMDI0LTAwNC50eHQKCkFmZmVjdGVk
+IHByb2R1Y3RzL3ZlbmRvcgo9PT09PT09PT09PT09PT09PT09PT09PT0KCkRhcyBVLUJvb3Qs
+IGh0dHBzOi8vZG9jcy51LWJvb3Qub3JnCgpTdW1tYXJ5Cj09PT09PT0KCkRhcyBVLUJvb3Qg
+KFUtQm9vdCkgaXMgYSB3aWRlc3ByZWFkIG9wZW4tc291cmNlIGJvb3QgbG9hZGVyIHVzZWQg
+aW4gZW1iZWRkZWQgZGV2aWNlcyB0byBwZXJmb3JtIHZhcmlvdXMgbG93LWxldmVsIGhhcmR3
+YXJlIGluaXRpYWxpemF0aW9uIHRhc2tzIGFuZCBib290IHRoZSBkZXZpY2UncyBvcGVyYXRp
+bmcgc3lzdGVtIGtlcm5lbC4gRHVyaW5nIGFuIGVtYmVkZGVkIHNlY3VyaXR5IGFzc2Vzc21l
+bnQsIHdlIGlkZW50aWZpZWQgYSBidWZmZXIgb3ZlcnJlYWQgdnVsbmVyYWJpbGl0eSAoQ1dF
+LTEyNikgaW4gdGhlIERIQ1AgaW1wbGVtZW50YXRpb24gb2YgVS1Cb290IHRoYXQgY291bGQg
+bGVhayBtZW1vcnkgb250byB0aGUgbmV0d29yay4gVGhlIGFtb3VudCBvZiBsZWFrZWQgZGF0
+YSBkZXBlbmRzIG9uIHRoZSBsYXRlciB1c2Ugb2YgdGhlIGhvc3RuYW1lLCBETlMtc2VydmVy
+IElQLCBnYXRld2F5IElQLCBvciBvdGhlciBESENQIG9wdGlvbnMgaW4gdW5lbmNyeXB0ZWQg
+bmV0d29yayB0cmFmZmljLiBUaGUgdnVsbmVyYWJpbGl0eSBoYXMgYmVlbiBwcmVzZW50IHNp
+bmNlIHRoZSAiSW5pdGlhbCByZXZpc2lvbiIgY29tbWl0ICgzODYxYWE1KSBmcm9tIDIwMDIu
+CgpSaXNrCj09PT0KCkFuIGF0dGFja2VyIHdpdGggYWNjZXNzIHRvIHRoZSBsb2NhbCBuZXR3
+b3JrIGFuZCBmYXN0ZXIgcmVzcG9uc2UgdGltZXMgdGhhbiB0aGUgZGVmYXVsdCBESENQIHNl
+cnZlciBjYW4gdHJpZ2dlciBhIG1lbW9yeSBsZWFrIGJ5IHJlc3BvbmRpbmcgd2l0aCBtYWxp
+Y2lvdXMgREhDUCBvZmZlcnMgdG8gYSB2dWxuZXJhYmxlIFUtQm9vdCBESENQIGNsaWVudC4g
+SW4gdGhlIGN1cnJlbnQgaW1wbGVtZW50YXRpb24sIG9ubHkgNCBCeXRlcyBvZiBkYXRhIGNh
+biBiZSBsZWFrZWQgdmlhIGdhdGV3YXkgb3IgRE5TIHNlcnZlciBhZGRyZXNzLiBXaGVuIG5l
+dF9ob3N0bmFtZSB3b3VsZCBiZSB1c2VkIGFuZCBhbHNvIHNlbnQgb3ZlciB0aGUgbmV0d29y
+aywgMzIgQnl0ZXMgY291bGQgYmUgcmV0cmlldmVkLiBXaGVuIHRoZSBicF92ZW5kIGZpZWxk
+IGlzIGZpbGxlZCB3aXRoIHplcm9lcyBiZXNpZGVzIHRoZSBtYWdpYyBudW1iZXIsIGl0IGNv
+dWxkIGFsc28gbGVhZCB0aGUgbG9vcCB0byBjb250aW51ZSBvdXRzaWRlIHRoZSBwYWNrZXQg
+dG8gcHJvY2VzcyBkYXRhLiBUaGlzIGNhbiBjYXVzZSBmdXJ0aGVyIGRhdGEgdG8gYmUgbGVh
+a2VkIHdoZW4gdmFsdWVzIGxpa2UgMHgxLDB4MywweDYsIGFuZCAweDEyIGFyZSBwcmVzZW50
+IGluIHRoYXQgZGF0YS4gV2hlbiBmdXJ0aGVyIHZ1bG5lcmFiaWxpdGllcyBjYW4gYmUgZm91
+bmQgdGhleSBtaWdodCBiZSBjb21iaW5lZCB0byBhY2hpZXZlIGZ1cnRoZXIgaGFybWZ1bCBp
+bXBhY3QgdG8gdGhlIHN5c3RlbS4KCkRlc2NyaXB0aW9uCj09PT09PT09PT09CgpBZnRlciBV
+LUJvb3Qgc2VuZHMgYW4gaW5pdGlhbCBESENQIHJlcXVlc3QsIHRoZSB2dWxuZXJhYmxlIGJv
+b3RwX2hhbmRsZXIgZ2V0cyByZWdpc3RlcmVkIGFzIGEgY2FsbGJhY2sgZm9yIGluY29taW5n
+IHBhY2tldHMuIFRoZSBoYW5kbGVyIGZpcnN0IGNoZWNrcyBpZiB0aGUgcmVjZWl2ZWQgcGFj
+a2V0IGlzIHRoZSBleHBlY3RlZCByZXBseSBwYWNrZXQuIElmIFZFTkRPUl9NQUdJQyBpcyBp
+biB0aGUgZmlyc3QgZm91ciBieXRlcyBvZiBicC0+YnBfdmVuZCwgdGhlIGFkZHJlc3Mgb2Yg
+YnAtPmJwX3ZlbmRbNF0gYW5kIHRoZSB0b3RhbCBsZW5ndGggb2YgdGhlIHBhY2tldCBpcyBw
+YXNzZWQgdG8gYm9vdHBfcHJvY2Vzc192ZW5kb3IgKG5ldC9ib290cC5jOjM4MSkgd2l0aG91
+dCBiZWluZyByZWR1Y2VkIHRvIGxlbi0ob2Zmc2V0b2Yoc3RydWN0IGJvb3RwX2hkcixicF92
+ZW5kKSs0KS4gVGhlcmUgaXMgYWxzbyBhIG1pc3NpbmcgY2hlY2sgd2hldGhlciB0aGUgZmly
+c3QgZm91ciBieXRlcyBvZiBicC0+cGJfdmVuZFtdIGFyZSBpbiByYW5nZSBvZiB0aGUgcGFj
+a2V0IGxlbmd0aCBiZWZvcmUgcmV0cmlldmluZyB0aGVtIHRvIGNvbXBhcmUgd2l0aCBodG9u
+bChWRU5ET1JfTUFHSUMpLgoKSW4gYm9vdHBfcHJvY2Vzc192ZW5kb3IsIGFuIGluY29ycmVj
+dCBlbmQgYWRkcmVzcyBpcyB0aGVuIGNhbGN1bGF0ZWQgYmFzZWQgb24gdGhlIGZ1bGwgcGFj
+a2V0IGxlbmd0aCAobmV0L2Jvb3RwLmM6MzEyKSBpbnN0ZWFkIG9mIHRoZSByZXN0IG9mIHRo
+ZSBicF92ZW5kIGJ1ZmZlciBzaXplLiBUaGVuLCB0aGUgZnVuY3Rpb24gaW5jcmVhc2VzIHRo
+ZSBleHQgcG9pbnRlciB1bnRpbCBpdCBubyBsb25nZXIgcG9pbnRzIHRvIHplcm8gYnl0ZXMg
+d2l0aGluIHRoZSB0b28tbG9uZyBidWZmZXIgcmFuZ2Ugb3Igd2hlbiBvbmUgYnl0ZSBpcyAw
+eGZmLiBXaGVuIGEgbm9uZS16ZXJvIHZhbHVlIGlzIGRpc2NvdmVyZWQgdGhlIGV4dCBwb2lu
+dGVyIGlzIHBhc3NlZCB0byBib290cF9wcm9jZXNzX3ZlbmRvcl9maWVsZC4KCkluIGJvb3Rw
+X3Byb2Nlc3NfdmVuZG9yX2ZpZWxkLCB0aGUgZGUtcmVmZXJlbmNlZCB2YWx1ZSBvZiB0aGUg
+cGFzc2VkIHBvaW50ZXIgaXMgdXNlZCB0byBzZWxlY3QgdGhlIGNhc2UgZm9yIHByb2Nlc3Np
+bmcgdGhlIGZpZWxkLCBhbmQgaXRzIGxlbmd0aCBpcyBkZS1yZWZlcmVuY2VkIGZyb20gZXh0
+KzEuIEJhc2VkIG9uIHRoZSBzZWxlY3RlZCBjYXNlLCB2YWx1ZXMgYXJlIHRoZW4gY29waWVk
+IHRvIHZhcmlhYmxlcyBhbmQgYnVmZmVycyBsaWtlIG5ldF9nYXRld2F5LnNfYWRkciBvciBu
+ZXRfaG9zdG5hbWUgZnJvbSBleHQrMi4gVGhlIGNvcGllZCBsZW5ndGhzIGFyZSBvbmx5IGxp
+bWl0ZWQgYnkgdGhlIHNpemUgb2YgdGhlaXIgZGVzdGluYXRpb24uIFRoZSBlbmQgb2YgdGhl
+IGJwX3ZlbmQgc3RydWN0dXJlIG9yIHRoZSBlbmQgb2YgdGhlIHBhY2tldCBpcyBuZXZlciBj
+aGVja2VkIGluIGJvb3RwX3Byb2Nlc3NfdmVuZG9yX2ZpZWxkLgoKVGhpcyBhbGxvd3MgYW4g
+YXR0YWNrZXIsIHdobyBjYW4gcmVzcG9uZCB0byBESENQIHJlcXVlc3RzLCB0byBjcmFmdCBh
+IHBhY2tldCB0aGF0IGNhdXNlcyB0aGUgY29kZSB0byBjb3B5IHRoZSBjb250ZW50cyBvZiB0
+aGUgdGFyZ2V0J3MgUkFNIGRpcmVjdGx5IGZvbGxvd2luZyB0aGUgcmVjZWl2ZWQgcGFja2V0
+IGludG8gcGFyYW1ldGVycy4gVGhlc2UgcGFyYW1ldGVycyBhcmUgc2VudCB2aWEgdGhlIG5l
+dHdvcmsgZHVyaW5nIGxhdGVyIHVzZSwgbGVha2luZyB0aGUgUkFNIGNvbnRlbnQgdG8gdGhl
+IGF0dGFja2VyLgoKU29sdXRpb24vTWl0aWdhdGlvbgo9PT09PT09PT09PT09PT09PT09CgpX
+ZSByZWNvbW1lbmQgcHJvdmlkaW5nIGFuIGFkZXF1YXRlIGxlbmd0aCB0byBib290cF9wcm9j
+ZXNzX3ZlbmRvciB0byBwcmV2ZW50IHRoZSB3aGlsZSBsb29wIGZyb20gc3RlcHBpbmcgb3V0
+c2lkZSB0aGUgcGFja2V0IGZyYW1lIGFuZCBjaGVja2luZyBpbiBib290cF9wcm9jZXNzX3Zl
+bmRvcl9maWVsZCBpZiB0aGUgY29waWVkIGRhdGEgaXMgc3RpbGwgd2l0aGluIHRoZSBwYWNr
+ZXQgc3RydWN0dXJlJ3MgcmFuZ2UuCgpEaXNjbG9zdXJlIHRpbWVsaW5lCj09PT09PT09PT09
+PT09PT09PT0KCjIwMjQtMDYtMjE6IFZ1bG5lcmFiaWxpdHkgZGlzY292ZXJlZAoyMDI0LTA4
+LTE5OiBWdWxuZXJhYmlsaXR5IHJlcG9ydGVkIHRvIHB1YmxpYyBtYWlsaW5nIGxpc3QgYnkg
+cmVxdWVzdCBvZiBtYWludGFpbmVyLgoKQ29udGFjdC9DcmVkaXRzCj09PT09PT09PT09PT09
+PQoKVGhlIHZ1bG5lcmFiaWxpdHkgd2FzIGRpc2NvdmVyZWQgZHVyaW5nIGFuIGFzc2Vzc21l
+bnQgYnkgU2ltb24gRGllcG9sZCBvZiBTQ0hVVFpXRVJLIEdtYkguCgpSZWZlcmVuY2VzCj09
+PT09PT09PT0KCgpEaXNjbGFpbWVyCj09PT09PT09PT0KClRoZSBpbmZvcm1hdGlvbiBwcm92
+aWRlZCBpbiB0aGlzIHNlY3VyaXR5IGFkdmlzb3J5IGlzIHByb3ZpZGVkICJhcyBpcyIgYW5k
+CndpdGhvdXQgd2FycmFudHkgb2YgYW55IGtpbmQuIERldGFpbHMgb2YgdGhpcyBzZWN1cml0
+eSBhZHZpc29yeSBtYXkgYmUgdXBkYXRlZAppbiBvcmRlciB0byBwcm92aWRlIGFzIGFjY3Vy
+YXRlIGluZm9ybWF0aW9uIGFzIHBvc3NpYmxlLiBUaGUgbW9zdCByZWNlbnQKdmVyc2lvbiBv
+ZiB0aGlzIHNlY3VyaXR5IGFkdmlzb3J5IGNhbiBiZSBmb3VuZCBhdCBTQ0hVVFpXRVJLIEdt
+YkgncyB3ZWJzaXRlCiggaHR0cHM6Ly93d3cuc2NodXR6d2Vyay5jb20gKS4KClNDSFVUWldF
+UksgQWR2aXNvcmllczogaHR0cHM6Ly93d3cuc2NodXR6d2Vyay5jb20vYmxvZy90YWdzL2Fk
+dmlzb3JpZXMvCgpTQ0hVVFpXRVJLIEFkdmlzb3J5IFBvbGljeTogaHR0cHM6Ly93d3cuc2No
+dXR6d2Vyay5jb20vZW4vYWR2aXNvcmllcy8KLS0tLS1CRUdJTiBQR1AgU0lHTkFUVVJFLS0t
+LS0KCmlRSk9CQUVCQ2dBNEZpRUVnTHNnN09qL3dZM0xTRjg3R3JYZmtUSVhMcnNGQW1iQytZ
+Z2FIR0ZrZG1semIzSnAKWlhOQWMyTm9kWFI2ZDJWeWF5NWpiMjBBQ2drUUdyWGZrVElYTHJ0
+U2VSQUFpNk9yd0hCcGJGZ0tseXFST1Fudwp6WXhtSFRZQmlXekJFRW1JMXpOK2lOYjV1UWxu
+WlhnQm9vZGJFbmVpUm1WUURTaVQ0elQvRFdlM0VHVjJUbFJSCjU2aEVJR3ZrdmxlVVJxQ2p3
+UlllWW5QRjNFZi9YTVR2VHUveDA4aDhVZkdyN1hOd2h3Q3BBTnhVVEU3YUkwMWIKalpMYTRq
+RHY4dnBOZDdKS05GMzJTMkFrNkdSamZFRTlhRUF4VUtsaU5YQ0E1U1UxZ1l2T1dRK0JKMG90
+aDdmTgpncmtUS2ZmbHRrOGRVQkZ5OFRzcnhjQUc1eWU0ZjFEdm01MWRVOEpOUEJMa21vdU9y
+RXZYMUs0VVRqdkF5RDhlCmJDbjJkWHMyckRMZnl3clRQVjBrMnpqM0FQWml3aFl4TkEzTWFU
+VUdzY1pBSVVNbjNXRS9jVXlZRHBRRHFPWXgKd3Jaeno5SzU5bSt4OEY2YzFsQlV4bG1VM3Q5
+WjE1L2kvdEw2S3JvcGIrSER4aldhTENaUEczZHpkbFI1NC9mbgpndnpTMzkzRk5XYWtOTkFK
+SXFOMmp2dm9sK3p2SkduMnJzU3NmcDVDUEVkclFFSGd2UWEwVGtCT3BkdEZaL2gxCm11VkZ3
+ajl5RHVwMDd5U3RUWFJKSGpnMldDSDBMZEw1eCttRGZjQnNwakxmbHBWUC8wWWorTW5SOGUz
+RWI3di8KQ2IxMlBlQkh3dzlWT2JVaGdiTWVjYW5TbjZFcGY3TmM1YTV3SWg1a0VXS292aUJZ
+TlkvMGN1N0dETis3MFBLNApKaEQ4NlR3dzVSRkpKZmtMY0pxbENBTUM0QWtBYzdTcTVGUzdX
+VEs1SngzWW1oLytMc3VoeDlFTnEzOFZ5VkdoCnRGZTNWMGpvVFV4ZzdZeTc4UG9FT3JzPQo9
+WEtabwotLS0tLUVORCBQR1AgU0lHTkFUVVJFLS0tLS0K
+--------------wLWC2UdnzG6GMal60WKPEPK4
+Content-Type: application/pgp-keys; name="OpenPGP_0x4150F146B88CA524.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x4150F146B88CA524.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
+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3D
+=3Dl9Xn
+-----END PGP PUBLIC KEY BLOCK-----
 
-Le sam. 17 ao=C3=BBt 2024 =C3=A0 17:57, Simon Glass <sjg@chromium.org> a =
-=C3=A9crit :
+--------------wLWC2UdnzG6GMal60WKPEPK4--
 
-> +Peter Robinson
-> +Matthias Brugger
->
-> Hi Romain,
->
-> On Sat, 17 Aug 2024 at 07:01, Romain Crausaz <crausaz.romain@gmail.com>
-> wrote:
-> >
-> > Hi all,
-> >
-> >
-> >
-> > I am currently facing an issue with U-Boot and a raspberry pi CM4. Here
-> is
-> > the setup:
-> >
-> >
-> >
-> > 1. Yocto Scarthgap
-> >
-> > 2. U-Boot 2024.01
-> >
-> > 3. rpi_arm64_defconfig
-> >
-> >
-> >
-> > I am trying to access the i2c bus from U-Boot. I have been trying to
-> modify
-> > the device tree which is referenced as
-> > =E2=80=9CCONFIG_DEFAULT_DEVICE_TREE=3D"bcm2711-rpi-4-b=E2=80=9D=E2=80=
-=9D in the defconfig without
-> > success. I can remove everything, set all nodes to disabled and I see n=
-o
-> > change in U-Boot (I am using dm commands to check the status of the
-> > peripherals).
-> >
-> >
-> >
-> > It seems that with the rpi, U-Boot will only configure itself against t=
-he
-> > device tree passed by the bootloader of RPI. Could someone confirm this=
- ?
->
-> Yes. It isn't quite obvious, but this is a clue:
->
-> Core:  211 devices, 16 uclasses, devicetree: board
->
-> 'board' means that the board can do whatever it wants.
->
-> >
-> >
-> >
-> > Is there a way to configure / modify U-Boot to use its own devicetree a=
-nd
-> > simply pass the device tree generated by the rpi bootloader to the
-> kernel ?
-> >
-> >
-> >
-> > Because the second issue is that the i2c driver defined in the device
-> tree
-> > passed to u-boot is not available in u-boot.
-> >
-> >
-> >
-> > Thanks for your help
->
-> Since OF_HAS_PRIOR_STAGE is a hidden option, you cannot disable it in
-> the defconfig. The only way I know of is to comment out the 'imply
-> OF_HAS_PRIOR_STAGE' in ARCH_BCM283X in arch/arm/Kconfig
->
-> For me, that stops the rpi_4 booting, so perhaps the devicetree is
-> out-of-date or ft_board_setup() is doing something strange, or
-> something else. The in-tree devicetree may have got out-of-date, so
-> perhaps use the Linux one.
->
-> Regards,
-> Simon
->
+--------------0e3ReY3vtX0VdUsZXiYEj06V--
+
+--------------943AsCtZH76dO4hocIJRXNzq
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEE92zh5YQGLm28qEO2QVDxRriMpSQFAmbDELgFAwAAAAAACgkQQVDxRriMpSQ1
+mw/+JePeKrCxQWn2Ot6EnZ4f5MvzHsmvgKzGLf6AHG2nbjbP0w7FpGKTn9xKJuVdJjaTf/WIGP87
+/2/6GfJAZaWS+L1zC9XcMep4Qm2YVuHzxVzg9RezwXoZCgev3yZTeDRvskoVGivJ1rWk4rLS2Lwp
+qN0AHz/ij0kjmjb1DYGGZMP8tLIzrWqlaIzF/1K2Oa6CD8DELbc3NUQYKjyV3xOUnW8B2HOWk0PD
+YtfhLzrwJv5BTshSfqLYD3VpC0Pz7B9nxxfHpyVk7XpjWqiyF1WJtn1/926KHcBBmtvm+8NpQQgx
+uoIj61+PUF6mehqiUalKOyE7qwg+fOsxpWLDHN9kMl00rmLbgX2cdaI+bBjTbMLgbGTe29PgR3UY
+mIJX9rQT7f6CiErP1CvVjK6i0B7dOrwWzk3NgNgZP1pZ2BbntwqRTplpn3RJmMwXcSbp1uCwUbpI
+LbJiEAbwtYpBNGeUDdzdtxn+pAYTd/Wl/KbfBDmJ9IvY6OkIywkrHTIZ33RGER7Yy3DT5u4pCrVV
+oyMglaCt+pfNfPL042cxOVnTFgrx+UJh6iPKA9tkisQ1Xf4KdrZcwoXhphxmO/cYoU8TrlcWk1av
+YEk8NOGiKpRtGZxXmUTlUd8NfGAn+Qviy0PTnupEbFPIjsydkGfLdhkZhcJhsDHTewspeRlRCY7h
+kfo=
+=QzLx
+-----END PGP SIGNATURE-----
+
+--------------943AsCtZH76dO4hocIJRXNzq--
