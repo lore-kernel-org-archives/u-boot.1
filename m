@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB4FDC52D6F
-	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 15:03:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFC0DC3DA4A
+	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 16:26:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8342C88CFB;
-	Mon, 19 Aug 2024 17:02:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 189AD88CC5;
+	Mon, 19 Aug 2024 18:26:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ef/RIwob";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WsBdEpcd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1727388CE8; Mon, 19 Aug 2024 17:02:14 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 72A8D88CBF; Mon, 19 Aug 2024 18:26:35 +0200 (CEST)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13E5F871C7
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 17:02:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E080E88AA8
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 18:26:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=macroalpha82@gmail.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-70930972e19so1398296a34.3
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 08:02:11 -0700 (PDT)
+ spf=pass smtp.mailfrom=hiagofranco@gmail.com
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-7afd1aeac83so3634876a12.0
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 09:26:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724079730; x=1724684530; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mCw5MPcxcWw0TZEM4gndlYGDMLadeweGjwzY42FV5nY=;
- b=Ef/RIwobzah2HKVBqSXfUZ+CBvLj9eXZpAd9SuD0o9DGt6AumxZ5ichirpF7S7649l
- cmv22AplU/SHzh6hnwCbHlxC+mOGeFsM7Zf8ihKOtrFoUrbkGvU4I94ZoVw77WHxSiRp
- apvHiEAhy/RxcX42OvGUJIJYq1Qg8VO+y3DBVvXcgYfUrQvuawfSicA9iSje8gs2FNiH
- QJ+yOHWwWlD4Yzttduen5U7zvHY+wROrlGMmcT/k1Llkhdwnc3Je/OI7pT50RX/SZAUr
- bvuBsN8BlvkZZuQVC4Vea7nZ7VbBqhfKCYNXcokxLc1Ws+zSxjIO0sezuJDl9euO0EB/
- nFpQ==
+ d=gmail.com; s=20230601; t=1724084791; x=1724689591; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=dw0UKe0sJZx8xyZ2TMhiyhhu1s6wyqBt0eNwQTd8Hh4=;
+ b=WsBdEpcd+sqWFxQuxcdEC86wAf2o1ZIbMkj4AQ17T3yhg/O7uJowyRJEvbmNdkaCsb
+ JO4wfUVGvTmIzvCL40r9Y5flUs/WYAGm7Fx2X13wKI29eq+e4Dk3LkPGgdXyVvlY3j7t
+ P327+y5fZTok3zgZ6FAABdmZll0FXKVoAQ7u8GkuQWLc4Ki99GHI9ZfyIJLawexlaxSA
+ y51whupRCU6i28F+KJD5BiCR9Hqj6Ho+H+9h/v67QGemeZckAI2TQ2ooyeQK8aS4VSgy
+ vLLGUIHs2BmfF44Zgf9QzBO6GSXWctGCfsiCVyP4Qa2rknLKbUnex8ZNom+HoZ0cvXDE
+ 0neA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724079730; x=1724684530;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mCw5MPcxcWw0TZEM4gndlYGDMLadeweGjwzY42FV5nY=;
- b=iVTA7wiLIoKPXCoaF9AdUePQA/0iMMxDlTPT/s5TGKJT5lKqpc/DAYK/lxAi/Na26f
- 4C21c1XRvmHksBidZzHEHgdLxSg3BIM3qm1HAGLSAFOOR3409lmQtjAzGtNwZ5Y/PIMH
- 60ocJuFYfZN9ytLWgkUmm9n81lTaZHaRMAMEP/s5y3us81rCgFip38H1k/aNmJeMKXDa
- DlJJEoYFXYF2kMjGZontMw/wveAb6Si22LPRajDJqkGs/zOfu2XfvKe+EluTxvBrp6HH
- gSckvQ2yJ5uT+klRx6aWaBllKflzew0RUQV0HjOeGpigdJj5rq0lJMNun7Vivpq5LJep
- Qzyg==
-X-Gm-Message-State: AOJu0Yzcg6tKSF37lgysvUtCCrGUC+tqygK6EDqz1OgksDL3HzdTKyIs
- NGwxOO6Os+riP1ba2KC254K8snHiCbutoSPtbz20gIJ6y2HEyFqHqW2Tzw==
-X-Google-Smtp-Source: AGHT+IEH+ruuVKkA8iT6/E82AGwwd2EomO1XBLJ7JHUuhvoF4PutUeN0Pb51cqxhR/LZmlq4b0O+rQ==
-X-Received: by 2002:a05:6870:a688:b0:25d:fb57:db43 with SMTP id
- 586e51a60fabf-27033fb8dc1mr8505844fac.12.1724079729537; 
- Mon, 19 Aug 2024 08:02:09 -0700 (PDT)
-Received: from localhost.localdomain ([2600:1700:fb0:1bcf::54])
+ d=1e100.net; s=20230601; t=1724084791; x=1724689591;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dw0UKe0sJZx8xyZ2TMhiyhhu1s6wyqBt0eNwQTd8Hh4=;
+ b=b09DT8vuL+ifB/om3t8UA+mIbOjAo/tOHNOten9XKh/Hk0+371n8FOiLeyc88hE2Ob
+ 15+tspt3xFTTX5FMNOGRQgSl4og/y/rR+BvoPb+N7kHG52md/tK8pvQtdS8rCOhFOmZF
+ D7neWlQtzzI4fLnxAJqorm2o4bW3/rYbZBjcKH/kGi9zByl0HbLzdSCSp6CBFBNTAvNy
+ NPV8ecbXKzx22CvHdEXik/4RQIM1kUCP8KQyYGKQK/Rj+n/zm2EX66bFNpF5A+OvhGSY
+ Gxl0N1jn7G+mT+UU0uibU9RrBZl575CiqO3/344uScSIzM1Ht7m9w3npwnXxYiOvRqxO
+ cnXg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUO57qsBUknUjqh1nzN2Epb2yQARy2CU/QVk1TKdeQTO6st7+olp1TKz3iywm4B912QGEQZoD8u9HeJU/jX+Ffh4t3anw==
+X-Gm-Message-State: AOJu0YzQTBhUFfthnG8gXuiqaohhDLSNaB1ueBf55CiTyahjZ/aEkmxz
+ qVjlMl1tPMdHyJXZrzo8OEGn7tq/oDcE+NpQUuJIiIbw7Dc5HP/q
+X-Google-Smtp-Source: AGHT+IEQqG2gADoZxHQxtUAVRVKCKsBJS0uDMkOiLMCAwD0uk0dmnHGz3mB+M8gnwnxFq97h/3dYrw==
+X-Received: by 2002:a17:90a:5d89:b0:2d3:acbd:307b with SMTP id
+ 98e67ed59e1d1-2d47321cf79mr248823a91.10.1724084790648; 
+ Mon, 19 Aug 2024 09:26:30 -0700 (PDT)
+Received: from hiago-nb.corp.toradex.com ([67.159.246.222])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-27004432d18sm2945189fac.7.2024.08.19.08.02.08
+ 98e67ed59e1d1-2d3e2b65b85sm7456675a91.2.2024.08.19.09.26.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Aug 2024 08:02:09 -0700 (PDT)
-From: Chris Morgan <macroalpha82@gmail.com>
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, jernej.skrabec@gmail.com, neil.armstrong@linaro.org,
- hdegoede@redhat.com, andre.przywara@arm.com, jagan@amarulasolutions.com,
- trini@konsulko.com, ryan@testtoast.com, iuncuim@gmail.com,
- sumit.garg@linaro.org, Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH V2 9/9] sunxi: Add support for Anbernic RG35XX-2024
-Date: Mon, 19 Aug 2024 09:59:38 -0500
-Message-Id: <20240819145938.503221-10-macroalpha82@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240819145938.503221-1-macroalpha82@gmail.com>
-References: <20240819145938.503221-1-macroalpha82@gmail.com>
+ Mon, 19 Aug 2024 09:26:30 -0700 (PDT)
+From: Hiago De Franco <hiagofranco@gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Greg Malysa <greg.malysa@timesys.com>,
+ Bo Gan <ganboing@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Ian Roberts <ian.roberts@timesys.com>,
+ Jesse Taube <mr.bossman075@gmail.com>,
+ John Keeping <jkeeping@inmusicbrands.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Shengyu Qu <wiagn233@outlook.com>, u-boot@lists.denx.de,
+ Hiago De Franco <hiago.franco@toradex.com>
+Subject: [PATCH] tools/scripts/Kconfig: Update references from
+ kconfig-language.txt to rst
+Date: Mon, 19 Aug 2024 13:24:49 -0300
+Message-Id: <20240819162449.101449-1-hiagofranco@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,99 +97,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Chris Morgan <macromorgan@hotmail.com>
+From: Hiago De Franco <hiago.franco@toradex.com>
 
-The Anbernic RG35XX series of devices are based around an Allwinner
-H700 SoC with 1GB of RAM, 2 SD cards, and multiple input buttons.
+The Linux kernel documentation has transitioned from using
+kconfig-language.txt to kconfig-language.rst. Therefore update all
+occurrences of kconfig-language.txt.
 
-This bootloader has been tested on the Anbernic RG35XX-2024 and
-RG35XX-H, but should be suitable for the entire lineup of H700 based
-devices.
-
-A future series of updates will add board selection logic to identify
-and load the correct device tree automatically.
-
-Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
+Signed-off-by: Hiago De Franco <hiago.franco@toradex.com>
 ---
- board/sunxi/MAINTAINERS                |  5 +++
- configs/anbernic_rg35xx_h700_defconfig | 52 ++++++++++++++++++++++++++
- 2 files changed, 57 insertions(+)
- create mode 100644 configs/anbernic_rg35xx_h700_defconfig
+ Kconfig                                            |  2 +-
+ scripts/kconfig/symbol.c                           |  2 +-
+ .../tests/err_recursive_dep/expected_stderr        | 14 +++++++-------
+ tools/buildman/kconfiglib.py                       | 10 +++++-----
+ 4 files changed, 14 insertions(+), 14 deletions(-)
 
-diff --git a/board/sunxi/MAINTAINERS b/board/sunxi/MAINTAINERS
-index 4ad77c75f5..84799879e8 100644
---- a/board/sunxi/MAINTAINERS
-+++ b/board/sunxi/MAINTAINERS
-@@ -132,6 +132,11 @@ M:	Paul Kocialkowski <contact@paulk.fr>
- S:	Maintained
- F:	configs/Ampe_A76_defconfig
+diff --git a/Kconfig b/Kconfig
+index 82df59f176ec..29c42249a221 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -1,6 +1,6 @@
+ #
+ # For a description of the syntax of this configuration file,
+-# see the file Documentation/kbuild/kconfig-language.txt in the
++# see the file Documentation/kbuild/kconfig-language.rst in the
+ # Linux kernel source tree.
+ #
+ mainmenu "U-Boot $(UBOOTVERSION) Configuration"
+diff --git a/scripts/kconfig/symbol.c b/scripts/kconfig/symbol.c
+index 703b9b899ee9..5245804bb337 100644
+--- a/scripts/kconfig/symbol.c
++++ b/scripts/kconfig/symbol.c
+@@ -1117,7 +1117,7 @@ static void sym_check_print_recursive(struct symbol *last_sym)
+ 	}
  
-+ANBERNIC RG35XX-2024
-+M:	Chris Morgan <macromorgan@hotmail.com>
-+S:	Maintained
-+F:	configs/anbernic_rg35xx_h700_defconfig
-+
- BANANAPI M1 PLUS
- M:	Jagan Teki <jagan@amarulasolutions.com>
- S:	Maintained
-diff --git a/configs/anbernic_rg35xx_h700_defconfig b/configs/anbernic_rg35xx_h700_defconfig
-new file mode 100644
-index 0000000000..6ea2f45d2f
---- /dev/null
-+++ b/configs/anbernic_rg35xx_h700_defconfig
-@@ -0,0 +1,52 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_SUNXI=y
-+CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun50i-h700-anbernic-rg35xx-2024"
-+CONFIG_SPL=y
-+CONFIG_DRAM_SUN50I_H616_DX_ODT=0x08080808
-+CONFIG_DRAM_SUN50I_H616_DX_DRI=0x0e0e0e0e
-+CONFIG_DRAM_SUN50I_H616_CA_DRI=0x0e0e
-+CONFIG_DRAM_SUN50I_H616_ODT_EN=0x7887bbbb
-+CONFIG_DRAM_SUN50I_H616_TPR2=0x1
-+CONFIG_DRAM_SUN50I_H616_TPR6=0x40808080
-+CONFIG_DRAM_SUN50I_H616_TPR10=0x402f6633
-+CONFIG_DRAM_SUN50I_H616_TPR11=0x1b1f1e1c
-+CONFIG_DRAM_SUN50I_H616_TPR12=0x06060606
-+CONFIG_MACH_SUN50I_H616=y
-+CONFIG_RESERVE_ALLWINNER_BOOT0_HEADER=y
-+CONFIG_SUNXI_DRAM_H616_LPDDR4=y
-+CONFIG_DRAM_CLK=672
-+CONFIG_R_I2C_ENABLE=y
-+CONFIG_DEFAULT_FDT_FILE="sun50i-h700-anbernic-rg35xx-2024.dtb"
-+CONFIG_LAST_STAGE_INIT=y
-+CONFIG_SPL_I2C=y
-+CONFIG_CMD_BDINFO_EXTRA=y
-+CONFIG_CMD_BOOTDEV=y
-+CONFIG_CMD_BOOTMETH=y
-+CONFIG_CMD_BOOTZ=y
-+CONFIG_BOOTM_OPENRTOS=y
-+CONFIG_BOOTM_OSE=y
-+CONFIG_CMD_ADTIMG=y
-+CONFIG_CMD_ADC=y
-+CONFIG_CMD_CLK=y
-+# CONFIG_CMD_LOADB is not set
-+# CONFIG_CMD_LOADS is not set
-+CONFIG_CMD_BKOPS_ENABLE=y
-+CONFIG_CMD_MMC_REG=y
-+CONFIG_CMD_MMC_SWRITE=y
-+CONFIG_CMD_SDRAM=y
-+CONFIG_CMD_PMIC=y
-+CONFIG_CMD_REGULATOR=y
-+CONFIG_OF_UPSTREAM=y
-+# CONFIG_NET is not set
-+CONFIG_BUTTON=y
-+CONFIG_BUTTON_GPIO=y
-+CONFIG_SPL_SYS_I2C_LEGACY=y
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_SYS_I2C_SLAVE=0x7f
-+CONFIG_SYS_I2C_SPEED=400000
-+CONFIG_REGULATOR_AXP=y
-+CONFIG_AXP717_POWER=y
-+CONFIG_AXP_DCDC2_VOLT=940
-+CONFIG_AXP_DCDC3_VOLT=1100
-+CONFIG_REGEX=y
-+# CONFIG_EFI_LOADER is not set
+ 	fprintf(stderr,
+-		"For a resolution refer to Documentation/kbuild/kconfig-language.txt\n"
++		"For a resolution refer to Documentation/kbuild/kconfig-language.rst\n"
+ 		"subsection \"Kconfig recursive dependency limitations\"\n"
+ 		"\n");
+ 
+diff --git a/scripts/kconfig/tests/err_recursive_dep/expected_stderr b/scripts/kconfig/tests/err_recursive_dep/expected_stderr
+index 84679b104655..c9f4abf9a791 100644
+--- a/scripts/kconfig/tests/err_recursive_dep/expected_stderr
++++ b/scripts/kconfig/tests/err_recursive_dep/expected_stderr
+@@ -1,38 +1,38 @@
+ Kconfig:11:error: recursive dependency detected!
+ Kconfig:11:	symbol B is selected by B
+-For a resolution refer to Documentation/kbuild/kconfig-language.txt
++For a resolution refer to Documentation/kbuild/kconfig-language.rst
+ subsection "Kconfig recursive dependency limitations"
+ 
+ Kconfig:5:error: recursive dependency detected!
+ Kconfig:5:	symbol A depends on A
+-For a resolution refer to Documentation/kbuild/kconfig-language.txt
++For a resolution refer to Documentation/kbuild/kconfig-language.rst
+ subsection "Kconfig recursive dependency limitations"
+ 
+ Kconfig:17:error: recursive dependency detected!
+ Kconfig:17:	symbol C1 depends on C2
+ Kconfig:21:	symbol C2 depends on C1
+-For a resolution refer to Documentation/kbuild/kconfig-language.txt
++For a resolution refer to Documentation/kbuild/kconfig-language.rst
+ subsection "Kconfig recursive dependency limitations"
+ 
+ Kconfig:32:error: recursive dependency detected!
+ Kconfig:32:	symbol D2 is selected by D1
+ Kconfig:27:	symbol D1 depends on D2
+-For a resolution refer to Documentation/kbuild/kconfig-language.txt
++For a resolution refer to Documentation/kbuild/kconfig-language.rst
+ subsection "Kconfig recursive dependency limitations"
+ 
+ Kconfig:37:error: recursive dependency detected!
+ Kconfig:37:	symbol E1 depends on E2
+ Kconfig:42:	symbol E2 is implied by E1
+-For a resolution refer to Documentation/kbuild/kconfig-language.txt
++For a resolution refer to Documentation/kbuild/kconfig-language.rst
+ subsection "Kconfig recursive dependency limitations"
+ 
+ Kconfig:60:error: recursive dependency detected!
+ Kconfig:60:	symbol G depends on G
+-For a resolution refer to Documentation/kbuild/kconfig-language.txt
++For a resolution refer to Documentation/kbuild/kconfig-language.rst
+ subsection "Kconfig recursive dependency limitations"
+ 
+ Kconfig:51:error: recursive dependency detected!
+ Kconfig:51:	symbol F2 depends on F1
+ Kconfig:49:	symbol F1 default value contains F2
+-For a resolution refer to Documentation/kbuild/kconfig-language.txt
++For a resolution refer to Documentation/kbuild/kconfig-language.rst
+ subsection "Kconfig recursive dependency limitations"
+diff --git a/tools/buildman/kconfiglib.py b/tools/buildman/kconfiglib.py
+index b9f37567559a..27abbf9a7a11 100644
+--- a/tools/buildman/kconfiglib.py
++++ b/tools/buildman/kconfiglib.py
+@@ -6,7 +6,7 @@ Overview
+ ========
+ 
+ Kconfiglib is a Python 2/3 library for scripting and extracting information
+-from Kconfig (https://www.kernel.org/doc/Documentation/kbuild/kconfig-language.txt)
++from Kconfig (https://www.kernel.org/doc/Documentation/kbuild/kconfig-language.rst)
+ configuration systems.
+ 
+ See the homepage at https://github.com/ulfalizer/Kconfiglib for a longer
+@@ -709,7 +709,7 @@ class Kconfig(object):
+ 
+     mainmenu_text:
+       The prompt (title) of the top menu (top_node). Defaults to "Main menu".
+-      Can be changed with the 'mainmenu' statement (see kconfig-language.txt).
++      Can be changed with the 'mainmenu' statement (see kconfig-language.rst).
+ 
+     variables:
+       A dictionary with all preprocessor variables, indexed by name. See the
+@@ -3562,7 +3562,7 @@ class Kconfig(object):
+         #
+         #  - Propagates dependencies from parent to child nodes
+         #
+-        #  - Creates implicit menus (see kconfig-language.txt)
++        #  - Creates implicit menus (see kconfig-language.rst)
+         #
+         #  - Removes 'if' nodes
+         #
+@@ -5030,7 +5030,7 @@ class Choice(object):
+ 
+         0 (n) - The choice is disabled and no symbols can be selected. For
+                 visible choices, this mode is only possible for choices with
+-                the 'optional' flag set (see kconfig-language.txt).
++                the 'optional' flag set (see kconfig-language.rst).
+ 
+         1 (m) - Any number of choice symbols can be set to m, the rest will
+                 be n.
+@@ -5498,7 +5498,7 @@ class MenuNode(object):
+ 
+       Choices and menus naturally have children, but Symbols can also have
+       children because of menus created automatically from dependencies (see
+-      kconfig-language.txt).
++      kconfig-language.rst).
+ 
+     parent:
+       The parent menu node. None if there is no parent.
 -- 
-2.34.1
+2.39.2
 
