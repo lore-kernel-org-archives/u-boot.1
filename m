@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E559BC3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 15:03:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEA39C52D6F
+	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 15:03:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC9BE88CF5;
-	Mon, 19 Aug 2024 17:02:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 414B188D02;
+	Mon, 19 Aug 2024 17:02:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HQSWQnkl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y/AkHVwj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A99DA88ADB; Mon, 19 Aug 2024 17:02:08 +0200 (CEST)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id 8118A88CEC; Mon, 19 Aug 2024 17:02:09 +0200 (CEST)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 453D988CE6
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 17:02:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 118248641A
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 17:02:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=macroalpha82@gmail.com
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-5d5af7ae388so2357158eaf.0
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 08:02:06 -0700 (PDT)
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-27012aa4a74so1804278fac.0
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 08:02:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724079725; x=1724684525; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1724079726; x=1724684526; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6mPa4OuabQeX2loaQ2kTd5kAkhyoVHYBr7+w8aNFRWs=;
- b=HQSWQnkljIEhxIGMBE/qVTBN6vsGjttU0AO/LVGapYls8dzwwqlmaPMQRH50VLQzaB
- tkt1NERskgroOotMinIj0ypzDsYXdAiOlSm0pAvgFl3DWl7p6yZFpdS/StrG3jUXhpaX
- DRXgMhOMDONPGjGMMcFw36n6/IZqnHaBbnJ7cDaVLmEthZ+TCRTWKVZz2uVM1xfDX0eH
- O0ZmEy1VSTMP++8uc2WYTUtg3DeNeVq7mVveg1W+x/2Q6Pq5Jqe8ZCIY528bVEYlL+Nl
- gUY67w6RwwzkUW8ihyIgetchQMvXm2Tn+wRR8e22nMMevdkxe4v7k8pJTJDhgBUdh9Hs
- EPiQ==
+ bh=XvwJElt4YUfFpBwvQE1FxCIY+djXkU5S5UfwCL3zens=;
+ b=Y/AkHVwjcvGGJKGJmB+3QDvpfCgdPLzXPRjhd2ysE1pKK/bcUf4bRezsvJkNTXQxjC
+ +XnLkZa1bPuLw5BTLAQ1qJr/NB0i9ls3A3oUhR4NKCfzA6qN6yBaOWBaiQAlptN4armk
+ 0stpImgiUBkSpAu9D9FVe7IbkIMnp+0xXEAhCnALibmdxboSFqrPjQYaiZLIGeWKqHjK
+ YyFqWhZqztQLtGNUqiCvLgN+Nk7iB6kUunD50LvX1hJfkFa1FHOvoabapZY92AnYBHm+
+ +OyJEjQlVtbO7A23GK/mYiFT/j0VBJUjaIm3f+dpRKSxcPJr011tgokNyogWotM9lrhj
+ WNpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724079725; x=1724684525;
+ d=1e100.net; s=20230601; t=1724079726; x=1724684526;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6mPa4OuabQeX2loaQ2kTd5kAkhyoVHYBr7+w8aNFRWs=;
- b=AzdJsDKWBc7RA12Yhl0Rkyv/KzzsGeNjwiS9kX80mrRxCHZK7AopieiglRgYZxECeL
- +nJYzrOKWFQ7tqhVaBDmAJCgsFDkRwKLP3t6whpDRxX9Pu4aDGfs3uOseo6qGOzQqN80
- +4k07JkYkOw3WKcc2v4+qU6qVR3s/uMZqtJia2uDAYzW6J4Djnk3BQul5aJ7UByGJOB1
- pir3wOCdpJBH0pwYeTzrMXo09sdw9B0CjdlJMbOUjz/0V9eOKsrJNKwWlbMxl4h3k0bH
- vEjVNHDz6661qDqUglYQmqRPRKRO5ksFKFs8Ko8/XtGZkl5hFG51Ia1/a5Gu/LnnoF/T
- RpNQ==
-X-Gm-Message-State: AOJu0YyYokefWR2YY7yqz5odPdOASicsxWlTctX3adWiHfauDsr+HsRZ
- UrRSO4x8ShFchXRZXp5vbNFD/ta/K6e//1yoZ2xwzpk0+ODx2zqaO0OeJg==
-X-Google-Smtp-Source: AGHT+IGZpnZo9P16/vc058+NnPmp59Pg73KCKQX6xzc5LUM7CgXV5SIVPyvZWTa3APl8AVZImtwZ3Q==
-X-Received: by 2002:a05:6870:3290:b0:260:27c6:48b6 with SMTP id
- 586e51a60fabf-2701db7c1a0mr4838781fac.8.1724079724613; 
- Mon, 19 Aug 2024 08:02:04 -0700 (PDT)
+ bh=XvwJElt4YUfFpBwvQE1FxCIY+djXkU5S5UfwCL3zens=;
+ b=R6bK8T6/2UJ4pShQWeX2liVovDfjy8eqCb2euJzUaENTvfd7QKQnH/R5EEnzYtO00k
+ Zb93RLcy9+t/l7MIjfSBIdQpMYvaw0gd8Bx4LBjut6U9bBvne++XE5BoqtgXntcR6uR0
+ HePqZvCRLV8uiMxL0+f57dE0A/pupnNq1i9K/J9o0MFsitgIJzd8hcozm/ZUWMzz0Luh
+ wq4niu8+A0C2KD5iUMnAexLDn2Fj5HuZMBvCbGZ5T+2HdOPG2e3LBNrjTELmHevgTBs+
+ iXAU7nJWAZd6zK+nVyLGMfR4oGY2pw6rrcbdydQKXeyW8k7tr843eupW4HibdEC90A+C
+ 9N3Q==
+X-Gm-Message-State: AOJu0YyOjcgr9UPytZ5NplgJqbhg7fCVDANhOMUO5m0S/Oi65/NlJDr4
+ 63euW2O2eSgmPhmOKnLWNFPmFtKmEwf6x3H1GcHeOhC+3CQBcwsXnZDcJQ==
+X-Google-Smtp-Source: AGHT+IHnTA6//OhariupgMVxqPieNyMDOoc9ieVCe6eN2SSk5WYUpdoMAWgrW21qMgEzRePZWlkAFg==
+X-Received: by 2002:a05:6870:232a:b0:268:b62c:d084 with SMTP id
+ 586e51a60fabf-2701c33fb5dmr12971773fac.10.1724079725573; 
+ Mon, 19 Aug 2024 08:02:05 -0700 (PDT)
 Received: from localhost.localdomain ([2600:1700:fb0:1bcf::54])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-27004432d18sm2945189fac.7.2024.08.19.08.02.03
+ 586e51a60fabf-27004432d18sm2945189fac.7.2024.08.19.08.02.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Aug 2024 08:02:04 -0700 (PDT)
+ Mon, 19 Aug 2024 08:02:05 -0700 (PDT)
 From: Chris Morgan <macroalpha82@gmail.com>
 To: u-boot@lists.denx.de
 Cc: sjg@chromium.org, jernej.skrabec@gmail.com, neil.armstrong@linaro.org,
  hdegoede@redhat.com, andre.przywara@arm.com, jagan@amarulasolutions.com,
  trini@konsulko.com, ryan@testtoast.com, iuncuim@gmail.com,
  sumit.garg@linaro.org, Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH V2 5/9] sunxi: H616: dram: Update mbus priorities
-Date: Mon, 19 Aug 2024 09:59:34 -0500
-Message-Id: <20240819145938.503221-6-macroalpha82@gmail.com>
+Subject: [PATCH V2 6/9] arm64: dts: allwinner: h616: Add r_i2c pinctrl nodes
+Date: Mon, 19 Aug 2024 09:59:35 -0500
+Message-Id: <20240819145938.503221-7-macroalpha82@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240819145938.503221-1-macroalpha82@gmail.com>
 References: <20240819145938.503221-1-macroalpha82@gmail.com>
@@ -94,79 +94,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jernej Skrabec <jernej.skrabec@gmail.com>
+From: Chris Morgan <macromorgan@hotmail.com>
 
-CSI1 channel (22) is missing and IOMMU (25) has priority flag set in
-vendor bootloader. Fix that.
+Add pinctrl nodes for the r_i2c node. Without the pinmux defined the
+r_i2c bus may fail to work, possibly if the bootloader uses rsb mode
+for the PMIC.
 
-While at it, replace bandwidth flag with priority since original flag has
-always value "true".
+Link: https://lore.kernel.org/linux-sunxi/172252952262.1669767.7675865282122079154.b4-ty@csie.org/
 
-Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
-Tested-by: Chris Morgan <macromorgan@hotmail.com>
+[ upstream commit: 7c9ea4ab76176f65f4f55aa144f9145a4bccaacb ]
+
+Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
 ---
- arch/arm/mach-sunxi/dram_sun50i_h616.c | 41 +++++++++++++-------------
- 1 file changed, 21 insertions(+), 20 deletions(-)
+ dts/upstream/src/arm64/allwinner/sun50i-h616.dtsi | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-index 2f2776ce35..c0bcf2eec7 100644
---- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
-+++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-@@ -55,8 +55,8 @@ static void mbus_configure_port(u8 port,
- 	writel_relaxed(cfg1, &mctl_com->master[port].cfg1);
- }
- 
--#define MBUS_CONF(port, bwlimit, qos, acs, bwl0, bwl1, bwl2)	\
--	mbus_configure_port(port, bwlimit, false, \
-+#define MBUS_CONF(port, priority, qos, acs, bwl0, bwl1, bwl2)	\
-+	mbus_configure_port(port, true, priority, \
- 			    MBUS_QOS_ ## qos, 0, acs, bwl0, bwl1, bwl2)
- 
- static void mctl_set_master_priority(void)
-@@ -68,24 +68,25 @@ static void mctl_set_master_priority(void)
- 	writel(399, &mctl_com->tmr);
- 	writel(BIT(16), &mctl_com->bwcr);
- 
--	MBUS_CONF( 0, true, HIGHEST, 0,  256,  128,  100);
--	MBUS_CONF( 1, true,    HIGH, 0, 1536, 1400,  256);
--	MBUS_CONF( 2, true, HIGHEST, 0,  512,  256,   96);
--	MBUS_CONF( 3, true,    HIGH, 0,  256,  100,   80);
--	MBUS_CONF( 4, true,    HIGH, 2, 8192, 5500, 5000);
--	MBUS_CONF( 5, true,    HIGH, 2,  100,   64,   32);
--	MBUS_CONF( 6, true,    HIGH, 2,  100,   64,   32);
--	MBUS_CONF( 8, true,    HIGH, 0,  256,  128,   64);
--	MBUS_CONF(11, true,    HIGH, 0,  256,  128,  100);
--	MBUS_CONF(14, true,    HIGH, 0, 1024,  256,   64);
--	MBUS_CONF(16, true, HIGHEST, 6, 8192, 2800, 2400);
--	MBUS_CONF(21, true, HIGHEST, 6, 2048,  768,  512);
--	MBUS_CONF(25, true, HIGHEST, 0,  100,   64,   32);
--	MBUS_CONF(26, true,    HIGH, 2, 8192, 5500, 5000);
--	MBUS_CONF(37, true,    HIGH, 0,  256,  128,   64);
--	MBUS_CONF(38, true,    HIGH, 2,  100,   64,   32);
--	MBUS_CONF(39, true,    HIGH, 2, 8192, 5500, 5000);
--	MBUS_CONF(40, true,    HIGH, 2,  100,   64,   32);
-+	MBUS_CONF(0, false, HIGHEST, 0,  256,  128,  100);
-+	MBUS_CONF(1, false,    HIGH, 0, 1536, 1400,  256);
-+	MBUS_CONF(2, false, HIGHEST, 0,  512,  256,   96);
-+	MBUS_CONF(3, false,    HIGH, 0,  256,  100,   80);
-+	MBUS_CONF(4, false,    HIGH, 2, 8192, 5500, 5000);
-+	MBUS_CONF(5, false,    HIGH, 2,  100,   64,   32);
-+	MBUS_CONF(6, false,    HIGH, 2,  100,   64,   32);
-+	MBUS_CONF(8, false,    HIGH, 0,  256,  128,   64);
-+	MBUS_CONF(11, false,    HIGH, 0,  256,  128,  100);
-+	MBUS_CONF(14, false,    HIGH, 0, 1024,  256,   64);
-+	MBUS_CONF(16, false, HIGHEST, 6, 8192, 2800, 2400);
-+	MBUS_CONF(21, false, HIGHEST, 6, 2048,  768,  512);
-+	MBUS_CONF(22, false,    HIGH, 0,  256,  128,  100);
-+	MBUS_CONF(25, true,  HIGHEST, 0,  100,   64,   32);
-+	MBUS_CONF(26, false,    HIGH, 2, 8192, 5500, 5000);
-+	MBUS_CONF(37, false,    HIGH, 0,  256,  128,   64);
-+	MBUS_CONF(38, false,    HIGH, 2,  100,   64,   32);
-+	MBUS_CONF(39, false,    HIGH, 2, 8192, 5500, 5000);
-+	MBUS_CONF(40, false,    HIGH, 2,  100,   64,   32);
- 
- 	dmb();
- }
+diff --git a/dts/upstream/src/arm64/allwinner/sun50i-h616.dtsi b/dts/upstream/src/arm64/allwinner/sun50i-h616.dtsi
+index 921d5f61d8..41f2c23e07 100644
+--- a/dts/upstream/src/arm64/allwinner/sun50i-h616.dtsi
++++ b/dts/upstream/src/arm64/allwinner/sun50i-h616.dtsi
+@@ -836,6 +836,8 @@
+ 			clocks = <&r_ccu CLK_R_APB2_I2C>;
+ 			dmas = <&dma 48>, <&dma 48>;
+ 			dma-names = "rx", "tx";
++			pinctrl-names = "default";
++			pinctrl-0 = <&r_i2c_pins>;
+ 			resets = <&r_ccu RST_R_APB2_I2C>;
+ 			status = "disabled";
+ 			#address-cells = <1>;
 -- 
 2.34.1
 
