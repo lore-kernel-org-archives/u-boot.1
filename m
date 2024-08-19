@@ -4,54 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC738C52D6F
-	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 13:55:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C59CC3DA4A
+	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 13:55:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A2D388CBF;
+	by phobos.denx.de (Postfix) with ESMTP id 6ED6988CC5;
 	Mon, 19 Aug 2024 15:54:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=johanneskirchmair.de
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=johanneskirchmair.de header.i=@johanneskirchmair.de header.b="LomGx5A0";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="baqOuhvR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A234388356; Mon, 19 Aug 2024 08:46:00 +0200 (CEST)
-Received: from mx8.mail-out.lima-city.de (mx8.mail-out.lima-city.de
- [91.216.248.210])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 24FA388356; Mon, 19 Aug 2024 09:15:56 +0200 (CEST)
+Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
+ [IPv6:2607:f8b0:4864:20::12e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 459A988009
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 08:45:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=johanneskirchmair.de
-Authentication-Results: phobos.denx.de; spf=none
- smtp.mailfrom=mailinglist1@johanneskirchmair.de
-From: <mailinglist1@johanneskirchmair.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=johanneskirchmair.de;
- s=securedbylima-20161106; t=1724049957;
- bh=tPsG8G93wXvNfNuZt7cG/11JFLw7aBrIq3dJI0j3hQw=;
- h=From:To:Cc:References:In-Reply-To:Subject:Date:From;
- b=LomGx5A0YR2LdzClvs3aOSkAlt44KaGo/8eVVX6mFZI/kE6R5TUrrkH1lBRZ1cyBQ
- tOWyYnlFiNDCQn2HiI2eoBmy/BAtVfZ5pdH1L2jk+ox/QY+UD6LkDOjpuOarqC44Cc
- 0/bC07GiUzK6s4A/bNrklBL2WFR0lz+02nAXIzSA=
-To: "'Simon Glass'" <sjg@chromium.org>, "'Sean Anderson'" <seanga2@gmail.com>
-Cc: <u-boot@lists.denx.de>, <trini@konsulko.com>,
- "'Johannes Kirchmair'" <johannes.kirchmair@skidata.com>
-References: <20240816073332.279025-1-mailinglist1@johanneskirchmair.de>
- <CAFLszTgx3NrH8-6XF4NKhfCcYxn-nWY3f6GNL_ORbzD5zGaswA@mail.gmail.com>
-In-Reply-To: <CAFLszTgx3NrH8-6XF4NKhfCcYxn-nWY3f6GNL_ORbzD5zGaswA@mail.gmail.com>
-Subject: AW: [PATCH] spl: fix error handling of spl_fit_read
-Date: Mon, 19 Aug 2024 08:45:58 +0200
-Message-ID: <000301daf203$73c1b7f0$5b4527d0$@johanneskirchmair.de>
+ by phobos.denx.de (Postfix) with ESMTPS id DB01788113
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 09:15:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=crausaz.romain@gmail.com
+Received: by mail-il1-x12e.google.com with SMTP id
+ e9e14a558f8ab-39d2256ee95so17029285ab.2
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 00:15:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1724051752; x=1724656552; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=h+HBo0Lo8GjeCjRvqc2U59MeRe1eprTDubIsw/9ONUE=;
+ b=baqOuhvRPP4/0t6ISzNzaDcycTD55LEA4lb6pRRMeBpBoIt7oP1FgIIYzB80+MmmVT
+ AZhQtyhFLbdW59kU5+ULlmkhOgdEBpa8LIqxsRqV+OeMvZJe5aRo23IIBqzhXA2K1VyI
+ YZ7AHl6OnWsoI5zwM6pDUUAA6QytyksyEOkuvaOBGi0zBAMB6Rv+scLoN3rm1nHLdynS
+ EQa5GACnE1uY0dq1nVdOIp4h7/Nbyt3r/HbnYEZtQYbCUfJ5U3l4YFUaDt2bAWI0/tAv
+ 062JvbUye5Y1TNWuegqnNaeVE8/fzNczFJdYpDDKCZ9qD7InWQe77VAFtvytvRhFF4Wz
+ pJpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724051752; x=1724656552;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=h+HBo0Lo8GjeCjRvqc2U59MeRe1eprTDubIsw/9ONUE=;
+ b=FHtkPmeWCGGIW+eGFdoa0GnFkOQwErydaRh8lD/pKKehyd9DLHsRFbyeYsb+3a/tn/
+ ZswN3twHFJP1WUZ9fQTI96HgySeHicVU+ouUl7XD7patR2xQJx4nL2zgU5zXc7LUYUyk
+ y6j+YF9cBOtsaKyIrMGAOBYphIDy/xjvaFJQxLZUuKhH2yu5m8eYmFH6VQbvoTI0H3zS
+ 1Knv/dvlxNhrXtKDJeSN1Eenl5sJIqJhjMCKWy/bnsk1y85cPiYfx64g171GCPfhTBg9
+ vDGXISWCnPMOOLg5SlvopNOLFZGPskbvB4z/JJeupJWJH4wdH2R+7SN8UTogDvaYnE0S
+ /9Nw==
+X-Gm-Message-State: AOJu0YyCyF0/RtxucibdXqy3T9v/AzQK6rmQ7XGk5lvsSkkql2wXYFHJ
+ hDBspK3yvM30JkgkkVN7cC+Nuv21aGJnHJaD0FJukh+7mmyY9V2vM083pwexOg1if2+xVbYOjMG
+ kr88b3p/TmJkijupLxHepvBjGbGLZeWdl
+X-Google-Smtp-Source: AGHT+IEPIVdanIigWfygTi+s8hO9ouI/NVwvrJyd1BN1GVR1hYcug0Roy7REhEboaPXU7+mTO/LGLNVeUmzT2oXa4H4=
+X-Received: by 2002:a05:6e02:152b:b0:396:c825:4db6 with SMTP id
+ e9e14a558f8ab-39d26d64999mr131705755ab.26.1724051752522; Mon, 19 Aug 2024
+ 00:15:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: de-at
-Thread-Index: AQKgpYxFpKtwKDAD7E2rRuPPb6XJPwGtmQujsJVNHDA=
-x-bromium-msgid: b30f5f67-e99f-4e05-afa5-aa9845aadbff
+References: <CAB=OP5Kb_YMmcn6Zjj3feSPX506zXt7dSb8w_vUaMsSsxWYgzw@mail.gmail.com>
+ <CAFLszTjHCbekGwJBvfw70iejhM6XeQ9kYc8+sHsdAfTyCq7DXw@mail.gmail.com>
+In-Reply-To: <CAFLszTjHCbekGwJBvfw70iejhM6XeQ9kYc8+sHsdAfTyCq7DXw@mail.gmail.com>
+From: Romain Crausaz <crausaz.romain@gmail.com>
+Date: Mon, 19 Aug 2024 09:15:41 +0200
+Message-ID: <CAB=OP5KesR5creSZ4C20v0dn3kmH_ZRRtj=L8uiK7K0dzV6hbw@mail.gmail.com>
+Subject: Re: RPI CM4 - I2C BUS and Device Tree
+To: Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>, 
+ Matthias Brugger <mbrugger@suse.com>
+Cc: u-boot@lists.denx.de
 X-Mailman-Approved-At: Mon, 19 Aug 2024 15:54:55 +0200
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,105 +90,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey,
+Hi Simon, Hi Peter,
 
-> -----Urspr=C3=BCngliche Nachricht-----
-> Von: Simon Glass <sjg@chromium.org>
-> Gesendet: Samstag, 17. August 2024 17:58
-> An: mailinglist1@johanneskirchmair.de; Sean Anderson
-> <seanga2@gmail.com>
-> Cc: u-boot@lists.denx.de; trini@konsulko.com; Johannes Kirchmair
-> <johannes.kirchmair@skidata.com>
-> Betreff: Re: [PATCH] spl: fix error handling of spl_fit_read
->=20
-> +Sean Anderson too, for this
->=20
-> Hi,
->=20
-> On Fri, 16 Aug 2024 at 07:36, <mailinglist1@johanneskirchmair.de> =
-wrote:
-> >
-> > From: Johannes Kirchmair <johannes.kirchmair@skidata.com>
-> >
-> > Returning negative values from spl_fit_read leads to u-boot =
-crashing.
-> > The return value of spl_fit_read is compared with an unsigned value.
-> > Returning negative values leads to the check not detecting the =
-error.
-> > Not detecting the error leads to crashing.
-> >
-> > Returning zero in case of an reading error is fine. It indicates =
-that
-> > nothing was red.
->=20
-> read
->=20
-> >
-> > Signed-off-by: Johannes Kirchmair <johannes.kirchmair@skidata.com>
-> > ---
-> >  common/spl/spl_fat.c | 2 +-
-> >  include/spl_load.h   | 4 ++--
-> >  2 files changed, 3 insertions(+), 3 deletions(-)
-> >
->=20
-> Perhaps instead this should be fixed in _spl_load()? We don't want to =
-ignore
-> errors, and returning -EIO is not as good as returning the actual =
-error received.
-> The docs of struct spl_load_info indicate that functions should return =
-0 on
-> error, but that is somewhat surprising behaviour, which is probably =
-why
-> people are not following it?
-Could also be a valid way of fixing, as Sean did in his patch [1]
-Too have less confusion in the future, we should also switch the =
-signature from returning ulong to long and allow negative return values =
-for errors.
+First of all, thanks a lot for your answers.
 
->=20
-> > diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c index
-> > bd8aab253a..345bc55149 100644
-> > --- a/common/spl/spl_fat.c
-> > +++ b/common/spl/spl_fat.c
-> > @@ -53,7 +53,7 @@ static ulong spl_fit_read(struct spl_load_info
-> > *load, ulong file_offset,
+1. When I enable the i2c bus in the config.txt (which is parsed by the rpi
+first stage bootloader), the overlay put this as compatible:"brcm,bcm2835".
+I checked in the source of U-Boot and the driver is not available.
+2. One solution could be to use the i2c-gpio driver instead of the default
+i2c controller. U-Boot has this driver.
+3. Since the device tree passed by the rpi bootloader is stored in the
+variable fw_dtb_pointer (see the lowlevel_init.S) would I be able to do the
+following:
+    3.1 remove the automatic selection for the device tree passed by the
+rpi bootload
+    3.2 system starts and use the default device tree where the i2c bus is
+defined with i2c-gpio, access the device I need and store the information
+needed
+    3.3 get the device tree address from fw_dtb_pointer, set fdt address
+fdt addr with the new device tree and then start the kernel
+
+I have another question, what triggers the DM to check for the device (with
+dm tree command there is a X under the column probed). Because here we
+could have a really simple device tree with the minimum configuration for
+just the i2c and load it from U-Boot, perform the action needed and then
+boot the kernel by passing the device tree provided by the first stage
+bootloder.
+
+Regards
+Romain
+
+
+
+Le sam. 17 ao=C3=BBt 2024 =C3=A0 17:57, Simon Glass <sjg@chromium.org> a =
+=C3=A9crit :
+
+> +Peter Robinson
+> +Matthias Brugger
+>
+> Hi Romain,
+>
+> On Sat, 17 Aug 2024 at 07:01, Romain Crausaz <crausaz.romain@gmail.com>
+> wrote:
 > >
-> >         ret =3D fat_read_file(filename, buf, file_offset, size, =
-&actread);
-> >         if (ret)
-> > -               return ret;
-> > +               return 0;
+> > Hi all,
 > >
-> >         return actread;
-> >  }
-> > diff --git a/include/spl_load.h b/include/spl_load.h index
-> > 1c2b296c0a..b411d9daa1 100644
-> > --- a/include/spl_load.h
-> > +++ b/include/spl_load.h
-> > @@ -17,8 +17,8 @@ static inline int _spl_load(struct spl_image_info
-> > *spl_image,  {
-> >         struct legacy_img_hdr *header =3D
-> >                 spl_get_load_buffer(-sizeof(*header), =
-sizeof(*header));
-> > -       ulong base_offset, image_offset, overhead;
-> > -       int read, ret;
-> > +       ulong base_offset, image_offset, overhead, read;
-> > +       int ret;
 > >
-> >         read =3D info->read(info, offset, ALIGN(sizeof(*header),
-> >                                               spl_get_bl_len(info)),
-> > header);
-> > --
-> > 2.34.1
 > >
->=20
+> > I am currently facing an issue with U-Boot and a raspberry pi CM4. Here
+> is
+> > the setup:
+> >
+> >
+> >
+> > 1. Yocto Scarthgap
+> >
+> > 2. U-Boot 2024.01
+> >
+> > 3. rpi_arm64_defconfig
+> >
+> >
+> >
+> > I am trying to access the i2c bus from U-Boot. I have been trying to
+> modify
+> > the device tree which is referenced as
+> > =E2=80=9CCONFIG_DEFAULT_DEVICE_TREE=3D"bcm2711-rpi-4-b=E2=80=9D=E2=80=
+=9D in the defconfig without
+> > success. I can remove everything, set all nodes to disabled and I see n=
+o
+> > change in U-Boot (I am using dm commands to check the status of the
+> > peripherals).
+> >
+> >
+> >
+> > It seems that with the rpi, U-Boot will only configure itself against t=
+he
+> > device tree passed by the bootloader of RPI. Could someone confirm this=
+ ?
+>
+> Yes. It isn't quite obvious, but this is a clue:
+>
+> Core:  211 devices, 16 uclasses, devicetree: board
+>
+> 'board' means that the board can do whatever it wants.
+>
+> >
+> >
+> >
+> > Is there a way to configure / modify U-Boot to use its own devicetree a=
+nd
+> > simply pass the device tree generated by the rpi bootloader to the
+> kernel ?
+> >
+> >
+> >
+> > Because the second issue is that the i2c driver defined in the device
+> tree
+> > passed to u-boot is not available in u-boot.
+> >
+> >
+> >
+> > Thanks for your help
+>
+> Since OF_HAS_PRIOR_STAGE is a hidden option, you cannot disable it in
+> the defconfig. The only way I know of is to comment out the 'imply
+> OF_HAS_PRIOR_STAGE' in ARCH_BCM283X in arch/arm/Kconfig
+>
+> For me, that stops the rpi_4 booting, so perhaps the devicetree is
+> out-of-date or ft_board_setup() is doing something strange, or
+> something else. The in-tree devicetree may have got out-of-date, so
+> perhaps use the Linux one.
+>
 > Regards,
 > Simon
-
-Best regards,
-Johannes
-
-[1] =
-https://lore.kernel.org/u-boot/20240731130913.487121-1-fventuri@comcast.n=
-et/
-
+>
