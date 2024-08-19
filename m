@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C600FC3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 15:02:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2239BC52D7C
+	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 15:02:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31E6F88CE1;
-	Mon, 19 Aug 2024 17:02:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9B48A87B84;
+	Mon, 19 Aug 2024 17:02:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FuxHE0jy";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BRlTVdk0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C569871C7; Mon, 19 Aug 2024 17:02:05 +0200 (CEST)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
+ id AE01A88CE9; Mon, 19 Aug 2024 17:02:06 +0200 (CEST)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 165BA87B84
+ by phobos.denx.de (Postfix) with ESMTPS id D2C9688CA0
  for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 17:02:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=macroalpha82@gmail.com
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-2702ed1054fso1039025fac.3
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-3db16129143so2345699b6e.0
  for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 08:02:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20230601; t=1724079722; x=1724684522; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8PH9F1VBK3kWNUHiqkBLlRVWB0H6/h7ZsBfedPxrAx0=;
- b=FuxHE0jylLRb1Bz4r9q9YPloDxeNJk71cYhuEry4qXKYEMPyRF3wR5BzyHlYUhMuXC
- P7EFf/9r7EB665GSBdquKEQXjippFQSlfn8O6fBKV/2dZW/wDfRDG81yoscHadQ7IFj+
- VIbYYz2mOZhisKJIaPs1pgOr8B91xxPzo6YmnNx2dv2YHsy32V71oiWAO1jS+WJa5Gda
- UztW2EvvQN++QyTmpGwI8afLzpWySHSUJAoJISURvYKHsO2lhgPa68OFimvjK5iRzqaU
- f4ZDqFyho5DgyjltZ2tdfWNZg/9DO2m+VYO1DMWAhac/fqFBFb6nnoNHMZiPlu1RGf82
- sC8Q==
+ bh=lncLCU7aTj1amHcX2H/VFllgDBgYGr8WJkwU+3jD/qo=;
+ b=BRlTVdk0fVVc5EuKxpnv7gtxjT1ha5Aqe08ab8r3bqki1wYRy0SQjY6KE9m6hdzliI
+ A+NGGcX1VJu9CQBzDwCWFz9614pRUJNJU5q9u5tBL5CZ9Me9AHyZwZ7bApWV+MCkLHCL
+ ceH8dC7dyQCI/325bGCSuRtDlgQrWXvFIbxCrOQZccBuk/l4reov1ycyQlhbrmWElNwc
+ CJADJm+rj1D3629CRfavoEpIY+RdqWmjOxFpsY0Rysk9FkHpP6R2y0R+aWa1dI3lLvVM
+ ihnYS565dP+N1KVwr3AzPkOxqsOsQAhdEC3HhcorESumtnKbHZyg0sFExyl3hqcaEI/e
+ sxpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1724079722; x=1724684522;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8PH9F1VBK3kWNUHiqkBLlRVWB0H6/h7ZsBfedPxrAx0=;
- b=qa/JlsUKF2tSeEPVFrXWDyQwRBW24fOEeeEHn0qa5Qn1NUHUBklyhxYdqxmk05uRzc
- gLGDT4KKyYVFgF68mhVG+I58YFIQ6APPhHSy8vr8ZPJLsDaS5aw5q1WGL+RcPKIl7GpL
- ffZcFy5mUAJa+8lvrn2QD1XVoXysosboQlwW06I3/M196SQZSMGmtR3/8dGWStnaADpZ
- mVI2XBHO/4LEPWmD7wAAOmhKbascc+L5O6rJ9u2YDB1FOp9hIomuBGTjLB3w297Pg0Ey
- kdf8eriqGwMoFq/UjG0XaVt3zS3vuAZ0QyDXgoKwVk2ZfCecvV2okPZ+QMrtdKZWJheq
- 6qOQ==
-X-Gm-Message-State: AOJu0Yzifl+FzUqppZ0Mq3BgWPbc8RfAil/NGH4YcJEYDPxiZcqAk/ef
- n8y7eghUvPo6ISXgIC3lRot6/bE43AksQZnKeltKO9uxI+5m5gxO4lf/1A==
-X-Google-Smtp-Source: AGHT+IHcgrH8A2XuEKWQfINMNP2BRnxJ4x0jSbXjW2MyO1GB+sMBEYg0l+JWwbrpHEcQbpWAAuR42g==
-X-Received: by 2002:a05:6870:470c:b0:25d:f0ba:eab7 with SMTP id
- 586e51a60fabf-2701c37eac4mr13785703fac.18.1724079721580; 
- Mon, 19 Aug 2024 08:02:01 -0700 (PDT)
+ bh=lncLCU7aTj1amHcX2H/VFllgDBgYGr8WJkwU+3jD/qo=;
+ b=pTatFDMQr8CXqhqUcAbn1UVSbcsD1fhnxIJ3vmlELgO9ibhJKda0GPe22wJ+z6y6rR
+ boEEAE83laHxO6o0VUOLNUpxZ/OQnis2vPDgtrj3+y+ZKLIhftsC3D43by5u2dT1tCjB
+ oLxX7WbLuXLqeG+BeFFmqtG08HDhNEvZd07aUQ1OHH9jKyWkeTN2fwywZziV/HCrKbaK
+ U1YarAn0ez5JAs8gz0gRE/itOIaA0kgvjanT10fSnlo/BmNrsg3SoZU3pgZjn1/7T2w6
+ ZjUVPNrXlMn6JQoh3zY4hpv6e6pTe1UkREkW38POnGGwq8ZjjBvEezsyBZEgcWdnxvNA
+ 6AOA==
+X-Gm-Message-State: AOJu0YzgUkjANgEKqdpQr23nH1Rwxnc+AJQW0lMeMQjCwEN95el+IDxk
+ UO8AVx1leWnphZW0a7mffrdUgwrRkfTollRZYwH0flMpJuu/CpkYYUcb3A==
+X-Google-Smtp-Source: AGHT+IElfWs4izjdWHCoYG2iUXY05Ry2eoPFtvMiRrlFsHToq2lwUngUPyjfqgtXS5hwBjqAcFgQCw==
+X-Received: by 2002:a05:6870:9a8a:b0:25d:fab0:b6f4 with SMTP id
+ 586e51a60fabf-27033f211f5mr7726117fac.1.1724079722384; 
+ Mon, 19 Aug 2024 08:02:02 -0700 (PDT)
 Received: from localhost.localdomain ([2600:1700:fb0:1bcf::54])
  by smtp.gmail.com with ESMTPSA id
  586e51a60fabf-27004432d18sm2945189fac.7.2024.08.19.08.02.01
@@ -70,9 +70,9 @@ Cc: sjg@chromium.org, jernej.skrabec@gmail.com, neil.armstrong@linaro.org,
  hdegoede@redhat.com, andre.przywara@arm.com, jagan@amarulasolutions.com,
  trini@konsulko.com, ryan@testtoast.com, iuncuim@gmail.com,
  sumit.garg@linaro.org, Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH V2 1/9] sunxi: H616: dram: LPDDR4: adjust settings
-Date: Mon, 19 Aug 2024 09:59:30 -0500
-Message-Id: <20240819145938.503221-2-macroalpha82@gmail.com>
+Subject: [PATCH V2 2/9] sunxi: H616: DRAM: Add alternative pin mapping
+Date: Mon, 19 Aug 2024 09:59:31 -0500
+Message-Id: <20240819145938.503221-3-macroalpha82@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240819145938.503221-1-macroalpha82@gmail.com>
 References: <20240819145938.503221-1-macroalpha82@gmail.com>
@@ -96,118 +96,102 @@ X-Virus-Status: Clean
 
 From: Jernej Skrabec <jernej.skrabec@gmail.com>
 
-Adjust H616 LPDDR4 DRAM settings to be in line with vendor driver.
+It seems that different dies need different PHY pin mapping. Select
+alternatives based on "bond ID".
 
 Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
 Tested-by: Chris Morgan <macromorgan@hotmail.com>
 ---
- arch/arm/mach-sunxi/dram_sun50i_h616.c        | 33 +++++++++++++------
- .../dram_timings/h616_lpddr4_2133.c           |  2 +-
- 2 files changed, 24 insertions(+), 11 deletions(-)
+ arch/arm/mach-sunxi/dram_sun50i_h616.c | 59 +++++++++++++++++++-------
+ 1 file changed, 44 insertions(+), 15 deletions(-)
 
 diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-index 37c139e0ee..5be2887a06 100644
+index 5be2887a06..dfaa270d96 100644
 --- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
 +++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-@@ -293,14 +293,22 @@ static void mctl_phy_configure_odt(const struct dram_para *para)
- 	dmb();
+@@ -225,22 +225,43 @@ static void mctl_set_addrmap(const struct dram_config *config)
+ 	mctl_ctl->addrmap[8] = 0x3F3F;
  }
  
--static bool mctl_phy_write_leveling(const struct dram_config *config)
-+static bool mctl_phy_write_leveling(const struct dram_para *para,
-+				    const struct dram_config *config)
- {
- 	bool result = true;
- 	u32 val;
- 
- 	clrsetbits_le32(SUNXI_DRAM_PHY0_BASE + 8, 0xc0, 0x80);
--	writel(4, SUNXI_DRAM_PHY0_BASE + 0xc);
--	writel(0x40, SUNXI_DRAM_PHY0_BASE + 0x10);
-+
-+	if (para->type == SUNXI_DRAM_TYPE_LPDDR4) {
-+		/* MR2 value */
-+		writel(0x1b, SUNXI_DRAM_PHY0_BASE + 0xc);
-+		writel(0, SUNXI_DRAM_PHY0_BASE + 0x10);
-+	} else {
-+		writel(4, SUNXI_DRAM_PHY0_BASE + 0xc);
-+		writel(0x40, SUNXI_DRAM_PHY0_BASE + 0x10);
+-static const u8 phy_init[] = {
++static const u8 phy_addr_maps[2][27] = {
+ #ifdef CONFIG_SUNXI_DRAM_H616_DDR3_1333
+-	0x07, 0x0b, 0x02, 0x16, 0x0d, 0x0e, 0x14, 0x19,
+-	0x0a, 0x15, 0x03, 0x13, 0x04, 0x0c, 0x10, 0x06,
+-	0x0f, 0x11, 0x1a, 0x01, 0x12, 0x17, 0x00, 0x08,
+-	0x09, 0x05, 0x18
++	{
++		0x07, 0x0b, 0x02, 0x16, 0x0d, 0x0e, 0x14, 0x19,
++		0x0a, 0x15, 0x03, 0x13, 0x04, 0x0c, 0x10, 0x06,
++		0x0f, 0x11, 0x1a, 0x01, 0x12, 0x17, 0x00, 0x08,
++		0x09, 0x05, 0x18
++	}, {
++		0x08, 0x02, 0x12, 0x05, 0x15, 0x17, 0x18, 0x0b,
++		0x14, 0x07, 0x04, 0x13, 0x0c, 0x00, 0x16, 0x1a,
++		0x0a, 0x11, 0x03, 0x10, 0x0e, 0x01, 0x0d, 0x19,
++		0x06, 0x09, 0x0f
 +	}
+ #elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR3)
+-	0x18, 0x06, 0x00, 0x05, 0x04, 0x03, 0x09, 0x02,
+-	0x08, 0x01, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+-	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x07,
+-	0x17, 0x19, 0x1a
++	{
++		0x18, 0x06, 0x00, 0x05, 0x04, 0x03, 0x09, 0x02,
++		0x08, 0x01, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
++		0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x07,
++		0x17, 0x19, 0x1a
++	}, {
++		0x18, 0x00, 0x04, 0x09, 0x06, 0x05, 0x02, 0x19,
++		0x17, 0x03, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
++		0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x07,
++		0x08, 0x01, 0x1a
++	}
+ #elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR4)
+-	0x02, 0x00, 0x17, 0x05, 0x04, 0x19, 0x06, 0x07,
+-	0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
+-	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x01,
+-	0x18, 0x03, 0x1a
++	{
++		0x02, 0x00, 0x17, 0x05, 0x04, 0x19, 0x06, 0x07,
++		0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
++		0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x01,
++		0x18, 0x03, 0x1a
++	}, {
++		0x03, 0x00, 0x17, 0x05, 0x02, 0x19, 0x06, 0x07,
++		0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
++		0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x01,
++		0x18, 0x04, 0x1a
++	}
+ #endif
+ };
  
- 	setbits_le32(SUNXI_DRAM_PHY0_BASE + 8, 4);
+@@ -887,6 +908,7 @@ static bool mctl_phy_init(const struct dram_para *para,
+ 	struct sunxi_mctl_ctl_reg * const mctl_ctl =
+ 			(struct sunxi_mctl_ctl_reg *)SUNXI_DRAM_CTL0_BASE;
+ 	u32 val, val2, *ptr, mr0, mr2;
++	const u8 *map;
+ 	int i;
  
-@@ -859,9 +867,9 @@ static void mctl_phy_ca_bit_delay_compensation(const struct dram_para *para,
- 		}
- 		break;
- 	case SUNXI_DRAM_TYPE_LPDDR4:
--		if (para->tpr2 & 1) {
--			writel(val, SUNXI_DRAM_PHY0_BASE + 0x788);
--		} else {
-+		writel(val, SUNXI_DRAM_PHY0_BASE + 0x788);
-+		if (config->ranks == 2) {
-+			val = (para->tpr10 >> 11) & 0x1e;
- 			writel(val, SUNXI_DRAM_PHY0_BASE + 0x794);
- 		};
- 		break;
-@@ -1080,19 +1088,27 @@ static bool mctl_phy_init(const struct dram_para *para,
- 		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
+ 	if (para->type == SUNXI_DRAM_TYPE_LPDDR4)
+@@ -942,8 +964,15 @@ static bool mctl_phy_init(const struct dram_para *para,
+ 	writel(val2, SUNXI_DRAM_PHY0_BASE + 0x37c);
  
- 		writel(0xb04, &mctl_ctl->mrctrl1);
-+		udelay(10);
- 		writel(0x80000030, &mctl_ctl->mrctrl0);
-+		udelay(10);
- 		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
+ 	ptr = (u32 *)(SUNXI_DRAM_PHY0_BASE + 0xc0);
+-	for (i = 0; i < ARRAY_SIZE(phy_init); i++)
+-		writel(phy_init[i], &ptr[i]);
++	val = readl(SUNXI_SID_BASE);
++	if (((val & 0xfbff) == 0x5000) ||
++	    ((val & 0xfeff) == 0x5c00) ||
++	    ((val & 0xf7ff) == 0x2000))
++		map = phy_addr_maps[0];
++	else
++		map = phy_addr_maps[1];
++	for (i = 0; i < ARRAY_SIZE(phy_addr_maps[0]); i++)
++		writel(map[i], &ptr[i]);
  
- 		writel(0xc72, &mctl_ctl->mrctrl1);
-+		udelay(10);
- 		writel(0x80000030, &mctl_ctl->mrctrl0);
-+		udelay(10);
- 		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
- 
- 		writel(0xe09, &mctl_ctl->mrctrl1);
-+		udelay(10);
- 		writel(0x80000030, &mctl_ctl->mrctrl0);
-+		udelay(10);
- 		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
- 
- 		writel(0x1624, &mctl_ctl->mrctrl1);
-+		udelay(10);
- 		writel(0x80000030, &mctl_ctl->mrctrl0);
-+		udelay(10);
- 		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
- 		break;
- 	case SUNXI_DRAM_TYPE_DDR4:
-@@ -1108,7 +1124,7 @@ static bool mctl_phy_init(const struct dram_para *para,
- 
- 	if (para->tpr10 & TPR10_WRITE_LEVELING) {
- 		for (i = 0; i < 5; i++)
--			if (mctl_phy_write_leveling(config))
-+			if (mctl_phy_write_leveling(para, config))
- 				break;
- 		if (i == 5) {
- 			debug("write leveling failed!\n");
-@@ -1234,9 +1250,6 @@ static bool mctl_ctrl_init(const struct dram_para *para,
- 	setbits_le32(&mctl_ctl->unk_0x3180, BIT(31) | BIT(30));
- 	setbits_le32(&mctl_ctl->unk_0x4180, BIT(31) | BIT(30));
- 
--	if (para->type == SUNXI_DRAM_TYPE_LPDDR4)
--		setbits_le32(&mctl_ctl->dbictl, 0x1);
--
- 	setbits_le32(&mctl_ctl->rfshctl3, BIT(0));
- 	clrbits_le32(&mctl_ctl->dfimisc, BIT(0));
- 
-diff --git a/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c b/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
-index e6446b9180..6f5c4acbd6 100644
---- a/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
-+++ b/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
-@@ -23,7 +23,7 @@ void mctl_set_timing_params(const struct dram_para *para)
- 	u8 trcd		= max(ns_to_t(18), 2);
- 	u8 trc		= ns_to_t(65);
- 	u8 txp		= max(ns_to_t(8), 2);
--	u8 trtp		= max(ns_to_t(8), 4);
-+	u8 trtp		= 4;
- 	u8 trp		= ns_to_t(21);
- 	u8 tras		= ns_to_t(42);
- 	u16 trefi	= ns_to_t(3904) / 32;
+ 	if (para->tpr10 & TPR10_CA_BIT_DELAY)
+ 		mctl_phy_ca_bit_delay_compensation(para, config);
 -- 
 2.34.1
 
