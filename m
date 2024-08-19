@@ -4,45 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5156DC3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 17:21:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49622C52D7C
+	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 17:27:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBF41883A4;
-	Mon, 19 Aug 2024 19:21:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 9DB7A88D0E;
+	Mon, 19 Aug 2024 19:27:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 64EB088CF1; Mon, 19 Aug 2024 19:21:18 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id C772F882F0
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 19:21:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 27BD6339;
- Mon, 19 Aug 2024 10:21:41 -0700 (PDT)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 45EB33F58B;
- Mon, 19 Aug 2024 10:21:13 -0700 (PDT)
-Date: Mon, 19 Aug 2024 18:21:10 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Chris Morgan <macroalpha82@gmail.com>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, jernej.skrabec@gmail.com,
- neil.armstrong@linaro.org, hdegoede@redhat.com, jagan@amarulasolutions.com,
- trini@konsulko.com, ryan@testtoast.com, iuncuim@gmail.com,
- sumit.garg@linaro.org, Chris Morgan <macromorgan@hotmail.com>
-Subject: Re: [PATCH V2 9/9] sunxi: Add support for Anbernic RG35XX-2024
-Message-ID: <20240819182110.5867a5ec@donnerap.manchester.arm.com>
-In-Reply-To: <20240819145938.503221-10-macroalpha82@gmail.com>
-References: <20240819145938.503221-1-macroalpha82@gmail.com>
- <20240819145938.503221-10-macroalpha82@gmail.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1724088452;
+	bh=Xd+D8MCcW7JMdt+syxVq009KEqHbSpVVTb+9+Pu6zzg=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=pWbR/TNAV0L8P8mg3DDWfWecqw2hHYERockHTG4YgNZ686mnfcbeGjLMFnjtZs5Nz
+	 Yy8FPkQbqKa0MzcPdRHulcz6iVxGS2We1OSzQYZuIoHWfu8fuxpCahLIhXr13meK9n
+	 yLS81RoI7GWv7Y4T2PohUD71ebyYeP+NX2rqlAni2uMsYYDlIg29yT22ZvYIKGWFDA
+	 QewbdKbrQLFU3v8IQ327ayTlGzAe/QYNph82wsamVOTusBraBLl1uJhuCN3pDa3jvZ
+	 zU0BEiV0nEC5bQs7+73zGOlt9MdkEFCGIQWCzqb7ztpFECSjuc1loTMRXV+aXtM0dc
+	 CkbKKmH7VePVw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id C2C0E88CFB;
+ Mon, 19 Aug 2024 19:27:30 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1724088451;
+ bh=Xd+D8MCcW7JMdt+syxVq009KEqHbSpVVTb+9+Pu6zzg=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=KM3bJJGkp08F9fWypYRFJmdhOuJ/EsFc/sj7sO51THIOZgEX+qscsWBbjr4AGQeei
+ uWsHLoNnlZCK2ZEkfGhibtfjvugVWhkNHA4idIRy8nMXB011XDHPi0k831MlTIfURU
+ WxKLpT3xFDZ3pghwIzPIZ3p7Mo/uoLZNbj1vNGoH/Em1JRtMdrMGD/fnuU5/0HhNzD
+ MVou1aVX+gfTU59qSLv5WYpSknPCzc4a9vlAjM9Z0A1InNqgD2ceBx36UMxITXqQD6
+ RX/i0GYIiVZ341fZMeZBIbo0JCrEUB0nspCLsnvh9WPC/2CPwmNBO5xEkrCpeAJ2aJ
+ TJkAajjEfmVgw==
+Message-ID: <baf69a18-e19f-49e5-82d8-c6a128147672@denx.de>
+Date: Mon, 19 Aug 2024 19:08:37 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/7] FUSB302 USB-C controller support
+To: Jonas Karlman <jonas@kwiboo.se>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>
+Cc: u-boot@lists.denx.de, Tim Harvey <tharvey@gateworks.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
+ Soeren Moch <smoch@web.de>
+References: <20240802180027.139193-1-sebastian.reichel@collabora.com>
+ <d3c80c56-ebb0-4b6f-ac92-15cd646feb27@denx.de>
+ <6f42837e-6378-4ded-8120-d642a13e69df@kwiboo.se>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <6f42837e-6378-4ded-8120-d642a13e69df@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -60,123 +75,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 19 Aug 2024 09:59:38 -0500
-Chris Morgan <macroalpha82@gmail.com> wrote:
+On 8/18/24 11:43 PM, Jonas Karlman wrote:
 
-Hi Chris,
+Hi,
 
-> From: Chris Morgan <macromorgan@hotmail.com>
+>>> On ROCK 5B power is usually supplied via it's USB-C port. This port has the
+>>> data lines connected to RK3588, VBUS connected to the input regulator and
+>>> CC pins connected to FUSB302. FUSB302 is a USB-C controller, which can be
+>>> accessed via I2C from RK3588. The USB-C controller is needed to figure out
+>>> the USB-C cable orientation, but also to do USB PD communication. Thus it
+>>> would be great to enable support for it in the operating system.
+>>>
+>>> But the USB-PD specification requires, that a device reacts to USB-PD messages
+>>> send by the power-supply within around 5 seconds. If that does not happen the
+>>> power-supply assumes, that the device does not support USB-PD. If a device
+>>> later starts sending USB-PD messages it is considered an error, which is solved
+>>> by doing a hard reset. A USB-PD hard reset means, that all supply voltages are
+>>> removed for a short period of time. For boards, which are solely powered
+>>> through their USB-C port, like the Radxa Rock 5B, this results in an machine
+>>> reset. This is currently worked around by not describing the FUSB302 in the
+>>> kernel DT, so nothing will ever speak USB-PD on the Rock 5B. This means
+>>>
+>>> 1. the USB-C port cannot be used at all
+>>> 2. the board will be running via fallback supply, which provides limited
+>>>      power capabilities
+>>>
+>>> In order to avoid the hard reset, this adds FUSB302 support to U-Boot, so
+>>> that we react to the power-supply's queries in time. The code, which is
+>>> originally from the Linux kernel, consists of two parts:
+>>>
+>>> 1. the tcpm state machine, which implements the Type C port manager state
+>>>      machine as described in the USB PD specification
+>>> 2. the fusb302 driver, which knows about specific registers
+>>>
+>>> Especially the first part has been heavily modified compared to the
+>>> kernel, which makes use of multiple delayed works and threads. For this
+>>> I used a priorly ported version from Rockchip, removed their hacks and
+>>> any states not necessary in U-Boot (e.g. audio accessory support).
+>>>
+>>> Sorry for the delay in getting PATCHv3 ready.
+>>
+>> I am the one who should be sorry here, really, sorry for the abysmal
+>> delay in my replies.
+>>
+>> So ... this series looks good to me. Thank you for working on this !
+>>
+>> Jonas, are your concerns resolved ?
 > 
-> The Anbernic RG35XX series of devices are based around an Allwinner
-> H700 SoC with 1GB of RAM, 2 SD cards, and multiple input buttons.
-> 
-> This bootloader has been tested on the Anbernic RG35XX-2024 and
-> RG35XX-H, but should be suitable for the entire lineup of H700 based
-> devices.
-> 
-> A future series of updates will add board selection logic to identify
-> and load the correct device tree automatically.
+> No, for ROCK 5B the full overwrite of the Rockchip common misc_init_r()
+> in mach-rockchip/board.c should be fixed, rockchip_early_misc_init_r()
+> could probably be used instead (or possible a PREBOOT cmd), see [1].
 
-So diverging from the rest of sunxi, you are switching to OF_UPSTREAM and
-bootstd here, just for that board. Please don't do this. Both methods are
-board agnostic, and just depend on generic platform code to work.
-I have a patch to switch all H616 boards over to OF_UPSTREAM, so this
-wouldn't be needed to be done here. If you want to patch the DT, you could
-do this in arch/arm/dts as well.
-For bootstd Simon had a series to enable that on sunxi, on which I
-commented:
-https://lore.kernel.org/u-boot/20240807205032.3745680-1-sjg@chromium.org/
+Can you use DM_FLAG_PROBE_AFTER_BIND instead of misc_init_r for this ?
 
-So please keep this board in line with the rest of the sunxi boards, and
-we will automatically upgrade it to both OF_UPSTREAM and bootstd as soon
-as that's ready.
+drivers/led/led-uclass.c: dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
 
-Also the defconfig looks quite elaborate, are those options really all
-needed? The idea of defconfig is just to provide a, well, default. On
-sunxi we also try to keep that minimal.
-
-Thanks,
-Andre
-
-> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
-> ---
->  board/sunxi/MAINTAINERS                |  5 +++
->  configs/anbernic_rg35xx_h700_defconfig | 52 ++++++++++++++++++++++++++
->  2 files changed, 57 insertions(+)
->  create mode 100644 configs/anbernic_rg35xx_h700_defconfig
-> 
-> diff --git a/board/sunxi/MAINTAINERS b/board/sunxi/MAINTAINERS
-> index 4ad77c75f5..84799879e8 100644
-> --- a/board/sunxi/MAINTAINERS
-> +++ b/board/sunxi/MAINTAINERS
-> @@ -132,6 +132,11 @@ M:	Paul Kocialkowski <contact@paulk.fr>
->  S:	Maintained
->  F:	configs/Ampe_A76_defconfig
->  
-> +ANBERNIC RG35XX-2024
-> +M:	Chris Morgan <macromorgan@hotmail.com>
-> +S:	Maintained
-> +F:	configs/anbernic_rg35xx_h700_defconfig
-> +
->  BANANAPI M1 PLUS
->  M:	Jagan Teki <jagan@amarulasolutions.com>
->  S:	Maintained
-> diff --git a/configs/anbernic_rg35xx_h700_defconfig b/configs/anbernic_rg35xx_h700_defconfig
-> new file mode 100644
-> index 0000000000..6ea2f45d2f
-> --- /dev/null
-> +++ b/configs/anbernic_rg35xx_h700_defconfig
-> @@ -0,0 +1,52 @@
-> +CONFIG_ARM=y
-> +CONFIG_ARCH_SUNXI=y
-> +CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun50i-h700-anbernic-rg35xx-2024"
-> +CONFIG_SPL=y
-> +CONFIG_DRAM_SUN50I_H616_DX_ODT=0x08080808
-> +CONFIG_DRAM_SUN50I_H616_DX_DRI=0x0e0e0e0e
-> +CONFIG_DRAM_SUN50I_H616_CA_DRI=0x0e0e
-> +CONFIG_DRAM_SUN50I_H616_ODT_EN=0x7887bbbb
-> +CONFIG_DRAM_SUN50I_H616_TPR2=0x1
-> +CONFIG_DRAM_SUN50I_H616_TPR6=0x40808080
-> +CONFIG_DRAM_SUN50I_H616_TPR10=0x402f6633
-> +CONFIG_DRAM_SUN50I_H616_TPR11=0x1b1f1e1c
-> +CONFIG_DRAM_SUN50I_H616_TPR12=0x06060606
-> +CONFIG_MACH_SUN50I_H616=y
-> +CONFIG_RESERVE_ALLWINNER_BOOT0_HEADER=y
-> +CONFIG_SUNXI_DRAM_H616_LPDDR4=y
-> +CONFIG_DRAM_CLK=672
-> +CONFIG_R_I2C_ENABLE=y
-> +CONFIG_DEFAULT_FDT_FILE="sun50i-h700-anbernic-rg35xx-2024.dtb"
-> +CONFIG_LAST_STAGE_INIT=y
-> +CONFIG_SPL_I2C=y
-> +CONFIG_CMD_BDINFO_EXTRA=y
-> +CONFIG_CMD_BOOTDEV=y
-> +CONFIG_CMD_BOOTMETH=y
-> +CONFIG_CMD_BOOTZ=y
-> +CONFIG_BOOTM_OPENRTOS=y
-> +CONFIG_BOOTM_OSE=y
-> +CONFIG_CMD_ADTIMG=y
-> +CONFIG_CMD_ADC=y
-> +CONFIG_CMD_CLK=y
-> +# CONFIG_CMD_LOADB is not set
-> +# CONFIG_CMD_LOADS is not set
-> +CONFIG_CMD_BKOPS_ENABLE=y
-> +CONFIG_CMD_MMC_REG=y
-> +CONFIG_CMD_MMC_SWRITE=y
-> +CONFIG_CMD_SDRAM=y
-> +CONFIG_CMD_PMIC=y
-> +CONFIG_CMD_REGULATOR=y
-> +CONFIG_OF_UPSTREAM=y
-> +# CONFIG_NET is not set
-> +CONFIG_BUTTON=y
-> +CONFIG_BUTTON_GPIO=y
-> +CONFIG_SPL_SYS_I2C_LEGACY=y
-> +CONFIG_SYS_I2C_MVTWSI=y
-> +CONFIG_SYS_I2C_SLAVE=0x7f
-> +CONFIG_SYS_I2C_SPEED=400000
-> +CONFIG_REGULATOR_AXP=y
-> +CONFIG_AXP717_POWER=y
-> +CONFIG_AXP_DCDC2_VOLT=940
-> +CONFIG_AXP_DCDC3_VOLT=1100
-> +CONFIG_REGEX=y
-> +# CONFIG_EFI_LOADER is not set
-
+This will probe the driver after it got bound, and you won't have to 
+hack around board files or arch files for this.
