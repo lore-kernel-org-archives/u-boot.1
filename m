@@ -4,19 +4,19 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4441FC3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 10:18:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10E80C3DA4A
+	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 10:18:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C81BB88A2C;
-	Mon, 19 Aug 2024 12:17:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 29F8D88B07;
+	Mon, 19 Aug 2024 12:17:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=aspeedtech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E26A288A32; Mon, 19 Aug 2024 12:17:14 +0200 (CEST)
+ id 138E688A30; Mon, 19 Aug 2024 12:17:15 +0200 (CEST)
 Received: from TWMBX01.aspeed.com (mail.aspeedtech.com [211.20.114.72])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FA7B88995
+ by phobos.denx.de (Postfix) with ESMTPS id ACDA888A11
  for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 12:17:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=aspeedtech.com
@@ -25,16 +25,16 @@ Authentication-Results: phobos.denx.de;
 Received: from TWMBX01.aspeed.com (192.168.0.62) by TWMBX01.aspeed.com
  (192.168.0.62) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1258.12; Mon, 19 Aug
- 2024 18:17:04 +0800
+ 2024 18:17:05 +0800
 Received: from mail.aspeedtech.com (192.168.10.152) by TWMBX01.aspeed.com
  (192.168.0.62) with Microsoft SMTP Server id 15.2.1258.12 via Frontend
- Transport; Mon, 19 Aug 2024 18:17:04 +0800
+ Transport; Mon, 19 Aug 2024 18:17:05 +0800
 From: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 To: <rick@andestech.com>, <ycliang@andestech.com>, <trini@konsulko.com>,
  <ryan_chen@aspeedtech.com>, <joel@jms.id.au>, <u-boot@lists.denx.de>
-Subject: [PATCH 5/8] timer: Add AST2700 IBEX timer support
-Date: Mon, 19 Aug 2024 18:17:01 +0800
-Message-ID: <20240819101704.1612317-6-chiawei_wang@aspeedtech.com>
+Subject: [PATCH 6/8] board: ibex_ast2700: Add FMC header support
+Date: Mon, 19 Aug 2024 18:17:02 +0800
+Message-ID: <20240819101704.1612317-7-chiawei_wang@aspeedtech.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240819101704.1612317-1-chiawei_wang@aspeedtech.com>
 References: <20240819101704.1612317-1-chiawei_wang@aspeedtech.com>
@@ -57,97 +57,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the driver for the AST2700 Ibex timer, which uses CPU
-cycles as the timer count running at 200MHz.
+Define and parse the header of the First Mutable Code (FMC)
+of AST2700 SoCs at runtime phase.
+
+The FMC header contains the information to load prebuilt binaries
+required for device initialization such as DRAM and VGA.
 
 Signed-off-by: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
 ---
- drivers/timer/Kconfig          |  6 +++++
- drivers/timer/Makefile         |  1 +
- drivers/timer/ast_ibex_timer.c | 45 ++++++++++++++++++++++++++++++++++
- 3 files changed, 52 insertions(+)
- create mode 100644 drivers/timer/ast_ibex_timer.c
+ arch/riscv/include/asm/arch-ast2700/fmc_hdr.h | 52 +++++++++++++++
+ board/aspeed/ibex_ast2700/Makefile            |  1 +
+ board/aspeed/ibex_ast2700/fmc_hdr.c           | 64 +++++++++++++++++++
+ 3 files changed, 117 insertions(+)
+ create mode 100644 arch/riscv/include/asm/arch-ast2700/fmc_hdr.h
+ create mode 100644 board/aspeed/ibex_ast2700/fmc_hdr.c
 
-diff --git a/drivers/timer/Kconfig b/drivers/timer/Kconfig
-index 6b1de82ae3..cb6fc0e7fd 100644
---- a/drivers/timer/Kconfig
-+++ b/drivers/timer/Kconfig
-@@ -106,6 +106,12 @@ config AST_TIMER
- 	  This is mostly because they all share several registers which
- 	  makes it difficult to completely separate them.
- 
-+config AST_IBEX_TIMER
-+	bool "Aspeed ast2700 Ibex timer"
-+	depends on TIMER
-+	help
-+	  Select this to enable a timer support for the Ibex RV32-based MCUs in AST2700.
-+
- config ATCPIT100_TIMER
- 	bool "ATCPIT100 timer support"
- 	depends on TIMER
-diff --git a/drivers/timer/Makefile b/drivers/timer/Makefile
-index fb95c8899e..fec4af392e 100644
---- a/drivers/timer/Makefile
-+++ b/drivers/timer/Makefile
-@@ -9,6 +9,7 @@ obj-$(CONFIG_$(SPL_)ANDES_PLMT_TIMER) += andes_plmt_timer.o
- obj-$(CONFIG_ARC_TIMER)	+= arc_timer.o
- obj-$(CONFIG_ARM_TWD_TIMER)	+= arm_twd_timer.o
- obj-$(CONFIG_AST_TIMER)	+= ast_timer.o
-+obj-$(CONFIG_AST_IBEX_TIMER)	+= ast_ibex_timer.o
- obj-$(CONFIG_ATCPIT100_TIMER) += atcpit100_timer.o
- obj-$(CONFIG_$(SPL_)ATMEL_PIT_TIMER) += atmel_pit_timer.o
- obj-$(CONFIG_$(SPL_)ATMEL_TCB_TIMER) += atmel_tcb_timer.o
-diff --git a/drivers/timer/ast_ibex_timer.c b/drivers/timer/ast_ibex_timer.c
+diff --git a/arch/riscv/include/asm/arch-ast2700/fmc_hdr.h b/arch/riscv/include/asm/arch-ast2700/fmc_hdr.h
 new file mode 100644
-index 0000000000..261839661e
+index 0000000000..fbbcdb25cc
 --- /dev/null
-+++ b/drivers/timer/ast_ibex_timer.c
-@@ -0,0 +1,45 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/arch/riscv/include/asm/arch-ast2700/fmc_hdr.h
+@@ -0,0 +1,52 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
 +/*
-+ * Copyright (c) 2024 Aspeed Technology Inc.
++ * Copyright (C) ASPEED Technology Inc.
 + */
 +
-+#include <asm/csr.h>
++#ifndef __ASM_AST2700_FMC_HDR_H__
++#define __ASM_AST2700_FMC_HDR_H__
++
++#include <linux/types.h>
++
++#define HDR_MAGIC		0x48545341	/* ASTH */
++#define HDR_PB_MAX		30
++
++enum prebuilt_type {
++	PBT_END_MARK = 0x0,
++
++	PBT_DDR4_PMU_TRAIN_IMEM,
++	PBT_DDR4_PMU_TRAIN_DMEM,
++	PBT_DDR4_2D_PMU_TRAIN_IMEM,
++	PBT_DDR4_2D_PMU_TRAIN_DMEM,
++	PBT_DDR5_PMU_TRAIN_IMEM,
++	PBT_DDR5_PMU_TRAIN_DMEM,
++	PBT_DP_FW,
++	PBT_UEFI_X64_AST2700,
++
++	PBT_NUM
++};
++
++struct fmc_hdr_preamble {
++	uint32_t magic;
++	uint32_t version;
++};
++
++struct fmc_hdr_body {
++	uint32_t fmc_size;
++	union {
++		struct {
++			uint32_t type;
++			uint32_t size;
++		} pbs[0];
++		uint32_t raz[29];
++	};
++};
++
++struct fmc_hdr {
++	struct fmc_hdr_preamble preamble;
++	struct fmc_hdr_body body;
++} __packed;
++
++int fmc_hdr_get_prebuilt(uint32_t type, uint32_t *ofst, uint32_t *size);
++
++#endif
+diff --git a/board/aspeed/ibex_ast2700/Makefile b/board/aspeed/ibex_ast2700/Makefile
+index 162f46fd46..3d8eea9166 100644
+--- a/board/aspeed/ibex_ast2700/Makefile
++++ b/board/aspeed/ibex_ast2700/Makefile
+@@ -1,2 +1,3 @@
+ obj-y += ibex_ast2700.o
++obj-y += fmc_hdr.o
+ obj-y += sli.o
+diff --git a/board/aspeed/ibex_ast2700/fmc_hdr.c b/board/aspeed/ibex_ast2700/fmc_hdr.c
+new file mode 100644
+index 0000000000..2068a906f6
+--- /dev/null
++++ b/board/aspeed/ibex_ast2700/fmc_hdr.c
+@@ -0,0 +1,64 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) Aspeed Technology Inc.
++ */
++
++#include <asm/arch/fmc_hdr.h>
 +#include <asm/io.h>
-+#include <dm.h>
++#include <asm/sections.h>
 +#include <errno.h>
-+#include <timer.h>
++#include <spl.h>
++#include <string.h>
 +
-+#define CSR_MCYCLE	0xb00
-+#define CSR_MCYCLEH	0xb80
-+
-+static u64 ast_ibex_timer_get_count(struct udevice *dev)
++int fmc_hdr_get_prebuilt(uint32_t type, uint32_t *ofst, uint32_t *size)
 +{
-+	uint32_t cnt_l, cnt_h;
++	struct fmc_hdr_preamble *preamble;
++	struct fmc_hdr_body *body;
++	struct fmc_hdr *hdr;
++	uint32_t t, s, o;
++	int i;
 +
-+	cnt_l = csr_read(CSR_MCYCLE);
-+	cnt_h = csr_read(CSR_MCYCLEH);
++	if (type >= PBT_NUM)
++		return -EINVAL;
 +
-+	return ((uint64_t)cnt_h << 32) | cnt_l;
-+}
++	if (!ofst || !size)
++		return -EINVAL;
 +
-+static int ast_ibex_timer_probe(struct udevice *dev)
-+{
++	hdr = (struct fmc_hdr *)(_start - sizeof(*hdr));
++	preamble = &hdr->preamble;
++	body = &hdr->body;
++
++	if (preamble->magic != HDR_MAGIC)
++		return -EIO;
++
++	for (i = 0, o = sizeof(*hdr) + body->fmc_size; i < HDR_PB_MAX; ++i) {
++		t = body->pbs[i].type;
++		s = body->pbs[i].size;
++
++		/* skip if unrecognized, yet */
++		if (t >= PBT_NUM) {
++			o += s;
++			continue;
++		}
++
++		/* prebuilt end mark */
++		if (t == 0 && s == 0)
++			break;
++
++		/* return the prebuilt info if found */
++		if (t == type) {
++			*ofst = o;
++			*size = s;
++
++			goto found;
++		}
++
++		/* update offset for next prebuilt */
++		o += s;
++	}
++
++	return -ENODATA;
++
++found:
 +	return 0;
 +}
-+
-+static const struct timer_ops ast_ibex_timer_ops = {
-+	.get_count = ast_ibex_timer_get_count,
-+};
-+
-+static const struct udevice_id ast_ibex_timer_ids[] = {
-+	{ .compatible = "aspeed,ast2700-ibex-timer" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(ast_ibex_timer) = {
-+	.name = "ast_ibex_timer",
-+	.id = UCLASS_TIMER,
-+	.of_match = ast_ibex_timer_ids,
-+	.probe = ast_ibex_timer_probe,
-+	.ops = &ast_ibex_timer_ops,
-+};
 -- 
 2.25.1
 
