@@ -4,62 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EE10C3DA4A
-	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 18:00:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC975C52D7C
+	for <u-boot@archiver.kernel.org>; Mon, 19 Aug 2024 19:34:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AD4088CE9;
-	Mon, 19 Aug 2024 20:00:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id CCB5388D22;
+	Mon, 19 Aug 2024 21:34:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1724090450;
-	bh=7p8OK6+3TH9G33gjJbrI0xtgoCeeW1HXXzrE3awtRTg=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=JzAFBMVIjAQvf7EcKd2CxCT+K67SUtBf72/Dh6mfnMe5+d0qqbv0McVP4LP9VzwhT
-	 tDYUyUt/z0Ne1pUyZfA7ds5JqPqByp8fAzBW9V4jmCqkG3pfz1PUNf6VTgG6B2MSkr
-	 bWFA3L5YWmZ/tDUYareDJ3oI8ZHcqvKVtg4aHP76zRQY/mIiLLHA1T4bq+9TMCRZcn
-	 zNeG72GGm9vf0sfGDa0/x3a4AEZsHOFrLG+RC+3m+tfj8b1MVejrm+Q46+GqatKKRD
-	 4lLacYVENgUMHfCzSPq27CYqbIiNj8GAlyJFprShPTDqgInYqZtfMpJqf5y2OmmBw4
-	 3HLzVoQKqEXPg==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Cz3PrPJ2";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id E435488CD7; Mon, 19 Aug 2024 21:34:24 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id B987888C9F;
- Mon, 19 Aug 2024 20:00:48 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1724090449;
- bh=7p8OK6+3TH9G33gjJbrI0xtgoCeeW1HXXzrE3awtRTg=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Q3Ev6GyOIoTh0ABO9IKihtU5CRuySTu64MNGxYc4fba2aknVz7a7E1J98+DEewb/8
- wo2DAhCV4fbhyIJVduPGocG1du3EEKPO1h6lBjoOXy6BWNO/SSewso2GTQKRKSpenG
- jHxSmJwfU7hX4udQknvv9VBZGo2xkvxApFSVe3WaahBYUy8P0uPuUGRrH2hNX1QYhu
- HiMHMbgcLl7iwT7868ttnRozXQHXf8DNT8VYidnaMbmZYDC40HsLiLxrrC9w9hM+Bi
- xGFleHN58aquDNqM+oIDR1XjK4ZTXFE+MClrpQHcMuVWy77UDb+oK2fkqZeKXEJsVS
- fv9FACBL5/R6g==
-Message-ID: <10150334-e1af-418d-9713-429bf53c3366@denx.de>
-Date: Mon, 19 Aug 2024 20:00:47 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id BBAED88CD7
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 21:34:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a7d89bb07e7so503675666b.3
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 12:34:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1724096062; x=1724700862; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XD+YZ03htDVoBxt0ZNMdWa9ZvwJG1fmW1JSa5Tzfq0w=;
+ b=Cz3PrPJ2xLYzHtN+ctmgJ2L0UfMLn8z7HA1sOEFWWMGdn8W4LIiVqnXpHZl5svSkuS
+ cKnAUbHEEgHaLdyRM3UDaRIN28/dsIoWt3TxRukby7HiIMFkktVmExyRq8ZKtgQ+e0ax
+ ktK7AjAeWdao7FMKvMHsa5o+/jCS431zhsrmzzZWnkAJVDu+9U9j2osq1gMmhYPWtQAB
+ i74ASd5x1UJXhjKgVNEQ/Iq3M3Rau/MKqu1zR6Xq671nWK0kBN5qJuUMu8f/iBMzyEro
+ /Z3UieuJ0cCVKRRQwA5Fc1pGBhuj+0RuWed9EaYm3qgRSSeZbrlCXJueKr+o71dFp7YE
+ x0Ug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724096062; x=1724700862;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XD+YZ03htDVoBxt0ZNMdWa9ZvwJG1fmW1JSa5Tzfq0w=;
+ b=jLubAgZFbXDbIi6wCqdwDzAFzep+axLmrA8KlNCJxiXcf26IiG94PNYdtYCy3h9qh1
+ D81UAEKYYLA+ekBb9bKRRsSbixvDR1vWMceDC+iFsXGxnukxuuY69zu+EXdlWoTQldOt
+ TfjpzzOfSVYdoeGeqU+qR3tcFTDawqsDY31XnbKuTMn/HRNoKQvwL75Mizn/n8FhfdVt
+ ytidW0wwH5yW4BIiq8Zxnbv3sZSpj7G6nr+8dXmI+HTyt5ra9OooZQiYfJroZ6Kv8Vka
+ tmwhzlJuL2mH6LBbmO2nzxMynswkElzyD2n2FWYc0GW1QoDjLDpJHSo46AAm0D8VIPLt
+ 7LPg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW6vEiBJBjMl/M9t/cCBAKSg7PIuZ8ELa+Y14nEhZaYNyWOtIiFk1y/orsKquCLfT7sqs7sF/M=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxe5yfvuKI9Y+5N70K3vEotmy5oQ6B6n4oEta3LturqOriarMSG
+ RfFi6TswG83724gZgy9HVhro23QBjT+Y5ds8P7veZZ2ogXP/S38nTxMDZH3X/xk=
+X-Google-Smtp-Source: AGHT+IG1AwFyMb2PyoaSznDIkd/UETWbCADAFLQOLIa2f6OC1dzDk6KMp6oBf0n5gh01cj0mMhdgDg==
+X-Received: by 2002:a17:907:9712:b0:a7a:c083:857b with SMTP id
+ a640c23a62f3a-a8392a11c5fmr904381966b.42.1724096061874; 
+ Mon, 19 Aug 2024 12:34:21 -0700 (PDT)
+Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::676e])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a8383964976sm667783666b.188.2024.08.19.12.34.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 19 Aug 2024 12:34:21 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH 0/4] clk/qcom: implement clk dump callback
+Date: Mon, 19 Aug 2024 21:34:16 +0200
+Message-Id: <20240819-b4-qcom-clk-dump-v1-0-182cf77c23a2@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/7] FUSB302 USB-C controller support
-To: Sebastian Reichel <sebastian.reichel@collabora.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>,
- Eugen Hristev <eugen.hristev@collabora.com>, u-boot@lists.denx.de,
- Tim Harvey <tharvey@gateworks.com>, Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
- Soeren Moch <smoch@web.de>
-References: <20240802180027.139193-1-sebastian.reichel@collabora.com>
- <d3c80c56-ebb0-4b6f-ac92-15cd646feb27@denx.de>
- <6f42837e-6378-4ded-8120-d642a13e69df@kwiboo.se>
- <baf69a18-e19f-49e5-82d8-c6a128147672@denx.de>
- <yi6wmt52ro5wg7baydfn6hixmv5ctfzcdfs7rrxy73oht3rc54@mxzn67zhfglt>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <yi6wmt52ro5wg7baydfn6hixmv5ctfzcdfs7rrxy73oht3rc54@mxzn67zhfglt>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIADiew2YC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxMDC0NL3SQT3cLk/Fzd5Jxs3ZTS3ALdVCPTRANDS4s0s2QDJaC2gqLUtMw
+ KsJHRsbW1AJguT8xiAAAA
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
+ Caleb Connolly <caleb.connolly@linaro.org>
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=9111;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=KXxZuq9P+ussJpaGzhLu9Y08ZkhUDYRBoiYE8wsFpuo=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmw548dHlpXhg9A/MqQGyFS627yaRgUZ1uiWwgZ
+ bLdXuCXyy2JAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZsOePAAKCRAFgzErGV9k
+ tr4+D/9wH9WNaI4z0MyhPEWn82Da9pH0SfaLE/8mtC2YTXiaaD9euBrsxZ58V1zPVV+0qIN68O9
+ vOgtpU0UNPGYOQC3XGEMXRGrNRV9rxb0Mz4s+eY48l5e1nstuEh2ntogVKPRg1o6sGz6cuBPPy2
+ Us8Iero78hIFn9HQFRip2K0ld8cqb/4StsblJVVz+wNrhHtTlDjjue957j8hlwWsG1HzZ+GsBjv
+ N9rXucfOSk297Kp393Q/2inuWfrwxmX6ag4sq0ZzV3W1ikRz31b5cQL7/IYaM+i0RxhkDZpffsk
+ s5uwMMaWIDy91rk3Jx/gR3eDnGdvsR5+pakhSGeNNxKfgs5G9MT7zb//ha2OS/80b5GPPdGXWKO
+ Lubj5O4hr/RoJktKBSSNoc3JJbN/zwWSU2fIeHQUxTubRsAIn3UwoopJqL12/tjQU2YkHGOYwxU
+ nUgy6h9g7Fs6ZAXHJJghwy2Q0WCJrcIfzaFnoPRe6CiTgZgHkK2xsOIz5p251DmUXTx3+Nijtwq
+ bQ/6Jw8TK9ABPQ4g8Gd+ID27t2hkY7ckAumayes1qVXBCPVmBYko4B4ywdfUWJLciT15wtIoHCQ
+ flrzfzVMOcCZbQewx7oWkE6nNms3Y/BlKZRC+Ier+N6RO6SGzytS7RpGN1gzdOVUmUBJ1LArvQ0
+ mD7gXbfePnpVEeg==
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,75 +114,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/19/24 7:38 PM, Sebastian Reichel wrote:
-> Hi,
-> 
-> On Mon, Aug 19, 2024 at 07:08:37PM GMT, Marek Vasut wrote:
->> On 8/18/24 11:43 PM, Jonas Karlman wrote:
->>>>> On ROCK 5B power is usually supplied via it's USB-C port. This port has the
->>>>> data lines connected to RK3588, VBUS connected to the input regulator and
->>>>> CC pins connected to FUSB302. FUSB302 is a USB-C controller, which can be
->>>>> accessed via I2C from RK3588. The USB-C controller is needed to figure out
->>>>> the USB-C cable orientation, but also to do USB PD communication. Thus it
->>>>> would be great to enable support for it in the operating system.
->>>>>
->>>>> But the USB-PD specification requires, that a device reacts to USB-PD messages
->>>>> send by the power-supply within around 5 seconds. If that does not happen the
->>>>> power-supply assumes, that the device does not support USB-PD. If a device
->>>>> later starts sending USB-PD messages it is considered an error, which is solved
->>>>> by doing a hard reset. A USB-PD hard reset means, that all supply voltages are
->>>>> removed for a short period of time. For boards, which are solely powered
->>>>> through their USB-C port, like the Radxa Rock 5B, this results in an machine
->>>>> reset. This is currently worked around by not describing the FUSB302 in the
->>>>> kernel DT, so nothing will ever speak USB-PD on the Rock 5B. This means
->>>>>
->>>>> 1. the USB-C port cannot be used at all
->>>>> 2. the board will be running via fallback supply, which provides limited
->>>>>       power capabilities
->>>>>
->>>>> In order to avoid the hard reset, this adds FUSB302 support to U-Boot, so
->>>>> that we react to the power-supply's queries in time. The code, which is
->>>>> originally from the Linux kernel, consists of two parts:
->>>>>
->>>>> 1. the tcpm state machine, which implements the Type C port manager state
->>>>>       machine as described in the USB PD specification
->>>>> 2. the fusb302 driver, which knows about specific registers
->>>>>
->>>>> Especially the first part has been heavily modified compared to the
->>>>> kernel, which makes use of multiple delayed works and threads. For this
->>>>> I used a priorly ported version from Rockchip, removed their hacks and
->>>>> any states not necessary in U-Boot (e.g. audio accessory support).
->>>>>
->>>>> Sorry for the delay in getting PATCHv3 ready.
->>>>
->>>> I am the one who should be sorry here, really, sorry for the abysmal
->>>> delay in my replies.
->>>>
->>>> So ... this series looks good to me. Thank you for working on this !
->>>>
->>>> Jonas, are your concerns resolved ?
->>>
->>> No, for ROCK 5B the full overwrite of the Rockchip common misc_init_r()
->>> in mach-rockchip/board.c should be fixed, rockchip_early_misc_init_r()
->>> could probably be used instead (or possible a PREBOOT cmd), see [1].
->>
->> Can you use DM_FLAG_PROBE_AFTER_BIND instead of misc_init_r for this ?
->>
->> drivers/led/led-uclass.c: dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
->>
->> This will probe the driver after it got bound, and you won't have to hack
->> around board files or arch files for this.
-> 
-> Jonas suggested the same. My response still applies:
-> 
-> Depending on the remote side (i.e. the power-supply) the TCPM state
-> machine can take quite some time to get it into the "final" state.
-> The worst I have seen was around 2 seconds.
-> 
-> Boards, which are not powered via their TCPM controller can survive
-> a USB hard reset and do not need any U-Boot support. I think we do
-> not want to add this penality to these boards.
+Add support for dumping a few of the clocks used on Qualcomm platforms.
+Naming the Global PLL's, Root Clock Generators, and gate clocks.
 
-Could you set the DM_FLAG_PROBE_AFTER_BIND flag only for systems where 
-this is applicable ? Maybe use some DT property to decide whether or not 
-to set the flag ?
+This helps a lot with platform bringup and feature enablement by making
+it easy to sanity check that the clocks are programmed correctly.
+
+== Usage ==
+
+Enable CONFIG_CMD_CLK and "#define LOG_DEBUG" at the top of
+qcom-<soc>.c.
+
+If your SoC doesn't yet define the debug data for clocks, it can be
+added using the Linux driver as a reference.
+
+The "clk dump" command should print the states of all the gates, GPLLs
+and RCGs for your SoC.
+
+== Glossary ==
+
+RCG: Root Clock Generator
+* Takes in some fairly arbitrary high freq clock (configurable clock
+source and options for taking just even pulses and other things)
+* Output frequency = input_freq * (m/n) * (1/d) where m/n are arbitrary
+8 or 16-bit values (depending on the RCG), and d is a number (with
+support for .5 offsets).
+
+GPLL: Global Phase Locked Loop
+* Crystal as input
+* integer multiplier + exponent part (2^-40)
+
+Gate: Simple on/off clock
+* Put between RCGs and the peripherals they power
+* Required to allow for correct power sequencing
+
+If you do the maths manually using the equations from "clk dump", the
+numbers should roughly line up by they're likely to be out by a handful
+of MHz. They output is formatted so that it can be pasted directly into
+the python interpreter.
+
+== Example output ==
+
+=> clk dump
+ Rate               Usecnt      Name
+------------------------------------------
+ 38400000             0        |-- xo-board
+ 32764                0        |-- sleep-clk
+
+qcom_clk qcom_clk:
+Gate Clocks:
+GCC_AGGRE_USB3_SEC_AXI_CLK      : 
+GCC_CFG_NOC_USB3_SEC_AXI_CLK    : 
+GCC_QUPV3_WRAP0_S0_CLK          : 
+GCC_QUPV3_WRAP0_S1_CLK          : 
+GCC_QUPV3_WRAP0_S2_CLK          : 
+GCC_QUPV3_WRAP0_S3_CLK          : 
+GCC_QUPV3_WRAP0_S4_CLK          : 
+GCC_QUPV3_WRAP0_S5_CLK          : 
+GCC_QUPV3_WRAP0_S6_CLK          : 
+GCC_QUPV3_WRAP0_S7_CLK          : 
+GCC_QUPV3_WRAP1_S0_CLK          : 
+GCC_QUPV3_WRAP1_S1_CLK          : ON
+GCC_QUPV3_WRAP1_S3_CLK          : 
+GCC_QUPV3_WRAP1_S4_CLK          : 
+GCC_QUPV3_WRAP1_S5_CLK          : 
+GCC_QUPV3_WRAP1_S6_CLK          : 
+GCC_QUPV3_WRAP1_S7_CLK          : 
+GCC_QUPV3_WRAP_0_M_AHB_CLK      : 
+GCC_QUPV3_WRAP_0_S_AHB_CLK      : 
+GCC_QUPV3_WRAP_1_M_AHB_CLK      : ON
+GCC_QUPV3_WRAP_1_S_AHB_CLK      : ON
+GCC_SDCC2_AHB_CLK               : ON
+GCC_SDCC2_APPS_CLK              : ON
+GCC_SDCC4_AHB_CLK               : 
+GCC_SDCC4_APPS_CLK              : 
+GCC_UFS_CARD_AHB_CLK            : 
+GCC_UFS_CARD_AXI_CLK            : 
+GCC_UFS_CARD_CLKREF_CLK         : ON
+GCC_UFS_CARD_ICE_CORE_CLK       : 
+GCC_UFS_CARD_PHY_AUX_CLK        : 
+GCC_UFS_CARD_RX_SYMBOL_0_CLK    : 
+GCC_UFS_CARD_RX_SYMBOL_1_CLK    : 
+GCC_UFS_CARD_TX_SYMBOL_0_CLK    : 
+GCC_UFS_CARD_UNIPRO_CORE_CLK    : 
+GCC_UFS_MEM_CLKREF_CLK          : ON
+GCC_UFS_PHY_AHB_CLK             : ON
+GCC_UFS_PHY_AXI_CLK             : ON
+GCC_UFS_PHY_ICE_CORE_CLK        : ON
+GCC_UFS_PHY_PHY_AUX_CLK         : ON
+GCC_UFS_PHY_RX_SYMBOL_0_CLK     : ON
+GCC_UFS_PHY_RX_SYMBOL_1_CLK     : ON
+GCC_UFS_PHY_TX_SYMBOL_0_CLK     : ON
+GCC_UFS_PHY_UNIPRO_CORE_CLK     : ON
+GCC_USB30_PRIM_MASTER_CLK       : ON
+GCC_USB30_PRIM_MOCK_UTMI_CLK    : ON
+GCC_USB30_PRIM_SLEEP_CLK        : ON
+GCC_USB30_SEC_MASTER_CLK        : 
+GCC_USB30_SEC_MOCK_UTMI_CLK     : 
+GCC_USB30_SEC_SLEEP_CLK         : 
+GCC_USB3_PRIM_CLKREF_CLK        : ON
+GCC_USB3_PRIM_PHY_AUX_CLK       : ON
+GCC_USB3_PRIM_PHY_COM_AUX_CLK   : ON
+GCC_USB3_PRIM_PHY_PIPE_CLK      : ON
+GCC_USB3_SEC_CLKREF_CLK         : ON
+GCC_USB3_SEC_PHY_AUX_CLK        : 
+GCC_USB3_SEC_PHY_PIPE_CLK       : 
+GCC_USB3_SEC_PHY_COM_AUX_CLK    : 
+GCC_USB_PHY_CFG_AHB2PHY_CLK     : ON
+
+GPLL clocks:
+| GPLL   | LOCKED | XO_BOARD  |  PLL_L     | ALPHA          |
++--------+--------+-----------+------------+----------------+
+| GPLL0  | X      |  19200000 * (0x1f      + 0x0            * 2 ** -40 )/ 1000000
+| GPLL1  | X      |  19200000 * (0x37      + 0x0            * 2 ** -40 ) / 1000000
+| GPLL2  |        |  19200000 * (0x14      + 0x0            * 2 ** -40 ) / 1000000
+| GPLL3  |        |  19200000 * (0x30      + 0x0            * 2 ** -40 )/ 1000000
+| GPLL4  | X      |  19200000 * (0x29      + 0x0            * 2 ** -40 ) / 1000000
+| GPLL5  |        |  19200000 * (0x30      + 0x0            * 2 ** -40 ) / 1000000
+| GPLL6  |        |  19200000 * (0x0       + 0x0            * 2 ** -40 )/ 1000000
+
+RCGs:
+| NAME                             | ON | SRC | OUT_FREQ = input_freq * (m/n) * (1/d) | [CMD REG   ] |
++----------------------------------+----+-----+---------------------------------------+--------------+
+GCC_USB30_PRIM_MASTER              | X  |   1 | input_freq * (   1/    1) * (1/4.5)   | [0x00000000]
+GCC_USB30_PRIM_MOCK_UTMI           | X  |   0 | input_freq * (   1/    1) * (1/1  )   | [0x00000000]
+GCC_USB3_PRIM_PHY_AUX              | X  |   0 | input_freq * (   1/    1) * (1/1  )   | [0x00000000]
+GCC_USB30_SEC_MASTER               |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_USB30_SEC_MOCK_UTMI            |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_USB3_SEC_PHY_AUX               |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_SDCC2_APPS                     | X  |   5 | input_freq * (   1/    1) * (1/4  )   | [0x00000000]
+GCC_SDCC4_APPS                     |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_QUPV3_WRAP0_CORE_2X            | X  |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x00000000]
+GCC_QUPV3_WRAP0_S0                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_QUPV3_WRAP0_S1                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_QUPV3_WRAP0_S2                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_QUPV3_WRAP0_S3                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_QUPV3_WRAP0_S4                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_QUPV3_WRAP0_S5                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_QUPV3_WRAP0_S6                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_QUPV3_WRAP0_S7                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_QUPV3_WRAP1_S0                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_QUPV3_WRAP1_S1                 | X  |   6 | input_freq * ( 384/15625) * (1/1  )   | [0x00000000]
+GCC_QUPV3_WRAP1_S2                 | X  |   0 | input_freq * (   1/    1) * (1/1  )   | [0x00000000]
+GCC_QUPV3_WRAP1_S3                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_QUPV3_WRAP1_S4                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_QUPV3_WRAP1_S5                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_QUPV3_WRAP1_S6                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_QUPV3_WRAP1_S7                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_PCIE_0_AUX                     |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_PCIE_1_AUX                     |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_PCIE_PHY_REFGEN                | X  |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x00000000]
+GCC_UFS_CARD_AXI                   | X  |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x00000000]
+GCC_UFS_CARD_ICE_CORE              |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_UFS_CARD_UNIPRO_CORE           |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_UFS_CARD_PHY_AUX               |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+GCC_UFS_PHY_AXI                    | X  |   1 | input_freq * (   1/    1) * (1/3  )   | [0x00000000]
+GCC_UFS_PHY_ICE_CORE               | X  |   1 | input_freq * (   1/    1) * (1/2  )   | [0x00000000]
+GCC_UFS_PHY_UNIPRO_CORE            | X  |   1 | input_freq * (   1/    1) * (1/4  )   | [0x00000000]
+GCC_UFS_PHY_PHY_AUX                | X  |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x00000000]
+
+---
+Caleb Connolly (4):
+      clk/qcom: implement clk dump
+      clk/qcom: sdm845: add dump data
+      clk/qcom: sm6115: add debug data
+      clk/qcom: sm8250: add debug data
+
+ drivers/clk/qcom/clock-qcom.c   | 117 ++++++++++++++++++++++++++++++++++++++++
+ drivers/clk/qcom/clock-qcom.h   |   6 +++
+ drivers/clk/qcom/clock-sdm845.c |  93 ++++++++++++++++++++++++++++++++
+ drivers/clk/qcom/clock-sm6115.c |  63 ++++++++++++++++++++++
+ drivers/clk/qcom/clock-sm8250.c | 115 +++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 394 insertions(+)
+---
+change-id: 20240819-b4-qcom-clk-dump-e25a0198f6c0
+base-commit: b7d5ce05b1b52136af09cf34541c6a91079a4b86
+
+// Caleb (they/them)
+
