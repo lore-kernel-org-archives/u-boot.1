@@ -4,87 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 413A9C3DA4A
-	for <u-boot@archiver.kernel.org>; Tue, 20 Aug 2024 01:45:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37E86C52D6F
+	for <u-boot@archiver.kernel.org>; Tue, 20 Aug 2024 02:19:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9671188A1E;
-	Tue, 20 Aug 2024 03:45:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 874EB889C5;
+	Tue, 20 Aug 2024 04:19:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NnBNMyBs";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="JrKmoAJz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E9E788AA8; Tue, 20 Aug 2024 03:45:05 +0200 (CEST)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8A31F88A1E; Tue, 20 Aug 2024 04:19:16 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87059889C5
- for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 03:45:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B9D5889C5
+ for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 04:19:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=promsoft@gmail.com
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-3dab336717fso3247007b6e.0
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 18:45:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724118301; x=1724723101; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VNAAiNkiYAbsPmWOVA0Va3etTGrLkaMSGyEyu1cCsdg=;
- b=NnBNMyBsUTByEi4i9OKLXrPm0gJuSmsxz54Ed+Tr7115FxKN57PJLjpvjqKTrzE8Qg
- l/AbqGZ81vVwMHtuNhngeYNcH+S5WYbqPeMIYtxzA01A9l72KgsJUmP2HTl/eIPEGZQC
- 3qIcrt9Pl+7SE1HYCtb7rxoblyR/gL7s+3lw1GgdlNmstxT8SkW57qwfyenNRFkxxrTT
- 08wvUTkq+yl45uVIadbxeGK713UiGCCLbbi5v6cwhnSn7MdSIXoqqLsthzboGxfRXWVs
- MGLHAxzfZ/iFhtnd7I7lI6J/95cn9cIrwyRFBgwIN693cvNNNiENY8kn0YWmVWaCn3ji
- qLvg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724118301; x=1724723101;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=VNAAiNkiYAbsPmWOVA0Va3etTGrLkaMSGyEyu1cCsdg=;
- b=KqY5yKX44LHbNHu/B3Mg+rsLkvwE/S5sNKbs31r54GQ43CJX/GzGNPegGJ3iZcmTdG
- silwUARJRbDpdS35i/TWkrASOMyXESHUO/30/0rxdyUA+hNagGKItoex4Ttwznacqfdt
- mWliQ36vVYADsMZnZ9Qpdz1uSnJ4NATJtIJNh59xsmUjV1/sGh0C662zceqbojumeJ8b
- sfRgikdzrmrt/GKvRtoVRCBVYRs99Qd21teKY9DqyNYD/YNvf16G6ew9hoGOyC2cEfFe
- jjCETBB0gLrZoijJyQWG9piqLG8XeFkXUeoElXYamnxKHlTYDrjhV+EKOfgbCmZMKhAt
- HB4w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWXuAfuqtzOpQdehElz3k4TXaiLD1lgmIfPUxf2BHWPjnxDGHzwa1dGPBhpq2e2Cc+CW9hPySU/BggfNf4+yu9b3hTPrA==
-X-Gm-Message-State: AOJu0YwpoT6QRhzu8EHNomlyJ5J56Y3NPHIZdDaKaVZ8UZ91lwNqryYT
- E3vqz9w8k2pflMiTsNaqjwL8NZJaZ8KfL0DQwKclW8lIfYV+124fW9eMUY27e6+hGzAliIEgnYP
- o+zsmu9dy/Kt+PKapBGkt464KqVM=
-X-Google-Smtp-Source: AGHT+IHyxFXk30JBrdD8W9QVvbT+AKftp/DxJ0T5oFtnKeNtokHEoR7l8T1nPsC2IPigkkFZsRFob4L8rbViEt4V2GI=
-X-Received: by 2002:a05:6870:1646:b0:270:6612:dddc with SMTP id
- 586e51a60fabf-2706612e7d8mr5405562fac.24.1724118301154; Mon, 19 Aug 2024
- 18:45:01 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240808031444.9619-1-semen.protsenko@linaro.org>
- <CAPLW+4m_rzR-96+4kNfE1a73kiASRAm9m+M56EqqNBZb6V7+5g@mail.gmail.com>
-In-Reply-To: <CAPLW+4m_rzR-96+4kNfE1a73kiASRAm9m+M56EqqNBZb6V7+5g@mail.gmail.com>
-From: Minkyu Kang <promsoft@gmail.com>
-Date: Tue, 20 Aug 2024 10:44:49 +0900
-Message-ID: <CALrBrZ3H_FzVUvCOz59gJCiHEPY3_fG6xH3sQ4nMeMdzugwfBg@mail.gmail.com>
-Subject: Re: [PATCH v5 00/38] mmc: dw_mmc: Enable eMMC on E850-96 board
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Minkyu Kang <mk7.kang@samsung.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tom Rini <trini@konsulko.com>, Henrik Grimler <henrik@grimler.se>,
- Peng Fan <peng.fan@nxp.com>, 
- Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Yang Xiwen <forbidden405@outlook.com>, 
- Ferass El Hafidi <vitali64pmemail@protonmail.com>,
- Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de, 
- uboot-snps-arc@synopsys.com
-Content-Type: text/plain; charset="UTF-8"
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mgbcxKm610dMGGjcxVXPsqI/T1q0tHsNEpDvWqQ5Cot/5apnotS8muz7PE7Ov/XazhCslIimS4BM7K+Yc+55D1lv0AjufADZEBUh3AAgZ75If5ojV6TAYSHa681FW1nycX+GEUrytL9UwQleLW6zIS8yDjOeTeNN8sxTXtp4kDoagdPA14k+Ncz3iN1qatoAT6br6R6y64G+gXIJKiBSmQ1FNUMS4iYkpuz7HLpKBOGxRev7q5q0J4OPU5Q9HrZ/EiKUc+H1lm4KqNySuu2EelmRN/1Otr70kDYDxl0v274MFhwDlEPGe/mbQeD7/gRBS1eTLiyNf+ieRQkiSwOXWQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=I65Q6SWAWIp9Z7I3k26yVXfmwhoILjmdKrqPzrXmdn4=;
+ b=Fm2pZiT53meAmZ5V9bUUs+ODGSQ55XLcF9Me74ZCNHouSWhJtsDd0GwsD1+IkJdB/G1+rfnrPQ7VLE/SzxfdBzrMGG2IttviRHEdXTuNYxz1pex4szTT7J1AHOTdE6QfXp/YOYleia8P3cN1XPYncYOqZFADFatk2NX8gnpJY+RU6Tvqxxh8/OcxvZC7b3yRcqhnCFn6efWshzRv/WXstXMgyqsn4hFiDabLqPvlRAq3UBy4SKIsCuix2DW8CRas8mZE1FbpWHDw2/juwqG/MbHoGClSfZDqgmrN6mZzEaueGNte7osvKD3Ff3VOwgD5+3zacgYgthntl7I7pAJ8fg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=I65Q6SWAWIp9Z7I3k26yVXfmwhoILjmdKrqPzrXmdn4=;
+ b=JrKmoAJzxDBlA1W2jhiC4UHrjuUGuxZo7JvdgKItj5A3BC+5Yq+iIVXC5cCrXYTe1qVROE8/despeLLfx5JBpMO+6IfYpYpzV0VP2fohRal+tpLfVNksQ8gyCpq/lX7uCpqWjzEWM0HH6IEvhmTvwIU4JNVJGizuXyR/8PNY7m/FV5EDdlsZL4PAykxxxaYL/jmlIZ7diTUvjFqo6YYSSWw2VhXHx57wP4uiB/hW+E5oQQ2iRiankySkMYRFv8uxaqtPMqHO6F+ystTyKTv9hkX1XoqZK80Jfj4tFR2jL7p1NCreM7uazwZAzN4w3S0H0gsZp9/NeYeut3mNK3T0qQ==
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by AS8PR04MB7847.eurprd04.prod.outlook.com (2603:10a6:20b:2ad::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7875.25; Tue, 20 Aug
+ 2024 02:19:13 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%6]) with mapi id 15.20.7875.019; Tue, 20 Aug 2024
+ 02:19:13 +0000
+From: Peng Fan <peng.fan@nxp.com>
+To: Fabio Estevam <festevam@gmail.com>, "sbabic@denx.de" <sbabic@denx.de>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, dl-uboot-imx
+ <uboot-imx@nxp.com>, Fabio Estevam <festevam@denx.de>
+Subject: RE: [PATCH] mx6: Expand bmode to support ecspi3 boot
+Thread-Topic: [PATCH] mx6: Expand bmode to support ecspi3 boot
+Thread-Index: AQHa8NmIEfZ8wh1AkEy8jsJz72dIWbIvbOSg
+Date: Tue, 20 Aug 2024 02:19:13 +0000
+Message-ID: <PAXPR04MB845923227ACE7CADF2392AFC888D2@PAXPR04MB8459.eurprd04.prod.outlook.com>
+References: <20240817191313.844479-1-festevam@gmail.com>
+In-Reply-To: <20240817191313.844479-1-festevam@gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|AS8PR04MB7847:EE_
+x-ms-office365-filtering-correlation-id: db51b25c-4e20-479d-f24f-08dcc0be7bb7
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|366016|376014|1800799024|38070700018;
+x-microsoft-antispam-message-info: =?us-ascii?Q?XNEmhkcbSxD3RK32eIAkqovCoy3EQaEfImnNqJ6j14H2555zejgbTRlckfaB?=
+ =?us-ascii?Q?N0+bG1Ftf754kutAAxYH05kOvgvP76Dj3h2+iPtox7U2NP1/wDeZoVYv15m5?=
+ =?us-ascii?Q?x4VMVsCGltK9IL/S0wrzGghaEhKOTdE6xSEiZFBxZs+YKjkogJREuwzJDwi4?=
+ =?us-ascii?Q?801WX66MOrwa0IdT3Q5XdVD8u9oWoCLAcqk/bjvExmaQx80dPT9h0z3uL7NC?=
+ =?us-ascii?Q?4Jw/lIHCgqQbDmH0AUH0DS8oy9rVYU3WPSKfpX5jbtaeujYEd7sqhLp1fzMY?=
+ =?us-ascii?Q?Q07dWWD4HF0zT/zfjA1RAOkbSDZbIuSSA3UHnr729VMAl90ljgYpMK8vq305?=
+ =?us-ascii?Q?gZTxJVU/feFJ2h12FlWEmYC8niX2d/Tf8B46mOKqdawWiNFMZPPNEQP5fyyV?=
+ =?us-ascii?Q?l7+x7sH+Oam2MHniwdq38+Qq17R31mn+VCtwC3m2F17xXTw0IG5mF7HtO6Qt?=
+ =?us-ascii?Q?0rql7rQDgKPS3zGmlasIxXlA+U+mwcUrg4J9CNsV1F5daP56NvdjEL+QUY4m?=
+ =?us-ascii?Q?K81MG9vEZuhQ0DVKG+oii+A4+XZ1xLpolCq6DHmGY7iy5dEIffb/Xz7d3FVm?=
+ =?us-ascii?Q?K/xwJDwIGTAMJp2gYsD//KTkCSHvNKXRF45nc/25k2not+DOja2mE9eYdfRh?=
+ =?us-ascii?Q?qAFSHjOGXwlirI8Q3nrB4faoWVTiDeIq7/Y3Av79o7PPQ9p6VLiy/XUpws6a?=
+ =?us-ascii?Q?3wTH2xT9o96LePNPSgYICsa5Mlljow0W70EKbm3PXFAv6p1w2Bb50U8BiOW+?=
+ =?us-ascii?Q?LEhX1VSV4MHDrzrOVjhWDBlQeCJRWNZdyTA1UxDSkyuenXXFnYMv80IfsTlt?=
+ =?us-ascii?Q?vz38Zk34m4k/LhWmhpO2TH2WpD0Ril69t0hsVuNbz+QxATi7AM7gAZAlLblQ?=
+ =?us-ascii?Q?CxDPqqTg3BCyDAObZTjOVBnWdTlkSlM62zPinTNugqdkyglYm316cgZT4fmf?=
+ =?us-ascii?Q?7v++ODYIGOsRdDDMQ3gzUB/it+Whb8zpbPlXsGggH9XpqqcCVDvPq+elY6Eo?=
+ =?us-ascii?Q?zSCy+GPjr5ioTRUrSctNcVYgYJEWcexQS2WvnjRyl84Br7mn6eXbQMLRPhLU?=
+ =?us-ascii?Q?Veyi9H4ISJlj5Iu/3d7Vtod0L9ZBbH7S8yMjuyCgqvUlrNOkCmIKNn07FRNx?=
+ =?us-ascii?Q?9qlNdWmTgyAMHhu90dBeyPq+Yewn+J6DjniICayHVImb+HVEJXd3ollNU5dk?=
+ =?us-ascii?Q?ii4kD+VsI+0ogZ7rnSGADDMsFOFEEGQE86KZNU9JPokt+iGVsJjf8hxbhtWK?=
+ =?us-ascii?Q?5gu4tX2ZgfhL7HxVRSxDAgTq8qrAXKzIognDUD6BJobUvVXV0QhdBEoy4a6X?=
+ =?us-ascii?Q?duv+LFWYd12k1y4DtkKkWi0C6tuGphvRfsik1332ZCG13gK+FkXAdxTsufG7?=
+ =?us-ascii?Q?RGrtyCwVROV5D/Gwb8nAT7CcYXcjLLUMRV9F1d8yyImaAkaotg=3D=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024)(38070700018); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?RPWfIy6ymPNGulmwEG5KXZevpvHATkGg8u/Faz9ykG1cCtUJhbXndI9bigO8?=
+ =?us-ascii?Q?7qjC7qiPkIDQtmduF04wexUz0Dpy7HRC+8iwdRsF5noa49Jxp4O9l0XIGyrb?=
+ =?us-ascii?Q?Ao7EOMBbrH4pb3q0ElAjt5wygDKkUc5ctTzuJAcpTPiLFgVsACF0cCum3XEW?=
+ =?us-ascii?Q?tq7CboupWe+txGorSzpsRf3q5k7udzCsTwtUitjqsPhrtAJSGnrori7vyDg6?=
+ =?us-ascii?Q?jI50LG7xKufd1/TH4N+ps1W60VBKosY6vFEchak3MT2Q9ML0gdrknpL3PSf1?=
+ =?us-ascii?Q?ks49XBZEiqRtQsopBccSjmgHWA1+5POdZVUUiN4GEdYJmE99MaL8GECezRr2?=
+ =?us-ascii?Q?N/yt25NNycpwPwuixHSLD/WDbO2tcfb9t/mXHfS8qcgeTe9n7CYfe2YGX4lV?=
+ =?us-ascii?Q?z8dtmOvDqJ9lfyXoH/6Uvzq4CG/3rKm3OT+8dqAvZBmlkVHKrHnG69JYl5kz?=
+ =?us-ascii?Q?46cdAUu9wdxOiq62f/LA8lAIj9cQmA+c0K4Qh/Lh9h/ag6Fco9szAhP2fzon?=
+ =?us-ascii?Q?Wc+iqpIaBCeSO0bjnRmHIH16Awj8H2H9M83MH3/7AW0NlB18p3D3pB9VdBoB?=
+ =?us-ascii?Q?x/ITVCTAp6jf3zVRe5qHjFcJnBbbOKr0VDWngJnDD1Qke/lR8NWXGDNFmyCF?=
+ =?us-ascii?Q?lEYalr4npweMT+sA6Ckn2EpneBzFYfIFpyBvpIiI2yyP3afI8W3Uta/pNofb?=
+ =?us-ascii?Q?87NsCD1fiFv0ZDsGmbD1Y5OhxR9j90Yp2xfby4I0/bGXag4lIWhkPVvoDo+o?=
+ =?us-ascii?Q?8xA76S/akmQz4YgDiIolhdhKAfxe+Y2pv3tdxEUfdhmHxxE6mDrRx2tbi0Mj?=
+ =?us-ascii?Q?63fiv9T1aHPUNJSoeOb3mph6z6hDjlANlLoBCiJQ0jez4yXuf0xMwpkJdTwP?=
+ =?us-ascii?Q?xDptxQWGrStZy/0jYZCN9f4qoZ0rncUYSfM9bPYdZf38KoMEdmIegKTqf6nK?=
+ =?us-ascii?Q?QtC2K2a8uw2s9yoUrJjEMuhibJZDfWt4WkMSeVdQsnBHkSEJeYZlWP/akOE8?=
+ =?us-ascii?Q?vb13SttTIx/Lhnid2U0wkxOhCKk2gSfla1qAhq3OGdE5Qq9ba2meJl3/6b1d?=
+ =?us-ascii?Q?fz59tSeXTthZ0wD0VDjwUf14Y2ZKkTkZ0WIVZVuDGOLMM2vGWVeSLyGbnOUG?=
+ =?us-ascii?Q?JP+DP9FHBWsjwYqX9LSip0U6FmAXVJVAoF//MImjdN9VDSKmYSrMtxR+vsKY?=
+ =?us-ascii?Q?C0aRhC+/xLzU0NqLw0Ri7rNQ4AMRBrxVP6wDO4DXxQAhHCk/EUi0Ch2PwTYm?=
+ =?us-ascii?Q?+nCinOypxYb4fTdK9Zy6MVmWqeSrTp0wKFHdqKtJbvtJ7+Zdg/geNZbFFUy0?=
+ =?us-ascii?Q?c7XaMwkDuYfhvnuv9nMxFTVYNY0Nmoc9OqEv3VHVV+5jChh3MYPsljJ+VY9u?=
+ =?us-ascii?Q?IoxveG66u0M7f2XaawTD3t11CEz7KQJ6Xl4czL88J9/P/sXCeeFpNyvxCCkO?=
+ =?us-ascii?Q?+ERiZHe8v58eOmDNHHk/K7SeJzyDW2F4ivxs9ZekVyz9fSFjNZ5AYUcncQta?=
+ =?us-ascii?Q?RL5uotyQcKIjY8AW2kGSPXQ4ZvA37uuV4oC3tWH/Z5raz9k0rJBv5SoVjHhw?=
+ =?us-ascii?Q?LvQaFAzaMRQ8NofFUzQ=3D?=
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+MIME-Version: 1.0
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: db51b25c-4e20-479d-f24f-08dcc0be7bb7
+X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Aug 2024 02:19:13.1318 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: mqC/A848eeuqmYqi2/JAf6+vmP0h0y4+tRPBqJfpgtJ6H9oJWtvnBJ3TNYWH19IXOGE6uvL4+Ee+jRq/tF4rFA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7847
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,221 +156,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+> Subject: [PATCH] mx6: Expand bmode to support ecspi3 boot
+>=20
+> From: Fabio Estevam <festevam@denx.de>
+>=20
+> Currently, the bmode command only supports booting from ecspi1.
+>=20
+> Expand it to also support booting from ecspi3.
+>=20
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
 
 
-2024=EB=85=84 8=EC=9B=94 14=EC=9D=BC (=EC=88=98) 10:15, Sam Protsenko <seme=
-n.protsenko@linaro.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
+Acked-by: Peng Fan <peng.fan@nxp.com>
 
-> Hi Minkyu,
->
-> What do you think about this series? It's been pending for a while
-> now, so may I ask you to take care of it?
->
-> Thanks!
->
-> On Wed, Aug 7, 2024 at 10:14=E2=80=AFPM Sam Protsenko
-> <semen.protsenko@linaro.org> wrote:
-> >
-> > Bring 64-bit support to dw_mmc core and Exynos dw_mmc drivers, and
-> > enable it on E850-96 board. Additionally do some related cleanups and
-> > device tree updates.
-> >
-> > 64-bit version of DesignWare MMC can be often found on modern ARM64
-> > chips. It's different from its older 32-bit version (which is already
-> > implemented in U-Boot): some new registers were added, existing
-> > register addresses are changed, DMA descriptor table is different, etc.
-> > Next Exynos chips are known to have 64-bit DW MMC block:
-> >
-> >   - Exynos3475
-> >   - Exynos5433
-> >   - Exynos7420
-> >   - Exynos7570
-> >   - Exynos7580
-> >   - Exynos7870
-> >   - Exynos7872
-> >   - Exynos7880
-> >   - Exynos7885
-> >   - Exynos7890
-> >   - Exynos850 (Exynos3830)
-> >
-> > Exynos DW MMC driver was updated too: ARM64 Exynos chips implement thei=
-r
-> > clock drivers using CCF framework, pinmux configuration is done at
-> > startup in DM capable pinctrl drivers, device tree properties were
-> > changed w.r.t. their upstream (Linux kernel) counterparts. CLKSEL
-> > register address is also different on 64-bit Exynos platforms.
-> >
-> > The patch series was tested on E850-96 board by running mainline Linux
-> > kernel with Debian rootfs from eMMC ("boot" partition) with these
-> > commands:
-> >
-> > 8<-------------------------------------------------------------------->=
-8
-> > env set fdtaddr 0x8a000000
-> > env set bootaddr 0x94000000
-> > env set boot_kerneladdr 0x94000800
-> > part start mmc 0 boot boot_start
-> > part size mmc 0 boot boot_size
-> > mmc read $bootaddr $boot_start $boot_size
-> > abootimg addr $bootaddr
-> > abootimg get dtb --index=3D0 dtb_start dtb_size
-> > cp.b $dtb_start $fdtaddr $dtb_size
-> > fdt addr $fdtaddr 0x100000
-> > cp.b $boot_kerneladdr $loadaddr 2aaaa00
-> > env set bootargs console=3DttySAC0,115200n8 printk.devkmsg=3Don \
-> >                  root=3D/dev/mmcblk0p12 rootwait rw
-> > booti $loadaddr - $fdtaddr
-> > 8<-------------------------------------------------------------------->=
-8
-> >
-> > For E850-96 eMMC to function properly in DDR mode, the pending patch [1=
-]
-> > has to be applied. Otherwise it won't be possible for exynos_dw_mmc
-> > driver to change CIU clock rate from 200 MHz up to 400 MHz, and MMC wil=
-l
-> > fall back to SDR mode, which makes eMMC throughput twice as slower. Wit=
-h
-> > patch [1] applied, 'mmc info' reports this:
-> >
-> >     Bus Speed: 52000000
-> >     Mode: MMC DDR52 (52MHz)
-> >
-> > and 'clk dump' shows CIU clock rate to be ~400 MHz (after first mmc
-> > operation, e.g. 'part start' or 'mmc read'):
-> >
-> >     399750000    gout_mmc_embd_sdclkin
-> >
-> > Which makes sense, because dw_mmc requests to set CCLKIN =3D 52 MHz (wi=
-th
-> > DDR/8-bit mode), and exynos_dw_mmc tries to set CIU clock rate to:
-> >
-> >     SDCLKIN =3D 2 * ciu_div * CCLKIN =3D 2 * 4 * 52 MHz =3D 416 MHz,
-> >
-> > and the closest possible value the clock driver can set is 399.75 MHz,
-> > which works just fine.
-> >
-> > For Exynos4 and Exynos5 (ARM32) boards, this patch series was only buil=
-d
-> > tested (manually and with buildman). The build is clean (no errors or
-> > warnings), but I don't have any Exynos4/Exynos5 boards at my disposal,
-> > so I can't actually verify MMC operation there.
-> >
-> > Changes in v5:
-> >   - Added missing bus-width property to sdhci2 node (SD card) in
-> >     exynos4412-odroid.dts (patch 14/38)
-> >
-> > Changes in v4:
-> >   - Rebased all patches on top of the most recent master; patches that
-> >     were affected by recent changes: 08/38, 13/38, 37/38
-> >
-> > Changes in v3:
-> >   - Rebased all patches on top of the most recent master, which in turn
-> >     dropped next patches:
-> >     - [PATCH v2 1/40] mmc: dw_mmc: Remove common.h
-> >     - [PATCH v2 33/40] mmc: exynos_dw_mmc: Remove common.h
-> >
-> > Changes in v2:
-> >   - Rebased on top of the most recent U-Boot/master
-> >   - Added pending R-b tags from the mailing list
-> >   - Addressed the comment from Quentin about CONFIG_IS_ENABLED() not
-> >     playing nice in SPL case:
-> >     1. Dropped [PATCH 35/42]
-> >        ("mmc: exynos_dw_mmc: Use CONFIG_IS_ENABLED() to check config
-> >         options")
-> >     2. Dropped [PATCH 14/42]
-> >        ("mmc: dw_mmc: Use CONFIG_IS_ENABLED() to check config options")
-> >     3. Got rid of all other CONFIG_IS_ENABLED() changes (used #ifdef fo=
-r
-> >        now)
-> >   - Addressed the comment from Quentin about incorrect logic for divide=
-r
-> >     update in [PATCH 06/40]
-> >   - Guarded exynos_dwmmc_of_to_plat() with #ifded CONFIG_DM_MMC in
-> >     [PATCH 22/40]
-> >   - Added list of Exynos chips implementing 64-bit IDMAC descriptor (in
-> >     [PATCH 00/40])
-> >
-> > [1] https://lists.denx.de/pipermail/u-boot/2024-March/547719.html
-> >
-> > Sam Protsenko (38):
-> >   mmc: dw_mmc: Remove unused version field from struct dwmci_host
-> >   mmc: dw_mmc: Move struct idmac to dw_mmc.c
-> >   mmc: dw_mmc: Extract waiting for data busy into a separate routine
-> >   mmc: dw_mmc: Extract FIFO init into a separate routine
-> >   mmc: dw_mmc: Extract divider update to a separate function
-> >   mmc: dw_mmc: Extract FIFO data transfer into a separate routine
-> >   mmc: dw_mmc: Extract DMA transfer handling code into a separate
-> >     routine
-> >   mmc: dw_mmc: Extract setting the DMA descriptor into a separate
-> >     routine
-> >   mmc: dw_mmc: Improve 32-bit IDMAC descriptor namings
-> >   mmc: dw_mmc: Add support for 64-bit IDMAC
-> >   mmc: dw_mmc: Replace fifoth_val property with fifo-depth
-> >   mmc: dw_mmc: Fix kernel-doc comments in dwmmc.h
-> >   mmc: dw_mmc: Improve coding style
-> >   arm: dts: exynos: Add upstream DW MMC properties to all Exynos dts
-> >   dt-bindings: exynos: Update bindings doc for DW MMC controller
-> >   arm: exynos: Add header guard for dwmmc.h
-> >   mmc: exynos_dw_mmc: Fix obtaining the base address of controller
-> >   mmc: exynos_dw_mmc: Fix getting private data in
-> >     exynos_dwmci_board_init()
-> >   mmc: exynos_dw_mmc: Don't call pinmux functions on ARM64 chips
-> >   mmc: exynos_dw_mmc: Obtain and use CIU clock via CCF API
-> >   mmc: exynos_dw_mmc: Use .of_to_plat for device tree parsing
-> >   mmc: exynos_dw_mmc: Convert to use livetree API
-> >   mmc: exynos_dw_mmc: Read upstream SDR timing properties
-> >   mmc: exynos_dw_mmc: Abstract CLKSEL register
-> >   mmc: exynos_dw_mmc: Refactor fixed CIU clock divider
-> >   mmc: exynos_dw_mmc: Read common bus-width property
-> >   mmc: exynos_dw_mmc: Read common clock-frequency property
-> >   mmc: exynos_dw_mmc: Move quirks from struct dwmci_host to chip data
-> >   mmc: exynos_dw_mmc: Read and use DDR timing when available
-> >   mmc: exynos_dw_mmc: Set requested freq in get_mmc_clk() callback
-> >   mmc: exynos_dw_mmc: Add support for ARM64 Exynos chips
-> >   mmc: exynos_dw_mmc: Pull all init code into probe function
-> >   mmc: exynos_dw_mmc: Don't call dwmci_setup_cfg() after add_dwmci()
-> >   mmc: exynos_dw_mmc: Use dev->name as driver's displayed name
-> >   mmc: exynos_dw_mmc: Improve coding style
-> >   arm: dts: exynos: Remove outdated DW MMC properties in all Exynos dts
-> >   configs: e850-96: Enable MMC
-> >   doc: samsung: Mention enabled eMMC in E850-96 board doc
-> >
-> >  arch/arm/dts/exynos4210-origen.dts         |   3 +-
-> >  arch/arm/dts/exynos4210-trats.dts          |   6 +-
-> >  arch/arm/dts/exynos4210-universal_c210.dts |   6 +-
-> >  arch/arm/dts/exynos4412-odroid.dts         |  15 +-
-> >  arch/arm/dts/exynos4412-trats2.dts         |  20 +-
-> >  arch/arm/dts/exynos5250-arndale.dts        |  10 +-
-> >  arch/arm/dts/exynos5250-smdk5250.dts       |  13 +-
-> >  arch/arm/dts/exynos5250-snow.dts           |  13 +-
-> >  arch/arm/dts/exynos5250-spring.dts         |   7 +-
-> >  arch/arm/dts/exynos5420-smdk5420.dts       |  13 +-
-> >  arch/arm/dts/exynos5422-odroidxu3.dts      |   4 +-
-> >  arch/arm/dts/exynos54xx.dtsi               |  13 +-
-> >  arch/arm/mach-exynos/include/mach/dwmmc.h  |  40 +-
-> >  configs/e850-96_defconfig                  |  10 +-
-> >  doc/board/samsung/e850-96.rst              |   5 +-
-> >  doc/device-tree-bindings/exynos/dwmmc.txt  |  46 +-
-> >  drivers/mmc/ca_dw_mmc.c                    |   2 +-
-> >  drivers/mmc/dw_mmc.c                       | 547 +++++++++++++--------
-> >  drivers/mmc/exynos_dw_mmc.c                | 357 +++++++++-----
-> >  drivers/mmc/ftsdc010_mci.h                 |   1 -
-> >  drivers/mmc/hi6220_dw_mmc.c                |   7 +-
-> >  drivers/mmc/nexell_dw_mmc.c                |   5 +-
-> >  drivers/mmc/rockchip_dw_mmc.c              |   5 +-
-> >  drivers/mmc/s5p_sdhci.c                    |   2 +-
-> >  drivers/mmc/snps_dw_mmc.c                  |   6 +-
-> >  drivers/mmc/socfpga_dw_mmc.c               |   4 +-
-> >  include/dwmmc.h                            | 242 +++++----
-> >  27 files changed, 869 insertions(+), 533 deletions(-)
-> >
-> > --
-> > 2.39.2
-> >
-
-
-applied to u-boot-samsung.
-
-Thanks.
-Minkyu Kang.
