@@ -4,86 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26F93C3DA4A
-	for <u-boot@archiver.kernel.org>; Tue, 20 Aug 2024 06:48:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CBF9C3DA4A
+	for <u-boot@archiver.kernel.org>; Tue, 20 Aug 2024 07:02:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 867B888D5D;
-	Tue, 20 Aug 2024 08:48:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E7109886A7;
+	Tue, 20 Aug 2024 09:02:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="WBSWDP14";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="bdMWFNMB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88A5188D65; Tue, 20 Aug 2024 08:48:49 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id 841B288701; Tue, 20 Aug 2024 09:02:48 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7534888D38
- for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 08:48:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 01EB488100
+ for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 09:02:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-3718e416297so2364062f8f.2
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 23:48:46 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-371a92d8c90so1588368f8f.3
+ for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 00:02:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1724136526; x=1724741326;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1724137365; x=1724742165;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ygiNC6a/g5PfV0tlYvtds9OokNaGSqKLl8wTOCe3LYA=;
- b=WBSWDP14jb/nxh/q9rsWDyZ5yjtjNNQY7SoZM9Caq+1s0PdO1iLaLvNnt+I8eA7o9O
- +B9DKGRuAAsPnDtex5g6D+RjcTsuzmBT/FmyUU+new0kq4NUSMPyJKn1ayk7+9zkdbyp
- XdfCduHflUNHdV9IPlX6eBjVVjLQFXcGMzTKDaCFrYZCPerUJpAHodb+C95upCW4I4wf
- I3c/lEZFgYbCbF14VnT+x+ia3hLIyQTg4N4JHq/q49qJHIWH+LpVQmdDvlSKYgsI5aJC
- pSdSw7j76Ir7X0hviWBTK/cb8QXfixcG3iaIlFB0eBT8tgrVtUci1YENarSXf7exSwDG
- qXsg==
+ :reply-to; bh=7qVn65jLgY+kYLhIYlinEcvwHI8pUxoZAmfl4lrZ7NQ=;
+ b=bdMWFNMB+Pea71MIBLSM7vaL73L7gbRsQEr88cKysaao3e8Wj2iiEWQ35v+R/Hgf7U
+ tbbIlshrW+Er3v2HnKdKjt1nsPk/pE13J9KEDry/p//FRG+dWqs9VRfW/OfhaSG4IrKy
+ LUdEU5bG205BaoIOpydt5wCXRzlBRaUD3iU7oiUGZcBracI7gTes2WVquypuAGp0S77I
+ PaKpdDbT2dM26tIZSV3BFJkBRxc/wAbXcInSByCwxEaHkK8/HQqcivEdwzPC4GTGZV5k
+ ktE7NRNVS+laGYESRx+Zawac9+PwZRjvJXA2pq/3HpZ0SGs2linZqQDeHmEG7tCppjIo
+ GZoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724136526; x=1724741326;
+ d=1e100.net; s=20230601; t=1724137365; x=1724742165;
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ygiNC6a/g5PfV0tlYvtds9OokNaGSqKLl8wTOCe3LYA=;
- b=Ipida/PLnS8OH2bC7qgInr9KqDjTt55qxH7tdhSo8CIlPFQIU6sauh6brkJIvKRzlD
- idXe6n/9urSMkiT1XqT4PmVInqTOpkqV9tSl3duSuJuJe69QkRurqY9blWRf0jrBO3Pd
- bxwh26+m8vM7cVtdgU86VGkqYAs/lFyGYwyFLafXVsVD1APEvNPsk+LxfT6/TUPQsYZR
- JiBYwwCA6O73p4K4DKuuHaaAZezkvTrvTilEVGh/WclVRjDY9zQ6O9JOgPIPFR0Q/fqJ
- WfyQiSz7Y7HdQNpEvDxhCZclxLVfVHf2cLOH4tLXzb0Bzdh5HkRZOgMJRjQDXlqgaxwO
- EYxQ==
+ bh=7qVn65jLgY+kYLhIYlinEcvwHI8pUxoZAmfl4lrZ7NQ=;
+ b=QXaYvePcoEaCoDRVAX9fAKuyIa8Bgc4KnHtN868x6ErukchHdOromU6NfH1zzFxypj
+ V+xkimpQGdVpq6nykj2p049rhVhl4ArFRl6rJhCfqBSXRmPu7RQ5BJraUlYcvmmz0kE9
+ lxLxZl6YGg0iEgTeh77xfWLeeKsruREYtLX8R/IXBq63zJJg5QdMTSBjhlwSIg+cyKQL
+ 2tfT8HjyHwgoxRm/zozTFcEnBw9jHiOhwXFGCYJ/HgWjjMoCtbS5eY+JrqN5AEuQwNko
+ JbpVnIvbMy8x2E1cjdfd84KBTqf1p/BICVrB/pa7yMkJGv7w+nduJdpA4hcP3nMmoTYi
+ BWJA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWQAhg2kPTxW1kExCfr6SbOTJsK1yAAdLY4j9uTKpdRu4k/v8qFPEwWjsLAFW+5ejPvuWanYca2VmNyNwyocSRYKz5ijQ==
-X-Gm-Message-State: AOJu0YygBz/3432iwH6bYILp7EEeRyWeMJzzZHHEckmfkh6KMNtsnYp9
- CHymeCVgsJ4qHeABwAnGB0VEVFe86ntvDQ6LOcHcVfowe0us6IUgMyfxMyAnJPA=
-X-Google-Smtp-Source: AGHT+IH4YurhN9Udh76hXkWqDDJtndTRZoGr5QoxVonr3eAmib3BDdasDWMd1OOG+llebSsfQ3OunA==
-X-Received: by 2002:a5d:4e42:0:b0:371:88a1:3e49 with SMTP id
- ffacd0b85a97d-371946a03d8mr8210795f8f.53.1724136525102; 
- Mon, 19 Aug 2024 23:48:45 -0700 (PDT)
+ AJvYcCU2MLR5ic8vhVvQW2VsPUAXL/aZBoU7E63mpPoHshu2CW88kkuCKgBUY78OkQDg/NIPgySbME8EAvTAEdA9aya6kE4J1Q==
+X-Gm-Message-State: AOJu0YwOkuYUI7ZuMZoliXhsAnuzX9PEAGdkDlaKoMMx/u9FP4W+p0Cm
+ mCkr26igRQ+h5TPgqwP8mwQVNowUkkxUhGfezQfr1Ok3692ZY1umn+p1lLAoiow=
+X-Google-Smtp-Source: AGHT+IHwJAyoEc+PK92hjI96uqM1sD/CTGmcsbrlo5IE02CSWh9XCy718PlQzmVJLQjfPmeSHI+pxQ==
+X-Received: by 2002:adf:b652:0:b0:371:8713:b502 with SMTP id
+ ffacd0b85a97d-371946a33abmr8273490f8f.48.1724137364708; 
+ Tue, 20 Aug 2024 00:02:44 -0700 (PDT)
 Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-371898ab855sm12316703f8f.105.2024.08.19.23.48.44
+ 5b1f17b1804b1-429ded7bb5fsm190081765e9.40.2024.08.20.00.02.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Aug 2024 23:48:44 -0700 (PDT)
+ Tue, 20 Aug 2024 00:02:44 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, AKASHI
- Takahiro <akashi.tkhro@gmail.com>, Abdellatif El Khlifi
- <abdellatif.elkhlifi@arm.com>, Alexander Gendin <agendin@matrox.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Johan Jonker <jbx6244@gmail.com>, Kever
- Yang <kever.yang@rock-chips.com>, Linus Walleij
- <linus.walleij@linaro.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Massimiliano Minella <massimiliano.minella@se.com>, Raymond Mao
- <raymond.mao@linaro.org>, Sean Anderson <seanga2@gmail.com>, Stephen
- Carlson <stcarlso@linux.microsoft.com>, Tim Harvey <tharvey@gateworks.com>
-Subject: Re: [PATCH 05/21] test: Rename UTF_CONSOLE_REC to UTF_CONSOLE
-In-Reply-To: <20240810205205.3403177-6-sjg@chromium.org>
+ Takahiro <akashi.tkhro@gmail.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH 11/21] test: boot: Use UTF_CONSOLE in tests
+In-Reply-To: <20240810205205.3403177-12-sjg@chromium.org>
 References: <20240810205205.3403177-1-sjg@chromium.org>
- <20240810205205.3403177-6-sjg@chromium.org>
-Date: Tue, 20 Aug 2024 08:48:43 +0200
-Message-ID: <878qwrwuyc.fsf@baylibre.com>
+ <20240810205205.3403177-12-sjg@chromium.org>
+Date: Tue, 20 Aug 2024 09:02:43 +0200
+Message-ID: <875xrvwub0.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -109,1074 +103,682 @@ Thank you for the patch.
 
 On sam., ao=C3=BBt 10, 2024 at 14:51, Simon Glass <sjg@chromium.org> wrote:
 
-> The _REC suffix doesn't add much. Really what we want to know is whether
-> the test uses the console, so rename this flag.
+> Set this flag rather than doing things manually in the test.
+>
+> Drop unnecessary calls to console_record_reset_enable()
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-
-On next: commit 158cf0270cb6 ("Merge tag 'v2024.10-rc3' into next"),
-this does not build:
-
-$ ./test/py/test.py --bd sandbox --build -k test_ut
-
-../test/env/cmd_ut_env.c:37:28: error: =E2=80=98UT_TESTF_CONSOLE_REC=E2=80=
-=99 undeclared here (not in a function)
-   37 | ENV_TEST(env_test_env_cmd, UT_TESTF_CONSOLE_REC);
-      |                            ^~~~~~~~~~~~~~~~~~~~
-
-
-Since next has:
-https://source.denx.de/u-boot/u-boot/-/commit/2a521d01e62c012f627d426a4c430=
-82b6402928d
-
-We also need to update:
-test/env/cmd_ut_env.c
-
-With that fixed:
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
 > ---
 >
->  doc/develop/tests_writing.rst |  4 ++--
->  include/dm/test.h             |  2 +-
->  include/test/test.h           |  2 +-
->  test/boot/bootflow.c          |  4 ++--
->  test/boot/upl.c               |  6 +++---
->  test/cmd/addrmap.c            |  2 +-
->  test/cmd/armffa.c             |  2 +-
->  test/cmd/bdinfo.c             |  8 ++++----
->  test/cmd/exit.c               |  2 +-
->  test/cmd/fdt.c                | 38 +++++++++++++++++------------------
->  test/cmd/font.c               |  2 +-
->  test/cmd/history.c            |  2 +-
->  test/cmd/loadm.c              |  4 ++--
->  test/cmd/mbr.c                |  4 ++--
->  test/cmd/mem_search.c         | 18 ++++++++---------
->  test/cmd/pci_mps.c            |  2 +-
->  test/cmd/pwm.c                |  2 +-
->  test/cmd/rw.c                 |  2 +-
->  test/cmd/seama.c              |  6 +++---
->  test/cmd/setexpr.c            | 22 ++++++++++----------
->  test/cmd/temperature.c        |  2 +-
->  test/dm/ffa.c                 |  4 ++--
->  test/dm/nvmxip.c              |  2 +-
->  test/dm/rkmtd.c               |  2 +-
->  test/dm/rng.c                 |  2 +-
->  test/log/log_filter.c         |  4 ++--
->  test/log/log_test.c           | 32 ++++++++++++++---------------
->  test/print_ut.c               |  6 +++---
->  test/test-main.c              |  2 +-
->  29 files changed, 95 insertions(+), 95 deletions(-)
+>  test/boot/bootdev.c  | 31 ++++++++++----------------
+>  test/boot/bootflow.c | 53 ++++++++++++++++++--------------------------
+>  test/boot/bootmeth.c | 12 ++++------
+>  test/boot/cedit.c    | 13 ++++-------
+>  test/boot/expo.c     |  3 +--
+>  5 files changed, 42 insertions(+), 70 deletions(-)
 >
-> diff --git a/doc/develop/tests_writing.rst b/doc/develop/tests_writing.rst
-> index c277c8dd44f..404d158ec40 100644
-> --- a/doc/develop/tests_writing.rst
-> +++ b/doc/develop/tests_writing.rst
-> @@ -167,7 +167,7 @@ There is no exactly equivalent C test, but here is a =
-similar one that tests 'ms'
+> diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
+> index 9a364d0f267..23ebc61ff52 100644
+> --- a/test/boot/bootdev.c
+> +++ b/test/boot/bootdev.c
+> @@ -28,7 +28,6 @@ static int bootdev_test_cmd_list(struct unit_test_state=
+ *uts)
+>  {
+>  	int probed;
 >=20=20
->        return 0;
->     }
-> -   MEM_TEST(mem_test_ms_b, UTF_CONSOLE_REC);
-> +   MEM_TEST(mem_test_ms_b, UTF_CONSOLE);
+> -	console_record_reset_enable();
+>  	for (probed =3D 0; probed < 2; probed++) {
+>  		int probe_ch =3D probed ? '+' : ' ';
 >=20=20
->  This runs the command directly in U-Boot, then checks the console output=
-, also
->  directly in U-Boot. If run by itself this takes 100ms. For 1000 runs it =
-takes
-> @@ -266,7 +266,7 @@ with the suite. For example, to add a new mem_search =
-test::
->=20=20
->           return 0;
->     }
-> -   MEM_TEST(mem_test_ms_new_thing, UTF_CONSOLE_REC);
-> +   MEM_TEST(mem_test_ms_new_thing, UTF_CONSOLE);
->=20=20
->  Note that the MEM_TEST() macros is defined at the top of the file.
->=20=20
-> diff --git a/include/dm/test.h b/include/dm/test.h
-> index 61776c8dda1..3cbf2c740d4 100644
-> --- a/include/dm/test.h
-> +++ b/include/dm/test.h
-> @@ -143,7 +143,7 @@ extern struct unit_test_state global_dm_test_state;
->=20=20
->  /* Declare a new driver model test */
->  #define DM_TEST(_name, _flags) \
-> -	UNIT_TEST(_name, UTF_DM | UTF_CONSOLE_REC | (_flags), dm_test)
-> +	UNIT_TEST(_name, UTF_DM | UTF_CONSOLE | (_flags), dm_test)
->=20=20
->  /*
->   * struct sandbox_sdl_plat - Platform data for the SDL video driver
-> diff --git a/include/test/test.h b/include/test/test.h
-> index 9ad73daf7f8..92eec2eb6f9 100644
-> --- a/include/test/test.h
-> +++ b/include/test/test.h
-> @@ -61,7 +61,7 @@ enum ut_flags {
->  	UTF_SCAN_FDT	=3D BIT(2),	/* scan device tree */
->  	UTF_FLAT_TREE	=3D BIT(3),	/* test needs flat DT */
->  	UTF_LIVE_TREE	=3D BIT(4),	/* needs live device tree */
-> -	UTF_CONSOLE_REC	=3D BIT(5),	/* needs console recording */
-> +	UTF_CONSOLE	=3D BIT(5),	/* needs console recording */
->  	/* do extra driver model init and uninit */
->  	UTF_DM		=3D BIT(6),
->  	UTF_OTHER_FDT	=3D BIT(7),	/* read in other device tree */
-> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-> index a97f4f877e9..f53e20e4c86 100644
-> --- a/test/boot/bootflow.c
-> +++ b/test/boot/bootflow.c
-> @@ -721,7 +721,7 @@ static int bootflow_scan_menu(struct unit_test_state =
-*uts)
+> @@ -49,7 +48,7 @@ static int bootdev_test_cmd_list(struct unit_test_state=
+ *uts)
 >=20=20
 >  	return 0;
 >  }
-> -BOOTSTD_TEST(bootflow_scan_menu, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE_REC=
-);
-> +BOOTSTD_TEST(bootflow_scan_menu, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+> -BOOTSTD_TEST(bootdev_test_cmd_list, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootdev_test_cmd_list, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
 >=20=20
->  /* Check 'bootflow scan -mb' to select and boot a bootflow using a menu =
-*/
->  static int bootflow_scan_menu_boot(struct unit_test_state *uts)
-> @@ -767,7 +767,7 @@ static int bootflow_scan_menu_boot(struct unit_test_s=
-tate *uts)
+>  /* Check 'bootdev select' and 'info' commands */
+>  static int bootdev_test_cmd_select(struct unit_test_state *uts)
+> @@ -59,7 +58,6 @@ static int bootdev_test_cmd_select(struct unit_test_sta=
+te *uts)
+>  	/* get access to the CLI's cur_bootdev */
+>  	ut_assertok(bootstd_get_priv(&std));
+>=20=20
+> -	console_record_reset_enable();
+>  	ut_asserteq(1, run_command("bootdev info", 0));
+>  	ut_assert_nextlinen("Please use");
+>  	ut_assert_console_end();
+> @@ -99,7 +97,7 @@ static int bootdev_test_cmd_select(struct unit_test_sta=
+te *uts)
 >=20=20
 >  	return 0;
 >  }
-> -BOOTSTD_TEST(bootflow_scan_menu_boot, UTF_DM | UTF_SCAN_FDT | UTF_CONSOL=
-E_REC);
-> +BOOTSTD_TEST(bootflow_scan_menu_boot, UTF_DM | UTF_SCAN_FDT | UTF_CONSOL=
+> -BOOTSTD_TEST(bootdev_test_cmd_select, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootdev_test_cmd_select, UTF_DM | UTF_SCAN_FDT | UTF_CONSOL=
 E);
 >=20=20
->  /* Check searching for a single bootdev using the hunters */
->  static int bootflow_cmd_hunt_single(struct unit_test_state *uts)
-> diff --git a/test/boot/upl.c b/test/boot/upl.c
-> index 6ef29a98f05..99f02b7951b 100644
-> --- a/test/boot/upl.c
-> +++ b/test/boot/upl.c
-> @@ -374,7 +374,7 @@ static int upl_test_info(struct unit_test_state *uts)
+>  /* Check bootdev labels */
+>  static int bootdev_test_labels(struct unit_test_state *uts)
+> @@ -157,7 +155,6 @@ static int bootdev_test_any(struct unit_test_state *u=
+ts)
+>  	 * 9   [ + ]      OK  mmc       mmc1.bootdev
+>  	 * a   [   ]      OK  mmc       mmc0.bootdev
+>  	 */
+> -	console_record_reset_enable();
+>  	ut_assertok(bootdev_find_by_any("8", &dev, &mflags));
+>  	ut_asserteq(UCLASS_BOOTDEV, device_get_uclass_id(dev));
+>  	ut_asserteq(BOOTFLOW_METHF_SINGLE_DEV, mflags);
+> @@ -185,7 +182,8 @@ static int bootdev_test_any(struct unit_test_state *u=
+ts)
 >=20=20
 >  	return 0;
 >  }
-> -UPL_TEST(upl_test_info, UTF_CONSOLE_REC);
-> +UPL_TEST(upl_test_info, UTF_CONSOLE);
+> -BOOTSTD_TEST(bootdev_test_any, UTF_DM | UTF_SCAN_FDT | UTF_ETH_BOOTDEV);
+> +BOOTSTD_TEST(bootdev_test_any, UTF_DM | UTF_SCAN_FDT | UTF_ETH_BOOTDEV |
+> +	     UTF_CONSOLE);
 >=20=20
->  /* Test 'upl read' and 'upl_write' commands */
->  static int upl_test_read_write(struct unit_test_state *uts)
-> @@ -396,7 +396,7 @@ static int upl_test_read_write(struct unit_test_state=
+>  /*
+>   * Check bootdev ordering with the bootdev-order property and boot_targe=
+ts
+> @@ -321,7 +319,6 @@ static int bootdev_test_prio(struct unit_test_state *=
+uts)
+>  	ut_assertok(bootstd_test_drop_bootdev_order(uts));
+>=20=20
+>  	/* 3 MMC and 3 USB bootdevs: MMC should come before USB */
+> -	console_record_reset_enable();
+>  	ut_assertok(bootflow_scan_first(NULL, NULL, &iter, 0, &bflow));
+>  	ut_asserteq(-ENODEV, bootflow_scan_next(&iter, &bflow));
+>  	ut_asserteq(6, iter.num_devs);
+> @@ -361,7 +358,6 @@ static int bootdev_test_hunter(struct unit_test_state=
+ *uts)
+>  	/* get access to the used hunters */
+>  	ut_assertok(bootstd_get_priv(&std));
+>=20=20
+> -	console_record_reset_enable();
+>  	bootdev_list_hunters(std);
+>  	ut_assert_nextline("Prio  Used  Uclass           Hunter");
+>  	ut_assert_nextlinen("----");
+> @@ -388,7 +384,7 @@ static int bootdev_test_hunter(struct unit_test_state=
  *uts)
 >=20=20
 >  	return 0;
 >  }
-> -UPL_TEST(upl_test_read_write, UTF_CONSOLE_REC);
-> +UPL_TEST(upl_test_read_write, UTF_CONSOLE);
+> -BOOTSTD_TEST(bootdev_test_hunter, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootdev_test_hunter, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
 >=20=20
->  /* Test UPL passthrough */
->  static int upl_test_info_norun(struct unit_test_state *uts)
-> @@ -425,7 +425,7 @@ static int upl_test_info_norun(struct unit_test_state=
- *uts)
+>  /* Check 'bootdev hunt' command */
+>  static int bootdev_test_cmd_hunt(struct unit_test_state *uts)
+> @@ -401,7 +397,6 @@ static int bootdev_test_cmd_hunt(struct unit_test_sta=
+te *uts)
+>  	/* get access to the used hunters */
+>  	ut_assertok(bootstd_get_priv(&std));
 >=20=20
->  	return 0;
->  }
-> -UPL_TEST(upl_test_info_norun, UTF_CONSOLE_REC | UTF_MANUAL);
-> +UPL_TEST(upl_test_info_norun, UTF_CONSOLE | UTF_MANUAL);
->=20=20
->  int do_ut_upl(struct cmd_tbl *cmdtp, int flag, int argc, char *const arg=
-v[])
->  {
-> diff --git a/test/cmd/addrmap.c b/test/cmd/addrmap.c
-> index fb4ec316781..abeb467aede 100644
-> --- a/test/cmd/addrmap.c
-> +++ b/test/cmd/addrmap.c
-> @@ -24,7 +24,7 @@ static int addrmap_test_basic(struct unit_test_state *u=
-ts)
+> -	console_record_reset_enable();
+>  	ut_assertok(run_command("bootdev hunt -l", 0));
+>  	ut_assert_nextline("Prio  Used  Uclass           Hunter");
+>  	ut_assert_nextlinen("----");
+> @@ -462,7 +457,8 @@ static int bootdev_test_cmd_hunt(struct unit_test_sta=
+te *uts)
 >=20=20
 >  	return 0;
 >  }
-> -ADDRMAP_TEST(addrmap_test_basic, UTF_CONSOLE_REC);
-> +ADDRMAP_TEST(addrmap_test_basic, UTF_CONSOLE);
->=20=20
->  int do_ut_addrmap(struct cmd_tbl *cmdtp, int flag, int argc, char *const=
- argv[])
->  {
-> diff --git a/test/cmd/armffa.c b/test/cmd/armffa.c
-> index d7b076cfe7c..fd578f3087f 100644
-> --- a/test/cmd/armffa.c
-> +++ b/test/cmd/armffa.c
-> @@ -28,4 +28,4 @@ static int dm_test_armffa_cmd(struct unit_test_state *u=
-ts)
->=20=20
->  	return 0;
->  }
-> -DM_TEST(dm_test_armffa_cmd, UTF_SCAN_FDT | UTF_CONSOLE_REC);
-> +DM_TEST(dm_test_armffa_cmd, UTF_SCAN_FDT | UTF_CONSOLE);
-> diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
-> index cb88d2ee11b..1d038bec29c 100644
-> --- a/test/cmd/bdinfo.c
-> +++ b/test/cmd/bdinfo.c
-> @@ -244,7 +244,7 @@ static int bdinfo_test_full(struct unit_test_state *u=
-ts)
->=20=20
->  	return 0;
->  }
-> -BDINFO_TEST(bdinfo_test_full, UTF_CONSOLE_REC);
-> +BDINFO_TEST(bdinfo_test_full, UTF_CONSOLE);
->=20=20
->  static int bdinfo_test_help(struct unit_test_state *uts)
->  {
-> @@ -265,7 +265,7 @@ static int bdinfo_test_help(struct unit_test_state *u=
-ts)
->=20=20
->  	return 0;
->  }
-> -BDINFO_TEST(bdinfo_test_help, UTF_CONSOLE_REC);
-> +BDINFO_TEST(bdinfo_test_help, UTF_CONSOLE);
->=20=20
->  static int bdinfo_test_memory(struct unit_test_state *uts)
->  {
-> @@ -280,7 +280,7 @@ static int bdinfo_test_memory(struct unit_test_state =
-*uts)
->=20=20
->  	return 0;
->  }
-> -BDINFO_TEST(bdinfo_test_memory, UTF_CONSOLE_REC);
-> +BDINFO_TEST(bdinfo_test_memory, UTF_CONSOLE);
->=20=20
->  static int bdinfo_test_eth(struct unit_test_state *uts)
->  {
-> @@ -295,7 +295,7 @@ static int bdinfo_test_eth(struct unit_test_state *ut=
-s)
->=20=20
->  	return 0;
->  }
-> -BDINFO_TEST(bdinfo_test_eth, UTF_CONSOLE_REC);
-> +BDINFO_TEST(bdinfo_test_eth, UTF_CONSOLE);
->=20=20
->  int do_ut_bdinfo(struct cmd_tbl *cmdtp, int flag, int argc, char *const =
-argv[])
->  {
-> diff --git a/test/cmd/exit.c b/test/cmd/exit.c
-> index e7e454c7631..d416607d610 100644
-> --- a/test/cmd/exit.c
-> +++ b/test/cmd/exit.c
-> @@ -121,7 +121,7 @@ static int cmd_exit_test(struct unit_test_state *uts)
->=20=20
->  	return 0;
->  }
-> -EXIT_TEST(cmd_exit_test, UTF_CONSOLE_REC);
-> +EXIT_TEST(cmd_exit_test, UTF_CONSOLE);
->=20=20
->  int do_ut_exit(struct cmd_tbl *cmdtp, int flag, int argc, char *const ar=
-gv[])
->  {
-> diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
-> index 4f935d053c6..721345f0288 100644
-> --- a/test/cmd/fdt.c
-> +++ b/test/cmd/fdt.c
-> @@ -213,7 +213,7 @@ static int fdt_test_addr(struct unit_test_state *uts)
->=20=20
->  	return 0;
->  }
-> -FDT_TEST(fdt_test_addr, UTF_CONSOLE_REC);
-> +FDT_TEST(fdt_test_addr, UTF_CONSOLE);
->=20=20
->  /* Test 'fdt addr' resizing an fdt */
->  static int fdt_test_addr_resize(struct unit_test_state *uts)
-> @@ -247,7 +247,7 @@ static int fdt_test_addr_resize(struct unit_test_stat=
-e *uts)
->=20=20
->  	return 0;
->  }
-> -FDT_TEST(fdt_test_addr_resize, UTF_CONSOLE_REC);
-> +FDT_TEST(fdt_test_addr_resize, UTF_CONSOLE);
->=20=20
->  static int fdt_test_move(struct unit_test_state *uts)
->  {
-> @@ -281,7 +281,7 @@ static int fdt_test_move(struct unit_test_state *uts)
->=20=20
->  	return 0;
->  }
-> -FDT_TEST(fdt_test_move, UTF_CONSOLE_REC);
-> +FDT_TEST(fdt_test_move, UTF_CONSOLE);
->=20=20
->  static int fdt_test_resize(struct unit_test_state *uts)
->  {
-> @@ -305,7 +305,7 @@ static int fdt_test_resize(struct unit_test_state *ut=
-s)
->=20=20
->  	return 0;
->  }
-> -FDT_TEST(fdt_test_resize, UTF_CONSOLE_REC);
-> +FDT_TEST(fdt_test_resize, UTF_CONSOLE);
->=20=20
->  static int fdt_test_print_list_common(struct unit_test_state *uts,
->  				      const char *opc, const char *node)
-> @@ -442,13 +442,13 @@ static int fdt_test_print(struct unit_test_state *u=
-ts)
->  {
->  	return fdt_test_print_list(uts, true);
->  }
-> -FDT_TEST(fdt_test_print, UTF_CONSOLE_REC);
-> +FDT_TEST(fdt_test_print, UTF_CONSOLE);
->=20=20
->  static int fdt_test_list(struct unit_test_state *uts)
->  {
->  	return fdt_test_print_list(uts, false);
->  }
-> -FDT_TEST(fdt_test_list, UTF_CONSOLE_REC);
-> +FDT_TEST(fdt_test_list, UTF_CONSOLE);
->=20=20
->  /* Test 'fdt get value' reading an fdt */
->  static int fdt_test_get_value_string(struct unit_test_state *uts,
-> @@ -554,7 +554,7 @@ static int fdt_test_get_value(struct unit_test_state =
-*uts)
->=20=20
->  	return 0;
->  }
-> -FDT_TEST(fdt_test_get_value, UTF_CONSOLE_REC);
-> +FDT_TEST(fdt_test_get_value, UTF_CONSOLE);
->=20=20
->  static int fdt_test_get_name(struct unit_test_state *uts)
->  {
-> @@ -633,7 +633,7 @@ static int fdt_test_get_name(struct unit_test_state *=
-uts)
->=20=20
->  	return 0;
->  }
-> -FDT_TEST(fdt_test_get_name, UTF_CONSOLE_REC);
-> +FDT_TEST(fdt_test_get_name, UTF_CONSOLE);
->=20=20
->  static int fdt_test_get_addr_common(struct unit_test_state *uts, char *f=
-dt,
->  				    const char *path, const char *prop)
-> @@ -700,7 +700,7 @@ static int fdt_test_get_addr(struct unit_test_state *=
-uts)
->=20=20
->  	return 0;
->  }
-> -FDT_TEST(fdt_test_get_addr, UTF_CONSOLE_REC);
-> +FDT_TEST(fdt_test_get_addr, UTF_CONSOLE);
->=20=20
->  static int fdt_test_get_size_common(struct unit_test_state *uts,
->  				     const char *path, const char *prop,
-> @@ -787,7 +787,7 @@ static int fdt_test_get_size(struct unit_test_state *=
-uts)
->=20=20
->  	return 0;
->  }
-> -FDT_TEST(fdt_test_get_size, UTF_CONSOLE_REC);
-> +FDT_TEST(fdt_test_get_size, UTF_CONSOLE);
->=20=20
->  static int fdt_test_set_single(struct unit_test_state *uts,
->  			       const char *path, const char *prop,
-> @@ -929,7 +929,7 @@ static int fdt_test_set(struct unit_test_state *uts)
->=20=20
->  	return 0;
->  }
-> -FDT_TEST(fdt_test_set, UTF_CONSOLE_REC);
-> +FDT_TEST(fdt_test_set, UTF_CONSOLE);
->=20=20
->  static int fdt_test_mknode(struct unit_test_state *uts)
->  {
-> @@ -997,7 +997,7 @@ static int fdt_test_mknode(struct unit_test_state *ut=
-s)
->=20=20
->  	return 0;
->  }
-> -FDT_TEST(fdt_test_mknode, UTF_CONSOLE_REC);
-> +FDT_TEST(fdt_test_mknode, UTF_CONSOLE);
->=20=20
->  static int fdt_test_rm(struct unit_test_state *uts)
->  {
-> @@ -1081,7 +1081,7 @@ static int fdt_test_rm(struct unit_test_state *uts)
->=20=20
->  	return 0;
->  }
-> -FDT_TEST(fdt_test_rm, UTF_CONSOLE_REC);
-> +FDT_TEST(fdt_test_rm, UTF_CONSOLE);
->=20=20
->  static int fdt_test_bootcpu(struct unit_test_state *uts)
->  {
-> @@ -1114,7 +1114,7 @@ static int fdt_test_bootcpu(struct unit_test_state =
-*uts)
->=20=20
->  	return 0;
->  }
-> -FDT_TEST(fdt_test_bootcpu, UTF_CONSOLE_REC);
-> +FDT_TEST(fdt_test_bootcpu, UTF_CONSOLE);
->=20=20
->  static int fdt_test_header_get(struct unit_test_state *uts,
->  			       const char *field, const unsigned long val)
-> @@ -1173,7 +1173,7 @@ static int fdt_test_header(struct unit_test_state *=
-uts)
->=20=20
->  	return 0;
->  }
-> -FDT_TEST(fdt_test_header, UTF_CONSOLE_REC);
-> +FDT_TEST(fdt_test_header, UTF_CONSOLE);
->=20=20
->  static int fdt_test_memory_cells(struct unit_test_state *uts,
->  				 const unsigned int cells)
-> @@ -1256,7 +1256,7 @@ static int fdt_test_memory(struct unit_test_state *=
-uts)
->=20=20
->  	return 0;
->  }
-> -FDT_TEST(fdt_test_memory, UTF_CONSOLE_REC);
-> +FDT_TEST(fdt_test_memory, UTF_CONSOLE);
->=20=20
->  static int fdt_test_rsvmem(struct unit_test_state *uts)
->  {
-> @@ -1319,7 +1319,7 @@ static int fdt_test_rsvmem(struct unit_test_state *=
-uts)
->=20=20
->  	return 0;
->  }
-> -FDT_TEST(fdt_test_rsvmem, UTF_CONSOLE_REC);
-> +FDT_TEST(fdt_test_rsvmem, UTF_CONSOLE);
->=20=20
->  static int fdt_test_chosen(struct unit_test_state *uts)
->  {
-> @@ -1375,7 +1375,7 @@ static int fdt_test_chosen(struct unit_test_state *=
-uts)
->=20=20
->  	return 0;
->  }
-> -FDT_TEST(fdt_test_chosen, UTF_CONSOLE_REC);
-> +FDT_TEST(fdt_test_chosen, UTF_CONSOLE);
->=20=20
->  static int fdt_test_apply(struct unit_test_state *uts)
->  {
-> @@ -1527,7 +1527,7 @@ static int fdt_test_apply(struct unit_test_state *u=
-ts)
->=20=20
->  	return 0;
->  }
-> -FDT_TEST(fdt_test_apply, UTF_CONSOLE_REC);
-> +FDT_TEST(fdt_test_apply, UTF_CONSOLE);
->=20=20
->  int do_ut_fdt(struct cmd_tbl *cmdtp, int flag, int argc, char *const arg=
-v[])
->  {
-> diff --git a/test/cmd/font.c b/test/cmd/font.c
-> index 3ea262bb703..08600dfe2eb 100644
-> --- a/test/cmd/font.c
-> +++ b/test/cmd/font.c
-> @@ -69,7 +69,7 @@ static int font_test_base(struct unit_test_state *uts)
->=20=20
->  	return 0;
->  }
-> -FONT_TEST(font_test_base, UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_CONSOLE_RE=
-C |
-> +FONT_TEST(font_test_base, UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_CONSOLE |
->  	  UTF_DM);
->=20=20
->  int do_ut_font(struct cmd_tbl *cmdtp, int flag, int argc, char *const ar=
-gv[])
-> diff --git a/test/cmd/history.c b/test/cmd/history.c
-> index 9fec4a811f4..6d9d2288483 100644
-> --- a/test/cmd/history.c
-> +++ b/test/cmd/history.c
-> @@ -45,4 +45,4 @@ static int lib_test_history(struct unit_test_state *uts)
->=20=20
->  	return 0;
->  }
-> -LIB_TEST(lib_test_history, UTF_CONSOLE_REC);
-> +LIB_TEST(lib_test_history, UTF_CONSOLE);
-> diff --git a/test/cmd/loadm.c b/test/cmd/loadm.c
-> index 0b6390ebc53..29ae8339183 100644
-> --- a/test/cmd/loadm.c
-> +++ b/test/cmd/loadm.c
-> @@ -41,7 +41,7 @@ static int loadm_test_params(struct unit_test_state *ut=
-s)
->=20=20
->  	return 0;
->  }
-> -LOADM_TEST(loadm_test_params, UTF_CONSOLE_REC);
-> +LOADM_TEST(loadm_test_params, UTF_CONSOLE);
->=20=20
->  static int loadm_test_load (struct unit_test_state *uts)
->  {
-> @@ -59,7 +59,7 @@ static int loadm_test_load (struct unit_test_state *uts)
->=20=20
->  	return 0;
->  }
-> -LOADM_TEST(loadm_test_load, UTF_CONSOLE_REC);
-> +LOADM_TEST(loadm_test_load, UTF_CONSOLE);
->=20=20
->  int do_ut_loadm(struct cmd_tbl *cmdtp, int flag, int argc, char *const a=
-rgv[])
->  {
-> diff --git a/test/cmd/mbr.c b/test/cmd/mbr.c
-> index e4b694b728f..0c3698afb0b 100644
-> --- a/test/cmd/mbr.c
-> +++ b/test/cmd/mbr.c
-> @@ -465,7 +465,7 @@ static int mbr_test_run(struct unit_test_state *uts)
->  }
->=20=20
->  /* Declare mbr test */
-> -UNIT_TEST(mbr_test_run, UTF_CONSOLE_REC, mbr_test);
-> +UNIT_TEST(mbr_test_run, UTF_CONSOLE, mbr_test);
->=20=20
->  int do_ut_mbr(struct cmd_tbl *cmdtp, int flag, int argc, char *const arg=
-v[])
->  {
-> @@ -479,4 +479,4 @@ static int dm_test_cmd_mbr(struct unit_test_state *ut=
-s)
->  {
->  	return mbr_test_run(uts);
->  }
-> -DM_TEST(dm_test_cmd_mbr, UTF_SCAN_FDT | UTF_CONSOLE_REC);
-> +DM_TEST(dm_test_cmd_mbr, UTF_SCAN_FDT | UTF_CONSOLE);
-> diff --git a/test/cmd/mem_search.c b/test/cmd/mem_search.c
-> index 9ad0c18152f..1387baea032 100644
-> --- a/test/cmd/mem_search.c
-> +++ b/test/cmd/mem_search.c
-> @@ -43,7 +43,7 @@ static int mem_test_ms_b(struct unit_test_state *uts)
->=20=20
->  	return 0;
->  }
-> -MEM_TEST(mem_test_ms_b, UTF_CONSOLE_REC);
-> +MEM_TEST(mem_test_ms_b, UTF_CONSOLE);
->=20=20
->  /* Test 'ms' command with 16-bit values */
->  static int mem_test_ms_w(struct unit_test_state *uts)
-> @@ -68,7 +68,7 @@ static int mem_test_ms_w(struct unit_test_state *uts)
->=20=20
->  	return 0;
->  }
-> -MEM_TEST(mem_test_ms_w, UTF_CONSOLE_REC);
-> +MEM_TEST(mem_test_ms_w, UTF_CONSOLE);
->=20=20
->  /* Test 'ms' command with 32-bit values */
->  static int mem_test_ms_l(struct unit_test_state *uts)
-> @@ -102,7 +102,7 @@ static int mem_test_ms_l(struct unit_test_state *uts)
->=20=20
->  	return 0;
->  }
-> -MEM_TEST(mem_test_ms_l, UTF_CONSOLE_REC);
-> +MEM_TEST(mem_test_ms_l, UTF_CONSOLE);
->=20=20
->  /* Test 'ms' command with continuation */
->  static int mem_test_ms_cont(struct unit_test_state *uts)
-> @@ -152,7 +152,7 @@ static int mem_test_ms_cont(struct unit_test_state *u=
-ts)
->=20=20
->  	return 0;
->  }
-> -MEM_TEST(mem_test_ms_cont, UTF_CONSOLE_REC);
-> +MEM_TEST(mem_test_ms_cont, UTF_CONSOLE);
->=20=20
->  /* Test that an 'ms' command with continuation stops at the end of the r=
-ange */
->  static int mem_test_ms_cont_end(struct unit_test_state *uts)
-> @@ -196,7 +196,7 @@ static int mem_test_ms_cont_end(struct unit_test_stat=
-e *uts)
->=20=20
->  	return 0;
->  }
-> -MEM_TEST(mem_test_ms_cont_end, UTF_CONSOLE_REC);
-> +MEM_TEST(mem_test_ms_cont_end, UTF_CONSOLE);
->=20=20
->  /* Test 'ms' command with multiple values */
->  static int mem_test_ms_mult(struct unit_test_state *uts)
-> @@ -225,7 +225,7 @@ static int mem_test_ms_mult(struct unit_test_state *u=
-ts)
->=20=20
->  	return 0;
->  }
-> -MEM_TEST(mem_test_ms_mult, UTF_CONSOLE_REC);
-> +MEM_TEST(mem_test_ms_mult, UTF_CONSOLE);
->=20=20
->  /* Test 'ms' command with string */
->  static int mem_test_ms_s(struct unit_test_state *uts)
-> @@ -268,7 +268,7 @@ static int mem_test_ms_s(struct unit_test_state *uts)
->=20=20
->  	return 0;
->  }
-> -MEM_TEST(mem_test_ms_s, UTF_CONSOLE_REC);
-> +MEM_TEST(mem_test_ms_s, UTF_CONSOLE);
->=20=20
->  /* Test 'ms' command with limit */
->  static int mem_test_ms_limit(struct unit_test_state *uts)
-> @@ -297,7 +297,7 @@ static int mem_test_ms_limit(struct unit_test_state *=
-uts)
->=20=20
->  	return 0;
->  }
-> -MEM_TEST(mem_test_ms_limit, UTF_CONSOLE_REC);
-> +MEM_TEST(mem_test_ms_limit, UTF_CONSOLE);
->=20=20
->  /* Test 'ms' command in quiet mode */
->  static int mem_test_ms_quiet(struct unit_test_state *uts)
-> @@ -321,4 +321,4 @@ static int mem_test_ms_quiet(struct unit_test_state *=
-uts)
->=20=20
->  	return 0;
->  }
-> -MEM_TEST(mem_test_ms_quiet, UTF_CONSOLE_REC);
-> +MEM_TEST(mem_test_ms_quiet, UTF_CONSOLE);
-> diff --git a/test/cmd/pci_mps.c b/test/cmd/pci_mps.c
-> index 755a0649770..a265105600c 100644
-> --- a/test/cmd/pci_mps.c
-> +++ b/test/cmd/pci_mps.c
-> @@ -27,7 +27,7 @@ static int test_pci_mps_safe(struct unit_test_state *ut=
-s)
->=20=20
->  	return 0;
->  }
-> -PCI_MPS_TEST(test_pci_mps_safe, UTF_CONSOLE_REC);
-> +PCI_MPS_TEST(test_pci_mps_safe, UTF_CONSOLE);
->=20=20
->  int do_ut_pci_mps(struct cmd_tbl *cmdtp, int flag, int argc,
->  		  char * const argv[])
-> diff --git a/test/cmd/pwm.c b/test/cmd/pwm.c
-> index 44f52e15cbb..f8de03fd6d1 100644
-> --- a/test/cmd/pwm.c
-> +++ b/test/cmd/pwm.c
-> @@ -71,4 +71,4 @@ static int dm_test_pwm_cmd(struct unit_test_state *uts)
->=20=20
->  	return 0;
->  }
-> -DM_TEST(dm_test_pwm_cmd, UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_CONSOLE_REC=
-);
-> +DM_TEST(dm_test_pwm_cmd, UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_CONSOLE);
-> diff --git a/test/cmd/rw.c b/test/cmd/rw.c
-> index eeda87b53ed..1086dcd2914 100644
-> --- a/test/cmd/rw.c
-> +++ b/test/cmd/rw.c
-> @@ -99,4 +99,4 @@ static int dm_test_read_write(struct unit_test_state *u=
-ts)
->=20=20
->  	return 0;
->  }
-> -DM_TEST(dm_test_read_write, UTF_SCAN_FDT | UTF_CONSOLE_REC);
-> +DM_TEST(dm_test_read_write, UTF_SCAN_FDT | UTF_CONSOLE);
-> diff --git a/test/cmd/seama.c b/test/cmd/seama.c
-> index 235135118cf..802563e4f71 100644
-> --- a/test/cmd/seama.c
-> +++ b/test/cmd/seama.c
-> @@ -26,7 +26,7 @@ static int seama_test_noargs(struct unit_test_state *ut=
-s)
->  	ut_assert_console_end();
->  	return 0;
->  }
-> -SEAMA_TEST(seama_test_noargs, UTF_CONSOLE_REC);
-> +SEAMA_TEST(seama_test_noargs, UTF_CONSOLE);
->=20=20
->  static int seama_test_addr(struct unit_test_state *uts)
->  {
-> @@ -42,7 +42,7 @@ static int seama_test_addr(struct unit_test_state *uts)
->  	ut_assert_console_end();
->  	return 0;
->  }
-> -SEAMA_TEST(seama_test_addr, UTF_CONSOLE_REC);
-> +SEAMA_TEST(seama_test_addr, UTF_CONSOLE);
->=20=20
->  static int seama_test_index(struct unit_test_state *uts)
->  {
-> @@ -58,7 +58,7 @@ static int seama_test_index(struct unit_test_state *uts)
->  	ut_assert_console_end();
->  	return 0;
->  }
-> -SEAMA_TEST(seama_test_index, UTF_CONSOLE_REC);
-> +SEAMA_TEST(seama_test_index, UTF_CONSOLE);
->=20=20
->  int do_ut_seama(struct cmd_tbl *cmdtp, int flag, int argc, char *const a=
-rgv[])
->  {
-> diff --git a/test/cmd/setexpr.c b/test/cmd/setexpr.c
-> index a4086c9451c..dcd0e3726e4 100644
-> --- a/test/cmd/setexpr.c
-> +++ b/test/cmd/setexpr.c
-> @@ -63,7 +63,7 @@ static int setexpr_test_int(struct unit_test_state *uts)
->=20=20
->  	return 0;
->  }
-> -SETEXPR_TEST(setexpr_test_int, UTF_CONSOLE_REC);
-> +SETEXPR_TEST(setexpr_test_int, UTF_CONSOLE);
->=20=20
->  /* Test 'setexpr' command with + operator */
->  static int setexpr_test_plus(struct unit_test_state *uts)
-> @@ -105,7 +105,7 @@ static int setexpr_test_plus(struct unit_test_state *=
-uts)
->=20=20
->  	return 0;
->  }
-> -SETEXPR_TEST(setexpr_test_plus, UTF_CONSOLE_REC);
-> +SETEXPR_TEST(setexpr_test_plus, UTF_CONSOLE);
->=20=20
->  /* Test 'setexpr' command with other operators */
->  static int setexpr_test_oper(struct unit_test_state *uts)
-> @@ -148,7 +148,7 @@ static int setexpr_test_oper(struct unit_test_state *=
-uts)
->=20=20
->  	return 0;
->  }
-> -SETEXPR_TEST(setexpr_test_oper, UTF_CONSOLE_REC);
-> +SETEXPR_TEST(setexpr_test_oper, UTF_CONSOLE);
->=20=20
->  /* Test 'setexpr' command with regex */
->  static int setexpr_test_regex(struct unit_test_state *uts)
-> @@ -192,7 +192,7 @@ static int setexpr_test_regex(struct unit_test_state =
-*uts)
->=20=20
->  	return 0;
->  }
-> -SETEXPR_TEST(setexpr_test_regex, UTF_CONSOLE_REC);
-> +SETEXPR_TEST(setexpr_test_regex, UTF_CONSOLE);
->=20=20
->  /* Test 'setexpr' command with regex replacement that expands the string=
- */
->  static int setexpr_test_regex_inc(struct unit_test_state *uts)
-> @@ -209,7 +209,7 @@ static int setexpr_test_regex_inc(struct unit_test_st=
+> -BOOTSTD_TEST(bootdev_test_cmd_hunt, UTF_DM | UTF_SCAN_FDT | UTF_ETH_BOOT=
+DEV);
+> +BOOTSTD_TEST(bootdev_test_cmd_hunt, UTF_DM | UTF_SCAN_FDT | UTF_ETH_BOOT=
+DEV |
+> +	     UTF_CONSOLE);
+>=20=20
+>  /* Check searching for bootdevs using the hunters */
+>  static int bootdev_test_hunt_scan(struct unit_test_state *uts)
+> @@ -527,7 +523,6 @@ static int bootdev_test_hunt_prio(struct unit_test_st=
+ate *uts)
+>  	usb_started =3D false;
+>  	test_set_skip_delays(true);
+>=20=20
+> -	console_record_reset_enable();
+>  	ut_assertok(bootdev_hunt_prio(BOOTDEVP_4_SCAN_FAST, false));
+>  	ut_assert_nextline("scanning bus for devices...");
+>  	ut_assert_skip_to_line("            Type: Hard Disk");
+> @@ -544,7 +539,7 @@ static int bootdev_test_hunt_prio(struct unit_test_st=
 ate *uts)
 >=20=20
 >  	return 0;
 >  }
-> -SETEXPR_TEST(setexpr_test_regex_inc, UTF_CONSOLE_REC);
-> +SETEXPR_TEST(setexpr_test_regex_inc, UTF_CONSOLE);
->=20=20
->  /* Test setexpr_regex_sub() directly to check buffer usage */
->  static int setexpr_test_sub(struct unit_test_state *uts)
-> @@ -249,7 +249,7 @@ static int setexpr_test_sub(struct unit_test_state *u=
-ts)
->=20=20
->  	return 0;
->  }
-> -SETEXPR_TEST(setexpr_test_sub, UTF_CONSOLE_REC);
-> +SETEXPR_TEST(setexpr_test_sub, UTF_CONSOLE);
->=20=20
->  /* Test setexpr_regex_sub() with back references */
->  static int setexpr_test_backref(struct unit_test_state *uts)
-> @@ -292,7 +292,7 @@ static int setexpr_test_backref(struct unit_test_stat=
-e *uts)
->=20=20
->  	return 0;
->  }
-> -SETEXPR_TEST(setexpr_test_backref, UTF_CONSOLE_REC);
-> +SETEXPR_TEST(setexpr_test_backref, UTF_CONSOLE);
->=20=20
->  /* Test 'setexpr' command with setting strings */
->  static int setexpr_test_str(struct unit_test_state *uts)
-> @@ -327,7 +327,7 @@ static int setexpr_test_str(struct unit_test_state *u=
-ts)
->=20=20
->  	return 0;
->  }
-> -SETEXPR_TEST(setexpr_test_str, UTF_CONSOLE_REC);
-> +SETEXPR_TEST(setexpr_test_str, UTF_CONSOLE);
->=20=20
->  /* Test 'setexpr' command with concatenating strings */
->  static int setexpr_test_str_oper(struct unit_test_state *uts)
-> @@ -376,7 +376,7 @@ static int setexpr_test_str_oper(struct unit_test_sta=
-te *uts)
->=20=20
->  	return 0;
->  }
-> -SETEXPR_TEST(setexpr_test_str_oper, UTF_CONSOLE_REC);
-> +SETEXPR_TEST(setexpr_test_str_oper, UTF_CONSOLE);
->=20=20
->  /* Test 'setexpr' command with a string that is too long */
->  static int setexpr_test_str_long(struct unit_test_state *uts)
-> @@ -396,7 +396,7 @@ static int setexpr_test_str_long(struct unit_test_sta=
-te *uts)
->=20=20
->  	return 0;
->  }
-> -SETEXPR_TEST(setexpr_test_str_long, UTF_CONSOLE_REC);
-> +SETEXPR_TEST(setexpr_test_str_long, UTF_CONSOLE);
->=20=20
->  #ifdef CONFIG_CMD_SETEXPR_FMT
->  /* Test 'setexpr' command with simply setting integers */
-> @@ -478,7 +478,7 @@ static int setexpr_test_fmt(struct unit_test_state *u=
-ts)
->=20=20
->  	return 0;
->  }
-> -SETEXPR_TEST(setexpr_test_fmt, UTF_CONSOLE_REC);
-> +SETEXPR_TEST(setexpr_test_fmt, UTF_CONSOLE);
->  #endif
->=20=20
->  int do_ut_setexpr(struct cmd_tbl *cmdtp, int flag, int argc, char *const=
- argv[])
-> diff --git a/test/cmd/temperature.c b/test/cmd/temperature.c
-> index b86c7d44b33..193fa6324ea 100644
-> --- a/test/cmd/temperature.c
-> +++ b/test/cmd/temperature.c
-> @@ -34,4 +34,4 @@ static int dm_test_cmd_temperature(struct unit_test_sta=
-te *uts)
->=20=20
->  	return 0;
->  }
-> -DM_TEST(dm_test_cmd_temperature, UTF_SCAN_FDT | UTF_CONSOLE_REC);
-> +DM_TEST(dm_test_cmd_temperature, UTF_SCAN_FDT | UTF_CONSOLE);
-> diff --git a/test/dm/ffa.c b/test/dm/ffa.c
-> index 1937d0eecb0..593b7177fce 100644
-> --- a/test/dm/ffa.c
-> +++ b/test/dm/ffa.c
-> @@ -197,7 +197,7 @@ static int dm_test_ffa_ack(struct unit_test_state *ut=
-s)
->=20=20
->  	return 0;
->  }
-> -DM_TEST(dm_test_ffa_ack, UTF_SCAN_FDT | UTF_CONSOLE_REC);
-> +DM_TEST(dm_test_ffa_ack, UTF_SCAN_FDT | UTF_CONSOLE);
->=20=20
->  static int dm_test_ffa_nack(struct unit_test_state *uts)
->  {
-> @@ -255,4 +255,4 @@ static int dm_test_ffa_nack(struct unit_test_state *u=
-ts)
->=20=20
->  	return 0;
->  }
-> -DM_TEST(dm_test_ffa_nack, UTF_SCAN_FDT | UTF_CONSOLE_REC);
-> +DM_TEST(dm_test_ffa_nack, UTF_SCAN_FDT | UTF_CONSOLE);
-> diff --git a/test/dm/nvmxip.c b/test/dm/nvmxip.c
-> index 5c455ddbf04..a702d0aec3f 100644
-> --- a/test/dm/nvmxip.c
-> +++ b/test/dm/nvmxip.c
-> @@ -142,4 +142,4 @@ static int dm_test_nvmxip(struct unit_test_state *uts)
->=20=20
->  	return CMD_RET_SUCCESS;
->  }
-> -DM_TEST(dm_test_nvmxip, UTF_SCAN_FDT | UTF_CONSOLE_REC);
-> +DM_TEST(dm_test_nvmxip, UTF_SCAN_FDT | UTF_CONSOLE);
-> diff --git a/test/dm/rkmtd.c b/test/dm/rkmtd.c
-> index e77c43b247a..d1ca5d1acac 100644
-> --- a/test/dm/rkmtd.c
-> +++ b/test/dm/rkmtd.c
-> @@ -196,4 +196,4 @@ static int dm_test_rkmtd_cmd(struct unit_test_state *=
-uts)
->=20=20
->  	return 0;
->  }
-> -DM_TEST(dm_test_rkmtd_cmd, UTF_SCAN_FDT | UTF_CONSOLE_REC);
-> +DM_TEST(dm_test_rkmtd_cmd, UTF_SCAN_FDT | UTF_CONSOLE);
-> diff --git a/test/dm/rng.c b/test/dm/rng.c
-> index d249e0218fe..8ed4e1373ea 100644
-> --- a/test/dm/rng.c
-> +++ b/test/dm/rng.c
-> @@ -52,4 +52,4 @@ static int dm_test_rng_cmd(struct unit_test_state *uts)
->=20=20
->  	return 0;
->  }
-> -DM_TEST(dm_test_rng_cmd, UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_CONSOLE_REC=
+> -BOOTSTD_TEST(bootdev_test_hunt_prio, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootdev_test_hunt_prio, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE=
 );
-> +DM_TEST(dm_test_rng_cmd, UTF_SCAN_PDATA | UTF_SCAN_FDT | UTF_CONSOLE);
-> diff --git a/test/log/log_filter.c b/test/log/log_filter.c
-> index 149eef05426..e175f409c9b 100644
-> --- a/test/log/log_filter.c
-> +++ b/test/log/log_filter.c
-> @@ -24,7 +24,7 @@ static int log_test_filter_invalid(struct unit_test_sta=
-te *uts)
+>=20=20
+>  /* Check hunting for bootdevs with a particular label */
+>  static int bootdev_test_hunt_label(struct unit_test_state *uts)
+> @@ -559,7 +554,6 @@ static int bootdev_test_hunt_label(struct unit_test_s=
+tate *uts)
+>  	ut_assertok(bootstd_get_priv(&std));
+>=20=20
+>  	/* scan an unknown uclass */
+> -	console_record_reset_enable();
+>  	old =3D (void *)&mflags;   /* arbitrary pointer to check against dev */
+>  	dev =3D old;
+>  	mflags =3D 123;
+> @@ -597,7 +591,7 @@ static int bootdev_test_hunt_label(struct unit_test_s=
+tate *uts)
 >=20=20
 >  	return 0;
 >  }
-> -LOG_TEST_FLAGS(log_test_filter_invalid, UTF_CONSOLE_REC);
-> +LOG_TEST_FLAGS(log_test_filter_invalid, UTF_CONSOLE);
+> -BOOTSTD_TEST(bootdev_test_hunt_label, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootdev_test_hunt_label, UTF_DM | UTF_SCAN_FDT | UTF_CONSOL=
+E);
 >=20=20
->  /* Test adding and removing filters */
->  static int log_test_filter(struct unit_test_state *uts)
-> @@ -105,4 +105,4 @@ static int log_test_filter(struct unit_test_state *ut=
-s)
+>  /* Check iterating to the next label in a list */
+>  static int bootdev_test_next_label(struct unit_test_state *uts)
+> @@ -624,7 +618,6 @@ static int bootdev_test_next_label(struct unit_test_s=
+tate *uts)
+>  	dev =3D NULL;
+>  	mflags =3D 123;
+>  	ut_assertok(bootdev_next_label(&iter, &dev, &mflags));
+> -	console_record_reset_enable();
+>  	ut_assert_console_end();
+>  	ut_assertnonnull(dev);
+>  	ut_asserteq_str("mmc0.bootdev", dev->name);
+> @@ -675,7 +668,7 @@ static int bootdev_test_next_label(struct unit_test_s=
+tate *uts)
+>  	return 0;
+>  }
+>  BOOTSTD_TEST(bootdev_test_next_label, UTF_DM | UTF_SCAN_FDT | UTF_ETH_BO=
+OTDEV |
+> -	     UTF_SF_BOOTDEV);
+> +	     UTF_SF_BOOTDEV | UTF_CONSOLE);
+>=20=20
+>  /* Check iterating to the next prioirty in a list */
+>  static int bootdev_test_next_prio(struct unit_test_state *uts)
+> @@ -700,7 +693,6 @@ static int bootdev_test_next_prio(struct unit_test_st=
+ate *uts)
+>  	iter.flags =3D BOOTFLOWIF_SHOW;
+>=20=20
+>  	dev =3D NULL;
+> -	console_record_reset_enable();
+>  	ut_assertok(bootdev_next_prio(&iter, &dev));
+>  	ut_assertnonnull(dev);
+>  	ut_asserteq_str("mmc2.bootdev", dev->name);
+> @@ -759,4 +751,5 @@ static int bootdev_test_next_prio(struct unit_test_st=
+ate *uts)
 >=20=20
 >  	return 0;
 >  }
-> -LOG_TEST_FLAGS(log_test_filter, UTF_CONSOLE_REC);
-> +LOG_TEST_FLAGS(log_test_filter, UTF_CONSOLE);
-> diff --git a/test/log/log_test.c b/test/log/log_test.c
-> index d2c062e1323..357a3b57feb 100644
-> --- a/test/log/log_test.c
-> +++ b/test/log/log_test.c
-> @@ -121,7 +121,7 @@ int log_test_cat_allow(struct unit_test_state *uts)
->  	ut_assertok(log_remove_filter("console", filt));
->  	return 0;
->  }
-> -LOG_TEST_FLAGS(log_test_cat_allow, UTF_CONSOLE_REC);
-> +LOG_TEST_FLAGS(log_test_cat_allow, UTF_CONSOLE);
->=20=20
->  /* Check a category filter that should block log entries */
->  int log_test_cat_deny_implicit(struct unit_test_state *uts)
-> @@ -141,7 +141,7 @@ int log_test_cat_deny_implicit(struct unit_test_state=
- *uts)
->  	ut_assertok(log_remove_filter("console", filt));
->  	return 0;
->  }
-> -LOG_TEST_FLAGS(log_test_cat_deny_implicit, UTF_CONSOLE_REC);
-> +LOG_TEST_FLAGS(log_test_cat_deny_implicit, UTF_CONSOLE);
->=20=20
->  /* Check passing and failing file filters */
->  int log_test_file(struct unit_test_state *uts)
-> @@ -162,7 +162,7 @@ int log_test_file(struct unit_test_state *uts)
->  	ut_assertok(log_remove_filter("console", filt));
->  	return 0;
->  }
-> -LOG_TEST_FLAGS(log_test_file, UTF_CONSOLE_REC);
-> +LOG_TEST_FLAGS(log_test_file, UTF_CONSOLE);
->=20=20
->  /* Check a passing file filter (second in list) */
->  int log_test_file_second(struct unit_test_state *uts)
-> @@ -179,7 +179,7 @@ int log_test_file_second(struct unit_test_state *uts)
->  	ut_assertok(log_remove_filter("console", filt));
->  	return 0;
->  }
-> -LOG_TEST_FLAGS(log_test_file_second, UTF_CONSOLE_REC);
-> +LOG_TEST_FLAGS(log_test_file_second, UTF_CONSOLE);
->=20=20
->  /* Check a passing file filter (middle of list) */
->  int log_test_file_mid(struct unit_test_state *uts)
-> @@ -197,7 +197,7 @@ int log_test_file_mid(struct unit_test_state *uts)
->  	ut_assertok(log_remove_filter("console", filt));
->  	return 0;
->  }
-> -LOG_TEST_FLAGS(log_test_file_mid, UTF_CONSOLE_REC);
-> +LOG_TEST_FLAGS(log_test_file_mid, UTF_CONSOLE);
->=20=20
->  /* Check a log level filter */
->  int log_test_level(struct unit_test_state *uts)
-> @@ -215,7 +215,7 @@ int log_test_level(struct unit_test_state *uts)
->  	ut_assertok(log_remove_filter("console", filt));
->  	return 0;
->  }
-> -LOG_TEST_FLAGS(log_test_level, UTF_CONSOLE_REC);
-> +LOG_TEST_FLAGS(log_test_level, UTF_CONSOLE);
->=20=20
->  /* Check two filters, one of which passes everything */
->  int log_test_double(struct unit_test_state *uts)
-> @@ -235,7 +235,7 @@ int log_test_double(struct unit_test_state *uts)
->  	ut_assertok(log_remove_filter("console", filt2));
->  	return 0;
->  }
-> -LOG_TEST_FLAGS(log_test_double, UTF_CONSOLE_REC);
-> +LOG_TEST_FLAGS(log_test_double, UTF_CONSOLE);
->=20=20
->  /* Check three filters, which together pass everything */
->  int log_test_triple(struct unit_test_state *uts)
-> @@ -258,7 +258,7 @@ int log_test_triple(struct unit_test_state *uts)
->  	ut_assertok(log_remove_filter("console", filt3));
->  	return 0;
->  }
-> -LOG_TEST_FLAGS(log_test_triple, UTF_CONSOLE_REC);
-> +LOG_TEST_FLAGS(log_test_triple, UTF_CONSOLE);
->=20=20
->  int do_log_test_helpers(struct unit_test_state *uts)
+> -BOOTSTD_TEST(bootdev_test_next_prio, UTF_DM | UTF_SCAN_FDT | UTF_SF_BOOT=
+DEV);
+> +BOOTSTD_TEST(bootdev_test_next_prio, UTF_DM | UTF_SCAN_FDT | UTF_SF_BOOT=
+DEV |
+> +	     UTF_CONSOLE);
+> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+> index f53e20e4c86..6ad63afe90a 100644
+> --- a/test/boot/bootflow.c
+> +++ b/test/boot/bootflow.c
+> @@ -50,7 +50,6 @@ static int inject_response(struct unit_test_state *uts)
+>  /* Check 'bootflow scan/list' commands */
+>  static int bootflow_cmd(struct unit_test_state *uts)
 >  {
-> @@ -292,7 +292,7 @@ int log_test_helpers(struct unit_test_state *uts)
->  	gd->log_fmt =3D log_get_default_format();
->  	return ret;
->  }
-> -LOG_TEST_FLAGS(log_test_helpers, UTF_CONSOLE_REC);
-> +LOG_TEST_FLAGS(log_test_helpers, UTF_CONSOLE);
+> -	console_record_reset_enable();
+>  	ut_assertok(run_command("bootdev select 1", 0));
+>  	ut_assert_console_end();
+>  	ut_assertok(run_command("bootflow scan -lH", 0));
+> @@ -76,14 +75,13 @@ static int bootflow_cmd(struct unit_test_state *uts)
 >=20=20
->  int do_log_test_disable(struct unit_test_state *uts)
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(bootflow_cmd, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootflow_cmd, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+>=20=20
+>  /* Check 'bootflow scan' with a label / seq */
+>  static int bootflow_cmd_label(struct unit_test_state *uts)
 >  {
-> @@ -319,7 +319,7 @@ int log_test_disable(struct unit_test_state *uts)
->  	gd->log_fmt =3D log_get_default_format();
->  	return ret;
->  }
-> -LOG_TEST_FLAGS(log_test_disable, UTF_CONSOLE_REC);
-> +LOG_TEST_FLAGS(log_test_disable, UTF_CONSOLE);
+>  	test_set_eth_enable(false);
 >=20=20
->  /* Check denying based on category */
->  int log_test_cat_deny(struct unit_test_state *uts)
-> @@ -343,7 +343,7 @@ int log_test_cat_deny(struct unit_test_state *uts)
->  	ut_assertok(log_remove_filter("console", filt2));
->  	return 0;
->  }
-> -LOG_TEST_FLAGS(log_test_cat_deny, UTF_CONSOLE_REC);
-> +LOG_TEST_FLAGS(log_test_cat_deny, UTF_CONSOLE);
->=20=20
->  /* Check denying based on file */
->  int log_test_file_deny(struct unit_test_state *uts)
-> @@ -364,7 +364,7 @@ int log_test_file_deny(struct unit_test_state *uts)
->  	ut_assertok(log_remove_filter("console", filt2));
->  	return 0;
->  }
-> -LOG_TEST_FLAGS(log_test_file_deny, UTF_CONSOLE_REC);
-> +LOG_TEST_FLAGS(log_test_file_deny, UTF_CONSOLE);
->=20=20
->  /* Check denying based on level */
->  int log_test_level_deny(struct unit_test_state *uts)
-> @@ -387,7 +387,7 @@ int log_test_level_deny(struct unit_test_state *uts)
->  	ut_assertok(log_remove_filter("console", filt2));
->  	return 0;
->  }
-> -LOG_TEST_FLAGS(log_test_level_deny, UTF_CONSOLE_REC);
-> +LOG_TEST_FLAGS(log_test_level_deny, UTF_CONSOLE);
->=20=20
->  /* Check matching based on minimum level */
->  int log_test_min(struct unit_test_state *uts)
-> @@ -410,7 +410,7 @@ int log_test_min(struct unit_test_state *uts)
->  	ut_assertok(log_remove_filter("console", filt2));
->  	return 0;
->  }
-> -LOG_TEST_FLAGS(log_test_min, UTF_CONSOLE_REC);
-> +LOG_TEST_FLAGS(log_test_min, UTF_CONSOLE);
->=20=20
->  /* Check dropped traces */
->  int log_test_dropped(struct unit_test_state *uts)
-> @@ -432,7 +432,7 @@ int log_test_dropped(struct unit_test_state *uts)
->=20=20
->  	return 0;
->  }
-> -LOG_TEST_FLAGS(log_test_dropped, UTF_CONSOLE_REC);
-> +LOG_TEST_FLAGS(log_test_dropped, UTF_CONSOLE);
->=20=20
->  /* Check log_buffer() */
->  int log_test_buffer(struct unit_test_state *uts)
-> @@ -459,4 +459,4 @@ int log_test_buffer(struct unit_test_state *uts)
->=20=20
->  	return 0;
->  }
-> -LOG_TEST_FLAGS(log_test_buffer, UTF_CONSOLE_REC);
-> +LOG_TEST_FLAGS(log_test_buffer, UTF_CONSOLE);
-> diff --git a/test/print_ut.c b/test/print_ut.c
-> index eef85d16218..cf0d5929508 100644
-> --- a/test/print_ut.c
-> +++ b/test/print_ut.c
-> @@ -246,7 +246,7 @@ static int print_display_buffer(struct unit_test_stat=
+> -	console_record_reset_enable();
+>  	ut_assertok(run_command("bootflow scan -lH mmc1", 0));
+>  	ut_assert_nextline("Scanning for bootflows with label 'mmc1'");
+>  	ut_assert_skip_to_line("(1 bootflow, 1 valid)");
+> @@ -123,14 +121,14 @@ static int bootflow_cmd_label(struct unit_test_stat=
 e *uts)
 >=20=20
 >  	return 0;
 >  }
-> -PRINT_TEST(print_display_buffer, UTF_CONSOLE_REC);
-> +PRINT_TEST(print_display_buffer, UTF_CONSOLE);
+> -BOOTSTD_TEST(bootflow_cmd_label, UTF_DM | UTF_SCAN_FDT | UTF_ETH_BOOTDEV=
+);
+> +BOOTSTD_TEST(bootflow_cmd_label, UTF_DM | UTF_SCAN_FDT | UTF_ETH_BOOTDEV=
+ |
+> +	     UTF_CONSOLE);
 >=20=20
->  static int print_hexdump_line(struct unit_test_state *uts)
+>  /* Check 'bootflow scan/list' commands using all bootdevs */
+>  static int bootflow_cmd_glob(struct unit_test_state *uts)
 >  {
-> @@ -272,7 +272,7 @@ static int print_hexdump_line(struct unit_test_state =
+>  	ut_assertok(bootstd_test_drop_bootdev_order(uts));
+>=20=20
+> -	console_record_reset_enable();
+>  	ut_assertok(run_command("bootflow scan -lGH", 0));
+>  	ut_assert_nextline("Scanning for bootflows in all bootdevs");
+>  	ut_assert_nextline("Seq  Method       State   Uclass    Part  Name     =
+                 Filename");
+> @@ -155,14 +153,13 @@ static int bootflow_cmd_glob(struct unit_test_state=
+ *uts)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(bootflow_cmd_glob, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootflow_cmd_glob, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+>=20=20
+>  /* Check 'bootflow scan -e' */
+>  static int bootflow_cmd_scan_e(struct unit_test_state *uts)
+>  {
+>  	ut_assertok(bootstd_test_drop_bootdev_order(uts));
+>=20=20
+> -	console_record_reset_enable();
+>  	ut_assertok(run_command("bootflow scan -aleGH", 0));
+>  	ut_assert_nextline("Scanning for bootflows in all bootdevs");
+>  	ut_assert_nextline("Seq  Method       State   Uclass    Part  Name     =
+                 Filename");
+> @@ -206,12 +203,11 @@ static int bootflow_cmd_scan_e(struct unit_test_sta=
+te *uts)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(bootflow_cmd_scan_e, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootflow_cmd_scan_e, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+>=20=20
+>  /* Check 'bootflow info' */
+>  static int bootflow_cmd_info(struct unit_test_state *uts)
+>  {
+> -	console_record_reset_enable();
+>  	ut_assertok(run_command("bootdev select 1", 0));
+>  	ut_assert_console_end();
+>  	ut_assertok(run_command("bootflow scan", 0));
+> @@ -247,12 +243,11 @@ static int bootflow_cmd_info(struct unit_test_state=
+ *uts)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(bootflow_cmd_info, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootflow_cmd_info, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+>=20=20
+>  /* Check 'bootflow scan -b' to boot the first available bootdev */
+>  static int bootflow_scan_boot(struct unit_test_state *uts)
+>  {
+> -	console_record_reset_enable();
+>  	ut_assertok(inject_response(uts));
+>  	ut_assertok(run_command("bootflow scan -b", 0));
+>  	ut_assert_nextline(
+> @@ -269,7 +264,7 @@ static int bootflow_scan_boot(struct unit_test_state =
 *uts)
 >=20=20
 >  	return 0;
 >  }
-> -PRINT_TEST(print_hexdump_line, UTF_CONSOLE_REC);
-> +PRINT_TEST(print_hexdump_line, UTF_CONSOLE);
+> -BOOTSTD_TEST(bootflow_scan_boot, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootflow_scan_boot, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
 >=20=20
->  static int print_do_hex_dump(struct unit_test_state *uts)
+>  /* Check iterating through available bootflows */
+>  static int bootflow_iter(struct unit_test_state *uts)
+> @@ -385,7 +380,6 @@ static int bootflow_system(struct unit_test_state *ut=
+s)
+>=20=20
+>  	/* We should get a single 'bootmgr' method right at the end */
+>  	bootstd_clear_glob();
+> -	console_record_reset_enable();
+>  	ut_assertok(run_command("bootflow scan -lH", 0));
+>  	ut_assert_skip_to_line(
+>  		"  0  efi_mgr      ready   (none)       0  <NULL>                    "=
+);
+> @@ -395,7 +389,8 @@ static int bootflow_system(struct unit_test_state *ut=
+s)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(bootflow_system, UTF_DM | UTF_SCAN_PDATA | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootflow_system, UTF_DM | UTF_SCAN_PDATA | UTF_SCAN_FDT |
+> +	     UTF_CONSOLE);
+>  #endif
+>=20=20
+>  /* Check disabling a bootmethod if it requests it */
+> @@ -414,7 +409,6 @@ static int bootflow_iter_disable(struct unit_test_sta=
+te *uts)
+>  	ut_assertok(bootstd_test_drop_bootdev_order(uts));
+>=20=20
+>  	bootstd_clear_glob();
+> -	console_record_reset_enable();
+>  	ut_assertok(inject_response(uts));
+>  	ut_assertok(run_command("bootflow scan -lbH", 0));
+>=20=20
+> @@ -436,7 +430,7 @@ static int bootflow_iter_disable(struct unit_test_sta=
+te *uts)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(bootflow_iter_disable, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootflow_iter_disable, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+>=20=20
+>  /* Check 'bootflow scan' with a bootmeth ordering including a global boo=
+tmeth */
+>  static int bootflow_scan_glob_bootmeth(struct unit_test_state *uts)
+> @@ -450,7 +444,6 @@ static int bootflow_scan_glob_bootmeth(struct unit_te=
+st_state *uts)
+>  	 * Make sure that the -G flag makes the scan fail, since this is not
+>  	 * supported when an ordering is provided
+>  	 */
+> -	console_record_reset_enable();
+>  	ut_assertok(bootmeth_set_order("efi firmware0"));
+>  	ut_assertok(run_command("bootflow scan -lGH", 0));
+>  	ut_assert_nextline("Scanning for bootflows in all bootdevs");
+> @@ -477,12 +470,12 @@ static int bootflow_scan_glob_bootmeth(struct unit_=
+test_state *uts)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(bootflow_scan_glob_bootmeth, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootflow_scan_glob_bootmeth, UTF_DM | UTF_SCAN_FDT |
+> +	     UTF_CONSOLE);
+>=20=20
+>  /* Check 'bootflow boot' to boot a selected bootflow */
+>  static int bootflow_cmd_boot(struct unit_test_state *uts)
 >  {
-> @@ -365,7 +365,7 @@ static int print_do_hex_dump(struct unit_test_state *=
+> -	console_record_reset_enable();
+>  	ut_assertok(run_command("bootdev select 1", 0));
+>  	ut_assert_console_end();
+>  	ut_assertok(run_command("bootflow scan", 0));
+> @@ -506,7 +499,7 @@ static int bootflow_cmd_boot(struct unit_test_state *=
 uts)
 >=20=20
 >  	return 0;
 >  }
-> -PRINT_TEST(print_do_hex_dump, UTF_CONSOLE_REC);
-> +PRINT_TEST(print_do_hex_dump, UTF_CONSOLE);
+> -BOOTSTD_TEST(bootflow_cmd_boot, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootflow_cmd_boot, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
 >=20=20
->  static int snprint(struct unit_test_state *uts)
+>  /**
+>   * prep_mmc_bootdev() - Set up an mmc bootdev so we can access other dis=
+tros
+> @@ -583,7 +576,6 @@ static int scan_mmc_bootdev(struct unit_test_state *u=
+ts, const char *mmc_dev,
+>=20=20
+>  	ut_assertok(prep_mmc_bootdev(uts, mmc_dev, bind_cros, &old_order));
+>=20=20
+> -	console_record_reset_enable();
+>  	ut_assertok(run_command("bootflow scan", 0));
+>  	ut_assert_console_end();
+>=20=20
+> @@ -611,7 +603,6 @@ static int scan_mmc_android_bootdev(struct unit_test_=
+state *uts, const char *mmc
+>=20=20
+>  	ut_assertok(prep_mmc_bootdev(uts, mmc_dev, true, &old_order));
+>=20=20
+> -	console_record_reset_enable();
+>  	ut_assertok(run_command("bootflow scan", 0));
+>  	/* Android bootflow might print one or two 'ANDROID:*' logs */
+>  	ut_check_skipline(uts);
+> @@ -673,7 +664,7 @@ static int bootflow_cmd_menu(struct unit_test_state *=
+uts)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(bootflow_cmd_menu, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootflow_cmd_menu, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+>=20=20
+>  /* Check 'bootflow scan -m' to select a bootflow using a menu */
+>  static int bootflow_scan_menu(struct unit_test_state *uts)
+> @@ -779,7 +770,6 @@ static int bootflow_cmd_hunt_single(struct unit_test_=
+state *uts)
+>=20=20
+>  	ut_assertok(bootstd_test_drop_bootdev_order(uts));
+>=20=20
+> -	console_record_reset_enable();
+>  	ut_assertok(run_command("bootflow scan -l mmc1", 0));
+>  	ut_assert_nextline("Scanning for bootflows with label 'mmc1'");
+>  	ut_assert_skip_to_line("(1 bootflow, 1 valid)");
+> @@ -790,7 +780,8 @@ static int bootflow_cmd_hunt_single(struct unit_test_=
+state *uts)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(bootflow_cmd_hunt_single, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootflow_cmd_hunt_single, UTF_DM | UTF_SCAN_FDT |
+> +	     UTF_CONSOLE);
+>=20=20
+>  /* Check searching for a uclass label using the hunters */
+>  static int bootflow_cmd_hunt_label(struct unit_test_state *uts)
+> @@ -804,7 +795,6 @@ static int bootflow_cmd_hunt_label(struct unit_test_s=
+tate *uts)
+>  	test_set_eth_enable(false);
+>  	ut_assertok(bootstd_test_drop_bootdev_order(uts));
+>=20=20
+> -	console_record_reset_enable();
+>  	ut_assertok(run_command("bootflow scan -l mmc", 0));
+>=20=20
+>  	/* check that the hunter was used */
+> @@ -827,7 +817,7 @@ static int bootflow_cmd_hunt_label(struct unit_test_s=
+tate *uts)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(bootflow_cmd_hunt_label, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootflow_cmd_hunt_label, UTF_DM | UTF_SCAN_FDT | UTF_CONSOL=
+E);
+>=20=20
+>  /**
+>   * check_font() - Check that the font size for an item matches expectati=
+ons
+> @@ -887,7 +877,7 @@ static int bootflow_menu_theme(struct unit_test_state=
+ *uts)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(bootflow_menu_theme, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootflow_menu_theme, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+>=20=20
+>  /**
+>   * check_arg() - Check both the normal case and the buffer-overflow case
+> @@ -1123,7 +1113,6 @@ static int bootflow_cmdline(struct unit_test_state =
+*uts)
 >  {
-> diff --git a/test/test-main.c b/test/test-main.c
-> index 2ee703ef5a8..63e8be0ccd1 100644
-> --- a/test/test-main.c
-> +++ b/test/test-main.c
-> @@ -333,7 +333,7 @@ static int test_pre_run(struct unit_test_state *uts, =
-struct unit_test *test)
->  		}
->  	}
+>  	ut_assertok(run_command("bootflow scan mmc", 0));
+>  	ut_assertok(run_command("bootflow sel 0", 0));
+> -	console_record_reset_enable();
 >=20=20
-> -	if (test->flags & UTF_CONSOLE_REC) {
-> +	if (test->flags & UTF_CONSOLE) {
->  		int ret =3D console_record_reset_enable();
+>  	ut_asserteq(1, run_command("bootflow cmdline get fred", 0));
+>  	ut_assert_nextline("Argument not found");
+> @@ -1151,7 +1140,7 @@ static int bootflow_cmdline(struct unit_test_state =
+*uts)
 >=20=20
->  		if (ret) {
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(bootflow_cmdline, 0);
+> +BOOTSTD_TEST(bootflow_cmdline, UTF_CONSOLE);
+>=20=20
+>  /* test a few special changes to a long command line */
+>  static int bootflow_cmdline_special(struct unit_test_state *uts)
+> @@ -1192,7 +1181,7 @@ static int bootflow_cros(struct unit_test_state *ut=
+s)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(bootflow_cros, 0);
+> +BOOTSTD_TEST(bootflow_cros, UTF_CONSOLE);
+>=20=20
+>  /* Test Android bootmeth  */
+>  static int bootflow_android(struct unit_test_state *uts)
+> @@ -1215,4 +1204,4 @@ static int bootflow_android(struct unit_test_state =
+*uts)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(bootflow_android, 0);
+> +BOOTSTD_TEST(bootflow_android, UTF_CONSOLE);
+> diff --git a/test/boot/bootmeth.c b/test/boot/bootmeth.c
+> index ae133cdb423..518d99c4a27 100644
+> --- a/test/boot/bootmeth.c
+> +++ b/test/boot/bootmeth.c
+> @@ -16,7 +16,6 @@
+>  /* Check 'bootmeth list' command */
+>  static int bootmeth_cmd_list(struct unit_test_state *uts)
+>  {
+> -	console_record_reset_enable();
+>  	ut_assertok(run_command("bootmeth list", 0));
+>  	ut_assert_nextline("Order  Seq  Name                Description");
+>  	ut_assert_nextlinen("---");
+> @@ -31,13 +30,12 @@ static int bootmeth_cmd_list(struct unit_test_state *=
+uts)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(bootmeth_cmd_list, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootmeth_cmd_list, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+>=20=20
+>  /* Check 'bootmeth order' command */
+>  static int bootmeth_cmd_order(struct unit_test_state *uts)
+>  {
+>  	/* Select just one bootmethod */
+> -	console_record_reset_enable();
+>  	ut_assertok(run_command("bootmeth order extlinux", 0));
+>  	ut_assert_console_end();
+>  	ut_assertnonnull(env_get("bootmeths"));
+> @@ -104,7 +102,7 @@ static int bootmeth_cmd_order(struct unit_test_state =
+*uts)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(bootmeth_cmd_order, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootmeth_cmd_order, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+>=20=20
+>  /* Check 'bootmeth order' command with global bootmeths */
+>  static int bootmeth_cmd_order_glob(struct unit_test_state *uts)
+> @@ -112,7 +110,6 @@ static int bootmeth_cmd_order_glob(struct unit_test_s=
+tate *uts)
+>  	if (!IS_ENABLED(CONFIG_BOOTMETH_GLOBAL))
+>  		return -EAGAIN;
+>=20=20
+> -	console_record_reset_enable();
+>  	ut_assertok(run_command("bootmeth order \"efi firmware0\"", 0));
+>  	ut_assert_console_end();
+>  	ut_assertok(run_command("bootmeth list", 0));
+> @@ -128,7 +125,7 @@ static int bootmeth_cmd_order_glob(struct unit_test_s=
+tate *uts)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(bootmeth_cmd_order_glob, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootmeth_cmd_order_glob, UTF_DM | UTF_SCAN_FDT | UTF_CONSOL=
+E);
+>=20=20
+>  /* Check 'bootmeths' env var */
+>  static int bootmeth_env(struct unit_test_state *uts)
+> @@ -138,7 +135,6 @@ static int bootmeth_env(struct unit_test_state *uts)
+>  	ut_assertok(bootstd_get_priv(&std));
+>=20=20
+>  	/* Select just one bootmethod */
+> -	console_record_reset_enable();
+>  	ut_assertok(env_set("bootmeths", "extlinux"));
+>  	ut_asserteq(1, std->bootmeth_count);
+>=20=20
+> @@ -154,7 +150,7 @@ static int bootmeth_env(struct unit_test_state *uts)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(bootmeth_env, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(bootmeth_env, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+>=20=20
+>  /* Check the get_state_desc() method */
+>  static int bootmeth_state(struct unit_test_state *uts)
+> diff --git a/test/boot/cedit.c b/test/boot/cedit.c
+> index fd19da0a0c0..1f7af8e5d79 100644
+> --- a/test/boot/cedit.c
+> +++ b/test/boot/cedit.c
+> @@ -25,8 +25,6 @@ static int cedit_base(struct unit_test_state *uts)
+>=20=20
+>  	ut_assertok(run_command("cedit load hostfs - cedit.dtb", 0));
+>=20=20
+> -	console_record_reset_enable();
+> -
+>  	/*
+>  	 * ^N  Move down to second menu
+>  	 * ^M  Open menu
+> @@ -52,7 +50,7 @@ static int cedit_base(struct unit_test_state *uts)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(cedit_base, 0);
+> +BOOTSTD_TEST(cedit_base, UTF_CONSOLE);
+>=20=20
+>  /* Check the cedit write_fdt and read_fdt commands */
+>  static int cedit_fdt(struct unit_test_state *uts)
+> @@ -70,7 +68,6 @@ static int cedit_fdt(struct unit_test_state *uts)
+>  	void *fdt;
+>  	int i;
+>=20=20
+> -	console_record_reset_enable();
+>  	ut_assertok(run_command("cedit load hostfs - cedit.dtb", 0));
+>=20=20
+>  	ut_asserteq(ID_SCENE1, cedit_prepare(cur_exp, &vid_priv, &scn));
+> @@ -122,7 +119,7 @@ static int cedit_fdt(struct unit_test_state *uts)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(cedit_fdt, 0);
+> +BOOTSTD_TEST(cedit_fdt, UTF_CONSOLE);
+>=20=20
+>  /* Check the cedit write_env and read_env commands */
+>  static int cedit_env(struct unit_test_state *uts)
+> @@ -134,7 +131,6 @@ static int cedit_env(struct unit_test_state *uts)
+>  	struct scene *scn;
+>  	char *str;
+>=20=20
+> -	console_record_reset_enable();
+>  	ut_assertok(run_command("cedit load hostfs - cedit.dtb", 0));
+>=20=20
+>  	ut_asserteq(ID_SCENE1, cedit_prepare(cur_exp, &vid_priv, &scn));
+> @@ -177,7 +173,7 @@ static int cedit_env(struct unit_test_state *uts)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(cedit_env, 0);
+> +BOOTSTD_TEST(cedit_env, UTF_CONSOLE);
+>=20=20
+>  /* Check the cedit write_cmos and read_cmos commands */
+>  static int cedit_cmos(struct unit_test_state *uts)
+> @@ -187,7 +183,6 @@ static int cedit_cmos(struct unit_test_state *uts)
+>  	extern struct expo *cur_exp;
+>  	struct scene *scn;
+>=20=20
+> -	console_record_reset_enable();
+>  	ut_assertok(run_command("cedit load hostfs - cedit.dtb", 0));
+>=20=20
+>  	ut_asserteq(ID_SCENE1, cedit_prepare(cur_exp, &vid_priv, &scn));
+> @@ -218,4 +213,4 @@ static int cedit_cmos(struct unit_test_state *uts)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(cedit_cmos, 0);
+> +BOOTSTD_TEST(cedit_cmos, UTF_CONSOLE);
+> diff --git a/test/boot/expo.c b/test/boot/expo.c
+> index 3fe06a4436e..4b24f504e21 100644
+> --- a/test/boot/expo.c
+> +++ b/test/boot/expo.c
+> @@ -445,7 +445,6 @@ static int expo_render_image(struct unit_test_state *=
+uts)
+>  	struct expo *exp;
+>  	int id;
+>=20=20
+> -	console_record_reset_enable();
+>  	ut_assertok(uclass_first_device_err(UCLASS_VIDEO, &dev));
+>=20=20
+>  	ut_assertok(expo_new(EXPO_NAME, NULL, &exp));
+> @@ -633,7 +632,7 @@ static int expo_render_image(struct unit_test_state *=
+uts)
+>=20=20
+>  	return 0;
+>  }
+> -BOOTSTD_TEST(expo_render_image, UTF_DM | UTF_SCAN_FDT);
+> +BOOTSTD_TEST(expo_render_image, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
+>=20=20
+>  /* Check building an expo from a devicetree description */
+>  static int expo_test_build(struct unit_test_state *uts)
 > --=20
 > 2.34.1
