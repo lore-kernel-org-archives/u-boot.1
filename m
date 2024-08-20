@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6744DC52D6F
-	for <u-boot@archiver.kernel.org>; Tue, 20 Aug 2024 00:30:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6960DC3DA4A
+	for <u-boot@archiver.kernel.org>; Tue, 20 Aug 2024 00:30:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC34B88D59;
-	Tue, 20 Aug 2024 02:29:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0B18A88D5E;
+	Tue, 20 Aug 2024 02:29:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LHnPfebz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="o4fCVKDG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F85088D43; Tue, 20 Aug 2024 02:29:46 +0200 (CEST)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id E2A2B88D42; Tue, 20 Aug 2024 02:29:47 +0200 (CEST)
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
+ [IPv6:2607:f8b0:4864:20::c2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7469588D4F
- for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 02:29:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C525488D3C
+ for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 02:29:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-3dc16d00ba6so2989021b6e.0
- for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 17:29:44 -0700 (PDT)
+Received: by mail-oo1-xc2d.google.com with SMTP id
+ 006d021491bc7-5d5c7f23f22so3067839eaf.0
+ for <u-boot@lists.denx.de>; Mon, 19 Aug 2024 17:29:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724113783; x=1724718583; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1724113784; x=1724718584; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=CKdQxubC3OGLjoPDLLXCbH1PZV0noK7zcvIvdvwP6yg=;
- b=LHnPfebzLg4hrAGBuf4GDEiX6ZrlmHoeOivrc2/zrHDymrbeEKaWv78cE5IZRR5L2S
- wHoNoGWdGUWH+F474I9Wc/tBV3dtqcfZBovYeSUAu5m+g9XETlw/rBDL6VGSbAd3ad7C
- CpuQGrfameeJKWfayNNIEY9RKo/JviSWlPVb0=
+ :reply-to; bh=okdkoJEQgWl6YsjS7cUC6Ok2wpWPzff5ZQjMN52jexQ=;
+ b=o4fCVKDGWUMSFQvIXrw2SUtixsi92EqObEXMxXdM+w38LQ016w6Z1aTD2dqkdZgEO5
+ nyIloAPo4cRSfBQKqD9vrptdZnXAV8JAjeGKldLWPsxyiEeP4h1m6FYDj5Nn0kyU7fO/
+ reQKWzIEjL6DDIZAp00/xFUAiT0n74h7ghikg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724113783; x=1724718583;
+ d=1e100.net; s=20230601; t=1724113784; x=1724718584;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CKdQxubC3OGLjoPDLLXCbH1PZV0noK7zcvIvdvwP6yg=;
- b=Kh8HCLFbMTpIJIdrCxbsp6hEb6Udd5xkgbPryLxL64yfECBaPl2mZFE2zHiBgOCpkc
- 1BaHFexe3aKdv+LtQrJ378pv6ks8xFvJX9zvwzYf9YJ8BICDkO4QX2tO+oCAVV9OXnRR
- dAGLLCcBSDRAKovQUED7AOW+fEQNLcMaolGGau+qvBqU3ojyvhDAF14HNrf8CzIJacmS
- 4AomBY5Acagk0i4/9yfBOuYNnXZMWVp63gEAscOgtyqj+6MCqEuoIHwXLTvrowZET/8s
- L78b+q0TXP1lnFtsuxhiwjgD1+lj+3lFvPFGcTEXy6QUv/LZezJyxm1oyKlkTyn0ie+0
- tfRQ==
+ bh=okdkoJEQgWl6YsjS7cUC6Ok2wpWPzff5ZQjMN52jexQ=;
+ b=nGwQEv3kE+U9Umuz0+NS4pDDf5QGhr0fguu01kcFCMHXCRY/oE+MLCLVNY8UaJocy0
+ lXYSJfuwMC98HN45yLm3GpWo8O61CkxjoGHjsWvPhCv8FwcGgAvHEaM5Y4t3/Tv0OBUG
+ vGKkXrXO/yl12VBWVOHBYWGMAmwXs6XC5aVMVtfuhdlUbwccbiI0rJwqfCsNCfT7Blrk
+ 0eube/l8NC+mPP25a1HuZUV1wUWuJ6LLSQOJuBPOFg3WZo3lrqtuaSbjCVfJ1049wMtk
+ kmh7ZtmajYntqN+N4YHm/6Z/CewS+KRXnFGi4bqIB3PfD2heH7y5NnSVADQ/+CgyX41P
+ bEZQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXYZRAAXFpxHl8gJOxke8fKhTGvE1q6+DJInuM8ZZlJOcv7WQUmaatpL6huqzGObY93QBrnPZc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy+gPh/cQjWa7BxjHzwOqomnDOHMbRMeetD6yWn9CwAMBFs1Vw5
- jOhNo8cG90VTHH3XmenMxj6W0nScSnlaOHCvJj1Em9hC7POpYLjU6GWsZx0hnOw=
-X-Google-Smtp-Source: AGHT+IGb78KIzK3AOMoiEDN7nlak75BForHuWU0AN0A7G3mbPV7eJFTZ+VGJi6gvKSgKN1yu39GXNA==
-X-Received: by 2002:a05:6870:d8c6:b0:260:ffaf:8126 with SMTP id
- 586e51a60fabf-2701c345f24mr14029675fac.9.1724113783164; 
- Mon, 19 Aug 2024 17:29:43 -0700 (PDT)
+ AJvYcCWm/NF4qhw3zoDq5GlZl4xmWO4kEGhgxBIRa9dXf+9uyL672oZikcd4O/ZpW0+MA7fokhKNK9Q=@lists.denx.de
+X-Gm-Message-State: AOJu0YycgAhj/ggQhAaFJzlsnxpKREBEAWZX5iCvJG2FLgIljnjlTxgu
+ HuIVygzxsZAtsC2h4ynwHSTs47JYPEIzTrMAUJin+kf7MvgmGQgICRes6kJS6Lc=
+X-Google-Smtp-Source: AGHT+IGrJTHdF5SnnScL1CIY5jfDQn8nX2A453sHb9SrvS45rh/aF+ii6Jhg4S2nRkDk9HB97tFYxw==
+X-Received: by 2002:a05:6870:e313:b0:260:e453:5368 with SMTP id
+ 586e51a60fabf-2701c5f3d12mr15378217fac.46.1724113784362; 
+ Mon, 19 Aug 2024 17:29:44 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-236.totalplay.net.
  [189.203.97.236]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-270046a6208sm3319572fac.27.2024.08.19.17.29.42
+ 586e51a60fabf-270046a6208sm3319572fac.27.2024.08.19.17.29.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Aug 2024 17:29:42 -0700 (PDT)
+ Mon, 19 Aug 2024 17:29:43 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Crispin John <john@phrozen.org>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
  Chunfeng Yun <chunfeng.yun@mediatek.com>, 
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Sam Shih <sam.shih@mediatek.com>, u-boot@lists.denx.de, 
+ Frank Wunderlich <frank-w@public-files.de>, 
+ Dong Huang <dong.huang@mediatek.com>, u-boot@lists.denx.de, 
  Christian Marangi <ansuelsmth@gmail.com>
-In-Reply-To: <20240802135326.25303-1-ansuelsmth@gmail.com>
-References: <20240802135326.25303-1-ansuelsmth@gmail.com>
-Subject: Re: [PATCH 00/14] clk: mediatek: mt7981: clk migration for OF_UPSTREAM
-Message-Id: <172411378201.165406.15697655279217840534.b4-ty@konsulko.com>
-Date: Mon, 19 Aug 2024 18:29:42 -0600
+In-Reply-To: <20240803083305.30697-1-ansuelsmth@gmail.com>
+References: <20240803083305.30697-1-ansuelsmth@gmail.com>
+Subject: Re: [PATCH 00/13] clk: mediatek: mt7988: clk migration for OF_UPSTREAM
+Message-Id: <172411378330.165406.6745514549440092348.b4-ty@konsulko.com>
+Date: Mon, 19 Aug 2024 18:29:43 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,27 +95,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 02 Aug 2024 15:53:01 +0200, Christian Marangi wrote:
+On Sat, 03 Aug 2024 10:32:49 +0200, Christian Marangi wrote:
 
 > These are all the required patches to migrate clk and correctly support
 > OF_UPSTREAM. This will align the clk index to upstream to support the same
 > clk implementation with downstream and upstream DTS.
 > 
-> Christian Marangi (14):
->   clk: mediatek: mt7981: add missing clock for infra_ipcie_pipe
->   clk: mediatek: mt7981: fix typo for infra_i2c0_ck
->   clk: mediatek: mt7981: fix wrong mux width for pwm2 and pwm1 clock
->   clk: mediatek: mt7981: fix wrong clock definition for spi2
->   clk: mediatek: mt7981: add missing clock for spi1 node
->   clk: mediatek: mt7981: swap wrong clock-names for spi nodes
->   clk: mediatek: mt7981: fix wrong parent for TOP_FAUD clock
->   clk: mediatek: mt7981: fix wrong parent list for INFRA_PWM1_SEL mux
->   clk: mediatek: mt7981: implement sgmii0/1 clock
->   clk: mediatek: mt7981: drop 1/1 spurious factor
->   clk: mediatek: mt7981: replace infracfg ID with upstream linux
->   clk: mediatek: mt7981: fix support for pwm3 clock
->   clk: mediatek: mt7981: convert to unified infracfg gates + muxes
->   clk: mediatek: mt7981: rename CK to CLK
+> Christian Marangi (13):
+>   clk: mediatek: mt7988: rename CB_CKSQ_40M to TOP_XTAL
+>   clk: mediatek: mt7988: rename TOP_DA_SELM_XTAL_SEL to TOP_DA_SEL
+>   clk: mediatek: mt7988: rename TOP_CK_NPU_SEL_CM_TOPS_SEL to
+>     TOP_NPU_SEL
+>   clk: mediatek: mt7988: move INFRA_PCIE_PERI_26M_CK_Px clock at top
+>   clk: mediatek: mt7988: fix wrong parent for INFRA_PCIE_PERI_26M_CK_P2
+>   clk: mediatek: mt7988: drop 1/1 infracfg spurious factor
+>   clk: mediatek: mt7988: rename TOPCKGEN factor clock to upstream naming
+>   clk: mediatek: mt7988: reorder TOPCKGEN factor ID
+>   clk: mediatek: mt7988: drop 1/1 spurious factor for topckgen
+>   clk: mediatek: mt7988: comment out infracfg clk not defined
+>   clk: mediatek: mt7988: replace clock ID with upstream linux
+>   clk: mediatek: mt7988: convert to unified infracfg gates + muxes
+>   clk: mediatek: mt7988: rename CK to CLK
 > 
 > [...]
 
