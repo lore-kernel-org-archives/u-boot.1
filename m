@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 260B6C3DA4A
-	for <u-boot@archiver.kernel.org>; Tue, 20 Aug 2024 07:39:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 029F8C3DA4A
+	for <u-boot@archiver.kernel.org>; Tue, 20 Aug 2024 08:17:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A76988CD7;
-	Tue, 20 Aug 2024 09:39:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 293A988C9F;
+	Tue, 20 Aug 2024 10:17:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="24EcT4W3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RdsvHI+6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E1FE88D41; Tue, 20 Aug 2024 09:39:40 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id 60E0188D47; Tue, 20 Aug 2024 10:17:21 +0200 (CEST)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19A6188D2E
- for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 09:39:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DA1488C9F
+ for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 10:17:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-371a6fcd863so1925918f8f.1
- for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 00:39:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2f3e2f07f41so14718421fa.3
+ for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 01:17:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1724139576; x=1724744376;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=B9POGw+0dkCoo38oZMpvHEa3RpeTyI0hVTEIEfkm3nA=;
- b=24EcT4W3QdtP4fTcJigXvxZXXPmv9piSdX0rRyvGOCZikZHGL2km/BvdyMHcMhVS2p
- N9Fks5I2eYwGvpqBzG9UcLVxX7krsBXIbGiwGnGPBOHhra1p4bveo5u2aWmHADfqMQaW
- T+zWKEW7r6EG7Fwb2YW81ARepxyknChXhGh4tsV4K0mLMK2A0uPX2iNQKtz1BCg05JB8
- ZRwTb8Xu0fSXvvJ33UnoITi0gF9OSaTmzBvsPe/4CFh2sURr9BlSf51LeXsrVa28kQ1q
- O1kdWavALxiEn+vhKpEfdumNlwfZjHpjuyYK72lZPrJ35mHt5cSbQjOqN0PIRMzep/D3
- Ho/w==
+ d=linaro.org; s=google; t=1724141838; x=1724746638; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=wIeXYQiVrjBMcLy3BTnQEhG2gx6LHREvcfeCH+AQUr0=;
+ b=RdsvHI+6N0q5E8js5beluJJeQvF1nNAVmuLnh4qoo0Ur7D/L1DFDAQBr5C7U8Zjogj
+ GOg+LX9jEkiJcY3S2WFxbJVH8mgnzVsJ6HqNojKE1NUGLkw9ur8SlxjMRliXFF7KZIR3
+ TCsivi7l+pHwbFnHvOKu84tD3cu23o+saFVNRtaVZ/W1oDCQzpCCT9e6COJKBwkjIUys
+ SDHTtDFMv+rxEsVTbOJD0QHm7LEfHLaAueP6YIvQvaezECSn8zrrBkrdOo+A50YLhotb
+ zlhzpFZEuZmi0aanaoEJI8mBwndVatRSaLvAvK6LGmJqPmqafAlsq9Z3zVyHnl9SEGfS
+ gDfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724139576; x=1724744376;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=B9POGw+0dkCoo38oZMpvHEa3RpeTyI0hVTEIEfkm3nA=;
- b=OigT6sa/Hae2JLcC3J51N8Gc+Ymm88b95oNElChpgG2wGdJCYAaTl099k0ViJOvVkG
- jZPE5Wkb2s4N7lC6ItbiUlwNMVqkKXAI4mFUAwwE+5LIL6P46+Hw3MiMc0fwcfeZceY1
- SoEUjJC+9ZEjukXwKsiC9/lq6xDPtHom7KnJc5Y34/Trdanx5TKTtRk5D5RSTnLw23kF
- aHGGOzgrTj3HTVSsyjq7BbRLDLzRLJGwFLTxEW5Lzs/3GzVKioqLl8ivk+wDdxaiSACv
- 9IHyTG8rw+HHECs+4ZHQ++piZ/ccM65SNln4mGrIfQmeAiF4UMnkkHjoUZakTVGiE9+6
- If/g==
-X-Gm-Message-State: AOJu0YzXeYGdXZ57vw0AiyLfdYR+hiKi+rTL0mcqYhe8bzSAsy6Lvpwq
- BJGi0TeTsUy/4nbkHENknjaYiw8wziN5aURIDcCMesZpo8pKZ7bE0IWebR953HAkRBsAHQdYGqS
- P
-X-Google-Smtp-Source: AGHT+IGIue6x2TN8F22YpzS8vmSmD05X6SxRDI7LYETZ5omDHcbEvzZwNwPKWZ3Es1mCqvn5Qi0gow==
-X-Received: by 2002:a5d:5e0b:0:b0:371:9388:2cdd with SMTP id
- ffacd0b85a97d-371983d5f44mr6437368f8f.17.1724139575984; 
- Tue, 20 Aug 2024 00:39:35 -0700 (PDT)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-429ded364fesm185157655e9.27.2024.08.20.00.39.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Aug 2024 00:39:35 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Lukasz
- Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, Zixun LI
- <admin@hifiphile.com>
-Cc: u-boot@lists.denx.de, tools@linux.kernel.org
-Subject: Re: [PATCH] cmd: bind: Use device sequence instead for driver
- bind/unbind
-In-Reply-To: <172413500327.69624.5444644456831665790.b4-ty@baylibre.com>
-References: <20240802092820.917450-1-admin@hifiphile.com>
- <20240802092820.917450-3-admin@hifiphile.com>
- <172413500327.69624.5444644456831665790.b4-ty@baylibre.com>
-Date: Tue, 20 Aug 2024 09:39:34 +0200
-Message-ID: <87wmkbve15.fsf@baylibre.com>
+ d=1e100.net; s=20230601; t=1724141838; x=1724746638;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wIeXYQiVrjBMcLy3BTnQEhG2gx6LHREvcfeCH+AQUr0=;
+ b=dVisq7DLL0lDxLn4Wr58a1nomqga3XGTjv+YCVIvCv6uvz0a6GMQtRuJavLPT0q3qz
+ a5ypqr2dvy/IWZft52/fwf9Mch1ven38m4RkQ1GGLKtmOqnFADUTs42NUxj1EQul7eW5
+ WQ7o5o7458byXANVkZsRx7utK3hmmcznQdKoxPVgxwRChINaZLz3/2qB7m8RhvWSXrrd
+ FJiy/g0EWWcPTBke2GseypFuDFZVznlJgBZn37SkP2dJDg0rKIEwEpd8J5+70LH6BZta
+ rsvyrfMHqHx4w6OeAFzHFsbFsil36/+u+qpGPCm5Mxj75u7YYD/WWMIauyAJ9y++GWkz
+ /2Bg==
+X-Gm-Message-State: AOJu0Yyka85tT9Oxvh+r6QQrkZhp7+2EtcpPKzB9pjOhxm5/02haLLKX
+ rPsYLT16ME0cZeD2737yPMjOW+F4Mj7iOX8/nnc1xdKFIG6sEqo9x1wS8q6MKc5IKwYSdM/iklJ
+ 3I+FFdLQrzKuLM3/HbvvwC3lz8xzBrgzm+HtOwA==
+X-Google-Smtp-Source: AGHT+IGbFHncu1nIPGqqJid/v3/co2ychTWD/E/3TjsadtLO+s+/I2vhornd/iHTGr4POhivC2bCYfhpjXAIIOHAGZc=
+X-Received: by 2002:a2e:b895:0:b0:2f3:e2f0:f76 with SMTP id
+ 38308e7fff4ca-2f3e2f0127amr30344851fa.38.1724141837800; Tue, 20 Aug 2024
+ 01:17:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
+ <20240814110009.45310-15-sughosh.ganu@linaro.org>
+ <CAFLszTjMwpW-MRWfJrOja2JGMcTtjYzLqH68hum=yDsXjc6PQQ@mail.gmail.com>
+In-Reply-To: <CAFLszTjMwpW-MRWfJrOja2JGMcTtjYzLqH68hum=yDsXjc6PQQ@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Tue, 20 Aug 2024 13:47:06 +0530
+Message-ID: <CADg8p95k_0CtqD5x8_jjW31YoPOoiLSvDU-M_JtcBU_+V-4hEg@mail.gmail.com>
+Subject: Re: [PATCH v2 14/32] lmb: introduce a function to add memory to the
+ lmb memory map
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
+ Max Filippov <jcmvbkbc@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,72 +97,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On mar., ao=C3=BBt 20, 2024 at 08:23, Mattijs Korpershoek <mkorpershoek@bay=
-libre.com> wrote:
-
-> Hi,
+On Fri, 16 Aug 2024 at 02:04, Simon Glass <sjg@chromium.org> wrote:
 >
-> On Fri, 02 Aug 2024 11:28:13 +0200, Zixun LI wrote:
->> Currently uclass index is used for bind/unbind which ignores alias
->> sequence numbering. Use device sequence number instead as it's
->> the number explicitly set in the DT.
->>=20
->> Also update documentation to use sequence number.
->>=20
->>=20
->> [...]
+> Hi Sughosh,
 >
-> Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u=
--boot-dfu-next)
+> On Wed, 14 Aug 2024 at 12:01, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> >
+> > Introduce a function lmb_add_memory() to add available memory to the
+> > LMB memory map. Call this function during board init once the LMB data
+> > structures have been initialised.
+> >
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> > Changes since V1:
+> > * Call the lmb_add_memory() from lmb_init() instead of
+> >   lmb_mem_regions_init().
+> >
+> >
+> >  include/lmb.h | 10 ++++++++++
+> >  lib/lmb.c     | 42 ++++++++++++++++++++++++++++++++++++++++++
+> >  2 files changed, 52 insertions(+)
+> >
 >
-> [1/1] cmd: bind: Use device sequence instead for driver bind/unbind
->       https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/0c4850=
-7eee08b5e7d4e8484727efe47cfabff0ee
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+>
+> But this should not be weak.
 
-Somehow, b4 did the wrong thing here when running:
-$ b4 shazam -s -l --check 20240802092820.917450-1-admin@hifiphile.com
+This is being made weak, as there would be lmb_add_memory()
+definitions added for powerpc and x86 arch's in the EFI part of my
+patches. Moreover, the lmb_add_memory() function would be called even
+in the SPL stage when LMB is enabled for that stage. So I am not sure
+how do we get around this. You can check the relevant branch [1] on my
+github to check for the specific commits [2][3] that I am referring
+to. Thanks.
 
-Grabbing thread from lore.kernel.org/all/20240802092820.917450-1-admin@hifi=
-phile.com/t.mbox.gz
-Checking for newer revisions
-Grabbing search results from lore.kernel.org
-Analyzing 12 messages in the thread
-Assuming new revision: v2 ([PATCH] dm: core: Show device sequence instead i=
-n dm_dump_tree())
-Assuming new revision: v3 ([PATCH] cmd: bind: Use device sequence instead f=
-or driver bind/unbind)
-Analyzing 0 code-review messages
-Will use the latest revision: v3
-You can pick other revisions using the -vN flag
-Checking attestation on all messages, may take a moment...
----
-  =E2=9C=97 [PATCH] cmd: bind: Use device sequence instead for driver bind/=
-unbind
-    + Reviewed-by: Simon Glass <sjg@chromium.org> (=E2=9C=97 DKIM/chromium.=
-org)
-    + Link: https://lore.kernel.org/r/20240802092820.917450-3-admin@hifiphi=
-le.com
-    + Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-    =E2=97=8F checkpatch.pl: passed all checks
-  ---
-  =E2=9C=97 BADSIG: DKIM/hifiphile-com.20230601.gappssmtp.com
----
-Total patches: 1
----
-Applying: cmd: bind: Use device sequence instead for driver bind/unbind
+-sughosh
 
-It applied:
-https://patchwork.ozlabs.org/project/uboot/patch/20240802092820.917450-3-ad=
-min@hifiphile.com/
-
-Instead of:
-https://patchwork.ozlabs.org/project/uboot/patch/20240802092820.917450-1-ad=
-min@hifiphile.com/
-
-I have fixed this up manually, see:
-https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/73f5b54a589cb6=
-ff97aaca55e7c97d68b43997ee
+[1] - https://github.com/sughoshg/u-boot/tree/lmb_efi_sep_apis_nrfc_next_v3
+[2] - https://github.com/u-boot/u-boot/commit/077ced7aaa6d495b1b87b324fb1c60658c203ce1
+[3] - https://github.com/u-boot/u-boot/commit/d0fa3a89865b796f3bbebffebbe4f7b5b048c140
 
 >
-> --
-> Mattijs
+> > diff --git a/include/lmb.h b/include/lmb.h
+> > index f6b2a81546..a82ea63d6c 100644
+> > --- a/include/lmb.h
+> > +++ b/include/lmb.h
+> > @@ -63,6 +63,16 @@ struct lmb {
+> >   */
+> >  int lmb_init(void);
+> >
+> > +/**
+> > + * lmb_add_memory() - Add memory range for LMB allocations
+> > + *
+> > + * Add the entire available memory range to the pool of memory that
+> > + * can be used by the LMB module for allocations.
+> > + *
+> > + * Return: None
+> > + */
+> > +void lmb_add_memory(void);
+> > +
+> >  long lmb_add(phys_addr_t base, phys_size_t size);
+> >  long lmb_reserve(phys_addr_t base, phys_size_t size);
+> >  /**
+> > diff --git a/lib/lmb.c b/lib/lmb.c
+> > index 3ccee26a46..f35a94c41b 100644
+> > --- a/lib/lmb.c
+> > +++ b/lib/lmb.c
+> > @@ -225,6 +225,46 @@ static void lmb_reserve_common(void *fdt_blob)
+> >                 efi_lmb_reserve();
+> >  }
+> >
+> > +/**
+> > + * lmb_add_memory() - Add memory range for LMB allocations
+> > + *
+> > + * Add the entire available memory range to the pool of memory that
+> > + * can be used by the LMB module for allocations.
+> > + *
+> > + * This can be overridden for specific boards/architectures.
+> > + *
+> > + * Return: None
+> > + *
+> > + */
+> > +__weak void lmb_add_memory(void)
+> > +{
+> > +       int i;
+> > +       phys_size_t size;
+> > +       phys_addr_t rgn_top;
+> > +       u64 ram_top = gd->ram_top;
+> > +       struct bd_info *bd = gd->bd;
+> > +
+> > +       /* Assume a 4GB ram_top if not defined */
+> > +       if (!ram_top)
+> > +               ram_top = 0x100000000ULL;
+> > +
+> > +       for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+> > +               size = bd->bi_dram[i].size;
+> > +               if (size) {
+> > +                       if (bd->bi_dram[i].start > ram_top)
+> > +                               continue;
+> > +
+> > +                       rgn_top = bd->bi_dram[i].start +
+> > +                               bd->bi_dram[i].size;
+> > +
+> > +                       if (rgn_top > ram_top)
+> > +                               size -= rgn_top - ram_top;
+> > +
+> > +                       lmb_add(bd->bi_dram[i].start, size);
+> > +               }
+> > +       }
+> > +}
+> > +
+> >  static long lmb_resize_regions(struct alist *lmb_rgn_lst,
+> >                                unsigned long idx_start,
+> >                                phys_addr_t base, phys_size_t size)
+> > @@ -674,5 +714,7 @@ int lmb_init(void)
+> >                 return ret;
+> >         }
+> >
+> > +       lmb_add_memory();
+> > +
+> >         return 0;
+> >  }
+> > --
+> > 2.34.1
+> >
+>
+> Regards,
+> Simon
