@@ -4,60 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A657AC52D7C
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 08:33:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DB96C52D6F
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 09:04:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8E9A88B68;
-	Wed, 21 Aug 2024 10:33:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 865D588B2D;
+	Wed, 21 Aug 2024 11:04:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1724229205;
-	bh=3w1OLKdrPZHvtFQtFF+jAk7qCug0RbyQgJnqrd9R/e8=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=WhK2JtmOt8qn8Yif/Web7a8+vSKuSYbLXKUZCjmFo26sj8/c0LtLCv0Lnn/GNpFhm
-	 aY0JgUKYuJy7qUdv8L6JlSC7SnDCJyMZuc2d0rmiAJlzQIs9pULeGRdLhykhKOPVYY
-	 B0LGxWT37yc3wirId51ur1LuMmt2b6bf6lUSW0Bo1yhpKJXCiy+1ygQLA8243zR6QQ
-	 sRAXjjlUe8RK/2WCYAHpjVm5uBga9YRGuVOkgks3LvfQUx5zVLmzKxNz0BjWWOLcRT
-	 H+cHD0ZioGCoOMZN+11M5HnLoJI929A8Sz7yfldCGLLpAx5GbCx16ZxyN+wnsc+M1Z
-	 q2h8bPivDjW1w==
-Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="n2lgmQ1F";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 6FB6788B52; Wed, 21 Aug 2024 11:04:41 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id B49D388B4C;
- Wed, 21 Aug 2024 10:33:24 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1724229205;
- bh=3w1OLKdrPZHvtFQtFF+jAk7qCug0RbyQgJnqrd9R/e8=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=w5qxHTZAYmTpzTIHFN8C+ZTfSEoTKToQ/wJ0lPswFi3JFSafDj0WH+oxrVwSeNJhW
- +4tihyWAlva96EoEYjmMUnQrpmms8lL78WKnEPOO8SU8PU0zUfo/tKDFllTmYB6uVw
- 3MbPXeJ2xQ2Nf9QhAyDgJBiD/ebH/XxU/nZIr+6xuXHzK8c1o2Sz6GuHv6bZoxBLqi
- 1CbpkV1cdznlfP6KZTuKBaPN3hI5m/GYjmcA7QRxW0ZXLcuJc4gjh0fTiYKBWL95RJ
- uR567rjsTybr5i1+/6XclPLMpF8YzL6IfyOb6cAMFhUiIUzw+JHHJpsoz1QjhKRIU2
- uBSmgI55k4dzw==
-Date: Wed, 21 Aug 2024 10:33:23 +0200
-From: Lukasz Majewski <lukma@denx.de>
-To: Teresa Remmet <T.Remmet@phytec.de>
-Cc: "festevam@gmail.com" <festevam@gmail.com>, "sbabic@denx.de"
- <sbabic@denx.de>, "trini@konsulko.com" <trini@konsulko.com>,
- "uboot-imx@nxp.com" <uboot-imx@nxp.com>, "marcel.ziswiler@toradex.com"
- <marcel.ziswiler@toradex.com>, Cem Tenruh <C.Tenruh@phytec.de>, Yannic Moog
- <Y.Moog@phytec.de>, Benjamin Hahn <B.Hahn@phytec.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH] config: imx: Add PHYTEC's phycore-imx8mm-fspi_defconfig
-Message-ID: <20240821103323.240527ab@wsk>
-In-Reply-To: <951f63db0af4f3a8072e49009cd7a3336d90736c.camel@phytec.de>
-References: <20240815084012.477436-1-lukma@denx.de>
- <951f63db0af4f3a8072e49009cd7a3336d90736c.camel@phytec.de>
-Organization: denx.de
-X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ by phobos.denx.de (Postfix) with ESMTPS id E746488859
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 11:04:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5befe420fc2so3883054a12.3
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 02:04:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1724231078; x=1724835878; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=Furhfl79LUuMzq3QQbLTTsFs1UckIW95QzbJTjgo6eg=;
+ b=n2lgmQ1F6ICiEnWGkE/xb/g8mDFGv1ZrOq10rrTRGvyfNDmihjopXw2mD2CYIqLv8G
+ PPevHX5yyKgCnPB2TiI5oUjh1CleuQza2bgPniNLhi+Ql/awSQMFczP0vYWjG6+319UX
+ blLRR60jDeqtthgM+F3IQMih7gFrIsHl6bu+l0tkrVTpXZN873netYU9b3/cFHaj2wF8
+ XGzUHMVA+9keDoJKqO7I648abJBAi/nrk498lMt5717uEZaLeP10QIT2yQvcb2hyFDeM
+ 814VF7svvA1Az6r9VFxQUTZGrjlTshogeGpqJdI7YPHVu8WgczsEK/2lvWcxjUOogxkx
+ K09Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724231078; x=1724835878;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:from:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Furhfl79LUuMzq3QQbLTTsFs1UckIW95QzbJTjgo6eg=;
+ b=ecUcTDDf0wZ3M7Su5DmP+1F4hvIrJQcnnbt2BOugUVxjTFdTRU2HiGsXmdTSpu4S+E
+ qZG+noGUcP7YoNW01x34gx6rq80Z0FMAPdYblgKEtGLCVsy4NZzoB7O5db5itdfk+fAz
+ rCzTaaoc0Fpk1JHyzJIbDk0mxZxRxTDbQ/04IaBsxhcW2iSqXL6Sy6xmPjERLwmOEbW1
+ udaXMwTgVtr+Y/i2DJIP9u0YjOolm8JjePjTWT0GyY/kFJt1GE7BAK1J1SA7MLc9ZQkR
+ IKZN2HqcktlDR0km0vUxkgQ2jnvM4yZuV4OumsxFyiOC9wzvdB/ws15OsJjLE0MvZTO2
+ 18oA==
+X-Gm-Message-State: AOJu0YzyvyNLw3E6LS6SjTqOiMhqNEsfUWiJGcxWI5aX2NXcLSaVLBfR
+ y+XMJRrUKvQc7o6dL/vVJ5VDcNnPndQF+2eVgsfd9+RUSAmucdB/hgVrPTp2Au4=
+X-Google-Smtp-Source: AGHT+IEU3F9cvqjajlEqij0Nxf1iV+q1lDjurs9KFMs88ExNXRHed4QoGp/ws3SECN+JNR1z6+WoKQ==
+X-Received: by 2002:a17:906:4fcd:b0:a6f:4f2c:1936 with SMTP id
+ a640c23a62f3a-a866f8ef598mr76116766b.44.1724231078043; 
+ Wed, 21 Aug 2024 02:04:38 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:913b:e313:d80a:1316?
+ ([2a01:e0a:3cb:7bb0:913b:e313:d80a:1316])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a83839471ecsm873073666b.156.2024.08.21.02.04.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 21 Aug 2024 02:04:36 -0700 (PDT)
+Message-ID: <6c4cd266-dfec-455b-ab10-79763f246e9b@linaro.org>
+Date: Wed, 21 Aug 2024 11:04:35 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/cTHRzKDplf9eHYAMpsyaQ+1";
- protocol="application/pgp-signature"; micalg=pgp-sha512
+User-Agent: Mozilla Thunderbird
+From: Jerome Forissier <jerome.forissier@linaro.org>
+Subject: Re: [PATCH v8 00/23] Introduce the lwIP network stack
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>
+References: <cover.1723050310.git.jerome.forissier@linaro.org>
+ <20240807204400.GJ1626301@bill-the-cat>
+ <d9fe273b-ab60-44eb-bef8-cbde3af8ab1b@linaro.org>
+ <20240816184019.GD1626301@bill-the-cat>
+ <7bf0ed1a-96f8-4970-a06d-7a572774b263@linaro.org>
+ <20240819220844.GI1626301@bill-the-cat>
+Content-Language: en-US
+In-Reply-To: <20240819220844.GI1626301@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,284 +101,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---Sig_/cTHRzKDplf9eHYAMpsyaQ+1
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-Hi Teresa,
-
-> Hello Lukasz,
->=20
-> Am Donnerstag, dem 15.08.2024 um 10:40 +0200 schrieb Lukasz Majewski:
-> > This configuration file provides support for booting phycore module
-> > (on e.g. polis-rdk base development board) from QSPI memory.
-> >=20
-> > Moreover, the SDP SPL gadget is supported, so single flash.bin
-> > binary can be used with uuu (with uuu -v -b qspi ~/u-boot/flash.bin)
-> > to flash QSPI in the factory or during debricking.
-> >=20
-> > Signed-off-by: Lukasz Majewski <lukma@denx.de>
-> > ---
-> > =C2=A0configs/phycore-imx8mm-fspi_defconfig | 158
-> > ++++++++++++++++++++++++++
-> > =C2=A01 file changed, 158 insertions(+)
-> > =C2=A0create mode 100644 configs/phycore-imx8mm-fspi_defconfig
-> >=20
-> > diff --git a/configs/phycore-imx8mm-fspi_defconfig
-> > b/configs/phycore- imx8mm-fspi_defconfig
-> > new file mode 100644
-> > index 0000000000..79a2668254
-> > --- /dev/null
-> > +++ b/configs/phycore-imx8mm-fspi_defconfig
-> > @@ -0,0 +1,158 @@
-> > +CONFIG_ARM=3Dy
-> > +CONFIG_ARCH_IMX8M=3Dy
-> > +CONFIG_TEXT_BASE=3D0x40200000
-> > +CONFIG_SYS_MALLOC_LEN=3D0x2000000
-> > +CONFIG_SPL_GPIO=3Dy
-> > +CONFIG_SPL_LIBCOMMON_SUPPORT=3Dy
-> > +CONFIG_SPL_LIBGENERIC_SUPPORT=3Dy
-> > +CONFIG_SF_DEFAULT_SPEED=3D80000000
-> > +CONFIG_ENV_SIZE=3D0x10000
-> > +CONFIG_ENV_OFFSET=3D0x3C0000
-> > +CONFIG_IMX_CONFIG=3D"board/freescale/imx8mm_evk/imximage-8mm-lpddr4-
-> > fspi.cfg" =20
->=20
-> can you create a cfg in the board folder and not use the one from the
-> evk?
-
-I wanted to avoid code duplication - as the same file (from EVK) is
-used by other boards already...
-
->=20
-> > +CONFIG_DM_GPIO=3Dy
-> > +CONFIG_DEFAULT_DEVICE_TREE=3D"freescale/imx8mm-phyboard-polis-rdk"
-> > +CONFIG_SPL_TEXT_BASE=3D0x7E2000
-> > +CONFIG_TARGET_PHYCORE_IMX8MM=3Dy
-> > +CONFIG_DM_RESET=3Dy
-> > +CONFIG_SYS_MONITOR_LEN=3D524288
-> > +CONFIG_SPL_MMC=3Dy
-> > +CONFIG_SPL_SERIAL=3Dy
-> > +CONFIG_SPL_DRIVERS_MISC=3Dy
-> > +CONFIG_SPL_STACK=3D0x920000
-> > +CONFIG_SPL_HAS_BSS_LINKER_SECTION=3Dy
-> > +CONFIG_SPL_BSS_START_ADDR=3D0x910000
-> > +CONFIG_SPL_BSS_MAX_SIZE=3D0x2000
-> > +CONFIG_SPL=3Dy
-> > +CONFIG_ENV_OFFSET_REDUND=3D0x3E0000
-> > +CONFIG_SYS_LOAD_ADDR=3D0x40480000
-> > +CONFIG_PCI=3Dy
-> > +# CONFIG_ANDROID_BOOT_IMAGE is not set
-> > +CONFIG_FIT=3Dy
-> > +CONFIG_FIT_EXTERNAL_OFFSET=3D0x3000
-> > +CONFIG_SPL_LOAD_FIT=3Dy
-> > +CONFIG_OF_SYSTEM_SETUP=3Dy
-> > +CONFIG_USE_BOOTCOMMAND=3Dy
-> > +CONFIG_BOOTCOMMAND=3D"mmc dev ${mmcdev}; if mmc rescan; then if run
-> > loadimage; then run mmcboot; else run netboot; fi; fi;"
-> > +CONFIG_DEFAULT_FDT_FILE=3D"oftree"
-> > +CONFIG_SYS_CBSIZE=3D2048
-> > +CONFIG_SYS_PBSIZE=3D2074
-> > +CONFIG_BOARD_LATE_INIT=3Dy
-> > +CONFIG_SPL_MAX_SIZE=3D0x25000 =20
->=20
-> This line
->=20
-> > +CONFIG_SPL_PAD_TO=3D0x0 =20
->=20
-> and this one is not available in phycore-imx8mm_defconfig.
-> Why have you added them here?
-
-I think that I've followed ./configs/imx8mm_beacon_fspi_defconfig as a
-starting point.
-
-I would need to check if removing them would make any harm.
-
->=20
-> > +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-> > +CONFIG_SPL_SYS_MALLOC=3Dy
-> > +CONFIG_SPL_HAS_CUSTOM_MALLOC_START=3Dy
-> > +CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=3D0x42200000
-> > +CONFIG_SPL_SYS_MALLOC_SIZE=3D0x80000
-> > +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=3Dy
-> > +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=3D0x300
-> > +CONFIG_SPL_I2C=3Dy
-> > +CONFIG_SPL_NOR_SUPPORT=3Dy
-> > +CONFIG_SPL_POWER=3Dy
-> > +CONFIG_SPL_SPI_FLASH_MTD=3Dy
-> > +CONFIG_SPL_WATCHDOG=3Dy
-> > +CONFIG_HUSH_PARSER=3Dy
-> > +CONFIG_SYS_PROMPT=3D"u-boot=3D> "
-> > +# CONFIG_CMD_EXPORTENV is not set
-> > +# CONFIG_CMD_IMPORTENV is not set =20
->=20
-> Here is
->=20
-> CONFIG_CMD_ERASEENV=3Dy
->=20
-> missing. Which was added with 60e01c6d9f892bfa088a0453cd19d6a418b00add
-> for phycore-imx8mm_defconfig. Why did you not add it?
->=20
-
-I might used either the older ./configs/phycore-imx8mm_defconfig or the
-above mentioned "beacon".
-
->=20
-> > +# CONFIG_CMD_CRC32 is not set
-> > +CONFIG_CMD_EEPROM=3Dy
-> > +CONFIG_SYS_I2C_EEPROM_ADDR_LEN=3D2
-> > +CONFIG_SYS_EEPROM_SIZE=3D4096
-> > +CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3D5
-> > +CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=3D5 =20
->=20
-> And I also miss
->=20
-> # CONFIG_CMD_BIND is not set
-> CONFIG_FASTBOOT_BUF_SIZE=3D0x20000000
->=20
-> which you did set in your=20
->=20
-> "config: imx: Add support for Phytec's phycore imx8mm running SDP
-> gadget"
->=20
-> patch for phycore-imx8mm_defconfig. Are they not required for fspi
-> image?
-
-IIRC this value has default value set in drivers/fastboot/Kconfig
-
-With QSPI setup I did not needed it so big, as the flash.bin was small
-enough.
-
-With phycore-imx8mm_defconfig I've set it to larger value - as one my
-update with it SD/eMMC memory with fastboot gadget.
-
->=20
-> Teresa
->=20
-> > +CONFIG_CMD_CLK=3Dy
-> > +CONFIG_CMD_FUSE=3Dy
-> > +CONFIG_CMD_GPIO=3Dy
-> > +CONFIG_CMD_I2C=3Dy
-> > +CONFIG_CMD_MMC=3Dy
-> > +CONFIG_CMD_PCI=3Dy
-> > +CONFIG_CMD_SF_TEST=3Dy
-> > +CONFIG_CMD_DHCP=3Dy
-> > +CONFIG_CMD_MII=3Dy
-> > +CONFIG_CMD_PING=3Dy
-> > +CONFIG_CMD_CACHE=3Dy
-> > +CONFIG_CMD_REGULATOR=3Dy
-> > +CONFIG_CMD_EXT2=3Dy
-> > +CONFIG_CMD_EXT4=3Dy
-> > +CONFIG_CMD_EXT4_WRITE=3Dy
-> > +CONFIG_CMD_FAT=3Dy
-> > +CONFIG_OF_CONTROL=3Dy
-> > +CONFIG_SPL_OF_CONTROL=3Dy
-> > +CONFIG_ENV_OVERWRITE=3Dy
-> > +CONFIG_ENV_IS_IN_MMC=3Dy
-> > +CONFIG_SYS_REDUNDAND_ENVIRONMENT=3Dy
-> > +CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
-> > +CONFIG_SYS_MMC_ENV_DEV=3D2
-> > +CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=3Dy
-> > +CONFIG_SPL_DM=3Dy
-> > +CONFIG_SPL_CLK_COMPOSITE_CCF=3Dy
-> > +CONFIG_CLK_COMPOSITE_CCF=3Dy
-> > +CONFIG_SPL_CLK_IMX8MM=3Dy
-> > +CONFIG_CLK_IMX8MM=3Dy
-> > +CONFIG_USB_FUNCTION_FASTBOOT=3Dy
-> > +CONFIG_FASTBOOT_BUF_ADDR=3D0x42800000
-> > +CONFIG_FASTBOOT_UUU_SUPPORT=3Dy
-> > +CONFIG_MXC_GPIO=3Dy
-> > +CONFIG_DM_I2C=3Dy
-> > +CONFIG_MISC=3Dy
-> > +CONFIG_I2C_EEPROM=3Dy
-> > +CONFIG_SYS_I2C_EEPROM_ADDR=3D0x51
-> > +CONFIG_SUPPORT_EMMC_BOOT=3Dy
-> > +CONFIG_MMC_IO_VOLTAGE=3Dy
-> > +CONFIG_MMC_UHS_SUPPORT=3Dy
-> > +CONFIG_MMC_HS400_ES_SUPPORT=3Dy
-> > +CONFIG_MMC_HS400_SUPPORT=3Dy
-> > +CONFIG_FSL_USDHC=3Dy
-> > +CONFIG_MTD=3Dy
-> > +CONFIG_DM_MTD=3Dy
-> > +CONFIG_DM_SPI_FLASH=3Dy
-> > +CONFIG_SF_DEFAULT_BUS=3D3
-> > +CONFIG_SPI_FLASH_BAR=3Dy
-> > +CONFIG_SPI_FLASH_MACRONIX=3Dy
-> > +CONFIG_SPI_FLASH_SPANSION=3Dy
-> > +CONFIG_SPI_FLASH_STMICRO=3Dy
-> > +CONFIG_SPI_FLASH_SST=3Dy
-> > +CONFIG_SPI_FLASH_WINBOND=3Dy
-> > +# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
-> > +CONFIG_SPI_FLASH_MTD=3Dy
-> > +CONFIG_PHYLIB=3Dy
-> > +CONFIG_PHY_TI_DP83867=3Dy
-> > +CONFIG_PHY_GIGE=3Dy
-> > +CONFIG_FEC_MXC=3Dy
-> > +CONFIG_MII=3Dy
-> > +CONFIG_NVME_PCI=3Dy
-> > +CONFIG_PCIE_DW_IMX=3Dy
-> > +CONFIG_PHY_IMX8M_PCIE=3Dy
-> > +CONFIG_PINCTRL=3Dy
-> > +CONFIG_SPL_PINCTRL=3Dy
-> > +CONFIG_PINCTRL_IMX8M=3Dy
-> > +CONFIG_POWER_DOMAIN=3Dy
-> > +CONFIG_IMX8M_POWER_DOMAIN=3Dy
-> > +CONFIG_DM_REGULATOR_FIXED=3Dy
-> > +CONFIG_DM_REGULATOR_GPIO=3Dy
-> > +CONFIG_DM_SERIAL=3Dy
-> > +CONFIG_MXC_UART=3Dy
-> > +CONFIG_SPI=3Dy
-> > +CONFIG_DM_SPI=3Dy
-> > +CONFIG_NXP_FSPI=3Dy
-> > +CONFIG_SYSRESET=3Dy
-> > +CONFIG_SPL_SYSRESET=3Dy
-> > +CONFIG_SYSRESET_PSCI=3Dy
-> > +CONFIG_SYSRESET_WATCHDOG=3Dy
-> > +CONFIG_DM_THERMAL=3Dy
-> > +CONFIG_IMX_TMU=3Dy
-> > +CONFIG_USB=3Dy
-> > +CONFIG_SPL_USB_HOST=3Dy
-> > +CONFIG_USB_EHCI_HCD=3Dy
-> > +CONFIG_MXC_USB_OTG_HACTIVE=3Dy
-> > +CONFIG_USB_GADGET=3Dy
-> > +CONFIG_SPL_USB_GADGET=3Dy
-> > +CONFIG_USB_GADGET_VENDOR_NUM=3D0x0525
-> > +CONFIG_USB_GADGET_PRODUCT_NUM=3D0xa4a5
-> > +CONFIG_CI_UDC=3Dy
-> > +CONFIG_SDP_LOADADDR=3D0x40400000
-> > +CONFIG_SPL_USB_SDP_SUPPORT=3Dy
-> > +CONFIG_IMX_WATCHDOG=3Dy
-> > +CONFIG_FSPI_CONF_HEADER=3Dy
-> > +CONFIG_FSPI_CONF_FILE=3D"fspi_header.bin" =20
->=20
 
 
+On 8/20/24 00:08, Tom Rini wrote:
+> On Mon, Aug 19, 2024 at 04:53:51PM +0200, Jerome Forissier wrote:
+>>
+>>
+>> On 8/16/24 20:40, Tom Rini wrote:
+>>> On Fri, Aug 16, 2024 at 06:21:24PM +0200, Jerome Forissier wrote:
+>>>>
+>>>>
+>>>> On 8/7/24 22:44, Tom Rini wrote:
+>>>>> On Wed, Aug 07, 2024 at 07:11:44PM +0200, Jerome Forissier wrote:
+>>>>>
+>>>>>> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+>>>>>> library for the network stack" [1]. The goal is to introduce the lwIP TCP/IP
+>>>>>> stack [2] [3] as an alternative to the current implementation in net/,
+>>>>>> selectable with Kconfig, and ultimately keep only lwIP if possible. Some
+>>>>>> reasons for doing so are:
+>>>>>> - Make the support of HTTPS in the wget command easier. Javier T. and
+>>>>>> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
+>>>>>> so. With that it becomes possible to fetch and launch a distro installer
+>>>>>> such as Debian etc. using a secure, authenticated connection directly
+>>>>>> from the U-Boot shell. Several use cases:
+>>>>>>   * Authentication: prevent MITM attack (third party replacing the
+>>>>>> binary with a different one)
+>>>>>>   * Confidentiality: prevent third parties from grabbing a copy of the
+>>>>>> image as it is being downloaded
+>>>>>>   * Allow connection to servers that do not support plain HTTP anymore
+>>>>>> (this is becoming more and more common on the Internet these days)
+>>>>>> - Possibly benefit from additional features implemented in lwIP
+>>>>>> - Less code to maintain in U-Boot
+>>>>>>
+>>>>>> Prior to applying this series, the lwIP stack needs to be added as a
+>>>>>> Git subtree with the following command:
+>>>>>>
+>>>>>>  $  git subtree add --squash --prefix lib/lwip/lwip https://git.savannah.gnu.org/git/lwip.git STABLE-2_2_0_RELEASE
+>>>>>
+>>>>> For v9, I think it would be good to do a CI run with NET_LWIP default
+>>>>> and seeing what fails from that too. There's a few problems still
+>>>>> leading to a lot of failures, in that case. Thanks.
+>>>>>
+>>>>
+>>>> See here: https://github.com/u-boot/u-boot/pull/635
+>>>>
+>>>> I fixed a number of issues, see the commit descriptions. As for the
+>>>> remaining ones:
+>>>> - There is no http server in the CI so the wget test I added fails
+>>>
+>>> Ah yes. So the test needs some enable-me type flag, like other tests
+>>> that require external configuration.
+>>
+>> Can you please suggest how to do that?
+> 
+> Well test/py/tests/test_net_boot.py for example.
 
+Thanks. I'm adding a skip variable for v9.
 
-Best regards,
+>>>> - tftp is super slow in QEMU (~145 KiB/s) which causes timeouts. This is
+>>>> for two reasons: (1) the tftp windowsize option is not supported in lwIP
+>>>> (while the legacy NET does support it) so the sender waits for an ACK
+>>>> before sending a new packet; and (2) the latency is very high due to
+>>>> memcpy() being incredibly slow in QEMU (I am mainly referring to the
+>>>> memcpy() call in tftp_write() in net/lwip/tftp.c). I measured ~20-60 ms
+>>>> to copy a few hundred bytes (!) and if CONFIG_USE_ARCH_MEMCPY is enabled
+>>>> it is slightly better but not much (~15 ms). Also it seems the QEMU
+>>>> networking emulation is fragmenting the UDP packets because with
+>>>> CONFIG_TFTP_BLOCKSIZE=1468 the tftp_write() function never receives
+>>>> 1468 bytes but only a few hundreds at a time (max 544 bytes).
+>>>
+>>> I thought you fixed that? Or was that only for on real hardware?
+>>
+>> It works OK on real hardware...
+> 
+> It should be fast enough here too.
+> 
+>>> But also, some of those numbers sound unusually terrible to me. We can
+>>> get some bad luck with the free instances, but, still.  Are you sure
+>>> there's nothing else going on?
+>>
+>> ...and yes that's absolutely terrible. In fact I found something curious.
+>> With the following patch applied to provide a memcpy() speed test:
+>>
+>> diff --git a/cmd/test.c b/cmd/test.c
+>> index b4c3eabf9f6..35b8d62af61 100644
+>> --- a/cmd/test.c
+>> +++ b/cmd/test.c
+>> @@ -7,6 +7,8 @@
+>>  #include <command.h>
+>>  #include <fs.h>
+>>  #include <log.h>
+>> +#include <stdlib.h>
+>> +#include <time.h>
+>>  #include <vsprintf.h>
+>>  
+>>  #define OP_INVALID	0
+>> @@ -215,3 +217,49 @@ U_BOOT_CMD(
+>>  	"do nothing, successfully",
+>>  	NULL
+>>  );
+>> +
+>> +static int do_mtest(struct cmd_tbl *cmdtp, int flag, int argc,
+>> +		    char *const argv[])
+>> +{
+>> +	ulong t0, delta;
+>> +	void *src, *dst;
+>> +	long sz;
+>> +
+>> +	if (argc < 2) {
+>> +		printf("Usage: %s <size_in_bytes> [dst [src]]\n", argv[0]);
+>> +		return 1;
+>> +	}
+>> +	sz = simple_strtol(argv[1], NULL, 10);
+>> +	if (sz < 0) {
+>> +		printf("%s: %s: invalid argument\n", argv[0], argv[1]);
+>> +		return 1;
+>> +	}
+>> +	if (argc > 2) {
+>> +		dst = (void *)hextoul(argv[2], NULL);
+>> +		if (argc > 3) {
+>> +			src = (void *)hextoul(argv[3], NULL);
+>> +		} else {
+>> +			src = malloc(sz);
+>> +		}
+>> +	} else {
+>> +		dst = malloc(sz);
+>> +		src = malloc(sz);
+>> +	}
+>> +	if (!src || !dst) {
+>> +		printf("%s: out of memory or NULL address\n", argv[0]);
+>> +		return 1;
+>> +	}
+>> +	printf("%ld bytes from 0x%p to 0x%p: ", sz, src, dst);
+>> +	t0 = get_timer(0);
+>> +	memcpy(dst, src, sz);
+>> +	delta = get_timer(t0);
+>> +	printf("%ld ms\n", delta);
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +U_BOOT_CMD(
+>> +	mtest,	CONFIG_SYS_MAXARGS,	0,	do_mtest,
+>> +	"memcpy() speed test",
+>> +	NULL
+>> +);
+>>
+>> I can see that there are ranges of memory that are very slow to *write*
+>> to (and the loadaddr used by the tftp test happens to fall in that
+>> range):
+>>
+>> $ make qemu_arm64_defconfig
+>> $ make -j$(nproc) CROSS_COMPILE="ccache aarch64-linux-gnu-"
+>> $ qemu-system-aarch64 -M virt -nographic -cpu cortex-a57 -bios u-boot.bin
+>>
+>> U-Boot 2024.10-rc1-00195-g35ce7016c9cb-dirty (Aug 19 2024 - 16:42:15 +0200)
+>> [...]
+>> => mtest
+>> Usage: mtest <size_in_bytes> [dst [src]]
+>> => mtest 1000
+>> 1000 bytes from 0x00000000466baed0 to 0x00000000466baae0: 0 ms
+>> => mtest 1000 0x2000000 0x00000000466baed0
+>> 1000 bytes from 0x00000000466baed0 to 0x0000000002000000: 22 ms
+>> => mtest 1000 0x00000000466baed0 0x2000000
+>> 1000 bytes from 0x0000000002000000 to 0x00000000466baed0: 0 ms
+>> => 
+> 
+> This is all very strange. Can you investigate a bit please?
 
-Lukasz Majewski
+OK, so this was actually a red herring :-/ For some reason I kept using
+address 2000000 for my tests and it happens to be memory-mapped I/O
+for the flash storage in QEMU. That's why it is so slow, but we don't
+care.
 
---
+The qemu_arm64 failure in CI was actually caused by DHCP not setting
+${serverip} so TFTP would fail afterwards. This is fixed in v9.
 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
+Fixed also are the r2dplus_i82557c and r2dplus_rtl8139 failures which
+were caused by calling free_pkt() with a length of zero, as well as
+the "dm_pci_phys_to_bus: invalid physical address" error on
+r2dplus_tulip (eth_init_rings() was called too late).
 
---Sig_/cTHRzKDplf9eHYAMpsyaQ+1
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
+I am now runnig CI again. It should hopefully be all green. Stay tuned
+for v9 ;)
 
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmbFplMACgkQAR8vZIA0
-zr1kYgf9GRe16Pk4rx2Veyq3ACxW0nE3c8qGWjxfSh9czdCCMmi20U+vks5vESaQ
-n20Hr385PdEjGzSgrwv9UQRoelN5T9gXOZWLcWeYpf6ZRZpLef/grWW/7js44FDl
-XtgoanuslEVvE5VG1moryatZpRuL1wstnSojxNVfFcgLYRr6X666OBtsRh1L1pHY
-W/rmmuBd0HyPnFp8CPSrNbyZR7D3JlD/x3mRPVMg3sZWx/3ingOqVkgVj5hrkHLm
-8XQvb3j7dQSXS8oMOU6ZE7AO/lmb3Or3DKaxpLzz5nItpR2Uz2Wpx/xgJpiqQ/ku
-prw3xSUT/gaJ4+RRsK9EQKel4CSxpw==
-=VHzy
------END PGP SIGNATURE-----
-
---Sig_/cTHRzKDplf9eHYAMpsyaQ+1--
+Thanks,
+-- 
+Jerome
