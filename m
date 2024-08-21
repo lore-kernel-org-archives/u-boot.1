@@ -4,56 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6721AC52D6F
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 23:26:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F85FC52D7C
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 23:52:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65D1188C08;
-	Thu, 22 Aug 2024 01:26:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8487888C53;
+	Thu, 22 Aug 2024 01:52:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1724282777;
-	bh=3NZ8CmizpK+LWXBa5K05RX63izWSM1S2NeBxPYV1XeI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=mOJPUAxvG2Udcemr3ph3dhS/NFxHBbyPLw0IerQEdRLGwVEGiSUv6y5B+cPIKxSor
-	 uk/VPVKKtWhRk6jZbJL5HyPmQRA5qvYBIbBWIFwXhB4gkUwLlMf6cBztbjEYVyl0WV
-	 TxiYEUnWCjccBClt3U/9SmmCADQZ4Nu+5l3TeZAur47atL8nlPKua8W4Qf7DXM8bbR
-	 W4B1RqBAUsM/UegUXHTkup1UEt0iX/zGPiGzZv6aYtPd/5PkucDX9iVywazpEY36La
-	 OeXC9Y1freAD2IfFAlQbdQSxrsESL+1TCbYLlVZjATCv72FxSUdX+uLqkzTqVmmNe+
-	 EoWbi6BA0wYtw==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Yl0OP6x/";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D5EE888C29; Thu, 22 Aug 2024 01:52:31 +0200 (CEST)
+Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
+ [IPv6:2607:f8b0:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 4BCDC88BC4;
- Thu, 22 Aug 2024 01:26:16 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1724282776;
- bh=3NZ8CmizpK+LWXBa5K05RX63izWSM1S2NeBxPYV1XeI=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=NDvpVuPTJKOZn7CrsqFur7OEGjUCREb0n4IuGQnPRHlhYuoJbVjwkPL4RKUh8Segr
- Wf3VSTCZ9P+OvQV6nFhmcw9mTOzAKYPGcW3PNbBq6dbYQ02PjovE+VrGR/u96m4bty
- tQy6g0EZYf9iy3Ca1RCqwy0v3grOtJwkXFBwaABmyxzKpj8K59citZpm3+ZAW6tmn+
- K2WAK18CZ6jztvvYmG8ojMZPlRQ8cs1oKwBDVoQRdimMcDCKQXW3Gv/aaVOIqR/cKX
- GcGAn973iMjuUUYUEzKP8a+dDGuSSE7WFZ8DwBvBLYwsA7zzCsaS/dy4iFnA7eelAx
- VN2/6+IE+YgZQ==
-Message-ID: <67e8423d-f8a8-412e-ae4a-014d52bf6a2f@denx.de>
-Date: Thu, 22 Aug 2024 01:21:55 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 377F788C4D
+ for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 01:52:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x133.google.com with SMTP id
+ e9e14a558f8ab-39d2256ee11so939585ab.1
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 16:52:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1724284348; x=1724889148; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5AdaDCLLHRES4S6at10A2Yr2k5Bxbt5qvpcAJ+E3MJo=;
+ b=Yl0OP6x/sw9GHT0f/nR7KMaE2xSp3jJ+F/Fqi8ZS7mswzrcaFvxFMCgMOYg0WZD5SF
+ cvbTRxODZG0jVJ4E3IWyf+PvGh3qBogrXkMpco0W5eSn/rI0cOdaoj/mqeF2cPWCFEvm
+ YdWAYA3lLw5GK1comHgET0e6RZNSEMJ8GvPGs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724284348; x=1724889148;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5AdaDCLLHRES4S6at10A2Yr2k5Bxbt5qvpcAJ+E3MJo=;
+ b=pCyZndEkCfwttXoj6cIOkJDyg7gjsqW1mSEwt1s3ObiIrau2XEPErync5hamq31GgA
+ V45z0K2E0OCm3tlJMd6tJiq7orZpN2WmbdFeFZ05SoSmlKBZksa+Y9m9iOX7bol6nTPL
+ YP56p2Gm+FRFmphiFtj/8WY2GEQALtT/QDhvjXnqPsJ+ljqTQRCNpz4jfC59yrLt8ofL
+ +oTKNCkmv4itqJtDEc7D8oz45gIKHuwU0Ss+IZT89tI6z8TwFu7ygLQl+loe1zXDOjQW
+ p7MzBE6+rKLPPPwtiaRHG7yTdLGAqRr06cwu4Zi4/MrLi7Gufnb7KhNveiQ/brMAXonp
+ VcmA==
+X-Gm-Message-State: AOJu0YwFW1XE2LviyJg5lL/UKjwwcrIaz5x3FgjTl0iaggYxgSw6qA/+
+ LPl8yZxWI6ypNWdADVmJN7Fp7g0p9I4lnSMyDVzNNBV3TFH59RqX1SJrU0e1q1ciFwoi7Z+yH/I
+ =
+X-Google-Smtp-Source: AGHT+IHEKnYkqOaPIWf1WTfkTvGWJBfcu0blkdUJ365j8E1DYhy2mp1dGEJW9rNdq7PtyTrFK1x4Fw==
+X-Received: by 2002:a05:6e02:1c04:b0:39d:254c:ece5 with SMTP id
+ e9e14a558f8ab-39d6c3928f1mr50788745ab.16.1724284347824; 
+ Wed, 21 Aug 2024 16:52:27 -0700 (PDT)
+Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
+ [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-39d73e7c2a2sm1552275ab.38.2024.08.21.16.52.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 Aug 2024 16:52:27 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH] qconfig: Fix an incorrect format-string with negative value
+Date: Wed, 21 Aug 2024 17:52:24 -0600
+Message-Id: <20240821235224.1734620-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] usb: gadget: ether: Disable USB pullup in eth probe
-To: Zixun LI <admin@hifiphile.com>
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
-References: <20240821212218.2092540-1-admin@hifiphile.com>
- <5a1367d7-be94-4c75-9f40-891ca79f9c5b@denx.de>
- <CA+GyqeYxig+5pyYaCjPmQodXGjCYK=819cNZx9XmvJOnoYne_w@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CA+GyqeYxig+5pyYaCjPmQodXGjCYK=819cNZx9XmvJOnoYne_w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -71,18 +86,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/21/24 11:58 PM, Zixun LI wrote:
-> Hi Marek,
+This is not allowed, so use ljust() instead. This fixes the
+'qconfig -i -I help' command.
 
-Hi,
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Fixes: 1bd43060b3e ("moveconfig: Use f strings where possible")
+---
 
-> On Wed, Aug 21, 2024 at 11:43 PM Marek Vasut <marex@denx.de> wrote:
->>
->> Wouldn't it be better if usb_gadget_register_driver() started in
->> disconnected state right away ?
-> 
-> That's what I did initially. But since g_dnl doesn't do connection after
-> register (I explained in cover letter) doing so will keep g_dnl always in
-> disconnected state.
+ tools/qconfig.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Would it be possible to fix up the g_dnl ?
+diff --git a/tools/qconfig.py b/tools/qconfig.py
+index 7b868c7d72c..8c2fc9efc5f 100755
+--- a/tools/qconfig.py
++++ b/tools/qconfig.py
+@@ -1595,7 +1595,7 @@ def imply(args):
+             if flag == 'help' or bad:
+                 print("Imply flags: (separate with ',')")
+                 for name, info in IMPLY_FLAGS.items():
+-                    print(f' {name:-15s}: {info[1]}')
++                    print(f' {name.ljust(15)}: {info[1]}')
+                 return 1
+             imply_flags |= IMPLY_FLAGS[flag][0]
+ 
+-- 
+2.34.1
+
