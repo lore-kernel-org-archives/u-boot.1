@@ -4,77 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17616C3DA4A
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 00:42:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFC9AC3DA4A
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 02:10:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C95688ADC;
-	Wed, 21 Aug 2024 02:42:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D6F5988A74;
+	Wed, 21 Aug 2024 04:10:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jdSauZLC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WoUa6rge";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1109A88B0B; Wed, 21 Aug 2024 02:42:55 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id E8D1588A64; Wed, 21 Aug 2024 04:10:47 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AAC8B88AA4
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 02:42:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D60E88A74
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 04:10:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-3db23a608eeso4045083b6e.1
- for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 17:42:52 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6bf42a563c8so34017196d6.1
+ for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 19:10:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724200971; x=1724805771; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3HaZ0OI4o9uFF5iZFlS5z+nbKRbkrGem4086NoXEcWg=;
- b=jdSauZLC3vRTS3qA6DStAnvum+T4Q2bb/AW8dXfZaAIk2SEHG8abHXWZ4MtKzafqB0
- tC4LfumTXM5vs+oe3Falg82nx5c75nCdtsoEex491eiY1mKZjJ1eua9N0T87vDcCb4xi
- E+ZDMoQbJb+IaIyjcRdgybPAug3Q0CGW1Lfxw=
+ d=chromium.org; s=google; t=1724206244; x=1724811044; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=pOf8jINUElXJrgd3V7RpyrQxxI8WVwWBCggnM6Zu8WA=;
+ b=WoUa6rgeSYS8QizZPaA8YYR0U93aa9FyCciiNRTXxH7gBMzteIAiSHl5eqQPfhGqr8
+ 0QKOBWGqE80Iw9wRDT7eryGDVbSs8FKyi2b1K/ARheE2cK4Zr7sWTaY6CCqNefiDQcgJ
+ ypG2ZSWKhmc/1He2BeFUtTG5ApW1B2Qr0uctQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724200971; x=1724805771;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3HaZ0OI4o9uFF5iZFlS5z+nbKRbkrGem4086NoXEcWg=;
- b=k8wPh2cAKEyyAAryZ7M+T5koyifgk3lopWWAZg740yaM39p0/HJznhlvqXo/F2okPz
- 6XsoOQYkEGgE6iTC+SOJVxsLQbb68sFY+D3iTNw7FmpF5jvbW6AySdsBRhOF3Szr+nn5
- w1h6dZEs+9ZQv53x7g7L5uIHIbkJ4C8q/V9AuEKLB/GgdJx9HuyXbiM0S4XUWa4KhBWA
- ttRn5uAeSrctuE6aRsG/HZ6dmO1UkyM8KQiXUNCcs687F+eBlJGoK4r1cFlRcUxnRO8E
- am/v8Uu5jp2f5FJbIKepKDu/qPz7+qJ5Lg1oq4q9n8T4UKEaN+uNytGJxwsRIKR2VTjq
- y6Bw==
-X-Gm-Message-State: AOJu0YxGBaltp9Ha86gtXBckwpdllyqAZUX4AKH4fc2+0dMJqcM+VG+z
- c9kP1N8dxCMXV/cxBzK0EM57vOtebDJj9SsKO/quEUq8OZHQsIVYK5pUir8+tvY=
-X-Google-Smtp-Source: AGHT+IG+OsOEW8hqcYgV30glOj6jyUeLFzDrAh4vmzvb1JNqMBR4mZ/vxr09FicKYLd3cgQC0ktBOg==
-X-Received: by 2002:a05:6808:1917:b0:3d9:1f05:845 with SMTP id
- 5614622812f47-3de195070b2mr1071042b6e.19.1724200971242; 
- Tue, 20 Aug 2024 17:42:51 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-236.totalplay.net.
- [189.203.97.236]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3dd33d400b4sm3113507b6e.11.2024.08.20.17.42.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Aug 2024 17:42:50 -0700 (PDT)
-Date: Tue, 20 Aug 2024 18:42:48 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Zixun LI <admin@hifiphile.com>
-Subject: Re: [GIT PULL] Please pull u-boot-dfu-next-20240820
-Message-ID: <20240821004248.GO1626301@bill-the-cat>
-References: <87r0ajuxbz.fsf@baylibre.com>
+ d=1e100.net; s=20230601; t=1724206244; x=1724811044;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pOf8jINUElXJrgd3V7RpyrQxxI8WVwWBCggnM6Zu8WA=;
+ b=KWVhZFUmrJ5mu8sNUcXwtgyhd2Ao2AFL4A+0Niqdb+KTiS+BNjrngZSsi2OGwEVIR0
+ AliCIqHEMoe0mZg/pOjjD+sqjFEPI4h2O1SQEfhc7wG4Jm6lcXY3LE2k1lVK2HYBAkJo
+ TLs8qEPmzv3XABTLVc4jwdYjZIkCsu0Huk7fej4DOtYxRzabk05FfvPJVYr3BFRVr+UW
+ /OR37gj+yH5Bqqfx+NoIZBWo6IUnakqBm1uc7BIqC4RN1P/RBPg3OxTP6o1ggqHmVA1U
+ s+7pJLXWDQqyv+L2JRSenF4eUIzfU3gRWgQQaXZM0N+75vb0RZpKKnhseEfz2wURAi4/
+ vK6g==
+X-Gm-Message-State: AOJu0YxbOqXxpN/D8pTViiCJ9q3PN/m8rHFO0UDxalYaYiHoq3WJE1E+
+ kjSx6SVSiEgdCcY0YBWlmU4bGAdKAUchB2N6HugKt2/gLYq+12hrf/Zs8f+zUi0p6mjr9CH00Ur
+ MxduXgZimNXoiJvmoH+ELKAzUMwRZxx7J8heoarWxdSR73xE=
+X-Google-Smtp-Source: AGHT+IGSLIeQZxh7Eeu9v8BCMA8ndzxfuOjHzoRlJfqJZtkHM7doP9l5upyvcdMrZyztmHR+oVY8TeEdWS+Z3RivozA=
+X-Received: by 2002:a05:6214:3992:b0:6bf:8bf8:658d with SMTP id
+ 6a1803df08f44-6c155e1ef05mr11742526d6.54.1724206244298; Tue, 20 Aug 2024
+ 19:10:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3paI2d6Q0+JAv9HI"
-Content-Disposition: inline
-In-Reply-To: <87r0ajuxbz.fsf@baylibre.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <b24ba149599b9e0261676110894d14a0f69eb6a2.camel@opensuse.org>
+In-Reply-To: <b24ba149599b9e0261676110894d14a0f69eb6a2.camel@opensuse.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 20 Aug 2024 20:10:33 -0600
+Message-ID: <CAFLszTh==U4_km3EQgNoqaDAK5uWXAAcj01Wd8B1U7CR31XH3g@mail.gmail.com>
+Subject: Re: u-boot on raspberry pi with secure boot
+To: Jonas Kvinge <jonaski@opensuse.org>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,64 +81,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jonas,
 
---3paI2d6Q0+JAv9HI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, 19 Aug 2024 at 07:11, Jonas Kvinge <jonaski@opensuse.org> wrote:
+>
+> Hi,
+>
+> I have a custom installation of openSUSE Tumbleweed which uses u-boot
+> and Grub.
+> To use secure boot on the RPI, one creates a boot.img containing the
+> kernel and other files which is signed, and the eeprom is locked to
+> only allow booting with this signature.
+> (https://github.com/raspberrypi/usbboot/blob/master/secure-boot-recovery/README.md
+> ).
+> Since I'm using u-boot, I'm creating a boot.img containing u-boot.bin
+> instead of the linux kernel and ramdisk.
+> But then nothing is locking down which kernel can boot, since that's
+> controller by UEFI and Grub. u-boot starts Grub from the UEFI
+> partition, and Grub starts the kernel from a separate /boot partition.
+> And I see no way to change this
+> I use a 3 partition setup where the partitions are 1. FAT UEFI
+> partition, 2. Linux ext4 /boot partition, 3. Encrypted LUKS ext4 root
+> partition.
+> I've been looking into
+> https://trac.gateworks.com/wiki/secure_boot#SecuringtheKernelFDTramdiskviaFITimages
+> But is that possible to do with my current setup? Can I include grub
+> and the kernel/initrd in the boot.img and make u-boot use that instead
+> of from the UEFI partition?
 
-On Tue, Aug 20, 2024 at 03:40:16PM +0200, Mattijs Korpershoek wrote:
+It's 'U-Boot', BTW.
 
-> Hi Tom,
->=20
-> Please find some developments for next:
->=20
-> - Migrate Atmel usb gadget to DM_USB_GADGET
-> - More small cleanups/improvements on the atmel UDC driver
-> - Change udc uclass name from "usb" -> "usb_gadget"
->=20
-> CI job:
-> - https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/22060
->=20
-> Thanks,
-> Mattijs
->=20
-> The following changes since commit 6f4c31c2b658358628b5b0fa801f55c7477c75=
-85:
->=20
->   Prepare v2024.10-rc2 (2024-08-05 18:13:42 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu=
--next-20240820
->=20
-> for you to fetch changes up to 73f5b54a589cb6ff97aaca55e7c97d68b43997ee:
->=20
->   usb: gadget: udc: Fix duplicate uclass name (2024-08-20 09:36:36 +0200)
->=20
+I don't fully understand your situation, but you should be able to use
+FIT as there is an EFI test for it - see
+test/py/tests/test_efi_capsule/test_capsule_firmware_fit.py
 
-Applied to u-boot/next, thanks!
+Note that RPI typically uses a private bootloader, so I'm not sure how
+secure it can actually be.
 
---=20
-Tom
-
---3paI2d6Q0+JAv9HI
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbFOAQACgkQFHw5/5Y0
-tyw0vwwAiPePkTFd5NPu2t8VyoKI1V4DAjjAsWiwZEyvdYDXU6R6rhcZW1RR/CkH
-ITYqhNQmULIbwj8Tv/CrVZaUZDd1Bf5lNz+kFSVdHeJyi3W3gc5ggMyQnpCnSZs1
-eaRuB0AK8vrBZ3mopmYSa5kJH/staf+DNt6BqxOYA4uGkuKSafePLXpD9C2knOyv
-liubIB6D98950kIP3I6OilGyS/d0Tm0VIG7oXMs13ZxdgUhAZDNsfssnm0oHz9JC
-rhiX9fN1szg/9B7VrHukjJVpAvuKKkABXBHZa+Ctsx3z+5jnfe08CE0eSDi+09As
-Bz+iEVtphSigCWSqyldhYbHm/Xy4wtsn7NXebGk+2D1mOLQo1LbPvQ4Aa/k3lySr
-Ylbzm12oLboOkH1ENwr2LJbXjJ7HbWPsKfSC50OVtPz4T8JpbLbqzPqP4lZC7V0u
-mQMcC09vvq7czvMYGqSRZNsAbEoNeSf9tU3v41FxSGt3SPjalwy3LpRs6aDks3iG
-8OkW8t8F
-=2ECl
------END PGP SIGNATURE-----
-
---3paI2d6Q0+JAv9HI--
+Regards,
+Simon
