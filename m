@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27B05C52D6F
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 16:20:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84E16C52D6F
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 16:20:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B4E888E13;
-	Wed, 21 Aug 2024 18:19:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EDC6C88BFA;
+	Wed, 21 Aug 2024 18:19:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PirGz4kJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JLMVGOzV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 833A388BFE; Wed, 21 Aug 2024 18:19:40 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id C764488E15; Wed, 21 Aug 2024 18:19:41 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7411088C0C
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 18:19:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B39988D9B
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 18:19:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-704466b19c4so3975514a34.0
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 09:19:38 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-70943b07c2cso3863125a34.1
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 09:19:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724257177; x=1724861977; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724257178; x=1724861978; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=n2VvIZslOyTJEYHNUNDzPUkSdUgEmdjJxFMCtKA45Gg=;
- b=PirGz4kJDxs0fTbWRxsTAjuDGt/xMybWMhJLtsyQ/oKD4Q1IjBU8aPxyjGfqWfmU5r
- 5ZxV8PCaWL8a1d5zlF+5HIZf5YYi11CE/6Hwy4j7ubwooJib0b9aBDcN0izfGyEPz2Ns
- D9RNBs0IuUM8MHr2nMDdGAQ80lEHZ6RX9yhxU=
+ bh=fYxZARxVNjL917E+Z5GGoPmtN0HaCSv/gBB6KMGbd3g=;
+ b=JLMVGOzVgOJR75vepXem1EMDXr4qDWU944YQZZnlVv3IxhDKHsLJ2B/8A8V4CVXwxB
+ 7xIjhbMueRnSxziKyWhfWj0QZtmlLmEvrhwz56u3sQ7X8sVMAqsoAVt02ykNOE5rr7ev
+ C22sAomrTCA9iXO7I80hRB3dCYaM9zOb8cfEc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724257177; x=1724861977;
+ d=1e100.net; s=20230601; t=1724257178; x=1724861978;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=n2VvIZslOyTJEYHNUNDzPUkSdUgEmdjJxFMCtKA45Gg=;
- b=khyWA4ITYC/58V7hTvSCFibYnLlwGTRBdGEo/GnWNhYWkCJsR+nyBlYeDQg/b/YOun
- ERnbO/elQahhf/t2Hfx/wZ7P0/34tCbuzbNXRoqImNGy4+0XCDglVyJ9vU2DG5SZq6Rj
- QINTVbclaoCEJ+WS+SDKu2uhnxvP69RtTBvKSl8Lt94fUOTzQHd3Vfo15npiKpaRBDfo
- p3TI+5VWdNxXlrnpQqgYYaWz/vJyJg6TCdiCMy9FWZXTQ6OBZMbfOm2uHwOGfeaEPaKk
- ubKN9sIrvACIyFbjaPU/bYXJF8XRMDnPXG/JgVY0UzfsPOdvsWus2XXM2XNmOtHKwxHM
- MLzw==
-X-Gm-Message-State: AOJu0YzjKU4nJaUkD2eGRtKq2CzLwTShpE3IfcUyCAlXYkL1m8GmDogn
- /SCffBKO+6mjnmOZ5u+S8xgcYkVfIgD6Ay26+dLGSkioOeznPO5F6mypD27Ad2rxbwIyePuSDE4
+ bh=fYxZARxVNjL917E+Z5GGoPmtN0HaCSv/gBB6KMGbd3g=;
+ b=CnshS9hc8sI8cuMh/CNisMume4aUB5Fv1VCUqg4k+agVBxIXvs8Co83+fB7OHn3Cp1
+ Pekk1aYHEjTBx5SLJpdKTVUF7gGu+H7ezdqzDsQEWMCHcfDKsMV0n4Hiqhhv0U3bWEcv
+ RXQnBs8vRNEpFzlXmD6Z5mmqKsYK7hiDT1ZKXfvfyw0AOmIEpkoJOkzL1Xr1HByVcXcV
+ d0qHS76NRvDNUQez0p3t5BOkn0qeYPCqca9uYYzqeQ4jcDBsIZ8sOQorbN4KGXQesLZ6
+ 9Ud4flcz618eonqozM5xulmRaACfNO6od7vFvymN2ECSixGRAP7e/fVCpAk1KOlizrBd
+ q8Tw==
+X-Gm-Message-State: AOJu0YxxDS9y6JKIblZZD5mj1oTsJQ/4hGxs73PxqvoFCk9T3rP594In
+ +d+tal3oS6SEEhOosO9ArBLoGbLSLgcgKaV5rqlGDjOdNdQwsc44T3eQpb+g7g63eSLER0j4BAY
  =
-X-Google-Smtp-Source: AGHT+IExtZECofIyQJaV0rthIFR8YnhnwFrmTov9MLMccUX8DcxbIf+vEGB1Ct1ZvqHNvNw05WAMwA==
-X-Received: by 2002:a05:6830:25c3:b0:709:3839:b7d2 with SMTP id
- 46e09a7af769-70df88767ebmr2441286a34.31.1724257177127; 
- Wed, 21 Aug 2024 09:19:37 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEF27nohzPFuGTB7N/xHQXDSVITyhoohRGxxy84QCyn2Foeghgqalho6ajFU8ll6BH5qS3ZXg==
+X-Received: by 2002:a05:6830:2586:b0:709:41c2:5104 with SMTP id
+ 46e09a7af769-70df85fd28dmr2883101a34.8.1724257178261; 
+ Wed, 21 Aug 2024 09:19:38 -0700 (PDT)
 Received: from chromium.org ([139.60.174.4]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70ca6629792sm3222376a34.72.2024.08.21.09.19.36
+ 46e09a7af769-70ca6629792sm3222376a34.72.2024.08.21.09.19.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Aug 2024 09:19:36 -0700 (PDT)
+ Wed, 21 Aug 2024 09:19:38 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH v2 02/35] x86: Drop use of global_data fb_base
-Date: Wed, 21 Aug 2024 10:18:54 -0600
-Message-Id: <20240821161927.695717-3-sjg@chromium.org>
+ Anatolij Gustschin <agust@denx.de>
+Subject: [PATCH v2 03/35] video: Add a function to obtain the framebuffer
+ address
+Date: Wed, 21 Aug 2024 10:18:55 -0600
+Message-Id: <20240821161927.695717-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240821161927.695717-1-sjg@chromium.org>
 References: <20240821161927.695717-1-sjg@chromium.org>
@@ -88,29 +89,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This value is set by not used on x86 so there is no point in setting it.
-Drop the assignment.
+Add a new function which returns the framebuffer address of the first
+video device. This will allow the global_data field top be dropped.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/x86/lib/fsp/fsp_graphics.c | 1 -
- 1 file changed, 1 deletion(-)
+ drivers/video/video-uclass.c | 14 ++++++++++++++
+ include/video.h              | 11 +++++++++++
+ 2 files changed, 25 insertions(+)
 
-diff --git a/arch/x86/lib/fsp/fsp_graphics.c b/arch/x86/lib/fsp/fsp_graphics.c
-index 5f7701265a9..ad25020086c 100644
---- a/arch/x86/lib/fsp/fsp_graphics.c
-+++ b/arch/x86/lib/fsp/fsp_graphics.c
-@@ -103,7 +103,6 @@ static int fsp_video_probe(struct udevice *dev)
- 	 * For IGD, it seems to be always on BAR2.
- 	 */
- 	vesa->phys_base_ptr = dm_pci_read_bar32(dev, 2);
--	gd->fb_base = vesa->phys_base_ptr;
+diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
+index a5aa8dd5295..e358a7949e0 100644
+--- a/drivers/video/video-uclass.c
++++ b/drivers/video/video-uclass.c
+@@ -152,6 +152,20 @@ int video_reserve(ulong *addrp)
+ 	return 0;
+ }
  
- 	ret = vesa_setup_video_priv(vesa, vesa->phys_base_ptr, uc_priv, plat);
- 	if (ret)
++ulong video_get_fb(void)
++{
++	struct udevice *dev;
++
++	uclass_find_first_device(UCLASS_VIDEO, &dev);
++	if (dev) {
++		const struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
++
++		return uc_plat->base;
++	}
++
++	return 0;
++}
++
+ int video_fill_part(struct udevice *dev, int xstart, int ystart, int xend,
+ 		    int yend, u32 colour)
+ {
+diff --git a/include/video.h b/include/video.h
+index 4013a949983..606c8a37fb8 100644
+--- a/include/video.h
++++ b/include/video.h
+@@ -420,4 +420,15 @@ int bmp_info(ulong addr);
+  */
+ int video_reserve_from_bloblist(struct video_handoff *ho);
+ 
++/**
++ * video_get_fb() - Get the first framebuffer address
++ *
++ * This function does not probe video devices, so can only be used after a video
++ * device has been activated.
++ *
++ * Return: address of the framebuffer of the first video device found, or 0 if
++ * there is no device
++ */
++ulong video_get_fb(void);
++
+ #endif
 -- 
 2.34.1
 
