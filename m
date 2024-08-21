@@ -4,81 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6109C52D6F
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 14:00:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93B1BC52D6F
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 14:00:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C12288D96;
+	by phobos.denx.de (Postfix) with ESMTP id 68B5A88DDF;
 	Wed, 21 Aug 2024 16:00:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZaO3hYvI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O01wNHA2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C7CE88D9B; Wed, 21 Aug 2024 16:00:06 +0200 (CEST)
+ id 8D61988D9B; Wed, 21 Aug 2024 16:00:06 +0200 (CEST)
 Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
  [IPv6:2607:f8b0:4864:20::f31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4208B88D96
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 16:00:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B20C88717
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 16:00:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6c159150ff4so3373516d6.2
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 07:00:03 -0700 (PDT)
+ 6a1803df08f44-6bf8a662467so24048076d6.3
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 07:00:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724248802; x=1724853602; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724248803; x=1724853603; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RiIHDipaSynYR1aQivjrzt1Z7AW3dv4OU1KQ7cUsBDw=;
- b=ZaO3hYvIkhZCi2qJ3dz0RL6rLxb/dwSCdTJCdLlzEC1bOoyjJ7lyxioQVGK17q4zQd
- zoGCyf6EWK/2iKBPXdxjnrhAJRXxqGN+VBwBsX0NV/Mu9WkX98juuKoNWlFO6ngTbMZF
- C9sB1x+Bo+JtZWWhWyGRQOkbomKXHhJKpULJc=
+ bh=1lKGERITs16Lx9/EW7vVK0WfLT+oFUSYJ4yItpoXr+g=;
+ b=O01wNHA2758P23Cq8K+v27gGocY+1ahznMBSx4QieMdeu9Vhhg4jqOXLS7z/4bBZ51
+ H8o/7TcfbuK4vud3xLC440wAEIp5CUxRrMKhLeRO0+a4z9xu1NJZkFu3pHosmCGJ6r5Y
+ LAw2BxZvr3ejeO5E8fnB0Q5qpHjh8rHbiJEBg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724248802; x=1724853602;
+ d=1e100.net; s=20230601; t=1724248803; x=1724853603;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=RiIHDipaSynYR1aQivjrzt1Z7AW3dv4OU1KQ7cUsBDw=;
- b=Gtqil4OjoAXGyzS/w0Q9rf+i0smpTtbWM78euGRgdaGC0LNsJ2rNdCjbX0LrPBTK9U
- XTCqZXt4F0eJZxTq2t1hg2ohGpmz9H/XH/eg74UXiifTVHG4DmkTGbXO9Yr2eT+raomw
- h76JPhbfxWYSTZE0V9pz/jiOPlfaQJqP5kDA7fS1OheM1LPdtGdJhSh7/fHeJxHd9zOU
- LWIW9QTOclRZVIC+UwT28JpSjaLSRJarC6RXc03cJ+vcILX0cxjDegqti2DVxAJIqbz5
- ziM7+Nc2wE6S65t4xKyZZrkcRVP88VwGJqLWzpexQBzmWTZLMr/FqRdozmZjBHuz0hTo
- qljA==
-X-Gm-Message-State: AOJu0Yy6yVh+5nLaGo9OebGTle1HEhtKyEuqNEjC/oLJnb9Mvo8Xp2PF
- 5BERK2hs/AWnBu1lbBTeaBeIkAB8NJuDjIxP0M7aIUd73tabnZsDiyeHWxbhdbgKxAV/Dg8uiQH
- NdSxXbJlry/rUlWcvDXkB6fYR+5odbZCkJuH3
-X-Google-Smtp-Source: AGHT+IF5nol4WxOD5USS/AbxIdlPUSZPAVpArhhq7Q5Xbj0+/9U0jewsYlNDSHDB+vLsy2XUeVPrVI73H2kaIeUVnCg=
-X-Received: by 2002:a05:6214:5541:b0:6b2:b9c7:da6a with SMTP id
- 6a1803df08f44-6c155df2af5mr34063506d6.41.1724248802016; Wed, 21 Aug 2024
- 07:00:02 -0700 (PDT)
+ bh=1lKGERITs16Lx9/EW7vVK0WfLT+oFUSYJ4yItpoXr+g=;
+ b=D9tZei3fxbssGqybmm5G1+G1G1mWKZP4Ofc+/7ZXDNHJXUFFrKdLx9/U3kFxlRBrvB
+ Ipoq8j+Qf/SMJZGlaIFBt0xXEMvOhsK2xnrEyzqsA6ZrCEvlEYUAl44OyLq1NdVJmA1W
+ 5TuGvFSEW/A9NnA6uSZ76JbG/DIPqxOkTZw8yt8NyxkGMMcqCdtFVC5K7w6JAv2YPjRP
+ z9kYEOhMLtN8M/pwSXAqDQgiZ2WQ0j/2sH+u7QN+hpLsLXc7+nPyzlkMiCoEmHW2ZKB3
+ RXyL20KXg+1ekl5Bz3UhJs8kHqbzFQRtQxM480pFmTKlNbngU4SlxBJE8zEPsh3GMJKG
+ VHwg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWTVhRw+euRiTDbnzsmsLKGUwL0n5lPXsUGxV+IoFIuWU8vF/GGVRd6/fCZJPAx59hz3kuINMM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz05sakRANl1UGLDaL55n9jmJh08doWRrfXaD7QgDCZyQh9D5ax
+ 0vpNpKQC2CRpE0EfmVa1W8qTqC/aXvhlt72sxxuhjMyYrETIE5aXNxj71e06jCE7VB5XHgI0sHS
+ mJfw26lyT/Hc2cGrK3beC0k9fjFkQS73qWu1H
+X-Google-Smtp-Source: AGHT+IGW1n5z/KG76lSgD0gwBO2/HcOAsS9XoFPl470dMaplPAG2nnzOdwSVFaem/2NiHWxn6y53QbvbXEvgDr224to=
+X-Received: by 2002:a05:6214:451d:b0:6bf:8c1b:54a6 with SMTP id
+ 6a1803df08f44-6c155e12a3emr31280716d6.50.1724248803112; Wed, 21 Aug 2024
+ 07:00:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
- <20240814110009.45310-15-sughosh.ganu@linaro.org>
- <CAFLszTjMwpW-MRWfJrOja2JGMcTtjYzLqH68hum=yDsXjc6PQQ@mail.gmail.com>
- <CADg8p95k_0CtqD5x8_jjW31YoPOoiLSvDU-M_JtcBU_+V-4hEg@mail.gmail.com>
- <CAFLszTji1FcHNitO+mKJ+uh-Kr5N33ZZjqZJx1Uaianj35Q4vQ@mail.gmail.com>
- <CADg8p94QuMpjP3fU0Rz7Y2gzpM=93RdxFxLM7c7DkpRtnkVL0A@mail.gmail.com>
-In-Reply-To: <CADg8p94QuMpjP3fU0Rz7Y2gzpM=93RdxFxLM7c7DkpRtnkVL0A@mail.gmail.com>
+References: <20240821-b4-rb3gen2-v2-0-49b07633f3a8@linaro.org>
+ <20240821-b4-rb3gen2-v2-1-49b07633f3a8@linaro.org>
+In-Reply-To: <20240821-b4-rb3gen2-v2-1-49b07633f3a8@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 21 Aug 2024 07:59:50 -0600
-Message-ID: <CAFLszTg6CwCs8bQ7jUaJ0PDHnGvq3sg+0P-c4NTKxCN08OZAsQ@mail.gmail.com>
-Subject: Re: [PATCH v2 14/32] lmb: introduce a function to add memory to the
- lmb memory map
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
- Max Filippov <jcmvbkbc@gmail.com>, Bin Meng <bmeng.cn@gmail.com>
+Date: Wed, 21 Aug 2024 07:59:52 -0600
+Message-ID: <CAFLszTjjS8m2DsNp0nMEknM0ggu4QEET81iSyYFGDYWCwVjf2w@mail.gmail.com>
+Subject: Re: [PATCH v2 1/7] clk/qcom: add initial clock driver for sc7280
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,107 +87,210 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+Bin Meng
+Hi Caleb,
 
-Hi Sughosh,
-
-On Tue, 20 Aug 2024 at 23:29, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Wed, 21 Aug 2024 at 07:42, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> On Wed, 21 Aug 2024 at 07:41, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Sughosh,
-> >
-> > On Tue, 20 Aug 2024 at 02:17, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > >
-> > > On Fri, 16 Aug 2024 at 02:04, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi Sughosh,
-> > > >
-> > > > On Wed, 14 Aug 2024 at 12:01, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > > > >
-> > > > > Introduce a function lmb_add_memory() to add available memory to the
-> > > > > LMB memory map. Call this function during board init once the LMB data
-> > > > > structures have been initialised.
-> > > > >
-> > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > > > ---
-> > > > > Changes since V1:
-> > > > > * Call the lmb_add_memory() from lmb_init() instead of
-> > > > >   lmb_mem_regions_init().
-> > > > >
-> > > > >
-> > > > >  include/lmb.h | 10 ++++++++++
-> > > > >  lib/lmb.c     | 42 ++++++++++++++++++++++++++++++++++++++++++
-> > > > >  2 files changed, 52 insertions(+)
-> > > > >
-> > > >
-> > > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > > >
-> > > > But this should not be weak.
-> > >
-> > > This is being made weak, as there would be lmb_add_memory()
-> > > definitions added for powerpc and x86 arch's in the EFI part of my
-> > > patches. Moreover, the lmb_add_memory() function would be called even
-> > > in the SPL stage when LMB is enabled for that stage. So I am not sure
-> > > how do we get around this. You can check the relevant branch [1] on my
-> > > github to check for the specific commits [2][3] that I am referring
-> > > to. Thanks.
-> >
-> > This is really strange.
-> >
-> > The e820 is different on each x86 board. I'm not sure we want that in
-> > the lmb. What is the purpose of that? It is somewhat circular in most
-> > cases, since U-Boot sets it up itself. Where it comes from coreboot,
-> > it looks like we are mirroring it in the EFI memory map. I'm not sure
-> > I understand all this very well.
+> We don't actually need any clocks to get UFS up and running, resets are
+> useful though.
 >
-> Yes, me neither. And I want to keep the behaviour same as before the
-> patches. You would know that the function efi_add_known_memory() gets
-> the memory map from a function install_e820_map() which includes
-> conventional memory, which is the ram memory. And I am basically now
-> doing this as part of the lmb_add_memory() function instead. Are you
-> sure that we can do away with this function, and instead use the
-> ram_base and ram_top values from the global data structure instead? I
-> believe you have boards which exercise this code? So it will be great
-> if you can test this if I remove the function for the e820 module.
-
-We are suffering here from too many ways to do the same thing and too
-much confusion about the overall goal here.
-
-Typically the e820 thing is created in U-Boot - see
-install_e820_map(). The ISA and PCI ranges needs to be added, so EFI
-needs a way to know to do that.
-
-e820 is used for the normal kernel boot flow - the table is passed
-directly to Linux.
-
-With EFI the kernel calls back into U-Boot to get the memory map, so
-we want to add the same reservations to the EFI tables.
-
-So I would favour having EFI sending an event before booting, to allow
-other code to add new reservations. Then we can let e820 do its thing
-and not affect EFI. In fact the e820 code will never be called on an
-EFI boot.
-
-I say we can clean this up later, so what you have here will do for now.
-
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>  drivers/clk/qcom/Kconfig        |   8 +++
+>  drivers/clk/qcom/Makefile       |   1 +
+>  drivers/clk/qcom/clock-qcom.h   |   1 +
+>  drivers/clk/qcom/clock-sc7280.c | 132 ++++++++++++++++++++++++++++++++++++++++
+>  4 files changed, 142 insertions(+)
 >
-> >
-> > For fsl, perhaps copy the #ifdef and handle arch.resv_ram in your code?
+> diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+> index 45d63c6d6dbf..0d2c0ac225c5 100644
+> --- a/drivers/clk/qcom/Kconfig
+> +++ b/drivers/clk/qcom/Kconfig
+> @@ -85,7 +85,15 @@ config CLK_QCOM_SM8650
+>           Say Y here to enable support for the Global Clock Controller
+>           on the Snapdragon SM8650 SoC. This driver supports the clocks
+>           and resets exposed by the GCC hardware block.
 >
-> This is for adding ram to the lmb memory map, but yes, I can check by
-> putting an ifdef in the function. Although the function might look
-> ugly and hackish. Thanks.
+> +config CLK_QCOM_SC7280
+> +       bool "Qualcomm SC7280 GCC"
+> +       select CLK_QCOM
+> +       help
+> +         Say Y here to enable support for the Global Clock Controller
+> +         on the Snapdragon SC7280 SoC. This driver supports the clocks
+> +         and resets exposed by the GCC hardware block.
+> +
+>  endmenu
+>
+>  endif
+> diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
+> index dec20e4b5943..e223c131ee4d 100644
+> --- a/drivers/clk/qcom/Makefile
+> +++ b/drivers/clk/qcom/Makefile
+> @@ -8,8 +8,9 @@ obj-$(CONFIG_CLK_QCOM_APQ8016) += clock-apq8016.o
+>  obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
+>  obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
+>  obj-$(CONFIG_CLK_QCOM_QCM2290) += clock-qcm2290.o
+>  obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
+> +obj-$(CONFIG_CLK_QCOM_SC7280) += clock-sc7280.o
+>  obj-$(CONFIG_CLK_QCOM_SM6115) += clock-sm6115.o
+>  obj-$(CONFIG_CLK_QCOM_SM8250) += clock-sm8250.o
+>  obj-$(CONFIG_CLK_QCOM_SM8550) += clock-sm8550.o
+>  obj-$(CONFIG_CLK_QCOM_SM8650) += clock-sm8650.o
+> diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
+> index f6445c8f566f..7aa6ca59aad5 100644
+> --- a/drivers/clk/qcom/clock-qcom.h
+> +++ b/drivers/clk/qcom/clock-qcom.h
+> @@ -10,8 +10,9 @@
+>  #define CFG_CLK_SRC_CXO   (0 << 8)
+>  #define CFG_CLK_SRC_GPLL0 (1 << 8)
+>  #define CFG_CLK_SRC_GPLL0_AUX2 (2 << 8)
+>  #define CFG_CLK_SRC_GPLL9 (2 << 8)
+> +#define CFG_CLK_SRC_GPLL0_ODD (3 << 8)
+>  #define CFG_CLK_SRC_GPLL6 (4 << 8)
+>  #define CFG_CLK_SRC_GPLL7 (3 << 8)
+>  #define CFG_CLK_SRC_GPLL4 (5 << 8)
+>  #define CFG_CLK_SRC_GPLL0_EVEN (6 << 8)
+> diff --git a/drivers/clk/qcom/clock-sc7280.c b/drivers/clk/qcom/clock-sc7280.c
+> new file mode 100644
+> index 000000000000..5d343f120519
+> --- /dev/null
+> +++ b/drivers/clk/qcom/clock-sc7280.c
+> @@ -0,0 +1,132 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Clock drivers for Qualcomm sc7280
+> + *
+> + * (C) Copyright 2024 Linaro Ltd.
+> + */
+> +
+> +#include <linux/types.h>
+> +#include <clk-uclass.h>
+> +#include <dm.h>
+> +#include <linux/delay.h>
+> +#include <asm/io.h>
+> +#include <linux/bug.h>
+> +#include <linux/bitops.h>
+> +#include <dt-bindings/clock/qcom,gcc-sc7280.h>
+> +
+> +#include "clock-qcom.h"
+> +
+> +#define USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR 0xf038
+> +#define USB30_PRIM_MASTER_CLK_CMD_RCGR 0xf020
+> +
+> +static ulong sc7280_set_rate(struct clk *clk, ulong rate)
+> +{
+> +       struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> +
+> +       if (clk->id < priv->data->num_clks)
+> +               debug("%s: %s, requested rate=%ld\n", __func__, priv->data->clks[clk->id].name, rate);
+> +
+> +       switch (clk->id) {
+> +       case GCC_USB30_PRIM_MOCK_UTMI_CLK:
+> +               WARN(rate != 19200000, "Unexpected rate for USB30_PRIM_MOCK_UTMI_CLK: %lu\n", rate);
+> +               clk_rcg_set_rate(priv->base, USB30_PRIM_MASTER_CLK_CMD_RCGR, 0, CFG_CLK_SRC_CXO);
+> +               return rate;
+> +       case GCC_USB30_PRIM_MASTER_CLK:
+> +               WARN(rate != 200000000, "Unexpected rate for USB30_PRIM_MASTER_CLK: %lu\n", rate);
+> +               clk_rcg_set_rate_mnd(priv->base, USB30_PRIM_MASTER_CLK_CMD_RCGR,
+> +                                    1, 0, 0, CFG_CLK_SRC_GPLL0_ODD, 8);
+> +               clk_rcg_set_rate(priv->base, 0xf064, 0, 0);
+> +               return rate;
+> +       default:
+> +               return 0;
+> +       }
+> +}
+> +
+> +static const struct gate_clk sc7280_clks[] = {
+> +       GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK, 0xf07c, 1),
+> +       GATE_CLK(GCC_USB30_PRIM_MASTER_CLK, 0xf010, 1),
+> +       GATE_CLK(GCC_AGGRE_USB3_PRIM_AXI_CLK, 0xf080, 1),
+> +       GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK, 0xf018, 1),
+> +       GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK, 0xf01c, 1),
+> +       GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK, 0xf054, 1),
+> +       GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK, 0xf058, 1),
+> +};
+> +
+> +static int sc7280_enable(struct clk *clk)
+> +{
+> +       struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> +
+> +       if (priv->data->num_clks < clk->id) {
+> +               debug("%s: unknown clk id %lu\n", __func__, clk->id);
+> +               return 0;
+> +       }
+> +
+> +       debug("%s: clk %ld: %s\n", __func__, clk->id, sc7280_clks[clk->id].name);
+> +
+> +       switch (clk->id) {
+> +       case GCC_AGGRE_USB3_PRIM_AXI_CLK:
+> +               qcom_gate_clk_en(priv, GCC_USB30_PRIM_MASTER_CLK);
+> +               fallthrough;
+> +       case GCC_USB30_PRIM_MASTER_CLK:
+> +               qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_AUX_CLK);
+> +               qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_COM_AUX_CLK);
+> +               break;
+> +       }
+> +
+> +       qcom_gate_clk_en(priv, clk->id);
+> +
+> +       return 0;
+> +}
+> +
+> +static const struct qcom_reset_map sc7280_gcc_resets[] = {
+> +       [GCC_PCIE_0_BCR] = { 0x6b000 },
+> +       [GCC_PCIE_0_PHY_BCR] = { 0x6c01c },
+> +       [GCC_PCIE_1_BCR] = { 0x8d000 },
+> +       [GCC_PCIE_1_PHY_BCR] = { 0x8e01c },
+> +       [GCC_QUSB2PHY_PRIM_BCR] = { 0x12000 },
+> +       [GCC_QUSB2PHY_SEC_BCR] = { 0x12004 },
+> +       [GCC_SDCC1_BCR] = { 0x75000 },
+> +       [GCC_SDCC2_BCR] = { 0x14000 },
+> +       [GCC_SDCC4_BCR] = { 0x16000 },
+> +       [GCC_UFS_PHY_BCR] = { 0x77000 },
+> +       [GCC_USB30_PRIM_BCR] = { 0xf000 },
+> +       [GCC_USB30_SEC_BCR] = { 0x9e000 },
+> +       [GCC_USB3_DP_PHY_PRIM_BCR] = { 0x50008 },
+> +       [GCC_USB3_PHY_PRIM_BCR] = { 0x50000 },
+> +       [GCC_USB3PHY_PHY_PRIM_BCR] = { 0x50004 },
+> +       [GCC_USB_PHY_CFG_AHB2PHY_BCR] = { 0x6a000 },
+> +};
+> +
+> +static const struct qcom_power_map sc7280_gdscs[] = {
+> +       [GCC_UFS_PHY_GDSC] = { 0x77004 },
+> +       [GCC_USB30_PRIM_GDSC] = { 0xf004 },
+> +};
+> +
+> +static struct msm_clk_data qcs404_gcc_data = {
+> +       .resets = sc7280_gcc_resets,
+> +       .num_resets = ARRAY_SIZE(sc7280_gcc_resets),
+> +       .clks = sc7280_clks,
+> +       .num_clks = ARRAY_SIZE(sc7280_clks),
+> +
+> +       .power_domains = sc7280_gdscs,
+> +       .num_power_domains = ARRAY_SIZE(sc7280_gdscs),
+> +
+> +       .enable = sc7280_enable,
+> +       .set_rate = sc7280_set_rate,
+> +};
+> +
+> +static const struct udevice_id gcc_sc7280_of_match[] = {
+> +       {
+> +               .compatible = "qcom,gcc-sc7280",
+> +               .data = (ulong)&qcs404_gcc_data,
+> +       },
+> +       { }
+> +};
+> +
+> +U_BOOT_DRIVER(gcc_sc7280) = {
+> +       .name           = "gcc_sc7280",
+> +       .id             = UCLASS_NOP,
+> +       .of_match       = gcc_sc7280_of_match,
+> +       .bind           = qcom_cc_bind,
+> +       .flags          = DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
+> +};
 
-Again, we can clean this up date. It is just one arch doing strange things.
-
-> >
-> > [..]
-> >
-> > > [1] - https://github.com/sughoshg/u-boot/tree/lmb_efi_sep_apis_nrfc_next_v3
-> > > [2] - https://github.com/u-boot/u-boot/commit/077ced7aaa6d495b1b87b324fb1c60658c203ce1
-> > > [3] - https://github.com/u-boot/u-boot/commit/d0fa3a89865b796f3bbebffebbe4f7b5b048c140
-> > >
+This should use driver model, with a UCLASS_CLK and UCLASS_RESET
 
 Regards,
 Simon
