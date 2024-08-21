@@ -4,88 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A43FC52D7C
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 21:34:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87E9DC52D6F
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 21:43:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89FD388E44;
-	Wed, 21 Aug 2024 23:34:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 0829788BD2;
+	Wed, 21 Aug 2024 23:43:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="qOcSCHcM";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BF4088E58; Wed, 21 Aug 2024 23:34:36 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1724276626;
+	bh=9haksfXLMmyx1R3Ir3dMOItRfPQmNZQpzHf4sx7SOdE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=PcPX7cx8MqnXGyeXbjVokyb7+2Wv/Ijm7J21Z76oPB0+T9ARJF3Jf5xkbhlAkYm5e
+	 4eYC8CcJtlf1FbBs59TsKtd4dljlWefazrgGAeHcGMgyR2x4II6Y7EVTFMAfpETwjg
+	 vPmQwuUbcudUwf3KVlab5h7eBWgvOgf3Vv/KUQp0IZXA7hi2pOEXjnV5AWdko5YlQw
+	 W5Yu1WcGKqcxa1lV1N81tx3t5G8UhWlAvHSD80yQN+r+lkKaHvzJ1WZNLkPU7b1ZWi
+	 1RUnfV7iSZfvnyQ9YYes623Sf2RdSlHOHXBZzPqjYWgGTKa2+Q/8MoKMEEQ8wIzSQL
+	 1SaX3fZa4AaRA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A134988E3F
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 23:34:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 612863F2EA
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 21:34:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1724276073;
- bh=mv092WfAePXTDb4wYJd4jrIBztJhs2u88FxTx4Gd/XE=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=qOcSCHcM/30U3NCYlGD4iVw+RGj+K7MXfmD23TcRmd8Rtt+eLZMotNbQ1GHG/q3eE
- TCOqedKi6dhOzwhlCFCg5AXhI1Nz9DviB4NH3tl+5sCtXDw1vNxN25iNraNchn+LrE
- rX7qIJ8zhmYFe1zMYcEMucQpw1lWyRbKTEPcFrzRa21BjCgPdpH94UO29/qPbi4QNi
- 06y5kE4W4yNQXxjbRrM5Z9dFS67Q3hOg5YUMVSefrhfG2cS/F+5laj4OgUhEVHit+z
- 6DOi72QBknpQLEWVRkEyaVAU5dIDgsffJwxzwR3Wli6ZXzNZkaPvbmpQNW2elqJP4F
- VtunYjjVUTqaw==
-Received: by mail-ej1-f72.google.com with SMTP id
- a640c23a62f3a-a868b6d6882so14057166b.1
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 14:34:33 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724276073; x=1724880873;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mv092WfAePXTDb4wYJd4jrIBztJhs2u88FxTx4Gd/XE=;
- b=ZKbnfYe0oSXgsT2G54fYUKZlmdPIqFzsJb/qq5FHB8p3ChcTSDfCLy527/qKMsgTjT
- UDyHQmG7SlAlqK2T/nvEvfjgGKA2hFui091+oJsfDzU4btKEhTv3g7fBjo5mHNs5qIlk
- MCjP8ztV0/eb8Yq7WGx2vUAbhKQvy9xJSrGlD/V9Tpap0ygYiXrDbrg01UCPL4d6NqeI
- N2YuXvgICIz49ACl+5AFWaCEtsceklzey3Bz4DeV4E0F1C69/oiawn5zpgDf9RK/drd4
- KZT1VlWdQ/SkAD7pcP2jzZGhnTfejaJhV3XwF+3bN41uapczAM26YgkRP1omyZa2Nsq2
- GkMg==
-X-Gm-Message-State: AOJu0YwxX70sR9pnRcKYpwT7IFDeRfKNDcs6GFgB1FMcIu+ZEtDevTyU
- z+W/Sxg7OL+ih40P6jjvnQs9IwHddzhUY8zO7A+aUR8CEvwt4Mw31bWjtn5Ry+lgpiPLshxCHQt
- G6xjZI7g37skdQUOgCyMTsfwNeAbsr/NIgejKyg/QkvvVBRPMBL8bIgPNafAuweGlG3ScXB4H99
- E=
-X-Received: by 2002:a17:907:c24:b0:a7a:a2e3:3739 with SMTP id
- a640c23a62f3a-a868a7b6a87mr92190766b.20.1724276072909; 
- Wed, 21 Aug 2024 14:34:32 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGKaNrR5S83D/Dn8rvqwL/sre/yludR+cnP6rn3N8BOYkglw2Iej8OfP560SiFd1K6xcDWU1w==
-X-Received: by 2002:a17:907:c24:b0:a7a:a2e3:3739 with SMTP id
- a640c23a62f3a-a868a7b6a87mr92187966b.20.1724276072045; 
- Wed, 21 Aug 2024 14:34:32 -0700 (PDT)
-Received: from localhost.localdomain
- (dynamic-046-114-198-078.46.114.pool.telefonica.de. [46.114.198.78])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c04a3ca798sm61301a12.32.2024.08.21.14.34.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Aug 2024 14:34:31 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_loader: allow EFI_LOADER_BOUNCE_BUFFER on all
- architectures
-Date: Wed, 21 Aug 2024 23:33:49 +0200
-Message-ID: <20240821213349.256463-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.45.2
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 2D8218785E;
+ Wed, 21 Aug 2024 23:43:44 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1724276624;
+ bh=9haksfXLMmyx1R3Ir3dMOItRfPQmNZQpzHf4sx7SOdE=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=hUgpZ7XSxq2uX2p7uyD1vIlVttk9G/JdizRSPqmifWo+uPjQGnHZKG0P3832Ck8EH
+ qd1iM5W4Kw3SELaqgMuSHS1EY1uLJF4rJCvShjHoKtaOJg2Kk3u0u6i+hEsRNzvUmN
+ sQG6nUzoh8Sayx7PPz5YLadMdJ3i2sk6raUH3eLxrcakt79B5O7DAqtKrua1kLDgpn
+ GRQ13+OiY/AiJBh+sYFu84UhUXR652h7SkK3p1uirNFT4Zeh+mNyWp8FY1yT6f5ADJ
+ Fq2OXWc2/7B0ZkRvAQQFFBWZzZEfI9e/008LezWBg/9swbH3+Z5smh6BdJU1Ijao4Z
+ XB1n1AYOe8uVA==
+Message-ID: <5a1367d7-be94-4c75-9f40-891ca79f9c5b@denx.de>
+Date: Wed, 21 Aug 2024 23:43:43 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] usb: gadget: ether: Disable USB pullup in eth probe
+To: Zixun LI <admin@hifiphile.com>, Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: u-boot@lists.denx.de
+References: <20240821212218.2092540-1-admin@hifiphile.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20240821212218.2092540-1-admin@hifiphile.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,28 +70,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There not only ARM64 boards but also RISC-V boards that require a bounce
-buffer to read block devices.
+On 8/21/24 11:22 PM, Zixun LI wrote:
+> usb_gadget_register_driver() called by probe will initialize the USB
+> controller which enters ready to connect state with pull-up resistor
+> enabled.
+> 
+>>From the host's point of view, a device is ready to be enumerated.
+> However, since dm_usb_gadget_handle_interrupts() is only called when
+> ethernet function is started, at this stage USB events are not managed,
+> host's enumeration attempts will fail and resulting error like:
+>      usb 1-1: new high-speed USB device number 50 using xhci_hcd
+>      usb 1-1: device descriptor read/64, error -110
+>      usb 1-1: device descriptor read/64, error -110
+>      usb usb1-port1: attempt power cycle
+> 
+> Disable USB pullup to prevent unwanted enumeration attempt.
+> 
+> Signed-off-by: Zixun LI <admin@hifiphile.com>
+> ---
+>   drivers/usb/gadget/ether.c | 11 ++++++++++-
+>   1 file changed, 10 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/usb/gadget/ether.c b/drivers/usb/gadget/ether.c
+> index 7973927e8a..c864beeaa7 100644
+> --- a/drivers/usb/gadget/ether.c
+> +++ b/drivers/usb/gadget/ether.c
+> @@ -2459,6 +2459,8 @@ static int usb_eth_probe(struct udevice *dev)
+>   {
+>   	struct ether_priv *priv = dev_get_priv(dev);
+>   	struct eth_pdata *pdata = dev_get_plat(dev);
+> +	struct eth_dev *ethdev = &priv->ethdev;
+> +	int ret;
+> 
+>   	priv->netdev = dev;
+>   	l_priv = priv;
+> @@ -2499,7 +2501,14 @@ static int usb_eth_probe(struct udevice *dev)
+>   	priv->eth_driver.disconnect	= eth_disconnect;
+>   	priv->eth_driver.suspend	= eth_suspend;
+>   	priv->eth_driver.resume		= eth_resume;
+> -	return usb_gadget_register_driver(&priv->eth_driver);
+> +
+> +	ret = usb_gadget_register_driver(&priv->eth_driver);
 
-Drop the architecture restriction.
-
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- lib/efi_loader/Kconfig | 1 -
- 1 file changed, 1 deletion(-)
-
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index 1179c31bb13..6ffefa9103f 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -364,7 +364,6 @@ endif
- 
- config EFI_LOADER_BOUNCE_BUFFER
- 	bool "EFI Applications use bounce buffers for DMA operations"
--	depends on ARM64
- 	help
- 	  Some hardware does not support DMA to full 64bit addresses. For this
- 	  hardware we can create a bounce buffer so that payloads don't have to
--- 
-2.45.2
-
+Wouldn't it be better if usb_gadget_register_driver() started in 
+disconnected state right away ?
