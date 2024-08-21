@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6F01C52D7C
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 13:42:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95003C52D6F
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 13:42:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FCF188DD8;
+	by phobos.denx.de (Postfix) with ESMTP id F1A1E88DBB;
 	Wed, 21 Aug 2024 15:42:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="W/enKPtj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fxhzRRWP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7430788BF6; Wed, 21 Aug 2024 15:42:00 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 5F28288DBF; Wed, 21 Aug 2024 15:42:01 +0200 (CEST)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB78388C7E
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 15:41:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5838488AC0
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 15:41:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-3718706cf8aso4087426f8f.3
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 06:41:57 -0700 (PDT)
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-52efc60a6e6so9447535e87.1
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 06:41:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724247717; x=1724852517; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724247718; x=1724852518; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=zLolcdfhpnv2Sr4+jU2o0ZvxpFWa2r7z1o+vmKY3kNM=;
- b=W/enKPtjbLPpOfXBJ95XWpBN74SHMzSf7YfqzclhQ8DglD54/Ubm8hmtMAJr3dU4oc
- 7QSmg2IojIWCgmF7ZVpPpPipkl0d0NJdhrbZgltHWn6DI5oa5z8H/oPL2qgfxOvi1mol
- GkNDzmOd9DogYJbDxazFLX/yuyObHE0Frbk1+5S+dUC9Mk6TEn/kAnphDP0/pIcoFqNS
- MHhPWfxQj8qNWFF683e2CNpiiQmhvIyxMnx2XDqHqr0sARkmDhEdmDt6/J2uDEpAXIqS
- gfb2ryOgrf0ymsrNXXmgtPBlJ1Nk+WvqQNZ+fFud6rDTMI7k3T6vg9LtuKRk5l0ZeW9z
- 9ukA==
+ :reply-to; bh=cqF2st4G7Whhok3VZo6aDGC//+kV3J+exZKhkiiSLFQ=;
+ b=fxhzRRWPt+qpJciGSAITWCo8l8X60UfTDq85wh8FY7dCx3uklUdpEcoF9mZQvZEARc
+ JdrCoNahI2M7n7uxXFkWNU8HAYP8adAfEIdzL9A74GE5HVYfUWU28+jLirmyAHbts2I/
+ SdPX01laMMuUBZNO1+eQTpYWK/pAO7J5BnazS9JOOedrSlBLeiX74zICTx9l/ogHIvar
+ oyR9/w28as1z3kdFFAACkxGoDrWsz0kGqhEBXGOOnKRQeXi16Wyq/ZOkZwrDs+ZaOCj0
+ Np0K2VryzXH+5acK/T8VFyaO/kiwyVE+oBQ9+t4QRslHCVoK+vniJFjWJmyiLbcrR+VF
+ Ug3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724247717; x=1724852517;
+ d=1e100.net; s=20230601; t=1724247718; x=1724852518;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zLolcdfhpnv2Sr4+jU2o0ZvxpFWa2r7z1o+vmKY3kNM=;
- b=Bk58APruZpAfRV6OKvJFR/r6nSOZTRk1lGotJZ/7Ps1APRn4QEUIEES/nAymFAlsZK
- IuAn5ixOz3aQip+GhlTd5ZX/4G2D90T9SLGu+jKI2zHbc9HfYsLUaLImDouZanKiy3DN
- rSF/DzczN7mNahfl++0WXyuhXE1l5coIb99U116QJ4etTFEC+YvBD2zWg7RpfxE6F2MA
- tu2L+KZX2xor/7JzMfyV/FeFyAo5X53e7JPAVpvXa6vGTXfyZa8kzv4oIa1vTbwsuxLK
- D4AcwfMHj4eyGTilDPHRn292bg79eS+R3MX3EpFEW6J/Zr5fKhsyDSDcjBuR2TYJ7Gcv
- BDrw==
-X-Gm-Message-State: AOJu0YxuxBBsFKKWph/SGz+J1lDRx2i4hMnvb9KUEI3p7sCb122LZSOU
- lTiuOgJUeGU0ryXFmDTRlVFUVDC+WlMh98BjXmGjDc74hcUPn0EuM1QELuQYSNk=
-X-Google-Smtp-Source: AGHT+IFF8AJ5Hu9iRBb/BV7cCxp9j5UJEcpMy4SVnJcq2ijih+8KFAvBMsil1LfJlPGBheg9LAatHw==
-X-Received: by 2002:adf:cc82:0:b0:368:6633:c550 with SMTP id
- ffacd0b85a97d-372fd82f325mr1509038f8f.52.1724247717163; 
- Wed, 21 Aug 2024 06:41:57 -0700 (PDT)
+ bh=cqF2st4G7Whhok3VZo6aDGC//+kV3J+exZKhkiiSLFQ=;
+ b=luGrCmqihUFezhJWv4e5vJ9xNHo14vlaEyeUAxelx59D64ZJJ1t0Wp71nzKQ4MjeF1
+ +a5ZoV7GeqYCdriLcYtSAm+mGfHYq6wqLK7MUxTJJXQiQ+8YNOE8O5jZPRQOnykhrHyv
+ SGgBu95T4t2+iops0PoEG1WJgUFfQdguMeIxCF/3egeF2vbuiLdkag3f/P1oZ+WId9d8
+ CdjoDP22VLYkI737XGw5dPYXjw8n5aElyW4w8a8+s/+LSHr2DqhP6jBRBHoEr96u9caD
+ MD/ZJMxHUIF5HVF49slrJCvxOVaE1BLLfvGg6DsgTGbiJ1R04nnqmP4eIiihjxGfokAz
+ ayDA==
+X-Gm-Message-State: AOJu0YyYd+xZ/CF0vx8K/xUigIplSGcNj9+ZYg92++5jyNrmeP/Dw2mb
+ YdY8603ttFOxzF77F9uZemMCCMk9Yqe06DIg4zk9AmmXVSdjOM16xI4mPU3kNko=
+X-Google-Smtp-Source: AGHT+IEiWiQ2+rnq9ygkkGwKWRO1l7vPXtE6nv9tq+GTkhXNeXOlV9Q+YJri22fWRmcjXR32eVPTAg==
+X-Received: by 2002:a05:6512:696:b0:52e:f77b:bb58 with SMTP id
+ 2adb3069b0e04-5334858e2dbmr1246801e87.36.1724247718271; 
+ Wed, 21 Aug 2024 06:41:58 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::676e])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a83839342f6sm904164066b.137.2024.08.21.06.41.56
+ a640c23a62f3a-a83839342f6sm904164066b.137.2024.08.21.06.41.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Aug 2024 06:41:56 -0700 (PDT)
+ Wed, 21 Aug 2024 06:41:57 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Wed, 21 Aug 2024 15:41:48 +0200
-Subject: [PATCH v2 3/7] dts: qcs6490-rb3gen2-u-boot: USB host mode
+Date: Wed, 21 Aug 2024 15:41:49 +0200
+Subject: [PATCH v2 4/7] iommu: qcom-smmu: add sc7280-smmu-500 compatible
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240821-b4-rb3gen2-v2-3-49b07633f3a8@linaro.org>
+Message-Id: <20240821-b4-rb3gen2-v2-4-49b07633f3a8@linaro.org>
 References: <20240821-b4-rb3gen2-v2-0-49b07633f3a8@linaro.org>
 In-Reply-To: <20240821-b4-rb3gen2-v2-0-49b07633f3a8@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
@@ -79,21 +79,21 @@ To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=955;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=735;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=HTbXxsrMd17GClJdrUxqmv1t42K8cKHfbuWdCzpCB0M=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmxe6djkazDSIeIn+UGkfv2WCzgyN2+Nv9IFp8u
- /7f/kVTNzKJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZsXunQAKCRAFgzErGV9k
- tt0qEACLN54DQLVEpmwhpZIBzCPjtaeMTHKNrVejy201O3Ts9I8BmKyuCQmcJReF8E1oTvhVE2p
- RRdEnopYd86hGyIc6pZZ1tNwmwCxeADAERIygNKEAGK6f6v29CJZt0OMSVRx7emdUn6wDP0/6FQ
- W7zfmxJKZMNp1gEMS80FJSa+PkI148T6WzfmKEfNbENYTwwIwC/e8yqlKXp+joiPv269f/nYbtY
- ZR6mW3re0fvIoCbUjHcIRmu5ZWB92qqfwAiSCLLlajpzIF8iDrDyOYOdb7/TxM5eWZloPwDYHaK
- 0eJde2EIysMA1TJFP8ynVnUe1c4sZxDLB+ZnVUpbvGTvHjguamxfazEZlUmd1kV6m+ilTqAIlUP
- 2v5eY2KUjx+MD8qm5FLgpj6JHDE9jszg3LSETAPwJDk0MICXQoY9HMu03kO8KE62j2HrRwVn7/G
- i1agSOBRJyNDHqTiUh2vYQnwwBPANZPjipnQgPkZ6Ebd98KbzzHr9Dh+kR7eC/caSf0V82YK4G8
- mPCaznXAPS+VNfT+JZQxQz7Axm1O7bWfIuSdLGqVGBRj4+4W3k1PzFWI7S46Vj4qWbpJXuWKl6I
- UlE67yw71FwYzQt6B7xLMSCr2O8bFmlv42AVl6bNjG53CZ8HmBo5AuKrhbdhpLv5HfjWK1j58tW
- Ci+WPJUvj2lPPfg==
+ bh=kxKBScKaYeuETfEZtkdyvgk1CIJk9dkzDtE1GYwaPOI=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmxe6dVYUKBuKYzxniyjNVxYEoPmLImzpJJVKSN
+ fZ8OGllgq+JAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZsXunQAKCRAFgzErGV9k
+ thhHD/sEX0G2aVw1Y8dD02U8Fg111EK/PNvDyUlifhchP/sTDJHxyzWJc0zxsb1FtSosTWlnv1i
+ tgFSLVCLklzMwrcUCZb5Fe/9bWGRL6Uz0dEbDXZohGWagR4SC9MoM/shyb6R7Xm2ywwaR1dBkHM
+ alh2af0YAoJi0TljeQz70GlUCBAyLiLhLD9/V7JDfkdAgUj1R7tGibGbz7plVk1ySD/JUbXLyRD
+ Oj3l66FUGleJAA+KrvbPR5sVcA8Zt+Mak0xp5xyjQ0T8TUNfwJF0VUgWEpiVHWZGPgOgw2OnE5U
+ Iv4mBGteHGHC0WjCdjt/thyn2+QCx/LjPwrBDrsyw6FFyg43yWEmDkEgfCiTDSHMtTMSPLvYbXM
+ b00Egv5OZrrhIGahpHxdd2Ui/6zicLanexZopGSaMu4DnMnhfm7GGdRxNphtP9VMWwgy+vePa+a
+ ghVuG+oIgtIOoEwE/SN2zBpMIxLNuzTi3c80xsxh6uA+5VH9X937eNFlB0fouXJjG27Jo4NSbKL
+ oeSE2rLXYtJ2bCV0ee7E5InyvUsdzHynjewLM0usEvnFHn433yCibXdQ1VjAZJVOJlFwxt85evc
+ Y/3ckT+iau+N7Z8un7Vhsp2FKf/IR5/QGd1NrfOyZuZ4V3ojqtD71Hymz1874HoW492BdpUytut
+ 5WHbOvM4jWAm5dQ==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -112,33 +112,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adjust DTS so USB runs in host mode. The type-c port is the only
-supported port (since the others need PCIe). Booting from USB is
-possible with a powered type-c dock.
+This soc doesn't have the generic compatible.
 
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi | 5 +++++
- 1 file changed, 5 insertions(+)
+ drivers/iommu/qcom-hyp-smmu.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi b/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
-index c3ec4a317f7c..fbe72595f5ac 100644
---- a/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
-+++ b/arch/arm/dts/qcs6490-rb3gen2-u-boot.dtsi
-@@ -16,8 +16,13 @@
- 		      <1 0x00000000 1 0x00000000>;
- 	};
+diff --git a/drivers/iommu/qcom-hyp-smmu.c b/drivers/iommu/qcom-hyp-smmu.c
+index 7b646d840dd4..1b5a09bb7b39 100644
+--- a/drivers/iommu/qcom-hyp-smmu.c
++++ b/drivers/iommu/qcom-hyp-smmu.c
+@@ -380,8 +380,9 @@ static struct iommu_ops qcom_smmu_ops = {
  };
  
-+&usb_1_dwc3 {
-+	dr_mode = "host";
-+	/delete-property/ usb-role-switch;
-+};
-+
- // RAM Entry 0 : Base 0x0080000000  Size 0x003A800000
- // RAM Entry 1 : Base 0x00C0000000  Size 0x0001800000
- // RAM Entry 2 : Base 0x00C3400000  Size 0x003CC00000
- // RAM Entry 3 : Base 0x0100000000  Size 0x0100000000
+ static const struct udevice_id qcom_smmu500_ids[] = {
+ 	{ .compatible = "qcom,sdm845-smmu-500" },
++	{ .compatible = "qcom,sc7280-smmu-500" },
+ 	{ .compatible = "qcom,smmu-500", },
+ 	{ /* sentinel */ }
+ };
+ 
 
 -- 
 2.46.0
