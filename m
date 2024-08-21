@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70DD7C52D7C
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 11:01:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1EBDC52D6F
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 11:01:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8037D88DD4;
-	Wed, 21 Aug 2024 13:00:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E6D4988DBA;
+	Wed, 21 Aug 2024 13:00:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28CCB88DC7; Wed, 21 Aug 2024 13:00:03 +0200 (CEST)
+ id B4A7C88B4C; Wed, 21 Aug 2024 13:00:07 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 71F0088DBA
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 13:00:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 5CC5E88DCF
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 13:00:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F100EDA7;
- Wed, 21 Aug 2024 04:00:25 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CADD9DA7;
+ Wed, 21 Aug 2024 04:00:29 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8AB8B3F73B;
- Wed, 21 Aug 2024 03:59:56 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6A1ED3F73B;
+ Wed, 21 Aug 2024 04:00:00 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
@@ -36,10 +36,9 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  Patrice CHOTARD <patrice.chotard@foss.st.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v3 16/27] ppc: lmb: move arch specific lmb reservations to
- arch_misc_init()
-Date: Wed, 21 Aug 2024 16:28:28 +0530
-Message-Id: <20240821105839.2870293-17-sughosh.ganu@linaro.org>
+Subject: [PATCH v3 17/27] lmb: do away with arch_lmb_reserve()
+Date: Wed, 21 Aug 2024 16:28:29 +0530
+Message-Id: <20240821105839.2870293-18-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240821105839.2870293-1-sughosh.ganu@linaro.org>
 References: <20240821105839.2870293-1-sughosh.ganu@linaro.org>
@@ -61,210 +60,467 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-All the current function definitions of arch_lmb_reserve() are doing
-the same thing -- reserve the U-Boot memory region. The powerpc(ppc)
-architecture, in addition, is making some LMB reservations for the
-bootm related image loading. Move these ppc specific reservations to
-the arch_misc_init() function. This allows to move the U-Boot memory
-region reservation to a different function, and remove
-arch_lmb_reserve() in a subsequent commit.
+All of the current definitions of arch_lmb_reserve() are doing the
+same thing -- reserve the region of memory occupied by U-Boot,
+starting from the current stack address to the ram_top. Introduce a
+function lmb_reserve_uboot_region() which does this, and do away with
+the arch_lmb_reserve() function.
+
+Instead of using the current value of stack pointer for starting the
+reserved region, have a fixed value, considering the stack size config
+value.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
-Changes since V2: New patch
+Changes since V2:
+* Remove the definitions of arch_lmb_reserve() and
+  arch_lmb_reserve_generic() functions.
+* Introduce a new function lmb_reserve_uboot_region() and call it from
+  lmb_reserve_common().
 
- arch/powerpc/cpu/mpc85xx/cpu_init.c | 16 --------
- arch/powerpc/lib/Makefile           |  1 +
- arch/powerpc/lib/bootm.c            | 40 -------------------
- arch/powerpc/lib/misc.c             | 62 +++++++++++++++++++++++++++++
- lib/Kconfig                         |  1 +
- 5 files changed, 64 insertions(+), 56 deletions(-)
- create mode 100644 arch/powerpc/lib/misc.c
+ arch/arc/lib/cache.c        | 14 -------
+ arch/arm/lib/stack.c        | 14 -------
+ arch/m68k/lib/bootm.c       | 17 --------
+ arch/microblaze/lib/bootm.c | 14 -------
+ arch/mips/lib/bootm.c       | 15 -------
+ arch/nios2/lib/bootm.c      | 13 ------
+ arch/powerpc/lib/bootm.c    |  9 ----
+ arch/riscv/lib/bootm.c      | 13 ------
+ arch/sh/lib/bootm.c         | 13 ------
+ arch/x86/lib/bootm.c        | 18 --------
+ arch/xtensa/lib/bootm.c     | 13 ------
+ include/lmb.h               |  2 -
+ lib/lmb.c                   | 83 ++++++++++++++++++-------------------
+ 13 files changed, 41 insertions(+), 197 deletions(-)
 
-diff --git a/arch/powerpc/cpu/mpc85xx/cpu_init.c b/arch/powerpc/cpu/mpc85xx/cpu_init.c
-index a7b805bc67..739d14f800 100644
---- a/arch/powerpc/cpu/mpc85xx/cpu_init.c
-+++ b/arch/powerpc/cpu/mpc85xx/cpu_init.c
-@@ -940,22 +940,6 @@ int cpu_init_r(void)
- 	return 0;
- }
+diff --git a/arch/arc/lib/cache.c b/arch/arc/lib/cache.c
+index 5151af917a..5169fc627f 100644
+--- a/arch/arc/lib/cache.c
++++ b/arch/arc/lib/cache.c
+@@ -10,7 +10,6 @@
+ #include <linux/compiler.h>
+ #include <linux/kernel.h>
+ #include <linux/log2.h>
+-#include <lmb.h>
+ #include <asm/arcregs.h>
+ #include <asm/arc-bcr.h>
+ #include <asm/cache.h>
+@@ -820,16 +819,3 @@ void sync_n_cleanup_cache_all(void)
  
--#ifdef CONFIG_ARCH_MISC_INIT
--int arch_misc_init(void)
+ 	__ic_entire_invalidate();
+ }
+-
+-static ulong get_sp(void)
 -{
--	if (IS_ENABLED(CONFIG_FSL_CAAM)) {
--		struct udevice *dev;
--		int ret;
+-	ulong ret;
 -
--		ret = uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(caam_jr), &dev);
--		if (ret)
--			printf("Failed to initialize caam_jr: %d\n", ret);
--	}
--
--	return 0;
+-	asm("mov %0, sp" : "=r"(ret) : );
+-	return ret;
 -}
--#endif
 -
- void arch_preboot_os(void)
- {
- 	u32 msr;
-diff --git a/arch/powerpc/lib/Makefile b/arch/powerpc/lib/Makefile
-index bb819dcbb6..ecc2aba8f3 100644
---- a/arch/powerpc/lib/Makefile
-+++ b/arch/powerpc/lib/Makefile
-@@ -39,6 +39,7 @@ obj-y	+= cache.o
- obj-y	+= extable.o
- obj-y	+= interrupts.o
- obj-$(CONFIG_CMD_KGDB) += kgdb.o
-+obj-y	+= misc.o
- obj-y	+= stack.o
- obj-y	+= time.o
- obj-y	+= traps.o
-diff --git a/arch/powerpc/lib/bootm.c b/arch/powerpc/lib/bootm.c
-index 6c35664ff3..5402e0bb35 100644
---- a/arch/powerpc/lib/bootm.c
-+++ b/arch/powerpc/lib/bootm.c
-@@ -12,7 +12,6 @@
- #include <cpu_func.h>
- #include <env.h>
+-void arch_lmb_reserve(void)
+-{
+-	arch_lmb_reserve_generic(get_sp(), gd->ram_top, 4096);
+-}
+diff --git a/arch/arm/lib/stack.c b/arch/arm/lib/stack.c
+index 87d5c962d7..2b21ec0734 100644
+--- a/arch/arm/lib/stack.c
++++ b/arch/arm/lib/stack.c
+@@ -11,7 +11,6 @@
+  * Marius Groeger <mgroeger@sysgo.de>
+  */
  #include <init.h>
 -#include <lmb.h>
- #include <log.h>
- #include <watchdog.h>
- #include <command.h>
-@@ -41,10 +40,6 @@ static ulong get_sp (void);
- extern void ft_fixup_num_cores(void *blob);
- static void set_clocks_in_mhz (struct bd_info *kbd);
+ #include <asm/global_data.h>
  
--#ifndef CFG_SYS_LINUX_LOWMEM_MAX_SIZE
--#define CFG_SYS_LINUX_LOWMEM_MAX_SIZE	(768*1024*1024)
--#endif
--
- static void boot_jump_linux(struct bootm_headers *images)
- {
- 	void	(*kernel)(struct bd_info *, ulong r4, ulong r5, ulong r6,
-@@ -116,41 +111,6 @@ static void boot_jump_linux(struct bootm_headers *images)
- 	return;
+ DECLARE_GLOBAL_DATA_PTR;
+@@ -33,16 +32,3 @@ int arch_reserve_stacks(void)
+ 
+ 	return 0;
  }
+-
+-static ulong get_sp(void)
+-{
+-	ulong ret;
+-
+-	asm("mov %0, sp" : "=r"(ret) : );
+-	return ret;
+-}
+-
+-void arch_lmb_reserve(void)
+-{
+-	arch_lmb_reserve_generic(get_sp(), gd->ram_top, 16384);
+-}
+diff --git a/arch/m68k/lib/bootm.c b/arch/m68k/lib/bootm.c
+index eb220d178d..06854e1442 100644
+--- a/arch/m68k/lib/bootm.c
++++ b/arch/m68k/lib/bootm.c
+@@ -9,7 +9,6 @@
+ #include <command.h>
+ #include <env.h>
+ #include <image.h>
+-#include <lmb.h>
+ #include <log.h>
+ #include <asm/global_data.h>
+ #include <u-boot/zlib.h>
+@@ -27,14 +26,8 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define LINUX_MAX_ENVS		256
+ #define LINUX_MAX_ARGS		256
+ 
+-static ulong get_sp (void);
+ static void set_clocks_in_mhz (struct bd_info *kbd);
  
 -void arch_lmb_reserve(void)
 -{
--	phys_size_t bootm_size;
--	ulong size, bootmap_base;
--
--	bootmap_base = env_get_bootm_low();
--	bootm_size = env_get_bootm_size();
--
--#ifdef DEBUG
--	if (((u64)bootmap_base + bootm_size) >
--	    (CFG_SYS_SDRAM_BASE + (u64)gd->ram_size))
--		puts("WARNING: bootm_low + bootm_size exceed total memory\n");
--	if ((bootmap_base + bootm_size) > get_effective_memsize())
--		puts("WARNING: bootm_low + bootm_size exceed eff. memory\n");
--#endif
--
--	size = min(bootm_size, get_effective_memsize());
--	size = min(size, (ulong)CFG_SYS_LINUX_LOWMEM_MAX_SIZE);
--
--	if (size < bootm_size) {
--		ulong base = bootmap_base + size;
--		printf("WARNING: adjusting available memory from 0x%lx to 0x%llx\n",
--		       size, (unsigned long long)bootm_size);
--		lmb_reserve(base, bootm_size - size);
--	}
--
--	arch_lmb_reserve_generic(get_sp(), gd->ram_top, 4096);
--
--#ifdef CONFIG_MP
--	cpu_mp_lmb_reserve();
--#endif
--
--	return;
+-	arch_lmb_reserve_generic(get_sp(), gd->ram_top, 1024);
 -}
 -
- static void boot_prep_linux(struct bootm_headers *images)
+ int do_bootm_linux(int flag, struct bootm_info *bmi)
  {
- #ifdef CONFIG_MP
-diff --git a/arch/powerpc/lib/misc.c b/arch/powerpc/lib/misc.c
-new file mode 100644
-index 0000000000..0ea9ab1358
---- /dev/null
-+++ b/arch/powerpc/lib/misc.c
-@@ -0,0 +1,62 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * (C) Copyright 2024 Linaro Ltd.
-+ */
-+
-+#include <image.h>
-+#include <init.h>
-+#include <lmb.h>
-+
-+#include <asm/mp.h>
-+#include <dm/device.h>
-+#include <dm/uclass.h>
-+
-+
-+#ifndef CFG_SYS_LINUX_LOWMEM_MAX_SIZE
-+#define CFG_SYS_LINUX_LOWMEM_MAX_SIZE	(768*1024*1024)
-+#endif
-+
-+int arch_misc_init(void)
+ 	struct bootm_headers *images = bmi->images;
+@@ -88,16 +81,6 @@ error:
+ 	return 1;
+ }
+ 
+-static ulong get_sp (void)
+-{
+-	ulong sp;
+-
+-	asm("movel %%a7, %%d0\n"
+-	    "movel %%d0, %0\n": "=d"(sp): :"%d0");
+-
+-	return sp;
+-}
+-
+ static void set_clocks_in_mhz (struct bd_info *kbd)
+ {
+ 	char *s;
+diff --git a/arch/microblaze/lib/bootm.c b/arch/microblaze/lib/bootm.c
+index ce96bca28f..4879a41aab 100644
+--- a/arch/microblaze/lib/bootm.c
++++ b/arch/microblaze/lib/bootm.c
+@@ -15,7 +15,6 @@
+ #include <fdt_support.h>
+ #include <hang.h>
+ #include <image.h>
+-#include <lmb.h>
+ #include <log.h>
+ #include <asm/cache.h>
+ #include <asm/global_data.h>
+@@ -24,19 +23,6 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+-static ulong get_sp(void)
+-{
+-	ulong ret;
+-
+-	asm("addik %0, r1, 0" : "=r"(ret) : );
+-	return ret;
+-}
+-
+-void arch_lmb_reserve(void)
+-{
+-	arch_lmb_reserve_generic(get_sp(), gd->ram_top, 4096);
+-}
+-
+ static void boot_jump_linux(struct bootm_headers *images, int flag)
+ {
+ 	void (*thekernel)(char *cmdline, ulong rd, ulong dt);
+diff --git a/arch/mips/lib/bootm.c b/arch/mips/lib/bootm.c
+index 8fb3a3923f..8719510002 100644
+--- a/arch/mips/lib/bootm.c
++++ b/arch/mips/lib/bootm.c
+@@ -9,7 +9,6 @@
+ #include <env.h>
+ #include <image.h>
+ #include <fdt_support.h>
+-#include <lmb.h>
+ #include <log.h>
+ #include <asm/addrspace.h>
+ #include <asm/global_data.h>
+@@ -28,20 +27,6 @@ static char **linux_env;
+ static char *linux_env_p;
+ static int linux_env_idx;
+ 
+-static ulong arch_get_sp(void)
+-{
+-	ulong ret;
+-
+-	__asm__ __volatile__("move %0, $sp" : "=r"(ret) : );
+-
+-	return ret;
+-}
+-
+-void arch_lmb_reserve(void)
+-{
+-	arch_lmb_reserve_generic(arch_get_sp(), gd->ram_top, 4096);
+-}
+-
+ static void linux_cmdline_init(void)
+ {
+ 	linux_argc = 1;
+diff --git a/arch/nios2/lib/bootm.c b/arch/nios2/lib/bootm.c
+index d33d45d28f..71319839ba 100644
+--- a/arch/nios2/lib/bootm.c
++++ b/arch/nios2/lib/bootm.c
+@@ -64,16 +64,3 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
+ 
+ 	return 1;
+ }
+-
+-static ulong get_sp(void)
+-{
+-	ulong ret;
+-
+-	asm("mov %0, sp" : "=r"(ret) : );
+-	return ret;
+-}
+-
+-void arch_lmb_reserve(void)
+-{
+-	arch_lmb_reserve_generic(get_sp(), gd->ram_top, 4096);
+-}
+diff --git a/arch/powerpc/lib/bootm.c b/arch/powerpc/lib/bootm.c
+index 5402e0bb35..4375d80154 100644
+--- a/arch/powerpc/lib/bootm.c
++++ b/arch/powerpc/lib/bootm.c
+@@ -36,7 +36,6 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+-static ulong get_sp (void);
+ extern void ft_fixup_num_cores(void *blob);
+ static void set_clocks_in_mhz (struct bd_info *kbd);
+ 
+@@ -210,14 +209,6 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
+ 	return 0;
+ }
+ 
+-static ulong get_sp (void)
+-{
+-	ulong sp;
+-
+-	asm( "mr %0,1": "=r"(sp) : );
+-	return sp;
+-}
+-
+ static void set_clocks_in_mhz (struct bd_info *kbd)
+ {
+ 	char	*s;
+diff --git a/arch/riscv/lib/bootm.c b/arch/riscv/lib/bootm.c
+index bbf62f9e05..82502972ee 100644
+--- a/arch/riscv/lib/bootm.c
++++ b/arch/riscv/lib/bootm.c
+@@ -133,16 +133,3 @@ int do_bootm_vxworks(int flag, struct bootm_info *bmi)
+ {
+ 	return do_bootm_linux(flag, bmi);
+ }
+-
+-static ulong get_sp(void)
+-{
+-	ulong ret;
+-
+-	asm("mv %0, sp" : "=r"(ret) : );
+-	return ret;
+-}
+-
+-void arch_lmb_reserve(void)
+-{
+-	arch_lmb_reserve_generic(get_sp(), gd->ram_top, 4096);
+-}
+diff --git a/arch/sh/lib/bootm.c b/arch/sh/lib/bootm.c
+index 44ac05988c..bb0f59e0aa 100644
+--- a/arch/sh/lib/bootm.c
++++ b/arch/sh/lib/bootm.c
+@@ -101,16 +101,3 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
+ 	/* does not return */
+ 	return 1;
+ }
+-
+-static ulong get_sp(void)
+-{
+-	ulong ret;
+-
+-	asm("mov r15, %0" : "=r"(ret) : );
+-	return ret;
+-}
+-
+-void arch_lmb_reserve(void)
+-{
+-	arch_lmb_reserve_generic(get_sp(), gd->ram_top, 4096);
+-}
+diff --git a/arch/x86/lib/bootm.c b/arch/x86/lib/bootm.c
+index 114b31012e..55f581836d 100644
+--- a/arch/x86/lib/bootm.c
++++ b/arch/x86/lib/bootm.c
+@@ -253,21 +253,3 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
+ 
+ 	return boot_jump_linux(images);
+ }
+-
+-static ulong get_sp(void)
+-{
+-	ulong ret;
+-
+-#if CONFIG_IS_ENABLED(X86_64)
+-	asm("mov %%rsp, %0" : "=r"(ret) : );
+-#else
+-	asm("mov %%esp, %0" : "=r"(ret) : );
+-#endif
+-
+-	return ret;
+-}
+-
+-void arch_lmb_reserve(void)
+-{
+-	arch_lmb_reserve_generic(get_sp(), gd->ram_top, 4096);
+-}
+diff --git a/arch/xtensa/lib/bootm.c b/arch/xtensa/lib/bootm.c
+index bdbd6d4692..2958f20739 100644
+--- a/arch/xtensa/lib/bootm.c
++++ b/arch/xtensa/lib/bootm.c
+@@ -197,16 +197,3 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
+ 
+ 	return 1;
+ }
+-
+-static ulong get_sp(void)
+-{
+-	ulong ret;
+-
+-	asm("mov %0, a1" : "=r"(ret) : );
+-	return ret;
+-}
+-
+-void arch_lmb_reserve(void)
+-{
+-	arch_lmb_reserve_generic(get_sp(), gd->ram_top, 4096);
+-}
+diff --git a/include/lmb.h b/include/lmb.h
+index e6c6f1cdcd..6e435bd35c 100644
+--- a/include/lmb.h
++++ b/include/lmb.h
+@@ -108,8 +108,6 @@ void lmb_dump_all(void);
+ void lmb_dump_all_force(void);
+ 
+ void board_lmb_reserve(void);
+-void arch_lmb_reserve(void);
+-void arch_lmb_reserve_generic(ulong sp, ulong end, ulong align);
+ 
+ #if CONFIG_IS_ENABLED(UNIT_TEST)
+ struct lmb *lmb_get(void);
+diff --git a/lib/lmb.c b/lib/lmb.c
+index e26e329248..1116b2b868 100644
+--- a/lib/lmb.c
++++ b/lib/lmb.c
+@@ -147,42 +147,6 @@ static void lmb_fix_over_lap_regions(struct alist *lmb_rgn_lst,
+ 	lmb_remove_region(lmb_rgn_lst, r2);
+ }
+ 
+-void arch_lmb_reserve_generic(ulong sp, ulong end, ulong align)
+-{
+-	ulong bank_end;
+-	int bank;
+-
+-	/*
+-	 * Reserve memory from aligned address below the bottom of U-Boot stack
+-	 * until end of U-Boot area using LMB to prevent U-Boot from overwriting
+-	 * that memory.
+-	 */
+-	debug("## Current stack ends at 0x%08lx ", sp);
+-
+-	/* adjust sp by 4K to be safe */
+-	sp -= align;
+-	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
+-		if (!gd->bd->bi_dram[bank].size ||
+-		    sp < gd->bd->bi_dram[bank].start)
+-			continue;
+-		/* Watch out for RAM at end of address space! */
+-		bank_end = gd->bd->bi_dram[bank].start +
+-			gd->bd->bi_dram[bank].size - 1;
+-		if (sp > bank_end)
+-			continue;
+-		if (bank_end > end)
+-			bank_end = end - 1;
+-
+-		lmb_reserve_flags(sp, bank_end - sp + 1, LMB_NOOVERWRITE);
+-
+-		if (gd->flags & GD_FLG_SKIP_RELOC)
+-			lmb_reserve_flags((phys_addr_t)(uintptr_t)_start,
+-				    gd->mon_len, LMB_NOOVERWRITE);
+-
+-		break;
+-	}
+-}
+-
+ /**
+  * efi_lmb_reserve() - add reservations for EFI memory
+  *
+@@ -215,10 +179,50 @@ static __maybe_unused int efi_lmb_reserve(void)
+ 	return 0;
+ }
+ 
++static void lmb_reserve_uboot_region(void)
 +{
-+	if (CONFIG_IS_ENABLED(CMD_BOOTM)) {
-+		phys_size_t bootm_size;
-+		ulong size, bootmap_base;
++	int bank;
++	ulong end, bank_end;
++	phys_addr_t rsv_start;
 +
-+		bootmap_base = env_get_bootm_low();
-+		bootm_size = env_get_bootm_size();
++	rsv_start = gd->start_addr_sp - CONFIG_STACK_SIZE;
++	end = gd->ram_top;
 +
-+#ifdef DEBUG
-+		if (((u64)bootmap_base + bootm_size) >
-+		    (CFG_SYS_SDRAM_BASE + (u64)gd->ram_size))
-+			puts("WARNING: bootm_low + bootm_size exceed total memory\n");
-+		if ((bootmap_base + bootm_size) > get_effective_memsize())
-+			puts("WARNING: bootm_low + bootm_size exceed eff. memory\n");
-+#endif
++	/*
++	 * Reserve memory from aligned address below the bottom of U-Boot stack
++	 * until end of RAM area to prevent LMB from overwriting that memory.
++	 */
++	debug("## Current stack ends at 0x%08lx ", (ulong)rsv_start);
 +
-+		size = min(bootm_size, get_effective_memsize());
-+		size = min(size, (ulong)CFG_SYS_LINUX_LOWMEM_MAX_SIZE);
++	/* adjust sp by 4K to be safe */
++	rsv_start -= 16384;
++	for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
++		if (!gd->bd->bi_dram[bank].size ||
++		    rsv_start < gd->bd->bi_dram[bank].start)
++			continue;
++		/* Watch out for RAM at end of address space! */
++		bank_end = gd->bd->bi_dram[bank].start +
++			gd->bd->bi_dram[bank].size - 1;
++		if (rsv_start > bank_end)
++			continue;
++		if (bank_end > end)
++			bank_end = end - 1;
 +
-+		if (size < bootm_size) {
-+			ulong base = bootmap_base + size;
-+			printf("WARNING: adjusting available memory from 0x%lx to 0x%llx\n",
-+			       size, (unsigned long long)bootm_size);
-+			lmb_reserve(base, bootm_size - size);
-+		}
++		lmb_reserve_flags(rsv_start, bank_end - rsv_start + 1,
++				  LMB_NOOVERWRITE);
 +
-+#ifdef CONFIG_MP
-+		cpu_mp_lmb_reserve();
-+#endif
++		if (gd->flags & GD_FLG_SKIP_RELOC)
++			lmb_reserve_flags((phys_addr_t)(uintptr_t)_start,
++				    gd->mon_len, LMB_NOOVERWRITE);
++
++		break;
 +	}
-+
-+	if (IS_ENABLED(CONFIG_FSL_CAAM)) {
-+		struct udevice *dev;
-+		int ret;
-+
-+		ret = uclass_get_device_by_driver(UCLASS_MISC,
-+						  DM_DRIVER_GET(caam_jr), &dev);
-+		if (ret)
-+			printf("Failed to initialize caam_jr: %d\n", ret);
-+	}
-+
-+	return 0;
 +}
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 6a9338390a..e352b5550a 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -1102,6 +1102,7 @@ config LMB
- 	bool "Enable the logical memory blocks library (lmb)"
- 	default y if ARC || ARM || M68K || MICROBLAZE || MIPS || \
- 		     NIOS2 || PPC || RISCV || SANDBOX || SH || X86 || XTENSA
-+	select ARCH_MISC_INIT if PPC
- 	help
- 	  Support the library logical memory blocks. This will require
- 	  a malloc() implementation for defining the data structures
++
+ static void lmb_reserve_common(void *fdt_blob)
+ {
+-	arch_lmb_reserve();
+ 	board_lmb_reserve();
++	lmb_reserve_uboot_region();
+ 
+ 	if (CONFIG_IS_ENABLED(OF_LIBFDT) && fdt_blob)
+ 		boot_fdt_add_mem_rsv_regions(fdt_blob);
+@@ -689,11 +693,6 @@ __weak void board_lmb_reserve(void)
+ 	/* please define platform specific board_lmb_reserve() */
+ }
+ 
+-__weak void arch_lmb_reserve(void)
+-{
+-	/* please define platform specific arch_lmb_reserve() */
+-}
+-
+ static int lmb_setup(void)
+ {
+ 	bool ret;
 -- 
 2.34.1
 
