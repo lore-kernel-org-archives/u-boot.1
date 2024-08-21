@@ -4,163 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A99AC52D7C
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 08:19:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A657AC52D7C
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 08:33:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDD5A88B52;
-	Wed, 21 Aug 2024 10:19:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id A8E9A88B68;
+	Wed, 21 Aug 2024 10:33:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="A6Cl4N6G";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A33A88B9F; Wed, 21 Aug 2024 10:19:53 +0200 (CEST)
-Received: from EUR03-AM7-obe.outbound.protection.outlook.com
- (mail-am7eur03on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260e::600])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1724229205;
+	bh=3w1OLKdrPZHvtFQtFF+jAk7qCug0RbyQgJnqrd9R/e8=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=WhK2JtmOt8qn8Yif/Web7a8+vSKuSYbLXKUZCjmFo26sj8/c0LtLCv0Lnn/GNpFhm
+	 aY0JgUKYuJy7qUdv8L6JlSC7SnDCJyMZuc2d0rmiAJlzQIs9pULeGRdLhykhKOPVYY
+	 B0LGxWT37yc3wirId51ur1LuMmt2b6bf6lUSW0Bo1yhpKJXCiy+1ygQLA8243zR6QQ
+	 sRAXjjlUe8RK/2WCYAHpjVm5uBga9YRGuVOkgks3LvfQUx5zVLmzKxNz0BjWWOLcRT
+	 H+cHD0ZioGCoOMZN+11M5HnLoJI929A8Sz7yfldCGLLpAx5GbCx16ZxyN+wnsc+M1Z
+	 q2h8bPivDjW1w==
+Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0FF588B4C
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 10:19:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=s1ftDKZkQcgP2pz1HrZXz2FozkBVi2Q3itUG6byrKzGkhOU3IhLoGGRpNbDPFc/LW+FXKEzhbszRmEvr3HfSPCa5j0uZaCfQrs/WuOJfk1NvrSzZ82NFcRLFxvzKGu/e60u57uZdRaGkv5NZuWR2u4d8gI5vw0MqkQbHMeCrkGmLC64WstTgMJY+9qx/f0xpnM1ZpP86YoxZzlHWGcs0L5xfAuEiEV9V5JK5kwdTUzB9Mulf9RcqxyFZr0RRVZb9rwhmCpdiNcZxwTFqrBu9nq3lT/dmHGbaeA+0ddThFlwdYAdH7fvxl9Stdm4I/W0qz0xK4FS8apm4P2zWr+ogyg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xrrLzJnu+GvDBMhLmCNxHHk2dPP18mZdLkVFeoCP098=;
- b=iy7PWa7/iB+4F8CiqjZCCqtSC2gD//IDqsA5Bw3contI2v/i7O70ryQcP3pTyi5nHflstF86p496tAyMhdB8eyFnGn8hqFIb+6x30DWMg7JpqhsjaXI9fCEhH6sbRgNoLsomkT1jRwsM5g9nXbvKH4VVqaWGnr8idkUWlZrVRHNF19kejkeHqHehP8/sN7nAtarZJ2l7qaUGLfggc6sw+Fh7Ev8IDvxdyGJ1kCDSAorvy/giiBvwNhVgOLrZalXwtDBeV/tWj9g1vZ0TUsRo0eA8N80pX3foTIb6V1TaPrPlN2Ag3tOav+uh3ZytCif0j/Am1uQ3qqd4mtSGTVhaRw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xrrLzJnu+GvDBMhLmCNxHHk2dPP18mZdLkVFeoCP098=;
- b=A6Cl4N6G0qg9v+aZMz2/8csIK/ygbU4VVuw4wVOgxRTVCxfXkYy3NrUzk6inl6AyZ9+zNk3qArc5XzE4AtLs907K+ZfEjhk2KLFzMJsAmmI2LswgcpdrcksHqr6FxjbxCDe2ue+Jqj6HDNaFFPii6dnqB0maDNsB/NX1IHQ9TU0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by GVXPR04MB9901.eurprd04.prod.outlook.com (2603:10a6:150:113::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7897.18; Wed, 21 Aug
- 2024 08:19:49 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%5]) with mapi id 15.20.7875.019; Wed, 21 Aug 2024
- 08:19:49 +0000
-Message-ID: <5b8e78ff-2a72-4af0-a286-065f312cbb8f@cherry.de>
-Date: Wed, 21 Aug 2024 10:19:48 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: clarifying i2c_get_chip_for_busnum()
-To: Simon Glass <sjg@chromium.org>
-Cc: Sahaj Sarup <sahaj.sarup@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <CAKZ1LvNcW7y0SnHwye98m1UrL53cqsErtKjFbGp0z+doiU+9aw@mail.gmail.com>
- <77a23ada-f1c2-4542-a4c3-55c71a1cc49b@cherry.de>
- <CAKZ1LvPSLRZJ0HnUtSvwOMw5ax-Vre_m94MaDrfhYmKYK_0KGg@mail.gmail.com>
- <6bc0ccf4-66ef-467c-a3f2-e39d3d54f7cd@cherry.de>
- <CAFLszTggctZ-iRj0PS7zgCbUM8y3VUGky4aheg0HGw4RQvUsOQ@mail.gmail.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <CAFLszTggctZ-iRj0PS7zgCbUM8y3VUGky4aheg0HGw4RQvUsOQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BE1P281CA0131.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:7a::8) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ (Authenticated sender: lukma@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id B49D388B4C;
+ Wed, 21 Aug 2024 10:33:24 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1724229205;
+ bh=3w1OLKdrPZHvtFQtFF+jAk7qCug0RbyQgJnqrd9R/e8=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=w5qxHTZAYmTpzTIHFN8C+ZTfSEoTKToQ/wJ0lPswFi3JFSafDj0WH+oxrVwSeNJhW
+ +4tihyWAlva96EoEYjmMUnQrpmms8lL78WKnEPOO8SU8PU0zUfo/tKDFllTmYB6uVw
+ 3MbPXeJ2xQ2Nf9QhAyDgJBiD/ebH/XxU/nZIr+6xuXHzK8c1o2Sz6GuHv6bZoxBLqi
+ 1CbpkV1cdznlfP6KZTuKBaPN3hI5m/GYjmcA7QRxW0ZXLcuJc4gjh0fTiYKBWL95RJ
+ uR567rjsTybr5i1+/6XclPLMpF8YzL6IfyOb6cAMFhUiIUzw+JHHJpsoz1QjhKRIU2
+ uBSmgI55k4dzw==
+Date: Wed, 21 Aug 2024 10:33:23 +0200
+From: Lukasz Majewski <lukma@denx.de>
+To: Teresa Remmet <T.Remmet@phytec.de>
+Cc: "festevam@gmail.com" <festevam@gmail.com>, "sbabic@denx.de"
+ <sbabic@denx.de>, "trini@konsulko.com" <trini@konsulko.com>,
+ "uboot-imx@nxp.com" <uboot-imx@nxp.com>, "marcel.ziswiler@toradex.com"
+ <marcel.ziswiler@toradex.com>, Cem Tenruh <C.Tenruh@phytec.de>, Yannic Moog
+ <Y.Moog@phytec.de>, Benjamin Hahn <B.Hahn@phytec.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH] config: imx: Add PHYTEC's phycore-imx8mm-fspi_defconfig
+Message-ID: <20240821103323.240527ab@wsk>
+In-Reply-To: <951f63db0af4f3a8072e49009cd7a3336d90736c.camel@phytec.de>
+References: <20240815084012.477436-1-lukma@denx.de>
+ <951f63db0af4f3a8072e49009cd7a3336d90736c.camel@phytec.de>
+Organization: denx.de
+X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|GVXPR04MB9901:EE_
-X-MS-Office365-Filtering-Correlation-Id: 524ab5b3-a93f-44dd-1f8c-08dcc1ba065f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?QnMzUzhWWlBTRlU2OUkvcFAzcWxVTThzTnZxblBlTC9JOXdTVHRHY2FhRzUz?=
- =?utf-8?B?VGJlTTAweHdTRksrclZuOUljeXhadi9uZEV2ZDk1MTI0bzdMZnZVa3EzSWJz?=
- =?utf-8?B?Zk1FVURqdndCaEFWaERORTl2NWg2Q1F0VS9ZakZZR0tEK1JjNERQOGZCY0dT?=
- =?utf-8?B?ajJTeC9VTDM4ZXU5L2gxUjYwVXJIbk1OdWc0WmV4TmpnYXM2Nzd3QUJrMnJK?=
- =?utf-8?B?SEFyN0lGSFFVdit1R2REU0MrTXVCeWtjeGdiS1NCUmVmdFhvY3JCcVNmNlZr?=
- =?utf-8?B?NFhSMWViaWFFQ3JoeHptUzEzMlBPM2lxenRsdVU4OWRDcGcySFR0dUVLQk1z?=
- =?utf-8?B?VXJXaUU3WFdZUXo3bHJVeHhFaXQrVGNzMlVXOEI3S2V5NjJQc1pjdEhoZm9n?=
- =?utf-8?B?TVA5eTlrOGlGR0JGUDV1MzVqUHBJekZoWm0zQXlFMmI5dUw5VU9BTnphWERD?=
- =?utf-8?B?cER5VS9YSGVNTy81WXV6azV1MStvTEpjUzBiNk5JMmdpbjRFWXBkVitsU3R4?=
- =?utf-8?B?bFdWQml6OE5tTlM2RFV4amN5TldhK3NaZTB3Wk1Zd0JhVlBMRjZyUUxTdGtx?=
- =?utf-8?B?M3pmNjVZZjBPNmR1bEVEaXlwaTVHSHlMOG1FdTZJcC82VGJ4NS84WElyaG9N?=
- =?utf-8?B?WndhTk1wT3kxMDdJUmZEaXd3aldPbngvc0xWeE84cERMWnl4ajBKcVhycEtj?=
- =?utf-8?B?U0hnVmtrL0YxVWVmaWRoZ0NXR1plL0NqTVAxRXFvRmJValRXRG9uWDhZVmlN?=
- =?utf-8?B?OUtFbU1nL0xHZEp2T1JVMUpCMUJLRUJyVG90b3IwVGVKSnJVWk43N2tvR0pk?=
- =?utf-8?B?NGVLUTNZKy84dFB5QjNuandMa2dZeUE2MG5ZVko4SDMrVkFzQmtSRTN1VUh0?=
- =?utf-8?B?d2lzUXd2cGlVOS9ETlVrZkVYaDlsSnh0RzdHUEZ6ZVlMVHE2ekhzSGhDRHhO?=
- =?utf-8?B?M1o0OFFKTzRPenJuVTdhYXBvN0NQcW9NdXpNcEJnc3BKTDJCeWIwdkZtMTNw?=
- =?utf-8?B?eTMwRFlKSkVpdVUwWDQraDNxUkR5ZHl4bmdvRlhtQThhdTdPUEk1enRIc3JX?=
- =?utf-8?B?VHNXODZwTjJNZ09yR3FvQUlxenV2UDUvWG0rVE85OGpWTkZ5QkoxalFmYlQx?=
- =?utf-8?B?VWtlbFRGMnh0dVFucFdRMHVpZUg2aEZ1dWg5aUZWVjNodjdXRnY1UjQ1Vkpp?=
- =?utf-8?B?czFBTFplTWJmWFpjSHVjNzRRTVJvN3BkQWgyQU1hL05YblBsa2VFZEJrbUti?=
- =?utf-8?B?QUhvOUpsK2VkcDZnQy9KL2JhYlN4V2VCMHFVZzkySkU5N01ibGhYRTJXTjBo?=
- =?utf-8?B?ak9GMkZlS1M3VVJWelZEU3l5bXQ2djg4K20yOHhSdWp1YVF5ZWJpbTlCa0J0?=
- =?utf-8?B?Y3BhT0U3QlpadGc4d3YvR0dBNUZNdUt1WWk3aHVTZjJTTnkyaDJrQ00xMjl2?=
- =?utf-8?B?dmtMT3JxUkcvbS9XTlRjV3BUK1hjWjRYeGdURkwxS1VoN1BBVVc3aUY2K3dq?=
- =?utf-8?B?bEU1RERhUUF5NU5pMEs0aTczN3RMeFRZaU1zSlMwWUV6WjBBQnFRV0pCWDdI?=
- =?utf-8?B?RlM3RnRnSnM1cTRVeW9DQ0MwS0FtNGxwalBHaFA0YXl3TVN6R1R3Z0RtOFNU?=
- =?utf-8?B?YVA1K1lyaG95UzdsL2ttMDNyUDFCS3FiT2lPMlZWSWpyM0diL2pkRU5oWldJ?=
- =?utf-8?B?RWNaRFpkKzdUYXJCZ3VQb1REQmx4NXhFVnVKSXdib2VJNzd4Mmg1SGdIcWtm?=
- =?utf-8?B?KzQ2aE53QXRtaEN2VnFpQ0doUlQvSm9LYUVUaWt1Y1N2TE5HRHptdVdqeGJk?=
- =?utf-8?B?QVZGdzhma29hOGZTWCtXUT09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?djZ5QllmT0JaYVZ6czBtWlg4ODFyMi96SnB1Y1B0M0NJL21sNTRQa0F6SlpV?=
- =?utf-8?B?dzdYc0ltdHpSVFhSVFRaT29FMzBHWmc2SGFGWXNkU0hNNjQ3VFpnTldhbWtY?=
- =?utf-8?B?VzN5Z3R2eUhwMXZ3MVBscVFqMFNDM053YVlOUEZMQ09HNlErV2poRjc5dkZ3?=
- =?utf-8?B?ekRaTVhPSlFlN3RaR2NvMm05WGpEOVAyVzR4QzFWV3VtNHB3WUk4QlRLZEpK?=
- =?utf-8?B?RWxJdE1Ub0ovRVJWZzM5bmh4aytYRnE4cEY4MzMySUlrVk1wMnh2bDA1VDNv?=
- =?utf-8?B?TmNUNktJMnRTZXR2MjJiT2JIYnQwZzE0Mm8rVU52Y09Ma0xYK2xHcHl3K2lq?=
- =?utf-8?B?MitqMVNzQ1hyaFhjd3B6MEVmWGJFWVJ3RFR4WXAxUUtXMzF0aFdjb01YSndk?=
- =?utf-8?B?UGJzR0pyaDRIMHVBZ2MydEo2cUxxWjJmZGZUelpHQnZTbUlZaGcvMTNqRUxx?=
- =?utf-8?B?UHEwTkNqc2dDeGFGRnI0ODlxeHN2V3NLQlB0SFgzU2ZrZlF2VHYxbVN3dkVE?=
- =?utf-8?B?Yk1aSzU3SURVdWp1WEZXU3FWd0RmNG9CTWY3bWRlS0hZZVhHbERQdVZVRk9H?=
- =?utf-8?B?cXJvemxKRlNTUk9yUE5uME9JZFl1SDd3WlUyd21hWWJxN0FWUFliRkFIdExB?=
- =?utf-8?B?RFJGelZRRjBReGlKSGtlekZvYUR2em9YTGN2VEtwbTEwaEZ2MEVlSjZhNDVu?=
- =?utf-8?B?UnRpdExBcmdHU2toMUV3RlhaUk54eHhLeWl5d24wK1ZyeHduNjhNS2dKTHNR?=
- =?utf-8?B?ZVR0elFMMnJ2M0sxMEZ2YmxIMS9sTjA5cmx6OFZRSmI0ZHFBRTg0aWV1b0Fq?=
- =?utf-8?B?VTZtMTR1ejJhcFJHRTlzdmxiSkJhYXlkbnU1dnluUk95eEtlODIrME1IUnB4?=
- =?utf-8?B?L0s0ZWhiMDk4K2QrNGk5dEs5dGxXZW9oVDYwMVdaMlZSYzF3cjc5TzlKbEcr?=
- =?utf-8?B?VyszQzRNaHV4SDBlUElleVRDL2VUaHllbkpUNHJac2lMQ1NHRzVzMHRKTXds?=
- =?utf-8?B?bDgzK0F6cEo5K0JtZS9DdHJmZHBhQ0lPdUE0dG9JWDBPSzM2dzYxVlRpa09C?=
- =?utf-8?B?Wm1mb0g0ZTJmUnVTWUQvdnkwWXJmNXpSSHR5UGVTNkFOdWdBblZRN2VpUW1Q?=
- =?utf-8?B?N0VsMnZ3d1loOW1PWStWaGdJTzFKamJrOHhqQUtSVy9rUHpjYjdPV0taMjA3?=
- =?utf-8?B?WVk4N0FpajRnVWlmazRPSU40T0hSazNDZmxUalZPTjhnL3BwczdOb2lVZDVR?=
- =?utf-8?B?OU8zSzlSWUxjNXdFUjNIQzYreCt6M091SmhEajArQTJOR1Z1MStYZEsvZThv?=
- =?utf-8?B?VUppeUdGUFlSWmJQMndyQXllU2tFbSs0MTZWT0VuamV1dWlUTlRjYXFhS0Z0?=
- =?utf-8?B?M0FRS0ZzNjhIdEpDTC8rVXpwQjJuN2RTa20vOTQ4SkNyZCtVdXRuNmpyQ3Vh?=
- =?utf-8?B?VzdvNWdkWGFBMFNUNDJlSjEvZXd4RFF2Q0Z6Mi9wZyszT3R0QjVwR2doRkdu?=
- =?utf-8?B?UUl0aW1jbC9nN0pxbVdTV052R2Y1VEVMR2hPSHpoQlQwS3hMcEtQUFF6K3BY?=
- =?utf-8?B?cVJwQ3U5anZsU0hZV3pId1hBQ2NhN1Fkamt0RkZWK3IwSU1jNVZWUUpFUHpT?=
- =?utf-8?B?Q0dCZDVVV2JxcCtTc1lpbHp0ZUU1TzJ4cU51TDlNZDVzU0FhWFBENDRJOWE2?=
- =?utf-8?B?UnZnSzZRNzhIa2FGZ3M5WGN4LzQxNU5DNmZyQkg5U2tFYkV6NlJvRC9wQlpS?=
- =?utf-8?B?cDQyanpEN2U0VGJRWVpuSkZGcVFFVjdPbTF3eGdMOXNpWFpiMTE0dmt1b3Bp?=
- =?utf-8?B?eXpKNURTSFA4T2g1V1R0emZzOGlENDdMUDIvUFlDUWU0Y05QVUE0VEE1RDZZ?=
- =?utf-8?B?dnJ6cnRSTkJmR1hFTTk1aklKeGtxb2dyeEJaamZXNHRNU0FLN1ZIRGJqbmdS?=
- =?utf-8?B?ZWhPYTJXQ2ZBT0NqZ0M1d3Rzcjg0RVl5TXBRSzNBdWlUOVhHbHFYVXFIQlJ6?=
- =?utf-8?B?ZHloaTh3SG00SUlqZEdtdUlaRysvWXFWY2JaMHV6aVpMZUlIVTYwSlV4Z1dn?=
- =?utf-8?B?Vk9TL08rTGQ5eE1OWTRjcVVkRmZGa05sMk1XcjY2RWlqYitpc3VNRXJtRHZQ?=
- =?utf-8?B?QzA2U1FsSDZYYU9Fd2JMaWpvQ1J0UlRBc2ZFRXlkU1BEaEg1UXdLeWwzdnZq?=
- =?utf-8?B?UlE9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 524ab5b3-a93f-44dd-1f8c-08dcc1ba065f
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Aug 2024 08:19:49.5640 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ocR/v/qzXi78yry3EbStURlZZEuVVGWQ92ICxnmID6lX3EHc0uYReN4XfzSHV7Xvklj47sgc9MPXG07u5pVlTIRugg+u4mx+VuksqLeGTak=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB9901
+Content-Type: multipart/signed; boundary="Sig_/cTHRzKDplf9eHYAMpsyaQ+1";
+ protocol="application/pgp-signature"; micalg=pgp-sha512
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -177,89 +74,284 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+--Sig_/cTHRzKDplf9eHYAMpsyaQ+1
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 8/21/24 4:11 AM, Simon Glass wrote:
-> Hi,
-> 
-> On Tue, 20 Aug 2024 at 07:34, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->>
->> Hi,
->>
->> On 8/20/24 3:01 PM, Sahaj Sarup wrote:
->>> [You don't often get email from sahaj.sarup@linaro.org. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
->>>
->>> On Tue, 20 Aug 2024 at 17:21, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->>>>
->>>> Hi,
->>>>
->>>> On 8/20/24 11:12 AM, Sahaj Sarup wrote:
->>>>> [You don't often get email from sahaj.sarup@linaro.org. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
->>>>>
->>>>> Hi,
->>>>>
->>>>> In `include/i2c.h` , the udevice pointer and return value definition
->>>>> seems to be confusing.
->>>>>
->>>>> ```
->>>>> /**
->>>>>     * i2c_get_chip_for_busnum() - get a device to use to access a chip on
->>>>> .
->>>>> .
->>>>> .
->>>>>     * @devp: Returns pointer to new device if found or -ENODEV if not
->>>>>     * found
->>>>>     */
->>>>> ```
->>>>>
->>>>> Should this instead be:
->>>>>
->>>>> ```
->>>>>     * @devp:   Returns pointer to new device or NULL if not found
->>>>>     * Return:  0 on success, -ENODEV on failure
->>>>> ```
->>>>>
->>>>
->>>> For the @devp part, seems like it as uclass_get_device_by_seq sets it to
->>>> NULL and i2c_get_chip only modifies it when a device is found.
->>>>
->>>> For the return part... not sure. We don't overwrite the return value we
->>>> get from functions we call, so not sure we can guarantee that only
->>>> ENODEV will be returned?
->>>
->>> make sense, devp can't return -ENODEV, ofc, and Return returns 0 or -ve.
->>> So it can be closer to:
->>>
->>> ```
->>> * @devp:   Returns pointer to new device or NULL if chip is not found
->>> * Return:  0 on success, -ve on failure to find bus or chip
->>> ```
->>>
->>
->> Nothing guarantees we'll return a negative value either though, c.f. the
->> if conditions in i2c_get_chip_for_busnum(), where we only check for ret
->> (i.e. ret != 0).
-> 
-> That is pretty common in driver model. Few things return a positive
-> value. Mostly they return 0 on success or a -ve error code.
-> 
-> Note though that *devp is generally not assigned if there is an error.
-> It is left unset, so it could be something like:
-> 
-> @devp: Returns pointer to new device on success
-> 
+Hi Teresa,
 
-I assume you're suggesting
+> Hello Lukasz,
+>=20
+> Am Donnerstag, dem 15.08.2024 um 10:40 +0200 schrieb Lukasz Majewski:
+> > This configuration file provides support for booting phycore module
+> > (on e.g. polis-rdk base development board) from QSPI memory.
+> >=20
+> > Moreover, the SDP SPL gadget is supported, so single flash.bin
+> > binary can be used with uuu (with uuu -v -b qspi ~/u-boot/flash.bin)
+> > to flash QSPI in the factory or during debricking.
+> >=20
+> > Signed-off-by: Lukasz Majewski <lukma@denx.de>
+> > ---
+> > =C2=A0configs/phycore-imx8mm-fspi_defconfig | 158
+> > ++++++++++++++++++++++++++
+> > =C2=A01 file changed, 158 insertions(+)
+> > =C2=A0create mode 100644 configs/phycore-imx8mm-fspi_defconfig
+> >=20
+> > diff --git a/configs/phycore-imx8mm-fspi_defconfig
+> > b/configs/phycore- imx8mm-fspi_defconfig
+> > new file mode 100644
+> > index 0000000000..79a2668254
+> > --- /dev/null
+> > +++ b/configs/phycore-imx8mm-fspi_defconfig
+> > @@ -0,0 +1,158 @@
+> > +CONFIG_ARM=3Dy
+> > +CONFIG_ARCH_IMX8M=3Dy
+> > +CONFIG_TEXT_BASE=3D0x40200000
+> > +CONFIG_SYS_MALLOC_LEN=3D0x2000000
+> > +CONFIG_SPL_GPIO=3Dy
+> > +CONFIG_SPL_LIBCOMMON_SUPPORT=3Dy
+> > +CONFIG_SPL_LIBGENERIC_SUPPORT=3Dy
+> > +CONFIG_SF_DEFAULT_SPEED=3D80000000
+> > +CONFIG_ENV_SIZE=3D0x10000
+> > +CONFIG_ENV_OFFSET=3D0x3C0000
+> > +CONFIG_IMX_CONFIG=3D"board/freescale/imx8mm_evk/imximage-8mm-lpddr4-
+> > fspi.cfg" =20
+>=20
+> can you create a cfg in the board folder and not use the one from the
+> evk?
 
-```
-* @devp:   Returns pointer to new device on success
-* Return:  0 on success, -ve on failure to find bus or chip
-```
+I wanted to avoid code duplication - as the same file (from EVK) is
+used by other boards already...
 
-?
+>=20
+> > +CONFIG_DM_GPIO=3Dy
+> > +CONFIG_DEFAULT_DEVICE_TREE=3D"freescale/imx8mm-phyboard-polis-rdk"
+> > +CONFIG_SPL_TEXT_BASE=3D0x7E2000
+> > +CONFIG_TARGET_PHYCORE_IMX8MM=3Dy
+> > +CONFIG_DM_RESET=3Dy
+> > +CONFIG_SYS_MONITOR_LEN=3D524288
+> > +CONFIG_SPL_MMC=3Dy
+> > +CONFIG_SPL_SERIAL=3Dy
+> > +CONFIG_SPL_DRIVERS_MISC=3Dy
+> > +CONFIG_SPL_STACK=3D0x920000
+> > +CONFIG_SPL_HAS_BSS_LINKER_SECTION=3Dy
+> > +CONFIG_SPL_BSS_START_ADDR=3D0x910000
+> > +CONFIG_SPL_BSS_MAX_SIZE=3D0x2000
+> > +CONFIG_SPL=3Dy
+> > +CONFIG_ENV_OFFSET_REDUND=3D0x3E0000
+> > +CONFIG_SYS_LOAD_ADDR=3D0x40480000
+> > +CONFIG_PCI=3Dy
+> > +# CONFIG_ANDROID_BOOT_IMAGE is not set
+> > +CONFIG_FIT=3Dy
+> > +CONFIG_FIT_EXTERNAL_OFFSET=3D0x3000
+> > +CONFIG_SPL_LOAD_FIT=3Dy
+> > +CONFIG_OF_SYSTEM_SETUP=3Dy
+> > +CONFIG_USE_BOOTCOMMAND=3Dy
+> > +CONFIG_BOOTCOMMAND=3D"mmc dev ${mmcdev}; if mmc rescan; then if run
+> > loadimage; then run mmcboot; else run netboot; fi; fi;"
+> > +CONFIG_DEFAULT_FDT_FILE=3D"oftree"
+> > +CONFIG_SYS_CBSIZE=3D2048
+> > +CONFIG_SYS_PBSIZE=3D2074
+> > +CONFIG_BOARD_LATE_INIT=3Dy
+> > +CONFIG_SPL_MAX_SIZE=3D0x25000 =20
+>=20
+> This line
+>=20
+> > +CONFIG_SPL_PAD_TO=3D0x0 =20
+>=20
+> and this one is not available in phycore-imx8mm_defconfig.
+> Why have you added them here?
 
-It isn't clear to me what's the path forward with this patch, hence the 
-question.
+I think that I've followed ./configs/imx8mm_beacon_fspi_defconfig as a
+starting point.
 
-Cheers,
-Quentin
+I would need to check if removing them would make any harm.
+
+>=20
+> > +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+> > +CONFIG_SPL_SYS_MALLOC=3Dy
+> > +CONFIG_SPL_HAS_CUSTOM_MALLOC_START=3Dy
+> > +CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=3D0x42200000
+> > +CONFIG_SPL_SYS_MALLOC_SIZE=3D0x80000
+> > +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=3Dy
+> > +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=3D0x300
+> > +CONFIG_SPL_I2C=3Dy
+> > +CONFIG_SPL_NOR_SUPPORT=3Dy
+> > +CONFIG_SPL_POWER=3Dy
+> > +CONFIG_SPL_SPI_FLASH_MTD=3Dy
+> > +CONFIG_SPL_WATCHDOG=3Dy
+> > +CONFIG_HUSH_PARSER=3Dy
+> > +CONFIG_SYS_PROMPT=3D"u-boot=3D> "
+> > +# CONFIG_CMD_EXPORTENV is not set
+> > +# CONFIG_CMD_IMPORTENV is not set =20
+>=20
+> Here is
+>=20
+> CONFIG_CMD_ERASEENV=3Dy
+>=20
+> missing. Which was added with 60e01c6d9f892bfa088a0453cd19d6a418b00add
+> for phycore-imx8mm_defconfig. Why did you not add it?
+>=20
+
+I might used either the older ./configs/phycore-imx8mm_defconfig or the
+above mentioned "beacon".
+
+>=20
+> > +# CONFIG_CMD_CRC32 is not set
+> > +CONFIG_CMD_EEPROM=3Dy
+> > +CONFIG_SYS_I2C_EEPROM_ADDR_LEN=3D2
+> > +CONFIG_SYS_EEPROM_SIZE=3D4096
+> > +CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=3D5
+> > +CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=3D5 =20
+>=20
+> And I also miss
+>=20
+> # CONFIG_CMD_BIND is not set
+> CONFIG_FASTBOOT_BUF_SIZE=3D0x20000000
+>=20
+> which you did set in your=20
+>=20
+> "config: imx: Add support for Phytec's phycore imx8mm running SDP
+> gadget"
+>=20
+> patch for phycore-imx8mm_defconfig. Are they not required for fspi
+> image?
+
+IIRC this value has default value set in drivers/fastboot/Kconfig
+
+With QSPI setup I did not needed it so big, as the flash.bin was small
+enough.
+
+With phycore-imx8mm_defconfig I've set it to larger value - as one my
+update with it SD/eMMC memory with fastboot gadget.
+
+>=20
+> Teresa
+>=20
+> > +CONFIG_CMD_CLK=3Dy
+> > +CONFIG_CMD_FUSE=3Dy
+> > +CONFIG_CMD_GPIO=3Dy
+> > +CONFIG_CMD_I2C=3Dy
+> > +CONFIG_CMD_MMC=3Dy
+> > +CONFIG_CMD_PCI=3Dy
+> > +CONFIG_CMD_SF_TEST=3Dy
+> > +CONFIG_CMD_DHCP=3Dy
+> > +CONFIG_CMD_MII=3Dy
+> > +CONFIG_CMD_PING=3Dy
+> > +CONFIG_CMD_CACHE=3Dy
+> > +CONFIG_CMD_REGULATOR=3Dy
+> > +CONFIG_CMD_EXT2=3Dy
+> > +CONFIG_CMD_EXT4=3Dy
+> > +CONFIG_CMD_EXT4_WRITE=3Dy
+> > +CONFIG_CMD_FAT=3Dy
+> > +CONFIG_OF_CONTROL=3Dy
+> > +CONFIG_SPL_OF_CONTROL=3Dy
+> > +CONFIG_ENV_OVERWRITE=3Dy
+> > +CONFIG_ENV_IS_IN_MMC=3Dy
+> > +CONFIG_SYS_REDUNDAND_ENVIRONMENT=3Dy
+> > +CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
+> > +CONFIG_SYS_MMC_ENV_DEV=3D2
+> > +CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=3Dy
+> > +CONFIG_SPL_DM=3Dy
+> > +CONFIG_SPL_CLK_COMPOSITE_CCF=3Dy
+> > +CONFIG_CLK_COMPOSITE_CCF=3Dy
+> > +CONFIG_SPL_CLK_IMX8MM=3Dy
+> > +CONFIG_CLK_IMX8MM=3Dy
+> > +CONFIG_USB_FUNCTION_FASTBOOT=3Dy
+> > +CONFIG_FASTBOOT_BUF_ADDR=3D0x42800000
+> > +CONFIG_FASTBOOT_UUU_SUPPORT=3Dy
+> > +CONFIG_MXC_GPIO=3Dy
+> > +CONFIG_DM_I2C=3Dy
+> > +CONFIG_MISC=3Dy
+> > +CONFIG_I2C_EEPROM=3Dy
+> > +CONFIG_SYS_I2C_EEPROM_ADDR=3D0x51
+> > +CONFIG_SUPPORT_EMMC_BOOT=3Dy
+> > +CONFIG_MMC_IO_VOLTAGE=3Dy
+> > +CONFIG_MMC_UHS_SUPPORT=3Dy
+> > +CONFIG_MMC_HS400_ES_SUPPORT=3Dy
+> > +CONFIG_MMC_HS400_SUPPORT=3Dy
+> > +CONFIG_FSL_USDHC=3Dy
+> > +CONFIG_MTD=3Dy
+> > +CONFIG_DM_MTD=3Dy
+> > +CONFIG_DM_SPI_FLASH=3Dy
+> > +CONFIG_SF_DEFAULT_BUS=3D3
+> > +CONFIG_SPI_FLASH_BAR=3Dy
+> > +CONFIG_SPI_FLASH_MACRONIX=3Dy
+> > +CONFIG_SPI_FLASH_SPANSION=3Dy
+> > +CONFIG_SPI_FLASH_STMICRO=3Dy
+> > +CONFIG_SPI_FLASH_SST=3Dy
+> > +CONFIG_SPI_FLASH_WINBOND=3Dy
+> > +# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+> > +CONFIG_SPI_FLASH_MTD=3Dy
+> > +CONFIG_PHYLIB=3Dy
+> > +CONFIG_PHY_TI_DP83867=3Dy
+> > +CONFIG_PHY_GIGE=3Dy
+> > +CONFIG_FEC_MXC=3Dy
+> > +CONFIG_MII=3Dy
+> > +CONFIG_NVME_PCI=3Dy
+> > +CONFIG_PCIE_DW_IMX=3Dy
+> > +CONFIG_PHY_IMX8M_PCIE=3Dy
+> > +CONFIG_PINCTRL=3Dy
+> > +CONFIG_SPL_PINCTRL=3Dy
+> > +CONFIG_PINCTRL_IMX8M=3Dy
+> > +CONFIG_POWER_DOMAIN=3Dy
+> > +CONFIG_IMX8M_POWER_DOMAIN=3Dy
+> > +CONFIG_DM_REGULATOR_FIXED=3Dy
+> > +CONFIG_DM_REGULATOR_GPIO=3Dy
+> > +CONFIG_DM_SERIAL=3Dy
+> > +CONFIG_MXC_UART=3Dy
+> > +CONFIG_SPI=3Dy
+> > +CONFIG_DM_SPI=3Dy
+> > +CONFIG_NXP_FSPI=3Dy
+> > +CONFIG_SYSRESET=3Dy
+> > +CONFIG_SPL_SYSRESET=3Dy
+> > +CONFIG_SYSRESET_PSCI=3Dy
+> > +CONFIG_SYSRESET_WATCHDOG=3Dy
+> > +CONFIG_DM_THERMAL=3Dy
+> > +CONFIG_IMX_TMU=3Dy
+> > +CONFIG_USB=3Dy
+> > +CONFIG_SPL_USB_HOST=3Dy
+> > +CONFIG_USB_EHCI_HCD=3Dy
+> > +CONFIG_MXC_USB_OTG_HACTIVE=3Dy
+> > +CONFIG_USB_GADGET=3Dy
+> > +CONFIG_SPL_USB_GADGET=3Dy
+> > +CONFIG_USB_GADGET_VENDOR_NUM=3D0x0525
+> > +CONFIG_USB_GADGET_PRODUCT_NUM=3D0xa4a5
+> > +CONFIG_CI_UDC=3Dy
+> > +CONFIG_SDP_LOADADDR=3D0x40400000
+> > +CONFIG_SPL_USB_SDP_SUPPORT=3Dy
+> > +CONFIG_IMX_WATCHDOG=3Dy
+> > +CONFIG_FSPI_CONF_HEADER=3Dy
+> > +CONFIG_FSPI_CONF_FILE=3D"fspi_header.bin" =20
+>=20
+
+
+
+
+Best regards,
+
+Lukasz Majewski
+
+--
+
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
+
+--Sig_/cTHRzKDplf9eHYAMpsyaQ+1
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmbFplMACgkQAR8vZIA0
+zr1kYgf9GRe16Pk4rx2Veyq3ACxW0nE3c8qGWjxfSh9czdCCMmi20U+vks5vESaQ
+n20Hr385PdEjGzSgrwv9UQRoelN5T9gXOZWLcWeYpf6ZRZpLef/grWW/7js44FDl
+XtgoanuslEVvE5VG1moryatZpRuL1wstnSojxNVfFcgLYRr6X666OBtsRh1L1pHY
+W/rmmuBd0HyPnFp8CPSrNbyZR7D3JlD/x3mRPVMg3sZWx/3ingOqVkgVj5hrkHLm
+8XQvb3j7dQSXS8oMOU6ZE7AO/lmb3Or3DKaxpLzz5nItpR2Uz2Wpx/xgJpiqQ/ku
+prw3xSUT/gaJ4+RRsK9EQKel4CSxpw==
+=VHzy
+-----END PGP SIGNATURE-----
+
+--Sig_/cTHRzKDplf9eHYAMpsyaQ+1--
