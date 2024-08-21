@@ -4,88 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DF19C52D6F
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 14:49:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A2D3C52D6F
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 14:59:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FE9188DDF;
-	Wed, 21 Aug 2024 16:49:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 77F9F88AAA;
+	Wed, 21 Aug 2024 16:59:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ngEmNFMT";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="f5OG14GQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B682E88363; Wed, 21 Aug 2024 16:49:25 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9C2B688BB8; Wed, 21 Aug 2024 16:59:22 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D01668843A
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 16:49:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3771C889AE
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 16:59:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a83856c6f51so379920066b.2
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 07:49:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724251758; x=1724856558; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=n4EFSgiyWPJPKzfEbQkDgAQ4aqmFb41u4PxM9y2uWoI=;
- b=ngEmNFMT7D0Ok6uGxTpXrQevuml65dbWs041RAtayuaX4ygEY8yAmzl5eVlIlZFHvb
- GSb+tW8mM6ueqPJEoCLbBQ52xBR5cnX31N47o0uUwWoS69wI4f0hUvlwSn2j3f8Re7Z4
- y0hc4648zSjJq1tG71lmVGrIwvAE/8A/SBQF8xNy21TTNPZa2Nk0JIxb9Yb9S+SArVe8
- bihPOeqUm4Goa1nNkSRfnQR6VaJkUrAQPJQLUVaS5GYRzMQryUdobekgwQe4Q3/MqSog
- 7NdDxZFHEKfeZLJpmQIL483Hm9jHoOYJjLZNUmta3nR0ojWHWsnGvseONxLZghQVkxI2
- 7LyA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724251758; x=1724856558;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=n4EFSgiyWPJPKzfEbQkDgAQ4aqmFb41u4PxM9y2uWoI=;
- b=JXy0gBf0UZWZSgLeLXcDFa9EN5lqcK7GAbY3ZM5Qw7oHNRWEqSVsgoxq3XrRK6FohA
- qXWv18DPEdW6bimEOYqHw5mLImvN3mBzVsFlCX0VpG9Eu/oTTm8/CZMf4Rxy8Dcs7+uh
- UV/L6TLjHhi6KH+Lr74AmYX6993spwsbINnxjtLnlLEk/OB/P5sk5+rwevWjRTCFUi8G
- kF1mOPNHMgER9Q8qX4nmVBgNmq6fZBuLCkHWMQA5yszu4i0uWvkhchKLcUXdGkjX7eRZ
- IAdFVqxKlwi2iwSYPSQ0/279+FBQbRdMcfRbveduPUYsVsI/sfBAwlvQo/m5cmwFoYzc
- kinA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWYQmRyloxRNSB60Q8WBR4Y7F96DfW8zCIFTpIMppGL9GmwVR1eqIetHgneD1XvlNEQkLWAYt0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxinBKShbshvfC8LuJDuj6lx+SrXyDsAHSMietvdgvP1v6er3Yz
- GlqdZ0FUUgzx+IoPD2VTnGzfHUKW6RicdKAGyEsBCHwwtYRy4tkfkV9KQEzRM2s=
-X-Google-Smtp-Source: AGHT+IFSEaVRzAX4rjApc3invBJD9vS6S3+KBmcWYoLy6+RtaGnPYA206zJaeafBZex5OCn7ow0q8A==
-X-Received: by 2002:a05:6402:5407:b0:5a2:e73f:1528 with SMTP id
- 4fb4d7f45d1cf-5bf1f0dab9dmr2137609a12.12.1724251758223; 
- Wed, 21 Aug 2024 07:49:18 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::676e? ([2a02:8109:aa0d:be00::676e])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5bebbde3edfsm8115392a12.29.2024.08.21.07.49.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 21 Aug 2024 07:49:17 -0700 (PDT)
-Message-ID: <eda3f2ad-d011-4ae6-b722-9114daafeae1@linaro.org>
-Date: Wed, 21 Aug 2024 16:49:16 +0200
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47LExEGh021026;
+ Wed, 21 Aug 2024 09:59:14 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1724252354;
+ bh=Wc2J5SBVcrMuYewOOAA8zL3iI6xCjC1OFEn9+M2Mfaw=;
+ h=From:To:CC:Subject:Date;
+ b=f5OG14GQ1h0GpeTW0jHSoDuC9apah0kynOgKR3cdMJPGgY+WGHcY+OTVH9s8dslLt
+ M2bbAApr2WPaHQzGDtkAP61ea43RPb29wXNyR6N2V6pn3EkiTyTJC8MV/+m8PtBnwf
+ bRRIwR5UX3wpUwSChZdvZTGCVGCnZKhF/a+pnUkU=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47LExES8028126
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 21 Aug 2024 09:59:14 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 21
+ Aug 2024 09:59:13 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 21 Aug 2024 09:59:13 -0500
+Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.72.81])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47LEx9wW121096;
+ Wed, 21 Aug 2024 09:59:09 -0500
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: <trini@konsulko.com>, <n-francis@ti.com>, <nm@ti.com>, <a-limaye@ti.com>, 
+ <marcel.ziswiler@toradex.com>, <seanga2@gmail.com>, <sjg@chromium.org>,
+ <marex@denx.de>, <john@phrozen.org>, <ansuelsmth@gmail.com>,
+ <sumit.garg@linaro.org>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <srk@ti.com>,
+ <s-vadapalli@ti.com>
+Subject: [RFC PATCH 0/2] Add TI K3 PCIe Controller support for J7200
+Date: Wed, 21 Aug 2024 20:29:06 +0530
+Message-ID: <20240821145908.3408573-1-s-vadapalli@ti.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/7] clk/qcom: add initial clock driver for sc7280
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20240821-b4-rb3gen2-v2-0-49b07633f3a8@linaro.org>
- <20240821-b4-rb3gen2-v2-1-49b07633f3a8@linaro.org>
- <CAFLszTjjS8m2DsNp0nMEknM0ggu4QEET81iSyYFGDYWCwVjf2w@mail.gmail.com>
- <2a45562f-792f-4ad5-9871-bef82ccd2d18@linaro.org>
- <CAFLszTjwjUnGYMdujDUNePBiEU8_oMpkZYpSK8REKxrMYUadpw@mail.gmail.com>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFLszTjwjUnGYMdujDUNePBiEU8_oMpkZYpSK8REKxrMYUadpw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,41 +81,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello,
 
+This series adds support for the Cadence PCIe controller on TI's K3
+family of SoCs which J7200 belongs to. The driver is an adaptation
+of the Linux driver (drivers/pci/controller/cadence/pci-j721e.c)
+and has been implemented specifically for Root-Complex mode of operation
+on J7200. A minor set of changes will be sufficient to support other
+K3 SoCs as well, which has been indicated with "TODO"s added in the
+driver code.
 
-On 21/08/2024 16:37, Simon Glass wrote:
-> Hi Caleb,
-> 
-> On Wed, 21 Aug 2024 at 08:11, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>
->> Hi Simon,
->>>> +U_BOOT_DRIVER(gcc_sc7280) = {
->>>> +       .name           = "gcc_sc7280",
->>>> +       .id             = UCLASS_NOP,
->>>> +       .of_match       = gcc_sc7280_of_match,
->>>> +       .bind           = qcom_cc_bind,
->>>> +       .flags          = DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
->>>> +};
->>>
->>> This should use driver model, with a UCLASS_CLK and UCLASS_RESET
->>
->> Please refer to qcom_cc_bind() which binds the clock, reset, and power
->> domain drivers.
-> 
-> Gosh, why? Are these devices not in the devicetree?
+Series is based on commit
+d2067c3ea5 Merge tag 'u-boot-dfu-next-20240820' of https://source.denx.de/u-boot/custodians/u-boot-dfu into next
+of the next branch of U-Boot.
 
-They are, the gcc block contains clock, reset, and pd parts. On Linux 
-this is not an issue because a single device can be multiple different 
-classes (e..g when you register a reset you do it for a device) whereas 
-U-Boot requires a device per class.
+I have posted this series as an RFC for feedback regarding the
+implementation. I plan to implement the remaining changes to truly
+support all K3 SoCs that are currently supported by the pci-j721e.c
+driver in Linux in Root-Complex mode of operation. I have tested this
+series with the following changes made to the device-tree for J7200:
+https://gist.github.com/Siddharth-Vadapalli-at-TI/1a498722ebb332da6f88abe05a43f2c4
 
-e.g. see devm_reset_controller_register() in Linux, it populates a 
-struct reset_controller_dev which references the struct device created 
-for the node. In U-Boot you have to create a new device which _is_ the 
-reset controller.
-> 
-> Regards,
-> Simon
+The device-tree changes are required since the "reg-mux" driver is not
+currently implemented in U-Boot. I will work on porting the "reg-mux"
+driver support from Linux.
+
+The logs corresponding to validating PCI Root-Complex functionality with
+an NVMe SSD connected to the PCIe Connector on J7200-EVM, with this series
+and the aforementioned device-tree changes applied are:
+https://gist.github.com/Siddharth-Vadapalli-at-TI/bbcbfa0b7d593795726c81fb41272823
+
+Regards,
+Siddharth.
+
+Siddharth Vadapalli (2):
+  pci: Add TI K3 Cadence PCIe Controller
+  configs: j7200_evm_a72_defconfig: Enable configs for PCI support
+
+ configs/j7200_evm_a72_defconfig |   4 +
+ drivers/pci/Kconfig             |   6 +
+ drivers/pci/Makefile            |   1 +
+ drivers/pci/pcie_cdns_ti.c      | 645 ++++++++++++++++++++++++++++++++
+ 4 files changed, 656 insertions(+)
+ create mode 100644 drivers/pci/pcie_cdns_ti.c
 
 -- 
-// Caleb (they/them)
+2.40.1
+
