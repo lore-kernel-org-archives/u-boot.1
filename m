@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A3E9C52D6F
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 16:21:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFB55C52D7C
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 16:22:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD64588E39;
-	Wed, 21 Aug 2024 18:19:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 39C8E88E4F;
+	Wed, 21 Aug 2024 18:19:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dFprjd0+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IKt9VocI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B103C88E34; Wed, 21 Aug 2024 18:19:50 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 93D0A88E3E; Wed, 21 Aug 2024 18:19:51 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 949F488E0E
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 18:19:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 83F7888E12
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 18:19:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-70968db52d0so6964991a34.3
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 09:19:48 -0700 (PDT)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-704466b19c4so3975678a34.0
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 09:19:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724257187; x=1724861987; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724257188; x=1724861988; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mAFY6rrl0ebeYcHUMBB9c7si/T0IAblqWs8Qz5P3+ZQ=;
- b=dFprjd0+Ncc8UI24Jw3wcNpAXDuKX0osKKFGi3qA60EwlfQiUBqVuBXvgweUccwmzV
- YvyGoG0c38y4BJ48s1hKLF3LcR2XZHjh5j02Bp19bp30UYuZnEkfPEfZ8TJg7o3R7DVG
- wKd94im8jOSDMp2zOWOpZsWARk4qlfAaBqh+U=
+ bh=1C1QWOt7Nc53x9hAhObUKMQH5WvPcUpeST/povX4Lvo=;
+ b=IKt9VocIVsfzps8KaE/EbJUPxaKqPnkJsgkBKyF8ymnb41V6KcpH75CllNY1Wfxdto
+ bKcuQPRLiDVOnhH4WcCcAero0p7ljo3dVifRP2KtD5wYUdBPHyn/qg8jsGYE52EGjwrR
+ YkGbQ8oGPi0a+Qbn3L+VXfu2Buu1GqOAJlZ5E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724257187; x=1724861987;
+ d=1e100.net; s=20230601; t=1724257188; x=1724861988;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mAFY6rrl0ebeYcHUMBB9c7si/T0IAblqWs8Qz5P3+ZQ=;
- b=tggmWhKrzcGi/WSptq1r0v4hneOBI2iRH6fXt3jP19Mntt8rkBUJ3QJLgh3T8VDgoE
- tPGfgXKF9Pku1GYMwWGQNNajcx/qyIxT0A1UDMKuNOgG7KnxrcMitD2hv0vglvfs3XJx
- OcA18NpRBZDSeyZg2gXpVAIYNWRUYB9CgX6B8orazEHsfZ6xKtJPhUEo1CoxiquXfN7q
- gDzgBQ5WdvbDA5QmOALai0ZsiM/ATZH1+KDlmzfi1+U0ZnAq49HdcBZadLIsYcWxnkek
- 7rvwoQZCUogpMspo50DLS2cAFtkFlD8Dy1B14XsemuwyLB8CLa+jvJCsY7T+Z3u4jt6O
- ErEA==
-X-Gm-Message-State: AOJu0YxHOno8dFhmhAVZlv6JZd7Pcqs913BXQpS7LLh3mxqex5XoySd8
- rCRXRPMqUXq51h3XOL14FpEWgrKi/it0X+etBq9/z74SfIytNeJVRa+pfhg2as9Yqp16rb+iidM
+ bh=1C1QWOt7Nc53x9hAhObUKMQH5WvPcUpeST/povX4Lvo=;
+ b=Odr4Br6nct1x1PvCJ0SCLOBgf2dwKK3rpxV4VS+FghwlI4x+a+gfMsKEteFajmOgnK
+ 8uiX6UZJ1obVRgFdAVVb6448nQVTupmMeRrh0xiYBxY0HRk1k67CIP34mOF0NPOWge5O
+ oaV33am2MCsCbqCcXiylr5BUVxzb2/xUGUFpG4+uw52zLwIHmOfrTG1eU1HGxbMMtZvH
+ olIbmdTcaDKviJBZdxgbrnTeg4vNBuYEOFThf3JzM4pwQDUUiftEflpNVp4K430gYlnL
+ snLb1SJooNMXlBcVAuV0Wfgf/ACEHrrNO7cMyv8athIXWE+tNb3quNTM1PnJ2IpggGxQ
+ XrCg==
+X-Gm-Message-State: AOJu0Yw+JLvM9hajUh1fnsWj3qGbV1JC2UOPK0zzhdymwep9fQ+P1EB9
+ ykN0N0vDU3uzqL+/8IZU6pTrYXixf64zMokmfdPV4KWgajQei60MGQcP6YtERQErY5kWpIheMaE
  =
-X-Google-Smtp-Source: AGHT+IH4I3aT+wM3JMxtOdj5MKgduZxgxGhDtGIUvauV4rFXdTROwEUpzlbRMACK/gfQbKRh5BIGhA==
-X-Received: by 2002:a05:6830:6517:b0:70a:948c:6b3f with SMTP id
- 46e09a7af769-70df870b7b6mr3803731a34.12.1724257187267; 
- Wed, 21 Aug 2024 09:19:47 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHIkPRk429EenW/0mNhqaUZldEzuVKmwYFo2sHbiW7BxpGsMycRIFpBwnZTGohy8vVrSjDsvA==
+X-Received: by 2002:a05:6830:2644:b0:709:4793:8757 with SMTP id
+ 46e09a7af769-70df85d5277mr2953629a34.2.1724257188048; 
+ Wed, 21 Aug 2024 09:19:48 -0700 (PDT)
 Received: from chromium.org ([139.60.174.4]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70ca6629792sm3222376a34.72.2024.08.21.09.19.46
+ 46e09a7af769-70ca6629792sm3222376a34.72.2024.08.21.09.19.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Aug 2024 09:19:46 -0700 (PDT)
+ Wed, 21 Aug 2024 09:19:47 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 13/35] global_data: Remove pci_ram_top
-Date: Wed, 21 Aug 2024 10:19:05 -0600
-Message-Id: <20240821161927.695717-14-sjg@chromium.org>
+Subject: [PATCH v2 14/35] global_data: Drop global_data hose
+Date: Wed, 21 Aug 2024 10:19:06 -0600
+Message-Id: <20240821161927.695717-15-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240821161927.695717-1-sjg@chromium.org>
 References: <20240821161927.695717-1-sjg@chromium.org>
@@ -88,110 +88,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This field is set but not used. Drop it.
+This is set on one x86 boards, but is not used anymore. Drop it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/arm/mach-tegra/board2.c      |  4 ----
- arch/arm/mach-tegra/cboot.c       |  4 ----
- arch/x86/cpu/i386/cpu.c           |  8 --------
- include/asm-generic/global_data.h | 10 ----------
- 4 files changed, 26 deletions(-)
+ arch/x86/cpu/ivybridge/cpu.c      | 5 -----
+ include/asm-generic/global_data.h | 8 +-------
+ 2 files changed, 1 insertion(+), 12 deletions(-)
 
-diff --git a/arch/arm/mach-tegra/board2.c b/arch/arm/mach-tegra/board2.c
-index 479137e457c..7971e3b68d5 100644
---- a/arch/arm/mach-tegra/board2.c
-+++ b/arch/arm/mach-tegra/board2.c
-@@ -423,10 +423,6 @@ int dram_init_banksize(void)
- 	gd->bd->bi_dram[0].start = CFG_SYS_SDRAM_BASE;
- 	gd->bd->bi_dram[0].size = usable_ram_size_below_4g();
+diff --git a/arch/x86/cpu/ivybridge/cpu.c b/arch/x86/cpu/ivybridge/cpu.c
+index d71ab0a6385..05691a38d2e 100644
+--- a/arch/x86/cpu/ivybridge/cpu.c
++++ b/arch/x86/cpu/ivybridge/cpu.c
+@@ -55,7 +55,6 @@ int arch_cpu_init(void)
  
--#ifdef CONFIG_PCI
--	gd->pci_ram_top = gd->bd->bi_dram[0].start + gd->bd->bi_dram[0].size;
--#endif
--
- #ifdef CONFIG_PHYS_64BIT
- 	if (gd->ram_size > SZ_2G) {
- 		gd->bd->bi_dram[1].start = 0x100000000;
-diff --git a/arch/arm/mach-tegra/cboot.c b/arch/arm/mach-tegra/cboot.c
-index c12543d71ac..e2342b2aece 100644
---- a/arch/arm/mach-tegra/cboot.c
-+++ b/arch/arm/mach-tegra/cboot.c
-@@ -189,10 +189,6 @@ int cboot_dram_init_banksize(void)
- 		gd->bd->bi_dram[i].size = tegra_mem_map[1 + i].size;
- 	}
- 
--#ifdef CONFIG_PCI
--	gd->pci_ram_top = ram_top;
--#endif
--
- 	return 0;
- }
- 
-diff --git a/arch/x86/cpu/i386/cpu.c b/arch/x86/cpu/i386/cpu.c
-index db2727d7485..934e98ac582 100644
---- a/arch/x86/cpu/i386/cpu.c
-+++ b/arch/x86/cpu/i386/cpu.c
-@@ -412,12 +412,6 @@ int cpu_phys_address_size(void)
- 	return 32;
- }
- 
--/* Don't allow PCI region 3 to use memory in the 2-4GB memory hole */
--static void setup_pci_ram_top(void)
--{
--	gd_set_pci_ram_top(0x80000000U);
--}
--
- static void setup_mtrr(void)
+ static int ivybridge_cpu_init(void)
  {
- 	u64 mtrr_cap;
-@@ -469,7 +463,6 @@ int x86_cpu_init_f(void)
- 		setup_cpu_features();
- 	setup_identity();
- 	setup_mtrr();
--	setup_pci_ram_top();
+-	struct pci_controller *hose;
+ 	struct udevice *bus, *dev;
+ 	int ret;
  
- 	/* Set up the i8254 timer if required */
- 	if (IS_ENABLED(CONFIG_I8254_TIMER))
-@@ -483,7 +476,6 @@ int x86_cpu_reinit_f(void)
- 	long addr;
+@@ -65,10 +64,6 @@ static int ivybridge_cpu_init(void)
+ 	if (ret)
+ 		return ret;
+ 	post_code(0x72);
+-	hose = dev_get_uclass_priv(bus);
+-
+-	/* TODO(sjg@chromium.org): Get rid of gd->hose */
+-	gd->hose = hose;
  
- 	setup_identity();
--	setup_pci_ram_top();
- 	addr = locate_coreboot_table();
- 	if (addr >= 0) {
- 		gd->arch.coreboot_table = addr;
+ 	ret = uclass_first_device_err(UCLASS_LPC, &dev);
+ 	if (ret)
 diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-index 0e276c5dece..1db1fb651db 100644
+index 1db1fb651db..b860f3626b8 100644
 --- a/include/asm-generic/global_data.h
 +++ b/include/asm-generic/global_data.h
-@@ -303,10 +303,6 @@ s	 * @timer: timer instance for Driver Model
- 	 * @hose: PCI hose for early use
- 	 */
- 	struct pci_controller *hose;
--	/**
--	 * @pci_ram_top: top of region accessible to PCI
--	 */
--	phys_addr_t pci_ram_top;
+@@ -211,7 +211,7 @@ struct global_data {
  #endif
+ #ifdef CONFIG_TIMER
+ 	/**
+-s	 * @timer: timer instance for Driver Model
++	 * @timer: timer instance for Driver Model
+ 	 */
+ 	struct udevice *timer;
+ #endif
+@@ -298,12 +298,6 @@ s	 * @timer: timer instance for Driver Model
+ 	 */
+ 	unsigned long malloc_ptr;
+ #endif
+-#ifdef CONFIG_PCI
+-	/**
+-	 * @hose: PCI hose for early use
+-	 */
+-	struct pci_controller *hose;
+-#endif
  #ifdef CONFIG_PCI_BOOTDELAY
  	/**
-@@ -565,12 +561,6 @@ static_assert(sizeof(struct global_data) == GD_SIZE);
- #define gd_set_malloc_start(val)
- #endif
- 
--#if CONFIG_IS_ENABLED(PCI)
--#define gd_set_pci_ram_top(val)	gd->pci_ram_top = val
--#else
--#define gd_set_pci_ram_top(val)
--#endif
--
- #if CONFIG_VAL(SYS_MALLOC_F_LEN)
- #define gd_malloc_ptr()		gd->malloc_ptr
- #else
+ 	 * @pcidelay_done: delay time before scanning of PIC hose expired
 -- 
 2.34.1
 
