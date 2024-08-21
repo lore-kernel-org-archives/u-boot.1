@@ -4,78 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3C8FC531DF
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 02:11:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5386C3DA4A
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 02:12:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C62788B58;
-	Wed, 21 Aug 2024 04:11:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 023C588AD2;
+	Wed, 21 Aug 2024 04:11:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BZR2+Asf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KKVyG2Jl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53DA888A64; Wed, 21 Aug 2024 04:11:26 +0200 (CEST)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id 3BA8A88A64; Wed, 21 Aug 2024 04:11:30 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7903788B78
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 04:11:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB10C88B5F
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 04:11:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-6bf6721aae5so30497446d6.2
- for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 19:11:23 -0700 (PDT)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6bf7f4a133aso27248496d6.2
+ for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 19:11:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724206282; x=1724811082; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724206287; x=1724811087; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LKJF4UV63Tfe8OGUwguNGv8M3YgmrSny7m5FuJcPrcU=;
- b=BZR2+Asfq0jGuQ1fs/TnULSV8lM97FMBB+fvXjQDSZAcHsFxfddIdS7PkDw08Ey7tq
- 3wTpfx+Jm5NN1qjksutTiHkytZBtyY6GM8CZh/lxAEGVhwQ7xWG+PH7QBTw3yFkSBPSw
- FCBSKuKg9Fp4whcl1sIwMEp7EUDyeFICC+wtM=
+ bh=0WDz9+p8JiGzORxpnBxMVtyZflfdHyTZc2lfrM1WicQ=;
+ b=KKVyG2JlZIfF/CmWxj8Oo+d1NhMluqeNqOKlMHKxqUw9g8YiBkow+iHLTezt3Q+YpZ
+ aaTVKbGAbeplNLnCzq+I/EE/Tq+Kyz61x/haKzo1SLkRW7v91BrnX9T02ecocjpT/Jgs
+ CqY4yj+ej1JwTs4SG7WwBmFZY5ynhwQbBMi30=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724206282; x=1724811082;
+ d=1e100.net; s=20230601; t=1724206287; x=1724811087;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=LKJF4UV63Tfe8OGUwguNGv8M3YgmrSny7m5FuJcPrcU=;
- b=ULvAU789WWxwY+3pn4kgF25iqr24qjisvxLc/Mb1isCopCCB3X5//akqsg27HpfwpH
- Pkmjh2pfNVt+BkkoxDE1LtHXCTIj0ALmDUb5Q/i4ga6MvQfF8n8enkVLAv55fn5hTbHk
- iiPulRyY550urhsrM+2Q1SAV/3/cgB7nwKSb2fSbbSZhPl7pi38p6Fm8WDeMM+ULOvg7
- dsgXYEkHsMpcY6ORWDJ7/d9F4UEEWwGdtXo/iCPlsfnFAruHDLsWIaZkdBMUhMWynuF9
- S4d050jVOWIlVw4zCgKGZjCbecrb9EBUEp0zjuSFnvthjZGD3YveZFhF7G9g3uE8pL4M
- HAtw==
-X-Gm-Message-State: AOJu0YxNOTULEFsVbpXmbWijvaE/QXDdVHjrPXZpKxwSc2dbOx+0hbJz
- N5y9WPV00s3r6Ef3vxgtckRhfmo3FsB6ns/X1GQzOUmfRGd2vknHjCMLtufQtdY5qaH19MWak6b
- uaS1+X92TxH2M7/gWvm9plWu+cUt9oQfrwvDs
-X-Google-Smtp-Source: AGHT+IGvdaSTt7BxYSnAOUgx2u/gU3D2S4+pxrCGttxpJTW9pQqq3EvbaPZbiexU4ibK6vaKPoxjQKLfVZSM+crQSOw=
-X-Received: by 2002:a05:6214:33c2:b0:6bf:7985:f46d with SMTP id
- 6a1803df08f44-6c155d55e4fmr14040196d6.12.1724206282385; Tue, 20 Aug 2024
- 19:11:22 -0700 (PDT)
+ bh=0WDz9+p8JiGzORxpnBxMVtyZflfdHyTZc2lfrM1WicQ=;
+ b=LTSahictn245OfNuwkD77KMI3uKa8RQtxVl27Vb3eXug+B6wvASmJ7UqK6EJKuqvCQ
+ XnZvTxsgoFwdIHGeQyaqnud4QGsjSUgeXZjj8Cf/UoxMCzDZg5q8gAIwLx735b3gOU6x
+ rrJziQkVLy5B0MvNPHg5LNXLjmqzfQ1LlbfGf6DpdHkTcXvcHFoKJE+QkDWvpyuzFbCu
+ qbFXp0utk8alT2XiLAfHMsi/vAnYVltRSE303rhNkoV6xOjm8ocbK1EeOcWb+yD4BanR
+ rE723Rh5VdEbk+9f6FP7yM25q0DGQPGCoPNWKSJA1DfC4L2fTK8NeXgR3kVCXQsGCqTa
+ cLqg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX68AYLTdhe6tg+pGMTt3xO8PN2TZQXw5hjkCrCUiqrnfTm/iy/SGB4Fx46QLC7n+T9V9C+IQ0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxg5c1F2wwhUsVR4xfHGHHzxV7LDZihTXmdrp0QQUSl9o+7G95G
+ TK9wm7T1/vMVtAtWV0soFgQP6XBU5WkkGLZm6zB3K31b1Jr7SRL7qASCXoEN0Gto64IdYCx8NZr
+ LEypdU0ptnCneay24A3AhmH6MEm1L3u7yKOvf/LxXzJUNOLQ=
+X-Google-Smtp-Source: AGHT+IHT8KokJL9qTLwXMKj7tJ04RmBNgUk7nzmW0W/jjt6EqNmPgMsSRoctFzwEnBW9GBSxK+27OIwlYIYLJK/IoGU=
+X-Received: by 2002:a05:6214:310b:b0:6bf:8ae8:fc0c with SMTP id
+ 6a1803df08f44-6c15686dff0mr9281086d6.35.1724206286731; Tue, 20 Aug 2024
+ 19:11:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
- <20240814110009.45310-33-sughosh.ganu@linaro.org>
- <CAFLszTigDtzrLWzVfrVmq_Uet_GRoQWq7YVQcgerpk8XAT8BvQ@mail.gmail.com>
- <CADg8p97bznk=rdyq9_vFSbobockFXwzwdbJ2JsEvDzW6ZTreWA@mail.gmail.com>
-In-Reply-To: <CADg8p97bznk=rdyq9_vFSbobockFXwzwdbJ2JsEvDzW6ZTreWA@mail.gmail.com>
+References: <CAKZ1LvNcW7y0SnHwye98m1UrL53cqsErtKjFbGp0z+doiU+9aw@mail.gmail.com>
+ <77a23ada-f1c2-4542-a4c3-55c71a1cc49b@cherry.de>
+ <CAKZ1LvPSLRZJ0HnUtSvwOMw5ax-Vre_m94MaDrfhYmKYK_0KGg@mail.gmail.com>
+ <6bc0ccf4-66ef-467c-a3f2-e39d3d54f7cd@cherry.de>
+In-Reply-To: <6bc0ccf4-66ef-467c-a3f2-e39d3d54f7cd@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 20 Aug 2024 20:11:11 -0600
-Message-ID: <CAFLszTgs9kur8AU8_CpHSvZ2FZCqXAptH_2rtgb62aWvpkQKNQ@mail.gmail.com>
-Subject: Re: [PATCH v2 32/32] lmb: add logic to print lmb flag strings
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
- Max Filippov <jcmvbkbc@gmail.com>
+Date: Tue, 20 Aug 2024 20:11:16 -0600
+Message-ID: <CAFLszTggctZ-iRj0PS7zgCbUM8y3VUGky4aheg0HGw4RQvUsOQ@mail.gmail.com>
+Subject: Re: clarifying i2c_get_chip_for_busnum()
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Sahaj Sarup <sahaj.sarup@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,58 +87,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
+Hi,
 
-On Tue, 20 Aug 2024 at 04:23, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Tue, 20 Aug 2024 at 07:34, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 >
-> On Fri, 16 Aug 2024 at 02:03, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Sughosh,
-> >
-> > On Wed, 14 Aug 2024 at 05:03, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > >
-> > > Instead of printing the LMB flags as numerical values, print them as
-> > > strings. This makes it easier to understand what flags are associated
-> > > with the lmb region. Also make corresponding changes to the bdinfo
-> > > command's test code.
-> > >
-> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > ---
-> > > Changes since V1: New patch
-> > >
-> > >  lib/lmb.c         | 18 ++++++++++++++++--
-> > >  test/cmd/bdinfo.c |  4 ++--
-> > >  2 files changed, 18 insertions(+), 4 deletions(-)
-> >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> >
-> > But see below
-> >
-> > >
-> > > diff --git a/lib/lmb.c b/lib/lmb.c
-> > > index 37d2a72951..5c5b3e9bb5 100644
-> > > --- a/lib/lmb.c
-> > > +++ b/lib/lmb.c
-> > > @@ -26,6 +26,19 @@ DECLARE_GLOBAL_DATA_PTR;
-> > >
-> > >  static struct lmb lmb;
-> > >
-> > > +static void print_region_flags(enum lmb_flags flags)
-> > > +{
-> > > +       uint64_t bitpos;
-> > > +       const char *flag_str[] = { "LMB_NONE", "LMB_NOMAP", "LMB_NOOVERWRITE" };
-> >
-> > As mentioned, LMB_NONE shouldn't be a flag. For the other two, how
-> > about "no-map" and "no-overwrite"?
+> Hi,
 >
-> So, you don't want any value to be shown with LMB_NONE? I guess
-> LMB_NONE is indicative of the fact that the region does not have any
-> attributes, no?
+> On 8/20/24 3:01 PM, Sahaj Sarup wrote:
+> > [You don't often get email from sahaj.sarup@linaro.org. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+> >
+> > On Tue, 20 Aug 2024 at 17:21, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+> >>
+> >> Hi,
+> >>
+> >> On 8/20/24 11:12 AM, Sahaj Sarup wrote:
+> >>> [You don't often get email from sahaj.sarup@linaro.org. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+> >>>
+> >>> Hi,
+> >>>
+> >>> In `include/i2c.h` , the udevice pointer and return value definition
+> >>> seems to be confusing.
+> >>>
+> >>> ```
+> >>> /**
+> >>>    * i2c_get_chip_for_busnum() - get a device to use to access a chip on
+> >>> .
+> >>> .
+> >>> .
+> >>>    * @devp: Returns pointer to new device if found or -ENODEV if not
+> >>>    * found
+> >>>    */
+> >>> ```
+> >>>
+> >>> Should this instead be:
+> >>>
+> >>> ```
+> >>>    * @devp:   Returns pointer to new device or NULL if not found
+> >>>    * Return:  0 on success, -ENODEV on failure
+> >>> ```
+> >>>
+> >>
+> >> For the @devp part, seems like it as uclass_get_device_by_seq sets it to
+> >> NULL and i2c_get_chip only modifies it when a device is found.
+> >>
+> >> For the return part... not sure. We don't overwrite the return value we
+> >> get from functions we call, so not sure we can guarantee that only
+> >> ENODEV will be returned?
+> >
+> > make sense, devp can't return -ENODEV, ofc, and Return returns 0 or -ve.
+> > So it can be closer to:
+> >
+> > ```
+> > * @devp:   Returns pointer to new device or NULL if chip is not found
+> > * Return:  0 on success, -ve on failure to find bus or chip
+> > ```
+> >
+>
+> Nothing guarantees we'll return a negative value either though, c.f. the
+> if conditions in i2c_get_chip_for_busnum(), where we only check for ret
+> (i.e. ret != 0).
 
-That's my understanding, yes. This could be a later cleanup I suppose,
-but since you are adding flags, you may as well remove this one.
+That is pretty common in driver model. Few things return a positive
+value. Mostly they return 0 on success or a -ve error code.
 
-[..]
+Note though that *devp is generally not assigned if there is an error.
+It is left unset, so it could be something like:
+
+@devp: Returns pointer to new device on success
 
 Regards,
-Simon
+SImon
