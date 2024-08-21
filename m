@@ -4,48 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCABFC52D6F
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 17:35:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDE9CC52D7C
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 17:47:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E143A88B3F;
-	Wed, 21 Aug 2024 19:35:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=opensuse.org
+	by phobos.denx.de (Postfix) with ESMTP id 324F988BFA;
+	Wed, 21 Aug 2024 19:47:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="g/1XsolA";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D27A88B6D; Wed, 21 Aug 2024 19:35:30 +0200 (CEST)
-Received: from eclipse.jkvinge.net (eclipse.jkvinge.net [217.170.205.109])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AC53A88DFF; Wed, 21 Aug 2024 19:47:31 +0200 (CEST)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 936BE88A7E
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 19:35:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9179588B94
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 19:47:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=opensuse.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=jonaski@opensuse.org
-Received: from ni246.in.jkvinge.net (ti0116a430-0074.bb.online.no
- [88.91.110.75]) (authenticated bits=0)
- by eclipse.jkvinge.net (8.15.2/8.15.2/SuSE Linux 0.8) with ESMTPSA id
- 47LHZNnv014968
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NO);
- Wed, 21 Aug 2024 19:35:24 +0200
-Message-ID: <ff64557053d3f00d42c1b3a8c0d9237e870b30af.camel@opensuse.org>
-Subject: Re: u-boot on raspberry pi with secure boot
-From: Jonas Kvinge <jonaski@opensuse.org>
-To: Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 21 Aug 2024 19:35:23 +0200
-In-Reply-To: <311e1dd1-a887-461f-b984-bfc1807c63e6@linaro.org>
-References: <b24ba149599b9e0261676110894d14a0f69eb6a2.camel@opensuse.org>
- <311e1dd1-a887-461f-b984-bfc1807c63e6@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.52.4 
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-3db1657c0fdso4241553b6e.1
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 10:47:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1724262448; x=1724867248; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=jHRS+FAh6rDpIne8DPGZmP7+8bgsn2ucIVfUpw8ARO0=;
+ b=g/1XsolA6cCNClQUCHnmSkW2mv/S1f5FMq40UyrWEBrErbVf+zDfAIO8mQz5eO5+pg
+ FsnzfJXtDGjRf8yJgwa8we/zQpz+v/0BK68DeHCgCe396dF3t00Q8kKZVYy726sh4LdW
+ nu4fw756Rvk7l3Yb17CVPt5PaZrzwXrPP3XKU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724262448; x=1724867248;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jHRS+FAh6rDpIne8DPGZmP7+8bgsn2ucIVfUpw8ARO0=;
+ b=MnyXE+9f0RIBxcL6/EQnA03zlcjSFa+onpU8b8thwz1I9iwt0JJGC3VBL/Oui808aB
+ vauBH71WF/EbM94F/P9Wesx5wRYEZQN28DN62AMMPmLKHd+LiQAbVKKMd0ldW/Jy55/4
+ qq8Mot50+Ws4gPrl3H2tg/YuSPYzHGgul5SkbCLBc5CMLTToymX2JM0w8BAGvuFoKNVx
+ eJg80ypxE06MLYeRMOyH95IjKsn/s90B5wSOKpUapME0MVehspJ9jm3AbHyHqBkbPzhP
+ SDP7hfHlupnyw1HLqmWygKsky+ri2+2X2oaPiHSlxXIPYeqEy+qys10CFcXQQRUjitvA
+ TcFg==
+X-Gm-Message-State: AOJu0YzzPimuqt7RW/MOzjIcoE/qTyjiljlW7B4xtnyCZZNR8RNU8y/Z
+ O9nTUMsirnWgp5FE+X7qN6PndOYxi/UNxCVbGdtRl1T41KIjMfZzGe66I4zHaANOHZ9duM+HC4c
+ u
+X-Google-Smtp-Source: AGHT+IHXLysCNkMVi/suHcRSv15bGQrT0yZm8Ejn2PnZ/YM/5l7w9waprZpM2Z00WCbYLhzR+pdgKw==
+X-Received: by 2002:a05:6808:f0d:b0:3de:2137:ed1a with SMTP id
+ 5614622812f47-3de2137eef9mr233712b6e.41.1724262448093; 
+ Wed, 21 Aug 2024 10:47:28 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-236.totalplay.net.
+ [189.203.97.236]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3dd33d879adsm3364766b6e.28.2024.08.21.10.47.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 Aug 2024 10:47:27 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20240819210719.71747-1-trini@konsulko.com>
+References: <20240819210719.71747-1-trini@konsulko.com>
+Subject: Re: [PATCH 1/2] pytest: requirements.txt: Resync with the rest of
+ the project
+Message-Id: <172426244724.1427850.5623579270807890373.b4-ty@konsulko.com>
+Date: Wed, 21 Aug 2024 11:47:27 -0600
 MIME-Version: 1.0
-Received-SPF: pass (eclipse.jkvinge.net: authenticated connection)
- receiver=eclipse.jkvinge.net; client-ip=88.91.110.75;
- helo=ni246.in.jkvinge.net; envelope-from=jonaski@opensuse.org;
- x-software=spfmilter 2.001 http://www.acme.com/software/spfmilter/ with
- libspf2-1.2.10; 
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,46 +89,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 2024-08-20 at 16:29 +0200, Caleb Connolly wrote:
-> Hi Jonas,
->=20
->=20
-> I don't know the details of how this is implemented, but the way to=20
-> solve this is by doing EFI secureboot in U-Boot. The trick is to
-> embed=20
-> the securebook public key hash into U-Boot, there it will be
-> validated=20
-> by the bootrom stage and can be trusted to validate the signed kernel
-> EFI.
->=20
-> The kernel would then need to be booted as a "UKI" (refer to the uapi
-> group uki docs), this embeds the kernel, ramdisk, and DTB into a
-> single=20
-> EFI image which can be signed and verified.
->=20
-> Hopefully this points you in the right direction.
->=20
+On Mon, 19 Aug 2024 15:07:18 -0600, Tom Rini wrote:
 
-Thanks, this got me a bit further, I have managed to produce a UKI
-using dracut on openSUSE, this is written as /boot/efi/EFI/Linux/linux-
-6.10.5-1-default-69b6602716a8442d94a79481993e2ded.efi,
-I verified that it works by copying it to
-/boot/efi/EFI/BOOT/bootaa64.efi.
-I've also signed it now following the instructions on
-https://github.com/u-boot/u-boot/blob/master/doc/develop/uefi/uefi.rst
-So it produced a signed file (/boot/efi/EFI/Linux/linux-6.10.5-1-
-default-69b6602716a8442d94a79481993e2ded.efi.signed).
-So the next step is to restrict booting to this signed efi file.
-But I'm still not sure how to configure U-Boot to only accept to boot
-EFI files with my certificate.
-I don't see anywhere to configure that in 'make menuconfig', of course,
-if I copy the files to the UEFI partition, someone could just replace
-the .auth files.
-Do I need to use FIT image like described on
-https://trac.gateworks.com/wiki/secure_boot ?
-In that case how do I configure the .its file to include the efi file
-and the certificate instead of the kernel, ramdisk and fdt files
-described in the wiki?
+> In order to build the docker container, which contains a download cache
+> of python modules, we need to have our versions be in sync in each
+> requirements file. Update some of the cases where which are older than
+> the rest of the project.
+> 
+> 
 
-Jonas
+Applied to u-boot/master, thanks!
+
+-- 
+Tom
+
 
