@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69AEFC52D6F
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 05:30:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB759C52D6F
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 07:48:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9BC8C88AF2;
-	Wed, 21 Aug 2024 07:29:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 19B60884CA;
+	Wed, 21 Aug 2024 09:48:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vbG2IUfA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Y5T1l9b2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E8E888ABE; Wed, 21 Aug 2024 07:29:57 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 3549F88B2A; Wed, 21 Aug 2024 09:48:44 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 312A888AF2
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 07:29:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBFBF884CA
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 09:48:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-429ec9f2155so44656675e9.2
- for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 22:29:55 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5bb85e90ad5so4854587a12.3
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 00:48:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724218194; x=1724822994; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724226521; x=1724831321; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=D51lF/mLWweCn5phRg8Oz31rhgbG9ACBtdfEp0orsTE=;
- b=vbG2IUfA7wTMg+OLi1tAcpsBUBcUejvQ02Po9CLoq+WKtBpLlLQscibUYQcboUDMqR
- hNwodNG/dwGmSqL/Kn5cn0DTOva0VwtWWcbVSjzq1eF8Bo8XS6Gjy2q8O9zb07Yc8EFE
- 9OVgpxyAVZc5ICU2B5c04kp1aMUbN26gl/ysSPcVSMOoUYkNJkyvSfPXHGkxFwqCn1OU
- YD5ZbiUJbjob8O7kwt1usHict9GbezP3uZQrY0lHA7VgL9TbicNinYJ8ZBO4J9Po3Lal
- ZOHna3sUgoGoJEv/RQWrTekdXcPG0fuomHmD3RNctHuxgCjOel0puaSwNjoJAAfCoCtY
- gIgA==
+ bh=fdeDWvHrSqr5rjphEi5VlkslloOZNgRLiZvWGb/P+bg=;
+ b=Y5T1l9b22oiBqFUI97RBtFuRmrrqCnh8TcFkL+JJdLk1WZfFUbC5lH7PAE4LjloaUl
+ GrBx8CoYuCHqiC+qowFoUBOxeJkIAcLwFw2GXRDuGbRlecokSvMKlkEQgzorZfMIzGSU
+ seYmyl2k4qnTQF2dsyhuCVJDdL9/9SI/+j/h7eN+NlEHR0slQZN2eZdlqlvKUgUX4YLn
+ yqvBbeHUOOD05SciyBt4q0pvV9b6lxKExPBFGI7rGXCWs3nR0vgZQxPgfm7CVC4QINBT
+ Fr4euN+2Ty1torxPpi+qi4i0172CccEFlZ4WTst1IZ9KP/o1t5M7RecCv0QmAR+YOFkm
+ EHgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724218194; x=1724822994;
+ d=1e100.net; s=20230601; t=1724226521; x=1724831321;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=D51lF/mLWweCn5phRg8Oz31rhgbG9ACBtdfEp0orsTE=;
- b=aCNkP8VPTwyIEIpfMI167QK60/9vm96AATEFLTGI3C2Jbt7bKseCtc9nv5Z9S2jMXJ
- XrSVkaw5qpPLSjF9rloC7FQN/EcHN/dGnhXINIbbtHu5/AVUq+VkZlPEFPe2eAkAR+pK
- pmlhSUJLdTe33WAHpL0AlC9MfQZjX3+a6nsMxWkH6yAQyirBLdfMbBxD7y7RipefxLBm
- xhqYKpSCh6IZBZgEZk2YZB0R1Yv+my/6ydeSuJ7/8GhSr8MfvCUlMkMJzDNjhtLiYe76
- RvZ8zNqZlyqKNtOuXiTjWK3PNXRGpHZfz2yUh84VZLLom6TqpyEl4W+V6Gzw8yTpqiR/
- IRzA==
-X-Gm-Message-State: AOJu0YwkgPiW58v/XtXAIJT6UiSszyklY9w98VVJ008vYdxMFzlUbuSn
- aWOtDK06ZvjxTZEFUUrSIyLGJTN5w8gyhc+/XHvYEpfmjtw6QMVno1JIZpvBFoPA542kkVpUv3A
- kqmkrA9VGWsoOtDvwePPJfdvOW6YmH9J2ZKd1rg==
-X-Google-Smtp-Source: AGHT+IHVoTnLv8U5yZkkc3gpXTa8Y/rqDVvL/TYYcjwDJvQ9ocEjz/9EqWQYfEY4l2LUIayv2lCWb3VblmiN+rko9po=
-X-Received: by 2002:adf:ec44:0:b0:371:88b9:256d with SMTP id
- ffacd0b85a97d-372fd586c98mr801851f8f.6.1724218194286; Tue, 20 Aug 2024
- 22:29:54 -0700 (PDT)
+ bh=fdeDWvHrSqr5rjphEi5VlkslloOZNgRLiZvWGb/P+bg=;
+ b=mt0sLlBTv/Hr8Okp4Py+gVP8c9JhRvWB2fRuEHQMJ3Ydaa9HKAtfeEet6/FRNuwvNL
+ KDNixYjdnxfaqC/QteGVbEWj8NZKz7i2rHFontK0OGYzW3iNCFERtqBIBLlaaUKkpcOw
+ AQaHRDkmqeKTvBxDx1LpE90kPsp9MDqx+pKS+69o4BTwpmJ19pdeXhsEjPNH+tsnMoB8
+ 3Foj4KooeqrI1X5KP+X9hQ+dQnvjqxHAj+bq4QxseZdAGBIpN1BYMlWixPF5OCgPeE4h
+ og6vV84Bq/Q+LWcoX2o6Wat8+QBBaab+WAoJwrB76NQk/e3RRBbp/zdcPrVnTl207CAv
+ UMNg==
+X-Gm-Message-State: AOJu0YzmAdOu98BGoadxG0ypZNBoQG/oHAVwuFHf54JaMbYjb3CP8Pr/
+ k+zFMh1qbN8CrXITnv9cTTyxYRhhsZETVRnBxE9V2sy6KBrZ4QtGTzGRA3X8e1cYAzDoUB+N0Y7
+ +okzgsKlYCZVC6xKKct90ckD0FuDssgyk2oa7cA==
+X-Google-Smtp-Source: AGHT+IEUfnzKwpHelO4DTAxf0AafWB9o1E/uTXOhbBctigvOYSmntAcf19sWbsAabuM7mbZPCX1DFNI8sM3wmhJtqlE=
+X-Received: by 2002:a05:6402:430c:b0:5bf:c8:774 with SMTP id
+ 4fb4d7f45d1cf-5bf1f0dab77mr936570a12.15.1724226521065; Wed, 21 Aug 2024
+ 00:48:41 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
- <20240814110009.45310-15-sughosh.ganu@linaro.org>
- <CAFLszTjMwpW-MRWfJrOja2JGMcTtjYzLqH68hum=yDsXjc6PQQ@mail.gmail.com>
- <CADg8p95k_0CtqD5x8_jjW31YoPOoiLSvDU-M_JtcBU_+V-4hEg@mail.gmail.com>
- <CAFLszTji1FcHNitO+mKJ+uh-Kr5N33ZZjqZJx1Uaianj35Q4vQ@mail.gmail.com>
-In-Reply-To: <CAFLszTji1FcHNitO+mKJ+uh-Kr5N33ZZjqZJx1Uaianj35Q4vQ@mail.gmail.com>
+ <20240814110009.45310-33-sughosh.ganu@linaro.org>
+ <CAFLszTigDtzrLWzVfrVmq_Uet_GRoQWq7YVQcgerpk8XAT8BvQ@mail.gmail.com>
+ <CADg8p97bznk=rdyq9_vFSbobockFXwzwdbJ2JsEvDzW6ZTreWA@mail.gmail.com>
+ <CAFLszTgs9kur8AU8_CpHSvZ2FZCqXAptH_2rtgb62aWvpkQKNQ@mail.gmail.com>
+In-Reply-To: <CAFLszTgs9kur8AU8_CpHSvZ2FZCqXAptH_2rtgb62aWvpkQKNQ@mail.gmail.com>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Wed, 21 Aug 2024 10:59:43 +0530
-Message-ID: <CADg8p94QuMpjP3fU0Rz7Y2gzpM=93RdxFxLM7c7DkpRtnkVL0A@mail.gmail.com>
-Subject: Re: [PATCH v2 14/32] lmb: introduce a function to add memory to the
- lmb memory map
+Date: Wed, 21 Aug 2024 13:18:29 +0530
+Message-ID: <CADg8p94cD7BOHb4H_vy-doRnytqK9zA12mdiHhRvHrGUKEw=SQ@mail.gmail.com>
+Subject: Re: [PATCH v2 32/32] lmb: add logic to print lmb flag strings
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
@@ -103,76 +102,68 @@ On Wed, 21 Aug 2024 at 07:41, Simon Glass <sjg@chromium.org> wrote:
 >
 > Hi Sughosh,
 >
-> On Tue, 20 Aug 2024 at 02:17, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> On Tue, 20 Aug 2024 at 04:23, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > >
-> > On Fri, 16 Aug 2024 at 02:04, Simon Glass <sjg@chromium.org> wrote:
+> > On Fri, 16 Aug 2024 at 02:03, Simon Glass <sjg@chromium.org> wrote:
 > > >
 > > > Hi Sughosh,
 > > >
-> > > On Wed, 14 Aug 2024 at 12:01, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > On Wed, 14 Aug 2024 at 05:03, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > > > >
-> > > > Introduce a function lmb_add_memory() to add available memory to the
-> > > > LMB memory map. Call this function during board init once the LMB data
-> > > > structures have been initialised.
+> > > > Instead of printing the LMB flags as numerical values, print them as
+> > > > strings. This makes it easier to understand what flags are associated
+> > > > with the lmb region. Also make corresponding changes to the bdinfo
+> > > > command's test code.
 > > > >
 > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > > > > ---
-> > > > Changes since V1:
-> > > > * Call the lmb_add_memory() from lmb_init() instead of
-> > > >   lmb_mem_regions_init().
+> > > > Changes since V1: New patch
 > > > >
-> > > >
-> > > >  include/lmb.h | 10 ++++++++++
-> > > >  lib/lmb.c     | 42 ++++++++++++++++++++++++++++++++++++++++++
-> > > >  2 files changed, 52 insertions(+)
-> > > >
+> > > >  lib/lmb.c         | 18 ++++++++++++++++--
+> > > >  test/cmd/bdinfo.c |  4 ++--
+> > > >  2 files changed, 18 insertions(+), 4 deletions(-)
 > > >
 > > > Reviewed-by: Simon Glass <sjg@chromium.org>
 > > >
-> > > But this should not be weak.
+> > > But see below
+> > >
+> > > >
+> > > > diff --git a/lib/lmb.c b/lib/lmb.c
+> > > > index 37d2a72951..5c5b3e9bb5 100644
+> > > > --- a/lib/lmb.c
+> > > > +++ b/lib/lmb.c
+> > > > @@ -26,6 +26,19 @@ DECLARE_GLOBAL_DATA_PTR;
+> > > >
+> > > >  static struct lmb lmb;
+> > > >
+> > > > +static void print_region_flags(enum lmb_flags flags)
+> > > > +{
+> > > > +       uint64_t bitpos;
+> > > > +       const char *flag_str[] = { "LMB_NONE", "LMB_NOMAP", "LMB_NOOVERWRITE" };
+> > >
+> > > As mentioned, LMB_NONE shouldn't be a flag. For the other two, how
+> > > about "no-map" and "no-overwrite"?
 > >
-> > This is being made weak, as there would be lmb_add_memory()
-> > definitions added for powerpc and x86 arch's in the EFI part of my
-> > patches. Moreover, the lmb_add_memory() function would be called even
-> > in the SPL stage when LMB is enabled for that stage. So I am not sure
-> > how do we get around this. You can check the relevant branch [1] on my
-> > github to check for the specific commits [2][3] that I am referring
-> > to. Thanks.
+> > So, you don't want any value to be shown with LMB_NONE? I guess
+> > LMB_NONE is indicative of the fact that the region does not have any
+> > attributes, no?
 >
-> This is really strange.
->
-> The e820 is different on each x86 board. I'm not sure we want that in
-> the lmb. What is the purpose of that? It is somewhat circular in most
-> cases, since U-Boot sets it up itself. Where it comes from coreboot,
-> it looks like we are mirroring it in the EFI memory map. I'm not sure
-> I understand all this very well.
+> That's my understanding, yes. This could be a later cleanup I suppose,
+> but since you are adding flags, you may as well remove this one.
 
-Yes, me neither. And I want to keep the behaviour same as before the
-patches. You would know that the function efi_add_known_memory() gets
-the memory map from a function install_e820_map() which includes
-conventional memory, which is the ram memory. And I am basically now
-doing this as part of the lmb_add_memory() function instead. Are you
-sure that we can do away with this function, and instead use the
-ram_base and ram_top values from the global data structure instead? I
-believe you have boards which exercise this code? So it will be great
-if you can test this if I remove the function for the e820 module.
-
->
-> For fsl, perhaps copy the #ifdef and handle arch.resv_ram in your code?
-
-This is for adding ram to the lmb memory map, but yes, I can check by
-putting an ifdef in the function. Although the function might look
-ugly and hackish. Thanks.
+Maybe I am not getting your point. But we have the flags member in the
+struct lmb_region, and a region without any flags set will have a
+value of 0. And we are calling that LMB_NONE. So, if we consider the
+boot_fdt_reserve_region() function, we need to pass a flags argument
+to the function. And a value of 0 would mean LMB_NONE. Is it not
+instructive to show a value of 0 as LMB_NONE(okay, maybe not in
+uppercase), instead of having to just print 0? Not printing anything
+is a little confusing imo.
 
 -sughosh
 
 >
 > [..]
+>
 > Regards,
 > Simon
->
->
-> > [1] - https://github.com/sughoshg/u-boot/tree/lmb_efi_sep_apis_nrfc_next_v3
-> > [2] - https://github.com/u-boot/u-boot/commit/077ced7aaa6d495b1b87b324fb1c60658c203ce1
-> > [3] - https://github.com/u-boot/u-boot/commit/d0fa3a89865b796f3bbebffebbe4f7b5b048c140
-> >
