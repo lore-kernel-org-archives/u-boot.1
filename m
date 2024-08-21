@@ -4,77 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C8C9C52D6F
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 18:43:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0512AC52D7C
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 20:25:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5722888D8B;
-	Wed, 21 Aug 2024 20:43:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2F50688C01;
+	Wed, 21 Aug 2024 22:25:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="acLhoV4u";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="Cfr7QRxl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94671889AE; Wed, 21 Aug 2024 20:43:08 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C829488E2B; Wed, 21 Aug 2024 22:25:25 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B66DB88E3B
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 20:43:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D7B1688BB2
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 22:25:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-202089e57d8so15945ad.0
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 11:43:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724265784; x=1724870584; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3e5A/Zrx7EHFJB8X/66W67b5cr2nk+ewJH/NIoq3Epo=;
- b=acLhoV4uyIzTfaPFNj1qqoyM6TnCRs0HPuadY71XmWLTyhJbFqLU5SunyyUGGZ1ip8
- R9ndGdYBnwG5ynjbwwocvPSVM3vOZGWDbqKeWHY3wufWQRCr5VR7UlKUHR0osW3ENLdw
- S1abOJfPsC9cMHNLNtwUBLfW2CjzuWkC+s42xtAHEZWHI4EgsvX1JAsdaaB5jfgw5r+E
- OMEF96ihUFPCSyq0UpNVRVWbMtTHoy5/2gcJZZKe/G4VAPL35vGi6EH5Bv1zJqr8MkQU
- Omvlf3Zq8e/Wxqgd9ny7OOU1x31VH/SOjuaa/6onjup5yR7BB7NQN31vGTBLjs6ACngZ
- QUpQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724265784; x=1724870584;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3e5A/Zrx7EHFJB8X/66W67b5cr2nk+ewJH/NIoq3Epo=;
- b=gznU30BILlipOeQVjL7IccmEKPBN2m4XxImAfWN2unqnYdiJzQAy4PrBAFwQ1CH9sq
- wmlbE25AIrDkI7ks0qejndwOpSmTsIWgP02c3YQq7DcgfSWSYlj5ax+95UKbycnuv2FC
- 9BHod/FaR83tmS8wswEbNjoftUtDxMuMbZ2+JT6C97ZKa/FemWMThLHedRfX1z754ZBO
- gWKhq4V9XIDAf2BldlJEoXyJ7iTYGOPiG0rcEbT/DvcIKHnkUIV93szuq3bK5ZFc+mpT
- m5Ir5fmgXLCjlcI9wPUudFFCKygrVYi1caTDLpZYh36sZ/VoixZV7Px+89dJNjMwPJOT
- iO2A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVB9Nf4oIAPA9ikOQc4jz584fZmdfY9VH9uL3ORBAQPTQoL8GFADq2bV9CuCwEynZDxZFxJkrY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz9mTBETxju/iMNNavpLJMjact+RUcyaY+EbcwShocJbqZImlhv
- lCkmwKTLY8N+y1lOw44AhyrRgMcUcUUB72NS4tN1ZeLRhh5S6mH5DEeXZHhlo7xs5ojt/ZYS+Hc
- cOjm2fqojMSj7SD5A7r7vOtG6H4u6AJ5G+faOWku+GJXuNP5x
-X-Google-Smtp-Source: AGHT+IHU3NmhJX21pDEDCzma3WzePI37qZ950byjcNX9oZg+aEkG+4m/kCD3a8VstuR63OlhWmFRoKVj8d+qayYD3z4=
-X-Received: by 2002:a17:902:d2cc:b0:201:eb46:1be5 with SMTP id
- d9443c01a7336-2037ef22e4cmr9061295ad.3.1724265783860; Wed, 21 Aug 2024
- 11:43:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 13C74120009;
+ Wed, 21 Aug 2024 23:25:22 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 13C74120009
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1724271922;
+ bh=DCR2LF/AdOw/Uk8d6pVtB46wYFXJpmRLhPXoL+NdMUQ=;
+ h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
+ b=Cfr7QRxlzb1ZXqo+/ZrY4BCH/jLfZPkIl5E/0owEhH1o5inggCI025BG4RLZKWRTB
+ jSkvG2oecUk2PHNjWBpa2efoY92vOXSCI4iOn5WwR8ciZpEwpslQsRQzPYs9ZxCtOY
+ y2llofaT2Q7KGE9/BYr3uGMElNcTM6ll1xnhrZcDnipE+2RrIuz7nkg+HZ3Be5MzjW
+ DgJXQ9MHaDm/9qbEVPZi1VEXwQgZ9tRC/7XajXwfyOPGuhBapzktHddvi4Jy3oosS3
+ bZp+BOMtbq0q2tk7G06Hf6a9CVujpiSfAJBWLnKvZ5NFidUlxq/jWRDjB8nryr0Bpa
+ QOp4yyoN08PiQ==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
+ [172.16.192.103])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Wed, 21 Aug 2024 23:25:21 +0300 (MSK)
+Message-ID: <82c914ec-db68-5971-8ac0-6ed359872175@salutedevices.com>
+Date: Wed, 21 Aug 2024 23:12:38 +0300
 MIME-Version: 1.0
-References: <b24ba149599b9e0261676110894d14a0f69eb6a2.camel@opensuse.org>
- <311e1dd1-a887-461f-b984-bfc1807c63e6@linaro.org>
- <ff64557053d3f00d42c1b3a8c0d9237e870b30af.camel@opensuse.org>
-In-Reply-To: <ff64557053d3f00d42c1b3a8c0d9237e870b30af.camel@opensuse.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 21 Aug 2024 21:42:52 +0300
-Message-ID: <CAC_iWj+qS7VzT89nF5ZO2bHzxRhaM6BRmLQVhipKtFktGfVbFw@mail.gmail.com>
-Subject: Re: u-boot on raspberry pi with secure boot
-To: Jonas Kvinge <jonaski@opensuse.org>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.1
+Subject: Re: [PATCH v2 0/3] Meson: R/W support for pages used by boot ROM
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Michael Trimarchi
+ <michael@amarulasolutions.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Tom Rini <trini@konsulko.com>,
+ Sean Anderson <seanga2@gmail.com>
+CC: <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>,
+ <kernel@sberdevices.ru>, <oxffffaa@gmail.com>
+References: <20240708071352.3022327-1-avkrasnov@salutedevices.com>
+Content-Language: en-US
+From: Arseniy Krasnov <avkrasnov@salutedevices.com>
+In-Reply-To: <20240708071352.3022327-1-avkrasnov@salutedevices.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [172.28.161.232]
+X-ClientProxiedBy: p-i-exch-a-m2.sberdevices.ru (172.24.196.120) To
+ p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 187218 [Aug 21 2024]
+X-KSMG-AntiSpam-Version: 6.1.0.4
+X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 27 0.3.27
+ 71302da218a62dcd84ac43314e19b5cc6b38e0b6, {Tracking_uf_ne_domains},
+ {Tracking_from_domain_doesnt_match_to}, salutedevices.com:7.1.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; lore.kernel.org:7.1.1;
+ 127.0.0.199:7.1.2; smtp.sberdevices.ru:5.0.1,7.1.1, FromAlignment: s
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean, bases: 2024/08/21 19:14:00
+X-KSMG-LinksScanning: Clean, bases: 2024/08/21 19:13:00
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/08/21 18:33:00 #26403583
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,59 +103,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas on mobile and on vacation, I'll respond in a week or so. In the
-meantime https://www.linaro.org/blog/uefi-secureboot-in-u-boot/ this might
-help.
+Hi, sorry, pls ping  😄
 
+Thanks
 
-In sort you have to include the efi keys in the uboot binary.
-
-Cheers
-Ilias
-
-On Wed, Aug 21, 2024, 20:35 Jonas Kvinge <jonaski@opensuse.org> wrote:
-
-> On Tue, 2024-08-20 at 16:29 +0200, Caleb Connolly wrote:
-> > Hi Jonas,
-> >
-> >
-> > I don't know the details of how this is implemented, but the way to
-> > solve this is by doing EFI secureboot in U-Boot. The trick is to
-> > embed
-> > the securebook public key hash into U-Boot, there it will be
-> > validated
-> > by the bootrom stage and can be trusted to validate the signed kernel
-> > EFI.
-> >
-> > The kernel would then need to be booted as a "UKI" (refer to the uapi
-> > group uki docs), this embeds the kernel, ramdisk, and DTB into a
-> > single
-> > EFI image which can be signed and verified.
-> >
-> > Hopefully this points you in the right direction.
-> >
->
-> Thanks, this got me a bit further, I have managed to produce a UKI
-> using dracut on openSUSE, this is written as /boot/efi/EFI/Linux/linux-
-> 6.10.5-1-default-69b6602716a8442d94a79481993e2ded.efi,
-> I verified that it works by copying it to
-> /boot/efi/EFI/BOOT/bootaa64.efi.
-> I've also signed it now following the instructions on
-> https://github.com/u-boot/u-boot/blob/master/doc/develop/uefi/uefi.rst
-> So it produced a signed file (/boot/efi/EFI/Linux/linux-6.10.5-1-
-> default-69b6602716a8442d94a79481993e2ded.efi.signed).
-> So the next step is to restrict booting to this signed efi file.
-> But I'm still not sure how to configure U-Boot to only accept to boot
-> EFI files with my certificate.
-> I don't see anywhere to configure that in 'make menuconfig', of course,
-> if I copy the files to the UEFI partition, someone could just replace
-> the .auth files.
-> Do I need to use FIT image like described on
-> https://trac.gateworks.com/wiki/secure_boot ?
-> In that case how do I configure the .its file to include the efi file
-> and the certificate instead of the kernel, ramdisk and fdt files
-> described in the wiki?
->
-> Jonas
->
->
+On 08.07.2024 10:13, Arseniy Krasnov wrote:
+> Patchset is based on patchset for Linux (today merged to nand-next):
+> https://lore.kernel.org/linux-mtd/20240507230903.3399594-1-avkrasnov@salutedevices.com/
+> 
+> Here is description from it:
+> 
+>  >  Amlogic's boot ROM code needs that some pages on NAND must be written
+>  >  in special "short" ECC mode with scrambling enabled. Such pages:
+>  >  1) Contain some metadata about hardware.
+>  >  2) Located with some interval starting from 0 offset, until some
+>  >     specified offset. Interval and second offset are set in the
+>  >     device tree.
+>  >  
+>  >  This patchset adds R/W support for such pages. To enable it we can setup
+>  >  it in dts:
+>  >  
+>  >      nand-is-boot-medium;
+>  >      amlogic,boot-pages = <1024>;
+>  >      amlogic,boot-page-step = <128>;
+>  >  
+>  >  It means that each 128th page in range 0 to 1024 pages will be accessed
+>  >  in special mode ("short" ECC + scrambling). In practice this feature is
+>  >  needed when we want to update first block of NAND - driver will enable
+>  >  required mode by itself using value from device tree.
+> 
+> The only difference is that patchset for Linux updates DT bindings, while
+> this adds NAND_IS_BOOT_MEDIUM flag support.
+> 
+> Changelog:
+>  v1 -> v2:
+>  * Pls see per-patch changelog.
+> 
+> Arseniy Krasnov (3):
+>   mtd: rawnand: nand_base: support for 'NAND_IS_BOOT_MEDIUM' flag
+>   mtd: rawnand: meson: refactor use of 'meson_nfc_cmd_access()'
+>   mtd: rawnand: meson: read/write access for boot ROM pages
+> 
+>  drivers/mtd/nand/raw/meson_nand.c | 84 +++++++++++++++++++++----------
+>  drivers/mtd/nand/raw/nand_base.c  |  3 ++
+>  include/linux/mtd/rawnand.h       |  5 ++
+>  3 files changed, 65 insertions(+), 27 deletions(-)
+> 
