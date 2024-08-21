@@ -4,72 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 193C4C3DA4A
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 02:11:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3C8FC531DF
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 02:11:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3989188AA7;
-	Wed, 21 Aug 2024 04:11:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9C62788B58;
+	Wed, 21 Aug 2024 04:11:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NwduhOzG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BZR2+Asf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23DCE88B37; Wed, 21 Aug 2024 04:11:20 +0200 (CEST)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
+ id 53DA888A64; Wed, 21 Aug 2024 04:11:26 +0200 (CEST)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E82988AAA
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 04:11:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7903788B78
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 04:11:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-e13c23dbabdso4309666276.3
- for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 19:11:18 -0700 (PDT)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-6bf6721aae5so30497446d6.2
+ for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 19:11:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724206277; x=1724811077; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724206282; x=1724811082; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=SUg7FZpJwdu8gzjZplO1/hULO/S8FOeV9pC4fFTQxjw=;
- b=NwduhOzGwnYnV0kz30HuJDIU3VpYXfi+kszU2mUJa9ZfIgdm74i2hmcG5ufhUzYMTw
- hGxJXpkD2fI9U1reEUR6RGfLORUnv6HEawyfjvHaCEomnCcDAMPa7+xTWKOy2yGA0/oL
- kWerfKBK4egz2pN+bO7xfoh6kwDmN8GH5sVUY=
+ bh=LKJF4UV63Tfe8OGUwguNGv8M3YgmrSny7m5FuJcPrcU=;
+ b=BZR2+Asfq0jGuQ1fs/TnULSV8lM97FMBB+fvXjQDSZAcHsFxfddIdS7PkDw08Ey7tq
+ 3wTpfx+Jm5NN1qjksutTiHkytZBtyY6GM8CZh/lxAEGVhwQ7xWG+PH7QBTw3yFkSBPSw
+ FCBSKuKg9Fp4whcl1sIwMEp7EUDyeFICC+wtM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724206277; x=1724811077;
+ d=1e100.net; s=20230601; t=1724206282; x=1724811082;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=SUg7FZpJwdu8gzjZplO1/hULO/S8FOeV9pC4fFTQxjw=;
- b=aAhYuK3mVpoqgWJhZU/oWMWGLQvI5Pwbr1+PrEWwpeBpLgrEHWEHnnhlzW4AOwS3ve
- W12eUieI8jZlGtYdweF9LWMz7Y/seXN4YvfPt4thnzKo35O56uL3TLlfWc/RQIPlmqlg
- ijEB7b6w5wBc/3HGIylfPfrlH6u2Q1STQZujNZ1b+FFff1bE76quGhEiU2pEOXam8Fyk
- VvKXBj1Oe9shWCuppIGZgJnLbSOA44YwOJNpqsak6lGuXspL+1Ju7p1fb/ycPI+573De
- SexHYE4gdo3xRGiwm0TrxHFICie+bFKfyuM1mQNE/ave1peUXsvLfIcl3CZeCCiC1qUw
- qzjA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUt4qryKe6vZ8Hi5UOoF9GwzWvHaceTxGBAne+e9D0DroX8lK6RdwD2S6KbSZAPwFyW2HwGzHw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzuYyWWNGITvH8s2Vui+Dth8TtIzArKYht5KbsjL5uZ7XnTQVNq
- No4YIA2ULWFy6JyLzgbFDZ+n+EjJ5ck0LNY6MUWl+WZQG+YL5RCU1fCxWs6yH4FR3lo+J5mcFJu
- PNKAEIebvU3kDIiutVrEuT4Lrj/ZWS7iYfmVS
-X-Google-Smtp-Source: AGHT+IHES4syNxSKP1qUIAiXUu06EmUULpO6CahfWj6h1PH/xGiLeAjvT1WSA54zDwlvDD47t/kOOyYnntFg4167mqI=
-X-Received: by 2002:a25:dcc4:0:b0:e11:8016:180c with SMTP id
- 3f1490d57ef6-e166555455fmr1149720276.52.1724206276908; Tue, 20 Aug 2024
- 19:11:16 -0700 (PDT)
+ bh=LKJF4UV63Tfe8OGUwguNGv8M3YgmrSny7m5FuJcPrcU=;
+ b=ULvAU789WWxwY+3pn4kgF25iqr24qjisvxLc/Mb1isCopCCB3X5//akqsg27HpfwpH
+ Pkmjh2pfNVt+BkkoxDE1LtHXCTIj0ALmDUb5Q/i4ga6MvQfF8n8enkVLAv55fn5hTbHk
+ iiPulRyY550urhsrM+2Q1SAV/3/cgB7nwKSb2fSbbSZhPl7pi38p6Fm8WDeMM+ULOvg7
+ dsgXYEkHsMpcY6ORWDJ7/d9F4UEEWwGdtXo/iCPlsfnFAruHDLsWIaZkdBMUhMWynuF9
+ S4d050jVOWIlVw4zCgKGZjCbecrb9EBUEp0zjuSFnvthjZGD3YveZFhF7G9g3uE8pL4M
+ HAtw==
+X-Gm-Message-State: AOJu0YxNOTULEFsVbpXmbWijvaE/QXDdVHjrPXZpKxwSc2dbOx+0hbJz
+ N5y9WPV00s3r6Ef3vxgtckRhfmo3FsB6ns/X1GQzOUmfRGd2vknHjCMLtufQtdY5qaH19MWak6b
+ uaS1+X92TxH2M7/gWvm9plWu+cUt9oQfrwvDs
+X-Google-Smtp-Source: AGHT+IGvdaSTt7BxYSnAOUgx2u/gU3D2S4+pxrCGttxpJTW9pQqq3EvbaPZbiexU4ibK6vaKPoxjQKLfVZSM+crQSOw=
+X-Received: by 2002:a05:6214:33c2:b0:6bf:7985:f46d with SMTP id
+ 6a1803df08f44-6c155d55e4fmr14040196d6.12.1724206282385; Tue, 20 Aug 2024
+ 19:11:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <BY1PR03MB72863313CCC8B4927892BFB2E18C2@BY1PR03MB7286.namprd03.prod.outlook.com>
-In-Reply-To: <BY1PR03MB72863313CCC8B4927892BFB2E18C2@BY1PR03MB7286.namprd03.prod.outlook.com>
+References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
+ <20240814110009.45310-33-sughosh.ganu@linaro.org>
+ <CAFLszTigDtzrLWzVfrVmq_Uet_GRoQWq7YVQcgerpk8XAT8BvQ@mail.gmail.com>
+ <CADg8p97bznk=rdyq9_vFSbobockFXwzwdbJ2JsEvDzW6ZTreWA@mail.gmail.com>
+In-Reply-To: <CADg8p97bznk=rdyq9_vFSbobockFXwzwdbJ2JsEvDzW6ZTreWA@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 20 Aug 2024 20:11:06 -0600
-Message-ID: <CAFLszTheDnDKSBV=qKd2m0i616sKSt=0TpHOosEogq+euLWRtQ@mail.gmail.com>
-Subject: Re: [PATCH v1] dm: core: Make SPL_DM_SEQ_ALIAS select SPL_STRTO
-To: "Gaskell, Oliver" <Oliver.Gaskell@analog.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>, 
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Linux Factory <adsp-linux@analog.com>
+Date: Tue, 20 Aug 2024 20:11:11 -0600
+Message-ID: <CAFLszTgs9kur8AU8_CpHSvZ2FZCqXAptH_2rtgb62aWvpkQKNQ@mail.gmail.com>
+Subject: Re: [PATCH v2 32/32] lmb: add logic to print lmb flag strings
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
+ Max Filippov <jcmvbkbc@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,37 +93,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 19 Aug 2024 at 03:43, Gaskell, Oliver <Oliver.Gaskell@analog.com> wrote:
->
-> Enabling CONFIG_DM_SEQ_ALIAS enables code which relies on
-> `trailing_strtol()` - which is only linked in SPL when CONFIG_SPL_STRTO
-> is enabled.
->
-> CONFIG_SPL_STRTO is not enabled by default - to ensure this function is
-> available in SPL, CONFIG_SPL_DM_SEQ_ALIAS should select
-> CONFIG_SPL_STRTO.
->
-> Signed-off-by: Oliver Gaskell <Oliver.Gaskell@analog.com>
-> ---
->
->  drivers/core/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
+Hi Sughosh,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-
+On Tue, 20 Aug 2024 at 04:23, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> diff --git a/drivers/core/Kconfig b/drivers/core/Kconfig
-> index 1a7be4d9b4..c39abe3bc9 100644
-> --- a/drivers/core/Kconfig
-> +++ b/drivers/core/Kconfig
-> @@ -146,6 +146,7 @@ config DM_SEQ_ALIAS
->  config SPL_DM_SEQ_ALIAS
->         bool "Support numbered aliases in device tree in SPL"
->         depends on SPL_DM
-> +       select SPL_STRTO
->         help
->           Most boards will have a '/aliases' node containing the path to
->           numbered devices (e.g. serial0 = &serial0). This feature can be
-> --
-> 2.34.1
+> On Fri, 16 Aug 2024 at 02:03, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Sughosh,
+> >
+> > On Wed, 14 Aug 2024 at 05:03, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > >
+> > > Instead of printing the LMB flags as numerical values, print them as
+> > > strings. This makes it easier to understand what flags are associated
+> > > with the lmb region. Also make corresponding changes to the bdinfo
+> > > command's test code.
+> > >
+> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > ---
+> > > Changes since V1: New patch
+> > >
+> > >  lib/lmb.c         | 18 ++++++++++++++++--
+> > >  test/cmd/bdinfo.c |  4 ++--
+> > >  2 files changed, 18 insertions(+), 4 deletions(-)
+> >
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> >
+> > But see below
+> >
+> > >
+> > > diff --git a/lib/lmb.c b/lib/lmb.c
+> > > index 37d2a72951..5c5b3e9bb5 100644
+> > > --- a/lib/lmb.c
+> > > +++ b/lib/lmb.c
+> > > @@ -26,6 +26,19 @@ DECLARE_GLOBAL_DATA_PTR;
+> > >
+> > >  static struct lmb lmb;
+> > >
+> > > +static void print_region_flags(enum lmb_flags flags)
+> > > +{
+> > > +       uint64_t bitpos;
+> > > +       const char *flag_str[] = { "LMB_NONE", "LMB_NOMAP", "LMB_NOOVERWRITE" };
+> >
+> > As mentioned, LMB_NONE shouldn't be a flag. For the other two, how
+> > about "no-map" and "no-overwrite"?
+>
+> So, you don't want any value to be shown with LMB_NONE? I guess
+> LMB_NONE is indicative of the fact that the region does not have any
+> attributes, no?
+
+That's my understanding, yes. This could be a later cleanup I suppose,
+but since you are adding flags, you may as well remove this one.
+
+[..]
+
+Regards,
+Simon
