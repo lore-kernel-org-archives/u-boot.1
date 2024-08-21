@@ -4,56 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87E9DC52D6F
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 21:43:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D23D1C52D7C
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 22:48:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0829788BD2;
-	Wed, 21 Aug 2024 23:43:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id E2F4F88C2F;
+	Thu, 22 Aug 2024 00:48:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1724276626;
-	bh=9haksfXLMmyx1R3Ir3dMOItRfPQmNZQpzHf4sx7SOdE=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=PcPX7cx8MqnXGyeXbjVokyb7+2Wv/Ijm7J21Z76oPB0+T9ARJF3Jf5xkbhlAkYm5e
-	 4eYC8CcJtlf1FbBs59TsKtd4dljlWefazrgGAeHcGMgyR2x4II6Y7EVTFMAfpETwjg
-	 vPmQwuUbcudUwf3KVlab5h7eBWgvOgf3Vv/KUQp0IZXA7hi2pOEXjnV5AWdko5YlQw
-	 W5Yu1WcGKqcxa1lV1N81tx3t5G8UhWlAvHSD80yQN+r+lkKaHvzJ1WZNLkPU7b1ZWi
-	 1RUnfV7iSZfvnyQ9YYes623Sf2RdSlHOHXBZzPqjYWgGTKa2+Q/8MoKMEEQ8wIzSQL
-	 1SaX3fZa4AaRA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CQ0Y0wsw";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1EFCF88C30; Thu, 22 Aug 2024 00:48:00 +0200 (CEST)
+Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
+ [IPv6:2607:f8b0:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 2D8218785E;
- Wed, 21 Aug 2024 23:43:44 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1724276624;
- bh=9haksfXLMmyx1R3Ir3dMOItRfPQmNZQpzHf4sx7SOdE=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=hUgpZ7XSxq2uX2p7uyD1vIlVttk9G/JdizRSPqmifWo+uPjQGnHZKG0P3832Ck8EH
- qd1iM5W4Kw3SELaqgMuSHS1EY1uLJF4rJCvShjHoKtaOJg2Kk3u0u6i+hEsRNzvUmN
- sQG6nUzoh8Sayx7PPz5YLadMdJ3i2sk6raUH3eLxrcakt79B5O7DAqtKrua1kLDgpn
- GRQ13+OiY/AiJBh+sYFu84UhUXR652h7SkK3p1uirNFT4Zeh+mNyWp8FY1yT6f5ADJ
- Fq2OXWc2/7B0ZkRvAQQFFBWZzZEfI9e/008LezWBg/9swbH3+Z5smh6BdJU1Ijao4Z
- XB1n1AYOe8uVA==
-Message-ID: <5a1367d7-be94-4c75-9f40-891ca79f9c5b@denx.de>
-Date: Wed, 21 Aug 2024 23:43:43 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id F138788BC4
+ for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 00:47:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x235.google.com with SMTP id
+ 5614622812f47-3db51133978so103800b6e.3
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 15:47:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1724280476; x=1724885276; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=GU0K+3SgirlE08l4qkE95qtHq1jgyCVoItG/NgRnH2w=;
+ b=CQ0Y0wswNzOKaVPoHl6sv7vLkRLBU2IlwYTmeUbNEvC1PNTI/abrl5TIGK04v5cjBb
+ IRTrUiIu0OV5svHxKUfNqTXHHmtg428COvHkWUs9PGHlB21ZAnuKW4s3fTvLcfsa3meG
+ iVlmbDoXDT9J6j1LqTpxjcD1bVE164kNN2PG0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724280476; x=1724885276;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GU0K+3SgirlE08l4qkE95qtHq1jgyCVoItG/NgRnH2w=;
+ b=I/pbAoWvpk+eu0XWEbm4AUphIK4CGEbtJRjXyQzcfVxlnpvblK5ZUqldOduHymX8Fl
+ eftqXLfkH8BJYCrKtxFncqpwUQiT4KLLJ2p1MigrNGntzeDnI18wpeDvjovEt7YI3VJC
+ p5iosDFPQ3LhQ0oqyMsMqEpR240k8ugYFFeJZAhMPzt5AXxwr8281+EdTyBH/vYVucYx
+ N5JvAxjBAN+qiIkjk9HHgs2dkThywypurmhr3Vc+Ew+sMmGtFpx/A91ToMEZfLW8PhQt
+ uJc32ib4z51aBxgs9CLuHtArOkPdQXcGp4FRPP2FR2uu/TkEwty0MN2bkAtURKcC7l0I
+ XJsw==
+X-Gm-Message-State: AOJu0Yxjnk3s8wp58pgily5SH5d3jrIICrahjouwMpd7lGZsqJeIlSuZ
+ YwYDplJ3s3ZSpIR8otdcnDfwN+403pXAZV0iIzZ/dkDZ9Cp3ex87K1GmYndbcao=
+X-Google-Smtp-Source: AGHT+IHqeND22R8gqbkeoiFFN61gy8LP2WKV8MtnhZZde/9FGk3G0uJDKFdDie/4srmo+4Pno1JASA==
+X-Received: by 2002:a05:6808:221e:b0:3db:2afc:b19 with SMTP id
+ 5614622812f47-3de194f7588mr4375347b6e.12.1724280476510; 
+ Wed, 21 Aug 2024 15:47:56 -0700 (PDT)
+Received: from oliver.lan ([2806:370:5564:d86d:5d21:f5a9:a623:3821])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3de22556216sm65295b6e.23.2024.08.21.15.47.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 Aug 2024 15:47:55 -0700 (PDT)
+Date: Wed, 21 Aug 2024 16:47:49 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
+ Mark Kettenis <mark.kettenis@xs4all.nl>,
+ Michal Simek <michal.simek@amd.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ Patrice CHOTARD <patrice.chotard@foss.st.com>
+Subject: Re: [PATCH v3 00/27] Make LMB memory map global and persistent
+Message-ID: <20240821224749.GA104928@oliver.lan>
+References: <20240821105839.2870293-1-sughosh.ganu@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] usb: gadget: ether: Disable USB pullup in eth probe
-To: Zixun LI <admin@hifiphile.com>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: u-boot@lists.denx.de
-References: <20240821212218.2092540-1-admin@hifiphile.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240821212218.2092540-1-admin@hifiphile.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="efu6VcBEy67K7qWc"
+Content-Disposition: inline
+In-Reply-To: <20240821105839.2870293-1-sughosh.ganu@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,47 +95,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/21/24 11:22 PM, Zixun LI wrote:
-> usb_gadget_register_driver() called by probe will initialize the USB
-> controller which enters ready to connect state with pull-up resistor
-> enabled.
-> 
->>From the host's point of view, a device is ready to be enumerated.
-> However, since dm_usb_gadget_handle_interrupts() is only called when
-> ethernet function is started, at this stage USB events are not managed,
-> host's enumeration attempts will fail and resulting error like:
->      usb 1-1: new high-speed USB device number 50 using xhci_hcd
->      usb 1-1: device descriptor read/64, error -110
->      usb 1-1: device descriptor read/64, error -110
->      usb usb1-port1: attempt power cycle
-> 
-> Disable USB pullup to prevent unwanted enumeration attempt.
-> 
-> Signed-off-by: Zixun LI <admin@hifiphile.com>
-> ---
->   drivers/usb/gadget/ether.c | 11 ++++++++++-
->   1 file changed, 10 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/usb/gadget/ether.c b/drivers/usb/gadget/ether.c
-> index 7973927e8a..c864beeaa7 100644
-> --- a/drivers/usb/gadget/ether.c
-> +++ b/drivers/usb/gadget/ether.c
-> @@ -2459,6 +2459,8 @@ static int usb_eth_probe(struct udevice *dev)
->   {
->   	struct ether_priv *priv = dev_get_priv(dev);
->   	struct eth_pdata *pdata = dev_get_plat(dev);
-> +	struct eth_dev *ethdev = &priv->ethdev;
-> +	int ret;
-> 
->   	priv->netdev = dev;
->   	l_priv = priv;
-> @@ -2499,7 +2501,14 @@ static int usb_eth_probe(struct udevice *dev)
->   	priv->eth_driver.disconnect	= eth_disconnect;
->   	priv->eth_driver.suspend	= eth_suspend;
->   	priv->eth_driver.resume		= eth_resume;
-> -	return usb_gadget_register_driver(&priv->eth_driver);
-> +
-> +	ret = usb_gadget_register_driver(&priv->eth_driver);
 
-Wouldn't it be better if usb_gadget_register_driver() started in 
-disconnected state right away ?
+--efu6VcBEy67K7qWc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Aug 21, 2024 at 04:28:12PM +0530, Sughosh Ganu wrote:
+
+> This is a follow-up from an earlier RFC series [1] for making the LMB
+> and EFI memory allocations work together. This is a non-rfc version
+> with only the LMB part of the patches, for making the LMB memory map
+> global and persistent.
+>=20
+> This is part one of a set of patches which aim to have the LMB and EFI
+> memory allocations work together. This requires making the LMB memory
+> map global and persistent, instead of having local, caller specific
+> maps. This is being done keeping in mind the usage of LMB memory by
+> platforms where the same memory region can be used to load multiple
+> different images. What is not allowed is to overwrite memory that has
+> been allocated by the other module, currently the EFI memory
+> module. This is being achieved by introducing a new flag,
+> LMB_NOOVERWRITE, which represents memory which cannot be re-requested
+> once allocated.
+>=20
+> The data structures (alloced lists) required for maintaining the LMB
+> map are initialised during board init. The LMB module is enabled by
+> default for the main U-Boot image, while it needs to be enabled for
+> SPL. This version also uses a stack implementation, as suggested by
+> Simon Glass to temporarily store the lmb structure instance which is
+> used during normal operation when running lmb tests. This does away
+> with the need to run the lmb tests separately.
+>=20
+> The tests have been tweaked where needed because of these changes.
+>=20
+> The second part of the patches, to be sent subsequently, would work on
+> having the EFI allocations work with the LMB API's.
+
+This generally feels like the right direction, but for v4 can you please
+look at the assorted checkpatch.pl warnings? Don't worry so much about
+trying to use IS_ENABLED and so forth if it doesn't enhance the
+readability but there are "func (....)" and some other issues that
+should be fixed. Thanks!
+
+--=20
+Tom
+
+--efu6VcBEy67K7qWc
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbGbpEACgkQFHw5/5Y0
+tyxxVAv+J70k7T1GTCPTQQtoJhnBE/W2bmpg7jK/r6bKzekR6ro0e6mOJGGIj+fJ
+X8v4xuP892Dh1IRIvrNKS5poPu1OJHkqLHhaWJTLQ4ScFMNNUk0/0MaitlYcA6MV
+n5YOt/LnoKdKWzawGNIc8pZexFWcB6WiLFoyc7gTKx5qt4KFDgMSQ/ILGF/QHNL9
+h+LlHkmz/XPhjinJkZ5/+K0+vvgwDq1RY8u/mxFs49Qdjdk3tsKK7xnbsWGA7c2W
+99R5XSXzdc8FzoLCECDASYhgTFbujCRFQXTfAXVN4l1KrWp6AcTezA3/gfipcuDV
+RO3UfsYsq5RtYdmwNY61rfvUTgQ5OJrrWmPOvlvC+NCbnaxjN03xRhYongDBcS4b
+mvdtR5EcOLaIjp40LugrD9dzGq0DcCZVTEM4i91GpANpbY96uf/yI3y9qMmdeNqb
+3ANL4sTNwFUpKa1CRo5UDo8gNOAGIsIpWDlzvs2Zpf/X+8IaLucwy29BcgNuzuia
+K++nYRp3
+=QOeO
+-----END PGP SIGNATURE-----
+
+--efu6VcBEy67K7qWc--
