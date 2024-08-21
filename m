@@ -4,79 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E8CDC3DA4A
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 02:12:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CA1AC3DA4A
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 02:12:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6886588A64;
-	Wed, 21 Aug 2024 04:11:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 028ED88B86;
+	Wed, 21 Aug 2024 04:12:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MYdbu4dV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZLkp+YxR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A11128780E; Wed, 21 Aug 2024 04:11:49 +0200 (CEST)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id 2FB1788B89; Wed, 21 Aug 2024 04:12:57 +0200 (CEST)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 401C287BF4
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 04:11:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D108F88B6C
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 04:12:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6bf7f4a1334so23623146d6.2
- for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 19:11:47 -0700 (PDT)
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6bf9db9740aso13608766d6.2
+ for <u-boot@lists.denx.de>; Tue, 20 Aug 2024 19:12:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724206306; x=1724811106; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724206374; x=1724811174; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=i6vQ+8J05qRGp0/3fL+Mu/R9i+Ie6w5zHzxSi9IiQys=;
- b=MYdbu4dVJQ6YdsQS03IBbQwvmaDjC9dzG0l9LCTWDQbOxU0U9c5timAgcOYnWRYjX8
- ZgOvU9UEkFpX0ahFbQyEVSpB8kIgKPuu85l77c17G2GBKnihI5Auv3FxahgBK8u1Ndaw
- 1bMeOYPw1XG9dvJIYTe+ys6ta1+6XrwNfrHrs=
+ bh=Mrtk0rF/jYRaEuZwP/ZCX1s1thsj2Q8OTFo0xNmab4k=;
+ b=ZLkp+YxRJDX8fQpzYUzbL8X79ujEpwasS4/Gg35bLf7J4jVzAR55qJMc70NaP+pLwJ
+ pDeL9RLvNKKAwRgOaDVlJattRQyIM/URZ8h925VZuONgKKTvMmawYOqZ3Q+hdGJE8Ny8
+ dMYGAgtN53yKIs2e0zQGJ9Q+6ePIBcFsTxBL8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724206306; x=1724811106;
+ d=1e100.net; s=20230601; t=1724206374; x=1724811174;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=i6vQ+8J05qRGp0/3fL+Mu/R9i+Ie6w5zHzxSi9IiQys=;
- b=V1AteO1kQvIW3spgfxVjmYTIDa4v/+ZO098jXUf/q8yYRzKY0TZ8CFNTqAVXESlv9k
- qa5f4P4f9r+8M1v1BSe09qyJxf/E5VmHHgwdhyHEL5NgEQxwsZgsABl9vcbszog0GuI3
- XJEOSf3NRbtWaJpiQjbx1mvBi8C5alp1V9I3G7zkFhz9z5K7b/H8ztRrl/byJ+NFBhNj
- 6H9eUmSmopbTaKrI4dh/k3jhxMHiai9w1QSh+ZjvM3nOiZprZuMJ00Kr/MX53ZJj94kE
- QyFYKYyG7oYg6sBXiH8nQ4m9dXX0dkgRw/XDrOek7G5x0PYyH+WWncoOOoE7J9ZrlClQ
- b5lQ==
-X-Gm-Message-State: AOJu0YxMzDHgZfRNSTmPkg53GbUsqAPFnPfkP8L3rELHJrSZN11/J30Y
- IOluJW4c82Bmh2x5PPJsczCXzeZX7sW9PxU7i8SCXmmBO5LDXevnAo/4lr6yS9/TYTg57zp6/DX
- 8fhsSdT3TJjzHA7qhqrf/bnD3cuHW2mamun1U
-X-Google-Smtp-Source: AGHT+IGcLVAFSkJpb7fbxX8w3Oac2UdMgA0yD9/89m3V/yZLc8KYIvQnv+gcxj55O7DhsCr0wR1Dhcrg3SHuDyoqMkM=
-X-Received: by 2002:a05:6214:3f84:b0:6bf:aa56:78a1 with SMTP id
- 6a1803df08f44-6c155df3e2amr11874766d6.41.1724206306114; Tue, 20 Aug 2024
- 19:11:46 -0700 (PDT)
+ bh=Mrtk0rF/jYRaEuZwP/ZCX1s1thsj2Q8OTFo0xNmab4k=;
+ b=RnrS15KSPUdLGA9YefUDjqIIL9R/Z0qufSxZf/15GFI1w00rYXeD02g6d13TUKKnU9
+ Po75PF+ICIsUkG45K2aRWla64bM3jxvLcVLPh45CiWl27QZIBpspNkObtmHNRFjVqUxN
+ ebqXh8uq6XVzrSTvE/vpFSU7JRVMpHgdzGZLReACphf5rVqxNbuQ/eVk02lmTh9byRG1
+ iqMRMOCOhWYvFBinepT55CroFnq3q0RNvpaERhlTcAJ2DvAdacPBB7+R7Zd1gavh8fco
+ ntryHWMjsQz8UuydcVvXmTnPpsqxxIAtO30tNun1wWOYkNiTLXQ1ibd4eOFq53+MWXiY
+ 9jqg==
+X-Gm-Message-State: AOJu0YzwQWzGZKMS1GuqelFx1k4+uqDzMay55NTmDTMlMBae4jnQTA3f
+ MY5mItTOH72cFtTg+Nx8Z+WQaLLLY0/55KpWGbW1MZEdbfyx2dKg6iDSrKnf5FtuISlBeU78dSt
+ lFbBK9GE4CyQKEunyV4FXnwGh2vEeG5+ZQWNU
+X-Google-Smtp-Source: AGHT+IEoarVbovV72atK3eCXH+RJPa7TkCe/q0X/tzDL10tfojE3SZNCEToELxvjMhBuWS+2yf3fyBOIj8JLMZtSFyk=
+X-Received: by 2002:a05:6214:3bca:b0:6bd:7460:fedc with SMTP id
+ 6a1803df08f44-6c155de2610mr14995996d6.45.1724206373654; Tue, 20 Aug 2024
+ 19:12:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
- <20240814110009.45310-15-sughosh.ganu@linaro.org>
- <CAFLszTjMwpW-MRWfJrOja2JGMcTtjYzLqH68hum=yDsXjc6PQQ@mail.gmail.com>
- <CADg8p95k_0CtqD5x8_jjW31YoPOoiLSvDU-M_JtcBU_+V-4hEg@mail.gmail.com>
-In-Reply-To: <CADg8p95k_0CtqD5x8_jjW31YoPOoiLSvDU-M_JtcBU_+V-4hEg@mail.gmail.com>
+References: <20240815202424.766778-1-sjg@chromium.org>
+ <20240815202424.766778-14-sjg@chromium.org>
+ <20240816161311.GY1626301@bill-the-cat>
+In-Reply-To: <20240816161311.GY1626301@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 20 Aug 2024 20:11:35 -0600
-Message-ID: <CAFLszTji1FcHNitO+mKJ+uh-Kr5N33ZZjqZJx1Uaianj35Q4vQ@mail.gmail.com>
-Subject: Re: [PATCH v2 14/32] lmb: introduce a function to add memory to the
- lmb memory map
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
- Max Filippov <jcmvbkbc@gmail.com>
+Date: Tue, 20 Aug 2024 20:12:43 -0600
+Message-ID: <CAFLszThGHKcxZ33pHaxCwq--OiR6sPgAK+ugYC18YByAiRKKyg@mail.gmail.com>
+Subject: Re: [PATCH v4 13/14] test: efi: boot: Set up an image suitable for
+ EFI testing
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,60 +86,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
+Hi Tom,
 
-On Tue, 20 Aug 2024 at 02:17, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Fri, 16 Aug 2024 at 10:13, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Fri, 16 Aug 2024 at 02:04, Simon Glass <sjg@chromium.org> wrote:
+> On Thu, Aug 15, 2024 at 02:24:23PM -0600, Simon Glass wrote:
+> > Create a new disk for use with tests, which contains the new 'testapp'
+> > EFI app specifically intended for testing the EFI loader.
 > >
-> > Hi Sughosh,
+> > Attach it to the USB device, since most testing is currently done with
+> > mmc.
 > >
-> > On Wed, 14 Aug 2024 at 12:01, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > >
-> > > Introduce a function lmb_add_memory() to add available memory to the
-> > > LMB memory map. Call this function during board init once the LMB data
-> > > structures have been initialised.
-> > >
-> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > > ---
-> > > Changes since V1:
-> > > * Call the lmb_add_memory() from lmb_init() instead of
-> > >   lmb_mem_regions_init().
-> > >
-> > >
-> > >  include/lmb.h | 10 ++++++++++
-> > >  lib/lmb.c     | 42 ++++++++++++++++++++++++++++++++++++++++++
-> > >  2 files changed, 52 insertions(+)
-> > >
+> > Initially this image will be used to test the EFI bootmeth.
 > >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > Fix a stale comment in prep_mmc_bootdev() while we are here.
 > >
-> > But this should not be weak.
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> [snip]
+> > +    try:
+> > +        loop = mount_image(cons, fname, mnt, 'ext4')
+> > +        mounted = True
+> > +        efi_dir = os.path.join(mnt, 'EFI')
+> > +        mkdir_cond(efi_dir)
+> > +        bootdir = os.path.join(efi_dir, 'BOOT')
+> > +        mkdir_cond(bootdir)
+> > +        efi_src = os.path.join(cons.config.build_dir,
+> > +                               f'lib/efi_loader/testapp.efi')
+> > +        efi_dst = os.path.join(bootdir, 'BOOTSBOX.EFI')
+> > +        with open(efi_src, 'rb') as inf:
+> > +            with open(efi_dst, 'wb') as outf:
+> > +                outf.write(inf.read())
+> > +    except ValueError as exc:
+> > +        print(f'Falled to create image, failing back to prepared copy: {exc}')
+> > +
+> > +    finally:
+> > +        if mounted:
+> > +            u_boot_utils.run_and_log(cons, 'sudo umount --lazy %s' % mnt)
+> > +        if loop:
+> > +            u_boot_utils.run_and_log(cons, 'sudo losetup -d %s' % loop)
 >
-> This is being made weak, as there would be lmb_add_memory()
-> definitions added for powerpc and x86 arch's in the EFI part of my
-> patches. Moreover, the lmb_add_memory() function would be called even
-> in the SPL stage when LMB is enabled for that stage. So I am not sure
-> how do we get around this. You can check the relevant branch [1] on my
-> github to check for the specific commits [2][3] that I am referring
-> to. Thanks.
+> Please see
+> https://patchwork.ozlabs.org/project/uboot/patch/20240802093322.15240-1-richard@nod.at/
+> for inspiration on making this not require sudo.
 
-This is really strange.
+It's optional, hence the fallback, but I'll need to wait until that
+stuff lands as we use common functions.
 
-The e820 is different on each x86 board. I'm not sure we want that in
-the lmb. What is the purpose of that? It is somewhat circular in most
-cases, since U-Boot sets it up itself. Where it comes from coreboot,
-it looks like we are mirroring it in the EFI memory map. I'm not sure
-I understand all this very well.
-
-For fsl, perhaps copy the #ifdef and handle arch.resv_ram in your code?
-
-[..]
 Regards,
 Simon
-
-
-> [1] - https://github.com/sughoshg/u-boot/tree/lmb_efi_sep_apis_nrfc_next_v3
-> [2] - https://github.com/u-boot/u-boot/commit/077ced7aaa6d495b1b87b324fb1c60658c203ce1
-> [3] - https://github.com/u-boot/u-boot/commit/d0fa3a89865b796f3bbebffebbe4f7b5b048c140
->
