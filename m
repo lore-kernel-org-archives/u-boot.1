@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 454D5C52D7C
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 16:23:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A49B0C52D6F
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 16:23:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 667AA88E67;
+	by phobos.denx.de (Postfix) with ESMTP id C572D88E6E;
 	Wed, 21 Aug 2024 18:20:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="j8Lziwoj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oEhPNzke";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A81ED88E14; Wed, 21 Aug 2024 18:19:58 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 9E42488E5E; Wed, 21 Aug 2024 18:19:59 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78AE98811A
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 18:19:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E5C488E2F
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 18:19:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7093efbade6so4407815a34.2
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 09:19:56 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-70940c9657dso3247554a34.1
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 09:19:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724257195; x=1724861995; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724257196; x=1724861996; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=p4yv8xWkAlDiRRqQrlVUQ1sncuiPNGNY9r3D5FCNp6A=;
- b=j8LziwojJpv+2CzCLjf937F+dGD+PdUNR/e4b2X4vpaN7uVW0cXJrJUsNWvjqIHNFR
- VzV8DGnghVsj6Z9NcrCh4usa3zuHaTbTsqfDOC7WusxtDgxnUQmK3fSGwiSNuTnYN8qS
- 0cbEcxFp3Nep06HXrpmOaMsCQZsbIk86e38n4=
+ bh=jcR/5iKrFCBX//g8VkkTnn7McDIXjBFIYs+lfpROyyg=;
+ b=oEhPNzke52a/SsTCAAfPzs5MxScvGtccheINt84wg5mnD65DkJo8EljhgS8Hbg+5K2
+ 6XcbXOMn8qXXu1DzcD0qg0D00IGbse84CDBqiKsW0oDAJPaghw0RidbHW+yDA1jbJPms
+ PUG1BF7eogvYYcg9rIcRFXLtt3cUuYDwZ+vm4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724257195; x=1724861995;
+ d=1e100.net; s=20230601; t=1724257196; x=1724861996;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=p4yv8xWkAlDiRRqQrlVUQ1sncuiPNGNY9r3D5FCNp6A=;
- b=lnKftFDZDE/4ycC8IAzP3FJtMYHQLSnD/zOCodFyS5uQCDyyZ8udHMcgDYiFHhjDz9
- 1zoR4gg17UbtYi0sG8MuwlZMP1apVKXiKF393aEe0RrZWcx6Ahd5rtBysgxCFSI+G7DD
- TBG2zyp8krCI9Ygp7T179pQbyeWLy25TTfrwyLAPQuG4rAbV7Vkst6x7UGE3PGVhmQKk
- E6qvxeBxFi5x/vFP7QL0+XnPe1O0231k570Um1cX3TmA2MrUpSpLZYxJZIqR2obkq8Cl
- O7ycNRcwaKBs+ipEfLxy3Y0qrzCIaUu7ojE9Cgn31ZYDHq7vISY4UVw9j3uvgfiL4/r1
- fCEQ==
-X-Gm-Message-State: AOJu0YyR08OgqnARRD8wVJVqViZFZ0PFktotlRe8bRIyJQ7fdwcuN4hx
- 7GNWpfMZi/PCgwgdfLjvvcILzuGhrRwRo1ylYVepMOU+Z//Jz4wEiVeGxAb/YjJh6L8bEM2riVk
+ bh=jcR/5iKrFCBX//g8VkkTnn7McDIXjBFIYs+lfpROyyg=;
+ b=gN7jzD1AhEeYlDXynZ40UlwL1KsbZrBeREspStMpQ33iyaUd8rYc1N5BJxTSm5Grfp
+ l1TmkOXQ5PnsK2d0adtIX7OTLB9Bg2W5YMy/z1E3g9Q4mEV5LvRs83LxeBu0ZV2MoDlo
+ JNnImb0lDUoQS+q/VLZcCPJjJdHkUU5gcrWzQwsP+hZqEWpBkmbNvEIFgNqYje/a2KbP
+ WnG1b2Ci8ekJJAOwPl9AGZqjp1fgf48xc1aHg5lok8DywtuL+fVaZPJBksyY+B77ah+S
+ f6uFSHgbixfp+cUSBQaMlxUxt9XWYPj05+EkWG59Yrcwt78BnE7grlqjWKLrU5H2Kdhn
+ Sj1Q==
+X-Gm-Message-State: AOJu0YzHnzUuy0ndn9LlAryI2uVc3tS54a88SwwpqM5YBCagp8gbBhm4
+ kFAiDphnrW+QSX0p0ZUtcBbF9rHwLGF2DMIZl0Bq1KnzXU0b2gIlyn0TaQ3OCJvJ31hRmVkbwb4
  =
-X-Google-Smtp-Source: AGHT+IH3lvfpvtOuEQjb5auwMwaXV3kEsLg9BqMV1rSq5xmPN9n1maHdUsd+b0bcaUOcTZfVkiD8eg==
-X-Received: by 2002:a05:6830:3109:b0:707:8b7d:b924 with SMTP id
- 46e09a7af769-70df8745d7cmr3089397a34.10.1724257195128; 
+X-Google-Smtp-Source: AGHT+IGUOfAq9hma+OQfzNCeaeQuGXd8qKf0ZLJjoxkY7UZRMaCWT8oYrJK2roJ337Yf7WbSNauqFg==
+X-Received: by 2002:a05:6830:6dc3:b0:709:35ae:e793 with SMTP id
+ 46e09a7af769-70df88916a7mr3821372a34.33.1724257195953; 
  Wed, 21 Aug 2024 09:19:55 -0700 (PDT)
 Received: from chromium.org ([139.60.174.4]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70ca6629792sm3222376a34.72.2024.08.21.09.19.54
+ 46e09a7af769-70ca6629792sm3222376a34.72.2024.08.21.09.19.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Aug 2024 09:19:54 -0700 (PDT)
+ Wed, 21 Aug 2024 09:19:55 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 21/35] global_data: Drop spl_handoff
-Date: Wed, 21 Aug 2024 10:19:13 -0600
-Message-Id: <20240821161927.695717-22-sjg@chromium.org>
+Subject: [PATCH v2 22/35] global_data: Collect common fields at the top
+Date: Wed, 21 Aug 2024 10:19:14 -0600
+Message-Id: <20240821161927.695717-23-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240821161927.695717-1-sjg@chromium.org>
 References: <20240821161927.695717-1-sjg@chromium.org>
@@ -88,191 +88,244 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide a function to locate this information, rather than doing it
-automatically on startup, to save space in global_data.
+Move all the fields which are always present to the top of the struct,
+so we can potentially save some space by taking note of alignment.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/x86/cpu/intel_common/cpu_from_spl.c |  4 +---
- arch/x86/lib/fsp2/fsp_dram.c             |  4 ++--
- cmd/sb.c                                 |  6 ++++--
- common/board_f.c                         | 12 ------------
- common/init/handoff.c                    | 12 ++++++++++++
- drivers/clk/rockchip/clk_rk3399.c        |  3 ++-
- include/asm-generic/global_data.h        |  6 ------
- include/handoff.h                        |  7 +++++++
- 8 files changed, 28 insertions(+), 26 deletions(-)
+ include/asm-generic/global_data.h | 166 +++++++++++++++---------------
+ 1 file changed, 82 insertions(+), 84 deletions(-)
 
-diff --git a/arch/x86/cpu/intel_common/cpu_from_spl.c b/arch/x86/cpu/intel_common/cpu_from_spl.c
-index 48b2ef253cb..5aad2ae7309 100644
---- a/arch/x86/cpu/intel_common/cpu_from_spl.c
-+++ b/arch/x86/cpu/intel_common/cpu_from_spl.c
-@@ -24,9 +24,7 @@ int arch_cpu_init(void)
- 	int ret;
- 
- #if CONFIG_IS_ENABLED(HANDOFF) && IS_ENABLED(CONFIG_USE_HOB)
--	struct spl_handoff *ho = gd->spl_handoff;
--
--	gd->arch.hob_list = ho->arch.hob_list;
-+	gd->arch.hob_list = handoff_get();
- #endif
- 	ret = x86_cpu_reinit_f();
- 
-diff --git a/arch/x86/lib/fsp2/fsp_dram.c b/arch/x86/lib/fsp2/fsp_dram.c
-index 83c6d7bcc93..a50dc985a3c 100644
---- a/arch/x86/lib/fsp2/fsp_dram.c
-+++ b/arch/x86/lib/fsp2/fsp_dram.c
-@@ -59,7 +59,7 @@ int dram_init(void)
- #endif
- 	} else {
- #if CONFIG_IS_ENABLED(HANDOFF)
--		struct spl_handoff *ho = gd->spl_handoff;
-+		struct spl_handoff *ho = handoff_get();
- 
- 		if (!ho) {
- 			log_debug("No SPL handoff found\n");
-@@ -82,7 +82,7 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- 		return gd->ram_size;
- 
- #if CONFIG_IS_ENABLED(HANDOFF)
--	struct spl_handoff *ho = gd->spl_handoff;
-+	struct spl_handoff *ho = handoff_get();
- 
- 	log_debug("usable_ram_top = %lx\n", ho->arch.usable_ram_top);
- 
-diff --git a/cmd/sb.c b/cmd/sb.c
-index 1aa5921f03e..db485fddfca 100644
---- a/cmd/sb.c
-+++ b/cmd/sb.c
-@@ -14,8 +14,10 @@ static int do_sb_handoff(struct cmd_tbl *cmdtp, int flag, int argc,
- 			 char *const argv[])
- {
- #if CONFIG_IS_ENABLED(HANDOFF)
--	if (gd->spl_handoff)
--		printf("SPL handoff magic %lx\n", gd->spl_handoff->arch.magic);
-+	struct spl_handoff *handoff = handoff_get();
-+
-+	if (handoff)
-+		printf("SPL handoff magic %lx\n", handoff->arch.magic);
- 	else
- 		printf("SPL handoff info not received\n");
- 
-diff --git a/common/board_f.c b/common/board_f.c
-index eb74bfa428a..eb1a5f0e1e9 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -305,17 +305,6 @@ static int setup_mon_len(void)
- 	return 0;
- }
- 
--static int setup_spl_handoff(void)
--{
--#if CONFIG_IS_ENABLED(HANDOFF)
--	gd->spl_handoff = bloblist_find(BLOBLISTT_U_BOOT_SPL_HANDOFF,
--					sizeof(struct spl_handoff));
--	debug("Found SPL hand-off info %p\n", gd->spl_handoff);
--#endif
--
--	return 0;
--}
--
- __weak int arch_cpu_init(void)
- {
- 	return 0;
-@@ -891,7 +880,6 @@ static const init_fnc_t init_sequence_f[] = {
- 	initf_bootstage,	/* uses its own timer, so does not need DM */
- 	event_init,
- 	bloblist_maybe_init,
--	setup_spl_handoff,
- #if defined(CONFIG_CONSOLE_RECORD_INIT_F)
- 	console_record_init,
- #endif
-diff --git a/common/init/handoff.c b/common/init/handoff.c
-index a7cd065fb38..86c020ee0b9 100644
---- a/common/init/handoff.c
-+++ b/common/init/handoff.c
-@@ -5,6 +5,7 @@
-  * Copyright 2018 Google, Inc
-  */
- 
-+#include <bloblist.h>
- #include <handoff.h>
- #include <asm/global_data.h>
- 
-@@ -38,3 +39,14 @@ void handoff_load_dram_banks(struct spl_handoff *ho)
- 		bd->bi_dram[i].size = ho->ram_bank[i].size;
- 	}
- }
-+
-+struct spl_handoff *handoff_get(void)
-+{
-+	struct spl_handoff *handoff;
-+
-+	handoff = bloblist_find(BLOBLISTT_U_BOOT_SPL_HANDOFF,
-+				sizeof(struct spl_handoff));
-+	debug("Found SPL hand-off info %p\n", handoff);
-+
-+	return handoff;
-+}
-diff --git a/drivers/clk/rockchip/clk_rk3399.c b/drivers/clk/rockchip/clk_rk3399.c
-index 24cefebd1b2..89924041299 100644
---- a/drivers/clk/rockchip/clk_rk3399.c
-+++ b/drivers/clk/rockchip/clk_rk3399.c
-@@ -8,6 +8,7 @@
- #include <dm.h>
- #include <dt-structs.h>
- #include <errno.h>
-+#include <handoff.h>
- #include <log.h>
- #include <malloc.h>
- #include <mapmem.h>
-@@ -1467,7 +1468,7 @@ static int rk3399_clk_probe(struct udevice *dev)
- 	init_clocks = true;
- #elif CONFIG_IS_ENABLED(HANDOFF)
- 	if (!(gd->flags & GD_FLG_RELOC)) {
--		if (!(gd->spl_handoff))
-+		if (!handoff_get())
- 			init_clocks = true;
- 	}
- #endif
 diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-index 544195391bd..16c4b4fe676 100644
+index 16c4b4fe676..094e97449f6 100644
 --- a/include/asm-generic/global_data.h
 +++ b/include/asm-generic/global_data.h
-@@ -396,12 +396,6 @@ struct global_data {
+@@ -71,48 +71,6 @@ struct global_data {
+ 	 * @mem_clk: memory clock rate in Hz
  	 */
- 	struct bloblist_hdr *bloblist;
- #endif
--#if CONFIG_IS_ENABLED(HANDOFF)
+ 	unsigned long mem_clk;
+-#if defined(CONFIG_POST)
 -	/**
--	 * @spl_handoff: SPL hand-off information
+-	 * @post_log_word: active POST tests
+-	 *
+-	 * @post_log_word is a bit mask defining which POST tests are recorded
+-	 * (see constants POST_*).
 -	 */
--	struct spl_handoff *spl_handoff;
+-	unsigned long post_log_word;
+-	/**
+-	 * @post_log_res: POST results
+-	 *
+-	 * @post_log_res is a bit mask with the POST results. A bit with value 1
+-	 * indicates successful execution.
+-	 */
+-	unsigned long post_log_res;
+-	/**
+-	 * @post_init_f_time: time in ms when post_init_f() started
+-	 */
+-	unsigned long post_init_f_time;
 -#endif
- #if defined(CONFIG_TRANSLATION_OFFSET)
+-#ifdef CONFIG_BOARD_TYPES
+-	/**
+-	 * @board_type: board type
+-	 *
+-	 * If a U-Boot configuration supports multiple board types, the actual
+-	 * board type may be stored in this field.
+-	 */
+-	unsigned long board_type;
+-#endif
+-#if CONFIG_IS_ENABLED(PRE_CONSOLE_BUFFER)
+-	/**
+-	 * @precon_buf_idx: pre-console buffer index
+-	 *
+-	 * @precon_buf_idx indicates the current position of the
+-	 * buffer used to collect output before the console becomes
+-	 * available. When negative, the pre-console buffer is
+-	 * temporarily disabled (used when the pre-console buffer is
+-	 * being written out, to prevent adding its contents to
+-	 * itself).
+-	 */
+-	long precon_buf_idx;
+-#endif
  	/**
- 	 * @translation_offset: optional translation offset
-diff --git a/include/handoff.h b/include/handoff.h
-index c0ae7b19a75..0072ea832f8 100644
---- a/include/handoff.h
-+++ b/include/handoff.h
-@@ -31,6 +31,13 @@ void handoff_save_dram(struct spl_handoff *ho);
- void handoff_load_dram_size(struct spl_handoff *ho);
- void handoff_load_dram_banks(struct spl_handoff *ho);
- 
-+/**
-+ * handoff_get() - Get the SPL handoff information
-+ *
-+ * Return: Pointer to SPL handoff if received, else NULL
-+ */
-+struct spl_handoff *handoff_get(void);
-+
- /**
-  * handoff_arch_save() - Save arch-specific info into the handoff area
-  *
+ 	 * @env_addr: address of environment structure
+ 	 *
+@@ -177,7 +135,87 @@ struct global_data {
+ 	 * @new_gd: pointer to relocated global data
+ 	 */
+ 	struct global_data *new_gd;
+-
++	/**
++	 * @fdt_blob: U-Boot's own device tree, NULL if none
++	 */
++	const void *fdt_blob;
++	/**
++	 * @fdt_src: Source of FDT
++	 */
++	enum fdt_source_t fdt_src;
++	/**
++	 * @jt: jump table
++	 *
++	 * The jump table contains pointers to exported functions. A pointer to
++	 * the jump table is passed to standalone applications.
++	 */
++	struct jt_funcs *jt;
++	/**
++	 * @env_buf: buffer for env_get() before reloc
++	 */
++	char env_buf[32];
++	/**
++	 * @cur_serial_dev: current serial device
++	 */
++	struct udevice *cur_serial_dev;
++	/**
++	 * @arch: architecture-specific data
++	 */
++	struct arch_global_data arch;
++	/**
++	 * @dmtag_list: List of DM tags
++	 */
++	struct list_head dmtag_list;
++	/**
++	 * @timebase_h: high 32 bits of timer
++	 */
++	unsigned int timebase_h;
++	/**
++	 * @timebase_l: low 32 bits of timer
++	 */
++	unsigned int timebase_l;
++#if defined(CONFIG_POST)
++	/**
++	 * @post_log_word: active POST tests
++	 *
++	 * @post_log_word is a bit mask defining which POST tests are recorded
++	 * (see constants POST_*).
++	 */
++	unsigned long post_log_word;
++	/**
++	 * @post_log_res: POST results
++	 *
++	 * @post_log_res is a bit mask with the POST results. A bit with value 1
++	 * indicates successful execution.
++	 */
++	unsigned long post_log_res;
++	/**
++	 * @post_init_f_time: time in ms when post_init_f() started
++	 */
++	unsigned long post_init_f_time;
++#endif
++#ifdef CONFIG_BOARD_TYPES
++	/**
++	 * @board_type: board type
++	 *
++	 * If a U-Boot configuration supports multiple board types, the actual
++	 * board type may be stored in this field.
++	 */
++	unsigned long board_type;
++#endif
++#if CONFIG_IS_ENABLED(PRE_CONSOLE_BUFFER)
++	/**
++	 * @precon_buf_idx: pre-console buffer index
++	 *
++	 * @precon_buf_idx indicates the current position of the
++	 * buffer used to collect output before the console becomes
++	 * available. When negative, the pre-console buffer is
++	 * temporarily disabled (used when the pre-console buffer is
++	 * being written out, to prevent adding its contents to
++	 * itself).
++	 */
++	long precon_buf_idx;
++#endif
+ #ifdef CONFIG_DM
+ 	/**
+ 	 * @dm_root: root instance for Driver Model
+@@ -222,38 +260,18 @@ struct global_data {
+ 	 */
+ 	struct udevice *timer;
+ #endif
+-	/**
+-	 * @fdt_blob: U-Boot's own device tree, NULL if none
+-	 */
+-	const void *fdt_blob;
+-	/**
+-	 * @fdt_src: Source of FDT
+-	 */
+-	enum fdt_source_t fdt_src;
+ #if CONFIG_IS_ENABLED(OF_LIVE)
+ 	/**
+ 	 * @of_root: root node of the live tree
+ 	 */
+ 	struct device_node *of_root;
+ #endif
+-
+ #if CONFIG_IS_ENABLED(MULTI_DTB_FIT)
+ 	/**
+ 	 * @multi_dtb_fit: pointer to uncompressed multi-dtb FIT image
+ 	 */
+ 	const void *multi_dtb_fit;
+ #endif
+-	/**
+-	 * @jt: jump table
+-	 *
+-	 * The jump table contains pointers to exported functions. A pointer to
+-	 * the jump table is passed to standalone applications.
+-	 */
+-	struct jt_funcs *jt;
+-	/**
+-	 * @env_buf: buffer for env_get() before reloc
+-	 */
+-	char env_buf[32];
+ #ifdef CONFIG_TRACE
+ 	/**
+ 	 * @trace_buff: trace buffer
+@@ -269,18 +287,10 @@ struct global_data {
+ 	 */
+ 	int cur_i2c_bus;
+ #endif
+-	/**
+-	 * @timebase_h: high 32 bits of timer
+-	 */
+-	unsigned int timebase_h;
+-	/**
+-	 * @timebase_l: low 32 bits of timer
+-	 */
+-	unsigned int timebase_l;
++#if CONFIG_IS_ENABLED(CMD_BDINFO_EXTRA)
+ 	/**
+ 	 * @malloc_start: start of malloc() region
+ 	 */
+-#if CONFIG_IS_ENABLED(CMD_BDINFO_EXTRA)
+ 	unsigned long malloc_start;
+ #endif
+ #if CONFIG_IS_ENABLED(SYS_MALLOC_F)
+@@ -297,14 +307,6 @@ struct global_data {
+ 	 */
+ 	unsigned long malloc_ptr;
+ #endif
+-	/**
+-	 * @cur_serial_dev: current serial device
+-	 */
+-	struct udevice *cur_serial_dev;
+-	/**
+-	 * @arch: architecture-specific data
+-	 */
+-	struct arch_global_data arch;
+ #ifdef CONFIG_CONSOLE_RECORD
+ 	/**
+ 	 * @console_out: output buffer for console recording
+@@ -432,10 +434,6 @@ struct global_data {
+ 	 */
+ 	struct hlist_head cyclic_list;
+ #endif
+-	/**
+-	 * @dmtag_list: List of DM tags
+-	 */
+-	struct list_head dmtag_list;
+ #if CONFIG_IS_ENABLED(UPL)
+ 	/**
+ 	 * @upl: Universal Payload-handoff information
 -- 
 2.34.1
 
