@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB877C52D7C
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 14:01:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90696C52D6F
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 14:01:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1933B88A54;
-	Wed, 21 Aug 2024 16:00:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AFE0688DEB;
+	Wed, 21 Aug 2024 16:00:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OXJNNCPQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QZl2gNqU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A30188DB7; Wed, 21 Aug 2024 16:00:08 +0200 (CEST)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id 126B388E04; Wed, 21 Aug 2024 16:00:11 +0200 (CEST)
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2675188B4C
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 16:00:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E6B2288C36
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 16:00:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-6bf75ed0e0eso34825936d6.1
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 07:00:06 -0700 (PDT)
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-5d5c8c1006eso4186483eaf.3
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 07:00:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724248805; x=1724853605; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724248807; x=1724853607; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bTICd6c+Q/+qwgMttQdqpbYqSoqmrioPgtJXwy6Axog=;
- b=OXJNNCPQ91yLmq6nv7dhvof+aZ/Uj3ZmmP8QNfgbm2CMhU+RC0HngFtCl6Zr1TnFyx
- OFseHUkY7tgtsKrMJ6b6oIIqBXBGyL1e/jnpnWEvIRL8ZNkLVwvhimqmKglf3q4YYENx
- XOCovispEMMPqpPgJKr+jxHs+SSANwyBZDx/o=
+ bh=8+zv9WaMzGGup6fPBxJSMXLwOepdsR76PqH60wNAu40=;
+ b=QZl2gNqUDCPzZMiF/3MC6Yay1AllTIW3JWXCW3Z/s+k2qFFVchGoTAOLkoRAhTDM0g
+ U8LJBlN3KooxWTCFKHAek1OG7JDVgN0YAsEnk1NyQofKolTeck53jmBXROuoxHvBSaqe
+ piSsrMzoIH7XNhN0SMjuasqlaDbMimdBtUqkE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724248805; x=1724853605;
+ d=1e100.net; s=20230601; t=1724248807; x=1724853607;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bTICd6c+Q/+qwgMttQdqpbYqSoqmrioPgtJXwy6Axog=;
- b=NnER++w8tudwzExJalOfd0Skd95DeMQD8ZIpCtGcg39vn5KxKK/z/LSEDTiPqhFK+y
- xSYD6IV+vWksxhkiPhPn/1mPBlOrgueZ0iTPMHka+HaPXFOnF6D31kbDowFNu9fvHoIs
- XoevhetGdUmcAEjU1RfhAABDQU6rhPG3i1CfhgXPIIM5IZL1KgGteYpTUS3cqZlh3tJR
- uBX0B1D3k3HLRKB/AGocuizGiCOeKvl/Dgh4pJWBnY0JphFHLD/RF1B9pl2BWYQFGwOy
- SOPccJ3qJE9pPj8ZTbAX+FJCmoNHnFBYYnSO7Tv0QyMKQ1sU0Q2aVWiw99pshKvT1CEW
- 6TXg==
+ bh=8+zv9WaMzGGup6fPBxJSMXLwOepdsR76PqH60wNAu40=;
+ b=Myp8+WYlQrHMt62Eb3moaoEU8tVpVX4oVU8Xw7BXpp4BDNe7UoyIsfoIsQSPf6AeRv
+ Wx4SxaY5jfL/8AeorvcEpzhC7Yp5gyC6cN4xu1/aDBEW9ZraZ7UJqtCeJVyMLGirfwY6
+ XVMS66heEaMSCUckKyKyRbJgZPDBRaJO7QXVBgxNgxsfx8BEmO1hCRCdUdaN/PlHMUA7
+ cdppf1Zzmt9tFNi1usahj21bMV4wthJIrvdLsJFOFj+JbCuiYjybahsD97Nl5RNBYkqS
+ TrTAT71208Iy7E6VKfUEl9Gv7ei0mgfkGS8q4VBtaKTSjTbC5iloVRcP6gRXtcXJzusJ
+ I6bg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX4zJ/5Dtxx0TmXkSti/LzURp9fPswXkM5qBq8byINetnaGztLQEGcpXkd7PVHzxzmV2+sA4LA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxjf6Z1nnDZnTFuZnNtbD3kycjsaO1Ryp/6uDWUkOfAfI4vNu1/
- Bsm3Uoc8MG8ZhVXvDinzJYazIPI57dhm+Be9I/qvXOrZbiUlsFNzzhnFhFRONClPSQrCjMtvacg
- lcFW4pDC7L3zqaij56ckh87FbsL0nvmOHG300
-X-Google-Smtp-Source: AGHT+IHNgw+qDYPOCUHDgwKQVoAVRlwqcw5yGCeyooA6V4a/z9eCoaBH+2Rm7iOnQmBElsw0taFKOrgaoZJPTVvqytk=
-X-Received: by 2002:a05:6214:4a87:b0:6bf:8186:be29 with SMTP id
- 6a1803df08f44-6c15686d9cfmr30965466d6.43.1724248805032; Wed, 21 Aug 2024
- 07:00:05 -0700 (PDT)
+ AJvYcCWKiu1bQxu8nBvcIqEo1KG3of+2Cns4e+io060p9hVn5YwRS1SGMPa2FRvOmfWmd/tTfJHiEmg=@lists.denx.de
+X-Gm-Message-State: AOJu0YxyA9hVMuzYQUVpigH8mDJYbG4c1OQqdKpOKKgFiynZ5v3XH98o
+ hwyAzUlU4ADhDSfXxkmBDKXHNBFFWhjWL2gVxu1XZ2HFP6gxpR8BkXyWYOR3N0sJRHvtexW3Xs3
+ xDn82HD9qgWUPbWi8EFYPtqtwE8VNGQemdl/k
+X-Google-Smtp-Source: AGHT+IE7f3Ak/kjfHXb+01XML/huA7DAXMrJpZ8Hv6cZpMdcWDfqGNYTnA39SUhz0rnFsokZ2jscSktFdOOrDhb05fc=
+X-Received: by 2002:a05:6358:93a5:b0:1ab:e07d:c93c with SMTP id
+ e5c5f4694b2df-1b5a264caebmr276632755d.4.1724248807671; Wed, 21 Aug 2024
+ 07:00:07 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240821-b4-rb3gen2-v2-0-49b07633f3a8@linaro.org>
- <20240821-b4-rb3gen2-v2-4-49b07633f3a8@linaro.org>
-In-Reply-To: <20240821-b4-rb3gen2-v2-4-49b07633f3a8@linaro.org>
+ <20240821-b4-rb3gen2-v2-5-49b07633f3a8@linaro.org>
+In-Reply-To: <20240821-b4-rb3gen2-v2-5-49b07633f3a8@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 21 Aug 2024 07:59:54 -0600
-Message-ID: <CAFLszTg38B4H_bOX21HD8rXuWWdRH33=MXVj3UwrEdiya_-c=w@mail.gmail.com>
-Subject: Re: [PATCH v2 4/7] iommu: qcom-smmu: add sc7280-smmu-500 compatible
+Date: Wed, 21 Aug 2024 07:59:55 -0600
+Message-ID: <CAFLszTjyYOfiFXD1sSsftDR4DZcqAK4epuD_JZcn=WyLe9U+6w@mail.gmail.com>
+Subject: Re: [PATCH v2 5/7] qcom_defconfig: enable SC7280 clocks
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, 
@@ -89,32 +89,32 @@ X-Virus-Status: Clean
 
 On Wed, 21 Aug 2024 at 07:42, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> This soc doesn't have the generic compatible.
+> Enable clocks on SC7280
 >
 > Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->  drivers/iommu/qcom-hyp-smmu.c | 1 +
+>  configs/qcom_defconfig | 1 +
 >  1 file changed, 1 insertion(+)
->
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 
 
-> diff --git a/drivers/iommu/qcom-hyp-smmu.c b/drivers/iommu/qcom-hyp-smmu.c
-> index 7b646d840dd4..1b5a09bb7b39 100644
-> --- a/drivers/iommu/qcom-hyp-smmu.c
-> +++ b/drivers/iommu/qcom-hyp-smmu.c
-> @@ -380,8 +380,9 @@ static struct iommu_ops qcom_smmu_ops = {
->  };
 >
->  static const struct udevice_id qcom_smmu500_ids[] = {
->         { .compatible = "qcom,sdm845-smmu-500" },
-> +       { .compatible = "qcom,sc7280-smmu-500" },
->         { .compatible = "qcom,smmu-500", },
->         { /* sentinel */ }
->  };
->
+> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+> index 24b71ba7be29..1a079264a554 100644
+> --- a/configs/qcom_defconfig
+> +++ b/configs/qcom_defconfig
+> @@ -44,8 +44,9 @@ CONFIG_CLK=y
+>  CONFIG_CLK_QCOM_APQ8016=y
+>  CONFIG_CLK_QCOM_APQ8096=y
+>  CONFIG_CLK_QCOM_QCM2290=y
+>  CONFIG_CLK_QCOM_QCS404=y
+> +CONFIG_CLK_QCOM_SC7280=y
+>  CONFIG_CLK_QCOM_SDM845=y
+>  CONFIG_CLK_QCOM_SM6115=y
+>  CONFIG_CLK_QCOM_SM8250=y
+>  CONFIG_CLK_QCOM_SM8550=y
 >
 > --
 > 2.46.0
