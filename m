@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2432FC52D7C
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 16:21:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E67E4C52D7C
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 16:21:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6F6288E1E;
-	Wed, 21 Aug 2024 18:19:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 463AA88E2B;
+	Wed, 21 Aug 2024 18:19:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IzFFi/f8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AZgPbgbo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17C5188E20; Wed, 21 Aug 2024 18:19:47 +0200 (CEST)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
+ id AA48388E2A; Wed, 21 Aug 2024 18:19:47 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 097C688E1B
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 18:19:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 211C088BF9
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 18:19:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-26ff21d82e4so3643652fac.2
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 09:19:43 -0700 (PDT)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-70cb1b959a6so2683291a34.3
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 09:19:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724257182; x=1724861982; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724257184; x=1724861984; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9YyY5JYjIB5ceFMr/xDwv4fIw4GEHyA6IKge5FER4Tc=;
- b=IzFFi/f8VtpJdR5ItIniPhgKrFwEIhYMTLe/w6fSr2IxlbKFEKDDpmPlyqpGHQixq5
- UiWow1XY1aFUpUtnG0K/kn64RkTTW8ovbGcyLP1Akz+0RNKV1suX96CvLOl6hv/BPWdo
- M1wPSLTEvuUo0kwh0BK0zFMLzozTuUBk2o0Io=
+ bh=VpzfZyiejuKVQDqSAJWSodsjwxF4NtJljc4OffauubI=;
+ b=AZgPbgbofU1chvsd29WHG9VWo0ij12svKpK1j4ljdN55PI29HtAENO27jFWGpJ+YRi
+ AMyv6cbDmKHrC25RIAjUngD6bAZQlS3Htni7TjcWkchzM507nc1XrmfKBj2K5PZXjdwR
+ Zmyx06DUQ8ITfBSBjDFoW7QFGPNekvKK5RfNQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724257182; x=1724861982;
+ d=1e100.net; s=20230601; t=1724257184; x=1724861984;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9YyY5JYjIB5ceFMr/xDwv4fIw4GEHyA6IKge5FER4Tc=;
- b=eA3g+wVn12FCZL8Ff3YXSZW1wPAVVAEubsAmFqubyJpTzUtnqRmVvZGoaIS+dLOnhI
- L/HAbUO98+Q2D0+PtoiuDsnr6lXXTwDGwt9gg0HmrIZkfEwH6gLD61a1pKo1VhKbITJM
- oAWoLU+uBcCBovFGvhPCdsMJE+WfSYTbGmJRNwzGHYuAiTXsE4tz4Us6CO0ENUtxWUmi
- WGISVrFyKM5YoEssl2UUftHRJafRP+tDG0HThlHNoavKkxpb+Kedk5yXK4NCBAR9Idr6
- ZdNJczJ/cF8hu2u4zXkJvN2cCO8YSFM1w7k83Hyyh/ImnnjOD2ZUpZ6g6K54eh1OTNd0
- BTRg==
-X-Gm-Message-State: AOJu0YzeyXMUT3Hs4Y8Q3BmuZXzbFGx0vwfYMiAxDm1HXcEkUEiJJA9r
- PkeNnxeLZwbzCb5eUJIvDfAuZpO08blbvQcMt4H99lv22hZCFUT/ZxLXNmInTw1FkexTG/5dOFE
+ bh=VpzfZyiejuKVQDqSAJWSodsjwxF4NtJljc4OffauubI=;
+ b=jx3lNIwIGodvGbdJaN91WEgNzUtOcOaFcy/lHARLZw292OFvI0+ITt0e10yMll5kLr
+ 0IeDKaJUXj1Oat8ilaIZiVwZW4Fd72gP5XWwhG1ZOsHhEw6Cap1dt2rsZe4a2InNphMC
+ HTn+W+Bj9L4ZQgWtiiAQqk1yY9Vu7RIa79sMglseAe72Ji6wl8cNwF0uc1r/oqre1j1p
+ E2l/swpexDkCFDkPYS5FxurV7MsS5YAmPxa8rZXJE+7jN8NQztKLAdj3RfKOWmpS1pcL
+ znQUJNgGMGoDRKCpYnUfV3utibLla/OnCAUV4hbMLkCzwSMh3sdpe+6IIilShbzu+Ztr
+ rXdw==
+X-Gm-Message-State: AOJu0YxEeHi26GDG5MF+JJ8LAxy6i2yDDWVD2joOBGFCMrhfnXQ+yYoy
+ MOWkTc16tnEkj+ekWenAVQRwSSJwcuFCKjSx0NsB0KmBbQ4vrbfSvV5ndj4flrmJp7QK37ecn/I
  =
-X-Google-Smtp-Source: AGHT+IEUAupLSgKmimlNzYQIgCEUhvARzjMVNAL8kO1dH4akS0OSqNUl8l2Lh3RkMQDICyliOS6u1A==
-X-Received: by 2002:a05:6871:5223:b0:270:1498:6a36 with SMTP id
- 586e51a60fabf-2737ef54d6dmr3221457fac.29.1724257182578; 
- Wed, 21 Aug 2024 09:19:42 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGm3t318OELXMlQ/VkWinZk7UDvvWN6onlDZq8PEBasFQLn1oyS74TjK289xJUUBHf5RbohNQ==
+X-Received: by 2002:a05:6830:2708:b0:709:420f:3c68 with SMTP id
+ 46e09a7af769-70df8714f46mr3005791a34.13.1724257183734; 
+ Wed, 21 Aug 2024 09:19:43 -0700 (PDT)
 Received: from chromium.org ([139.60.174.4]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70ca6629792sm3222376a34.72.2024.08.21.09.19.41
+ 46e09a7af769-70ca6629792sm3222376a34.72.2024.08.21.09.19.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Aug 2024 09:19:42 -0700 (PDT)
+ Wed, 21 Aug 2024 09:19:43 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 08/35] zynqmp: Avoid setting the framebuffer address
-Date: Wed, 21 Aug 2024 10:19:00 -0600
-Message-Id: <20240821161927.695717-9-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Anatolij Gustschin <agust@denx.de>
+Subject: [PATCH v2 09/35] video: Avoid setting global_data fb_base from SPL
+ handoff
+Date: Wed, 21 Aug 2024 10:19:01 -0600
+Message-Id: <20240821161927.695717-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240821161927.695717-1-sjg@chromium.org>
 References: <20240821161927.695717-1-sjg@chromium.org>
@@ -88,38 +89,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is handled by driver model so this driver should not be setting the
-framebuffer address. Drop the assignment.
+This field is not used, so don't set it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- drivers/video/zynqmp/zynqmp_dpsub.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ drivers/video/video-uclass.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/drivers/video/zynqmp/zynqmp_dpsub.c b/drivers/video/zynqmp/zynqmp_dpsub.c
-index 1405b29cb8b..76abfeac443 100644
---- a/drivers/video/zynqmp/zynqmp_dpsub.c
-+++ b/drivers/video/zynqmp/zynqmp_dpsub.c
-@@ -49,7 +49,7 @@ static void dma_init_video_descriptor(struct udevice *dev)
- 			     DPDMA_DESCRIPTOR_ADDR_EXT_SRC_ADDR_EXT_SHIFT) |
- 			     (upper_32_bits((u64)&cur_desc)));
- 	cur_desc.next_desr = lower_32_bits((u64)&cur_desc);
--	cur_desc.src_addr = lower_32_bits((u64)gd->fb_base);
-+	cur_desc.src_addr = lower_32_bits((u64)video_get_fb());
- }
+diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
+index e358a7949e0..ef780a6730c 100644
+--- a/drivers/video/video-uclass.c
++++ b/drivers/video/video-uclass.c
+@@ -224,7 +224,6 @@ int video_reserve_from_bloblist(struct video_handoff *ho)
+ 		return -ENOENT;
  
- static void dma_set_descriptor_address(struct udevice *dev)
-@@ -2134,7 +2134,6 @@ static int zynqmp_dpsub_probe(struct udevice *dev)
- 	dev_dbg(dev, "BPP in bits %d, bpix %d\n",
- 		priv->non_live_graphics->bpp, uc_priv->bpix);
- 
--	uc_priv->fb = (void *)gd->fb_base;
- 	uc_priv->xsize = vidc_video_timing_modes[priv->video_mode].video_timing.h_active;
- 	uc_priv->ysize = vidc_video_timing_modes[priv->video_mode].video_timing.v_active;
- 	/* Calculated by core but need it for my own setup */
+ 	gd->video_bottom = ho->fb;
+-	gd->fb_base = ho->fb;
+ 	gd->video_top = ho->fb + ho->size;
+ 	debug("%s: Reserving %lx bytes at %08x as per bloblist received\n",
+ 	      __func__, (unsigned long)ho->size, (u32)ho->fb);
 -- 
 2.34.1
 
