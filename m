@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B736CC52D6F
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 10:59:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99A20C52D6F
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 11:00:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A438E88C52;
-	Wed, 21 Aug 2024 12:59:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0593F88C70;
+	Wed, 21 Aug 2024 12:59:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C35F88B4C; Wed, 21 Aug 2024 12:59:26 +0200 (CEST)
+ id E88D288D88; Wed, 21 Aug 2024 12:59:27 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id BC75A88D96
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 12:59:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 9BCD188C70
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 12:59:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4ECA5DA7;
- Wed, 21 Aug 2024 03:59:47 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2DE4EDA7;
+ Wed, 21 Aug 2024 03:59:51 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E24433F73B;
- Wed, 21 Aug 2024 03:59:17 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C0D623F73B;
+ Wed, 21 Aug 2024 03:59:21 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
@@ -36,9 +36,9 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  Patrice CHOTARD <patrice.chotard@foss.st.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v3 06/27] lmb: allow for resizing lmb regions
-Date: Wed, 21 Aug 2024 16:28:18 +0530
-Message-Id: <20240821105839.2870293-7-sughosh.ganu@linaro.org>
+Subject: [PATCH v3 07/27] lmb: remove config symbols used for lmb region count
+Date: Wed, 21 Aug 2024 16:28:19 +0530
+Message-Id: <20240821105839.2870293-8-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240821105839.2870293-1-sughosh.ganu@linaro.org>
 References: <20240821105839.2870293-1-sughosh.ganu@linaro.org>
@@ -60,215 +60,265 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allow for resizing of LMB regions if the region attributes match. The
-current code returns a failure status on detecting an overlapping
-address. This worked up until now since the LMB calls were not
-persistent and global -- the LMB memory map was specific and private
-to a given caller of the LMB API's.
-
-With the change in the LMB code to make the LMB reservations
-persistent, there needs to be a check on whether the memory region can
-be resized, and then do it if so. To distinguish between memory that
-cannot be resized, add a new flag, LMB_NOOVERWRITE. Reserving a region
-of memory with this attribute would indicate that the region cannot be
-resized.
+The LMB memory maps are now being maintained through a couple of
+alloced lists, one for the available(added) memory, and one for the
+used memory. These lists are not static arrays but can be extended at
+runtime. Remove the config symbols which were being used to define the
+size of these lists with the earlier implementation of static arrays.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 Changes since V2: None
 
- include/lmb.h |  1 +
- lib/lmb.c     | 98 ++++++++++++++++++++++++++++++++++++++++++---------
- 2 files changed, 83 insertions(+), 16 deletions(-)
+ configs/a3y17lte_defconfig           |  1 -
+ configs/a5y17lte_defconfig           |  1 -
+ configs/a7y17lte_defconfig           |  1 -
+ configs/apple_m1_defconfig           |  1 -
+ configs/mt7981_emmc_rfb_defconfig    |  1 -
+ configs/mt7981_rfb_defconfig         |  1 -
+ configs/mt7981_sd_rfb_defconfig      |  1 -
+ configs/mt7986_rfb_defconfig         |  1 -
+ configs/mt7986a_bpir3_emmc_defconfig |  1 -
+ configs/mt7986a_bpir3_sd_defconfig   |  1 -
+ configs/mt7988_rfb_defconfig         |  1 -
+ configs/mt7988_sd_rfb_defconfig      |  1 -
+ configs/qcom_defconfig               |  1 -
+ configs/stm32mp13_defconfig          |  3 ---
+ configs/stm32mp15_basic_defconfig    |  3 ---
+ configs/stm32mp15_defconfig          |  3 ---
+ configs/stm32mp15_trusted_defconfig  |  3 ---
+ configs/stm32mp25_defconfig          |  3 ---
+ configs/th1520_lpi4a_defconfig       |  1 -
+ lib/Kconfig                          | 34 ----------------------------
+ 20 files changed, 63 deletions(-)
 
-diff --git a/include/lmb.h b/include/lmb.h
-index d352fe9afb..d0f1b65fb6 100644
---- a/include/lmb.h
-+++ b/include/lmb.h
-@@ -22,6 +22,7 @@
- enum lmb_flags {
- 	LMB_NONE		= 0,
- 	LMB_NOMAP		= BIT(1),
-+	LMB_NOOVERWRITE		= BIT(2),
- };
+diff --git a/configs/a3y17lte_defconfig b/configs/a3y17lte_defconfig
+index 5c15d51fdc..b012b985a3 100644
+--- a/configs/a3y17lte_defconfig
++++ b/configs/a3y17lte_defconfig
+@@ -23,4 +23,3 @@ CONFIG_HUSH_PARSER=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
+ CONFIG_DM_I2C_GPIO=y
+-CONFIG_LMB_MAX_REGIONS=64
+diff --git a/configs/a5y17lte_defconfig b/configs/a5y17lte_defconfig
+index 7c9b6b2511..25a7d5bc98 100644
+--- a/configs/a5y17lte_defconfig
++++ b/configs/a5y17lte_defconfig
+@@ -23,4 +23,3 @@ CONFIG_HUSH_PARSER=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
+ CONFIG_DM_I2C_GPIO=y
+-CONFIG_LMB_MAX_REGIONS=64
+diff --git a/configs/a7y17lte_defconfig b/configs/a7y17lte_defconfig
+index c7297f7d75..c87379ab39 100644
+--- a/configs/a7y17lte_defconfig
++++ b/configs/a7y17lte_defconfig
+@@ -23,4 +23,3 @@ CONFIG_HUSH_PARSER=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
+ CONFIG_DM_I2C_GPIO=y
+-CONFIG_LMB_MAX_REGIONS=64
+diff --git a/configs/apple_m1_defconfig b/configs/apple_m1_defconfig
+index 20d2cff93f..dca6e0ca8b 100644
+--- a/configs/apple_m1_defconfig
++++ b/configs/apple_m1_defconfig
+@@ -26,4 +26,3 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+ CONFIG_NO_FB_CLEAR=y
+ CONFIG_VIDEO_SIMPLE=y
+ # CONFIG_SMBIOS is not set
+-CONFIG_LMB_MAX_REGIONS=64
+diff --git a/configs/mt7981_emmc_rfb_defconfig b/configs/mt7981_emmc_rfb_defconfig
+index 76ee2aa2d6..d3e833905f 100644
+--- a/configs/mt7981_emmc_rfb_defconfig
++++ b/configs/mt7981_emmc_rfb_defconfig
+@@ -62,4 +62,3 @@ CONFIG_MTK_SERIAL=y
+ CONFIG_FAT_WRITE=y
+ CONFIG_HEXDUMP=y
+ # CONFIG_EFI_LOADER is not set
+-CONFIG_LMB_MAX_REGIONS=64
+diff --git a/configs/mt7981_rfb_defconfig b/configs/mt7981_rfb_defconfig
+index 3989c79d2b..4bc2173f13 100644
+--- a/configs/mt7981_rfb_defconfig
++++ b/configs/mt7981_rfb_defconfig
+@@ -65,4 +65,3 @@ CONFIG_DM_SPI=y
+ CONFIG_MTK_SPIM=y
+ CONFIG_HEXDUMP=y
+ # CONFIG_EFI_LOADER is not set
+-CONFIG_LMB_MAX_REGIONS=64
+diff --git a/configs/mt7981_sd_rfb_defconfig b/configs/mt7981_sd_rfb_defconfig
+index 9b33245527..8721b4074a 100644
+--- a/configs/mt7981_sd_rfb_defconfig
++++ b/configs/mt7981_sd_rfb_defconfig
+@@ -62,4 +62,3 @@ CONFIG_MTK_SERIAL=y
+ CONFIG_FAT_WRITE=y
+ CONFIG_HEXDUMP=y
+ # CONFIG_EFI_LOADER is not set
+-CONFIG_LMB_MAX_REGIONS=64
+diff --git a/configs/mt7986_rfb_defconfig b/configs/mt7986_rfb_defconfig
+index 4d0cc85d0e..15c31de236 100644
+--- a/configs/mt7986_rfb_defconfig
++++ b/configs/mt7986_rfb_defconfig
+@@ -65,4 +65,3 @@ CONFIG_DM_SPI=y
+ CONFIG_MTK_SPIM=y
+ CONFIG_HEXDUMP=y
+ # CONFIG_EFI_LOADER is not set
+-CONFIG_LMB_MAX_REGIONS=64
+diff --git a/configs/mt7986a_bpir3_emmc_defconfig b/configs/mt7986a_bpir3_emmc_defconfig
+index 3c296ab803..56921f3605 100644
+--- a/configs/mt7986a_bpir3_emmc_defconfig
++++ b/configs/mt7986a_bpir3_emmc_defconfig
+@@ -62,4 +62,3 @@ CONFIG_MTK_SERIAL=y
+ CONFIG_FAT_WRITE=y
+ CONFIG_HEXDUMP=y
+ # CONFIG_EFI_LOADER is not set
+-CONFIG_LMB_MAX_REGIONS=64
+diff --git a/configs/mt7986a_bpir3_sd_defconfig b/configs/mt7986a_bpir3_sd_defconfig
+index f644070f4e..4ed06b72d5 100644
+--- a/configs/mt7986a_bpir3_sd_defconfig
++++ b/configs/mt7986a_bpir3_sd_defconfig
+@@ -62,4 +62,3 @@ CONFIG_MTK_SERIAL=y
+ CONFIG_FAT_WRITE=y
+ CONFIG_HEXDUMP=y
+ # CONFIG_EFI_LOADER is not set
+-CONFIG_LMB_MAX_REGIONS=64
+diff --git a/configs/mt7988_rfb_defconfig b/configs/mt7988_rfb_defconfig
+index d0ed2cc1c9..f7ceaceb30 100644
+--- a/configs/mt7988_rfb_defconfig
++++ b/configs/mt7988_rfb_defconfig
+@@ -81,4 +81,3 @@ CONFIG_MTK_SPIM=y
+ CONFIG_LZO=y
+ CONFIG_HEXDUMP=y
+ # CONFIG_EFI_LOADER is not set
+-CONFIG_LMB_MAX_REGIONS=64
+diff --git a/configs/mt7988_sd_rfb_defconfig b/configs/mt7988_sd_rfb_defconfig
+index 5631eaa338..808c8b9011 100644
+--- a/configs/mt7988_sd_rfb_defconfig
++++ b/configs/mt7988_sd_rfb_defconfig
+@@ -69,4 +69,3 @@ CONFIG_MTK_SPIM=y
+ CONFIG_LZO=y
+ CONFIG_HEXDUMP=y
+ # CONFIG_EFI_LOADER is not set
+-CONFIG_LMB_MAX_REGIONS=64
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index 8852e83a52..edbb624baf 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -117,4 +117,3 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+ CONFIG_NO_FB_CLEAR=y
+ CONFIG_VIDEO_SIMPLE=y
+ CONFIG_HEXDUMP=y
+-CONFIG_LMB_MAX_REGIONS=64
+diff --git a/configs/stm32mp13_defconfig b/configs/stm32mp13_defconfig
+index caaabf39ef..9aa3560c7e 100644
+--- a/configs/stm32mp13_defconfig
++++ b/configs/stm32mp13_defconfig
+@@ -103,6 +103,3 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x0483
+ CONFIG_USB_GADGET_PRODUCT_NUM=0x5720
+ CONFIG_USB_GADGET_DWC2_OTG=y
+ CONFIG_ERRNO_STR=y
+-# CONFIG_LMB_USE_MAX_REGIONS is not set
+-CONFIG_LMB_MEMORY_REGIONS=2
+-CONFIG_LMB_RESERVED_REGIONS=16
+diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
+index 2e22bf8600..806935f389 100644
+--- a/configs/stm32mp15_basic_defconfig
++++ b/configs/stm32mp15_basic_defconfig
+@@ -190,6 +190,3 @@ CONFIG_WDT=y
+ CONFIG_WDT_STM32MP=y
+ # CONFIG_BINMAN_FDT is not set
+ CONFIG_ERRNO_STR=y
+-# CONFIG_LMB_USE_MAX_REGIONS is not set
+-CONFIG_LMB_MEMORY_REGIONS=2
+-CONFIG_LMB_RESERVED_REGIONS=16
+diff --git a/configs/stm32mp15_defconfig b/configs/stm32mp15_defconfig
+index ffe7512650..5f050ee0d0 100644
+--- a/configs/stm32mp15_defconfig
++++ b/configs/stm32mp15_defconfig
+@@ -166,6 +166,3 @@ CONFIG_WDT=y
+ CONFIG_WDT_STM32MP=y
+ # CONFIG_BINMAN_FDT is not set
+ CONFIG_ERRNO_STR=y
+-# CONFIG_LMB_USE_MAX_REGIONS is not set
+-CONFIG_LMB_MEMORY_REGIONS=2
+-CONFIG_LMB_RESERVED_REGIONS=16
+diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
+index 74deaaba2e..3c591d74af 100644
+--- a/configs/stm32mp15_trusted_defconfig
++++ b/configs/stm32mp15_trusted_defconfig
+@@ -166,6 +166,3 @@ CONFIG_WDT=y
+ CONFIG_WDT_STM32MP=y
+ # CONFIG_BINMAN_FDT is not set
+ CONFIG_ERRNO_STR=y
+-# CONFIG_LMB_USE_MAX_REGIONS is not set
+-CONFIG_LMB_MEMORY_REGIONS=2
+-CONFIG_LMB_RESERVED_REGIONS=16
+diff --git a/configs/stm32mp25_defconfig b/configs/stm32mp25_defconfig
+index 87038cc773..f5623a19bb 100644
+--- a/configs/stm32mp25_defconfig
++++ b/configs/stm32mp25_defconfig
+@@ -49,6 +49,3 @@ CONFIG_WDT_STM32MP=y
+ CONFIG_WDT_ARM_SMC=y
+ CONFIG_ERRNO_STR=y
+ # CONFIG_EFI_LOADER is not set
+-# CONFIG_LMB_USE_MAX_REGIONS is not set
+-CONFIG_LMB_MEMORY_REGIONS=2
+-CONFIG_LMB_RESERVED_REGIONS=32
+diff --git a/configs/th1520_lpi4a_defconfig b/configs/th1520_lpi4a_defconfig
+index 49ff92f6de..db80e33870 100644
+--- a/configs/th1520_lpi4a_defconfig
++++ b/configs/th1520_lpi4a_defconfig
+@@ -79,4 +79,3 @@ CONFIG_BZIP2=y
+ CONFIG_ZSTD=y
+ CONFIG_LIB_RATIONAL=y
+ # CONFIG_EFI_LOADER is not set
+-# CONFIG_LMB_USE_MAX_REGIONS is not set
+diff --git a/lib/Kconfig b/lib/Kconfig
+index 2059219a12..f8ac8daad3 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -1105,40 +1105,6 @@ config LMB
+ 	help
+ 	  Support the library logical memory blocks.
  
- /**
-diff --git a/lib/lmb.c b/lib/lmb.c
-index 531d151b28..e85ee0a90b 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -246,6 +246,56 @@ void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
- 	lmb_reserve_common(fdt_blob);
- }
- 
-+static long lmb_resize_regions(struct alist *lmb_rgn_lst,
-+			       unsigned long idx_start,
-+			       phys_addr_t base, phys_size_t size)
-+{
-+	phys_size_t rgnsize;
-+	unsigned long rgn_cnt, idx, idx_end;
-+	phys_addr_t rgnbase, rgnend;
-+	phys_addr_t mergebase, mergeend;
-+	struct lmb_region *rgn = lmb_rgn_lst->data;
-+
-+	rgn_cnt = 0;
-+	idx = idx_end = idx_start;
-+
-+	/*
-+	 * First thing to do is to identify how many regions
-+	 * the requested region overlaps.
-+	 * If the flags match, combine all these overlapping
-+	 * regions into a single region, and remove the merged
-+	 * regions.
-+	 */
-+	while (idx <= lmb_rgn_lst->count - 1) {
-+		rgnbase = rgn[idx].base;
-+		rgnsize = rgn[idx].size;
-+
-+		if (lmb_addrs_overlap(base, size, rgnbase,
-+				      rgnsize)) {
-+			if (rgn[idx].flags != LMB_NONE)
-+				return -1;
-+			rgn_cnt++;
-+			idx_end = idx;
-+		}
-+		idx++;
-+	}
-+
-+	/* The merged region's base and size */
-+	rgnbase = rgn[idx_start].base;
-+	mergebase = min(base, rgnbase);
-+	rgnend = rgn[idx_end].base + rgn[idx_end].size;
-+	mergeend = max(rgnend, (base + size));
-+
-+	rgn[idx_start].base = mergebase;
-+	rgn[idx_start].size = mergeend - mergebase;
-+
-+	/* Now remove the merged regions */
-+	while (--rgn_cnt)
-+		lmb_remove_region(lmb_rgn_lst, idx_start + 1);
-+
-+	return 0;
-+}
-+
- /**
-  * lmb_add_region_flags() - Add an lmb region to the given list
-  * @lmb_rgn_lst: LMB list to which region is to be added(free/used)
-@@ -265,7 +315,7 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
- 				 phys_size_t size, enum lmb_flags flags)
- {
- 	unsigned long coalesced = 0;
--	long adjacent, i;
-+	long ret, i;
- 	struct lmb_region *rgn = lmb_rgn_lst->data;
- 
- 	if (alist_err(lmb_rgn_lst))
-@@ -286,23 +336,32 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
- 				return -1; /* regions with new flags */
- 		}
- 
--		adjacent = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
--		if (adjacent > 0) {
-+		ret = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
-+		if (ret > 0) {
- 			if (flags != rgnflags)
- 				break;
- 			rgn[i].base -= size;
- 			rgn[i].size += size;
- 			coalesced++;
- 			break;
--		} else if (adjacent < 0) {
-+		} else if (ret < 0) {
- 			if (flags != rgnflags)
- 				break;
- 			rgn[i].size += size;
- 			coalesced++;
- 			break;
- 		} else if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
--			/* regions overlap */
--			return -1;
-+			if (flags == LMB_NONE) {
-+				ret = lmb_resize_regions(lmb_rgn_lst, i, base,
-+							 size);
-+				if (ret < 0)
-+					return -1;
-+
-+				coalesced++;
-+				break;
-+			} else {
-+				return -1;
-+			}
- 		}
- 	}
- 
-@@ -444,7 +503,7 @@ static phys_addr_t lmb_align_down(phys_addr_t addr, phys_size_t size)
- }
- 
- static phys_addr_t __lmb_alloc_base(phys_size_t size, ulong align,
--				    phys_addr_t max_addr)
-+				    phys_addr_t max_addr, enum lmb_flags flags)
- {
- 	long i, rgn;
- 	phys_addr_t base = 0;
-@@ -473,8 +532,8 @@ static phys_addr_t __lmb_alloc_base(phys_size_t size, ulong align,
- 			rgn = lmb_overlaps_region(&lmb.used_mem, base, size);
- 			if (rgn < 0) {
- 				/* This area isn't reserved, take it */
--				if (lmb_add_region(&lmb.used_mem, base,
--						   size) < 0)
-+				if (lmb_add_region_flags(&lmb.used_mem, base,
-+							 size, flags) < 0)
- 					return 0;
- 				return base;
- 			}
-@@ -497,7 +556,7 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
- {
- 	phys_addr_t alloc;
- 
--	alloc = __lmb_alloc_base(size, align, max_addr);
-+	alloc = __lmb_alloc_base(size, align, max_addr, LMB_NONE);
- 
- 	if (alloc == 0)
- 		printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
-@@ -506,11 +565,8 @@ phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr)
- 	return alloc;
- }
- 
--/*
-- * Try to allocate a specific address range: must be in defined memory but not
-- * reserved
-- */
--phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
-+static phys_addr_t __lmb_alloc_addr(phys_addr_t base, phys_size_t size,
-+				    enum lmb_flags flags)
- {
- 	long rgn;
- 	struct lmb_region *lmb_memory = lmb.free_mem.data;
-@@ -526,13 +582,23 @@ phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
- 				      lmb_memory[rgn].size,
- 				      base + size - 1, 1)) {
- 			/* ok, reserve the memory */
--			if (lmb_reserve(base, size) >= 0)
-+			if (lmb_reserve_flags(base, size, flags) >= 0)
- 				return base;
- 		}
- 	}
-+
- 	return 0;
- }
- 
-+/*
-+ * Try to allocate a specific address range: must be in defined memory but not
-+ * reserved
-+ */
-+phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size)
-+{
-+	return __lmb_alloc_addr(base, size, LMB_NONE);
-+}
-+
- /* Return number of bytes from a given address that are free */
- phys_size_t lmb_get_free_size(phys_addr_t addr)
- {
+-config LMB_USE_MAX_REGIONS
+-	bool "Use a common number of memory and reserved regions in lmb lib"
+-	default y
+-	help
+-	  Define the number of supported memory regions in the library logical
+-	  memory blocks.
+-	  This feature allow to reduce the lmb library size by using compiler
+-	  optimization when LMB_MEMORY_REGIONS == LMB_RESERVED_REGIONS.
+-
+-config LMB_MAX_REGIONS
+-	int "Number of memory and reserved regions in lmb lib"
+-	depends on LMB_USE_MAX_REGIONS
+-	default 16
+-	help
+-	  Define the number of supported regions, memory and reserved, in the
+-	  library logical memory blocks.
+-
+-config LMB_MEMORY_REGIONS
+-	int "Number of memory regions in lmb lib"
+-	depends on !LMB_USE_MAX_REGIONS
+-	default 8
+-	help
+-	  Define the number of supported memory regions in the library logical
+-	  memory blocks.
+-	  The minimal value is CONFIG_NR_DRAM_BANKS.
+-
+-config LMB_RESERVED_REGIONS
+-	int "Number of reserved regions in lmb lib"
+-	depends on !LMB_USE_MAX_REGIONS
+-	default 8
+-	help
+-	  Define the number of supported reserved regions in the library logical
+-	  memory blocks.
+-
+ config PHANDLE_CHECK_SEQ
+ 	bool "Enable phandle check while getting sequence number"
+ 	help
 -- 
 2.34.1
 
