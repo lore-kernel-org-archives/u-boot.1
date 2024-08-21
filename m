@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1B1AC52D7C
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 11:02:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC14AC52D6F
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 11:02:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD86488D0F;
-	Wed, 21 Aug 2024 13:00:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1FC4D88C20;
+	Wed, 21 Aug 2024 13:00:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1CDE88DCD; Wed, 21 Aug 2024 13:00:17 +0200 (CEST)
+ id F018088DD0; Wed, 21 Aug 2024 13:00:19 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 0D33588DB8
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 13:00:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id E3BDD88DDF
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 13:00:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 88436DA7;
- Wed, 21 Aug 2024 04:00:37 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 66B4ADA7;
+ Wed, 21 Aug 2024 04:00:41 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2740A3F73B;
- Wed, 21 Aug 2024 04:00:07 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 05BFC3F73B;
+ Wed, 21 Aug 2024 04:00:11 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
@@ -36,10 +36,10 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  Patrice CHOTARD <patrice.chotard@foss.st.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v3 19/27] sandbox: move the TCG event log to the start of ram
- memory
-Date: Wed, 21 Aug 2024 16:28:31 +0530
-Message-Id: <20240821105839.2870293-20-sughosh.ganu@linaro.org>
+Subject: [PATCH v3 20/27] spl: call spl_board_init() at the end of the spl
+ init sequence
+Date: Wed, 21 Aug 2024 16:28:32 +0530
+Message-Id: <20240821105839.2870293-21-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240821105839.2870293-1-sughosh.ganu@linaro.org>
 References: <20240821105839.2870293-1-sughosh.ganu@linaro.org>
@@ -61,82 +61,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The TCG event log buffer is being set at the end of ram memory. This
-region of memory is to be reserved as LMB_NOMAP memory in the LMB
-memory map. The current location of this buffer overlaps with the
-memory region reserved for the U-Boot image, which is at the top of
-the usable memory. This worked earlier as the LMB memory map was not
-global but caller specific, but fails now because of the overlap.
-
-Move the TCG event log buffer to the start of the ram memory region
-instead. Move the location of the early trace buffer and the load
-buffer for U-Boot(spl boot) accordingly.
+The spl_board_init() function on sandbox invokes the unit
+tests. Invoking the tests should be done once the rest of the system
+has been initialised. Call the spl_board_init() function at the very
+end, once the rest of the initilisation functions have been called,
+including the setting up of the LMB memory map.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
-Changes since V2:
-* Move the TCG event log to a location such that it does not clash
-  with any load addresses in the tests.
-* Adjust the values of CONFIG_TRACE_EARLY_ADDR and U-Boot load address
-  for SPL accordingly.
+Changes since V2: None
 
- arch/sandbox/dts/test.dts     | 2 +-
- configs/sandbox_spl_defconfig | 2 +-
- doc/arch/sandbox/sandbox.rst  | 5 +++--
- lib/Kconfig                   | 2 +-
- 4 files changed, 6 insertions(+), 5 deletions(-)
+ common/spl/spl.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 5fb5eac862..8412506c17 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -78,7 +78,7 @@
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 4102e25115..f58c1f97b9 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -713,9 +713,6 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 	if (CONFIG_IS_ENABLED(SOC_INIT))
+ 		spl_soc_init();
  
- 		event_log: tcg_event_log {
- 			no-map;
--			reg = <(CFG_SYS_SDRAM_SIZE - 0x2000) 0x2000>;
-+			reg = <(CFG_SYS_SDRAM_BASE + 0x100000) 0x2000>;
- 		};
- 	};
+-	if (CONFIG_IS_ENABLED(BOARD_INIT))
+-		spl_board_init();
+-
+ 	if (IS_ENABLED(CONFIG_SPL_WATCHDOG) && CONFIG_IS_ENABLED(WDT))
+ 		initr_watchdog();
  
-diff --git a/configs/sandbox_spl_defconfig b/configs/sandbox_spl_defconfig
-index f7b92dc844..826a82d092 100644
---- a/configs/sandbox_spl_defconfig
-+++ b/configs/sandbox_spl_defconfig
-@@ -1,4 +1,4 @@
--CONFIG_TEXT_BASE=0x200000
-+CONFIG_TEXT_BASE=0x400000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
- CONFIG_SPL_LIBGENERIC_SUPPORT=y
-diff --git a/doc/arch/sandbox/sandbox.rst b/doc/arch/sandbox/sandbox.rst
-index 5f8db12665..4967551724 100644
---- a/doc/arch/sandbox/sandbox.rst
-+++ b/doc/arch/sandbox/sandbox.rst
-@@ -662,7 +662,8 @@ Addr      Config                     Usage
-    b000   CONFIG_BLOBLIST_ADDR       Blob list
-   10000   CFG_MALLOC_F_ADDR          Early memory allocation
-   f0000   CONFIG_PRE_CON_BUF_ADDR    Pre-console buffer
-- 100000   CONFIG_TRACE_EARLY_ADDR    Early trace buffer (if enabled). Also used
-+ 100000   TCG Event log              TCG Event Log
-+ 200000   CONFIG_TRACE_EARLY_ADDR    Early trace buffer (if enabled). Also used
-                                      as the SPL load buffer in spl_test_load().
-- 200000   CONFIG_TEXT_BASE           Load buffer for U-Boot (sandbox_spl only)
-+ 400000   CONFIG_TEXT_BASE           Load buffer for U-Boot (sandbox_spl only)
- =======   ========================   ===============================
-diff --git a/lib/Kconfig b/lib/Kconfig
-index e352b5550a..5f282ecb54 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -403,7 +403,7 @@ config TRACE_EARLY_CALL_DEPTH_LIMIT
- config TRACE_EARLY_ADDR
- 	hex "Address of early trace buffer in U-Boot"
- 	depends on TRACE_EARLY
--	default 0x00100000
-+	default 0x00200000
- 	help
- 	  Sets the address of the early trace buffer in U-Boot. This memory
- 	  must be accessible before relocation.
+@@ -733,6 +730,9 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 		/* Don't fail. We still can try other boot methods. */
+ 	}
+ 
++	if (CONFIG_IS_ENABLED(BOARD_INIT))
++		spl_board_init();
++
+ 	bootcount_inc();
+ 
+ 	/* Dump driver model states to aid analysis */
 -- 
 2.34.1
 
