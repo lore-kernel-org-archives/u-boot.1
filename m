@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AB6AC52D6F
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 11:01:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADB8EC52D7C
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 11:01:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1834388DBE;
-	Wed, 21 Aug 2024 12:59:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 672B588C37;
+	Wed, 21 Aug 2024 12:59:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C24AA88DB7; Wed, 21 Aug 2024 12:59:50 +0200 (CEST)
+ id 09E0888DA4; Wed, 21 Aug 2024 12:59:55 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id C8AC888C37
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 12:59:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id AEE0288DC2
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 12:59:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5C476FEC;
- Wed, 21 Aug 2024 04:00:14 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 40A63DA7;
+ Wed, 21 Aug 2024 04:00:18 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EDC3E3F73B;
- Wed, 21 Aug 2024 03:59:44 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CCFE33F73B;
+ Wed, 21 Aug 2024 03:59:48 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
@@ -36,9 +36,9 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  Patrice CHOTARD <patrice.chotard@foss.st.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v3 13/27] lmb: remove lmb_init_and_reserve_range() function
-Date: Wed, 21 Aug 2024 16:28:25 +0530
-Message-Id: <20240821105839.2870293-14-sughosh.ganu@linaro.org>
+Subject: [PATCH v3 14/27] lmb: bootm: remove superfluous lmb stub functions
+Date: Wed, 21 Aug 2024 16:28:26 +0530
+Message-Id: <20240821105839.2870293-15-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240821105839.2870293-1-sughosh.ganu@linaro.org>
 References: <20240821105839.2870293-1-sughosh.ganu@linaro.org>
@@ -60,89 +60,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the move to make the LMB allocations persistent and the common
-memory regions being reserved during board init, there is no need for
-an explicit reservation of a memory range. Remove the
-lmb_init_and_reserve_range() function.
+Remove a couple of superfluous LMB stub functions, and instead put a
+check for calling the lmb_reserve() function.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 Changes since V2: None
 
- boot/bootm.c  | 15 +--------------
- include/lmb.h |  3 ---
- lib/lmb.c     |  8 --------
- 3 files changed, 1 insertion(+), 25 deletions(-)
+ boot/bootm.c | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
 diff --git a/boot/bootm.c b/boot/bootm.c
-index e244b9b410..ddede08979 100644
+index ddede08979..a61bbcfb45 100644
 --- a/boot/bootm.c
 +++ b/boot/bootm.c
-@@ -239,18 +239,7 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
+@@ -239,11 +239,6 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
  	return 0;
  }
  
--#if CONFIG_IS_ENABLED(LMB)
--static void boot_start_lmb(void)
--{
--	phys_addr_t	mem_start;
--	phys_size_t	mem_size;
+-#if !CONFIG_IS_ENABLED(LMB)
+-#define lmb_reserve(base, size)
+-static inline void boot_start_lmb(void) { }
+-#endif
 -
--	mem_start = env_get_bootm_low();
--	mem_size = env_get_bootm_size();
--
--	lmb_init_and_reserve_range(mem_start, mem_size, NULL);
--}
--#else
-+#if !CONFIG_IS_ENABLED(LMB)
- #define lmb_reserve(base, size)
- static inline void boot_start_lmb(void) { }
- #endif
-@@ -260,8 +249,6 @@ static int bootm_start(void)
+ static int bootm_start(void)
+ {
  	memset((void *)&images, 0, sizeof(images));
- 	images.verify = env_get_yesno("verify");
+@@ -700,7 +695,9 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 		images->os.end = relocated_addr + image_size;
+ 	}
  
--	boot_start_lmb();
--
- 	bootstage_mark_name(BOOTSTAGE_ID_BOOTM_START, "bootm_start");
- 	images.state = BOOTM_STATE_START;
- 
-diff --git a/include/lmb.h b/include/lmb.h
-index 6d41672216..e6c6f1cdcd 100644
---- a/include/lmb.h
-+++ b/include/lmb.h
-@@ -63,9 +63,6 @@ struct lmb {
-  */
- int lmb_init(void);
- 
--void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
--				void *fdt_blob);
--
- /**
-  * lmb_add_memory() - Add memory range for LMB allocations
-  *
-diff --git a/lib/lmb.c b/lib/lmb.c
-index 83d3512a02..e26e329248 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -227,14 +227,6 @@ static void lmb_reserve_common(void *fdt_blob)
- 		efi_lmb_reserve();
+-	lmb_reserve(images->os.load, (load_end - images->os.load));
++	if (CONFIG_IS_ENABLED(LMB))
++		lmb_reserve(images->os.load, (load_end - images->os.load));
++
+ 	return 0;
  }
  
--/* Initialize the struct, add memory and call arch/board reserve functions */
--void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
--				void *fdt_blob)
--{
--	lmb_add(base, size);
--	lmb_reserve_common(fdt_blob);
--}
--
- static __maybe_unused void lmb_reserve_common_spl(void)
- {
- 	phys_addr_t rsv_start;
 -- 
 2.34.1
 
