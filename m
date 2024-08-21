@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69D47C52D7C
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 11:03:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39C62C52D7C
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 11:03:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D835B88DDD;
-	Wed, 21 Aug 2024 13:00:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 41EA188DE8;
+	Wed, 21 Aug 2024 13:00:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6541388113; Wed, 21 Aug 2024 13:00:37 +0200 (CEST)
+ id A3C0D88DE0; Wed, 21 Aug 2024 13:00:41 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 3A42988DDD
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 13:00:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 0F70188DF5
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 13:00:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B8CF4FEC;
- Wed, 21 Aug 2024 04:01:00 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 97919DA7;
+ Wed, 21 Aug 2024 04:01:04 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 56D8B3F73B;
- Wed, 21 Aug 2024 04:00:31 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 365F73F73B;
+ Wed, 21 Aug 2024 04:00:34 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
@@ -36,10 +36,10 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
  Patrice CHOTARD <patrice.chotard@foss.st.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v3 25/27] stm32mp: allow calling optee_get_reserved_memory()
- from U-Boot
-Date: Wed, 21 Aug 2024 16:28:37 +0530
-Message-Id: <20240821105839.2870293-26-sughosh.ganu@linaro.org>
+Subject: [PATCH v3 26/27] stm32mp: compute ram_top based on the optee base
+ address
+Date: Wed, 21 Aug 2024 16:28:38 +0530
+Message-Id: <20240821105839.2870293-27-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240821105839.2870293-1-sughosh.ganu@linaro.org>
 References: <20240821105839.2870293-1-sughosh.ganu@linaro.org>
@@ -61,106 +61,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The optee_get_reserved_memory() function returns the OP-TEE base
-address and size. The function gets these values from the
-FDT. Currently, this function is defined only to be called in the SPL
-phase. Move this function to a place where it can be invoked from the
-main U-Boot phase, where it will be used to compute the ram_top
-address.
+The value of ram_top address currently gets computed in an indirect
+manner. The boot_fdt_add_mem_rsv_regions() function gets called first
+to reserve the memory region occupied by OP-TEE in the LMB memory
+map. This is followed by a call to the lmb_alloc() API, which returns
+an address which is below the OP-TEE base address. This address is the
+value of ram_top returned by the board_get_usable_ram_top() function.
+
+This has now changed, as the LMB memory map, which is no longer local,
+gets set up after relocation. Get the OP-TEE base address by reading
+the device tree, and set the ram_top from this value.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 Changes since V2: None
 
- arch/arm/mach-stm32mp/dram_init.c            | 17 +++++++++++++++++
- arch/arm/mach-stm32mp/include/mach/stm32mp.h | 11 +++++++++++
- arch/arm/mach-stm32mp/stm32mp1/spl.c         | 17 +----------------
- 3 files changed, 29 insertions(+), 16 deletions(-)
- create mode 100644 arch/arm/mach-stm32mp/include/mach/stm32mp.h
+ arch/arm/mach-stm32mp/dram_init.c | 14 +++++---------
+ 1 file changed, 5 insertions(+), 9 deletions(-)
 
 diff --git a/arch/arm/mach-stm32mp/dram_init.c b/arch/arm/mach-stm32mp/dram_init.c
-index e8b0a38be1..b3dbd521b7 100644
+index b3dbd521b7..32baefca71 100644
 --- a/arch/arm/mach-stm32mp/dram_init.c
 +++ b/arch/arm/mach-stm32mp/dram_init.c
-@@ -14,9 +14,26 @@
- #include <ram.h>
- #include <asm/global_data.h>
- #include <asm/system.h>
-+#include <mach/stm32mp.h>
+@@ -62,8 +62,10 @@ int dram_init(void)
  
- DECLARE_GLOBAL_DATA_PTR;
- 
-+int optee_get_reserved_memory(uint32_t *start, uint32_t *size)
-+{
-+	fdt_addr_t fdt_mem_size;
-+	fdt_addr_t fdt_start;
-+	ofnode node;
-+
-+	node = ofnode_path("/reserved-memory/optee");
-+	if (!ofnode_valid(node))
-+		return -ENOENT;
-+
-+	fdt_start = ofnode_get_addr_size(node, "reg", &fdt_mem_size);
-+	*start = fdt_start;
-+	*size = fdt_mem_size;
-+	return (fdt_start < 0) ? fdt_start : 0;
-+}
-+
- int dram_init(void)
+ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
  {
- 	struct ram_info ram;
-diff --git a/arch/arm/mach-stm32mp/include/mach/stm32mp.h b/arch/arm/mach-stm32mp/include/mach/stm32mp.h
-new file mode 100644
-index 0000000000..afc03c9ba8
---- /dev/null
-+++ b/arch/arm/mach-stm32mp/include/mach/stm32mp.h
-@@ -0,0 +1,11 @@
-+/* SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause */
-+/*
-+ * Copyright (C) 2024, STMicroelectronics - All Rights Reserved
-+ */
-+
-+#ifndef __MACH_STM32MP_H_
-+#define __MACH_STM32MP_H_
-+
-+int optee_get_reserved_memory(uint32_t *start, uint32_t *size);
-+
-+#endif
-diff --git a/arch/arm/mach-stm32mp/stm32mp1/spl.c b/arch/arm/mach-stm32mp/stm32mp1/spl.c
-index 6eae5c2f55..9c4fafbf47 100644
---- a/arch/arm/mach-stm32mp/stm32mp1/spl.c
-+++ b/arch/arm/mach-stm32mp/stm32mp1/spl.c
-@@ -18,6 +18,7 @@
- #include <asm/io.h>
- #include <asm/arch/sys_proto.h>
- #include <mach/tzc.h>
-+#include <mach/stm32mp.h>
- #include <linux/libfdt.h>
++	int ret;
+ 	phys_size_t size;
+ 	phys_addr_t reg;
++	u32 optee_start, optee_size;
  
- u32 spl_boot_device(void)
-@@ -110,22 +111,6 @@ uint32_t stm32mp_get_dram_size(void)
- 	return ram.size;
- }
+ 	if (!total_size)
+ 		return gd->ram_top;
+@@ -73,16 +75,10 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+ 	 * if the effective available memory is bigger
+ 	 */
+ 	gd->ram_top = clamp_val(gd->ram_top, 0, SZ_4G - 1);
++	size = ALIGN(SZ_8M + CONFIG_SYS_MALLOC_LEN + total_size, MMU_SECTION_SIZE);
  
--static int optee_get_reserved_memory(uint32_t *start, uint32_t *size)
--{
--	fdt_addr_t fdt_mem_size;
--	fdt_addr_t fdt_start;
--	ofnode node;
+-	/* found enough not-reserved memory to relocated U-Boot */
+-	lmb_add(gd->ram_base, gd->ram_top - gd->ram_base);
+-	boot_fdt_add_mem_rsv_regions((void *)gd->fdt_blob);
+-	/* add 8M for reserved memory for display, fdt, gd,... */
+-	size = ALIGN(SZ_8M + CONFIG_SYS_MALLOC_LEN + total_size, MMU_SECTION_SIZE),
+-	reg = lmb_alloc(size, MMU_SECTION_SIZE);
 -
--	node = ofnode_path("/reserved-memory/optee");
--	if (!ofnode_valid(node))
--		return -ENOENT;
--
--	fdt_start = ofnode_get_addr_size(node, "reg", &fdt_mem_size);
--	*start = fdt_start;
--	*size = fdt_mem_size;
--	return (fdt_start < 0) ? fdt_start : 0;
--}
--
- #define CFG_SHMEM_SIZE			0x200000
- #define STM32_TZC_NSID_ALL		0xffff
- #define STM32_TZC_FILTER_ALL		3
+-	if (!reg)
+-		reg = gd->ram_top - size;
++	ret = optee_get_reserved_memory(&optee_start, &optee_size);
++	reg = (!ret ? optee_start : gd->ram_top) - size;
+ 
+ 	/* before relocation, mark the U-Boot memory as cacheable by default */
+ 	if (!(gd->flags & GD_FLG_RELOC))
 -- 
 2.34.1
 
