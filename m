@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D68A3C52D6F
-	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 14:01:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 486EDC52D7C
+	for <u-boot@archiver.kernel.org>; Wed, 21 Aug 2024 14:01:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 219EF88DFA;
-	Wed, 21 Aug 2024 16:00:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8D50C88E01;
+	Wed, 21 Aug 2024 16:00:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eMG/rO1p";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cfpUtg5o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71A7988DD5; Wed, 21 Aug 2024 16:00:13 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
+ id 3F4D688DFF; Wed, 21 Aug 2024 16:00:15 +0200 (CEST)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E5FD88DEB
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 16:00:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A001B88E01
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 16:00:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-5d5cbe88f70so3958346eaf.0
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 07:00:09 -0700 (PDT)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6bf705959f1so6718136d6.1
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 07:00:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724248808; x=1724853608; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724248809; x=1724853609; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Fm440EvBuMXO5KTkNxDa1PHBm2YCesA1b3wcK8UcH5A=;
- b=eMG/rO1p/3w47wMTHgw7KC8lAKofUe2gvqfjO4WjEMYj8Ig6XaoP03mOrpLRL2svnH
- +70JFL1VSLpm1cW1+csKlpSbjMhe5O+5O4+Irv45tZnlwaj76uXRztyES7H6H64k4sdH
- Z6dwOH4rYlg2WAnDkPrLev7RdXNZPgmUGw7ag=
+ bh=etZfyujbkXPb60eEaOkoW8GA2SbeF1hvht9OVZ+C4Xo=;
+ b=cfpUtg5o062B6cPjeM4s4eox1NlMfj28uUNiEZA9OEU4iKadYrstCO4dS7qA6YmWhU
+ zYBfCE6QoDmtieBWFzcHV8xtSbeLvTn590Vstvi4Y/eSTP9NappBcTNQyIt9RMJjHfM2
+ 9Vdgf8XkisU7P1YG3rNxT2w2xQMki8Kdvt8Qg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724248808; x=1724853608;
+ d=1e100.net; s=20230601; t=1724248809; x=1724853609;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Fm440EvBuMXO5KTkNxDa1PHBm2YCesA1b3wcK8UcH5A=;
- b=UppYnIU75OT2UP+lhZsv/zHQaYcCt2Io2qaUZ/FCe+cOFYnq8EfUap/jMHTRKt+nlb
- SKpeFQ+RPI98OAnzmbN8ab+reDuYBDqGfz6c5/yBa7lo0eJ4U3JzH3bXkCYy/9m4tZwh
- W9rDyc2TbIKQbBbbJprMO5yTsD8Vg1ajdoCbyaIv9CVEIzNvciA6E0UeGwExqK1TDNB8
- vw6VNMc9evz5ckpWWsIci4/E5LVXU8+xAcyeo8CJRrGbl//s6Q7ADqoAwRAh1V8O9Xbt
- ktiYeQcDxMYoMC8EBU4bSTlHDL/y/sT5QP2L9AFXsUFauC8mtqW52L0lTroO62UQ6N3t
- Bn8g==
+ bh=etZfyujbkXPb60eEaOkoW8GA2SbeF1hvht9OVZ+C4Xo=;
+ b=CUHeGRWsWurDcKDYq8ydvqvTIXY3VlaEX1MTRhZWjdW0r3Or0mTkzyXnsBjKoBrI1v
+ sBkqRM/kJ+YSKXRN+zNB1DfUx4ZMHG1YtESs1QHhhIxHTwx+XTj8peaR4YmJtpKCQDut
+ 2/qnL05KyOOvtMX5zsth7F276U3oa/e1PPD7wBN6ODTBJEA69P/jZ3qvbldlh1nBC/tJ
+ h2/fIoK5N58qgVLHhArEoTGFTKxbclq/Ib6seVP3pAfNUZmwGhVsQDZsWF6BTL2fhCnV
+ +O57mazgn4DnIihQjttAOVvjlsXHJKTOzYMC+P0CtS0F9Yth/z5I+bFDo+EndcV1Oqyb
+ y0wg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWrvVz9PdVt4xOTYz7jfp3A3GfTX8jZ5ypQVD+OxvkETVwjNc6O3c5+Vv3lmmg3vxVxTaDqj9s=@lists.denx.de
-X-Gm-Message-State: AOJu0YwLtijntqJolGoUS211maGsNbK5xQ8ifNUbdGfZ4FYvcdS4dUNZ
- nlPoSFmdnWV/U9Ac0BTfF0+qi+67DbSQLK57ewvdXdbM0jmNaxEwHzoK1a8fuN6RJexHfHv6Qia
- L2cbnWkvkZj3HUETW4zNXfuJR9NslGXtPcq2A
-X-Google-Smtp-Source: AGHT+IEQXHfupn133cwczeovi0DTCGIfsdkLtBqBKEWxLS4SUANRMYU7kAoYX4XszFjR6v9NP6DbdzxtVQtoxAzUGMs=
-X-Received: by 2002:a05:6358:75a8:b0:1ac:660a:6fec with SMTP id
- e5c5f4694b2df-1b59fbf0011mr312480455d.20.1724248807667; Wed, 21 Aug 2024
- 07:00:07 -0700 (PDT)
+ AJvYcCWVJ4qdZVK+uPu6dzsh8P+lYosRfnE7wLrhwKmAuTKMyP5DzUYkgL62anzu97UqDYNRzNy/C0E=@lists.denx.de
+X-Gm-Message-State: AOJu0YxBRpolzuFmt8bzFlZz4AxhUPQRoB4Nyy239VGsss3aSDr2KXrl
+ Umuhxm+Rqu5TEgBw99OjzZU4SOd6wU9/k1w6jeXG3h8/xEGBLehGdWehT4bA4aLjjtEHuiu9kY0
+ g6eb0RH7Cpy2+ok6KwgMeBniwa6Ks9pku84vn
+X-Google-Smtp-Source: AGHT+IGf2Peuo9mxz050MoyPYOnn/WKzR7cf8hdTJ9m0h46Ov0Sdiq0pu3IX698FXo6Vr/Iqz6wpdU9Yt20yD7iUU0g=
+X-Received: by 2002:a05:6214:4b07:b0:6bf:968d:158d with SMTP id
+ 6a1803df08f44-6c1571c8b2cmr45918946d6.18.1724248809157; Wed, 21 Aug 2024
+ 07:00:09 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240821-b4-rb3gen2-v2-0-49b07633f3a8@linaro.org>
- <20240821-b4-rb3gen2-v2-6-49b07633f3a8@linaro.org>
-In-Reply-To: <20240821-b4-rb3gen2-v2-6-49b07633f3a8@linaro.org>
+ <20240821-b4-rb3gen2-v2-7-49b07633f3a8@linaro.org>
+In-Reply-To: <20240821-b4-rb3gen2-v2-7-49b07633f3a8@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 21 Aug 2024 07:59:56 -0600
-Message-ID: <CAFLszTgFv7nkfSFgz_tto1xgwrDqf6Qg-yBn1BgUpAB0hoDxFQ@mail.gmail.com>
-Subject: Re: [PATCH v2 6/7] configs: add qcm6490_defconfig
+Date: Wed, 21 Aug 2024 07:59:57 -0600
+Message-ID: <CAFLszTiqrqVF69sXfE18UpDtp9GFNUb-TsxMqJ=Qrf6PswVgQQ@mail.gmail.com>
+Subject: Re: [PATCH v2 7/7] doc: board/qualcomm: document rb3gen2
+ building/flashing
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, 
@@ -89,58 +90,13 @@ X-Virus-Status: Clean
 
 On Wed, 21 Aug 2024 at 07:43, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> Introduce a defconfig for the RB3 Gen 2 and other QCM6490 boards with a
-> dedicated uefi partition. These can replace EDK2 entirely with U-Boot.
+> The process here is almost identical to the Dragonboard 410c, we've come
+> full circle!
 >
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->  MAINTAINERS               |  1 +
->  configs/qcm6490_defconfig | 18 ++++++++++++++++++
->  2 files changed, 19 insertions(+)
+>  doc/board/qualcomm/index.rst   |  1 +
+>  doc/board/qualcomm/rb3gen2.rst | 53 ++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 54 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index daaf0345d0e8..7ab39d91a553 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -616,8 +616,9 @@ M:  Neil Armstrong <neil.armstrong@linaro.org>
->  R:     Sumit Garg <sumit.garg@linaro.org>
->  L:     u-boot-qcom@groups.io
->  S:     Maintained
->  T:     git https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git
-> +F:     configs/qcm6490_defconfig
->  F:     drivers/*/*/pm8???-*
->  F:     drivers/gpio/msm_gpio.c
->  F:     drivers/mmc/msm_sdhci.c
->  F:     drivers/phy/msm8916-usbh-phy.c
-> diff --git a/configs/qcm6490_defconfig b/configs/qcm6490_defconfig
-> new file mode 100644
-> index 000000000000..25413ac9ed5a
-> --- /dev/null
-> +++ b/configs/qcm6490_defconfig
-> @@ -0,0 +1,18 @@
-> +# Configuration for building U-Boot to be flashed
-> +# to the uefi partition of QCM6490 dev boards with
-> +# the "Linux Embedded" partition layout (which have
-> +# a dedicated "uefi" partition for edk2/U-Boot)
-> +
-> +#include "qcom_defconfig"
-> +
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_DEBUG_UART_ANNOUNCE=y
-> +CONFIG_DEBUG_UART_BASE=0x994000
-> +CONFIG_DEBUG_UART_MSM_GENI=y
-> +CONFIG_DEBUG_UART_CLOCK=14745600
-> +
-> +# Address where U-Boot will be loaded
-> +CONFIG_TEXT_BASE=0x9fc00000
-> +CONFIG_REMAKE_ELF=y
-> +
-> +CONFIG_DEFAULT_DEVICE_TREE="qcom/qcs6490-rb3gen2"
->
-> --
-> 2.46.0
->
