@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B09B7C52D7C
-	for <u-boot@archiver.kernel.org>; Thu, 22 Aug 2024 02:57:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D542C52D7C
+	for <u-boot@archiver.kernel.org>; Thu, 22 Aug 2024 02:57:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DAE2788C9D;
-	Thu, 22 Aug 2024 04:56:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4520B88E13;
+	Thu, 22 Aug 2024 04:56:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MhJCv3mL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NYPNtTUf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 781A888CC0; Thu, 22 Aug 2024 04:56:45 +0200 (CEST)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id E3A1C88CFB; Thu, 22 Aug 2024 04:56:45 +0200 (CEST)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BC1588C8E
- for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 04:56:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FED888C7F
+ for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 04:56:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-824ee14f7bfso14210439f.1
- for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 19:56:42 -0700 (PDT)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-8251e23eaebso11783839f.3
+ for <u-boot@lists.denx.de>; Wed, 21 Aug 2024 19:56:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724295401; x=1724900201; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724295402; x=1724900202; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bYXyQsRqtsBnO3GE7g5g2m/2vv435FQ3x/HtVb7x2JY=;
- b=MhJCv3mLHLj6ftmtQL3qP4Oke0gLXKq9z/6MizaHk9O2nWRTXF1/gnpisBctt4fJ8Q
- CTPaWRrb+Pyr7qrFX3mR3ialPfQKyvWcO42zgP7vWxz9wG8mdmsExeHPkcwqGfB5MwLY
- TlVQ+gW2lUgYqiT01qBnR6LG8YG6KLeHySB40=
+ bh=i8DaFGF5/hEwxIGAsIVSejGtNXaa0RJWKjQAwyotlPc=;
+ b=NYPNtTUf7DqFG4PrRB1Gy+8xFZJeWWkhjfExaHG6CBJxY6eNlxaU55zEvYdPAm6Zvl
+ +25qqazm/ROx9MINzItmpQiV4uo1TtTO4XB0wsxFpPauEgXB5ScRCE7Arzs3i7X15UBe
+ lRnaCsgnvFSiJAba3nq7F3Lxuyzt8Uzy+ssRU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724295401; x=1724900201;
+ d=1e100.net; s=20230601; t=1724295402; x=1724900202;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bYXyQsRqtsBnO3GE7g5g2m/2vv435FQ3x/HtVb7x2JY=;
- b=iWsoMGKxWXUf/Hapg8PPhWdqn8zc046aD7/Ad9Aq1AvWhuyMGjVg7vNQvWdOGCTLwt
- jlLv/A6IVcpg2qwhfGoWs9b83nvdjfGFWuG+3+Dctxnb4uJ1ZGyKktmTOJenDpc7lnzX
- bowKQxXjvfGO6snW+p61ca0k6GUGl+MS0faUZQMwH6N8m3kOyJ/0KOBhlxcKWyWe5isy
- het0T6PbgFxGQMDjiBYVSdRHALtCk5lWAObbpwQgViv37QoZ6vuD/+8l28Ge3DHwj8eT
- TOr/LK3HhIDmZvjgfx22jIw/L/E74JbNOYzHyJUQW9uOVttbm8JI+yvAkaXmdDpGr2GB
- sWCQ==
-X-Gm-Message-State: AOJu0Yx2KgSO4kJbmOCpQUfcPCvwmhE3LrlMbr07KiPx0sPlaLjgsB6d
- Tt4elKr49CmcNXEJz6nWpg5dtB9JW7MOWDhe8o0jr+XdBSVQFC9NliCwmOaaxZJ8jh1LSSEe0bk
+ bh=i8DaFGF5/hEwxIGAsIVSejGtNXaa0RJWKjQAwyotlPc=;
+ b=YS6P0m8meUH2wewGovYHrW8sH1n+Z9MuVlyQ3a1bMbSTStIgrS//m3o/o/KXcL/LKn
+ tvtpYI5iCfOzsYQcuj0oDMOpT7UE6X7b4u6zK51N0+4/0fSA7lg36bZ3HqKeaUK4Kh84
+ IL6h3jERAJJW8Jze0digJk1xh+/P40JKhnQmN6Py24tViqqHOVRaiJ/ewH07AstlgjG7
+ BsHtXEpXvZ+y2Glr72LUcwzKme/3Z66puX/M+/XjwpdSDFunrj/NifaFUXMBx1D5oYbM
+ j06EvlTigDS+DTCgKHPqdTPf2N3kzYUSJuOmv3vSPy2lbC7RN9e5B3qxwmwFBQDC1XYF
+ xEhg==
+X-Gm-Message-State: AOJu0YyY8ugw/JepKbs6b+CCBGTHRwHmJ71DVoKx6kli8zVoTvA7J84I
+ aWk7H9KiN0y5rAuVXFCPzvQDbnmttRIdwiWZNMZFmoyTGdWjTXWpjocyB8kxyXk6jfPEdFeWF9s
  =
-X-Google-Smtp-Source: AGHT+IEZ9umIsM1ddofr/VGQeB++75pRHQhA94r/Y/KNqkLWADJ/8TgwhVQdqENWPZq2SDz5SsDSTA==
-X-Received: by 2002:a05:6602:1490:b0:803:5e55:ecb2 with SMTP id
- ca18e2360f4ac-825318032f1mr463297639f.0.1724295401008; 
+X-Google-Smtp-Source: AGHT+IEG+kC1kvMTPAgtH9GTChaQ3ApVwQep5aBrwl/EeGTdt3rffB3HbZmvy8Xj42wkt/VK9Ieptg==
+X-Received: by 2002:a05:6602:3d1:b0:81f:803d:cbe7 with SMTP id
+ ca18e2360f4ac-825a5a0c820mr80948439f.12.1724295401753; 
  Wed, 21 Aug 2024 19:56:41 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ce70f200a0sm209403173.27.2024.08.21.19.56.40
+ 8926c6da1cb9f-4ce70f200a0sm209403173.27.2024.08.21.19.56.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Aug 2024 19:56:40 -0700 (PDT)
+ Wed, 21 Aug 2024 19:56:41 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4 02/19] test: Use a constant for the test timeout
-Date: Wed, 21 Aug 2024 20:56:14 -0600
-Message-Id: <20240822025631.1838434-3-sjg@chromium.org>
+Subject: [PATCH v4 03/19] test: Pass stderr to stdout
+Date: Wed, 21 Aug 2024 20:56:15 -0600
+Message-Id: <20240822025631.1838434-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240822025631.1838434-1-sjg@chromium.org>
 References: <20240822025631.1838434-1-sjg@chromium.org>
@@ -89,48 +89,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Declare a constant rather than open-coding the same value twice.
+Some tests may output things to stderr. Ensure that this output is not
+dropped, by redirecting it to stdout
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/py/u_boot_console_base.py | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ test/py/u_boot_spawn.py | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/test/py/u_boot_console_base.py b/test/py/u_boot_console_base.py
-index 882d04cd1e9..9cc0af66356 100644
---- a/test/py/u_boot_console_base.py
-+++ b/test/py/u_boot_console_base.py
-@@ -27,6 +27,9 @@ pattern_ready_prompt = re.compile('U-Boot is ready')
- PAT_ID = 0
- PAT_RE = 1
+diff --git a/test/py/u_boot_spawn.py b/test/py/u_boot_spawn.py
+index 97e95e07c80..81a09a9d639 100644
+--- a/test/py/u_boot_spawn.py
++++ b/test/py/u_boot_spawn.py
+@@ -10,6 +10,7 @@ import re
+ import pty
+ import signal
+ import select
++import sys
+ import time
+ import traceback
  
-+# Timeout before expecting the console to be ready (in milliseconds)
-+TIMEOUT_MS = 30000
-+
- bad_pattern_defs = (
-     ('spl_signon', pattern_u_boot_spl_signon),
-     ('main_signon', pattern_u_boot_main_signon),
-@@ -423,7 +426,7 @@ class ConsoleBase(object):
-             # Reset the console timeout value as some tests may change
-             # its default value during the execution
-             if not self.config.gdbserver:
--                self.p.timeout = 30000
-+                self.p.timeout = TIMEOUT_MS
-             return
-         try:
-             self.log.start_section('Starting U-Boot')
-@@ -434,7 +437,7 @@ class ConsoleBase(object):
-             # future, possibly per-test to be optimal. This works for 'help'
-             # on board 'seaboard'.
-             if not self.config.gdbserver:
--                self.p.timeout = 30000
-+                self.p.timeout = TIMEOUT_MS
-             self.p.logfile_read = self.logstream
-             if expect_reset:
-                 loop_num = 2
+@@ -59,6 +60,7 @@ class Spawn:
+                 signal.signal(signal.SIGHUP, signal.SIG_DFL)
+                 if cwd:
+                     os.chdir(cwd)
++                sys.stderr = sys.stdout
+                 os.execvp(args[0], args)
+             except:
+                 print('CHILD EXECEPTION:')
 -- 
 2.34.1
 
