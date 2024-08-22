@@ -4,119 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A5F1C52D7C
-	for <u-boot@archiver.kernel.org>; Thu, 22 Aug 2024 15:18:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8607C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu, 22 Aug 2024 15:24:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D09888A5B;
-	Thu, 22 Aug 2024 17:18:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 377E188B47;
+	Thu, 22 Aug 2024 17:24:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vNmjJlS0";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 5174C88AC0; Thu, 22 Aug 2024 17:18:40 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1724340251;
+	bh=vyXfQoAQfCPJ7gAsRe8pF1DlGskkp/bRyDdFJ70Ztl0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=T14uBbb/bDImJw8vnA1dKlBbu1zbZPUd7mLv50fdsSMhTCq59Yi8G/NXLa4d5ihEQ
+	 F802gFf66EIB9MWWJpDEZDaKOXRC7qmiDmCo6vJutJdC2uG3c4Fner/lQ6oUMNuGVB
+	 9YThXn3Hw7ZqVR5widZnpjZ+nZlgXuMFBM6ixduLWWGaHWS5WUqA615DinEc/1xRrJ
+	 Vah80Pmrez14YyRWknVNdxkUEjXDZ11qwEst4POwpEmjy8/rR9TGP3/F98qCT7Na4E
+	 xl6GQFRKMtfNL0kVHNk1kfFOrxITznRqEu9HtkxuhNHSgQLXhKnpYYBQ8Rl0qWPkKX
+	 wWX9GlkLsFI7w==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0D2E887BB
- for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 17:18:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-428101fa30aso7371115e9.3
- for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 08:18:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724339916; x=1724944716; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=SgLd4VZEV3dBAnlR9Gdqju0771YAZG17iVd8X5dLIcQ=;
- b=vNmjJlS0FV9K91YOrMAwsg44vqihx8GCncjcNJcMeb7u6M6aMOa8Quxq15xS/WOwJP
- RNPXZXamuUyavjStHE3uUVCnivBMh7BSct3MbbTlIa9k4tOeipfmHHENMqesgoadmBWa
- jZ7v4QZpfyMAeN/rw6RqB53ZeSuEuiv/pBImnE5qvPmMqhHbN2D1j3Mhc0xZMufHucgq
- aNARcVNGRlLJb/FxBlKMw/KoHeCSidSbbuMIDnfcgQynwJFX+lqD6t6JTy6eEaMhunU6
- YyHPeE2zNjNstxcK/5nBFI9gR55oxA7sMDlggTV7kz1ErnF8PaumLuArHjW5hN6seS1d
- 31eQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724339916; x=1724944716;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=SgLd4VZEV3dBAnlR9Gdqju0771YAZG17iVd8X5dLIcQ=;
- b=jv3E2XF6VIUyBpMuxiXdiTam4YBrNlW5FS8ACwkiLlGHJeoIGDPs82+2QTX/QYC3Zy
- XR9SYxRZT8xpJ+GiTwowmYbtNoMETGyhZqzlKgUDB2O98I61OLJ5lHQzz1T8URaFy8sM
- bg1AEST4I24T5xNLbCiRA0JJYhe3Y4tlW/dpcDnYL9lkgFfUl5TritB9pKTWawbHVn9Q
- c3j6vhcWW0Gm0qf8HwQ9Od19990JAMWuPJ7cqsYDbayc06QkwV9i77w5vxkDccks5z/T
- O56ISjSBaIQ0IGmYX7g/qsBlUyG/y1V5DaaUBcTiJyiMKwbVIvhSmJskn7KXYHNYW0vX
- uV5Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXITHPsk88Y/Bc7iMhW0FNSMq+WqfMkHsp9stmUZRK853Pb8Wrrim/yMp/xQrgNYQJd0UWfw6w=@lists.denx.de
-X-Gm-Message-State: AOJu0YwEkmI4fo7Hw1ggA62ko0s59q1jwtirwvFDLDV0kdIa+xK52jeE
- 0n8kLxd4q2ilfOYaOV0ioqFOp129AjtZtG+TE8jXsytcYEg3l7MRRnQrb6LYsi4=
-X-Google-Smtp-Source: AGHT+IEui5lhv6I2PMnYLoB+ZXCrA21DqKrc6qJ3GBGG2VGte3Zdojf6o0zaH14oMYkU/tnlqpYTnw==
-X-Received: by 2002:a05:600c:4f91:b0:426:554a:e0bf with SMTP id
- 5b1f17b1804b1-42abd21325emr42409135e9.16.1724339915715; 
- Thu, 22 Aug 2024 08:18:35 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:f06:7793:d95e:24b?
- ([2a01:e0a:982:cbb0:f06:7793:d95e:24b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42abed922b4sm64376625e9.11.2024.08.22.08.18.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 22 Aug 2024 08:18:35 -0700 (PDT)
-Message-ID: <a82bd2f0-9516-4f60-b9b4-e104f80dc892@linaro.org>
-Date: Thu, 22 Aug 2024 17:18:34 +0200
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 4A48088B1D;
+ Thu, 22 Aug 2024 17:24:09 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1724340249;
+ bh=vyXfQoAQfCPJ7gAsRe8pF1DlGskkp/bRyDdFJ70Ztl0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=yRiGb6LHM1Vnpl+fEss9Ic6psLzmMZHw1wJThyCXaaSLpE9LnX7gqUv9uu3h6Mpo/
+ iZgAhdwecF40VdngLPoa4bBX/EGjdXrxE9muWVIcDiISwux7SsAPpbpiLYXZo1G5jV
+ 5p9FYEK+nxdf9nf2bHn8uku+Kra2njYlge+7e5P60B6zXd+I/0ZDjvJUUKFXin+UeI
+ fkEy7U6F7ML5RwJJuI8veAyI1VsI635hCF5NlSy1+Qq/jb2PTb9had4D/ck38anlYA
+ oOIcqA0DiauH+9VaEd+9fHeO1pe3WeUmBBHoD6twzQC32cmW1b0BMLhCOArCLeaUt+
+ XLud9NTdc5OIQ==
+Message-ID: <c7c61399-8b64-471f-bfcb-71afd387317b@denx.de>
+Date: Thu, 22 Aug 2024 17:19:40 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 1/7] clk/qcom: add initial clock driver for sc7280
-To: Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 1/1] usb: gadget: ether: Disable USB pullup in eth probe
+To: Zixun LI <admin@hifiphile.com>
 Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20240821-b4-rb3gen2-v2-0-49b07633f3a8@linaro.org>
- <20240821-b4-rb3gen2-v2-1-49b07633f3a8@linaro.org>
- <CAFLszTjjS8m2DsNp0nMEknM0ggu4QEET81iSyYFGDYWCwVjf2w@mail.gmail.com>
- <2a45562f-792f-4ad5-9871-bef82ccd2d18@linaro.org>
- <CAFLszTjwjUnGYMdujDUNePBiEU8_oMpkZYpSK8REKxrMYUadpw@mail.gmail.com>
- <eda3f2ad-d011-4ae6-b722-9114daafeae1@linaro.org>
- <CAFLszTidT+=wySmu1uo2auxnsbdvm0Qkav-vwu-3vbU9iuEhhA@mail.gmail.com>
- <c03c84a4-660a-4f20-8da4-e29d613600ac@linaro.org>
- <CAFLszThOJ_pYipxtqaBRCqU+npYrXy4nK4u8C+zM1cVxaR8fjg@mail.gmail.com>
- <75ba1b5c-5809-46ac-ad85-e4d8c8637853@linaro.org>
- <CAFLszTgeHOKLie4wA4jpgHUUVPJ0KoPW5ermW+af02g0UcUo8w@mail.gmail.com>
- <18cff8b5-ad04-43f4-a639-cc40c48ff441@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <18cff8b5-ad04-43f4-a639-cc40c48ff441@linaro.org>
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
+References: <20240821212218.2092540-1-admin@hifiphile.com>
+ <5a1367d7-be94-4c75-9f40-891ca79f9c5b@denx.de>
+ <CA+GyqeYxig+5pyYaCjPmQodXGjCYK=819cNZx9XmvJOnoYne_w@mail.gmail.com>
+ <67e8423d-f8a8-412e-ae4a-014d52bf6a2f@denx.de>
+ <CA+Gyqea1r6rP8gXfS6nOtOaKZ=sJ1+z_KguGzzJygQKmSNRakw@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CA+Gyqea1r6rP8gXfS6nOtOaKZ=sJ1+z_KguGzzJygQKmSNRakw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -130,349 +68,61 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 22/08/2024 14:12, Caleb Connolly wrote:
-> 
-> 
-> On 22/08/2024 04:59, Simon Glass wrote:
->> Hi Caleb,
->>
->> On Wed, 21 Aug 2024 at 14:33, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>>
->>>
->>>
->>> On 21/08/2024 20:27, Simon Glass wrote:
->>>> Hi Caleb,
->>>>
->>>> On Wed, 21 Aug 2024 at 10:47, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>>>>
->>>>>
->>>>>
->>>>> On 21/08/2024 18:16, Simon Glass wrote:
->>>>>> Hi Caleb,
->>>>>>
->>>>>> On Wed, 21 Aug 2024 at 08:49, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>>>>>>
->>>>>>>
->>>>>>>
->>>>>>> On 21/08/2024 16:37, Simon Glass wrote:
->>>>>>>> Hi Caleb,
->>>>>>>>
->>>>>>>> On Wed, 21 Aug 2024 at 08:11, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>>>>>>>>
->>>>>>>>> Hi Simon,
->>>>>>>>>>> +U_BOOT_DRIVER(gcc_sc7280) = {
->>>>>>>>>>> +       .name           = "gcc_sc7280",
->>>>>>>>>>> +       .id             = UCLASS_NOP,
->>>>>>>>>>> +       .of_match       = gcc_sc7280_of_match,
->>>>>>>>>>> +       .bind           = qcom_cc_bind,
->>>>>>>>>>> +       .flags          = DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
->>>>>>>>>>> +};
->>>>>>>>>>
->>>>>>>>>> This should use driver model, with a UCLASS_CLK and UCLASS_RESET
->>>>>>>>>
->>>>>>>>> Please refer to qcom_cc_bind() which binds the clock, reset, and power
->>>>>>>>> domain drivers.
->>>>>>>>
->>>>>>>> Gosh, why? Are these devices not in the devicetree?
->>>>>>>
->>>>>>> They are, the gcc block contains clock, reset, and pd parts. On Linux
->>>>>>> this is not an issue because a single device can be multiple different
->>>>>>> classes (e..g when you register a reset you do it for a device) whereas
->>>>>>> U-Boot requires a device per class.
->>>>>>>
->>>>>>> e.g. see devm_reset_controller_register() in Linux, it populates a
->>>>>>> struct reset_controller_dev which references the struct device created
->>>>>>> for the node. In U-Boot you have to create a new device which _is_ the
->>>>>>> reset controller.
->>>>>>
->>>>>> OK, I see. Rockchip has a CRU (Clock & Reset Unit) which uses syscon
->>>>>> to access registers. The clock driver 'owns' the node in U-Boot and it
->>>>>> manually binds a reset driver. It isn't great, either.
->>>>>>
->>>>>> Looking at drivers/clk/qcom/clock-sdm845.c (for example), I can't
->>>>>> actually find "qcom,gcc-sdm845" (for example) in U-Boot, except as a
->>>>>> binding. Can you please point me to the node?
->>>>>
->>>>> It's in dts/upstream/src/arm64/qcom/sdm845.dtsi
->>>>>
->>>>>>
->>>>>> Re devm_reset_controller_register(), yes the U-Boot driver model is a
->>>>>> lot more regular, e.g. we don't really want drivers creating their own
->>>>>> struct udevice. We want all devices to be created automatically by the
->>>>>> devicetree and most memory allocations to be done automatically. This
->>>>>> helps to reduce code size and execution time. You probably know all
->>>>>> this :-)
->>>>>
->>>>> Yeah, U-Boot's model is simpler for most cases. This makes sense. But it
->>>>> doesn't reflect the reality of DT so well in cases like this.
->>>>>>
->>>>>> To a significant degree, the devicetree bindings are created without
->>>>>> much thought to efficient operation in U-Boot. I hope that eventually
->>>>>> this might change.
->>>>>
->>>>> I strongly disagree with this mental model. This is the approach I see
->>>>> vendors take in their BSP sources and the result is not pleasant.
->>>>>
->>>>> DT should (within reason) never be written with the OS in mind. It is an
->>>>> agnostic structure to describe the hardware. I think the new power
->>>>> sequencing subsystem in Linux does a good job at embodying how we should
->>>>> approach consuming DT.
->>>>
->>>> I'm only really involved in mainline and don't really see vendor trees
->>>> much. An example is where pinctrl has a GPIO controller but it is not
->>>> mentioned in the devicetree. It would be better for U-Boot to add a
->>>> subnode for each GPIO controller. In general, if the SoC has a device,
->>>> it should be in the devicetree.
->>>
->>> The concept of a device is an OS one. DT is not "telling the OS how to
->>> use the hardware", it is describing the hardware.
->>>
->>> This distinction is important because it's the only way to ensure that
->>> future OS changes can be done regardless of the DT. And also of course
->>> because different OS's will have different ideas of how to model devices
->>> (case in point).
->>>
->>> The GCC block on Qualcomm platforms is a single hardware block. The
->>> datasheets and hardware programming guides describe it as such. The
->>> clocks, resets, and GDSCs are all entwined at the hardware level. They
->>> also have overlapping register addresses.
->>>
->>> The further away DT gets from describing the hardware in favour of
->>> simplifying the OS, the more likely we are to start running into issues
->>> with fitting hardware changes into our arbitrary model.
->>
->> I completely agree with everything you are saying, but you don't go
->> far enough. We should additionally require that all hardware has a
->> description in the devicetree. See for example the GPIO controller I
->> mentioned. When Linux wants it, it gets it, when it doesn't, it isn't
->> there. Sorry to have to say it, but that's not right.
-> 
-> If it's only used in U-Boot, that's justification enough to add the node upstream?
->>
->>>
->>>>
->>>> Part of this difference (between U-Boot and Linux) comes about because
->>>> Linux device setup is fairly manual, whereas U-Boot tries to put all
->>>> of that in common DM code. Whenever you are including
->>>> dm/device-internal.h that is often a sign that the binding is causing
->>>> issues.
->>>
->>> To me this indicates an inability for U-Boot's DM to handle complicated
->>> devices. I don't think U-Boot should dictate the design of devicetree.
->>>
->>> I don't know how else to describe this. This issue has been litigated
->>> over and over again on the kernel mailing list. Every time someone
->>> suggests changing DT because of a limitation in Linux they are
->>> (rightfully) shut down. If these changes were accepted then it would be
->>> impossible for DT to be an OS agnostic hardware description, because it
->>> would be full of OS specific hacks.
->>
->> Given that an OS has no size limitations so can afford to do just
->> about anything to deal with one-off cases in each SoC, sure. But let's
->> face it, it isn't project-agnostic. I could provide dozens of examples
->> where the bindings are a pain for U-Boot. Even the use of strings in
->> some of the SoCs' pinctrl bindings is painful. My point is that there
->> are many ways to model and describe the hardware and taking more
->> account of all users would be a big step forward.
-> 
-> Sure, I can understand wanting to prioritize size/speed. I think livetree would help a lot here.
->>
->>>>
->>>> I'm happy for you to change my mind.
->>>>
->>>>>
->>>>>>
->>>>>> Anyway, with the devicetree we have, I wonder how we could do this better?
->>>>>>
->>>>>> Some ideas:
->>>>>>
->>>>>> 1. Allow DM to bind multiple devices to each devicetree node, perhaps
->>>>>> as a Kconfig option (to avoid time penalty for all boards), or by
->>>>>> requiring a new DM_FLAG_MULTI_NODE flag. The devices would then be
->>>>>> independent, with no common parent device
->>>>>
->>>>> This would make sharing match data hard, and likely cause issues with
->>>>> generic compatible strings.
->>>>
->>>> You would have to repeat the same compatible string in each driver.
->>>>
->>>> For generic compatible strings we could a) worry about it later or b)
->>>> restrict this technique to only nodes with a single compatible string,
->>>> or c) use the driver flag as mentioned
->>>>
->>>>>>
->>>>>> 2. As 1 but have DM create a parent 'UCLASS_MULTI' device
->>>>>> automatically. I am thinking that we should have a new uclass for
->>>>>> these things, or rename the NOP uclass. This option would allow easy
->>>>>> access to the parent device, if needed.
->>>>>
->>>>> This is the current approach, we just bind the clk/reset/pd drivers
->>>>> explicitly, allowing us to create and share common data. I don't believe
->>>>> there is a sensible way to do this generically.
->>>>
->>>> How come? What is qcom_cc_bind() doing which DM couldn't?
->>>
->>> Maybe DM could look at the "#clock-cells", "#reset-cells", and
->>> "#power-domain-cells" properties and match on compatible string +
->>> uclass? I think that could work.
->>
->> Hmmm you mean when it sees those in the node it knows the additional
->> uclasses it is allowed to use?
-> 
-> Yes, the "#reset-cells" property literally means "this is a reset controller".
+On 8/22/24 11:11 AM, Zixun LI wrote:
+> Hi,
 
-Well technically it's more "here is the number of parameters I expect for phandles to my node as a reset controller",
-but since it's required to support phandles for reset handles, having the #<>-cells can be an hint
-that the node is supposed to act as a reset controller since some other nodes references the
-current node via a reset phandle.
+Hi,
 
-Since won't solve node that can act as provides _and_ other services, like it's common
-to have like a mmc controller that can also act as clock controller, you'll have
-the #clock-cells, but no #mmc-cells since no other nodes depends on it.
-
-You also have the case for firmware nodes, where the link between users and consumers
-is not described in DT but only in code, like the qcom scm or the amlogic securemonitor.
-
-So I won't base myself on the #<>-cells property.
-
-Neil
-
+> On Thu, Aug 22, 2024 at 1:26 AM Marek Vasut <marex@denx.de> wrote:
 >>
->>>>
->>>>>>
->>>>>> 3. Implement devices which are in more than one uclass. There would
->>>>>> still be a primary uclass, but others can be added too. This would
->>>>>> involve declaring a list of secondary uclasses in the U_BOOT_DRIVER()
->>>>>> macro. We would then have a struct dmtag_node for each secondary
->>>>>> uclass, containing the ID and the uclass pointer. Certain functions
->>>>>> would need to be updated to support this, and again it could be behind
->>>>>> a Kconfig.
->>>>>
->>>>> Many device classes in U-Boot rely on going from a struct udevice to
->>>>> some uclass specific data or ops. I have always found this to be a bit
->>>>> odd, though simpler to deal with than Linux.
->>>>
->>>> In U-Boot the uclass is a stronger concept, e.g. you can generically
->>>> iterate through all devices in a uclass, and all devices have one.
->>>>
->>>>>>
->>>>>> What do you think?
->>>>>
->>>>> I think if we're to try and solve this at all, the Linux model is by far
->>>>> the most sensible. It is already tried and tested, and would have the
->>>>> huge bonus of simplifying driver porting.
->>>>>
->>>>> barebox went with this approach and it seems to have worked out quite
->>>>> well for them.
->>>>
->>>> What is the Linux model, in this sense? Whenever I see barebox I
->>>> wonder why we can't fold whatever new features it needs into
->>>> U-Boot...perhaps the code bases have converged too much...?
->>>
->>> barebox is livetree only (like Linux) as I understand it, and I think it
->>> aims to be literally copy/paste compatible with Linux. I would love for
->>> U-Boot to adopt this approach.
->>
->> OK. We do have code-size restrictions though.
->>
->>>>
->>>>>
->>>>> All that being said, while it's taken me some time to get my head around
->>>>> "the U-Boot way", I think there is still value in the simplicity of
->>>>> U-Boot's approach. I also think the solution we've ended up with (after
->>>>> many iterations I might add) in clock-qcom is clean, simple, and easy to
->>>>> understand; though I do agree that U-Boot's DM is definitely hitting the
->>>>> limit of what complexity it can handle.
->>>>
->>>> Well I would like to tidy this up in DM, so let's figure out which
->>>> option makes the most sense...once I understand what you mean by
->>>> 'Linux model' above.
->>>
->>> I mean where a single struct device can be multiple classes, so you
->>> create a device and then create a reset controller and associate the
->>> device with it.
->>
->> It's the bit about having one driver manually creating devices that I
->> very much want to avoid. If the devicetree really does (fully)
->> describe hardware, it shouldn't be necessary.
+>> Would it be possible to fix up the g_dnl ?
 > 
-> For sure
->>
->>>>
->>>>>
->>>>> I would honestly be much more interested in seeing early init get
->>>>> cleaned up, OF_LIVE becoming the default, and the ofnode abstraction
->>>>> going away.
->>>>
->>>> So far as I can tell, you are always going to have a flat tree, even
->>>> if only before relocation or in SPL. How would we get around that?
->>>> Also, what don't you like about ofnode?
->>>
->>> Yeah, you start with a flat tree and then should build a live one as
->>> early as possible.
->>>
->>> The problem with ofnode is that it is more or less restricted to the
->>> subset of operations fdt supports. It lacks some of the fancier features
->>> of a live tree. It also means that every use of the of_* API has to be
->>> preceded by a check that we're actually running the live tree, otherwise
->>> some kind of hard bail.
->>
->> Indeed. In principle, ofnode could support anything, but the cost
->> might be high when implemented in the flat tree. People do add new
->> functions from time to time.
->>
->>>
->>> Would be great to use of_* API by default, for capable platforms anyway.
->>>>
->>>> Given that Qualcomm is only using U-Boot as a second-stage loader so
->>>> far, (please, not for long!!) everything looks quite different. But
->>>> most platforms use U-Boot from SoC-boot-ROM handoff, so the
->>>> constraints are different (tighter).
->>>
->>> For U-Boot SPL yeah I expect the constraints to be different. We're
->>> getting a bit closer to the metal on the rb3gen2 (now it's just bootROM
->>> -> SBL1 -> (tz -> hyp) -> U-Boot, without going through edk2 first haha).
->>
->> You should teach rpi to do that too! At the moment I think it boots
->> edk2 before U-Boot.
->>
->>>
->>> I hope we'll get to do U-Boot SPL on some Qualcomm platforms eventually.
->>>>
->>>> Anyway, certainly OF_LIVE being the default would be good. I have
->>>> often wondered if we can (at build-time) convert the devicetree into a
->>>> 'live' version, where the pointers are replaced by integers, such that
->>>> the early U-Boot code can easily compute the pointer value for each
->>>> node. It should make the unflattening much faster. For pre-relocation
->>>> and SPL, since we know the load address, we can (I am pretty sure)
->>>> have Binman put a full, live tree in the image and avoid the
->>>> unflattening code at all. Relocating a livetree is fairly easy too.
->>>
->>> This might be a nice optimisation? I think it would be acceptable to
->>> just read the memory layout -> enable the MMU -> build the live tree.
->>> This would probably be fast enough.
->>>
->>> And of course, the great thing we have on Qualcomm platforms is that we
->>> can run the same U-Boot binary on every sdm845 and newer platform.
->>
->> That's nice, and a good demo of devicetree done right.
->>
->> If I don't hear any strong preference from you I am likely to have a
->> go (in the fullness of time) at implementing the easiest DM-based
->> solution to get rid of that binding function you have. We can iterate
->> on it in the review in any case.
-> 
-> That makes sense. I assume in the mean time it's ok for me to take this patch?
-> 
-> Kind regards,
->>
->> Regards,
->> Simon
-> 
+> g_dnl's interface is pretty different from usb_ether, I can't find a
+> way to access
+> usb_gadget struct in g_dnl_register().
 
+Can you change the g_dnl_register() prototype and pass he structure in ? 
+I suspect it should be available in the commands which register g_dnl ?
+
+> Meanwhile it can be fixed in udc core, by doing gadget_driver bind
+> after udc start,
+> in addition to keeping the controller in disconnected state.
+> 
+> diff --git a/drivers/usb/gadget/udc/udc-core.c
+> b/drivers/usb/gadget/udc/udc-core.c
+> index 6bb419ae2a..b917a79892 100644
+> --- a/drivers/usb/gadget/udc/udc-core.c
+> +++ b/drivers/usb/gadget/udc/udc-core.c
+> @@ -300,15 +300,17 @@ static int udc_bind_to_driver(struct usb_udc
+> *udc, struct usb_gadget_driver *dri
+> 
+>       usb_gadget_udc_set_speed(udc, driver->speed);
+> 
+> -    ret = driver->bind(udc->gadget);
+> -    if (ret)
+> -        goto err1;
+>       ret = usb_gadget_udc_start(udc);
+>       if (ret) {
+> -        driver->unbind(udc->gadget);
+>           goto err1;
+>       }
+> -    usb_gadget_connect(udc->gadget);
+> +
+> +    /* Keep pullup disabled until interrupt is available */
+> +    usb_gadget_disconnect(udc->gadget);
+
+This is no good, this is a workaround, let's not do this.
+
+> +    ret = driver->bind(udc->gadget);
+> +    if (ret)
+> +        goto err1;
+> 
+>       return 0;
+>   err1:
+
+[...]
