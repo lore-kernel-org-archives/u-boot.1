@@ -4,88 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBA8CC3DA4A
-	for <u-boot@archiver.kernel.org>; Thu, 22 Aug 2024 08:36:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85DD6C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu, 22 Aug 2024 10:20:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1347588ED0;
-	Thu, 22 Aug 2024 10:36:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id D7A5688D8B;
+	Thu, 22 Aug 2024 12:20:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="n6EfBWQN";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="AK9kk5+o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C4D288ED5; Thu, 22 Aug 2024 10:36:17 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ id 0494B88ABF; Thu, 22 Aug 2024 12:20:19 +0200 (CEST)
+Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 567F688ED0
- for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 10:36:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31A1488C7B
+ for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 12:20:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=T.Remmet@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1724315775; x=1726907775;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PPc7wv6KR01QhcluWRXYImSX4MJAkrM2s4qwAz1KZyY=;
- b=n6EfBWQNC0lJXd+5QLxKvdG/flusYGuCCmRPicRKZVclJVOwVwyBbfDfhoBkZqrZ
- FmWc+J6CZlMA3GqFfUEP/WJ7eJD+/tczvGAqn/yQtxl8LlgRE1zQg8IqJs6Mk1Au
- Kbi7QfrfZg4VracUp0VMTuQ+EKExhJQsJ1DAA8/kwpk=;
-X-AuditID: ac14000a-03251700000021bc-e8-66c6f87ed2d2
-Received: from florix.phytec.de (Unknown_Domain [172.25.0.13])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id AD.8A.08636.E78F6C66;
- Thu, 22 Aug 2024 10:36:14 +0200 (CEST)
-Received: from Berlix.phytec.de (172.25.0.12) by Florix.phytec.de
- (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Thu, 22 Aug
- 2024 10:36:14 +0200
-Received: from Berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4]) by
- berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4%4]) with mapi id 15.01.2507.006;
- Thu, 22 Aug 2024 10:36:14 +0200
-From: Teresa Remmet <T.Remmet@phytec.de>
-To: "lukma@denx.de" <lukma@denx.de>
-CC: Cem Tenruh <C.Tenruh@phytec.de>, "uboot-imx@nxp.com" <uboot-imx@nxp.com>, 
- "marcel.ziswiler@toradex.com" <marcel.ziswiler@toradex.com>,
- "trini@konsulko.com" <trini@konsulko.com>, "festevam@gmail.com"
- <festevam@gmail.com>, "sbabic@denx.de" <sbabic@denx.de>, Benjamin Hahn
- <B.Hahn@phytec.de>, Yannic Moog <Y.Moog@phytec.de>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH] config: imx: Add PHYTEC's phycore-imx8mm-fspi_defconfig
-Thread-Topic: [PATCH] config: imx: Add PHYTEC's phycore-imx8mm-fspi_defconfig
-Thread-Index: AQHa7u7JxBcUnACeC0WPj2hFdojJGrIoIGkAgAkpw4CAAZMggA==
-Date: Thu, 22 Aug 2024 08:36:14 +0000
-Message-ID: <e459bee491d05cc3bd3815d25e3f5fa81ad1bb4b.camel@phytec.de>
-References: <20240815084012.477436-1-lukma@denx.de>
- <951f63db0af4f3a8072e49009cd7a3336d90736c.camel@phytec.de>
- <20240821103323.240527ab@wsk>
-In-Reply-To: <20240821103323.240527ab@wsk>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.25.0.11]
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <B1E3360CE2B92242B5CDB5AB9D044282@phytec.de>
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=mk7.kang@samsung.com
+Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20240822102012epoutp01c39731034e0a09e8fc1aa05afe6be82e~uBbvw3VLH0480204802epoutp017
+ for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 10:20:12 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20240822102012epoutp01c39731034e0a09e8fc1aa05afe6be82e~uBbvw3VLH0480204802epoutp017
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1724322012;
+ bh=TmLa35RDPqqi0PzNUulZS4HeZ+uHO6M74UOlxG4OX7I=;
+ h=From:To:Subject:Date:References:From;
+ b=AK9kk5+ogkIJk2ye+I9oCPwVU/ovV4JgMekNihzmEFwcZ05un7xJnpfzHc7uPKpJR
+ iEyjZlQo2zYppyzPJmddx7UVPiWl2lB6JNXZxCR/Vm2pFHE+w9h5Tq3PEpls8BxQg+
+ AHZhxqV/+u2paTxxirwYHMaVVhfXmnMCNT/7CCXA=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTP id
+ 20240822102011epcas1p32021d8da68700a86b4764a89ff9603c0~uBbvmCtUJ1719517195epcas1p3s;
+ Thu, 22 Aug 2024 10:20:11 +0000 (GMT)
+Received: from epsmges1p3.samsung.com (unknown [182.195.38.248]) by
+ epsnrtp3.localdomain (Postfix) with ESMTP id 4WqK2f6Wkwz4x9Pp; Thu, 22 Aug
+ 2024 10:20:10 +0000 (GMT)
+Received: from epcas1p1.samsung.com ( [182.195.41.45]) by
+ epsmges1p3.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 02.5C.09725.AD017C66; Thu, 22 Aug 2024 19:20:10 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
+ 20240822102010epcas1p434e5a447b002e8bdea5423a034c2e444~uBbuUU-L-0782607826epcas1p4m;
+ Thu, 22 Aug 2024 10:20:10 +0000 (GMT)
+Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20240822102010epsmtrp2c8cabc103ed69bd7365d88cc630194b7~uBbuTvAo51260112601epsmtrp2R;
+ Thu, 22 Aug 2024 10:20:10 +0000 (GMT)
+X-AuditID: b6c32a37-1f3ff700000025fd-5b-66c710dac004
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 10.A2.19367.AD017C66; Thu, 22 Aug 2024 19:20:10 +0900 (KST)
+Received: from mk7kang01 (unknown [10.88.105.222]) by epsmtip2.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20240822102010epsmtip2e4bfdf096cccf85b74ced27be4c2e668~uBbuHSzaX2809328093epsmtip2H;
+ Thu, 22 Aug 2024 10:20:10 +0000 (GMT)
+From: "Minkyu Kang" <mk7.kang@samsung.com>
+To: <trini@konsulko.com>, <u-boot@lists.denx.de>
+Subject: Please pull u-boot-samsung master
+Date: Thu, 22 Aug 2024 19:20:10 +0900
+Message-ID: <118b01daf47c$de3b9620$9ab2c260$@samsung.com>
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrNIsWRmVeSWpSXmKPExsWyRpKBV7fux7E0gztPrCweXvW3eP7uMpNF
- 4+NVTBbtp3wspk7azG7xdm8nu8WUx+vZHdg95s06weKxc9Zddo9XB1axe5y9s4PRY+O7HUwe
- m155BLBFcdmkpOZklqUW6dslcGVs+jOdrWBKUkXjvF3MDYwX4rsYOTkkBEwktu46zNbFyMUh
- JLCESeLIx1dQzn1GiYcXbkE5GxglNi5ZygjSwiagIfHyRDcTiC0ioCxx7fdbdpAiZoG/TBKd
- jTNYQBLCAj4S5253s0IU+Up0bD3KAmE7SXzfswksziKgKnHw2AuwOK+Am0RH/0R2iG2TGCVm
- nP0DluAU0JKYsOYQG4jNKCArsWHDeWYQm1lAXGLTs++sEE8ISCzZAxGXEBCVePn4H1RcXuLE
- rWlAl3IA1WtKrN+lD9FqIXH49jx2CFtRYkr3Q3aIGwQlTs58wjKBUXwWkg2zELpnIemehaR7
- FpLuBYysqxiFcjOTs1OLMrP1CjIqS1KT9VJSNzGCIliEgWsHY98cj0OMTByMhxglOJiVRHiT
- 7h1NE+JNSaysSi3Kjy8qzUktPsQozcGiJM67uiM4VUggPbEkNTs1tSC1CCbLxMEp1cAYIHVj
- 06vDa4t3TdidW6jyh4NzZchhy/bwHJl8pa9i3l8361UVi/R+fKPmU36Bd8mDxMXxJhvUWrc8
- bj+wLezmf/ZI64idG0SYJH1/7P1W9VXk/fqMfenbbhYt6VuXoaZ0dH9syuySH6IHA1fa/LzE
- alXWn357x7rptWWBQe9XvdXN0bjF/O+kEktxRqKhFnNRcSIAlbXc/M4CAAA=
+Content-Transfer-Encoding: 7bit
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: Adr0bAoXu+pUYyUVS8yEzu62YnKdGg==
+Content-Language: ko
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrCKsWRmVeSWpSXmKPExsWy7bCmru4tgeNpBr/36FhMnbSZ3eLt3k52
+ ByaPVwdWsXucvbODMYApKtsmIzUxJbVIITUvOT8lMy/dVsk7ON453tTMwFDX0NLCXEkhLzE3
+ 1VbJxSdA1y0zB2i+kkJZYk4pUCggsbhYSd/Opii/tCRVISO/uMRWKbUgJafArECvODG3uDQv
+ XS8vtcTK0MDAyBSoMCE7o23XXKaCwyoVb649YW5gnCHdxcjJISFgInH34jnGLkYuDiGBHYwS
+ v55cY4VwPjFKfLpxmg3O2bDtE3MXIwdYy5vdVSDdQgI7gYrWh0DYzxkl2t+B2WwCWhJ/F55n
+ BbFFBAwkthzcAWYLA8V/XXjGBmKzCKhKfLn7ih3E5hWwlHh7oYURwhaUODnzCQuIzSwgL7H9
+ 7RxmiEsVJH4+XQY1U0/i58apjBA1IhKzO9uYQe6UEFjHLvFl3XImiAYXiZ8N51kgbGGJV8e3
+ sEPYUhKf3+1lg2iYzCgxadEzRghnPaPE4VkfGCGqjCVurt/ACvIxs4CmxPpd+hDb+CTefe1h
+ hQQEr0RHmxBEtZLEgQsHoDolJGZf384KYXtIvP21mwkSQLESyz8uZ5zAKD8LyZ+zkPw5C8k/
+ sxAWL2BkWcUollpQnJueWmxYYAyP4OT83E2M4OSmZb6DcdrbD3qHGJk4GA8xSnAwK4nwJt07
+ mibEm5JYWZValB9fVJqTWnyI0RQY8hOZpUST84HpNa8k3tDE0sDEzMjEwtjS2ExJnPfMlbJU
+ IYH0xJLU7NTUgtQimD4mDk6pBqYrS9i2+8pNe7XM411s1Yzck+uO8T97Pvd+zMl5R313nc2u
+ 7Dasynap++4XcO6DgEz7okPrNZeulZkumu1Vb63CZPa/7E901xoH3sq0bce3TmacWtVVxH0h
+ 23a7814XhwXzXsatYm2UO8DMF2iw55YVc722+8TtijzTX6xsM/hps9a98IY/a9MVO62Jy7kX
+ 7svtMdPe33JwsbN4X162wZUe4wCVjf1XThT5ThR8++Gy0rE9DJPWNDTntncZ/1mUm+hlGrf5
+ XD+DZe/ylcwrHh/mjRNaaSAnckZcPN904upFP0X/nFfMuxZbvGnDzN0vTglEvFDc7TPPbhlb
+ otv9FbtnH7nIVvT+3IRc7ZcsszuUWIozEg21mIuKEwGGKHSb9wMAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrALMWRmVeSWpSXmKPExsWy7bCSvO4tgeNpBlu/i1tMnbSZ3eLt3k52
+ ByaPVwdWsXucvbODMYApissmJTUnsyy1SN8ugSujbddcpoLDKhVvrj1hbmCcId3FyMEhIWAi
+ 8WZ3VRcjF4eQwHZGiaNrbrF1MXICxSUkJs2+wARRIyxx+HAxRM1TRolXz++xgNSwCWhJ/F14
+ nhXEFhEwkmjd0MkEYgsDxX9deAY2h0VAVeLL3VfsIDavgKXE2wstjBC2oMTJmU9YQOYzC+hJ
+ tG0ECzMLyEtsfzuHGeIEBYmfT5dBjdeT+LlxKlSNiMTszjbmCYwCs5BMmoUwaRaSSbOQdCxg
+ ZFnFKJpaUJybnptcYKhXnJhbXJqXrpecn7uJERyoWkE7GJet/6t3iJGJg/EQowQHs5IIb9K9
+ o2lCvCmJlVWpRfnxRaU5qcWHGKU5WJTEeZVzOlOEBNITS1KzU1MLUotgskwcnFINTMKCAZfU
+ U5qf+pTHRv5I+nSkYduX2MCrQg0uq3pU9FeUmaTMN7Fp4H+1dHHzr+pyo6cHFszYP/291Dfh
+ v4tu/83xClQx3m201+IS/+N0y73zBMMFTzxI2Pizev3FPOa5GSqH377elsVk8DaG9a7CQR7t
+ 5dq85dtk9ItPHtjmuqTkdO6D1S45Wb+nXOX/dHybv01PQ0Xvsa+nDrw5UiDB6d7F9kfexV/3
+ bsJ13QU/dzAfXdBtsKPJyYO9Qn+1cirH6X9B75Wv8ZSuOcudse0+i/Dvm8/yedpmu50/5KZm
+ xZA69eSaC3xZe+WunJgmffnL4RU/pykXiUc5Md0K1D/kqL+Tr+zPSZXW3NuTUqxtkpVYijMS
+ DbWYi4oTATfnNanDAgAA
+X-CMS-MailID: 20240822102010epcas1p434e5a447b002e8bdea5423a034c2e444
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+CMS-TYPE: 101P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20240822102010epcas1p434e5a447b002e8bdea5423a034c2e444
+References: <CGME20240822102010epcas1p434e5a447b002e8bdea5423a034c2e444@epcas1p4.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,165 +128,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGVsbG8gTHVrYXN6LA0KDQpBbSBNaXR0d29jaCwgZGVtIDIxLjA4LjIwMjQgdW0gMTA6MzMgKzAy
-MDAgc2NocmllYiBMdWthc3ogTWFqZXdza2k6DQo+IEhpIFRlcmVzYSwNCj4gDQo+ID4gSGVsbG8g
-THVrYXN6LA0KPiA+IA0KPiA+IEFtIERvbm5lcnN0YWcsIGRlbSAxNS4wOC4yMDI0IHVtIDEwOjQw
-ICswMjAwIHNjaHJpZWIgTHVrYXN6DQo+ID4gTWFqZXdza2k6DQo+ID4gPiBUaGlzIGNvbmZpZ3Vy
-YXRpb24gZmlsZSBwcm92aWRlcyBzdXBwb3J0IGZvciBib290aW5nIHBoeWNvcmUNCj4gPiA+IG1v
-ZHVsZQ0KPiA+ID4gKG9uIGUuZy4gcG9saXMtcmRrIGJhc2UgZGV2ZWxvcG1lbnQgYm9hcmQpIGZy
-b20gUVNQSSBtZW1vcnkuDQo+ID4gPiANCj4gPiA+IE1vcmVvdmVyLCB0aGUgU0RQIFNQTCBnYWRn
-ZXQgaXMgc3VwcG9ydGVkLCBzbyBzaW5nbGUgZmxhc2guYmluDQo+ID4gPiBiaW5hcnkgY2FuIGJl
-IHVzZWQgd2l0aCB1dXUgKHdpdGggdXV1IC12IC1iIHFzcGkgfi91LQ0KPiA+ID4gYm9vdC9mbGFz
-aC5iaW4pDQo+ID4gPiB0byBmbGFzaCBRU1BJIGluIHRoZSBmYWN0b3J5IG9yIGR1cmluZyBkZWJy
-aWNraW5nLg0KPiA+ID4gDQo+ID4gPiBTaWduZWQtb2ZmLWJ5OiBMdWthc3ogTWFqZXdza2kgPGx1
-a21hQGRlbnguZGU+DQo+ID4gPiAtLS0NCj4gPiA+IMKgY29uZmlncy9waHljb3JlLWlteDhtbS1m
-c3BpX2RlZmNvbmZpZyB8IDE1OA0KPiA+ID4gKysrKysrKysrKysrKysrKysrKysrKysrKysNCj4g
-PiA+IMKgMSBmaWxlIGNoYW5nZWQsIDE1OCBpbnNlcnRpb25zKCspDQo+ID4gPiDCoGNyZWF0ZSBt
-b2RlIDEwMDY0NCBjb25maWdzL3BoeWNvcmUtaW14OG1tLWZzcGlfZGVmY29uZmlnDQo+ID4gPiAN
-Cj4gPiA+IGRpZmYgLS1naXQgYS9jb25maWdzL3BoeWNvcmUtaW14OG1tLWZzcGlfZGVmY29uZmln
-DQo+ID4gPiBiL2NvbmZpZ3MvcGh5Y29yZS0gaW14OG1tLWZzcGlfZGVmY29uZmlnDQo+ID4gPiBu
-ZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiA+ID4gaW5kZXggMDAwMDAwMDAwMC4uNzlhMjY2ODI1NA0K
-PiA+ID4gLS0tIC9kZXYvbnVsbA0KPiA+ID4gKysrIGIvY29uZmlncy9waHljb3JlLWlteDhtbS1m
-c3BpX2RlZmNvbmZpZw0KPiA+ID4gQEAgLTAsMCArMSwxNTggQEANCj4gPiA+ICtDT05GSUdfQVJN
-PXkNCj4gPiA+ICtDT05GSUdfQVJDSF9JTVg4TT15DQo+ID4gPiArQ09ORklHX1RFWFRfQkFTRT0w
-eDQwMjAwMDAwDQo+ID4gPiArQ09ORklHX1NZU19NQUxMT0NfTEVOPTB4MjAwMDAwMA0KPiA+ID4g
-K0NPTkZJR19TUExfR1BJTz15DQo+ID4gPiArQ09ORklHX1NQTF9MSUJDT01NT05fU1VQUE9SVD15
-DQo+ID4gPiArQ09ORklHX1NQTF9MSUJHRU5FUklDX1NVUFBPUlQ9eQ0KPiA+ID4gK0NPTkZJR19T
-Rl9ERUZBVUxUX1NQRUVEPTgwMDAwMDAwDQo+ID4gPiArQ09ORklHX0VOVl9TSVpFPTB4MTAwMDAN
-Cj4gPiA+ICtDT05GSUdfRU5WX09GRlNFVD0weDNDMDAwMA0KPiA+ID4gK0NPTkZJR19JTVhfQ09O
-RklHPSJib2FyZC9mcmVlc2NhbGUvaW14OG1tX2V2ay9pbXhpbWFnZS04bW0tDQo+ID4gPiBscGRk
-cjQtDQo+ID4gPiBmc3BpLmNmZyLCoCANCj4gPiANCj4gPiBjYW4geW91IGNyZWF0ZSBhIGNmZyBp
-biB0aGUgYm9hcmQgZm9sZGVyIGFuZCBub3QgdXNlIHRoZSBvbmUgZnJvbQ0KPiA+IHRoZQ0KPiA+
-IGV2az8NCj4gDQo+IEkgd2FudGVkIHRvIGF2b2lkIGNvZGUgZHVwbGljYXRpb24gLSBhcyB0aGUg
-c2FtZSBmaWxlIChmcm9tIEVWSykgaXMNCj4gdXNlZCBieSBvdGhlciBib2FyZHMgYWxyZWFkeS4u
-Lg0KDQpPa2F5LCB0aGFua3MgaGF2ZW4ndCBub3RpY2VkIHRoYXQuDQpXaGF0IGFib3V0IG1vdmlu
-ZyB0aGlzIGZpbGUgdG8gYSBtb3JlIGdlbmVyaWMgcGxhY2UgdGhlbj8NClRvICJhcmNoL2FybS9t
-YWNoLWlteC9pbXg4bS8iIGZvciBleGFtcGxlLiBUaGVyZSBhcmUgYWxyZWFkeSBvdGhlciBjZmcN
-CmZpbGVzIGxvY2F0ZWQuDQoNCj4gDQo+ID4gDQo+ID4gPiArQ09ORklHX0RNX0dQSU89eQ0KPiA+
-ID4gK0NPTkZJR19ERUZBVUxUX0RFVklDRV9UUkVFPSJmcmVlc2NhbGUvaW14OG1tLXBoeWJvYXJk
-LXBvbGlzLXJkayINCj4gPiA+ICtDT05GSUdfU1BMX1RFWFRfQkFTRT0weDdFMjAwMA0KPiA+ID4g
-K0NPTkZJR19UQVJHRVRfUEhZQ09SRV9JTVg4TU09eQ0KPiA+ID4gK0NPTkZJR19ETV9SRVNFVD15
-DQo+ID4gPiArQ09ORklHX1NZU19NT05JVE9SX0xFTj01MjQyODgNCj4gPiA+ICtDT05GSUdfU1BM
-X01NQz15DQo+ID4gPiArQ09ORklHX1NQTF9TRVJJQUw9eQ0KPiA+ID4gK0NPTkZJR19TUExfRFJJ
-VkVSU19NSVNDPXkNCj4gPiA+ICtDT05GSUdfU1BMX1NUQUNLPTB4OTIwMDAwDQo+ID4gPiArQ09O
-RklHX1NQTF9IQVNfQlNTX0xJTktFUl9TRUNUSU9OPXkNCj4gPiA+ICtDT05GSUdfU1BMX0JTU19T
-VEFSVF9BRERSPTB4OTEwMDAwDQo+ID4gPiArQ09ORklHX1NQTF9CU1NfTUFYX1NJWkU9MHgyMDAw
-DQo+ID4gPiArQ09ORklHX1NQTD15DQo+ID4gPiArQ09ORklHX0VOVl9PRkZTRVRfUkVEVU5EPTB4
-M0UwMDAwDQo+ID4gPiArQ09ORklHX1NZU19MT0FEX0FERFI9MHg0MDQ4MDAwMA0KPiA+ID4gK0NP
-TkZJR19QQ0k9eQ0KPiA+ID4gKyMgQ09ORklHX0FORFJPSURfQk9PVF9JTUFHRSBpcyBub3Qgc2V0
-DQo+ID4gPiArQ09ORklHX0ZJVD15DQo+ID4gPiArQ09ORklHX0ZJVF9FWFRFUk5BTF9PRkZTRVQ9
-MHgzMDAwDQo+ID4gPiArQ09ORklHX1NQTF9MT0FEX0ZJVD15DQo+ID4gPiArQ09ORklHX09GX1NZ
-U1RFTV9TRVRVUD15DQo+ID4gPiArQ09ORklHX1VTRV9CT09UQ09NTUFORD15DQo+ID4gPiArQ09O
-RklHX0JPT1RDT01NQU5EPSJtbWMgZGV2ICR7bW1jZGV2fTsgaWYgbW1jIHJlc2NhbjsgdGhlbiBp
-Zg0KPiA+ID4gcnVuDQo+ID4gPiBsb2FkaW1hZ2U7IHRoZW4gcnVuIG1tY2Jvb3Q7IGVsc2UgcnVu
-IG5ldGJvb3Q7IGZpOyBmaTsiDQo+ID4gPiArQ09ORklHX0RFRkFVTFRfRkRUX0ZJTEU9Im9mdHJl
-ZSINCj4gPiA+ICtDT05GSUdfU1lTX0NCU0laRT0yMDQ4DQo+ID4gPiArQ09ORklHX1NZU19QQlNJ
-WkU9MjA3NA0KPiA+ID4gK0NPTkZJR19CT0FSRF9MQVRFX0lOSVQ9eQ0KPiA+ID4gK0NPTkZJR19T
-UExfTUFYX1NJWkU9MHgyNTAwMMKgIA0KPiA+IA0KPiA+IFRoaXMgbGluZQ0KPiA+IA0KPiA+ID4g
-K0NPTkZJR19TUExfUEFEX1RPPTB4MMKgIA0KPiA+IA0KPiA+IGFuZCB0aGlzIG9uZSBpcyBub3Qg
-YXZhaWxhYmxlIGluIHBoeWNvcmUtaW14OG1tX2RlZmNvbmZpZy4NCj4gPiBXaHkgaGF2ZSB5b3Ug
-YWRkZWQgdGhlbSBoZXJlPw0KPiANCj4gSSB0aGluayB0aGF0IEkndmUgZm9sbG93ZWQgLi9jb25m
-aWdzL2lteDhtbV9iZWFjb25fZnNwaV9kZWZjb25maWcgYXMNCj4gYQ0KPiBzdGFydGluZyBwb2lu
-dC4NCj4gDQo+IEkgd291bGQgbmVlZCB0byBjaGVjayBpZiByZW1vdmluZyB0aGVtIHdvdWxkIG1h
-a2UgYW55IGhhcm0uDQoNCkkgd291bGQgcHJlZmVyIGhhdmluZyBpdCBpbiBzbnljIHdpdGggcGh5
-Y29yZS1pbXg4bW1fZGVmY29uZmlnIG1ha2VzIGl0DQplYXNpZXIgd2hlbiB0cnlpbmcgdG8gY29t
-cGFyZSB0aGVtIGluIGZ1dHVyZS4NCg0KPiANCj4gPiANCj4gPiA+ICsjIENPTkZJR19TUExfU0hB
-UkVTX0lOSVRfU1BfQUREUiBpcyBub3Qgc2V0DQo+ID4gPiArQ09ORklHX1NQTF9TWVNfTUFMTE9D
-PXkNCj4gPiA+ICtDT05GSUdfU1BMX0hBU19DVVNUT01fTUFMTE9DX1NUQVJUPXkNCj4gPiA+ICtD
-T05GSUdfU1BMX0NVU1RPTV9TWVNfTUFMTE9DX0FERFI9MHg0MjIwMDAwMA0KPiA+ID4gK0NPTkZJ
-R19TUExfU1lTX01BTExPQ19TSVpFPTB4ODAwMDANCj4gPiA+ICtDT05GSUdfU1lTX01NQ1NEX1JB
-V19NT0RFX1VfQk9PVF9VU0VfU0VDVE9SPXkNCj4gPiA+ICtDT05GSUdfU1lTX01NQ1NEX1JBV19N
-T0RFX1VfQk9PVF9TRUNUT1I9MHgzMDANCj4gPiA+ICtDT05GSUdfU1BMX0kyQz15DQo+ID4gPiAr
-Q09ORklHX1NQTF9OT1JfU1VQUE9SVD15DQo+ID4gPiArQ09ORklHX1NQTF9QT1dFUj15DQo+ID4g
-PiArQ09ORklHX1NQTF9TUElfRkxBU0hfTVREPXkNCj4gPiA+ICtDT05GSUdfU1BMX1dBVENIRE9H
-PXkNCj4gPiA+ICtDT05GSUdfSFVTSF9QQVJTRVI9eQ0KPiA+ID4gK0NPTkZJR19TWVNfUFJPTVBU
-PSJ1LWJvb3Q9PiAiDQo+ID4gPiArIyBDT05GSUdfQ01EX0VYUE9SVEVOViBpcyBub3Qgc2V0DQo+
-ID4gPiArIyBDT05GSUdfQ01EX0lNUE9SVEVOViBpcyBub3Qgc2V0wqAgDQo+ID4gDQo+ID4gSGVy
-ZSBpcw0KPiA+IA0KPiA+IENPTkZJR19DTURfRVJBU0VFTlY9eQ0KPiA+IA0KPiA+IG1pc3Npbmcu
-IFdoaWNoIHdhcyBhZGRlZCB3aXRoDQo+ID4gNjBlMDFjNmQ5Zjg5MmJmYTA4OGEwNDUzY2QxOWQ2
-YTQxOGIwMGFkZA0KPiA+IGZvciBwaHljb3JlLWlteDhtbV9kZWZjb25maWcuIFdoeSBkaWQgeW91
-IG5vdCBhZGQgaXQ/DQo+ID4gDQo+IA0KPiBJIG1pZ2h0IHVzZWQgZWl0aGVyIHRoZSBvbGRlciAu
-L2NvbmZpZ3MvcGh5Y29yZS1pbXg4bW1fZGVmY29uZmlnIG9yDQo+IHRoZQ0KPiBhYm92ZSBtZW50
-aW9uZWQgImJlYWNvbiIuDQoNCmNvdWxkIHlvdSBhZGQgaXQ/DQoNCj4gDQo+ID4gDQo+ID4gPiAr
-IyBDT05GSUdfQ01EX0NSQzMyIGlzIG5vdCBzZXQNCj4gPiA+ICtDT05GSUdfQ01EX0VFUFJPTT15
-DQo+ID4gPiArQ09ORklHX1NZU19JMkNfRUVQUk9NX0FERFJfTEVOPTINCj4gPiA+ICtDT05GSUdf
-U1lTX0VFUFJPTV9TSVpFPTQwOTYNCj4gPiA+ICtDT05GSUdfU1lTX0VFUFJPTV9QQUdFX1dSSVRF
-X0JJVFM9NQ0KPiA+ID4gK0NPTkZJR19TWVNfRUVQUk9NX1BBR0VfV1JJVEVfREVMQVlfTVM9NcKg
-IA0KPiA+IA0KPiA+IEFuZCBJIGFsc28gbWlzcw0KPiA+IA0KPiA+ICMgQ09ORklHX0NNRF9CSU5E
-IGlzIG5vdCBzZXQNCj4gPiBDT05GSUdfRkFTVEJPT1RfQlVGX1NJWkU9MHgyMDAwMDAwMA0KPiA+
-IA0KPiA+IHdoaWNoIHlvdSBkaWQgc2V0IGluIHlvdXIgDQo+ID4gDQo+ID4gImNvbmZpZzogaW14
-OiBBZGQgc3VwcG9ydCBmb3IgUGh5dGVjJ3MgcGh5Y29yZSBpbXg4bW0gcnVubmluZyBTRFANCj4g
-PiBnYWRnZXQiDQo+ID4gDQo+ID4gcGF0Y2ggZm9yIHBoeWNvcmUtaW14OG1tX2RlZmNvbmZpZy4g
-QXJlIHRoZXkgbm90IHJlcXVpcmVkIGZvciBmc3BpDQo+ID4gaW1hZ2U/DQo+IA0KPiBJSVJDIHRo
-aXMgdmFsdWUgaGFzIGRlZmF1bHQgdmFsdWUgc2V0IGluIGRyaXZlcnMvZmFzdGJvb3QvS2NvbmZp
-Zw0KPiANCj4gV2l0aCBRU1BJIHNldHVwIEkgZGlkIG5vdCBuZWVkZWQgaXQgc28gYmlnLCBhcyB0
-aGUgZmxhc2guYmluIHdhcw0KPiBzbWFsbA0KPiBlbm91Z2guDQo+IA0KPiBXaXRoIHBoeWNvcmUt
-aW14OG1tX2RlZmNvbmZpZyBJJ3ZlIHNldCBpdCB0byBsYXJnZXIgdmFsdWUgLSBhcyBvbmUgbXkN
-Cj4gdXBkYXRlIHdpdGggaXQgU0QvZU1NQyBtZW1vcnkgd2l0aCBmYXN0Ym9vdCBnYWRnZXQuDQoN
-CkJ1dCB3b3VsZCBpdCBodXJ0IHRvIGluY3JlYXNlIHRoZSBidWZmZXIgaGVyZT8gDQpJIHRoaW5r
-IGl0IHdvdWxkIGJlIG5pY2UgdG8gYmUgYWJsZSBmbGFzaCBhIGxhcmdlciBpbWFnZSB0byBlTU1D
-IHdoZW4NCmJvb3RpbmcgZnJvbSBTUEkgZmxhc2gsIHRvby4gRXZlbiB0aG91Z2ggSSB1bmRlcnN0
-YW5kIGl0IGlzIG5vdA0KcmVxdWlyZWQgZm9yIHlvdXIgdXNlY2FzZS4NCg0KVGVyZXNhDQoNCg0K
-PiANCj4gPiANCj4gPiBUZXJlc2ENCj4gPiANCj4gPiA+ICtDT05GSUdfQ01EX0NMSz15DQo+ID4g
-PiArQ09ORklHX0NNRF9GVVNFPXkNCj4gPiA+ICtDT05GSUdfQ01EX0dQSU89eQ0KPiA+ID4gK0NP
-TkZJR19DTURfSTJDPXkNCj4gPiA+ICtDT05GSUdfQ01EX01NQz15DQo+ID4gPiArQ09ORklHX0NN
-RF9QQ0k9eQ0KPiA+ID4gK0NPTkZJR19DTURfU0ZfVEVTVD15DQo+ID4gPiArQ09ORklHX0NNRF9E
-SENQPXkNCj4gPiA+ICtDT05GSUdfQ01EX01JST15DQo+ID4gPiArQ09ORklHX0NNRF9QSU5HPXkN
-Cj4gPiA+ICtDT05GSUdfQ01EX0NBQ0hFPXkNCj4gPiA+ICtDT05GSUdfQ01EX1JFR1VMQVRPUj15
-DQo+ID4gPiArQ09ORklHX0NNRF9FWFQyPXkNCj4gPiA+ICtDT05GSUdfQ01EX0VYVDQ9eQ0KPiA+
-ID4gK0NPTkZJR19DTURfRVhUNF9XUklURT15DQo+ID4gPiArQ09ORklHX0NNRF9GQVQ9eQ0KPiA+
-ID4gK0NPTkZJR19PRl9DT05UUk9MPXkNCj4gPiA+ICtDT05GSUdfU1BMX09GX0NPTlRST0w9eQ0K
-PiA+ID4gK0NPTkZJR19FTlZfT1ZFUldSSVRFPXkNCj4gPiA+ICtDT05GSUdfRU5WX0lTX0lOX01N
-Qz15DQo+ID4gPiArQ09ORklHX1NZU19SRURVTkRBTkRfRU5WSVJPTk1FTlQ9eQ0KPiA+ID4gK0NP
-TkZJR19TWVNfUkVMT0NfR0RfRU5WX0FERFI9eQ0KPiA+ID4gK0NPTkZJR19TWVNfTU1DX0VOVl9E
-RVY9Mg0KPiA+ID4gK0NPTkZJR19FTlZfVkFSU19VQk9PVF9SVU5USU1FX0NPTkZJRz15DQo+ID4g
-PiArQ09ORklHX1NQTF9ETT15DQo+ID4gPiArQ09ORklHX1NQTF9DTEtfQ09NUE9TSVRFX0NDRj15
-DQo+ID4gPiArQ09ORklHX0NMS19DT01QT1NJVEVfQ0NGPXkNCj4gPiA+ICtDT05GSUdfU1BMX0NM
-S19JTVg4TU09eQ0KPiA+ID4gK0NPTkZJR19DTEtfSU1YOE1NPXkNCj4gPiA+ICtDT05GSUdfVVNC
-X0ZVTkNUSU9OX0ZBU1RCT09UPXkNCj4gPiA+ICtDT05GSUdfRkFTVEJPT1RfQlVGX0FERFI9MHg0
-MjgwMDAwMA0KPiA+ID4gK0NPTkZJR19GQVNUQk9PVF9VVVVfU1VQUE9SVD15DQo+ID4gPiArQ09O
-RklHX01YQ19HUElPPXkNCj4gPiA+ICtDT05GSUdfRE1fSTJDPXkNCj4gPiA+ICtDT05GSUdfTUlT
-Qz15DQo+ID4gPiArQ09ORklHX0kyQ19FRVBST009eQ0KPiA+ID4gK0NPTkZJR19TWVNfSTJDX0VF
-UFJPTV9BRERSPTB4NTENCj4gPiA+ICtDT05GSUdfU1VQUE9SVF9FTU1DX0JPT1Q9eQ0KPiA+ID4g
-K0NPTkZJR19NTUNfSU9fVk9MVEFHRT15DQo+ID4gPiArQ09ORklHX01NQ19VSFNfU1VQUE9SVD15
-DQo+ID4gPiArQ09ORklHX01NQ19IUzQwMF9FU19TVVBQT1JUPXkNCj4gPiA+ICtDT05GSUdfTU1D
-X0hTNDAwX1NVUFBPUlQ9eQ0KPiA+ID4gK0NPTkZJR19GU0xfVVNESEM9eQ0KPiA+ID4gK0NPTkZJ
-R19NVEQ9eQ0KPiA+ID4gK0NPTkZJR19ETV9NVEQ9eQ0KPiA+ID4gK0NPTkZJR19ETV9TUElfRkxB
-U0g9eQ0KPiA+ID4gK0NPTkZJR19TRl9ERUZBVUxUX0JVUz0zDQo+ID4gPiArQ09ORklHX1NQSV9G
-TEFTSF9CQVI9eQ0KPiA+ID4gK0NPTkZJR19TUElfRkxBU0hfTUFDUk9OSVg9eQ0KPiA+ID4gK0NP
-TkZJR19TUElfRkxBU0hfU1BBTlNJT049eQ0KPiA+ID4gK0NPTkZJR19TUElfRkxBU0hfU1RNSUNS
-Tz15DQo+ID4gPiArQ09ORklHX1NQSV9GTEFTSF9TU1Q9eQ0KPiA+ID4gK0NPTkZJR19TUElfRkxB
-U0hfV0lOQk9ORD15DQo+ID4gPiArIyBDT05GSUdfU1BJX0ZMQVNIX1VTRV80S19TRUNUT1JTIGlz
-IG5vdCBzZXQNCj4gPiA+ICtDT05GSUdfU1BJX0ZMQVNIX01URD15DQo+ID4gPiArQ09ORklHX1BI
-WUxJQj15DQo+ID4gPiArQ09ORklHX1BIWV9USV9EUDgzODY3PXkNCj4gPiA+ICtDT05GSUdfUEhZ
-X0dJR0U9eQ0KPiA+ID4gK0NPTkZJR19GRUNfTVhDPXkNCj4gPiA+ICtDT05GSUdfTUlJPXkNCj4g
-PiA+ICtDT05GSUdfTlZNRV9QQ0k9eQ0KPiA+ID4gK0NPTkZJR19QQ0lFX0RXX0lNWD15DQo+ID4g
-PiArQ09ORklHX1BIWV9JTVg4TV9QQ0lFPXkNCj4gPiA+ICtDT05GSUdfUElOQ1RSTD15DQo+ID4g
-PiArQ09ORklHX1NQTF9QSU5DVFJMPXkNCj4gPiA+ICtDT05GSUdfUElOQ1RSTF9JTVg4TT15DQo+
-ID4gPiArQ09ORklHX1BPV0VSX0RPTUFJTj15DQo+ID4gPiArQ09ORklHX0lNWDhNX1BPV0VSX0RP
-TUFJTj15DQo+ID4gPiArQ09ORklHX0RNX1JFR1VMQVRPUl9GSVhFRD15DQo+ID4gPiArQ09ORklH
-X0RNX1JFR1VMQVRPUl9HUElPPXkNCj4gPiA+ICtDT05GSUdfRE1fU0VSSUFMPXkNCj4gPiA+ICtD
-T05GSUdfTVhDX1VBUlQ9eQ0KPiA+ID4gK0NPTkZJR19TUEk9eQ0KPiA+ID4gK0NPTkZJR19ETV9T
-UEk9eQ0KPiA+ID4gK0NPTkZJR19OWFBfRlNQST15DQo+ID4gPiArQ09ORklHX1NZU1JFU0VUPXkN
-Cj4gPiA+ICtDT05GSUdfU1BMX1NZU1JFU0VUPXkNCj4gPiA+ICtDT05GSUdfU1lTUkVTRVRfUFND
-ST15DQo+ID4gPiArQ09ORklHX1NZU1JFU0VUX1dBVENIRE9HPXkNCj4gPiA+ICtDT05GSUdfRE1f
-VEhFUk1BTD15DQo+ID4gPiArQ09ORklHX0lNWF9UTVU9eQ0KPiA+ID4gK0NPTkZJR19VU0I9eQ0K
-PiA+ID4gK0NPTkZJR19TUExfVVNCX0hPU1Q9eQ0KPiA+ID4gK0NPTkZJR19VU0JfRUhDSV9IQ0Q9
-eQ0KPiA+ID4gK0NPTkZJR19NWENfVVNCX09UR19IQUNUSVZFPXkNCj4gPiA+ICtDT05GSUdfVVNC
-X0dBREdFVD15DQo+ID4gPiArQ09ORklHX1NQTF9VU0JfR0FER0VUPXkNCj4gPiA+ICtDT05GSUdf
-VVNCX0dBREdFVF9WRU5ET1JfTlVNPTB4MDUyNQ0KPiA+ID4gK0NPTkZJR19VU0JfR0FER0VUX1BS
-T0RVQ1RfTlVNPTB4YTRhNQ0KPiA+ID4gK0NPTkZJR19DSV9VREM9eQ0KPiA+ID4gK0NPTkZJR19T
-RFBfTE9BREFERFI9MHg0MDQwMDAwMA0KPiA+ID4gK0NPTkZJR19TUExfVVNCX1NEUF9TVVBQT1JU
-PXkNCj4gPiA+ICtDT05GSUdfSU1YX1dBVENIRE9HPXkNCj4gPiA+ICtDT05GSUdfRlNQSV9DT05G
-X0hFQURFUj15DQo+ID4gPiArQ09ORklHX0ZTUElfQ09ORl9GSUxFPSJmc3BpX2hlYWRlci5iaW4i
-wqAgDQo+ID4gDQo+IA0KPiANCj4gDQo+IA0KPiBCZXN0IHJlZ2FyZHMsDQo+IA0KPiBMdWthc3og
-TWFqZXdza2kNCj4gDQo+IC0tDQo+IA0KPiBERU5YIFNvZnR3YXJlIEVuZ2luZWVyaW5nIEdtYkgs
-wqDCoMKgwqDCoCBNYW5hZ2luZyBEaXJlY3RvcjogRXJpa2EgVW50ZXINCj4gSFJCIDE2NTIzNSBN
-dW5pY2gsIE9mZmljZTogS2lyY2hlbnN0ci41LCBELTgyMTk0IEdyb2ViZW56ZWxsLCBHZXJtYW55
-DQo+IFBob25lOiAoKzQ5KS04MTQyLTY2OTg5LTU5IEZheDogKCs0OSktODE0Mi02Njk4OS04MCBF
-bWFpbDoNCj4gbHVrbWFAZGVueC5kZQ0KDQotLSANClBIWVRFQyBNZXNzdGVjaG5payBHbWJIIHwg
-QmFyY2Vsb25hLUFsbGVlIDEgfCA1NTEyOSBNYWlueiwgR2VybWFueQ0KDQpHZXNjaMOkZnRzZsO8
-aHJlcjogRGlwbC4tSW5nLiBNaWNoYWVsIE1pdGV6a2ksIERpcGwuLUluZy4gQm9kbyBIdWJlciwN
-CkRpcGwuLUluZy4gKEZIKSBNYXJrdXMgTGlja2VzIHwgSGFuZGVsc3JlZ2lzdGVyIE1haW56IEhS
-QiA0NjU2IHwNCkZpbmFuemFtdCBNYWlueiB8IFN0Lk5yLiAyNjY1MDA2MDgsIERFIDE0OTA1OTg1
-NQ0K
+Dear Tom,
+
+The following changes since commit d51764417dc37ead471a5597f7815ae455e84ea3:
+
+  am335x_hs_evm_spi_defconfig: Add MAINTAINERS entry (2024-08-15 16:07:45
+-0600)
+
+are available in the git repository at:
+
+  git@source.denx.de:u-boot/custodians/u-boot-samsung.git master
+
+for you to fetch changes up to 25a972368cf926b4d70c22a2de65d959774d5cc5:
+
+  doc: samsung: Mention enabled eMMC in E850-96 board doc (2024-08-19
+16:09:06 +0900)
+
+----------------------------------------------------------------
+Sam Protsenko (38):
+      mmc: dw_mmc: Remove unused version field from struct dwmci_host
+      mmc: dw_mmc: Move struct idmac to dw_mmc.c
+      mmc: dw_mmc: Extract waiting for data busy into a separate routine
+      mmc: dw_mmc: Extract FIFO init into a separate routine
+      mmc: dw_mmc: Extract divider update to a separate function
+      mmc: dw_mmc: Extract FIFO data transfer into a separate routine
+      mmc: dw_mmc: Extract DMA transfer handling code into a separate
+routine
+      mmc: dw_mmc: Extract setting the DMA descriptor into a separate
+routine
+      mmc: dw_mmc: Improve 32-bit IDMAC descriptor namings
+      mmc: dw_mmc: Add support for 64-bit IDMAC
+      mmc: dw_mmc: Replace fifoth_val property with fifo-depth
+      mmc: dw_mmc: Fix kernel-doc comments in dwmmc.h
+      mmc: dw_mmc: Improve coding style
+      arm: dts: exynos: Add upstream DW MMC properties to all Exynos dts
+      dt-bindings: exynos: Update bindings doc for DW MMC controller
+      arm: exynos: Add header guard for dwmmc.h
+      mmc: exynos_dw_mmc: Fix obtaining the base address of controller
+      mmc: exynos_dw_mmc: Fix getting private data in
+exynos_dwmci_board_init()
+      mmc: exynos_dw_mmc: Don't call pinmux functions on ARM64 chips
+      mmc: exynos_dw_mmc: Obtain and use CIU clock via CCF API
+      mmc: exynos_dw_mmc: Use .of_to_plat for device tree parsing
+      mmc: exynos_dw_mmc: Convert to use livetree API
+      mmc: exynos_dw_mmc: Read upstream SDR timing properties
+      mmc: exynos_dw_mmc: Abstract CLKSEL register
+      mmc: exynos_dw_mmc: Refactor fixed CIU clock divider
+      mmc: exynos_dw_mmc: Read common bus-width property
+      mmc: exynos_dw_mmc: Read common clock-frequency property
+      mmc: exynos_dw_mmc: Move quirks from struct dwmci_host to chip data
+      mmc: exynos_dw_mmc: Read and use DDR timing when available
+      mmc: exynos_dw_mmc: Set requested freq in get_mmc_clk() callback
+      mmc: exynos_dw_mmc: Add support for ARM64 Exynos chips
+      mmc: exynos_dw_mmc: Pull all init code into probe function
+      mmc: exynos_dw_mmc: Don't call dwmci_setup_cfg() after add_dwmci()
+      mmc: exynos_dw_mmc: Use dev->name as driver's displayed name
+      mmc: exynos_dw_mmc: Improve coding style
+      arm: dts: exynos: Remove outdated DW MMC properties in all Exynos dts
+      configs: e850-96: Enable MMC
+      doc: samsung: Mention enabled eMMC in E850-96 board doc
+
+ arch/arm/dts/exynos4210-origen.dts         |   3 +-
+ arch/arm/dts/exynos4210-trats.dts          |   6 +-
+ arch/arm/dts/exynos4210-universal_c210.dts |   6 +-
+ arch/arm/dts/exynos4412-odroid.dts         |  15 +-
+ arch/arm/dts/exynos4412-trats2.dts         |  20 ++-
+ arch/arm/dts/exynos5250-arndale.dts        |  10 +-
+ arch/arm/dts/exynos5250-smdk5250.dts       |  13 +-
+ arch/arm/dts/exynos5250-snow.dts           |  13 +-
+ arch/arm/dts/exynos5250-spring.dts         |   7 +-
+ arch/arm/dts/exynos5420-smdk5420.dts       |  13 +-
+ arch/arm/dts/exynos5422-odroidxu3.dts      |   4 +-
+ arch/arm/dts/exynos54xx.dtsi               |  13 +-
+ arch/arm/mach-exynos/include/mach/dwmmc.h  |  40 ++++--
+ configs/e850-96_defconfig                  |  10 +-
+ doc/board/samsung/e850-96.rst              |   5 +-
+ doc/device-tree-bindings/exynos/dwmmc.txt  |  46 ++++---
+ drivers/mmc/ca_dw_mmc.c                    |   2 +-
+ drivers/mmc/dw_mmc.c                       | 547
++++++++++++++++++++++++++++++++++++++++++++++++--------------------------
+ drivers/mmc/exynos_dw_mmc.c                | 357
+++++++++++++++++++++++++++++++++---------------
+ drivers/mmc/ftsdc010_mci.h                 |   1 -
+ drivers/mmc/hi6220_dw_mmc.c                |   7 +-
+ drivers/mmc/nexell_dw_mmc.c                |   5 +-
+ drivers/mmc/rockchip_dw_mmc.c              |   5 +-
+ drivers/mmc/s5p_sdhci.c                    |   2 +-
+ drivers/mmc/snps_dw_mmc.c                  |   6 +-
+ drivers/mmc/socfpga_dw_mmc.c               |   4 +-
+ include/dwmmc.h                            | 242
+++++++++++++++++++--------------
+ 27 files changed, 869 insertions(+), 533 deletions(-)
+
+Thanks,
+Minkyu Kang.
+
+
