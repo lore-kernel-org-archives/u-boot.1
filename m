@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC104C3DA4A
-	for <u-boot@archiver.kernel.org>; Thu, 22 Aug 2024 14:15:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E32A2C52D7C
+	for <u-boot@archiver.kernel.org>; Thu, 22 Aug 2024 14:23:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 732B3888FB;
-	Thu, 22 Aug 2024 16:15:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6723D8882C;
+	Thu, 22 Aug 2024 16:23:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kIvpr+eT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h4ShFyBC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7CD288915; Thu, 22 Aug 2024 16:15:53 +0200 (CEST)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id 673AC88915; Thu, 22 Aug 2024 16:23:14 +0200 (CEST)
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [IPv6:2607:f8b0:4864:20::72d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B01F988651
- for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 16:15:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32116887EB
+ for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 16:23:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6c159150ff4so4362336d6.2
- for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 07:15:51 -0700 (PDT)
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-7a1dac7f0b7so52512485a.0
+ for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 07:23:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724336150; x=1724940950; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724336591; x=1724941391; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZBXlNh0AT7Ukj9hCAf6AUklHjlOxFe3vu8P4EsoMjUU=;
- b=kIvpr+eTcbtRKgnmU4afZD4XsbdraGkiQU4SfKEoUtWpkvhMQ0JB3wcq+7hY2Sdn7h
- LTF9u+GWNFFE7XpZQUJqxIuYKa7QMgMhxQxQg/Y6HJrWU/RiJxUAsqbXqTvw9GbtFCIq
- XH8d5biB/K2S20ubUUmdA/3aEY6wIjmuEl2iM=
+ bh=YzoVgJjTU/nT00xGz+5emLBSTcVUHGqnoMoFOgJUVYU=;
+ b=h4ShFyBCIjvF1w8jsUkACxoBwquB2AMpeZtss5OjZvRfAwwzutcKWqrh1JqRs9le0s
+ arYQQcW3oJl4glQDebquFIhOyzElfNxjtRN2cC/QocUOkO147lrrsVsEjJRWeB/l+Jlq
+ 8exRl9J4UFdtT2kDaRyiTlslnAQCVqI2rIMYw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724336150; x=1724940950;
+ d=1e100.net; s=20230601; t=1724336591; x=1724941391;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ZBXlNh0AT7Ukj9hCAf6AUklHjlOxFe3vu8P4EsoMjUU=;
- b=foWSmaTFXjfjfIi4FqJN3QuJL2bHFpqLhFgxSTa+saPyvmEoMhVVktQwswaARej/9V
- F+j2MXMApKPS6EjXxLXIdJ9b7fN2dpkz5M1FpoVtnW5oc0lwSfvzRN3oQvLQAWHTBaWa
- 8gppcZsyOlxkeeTWYy7lgyU/2uEO8RnKHsTEY3DlKdI1bT87v5kDPVYTCECNNJv6nei1
- LxtEfS9hGO77RgZnNQIW0fwo9eyClZlvGpqwS5BXB4tDgTn12q0vwuSUnStzDw8pZGq4
- pCvxiDNzDoe6t5f1+JgatQx+/8H2kZP8m6zu9ZNCiGfl4/b36FFHsDbGeK+fA8DPUIH+
- 6RCQ==
-X-Gm-Message-State: AOJu0YwuvY/+rlu8TplwmNBFJ2VTGeS7IZESxWWzKN51wXqFZ2INW1KS
- 4PmEYkI7geM58TXJGrpk3C0v5tWcQM40Oua9cT2EQIX7q20zD4UTk9e7DSIHKZ4Vxs6ShjmshWJ
- cToynlRLbwJeOQcJ6/vuLNA6RARfepF0OfKtJ
-X-Google-Smtp-Source: AGHT+IG2A2wZIbHxMrCR1mKCWA+zGgOSDw4i8D80JyHUq+QRkIYef7/EkZN/hi/dwG1rSXXxsFL9LRIFWiQuqRj4WWg=
-X-Received: by 2002:a05:6214:3a81:b0:6bb:8e2f:bd4a with SMTP id
- 6a1803df08f44-6c16479b6f3mr16520346d6.38.1724336150561; Thu, 22 Aug 2024
- 07:15:50 -0700 (PDT)
+ bh=YzoVgJjTU/nT00xGz+5emLBSTcVUHGqnoMoFOgJUVYU=;
+ b=Lf08yOvPxD97NE1mHjidE7LlKbu8UCICQe8VyAQ4xKR8LL1kaPmhFzLfvx1cxnH5Yf
+ VrloA2JWHP4pYcBQglYCxzZzLcwtBnn+pcLPJfwHvOzxcg095LgDF760sgbczZEWEShY
+ 0L3Fl9sq44QOqVVLobl48JZDe9Ix30SjwVhuYrd5SnFKvSza0T6KuPLqZDnVJbRJnnFW
+ x36s+ITYEoVHFcytIxz8pWWBMTQ9B1nDSGVZc884vvj5IcuU/D2NCbyEcVmbzvhp3Isn
+ ZGXceRYmPK0R0tP8UiaDYnyGHj6fkZmXY3MVVnETP5MjHn/nsdR/OEN54mx2fHLT0Qi4
+ 9dow==
+X-Gm-Message-State: AOJu0YzUq2AUAdRwtJ7DB7wZuppmhMzP960qmHsxpQ86iqewn2vZlWSo
+ XmwBMw30HwuCFCKwd/If2MYKlMilSvOKWR/m8NfL8VamAcfB9sgFv6dvzHloLeZFEqyWAw91Udq
+ M2hzUyuvVh/3kvsaxwpbFro/Uw2NuXRDCz0BO
+X-Google-Smtp-Source: AGHT+IEqflypdKteuL/eDZDbIgr9SdtmcFQVupDr1RD4ta5gXoH2UOp9ep8HBzDiAUCeu9zfrJtxaFI2SSJdzAytW1c=
+X-Received: by 2002:a05:6214:4b0d:b0:6bf:6bae:6090 with SMTP id
+ 6a1803df08f44-6c1568432a0mr61024856d6.44.1724336590973; Thu, 22 Aug 2024
+ 07:23:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240815195746.749042-1-sjg@chromium.org>
- <20240815195746.749042-3-sjg@chromium.org>
- <20240816172237.GA1626301@bill-the-cat>
- <CAFLszTh1Nig-hs+Gtxzg8f-=vE1z4BvNSfEyUGtatZohj0pnuQ@mail.gmail.com>
- <CAFLszTgufCxvXjJupqDphcGwJ0gfvrYxQACK3kYRKaumpKgrYQ@mail.gmail.com>
- <20240822141013.GQ1626301@bill-the-cat>
-In-Reply-To: <20240822141013.GQ1626301@bill-the-cat>
+References: <20240623203213.1571666-1-sjg@chromium.org>
+ <20240623203213.1571666-7-sjg@chromium.org>
+ <20240624180556.GG38804@bill-the-cat>
+ <CAFLszTiJYVQZ=2kqC6FUQMfrFwtSraET_3nG-2oZhMV=Ts7OEw@mail.gmail.com>
+ <20240625141432.GP38804@bill-the-cat>
+ <CAFLszTg3LhZTeOAANcm29pZnvfF4mpWZEw6Swf09wzGaWQOOtA@mail.gmail.com>
+ <CAFLszTgP71y2Z6Or5CLA+gzk=EfiwnfXFvdkeBqGKidLFGd6bQ@mail.gmail.com>
+ <20240822141146.GR1626301@bill-the-cat>
+In-Reply-To: <20240822141146.GR1626301@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 22 Aug 2024 08:15:39 -0600
-Message-ID: <CAFLszTgPBO9dO9za2KaJKhp2Xq5RD3x6vCQs7X5i5KiF_tT-Cw@mail.gmail.com>
-Subject: Re: [PATCH v3 2/3] buildman: Allow skipping the dtc build
+Date: Thu, 22 Aug 2024 08:22:59 -0600
+Message-ID: <CAFLszTiyPCH57NZMrbKg76Cg3NRhO5bHriRLWwgs5i5qPMhFVQ@mail.gmail.com>
+Subject: Re: [PATCH v3 06/19] test: Avoid failing skipped tests
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Brandon Maier <brandon.maier@collins.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
+ Sean Anderson <seanga2@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,64 +91,117 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Thu, 22 Aug 2024 at 08:10, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 22 Aug 2024 at 08:11, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Wed, Aug 21, 2024 at 09:00:25PM -0600, Simon Glass wrote:
+> On Wed, Aug 21, 2024 at 09:00:33PM -0600, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Fri, 16 Aug 2024 at 17:53, Simon Glass <sjg@chromium.org> wrote:
+> > On Wed, 26 Jun 2024 at 02:00, Simon Glass <sjg@chromium.org> wrote:
 > > >
 > > > Hi Tom,
 > > >
-> > > On Fri, 16 Aug 2024 at 11:22, Tom Rini <trini@konsulko.com> wrote:
+> > > On Tue, 25 Jun 2024 at 15:14, Tom Rini <trini@konsulko.com> wrote:
 > > > >
-> > > > On Thu, Aug 15, 2024 at 01:57:45PM -0600, Simon Glass wrote:
+> > > > On Tue, Jun 25, 2024 at 01:38:00PM +0100, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Mon, 24 Jun 2024 at 19:06, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Sun, Jun 23, 2024 at 02:32:00PM -0600, Simon Glass wrote:
+> > > > > >
+> > > > > > > When a test returns -EAGAIN this should not be considered a failure.
+> > > > > > > Fix what seems to be a problem case, where the pytests see a failure
+> > > > > > > when a test has merely been skipped.
+> > > > > > >
+> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > ---
+> > > > > > >
+> > > > > > > (no changes since v1)
+> > > > > > >
+> > > > > > >  test/test-main.c | 16 +++++++++++-----
+> > > > > > >  1 file changed, 11 insertions(+), 5 deletions(-)
+> > > > > > >
+> > > > > > > diff --git a/test/test-main.c b/test/test-main.c
+> > > > > > > index 3fa6f6e32ec..cda1a186390 100644
+> > > > > > > --- a/test/test-main.c
+> > > > > > > +++ b/test/test-main.c
+> > > > > > > @@ -448,7 +448,7 @@ static int ut_run_test(struct unit_test_state *uts, struct unit_test *test,
+> > > > > > >  static int ut_run_test_live_flat(struct unit_test_state *uts,
+> > > > > > >                                struct unit_test *test)
+> > > > > > >  {
+> > > > > > > -     int runs;
+> > > > > > > +     int runs, ret;
+> > > > > > >
+> > > > > > >       if ((test->flags & UT_TESTF_OTHER_FDT) && !IS_ENABLED(CONFIG_SANDBOX))
+> > > > > > >               return skip_test(uts);
+> > > > > > > @@ -458,8 +458,11 @@ static int ut_run_test_live_flat(struct unit_test_state *uts,
+> > > > > > >       if (CONFIG_IS_ENABLED(OF_LIVE)) {
+> > > > > > >               if (!(test->flags & UT_TESTF_FLAT_TREE)) {
+> > > > > > >                       uts->of_live = true;
+> > > > > > > -                     ut_assertok(ut_run_test(uts, test, test->name));
+> > > > > > > -                     runs++;
+> > > > > > > +                     ret = ut_run_test(uts, test, test->name);
+> > > > > > > +                     if (ret != -EAGAIN) {
+> > > > > > > +                             ut_assertok(ret);
+> > > > > > > +                             runs++;
+> > > > > > > +                     }
+> > > > > > >               }
+> > > > > > >       }
+> > > > > > >
+> > > > > > > @@ -483,8 +486,11 @@ static int ut_run_test_live_flat(struct unit_test_state *uts,
+> > > > > > >           (!runs || ut_test_run_on_flattree(test)) &&
+> > > > > > >           !(gd->flags & GD_FLG_FDT_CHANGED)) {
+> > > > > > >               uts->of_live = false;
+> > > > > > > -             ut_assertok(ut_run_test(uts, test, test->name));
+> > > > > > > -             runs++;
+> > > > > > > +             ret = ut_run_test(uts, test, test->name);
+> > > > > > > +             if (ret != -EAGAIN) {
+> > > > > > > +                     ut_assertok(ret);
+> > > > > > > +                     runs++;
+> > > > > > > +             }
+> > > > > > >       }
+> > > > > > >
+> > > > > > >       return 0;
+> > > > > >
+> > > > > > How did you trigger this case exactly?
+> > > > >
+> > > > > I noticed this in CI, where some skipped tests were shown as failed in
+> > > > > the log, even though they were not counted as failures in the final
+> > > > > results.
 > > > >
-> > > > > For most boards, the device-tree compiler is built in-tree, ignoring the
-> > > > > system version. Add a special option to skip this build. This can be
-> > > > > useful when the system dtc is up-to-date, as it speeds up the build.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > ---
-> > > > >
-> > > > > (no changes since v1)
-> > > > >
-> > > > >  tools/buildman/builder.py       | 27 ++++++++++++++++++++++++++-
-> > > > >  tools/buildman/builderthread.py |  4 ++--
-> > > > >  tools/buildman/buildman.rst     |  3 +++
-> > > > >  tools/buildman/cmdline.py       |  2 ++
-> > > > >  tools/buildman/control.py       |  3 ++-
-> > > > >  tools/buildman/test.py          | 31 +++++++++++++++++++++++++++++++
-> > > > >  6 files changed, 66 insertions(+), 4 deletions(-)
-> > > >
-> > > > We should probably do this more generically, outside of buildman. We
-> > > > have scripts/dtc-version.sh and if the system version isn't new enough
-> > > > (and we just need to define whatever the minimum version is), then we
-> > > > build our (not currently that new anymore) dtc instead.
+> > > > That's really really strange, do you have an example log or something
+> > > > around still?
 > > >
-> > > Yes I think I did a patch for that ages ago [1], but it was rejected.
+> > > This happens on snow, which is (maybe) the only real board that
+> > > defines CONFIG_UNIT_TEST
 > > >
-> > > I'd be very happy for it to be applied as I think it is a better
-> > > solution than this one.
+> > > test/py/tests/test_ut.py sssnow # ut bdinfo bdinfo_test_eth
+> > > Test: bdinfo_test_eth: bdinfo.c
+> > > Skipping: Console recording disabled
+> > > test/test-main.c:486, ut_run_test_live_flat(): 0 == ut_run_test(uts,
+> > > test, test->name): Expected 0x0 (0), got 0xfffffff5 (-11)
+> > > Test bdinfo_test_eth failed 1 times
+> > > Skipped: 1, Failures: 1
+> > > snow # F+u-boot-test-reset snow snow
 > > >
-> > > I see that some poor sod tried to do this in Linux this morning.
+> > > For this particular mechanism (-EAGAIN returned by test_pre_run()) , I
+> > > think a better fix would be to squash the error in ut_run_test(), as
+> > > is done when -EAGAIN is returned in the body of the test. I'll update
+> > > that. I cannot see any other way this could happen, but we can always
+> > > deal with it later if it does.
 > >
-> > Any thoughts on that patch?
+> > No, that doesn't work, since the failure counting happens in the
+> > caller. This patch seems to be the right fix, so I'll send it again
+> > with a better commit message.
 >
-> I'm open to re-considering [1] again, but we need to handle the warning
-> problem first. That means...
->
-> > Also I do see one problem. Newer dtc version produce a lot of
-> > warnings, which causes CI to fail. So if we always use the newest
-> > version, people are going to see a ton of warnings when they run
-> > locally. Am I missing something here?
->
-> Well, it would be great to get our Kbuild logic anywhere close to
-> in-sync again with upstream. But syncing up the disabling warning flags
-> shouldn't be too hard.
+> And I'll try and test it on Pi as with the series I posted and so
+> UNIT_TEST compiles on there, I got what looks like the same failure.
 
-Have you talked to Linaro about taking this on? It becomes more and
-more important as time goes on.
+OK ta.
+
+It would be good to get the Labgrid series into -next as it fixes
+quite a few problems on snow for me. It will provide a better base for
+solving other problems.
 
 Regards,
-Simon
+SImon
