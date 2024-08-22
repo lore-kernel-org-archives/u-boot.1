@@ -4,84 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46DD7C3DA4A
-	for <u-boot@archiver.kernel.org>; Thu, 22 Aug 2024 17:11:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56A99C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu, 22 Aug 2024 21:54:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8799A881A1;
-	Thu, 22 Aug 2024 19:11:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 5C07388872;
+	Thu, 22 Aug 2024 23:54:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KM3cQET+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MRTancQG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42713881A1; Thu, 22 Aug 2024 19:11:26 +0200 (CEST)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id B8ED688651; Thu, 22 Aug 2024 23:54:31 +0200 (CEST)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91A4F8897F
- for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 19:11:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F2997885F5
+ for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 23:54:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-7a1d3874c1eso64113085a.2
- for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 10:11:23 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-709485aca4bso922895a34.1
+ for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 14:54:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724346682; x=1724951482; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=36Yf5jRFcPmnP6163EkcSjebiRDfRx2cTNbefeA7PZY=;
- b=KM3cQET+ROEJNLjEDW5qEljtun69K5Ejiod5VQ+i/0JTAyMAIL0vBWVGq53oXxQBNv
- Af3tAWzllO1C9ya7kjjp3hQK3lQTZZonnhb+XYEQFErtwBbi8oOabM6C1dgH+3i3Z9tT
- FgAlswPI61af5xDlQ1XZ5zTtUcd90GxjGLYwg=
+ d=konsulko.com; s=google; t=1724363666; x=1724968466; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=henVfi/Ei6U9tAVdctjiTZC54c+ykQ5FgN4sshsGL7s=;
+ b=MRTancQGVrhLLaiUwO29zvVku67volz6tLlz5jIPxbIFqAaOzy7DjrVZAM9a0NBucN
+ LCCkG7ESCinI9EBoaggHvdtwBMdZMX0EFGD8e+qlicaBYg3uBCShG7fR46+NHn2wZ5Fu
+ G6LfHYBW/1UWW7w7AMPCcZlqmCoZ7YTecX+4I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724346682; x=1724951482;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=36Yf5jRFcPmnP6163EkcSjebiRDfRx2cTNbefeA7PZY=;
- b=xOsnAwuHTqhn0s2MGW20cDvIuMzvppI8S70kBTwE6FKImQ6TfkO6gY6y7yZY9JiNq2
- sz3BoYvUMdA66NCf/BpQIUokuvw45CsvRRiBK7vtDEuJBbJgN/WFY/sz+3pxmqDYbyRh
- O/fhOzgx1dgmOTV7lyON7FuFVBnc42sDKgtzcSdNcNXRWRKoTJiYxiTgXbzlo8f/Q9Td
- qlvu4UwPPWlQLYzQfLNN58TslX/4CJqS1RH3ekqN/YBdaJvguArI41PR3pdBmIrimnHE
- 6dExg/w4B0uWF+AXJa3o0v1pNTG/y+MmH+m5lq+B5ElOrLcD3SySAUYUPtSjXoEbe9FV
- TLeg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVgO0FR/e6dORN7AK3cRTbqwd6YaSQcTrhrnNpcRXLrbEPwsppIzMZw0H0GangKwEAYbKuLrc0=@lists.denx.de
-X-Gm-Message-State: AOJu0YySQUAd9NF0nR37j53KUSD/88pQzGj+hvnB7ERkk20JzjaCNOWS
- 0LJrFTvgIug7VuCrSQ75RAcEjTj7Hkokopinu3NsQbiIouPNrPacAfUYmuhW4pZFCrt34C9uG6J
- NJCC8nekfad3GMwnUg4C3lfdnhYfzW8+8g53+
-X-Google-Smtp-Source: AGHT+IGnU/KJmMlFvB3rU5tBXEmQagDAGArK1L4+I2aHe+Cd+saAQrgVJhX/QLfRYFr5hXQShlbWyojd0VS76gf7hkc=
-X-Received: by 2002:a05:6214:4b02:b0:6bf:6a6a:8996 with SMTP id
- 6a1803df08f44-6c155e279e7mr93543306d6.50.1724346682187; Thu, 22 Aug 2024
- 10:11:22 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1724363666; x=1724968466;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=henVfi/Ei6U9tAVdctjiTZC54c+ykQ5FgN4sshsGL7s=;
+ b=Ka0Uv/SUpDYN1Ox7V/Ji6mVQnaYjzaW7OcTb53shxq6Z38B5iGWAKyLO+upFQVexYp
+ rEIKUcWpV4t4Yw92Rwzlez2XYEYGHhHDNczXVIRc/4O4nBu44le9UTstPgpX5cGqKR93
+ Km6sbYCVBphy3qdCPw4ybLwzWV1mMcD8Z8XBDAywS3PANCD+A+GZwJbeJvCo0bSqjmqD
+ OYblyr80ayJiGAIxMBjcM6J1VXejb0CW293tCkxG1L2iTqbFc4J3tZlN2v6NqX6f5OhX
+ gVIlo9X9+vveuRlbRl8ULnhM9vchVJwT6b05j3RPICKS/2axWSjq1E12P6RS3yBywkdz
+ 0xRw==
+X-Gm-Message-State: AOJu0YzAIGaN5uvtwyLSVayBVl2wVOybnGwpXzH62Cs91ol+eecgIhRw
+ qVsRPXbdIShbxwGyPVYpEGzoZ7jw1BW4lxi8A4ckRWBNKfmZslCtchvAu+45tfU=
+X-Google-Smtp-Source: AGHT+IGXf7QON/mSR+2L6pTSEZKnUKjFILo9ukOT1k5Jh6os1BIY6lbordN2f5HwqsOq/PWaozRFLw==
+X-Received: by 2002:a05:6808:170a:b0:3d9:3649:9087 with SMTP id
+ 5614622812f47-3de2a8b93ccmr225167b6e.41.1724363666428; 
+ Thu, 22 Aug 2024 14:54:26 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-197-236.totalplay.net.
+ [187.190.197.236]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3de2252d3c5sm454527b6e.10.2024.08.22.14.54.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 22 Aug 2024 14:54:25 -0700 (PDT)
+Date: Thu, 22 Aug 2024 15:54:23 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michael Walle <mwalle@kernel.org>
+Subject: Re: [GIT PULL] Please pull u-boot-dfu-20240822
+Message-ID: <20240822215423.GW1626301@bill-the-cat>
+References: <87h6bcdag7.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20240806125850.2316956-1-sjg@chromium.org>
- <20240806125850.2316956-38-sjg@chromium.org>
- <23093165-6af9-4582-8448-7bbae3c86be2@gmx.de>
- <20240807015613.GD1626301@bill-the-cat>
- <CAFLszThhn0240xt1j6GQB9QTKxiHiAg6J3vMXCnHBE15iYZSkA@mail.gmail.com>
- <20240808200634.GR1626301@bill-the-cat>
- <CAFLszThM=23AXCOfZ_uOyGGDQTRurDpAjR-t8X_NHjz4LgQ9SA@mail.gmail.com>
- <20240814175601.GP1626301@bill-the-cat>
- <CAFLszThU+vLUm_fveWUgV3Qt3J+F3=Sr1aBgbc4T5z8zJJz5sw@mail.gmail.com>
- <CAFLszThG_oM4B3beUfOrjXD2-B3sMo44U5-G-J8Eky1uZU=bAw@mail.gmail.com>
- <20240822151322.GU1626301@bill-the-cat>
-In-Reply-To: <20240822151322.GU1626301@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 22 Aug 2024 11:11:11 -0600
-Message-ID: <CAFLszTh=bJ_W7d61OS33+Yo2f_Yk_XAPE5XSH4MjoWucJ9mDCw@mail.gmail.com>
-Subject: Re: [PATCH v2 37/39] efi: Avoid using sandbox virtio devices
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Raymond Mao <raymond.mao@linaro.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="dC5tbWzZs7O5Up6w"
+Content-Disposition: inline
+In-Reply-To: <87h6bcdag7.fsf@baylibre.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,39 +91,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Thu, 22 Aug 2024 at 09:13, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Aug 16, 2024 at 05:53:59PM -0600, Simon Glass wrote:
-> [snip]
-> > > Some notes from a little bit of digging: There are almost 1000 sandbox
-> > > tests (17-20mins), but qemu_arm only runs 62 (2mins). With 'make
-> > > qcheck' it runs about 2500 tests in about 4 minutes. I just got 'make
-> > > pcheck' going again and that is a little faster (2.5 mins). Binman
-> > > tests run in parallel if you use 'pip install concurrencytest'
-> >
-> > While on this topic I forgot to mention that the sandbox tests (~800
-> > of them) actually run in about 10 seconds. Try 'ut all' (although
-> > you'll need my test-fix series to stop it crashing).
-> >
-> > The reason pytest is so slow with sandbox is that it talks to U-Boot
-> > through a pty. Stephen Warren did something clever to stop it being
-> > horrible, but it is still very slow.
->
-> Seeing about addressing this more would probably be very helpful then as
-> most of the runs (by user, I mean) happen via pytest and not directly
-> running sandbox I strongly suspect.
+--dC5tbWzZs7O5Up6w
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Yes, there is a long thread about performance[1] which makes for
-interesting reading these days. We do indeed have >1000 tests although
-it took more than 2 years. The Python approach is indeed quite slow,
-although half as slow as using the real 'expect' library.
+On Thu, Aug 22, 2024 at 02:11:04PM +0200, Mattijs Korpershoek wrote:
 
-I do have one idea that might help, so I filed [2].
+> Hi Tom,
+>=20
+> Please find some fixes for master:
+>=20
+> - Fix crash in BCB on invalid block device (reported by coverity)
+> - Fix booting Android kernel without a ramdisk using fastboot
+> - Fix ux500 gadget driver ops based on CONFIG_USB_MUSB_HOST
+>=20
+> CI job:
+> - https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/22076
+>=20
+> Thanks,
+> Mattijs
+>=20
+> The following changes since commit 0b06e052fb153958d470209dab237f12796cb0=
+da:
+>=20
+>   CI: Update to latest Dockerfile (2024-08-21 09:41:20 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu=
+-20240822
+>=20
+> for you to fetch changes up to e49eeb6575152cac4241f3c87471934a726970e9:
+>=20
+>   usb: gadget: ux500: Do not redefine ops if CONFIG_USB_MUSB_HOST set (20=
+24-08-22 09:23:33 +0200)
+>=20
 
-Regards,
-Simon
+Applied to u-boot/master, thanks!
 
-[1] https://patchwork.ozlabs.org/project/uboot/patch/1447570381-1361-1-git-send-email-swarren@wwwdotorg.org/
-[2] https://source.denx.de/u-boot/u-boot/-/issues/39
+--=20
+Tom
+
+--dC5tbWzZs7O5Up6w
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbHs4wACgkQFHw5/5Y0
+tyytTgv9EbfjlCcVeyDuon+kGZO6nGr+ByiAxCRzi18PNbcwCDKng5u1bYV/TPpt
+RGwlau0SbLVS1TppyyxUmzKpxr2YkMObLnxlRwoykfXb7Xblj/GDNr5RUp+n1i+O
+xjZ74Q62Sp/Uee0hU+aOnEK6I4emKQRMdferLgz2VcUfhiT+uViNFOk5bWVTs7Dm
+S4btjjb9fLhMxPSq9ChxS5VIYmx1V5pRUe3R8HEVzFSyDOFw5NBrb5293Fkh73ON
+pg1SHd4Qt9wUefjjRyztQBA/rrONPEqEjWV2FuKRH8dolu2X/qrdqo0TXLiLJbW5
+oreV4HpAIy6/CrpQJ0k0Z9WHWPvtZJwjJCehyT0BPOgH1RT+KGYYHssLJMzhZ1HB
+ZsF9o/teWJb5KuaFZbnkWc9Ja+ML3IuRNP+KniBLu0adCkvnd7qIu1zC4C9BLKLb
+dgByHx9o7sy5UJBmS2P2RTiFg5S2izIK4P3lU2RricnZ26tBpBX6Ir9jhPC2SoIs
+QHTik1IT
+=eor2
+-----END PGP SIGNATURE-----
+
+--dC5tbWzZs7O5Up6w--
