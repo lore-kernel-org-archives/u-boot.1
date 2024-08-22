@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EF7AC52D7C
-	for <u-boot@archiver.kernel.org>; Thu, 22 Aug 2024 14:14:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC104C3DA4A
+	for <u-boot@archiver.kernel.org>; Thu, 22 Aug 2024 14:15:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05412887D4;
-	Thu, 22 Aug 2024 16:14:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 732B3888FB;
+	Thu, 22 Aug 2024 16:15:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Pp7GHGWP";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kIvpr+eT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA9A0887D4; Thu, 22 Aug 2024 16:14:25 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id D7CD288915; Thu, 22 Aug 2024 16:15:53 +0200 (CEST)
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [IPv6:2607:f8b0:4864:20::f33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A0F6888A0
- for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 16:14:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B01F988651
+ for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 16:15:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-709428a9469so641590a34.3
- for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 07:14:21 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf33.google.com with SMTP id
+ 6a1803df08f44-6c159150ff4so4362336d6.2
+ for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 07:15:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724336060; x=1724940860; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3wnV2lBknLIy5OgzDzERH8qvC2q8wUQXCYQWS81wamw=;
- b=Pp7GHGWPD3XJ4p6RhB20IJIhbjn0BPzv1EhCKQAH70MP+ASpCCAXmtSJ/0npIRpe8G
- w46m5VIgDF9w6NbllRhcAu2FfZaP7cgXx31vtYpV5noWvDaNteLmvesEEOFUo6IEThfr
- bXSDlLUpHeP8fCxEmjvNmHViVLj3nh7rAEYac=
+ d=chromium.org; s=google; t=1724336150; x=1724940950; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZBXlNh0AT7Ukj9hCAf6AUklHjlOxFe3vu8P4EsoMjUU=;
+ b=kIvpr+eTcbtRKgnmU4afZD4XsbdraGkiQU4SfKEoUtWpkvhMQ0JB3wcq+7hY2Sdn7h
+ LTF9u+GWNFFE7XpZQUJqxIuYKa7QMgMhxQxQg/Y6HJrWU/RiJxUAsqbXqTvw9GbtFCIq
+ XH8d5biB/K2S20ubUUmdA/3aEY6wIjmuEl2iM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724336060; x=1724940860;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3wnV2lBknLIy5OgzDzERH8qvC2q8wUQXCYQWS81wamw=;
- b=Nhs26+zMZJ5/4ElXXCgRzWsBNL5AWY/kBFHZprQFt2+UMcw8MBENPuMwhkzmKSyIwv
- vwT6imPAAGAu9JN/MVSVLCKPQZDhusKoCnzjhtNPvGqXnVhxqSqqNlJ6M4RvGehTvdnM
- ylsNWj8mtPCdnf6XdUqFewsPBaFmceHXElJBazBD0wkYxGkyjNdibPAV4kQTmnVuaTGm
- VTrhU4ldavGvoOSuBiVEAK7175l/brTrp4UIBDAkjbEz80GJE+03ZUU5cTVku0Hd4hII
- iyw0yfKmDDuGjcFR63ler8MVu+V2aJWDr4mS6ylPfngdt9JzG7920gxnUVHH2FTMz3TX
- lfyw==
-X-Gm-Message-State: AOJu0Yyb3OjIT5a4S2z4psAChkEqgq8sceVnOnClm8AmSyaNar6S78RP
- amgY2QH5lEHgtOR7VMZOiDV4NzjwML21LRt8fR4JtDzwWUFlOmpW5zOA1SdiHdI=
-X-Google-Smtp-Source: AGHT+IElg0c0mH4nkUOm+cFfHHVlyfr4tFtAP0xDCXAtSHutJlht9bWBYD+9WwX2lbzzlBF9BKJMTA==
-X-Received: by 2002:a05:6808:338a:b0:3d6:3450:7fe0 with SMTP id
- 5614622812f47-3de22fd31e7mr2260972b6e.9.1724336059753; 
- Thu, 22 Aug 2024 07:14:19 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-197-236.totalplay.net.
- [187.190.197.236]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3de2256d788sm291226b6e.25.2024.08.22.07.14.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Aug 2024 07:14:19 -0700 (PDT)
-Date: Thu, 22 Aug 2024 08:14:17 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: u-boot@lists.denx.de, u-boot-custodians@lists.denx.de,
- u-boot-board-maintainers@lists.denx.de, Claudius Heine <ch@denx.de>
-Subject: Re: [ANN] U-Boot v2024.10-rc3 released
-Message-ID: <20240822141417.GS1626301@bill-the-cat>
-References: <20240819231535.GK1626301@bill-the-cat>
- <CALeDE9NvYUqCsv8L4NurYtBfe4VxF2p-+_qG85EphP8YKhYWWA@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1724336150; x=1724940950;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZBXlNh0AT7Ukj9hCAf6AUklHjlOxFe3vu8P4EsoMjUU=;
+ b=foWSmaTFXjfjfIi4FqJN3QuJL2bHFpqLhFgxSTa+saPyvmEoMhVVktQwswaARej/9V
+ F+j2MXMApKPS6EjXxLXIdJ9b7fN2dpkz5M1FpoVtnW5oc0lwSfvzRN3oQvLQAWHTBaWa
+ 8gppcZsyOlxkeeTWYy7lgyU/2uEO8RnKHsTEY3DlKdI1bT87v5kDPVYTCECNNJv6nei1
+ LxtEfS9hGO77RgZnNQIW0fwo9eyClZlvGpqwS5BXB4tDgTn12q0vwuSUnStzDw8pZGq4
+ pCvxiDNzDoe6t5f1+JgatQx+/8H2kZP8m6zu9ZNCiGfl4/b36FFHsDbGeK+fA8DPUIH+
+ 6RCQ==
+X-Gm-Message-State: AOJu0YwuvY/+rlu8TplwmNBFJ2VTGeS7IZESxWWzKN51wXqFZ2INW1KS
+ 4PmEYkI7geM58TXJGrpk3C0v5tWcQM40Oua9cT2EQIX7q20zD4UTk9e7DSIHKZ4Vxs6ShjmshWJ
+ cToynlRLbwJeOQcJ6/vuLNA6RARfepF0OfKtJ
+X-Google-Smtp-Source: AGHT+IG2A2wZIbHxMrCR1mKCWA+zGgOSDw4i8D80JyHUq+QRkIYef7/EkZN/hi/dwG1rSXXxsFL9LRIFWiQuqRj4WWg=
+X-Received: by 2002:a05:6214:3a81:b0:6bb:8e2f:bd4a with SMTP id
+ 6a1803df08f44-6c16479b6f3mr16520346d6.38.1724336150561; Thu, 22 Aug 2024
+ 07:15:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="diAWQJU964O/5+Uj"
-Content-Disposition: inline
-In-Reply-To: <CALeDE9NvYUqCsv8L4NurYtBfe4VxF2p-+_qG85EphP8YKhYWWA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240815195746.749042-1-sjg@chromium.org>
+ <20240815195746.749042-3-sjg@chromium.org>
+ <20240816172237.GA1626301@bill-the-cat>
+ <CAFLszTh1Nig-hs+Gtxzg8f-=vE1z4BvNSfEyUGtatZohj0pnuQ@mail.gmail.com>
+ <CAFLszTgufCxvXjJupqDphcGwJ0gfvrYxQACK3kYRKaumpKgrYQ@mail.gmail.com>
+ <20240822141013.GQ1626301@bill-the-cat>
+In-Reply-To: <20240822141013.GQ1626301@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 22 Aug 2024 08:15:39 -0600
+Message-ID: <CAFLszTgPBO9dO9za2KaJKhp2Xq5RD3x6vCQs7X5i5KiF_tT-Cw@mail.gmail.com>
+Subject: Re: [PATCH v3 2/3] buildman: Allow skipping the dtc build
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Brandon Maier <brandon.maier@collins.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,54 +89,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---diAWQJU964O/5+Uj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Aug 22, 2024 at 08:19:12AM +0100, Peter Robinson wrote:
-> Hi Tom,
->=20
-> > It's release day and here is -rc3. Things have been mostly quiet, and
-> > with the -next window firmly open I believe things should remain quiet
-> > moving forward.
+On Thu, 22 Aug 2024 at 08:10, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Aug 21, 2024 at 09:00:25PM -0600, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > In terms of a changelog,
-> > git log --merges v2024.10-rc2..v2024.10-rc3
-> > contains what I've pulled but as always, better PR messages and tags
-> > will provide better results here.
+> > On Fri, 16 Aug 2024 at 17:53, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Tom,
+> > >
+> > > On Fri, 16 Aug 2024 at 11:22, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Thu, Aug 15, 2024 at 01:57:45PM -0600, Simon Glass wrote:
+> > > >
+> > > > > For most boards, the device-tree compiler is built in-tree, ignoring the
+> > > > > system version. Add a special option to skip this build. This can be
+> > > > > useful when the system dtc is up-to-date, as it speeds up the build.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
+> > > > >
+> > > > > (no changes since v1)
+> > > > >
+> > > > >  tools/buildman/builder.py       | 27 ++++++++++++++++++++++++++-
+> > > > >  tools/buildman/builderthread.py |  4 ++--
+> > > > >  tools/buildman/buildman.rst     |  3 +++
+> > > > >  tools/buildman/cmdline.py       |  2 ++
+> > > > >  tools/buildman/control.py       |  3 ++-
+> > > > >  tools/buildman/test.py          | 31 +++++++++++++++++++++++++++++++
+> > > > >  6 files changed, 66 insertions(+), 4 deletions(-)
+> > > >
+> > > > We should probably do this more generically, outside of buildman. We
+> > > > have scripts/dtc-version.sh and if the system version isn't new enough
+> > > > (and we just need to define whatever the minimum version is), then we
+> > > > build our (not currently that new anymore) dtc instead.
+> > >
+> > > Yes I think I did a patch for that ages ago [1], but it was rejected.
+> > >
+> > > I'd be very happy for it to be applied as I think it is a better
+> > > solution than this one.
+> > >
+> > > I see that some poor sod tried to do this in Linux this morning.
 > >
-> > I hope to remain on schedule and that means the rest of the rcs every
-> > other Monday, and with final release on Monday,  October 7th, 2024.
-> > Thanks all!
->=20
-> There's an issue with the tar ball at https://ftp.denx.de/pub/u-boot/
->=20
-> It's onlt 11Mb and there's no .sig
+> > Any thoughts on that patch?
+>
+> I'm open to re-considering [1] again, but we need to handle the warning
+> problem first. That means...
+>
+> > Also I do see one problem. Newer dtc version produce a lot of
+> > warnings, which causes CI to fail. So if we always use the newest
+> > version, people are going to see a ton of warnings when they run
+> > locally. Am I missing something here?
+>
+> Well, it would be great to get our Kbuild logic anywhere close to
+> in-sync again with upstream. But syncing up the disabling warning flags
+> shouldn't be too hard.
 
-Oops. I had some local connectivity issues right then, but I thought it
-completed. I've re-uploaded it now.
+Have you talked to Linaro about taking this on? It becomes more and
+more important as time goes on.
 
---=20
-Tom
-
---diAWQJU964O/5+Uj
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbHR7kACgkQFHw5/5Y0
-tyz7GQv9HlBhHJtTDSdX8N2FjE2fTjkOsA90pLMePGvZ08SguLYj4bBZ54wUo3Ax
-lFEprSCX3DMTyfHoybBveVm6OGh5GP1RCaoxXw1iZKbmRceK/pF48hfN/VTBGJ8W
-ag/MNtgrgkiY9CsXRdEofcMj6ETgGq0yg4EJx9ikU43OR3VlONkIwYzbQ8RUohGq
-dGqFmXFx3ewaXXsuPnhTew6WoADRoPd0T2fMzdsb+GQKt3/7hCNDfArEWxcwgJTi
-J5afb2ZZ5/nTtDHHyCpB/6BYI8+7ZsFqjrR44qvuEXXEUDr8cHIYYwIZmb/jQDvi
-b9HqL+8ptDNaXoKi4JNGmJImvREQyiPiHv7f3Yda+jhV6ra/PHsBwUt6wFxlvPdj
-H0EVLWpeuLCaugjPcqX02S+MmsdUuAuRMpSFHqbLu/hWvGY7HAQfGyL5bYPr9I3d
-PhMxvQnqOD77rOXORhrYetD9A1UnKx4tYlkeR29uTgP1LWOihqAo2ayubu9BRafZ
-UGC5EUXC
-=r0R2
------END PGP SIGNATURE-----
-
---diAWQJU964O/5+Uj--
+Regards,
+Simon
