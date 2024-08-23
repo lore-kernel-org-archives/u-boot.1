@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52B4AC531DC
-	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 13:54:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12FFDC52D7C
+	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 13:54:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 978D788C9D;
-	Fri, 23 Aug 2024 15:50:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E8B8E88C4A;
+	Fri, 23 Aug 2024 15:50:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="h+4AdGH6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GpMQovna";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1A7488C6A; Fri, 23 Aug 2024 15:50:15 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id A21B488C70; Fri, 23 Aug 2024 15:50:16 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8927E88C70
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 15:50:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A97D88C90
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 15:50:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-37196786139so1035574f8f.2
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 06:50:13 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-428e0d18666so15104705e9.3
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 06:50:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724421013; x=1725025813; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724421014; x=1725025814; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0tGrz+fyPkE3vdcLjdOdpujgl7dYrT2sQnfYMflACoQ=;
- b=h+4AdGH6jszR5YoutpkFbgGFxuX/BruNyHkGgXzbv13l3O/UVmPf4yHIP2Lr71dyiy
- WyJxrk6yb4fOeYnvixDafpXf43bVRuMRaGEHjzcgyB8gM4BvQfxl0LwUeFC8TXdpHk55
- c8In8xiqEPap5GuTH1TRXLt3wKtH/SoSrafQ2Yx2uD8zDiZSRbOKYQrhvhDDz75T2mlH
- 2HkJISredVdjpTKnVRIrPPqPTSdfeZRnR6sQGRIwu92zw8D41WzOEZUQ3CpbD077H6nm
- L6JLS5kjIo4qlm5VO5+aO+TLoGuyHiWRjS7dmYid3Xke6WJ5hbN1jVWOw9/uNE7nS/gy
- ZUeQ==
+ bh=rapHq8mT0Fevrq/9JxTGXRXySaMIV1ZV1VBfbr90Q3k=;
+ b=GpMQovnaZ+W/+EG3QtKwuC1h5pLn/93M4HEYMRXgYqo6yGS0spf2Rb2iKqto9bZg6y
+ Z1BtOPiwVEmEGmmh/fh8C+ciEDHENlO+kNZV0iLfIy65ZPLrqq9QfNFIExnc18q9B2WK
+ b5iQET+SQIEx4cyqU+7SfcXgP5Z/xhgd6+y7GNZACPDcxnzPiqtV2hKen1UBX69M8ZoP
+ 5Vj5FopOqu2DN9ghf1vygwkRu168eyq4dbuhZaC0Bl/2O9PQBLy8Mo7eqJrtXoNpFFtO
+ Tg4nt6GeZ+CrCQ4S3V+v9LkaAUhD/aHGBBT5jDg/8ct/tQg4CZeDq5lXtukvR6E62psh
+ qTwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724421013; x=1725025813;
+ d=1e100.net; s=20230601; t=1724421014; x=1725025814;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0tGrz+fyPkE3vdcLjdOdpujgl7dYrT2sQnfYMflACoQ=;
- b=aVOWahkXcbK6eHU3dgU7r4ISshJqae01ZsYZSXWJ9kSSVOAwr8L/BRtL3IpyC3if0g
- byN2kxb/fxzLhVCUbGP9Ymo+yxJFHORj9PRFlsrCgHQE52/Jv6xMnDtDRSDT0xqWhMEL
- N0BhqkoEVdYXGsItRlHX89cNDRv6XqIbCxooFZvTOGa7BTSN+NV20Ci+iPlY9+xSI5Im
- /8xo81nTyUjC7CEsqJh7f5q6CGqbjh1jYqLazbVHoqPXaaD8dIJflsXCulc5o6bWBhUG
- LoobS0A/Q5l1V8/Fj2GtsLcH1gbVqQwVNKHs5Pjkb4TKQ8QQ8BsDclDVraCXhtKj0Um+
- +fmQ==
-X-Gm-Message-State: AOJu0YzpbagZGycY1W0mvm0paB4neQjb3BJ/ySbKHc2aolmYQlv3jTIl
- ohg6M1/Eog4g9nJYvAEbcx/u3AJcDnH8DYBVAiOqnHvH8grlKcB77uiZRal5Ii+ljfg7Qpt8hnG
- WNMgVvUDs
-X-Google-Smtp-Source: AGHT+IEeRd1aV6wIarSU9SNmbvP+szku0cK8mWqLSYzXpRXx2oZcIy6IRzjKyIJdqLAtb1bMovfjHA==
-X-Received: by 2002:a5d:61c2:0:b0:368:3f5b:2ae4 with SMTP id
- ffacd0b85a97d-3731187db65mr1528871f8f.36.1724421012659; 
- Fri, 23 Aug 2024 06:50:12 -0700 (PDT)
+ bh=rapHq8mT0Fevrq/9JxTGXRXySaMIV1ZV1VBfbr90Q3k=;
+ b=psrNOf9DTwh0Swho2zOrHrXj1KRq1BIs51K4ewiHxd3pP3vdWc1osdfgqgWIlEgN1d
+ 0SmFdS51FXna4Lk41GhrQM9VwL+QUY2DJBsQDwXH0k1GItWlulGw3iHb9S9LDrA04XpF
+ xjOrwa50gmJLUpXBzyvBkIQzeIdA72NpkTLwzNd1CWyHi9YU5UkVitj/oq7MNphuZpQ7
+ 3R/lWysZqYFWd00xy53DA+wWaDh6Wt777bYfcetJy/EHOL+7LyoC02U1+5ZgQW9nAMPO
+ lH1uodG6tpAgbe4UEMRROVucWtgI1Ykk5ii27qldb8ITEnSCgjzjNxCRqvqkzW0wzesu
+ 7lVw==
+X-Gm-Message-State: AOJu0Yxo4xAkHqXo/Wh6uiNHCt9JX0ONo1o7tDIKVkFcSb6gJmZT5X3t
+ /Imw34GSVOCGAOh9KApf0IVu3e1gCuaLmCw/BK79HbRRb6V0SNrKSnwaz4O3GTi/wOszJnTgpLB
+ wRuexSnvI
+X-Google-Smtp-Source: AGHT+IGGWeq5tFcYGiEzkFHFTCa/e4grJwTltEywjGY7fSFyvWR5CfQ8NFizp8zSEjiMGVPz5CMw1w==
+X-Received: by 2002:a5d:6d06:0:b0:367:8fc3:a25b with SMTP id
+ ffacd0b85a97d-373118e551emr1627876f8f.42.1724421013698; 
+ Fri, 23 Aug 2024 06:50:13 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:e668:dc94:35c7:8064])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-373081ffb40sm4201665f8f.76.2024.08.23.06.50.11
+ ffacd0b85a97d-373081ffb40sm4201665f8f.76.2024.08.23.06.50.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Aug 2024 06:50:11 -0700 (PDT)
+ Fri, 23 Aug 2024 06:50:13 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -72,18 +72,16 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
  Anton Antonov <Anton.Antonov@arm.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH v9 32/37] MAINTAINERS: net-lwip: add myself as a maintainer
-Date: Fri, 23 Aug 2024 15:48:36 +0200
-Message-Id: <dc82acd262bbbb216f8623643ebc2d806f05e26b.1724419624.git.jerome.forissier@linaro.org>
+ Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v9 33/37] Kconfig: fix undefined symbols (g_dnl*) when
+ NET_LWIP is default enabled
+Date: Fri, 23 Aug 2024 15:48:37 +0200
+Message-Id: <49c9454c4ee803376d59233a712ba04df98b9ec5.1724419624.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1724419624.git.jerome.forissier@linaro.org>
 References: <cover.1724419624.git.jerome.forissier@linaro.org>
@@ -105,39 +103,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add myself as a maintainer for the lwIP network stack integration code
-and network commands. The library code itself (i.e., most files under
-lib/lwip/ except README, Makefile and integration files in u-boot) is
-unmodified from upstream and therefore does not need a maintainer.
+Fix for link errors on am62px_evm_a53and other platforms when NET_LWIP
+is enabled:
+
+ common/dfu.c:34:(.text.run_usb_dnl_gadget+0x68): undefined reference to `g_dnl_clear_detach
+ [...]
+ common/spl/spl_dfu.c:29:(.text.spl_dfu_cmd+0xb0): undefined reference to `run_usb_dnl_gadget'
+
+- DFU_OVER_USB compiles common/dfu.c which calls g_dnl_clear_detach()
+which is implemented in drivers/usb/gadget/g_dnl.c which needs
+USB_GADGET_DOWNLOAD
+- SPL_DFU compiles common/spl/spl_dfu.c which calls run_usb_dnl_gadget()
+which is implemented in common/dfu.c which needs DFU_OVER_USB
+
+Therefore add these dependencies to Kconfig.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- MAINTAINERS | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ drivers/dfu/Kconfig        | 1 +
+ drivers/usb/gadget/Kconfig | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 2050ae24df8..cbd59d17e4f 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1351,6 +1351,17 @@ F:	drivers/net/
- F:	include/net.h
- F:	net/
+diff --git a/drivers/dfu/Kconfig b/drivers/dfu/Kconfig
+index d034b501360..7de629f103a 100644
+--- a/drivers/dfu/Kconfig
++++ b/drivers/dfu/Kconfig
+@@ -8,6 +8,7 @@ config DFU_OVER_USB
+ 	bool
+ 	select HASH
+ 	depends on USB_GADGET
++	depends on USB_GADGET_DOWNLOAD
  
-+NETWORK (LWIP)
-+M:	Jerome Forissier <jerome.forissier@linaro.org>
-+S:	Maintained
-+F:	cmd/net-lwip.c
-+F:	configs/qemu_arm64_lwip_defconfig
-+F:	include/net-lwip.h
-+F:	lib/lwip/Makefile
-+F:	lib/lwip/README
-+F:	lib/lwip/u-boot/
-+F:	net/lwip/
-+
- NIOS
- M:	Thomas Chou <thomas@wytron.com.tw>
- S:	Maintained
+ config DFU_OVER_TFTP
+ 	bool
+diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+index 03fe3bca197..ce9364c3172 100644
+--- a/drivers/usb/gadget/Kconfig
++++ b/drivers/usb/gadget/Kconfig
+@@ -324,6 +324,7 @@ config SPL_DFU
+ 	select SPL_HASH
+ 	select SPL_DFU_NO_RESET
+ 	depends on SPL_RAM_SUPPORT
++	depends on DFU_OVER_USB
+ 	help
+ 	  This feature enables the DFU (Device Firmware Upgrade) in SPL with
+ 	  RAM memory device support. The ROM code will load and execute
 -- 
 2.40.1
 
