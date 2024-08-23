@@ -4,99 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3864FC5321E
-	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 21:57:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8969AC5321D
+	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 21:57:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEDB588C10;
-	Fri, 23 Aug 2024 23:57:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 1CEBD88210;
+	Fri, 23 Aug 2024 23:57:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HqHDgKBr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SFG7psYC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B87488C73; Fri, 23 Aug 2024 22:48:35 +0200 (CEST)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id AAFEC88549; Fri, 23 Aug 2024 23:57:29 +0200 (CEST)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C21588BB8
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 22:48:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 53D11881A5
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 23:57:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-81f96ea9ff7so116978439f.3
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 13:48:31 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-44fe11dedb3so13663851cf.1
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 14:57:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724446110; x=1725050910; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ews+L2zO+wvLUWJVybnPdB7R7SVNvQa9C4LJkBGzLXY=;
- b=HqHDgKBrGIZoWIuETMnLwAFvVa2s6cNljUaXDIb+2LJM0HrfvzqeSoMxDodXs45Kld
- IRZ9K2EqpibxR+Tb576Zmwr9Qghjd+uLw4Woxfcm5p4J3/XV7t+gP7haExX1xYgqL+Su
- Hfq4iG3IZD4kjPQAG274J54seW9wr17pXuBCQ=
+ d=konsulko.com; s=google; t=1724450246; x=1725055046; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ipgfZT3H8axfvatePyqRHFYlMC+ddrhZqzhPbptYBXM=;
+ b=SFG7psYCuXpOBVShtB/d+gvaOtVYS6GuH8wfJB6ZJw+0ku02Be266SnRCfjQf1p++v
+ E6YFBSMaKzEeZfArq+WCPeV7HW20ew67xngHSE1h/lC9x1UgIyFfllh0QyS6haLNXWLH
+ rceTSKK6UJ6Wa9aDlPHBisFv1IYaMgWyVMvfs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724446110; x=1725050910;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ews+L2zO+wvLUWJVybnPdB7R7SVNvQa9C4LJkBGzLXY=;
- b=cBEZQCOoaBnC6+r50NxrKdIpRC5t6RaEG5EkK9UUmj37Mqs9isOZxS7BuuuBq531Id
- Ab3RrAbbMPd7DozzsdY030qIaqwv7aHiGedfjEgXaPuV8gjzeBoLMq8z1iQ2tYMqQNxV
- qPxpJbRgNr682QHkKqOM7d8H7LNhD7s7rf+LnOK/Mm+YAOiYl8QTUtU97Wjzh41qSZmt
- 1opVkLaDQfYy/vFmN9hgcdWxxaIS6m+OtuYgAtJvBtG0CWau5Nnc8phv7nSXi8XKhYWq
- NIWxtM6Sdqvz7zkmc5+34rsdLuFYs7SsE5i5mcPrtLb33LA1Zkn5ZL/29Ho4t/jW/d2p
- GLtA==
-X-Gm-Message-State: AOJu0Yx1KQTSKtX203G/ii8RTTOT7CJ+75fRAsMEGVVc171PsxhR1FOq
- BhDMYjaoC2O7+9G1Mxestfe17Zq7NWkjg+vPrU5u1TrkDluDCwgmvmQeKTQVJPAidzNWnrV+OWo
- =
-X-Google-Smtp-Source: AGHT+IGt/Z25DwHG5vZVteDK0IXXEbenr/jJzjwyLhIkHyNC0iTqfcCidyKGRCFmohR7DqzdsN37yg==
-X-Received: by 2002:a05:6e02:1547:b0:374:a781:64b9 with SMTP id
- e9e14a558f8ab-39e3c989d00mr35672165ab.13.1724446109843; 
- Fri, 23 Aug 2024 13:48:29 -0700 (PDT)
-Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
- [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39d73e67addsm15698375ab.4.2024.08.23.13.48.28
+ d=1e100.net; s=20230601; t=1724450246; x=1725055046;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ipgfZT3H8axfvatePyqRHFYlMC+ddrhZqzhPbptYBXM=;
+ b=rg2h7bRt+Vc6mQUQI9WbtFp0a/Uokc8md00GzbmOr4QJ/S37CiJZKTHjLwFFIt+TVU
+ 5Szh5y8bnF1OGMohOB2dz4YkLhaSv4LGUG3YxvfxENet4s6FufKKfc2j5yep3+6+hLkf
+ g4ppz9rJNe47/6w2sVjaFkY1lmg6N/Mnu4ZeC3iHT+ouVfsC7FSLts8MOZGhTYo4UYLX
+ Csy+onldscc7I8EsL5gHUq5i3Ux/260qFehXE1dg43NEsbFqPsflDhhohrApWDHBE0mQ
+ 6xhSJv3RNN1IHxMeL1GIswAekVmTBP42voT8lYPT3LYQiiPiIE3RAaYxFaxNGgHFvTz2
+ l5LQ==
+X-Gm-Message-State: AOJu0YzTrWYtQWAdR8FFV8oEoXE2QTCQ+GsM/Dly2MkIY6ts+gWTSGDJ
+ mChrqa2PGxO59L9ZAOAhvw1GSlg5JJHjSPcVi1SBAH0t2KwqoBmgT/5T7ZfQyLY=
+X-Google-Smtp-Source: AGHT+IF5D8XcOsxwFSvo3GRNv9cg5YlKEzVKXFdF3+HbeCOajqqD1F8iYEN1bwtmIqElc6zglWzNdw==
+X-Received: by 2002:a05:622a:488f:b0:44f:a251:2c05 with SMTP id
+ d75a77b69052e-45509d59828mr48462831cf.59.1724450246011; 
+ Fri, 23 Aug 2024 14:57:26 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-454fe1968a6sm21243651cf.61.2024.08.23.14.57.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Aug 2024 13:48:29 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Andrew Davis <afd@ti.com>,
- Bin Meng <bmeng@tinylab.org>, Bryan Brattlof <bb@ti.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?= <csokas.bence@prolan.hu>,
- Dragan Simic <dsimic@manjaro.org>, Eddie James <eajames@linux.ibm.com>,
- Hans de Goede <hdegoede@redhat.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Janne Grunau <j@jannau.net>, Jesse Taube <mr.bossman075@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Johan Jonker <jbx6244@gmail.com>,
- Julien Masson <jmasson@baylibre.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Ramon Fried <rfried.dev@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Stefan Roese <sr@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
- =?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
- Tony Dinh <mibodhi@gmail.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: [PATCH v2 0/8] bootstd: sunxi: Migrate to standard boot
-Date: Fri, 23 Aug 2024 14:48:16 -0600
-Message-Id: <20240823204824.443631-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
+ Fri, 23 Aug 2024 14:57:25 -0700 (PDT)
+Date: Fri, 23 Aug 2024 15:57:22 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [GIT PULL v2] Please pull u-boot-imx-next-20240823
+Message-ID: <20240823215722.GD2479150@bill-the-cat>
+References: <20240823194052.3978150-1-festevam@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 23 Aug 2024 23:57:01 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="VWLHAIS8APe/BQP7"
+Content-Disposition: inline
+In-Reply-To: <20240823194052.3978150-1-festevam@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,41 +89,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series attempts to migrate all sunxi boards to use standard boot,
-along with a text environment.
 
-Changes in v2:
-- Add new patch to resolve BOOTSTD->BLK recursion with Kconfig
-- Put the FEL bootmeth before all other global bootmeths
-- Convert the other DISTRO_DEFAULTS in the Kconfig too
-- Keep BOOTCMD_SUNXI_COMPAT
-- Keep bootcmd_sunxi_compat if OLD_SUNXI_KERNEL_COMPAT is enabled
+--VWLHAIS8APe/BQP7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Simon Glass (8):
-  blk: Make functions available unconditionally
-  bootstd: Avoid calling unavailable block functions
-  bootstd: Avoid depending on BLK
-  sunxi: Add a bootmeth for FEL
-  sunxi: Move to bootstd
-  sunxi: Drop old distro boot variables
-  env: Provide a work-around for unquoting fdtfile
-  sunxi: Move to text environment
+On Fri, Aug 23, 2024 at 04:40:52PM -0300, Fabio Estevam wrote:
 
- Makefile                                      |   1 +
- arch/arm/Kconfig                              |  10 +-
- board/sunxi/sunxi.env                         | 152 +++++++++++
- boot/Kconfig                                  |  16 +-
- boot/Makefile                                 |   1 +
- boot/bootdev-uclass.c                         |   3 +
- boot/bootmeth_fel.c                           |  81 ++++++
- .../gardena-smart-gateway-mt7688_defconfig    |   1 +
- doc/usage/environment.rst                     |  12 +
- include/blk.h                                 |   9 +-
- include/configs/sunxi-common.h                | 238 ------------------
- 11 files changed, 278 insertions(+), 246 deletions(-)
- create mode 100644 board/sunxi/sunxi.env
- create mode 100644 boot/bootmeth_fel.c
+> Hi Tom,
+>=20
+> Please pull from u-boot-imx/next, thanks.
+>=20
+> The following changes since commit e93d343cc7d2886b1148d885aa137d46bbce05=
+70:
+>=20
+>   Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boo=
+t-samsung into next (2024-08-22 08:15:04 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
+-next-20240823
+>=20
+> for you to fetch changes up to dda8444832ce32e0bdb9a05e2e90a7dc9f8663ca:
+>=20
+>   ARM: imx: Enable cat and xxd commands on Data Modul i.MX8M Mini/Plus eD=
+M SBC (2024-08-23 14:53:53 -0300)
+>=20
+> u-boot-imx-next-20240823
 
--- 
-2.34.1
+Applied to u-boot/next, thanks!
 
+--=20
+Tom
+
+--VWLHAIS8APe/BQP7
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbJBcIACgkQFHw5/5Y0
+tyw8KQv6A45HW7f/dRPtrK9/S0M4ARIBEsDGe1na4cOIIQRpzD80XM+11kW9j46A
+5XjtZjVnh3mG4//qwz1RTisB72DcqtqJ0oxy0Z+bDaLNsVpvb06fTnopuOgjo2ml
+9sFLU9XjgANEzny/VnzQdHC6uo/k5HNDExaRze6jsJp+axFbC4rEMBz62OiukOCq
+ultQQiH2mhMgJeyjdpLS+hn/OSoUrKHk+KOCi99rYJQa3e7ZuGhEFvmqSqFrsChi
+I0vvIHAp0R0yScu7/vRVC+Q9MfO6wKtbnSFsb/aIFPcOE/UToLSIXz6S/oMq94dQ
+3hDjn4np3YBFR5yV+IuLnX7zjrUw6kmreLqmFPQYW5k328jjweFXrc1FDGotayf6
+QnNTDv6i5Pd81mPJMBfZw1GXSiUyLNNIhtAlaRc/hL5CFFkbyLwgrdt0IFZNlTBv
+lpCNcTMFKHMdIqy11pBs+9ovNCjRnHymJo1vDuJN9B0GlhHhMZOxDO4lrqjWda37
+MJdGNh/W
+=DvgD
+-----END PGP SIGNATURE-----
+
+--VWLHAIS8APe/BQP7--
