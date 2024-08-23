@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BF85C52D7C
-	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 07:51:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAA74C531DC
+	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 08:10:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3D228860D;
-	Fri, 23 Aug 2024 09:50:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2A50F885C5;
+	Fri, 23 Aug 2024 10:10:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gZFtMIbF";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="CmCYHgzs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBF1C88670; Fri, 23 Aug 2024 09:50:57 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id A872A886B1; Fri, 23 Aug 2024 10:10:40 +0200 (CEST)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3E928852E
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 09:50:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C9FB884C3
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 10:10:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=promsoft@gmail.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-5dca00a72easo1282822eaf.2
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 00:50:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2f029e9c9cfso20423831fa.2
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 01:10:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724399454; x=1725004254; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GFEMU9lR1Yha7FuFiBaJJB/faj42JwL5wN6nuK2K5yk=;
- b=gZFtMIbFoOXeqS1FJnGI8i1fK41Itc4GFqQwbJRiCFJo2/IKCxA4/9kXkrj6VB/R5c
- uuPy8srUY8h03OG7vsTTh/4Rrt+/sJewM832Pyeakeq611ZZTHfoL7pYRoLAeRha9Hda
- yR6Mv9zgR8e21bBlzu7bMYmCwdSQHnqxmKlA0wikr0fGsq0YLIunQeIlEHPLHYCLVJEf
- WwAHxZAikxCyuXHF/C6Ls25P/UhDEHfg8nSIoj3y3DSpLWZ11A0LLbHwP3KpWeAcnCDn
- GZMGBvTbFhKWBOhxG+VtSMZ8tIX9JrktZxQHtU/HFjDHlq25MaMO+kkgm1WfDJL6jvdw
- duEg==
+ d=amarulasolutions.com; s=google; t=1724400637; x=1725005437;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RzJK3iM0w8U7WyyNHLMy+vVzW9roXN6bQ3bF10Diwic=;
+ b=CmCYHgzsA9vYDO9UOOyGmtts0zJjL4m91oNMGZpXjsZ7Ia+r5CMYVP5GRxYWV/m80X
+ aBrMEQBeNZuLKUPi0pPLthDbxcIaB6UjjlTXGnpRM5y2rpvm0vjTBhbbwy2Ds4w14gyG
+ YQsWB8dWyYoVOuLKwpjL8JZLs4jal7yVKzEg4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724399454; x=1725004254;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=GFEMU9lR1Yha7FuFiBaJJB/faj42JwL5wN6nuK2K5yk=;
- b=iD3sQlLmjjbXZr3NlwSZWQ/yTuFVxLIIrcqA4qUw4TUl1RZkBbNG5O7P46AC/Kr4ua
- 4rqWmnvQcAZoAho09u7JYqIV3jE8Zve9GB7grXO2/ZT6SnzXPe51CB/YHYXhMKaCrwzT
- Qn6CnN9znrLPsX4dRERMqOL6zTnlAk0WXZc8DuV7i7h6YqlvvJcWqYZFpDvTI8t1w0DS
- 9GuXYxEEuWsAY1FZsdwVgzYrH5mgCAMiOdzweDi0PaubJSReUp2zZwPZj60TK8deQom6
- +VdDJO3Bo8qbbj4cgd7y1eHbXIi+vSZvA4tWdRa0I3BzxcHhptDkmNdo5hdG2/Vewobx
- uGug==
+ d=1e100.net; s=20230601; t=1724400637; x=1725005437;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=RzJK3iM0w8U7WyyNHLMy+vVzW9roXN6bQ3bF10Diwic=;
+ b=AZatfUyVjZkbq8Ta8qpv/jgL3NsJBNlR87vJmAQDJG/+FVYkbkXR/kPyGaKfdJWfXQ
+ X3rRTG503DcV+SyI0rqULhpH6Eh436ZQtfZYbuXLUHw0vmfu8r0F7oe0CJLqHcOI3Qw7
+ EQb3nYfabakx6NW4xCDnG350Pur2Uk6tClN0ilyGHBiaQaEbqML8yeLHxSyNLYVuAVl7
+ +h67y9G494khzvSQdTHko4mHYpXZ+5OiOmWjQyvS0XqSAIcT8KBWb62dJ344xMxVaMSf
+ jzlBWaA4zRNrzYpO8ni2lqQafIkHeZ9mgW7/2AVrjXhlU8XDC9G4XyiQ6ZnTb/Pvb5Zh
+ aGuQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUvtt7BTvLuBI8Ecx7T9CYr0p4ucQeRE7eoXYkldOeFduND9Y6aJ9Ufblsr6To5o3at5ROCW7s=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz9rAU/NzPCqHMCvDf5L4PrFETbwIp5/gvco9jj2dhWyooNi9GQ
- PX6ncRe2HXHI4MRHpoDYpob+iBj6L9DVvVIENydsCT7fDfg28bANyxVIElg1MGKh9OZOUBTkvWR
- dR9JJFSP69WpzVUU57mEYT3cPLJk=
-X-Google-Smtp-Source: AGHT+IFg9egkKyvrAa6gKwHP+COGLJv9hfmbcdf7qq1OC7UgukYr7zTSsXlKCSerskQ5QRhSopRrdIIv9v8ypCLEA9o=
-X-Received: by 2002:a05:6871:582a:b0:270:62ba:ff5c with SMTP id
- 586e51a60fabf-273e64dfb40mr1546523fac.25.1724399454377; Fri, 23 Aug 2024
- 00:50:54 -0700 (PDT)
+ AJvYcCUy57cUuRgJZOWUrSWmOFZ00FmWx2IT9DxTjUJV9LV1IoZr3gzYbCIIGzOSOaKmbLCxkY9RndI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy+i4bNGPR+LOHLDKshDS+lrMIBn9IrmDtJymjYJIANHCOXK3O3
+ kL5JZmHH7URsT9a5nIpSeT8LhgaVhEQtPCbRKe4j2iekUnjFWMmrmI7A0QXM8uYxPKFDvY7aWtz
+ Cqjoww3oiB3fvIS7Cdz74z50FfIZq34juoMNx8g==
+X-Google-Smtp-Source: AGHT+IHcUeAr+70IxxFcfv0eey6h/QQN3ytSBL+ileJ12GGUj+fEJfjkaTmC5RsqXEXTuhCUiMovJtuiTllsan+H+iA=
+X-Received: by 2002:a2e:361a:0:b0:2f3:cd65:cf65 with SMTP id
+ 38308e7fff4ca-2f4f577655emr9448881fa.28.1724400636908; Fri, 23 Aug 2024
+ 01:10:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <CGME20240822102010epcas1p434e5a447b002e8bdea5423a034c2e444@epcas1p4.samsung.com>
- <118b01daf47c$de3b9620$9ab2c260$@samsung.com>
- <20240822215429.GX1626301@bill-the-cat>
-In-Reply-To: <20240822215429.GX1626301@bill-the-cat>
-From: Minkyu Kang <promsoft@gmail.com>
-Date: Fri, 23 Aug 2024 16:50:42 +0900
-Message-ID: <CALrBrZ016Ba7MkA3cYNdg3qyRokuSEAqPWUgT=kujCfUQVrdZg@mail.gmail.com>
-Subject: Re: Please pull u-boot-samsung master
-To: Tom Rini <trini@konsulko.com>
-Cc: Minkyu Kang <mk7.kang@samsung.com>, u-boot@lists.denx.de
+References: <20240708071352.3022327-1-avkrasnov@salutedevices.com>
+ <82c914ec-db68-5971-8ac0-6ed359872175@salutedevices.com>
+ <CAOf5uwmuZoDpVTGA=vTm_7Ywkw8OWi0e2NpG3Q1ZgO6R=UnuHQ@mail.gmail.com>
+ <bb05c33e-9769-7e1d-699e-f42829255796@salutedevices.com>
+In-Reply-To: <bb05c33e-9769-7e1d-699e-f42829255796@salutedevices.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Fri, 23 Aug 2024 10:10:25 +0200
+Message-ID: <CAOf5uw=UKXVB5H3DBzFFPx8nrXw3S44yPq=5CD+VAVHGuAmQTg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/3] Meson: R/W support for pages used by boot ROM
+To: Arseniy Krasnov <avkrasnov@salutedevices.com>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>, 
+ U-Boot-Denx <u-boot@lists.denx.de>, u-boot-amlogic@groups.io, 
+ kernel <kernel@sberdevices.ru>, oxffffaa@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,39 +95,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Arseniy
 
-On Fri, 23 Aug 2024 at 07:11, Tom Rini <trini@konsulko.com> wrote:
+On Thu, Aug 22, 2024 at 9:04=E2=80=AFAM Arseniy Krasnov
+<avkrasnov@salutedevices.com> wrote:
+>
+> Hi, thanks!
+>
+> Thanks, Arseniy
+>
+> On 22.08.2024 00:17, Michael Nazzareno Trimarchi wrote:
+> > Hi
+> >
+> > I will read them tomorrow ;)
+> >
+> > Thank you for understanding
+> >
 
-> On Thu, Aug 22, 2024 at 07:20:10PM +0900, Minkyu Kang wrote:
->
-> > Dear Tom,
-> >
-> > The following changes since commit
-> d51764417dc37ead471a5597f7815ae455e84ea3:
-> >
-> >   am335x_hs_evm_spi_defconfig: Add MAINTAINERS entry (2024-08-15 16:07:45
-> > -0600)
-> >
-> > are available in the git repository at:
-> >
-> >   git@source.denx.de:u-boot/custodians/u-boot-samsung.git master
-> >
-> > for you to fetch changes up to 25a972368cf926b4d70c22a2de65d959774d5cc5:
-> >
-> >   doc: samsung: Mention enabled eMMC in E850-96 board doc (2024-08-19
-> > 16:09:06 +0900)
-> >
->
-> Given the point in the release cycle, I've applied to u-boot/next
-> instead, thanks.
->
-> --
-> Tom
->
+All the series are delegated to Neil. I will review anyway but I think
+that will then pick from him
 
-All right,  thanks.
+Michael
 
--- 
-Thanks,
-Minkyu Kang.
+> > Michael
+> >
+> > Il mer 21 ago 2024, 22:25 Arseniy Krasnov <avkrasnov@salutedevices.com>=
+ ha
+> > scritto:
+> >
+> >> Hi, sorry, pls ping  =F0=9F=98=84
+> >>
+> >> Thanks
+> >>
+> >> On 08.07.2024 10:13, Arseniy Krasnov wrote:
+> >>> Patchset is based on patchset for Linux (today merged to nand-next):
+> >>>
+> >> https://lore.kernel.org/linux-mtd/20240507230903.3399594-1-avkrasnov@s=
+alutedevices.com/
+> >>>
+> >>> Here is description from it:
+> >>>
+> >>>  >  Amlogic's boot ROM code needs that some pages on NAND must be wri=
+tten
+> >>>  >  in special "short" ECC mode with scrambling enabled. Such pages:
+> >>>  >  1) Contain some metadata about hardware.
+> >>>  >  2) Located with some interval starting from 0 offset, until some
+> >>>  >     specified offset. Interval and second offset are set in the
+> >>>  >     device tree.
+> >>>  >
+> >>>  >  This patchset adds R/W support for such pages. To enable it we ca=
+n
+> >> setup
+> >>>  >  it in dts:
+> >>>  >
+> >>>  >      nand-is-boot-medium;
+> >>>  >      amlogic,boot-pages =3D <1024>;
+> >>>  >      amlogic,boot-page-step =3D <128>;
+> >>>  >
+> >>>  >  It means that each 128th page in range 0 to 1024 pages will be
+> >> accessed
+> >>>  >  in special mode ("short" ECC + scrambling). In practice this feat=
+ure
+> >> is
+> >>>  >  needed when we want to update first block of NAND - driver will
+> >> enable
+> >>>  >  required mode by itself using value from device tree.
+> >>>
+> >>> The only difference is that patchset for Linux updates DT bindings, w=
+hile
+> >>> this adds NAND_IS_BOOT_MEDIUM flag support.
+> >>>
+> >>> Changelog:
+> >>>  v1 -> v2:
+> >>>  * Pls see per-patch changelog.
+> >>>
+> >>> Arseniy Krasnov (3):
+> >>>   mtd: rawnand: nand_base: support for 'NAND_IS_BOOT_MEDIUM' flag
+> >>>   mtd: rawnand: meson: refactor use of 'meson_nfc_cmd_access()'
+> >>>   mtd: rawnand: meson: read/write access for boot ROM pages
+> >>>
+> >>>  drivers/mtd/nand/raw/meson_nand.c | 84 +++++++++++++++++++++--------=
+--
+> >>>  drivers/mtd/nand/raw/nand_base.c  |  3 ++
+> >>>  include/linux/mtd/rawnand.h       |  5 ++
+> >>>  3 files changed, 65 insertions(+), 27 deletions(-)
+> >>>
+> >>
+> >
+
+
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
