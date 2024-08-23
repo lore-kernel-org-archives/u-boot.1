@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78A7FC531DC
-	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 13:54:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10775C52D7C
+	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 13:54:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E158C88C15;
-	Fri, 23 Aug 2024 15:50:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 44F4088C61;
+	Fri, 23 Aug 2024 15:50:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Srfv0ADQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Jp6NflvK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE62688C6D; Fri, 23 Aug 2024 15:50:12 +0200 (CEST)
+ id 0E131889ED; Fri, 23 Aug 2024 15:50:14 +0200 (CEST)
 Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
  [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F388E88C13
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 15:50:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D55AF88C08
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 15:50:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
 Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3719398eafcso1043388f8f.1
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 06:50:10 -0700 (PDT)
+ ffacd0b85a97d-371a9bea8d4so985612f8f.2
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 06:50:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724421010; x=1725025810; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724421011; x=1725025811; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=w5Ti40FD60twAqgTogRIah0zrrRbOJ+6aN+DRYhjcLI=;
- b=Srfv0ADQMWrxUDvTEvjlS2ps2Mvm+f9/T9YgUyAWaMixc3qngAMc7EuSQsT66UF8ei
- 1X55UU3iKefvJmof+5lu0rs8ulq7hvDG4ge6eUnnfQARV4XtGHBPiq7wz2VOuBZ11Oy3
- FwlnNqWIm33Fquwy1UUN0mFvxfNkG6bmyg3joprT7xxz9Np8OSE62HF+rRYdsi+J1Ky3
- GDMeaUl2IZamy6+RMubmIlruBLJTUbv2YOCp05zw9ofOVmdqBeJaITYh9O9SE/xiLyEw
- YBh50DnK1FD/moSaA21RjOcjQUZ8JIMIcm9anW44E39VyZU2OPWsQc90kopwWLJMa38v
- CtUA==
+ bh=YReqvMd/BxfFFS2kjHJgaJSXZI3pm+qMN/lkAT63YpM=;
+ b=Jp6NflvKcaQtrmU2bUTRx3ovxeQ7p1KtMCn6OtsKm7LyxVe5l0DNIJPG/gb9soc6p0
+ f9GQh3TWIsvj89uuWeC0ZgN+GbVAZ7foo3DI69BMg0PUau62mSK8WmZJjcgMAOAXgwXI
+ 0m3kLYDUQavh024hdUH4dZLdm+QB5CgQHSUxXU/gZ/nyv8ugvMxSr1Q8L2lAraDNJNwf
+ F1EmGZJT5HoFmzQcnPLOGzBdiJLsvFCErGhEfFRwx6mKwXPEstgE75vYwvgohWH19jp1
+ ken9tNEblPzKA77pq4OcmRtFAas1x+PD2pCl2oZL5cIEUf4xQRDNQyxjbSnBo2F1eNoz
+ 4tFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724421010; x=1725025810;
+ d=1e100.net; s=20230601; t=1724421011; x=1725025811;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=w5Ti40FD60twAqgTogRIah0zrrRbOJ+6aN+DRYhjcLI=;
- b=CorjnwZaAfIC9OPVkF3ToOnNvJXTTJ+8JZ7Ei9Uzn4aRjhHsIaylAdAA8wHm0/MFQM
- h8hDrQ/9TglXwCbv9+kJfJDro62KPD3fvIlVPspOQaqi2g2Q9zxaN59PtendGYtYSHI5
- P2BX2NwWZHqEfJhpUIKOqhW5RCPBPEGl4haVffWkFvcoQOaonmxpp9H7ypoZrsfaokkv
- hOrJd6WQlyxf/u7FhLDJ+Y4MtMh1ZeV+Y2ZwWHobg7ZNLe1ZQydFg5xhp46fWIwGE4vo
- lkm0Lt1ZTgfeEiOArrE4QkYJpaj4N1yU4FMAW26ki94wASuSXEpITrYgCFJEx5ZAu4et
- 4PVg==
-X-Gm-Message-State: AOJu0YyvEOXdZsChA3/aqE/pdNn+rA23qPMSoA3MK1goQazo/kDEatcX
- bxDyj3bkkjK1ZsFlIzaCoIv8pFUDjgqnjLi8Uby3ZOJ4erUceMnWsfDf7m1AT2ceyjYa0FNYGpg
- jzwLPCLbH
-X-Google-Smtp-Source: AGHT+IH2bGzWMTQN9FnuUAX9z/UBBprzuy/LmDZ/j9ZncxsLvheN3h+K3AenBoITouSAB56lP5g0pA==
-X-Received: by 2002:adf:fd41:0:b0:367:8a87:ada2 with SMTP id
- ffacd0b85a97d-37311876fadmr1505479f8f.26.1724421010155; 
- Fri, 23 Aug 2024 06:50:10 -0700 (PDT)
+ bh=YReqvMd/BxfFFS2kjHJgaJSXZI3pm+qMN/lkAT63YpM=;
+ b=X7eo8o1yitJS5otD2Lpin9qAWJIRuWjGdb3UrZW2f1vwmySZcZSdSuwL870vYOZZxv
+ HZZnfdYy4sDfzWLj+Mtpj+9ojlM+r4JdXAbcHztuWdFLKMkKEOaHUOWZ8+fzZaNtdSmt
+ MQEV/RxTnBezeK094ZVXvRud83uQFp70lNsKBthnUO084PtqNvQyJ7iD1TtD4VIhj+6Z
+ E7Z0V1wHc0YqDp5oypgVLq7lJ4fLGjAWCsDEIxFvHjfDPuTnDwhtvWZ5ScnRrEtE40b+
+ yzzGj75c0uCn1hKgF5CjS3xuRE/1/f5btkTP90kQBu2JKV+veVRZiW8hKWYz+I5KDzr0
+ 8QRg==
+X-Gm-Message-State: AOJu0Ywsb932teUxh/1AqYCs/DzTkVLsoZ0KBjByyaFPoPOl+IA+DLGM
+ 2ZlDTHB1Du/9x7HrXh2qxKdv0ireq8D3/EnJQB2XwPnrpYg/WiF60Bw1XuVG257WDRx+HH5k23Y
+ fIJxAJgyp
+X-Google-Smtp-Source: AGHT+IFN7Evm+qyMyVtEA4TgDri5Vejyt+XDwVhSJMJPtNpHK0jrGy3ATcAar7x0scKU1zy4bUkWoQ==
+X-Received: by 2002:a5d:66c1:0:b0:368:74e0:2068 with SMTP id
+ ffacd0b85a97d-37311865155mr1536883f8f.33.1724421011079; 
+ Fri, 23 Aug 2024 06:50:11 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:e668:dc94:35c7:8064])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-373081ffb40sm4201665f8f.76.2024.08.23.06.50.09
+ ffacd0b85a97d-373081ffb40sm4201665f8f.76.2024.08.23.06.50.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Aug 2024 06:50:09 -0700 (PDT)
+ Fri, 23 Aug 2024 06:50:10 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -72,13 +72,11 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
  Anton Antonov <Anton.Antonov@arm.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- Baruch Siach <baruch@tkos.co.il>, Simon Glass <sjg@chromium.org>,
- Anand Moon <linux.amoon@gmail.com>
-Subject: [PATCH v9 30/37] net-lwip: add TFTP_BLOCKSIZE
-Date: Fri, 23 Aug 2024 15:48:34 +0200
-Message-Id: <86cbe8adc7cd7130571f5b4d4eaf3828c222d6fe.1724419624.git.jerome.forissier@linaro.org>
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>
+Subject: [PATCH v9 31/37] CI: add qemu_arm64_lwip to the test matrix
+Date: Fri, 23 Aug 2024 15:48:35 +0200
+Message-Id: <3aad66cbc5eb380993fd4f9409167d91e9746f06.1724419624.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1724419624.git.jerome.forissier@linaro.org>
 References: <cover.1724419624.git.jerome.forissier@linaro.org>
@@ -100,72 +98,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for setting the TFTP block size. The default value (1468)
-is fine for Ethernet and allows a better throughput than the TFTP
-default (512), if the server supports the blksize option of course.
-
-I tested this change with qemu_arm64_lwip_defconfig. The throughput is
-now 875 KiB/s vs. 313 KiB/s before. That is still a low number, but I
-think we can't expect more without implementing the windowsize option.
+Build and run qemu_arm64_lwip_defconfig in CI. This tests the lightweight
+IP (lwIP) implementation of the dhcp, tftpboot and ping commands.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- net/Kconfig     | 20 ++++++++++----------
- net/lwip/tftp.c |  2 ++
- 2 files changed, 12 insertions(+), 10 deletions(-)
+ .azure-pipelines.yml | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/net/Kconfig b/net/Kconfig
-index 16a9de47e94..76ab7d91eeb 100644
---- a/net/Kconfig
-+++ b/net/Kconfig
-@@ -60,16 +60,6 @@ config SYS_FAULT_ECHO_LINK_DOWN
- 	  this option is active, then CONFIG_SYS_FAULT_MII_ADDR also needs to
- 	  be configured.
- 
--config TFTP_BLOCKSIZE
--	int "TFTP block size"
--	default 1468
--	help
--	  Default TFTP block size.
--	  The MTU is typically 1500 for ethernet, so a TFTP block of
--	  1468 (MTU minus eth.hdrs) provides a good throughput with
--	  almost-MTU block sizes.
--	  You can also activate CONFIG_IP_DEFRAG to set a larger block.
--
- config TFTP_PORT
- 	bool "Set TFTP UDP source/destination ports via the environment"
- 	help
-@@ -254,6 +244,16 @@ config NET_RANDOM_ETHADDR
- 	  generated. It will be saved to the appropriate environment variable,
- 	  too.
- 
-+config TFTP_BLOCKSIZE
-+	int "TFTP block size"
-+	default 1468
-+	help
-+	  Default TFTP block size.
-+	  The MTU is typically 1500 for ethernet, so a TFTP block of
-+	  1468 (MTU minus eth.hdrs) provides a good throughput with
-+	  almost-MTU block sizes.
-+	  You can also activate CONFIG_IP_DEFRAG to set a larger block.
-+
- endif   # if NET || NET_LWIP
- 
- config SYS_RX_ETH_BUFFER
-diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
-index 50b8fbad00d..51cd1e0207c 100644
---- a/net/lwip/tftp.c
-+++ b/net/lwip/tftp.c
-@@ -138,6 +138,8 @@ static int tftp_loop(struct udevice *udev, ulong addr, char *fname,
- 	if (!(err == ERR_OK || err == ERR_USE))
- 		log_err("tftp_init_client err: %d\n", err);
- 
-+	tftp_client_set_blksize(CONFIG_TFTP_BLOCKSIZE);
-+
- 	ctx.start_time = get_timer(0);
- 	err = tftp_get(&ctx, &srvip, srvport, fname, TFTP_MODE_OCTET);
- 	/* might return different errors, like routing problems */
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index 93111eb6127..59fddb96a48 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -238,6 +238,10 @@ stages:
+           cd \${WORK_DIR}
+           git config --global --add safe.directory \${WORK_DIR}
+           git clone --depth=1 https://source.denx.de/u-boot/u-boot-test-hooks /tmp/uboot-test-hooks
++          # qemu_arm64_lwip_defconfig is the same as qemu_arm64 but with NET_LWIP enabled.
++          # The test config and the boardenv file from qemu_arm64 can be re-used so create symlinks
++          ln -s conf.qemu_arm64_na /tmp/uboot-test-hooks/bin/travis-ci/conf.qemu_arm64_lwip_na
++          ln -s u_boot_boardenv_qemu_arm64_na.py /tmp/uboot-test-hooks/py/travis-ci/u_boot_boardenv_qemu_arm64_lwip_na.py
+           ln -s travis-ci /tmp/uboot-test-hooks/bin/\`hostname\`
+           ln -s travis-ci /tmp/uboot-test-hooks/py/\`hostname\`
+           grub-mkimage --prefix=\"\" -o ~/grub_x86.efi -O i386-efi normal echo lsefimmap lsefi lsefisystab efinet tftp minicmd
+@@ -415,6 +419,9 @@ stages:
+         qemu_arm64:
+           TEST_PY_BD: "qemu_arm64"
+           TEST_PY_TEST_SPEC: "not sleep"
++        qemu_arm64_lwip:
++          TEST_PY_BD: "qemu_arm64_lwip"
++          TEST_PY_TEST_SPEC: "test_net_dhcp or test_net_ping or test_net_tftpboot"
+         qemu_m68k:
+           TEST_PY_BD: "M5208EVBE"
+           TEST_PY_ID: "--id qemu"
 -- 
 2.40.1
 
