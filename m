@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1451C531DC
-	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 20:49:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93F65C531DC
+	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 20:49:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8915688CCD;
-	Fri, 23 Aug 2024 22:48:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E711388B84;
+	Fri, 23 Aug 2024 22:48:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PddURKPi";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IDdj/csD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E633E88CA2; Fri, 23 Aug 2024 22:48:45 +0200 (CEST)
-Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
- [IPv6:2607:f8b0:4864:20::131])
+ id 926B988915; Fri, 23 Aug 2024 22:48:46 +0200 (CEST)
+Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
+ [IPv6:2607:f8b0:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66DA088C53
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 22:48:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 37E7E88C72
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 22:48:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x131.google.com with SMTP id
- e9e14a558f8ab-39d4161c398so10277475ab.3
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 13:48:43 -0700 (PDT)
+Received: by mail-il1-x134.google.com with SMTP id
+ e9e14a558f8ab-39d31d16d39so8666825ab.0
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 13:48:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724446122; x=1725050922; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724446123; x=1725050923; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eyhJ+R09/yj3MbPGE6e353C0s56hfCnQG2o+hVBYtlU=;
- b=PddURKPi6bDHpQWqszmQCRQKysqibljz+YU8tBOAjE/3HZNyzTcRU8p9iPKtzxq2Vx
- mXJWVNtDKoto4j0PXZeNJvR33Koka/1OA0KxyQi2zUyhsICFI16XYUhq1IvWPhtZETVs
- 4phnzu7lej0nRYKITpceKmAg5btzRJ50V1nso=
+ bh=9T8Fnwnw1unBrZVbfatUhdSZjLgpwMkl4MIYJvm/rXc=;
+ b=IDdj/csDGUp/eZxn900SEHW5O8ExTGhkZ9QSnS4FLA4IMDtFx9FIQ9I5qvefhXodcx
+ jUDWN9M/KObdMxfxhagJPcaUgpJBkrtht9xyqCfy6yDhIQm5ipvUwf7xKxVf6S21KT/w
+ zGvsLfnS8KGAY8QJgmwREYVUCIM7yEzjeuQWk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724446122; x=1725050922;
+ d=1e100.net; s=20230601; t=1724446123; x=1725050923;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eyhJ+R09/yj3MbPGE6e353C0s56hfCnQG2o+hVBYtlU=;
- b=Tqvifn3FLJEWJwhnzUVjCWaa1E5AEFW0bvgMzR0KWqHlqKg//hfitTdkQ6ssnk/pUk
- J6HnbisaHts5qg048GhbLuVb9kuC2AAYImUNFElVMkQZ2dIE4dblxn8lMENp36K5zARu
- Oy/PEDLfxZUKPkQDxmOfiwqQmygCOuVCBU6ioww6dvas8R355PiNE0/fOvoRewyAC6Qu
- Pju0AJ1jGmiaSI0VyOxuK1Csa1irqfFQWA4qGU6zIsVe87IExZbPt2UcsfipfvHImYjg
- ajLGK+HvAVMslniSx5Ki2x7GcOvZ2a3YqzWnNWocaVry0aLVI2xlkFofYReIXd6G2azN
- MUgQ==
-X-Gm-Message-State: AOJu0YzpIB3vGuzCXrIKBMwD2yF2zd6gsrl+JPQmacY6D1J+vaDCjcJE
- TclUVXS55Le4lgM2Mi7a4WviIeX6nHy2xoTgTop4aGHRG27Clebm67qBKWkHQRqePCaQ/Zt+74c
+ bh=9T8Fnwnw1unBrZVbfatUhdSZjLgpwMkl4MIYJvm/rXc=;
+ b=VXD5DpCz58JBczRpa7vvT+ru+TPNNUHiYJYm7rhrwb89pny5AaOxYgzYC7QsoNgcPb
+ XzcbRNFOuGE8gf/61wlBI0x06ObNKttvi+GoLpuahuufQWq23ffoFNy7ZW5MQg8KkuCa
+ +oKM33wb6B70i3Dlgkmd8Mjc8jJW5uCA28QNlX9TcKajL/sGQnrqux4tY2BMyR+9m1tk
+ lPceBKyDITPZn11RJJ/McZD6uf624fr0+52FZIaY9N+v46NfkgWxUu+2kFuDevCqvkDf
+ 4qyqOHP3zIWcgf1sCIJFRZpCyLqRxE25NNXzhNEbn1UezDjJU5ZVZXPeoR/XEO77Nvqw
+ LqGQ==
+X-Gm-Message-State: AOJu0YxEmvK1Ubjo6bCWpQGSgAHuLC1toYEPl/rU4ds18DRbHUflLBMN
+ 2JufoiVS2pug67/booIVLspWEKTmtLqQ5ptQ0HnJw6r4mNEa6Gq0+eSWrMvH71hE1RJIK/2cc5o
  =
-X-Google-Smtp-Source: AGHT+IEVwVbmiY6kKP0Tja6SYe2/1Nr87o0MxKPzESS8FiUicc3//TMaidgRzPdCQv8eSLZt/38V6g==
-X-Received: by 2002:a05:6e02:1a66:b0:376:410b:ae69 with SMTP id
- e9e14a558f8ab-39e3c98dd3emr36536795ab.15.1724446121835; 
- Fri, 23 Aug 2024 13:48:41 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFoHBjerXq6rxQJzHQ9H2RJqjqINBBhkU/cECHsYgQ32O0qj3XoCDfpuN//2hzV1Ggau3r7iQ==
+X-Received: by 2002:a92:c569:0:b0:39d:47cf:2c7f with SMTP id
+ e9e14a558f8ab-39e3c9e9965mr36722845ab.24.1724446122834; 
+ Fri, 23 Aug 2024 13:48:42 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39d73e67addsm15698375ab.4.2024.08.23.13.48.41
+ e9e14a558f8ab-39d73e67addsm15698375ab.4.2024.08.23.13.48.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Aug 2024 13:48:41 -0700 (PDT)
+ Fri, 23 Aug 2024 13:48:42 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Eddie James <eajames@linux.ibm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Julien Masson <jmasson@baylibre.com>
-Subject: [PATCH v2 4/8] sunxi: Add a bootmeth for FEL
-Date: Fri, 23 Aug 2024 14:48:20 -0600
-Message-Id: <20240823204824.443631-5-sjg@chromium.org>
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Andrew Davis <afd@ti.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?= <csokas.bence@prolan.hu>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michal Simek <michal.simek@amd.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: [PATCH v2 5/8] sunxi: Move to bootstd
+Date: Fri, 23 Aug 2024 14:48:21 -0600
+Message-Id: <20240823204824.443631-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240823204824.443631-1-sjg@chromium.org>
 References: <20240823204824.443631-1-sjg@chromium.org>
@@ -95,146 +97,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for booting from a script loaded over FEL. This mirrors the
-bootcmd_fel provided by distro boot.
+Drop support for distroboot and move to using bootstd instead.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
 
 Changes in v2:
-- Put the FEL bootmeth before all other global bootmeths
+- Convert the other DISTRO_DEFAULTS in the Kconfig too
 
- boot/Kconfig        | 14 ++++++++
- boot/Makefile       |  1 +
- boot/bootmeth_fel.c | 81 +++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 96 insertions(+)
- create mode 100644 boot/bootmeth_fel.c
+ arch/arm/Kconfig | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 291919ea1ef..7d6e819bde6 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -585,6 +585,20 @@ config BOOTMETH_EFI_BOOTMGR
- 	  the EFI binary to be launched is determined. To set the EFI variables
- 	  use the eficonfig command.
- 
-+config BOOTMETH_FEL
-+	bool "Bootdev support for Sunxi FEL"
-+	depends on ARCH_SUNXI
-+	default y
-+	help
-+	  Enables support for booting over USB on a Sunxi device. This uses
-+	  the FEL protocol and obtains the script address from the
-+	  'fel_scriptaddr' environment variable.
-+
-+	  This method is only available if booting from FEL, i.e. the
-+	  'fel_booted' environment variable is set.
-+
-+	  See https://linux-sunxi.org/FEL/Protocol for more information.
-+
- config BOOTMETH_QFW
- 	bool "Boot method using QEMU parameters"
- 	depends on QFW
-diff --git a/boot/Makefile b/boot/Makefile
-index f4675d6ffd5..295f27dfd39 100644
---- a/boot/Makefile
-+++ b/boot/Makefile
-@@ -30,6 +30,7 @@ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EXTLINUX) += bootmeth_extlinux.o
- obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EXTLINUX_PXE) += bootmeth_pxe.o
- obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EFILOADER) += bootmeth_efi.o
- obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_CROS) += bootm.o bootm_os.o bootmeth_cros.o
-+obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_FEL) += bootmeth_fel.o
- obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_QFW) += bootmeth_qfw.o
- obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SANDBOX) += bootmeth_sandbox.o
- obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SCRIPT) += bootmeth_script.o
-diff --git a/boot/bootmeth_fel.c b/boot/bootmeth_fel.c
-new file mode 100644
-index 00000000000..160ba6eb827
---- /dev/null
-+++ b/boot/bootmeth_fel.c
-@@ -0,0 +1,81 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Bootmethod for sunxi FEL loading
-+ *
-+ * Copyright 2024 Google LLC
-+ * Written by Simon Glass <sjg@chromium.org>
-+ */
-+
-+#define LOG_CATEGORY UCLASS_BOOTSTD
-+
-+#include <bootdev.h>
-+#include <bootflow.h>
-+#include <bootmeth.h>
-+#include <command.h>
-+#include <dm.h>
-+#include <env.h>
-+
-+static int fel_check(struct udevice *dev, struct bootflow_iter *iter)
-+{
-+	return 0;
-+}
-+
-+static int fel_read_bootflow(struct udevice *dev, struct bootflow *bflow)
-+{
-+	if (!env_get("fel_booted") || !env_get("fel_scriptaddr"))
-+		return -ENOENT;
-+
-+	bflow->state = BOOTFLOWST_READY;
-+
-+	return 0;
-+}
-+
-+static int fel_read_file(struct udevice *dev, struct bootflow *bflow,
-+			 const char *file_path, ulong addr, ulong *sizep)
-+{
-+	return -ENOSYS;
-+}
-+
-+static int fel_boot(struct udevice *dev, struct bootflow *bflow)
-+{
-+	ulong addr;
-+	int ret;
-+
-+	addr = env_get_hex("fel_scriptaddr", 0);
-+	ret = cmd_source_script(addr, NULL, NULL);
-+	if (ret)
-+		return log_msg_ret("boot", ret);
-+
-+	return 0;
-+}
-+
-+static int fel_bootmeth_bind(struct udevice *dev)
-+{
-+	struct bootmeth_uc_plat *plat = dev_get_uclass_plat(dev);
-+
-+	plat->desc = IS_ENABLED(CONFIG_BOOTSTD_FULL) ?
-+	   "Sunxi FEL boot over USB" : "FEL";
-+	plat->flags = BOOTMETHF_GLOBAL;
-+
-+	return 0;
-+}
-+
-+static struct bootmeth_ops fel_bootmeth_ops = {
-+	.check		= fel_check,
-+	.read_bootflow	= fel_read_bootflow,
-+	.read_file	= fel_read_file,
-+	.boot		= fel_boot,
-+};
-+
-+static const struct udevice_id fel_bootmeth_ids[] = {
-+	{ .compatible = "u-boot,fel-bootmeth" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(bootmeth_2fel) = {
-+	.name		= "bootmeth_fel",
-+	.id		= UCLASS_BOOTMETH,
-+	.of_match	= fel_bootmeth_ids,
-+	.ops		= &fel_bootmeth_ops,
-+	.bind		= fel_bootmeth_bind,
-+};
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 656f588a97c..4e36a4814b8 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1147,7 +1147,7 @@ config ARCH_SUNXI
+ 	select BINMAN
+ 	select CMD_GPIO
+ 	select CMD_MMC if MMC
+-	select CMD_USB if DISTRO_DEFAULTS && USB_HOST
++	select CMD_USB if BOOTSTD_DEFAULTS && USB_HOST
+ 	select CLK
+ 	select DM
+ 	select DM_GPIO
+@@ -1169,9 +1169,9 @@ config ARCH_SUNXI
+ 	select SUNXI_GPIO
+ 	select SYS_NS16550
+ 	select SYS_THUMB_BUILD if !ARM64
+-	select USB if DISTRO_DEFAULTS
+-	select USB_KEYBOARD if DISTRO_DEFAULTS && USB_HOST
+-	select USB_STORAGE if DISTRO_DEFAULTS && USB_HOST
++	select USB if BOOTSTD_DEFAULTS
++	select USB_KEYBOARD if BOOTSTD_DEFAULTS && USB_HOST
++	select USB_STORAGE if BOOTSTD_DEFAULTS && USB_HOST
+ 	select SPL_USE_TINY_PRINTF if SPL
+ 	select USE_PREBOOT
+ 	select SYS_RELOC_GD_ENV_ADDR
+@@ -1179,7 +1179,7 @@ config ARCH_SUNXI
+ 	imply CMD_DM
+ 	imply CMD_GPT
+ 	imply CMD_UBI if MTD_RAW_NAND
+-	imply DISTRO_DEFAULTS
++	imply BOOTSTD_DEFAULTS
+ 	imply DM_REGULATOR
+ 	imply DM_REGULATOR_FIXED
+ 	imply FAT_WRITE
 -- 
 2.34.1
 
