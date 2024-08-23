@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9CA2C531DC
-	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 13:53:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6733C52D7C
+	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 13:53:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7BD988C42;
-	Fri, 23 Aug 2024 15:50:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 14A6188C50;
+	Fri, 23 Aug 2024 15:50:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QLQvptyc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="l/9OxuMY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05B0E88C17; Fri, 23 Aug 2024 15:50:09 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id 0300588C17; Fri, 23 Aug 2024 15:50:10 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23CD4889D2
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 15:50:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B6DA88BFD
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 15:50:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-371936541caso910834f8f.0
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 06:50:07 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4281ca54fd3so16385795e9.2
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 06:50:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724421006; x=1725025806; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724421007; x=1725025807; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OU2VUMRGCTc+MvFx1Y4JV6qJNct5kwe7bvtCsqQAkio=;
- b=QLQvptycWiIui7gDl6oJduNayUkSjbxx/hO2TlU0qt5Hp4mzNazTovtZwFt+OA4YBD
- N/OrujlaBpRZlXvA3b6a8MpYufd9IZhhHk4F8W+rknRP/mM1kzUitvKSv388CkTExR2I
- 8oL2G2zlLEKP+kvWL+VHPzRhqLNrFj0LKfkt75NiaUe9AvTv18SVsGlqe+CHD+/b+7TJ
- FfL7yjcgDkC+pq6dtft49W+cfoDLNvuCXMStNDllS7ApQvpOzTx4i2hEJ2wnzgbPyP+m
- acR8JJSSyUZflTGpFpEmwTLOngDdTRU4Ssfc17ct69scWukN3+t3rax77OTD/nfjf2V2
- JpOw==
+ bh=WQUv/HNCuMRxpKPtwooUf712RMBAKG5Q2VDiw47vrAI=;
+ b=l/9OxuMY0ciMDG4rbtFVaO7UU68bpKlVurBNefbGWkbwigsM1WOjYQd/+ABxhaY0FD
+ KiuVdwKO9aNTTJQGTzYlXJDK7P94HiSlliwueuo9MW5XW7AuYLP6rlnguM7z+CPabgTR
+ 5FJ6BjPq6GdcDkKsmdmHCLh5AzNoteMg73flDHmESDek33ZATwgccpfVI4etNGMYyU9q
+ Wp2klQQqth2tRRGslqUofxMkNVMg96p6rHXonTP8JraD3t59KZQ/T+ZR31VeUvQujk+Q
+ OC/L0La1xiJrvvKj2bslej4d3/Zz3fo0TUXFV4jnGHSpHbE4bf/GyH55km+wpbVDa0Cr
+ mQlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724421006; x=1725025806;
+ d=1e100.net; s=20230601; t=1724421007; x=1725025807;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OU2VUMRGCTc+MvFx1Y4JV6qJNct5kwe7bvtCsqQAkio=;
- b=o1/fzXqSa7wfermXlek55gw21ZkXw5XpMvhqY7o+IB8vMCe1ZI1MpIMldeJsX20RTH
- lEb8raa0ZXuleisR7i/ni46EDpcFEMdE81y1wM+8HTqISDf0UPBElZlhwVI7YKMy6dVl
- YoPU4A2RzdQsl3Pz9T5KuWqew1A+raYN+jFVYZuSW7PALsXTae//26I932DPu8Hpcm+j
- F3W/aYpAnMI/yQ+V+eEZtQUG8/Td4lWjo/Ex7zyxr4khhxZbikchbRn/K7pCEwap289x
- cF6sxRjmPbtzz1XyYx3eeDkjcjuq5s62YzlmKmhe0OqfHTWChHTIu/aqkrrIUeCKuTFU
- R3vA==
-X-Gm-Message-State: AOJu0YwhXVOVzhtnGdlRv+4KZ7Mzaige2S73WslD7GXR/tfaCtk1uOTe
- UeVz1Q2kGxJIkNzsfVLvqzpuZ7BWAxDegN3t21QMOM6BfEj2VrVc9WKdsxt3P5oXnz49AkHSqB5
- T1w0/TEu5
-X-Google-Smtp-Source: AGHT+IH+6UXIij8r57BhMovSPWUuTszzB/IXQn03KdXImO/sOzT7oxEcD9ApJwwqT7QPK1DQTWZrgA==
-X-Received: by 2002:adf:ce88:0:b0:368:7a04:7f5b with SMTP id
- ffacd0b85a97d-373118d12b0mr1627665f8f.40.1724421006406; 
- Fri, 23 Aug 2024 06:50:06 -0700 (PDT)
+ bh=WQUv/HNCuMRxpKPtwooUf712RMBAKG5Q2VDiw47vrAI=;
+ b=Dl7gIRJG4CUnncIAs5IdXszji4BUO+DFVEk618vDDVghSZhEjNLLj3EbzKESeImgx8
+ pPu5Szd6itrapLPYg8iBLvI9ZtAT+/1ckOqgAbPKvXYl+Tr1SkOiaxyAvgKUAvXpbY6J
+ i2PHmyQI0Bdqdcga32zQTUjhBq5mOMDqma+NgK3Rc5SMfpjGT7WtNQt/9cCdZIBketqv
+ uAYIebjZdelLvglY8EBLaSbRCM5a0F1SeRraI0SBxnqo7lz9eRPS4trjxNXWUnWBbe2u
+ 5lXgZX9EC+Zm6MbMnp1oDtEUr+BC1BknD7pacMNE6rgMP1NEc2Scy2wQA6IWVlt7TFBy
+ GOfQ==
+X-Gm-Message-State: AOJu0YzBykVqzCZ/UAIXkyZqgUPYboVCNMFB6kJjdgEsVMjTjk9F3Ywa
+ KJqq7PoMKxJ+Ogz18kS9Uvy/+WvjZ9Q5EO0frto4Ub2brRzyfEVQKoWSs1iXMne0wNwSbSvtt53
+ ZzJGw+mwQ
+X-Google-Smtp-Source: AGHT+IEDbLZJeDMtZgh4ACp1MJGJf1zdX3KgXtBSShrDvDljzVVJovpOwTKlIpxXsJ8v/U9O45ILrg==
+X-Received: by 2002:adf:959a:0:b0:367:9625:bd06 with SMTP id
+ ffacd0b85a97d-373118e3552mr1540055f8f.42.1724421007222; 
+ Fri, 23 Aug 2024 06:50:07 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:e668:dc94:35c7:8064])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-373081ffb40sm4201665f8f.76.2024.08.23.06.50.05
+ ffacd0b85a97d-373081ffb40sm4201665f8f.76.2024.08.23.06.50.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Aug 2024 06:50:06 -0700 (PDT)
+ Fri, 23 Aug 2024 06:50:07 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
  Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
  Anton Antonov <Anton.Antonov@arm.com>,
- Jonathan Humphreys <j-humphreys@ti.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v9 26/37] net-lwip: lwIP wget supports user defined port in
- the uri, so allow it.
-Date: Fri, 23 Aug 2024 15:48:30 +0200
-Message-Id: <9a357746ad72f7b78320d225c9d020e283000a8c.1724419624.git.jerome.forissier@linaro.org>
+ Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v9 27/37] cmd: bdinfo: enable -e when CONFIG_CMD_NET_LWIP=y
+Date: Fri, 23 Aug 2024 15:48:31 +0200
+Message-Id: <316f7bf4005999e127655ad13426cd48152e29a7.1724419624.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1724419624.git.jerome.forissier@linaro.org>
 References: <cover.1724419624.git.jerome.forissier@linaro.org>
@@ -100,31 +99,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jonathan Humphreys <j-humphreys@ti.com>
+Support "bdinfo -e" when lwIP is selected.
 
-Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
- net/lwip/wget.c | 6 ------
- 1 file changed, 6 deletions(-)
+ cmd/bdinfo.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-index e8768fc2acd..b495ebd1aa9 100644
---- a/net/lwip/wget.c
-+++ b/net/lwip/wget.c
-@@ -349,12 +349,6 @@ bool wget_validate_uri(char *uri)
- 		ret = false;
- 		goto out;
- 	}
--	s = strchr(authority, ':');
--	if (s) {
--		log_err("user defined port is not supported\n");
--		ret = false;
--		goto out;
--	}
- 
- out:
- 	free(str_copy);
+diff --git a/cmd/bdinfo.c b/cmd/bdinfo.c
+index 437ac4e8630..472e5c42b08 100644
+--- a/cmd/bdinfo.c
++++ b/cmd/bdinfo.c
+@@ -151,7 +151,7 @@ static int bdinfo_print_all(struct bd_info *bd)
+ 	bdinfo_print_num_l("relocaddr", gd->relocaddr);
+ 	bdinfo_print_num_l("reloc off", gd->reloc_off);
+ 	printf("%-12s= %u-bit\n", "Build", (uint)sizeof(void *) * 8);
+-	if (IS_ENABLED(CONFIG_CMD_NET))
++	if (IS_ENABLED(CONFIG_CMD_NET) || IS_ENABLED(CONFIG_CMD_NET_LWIP))
+ 		print_eth();
+ 	bdinfo_print_num_l("fdt_blob", (ulong)map_to_sysmem(gd->fdt_blob));
+ 	bdinfo_print_num_l("new_fdt", (ulong)map_to_sysmem(gd->new_fdt));
+@@ -197,7 +197,8 @@ int do_bdinfo(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		case 'a':
+ 			return bdinfo_print_all(bd);
+ 		case 'e':
+-			if (!IS_ENABLED(CONFIG_CMD_NET))
++			if (!IS_ENABLED(CONFIG_CMD_NET) &&
++			    !IS_ENABLED(CONFIG_CMD_NET_LWIP))
+ 				return CMD_RET_USAGE;
+ 			print_eth();
+ 			return CMD_RET_SUCCESS;
 -- 
 2.40.1
 
