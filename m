@@ -4,76 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4BFBC3DA4A
-	for <u-boot@archiver.kernel.org>; Thu, 22 Aug 2024 21:54:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1ADAC5321E
+	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 02:55:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDF2D8869E;
-	Thu, 22 Aug 2024 23:54:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8E653888C2;
+	Fri, 23 Aug 2024 04:55:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BNd3v1OH";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D23E88651; Thu, 22 Aug 2024 23:54:35 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1724381700;
+	bh=Qj+KL64u4A6yrh4VPYuP5sCWtvP3+y7Is96MIXgvobw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=qu829/K6POhrLf7urDWI1HbTOVnLnXYPEhEIAMsBaJFnNOAMH28XDl6YTr/9ogopN
+	 U/qT4mPqewoR9U9y459bhKGaUflUGi1KkpG+XdgJ+UtFkxRICbVyxll5riBcwAuvuh
+	 s2um3wKDjX4zxaxxjE24tuC1zz0wOkfv1/QLEavMTIvJDT4rutAglDmoGbl2FrSOB0
+	 3Gimm8RHS/3V55RWX7vaR0YOxUvUgY7wBUGbfe18DmdFZdt6HbXnl13oB5YD0WScJ2
+	 nkBnmDjCWaBeoq1zcpWkv2GETVYLUOmoyyozRwVN+cDD54XQQhdmMCFIO6IwmNWjfW
+	 +rdPzSk3hJNbA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 102BA887BB
- for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 23:54:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-70942ebcc29so1118062a34.0
- for <u-boot@lists.denx.de>; Thu, 22 Aug 2024 14:54:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724363672; x=1724968472; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=fMxXa6El06A9s/GDO+DYWPRHG2rnq6H1Os0cTBlJUfo=;
- b=BNd3v1OHxioFxzp2OHnjf/1higeWsyRdzPOvn/gqQswTsEDCos/TSQ9puH9k7lYD+l
- cWpyERwlk+AYC3gTXkv7he8gYDyB1rxZBgZVbd1S+ePsg+sQRmy2JT9Mj6bl8NNA8UZp
- wFwbVF/BGDyt9T0BinJe78spq6cqsl73R/BlM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724363672; x=1724968472;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fMxXa6El06A9s/GDO+DYWPRHG2rnq6H1Os0cTBlJUfo=;
- b=cfV8A/vjjs9c/n15MJQJ4qENLFrc0dedlcRQcfqplPyLJRp1DbP4ogVQpBKwHlSmPM
- 0qX2w17irHw3/rEMEVVCaLKV4TmCrBG0LIj+zi9u7t3MbjoGcjV9Lw+lEhvkF95rU0x5
- ki9zpd6rlXnlklYsSdcxtvVUqNyJLbDZcIkGaCMnI6xQpJ7CjmTqvWkjwqiy1RdzGGBT
- CS7BDd5W4HF7WLcv0EO5p9DegPJeZyB2+VGZqeoU+TGb8meF1p12/2Fd6DQKC1/W22Io
- xrKuw409k6T5d7fyoJd0hpa+cJtmvVx4mNqUtz2s0Buv8D92iKkbDtCT5raO1uZTGbHH
- D3+A==
-X-Gm-Message-State: AOJu0Yx2hr9rQ+ykn2BIVx52W841SDkGCVPyuXthcu6zJeYgOyv61/8r
- l7kuOTqOVHqClkla/gqpGURx8/hIEQm6p4Jm2Rnn7Qe+Q4R+xttuVwLBB0AtU4Q=
-X-Google-Smtp-Source: AGHT+IHve3IrucJxpD+5jbw5jbL91cUdJ7eP7eJM3OdAmq9olMlChbi6/7TOYGjsPJRo5OI2vRUlpQ==
-X-Received: by 2002:a05:6808:f01:b0:3d9:2a77:b81b with SMTP id
- 5614622812f47-3de2a8ed647mr233816b6e.34.1724363671782; 
- Thu, 22 Aug 2024 14:54:31 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-197-236.totalplay.net.
- [187.190.197.236]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3de2252d574sm451725b6e.6.2024.08.22.14.54.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Aug 2024 14:54:31 -0700 (PDT)
-Date: Thu, 22 Aug 2024 15:54:29 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Minkyu Kang <mk7.kang@samsung.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: Please pull u-boot-samsung master
-Message-ID: <20240822215429.GX1626301@bill-the-cat>
-References: <CGME20240822102010epcas1p434e5a447b002e8bdea5423a034c2e444@epcas1p4.samsung.com>
- <118b01daf47c$de3b9620$9ab2c260$@samsung.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 8BA1488670;
+ Fri, 23 Aug 2024 04:54:58 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1724381698;
+ bh=Qj+KL64u4A6yrh4VPYuP5sCWtvP3+y7Is96MIXgvobw=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=AQab/ar+2rriuYVO+T2IzBFwUgmQIauCILvau6XzKkhA98OTHv7B4yjIcQcXOHqKE
+ jmRH/8dhZOKwK9q962c8+lnxhPNrjA9emjo+1WaJEum1kOduSS42xbdHr5jgmSd7Kj
+ hNYITSafMNI7Tc3cYwSSZHo0DDSx+Z+RKNJELdI9jN7HE68h51WjyUy3UfDGQoyI/a
+ MFHggZl5qE0Yu+QO+t8DhgL73kpfMxCJjiiC0TqdYecTw9y2GRF23wVFW+GS6ZpfnD
+ g4CCfaU6mRQAZOlQMsy08FrGJiYNxCIhp2tlGxcwyOERBvhAS2Ih8zbryAe2vaalD2
+ Wudi/kwqAteqw==
+Message-ID: <a86dd37e-2e55-4947-b665-06d68831b63a@denx.de>
+Date: Fri, 23 Aug 2024 03:23:15 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="CLqKMucdE+T9UFBs"
-Content-Disposition: inline
-In-Reply-To: <118b01daf47c$de3b9620$9ab2c260$@samsung.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] usb: gadget: ether: Disable USB pullup in eth probe
+To: Zixun LI <admin@hifiphile.com>
+Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
+References: <20240821212218.2092540-1-admin@hifiphile.com>
+ <5a1367d7-be94-4c75-9f40-891ca79f9c5b@denx.de>
+ <CA+GyqeYxig+5pyYaCjPmQodXGjCYK=819cNZx9XmvJOnoYne_w@mail.gmail.com>
+ <67e8423d-f8a8-412e-ae4a-014d52bf6a2f@denx.de>
+ <CA+Gyqea1r6rP8gXfS6nOtOaKZ=sJ1+z_KguGzzJygQKmSNRakw@mail.gmail.com>
+ <c7c61399-8b64-471f-bfcb-71afd387317b@denx.de>
+ <CA+GyqebS7gVMpLJuMdxN9c8U=CpBLiTuFkqm_4-bA+LstLJpsQ@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CA+GyqebS7gVMpLJuMdxN9c8U=CpBLiTuFkqm_4-bA+LstLJpsQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,54 +75,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 8/22/24 5:53 PM, Zixun LI wrote:
+> On Thu, Aug 22, 2024 at 5:24 PM Marek Vasut <marex@denx.de> wrote:
+>>
+>> Can you change the g_dnl_register() prototype and pass he structure in ?
+>> I suspect it should be available in the commands which register g_dnl ?
+>>
+> 
+> There are many places where g_dnl_register() is called, like fastboot, dfu, ums,
+> etc, need to modify all of them ?
 
---CLqKMucdE+T9UFBs
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I think that should be possible with 'git grep' and 'sed' mechanically.
 
-On Thu, Aug 22, 2024 at 07:20:10PM +0900, Minkyu Kang wrote:
+>> This is no good, this is a workaround, let's not do this.
+>>
+> 
+> You mean which part, order change or disconnect call ?
 
-> Dear Tom,
->=20
-> The following changes since commit d51764417dc37ead471a5597f7815ae455e84e=
-a3:
->=20
->   am335x_hs_evm_spi_defconfig: Add MAINTAINERS entry (2024-08-15 16:07:45
-> -0600)
->=20
-> are available in the git repository at:
->=20
->   git@source.denx.de:u-boot/custodians/u-boot-samsung.git master
->=20
-> for you to fetch changes up to 25a972368cf926b4d70c22a2de65d959774d5cc5:
->=20
->   doc: samsung: Mention enabled eMMC in E850-96 board doc (2024-08-19
-> 16:09:06 +0900)
->=20
+Yes
 
-Given the point in the release cycle, I've applied to u-boot/next
-instead, thanks.
+> Is there a fixed order of udc_start (device init) and driver->bind ?
+> In non-DM mode most device drivers do init first in their
+> usb_gadget_register_driver(), except udc-core and DWC2 who does
+> driver->bind first.
 
---=20
-Tom
+The driver .bind callback is called when the driver is instantiated 
+(e.g. matching compatible string is found in DT, or some board file 
+instantiates a driver and binds it to a DT node). This can happen very 
+early.
 
---CLqKMucdE+T9UFBs
-Content-Type: application/pgp-signature; name="signature.asc"
+The driver .probe callback initializes the controller hardware and is 
+called only the first time the controller is used. U-Boot uses lazy 
+hardware initialization to speed up the boot process, i.e. hardware is 
+initialized the first time it is used, using the .probe callback.
 
------BEGIN PGP SIGNATURE-----
+The .udc_start callback in usb_gadget_ops must be called after the 
+controller driver .bind and .probe were called.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbHs5UACgkQFHw5/5Y0
-tywxlgv/TwMQo1smkSuZq3ZXh++n5udjLVvJ5IRkFRUyfHkz5dcN6jgr02Ix84a9
-zulE7o575XFFbzOY6Qb9tbXWviBBdQnNF7rEL4aOX0bl1Fc5QEJj5bdKDgcB4UoG
-ELly0KDOSK7PBe28Mr52HLQRfp7x8o1LvHpToqxF1DWyFz2qCyXfS/nMl5ZJgV+E
-n2qbysmJDsqbAWPuZDINZ4ubVsf72LQBaIiTxHzM5tiOS1Rr7QfDA6WC/vkKKXLH
-/4vvxpOVrF9kWtBqScrmSx2dtDgdt0qYUwLpxlfd9f6TLBv5y0H8mcfO9d9jCvMb
-mZkgzwyyIY1koosscvTpNGHNDwQ7GqRUow0mlR/2+nnEIL2WowsTeLVop+uIsA5M
-A99KSlSCnmqqGmiA0JIOcmkwqa79fZX9NsHjkeqoRK2F41p1kAv81HX88wd0Rz+2
-tIIFfj2OxUcQwU6EaaxMV/nl8Uo2HNkyJ+5YQ/2TjPmh1AECqaZc8Q1diY4wFzTZ
-8aIK9Llv
-=YOqb
------END PGP SIGNATURE-----
+The usb_composite_driver .bind has to be called after controller driver 
+.bind (but it may be called before controller driver .probe).
 
---CLqKMucdE+T9UFBs--
+I think udc_bind_to_driver() should not call usb_gadget_connect() , that 
+connect should likely be called by at some later point. I also think 
+that drivers/usb/gadget/udc/udc-core.c might have to be extended to 
+provide some way to convert controller struct udevice to struct 
+usb_gadget , so when e.g. run_usb_dnl_gadget() calls 
+udc_device_get_by_index() and obtains struct udevice * , it can also get 
+matching struct usb_gadget * , and call the usb_gadget_connect().
+
+What do you think ?
+
+> Call usb_gadget_disconnect here could avoid modifying all device driver's init.
+
+[...]
