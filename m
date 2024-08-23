@@ -4,81 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CCCEC5321E
-	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 21:49:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6A41C5321E
+	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 21:57:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65A6488966;
-	Fri, 23 Aug 2024 23:49:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 588B2889D0;
+	Fri, 23 Aug 2024 23:57:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kflCsX85";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="elHIN6LU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06C43889D0; Fri, 23 Aug 2024 23:49:48 +0200 (CEST)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id BBB4588B23; Fri, 23 Aug 2024 22:47:35 +0200 (CEST)
+Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
+ [IPv6:2607:f8b0:4864:20::f2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94AA18891E
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 23:49:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A03D788B36
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 22:47:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7a4df9dc840so145405285a.2
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 14:49:45 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf2d.google.com with SMTP id
+ 6a1803df08f44-6bf7a2035d9so32471426d6.1
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 13:47:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724449784; x=1725054584; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=hUL7ybQ+G3f8gU/A1PsnywaxCwpKO6fsulpl55UeQP4=;
- b=kflCsX85HdCLQt/OhRAiSgItkS/xAC9txfQk71/gSaHXGBoCmdLXRB8i1Dv1S7NBM9
- nv4l+/fq1L6pPmjCJgZDa4tq7XjMpPRbPEhOOziWbb3c5V/SK6Qjs2/LFfS0EHMSGDaL
- +bDHQ254YO81YfM4q8V0IbHkIFiKcR8YDLj68=
+ d=chromium.org; s=google; t=1724446051; x=1725050851; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=FDAdFBJ7wSGpFlyT7ZSxSlgKctSQJcHKYh+yRjEkv9Y=;
+ b=elHIN6LUIqavT4GdGU/CsqVpNOQAjcIT7w0qL9r5L4Ma4OL6fJjkZnYZjbTfKcyCUN
+ q9MTJ7iWtqSIUNIxGT33x7nmU5d9hBJQLekycDLfyeUdLsFbHK1gbIiEpToQxA6UP++D
+ aJt0lrAGnL/YzFf9QjIEwA2Xh5vlEpp8fJN2Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724449784; x=1725054584;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hUL7ybQ+G3f8gU/A1PsnywaxCwpKO6fsulpl55UeQP4=;
- b=IiW8ApUf1QNkVxnkZ79deVAitEJ9JKYD+3KEU/gdfcVhWflfFuw7+qQzEjuIlYRx0g
- udRS48KPhc8/lGWIAAftWpfiOsKLf1QzZpeEapSMys3jCNvNOMRvx8T1WnnaaDdlEiKV
- OX0ZCdtHhviUo1gFTVQvRLofkhMcCMafbpcUnITlj5HY3Ia93L4rNkzkNK9i1wPUoU81
- KnkOmYDoaDljZoXQGxCTvUVG1IU1D9th9jF44yRXjP2yIAgcWQC0m/N59u1b7vsK6kXD
- M1GxBx0PgMWohsDNIdisXnWodQ0YhGW/MF21LTO6hpEGYIkNw10xMh/b1e106C7oXukL
- Q0sg==
-X-Gm-Message-State: AOJu0YxU9BFWKmp3veDmLWlPz8MuQyAMI3EtKwQQFQGnPsIpx/ejjtDd
- XK9en+1h6d8J4I1pI6Q218RXUq3X9MTO9UR4TGsKl3bcD+2kIej0wWD97XGP4Psfkf4Ej3mqZcH
- W
-X-Google-Smtp-Source: AGHT+IF6YjNoUaEDBvqzANVpOD8JMV0fx27mY1BFI8bjpE3RKyNy5d6gyB1GwqJX6oalBmxsF6mXzg==
-X-Received: by 2002:a05:620a:25c8:b0:79f:73d:d2e with SMTP id
- af79cd13be357-7a689700986mr308655185a.24.1724449783979; 
- Fri, 23 Aug 2024 14:49:43 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a67f3baf94sm218439385a.94.2024.08.23.14.49.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Aug 2024 14:49:43 -0700 (PDT)
-Date: Fri, 23 Aug 2024 15:49:40 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v2 26/35] global_data: Reduce size of early-malloc vars
-Message-ID: <20240823214940.GC2479150@bill-the-cat>
-References: <20240821161927.695717-1-sjg@chromium.org>
- <20240821161927.695717-27-sjg@chromium.org>
- <20240823133450.GA1627158@bill-the-cat>
- <CAFLszThQKH-pM1nTNJv5HwLanc9tGL4ZgvPLzxWk48LmxHa+NQ@mail.gmail.com>
- <20240823210723.GY1626301@bill-the-cat>
- <CAFLszTirvuCkhb7BTj84Y3oNey34fmi=+V=fFTwb73rV428i=Q@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1724446051; x=1725050851;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=FDAdFBJ7wSGpFlyT7ZSxSlgKctSQJcHKYh+yRjEkv9Y=;
+ b=SSHl3uHoxZvJZPSbKHg/V4so1Y3DyQ5FUAJrOT9zVHgAP5ZR/1fXITVfuy+nCEOHPd
+ ikUx8ccyJEeYZJHmDF/aFT64/MOf6RdFVWoEiRvyg+ulEaIK+oNjMC6rPy0iUezvhjRH
+ 25DqHnzSsGIGqws0I9F6myKq7LBOgiuIGPZLzQi9fUQYRF1WIsfZERnuQJIz1BrTWoB+
+ 6ZGAlv6QmnJYrn9+7qrc5bYWiWmu3F64BOJLe3d+W5ZYM8vAEBRVo7mrfmPKCvigwW1c
+ DjIud64+HWfqR8u31QFrw8sCxn5oviEHTay4PVeiY7F9/bziuwsRpDAwnItQ3AwxdnpD
+ heYg==
+X-Gm-Message-State: AOJu0YwyfGHezgSb0myJ29bukI1x6X1N1BxqU2pQFKXQ1CeojR372xiX
+ 3VB4qKXj1sCYnySFWjrZidDKbvZt37DXkqCIOMq74Zc+VUHTS93lqJtluhnlZby1t04SdJp7Vip
+ mLHCqfgTS00wEJZGqzdvAru7WbLPt6Bcvdr9e
+X-Google-Smtp-Source: AGHT+IGXvbHeqLFRYmpCLBri2xuQktWzZKlb0JDg6puWt3MAIy7lUqOLWwGcBYv/6r2UC1SqJhAFmnPOCWSe/VmBuJ4=
+X-Received: by 2002:a05:6214:5293:b0:6bf:54fc:3d69 with SMTP id
+ 6a1803df08f44-6c160c667d2mr138117846d6.12.1724446051423; Fri, 23 Aug 2024
+ 13:47:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="HiBX1nq8MZ4bwKGI"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTirvuCkhb7BTj84Y3oNey34fmi=+V=fFTwb73rV428i=Q@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240807205032.3745680-1-sjg@chromium.org>
+ <20240812165952.7d0da18d@donnerap.manchester.arm.com>
+ <CAFLszThv2wHzV6FStwb3qfrR+Qq82kdp7qynWC4=xsw5m-JVxg@mail.gmail.com>
+ <20240813133516.20c04cea@donnerap.manchester.arm.com>
+In-Reply-To: <20240813133516.20c04cea@donnerap.manchester.arm.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 23 Aug 2024 14:47:20 -0600
+Message-ID: <CAFLszTj=NV1Fd5DoOeQH60eMYf=qgM9NRPmOhmd5W-kenyDjag@mail.gmail.com>
+Subject: Re: [PATCH 0/6] bootstd: sunxi: Migrate to standard boot
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Andrew Davis <afd@ti.com>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ Bryan Brattlof <bb@ti.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
+ =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>, 
+ Eddie James <eajames@linux.ibm.com>, Hans de Goede <hdegoede@redhat.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Janne Grunau <j@jannau.net>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>, 
+ Maksim Kiselev <bigunclemax@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Marek Vasut <marex@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Michael Walle <mwalle@kernel.org>, Michal Simek <michal.simek@amd.com>, 
+ Mikhail Kalashnikov <iuncuim@gmail.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Sam Edwards <cfsworks@gmail.com>, 
+ Samuel Holland <samuel@sholland.org>, Stefan Roese <sr@denx.de>,
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Fri, 23 Aug 2024 23:57:01 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,115 +110,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Andre,
 
---HiBX1nq8MZ4bwKGI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, 13 Aug 2024 at 06:35, Andre Przywara <andre.przywara@arm.com> wrote:
+>
+> On Tue, 13 Aug 2024 06:17:17 -0600
+> Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Simon,
+>
+> I had a bit deeper look yesterday.
 
-On Fri, Aug 23, 2024 at 03:44:45PM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Fri, 23 Aug 2024 at 15:07, Tom Rini <trini@konsulko.com> wrote:
+Thanks for digging into this.
+
+>
+> > Hi Andre,
 > >
-> > On Fri, Aug 23, 2024 at 02:30:04PM -0600, Simon Glass wrote:
-> > > Hi Tom,
+> > On Mon, 12 Aug 2024 at 10:00, Andre Przywara <andre.przywara@arm.com> wrote:
 > > >
-> > > On Fri, 23 Aug 2024 at 07:34, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Wed, Aug 21, 2024 at 10:19:18AM -0600, Simon Glass wrote:
-> > > >
-> > > > > The early malloc region is normally quite small and is certainly =
-less
-> > > > > than 4GB, so use a 32-bit value for the limit and pointer. Update=
- the
-> > > > > comment for clarity while we are here.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > ---
-> > > > >
-> > > > > (no changes since v1)
-> > > > >
-> > > > >  arch/arm/lib/bdinfo.c             | 2 +-
-> > > > >  common/board_r.c                  | 2 +-
-> > > > >  common/malloc_simple.c            | 7 ++++---
-> > > > >  common/spl/spl.c                  | 4 ++--
-> > > > >  include/asm-generic/global_data.h | 6 +++---
-> > > > >  5 files changed, 11 insertions(+), 10 deletions(-)
-> > > >
-> > > > This breaks booting on am64x_evm_a53 which is an odd platform that =
-does
-> > > > SPL->SPL->U-Boot.
+> > > On Wed,  7 Aug 2024 14:50:26 -0600
+> > > Simon Glass <sjg@chromium.org> wrote:
 > > >
-> > > OK, I can repeat that on the Beagleplay in my lab. I sent a v3 patch.
-> > > Thanks for bisecting.
+> > > Hey Simon,
+> > >
+> > > > This series attempts to migrate all sunxi boards to use standard boot,
+> > > > along with a text environment.
+> > >
+> > > Ah, many thanks for that! I figured that we need a bootmeth for FEL, but
+> > > never got around to have a closer look.
+> > > On a coarse glance, this looks roughly OK, and doing a super quick boot
+> > > test on one board, it seems to still work(TM), though the priority of the
+> > > FEL boot is not right?
 > >
-> > Oh good, beagleplay is run after the EVM in my loop and so I didn't see
-> > it was broken there too.
+> > Does it need to be the top priority, perhaps?
+>
+> Yes, please. It should only trigger when you a) do FEL booting and b)
+> upload a boot script via FEL, in which case you surely want to execute
+> that before anything else. From what I see the global EFI bootmeth is first
+> in the list, but I couldn't find an easy way to fix this in the source
+> file. Would that go through a platform specific bootmeths env variable?
+
+We can just rename the bootmeth to be before the EFI mgr one.
+
+>
+> > > And I guess ditching the old kernel support might be a bit controversial.
+> > > I think this is about the vendor kernels, which some people still rely on?
 > >
-> > > I'd love to be able to push trees to gitlab and have them run on my
-> > > lab. I think you said that the patches[1] break your lab, so let me
-> > > know if there is anything I can fix.
-> > >
-> > > Regards,
-> > > Simon
-> > >
-> > > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=3D420392
-> >
-> > Well the good news is that I've got the tests running again here, and I
-> > think I mostly understand where the challenges will be in updating this
-> > lab to a newer labgrid version and so being able to migrate it to on top
-> > of your patches. The challenge next will be time. Likely the next steps
-> > will be splitting out your serieses in to test fixes and labgrid
-> > implementation details.
->=20
-> I just sent v3 of the u-boot-test-hooks series. That needs to be in
-> for Labgrid to work.
+> > OK, perhaps it is. It might be a little tricky to handle it, but I
+> > suspect another bootmeth might be enough.
+>
+> Well, I had a look, and it looks like CONFIG_OLD_SUNXI_KERNEL_COMPAT
+> covers multiple things:
+> - it sets up some clocks slightly differently
+> - it enters the kernel (stays?) in secure mode
+> - it provides a custom boot script
+>
+> I think the latter can be replaced quite easily with something custom, and
+> I guess it's the only one biting you? So I am OK with that going, but I
+> think we should keep the first two features (and thus the Kconfig symbol).
 
-Yes, thanks. It reminded me how far apart what you have is from what I
-have, for labgrid.
+Yes the script is the only issue and actually it doesn't affect
+standard boot. So I can just convert it. I was just hoping to remove
+some old code!
 
-> The only other series is [1] which makes the integration nicer, but is
-> not necessary. That makes sense since we still want the lab to be able
-> to test older commits.
->=20
-> From that series patch [2] fixes a problem which breaks pytest runs,
-> since without it, pytest gets a double echo of a few of the characters
-> of the first command it sends. It is a pretty annoying problem which
-> took a while to figure out. I tried very hard to fix it without
-> patching U-Boot's pytest code, but I gave up. One thought I just had
-> is that it is possible that setting up the terminal in the
-> u-boot-test-console script might work most of the time, i.e. before
-> calling Labgrid.
+>
+>
+> Another thing I discovered: we lose USB support with patch 3/6. The reason
+> is that USB support is enabled by having DISTRO_DEFAULTS. Just replacing
+> that with BOOTSTD_DEFAULTS didn't work, though, I get a (ridiculous) splat
+> about a circular Kconfig dependency. My hunch is that's something else not
+> right in Kconfig, but I need to have a closer look.
 
-I know with previous iterations of all of the test cleanups and changes
-you did, my non-labgrid lab also started failing immediately. Keeping in
-mind that today I run all of the pytests on a few hardware platforms,
-both with and without labgrid, I need to see what changes you've done
-lead to what behavior changes here, and then eventually get things
-boiled down to just the your labgrid implementation specific parts, and
-see how to work with them, or if it's too far away from the rest of my
-use case.
+Oh yes that is nasty. The problem goes back to BLK being selected by
+various things, while BOOTSTD depends on it. I eventually found a
+solution so will include that in v2.
 
---=20
-Tom
-
---HiBX1nq8MZ4bwKGI
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbJA+0ACgkQFHw5/5Y0
-tywjKgv/WWp/x966mld/CuOzP9bTWDNO1SvWN/Sb1a/hQW05oWciC5WisRfDcZ2U
-DaBXRpG/gEb1Ga91LjfLdjP4I13PyzpzeCB7iOEJmBfUeAkA5ww9dhEFFbPlxCgD
-jxXiKM4fRiXZfWj0NeIyDyRC/Q66n58Uao7mSWBFjJxKzCtj5L5BkpUU/WrdwcUK
-fsg3m0gc/Uw1x6tTlwGX3amfBgBQ3AUR4O90sDmPzbZYOirU2690JMEGl42/HP/S
-VfMxBDvQVYhr5zPrH4g5bndAJL/VoOlT5FNbsQA7SvqF9DFC22bfn00p6RZO8haM
-zntuLXo9i76FRwCKmgpn+UpOI8aiyJe5Gm3tfRbODI+z4xXSRsdZV7As9w7zJgB2
-mhSUDbvj2HHVoHlz7Up1VAeH/z2pBli1uSKiLw/SNGyh8wuiZ51QqK6VeNfy4SWp
-VBGlzFSUtmR1m5Edb10FIytgqtkBMt1R5z6iCVLSzE8EzHWHArW4Mp4+BWjt1aSh
-M9YmI4E7
-=agj9
------END PGP SIGNATURE-----
-
---HiBX1nq8MZ4bwKGI--
+Regards,
+Simon
