@@ -4,79 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B683C5321E
-	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 21:30:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F258C5321D
+	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 21:31:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C39C88B82;
-	Fri, 23 Aug 2024 23:30:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 19A4488AAA;
+	Fri, 23 Aug 2024 23:31:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YmQIvQ7H";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Sr6YFOmB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 427D688B82; Fri, 23 Aug 2024 23:30:48 +0200 (CEST)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id 01FDC88B9E; Fri, 23 Aug 2024 23:31:32 +0200 (CEST)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 468F988BE4
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 23:30:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 29BA688AA9
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 23:31:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7a1dcc7bc05so150361585a.0
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 14:30:45 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-81fe38c7255so146211539f.1
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 14:31:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724448644; x=1725053444; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=YnVsy5xeiS8glbK/JIz+g1prZVB18mOYP/LpP+1geHY=;
- b=YmQIvQ7HKNtN8BXjEKz5kDCMuFIwRHh6LHztTIW1YDitnEXRLiQW/wFJxsCxrb8qog
- XQxexX7uR4WBZPx627OcgdVqNLJ8m3yZAaAvLetuF8PJHwBrGJZ6ay6J6F/73iLO3z/x
- L9RQaPWO5VMGV6gTBCtRr17AhXcT/ZYET8wsM=
+ d=chromium.org; s=google; t=1724448688; x=1725053488; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=rNBG6U9L26f/tIP84GkYgZtKXVpW8DQTzcsKc4SWDEA=;
+ b=Sr6YFOmBDvMIJBc4aaiRC8YUVcJWwR0U3apiamb4pvPcC+Ci71mI1mmbnyJ+F9LA4e
+ QJlhirE/LmjC5tv/UKd9CmtPlD6cQ6x+qXSPnWmoA+hIsykBDATLdnMAudKZVauFDPmt
+ 3EuD8DQxsAdqIgT+3Y4eljgR1OUrkeSwbyUxE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724448644; x=1725053444;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YnVsy5xeiS8glbK/JIz+g1prZVB18mOYP/LpP+1geHY=;
- b=FCA4MYlGgNWaQ+ucm9msQeEUhH0ops5awOcOcyyT/m1+IrGrWK9oxShHKAP98+vJSD
- +/1qf5NbsD+GA3vHL5E5aQJMnbSrmAp+n2szed48r/R6tWCZvC2fuGuTamV4GpaIhOoj
- 60Ek9TBK9v6b4udMKg1N7T9BgITuI/XrPc+J3ZXAVStJo63mDFm3nEsA1vyrXYdrx6/b
- HJEc54a4/qTfJJWrognAd7UP0IXuoTPaghNzb/s9mE1/PisY5jsb962eLmkQhwCGlm0E
- zpYmpCbfQ7tO9AZe8IbquTR6ElGy5whzYPftsdMAzLY9RC2vg5l7KM1d3RgeLwaGx1SW
- h5PQ==
-X-Gm-Message-State: AOJu0YyUBpCg9DNv18sQ4OoG2jDXVHXfB17wGO8bNpH4V5h9L6aNgz5f
- Xzg5vtbE9S/bEZF/po8tm1VkBe3Ipp/I+5ARY8zykAFtcwpkTM6LE1DNvLZRi0A=
-X-Google-Smtp-Source: AGHT+IFHpzmdjClowwjfvfBIIj/ywPWIgVyBsPZ9zQElwUZLTvpYXux2DFxSm/UQ4odvk4QqhnLiEA==
-X-Received: by 2002:a05:620a:28c6:b0:79f:c0d:782b with SMTP id
- af79cd13be357-7a68971de8bmr510234985a.39.1724448644020; 
- Fri, 23 Aug 2024 14:30:44 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a67f3f7b75sm216783485a.104.2024.08.23.14.30.42
+ d=1e100.net; s=20230601; t=1724448688; x=1725053488;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rNBG6U9L26f/tIP84GkYgZtKXVpW8DQTzcsKc4SWDEA=;
+ b=WUFpVHjwIbDwkCxfUxa3M0ombZSoT688CtfnlJi8I7Z5PjEJou+MWGsm0WCr72EfW0
+ NGNt0FTV0E9+MOcsrUi+UeLQNV0ruAtASokW9egalerQ8+EEnvK2wXmIXfprvYeRQaOc
+ P0LEup2r4/DIU1ep+kOVTcSX58a63r9xpSaNeJ3Q2qaJtdMSq9mmGzQPtZm/5+HG1lJA
+ MAusu5eylQYOsz0jbQQ2syjMZcB/JGDDjec6iecCWouPug9iUudigFtOhk1kGJ8e7Zui
+ +zw6zSMXpMh12XCtVY4tvTwbrgONrOD25ihNry+A+BkT/uBiV59HZDhNRFAP+ChRchyG
+ vUMg==
+X-Gm-Message-State: AOJu0Yw0R60r2dmeKrl33OJPZdAw8zKmVfLx6M4NC9WEKMst4FPR95pL
+ MPvhwyHFrgWhEDzy30HFSmqzuOI14azuzRU0M4Ye432iCfs3rEnaJMtueSWkCQN2Rg9Et53XLwY
+ =
+X-Google-Smtp-Source: AGHT+IG/nH9yJ6AgOsRo5HuNdKghuuj2TZV9XlhnczmjdcaKLa92GA1RG21fl730Tjd4WepAtInvXA==
+X-Received: by 2002:a05:6e02:178f:b0:39d:37de:4196 with SMTP id
+ e9e14a558f8ab-39e3c9c0d48mr38809975ab.18.1724448687671; 
+ Fri, 23 Aug 2024 14:31:27 -0700 (PDT)
+Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
+ [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4ce7106a1bbsm1101042173.97.2024.08.23.14.31.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Aug 2024 14:30:43 -0700 (PDT)
-Date: Fri, 23 Aug 2024 15:30:40 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Anton Antonov <Anton.Antonov@arm.com>
-Subject: Re: [PATCH v9 04/37] arm: omap2: add missing #include <netdev.h>
-Message-ID: <20240823211833.GA1626301@bill-the-cat>
-References: <cover.1724419624.git.jerome.forissier@linaro.org>
- <a74407230cf665355ed114f28adbef9fd7e1f80c.1724419624.git.jerome.forissier@linaro.org>
+ Fri, 23 Aug 2024 14:31:27 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [u-boot-test-hooks PATCH v3 0/2] Add support for Labgrid
+Date: Fri, 23 Aug 2024 15:31:21 -0600
+Message-Id: <20240823213123.487227-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="wIFTl5Vdx0Xt1nM1"
-Content-Disposition: inline
-In-Reply-To: <a74407230cf665355ed114f28adbef9fd7e1f80c.1724419624.git.jerome.forissier@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,40 +86,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This adds hooks for use with Labgrid. The only existing hook that really
+does anything now is the 'console' one. There is also a new 'getrole'
+hook which looks up a role to find various things about it, such as the
+U-Boot board name.
 
---wIFTl5Vdx0Xt1nM1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Changes in v3:
+- Fall back to conf.${board_type}_${board_ident} if conf.all missing
+- Update scripts for latest version of Labgrid integration
+- Add poweroff.none and poweron.none
+- Provide -n flag when querying board info
+- Target the grpc version of Labgrid which is now in -master
+- Update README to cover the changes
 
-On Fri, Aug 23, 2024 at 03:48:08PM +0200, Jerome Forissier wrote:
+Changes in v2:
+- Make use of the common script (only) to set bin_dir
+- Make use of the common script (only) to set bin_dir
 
-> emac.c implements cpu_eth_init() so it needs to pull the corresponding
-> header file.
->=20
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Simon Glass (2):
+  Create a common file for test scripts
+  Provide some basic scripts for Labgrid integration
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+ README.md                    | 37 +++++++++++++++++++++++++++++++
+ bin/console.labgrid          | 42 ++++++++++++++++++++++++++++++++++++
+ bin/ellesmere/common-labgrid | 32 +++++++++++++++++++++++++++
+ bin/ellesmere/conf.all       | 24 +++++++++++++++++++++
+ bin/getrole.labgrid          | 25 +++++++++++++++++++++
+ bin/poweroff.none            | 22 +++++++++++++++++++
+ bin/poweron.none             | 22 +++++++++++++++++++
+ bin/release.labgrid          | 22 +++++++++++++++++++
+ bin/release.none             | 22 +++++++++++++++++++
+ bin/u-boot-test-common       | 35 ++++++++++++++++++++++++++++++
+ bin/u-boot-test-console      |  8 +------
+ bin/u-boot-test-flash        |  8 +------
+ bin/u-boot-test-getrole      | 38 ++++++++++++++++++++++++++++++++
+ bin/u-boot-test-power-off    |  8 +------
+ bin/u-boot-test-power-on     |  8 +------
+ bin/u-boot-test-release      | 26 ++++++++++++++++++++++
+ bin/u-boot-test-reset        |  8 +------
+ 17 files changed, 352 insertions(+), 35 deletions(-)
+ create mode 100644 bin/console.labgrid
+ create mode 100755 bin/ellesmere/common-labgrid
+ create mode 100644 bin/ellesmere/conf.all
+ create mode 100644 bin/getrole.labgrid
+ create mode 100755 bin/poweroff.none
+ create mode 100755 bin/poweron.none
+ create mode 100644 bin/release.labgrid
+ create mode 100644 bin/release.none
+ create mode 100755 bin/u-boot-test-common
+ create mode 100755 bin/u-boot-test-getrole
+ create mode 100755 bin/u-boot-test-release
 
---=20
-Tom
+-- 
+2.34.1
 
---wIFTl5Vdx0Xt1nM1
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbI/4AACgkQFHw5/5Y0
-tywGnQv9FpKN6Btvd6IxE+yz/8CUzv0nJojv3uLPN7i6/AW5EBRb7icTG2LDo/Fa
-YsGytkipzqQKv/VAKrQlyhghf/8s7QEWqW1rrI7XL3hBioagqV51GUl/ZeY9WU7G
-krKgWk1/3JVMNfpRL/OuepqOm4t+JAkjpuetzTq4+ihpEI8vUnFaVcNrj21NIGmm
-N0x97Jz0T6BeWMrG2H/oX8ozY4BtLi3wwZ0tQA2Vp/XTqtlBTm/89IvwLUTZANY6
-JX/z9CZE/m+vMtVgxahtxhxxE5omCJmeFq5TqQEX2GpdE1RIliEAkIcrHoRsNAvk
-IOM0Pe7LkFwa/eEmtDI729z9PvIQleGgNBXbPP1KH3HzKEpa/JUnJ5XbQfA2kpZn
-0Z0pK6hXF2kJdSoGaKgNFBbzWQ7ZAmetOnsRpbD4MkVEEIjcs/yAyp+UVDhoSt9Z
-7TFNbDALqVfnopWiBQnyhgyv9UqIQjlE8+Rbhrb47IEzk/Z9Pj4M0r1yPxOw+RSV
-IiWnuJTA
-=Tw47
------END PGP SIGNATURE-----
-
---wIFTl5Vdx0Xt1nM1--
