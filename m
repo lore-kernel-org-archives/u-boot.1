@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52D6CC531DC
-	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 20:48:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9183C5321D
+	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 20:49:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60B7088B36;
-	Fri, 23 Aug 2024 22:48:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B921788C72;
+	Fri, 23 Aug 2024 22:48:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DwqsOXYu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aw4j1VVI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3D4388C53; Fri, 23 Aug 2024 22:48:42 +0200 (CEST)
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
- [IPv6:2607:f8b0:4864:20::134])
+ id 834A388C72; Fri, 23 Aug 2024 22:48:43 +0200 (CEST)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4CEA88915
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 22:48:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 68E8D88BB8
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 22:48:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x134.google.com with SMTP id
- e9e14a558f8ab-39d22965434so11300215ab.0
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 13:48:40 -0700 (PDT)
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-81fd925287eso81655439f.3
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 13:48:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724446119; x=1725050919; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724446120; x=1725050920; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Hc+1pDb3T997e3xWxn6N4GlwPK2NzA4NIJcJfzVUClY=;
- b=DwqsOXYuzrrCP+QDqrc1i9xEbTleqMIwaRUEWHFmywJ4SarZbxZg7GpQSIurYNLiIn
- 8kjX4zk0iC9RZVTCA3JlLqKP9CBuaeHf0JTjx+L9X3wiQ9d5/K6CbtGC/ZSQxsjA8ZEZ
- xulRpwhL5ViKXF15nwVaG/rpnjK5Ld60EQWmc=
+ bh=CanB/Gvo8puF3XkUGNW8QcP2kttXCr7Cr53gforT/YU=;
+ b=aw4j1VVIUoQgoWMPpwUDakg36M4JaupCSlDNp5ziAG80YGocGRYeKurbEC4HSId5Nv
+ L2w3SQnIDDiTdreiAZ0Z+rKdG+uy7vksdyHrvdbQIhGWGa28SUVbdpYTnyhDrSmIqtjZ
+ JLUyOzuRKjFJ5BoBhyg3VQAGEvANd31Rnl+NQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724446119; x=1725050919;
+ d=1e100.net; s=20230601; t=1724446120; x=1725050920;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Hc+1pDb3T997e3xWxn6N4GlwPK2NzA4NIJcJfzVUClY=;
- b=XilVDKgmnoOrKWxg5byZNIRoZd20Lvj026cihoybAYFH+uyspE72LW4pVqQB2SLzr2
- Axdf7vZ1mCjgYIZXGgIc2FuCYuPPDYTq7hNXdNazMOXqkUxLZhMTPQGRfSKBhU28nhcU
- PFkPFmP6Piq3HYR+XiWgVsh8kLG89QFniJJdJEqWjV3Q4WwuBZz7Vln2MdAzJj8jMwnK
- 2lYaXLs5kx1jczl3STZ5Yg6fLZwDIP4mCmQiEAgYOR9vnpra5/kyNWTdRQy+h9VFIgih
- afyuIV9JQMtsSJhrKIuoiD7G2U2v1u9o9AsSBVRYTMTEloP9Wjfy5nW0maGge790/SL8
- VB6Q==
-X-Gm-Message-State: AOJu0YyTAoAVLDCvQU/1YzjwJhpRXaHIyEMRgxHUhwOgvkxurK5VaHbY
- n2BrxFo7Fu7QL+6bi/G13PWoi3AjjcygXPDaVcnZm/RAmGVqIPM+qirHBMYTBXYc+NHe2JN9Xg0
+ bh=CanB/Gvo8puF3XkUGNW8QcP2kttXCr7Cr53gforT/YU=;
+ b=cgPgoz+foFrAGJynUks/NBBEstvu66oSi84MHFe3k1/M962cYtGY7ranYaOTr+P4gS
+ +LmkS9XllTP+3W3KRZrsJlPn/pkD7oeemTO8SMFhtMCmXlqTwmxzOUnp+3hogQ8WWgIP
+ doy46zX9+RbplwfVNshVDj9Bi40jdhzebpaXj8Xz/nYofNzjqz7gJwts3hfjrUskcLB0
+ mwY+19FTAIw0EdNWqok9PsS7jZgAZlAEYyTGpCbOLlnxUsCSg1emZsYQIlHn7hkpC+Ro
+ eeO2cJvcrnyYewcT5DPhj9m531bCtvIwN8ULocRx5MiSVsZ93u8J+TDFa+wacGuui1LL
+ jsmw==
+X-Gm-Message-State: AOJu0YwBIa+d+eQej3wshbiX9QeIvuowx50pn6eOM2V8+F9wEdSSWnHy
+ bzr1qwCb6MuYbm7986/roqnCa0Al+B/squ1i5ip8k8cCQfW1FpEs6bG/8Tf+Qt4nrtQ5r7c+M4k
  =
-X-Google-Smtp-Source: AGHT+IHRuG8EePTroxbWebgTuusMjwzbM/NwWzw0nk0yI98soT5oQdQaLVmn3Z6yyWWw0I4xFdpsrQ==
-X-Received: by 2002:a05:6e02:152b:b0:39b:35d8:dc37 with SMTP id
- e9e14a558f8ab-39e3bf5175emr31997465ab.13.1724446119232; 
- Fri, 23 Aug 2024 13:48:39 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHjh0ZZlY2gZIKBjK586JS7fRd5CDU8lcqMcu3CyVaH075C2PwjsRgN0b9KN++yig6L3kdvvg==
+X-Received: by 2002:a05:6e02:1947:b0:39b:4ec2:c5c1 with SMTP id
+ e9e14a558f8ab-39e3c9c06a6mr32066455ab.18.1724446120094; 
+ Fri, 23 Aug 2024 13:48:40 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39d73e67addsm15698375ab.4.2024.08.23.13.48.38
+ e9e14a558f8ab-39d73e67addsm15698375ab.4.2024.08.23.13.48.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Fri, 23 Aug 2024 13:48:39 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng@tinylab.org>, Johan Jonker <jbx6244@gmail.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH v2 1/8] blk: Make functions available unconditionally
-Date: Fri, 23 Aug 2024 14:48:17 -0600
-Message-Id: <20240823204824.443631-2-sjg@chromium.org>
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Dragan Simic <dsimic@manjaro.org>, Nam Cao <namcao@linutronix.de>,
+ =?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
+ Tony Dinh <mibodhi@gmail.com>
+Subject: [PATCH v2 2/8] bootstd: Avoid calling unavailable block functions
+Date: Fri, 23 Aug 2024 14:48:18 -0600
+Message-Id: <20240823204824.443631-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240823204824.443631-1-sjg@chromium.org>
 References: <20240823204824.443631-1-sjg@chromium.org>
@@ -92,63 +93,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some boards still don't enable BLK but we want to be able to at least
-compile the code which relies on this. For example, bootstd includes
-calls to blk_...() functions, albeit with a check for BLK so that the
-code is eliminated by the compiler.
-
-Reduce the scope of the BLK #ifdef to help with this.
+When BLK is not enabled but BOOTSTD is, some features of standard boot
+become unavailable. Add a check for this in the only site that is
+currently apparent.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- include/blk.h | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+ boot/bootdev-uclass.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/include/blk.h b/include/blk.h
-index 7c7cf7f2b10..a4aa7dd34df 100644
---- a/include/blk.h
-+++ b/include/blk.h
-@@ -197,7 +197,6 @@ static inline void blkcache_free(void) {}
+diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
+index 7c7bba088c9..e10be2baa30 100644
+--- a/boot/bootdev-uclass.c
++++ b/boot/bootdev-uclass.c
+@@ -434,6 +434,9 @@ int bootdev_find_by_label(const char *label, struct udevice **devp,
+ 	struct uclass *uc;
+ 	enum uclass_id id;
  
- #endif
- 
--#if CONFIG_IS_ENABLED(BLK)
- struct udevice;
- 
- /* Operations on block devices */
-@@ -278,6 +277,8 @@ struct blk_ops {
- #endif	/* CONFIG_BOUNCE_BUFFER */
- };
- 
-+#if CONFIG_IS_ENABLED(BLK)
++	if (!CONFIG_IS_ENABLED(BLK))
++		return -ENOSYS;
 +
- /*
-  * These functions should take struct udevice instead of struct blk_desc,
-  * but this is convenient for migration to driver model. Add a 'd' prefix
-@@ -291,6 +292,8 @@ unsigned long blk_dwrite(struct blk_desc *block_dev, lbaint_t start,
- unsigned long blk_derase(struct blk_desc *block_dev, lbaint_t start,
- 			 lbaint_t blkcnt);
- 
-+#endif /* BLK */
-+
- /**
-  * blk_read() - Read from a block device
-  *
-@@ -528,8 +531,10 @@ struct blk_desc *blk_get_by_device(struct udevice *dev);
-  */
- int blk_get_desc(enum uclass_id uclass_id, int devnum, struct blk_desc **descp);
- 
--#else
-+#if !CONFIG_IS_ENABLED(BLK)
-+
- #include <errno.h>
-+
- /*
-  * These functions should take struct udevice instead of struct blk_desc,
-  * but this is convenient for migration to driver model. Add a 'd' prefix
+ 	ret = label_to_uclass(label, &seq, &method_flags);
+ 	if (ret < 0)
+ 		return log_msg_ret("uc", ret);
 -- 
 2.34.1
 
