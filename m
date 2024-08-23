@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1B8CC531DC
-	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 13:52:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C326EC52D7C
+	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 13:52:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A40788BC4;
-	Fri, 23 Aug 2024 15:49:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8571C88BEF;
+	Fri, 23 Aug 2024 15:49:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tuYwHJvC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iIZfUSXz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24674886E7; Fri, 23 Aug 2024 15:49:50 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id AF08C88A37; Fri, 23 Aug 2024 15:49:52 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CA4788A29
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 15:49:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 90C82886E7
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 15:49:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-371936541caso910575f8f.0
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 06:49:48 -0700 (PDT)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-371a6fcd863so976507f8f.1
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 06:49:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724420987; x=1725025787; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724420990; x=1725025790; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ErBWxkzTdbtyE92CQBPyiy1jniNtymtJyxMnRxGL814=;
- b=tuYwHJvCKa+I5oI0SkLE2Aa4NDlwvqJmBrjx+RTMqBuiNE4Kt+oiatfjE3AGIptFet
- w2izbm+/4jV3j/+lu3m0AcsFXnuH6WtSC06voF1tpqvrEyA4OsxOR+3myE671nmDiLKG
- W407CeYpntIsb04bwCoMfQqHyFSQ/G4yFrYAZWE//C/hbSYHg5njeME4qO4FL5WYEc6+
- NtaEhwOj1NOeGcRUw1LGYLdjx/CqYKPhEtls0Fps/2BmOj1oPa5B1fYYMV35+amPvpZz
- I2B8kDzeqqHWkecswsyK2XBIEKavlVjzEC/akYNKahE7JycZLSZZdUfXHvXEJx92orAb
- jUug==
+ bh=jN/vBBm6YP+NZdFlyfr3/XPN0pa+n102gLZEhWvACJU=;
+ b=iIZfUSXzCFJh4OMyhtFKbJFES15yJnKTXiuJy9BRG0Pw6QDxoSu1+pnPlKrUFPNnXI
+ 4ArMFphqa6LoXt4y6tWAQslxuxQbWf6mUTJNPa8oPQE2vYyAB+yi35BMRrZn1CdAXXNs
+ 7HnmfIw3343EPvxH70eWlU8NgQRNNd4YX5lSe9A/WP8ZPYt/VnW4VzRjAzjGpSaS4J6b
+ 9A4fM0RpEYnyPQcaWl7KxzL35yzG8d8v+ESuOW7QD8qCvXtUsW8GBnfEfikTsdhlM4+n
+ GG/DVcqcQrUI/e74ksL/J9JXyTnHWQ7sjgxYQtiV6kzC6J8K4kdllQrQAwwLlq6dhWjz
+ KXFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724420987; x=1725025787;
+ d=1e100.net; s=20230601; t=1724420990; x=1725025790;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ErBWxkzTdbtyE92CQBPyiy1jniNtymtJyxMnRxGL814=;
- b=SDk+OthUVbSTQ0Gg2Yu+Qzzf/C4H5qijx1slIoJbq+60xChAW9V445CJAyOIGdgnY1
- t+Rdp27DUeeyoIXbxzKLuDWL01gcRNVjA5cIu35jwtSCxzVq4PiYmrgEGNFKlvh5jeNz
- vC/f4zMRJGbR5Fzcns4j+wgHn/T3cYptUnrwD+VswbUP59+pHr3cFtT6/axj0ghvwg7n
- o6Zi87DJFPqGwsw2C7wQrtgq0OyCsT16nzggq5evAy8Dcks0eMSNYoqqx6zt+OG9ffnW
- kX9nWdSNp3pA0vlMNemFn//sbWfKi0RnDaCQWZy7DDP3ETzM2tG3o2DE5I6sR7FRb4rb
- fImQ==
-X-Gm-Message-State: AOJu0Yy/P85moA8fEMaR1dhtMkMooauA26ClaGh8ZJIhhnMg2sao2ylF
- XDbOgtIrzjDY06hU3HOO5NToUq4ixXBsof/P6fA8N2LMrepg6PDHlQdC/Q9MrdcNvC5mEMiI5nY
- eA7Wkw/0y
-X-Google-Smtp-Source: AGHT+IHHAbDKjBQU8w68SYqzRwAi7kWtXRGp/zlxkPJmeEUx/qjS9PlkyrcennPvLjDwHwXnA8ys2w==
-X-Received: by 2002:a5d:6d0a:0:b0:367:95e8:3aef with SMTP id
- ffacd0b85a97d-373118cecb6mr1846006f8f.42.1724420987392; 
- Fri, 23 Aug 2024 06:49:47 -0700 (PDT)
+ bh=jN/vBBm6YP+NZdFlyfr3/XPN0pa+n102gLZEhWvACJU=;
+ b=T3HevDThEHEhvyO0EThX920VNcw8rjTkVtPrKwn+r60iJZ+/BYa9RJCipBT5h9ycFO
+ OazwgCMO1L4uANJjPSxL0O/gqPtT1kTj1UGMxEcYut0Y7yJNXBQopWPDslGb4SkTxBKS
+ yh3oWA4t1pY+DSiougb6yAet9c6T9jCnWlckAtxTzbI41OwmECiTPjumvP6cKZ1Q36xY
+ 4tYQyT60lAco7x39b39MGOjqZIKQQ0zkEAIKyQGFfd1j9kKfXTkpAS3XJGihHrPkbABX
+ jR2kLNikttJqyUOjhNURFgHsbkycfAK0dn+kuCoo8ef86Du7TwHY55xGs2Uf+duzykHR
+ b+3w==
+X-Gm-Message-State: AOJu0YwXPagP4O+SwXkJ40EjHDOJPmXcLW/8qhfggu2gaaRtDmG7vr7Q
+ IzBKHf+22UZQLhfGvdfTgNVdbVkKRoRlzvYaIS3bdy7Tuh6MfJVvg/vrCV8Rz+HSvrMYbkaA0Z+
+ 9BvMw2fgS
+X-Google-Smtp-Source: AGHT+IHwo9HKTSk4imMLXlgfhd1XXfCTWxCt2cCSY7kkBAx63evqJ5+CXCzXDwMDF1tB672UTL44VQ==
+X-Received: by 2002:a05:6000:82:b0:373:591:14e4 with SMTP id
+ ffacd0b85a97d-373118c86d4mr1494525f8f.49.1724420989757; 
+ Fri, 23 Aug 2024 06:49:49 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:e668:dc94:35c7:8064])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-373081ffb40sm4201665f8f.76.2024.08.23.06.49.46
+ ffacd0b85a97d-373081ffb40sm4201665f8f.76.2024.08.23.06.49.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 23 Aug 2024 06:49:47 -0700 (PDT)
+ Fri, 23 Aug 2024 06:49:49 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -73,17 +73,12 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Anton Antonov <Anton.Antonov@arm.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- William Zhang <william.zhang@broadcom.com>, Simon Glass <sjg@chromium.org>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sean Anderson <seanga2@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Fabio Estevam <festevam@denx.de>,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
- Michal Simek <michal.simek@amd.com>
-Subject: [PATCH v9 18/37] net: eth-uclass: add function eth_start_udev()
-Date: Fri, 23 Aug 2024 15:48:22 +0200
-Message-Id: <64779fa9e2c5988a347fe7b9ee55fdf03b464fba.1724419624.git.jerome.forissier@linaro.org>
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Subject: [PATCH v9 19/37] net-lwip: build lwIP
+Date: Fri, 23 Aug 2024 15:48:23 +0200
+Message-Id: <6928c1fca21f4a86142d86e919c1f908501dddca.1724419624.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1724419624.git.jerome.forissier@linaro.org>
 References: <cover.1724419624.git.jerome.forissier@linaro.org>
@@ -105,108 +100,347 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a function to start a given network device, and update eth_init()
-to use it.
+Build the lwIP library when NET_LWIP is enabled. The following files
+are adaptation layers written specially for U-Boot:
+
+ lib/lwip/u-boot/arch/cc.h
+ lib/lwip/u-boot/arch/sys_arch.h (empty)
+ lib/lwip/u-boot/limits.h (empty)
+ lib/lwip/u-boot/lwipopts.h
+
+They were initially contributed by Maxim in a previous RFC patch series.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Co-developed-by: Maxim Uvarov <muvarov@gmail.com>
+Cc: Maxim Uvarov <muvarov@gmail.com>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- drivers/mtd/altera_qspi.c |  4 ++--
- include/net-common.h      |  1 +
- net/eth-uclass.c          | 38 +++++++++++++++++++++++++-------------
- 3 files changed, 28 insertions(+), 15 deletions(-)
+ lib/Makefile                    |   2 +
+ lib/lwip/Makefile               |  55 +++++++++++
+ lib/lwip/u-boot/arch/cc.h       |  45 +++++++++
+ lib/lwip/u-boot/arch/sys_arch.h |   0
+ lib/lwip/u-boot/limits.h        |   0
+ lib/lwip/u-boot/lwipopts.h      | 157 ++++++++++++++++++++++++++++++++
+ net/lwip/Kconfig                |  10 ++
+ 7 files changed, 269 insertions(+)
+ create mode 100644 lib/lwip/Makefile
+ create mode 100644 lib/lwip/u-boot/arch/cc.h
+ create mode 100644 lib/lwip/u-boot/arch/sys_arch.h
+ create mode 100644 lib/lwip/u-boot/limits.h
+ create mode 100644 lib/lwip/u-boot/lwipopts.h
 
-diff --git a/drivers/mtd/altera_qspi.c b/drivers/mtd/altera_qspi.c
-index c26615821c8..e5c8df750b7 100644
---- a/drivers/mtd/altera_qspi.c
-+++ b/drivers/mtd/altera_qspi.c
-@@ -96,7 +96,7 @@ int flash_erase(flash_info_t *info, int s_first, int s_last)
- 	ret = mtd_erase(mtd, &instr);
- 	flash_set_verbose(0);
- 	if (ret)
--		return ERR_PROTECTED;
-+		return FL_ERR_PROTECTED;
+diff --git a/lib/Makefile b/lib/Makefile
+index e389ad014f8..7378d907258 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -96,6 +96,8 @@ obj-$(CONFIG_LIBAVB) += libavb/
+ obj-$(CONFIG_$(SPL_TPL_)OF_LIBFDT) += libfdt/
+ obj-$(CONFIG_$(SPL_TPL_)OF_REAL) += fdtdec_common.o fdtdec.o
  
- 	puts(" done\n");
- 	return 0;
-@@ -114,7 +114,7 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
- 
- 	ret = mtd_write(mtd, to, cnt, &retlen, src);
- 	if (ret)
--		return ERR_PROTECTED;
-+		return FL_ERR_PROTECTED;
- 
- 	return 0;
- }
-diff --git a/include/net-common.h b/include/net-common.h
-index 26674ec7e90..43bc6b9a0d5 100644
---- a/include/net-common.h
-+++ b/include/net-common.h
-@@ -192,6 +192,7 @@ int eth_env_set_enetaddr_by_index(const char *base_name, int index,
- int usb_ether_init(void);
- 
- int eth_init(void);			/* Initialize the device */
-+int eth_start_udev(struct udevice *dev);
- int eth_send(void *packet, int length);	   /* Send a packet */
- #if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
- int eth_receive(void *packet, int length); /* Receive a packet*/
-diff --git a/net/eth-uclass.c b/net/eth-uclass.c
-index e34d7af0229..6dd9b9bb98e 100644
---- a/net/eth-uclass.c
-+++ b/net/eth-uclass.c
-@@ -284,6 +284,27 @@ static int on_ethaddr(const char *name, const char *value, enum env_op op,
- }
- U_BOOT_ENV_CALLBACK(ethaddr, on_ethaddr);
- 
-+int eth_start_udev(struct udevice *dev)
-+{
-+	struct eth_device_priv *priv = dev_get_uclass_priv(dev);
-+	int ret;
++obj-$(CONFIG_NET_LWIP) += lwip/
 +
-+	if (priv->running)
-+		return 0;
+ ifdef CONFIG_SPL_BUILD
+ obj-$(CONFIG_SPL_YMODEM_SUPPORT) += crc16-ccitt.o
+ obj-$(CONFIG_$(SPL_TPL_)HASH) += crc16-ccitt.o
+diff --git a/lib/lwip/Makefile b/lib/lwip/Makefile
+new file mode 100644
+index 00000000000..dfcd700ca47
+--- /dev/null
++++ b/lib/lwip/Makefile
+@@ -0,0 +1,55 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2024 Linaro Ltd.
 +
-+	if (!device_active(dev))
-+		return -EINVAL;
++obj-y += \
++	lwip/src/api/api_lib.o \
++	lwip/src/api/api_msg.o \
++	lwip/src/api/err.o \
++	lwip/src/api/if_api.o \
++	lwip/src/api/netbuf.o \
++	lwip/src/api/netdb.o \
++	lwip/src/api/netifapi.o \
++	lwip/src/api/sockets.o \
++	lwip/src/api/tcpip.o \
++	lwip/src/apps/http/http_client.o \
++	lwip/src/apps/tftp/tftp.o \
++	lwip/src/core/altcp_alloc.o \
++	lwip/src/core/altcp.o \
++	lwip/src/core/altcp_tcp.o \
++	lwip/src/core/def.o \
++	lwip/src/core/dns.o \
++	lwip/src/core/inet_chksum.o \
++	lwip/src/core/init.o \
++	lwip/src/core/ip.o \
++	lwip/src/core/ipv4/acd.o \
++	lwip/src/core/ipv4/autoip.o \
++	lwip/src/core/ipv4/dhcp.o \
++	lwip/src/core/ipv4/etharp.o \
++	lwip/src/core/ipv4/icmp.o \
++	lwip/src/core/ipv4/igmp.o \
++	lwip/src/core/ipv4/ip4_addr.o \
++	lwip/src/core/ipv4/ip4.o \
++	lwip/src/core/ipv4/ip4_frag.o \
++	lwip/src/core/ipv6/dhcp6.o \
++	lwip/src/core/ipv6/ethip6.o \
++	lwip/src/core/ipv6/icmp6.o \
++	lwip/src/core/ipv6/inet6.o \
++	lwip/src/core/ipv6/ip6_addr.o \
++	lwip/src/core/ipv6/ip6.o \
++	lwip/src/core/ipv6/ip6_frag.o \
++	lwip/src/core/ipv6/mld6.o \
++	lwip/src/core/ipv6/nd6.o \
++	lwip/src/core/mem.o \
++	lwip/src/core/memp.o \
++	lwip/src/core/netif.o \
++	lwip/src/core/pbuf.o \
++	lwip/src/core/raw.o \
++	lwip/src/core/stats.o \
++	lwip/src/core/sys.o \
++	lwip/src/core/tcp.o \
++	lwip/src/core/tcp_in.o \
++	lwip/src/core/tcp_out.o \
++	lwip/src/core/timeouts.o \
++	lwip/src/core/udp.o \
++	lwip/src/netif/ethernet.o
+diff --git a/lib/lwip/u-boot/arch/cc.h b/lib/lwip/u-boot/arch/cc.h
+new file mode 100644
+index 00000000000..563d3bfa98b
+--- /dev/null
++++ b/lib/lwip/u-boot/arch/cc.h
+@@ -0,0 +1,45 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/* Copyright (C) 2023 Linaro Ltd. <maxim.uvarov@linaro.org> */
 +
-+	ret = eth_get_ops(dev)->start(dev);
-+	if (ret >= 0) {
-+		priv->state = ETH_STATE_ACTIVE;
-+		priv->running = true;
-+		ret = 0;
-+	}
++#ifndef LWIP_ARCH_CC_H
++#define LWIP_ARCH_CC_H
 +
-+	return ret;
-+}
++#include <linux/types.h>
++#include <linux/kernel.h>
++#include <vsprintf.h>
++#include <rand.h>
 +
- int eth_init(void)
- {
- 	struct udevice *current = NULL;
-@@ -328,20 +349,11 @@ int eth_init(void)
- 		if (current) {
- 			debug("Trying %s\n", current->name);
++#define LWIP_ERRNO_INCLUDE <errno.h>
++
++#define LWIP_ERRNO_STDINCLUDE	1
++#define LWIP_NO_UNISTD_H 1
++#define LWIP_TIMEVAL_PRIVATE 1
++
++#ifdef CONFIG_LIB_RAND
++#define LWIP_RAND() ((u32_t)rand())
++#else
++#define LWIP_DNS_SECURE 0
++#endif
++
++/* different handling for unit test, normally not needed */
++#ifdef LWIP_NOASSERT_ON_ERROR
++#define LWIP_ERROR(message, expression, handler) do { if (!(expression)) { \
++						handler; }} while (0)
++#endif
++
++#define LWIP_DONT_PROVIDE_BYTEORDER_FUNCTIONS
++
++#define LWIP_PLATFORM_ASSERT(x) do {printf("Assertion \"%s\" failed at line %d in %s\n", \
++				    x, __LINE__, __FILE__); } while (0)
++
++#define atoi(str) (int)dectoul(str, NULL)
++#define lwip_strnstr(a, b, c)  strstr(a, b)
++
++#define LWIP_ERR_T int
++#define LWIP_CONST_CAST(target_type, val) ((target_type)((uintptr_t)val))
++
++#if defined(CONFIG_SYS_BIG_ENDIAN)
++#define BYTE_ORDER BIG_ENDIAN
++#endif
++
++#endif /* LWIP_ARCH_CC_H */
+diff --git a/lib/lwip/u-boot/arch/sys_arch.h b/lib/lwip/u-boot/arch/sys_arch.h
+new file mode 100644
+index 00000000000..e69de29bb2d
+diff --git a/lib/lwip/u-boot/limits.h b/lib/lwip/u-boot/limits.h
+new file mode 100644
+index 00000000000..e69de29bb2d
+diff --git a/lib/lwip/u-boot/lwipopts.h b/lib/lwip/u-boot/lwipopts.h
+new file mode 100644
+index 00000000000..a0d3d2b364f
+--- /dev/null
++++ b/lib/lwip/u-boot/lwipopts.h
+@@ -0,0 +1,157 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++
++/* Copyright (C) 2023 Linaro Ltd. <maxim.uvarov@linaro.org> */
++
++#ifndef LWIP_UBOOT_LWIPOPTS_H
++#define LWIP_UBOOT_LWIPOPTS_H
++
++#if defined(CONFIG_LWIP_DEBUG)
++#define LWIP_DEBUG 1
++#define LWIP_DBG_MIN_LEVEL              LWIP_DBG_LEVEL_ALL
++#define LWIP_DBG_TYPES_ON               LWIP_DBG_ON
++#define ETHARP_DEBUG                    LWIP_DBG_ON
++#define NETIF_DEBUG                     LWIP_DBG_ON
++#define PBUF_DEBUG                      LWIP_DBG_OFF
++#define API_LIB_DEBUG                   LWIP_DBG_ON
++#define API_MSG_DEBUG                   LWIP_DBG_OFF
++#define SOCKETS_DEBUG                   LWIP_DBG_OFF
++#define ICMP_DEBUG                      LWIP_DBG_OFF
++#define IGMP_DEBUG                      LWIP_DBG_OFF
++#define INET_DEBUG                      LWIP_DBG_OFF
++#define IP_DEBUG                        LWIP_DBG_ON
++#define IP_REASS_DEBUG                  LWIP_DBG_OFF
++#define RAW_DEBUG                       LWIP_DBG_OFF
++#define MEM_DEBUG                       LWIP_DBG_OFF
++#define MEMP_DEBUG                      LWIP_DBG_OFF
++#define SYS_DEBUG                       LWIP_DBG_OFF
++#define TIMERS_DEBUG                    LWIP_DBG_ON
++#define TCP_DEBUG                       LWIP_DBG_OFF
++#define TCP_INPUT_DEBUG                 LWIP_DBG_OFF
++#define TCP_FR_DEBUG                    LWIP_DBG_OFF
++#define TCP_RTO_DEBUG                   LWIP_DBG_OFF
++#define TCP_CWND_DEBUG                  LWIP_DBG_OFF
++#define TCP_WND_DEBUG                   LWIP_DBG_OFF
++#define TCP_OUTPUT_DEBUG                LWIP_DBG_OFF
++#define TCP_RST_DEBUG                   LWIP_DBG_OFF
++#define TCP_QLEN_DEBUG                  LWIP_DBG_OFF
++#define UDP_DEBUG                       LWIP_DBG_OFF
++#define TCPIP_DEBUG                     LWIP_DBG_OFF
++#define SLIP_DEBUG                      LWIP_DBG_OFF
++#define DHCP_DEBUG                      LWIP_DBG_ON
++#define AUTOIP_DEBUG                    LWIP_DBG_ON
++#define DNS_DEBUG                       LWIP_DBG_ON
++#define IP6_DEBUG                       LWIP_DBG_OFF
++#define DHCP6_DEBUG                     LWIP_DBG_OFF
++#endif
++
++#define LWIP_TESTMODE                   0
++
++#if !defined(CONFIG_LWIP_ASSERT)
++#define LWIP_NOASSERT 1
++#define LWIP_ASSERT(message, assertion)
++#endif
++
++#include "lwip/debug.h"
++
++#define SYS_LIGHTWEIGHT_PROT            0
++#define NO_SYS                          1
++
++#define LWIP_IPV4			1
++#define LWIP_IPV6			0
++
++#define MEM_ALIGNMENT                   1
++
++#define MEMP_NUM_TCP_SEG                16
++#define PBUF_POOL_SIZE                  8
++
++#define LWIP_ARP                        1
++#define ARP_TABLE_SIZE                  4
++#define ARP_QUEUEING                    1
++
++#define IP_FORWARD                      0
++#define IP_OPTIONS_ALLOWED              1
++#define IP_REASSEMBLY                   0
++#define IP_FRAG                         0
++#define IP_REASS_MAXAGE                 3
++#define IP_REASS_MAX_PBUFS              4
++#define IP_FRAG_USES_STATIC_BUF         0
++
++#define IP_DEFAULT_TTL                  255
++
++#define LWIP_ICMP                       0
++
++#if defined(CONFIG_PROT_RAW_LWIP)
++#define LWIP_RAW                        1
++#else
++#define LWIP_RAW			0
++#endif
++
++#if defined(CONFIG_PROT_DHCP_LWIP)
++#define LWIP_DHCP                       1
++#define LWIP_DHCP_BOOTP_FILE		1
++#else
++#define LWIP_DHCP			0
++#endif
++
++#define LWIP_DHCP_DOES_ACD_CHECK	0
++
++#define LWIP_AUTOIP                     0
++
++#define LWIP_SNMP                       0
++
++#define LWIP_IGMP                       0
++
++#if defined(CONFIG_PROT_DNS_LWIP)
++#define LWIP_DNS                        1
++#define DNS_TABLE_SIZE                  1
++#else
++#define LWIP_DNS                        0
++#endif
++
++#if defined(CONFIG_PROT_UDP_LWIP)
++#define LWIP_UDP                        1
++#else
++#define LWIP_UDP                        0
++#endif
++
++#if defined(CONFIG_PROT_TCP_LWIP)
++#define LWIP_TCP                        1
++#define TCP_MSS                         1460
++#define TCP_WND                         CONFIG_LWIP_TCP_WND
++#define LWIP_WND_SCALE                  1
++#define TCP_RCV_SCALE                   0x7
++#define TCP_SND_BUF                     (2 * TCP_MSS)
++#ifdef CONFIG_PROT_TCP_SACK_LWIP
++#define LWIP_TCP_SACK_OUT               1
++#endif
++#else
++#define LWIP_TCP                        0
++#endif
++
++#define LWIP_LISTEN_BACKLOG             0
++
++#define PBUF_LINK_HLEN                  14
++#define PBUF_POOL_BUFSIZE               LWIP_MEM_ALIGN_SIZE(TCP_MSS + 40 + PBUF_LINK_HLEN)
++
++#define LWIP_HAVE_LOOPIF                0
++
++#define LWIP_NETCONN                    0
++#define LWIP_DISABLE_MEMP_SANITY_CHECKS 1
++
++#define LWIP_SOCKET                     0
++#define SO_REUSE                        0
++
++#define LWIP_STATS                      0
++
++#define PPP_SUPPORT                     0
++
++#define LWIP_TCPIP_CORE_LOCKING		0
++
++#define LWIP_NETIF_LOOPBACK		0
++
++/* use malloc instead of pool */
++#define MEMP_MEM_MALLOC                 1
++#define MEMP_MEM_INIT			1
++#define MEM_LIBC_MALLOC			1
++
++#endif /* LWIP_UBOOT_LWIPOPTS_H */
+diff --git a/net/lwip/Kconfig b/net/lwip/Kconfig
+index eb31d044197..4e2f4885f7a 100644
+--- a/net/lwip/Kconfig
++++ b/net/lwip/Kconfig
+@@ -32,3 +32,13 @@ config PROT_TCP_SACK_LWIP
  
--			if (device_active(current)) {
--				ret = eth_get_ops(current)->start(current);
--				if (ret >= 0) {
--					struct eth_device_priv *priv =
--						dev_get_uclass_priv(current);
--
--					priv->state = ETH_STATE_ACTIVE;
--					priv->running = true;
--					ret = 0;
--					goto end;
--				}
--			} else {
-+			ret = eth_start_udev(current);
-+			if (ret < 0)
- 				ret = eth_errno;
--			}
-+			else
-+				goto end;
- 
- 			debug("FAIL\n");
- 		} else {
+ config PROT_UDP_LWIP
+ 	bool
++
++config LWIP_TCP_WND
++	int "Value of TCP_WND"
++	default 3000000
++	help
++	  Default value for TCP_WND in the lwIP configuration
++	  Lower values result in slower wget transfer speeds in
++	  general, especially when the latency on the network is high,
++	  but QEMU with "-net user" needs no more than a few KB or the
++	  transfer will stall and eventually time out.
 -- 
 2.40.1
 
