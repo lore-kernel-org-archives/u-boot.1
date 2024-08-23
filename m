@@ -4,94 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6C4DC52D7C
-	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 08:42:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28D2BC5321D
+	for <u-boot@archiver.kernel.org>; Fri, 23 Aug 2024 08:53:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D91A88641;
-	Fri, 23 Aug 2024 10:42:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 897948855C;
+	Fri, 23 Aug 2024 10:53:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="rk9Bj1O5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wKesWz2P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2D8388641; Fri, 23 Aug 2024 10:42:00 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9174588641; Fri, 23 Aug 2024 10:53:34 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D0F788754
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 10:41:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 4D4048806A
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 10:53:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 77747100002;
- Fri, 23 Aug 2024 11:41:57 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 77747100002
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1724402517;
- bh=O5i5UG9ZaMsJlU6oO9qcoHI+IujwSXRUo0F3r6nzovw=;
- h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
- b=rk9Bj1O5eZ79aFsNTavScAu58ktkwn+Ry6FouMQ44yhqqn8B2rmMl+zR17ko1D6pj
- vGshBHws/qTkPN9A4ow6pzyR9f4lsXB2D9ZtKN+OkuI5u/qUmHUFWdlbwMgAZryoP2
- SgIKmG5P2sjHrw0XkEycnBHvzijtAx62AOBxARh8D24c89YbhwCRwTT8PGVQFBxPTZ
- oXiAfPpGbH+s7WVUkXKK3zVOJtujLtBB0qMx6PE9dMyhGKvmXFWZK7ZyDGsdG2U8fC
- m/2uJJVIsQup8qDKoY9EUAzPxXN5wC871RoFU9O58UcR6C8Ip9jWyFGtV25oGvgE1z
- fwo4wPlZnZI7g==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
- [172.16.192.103])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Fri, 23 Aug 2024 11:41:57 +0300 (MSK)
-Message-ID: <0343aa52-8f23-4447-1827-3de7710735f3@salutedevices.com>
-Date: Fri, 23 Aug 2024 11:29:11 +0300
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-428178fc07eso12448535e9.3
+ for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 01:53:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1724403212; x=1725008012; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=jFizrNLBGJfQBmXaxS7CRPlSxBfoe9oXjYU+fV7ZdLg=;
+ b=wKesWz2PdKmFGktU0fOGZuEUllMt/fqyAwdKHXEyk222Vd/C7YTqHtlnbudewLYjSB
+ 6NO14Q/f01ZlgR36OeO3xzuJv/G0NvHKeBCUh08fmpBYbfj2hU3J8polvhU2rPT3W72/
+ yrVJrzj4hUCBnH58HEqKchkJ9PoENeUEQih+67ahSkU0vtyqLfLf5VaLsuqF4EHDf1D6
+ 6HONr6le95NpKPlXDB74V4H1ouUsLFqcl+WkS3o3xvI3QLXKZbBgl50kUC58cuE+gebE
+ BI0OG9NM4qgESjlMkKPzWcN3im4qxwsVdmIKe9R4DTW2ZvptOc90h1qhNWmUaHFDG5VP
+ ABVg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724403212; x=1725008012;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=jFizrNLBGJfQBmXaxS7CRPlSxBfoe9oXjYU+fV7ZdLg=;
+ b=uc8+tTPQpsVrs5LoZ+saBFWpm9XA+g47s3yAKfR+DqQj+mb2CgpihMa0NUsEHEzNsY
+ V+uOJiwXL44QpRQ5RIrZiut+MI0CrYRsMjF9GM9+KHstLOHY0fkaKL92f8m4aikoonPd
+ TnBKsrNNn8k2w1HLrNUCriNb3huo8qFtizzP5tLwYlALBGngBsEDRrBkAjebrt5pKZ4D
+ AUHj5JQfuX2DFsCH2PIDrxL5yqmbU/DfuwLHb06v9y2/j1sjZxeHWIdx8GFaEA9dN3Qk
+ VzYt0OB1oiAWbgnwaoAbdHR+tqCsyZ/eGi9G65aXdJnyeuxCbWa6OOTv62sTHJM3EUgp
+ Zl/w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWFNvdQugI6GfbSLS90KDUIs2AlHK7WivHW+LCLUtjRWvUOzbw0f8j9asQk9oXjfJsyWmqAK4I=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw0T1E5y+HQQT3ebTZ7cJ5xRmSP9x/LttaOfOsPSJCIeewzi5CV
+ lT58kjOij0h1gNEAeCmx3FpnG7BTYRqLIlr8G2t+D0uyHiN0jyk9MQNviUAYY2A=
+X-Google-Smtp-Source: AGHT+IEVkf0byAbk4UAUVYW0mgG3ePRv4dA5QKa2hVBp7m5fD259rKBkADwlUhgVm7xYb/3NUfVhug==
+X-Received: by 2002:a7b:c399:0:b0:427:d8f7:b718 with SMTP id
+ 5b1f17b1804b1-42acd5d7dacmr9434335e9.24.1724403210871; 
+ Fri, 23 Aug 2024 01:53:30 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:995c:3fea:6b19:4a51?
+ ([2a01:e0a:982:cbb0:995c:3fea:6b19:4a51])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42ac5159450sm52139335e9.17.2024.08.23.01.53.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 23 Aug 2024 01:53:30 -0700 (PDT)
+Message-ID: <887fcb7b-5bd7-40ef-9bb5-ab9ed5079b06@linaro.org>
+Date: Fri, 23 Aug 2024 10:53:29 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
 Subject: Re: [PATCH v2 0/3] Meson: R/W support for pages used by boot ROM
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-CC: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Miquel Raynal <miquel.raynal@bootlin.com>, "Tom
- Rini" <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>, U-Boot-Denx
- <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>, kernel
- <kernel@sberdevices.ru>, <oxffffaa@gmail.com>
+To: Arseniy Krasnov <avkrasnov@salutedevices.com>,
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Tom Rini <trini@konsulko.com>,
+ Sean Anderson <seanga2@gmail.com>, U-Boot-Denx <u-boot@lists.denx.de>,
+ u-boot-amlogic@groups.io, kernel <kernel@sberdevices.ru>, oxffffaa@gmail.com
 References: <20240708071352.3022327-1-avkrasnov@salutedevices.com>
  <82c914ec-db68-5971-8ac0-6ed359872175@salutedevices.com>
  <CAOf5uwmuZoDpVTGA=vTm_7Ywkw8OWi0e2NpG3Q1ZgO6R=UnuHQ@mail.gmail.com>
  <bb05c33e-9769-7e1d-699e-f42829255796@salutedevices.com>
  <CAOf5uw=UKXVB5H3DBzFFPx8nrXw3S44yPq=5CD+VAVHGuAmQTg@mail.gmail.com>
-Content-Language: en-US
-From: Arseniy Krasnov <avkrasnov@salutedevices.com>
-In-Reply-To: <CAOf5uw=UKXVB5H3DBzFFPx8nrXw3S44yPq=5CD+VAVHGuAmQTg@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+ <0343aa52-8f23-4447-1827-3de7710735f3@salutedevices.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <0343aa52-8f23-4447-1827-3de7710735f3@salutedevices.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Originating-IP: [77.220.140.242]
-X-ClientProxiedBy: p-i-exch-a-m1.sberdevices.ru (172.24.196.116) To
- p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 187254 [Aug 23 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.4
-X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 27 0.3.27
- 71302da218a62dcd84ac43314e19b5cc6b38e0b6, {Tracking_uf_ne_domains},
- {Tracking_arrow_http, text}, {Tracking_from_domain_doesnt_match_to},
- 127.0.0.199:7.1.2; salutedevices.com:7.1.1; smtp.sberdevices.ru:5.0.1,7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- lore.kernel.org:7.1.1, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2024/08/23 08:06:00
-X-KSMG-LinksScanning: Clean, bases: 2024/08/23 08:07:00
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/08/22 23:06:00 #26414143
-X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,94 +126,102 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi! Got it, thanks!
+On 23/08/2024 10:29, Arseniy Krasnov wrote:
+> Hi! Got it, thanks!
+> 
+> On 23.08.2024 11:10, Michael Nazzareno Trimarchi wrote:
+>> Hi Arseniy
+>>
+>> On Thu, Aug 22, 2024 at 9:04 AM Arseniy Krasnov
+>> <avkrasnov@salutedevices.com> wrote:
+>>>
+>>> Hi, thanks!
+>>>
+>>> Thanks, Arseniy
+>>>
+>>> On 22.08.2024 00:17, Michael Nazzareno Trimarchi wrote:
+>>>> Hi
+>>>>
+>>>> I will read them tomorrow ;)
+>>>>
+>>>> Thank you for understanding
+>>>>
+>>
+>> All the series are delegated to Neil. I will review anyway but I think
+>> that will then pick from him
 
-On 23.08.2024 11:10, Michael Nazzareno Trimarchi wrote:
-> Hi Arseniy
-> 
-> On Thu, Aug 22, 2024 at 9:04 AM Arseniy Krasnov
-> <avkrasnov@salutedevices.com> wrote:
+Sure I can pick them if reviewed!
+
+Neil
+
 >>
->> Hi, thanks!
+>> Michael
 >>
->> Thanks, Arseniy
->>
->> On 22.08.2024 00:17, Michael Nazzareno Trimarchi wrote:
->>> Hi
->>>
->>> I will read them tomorrow ;)
->>>
->>> Thank you for understanding
->>>
-> 
-> All the series are delegated to Neil. I will review anyway but I think
-> that will then pick from him
-> 
-> Michael
-> 
->>> Michael
->>>
->>> Il mer 21 ago 2024, 22:25 Arseniy Krasnov <avkrasnov@salutedevices.com> ha
->>> scritto:
->>>
->>>> Hi, sorry, pls ping  😄
+>>>> Michael
 >>>>
->>>> Thanks
+>>>> Il mer 21 ago 2024, 22:25 Arseniy Krasnov <avkrasnov@salutedevices.com> ha
+>>>> scritto:
 >>>>
->>>> On 08.07.2024 10:13, Arseniy Krasnov wrote:
->>>>> Patchset is based on patchset for Linux (today merged to nand-next):
+>>>>> Hi, sorry, pls ping  😄
 >>>>>
->>>> https://lore.kernel.org/linux-mtd/20240507230903.3399594-1-avkrasnov@salutedevices.com/
+>>>>> Thanks
 >>>>>
->>>>> Here is description from it:
->>>>>
->>>>>  >  Amlogic's boot ROM code needs that some pages on NAND must be written
->>>>>  >  in special "short" ECC mode with scrambling enabled. Such pages:
->>>>>  >  1) Contain some metadata about hardware.
->>>>>  >  2) Located with some interval starting from 0 offset, until some
->>>>>  >     specified offset. Interval and second offset are set in the
->>>>>  >     device tree.
->>>>>  >
->>>>>  >  This patchset adds R/W support for such pages. To enable it we can
->>>> setup
->>>>>  >  it in dts:
->>>>>  >
->>>>>  >      nand-is-boot-medium;
->>>>>  >      amlogic,boot-pages = <1024>;
->>>>>  >      amlogic,boot-page-step = <128>;
->>>>>  >
->>>>>  >  It means that each 128th page in range 0 to 1024 pages will be
->>>> accessed
->>>>>  >  in special mode ("short" ECC + scrambling). In practice this feature
->>>> is
->>>>>  >  needed when we want to update first block of NAND - driver will
->>>> enable
->>>>>  >  required mode by itself using value from device tree.
->>>>>
->>>>> The only difference is that patchset for Linux updates DT bindings, while
->>>>> this adds NAND_IS_BOOT_MEDIUM flag support.
->>>>>
->>>>> Changelog:
->>>>>  v1 -> v2:
->>>>>  * Pls see per-patch changelog.
->>>>>
->>>>> Arseniy Krasnov (3):
->>>>>   mtd: rawnand: nand_base: support for 'NAND_IS_BOOT_MEDIUM' flag
->>>>>   mtd: rawnand: meson: refactor use of 'meson_nfc_cmd_access()'
->>>>>   mtd: rawnand: meson: read/write access for boot ROM pages
->>>>>
->>>>>  drivers/mtd/nand/raw/meson_nand.c | 84 +++++++++++++++++++++----------
->>>>>  drivers/mtd/nand/raw/nand_base.c  |  3 ++
->>>>>  include/linux/mtd/rawnand.h       |  5 ++
->>>>>  3 files changed, 65 insertions(+), 27 deletions(-)
+>>>>> On 08.07.2024 10:13, Arseniy Krasnov wrote:
+>>>>>> Patchset is based on patchset for Linux (today merged to nand-next):
+>>>>>>
+>>>>> https://lore.kernel.org/linux-mtd/20240507230903.3399594-1-avkrasnov@salutedevices.com/
+>>>>>>
+>>>>>> Here is description from it:
+>>>>>>
+>>>>>>   >  Amlogic's boot ROM code needs that some pages on NAND must be written
+>>>>>>   >  in special "short" ECC mode with scrambling enabled. Such pages:
+>>>>>>   >  1) Contain some metadata about hardware.
+>>>>>>   >  2) Located with some interval starting from 0 offset, until some
+>>>>>>   >     specified offset. Interval and second offset are set in the
+>>>>>>   >     device tree.
+>>>>>>   >
+>>>>>>   >  This patchset adds R/W support for such pages. To enable it we can
+>>>>> setup
+>>>>>>   >  it in dts:
+>>>>>>   >
+>>>>>>   >      nand-is-boot-medium;
+>>>>>>   >      amlogic,boot-pages = <1024>;
+>>>>>>   >      amlogic,boot-page-step = <128>;
+>>>>>>   >
+>>>>>>   >  It means that each 128th page in range 0 to 1024 pages will be
+>>>>> accessed
+>>>>>>   >  in special mode ("short" ECC + scrambling). In practice this feature
+>>>>> is
+>>>>>>   >  needed when we want to update first block of NAND - driver will
+>>>>> enable
+>>>>>>   >  required mode by itself using value from device tree.
+>>>>>>
+>>>>>> The only difference is that patchset for Linux updates DT bindings, while
+>>>>>> this adds NAND_IS_BOOT_MEDIUM flag support.
+>>>>>>
+>>>>>> Changelog:
+>>>>>>   v1 -> v2:
+>>>>>>   * Pls see per-patch changelog.
+>>>>>>
+>>>>>> Arseniy Krasnov (3):
+>>>>>>    mtd: rawnand: nand_base: support for 'NAND_IS_BOOT_MEDIUM' flag
+>>>>>>    mtd: rawnand: meson: refactor use of 'meson_nfc_cmd_access()'
+>>>>>>    mtd: rawnand: meson: read/write access for boot ROM pages
+>>>>>>
+>>>>>>   drivers/mtd/nand/raw/meson_nand.c | 84 +++++++++++++++++++++----------
+>>>>>>   drivers/mtd/nand/raw/nand_base.c  |  3 ++
+>>>>>>   include/linux/mtd/rawnand.h       |  5 ++
+>>>>>>   3 files changed, 65 insertions(+), 27 deletions(-)
+>>>>>>
 >>>>>
 >>>>
->>>
-> 
-> 
-> 
+>>
+>>
+>>
+
