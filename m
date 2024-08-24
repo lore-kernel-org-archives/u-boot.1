@@ -4,79 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DC16C52D6F
-	for <u-boot@archiver.kernel.org>; Sat, 24 Aug 2024 05:35:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F6BCC52D6F
+	for <u-boot@archiver.kernel.org>; Sat, 24 Aug 2024 09:01:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 780E588A99;
-	Sat, 24 Aug 2024 07:35:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7F5AD88792;
+	Sat, 24 Aug 2024 11:01:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iAHH0uvH";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0967D88BE4; Sat, 24 Aug 2024 07:35:10 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6964A8888F; Sat, 24 Aug 2024 11:01:16 +0200 (CEST)
+Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D64E188A99
- for <u-boot@lists.denx.de>; Sat, 24 Aug 2024 07:35:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9891588706
+ for <u-boot@lists.denx.de>; Sat, 24 Aug 2024 11:01:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5bed05c0a2fso3339207a12.3
- for <u-boot@lists.denx.de>; Fri, 23 Aug 2024 22:35:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724477707; x=1725082507; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ij/b8mc2OidGWygKnF0w7rsT2zj6CQpcWuf4WDQSSeI=;
- b=iAHH0uvHaZ8GATc4Yph8+cwgIt18JTSRUtymU4AJmHCxewLHz+I6tPQ5APlqCyWdPH
- gm/6c6wDQfi9Yrk+sfNEZyFJfcw85hzgIbQzi4r6oHmkVCBJCKE2WZ654L0ucP2ei4Jd
- P7YRkA3s0as0ZtbJBAWDhqixW0/ww1g8wlSJ1I6N9xLDxcWTs/hBEndRVvnQznGuNy6E
- y5LqcrGvmoZN5ksMqkR4vuOuC/1/kHmiRPJzPGl5qUDGHJuQUskRn0gw5h8oCYsDIsAf
- HO3A/gJYRUY++IlCJFO5BHL5q/9z2zVsaVmKF8SJuJ/G2peJ2afTQFSr/otL9ibiMcod
- ipCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724477707; x=1725082507;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ij/b8mc2OidGWygKnF0w7rsT2zj6CQpcWuf4WDQSSeI=;
- b=s1Jp8hE1TTmkQeqd3EG8YZSAAo22fBfE31CPRyacuSbxnccZrZ7cSlIXR2bJlM7Mjn
- AccRCYFnruwLjoBPUR1NuOE4camEu8qAuBA93P7f7ifDri6nq6FY9fBNgAC3z8TSp56B
- wFsC4F1WJ7GiIm0fEQXqeHAIJYDqn23eqx5y+Em7AqrDFMHd4N3CtdkWePD9J1X6ufbX
- zRA6MbeOvwzRsZf4hQB9p6R11ceeVms4G164fmpob1bcoGlaHUd8GJWPELKx0O8IsqcV
- KErN19ic1AgHonFpBB/HSeU4Q26ZowKpnwQFuwnr3ElQ1O7kCwEcYQ+JcEQo6jUY/2Ul
- Ef5g==
-X-Gm-Message-State: AOJu0Yz4Dw6gaAyjTCDaU5QqePtBXMVzUIcXsq+G0QaYNF12NyB2cXa3
- pK4Q7KUg8ZVhyMG5I+QhfNBXCl2I7YOpXU9oIRgmRrWt3kAQYdFcFsTeALHk17rBdtXhjp/1B7z
- GFayYOEUSMUwLw0zSTf0J9/Toma0h7OtG+HZUUg==
-X-Google-Smtp-Source: AGHT+IHG1L3M4Mw0C3v/RxBSRM+slSJrexAejRqe5x/ufv8F84Z8ATX5H9dYr76ij+ZcVATsCa7aKmg2MfLg7LmYJ2E=
-X-Received: by 2002:a05:6402:518d:b0:5c0:99ff:7c85 with SMTP id
- 4fb4d7f45d1cf-5c099ff84b0mr333536a12.18.1724477707041; Fri, 23 Aug 2024
- 22:35:07 -0700 (PDT)
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
+Received: from secure.fukaumi.org ([10.0.0.2])
+ by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
+ 47O910Q3019052; Sat, 24 Aug 2024 18:01:00 +0900
+From: FUKAUMI Naoki <naoki@radxa.com>
+To: u-boot@lists.denx.de
+Cc: jonas@kwiboo.se, sjg@chromium.org, philipp.tomsich@vrull.eu,
+ kever.yang@rock-chips.com, FUKAUMI Naoki <naoki@radxa.com>
+Subject: [PATCH] arm: dts: rockchip: add support for SPI NOR flash on Radxa
+ E25(CM3I)
+Date: Sat, 24 Aug 2024 18:00:53 +0900
+Message-ID: <20240824090054.8973-1-naoki@radxa.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20240821105839.2870293-1-sughosh.ganu@linaro.org>
- <20240821105839.2870293-18-sughosh.ganu@linaro.org>
- <CAFLszTiuOTquP5sztthp=zgb=u-c2ZADu8Rw6E-AhPV2Up9m3A@mail.gmail.com>
-In-Reply-To: <CAFLszTiuOTquP5sztthp=zgb=u-c2ZADu8Rw6E-AhPV2Up9m3A@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Sat, 24 Aug 2024 11:04:55 +0530
-Message-ID: <CADg8p96s0EAvFO5qHEduZ6C2hEEf53hM6BfaZPoF5Zx3NVHZ9A@mail.gmail.com>
-Subject: Re: [PATCH v3 17/27] lmb: do away with arch_lmb_reserve()
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Marek Vasut <marex@denx.de>, Mark Kettenis <mark.kettenis@xs4all.nl>, 
- Michal Simek <michal.simek@amd.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- Patrice CHOTARD <patrice.chotard@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,152 +51,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 24 Aug 2024 at 02:17, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Sughosh,
->
-> On Wed, 21 Aug 2024 at 05:00, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >
-> > All of the current definitions of arch_lmb_reserve() are doing the
-> > same thing -- reserve the region of memory occupied by U-Boot,
-> > starting from the current stack address to the ram_top. Introduce a
-> > function lmb_reserve_uboot_region() which does this, and do away with
-> > the arch_lmb_reserve() function.
-> >
-> > Instead of using the current value of stack pointer for starting the
-> > reserved region, have a fixed value, considering the stack size config
-> > value.nit
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> > Changes since V2:
-> > * Remove the definitions of arch_lmb_reserve() and
-> >   arch_lmb_reserve_generic() functions.
-> > * Introduce a new function lmb_reserve_uboot_region() and call it from
-> >   lmb_reserve_common().
-> >
-> >  arch/arc/lib/cache.c        | 14 -------
-> >  arch/arm/lib/stack.c        | 14 -------
-> >  arch/m68k/lib/bootm.c       | 17 --------
-> >  arch/microblaze/lib/bootm.c | 14 -------
-> >  arch/mips/lib/bootm.c       | 15 -------
-> >  arch/nios2/lib/bootm.c      | 13 ------
-> >  arch/powerpc/lib/bootm.c    |  9 ----
-> >  arch/riscv/lib/bootm.c      | 13 ------
-> >  arch/sh/lib/bootm.c         | 13 ------
-> >  arch/x86/lib/bootm.c        | 18 --------
-> >  arch/xtensa/lib/bootm.c     | 13 ------
-> >  include/lmb.h               |  2 -
-> >  lib/lmb.c                   | 83 ++++++++++++++++++-------------------
-> >  13 files changed, 41 insertions(+), 197 deletions(-)
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->
-> question below
->
-> [..]
->
-> > diff --git a/include/lmb.h b/include/lmb.h
-> > index e6c6f1cdcd..6e435bd35c 100644
-> > --- a/include/lmb.h
-> > +++ b/include/lmb.h
-> > @@ -108,8 +108,6 @@ void lmb_dump_all(void);
-> >  void lmb_dump_all_force(void);
-> >
-> >  void board_lmb_reserve(void);
-> > -void arch_lmb_reserve(void);
-> > -void arch_lmb_reserve_generic(ulong sp, ulong end, ulong align);
-> >
-> >  #if CONFIG_IS_ENABLED(UNIT_TEST)
->
-> There is no need to do this in the header file, BTW. It will cause a
-> link error if someone uses it by mistake.
+my CM3I has a w25q128fw, so add support for it.
 
-Okay
+=> sf probe
+SF: Detected w25q128fw with page size 256 Bytes, erase size 4 KiB, total 16 MiB
 
->
-> >  struct lmb *lmb_get(void);
-> > diff --git a/lib/lmb.c b/lib/lmb.c
-> > index e26e329248..1116b2b868 100644
-> > --- a/lib/lmb.c
-> > +++ b/lib/lmb.c
-> [..]
-> > @@ -215,10 +179,50 @@ static __maybe_unused int efi_lmb_reserve(void)
-> >         return 0;
-> >  }
-> >
-> > +static void lmb_reserve_uboot_region(void)
-> > +{
-> > +       int bank;
-> > +       ulong end, bank_end;
-> > +       phys_addr_t rsv_start;
-> > +
-> > +       rsv_start = gd->start_addr_sp - CONFIG_STACK_SIZE;
-> > +       end = gd->ram_top;
-> > +
-> > +       /*
-> > +        * Reserve memory from aligned address below the bottom of U-Boot stack
-> > +        * until end of RAM area to prevent LMB from overwriting that memory.
-> > +        */
-> > +       debug("## Current stack ends at 0x%08lx ", (ulong)rsv_start);
-> > +
-> > +       /* adjust sp by 4K to be safe */
-> > +       rsv_start -= 16384;
->
-> Should that be SZ_4K ?
+Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+---
+ arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi | 16 ++++++++++++++++
+ configs/radxa-e25-rk3568_defconfig        | 14 ++++++++++++++
+ 2 files changed, 30 insertions(+)
 
-It should be SZ_16K. This is using the highest value that was being
-used by the different architectures. I will fix the comment. Thanks.
+diff --git a/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi b/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
+index 74755a44eae..1f0bacbf61f 100644
+--- a/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
++++ b/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
+@@ -21,6 +21,22 @@
+ 	mmc-hs400-enhanced-strobe;
+ };
+ 
++&sfc {
++	#address-cells = <1>;
++	#size-cells = <0>;
++	status = "okay";
++
++	flash@0 {
++		compatible = "jedec,spi-nor";
++		reg = <0>;
++		bootph-pre-ram;
++		bootph-some-ram;
++		spi-max-frequency = <24000000>;
++		spi-rx-bus-width = <4>;
++		spi-tx-bus-width = <1>;
++	};
++};
++
+ &usb_host0_xhci {
+ 	dr_mode = "host";
+ };
+diff --git a/configs/radxa-e25-rk3568_defconfig b/configs/radxa-e25-rk3568_defconfig
+index 496fee0e0a4..51bf0287198 100644
+--- a/configs/radxa-e25-rk3568_defconfig
++++ b/configs/radxa-e25-rk3568_defconfig
+@@ -3,11 +3,16 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_SYS_HAS_NONCACHED_MEMORY=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
++CONFIG_SF_DEFAULT_SPEED=24000000
++CONFIG_SF_DEFAULT_MODE=0x2000
+ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-radxa-e25"
+ CONFIG_ROCKCHIP_RK3568=y
++CONFIG_ROCKCHIP_SPI_IMAGE=y
+ CONFIG_SPL_SERIAL=y
+ CONFIG_DEBUG_UART_BASE=0xFE660000
+ CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
+ CONFIG_SYS_LOAD_ADDR=0xc00800
+ CONFIG_PCI=y
+ CONFIG_DEBUG_UART=y
+@@ -23,6 +28,8 @@ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+ CONFIG_SPL_ATF=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_GPT=y
+@@ -51,6 +58,12 @@ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_SDMA=y
+ CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_SF_DEFAULT_BUS=4
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_GIGADEVICE=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_WINBOND=y
++CONFIG_SPI_FLASH_XTX=y
+ CONFIG_RTL8169=y
+ CONFIG_PCIE_DW_ROCKCHIP=y
+ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+@@ -64,6 +77,7 @@ CONFIG_SPL_RAM=y
+ CONFIG_SCSI=y
+ CONFIG_DEBUG_UART_SHIFT=2
+ CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SFC=y
+ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ CONFIG_USB_XHCI_HCD=y
+-- 
+2.43.0
 
--sughosh
-
->
-> > +       for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-> > +               if (!gd->bd->bi_dram[bank].size ||
-> > +                   rsv_start < gd->bd->bi_dram[bank].start)
-> > +                       continue;
-> > +               /* Watch out for RAM at end of address space! */
-> > +               bank_end = gd->bd->bi_dram[bank].start +
-> > +                       gd->bd->bi_dram[bank].size - 1;
-> > +               if (rsv_start > bank_end)
-> > +                       continue;
-> > +               if (bank_end > end)
-> > +                       bank_end = end - 1;
-> > +
-> > +               lmb_reserve_flags(rsv_start, bank_end - rsv_start + 1,
-> > +                                 LMB_NOOVERWRITE);
-> > +
-> > +               if (gd->flags & GD_FLG_SKIP_RELOC)
-> > +                       lmb_reserve_flags((phys_addr_t)(uintptr_t)_start,
-> > +                                   gd->mon_len, LMB_NOOVERWRITE);
-> > +
-> > +               break;
-> > +       }
-> > +}
-> > +
-> >  static void lmb_reserve_common(void *fdt_blob)
-> >  {
-> > -       arch_lmb_reserve();
-> >         board_lmb_reserve();
-> > +       lmb_reserve_uboot_region();
-> >
-> >         if (CONFIG_IS_ENABLED(OF_LIBFDT) && fdt_blob)
-> >                 boot_fdt_add_mem_rsv_regions(fdt_blob);
-> > @@ -689,11 +693,6 @@ __weak void board_lmb_reserve(void)
-> >         /* please define platform specific board_lmb_reserve() */
-> >  }
-> >
-> > -__weak void arch_lmb_reserve(void)
-> > -{
-> > -       /* please define platform specific arch_lmb_reserve() */
-> > -}
-> > -
-> >  static int lmb_setup(void)
-> >  {
-> >         bool ret;
-> > --
-> > 2.34.1
-> >
->
-> Regards,
-> Simon
