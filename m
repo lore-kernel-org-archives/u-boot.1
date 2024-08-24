@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DDE8C5472D
-	for <u-boot@archiver.kernel.org>; Sat, 24 Aug 2024 18:48:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C791FC52D6F
+	for <u-boot@archiver.kernel.org>; Sat, 24 Aug 2024 19:07:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EC0E88886;
-	Sat, 24 Aug 2024 20:48:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 1A91B87F5C;
+	Sat, 24 Aug 2024 21:07:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="azMo7UsI";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="BF4zhQP6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24B948888F; Sat, 24 Aug 2024 20:48:22 +0200 (CEST)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B8FDB8852A; Sat, 24 Aug 2024 21:07:06 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E93B388706
- for <u-boot@lists.denx.de>; Sat, 24 Aug 2024 20:48:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86E6187F19
+ for <u-boot@lists.denx.de>; Sat, 24 Aug 2024 21:07:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=moritzf@google.com
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-20353e5de9cso155375ad.0
- for <u-boot@lists.denx.de>; Sat, 24 Aug 2024 11:48:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1724525298; x=1725130098; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jKErnblzu3qV8jlaIU+bnU6QfXKqC2FHZXzJA/CSZ8w=;
- b=azMo7UsIkBzHlM14SMylVKve7KPoZpuhXIRQEcGobR76gFOidO+0ylVeEWG4VKwDln
- ZT9xctytSDY28wqqwqRn9Wphrw5UYUf94aRBz2CqbHQVzP4/P/Rq76KsjZumUUH+zV50
- SX8w0bfAc+05nbVn10fN3MqNjVcs1XiY6JkRu3J4403GjpWS4VKZdUZDpXKiWLP2ZJuI
- 4lu8y0ADkbA1YYMGOGmQnw/JK30qccolpz7OF+pNATV+6LhaKj/5jWlPTSIzxv10pdKJ
- xuLU/+yIRbKv4YUEbikJTWtnpbFB6LvlHZu+Rk0qGYMs2dAF9u9xaeTUHRfhZrucxoWy
- HDpA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724525298; x=1725130098;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jKErnblzu3qV8jlaIU+bnU6QfXKqC2FHZXzJA/CSZ8w=;
- b=nPk/wum7kScrQ0KD0BveMx0y+WiLoQMA9b1PYuDah2QX8bcDqmFue44iunV/4LTmGJ
- GZ4vjR0fSu1J5yo39yrVk/q5JbXYIuMib0YHaPrSPYC+QBrFzDd38PcGVUbDUPa2kkmt
- h1UT+1JOJeXu2ZhpnnoUCirP+6Lw87D7ICqfVZDGBc5CJNZlG5jKSv8KcPL4fJcN6Uxv
- tWlfhbZBrRIgEfkPy3GEQLzFmYgA9NlUP2rS1UnGNTlSXqRK/O6QXH5WykEHlYxQqCM3
- 8k6QlkYkNdlkuK7HjZuYVhuULdsu7KqtLBuolpN237Fy+NkqTcszRIVGbXcQCC0JFBY3
- atAw==
-X-Gm-Message-State: AOJu0YzXKXn6ycEWmh/dqLwrs0tPWEbZXwBNzma6KQ1KZnWY8EoXrJ0H
- RD0pnaf5owaSAxTSOegZgzxVHn3s5xGlxNZY7INl/C9kM+9yrANKnENWuDZRTnecTtgSYwovBoP
- i2EyvFO8Zqtvk/f8UAA2KaIqZEMiicUfJPNlH
-X-Google-Smtp-Source: AGHT+IFaNVteBFzMiFWCpgH6wgjjF8w/YnjGBABCXbDl1cpa7wkJBrffPiim9wdqoNrbLhIPnyVyTY+M0+/aZqUMbZ4=
-X-Received: by 2002:a17:903:1c4:b0:201:df0b:2b77 with SMTP id
- d9443c01a7336-203b28bc953mr2164215ad.0.1724525298052; Sat, 24 Aug 2024
- 11:48:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1724526420; x=1725131220; i=xypron.glpk@gmx.de;
+ bh=wgkYgZXP9KCNffKAMq8LcHNluycubduON8VrepR8cOY=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
+ Subject:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=BF4zhQP6sow0mFKkStGtGS3Xi3ACnKBsJ3R4l/G2BbHbPRaxzYzIZ2RqpDoXWxjw
+ 1dHZUXPK7RAQc0pioCT4NezRzM0kIeakWTuE82I1zKcFBZNLhZ5MEjeqvJFrZOi7A
+ jLywO0SnSm8qfGvTIhBXDwnAcuZgNy+MyGKNf6SIzE4xOcCIQ0M2PNqbCTagzHdRx
+ BzthRTO/TTyRTNB0vgBVXity0vVytfmBH3BgYsul5n+Cdua/UkV9FGtBnT2H7EyXI
+ hIO39fhtZT1MvngXmClxvcdnJKvHpm0B2bhIRyGz2JdX0omYALOB+i0CsM5SLSRPl
+ h0Ipgd+Z4zacR65T2w==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.101] ([178.202.41.98]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N3KTo-1rzYj01obi-016ntq; Sat, 24
+ Aug 2024 21:07:00 +0200
+Message-ID: <dd9352a4-767d-4aef-9d19-08cf301ee8f7@gmx.de>
+Date: Sat, 24 Aug 2024 21:06:56 +0200
 MIME-Version: 1.0
-References: <20240727071742.1735703-1-patrick.rudolph@9elements.com>
- <20240727071742.1735703-8-patrick.rudolph@9elements.com>
-In-Reply-To: <20240727071742.1735703-8-patrick.rudolph@9elements.com>
-From: Moritz Fischer <moritzf@google.com>
-Date: Sat, 24 Aug 2024 11:48:07 -0700
-Message-ID: <CAFyOScp-gskCBxAsha2tsN83tfTrUtLBnARNpEQ18_ENO+aE6g@mail.gmail.com>
-Subject: Re: [PATCH 07/17] arm: acpi: Add generic ACPI methods
-To: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: u-boot@lists.denx.de, linux-kernel@vger.kernel.org, mbrugger@suse.com, 
- pbrobinson@gmail.com, trini@konsulko.com, sjg@chromium.org, 
- bmeng.cn@gmail.com
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Emil Kronborg <emil.kronborg@protonmail.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PULL MASTER] Pull request efi-2024-10-rc4
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:cYh/N1zIRnIBBTDpTI6sIgLvGr2Fq78E0XyVgIBjICFmK1eek+C
+ DUBVUHV/aIOKbu9DLo+WrX4efwuPV9e5clk04H6HRvvmO7AdLOJPfBXHMggHQeIgiR8GgbY
+ pJcW2iKtJSbloQcCkeKrpWzUzsNs8uA/ZDKAdnPGuoc1KggA/C43Dy0Ufk6ClOy4AgnSl4f
+ DxzrgQiOcTGg99HsBs6iA==
+UI-OutboundReport: notjunk:1;M01:P0:h0C2Qe/4u9E=;oM9mRZFUYsGlbGdA+/ofmqvgPqG
+ SO3KvkENVeGw9SoxtLioDhF/4gHEqXPLH//3RHelh4gdRQWCY9sxbTiyNvU/h+xVcR/p5S7Gl
+ xsMYW4jB1/qy6hDywGXzBaP6t29NnbF+KQEuliFjh7JvJ7m/ztGAuvnCXhGx05a8hOKZ8rF23
+ 6hFE9Wm6UJMG8TQuFWLaxvlGNq3OMTS7zjlEXkYA9w8OY2vpXVsaqMJQkTrpIAmSM81gBUEF+
+ Hod78IL63AOWQ/aXg1ESV3x3C75M0EN2b6XpGgu9wKtapIh3vStaykBffy2cJ25yIZyhykA98
+ Mq08GDBTPYfic+oEYn7nZsTaebhNoaKjZdpv4k6bVP889VXYoC58C7dn1R8dRIi3asxf2e4hN
+ o7QGcyVl0aeateIR5nNVZINaZeke0P7QJgOROcBS0AYhevAMY7dg+NPZxLh3S/X0FL3u0LjGd
+ SCw38k053mubgdtAUeNC46+cXLOOPcCKKnKDGcMIcnTk/I5eGCG9uTv+Sggwzovt7593Oh4YS
+ SNOrCBSETkmfizKX9Ql7Y/b+h5UNsYtATm2z9CPS4LboFHRz976oxU9AqSC9Kv7FuuHOE7xVL
+ aIThmjVPltxZC9iVICAWUsZF77SmMI0eQqlV3Jx1cjx1xRdhs0RWnzCxQ+Xr0OUFG1OB5O4zF
+ zlLJ8MqiIDXX+OKAQFsldu1YdEnTboE0nTTkx6mmuClyHI2XfavsN0OQcnQAxR8Z49+EQrssc
+ /VoAOQwAPqZtQB34t1kvUt/n+V/HOXHtS60g011sMGdXjx7nTjC6WsvP5XVCtXKsUvv/LXJXe
+ VqnIQOXVb8DZ/UiQPKi76O0w==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,119 +88,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Patrick,
+Dear Tom,
 
-On Sat, Jul 27, 2024 at 12:21=E2=80=AFAM Patrick Rudolph
-<patrick.rudolph@9elements.com> wrote:
->
-> Add generic ACPI code to generate
-> - MADT GICC
-> - MADT GICD
->
-> as commonly used on arm platforms.
->
-> Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> ---
->  arch/arm/include/asm/acpi_table.h | 18 +++++++++++++
->  arch/arm/lib/Makefile             |  1 +
->  arch/arm/lib/acpi_table.c         | 44 +++++++++++++++++++++++++++++++
->  3 files changed, 63 insertions(+)
->  create mode 100644 arch/arm/lib/acpi_table.c
->
-> diff --git a/arch/arm/include/asm/acpi_table.h b/arch/arm/include/asm/acp=
-i_table.h
-> index e69de29bb2..8a25e93847 100644
-> --- a/arch/arm/include/asm/acpi_table.h
-> +++ b/arch/arm/include/asm/acpi_table.h
-> @@ -0,0 +1,18 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +
-> +#ifndef __ASM_ACPI_TABLE_H__
-> +#define __ASM_ACPI_TABLE_H__
-> +
-> +#ifndef __ACPI__
-> +
-> +void acpi_write_madt_gicc(struct acpi_madt_gicc *gicc, uint cpu_num,
-> +                         uint perf_gsiv, ulong phys_base, ulong gicv,
-> +                         ulong gich, uint vgic_maint_irq, ulong mpidr,
-> +                         uint efficiency);
-> +
-> +void acpi_write_madt_gicd(struct acpi_madt_gicd *gicd, uint gic_id,
-> +                         ulong phys_base, uint gic_version);
-> +
-> +#endif /* !__ACPI__ */
-> +
-> +#endif /* __ASM_ACPI_TABLE_H__ */
-> diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
-> index 67275fba61..a7efed6771 100644
-> --- a/arch/arm/lib/Makefile
-> +++ b/arch/arm/lib/Makefile
-> @@ -86,6 +86,7 @@ obj-y +=3D psci-dt.o
->  obj-$(CONFIG_DEBUG_LL) +=3D debug.o
->
->  obj-$(CONFIG_BLOBLIST)  +=3D xferlist.o
-> +obj-$(CONFIG_GENERATE_ACPI_TABLE) +=3D acpi_table.o
->
->  # For EABI conformant tool chains, provide eabi_compat()
->  ifneq (,$(findstring -mabi=3Daapcs-linux,$(PLATFORM_CPPFLAGS)))
-> diff --git a/arch/arm/lib/acpi_table.c b/arch/arm/lib/acpi_table.c
-> new file mode 100644
-> index 0000000000..ea3a6343c9
-> --- /dev/null
-> +++ b/arch/arm/lib/acpi_table.c
-> @@ -0,0 +1,44 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Based on acpi.c from coreboot
-> + *
-> + * Copyright (C) 2024 9elements GmbH
-> + */
-> +
-> +#define LOG_CATEGORY LOGC_ACPI
-> +
-> +#include <acpi/acpigen.h>
-> +#include <acpi/acpi_device.h>
-> +#include <acpi/acpi_table.h>
-> +#include <string.h>
-> +
-> +void acpi_write_madt_gicc(struct acpi_madt_gicc *gicc, uint cpu_num,
-> +                         uint perf_gsiv, ulong phys_base, ulong gicv,
-> +                         ulong gich, uint vgic_maint_irq, ulong mpidr,
-> +                         uint efficiency)
-> +{
-> +       memset(gicc, '\0', sizeof(struct acpi_madt_gicc));
-> +       gicc->type =3D ACPI_APIC_GICC;
-> +       gicc->length =3D sizeof(struct acpi_madt_gicc);
-> +       gicc->cpu_if_num =3D cpu_num;
-> +       gicc->processor_id =3D cpu_num;
-> +       gicc->flags =3D ACPI_MADTF_ENABLED;
-> +       gicc->perf_gsiv =3D perf_gsiv;
-> +       gicc->phys_base =3D phys_base;
-> +       gicc->gicv =3D gicv;
-> +       gicc->gich =3D gich;
-> +       gicc->vgic_maint_irq =3D vgic_maint_irq;
+The following changes since commit a481740629af5e51732b86b6ead61dc5aa5a440=
+d:
 
-I think you're lacking the rdists here?
+   Merge tag 'u-boot-dfu-20240822' of
+https://source.denx.de/u-boot/custodians/u-boot-dfu (2024-08-22 08:14:48
+-0600)
 
-> +       gicc->mpidr =3D mpidr;
-> +       gicc->efficiency =3D efficiency;
-> +}
-> +
-> +void acpi_write_madt_gicd(struct acpi_madt_gicd *gicd, uint gic_id,
-> +                         ulong phys_base, uint gic_version)
-> +{
-> +       memset(gicd, '\0', sizeof(struct acpi_madt_gicd));
-> +       gicd->type =3D ACPI_APIC_GICD;
-> +       gicd->length =3D sizeof(struct acpi_madt_gicd);
-> +       gicd->gic_id =3D gic_id;
-> +       gicd->phys_base =3D phys_base;
-> +       gicd->gic_version =3D gic_version;
-> +}
-> --
-> 2.45.2
->
+are available in the Git repository at:
 
-Cheers,
-Moritz
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+tags/efi-2024-10-rc4
+
+for you to fetch changes up to dcd1b63b7072749f98ea0a87565d0ae5c8ddfb65:
+
+   efi_loader: allow EFI_LOADER_BOUNCE_BUFFER on all architectures
+(2024-08-24 11:41:23 +0200)
+
+Gitlab CI showed no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/22104
+
+=2D---------------------------------------------------------------
+Pull request efi-2024-10-rc4
+
+Documentation:
+
+  * Add description of the pwm command
+
+UEFI
+
+* Correct printf codes in mkeficapsule
+* Allow CONFIG_EFI_LOADER_BOUNCE_BUFFER on all architectures
+* Free memory in efi_get_dp_from_boot()
+
+=2D---------------------------------------------------------------
+Emil Kronborg (1):
+       doc: document the pwm command
+
+Heinrich Schuchardt (2):
+       tools/mkeficapsule: correct printf codes
+       efi_loader: allow EFI_LOADER_BOUNCE_BUFFER on all architectures
+
+Ilias Apalodimas (1):
+       efi_loader: fix memory freeing in efi_get_dp_from_boot()
+
+  doc/usage/cmd/pwm.rst       | 91
++++++++++++++++++++++++++++++++++++++++++++++
+  doc/usage/index.rst         |  1 +
+  lib/efi_loader/Kconfig      |  1 -
+  lib/efi_loader/efi_helper.c |  5 ++-
+  tools/mkeficapsule.c        |  7 ++--
+  5 files changed, 99 insertions(+), 6 deletions(-)
+  create mode 100644 doc/usage/cmd/pwm.rst
