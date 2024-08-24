@@ -4,74 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C791FC52D6F
-	for <u-boot@archiver.kernel.org>; Sat, 24 Aug 2024 19:07:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 621D9C52D6F
+	for <u-boot@archiver.kernel.org>; Sat, 24 Aug 2024 20:02:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A91B87F5C;
-	Sat, 24 Aug 2024 21:07:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 79BE588792;
+	Sat, 24 Aug 2024 22:02:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="BF4zhQP6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RO/o1m6P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8FDB8852A; Sat, 24 Aug 2024 21:07:06 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 08002888C1; Sat, 24 Aug 2024 22:02:16 +0200 (CEST)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86E6187F19
- for <u-boot@lists.denx.de>; Sat, 24 Aug 2024 21:07:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DE6438877E
+ for <u-boot@lists.denx.de>; Sat, 24 Aug 2024 22:02:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1724526420; x=1725131220; i=xypron.glpk@gmx.de;
- bh=wgkYgZXP9KCNffKAMq8LcHNluycubduON8VrepR8cOY=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
- Subject:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=BF4zhQP6sow0mFKkStGtGS3Xi3ACnKBsJ3R4l/G2BbHbPRaxzYzIZ2RqpDoXWxjw
- 1dHZUXPK7RAQc0pioCT4NezRzM0kIeakWTuE82I1zKcFBZNLhZ5MEjeqvJFrZOi7A
- jLywO0SnSm8qfGvTIhBXDwnAcuZgNy+MyGKNf6SIzE4xOcCIQ0M2PNqbCTagzHdRx
- BzthRTO/TTyRTNB0vgBVXity0vVytfmBH3BgYsul5n+Cdua/UkV9FGtBnT2H7EyXI
- hIO39fhtZT1MvngXmClxvcdnJKvHpm0B2bhIRyGz2JdX0omYALOB+i0CsM5SLSRPl
- h0Ipgd+Z4zacR65T2w==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.101] ([178.202.41.98]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N3KTo-1rzYj01obi-016ntq; Sat, 24
- Aug 2024 21:07:00 +0200
-Message-ID: <dd9352a4-767d-4aef-9d19-08cf301ee8f7@gmx.de>
-Date: Sat, 24 Aug 2024 21:06:56 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-27032e6dbf2so2021983fac.1
+ for <u-boot@lists.denx.de>; Sat, 24 Aug 2024 13:02:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1724529732; x=1725134532; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eAsjolSAWnq/GpU4TndEsA+sxb9MjFrvkO3Tt6/an6k=;
+ b=RO/o1m6PdjNoe9ygRmstw0gVqfeP1Nmv8Kb8YnutTLL0u6E3h/6ruhkpiTlPY604XR
+ 9/DFoRaYzuxYxWHqo/4jCVUoT4F1MTTPtu8B24iq/3A4jl2l38YS7VwN1mB8OMMlEp2+
+ f808wcCy78FhPE+W6H1l7LJILZyhRXFRY4Ve4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724529732; x=1725134532;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=eAsjolSAWnq/GpU4TndEsA+sxb9MjFrvkO3Tt6/an6k=;
+ b=EjlmIYLemF/qr7xC1YTFErMKpcH5D9z70eyupAwkfMwrSNdr09IvGSj6ZyxbzJ7fr5
+ ej7EAR5zalCFfxkxq5IKoL5St/ehSnwzXIq8ig9I11ESqVfVh6mIYFDaG9xN2M53+1N5
+ kZIlkVNMR9E8Qgff/44kqcvmNxIQYtF2hHpJCkS42Q04XN7UwXW6C5CU6kG6LPVx936Y
+ HnU+CuODcaNROudYL6fvtxQdHNpmnTAI/nrPhbi3IVEk9zZPRO5TkhENqqQiUwvG/XXs
+ aF7k+MFrfxVLmt9xD3l07guUpoZytk+j5FaDfioO0jLjIC0nijCrL9q7MCd16MAX1Ol4
+ aR/g==
+X-Gm-Message-State: AOJu0YxuSQuRMRHDW3gSL4zfFZcA7BcK39tXUKllTob2vuWGxU+gzc66
+ IIIZrcOt3eTbIkQEH4HrdOjPVuHMQJTzlIcNX4Rv2MTFl1EyxxQnyQIgZ++VFTI=
+X-Google-Smtp-Source: AGHT+IGNcEfUNFfN0OCzj+B0aceVvpTMZQhVXwL7GCYmyywIpgv1OTi1lLF8dL+eJwLo7TwAMF/isA==
+X-Received: by 2002:a05:6870:3c15:b0:270:2c12:98c3 with SMTP id
+ 586e51a60fabf-273e67aace1mr6211731fac.50.1724529732576; 
+ Sat, 24 Aug 2024 13:02:12 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7a67f41f507sm300754485a.132.2024.08.24.13.02.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 24 Aug 2024 13:02:11 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Cc: Sean Anderson <seanga2@gmail.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Jeffy Chen <jeffy.chen@rock-chips.com>, 
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Peng Fan <peng.fan@nxp.com>, huang lin <hl@rock-chips.com>
+In-Reply-To: <20240822135503.2363706-1-sjg@chromium.org>
+References: <20240822135503.2363706-1-sjg@chromium.org>
+Subject: Re: [PATCH v4 00/14] spl: mmc: Some tweaks for SPL, particularly
+ with MMC
+Message-Id: <172452973055.2581148.4176048793688635803.b4-ty@konsulko.com>
+Date: Sat, 24 Aug 2024 14:02:10 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Emil Kronborg <emil.kronborg@protonmail.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PULL MASTER] Pull request efi-2024-10-rc4
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:cYh/N1zIRnIBBTDpTI6sIgLvGr2Fq78E0XyVgIBjICFmK1eek+C
- DUBVUHV/aIOKbu9DLo+WrX4efwuPV9e5clk04H6HRvvmO7AdLOJPfBXHMggHQeIgiR8GgbY
- pJcW2iKtJSbloQcCkeKrpWzUzsNs8uA/ZDKAdnPGuoc1KggA/C43Dy0Ufk6ClOy4AgnSl4f
- DxzrgQiOcTGg99HsBs6iA==
-UI-OutboundReport: notjunk:1;M01:P0:h0C2Qe/4u9E=;oM9mRZFUYsGlbGdA+/ofmqvgPqG
- SO3KvkENVeGw9SoxtLioDhF/4gHEqXPLH//3RHelh4gdRQWCY9sxbTiyNvU/h+xVcR/p5S7Gl
- xsMYW4jB1/qy6hDywGXzBaP6t29NnbF+KQEuliFjh7JvJ7m/ztGAuvnCXhGx05a8hOKZ8rF23
- 6hFE9Wm6UJMG8TQuFWLaxvlGNq3OMTS7zjlEXkYA9w8OY2vpXVsaqMJQkTrpIAmSM81gBUEF+
- Hod78IL63AOWQ/aXg1ESV3x3C75M0EN2b6XpGgu9wKtapIh3vStaykBffy2cJ25yIZyhykA98
- Mq08GDBTPYfic+oEYn7nZsTaebhNoaKjZdpv4k6bVP889VXYoC58C7dn1R8dRIi3asxf2e4hN
- o7QGcyVl0aeateIR5nNVZINaZeke0P7QJgOROcBS0AYhevAMY7dg+NPZxLh3S/X0FL3u0LjGd
- SCw38k053mubgdtAUeNC46+cXLOOPcCKKnKDGcMIcnTk/I5eGCG9uTv+Sggwzovt7593Oh4YS
- SNOrCBSETkmfizKX9Ql7Y/b+h5UNsYtATm2z9CPS4LboFHRz976oxU9AqSC9Kv7FuuHOE7xVL
- aIThmjVPltxZC9iVICAWUsZF77SmMI0eQqlV3Jx1cjx1xRdhs0RWnzCxQ+Xr0OUFG1OB5O4zF
- zlLJ8MqiIDXX+OKAQFsldu1YdEnTboE0nTTkx6mmuClyHI2XfavsN0OQcnQAxR8Z49+EQrssc
- /VoAOQwAPqZtQB34t1kvUt/n+V/HOXHtS60g011sMGdXjx7nTjC6WsvP5XVCtXKsUvv/LXJXe
- VqnIQOXVb8DZ/UiQPKi76O0w==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,57 +94,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+On Thu, 22 Aug 2024 07:54:49 -0600, Simon Glass wrote:
 
-The following changes since commit a481740629af5e51732b86b6ead61dc5aa5a440=
-d:
+> This series includes various minor fixes and tweaks found when trying
+> to reduce the size of MMC code in SPL.
+> 
+> Changes in v4:
+> - Mention the change to lower case in the commit message
+> - Put a 0x prefix on the 'enhanced size' message
+> - Drop defconfig-resync patch
+> 
+> [...]
 
-   Merge tag 'u-boot-dfu-20240822' of
-https://source.denx.de/u-boot/custodians/u-boot-dfu (2024-08-22 08:14:48
--0600)
+Applied to u-boot/next, thanks!
 
-are available in the Git repository at:
+-- 
+Tom
 
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-tags/efi-2024-10-rc4
 
-for you to fetch changes up to dcd1b63b7072749f98ea0a87565d0ae5c8ddfb65:
-
-   efi_loader: allow EFI_LOADER_BOUNCE_BUFFER on all architectures
-(2024-08-24 11:41:23 +0200)
-
-Gitlab CI showed no issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/22104
-
-=2D---------------------------------------------------------------
-Pull request efi-2024-10-rc4
-
-Documentation:
-
-  * Add description of the pwm command
-
-UEFI
-
-* Correct printf codes in mkeficapsule
-* Allow CONFIG_EFI_LOADER_BOUNCE_BUFFER on all architectures
-* Free memory in efi_get_dp_from_boot()
-
-=2D---------------------------------------------------------------
-Emil Kronborg (1):
-       doc: document the pwm command
-
-Heinrich Schuchardt (2):
-       tools/mkeficapsule: correct printf codes
-       efi_loader: allow EFI_LOADER_BOUNCE_BUFFER on all architectures
-
-Ilias Apalodimas (1):
-       efi_loader: fix memory freeing in efi_get_dp_from_boot()
-
-  doc/usage/cmd/pwm.rst       | 91
-+++++++++++++++++++++++++++++++++++++++++++++
-  doc/usage/index.rst         |  1 +
-  lib/efi_loader/Kconfig      |  1 -
-  lib/efi_loader/efi_helper.c |  5 ++-
-  tools/mkeficapsule.c        |  7 ++--
-  5 files changed, 99 insertions(+), 6 deletions(-)
-  create mode 100644 doc/usage/cmd/pwm.rst
