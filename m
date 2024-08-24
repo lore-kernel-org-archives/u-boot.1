@@ -4,51 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7214AC52D6F
-	for <u-boot@archiver.kernel.org>; Sat, 24 Aug 2024 22:25:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74BFCC52D6F
+	for <u-boot@archiver.kernel.org>; Sat, 24 Aug 2024 22:34:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A387A889E2;
-	Sun, 25 Aug 2024 00:25:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C3D668897E;
+	Sun, 25 Aug 2024 00:34:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 479B888A30; Sun, 25 Aug 2024 00:25:04 +0200 (CEST)
-Received: from smtpbgau2.qq.com (smtpbgau2.qq.com [54.206.34.216])
+ id B55DD88A10; Sun, 25 Aug 2024 00:34:05 +0200 (CEST)
+Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D94FA8897E
- for <u-boot@lists.denx.de>; Sun, 25 Aug 2024 00:25:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 884E388671
+ for <u-boot@lists.denx.de>; Sun, 25 Aug 2024 00:34:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
-X-QQ-mid: bizesmtp77t1724538260thojojy1
-X-QQ-Originating-IP: BksEPimgPPUtAjNbkuSpc3fa/Q82N1q6WDyL1CQEhYM=
-Received: from [192.168.159.131] ( [106.150.157.243])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Sun, 25 Aug 2024 06:24:17 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 12817052217344911992
-Message-ID: <5585DCF76DFB9F3E+461d42c4-89b9-41e9-87fb-df9b3ba7bb6a@radxa.com>
-Date: Sun, 25 Aug 2024 07:24:16 +0900
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] arm: dts: rockchip: turn LEDs on at boot for Radxa
- boards
-To: u-boot@lists.denx.de
-Cc: banglang.huang@foxmail.com, jonas@kwiboo.se, sjg@chromium.org,
- philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- jagan@amarulasolutions.com, gajjar04akash@gmail.com,
- eugen.hristev@collabora.com, chris.obbard@collabora.com
-References: <20240816001204.3038-1-naoki@radxa.com>
- <20240816001204.3038-2-naoki@radxa.com>
-Content-Language: en-US
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
+Received: from secure.fukaumi.org ([10.0.0.2])
+ by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
+ 47OMXno0020763; Sun, 25 Aug 2024 07:33:50 +0900
 From: FUKAUMI Naoki <naoki@radxa.com>
-In-Reply-To: <20240816001204.3038-2-naoki@radxa.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtp:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ eugen.hristev@collabora.com, jonas@kwiboo.se, sumit.garg@linaro.org,
+ FUKAUMI Naoki <naoki@radxa.com>
+Subject: [PATCH v2 2/2] rockchip: add support for Radxa ROCK 5A with SPI NOR
+ flash module
+Date: Sun, 25 Aug 2024 07:33:43 +0900
+Message-ID: <20240824223343.98577-2-naoki@radxa.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240824223343.98577-1-naoki@radxa.com>
+References: <20240824223343.98577-1-naoki@radxa.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,199 +54,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-sorry, please ignore this patch.
-https://patchwork.ozlabs.org/project/uboot/patch/20240808222325.2082-2-naoki@radxa.com/
-is right one.
+on Radxa ROCK 5A, sdhci(eMMC) and fspim0(SPI NOR flash) share pins
+(i.e. eMMC and SPI NOR flash are exclusive), new defconfig and dts
+specifically for SPI NOR flash is required.
 
---
-FUKAUMI Naoki
-Radxa Computer (Shenzhen) Co., Ltd.
+Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+---
+Changes in v2
+- fix subject
+---
+ arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi | 24 ++++++
+ arch/arm/dts/rk3588s-rock-5a-spi.dts         |  4 +
+ board/radxa/rock5a-rk3588s/MAINTAINERS       |  5 +-
+ configs/rock5a-spi-rk3588s_defconfig         | 83 ++++++++++++++++++++
+ 4 files changed, 113 insertions(+), 3 deletions(-)
+ create mode 100644 arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi
+ create mode 100644 arch/arm/dts/rk3588s-rock-5a-spi.dts
+ create mode 100644 configs/rock5a-spi-rk3588s_defconfig
 
-On 8/16/24 09:12, FUKAUMI Naoki wrote:
-> Basically, Radxa's boards are intended to turn LEDs on at U-Boot.
-> add `default-state = "on"` to u-boot.dtsi.
-> 
-> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
-> ---
-> this patch depends on
->   https://patchwork.ozlabs.org/project/uboot/patch/20240815223713.2479-1-naoki@radxa.com/
-> ---
->   .../arm/dts/rk3328-rock-pi-e-base-u-boot.dtsi |  6 +++++
->   arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi  | 12 ++++++++++
->   arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi     |  8 +++++++
->   arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi  |  8 +++++++
->   arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi     | 23 +++++++++++++++++++
->   arch/arm/dts/rk3568-rock-3a-u-boot.dtsi       |  8 +++++++
->   arch/arm/dts/rk3588-rock-5b-u-boot.dtsi       |  8 +++++++
->   arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi      |  8 +++++++
->   8 files changed, 81 insertions(+)
-> 
-> diff --git a/arch/arm/dts/rk3328-rock-pi-e-base-u-boot.dtsi b/arch/arm/dts/rk3328-rock-pi-e-base-u-boot.dtsi
-> index 39bb66c4fcb..a30adb0be98 100644
-> --- a/arch/arm/dts/rk3328-rock-pi-e-base-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3328-rock-pi-e-base-u-boot.dtsi
-> @@ -6,6 +6,12 @@
->   #include "rk3328-u-boot.dtsi"
->   
->   / {
-> +	leds {
-> +		led-0 {
-> +			default-state = "on";
-> +		};
-> +	};
-> +
->   	smbios {
->   		compatible = "u-boot,sysinfo-smbios";
->   
-> diff --git a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-> index 50dae5cb5ef..7a6af430a6f 100644
-> --- a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-> @@ -6,6 +6,18 @@
->   #include "rk3399-u-boot.dtsi"
->   #include "rk3399-sdram-lpddr4-100.dtsi"
->   
-> +/ {
-> +	leds {
-> +		led-0 {
-> +			default-state = "on";
-> +		};
-> +
-> +		led-1 {
-> +			default-state = "on";
-> +		};
-> +	};
-> +};
-> +
->   &pcfg_pull_none_18ma {
->   	bootph-pre-ram;
->   	bootph-some-ram;
-> diff --git a/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi b/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi
-> index b3bfc77f756..4861574636e 100644
-> --- a/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi
-> @@ -6,6 +6,14 @@
->   #include "rk3399-u-boot.dtsi"
->   #include "rk3399-sdram-lpddr4-100.dtsi"
->   
-> +/ {
-> +	leds {
-> +		led-0 {
-> +			default-state = "on";
-> +		};
-> +	};
-> +};
-> +
->   &sdhci {
->   	cap-mmc-highspeed;
->   	mmc-ddr-1_8v;
-> diff --git a/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi b/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
-> index e0e501deccf..412f9e06aff 100644
-> --- a/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3566-radxa-cm3-io-u-boot.dtsi
-> @@ -5,6 +5,14 @@
->   
->   #include "rk356x-u-boot.dtsi"
->   
-> +/ {
-> +	leds {
-> +		led-1 {
-> +			default-state = "on";
-> +		};
-> +	};
-> +};
-> +
->   &sdhci {
->   	cap-mmc-highspeed;
->   };
-> diff --git a/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi b/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
-> index 74755a44eae..efeab626d8a 100644
-> --- a/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
-> @@ -2,6 +2,29 @@
->   
->   #include "rk356x-u-boot.dtsi"
->   
-> +/ {
-> +	gpio-leds {
-> +		led-0 {
-> +			default-state = "on";
-> +		};
-> +
-> +		led-red {
-> +			default-state = "on";
-> +			gpios = <&gpio0 RK_PC0 GPIO_ACTIVE_HIGH>;
-> +		};
-> +
-> +		led-green {
-> +			default-state = "on";
-> +			gpios = <&gpio0 RK_PC1 GPIO_ACTIVE_HIGH>;
-> +		};
-> +
-> +		led-blue {
-> +			default-state = "on";
-> +			gpios = <&gpio4 RK_PC5 GPIO_ACTIVE_HIGH>;
-> +		};
-> +	};
-> +};
-> +
->   &pcie3x1 {
->   	pinctrl-0 = <&pcie30x1_reset_h>;
->   };
-> diff --git a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> index 0da3d9c56b8..29c18f5a340 100644
-> --- a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> @@ -6,6 +6,14 @@
->   
->   #include "rk356x-u-boot.dtsi"
->   
-> +/ {
-> +	leds {
-> +		led-0 {
-> +			default-state = "on";
-> +		};
-> +	};
-> +};
-> +
->   &pcie3x2 {
->   	pinctrl-0 = <&pcie3x2_reset_h>;
->   };
-> diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> index 4dd17ff408c..8cf78b19739 100644
-> --- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> @@ -5,6 +5,14 @@
->   
->   #include "rk3588-u-boot.dtsi"
->   
-> +/ {
-> +	leds {
-> +		led_rgb_b {
-> +			default-state = "on";
-> +		};
-> +	};
-> +};
-> +
->   &fspim2_pins {
->   	bootph-pre-ram;
->   	bootph-some-ram;
-> diff --git a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-> index efba0c359ba..a75ae296386 100644
-> --- a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-> @@ -5,6 +5,14 @@
->   
->   #include "rk3588s-u-boot.dtsi"
->   
-> +/ {
-> +	leds {
-> +		io-led {
-> +			default-state = "on";
-> +		};
-> +	};
-> +};
-> +
->   &sdhci {
->   	cap-mmc-highspeed;
->   	mmc-hs200-1_8v;
+diff --git a/arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi
+new file mode 100644
+index 00000000000..5cd131d3cb1
+--- /dev/null
++++ b/arch/arm/dts/rk3588s-rock-5a-spi-u-boot.dtsi
+@@ -0,0 +1,24 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (c) 2023 Collabora Ltd.
++ */
++
++#include "rk3588s-u-boot.dtsi"
++
++&fspim0_pins {
++	bootph-pre-ram;
++	bootph-some-ram;
++};
++
++&sdhci {
++	status = "disabled";
++};
++
++&sfc {
++	status = "okay";
++
++	flash@0 {
++		bootph-pre-ram;
++		bootph-some-ram;
++	};
++};
+diff --git a/arch/arm/dts/rk3588s-rock-5a-spi.dts b/arch/arm/dts/rk3588s-rock-5a-spi.dts
+new file mode 100644
+index 00000000000..780e90d041b
+--- /dev/null
++++ b/arch/arm/dts/rk3588s-rock-5a-spi.dts
+@@ -0,0 +1,4 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++
++/dts-v1/;
++#include "rk3588s-rock-5a.dts"
+diff --git a/board/radxa/rock5a-rk3588s/MAINTAINERS b/board/radxa/rock5a-rk3588s/MAINTAINERS
+index a569efa74e3..06ebc9829f4 100644
+--- a/board/radxa/rock5a-rk3588s/MAINTAINERS
++++ b/board/radxa/rock5a-rk3588s/MAINTAINERS
+@@ -4,6 +4,5 @@ R:	Jonas Karlman <jonas@kwiboo.se>
+ S:	Maintained
+ F:	board/radxa/rock5a-rk3588s
+ F:	include/configs/rock5a-rk3588s.h
+-F:	configs/rock5a-rk3588s_defconfig
+-F:	arch/arm/dts/rk3588s-rock-5a.dts
+-F:	arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
++F:	configs/rock5a*
++F:	arch/arm/dts/rk3588s-rock-5a*
+diff --git a/configs/rock5a-spi-rk3588s_defconfig b/configs/rock5a-spi-rk3588s_defconfig
+new file mode 100644
+index 00000000000..297278c7a06
+--- /dev/null
++++ b/configs/rock5a-spi-rk3588s_defconfig
+@@ -0,0 +1,83 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_SF_DEFAULT_SPEED=24000000
++CONFIG_SF_DEFAULT_MODE=0x2000
++CONFIG_DEFAULT_DEVICE_TREE="rk3588s-rock-5a-spi"
++CONFIG_ROCKCHIP_RK3588=y
++CONFIG_ROCKCHIP_SPI_IMAGE=y
++CONFIG_SPL_SERIAL=y
++CONFIG_TARGET_ROCK5A_RK3588=y
++CONFIG_DEBUG_UART_BASE=0xFEB50000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_DEBUG_UART=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-rock-5a.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
++CONFIG_SPL_ATF=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_USB=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++# CONFIG_OF_UPSTREAM is not set
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_SPL_CLK=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_MISC=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
++CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_SF_DEFAULT_BUS=5
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_XTX=y
++CONFIG_PHY_REALTEK=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_PHY_ROCKCHIP_USBDP=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_SPL_RAM=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SFC=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_OHCI_HCD=y
++CONFIG_USB_OHCI_GENERIC=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_ERRNO_STR=y
+-- 
+2.43.0
+
