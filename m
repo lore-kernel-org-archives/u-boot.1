@@ -4,37 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BAF2C5472C
-	for <u-boot@archiver.kernel.org>; Sat, 24 Aug 2024 22:34:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5252CC52D6F
+	for <u-boot@archiver.kernel.org>; Sat, 24 Aug 2024 23:23:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40A3588A2F;
-	Sun, 25 Aug 2024 00:34:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+	by phobos.denx.de (Postfix) with ESMTP id 77E3288A2F;
+	Sun, 25 Aug 2024 01:23:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 03AB788671; Sun, 25 Aug 2024 00:34:06 +0200 (CEST)
-Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1724541791;
+	bh=c6x8cAJw1rfq03/tYVDICRvtzfaJfc6qq/8x5KwaaI0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=o16BeHxHvDPiJK4VOoyJfNhtOxqJxNQs7ov9Uva19MrM72Hx0r/fVWl2FvXDSOHyJ
+	 xOmHuy4SD8jDOe+9IXgqLDfX83bUn+ufJqlJTCXibgTM6QiNCiH8vZCE72wA8Io1nO
+	 ZlkDLs1ibKCnTb2spA12fj+SVXMw1wG6yn6qBcpCzvb69lZEqh3+4//y7Ph2giwI5m
+	 zXAfVlxyXQQzjFga5CQSzbsu+DYp4Utn/ee7TP+3MZt9IkoQ0akmwGXK5Mufn36UBS
+	 W+BIPcyW3Keyl9+oY2ONrlQfGsrTUNHJqYto8SyznawRqExXV3gT1wcNwSoYd1u/jC
+	 A7MuUIv84hgKg==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 96E308897E
- for <u-boot@lists.denx.de>; Sun, 25 Aug 2024 00:34:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
-Received: from secure.fukaumi.org ([10.0.0.2])
- by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
- 47OMXnnx020763; Sun, 25 Aug 2024 07:33:49 +0900
-From: FUKAUMI Naoki <naoki@radxa.com>
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- eugen.hristev@collabora.com, jonas@kwiboo.se, sumit.garg@linaro.org,
- FUKAUMI Naoki <naoki@radxa.com>, Heiko Stuebner <heiko@sntech.de>
-Subject: [PATCH v2 1/2] arm64: dts: rockchip: add (but disabled) SFC node for
- Radxa ROCK 5A
-Date: Sun, 25 Aug 2024 07:33:42 +0900
-Message-ID: <20240824223343.98577-1-naoki@radxa.com>
-X-Mailer: git-send-email 2.43.0
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 86B5D8877E;
+ Sun, 25 Aug 2024 01:23:10 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1724541790;
+ bh=c6x8cAJw1rfq03/tYVDICRvtzfaJfc6qq/8x5KwaaI0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=xTTnOdkAps544tJ+bD1i8rI4fXhMxkytaA7GscEYp5nuSrP+NNoFKWgjWRRrOjgie
+ 2LlBVMXOU8sIk7hqvW76W2XY+5UfNhRN2StWVCH5ud5g3M6X1EvpLR8L5c51YAkjVM
+ iN3VboYs8SHXeCNAqMZvAnJdzixQcgYcDsuerwNpJgPJI9ORQFCcpQ8V+zVZSkg5bR
+ Ma7rWOFOxOAzKyUma+aXatJCGhrpCLbo8j4VjBT5tskVVuvF+ST52d1rt++/Gj9QXb
+ c50vyFO03GWeR9gZzet07r0tsqNXHb5+f4Iae5X8GKkjRghGPd1Oabvc5p3nqUXsw5
+ dvFi2KOjNSFNg==
+Message-ID: <5a278214-6343-418d-b1b4-05804585319c@denx.de>
+Date: Sun, 25 Aug 2024 01:23:09 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] usb: gadget: ether: Disable USB pullup in eth probe
+To: Zixun LI <admin@hifiphile.com>
+Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
+References: <20240821212218.2092540-1-admin@hifiphile.com>
+ <5a1367d7-be94-4c75-9f40-891ca79f9c5b@denx.de>
+ <CA+GyqeYxig+5pyYaCjPmQodXGjCYK=819cNZx9XmvJOnoYne_w@mail.gmail.com>
+ <67e8423d-f8a8-412e-ae4a-014d52bf6a2f@denx.de>
+ <CA+Gyqea1r6rP8gXfS6nOtOaKZ=sJ1+z_KguGzzJygQKmSNRakw@mail.gmail.com>
+ <c7c61399-8b64-471f-bfcb-71afd387317b@denx.de>
+ <CA+GyqebS7gVMpLJuMdxN9c8U=CpBLiTuFkqm_4-bA+LstLJpsQ@mail.gmail.com>
+ <a86dd37e-2e55-4947-b665-06d68831b63a@denx.de>
+ <CA+Gyqeair5Ak2-b32JL9PkoPrJaa9dg1NwQ3s+8+ycCxdv-HDg@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CA+Gyqeair5Ak2-b32JL9PkoPrJaa9dg1NwQ3s+8+ycCxdv-HDg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -52,54 +77,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This commit adds SFC node for Radxa ROCK 5A.
+On 8/23/24 11:22 AM, Zixun LI wrote:
+> On Fri, Aug 23, 2024 at 4:54 AM Marek Vasut <marex@denx.de> wrote:
+>>
+>> I think udc_bind_to_driver() should not call usb_gadget_connect() , that
+>> connect should likely be called by at some later point.
+> 
+> Yes it's more logical, to keep it in disconnected state you prefer modify
+> controllers drivers init (I can do usba_udc and dwc2) or add a disconnect()
+> call ?
 
-since sdhci and sfc on RK3588s share pins(i.e. exclusive), it cannot
-be enabled both nodes at the same time. so status = "okay" is omitted
-here.
+I think modify the init is the best option.
 
-you may be able to enable sfc (and disable sdhci) by fdt overlay.
+>> I also think
+>> that drivers/usb/gadget/udc/udc-core.c might have to be extended to
+>> provide some way to convert controller struct udevice to struct
+>> usb_gadget , so when e.g. run_usb_dnl_gadget() calls
+>> udc_device_get_by_index() and obtains struct udevice * , it can also get
+>> matching struct usb_gadget * , and call the usb_gadget_connect().
+>>
+>> What do you think ?
+> 
+> I think it's a good idea.
+> 
+> If there are multiple gadget controllers (very rare), since
+> usb_gadget_probe_driver() simply takes the first one from udc list,
+> is there a chance that the one to be started is different from the one
+> used by udc_device_get_by_index() ?
 
-SPI NOR flash chip may vary, so use safe(lowest) spi-max-frequency.
+Yes, I think that chance exists.
 
-Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
-Link: https://lore.kernel.org/r/20240623023329.1044-2-naoki@radxa.com
-Signed-off-by: Heiko Stuebner <heiko@sntech.de>
-
-[ upstream commit: 00224650dd45e166ea6eb1593f5f064583963ccf ]
-
-(cherry picked from commit fde218de3133705f3f56dc8eb26baa878f0e0dc9)
----
-Changes in v2
-- none
----
- dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
-
-diff --git a/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts b/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts
-index 3b9a349362d..2e2f7f0e769 100644
---- a/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts
-+++ b/dts/upstream/src/arm64/rockchip/rk3588s-rock-5a.dts
-@@ -377,6 +377,19 @@
- 	status = "okay";
- };
- 
-+&sfc {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&fspim0_pins>;
-+
-+	flash@0 {
-+		compatible = "jedec,spi-nor";
-+		reg = <0>;
-+		spi-max-frequency = <104000000>;
-+		spi-rx-bus-width = <4>;
-+		spi-tx-bus-width = <1>;
-+	};
-+};
-+
- &spi2 {
- 	status = "okay";
- 	assigned-clocks = <&cru CLK_SPI2>;
--- 
-2.43.0
-
+I am looking at the usb_add_gadget_udc_release() and 
+usb_gadget_probe_driver() and I am thinking, sigh, all that code is 
+ready to be replaced by something cleaner which does not use this 
+special struct usb_udc and udc_list, but instead only uses U-Boot DM 
+udevices . But I am reluctant to ask you to do all that rework, because 
+that is WAY out of scope of the problem you are trying to fix.
