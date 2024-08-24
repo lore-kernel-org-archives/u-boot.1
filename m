@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ACCDC52D6F
-	for <u-boot@archiver.kernel.org>; Sat, 24 Aug 2024 22:07:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62145C52D6F
+	for <u-boot@archiver.kernel.org>; Sat, 24 Aug 2024 22:09:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A75088792;
-	Sun, 25 Aug 2024 00:07:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4D29988792;
+	Sun, 25 Aug 2024 00:09:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6896C88886; Sun, 25 Aug 2024 00:07:21 +0200 (CEST)
+ id BBB6688886; Sun, 25 Aug 2024 00:09:00 +0200 (CEST)
 Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5FBE8865D
- for <u-boot@lists.denx.de>; Sun, 25 Aug 2024 00:07:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 39EAE8865D
+ for <u-boot@lists.denx.de>; Sun, 25 Aug 2024 00:08:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
 Received: from secure.fukaumi.org ([10.0.0.2])
  by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
- 47OM78K2020712; Sun, 25 Aug 2024 07:07:08 +0900
+ 47OM8nTr020719; Sun, 25 Aug 2024 07:08:49 +0900
 From: FUKAUMI Naoki <naoki@radxa.com>
 To: u-boot@lists.denx.de
 Cc: jonas@kwiboo.se, sjg@chromium.org, philipp.tomsich@vrull.eu,
  kever.yang@rock-chips.com, FUKAUMI Naoki <naoki@radxa.com>
-Subject: [PATCH] rockchip: add SPI NOR flash support for Radxa E25(CM3I)
-Date: Sun, 25 Aug 2024 07:07:01 +0900
-Message-ID: <20240824220701.97796-1-naoki@radxa.com>
+Subject: [PATCH v2] rockchip: add SPI NOR flash support for Radxa E25(CM3I)
+Date: Sun, 25 Aug 2024 07:08:47 +0900
+Message-ID: <20240824220847.98136-1-naoki@radxa.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
