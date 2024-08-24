@@ -4,76 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 621D9C52D6F
-	for <u-boot@archiver.kernel.org>; Sat, 24 Aug 2024 20:02:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68941C5320E
+	for <u-boot@archiver.kernel.org>; Sat, 24 Aug 2024 20:02:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79BE588792;
-	Sat, 24 Aug 2024 22:02:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DC6FD8897E;
+	Sat, 24 Aug 2024 22:02:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RO/o1m6P";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GtgGSJZU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08002888C1; Sat, 24 Aug 2024 22:02:16 +0200 (CEST)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
+ id 4B03F8877E; Sat, 24 Aug 2024 22:02:17 +0200 (CEST)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE6438877E
- for <u-boot@lists.denx.de>; Sat, 24 Aug 2024 22:02:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1104D8885D
+ for <u-boot@lists.denx.de>; Sat, 24 Aug 2024 22:02:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-27032e6dbf2so2021983fac.1
- for <u-boot@lists.denx.de>; Sat, 24 Aug 2024 13:02:13 -0700 (PDT)
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-7a20b8fa6dcso201744085a.3
+ for <u-boot@lists.denx.de>; Sat, 24 Aug 2024 13:02:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724529732; x=1725134532; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1724529734; x=1725134534; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eAsjolSAWnq/GpU4TndEsA+sxb9MjFrvkO3Tt6/an6k=;
- b=RO/o1m6PdjNoe9ygRmstw0gVqfeP1Nmv8Kb8YnutTLL0u6E3h/6ruhkpiTlPY604XR
- 9/DFoRaYzuxYxWHqo/4jCVUoT4F1MTTPtu8B24iq/3A4jl2l38YS7VwN1mB8OMMlEp2+
- f808wcCy78FhPE+W6H1l7LJILZyhRXFRY4Ve4=
+ bh=UvAfao7K/Qg+KJAAzFEf/CoYurJFFqiHAJD+BaBn7tI=;
+ b=GtgGSJZUEODLdccko5cNxA6Pc6rNOBfXK7QSRGmAtDma34KUC3DTzq7d/DT+YMBaME
+ FzJ+SJ+1Hfb/aosbP1eHP1ivcXgmD2Z1ltRnsXbAAeFAeHL3efgK2FeNItOIIsvFENlH
+ l4LgwCyis+N46KixvjARCw18sOemMFDtTkRsA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724529732; x=1725134532;
+ d=1e100.net; s=20230601; t=1724529734; x=1725134534;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eAsjolSAWnq/GpU4TndEsA+sxb9MjFrvkO3Tt6/an6k=;
- b=EjlmIYLemF/qr7xC1YTFErMKpcH5D9z70eyupAwkfMwrSNdr09IvGSj6ZyxbzJ7fr5
- ej7EAR5zalCFfxkxq5IKoL5St/ehSnwzXIq8ig9I11ESqVfVh6mIYFDaG9xN2M53+1N5
- kZIlkVNMR9E8Qgff/44kqcvmNxIQYtF2hHpJCkS42Q04XN7UwXW6C5CU6kG6LPVx936Y
- HnU+CuODcaNROudYL6fvtxQdHNpmnTAI/nrPhbi3IVEk9zZPRO5TkhENqqQiUwvG/XXs
- aF7k+MFrfxVLmt9xD3l07guUpoZytk+j5FaDfioO0jLjIC0nijCrL9q7MCd16MAX1Ol4
- aR/g==
-X-Gm-Message-State: AOJu0YxuSQuRMRHDW3gSL4zfFZcA7BcK39tXUKllTob2vuWGxU+gzc66
- IIIZrcOt3eTbIkQEH4HrdOjPVuHMQJTzlIcNX4Rv2MTFl1EyxxQnyQIgZ++VFTI=
-X-Google-Smtp-Source: AGHT+IGNcEfUNFfN0OCzj+B0aceVvpTMZQhVXwL7GCYmyywIpgv1OTi1lLF8dL+eJwLo7TwAMF/isA==
-X-Received: by 2002:a05:6870:3c15:b0:270:2c12:98c3 with SMTP id
- 586e51a60fabf-273e67aace1mr6211731fac.50.1724529732576; 
- Sat, 24 Aug 2024 13:02:12 -0700 (PDT)
+ bh=UvAfao7K/Qg+KJAAzFEf/CoYurJFFqiHAJD+BaBn7tI=;
+ b=MyIdnCrDYjkC1GrzyZIRCqu0uzdiGCjA6gCJYhmilGRTxz40mmpryQG8uxxrbdhVYo
+ l7MwRvcv3geO23yJ/2GuHmejze2i5mf00ct6NwUFd4oaJewEhI+RqDoIdtPtrRodJ+Iv
+ 72PJPWiOP1Iv38YrrzD55bu8Oz0UbuNpy97AdSTiACwWtCx7QR9e4ilr0zRDkNeyN0nD
+ 3Vfe2O8Mvead6i7TmM5ZjHTmLqz8F4lOtGxldqpD5Em+LtKo3vU0b0cjxUP9NqfhBVRt
+ 5+PkL+dPIlV6y+MhYq8JaES1hIEvQCeIOvsO7zJCjAKMqYcMGizAGFU6Rqio2XRlFI6h
+ h9qQ==
+X-Gm-Message-State: AOJu0YymNcRX/wXvOOWy1s22ixsnK9stKAeOhfTDy02s03fX0EOSHdNX
+ eecNO9Ixk1MyZEnZY5svmVQg7CIipEQ75xpjEsV/bteCttP7gipS2ZmgHaoH8D+vIHs7ni+WpMl
+ k
+X-Google-Smtp-Source: AGHT+IE9/lRpcawIEjBPekg37JfVfL9HXAGAbyzJxR4KY0Ic04uZMuUBpFAJnkTUcwe1aXRuBG12Ew==
+X-Received: by 2002:a05:620a:c44:b0:7a1:dff1:57ab with SMTP id
+ af79cd13be357-7a6897041edmr580648385a.23.1724529733760; 
+ Sat, 24 Aug 2024 13:02:13 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a67f41f507sm300754485a.132.2024.08.24.13.02.10
+ af79cd13be357-7a67f41f507sm300754485a.132.2024.08.24.13.02.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 24 Aug 2024 13:02:11 -0700 (PDT)
+ Sat, 24 Aug 2024 13:02:13 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-Cc: Sean Anderson <seanga2@gmail.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Jeffy Chen <jeffy.chen@rock-chips.com>, 
- Kever Yang <kever.yang@rock-chips.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Peng Fan <peng.fan@nxp.com>, huang lin <hl@rock-chips.com>
-In-Reply-To: <20240822135503.2363706-1-sjg@chromium.org>
-References: <20240822135503.2363706-1-sjg@chromium.org>
-Subject: Re: [PATCH v4 00/14] spl: mmc: Some tweaks for SPL, particularly
- with MMC
-Message-Id: <172452973055.2581148.4176048793688635803.b4-ty@konsulko.com>
-Date: Sat, 24 Aug 2024 14:02:10 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+In-Reply-To: <20240816034905.3541020-1-trini@konsulko.com>
+References: <20240816034905.3541020-1-trini@konsulko.com>
+Subject: Re: [PATCH 1/3] test/overlay: Make this depend on SANDBOX
+Message-Id: <172452973270.2581148.5934159294858834187.b4-ty@konsulko.com>
+Date: Sat, 24 Aug 2024 14:02:12 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,17 +89,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 22 Aug 2024 07:54:49 -0600, Simon Glass wrote:
+On Thu, 15 Aug 2024 21:49:03 -0600, Tom Rini wrote:
 
-> This series includes various minor fixes and tweaks found when trying
-> to reduce the size of MMC code in SPL.
+> As the overlays are sandbox specific, mark the whole test as depending
+> on sandbox.
 > 
-> Changes in v4:
-> - Mention the change to lower case in the commit message
-> - Put a 0x prefix on the 'enhanced size' message
-> - Drop defconfig-resync patch
 > 
-> [...]
 
 Applied to u-boot/next, thanks!
 
