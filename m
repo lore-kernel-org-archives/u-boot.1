@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9560C5472C
-	for <u-boot@archiver.kernel.org>; Sat, 24 Aug 2024 09:29:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 567BDC52D6F
+	for <u-boot@archiver.kernel.org>; Sat, 24 Aug 2024 09:29:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D0A0888D5;
+	by phobos.denx.de (Postfix) with ESMTP id F168588C7C;
 	Sat, 24 Aug 2024 11:27:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="uOwipLEj";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="zBmJoJjn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A3CB888C1; Sat, 24 Aug 2024 11:27:44 +0200 (CEST)
+ id 2C072888D5; Sat, 24 Aug 2024 11:27:44 +0200 (CEST)
 Received: from EUR05-DB8-obe.outbound.protection.outlook.com
  (mail-db8eur05on20702.outbound.protection.outlook.com
  [IPv6:2a01:111:f400:7e1a::702])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B1D688C97
+ by phobos.denx.de (Postfix) with ESMTPS id 2E02288C53
  for <u-boot@lists.denx.de>; Sat, 24 Aug 2024 11:27:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Hh7+MYLBX+PfV1dNwt2O4aAiuSOUjvI6LrmQXDObZiYlJdB18JngcfTtwvcs7YEAixdNE4DrC/DQcXeV17/bsW+hNwo9Xjjhqc8kF4bYfBv6BRL+CPmvzvxbFMJ8QYZPvmzxuVjAzKdGxMLUOeyo47hu6WvAGM44VfJ7xGuxZiV2Em2ABQoO0F1m0T3K0/8IAEw8ujYImp9cNyTxy1+ihwcJzKDzQcD5UeHx+FnoKDzkCdMcDoBkfVzox4JGddV+oJbq1uw6TRDWsx5zFnfWHLeIr9wBAo53cTvHYN/OpjKu5GGszbBM6qdlX+Sc/QRe577jcjlcLVxImnE2FeeKCA==
+ b=xO/SBvAyRXVwgsLzg0d53nLaCOFhrpatm9EQwketlc4CS3vg9LATKkHKaCtc1fSHRIFX/lr/DwrvZP9fws/798xiSiVqNckuFY3VZHGSFeXxGyKJ4yxGXd7sxhcYM+P2iPPibpoaC+tW7QI83EtsdYU7N6doYmneRnuhhpxL8mzh6JfY/V1qYIvPp/MuTU9llSXChjb5uDG8k5FDG+jdj1lGTacZIsqIt4ph2QJOYqaEKz3mB9Ez93cKfn9nj3OxW9nnGgfMH0NzMmTjfo/RyUTTcaTNgVQtj4rHoMBcYibMRUDJoFG+YlPTFihGmTcaTnpRMdt4XSHljqAWbjN9Zg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YoFt4UFdyzHMIDNWxqwgCs1uTETlcZJ+xknUX5ebXiA=;
- b=LiZLb+KfwoHULspEczm1Qjmxikce/rwNTrdJEF+RS+VSriYfgYW8I6hRvf+acw/7rawApxRLBEKA2lTTjxyoI1wIBGhOnjNObfLcT08h0OT3/SHEYDj1+r1sXIxE0VmMoeTAzaxdaDpJ86QGsYQklloaFnRPI1FJitrRcxu3vzuOhvng0jIxZZyG2qWOG7ooGk4bgJdOZAPJ4/trk0Jnps78jAr6Rj6ukCMikc9IV6szMoVvhzg2SMZcA5DKgpGrTNq/8r1nR9xH2yiEsiokbOSn7824kW1pG00jS4NCGsBep+d9q10xs7q6+72slqW1ANn37XtxsDn92BAhQB0s1w==
+ bh=VhwOxvBlcDYM5Mlz8B4oX9N9X3P/WY70hcpc+Yw+tDw=;
+ b=le6nmLVEthesJTjueV9m1zs4fLfj2ShxMpR1Kqs1Nct9dCrNf20UNlbWLmTz6qF6Ex3TI93fnDbEJ6uJJlZfiN41wk1bn5XP1DLdPXiyvDy1/9TV0fcsJWkYNwwoIAU1cVjIceLfhUMwptmnH1YvdhjnMIzh9Z8Jxu9n98pzMg2NdRt8ei544mrf4F9Tuk37/f3wXzkpL0YnjYrInQKmBADhG8b8pX9oajWRDuWUfSbiAOhVnFtd7F7/cSH9bq9Rpj9wG2knfYNI+oqiG6CbsseQcebiONB4DzDJndDxktVm00+LkBcSvu2PkBVMmqBJMoCUZEWdjsp0445fvPntXA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YoFt4UFdyzHMIDNWxqwgCs1uTETlcZJ+xknUX5ebXiA=;
- b=uOwipLEjSS7p4PLXfQA55vQOW1zR5ooWCPP7mRUhjyHPppssIRYLbYsOL5DOaGs7leTJoyyXH5wyiQ2WuLhPV69wRBGvg/Tspn8SXijQK7yd1m4OHJzrVEzCj0eb8T+VSfDVPoQ12HXLPy9WkhICB/+U7HD5vvWzssNtkk+3sDDriLQMjAykgM2aZD283nSeuNb9XwHD3mpLnlmBlMaDkkw5Ew3lRZx+/wVJF0J+2AjWO/QQhhsXDJUqbHIGVHlMZML0A4DEET19oMjR3mqKJBxjf0GwYH/JY8oy/e0pTBt3bpnDFIVNpWbV6MXEISQb4rEeppyKC5sDS5qu72LQhA==
+ bh=VhwOxvBlcDYM5Mlz8B4oX9N9X3P/WY70hcpc+Yw+tDw=;
+ b=zBmJoJjncJJGZifFZtXB2y9xwVsIO+lkIr3qpTBxprF2QNi2WQ0Ov18TCOhrkL0g/0TP0WzZ0co1pxK+oaVGuTJrM8+hM734ltLuGK/C4+ekMk14AyMsF5X5D3eo7V7IToZPlrV7RHMrF7Ka2PCpIAX8HX6+27SqbdHMr1oFobxL6JbZtsI5ReC0lczMGLMCOb5rgUzJGEglfaowrZfnC2DKkgiy7PfpeJ1w+Syf80Ma4isTUQL6nRxSiR8w4UU7/3FgdtsJaDLBBjkQsx3NFbw5M0H8Q2pe8Qi0UNIocv6Jsytu25Zx0IizTdZcsiA4YDKSlMxDEXHpr3FqK9QaFA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
@@ -51,7 +51,7 @@ Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%2]) with mapi id 15.20.7918.011; Sat, 24 Aug 2024
- 09:27:39 +0000
+ 09:27:38 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
@@ -67,10 +67,9 @@ To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
  Sean Anderson <seanga2@gmail.com>, Baruch Siach <baruch@tkos.co.il>,
  Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH v5 11/11] net/httpd-upload: an example web-server
- implementation for file uploading
-Date: Sat, 24 Aug 2024 12:27:16 +0300
-Message-ID: <20240824092716.1042696-12-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v5 10/11] net/httpd: add httpd common code
+Date: Sat, 24 Aug 2024 12:27:15 +0300
+Message-ID: <20240824092716.1042696-11-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240824092716.1042696-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20240824092716.1042696-1-mikhail.kshevetskiy@iopsys.eu>
@@ -82,78 +81,78 @@ X-ClientProxiedBy: GV3P280CA0011.SWEP280.PROD.OUTLOOK.COM (2603:10a6:150:b::7)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|DB9PR08MB7445:EE_
-X-MS-Office365-Filtering-Correlation-Id: 58e413c2-570f-47f3-f978-08dcc41eff9d
+X-MS-Office365-Filtering-Correlation-Id: f68e9572-0322-4e85-6a39-08dcc41efedd
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|366016|376014|52116014|7416014|921020|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ahw7kD18J8VB7HSZIzSw77EmLqMPzPkA/NTuHLz+2pTdEPSEOhSPSNEk04Ut?=
- =?us-ascii?Q?egV+lF+LCi12l3btO7bTW8lor5mNMgh8tQG4+4mDtIIaSRQdtbwyX8yjfSIn?=
- =?us-ascii?Q?HGRO+Ql82XrTuybSd7bsF09VZYlOQ13Vonrjy1WMVcsKnqTZJe0/YDoq18Or?=
- =?us-ascii?Q?Pq0yTOMuDaklRjxsAfP/qBkgUjvQugBXOFIPLbIOXlR1WVMprCK+Btfmc4Y/?=
- =?us-ascii?Q?gy/WGHFborjrQ1WwouWed7cEqUjZQEOlzJaPXGzrgFmOPthsEkwLWZVO9zJm?=
- =?us-ascii?Q?ppeAHzCO1BKlCcmT1ZmAZlK7AIuJ9pLGd5VK0S6hVXxBputKFePbMr6C9JuA?=
- =?us-ascii?Q?dDZvhXXV7jc/QiEqzT2OxfTChrXR4JlTDqy8NoKPgWsmwMKZqpmR3s9EBjNQ?=
- =?us-ascii?Q?2DtYYwY7/YV8Tza+gVOs8Q8GEfhARR/Slx9PBqzIA9y1WMeLzKstzbtI4DAq?=
- =?us-ascii?Q?3FiEj4mp8uN7pjVz9X/5gdfxl0ki4TG6nGhwVXBUawQxwxA6beqfVx7gNLKa?=
- =?us-ascii?Q?ATPCIE+9x5pc9pvrbmQIi2fsSKubU3/3Rt6Xqn+7op4PCHrlOWD1WDF768UH?=
- =?us-ascii?Q?y5GeNQNBz81LkjjdBuvs9x7aPswNT7VLhS65UuUl14SQH589kp/yagncdVM8?=
- =?us-ascii?Q?UQ+c4Enat3MqEoxc5iXFw9WES+3PnsJPcdge4POEaAJ51MbVEr1q9txwt+8t?=
- =?us-ascii?Q?Iq5ib9QxGxJjVdfR9U1ANh5mo+7F8JabRv+XRq0/D6vopQSWqQfstDEjDsAY?=
- =?us-ascii?Q?x2wxPDsHYJnvZdVN9fUN+l6+bxd854UTtvhojY6efWnpUcGkkljxmZyzFqmJ?=
- =?us-ascii?Q?+Z2aSa32YiH4Us1aAPEqPFXcDlQd1frZfOzqW63hTSrAdWNJr+VvKozeEUoF?=
- =?us-ascii?Q?hI5A35Wz8DA70qASDoMMo3d8vgudTbi9yi2sNCsFNgLvWgsTrYjIsk1aFvBq?=
- =?us-ascii?Q?U7e6VvPVtQcW97bN+Df9NA3FTLfsqo88XL0OylhkL/XikqEZzJAs3+ZQJT/+?=
- =?us-ascii?Q?BCazZwL1WQoC6hLR9Los70B+Wjjvil5InvTA6SKbZfigsdaQNc49NDxG3yk7?=
- =?us-ascii?Q?IBw+jum1yJ6qO/tJjuamu+cIRqN+84UmVMtGuQpU+FTVMpFL5ErUg3vSWfLV?=
- =?us-ascii?Q?Qu97+YEE5xwCVZH1H6dljk1l/NDO885fzw57uGlIgZZA+L/RjWaNppHyUTeV?=
- =?us-ascii?Q?7rQQvZKESRyAcnU0rJa61Q9SXGy3FCh4yo9bS+gpVe+WUgqbVRSdaCTkT1au?=
- =?us-ascii?Q?RuxDpbo2UcxJn0vcu+EHQH9dNneb7oDE9d/rU5+odiZ0rZgfmphivctwOIYi?=
- =?us-ascii?Q?LpIBD/PG2rLJqzY4a6vvYsqvLkOKc385NpZ6Ey80Bu4AoVnTHie32ulCY91O?=
- =?us-ascii?Q?uymIIhGbpLug5mVgR8yJcgLeny7q6a/5RcrWqld6JXJd6FrIP/l2U+yVxPPL?=
- =?us-ascii?Q?r7ADm4m9sRc=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?nWIQhAw4Ql5aKadT9Z6bnic8P50Sg46pGPs6drvHkqWgeDfLYgdE3z1mwiUn?=
+ =?us-ascii?Q?1EC4EUhB4TB/f1kIEsftCqmMkRDUeeCSX5zxGuC9tDKeTSNs/E2m6FiLc/UO?=
+ =?us-ascii?Q?v4jfkOReLMm8BvBcAHyndIpsOKuIUP9mrom0WOlGz+nNAxtkD4Q6bBmsVryy?=
+ =?us-ascii?Q?ulNJ/8SoIhRjY0vQoP5K1pmiRToMkpy3G8KMyB9hvC6ziYcsgQeKrcFQpJZR?=
+ =?us-ascii?Q?jWPZTv8r41XdtzynvYzRgoOZSU8Exp5puT84w5a8avcI9DBB6Ef3d5T1IiYo?=
+ =?us-ascii?Q?K1+GuFQhOgPQDPgIEabFEVEMHDzZMp+H6ch74WtMOGuM57lxYD+dVO/zM2YP?=
+ =?us-ascii?Q?GPBmdr/VVZYx39dWrUsy1Hp18Fr5IBSB38A3/FBe0n7OBwadb20J1p0ryN12?=
+ =?us-ascii?Q?f2p2lh5Ma9f2hWeDBIM7HolahY8L3SEA47OoyWXI05fPg8J0qQjpfD7WKboI?=
+ =?us-ascii?Q?FcyjMhX6ubVKDU3Imy29V6fBzrD3ZMRlcR7Pnv5DLD3wGHIqxrcrb4DxRU0T?=
+ =?us-ascii?Q?xCYTrO4BqgpNj/bSv5HVPlX9QDeXXYnOV60vD5jDZ6ErdZ3zfFmuFbpNYPQj?=
+ =?us-ascii?Q?pS1OwqrJLtKYFmVyTCHZzv9Jkn5eegZi+O3MnFhOI46LxU1hRA89z6ZDjgyS?=
+ =?us-ascii?Q?UyQOefBed6CLSyiUwf7jdBykqNDFI2o6ijhIWe0KXMFgWsICGf9xYaCmXgFP?=
+ =?us-ascii?Q?DOwcoDlEei6QNnioDf7Dv5sgjmlownS0Q1wrg4U7d9R1Jk24ed3uvSf7oKn8?=
+ =?us-ascii?Q?R9OzzK3wEnDLfjwEisnNa3wuXBPc+dTLKvIfPdCydwDw/6jCc3BnRHaqqLHL?=
+ =?us-ascii?Q?kMHVmiValmHfnGkawx4TDvoEAZAcNtTQUhznv3XLrwWuQ5syT9xgutxegX/6?=
+ =?us-ascii?Q?vV3sYrrUpPDapUKqn1mWY7xIGV8zFktaLbDbkSoy8nMfV8QmMKe34HCU3DKE?=
+ =?us-ascii?Q?xe+6pqGZyJnuWGtQrrHgIi790vDHdFCqrAwMdPa0Sgq5MKCJlvcEiwWZzAkC?=
+ =?us-ascii?Q?4IogWxzCUCkepfm7HSi336LWdjx1ptQqz2Ulmo7uyhlGfvC4bCC9GqrOHIAK?=
+ =?us-ascii?Q?aXQtztLHWSoQpAjqhOxcG4zNa+06TfLrUGlOVoXcrGmbPbcHgLAELMseaLHl?=
+ =?us-ascii?Q?43r3c+ArUaqws7fN0wXIdWNHtCXjjNM75cUAsKL4owCXBRY00Fsgmhvgdgqg?=
+ =?us-ascii?Q?FfKxVZzlVH+hN8aaDsRHO5ClqktEjbr8DUoE9RTIp9xMtKXTPv8ememSyNFJ?=
+ =?us-ascii?Q?sza5ezO9if6/1il+r7K+vljVo/KtHQ5SzaTZdsqz5dlpG94v3UWV1w3Kd3mK?=
+ =?us-ascii?Q?jgeO9iHbV4XWDsVqXaH5SosEEwz+nkexGUnW2eR8yvm7odkVxCkZdni3Ze2+?=
+ =?us-ascii?Q?nhoWOJDrMkbahV+QVoqSAoUrPXbzcLSZcYdbV00SNxHgD3c2ke0abtQU0qi4?=
+ =?us-ascii?Q?ELdY0UWUh6Q=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(366016)(376014)(52116014)(7416014)(921020)(38350700014);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?LRetwjxj4A+vV57WhD7ph1TTlc+oeobl6hhOJYQoflxVqNmVZMoBoQsNVuUY?=
- =?us-ascii?Q?Jmmuru54zaFfHkiGstJwYLDT5V/BsW2D0lHacwnrBw6ghlsvLwFP6Jh7nSsE?=
- =?us-ascii?Q?IcqyQNkwdTtI8yPIEsPKM7Bw3RuXDP6gjk+QiEWKqF5oBBXfjZATD6rdiWb4?=
- =?us-ascii?Q?wMjsgmoRjFK2TDznm1RKH70cKWE8BoqqJGs+4l17/BFxUjos5htCrmm6Gk42?=
- =?us-ascii?Q?1whNbDQrDrwapUvdPkgvfmBpMK2XLCmjfIozG3A414d0w7iMWZmGeTiBqV+X?=
- =?us-ascii?Q?+xMi0GrWM48BmqYzFAKF+baxhFdatUBnsqtbYrAaN4CSb9PHpVy+5v/PaUOi?=
- =?us-ascii?Q?l/doQycqA+jw3F0eV65m7+oSB5OScN3qqHndfaN6C64Q9yJHWjXWLA8M6EdO?=
- =?us-ascii?Q?NO4Uph/5CXjJ4A4K2jqslBDfbqiSx3/5MxH2IvFMrK/RmKz7BoNKvFm+0Vju?=
- =?us-ascii?Q?e3UCTCPPHcG5C3PbLbzc01uBIgXMvwATGNPQJha3LblyyfIUigmj39V3nCY9?=
- =?us-ascii?Q?wJcUsOukNvvULdnEte3wQgA/jBvjfpkyqI2PDvFcEEF5h6cat/BgPD8vl+C2?=
- =?us-ascii?Q?lp8u9gP7QJDWXkJllpLs7dCpiiOlVWcyrJ5Q4PvCGHogGlwYpFUNW/YVdewY?=
- =?us-ascii?Q?S5Ugw2/KEsciYa8VfXrTVkZmYJGhUhCbNRnnnuW5inL0n4R2sKM7ipPXWbDZ?=
- =?us-ascii?Q?/59IcbT36JO0jChnCRz0NCWc9pHKtRUkv4+0GR8Vq+X11kZuY6SyBZ3pOn01?=
- =?us-ascii?Q?bQd/evbqcRKQYc7eQREwztPyoVmbc7rwkLyEnvERr9753PyRWfHCLa6gJz8M?=
- =?us-ascii?Q?Zklaj4JVwGERTXZlrVy6fbJRnNRQZLLdYAEuz9GDBEkiiLwp57/1FwNbmr8E?=
- =?us-ascii?Q?WctARzTadV58sySsiMhklIUzbe1RliMXfmJUJ37unfSqjkr2eLHsW+pxTNgY?=
- =?us-ascii?Q?yZkXfM0oU8Jly2agpDxe9j04u0J0e3pg5lqxHa6vc/dBf78/7q4hZi4mYsgX?=
- =?us-ascii?Q?Lp8Qi/jiQ2RHmQD/LhR6IT4yZA+eQZ6Iy6RncAJ24+Jg/yXwHLt4+bxVBSN2?=
- =?us-ascii?Q?YiDijydsDs6z/j6Q/bGifkAlI/cmureD9afFplfGnKiw5KlO6jF+yI3Gv5Ms?=
- =?us-ascii?Q?7CbWMiuci3Bl/HiQS52MJdX2H3H9efux0w8yEd/cWy/Q85qotW7oKRiJwKl4?=
- =?us-ascii?Q?5ASspnXBni+RiSwLlrgV16kA+Cf2F9fW3wpHYX0tX+PWg/TilVa9kkxHL5Yg?=
- =?us-ascii?Q?fcYT/2f4opTqX5Q9Wc2Jz8QNZfrinCXBsaQrljOYMNTMJHrXpHAgBdh+9aqv?=
- =?us-ascii?Q?Wad2pDp7wLerfsexLZHfGS1uZhQol796/3U8cA9TlSfUYQ/WaPSByWCnghdV?=
- =?us-ascii?Q?VlzjxEIPZWWa9lEAMxMxPEZZKRPYmkCqur1qX3m9mP8w86Ra9irDurMqH0lA?=
- =?us-ascii?Q?tYZcml8CuBdWn+v5U/sTSmPHcblZIeJi4jbyWJkECopeuLfVMayVfOfiTiMH?=
- =?us-ascii?Q?dx0eOyy3RHfcK0ZnAubGfB25wwJj/lGcu86qLdlKENbSgpAxGjXIYgCNnvoQ?=
- =?us-ascii?Q?R714OJws2VfowsgfGQEpjzq5YqJrJTdmF0C3aWryjlhkCq1ArBlqW/5EskaX?=
- =?us-ascii?Q?yVHyDEh25EN+lk3QKAJQftw=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?EabD80awRGLdWpzCl60mXNdaH1R3oopJRTy/JkuhQ92yLyZP7SbI+D9p35Ei?=
+ =?us-ascii?Q?ZbJJiKTNJ3cRFINxszh3nGP7e/88H/HMB9EvLB3QlxdUYtKayBzYqO+buM2F?=
+ =?us-ascii?Q?uYA2sosEks1EJkXCwMVcGpYFixrCuWTmBLw40N9oUohcvTJ0rau5ikp7QLfU?=
+ =?us-ascii?Q?gRpHEpG7G39t9bi+N+CtP4ErxBAcBBT5B0hxI2Kpnsk+LTG5I5VHY1f//jZp?=
+ =?us-ascii?Q?FxsIj5Zd1foGLrqvSeHeCqBa1yanzrtply5/uEHBmwcd7itTLQlXiuKJrjfw?=
+ =?us-ascii?Q?gAWaDWEOhI2xiT5pxK9xf33mo8gTSq+ePOjCswYzKBCdlwN2FF2Z30snhOuz?=
+ =?us-ascii?Q?7UoQu4t6nIgTsF7BWtsMzSjFib0tJjGjAX91BAdAQ3cHUALKTmRunH/Tt2nH?=
+ =?us-ascii?Q?Q6lm6Nuhg69ULQcdSSEJgvkWppDljn3pIULhLHGCGH+NEDtIUouL5b4ne8Bb?=
+ =?us-ascii?Q?183aNzgJz9viWqBtuoEyGpfW3G0ss0FXkYzhNBaj2DEJ0YXglgems3NaQo7u?=
+ =?us-ascii?Q?FrJEvMOW9r7eHYY6ssJk67bSB2uELjPJoDtHcH917f8kZDmVXc9ZlaFg6Rqu?=
+ =?us-ascii?Q?Tq+IyEgATXjsHrGGN9lebmK3c99C+ZAuySUqBZzEAKjC5YRkueG4AWSadV6N?=
+ =?us-ascii?Q?n0EAHxdpcB7a5ZyghYIbsWtFFpyodWDQebgdd/rd1ouiAjBd3Qj/6eKNhtz3?=
+ =?us-ascii?Q?H+UF95x6dQcCdMfUBB8KcskSbwj1HnUBZYl2i8ovuZUA2tyBBaaqF+bXzvdS?=
+ =?us-ascii?Q?Wmm0F9s7AsaY35L7SVxx9tyEXNp8fpvuUwoTtvazZsqPsndF/KVzgt54ZOg5?=
+ =?us-ascii?Q?M3pLQ/NLTRpKP3E68k0bzhZsdW8hrYFLrtRrRI+CSTAV8qfnBsk6J0jd3z/K?=
+ =?us-ascii?Q?MwIc8MXl0zAJ4dyTaMKnZgIjQA8o58q0j7KXXot+/Z14GE8omwfGyP+88jNd?=
+ =?us-ascii?Q?h832HaEsSfSj//gfqBmfunXcGDfLKR/6UlXsNnbGL7W6qDBkd8ksjITqEZu6?=
+ =?us-ascii?Q?yuvT4BturVsfBWrsabsLOxIQR5k3tmLqwUCHmojHgONG9IO5YwCopnvhuWX6?=
+ =?us-ascii?Q?cIpydzQN7bK2oI8bLXClC6RP09ecg7djOJCWqQ/rJH/YpWujutap0XjBPFPb?=
+ =?us-ascii?Q?zw68SuAXT5+GTcXxMm7TkSkni5aR+hgFFgk2yVWO65eqNf4gb+dR9QpOnLUN?=
+ =?us-ascii?Q?3Ekm3OMJkv5PfY309bMnIGKeikhN8ulEp52ZXZbucnJNy7qTuicBCIf4Clfi?=
+ =?us-ascii?Q?6+HJgLFeG1vsqbX+J/3Y6c+RDD+9/7uWHxviQ5VwHOs20t1XYtRPQKEpl5w+?=
+ =?us-ascii?Q?mxoEj/HW909Sl8MYuzI6c+2FcASbhtkJ2HmdcE702Tebskc5qaoZXzW7hO4L?=
+ =?us-ascii?Q?7r7ArXHkECcAjZtG9aRPYgk7kG7mgcN1chS54Vo83rUJKxhoVsSSVsvtSdT7?=
+ =?us-ascii?Q?zwpHT7qe8hZO7yFunH5G0Lyk9gYdOfLOcy9uFPT4pEYxpLAvtHNiuwRTCncv?=
+ =?us-ascii?Q?ddiUA5zL76sZUoqbKBApQrnTo0ZJ4z5ZcGzncaCyTHF+V+yVO7OLwUvmYJQd?=
+ =?us-ascii?Q?lDpq3lnwYuzw3WCyVI4Ael2e183RTmGwJ/7k1Il/FiA3wixE/1q8NHX6K9Xf?=
+ =?us-ascii?Q?C4cyYuZeCyTTjJczVNBAOZQ=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 58e413c2-570f-47f3-f978-08dcc41eff9d
+X-MS-Exchange-CrossTenant-Network-Message-Id: f68e9572-0322-4e85-6a39-08dcc41efedd
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2024 09:27:39.7670 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2024 09:27:38.5221 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: RWzXfVGSVRZbL4q3MgetRnIXG0gxjHv3n2X73nLuGXfg5+QFj66BjSNRrjGPPkfrBN8eNdQVk/ixiw+Pk71qiRAywFHbYGmZkwXawv7r41Q=
+X-MS-Exchange-CrossTenant-UserPrincipalName: yQBAtQJn1T89zBFVPacwYxj9a4cXuamt34UM/jhyTEY4VJcDRvVZOL1vrOUHqfUH/ECr6/C+Jq+frrfeqh791sVzBjxiT7wr3OvR6vDwWBU=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB7445
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -171,342 +170,871 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an example web-server implementation. It can be used for files
-uploading to u-boot using a web-browser. It acts much like tftpget, but no
-special servers needs to be installed by the user.
+This patch adds HTTP/1.1 compatible web-server that can be used
+by other. Server supports GET, POST, and HEAD requests. On client
+request it will call user specified GET/POST callback. Then results
+will be transmitted to client.
 
-This code can be used as a base for other implementations like firmware
-upgrade web-server used by some vendors.
-
-Usage:
-  u-boot: start the we-server using the "httpd_upload" command
-  PC:     open the "http://your_uboot_ip" link in the browser
+The following restrictions exist on the POST request
+at the moment:
+  * only multipart/form-data with a single file object
+  * object will be stored to a memory area specified in
+    image_load_addr variable
 
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 ---
- cmd/Kconfig                     |  14 ++++
- cmd/net.c                       |  20 ++++++
- include/net/httpd-upload.h      |  12 ++++
- net/Makefile                    |  19 +++++
- net/httpd-upload.c              | 123 ++++++++++++++++++++++++++++++++
- net/httpd_upload/error_400.html |   9 +++
- net/httpd_upload/error_404.html |  10 +++
- net/httpd_upload/index.html     |  14 ++++
- net/httpd_upload/upload_ok.html |   7 ++
- 9 files changed, 228 insertions(+)
- create mode 100644 include/net/httpd-upload.h
- create mode 100644 net/httpd-upload.c
- create mode 100644 net/httpd_upload/error_400.html
- create mode 100644 net/httpd_upload/error_404.html
- create mode 100644 net/httpd_upload/index.html
- create mode 100644 net/httpd_upload/upload_ok.html
+ include/net.h       |   2 +-
+ include/net/httpd.h |  64 ++++
+ net/Kconfig         |  14 +
+ net/Makefile        |   1 +
+ net/httpd.c         | 692 ++++++++++++++++++++++++++++++++++++++++++++
+ net/net.c           |   6 +
+ 6 files changed, 778 insertions(+), 1 deletion(-)
+ create mode 100644 include/net/httpd.h
+ create mode 100644 net/httpd.c
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index abcd003f7f1..55b9d04f2fa 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -2014,6 +2014,20 @@ config CMD_NETCAT
- 	  netcat is a simple command to load/store kernel, or other files,
- 	  using netcat like manner over TCP.
+diff --git a/include/net.h b/include/net.h
+index 0af6493788a..154885a2b7e 100644
+--- a/include/net.h
++++ b/include/net.h
+@@ -515,7 +515,7 @@ extern int		net_restart_wrap;	/* Tried all network devices */
+ enum proto_t {
+ 	BOOTP, RARP, ARP, TFTPGET, DHCP, DHCP6, PING, PING6, DNS, NFS, CDP,
+ 	NETCONS, SNTP, TFTPSRV, TFTPPUT, LINKLOCAL, FASTBOOT_UDP, FASTBOOT_TCP,
+-	WOL, UDP, NCSI, WGET, NETCAT_LOAD, NETCAT_SAVE, RS
++	WOL, UDP, NCSI, WGET, NETCAT_LOAD, NETCAT_SAVE, HTTPD, RS
+ };
  
-+config CMD_HTTPD_UPLOAD
-+	bool "an example HTTP server for file uploading"
-+	depends on HTTPD_COMMON
-+	help
-+	  HTTP/1.1 compatible server for file uploading.
-+
-+config CMD_HTTPD_UPLOAD_MAX_SIZE
-+	int "Maximum uploading size"
-+	depends on CMD_HTTPD_UPLOAD
-+	default 209715200
-+	help
-+	  This sets maximum size of uploaded file. Real transfer will be
-+	  slightly more than this limit.
-+
- config CMD_MII
- 	bool "mii"
- 	imply CMD_MDIO
-diff --git a/cmd/net.c b/cmd/net.c
-index 364139ec5b9..e5fddc8c7c5 100644
---- a/cmd/net.c
-+++ b/cmd/net.c
-@@ -21,6 +21,9 @@
- #include <net/udp.h>
- #include <net/sntp.h>
- #include <net/ncsi.h>
-+#if defined(CONFIG_CMD_HTTPD_UPLOAD)
-+#include <net/httpd-upload.h>
-+#endif
- 
- static int netboot_common(enum proto_t, struct cmd_tbl *, int, char * const []);
- 
-@@ -228,6 +231,23 @@ U_BOOT_CMD(
- );
- #endif
- 
-+#if defined(CONFIG_CMD_HTTPD_UPLOAD)
-+static int do_httpd_upload(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-+{
-+	if (argc < 2)
-+		return 1;
-+
-+	httpd_upload_prepare();
-+	return netboot_common(HTTPD, cmdtp, argc, argv);
-+}
-+
-+U_BOOT_CMD(
-+	httpd_upload,   2,      1,      do_httpd_upload,
-+	"starts httpd server for file uploading",
-+	"[loadAddress]\n"
-+);
-+#endif
-+
- static void netboot_update_env(void)
- {
- 	char tmp[46];
-diff --git a/include/net/httpd-upload.h b/include/net/httpd-upload.h
+ extern char	net_boot_file_name[1024];/* Boot File name */
+diff --git a/include/net/httpd.h b/include/net/httpd.h
 new file mode 100644
-index 00000000000..a80df214668
+index 00000000000..ff0dc93ecf5
 --- /dev/null
-+++ b/include/net/httpd-upload.h
-@@ -0,0 +1,12 @@
-+/* SPDX-License-Identifier: BSD-2-Clause
-+ *
-+ * httpd-upload include file
++++ b/include/net/httpd.h
+@@ -0,0 +1,64 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * httpd support header file
 + * Copyright (C) 2024 IOPSYS Software Solutions AB
 + * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
++ *
 + */
-+#ifndef __NET_HTTPD_UPLOAD_TCP_H__
-+#define __NET_HTTPD_UPLOAD_TCP_H__
++#ifndef __NET_HTTPD_COMMON_H__
++#define __NET_HTTPD_COMMON_H__
 +
-+void httpd_upload_prepare(void);
++struct http_reply {
++	int		code;
++	const char	*code_msg;
++	const char	*data_type;
++	void		*data;
++	u32		len;
++};
 +
-+#endif /* __NET_HTTPD_UPLOAD_TCP_H__ */
++struct httpd_post_data {
++	const char	*name;
++	const char	*filename;
++	void		*addr;
++	u32		size;
++};
++
++enum httpd_req_check {
++	HTTPD_REQ_OK,
++	HTTPD_BAD_URL,
++	HTTPD_BAD_REQ,
++	HTTPD_CLNT_RST
++};
++
++struct httpd_config {
++	enum net_loop_state	(*on_stop)(void);
++	void			(*on_req_end)(void *req_id);
++
++	enum httpd_req_check	(*pre_get)(void *req_id, const char *url);
++	enum httpd_req_check	(*pre_post)(void *req_id, const char *url,
++					    struct httpd_post_data *post);
++
++	struct http_reply *	(*get)(void *req_id, const char *url);
++	struct http_reply *	(*post)(void *req_id, const char *url,
++					struct httpd_post_data *post);
++
++	struct http_reply	*error_400;
++	struct http_reply	*error_404;
++};
++
++/**
++ * httpd_setup() - configure the webserver
++ */
++void httpd_setup(struct httpd_config *config);
++
++/**
++ * httpd_stop() - start stopping of the webserver
++ */
++void httpd_stop(void);
++
++/**
++ * httpd_start() - start the webserver
++ */
++void httpd_start(void);
++
++#endif /* __NET_HTTPD_COMMON_H__ */
+diff --git a/net/Kconfig b/net/Kconfig
+index 7cb80b880a9..55739b9bc98 100644
+--- a/net/Kconfig
++++ b/net/Kconfig
+@@ -243,6 +243,20 @@ config PROT_TCP_SACK
+ 	  This option should be turn on if you want to achieve the fastest
+ 	  file transfer possible.
+ 
++config HTTPD_COMMON
++	bool "HTTP server common code"
++	depends on PROT_TCP
++	help
++	  HTTP/1.1 compatible web-server common code. It supports standard
++	  GET/POST requests. User MUST provide a configuration to the
++	  web-server. On client request web-server will call user specified
++	  GET/POST callback. Then results will be transmitted to the client.
++	  The following restricions on the POST request are present at the
++	  moment:
++	    * only mulipart/form-data with a single binary object
++	    * object will be stored to a memory area specified in
++	      image_load_addr variable
++
+ config IPV6
+ 	bool "IPv6 support"
+ 	help
 diff --git a/net/Makefile b/net/Makefile
-index c1f491fad02..e7cbbc2248e 100644
+index dac7b4859fb..c1f491fad02 100644
 --- a/net/Makefile
 +++ b/net/Makefile
-@@ -35,8 +35,27 @@ obj-$(CONFIG_PROT_TCP) += tcp.o
+@@ -34,6 +34,7 @@ obj-$(CONFIG_PROT_UDP) += udp.o
+ obj-$(CONFIG_PROT_TCP) += tcp.o
  obj-$(CONFIG_CMD_WGET) += wget.o
  obj-$(CONFIG_CMD_NETCAT) += netcat.o
- obj-$(CONFIG_HTTPD_COMMON) += httpd.o
-+obj-$(CONFIG_CMD_HTTPD_UPLOAD) += httpd-upload.o
++obj-$(CONFIG_HTTPD_COMMON) += httpd.o
  
  # Disable this warning as it is triggered by:
  # sprintf(buf, index ? "foo%d" : "foo", index)
- # and this is intentional usage.
- CFLAGS_eth_common.o += -Wno-format-extra-args
-+
-+STATIC_SUBST := 's/^\(unsigned char \)/static \1/'
-+SIZE_REMOVE_SUBST := 's/^unsigned int .*//'
-+
-+httpd_upload_generated:
-+	rm -rf $(src)/httpd_upload_generated
-+	mkdir -p $(src)/httpd_upload_generated
-+	cd $(src)/httpd_upload && find . -type f | while read fname; do \
-+		name="$${fname##*/}" && \
-+		name="$${name%%.*}"  && \
-+		set -o pipefail && xxd -i "$${fname##./}" | \
-+			sed $(STATIC_SUBST) | \
-+			sed $(SIZE_REMOVE_SUBST) > ../httpd_upload_generated/$${name}.h; \
-+	done
-+
-+.PHONY: httpd_upload_generated
-+
-+net/httpd-upload.o:	httpd_upload_generated
-diff --git a/net/httpd-upload.c b/net/httpd-upload.c
+diff --git a/net/httpd.c b/net/httpd.c
 new file mode 100644
-index 00000000000..1e1e0b1cf75
+index 00000000000..052fae9ced0
 --- /dev/null
-+++ b/net/httpd-upload.c
-@@ -0,0 +1,123 @@
++++ b/net/httpd.c
+@@ -0,0 +1,692 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * httpd-upload support driver
++ * httpd support driver
 + * Copyright (C) 2024 IOPSYS Software Solutions AB
 + * Author: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 + */
 +
 +#include <command.h>
++#include <version.h>
++#include <display_options.h>
++#include <env.h>
++#include <image.h>
++#include <mapmem.h>
++#include <malloc.h>
 +#include <net.h>
++#include <net/tcp.h>
 +#include <net/httpd.h>
-+#include <net/httpd-upload.h>
 +
-+#define MAX_FILE_SIZE	CONFIG_CMD_HTTPD_UPLOAD_MAX_SIZE
++#define HTTP_PORT		80
 +
-+static enum net_loop_state  httpd_on_stop(void);
++#define MAX_URL_LEN		128
++#define MAX_BOUNDARY_LEN	80
++#define MAX_MPART_NAME_LEN	80
++#define MAX_FILENAME_LEN	256
++#define BUFFER_LEN		2048
 +
-+static enum httpd_req_check httpd_pre_post(void *req_id, const char *url,
-+					   struct httpd_post_data *post);
-+static struct http_reply    *httpd_get(void *req_id, const char *url);
-+static struct http_reply    *httpd_post(void *req_id, const char *url,
-+					struct httpd_post_data *post);
-+static void		     httpd_on_req_end(void *req_id);
-+
-+#include "httpd_upload_generated/error_400.h"
-+#include "httpd_upload_generated/error_404.h"
-+#include "httpd_upload_generated/index.h"
-+#include "httpd_upload_generated/upload_ok.h"
-+
-+static struct http_reply error_400 = {
-+	.code      = 400,
-+	.code_msg  = "Bad Request",
-+	.data_type = "text/html; charset=utf-8",
-+	.data      = error_400_html,
-+	.len       = sizeof(error_400_html)
++enum http_req_state {
++	ST_REQ_LINE = 0,
++	ST_REQ_HDR,
++	ST_REQ_MPBOUNDARY,
++	ST_REQ_MPART,
++	ST_REQ_MPFILE,
++	ST_REQ_MPEND,
++	ST_REQ_DONE,
 +};
 +
-+static struct http_reply error_404 = {
-+	.code      = 404,
-+	.code_msg  = "Not Found",
-+	.data_type = "text/html; charset=utf-8",
-+	.data      = error_404_html,
-+	.len       = sizeof(error_404_html)
++enum http_reply_state {
++	ST_REPLY_ERR = 0,
++	ST_REPLY_HDR,
++	ST_REPLY_BODY
 +};
 +
-+static struct http_reply index = {
++enum http_method {
++	HTTP_UNKNOWN = -1,
++	HTTP_GET,
++	HTTP_POST,
++	HTTP_HEAD,
++	HTTP_OPTIONS,
++};
++
++struct httpd_priv {
++	enum http_req_state	req_state;
++	enum http_reply_state	reply_state;
++
++	struct tcp_stream	*tcp;
++
++	enum http_method	method;
++	char			url[MAX_URL_LEN];
++	u32			version_major;
++	u32			version_minor;
++	u32			hdr_len;
++
++	u32			post_fstart;
++	u32			post_flen;
++	char			post_fname[MAX_FILENAME_LEN];
++	char			post_name[MAX_MPART_NAME_LEN];
++	char			post_boundary[MAX_BOUNDARY_LEN];
++
++	int			reply_code;
++	u32			reply_fstart;
++	u32			reply_flen;
++	void			*reply_fdata;
++
++	u32			rx_processed;
++	char			buf[BUFFER_LEN];
++};
++
++static struct http_reply options_reply = {
 +	.code      = 200,
 +	.code_msg  = "OK",
-+	.data_type = "text/html; charset=utf-8",
-+	.data      = index_html,
-+	.len       = sizeof(index_html)
++	.data_type = "text/plain",
++	.data      = NULL,
++	.len       = 0
 +};
 +
-+static struct http_reply upload_ok = {
-+	.code      = 200,
-+	.code_msg  = "OK",
-+	.data_type = "text/html; charset=utf-8",
-+	.data      = upload_ok_html,
-+	.len       = sizeof(upload_ok_html)
-+};
++static int stop_server;
++static int tsize_num_hash;
 +
-+static struct httpd_config cfg = {
-+	.on_stop    = httpd_on_stop,
-+	.on_req_end = httpd_on_req_end,
-+	.get        = httpd_get,
-+	.post       = httpd_post,
-+	.pre_post   = httpd_pre_post,
-+	.error_400  = &error_400,
-+	.error_404  = &error_404,
-+};
++static struct httpd_config *cfg;
 +
-+static enum net_loop_state	httpd_loop_state;
-+static void			*post_req_id;
-+
-+void httpd_upload_prepare(void)
++static void show_block_marker(u32 offs, u32 size)
 +{
-+	httpd_setup(&cfg);
-+	httpd_loop_state = NETLOOP_FAIL;
-+}
++	int cnt;
 +
-+static enum httpd_req_check httpd_pre_post(void *req_id, const char *url,
-+					   struct httpd_post_data *post)
-+{
-+	if (post->size > MAX_FILE_SIZE) {
-+		printf("HTTPD: reset connection, upload file is too large\n");
-+		return HTTPD_CLNT_RST;
++	if (offs > size)
++		offs = size;
++
++	cnt = offs * 50 / size;
++	while (tsize_num_hash < cnt) {
++		putc('#');
++		tsize_num_hash++;
 +	}
 +
-+	post_req_id = req_id;
++	if (cnt == 50)
++		putc('\n');
++}
++
++static void tcp_stream_on_closed(struct tcp_stream *tcp)
++{
++	struct httpd_priv *priv = tcp->priv;
++
++	if ((priv->req_state != ST_REQ_DONE) &&
++	    (priv->req_state >= ST_REQ_MPFILE)) {
++		printf("\nHTTPD: transfer was terminated\n");
++	}
++
++	if (cfg->on_req_end)
++		cfg->on_req_end(tcp->priv);
++
++	free(tcp->priv);
++
++	if (stop_server)
++		net_set_state(cfg->on_stop ? cfg->on_stop() : NETLOOP_SUCCESS);
++}
++
++static void http_make_reply(struct httpd_priv *priv, struct http_reply *reply,
++			    int head_only)
++{
++	int offs = 0;
++
++	if (priv->version_major >= 1) {
++		offs = snprintf(priv->buf, sizeof(priv->buf),
++				"HTTP/%d.%d %d %s\r\n"
++				"Server: %s\r\n"
++				"Connection: close\r\n"
++				"Cache-Control: no-store\r\n"
++				"Content-Type: %s\r\n"
++				"Content-Length: %d\r\n",
++				priv->version_major, priv->version_minor,
++				reply->code, reply->code_msg, U_BOOT_VERSION,
++				reply->data_type,
++				head_only ? 0 : reply->len);
++		if (priv->method == HTTP_OPTIONS)
++			offs += snprintf(priv->buf + offs, sizeof(priv->buf) - offs,
++					"Access-Control-Allow-Methods: GET, HEAD, OPTIONS, POST\r\n");
++		offs += snprintf(priv->buf + offs, sizeof(priv->buf) - offs,
++				"\r\n");
++	}
++
++	priv->reply_code = reply->code;
++	priv->reply_fstart = offs;
++	if (!head_only) {
++		priv->reply_flen = reply->len;
++		priv->reply_fdata = reply->data;
++	}
++}
++
++static enum httpd_req_check http_parse_line(struct httpd_priv *priv, char *line)
++{
++	char			*url, *version, *data, *end;
++	u32			len, tmp;
++	enum httpd_req_check	ret;
++	struct httpd_post_data	post;
++
++	switch (priv->req_state) {
++	case ST_REQ_LINE:
++		if (!strncasecmp(line, "GET ", 4)) {
++			priv->method = HTTP_GET;
++			url = line + 4;
++		} else if (!strncasecmp(line, "POST ", 5)) {
++			priv->method = HTTP_POST;
++			url = line + 5;
++		} else if (!strncasecmp(line, "HEAD ", 5)) {
++			priv->method = HTTP_HEAD;
++			url = line + 5;
++		} else if (!strncasecmp(line, "OPTIONS ", 8)) {
++			priv->method = HTTP_OPTIONS;
++			url = line + 8;
++		} else {
++			/* unknown request */
++			return HTTPD_CLNT_RST;
++		}
++
++		version = strstr(url, " ");
++		if (!version) {
++			/* check for HTTP 0.9 */
++			if (*url != '/' || priv->method != HTTP_GET)
++				return HTTPD_CLNT_RST;
++
++			if (strlen(url) >= MAX_URL_LEN)
++				return HTTPD_CLNT_RST;
++
++			if (cfg->pre_get) {
++				ret = cfg->pre_get(priv, url);
++				if (ret != HTTPD_REQ_OK)
++					return ret;
++			}
++
++			priv->req_state = ST_REQ_DONE;
++			priv->hdr_len = strlen(line) + 2;
++			priv->version_major = 0;
++			priv->version_minor = 9;
++			strcpy(priv->url, url);
++			return HTTPD_REQ_OK;
++		}
++
++		if (strncasecmp(version + 1, "HTTP/", 5)) {
++			/* version is required for HTTP >= 1.0 */
++			return HTTPD_CLNT_RST;
++		}
++
++		*version++ = '\0';
++		version += strlen("HTTP/");
++
++		priv->version_major = dectoul(version, &end);
++		switch (*end) {
++		case '\0':
++			priv->version_minor = 0;
++			break;
++		case '.':
++			priv->version_minor = dectoul(end + 1, &end);
++			if (*end == '\0')
++				break;
++			fallthrough;
++		default:
++			/* bad version format */
++			return HTTPD_CLNT_RST;
++		}
++
++		if (priv->version_major < 1) {
++			/* bad version */
++			return HTTPD_CLNT_RST;
++		}
++
++		if (priv->version_major > 1 || priv->version_minor > 1) {
++			/* We support HTTP/1.1 or early standards only */
++			priv->version_major = 1;
++			priv->version_minor = 1;
++		}
++
++		if (*url != '/')
++			return HTTPD_CLNT_RST;
++
++		if (strlen(url) >= MAX_URL_LEN)
++			return HTTPD_CLNT_RST;
++
++		priv->req_state = ST_REQ_HDR;
++		strcpy(priv->url, url);
++		return HTTPD_REQ_OK;
++
++	case ST_REQ_HDR:
++		if (*line == '\0') {
++			priv->hdr_len = priv->rx_processed + 2;
++			switch (priv->method) {
++			case HTTP_GET:
++			case HTTP_HEAD:
++				if (cfg->pre_get) {
++					ret = cfg->pre_get(priv, priv->url);
++					if (ret != HTTPD_REQ_OK)
++						return ret;
++				}
++				fallthrough;
++
++			case HTTP_OPTIONS:
++				priv->req_state = ST_REQ_DONE;
++				return HTTPD_REQ_OK;
++
++			default:
++				break;
++			}
++
++			if (*priv->post_boundary != '\0') {
++				priv->req_state = ST_REQ_MPBOUNDARY;
++				return HTTPD_REQ_OK;
++			}
++			/* NOT multipart/form-data POST request */
++			return HTTPD_BAD_REQ;
++		}
++
++		if (priv->method != HTTP_POST)
++			return HTTPD_REQ_OK;
++
++		len = strlen("Content-Length: ");
++		if (!strncasecmp(line, "Content-Length: ", len)) {
++			data = line + len;
++			priv->post_flen = simple_strtol(data, &end, 10);
++			if (*end != '\0') {
++				/* bad Content-Length string */
++				return HTTPD_BAD_REQ;
++			}
++			return HTTPD_REQ_OK;
++		}
++
++		len = strlen("Content-Type: ");
++		if (!strncasecmp(line, "Content-Type: ", len)) {
++			data = strstr(line + len, " boundary=");
++			if (!data) {
++				/* expect multipart/form-data format */
++				return HTTPD_BAD_REQ;
++			}
++
++			data += strlen(" boundary=");
++			if (strlen(data) >= sizeof(priv->post_boundary)) {
++				/* no space to keep boundary */
++				return HTTPD_BAD_REQ;
++			}
++
++			strcpy(priv->post_boundary, data);
++			return HTTPD_REQ_OK;
++		}
++
++		return HTTPD_REQ_OK;
++
++	case ST_REQ_MPBOUNDARY:
++		if (*line == '\0')
++			return HTTPD_REQ_OK;
++		if (line[0] != '-' || line[1] != '-' ||
++		    strcmp(line + 2, priv->post_boundary)) {
++			/* expect boundary line */
++			return HTTPD_BAD_REQ;
++		}
++		priv->req_state = ST_REQ_MPART;
++		return HTTPD_REQ_OK;
++
++	case ST_REQ_MPART:
++		if (*line == '\0') {
++			if (*priv->post_name == '\0')
++				return HTTPD_BAD_REQ;
++
++			priv->post_fstart = priv->rx_processed + 2;
++			priv->post_flen -= priv->post_fstart - priv->hdr_len;
++			/* expect: "\r\n--${boundary}--\r\n", so strlen() + 8 */
++			priv->post_flen -= strlen(priv->post_boundary) + 8;
++
++			if (cfg->pre_post) {
++				post.addr     = NULL;
++				post.name     = priv->post_name;
++				post.filename = priv->post_fname;
++				post.size     = priv->post_flen;
++
++				ret = cfg->pre_post(priv, priv->url, &post);
++				if (ret != HTTPD_REQ_OK)
++					return ret;
++			}
++
++			tsize_num_hash = 0;
++			printf("File: %s, %u bytes\n", priv->post_fname, priv->post_flen);
++			printf("Loading: ");
++
++			priv->req_state = ST_REQ_MPFILE;
++			return HTTPD_REQ_OK;
++		}
++
++		len = strlen("Content-Disposition: ");
++		if (!strncasecmp(line, "Content-Disposition: ", len)) {
++			data = strstr(line + len, " name=\"");
++			if (!data) {
++				/* name attribute not found */
++				return HTTPD_BAD_REQ;
++			}
++
++			data += strlen(" name=\"");
++			end = strstr(data, "\"");
++			if (!end) {
++				/* bad name attribute format */
++				return HTTPD_BAD_REQ;
++			}
++
++			tmp = end - data;
++			if (tmp >= sizeof(priv->post_name)) {
++				/* multipart name is too long */
++				return HTTPD_BAD_REQ;
++			}
++			strncpy(priv->post_name, data, tmp);
++			priv->post_name[tmp] = '\0';
++
++			data = strstr(line + len, " filename=\"");
++			if (!data) {
++				/* filename attribute not found */
++				return HTTPD_BAD_REQ;
++			}
++
++			data += strlen(" filename=\"");
++			end = strstr(data, "\"");
++			if (!end) {
++				/* bad filename attribute format */
++				return HTTPD_BAD_REQ;
++			}
++
++			tmp = end - data;
++			if (tmp >= sizeof(priv->post_fname))
++				tmp = sizeof(priv->post_fname) - 1;
++			strncpy(priv->post_fname, data, tmp);
++			priv->post_fname[tmp] = '\0';
++			return HTTPD_REQ_OK;
++		}
++
++		return HTTPD_REQ_OK;
++
++	case ST_REQ_MPEND:
++		if (*line == '\0')
++			return HTTPD_REQ_OK;
++
++		len = strlen(priv->post_boundary);
++		if (line[0] != '-' || line[1] != '-' ||
++		    strncmp(line + 2, priv->post_boundary, len) ||
++		    line[len + 2] != '-' || line[len + 3] != '-' ||
++		    line[len + 4] != '\0') {
++			/* expect final boundary line */
++			return HTTPD_BAD_REQ;
++		}
++		priv->req_state = ST_REQ_DONE;
++		return HTTPD_REQ_OK;
++
++	default:
++		return HTTPD_BAD_REQ;
++	}
++}
++
++static enum httpd_req_check http_parse_buf(struct httpd_priv *priv,
++					   char *buf, u32 size)
++{
++	char			*eol_pos;
++	u32			len;
++	enum httpd_req_check	ret;
++
++	buf[size] = '\0';
++	while (size > 0) {
++		eol_pos = strstr(buf, "\r\n");
++		if (!eol_pos)
++			break;
++
++		*eol_pos = '\0';
++		len = eol_pos + 2 - buf;
++
++		ret = http_parse_line(priv, buf);
++		if (ret != HTTPD_REQ_OK) {
++			/* request processing error */
++			return ret;
++		}
++
++		priv->rx_processed += len;
++		buf += len;
++		size -= len;
++
++		if ((priv->req_state == ST_REQ_MPFILE) ||
++		    (priv->req_state == ST_REQ_DONE))
++			return HTTPD_REQ_OK;
++	}
++	/* continue when more data becomes available */
 +	return HTTPD_REQ_OK;
 +}
 +
-+static struct http_reply *httpd_post(void *req_id, const char *url,
-+				     struct httpd_post_data *post)
++static void tcp_stream_on_rcv_nxt_update(struct tcp_stream *tcp, u32 rx_bytes)
 +{
-+	if (strcmp(url, "/file_upload"))
-+		return &error_404;
++	struct httpd_priv	*priv;
++	void			*ptr;
++	u32			shift, size;
++	enum httpd_req_check	ret;
++	struct http_reply	*reply;
++	struct httpd_post_data	post;
 +
-+	httpd_loop_state = NETLOOP_SUCCESS;
-+	printf("HTTPD: upload OK\n");
-+	return &upload_ok;
-+}
++	priv = tcp->priv;
 +
-+static struct http_reply *httpd_get(void *req_id, const char *url)
-+{
-+	if (!strcmp(url, "/"))
-+		return &index;
-+	if (!strcmp(url, "/index.html"))
-+		return &index;
-+	return &error_404;
-+}
++	switch (priv->req_state) {
++	case ST_REQ_DONE:
++		return;
 +
-+static void httpd_on_req_end(void *req_id)
-+{
-+	if (req_id == post_req_id) {
-+		post_req_id = NULL;
-+		httpd_stop();
++	case ST_REQ_MPFILE:
++		show_block_marker(rx_bytes - priv->post_fstart,
++				  priv->post_flen);
++		if (rx_bytes < priv->post_fstart + priv->post_flen) {
++			priv->rx_processed = rx_bytes;
++			return;
++		}
++		priv->req_state = ST_REQ_MPEND;
++		priv->rx_processed = priv->post_fstart + priv->post_flen;
++		fallthrough;
++
++	case ST_REQ_MPEND:
++		shift = priv->rx_processed - priv->post_fstart;
++		ptr = map_sysmem(image_load_addr + shift,
++				 rx_bytes - priv->rx_processed);
++		ret = http_parse_buf(priv, ptr,
++				     rx_bytes - priv->rx_processed);
++		unmap_sysmem(ptr);
++
++		if (ret != HTTPD_REQ_OK)
++			goto error;
++		if (priv->req_state != ST_REQ_DONE)
++			return;
++		break;
++
++	default:
++		ret = http_parse_buf(priv, priv->buf + priv->rx_processed,
++				     rx_bytes - priv->rx_processed);
++		if (ret != HTTPD_REQ_OK)
++			goto error;
++
++		if (priv->req_state == ST_REQ_MPFILE) {
++			/*
++			 * We just switched from parsing of HTTP request
++			 * headers to binary data reading. Our tcp->rx
++			 * handler may put some binary data to priv->buf.
++			 * It's time to copy these data to a proper place.
++			 * It's required to copy whole buffer data starting
++			 * from priv->rx_processed position. Otherwise we
++			 * may miss data placed after the first hole.
++			 */
++			size = sizeof(priv->buf) - priv->rx_processed;
++			if (size > 0) {
++				ptr = map_sysmem(image_load_addr, size);
++				memcpy(ptr, priv->buf + priv->rx_processed, size);
++				unmap_sysmem(ptr);
++			}
++
++			show_block_marker(rx_bytes - priv->post_fstart,
++					  priv->post_flen);
++		}
++
++		if (priv->req_state != ST_REQ_DONE)
++			return;
++		break;
++	}
++
++	switch (priv->method) {
++	case HTTP_OPTIONS:
++		reply = &options_reply;
++		break;
++
++	case HTTP_GET:
++	case HTTP_HEAD:
++		if (!cfg->get) {
++			ret = HTTPD_BAD_REQ;
++			goto error;
++		}
++		reply = cfg->get(priv, priv->url);
++		break;
++
++	case HTTP_POST:
++		if (!cfg->post) {
++			ret = HTTPD_BAD_REQ;
++			goto error;
++		}
++		post.name     = priv->post_name;
++		post.filename = priv->post_fname;
++		post.size     = priv->post_flen;
++		post.addr     = map_sysmem(image_load_addr, post.size);
++		reply = cfg->post(priv, priv->url, &post);
++		unmap_sysmem(post.addr);
++		break;
++
++	default:
++		ret = HTTPD_BAD_REQ;
++		goto error;
++	}
++
++	http_make_reply(priv, reply, priv->method == HTTP_HEAD);
++	return;
++
++error:
++	priv->req_state = ST_REQ_DONE;
++	switch (ret) {
++	case HTTPD_BAD_URL:
++		http_make_reply(priv, cfg->error_404, 0);
++		break;
++	case HTTPD_BAD_REQ:
++		http_make_reply(priv, cfg->error_400, 0);
++		break;
++	default:
++		tcp_stream_reset(tcp);
++		break;
 +	}
 +}
 +
-+static enum net_loop_state httpd_on_stop(void)
++static u32 tcp_stream_rx(struct tcp_stream *tcp, u32 rx_offs, void *buf, u32 len)
 +{
-+	return httpd_loop_state;
++	void			*ptr;
++	struct httpd_priv	*priv;
++	u32			shift;
++
++	priv = tcp->priv;
++	switch (priv->req_state) {
++	case ST_REQ_DONE:
++		return len;
++	case ST_REQ_MPFILE:
++	case ST_REQ_MPEND:
++		shift = rx_offs - priv->post_fstart;
++		ptr = map_sysmem(image_load_addr + shift, len);
++		memcpy(ptr, buf, len);
++		unmap_sysmem(ptr);
++		return len;
++	default:
++		/*
++		 * accept data that fits to buffer,
++		 * reserve space for end of line symbol
++		 */
++		if (rx_offs + len > sizeof(priv->buf) - 1)
++			len = sizeof(priv->buf) - rx_offs - 1;
++		memcpy(priv->buf + rx_offs, buf, len);
++		return len;
++	}
 +}
-diff --git a/net/httpd_upload/error_400.html b/net/httpd_upload/error_400.html
-new file mode 100644
-index 00000000000..de654364edf
---- /dev/null
-+++ b/net/httpd_upload/error_400.html
-@@ -0,0 +1,9 @@
-+<html>
-+  <head><title>400</title></head>
-+  <body>
-+    <h1>400 - Bad Request</h1>
-+    <p>
-+      Sorry, the request you are trying to do is wrong.
-+    </p>
-+  </body>
-+</html>
-diff --git a/net/httpd_upload/error_404.html b/net/httpd_upload/error_404.html
-new file mode 100644
-index 00000000000..9dac22d497d
---- /dev/null
-+++ b/net/httpd_upload/error_404.html
-@@ -0,0 +1,10 @@
-+<html>
-+  <head><title>404</title></head>
-+  <body>
-+    <h1>404 - Page not found</h1>
-+    <p>
-+      Sorry, the page you are requesting was not found on this
-+      server.
-+    </p>
-+  </body>
-+</html>
-diff --git a/net/httpd_upload/index.html b/net/httpd_upload/index.html
-new file mode 100644
-index 00000000000..e7d5ac943b6
---- /dev/null
-+++ b/net/httpd_upload/index.html
-@@ -0,0 +1,14 @@
-+<html>
-+  <head><title>Upload File</title></head>
-+  <body>
-+    <h1>Upload File.</h1>
-+    <p>This will write the uploaded file to the memory arear pointed by ${loadaddr}.
-+      <form method="post" enctype="multipart/form-data" action="file_upload">
-+        File to upload:
-+        <input type="file" name="fileID" size="500" /><br />
-+        <p>&nbsp;&nbsp;<input type="submit" value="upload" />
-+        <p>It takes no more than a second after the file has been uploaded until status OK is shown.
-+      </form>
-+    </p>
-+  </body>
-+</html>
-diff --git a/net/httpd_upload/upload_ok.html b/net/httpd_upload/upload_ok.html
-new file mode 100644
-index 00000000000..8d2e561982f
---- /dev/null
-+++ b/net/httpd_upload/upload_ok.html
-@@ -0,0 +1,7 @@
-+<html>
-+  <head><title>OK</title></head>
-+  <body>
-+    <h1>Upload OK</h1>
-+    <p>The file was uploaded.</p>
-+  </body>
-+</html>
++
++static void tcp_stream_on_snd_una_update(struct tcp_stream *tcp, u32 tx_bytes)
++{
++	struct httpd_priv *priv;
++
++	priv = tcp->priv;
++	if ((priv->req_state == ST_REQ_DONE) &&
++	    (tx_bytes == priv->reply_fstart + priv->reply_flen))
++		tcp_stream_close(tcp);
++}
++
++static u32 tcp_stream_tx(struct tcp_stream *tcp, u32 tx_offs, void *buf, u32 maxlen)
++{
++	struct httpd_priv	*priv;
++	u32			len, bytes = 0;
++	char			*ptr;
++
++	priv = tcp->priv;
++	if (priv->req_state != ST_REQ_DONE)
++		return 0;
++
++	if (tx_offs < priv->reply_fstart) {
++		len = maxlen;
++		if (len > priv->reply_fstart - tx_offs)
++			len = priv->reply_fstart - tx_offs;
++		memcpy(buf, priv->buf + tx_offs, len);
++		buf += len;
++		tx_offs += len;
++		bytes += len;
++		maxlen -= len;
++	}
++
++	if (tx_offs >= priv->reply_fstart) {
++		if (tx_offs + maxlen > priv->reply_fstart + priv->reply_flen)
++			maxlen = priv->reply_fstart + priv->reply_flen - tx_offs;
++		if (maxlen > 0) {
++			ptr = priv->reply_fdata + tx_offs - priv->reply_fstart;
++			memcpy(buf, ptr, maxlen);
++			bytes += maxlen;
++		}
++	}
++
++	return bytes;
++}
++
++static int tcp_stream_on_create(struct tcp_stream *tcp)
++{
++	struct httpd_priv	*priv;
++
++	if (!cfg || stop_server || tcp->lport != HTTP_PORT)
++		return 0;
++
++	priv = malloc(sizeof(struct httpd_priv));
++	if (!priv)
++		return 0;
++
++	memset(priv, 0, sizeof(struct httpd_priv));
++	priv->tcp = tcp;
++
++	tcp->priv = priv;
++	tcp->on_closed = tcp_stream_on_closed;
++	tcp->on_rcv_nxt_update = tcp_stream_on_rcv_nxt_update;
++	tcp->rx = tcp_stream_rx;
++	tcp->on_snd_una_update = tcp_stream_on_snd_una_update;
++	tcp->tx = tcp_stream_tx;
++	return 1;
++}
++
++void httpd_setup(struct httpd_config *config)
++{
++	cfg = config;
++}
++
++void httpd_stop(void)
++{
++	stop_server = 1;
++}
++
++void httpd_start(void)
++{
++	if (!cfg) {
++		net_set_state(NETLOOP_FAIL);
++		return;
++	}
++	stop_server = 0;
++	memset(net_server_ethaddr, 0, 6);
++	tcp_stream_set_on_create_handler(tcp_stream_on_create);
++	printf("HTTPD listening on port %d...\n", HTTP_PORT);
++}
+diff --git a/net/net.c b/net/net.c
+index d81604a57ce..0b6cf4ef45c 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -109,6 +109,7 @@
+ #include <net/tcp.h>
+ #include <net/wget.h>
+ #include <net/netcat.h>
++#include <net/httpd.h>
+ #include "arp.h"
+ #include "bootp.h"
+ #include "cdp.h"
+@@ -573,6 +574,11 @@ restart:
+ 			netcat_save_start();
+ 			break;
+ #endif
++#if defined(CONFIG_HTTPD_COMMON)
++		case HTTPD:
++			httpd_start();
++			break;
++#endif
+ #if defined(CONFIG_CMD_CDP)
+ 		case CDP:
+ 			cdp_start();
 -- 
 2.43.0
 
