@@ -4,65 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B820C5321E
-	for <u-boot@archiver.kernel.org>; Sun, 25 Aug 2024 13:07:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE879C5321E
+	for <u-boot@archiver.kernel.org>; Sun, 25 Aug 2024 17:53:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7F2A8895B;
-	Sun, 25 Aug 2024 15:07:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id C45F688640;
+	Sun, 25 Aug 2024 19:53:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X2gEiQJy";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k40Bu0gI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87C2888975; Sun, 25 Aug 2024 15:07:38 +0200 (CEST)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id D24F5886E7; Sun, 25 Aug 2024 19:53:05 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDEB288279
- for <u-boot@lists.denx.de>; Sun, 25 Aug 2024 15:07:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C6288862E;
+ Sun, 25 Aug 2024 19:53:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6bf6755323cso20508466d6.1
- for <u-boot@lists.denx.de>; Sun, 25 Aug 2024 06:07:34 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-533462b9428so6128599e87.3; 
+ Sun, 25 Aug 2024 10:53:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724591253; x=1725196053; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=vPn1trtAoRIN3Wmf7I/6yZoJjN/ziQx9yhjUvKPRkkI=;
- b=X2gEiQJyZhI4CWJspS/heRi6rBEZkinS3iRk+emhp73zibiobuSKn891aNCQmZAwBZ
- TB+pPOZPFigLbKB56rwoBMBqiKnL5IPYj8i5tG8JJR0Bw1QtuzCyu1d8mndDewZ4nmH+
- 7fegMVkVfU8hEVeFL4r47QLSWoNwnU8XMupUQ=
+ d=gmail.com; s=20230601; t=1724608383; x=1725213183; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bUuNtkz5nQuplOHrRKjreApOfkbilC+PA/cnCRIwr5c=;
+ b=k40Bu0gIVY9q+wx3WyfS8PJAmvcVxlYQUIfyI9/pJfxhKWIvo9tAYWDXGF9TQ8lJ7s
+ eAX50ONYKnSDlXL0+/1VHZawNaF07KZRlNZSJ3zwMyIu8StH1OMKUy1J9Z2IrjL+MWye
+ MES8MZR7Jc1rfd9necpTz/8G8fWulnhF1dqtiLEFZ0+ZpUyRwrLXnWz89IxC4U6ycc1Z
+ Nz+DiOdwBWfozrLhX2n0yMB9joODqtkrMNUz3tTlN0rl8F+R45PBxd3a3TcPm9Q4YHWd
+ 2Maqmi9p64ZIT8Zej/17hPLVSjhv1ckWmnp3p0LZm0k1o0zx4cWlGpGS+avskAahF3+F
+ yG0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724591253; x=1725196053;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=vPn1trtAoRIN3Wmf7I/6yZoJjN/ziQx9yhjUvKPRkkI=;
- b=Md6jEe/HUPsg8IBOstiI+E47VHECMddc4BV3zDokEUaDOKcjkRG5PSNTwpGVeD8bIA
- Cq02YxSQFmRgiIB+uiJYBNIRrKjq2muKN8BmbTyW4a6Qp+wvKNLalXm1FhB1v+1Zsh4M
- hCt8mMVo1GcxEjRLNfdhdxebD4wi4e62X70ucU1H63uCtDdoY/2NKacrPlvcrFbjeRCA
- TldlR+J9bX8JFUEhlUgFHikk03Izw3/cCB7GCodc5tprkpPXJnPyNzTaJpaiUs0jzxNO
- cTpNTUrFIDhc8JLkpfXwq99AK5bn9MW/+h66FsW4ccWz/qprOg2VODzuP3GZzt60fYbV
- OFBQ==
-X-Gm-Message-State: AOJu0YwRyq0nT421sU0MJC3co6c9dTbJgI4SdT+GnuiS2IW9XIDIJJDv
- 7C0TLbnp7hp7pWmETZ65QcT9fZNmmCEFOvA/Mo21NnkBjwcavKSX9Dpkie7CiJ5VtbjDPBVF36Z
- elfMF2rlCgwXfhZ5NQABQ2rpTtYtZoNjGlJMZWRVmn9QVsvE=
-X-Google-Smtp-Source: AGHT+IGAdqDBbcmzQvv3eOkhg3NxWQ8E8Exb6+y0EzUp+BY89wwzWOMMPKHLnc6yJnTVED9iW0V2d23FzgOYHIjvL3Y=
-X-Received: by 2002:a0c:f209:0:b0:6c1:6baa:d97f with SMTP id
- 6a1803df08f44-6c16dc7f2d0mr105910946d6.25.1724591253692; Sun, 25 Aug 2024
- 06:07:33 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1724608383; x=1725213183;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=bUuNtkz5nQuplOHrRKjreApOfkbilC+PA/cnCRIwr5c=;
+ b=V4Psh6BO22jnQaIN0vlO1Nq/yx5pYA4DxMdvNwG1bQsYfGGDc4ILgbyy9fOT4UdcFI
+ cOWUnBNa0EHAkaj4TzkPgxBFqeLni4izmp87SHyyNXDwAvyi+pC1jQvbiyqJjF4QdU3U
+ lHZIm2mrm9GxfjMkEpmOl3jOU5sHRwdmqF7G9iNYFhLAdsmKcNHxpLpQIN0CMHQ1tO9P
+ F+Y7YImcXjR8hlCS511zR/2PkZKw0KMuRpNAbcyigH/X4Oqi4qAOKaOTF1l4gomMX6g5
+ yg4YbPqSFjuNrtLqKhi1lxwAr0/BG/fm5V0Ky/IIv7ZbisuMY3RSlOGwC1tQNJr5AiJg
+ XYOA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUPsC/uCACHEhyCFG12cLDzer/a7k/Z/t1T6fBO4poQhkFY+ncKpQfYunoCKxxWTRcN+OqJh9KzY2bKftpN08CY/A==@lists.denx.de
+X-Gm-Message-State: AOJu0YzS1we0toyfAQt7l5OWpl30gzulXTb8u7HtzBrBmNdbooZ2PXj5
+ PVydeGAK1vVRp2lfGmQyn6YvLSgWSm6athtEGRQnoqMdOtdiBzyClOgK9hIZklml0XR9lni1jBs
+ 42Bn2VKR6w68mHAdhjomhPqZ4T0o=
+X-Google-Smtp-Source: AGHT+IHzwBJ7kt6WcQAxJeP5jzSJsmiI3cM8grOP4I/pTiatdhzNHuLlG+ibO2elLVZn9kptUHzC4TneeRLzu8vr53E=
+X-Received: by 2002:a05:6512:39d0:b0:533:3268:b96f with SMTP id
+ 2adb3069b0e04-5343883d613mr6532927e87.12.1724608382316; Sun, 25 Aug 2024
+ 10:53:02 -0700 (PDT)
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 25 Aug 2024 07:07:23 -0600
-Message-ID: <CAFLszThRq1MmeAukYW+uwe5nBiku94qXALLMZ4S9ySFfbW0AkA@mail.gmail.com>
-Subject: xPL terminology
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
+References: <CAFLszThRq1MmeAukYW+uwe5nBiku94qXALLMZ4S9ySFfbW0AkA@mail.gmail.com>
+In-Reply-To: <CAFLszThRq1MmeAukYW+uwe5nBiku94qXALLMZ4S9ySFfbW0AkA@mail.gmail.com>
+From: E Shattow <lucent@gmail.com>
+Date: Sun, 25 Aug 2024 10:52:51 -0700
+Message-ID: <CANV2PTMbQg-1959WiTJ8SDgS9C0Js+D87x7bebwLFZir8f0GUQ@mail.gmail.com>
+Subject: Re: xPL terminology
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
  U-Boot Custodians <u-boot-custodians@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,23 +89,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Simon,
 
-We have the term 'SPL', which has a dual meaning. It is both a
-particular phase of U-Boot (the one that loads U-Boot proper) and a
-generic name for any pre-proper phase.
+On Sun, Aug 25, 2024 at 6:07=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi,
+>
+> We have the term 'SPL', which has a dual meaning. It is both a
+> particular phase of U-Boot (the one that loads U-Boot proper) and a
+> generic name for any pre-proper phase.
 
-You can see that in a few areas, but for example CONFIG_SPL_BUILD is
-enabled for TPL and VPL builds, not just SPL.
+ZBL or ZSBL: Zeroth Stage Boot Loader (usually in MaskROM)
 
-I propose to rename the generic term from SPL to xPL (meaning any PL
-phase), leaving SPL to just refer to the phase before U-Boot proper.
+SPL: Secondary Program Loader is what gets loaded by ZSBL and jump
+code execution to next
 
-The symbol would be CONFIG_XPL but in documentation we would talk of
-xPL, with a lower-case X, so it is more obvious that it refers to any
-phase.
+Everything after SPL seems like an invention of naming, and yes it is confu=
+sing!
 
-What do you think?
+>
+> You can see that in a few areas, but for example CONFIG_SPL_BUILD is
+> enabled for TPL and VPL builds, not just SPL.
+>
+> I propose to rename the generic term from SPL to xPL (meaning any PL
+> phase), leaving SPL to just refer to the phase before U-Boot proper.
+>
+> The symbol would be CONFIG_XPL but in documentation we would talk of
+> xPL, with a lower-case X, so it is more obvious that it refers to any
+> phase.
+>
+> What do you think?
+>
+> Regards,
+> Simon
 
-Regards,
-Simon
+Secondary / Tertiary / Verifying / U-Boot from documentation:
+
+https://docs.u-boot.org/en/latest/usage/spl_boot.html
+
+... does not add much clarity to what these programs do, excepting
+"verifying" which is at least saying what it does.
+
+When code execution is transferred to U-Boot (as SPL from ZSBL) then
+it is simply U-Boot Program if you need a short acronym: UP UBP UPRG
+UPGM UBPG
+
+Add to this the descriptive short word name modifier of what that
+U-Boot Program does:
+
+TINY
+VERIFY
+SETUP
+MAIN
+
+Taking for example UP and TINY we would have UP_TINY UP_VERIFY UP_SETUP UP_=
+MAIN
+
+Any of these would be the SPL if they are loaded by the ZSBL, simple
+enough. Also keeping the same mnemonic first letter to what it is
+already now for making it less disruptive.
+
+My comment then is that if you want it to be less confusing we should
+get away from "SPL" (x)PL naming so it looks nothing like ZSBL or SPL
+acronym. Also I observe that U-Boot code base norms are unnecessarily
+cryptic and weirdly abbreviated descriptions in the guise of "reducing
+code size" at the expense of readability... and it is welcome to me if
+you can improve this with _less_ cryptic naming and descriptions.
+Sorry "xPL" is more cryptic than it is now and keeps the overloading
+of the "SPL" terminology which is the cause of confusion.
+
+-E
