@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53F94C5472D
-	for <u-boot@archiver.kernel.org>; Sun, 25 Aug 2024 01:36:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82429C5321E
+	for <u-boot@archiver.kernel.org>; Sun, 25 Aug 2024 12:26:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D7FE88852;
-	Sun, 25 Aug 2024 03:36:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4C4868877E;
+	Sun, 25 Aug 2024 14:26:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XfCzk41G";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="iYqWe4tL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 732588888F; Sun, 25 Aug 2024 03:36:40 +0200 (CEST)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
+ id 72455889B3; Sun, 25 Aug 2024 14:26:31 +0200 (CEST)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 242218870E
- for <u-boot@lists.denx.de>; Sun, 25 Aug 2024 03:36:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-7a1d5f6c56fso210958485a.0
- for <u-boot@lists.denx.de>; Sat, 24 Aug 2024 18:36:38 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B9CA8852A
+ for <u-boot@lists.denx.de>; Sun, 25 Aug 2024 14:26:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2f4f2868783so28403631fa.2
+ for <u-boot@lists.denx.de>; Sun, 25 Aug 2024 05:26:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724549797; x=1725154597; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=bItCpRTXv1gaMRcMBz2B2HFt3Pnqsgg0hMCqA0UawEg=;
- b=XfCzk41GKTVkbxxdnt6bfYqRn0fvLmbeRa6TEEFoRbGYW6NYOALQtYrflo6ZzDot2V
- MAPDGHTI1oKKHTOcraHJpSbYjyWGTBICZOps7WDpFytdjv8XrEZVxBFJ5qP6JSk0laYw
- gP9vAO7VmQ15pq0HjrA9bCUrm9yypENI2JIyI=
+ d=amarulasolutions.com; s=google; t=1724588788; x=1725193588;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=iMK0oinWbrB6qtCxO2LJDruapOwMRD+CxR6o8GzfA/E=;
+ b=iYqWe4tLZsqQt1Cv58mzMlmVamvBvOTAND0hRpsWoIM3c3JXol8uTMa2IvVZOvSFh8
+ uyqzKrvyn3pQtbcGAL48pMcs40CaZ0EcMm/CQr0tbKcF95GrcI9Ltomte2A98HSiOs0b
+ ZQuZoUfyKbVNvFuMzPQ6Ner8hNVFC538flObc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724549797; x=1725154597;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bItCpRTXv1gaMRcMBz2B2HFt3Pnqsgg0hMCqA0UawEg=;
- b=SSDmwWWoeMDHDaBBXIu9iQAKid+iAHwh4vlYeiEl0ZScCM4y5D9qec9Rcmbow4yLkY
- g5OVR87FMcBxYyyYJSVEtbBDBQel1qfEvZWbKBl86JTfS4UMLxd0cHEHjf8VVf31Rq4g
- l4LNmm6pYiunLnO/jyD71jYqUazglRVivyiIQJg1cf3klX/r9iUYL7ZD5BvxqDbhEaAO
- Olo4uMeL3DSvaTY4seZBioik977nq/W90y4n3D5zWAj3zRPkmoKyeL8txdtk2oQWdRo6
- 30MzRWkLLcul/UlY20si04eVQAmZtk2VS3o8HG7APG4BNSbNuyyBNMD7swNfvvcFq8Pm
- 75jQ==
-X-Gm-Message-State: AOJu0YxPiPvlPf3XgPZOamOdbcMWtqMA3zsfmtgOnddZsPiAe+IS6wMN
- fz97ehywXu/NgrI304LSJO0SdbQWmbItojcsRoy0ET+PN72U23lmHkcEQAHBisU=
-X-Google-Smtp-Source: AGHT+IFb36OsIWvjvLAMVXdSr5XTr4mwoo1+iJ+IlVDrubRZYGTKqfjfZvnc1QFu3CLdhYZs8yG5Gg==
-X-Received: by 2002:a05:620a:1a83:b0:79e:f9ca:4631 with SMTP id
- af79cd13be357-7a6896e39f5mr838585285a.1.1724549796615; 
- Sat, 24 Aug 2024 18:36:36 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
+ d=1e100.net; s=20230601; t=1724588788; x=1725193588;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=iMK0oinWbrB6qtCxO2LJDruapOwMRD+CxR6o8GzfA/E=;
+ b=r7CL+0RdSEA85DA6Daaw/qDnFWcAtv4C85Sj47Oxq62FOiorFm/A00e+vfxhR57jKY
+ ojp7ECQFB3ZeDedklKXynHsKSg8obN+I/SQgb7RrbA/CpvrHssthk0CZMPxUJXa4AMeQ
+ IKiMfPfdwndCP7AJ788wRm8HrWHSzNBiNku4yNvwzfKasTr2JgimhQ3s7yM9INivf9M2
+ bTTKTk3hH148F+o63p7OnYoR2U1K52ssUbLm8WPFz3MaJVFj1/gLIwPDEw5jGbB6+Bwh
+ H8XumGdLbTfkhDGXBaZlF0kA5pkBi4BdRB2hjkiOimv0pjx2VlRWexdcAs59OqtVnQoR
+ IKZw==
+X-Gm-Message-State: AOJu0YxvlGwfwPgziPSVDYqPBsaEfTNva8UVWsBO1do5ec3z9cqkhDhl
+ YfAEMzOcqy5QI5/O6Jyl/z4cjXYqWtvBqLeI9Yso+XVm06ItWPjg2p1PbyXKOkaJycmAYZbnTCr
+ CabE=
+X-Google-Smtp-Source: AGHT+IF9O+eQTTQHoQdoLBeHT2xJXWAhOqASfYQpMWwugIoFbCh9DjGv4JPyoLoAeBiZZ2iy327XTQ==
+X-Received: by 2002:a2e:6102:0:b0:2ef:2e1c:79b5 with SMTP id
+ 38308e7fff4ca-2f4f4902e6bmr44780371fa.14.1724588788012; 
+ Sun, 25 Aug 2024 05:26:28 -0700 (PDT)
+Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
+ (host-79-25-99-149.retail.telecomitalia.it. [79.25.99.149])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a67f362739sm323351785a.68.2024.08.24.18.36.34
+ 4fb4d7f45d1cf-5c04a4c4377sm4651563a12.74.2024.08.25.05.26.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 24 Aug 2024 18:36:35 -0700 (PDT)
-Date: Sat, 24 Aug 2024 19:36:32 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Sun, 25 Aug 2024 05:26:27 -0700 (PDT)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Cc: linux-amarula@amarulasolutions.com,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Eddie James <eajames@linux.ibm.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Emil Kronborg <emil.kronborg@protonmail.com>
-Subject: Re: [PULL MASTER] Pull request efi-2024-10-rc4
-Message-ID: <20240825013632.GE2479150@bill-the-cat>
-References: <dd9352a4-767d-4aef-9d19-08cf301ee8f7@gmx.de>
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/2] bootm: adjust the print format
+Date: Sun, 25 Aug 2024 14:26:07 +0200
+Message-ID: <20240825122617.3708982-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="iRxxtPD+GTPi4yvZ"
-Content-Disposition: inline
-In-Reply-To: <dd9352a4-767d-4aef-9d19-08cf301ee8f7@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,58 +93,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+All three addresses printed are in hexadecimal format, but only the
+first two have the "0x" prefix. The patch aligns the format of the
+"end" address with the other two by adding the "0x" prefix.
 
---iRxxtPD+GTPi4yvZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+---
 
-On Sat, Aug 24, 2024 at 09:06:56PM +0200, Heinrich Schuchardt wrote:
+ boot/bootm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> Dear Tom,
->=20
-> The following changes since commit a481740629af5e51732b86b6ead61dc5aa5a44=
-0d:
->=20
->   Merge tag 'u-boot-dfu-20240822' of
-> https://source.denx.de/u-boot/custodians/u-boot-dfu (2024-08-22 08:14:48
-> -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-2024-10-rc4
->=20
-> for you to fetch changes up to dcd1b63b7072749f98ea0a87565d0ae5c8ddfb65:
->=20
->   efi_loader: allow EFI_LOADER_BOUNCE_BUFFER on all architectures
-> (2024-08-24 11:41:23 +0200)
->=20
-> Gitlab CI showed no issues:
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/22104
->=20
+diff --git a/boot/bootm.c b/boot/bootm.c
+index 480f8e6a0e6e..951e549f19ff 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -703,7 +703,7 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 
+ 		/* Handle BOOTM_STATE_LOADOS */
+ 		if (relocated_addr != load) {
+-			printf("Moving Image from 0x%lx to 0x%lx, end=%lx\n",
++			printf("Moving Image from 0x%lx to 0x%lx, end=0x%lx\n",
+ 			       load, relocated_addr,
+ 			       relocated_addr + image_size);
+ 			memmove((void *)relocated_addr, load_buf, image_size);
+-- 
+2.43.0
 
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---iRxxtPD+GTPi4yvZ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbKip0ACgkQFHw5/5Y0
-tyzVrAwAuQP1PiLqoXacnAZRjyEc3oihszDfK/6U2TVj0MuY3Wl7T0hTY13vcLrk
-dDK+1qeOVe1V8s2iYEyobZps4p+t03fMvcsAhm4x7kXjp38jBDpQGtTYlIW2WI+Y
-9Rm23y1DK6bngsuYVOABQQuQ3DebJVZslGAg3R+XEZI2nXc+gMDuz1GwfcfDdvw0
-OExkH9h7calCJ6l3GSIY6fpTod+V7C694s3HgkP53/F5q+ewle1XbdhrKlLCvDKv
-uajPfTmnxv8qEXLES8YytRHGtBUvlKoGtfNPfr682MHethI9SCsldtz59I3Dab9/
-ydRaVUx/hzL2PQhvYpVTsfXRpKsgr+NuEA1Uwa2bFLQaXSUuKNTNHSHARhlqlDbP
-1mTE7cElfSMI6XF7w88P++shdlURRC1VMniQcSb8bKIlzEi+PptpzHv0oUY4bEaF
-MyVurg/iShAEphl1xJWzaqiVMr6rELqOnRQCcIasfjsNzExmZG8MPxIl+sFcT/yn
-vMhSACUW
-=T0vN
------END PGP SIGNATURE-----
-
---iRxxtPD+GTPi4yvZ--
