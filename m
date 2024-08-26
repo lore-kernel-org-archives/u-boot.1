@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92C7AC5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 10:25:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2A70C5321D
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 10:25:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E64988A46;
+	by phobos.denx.de (Postfix) with ESMTP id 622A788A74;
 	Mon, 26 Aug 2024 12:25:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EtmPn3GE";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KNpgkAz9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C74BD88A35; Mon, 26 Aug 2024 12:25:39 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 8F91B88A46; Mon, 26 Aug 2024 12:25:41 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55D0488A2E
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 12:25:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3152287FA7
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 12:25:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPOvA061308;
- Mon, 26 Aug 2024 05:25:24 -0500
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPQFq094242;
+ Mon, 26 Aug 2024 05:25:26 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1724667924;
- bh=k4ZDNzfVyfQ2vbeQp8l6gnbnWgEMlOqyyGmJBRm10xU=;
+ s=ti-com-17Q1; t=1724667926;
+ bh=9da6fNW+RVHs6Fan9go+riGt5ejBiN+weGAN9peoS3I=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=EtmPn3GEhP/IxW32ynv9XwxM5MeMH2EjzHExcCLqDIopVGHI4/xYWQ8LrYAfnnk8j
- 1YgGGlIUovp1H+K+zRYmBrh3CW39q31o6/Q5ciliwimSt+RrzykxIx5+nLkip4DpF0
- I0PbGqwSS7Qo0lIXArIqI6ez+mu+H9xTEdOt2pyc=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47QAPONQ024838
+ b=KNpgkAz9785n0T6LglClBDIdiQCNJJJ43rkpjQ6i/05jmfYvP91irXA4c9yMKILxx
+ WP3Q/T2RfwBGfZ/6cG7DBMezdeEGDcWQ79ZRDBdH3NJkAUGuzhzov6xugNCKlJ20KX
+ KH757KKbD58i8NaPBBf7yfufFdl1JGTKg04yNnpU=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47QAPQDi094572
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 26 Aug 2024 05:25:24 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 26 Aug 2024 05:25:26 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 26
- Aug 2024 05:25:24 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2024 05:25:25 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 26 Aug 2024 05:25:24 -0500
+ Frontend Transport; Mon, 26 Aug 2024 05:25:25 -0500
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPNdl040332;
- Mon, 26 Aug 2024 05:25:24 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPPkJ040381;
+ Mon, 26 Aug 2024 05:25:25 -0500
 From: Chintan Vankar <c-vankar@ti.com>
 To: Michal Simek <michal.simek@amd.com>, Vignesh Raghavendra
  <vigneshr@ti.com>, Dhruva Gole <d-gole@ti.com>, Neha Malcom Francis
@@ -68,9 +68,9 @@ To: Michal Simek <michal.simek@amd.com>, Vignesh Raghavendra
  <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>, Sumit Garg
  <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH v6 01/11] common: spl: spl: Init DRAM size in R5/A53 SPL
-Date: Mon, 26 Aug 2024 15:55:05 +0530
-Message-ID: <20240826102515.2774296-2-c-vankar@ti.com>
+Subject: [PATCH v6 02/11] firmware: ti_sci: Add No-OP for "RX_FL_CFG"
+Date: Mon, 26 Aug 2024 15:55:06 +0530
+Message-ID: <20240826102515.2774296-3-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240826102515.2774296-1-c-vankar@ti.com>
 References: <20240826102515.2774296-1-c-vankar@ti.com>
@@ -94,37 +94,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Initialize DRAM size in SPL stage since networking requires DDR
-to be initialized.
+From: Kishon Vijay Abraham I <kishon@ti.com>
 
-Reviewed-by: Dhruva Gole <d-gole@ti.com>
-Reviewed-by: Tom Rini <trini@konsulko.com>
+RX_FL_CFG message should not be forwarded to TIFS and should be
+handled within R5 SPL (when DM services are not available). Add
+a no-op function to not handle RX_FL_CFG messages.
+
+Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
 Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
+Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 ---
 
 Link to v5:
-https://lore.kernel.org/r/20240813105400.4054657-2-c-vankar@ti.com/
+https://lore.kernel.org/r/20240813105400.4054657-3-c-vankar@ti.com/
 
 Changes from v5 to v6:
-- No changes.
+- Added a Reviewed-by tag from Alexander Sverdlin.
 
- common/spl/spl.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/firmware/ti_sci.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 7c6e322ffd7..43a29db23bd 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -718,7 +718,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 		initr_watchdog();
+diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
+index e591333ba38..719cfa771b4 100644
+--- a/drivers/firmware/ti_sci.c
++++ b/drivers/firmware/ti_sci.c
+@@ -2450,6 +2450,12 @@ fail:
+ 	return ret;
+ }
  
- 	if (IS_ENABLED(CONFIG_SPL_OS_BOOT) || CONFIG_IS_ENABLED(HANDOFF) ||
--	    IS_ENABLED(CONFIG_SPL_ATF))
-+	    IS_ENABLED(CONFIG_SPL_ATF) || IS_ENABLED(CONFIG_SPL_NET))
- 		dram_init_banksize();
++static int ti_sci_cmd_rm_udmap_rx_flow_cfg_noop(const struct ti_sci_handle *handle,
++						const struct ti_sci_msg_rm_udmap_flow_cfg *params)
++{
++	return 0;
++}
++
+ /**
+  * ti_sci_cmd_set_fwl_region() - Request for configuring a firewall region
+  * @handle:    pointer to TI SCI handle
+@@ -2895,7 +2901,7 @@ static __maybe_unused int ti_sci_dm_probe(struct udevice *dev)
+ 	udmap_ops = &ops->rm_udmap_ops;
+ 	udmap_ops->tx_ch_cfg = ti_sci_cmd_rm_udmap_tx_ch_cfg;
+ 	udmap_ops->rx_ch_cfg = ti_sci_cmd_rm_udmap_rx_ch_cfg;
+-	udmap_ops->rx_flow_cfg = ti_sci_cmd_rm_udmap_rx_flow_cfg;
++	udmap_ops->rx_flow_cfg = ti_sci_cmd_rm_udmap_rx_flow_cfg_noop;
  
- 	if (CONFIG_IS_ENABLED(PCI) && !(gd->flags & GD_FLG_DM_DEAD)) {
+ 	return ret;
+ }
 -- 
 2.34.1
 
