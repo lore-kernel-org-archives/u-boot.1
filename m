@@ -4,25 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A069C5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 14:39:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A3B5C5321D
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 14:39:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACC0A88A4B;
-	Mon, 26 Aug 2024 16:39:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2094C884DB;
+	Mon, 26 Aug 2024 16:39:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="XtGT3lXl";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="suHolJsI";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Fw9Ddvsh";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="LaX9WnO6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24829884DB; Mon, 26 Aug 2024 16:39:16 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id 875D988A74; Mon, 26 Aug 2024 16:39:17 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 436AC889CA
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 16:39:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A30E8889FC
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 16:39:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,33 +30,33 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Wstbj6fq0z9sbh;
- Mon, 26 Aug 2024 16:39:13 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Wstbl2q58z9t2C;
+ Mon, 26 Aug 2024 16:39:15 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1724683154;
+ s=mail20150812; t=1724683155;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=GiQCmqr7tSo8RBEBwrpP4KkwmIDMWer024FHcpHysiI=;
- b=XtGT3lXleskQogWjI5G/oxLzZkTdCPGrdkgGXJXPNOHtJL/ayZzMQM6kyWKlR1MH4ABcU4
- LB5i5CbudCSp15jVVJCBI0EzZVYjiL4oa7NbJb94k8vlsX2RpO7MNSh7pz9Qh3Yo592/RB
- VcqUaYT43bCc9zCQ/a+rVQdtwxU7JcLzJ0aEMtbjlLcJFRiAmmjzNXAjORjs1gN1C5T0xK
- VITt4kV2+cfLHxIY8qRhN6OmTdiSG+tui97IHiEF/dFdNeJm335juzINgWvpCB6loOZT/X
- aPWM1Z1mN6Wrz4DVV6mQOX5j2BSc1cW3OG1ZvdXhih7ug1f3yktql5JhmnmL7w==
+ bh=4hmXGMYK4oexR5XOdM3WNL+Q63d4FnlxfexjNRUepq4=;
+ b=Fw9DdvshVh7im/KmdnQd8uHyQa7PoimQ94X7VOsLZYP3hPIl0ZACqlkTRZty5bJ4dYbZMz
+ yBPi41DH8TNJfltfBMOu9KVym9Rn5r402wEoL5wIW06MpUCM4fzg8qQsq+aLSNpr515UNm
+ UGvX+MsRnYMAKRMSLR64sDRvi32HjvR9Lku9/8Fg9u2pGdUgp1vC2R1EjeY37MO1mAZMIV
+ ebLpJP+FGNw4pvX7k0TwrwOs9XgjARkAam0CTYOr0cYfwQ/f9m/coPjC07EhvEt2mz8DQH
+ EHMevA+trz+8wujZG05wce5Tl56DJ0xUPqlJjI+xsQ2W9Kh5XsLb82csxik5wA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1724683152;
+ s=mail20150812; t=1724683153;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=GiQCmqr7tSo8RBEBwrpP4KkwmIDMWer024FHcpHysiI=;
- b=suHolJsIXuIlW851X4H4ge5GTrcChdRmBJvAkCsZEl7trVcNafuMLtswRS8Nh/4MHsFMoZ
- K3YpwGmPJc49PRsDvHNsX5jcNTqGsLDW60eMFpB0H0KQxYVxrVM5Unra49KLYRMqiUAJaQ
- 6E7fsQE5zlI9cC7EoaRJqZlls1Xh+ZfnMF5k/q1ZgTZC8erDggZctzHepXBUgRtz+0qn95
- GvHS70JcWaNtyXOZDzxudl5/xFw2cmHiSTiwwHjM1T9Ax7Ot7gIZRkzxKpiJS8uoRAdqef
- wqiiL57wMeuBN91XtVXyWqJojU40gzETtck+m0/UaaBrQcRrmZ6te5U4HSfZFg==
+ bh=4hmXGMYK4oexR5XOdM3WNL+Q63d4FnlxfexjNRUepq4=;
+ b=LaX9WnO6gM8qXtmx8MJW3v27HG7RBU/wmGf38Dtz0QI0+J+onwDFZTMpUjSkwu4cMgMbSu
+ 8TKzVme1cuFr1x1mRNQsCQ9xl6qkJ3NK6Upngynbp/Cn7uN3MhM5At6toHUt48SoDwjkgx
+ 4ysN6EjDocHL3tlvKWnbFPj4hKg0wWJtAMXCnHHtl+pepu4IbXjYJkyBx2PRGWHO8GSHYy
+ vs4Vi8z3mq1XCMeYqWDUiUiAuiM2Q/MzWKLk5cYa6mOhDWTl/HOJZCUFs1/WOPAAJuTcWD
+ xmxjCLHdPRIOBdcVKA5xra5w0fny/siF1RLd3ObgfgF77qGtmUQ/f6B5xUJQTQ==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Linus Walleij <linus.walleij@linaro.org>, Lukasz Majewski <lukma@denx.de>,
@@ -65,15 +64,15 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Miquel Raynal <miquel.raynal@bootlin.com>,
  Neil Armstrong <neil.armstrong@linaro.org>, Nishanth Menon <nm@ti.com>,
  Zixun LI <admin@hifiphile.com>
-Subject: [PATCH 4/6] usb: gadget: Drop dev_to_usb_gadget()
-Date: Mon, 26 Aug 2024 16:38:39 +0200
-Message-ID: <20240826143851.8020-4-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 5/6] usb: gadget: dwc2: Drop get/set_udc_gadget_private_data()
+Date: Mon, 26 Aug 2024 16:38:40 +0200
+Message-ID: <20240826143851.8020-5-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240826143851.8020-1-marek.vasut+renesas@mailbox.org>
 References: <20240826143851.8020-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: ab9ffde7b238487d12b
-X-MBO-RS-META: c756sxyjbmyy4esw83u4g1ob7q93h4hw
+X-MBO-RS-META: y8sohhaasufw6xcqnyjyfbbj8eismz1p
+X-MBO-RS-ID: 7351fc860235064d838
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,7 +89,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function is unused, remove it.
+Neither get_udc_gadget_private_data() nor set_udc_gadget_private_data()
+is ever called anywhere, remove both.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -102,25 +102,33 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>
 Cc: Nishanth Menon <nm@ti.com>
 Cc: Zixun LI <admin@hifiphile.com>
 ---
- include/linux/usb/gadget.h | 5 -----
- 1 file changed, 5 deletions(-)
+ drivers/usb/gadget/dwc2_udc_otg.c | 13 -------------
+ 1 file changed, 13 deletions(-)
 
-diff --git a/include/linux/usb/gadget.h b/include/linux/usb/gadget.h
-index a2b8520bc99..194025ebd12 100644
---- a/include/linux/usb/gadget.h
-+++ b/include/linux/usb/gadget.h
-@@ -558,11 +558,6 @@ static inline void *get_gadget_data(struct usb_gadget *gadget)
- 	return gadget->driver_data;
- }
+diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
+index 7e9dd6f4268..fbd6c9600fc 100644
+--- a/drivers/usb/gadget/dwc2_udc_otg.c
++++ b/drivers/usb/gadget/dwc2_udc_otg.c
+@@ -121,19 +121,6 @@ static void nuke(struct dwc2_ep *ep, int status);
+ static int dwc2_udc_set_halt(struct usb_ep *_ep, int value);
+ static void dwc2_udc_set_nak(struct dwc2_ep *ep);
  
--static inline struct usb_gadget *dev_to_usb_gadget(struct device *dev)
+-void set_udc_gadget_private_data(void *p)
 -{
--	return container_of(dev, struct usb_gadget, dev);
+-	debug_cond(DEBUG_SETUP != 0,
+-		   "%s: the_controller: 0x%p, p: 0x%p\n", __func__,
+-		   the_controller, p);
+-	the_controller->gadget.dev.device_data = p;
 -}
 -
- /* iterates the non-control endpoints; 'tmp' is a struct usb_ep pointer */
- #define gadget_for_each_ep(tmp, gadget) \
- 	list_for_each_entry(tmp, &(gadget)->ep_list, ep_list)
+-void *get_udc_gadget_private_data(struct usb_gadget *gadget)
+-{
+-	return gadget->dev.device_data;
+-}
+-
+ static struct usb_ep_ops dwc2_ep_ops = {
+ 	.enable = dwc2_ep_enable,
+ 	.disable = dwc2_ep_disable,
 -- 
 2.45.2
 
