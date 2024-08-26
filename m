@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0746CC5321D
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 21:07:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0474C5472C
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 22:54:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4146188AF0;
-	Mon, 26 Aug 2024 23:07:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0F5C088B16;
+	Tue, 27 Aug 2024 00:54:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AbjzziEZ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ub0Dthpc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3F2987FA7; Mon, 26 Aug 2024 23:07:35 +0200 (CEST)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id 1803188B63; Tue, 27 Aug 2024 00:54:28 +0200 (CEST)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34C6988B55
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 23:07:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D4B6882EF
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 00:54:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-53343bf5eddso6318909e87.1
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 14:07:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-5d5c8c1006eso3623966eaf.3
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 15:54:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724706451; x=1725311251; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1724712864; x=1725317664; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lvrcHDP3p2GZ0wvdNQ8Yj9bnXBF6CA+uoV+Gv7bDAzU=;
- b=AbjzziEZS5L+hzK8epIpTV4r5yL8rIMrnenqhXrJJx2DwI7NTMm0jzmK4Ugbb83bDj
- LMM75DpWG90YuOvwvdTG5g8QcW//B3ecTupctJMpX7s9LuLRoVGTRsnzZ0QiHWYGW8My
- oMuvOrrYtwq/INDWAGQrUce9asRygnxKCkhljseninEJevO8lra+RjmhO0PDICSz5fg9
- BLkps7qxZ8pJGwVHdq7dBGn92WyUXEi0z9968hmpwgojt9WZ6lU5iR6F5jC5edwirNeV
- r2x1PZBeHpkfLFMei/TKunSguqVXCyulNYuVTTe2gUtSt/nZshgyVXImMP1hlX/DIoIx
- MDNg==
+ bh=E8eYYgsmkka06JXMdoigsifVlBRyVZKL7Qks/S20TJM=;
+ b=ub0Dthpcq7I2CX2OQi1ShWLG4QBtFKOupegTJGIlU3XoayGmlbSrTHf/KKokcK4iqd
+ TpyGkHaUFshl78tjHg4Ph1ZN8bBHZUGBbOSOePnLKlpjHSuF7fCx5DWYGn/eusS1VGAW
+ AwMHVlBhWQ0EIUe5hbWkmffF3ia2/tqp1GQqE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724706451; x=1725311251;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1724712864; x=1725317664;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lvrcHDP3p2GZ0wvdNQ8Yj9bnXBF6CA+uoV+Gv7bDAzU=;
- b=V4vQDToUpwBCZyHCPdugrDW2yfERABrOHMu/1GQo9mlrj+Xk6zkci9LQExxhF797Bl
- CR1d/m/bcKmS44j78gLdyW7OH0dY4z5lUNfYLq2arrG6+ySd+NUbPeXUTNQNyggvY/Rb
- 5WGDoK8f1GfdVaJk4kJAF9fMAqcZPtDwUTTusGi9wYL6bqDIdegK8/vdsFk/Nj8mczCD
- 0XNp/xkH7u+aaZWFQhoaiNIYhV93W8UWM8jAw4TuzQ5cYPqotctvZTVLDmfmQye91Js3
- jd1XlxSWpgVWcZBp4ces9L2k7rwxEor4Xfk+9uvoSQ53vI+oHFYuD8wr006VIAIGJlt8
- w1Dg==
-X-Gm-Message-State: AOJu0YwTZUiPH3BnCsubCH7J1sBQjfvswOUA0M9dXRwv23YTiivtvPcr
- niEQy4MVTATKXrr9HjiIF/4OTl4tnDsNHubDVJDjIoRpeFjDjbLblhj2RHXdZAJFnKjfFUm67vA
- npU7C/XZZvBkQ/sPSDqu7t23/luQ=
-X-Google-Smtp-Source: AGHT+IGw8/xrEC58IKog0U8jG+IeEvU8eftco+bMrz21rW4TSFQgJBLY0qfGl08YAISuyhO0KtSFZxmKDY1PfAgnlpo=
-X-Received: by 2002:a05:6512:1392:b0:533:46cc:a71e with SMTP id
- 2adb3069b0e04-5344e4fb867mr316794e87.54.1724706450892; Mon, 26 Aug 2024
- 14:07:30 -0700 (PDT)
+ bh=E8eYYgsmkka06JXMdoigsifVlBRyVZKL7Qks/S20TJM=;
+ b=WkyzA7ix1tpf4rShqJEGHoh/aTqG6SPMPCvdXpdNhAfwM7Vwkq7ai+xm/pd8XtYxRO
+ 9kFYm8BwyXo91cBv0fgF1YDvwMbDzPbI5O4RbLpsQNoVOCW8/wvsqxM/1dNwHpoZMPxN
+ UY4KTgA4WGmp2zhfn6M6yCzLCY2fHt0ujOY3ls2IW3vTnS6qnV6kOTQ9gPz0MI3l+FBt
+ FDT9iig0v+IzMTkawRi/SOKdYkePEd9mdelO7h6Qhi+ZZryFiln4Rd/US3xbbXWFFyrU
+ 5xgavburab1D2BIb7dO1U8JW1RMnM41r4Rngz7sxpqvn7FctnbRB5obd3qrNgeyX0opC
+ 4tew==
+X-Gm-Message-State: AOJu0YyNru5+gp+2wp541YiplAPVK1sfeRdsEWie8tY0cdPvxobkDDmB
+ sM3ug12HPHOVtoUGKVKMgStcnlP6h9qw/vSiJDFtrLb0AySnUQWY3BgMjqN1Qus=
+X-Google-Smtp-Source: AGHT+IHb6wWp6V4GO5Oo50zuwwcXPzRB4H4q/DfsQgdfO20RY3rthd1i/E29cW7HJzVAvGHQ3uY1mQ==
+X-Received: by 2002:a05:6358:891:b0:1b5:a060:6c76 with SMTP id
+ e5c5f4694b2df-1b5c20c5ec9mr1473468255d.2.1724712864064; 
+ Mon, 26 Aug 2024 15:54:24 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7a67f41d415sm497888585a.125.2024.08.26.15.54.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 26 Aug 2024 15:54:23 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Cc: Albert Aribaud <albert.u.boot@aribaud.net>, 
+ Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>
+In-Reply-To: <20240823202713.430219-1-sjg@chromium.org>
+References: <20240823202713.430219-1-sjg@chromium.org>
+Subject: Re: [PATCH v3 00/35] global_data: Reduce size of struct
+ global_data
+Message-Id: <172471286303.2816530.16130724739921537085.b4-ty@konsulko.com>
+Date: Mon, 26 Aug 2024 16:54:23 -0600
 MIME-Version: 1.0
-References: <20240816032217.267689-1-festevam@gmail.com>
- <CAJ+vNU32x+MieDJj3urBs7q_Rc+u+4zMinGGOLDY43rnih04FA@mail.gmail.com>
-In-Reply-To: <CAJ+vNU32x+MieDJj3urBs7q_Rc+u+4zMinGGOLDY43rnih04FA@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 26 Aug 2024 18:07:19 -0300
-Message-ID: <CAOMZO5C7wNcmfqxzP7EvfwtSW7HR+xPxd=+eiuoTiqhZmKNfSA@mail.gmail.com>
-Subject: Re: [PATCH] gw_ventana: Remove unneeded comments
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,21 +90,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tim,
+On Fri, 23 Aug 2024 14:26:38 -0600, Simon Glass wrote:
 
-On Mon, Aug 26, 2024 at 4:06=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
-wrote:
+> The global data structure has grown quite a lot over the years, being
+> the best place to put an important pointer or something that must be
+> accessed before and after relocation.
+> 
+> This series attempts to reduce the size a little, by moving some things
+> out and shrinking and aligning some fields.
+> 
+> [...]
 
-> Looks like there isn't much left to be moved to Kconfig. I'm not sure
-> if your interested or have the time (I know I currently don't) but the
-> USB defines can be cleaned up pretty easily:
-> - '#define CFG_MXC_USB_PORTSC     (PORT_PTS_UTMI | PORT_PTS_PTW)' can
-> be removed from mx6/mx7/mx8m includes as its defaulted in
-> drivers/usb/host/ehci-mx6.c
-> - CFG_MXC_USB_FLAGS is only used for drivers/usb/host/ehci-mx5.c so
-> can be removed for all mx6/mx7/mx8m and the mx51evk.h is the only
-> place its not set to 0
+Applied to u-boot/next, thanks!
 
-Good point. I will work on cleaning these two CFG symbols.
+-- 
+Tom
 
-Thanks
+
