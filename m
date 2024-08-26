@@ -4,74 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB3BCC5321D
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 10:29:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84760C5321D
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 10:32:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6213A88A21;
-	Mon, 26 Aug 2024 12:29:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0BB168847B;
+	Mon, 26 Aug 2024 12:32:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Wi5fDoUW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ty1tqUGt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 834B088A2E; Mon, 26 Aug 2024 12:29:05 +0200 (CEST)
+ id 8455F889FC; Mon, 26 Aug 2024 12:32:06 +0200 (CEST)
 Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
  [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5CFF8831F
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 12:29:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 52AA08847B
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 12:32:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
 Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-20223b5c1c0so35003055ad.2
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 03:29:02 -0700 (PDT)
+ d9443c01a7336-2021c03c13aso30144895ad.1
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 03:32:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724668141; x=1725272941; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724668323; x=1725273123; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YQpsWo2QDbonvprbv3KlaVSFCZ42casQ5c78pQA5XxM=;
- b=Wi5fDoUWHZR7nfAtP4kkPiQt900zQdEgMJsaUOcqU/K6yK5SJUQ04TDB/KyPGDVtMc
- J9vANaH+9wIGvdr52P8fAN2MypI4uL/jEQnRSzIFnCTgXnRBHXTyVAwH1/AcUadXg1iw
- a3/uS8asnV6WVkXW4TEDiND/WweDRVhMNKzct75jB2E39V0H/STDNDQ+5CYjtw7qssaS
- lJlDKlenk+xqNpx7FfyUCjfVHm4XaBiUnBi3m/lNL6Dj9z5bjnbU1NRUQIAXuPVHcS6v
- jjMBIT6Uz4lFOCcDQlX0xrm00r7JaPuQiN7SKd2Q8PbRnaNzPzd/J7qGUwNOGl5vrLCw
- Wj9w==
+ bh=v75RwO0MAhKDNsghRgnt7vpixKnJFczT0kQ7pIspyds=;
+ b=ty1tqUGt3MsOyVgri5f4iXeTIl31zP7FzYT7j5C3miTgVISq6GJuUTwS7/uiOTixQc
+ Y4ACPvIs5XHMFJw/7wWSgCGUkklMukTZ1x7ecXCwy3YPEySGpSS/cyVssuIpaPlZn37J
+ r7AsUOqEGvEaMXU94mky3ij4rjRbUPigpIdrsGa/l+N76IaBrsTfbRCFf1UhTV7fXg6S
+ CKH+HM3DlbGXd4S8UXkDuladAOIxQL+wjc//l//CxO5hAihxL9mXdDqgh1QBLC5S+PPO
+ AlL4kjbfCL0dcE/abqjx38kBwas9QjusSROu7wLvBc0Bzzrw/Sb2UuRowaU1xEUHqXYO
+ FlCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724668141; x=1725272941;
+ d=1e100.net; s=20230601; t=1724668323; x=1725273123;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=YQpsWo2QDbonvprbv3KlaVSFCZ42casQ5c78pQA5XxM=;
- b=xNkYkzFkUfz3G87jWIl9xw7eSpHlkBlZjIKNXnnSfjxBIVBSHPeKjc/98NYw4xoUsQ
- GnH4v8nQdbYgHs23FbRFqcCNrF3BT/OX+2g1BiWBBlbjXLYeZbcGP5ehnkpcmfJ2VFoc
- OdH4VpdU4MFJ8c3f+rMnEZOAvxh6NpREP8eKvcYG+eyZGa5ft9qijieeyXi34/Nc20l2
- xN0cyECilPx8bbjifO62Xhf645E0HhL48ql+YDY9O588Su/KfPbVdKV2Pg1PmeuhaJcE
- Z352ygjexWH+xU/v3F9oJmKXlWoiAP9P1xV6BB3MF4z20nCPOC900Z0g7+2BXm/5FmC1
- NQ0w==
-X-Gm-Message-State: AOJu0YwWJN66dLbqyrGvHNLu1LcqZHHBYPDTuqr33uWIiURKsjPT9ItW
- +i7NcdlFO2oPXUR44ZaZHHgzKBWP6KOEDAsrmP1dQZIJ09ynpV2Xef4VSMytmilMwV8Bi1qKbS9
- R1eUv0v9v0eDfja2rzGZlrz4SwpjrSlqWy+hCbA==
-X-Google-Smtp-Source: AGHT+IE9vcWcYllkWI3EinDWyIbJI0sBh3SbZhQSKCR9N9YHcaEjEJY6wjHcuJEDcQ9WdyKiqkxyeVmX/MhO+mtTLxE=
-X-Received: by 2002:a17:903:234a:b0:202:ad1:8c84 with SMTP id
- d9443c01a7336-2039e67c9c1mr82441065ad.52.1724668141024; Mon, 26 Aug 2024
- 03:29:01 -0700 (PDT)
+ bh=v75RwO0MAhKDNsghRgnt7vpixKnJFczT0kQ7pIspyds=;
+ b=bOzXyvt8AVyaM/tfOnW1JFzJt8m4usj3CoW9UrF20UCT8vsraZKyUNIN4TSBhfNW24
+ bHRVWY9CUeXwHdYhuW4vpMzqt758uwsVg46tW16kGrOGogOYmN2U/KHL6AeVTuZTNuvK
+ xAm6iunp0sXtGthmm2Ut58oyFCTQ8v9dNtGBpwU/g4tfGXj9lQvmbgLjguuXWa/f0JGr
+ 5BYlmQLi2UVZPcl3lf4KyVQal4UgLA6ZBVzPH271iRspwh/0Q7yaK7pYo3bnuDPn2vHk
+ Zwj2BSHXCcgvsrnjFECOj+2ENNEDUhYv4kVHzOma2HNsKmV7UNxD0DfCGcfk2qSiYkYV
+ AZ9Q==
+X-Gm-Message-State: AOJu0Yzj+TZ0aGb4pRgV/GavHoy2fRA+JXvHPQZg7ZcoNZSzfqZhWvxb
+ xAhswunnIJwl85lzMXGo5ChN5TstLqckU1Qo9AFmbb74v2A8YHCo7Wah9JJh5GmSldq5+4b945p
+ llJ8jhsh0NE8xxCrijsX1kYYMlh8kSBs1UYjvKQ==
+X-Google-Smtp-Source: AGHT+IFGzJ57LjESElF51gamoOzkrDAvli/FRZiRCP36qaheNN6RTKDMKFkfRwVAVO5VFO5Mc/zzzwN7ZCLXChLq+kw=
+X-Received: by 2002:a17:902:d2ca:b0:202:2f0:3b83 with SMTP id
+ d9443c01a7336-2037ee2ce5emr239599265ad.13.1724668322471; Mon, 26 Aug 2024
+ 03:32:02 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240809095430.3656-1-richard@nod.at>
- <20240809095430.3656-3-richard@nod.at>
-In-Reply-To: <20240809095430.3656-3-richard@nod.at>
+References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
+ <20240814110009.45310-6-sughosh.ganu@linaro.org>
+In-Reply-To: <20240814110009.45310-6-sughosh.ganu@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 26 Aug 2024 13:28:24 +0300
-Message-ID: <CAC_iWj+Jq5WrQT5W0Wkt6UnUijTyV3H=AZEyD5T+MZOQJ5k6UA@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] ext4: Fix zalloc()
-To: Richard Weinberger <richard@nod.at>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, Jixiong.Hu@mediatek.com, 
- marek.vasut+renesas@mailbox.org, patrick.delaunay@foss.st.com, 
- xypron.glpk@gmx.de, seanga2@gmail.com, trini@konsulko.com, 
- upstream+uboot@sigma-star.at
+Date: Mon, 26 Aug 2024 13:31:26 +0300
+Message-ID: <CAC_iWjKJha0dcOADp8DrhUN-JZv7aAFbxyaAX-9UL_iaM=jB_A@mail.gmail.com>
+Subject: Re: [PATCH v2 05/32] lmb: use the BIT macro for lmb flags
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
+ Max Filippov <jcmvbkbc@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,43 +95,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 9 Aug 2024 at 12:55, Richard Weinberger <richard@nod.at> wrote:
+On Wed, 14 Aug 2024 at 14:00, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Currently, zalloc() calls uncondtionally memset(),
-> if the allocation failes, memset() will write to a null pointer.
+> Use the BIT macro for assigning values to the LMB flags instead of
+> assigning random values to them.
 >
-> Fix by using kzalloc().
->
-> Signed-off-by: Richard Weinberger <richard@nod.at>
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
->  fs/ext4/ext4_common.h | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
+> Changes since V1: None
 >
-> diff --git a/fs/ext4/ext4_common.h b/fs/ext4/ext4_common.h
-> index 84500e990a..346752092b 100644
-> --- a/fs/ext4/ext4_common.h
-> +++ b/fs/ext4/ext4_common.h
-> @@ -24,6 +24,7 @@
->  #include <ext4fs.h>
->  #include <malloc.h>
->  #include <asm/cache.h>
-> +#include <linux/compat.h>
->  #include <linux/errno.h>
->  #if defined(CONFIG_EXT4_WRITE)
->  #include "ext4_journal.h"
-> @@ -43,9 +44,7 @@
+>  include/lmb.h | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
 >
->  static inline void *zalloc(size_t size)
->  {
-> -       void *p = memalign(ARCH_DMA_MINALIGN, size);
-> -       memset(p, 0, size);
-> -       return p;
-> +       return kzalloc(size, 0);
->  }
+> diff --git a/include/lmb.h b/include/lmb.h
+> index 7b87181b9e..a1de18c3cb 100644
+> --- a/include/lmb.h
+> +++ b/include/lmb.h
+> @@ -5,6 +5,7 @@
 >
->  int ext4fs_read_inode(struct ext2_data *data, int ino,
+>  #include <asm/types.h>
+>  #include <asm/u-boot.h>
+> +#include <linux/bitops.h>
+>
+>  /*
+>   * Logical memory blocks.
+> @@ -18,8 +19,8 @@
+>   * @LMB_NOMAP: don't add to mmu configuration
+>   */
+>  enum lmb_flags {
+> -       LMB_NONE                = 0x0,
+> -       LMB_NOMAP               = 0x4,
+> +       LMB_NONE                = BIT(0),
+> +       LMB_NOMAP               = BIT(1),
+>  };
+>
+>  /**
 > --
-> 2.35.3
+> 2.34.1
 >
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
