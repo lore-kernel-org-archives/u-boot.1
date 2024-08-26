@@ -4,62 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87186C5321D
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 08:58:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E39FC5321D
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 09:00:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 050298877E;
-	Mon, 26 Aug 2024 10:58:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 9458D88966;
+	Mon, 26 Aug 2024 11:00:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="yZm/xPnk";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="Ghf4ZP32";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10C8588795; Mon, 26 Aug 2024 10:58:01 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 576E48891B; Mon, 26 Aug 2024 11:00:30 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 296FD880D1
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 10:57:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C9E188877E
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 11:00:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=a02a=PZ=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1724662673;
- bh=kYOSGlMXkS2i6m9P5Qb9v+j8ren79jTJP7YOeWTozZU=;
- b=yZm/xPnkrc4mvum1yi2IN60f+TzIrWTUKu+3hSAL+vYsqHM12lxFAweFX51+z2aAMZDEWGz8B
- u3JxLkPpZ5k+KUtzXGsw7GgRQLlSyjNnp040rkWmZkvi5xt3dx0dNSi+8ivc9UKSW8Qw1IjDg3Q
- S1mBxrnweQCWf7LY0GSuRbDcimjU+iYbH86IguMzQ444VU1bvNiW+WrJXSVaJdAV+GpDPqOCMFI
- GGfG/SXVKyXs6M9E1X+YYXTUbMkcTPZUmIWaazo1NkeoskFwws6ijhspdZpv17ltkOkrZkCm+P+
- tDqMnKFl4zWoJHZ5F9YYjKa9VMQl6qFbFB3VnXwX6b+A==
-Message-ID: 8dc08759-c3ee-4c56-9902-d785e361baf7@kwiboo.se
-Date: Mon, 26 Aug 2024 10:57:45 +0200
+ spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 30327100006;
+ Mon, 26 Aug 2024 12:00:27 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 30327100006
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1724662827;
+ bh=9tiDiur44sSbERQPPOfXw249JYw1EbY5R90Wfc89dkI=;
+ h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
+ b=Ghf4ZP32BfPTVKFa0ShltFLess2s39cM4Vrlu1UEq9YD31KngzYFIOjIau5MmRBzd
+ bRVr/8NV1TNn3aZ/erK7NV7Gxs9ShhQdUh7c1XvZ6aTtiI/3aKc85+2kBCYMkL/Gaa
+ mEVxkKCX90dY29oP8ch9zLJwVv9lE4rfSG49yjoW4kGPGxH4vF37LZ+bP21UqT7W7G
+ bwbMc3nJOImgr58Hx/rSDA7MlLRIEb+LmGUqLrIRN1oiOmkeb0DRCbtmkn3IIzIeah
+ v+P0JOH/R8PSxc2c3mdxeV5PmnmJoXxL3n7yV0GgD1v2W7Xn09IJwFOFPliDZXcvSS
+ A6zC3zABlq1jw==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Mon, 26 Aug 2024 12:00:26 +0300 (MSK)
+Message-ID: <6f361799-2cd2-9573-cb53-82b22ca56c06@salutedevices.com>
+Date: Mon, 26 Aug 2024 11:47:39 +0300
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: OF_UPSTREAM vs. additional dtbs
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Jan Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <7765273f-7f36-41e4-a604-1901e4fbec62@siemens.com>
- <20240813125245.ezlu6me3ljwx6dkj@margarine>
- <89f8e976-e831-4035-8cd0-ab6284846d0a@siemens.com>
- <4ec5108f-b7a4-47db-baa4-edee532c58af@siemens.com>
- <CAFA6WYMQustcwo4Es7iJQj5Lva6UiYJ-j7WgSzMjOvEHemeDcQ@mail.gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.1
+Subject: Re: [PATCH v2 3/3] mtd: rawnand: meson: read/write access for boot
+ ROM pages
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CAFA6WYMQustcwo4Es7iJQj5Lva6UiYJ-j7WgSzMjOvEHemeDcQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 66cc438f6a727c42ee54e658
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+CC: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Miquel Raynal <miquel.raynal@bootlin.com>, "Tom
+ Rini" <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>,
+ <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>, <kernel@sberdevices.ru>,
+ <oxffffaa@gmail.com>
+References: <20240826060411.3532105-1-avkrasnov@salutedevices.com>
+ <20240826060411.3532105-4-avkrasnov@salutedevices.com>
+ <CAOf5uw=UuB1YandpEziF1gp3Amh1J9fk15YCM7J4FZW6zoq7GA@mail.gmail.com>
+From: Arseniy Krasnov <avkrasnov@salutedevices.com>
+In-Reply-To: <CAOf5uw=UuB1YandpEziF1gp3Amh1J9fk15YCM7J4FZW6zoq7GA@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [172.28.161.232]
+X-ClientProxiedBy: p-i-exch-a-m2.sberdevices.ru (172.24.196.120) To
+ p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 187291 [Aug 26 2024]
+X-KSMG-AntiSpam-Version: 6.1.0.4
+X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 27 0.3.27
+ 71302da218a62dcd84ac43314e19b5cc6b38e0b6,
+ {Tracking_from_domain_doesnt_match_to}, salutedevices.com:7.1.1;
+ smtp.sberdevices.ru:5.0.1,7.1.1; 127.0.0.199:7.1.2;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/08/26 08:14:00 #26435425
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,127 +106,175 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sumit,
 
-On 2024-08-26 08:44, Sumit Garg wrote:
-> Hi,
+
+On 26.08.2024 10:16, Michael Nazzareno Trimarchi wrote:
+> Hi
 > 
-> On Wed, 14 Aug 2024 at 22:14, Jan Kiszka <jan.kiszka@siemens.com> wrote:
+> On Mon, Aug 26, 2024 at 8:17 AM Arseniy Krasnov
+> <avkrasnov@salutedevices.com> wrote:
 >>
->> On 14.08.24 11:41, Jan Kiszka wrote:
->>> On 13.08.24 14:52, Nishanth Menon wrote:
->>>> On 11:16-20240813, Jan Kiszka wrote:
->>>>> Hi all,
->>>>>
->>>>> I'm trying to migrate the TI AM65x IOT2050 boards to OF_UPSTREAM but I'm
->>>>> facing issues because I need to still build the u-boot-only overlays. It
->>>>> is also a bit weird (but works) having to specify
->>>>>
->>>>> CONFIG_SPL_OF_LIST="../../../../arch/arm/dts/k3-am65-iot2050-spl"
->>>>>
->>>
->>> Actually, this does NOT work: I just had a long morning debugging SPL
->>> which no longer started because it picked the non-filtered dtb. The
->>> filtered one ended up in a folder outside of the u-boot sources because
->>> of all those ../ and hard-wiring to dts/upstream.
->>>
->>>>> for our spl dtb.
->>>>>
->>>>> Are there means to still build certain dtb[o] files in arch/<arch>/dts?
->>>>> I'm a bit lost in the Makefile forest.
->>>>>
->>>>
->>>> Sumit: Any suggestions?
->>>>
-> 
-> Apologies for the delayed reply. I was a bit busy with other high
-> priority stuff.
-> 
->>>
->>> I would really like to hear some better proposals than my local
->>> workarounds to far. They don't converge although I already patched some
->>> core Makefile (overlays are building now).
->>>
+>> Boot ROM on Meson needs some pages to be read/written in a special mode:
+>> 384 byte ECC mode (so called "short" by Amlogic) and with scrambling
+>> enabled. Such pages are located on the chip in the following way (for
+>> example):
 >>
->> OK, I side-stepped the spl issue by using one of our variant DTBs for
->> spl as well - happens to work.
-> 
-> That's good to know.
-> 
+>> [ p0 ][ p1 ][ p2 ][ p3 ][ p4 ][ p5 ][ p6 ][ p7 ] ... [ pN ]
+>>   ^           ^           ^           ^
 >>
->> For the overlays, I need to add
+>> pX is page number "X". "^" means "special" page used by boot ROM - e.g.
+>> every 2nd page in the range of [0, 7]. Step (2 here) and last page in
+>> range is read from the device tree.
 >>
->> --- a/scripts/Makefile.dts
->> +++ b/scripts/Makefile.dts
->> @@ -1,5 +1,7 @@
->>  # SPDX-License-Identifier: GPL-2.0+
+>> Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
+>> ---
+>>  drivers/mtd/nand/raw/meson_nand.c | 56 +++++++++++++++++++++++++------
+>>  1 file changed, 46 insertions(+), 10 deletions(-)
 >>
->> +include $(srctree)/config.mk
+>> diff --git a/drivers/mtd/nand/raw/meson_nand.c b/drivers/mtd/nand/raw/meson_nand.c
+>> index 19f005202b..54ea035d8d 100644
+>> --- a/drivers/mtd/nand/raw/meson_nand.c
+>> +++ b/drivers/mtd/nand/raw/meson_nand.c
+>> @@ -40,6 +40,7 @@
+>>  #define NFC_CMD_RB                     BIT(20)
+>>  #define NFC_CMD_SCRAMBLER_ENABLE       BIT(19)
+>>  #define NFC_CMD_SCRAMBLER_DISABLE      0
+>> +#define NFC_CMD_SHORTMODE_ENABLE       1
+>>  #define NFC_CMD_SHORTMODE_DISABLE      0
+>>  #define NFC_CMD_RB_INT                 BIT(14)
+>>  #define NFC_CMD_RB_INT_NO_PIN          ((0xb << 10) | BIT(18) | BIT(16))
+>> @@ -78,6 +79,8 @@
+>>
+>>  #define DMA_DIR(dir)           ((dir) ? NFC_CMD_N2M : NFC_CMD_M2N)
+>>
+>> +#define NFC_SHORT_MODE_ECC_SZ  384
 >> +
->>  dtb-y += $(patsubst %,%.dtb,$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $(CONFIG_OF_LIST) $(CONFIG_SPL_OF_LIST)))
+>>  #define ECC_CHECK_RETURN_FF    -1
 >>
->>  ifeq ($(CONFIG_OF_UPSTREAM_BUILD_VENDOR),y)
+>>  #define NAND_CE0               (0xe << 10)
+>> @@ -141,6 +144,8 @@
+>>  struct meson_nfc_nand_chip {
+>>         struct list_head node;
+>>         struct nand_chip nand;
+>> +       u32 boot_pages;
+>> +       u32 boot_page_step;
 >>
+>>         u32 bch_mode;
+>>         u8 *data_buf;
+>> @@ -229,33 +234,46 @@ static void meson_nfc_cmd_seed(const struct meson_nfc *nfc, u32 seed)
+>>                nfc->reg_base + NFC_REG_CMD);
+>>  }
 >>
->> in order to then be able to do
->>
->> --- a/board/siemens/iot2050/config.mk
->> +++ b/board/siemens/iot2050/config.mk
->> @@ -5,4 +5,12 @@
->>  # Authors:
->>  #   Jan Kiszka <jan.kiszka@siemens.com>
->>
->> +ifneq ($(CONFIG_SPL_BUILD),y)
->> +dtbo-list = \
->> +       k3-am6548-iot2050-advanced-m2-bkey-usb3-overlay \
->> +       k3-am6548-iot2050-advanced-m2-bkey-ekey-pcie-overlay
+>> +static int meson_nfc_is_boot_page(struct nand_chip *nand, int page)
+>> +{
+>> +       const struct meson_nfc_nand_chip *meson_chip = to_meson_nand(nand);
 >> +
->> +dtb-y += $(patsubst %,../../../../arch/arm/dts/%.dtbo,$(dtbo-list))
->> +endif
+>> +       return (nand->options & NAND_IS_BOOT_MEDIUM) &&
+>> +              !(page % meson_chip->boot_page_step) &&
+>> +              (page < meson_chip->boot_pages);
+>> +}
 >> +
->>  flash.bin: all
+>>  static void meson_nfc_cmd_access(struct nand_chip *nand, bool raw, bool dir, int page)
+>>  {
+>> +       const struct meson_nfc_nand_chip *meson_chip = to_meson_nand(nand);
+>>         struct mtd_info *mtd = nand_to_mtd(nand);
+>>         const struct meson_nfc *nfc = nand_get_controller_data(mtd_to_nand(mtd));
+>> -       const struct meson_nfc_nand_chip *meson_chip = to_meson_nand(nand);
+>> -       u32 bch = meson_chip->bch_mode, cmd;
+>>         int len = mtd->writesize, pagesize, pages;
+>>         int scrambler;
+>> +       u32 cmd;
 >>
+>>         if (nand->options & NAND_NEED_SCRAMBLING)
+>>                 scrambler = NFC_CMD_SCRAMBLER_ENABLE;
+>>         else
+>>                 scrambler = NFC_CMD_SCRAMBLER_DISABLE;
 >>
->> Does that make sense?
 > 
-> A switch to OF_UPSTREAM means that we build all the DT artifacts from
-> dts/upstream/src/ directory with the only exception that we include
-> U-Boot specific overrides via *-u-boot.dtsi from arch/<arch>/dts. In
-> case of overlays, is there any reason for IOT2050 board overlays not
-> being pushed into Linux kernel repo? AFAIU, overlays are also
-> describing puggable hardware so they shouldn't be referred to as
-> "u-boot-only" overlays.
+> scrambler depends on NAND_NEED_SCRAMBLING so suppose
+> that is not set
+> 
+> scrambler = NAND_NEED_SCRAMBLING;
+> 
+>> -       pagesize = nand->ecc.size;
+>> -
+>>         if (raw) {
+>>                 len = mtd->writesize + mtd->oobsize;
+>>                 cmd = len | scrambler | DMA_DIR(dir);
+>> -               writel(cmd, nfc->reg_base + NFC_REG_CMD);
+>> -               return;
+>> -       }
+>> +       } else if (meson_nfc_is_boot_page(nand, page)) {
+> 
+> Now here you  seems that you don't care anymore about this option and check
+> only meson_nfc_is_boot_page
+> 
+> Is something am I missing?
 
-I have a related issue where I would like to build board DT from
-dts/upstream, however there is also a need for a limited U-Boot specific
-DT that only is intended for initial boot so that U-Boot at runtime can
-determine what hw revision is booting and select correct DT to use for
-U-Boot proper and OS.
+Idea is the following IIUC: such boot pages could be read in ECC mode only with enabled scrambling -
+otherwise we get ECC error. Or we need to read it in raw mode. So:
 
-For now I have just set the board target to use OF_UPSTREAM=n and
-instead created minimal .dts-files in arch/<arch>/dts that include the
-full .dts-file from dts/upstream.
+if (read page in raw mode) {
+    use scrambler as provided
+} else if (read boot page in ECC mode) {
+    force scrambling mode + NFC_ECC_BCH8_1K + NFC_CMD_SHORTMODE_ENABLE
+} else {
+    //we read non-boot page in ECC mode
+   use scrambler as provided
+}
 
-Any suggestion on how we better can support having a U-Boot only
-.dts-file together with OF_UPSTREAM=y ?
+Thanks
 
-Please see following for more details:
-https://source.denx.de/u-boot/u-boot/-/commit/a52099b4a2ae9e8cafc79268325249bcad308012
-https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/rk3566-orangepi-3b.dts
-https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/rk3566-orangepi-3b-v1.1.dts
-https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/rk3566-orangepi-3b-v2.1.dts
-
-Regards,
-Jonas
 
 > 
-> -Sumit
+> Michael
 > 
+>> +               pagesize = NFC_SHORT_MODE_ECC_SZ >> 3;
+>> +               pages = mtd->writesize / 512;
 >>
->> Jan
+>> -       pages = len / nand->ecc.size;
+>> +               scrambler = NFC_CMD_SCRAMBLER_ENABLE;
+>> +               cmd = CMDRWGEN(DMA_DIR(dir), scrambler, NFC_ECC_BCH8_1K,
+>> +                              NFC_CMD_SHORTMODE_ENABLE, pagesize, pages);
+>> +       } else {
+>> +               pagesize = nand->ecc.size >> 3;
+>> +               pages = len / nand->ecc.size;
 >>
+>> -       cmd = CMDRWGEN(DMA_DIR(dir), scrambler, bch,
+>> -                      NFC_CMD_SHORTMODE_DISABLE, pagesize, pages);
+>> +               cmd = CMDRWGEN(DMA_DIR(dir), scrambler, meson_chip->bch_mode,
+>> +                              NFC_CMD_SHORTMODE_DISABLE, pagesize, pages);
+>> +       }
+>>
+>>         if (scrambler == NFC_CMD_SCRAMBLER_ENABLE)
+>>                 meson_nfc_cmd_seed(nfc, page);
+>> @@ -1132,6 +1150,24 @@ static int meson_nfc_nand_chip_init(struct udevice *dev, struct meson_nfc *nfc,
+>>                 goto err_chip_buf_free;
+>>         }
+>>
+>> +       if (nand->options & NAND_IS_BOOT_MEDIUM) {
+>> +               ret = ofnode_read_u32(node, "amlogic,boot-pages",
+>> +                                     &meson_chip->boot_pages);
+>> +               if (ret) {
+>> +                       dev_err(dev, "could not retrieve 'amlogic,boot-pages' property: %d",
+>> +                               ret);
+>> +                       goto err_chip_buf_free;
+>> +               }
+>> +
+>> +               ret = ofnode_read_u32(node, "amlogic,boot-page-step",
+>> +                                     &meson_chip->boot_page_step);
+>> +               if (ret) {
+>> +                       dev_err(dev, "could not retrieve 'amlogic,boot-page-step' property: %d",
+>> +                               ret);
+>> +                       goto err_chip_buf_free;
+>> +               }
+>> +       }
+>> +
+>>         ret = nand_register(0, mtd);
+>>         if (ret) {
+>>                 dev_err(dev, "'nand_register()' failed: %d\n", ret);
 >> --
->> Siemens AG, Technology
->> Linux Expert Center
+>> 2.30.1
 >>
-
+> 
+> 
