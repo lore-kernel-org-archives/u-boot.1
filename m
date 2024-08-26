@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F974C5472E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 11:16:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB9A9C5321E
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 11:17:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5823F88297;
-	Mon, 26 Aug 2024 13:16:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4796E88770;
+	Mon, 26 Aug 2024 13:17:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RrDigFnv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PJHU659G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D84DB8831F; Mon, 26 Aug 2024 13:15:58 +0200 (CEST)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id 56C1A8891B; Mon, 26 Aug 2024 13:17:12 +0200 (CEST)
+Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
+ [IPv6:2607:f8b0:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B481881A5
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 13:15:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A8B888297
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 13:17:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2d3b5f2f621so2907058a91.1
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 04:15:56 -0700 (PDT)
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-7163489149eso2497030a12.1
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 04:17:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724670955; x=1725275755; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724671028; x=1725275828; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=paPu3KIM4Tf3GpiO+4iFuUkMBwSHb2CQ813VILkXSXg=;
- b=RrDigFnvjexjvMjJCPMaKGmZHgvVcZuNbLC0PMhRFEjtmOv6adLjUdHCv1q0azMpB2
- 6JLkZTeFDiEmtY8816CfeHZZVOkFu1OrJbZDN3B+M16C3uSIjSmjAs9XRMltqj1sfk7v
- 9cJ+g2L/xs3oOCc+lezD6KblhrTsUcyNzN9xIEQsolpKE9Tz54Xz8F7SEOPlsMG/vsy3
- tgKxlMMEde6nfYVXTiuMlc0X4qdOaQNoy+agxgk3/Pg47v7wgcwTTHC//ZfuVZTn3NLE
- wrA/tM1L3fG4R3JZHLBZpof1FhoKc2xnpkDL9W3PJFURto07WJExGC61oi3l6ZDpAse4
- vFGw==
+ bh=lFEf7xg/uMupMtz4vnqKACO/QZAivXR8VuxKJvlRYhw=;
+ b=PJHU659Gqg39z6Ar4zsZE83pUbObnYAGTqRMXROWluWka8ssZUYSUBDuPXiZzHGKeR
+ hZDFaMXP2YxbAZm84Tu6BzEva6qpeRbkp0NDG6ZGoZObu+KafsYX6ePE0LeTnuN0/REX
+ 9jVCZbuhl1HXRWdo6nwdjScCAzYi2e51SFV+Vk+QqDJsOMEPt/Brp7ql2/1FopzSTCmE
+ xs1rQ4d+yY6zFRL/R/8E8nV2ULD8pXQ12hXga3SSb/RT14TwxNweu3Nj5uV3CfrfMN96
+ pH2rUUqptD/ct+kiIy8UPR1CpPxGNvSJT91HvXc9Wi4VQaZGKkn0eZGcok3wuTx2ABY+
+ G6HA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724670955; x=1725275755;
+ d=1e100.net; s=20230601; t=1724671028; x=1725275828;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=paPu3KIM4Tf3GpiO+4iFuUkMBwSHb2CQ813VILkXSXg=;
- b=T2qPpSjIrEgzKmhYrQuZsTEhqh81bYMLxbIzXAtcLaHOZERY/hQ8NGGh4TorPjt6tJ
- TFxynmrRZF3DjhbuPjTwJhjXYZScJMOfEcYRtBIm572akDGIidcXmVsLSBgG/XJIzRXd
- Z//Ek3Siw7YKY0tIp8MFDiXPqh82/NUflDxJIGk0wOwTm62JZlaCNB1foZjs20LPPnd+
- mcDkPDsCLzB1hYDBGWzUs/98c+gJDnViWWpy5jx3vU1Bnlqt1eKKvC/PhalyzcgVWmHB
- +0u6UcWenIHZlTCHeEP/sVKnr1DTOZBAN6a9rRFm7TZIpH59V0k2i7DddxTNN6rOnaC+
- iTPA==
-X-Gm-Message-State: AOJu0YyLoxew1t+o9KydDBgLoQd45zdXdxo6aKk+C4eKwqM/Gn9WKguN
- us3vZI4UvoRpRpaWr1Yb7mof5vDDwKf8jR6EvKZr2a/80YZW2l4RlA7QnjXczhKbZeKkOArfGUE
- ShIoYf0CsseP47amZQm97TVYivqJI0KK+688iLXuTheh9EfOAXRE=
-X-Google-Smtp-Source: AGHT+IHLsC9BZncnxQTlOkEIZgbHsm2EEbdC/5+/myC9R/F0/A87QaFTLTWn8U7RzXX2MsCIJAVUCKJ7sFLbmXu+UY4=
-X-Received: by 2002:a17:90b:2346:b0:2d3:ce99:44b6 with SMTP id
- 98e67ed59e1d1-2d646d30439mr8731017a91.29.1724670954771; Mon, 26 Aug 2024
- 04:15:54 -0700 (PDT)
+ bh=lFEf7xg/uMupMtz4vnqKACO/QZAivXR8VuxKJvlRYhw=;
+ b=IHTgrWOjksPvaimXBrFqee9n0MpVQRZT53M5Ta+jRpyKNCSOihjyssU2dyy5HIBjJD
+ OoLLhfYNBwcUGzXxiW7/wtRM3wbbOgGazKfH0c/wjOCDyC57+soyDrsP2uMqKl+ZLfV6
+ 6lf003mbeQjAPvop4Rg3abDQPySBKhwgszQ1A+3EuDjJa255R02D98cwTqTFNz8q3QH8
+ qTd+5MvmF9mZZ/mNXFpfVL+t9tIkScJVsTfXrFUJHsRWhC5TK7CzyAyi8Sjog01d3yg6
+ 8OcWdPSGtKPaqFa58YEvI3mcVkhGxomYD5RDrTPwUblbvLukvLWh8q9VBZAzXZLWImpU
+ 8ezA==
+X-Gm-Message-State: AOJu0YzMR/WZO1nk+p931HCjrhRzsDVbIIGCbvk0taKop4YAH97KDudX
+ 8alfv9IO1dsvUrOUPQBymcJBxN9ieDi2Sqy7QqSY/kNTikAEoq1prhDXAyNQg5vH7JvD/5HCLxf
+ MRsMggqsH2Iisp2RNatjlk/2PLQMortLKrYkKmQ==
+X-Google-Smtp-Source: AGHT+IGsCZWb8EG5gl3rydiooNt+jU976kNY/nAPGSbkMEl0nj0P5I8dSIVQq31VYS9mMirNw3CyG9NfShAhL/r6uz0=
+X-Received: by 2002:a05:6a20:d49a:b0:1cc:9f24:42 with SMTP id
+ adf61e73a8af0-1cc9f2400f3mr7662967637.20.1724671028302; Mon, 26 Aug 2024
+ 04:17:08 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240815202424.766778-1-sjg@chromium.org>
- <20240815202424.766778-9-sjg@chromium.org>
-In-Reply-To: <20240815202424.766778-9-sjg@chromium.org>
+ <20240815202424.766778-12-sjg@chromium.org>
+In-Reply-To: <20240815202424.766778-12-sjg@chromium.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 26 Aug 2024 14:15:18 +0300
-Message-ID: <CAC_iWj+6jbSknsmZ_079YtNFw3yTsRFTdaP5LBnLR8a4y7qLYA@mail.gmail.com>
-Subject: Re: [PATCH v4 08/14] efi: Use the same filename for all sandbox builds
+Date: Mon, 26 Aug 2024 14:16:31 +0300
+Message-ID: <CAC_iWjL4kkSzX6YEv63gBJk9ruwBCRP+_NFATtBPgk7u3Xa=Yg@mail.gmail.com>
+Subject: Re: [PATCH v4 11/14] efi_loader: Add a test app
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
@@ -91,76 +91,133 @@ Hi Simon,
 
 On Thu, 15 Aug 2024 at 23:24, Simon Glass <sjg@chromium.org> wrote:
 >
-> Sandbox is not a real architecture, but within U-Boot it is real enough.
-> We should not need to pretend it is x86 or ARM anywhere in the code.
->
-> Also we want to be able to locate the sandbox app using a single
-> filename, 'bootsbox.efi', to avoid needing tests to produce different
-> files on each host architecture.
->
-> Drop the confusing use of host architecture and just let sandbox be
-> sandbox.
+> Add a simple app to use for testing. This is intended to do whatever it
+> needs to for testing purposes. For now it just prints a message and
+> exits boot services.
+
+We have tests in py and efi selftests, can you explain why you need
+another EFI app?
+I'd rather skip this and add it when needed
+
+Thanks
+/Ilias
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-> Fixes: 3a0654ecd0d ("efi_loader: correctly identify binary name")
-
-The reasoning here, was that sandbox is compiled for the host arch,
-that's why the name were preserved.
-I don't mind changing that, but we don't need the fixes tag.
-
-Without that
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
-
 > ---
 >
-> (no changes since v3)
+> (no changes since v1)
 >
-> Changes in v3:
-> - Put back the Linaro copyright accidentally removed
+>  lib/efi_loader/Kconfig   | 10 ++++++
+>  lib/efi_loader/Makefile  |  1 +
+>  lib/efi_loader/testapp.c | 68 ++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 79 insertions(+)
+>  create mode 100644 lib/efi_loader/testapp.c
 >
->  include/efi_default_filename.h | 24 ++----------------------
->  1 file changed, 2 insertions(+), 22 deletions(-)
+> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> index ab2c1c44364..4de05c6f2d6 100644
+> --- a/lib/efi_loader/Kconfig
+> +++ b/lib/efi_loader/Kconfig
+> @@ -528,4 +528,14 @@ config BOOTEFI_HELLO_COMPILE
+>           No additional space will be required in the resulting U-Boot binary
+>           when this option is enabled.
 >
-> diff --git a/include/efi_default_filename.h b/include/efi_default_filename.h
-> index 77932984b55..06ca8735002 100644
-> --- a/include/efi_default_filename.h
-> +++ b/include/efi_default_filename.h
-> @@ -16,26 +16,8 @@
->  #undef BOOTEFI_NAME
+> +config BOOTEFI_TESTAPP_COMPILE
+> +       bool "Compile an EFI test app for testing"
+> +       default y
+> +       help
+> +         This compiles an app designed for testing. It is packed into an image
+> +         by the test.py testing frame in the setup_efi_image() function.
+> +
+> +         No additional space will be required in the resulting U-Boot binary
+> +         when this option is enabled.
+> +
+>  endif
+> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> index 00d18966f9e..87131ab911d 100644
+> --- a/lib/efi_loader/Makefile
+> +++ b/lib/efi_loader/Makefile
+> @@ -20,6 +20,7 @@ apps-$(CONFIG_EFI_LOAD_FILE2_INITRD) += initrddump
+>  ifeq ($(CONFIG_GENERATE_ACPI_TABLE),)
+>  apps-y += dtbdump
+>  endif
+> +apps-$(CONFIG_BOOTEFI_TESTAPP_COMPILE) += testapp
 >
->  #ifdef CONFIG_SANDBOX
-> -
-> -#if HOST_ARCH == HOST_ARCH_X86_64
-> -#define BOOTEFI_NAME "BOOTX64.EFI"
-> -#elif HOST_ARCH == HOST_ARCH_X86
-> -#define BOOTEFI_NAME "BOOTIA32.EFI"
-> -#elif HOST_ARCH == HOST_ARCH_AARCH64
-> -#define BOOTEFI_NAME "BOOTAA64.EFI"
-> -#elif HOST_ARCH == HOST_ARCH_ARM
-> -#define BOOTEFI_NAME "BOOTARM.EFI"
-> -#elif HOST_ARCH == HOST_ARCH_RISCV32
-> -#define BOOTEFI_NAME "BOOTRISCV32.EFI"
-> -#elif HOST_ARCH == HOST_ARCH_RISCV64
-> -#define BOOTEFI_NAME "BOOTRISCV64.EFI"
-> -#else
-> -#error Unsupported UEFI architecture
-> -#endif
-> -
-> -#else
-> -
-> -#if defined(CONFIG_ARM64)
-> +#define BOOTEFI_NAME "BOOTSBOX.EFI"
-> +#elif defined(CONFIG_ARM64)
->  #define BOOTEFI_NAME "BOOTAA64.EFI"
->  #elif defined(CONFIG_ARM)
->  #define BOOTEFI_NAME "BOOTARM.EFI"
-> @@ -52,5 +34,3 @@
->  #endif
->
->  #endif
-> -
-> -#endif
+>  obj-$(CONFIG_CMD_BOOTEFI_HELLO) += helloworld_efi.o
+>  obj-$(CONFIG_EFI_BOOTMGR) += efi_bootmgr.o
+> diff --git a/lib/efi_loader/testapp.c b/lib/efi_loader/testapp.c
+> new file mode 100644
+> index 00000000000..feb444c92e9
+> --- /dev/null
+> +++ b/lib/efi_loader/testapp.c
+> @@ -0,0 +1,68 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Hello world EFI application
+> + *
+> + * Copyright 2024 Google LLC
+> + * Written by Simon Glass <sjg@chromium.org>
+> + *
+> + * This test program is used to test the invocation of an EFI application.
+> + * It writes a few messages to the console and then exits boot services
+> + */
+> +
+> +#include <efi_api.h>
+> +
+> +static const efi_guid_t loaded_image_guid = EFI_LOADED_IMAGE_PROTOCOL_GUID;
+> +
+> +static struct efi_system_table *systable;
+> +static struct efi_boot_services *boottime;
+> +static struct efi_simple_text_output_protocol *con_out;
+> +
+> +/**
+> + * efi_main() - entry point of the EFI application.
+> + *
+> + * @handle:    handle of the loaded image
+> + * @systab:    system table
+> + * Return:     status code
+> + */
+> +efi_status_t EFIAPI efi_main(efi_handle_t handle,
+> +                            struct efi_system_table *systab)
+> +{
+> +       struct efi_loaded_image *loaded_image;
+> +       efi_status_t ret;
+> +       efi_uintn_t map_size;
+> +       efi_uintn_t map_key;
+> +       efi_uintn_t desc_size;
+> +       u32 desc_version;
+> +
+> +       systable = systab;
+> +       boottime = systable->boottime;
+> +       con_out = systable->con_out;
+> +
+> +       /* Get the loaded image protocol */
+> +       ret = boottime->open_protocol(handle, &loaded_image_guid,
+> +                                     (void **)&loaded_image, NULL, NULL,
+> +                                     EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+> +       if (ret != EFI_SUCCESS) {
+> +               con_out->output_string
+> +                       (con_out, u"Cannot open loaded image protocol\r\n");
+> +               goto out;
+> +       }
+> +
+> +       /* UEFI requires CR LF */
+> +       con_out->output_string(con_out, u"U-Boot test app for EFI_LOADER\r\n");
+> +
+> +out:
+> +       map_size = 0;
+> +       ret = boottime->get_memory_map(&map_size, NULL, &map_key, &desc_size,
+> +                                      &desc_version);
+> +       con_out->output_string(con_out, u"Exiting boot sevices\n");
+> +
+> +       /* exit boot services so that this part of U-Boot can be tested */
+> +       boottime->exit_boot_services(handle, map_key);
+> +
+> +       /* now exit for real */
+> +       ret = boottime->exit(handle, ret, 0, NULL);
+> +
+> +       /* We should never arrive here */
+> +       return ret;
+> +}
 > --
 > 2.34.1
 >
