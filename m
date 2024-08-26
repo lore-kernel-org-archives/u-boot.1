@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B738C5472E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 18:05:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00BF7C5472E
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 18:16:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB74288BC6;
-	Mon, 26 Aug 2024 20:05:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 80F50886A7;
+	Mon, 26 Aug 2024 20:16:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aW+HOdO+";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="m9ZSqZbP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9D8488B78; Mon, 26 Aug 2024 20:05:10 +0200 (CEST)
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5DC2A88A7B; Mon, 26 Aug 2024 20:16:50 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 929B588B61
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 20:05:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5630D88210
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 20:16:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-71446fefddfso2393808b3a.0
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 11:05:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724695507; x=1725300307; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mxl6MiOwRzGw5LUtTeB5B0FIdbylCnjcYrt4o/riylM=;
- b=aW+HOdO+akG2rrZ8qbuY0iWE6fDLGXMslaVCLne6NjVoFFp4odfyf49gvA47TSToZA
- NfGQT4XXLltimMhcU3dxSKd9qWIOKazcGUHw7WhZqNjLmPs459J4GPaFEym52oEDE8o2
- vOtB1sFLs8vcNZK4S4CxDl1j5maB4NQipV0bfBMkuale80u86KgtbgmtukDbCbAFkZ8c
- P8RutBJeOh3sppotlp5EODrWjXB5O3+3gshnmnVZL1w4rNldekD53Ih/iSGDuPnJ8816
- OaFL46hNxTNuKFk9BKZTW5idisU1BZVzHE3kRlfxIjgy3qXY6KZip+NZUPX74LwRUPOm
- aq2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724695507; x=1725300307;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mxl6MiOwRzGw5LUtTeB5B0FIdbylCnjcYrt4o/riylM=;
- b=v4+LfZnapoKfTJLksqwct40/1I/doSu1dZsmD6tQRY3p8P6wk3+N757ofmJRj4Pb13
- SkeCbfcabcO0cKAV/s3hu2kCISEwCwwRQv4nwWfaM2bwAAacPJqeZfcNn6JtIXww9N1k
- GpRE2XQuaL/aMc+WYGzBXgCJGppDWfWG/fsdmjSnHjlVVmF0PqXxMnwLjNdemdqbrVDP
- hLPV3v+YC/mETZasy9xrcma9HsqHmHU/fgUbTk6BhwCBbFzBP+g35xVoGSx7pvIp75MR
- HaAuIAvHeGP64KW/WbuMhIztFuWd6a0Fm+0MV9ewnjSbpTQGEBFSs3VAMvd1iZ5mkjjk
- GL5g==
-X-Gm-Message-State: AOJu0Yxlt5Hoi/7k4JLBmS6vO3T0pEfRjOREBjRmTAT+/TvuiM97iW3v
- MELf1JBmOyurITV8eJ+zMWr9DQkOMS5EnhWbPH9ej4ReEEl7yyccJMBTzQ==
-X-Google-Smtp-Source: AGHT+IE+IyrShhwE6zi1GQd3TzOScz+f216ce5hrcMl2629mg9mcpAclRl27lRdATqplm3rKa8zL1w==
-X-Received: by 2002:a05:6a00:6f60:b0:714:21f0:c799 with SMTP id
- d2e1a72fcca58-714457a04e6mr12064319b3a.12.1724695506824; 
- Mon, 26 Aug 2024 11:05:06 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:bc67:f2c3:ca16:906f])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7143422eaabsm7544947b3a.12.2024.08.26.11.05.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Aug 2024 11:05:06 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: peng.fan@nxp.com
-Cc: u-boot@lists.denx.de,
-	Fabio Estevam <festevam@denx.de>
-Subject: [PATCH 3/4] mx6slevk: Keep a single defconfig
-Date: Mon, 26 Aug 2024 15:04:53 -0300
-Message-Id: <20240826180454.2778016-3-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240826180454.2778016-1-festevam@gmail.com>
-References: <20240826180454.2778016-1-festevam@gmail.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1724696206; x=1725301006; i=xypron.glpk@gmx.de;
+ bh=FpEfLbu0lqOzUJ8FuTfXhQILDIivXjqyy/yuk5J/bjU=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=m9ZSqZbPawKg+OgxrAYtn1vdExCcNq7+j4L4GT+k72j+mkWxIMSOTc4GP2EjKCpl
+ zP94TOWcmFBI3uUNxrakxLGe7rqjUiDYpKNKxMGhXed/6wXPT99AU+JYSiHUCMXX5
+ izSsyPL9ULIgL8cJkOuHNS+rPh6bS4YvDxMkfeIiOGJJp1Tjctu2na1Yy7Cayk5Qb
+ A9gGNtOTaEYulGqEeI2Lc9VpsBW20xSN0xc4VxM32qVsOBGs57AvB1hXuGUVKJare
+ 3LodQq1Q/pU+ddrWClzx3nQ09S3dTxIOCLe4heAu5AiCvn5iercpNen0TiUv/zsrL
+ KZOCdLm7APW02b0Gig==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.143.105] ([46.114.229.134]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MlNpH-1sF7wp2ZoL-00ntrr; Mon, 26
+ Aug 2024 20:16:46 +0200
+Message-ID: <ba46d2c2-38ac-411a-a48c-429295cf6efb@gmx.de>
+Date: Mon, 26 Aug 2024 20:16:45 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 10/14] efi_loader: Disable ANSI output for tests
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20240815202424.766778-1-sjg@chromium.org>
+ <20240815202424.766778-11-sjg@chromium.org>
+ <CAC_iWjJARSNuFRE4x85fNMkT68NnB74bCZe6ryKm2Rp5axTJEg@mail.gmail.com>
+ <CAFLszTjwstB4PdPR4Rf0FpJDJuSQkSw=9-nZTkSNedLv5iaKyg@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAFLszTjwstB4PdPR4Rf0FpJDJuSQkSw=9-nZTkSNedLv5iaKyg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:bkW4fMJPlXwHErrbhy5zgjJmAHTCXHCuPVngDh1AyrqUzEMAtju
+ NPfl7/vJzEUXovCqpK0kjPafh344Fe3jVm8Aor0WlQ/iIza81sx8Btdp70nWJxUvqEPA7W2
+ r8H4k92BoeYKZgYOndUZVZr5NQcHwIXf6724+sxyK63t/tkmvBEMTHXTFwH/624qQjHy8j0
+ zZUbktgdReC1m3/+xejqQ==
+UI-OutboundReport: notjunk:1;M01:P0:cMbPYV/yTz8=;WF+haazfS8Oa+GhzQzMU5Q6RKk0
+ FD16V01SxqJLWyZMV95OSVK4QyoOnh6EdQEuUUhpGUFJgjKihB0G2CFP6FpF3fVm8Hm3GPTBq
+ LQdh7U/ZR8dgGP2sxOZ6vMJOzi1yI0U8H42mz8/vDIUfHnA/+DPbiEhQ5OPeKLnqPSHbZRKXp
+ H5KQHUOLIgknFtVG1YQDhjQq6YBKAKFImuWrQgIpjZjU+K84nBagwViNnZWtGVtKUYbfvrghp
+ UJPUiVxZRWopzASlVHTTjLFROyHIj6A2tXN3G1diTHLXHQVK7Mh5Q/m1BYDap2Tvq6XHOqttR
+ VKaxpGVHjchUT5ydxyoJuxmO/WRkW4bBoZRyE/phbhPamcIoo5B2S5F5sS8SyuP3psLOKt2Mb
+ mFri5JqehcduGD3SxD/wrI1OpxMKitK7cEkqvskKOVLg/A8L+X22KCrNaGC6FQJIK07ju3400
+ QpLTf2fsVXVWWz2/6Q3Q/nkBGvHUK5FlY4reBkHKdDpx9zJ17jL1JwqE0bPzCzPurwZyk5uz9
+ GCr2YQDH+iskdDLq2qmWQqJuChlmBr+fNNnaPXvWPUODf6h1N/qtSSWsF1FcgkcQtBlLV/52d
+ vr1TAA3TT3jIjuXAiC52dksJMiEQIf7esPnSJyCdHCwmFblQdhaWVYCC33e5bDyP/aVsFLfSc
+ tNdoISw6hwXgACZ7gGQevGDPTSrv5+SSYfrCBTqYLvvTP9H7Jpj1q+D3NhqC9MJrTUQPVKWA+
+ Ery3zpjfuY+WSX9DAl4ZRwYFQuIQVgsKP6I+C+UCo3Itu2PDrjKliO/ptaHa+nZioEIwcz4rM
+ p5dvEaaFQdBn3jz1JOiMTgYj8W5IthxddHKFT+fOuli4Y=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,191 +94,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
+On 8/26/24 19:57, Simon Glass wrote:
+> Hi Ilias,
+>
+> On Mon, 26 Aug 2024 at 05:47, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+>>
+>> Hi Simon,
+>>
+>> On Thu, 15 Aug 2024 at 23:24, Simon Glass <sjg@chromium.org> wrote:
+>>>
+>>> We don't want ANSI characters written in tests since it is a pain to
+>>> check the output with ut_assert_nextline() et al.
+>>>
+>>> Provide a way to tests to request that ANSI characters not be sent.
+>>>
+>>> Add a proper function comment while we are here, to encourage others.
+>>>
+>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>>> ---
+>>>
+>>> (no changes since v1)
+>>>
+>>>   include/efi_loader.h         | 21 ++++++++++++++++++++-
+>>>   lib/efi_loader/efi_console.c | 26 +++++++++++++++++---------
+>>>   2 files changed, 37 insertions(+), 10 deletions(-)
+>>>
+>>> diff --git a/include/efi_loader.h b/include/efi_loader.h
+>>> index f84852e384f..82b90ee0f1d 100644
+>>> --- a/include/efi_loader.h
+>>> +++ b/include/efi_loader.h
+>>> @@ -531,8 +531,27 @@ efi_status_t efi_bootmgr_delete_boot_option(u16 b=
+oot_index);
+>>>   efi_status_t efi_bootmgr_run(void *fdt);
+>>>   /* search the boot option index in BootOrder */
+>>>   bool efi_search_bootorder(u16 *bootorder, efi_uintn_t num, u32 targe=
+t, u32 *index);
+>>> -/* Set up console modes */
+>>> +
+>>> +/**
+>>> + * efi_setup_console_size() - update the mode table.
+>>> + *
+>>> + * By default the only mode available is 80x25. If the console has at=
+ least 50
+>>> + * lines, enable mode 80x50. If we can query the console size and it =
+is neither
+>>> + * 80x25 nor 80x50, set it as an additional mode.
+>>> + */
+>>>   void efi_setup_console_size(void);
+>>> +
+>>> +/**
+>>> + * efi_console_set_ansi() - Set whether ANSI characters should be emi=
+tted
+>>> + *
+>>> + * These characters mess up tests which use ut_assert_nextline(). Cal=
+l this
+>>> + * function to tell efi_loader not to emit these characters when star=
+ting up the
+>>> + * terminal
+>>> + *
+>>> + * @allow_ansi: Allow emitting ANSI characters
+>>> + */
+>>> +void efi_console_set_ansi(bool allow_ansi);
+>>> +
+>>>   /* Set up load options from environment variable */
+>>>   efi_status_t efi_env_set_load_options(efi_handle_t handle, const cha=
+r *env_var,
+>>>                                        u16 **load_options);
+>>> diff --git a/lib/efi_loader/efi_console.c b/lib/efi_loader/efi_console=
+.c
+>>> index cea50c748aa..569fc9199bc 100644
+>>> --- a/lib/efi_loader/efi_console.c
+>>> +++ b/lib/efi_loader/efi_console.c
+>>> @@ -30,6 +30,17 @@ struct cout_mode {
+>>>
+>>>   __maybe_unused static struct efi_object uart_obj;
+>>>
+>>> +/*
+>>> + * suppress emission of ANSI codes for use by unit tests. Leave it as=
+ 0 for the
+>>> + * default behaviour
+>>> + */
+>>> +static bool no_ansi;
+>>> +
+>>> +void efi_console_set_ansi(bool allow_ansi)
+>>> +{
+>>> +       no_ansi =3D !allow_ansi;
+>>> +}
+>>> +
+>>>   static struct cout_mode efi_cout_modes[] =3D {
+>>>          /* EFI Mode 0 is 80x25 and always present */
+>>>          {
+>>> @@ -348,13 +359,6 @@ static int __maybe_unused query_vidconsole(int *r=
+ows, int *cols)
+>>>          return 0;
+>>>   }
+>>>
+>>> -/**
+>>> - * efi_setup_console_size() - update the mode table.
+>>> - *
+>>> - * By default the only mode available is 80x25. If the console has at=
+ least 50
+>>> - * lines, enable mode 80x50. If we can query the console size and it =
+is neither
+>>> - * 80x25 nor 80x50, set it as an additional mode.
+>>> - */
+>>>   void efi_setup_console_size(void)
+>>>   {
+>>>          int rows =3D 25, cols =3D 80;
+>>> @@ -362,8 +366,12 @@ void efi_setup_console_size(void)
+>>>
+>>>          if (IS_ENABLED(CONFIG_VIDEO))
+>>>                  ret =3D query_vidconsole(&rows, &cols);
+>>> -       if (ret)
+>>> -               ret =3D query_console_serial(&rows, &cols);
+>>> +       if (ret) {
+>>> +               if (no_ansi)
+>>
+>> What are you trying to do here? The function you are skipping just
+>> queries the number of columns and rows. The defaults on the function
+>> are 80x25, so the setup will continue
+>
+> Well, the query works by sending out some ANSI characters to the
+> terminal, then checking the result. In a unit test, these characters
+> are captured and the unit test fails when ut_assert_nextline() gets
+> unexpected output.
 
-Remove mx6slevk_spinor_defconfig and mx6slevk_spl_defconfig in
-favor of having a single mx6slevk_defconfig to help reducing
-the maintenance effort.
+We should be able to compile U-Boot with all tests enabled such that it
+is still usable on real hardware.
 
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
- configs/mx6slevk_spinor_defconfig | 71 -------------------------
- configs/mx6slevk_spl_defconfig    | 88 -------------------------------
- 2 files changed, 159 deletions(-)
- delete mode 100644 configs/mx6slevk_spinor_defconfig
- delete mode 100644 configs/mx6slevk_spl_defconfig
+Your patch is not compatible with this.
 
-diff --git a/configs/mx6slevk_spinor_defconfig b/configs/mx6slevk_spinor_defconfig
-deleted file mode 100644
-index 3491cbc5b10d..000000000000
---- a/configs/mx6slevk_spinor_defconfig
-+++ /dev/null
-@@ -1,71 +0,0 @@
--CONFIG_ARM=y
--CONFIG_ARCH_MX6=y
--CONFIG_TEXT_BASE=0x87800000
--CONFIG_SYS_MALLOC_LEN=0x300000
--CONFIG_NR_DRAM_BANKS=1
--CONFIG_SF_DEFAULT_SPEED=20000000
--CONFIG_ENV_SIZE=0x2000
--CONFIG_ENV_OFFSET=0xC0000
--CONFIG_ENV_SECT_SIZE=0x10000
--CONFIG_MX6SL=y
--CONFIG_TARGET_MX6SLEVK=y
--CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="imx6sl-evk"
--# CONFIG_CMD_BMODE is not set
--CONFIG_SUPPORT_RAW_INITRD=y
--CONFIG_SPI_BOOT=y
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi"
--CONFIG_SYS_PBSIZE=532
--CONFIG_BOARD_EARLY_INIT_F=y
--CONFIG_HUSH_PARSER=y
--CONFIG_SYS_MAXARGS=32
--CONFIG_CMD_BOOTZ=y
--CONFIG_CMD_GPIO=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_USB=y
--# CONFIG_CMD_SETEXPR is not set
--CONFIG_CMD_DHCP=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
--CONFIG_CMD_CACHE=y
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_EXT4=y
--CONFIG_CMD_EXT4_WRITE=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_FS_GENERIC=y
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_SPI_FLASH=y
--CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_BOUNCE_BUFFER=y
--CONFIG_DM_I2C=y
--CONFIG_SYS_I2C_MXC=y
--CONFIG_FSL_USDHC=y
--CONFIG_MTD=y
--CONFIG_DM_SPI_FLASH=y
--CONFIG_SPI_FLASH_STMICRO=y
--CONFIG_PHYLIB=y
--CONFIG_PHY_SMSC=y
--CONFIG_FEC_MXC=y
--CONFIG_MII=y
--CONFIG_PINCTRL=y
--CONFIG_PINCTRL_IMX6=y
--CONFIG_DM_PMIC=y
--CONFIG_DM_PMIC_PFUZE100=y
--CONFIG_DM_REGULATOR=y
--CONFIG_DM_REGULATOR_PFUZE100=y
--CONFIG_DM_REGULATOR_FIXED=y
--CONFIG_DM_REGULATOR_GPIO=y
--CONFIG_DM_SERIAL=y
--CONFIG_MXC_UART=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_MXC_SPI=y
--CONFIG_DM_THERMAL=y
--CONFIG_IMX_THERMAL=y
--CONFIG_USB=y
--CONFIG_USB_STORAGE=y
--CONFIG_USB_HOST_ETHER=y
--CONFIG_USB_ETHER_ASIX=y
-diff --git a/configs/mx6slevk_spl_defconfig b/configs/mx6slevk_spl_defconfig
-deleted file mode 100644
-index 9c923609000c..000000000000
---- a/configs/mx6slevk_spl_defconfig
-+++ /dev/null
-@@ -1,88 +0,0 @@
--CONFIG_ARM=y
--CONFIG_ARCH_MX6=y
--CONFIG_TEXT_BASE=0x87800000
--CONFIG_SYS_MALLOC_LEN=0x300000
--CONFIG_SPL_GPIO=y
--CONFIG_SPL_LIBCOMMON_SUPPORT=y
--CONFIG_SPL_LIBGENERIC_SUPPORT=y
--CONFIG_NR_DRAM_BANKS=1
--CONFIG_SF_DEFAULT_SPEED=20000000
--CONFIG_ENV_SIZE=0x2000
--CONFIG_ENV_OFFSET=0x80000
--CONFIG_MX6SL=y
--CONFIG_TARGET_MX6SLEVK=y
--CONFIG_SYS_I2C_MXC_I2C1=y
--CONFIG_SYS_I2C_MXC_I2C2=y
--CONFIG_SYS_I2C_MXC_I2C3=y
--CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="imx6sl-evk"
--CONFIG_SPL_TEXT_BASE=0x00908000
--CONFIG_SYS_MONITOR_LEN=409600
--CONFIG_SPL_MMC=y
--CONFIG_SPL_SERIAL=y
--CONFIG_SPL=y
--CONFIG_SPL_LIBDISK_SUPPORT=y
--# CONFIG_CMD_BMODE is not set
--CONFIG_SUPPORT_RAW_INITRD=y
--CONFIG_USE_BOOTCOMMAND=y
--CONFIG_BOOTCOMMAND="mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run bootscript; else if run loadimage; then run mmcboot; else run netboot; fi; fi; else run netboot; fi"
--CONFIG_SYS_PBSIZE=532
--CONFIG_BOARD_EARLY_INIT_F=y
--CONFIG_SPL_SYS_MALLOC=y
--CONFIG_SPL_FS_EXT4=y
--CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot-dtb.img"
--CONFIG_SPL_I2C=y
--CONFIG_SPL_WATCHDOG=y
--CONFIG_HUSH_PARSER=y
--CONFIG_SYS_MAXARGS=32
--CONFIG_CMD_BOOTZ=y
--CONFIG_CMD_GPIO=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_MMC=y
--CONFIG_CMD_PART=y
--CONFIG_CMD_USB=y
--CONFIG_CMD_DHCP=y
--CONFIG_CMD_MII=y
--CONFIG_CMD_PING=y
--CONFIG_CMD_CACHE=y
--CONFIG_CMD_EXT2=y
--CONFIG_CMD_EXT4=y
--CONFIG_CMD_EXT4_WRITE=y
--CONFIG_CMD_FAT=y
--CONFIG_CMD_FS_GENERIC=y
--CONFIG_OF_CONTROL=y
--CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_MMC=y
--CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_SYS_MMC_ENV_DEV=1
--CONFIG_BOUNCE_BUFFER=y
--CONFIG_DM_I2C=y
--CONFIG_SPL_SYS_I2C_LEGACY=y
--CONFIG_SYS_I2C_MXC=y
--CONFIG_FSL_USDHC=y
--CONFIG_MTD=y
--CONFIG_DM_SPI_FLASH=y
--CONFIG_SPI_FLASH_STMICRO=y
--CONFIG_PHYLIB=y
--CONFIG_PHY_SMSC=y
--CONFIG_FEC_MXC=y
--CONFIG_MII=y
--CONFIG_PINCTRL=y
--CONFIG_PINCTRL_IMX6=y
--CONFIG_DM_PMIC=y
--CONFIG_DM_PMIC_PFUZE100=y
--CONFIG_DM_REGULATOR=y
--CONFIG_DM_REGULATOR_PFUZE100=y
--CONFIG_DM_REGULATOR_FIXED=y
--CONFIG_DM_REGULATOR_GPIO=y
--CONFIG_DM_SERIAL=y
--CONFIG_MXC_UART=y
--CONFIG_SPI=y
--CONFIG_DM_SPI=y
--CONFIG_MXC_SPI=y
--CONFIG_DM_THERMAL=y
--CONFIG_IMX_THERMAL=y
--CONFIG_USB=y
--CONFIG_USB_STORAGE=y
--CONFIG_USB_HOST_ETHER=y
--CONFIG_USB_ETHER_ASIX=y
--- 
-2.34.1
+Please, adjust readline_check() to strip out non-printing ANSI codes.
+
+Best regards
+
+Heinrich
+
+>
+>>
+>> Thanks
+>> /Ilias
+>>> +                       ret =3D 0;
+>>> +               else
+>>> +                       ret =3D query_console_serial(&rows, &cols);
+>>> +       }
+>>>          if (ret)
+>>>                  return;
+>>>
+>>> --
+>>> 2.34.1
+>>>
+>
+> Regards,
+> Simon
 
