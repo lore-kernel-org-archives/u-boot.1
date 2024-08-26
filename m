@@ -4,76 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68572C5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 17:01:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DF56C5472D
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 17:27:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4D7F88ABA;
-	Mon, 26 Aug 2024 19:01:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BED4C87DEA;
+	Mon, 26 Aug 2024 19:27:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gEynaJIV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zs2nLmuq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA4C88641A; Mon, 26 Aug 2024 19:01:46 +0200 (CEST)
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
- [IPv6:2607:f8b0:4864:20::82c])
+ id CC6C688481; Mon, 26 Aug 2024 19:27:19 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7690688ABA
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 19:01:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 73DE987B84
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 19:27:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82c.google.com with SMTP id
- d75a77b69052e-4503ccbc218so44298251cf.1
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 10:01:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-428f5c0833bso29773475e9.0
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 10:27:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724691703; x=1725296503; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=p4IWNjvE+mm0hyeVBSYZi1ZSLZbQdeoQhsnG6ae67r4=;
- b=gEynaJIVAHDzsHCAdpLBGiCoKtIoSCU9V6j+sVzEa9ixd5WPUKn2pyvc8YnVyKs+EX
- 7JyIg+2Tl0fqrm2Pto/dZgzImHKoxp7gzXLO5bKdL+6fG6KEaYP4V2ZlnY8rkLKGsdI6
- g0y5lBCgEWCORYuy896r2h2otegVMhZM/va7Y=
+ d=linaro.org; s=google; t=1724693237; x=1725298037; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=qFjjK2n9CMwLkhDpWgjmwtKiqLSZZbNFpa8s3GHrdDA=;
+ b=zs2nLmuqTNwveGVWRoKeveM/Tv0L+uLROduT3z73EeGnIFFreai0MY9gypUH7Jyw3V
+ sIuaDttzkRQDRvEOlbJk1wRU+wKjrZJM/6pWODqAoLvSFlCFo/67jjfXP/WiTj64q0UT
+ McSzipuTJOqsWAVc4jJb4T4M0rf0ijzDs+l222Wrfx7u/HCQkfhbICnWcbWAdxT5rzhk
+ y0lh3ihwHVfoNhjjBMD5wNFVDYAZGcodcVmV0vRDiOG4PKZezbgsxduM6bslbQMHmIJK
+ S4QGSKBMNPA9Bf9Lvd9KnWeZ189caXFZp/5LpOe3gZcEZUP7SJwIlpO3SIUWQ0LY2Kwc
+ XGlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724691703; x=1725296503;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=p4IWNjvE+mm0hyeVBSYZi1ZSLZbQdeoQhsnG6ae67r4=;
- b=S7F8345mTpu8GrKYgnIytS7kaCJB/EKzwhSF3sfOmV6POEF9FbWcQvxv30uDoXubzE
- hqSqsVYpZZXPXEgnIpgDRbRsVwKYOTMuOOOx+Ffx67ZlJH26J3kU7x9xceFnFaCdxX8H
- AZ9tPTfbdjVqOcGAQlWuGh6j+zazw29M/XbFTGrYKBc8ZGBMQaQ9s7NieuKPYCglhzSK
- 4e6m4IS+750CPexiWKYRhzUSITZLCdD6ZMfA1fgx/i8yqiHUJJtge8i643OcPBUhu5Cu
- LGJdQBfUClL45e7a7Gs6Cd4IA01punlu32UsAtkx4CDd589PctwdpGIN0hVd9LIhnLsg
- 8Upw==
-X-Gm-Message-State: AOJu0YyTjzNr88lECMwY3kCiDiqP+7O6XSKDMnVWyQWqSaf94CIBBsXX
- 8X8Wp2nbMGyDNPFnb3JeZ11VoAY2t+E3ywr1U/ewukYQJexyFEEDwLv4tGbk8911ZOFcei7VzKS
- x
-X-Google-Smtp-Source: AGHT+IGgs5a3IBn9TdNfEhyfO+Gjmy4rJXsLs4lfXNLG/v6U80juMFC5a8OgOud9nHlEEv3oyKZHjg==
-X-Received: by 2002:a05:622a:53ca:b0:456:45cc:2b5a with SMTP id
- d75a77b69052e-456600b8154mr4190221cf.25.1724691703036; 
- Mon, 26 Aug 2024 10:01:43 -0700 (PDT)
-Received: from bill-the-cat.tail58a08.ts.net ([187.144.65.244])
+ d=1e100.net; s=20230601; t=1724693237; x=1725298037;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=qFjjK2n9CMwLkhDpWgjmwtKiqLSZZbNFpa8s3GHrdDA=;
+ b=GTDmCbB8OLRC6oAPXI9Yssan5hLSNz+pYOtHqBmy6IyOth5uQkn6e652gY4YHeB8WX
+ mL5u1EJfbZxGVli6taV5GfWBk8VFgWBIg4VFYzObBgIyXNzfKDyblSx24MC7g3EJkaqc
+ QEd+qjmSutg7i7dGsNzQHySFSStQ36BFLkpjUgdfNMIVodgdw6nb8FXXfFvn0eQSp8Iq
+ TikT0i0Wvof7g6RNRz79EHR45NMMLBCh60iHrimCrF41iSoLT3DcVIs1EJrzQO7sK1+I
+ EXnGPytHYYvcTFa0ZK6FQfIR+F7E7dvn+Xd/PC2Wov/NDscizieaV8LpBkzMLbu0SDiP
+ 8VHQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU8FSAVZ0Kx1d7yRk2SZyn/CG3DO4Q19+q+FkDqbZeog+Nvl8wRBNhHFOBTwoyQWcIrbKr5ah0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxCl+Rf4ozyg3vxu/JY+/jj7jws4xeH5mR0o0h//cPEUoF+QQXs
+ iVOSGvAkeUdca3vIBPBo/1rnkKiJnqtWvP2JoeQ13mSweXv6vL8MwswkTvZh1MRczz9xeBRSI9l
+ Ym9YkZA==
+X-Google-Smtp-Source: AGHT+IHKkL5XqbF8sZyiDnh4Y35EnE1jtUGcNdHe5gPgltnZlaAna44plwnRGL5JUaXt0EmvucV8eQ==
+X-Received: by 2002:a05:6000:e92:b0:36b:b174:5256 with SMTP id
+ ffacd0b85a97d-3748c82c760mr213578f8f.6.1724693236662; 
+ Mon, 26 Aug 2024 10:27:16 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:3433:4a68:4ceb:ac41?
+ ([2a01:e0a:3cb:7bb0:3433:4a68:4ceb:ac41])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-454fe0e5508sm45223301cf.39.2024.08.26.10.01.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Aug 2024 10:01:42 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH] doc/develop/sending_patches.rst: Reword where our git tree is
- slightly
-Date: Mon, 26 Aug 2024 11:01:40 -0600
-Message-Id: <20240826170140.2791128-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240826163917.2786791-1-trini@konsulko.com>
-References: <20240826163917.2786791-1-trini@konsulko.com>
+ 5b1f17b1804b1-42ac515914bsm158151085e9.12.2024.08.26.10.27.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 26 Aug 2024 10:27:16 -0700 (PDT)
+Message-ID: <423562a2-31ce-4d97-bc46-7412245d43b8@linaro.org>
+Date: Mon, 26 Aug 2024 19:27:15 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] doc/develop/sending_patches.rst: Clarify when to use
+ which branch
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20240826163917.2786791-1-trini@konsulko.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20240826163917.2786791-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,37 +97,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We shouldn't have had the link to our git tree be contained within "``"
-as that meant that it did not work as a link, so remove those. And
-rather than make this a link plus text, keep this as a link within the
-text for overall clarity.
 
-Suggested-by: Quentin Schulz <quentin.schulz@cherry.de>
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- doc/develop/sending_patches.rst | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/doc/develop/sending_patches.rst b/doc/develop/sending_patches.rst
-index 82efb717b179..990cb9912a92 100644
---- a/doc/develop/sending_patches.rst
-+++ b/doc/develop/sending_patches.rst
-@@ -76,11 +76,10 @@ General Patch Submission Rules
-   compression, no attachments. Just plain text. The best way the generate
-   patches is by using the ``git format-patch`` command. For a patch that is
-   fixing a bug or regression of some sort, please use the ``master`` branch of
--  the mainline U-Boot git repository
--  (``https://source.denx.de/u-boot/u-boot.git``) as reference. For new
--  features, if the ``next`` branch has been opened (which happens with the
--  release of ``-rc2``) that branch should be used, otherwise ``master`` is
--  acceptable.
-+  the mainline U-Boot git repository located at
-+  https://source.denx.de/u-boot/u-boot.git as reference. For new features, if
-+  the ``next`` branch has been opened (which happens with the release of
-+  ``-rc2``) that branch should be used, otherwise ``master`` is acceptable.
- 
- * Make sure that your mailer does not mangle the patch by automatic changes
-   like wrapping of longer lines etc.
+On 8/26/24 18:39, Tom Rini wrote:
+> The previous wording on the paragraph about what branch to use when
+> submitting patches did not reflect how / when the next branch is
+> currently used. Reword this to note that master should be used for bug
+> and regression fixes, always, and that next should be used once it
+> opens, with -rc2.
+> 
+> Reported-by: Jerome Forissier <jerome.forissier@linaro.org>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+>  doc/develop/sending_patches.rst | 12 +++++++-----
+>  1 file changed, 7 insertions(+), 5 deletions(-)
+> 
+> diff --git a/doc/develop/sending_patches.rst b/doc/develop/sending_patches.rst
+> index 3f25b1d0466f..82efb717b179 100644
+> --- a/doc/develop/sending_patches.rst
+> +++ b/doc/develop/sending_patches.rst
+> @@ -74,11 +74,13 @@ General Patch Submission Rules
+>  
+>  * Send your patches as plain text messages: no HTML, no MIME, no links, no
+>    compression, no attachments. Just plain text. The best way the generate
+> -  patches is by using the ``git format-patch`` command. Please use the
+> -  ``master`` branch of the mainline U-Boot git repository
+> -  (``https://source.denx.de/u-boot/u-boot.git``) as reference, unless (usually
+> -  late in a release cycle) there has been an announcement to use the ``next``
+> -  branch of this repository instead.
+> +  patches is by using the ``git format-patch`` command. For a patch that is
+> +  fixing a bug or regression of some sort, please use the ``master`` branch of
+> +  the mainline U-Boot git repository
+> +  (``https://source.denx.de/u-boot/u-boot.git``) as reference. For new
+> +  features, if the ``next`` branch has been opened (which happens with the
+> +  release of ``-rc2``) that branch should be used, otherwise ``master`` is
+> +  acceptable.
+>  
+>  * Make sure that your mailer does not mangle the patch by automatic changes
+>    like wrapping of longer lines etc.
+
+Crystal clear! Thanks.
+FWIW and with Quentin's comment about the back ticks addressed or not:
+
+Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
+
 -- 
-2.34.1
-
+Jerome
