@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6784EC5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 10:26:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE0C7C5321E
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 10:26:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8361888AB2;
+	by phobos.denx.de (Postfix) with ESMTP id E79D588AD7;
 	Mon, 26 Aug 2024 12:25:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bzfRsX/v";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="K5chRS5H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BD9B88AFB; Mon, 26 Aug 2024 12:25:45 +0200 (CEST)
+ id 5BAAA88A53; Mon, 26 Aug 2024 12:25:46 +0200 (CEST)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 083C388A2E
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 12:25:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7977788A7B
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 12:25:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPU5p129913;
- Mon, 26 Aug 2024 05:25:30 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPW68129922;
+ Mon, 26 Aug 2024 05:25:32 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1724667930;
- bh=kJHAhW/az0+CwPh7y/dJ2g/LfT0pWai17qFwZlubHy0=;
+ s=ti-com-17Q1; t=1724667932;
+ bh=8NRrXb8lF1LGPvqnC6CcZm0QFEfvuX3W4pFpZSgqCII=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=bzfRsX/v/9Am/SgpibITWC7TpL9xLgR0kZGogo2p+1W46kRQm9+VnOYRjKY5ws7T6
- aVCTsot9NG914GH3zsYqYvN9xCUhMr7ZMWIWv5c4Tyt4/zO/te97nv9XP17Js+dd5L
- 4FFeEzLFBzF9GissSGzH7QZd8nps9ijAISbl052Y=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47QAPUpx015101
+ b=K5chRS5Hluqq24w8+qys52o5/FogP5TigdIJZ1v+Fq/inBd+uhsEjB3RlsMUXusjv
+ vYLq2BvMvbOARIdagz1pAJD9yIvk1J+/TRWa3e9OIuunAmt1qiui1M9fncxYfQRphm
+ o5lTktmGYO+2e00qBwUrZskE4/nVili6LVMj4i5s=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47QAPWqP084142
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 26 Aug 2024 05:25:30 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 26 Aug 2024 05:25:32 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 26
- Aug 2024 05:25:30 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2024 05:25:31 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 26 Aug 2024 05:25:30 -0500
+ Frontend Transport; Mon, 26 Aug 2024 05:25:31 -0500
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPTT6040605;
- Mon, 26 Aug 2024 05:25:30 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPU2k040611;
+ Mon, 26 Aug 2024 05:25:31 -0500
 From: Chintan Vankar <c-vankar@ti.com>
 To: Michal Simek <michal.simek@amd.com>, Vignesh Raghavendra
  <vigneshr@ti.com>, Dhruva Gole <d-gole@ti.com>, Neha Malcom Francis
@@ -68,10 +68,10 @@ To: Michal Simek <michal.simek@amd.com>, Vignesh Raghavendra
  <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>, Sumit Garg
  <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH v6 05/11] soc: ti: k3-navss-ringacc: Fix reconfiguration of
- qmode API
-Date: Mon, 26 Aug 2024 15:55:09 +0530
-Message-ID: <20240826102515.2774296-6-c-vankar@ti.com>
+Subject: [PATCH v6 06/11] dma: ti: k3-udma: Add support for native
+ configuration of chan/flow
+Date: Mon, 26 Aug 2024 15:55:10 +0530
+Message-ID: <20240826102515.2774296-7-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240826102515.2774296-1-c-vankar@ti.com>
 References: <20240826102515.2774296-1-c-vankar@ti.com>
@@ -95,31 +95,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Function "k3_ringacc_ring_reconfig_qmode_raw()" should reset qmode to
-requested value and should not update other fields in ring configuration
-register.
+From: Kishon Vijay Abraham I <kishon@ti.com>
 
+In absence of Device Manager (DM) services such as at R5 SPL stage,
+driver will have to natively setup TCHAN/RCHAN/RFLOW cfg registers.
+Existing UDMA driver performed the above mentioned configuration
+for UDMA. Add similar configuration for PKTDMA here.
+
+Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
+Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 ---
 
-This patch is newely added in this series.
+Link to v5:
+https://lore.kernel.org/r/20240813105400.4054657-6-c-vankar@ti.com/
 
- drivers/soc/ti/k3-navss-ringacc-u-boot.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes from v5 to v6:
+- Added Reviewed-by tag from Alexander Sverdlin.
 
-diff --git a/drivers/soc/ti/k3-navss-ringacc-u-boot.c b/drivers/soc/ti/k3-navss-ringacc-u-boot.c
-index 2799f214c77..8227d8bc3e3 100644
---- a/drivers/soc/ti/k3-navss-ringacc-u-boot.c
-+++ b/drivers/soc/ti/k3-navss-ringacc-u-boot.c
-@@ -42,7 +42,7 @@ static void k3_ringacc_ring_reconfig_qmode_raw(struct k3_nav_ring *ring, enum k3
- 	u32 val;
+ drivers/dma/ti/k3-udma.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
+index b7e674f2186..e23d09e6b81 100644
+--- a/drivers/dma/ti/k3-udma.c
++++ b/drivers/dma/ti/k3-udma.c
+@@ -2118,6 +2118,9 @@ static int bcdma_tisci_tx_channel_config(struct udma_chan *uc)
+ 	if (ret)
+ 		dev_err(ud->dev, "tchan%d cfg failed %d\n", tchan->id, ret);
  
- 	val = readl(&ring->cfg->size);
--	val &= KNAV_RINGACC_CFG_RING_SIZE_QMODE_MASK;
-+	val &= ~KNAV_RINGACC_CFG_RING_SIZE_QMODE_MASK;
- 	val |= mode << KNAV_RINGACC_CFG_RING_SIZE_QMODE_SHIFT;
- 	writel(val, &ring->cfg->size);
++	if (IS_ENABLED(CONFIG_K3_DM_FW))
++		udma_alloc_tchan_raw(uc);
++
+ 	return ret;
  }
+ 
+@@ -2166,6 +2169,9 @@ static int pktdma_tisci_rx_channel_config(struct udma_chan *uc)
+ 		dev_err(ud->dev, "flow%d config failed: %d\n", uc->rflow->id,
+ 			ret);
+ 
++	if (IS_ENABLED(CONFIG_K3_DM_FW))
++		udma_alloc_rchan_raw(uc);
++
+ 	return ret;
+ }
+ 
 -- 
 2.34.1
 
