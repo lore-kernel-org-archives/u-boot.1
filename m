@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0B63C5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 06:17:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ED63C5321D
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 06:17:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67E0B88A08;
+	by phobos.denx.de (Postfix) with ESMTP id C10C988A2E;
 	Mon, 26 Aug 2024 08:17:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="Uf3WXPEz";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="QuboRpV3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06AD0889CA; Mon, 26 Aug 2024 08:17:16 +0200 (CEST)
+ id 1C56188A08; Mon, 26 Aug 2024 08:17:16 +0200 (CEST)
 Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B29488846
+ by phobos.denx.de (Postfix) with ESMTPS id 9481B8897E
  for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 08:17:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id F38F8100005;
- Mon, 26 Aug 2024 09:17:11 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru F38F8100005
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 2AD7E100006;
+ Mon, 26 Aug 2024 09:17:12 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 2AD7E100006
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1724653031;
- bh=dn3mYdQz9MZLgQ/01yQmK1zVAN4QGAKbGX5MMJw5v9I=;
+ s=mail; t=1724653032;
+ bh=1ZgOD44RrLiewpGqSsIvzySZ9YhmmbSHGi8ygd60HyM=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=Uf3WXPEzR3scMW5f2W9ZbYQ04OXS+kyIHYPGEscaFHG/yQfIG4J0WXO4ftegDKKFu
- Y/3UcJhhn8i4q1poDaQ/znrtDlaUpyrB4q7k+nwSP/HwLbceJm3vyGNI5aXtdF85Wk
- 0T6ZNCs0Suavhlz8PlSuy3tBVOWrLNqKBjFANj/p1qpTSWNvZOFkmBh2w8NwBuiD2+
- kMir56kFdRr1TYJJzj7bClY52/DcUl1bXCrSUoO31Dy3lM3YEacKcacsJfhpI7o/zI
- +AM4u5/T9ZWcve5ubRtAiRo9o7Onf4bsJ6kpVZ5yUZLksiP7czkKFQtxKjoUIoBdrb
- ht7/Z/DMUY4hg==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
+ b=QuboRpV3shx6zQgCiK7QVWAp0a/9lPMKA9HPCwxy4p9zStu/Kvsd1Aq9p6wONNMlv
+ S8qaOG7qQoGhPv0GlVJ21CalQPVp8fHO7cEDbhS1PXEx00UkBFDOh2WUos65NRHuMM
+ AqlXB124RTBSVeQXK+ys0wH+u6V8Pp3zi2YeLVFP0xb1SSRZ5NSmakVjXuicOv4ZOG
+ LCCooVFmofAYcj8V4fQAof7AXdcqz0ozSfkdH+Hkk7uMFXlkWPkaWGPgetoM6FhVqZ
+ 50VeV8u3KTWBshe1x5hFiXHDprBShvRda1YgSMRebFDPJCKk7gfK8i2tfqLZuB7zrN
+ 7rhe5GbvIf6rA==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
+ [172.16.192.103])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Mon, 26 Aug 2024 09:17:11 +0300 (MSK)
+ Mon, 26 Aug 2024 09:17:12 +0300 (MSK)
 From: Arseniy Krasnov <avkrasnov@salutedevices.com>
 To: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Michael Trimarchi
  <michael@amarulasolutions.com>, Neil Armstrong <neil.armstrong@linaro.org>,
@@ -52,10 +52,10 @@ To: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Michael Trimarchi
  Sean Anderson <seanga2@gmail.com>
 CC: <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>,
  <kernel@sberdevices.ru>, <oxffffaa@gmail.com>, <avkrasnov@salutedevices.com>
-Subject: [PATCH v2 2/3] mtd: rawnand: meson: refactor use of
- 'meson_nfc_cmd_access()'
-Date: Mon, 26 Aug 2024 09:04:10 +0300
-Message-ID: <20240826060411.3532105-3-avkrasnov@salutedevices.com>
+Subject: [PATCH v2 3/3] mtd: rawnand: meson: read/write access for boot ROM
+ pages
+Date: Mon, 26 Aug 2024 09:04:11 +0300
+Message-ID: <20240826060411.3532105-4-avkrasnov@salutedevices.com>
 X-Mailer: git-send-email 2.35.0
 In-Reply-To: <20240826060411.3532105-1-avkrasnov@salutedevices.com>
 References: <20240826060411.3532105-1-avkrasnov@salutedevices.com>
@@ -102,82 +102,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move call 'meson_nfc_cmd_seed()' and check for 'NAND_NEED_SCRAMBLING'
-to 'meson_nfc_cmd_access()', thus removing code duplication.
+Boot ROM on Meson needs some pages to be read/written in a special mode:
+384 byte ECC mode (so called "short" by Amlogic) and with scrambling
+enabled. Such pages are located on the chip in the following way (for
+example):
+
+[ p0 ][ p1 ][ p2 ][ p3 ][ p4 ][ p5 ][ p6 ][ p7 ] ... [ pN ]
+  ^           ^           ^           ^
+
+pX is page number "X". "^" means "special" page used by boot ROM - e.g.
+every 2nd page in the range of [0, 7]. Step (2 here) and last page in
+range is read from the device tree.
 
 Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
 ---
- drivers/mtd/nand/raw/meson_nand.c | 30 ++++++++++++------------------
- 1 file changed, 12 insertions(+), 18 deletions(-)
+ drivers/mtd/nand/raw/meson_nand.c | 56 +++++++++++++++++++++++++------
+ 1 file changed, 46 insertions(+), 10 deletions(-)
 
 diff --git a/drivers/mtd/nand/raw/meson_nand.c b/drivers/mtd/nand/raw/meson_nand.c
-index 5d411c4594..19f005202b 100644
+index 19f005202b..54ea035d8d 100644
 --- a/drivers/mtd/nand/raw/meson_nand.c
 +++ b/drivers/mtd/nand/raw/meson_nand.c
-@@ -229,14 +229,19 @@ static void meson_nfc_cmd_seed(const struct meson_nfc *nfc, u32 seed)
+@@ -40,6 +40,7 @@
+ #define NFC_CMD_RB			BIT(20)
+ #define NFC_CMD_SCRAMBLER_ENABLE	BIT(19)
+ #define NFC_CMD_SCRAMBLER_DISABLE	0
++#define NFC_CMD_SHORTMODE_ENABLE	1
+ #define NFC_CMD_SHORTMODE_DISABLE	0
+ #define NFC_CMD_RB_INT			BIT(14)
+ #define NFC_CMD_RB_INT_NO_PIN		((0xb << 10) | BIT(18) | BIT(16))
+@@ -78,6 +79,8 @@
+ 
+ #define DMA_DIR(dir)		((dir) ? NFC_CMD_N2M : NFC_CMD_M2N)
+ 
++#define NFC_SHORT_MODE_ECC_SZ	384
++
+ #define ECC_CHECK_RETURN_FF	-1
+ 
+ #define NAND_CE0		(0xe << 10)
+@@ -141,6 +144,8 @@
+ struct meson_nfc_nand_chip {
+ 	struct list_head node;
+ 	struct nand_chip nand;
++	u32 boot_pages;
++	u32 boot_page_step;
+ 
+ 	u32 bch_mode;
+ 	u8 *data_buf;
+@@ -229,33 +234,46 @@ static void meson_nfc_cmd_seed(const struct meson_nfc *nfc, u32 seed)
  	       nfc->reg_base + NFC_REG_CMD);
  }
  
--static void meson_nfc_cmd_access(struct nand_chip *nand, bool raw, bool dir,
--				 int scrambler)
-+static void meson_nfc_cmd_access(struct nand_chip *nand, bool raw, bool dir, int page)
++static int meson_nfc_is_boot_page(struct nand_chip *nand, int page)
++{
++	const struct meson_nfc_nand_chip *meson_chip = to_meson_nand(nand);
++
++	return (nand->options & NAND_IS_BOOT_MEDIUM) &&
++	       !(page % meson_chip->boot_page_step) &&
++	       (page < meson_chip->boot_pages);
++}
++
+ static void meson_nfc_cmd_access(struct nand_chip *nand, bool raw, bool dir, int page)
  {
++	const struct meson_nfc_nand_chip *meson_chip = to_meson_nand(nand);
  	struct mtd_info *mtd = nand_to_mtd(nand);
  	const struct meson_nfc *nfc = nand_get_controller_data(mtd_to_nand(mtd));
- 	const struct meson_nfc_nand_chip *meson_chip = to_meson_nand(nand);
- 	u32 bch = meson_chip->bch_mode, cmd;
+-	const struct meson_nfc_nand_chip *meson_chip = to_meson_nand(nand);
+-	u32 bch = meson_chip->bch_mode, cmd;
  	int len = mtd->writesize, pagesize, pages;
-+	int scrambler;
-+
-+	if (nand->options & NAND_NEED_SCRAMBLING)
+ 	int scrambler;
++	u32 cmd;
+ 
+ 	if (nand->options & NAND_NEED_SCRAMBLING)
+ 		scrambler = NFC_CMD_SCRAMBLER_ENABLE;
+ 	else
+ 		scrambler = NFC_CMD_SCRAMBLER_DISABLE;
+ 
+-	pagesize = nand->ecc.size;
+-
+ 	if (raw) {
+ 		len = mtd->writesize + mtd->oobsize;
+ 		cmd = len | scrambler | DMA_DIR(dir);
+-		writel(cmd, nfc->reg_base + NFC_REG_CMD);
+-		return;
+-	}
++	} else if (meson_nfc_is_boot_page(nand, page)) {
++		pagesize = NFC_SHORT_MODE_ECC_SZ >> 3;
++		pages = mtd->writesize / 512;
+ 
+-	pages = len / nand->ecc.size;
 +		scrambler = NFC_CMD_SCRAMBLER_ENABLE;
-+	else
-+		scrambler = NFC_CMD_SCRAMBLER_DISABLE;
++		cmd = CMDRWGEN(DMA_DIR(dir), scrambler, NFC_ECC_BCH8_1K,
++			       NFC_CMD_SHORTMODE_ENABLE, pagesize, pages);
++	} else {
++		pagesize = nand->ecc.size >> 3;
++		pages = len / nand->ecc.size;
  
- 	pagesize = nand->ecc.size;
+-	cmd = CMDRWGEN(DMA_DIR(dir), scrambler, bch,
+-		       NFC_CMD_SHORTMODE_DISABLE, pagesize, pages);
++		cmd = CMDRWGEN(DMA_DIR(dir), scrambler, meson_chip->bch_mode,
++			       NFC_CMD_SHORTMODE_DISABLE, pagesize, pages);
++	}
  
-@@ -252,6 +257,9 @@ static void meson_nfc_cmd_access(struct nand_chip *nand, bool raw, bool dir,
- 	cmd = CMDRWGEN(DMA_DIR(dir), scrambler, bch,
- 		       NFC_CMD_SHORTMODE_DISABLE, pagesize, pages);
- 
-+	if (scrambler == NFC_CMD_SCRAMBLER_ENABLE)
-+		meson_nfc_cmd_seed(nfc, page);
-+
- 	writel(cmd, nfc->reg_base + NFC_REG_CMD);
- }
- 
-@@ -566,14 +574,7 @@ static int meson_nfc_write_page_sub(struct nand_chip *nand,
- 		return ret;
+ 	if (scrambler == NFC_CMD_SCRAMBLER_ENABLE)
+ 		meson_nfc_cmd_seed(nfc, page);
+@@ -1132,6 +1150,24 @@ static int meson_nfc_nand_chip_init(struct udevice *dev, struct meson_nfc *nfc,
+ 		goto err_chip_buf_free;
  	}
  
--	if (nand->options & NAND_NEED_SCRAMBLING) {
--		meson_nfc_cmd_seed(nfc, page);
--		meson_nfc_cmd_access(nand, raw, DIRWRITE,
--				     NFC_CMD_SCRAMBLER_ENABLE);
--	} else {
--		meson_nfc_cmd_access(nand, raw, DIRWRITE,
--				     NFC_CMD_SCRAMBLER_DISABLE);
--	}
-+	meson_nfc_cmd_access(nand, raw, DIRWRITE, page);
- 
- 	cmd = nfc->param.chip_select | NFC_CMD_CLE | NAND_CMD_PAGEPROG;
- 	writel(cmd, nfc->reg_base + NFC_REG_CMD);
-@@ -644,14 +645,7 @@ static int meson_nfc_read_page_sub(struct nand_chip *nand,
- 	if (ret)
- 		return ret;
- 
--	if (nand->options & NAND_NEED_SCRAMBLING) {
--		meson_nfc_cmd_seed(nfc, page);
--		meson_nfc_cmd_access(nand, raw, DIRREAD,
--				     NFC_CMD_SCRAMBLER_ENABLE);
--	} else {
--		meson_nfc_cmd_access(nand, raw, DIRREAD,
--				     NFC_CMD_SCRAMBLER_DISABLE);
--	}
-+	meson_nfc_cmd_access(nand, raw, DIRREAD, page);
- 
- 	meson_nfc_wait_dma_finish(nfc);
- 	meson_nfc_check_ecc_pages_valid(nfc, nand, raw);
++	if (nand->options & NAND_IS_BOOT_MEDIUM) {
++		ret = ofnode_read_u32(node, "amlogic,boot-pages",
++				      &meson_chip->boot_pages);
++		if (ret) {
++			dev_err(dev, "could not retrieve 'amlogic,boot-pages' property: %d",
++				ret);
++			goto err_chip_buf_free;
++		}
++
++		ret = ofnode_read_u32(node, "amlogic,boot-page-step",
++				      &meson_chip->boot_page_step);
++		if (ret) {
++			dev_err(dev, "could not retrieve 'amlogic,boot-page-step' property: %d",
++				ret);
++			goto err_chip_buf_free;
++		}
++	}
++
+ 	ret = nand_register(0, mtd);
+ 	if (ret) {
+ 		dev_err(dev, "'nand_register()' failed: %d\n", ret);
 -- 
 2.30.1
 
