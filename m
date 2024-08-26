@@ -4,209 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30928C5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 12:32:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BD49C5321D
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 12:33:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72B95884C3;
-	Mon, 26 Aug 2024 14:32:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id E00EA8831F;
+	Mon, 26 Aug 2024 14:33:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="Tabkmh1s";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="OfeBpsOZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F2E9884C3; Mon, 26 Aug 2024 14:32:48 +0200 (CEST)
-Received: from EUR02-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur02on2062a.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2608::62a])
+ id 203B888481; Mon, 26 Aug 2024 14:33:32 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1010188297
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 14:32:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8440488297
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 14:33:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jan.kiszka@siemens.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SZb6h4rMYxF9EblBFkku6Y0EUDCajAqGuWw9NzilVAIdNF+RdmiOqE/vhaHBq9kpA1D4SsN4Dgd6ntLukq6ZvaoeGNHT27T257OuKD0FiF0DcxtgYUKJ9PqkvstmcgRO7SQshZ15S0xhVWE48BX8tQaZNaUyQJ3RfXDzjexhPTX1qSC+GPG55nvtg9wjsIRDd2p9Y4rhsc6HNpWUwHIbJjxQZHaCiqquYXjF5fQtBF63DIKbdGRJ7kCY3L5x24Xcf6vG1pRzqUur7Akmt1krJzDbtoom3PGJWRuDI5Velq/WQw4sI0A13vANB/C7Sm5j7Dp4eBxmXb2vAMTBDOhZ8A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0KVXgAwNOr971k9i/Rz5MDqbD3fGoiAsjtpjhHIQfFc=;
- b=GZ7FsMQOBnDWrOitgIhXh2cWEekYE7yMdaIM6ym0AEH6Qp7Y8I+sszY8vnwv2olL9NJQg3rVc1oVJNa7rLZ2mj5Qx8Yn4AxL3USs8ovoIzZcpmp2zL99hheDNAYg6TNBt+zVRgllQEzmVObGOPdS68q33PX6DlWCWUSloNPzN/owte/55cJi6Vu+87pen0dhmjGpTNGEww5i4OsnLG4hUhbtt9BjZp4WfEIMXQhPMBwS/OwO8P8souLv27dKNnjK6NuX/L6tx+BYsSD1jEdm5ySddNugG7eswxUSSE+uXsNI5XkvyL8QZChitON0gZ34sMCmMY/FXqYRkOsrD5au5w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0KVXgAwNOr971k9i/Rz5MDqbD3fGoiAsjtpjhHIQfFc=;
- b=Tabkmh1siLcseGUivPdjYNZy/otKvKUwgkDFYiDkplzBbiue2ubTqJETeNXnM5awTXPuMoVEIIuHGAbYFRPnHV1zsDLW+WvtEk78qiiilSNXnis0cbdWhxfALm5VfR+nh5qtkNcq8EIt5BCegscFbT1lGMyT7SsaxuN5+ApI6IxagAe2gfplErT+ifjzIwXRuVN15fs8HJl1jk3DPLDoICXmScM3UiMO98WZYRNjHVhxqGugLTVThv+V46SyCUhqWco3d/hHE3Cd5gKBTwlZZvYfYsFx1G1jr7jZiPaHSgM/qc0e54Dcb7Y2FITQ15oGbUY7q91Jf8Qz7lFvnRmOFQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:588::19)
- by GV1PR10MB8845.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:1d7::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7897.24; Mon, 26 Aug
- 2024 12:32:44 +0000
-Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::8fe1:7e71:cf4a:7408]) by AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::8fe1:7e71:cf4a:7408%4]) with mapi id 15.20.7897.021; Mon, 26 Aug 2024
- 12:32:44 +0000
-Message-ID: <87a9fe3e-5d9a-41e8-a8b2-4368cb727a65@siemens.com>
-Date: Mon, 26 Aug 2024 14:32:42 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: OF_UPSTREAM vs. additional dtbs
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Nishanth Menon <nm@ti.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-References: <7765273f-7f36-41e4-a604-1901e4fbec62@siemens.com>
- <20240813125245.ezlu6me3ljwx6dkj@margarine>
- <89f8e976-e831-4035-8cd0-ab6284846d0a@siemens.com>
- <4ec5108f-b7a4-47db-baa4-edee532c58af@siemens.com>
- <CAFA6WYMQustcwo4Es7iJQj5Lva6UiYJ-j7WgSzMjOvEHemeDcQ@mail.gmail.com>
- <4576b818-9732-45ff-a4ab-b98fc0ecf4c9@siemens.com>
- <CAFA6WYNXgJkCX9-aoL5FGchAHGdV+ikTt4+pTJP-jZ_UJG8E6Q@mail.gmail.com>
-From: Jan Kiszka <jan.kiszka@siemens.com>
-Content-Language: en-US
-Autocrypt: addr=jan.kiszka@siemens.com; keydata=
- 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
-In-Reply-To: <CAFA6WYNXgJkCX9-aoL5FGchAHGdV+ikTt4+pTJP-jZ_UJG8E6Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0107.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:9c::10) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:588::19)
+ spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id C6403100009;
+ Mon, 26 Aug 2024 15:33:28 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru C6403100009
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1724675608;
+ bh=Ydm1WB1xgNCDLvn7DGbP4Mj9EyUVvzYyiTlNe/DLzkw=;
+ h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
+ b=OfeBpsOZFxZPl16RIbxgnS824a/XMhc0rd00bAFB9azLh3EzKWqYV4ILM1rx+N2SY
+ ObkkJPK7DpoNjv/dWd9gk36NjCEhTM925AA09MAtnTwydXOPKWH4fPLRIHzDoZnS0I
+ 7QlulEBJ7PbAL3x63gAehrqxfN2Fd/VAl85NzVmTt1uZWRGk31GLZys35bUr9bjR0+
+ EB9GOn7+lU/mF8A/cWFBZZARlop5rXc3s4O2eBHBwc9Ekjs40+G0XU0tX0E/fdb+fV
+ i7nV8QpZIZ2mWWrDZ9JtHFv259/Tpd+KuiJPDZNttFo3qjX8BxbwFO9OIkzVvHEnQI
+ GkNy24oiQb4vA==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
+ [172.16.192.103])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Mon, 26 Aug 2024 15:33:28 +0300 (MSK)
+Message-ID: <238509bc-1174-c042-7493-4c579fb3c1a0@salutedevices.com>
+Date: Mon, 26 Aug 2024 15:20:40 +0300
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|GV1PR10MB8845:EE_
-X-MS-Office365-Filtering-Correlation-Id: d89bf18c-9606-4bfb-1944-08dcc5cb2f54
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?OXJPTXg5N3Ftb1NHZ29kQUtDUzdrMHU5NElGK050R3ZEZFFwNVVrNEV4OFov?=
- =?utf-8?B?Nm0xUXJkdFJqbCt1MjNGNC84NEhkTkdveGdqT2NOdkY3VFlGZFZXYmQ3NnBJ?=
- =?utf-8?B?UXUzaHpLTSs5QWlYMy9JVEZwcXRYSDBFK2hxWUthL21wRU42UWk1d1pGYUNY?=
- =?utf-8?B?TEIrSWhtOFJqY2FSaWltTG53Y2x3VHhpTllXakVPd3JlY21rajB4ejNZUzdv?=
- =?utf-8?B?L3Y1M0pVOXhrOGt4TWVXWGdCcHJQQ0kzMkdNWDd2eE1kWmpPekN4OTBMOFVM?=
- =?utf-8?B?WEZlUVRuN25FNisrK0M0bkIrR1NaQVdYNlJCWVE5UXFUMW43dEp4a3hZQld5?=
- =?utf-8?B?RHJlQXByelBjQmp3eUt1Vk02aVNKNkJLRWZHeE5IVmc0c0ZZYUlqS09DMGNK?=
- =?utf-8?B?U1JrdjF4UWdjdnV2SzlGNG1sUENVdEl1WFVoZVk0WXlqdTFuVUdpbWpVUnVU?=
- =?utf-8?B?YTlRY0RCaHlDUzhzaHFYQTBGWFRJdHgwdVBxTEhuODR0OEdoWXBZa1RweUd1?=
- =?utf-8?B?SW8wZ0U4SUxOd1VTb1V4cW1kOVF4K25jeFIyR0tBdWdOclJ6cm9nQ3p0VlI1?=
- =?utf-8?B?VFRWNXV4bXVPSTF0aUhqZEdvbTZDcVM2ZWg2VFBUeldISFo1ejg4NTBmeVRF?=
- =?utf-8?B?Uy9EUHNFRDZMMU9Sa2k5NjJQMk5yTnlpWmkyR28wM0toNmxPdndrYVJmSTRt?=
- =?utf-8?B?aGFmODlpbEZBWko0a1ZHaklYUXY5aW5NTEI5OHNNSmhLVjM1TjBERmwzRDBa?=
- =?utf-8?B?OWVoM2g0bTRQZFphdVZKNHQ3TkNoWEhpUzlQMmNWUWs5OUZrV0NzaU8zdSt6?=
- =?utf-8?B?L1JBejdqekU5ZG5NWUhBR01kbHdJeTlJZXJLdXRucGZRejFLSU82N1EyM1NO?=
- =?utf-8?B?MWxRU0RCMjhUUStYWmNTVVdTdHN2Y282djRLUncrVkVaU3ZYTkhlQUwxd3Yw?=
- =?utf-8?B?RGxUbzhkb3VEWU84QzhXckFrS0tDbUJTWGpkVzZGNjhYREEzSHg3QStpN3ZB?=
- =?utf-8?B?TkZ2NTB1S1ExOWlzV0tjbzdyWjl6U0k1TXlwbkpUbzZvdWFQRGFtZkMzN1ZF?=
- =?utf-8?B?eVJEbyt3WXZITXZxZkFtZitjcHlLRnB4VWphaXlrbFNmaVJLd25xZkU3MUhh?=
- =?utf-8?B?RUE5cHh1NXU3clJVTXNFOENtMG8ySmhjZ2c2b3JYK01kUlNJMUkvMEdJN1Bz?=
- =?utf-8?B?aGdKUEtHK0Q1dkt5U0hwYjA1WVB2eHk3NHh2dldod2M1eG12b0xhZUlQUzBz?=
- =?utf-8?B?ZnMzTi84ZEJyMWJPMTNNVm9nQ29XdkNBZythbGlXUUkrVUFrUjZtdTI0SUNi?=
- =?utf-8?B?Ty9GM001VDRaYUwzUUQ0L3JYUHpvaThVTTNNMkpPTVhsWWNZZzJMNmdBL0s2?=
- =?utf-8?B?VC9peW04ZjlwOFRnbEhtY3JpODNSM1NONWVhdjBDaGJ2Rk43Ym52TXpDdHUr?=
- =?utf-8?B?Q2tiazdEeDIzcnZGTHJselRPNUY4L01sTHJBS0NmaXhLdC9ZQXhDTlc0OXRX?=
- =?utf-8?B?WlRZNkRWbjRad1VFTkp2UFFHcEdQWnVTVzdxWVpRWkM2Z1JGOXpEcXFOd2Ur?=
- =?utf-8?B?SG8vcEg0VFdLbmFRUXdIOWxwdUx0V2hqSjg2Y0FZUGVIOWVpbDBsekRndTY4?=
- =?utf-8?B?cmpTZm5ZaTJqTHJIYjJKczl1amRMTzRNM2ZKeng5ZGlZY1pmVW5xYml4dDB6?=
- =?utf-8?B?c2s2bElzcVp5NDlGTWpCWFBPM2F5WjM3Z2JIRy9ibXpqRVZnS2o3MGNtSU0r?=
- =?utf-8?B?QXdLeTUvYWI3RVhtcWlCczFRWjM0cW1mTTBFN25CUmZXZ1RKK3ZrU0Fhc204?=
- =?utf-8?B?bzVQRjh3a0FzVTRlS28zUT09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dVNGaUpXZ2pxOU0rU3RIMHRBaUNibm1TbkJPYU12dThZandkSHlOR0d4WWlT?=
- =?utf-8?B?QVE3RFdxWlhxRi9hMmxoWDZ6NENvY20xUk1PdDVQUUtkbkpMNXdwTjBmN1hn?=
- =?utf-8?B?U0M5NTFJSEVUK0VsT3dvb28vQS9nUVAwa21jdCtBMFAwQXk2QUFlZUZBbzR5?=
- =?utf-8?B?SEQxU3J4NThOYWkxUEE5Y2FzbXRpZU0xRitPL1BvbDBWeVNzN01aZnQwVWpu?=
- =?utf-8?B?MTFYcmJyS0c1SHltWGxPYUhpWTJUeFc1dURidUFCRHNhekFmb1VWR0orSEow?=
- =?utf-8?B?djZhV3p5cjVDTW9yTEJYeFlHTnFzVytIL0ViWTR5ZFFmRTNQR3Q0bjhsQ25F?=
- =?utf-8?B?RXlyN1JYTFA5aXVYcTdQcFcvNENqL2ZDSTJ3dHB3Tm5OOSt0MVdtQnpIUnc0?=
- =?utf-8?B?V245MGYyRFcwMUZheHVIeGljMDBid0VXS3FSOG11aW5BZk5TaW5nVmdPM29w?=
- =?utf-8?B?d0VJVXJhSnZ4Sm5wNGxSSCtzalZjUW01RUR0WXUwRUd0S2prSzY1b0k3ci9m?=
- =?utf-8?B?RUh1L1NmOUJ1MW9hblAvSityd21JbWRuR0Z2NFZaRURvbzFPMnJ1T2pOTmpm?=
- =?utf-8?B?S3dKb2dLckdRL051bEw4YitpZzRTY0hnOXpSRExuVHZDcVBOQk15Tk1QUzRV?=
- =?utf-8?B?M0xoeCtDdVpSbFpZa0UyT2c3U0tPcjA4VWl6YjU0Wjh5djYvbllaKzJ1TUhx?=
- =?utf-8?B?UmlFYXpvWlVuREVlTjdRSjdRcUlXanVRMVJPZ2pHRG1oK2lUeFNid3J5aTVO?=
- =?utf-8?B?QXVMNm1Qdis4eU5jRUpTV2RucG1WektaR2U1YjFpdExOS1JtRHMvVDdRdFFF?=
- =?utf-8?B?emt6MjdvVTN6Qm5INWdRV1lOWDVBQUZmNitlSW1kem5nWWtEcWpuZFkrMTdF?=
- =?utf-8?B?Qk9LN0Z3d1pITTlKSTJNaW1uZEZYSnRNbWtSeXpKdDhrMFN2b1VlRkVHazIy?=
- =?utf-8?B?bVRSY2pxRWN0cnMvMzZyNUlRaFRSNjYvN3Rla3lMaWtLWDZZaVB2eFBWSGo3?=
- =?utf-8?B?N013ckxFODhqNmUrdi9WY211OFFmeHNVU0Job0hXOHVmelIyVzZPdUlEZUNu?=
- =?utf-8?B?Q0l5bkN0ZjhDVkcrN1gzT2VxVjlnTTJkd1NZWmp5QUVKT0dpVDNEWXVNSzRz?=
- =?utf-8?B?MHM5NkQxS2p5WWd4Mkl6NDNhaDNzYVFiR21wU21veWdoeDRtczllenQ2WTlH?=
- =?utf-8?B?Zk1EY3oySEE4a25lV0lwRG1kT29OQTQxT01EUnJuaGxnbjlvTGk5OTJpUHRL?=
- =?utf-8?B?U2czVTNGNFp6YUpXWkRaYXJvYVZaTEZzWTJvcVc0bnJ5d211WU91eEFGU1gz?=
- =?utf-8?B?Z3ZLazNtNVYyTzRLRGZtR3hwTjU4cCt3OXUrK25iNFppRW9kYXhkc2hzenpi?=
- =?utf-8?B?dC9MRy9waHVUdTlCY1FBWnFmaHF4U3h4SVptS1ZrRUpvMlZIMVJVd2U2aHBh?=
- =?utf-8?B?a2tCaFlvNnhkRWRyUkNaSlVkL1dQVHNlemRtMzJCMGxJMkdpZ1hYd2tndkZS?=
- =?utf-8?B?RitubU5RUXVsVEFHZjQ0RFZxYjdSRnlhSEpsT2xLVi8wSk5zTWc0MkF4OTlC?=
- =?utf-8?B?alRHcFRCWTlNQ1dudER4WENEUjBSTlR0ME8vNnFoVFZGM0JuN2ZxN1VzVlpa?=
- =?utf-8?B?dFZCcmd3WlNIUUZ3TzROdUk5NXhKRm5mNmwycEVqTHI3SFdpZkxoQ09xZDI5?=
- =?utf-8?B?bkpna2xCbTVBWHE0eFNqWHg4Rkh6T1QvbWgvVTFGZTFDOTB4T0tZcFlWSzg0?=
- =?utf-8?B?aE9HeTQxbllLWHJjNUxoZjdTMjQvc1ZjdFpjS01hYSsycDAvbVJQa1FWTUZx?=
- =?utf-8?B?elhVcXdZYVU5dFYzdmFCWDBWWHpOQzdxcmhkQjROQjNobjlRSDhYRXp3OGZP?=
- =?utf-8?B?bGZGQ1daOHhQVFI2dXNxclVOemM5dnZOeGZyNGV1QThtQ09WZmFiV3FEVVhn?=
- =?utf-8?B?VWFFOUxBeC9IelJZS29CRzVBaU5idUFEeEJQdlBWVVBuWUVXVG9peXBNN3cz?=
- =?utf-8?B?VTFYdXRKU24wb0swZGIxNnl4RkV6R3JkSHExWlBIS3hFL2ZPZk5keWsvTUZp?=
- =?utf-8?B?Q1JrNWVBVFhqREtTZEhxUzJuUFNEcTFHMjNIbm1IbjRISHVDVzh1ZzBXSnM1?=
- =?utf-8?B?SjQwVnZ0ckJ5ditQbUc1akMwYmxmZ0Q2Z2tQMmpCZnd4ajZQVGJuMmZvWFNM?=
- =?utf-8?B?cUE9PQ==?=
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d89bf18c-9606-4bfb-1944-08dcc5cb2f54
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2024 12:32:44.3800 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 4rPAdRlWR8oqeEB3+LIauEdKFjvD6IRJ8I6JbdX+lVqqesvAuCOisYjEI+MSii1KnU4E48S1fCaA2F7i35TxVQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB8845
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.1
+Subject: Re: [PATCH v2 3/3] mtd: rawnand: meson: read/write access for boot
+ ROM pages
+Content-Language: en-US
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+CC: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Miquel Raynal <miquel.raynal@bootlin.com>, "Tom
+ Rini" <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>,
+ <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>, <kernel@sberdevices.ru>,
+ <oxffffaa@gmail.com>
+References: <20240826060411.3532105-1-avkrasnov@salutedevices.com>
+ <20240826060411.3532105-4-avkrasnov@salutedevices.com>
+ <CAOf5uw=UuB1YandpEziF1gp3Amh1J9fk15YCM7J4FZW6zoq7GA@mail.gmail.com>
+ <6f361799-2cd2-9573-cb53-82b22ca56c06@salutedevices.com>
+ <CAOf5uw=2T7VLdKA+45LedRDvPN29Sv73C8P1NEeB+BRKA=exQg@mail.gmail.com>
+From: Arseniy Krasnov <avkrasnov@salutedevices.com>
+In-Reply-To: <CAOf5uw=2T7VLdKA+45LedRDvPN29Sv73C8P1NEeB+BRKA=exQg@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [172.28.225.232]
+X-ClientProxiedBy: p-i-exch-a-m2.sberdevices.ru (172.24.196.120) To
+ p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 187315 [Aug 26 2024]
+X-KSMG-AntiSpam-Version: 6.1.0.4
+X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 27 0.3.27
+ 71302da218a62dcd84ac43314e19b5cc6b38e0b6,
+ {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
+ smtp.sberdevices.ru:7.1.1,5.0.1; salutedevices.com:7.1.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/08/26 08:14:00 #26435425
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -223,120 +108,195 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 26.08.24 09:10, Sumit Garg wrote:
-> On Mon, 26 Aug 2024 at 12:19, Jan Kiszka <jan.kiszka@siemens.com> wrote:
+
+
+On 26.08.2024 13:42, Michael Nazzareno Trimarchi wrote:
+> Hi
+> 
+> On Mon, Aug 26, 2024 at 11:00 AM Arseniy Krasnov
+> <avkrasnov@salutedevices.com> wrote:
 >>
->> On 26.08.24 08:44, Sumit Garg wrote:
->>> Hi,
->>>
->>> On Wed, 14 Aug 2024 at 22:14, Jan Kiszka <jan.kiszka@siemens.com> wrote:
->>>>
->>>> On 14.08.24 11:41, Jan Kiszka wrote:
->>>>> On 13.08.24 14:52, Nishanth Menon wrote:
->>>>>> On 11:16-20240813, Jan Kiszka wrote:
->>>>>>> Hi all,
->>>>>>>
->>>>>>> I'm trying to migrate the TI AM65x IOT2050 boards to OF_UPSTREAM but I'm
->>>>>>> facing issues because I need to still build the u-boot-only overlays. It
->>>>>>> is also a bit weird (but works) having to specify
->>>>>>>
->>>>>>> CONFIG_SPL_OF_LIST="../../../../arch/arm/dts/k3-am65-iot2050-spl"
->>>>>>>
->>>>>
->>>>> Actually, this does NOT work: I just had a long morning debugging SPL
->>>>> which no longer started because it picked the non-filtered dtb. The
->>>>> filtered one ended up in a folder outside of the u-boot sources because
->>>>> of all those ../ and hard-wiring to dts/upstream.
->>>>>
->>>>>>> for our spl dtb.
->>>>>>>
->>>>>>> Are there means to still build certain dtb[o] files in arch/<arch>/dts?
->>>>>>> I'm a bit lost in the Makefile forest.
->>>>>>>
->>>>>>
->>>>>> Sumit: Any suggestions?
->>>>>>
->>>
->>> Apologies for the delayed reply. I was a bit busy with other high
->>> priority stuff.
->>>
->>>>>
->>>>> I would really like to hear some better proposals than my local
->>>>> workarounds to far. They don't converge although I already patched some
->>>>> core Makefile (overlays are building now).
->>>>>
->>>>
->>>> OK, I side-stepped the spl issue by using one of our variant DTBs for
->>>> spl as well - happens to work.
->>>
->>> That's good to know.
->>>
->>>>
->>>> For the overlays, I need to add
->>>>
->>>> --- a/scripts/Makefile.dts
->>>> +++ b/scripts/Makefile.dts
->>>> @@ -1,5 +1,7 @@
->>>>  # SPDX-License-Identifier: GPL-2.0+
->>>>
->>>> +include $(srctree)/config.mk
->>>> +
->>>>  dtb-y += $(patsubst %,%.dtb,$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $(CONFIG_OF_LIST) $(CONFIG_SPL_OF_LIST)))
->>>>
->>>>  ifeq ($(CONFIG_OF_UPSTREAM_BUILD_VENDOR),y)
->>>>
->>>>
->>>> in order to then be able to do
->>>>
->>>> --- a/board/siemens/iot2050/config.mk
->>>> +++ b/board/siemens/iot2050/config.mk
->>>> @@ -5,4 +5,12 @@
->>>>  # Authors:
->>>>  #   Jan Kiszka <jan.kiszka@siemens.com>
->>>>
->>>> +ifneq ($(CONFIG_SPL_BUILD),y)
->>>> +dtbo-list = \
->>>> +       k3-am6548-iot2050-advanced-m2-bkey-usb3-overlay \
->>>> +       k3-am6548-iot2050-advanced-m2-bkey-ekey-pcie-overlay
->>>> +
->>>> +dtb-y += $(patsubst %,../../../../arch/arm/dts/%.dtbo,$(dtbo-list))
->>>> +endif
->>>> +
->>>>  flash.bin: all
->>>>
->>>>
->>>> Does that make sense?
->>>
->>> A switch to OF_UPSTREAM means that we build all the DT artifacts from
->>> dts/upstream/src/ directory with the only exception that we include
->>> U-Boot specific overrides via *-u-boot.dtsi from arch/<arch>/dts. In
->>> case of overlays, is there any reason for IOT2050 board overlays not
->>> being pushed into Linux kernel repo? AFAIU, overlays are also
->>> describing puggable hardware so they shouldn't be referred to as
->>> "u-boot-only" overlays.
 >>
->> We are using the overlay to massage the DT presented to the OS based on
->> firmware configuration.
+>>
+>> On 26.08.2024 10:16, Michael Nazzareno Trimarchi wrote:
+>>> Hi
+>>>
+>>> On Mon, Aug 26, 2024 at 8:17 AM Arseniy Krasnov
+>>> <avkrasnov@salutedevices.com> wrote:
+>>>>
+>>>> Boot ROM on Meson needs some pages to be read/written in a special mode:
+>>>> 384 byte ECC mode (so called "short" by Amlogic) and with scrambling
+>>>> enabled. Such pages are located on the chip in the following way (for
+>>>> example):
+>>>>
+>>>> [ p0 ][ p1 ][ p2 ][ p3 ][ p4 ][ p5 ][ p6 ][ p7 ] ... [ pN ]
+>>>>   ^           ^           ^           ^
+>>>>
+>>>> pX is page number "X". "^" means "special" page used by boot ROM - e.g.
+>>>> every 2nd page in the range of [0, 7]. Step (2 here) and last page in
+>>>> range is read from the device tree.
+>>>>
+>>>> Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
+>>>> ---
+>>>>  drivers/mtd/nand/raw/meson_nand.c | 56 +++++++++++++++++++++++++------
+>>>>  1 file changed, 46 insertions(+), 10 deletions(-)
+>>>>
+>>>> diff --git a/drivers/mtd/nand/raw/meson_nand.c b/drivers/mtd/nand/raw/meson_nand.c
+>>>> index 19f005202b..54ea035d8d 100644
+>>>> --- a/drivers/mtd/nand/raw/meson_nand.c
+>>>> +++ b/drivers/mtd/nand/raw/meson_nand.c
+>>>> @@ -40,6 +40,7 @@
+>>>>  #define NFC_CMD_RB                     BIT(20)
+>>>>  #define NFC_CMD_SCRAMBLER_ENABLE       BIT(19)
+>>>>  #define NFC_CMD_SCRAMBLER_DISABLE      0
+>>>> +#define NFC_CMD_SHORTMODE_ENABLE       1
+>>>>  #define NFC_CMD_SHORTMODE_DISABLE      0
+>>>>  #define NFC_CMD_RB_INT                 BIT(14)
+>>>>  #define NFC_CMD_RB_INT_NO_PIN          ((0xb << 10) | BIT(18) | BIT(16))
+>>>> @@ -78,6 +79,8 @@
+>>>>
+>>>>  #define DMA_DIR(dir)           ((dir) ? NFC_CMD_N2M : NFC_CMD_M2N)
+>>>>
+>>>> +#define NFC_SHORT_MODE_ECC_SZ  384
+>>>> +
+>>>>  #define ECC_CHECK_RETURN_FF    -1
+>>>>
+>>>>  #define NAND_CE0               (0xe << 10)
+>>>> @@ -141,6 +144,8 @@
+>>>>  struct meson_nfc_nand_chip {
+>>>>         struct list_head node;
+>>>>         struct nand_chip nand;
+>>>> +       u32 boot_pages;
+>>>> +       u32 boot_page_step;
+>>>>
+>>>>         u32 bch_mode;
+>>>>         u8 *data_buf;
+>>>> @@ -229,33 +234,46 @@ static void meson_nfc_cmd_seed(const struct meson_nfc *nfc, u32 seed)
+>>>>                nfc->reg_base + NFC_REG_CMD);
+>>>>  }
+>>>>
+>>>> +static int meson_nfc_is_boot_page(struct nand_chip *nand, int page)
+>>>> +{
+>>>> +       const struct meson_nfc_nand_chip *meson_chip = to_meson_nand(nand);
+>>>> +
+>>>> +       return (nand->options & NAND_IS_BOOT_MEDIUM) &&
+>>>> +              !(page % meson_chip->boot_page_step) &&
+>>>> +              (page < meson_chip->boot_pages);
+>>>> +}
+>>>> +
+>>>>  static void meson_nfc_cmd_access(struct nand_chip *nand, bool raw, bool dir, int page)
+>>>>  {
+>>>> +       const struct meson_nfc_nand_chip *meson_chip = to_meson_nand(nand);
+>>>>         struct mtd_info *mtd = nand_to_mtd(nand);
+>>>>         const struct meson_nfc *nfc = nand_get_controller_data(mtd_to_nand(mtd));
+>>>> -       const struct meson_nfc_nand_chip *meson_chip = to_meson_nand(nand);
+>>>> -       u32 bch = meson_chip->bch_mode, cmd;
+>>>>         int len = mtd->writesize, pagesize, pages;
+>>>>         int scrambler;
+>>>> +       u32 cmd;
+>>>>
+>>>>         if (nand->options & NAND_NEED_SCRAMBLING)
+>>>>                 scrambler = NFC_CMD_SCRAMBLER_ENABLE;
+>>>>         else
+>>>>                 scrambler = NFC_CMD_SCRAMBLER_DISABLE;
+>>>>
+>>>
+>>> scrambler depends on NAND_NEED_SCRAMBLING so suppose
+>>> that is not set
+>>>
+>>> scrambler = NAND_NEED_SCRAMBLING;
+>>>
+>>>> -       pagesize = nand->ecc.size;
+>>>> -
+>>>>         if (raw) {
+>>>>                 len = mtd->writesize + mtd->oobsize;
+>>>>                 cmd = len | scrambler | DMA_DIR(dir);
+>>>> -               writel(cmd, nfc->reg_base + NFC_REG_CMD);
+>>>> -               return;
+>>>> -       }
+>>>> +       } else if (meson_nfc_is_boot_page(nand, page)) {
+>>>
+>>> Now here you  seems that you don't care anymore about this option and check
+>>> only meson_nfc_is_boot_page
+>>>
+>>> Is something am I missing?
+>>
+>> Idea is the following IIUC: such boot pages could be read in ECC mode only with enabled scrambling -
+>> otherwise we get ECC error. Or we need to read it in raw mode. So:
+>>
+>> if (read page in raw mode) {
+>>     use scrambler as provided
+>> } else if (read boot page in ECC mode) {
+>>     force scrambling mode + NFC_ECC_BCH8_1K + NFC_CMD_SHORTMODE_ENABLE
+>> } else {
+>>     //we read non-boot page in ECC mode
+>>    use scrambler as provided
+>> }
+>>
+>> Thanks
+>>
+>>
+>>>
+>>> Michael
+>>>
+>>>> +               pagesize = NFC_SHORT_MODE_ECC_SZ >> 3;
+>>>> +               pages = mtd->writesize / 512;
+>>>>
+>>>> -       pages = len / nand->ecc.size;
+>>>> +               scrambler = NFC_CMD_SCRAMBLER_ENABLE;
+>>>> +               cmd = CMDRWGEN(DMA_DIR(dir), scrambler, NFC_ECC_BCH8_1K,
+>>>> +                              NFC_CMD_SHORTMODE_ENABLE, pagesize, pages);
+>>>> +       } else {
+>>>> +               pagesize = nand->ecc.size >> 3;
+>>>> +               pages = len / nand->ecc.size;
+>>>>
+>>>> -       cmd = CMDRWGEN(DMA_DIR(dir), scrambler, bch,
+>>>> -                      NFC_CMD_SHORTMODE_DISABLE, pagesize, pages);
+>>>> +               cmd = CMDRWGEN(DMA_DIR(dir), scrambler, meson_chip->bch_mode,
+>>>> +                              NFC_CMD_SHORTMODE_DISABLE, pagesize, pages);
+>>>> +       }
+>>>>
+>>>>         if (scrambler == NFC_CMD_SCRAMBLER_ENABLE)
+>>>>                 meson_nfc_cmd_seed(nfc, page);
+>>>> @@ -1132,6 +1150,24 @@ static int meson_nfc_nand_chip_init(struct udevice *dev, struct meson_nfc *nfc,
+>>>>                 goto err_chip_buf_free;
+>>>>         }
+>>>>
+>>>> +       if (nand->options & NAND_IS_BOOT_MEDIUM) {
+>>>> +               ret = ofnode_read_u32(node, "amlogic,boot-pages",
+>>>> +                                     &meson_chip->boot_pages);
+>>>> +               if (ret) {
+>>>> +                       dev_err(dev, "could not retrieve 'amlogic,boot-pages' property: %d",
+>>>> +                               ret);
+>>>> +                       goto err_chip_buf_free;
+>>>> +               }
+>>>> +
+>>>> +               ret = ofnode_read_u32(node, "amlogic,boot-page-step",
+>>>> +                                     &meson_chip->boot_page_step);
+>>>> +               if (ret) {
+>>>> +                       dev_err(dev, "could not retrieve 'amlogic,boot-page-step' property: %d",
+>>>> +                               ret);
+>>>> +                       goto err_chip_buf_free;
+>>>> +               }
+>>>> +       }
+>>>> +
+>>>>         ret = nand_register(0, mtd);
+>>>>         if (ret) {
+>>>>                 dev_err(dev, "'nand_register()' failed: %d\n", ret);
+>>>> --
+>>>> 2.30.1
+>>>>
+>>>
+>>>
 > 
-> Agree and more than that I prefer the firmware to own the overall DT
-> and present that to the OS.
+> The first patch seems not apply clean to me on master
 > 
->> So, those two belong to the firmware logically,
->> but - with some disclaimers, we could also try to upstream them.
+> Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+
+Got it, I'll check
+
+Thanks
+
 > 
-> For historical reasons, Linux kernel source tree has become the
-> defacto upstream repo for DT sources. So it's better to contribute
-> there and sync back in U-Boot.
-
-Will do ASAP, hope to hit at least 6.12 then.
-
-Still, this will delay our next patches for U-Boot by many months. Also
-for that reason, a plan B for U-Boot local DTs should remain, no
-left-or-right policy.
-
-Jan
-
--- 
-Siemens AG, Technology
-Linux Expert Center
-
+> 
+> 
