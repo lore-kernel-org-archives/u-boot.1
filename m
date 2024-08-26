@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83F84C5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 13:30:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51E80C5321D
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 13:30:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52FF988A47;
-	Mon, 26 Aug 2024 15:30:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0563488A76;
+	Mon, 26 Aug 2024 15:30:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="i+rlU5oQ";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="LkQ1t7jA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F079588A3A; Mon, 26 Aug 2024 15:30:12 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ id D270288A2E; Mon, 26 Aug 2024 15:30:13 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CEFA288A2E
+ by phobos.denx.de (Postfix) with ESMTPS id C64B888A1B
  for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 15:30:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 46DCE120007;
+Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 5506B100009;
  Mon, 26 Aug 2024 16:30:09 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 46DCE120007
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 5506B100009
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
  s=mail; t=1724679009;
- bh=fzEvLbzaDYGIdkWkAvNQhcdnTWKcApYvgcoMhQsmpM0=;
+ bh=GDjaIwbxT+VKOvRr+kMFO67gQV7wATLCRPWCDBLJlas=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=i+rlU5oQDovlWxavw3m54VuQI8d4Q2EIsFfjv/jpP5VAvIGMVKJuGID33WOpVNO3a
- WK9Jwlz2/0/Syq/YwGISUWa1+52HYDMqbkm202sAbB8k6+ALmqdKt44G48ILe6vsl1
- ZT8rWEBzj8CZ0gTLe5OqYCRTPi6opxNT6ve5neI8zo3/T5kikVGU9uS7yA9qUvDZAK
- 4y5UHvQ8wIKA01qRF6cVjjd/Faae0gbuOIDvbfY67J8VueYbxJ8f7okh+etKExuPW2
- fjx0vzvsqFbOvrfmjCX85h1PCnmbaBE5CFjywNV8nZDW+IRh1VfjgTJJS51cBg5m3U
- Ia8qenK/ikU0Q==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
- [172.16.192.103])
+ b=LkQ1t7jAAHXwIj7eW1f5/ArZKyVT02Wnd8M/9w6cwrDs5zAa5u1a+loozJgCkm7mB
+ XkNCXySKGHzWDYVsukf2OBjAgQ/RCLfSL0SFHIl3cHdS7SOj98zuQxkOooKMI1UPQ6
+ ayOV0++oaEcctJeK0Em78HJ9OOWfT1MBredUiWXFhMR4mUY2HpRBTrQYECSBPt1Au9
+ kjU6SVosDBP3GvmrkLN4xV+WX6kLja2VxTi0RRmt/JpZvS6BpoF9Ic76Ehd3FuCKh+
+ c7M3UzuFKfDwf1h/65Q8d+WiHFiRnTVWLUKP7oevUt6u9wHOnnHCrijxoVM9jQkEOe
+ GOHuMZ6lka1lQ==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Mon, 26 Aug 2024 16:30:08 +0300 (MSK)
+ Mon, 26 Aug 2024 16:30:09 +0300 (MSK)
 From: Arseniy Krasnov <avkrasnov@salutedevices.com>
 To: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Michael Trimarchi
  <michael@amarulasolutions.com>, Neil Armstrong <neil.armstrong@linaro.org>,
@@ -52,10 +52,10 @@ To: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Michael Trimarchi
  Sean Anderson <seanga2@gmail.com>
 CC: <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>,
  <kernel@sberdevices.ru>, <oxffffaa@gmail.com>, <avkrasnov@salutedevices.com>
-Subject: [PATCH v3 1/3] mtd: rawnand: nand_base: support for
- 'NAND_IS_BOOT_MEDIUM' flag
-Date: Mon, 26 Aug 2024 16:17:08 +0300
-Message-ID: <20240826131710.29746-2-avkrasnov@salutedevices.com>
+Subject: [PATCH v3 3/3] mtd: rawnand: meson: read/write access for boot ROM
+ pages
+Date: Mon, 26 Aug 2024 16:17:10 +0300
+Message-ID: <20240826131710.29746-4-avkrasnov@salutedevices.com>
 X-Mailer: git-send-email 2.35.0
 In-Reply-To: <20240826131710.29746-1-avkrasnov@salutedevices.com>
 References: <20240826131710.29746-1-avkrasnov@salutedevices.com>
@@ -77,8 +77,8 @@ X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 27 0.3.27
  71302da218a62dcd84ac43314e19b5cc6b38e0b6,
  {Tracking_from_domain_doesnt_match_to},
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; salutedevices.com:7.1.1;
- smtp.sberdevices.ru:5.0.1,7.1.1; 127.0.0.199:7.1.2, FromAlignment: s
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; smtp.sberdevices.ru:7.1.1,5.0.1;
+ salutedevices.com:7.1.1; 127.0.0.199:7.1.2, FromAlignment: s
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
 X-KSMG-AntiPhishing: Clean
@@ -102,56 +102,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Based on Linux kernel:
-commit f922bd798bb9 ("mtd: rawnand: add an option to specify NAND chip as a boot device")
+Boot ROM on Meson needs some pages to be read/written in a special mode:
+384 byte ECC mode (so called "short" by Amlogic) and with scrambling
+enabled. Such pages are located on the chip in the following way (for
+example):
 
-Allow to define a NAND chip as a boot device. This can be helpful
-for the selection of the ECC algorithm and strength in case the boot
-ROM supports only a subset of controller provided options.
+[ p0 ][ p1 ][ p2 ][ p3 ][ p4 ][ p5 ][ p6 ][ p7 ] ... [ pN ]
+  ^           ^           ^           ^
+
+pX is page number "X". "^" means "special" page used by boot ROM - e.g.
+every 2nd page in the range of [0, 7]. Step (2 here) and last page in
+range is read from the device tree.
 
 Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
 Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
 ---
- Changelog:                                                             
- v1 -> v2:                                                              
-  * Place 'NAND_IS_BOOT_MEDIUM' according its numerical value.
- v2 -> v3:                                                              
-  * Rebase on last master.
+ drivers/mtd/nand/raw/meson_nand.c | 56 +++++++++++++++++++++++++------
+ 1 file changed, 46 insertions(+), 10 deletions(-)
 
- drivers/mtd/nand/raw/nand_base.c | 3 +++
- include/linux/mtd/rawnand.h      | 5 +++++
- 2 files changed, 8 insertions(+)
-
-diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand_base.c
-index 688d17ba3c..a7474574f8 100644
---- a/drivers/mtd/nand/raw/nand_base.c
-+++ b/drivers/mtd/nand/raw/nand_base.c
-@@ -4458,6 +4458,9 @@ static int nand_dt_init(struct mtd_info *mtd, struct nand_chip *chip, ofnode nod
- 	if (ret == 16)
- 		chip->options |= NAND_BUSWIDTH_16;
+diff --git a/drivers/mtd/nand/raw/meson_nand.c b/drivers/mtd/nand/raw/meson_nand.c
+index 2d77ee51ce..28c851f103 100644
+--- a/drivers/mtd/nand/raw/meson_nand.c
++++ b/drivers/mtd/nand/raw/meson_nand.c
+@@ -39,6 +39,7 @@
+ #define NFC_CMD_RB			BIT(20)
+ #define NFC_CMD_SCRAMBLER_ENABLE	BIT(19)
+ #define NFC_CMD_SCRAMBLER_DISABLE	0
++#define NFC_CMD_SHORTMODE_ENABLE	1
+ #define NFC_CMD_SHORTMODE_DISABLE	0
+ #define NFC_CMD_RB_INT			BIT(14)
+ #define NFC_CMD_RB_INT_NO_PIN		((0xb << 10) | BIT(18) | BIT(16))
+@@ -77,6 +78,8 @@
  
-+	if (ofnode_read_bool(node, "nand-is-boot-medium"))
-+		chip->options |= NAND_IS_BOOT_MEDIUM;
+ #define DMA_DIR(dir)		((dir) ? NFC_CMD_N2M : NFC_CMD_M2N)
+ 
++#define NFC_SHORT_MODE_ECC_SZ	384
 +
- 	if (ofnode_read_bool(node, "nand-on-flash-bbt"))
- 		chip->bbt_options |= NAND_BBT_USE_FLASH;
+ #define ECC_CHECK_RETURN_FF	-1
  
-diff --git a/include/linux/mtd/rawnand.h b/include/linux/mtd/rawnand.h
-index 4abaf4734c..0e7b5f852c 100644
---- a/include/linux/mtd/rawnand.h
-+++ b/include/linux/mtd/rawnand.h
-@@ -248,6 +248,11 @@ enum nand_ecc_algo {
-  * kmap'ed, vmalloc'ed highmem buffers being passed from upper layers
-  */
- #define NAND_USE_BOUNCE_BUFFER	0x00100000
-+/*
-+ * Whether the NAND chip is a boot medium. Drivers might use this information
-+ * to select ECC algorithms supported by the boot ROM or similar restrictions.
-+ */
-+#define NAND_IS_BOOT_MEDIUM	0x00400000
+ #define NAND_CE0		(0xe << 10)
+@@ -140,6 +143,8 @@
+ struct meson_nfc_nand_chip {
+ 	struct list_head node;
+ 	struct nand_chip nand;
++	u32 boot_pages;
++	u32 boot_page_step;
  
- /*
-  * Do not try to tweak the timings at runtime. This is needed when the
+ 	u32 bch_mode;
+ 	u8 *data_buf;
+@@ -228,33 +233,46 @@ static void meson_nfc_cmd_seed(const struct meson_nfc *nfc, u32 seed)
+ 	       nfc->reg_base + NFC_REG_CMD);
+ }
+ 
++static int meson_nfc_is_boot_page(struct nand_chip *nand, int page)
++{
++	const struct meson_nfc_nand_chip *meson_chip = to_meson_nand(nand);
++
++	return (nand->options & NAND_IS_BOOT_MEDIUM) &&
++	       !(page % meson_chip->boot_page_step) &&
++	       (page < meson_chip->boot_pages);
++}
++
+ static void meson_nfc_cmd_access(struct nand_chip *nand, bool raw, bool dir, int page)
+ {
++	const struct meson_nfc_nand_chip *meson_chip = to_meson_nand(nand);
+ 	struct mtd_info *mtd = nand_to_mtd(nand);
+ 	const struct meson_nfc *nfc = nand_get_controller_data(mtd_to_nand(mtd));
+-	const struct meson_nfc_nand_chip *meson_chip = to_meson_nand(nand);
+-	u32 bch = meson_chip->bch_mode, cmd;
+ 	int len = mtd->writesize, pagesize, pages;
+ 	unsigned int scrambler;
++	u32 cmd;
+ 
+ 	if (nand->options & NAND_NEED_SCRAMBLING)
+ 		scrambler = NFC_CMD_SCRAMBLER_ENABLE;
+ 	else
+ 		scrambler = NFC_CMD_SCRAMBLER_DISABLE;
+ 
+-	pagesize = nand->ecc.size;
+-
+ 	if (raw) {
+ 		len = mtd->writesize + mtd->oobsize;
+ 		cmd = len | scrambler | DMA_DIR(dir);
+-		writel(cmd, nfc->reg_base + NFC_REG_CMD);
+-		return;
+-	}
++	} else if (meson_nfc_is_boot_page(nand, page)) {
++		pagesize = NFC_SHORT_MODE_ECC_SZ >> 3;
++		pages = mtd->writesize / 512;
+ 
+-	pages = len / nand->ecc.size;
++		scrambler = NFC_CMD_SCRAMBLER_ENABLE;
++		cmd = CMDRWGEN(DMA_DIR(dir), scrambler, NFC_ECC_BCH8_1K,
++			       NFC_CMD_SHORTMODE_ENABLE, pagesize, pages);
++	} else {
++		pagesize = nand->ecc.size >> 3;
++		pages = len / nand->ecc.size;
+ 
+-	cmd = CMDRWGEN(DMA_DIR(dir), scrambler, bch,
+-		       NFC_CMD_SHORTMODE_DISABLE, pagesize, pages);
++		cmd = CMDRWGEN(DMA_DIR(dir), scrambler, meson_chip->bch_mode,
++			       NFC_CMD_SHORTMODE_DISABLE, pagesize, pages);
++	}
+ 
+ 	if (scrambler == NFC_CMD_SCRAMBLER_ENABLE)
+ 		meson_nfc_cmd_seed(nfc, page);
+@@ -1131,6 +1149,24 @@ static int meson_nfc_nand_chip_init(struct udevice *dev, struct meson_nfc *nfc,
+ 		goto err_chip_buf_free;
+ 	}
+ 
++	if (nand->options & NAND_IS_BOOT_MEDIUM) {
++		ret = ofnode_read_u32(node, "amlogic,boot-pages",
++				      &meson_chip->boot_pages);
++		if (ret) {
++			dev_err(dev, "could not retrieve 'amlogic,boot-pages' property: %d",
++				ret);
++			goto err_chip_buf_free;
++		}
++
++		ret = ofnode_read_u32(node, "amlogic,boot-page-step",
++				      &meson_chip->boot_page_step);
++		if (ret) {
++			dev_err(dev, "could not retrieve 'amlogic,boot-page-step' property: %d",
++				ret);
++			goto err_chip_buf_free;
++		}
++	}
++
+ 	ret = nand_register(0, mtd);
+ 	if (ret) {
+ 		dev_err(dev, "'nand_register()' failed: %d\n", ret);
 -- 
 2.30.1
 
