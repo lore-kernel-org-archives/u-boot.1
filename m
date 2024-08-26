@@ -4,82 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BA63C5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 16:49:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92F24C5321E
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 16:50:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95C7788AC2;
-	Mon, 26 Aug 2024 18:49:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 02A0088B0B;
+	Mon, 26 Aug 2024 18:50:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="VTWJ5p/a";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eCVpywhC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15A2888AD2; Mon, 26 Aug 2024 18:49:16 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C245F88B0A; Mon, 26 Aug 2024 18:50:06 +0200 (CEST)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79F4088ABE
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 18:49:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B190988A08
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 18:50:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=B.Hahn@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1724690952; x=1727282952;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FLr8tmUnUjHpRzFS+CT9lgn8Ue+b1b89T/g1BYCGM3s=;
- b=VTWJ5p/aN1XiislTrtXf8s2lZjIFohqfs+/pvFnlMX6mpPmr/byqtV6sAWMQVMqd
- VsEfm00X0ifwqCL8cztr0SwvhE4aJLLUQeSp7n6Nk6Ut1Y3LyvOL/345K5iuKw/Z
- ggA75RgPvvSnZmeM1payOvMDovWz/vL9zSQ4wks/4r0=;
-X-AuditID: ac14000a-03251700000021bc-b8-66ccb207f4a5
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id D0.BB.08636.702BCC66;
- Mon, 26 Aug 2024 18:49:11 +0200 (CEST)
-Received: from llp-Hahn.hahn.test (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 26 Aug
- 2024 18:49:11 +0200
-From: Benjamin Hahn <B.Hahn@phytec.de>
-Subject: [PATCH 0/2] phycore-imx8mp: Add support for SPI NOR flash
-Date: Mon, 26 Aug 2024 18:49:04 +0200
-Message-ID: <20240826-wip-bhahn-add_qspi_support-v1-0-0ea7840b940a@phytec.de>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-6bf9db9740aso20530336d6.2
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 09:50:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1724691003; x=1725295803; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3uF1UnFByoQ9Z920lWXWQN8QleDrvTTPFRBYkpmibu8=;
+ b=eCVpywhCGPWcvbA6bhAKNkX6i8SlrW0Fci0Na9d7Qglrqe5DTA3QgF/tNZpExY4StQ
+ joQSpAEKfgQztZNrPfkMlpoSAgjlgOkoRI44ljYwMMhhJq/Dz6lQZSsja1Mr+Y4aZmIi
+ POWSxlvFpjtvXh/69g5F+hwSvwjNw6mEMn79I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724691003; x=1725295803;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=3uF1UnFByoQ9Z920lWXWQN8QleDrvTTPFRBYkpmibu8=;
+ b=LzJvFsxwBmnMFgz4MjtojKvu9Gt0gyuClocO51odFpFjG0ah0EpGHirkqZoWJxjazR
+ XFa/keEsUqCx5bzVFL/h56i3EX08fYY9HAanwmjJFMTAUXjxGO3rUcM6vNIRUJlGe/nY
+ 4BeaMgLa6PqESFToyRpauEru2SY9oeyQinC0qABZd1rfz5Iz556IZITOCxZJp51uf4y2
+ 0cd43R7I8KWgovioFoLSAr2viRRU59wsxRSV5XgFgfTwGP7bH1DYYvOWHcJUA22Wyuz7
+ CM2U5lAED5NlGYUVgaZ7Uyho8Gr0bGLNvmKqd4rsiMcozyKmwLbIum2kfW9dVdzWdXrv
+ KDpQ==
+X-Gm-Message-State: AOJu0Yx2qy+DKrcdu+CycmHhHYaz+v7tOmByh49F218kn0NdKL+jyTso
+ +5YSHGTaJ1oOvxgL7/OXVSqgycm4mRvx0S8cNsQonh8di9UpFOMtyYGPag7AIK1RqeoyP1aEKH2
+ C
+X-Google-Smtp-Source: AGHT+IHksyVsbqBKOFqUiDOqIU0BN46skxqfq1H5C5m2mo0axQzRH5GeKwnO0NmvB9S3Ec+G5eq2QQ==
+X-Received: by 2002:a05:6214:3b86:b0:6b5:9439:f048 with SMTP id
+ 6a1803df08f44-6c32b6a4dd7mr181316d6.19.1724691003489; 
+ Mon, 26 Aug 2024 09:50:03 -0700 (PDT)
+Received: from bill-the-cat.tail58a08.ts.net ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6c162d1d242sm48576136d6.16.2024.08.26.09.50.02
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 26 Aug 2024 09:50:03 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH 0/6] Remove almost all project wiki links
+Date: Mon, 26 Aug 2024 10:49:51 -0600
+Message-Id: <20240826164957.2789525-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAGyzGYC/x3MwQqDMAwA0F+RnBeIRWT6KzKkXTObS82auQ3Ef
- 7d4fJe3g3ERNhibHQp/xWTNFe2tgWfyeWGUWA2OXEd31+NPFEPyKaOPcX6bymyb6lo+2LeOKND
- AHQeogRZ+yf/Kp8dxnP2SE/BsAAAA
-To: Teresa Remmet <t.remmet@phytec.de>, Yannic Moog <y.moog@phytec.de>, Tom
- Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, Benjamin Hahn
- <B.Hahn@phytec.de>
-X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1724690951; l=693;
- i=B.Hahn@phytec.de; s=20240126; h=from:subject:message-id;
- bh=FLr8tmUnUjHpRzFS+CT9lgn8Ue+b1b89T/g1BYCGM3s=;
- b=pl80NyeNwy/xomHtWtYTq+yjKGeHt4j9JBLRvy8Nhz4hYLJkoELJ8quNeezGDeO2r000lf6ia
- jfKbblXDIuICSGhkQUA1AP8jg7uAyNg89CVNM1awnX4nAysWI0zYTzd
-X-Developer-Key: i=B.Hahn@phytec.de; a=ed25519;
- pk=r04clMulHz6S6js6elPBA+U+zVdDAqJyEyoNd8I3pSw=
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrLLMWRmVeSWpSXmKPExsWyRpKBR5dj05k0g6cNjBZTJ21mt3i7t5Pd
- ovudugOzx6sDq9g9zt7ZwejR393CGsAcxWWTkpqTWZZapG+XwJXx4GkvY8F21oqOh5OYGhgP
- snQxcnJICJhIHLvzFMwWEljCJHFosQ+E/ZBRYlp7IYjNJqAmsevNa1YQW1jASeJT9wFGEJtF
- QFXi+cxL7CA2r4CvROeWm0wQtqDEyZlPgGZycDALaEqs36UPEmYWkJfY/nYOcxcjF9DaHYwS
- y1bsAOsVEUiX2PbiOytEfZTEu4lBEKcJS3zevYYNon4Xk8Svk/PYQGokBBIldr6WgzhTVuLm
- +S1sEPXyEtPOvWaGsEMljmxazTSBUXgWkotmIVw0C8lFCxiZVzEK5WYmZ6cWZWbrFWRUlqQm
- 66WkbmIEBbkIA9cOxr45HocYmTgYDzFKcDArifDKXT6ZJsSbklhZlVqUH19UmpNafIhRmoNF
- SZx3dUdwqpBAemJJanZqakFqEUyWiYNTqoGxsuydcM7PY5OiNLWXF2z/pXl7cdCSz9ulmHev
- NeqJfMb0QezaZ8H3iSneB5Xi+Pa9/7RmSjBf2dewjzkT5WwOlm/zEfP6uemMWm24yj2G5NzN
- BaFsvhOXfg9U/9UVfLMzru+t2IzJuq01/HylnNfWOM/P/PbxypRZ25/bn78y7de5tV5hAjs+
- KbEUZyQaajEXFScCANXmN9FgAgAA
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,23 +85,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for flashing and booting from spi nor flash.
+There were still a handful of places where we referenced the old project
+wiki pages rather than our current documentation. For the most part this
+series changes links to instead point to the current website version of
+these documents instead. In the first two patches the content was out of
+date and it was simple enough to correct instead.
 
-Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
----
-Benjamin Hahn (2):
-      configs: phycore-imx8mp_defconfig: Enable SPI NOR flash support
-      board: phytec: phycore_imx8mp: Add mtd spi partitions
+The only remaining wiki links are in:
+doc/feature-removal-schedule.txt
+README
 
- board/phytec/phycore_imx8mp/phycore-imx8mp.c   | 34 ++++++++++++++++++++++++++
- board/phytec/phycore_imx8mp/phycore_imx8mp.env |  4 +++
- configs/phycore-imx8mp_defconfig               | 24 ++++++++++++++++++
- 3 files changed, 62 insertions(+)
----
-base-commit: ee2af844ba1b27b2e959c4e649e4b769fbeb4074
-change-id: 20240826-wip-bhahn-add_qspi_support-61200b09e4eb
+And in both cases just updating the file for those links would imply the
+rest of the content is correct and it is not.
 
-Best regards,
--- 
-Benjamin Hahn <B.Hahn@phytec.de>
+--  
+Tom
 
