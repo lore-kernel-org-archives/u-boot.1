@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA62CC5472E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 19:14:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99453C5321D
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 19:14:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06C4788C66;
-	Mon, 26 Aug 2024 21:12:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6597C88B59;
+	Mon, 26 Aug 2024 21:12:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CKNv0QA1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LHY3xP1M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD8BD88B59; Mon, 26 Aug 2024 21:12:14 +0200 (CEST)
-Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
- [IPv6:2607:f8b0:4864:20::12a])
+ id 0B4A388C14; Mon, 26 Aug 2024 21:12:17 +0200 (CEST)
+Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
+ [IPv6:2607:f8b0:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C94288C14
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 21:12:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BFFBA88C73
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 21:12:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12a.google.com with SMTP id
- e9e14a558f8ab-39d380d4ffcso17059595ab.0
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 12:12:12 -0700 (PDT)
+Received: by mail-il1-x130.google.com with SMTP id
+ e9e14a558f8ab-39d26a8f9dbso16073255ab.1
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 12:12:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724699531; x=1725304331; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724699532; x=1725304332; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gRm49h0hKWiXPkWMCIhRmQyPEdX3btmIlkjoB5gRxG4=;
- b=CKNv0QA15Gp/Y9xDF0srVbbq0Oupl7tz9r8GShSMIykOtDPv2YnZKa0SoCxQFp1BP+
- aY3pwgh/NqeHgtRqKzMlPdVyHm/ltA9YUBRA7Z+GiEyAIOiaOwvgtKnLmgX4UVyReVNQ
- GsdOQKpuVyE/tcSTL4Qqy2CEbocr+uGJ1TZks=
+ bh=yYxOxvsq/a2UynGTAQeUrpj4KczxeQI3Ie/NudhDdeE=;
+ b=LHY3xP1MNhTp9Qa01Z6qDLHj0oVfgisYHDkefTcY0ywWhnVJZYTCt84/rSZs+Kx/PJ
+ jKoO0JudJUx6nxQpbIQf/cxPXU0N7eZ4GXlCCseIMmAsnMdMrn0r65JhyKgi4dQ/i8Wx
+ yMGX41nFHn7KjTMKmb6X3PORDPDF+uzQvNS/o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724699531; x=1725304331;
+ d=1e100.net; s=20230601; t=1724699532; x=1725304332;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gRm49h0hKWiXPkWMCIhRmQyPEdX3btmIlkjoB5gRxG4=;
- b=FbkrLJllMl+QbJO7ZbIGXjLyBfzEi/V/aJtPOpwTXTMFnCLuZ7JdGizr0fEBr23dqg
- xt8ZT1IL9UXZVieRmegOyIRyZ7UKqF0uLkWMkgJlvi56Yj4Lh50QbhxEGgu+gJhuHyPO
- 7pejqEsDeox5GMU0n4aGCTY9AbsoxenvVsHBZwIdEPxOOq4hDv+HLTDyKbSekwDhDu0U
- IC+FzmffUzScDtoslSdET/uwejwKdJWqgIUMLPT7Y91kYWGuMt7bM+o534blsS8DEQnL
- yEnHAcmKKXipgx7agFTE3WKuIXH6LDmjttseD/vdPA3+RiaKmqDgI4vfKGoUlaXQl9vz
- tkCQ==
-X-Gm-Message-State: AOJu0YyJcY2vpcpiBwxbnUKm6OUuQw0QRD0Z8IYfXn19lY8rX5z/Lz+p
- 5N25Hs6uaKgRgZDvG4kq8ObcqVBqnV2YoG+CjKtD9TI+xo0Wczle8jgm6hJnnPTvKKCML1RGbFU
+ bh=yYxOxvsq/a2UynGTAQeUrpj4KczxeQI3Ie/NudhDdeE=;
+ b=kegidFeJeF3ye5SnBivhkiw6Bd6U/G00okmZfsLcKKzNVEeq3/MoMyS4/G8dNrt+1D
+ ZMPWfIzLe6Bh+bQt+lNh2+lZbz2rVfGVHwnRgX+xN4ouENmabCeaPCV3qsGXrgVwsKv6
+ va8PULYJ0WaTvPq3iK7PDayigUPT3jpWswwCfgNizUMMZA01D1F5JelVVdlXlcYZujdu
+ aHTje3YVBPKtk5P87x0BaMGTvRvury01uaDzhZnxpk1Z/ZlhgB7y6W59jHkjijSPbP9l
+ B1gkj63ScY/T5PwdiafjuiGbybYiQK4iSfdn1+45HfBv0aCf+CumRXXxuc96kHC6Q2Iu
+ IMGg==
+X-Gm-Message-State: AOJu0Ywqqmklu7gweVdN8BrkPL4sKVnGhPPE7DivdJkgiKwpyXoYh0mJ
+ BDIpJCyGoOyn9qIovVM5K/tMpJufOrtHjdOpN7cE2/MxYnd6TLsk8Mr0Ydr2Js9vgZFGKzHZFt8
  =
-X-Google-Smtp-Source: AGHT+IH9WGLRHCzjueCgOl90HXsqkFXQEdEcKJHEguTcJxm1Ibt6zKB2x4Wv+VpPeFu308NwwtjUpw==
-X-Received: by 2002:a05:6e02:1d12:b0:39b:936:83b3 with SMTP id
- e9e14a558f8ab-39e3c9842b6mr126399645ab.9.1724699530741; 
- Mon, 26 Aug 2024 12:12:10 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHye6FIDHyqx2uTlFTTR/Bfv05FGXwEHzg9jo3rJi8cLEnqxfuxv16cb4h5xF6xLY3G9f3v6w==
+X-Received: by 2002:a92:c54f:0:b0:39a:e8cf:80d0 with SMTP id
+ e9e14a558f8ab-39e63e3a07dmr8284095ab.14.1724699532121; 
+ Mon, 26 Aug 2024 12:12:12 -0700 (PDT)
 Received: from chromium.org ([139.60.174.4]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39d73e7c102sm34412575ab.37.2024.08.26.12.12.09
+ e9e14a558f8ab-39d73e7c102sm34412575ab.37.2024.08.26.12.12.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Aug 2024 12:12:10 -0700 (PDT)
+ Mon, 26 Aug 2024 12:12:11 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Rong Tao <rongtao@cestc.cn>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 13/15] binman: Unwind the end-at-4gb special-case a little
-Date: Mon, 26 Aug 2024 13:11:41 -0600
-Message-Id: <20240826191143.426387-14-sjg@chromium.org>
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Brandon Maier <brandon.maier@collins.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Rong Tao <rongtao@cestc.cn>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 14/15] binman: Allow image_pos to be None when writing symbols
+Date: Mon, 26 Aug 2024 13:11:42 -0600
+Message-Id: <20240826191143.426387-15-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240826191143.426387-1-sjg@chromium.org>
 References: <20240826191143.426387-1-sjg@chromium.org>
@@ -89,100 +91,178 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move the check for this further out, so that base_addr is computed in
-Entry.WriteSymbols() rather than at lower levels.
+Some images do not have an image_pos value, for example an image which
+is part of a compressed section and therefore cannot be accessed
+directly.
+
+Handle this case, returning None as the value.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/binman/entry.py         | 11 +++++++++--
- tools/binman/etype/section.py | 15 +++++----------
- tools/binman/image.py         | 10 ++++------
- 3 files changed, 18 insertions(+), 18 deletions(-)
+ tools/binman/etype/section.py          |  3 ++
+ tools/binman/ftest.py                  | 49 +++++++++++++++++++-------
+ tools/binman/test/338_symbols_comp.dts | 26 ++++++++++++++
+ 3 files changed, 65 insertions(+), 13 deletions(-)
+ create mode 100644 tools/binman/test/338_symbols_comp.dts
 
-diff --git a/tools/binman/entry.py b/tools/binman/entry.py
-index 8ad9fe89e0c..68f8d62bba9 100644
---- a/tools/binman/entry.py
-+++ b/tools/binman/entry.py
-@@ -711,15 +711,22 @@ class Entry(object):
-     def WriteSymbols(self, section):
-         """Write symbol values into binary files for access at run time
- 
-+        As a special case, if symbols_base is not specified and this is an
-+        end-at-4gb image, a symbols_base of 0 is used
-+
-         Args:
-           section: Section containing the entry
-         """
-         if self.auto_write_symbols and not self.no_write_symbols:
-             # Check if we are writing symbols into an ELF file
-             is_elf = self.GetDefaultFilename() == self.elf_fname
-+
-+            symbols_base = self.symbols_base
-+            if symbols_base is None and self.GetImage()._end_4gb:
-+                symbols_base = 0
-+
-             elf.LookupAndWriteSymbols(self.elf_fname, self, section.GetImage(),
--                                      is_elf, self.elf_base_sym,
--                                      self.symbols_base)
-+                                      is_elf, self.elf_base_sym, symbols_base)
- 
-     def CheckEntries(self):
-         """Check that the entry offsets are correct
 diff --git a/tools/binman/etype/section.py b/tools/binman/etype/section.py
-index 6c181531b8b..7d2eb42627d 100644
+index 7d2eb42627d..f4f48c00e87 100644
 --- a/tools/binman/etype/section.py
 +++ b/tools/binman/etype/section.py
-@@ -627,12 +627,10 @@ class Entry_section(Entry):
-             optional: True if the symbol is optional. If False this function
-                 will raise if the symbol is not found
-             msg: Message to display if an error occurs
--            base_addr: Base address of image. This is added to the returned
--                image_pos in most cases so that the returned position indicates
--                where the targetted entry/binary has actually been loaded. But
--                if end-at-4gb is used, this is not done, since the binary is
--                already assumed to be linked to the ROM position and using
--                execute-in-place (XIP).
-+            base_addr (int): Base address of image. This is added to the
-+                returned value of image-pos so that the returned position
-+                indicates where the targeted entry/binary has actually been
-+                loaded
- 
-         Returns:
-             Value that should be assigned to that symbol, or None if it was
-@@ -655,10 +653,7 @@ class Entry_section(Entry):
+@@ -653,6 +653,9 @@ class Entry_section(Entry):
          if prop_name == 'offset':
              return entry.offset
          elif prop_name == 'image_pos':
--            value = entry.image_pos
--            if not self.GetImage()._end_4gb:
--                value += base_addr
--            return value
-+            return base_addr + entry.image_pos
++            if not entry.image_pos:
++                tout.info(f'Symbol-writing: no value for {entry._node.path}')
++                return None
+             return base_addr + entry.image_pos
          if prop_name == 'size':
              return entry.size
-         else:
-diff --git a/tools/binman/image.py b/tools/binman/image.py
-index c667f583db6..24ce0af7c72 100644
---- a/tools/binman/image.py
-+++ b/tools/binman/image.py
-@@ -404,12 +404,10 @@ class Image(section.Entry_section):
-             optional: True if the symbol is optional. If False this function
-                 will raise if the symbol is not found
-             msg: Message to display if an error occurs
--            base_addr: Base address of image. This is added to the returned
--                image_pos in most cases so that the returned position indicates
--                where the targeted entry/binary has actually been loaded. But
--                if end-at-4gb is used, this is not done, since the binary is
--                already assumed to be linked to the ROM position and using
--                execute-in-place (XIP).
-+            base_addr (int): Base address of image. This is added to the
-+                returned value of image-pos so that the returned position
-+                indicates where the targeted entry/binary has actually been
-+                loaded
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index a1a75266947..6317e72e649 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -505,8 +505,9 @@ class TestFunctional(unittest.TestCase):
+         return dtb.GetContents()
  
-         Returns:
-             Value that should be assigned to that symbol, or None if it was
+     def _DoReadFileDtb(self, fname, use_real_dtb=False, use_expanded=False,
+-                       map=False, update_dtb=False, entry_args=None,
+-                       reset_dtbs=True, extra_indirs=None, threads=None):
++                       verbosity=None, map=False, update_dtb=False,
++                       entry_args=None, reset_dtbs=True, extra_indirs=None,
++                       threads=None):
+         """Run binman and return the resulting image
+ 
+         This runs binman with a given test file and then reads the resulting
+@@ -523,6 +524,7 @@ class TestFunctional(unittest.TestCase):
+                 But in some test we need the real contents.
+             use_expanded: True to use expanded entries where available, e.g.
+                 'u-boot-expanded' instead of 'u-boot'
++            verbosity: Verbosity level to use (0-3, None=don't set it)
+             map: True to output map files for the images
+             update_dtb: Update the offset and size of each entry in the device
+                 tree before packing it into the image
+@@ -559,7 +561,8 @@ class TestFunctional(unittest.TestCase):
+         try:
+             retcode = self._DoTestFile(fname, map=map, update_dtb=update_dtb,
+                     entry_args=entry_args, use_real_dtb=use_real_dtb,
+-                    use_expanded=use_expanded, extra_indirs=extra_indirs,
++                    use_expanded=use_expanded, verbosity=verbosity,
++                    extra_indirs=extra_indirs,
+                     threads=threads)
+             self.assertEqual(0, retcode)
+             out_dtb_fname = tools.get_output_filename('u-boot.dtb.out')
+@@ -1507,7 +1510,8 @@ class TestFunctional(unittest.TestCase):
+         Args:
+             dts: Device tree file to use for test
+             base_data: Data before and after 'u-boot' section
+-            u_boot_offset: Offset of 'u-boot' section in image
++            u_boot_offset (int): Offset of 'u-boot' section in image, or None if
++                the offset not available due to it being in a compressed section
+             entry_args: Dict of entry args to supply to binman
+                 key: arg name
+                 value: value of that arg
+@@ -1525,13 +1529,20 @@ class TestFunctional(unittest.TestCase):
+ 
+         self._SetupSplElf('u_boot_binman_syms')
+         data = self._DoReadFileDtb(dts, entry_args=entry_args,
+-                                   use_expanded=use_expanded)[0]
++                                   use_expanded=use_expanded,
++                                   verbosity=None if u_boot_offset else 3)[0]
++
++        # The lz4-compressed version of the U-Boot data is 19 bytes long
++        comp_uboot_len = 19
++
+         # The image should contain the symbols from u_boot_binman_syms.c
+         # Note that image_pos is adjusted by the base address of the image,
+         # which is 0x10 in our test image
++        # If u_boot_offset is None, Binman should write -1U into the image
+         vals2 = (elf.BINMAN_SYM_MAGIC_VALUE, 0x00,
+-                u_boot_offset + len(U_BOOT_DATA),
+-                0x10 + u_boot_offset, 0x04)
++                u_boot_offset + len(U_BOOT_DATA) if u_boot_offset else
++                    len(U_BOOT_SPL_DATA) + 1 + comp_uboot_len,
++                0x10 + u_boot_offset if u_boot_offset else 0xffffffff, 0x04)
+ 
+         # u-boot-spl has a symbols-base property, so take that into account if
+         # required. The caller must supply the value
+@@ -1561,17 +1572,21 @@ class TestFunctional(unittest.TestCase):
+             self.assertEqual(base_data[24:], data[24:blen])
+             self.assertEqual(0xff, data[blen])
+ 
+-            ofs = blen + 1 + len(U_BOOT_DATA)
+-            self.assertEqual(U_BOOT_DATA, data[blen + 1:ofs])
++            if u_boot_offset:
++                ofs = blen + 1 + len(U_BOOT_DATA)
++                self.assertEqual(U_BOOT_DATA, data[blen + 1:ofs])
++            else:
++                ofs = blen + 1 + comp_uboot_len
+ 
+             self.assertEqual(sym_values2, data[ofs:ofs + 24])
+             self.assertEqual(base_data[24:], data[ofs + 24:])
+ 
+             # Just repeating the above asserts all at once, for clarity
+-            expected = (sym_values + base_data[24:] +
+-                        tools.get_bytes(0xff, 1) + U_BOOT_DATA + sym_values2 +
+-                        base_data[24:])
+-            self.assertEqual(expected, data)
++            if u_boot_offset:
++                expected = (sym_values + base_data[24:] +
++                            tools.get_bytes(0xff, 1) + U_BOOT_DATA +
++                            sym_values2 + base_data[24:])
++                self.assertEqual(expected, data)
+ 
+     def testSymbols(self):
+         """Test binman can assign symbols embedded in U-Boot"""
+@@ -7777,6 +7792,14 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+                           entry_args=entry_args, use_expanded=True,
+                           symbols_base=0)
+ 
++    def testSymbolsCompressed(self):
++        """Test binman complains about symbols from a compressed section"""
++        with test_util.capture_sys_output() as (stdout, stderr):
++            self.checkSymbols('338_symbols_comp.dts', U_BOOT_SPL_DATA, None)
++        out = stdout.getvalue()
++        self.assertIn('Symbol-writing: no value for /binman/section/u-boot',
++                      out)
++
+ 
+ if __name__ == "__main__":
+     unittest.main()
+diff --git a/tools/binman/test/338_symbols_comp.dts b/tools/binman/test/338_symbols_comp.dts
+new file mode 100644
+index 00000000000..15008507cfd
+--- /dev/null
++++ b/tools/binman/test/338_symbols_comp.dts
+@@ -0,0 +1,26 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/dts-v1/;
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	binman {
++		pad-byte = <0xff>;
++		u-boot-spl {
++		};
++
++		section {
++			offset = <0x1c>;
++			compress = "lz4";
++
++			u-boot {
++			};
++		};
++
++		u-boot-spl2 {
++			type = "u-boot-spl";
++		};
++	};
++};
 -- 
 2.34.1
 
