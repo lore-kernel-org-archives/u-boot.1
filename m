@@ -4,93 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D3E5C5472E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 18:51:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F2FBC5472E
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 19:06:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A848688387;
-	Mon, 26 Aug 2024 20:51:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 28AC6884C3;
+	Mon, 26 Aug 2024 21:06:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="klRi4P2P";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="X5KiG1DT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DD5288A7B; Mon, 26 Aug 2024 20:51:03 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 34D568842C; Mon, 26 Aug 2024 21:06:34 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 432D1880E6
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 20:51:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9012088AE2
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 21:06:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1724698232; x=1725303032; i=xypron.glpk@gmx.de;
- bh=H7FQSml9Ts+9TSE9GdHBuF6CIJEek1OozTCQyFBHeuI=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=klRi4P2PeaZLFgKI0yO5hJaSNlNLHRico33bXIwa4XJ4R8IgNyNOjpTn1Cc0NHUN
- ai2rmKoG7S2eg0yYoJmJ9StHcd3xgqPW1nEhBZ4h6BFKlWYV50JkNteYtETl0Tp83
- XAfPZQlOhycMt0MCu0XRg5ycQebT28M6R+n8gvf/iwYAPYS0zvBmvXUbparqXeau6
- E9JXl1sRqnowf4ipDLqv48r/stl0gWH6ENoQHk4Tw24eEB1fqGoKfmtd+vmU/Zsec
- W+ieTdFY0hp4QxrZwzOG5O1fuFW2pZmW1WjqNaVL70pqKsnZhDQFae+DEKRBN9sDE
- TlgXur8SXWWRxgINcg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.105] ([46.114.229.134]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M1Hdw-1sgzpq1Dn0-005Amu; Mon, 26
- Aug 2024 20:50:32 +0200
-Message-ID: <57af7831-850d-4e9d-8fcd-5ad03f8538dd@gmx.de>
-Date: Mon, 26 Aug 2024 20:50:28 +0200
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a83597ce5beso720501666b.1
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 12:06:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gateworks.com; s=google; t=1724699190; x=1725303990; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HAaJEY31GHYG7OVz5ZzNLRxgIbBJcNA44aOzXEFhLGM=;
+ b=X5KiG1DTJrPrfpGSuqYMbuKRv9hQ8hEhdOgIstq4hCHg1OcGtdX4l0obs20Tx9OKFf
+ wY8HaKg+E1PX7XraVZIaIFCwuo2ElE6wt8kYt8xfbgJpsoCAlqjtl1oJO6znGABv8ieL
+ rZNwhGePQeRvoFDfiYrkv5ON1Ji8Mn4QoUvj2MUfv0kBHGgtChIqrEY/c3YnhsdiQ6t0
+ tNbjope9nEz7wKGUOQ4ZOrXJ5lFUfAgNUgrR2NATPCy1bjAKxw60B4/Z4hnsUjcFhuLG
+ o6ZlcnjQBJdQjkZ9OhLgR+nT5CQUjWACuaISg3bBrPJP4/bedoBw67qRed6IMVSBZDSk
+ Fkqw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724699190; x=1725303990;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=HAaJEY31GHYG7OVz5ZzNLRxgIbBJcNA44aOzXEFhLGM=;
+ b=Hbm25ZwRJ4AHcOqwwVuH8hqIQiUSQXGbWZVLNlqbSFTY/wrlnP4Z4Lj7KknCW7ABkc
+ gmFmXJJv3InymN7Z3tLdvD9fn2FWcglzMPvdfj4Fn4Ge2A4a3bH6XvVnNvy1pxTx5x4Z
+ 6wQVoOkLMhMA87rTbgLyIjsTZ73rPGwqHndhfyvtBja7/clL4KyQWxs24t+Ho8ec9s0t
+ 2uUbZXiCQYuu20/AV/8sdNJLTURLbHQ0mP2GiAlEiH3OyNHLPUpgYb1oikG8QkFXT79q
+ +sY8zfdXx4PdTRrPEc0mmAqTf3rdtqkkNOdbfHFFKwE6O+sQJd8I4kg1750m7AYTedti
+ yzAQ==
+X-Gm-Message-State: AOJu0Yzy0jTAZ9doXyn3nO2WLQedkl77rh8gEYilMcIM6RDch3Uej0NG
+ YcY3ObZr6uia2Y/UGUFt8q5a2MlrVuZf+Uu5L2hdmPlGjEYCDp/YxSWCvs2vaQfKYHpY7Vrgb6T
+ OmDSsqzd2I1vZZsx6yUNMksNN95fyaBAJAfPYO2PmGCzVsfpIUh8=
+X-Google-Smtp-Source: AGHT+IFDBpZxrhKbcu/oKNZIV/0QWSZxOqshDNnKyxpuuHPtUdRidq6Ip+gnmkE8xzQ+ZrMVY5bKRE4xK2vgFBwFC9Q=
+X-Received: by 2002:a17:907:60d1:b0:a77:d9b5:ad4b with SMTP id
+ a640c23a62f3a-a86e2901bcamr67180666b.9.1724699189393; Mon, 26 Aug 2024
+ 12:06:29 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/10] SMBIOS improvements
-To: Tom Rini <trini@konsulko.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Bin Meng
- <bmeng@tinylab.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Stefan Roese <sr@denx.de>, =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
- Wan Yee Lau <wan.yee.lau@intel.com>, Alexander Gendin <agendin@matrox.com>,
- Michal Simek <michal.simek@amd.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Max Krummenacher <max.krummenacher@toradex.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Sean Anderson <seanga2@gmail.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>
-References: <20240816154658.1866186-1-raymond.mao@linaro.org>
- <CAFLszTjE+8BmdmtFXER94LmEYshNDEA4x_MDTqvyGhHYed2OCw@mail.gmail.com>
- <ffeb90f8-4f3b-4455-83db-d7b03b872c84@linaro.org>
- <CAFLszTg8gM53pcbHGj-LoA9GDSU-X294_q6ZRnP_QjYFppG0sw@mail.gmail.com>
- <20240826182345.GJ2479150@bill-the-cat>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240826182345.GJ2479150@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <20240816032217.267689-1-festevam@gmail.com>
+In-Reply-To: <20240816032217.267689-1-festevam@gmail.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Mon, 26 Aug 2024 12:06:17 -0700
+Message-ID: <CAJ+vNU32x+MieDJj3urBs7q_Rc+u+4zMinGGOLDY43rnih04FA@mail.gmail.com>
+Subject: Re: [PATCH] gw_ventana: Remove unneeded comments
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:X3nKlHY+ZczJlhGne0tmwlrZG+I7TvH6H8IHBiLKMzdnol0tAI6
- QFCTGwPxLeobnrsBimVG3qiFgVJDZnpppgjKsqHEXsQ52bNMMtt5SkNhs5XL5ox5xJ6VEPB
- H8wLaEh/0tvt6pJLTAkMKP41YmTosisGZrffM8MgNAsIx8hKeh47q98ICyJkEb9Irvz8vwe
- usqBC4/NMDNekjYbPaAqQ==
-UI-OutboundReport: notjunk:1;M01:P0:YxmohzHArJk=;Y93MnY4LCGaiYdHU353u7IISnt7
- j5PjCoCdYqmdd49zEPgb+OgDuscKnEOcyAZQdaNsHFEI62S6VJ5wbqYQwDXMosmwLU6I/1jFN
- 3igAOsO7+3gowCjEsR8CiNaWuugirC1RGdRdub4D8czxF3HvFS6yanZF4qqIhQ65voJuBPXzu
- rFyDOo+YOsyM2IGyWgAWSlhykPjeX1LcRHbaHQO46rmhEQKHlHrXA4Y7dmuhUJ1AjAw1r/luC
- x7Z3t0vMSTEd80COU6otvS/EJJonBehdDXDRi0WqknPyFw1NEcGpoHlExgSOWG0K8zyoAgsQz
- J1/apj36ZoHRUH31cRfmDmh4Cd2+UU8D7tE6Kynvyo8kSPLcQ4RqcYtZcsSdjZyCuH6ky/frS
- /bV1GcXwt1oCsyLwOzO+kVLPpQ7X9cu2Q5SJKOEAXv/CTD7+Q5WoX1oF2DjwrV3Bh/Z/mJGPn
- cXubTWXR2BEZnJfCxv3/wkXS10h7bhsG/FLiPl9Ib2TTouB9afbz7Muy9IvCOjr+YKTp/DJTd
- Gqr+Dl5njt6m9TJ1nEj9ZkyIcC4l8NEqQ62Y8JwVP7FnguRc/Wexo930w+RzJ9VyAkizYNBOg
- m5+FHBWH1sbBUPEYugquhXr30gfFphzBnZbSWXbU5kXZqqvHN6vSibHRU5aWEfxMo6tDeRW6j
- qR+VlvE55X+OkxNjd7Q9ZAS1f07zeH1ImKWj8uCmOiu/ig6ulmBhIX3dhvYM9qT7LXcIaVFXh
- kAF6W+8tM6DUU9L1Zun+C+WKr0ZLeTjAG9C0D3zrya626SEUq7pfj36T4fUestqCtMz1TIZFt
- uQQ1CnKINU4/2JzhemUtz42BLPIJ+g6gm2IVj74cgyPxU=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,52 +87,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/26/24 20:23, Tom Rini wrote:
-> On Mon, Aug 26, 2024 at 11:58:54AM -0600, Simon Glass wrote:
->> Hi Caleb,
->>
->> On Mon, 19 Aug 2024 at 17:03, Caleb Connolly <caleb.connolly@linaro.org=
-> wrote:
->>>
->>> Hi Simon,
->>>
->>>> As a general comment, this is adding a load of code which is used by =
-a
->>>> lot of platforms. As more and more aarch64 platforms are created, thi=
-s
->>>> data grows. Why not use the devicetree for this hardware information?
->>>> That is what it is for.
->>>
->>> This data does not belong in devicetree, the various system registers
->>> exist to describe this information... Putting it in DT would be
->>> duplicating it.
->>
->> I am not wanting to duplicate info which can be read from system regist=
-ers.
->>
->>>
->>> Using DT for this would additionally require having bindings accepted
->>> upstream and for all SoCs to add them. To what end?
->>
->> To get the correct information in there. How are boards supposed to
->> add SMBIOS info? Do we end up creating a whole infra in U-Boot just
->> for the driver to read it out? It just doesn't make any sense to me...
->>
->> Let's put hardware info in the DT where it belongs.
+On Thu, Aug 15, 2024 at 8:22=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+wrote:
 >
-> I'm a little confused here because of some older threads on this overall
-> topic. Part of the issue here is that in user space, "everyone" has
-> SMBIOS-based tooling today, and wants to have that work, rather than
-> inventing new tooling or modify existing tooling. And you were concerned
-> I thought that we had tied SMBIOS too much to EFI being present when
-> indeed it should be possible to pass the location along to the OS
-> without EFI, but at the time Linux at least only supported that notion
-> on MIPS I think?
+> From: Fabio Estevam <festevam@denx.de>
+>
+> Remove several comments that do not apply anymore to
+> the current file content.
+>
+> While at it, write 'PMIC' into a single line for consistency.
+>
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
+> ---
+>  include/configs/gw_ventana.h | 31 +------------------------------
+>  1 file changed, 1 insertion(+), 30 deletions(-)
+>
+> diff --git a/include/configs/gw_ventana.h b/include/configs/gw_ventana.h
+> index ebc5d03d0d5..3e720a6e0af 100644
+> --- a/include/configs/gw_ventana.h
+> +++ b/include/configs/gw_ventana.h
+> @@ -6,55 +6,26 @@
+>  #ifndef __CONFIG_H
+>  #define __CONFIG_H
+>
+> -/* SPL */
+> -/* Location in NAND to read U-Boot from */
+> -
+> -/* Falcon Mode */
+> -
+> -/* Falcon Mode - MMC support: args@1MB kernel@2MB */
+> -
+>  #include "mx6_common.h"
+>
+>  /* Serial */
+>  #define CFG_MXC_UART_BASE             UART2_BASE
+>
+> -/* NAND */
+> -
+>  /* MMC Configs */
+>  #define CFG_SYS_FSL_ESDHC_ADDR      0
+>
+> -/*
+> - * PCI express
+> - */
+> -
+> -/*
+> - * PMIC
+> - */
+> +/* PMIC */
+>  #define CFG_POWER_PFUZE100_I2C_ADDR    0x08
+>  #define CFG_POWER_LTC3676_I2C_ADDR  0x3c
+>
+> -/* Various command support */
+> -
+>  /* USB Configs */
+>  #define CFG_MXC_USB_PORTSC     (PORT_PTS_UTMI | PORT_PTS_PTW)
+>  #define CFG_MXC_USB_FLAGS      0
+>
+> -/* Miscellaneous configurable options */
+> -
+> -/* Memory configuration */
+> -
+>  /* Physical Memory Map */
+>  #define PHYS_SDRAM                     MMDC0_ARB_BASE_ADDR
+>  #define CFG_SYS_SDRAM_BASE          PHYS_SDRAM
+>  #define CFG_SYS_INIT_RAM_ADDR       IRAM_BASE_ADDR
+>  #define CFG_SYS_INIT_RAM_SIZE       IRAM_SIZE
+>
+> -/*
+> - * MTD Command for mtdparts
+> - */
+> -
+> -/* Persistent Environment Config */
+> -
+> -/* Environment */
+> -
+>  #endif                        /* __CONFIG_H */
+> --
+> 2.34.1
 >
 
-Looking at the Linux kernel code, only x86 can discover an SMBIOS table
-without EFI. We should not ride that dead horse.
+Hi Fabio,
 
-Best regards
+Acked-by: Tim Harvey <tharvey@gateworks.com>
 
-Heinrich
+Looks like there isn't much left to be moved to Kconfig. I'm not sure
+if your interested or have the time (I know I currently don't) but the
+USB defines can be cleaned up pretty easily:
+- '#define CFG_MXC_USB_PORTSC     (PORT_PTS_UTMI | PORT_PTS_PTW)' can
+be removed from mx6/mx7/mx8m includes as its defaulted in
+drivers/usb/host/ehci-mx6.c
+- CFG_MXC_USB_FLAGS is only used for drivers/usb/host/ehci-mx5.c so
+can be removed for all mx6/mx7/mx8m and the mx51evk.h is the only
+place its not set to 0
+
+best regards,
+
+Tim
