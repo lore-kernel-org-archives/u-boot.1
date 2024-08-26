@@ -4,79 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84DDFC5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 14:47:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A5E1C5321E
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 15:01:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A01788A13;
-	Mon, 26 Aug 2024 16:47:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8B9C68857C;
+	Mon, 26 Aug 2024 17:01:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Teop85sf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gWCBD2E3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 669CC88A35; Mon, 26 Aug 2024 16:47:22 +0200 (CEST)
-Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
- [IPv6:2607:f8b0:4864:20::82a])
+ id 74511882EF; Mon, 26 Aug 2024 17:01:54 +0200 (CEST)
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [IPv6:2607:f8b0:4864:20::72d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA581889CA
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 16:47:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C8EC86DBD
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 17:01:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82a.google.com with SMTP id
- d75a77b69052e-44fe11dedb3so24468611cf.1
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 07:47:19 -0700 (PDT)
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-7a1d42da3f7so281091585a.2
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 08:01:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724683639; x=1725288439; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1724684511; x=1725289311; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=P1KxKfCWL5IzU5OWQvscD3i9219GoPkjHkZbYW4Hp/g=;
- b=Teop85sf7mnZ44RN03uiw//39hb09sSitZ7MkqQdz37Y3IXy/jrBMBFzNUSLHp2A5m
- bfENSQJU8Khel6mYgrKuvDKUhpZHrNVakVBoUtyEd9NtgJyu66fo9CanvpqwC2y901Wq
- hV621SpvswkNohTnOvRixnaVE175BtBwO77ck=
+ bh=Bwn9R3nEpqeJewBOqlIcEaN5Mosj94pDghVPFn5aNkk=;
+ b=gWCBD2E3ZMlOR+t8nVzvbA+JkYEcFWiYwRdmUUuUPKcpeTaT4A6rkTHhYxhNhFm3XG
+ vYWH2OvUrLeToyMRuEwSAh23D5Ci4KzARqsdG9P0DBQUSPCgDtvQpuAggifolUZO1Z5C
+ BaV+4okpo8IjC+MWE7irXPi7d9PRnMLtNqKus=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724683639; x=1725288439;
+ d=1e100.net; s=20230601; t=1724684511; x=1725289311;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P1KxKfCWL5IzU5OWQvscD3i9219GoPkjHkZbYW4Hp/g=;
- b=W+8UhwcrtSDgzneYPk5YFgxlGcpqlVLznQxUmWluKqQjUJJVdq17pRSZrjH2CKQyCe
- uzDoSpbZFNGKYdACqgzddQZXzVNYYGAiS6gBV033jRFIrthWYjE/YKpf6oBKhVyPukTD
- 3GJ5UqTCiR59J8SDBsjsCwW9IKnIqIrsB2//zyGj5tCseiHbD6HtvXIkezgi8XOsS4d6
- 6I0YT7DnpA+p8sCvcbueCS94BcIGcePf4vsKJZHI7IR1yUtDmRds9qoOmJ9PrNSrG2eD
- JAbzy25zeM0nljIcJk053CNdbbQElPge6YXd4CUKjO+2GqDIcM4/nE3JaMa//VqtK+hH
- W+7A==
-X-Gm-Message-State: AOJu0Ywg+/rBh/cu3hBTOTZGANcOxUJbRAGL0sqZdm5u4o3u7F7LCJfm
- iyCml3rhfYttQAZklY6vuFadELCSC9PwB9LwYWeKpcgSNP8EcTsEWKstuAuhP2g=
-X-Google-Smtp-Source: AGHT+IG4CGln/ol8jccMfPg+P+EXRAuoAcwzBoskLcImGlNjdCTFFSD3QiPOqD0PRsF9pzCz+/GoIQ==
-X-Received: by 2002:a05:6214:2d4a:b0:6bf:6934:d0bb with SMTP id
- 6a1803df08f44-6c16dc6d6c2mr114915576d6.21.1724683638690; 
- Mon, 26 Aug 2024 07:47:18 -0700 (PDT)
+ bh=Bwn9R3nEpqeJewBOqlIcEaN5Mosj94pDghVPFn5aNkk=;
+ b=Oq38KW/N29sUK0e+xrVRo3NFHhhzL2JH9MwjodHvk1UcIPTkM/epdObNN8JxGcAr40
+ Z2TUMZfQkEWLn2fp4EM4N6uubcHVR0LhanUJZxueCwz+W9l212yMuncPXJkubFN81y+v
+ XOA3E5+yHQEO8py01sLyer/A+sQ8TD5bwmwih78sr+fDF4qRN3Zy5J80TKRwmikzPZ3s
+ takX6YO3e4MymbydyBYX+Ws3kzcHMii4d43JozcmMTB4GmWqELk8w0dUJQ5GjDD3CxxX
+ m5IXSm+l7qZMz1QlMT1nOxh8MhgXVtUb+XM17JscEUD63U+3Y0DH4xa7fccO28JlJ7Yk
+ AVIQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVxEW0Nn9rXsSW8T9Nrq/wnoevoVbhPOWwkSgo2kI0jR8H41D80eLygX4R4U4RBGbD2HmaH6x4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwN3wJsx2hJH1d1BZBKfGDxENDzFLiUIJLLovAcPJya8o3GLp1n
+ Im+wfkfA5aTODvUbtguRKJ3Xc2dndmRTlTLPPETyPzYbIzA69jrHJcI99oGJ+lM=
+X-Google-Smtp-Source: AGHT+IF5YSIdYVf3zEAQE+rRFrUVS7LcEbdJpcS8jm0Nt0b8L1dMYir26Myiaiq1FpFpVk4cshoHUg==
+X-Received: by 2002:a05:620a:1a0e:b0:7a1:da5e:c501 with SMTP id
+ af79cd13be357-7a6897c676fmr1208230985a.60.1724684510476; 
+ Mon, 26 Aug 2024 08:01:50 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6c162de645dsm46913066d6.131.2024.08.26.07.47.17
+ af79cd13be357-7a67f3bb381sm462705785a.85.2024.08.26.08.01.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Aug 2024 07:47:18 -0700 (PDT)
-Date: Mon, 26 Aug 2024 08:47:14 -0600
+ Mon, 26 Aug 2024 08:01:49 -0700 (PDT)
+Date: Mon, 26 Aug 2024 09:01:46 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Anton Antonov <Anton.Antonov@arm.com>
-Subject: Re: [PATCH v9 00/23] Introduce the lwIP network stack
-Message-ID: <20240826144714.GF2479150@bill-the-cat>
-References: <cover.1724419624.git.jerome.forissier@linaro.org>
- <20240823211825.GZ1626301@bill-the-cat>
- <12d558ef-6c76-4ae5-9aa3-7e34eb5e2a60@linaro.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: E Shattow <lucent@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ u-boot@lists.denx.de, linux-amarula@amarulasolutions.com,
+ Eddie James <eajames@linux.ibm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 1/2] bootm: adjust the print format
+Message-ID: <20240826150146.GG2479150@bill-the-cat>
+References: <20240825122617.3708982-1-dario.binacchi@amarulasolutions.com>
+ <CANV2PTN_+9rZu0=XrNE+AUO3YRPCUjSHZy-Oe8WcXb_M-MiVTw@mail.gmail.com>
+ <7a25850c-6082-4490-867b-126b480ba757@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0BO52E+poEEhO8Kq"
+ protocol="application/pgp-signature"; boundary="lYD9jK+B7g0vt+bI"
 Content-Disposition: inline
-In-Reply-To: <12d558ef-6c76-4ae5-9aa3-7e34eb5e2a60@linaro.org>
+In-Reply-To: <7a25850c-6082-4490-867b-126b480ba757@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,94 +100,99 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---0BO52E+poEEhO8Kq
-Content-Type: text/plain; charset=us-ascii
+--lYD9jK+B7g0vt+bI
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 26, 2024 at 01:45:10PM +0200, Jerome Forissier wrote:
+On Mon, Aug 26, 2024 at 02:26:10PM +0100, Caleb Connolly wrote:
 >=20
 >=20
-> On 8/23/24 23:18, Tom Rini wrote:
-> > On Fri, Aug 23, 2024 at 03:48:04PM +0200, Jerome Forissier wrote:
+> On 25/08/2024 19:36, E Shattow wrote:
+> > On Sun, Aug 25, 2024 at 5:26=E2=80=AFAM Dario Binacchi
+> > <dario.binacchi@amarulasolutions.com> wrote:
+> > >=20
+> > > All three addresses printed are in hexadecimal format, but only the
+> > > first two have the "0x" prefix. The patch aligns the format of the
+> > > "end" address with the other two by adding the "0x" prefix.
+> > >=20
+> > > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> > > ---
+> > >=20
+> > >   boot/bootm.c | 2 +-
+> > >   1 file changed, 1 insertion(+), 1 deletion(-)
+> > >=20
+> > > diff --git a/boot/bootm.c b/boot/bootm.c
+> > > index 480f8e6a0e6e..951e549f19ff 100644
+> > > --- a/boot/bootm.c
+> > > +++ b/boot/bootm.c
+> > > @@ -703,7 +703,7 @@ static int bootm_load_os(struct bootm_headers *im=
+ages, int boot_progress)
+> > >=20
+> > >                  /* Handle BOOTM_STATE_LOADOS */
+> > >                  if (relocated_addr !=3D load) {
+> > > -                       printf("Moving Image from 0x%lx to 0x%lx, end=
+=3D%lx\n",
+> > > +                       printf("Moving Image from 0x%lx to 0x%lx, end=
+=3D0x%lx\n",
+> > >                                 load, relocated_addr,
+> > >                                 relocated_addr + image_size);
+> > >                          memmove((void *)relocated_addr, load_buf, im=
+age_size);
+> > > --
+> > > 2.43.0
+> > >=20
 > >=20
-> >> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
-> >> library for the network stack" [1]. The goal is to introduce the lwIP =
-TCP/IP
-> >> stack [2] [3] as an alternative to the current implementation in net/,
-> >> selectable with Kconfig, and ultimately keep only lwIP if possible. So=
-me
-> >> reasons for doing so are:
-> >> - Make the support of HTTPS in the wget command easier. Javier T. and
-> >> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
-> >> so. With that it becomes possible to fetch and launch a distro install=
-er
-> >> such as Debian etc. using a secure, authenticated connection directly
-> >> from the U-Boot shell. Several use cases:
-> >>   * Authentication: prevent MITM attack (third party replacing the
-> >> binary with a different one)
-> >>   * Confidentiality: prevent third parties from grabbing a copy of the
-> >> image as it is being downloaded
-> >>   * Allow connection to servers that do not support plain HTTP anymore
-> >> (this is becoming more and more common on the Internet these days)
-> >> - Possibly benefit from additional features implemented in lwIP
-> >> - Less code to maintain in U-Boot
-> >=20
-> > As an odd thing, the series leads to ethernut5 failing to build,
-> > strangely over the RTC driver it uses, for me.
->=20
-> Weird.
->=20
-> > I did have to manually
-> > merge the CMD_WGET related patch,=20
->=20
-> Weird.
->=20
-> > but I don't think that was what went
-> > wrong here.
->=20
-> Could you try to build from GitHub perhaps?
-> Branch https://github.com/jforissier/u-boot/tree/to-upstream/v9 builds
-> fine here:
->=20
-> $ ./tools/buildman/buildman ethernut5
-> Building current source for 1 boards (1 thread, 24 jobs per thread)
->        arm:  w+   ethernut5
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D WARNING =
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +This board does not use CONFIG_DM_I2C (Driver Model
-> +for I2C drivers). Please update the board to use
-> +CONFIG_DM_I2C before the v2022.04 release. Failure to
-> +update by the deadline may result in board removal.
-> +See doc/develop/driver-model/migration.rst for more info.
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D
->     0    1    0 /1              ethernut5
+> >  From U-Boot documentation, alpha-numeric input is assumed to be
+> > hexadecimal except when it is not, and generally does not accept "0x"
+> > prefix on input. So the correct action would be to make this
 
-I think you weren't on latest next branch when you posted v9, and that's
-at least the merge conflict. I see the platform builds on your branch as
-well, but fails still, on mine.
+While there was some point in history where I'm sure we got confused by
+"0x" input I don't think that's true anymore (and everything should be
+using some strto function that works as expected, not a custom parser).
+So the docs should be updated there.
+
+> > consistent over the whole U-Boot code base, or remove the "0x"
+> > prefixes (not add more of them) ?
+>=20
+> Most(?) U-Boot commands accept the 0x prefix. I don't think stripping it =
+is
+> sensible, I myself have gotten confused many times over hex values that l=
+ack
+> the leading 0x in U-Boot output.
+>=20
+> Maybe unavailable in SPL (not sure) but I prefer the "%#lx" format which
+> prepends the 0x automatically.
+
+That we assume input is hex is just what it is these days. Output really
+ought to be prefixed with 0x because that's just common convention (and
+whatever we assumed people would Just Know 25+ years ago may not be true
+today). Since updating this output really shouldn't change our ABI, it's
+conceptually fine with me but we don't use "%#lx" a lot and so I don't
+know if tiny-printf handles it and so that might not be the right call
+for SPL code and so lets not change this patch.
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---0BO52E+poEEhO8Kq
+--lYD9jK+B7g0vt+bI
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbMlWsACgkQFHw5/5Y0
-tyyQxgwAqDf+RfMkp2NBtj5H9PVtUHN4v3psr6vw5s7yCy/FISQFdzGJWzBBgdoI
-akFnUDO1ypMFofUiJDD9oNbpceo7uK00uS85X6YgPZOCPnLTL3b89O5XgGsf7hdz
-p+fK68FOEEYAmSS7wUKVC0txqL64ZQICd5x+V0FWZRk/8/SEJJzz3O9koxQ8NptK
-JeUc1ssAhnrQhWJ1DJx38rZ/8byEjph0r1PbbiRcJ7K0t9LGK7KqO550//8zQxRd
-2DSmiHVrCrlFmJCi/aJeHfWD4lNNmuc+Z3bLU8IGYprORYDEHbP+VD4jheO9d8rP
-UebKU5qOydeNu4Xo7lmRkcKTZ8DjWZnPUOEBFXJNqPW5iGqsCzWcIeBp6WAIi5or
-GEVd60b0PRj38a3Uz/9ye/kwO5zy+31vo7cRL1wVSSVdEK7KPO1vbjZq5PS3jNo7
-cGTuLdSCVJUWggcLGTotTQYJXzSxO9fedz8sGpSCoI6IsLkj88Eyr5ya3DrUFifj
-IVTNMl6J
-=8ess
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbMmNcACgkQFHw5/5Y0
+tyzkEAv/S4K8+YbUa2c27z7Zw5QsUuDne0/+ACePn04Rzc/VgTsDMorlZu2x3J+z
+OrihTW6S87jaO8PGiOk7YnnZKr/kPZkpDmo7JjJv4cV6TEF1hPXGAQQKpKs/Wi8t
+0B+4eAfwj0UilQXliwhglxpzXl0JgBPbAB512SC+RsFHtrN/Ux3MF59s+ekqsvXO
+NAhmvoslav8LQ2TT8RKtZ+/nBHmJrGLKg1vCeZHHaiwgjcYqMF0R8LHRlc/x7TjI
+hHTZ1gmAjDENT/hJ8exDWc9AYCEIQIF8NAEBFeCyfQRnqRs4vysaKce4Tr89f9Rp
+gIq/eVF3TFZRIZSbxR9YXUHz3W2Ya78zraDRbQgsiH9s05EYVxz84mywfUv1emrm
+BtxM6lW54+Rqy0Uu8SYclroBoIieoxJd34tXDgS9oLtvX8eeou5njIc4yz0XyIBy
+uJNJlfcQAiwVD6TXCtVpNGJDJ7QLje0ZFvfN7sVZMjq0CFsMvp9DgK0oI/q4IUvC
+Kpu8I7Tp
+=7YSe
 -----END PGP SIGNATURE-----
 
---0BO52E+poEEhO8Kq--
+--lYD9jK+B7g0vt+bI--
