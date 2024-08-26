@@ -4,94 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BD49C5321D
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 12:33:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36B40C5321E
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 12:51:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E00EA8831F;
-	Mon, 26 Aug 2024 14:33:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 7EA988895B;
+	Mon, 26 Aug 2024 14:51:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="OfeBpsOZ";
+	dkim=pass (2048-bit key; unprotected) header.d=weidmueller.com header.i=@weidmueller.com header.b="Xoz7sRBH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 203B888481; Mon, 26 Aug 2024 14:33:32 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ id ECAA5889C9; Mon, 26 Aug 2024 14:51:23 +0200 (CEST)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on20710.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e1a::710])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8440488297
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 14:33:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DA5C88001
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 14:51:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ header.from=weidmueller.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id C6403100009;
- Mon, 26 Aug 2024 15:33:28 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru C6403100009
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1724675608;
- bh=Ydm1WB1xgNCDLvn7DGbP4Mj9EyUVvzYyiTlNe/DLzkw=;
- h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
- b=OfeBpsOZFxZPl16RIbxgnS824a/XMhc0rd00bAFB9azLh3EzKWqYV4ILM1rx+N2SY
- ObkkJPK7DpoNjv/dWd9gk36NjCEhTM925AA09MAtnTwydXOPKWH4fPLRIHzDoZnS0I
- 7QlulEBJ7PbAL3x63gAehrqxfN2Fd/VAl85NzVmTt1uZWRGk31GLZys35bUr9bjR0+
- EB9GOn7+lU/mF8A/cWFBZZARlop5rXc3s4O2eBHBwc9Ekjs40+G0XU0tX0E/fdb+fV
- i7nV8QpZIZ2mWWrDZ9JtHFv259/Tpd+KuiJPDZNttFo3qjX8BxbwFO9OIkzVvHEnQI
- GkNy24oiQb4vA==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
- [172.16.192.103])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Mon, 26 Aug 2024 15:33:28 +0300 (MSK)
-Message-ID: <238509bc-1174-c042-7493-4c579fb3c1a0@salutedevices.com>
-Date: Mon, 26 Aug 2024 15:20:40 +0300
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Subject: Re: [PATCH v2 3/3] mtd: rawnand: meson: read/write access for boot
- ROM pages
-Content-Language: en-US
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-CC: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Miquel Raynal <miquel.raynal@bootlin.com>, "Tom
- Rini" <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>,
- <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>, <kernel@sberdevices.ru>,
- <oxffffaa@gmail.com>
-References: <20240826060411.3532105-1-avkrasnov@salutedevices.com>
- <20240826060411.3532105-4-avkrasnov@salutedevices.com>
- <CAOf5uw=UuB1YandpEziF1gp3Amh1J9fk15YCM7J4FZW6zoq7GA@mail.gmail.com>
- <6f361799-2cd2-9573-cb53-82b22ca56c06@salutedevices.com>
- <CAOf5uw=2T7VLdKA+45LedRDvPN29Sv73C8P1NEeB+BRKA=exQg@mail.gmail.com>
-From: Arseniy Krasnov <avkrasnov@salutedevices.com>
-In-Reply-To: <CAOf5uw=2T7VLdKA+45LedRDvPN29Sv73C8P1NEeB+BRKA=exQg@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+ spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=eTvn+lNOu5MWx1cZylDbpMLgLG5GyiFdDNMWoD1s6k8YDNuCP6ioPnp3LilIbabD65AYM14Zz2yilPbBl2on00U3umuAAbtAfpQeQQuwJyOgGkiSheWSnyCeOLImanEDinB4F1SCM4whUT2U/z+HEsEje4t+dX2T9NsctczZCOrfjV+k1bXWFDnVyHd2mKsY/oMFTjG97MGdz9UUA+MpYNBsenCupDvpfWbD9Gg1KjDZyqyb/moH1EQM3eRMgeDNrEo3wtst2n4+89Pv6nlrDzxmZfmkt8sKYmUd8yOugA14ZQZzeNWQGYLt3bid+3aoDIgETLk/9Xzlm6iSQUILTw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=jvCsq8PQ69TJ8vLooNb+NL/5ZfMCxNK4duxvZbSUDzQ=;
+ b=NLq2fmVWFCQNFgwZmh5rKvIevjKZOQq5pXz3+DdbOvXj5riW4IZRoZTuEWLHrFSyJGZbiJMnrx+arfWbHXojx3Y3yCsY4Xs3t7qSqiCdLVtM5E7QDfRYgSgujnl6LK/EUgn/Skaq3JigDyFlE375NQyHs8eLYQyUSfBnfU+7PUtF+ycnb0AGbkED6tXBRqSUYu8g2kf+K9qs6Q2/8SVfsTYeV+x5/vcQgNrYgnUKfg8tFMwys4WZRTPs46/qTNiPj7lOcEuNls+/Chf2p4Y5NmZpt7uhLda8ztkWutcD8Ebk4As1eTtEeHPpsufsImLrMEcaCsGR9Ikd1S0Q32kvHg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=weidmueller.com; dmarc=pass action=none
+ header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=weidmueller.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=jvCsq8PQ69TJ8vLooNb+NL/5ZfMCxNK4duxvZbSUDzQ=;
+ b=Xoz7sRBHX0O8HrvEuoxxIhO6j8IG9Kdy2bsbJWcaL6uHrEPv5KYYKTV83+2MHONvsdKSWwQJ9Rc7/7JXtI10oa0idCqX7H3uBxD904BKIMtS64Otn827S0TzDmyhKBQQb8zps3gkjihcIStJMJ/zTV2QonTwuhZmSqTlmfux1SrJYODPJgYwdzL9dJ297WE/RJukkwU+kLHWUYp+wnjJVz7yYYJS9oQ9TS7wseKdpFP3McqWStDbPu4N7xRB3dPjZDTibTtg+3FPkC4FMzVJXRfPohNbKq0okKQU8zqFUSYwbETrNCg9BgHpnvLOQLEQ0z5/yH0w36Q/VEwj67itUQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=weidmueller.com;
+Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
+ by AS8PR08MB6534.eurprd08.prod.outlook.com (2603:10a6:20b:31c::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.14; Mon, 26 Aug
+ 2024 12:51:19 +0000
+Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
+ ([fe80::aeb:1738:d59a:cee6]) by AS2PR08MB8431.eurprd08.prod.outlook.com
+ ([fe80::aeb:1738:d59a:cee6%5]) with mapi id 15.20.7918.012; Mon, 26 Aug 2024
+ 12:51:19 +0000
+From: lukas.funke-oss@weidmueller.com
+To: u-boot@lists.denx.de
+Cc: Lukas Funke <lukas.funke@weidmueller.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mario Six <mario.six@gdsys.cc>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [RFC PATCH 0/1] env: introduce variable value ranges
+Date: Mon, 26 Aug 2024 14:51:10 +0200
+Message-Id: <20240826125111.1332215-1-lukas.funke-oss@weidmueller.com>
+X-Mailer: git-send-email 2.30.2
 Content-Transfer-Encoding: 8bit
-X-Originating-IP: [172.28.225.232]
-X-ClientProxiedBy: p-i-exch-a-m2.sberdevices.ru (172.24.196.120) To
- p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 187315 [Aug 26 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.4
-X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 27 0.3.27
- 71302da218a62dcd84ac43314e19b5cc6b38e0b6,
- {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
- smtp.sberdevices.ru:7.1.1,5.0.1; salutedevices.com:7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/08/26 08:14:00 #26435425
-X-KSMG-AntiVirus-Status: Clean, skipped
+Content-Type: text/plain
+X-ClientProxiedBy: FR4P281CA0303.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f6::16) To AS2PR08MB8431.eurprd08.prod.outlook.com
+ (2603:10a6:20b:55a::18)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|AS8PR08MB6534:EE_
+X-MS-Office365-Filtering-Correlation-Id: 893c62b3-a64f-497e-3739-08dcc5cdc795
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|1800799024|52116014|376014|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?skyERZ3mLPcx06ODeO2K+4+TnlpvGyfsUJ+BzA7tjfzL+HfyrY5A845tnaEU?=
+ =?us-ascii?Q?Py9hu4sAgC3iaTECFfRCXzJpBZUcQ7Ba2rCr/KS2kYuz5i7xB7xtYm7liMTr?=
+ =?us-ascii?Q?CCfDD3hYz27QRTBBlU02HCHbS/NC56ImH8dnu7OPItpNC98rq2jI+DMB5WUb?=
+ =?us-ascii?Q?JbHYTqM5p1q1kCMBOD+qSTXZQZIFO0hlehZQimFLrjfiHwe7yxgkJW+03nzy?=
+ =?us-ascii?Q?AYiVUoJa/WocYgRQSGZFhjZAxBKym/Lfc8l5ltkFvqfhQZKtuOwtom0MuZlE?=
+ =?us-ascii?Q?mDPYdg3gvDjLnb3RUFsjCtt3z2p/J0V5TBcy7CMMS3b3DJuVE44UH0p9Db6W?=
+ =?us-ascii?Q?2dFsoND8w/hUqEXY1Rl77Y9rYZyxiSWmWeUuikT1TYUvB8i9VX88DfOjsq7N?=
+ =?us-ascii?Q?wAo7VKaNaauRhULFzO+c7GGRbsympATISLwL/v1MxioutjJ1bZmjHxFaYdrw?=
+ =?us-ascii?Q?u+0z+a0VR5rH4mlPupWErgySjzxWLLiQ6l3+HaRPiSSdcv2WLOhD1Rk7ZYhv?=
+ =?us-ascii?Q?n9ZbK41zhQxJIEu2fXQcK3aZQhOZitVKVhbIH2pVNVmoxosKZL2R/EIXoq5Y?=
+ =?us-ascii?Q?S+vItigiCkzlJl4wMIn8U8VR3ReC0xJHYbDCbJnJRtrcGQJKQ35vRxcsEhHg?=
+ =?us-ascii?Q?ASC921gveuumraQa3j7/CWCa7t96RvVYbqAdaemhDjiMiqkmRmj8r97yLM/T?=
+ =?us-ascii?Q?W6nJ3L1qZFkMKHOHyypDiPR+wwRLmrSwMq/PE4MGLG5fOnp0UUHqT/bNfJ97?=
+ =?us-ascii?Q?u0lTQWS6qMzxC/sAilx9ObOw4D1l+KqDQXzNUAXFO22XoZGnUBPi9l3a353t?=
+ =?us-ascii?Q?HhwtSy8t+Ddg595svd/qwYhFbzCUaCi69Xk1Uv/f8r50aSdPrx/VcPsJ6fDL?=
+ =?us-ascii?Q?LG8bYqDXG9kWxyzxdONnsDqxCB1Ezd4SeRetgE3k+QNsb/LjFEOGlTBwT8UR?=
+ =?us-ascii?Q?dkZBnsOfePYTtcIT+YfwB2BpedMGIe/Q6Gu1HdOTlIe8ohJjskHutKO7Ca6l?=
+ =?us-ascii?Q?tafreSj5BYs61wbj60GU1cu3mDf0MUs/vybGkbRp0S6cEz+APgurAdKbZbRk?=
+ =?us-ascii?Q?6O0GBsN9capP+oknL6N3aij/Paa04mZRm3Je9alAXtyCuCIYNnI4s8FEbxOe?=
+ =?us-ascii?Q?4dHjCR1O7oxdUP36hlQQyKCdKbBMAOkPN0xCCcVdRy7E6XFEDRv01M1MdMn+?=
+ =?us-ascii?Q?DXFsn7uVf2+YbkxG2TwEhh/nZoNtcjdXmKKr1MPRGlvhLHIYoQG8ZEJyMluf?=
+ =?us-ascii?Q?5ovgBfjOSPkxiNGC64q/QXD3PurplsKl0gZjuwHXuSnDvUvbJwtmjPjpZn1P?=
+ =?us-ascii?Q?9EeFwo6r8rFgbDPogjm0/2tKnhN5lgZNIb2UFjV2+JMH3Bh45A1Ew8HqATI/?=
+ =?us-ascii?Q?Jk2wRjdimsB59BNNhFU3YWd3dcH8A0mO0Hi5e2+zZ8r3uRPhzw=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(52116014)(376014)(38350700014); DIR:OUT;
+ SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?eE33zHX24XPgpL3nWy5Ay4J7Za3VeoBqLDoVP9zeDauvkkeltVS6Zs2QfjE6?=
+ =?us-ascii?Q?XnB6rzaqy36G2/wrJsbh8uc7ks6xKyV109bZ0TJgolX59r7ReBBJua8ZXwVi?=
+ =?us-ascii?Q?x+B4gB18kozPHR7AK6dRKLNtyB8Ws3m3pTKEBoL1GpyB7WNFQ1NthmcgVkoS?=
+ =?us-ascii?Q?0rAg78V/ygSb//SHGC4E4o6uUpnVTYhHGCYyeJdw6vvNLv2QK4lMqrNDzsu1?=
+ =?us-ascii?Q?Dyv4V1ESCF9eOPBvxSaup+T3etiMOp9Bci1JUtiVZQq+MUqJpI+UuV4AROcP?=
+ =?us-ascii?Q?KATLHxMyiqwMEbW643SYbQTxV4seEKgjeBjlMpnKVwtxS4EwWFIbjF6/kGff?=
+ =?us-ascii?Q?7PzgEYWNeuzpiVOvuVA4/6uCDI+NFkoI8zNDSa6oeVXGmD/V3VD/Z/XniWWi?=
+ =?us-ascii?Q?qmnHXYXkblxGwL0uZ+CD+HeRN2al0r3AiaDGU52EzUxAJzsVlA05jeTZU3xZ?=
+ =?us-ascii?Q?eBSOS9ui4c64SjKkOzNa0N0IzJGbhLRlLh2kRVmc8wdvLAdKloZgM+syTnJr?=
+ =?us-ascii?Q?k5dSVvW9ghUtMOvpmyYXIArzwWHuEOHlO4N1IHavuCVudUb6eOR+slAqyPyA?=
+ =?us-ascii?Q?1UcaueLs0zoxnwsrSmrW7DQ0HFDBfYVHnuEAqxzn6cYaXlkgW4+EQAPWCxRf?=
+ =?us-ascii?Q?r9YDrVCNuAxUJH2n64lo62PzKq8rmdvbBO+FfeQEeZ/NeK/mouwSjejDMojI?=
+ =?us-ascii?Q?GsgptlPE+1QNfO1KCgry+ML7NXkdOr+McxP0cd0EZxLzc4K9qxT3YOdzjABl?=
+ =?us-ascii?Q?CjY4+EZ6hcvUi06TRmTxzrH95b6G38PB7z2yLD6YvrjhKDzG4Zh7+XGMoedN?=
+ =?us-ascii?Q?EjeoIkGFYG8MTsuJBHHLydz/l/sY/ZVM0oqBac8l9fCEBMdY2vO3wp2uwRhn?=
+ =?us-ascii?Q?rZPaRll+Y3zokdiLPPoFZXsBX+Jil2y7ha2crVekt2/rNc6pmeQiprlu4oCE?=
+ =?us-ascii?Q?n2bgqM5PqwIJYn5rc0UHUZqt3cw2kgfy9XIRf1dIDjZYAapsTkcw6jZn4s/5?=
+ =?us-ascii?Q?SXReyteYNOF6OAsIq2zZpFZDi2PyNamBV+SkOWW9/x8cb2H4DnklsYICIuFF?=
+ =?us-ascii?Q?lUBsJq40SDLSHVl2D2xkqYP7GRjbrleyVOA+fb//98mX3twjzbxGsLPVBTuq?=
+ =?us-ascii?Q?S1tDD3ZvR2k2a+0SwLCrhRmfrXry/Ry6MFqDJitK040dq5OnuJuR6FHPxl1J?=
+ =?us-ascii?Q?OwBhyMX0axMu3eTkYavLeyFW0pGWxVnLh3X/X4/IpWvwM+Mlt3BSkNhyatbR?=
+ =?us-ascii?Q?SLAvyAHIeoXUULyi3j7j+Q2cK4g5YUR38EGNd7RiUbM7pMk4eqbHAoph7gJ9?=
+ =?us-ascii?Q?5HdPOpM69S6sRvNYlxZ0LrPfxKg4qyN3duvzg8175oyP28lDqoGiSP/Z7Svv?=
+ =?us-ascii?Q?Z77qY4hrG4MzhAbQGlnq8BaZBVXeJvMFUZGZzZC+9LTwSQPwshhv2ixqz7XG?=
+ =?us-ascii?Q?Dr4leO/MC9CGrG5jBwKBEbTO6KksG5ITOBJniJ27am2ioWUP6RD4tcfj0ax3?=
+ =?us-ascii?Q?13KPIaDWoeOm20puSzaZf3N7lniuB09ByHyBwIQYwTMbu1cAmEWwkdbbAcol?=
+ =?us-ascii?Q?s+08syDM225Y2/sAZxDO28ifR7NbtjTFPg9aNbvN4sEdioq85qc4t2R3RT5X?=
+ =?us-ascii?Q?YQ=3D=3D?=
+X-OriginatorOrg: weidmueller.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 893c62b3-a64f-497e-3739-08dcc5cdc795
+X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2024 12:51:18.8521 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: uLSre2s2OAdRO2a3w22Dt3tFDuTHYh0QTrOKpOsp049vgTicvVC3ENoo3XbuCL2hmC+hD/7nLtrN3SAPsyFg5g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB6534
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,195 +160,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Lukas Funke <lukas.funke@weidmueller.com>
 
 
-On 26.08.2024 13:42, Michael Nazzareno Trimarchi wrote:
-> Hi
-> 
-> On Mon, Aug 26, 2024 at 11:00 AM Arseniy Krasnov
-> <avkrasnov@salutedevices.com> wrote:
->>
->>
->>
->> On 26.08.2024 10:16, Michael Nazzareno Trimarchi wrote:
->>> Hi
->>>
->>> On Mon, Aug 26, 2024 at 8:17 AM Arseniy Krasnov
->>> <avkrasnov@salutedevices.com> wrote:
->>>>
->>>> Boot ROM on Meson needs some pages to be read/written in a special mode:
->>>> 384 byte ECC mode (so called "short" by Amlogic) and with scrambling
->>>> enabled. Such pages are located on the chip in the following way (for
->>>> example):
->>>>
->>>> [ p0 ][ p1 ][ p2 ][ p3 ][ p4 ][ p5 ][ p6 ][ p7 ] ... [ pN ]
->>>>   ^           ^           ^           ^
->>>>
->>>> pX is page number "X". "^" means "special" page used by boot ROM - e.g.
->>>> every 2nd page in the range of [0, 7]. Step (2 here) and last page in
->>>> range is read from the device tree.
->>>>
->>>> Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
->>>> ---
->>>>  drivers/mtd/nand/raw/meson_nand.c | 56 +++++++++++++++++++++++++------
->>>>  1 file changed, 46 insertions(+), 10 deletions(-)
->>>>
->>>> diff --git a/drivers/mtd/nand/raw/meson_nand.c b/drivers/mtd/nand/raw/meson_nand.c
->>>> index 19f005202b..54ea035d8d 100644
->>>> --- a/drivers/mtd/nand/raw/meson_nand.c
->>>> +++ b/drivers/mtd/nand/raw/meson_nand.c
->>>> @@ -40,6 +40,7 @@
->>>>  #define NFC_CMD_RB                     BIT(20)
->>>>  #define NFC_CMD_SCRAMBLER_ENABLE       BIT(19)
->>>>  #define NFC_CMD_SCRAMBLER_DISABLE      0
->>>> +#define NFC_CMD_SHORTMODE_ENABLE       1
->>>>  #define NFC_CMD_SHORTMODE_DISABLE      0
->>>>  #define NFC_CMD_RB_INT                 BIT(14)
->>>>  #define NFC_CMD_RB_INT_NO_PIN          ((0xb << 10) | BIT(18) | BIT(16))
->>>> @@ -78,6 +79,8 @@
->>>>
->>>>  #define DMA_DIR(dir)           ((dir) ? NFC_CMD_N2M : NFC_CMD_M2N)
->>>>
->>>> +#define NFC_SHORT_MODE_ECC_SZ  384
->>>> +
->>>>  #define ECC_CHECK_RETURN_FF    -1
->>>>
->>>>  #define NAND_CE0               (0xe << 10)
->>>> @@ -141,6 +144,8 @@
->>>>  struct meson_nfc_nand_chip {
->>>>         struct list_head node;
->>>>         struct nand_chip nand;
->>>> +       u32 boot_pages;
->>>> +       u32 boot_page_step;
->>>>
->>>>         u32 bch_mode;
->>>>         u8 *data_buf;
->>>> @@ -229,33 +234,46 @@ static void meson_nfc_cmd_seed(const struct meson_nfc *nfc, u32 seed)
->>>>                nfc->reg_base + NFC_REG_CMD);
->>>>  }
->>>>
->>>> +static int meson_nfc_is_boot_page(struct nand_chip *nand, int page)
->>>> +{
->>>> +       const struct meson_nfc_nand_chip *meson_chip = to_meson_nand(nand);
->>>> +
->>>> +       return (nand->options & NAND_IS_BOOT_MEDIUM) &&
->>>> +              !(page % meson_chip->boot_page_step) &&
->>>> +              (page < meson_chip->boot_pages);
->>>> +}
->>>> +
->>>>  static void meson_nfc_cmd_access(struct nand_chip *nand, bool raw, bool dir, int page)
->>>>  {
->>>> +       const struct meson_nfc_nand_chip *meson_chip = to_meson_nand(nand);
->>>>         struct mtd_info *mtd = nand_to_mtd(nand);
->>>>         const struct meson_nfc *nfc = nand_get_controller_data(mtd_to_nand(mtd));
->>>> -       const struct meson_nfc_nand_chip *meson_chip = to_meson_nand(nand);
->>>> -       u32 bch = meson_chip->bch_mode, cmd;
->>>>         int len = mtd->writesize, pagesize, pages;
->>>>         int scrambler;
->>>> +       u32 cmd;
->>>>
->>>>         if (nand->options & NAND_NEED_SCRAMBLING)
->>>>                 scrambler = NFC_CMD_SCRAMBLER_ENABLE;
->>>>         else
->>>>                 scrambler = NFC_CMD_SCRAMBLER_DISABLE;
->>>>
->>>
->>> scrambler depends on NAND_NEED_SCRAMBLING so suppose
->>> that is not set
->>>
->>> scrambler = NAND_NEED_SCRAMBLING;
->>>
->>>> -       pagesize = nand->ecc.size;
->>>> -
->>>>         if (raw) {
->>>>                 len = mtd->writesize + mtd->oobsize;
->>>>                 cmd = len | scrambler | DMA_DIR(dir);
->>>> -               writel(cmd, nfc->reg_base + NFC_REG_CMD);
->>>> -               return;
->>>> -       }
->>>> +       } else if (meson_nfc_is_boot_page(nand, page)) {
->>>
->>> Now here you  seems that you don't care anymore about this option and check
->>> only meson_nfc_is_boot_page
->>>
->>> Is something am I missing?
->>
->> Idea is the following IIUC: such boot pages could be read in ECC mode only with enabled scrambling -
->> otherwise we get ECC error. Or we need to read it in raw mode. So:
->>
->> if (read page in raw mode) {
->>     use scrambler as provided
->> } else if (read boot page in ECC mode) {
->>     force scrambling mode + NFC_ECC_BCH8_1K + NFC_CMD_SHORTMODE_ENABLE
->> } else {
->>     //we read non-boot page in ECC mode
->>    use scrambler as provided
->> }
->>
->> Thanks
->>
->>
->>>
->>> Michael
->>>
->>>> +               pagesize = NFC_SHORT_MODE_ECC_SZ >> 3;
->>>> +               pages = mtd->writesize / 512;
->>>>
->>>> -       pages = len / nand->ecc.size;
->>>> +               scrambler = NFC_CMD_SCRAMBLER_ENABLE;
->>>> +               cmd = CMDRWGEN(DMA_DIR(dir), scrambler, NFC_ECC_BCH8_1K,
->>>> +                              NFC_CMD_SHORTMODE_ENABLE, pagesize, pages);
->>>> +       } else {
->>>> +               pagesize = nand->ecc.size >> 3;
->>>> +               pages = len / nand->ecc.size;
->>>>
->>>> -       cmd = CMDRWGEN(DMA_DIR(dir), scrambler, bch,
->>>> -                      NFC_CMD_SHORTMODE_DISABLE, pagesize, pages);
->>>> +               cmd = CMDRWGEN(DMA_DIR(dir), scrambler, meson_chip->bch_mode,
->>>> +                              NFC_CMD_SHORTMODE_DISABLE, pagesize, pages);
->>>> +       }
->>>>
->>>>         if (scrambler == NFC_CMD_SCRAMBLER_ENABLE)
->>>>                 meson_nfc_cmd_seed(nfc, page);
->>>> @@ -1132,6 +1150,24 @@ static int meson_nfc_nand_chip_init(struct udevice *dev, struct meson_nfc *nfc,
->>>>                 goto err_chip_buf_free;
->>>>         }
->>>>
->>>> +       if (nand->options & NAND_IS_BOOT_MEDIUM) {
->>>> +               ret = ofnode_read_u32(node, "amlogic,boot-pages",
->>>> +                                     &meson_chip->boot_pages);
->>>> +               if (ret) {
->>>> +                       dev_err(dev, "could not retrieve 'amlogic,boot-pages' property: %d",
->>>> +                               ret);
->>>> +                       goto err_chip_buf_free;
->>>> +               }
->>>> +
->>>> +               ret = ofnode_read_u32(node, "amlogic,boot-page-step",
->>>> +                                     &meson_chip->boot_page_step);
->>>> +               if (ret) {
->>>> +                       dev_err(dev, "could not retrieve 'amlogic,boot-page-step' property: %d",
->>>> +                               ret);
->>>> +                       goto err_chip_buf_free;
->>>> +               }
->>>> +       }
->>>> +
->>>>         ret = nand_register(0, mtd);
->>>>         if (ret) {
->>>>                 dev_err(dev, "'nand_register()' failed: %d\n", ret);
->>>> --
->>>> 2.30.1
->>>>
->>>
->>>
-> 
-> The first patch seems not apply clean to me on master
-> 
-> Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+This series extends the flags-variable with ranges for environment
+variables. The range is appended to the variable flags using
+the '@'-character. A range can be decimal (min/max), bitmask or regular
+expression (64 byte).
 
-Got it, I'll check
+Value ranges for variables can be used to make the environment more
+robust against faults such as invalid user input or attacks.
 
-Thanks
+Decimal-range:  foo:da@<min>-<max>
+Hexadecimal-range(bitmask): bar:xa@0xdeadbeed
+Regex-range: mystring:sa@r"klaus|haus|maus"
 
-> 
-> 
-> 
+Example:
+
+	"decimalvalue:dw@100-200,"
+    ...
+
+=> env set decimalvalue 1
+1 < 100 || 1 > 200
+=> env set decimalvalue 150
+=>
+
+
+
+Lukas Funke (1):
+  env: introduce variable ranges
+
+ cmd/nvedit.c              |  30 +++---
+ env/flags.c               | 217 +++++++++++++++++++++++++++++++++++++-
+ include/configs/sandbox.h |   5 +
+ include/env_flags.h       |  27 ++++-
+ include/search.h          |   1 +
+ test/env/Makefile         |   1 +
+ test/env/range.c          | 113 ++++++++++++++++++++
+ 7 files changed, 377 insertions(+), 17 deletions(-)
+ create mode 100644 test/env/range.c
+
+-- 
+2.30.2
+
