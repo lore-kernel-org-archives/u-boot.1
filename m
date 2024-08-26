@@ -4,83 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DF56C5472D
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 17:27:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0648CC5321D
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 17:49:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BED4C87DEA;
-	Mon, 26 Aug 2024 19:27:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 281AF88481;
+	Mon, 26 Aug 2024 19:49:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zs2nLmuq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lXaLRJPW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC6C688481; Mon, 26 Aug 2024 19:27:19 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id D852B8852A; Mon, 26 Aug 2024 19:49:31 +0200 (CEST)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73DE987B84
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 19:27:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B41C688297
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 19:49:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-428f5c0833bso29773475e9.0
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 10:27:17 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6bf84c3d043so23812366d6.3
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 10:49:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724693237; x=1725298037; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=qFjjK2n9CMwLkhDpWgjmwtKiqLSZZbNFpa8s3GHrdDA=;
- b=zs2nLmuqTNwveGVWRoKeveM/Tv0L+uLROduT3z73EeGnIFFreai0MY9gypUH7Jyw3V
- sIuaDttzkRQDRvEOlbJk1wRU+wKjrZJM/6pWODqAoLvSFlCFo/67jjfXP/WiTj64q0UT
- McSzipuTJOqsWAVc4jJb4T4M0rf0ijzDs+l222Wrfx7u/HCQkfhbICnWcbWAdxT5rzhk
- y0lh3ihwHVfoNhjjBMD5wNFVDYAZGcodcVmV0vRDiOG4PKZezbgsxduM6bslbQMHmIJK
- S4QGSKBMNPA9Bf9Lvd9KnWeZ189caXFZp/5LpOe3gZcEZUP7SJwIlpO3SIUWQ0LY2Kwc
- XGlg==
+ d=chromium.org; s=google; t=1724694568; x=1725299368; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=O/TVJyoVtNTn1TRfAoFlo+jIP2gpr7iPYBvM6qrLZfM=;
+ b=lXaLRJPWOVZvzXepYXZVFu8axmuQN4VOmfMeMxdmRToYeCpyVxdEhfgBOiWpKSUHRs
+ hP6NkOSzZnuK2G74ZRaEZ1+dNMaeL+9vy+BLIUr+ABDS8CEc/awGn/1uBgXoKMq+Qzjq
+ uQCYHdkOMM4w68RtBZe51LwsMuIjv30OmNnIU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724693237; x=1725298037;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qFjjK2n9CMwLkhDpWgjmwtKiqLSZZbNFpa8s3GHrdDA=;
- b=GTDmCbB8OLRC6oAPXI9Yssan5hLSNz+pYOtHqBmy6IyOth5uQkn6e652gY4YHeB8WX
- mL5u1EJfbZxGVli6taV5GfWBk8VFgWBIg4VFYzObBgIyXNzfKDyblSx24MC7g3EJkaqc
- QEd+qjmSutg7i7dGsNzQHySFSStQ36BFLkpjUgdfNMIVodgdw6nb8FXXfFvn0eQSp8Iq
- TikT0i0Wvof7g6RNRz79EHR45NMMLBCh60iHrimCrF41iSoLT3DcVIs1EJrzQO7sK1+I
- EXnGPytHYYvcTFa0ZK6FQfIR+F7E7dvn+Xd/PC2Wov/NDscizieaV8LpBkzMLbu0SDiP
- 8VHQ==
+ d=1e100.net; s=20230601; t=1724694568; x=1725299368;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=O/TVJyoVtNTn1TRfAoFlo+jIP2gpr7iPYBvM6qrLZfM=;
+ b=gxQKBsaH6SzJiZ/W7OScRfHTSpmA5QgK2WPhh67dgWrrHApyKBbHeM72/eJaGB6JCJ
+ JWaaDT1/stSWqqKsl5UwGyPyKyoi0SWMC7iTJxYq1s5Ql2cn9MqEHQeOtqAH20buUGMm
+ VVsziH8z0bntY9p+fiKq6yQqY7RpMzc6mG+6yKFXryE4Z1nCOVAmqmjSQbQjscERblM4
+ Iqu4cHu+2057p/9xfkhIDu8YPAdXhc4oCQO684gaNWRZ2UNkYgRJ1zrZ22qYA3/SBs+p
+ ZwgzbpOPCpXCgqWmi+6YrSXWqHtUsOedcrMfbJU9fVgth/mKmfFIqc4mky7R6NPzaz+c
+ 6MMw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU8FSAVZ0Kx1d7yRk2SZyn/CG3DO4Q19+q+FkDqbZeog+Nvl8wRBNhHFOBTwoyQWcIrbKr5ah0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxCl+Rf4ozyg3vxu/JY+/jj7jws4xeH5mR0o0h//cPEUoF+QQXs
- iVOSGvAkeUdca3vIBPBo/1rnkKiJnqtWvP2JoeQ13mSweXv6vL8MwswkTvZh1MRczz9xeBRSI9l
- Ym9YkZA==
-X-Google-Smtp-Source: AGHT+IHKkL5XqbF8sZyiDnh4Y35EnE1jtUGcNdHe5gPgltnZlaAna44plwnRGL5JUaXt0EmvucV8eQ==
-X-Received: by 2002:a05:6000:e92:b0:36b:b174:5256 with SMTP id
- ffacd0b85a97d-3748c82c760mr213578f8f.6.1724693236662; 
- Mon, 26 Aug 2024 10:27:16 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:3433:4a68:4ceb:ac41?
- ([2a01:e0a:3cb:7bb0:3433:4a68:4ceb:ac41])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42ac515914bsm158151085e9.12.2024.08.26.10.27.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 26 Aug 2024 10:27:16 -0700 (PDT)
-Message-ID: <423562a2-31ce-4d97-bc46-7412245d43b8@linaro.org>
-Date: Mon, 26 Aug 2024 19:27:15 +0200
+ AJvYcCVW/Lz5Cq5C3IzH32hEGntNjzZaFICbHpwHbO8pIZQcpyM2jT+wjEJ+Qv4WgGfOsVizu/DalT0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz68xCqHeZWXXmGLfGVRdQkR7rBp1Py2+41O4DtDKwgGZWHCLGT
+ BK/1h4zujNiAuWSG/nl06a7OuCuIypjwJyeT/4D9a6c4hZvBMPRXovq88MH/lwiVx6C6VzvJrpF
+ F/6CbO9LxgkeGkYcrxZDWY4lzvWwQpNB1MqxG
+X-Google-Smtp-Source: AGHT+IGUf4KonLEQCMj33ifdCBd1pgkpegu5ySwAxu4cabVflB4epaXnA2xAC23N+N/8vXrmS3cKkvxhsLGFRaamgAA=
+X-Received: by 2002:a05:6214:2f90:b0:6bf:7985:f46d with SMTP id
+ 6a1803df08f44-6c32b6a16f6mr2675066d6.12.1724694568445; Mon, 26 Aug 2024
+ 10:49:28 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc/develop/sending_patches.rst: Clarify when to use
- which branch
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20240826163917.2786791-1-trini@konsulko.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20240826163917.2786791-1-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20240825122617.3708982-1-dario.binacchi@amarulasolutions.com>
+ <CANV2PTN_+9rZu0=XrNE+AUO3YRPCUjSHZy-Oe8WcXb_M-MiVTw@mail.gmail.com>
+In-Reply-To: <CANV2PTN_+9rZu0=XrNE+AUO3YRPCUjSHZy-Oe8WcXb_M-MiVTw@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 26 Aug 2024 11:49:17 -0600
+Message-ID: <CAFLszTjqKgMmm1kXgPYVCLnWP+SKUYv1Hym4-2sqkXthDVE6iw@mail.gmail.com>
+Subject: Re: [PATCH 1/2] bootm: adjust the print format
+To: E Shattow <lucent@gmail.com>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de,
+ linux-amarula@amarulasolutions.com, Eddie James <eajames@linux.ibm.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,49 +89,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
+On Sun, 25 Aug 2024 at 12:36, E Shattow <lucent@gmail.com> wrote:
+>
+> On Sun, Aug 25, 2024 at 5:26=E2=80=AFAM Dario Binacchi
+> <dario.binacchi@amarulasolutions.com> wrote:
+> >
+> > All three addresses printed are in hexadecimal format, but only the
+> > first two have the "0x" prefix. The patch aligns the format of the
+> > "end" address with the other two by adding the "0x" prefix.
+> >
+> > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> > ---
+> >
+> >  boot/bootm.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/boot/bootm.c b/boot/bootm.c
+> > index 480f8e6a0e6e..951e549f19ff 100644
+> > --- a/boot/bootm.c
+> > +++ b/boot/bootm.c
+> > @@ -703,7 +703,7 @@ static int bootm_load_os(struct bootm_headers *imag=
+es, int boot_progress)
+> >
+> >                 /* Handle BOOTM_STATE_LOADOS */
+> >                 if (relocated_addr !=3D load) {
+> > -                       printf("Moving Image from 0x%lx to 0x%lx, end=
+=3D%lx\n",
+> > +                       printf("Moving Image from 0x%lx to 0x%lx, end=
+=3D0x%lx\n",
+> >                                load, relocated_addr,
+> >                                relocated_addr + image_size);
+> >                         memmove((void *)relocated_addr, load_buf, image=
+_size);
+> > --
+> > 2.43.0
+> >
+>
+> From U-Boot documentation, alpha-numeric input is assumed to be
+> hexadecimal except when it is not, and generally does not accept "0x"
+> prefix on input. So the correct action would be to make this
+> consistent over the whole U-Boot code base, or remove the "0x"
+> prefixes (not add more of them) ?
 
-On 8/26/24 18:39, Tom Rini wrote:
-> The previous wording on the paragraph about what branch to use when
-> submitting patches did not reflect how / when the next branch is
-> currently used. Reword this to note that master should be used for bug
-> and regression fixes, always, and that next should be used once it
-> opens, with -rc2.
-> 
-> Reported-by: Jerome Forissier <jerome.forissier@linaro.org>
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
->  doc/develop/sending_patches.rst | 12 +++++++-----
->  1 file changed, 7 insertions(+), 5 deletions(-)
-> 
-> diff --git a/doc/develop/sending_patches.rst b/doc/develop/sending_patches.rst
-> index 3f25b1d0466f..82efb717b179 100644
-> --- a/doc/develop/sending_patches.rst
-> +++ b/doc/develop/sending_patches.rst
-> @@ -74,11 +74,13 @@ General Patch Submission Rules
->  
->  * Send your patches as plain text messages: no HTML, no MIME, no links, no
->    compression, no attachments. Just plain text. The best way the generate
-> -  patches is by using the ``git format-patch`` command. Please use the
-> -  ``master`` branch of the mainline U-Boot git repository
-> -  (``https://source.denx.de/u-boot/u-boot.git``) as reference, unless (usually
-> -  late in a release cycle) there has been an announcement to use the ``next``
-> -  branch of this repository instead.
-> +  patches is by using the ``git format-patch`` command. For a patch that is
-> +  fixing a bug or regression of some sort, please use the ``master`` branch of
-> +  the mainline U-Boot git repository
-> +  (``https://source.denx.de/u-boot/u-boot.git``) as reference. For new
-> +  features, if the ``next`` branch has been opened (which happens with the
-> +  release of ``-rc2``) that branch should be used, otherwise ``master`` is
-> +  acceptable.
->  
->  * Make sure that your mailer does not mangle the patch by automatic changes
->    like wrapping of longer lines etc.
+Yes, we should avoid these prefixes as they can confuse people into
+thinking that hex is not the default.
 
-Crystal clear! Thanks.
-FWIW and with Quentin's comment about the back ticks addressed or not:
+In other cases where this is needed, for 0x you can use %#x
 
-Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
-
--- 
-Jerome
+Regards,
+Simon
