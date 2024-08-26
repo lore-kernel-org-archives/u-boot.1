@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36B40C5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 12:51:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98B75C5321E
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 12:51:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EA988895B;
-	Mon, 26 Aug 2024 14:51:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D6A69889FC;
+	Mon, 26 Aug 2024 14:51:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=weidmueller.com header.i=@weidmueller.com header.b="Xoz7sRBH";
+	dkim=pass (2048-bit key; unprotected) header.d=weidmueller.com header.i=@weidmueller.com header.b="nrCmt1eU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECAA5889C9; Mon, 26 Aug 2024 14:51:23 +0200 (CEST)
+ id 736F288001; Mon, 26 Aug 2024 14:51:24 +0200 (CEST)
 Received: from EUR05-DB8-obe.outbound.protection.outlook.com
  (mail-db8eur05on20710.outbound.protection.outlook.com
  [IPv6:2a01:111:f400:7e1a::710])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DA5C88001
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 14:51:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F8BA8895B
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 14:51:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=weidmueller.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eTvn+lNOu5MWx1cZylDbpMLgLG5GyiFdDNMWoD1s6k8YDNuCP6ioPnp3LilIbabD65AYM14Zz2yilPbBl2on00U3umuAAbtAfpQeQQuwJyOgGkiSheWSnyCeOLImanEDinB4F1SCM4whUT2U/z+HEsEje4t+dX2T9NsctczZCOrfjV+k1bXWFDnVyHd2mKsY/oMFTjG97MGdz9UUA+MpYNBsenCupDvpfWbD9Gg1KjDZyqyb/moH1EQM3eRMgeDNrEo3wtst2n4+89Pv6nlrDzxmZfmkt8sKYmUd8yOugA14ZQZzeNWQGYLt3bid+3aoDIgETLk/9Xzlm6iSQUILTw==
+ b=BoCHU3fRsA9WvBGh8852d5ygm7NnfiOzBvpXm006nZ0UIjgak7h6Q2LTOcrUiAD6t+Yg6qVIinlf4eiRHPTtzFASNvIkLQyraogGt0FMEGku3N+oX6SxFWzrG5ZgPjuoT9osoN+YN1O0lJaTpRaN9fHMwqMwmF8rYRlHvtjZymyRFxnvVzZEYZpuLPanLN4bFJImrsfzWRjPPZFE01NXV0NCcsgzCdgC7varzqGdysQpzyGjk3BDKxtpZg8VnZRThzCtH005fFarWkOar+uc4RkKp+6VB0H8K61qnDSnRyEUKWFTy2CWz//2WoY//QO8AvESeroxjvfxwoxOWSVbKw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jvCsq8PQ69TJ8vLooNb+NL/5ZfMCxNK4duxvZbSUDzQ=;
- b=NLq2fmVWFCQNFgwZmh5rKvIevjKZOQq5pXz3+DdbOvXj5riW4IZRoZTuEWLHrFSyJGZbiJMnrx+arfWbHXojx3Y3yCsY4Xs3t7qSqiCdLVtM5E7QDfRYgSgujnl6LK/EUgn/Skaq3JigDyFlE375NQyHs8eLYQyUSfBnfU+7PUtF+ycnb0AGbkED6tXBRqSUYu8g2kf+K9qs6Q2/8SVfsTYeV+x5/vcQgNrYgnUKfg8tFMwys4WZRTPs46/qTNiPj7lOcEuNls+/Chf2p4Y5NmZpt7uhLda8ztkWutcD8Ebk4As1eTtEeHPpsufsImLrMEcaCsGR9Ikd1S0Q32kvHg==
+ bh=XkxOvhTDaSCzB0wnF4te9nYLFHgdSDNaklfou3wswfY=;
+ b=ZlW088cldflSeLMkxgc803muAtJ/fXolyy2YuPHS5WRjblL7GamR3KC7r2Qw8s6KXjN1AQ8H4lqvPfJdcji999c4s3mPCuJgHQu5qsSUCAFnZqGDrzc/UF1odNZG+oh39whsb78p/f4id+3AGd9dEgvljtiVfz5UQhwaNok6MvEyI89AnW0/1OgRtxCfPRRlrzgq+3ijNwSKz0fmPNj/u1142c0HZ7DbMr+CSk7Ak0gMwqpmlqzOOa+Rs6snVIPW1eSjZvIcjBQj+9xrV3S/Fr+NrvSoFmq9E2sb7D7XVkRA7ANuo5SYkLg7RTwDrwYbrqZ1B0CXeqwxnl389n6tOg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=weidmueller.com; dmarc=pass action=none
  header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=weidmueller.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jvCsq8PQ69TJ8vLooNb+NL/5ZfMCxNK4duxvZbSUDzQ=;
- b=Xoz7sRBHX0O8HrvEuoxxIhO6j8IG9Kdy2bsbJWcaL6uHrEPv5KYYKTV83+2MHONvsdKSWwQJ9Rc7/7JXtI10oa0idCqX7H3uBxD904BKIMtS64Otn827S0TzDmyhKBQQb8zps3gkjihcIStJMJ/zTV2QonTwuhZmSqTlmfux1SrJYODPJgYwdzL9dJ297WE/RJukkwU+kLHWUYp+wnjJVz7yYYJS9oQ9TS7wseKdpFP3McqWStDbPu4N7xRB3dPjZDTibTtg+3FPkC4FMzVJXRfPohNbKq0okKQU8zqFUSYwbETrNCg9BgHpnvLOQLEQ0z5/yH0w36Q/VEwj67itUQ==
+ bh=XkxOvhTDaSCzB0wnF4te9nYLFHgdSDNaklfou3wswfY=;
+ b=nrCmt1eUeB4edpfW/IMLNN6H5klZIW+Uw6Tpl+AzKszlcHT3if/qhMBW4sDT84Op3UcORkR6Tctk+VT0fL8ZIefXKFKRzFmvLSzeafYUNZGXDQ5BSofLoA1+0XvpfCRL14OOfTiHtFU6qCorbh53C+cO+RRVNs+6d4oAYR+0SZ2AZ6Eq90Pa/EUaY3KOptKkimA+wX8nblhih8OgdgAW9PhGCDnhAKKHOi1CRP/VrXr6P/4vfDLzm7SALkMohoF8wQuRRAt41p0quc7q6sRy4Nz9/x4PuKMhiEqQaO5jlkqCu6qdiIsdroRIY94xklnzCzWfGnWZEziMEMcYLjGyVg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=weidmueller.com;
 Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
@@ -60,10 +60,12 @@ Cc: Lukas Funke <lukas.funke@weidmueller.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Mario Six <mario.six@gdsys.cc>, Sean Anderson <seanga2@gmail.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [RFC PATCH 0/1] env: introduce variable value ranges
-Date: Mon, 26 Aug 2024 14:51:10 +0200
-Message-Id: <20240826125111.1332215-1-lukas.funke-oss@weidmueller.com>
+Subject: [RFC PATCH 1/1] env: introduce variable ranges
+Date: Mon, 26 Aug 2024 14:51:11 +0200
+Message-Id: <20240826125111.1332215-2-lukas.funke-oss@weidmueller.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20240826125111.1332215-1-lukas.funke-oss@weidmueller.com>
+References: <20240826125111.1332215-1-lukas.funke-oss@weidmueller.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: FR4P281CA0303.DEUP281.PROD.OUTLOOK.COM
@@ -72,77 +74,77 @@ X-ClientProxiedBy: FR4P281CA0303.DEUP281.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|AS8PR08MB6534:EE_
-X-MS-Office365-Filtering-Correlation-Id: 893c62b3-a64f-497e-3739-08dcc5cdc795
+X-MS-Office365-Filtering-Correlation-Id: ee42a18c-bc04-4b0b-db48-08dcc5cdc7f1
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|366016|1800799024|52116014|376014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?skyERZ3mLPcx06ODeO2K+4+TnlpvGyfsUJ+BzA7tjfzL+HfyrY5A845tnaEU?=
- =?us-ascii?Q?Py9hu4sAgC3iaTECFfRCXzJpBZUcQ7Ba2rCr/KS2kYuz5i7xB7xtYm7liMTr?=
- =?us-ascii?Q?CCfDD3hYz27QRTBBlU02HCHbS/NC56ImH8dnu7OPItpNC98rq2jI+DMB5WUb?=
- =?us-ascii?Q?JbHYTqM5p1q1kCMBOD+qSTXZQZIFO0hlehZQimFLrjfiHwe7yxgkJW+03nzy?=
- =?us-ascii?Q?AYiVUoJa/WocYgRQSGZFhjZAxBKym/Lfc8l5ltkFvqfhQZKtuOwtom0MuZlE?=
- =?us-ascii?Q?mDPYdg3gvDjLnb3RUFsjCtt3z2p/J0V5TBcy7CMMS3b3DJuVE44UH0p9Db6W?=
- =?us-ascii?Q?2dFsoND8w/hUqEXY1Rl77Y9rYZyxiSWmWeUuikT1TYUvB8i9VX88DfOjsq7N?=
- =?us-ascii?Q?wAo7VKaNaauRhULFzO+c7GGRbsympATISLwL/v1MxioutjJ1bZmjHxFaYdrw?=
- =?us-ascii?Q?u+0z+a0VR5rH4mlPupWErgySjzxWLLiQ6l3+HaRPiSSdcv2WLOhD1Rk7ZYhv?=
- =?us-ascii?Q?n9ZbK41zhQxJIEu2fXQcK3aZQhOZitVKVhbIH2pVNVmoxosKZL2R/EIXoq5Y?=
- =?us-ascii?Q?S+vItigiCkzlJl4wMIn8U8VR3ReC0xJHYbDCbJnJRtrcGQJKQ35vRxcsEhHg?=
- =?us-ascii?Q?ASC921gveuumraQa3j7/CWCa7t96RvVYbqAdaemhDjiMiqkmRmj8r97yLM/T?=
- =?us-ascii?Q?W6nJ3L1qZFkMKHOHyypDiPR+wwRLmrSwMq/PE4MGLG5fOnp0UUHqT/bNfJ97?=
- =?us-ascii?Q?u0lTQWS6qMzxC/sAilx9ObOw4D1l+KqDQXzNUAXFO22XoZGnUBPi9l3a353t?=
- =?us-ascii?Q?HhwtSy8t+Ddg595svd/qwYhFbzCUaCi69Xk1Uv/f8r50aSdPrx/VcPsJ6fDL?=
- =?us-ascii?Q?LG8bYqDXG9kWxyzxdONnsDqxCB1Ezd4SeRetgE3k+QNsb/LjFEOGlTBwT8UR?=
- =?us-ascii?Q?dkZBnsOfePYTtcIT+YfwB2BpedMGIe/Q6Gu1HdOTlIe8ohJjskHutKO7Ca6l?=
- =?us-ascii?Q?tafreSj5BYs61wbj60GU1cu3mDf0MUs/vybGkbRp0S6cEz+APgurAdKbZbRk?=
- =?us-ascii?Q?6O0GBsN9capP+oknL6N3aij/Paa04mZRm3Je9alAXtyCuCIYNnI4s8FEbxOe?=
- =?us-ascii?Q?4dHjCR1O7oxdUP36hlQQyKCdKbBMAOkPN0xCCcVdRy7E6XFEDRv01M1MdMn+?=
- =?us-ascii?Q?DXFsn7uVf2+YbkxG2TwEhh/nZoNtcjdXmKKr1MPRGlvhLHIYoQG8ZEJyMluf?=
- =?us-ascii?Q?5ovgBfjOSPkxiNGC64q/QXD3PurplsKl0gZjuwHXuSnDvUvbJwtmjPjpZn1P?=
- =?us-ascii?Q?9EeFwo6r8rFgbDPogjm0/2tKnhN5lgZNIb2UFjV2+JMH3Bh45A1Ew8HqATI/?=
- =?us-ascii?Q?Jk2wRjdimsB59BNNhFU3YWd3dcH8A0mO0Hi5e2+zZ8r3uRPhzw=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?rhJdQQ5EtaZnprKTYkyq8slJ6DQ09qBw0AKmKo65m1OaobBcmgZuYzzbFsb8?=
+ =?us-ascii?Q?++DeQzJi/EB1oj3zZ80iwQ+B5MO/wA/A0jqd6ShWdY+JUa+8jPYbvrJsCDVE?=
+ =?us-ascii?Q?VHFvS9IXhTYTuTVVBovCnRhb31RZeM6X9kOnyaaVxjjMmrYXDWqzBz7eZf6T?=
+ =?us-ascii?Q?Gwy7lDTgK3QCjHTtKjrFk0yKkTJct2sF/vjNLI6Vl8qrbwikP3gzELm6bUJM?=
+ =?us-ascii?Q?0ZR9mC4Qg0x7l2O8lVGWVa9gxVTM+lg4lpHba41+qgZ5vQsfINplIYgTcYZF?=
+ =?us-ascii?Q?gIuOK9dq3icysE8sn38rI4jT7YWGiyd/cdBXdGsOkpptSebFeMWT0Il1OF98?=
+ =?us-ascii?Q?LkkAp0cX2HPLfT3kmWQM59KzN6a3f42MMxpCoU1hgxfvGSHsrhw6sC+nLHuw?=
+ =?us-ascii?Q?afJWh33U4efLaeS/kCCY/E98iise+HCR2kgdR/Tz8JJLKl/lDL3M9F9iGhMX?=
+ =?us-ascii?Q?K5vVh3VJHQbFbFmbYFp0cga/hh78syfJS9DkKU47roBVjqh3pNDC3dfyfdK3?=
+ =?us-ascii?Q?ggwgGkSsgoKP1NXaZErY65CbAKKot5HvTmTG29n80zUEuSL1O1ww/QKzl0Y0?=
+ =?us-ascii?Q?vBCq+6Gx0sCp5XN743iKph4Hq9cu73BiW01CrifsyNbFCm8puqKGXinXsS3D?=
+ =?us-ascii?Q?MzOhB6E3zuF8dgyNG01PaxoslNnkAeUcOdDMs57dBr3+EWOJY05wS/Z7Vusw?=
+ =?us-ascii?Q?q4VMdLFyId6HOypWwLeehFOt8czdRkS/p9Y+ZebcxrWMiZEBW3+grhbFSGLw?=
+ =?us-ascii?Q?Yl+HbDsQisr6HPVGGutsC64oU1iXM8GbytfV+yJa+Rvl2+Soe6FSgoZZRYsE?=
+ =?us-ascii?Q?vjLQw+2DElb9mqEnSLFEGjAnick9X2jE5QUKlw1PPWt7sqxMwo37qvRlEDFE?=
+ =?us-ascii?Q?8qL7DnpqB1SJJLlap3RsaSiAk8ws+Yj4XXhCw7s9YEVUYU5nuVODrqNumpAT?=
+ =?us-ascii?Q?0IgEL3Nn/q2T8JsUkcj6zJXWMCyg4MQNDGhX72LUJdHFWXXx8YiM+7xtCp+a?=
+ =?us-ascii?Q?mXFKmGoxDcSRCF1ZpX40J7S0nT37ZUtLx4dvzjXOb22sybHpnEKMxgrOP2C+?=
+ =?us-ascii?Q?gmrVj54Lm4Q8QFn91IzsNw0Eza68ng+hCIWzI3lN8qFAlLvlrB7mrOZhCehG?=
+ =?us-ascii?Q?JUX8R7AjU22qiLQ8AhXvBOdezmKckrSwx34R5l7TdWS8kcHfTuQtMTtut3y6?=
+ =?us-ascii?Q?vvDmzSvpeqzJ4n2LGTyG43u0kiwvm4/cPO8qCHfrGLJkHr6GfYte03Ju6lVK?=
+ =?us-ascii?Q?bBID0BTJotntkabqtveGpd4tGij2WKXT9Fnz2jljVbUbh1Wd6xX/Go404A+H?=
+ =?us-ascii?Q?sqI7nQneW+MyJrdWBzdpmjxFmchbHK2hhFxFXYOCJrdgEBDSaHWLewzOmpzE?=
+ =?us-ascii?Q?Oj+dyZ2DUVq0NnuXRT1Yn+VKT7EeDrhdTcF+DM3z9B4m2CGVew=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(1800799024)(52116014)(376014)(38350700014); DIR:OUT;
  SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?eE33zHX24XPgpL3nWy5Ay4J7Za3VeoBqLDoVP9zeDauvkkeltVS6Zs2QfjE6?=
- =?us-ascii?Q?XnB6rzaqy36G2/wrJsbh8uc7ks6xKyV109bZ0TJgolX59r7ReBBJua8ZXwVi?=
- =?us-ascii?Q?x+B4gB18kozPHR7AK6dRKLNtyB8Ws3m3pTKEBoL1GpyB7WNFQ1NthmcgVkoS?=
- =?us-ascii?Q?0rAg78V/ygSb//SHGC4E4o6uUpnVTYhHGCYyeJdw6vvNLv2QK4lMqrNDzsu1?=
- =?us-ascii?Q?Dyv4V1ESCF9eOPBvxSaup+T3etiMOp9Bci1JUtiVZQq+MUqJpI+UuV4AROcP?=
- =?us-ascii?Q?KATLHxMyiqwMEbW643SYbQTxV4seEKgjeBjlMpnKVwtxS4EwWFIbjF6/kGff?=
- =?us-ascii?Q?7PzgEYWNeuzpiVOvuVA4/6uCDI+NFkoI8zNDSa6oeVXGmD/V3VD/Z/XniWWi?=
- =?us-ascii?Q?qmnHXYXkblxGwL0uZ+CD+HeRN2al0r3AiaDGU52EzUxAJzsVlA05jeTZU3xZ?=
- =?us-ascii?Q?eBSOS9ui4c64SjKkOzNa0N0IzJGbhLRlLh2kRVmc8wdvLAdKloZgM+syTnJr?=
- =?us-ascii?Q?k5dSVvW9ghUtMOvpmyYXIArzwWHuEOHlO4N1IHavuCVudUb6eOR+slAqyPyA?=
- =?us-ascii?Q?1UcaueLs0zoxnwsrSmrW7DQ0HFDBfYVHnuEAqxzn6cYaXlkgW4+EQAPWCxRf?=
- =?us-ascii?Q?r9YDrVCNuAxUJH2n64lo62PzKq8rmdvbBO+FfeQEeZ/NeK/mouwSjejDMojI?=
- =?us-ascii?Q?GsgptlPE+1QNfO1KCgry+ML7NXkdOr+McxP0cd0EZxLzc4K9qxT3YOdzjABl?=
- =?us-ascii?Q?CjY4+EZ6hcvUi06TRmTxzrH95b6G38PB7z2yLD6YvrjhKDzG4Zh7+XGMoedN?=
- =?us-ascii?Q?EjeoIkGFYG8MTsuJBHHLydz/l/sY/ZVM0oqBac8l9fCEBMdY2vO3wp2uwRhn?=
- =?us-ascii?Q?rZPaRll+Y3zokdiLPPoFZXsBX+Jil2y7ha2crVekt2/rNc6pmeQiprlu4oCE?=
- =?us-ascii?Q?n2bgqM5PqwIJYn5rc0UHUZqt3cw2kgfy9XIRf1dIDjZYAapsTkcw6jZn4s/5?=
- =?us-ascii?Q?SXReyteYNOF6OAsIq2zZpFZDi2PyNamBV+SkOWW9/x8cb2H4DnklsYICIuFF?=
- =?us-ascii?Q?lUBsJq40SDLSHVl2D2xkqYP7GRjbrleyVOA+fb//98mX3twjzbxGsLPVBTuq?=
- =?us-ascii?Q?S1tDD3ZvR2k2a+0SwLCrhRmfrXry/Ry6MFqDJitK040dq5OnuJuR6FHPxl1J?=
- =?us-ascii?Q?OwBhyMX0axMu3eTkYavLeyFW0pGWxVnLh3X/X4/IpWvwM+Mlt3BSkNhyatbR?=
- =?us-ascii?Q?SLAvyAHIeoXUULyi3j7j+Q2cK4g5YUR38EGNd7RiUbM7pMk4eqbHAoph7gJ9?=
- =?us-ascii?Q?5HdPOpM69S6sRvNYlxZ0LrPfxKg4qyN3duvzg8175oyP28lDqoGiSP/Z7Svv?=
- =?us-ascii?Q?Z77qY4hrG4MzhAbQGlnq8BaZBVXeJvMFUZGZzZC+9LTwSQPwshhv2ixqz7XG?=
- =?us-ascii?Q?Dr4leO/MC9CGrG5jBwKBEbTO6KksG5ITOBJniJ27am2ioWUP6RD4tcfj0ax3?=
- =?us-ascii?Q?13KPIaDWoeOm20puSzaZf3N7lniuB09ByHyBwIQYwTMbu1cAmEWwkdbbAcol?=
- =?us-ascii?Q?s+08syDM225Y2/sAZxDO28ifR7NbtjTFPg9aNbvN4sEdioq85qc4t2R3RT5X?=
- =?us-ascii?Q?YQ=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?7Hv6fBcKv9jvHDN7upjUBE6D4YrYLUQSE3oHveLsiNAQDArc4wz7sgqrKJBo?=
+ =?us-ascii?Q?erV/fjHZv99Y16tcP0e/ZOJTHKLycFxtSZ++xHtKseozD6myt2ghMZ9BdcCY?=
+ =?us-ascii?Q?I2OVlA3+k6job/Yv8jO38t8Vzo2Ulqe8glXnIhQqTnMCESbxaF+eYNGtIleB?=
+ =?us-ascii?Q?FsUW0y2ZqQzY2oFKdY4rHTJqXymbYB0p1z/xanWTd2q5G51LwVDnxrkfqepI?=
+ =?us-ascii?Q?IZP6/627P+cv5uZzHdTsXVEf6D6Xb9v69Zbosnv2l8Z+R+I+JLl0ZfYoT0vC?=
+ =?us-ascii?Q?UKcBF2Ve4sT1cBCBhKuN4LLa0IgYJObbqmS4KlMuy9vbc3/yHtfmWsH6dUgi?=
+ =?us-ascii?Q?VvH5ZYwgDzxJds1OzY7K4jnGk1XkzXI3n6Gs5NAMkjPQmAeqV9QEnKvAlLC2?=
+ =?us-ascii?Q?5fBdraj39JtkWIMYJ9gNqNTbo8M3D/aRM9G36jxxSFYDSIJb9LNthcuqOxD1?=
+ =?us-ascii?Q?aUGqU0GYTGiV48Q4wIrbBj8HVWHQWbuHbTEELNc5r7qkG+Jc/iUAnu+1EYdb?=
+ =?us-ascii?Q?jmrhjO9yhS8fhLVJ52GxsiBotJOm+l3BzjQj1SLCKdEiscvB0DLth4s5bBvT?=
+ =?us-ascii?Q?8cKi3JDNw/0w5SIryGYEYdZGKhW839DuygizTsdrPSE4FM5vI4duhlzvB953?=
+ =?us-ascii?Q?eahXbtghZRMi8zMTNOXktEpYJN+PmyO+ujTYk71xr5raW0LZCVK+RbiWuI+9?=
+ =?us-ascii?Q?hx+GwVlmlPLCw3W7kN3V2sWRlIhdAu/amwpN97n4wm6hkSg28ZPHeCwp+flK?=
+ =?us-ascii?Q?SiuKy72T8Hhkz0GuhtjMKAWUSG2nB9leDt+TU8xHryOmNoA3zpIBM4zrFvc/?=
+ =?us-ascii?Q?FAOGbr5FT5sB0wtSoMZymPSmW024JrJMgALSdk0+UJ9DlntmGyeeWspp9xRr?=
+ =?us-ascii?Q?sQHXouRb5a6OqjR7Ad3wcsipZF8+zTsGEhjcN1iSp6E0zLDBStQvyq03CVbC?=
+ =?us-ascii?Q?nlBMth5JkmqRta+1M3ekE8T7DNUqiTZokO2Suu8Wzf4unBlI2nVI3lvzZqcN?=
+ =?us-ascii?Q?sv+rNmA04JVwvYTyMZfa23rn4Y3mBPgviFu4ZMCkgOykVmiAu8QBhi8h5pm5?=
+ =?us-ascii?Q?30RBipBnaZCKB9LnA3QLKykpCDL1cS3oBEox9iJJ+MvWtldmVG/vj2xt6zbX?=
+ =?us-ascii?Q?ONrxlQKwTIb0y4dmkaArOzXHpfsI1XnzNzfE78DtnZ2HMrpOi1h0Gx1aPUcb?=
+ =?us-ascii?Q?EVxE4Qs4xTbuPCVlqrlHhs/zLuU1TsVHM9LP8AsakFN2RS1kboJec0RSTbQ8?=
+ =?us-ascii?Q?sqwDjfIMkl8tSOoH8isAXwuufjOaXx34dKlBGjw8YrbnStllGCXKeRlAtR62?=
+ =?us-ascii?Q?a8MggzLTU+YK+qOSK9YMwOBHkk5GP/sjPXbIUtGdKE4YtBkXWnTQjSFuISkU?=
+ =?us-ascii?Q?nRWMD3XHqLGm9FxQxQw/3vhkYnHvciF0moaPaVMTkQ11+LmeatipzsocMdSH?=
+ =?us-ascii?Q?stZcti1kxSc5BiAKQhqSvkE5NnDgaDsPStLgKOfraQeUU4u9OqsKe/5QOiV7?=
+ =?us-ascii?Q?3KC0RrkgeWzihnjycp+WS6tzon94upmxewyI6hZNE6+JdRzMY7B7rKNpgP8/?=
+ =?us-ascii?Q?EArM5TkzeCdwmcbzpvasMHJWD8xCJCzxNv4yODThPyo+gf/3752mMTqaGGbt?=
+ =?us-ascii?Q?Dw=3D=3D?=
 X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 893c62b3-a64f-497e-3739-08dcc5cdc795
+X-MS-Exchange-CrossTenant-Network-Message-Id: ee42a18c-bc04-4b0b-db48-08dcc5cdc7f1
 X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2024 12:51:18.8521 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2024 12:51:19.5072 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: uLSre2s2OAdRO2a3w22Dt3tFDuTHYh0QTrOKpOsp049vgTicvVC3ENoo3XbuCL2hmC+hD/7nLtrN3SAPsyFg5g==
+X-MS-Exchange-CrossTenant-UserPrincipalName: juc8gYP6y42CMEcRkVC6LF7hbhCTRiIXhkJhSQeOA1+eN8m92GFJbYm2w4iS9sgruxIeeiQZuMBhMc6reATiqw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB6534
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -162,8 +164,7 @@ X-Virus-Status: Clean
 
 From: Lukas Funke <lukas.funke@weidmueller.com>
 
-
-This series extends the flags-variable with ranges for environment
+This commit extends the flags-variable with ranges for environment
 variables. The range is appended to the variable flags using
 the '@'-character. A range can be decimal (min/max), bitmask or regular
 expression (64 byte).
@@ -185,10 +186,8 @@ Example:
 => env set decimalvalue 150
 =>
 
-
-
-Lukas Funke (1):
-  env: introduce variable ranges
+Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+---
 
  cmd/nvedit.c              |  30 +++---
  env/flags.c               | 217 +++++++++++++++++++++++++++++++++++++-
@@ -200,6 +199,592 @@ Lukas Funke (1):
  7 files changed, 377 insertions(+), 17 deletions(-)
  create mode 100644 test/env/range.c
 
+diff --git a/cmd/nvedit.c b/cmd/nvedit.c
+index 98a687bcabb..f02545c7a55 100644
+--- a/cmd/nvedit.c
++++ b/cmd/nvedit.c
+@@ -352,10 +352,13 @@ static int print_static_flags(const char *var_name, const char *flags,
+ {
+ 	enum env_flags_vartype type = env_flags_parse_vartype(flags);
+ 	enum env_flags_varaccess access = env_flags_parse_varaccess(flags);
++	struct env_flags_range *range = env_flags_parse_varrange(flags);
+ 
+-	printf("\t%-20s %-20s %-20s\n", var_name,
++	printf("\t%-20s %-20s %-20s %-20s\n", var_name,
+ 		env_flags_get_vartype_name(type),
+-		env_flags_get_varaccess_name(access));
++		env_flags_get_varaccess_name(access),
++		env_flags_get_varrange_name(range, type));
++	free(range);
+ 
+ 	return 0;
+ }
+@@ -364,6 +367,7 @@ static int print_active_flags(struct env_entry *entry)
+ {
+ 	enum env_flags_vartype type;
+ 	enum env_flags_varaccess access;
++	struct env_flags_range *range;
+ 
+ 	if (entry->flags == 0)
+ 		return 0;
+@@ -371,9 +375,11 @@ static int print_active_flags(struct env_entry *entry)
+ 	type = (enum env_flags_vartype)
+ 		(entry->flags & ENV_FLAGS_VARTYPE_BIN_MASK);
+ 	access = env_flags_parse_varaccess_from_binflags(entry->flags);
+-	printf("\t%-20s %-20s %-20s\n", entry->key,
++	range = (struct env_flags_range *)entry->range;
++	printf("\t%-20s %-20s %-20s %-20s\n", entry->key,
+ 		env_flags_get_vartype_name(type),
+-		env_flags_get_varaccess_name(access));
++		env_flags_get_varaccess_name(access),
++		env_flags_get_varrange_name(range, type));
+ 
+ 	return 0;
+ }
+@@ -401,19 +407,19 @@ int do_env_flags(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 
+ 	/* Print the static flags that may exist */
+ 	puts("Static flags:\n");
+-	printf("\t%-20s %-20s %-20s\n", "Variable Name", "Variable Type",
+-		"Variable Access");
+-	printf("\t%-20s %-20s %-20s\n", "-------------", "-------------",
+-		"---------------");
++	printf("\t%-20s %-20s %-20s %-20s\n", "Variable Name", "Variable Type",
++		"Variable Access", "Variable Range");
++	printf("\t%-20s %-20s %-20s %-20s\n", "-------------", "-------------",
++		"---------------", "---------------");
+ 	env_attr_walk(ENV_FLAGS_LIST_STATIC, print_static_flags, NULL);
+ 	puts("\n");
+ 
+ 	/* walk through each variable and print the flags if non-default */
+ 	puts("Active flags:\n");
+-	printf("\t%-20s %-20s %-20s\n", "Variable Name", "Variable Type",
+-		"Variable Access");
+-	printf("\t%-20s %-20s %-20s\n", "-------------", "-------------",
+-		"---------------");
++	printf("\t%-20s %-20s %-20s %-20s\n", "Variable Name", "Variable Type",
++		"Variable Access", "Variable Range");
++	printf("\t%-20s %-20s %-20s %-20s\n", "-------------", "-------------",
++		"---------------", "---------------");
+ 	hwalk_r(&env_htab, print_active_flags);
+ 	return 0;
+ }
+diff --git a/env/flags.c b/env/flags.c
+index 233fd460d84..dc0a9c5764f 100644
+--- a/env/flags.c
++++ b/env/flags.c
+@@ -20,6 +20,9 @@
+ #else
+ #include <linux/kernel.h>
+ #include <env_internal.h>
++#include <vsprintf.h>
++#include <malloc.h>
++#include <slre.h>
+ #endif
+ 
+ #ifdef CONFIG_NET
+@@ -34,6 +37,8 @@
+ #define ENV_FLAGS_WRITEABLE_VARACCESS_REPS ""
+ #endif
+ 
++#define ENV_FLAGS_RANGE_SEPERATOR '@'
++
+ static const char env_flags_vartype_rep[] = "sdxb" ENV_FLAGS_NET_VARTYPE_REPS;
+ static const char env_flags_varaccess_rep[] =
+ 	"aroc" ENV_FLAGS_WRITEABLE_VARACCESS_REPS;
+@@ -115,6 +120,35 @@ const char *env_flags_get_varaccess_name(enum env_flags_varaccess access)
+ {
+ 	return env_flags_varaccess_names[access];
+ }
++
++const char *env_flags_get_varrange_name(struct env_flags_range *range,
++					enum env_flags_vartype type)
++{
++	static char range_str[64];
++
++	if (!range)
++		return "";
++
++	switch (type) {
++	case env_flags_vartype_decimal: {
++		snprintf(range_str, sizeof(range_str), "%lld-%lld",
++			 range->u.int_range.min, range->u.int_range.max);
++		break;
++	}
++	case env_flags_vartype_hex: {
++		snprintf(range_str, sizeof(range_str), "0x%llx", range->u.bitmask);
++		break;
++	}
++	case env_flags_vartype_string: {
++		strlcpy(range_str, range->u.re, sizeof(range_str));
++		break;
++	}
++	default:
++		return "";
++	}
++
++	return range_str;
++}
+ #endif /* CONFIG_CMD_ENV_FLAGS */
+ 
+ /*
+@@ -151,6 +185,9 @@ enum env_flags_varaccess env_flags_parse_varaccess(const char *flags)
+ 	if (strlen(flags) <= ENV_FLAGS_VARACCESS_LOC)
+ 		return va_default;
+ 
++	if (flags[ENV_FLAGS_VARACCESS_LOC] == ENV_FLAGS_RANGE_SEPERATOR)
++		return va_default;
++
+ 	access = strchr(env_flags_varaccess_rep,
+ 		flags[ENV_FLAGS_VARACCESS_LOC]);
+ 
+@@ -211,6 +248,138 @@ static void skip_num(int hex, const char *value, const char **end,
+ 		*end = value;
+ }
+ 
++struct env_flags_range *env_flags_parse_varrange(const char *flags)
++{
++	char *range;
++	struct env_flags_range *r;
++	enum env_flags_vartype type;
++
++	if (!flags)
++		return NULL;
++
++	range = strchr(flags, ENV_FLAGS_RANGE_SEPERATOR);
++	if (!range)
++		return NULL;
++
++	range++;
++
++	r = (struct env_flags_range *)malloc(sizeof(struct env_flags_range));
++	if (!r)
++		return NULL;
++
++	type = env_flags_parse_vartype(flags);
++
++	/* parse regex range r"someregex" */
++	if (!strncmp(range, "r\"", 2)) {
++		if (IS_ENABLED(CONFIG_REGEX)) {
++			if (type != env_flags_vartype_string) {
++				free(r);
++				return NULL;
++			}
++
++			char *rstart = strchr(range, '"');
++			char *rend = strrchr(range, '"');
++
++			memset(r->u.re, 0, sizeof(r->u.re));
++
++			if (rstart == rend) /* invalid format r" */
++				return NULL;
++
++			rstart++;
++			if (rstart == rend) /* empty regex is okay */
++				return r;
++
++			if ((rend - rstart) < sizeof(r->u.re))
++				strlcpy(r->u.re, rstart, rend - rstart);
++			else
++				return NULL; /* too big */
++		}
++	} else if (is_hex_prefix(range)) {
++		/* parse bitmask range 0x[a-fA-F0-9]+ */
++		if (type != env_flags_vartype_hex) {
++			free(r);
++			return NULL;
++		}
++		r->u.bitmask = (u64)simple_strtol(range, NULL, 16);
++	} else {
++		/* parse integer range [0-9]+-[0-9]+ */
++		s64 min, max;
++
++		if (type != env_flags_vartype_decimal) {
++			free(r);
++			return NULL;
++		}
++
++		char *lhs = strcpy(r->u.re, range); /* exploit regex buffer */
++		char *rhs = strchr(lhs[0] == '-' ? lhs + 1 : lhs, '-');
++
++		if (!rhs) {
++			free(r);
++			return NULL;
++		}
++
++		*rhs++ = '\0';
++		min = simple_strtol(lhs, NULL, 10);
++		max = simple_strtol(rhs, NULL, 10);
++		r->u.int_range.min = min;
++		r->u.int_range.max = max;
++	}
++
++	return r;
++}
++
++static int _env_flags_validate_range(const struct env_flags_range *range,
++				     enum env_flags_vartype type,
++				     const char *newval)
++{
++	if (!range)
++		return -1;
++
++	switch (type) {
++	case env_flags_vartype_decimal: {
++		s64 value = simple_strtol(newval, NULL, 10);
++		s64 min = range->u.int_range.min;
++		s64 max = range->u.int_range.max;
++
++		if (value < min || value > max) {
++			printf("## Error: value out of bounds\n"
++				"%lld < %lld || %lld > %lld\n", value, min, value, max);
++			return -1;
++		}
++		break;
++	}
++	case env_flags_vartype_hex: {
++		u64 value = (u64)simple_strtoll(newval, NULL, 16);
++		u64 mask = range->u.bitmask;
++
++		if ((value | mask) != mask) {
++			printf("## Error: value out of bounds\n"
++				"value = 0x%llx, mask 0x%llx\n", value, mask);
++			return -1;
++		}
++		break;
++	}
++	case env_flags_vartype_string: {
++#if defined(CONFIG_REGEX)
++		struct slre slre;
++
++		if (slre_compile(&slre, range->u.re)) {
++			if (slre_match(&slre, newval, strlen(newval), NULL) == 0) {
++				printf("## Error: value does not match regex\n"
++				       "value = %s, re = %s\n", newval, range->u.re);
++				return -1;
++			}
++		}
++#endif
++		break;
++	}
++	default:
++		return -1;
++	}
++
++	return 0;
++}
++
+ #ifdef CONFIG_NET
+ int eth_validate_ethaddr_str(const char *addr)
+ {
+@@ -241,7 +410,7 @@ int eth_validate_ethaddr_str(const char *addr)
+  * with that format
+  */
+ static int _env_flags_validate_type(const char *value,
+-	enum env_flags_vartype type)
++				    enum env_flags_vartype type)
+ {
+ 	const char *end;
+ #ifdef CONFIG_NET
+@@ -360,6 +529,20 @@ enum env_flags_varaccess env_flags_get_varaccess(const char *name)
+ 	return env_flags_parse_varaccess(flags);
+ }
+ 
++/*
++ * Look up the range of a variable directly from the .flags var.
++ */
++struct env_flags_range *env_flags_get_range(const char *name)
++{
++	const char *flags_list = env_get(ENV_FLAGS_VAR);
++	char flags[ENV_FLAGS_ATTR_MAX_LEN + 1];
++
++	if (env_flags_lookup(flags_list, name, flags))
++		return NULL;
++
++	return env_flags_parse_varrange(flags);
++}
++
+ /*
+  * Validate that the proposed new value for "name" is valid according to the
+  * defined flags for that variable, if any.
+@@ -395,6 +578,25 @@ int env_flags_validate_varaccess(const char *name, int check_mask)
+ 	return (check_mask & access_mask) != 0;
+ }
+ 
++/*
++ * Validate that the variable "name" is valid according to
++ * the defined range for that variable, if any.
++ */
++int env_flags_validate_range(const char *name, const char *newval)
++{
++	int r;
++	enum env_flags_vartype type;
++	struct env_flags_range *range;
++
++	type = env_flags_get_type(name);
++	range = env_flags_get_range(name);
++
++	r = _env_flags_validate_range(range, type, newval);
++
++	free(range);
++	return r;
++}
++
+ /*
+  * Validate the parameters to "env set" directly
+  */
+@@ -460,8 +662,10 @@ void env_flags_init(struct env_entry *var_entry)
+ 	ret = env_flags_lookup(flags_list, var_name, flags);
+ 
+ 	/* if any flags were found, set the binary form to the entry */
+-	if (!ret && strlen(flags))
++	if (!ret && strlen(flags)) {
+ 		var_entry->flags = env_parse_flags_to_bin(flags);
++		var_entry->range = env_flags_parse_varrange(flags);
++	}
+ }
+ 
+ /*
+@@ -489,11 +693,13 @@ static int set_flags(const char *name, const char *value, void *priv)
+ 	/* does the env variable actually exist? */
+ 	if (ep != NULL) {
+ 		/* the flag list is empty, so clear the flags */
+-		if (value == NULL || strlen(value) == 0)
++		if (value == NULL || strlen(value) == 0) {
+ 			ep->flags = 0;
+-		else
++		} else {
+ 			/* assign the requested flags */
+ 			ep->flags = env_parse_flags_to_bin(value);
++			ep->range = env_flags_parse_varrange(value);
++		}
+ 	}
+ 
+ 	return 0;
+@@ -547,6 +753,9 @@ int env_flags_validate(const struct env_entry *item, const char *newval,
+ 				name, newval, env_flags_vartype_rep[type]);
+ 			return -1;
+ 		}
++		if (item->range &&
++		    _env_flags_validate_range(item->range, type, newval) < 0)
++			return -1;
+ 	}
+ 
+ 	/* check for access permission */
+diff --git a/include/configs/sandbox.h b/include/configs/sandbox.h
+index 2372485c84e..8dec2b2cc89 100644
+--- a/include/configs/sandbox.h
++++ b/include/configs/sandbox.h
+@@ -21,4 +21,9 @@
+ /* Unused but necessary to build */
+ #define CFG_SYS_UBOOT_BASE	CONFIG_TEXT_BASE
+ 
++#define CFG_ENV_FLAGS_LIST_STATIC \
++	"decimalvalue:da@100-200," \
++	"regexvalue:sa@r\"foo|bar\"," \
++	"bitmaskvalue:xa@0xf00f"
++
+ #endif
+diff --git a/include/env_flags.h b/include/env_flags.h
+index 2476043b0e3..dfe45ce04d5 100644
+--- a/include/env_flags.h
++++ b/include/env_flags.h
+@@ -32,8 +32,19 @@ enum env_flags_varaccess {
+ 	env_flags_varaccess_end
+ };
+ 
++struct env_flags_range {
++	union  {
++		char re[64];
++		u64 bitmask;
++		struct {
++			s64 min;
++			s64 max;
++		} int_range;
++	} u;
++};
++
+ #define ENV_FLAGS_VAR ".flags"
+-#define ENV_FLAGS_ATTR_MAX_LEN 2
++#define ENV_FLAGS_ATTR_MAX_LEN 64
+ #define ENV_FLAGS_VARTYPE_LOC 0
+ #define ENV_FLAGS_VARACCESS_LOC 1
+ 
+@@ -108,6 +119,11 @@ const char *env_flags_get_vartype_name(enum env_flags_vartype type);
+  * Return the name of the access.
+  */
+ const char *env_flags_get_varaccess_name(enum env_flags_varaccess access);
++/*
++ * Return the range of the access.
++ */
++const char *env_flags_get_varrange_name(struct env_flags_range *range,
++										enum env_flags_vartype type);
+ #endif
+ 
+ /*
+@@ -118,6 +134,10 @@ enum env_flags_vartype env_flags_parse_vartype(const char *flags);
+  * Parse the flags string from a .flags attribute list into the varaccess enum.
+  */
+ enum env_flags_varaccess env_flags_parse_varaccess(const char *flags);
++/*
++ * Parse the flags string from a .flags attribute list into the varaccess enum.
++ */
++struct env_flags_range *env_flags_parse_varrange(const char *flags);
+ /*
+  * Parse the binary flags from a hash table entry into the varaccess enum.
+  */
+@@ -154,6 +174,11 @@ int env_flags_validate_access(const char *name, int check_mask);
+  * the defined flags for that variable, if any.
+  */
+ int env_flags_validate_varaccess(const char *name, int check_mask);
++/*
++ * Validate that the variable "name" is valid according to
++ * the defined range for that variable, if any.
++ */
++int env_flags_validate_range(const char *name, const char *newval)
+ /*
+  * Validate the parameters passed to "env set" for type compliance
+  */
+diff --git a/include/search.h b/include/search.h
+index 7faf23f4aca..c3de3109a4d 100644
+--- a/include/search.h
++++ b/include/search.h
+@@ -34,6 +34,7 @@ struct env_entry {
+ 		int flags);
+ #endif
+ 	int flags;
++	void *range;
+ };
+ 
+ /*
+diff --git a/test/env/Makefile b/test/env/Makefile
+index 9a98fd47966..717cbc5555e 100644
+--- a/test/env/Makefile
++++ b/test/env/Makefile
+@@ -6,3 +6,4 @@ obj-y += cmd_ut_env.o
+ obj-y += attr.o
+ obj-y += hashtable.o
+ obj-$(CONFIG_ENV_IMPORT_FDT) += fdt.o
++obj-y += range.o
+diff --git a/test/env/range.c b/test/env/range.c
+new file mode 100644
+index 00000000000..ed2cf27ef91
+--- /dev/null
++++ b/test/env/range.c
+@@ -0,0 +1,113 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * (C) Copyright 2024
++ * Lukas Funke, Weidmueller GmbH, lukas.funke@weidmueller.com
++ */
++
++#include <vsprintf.h>
++#include <command.h>
++#include <env_attr.h>
++#include <env_flags.h>
++#include <test/env.h>
++#include <test/ut.h>
++
++/*
++ * Set values according to their range
++ */
++static int env_test_env_set_range(struct unit_test_state *uts)
++{
++	int r;
++	char *value;
++
++	r = env_set("decimalvalue", "100");
++	ut_asserteq(0, r);
++	value = env_get("decimalvalue");
++	ut_asserteq_str("100", value);
++	r = env_set("decimalvalue", "500");
++	ut_asserteq(1, r);
++
++	r = env_set("regexvalue", "foo");
++	ut_asserteq(0, r);
++	value = env_get("regexvalue");
++	ut_asserteq_str("foo", value);
++	r = env_set("regexvalue", "klaus");
++	ut_asserteq(1, r);
++
++	r = env_set("bitmaskvalue", "0xf00f");
++	ut_asserteq(0, r);
++	value = env_get("bitmaskvalue");
++	ut_asserteq_str("0xf00f", value);
++	r = env_set("bitmaskvalue", "0x0110");
++	ut_asserteq(1, r);
++
++	return 0;
++}
++
++ENV_TEST(env_test_env_set_range, 0);
++
++static int env_test_range_to_str(struct unit_test_state *uts)
++{
++	struct env_flags_range range;
++
++	range.u.int_range.min = 123;
++	range.u.int_range.max = 456;
++	ut_asserteq_str("123-456",
++			env_flags_get_varrange_name(&range,
++						    env_flags_vartype_decimal));
++
++	strcpy(&range.u.re[0], "^(some|value)_[0-9a-zA-Z]");
++	ut_asserteq_str("^(some|value)_[0-9a-zA-Z]",
++			env_flags_get_varrange_name(&range,
++						    env_flags_vartype_string));
++
++	range.u.bitmask = 0x12300000;
++	ut_asserteq_str("0x12300000",
++			env_flags_get_varrange_name(&range,
++						    env_flags_vartype_hex));
++	return 0;
++}
++
++ENV_TEST(env_test_range_to_str, 0);
++
++static int env_test_range_parse(struct unit_test_state *uts)
++{
++	char str[64];
++	struct env_flags_range *range;
++
++	range = env_flags_parse_varrange("s@r\"somevalue\"");
++	ut_assertnonnull(range);
++	free(range);
++
++	range = env_flags_parse_varrange("sw");
++	ut_assertnull(range);
++
++	snprintf(str, sizeof(str), "d@%ld-%ld", LONG_MIN, LONG_MAX);
++	range = env_flags_parse_varrange(str);
++	ut_assertnonnull(range);
++	ut_assert(range->u.int_range.min == LONG_MIN);
++	ut_assert(range->u.int_range.max == LONG_MAX);
++	free(range);
++
++	snprintf(str, sizeof(str), "d@0-%ld", LONG_MAX);
++	range = env_flags_parse_varrange(str);
++	ut_assertnonnull(range);
++	ut_assert(range->u.int_range.min == 0);
++	ut_assert(range->u.int_range.max == LONG_MAX);
++	free(range);
++
++	snprintf(str, sizeof(str), "d@%ld-0", LONG_MIN);
++	range = env_flags_parse_varrange(str);
++	ut_assertnonnull(range);
++	ut_assert(range->u.int_range.min == LONG_MIN);
++	ut_assert(range->u.int_range.max == 0);
++	free(range);
++
++	range = env_flags_parse_varrange("x@0xff0000ff");
++	ut_assertnonnull(range);
++	ut_assert(range->u.bitmask == 0xff0000ff);
++	free(range);
++
++	return 0;
++}
++
++ENV_TEST(env_test_range_parse, 0);
 -- 
 2.30.2
 
