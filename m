@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EED3BC5321D
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 16:49:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BA63C5321E
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 16:49:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36DF288AD2;
-	Mon, 26 Aug 2024 18:49:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 95C7788AC2;
+	Mon, 26 Aug 2024 18:49:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="NW/2cSNv";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="VTWJ5p/a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4865088A08; Mon, 26 Aug 2024 18:49:14 +0200 (CEST)
+ id 15A2888AD2; Mon, 26 Aug 2024 18:49:16 +0200 (CEST)
 Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B0078852A
+ by phobos.denx.de (Postfix) with ESMTPS id 79F4088ABE
  for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 18:49:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=phytec.de
@@ -30,55 +30,56 @@ DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XU0dQoorOCHAv/br+1zcpBOotCDqoq+TgDBt9WbWluE=;
- b=NW/2cSNviwVjIwJ5ASIIzm57waLoZ4yhwYny3q36e2YDUDR87fOWKJN+kV6Mm1KF
- S9wncKExw6vUWY0bNwQOTmqB3mbdYZe6l4maqn45PpyuOk3qUWvTCilUhwIaYlqv
- aA4q4aIGw9QmyIR2G8nbP6wBsM3LjwBBEci/WWA6Cds=;
-X-AuditID: ac14000a-03e52700000021bc-ba-66ccb2082e43
+ bh=FLr8tmUnUjHpRzFS+CT9lgn8Ue+b1b89T/g1BYCGM3s=;
+ b=VTWJ5p/aN1XiislTrtXf8s2lZjIFohqfs+/pvFnlMX6mpPmr/byqtV6sAWMQVMqd
+ VsEfm00X0ifwqCL8cztr0SwvhE4aJLLUQeSp7n6Nk6Ut1Y3LyvOL/345K5iuKw/Z
+ ggA75RgPvvSnZmeM1payOvMDovWz/vL9zSQ4wks/4r0=;
+X-AuditID: ac14000a-03251700000021bc-b8-66ccb207f4a5
 Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
  (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 21.BB.08636.802BCC66;
- Mon, 26 Aug 2024 18:49:12 +0200 (CEST)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id D0.BB.08636.702BCC66;
+ Mon, 26 Aug 2024 18:49:11 +0200 (CEST)
 Received: from llp-Hahn.hahn.test (172.25.0.11) by Berlix.phytec.de
  (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 26 Aug
  2024 18:49:11 +0200
 From: Benjamin Hahn <B.Hahn@phytec.de>
-Date: Mon, 26 Aug 2024 18:49:06 +0200
-Subject: [PATCH 2/2] board: phytec: phycore_imx8mp: Add mtd spi partitions
+Subject: [PATCH 0/2] phycore-imx8mp: Add support for SPI NOR flash
+Date: Mon, 26 Aug 2024 18:49:04 +0200
+Message-ID: <20240826-wip-bhahn-add_qspi_support-v1-0-0ea7840b940a@phytec.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20240826-wip-bhahn-add_qspi_support-v1-2-0ea7840b940a@phytec.de>
-References: <20240826-wip-bhahn-add_qspi_support-v1-0-0ea7840b940a@phytec.de>
-In-Reply-To: <20240826-wip-bhahn-add_qspi_support-v1-0-0ea7840b940a@phytec.de>
+X-B4-Tracking: v=1; b=H4sIAAGyzGYC/x3MwQqDMAwA0F+RnBeIRWT6KzKkXTObS82auQ3Ef
+ 7d4fJe3g3ERNhibHQp/xWTNFe2tgWfyeWGUWA2OXEd31+NPFEPyKaOPcX6bymyb6lo+2LeOKND
+ AHQeogRZ+yf/Kp8dxnP2SE/BsAAAA
 To: Teresa Remmet <t.remmet@phytec.de>, Yannic Moog <y.moog@phytec.de>, Tom
  Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, Benjamin Hahn
  <B.Hahn@phytec.de>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1724690951; l=2782;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1724690951; l=693;
  i=B.Hahn@phytec.de; s=20240126; h=from:subject:message-id;
- bh=XU0dQoorOCHAv/br+1zcpBOotCDqoq+TgDBt9WbWluE=;
- b=PZWRJIDi1hU0w2dYKyVAXo5sADY2758qM1oW9A/aoE0Eqg/3s+YBo9eRLCDgyiUEp5/mF2Jwv
- b6UOSg9Xz+1D8eg9AlWli7Iu+OvGS6dSRql24De+LY1mt2wlDIXOOMm
+ bh=FLr8tmUnUjHpRzFS+CT9lgn8Ue+b1b89T/g1BYCGM3s=;
+ b=pl80NyeNwy/xomHtWtYTq+yjKGeHt4j9JBLRvy8Nhz4hYLJkoELJ8quNeezGDeO2r000lf6ia
+ jfKbblXDIuICSGhkQUA1AP8jg7uAyNg89CVNM1awnX4nAysWI0zYTzd
 X-Developer-Key: i=B.Hahn@phytec.de; a=ed25519;
  pk=r04clMulHz6S6js6elPBA+U+zVdDAqJyEyoNd8I3pSw=
 X-Originating-IP: [172.25.0.11]
 X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
  (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrBLMWRmVeSWpSXmKPExsWyRpKBR5dj05k0gycdrBZTJ21mt3i7t5Pd
- ovudugOzx6sDq9g9zt7ZwejR393CGsAcxWWTkpqTWZZapG+XwJWxd4tFwQPRiue/PrE2MM4W
- 6mLk5JAQMJH4v7aPuYuRi0NIYAmTxMxNZ5hAEkICDxklprUXgthsAmoSu968ZgWxWQRUJY4u
- vMcCYgsLeEm8anoIVs8rIChxcuYToDgHB7OApsT6XfogYWYBeYntb+cwQ5T4SqyYdgFqvK/E
- /6OnwMZwCvhJnF1+lw3EFhFIl9j24jsrxJgoiXcTgyDOFJb4vHsNG8iZEgK7mSRW7/3JDlIj
- IZAosfO1HMRIWYmb57ewQdTLS0w795oZwg6VOLJpNdMERpFZSA6dhXDoLCSHLmBkXsUolJuZ
- nJ1alJmtV5BRWZKarJeSuokRFPoiDFw7GPvmeBxiZOJgPMQowcGsJMIrd/lkmhBvSmJlVWpR
- fnxRaU5q8SFGaQ4WJXHe1R3BqUIC6YklqdmpqQWpRTBZJg5OqQbG6JMxG2PiM3KzhI+smKc2
- SSdi8ar5Ap/T0zvifk03s3tyt+SaoSvjWlNnzgvV00p8H8+3EnuxeX+GjMj5yyoFrtlBJ6zC
- Xu9bpnbO7XTwtqYlhUr6jywub1GO/Dj1/uKuqQYWt/pfvFGZcaC8jeswX+qZmuREtZ0P8hS3
- nIqTtHnBfIw3T/WMEktxRqKhFnNRcSIAIG+iimsCAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrLLMWRmVeSWpSXmKPExsWyRpKBR5dj05k0g6cNjBZTJ21mt3i7t5Pd
+ ovudugOzx6sDq9g9zt7ZwejR393CGsAcxWWTkpqTWZZapG+XwJXx4GkvY8F21oqOh5OYGhgP
+ snQxcnJICJhIHLvzFMwWEljCJHFosQ+E/ZBRYlp7IYjNJqAmsevNa1YQW1jASeJT9wFGEJtF
+ QFXi+cxL7CA2r4CvROeWm0wQtqDEyZlPgGZycDALaEqs36UPEmYWkJfY/nYOcxcjF9DaHYwS
+ y1bsAOsVEUiX2PbiOytEfZTEu4lBEKcJS3zevYYNon4Xk8Svk/PYQGokBBIldr6WgzhTVuLm
+ +S1sEPXyEtPOvWaGsEMljmxazTSBUXgWkotmIVw0C8lFCxiZVzEK5WYmZ6cWZWbrFWRUlqQm
+ 66WkbmIEBbkIA9cOxr45HocYmTgYDzFKcDArifDKXT6ZJsSbklhZlVqUH19UmpNafIhRmoNF
+ SZx3dUdwqpBAemJJanZqakFqEUyWiYNTqoGxsuydcM7PY5OiNLWXF2z/pXl7cdCSz9ulmHev
+ NeqJfMb0QezaZ8H3iSneB5Xi+Pa9/7RmSjBf2dewjzkT5WwOlm/zEfP6uemMWm24yj2G5NzN
+ BaFsvhOXfg9U/9UVfLMzru+t2IzJuq01/HylnNfWOM/P/PbxypRZ25/bn78y7de5tV5hAjs+
+ KbEUZyQaajEXFScCANXmN9FgAgAA
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,102 +96,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Depending on if a SPI-NOR flash is populated add the mtd partition
-table to the device tree. For this we have to also probe the
-flash before booting.
+Add support for flashing and booting from spi nor flash.
 
 Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
 ---
+Benjamin Hahn (2):
+      configs: phycore-imx8mp_defconfig: Enable SPI NOR flash support
+      board: phytec: phycore_imx8mp: Add mtd spi partitions
+
  board/phytec/phycore_imx8mp/phycore-imx8mp.c   | 34 ++++++++++++++++++++++++++
  board/phytec/phycore_imx8mp/phycore_imx8mp.env |  4 +++
- 2 files changed, 38 insertions(+)
+ configs/phycore-imx8mp_defconfig               | 24 ++++++++++++++++++
+ 3 files changed, 62 insertions(+)
+---
+base-commit: ee2af844ba1b27b2e959c4e649e4b769fbeb4074
+change-id: 20240826-wip-bhahn-add_qspi_support-61200b09e4eb
 
-diff --git a/board/phytec/phycore_imx8mp/phycore-imx8mp.c b/board/phytec/phycore_imx8mp/phycore-imx8mp.c
-index ef9513618449..bf2d5ce01fa5 100644
---- a/board/phytec/phycore_imx8mp/phycore-imx8mp.c
-+++ b/board/phytec/phycore_imx8mp/phycore-imx8mp.c
-@@ -10,10 +10,34 @@
- #include <asm/mach-imx/boot_mode.h>
- #include <env.h>
- #include <init.h>
-+#include <fdt_support.h>
-+#include <jffs2/load_kernel.h>
- #include <miiphy.h>
-+#include <mtd_node.h>
-+
-+#include "../common/imx8m_som_detection.h"
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-+#define EEPROM_ADDR		0x51
-+#define EEPROM_ADDR_FALLBACK	0x59
-+
-+int ft_board_setup(void *blob, struct bd_info *bd)
-+{
-+	u8 spi = phytec_get_imx8m_spi(NULL);
-+	/* Do nothing if no SPI is populated */
-+	if (!spi)
-+		return 0;
-+
-+	static const struct node_info nodes[] = {
-+		{ "jedec,spi-nor", MTD_DEV_TYPE_NOR, },
-+	};
-+
-+	fdt_fixup_mtdparts(blob, nodes, ARRAY_SIZE(nodes));
-+
-+	return 0;
-+}
-+
- static int setup_fec(void)
- {
- 	struct iomuxc_gpr_base_regs *gpr =
-@@ -27,6 +51,11 @@ static int setup_fec(void)
- 
- int board_init(void)
- {
-+	int ret = phytec_eeprom_data_setup_fallback(NULL, 0,
-+			EEPROM_ADDR, EEPROM_ADDR_FALLBACK);
-+	if (ret)
-+		printf("%s: EEPROM data init failed\n", __func__);
-+
- 	setup_fec();
- 
- 	return 0;
-@@ -39,6 +68,11 @@ int board_mmc_get_env_dev(int devno)
- 
- int board_late_init(void)
- {
-+	u8 spi = phytec_get_imx8m_spi(NULL);
-+
-+	if (spi != 0 && spi != PHYTEC_EEPROM_INVAL)
-+		env_set("spiprobe", "sf probe");
-+
- 	switch (get_boot_device()) {
- 	case SD2_BOOT:
- 		env_set_ulong("mmcdev", 1);
-diff --git a/board/phytec/phycore_imx8mp/phycore_imx8mp.env b/board/phytec/phycore_imx8mp/phycore_imx8mp.env
-index f8f878e8f3a6..e5b49756132a 100644
---- a/board/phytec/phycore_imx8mp/phycore_imx8mp.env
-+++ b/board/phytec/phycore_imx8mp/phycore_imx8mp.env
-@@ -7,6 +7,7 @@ bootcmd=
- 	fi;
- 	mmc dev ${mmcdev};
- 	if mmc rescan; then
-+		run spiprobe;
- 		if test ${doraucboot} = 1; then
- 			run raucinit;
- 		fi;
-@@ -27,6 +28,9 @@ fdt_addr_r=0x48000000
- fdtfile=CONFIG_DEFAULT_FDT_FILE
- image=Image
- ip_dyn=yes
-+mtdparts=30bb0000.spi:3840k(u-boot),128k(env),128k(env_redund),-(none)
-+mtdids=nor0=30bb0000.spi
-+spiprobe=true
- loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr_r} ${fdtfile}
- loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
- mmcargs=
-
+Best regards,
 -- 
-2.34.1
+Benjamin Hahn <B.Hahn@phytec.de>
 
