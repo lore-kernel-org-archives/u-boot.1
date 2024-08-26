@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBD70C5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 12:02:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E616CC5321E
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 12:02:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E318C8806A;
-	Mon, 26 Aug 2024 14:01:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4A00C88A7B;
+	Mon, 26 Aug 2024 14:01:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1582F8806A; Mon, 26 Aug 2024 14:01:08 +0200 (CEST)
+ id 2AF8088B36; Mon, 26 Aug 2024 14:01:13 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 1AF2988AFB
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 14:01:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 5A37488B5A
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 14:01:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BAC1ADA7;
- Mon, 26 Aug 2024 05:01:31 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 05B4EDA7;
+ Mon, 26 Aug 2024 05:01:36 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D773B3F762;
- Mon, 26 Aug 2024 05:01:01 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 22D333F762;
+ Mon, 26 Aug 2024 05:01:05 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
@@ -37,9 +37,10 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Patrice CHOTARD <patrice.chotard@foss.st.com>,
  =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v4 14/27] lmb: bootm: remove superfluous lmb stub functions
-Date: Mon, 26 Aug 2024 17:29:27 +0530
-Message-Id: <20240826115940.3233167-15-sughosh.ganu@linaro.org>
+Subject: [PATCH v4 15/27] lmb: init: initialise the lmb data structures during
+ board init
+Date: Mon, 26 Aug 2024 17:29:28 +0530
+Message-Id: <20240826115940.3233167-16-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240826115940.3233167-1-sughosh.ganu@linaro.org>
 References: <20240826115940.3233167-1-sughosh.ganu@linaro.org>
@@ -61,44 +62,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove a couple of superfluous LMB stub functions, and instead put a
-check for calling the lmb_reserve() function.
+The memory map maintained by the LMB module is now persistent and
+global. This memory map is being maintained through the alloced list
+structure which can be extended at runtime -- there is one list for
+the available memory, and one for the used memory. Allocate and
+initialise these lists during the board init.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 Changes since V3: None
 
- boot/bootm.c | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+ common/board_r.c | 10 ++++++++++
+ common/spl/spl.c |  3 +++
+ 2 files changed, 13 insertions(+)
 
-diff --git a/boot/bootm.c b/boot/bootm.c
-index ddede08979..a61bbcfb45 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -239,11 +239,6 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
- 	return 0;
+diff --git a/common/board_r.c b/common/board_r.c
+index f445803d7a..a60da39a29 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -22,6 +22,7 @@
+ #include <hang.h>
+ #include <image.h>
+ #include <irq_func.h>
++#include <lmb.h>
+ #include <log.h>
+ #include <net.h>
+ #include <asm/cache.h>
+@@ -510,6 +511,14 @@ int initr_mem(void)
  }
+ #endif
  
--#if !CONFIG_IS_ENABLED(LMB)
--#define lmb_reserve(base, size)
--static inline void boot_start_lmb(void) { }
--#endif
--
- static int bootm_start(void)
- {
- 	memset((void *)&images, 0, sizeof(images));
-@@ -700,7 +695,9 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
- 		images->os.end = relocated_addr + image_size;
- 	}
- 
--	lmb_reserve(images->os.load, (load_end - images->os.load));
++static int initr_lmb(void)
++{
 +	if (CONFIG_IS_ENABLED(LMB))
-+		lmb_reserve(images->os.load, (load_end - images->os.load));
++		return lmb_init();
++	else
++		return 0;
++}
 +
- 	return 0;
- }
+ static int dm_announce(void)
+ {
+ 	int device_count;
+@@ -612,6 +621,7 @@ static init_fnc_t init_sequence_r[] = {
+ #ifdef CONFIG_CLOCKS
+ 	set_cpu_clk_info, /* Setup clock information */
+ #endif
++	initr_lmb,
+ #ifdef CONFIG_EFI_LOADER
+ 	efi_memory_init,
+ #endif
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 7c6e322ffd..ad2dc6a908 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -721,6 +721,9 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 	    IS_ENABLED(CONFIG_SPL_ATF))
+ 		dram_init_banksize();
  
++	if (IS_ENABLED(CONFIG_SPL_LMB))
++		lmb_init();
++
+ 	if (CONFIG_IS_ENABLED(PCI) && !(gd->flags & GD_FLG_DM_DEAD)) {
+ 		ret = pci_init();
+ 		if (ret)
 -- 
 2.34.1
 
