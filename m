@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37F5FC5321D
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 06:27:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED6BAC5321D
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 06:32:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FC288843A;
-	Mon, 26 Aug 2024 08:27:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 70E75883C3;
+	Mon, 26 Aug 2024 08:32:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="KT9+nT8n";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ab4/kQny";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35B96884AC; Mon, 26 Aug 2024 08:27:13 +0200 (CEST)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id E527F883C3; Mon, 26 Aug 2024 08:32:18 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11251883C3
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 08:27:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CC7C987B84
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 08:32:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-533461323cdso4410060e87.2
- for <u-boot@lists.denx.de>; Sun, 25 Aug 2024 23:27:10 -0700 (PDT)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5bf0261f162so4651046a12.0
+ for <u-boot@lists.denx.de>; Sun, 25 Aug 2024 23:32:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1724653630; x=1725258430;
+ d=amarulasolutions.com; s=google; t=1724653936; x=1725258736;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=O49GULQ1RBuCV3mQEjbflI9CcaxwJjbcRrrTowCZDqA=;
- b=KT9+nT8nOghlhnzhhRYggc/zUUOgiB/fwCgPPObmSSqDeWVM5Xxq3sjDhhGdDI7HJd
- BCEOYmbxVuF5m1nfaiaCnRWQEEKEHh8KxuLHgsGTIh1YDJrzunaf0/FnBG0eZc4fFBVo
- geJ3p8Njb6z6Ts6an6HW75ipG/u1bB3uP4Rng=
+ bh=yARgcnDAtx3Yxw5LFT4MkJfArTZq9+tfuycjr0R/6DA=;
+ b=ab4/kQnydZsKCrAYwvruCv0Tyw8GuUA39sMVjZ17TBYF3Ys2jklMCYX29VqqwhVZYo
+ tneajlx7wFx7b6ms3gn4cQi/0tS3kTacG4qjr0V7XIv7rXbtwPHIC77KrFoUidHtHy87
+ TX9x2A3tneiSmfeoNdYpd/ZGog2AyAUEWqomE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724653630; x=1725258430;
+ d=1e100.net; s=20230601; t=1724653936; x=1725258736;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=O49GULQ1RBuCV3mQEjbflI9CcaxwJjbcRrrTowCZDqA=;
- b=AtZT+exJZvyPXnktf8kB1MWqRCf2SRHG6B8e7qarmNKPis51P0/h5KrzoOnI+0QSSd
- hn9VvCugVh+vnOc2ml/FObosX/5NDyGVQYybF9DE5bhdI/BIS6NdWNG/SBXCA4KLqFwh
- D6hSgH/TOu7JGS8/EmOzvV8xhUTLOojlY2/gKoydpAr6aA+nQ0QwYi+2MBG2J82VhrKx
- lxaI51+18ENdVzI2hrhHlsVDUGyQfUSdyFb+6IoxysHlg0BQbInwhkxaVt2i3kfrq9P7
- /hipbiW6vIdBOoAlJ5nh/abD50PUjb6vC4oRTZDJPxX0NXdwJHtRORp86Ol4spo8ax3+
- oLVA==
+ bh=yARgcnDAtx3Yxw5LFT4MkJfArTZq9+tfuycjr0R/6DA=;
+ b=Ts5f0ZAsIkzEpyrV59WBTxcXSqcoK+qqBAWhcy7D48Ophw+ziyWo7ppZy/KjTHEdMl
+ LTYaUzquh/+mf3I7FazvsCCjlIXaMImrHExcdo9GXT3VuyOv4dK9EnlZ6aKSkbVXPvUJ
+ xl9IQ6Ge2QkWCs0cOc3Mau9yWegLPCLZa9lWTTKv2D7E8Le3mkXPtUU/jGI68tOn12Ht
+ aNh7p/tqdnuhsESQLJGZvEKyFd/IZGdcbnvGcY+FMZH0e7MQ2EHquqX1qX4GYwW2u9Q0
+ rF9h9+UFoZLS/+lAnPo4SXi2g7g2m0jdo69BhK+fjBrsUaXGrzWsvGt4kbbGl0tFdqlj
+ qD/Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXDnfkp24+nTOTlCZlYtcqhL9WvFNWVWmUbIsqZkwnLRL751XcsB12X8K/7CerbeZRH6aZDvAs=@lists.denx.de
-X-Gm-Message-State: AOJu0YwF9UAI2QqalQH+bFr4JeFov8LV4HBRoTLgx0FYHqvgCCGSAOUR
- Vw60BthGppFKIMeoJAo0r0iTlLGehBA1Z2c1c473M7dlfefuKsE8W51hoEsw2Wy0SDzmWQqYW9C
- jOZFjrLoFVeIpTayV4HC12IA79iBX1CE3gPrSjg==
-X-Google-Smtp-Source: AGHT+IGLZm8cpIXurtfd85+7V/VWH/yGKgxHrxhSBjQ+B0cw3qRJc/GEE2joGgaf9tN7H7F8APZaUm5kWlVaAJMXZtM=
-X-Received: by 2002:a05:6512:3351:b0:534:3cdc:dbfe with SMTP id
- 2adb3069b0e04-5343cdcddabmr3468345e87.28.1724653629740; Sun, 25 Aug 2024
- 23:27:09 -0700 (PDT)
+ AJvYcCUDTnUoboP7RczyWz/6vim9WWSWg5wrm0sLMgcMEcUPRvcKL3AkQOQk4d20U158YAw5ar7tFE0=@lists.denx.de
+X-Gm-Message-State: AOJu0YyAXZIHYQe1ZOi5zqEChSoq8JP9EofBfGFlj1m/yflrnc6puq6Z
+ l4uHnA9etnt+yxmMqYgenIzJOCzPYrdVhtb/cZg1ksefpDmc7uAf59FGs3vo2aljRS5u9t10X4K
+ MUtNUZS+1qBDrHcvk2NY+BvD1DTwQGNl3CpQ+0g==
+X-Google-Smtp-Source: AGHT+IE3zwHmGc0ADbqzaCBwgxDk71z7sO07GB6/Gdx4SxVW/N9YyZlFQ2D/Pe4EXdbdgQcdfjp1hIHBXwoXMpmGNRA=
+X-Received: by 2002:a17:907:6095:b0:a6f:392d:51a9 with SMTP id
+ a640c23a62f3a-a86a5178cd2mr652151366b.14.1724653935667; Sun, 25 Aug 2024
+ 23:32:15 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240826060411.3532105-1-avkrasnov@salutedevices.com>
- <20240826060411.3532105-2-avkrasnov@salutedevices.com>
-In-Reply-To: <20240826060411.3532105-2-avkrasnov@salutedevices.com>
+ <20240826060411.3532105-3-avkrasnov@salutedevices.com>
+In-Reply-To: <20240826060411.3532105-3-avkrasnov@salutedevices.com>
 From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Mon, 26 Aug 2024 08:26:58 +0200
-Message-ID: <CAOf5uw=hQv4WUQuFgw7RsZSQYW1Az0_sUvO=_8kqOFdK945pUA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] mtd: rawnand: nand_base: support for
- 'NAND_IS_BOOT_MEDIUM' flag
+Date: Mon, 26 Aug 2024 08:32:04 +0200
+Message-ID: <CAOf5uw=GSTTJ_cUpefnFnL+aR-d2Tq6k7odvhqGUEhRrKbcACg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/3] mtd: rawnand: meson: refactor use of
+ 'meson_nfc_cmd_access()'
 To: Arseniy Krasnov <avkrasnov@salutedevices.com>
 Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>,
@@ -99,71 +99,106 @@ Hi
 On Mon, Aug 26, 2024 at 8:17=E2=80=AFAM Arseniy Krasnov
 <avkrasnov@salutedevices.com> wrote:
 >
-> Based on Linux kernel:
-> commit f922bd798bb9 ("mtd: rawnand: add an option to specify NAND chip as=
- a boot device")
->
-> Allow to define a NAND chip as a boot device. This can be helpful
-> for the selection of the ECC algorithm and strength in case the boot
-> ROM supports only a subset of controller provided options.
+> Move call 'meson_nfc_cmd_seed()' and check for 'NAND_NEED_SCRAMBLING'
+> to 'meson_nfc_cmd_access()', thus removing code duplication.
 >
 > Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
 > ---
->  Changelog:
->  v1 -> v2:
->   * Place 'NAND_IS_BOOT_MEDIUM' according its numerical value.
+>  drivers/mtd/nand/raw/meson_nand.c | 30 ++++++++++++------------------
+>  1 file changed, 12 insertions(+), 18 deletions(-)
 >
->  drivers/mtd/nand/raw/nand_base.c | 3 +++
->  include/linux/mtd/rawnand.h      | 5 +++++
->  2 files changed, 8 insertions(+)
+> diff --git a/drivers/mtd/nand/raw/meson_nand.c b/drivers/mtd/nand/raw/mes=
+on_nand.c
+> index 5d411c4594..19f005202b 100644
+> --- a/drivers/mtd/nand/raw/meson_nand.c
+> +++ b/drivers/mtd/nand/raw/meson_nand.c
+> @@ -229,14 +229,19 @@ static void meson_nfc_cmd_seed(const struct meson_n=
+fc *nfc, u32 seed)
+>                nfc->reg_base + NFC_REG_CMD);
+>  }
 >
-> diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand=
-_base.c
-> index c40a0f23d7..ed605b4af5 100644
-> --- a/drivers/mtd/nand/raw/nand_base.c
-> +++ b/drivers/mtd/nand/raw/nand_base.c
-> @@ -4458,6 +4458,9 @@ static int nand_dt_init(struct mtd_info *mtd, struc=
-t nand_chip *chip, ofnode nod
->         if (ret =3D=3D 16)
->                 chip->options |=3D NAND_BUSWIDTH_16;
->
-> +       if (ofnode_read_bool(node, "nand-is-boot-medium"))
-> +               chip->options |=3D NAND_IS_BOOT_MEDIUM;
+> -static void meson_nfc_cmd_access(struct nand_chip *nand, bool raw, bool =
+dir,
+> -                                int scrambler)
+> +static void meson_nfc_cmd_access(struct nand_chip *nand, bool raw, bool =
+dir, int page)
+>  {
+>         struct mtd_info *mtd =3D nand_to_mtd(nand);
+>         const struct meson_nfc *nfc =3D nand_get_controller_data(mtd_to_n=
+and(mtd));
+>         const struct meson_nfc_nand_chip *meson_chip =3D to_meson_nand(na=
+nd);
+>         u32 bch =3D meson_chip->bch_mode, cmd;
+>         int len =3D mtd->writesize, pagesize, pages;
+> +       int scrambler;
 > +
->         if (ofnode_read_bool(node, "nand-on-flash-bbt"))
->                 chip->bbt_options |=3D NAND_BBT_USE_FLASH;
+
+unsigned int
+
+> +       if (nand->options & NAND_NEED_SCRAMBLING)
+> +               scrambler =3D NFC_CMD_SCRAMBLER_ENABLE;
+> +       else
+> +               scrambler =3D NFC_CMD_SCRAMBLER_DISABLE;
 >
-> diff --git a/include/linux/mtd/rawnand.h b/include/linux/mtd/rawnand.h
-> index fb002ae641..61690e816f 100644
-> --- a/include/linux/mtd/rawnand.h
-> +++ b/include/linux/mtd/rawnand.h
-> @@ -248,6 +248,11 @@ enum nand_ecc_algo {
->   * kmap'ed, vmalloc'ed highmem buffers being passed from upper layers
->   */
->  #define NAND_USE_BOUNCE_BUFFER 0x00100000
-> +/*
-> + * Whether the NAND chip is a boot medium. Drivers might use this inform=
-ation
-> + * to select ECC algorithms supported by the boot ROM or similar restric=
-tions.
-> + */
-> +#define NAND_IS_BOOT_MEDIUM    0x00400000
+>         pagesize =3D nand->ecc.size;
 >
->  /* Options set by nand scan */
->  /* bbt has already been read */
+> @@ -252,6 +257,9 @@ static void meson_nfc_cmd_access(struct nand_chip *na=
+nd, bool raw, bool dir,
+>         cmd =3D CMDRWGEN(DMA_DIR(dir), scrambler, bch,
+>                        NFC_CMD_SHORTMODE_DISABLE, pagesize, pages);
+>
+> +       if (scrambler =3D=3D NFC_CMD_SCRAMBLER_ENABLE)
+> +               meson_nfc_cmd_seed(nfc, page);
+> +
+>         writel(cmd, nfc->reg_base + NFC_REG_CMD);
+>  }
+>
+> @@ -566,14 +574,7 @@ static int meson_nfc_write_page_sub(struct nand_chip=
+ *nand,
+>                 return ret;
+>         }
+>
+> -       if (nand->options & NAND_NEED_SCRAMBLING) {
+> -               meson_nfc_cmd_seed(nfc, page);
+> -               meson_nfc_cmd_access(nand, raw, DIRWRITE,
+> -                                    NFC_CMD_SCRAMBLER_ENABLE);
+> -       } else {
+> -               meson_nfc_cmd_access(nand, raw, DIRWRITE,
+> -                                    NFC_CMD_SCRAMBLER_DISABLE);
+> -       }
+> +       meson_nfc_cmd_access(nand, raw, DIRWRITE, page);
+>
+>         cmd =3D nfc->param.chip_select | NFC_CMD_CLE | NAND_CMD_PAGEPROG;
+>         writel(cmd, nfc->reg_base + NFC_REG_CMD);
+> @@ -644,14 +645,7 @@ static int meson_nfc_read_page_sub(struct nand_chip =
+*nand,
+>         if (ret)
+>                 return ret;
+>
+> -       if (nand->options & NAND_NEED_SCRAMBLING) {
+> -               meson_nfc_cmd_seed(nfc, page);
+> -               meson_nfc_cmd_access(nand, raw, DIRREAD,
+> -                                    NFC_CMD_SCRAMBLER_ENABLE);
+> -       } else {
+> -               meson_nfc_cmd_access(nand, raw, DIRREAD,
+> -                                    NFC_CMD_SCRAMBLER_DISABLE);
+> -       }
+> +       meson_nfc_cmd_access(nand, raw, DIRREAD, page);
+>
+>         meson_nfc_wait_dma_finish(nfc);
+>         meson_nfc_check_ecc_pages_valid(nfc, nand, raw);
 > --
-
-I will then backport this from linux kernel
-dd6ed5c9890b759ba1b56697b9f3f50e71909e43
-
-Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
-
 > 2.30.1
 >
 
+Please change to unsigned int because I think match options type
+
+With this
+
+Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
 
 
---
+--=20
 Michael Nazzareno Trimarchi
 Co-Founder & Chief Executive Officer
 M. +39 347 913 2170
