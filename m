@@ -4,77 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ACBDC5472E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 19:14:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38D90C5472F
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 19:14:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7AD988C1C;
-	Mon, 26 Aug 2024 21:12:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 42EDE88CA3;
+	Mon, 26 Aug 2024 21:12:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aa+N/aOy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z9aTCbrm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 138DE88B59; Mon, 26 Aug 2024 21:12:18 +0200 (CEST)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id AF28988C90; Mon, 26 Aug 2024 21:12:32 +0200 (CEST)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28BDA88C37
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 21:12:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6872088C5D
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 21:12:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-39d2256ee11so18433775ab.1
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 12:12:15 -0700 (PDT)
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-2d3c098792bso3741108a91.1
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 12:12:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724699533; x=1725304333; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=arHsLf0mL/Bmrmxsn27G4ocfaU+5B4v+aZ2dBfQVb8M=;
- b=aa+N/aOyVQaje67KB09v9LjpPZAu4BsrZSDOoTt3MvM+L6sV1Xim1RNuAQQQlO0A++
- ahV46RIveZ9imQzf7iwGGauDf8t3oSgjADd06I6R0FTEGsHbD/wMWq7ISldVmmKt7bfQ
- KC3RRgnVPidAuPUEIXu543UyqVuXaKKytR5WI=
+ d=chromium.org; s=google; t=1724699549; x=1725304349; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=t47v4quQ30K33gizPhauvedGXnpyk+5aHqmOWTs0Wfo=;
+ b=Z9aTCbrma8OBXGCIK1ymUXgmGMlb2tB0GRJRuq18WsG/cn1cYoSMFy9XV90VE11p0i
+ XDegoFBtmXZdcy9F+ZxgFHj42weOtkRRrLry64yW9D1Jlmq12wCL3cMydFe7azSqGCpR
+ NXJvTGLYWjAmTRfej1vZfj83ne95bYn13UDsE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724699533; x=1725304333;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=arHsLf0mL/Bmrmxsn27G4ocfaU+5B4v+aZ2dBfQVb8M=;
- b=iKkErO1J0cdZtbYIiIMYQexb4oIkbxJDPY8aB/RnPHgPioK/fhXPRoD9GdiqBBLyts
- N8DQ3podgoKxZY89+hVfCACMpCDTYQXGM0MVZTJYPqzKF8yv0Kix0A4gw3rRlHsJdMSO
- RDkLE65SVsJv2boKkvbIauyins+GGYZfikqUCj3IuZDCvoBeGtJWW08Lut+srpmq3MRz
- K4zodt5CuvcQM2LGwIw6/NJG8bstUpvK7XtLKOnPP7A3AkXUd0GT5Ia9LfnEJjXZ6g69
- 2wqHOt1WuQUhTRaztbqY5F5MAK4BCZEaczbEkcNhHZLjxQGYHUHdpHJBLB0QIOpe7StQ
- dm+A==
-X-Gm-Message-State: AOJu0Yxrh7RoUsGJB4dbXRCyGOIbHZiXlHVKQypfLlEgu5naJERRevUE
- ICSnzQkvbisEpzbVKUlGHsRd+jETTFzA5eKe3btwgSfS1jgzAxeyUNxiBCMpl8cVmDD1xO0xXXw
- =
-X-Google-Smtp-Source: AGHT+IEoEGNjXfpktlVE4a9qA9XCFI+ehCSEjoxebJCT6pKspbIWiW/Z7NKyNmgvB/d7meaAP2Mo9w==
-X-Received: by 2002:a05:6e02:1488:b0:398:16d1:6127 with SMTP id
- e9e14a558f8ab-39e3c9c0727mr126420845ab.21.1724699533516; 
- Mon, 26 Aug 2024 12:12:13 -0700 (PDT)
-Received: from chromium.org ([139.60.174.4]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39d73e7c102sm34412575ab.37.2024.08.26.12.12.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Aug 2024 12:12:13 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Brandon Maier <brandon.maier@collins.com>, Marek Vasut <marex@denx.de>,
- Neha Malcom Francis <n-francis@ti.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 15/15] binman: Make a start on an iMX8 test
-Date: Mon, 26 Aug 2024 13:11:43 -0600
-Message-Id: <20240826191143.426387-16-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240826191143.426387-1-sjg@chromium.org>
-References: <20240826191143.426387-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1724699549; x=1725304349;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=t47v4quQ30K33gizPhauvedGXnpyk+5aHqmOWTs0Wfo=;
+ b=L8MIU3sF/Ilal2SUFHFg8VbzLFcLQGQljuD2/KXx2jcAUv3/6nLRjB7Hb+4NEuaau/
+ PNrtqGcmzr6Mtu7kgpb5Fgoo/ZSOpba97ZquexCBo7tR678xmf4Y0JhOV2NS3yotYzbR
+ vK644ns93gVJS2WZCowBlsnLEvgB/6eciWmQn1+fXCjD4WxZdBiQOgXs2fMAxOp3K0+X
+ z9xbOXcWrLdxi2ASUUfuXy6dNWhyb0S6o6DPUzy9qoGswH71l3ojnoGiGhQuc2VYMEeB
+ PRSTp/Mc+Mc9fmEq9PArwtw7vxBYfh2Lwqx8ieGlzrfSuZrsnpajkCxp14fHDhjGT9Vk
+ cVJA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVMLHsKr500zn/qH40Mnb5DYSnhshbFRQmYS2gv105+6WpZNUZQ00p6UlrlhYCqLD99ubhe+Kg=@lists.denx.de
+X-Gm-Message-State: AOJu0YxW2eIcj10pxHbvDn8ve0WvX7doOGrFUsXmiYneE7PQeG+14QTj
+ a9QCFWrnR8aA3gkBGtxQshQqMUV+Md+WCKcYcTUCfS5FzfSYYUuxqbGtVJks3Um8T/NmETwZsZF
+ zmTPno4SgoFyTvE4qWSTRCoqf0hd2ttbPrqgH
+X-Google-Smtp-Source: AGHT+IGClOQ6fVqYhvWjBNjxzkAEkRsAwIBcWCGVX8Fo/cnvSdTNzadSksjo+oTXkz/x9vGxaHO46mxTCgLS1EZNLGc=
+X-Received: by 2002:a17:90b:3787:b0:2cd:2992:e8e5 with SMTP id
+ 98e67ed59e1d1-2d8259b8c86mr647420a91.33.1724699548907; Mon, 26 Aug 2024
+ 12:12:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240816154658.1866186-1-raymond.mao@linaro.org>
+ <CAFLszTjE+8BmdmtFXER94LmEYshNDEA4x_MDTqvyGhHYed2OCw@mail.gmail.com>
+ <ffeb90f8-4f3b-4455-83db-d7b03b872c84@linaro.org>
+ <CAFLszTg8gM53pcbHGj-LoA9GDSU-X294_q6ZRnP_QjYFppG0sw@mail.gmail.com>
+ <20240826182345.GJ2479150@bill-the-cat>
+In-Reply-To: <20240826182345.GJ2479150@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 26 Aug 2024 13:12:16 -0600
+Message-ID: <CAFLszTiD4A2eCMfnnKvrbm__urLu+vdi_L1T1iiwU-qOY-yYJQ@mail.gmail.com>
+Subject: Re: [PATCH 00/10] SMBIOS improvements
+To: Tom Rini <trini@konsulko.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>, 
+ u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Bin Meng <bmeng@tinylab.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Stefan Roese <sr@denx.de>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Wan Yee Lau <wan.yee.lau@intel.com>, Alexander Gendin <agendin@matrox.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Max Krummenacher <max.krummenacher@toradex.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Peter Robinson <pbrobinson@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,71 +103,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch is for Marek, to provide a starting point.
+Hi Tom,
 
-To try it, use 'binman test -T' and see the missing coverage.
+On Mon, 26 Aug 2024 at 12:23, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Mon, Aug 26, 2024 at 11:58:54AM -0600, Simon Glass wrote:
+> > Hi Caleb,
+> >
+> > On Mon, 19 Aug 2024 at 17:03, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> > >
+> > > Hi Simon,
+> > >
+> > > > As a general comment, this is adding a load of code which is used by a
+> > > > lot of platforms. As more and more aarch64 platforms are created, this
+> > > > data grows. Why not use the devicetree for this hardware information?
+> > > > That is what it is for.
+> > >
+> > > This data does not belong in devicetree, the various system registers
+> > > exist to describe this information... Putting it in DT would be
+> > > duplicating it.
+> >
+> > I am not wanting to duplicate info which can be read from system registers.
+> >
+> > >
+> > > Using DT for this would additionally require having bindings accepted
+> > > upstream and for all SoCs to add them. To what end?
+> >
+> > To get the correct information in there. How are boards supposed to
+> > add SMBIOS info? Do we end up creating a whole infra in U-Boot just
+> > for the driver to read it out? It just doesn't make any sense to me...
+> >
+> > Let's put hardware info in the DT where it belongs.
+>
+> I'm a little confused here because of some older threads on this overall
+> topic. Part of the issue here is that in user space, "everyone" has
+> SMBIOS-based tooling today, and wants to have that work, rather than
+> inventing new tooling or modify existing tooling. And you were concerned
+> I thought that we had tied SMBIOS too much to EFI being present when
+> indeed it should be possible to pass the location along to the OS
+> without EFI, but at the time Linux at least only supported that notion
+> on MIPS I think?
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+That is a whole other concern I have, that we are perpetuating this
+legacy format which is a real pain to work with, when we already have
+devicetree. Let's leave that issue aside as I have not detected any
+interest in solving that problem, or even any agreement that it is a
+problem.
 
- tools/binman/etype/nxp_imx8mimage.py |  3 ++-
- tools/binman/ftest.py                |  4 ++++
- tools/binman/test/339_nxp_imx8.dts   | 17 +++++++++++++++++
- 3 files changed, 23 insertions(+), 1 deletion(-)
- create mode 100644 tools/binman/test/339_nxp_imx8.dts
+But for this particular series, I am just wanting to get the correct
+info in there. Having the CPU-detection code provide an opinion about
+what type of chassis is in use (just to take an example, the patch
+pieces I highlighted have been dropped from the email I am replying
+to) just seems a bit daft to me. Only the board vendor would know that
+info.
 
-diff --git a/tools/binman/etype/nxp_imx8mimage.py b/tools/binman/etype/nxp_imx8mimage.py
-index 3585120b79b..8ad177b3b65 100644
---- a/tools/binman/etype/nxp_imx8mimage.py
-+++ b/tools/binman/etype/nxp_imx8mimage.py
-@@ -27,7 +27,8 @@ class Entry_nxp_imx8mimage(Entry_mkimage):
- 
-     def __init__(self, section, etype, node):
-         super().__init__(section, etype, node)
--        self.required_props = ['nxp,boot-from', 'nxp,rom-version', 'nxp,loader-address']
-+        self.required_props = ['nxp,boot-from', 'nxp,rom-version',
-+                               'nxp,loader-address']
- 
-     def ReadNode(self):
-         super().ReadNode()
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index 6317e72e649..225b5639b58 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -7800,6 +7800,10 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         self.assertIn('Symbol-writing: no value for /binman/section/u-boot',
-                       out)
- 
-+    def testNxpImx8Image(self):
-+        """Test that binman can produce an iMX8 image"""
-+        self._DoTestFile('339_nxp_imx8.dts')
-+
- 
- if __name__ == "__main__":
-     unittest.main()
-diff --git a/tools/binman/test/339_nxp_imx8.dts b/tools/binman/test/339_nxp_imx8.dts
-new file mode 100644
-index 00000000000..cb512ae9aa2
---- /dev/null
-+++ b/tools/binman/test/339_nxp_imx8.dts
-@@ -0,0 +1,17 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/dts-v1/;
-+
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
-+
-+	binman {
-+		nxp-imx8mimage {
-+			args;	/* TODO: Needed by mkimage etype superclass */
-+			nxp,boot-from = "sd";
-+			nxp,rom-version = <1>;
-+			nxp,loader-address = <0x10>;
-+		};
-+	};
-+};
--- 
-2.34.1
-
+Regards,
+Simon
