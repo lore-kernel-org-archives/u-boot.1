@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 234EEC5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 10:25:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92C7AC5321E
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 10:25:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A65C488A35;
-	Mon, 26 Aug 2024 12:25:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0E64988A46;
+	Mon, 26 Aug 2024 12:25:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UejqidUe";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EtmPn3GE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12B2288A31; Mon, 26 Aug 2024 12:25:39 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id C74BD88A35; Mon, 26 Aug 2024 12:25:39 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0C2887FA7
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 12:25:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55D0488A2E
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 12:25:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPNK5001335;
- Mon, 26 Aug 2024 05:25:23 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPOvA061308;
+ Mon, 26 Aug 2024 05:25:24 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1724667923;
- bh=OPAnpXoF6FU0I1qr4spwq/hd7uKK6lt3wD5a1Xnfud4=;
- h=From:To:CC:Subject:Date;
- b=UejqidUechUXzxSA6V1XBZ7CRBqgIhLUY6NzyiadL6XoQJYo0R7IlggEkRvZOKWtA
- +2g5osIw2wp8wWJVpIljO1R0shCBqNn+yICFV3KkSTAK9tMZ1RjbfZ8pDiLmkfCY3r
- 0JW1xI6cqmMO2ma3SKlv9NVYng2i5f/l8vINlt3o=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47QAPNIl094555
+ s=ti-com-17Q1; t=1724667924;
+ bh=k4ZDNzfVyfQ2vbeQp8l6gnbnWgEMlOqyyGmJBRm10xU=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=EtmPn3GEhP/IxW32ynv9XwxM5MeMH2EjzHExcCLqDIopVGHI4/xYWQ8LrYAfnnk8j
+ 1YgGGlIUovp1H+K+zRYmBrh3CW39q31o6/Q5ciliwimSt+RrzykxIx5+nLkip4DpF0
+ I0PbGqwSS7Qo0lIXArIqI6ez+mu+H9xTEdOt2pyc=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47QAPONQ024838
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 26 Aug 2024 05:25:23 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 26 Aug 2024 05:25:24 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 26
- Aug 2024 05:25:22 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2024 05:25:24 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 26 Aug 2024 05:25:22 -0500
+ Frontend Transport; Mon, 26 Aug 2024 05:25:24 -0500
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPM11041687;
- Mon, 26 Aug 2024 05:25:22 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPNdl040332;
+ Mon, 26 Aug 2024 05:25:24 -0500
 From: Chintan Vankar <c-vankar@ti.com>
 To: Michal Simek <michal.simek@amd.com>, Vignesh Raghavendra
  <vigneshr@ti.com>, Dhruva Gole <d-gole@ti.com>, Neha Malcom Francis
@@ -68,10 +68,12 @@ To: Michal Simek <michal.simek@amd.com>, Vignesh Raghavendra
  <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>, Sumit Garg
  <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH v6 00/11] Add support for Ethernet Boot on SK-AM62
-Date: Mon, 26 Aug 2024 15:55:04 +0530
-Message-ID: <20240826102515.2774296-1-c-vankar@ti.com>
+Subject: [PATCH v6 01/11] common: spl: spl: Init DRAM size in R5/A53 SPL
+Date: Mon, 26 Aug 2024 15:55:05 +0530
+Message-ID: <20240826102515.2774296-2-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240826102515.2774296-1-c-vankar@ti.com>
+References: <20240826102515.2774296-1-c-vankar@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -92,63 +94,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series enables Ethernet Boot on SK-AM62 device.
+Initialize DRAM size in SPL stage since networking requires DDR
+to be initialized.
 
-This series is based on commit 'f4f845b85926' of origin/next branch of
-U-Boot.
+Reviewed-by: Dhruva Gole <d-gole@ti.com>
+Reviewed-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
+Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+---
 
 Link to v5:
-https://lore.kernel.org/r/20240813105400.4054657-1-c-vankar@ti.com/
-
-Logs for Ethernet Boot for AM625-SK:
-https://gist.github.com/chintanv133/464782796a9a60b9f5a49e674c5fc31a
+https://lore.kernel.org/r/20240813105400.4054657-2-c-vankar@ti.com/
 
 Changes from v5 to v6:
-- Updated function "k3_ringacc_ring_reset_raw" in [PATCH v5 04/10] to
-  reset only ring size field in ring configuration register as pointed out
-  by Alexander Sverdlin.
-- Added a new patch [PATCH 05/11] to reset only qmode in
-  "k3_ringacc_ring_reconfig_qmode_raw" function as it was resetting
-  other fields in ring configuration register.
-- Moved function to enable cache before probing CPSW driver as suggested
-  by Andrew.
-- Added Reviewed-by tags from Alexander Sverdlin and Sumit Garg.
+- No changes.
 
-Chintan Vankar (3):
-  common: spl: spl: Init DRAM size in R5/A53 SPL
-  soc: ti: k3-navss-ringacc: Fix reconfiguration of qmode API
-  arm64: dts: ti: k3-am62x-sk-common: Add bootph-all property in
-    phy_gmii_sel node
+ common/spl/spl.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Kishon Vijay Abraham I (6):
-  firmware: ti_sci: Add No-OP for "RX_FL_CFG"
-  soc: ti: k3-navss-ringacc: Initialize base address of ring cfg
-    registers
-  dma: ti: k3-udma: Add support for native configuration of chan/flow
-  arm: mach-k3: am62x: am625_init: Probe AM65 CPSW NUSS
-  configs: am62: Add configs for enabling ETHBOOT in R5SPL
-  configs: am62: Enable configs required for Ethboot
-
-Siddharth Vadapalli (1):
-  arm: dts: k3-am625-r5-sk: Enable DM services for main_pktdma
-
-Vignesh Raghavendra (1):
-  soc: ti: k3-navss-ringacc: Fix reset ring API
-
- arch/arm/dts/k3-am625-r5-sk.dts               |  5 ++++
- arch/arm/mach-k3/am62x/am625_init.c           |  9 +++++++
- common/spl/spl.c                              |  2 +-
- configs/am62x_evm_a53_ethboot_defconfig       | 17 +++++++++++++
- configs/am62x_evm_r5_ethboot_defconfig        | 25 +++++++++++++++++++
- drivers/dma/ti/k3-udma.c                      |  6 +++++
- drivers/firmware/ti_sci.c                     |  8 +++++-
- drivers/soc/ti/k3-navss-ringacc-u-boot.c      | 11 ++++++--
- drivers/soc/ti/k3-navss-ringacc.c             | 17 ++++++++++++-
- .../src/arm64/ti/k3-am62x-sk-common.dtsi      |  4 +++
- 10 files changed, 99 insertions(+), 5 deletions(-)
- create mode 100644 configs/am62x_evm_a53_ethboot_defconfig
- create mode 100644 configs/am62x_evm_r5_ethboot_defconfig
-
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 7c6e322ffd7..43a29db23bd 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -718,7 +718,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 		initr_watchdog();
+ 
+ 	if (IS_ENABLED(CONFIG_SPL_OS_BOOT) || CONFIG_IS_ENABLED(HANDOFF) ||
+-	    IS_ENABLED(CONFIG_SPL_ATF))
++	    IS_ENABLED(CONFIG_SPL_ATF) || IS_ENABLED(CONFIG_SPL_NET))
+ 		dram_init_banksize();
+ 
+ 	if (CONFIG_IS_ENABLED(PCI) && !(gd->flags & GD_FLG_DM_DEAD)) {
 -- 
 2.34.1
 
