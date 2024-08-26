@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42E07C5321D
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 12:04:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BBA1C5321E
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 12:04:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9349A8690D;
-	Mon, 26 Aug 2024 14:01:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F2C6C88A2E;
+	Mon, 26 Aug 2024 14:01:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AEF46866EB; Mon, 26 Aug 2024 14:01:46 +0200 (CEST)
+ id AE4F588905; Mon, 26 Aug 2024 14:01:50 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 79C7E88A2E
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 14:01:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id AEBB588A2E
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 14:01:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1B88DDA7;
- Mon, 26 Aug 2024 05:02:10 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5B49A11FB;
+ Mon, 26 Aug 2024 05:02:14 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 37D013F762;
- Mon, 26 Aug 2024 05:01:39 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7680F3F762;
+ Mon, 26 Aug 2024 05:01:44 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
@@ -37,9 +37,9 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Patrice CHOTARD <patrice.chotard@foss.st.com>,
  =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v4 23/27] sandbox: iommu: remove lmb allocation in the driver
-Date: Mon, 26 Aug 2024 17:29:36 +0530
-Message-Id: <20240826115940.3233167-24-sughosh.ganu@linaro.org>
+Subject: [PATCH v4 24/27] zynq: lmb: do not add to lmb map before relocation
+Date: Mon, 26 Aug 2024 17:29:37 +0530
+Message-Id: <20240826115940.3233167-25-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240826115940.3233167-1-sughosh.ganu@linaro.org>
 References: <20240826115940.3233167-1-sughosh.ganu@linaro.org>
@@ -61,105 +61,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The sandbox iommu driver uses the LMB module to allocate a particular
-range of memory for the device virtual address(DVA). This used to work
-earlier since the LMB memory map was caller specific and not
-global. But with the change to make the LMB allocations global and
-persistent, adding this memory range has other side effects. On the
-other hand, the sandbox iommu test expects to see this particular
-value of the DVA. Use the DVA address directly, instead of mapping it
-in the LMB memory map, and then have it allocated.
+The LMB memory is typically not needed very early in the platform's
+boot. Do not add memory to the LMB map before relocation. Reservation
+of common areas and adding of memory is done after relocation.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 Changes since V3: None
 
- arch/sandbox/include/asm/test.h |  4 ++++
- drivers/iommu/sandbox_iommu.c   | 25 ++++++-------------------
- 2 files changed, 10 insertions(+), 19 deletions(-)
+ board/xilinx/common/board.c | 31 -------------------------------
+ 1 file changed, 31 deletions(-)
 
-diff --git a/arch/sandbox/include/asm/test.h b/arch/sandbox/include/asm/test.h
-index 17159f8d67..0e8d19ce23 100644
---- a/arch/sandbox/include/asm/test.h
-+++ b/arch/sandbox/include/asm/test.h
-@@ -49,6 +49,10 @@ struct unit_test_state;
- #define PCI_EA_BAR2_MAGIC		0x72727272
- #define PCI_EA_BAR4_MAGIC		0x74747474
- 
-+/* Used by the sandbox iommu driver */
-+#define SANDBOX_IOMMU_DVA_ADDR		0x89abc000
-+#define SANDBOX_IOMMU_PAGE_SIZE		SZ_4K
-+
- enum {
- 	SANDBOX_IRQN_PEND = 1,	/* Interrupt number for 'pending' test */
- };
-diff --git a/drivers/iommu/sandbox_iommu.c b/drivers/iommu/sandbox_iommu.c
-index 5b4a6a8982..c5eefec218 100644
---- a/drivers/iommu/sandbox_iommu.c
-+++ b/drivers/iommu/sandbox_iommu.c
-@@ -5,23 +5,20 @@
- 
- #include <dm.h>
- #include <iommu.h>
+diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+index f04c92a70f..3440402ab4 100644
+--- a/board/xilinx/common/board.c
++++ b/board/xilinx/common/board.c
+@@ -12,7 +12,6 @@
+ #include <image.h>
+ #include <init.h>
+ #include <jffs2/load_kernel.h>
 -#include <lmb.h>
- #include <asm/io.h>
-+#include <asm/test.h>
- #include <linux/sizes.h>
- 
--#define IOMMU_PAGE_SIZE		SZ_4K
--
- static dma_addr_t sandbox_iommu_map(struct udevice *dev, void *addr,
- 				    size_t size)
- {
- 	phys_addr_t paddr, dva;
- 	phys_size_t psize, off;
- 
--	paddr = ALIGN_DOWN(virt_to_phys(addr), IOMMU_PAGE_SIZE);
-+	paddr = ALIGN_DOWN(virt_to_phys(addr), SANDBOX_IOMMU_PAGE_SIZE);
- 	off = virt_to_phys(addr) - paddr;
--	psize = ALIGN(size + off, IOMMU_PAGE_SIZE);
--
--	dva = lmb_alloc(psize, IOMMU_PAGE_SIZE);
-+	psize = ALIGN(size + off, SANDBOX_IOMMU_PAGE_SIZE);
-+	dva = (phys_addr_t)SANDBOX_IOMMU_DVA_ADDR;
- 
- 	return dva + off;
+ #include <log.h>
+ #include <asm/global_data.h>
+ #include <asm/sections.h>
+@@ -665,36 +664,6 @@ int embedded_dtb_select(void)
  }
-@@ -32,11 +29,9 @@ static void sandbox_iommu_unmap(struct udevice *dev, dma_addr_t addr,
- 	phys_addr_t dva;
- 	phys_size_t psize;
+ #endif
  
--	dva = ALIGN_DOWN(addr, IOMMU_PAGE_SIZE);
-+	dva = ALIGN_DOWN(addr, SANDBOX_IOMMU_PAGE_SIZE);
- 	psize = size + (addr - dva);
--	psize = ALIGN(psize, IOMMU_PAGE_SIZE);
+-#if IS_ENABLED(CONFIG_LMB)
 -
--	lmb_free(dva, psize);
-+	psize = ALIGN(psize, SANDBOX_IOMMU_PAGE_SIZE);
- }
- 
- static struct iommu_ops sandbox_iommu_ops = {
-@@ -44,13 +39,6 @@ static struct iommu_ops sandbox_iommu_ops = {
- 	.unmap = sandbox_iommu_unmap,
- };
- 
--static int sandbox_iommu_probe(struct udevice *dev)
+-#ifndef MMU_SECTION_SIZE
+-#define MMU_SECTION_SIZE        (1 * 1024 * 1024)
+-#endif
+-
+-phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
 -{
--	lmb_add(0x89abc000, SZ_16K);
+-	phys_size_t size;
+-	phys_addr_t reg;
 -
--	return 0;
+-	if (!total_size)
+-		return gd->ram_top;
+-
+-	if (!IS_ALIGNED((ulong)gd->fdt_blob, 0x8))
+-		panic("Not 64bit aligned DT location: %p\n", gd->fdt_blob);
+-
+-	/* found enough not-reserved memory to relocated U-Boot */
+-	lmb_add(gd->ram_base, gd->ram_size);
+-	boot_fdt_add_mem_rsv_regions((void *)gd->fdt_blob);
+-	size = ALIGN(CONFIG_SYS_MALLOC_LEN + total_size, MMU_SECTION_SIZE);
+-	reg = lmb_alloc(size, MMU_SECTION_SIZE);
+-
+-	if (!reg)
+-		reg = gd->ram_top - size;
+-
+-	return reg + size;
 -}
+-#endif
 -
- static const struct udevice_id sandbox_iommu_ids[] = {
- 	{ .compatible = "sandbox,iommu" },
- 	{ /* sentinel */ }
-@@ -61,5 +49,4 @@ U_BOOT_DRIVER(sandbox_iommu) = {
- 	.id = UCLASS_IOMMU,
- 	.of_match = sandbox_iommu_ids,
- 	.ops = &sandbox_iommu_ops,
--	.probe = sandbox_iommu_probe,
- };
+ #ifdef CONFIG_OF_BOARD_SETUP
+ #define MAX_RAND_SIZE 8
+ int ft_board_setup(void *blob, struct bd_info *bd)
 -- 
 2.34.1
 
