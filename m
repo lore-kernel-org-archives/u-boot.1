@@ -4,82 +4,182 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 456E0C5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 10:42:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0803C5321D
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 10:51:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CC258855C;
-	Mon, 26 Aug 2024 12:42:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id E9BA088155;
+	Mon, 26 Aug 2024 12:51:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="KNBWvruh";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="cRHAA/yo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D0EE88A21; Mon, 26 Aug 2024 12:42:17 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 64EF1881A5; Mon, 26 Aug 2024 12:51:19 +0200 (CEST)
+Received: from EUR03-AM7-obe.outbound.protection.outlook.com
+ (mail-am7eur03on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260e::601])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60AE288804
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 12:42:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 24D468811A
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 12:51:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a86abbd68ffso425444266b.0
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 03:42:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1724668935; x=1725273735;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=P1Ch/kEAqJ2L6v0885UsOA8IEmUuLGULblzPqqlLtE0=;
- b=KNBWvruhiA8MI6WJunVjq7jlM6c1mrhLGsjkygbS3ZurmMwN8BWXrGQI6uvhh4n+d4
- 3cgRexANyhVyp4eKbvajd629dpuF+brH4FqPqs0Hl4Fpl27qaGBh64mFS2EK4c4aD2QU
- iUFbpvfDHspZSHpppKfP5aaQBzSyolxYuElqM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724668935; x=1725273735;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=P1Ch/kEAqJ2L6v0885UsOA8IEmUuLGULblzPqqlLtE0=;
- b=YzGj6oiXaIER40qVvPVczQtLTRmunu5w6C+Gy/7qAB/tpEDrO3zZTPVoYHeDAdYDUC
- AH44jGTgLh8DaYlbncD2ptE+2/QeSwv5CJD63piD2esFsYQc0iVV548YYqv4OkRDWJIK
- gjtx92a1rwyveyAdBl2DS92ZoLThrqLqn3ZOFQTv1ycoXyDenrKLzNV4hXWuZ+nYG8lg
- VHHAaPve/5DJ6JeLvGOSGiSobfD+nlHWc+CCPztAy1/Cxkg3p9gP8Lodnemr7t3ZyZrB
- SgWUX3p/ihcV8cPXEAzpNA29an45QiLorP5vfPfAz1gkKGrVnBgN3LhEk+aHWyaGwdcg
- 2hYA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU3cQEimreR9YD38OsFfNXeYtnBJRGZaQnFExulfWyFQRyN8B0gvKW0rZJtdm6hssAzwKMAYNA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxy95rjXQkTBHM/ViLNI1fF+3J+PY8Y6uFmcHvn8ZPjanD6/ibD
- OMuIZA+JJzlSiaYwhXrwP0gAlhVo4bIWVisORHU0bkkT4eP7PvdgllCq73OyEN+9ztDQBDLNj4k
- Lpa2PqUz5L1q06l5Tphapi5y8m8oWMxD8fUFHAQ==
-X-Google-Smtp-Source: AGHT+IGJrV4MbiJW8z9tVIPoF4insWoP8zyr1EKJDY1ERIO+j0hgvnzShD2U1SltA2tjPzTmJQzKCn9c89RzVdv5w6s=
-X-Received: by 2002:a17:907:2dac:b0:a7a:8dcd:ffb4 with SMTP id
- a640c23a62f3a-a868a69568cmr1274314566b.17.1724668934196; Mon, 26 Aug 2024
- 03:42:14 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=YrdUsdtSuSAWUyABnjnpU+2CmuKH1++R+Zxyqs6SXOr3AGkspZqsCd4AJOR6b8g1VpzYexKOfyMamv4MvRQ3ZMU7MlJVL85Vfr7mb8YB4teVOcnQJ7eKkBmchgQljVnRzCYQhQXzpmlhz9rhSRaGZhwTtOEPrg14kQjru40ec0O0EG2is9DTekHC+PusXcfNulDxL1Rkeq5RYc3JCZpD6lpObhlg8ciKdhZ2BPW+kW/KnKTuJXEYHdrRto1RPxZZcpZBAsHtxjkbQX8DlBqbDqygUeXx9FScTUY/INOpmETUKupU1whXz/KHKGEzlTEIUEsdeRr0bg32eplrODqIsA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=V+xSYNYOKF3kR18hyo7dGWtddXKI/SEaNUn42fQYESc=;
+ b=ilGNwNejH8S+UhLHRSAYIUR5SuJYWKR93Fd3bH+bbDuLEu0VviG/rxE83f6SXY3bZpgCxkFhjDOLlsJP/j7EKu2D3UKq1Cr1UAjbAvkWQtgANLeReKJwGNJdfvopHqfBrErXVkIBqk1/Crm+bxP3T9yG7Vs2x9wR+P05jHBeuY5lg0A2bXlITrnb1f+KRqXs4z7SjdCoYwymK4BdQT7PzvGbJSO25KHwfB2WemzM0dFlBTwMRvqbHJVA30j21xSeZ6ayWa6alIlVg6yPDwzH5GoIbN3VCBKIFLObKVBKtsR8hEWG4mJOXJ46ZCsmBI6ZMRzyeDqnnRFowQaZEab8QA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
+ dkim=pass header.d=siemens.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=V+xSYNYOKF3kR18hyo7dGWtddXKI/SEaNUn42fQYESc=;
+ b=cRHAA/yomvaa+KtpkBtg3xKhxDwabg348gC0t7EzId1wMtwI/OH/tBmTRGFO7HSe7MUVlCN1lNkphIZIMFHeHPMHHCELmpPlvpK77lN1OlxMYvzYL+/a6v69i0jGoCZtjaSK1UUNW0RWNBS44Q9hSsly02aeIPwobkbhOXXqpwRS8epYohqfZK3UCvJ+Haj+LOyvMjl+vx4kFGPAvPH39IbAxZ52mSR/51rzZtDuXdkbc7LZCVecHSonBKUJeMuHiAUmP0a4zwtU5gavn2gtsDic0HNcz/2TwFO6Gur/lWNcslOnu/BHdEK1ON5MGvuVyf8GjDu6CEizWtesXjRlpQ==
+Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5b6::22)
+ by PAXPR10MB7928.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:24e::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7897.24; Mon, 26 Aug
+ 2024 10:51:15 +0000
+Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::baa6:3ada:fbe6:98f4]) by AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::baa6:3ada:fbe6:98f4%3]) with mapi id 15.20.7897.021; Mon, 26 Aug 2024
+ 10:51:15 +0000
+From: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
+To: "joao.goncalves@toradex.com" <joao.goncalves@toradex.com>,
+ "sumit.garg@linaro.org" <sumit.garg@linaro.org>, "c-vankar@ti.com"
+ <c-vankar@ti.com>, "francesco.dolcini@toradex.com"
+ <francesco.dolcini@toradex.com>, "nm@ti.com" <nm@ti.com>, "dannenberg@ti.com"
+ <dannenberg@ti.com>, "n-francis@ti.com" <n-francis@ti.com>,
+ "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
+ "trini@konsulko.com" <trini@konsulko.com>, "afd@ti.com" <afd@ti.com>,
+ "seanga2@gmail.com" <seanga2@gmail.com>, "s-vadapalli@ti.com"
+ <s-vadapalli@ti.com>, "michal.simek@amd.com" <michal.simek@amd.com>,
+ "quentin.schulz@cherry.de" <quentin.schulz@cherry.de>, "d-gole@ti.com"
+ <d-gole@ti.com>, "danishanwar@ti.com" <danishanwar@ti.com>, "devarsht@ti.com"
+ <devarsht@ti.com>, "mkorpershoek@baylibre.com" <mkorpershoek@baylibre.com>,
+ "w.egorov@phytec.de" <w.egorov@phytec.de>, "jonas@kwiboo.se"
+ <jonas@kwiboo.se>, "kishon@ti.com" <kishon@ti.com>, "sjg@chromium.org"
+ <sjg@chromium.org>, "matthias.schiffer@ew.tq-group.com"
+ <matthias.schiffer@ew.tq-group.com>, "u-kumar1@ti.com" <u-kumar1@ti.com>,
+ "vigneshr@ti.com" <vigneshr@ti.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH v6 04/11] soc: ti: k3-navss-ringacc: Fix reset ring API
+Thread-Topic: [PATCH v6 04/11] soc: ti: k3-navss-ringacc: Fix reset ring API
+Thread-Index: AQHa96JVfGvF+05r9EmcrUPsllJsr7I5XHgA
+Date: Mon, 26 Aug 2024 10:51:15 +0000
+Message-ID: <1e8e078a1def1e9d6cf60f29bcabb95d459325ef.camel@siemens.com>
+References: <20240826102515.2774296-1-c-vankar@ti.com>
+ <20240826102515.2774296-5-c-vankar@ti.com>
+In-Reply-To: <20240826102515.2774296-5-c-vankar@ti.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=siemens.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AS8PR10MB6867:EE_|PAXPR10MB7928:EE_
+x-ms-office365-filtering-correlation-id: d72b1282-6382-49af-0005-08dcc5bd01e8
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|366016|1800799024|376014|7416014|921020|38070700018; 
+x-microsoft-antispam-message-info: =?utf-8?B?eG5DYlo5Q3MzSWlNMGR6djhrTlJGMXE5SjUzSTdXcjc2Y3ZPenkxa0FMMm01?=
+ =?utf-8?B?cWFGN082cDJGaEtpUjI4dzlrOGQ5c250bGdWU3I0M0lEaXhuM0tQeW4rQ0d0?=
+ =?utf-8?B?WXRJeUtFbTJuL3RoKzFnSC80OVowc0NYQ1J3VE4zVE16VWprN0w1K0swZ1kv?=
+ =?utf-8?B?UUdUS205TWZ2MzNLbmh5V01VS0hpVk1jVThSWHBrVmtaZ2JYelo0czU1R1hG?=
+ =?utf-8?B?bkpMTm1jYnpEbzRGc0RUNFdBR3MveUhUR2tuYzVhZWc4TnY1bmh3VkNyS3RY?=
+ =?utf-8?B?UUdzakFyeTFvWE04OFpqcUJXb2dzemNtT3h6WENzZU9kcm9nT1VIYSsvYml3?=
+ =?utf-8?B?RVd1NzFQVi9GcTJYZEZla0NvRmJ0TFEvMmJleUQ4T3RqeTJHekF0MTNXOXlQ?=
+ =?utf-8?B?dWlpNGp1VnVDMFdTQWI5SnBMelpocXB1QXYrbnY4TWlZVGxmUk1oS3ZYSWxx?=
+ =?utf-8?B?TDZrVG5HWmJHdFBaK2dscHYrOUt0ckg0c0xrM1hsN0xMeHdOcUV1K2VSeEVt?=
+ =?utf-8?B?QlArRm5vMUN0eENMLzM3N0xIRi9DUVJsNUZRSjAwNlpmbzJ3b2ZlSVlOZ1Bt?=
+ =?utf-8?B?S0pWdmVXdWYwK09wV1VEeWc0YUxNbzlKM21BdFVJNWZBVllKQmppNmN6Z0Yy?=
+ =?utf-8?B?ckw5UTRROUtLWlpscUY2VFBDeS9iTmx1cWltWVdiRUxkRVQvRVBZLzZlYnlB?=
+ =?utf-8?B?KytQK0FEbmhNNnU4YkZhMkZoMkpiRFZKSktQZ25zMm12QkZhbVRhN3M2ci9P?=
+ =?utf-8?B?eHBXMTRDVkFuZFdCMkd3NVdKcWNjck5vdGczc3piY0JWMXFrbzYxaU1jdTRz?=
+ =?utf-8?B?eUVwZW1XUHZGVFQvY014S1FTbHh3bTZVaTgxSzhudW9LMW4rVHZxRGdyck1n?=
+ =?utf-8?B?bmVTYkw3WWxTaW5mMmIrV2NMcmhZaHhNZkRYVmh1VWZQaGpxU2JnM08rMUxK?=
+ =?utf-8?B?TFc3STl0NHhsbVppaUFnOG14VmtiYW5LU0l2c0s3K0RzV21yTGJZSUpvMjNM?=
+ =?utf-8?B?SVZ0dHpQV002eS9MMElveDBjdUEwOEVWOFZBUlY4Z0ZIT0NPWlI5SmFob1hH?=
+ =?utf-8?B?eStxZEdBc25SZW1OQXZKVWpZaW5sS0p6dHN0VW9raWc3b2dMc0pYbEt6Vjlk?=
+ =?utf-8?B?UUUxZXNtM3dFQ3phTXJ3MFVpYVRNTVlmYVBnQ1BsdE9ZR1Z2S3JVZHliZ21W?=
+ =?utf-8?B?T1VWcVVnRC9xaC8yejBFQm1BL3BYVnJKSTR3aXdWejgxQkV3N2Uya1FmSDhy?=
+ =?utf-8?B?dHVIZVNaQXRjWFJZL3lBSGNkWTFibVMxN2hsZXFKc09SZTA5MEpRQXpCdURV?=
+ =?utf-8?B?aFVBaU9KUm5uRzR1RHRYWXpmdGFPaU11WXlmY3JjTHVsZFUvT0tDb2lKWEU1?=
+ =?utf-8?B?QmVxUVBIYmpPdGlhenJuZmFoRitoaWRRWk5DTzEza2lsSW9GVWpMM1BxcFpB?=
+ =?utf-8?B?N1dxT01UY1duRGNaVkEwMmpMV2Zic051TExaN0xKNmFaaVNsTzF1N3ZzUjRj?=
+ =?utf-8?B?QWFVQ0hKZ3BKQm85THZEV3JiNGRwQWtHOW5kczVpTHpaeGxSdk01T2U5MnlF?=
+ =?utf-8?B?ZVRFclEvVW4rTUY3MGYyQ3JRTGdyd1dlT2FGOUhrVS93OEdmMThib05xQ0xY?=
+ =?utf-8?B?cDJWa2Eyekc2cWlTa3pTWmpNWmp0RVYrQ2tNWXJnWWZJaVhhT09hVWhoUzhQ?=
+ =?utf-8?B?YnVnL2oyM3JHSGtJTlBRaHA3UEhqY0hpajk2K3FTaHppaE12Tll5MUoyaHFm?=
+ =?utf-8?B?ZUo0VnR5UU9jZU13ZUlvRklxMzNSTEw0SXZWYmZvbEVMb2ZDT3FndW9ibSts?=
+ =?utf-8?B?YXRHUVh2M1BEOHBzK1A3Mmw3VkdQdWdmWm93dFI0aHFWMTdsd2ZxRDVoRHdV?=
+ =?utf-8?Q?imvy98BTgWbAq?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(7416014)(921020)(38070700018);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?R1Q3V3puYTFJUVJtamQ4bWplbUdCNXNkajM0aHg5VFROMDBiMEtwZjA5Zzc0?=
+ =?utf-8?B?RVlGRXRpWUxnSCtiYlJjckJwQ3ppZmtBTFBpRkVPeUlreHVMcXQ2anFjZXlm?=
+ =?utf-8?B?MVF2NXdnUFZZVFRENFFmUkxlSGRjZkNNby9NVDZyOTN1c1dTTE5ranZjUDJp?=
+ =?utf-8?B?MjIwWDAwSE80VEZJcS9vazdhRHF5U2JUTTRtaGIrRTNQSTFmUFZOelJibXEx?=
+ =?utf-8?B?NlZ6M2pOYlBiaWFWa2c5SEUvN3p0YVIxNFo5OWpkZE5zNWt1UWk0Rll2LzE2?=
+ =?utf-8?B?d2FNTUFMZGZ2MHFTS3hnQ2IxQ3FxUGhzK0lBdUFUeUM1Sk1iWFAvV2dOejhL?=
+ =?utf-8?B?YUZJOE9xMWhUYlJUYS8zMWZDeGw2dlZJQ3l5OExOeFh4TGZCZGVPZjNpRG5O?=
+ =?utf-8?B?SUppL3VnOXpUOW43NjlnR3BHQTlROGN0eWpWSFRpdWZVQXhpNG45ZUJFTDZK?=
+ =?utf-8?B?ZVBVMmxNQThHUkhZOFBkT0RMUXBSclcvUkRXb0IzeUs0T2syWlF5OFJ6K0ty?=
+ =?utf-8?B?TFlOS3V2QXpTR0hTMUs2cnlJWnpVM1hUU2tydllWeDRxYnNCWjVSR0VFSG9n?=
+ =?utf-8?B?amwzZ1kvbHpoSW1ydnQ2endpTEpsRUtjKzByd1FGMFk4TGgySTBFbko3SGNt?=
+ =?utf-8?B?ak5NVU1ZWTJMWXBtbEk4QVhodngzemhKcVRmSklsMk1ESklqVnpjd096WnRE?=
+ =?utf-8?B?RGdFT3FnNi9TNll0aXlHZkI2RmFCd2hFeE8rNXNDaEdld1ZsWENYdUNuOFE5?=
+ =?utf-8?B?WTd1b2VvK2RYSlpCbWFJTi91RjI3NTFla1JCb2Vpd2VxSTNhczJGTzN4bGM5?=
+ =?utf-8?B?QnBKd0pjdm04ZjRjdlMxZ20xVTA3MkloeklDL1BtaXJjc2hDVEFqalhmQzlX?=
+ =?utf-8?B?ZFJNV0dPNXgwVEI4VjNKWjNvZzREM2dGcXhxUHlBNFYvVHRjNGsyV3dCNUNv?=
+ =?utf-8?B?L0NFWFQ2Rm9WSnJSYXFiZXk1MzY2VjljdzNMaFk1NWh1dE9DZ1pqQ0VIWUMv?=
+ =?utf-8?B?Y3NNUUM2a0liMGFuMEwvcVV5ZHR4YUExNE1wbU9mK1pDNVQxRXdGeVUzN0NG?=
+ =?utf-8?B?akp0RDhaUUZFRDhBT05HcnpoR0tVTjhmS0MxbXJRWWp1RUNSVHdUWHVudWRQ?=
+ =?utf-8?B?aThFOWs3VVJWaE1rK0hOSmtUZ1JsYmM0Ym94Wk4rdkFRVVN2eEF3UGpGTVp2?=
+ =?utf-8?B?WlNPT042U2tKVjhiSnBzazhienVUdTVzRjZlb1dJeHNrUXMwQzhuZ2RhVEJK?=
+ =?utf-8?B?Z244N0JVaXBKbmFIYXVHVUp4ME5IK1FxRWduK0dyZFFsczU1ZSs3cUxnTVlp?=
+ =?utf-8?B?WnFRVFJnQk0zNVpjSGlHVWkwc1dlUzVqQUU0MkN1K2ZiUVdnM2JHS1U2ckhI?=
+ =?utf-8?B?ekhsdmtRNjI4djNBRDJZUjFTanJwWENvMVlETUlmQ0t3ZTdpUGp4ekgxS2Y4?=
+ =?utf-8?B?eGhmYWFoWWZHTEFZVjJldmZqbnAzaXNxRWd0K3E3ZHlydnlyOTI1MHhQT3Fk?=
+ =?utf-8?B?d0pkcVI2UkllSkZZRmQ5TkhFWWJWMElNMTVnM2liNllJRlUwR0JPUUJPcTMx?=
+ =?utf-8?B?WDF4OU5kdWFKbklNa3J2WGNhcmkvaTJHd0JXdkpzZ2MvYVZ3Wm1Xelg0VVpu?=
+ =?utf-8?B?QjVWSDBCb3M4UDlJQWp0Q2ZTUVR3QklhWjFrcFI5clQrbyt4YmtRcEhaMFo0?=
+ =?utf-8?B?N3lmOGdadkM1SFJRVlNybTMyWUk4TEdGZTRrOFNXcUw3aEo5QUxyRUVqeHJ2?=
+ =?utf-8?B?U2l0S0RoR3d1TWZzOGtib0pici9nU2hBMlhsV1piL09rWVkxTk9YVFlsMEky?=
+ =?utf-8?B?TURoWi9FU1JGd09Vb2VZa2M0SmdoLzJHWFJ5b1VEazJNK3lSeVhtd2VFcEQ3?=
+ =?utf-8?B?eUkwOHMvSm56YkNXUGV3SFFHV2loKy9jZGhhU0V4Q05RQ1RSaEZXaWhkT3Yz?=
+ =?utf-8?B?NGgzZkQxaEJKK1F5SHdqRzZmSnM3ZE9BdjVXME5ZT0RyanZhbi9pWFlQVzIz?=
+ =?utf-8?B?TDNkT1Q1NXN0cHgrM0x5cFB2NVRFSzBVRGpDcEdUQjE3eWtuSUdFU285alQ0?=
+ =?utf-8?B?ZnlTUjdxTWlPM2JGQTUxRDNIUmFDZ3dRK2lEK0Z3Z3R1TFRPU0UyVEJHOEZS?=
+ =?utf-8?B?Ri8wN2ZTYmJtSWozdGhjUDZMTlRndzRGTXNSV0xBWjQvcC9aek1ob0gzLzQy?=
+ =?utf-8?Q?uFmwdemiyYIg63J0U/6w49I=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <E182E86741986B469E0DB1FFB9DAC434@EURPRD10.PROD.OUTLOOK.COM>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20240826060411.3532105-1-avkrasnov@salutedevices.com>
- <20240826060411.3532105-4-avkrasnov@salutedevices.com>
- <CAOf5uw=UuB1YandpEziF1gp3Amh1J9fk15YCM7J4FZW6zoq7GA@mail.gmail.com>
- <6f361799-2cd2-9573-cb53-82b22ca56c06@salutedevices.com>
-In-Reply-To: <6f361799-2cd2-9573-cb53-82b22ca56c06@salutedevices.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Mon, 26 Aug 2024 12:42:03 +0200
-Message-ID: <CAOf5uw=2T7VLdKA+45LedRDvPN29Sv73C8P1NEeB+BRKA=exQg@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] mtd: rawnand: meson: read/write access for boot
- ROM pages
-To: Arseniy Krasnov <avkrasnov@salutedevices.com>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>,
- u-boot@lists.denx.de, 
- u-boot-amlogic@groups.io, kernel@sberdevices.ru, oxffffaa@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: d72b1282-6382-49af-0005-08dcc5bd01e8
+X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Aug 2024 10:51:15.1051 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: YeG26EP3pw2eSMcjQePVaB/DDczafJbCTiP4sFaFoe1zrAzmpV3ix9Fe/kG6gw1tz1UvAlcvCauOAZqABCTw436QvNH9PsUFXn78U3XuLxc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR10MB7928
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,220 +196,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
-
-On Mon, Aug 26, 2024 at 11:00=E2=80=AFAM Arseniy Krasnov
-<avkrasnov@salutedevices.com> wrote:
->
->
->
-> On 26.08.2024 10:16, Michael Nazzareno Trimarchi wrote:
-> > Hi
-> >
-> > On Mon, Aug 26, 2024 at 8:17=E2=80=AFAM Arseniy Krasnov
-> > <avkrasnov@salutedevices.com> wrote:
-> >>
-> >> Boot ROM on Meson needs some pages to be read/written in a special mod=
-e:
-> >> 384 byte ECC mode (so called "short" by Amlogic) and with scrambling
-> >> enabled. Such pages are located on the chip in the following way (for
-> >> example):
-> >>
-> >> [ p0 ][ p1 ][ p2 ][ p3 ][ p4 ][ p5 ][ p6 ][ p7 ] ... [ pN ]
-> >>   ^           ^           ^           ^
-> >>
-> >> pX is page number "X". "^" means "special" page used by boot ROM - e.g=
-.
-> >> every 2nd page in the range of [0, 7]. Step (2 here) and last page in
-> >> range is read from the device tree.
-> >>
-> >> Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
-> >> ---
-> >>  drivers/mtd/nand/raw/meson_nand.c | 56 +++++++++++++++++++++++++-----=
--
-> >>  1 file changed, 46 insertions(+), 10 deletions(-)
-> >>
-> >> diff --git a/drivers/mtd/nand/raw/meson_nand.c b/drivers/mtd/nand/raw/=
-meson_nand.c
-> >> index 19f005202b..54ea035d8d 100644
-> >> --- a/drivers/mtd/nand/raw/meson_nand.c
-> >> +++ b/drivers/mtd/nand/raw/meson_nand.c
-> >> @@ -40,6 +40,7 @@
-> >>  #define NFC_CMD_RB                     BIT(20)
-> >>  #define NFC_CMD_SCRAMBLER_ENABLE       BIT(19)
-> >>  #define NFC_CMD_SCRAMBLER_DISABLE      0
-> >> +#define NFC_CMD_SHORTMODE_ENABLE       1
-> >>  #define NFC_CMD_SHORTMODE_DISABLE      0
-> >>  #define NFC_CMD_RB_INT                 BIT(14)
-> >>  #define NFC_CMD_RB_INT_NO_PIN          ((0xb << 10) | BIT(18) | BIT(1=
-6))
-> >> @@ -78,6 +79,8 @@
-> >>
-> >>  #define DMA_DIR(dir)           ((dir) ? NFC_CMD_N2M : NFC_CMD_M2N)
-> >>
-> >> +#define NFC_SHORT_MODE_ECC_SZ  384
-> >> +
-> >>  #define ECC_CHECK_RETURN_FF    -1
-> >>
-> >>  #define NAND_CE0               (0xe << 10)
-> >> @@ -141,6 +144,8 @@
-> >>  struct meson_nfc_nand_chip {
-> >>         struct list_head node;
-> >>         struct nand_chip nand;
-> >> +       u32 boot_pages;
-> >> +       u32 boot_page_step;
-> >>
-> >>         u32 bch_mode;
-> >>         u8 *data_buf;
-> >> @@ -229,33 +234,46 @@ static void meson_nfc_cmd_seed(const struct meso=
-n_nfc *nfc, u32 seed)
-> >>                nfc->reg_base + NFC_REG_CMD);
-> >>  }
-> >>
-> >> +static int meson_nfc_is_boot_page(struct nand_chip *nand, int page)
-> >> +{
-> >> +       const struct meson_nfc_nand_chip *meson_chip =3D to_meson_nand=
-(nand);
-> >> +
-> >> +       return (nand->options & NAND_IS_BOOT_MEDIUM) &&
-> >> +              !(page % meson_chip->boot_page_step) &&
-> >> +              (page < meson_chip->boot_pages);
-> >> +}
-> >> +
-> >>  static void meson_nfc_cmd_access(struct nand_chip *nand, bool raw, bo=
-ol dir, int page)
-> >>  {
-> >> +       const struct meson_nfc_nand_chip *meson_chip =3D to_meson_nand=
-(nand);
-> >>         struct mtd_info *mtd =3D nand_to_mtd(nand);
-> >>         const struct meson_nfc *nfc =3D nand_get_controller_data(mtd_t=
-o_nand(mtd));
-> >> -       const struct meson_nfc_nand_chip *meson_chip =3D to_meson_nand=
-(nand);
-> >> -       u32 bch =3D meson_chip->bch_mode, cmd;
-> >>         int len =3D mtd->writesize, pagesize, pages;
-> >>         int scrambler;
-> >> +       u32 cmd;
-> >>
-> >>         if (nand->options & NAND_NEED_SCRAMBLING)
-> >>                 scrambler =3D NFC_CMD_SCRAMBLER_ENABLE;
-> >>         else
-> >>                 scrambler =3D NFC_CMD_SCRAMBLER_DISABLE;
-> >>
-> >
-> > scrambler depends on NAND_NEED_SCRAMBLING so suppose
-> > that is not set
-> >
-> > scrambler =3D NAND_NEED_SCRAMBLING;
-> >
-> >> -       pagesize =3D nand->ecc.size;
-> >> -
-> >>         if (raw) {
-> >>                 len =3D mtd->writesize + mtd->oobsize;
-> >>                 cmd =3D len | scrambler | DMA_DIR(dir);
-> >> -               writel(cmd, nfc->reg_base + NFC_REG_CMD);
-> >> -               return;
-> >> -       }
-> >> +       } else if (meson_nfc_is_boot_page(nand, page)) {
-> >
-> > Now here you  seems that you don't care anymore about this option and c=
-heck
-> > only meson_nfc_is_boot_page
-> >
-> > Is something am I missing?
->
-> Idea is the following IIUC: such boot pages could be read in ECC mode onl=
-y with enabled scrambling -
-> otherwise we get ECC error. Or we need to read it in raw mode. So:
->
-> if (read page in raw mode) {
->     use scrambler as provided
-> } else if (read boot page in ECC mode) {
->     force scrambling mode + NFC_ECC_BCH8_1K + NFC_CMD_SHORTMODE_ENABLE
-> } else {
->     //we read non-boot page in ECC mode
->    use scrambler as provided
-> }
->
-> Thanks
->
->
-> >
-> > Michael
-> >
-> >> +               pagesize =3D NFC_SHORT_MODE_ECC_SZ >> 3;
-> >> +               pages =3D mtd->writesize / 512;
-> >>
-> >> -       pages =3D len / nand->ecc.size;
-> >> +               scrambler =3D NFC_CMD_SCRAMBLER_ENABLE;
-> >> +               cmd =3D CMDRWGEN(DMA_DIR(dir), scrambler, NFC_ECC_BCH8=
-_1K,
-> >> +                              NFC_CMD_SHORTMODE_ENABLE, pagesize, pag=
-es);
-> >> +       } else {
-> >> +               pagesize =3D nand->ecc.size >> 3;
-> >> +               pages =3D len / nand->ecc.size;
-> >>
-> >> -       cmd =3D CMDRWGEN(DMA_DIR(dir), scrambler, bch,
-> >> -                      NFC_CMD_SHORTMODE_DISABLE, pagesize, pages);
-> >> +               cmd =3D CMDRWGEN(DMA_DIR(dir), scrambler, meson_chip->=
-bch_mode,
-> >> +                              NFC_CMD_SHORTMODE_DISABLE, pagesize, pa=
-ges);
-> >> +       }
-> >>
-> >>         if (scrambler =3D=3D NFC_CMD_SCRAMBLER_ENABLE)
-> >>                 meson_nfc_cmd_seed(nfc, page);
-> >> @@ -1132,6 +1150,24 @@ static int meson_nfc_nand_chip_init(struct udev=
-ice *dev, struct meson_nfc *nfc,
-> >>                 goto err_chip_buf_free;
-> >>         }
-> >>
-> >> +       if (nand->options & NAND_IS_BOOT_MEDIUM) {
-> >> +               ret =3D ofnode_read_u32(node, "amlogic,boot-pages",
-> >> +                                     &meson_chip->boot_pages);
-> >> +               if (ret) {
-> >> +                       dev_err(dev, "could not retrieve 'amlogic,boot=
--pages' property: %d",
-> >> +                               ret);
-> >> +                       goto err_chip_buf_free;
-> >> +               }
-> >> +
-> >> +               ret =3D ofnode_read_u32(node, "amlogic,boot-page-step"=
-,
-> >> +                                     &meson_chip->boot_page_step);
-> >> +               if (ret) {
-> >> +                       dev_err(dev, "could not retrieve 'amlogic,boot=
--page-step' property: %d",
-> >> +                               ret);
-> >> +                       goto err_chip_buf_free;
-> >> +               }
-> >> +       }
-> >> +
-> >>         ret =3D nand_register(0, mtd);
-> >>         if (ret) {
-> >>                 dev_err(dev, "'nand_register()' failed: %d\n", ret);
-> >> --
-> >> 2.30.1
-> >>
-> >
-> >
-
-The first patch seems not apply clean to me on master
-
-Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
-
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+SGkgQ2hpbnRhbiENCg0KT24gTW9uLCAyMDI0LTA4LTI2IGF0IDE1OjU1ICswNTMwLCBDaGludGFu
+IFZhbmthciB3cm90ZToNCj4gRnJvbTogVmlnbmVzaCBSYWdoYXZlbmRyYSA8dmlnbmVzaHJAdGku
+Y29tPg0KPiANCj4gRXhwZWN0YXRpb24gb2YgazNfcmluZ2FjY19yaW5nX3Jlc2V0X3JhdygpIGlz
+IHRvIHJlc2V0IHRoZSByaW5nIHRvDQo+IHJlcXVlc3RlZCBzaXplIGFuZCBub3QgdG8gMC4gRml4
+IHRoaXMuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBWaWduZXNoIFJhZ2hhdmVuZHJhIDx2aWduZXNo
+ckB0aS5jb20+DQo+IFNpZ25lZC1vZmYtYnk6IFNpZGRoYXJ0aCBWYWRhcGFsbGkgPHMtdmFkYXBh
+bGxpQHRpLmNvbT4NCj4gU2lnbmVkLW9mZi1ieTogQ2hpbnRhbiBWYW5rYXIgPGMtdmFua2FyQHRp
+LmNvbT4NCg0KVGhhbmtzIGZvciBxdWljayByZXdvcmshDQpSZXZpZXdlZC1ieTogQWxleGFuZGVy
+IFN2ZXJkbGluIDxhbGV4YW5kZXIuc3ZlcmRsaW5Ac2llbWVucy5jb20+DQoNCj4gLS0tDQo+IA0K
+PiBMaW5rIHRvIHY1Og0KPiBodHRwczovL2xvcmUua2VybmVsLm9yZy9yLzIwMjQwODEzMTA1NDAw
+LjQwNTQ2NTctNS1jLXZhbmthckB0aS5jb20vDQo+IA0KPiBDaGFuZ2VzIGZyb20gdjUgdG8gdjY6
+DQo+IC0gVXBkYXRlZCBmdW5jdGlvbiAiazNfcmluZ2FjY19yaW5nX3Jlc2V0X3JhdyIgdG8gcmVz
+ZXQgb25seSByaW5nDQo+IMKgIHNpemUgZmllbGQgaW4gcmluZyBjb25maWd1cmF0aW9uIHJlZ2lz
+dGVyIGFzIHBvaW50ZWQgb3V0IGJ5IEFsZXhhbmRlcg0KPiDCoCBTdmVyZGxpbi4NCj4gDQo+IMKg
+ZHJpdmVycy9zb2MvdGkvazMtbmF2c3MtcmluZ2FjYy11LWJvb3QuYyB8IDkgKysrKysrKystDQo+
+IMKgMSBmaWxlIGNoYW5nZWQsIDggaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQ0KPiANCj4g
+ZGlmZiAtLWdpdCBhL2RyaXZlcnMvc29jL3RpL2szLW5hdnNzLXJpbmdhY2MtdS1ib290LmMgYi9k
+cml2ZXJzL3NvYy90aS9rMy1uYXZzcy1yaW5nYWNjLXUtYm9vdC5jDQo+IGluZGV4IGY5NTgyMzlj
+MmFmLi4yNzk5ZjIxNGM3NyAxMDA2NDQNCj4gLS0tIGEvZHJpdmVycy9zb2MvdGkvazMtbmF2c3Mt
+cmluZ2FjYy11LWJvb3QuYw0KPiArKysgYi9kcml2ZXJzL3NvYy90aS9rMy1uYXZzcy1yaW5nYWNj
+LXUtYm9vdC5jDQo+IEBAIC0yNSw5ICsyNSwxNiBAQCBzdHJ1Y3QgazNfbmF2X3JpbmdfY2ZnX3Jl
+Z3Mgew0KPiDCoCNkZWZpbmUgS05BVl9SSU5HQUNDX0NGR19SSU5HX1NJWkVfRUxTSVpFX01BU0sJ
+CUdFTk1BU0soMjYsIDI0KQ0KPiDCoCNkZWZpbmUgS05BVl9SSU5HQUNDX0NGR19SSU5HX1NJWkVf
+RUxTSVpFX1NISUZUCQkoMjQpDQo+IMKgDQo+ICsjZGVmaW5lIEtOQVZfUklOR0FDQ19DRkdfUklO
+R19TSVpFX01BU0sJCQlHRU5NQVNLKDE5LCAwKQ0KPiArDQo+IMKgc3RhdGljIHZvaWQgazNfcmlu
+Z2FjY19yaW5nX3Jlc2V0X3JhdyhzdHJ1Y3QgazNfbmF2X3JpbmcgKnJpbmcpDQo+IMKgew0KPiAt
+CXdyaXRlbCgwLCAmcmluZy0+Y2ZnLT5zaXplKTsNCj4gKwl1MzIgcmVnOw0KPiArDQo+ICsJcmVn
+ID0gcmVhZGwoJnJpbmctPmNmZy0+c2l6ZSk7DQo+ICsJcmVnICY9IH5LTkFWX1JJTkdBQ0NfQ0ZH
+X1JJTkdfU0laRV9NQVNLOw0KPiArCXJlZyB8PSByaW5nLT5zaXplOw0KPiArCXdyaXRlbChyZWcs
+ICZyaW5nLT5jZmctPnNpemUpOw0KPiDCoH0NCj4gwqANCj4gwqBzdGF0aWMgdm9pZCBrM19yaW5n
+YWNjX3JpbmdfcmVjb25maWdfcW1vZGVfcmF3KHN0cnVjdCBrM19uYXZfcmluZyAqcmluZywgZW51
+bSBrM19uYXZfcmluZ19tb2RlIG1vZGUpDQoNCi0tIA0KQWxleGFuZGVyIFN2ZXJkbGluDQpTaWVt
+ZW5zIEFHDQp3d3cuc2llbWVucy5jb20NCg==
