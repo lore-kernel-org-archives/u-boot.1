@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3041C5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 10:26:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B53FC5321D
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 10:26:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD76C88A92;
-	Mon, 26 Aug 2024 12:25:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 242F288A5F;
+	Mon, 26 Aug 2024 12:25:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="gIGOPpwH";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="htbh0Va5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 347A888A46; Mon, 26 Aug 2024 12:25:42 +0200 (CEST)
+ id 2C72288AB1; Mon, 26 Aug 2024 12:25:44 +0200 (CEST)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6FAF88A31
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 12:25:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B655587FA7
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 12:25:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPRpj001342;
- Mon, 26 Aug 2024 05:25:27 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPT9s001356;
+ Mon, 26 Aug 2024 05:25:29 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1724667927;
- bh=32NJnlYi5FCpKqOkebsXzB0Qa28PDPZ3hnWdAvxqCro=;
+ s=ti-com-17Q1; t=1724667929;
+ bh=IROkLeokncTgqtzu4BhXBBsfrS+UpO8y7HVxeLVcHR0=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=gIGOPpwHOplJN/+fgjqIDgtPJy4qbGFgd19TvlbPFYGWUKhLi1RFPdKWPIAzr72Ba
- J5Bo/1UBefOHPuQ3bt71ezqGSPDC1NDRmJuduWidEs8hhI9YqTb1fesGO82O4sFOnY
- 9XH1Fo8nz1goRtvB1pDcpk1hVssms3u1pFK/+wtA=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47QAPR4S024857
+ b=htbh0Va5D00keBwBLHNcFbluS7/A0zfnDyYEFihfY+Ubgf6UR4cvJJ57XpzeIM8Wn
+ 2B/0kNjT178TPx6uUeM8/JQAT9Ji9zRDUtlEZXBaH+5NJHU4EutXytyHh6KzekHv7f
+ O+NUIWUwKjp/p6VAojee3vF5ZMfA/rm2srEwOC4w=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47QAPTsc084134
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 26 Aug 2024 05:25:27 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 26 Aug 2024 05:25:29 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 26
- Aug 2024 05:25:27 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2024 05:25:28 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 26 Aug 2024 05:25:27 -0500
+ Frontend Transport; Mon, 26 Aug 2024 05:25:28 -0500
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPQiV040517;
- Mon, 26 Aug 2024 05:25:27 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPS9V041809;
+ Mon, 26 Aug 2024 05:25:28 -0500
 From: Chintan Vankar <c-vankar@ti.com>
 To: Michal Simek <michal.simek@amd.com>, Vignesh Raghavendra
  <vigneshr@ti.com>, Dhruva Gole <d-gole@ti.com>, Neha Malcom Francis
@@ -68,10 +68,9 @@ To: Michal Simek <michal.simek@amd.com>, Vignesh Raghavendra
  <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>, Sumit Garg
  <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH v6 03/11] soc: ti: k3-navss-ringacc: Initialize base address
- of ring cfg registers
-Date: Mon, 26 Aug 2024 15:55:07 +0530
-Message-ID: <20240826102515.2774296-4-c-vankar@ti.com>
+Subject: [PATCH v6 04/11] soc: ti: k3-navss-ringacc: Fix reset ring API
+Date: Mon, 26 Aug 2024 15:55:08 +0530
+Message-ID: <20240826102515.2774296-5-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240826102515.2774296-1-c-vankar@ti.com>
 References: <20240826102515.2774296-1-c-vankar@ti.com>
@@ -95,72 +94,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Kishon Vijay Abraham I <kishon@ti.com>
+From: Vignesh Raghavendra <vigneshr@ti.com>
 
-Initialize base address of ring config registers required to natively
-setup ring cfg registers in the absence of Device Manager (DM) services
-at R5 SPL stage. Since register property is defined as "ring" for PKTDMA
-and "cfg" for UDMA, configure base address of ring configuration register
-accordingly.
+Expectation of k3_ringacc_ring_reset_raw() is to reset the ring to
+requested size and not to 0. Fix this.
 
-Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
+Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
 Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 ---
 
 Link to v5:
-https://lore.kernel.org/r/20240813105400.4054657-4-c-vankar@ti.com/
+https://lore.kernel.org/r/20240813105400.4054657-5-c-vankar@ti.com/
 
 Changes from v5 to v6:
-- Added a Reviewed-by tag from Alexander Sverdlin.
+- Updated function "k3_ringacc_ring_reset_raw" to reset only ring
+  size field in ring configuration register as pointed out by Alexander
+  Sverdlin.
 
- drivers/soc/ti/k3-navss-ringacc.c | 17 ++++++++++++++++-
- 1 file changed, 16 insertions(+), 1 deletion(-)
+ drivers/soc/ti/k3-navss-ringacc-u-boot.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/soc/ti/k3-navss-ringacc.c b/drivers/soc/ti/k3-navss-ringacc.c
-index b2643a30d3d..14114a65830 100644
---- a/drivers/soc/ti/k3-navss-ringacc.c
-+++ b/drivers/soc/ti/k3-navss-ringacc.c
-@@ -1028,8 +1028,8 @@ static int k3_nav_ringacc_init(struct udevice *dev, struct k3_nav_ringacc *ringa
- struct k3_nav_ringacc *k3_ringacc_dmarings_init(struct udevice *dev,
- 						struct k3_ringacc_init_data *data)
- {
-+	void __iomem *base_rt, *base_cfg;
- 	struct k3_nav_ringacc *ringacc;
--	void __iomem *base_rt;
- 	int i;
+diff --git a/drivers/soc/ti/k3-navss-ringacc-u-boot.c b/drivers/soc/ti/k3-navss-ringacc-u-boot.c
+index f958239c2af..2799f214c77 100644
+--- a/drivers/soc/ti/k3-navss-ringacc-u-boot.c
++++ b/drivers/soc/ti/k3-navss-ringacc-u-boot.c
+@@ -25,9 +25,16 @@ struct k3_nav_ring_cfg_regs {
+ #define KNAV_RINGACC_CFG_RING_SIZE_ELSIZE_MASK		GENMASK(26, 24)
+ #define KNAV_RINGACC_CFG_RING_SIZE_ELSIZE_SHIFT		(24)
  
- 	ringacc = devm_kzalloc(dev, sizeof(*ringacc), GFP_KERNEL);
-@@ -1047,6 +1047,20 @@ struct k3_nav_ringacc *k3_ringacc_dmarings_init(struct udevice *dev,
- 	if (!base_rt)
- 		return ERR_PTR(-EINVAL);
- 
-+	/*
-+	 * Since register property is defined as "ring" for PKTDMA and
-+	 * "cfg" for UDMA, configure base address of ring configuration
-+	 * register accordingly.
-+	 */
-+	base_cfg = dev_remap_addr_name(dev, "ring");
-+	pr_debug("ring %p\n", base_cfg);
-+	if (!base_cfg) {
-+		base_cfg = dev_remap_addr_name(dev, "cfg");
-+		pr_debug("cfg %p\n", base_cfg);
-+		if (!base_cfg)
-+			return ERR_PTR(-EINVAL);
-+	}
++#define KNAV_RINGACC_CFG_RING_SIZE_MASK			GENMASK(19, 0)
 +
- 	ringacc->rings = devm_kzalloc(dev,
- 				      sizeof(*ringacc->rings) *
- 				      ringacc->num_rings * 2,
-@@ -1061,6 +1075,7 @@ struct k3_nav_ringacc *k3_ringacc_dmarings_init(struct udevice *dev,
- 	for (i = 0; i < ringacc->num_rings; i++) {
- 		struct k3_nav_ring *ring = &ringacc->rings[i];
+ static void k3_ringacc_ring_reset_raw(struct k3_nav_ring *ring)
+ {
+-	writel(0, &ring->cfg->size);
++	u32 reg;
++
++	reg = readl(&ring->cfg->size);
++	reg &= ~KNAV_RINGACC_CFG_RING_SIZE_MASK;
++	reg |= ring->size;
++	writel(reg, &ring->cfg->size);
+ }
  
-+		ring->cfg = base_cfg + KNAV_RINGACC_CFG_REGS_STEP * i;
- 		ring->rt = base_rt + K3_DMARING_RING_RT_REGS_STEP * i;
- 		ring->parent = ringacc;
- 		ring->ring_id = i;
+ static void k3_ringacc_ring_reconfig_qmode_raw(struct k3_nav_ring *ring, enum k3_nav_ring_mode mode)
 -- 
 2.34.1
 
