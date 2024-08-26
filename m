@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9D05C5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 14:43:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84DDFC5321E
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 14:47:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60FAA889FC;
-	Mon, 26 Aug 2024 16:43:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0A01788A13;
+	Mon, 26 Aug 2024 16:47:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="F+8zQ4Z3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Teop85sf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0271588A13; Mon, 26 Aug 2024 16:43:21 +0200 (CEST)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
+ id 669CC88A35; Mon, 26 Aug 2024 16:47:22 +0200 (CEST)
+Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
+ [IPv6:2607:f8b0:4864:20::82a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 950CE87E64
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 16:43:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EA581889CA
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 16:47:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-20230059241so34841105ad.3
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 07:43:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82a.google.com with SMTP id
+ d75a77b69052e-44fe11dedb3so24468611cf.1
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 07:47:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724683397; x=1725288197; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=k4/cd/aEFEt8x/J7HHUI4rkhnIBQrcLeyokIs0soPNs=;
- b=F+8zQ4Z3QHlfg0K+KieO9IXLc7TVw363pblI0KzwgZ/7NrE3JXAaAQBRykUcb0BndU
- OkQ/uo8bVyyYIDjmT7j95gVpn+kxSF4T+vjVvlwt+83gjkp6yBOmHiNtX/ghWaj/hq+o
- QLEXMLau+WH/QhKDpsPA8W9ErWogR0c5jcjhAcqFtQfdgpq4zuS82qUqWzl3aebfRSI8
- FxpJ4FE4T4wN/TeWSofqQZUN0XAKYHQQajoccUPsWl3Rh1UK3vLrre70eNxqwLamnhzH
- qhXOeweKu5/qE+ppMu7TLNmNPgQ0MXmlcg0Z8OSGoEGsfSVbHobwcv0MhYHVBpLMvzjn
- DwXg==
+ d=konsulko.com; s=google; t=1724683639; x=1725288439; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=P1KxKfCWL5IzU5OWQvscD3i9219GoPkjHkZbYW4Hp/g=;
+ b=Teop85sf7mnZ44RN03uiw//39hb09sSitZ7MkqQdz37Y3IXy/jrBMBFzNUSLHp2A5m
+ bfENSQJU8Khel6mYgrKuvDKUhpZHrNVakVBoUtyEd9NtgJyu66fo9CanvpqwC2y901Wq
+ hV621SpvswkNohTnOvRixnaVE175BtBwO77ck=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724683397; x=1725288197;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=k4/cd/aEFEt8x/J7HHUI4rkhnIBQrcLeyokIs0soPNs=;
- b=D4KgjDe/yW1t5Wg4G1Ohfyvyu0w165rFR5qYcfCsKT02SKaKDkFQVU4s/aDsDMEuoz
- 36AaOugYSmNFlyZdezWYZ0IdORcHJZQ2UcOTvWn4Je3gUdmyC6nPS+d63VJrOxlVQPch
- qNpD7R20CdV0gpvvTAkg96MFHh+KMBK6rmnesVQrVapxL8/ilFpBgZfEaQ+yY8fkjgsz
- cNs/Dpvi2jP7D1Pxja4J6mrTDU7BMaEMb5wvXZbulnRG17mdmf0mivZqYIXsyo1zR3Eo
- IiLF0XAmXl7swzP5XbQGWyhuQv0lbsHzkPp1Cj9+oLyeqgPKqFUD5Z8iK3aSg92Ntxj9
- 0GOA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXmSvbZwnD0HLdlpRvg+Yl6zLplF7LqebmHZbusgGo5ufAf9xuKs7mV2z85Bnhsr0ZslBny5Og=@lists.denx.de
-X-Gm-Message-State: AOJu0YwfTzyOgCGThJu3LiUS9wZBWbjwflbAhiDGeO9kS5rfEOdFoLey
- 7gZX8YJQZwFAJJFKhW2E90SktRzZfY4FZD4dwUdcDBUXZj9/MHVcXw7Z+/fyJgljtT+I77hbrER
- lZiIY8D/Fem16+wmWJcV5C9+wcmOJ8syTO1DJsQ==
-X-Google-Smtp-Source: AGHT+IFL5bGb9uzhTBtcZcZra7A1O2haXTGVKV1ZMCvDr0FYsCs37jQnXu/MokmDFCS0cnc2eg8CvRJXLBKyxMjY2p0=
-X-Received: by 2002:a17:903:41ca:b0:202:ac8:991f with SMTP id
- d9443c01a7336-2039e48b9a9mr100745605ad.26.1724683396836; Mon, 26 Aug 2024
- 07:43:16 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1724683639; x=1725288439;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=P1KxKfCWL5IzU5OWQvscD3i9219GoPkjHkZbYW4Hp/g=;
+ b=W+8UhwcrtSDgzneYPk5YFgxlGcpqlVLznQxUmWluKqQjUJJVdq17pRSZrjH2CKQyCe
+ uzDoSpbZFNGKYdACqgzddQZXzVNYYGAiS6gBV033jRFIrthWYjE/YKpf6oBKhVyPukTD
+ 3GJ5UqTCiR59J8SDBsjsCwW9IKnIqIrsB2//zyGj5tCseiHbD6HtvXIkezgi8XOsS4d6
+ 6I0YT7DnpA+p8sCvcbueCS94BcIGcePf4vsKJZHI7IR1yUtDmRds9qoOmJ9PrNSrG2eD
+ JAbzy25zeM0nljIcJk053CNdbbQElPge6YXd4CUKjO+2GqDIcM4/nE3JaMa//VqtK+hH
+ W+7A==
+X-Gm-Message-State: AOJu0Ywg+/rBh/cu3hBTOTZGANcOxUJbRAGL0sqZdm5u4o3u7F7LCJfm
+ iyCml3rhfYttQAZklY6vuFadELCSC9PwB9LwYWeKpcgSNP8EcTsEWKstuAuhP2g=
+X-Google-Smtp-Source: AGHT+IG4CGln/ol8jccMfPg+P+EXRAuoAcwzBoskLcImGlNjdCTFFSD3QiPOqD0PRsF9pzCz+/GoIQ==
+X-Received: by 2002:a05:6214:2d4a:b0:6bf:6934:d0bb with SMTP id
+ 6a1803df08f44-6c16dc6d6c2mr114915576d6.21.1724683638690; 
+ Mon, 26 Aug 2024 07:47:18 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6c162de645dsm46913066d6.131.2024.08.26.07.47.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 26 Aug 2024 07:47:18 -0700 (PDT)
+Date: Mon, 26 Aug 2024 08:47:14 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Anton Antonov <Anton.Antonov@arm.com>
+Subject: Re: [PATCH v9 00/23] Introduce the lwIP network stack
+Message-ID: <20240826144714.GF2479150@bill-the-cat>
+References: <cover.1724419624.git.jerome.forissier@linaro.org>
+ <20240823211825.GZ1626301@bill-the-cat>
+ <12d558ef-6c76-4ae5-9aa3-7e34eb5e2a60@linaro.org>
 MIME-Version: 1.0
-References: <20240809-b4-dynamic-uuid-v7-0-8c44ab1f06a5@linaro.org>
- <20240809-b4-dynamic-uuid-v7-3-8c44ab1f06a5@linaro.org>
-In-Reply-To: <20240809-b4-dynamic-uuid-v7-3-8c44ab1f06a5@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 26 Aug 2024 17:42:39 +0300
-Message-ID: <CAC_iWj+dGepRp+BruAAY3wnUTbOwOvCzrDmY=3BS87czxdxAjw@mail.gmail.com>
-Subject: Re: [PATCH v7 03/11] efi: add a helper to generate dynamic UUIDs
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="0BO52E+poEEhO8Kq"
+Content-Disposition: inline
+In-Reply-To: <12d558ef-6c76-4ae5-9aa3-7e34eb5e2a60@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,156 +94,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 9 Aug 2024 at 03:56, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->
-> Introduce a new helper efi_capsule_update_info_gen_ids() which populates
-> the capsule update fw images image_type_id field. This allows for
-> determinstic UUIDs to be used that can scale to a large number of
-> different boards and board variants without the need to maintain a big
-> list.
->
-> We call this from efi_fill_image_desc_array() to populate the UUIDs
-> lazily on-demand.
->
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->  lib/efi_loader/Kconfig        | 12 ++++++++++
->  lib/efi_loader/efi_capsule.c  |  1 +
->  lib/efi_loader/efi_firmware.c | 55 ++++++++++++++++++++++++++++++++++++++++++-
->  3 files changed, 67 insertions(+), 1 deletion(-)
->
-> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> index 1179c31bb136..85a31113fcf0 100644
-> --- a/lib/efi_loader/Kconfig
-> +++ b/lib/efi_loader/Kconfig
-> @@ -236,8 +236,20 @@ config EFI_CAPSULE_ON_DISK_EARLY
->           If this option is enabled, capsules will be enforced to be
->           executed as part of U-Boot initialisation so that they will
->           surely take place whatever is set to distro_bootcmd.
->
-> +config EFI_CAPSULE_NAMESPACE_GUID
-> +       string "Namespace for dynamic capsule GUIDs"
-> +       # v4 UUID as a default for upstream U-Boot boards
-> +       default "8c9f137e-91dc-427b-b2d6-b420faebaf2a"
-> +       depends on EFI_HAVE_CAPSULE_SUPPORT
-> +       help
-> +         Define the namespace or "salt" GUID used to generate the per-image
-> +         GUIDs. This should be a GUID in the standard 8-4-4-4-12 format.
-> +
-> +         Device vendors are expected to generate their own namespace GUID
-> +         to avoid conflicts with upstream/community images.
-> +
->  config EFI_CAPSULE_FIRMWARE
->         bool
->
->  config EFI_CAPSULE_FIRMWARE_MANAGEMENT
-> diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-> index 635088f25a13..f3a2388506cc 100644
-> --- a/lib/efi_loader/efi_capsule.c
-> +++ b/lib/efi_loader/efi_capsule.c
-> @@ -19,8 +19,9 @@
->  #include <mapmem.h>
->  #include <sort.h>
->  #include <sysreset.h>
->  #include <asm/global_data.h>
-> +#include <uuid.h>
->
->  #include <crypto/pkcs7.h>
->  #include <crypto/pkcs7_parser.h>
->  #include <linux/err.h>
-> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-> index ba5aba098c0f..c0240e95cf13 100644
-> --- a/lib/efi_loader/efi_firmware.c
-> +++ b/lib/efi_loader/efi_firmware.c
-> @@ -244,8 +244,57 @@ void efi_firmware_fill_version_info(struct efi_firmware_image_descriptor *image_
->
->         free(var_state);
->  }
->
-> +/**
-> + * efi_gen_capsule_guids - generate GUIDs for the images
-> + *
-> + * Generate the image_type_id for each image in the update_info.images array
-> + * using the first compatible from the device tree and a salt
-> + * UUID defined at build time.
-> + *
-> + * Returns:            status code
-> + */
-> +static efi_status_t efi_gen_capsule_guids(void)
-> +{
-> +       int ret, i;
-> +       struct uuid namespace;
-> +       const char *compatible; /* Full array including null bytes */
-> +       struct efi_fw_image *fw_array;
-> +
-> +       fw_array = update_info.images;
-> +       /* Check if we need to run (there are images and we didn't already generate their IDs) */
-> +       if (!update_info.num_images ||
-> +           memchr_inv(&fw_array[0].image_type_id, 0, sizeof(fw_array[0].image_type_id)))
-> +               return EFI_SUCCESS;
-> +
-> +       ret = uuid_str_to_bin(CONFIG_EFI_CAPSULE_NAMESPACE_GUID,
-> +                       (unsigned char *)&namespace, UUID_STR_FORMAT_GUID);
-> +       if (ret) {
-> +               log_debug("%s: EFI_CAPSULE_NAMESPACE_GUID is invalid: %d\n", __func__, ret);
-> +               return EFI_INVALID_PARAMETER;
-> +       }
-> +
-> +       compatible = ofnode_read_string(ofnode_root(), "compatible");
-> +       if (!compatible) {
-> +               log_debug("%s: model or compatible not defined\n", __func__);
-> +               return EFI_INVALID_PARAMETER;
-> +       }
-> +
-> +       for (i = 0; i < update_info.num_images; i++) {
-> +               gen_v5_guid(&namespace,
-> +                           &fw_array[i].image_type_id,
-> +                           compatible, strlen(compatible),
-> +                           fw_array[i].fw_name, u16_strlen(fw_array[i].fw_name) * sizeof(uint16_t),
-> +                           NULL);
-> +
-> +               log_debug("Image %ls UUID %pUl\n", fw_array[i].fw_name,
-> +                         &fw_array[i].image_type_id);
-> +       }
-> +
-> +       return EFI_SUCCESS;
-> +}
-> +
->  /**
->   * efi_fill_image_desc_array - populate image descriptor array
->   * @image_info_size:           Size of @image_info
->   * @image_info:                        Image information
-> @@ -271,9 +320,9 @@ static efi_status_t efi_fill_image_desc_array(
->         u16 **package_version_name)
->  {
->         size_t total_size;
->         struct efi_fw_image *fw_array;
-> -       int i;
-> +       int i, ret;
->
->         total_size = sizeof(*image_info) * update_info.num_images;
->
->         if (*image_info_size < total_size) {
-> @@ -282,8 +331,12 @@ static efi_status_t efi_fill_image_desc_array(
->                 return EFI_BUFFER_TOO_SMALL;
->         }
->         *image_info_size = total_size;
->
-> +       ret = efi_gen_capsule_guids();
 
-ret should be efi_status_t
+--0BO52E+poEEhO8Kq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> +       if (ret != EFI_SUCCESS)
-> +               return ret;
-> +
->         fw_array = update_info.images;
->         *descriptor_count = update_info.num_images;
->         *descriptor_version = EFI_FIRMWARE_IMAGE_DESCRIPTOR_VERSION;
->         *descriptor_size = sizeof(*image_info);
->
-> --
-> 2.46.0
->
+On Mon, Aug 26, 2024 at 01:45:10PM +0200, Jerome Forissier wrote:
+>=20
+>=20
+> On 8/23/24 23:18, Tom Rini wrote:
+> > On Fri, Aug 23, 2024 at 03:48:04PM +0200, Jerome Forissier wrote:
+> >=20
+> >> This is a rework of a patch series by Maxim Uvarov: "net/lwip: add lwip
+> >> library for the network stack" [1]. The goal is to introduce the lwIP =
+TCP/IP
+> >> stack [2] [3] as an alternative to the current implementation in net/,
+> >> selectable with Kconfig, and ultimately keep only lwIP if possible. So=
+me
+> >> reasons for doing so are:
+> >> - Make the support of HTTPS in the wget command easier. Javier T. and
+> >> Raymond M. (CC'd) have some additional lwIP and Mbed TLS patches to do
+> >> so. With that it becomes possible to fetch and launch a distro install=
+er
+> >> such as Debian etc. using a secure, authenticated connection directly
+> >> from the U-Boot shell. Several use cases:
+> >>   * Authentication: prevent MITM attack (third party replacing the
+> >> binary with a different one)
+> >>   * Confidentiality: prevent third parties from grabbing a copy of the
+> >> image as it is being downloaded
+> >>   * Allow connection to servers that do not support plain HTTP anymore
+> >> (this is becoming more and more common on the Internet these days)
+> >> - Possibly benefit from additional features implemented in lwIP
+> >> - Less code to maintain in U-Boot
+> >=20
+> > As an odd thing, the series leads to ethernut5 failing to build,
+> > strangely over the RTC driver it uses, for me.
+>=20
+> Weird.
+>=20
+> > I did have to manually
+> > merge the CMD_WGET related patch,=20
+>=20
+> Weird.
+>=20
+> > but I don't think that was what went
+> > wrong here.
+>=20
+> Could you try to build from GitHub perhaps?
+> Branch https://github.com/jforissier/u-boot/tree/to-upstream/v9 builds
+> fine here:
+>=20
+> $ ./tools/buildman/buildman ethernut5
+> Building current source for 1 boards (1 thread, 24 jobs per thread)
+>        arm:  w+   ethernut5
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D WARNING =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +This board does not use CONFIG_DM_I2C (Driver Model
+> +for I2C drivers). Please update the board to use
+> +CONFIG_DM_I2C before the v2022.04 release. Failure to
+> +update by the deadline may result in board removal.
+> +See doc/develop/driver-model/migration.rst for more info.
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+>     0    1    0 /1              ethernut5
 
-with the fix above
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+I think you weren't on latest next branch when you posted v9, and that's
+at least the merge conflict. I see the platform builds on your branch as
+well, but fails still, on mine.
+
+--=20
+Tom
+
+--0BO52E+poEEhO8Kq
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbMlWsACgkQFHw5/5Y0
+tyyQxgwAqDf+RfMkp2NBtj5H9PVtUHN4v3psr6vw5s7yCy/FISQFdzGJWzBBgdoI
+akFnUDO1ypMFofUiJDD9oNbpceo7uK00uS85X6YgPZOCPnLTL3b89O5XgGsf7hdz
+p+fK68FOEEYAmSS7wUKVC0txqL64ZQICd5x+V0FWZRk/8/SEJJzz3O9koxQ8NptK
+JeUc1ssAhnrQhWJ1DJx38rZ/8byEjph0r1PbbiRcJ7K0t9LGK7KqO550//8zQxRd
+2DSmiHVrCrlFmJCi/aJeHfWD4lNNmuc+Z3bLU8IGYprORYDEHbP+VD4jheO9d8rP
+UebKU5qOydeNu4Xo7lmRkcKTZ8DjWZnPUOEBFXJNqPW5iGqsCzWcIeBp6WAIi5or
+GEVd60b0PRj38a3Uz/9ye/kwO5zy+31vo7cRL1wVSSVdEK7KPO1vbjZq5PS3jNo7
+cGTuLdSCVJUWggcLGTotTQYJXzSxO9fedz8sGpSCoI6IsLkj88Eyr5ya3DrUFifj
+IVTNMl6J
+=8ess
+-----END PGP SIGNATURE-----
+
+--0BO52E+poEEhO8Kq--
