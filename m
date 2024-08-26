@@ -4,98 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6787CC5321D
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 06:17:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37F5FC5321D
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 06:27:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 325B2889C5;
-	Mon, 26 Aug 2024 08:17:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 9FC288843A;
+	Mon, 26 Aug 2024 08:27:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="OZS0CXH5";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="KT9+nT8n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D14338843A; Mon, 26 Aug 2024 08:17:47 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 35B96884AC; Mon, 26 Aug 2024 08:27:13 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 865A3889FC
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 08:17:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 11251883C3
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 08:27:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 26380120008;
- Mon, 26 Aug 2024 09:17:45 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 26380120008
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1724653065;
- bh=7aMoCqtCm4gGmozuueOdTHbmR+fr1AvpmZ/ggmdD/og=;
- h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
- b=OZS0CXH5V93XKWNSiHws8bVRfaFer6hJUJGYf9eehlCKCqOA9mzP4I2zYR/m+inu+
- dAvypjcuy/2V0qaJqbdoT+/ADWz365+ZYNaKQza+73RovZ7s0R0gfsnzjdxnbYNnvl
- A5uC0go+bGza7vwhsZMfQRf6Um+htlGAxuVzntwNFLv1H6Qp5/9TK9F6QywK9wQPIg
- aSNX33H1HPLnhMQOQXZo0Igu3Iez/UkRgNY+OYG3MQ7ouFrr0lZZUROot3Qs8rgrQ7
- D5AdJznKgeTs3NRH6DkQaWWnPzfdBJ/K4fVJYSBnRKPVLkZIm104XN1xkjetiOhs61
- BQQQpUERoI4AA==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Mon, 26 Aug 2024 09:17:44 +0300 (MSK)
-Message-ID: <3f0cbb8c-6dc7-73f2-db81-f01484f4bde3@salutedevices.com>
-Date: Mon, 26 Aug 2024 09:04:57 +0300
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-533461323cdso4410060e87.2
+ for <u-boot@lists.denx.de>; Sun, 25 Aug 2024 23:27:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1724653630; x=1725258430;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=O49GULQ1RBuCV3mQEjbflI9CcaxwJjbcRrrTowCZDqA=;
+ b=KT9+nT8nOghlhnzhhRYggc/zUUOgiB/fwCgPPObmSSqDeWVM5Xxq3sjDhhGdDI7HJd
+ BCEOYmbxVuF5m1nfaiaCnRWQEEKEHh8KxuLHgsGTIh1YDJrzunaf0/FnBG0eZc4fFBVo
+ geJ3p8Njb6z6Ts6an6HW75ipG/u1bB3uP4Rng=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724653630; x=1725258430;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=O49GULQ1RBuCV3mQEjbflI9CcaxwJjbcRrrTowCZDqA=;
+ b=AtZT+exJZvyPXnktf8kB1MWqRCf2SRHG6B8e7qarmNKPis51P0/h5KrzoOnI+0QSSd
+ hn9VvCugVh+vnOc2ml/FObosX/5NDyGVQYybF9DE5bhdI/BIS6NdWNG/SBXCA4KLqFwh
+ D6hSgH/TOu7JGS8/EmOzvV8xhUTLOojlY2/gKoydpAr6aA+nQ0QwYi+2MBG2J82VhrKx
+ lxaI51+18ENdVzI2hrhHlsVDUGyQfUSdyFb+6IoxysHlg0BQbInwhkxaVt2i3kfrq9P7
+ /hipbiW6vIdBOoAlJ5nh/abD50PUjb6vC4oRTZDJPxX0NXdwJHtRORp86Ol4spo8ax3+
+ oLVA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXDnfkp24+nTOTlCZlYtcqhL9WvFNWVWmUbIsqZkwnLRL751XcsB12X8K/7CerbeZRH6aZDvAs=@lists.denx.de
+X-Gm-Message-State: AOJu0YwF9UAI2QqalQH+bFr4JeFov8LV4HBRoTLgx0FYHqvgCCGSAOUR
+ Vw60BthGppFKIMeoJAo0r0iTlLGehBA1Z2c1c473M7dlfefuKsE8W51hoEsw2Wy0SDzmWQqYW9C
+ jOZFjrLoFVeIpTayV4HC12IA79iBX1CE3gPrSjg==
+X-Google-Smtp-Source: AGHT+IGLZm8cpIXurtfd85+7V/VWH/yGKgxHrxhSBjQ+B0cw3qRJc/GEE2joGgaf9tN7H7F8APZaUm5kWlVaAJMXZtM=
+X-Received: by 2002:a05:6512:3351:b0:534:3cdc:dbfe with SMTP id
+ 2adb3069b0e04-5343cdcddabmr3468345e87.28.1724653629740; Sun, 25 Aug 2024
+ 23:27:09 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Subject: Re: [PATCH v2 0/3] Meson: R/W support for pages used by boot ROM
-Content-Language: en-US
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- <neil.armstrong@linaro.org>
-CC: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Miquel Raynal
- <miquel.raynal@bootlin.com>, Tom Rini <trini@konsulko.com>, Sean Anderson
- <seanga2@gmail.com>, U-Boot-Denx <u-boot@lists.denx.de>,
- <u-boot-amlogic@groups.io>, kernel <kernel@sberdevices.ru>,
- <oxffffaa@gmail.com>
-References: <20240708071352.3022327-1-avkrasnov@salutedevices.com>
- <82c914ec-db68-5971-8ac0-6ed359872175@salutedevices.com>
- <CAOf5uwmuZoDpVTGA=vTm_7Ywkw8OWi0e2NpG3Q1ZgO6R=UnuHQ@mail.gmail.com>
- <bb05c33e-9769-7e1d-699e-f42829255796@salutedevices.com>
- <CAOf5uw=UKXVB5H3DBzFFPx8nrXw3S44yPq=5CD+VAVHGuAmQTg@mail.gmail.com>
- <0343aa52-8f23-4447-1827-3de7710735f3@salutedevices.com>
- <887fcb7b-5bd7-40ef-9bb5-ab9ed5079b06@linaro.org>
- <CAOf5uwnH-RTPWshLt_SnB=U=Fdug38m7Jsvm_PDm3kaCQEb_jA@mail.gmail.com>
-From: Arseniy Krasnov <avkrasnov@salutedevices.com>
-In-Reply-To: <CAOf5uwnH-RTPWshLt_SnB=U=Fdug38m7Jsvm_PDm3kaCQEb_jA@mail.gmail.com>
+References: <20240826060411.3532105-1-avkrasnov@salutedevices.com>
+ <20240826060411.3532105-2-avkrasnov@salutedevices.com>
+In-Reply-To: <20240826060411.3532105-2-avkrasnov@salutedevices.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Mon, 26 Aug 2024 08:26:58 +0200
+Message-ID: <CAOf5uw=hQv4WUQuFgw7RsZSQYW1Az0_sUvO=_8kqOFdK945pUA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] mtd: rawnand: nand_base: support for
+ 'NAND_IS_BOOT_MEDIUM' flag
+To: Arseniy Krasnov <avkrasnov@salutedevices.com>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>,
+ u-boot@lists.denx.de, 
+ u-boot-amlogic@groups.io, kernel@sberdevices.ru, oxffffaa@gmail.com
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [172.28.161.232]
-X-ClientProxiedBy: p-i-exch-a-m2.sberdevices.ru (172.24.196.120) To
- p-i-exch-a-m1.sberdevices.ru (172.24.196.116)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 187287 [Aug 26 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.4
-X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 27 0.3.27
- 71302da218a62dcd84ac43314e19b5cc6b38e0b6, {Tracking_uf_ne_domains},
- {Tracking_arrow_http, text}, {Tracking_from_domain_doesnt_match_to},
- lore.kernel.org:7.1.1; salutedevices.com:7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 127.0.0.199:7.1.2;
- smtp.sberdevices.ru:5.0.1,7.1.1, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2024/08/26 04:18:00
-X-KSMG-LinksScanning: Clean, bases: 2024/08/26 04:18:00
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/08/26 02:45:00 #26434133
-X-KSMG-AntiVirus-Status: Clean, skipped
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,116 +94,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi
+
+On Mon, Aug 26, 2024 at 8:17=E2=80=AFAM Arseniy Krasnov
+<avkrasnov@salutedevices.com> wrote:
+>
+> Based on Linux kernel:
+> commit f922bd798bb9 ("mtd: rawnand: add an option to specify NAND chip as=
+ a boot device")
+>
+> Allow to define a NAND chip as a boot device. This can be helpful
+> for the selection of the ECC algorithm and strength in case the boot
+> ROM supports only a subset of controller provided options.
+>
+> Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
+> ---
+>  Changelog:
+>  v1 -> v2:
+>   * Place 'NAND_IS_BOOT_MEDIUM' according its numerical value.
+>
+>  drivers/mtd/nand/raw/nand_base.c | 3 +++
+>  include/linux/mtd/rawnand.h      | 5 +++++
+>  2 files changed, 8 insertions(+)
+>
+> diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand=
+_base.c
+> index c40a0f23d7..ed605b4af5 100644
+> --- a/drivers/mtd/nand/raw/nand_base.c
+> +++ b/drivers/mtd/nand/raw/nand_base.c
+> @@ -4458,6 +4458,9 @@ static int nand_dt_init(struct mtd_info *mtd, struc=
+t nand_chip *chip, ofnode nod
+>         if (ret =3D=3D 16)
+>                 chip->options |=3D NAND_BUSWIDTH_16;
+>
+> +       if (ofnode_read_bool(node, "nand-is-boot-medium"))
+> +               chip->options |=3D NAND_IS_BOOT_MEDIUM;
+> +
+>         if (ofnode_read_bool(node, "nand-on-flash-bbt"))
+>                 chip->bbt_options |=3D NAND_BBT_USE_FLASH;
+>
+> diff --git a/include/linux/mtd/rawnand.h b/include/linux/mtd/rawnand.h
+> index fb002ae641..61690e816f 100644
+> --- a/include/linux/mtd/rawnand.h
+> +++ b/include/linux/mtd/rawnand.h
+> @@ -248,6 +248,11 @@ enum nand_ecc_algo {
+>   * kmap'ed, vmalloc'ed highmem buffers being passed from upper layers
+>   */
+>  #define NAND_USE_BOUNCE_BUFFER 0x00100000
+> +/*
+> + * Whether the NAND chip is a boot medium. Drivers might use this inform=
+ation
+> + * to select ECC algorithms supported by the boot ROM or similar restric=
+tions.
+> + */
+> +#define NAND_IS_BOOT_MEDIUM    0x00400000
+>
+>  /* Options set by nand scan */
+>  /* bbt has already been read */
+> --
+
+I will then backport this from linux kernel
+dd6ed5c9890b759ba1b56697b9f3f50e71909e43
+
+Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+
+> 2.30.1
+>
 
 
-On 26.08.2024 09:15, Michael Nazzareno Trimarchi wrote:
-> Hi Aresenly
-> 
-> On Fri, Aug 23, 2024 at 10:53 AM Neil Armstrong
-> <neil.armstrong@linaro.org> wrote:
->>
->> On 23/08/2024 10:29, Arseniy Krasnov wrote:
->>> Hi! Got it, thanks!
->>>
->>> On 23.08.2024 11:10, Michael Nazzareno Trimarchi wrote:
->>>> Hi Arseniy
->>>>
->>>> On Thu, Aug 22, 2024 at 9:04 AM Arseniy Krasnov
->>>> <avkrasnov@salutedevices.com> wrote:
->>>>>
->>>>> Hi, thanks!
->>>>>
->>>>> Thanks, Arseniy
->>>>>
->>>>> On 22.08.2024 00:17, Michael Nazzareno Trimarchi wrote:
->>>>>> Hi
->>>>>>
->>>>>> I will read them tomorrow ;)
->>>>>>
->>>>>> Thank you for understanding
->>>>>>
->>>>
->>>> All the series are delegated to Neil. I will review anyway but I think
->>>> that will then pick from him
->>
->> Sure I can pick them if reviewed!
->>
-> 
-> Can you please resend the series? I don't find in my mailbox (strange)
 
-Hi, sure, done. With 'RESEND' prefix.
+--
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
 
-Thanks
-
-> 
-> Michael
-> 
->> Neil
->>
->>>>
->>>> Michael
->>>>
->>>>>> Michael
->>>>>>
->>>>>> Il mer 21 ago 2024, 22:25 Arseniy Krasnov <avkrasnov@salutedevices.com> ha
->>>>>> scritto:
->>>>>>
->>>>>>> Hi, sorry, pls ping  😄
->>>>>>>
->>>>>>> Thanks
->>>>>>>
->>>>>>> On 08.07.2024 10:13, Arseniy Krasnov wrote:
->>>>>>>> Patchset is based on patchset for Linux (today merged to nand-next):
->>>>>>>>
->>>>>>> https://lore.kernel.org/linux-mtd/20240507230903.3399594-1-avkrasnov@salutedevices.com/
->>>>>>>>
->>>>>>>> Here is description from it:
->>>>>>>>
->>>>>>>>   >  Amlogic's boot ROM code needs that some pages on NAND must be written
->>>>>>>>   >  in special "short" ECC mode with scrambling enabled. Such pages:
->>>>>>>>   >  1) Contain some metadata about hardware.
->>>>>>>>   >  2) Located with some interval starting from 0 offset, until some
->>>>>>>>   >     specified offset. Interval and second offset are set in the
->>>>>>>>   >     device tree.
->>>>>>>>   >
->>>>>>>>   >  This patchset adds R/W support for such pages. To enable it we can
->>>>>>> setup
->>>>>>>>   >  it in dts:
->>>>>>>>   >
->>>>>>>>   >      nand-is-boot-medium;
->>>>>>>>   >      amlogic,boot-pages = <1024>;
->>>>>>>>   >      amlogic,boot-page-step = <128>;
->>>>>>>>   >
->>>>>>>>   >  It means that each 128th page in range 0 to 1024 pages will be
->>>>>>> accessed
->>>>>>>>   >  in special mode ("short" ECC + scrambling). In practice this feature
->>>>>>> is
->>>>>>>>   >  needed when we want to update first block of NAND - driver will
->>>>>>> enable
->>>>>>>>   >  required mode by itself using value from device tree.
->>>>>>>>
->>>>>>>> The only difference is that patchset for Linux updates DT bindings, while
->>>>>>>> this adds NAND_IS_BOOT_MEDIUM flag support.
->>>>>>>>
->>>>>>>> Changelog:
->>>>>>>>   v1 -> v2:
->>>>>>>>   * Pls see per-patch changelog.
->>>>>>>>
->>>>>>>> Arseniy Krasnov (3):
->>>>>>>>    mtd: rawnand: nand_base: support for 'NAND_IS_BOOT_MEDIUM' flag
->>>>>>>>    mtd: rawnand: meson: refactor use of 'meson_nfc_cmd_access()'
->>>>>>>>    mtd: rawnand: meson: read/write access for boot ROM pages
->>>>>>>>
->>>>>>>>   drivers/mtd/nand/raw/meson_nand.c | 84 +++++++++++++++++++++----------
->>>>>>>>   drivers/mtd/nand/raw/nand_base.c  |  3 ++
->>>>>>>>   include/linux/mtd/rawnand.h       |  5 ++
->>>>>>>>   3 files changed, 65 insertions(+), 27 deletions(-)
->>>>>>>>
->>>>>>>
->>>>>>
->>>>
->>>>
->>>>
->>
-> 
-> 
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
