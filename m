@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4E05C5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 09:01:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE2AC5321E
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 09:34:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2880A8891B;
-	Mon, 26 Aug 2024 11:01:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2A9EB884CA;
+	Mon, 26 Aug 2024 11:34:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="CBlupWdp";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="0vAGkTTM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE71C8895B; Mon, 26 Aug 2024 11:01:42 +0200 (CEST)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20605.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::605])
+ id 9DE958895B; Mon, 26 Aug 2024 11:34:25 +0200 (CEST)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20608.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2412::608])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FEA988846
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 11:01:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EEB41884CA
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 11:34:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=k/AJisU5XsmgMN2YtgL/LZpxE/N7Cwid38LfVPOzlreR0ZkD+7ZZrc05L/OBKTeDYbRFz84Riwegk3U6uYLQKvlLcHBTUds+i4YoFHjRjF40bxFKgv+PBYIyTW9N1/haJYxj19B/zroRnkeq82hiOzbJe52V/yenJzAntcRDp0/96p91vxd8baDXII0XOi0PosTg/ypCgiyTqvdY2th82CThQnJd0xHEJdOKi/OAYacIOvHFok0U+MefDCJ279Uzh2Y7+DvFqC5qtK6J6009ncCLAOyuJxUHVLFonBeKjO4AeBKE2t0/8rC110DGEMRqag487ouMc3ZAdYfDzU8Xpg==
+ b=Zz/tGaYjf6uudTi2HlrHJo6dviE/DTLBPkSqvjnbI3Aod3MZdtSzwyF6XT4RzlhMZiHIkPBSqOjlQDGu6P0QVSOE/9V7O+ALki+dbUF5Z2q4Tg1g6h/UAZz5okHr19D533UBjiNtHmC9dKaia67djtaeVI6M5Yzq7MNj5eiBw5rFSm1Ytdnq+oUH5vg2mAh5ov3hSki5tPaSgIkuX/i9SA5JMxAtmYNbtyk4bmD6G59tV3JJCNoGiTE+rbIPHDMLCiwtZJEl9xoaTBjwu2529vFgbePfT/RUXDUba0OPjdcawU0DgMnU6ekWje0fnXPhFT18wADY9t5YwyyHdjh9UA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2GLb11AqHgyGsgWYKMzDeUvn87SX4aE1w2KzB2tvMNo=;
- b=s6DcdDiP9oxOZnVuEoEi6Eoc4dLERl7Jhx9ilXp1uZ5Fs+mpsc3Ziq6fQF4HlJrx8wZ1NilXWz7f+2BBhqqpqheZCph+IqzolhjDJAfohkb3GFyc8zar5Xx2qebRfkr5UJolPzNF+Iwsdxln5rJiGLDEcKs6eNlqHS5LXYQ/nsTRKEcgdcTc4SFojSdReRbPTbkbWucqSy/f11OPVxMGNPp4ep9pLgWcLaRW9Z0W3htQkXjrJOH4Nbbrw/poK+oD43bnCSmBj+zA9rQvFbpz9T1lv+YO8IzqA4QH55QZmtsS/0vvQjrb/ZU+F+qlA7skB9g07z5/+B8RmRaS/MeKJg==
+ bh=GTAuEZz2a1nQEATd2h5mNrGTJSxAcOvdFiF4cKSVThw=;
+ b=YMibZfV5lBrFGJhuXNwlnkC8b8kydzORJpMvasLDzwF6t10IudlitJBFaDHpAFRfFgu4UM/2Ql/3bM34gH1S6uwWSwtMEQlMxTw9pLgZ6i+Nws7AkRoh7Gm/0B+4Euu1oLDz9j33Q2QAVGaBKkYC9TY8LbkH837eYmoOcYPgi5bQcWbtbe3ddyTA/dNhLg2lexbeh4KwdgKiVQmP7kallHgHqIgIVn9gSB2Vx6WieOJXP1Q8P5xadLmpDR+Q4ial97Tk30PEoz0pL5juTEZMVI+eoy1Jkzu39T0+Q/LNMGfsaE57IqQhmRD6mslkJcDp2EAoL7NnVQnMt2cLS9Mzjw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2GLb11AqHgyGsgWYKMzDeUvn87SX4aE1w2KzB2tvMNo=;
- b=CBlupWdpb+LHlOm48YE7E3jhgSdevbUixxT4cO/VARlSXjgqgHLZj20qdIO0AUHpZLQjILH5ppASvw+DsyxNGYNUe8dUJ8NME9G9J7SFtCt7BUyxmWQSUowRtx2+jmrAM4zh6+u6zBrz0bROf2xANKO+9SNlKWI+ebav+EbM1XI=
+ bh=GTAuEZz2a1nQEATd2h5mNrGTJSxAcOvdFiF4cKSVThw=;
+ b=0vAGkTTMCC6O6wsNBPdZqkoxLW+yqpBz+kFIXjzw01viGP9XDEpK9BJ47VsrmMMqDdHtMBcFiTne5viorXpbgoozXKx+QQAMPl80ZmFU9duhUQcFmSTVdGQNRe8lw1hADqJtGJSA6oNrL5PHLEKs3c0yElu7kbrldxqgg0YdCqE=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by DS7PR12MB8291.namprd12.prod.outlook.com (2603:10b6:8:e6::13) with
+ by DM4PR12MB5841.namprd12.prod.outlook.com (2603:10b6:8:64::13) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7897.25; Mon, 26 Aug
- 2024 09:01:36 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7897.19; Mon, 26 Aug
+ 2024 09:34:19 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30%3]) with mapi id 15.20.7897.021; Mon, 26 Aug 2024
- 09:01:36 +0000
-Message-ID: <dcd0002a-5856-4741-9b9d-887876c8e14b@amd.com>
-Date: Mon, 26 Aug 2024 11:01:18 +0200
+ 09:34:19 +0000
+Message-ID: <8902ac79-9aa2-4363-8f9c-486c9ff52356@amd.com>
+Date: Mon, 26 Aug 2024 11:34:00 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 02/10] sysinfo: Add sysinfo driver and data structure for
- SMBIOS
+Subject: Re: [PATCH 03/10] smbios: Refactor SMBIOS library
 To: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen
  <tuomas.tynkkynen@iki.fi>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, Bin Meng <bmeng@tinylab.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, =?UTF-8?Q?Marek_Beh=C3=BAn?=
- <kabel@kernel.org>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>, Alexander Gendin
- <agendin@matrox.com>, Wan Yee Lau <wan.yee.lau@intel.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Jonas Karlman
+ <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Stefan Roese <sr@denx.de>, =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
+ Alexander Gendin <agendin@matrox.com>, Wan Yee Lau <wan.yee.lau@intel.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
  Francesco Dolcini <francesco.dolcini@toradex.com>,
@@ -74,7 +73,7 @@ Cc: Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen
  Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
  Peter Robinson <pbrobinson@gmail.com>
 References: <20240816154658.1866186-1-raymond.mao@linaro.org>
- <20240816154658.1866186-3-raymond.mao@linaro.org>
+ <20240816154658.1866186-4-raymond.mao@linaro.org>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -121,100 +120,100 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <20240816154658.1866186-3-raymond.mao@linaro.org>
+In-Reply-To: <20240816154658.1866186-4-raymond.mao@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1P189CA0031.EURP189.PROD.OUTLOOK.COM
- (2603:10a6:802:2a::44) To SJ2PR12MB8109.namprd12.prod.outlook.com
+X-ClientProxiedBy: VI1PR08CA0224.eurprd08.prod.outlook.com
+ (2603:10a6:802:15::33) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|DS7PR12MB8291:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7458afdd-196f-4348-6bd1-08dcc5adb0d8
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|DM4PR12MB5841:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5b95c7a1-3bf5-4b98-9bd2-08dcc5b242ae
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|376014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Vk5NUE9jMnhJYzQzaGErS3pLQ1VzdldxWlBpZDUzNU9mcCtzbVZSWTVMQ245?=
- =?utf-8?B?bnRVeWJBNXMyTEoxSitrZmxNODU2anpCclVkTGJ3SlRaUHkvaHkxdExWZlE4?=
- =?utf-8?B?aXFBSjdhUjBhbk0xaXgwZjVyTlE4KzdaUGtNVUE1aHNQdUtRWFFua0JiQVpZ?=
- =?utf-8?B?UFlITVFwaE1YWGRtUThRZFlUaitaMUZsUFBnUlR3U2hvUWgzRkxYTmhXakRD?=
- =?utf-8?B?dytpekpNMUtnNkU4OVl3TzZsMU82RXRSVHVXWU1QeTUxUmZBNEgrOEhMVDBw?=
- =?utf-8?B?TkVqQldsb1lZZXY0OW82bURSd3N0M1BJSXp4RFFZVG9hRThDaVZ1NlR6aFhQ?=
- =?utf-8?B?Z1J6Y21MQVRRTUpHUnEzNC9yRS9Ka09TdExJWXpYT1ErclVpazMxdTlScjVh?=
- =?utf-8?B?T3FOd3RlcDFseGpnZUNTWVVsdzZ5Rm1HaGdaSUFZd1BCSnZuT0d2ak1jb0FQ?=
- =?utf-8?B?Y2xsejZSREN2WDd4ZGFYR05ZL1p6b3NYT0w0cHgvd0xWMkFhT2JkVjk5YmNK?=
- =?utf-8?B?MEZhZndxQVJwN1FWM0tDYXBYSWdiZ08rS0lJQTBsdlh0WlE0QmlyRm1CZklC?=
- =?utf-8?B?OWcxVFFSK1pPZGNXUFFyZXYyUVRUMm9VV1BNYW5OWXhmRENPZTU1MFQrRkxR?=
- =?utf-8?B?ZlRwTDMwVUhJbXdrYmhDS0psbGMySDZleW1jR0NkTmdhWjRwdEwvVVRaQVBC?=
- =?utf-8?B?ZUJqK1BMUEx2SkhUM2J1STZvZHhkc29ZMUdUUDRBNUdVdGFBNndtS29xY3A2?=
- =?utf-8?B?cFZ0Q21LSXhjSGNUVlVvMTdkc1VsZUdpQUJ4eUZSTWFBc0hnaDJpNEY4WU56?=
- =?utf-8?B?UkRHRVhQMm5nMnVMMzFvSzBFeGVkR0Zqd2RiRVhmaHBUSVpidE10WTdsTi9q?=
- =?utf-8?B?Wm5FYTBJZUw5WUlLRFY2c05GU0NHRnh3czA0WENzTEtTOEJCOW5ZbU5hRUR3?=
- =?utf-8?B?eFFybzdTTGFuMjM1UW1YMHZDVmpIN04yYWZLdUU0UlVoc0FvaURibWx2aTZC?=
- =?utf-8?B?c2ppNEtRTEl0SHgyOXE0K1kvWDZxVno4NHZ0dzl6bjFPSXFaTDA1WW5BeVFr?=
- =?utf-8?B?ZHFwdHFiYzF6M1A0eU02eWcrWlhPWmhmV2ozQjRPR0lzaHNtZzl6MVVZMFBa?=
- =?utf-8?B?TW5Ib3J6emhVSW85VHVoaTMweWswMW5LNnd3Z09UWVN6MXo4YWlZN0dZYjd3?=
- =?utf-8?B?RmVaRGhPcnRBUUc0TGZxSHVjVW9KWksybENFR01kbzNuVCtXNzNiOTBUNm81?=
- =?utf-8?B?aGxJYVo5d1JEM2NXbkpjTFJKazJiM1RZdFVDU2YrZHN4Nlc1RldTZTlyamsv?=
- =?utf-8?B?L3VIME54STIwU25ZZXY1aS8vbGRna2VKTHNmVWZkWENRby95bE4raTVmZFpX?=
- =?utf-8?B?dVVOWnZOWnNhR2ozcmpCRk4veWpHN2VFVFBjTStVMll4SFVtd1drLzhCMFRF?=
- =?utf-8?B?MnlyL0RRaU8yR3ZsQUsva0tDUWdzT2MyMGF3Qm9HTUl0cmRwK1p4cXpnM1VI?=
- =?utf-8?B?MVJEMWJ5cVJxZVU0c2plVnQ4ckdNck4yRXZjZnhudzVyYTJBVU9NcVYrR3Rw?=
- =?utf-8?B?VTBlSDl6ZFVJeGZKNkdOcnFhY2Z4bytnN240QWQwM2pmL2Jvb21DaGpjaUtZ?=
- =?utf-8?B?RGV2OWVaVnloeEVOaktvNEtRU0t5YVdodVB1K3lCNi95em5sZFJMSGl3NlFp?=
- =?utf-8?B?V1V2RXNFRkdEcnY2UnkzQlNRamRwc3NSbXJUNmJFM1hSRUtxMiszemwyMURY?=
- =?utf-8?B?RjJtc0ZaRGdYNnllb21nNXlDL0IwU3BId2J1d1BVODNKVlYrZVBRWENUb1NW?=
- =?utf-8?B?a2FnWnNPUFhrTDQzSU54Zz09?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?S1o0Z0NlWkUrSXZLMEtRc3I2ckJZUVhySFROWE1CdmlYQVRCblFtejM4WFAz?=
+ =?utf-8?B?Y2pTd2dVVGhhOUMzcUNyakN1VkEwRkxQbldIREd1NzVyR3FvZ1QvbmFnZUs2?=
+ =?utf-8?B?Yld5eW1hMTJBTHRZVGwweUdwU3RvTURidjNwaTZVU0dQaDBnL0FveU5Ja0hz?=
+ =?utf-8?B?dnBzeWY5eFZRYUJ0UDBheEVkTXU2d1Q1M2d5TmhPSC9uVXYvektadlBtMXN4?=
+ =?utf-8?B?cDRyYWNoMWpTZ2FBOEFrNnBrYlo4T0lreE1BelVDcFNzaVBtbVluczlISWRC?=
+ =?utf-8?B?czJ0dnFQSTl6YzVzekwzQmlYaVU1RTl5KzE4cjhvSHZnMVM2TjR4NVMvSGdt?=
+ =?utf-8?B?RUp3R2Zxb3p5NjdwTk1tVEdOcHpBdW84SEU2MWdjbjJucUJzU0Nic093NjA4?=
+ =?utf-8?B?WkZ2T0p0dFdrSVlFcVlvL3A1YzJRamRtNFFzREl3ZUFCdjQ4V1pIcWY2ZXpa?=
+ =?utf-8?B?WG9RMllvOExkTE5LWi93YjNyNk5rd2poZ0U1RFV5RGRJUmVRTS9wdGlJWDB4?=
+ =?utf-8?B?SXpiSlRxWDhtbzhRS1R5elBvUlliUjhqZys1dXlPcVR4WXZJVTF0M08rSnpm?=
+ =?utf-8?B?anUzZ29DRWZoTXk5Tm8xZWM3a1hKK3VTZmMrMnRMbDNCQzNpMU9kVDRWU25J?=
+ =?utf-8?B?SjZmNnoyNzBXK1VyL0krM2ZkS01MUXNyQndrQWxXcXZjL0M5QzBPdFBpOXJ1?=
+ =?utf-8?B?Z0k5UzRSbGluR3BRcnZQRjVsNXB5cFlYaFRuWmhQWU1xL3puMVdNVkFHbUNk?=
+ =?utf-8?B?VXlYZ0t1Ti9KUWNadGlWYmxkSS9LMmZLV0tWM2loaG8rY04vNGlRVHdIK0ZQ?=
+ =?utf-8?B?MUIrODhhUlRvRExiSklJZ2s4SnJHY3B1MTA1MEJZZ09haENlTi95aXVOSUsy?=
+ =?utf-8?B?c1Rua20yZjkyV3lpQW12dUd0UlF4T2FYbUNLb2NXcThCNWNlUVRuZFlvbDEx?=
+ =?utf-8?B?TFRHN3hUWDA5Z2dpcnNHTllYMjMvQmk3cEx1TVo3Zi9MZXg4d0lhS0M1dDlk?=
+ =?utf-8?B?TDZGSGJqSlRKVDJMY2RSUGlxTm1yeWRJMGZJY0dIamdJN2ljb3M4ZUJlRHg5?=
+ =?utf-8?B?bUNsRkxKanRBQ3NNdkpuWFkvM2l5cktFY1lZRmhHWGZiQVJ0MG05eHN4QzQ4?=
+ =?utf-8?B?RERNalp3d2F0d0pQclcxeG9mc1RabmorL1dIQUVMY3pzV1RXVFpjd056ajZV?=
+ =?utf-8?B?Z2dYeVBQbndoUFNDZE1veTBhUDk0aGhkRUVlV2cwK1V3THVsVXJubVR0K0I1?=
+ =?utf-8?B?VVJETUtqUm90QUF3RzdLNUpScEEyV2dvMDdrVWV6TXd2T3IvVDRqdTNkVEdE?=
+ =?utf-8?B?WXR4STZheXBvMVVmRXZVRllzM0M5c1BzVTl4blNFeGttTmltYnpnNHpoT01h?=
+ =?utf-8?B?ajZ3S1ZJUGNrSkVEMTZRVUVyV0dkTjFQUXYvNGJWRURFZlRuZWxtakpTVFBY?=
+ =?utf-8?B?QkkzOE4rTW8zblh5RFk4RldJVk9abWU4ZjJFcS9nazRXZlZvQ3J1WUpaR3E5?=
+ =?utf-8?B?OGpkczFFT091a1pMUzltVFBKazBrbTVkQTFKdHgrRHdFbW1qWSsvYlJkUXdW?=
+ =?utf-8?B?QzFXUkdYMGRjQjlyWDNINWRrTkk3UnlZQzJ4NTRUdnZRWlhnSkxNL1hJVzIr?=
+ =?utf-8?B?NmRVUmhGcFhnT2h0QzEwc2Qzd0dCdS9STnlZdmVWb0J2VkdYWTZ0Mzg2c3Zj?=
+ =?utf-8?B?enZ0UjNmbmswT0JvYURpQWcxU0ErbFpGNjUycXBQZEZHU2k0Si8wWU5zckJR?=
+ =?utf-8?B?eFRLVE9yTFgvTmNJS3ZJMExNMGo3Wld4VC9JOXR6bTNCY0hKM2VCbHg5OVIy?=
+ =?utf-8?B?OVhlRitHLzBzT0hQY2htQT09?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZjRmbVFHdTFmQ2JFa0VqSVNaN2pYdWczSWxmR2t5R2ZhRlBHVFFlbGhsRXdD?=
- =?utf-8?B?WitkSWxrMi9qSFI0bnpuWTB3aEk3dlFNeFErUnozNmduaDhrQ2lKZmdXaTJm?=
- =?utf-8?B?dzZLMzRhSmFOenJxWElHaVBVZG90NkJVK3FGL2RoYUZzR3p3ayt6UHpRVGx0?=
- =?utf-8?B?WWRJYXd3WTdvVVJxeHlFS3lZclAySVlucC8zZzRCYjhORWZMTGFXclRjYzBL?=
- =?utf-8?B?WnF1Sk1qeVRHTVVPN3FHZFY1Nk1kdUdLS3ZDcDlmb2VlWFVHdHRhVjBSbkI3?=
- =?utf-8?B?Sk4vbzdqTDNhRGw5cmhKQWFIcGo3QnhaWS9MVmFvUlk3K21GbnkxWHBNVUdu?=
- =?utf-8?B?QnlhNFVKQTdHcVZKNmM3Z0xDYnAxUktEUmdUVXk2TmE1WUpRL0FjYlRDMHU5?=
- =?utf-8?B?YmpuM2JWK3VBSlJGcHFPaUlGT1BXZmE1UzlBMTdqMVJ2VTFiT0p5NXR3Q01a?=
- =?utf-8?B?NHc0My96bTF3ak85R2F1QVpxRUdldzlMVnNhSnVzNmVxTWk2b0FueEEycDR3?=
- =?utf-8?B?WDNkUm5sTFR1Tm90OHhMQVpwTjBWV0J1VXdmYWZyWUswUTBOZ0NSbFJ5L3lE?=
- =?utf-8?B?bzVtOGZMMVRrRVhMVjJySWlQdmVGM2I2VHdodFJ5V2l1emM3ZzVCdURtbnRN?=
- =?utf-8?B?OE01ZDUrMXJ0eDZValdrU25ONmFCcEN4QU5hVmE0NlZ3LzIwQ2RvYzViYzg3?=
- =?utf-8?B?S085cTdCdHU4cTl5VmVORlFZWEkwMlVsakNlWEdGaUJhWkFqcGxGS095UmJq?=
- =?utf-8?B?VjhRbHFrV0NndmM1bEYyZmYxV2Q0Szl6b2hMcVAxdzVmdG9WVi9vN2VIZmZj?=
- =?utf-8?B?MGhFUVM1Q3VabzAzVWZTUzZWc2Z1Uml4YUdqV085TVpqUitCU24za2dFMlBy?=
- =?utf-8?B?OUN3V25oeWU0eFZneG5ud2RZdWZuaC9ib1hQNEg2NUliTG81bjVzUDdpMDVX?=
- =?utf-8?B?VmVUZURvVXZPOTJwbHNaeURjZGt2UUZ5RFp3bW5NS25wZktrTUcvbk1DZUh0?=
- =?utf-8?B?SDBHQ1NPYnhLenowZE82QUkrQnYwa0JEbWl5Ni9md1B0Tm92L0liRDVXb0lJ?=
- =?utf-8?B?UmJ3WnBtSnhTbnNaNTErbUE0UVV4OWN0VVYvUEJBc2xLU0hmUmRQQzMvdFA4?=
- =?utf-8?B?R0RKck14UVpLNHZSZVNQWE9sTTFIcUVOcDZhQWVyeUpudFIyczJudFhOcmp1?=
- =?utf-8?B?d2JNZHJQN094WHo2MUMwQ1ZkNVYwTkp6Znl2dGFhbDNrM05lTzlaTkdZdW4r?=
- =?utf-8?B?ekJva3MyK2RiOVZkbmEvRkM3TXk1KzJ5TFgra0xlY3hZQXZxQ29FZWxJRG9B?=
- =?utf-8?B?akwrdFlVb20wWlhXbkttNlNETjd2S2V1SElpeUs2WWpqenhDYmhxd0liTmNN?=
- =?utf-8?B?SDRNWmxhSlpGU3dyM0ZmdnFuUlNJWHE3U0x4aTlPcGdYbUtzZUEwUlpqcXox?=
- =?utf-8?B?d0VnSzU3MXM4NEhmSlRmU2hsWkwwUXpxUzhKL3lPcitnZjNrb3F0R3NiK1BW?=
- =?utf-8?B?Rm1ZRUV0endnQWtzcmppYnl3UzFuYndSL3NrUEZDWG1UTmRWbFFFQzNBR3lY?=
- =?utf-8?B?QzVkTEJoREZQMTVpNGNwU0luV0tUQ3FaQWw0ODRmM3drYVYyb3V3QzFFbWRx?=
- =?utf-8?B?Qmx1STlKUlR1bk5VcEFPSS9raVFLTXdpWnVjMkVNNjBTcS83b1NvTUFQVTlQ?=
- =?utf-8?B?cUMvbG9oRnByTmdEazh1TnlvbkdsL016MVhkK1g2cjJpTlJWemM2b2wxc1dF?=
- =?utf-8?B?Q3hnT0cxaEZpMVNIVVFqaHhiRGFwTlhnRWQ2MGpJNDA5T3F6TytSYnZTQlR1?=
- =?utf-8?B?NmlKL2QrckpOMGwwZUdzOW9FNVZXV3NnbTd4bUpMamhxUjlKSkVoQnV1eFAv?=
- =?utf-8?B?MTJLMnEwNFhDZmJYZ1J0WExKQW15WkJCL3VadHkxQWZPMVdPTjUzaXliOEIy?=
- =?utf-8?B?My8yRGVySmhyZStTbVNZWFpQMEJ2M1Bta1N4Wkl1eWlOcWJPU0RYeENKRkFl?=
- =?utf-8?B?SWdSd3FEWUU0anBVclF2YVgvVHJlcWZPWlNJZXBCWkY4VGp1S1lFRXVoNEVN?=
- =?utf-8?B?NDZ1WDFhMjRjZVlWaGlJZjF2M1BsVm5lZFdaQXJvVHg1S3ZBWGQxOXRISE5M?=
- =?utf-8?Q?EqG3+r6LjxQM09bRXcQ0ff1KW?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?STdHeUhleGNaOXRPK2k0eS9paGY4aW5pSm9tZERZem9RR3c1azh3R2djT25J?=
+ =?utf-8?B?NmM0SGF6N1lrcGhyeEpSaTFjaUczQTJQSTFEL29KQjhISjhmb0RRVW8zR3Rq?=
+ =?utf-8?B?bDl3MG9iZHk5TFlHb0NEYUM0VXhCcEJRa3o3cWJFcmNFY21OTnF4bmc2WVY0?=
+ =?utf-8?B?RlNpZUhkZmhXVWZmQ0lVT25GcDN5SXRPMTFhVENPWGN3SzRweG1kQU5NSGUz?=
+ =?utf-8?B?YTBzWXVHUnBuQUJKcHJiNDh2Mll4bXlRUGxQZm5nZlh6NHJibGpSU0cvaEtX?=
+ =?utf-8?B?aDVlUnF2YmIzYWsyRzcyQjdFOFhOQTZDQXZEWFZYUkptREwyZVlGaVpZaG53?=
+ =?utf-8?B?V3RWeXEzQzNhclRSNFhaL1Fwc0RwajBDL3pCd21sem9ET3k5QVVXSWVKcVRI?=
+ =?utf-8?B?NUsyeW5GR0hibGNybXp0L1Q0WjJuMjJBWW85cER1M3hHNllTanovNGRRd09S?=
+ =?utf-8?B?cG9aR3FyZ3dXOERDN1RweEFaVU5NUGZMcmFRNmZxY0ZmK0dxcnNCRGtSa244?=
+ =?utf-8?B?RUJLNWxNdktyNDVOdkRiMDM5RFRYdXUrR1hBa2NzOUU0c0tLTUVhbTdQd2ZS?=
+ =?utf-8?B?U3ZFekZNUWJBYmJSRHhqS0svSUN1WTdaZnphMXJPdjhsak5GbFRyeUNvWkI2?=
+ =?utf-8?B?SktITmlwczZhYmFvSk02U3RTQnRtY1ZBNERUL1B2MUt6Y3hNRHNIOEg2RGF5?=
+ =?utf-8?B?S2tVbk9aNncwT1o5V0sxWEsxT2J4RmQrOVpQV3BNZXMvY3FUbk5Cc3hvZDJy?=
+ =?utf-8?B?UE1DbXh1ZDFJVE5DSWV5bFE4cUxIcERMTDFCbTUvdnl1R0J3TSt6MkxDWVVN?=
+ =?utf-8?B?YUxHUmk3bDZTL0ZtSGRWd2xRRkF5dUQxaWJ0VVI0Uno4OUVaYTJEdGNidTBN?=
+ =?utf-8?B?UWpaOGlseXh2eUJpa25zZ1ZGWnFpOTFrK0hwR0YxL1d4czI5UVVwbTd1ZWJv?=
+ =?utf-8?B?SkU1alhUNlFlbVdOMmY5OGNPNlFBTXJRMmZ0ZCtGSXpJLzVZaElJdkVSOEV0?=
+ =?utf-8?B?UEVwc1NWZkwrL2NlaXVtbkdJaTJaT2RyYlNqM0NxYjNTY1RCQ251RUl3SzBY?=
+ =?utf-8?B?NDNiYVllTCtiajNXdWdlYnhlQWI4RklYaU5JVVdHK0MrcWgza1ZZVFFtVzRB?=
+ =?utf-8?B?K0JSWWZQZjc1czhLZTVML01kRkVqOWwwMzZSNDF0NGpTWEg2U1E5VVl6WElm?=
+ =?utf-8?B?c0J2UnZYTDVIOGZSdkYrZ1c5YmI5V0lnWVFXUE85TzhFTXB1VG10b09DUmxy?=
+ =?utf-8?B?YzB0THVyZDNSY3ZHUFZtVjJwVElJUHRMYzIrTG5BYzRCY2JGM3NudUhBaGMw?=
+ =?utf-8?B?dS91M0xBY3BJMnNxZDRhT1Q2MjRRTE5SdHNCeCtEMXNOeW5OSVlIdEdTa0hl?=
+ =?utf-8?B?WXBUREdsZHZNWkNYNklEWXpLZ3F1U1lNUVIxSUZST1gzY2RxYjgyUENMcGpK?=
+ =?utf-8?B?SkpIN3Y0dUJ5WWgxK1ZMQmlPaFV1eExIMFNKdFNKRkpUdFhRa0t4aytvVFlZ?=
+ =?utf-8?B?Wko4MjRNNlo5ZGg4dUpZeG9neTY2WW13NE1GOXg4MXIvVStBcnJ2RTBLdnh3?=
+ =?utf-8?B?ZDN4V1dFL3NRdTI4WVJwWjdHVk1wc1c0aHZyVk1YK0RmTFVZRjN3Vy9sN2x1?=
+ =?utf-8?B?MFQ4SHFZZXk2SmtJc3pLR21QdFN6NnhwMzFxM21jOHg0VG9OczRTNG9JMFBt?=
+ =?utf-8?B?MTI1UTA0ZFRpZG9EbzRqMENEaURVcFVpTlA1QmsxbzlVRVRYbzNmQmFUQlIx?=
+ =?utf-8?B?eXI5VXQzNkpwSmFvZ0J1d2txRTZ2REoza3BNbDBZdytOdDcxSjlDMUN6K0RD?=
+ =?utf-8?B?Z05rYU1lbDJTcGhlc0ZoZEVQbFRFS1NpVVREZDNybkZYNDg1VGU1RjdRcFV5?=
+ =?utf-8?B?RHVDam01OHEwNjBHM010U2luN0k2RFkzdzYvdTMyb0F5VDE0ckhnV2FmOWl4?=
+ =?utf-8?B?emJJZFU0NnVtcXMyNk5FbnlkQzNRazg2aVN6Q3ZlSkMzM2tBUGZVeE5vZG04?=
+ =?utf-8?B?TmNaR1UzV0orOHRZQklwOFRsSTZpSlMzcmd6bk9aa0IyNmRDRDI3RUlndWlT?=
+ =?utf-8?B?dmVHdnRlNlNRcEJtaWxtbUIxOGZVaVVUY0NodUpVRFlXM0ZnWkVoajV4Yi9G?=
+ =?utf-8?Q?jRWNrEzxjHm/uGaS9EJPsCyIc?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7458afdd-196f-4348-6bd1-08dcc5adb0d8
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5b95c7a1-3bf5-4b98-9bd2-08dcc5b242ae
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2024 09:01:36.7492 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2024 09:34:19.4121 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: FWNrEBLEo0XgsgYBqdYSViG5JTCrR9mtOPznFSPmXKWoV9HuDuzQbi6sjRLtGA3C
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB8291
+X-MS-Exchange-CrossTenant-UserPrincipalName: L67PrnoZR5Tpl9OKNzGdshO2X344ikvxkKKcIUn9m+vXPuQYRToIw1n/RIm+02BB
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5841
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -234,553 +233,226 @@ X-Virus-Status: Clean
 
 
 On 8/16/24 17:46, Raymond Mao wrote:
-> Add sysinfo interface and definitions to support SMBIOS type 0 to
-> type 4.
+> Current SMBIOS library does not fully match to the specification.
+> It hardcodes values instead of exposing values from the device.
+> It does not support dynamic length for contained object handles
+> or elements and misses the handling of a few fields.
+> 
+> The refactoring of this patch includes:
+> 1. Expose values from device via sysinfo interface.
+> 2. Replace smbios_add_prop with smbios_add_prop_si to allow getting
+>     string values from sysinfo.
+> 3. Add smbios_get_val_si to get int values from sysinfo.
+> 4. Use sysinfo_get_data to get data area like contained object
+>     handles, elements or processor id.
+> 5. Refactor SMBIOS cmd print functions to match the command output
+>     with the specification
+> 6. Add new print functions for Type 0, 3 and 4.
+> 7. Miscellaneous fixes in SMBIOS.
 > 
 > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 > ---
->   drivers/sysinfo/Makefile      |   1 +
->   drivers/sysinfo/smbios_plat.c | 270 ++++++++++++++++++++++++++++++++++
->   drivers/sysinfo/smbios_plat.h | 104 +++++++++++++
->   include/smbios.h              |  12 ++
->   include/sysinfo.h             |  58 +++++++-
->   lib/Makefile                  |   2 +
->   6 files changed, 446 insertions(+), 1 deletion(-)
->   create mode 100644 drivers/sysinfo/smbios_plat.c
->   create mode 100644 drivers/sysinfo/smbios_plat.h
+>   cmd/smbios.c     | 268 +++++++++++++++++++++++++++++++++--
+>   include/smbios.h | 116 +++++++++++----
+>   lib/smbios.c     | 358 ++++++++++++++++++++++++++++++++++++++---------
+>   3 files changed, 632 insertions(+), 110 deletions(-)
 > 
-> diff --git a/drivers/sysinfo/Makefile b/drivers/sysinfo/Makefile
-> index 680dde77fe8..3e478f87c23 100644
-> --- a/drivers/sysinfo/Makefile
-> +++ b/drivers/sysinfo/Makefile
-> @@ -8,3 +8,4 @@ obj-$(CONFIG_SYSINFO_GPIO) += gpio.o
->   obj-$(CONFIG_SYSINFO_RCAR3) += rcar3.o
->   obj-$(CONFIG_SYSINFO_SANDBOX) += sandbox.o
->   obj-$(CONFIG_SYSINFO_SMBIOS) += smbios.o
-> +obj-$(CONFIG_SYSINFO_SMBIOS) += smbios_plat.o
-> \ No newline at end of file
-
-doesn't look correct.
-
-
-> diff --git a/drivers/sysinfo/smbios_plat.c b/drivers/sysinfo/smbios_plat.c
-> new file mode 100644
-> index 00000000000..adbc8cf3cf2
-> --- /dev/null
-> +++ b/drivers/sysinfo/smbios_plat.c
-> @@ -0,0 +1,270 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (c) 2024 Linaro Limited
-> + * Author: Raymond Mao <raymond.mao@linaro.org>
-> + */
-> +#include <dm.h>
-> +#include <smbios_plat.h>
-> +#include <sysinfo.h>
-> +
-> +struct sysinfo_plat_priv {
-> +	struct sys_info *t1;
-> +	struct baseboard_info *t2;
-> +	struct enclosure_info *t3;
-> +	struct processor_info *t4;
-> +};
-> +
-> +/* weak function for the platforms not yet supported */
-> +__weak int sysinfo_get_processor_info(struct processor_info *pinfo)
-> +{
-> +	return -ENOSYS;
-> +}
-> +
-> +static int sysinfo_plat_detect(struct udevice *dev)
-> +{
-> +	return 0;
-> +}
-> +
-> +static int sysinfo_plat_get_str(struct udevice *dev, int id,
-> +				size_t size, char *val)
-> +{
-> +	struct sysinfo_plat_priv *priv = dev_get_priv(dev);
-> +	const char *str = NULL;
-> +
-> +	switch (id) {
-> +	case SYSINFO_ID_SMBIOS_SYSTEM_MANUFACTURER:
-> +		str = priv->t1->manufacturer;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_SYSTEM_PRODUCT:
-> +		str = priv->t1->prod_name;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_SYSTEM_VERSION:
-> +		str = priv->t1->version;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_SYSTEM_SERIAL:
-> +		str = priv->t1->sn;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_SYSTEM_SKU:
-> +		str = priv->t1->sku_num;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_SYSTEM_FAMILY:
-> +		str = priv->t1->family;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_BASEBOARD_MANUFACTURER:
-> +		str = priv->t2->manufacturer;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT:
-> +		str = priv->t2->prod_name;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_BASEBOARD_VERSION:
-> +		str = priv->t2->version;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_BASEBOARD_SERIAL:
-> +		str = priv->t2->sn;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_BASEBOARD_ASSET_TAG:
-> +		str = priv->t2->asset_tag;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_BASEBOARD_CHASSIS_LOCAT:
-> +		str = priv->t2->chassis_locat;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_ENCLOSURE_MANUFACTURER:
-> +		str = priv->t3->manufacturer;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_ENCLOSURE_VERSION:
-> +		str = priv->t3->version;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_ENCLOSURE_SERIAL:
-> +		str = priv->t3->sn;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_ENCLOSURE_ASSET_TAG:
-> +		str = priv->t3->asset_tag;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_ENCLOSURE_SKU:
-> +		str = priv->t3->sku_num;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_SOCKET:
-> +		str = priv->t4->socket_design;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_MANUFACT:
-> +		str = priv->t4->manufacturer;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_VERSION:
-> +		str = priv->t4->version;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_SN:
-> +		str = priv->t4->sn;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_ASSET_TAG:
-> +		str = priv->t4->asset_tag;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_PN:
-> +		str = priv->t4->pn;
-> +		break;
-> +	default:
-> +		break;
-> +	}
-> +
-> +	if (!str)
-> +		return -ENOSYS;
-> +
-> +	strlcpy(val, str, size);
-> +
-> +	return 0;
-> +}
-> +
-> +static int sysinfo_plat_get_int(struct udevice *dev, int id, int *val)
-> +{
-> +	struct sysinfo_plat_priv *priv = dev_get_priv(dev);
-> +
-> +	switch (id) {
-> +	case SYSINFO_ID_SMBIOS_SYSTEM_WAKEUP:
-> +		*val = priv->t1->wakeup_type;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_BASEBOARD_FEATURE:
-> +		*val = priv->t2->feature.data;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_BASEBOARD_TYPE:
-> +		*val = priv->t2->type;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_BASEBOARD_OBJS_NUM:
-> +		*val = priv->t2->objs_num;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_ENCLOSURE_TYPE:
-> +		*val = priv->t3->chassis_type;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_ENCLOSURE_BOOTUP:
-> +		*val = priv->t3->bootup_state;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_ENCLOSURE_POW:
-> +		*val = priv->t3->power_supply_state;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_ENCLOSURE_THERMAL:
-> +		*val = priv->t3->thermal_state;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_ENCLOSURE_SECURITY:
-> +		*val = priv->t3->security_status;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_ENCLOSURE_OEM:
-> +		*val = priv->t3->oem_defined;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_ENCLOSURE_HEIGHT:
-> +		*val = priv->t3->height;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_ENCLOSURE_POWCORE_NUM:
-> +		*val = priv->t3->number_of_power_cords;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_ENCLOSURE_ELEMENT_CNT:
-> +		*val = priv->t3->element_count;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_ENCLOSURE_ELEMENT_LEN:
-> +		*val = priv->t3->element_record_length;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_TYPE:
-> +		*val = priv->t4->type;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_VOLTAGE:
-> +		*val = priv->t4->voltage;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_EXT_CLOCK:
-> +		*val = priv->t4->ext_clock;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_MAX_SPEED:
-> +		*val = priv->t4->max_speed;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_CUR_SPEED:
-> +		*val = priv->t4->curr_speed;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_STATUS:
-> +		*val = priv->t4->status;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_UPGRADE:
-> +		*val = priv->t4->upgrade;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_CORE_CNT:
-> +		*val = priv->t4->core_count;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_CORE_EN:
-> +		*val = priv->t4->core_enabled;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_THREAD_CNT:
-> +		*val = priv->t4->thread_count;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_CHARA:
-> +		*val = priv->t4->characteristics;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_FAMILY2:
-> +		*val = priv->t4->family2;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_CORE_CNT2:
-> +		*val = priv->t4->core_count2;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_CORE_EN2:
-> +		*val = priv->t4->core_enabled2;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_THREAD_CNT2:
-> +		*val = priv->t4->thread_count2;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_THREAD_EN:
-> +		*val = priv->t4->thread_enabled;
-> +		break;
-> +	default:
-> +		break;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int sysinfo_plat_get_data(struct udevice *dev, int id, uchar **buf,
-> +				 size_t *size)
-> +{
-> +	struct sysinfo_plat_priv *priv = dev_get_priv(dev);
-> +
-> +	switch (id) {
-> +	case SYSINFO_ID_SMBIOS_ENCLOSURE_ELEMENTS:
-> +		*buf = priv->t3->elements;
-> +		*size = priv->t3->elements_size;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_BASEBOARD_OBJS_HANDLE:
-> +		*buf = priv->t2->objs;
-> +		*size = priv->t2->objs_size;
-> +		break;
-> +	case SYSINFO_ID_SMBIOS_PROCESSOR_ID:
-> +		*buf = (uchar *)priv->t4->id;
-> +		*size = sizeof(priv->t4->id);
-> +		break;
-> +	default:
-> +		break;
-> +	}
-> +	return 0;
-> +}
-> +
-> +static int sysinfo_plat_probe(struct udevice *dev)
-> +{
-> +	struct sysinfo_plat_priv *priv = dev_get_priv(dev);
-> +	struct sysinfo_plat *plat = dev_get_plat(dev);
-> +
-> +	priv->t1 = &plat->sys;
-> +	priv->t2 = &plat->board;
-> +	priv->t3 = &plat->chassis;
-> +
-> +	if (!sysinfo_get_processor_info(plat->processor))
-> +		priv->t4 = plat->processor;
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct sysinfo_ops sysinfo_smbios_ops = {
-> +	.detect = sysinfo_plat_detect,
-> +	.get_str = sysinfo_plat_get_str,
-> +	.get_int = sysinfo_plat_get_int,
-> +	.get_data = sysinfo_plat_get_data,
-> +};
-> +
-> +U_BOOT_DRIVER(sysinfo_smbios_plat) = {
-> +	.name           = "sysinfo_smbios_plat",
-> +	.id             = UCLASS_SYSINFO,
-> +	.ops		= &sysinfo_smbios_ops,
-> +	.priv_auto	= sizeof(struct sysinfo_plat_priv),
-> +	.probe		= sysinfo_plat_probe,
-> +};
-> diff --git a/drivers/sysinfo/smbios_plat.h b/drivers/sysinfo/smbios_plat.h
-> new file mode 100644
-> index 00000000000..3576f492ecb
-> --- /dev/null
-> +++ b/drivers/sysinfo/smbios_plat.h
-> @@ -0,0 +1,104 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright (c) 2024 Linaro Limited
-> + * Author: Raymond Mao <raymond.mao@linaro.org>
-> + */
-> +#ifndef __SMBIOS_PLAT_H
-> +#define __SMBIOS_PLAT_H
-> +
-> +#include <smbios.h>
-> +
-> +/*
-> + * TODO:
-> + * sysinfo_plat and all sub data structure should be moved to <asm/sysinfo.h>
-> + * if we have this defined for each arch.
-
-But why?
-
-> + */
-> +struct __packed sys_info {
-> +	char *manufacturer;
-> +	char *prod_name;
-> +	char *version;
-> +	char *sn;
-> +	u8 wakeup_type;
-> +	char *sku_num;
-> +	char *family;
-> +};
-> +
-> +struct __packed baseboard_info {
-> +	char *manufacturer;
-> +	char *prod_name;
-> +	char *version;
-> +	char *sn;
-> +	char *asset_tag;
-> +	union baseboard_feat feature;
-> +	char *chassis_locat;
-> +	u8 type;
-> +	u8 objs_num;
-> +	void *objs;
-> +	size_t objs_size;
-> +};
-> +
-> +struct __packed enclosure_info {
-> +	char *manufacturer;
-> +	char *version;
-> +	char *sn;
-> +	char *asset_tag;
-> +	u8 chassis_type;
-> +	u8 bootup_state;
-> +	u8 power_supply_state;
-> +	u8 thermal_state;
-> +	u8 security_status;
-> +	u32 oem_defined;
-> +	u8 height;
-> +	u8 number_of_power_cords;
-> +	u8 element_count;
-> +	u8 element_record_length;
-> +	void *elements;
-> +	size_t elements_size;
-> +	char *sku_num;
-> +};
-> +
-> +struct __packed processor_info {
-> +	char *socket_design;
-> +	u8 type;
-> +	u8 family;
-
-packed is nice but I think you should use pahole and look at them to see
-where you have gaps. Because I am quite sure you have gaps there.
-
-char * is 64bit
-then two u8
-and below is another pointer which has 64bit.
-
-Or 32bit arch it is the same.
-
-> +	char *manufacturer;
-> +	u32 id[2];
-> +	char *version;
-> +	u8 voltage;
-> +	u16 ext_clock;
-> +	u16 max_speed;
-> +	u16 curr_speed;
-> +	u8 status;
-> +	u8 upgrade;
-> +	char *sn;
-> +	char *asset_tag;
-> +	char *pn;
-> +	u8 core_count;
-> +	u8 core_enabled;
-> +	u8 thread_count;
-> +	u16 characteristics;
-> +	u16 family2;
-> +	u16 core_count2;
-> +	u16 core_enabled2;
-> +	u16 thread_count2;
-> +	u16 thread_enabled;
-> +};
-> +
-> +struct sysinfo_plat {
-> +	struct sys_info sys;
-> +	struct baseboard_info board;
-> +	struct enclosure_info chassis;
-> +	struct processor_info *processor;
-> +	/* add other sysinfo structure here */
-> +};
-> +
-> +#if CONFIG_IS_ENABLED(SYSINFO_SMBIOS)
-> +int sysinfo_get_processor_info(struct processor_info *pinfo);
-> +#else
-> +static inline int sysinfo_get_processor_info(struct processor_info *pinfo)
-> +{
-> +	return -ENOSYS;
-> +}
-> +#endif
-> +
-> +#endif	/* __SMBIOS_PLAT_H */
-> diff --git a/include/smbios.h b/include/smbios.h
-> index 00119d7a60c..60e28a89af8 100644
-> --- a/include/smbios.h
-> +++ b/include/smbios.h
-> @@ -154,6 +154,18 @@ struct __packed smbios_type1 {
->   #define SMBIOS_BOARD_FEATURE_HOSTING	(1 << 0)
->   #define SMBIOS_BOARD_MOTHERBOARD	10
+> diff --git a/cmd/smbios.c b/cmd/smbios.c
+> index d3bd8b12a67..8e2bf46a09c 100644
+> --- a/cmd/smbios.c
+> +++ b/cmd/smbios.c
+> @@ -26,6 +26,71 @@ static const char * const wakeup_type_strings[] = {
+>   	"AC Power Restored",	/* 0x08 */
+>   };
 >   
-> +union baseboard_feat {
-> +	struct {
-> +		u8 hosting_board:1;
-> +		u8 need_daughter_board:1;
-> +		u8 removable:1;
-> +		u8 replaceable:1;
-> +		u8 hot_swappable:1;
-> +		u8 rsvd:3;
-> +	} fields;
-> +	u8 data;
+> +static const char * const boardtype_strings[] = {
+> +	"Reserved",			/* 0x00 */
+> +	"Unknown",			/* 0x01 */
+> +	"Other",			/* 0x02 */
+> +	"Server Blade",			/* 0x03 */
+> +	"Connectivity Switch",		/* 0x04 */
+> +	"System Management Module",	/* 0x05 */
+> +	"Processor Module",		/* 0x06 */
+> +	"I/O Module",			/* 0x07 */
+> +	"Memory Module",		/* 0x08 */
+> +	"Daughter board",		/* 0x09 */
+> +	"Motherboard",			/* 0x0a */
+> +	"Processor/Memory Module",	/* 0x0b */
+> +	"Processor/IO Module",		/* 0x0c */
+> +	"Interconnect board",		/* 0x0d */
 > +};
 > +
->   struct __packed smbios_type2 {
->   	u8 type;
->   	u8 length;
-> diff --git a/include/sysinfo.h b/include/sysinfo.h
-> index 17b2b9c7111..6c9de7744c1 100644
-> --- a/include/sysinfo.h
-> +++ b/include/sysinfo.h
-> @@ -42,18 +42,74 @@ struct udevice;
->   enum sysinfo_id {
->   	SYSINFO_ID_NONE,
+> +static const char * const chassis_state_strings[] = {
+> +	"Reserved",			/* 0x00 */
+> +	"Other",			/* 0x01 */
+> +	"Unknown",			/* 0x02 */
+> +	"Safe",				/* 0x03 */
+> +	"Warning",			/* 0x04 */
+> +	"Critical",			/* 0x05 */
+> +	"Non-recoverable",		/* 0x06 */
+> +};
+> +
+> +static const char * const chassis_security_strings[] = {
+> +	"Reserved",			/* 0x00 */
+> +	"Other",			/* 0x01 */
+> +	"Unknown",			/* 0x02 */
+> +	"None",				/* 0x03 */
+> +	"External interface locked out",/* 0x04 */
+> +	"External interface enabled",	/* 0x05 */
+> +};
+> +
+> +static const char * const processor_type_strings[] = {
+> +	"Reserved",			/* 0x00 */
+> +	"Other",			/* 0x01 */
+> +	"Unknown",			/* 0x02 */
+> +	"Central Processor",		/* 0x03 */
+> +	"Math Processor",		/* 0x04 */
+> +	"DSP Processor",		/* 0x05 */
+> +	"Video Processor",		/* 0x06 */
+> +};
+> +
+> +static const char * const processor_family_strings[] = {
+> +	[0] = "Other",
+> +	[1] = "Unknown",
+> +	[2 ... 253] = "Other", /* skip these definitions from now */
+> +	[254] = "Refer to 'Processor Family 2'",
+> +	[255] = "Reserved",
+> +	[256] = "ARMv7",
+> +	[257] = "ARMv8",
+> +};
+> +
+> +static const char * const processor_upgrade_strings[] = {
+> +	[0] = "Reserved",
+> +	[1] = "Other",
+> +	[2] = "Unknown",
+> +	[3 ... 5] = "Other", /* skip these definitions from now */
+> +	[6] = "None",
+> +	[7 ... 80] = "Other", /* skip these definitions from now */
+> +};
+> +
+>   /**
+>    * smbios_get_string() - get SMBIOS string from table
+>    *
+> @@ -92,6 +157,32 @@ const char *smbios_wakeup_type_str(u8 wakeup_type)
+>   	return wakeup_type_strings[wakeup_type];
+>   }
 >   
-> -	/* For SMBIOS tables */
-> +	/* BIOS Information (Type 0) */
-> +	SYSINFO_ID_SMBIOS_BIOS_VENDOR,
-> +	SYSINFO_ID_SMBIOS_BIOS_VER,
-> +	SYSINFO_ID_SMBIOS_BIOS_REL_DATE,
+> +static void smbios_print_type0(struct smbios_type0 *table)
+> +{
+> +	printf("BIOS Information\n");
+> +	smbios_print_str("Vendor", table, table->vendor);
+> +	smbios_print_str("BIOS Version", table, table->bios_ver);
+> +	/* Keep table->bios_start_segment as 0 for UEFI-based systems */
+> +	smbios_print_str("BIOS Release Date", table, table->bios_release_date);
+> +	printf("\tBIOS ROM Size: 0x%02x\n", table->bios_rom_size);
+> +	printf("\tBIOS Characteristics: 0x%016llx\n",
+> +	       table->bios_characteristics);
+> +	printf("\tBIOS Characteristics Extension Byte 1: 0x%02x\n",
+> +	       table->bios_characteristics_ext1);
+> +	printf("\tBIOS Characteristics Extension Byte 2: 0x%02x\n",
+> +	       table->bios_characteristics_ext2);
+> +	printf("\tSystem BIOS Major Release: 0x%02x\n",
+> +	       table->bios_major_release);
+> +	printf("\tSystem BIOS Minor Release: 0x%02x\n",
+> +	       table->bios_minor_release);
+> +	printf("\tEmbedded Controller Firmware Major Release: 0x%02x\n",
+> +	       table->ec_major_release);
+> +	printf("\tEmbedded Controller Firmware Minor Release: 0x%02x\n",
+> +	       table->ec_minor_release);
+> +	printf("\tExtended BIOS ROM Size: 0x%04x\n",
+> +	       table->extended_bios_rom_size);
+> +}
 > +
-> +	/* System Information (Type 1) */
->   	SYSINFO_ID_SMBIOS_SYSTEM_MANUFACTURER,
->   	SYSINFO_ID_SMBIOS_SYSTEM_PRODUCT,
->   	SYSINFO_ID_SMBIOS_SYSTEM_VERSION,
->   	SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
-> +	SYSINFO_ID_SMBIOS_SYSTEM_WAKEUP,
->   	SYSINFO_ID_SMBIOS_SYSTEM_SKU,
->   	SYSINFO_ID_SMBIOS_SYSTEM_FAMILY,
-> +
-> +	/* Baseboard (or Module) Information (Type 2) */
->   	SYSINFO_ID_SMBIOS_BASEBOARD_MANUFACTURER,
->   	SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT,
->   	SYSINFO_ID_SMBIOS_BASEBOARD_VERSION,
->   	SYSINFO_ID_SMBIOS_BASEBOARD_SERIAL,
->   	SYSINFO_ID_SMBIOS_BASEBOARD_ASSET_TAG,
-> +	SYSINFO_ID_SMBIOS_BASEBOARD_FEATURE,
-> +	SYSINFO_ID_SMBIOS_BASEBOARD_CHASSIS_LOCAT,
-> +	SYSINFO_ID_SMBIOS_BASEBOARD_TYPE,
-> +	SYSINFO_ID_SMBIOS_BASEBOARD_OBJS_NUM,
-> +	SYSINFO_ID_SMBIOS_BASEBOARD_OBJS_HANDLE,
-> +
-> +	/* System Enclosure or Chassis (Type 3) */
-> +	SYSINFO_ID_SMBIOS_ENCLOSURE_MANUFACTURER,
-> +	SYSINFO_ID_SMBIOS_ENCLOSURE_VERSION,
-> +	SYSINFO_ID_SMBIOS_ENCLOSURE_SERIAL,
-> +	SYSINFO_ID_SMBIOS_ENCLOSURE_ASSET_TAG,
-> +	SYSINFO_ID_SMBIOS_ENCLOSURE_TYPE,
-> +	SYSINFO_ID_SMBIOS_ENCLOSURE_BOOTUP,
-> +	SYSINFO_ID_SMBIOS_ENCLOSURE_POW,
-> +	SYSINFO_ID_SMBIOS_ENCLOSURE_THERMAL,
-> +	SYSINFO_ID_SMBIOS_ENCLOSURE_SECURITY,
-> +	SYSINFO_ID_SMBIOS_ENCLOSURE_OEM,
-> +	SYSINFO_ID_SMBIOS_ENCLOSURE_HEIGHT,
-> +	SYSINFO_ID_SMBIOS_ENCLOSURE_POWCORE_NUM,
-> +	SYSINFO_ID_SMBIOS_ENCLOSURE_ELEMENT_CNT,
-> +	SYSINFO_ID_SMBIOS_ENCLOSURE_ELEMENT_LEN,
-> +	SYSINFO_ID_SMBIOS_ENCLOSURE_ELEMENTS,
-> +	SYSINFO_ID_SMBIOS_ENCLOSURE_SKU,
-> +
-> +	/* Processor Information (Type 4) */
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_SOCKET,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_TYPE,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_MANUFACT,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_ID,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_VERSION,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_VOLTAGE,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_EXT_CLOCK,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_MAX_SPEED,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_CUR_SPEED,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_STATUS,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_UPGRADE,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_SN,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_ASSET_TAG,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_PN,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_CORE_CNT,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_CORE_EN,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_THREAD_CNT,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_CHARA,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_FAMILY2,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_CORE_CNT2,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_CORE_EN2,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_THREAD_CNT2,
-> +	SYSINFO_ID_SMBIOS_PROCESSOR_THREAD_EN,
+>   static void smbios_print_type1(struct smbios_type1 *table)
+>   {
+>   	printf("System Information\n");
+> @@ -99,38 +190,180 @@ static void smbios_print_type1(struct smbios_type1 *table)
+>   	smbios_print_str("Product Name", table, table->product_name);
+>   	smbios_print_str("Version", table, table->version);
+>   	smbios_print_str("Serial Number", table, table->serial_number);
+> -	if (table->length >= 0x19) {
+> +	if (table->hdr.length >= SMBIOS_TYPE1_LENGTH_V21) {
+>   		printf("\tUUID: %pUl\n", table->uuid);
+>   		printf("\tWake-up Type: %s\n",
+>   		       smbios_wakeup_type_str(table->wakeup_type));
+>   	}
+> -	if (table->length >= 0x1b) {
+> +	if (table->hdr.length >= SMBIOS_TYPE1_LENGTH_V24) {
+>   		smbios_print_str("SKU Number", table, table->sku_number);
+>   		smbios_print_str("Family", table, table->family);
+>   	}
+>   }
 >   
->   	/* For show_board_info() */
->   	SYSINFO_ID_BOARD_MODEL,
-> diff --git a/lib/Makefile b/lib/Makefile
-> index 81b503ab526..1829647e83d 100644
-> --- a/lib/Makefile
-> +++ b/lib/Makefile
-> @@ -42,6 +42,8 @@ obj-$(CONFIG_FIT) += fdtdec_common.o
->   obj-$(CONFIG_TEST_FDTDEC) += fdtdec_test.o
->   obj-$(CONFIG_GZIP_COMPRESSED) += gzip.o
->   obj-$(CONFIG_GENERATE_SMBIOS_TABLE) += smbios.o
-> +ccflags-$(CONFIG_SYSINFO_SMBIOS) += \
-> +	-I$(srctree)/drivers/sysinfo
+> +const char *smbios_baseboard_type_str(u8 borad_type)
 
-I can't see reason for this. Why do you think make sense to keep header in 
-drivers/sysinfo when you can move it to include/ directly.
+typo board_type
 
->   obj-$(CONFIG_SMBIOS_PARSER) += smbios-parser.o
->   obj-$(CONFIG_IMAGE_SPARSE) += image-sparse.o
->   obj-y += initcall.o
+
+> +{
+> +	if (borad_type >= ARRAY_SIZE(boardtype_strings))
+> +		borad_type = 0;
+
+newline but is 0 proper here? It means Reserved. Shouldn't be Unknown?
+
+
+> +	return boardtype_strings[borad_type];
+> +}
+> +
+>   static void smbios_print_type2(struct smbios_type2 *table)
+>   {
+> -	u16 *handle;
+> +	int i;
+> +	u8 *addr = (u8 *)table + offsetof(struct smbios_type2, eos);
+>   
+> -	printf("Base Board Information\n");
+> +	printf("Baseboard Information\n");
+>   	smbios_print_str("Manufacturer", table, table->manufacturer);
+>   	smbios_print_str("Product Name", table, table->product_name);
+>   	smbios_print_str("Version", table, table->version);
+>   	smbios_print_str("Serial Number", table, table->serial_number);
+>   	smbios_print_str("Asset Tag", table, table->asset_tag_number);
+> -	printf("\tFeature Flags: 0x%04x\n", table->feature_flags);
+> +	printf("\tFeature Flags: 0x%02x\n", table->feature_flags);
+>   	smbios_print_str("Chassis Location", table, table->chassis_location);
+>   	printf("\tChassis Handle: 0x%04x\n", table->chassis_handle);
+> -	smbios_print_str("Board Type", table, table->board_type);
+> -	printf("\tContained Object Handles: ");
+> -	handle = (void *)table->eos;
+> -	for (int i = 0; i < table->number_contained_objects; ++i)
+> -		printf("0x%04x ", handle[i]);
+> +	printf("\tBoard Type: %s\n",
+> +	       smbios_baseboard_type_str(table->board_type));
+> +	printf("\tNumber of Contained Object Handles: 0x%02x\n",
+> +	       table->number_contained_objects);
+> +	if (!table->number_contained_objects)
+> +		return;
+> +
+> +	printf("\tContained Object Handles:\n");
+> +	for (i = 0; i < table->number_contained_objects; i++) {
+> +		printf("\t\tObject[%03d]:\n", i);
+> +		if (CONFIG_IS_ENABLED(HEXDUMP))
+> +			print_hex_dump("\t\t", DUMP_PREFIX_OFFSET, 16, 1, addr,
+> +				       sizeof(u16), false);
+> +		addr += sizeof(u16);
+> +	}
+>   	printf("\n");
+>   }
+>   
+> +const char *smbios_chassis_state_str(u8 state)
+> +{
+> +	if (state >= ARRAY_SIZE(chassis_state_strings))
+> +		state = 0;
+
+newline and same as above.
+
+> +	return chassis_state_strings[state];
+> +}
+> +
+> +const char *smbios_chassis_security_str(u8 status)
+> +{
+> +	if (status >= ARRAY_SIZE(chassis_security_strings))
+> +		status = 0;
+
+ditto.
 
 M
