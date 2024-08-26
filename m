@@ -4,83 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BC49C5321D
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 18:33:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D3E5C5472E
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 18:51:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F123E87873;
-	Mon, 26 Aug 2024 20:33:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A848688387;
+	Mon, 26 Aug 2024 20:51:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bC234qHO";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="klRi4P2P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94F63841BC; Mon, 26 Aug 2024 20:33:26 +0200 (CEST)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6DD5288A7B; Mon, 26 Aug 2024 20:51:03 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39A5088B55
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 20:33:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 432D1880E6
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 20:51:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7a501dd544eso283057185a.2
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 11:33:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724697202; x=1725302002; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=tD29vJ5zaQQJdWZj/js3YNSkVjUUfPG+Yq46uYeL7hk=;
- b=bC234qHOVOgJCAednyMz3YSpnLnUyr6Ip6hx104XeOQFOx04RWof7rztOhWoeabZtc
- tUQFnBfs1dpphVuniMEQhWJy9j0Ru42RYTJq8LElLajWjceN2oDkc+7YwhpwbXBjxVKp
- dP5bj9JHM8CLYf9y0fH231pvPg3y2FWUUZnA4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724697202; x=1725302002;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tD29vJ5zaQQJdWZj/js3YNSkVjUUfPG+Yq46uYeL7hk=;
- b=XFj63B4Hv6urRDiDpGCoBJsxAtmo5Ri5OUIP/qfVLkRYVqCVyLoWrna9/Mq3bVOrlN
- 6XMRRe01v0Z2iEv5e3oZ6A0EZaxENL15sE0Kc5zyshGTYCbtCqwK5kGEHhAMikG851lg
- JmjU5Sd2sSY4lj7UhuTKywxXEh+B/fdTeC6NlEw4xd5Eiej3WB938Hk+BYZzimm88xjt
- 7S8IU/eRDHDhAaPonAXs0wopLFBt950qY5ydaxAOOGFd4EvC2dtIRU1xSmVKCyzGOK9Y
- /EofbMWvo23Zchgam9t/mPyHMf7EpoORXWHuBTb7l2JCwQIOCKnWnzGqy+lOGYSuhpbT
- 67Nw==
-X-Gm-Message-State: AOJu0YzqEbn5Mm/phlbYZMs8pFhqhtRUzeR6mcPVK0O+zt8Pr3tepf8K
- l3BRRBzwDkbkO50ng/MC58hBklNfdsrntOwYDhr5EUEj4hm3QgsvOn+hyb5UFLi2Zo7gy9zkPrk
- Z
-X-Google-Smtp-Source: AGHT+IFZD2rsKlMdvB7Vp9AAx5vYjmNlDQd5AuI9sav608qO74BlNt8/852PL1hryXctrO+yFPnrAg==
-X-Received: by 2002:a05:620a:24cf:b0:7a1:c40c:2f7b with SMTP id
- af79cd13be357-7a689715fd7mr1385474485a.30.1724697201804; 
- Mon, 26 Aug 2024 11:33:21 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a67f318e1bsm480426585a.27.2024.08.26.11.33.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Aug 2024 11:33:21 -0700 (PDT)
-Date: Mon, 26 Aug 2024 12:33:18 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v2 26/35] global_data: Reduce size of early-malloc vars
-Message-ID: <20240826183318.GL2479150@bill-the-cat>
-References: <20240821161927.695717-1-sjg@chromium.org>
- <20240821161927.695717-27-sjg@chromium.org>
- <20240823133450.GA1627158@bill-the-cat>
- <CAFLszThQKH-pM1nTNJv5HwLanc9tGL4ZgvPLzxWk48LmxHa+NQ@mail.gmail.com>
- <20240823210723.GY1626301@bill-the-cat>
- <CAFLszTirvuCkhb7BTj84Y3oNey34fmi=+V=fFTwb73rV428i=Q@mail.gmail.com>
- <20240823214940.GC2479150@bill-the-cat>
- <CAFLszTh5JTmtm55TrHTpHSjYPzGSyxBVOa8hG=yUVfPg1y3jsw@mail.gmail.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1724698232; x=1725303032; i=xypron.glpk@gmx.de;
+ bh=H7FQSml9Ts+9TSE9GdHBuF6CIJEek1OozTCQyFBHeuI=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=klRi4P2PeaZLFgKI0yO5hJaSNlNLHRico33bXIwa4XJ4R8IgNyNOjpTn1Cc0NHUN
+ ai2rmKoG7S2eg0yYoJmJ9StHcd3xgqPW1nEhBZ4h6BFKlWYV50JkNteYtETl0Tp83
+ XAfPZQlOhycMt0MCu0XRg5ycQebT28M6R+n8gvf/iwYAPYS0zvBmvXUbparqXeau6
+ E9JXl1sRqnowf4ipDLqv48r/stl0gWH6ENoQHk4Tw24eEB1fqGoKfmtd+vmU/Zsec
+ W+ieTdFY0hp4QxrZwzOG5O1fuFW2pZmW1WjqNaVL70pqKsnZhDQFae+DEKRBN9sDE
+ TlgXur8SXWWRxgINcg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.143.105] ([46.114.229.134]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M1Hdw-1sgzpq1Dn0-005Amu; Mon, 26
+ Aug 2024 20:50:32 +0200
+Message-ID: <57af7831-850d-4e9d-8fcd-5ad03f8538dd@gmx.de>
+Date: Mon, 26 Aug 2024 20:50:28 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="NUM05neTvLMfnqDM"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTh5JTmtm55TrHTpHSjYPzGSyxBVOa8hG=yUVfPg1y3jsw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/10] SMBIOS improvements
+To: Tom Rini <trini@konsulko.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Bin Meng
+ <bmeng@tinylab.org>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Stefan Roese <sr@denx.de>, =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
+ Wan Yee Lau <wan.yee.lau@intel.com>, Alexander Gendin <agendin@matrox.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Sean Anderson <seanga2@gmail.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>
+References: <20240816154658.1866186-1-raymond.mao@linaro.org>
+ <CAFLszTjE+8BmdmtFXER94LmEYshNDEA4x_MDTqvyGhHYed2OCw@mail.gmail.com>
+ <ffeb90f8-4f3b-4455-83db-d7b03b872c84@linaro.org>
+ <CAFLszTg8gM53pcbHGj-LoA9GDSU-X294_q6ZRnP_QjYFppG0sw@mail.gmail.com>
+ <20240826182345.GJ2479150@bill-the-cat>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240826182345.GJ2479150@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:X3nKlHY+ZczJlhGne0tmwlrZG+I7TvH6H8IHBiLKMzdnol0tAI6
+ QFCTGwPxLeobnrsBimVG3qiFgVJDZnpppgjKsqHEXsQ52bNMMtt5SkNhs5XL5ox5xJ6VEPB
+ H8wLaEh/0tvt6pJLTAkMKP41YmTosisGZrffM8MgNAsIx8hKeh47q98ICyJkEb9Irvz8vwe
+ usqBC4/NMDNekjYbPaAqQ==
+UI-OutboundReport: notjunk:1;M01:P0:YxmohzHArJk=;Y93MnY4LCGaiYdHU353u7IISnt7
+ j5PjCoCdYqmdd49zEPgb+OgDuscKnEOcyAZQdaNsHFEI62S6VJ5wbqYQwDXMosmwLU6I/1jFN
+ 3igAOsO7+3gowCjEsR8CiNaWuugirC1RGdRdub4D8czxF3HvFS6yanZF4qqIhQ65voJuBPXzu
+ rFyDOo+YOsyM2IGyWgAWSlhykPjeX1LcRHbaHQO46rmhEQKHlHrXA4Y7dmuhUJ1AjAw1r/luC
+ x7Z3t0vMSTEd80COU6otvS/EJJonBehdDXDRi0WqknPyFw1NEcGpoHlExgSOWG0K8zyoAgsQz
+ J1/apj36ZoHRUH31cRfmDmh4Cd2+UU8D7tE6Kynvyo8kSPLcQ4RqcYtZcsSdjZyCuH6ky/frS
+ /bV1GcXwt1oCsyLwOzO+kVLPpQ7X9cu2Q5SJKOEAXv/CTD7+Q5WoX1oF2DjwrV3Bh/Z/mJGPn
+ cXubTWXR2BEZnJfCxv3/wkXS10h7bhsG/FLiPl9Ib2TTouB9afbz7Muy9IvCOjr+YKTp/DJTd
+ Gqr+Dl5njt6m9TJ1nEj9ZkyIcC4l8NEqQ62Y8JwVP7FnguRc/Wexo930w+RzJ9VyAkizYNBOg
+ m5+FHBWH1sbBUPEYugquhXr30gfFphzBnZbSWXbU5kXZqqvHN6vSibHRU5aWEfxMo6tDeRW6j
+ qR+VlvE55X+OkxNjd7Q9ZAS1f07zeH1ImKWj8uCmOiu/ig6ulmBhIX3dhvYM9qT7LXcIaVFXh
+ kAF6W+8tM6DUU9L1Zun+C+WKr0ZLeTjAG9C0D3zrya626SEUq7pfj36T4fUestqCtMz1TIZFt
+ uQQ1CnKINU4/2JzhemUtz42BLPIJ+g6gm2IVj74cgyPxU=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,150 +107,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 8/26/24 20:23, Tom Rini wrote:
+> On Mon, Aug 26, 2024 at 11:58:54AM -0600, Simon Glass wrote:
+>> Hi Caleb,
+>>
+>> On Mon, 19 Aug 2024 at 17:03, Caleb Connolly <caleb.connolly@linaro.org=
+> wrote:
+>>>
+>>> Hi Simon,
+>>>
+>>>> As a general comment, this is adding a load of code which is used by =
+a
+>>>> lot of platforms. As more and more aarch64 platforms are created, thi=
+s
+>>>> data grows. Why not use the devicetree for this hardware information?
+>>>> That is what it is for.
+>>>
+>>> This data does not belong in devicetree, the various system registers
+>>> exist to describe this information... Putting it in DT would be
+>>> duplicating it.
+>>
+>> I am not wanting to duplicate info which can be read from system regist=
+ers.
+>>
+>>>
+>>> Using DT for this would additionally require having bindings accepted
+>>> upstream and for all SoCs to add them. To what end?
+>>
+>> To get the correct information in there. How are boards supposed to
+>> add SMBIOS info? Do we end up creating a whole infra in U-Boot just
+>> for the driver to read it out? It just doesn't make any sense to me...
+>>
+>> Let's put hardware info in the DT where it belongs.
+>
+> I'm a little confused here because of some older threads on this overall
+> topic. Part of the issue here is that in user space, "everyone" has
+> SMBIOS-based tooling today, and wants to have that work, rather than
+> inventing new tooling or modify existing tooling. And you were concerned
+> I thought that we had tied SMBIOS too much to EFI being present when
+> indeed it should be possible to pass the location along to the OS
+> without EFI, but at the time Linux at least only supported that notion
+> on MIPS I think?
+>
 
---NUM05neTvLMfnqDM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Looking at the Linux kernel code, only x86 can discover an SMBIOS table
+without EFI. We should not ride that dead horse.
 
-On Fri, Aug 23, 2024 at 05:30:48PM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Fri, 23 Aug 2024 at 15:49, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Fri, Aug 23, 2024 at 03:44:45PM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Fri, 23 Aug 2024 at 15:07, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Fri, Aug 23, 2024 at 02:30:04PM -0600, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Fri, 23 Aug 2024 at 07:34, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Wed, Aug 21, 2024 at 10:19:18AM -0600, Simon Glass wrote:
-> > > > > >
-> > > > > > > The early malloc region is normally quite small and is certai=
-nly less
-> > > > > > > than 4GB, so use a 32-bit value for the limit and pointer. Up=
-date the
-> > > > > > > comment for clarity while we are here.
-> > > > > > >
-> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > ---
-> > > > > > >
-> > > > > > > (no changes since v1)
-> > > > > > >
-> > > > > > >  arch/arm/lib/bdinfo.c             | 2 +-
-> > > > > > >  common/board_r.c                  | 2 +-
-> > > > > > >  common/malloc_simple.c            | 7 ++++---
-> > > > > > >  common/spl/spl.c                  | 4 ++--
-> > > > > > >  include/asm-generic/global_data.h | 6 +++---
-> > > > > > >  5 files changed, 11 insertions(+), 10 deletions(-)
-> > > > > >
-> > > > > > This breaks booting on am64x_evm_a53 which is an odd platform t=
-hat does
-> > > > > > SPL->SPL->U-Boot.
-> > > > >
-> > > > > OK, I can repeat that on the Beagleplay in my lab. I sent a v3 pa=
-tch.
-> > > > > Thanks for bisecting.
-> > > >
-> > > > Oh good, beagleplay is run after the EVM in my loop and so I didn't=
- see
-> > > > it was broken there too.
-> > > >
-> > > > > I'd love to be able to push trees to gitlab and have them run on =
-my
-> > > > > lab. I think you said that the patches[1] break your lab, so let =
-me
-> > > > > know if there is anything I can fix.
-> > > > >
-> > > > > Regards,
-> > > > > Simon
-> > > > >
-> > > > > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=3D420=
-392
-> > > >
-> > > > Well the good news is that I've got the tests running again here, a=
-nd I
-> > > > think I mostly understand where the challenges will be in updating =
-this
-> > > > lab to a newer labgrid version and so being able to migrate it to o=
-n top
-> > > > of your patches. The challenge next will be time. Likely the next s=
-teps
-> > > > will be splitting out your serieses in to test fixes and labgrid
-> > > > implementation details.
-> > >
-> > > I just sent v3 of the u-boot-test-hooks series. That needs to be in
-> > > for Labgrid to work.
-> >
-> > Yes, thanks. It reminded me how far apart what you have is from what I
-> > have, for labgrid.
->=20
-> Oh...is it posted somewhere?
+Best regards
 
-I posted it in response to your other lab grid series at various points.
-At this point there's not much too it because it's just one-liners more
-or less like:
-$ cat console.labgrid
-exec $LG_CLIENT -c $LG_ENV console
-
-and so forth (and LG_CLIENT shouldn't be abstracted honestly, it should
-just be labgrid-client).
-
-> > > The only other series is [1] which makes the integration nicer, but is
-> > > not necessary. That makes sense since we still want the lab to be able
-> > > to test older commits.
-> > >
-> > > From that series patch [2] fixes a problem which breaks pytest runs,
-> > > since without it, pytest gets a double echo of a few of the characters
-> > > of the first command it sends. It is a pretty annoying problem which
-> > > took a while to figure out. I tried very hard to fix it without
-> > > patching U-Boot's pytest code, but I gave up. One thought I just had
-> > > is that it is possible that setting up the terminal in the
-> > > u-boot-test-console script might work most of the time, i.e. before
-> > > calling Labgrid.
-> >
-> > I know with previous iterations of all of the test cleanups and changes
-> > you did, my non-labgrid lab also started failing immediately. Keeping in
-> > mind that today I run all of the pytests on a few hardware platforms,
-> > both with and without labgrid, I need to see what changes you've done
-> > lead to what behavior changes here, and then eventually get things
-> > boiled down to just the your labgrid implementation specific parts, and
-> > see how to work with them, or if it's too far away from the rest of my
-> > use case.
->=20
-> It might have been that it stopped running conf.xxx files...I fixed that =
-in v3.
->=20
-> OK, I will wait to hear.
-
-It was I think a lack of the new top-level scripts being present, I
-think. We might need to re-work that part of the series to be 3 parts,
-where release.none/u-boot-test-release are added in preparation for
-adding the labgrid specific one.
-
---=20
-Tom
-
---NUM05neTvLMfnqDM
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbMym4ACgkQFHw5/5Y0
-tywXGAv/RAAmVeN4DoDeQBveOH+rZ/DleMy/RZxT5MUOickd8XrCufRXTDKA/749
-YjFeQaDJ4ngctKySgq5g2QyiZsoVkrbaqUqx5Rv835soirT5jJw5uYwpg7UPxRmB
-nafHHA3DIceJj5nDD5Rpn8AQ7zfB2797Di5AkDOtzWOwHov1bR6yiccqNsOaqsw9
-tVq5d5ql4Rp0sdSLBziE+dyp8X1DmSSDKpzdGqgMUZkOaSEMloawv2YTE1LH1KDb
-7ADcmU8oPhdSQkJutEEGY3WYaqVvn7a6cvNT+a++ZzdROO7CpDB5PLKw/KxTGzVG
-Cudnziqxh/nPonbn3U4vw3pWnLDYT6Yg3jwM8VL7s4rnBS+LDAX2ZpQ0ToeeIaey
-v/uNDSJ2dRD2k1YmOCVnS+7itW4Zp2Or2QKYfh/mXmQDwH7VIXqsXXVHXvwepRTg
-2Z9CYlbTVq/6/l+T29STSt1NkWzVdYlzF03/HxWmEw4K1XST/H2VX3s/I1K4gCvW
-k2PwDrh0
-=VwlQ
------END PGP SIGNATURE-----
-
---NUM05neTvLMfnqDM--
+Heinrich
