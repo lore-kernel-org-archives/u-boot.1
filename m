@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2E7EC5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 12:01:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B03A4C5321D
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 12:02:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1E788641A;
-	Mon, 26 Aug 2024 14:00:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1AFCF88A8B;
+	Mon, 26 Aug 2024 14:01:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B0D788A12; Mon, 26 Aug 2024 14:00:55 +0200 (CEST)
+ id 6FD6888B0C; Mon, 26 Aug 2024 14:01:01 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 4E1B68641A
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 14:00:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 8DF1588B02
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 14:00:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EFCD6DA7;
- Mon, 26 Aug 2024 05:01:18 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3B90211FB;
+ Mon, 26 Aug 2024 05:01:23 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 186EE3F762;
- Mon, 26 Aug 2024 05:00:48 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 57C3D3F762;
+ Mon, 26 Aug 2024 05:00:53 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
@@ -37,9 +37,9 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Patrice CHOTARD <patrice.chotard@foss.st.com>,
  =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v4 11/27] lmb: reserve common areas during board init
-Date: Mon, 26 Aug 2024 17:29:24 +0530
-Message-Id: <20240826115940.3233167-12-sughosh.ganu@linaro.org>
+Subject: [PATCH v4 12/27] lmb: remove the lmb_init_and_reserve() function
+Date: Mon, 26 Aug 2024 17:29:25 +0530
+Message-Id: <20240826115940.3233167-13-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240826115940.3233167-1-sughosh.ganu@linaro.org>
 References: <20240826115940.3233167-1-sughosh.ganu@linaro.org>
@@ -61,98 +61,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The LMB module provides API's for allocating and reserving chunks of
-memory which is then typically used for things like loading images for
-booting. Reserve the portion of memory that is occupied by the U-Boot
-image itself, and other parts of memory that might have been marked as
-reserved in the board's DTB. When executing in SPL, reserve the
-sections that get relocated to the ram memory, the stack and
-the global data structure and also the bss.
-
-Mark these regions of memory with the LMB_NOOVERWRITE flag to indicate
-that these regions cannot be re-requested or overwritten.
+With the changes to make the LMB reservations persistent, the common
+memory regions are being added during board init. Remove the
+now superfluous lmb_init_and_reserve() function.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
-Changes since V3:
-* Fix the alignment in arch_lmb_reserve_generic() as suggested by
-  checkpatch.
+Changes since V3: None
 
+ arch/arm/mach-apple/board.c          |  2 --
+ arch/arm/mach-snapdragon/board.c     |  2 --
+ arch/arm/mach-stm32mp/stm32mp1/cpu.c |  3 ---
+ cmd/bdinfo.c                         |  1 -
+ cmd/load.c                           |  2 --
+ fs/fs.c                              |  1 -
+ include/lmb.h                        |  1 -
+ lib/lmb.c                            | 13 -------------
+ net/tftp.c                           |  2 --
+ net/wget.c                           |  2 --
+ 10 files changed, 29 deletions(-)
 
- lib/lmb.c | 36 ++++++++++++++++++++++++++++++++++--
- 1 file changed, 34 insertions(+), 2 deletions(-)
-
+diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
+index 213390d6e8..0b6d290b8a 100644
+--- a/arch/arm/mach-apple/board.c
++++ b/arch/arm/mach-apple/board.c
+@@ -775,8 +775,6 @@ int board_late_init(void)
+ {
+ 	u32 status = 0;
+ 
+-	lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
+-
+ 	/* somewhat based on the Linux Kernel boot requirements:
+ 	 * align by 2M and maximal FDT size 2M
+ 	 */
+diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+index a63c8bec45..22a7d2a637 100644
+--- a/arch/arm/mach-snapdragon/board.c
++++ b/arch/arm/mach-snapdragon/board.c
+@@ -282,8 +282,6 @@ int board_late_init(void)
+ {
+ 	u32 status = 0;
+ 
+-	lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
+-
+ 	/* We need to be fairly conservative here as we support boards with just 1G of TOTAL RAM */
+ 	status |= env_set_hex("kernel_addr_r", addr_alloc(SZ_128M));
+ 	status |= env_set_hex("ramdisk_addr_r", addr_alloc(SZ_128M));
+diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+index a913737342..64480da9f8 100644
+--- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
++++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
+@@ -141,9 +141,6 @@ int mach_cpu_init(void)
+ 
+ void enable_caches(void)
+ {
+-	/* parse device tree when data cache is still activated */
+-	lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
+-
+ 	/* I-cache is already enabled in start.S: icache_enable() not needed */
+ 
+ 	/* deactivate the data cache, early enabled in arch_cpu_init() */
+diff --git a/cmd/bdinfo.c b/cmd/bdinfo.c
+index b31e0208df..3c40dee143 100644
+--- a/cmd/bdinfo.c
++++ b/cmd/bdinfo.c
+@@ -162,7 +162,6 @@ static int bdinfo_print_all(struct bd_info *bd)
+ 	bdinfo_print_num_l("multi_dtb_fit", (ulong)gd->multi_dtb_fit);
+ #endif
+ 	if (IS_ENABLED(CONFIG_LMB) && gd->fdt_blob) {
+-		lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
+ 		lmb_dump_all_force();
+ 		if (IS_ENABLED(CONFIG_OF_REAL))
+ 			printf("devicetree  = %s\n", fdtdec_get_srcname());
+diff --git a/cmd/load.c b/cmd/load.c
+index 56da3a4c5d..20d802502a 100644
+--- a/cmd/load.c
++++ b/cmd/load.c
+@@ -153,8 +153,6 @@ static ulong load_serial(long offset)
+ 	int	line_count =  0;
+ 	long ret;
+ 
+-	lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
+-
+ 	while (read_record(record, SREC_MAXRECLEN + 1) >= 0) {
+ 		type = srec_decode(record, &binlen, &addr, binbuf);
+ 
+diff --git a/fs/fs.c b/fs/fs.c
+index 3fb00590be..4bc28d1dff 100644
+--- a/fs/fs.c
++++ b/fs/fs.c
+@@ -549,7 +549,6 @@ static int fs_read_lmb_check(const char *filename, ulong addr, loff_t offset,
+ 	if (len && len < read_len)
+ 		read_len = len;
+ 
+-	lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
+ 	lmb_dump_all();
+ 
+ 	if (lmb_alloc_addr(addr, read_len) == addr)
+diff --git a/include/lmb.h b/include/lmb.h
+index 70191456e5..04558724a7 100644
+--- a/include/lmb.h
++++ b/include/lmb.h
+@@ -63,7 +63,6 @@ struct lmb {
+  */
+ int lmb_init(void);
+ 
+-void lmb_init_and_reserve(struct bd_info *bd, void *fdt_blob);
+ void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
+ 				void *fdt_blob);
+ 
 diff --git a/lib/lmb.c b/lib/lmb.c
-index 44ecf96811..9b1854223d 100644
+index 9b1854223d..de4d0d1803 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -13,6 +13,7 @@
- #include <lmb.h>
- #include <log.h>
- #include <malloc.h>
-+#include <spl.h>
- 
- #include <asm/global_data.h>
- #include <asm/sections.h>
-@@ -172,10 +173,11 @@ void arch_lmb_reserve_generic(ulong sp, ulong end, ulong align)
- 		if (bank_end > end)
- 			bank_end = end - 1;
- 
--		lmb_reserve(sp, bank_end - sp + 1);
-+		lmb_reserve_flags(sp, bank_end - sp + 1, LMB_NOOVERWRITE);
- 
- 		if (gd->flags & GD_FLG_SKIP_RELOC)
--			lmb_reserve((phys_addr_t)(uintptr_t)_start, gd->mon_len);
-+			lmb_reserve_flags((phys_addr_t)(uintptr_t)_start,
-+					  gd->mon_len, LMB_NOOVERWRITE);
- 
- 		break;
- 	}
-@@ -246,6 +248,30 @@ void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
- 	lmb_reserve_common(fdt_blob);
+@@ -227,19 +227,6 @@ static void lmb_reserve_common(void *fdt_blob)
+ 		efi_lmb_reserve();
  }
  
-+static __maybe_unused void lmb_reserve_common_spl(void)
-+{
-+	phys_addr_t rsv_start;
-+	phys_size_t rsv_size;
-+
-+	/*
-+	 * Assume a SPL stack of 16KB. This must be
-+	 * more than enough for the SPL stage.
-+	 */
-+	if (IS_ENABLED(CONFIG_SPL_STACK_R_ADDR)) {
-+		rsv_start = gd->start_addr_sp - 16384;
-+		rsv_size = 16384;
-+		lmb_reserve_flags(rsv_start, rsv_size, LMB_NOOVERWRITE);
-+	}
-+
-+	if (IS_ENABLED(CONFIG_SPL_SEPARATE_BSS)) {
-+		/* Reserve the bss region */
-+		rsv_start = (phys_addr_t)(uintptr_t)__bss_start;
-+		rsv_size = (phys_addr_t)(uintptr_t)__bss_end -
-+			(phys_addr_t)(uintptr_t)__bss_start;
-+		lmb_reserve_flags(rsv_start, rsv_size, LMB_NOOVERWRITE);
-+	}
-+}
-+
- /**
-  * lmb_add_memory() - Add memory range for LMB allocations
-  *
-@@ -735,6 +761,12 @@ int lmb_init(void)
+-/* Initialize the struct, add memory and call arch/board reserve functions */
+-void lmb_init_and_reserve(struct bd_info *bd, void *fdt_blob)
+-{
+-	int i;
+-
+-	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+-		if (bd->bi_dram[i].size)
+-			lmb_add(bd->bi_dram[i].start, bd->bi_dram[i].size);
+-	}
+-
+-	lmb_reserve_common(fdt_blob);
+-}
+-
+ /* Initialize the struct, add memory and call arch/board reserve functions */
+ void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
+ 				void *fdt_blob)
+diff --git a/net/tftp.c b/net/tftp.c
+index 99b2ab9fca..b5d227d8bc 100644
+--- a/net/tftp.c
++++ b/net/tftp.c
+@@ -718,8 +718,6 @@ static int tftp_init_load_addr(void)
+ 	if (CONFIG_IS_ENABLED(LMB)) {
+ 		phys_size_t max_size;
  
- 	lmb_add_memory();
+-		lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
+-
+ 		max_size = lmb_get_free_size(image_load_addr);
+ 		if (!max_size)
+ 			return -1;
+diff --git a/net/wget.c b/net/wget.c
+index 241465b9b4..4a168641c6 100644
+--- a/net/wget.c
++++ b/net/wget.c
+@@ -75,8 +75,6 @@ static int wget_init_load_size(void)
+ {
+ 	phys_size_t max_size;
  
-+	/* Reserve the U-Boot image region once U-Boot has relocated */
-+	if (spl_phase() == PHASE_SPL)
-+		lmb_reserve_common_spl();
-+	else if (spl_phase() == PHASE_BOARD_R)
-+		lmb_reserve_common((void *)gd->fdt_blob);
-+
- 	return 0;
- }
- 
+-	lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
+-
+ 	max_size = lmb_get_free_size(image_load_addr);
+ 	if (!max_size)
+ 		return -1;
 -- 
 2.34.1
 
