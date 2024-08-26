@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89CDEC5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 07:17:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7669EC5321E
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 08:24:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF10088602;
-	Mon, 26 Aug 2024 09:16:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 8CB1C88770;
+	Mon, 26 Aug 2024 10:24:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="DBsgFPvm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qfEN28sO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1292888606; Mon, 26 Aug 2024 09:16:58 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 1E4C28891B; Mon, 26 Aug 2024 10:24:23 +0200 (CEST)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDF01885F1
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 09:16:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id EF2B0886DF
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 10:24:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-a86a0b5513aso294721266b.1
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 00:16:55 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-201fba05363so29643555ad.3
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 01:24:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1724656615; x=1725261415;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QisOR/gLmN27F6OTvYePTPqmJyH4b5pHnoOYVVShNoU=;
- b=DBsgFPvm085DzxX6eeU6cV/poSCOhIhrfD4rvYTIx/eMfXInmMz35Va6sFL/5Poutl
- E9qT284TNlHx4Fq83oGueGl21udFFTrggj5V4dLsYldF+Nj6t2shNVmodyPwgeB8LtFm
- z3dbt5L4pIiwUsgB23HGs4TKsC5tUqLdnMpFk=
+ d=linaro.org; s=google; t=1724660658; x=1725265458; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=UIhvC3uSl7quKivHr1apK8aHXCH7wHb7PU/bITSS5oE=;
+ b=qfEN28sOTx3I34tqDE9l7S05biKveSBWU6GqK08V51f6jAcmxR91rdwwrOTvK+KBJr
+ D98Zjklkqkz+lNfQ+rPp6u0iQ0mH1rFH4f+ESnujEqL01ePbQ3sZvykZ6cPSKZ7xaz5w
+ w8v70fwhkLq3j6yjga7+ig32wE81hUuiAl2v+nT3nnuE1yJXaYRZ4Mu3r90Nxfke5O2r
+ Z9XO4zYiZ+ZmM09HQcGhq2yvvivdfamvs9in9/37UP5Gk5IOydgkmHQKnvWR63hDMYeO
+ rXp8afzRAWA+8x12qvX4IHFc2lXbw9KGXH5khwDm+ObirPWLL2k5fC9REmTl0TkDUsXc
+ 17uQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724656615; x=1725261415;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QisOR/gLmN27F6OTvYePTPqmJyH4b5pHnoOYVVShNoU=;
- b=j7be+R0cPm97xIJbdqXK5Im1METFW76A3O0IQ+/1Til0blo0B0yOkjl3YkRDjeJXWw
- rHitO84SeEotJr34oiZEKi5XPY5Qq80R41OZfm/b4keJcG74TdL6NdC3m+rkQZ9J/8Pk
- qDKL6eiENrK6LqbucOGZMIzDwsqQS07D+Yiyj8iFSZvY25peyYDML7c674XZF2NWY85j
- CMpndtxQ/7v9Pd6VcN2wCwnIDoxi0ECGRbANsPJXv4iIhbvWIPsErPOkAtX9fVic1RFf
- W5P0YHkJKkNVedDCRYUVCZZainRdHjI3n097fsIJ9wdXC2BHgYzWq9NdCx8img/81P9z
- Xyww==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWCR/11Qb7+fr5DiSn/tFfW4khXMHD8IanhA/D1DXIevhd+3xuxZvhkjhTXcrxcon15Rrp7mhM=@lists.denx.de
-X-Gm-Message-State: AOJu0YylRFbIeQxP3xVLhDdNcgF7O0tkBaNJirR7WFPxQHaVwx4i9zSB
- goxg4DSozXdcjXF9z7KZ/jJZ+PY+Z4FQFxYH98w7uDYNWekVKDIvd2BhwFmSv00zy7wql8RdMVB
- GE403GRSzHideoYeNfvcC0AmCBgey5oPRzS2rTA==
-X-Google-Smtp-Source: AGHT+IHat6uplQki7KBfQDd8oriuSxRhU1GzKNcgbFs0uH0phsyrDlz8sRNehnTUsWmiXtWWUSlcZTCab+bq4Bu3qIY=
-X-Received: by 2002:a17:907:f742:b0:a7d:3cf6:48d1 with SMTP id
- a640c23a62f3a-a86a52ec041mr520659866b.32.1724656614847; Mon, 26 Aug 2024
- 00:16:54 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1724660658; x=1725265458;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=UIhvC3uSl7quKivHr1apK8aHXCH7wHb7PU/bITSS5oE=;
+ b=gS3qpV/pFBZzqP1kwT5D7IWPYDgTp+gJ22Z7MHggWeLTr1AlbcOq/BWQzaTcGYPgfV
+ qEnfBg9z8nGbnmPibeqAyHsqMTl4tS3C3cYmFFPhelc+WOJTAUOWnUi5K4l6JhRqpYME
+ IgfFZf41EYuQcQ7k3tB51a5I9ejOwDZfk3VAfAY778HQk4yhej0tN/k2FQ2WvbXFE1PG
+ 963Iq9ErvMs678TdHYSZXx33unyC6o4bBwKQKdxVl/Zucf9dePHk4G1cVNLyIENNYGDF
+ JuvdYMDbJJcGoV5XFm65OdYj9pr7Ovc5u7Up23f/UweNxYEoJA5AsLnVfPeAULIPbefb
+ G7aA==
+X-Gm-Message-State: AOJu0YzfIjEf8IpatFqs108JLMadXRIDfWmQ7AnaBk+TR7pHrWlwFShm
+ 3tl4ZTr+thHmQ5FDaKd30/wyDxTJbQTxogWPYE851uDaHaZbiqWtkxY9k2SVoprx3mcfR1zllXs
+ OeNXHMN016xMdSwkWSDLJn19MYMxJS7YpeKXn6A==
+X-Google-Smtp-Source: AGHT+IG8Kfh2CTTsp5XI5+mKDhHS6mAP0tzyiCmp1kyO6Q18kt/bqsAYUA1Ccj1nnNaP/U8M1qKJlPnkXoqzNZV+BqY=
+X-Received: by 2002:a17:902:d512:b0:202:51ca:9831 with SMTP id
+ d9443c01a7336-2039e570630mr94531845ad.49.1724660658072; Mon, 26 Aug 2024
+ 01:24:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240826060411.3532105-1-avkrasnov@salutedevices.com>
- <20240826060411.3532105-4-avkrasnov@salutedevices.com>
-In-Reply-To: <20240826060411.3532105-4-avkrasnov@salutedevices.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Mon, 26 Aug 2024 09:16:44 +0200
-Message-ID: <CAOf5uw=UuB1YandpEziF1gp3Amh1J9fk15YCM7J4FZW6zoq7GA@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] mtd: rawnand: meson: read/write access for boot
- ROM pages
-To: Arseniy Krasnov <avkrasnov@salutedevices.com>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>,
- u-boot@lists.denx.de, 
- u-boot-amlogic@groups.io, kernel@sberdevices.ru, oxffffaa@gmail.com
+References: <20240821105839.2870293-1-sughosh.ganu@linaro.org>
+ <20240821105839.2870293-19-sughosh.ganu@linaro.org>
+In-Reply-To: <20240821105839.2870293-19-sughosh.ganu@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 26 Aug 2024 11:23:41 +0300
+Message-ID: <CAC_iWj+RJF8ewArUwJnRgiy+g792hFP61OpJv=+zysMpJYX=Ng@mail.gmail.com>
+Subject: Re: [PATCH v3 18/27] lmb: remove the unused board_lmb_reserve()
+ function
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,182 +92,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
-
-On Mon, Aug 26, 2024 at 8:17=E2=80=AFAM Arseniy Krasnov
-<avkrasnov@salutedevices.com> wrote:
+On Wed, 21 Aug 2024 at 14:00, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Boot ROM on Meson needs some pages to be read/written in a special mode:
-> 384 byte ECC mode (so called "short" by Amlogic) and with scrambling
-> enabled. Such pages are located on the chip in the following way (for
-> example):
+> The board_lmb_reserve() function is not being used, and currently
+> there is only an empty weak function defined. Remove this unused
+> function.
 >
-> [ p0 ][ p1 ][ p2 ][ p3 ][ p4 ][ p5 ][ p6 ][ p7 ] ... [ pN ]
->   ^           ^           ^           ^
->
-> pX is page number "X". "^" means "special" page used by boot ROM - e.g.
-> every 2nd page in the range of [0, 7]. Step (2 here) and last page in
-> range is read from the device tree.
->
-> Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
->  drivers/mtd/nand/raw/meson_nand.c | 56 +++++++++++++++++++++++++------
->  1 file changed, 46 insertions(+), 10 deletions(-)
+> Changes since V2: New patch
 >
-> diff --git a/drivers/mtd/nand/raw/meson_nand.c b/drivers/mtd/nand/raw/mes=
-on_nand.c
-> index 19f005202b..54ea035d8d 100644
-> --- a/drivers/mtd/nand/raw/meson_nand.c
-> +++ b/drivers/mtd/nand/raw/meson_nand.c
-> @@ -40,6 +40,7 @@
->  #define NFC_CMD_RB                     BIT(20)
->  #define NFC_CMD_SCRAMBLER_ENABLE       BIT(19)
->  #define NFC_CMD_SCRAMBLER_DISABLE      0
-> +#define NFC_CMD_SHORTMODE_ENABLE       1
->  #define NFC_CMD_SHORTMODE_DISABLE      0
->  #define NFC_CMD_RB_INT                 BIT(14)
->  #define NFC_CMD_RB_INT_NO_PIN          ((0xb << 10) | BIT(18) | BIT(16))
-> @@ -78,6 +79,8 @@
+>  include/lmb.h | 2 --
+>  lib/lmb.c     | 6 ------
+>  2 files changed, 8 deletions(-)
 >
->  #define DMA_DIR(dir)           ((dir) ? NFC_CMD_N2M : NFC_CMD_M2N)
+> diff --git a/include/lmb.h b/include/lmb.h
+> index 6e435bd35c..79bd2457d3 100644
+> --- a/include/lmb.h
+> +++ b/include/lmb.h
+> @@ -107,8 +107,6 @@ long lmb_free(phys_addr_t base, phys_size_t size);
+>  void lmb_dump_all(void);
+>  void lmb_dump_all_force(void);
 >
-> +#define NFC_SHORT_MODE_ECC_SZ  384
-> +
->  #define ECC_CHECK_RETURN_FF    -1
+> -void board_lmb_reserve(void);
+> -
+>  #if CONFIG_IS_ENABLED(UNIT_TEST)
+>  struct lmb *lmb_get(void);
+>  int lmb_push(struct lmb *store);
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index 1116b2b868..11959760b6 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -221,7 +221,6 @@ static void lmb_reserve_uboot_region(void)
 >
->  #define NAND_CE0               (0xe << 10)
-> @@ -141,6 +144,8 @@
->  struct meson_nfc_nand_chip {
->         struct list_head node;
->         struct nand_chip nand;
-> +       u32 boot_pages;
-> +       u32 boot_page_step;
+>  static void lmb_reserve_common(void *fdt_blob)
+>  {
+> -       board_lmb_reserve();
+>         lmb_reserve_uboot_region();
 >
->         u32 bch_mode;
->         u8 *data_buf;
-> @@ -229,33 +234,46 @@ static void meson_nfc_cmd_seed(const struct meson_n=
-fc *nfc, u32 seed)
->                nfc->reg_base + NFC_REG_CMD);
+>         if (CONFIG_IS_ENABLED(OF_LIBFDT) && fdt_blob)
+> @@ -688,11 +687,6 @@ int lmb_is_reserved_flags(phys_addr_t addr, int flags)
+>         return 0;
 >  }
 >
-> +static int meson_nfc_is_boot_page(struct nand_chip *nand, int page)
-> +{
-> +       const struct meson_nfc_nand_chip *meson_chip =3D to_meson_nand(na=
-nd);
-> +
-> +       return (nand->options & NAND_IS_BOOT_MEDIUM) &&
-> +              !(page % meson_chip->boot_page_step) &&
-> +              (page < meson_chip->boot_pages);
-> +}
-> +
->  static void meson_nfc_cmd_access(struct nand_chip *nand, bool raw, bool =
-dir, int page)
->  {
-> +       const struct meson_nfc_nand_chip *meson_chip =3D to_meson_nand(na=
-nd);
->         struct mtd_info *mtd =3D nand_to_mtd(nand);
->         const struct meson_nfc *nfc =3D nand_get_controller_data(mtd_to_n=
-and(mtd));
-> -       const struct meson_nfc_nand_chip *meson_chip =3D to_meson_nand(na=
-nd);
-> -       u32 bch =3D meson_chip->bch_mode, cmd;
->         int len =3D mtd->writesize, pagesize, pages;
->         int scrambler;
-> +       u32 cmd;
->
->         if (nand->options & NAND_NEED_SCRAMBLING)
->                 scrambler =3D NFC_CMD_SCRAMBLER_ENABLE;
->         else
->                 scrambler =3D NFC_CMD_SCRAMBLER_DISABLE;
->
-
-scrambler depends on NAND_NEED_SCRAMBLING so suppose
-that is not set
-
-scrambler =3D NAND_NEED_SCRAMBLING;
-
-> -       pagesize =3D nand->ecc.size;
+> -__weak void board_lmb_reserve(void)
+> -{
+> -       /* please define platform specific board_lmb_reserve() */
+> -}
 > -
->         if (raw) {
->                 len =3D mtd->writesize + mtd->oobsize;
->                 cmd =3D len | scrambler | DMA_DIR(dir);
-> -               writel(cmd, nfc->reg_base + NFC_REG_CMD);
-> -               return;
-> -       }
-> +       } else if (meson_nfc_is_boot_page(nand, page)) {
-
-Now here you  seems that you don't care anymore about this option and check
-only meson_nfc_is_boot_page
-
-Is something am I missing?
-
-Michael
-
-> +               pagesize =3D NFC_SHORT_MODE_ECC_SZ >> 3;
-> +               pages =3D mtd->writesize / 512;
->
-> -       pages =3D len / nand->ecc.size;
-> +               scrambler =3D NFC_CMD_SCRAMBLER_ENABLE;
-> +               cmd =3D CMDRWGEN(DMA_DIR(dir), scrambler, NFC_ECC_BCH8_1K=
-,
-> +                              NFC_CMD_SHORTMODE_ENABLE, pagesize, pages)=
-;
-> +       } else {
-> +               pagesize =3D nand->ecc.size >> 3;
-> +               pages =3D len / nand->ecc.size;
->
-> -       cmd =3D CMDRWGEN(DMA_DIR(dir), scrambler, bch,
-> -                      NFC_CMD_SHORTMODE_DISABLE, pagesize, pages);
-> +               cmd =3D CMDRWGEN(DMA_DIR(dir), scrambler, meson_chip->bch=
-_mode,
-> +                              NFC_CMD_SHORTMODE_DISABLE, pagesize, pages=
-);
-> +       }
->
->         if (scrambler =3D=3D NFC_CMD_SCRAMBLER_ENABLE)
->                 meson_nfc_cmd_seed(nfc, page);
-> @@ -1132,6 +1150,24 @@ static int meson_nfc_nand_chip_init(struct udevice=
- *dev, struct meson_nfc *nfc,
->                 goto err_chip_buf_free;
->         }
->
-> +       if (nand->options & NAND_IS_BOOT_MEDIUM) {
-> +               ret =3D ofnode_read_u32(node, "amlogic,boot-pages",
-> +                                     &meson_chip->boot_pages);
-> +               if (ret) {
-> +                       dev_err(dev, "could not retrieve 'amlogic,boot-pa=
-ges' property: %d",
-> +                               ret);
-> +                       goto err_chip_buf_free;
-> +               }
-> +
-> +               ret =3D ofnode_read_u32(node, "amlogic,boot-page-step",
-> +                                     &meson_chip->boot_page_step);
-> +               if (ret) {
-> +                       dev_err(dev, "could not retrieve 'amlogic,boot-pa=
-ge-step' property: %d",
-> +                               ret);
-> +                       goto err_chip_buf_free;
-> +               }
-> +       }
-> +
->         ret =3D nand_register(0, mtd);
->         if (ret) {
->                 dev_err(dev, "'nand_register()' failed: %d\n", ret);
+>  static int lmb_setup(void)
+>  {
+>         bool ret;
 > --
-> 2.30.1
+> 2.34.1
 >
 
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
