@@ -4,86 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B2B3C5472D
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 17:59:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40C93C5321D
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 18:05:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1E8088AA4;
-	Mon, 26 Aug 2024 19:59:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id A01CB88B1F;
+	Mon, 26 Aug 2024 20:05:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L63CamEN";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Jj4T3/IB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E51E088981; Mon, 26 Aug 2024 19:59:09 +0200 (CEST)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id 8C996889D4; Mon, 26 Aug 2024 20:05:06 +0200 (CEST)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82553886A7
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 19:59:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6AD8E888F0
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 20:05:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6bf66fe9d8bso21798136d6.0
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 10:59:07 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-715abede256so918064b3a.3
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 11:05:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724695146; x=1725299946; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=suYgUUsam5NJCnlRO6M1nLsMpOzqcPqshJkcud5n/uM=;
- b=L63CamEN6EadoTj4IVg6O2jj3fQnbDuvk64WxcVOX0o0eK2flJkkROG4dasTevJ5W/
- tPZh/sEW3F8LesuOgA7XpsTohvE25lWplfRkPjsoe68wDkICeG4KCL/oMeC6NKYwWZaz
- ItfM3LOugOmnygnFbXH/5mR1Vfu0N1QAhPDhM=
+ d=gmail.com; s=20230601; t=1724695503; x=1725300303; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=jj7U/Uot6r+6ymS5HcpOzDbqzK/XGSFvlksSinMAU3Q=;
+ b=Jj4T3/IBnbtDgKhCOyx8jYDX3kkbrY2RfXUIDgOEG0jh+LS294946shhD7H0MDUArI
+ MNp19foE8aocZDiWyPn2TM8E0DodGeFhncmjyK5fkMqlgz2QkESuYQ7vhnuuAJmcRK8W
+ 062chC1TQqGsgZpSuXogNtLQ5budi9woZ8XTz/SfAbYi0p9aJhHBBvqaYWXUZbsCUGgM
+ x5RTIbS7aTMywqzNaxeuJdO/cOiIXCF8qzR7k8btounBb5kD7lUZ/m3H9doG6eY9HRb7
+ F2ev3M5LUhcqavhi9NDFO78ZjkfESXtWlO0Fs3Lh4Mh85MuYJEXRasw0zolKBgjnCu26
+ JWtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724695146; x=1725299946;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1724695503; x=1725300303;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=suYgUUsam5NJCnlRO6M1nLsMpOzqcPqshJkcud5n/uM=;
- b=pkuKSpRYMVSHkpLke24eHpqG4O+kP3ZEcyY7hQv3VyPz+EiF5QOK9lt3NHE0cdsGKg
- SqIHw/qMlg/SeiI0AfI5eMO2TI8jGsNNPidRt+CbngCvdCy39YTwi3ht3B0ehzZ5HPBs
- aFLASSty6nik7WG5n/xLjEPkde/2gUfI7wIOBgn/xny+RNmzsfvyf4iUvxpvqhFQc3Zq
- 7ll+6cLIPpC4PD+Txz20VJd/2xEL4p6EtDD9hlsPNbxeKiqWSehfFqzIIHQh6u8EVoxI
- 8OhqO6+tWfHCzDQFlo3g/ZdgNJlrLTMqKAElHMkoaXdBzJMtjleyP035NuUr18lieMf2
- 2wiQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX572V+dtBvMGpyo8aJepRKx9EfVMEuMXVTy/UdqkmBp/r+qaVlokSNW5v0+qs+Yd1AmCzTPE0=@lists.denx.de
-X-Gm-Message-State: AOJu0YziUXvnhQq59nfCpHjcY38mfkaRz7Nm3mjNWSTqhdWKgTm/LFKd
- WD/S4HIfANFStE8SbLVZHSfsOiEWaMjLd22azD42JAVIe4mvjjy2oCKZIvAISiZPhu+zFZKXfFD
- hm6TS8+CeZ50Dr6yD9+k58ygk0Jb2JfAy9B2T
-X-Google-Smtp-Source: AGHT+IGMoJsJgft5f2kCZo1MP0QFa40CDJS2DXssgJTz1V/c1RjY5PgH9mQZ3fCQ60i4o4s7XD+Ci4GXuF6yVgV1isc=
-X-Received: by 2002:a05:6214:318d:b0:6b5:e60c:76dc with SMTP id
- 6a1803df08f44-6c16dc604d3mr134647136d6.19.1724695146477; Mon, 26 Aug 2024
- 10:59:06 -0700 (PDT)
+ bh=jj7U/Uot6r+6ymS5HcpOzDbqzK/XGSFvlksSinMAU3Q=;
+ b=Mn2rUhsBGReHBphaSdf/D4i+hYzS7N65suZAFe+N1p2hhlmv8qJoj/SwoK+2/Gbh2V
+ xL2eR05bsCoMKurDh0O5y/5WJirZlA+ENsRYLKGyiesKLsvuAPsN8UfSFnCxhUg+nb16
+ 6G/m8xPME0LMLeAab2m1BZuR65rZXkfKOeJ1Npz6kdEn8UxyPlObxfq6WpKeCV/+qegE
+ wzEOODDwOaequtMlAIZWs20CvmvulzNbtl/t65vXnPcPXKQFlfDpgGvoBR6YVFlwKrid
+ mLio9sS0vR8/d557SDokZSNk4hggFc5J6iLxBSvcffHxFvfOH3MW6doQkUKsvvfB4NHp
+ Ru6Q==
+X-Gm-Message-State: AOJu0YzAdXPDSSLN7KGtno89zXeT/ZWxLHhcWnd00JY6dEDqFQt1mduW
+ rknojHi1CEj58CWOw+hdgfaeLMpopuqy+PYakakyVNtUigChjojw
+X-Google-Smtp-Source: AGHT+IFdMq1ltHtKxxA62c204oC5TXbojvjZEPSnABIB+Vohv5iVYT9hsE8i3aqyyGVlDLVlMBQn/A==
+X-Received: by 2002:a05:6a21:9101:b0:1c6:a66e:1dea with SMTP id
+ adf61e73a8af0-1cc8b514738mr9692134637.32.1724695502830; 
+ Mon, 26 Aug 2024 11:05:02 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:bc67:f2c3:ca16:906f])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7143422eaabsm7544947b3a.12.2024.08.26.11.05.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 26 Aug 2024 11:05:02 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: peng.fan@nxp.com
+Cc: u-boot@lists.denx.de,
+	Fabio Estevam <festevam@denx.de>
+Subject: [PATCH 1/4] mx6slevk: Convert to watchdog driver model
+Date: Mon, 26 Aug 2024 15:04:51 -0300
+Message-Id: <20240826180454.2778016-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240814103145.1347645-1-mikhail.kshevetskiy@iopsys.eu>
- <20240814103145.1347645-8-mikhail.kshevetskiy@iopsys.eu>
- <CAFLszThroMFX-+G5r0uhkVsWwO9GWtK4qVZPTzx-2fiu+YLd2g@mail.gmail.com>
- <b7c9d535-9295-4a6b-9b8e-a62a123bc1fc@genexis.eu>
- <CAFLszTgFXHoWjdeZ+Ze_vpvRpA4B1C=zpsKzJsMtuLkzH_HFmg@mail.gmail.com>
- <c77f2748-129f-4307-9bab-8691da69b0b9@genexis.eu>
-In-Reply-To: <c77f2748-129f-4307-9bab-8691da69b0b9@genexis.eu>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 26 Aug 2024 11:58:55 -0600
-Message-ID: <CAFLszTj2uEjx24q222gMBm2AsydnpVf-qhcrkPpQt76cXXVRJw@mail.gmail.com>
-Subject: Re: [RESEND PATCH v3 7/9] net/tcp: simplify tcp header filling code
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@genexis.eu>
-Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Tom Rini <trini@konsulko.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Anand Moon <linux.amoon@gmail.com>, 
- Marek Vasut <marex@denx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Sean Anderson <seanga2@gmail.com>, 
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,52 +89,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mikhail,
+From: Fabio Estevam <festevam@denx.de>
 
-On Sat, 24 Aug 2024 at 06:30, Mikhail Kshevetskiy
-<mikhail.kshevetskiy@genexis.eu> wrote:
->
-> actually I know nothing about sandbox emulator
+Commit 68dcbdd594d4 ("ARM: imx: Add weak default reset_cpu()") caused
+the 'reset' command in U-Boot to not cause a board reset.
+    
+Fix it by switching to the watchdog driver model via sysreset, which
+is the preferred method for implementing the watchdog reset.
 
-This is the foundation of U-Boot's testing [1]. See for example test/cmd/wget.c
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+ configs/mx6slevk_defconfig | 4 ++++
+ 1 file changed, 4 insertions(+)
 
->
->
-> On 23.08.2024 23:47, Simon Glass wrote:
-> > Hi Mikhail,
-> >
-> > On Fri, 23 Aug 2024 at 09:12, Mikhail Kshevetskiy
-> > <mikhail.kshevetskiy@genexis.eu> wrote:
-> >> By the way, I'd like to know your opinion:
-> >>  * should I add a sample implementation of http/1.1 compatible
-> >> web-server to this patch series?
-> >>
-> >> This can be used as a base for other implementations like firmware
-> >> upgrade web-server used by some vendors.
-> > Do you mean using the sandbox emulator? Yes I think that would be very helpful.
-> >
-> > Regards,
-> > Simon
-> >
-> >
-> >> Mikhail Kshevetskiy
-> >>
-> >>
-> >> On 17.08.2024 18:58, Simon Glass wrote:
-> >>> Hi Mikhail,
-> >>>
-> >>> On Wed, 14 Aug 2024 at 04:32, Mikhail Kshevetskiy
-> >>> <mikhail.kshevetskiy@iopsys.eu> wrote:
-> >>>> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-> >>>> ---
-> >>>>  net/tcp.c | 70 +++++++++++++++++++++++++++++--------------------------
-> >>>>  1 file changed, 37 insertions(+), 33 deletions(-)
-> >>>>
-> >>> Reviewed-by: Simon Glass <sjg@chromium.org>
+diff --git a/configs/mx6slevk_defconfig b/configs/mx6slevk_defconfig
+index 9beb045d7df3..a9d7435c0e89 100644
+--- a/configs/mx6slevk_defconfig
++++ b/configs/mx6slevk_defconfig
+@@ -63,9 +63,13 @@ CONFIG_MXC_UART=y
+ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+ CONFIG_MXC_SPI=y
++CONFIG_SYSRESET=y
++CONFIG_SYSRESET_WATCHDOG=y
++CONFIG_SYSRESET_WATCHDOG_AUTO=y
+ CONFIG_DM_THERMAL=y
+ CONFIG_IMX_THERMAL=y
+ CONFIG_USB=y
+ CONFIG_USB_STORAGE=y
+ CONFIG_USB_HOST_ETHER=y
+ CONFIG_USB_ETHER_ASIX=y
++CONFIG_IMX_WATCHDOG=y
+-- 
+2.34.1
 
-[..]
-
-Regards,
-Simon
-
-[1] https://docs.u-boot.org/en/latest/develop/testing.html
