@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C1FBC5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 10:27:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63CB3C5321D
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 10:27:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A31B688B03;
-	Mon, 26 Aug 2024 12:25:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 088C788B2A;
+	Mon, 26 Aug 2024 12:25:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="V11Q02WU";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QOkO+prE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E87F788A2E; Mon, 26 Aug 2024 12:25:50 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id D485688AB1; Mon, 26 Aug 2024 12:25:51 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 997EF88AD2
+ by phobos.denx.de (Postfix) with ESMTPS id 836C088ABA
  for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 12:25:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPc0C129951;
- Mon, 26 Aug 2024 05:25:38 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPZC7001365;
+ Mon, 26 Aug 2024 05:25:35 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1724667938;
- bh=i3oOUO2btyixz8eGW2U7bowSEdoPvKbyoQ51NdyuFvk=;
+ s=ti-com-17Q1; t=1724667935;
+ bh=50tGib5J4oxo6Qym+UU0xjKLNV7lH+AkrxpKDiUyerg=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=V11Q02WU6B9N3EbNHy7xSe5uwCf+0apfAXb6mgIZPvbrz6EMtToP2+1JdDL1Xrg3P
- 6Yn6HfojQjUo1GXPZG09/tXkbV7xebTPpyyNyTJL8lNDhneBLtuLzRJdQkn/FZJBiC
- snvJdWrjBz730Gua+WV5PjTjXXfD04zc8tHL3lqw=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47QAPcjm094617
+ b=QOkO+prEcFE0r6X9FMPTjhIdq0ytRgaNB0CSQumEKuqg96A8l8NweGm3JkmoUzAdr
+ 6A2vpKuE8do9f1+ISkvdp5LSG8uuDYDzPwvWoOBtwRI0j7Ay8iv8mR9wdiGPzvbVNS
+ olL3ih1+v/086+97567bBRoDMFdSvtgyNpnJHTD4=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47QAPZDi024885
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 26 Aug 2024 05:25:38 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 26 Aug 2024 05:25:35 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 26
- Aug 2024 05:25:37 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Aug 2024 05:25:34 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 26 Aug 2024 05:25:37 -0500
+ Frontend Transport; Mon, 26 Aug 2024 05:25:34 -0500
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPabT040670;
- Mon, 26 Aug 2024 05:25:37 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47QAPXgW041860;
+ Mon, 26 Aug 2024 05:25:34 -0500
 From: Chintan Vankar <c-vankar@ti.com>
 To: Michal Simek <michal.simek@amd.com>, Vignesh Raghavendra
  <vigneshr@ti.com>, Dhruva Gole <d-gole@ti.com>, Neha Malcom Francis
@@ -68,10 +68,10 @@ To: Michal Simek <michal.simek@amd.com>, Vignesh Raghavendra
  <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>, Sumit Garg
  <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH v6 10/11] arm: dts: k3-am625-r5-sk: Enable DM services for
- main_pktdma
-Date: Mon, 26 Aug 2024 15:55:14 +0530
-Message-ID: <20240826102515.2774296-11-c-vankar@ti.com>
+Subject: [PATCH v6 08/11] configs: am62: Add configs for enabling ETHBOOT in
+ R5SPL
+Date: Mon, 26 Aug 2024 15:55:12 +0530
+Message-ID: <20240826102515.2774296-9-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240826102515.2774296-1-c-vankar@ti.com>
 References: <20240826102515.2774296-1-c-vankar@ti.com>
@@ -95,37 +95,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
+From: Kishon Vijay Abraham I <kishon@ti.com>
 
-Enable DM services for main_pktdma during R5 SPL stage.
+Add configs for enabling ETHBOOT in R5SPL.
 
-Reviewed-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
+Signed-off-by: Andreas Dannenberg <dannenberg@ti.com>
 Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 ---
 
 Link to v5:
-https://lore.kernel.org/r/20240813105400.4054657-10-c-vankar@ti.com/
+https://lore.kernel.org/r/20240813105400.4054657-8-c-vankar@ti.com/
 
 Changes from v5 to v6:
-- Added Reviewed-by tag from Alexander Sverdlin.
+- No changes.
 
- arch/arm/dts/k3-am625-r5-sk.dts | 5 +++++
- 1 file changed, 5 insertions(+)
+ configs/am62x_evm_r5_ethboot_defconfig | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 configs/am62x_evm_r5_ethboot_defconfig
 
-diff --git a/arch/arm/dts/k3-am625-r5-sk.dts b/arch/arm/dts/k3-am625-r5-sk.dts
-index 6b9f40e5558..0912b953db0 100644
---- a/arch/arm/dts/k3-am625-r5-sk.dts
-+++ b/arch/arm/dts/k3-am625-r5-sk.dts
-@@ -83,3 +83,8 @@
- 	reg = <0x00 0x0fc40000 0x00 0x100>,
- 	      <0x00 0x60000000 0x00 0x08000000>;
- };
+diff --git a/configs/am62x_evm_r5_ethboot_defconfig b/configs/am62x_evm_r5_ethboot_defconfig
+new file mode 100644
+index 00000000000..0d823743907
+--- /dev/null
++++ b/configs/am62x_evm_r5_ethboot_defconfig
+@@ -0,0 +1,25 @@
++#include<configs/am62x_evm_r5_defconfig>
 +
-+&main_pktdma {
-+	ti,sci = <&dm_tifs>;
-+	bootph-all;
-+};
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_SOC_K3_AM625=y
++CONFIG_TARGET_AM625_R5_EVM=y
++CONFIG_DEFAULT_DEVICEC_TREE="k3-am625-r5-sk"
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_MMC=n
++CONFIG_SPL_BOARD_INIT=y
++CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x200000
++CONFIG_SPL_BSS_MAX_SIZE=0X3100
++CONFIG_SPL_DMA=y
++CONFIG_SPL_ENV_SUPPORT=y
++CONFIG_SPL_ETH=y
++CONFIG_SPL_I2C=y
++CONFIG_SPL_NET=y
++CONFIG_SPL_NET_VCI_STRING="AM62X U-Boot R5 SPL"
++CONFIG_CMD_DHCP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_DMA_CHANNELS=y
++CONFIG_TI_K3_NAVSS_UDMA=y
++CONFIG_DM_I2C=y
++CONFIG_PHY_TI_DP83867=y
++CONFIG_TI_AM65_CPSW_NUSS=y
 -- 
 2.34.1
 
