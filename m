@@ -4,86 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FEFFC5321E
-	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 11:48:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 852E2C5321E
+	for <u-boot@archiver.kernel.org>; Mon, 26 Aug 2024 11:48:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 890BF889FC;
-	Mon, 26 Aug 2024 13:48:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0CCC28895B;
+	Mon, 26 Aug 2024 13:48:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KtxVnlFv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dSARh0l2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFE5688A00; Mon, 26 Aug 2024 13:48:05 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id DC6D18897E; Mon, 26 Aug 2024 13:48:36 +0200 (CEST)
+Received: from mail-ua1-x933.google.com (mail-ua1-x933.google.com
+ [IPv6:2607:f8b0:4864:20::933])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B80ED88418
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 13:48:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 39DF688418
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 13:48:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4280b3a7efaso36295315e9.0
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 04:48:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x933.google.com with SMTP id
+ a1e0cc1a2514c-84305a83b06so1279054241.2
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 04:48:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724672883; x=1725277683; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=WblpC0RVF7mcuCXpdbaubaQcNOSckdSHccn0Kb0wGP4=;
- b=KtxVnlFvFGsxdQ0RHxtJJXn0WeoBB/S0n8vwZNpSDBDno1Q2MsdlfmsplGVwqL0i+x
- 4qEPj/+tZwGpZoIAb76fM2hY1xlo1cIg9Bclry8diXNCDx3PM/7MxQUN+EK9Hz1X/f2b
- VVZB3aASuor+y/jDDV0BaVSb2VHdklnQYuyANO72jnv+L/ucL5tyF/Vcb43u+afa9M6u
- crLvNv8bFy0BpdwAaLsRvWxOpbtVLS8tAh7CnmOTpmT0Iw+Qlz4jj6X2GyqVAfoO52Pi
- PRe92Gz4pIMANLcs/hDy7xutJJEEI69P5roJBukTpgp/RqUdeCMBs6++J1weZHd/m0GQ
- TxGw==
+ d=linaro.org; s=google; t=1724672913; x=1725277713; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=EWPflUdezkFs9RREZvqe7oHuM8Rm4+l3kIhlM9m7A40=;
+ b=dSARh0l2eKWQO1/3Z88w5YhH8gPyVlgb224NfHtmpN0HxKN6Q/oZNR0/QcSTWJH/If
+ pHQtHQuijJw8pUiqZcQJTduNIPQnkbAEnGeN/zIYkEHFLOEVK4ZJGecHmp6Sr1yQhJaN
+ tD7ls9EPIC5oFrp42xhoG4Xci/r5Qb/8Jp6aP7DLXGVBtP2WrBjI6x2HRiWoVxzwG+GA
+ wf/mZPg75V4hc8xBOWBpS7H8xbdoA9wL9BnaI94PSw9N+ZW/M3GKtv823D9jOXNLz0zF
+ ZGaFGVXW66hNW8aBRVuNWLy9GfBR8lJUEbiFlbY1SiPj9GuvwdgzH7FpSlaJwAAVurb9
+ cnbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724672883; x=1725277683;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WblpC0RVF7mcuCXpdbaubaQcNOSckdSHccn0Kb0wGP4=;
- b=Br9WQFhWGVO7rXYhwpgjfG/YF0aKCExzd44EcWxhJZuYgDkoCxDgT/ahzhztqYgo4K
- HgrXc1kpCqycFcz53JGcEMbaORu2F2Y0ZVJO2knkB+Ci5lk/v7r7Jd+D4Ocv+G4ww6ae
- wdi6sBJ2qi8h3ZYmjSsJCTms6XB8uEd+YWY/VBCKCxsfJ1LzTZ4sv89SQ1aIqV4oyI1N
- EmJa6z11AFZwqa9oBvM2Hq39OaLwNsBUPJ6I8w8LE089tK4ZZkKkEM2kwvgQof2ssP7X
- MjlUVbQQYRRCnD7w3eIdOBaCbV89rTyW8T2gkHYd0caeKOkAGSO1XyDzfo0BP+8gDr4k
- Nqnw==
-X-Gm-Message-State: AOJu0YwnnGcziTsVWXW9Y1FrNCer2W8uuNzI0AziQZtFINeUxVAy+5SC
- Mo7K7vVR3cuHC4s1V6TRZCnNwuTeUhs0mmxcqFn+466kU0ys3SKZFpM5a7s9r6U=
-X-Google-Smtp-Source: AGHT+IE9+o5n/WgyD6ANdqPTgbjQpEmvwhnhNeWau7XfSnhNIISJ941xbNNXZmGFefifbj/coFjuYQ==
-X-Received: by 2002:a5d:6d06:0:b0:367:8fc3:a25b with SMTP id
- ffacd0b85a97d-373118e551emr6830529f8f.42.1724672883040; 
- Mon, 26 Aug 2024 04:48:03 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:600f:f83:7439:fd9c?
- ([2a01:e0a:3cb:7bb0:600f:f83:7439:fd9c])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42abefc63c4sm185787845e9.29.2024.08.26.04.48.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 26 Aug 2024 04:48:02 -0700 (PDT)
-Message-ID: <92bcf9c6-d2df-4276-b35b-a457e8bddbac@linaro.org>
-Date: Mon, 26 Aug 2024 13:48:02 +0200
+ d=1e100.net; s=20230601; t=1724672913; x=1725277713;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EWPflUdezkFs9RREZvqe7oHuM8Rm4+l3kIhlM9m7A40=;
+ b=D0SwrW7DwqGDBCd530ePxCGL8cL237rlfGM9ydIgIlTwebLs3neWSbVoVKMOEZLrYq
+ yAWMwAZt/xGmb1xwF8eAZ+BHXonY2HsDYc6HbTHoAG6tazjNfgJlo5zgYlcBIfjHOTuh
+ vpTvCk419gr64+jnnmohwL0LIINoEBrFDT7VznZ8TExCGk0aobQVc+ILreIqUz9Rnua8
+ 4jWCefZk1dsNeNw14oL5v4XPPvMVQ5karvscy8XYD4cYrIrGyxMYVNNTOKdFXmErcI3G
+ +mb9PLp8U4xX73OBtAu0ZtGce2iqZJgRwVx9IBusPuMGy/HuAq+iiHiVPqoabTZgulBe
+ 5SFA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUqtWs2jZmarxd7vjjGy+NmbBMdzNMtrrOcnqvXL+y1bHy10bQbKPJ8QfSPvCRs/rFB9nEwO6k=@lists.denx.de
+X-Gm-Message-State: AOJu0YwrhH4TVDQwk07RX9pZ71svpxi6jA4IESadpUCp0EtHL4FBetkm
+ CYtmwQ++0uHzqJRSVhWM/bWGdyB7feHlVDzs6mOD4zRVj+7+9YUwUCm1reSMSUD29FER37tJTs2
+ VTrhvGFwKIvrwxN9FlGm6rwl7ukion2qtiMdMhw==
+X-Google-Smtp-Source: AGHT+IGLrUXFAWOxcgF9G6lBHlrWGvhVFNKRpkU8KU1UYWmrW9X0izvD3CcT+RD6jTzXyvojSk7wvcVX64U1FnWQ/dA=
+X-Received: by 2002:a05:6102:32c3:b0:493:bb36:9be9 with SMTP id
+ ada2fe7eead31-498f4520145mr11729550137.1.1724672912839; Mon, 26 Aug 2024
+ 04:48:32 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 34/37] configs: use syntax CONFIG_FOO=n in
- tools-only_defconfig
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Anton Antonov <Anton.Antonov@arm.com>, Simon Glass <sjg@chromium.org>
-References: <cover.1724419624.git.jerome.forissier@linaro.org>
- <1cd8b6cde8ba55d6f78cc8ca4c4376bc5ce62294.1724419624.git.jerome.forissier@linaro.org>
- <20240823213030.GA2479150@bill-the-cat>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20240823213030.GA2479150@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <7765273f-7f36-41e4-a604-1901e4fbec62@siemens.com>
+ <20240813125245.ezlu6me3ljwx6dkj@margarine>
+ <89f8e976-e831-4035-8cd0-ab6284846d0a@siemens.com>
+ <4ec5108f-b7a4-47db-baa4-edee532c58af@siemens.com>
+ <CAFA6WYMQustcwo4Es7iJQj5Lva6UiYJ-j7WgSzMjOvEHemeDcQ@mail.gmail.com>
+ <66cc4396.670a0220.ebd0d.a836SMTPIN_ADDED_BROKEN@mx.google.com>
+In-Reply-To: <66cc4396.670a0220.ebd0d.a836SMTPIN_ADDED_BROKEN@mx.google.com>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Mon, 26 Aug 2024 17:18:21 +0530
+Message-ID: <CAFA6WYOgL6726=EVQyuWPqXEuf+efZyt0AOmVWQXcLq5eOUOrg@mail.gmail.com>
+Subject: Re: OF_UPSTREAM vs. additional dtbs
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Jan Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,36 +93,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jonas,
 
+On Mon, 26 Aug 2024 at 14:27, Jonas Karlman <jonas@kwiboo.se> wrote:
+>
+> Hi Sumit,
+>
+> On 2024-08-26 08:44, Sumit Garg wrote:
+> > Hi,
+> >
+> > On Wed, 14 Aug 2024 at 22:14, Jan Kiszka <jan.kiszka@siemens.com> wrote:
+> >>
+> >> On 14.08.24 11:41, Jan Kiszka wrote:
+> >>> On 13.08.24 14:52, Nishanth Menon wrote:
+> >>>> On 11:16-20240813, Jan Kiszka wrote:
+> >>>>> Hi all,
+> >>>>>
+> >>>>> I'm trying to migrate the TI AM65x IOT2050 boards to OF_UPSTREAM but I'm
+> >>>>> facing issues because I need to still build the u-boot-only overlays. It
+> >>>>> is also a bit weird (but works) having to specify
+> >>>>>
+> >>>>> CONFIG_SPL_OF_LIST="../../../../arch/arm/dts/k3-am65-iot2050-spl"
+> >>>>>
+> >>>
+> >>> Actually, this does NOT work: I just had a long morning debugging SPL
+> >>> which no longer started because it picked the non-filtered dtb. The
+> >>> filtered one ended up in a folder outside of the u-boot sources because
+> >>> of all those ../ and hard-wiring to dts/upstream.
+> >>>
+> >>>>> for our spl dtb.
+> >>>>>
+> >>>>> Are there means to still build certain dtb[o] files in arch/<arch>/dts?
+> >>>>> I'm a bit lost in the Makefile forest.
+> >>>>>
+> >>>>
+> >>>> Sumit: Any suggestions?
+> >>>>
+> >
+> > Apologies for the delayed reply. I was a bit busy with other high
+> > priority stuff.
+> >
+> >>>
+> >>> I would really like to hear some better proposals than my local
+> >>> workarounds to far. They don't converge although I already patched some
+> >>> core Makefile (overlays are building now).
+> >>>
+> >>
+> >> OK, I side-stepped the spl issue by using one of our variant DTBs for
+> >> spl as well - happens to work.
+> >
+> > That's good to know.
+> >
+> >>
+> >> For the overlays, I need to add
+> >>
+> >> --- a/scripts/Makefile.dts
+> >> +++ b/scripts/Makefile.dts
+> >> @@ -1,5 +1,7 @@
+> >>  # SPDX-License-Identifier: GPL-2.0+
+> >>
+> >> +include $(srctree)/config.mk
+> >> +
+> >>  dtb-y += $(patsubst %,%.dtb,$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $(CONFIG_OF_LIST) $(CONFIG_SPL_OF_LIST)))
+> >>
+> >>  ifeq ($(CONFIG_OF_UPSTREAM_BUILD_VENDOR),y)
+> >>
+> >>
+> >> in order to then be able to do
+> >>
+> >> --- a/board/siemens/iot2050/config.mk
+> >> +++ b/board/siemens/iot2050/config.mk
+> >> @@ -5,4 +5,12 @@
+> >>  # Authors:
+> >>  #   Jan Kiszka <jan.kiszka@siemens.com>
+> >>
+> >> +ifneq ($(CONFIG_SPL_BUILD),y)
+> >> +dtbo-list = \
+> >> +       k3-am6548-iot2050-advanced-m2-bkey-usb3-overlay \
+> >> +       k3-am6548-iot2050-advanced-m2-bkey-ekey-pcie-overlay
+> >> +
+> >> +dtb-y += $(patsubst %,../../../../arch/arm/dts/%.dtbo,$(dtbo-list))
+> >> +endif
+> >> +
+> >>  flash.bin: all
+> >>
+> >>
+> >> Does that make sense?
+> >
+> > A switch to OF_UPSTREAM means that we build all the DT artifacts from
+> > dts/upstream/src/ directory with the only exception that we include
+> > U-Boot specific overrides via *-u-boot.dtsi from arch/<arch>/dts. In
+> > case of overlays, is there any reason for IOT2050 board overlays not
+> > being pushed into Linux kernel repo? AFAIU, overlays are also
+> > describing puggable hardware so they shouldn't be referred to as
+> > "u-boot-only" overlays.
+>
+> I have a related issue where I would like to build board DT from
+> dts/upstream, however there is also a need for a limited U-Boot specific
+> DT that only is intended for initial boot so that U-Boot at runtime can
+> determine what hw revision is booting and select correct DT to use for
+> U-Boot proper and OS.
+>
+> For now I have just set the board target to use OF_UPSTREAM=n and
+> instead created minimal .dts-files in arch/<arch>/dts that include the
+> full .dts-file from dts/upstream.
+>
+> Any suggestion on how we better can support having a U-Boot only
+> .dts-file together with OF_UPSTREAM=y ?
 
-On 8/23/24 23:30, Tom Rini wrote:
-> On Fri, Aug 23, 2024 at 03:48:38PM +0200, Jerome Forissier wrote:
-> 
->> The tools-only defconfig causes troubles on MacOSX due to the default
->> C compiler being Clang (LLVM) rather than GCC and more specifically
->> due to [1]. Therefore replace "$ CONFIG_FOO is not set" with the
-> 
-> "# CONFIG_FOO" not "$ CONFIG_FOO".
+The motivation is rather to avoid any U-Boot specific DT files.
+Shouldn't you be able to create a DT overlay of v2.1 board over v1.1
+and push that upstream? The runtime DT choice sounds pretty similar to
+how you can choose to apply the DT overlay or not with common boot DT.
+Also, bundling multiple DT within U-Boot proper FIT image can be an
+alternative too.
 
-Fixed in v10
+-Sumit
 
-> 
->> equivalent "CONFIG_FOO=n" using the following command:
->>
->>  $ sed -i -e 's/# \(CONFIG_[^ ]*\) is not set/\1=n/' \
->>        configs/tools-only_defconfig
->>
->> This fixes the tools_only_macOS CI job on GitHub [2].
->>
->> [1] https://github.com/llvm/llvm-project/issues/78778
->> [2] https://dev.azure.com/u-boot/u-boot/_build/results?buildId=9105&view=results
->>
->> Suggested-by: Tom Rini <trini@konsulko.com>
->> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> 
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-
-Thanks!
-
--- 
-Jerome
+>
+> Please see following for more details:
+> https://source.denx.de/u-boot/u-boot/-/commit/a52099b4a2ae9e8cafc79268325249bcad308012
+> https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/rk3566-orangepi-3b.dts
+> https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/rk3566-orangepi-3b-v1.1.dts
+> https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/rk3566-orangepi-3b-v2.1.dts
+>
+> Regards,
+> Jonas
+>
+> >
+> > -Sumit
+> >
+> >>
+> >> Jan
+> >>
+> >> --
+> >> Siemens AG, Technology
+> >> Linux Expert Center
+> >>
+>
