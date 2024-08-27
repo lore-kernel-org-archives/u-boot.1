@@ -4,75 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0CFBC54731
-	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 18:36:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D4B2C54731
+	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 18:36:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC258889CA;
-	Tue, 27 Aug 2024 20:35:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1598588A76;
+	Tue, 27 Aug 2024 20:35:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hw3i1b6E";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uuEH1Z/X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1058F88A5D; Tue, 27 Aug 2024 20:35:48 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id 343F488AA4; Tue, 27 Aug 2024 20:35:49 +0200 (CEST)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D597588A46
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 20:35:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 26D28889CA
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 20:35:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3db1d4dab7fso602151b6e.1
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 11:35:45 -0700 (PDT)
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-44ff7bdb5a6so33205411cf.3
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 11:35:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724783744; x=1725388544; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1724783746; x=1725388546; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=EviIkf1rghqNEWpNFgXiKlQJoB0u40O1mCf5HFw1XWU=;
- b=hw3i1b6Ea3L6rfZYj1md+cCwN83jMIYncUamopbsWGP0oNBn/fuEzWk4JyWYPwVd9E
- 4jDNN8JOzGhW5NBzA7ASK/FPWQ6MWzLxPyhMSxBZA53Rg97OhrGaZpYBzLIopuy48riT
- dDGPiO+sZ9zKgBdCgT31mPSxBD0Zv8UQaKhyA=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ke9W5J5XOXNdIoWCAKyD0ePdBJsRut37WRDuTwQCAT8=;
+ b=uuEH1Z/XnVN3scswiO254EwuFjdqxWDeN7gz9zN5kirzzwxr/UkhLkcS/9hkXbryd8
+ t1oPy8bMHWDKGxOIOOlkEl9MZooPv9x86wFHIa0CeixPGxJeITjA1NdArncg8iSpXZ/t
+ U5vFmQ7J1tp5akqeK/cuI7t61CKXVMx2N1c1g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724783744; x=1725388544;
+ d=1e100.net; s=20230601; t=1724783746; x=1725388546;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EviIkf1rghqNEWpNFgXiKlQJoB0u40O1mCf5HFw1XWU=;
- b=W/6UDAH+mjn8UYVov2+3L40NVnn2PC+224prlFdn7n1bmBEVbLGFmmvE3+/CCsCk2m
- JLDiUuk6vhFJil5Lkzs2086q/qtVtqJ1q1shsRp1JJmmXdINIsIBossOY8kfGsfwp1Sx
- W8tT8mp+Ajw+oG7CXX6M4LOxGp1FlsO3TPOICmt8TVpzPRfHbWVmthDexL/mYf3382zj
- ZJZMCGdZ2NjQ5wMUqj8HdcE4lB3ImXHiGWZPKWg12b5mTMgOQHGcHIibliAWyQwA66Th
- wU+VlIkVRbHnj0G/qrvNmQEurN2FHvq2Jn7h/HByjZgUeHSqQxVR4yCwqbslusRLIJbF
- KoEg==
+ bh=ke9W5J5XOXNdIoWCAKyD0ePdBJsRut37WRDuTwQCAT8=;
+ b=siDiwhCMsLT00JdV7skM/r1JvELHOjxzrLQRWUEmSBfLaYntHm6uKuE+w3o9Cy8kpD
+ hrGSF4Qor8UpnBoezEJyDiiamaZ2XF1BFbGQvOOfAbPOyWAczZj5hrnQi9GRSyQKR/cS
+ IN288Rpj3IBY4Je6abn7CdTgIkw7Nl7JeDh3E9dsy8gILjDTz68i74jSixKsnz+yTvGY
+ chBn+82ZSuNJzuA5+mNLh0NYElrQKlQisXAElePc1PjcRAqBrsxGah7UdoncHnZgDsAi
+ yy2JuZe/l0zZSOesL57XA+B6S2ULQUFF4YZGE7d4xD8DjHhb44BNEZpE2dW3RUr6Yu5a
+ K+5w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWctFIULHTJzHrUrMA0fmyb7fdywFDMDJ+xXmbLy74JmedhURS0qkNRTOOcNqaYZmhGbKraGdI=@lists.denx.de
-X-Gm-Message-State: AOJu0YxA2Z1ErrS03fb3E/mqgOoF/W2Od1FRq+ympAWxtryhYhOCczMa
- RtVX5N4WjYEsTPfEmzoKzV+AmN/QYv4Su5AixxA1B0IZ3l1hg/oqLUFTUayceN8=
-X-Google-Smtp-Source: AGHT+IF2LhiIN0yp4IS0rLUbXpM1ur+lBNITcLWgK+F6XqLDiqDi+5YHddA31sp1c3ThF2t324Zsmg==
-X-Received: by 2002:a05:6808:2118:b0:3d5:4256:26d4 with SMTP id
- 5614622812f47-3de2a86e26amr17442245b6e.7.1724783744585; 
- Tue, 27 Aug 2024 11:35:44 -0700 (PDT)
+ AJvYcCUec1XP2YCNnpKyygIrmuN46DGf9HhhwgFOQ/+Aa2DiyGqS7l96l5FreO4p/84JHYE6LukRuhk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxewxk7aAcrR/uZIEsISqjGWYEbxk/aBoXvSZ5BgqshMW4W7o2O
+ Magj1qYQcHpEfTMMfhkyppVCsVaqfqAocmXVtwV2EWzT36xGbXMLu+oPeftrxus=
+X-Google-Smtp-Source: AGHT+IH54x53HzjD5sTLZh6B/HzS9tTPYEC4J9FyEib2UycEL8QVSDjmut5ytOZpjI4MpumfDuJnBA==
+X-Received: by 2002:a05:622a:8119:b0:456:61f0:830d with SMTP id
+ d75a77b69052e-45661f0835dmr28726051cf.9.1724783745810; 
+ Tue, 27 Aug 2024 11:35:45 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-454fe1c9c9asm54635271cf.89.2024.08.27.11.35.43
+ d75a77b69052e-454fe1c9c9asm54635271cf.89.2024.08.27.11.35.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Aug 2024 11:35:44 -0700 (PDT)
+ Tue, 27 Aug 2024 11:35:45 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Simon Glass <sjg@chromium.org>, Heiko Schocher <hs@denx.de>, 
- u-boot@lists.denx.de, Christian Marangi <ansuelsmth@gmail.com>
-In-Reply-To: <20240812123150.20598-1-ansuelsmth@gmail.com>
-References: <20240812123150.20598-1-ansuelsmth@gmail.com>
-Subject: Re: [PATCH] pci: mediatek: add support for upstream split PCIe
- node
-Message-Id: <172478374325.2927671.265936616332935692.b4-ty@konsulko.com>
-Date: Tue, 27 Aug 2024 12:35:43 -0600
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Tony Dinh <mibodhi@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Stefan Roese <sr@denx.de>, u-boot@lists.denx.de
+In-Reply-To: <20240814071037.34446-1-heinrich.schuchardt@canonical.com>
+References: <20240814071037.34446-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH v3 1/1] ata: sata_rescan must scan for block devices
+Message-Id: <172478374474.2927671.4677105894012380040.b4-ty@konsulko.com>
+Date: Tue, 27 Aug 2024 12:35:44 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -93,16 +91,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 12 Aug 2024 14:31:48 +0200, Christian Marangi wrote:
+On Wed, 14 Aug 2024 09:10:37 +0200, Heinrich Schuchardt wrote:
 
-> Add support for upstream linux split PCIe node.
+> A system may have multiple SATA controller. Removing the controller with
+> the lowest sequence number before probing all SATA controllers makes no
+> sense.
 > 
-> Upstream linux have an alternative way to declare PCIe nodes that splits
-> them in dedicated nodes for each line instead of putting them all in one
-> node.
-> 
-> Detect this by checking if the mediatek,generic-pciecfg node is passed
-> as it's used to reference the common address for all the PCIe lines.
+> In sata_rescan we remove all block devices which are children of SATA
+> controllers. We also have to remove the bootdev devices as they will be
+> created when scanning for block devices.
 > 
 > [...]
 
