@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE6C5C52D6F
-	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 07:11:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D071C52D6F
+	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 07:13:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12BFC8831F;
-	Tue, 27 Aug 2024 09:11:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9829C886CC;
+	Tue, 27 Aug 2024 09:13:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RU4dr8cY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MaYA/S4U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4569988009; Tue, 27 Aug 2024 09:11:47 +0200 (CEST)
-Received: from mail-ua1-x92a.google.com (mail-ua1-x92a.google.com
- [IPv6:2607:f8b0:4864:20::92a])
+ id B25EC886CC; Tue, 27 Aug 2024 09:13:55 +0200 (CEST)
+Received: from mail-vs1-xe35.google.com (mail-vs1-xe35.google.com
+ [IPv6:2607:f8b0:4864:20::e35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E57F881A1
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 09:11:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72ACB8831F
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 09:13:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x92a.google.com with SMTP id
- a1e0cc1a2514c-8430fdf256bso1192174241.0
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 00:11:44 -0700 (PDT)
+Received: by mail-vs1-xe35.google.com with SMTP id
+ ada2fe7eead31-498d0268541so2730966137.1
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 00:13:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724742703; x=1725347503; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724742832; x=1725347632; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vz1uXn20XIcOKTc1VY6tyXWU9H0guXEH03GGegVzuy4=;
- b=RU4dr8cY8DCwa7ZGHnwqCSxCw3YoyElA3xrSze0I6AEyJnE75RRzhR14sPR3YgaLq+
- DJ6GcubeRAPC+DHS6dW+jXaRVUweDqNUII7zDS9vXznVdVQrdQm4lY2Lq+8fgkwztS0M
- jBXjk7e/n61hk4ncmbSeFvbcCfdR9/gHkAJ9wrbCMaAZCA5Ftsx45ZHdWVQsakfCbQUX
- VmyLqhT1qYRFezPRZ2fiPKFLgWa9/XHo5675bRF4w4EBn81Ca0Sa2uHVitWNSLANa6V7
- vWZz56M2slRJoYdZdmGiRQMPNyE0WdY1UJHk+4NZmiKKmCpkFRwaodaWD9unVwscMxwp
- i1qw==
+ bh=JvpLjetmEy9aYlXGjIK1OuE7V5H2HYXTgPQz1s8K4g0=;
+ b=MaYA/S4UpKfhEYs6YwABqsewQtVaaCccIuHHbuUA0gmd71jUBAWsXmFSj9c+4gLTzT
+ rePs64EnCxZbfkBJmt90VXnFsL77EqOahEEPktqy+Z7hIO7qMFxIcR5lLV7mw3aWrXag
+ cORcF4Htp0+FkdjHM9yGQvJuWLyamwg+xIzd/ZmS5FUqS3FL/2TST6dpAqpamCmL5i4+
+ xsqEg0nFKTRd74KrE72fvEGzNRh7y9AyBpxeTHKDss6RC7r2ZuiiGRMJvHj3OgXFeWdH
+ xTdqkpV8MnpbhOA2ijLYprJT7TZznHbQ8rJl/D2GKk7RcmXLwOT3Jb2k+BE3iIVKvkG2
+ meyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724742703; x=1725347503;
+ d=1e100.net; s=20230601; t=1724742832; x=1725347632;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vz1uXn20XIcOKTc1VY6tyXWU9H0guXEH03GGegVzuy4=;
- b=oSK2KqwmdrPi+hG1DmPgOW7Z2mZtPBO2W8NnS1TNzGP4vQvK4M5mHvMoAYiXRbuovL
- d0/FbD152dRW3d/fC9DhEBR6PdiyBfSyYb9DwKEn3sVaYAEsIveGv8zUDIJVKqogxFqe
- gw/zgzPAbR5D6U99SF4/DUHyucp6A9hgIwToH4OizmK5az4T8SapetfAMTWmDTcbv7RS
- uppwwfJY/vCvtzV7qMU3CKB0OW9FBz9dlhbJKgg2BATOnG4Rk7OQFpkvGuOeK4P0qpWc
- n6o//y1BAHzK1lRzgClvdwnR2SFcMawIf2tj0eCi34xvPolbH/0ogMKHm7wG45bEZPkP
- C5Cg==
+ bh=JvpLjetmEy9aYlXGjIK1OuE7V5H2HYXTgPQz1s8K4g0=;
+ b=KBVQHYMtcbNP3oUaiwCvfpli+EC65JYCLmxYMhhLz+5v5smjpwhdTcIx8wIJU6vKp2
+ e6XAfPRXF1C5jLEX+nwo/IpX/SD88vAcuybWOrbWD0m62oTF0Odek3FpTUMN6wb0ljhb
+ rcq4HtFp+ZIOe44DOMhKejVa2OW2MHKtobsDft+XcDMAHBZ7msrStAZzdIPRTVxkQnzm
+ bdkr8gnNWIL9/+t4+4J3fnvdhh99GUrqPf3Z1GCayYYWIo1T41+UhFZQ0yrDf9e7bSe2
+ 3dydP9ri9cN9QBrvjxAtuET3fduRrF87EUVXJuvngmbRsI1o68ijiGpIpHlbDXH1QAnZ
+ f9VA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXfADXi3wpAmo19rNNnXGRnG9d2FExklY+Led3KJHRYmbixMdAr6+FjroJWhJc4FZWZcWvn2ak=@lists.denx.de
-X-Gm-Message-State: AOJu0YyJqDayOpnc/BmpEFfv1pWq1YYTBoUeNs3b6kt6XFw/Ht3cSYcx
- 8vH7VCcDWlr2mJoJ5cs9Bcrfiv7/Y0QKzy2k7DLgyrBxgind7QhmqpFe5AUJ6NYfKw4v7X0XZ18
- f+8R5Ln83IGEsclEeMKC45IFgE53JJe6l5HYocw==
-X-Google-Smtp-Source: AGHT+IH4HakSulNaW1Wrv/Dw/b6iPzou9yOsjFjjmrXakEkWpTudWoP+i/K+SvfkSc1PrGgZE4plLTHiYrsOOR2BeQo=
-X-Received: by 2002:a05:6102:c93:b0:48f:eb5f:84d8 with SMTP id
- ada2fe7eead31-498f4c5be07mr14185672137.27.1724742703074; Tue, 27 Aug 2024
- 00:11:43 -0700 (PDT)
+ AJvYcCWIADCuc6WAC5aVTE4YoLE1Sd9WnoDd0yS1AwtWBqrSkCNp8glWoKeODKW+nVGmDA/o4muh4pY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxGEVoE9UMxH3wiUgQtW0khcJojRqaNzqYM7108tMUGDpRujSDQ
+ flftwGB/Hs/UptEsd0Fzuva86yT+BLWQ9K34Vrvt3guBxtKCZz/QmqN3ri+RhuF+QE71o3sCN8A
+ B1eDNhW+EJ85GOObjUX2aeHs7/+B9AZgi5IR82g==
+X-Google-Smtp-Source: AGHT+IH8rF2v9lEQ3Aj65iorVTNLfsR1ig+iQR6XA0v7tCaj8i6y6bn64N4JgueF75+DgH1jFKRicaX/fCR2ESY1CoY=
+X-Received: by 2002:a05:6102:2ac6:b0:495:c34d:ab5d with SMTP id
+ ada2fe7eead31-49a3bd27ec0mr1561545137.13.1724742832121; Tue, 27 Aug 2024
+ 00:13:52 -0700 (PDT)
 MIME-Version: 1.0
 References: <7765273f-7f36-41e4-a604-1901e4fbec62@siemens.com>
  <20240813125245.ezlu6me3ljwx6dkj@margarine>
  <89f8e976-e831-4035-8cd0-ab6284846d0a@siemens.com>
  <4ec5108f-b7a4-47db-baa4-edee532c58af@siemens.com>
  <CAFA6WYMQustcwo4Es7iJQj5Lva6UiYJ-j7WgSzMjOvEHemeDcQ@mail.gmail.com>
- <66cc4396.670a0220.ebd0d.a836SMTPIN_ADDED_BROKEN@mx.google.com>
- <CAFA6WYOgL6726=EVQyuWPqXEuf+efZyt0AOmVWQXcLq5eOUOrg@mail.gmail.com>
- <66cc733b.050a0220.26d1c6.5ff7SMTPIN_ADDED_BROKEN@mx.google.com>
-In-Reply-To: <66cc733b.050a0220.26d1c6.5ff7SMTPIN_ADDED_BROKEN@mx.google.com>
+ <4576b818-9732-45ff-a4ab-b98fc0ecf4c9@siemens.com>
+ <CAFA6WYNXgJkCX9-aoL5FGchAHGdV+ikTt4+pTJP-jZ_UJG8E6Q@mail.gmail.com>
+ <87a9fe3e-5d9a-41e8-a8b2-4368cb727a65@siemens.com>
+In-Reply-To: <87a9fe3e-5d9a-41e8-a8b2-4368cb727a65@siemens.com>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 27 Aug 2024 12:41:31 +0530
-Message-ID: <CAFA6WYOuzJfDP1J=9c6Y=fg4m7UMguJBTAUj6gDnYmTNnCDmDQ@mail.gmail.com>
+Date: Tue, 27 Aug 2024 12:43:41 +0530
+Message-ID: <CAFA6WYMGyMAB=m-hkxs87PyHszcbQUk6+0_G0n+0-Yk8NeRXQQ@mail.gmail.com>
 Subject: Re: OF_UPSTREAM vs. additional dtbs
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Jan Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+To: Jan Kiszka <jan.kiszka@siemens.com>
+Cc: Nishanth Menon <nm@ti.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,18 +94,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 26 Aug 2024 at 17:51, Jonas Karlman <jonas@kwiboo.se> wrote:
+On Mon, 26 Aug 2024 at 18:02, Jan Kiszka <jan.kiszka@siemens.com> wrote:
 >
-> Hi Sumit,
->
-> On 2024-08-26 13:48, Sumit Garg wrote:
-> > Hi Jonas,
-> >
-> > On Mon, 26 Aug 2024 at 14:27, Jonas Karlman <jonas@kwiboo.se> wrote:
+> On 26.08.24 09:10, Sumit Garg wrote:
+> > On Mon, 26 Aug 2024 at 12:19, Jan Kiszka <jan.kiszka@siemens.com> wrote:
 > >>
-> >> Hi Sumit,
-> >>
-> >> On 2024-08-26 08:44, Sumit Garg wrote:
+> >> On 26.08.24 08:44, Sumit Garg wrote:
 > >>> Hi,
 > >>>
 > >>> On Wed, 14 Aug 2024 at 22:14, Jan Kiszka <jan.kiszka@siemens.com> wrote:
@@ -195,118 +188,34 @@ On Mon, 26 Aug 2024 at 17:51, Jonas Karlman <jonas@kwiboo.se> wrote:
 > >>> describing puggable hardware so they shouldn't be referred to as
 > >>> "u-boot-only" overlays.
 > >>
-> >> I have a related issue where I would like to build board DT from
-> >> dts/upstream, however there is also a need for a limited U-Boot specific
-> >> DT that only is intended for initial boot so that U-Boot at runtime can
-> >> determine what hw revision is booting and select correct DT to use for
-> >> U-Boot proper and OS.
-> >>
-> >> For now I have just set the board target to use OF_UPSTREAM=n and
-> >> instead created minimal .dts-files in arch/<arch>/dts that include the
-> >> full .dts-file from dts/upstream.
-> >>
-> >> Any suggestion on how we better can support having a U-Boot only
-> >> .dts-file together with OF_UPSTREAM=y ?
+> >> We are using the overlay to massage the DT presented to the OS based on
+> >> firmware configuration.
 > >
-> > The motivation is rather to avoid any U-Boot specific DT files.
-> > Shouldn't you be able to create a DT overlay of v2.1 board over v1.1
-> > and push that upstream? The runtime DT choice sounds pretty similar to
-> > how you can choose to apply the DT overlay or not with common boot DT.
-> > Also, bundling multiple DT within U-Boot proper FIT image can be an
-> > alternative too.
+> > Agree and more than that I prefer the firmware to own the overall DT
+> > and present that to the OS.
+> >
+> >> So, those two belong to the firmware logically,
+> >> but - with some disclaimers, we could also try to upstream them.
+> >
+> > For historical reasons, Linux kernel source tree has become the
+> > defacto upstream repo for DT sources. So it's better to contribute
+> > there and sync back in U-Boot.
 >
-> Both rk3566-orangepi-3b-v1.1.dts and rk3566-orangepi-3b-v2.1.dts are
-> in/from upstream Linux, and they are both included in the same FIT along
-> with the default U-Boot specific DT (rk3566-orangepi-3b.dtb):
+> Will do ASAP, hope to hit at least 6.12 then.
 >
->  CONFIG_OF_LIST="rk3566-orangepi-3b rk3566-orangepi-3b-v1.1 rk3566-orangepi-3b-v2.1"
->
->  Default Configuration: 'config-1'
->  Configuration 0 (config-1)
->   Description:  rk3566-orangepi-3b.dtb
->   Kernel:       unavailable
->   Firmware:     atf-1
->   FDT:          fdt-1
->   Loadables:    u-boot
->                 atf-2
->                 atf-3
->                 atf-4
->                 atf-5
->                 atf-6
->  Configuration 1 (config-2)
->   Description:  rk3566-orangepi-3b-v1.1.dtb
->   Kernel:       unavailable
->   Firmware:     atf-1
->   FDT:          fdt-2
->   Loadables:    u-boot
->                 atf-2
->                 atf-3
->                 atf-4
->                 atf-5
->                 atf-6
->  Configuration 2 (config-3)
->   Description:  rk3566-orangepi-3b-v2.1.dtb
->   Kernel:       unavailable
->   Firmware:     atf-1
->   FDT:          fdt-3
->   Loadables:    u-boot
->                 atf-2
->                 atf-3
->                 atf-4
->                 atf-5
->                 atf-6
->
-> Main reason why a U-Boot specific DT is used is because the hw revisions
-> use different voltage for Ethernet PHY, and we want to avoid causing
-> damage to a board when runtime cannot determine what hw revision is
-> running, and thus we use a safe U-Boot specific DT.
+> Still, this will delay our next patches for U-Boot by many months. Also
+> for that reason, a plan B for U-Boot local DTs should remain, no
+> left-or-right policy.
 
-Okay so the runtime check for hw revision isn't stable. If that's the
-case then I am unsure if we should enable it at all. IIUC in case a
-fallback to safe U-Boot DT is made then the ethernet won't be
-functional. I would rather favour separate U-Boot images for each
-board with corresponding DT to provide a fully functional system.
-
->
-> I do not see any reason to try and upstream this u-boot only DT to Linux,
-> since it's only purpose is to assist boot firmware to select correct DT.
-
-I suppose similar functionality would be needed if any other
-bootloader/firmware has to be enabled for these boards. So we can't
-say it's particularly specific to U-Boot but it is rather a dowsized
-DT which can boot on both boards with ethernet non-functional. You can
-also rather have a single downsized DT supported upstream with 2
-overlays one for each board which can be applied on successful
-detection of hw revision.
+Yeah, the U-Boot local DTs should be used until the board is fully
+supported by the dts/upstream directory.
 
 -Sumit
 
 >
-> Regards,
-> Jonas
+> Jan
 >
-> >
-> > -Sumit
-> >
-> >>
-> >> Please see following for more details:
-> >> https://source.denx.de/u-boot/u-boot/-/commit/a52099b4a2ae9e8cafc79268325249bcad308012
-> >> https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/rk3566-orangepi-3b.dts
-> >> https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/rk3566-orangepi-3b-v1.1.dts
-> >> https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/rk3566-orangepi-3b-v2.1.dts
-> >>
-> >> Regards,
-> >> Jonas
-> >>
-> >>>
-> >>> -Sumit
-> >>>
-> >>>>
-> >>>> Jan
-> >>>>
-> >>>> --
-> >>>> Siemens AG, Technology
-> >>>> Linux Expert Center
-> >>>>
-> >>
+> --
+> Siemens AG, Technology
+> Linux Expert Center
 >
