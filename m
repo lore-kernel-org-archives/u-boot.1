@@ -4,100 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE5E1C54736
-	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 19:47:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C72C3C54731
+	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 19:54:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4523688717;
-	Tue, 27 Aug 2024 21:47:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pritschet.eu
+	by phobos.denx.de (Postfix) with ESMTP id 38E2888A2E;
+	Tue, 27 Aug 2024 21:54:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=pritschet.eu header.i=@pritschet.eu header.b="K4iOVKt9";
-	dkim=permerror (0-bit key) header.d=pritschet.eu header.i=@pritschet.eu header.b="Jdo1Fwxz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PHkJJFL6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB63E88A3E; Tue, 27 Aug 2024 21:47:47 +0200 (CEST)
-Received: from mo4-p00-ob.smtp.rzone.de (mo4-p00-ob.smtp.rzone.de
- [81.169.146.219])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1489088A3E; Tue, 27 Aug 2024 21:54:03 +0200 (CEST)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBF2B88671
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 21:47:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D730688717
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 21:54:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=pritschet.eu
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=matthias@pritschet.eu
-ARC-Seal: i=1; a=rsa-sha256; t=1724788063; cv=none;
- d=strato.com; s=strato-dkim-0002;
- b=tBBg+K/HdgqRbz3k25HmV9b2ZHQnq/1L+dSghK5F/LOUmDHpzVy8ggac7VZ0S4uwWI
- 9xkESx+J9szV43956tBZKR2taFSbhBEcNgDD6CAnRDx1jcY2NMx1jprQgVfNVEUc7bxA
- xayqxVIz+C3ye1FSGYpnnaHQ0w/tLjXxFLZv284sQe/uvQ7a2mD/Y6R7WrjyKzCnSSTA
- 3DlkU+6+X4AJHbY0B23lbqnaPCmR8sINPyVTH0ahODg2wWHBZczB8ripaswsO76MxPtu
- Dw8y9RxAwG6hEvb7rBLOcPMEigFx07vcCCEJ9bqPaPcMKWXygh72CmW4c0MOpNVO3jFr
- qRbg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1724788063;
- s=strato-dkim-0002; d=strato.com;
- h=In-Reply-To:From:References:Cc:To:Subject:Date:Message-ID:Cc:Date:
- From:Subject:Sender;
- bh=ygmj4zIvKvHG9wJyxczcSBeNAGps998YpMGmGqsvPYc=;
- b=TbwtOli1VUEkb4oEINxIaBwSa13mQjjaOMHol92pGYtxZh1A2J8SXEFifr24ZD+uD9
- Z/Gdx2V8AXJphJtU3IsjPMX36zN0Q4f8PPnDieLKllp/aNcvs8mTZ2aqdl4onMTSBDFQ
- BQ6zYcsOmyGM7wFNxeR6gaspFU7SEGVHCWRr/xOCq+hxFVKtj4Rr+lEFtss+iTd3cGPp
- c/plJWKm1k8u2pd8x6Jg8vIxDH+//MhnCazKby1QOkRKX4UdCkDFQYdNKNeZ+YP+luxk
- ruRuN9qceQGNQV6Mc0ouWEpgqEstOc6wIAOp4G0eHGPs0vVWrMKhhLhQAiXfa0OYEnpz
- UkHg==
-ARC-Authentication-Results: i=1; strato.com;
-    arc=none;
-    dkim=none
-X-RZG-CLASS-ID: mo00
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1724788063;
- s=strato-dkim-0002; d=pritschet.eu;
- h=In-Reply-To:From:References:Cc:To:Subject:Date:Message-ID:Cc:Date:
- From:Subject:Sender;
- bh=ygmj4zIvKvHG9wJyxczcSBeNAGps998YpMGmGqsvPYc=;
- b=K4iOVKt94hKG1crMhGxwpdsCZ7GoxjlbJwf2IHwvHRWYecSYB2z/sr3YWzq+glufn7
- j7/8D+1vLro9GnnG3M4fqKXo39Z+3G6/34OoQPdbC1X5yXbLrn+jpCbgIZHnaDNFi82x
- rGfMrEokb4Ei8fIKHAUUZgh1nJV6JGG6rMd4GzaXZyIpFWXiZo9OOQn2zFPZJ0XDdJZC
- KJVQbDLfgRfGLbUTOKSpkUxpuQ244IlsRmSIYIcN0jUhPPcwUZ+4qjWzlA+lU6962fi8
- DDkcR0KM+VhY/9L+Q2spci9u6pYMceswyTpOBa6iiuKnQy9NW3SlB7QHJx49Y9CKROrQ
- cKRw==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1724788063;
- s=strato-dkim-0003; d=pritschet.eu;
- h=In-Reply-To:From:References:Cc:To:Subject:Date:Message-ID:Cc:Date:
- From:Subject:Sender;
- bh=ygmj4zIvKvHG9wJyxczcSBeNAGps998YpMGmGqsvPYc=;
- b=Jdo1Fwxzqb3uDTFszajmArsOPUsRscr+S+zCKnsqRFV2iXlgcAZmSCKbipgczG7J3J
- +rno3aoS4/hKAMX3GEAg==
-X-RZG-AUTH: ":IW0QYUiheuxX18P29qqHt/qCfjagLCCd1qyzKexpcQi1jQNsuxOyhTejoQQ4wC2Bp2zYdWPg2FSP9SQ5RapwYXGg226O9jufEh9FdQ=="
-Received: from [IPV6:2001:9e8:31ee:a000:76b5:2208:5ab8:6fd]
- by smtp.strato.de (RZmta 51.2.3 AUTH) with ESMTPSA id Yed7a707RJlgpex
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Tue, 27 Aug 2024 21:47:42 +0200 (CEST)
-Message-ID: <af9c9733-4841-448c-98d0-3f960814f039@pritschet.eu>
-Date: Tue, 27 Aug 2024 21:47:42 +0200
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2f43de7ad5eso75973851fa.1
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 12:54:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1724788440; x=1725393240; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VmUaoTpK0y5IhpvAhI2yt0Nk9uJky2rzAsZeHNZGTm4=;
+ b=PHkJJFL6NJjqv1eGQ6FT6VTKzy7g1GdY084HqnoFipxR0IzMHpoehfDnoHsRYfv8uc
+ 6FEFK1wsWbB5OcehXyJBaRMna9BJjGRcJCyas1UzX8ICeiLNCYAIZ4WYX7g/ne/QB5hh
+ vD3VPxXhn8b4F7pTW+Jmk4DLvbkDCObA4g3zTCEmbzUg+u2m1+0BZLb57z/cNwU+ZVqI
+ iL5jUvcizp7fobCP6hnLQlJjj41dwYPJiRLOk1AX9LBs/uAEWWnpPwRP8xd8u7jEuOWl
+ L8WWDzWk8PO5DDFgJ8cP9VG2FmotwLfOUuydmlw2kW+sZt5gbotztCosuR3DOrcmTAar
+ ZPMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724788440; x=1725393240;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=VmUaoTpK0y5IhpvAhI2yt0Nk9uJky2rzAsZeHNZGTm4=;
+ b=riJhMoJCaNhF5szAai4AmI4fUne3lTHBGQ1AkFc5KNhmSw2MT8A0hWfa+0JHR/vQMo
+ zko+auvr5i/X1mNt7otBHI9IE/RbkzL+NIfT4Z7/akgw8gW2fXi0s1qeZdCkDjG67WYA
+ oW54fkLzL7cucjqC5HGqzF1zwdhxxvIKwP4RkRC4OR2TjFMxU6jfyy3v7X1fG+3TtvOK
+ wyHRtBQJ4Zu3AStRDSZGaEpSxe8wQWmxJIpFz/0h4pRmErnqWF/vfI6fGjD39oEgyDo/
+ W8kM+/J8IKMq53gPFO1fmS6mNQcCKmWTOyCThATYF1AqbjXYC+8xmlXahnYym9n4v9mX
+ 4Jwg==
+X-Gm-Message-State: AOJu0Yy4aSdjAJMC5f9/H+7gPV+QWWJWr2Kjx5PrfCTHzi9edBYFvEC8
+ 3zzlQmN3Zbib7Bz71W0Gx+ffma0alNY767HYCVbZln9vaMVKGhvATNzn5ctGrdd3Ilt7Ocs8qlL
+ MWZc0gAySvZ5S90MfqggXv4a/3wQ=
+X-Google-Smtp-Source: AGHT+IGWydHbCMVEKeBuKIORenSFSloz+apHVG+RLEpV0US1ZhdZYZP54r5CcKOxYMeOga1pCrmAgdmlthQpsDu26o0=
+X-Received: by 2002:a2e:7311:0:b0:2ef:2061:8bf5 with SMTP id
+ 38308e7fff4ca-2f4f4932e4emr87620771fa.40.1724788439627; Tue, 27 Aug 2024
+ 12:53:59 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mkimage: ecdsa: add signature/key nodes to dtb if missing
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: u-boot@lists.denx.de,
- Matthias Pritschet <matthias.pritschet@itk-engineering.de>
-References: <20240827160054.26819-1-matthias@pritschet.eu>
- <CALeDE9MLsyxNstkTy6SarjvtxO9_qu3=DA3NEfheSU=gehpahA@mail.gmail.com>
-Content-Language: de-DE
-From: Matthias Pritschet <matthias@pritschet.eu>
-Autocrypt: addr=matthias@pritschet.eu; keydata=
- xjMEYAvn3xYJKwYBBAHaRw8BAQdAsOZSUAnRUPv6AGvGQ0ZAK+f4+oZ/dN4SEeovDNQUo/vN
- Kk1hdHRoaWFzIFByaXRzY2hldCA8bWF0dGhpYXNAcHJpdHNjaGV0LmV1PsKWBBMWCAA+FiEE
- 00KVu/VT2UO2HZzJFnwPi9kgHfYFAmAL598CGwMFCQlmAYAFCwkIBwIGFQoJCAsCBBYCAwEC
- HgECF4AACgkQFnwPi9kgHfYC+AD9HmOmhjDzw4w3s3krqNIK27b2I0+LKa2X/bY1/K6e+5kA
- /i+F/3vj08bmDTnZsb+jgDv/Y7kAtekAurnjfg8KN08JzjgEYAvn3xIKKwYBBAGXVQEFAQEH
- QKxYz1KTA1tCZaa/oMtqDxJ7hk4/BxFEMYeWv5CYzC8aAwEIB8J+BBgWCAAmFiEE00KVu/VT
- 2UO2HZzJFnwPi9kgHfYFAmAL598CGwwFCQlmAYAACgkQFnwPi9kgHfYfAgD/fqY6cuDXCHt5
- GFZJORkhFP/oKA9XUcjYtl+3M6zdiEABANfftDe3u7QXTaEyVS0Y6dG1Nwgw96mKzF/VIZot sTIB
-In-Reply-To: <CALeDE9MLsyxNstkTy6SarjvtxO9_qu3=DA3NEfheSU=gehpahA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <GI.Za6b.48b6UC5Rsur.1cpWwh@seznam.cz>
+ <CAOMZO5Aj9zSEWF9Gm5-tF9hTaczf6FXv0zo_z+Jws+BGPYPwrg@mail.gmail.com>
+ <K9.Za7d.77W3I8GjZaJ.1cpYlf@seznam.cz>
+In-Reply-To: <K9.Za7d.77W3I8GjZaJ.1cpYlf@seznam.cz>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 27 Aug 2024 16:53:46 -0300
+Message-ID: <CAOMZO5BshEknpJEeEiqip3e_YkN21kAKtKva0ik=8SKGJxmngw@mail.gmail.com>
+Subject: Re: [PATCH] gpio: mxc_gpio: fix reading state of GPIO pins in output
+ mode
+To: Tomas Paukrt <tomaspaukrt@email.cz>, Ye Li <ye.li@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,28 +91,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 27.08.24 um 20:40 schrieb Peter Robinson:
-> On Tue, 27 Aug 2024 at 18:52, Matthias Pritschet <matthias@pritschet.eu> wrote:
->>
->> From: Matthias Pritschet <matthias.pritschet@itk-engineering.de>
->>
->> If the signature/key node(s) are not yet present in the U-Boot device
->> tree, ecdsa_add_verify_data simply fails if it can't find the nodes.
->> This behaviour differs from rsa_add_verify_data, wich does add the missing
->> nodes and proceeds in that case.
->>
->> This change is mainly copy&paste from rsa_add_verify_data to add the
->> same behaviour to ecdsa_add_verify_data.
-> 
-> Could the duplicated code be moved out into a function shared between
-> the two *_add_verify_data bits of code?
-> 
+Hi Tomas,
 
-I don't see a reason why not.
-However, I'm not too familiar with the codebase and not sure where to put it.
+On Tue, Aug 27, 2024 at 4:41=E2=80=AFPM Tomas Paukrt <tomaspaukrt@email.cz>=
+ wrote:
 
-If you think it's worth it and give me a few pointers regarding where and how to implement it, I'll happily draft a v2.
+> Hi Fabio,
+>
+> you are correct that the existing code will work if the SION bit is set, =
+but this is not always possible or desirable. For example, if you use the c=
+ommand "gpio set" to set the state of a pin that is not configured in DTS t=
+hen you will get the error message "Warning: value of pin is still 0". Also=
+ the command "gpio status -a" shows wrong states of some output pins withou=
+t this patch.
 
--- 
-Matthias
+This happens due to an incorrect devicetree description, i.e, the lack
+of setting the SION bit.
 
+> Please see the chapters "GPIO data register (GPIOx_DR)" and "GPIO pad sta=
+tus register (GPIOx_PSR)" in the document IMX6ULLRM.pdf which show that it =
+is possible to use the DR register instead of the PSR register in this case=
+.
+>
+> I also found the exactly same modification in NXP version of U-Boot (http=
+s://github.com/nxp-imx/uboot-imx/commit/4afc3f90943c6b117f79b66d2cd04e64f43=
+7b0c2) made by an NXP employee.
+
+Adding Ye Li on Cc.
+
+There were many attempts to fix this in both U-Boot and the kernel,
+but the recommendation has always been: "Set the SION bit if you need
+to read the output state".
+
+Regards,
+
+Fabio Estevam
