@@ -4,57 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FB0BC54731
-	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 17:52:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC629C54731
+	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 17:56:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86D6788A32;
-	Tue, 27 Aug 2024 19:52:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=email.cz
+	by phobos.denx.de (Postfix) with ESMTP id 5E69C886E5;
+	Tue, 27 Aug 2024 19:56:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=email.cz header.i=@email.cz header.b="TtP6RxEp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Mly+HjDy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 629B487FA7; Tue, 27 Aug 2024 19:38:14 +0200 (CEST)
-Received: from mxe-2-566.seznam.cz (mxe-2-566.seznam.cz
- [IPv6:2a02:598:64:8a00::1000:566])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 33F3D88675; Tue, 27 Aug 2024 19:56:26 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46CE488A27
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 19:38:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 51A2888A2E
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 19:56:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=email.cz
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tomaspaukrt@email.cz
-Received: from email.seznam.cz by smtpc-mxe-5549df4ffc-zc8mb
- (smtpc-mxe-5549df4ffc-zc8mb [2a02:598:64:8a00::1000:566])
- id 116883c2ef9c316811e60dda; Tue, 27 Aug 2024 19:38:10 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cz;
- s=szn20221014; t=1724780290;
- bh=lIl5fSgmniNuyb+QIUtixaO3ZLxIBBhWwUIIgHlzlnE=;
- h=Received:From:To:Cc:Subject:Date:Message-Id:Mime-Version:X-Mailer:
- Content-Type:Content-Transfer-Encoding;
- b=TtP6RxEptC9H66EurhQ7q04qiY39hyzEdEnXC3afQC6NJfRxM5jBExqM3WIypLfUc
- 8ToIOHDb4fXt+N99sVxUtNhfHvkqy53AuySqMJ7z/236cG26G/6rfZg+GeVeL/s90r
- PikKDkLbpnCGKpilWVtNHey6sAWJqXaNOHSVMj75bQ8adsvHbDUc+DlNci0eoLsjZw
- XLrLoiVxLGXbcwUOT7arUy830GlAdjlPnMixvLClfToPjpsNrYtJZpef4DTbKXIAqK
- O4MBacBxgJ5/s90SFqoFOlmDgYyKk0nOnwMMUPQcK7nccxkuufFqnZTHH17toFB/rG
- +Vq93p3lYrxCw==
-Received: from 184-143.ktuo.cz (184-143.ktuo.cz [82.144.143.184])
- by email.seznam.cz (szn-UNKNOWN-unknown) with HTTP;
- Tue, 27 Aug 2024 19:38:09 +0200 (CEST)
-From: "Tomas Paukrt" <tomaspaukrt@email.cz>
-To: <u-boot@lists.denx.de>
-Cc: "Tom Rini" <trini@konsulko.com>
-Subject: [PATCH] lib: crypto: fix ASYMMETRIC_KEY_TYPE dependency 
-Date: Tue, 27 Aug 2024 19:38:09 +0200 (CEST)
-Message-Id: <GK.Za7R.19AhVTpFILn.1cpWy1@seznam.cz>
-Mime-Version: 1.0 (szn-mime-2.1.61)
-X-Mailer: szn-UNKNOWN-unknown
-Content-Type: text/plain;
-	charset=utf-8
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-533488ffaebso7046634e87.0
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 10:56:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1724781383; x=1725386183; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=N2luGnNwRkyLSZIFRtKXU1NpvgW6/CzO2A9DaUPmidM=;
+ b=Mly+HjDyMwMhe1YyC+hsoUtWVUeM7+sDYjqLd4cqroCG7RMx4QxvyqUQjJD3idpqK9
+ 25+142jZ5L6D0+dOB5jxV2eyu2v/gKnWiY1ymTJGnlhjjbsOvsw/98K6emvW/A8FFoZL
+ 6JVrLcT7x3dZO5BJnvkHB+5aAlHw/kyA7ieCWht8lQD8Q3FKfjbN2c3VO9aF1jSU0i6b
+ EgVe02vQWOdL8FuaWwmObD8pBqIV9umgjl/nszlanCTp9QA9sjucugZbUee8WYAvoR6+
+ Eh8t0nBrIALtSEEk9YnoUPbFwzI4qbnixtrdpO+XuJXckutzEax4tkMTOsdWts/PGskh
+ 2T0w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724781383; x=1725386183;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=N2luGnNwRkyLSZIFRtKXU1NpvgW6/CzO2A9DaUPmidM=;
+ b=U8wliH8GnmSUVo1O1SITjQvTR1/tZktDIobqZdIL+RAWOnjaPpr+wTN4M+CMxZDLyX
+ Yze+0B7eTahmb6Bi2tRRBFgwUdM1katw3jW0i/MSPr6Z0lw6ood8cd2OBFr0MCIZzaye
+ 1xb59BzyYHQVnf7JiO9znu2vvMbDYA4r/Toir51SJ+W9zs/lrylQpA9JSWDtc4hXZ154
+ VocYOwC7xc+MaVy2nKcn5Ys0RS8I1OuBIq/Fux79WskOiUxAUclhe9FVQXYermqdH49e
+ /MIueAoFwlFvpqkpQv/mXIns7T3lgDpgqt2eUwEUuUQ9oosoTGSqXZEDVLoDZprkWoSK
+ pf0g==
+X-Gm-Message-State: AOJu0YwnJa6oeFwQqZ32QNYs9wTU8gMgbY1tgo8xWeR1Dm8rlikfqs0P
+ Swqz/IWkCmIFW9TOBU7G9sLjXAEBaSsUKSVOLk/jZf/CX5XsToNaGHjLcwQRQcX8CdIOeSunkqh
+ 0APt6EIqQXm6KePIYWNYV0dACt4O6eQ==
+X-Google-Smtp-Source: AGHT+IFE4Ssbiw1sB8c2z5SX2+A7bk005R5cq3ZeBlBE31Gw5QfDAASofpG63OdxXZWQPi6q1oXsbqPtDjW2pqKVsu8=
+X-Received: by 2002:a05:6512:6cf:b0:52c:cd4f:b95b with SMTP id
+ 2adb3069b0e04-53438773dc4mr9820985e87.22.1724781383285; Tue, 27 Aug 2024
+ 10:56:23 -0700 (PDT)
+MIME-Version: 1.0
+References: <GI.Za6b.48b6UC5Rsur.1cpWwh@seznam.cz>
+In-Reply-To: <GI.Za6b.48b6UC5Rsur.1cpWwh@seznam.cz>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 27 Aug 2024 14:56:11 -0300
+Message-ID: <CAOMZO5Aj9zSEWF9Gm5-tF9hTaczf6FXv0zo_z+Jws+BGPYPwrg@mail.gmail.com>
+Subject: Re: [PATCH] gpio: mxc_gpio: fix reading state of GPIO pins in output
+ mode
+To: Tomas Paukrt <tomaspaukrt@email.cz>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 27 Aug 2024 19:52:05 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,29 +88,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix the dependency to avoid a warning if RSA_VERIFY_WITH_PKEY is enabled.=
+Hi Tomas,
 
+On Tue, Aug 27, 2024 at 2:52=E2=80=AFPM Tomas Paukrt <tomaspaukrt@email.cz>=
+ wrote:
+>
+> The PSR register works correctly for GPIO pins in input mode,
+> but always returns 0 for GPIO pins in output mode.
+> The DR register works correctly in both modes.
 
-Fixes: b7463f198da6 ("Make ASYMMETRIC_KEY_TYPE depend on FIT_SIGNATURE")=
+The current code is correct as is.
 
-Signed-off-by: Tomas Paukrt <tomaspaukrt@email.cz>
----
- lib/crypto/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/lib/crypto/Kconfig b/lib/crypto/Kconfig
-index 6e0656a..742f6d9 100644
---- a/lib/crypto/Kconfig
-+++ b/lib/crypto/Kconfig
-@@ -1,6 +1,6 @@
- menuconfig ASYMMETRIC_KEY_TYPE
- 	bool "Asymmetric (public-key cryptographic) key Support"
--	depends on FIT_SIGNATURE
-+	depends on FIT_SIGNATURE || RSA_VERIFY_WITH_PKEY
- 	help
- 	  This option provides support for a key type that holds the data for
- 	  the asymmetric keys used for public key cryptographic operations such=
-
--- 
-2.7.4
- 
+You should set the SION bit to read the value of the output pin.
