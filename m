@@ -4,38 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 857E6C5321D
-	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 01:31:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9F06C52D6F
+	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 04:01:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B646488210;
-	Tue, 27 Aug 2024 03:31:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+	by phobos.denx.de (Postfix) with ESMTP id 8B60E88418;
+	Tue, 27 Aug 2024 06:01:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A1428839A; Tue, 27 Aug 2024 03:31:37 +0200 (CEST)
-Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2925286462
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 03:31:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
-Received: from secure.fukaumi.org ([10.0.0.2])
- by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
- 47R1VKFW027155; Tue, 27 Aug 2024 10:31:20 +0900
-From: FUKAUMI Naoki <naoki@radxa.com>
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- banglang.huang@foxmail.com, jonas@kwiboo.se,
- FUKAUMI Naoki <naoki@radxa.com>
-Subject: [PATCH] rockchip: modify devicetree at runtime for Radxa ROCK Pi E
- v3.0
-Date: Tue, 27 Aug 2024 10:31:10 +0900
-Message-ID: <20240827013111.633-1-naoki@radxa.com>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="G7Jo2eHl";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 3C91388418; Tue, 27 Aug 2024 06:01:49 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B4006841BC
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 06:01:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6bf6bf3a536so2636986d6.2
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 21:01:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1724731305; x=1725336105; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:cc:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=75USNbWEzxhZVj9Xxgam8e32O1Uxq+Q7L+LtFlgNv5k=;
+ b=G7Jo2eHl58EWWhLqfamQQOMbrAsQkkn/U9afGmTcf6SSePxz/blUyBgvY2/Kl0upAi
+ rr/F5U+OQxlLMd5jaVerTqnEeraJ4QEnueu6OBbeycmJy+7Qm7nZLwNkEEPUGQGuH3qN
+ K/gipzKg9AzMWfNp8YFGypwe/7hM7wG7zZbNGWCVKEuTWqcJxOBc4GWjzw8vY8xSYdiR
+ EHgoxc02dJgNSPq/j+jsMK+vWds7lmfB/CO6pi1dBW6i24LixrQR/dpL38KBEU45oMxr
+ 3xZqRN6Jw4ivHSmVGIbKv0vj8dvwRTxnjqaRI82jhf8599YAEe+ZG4452jEKPN3rDO9c
+ YOwQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724731305; x=1725336105;
+ h=content-transfer-encoding:in-reply-to:from:cc:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=75USNbWEzxhZVj9Xxgam8e32O1Uxq+Q7L+LtFlgNv5k=;
+ b=HECjUyXt5hRCqj4OZDxe89cYATnU5VYWhXE3CGmdE2LKxZXME7RoWhcCuM0zzUWguO
+ AKbwzPyfzoVlRVO0lDFruf/ULfMAWM0KITX/XH0+oI4/VGFu/LPghQFw8kbK4NI1MwBR
+ tJnyYh05/Dx9dF015bG05xAugm36baVNMISi7ayIKGxAiN12ai/nzzWMgj8LXPQDIZoL
+ F1KtwCJdWnwOPtiCKoC5gv1J47H2uuuHgaX8ELsKyums5t3ARsON9BjLgaJKV5z8e9Un
+ JEwx2d+YoTdSu9D9nIR6aPwuny/c5UaxtJz/4bt7Mbiqcq1HABgo/bW6bwfhCncsYHRE
+ gQpA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXXLPdXN73RgtRnwOSBJvsKdo+GmkUJMJF9m8zlnYbgfvJqBYUkWb4skwHiW9IjNk4soupHXj0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxZMH4egr0OAzaCynJ6fnMVgKwQ7LlK6sf/iQUQnIuAW0RHvvha
+ NusAQwOnoBNhKkgnG553ggFT7AzLCBtRRTUXT5lXmcuoBbrWxlkr
+X-Google-Smtp-Source: AGHT+IEFGEOLzfoM24VSthlCYHZtCeDIqEXJ0Kq3dJ6D/Rp2Ai/nVuinwhhBS/5cymGx+usjZNEDZA==
+X-Received: by 2002:a05:6214:19e6:b0:6bf:6722:aab3 with SMTP id
+ 6a1803df08f44-6c16df386f6mr92410486d6.5.1724731305399; 
+ Mon, 26 Aug 2024 21:01:45 -0700 (PDT)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6c162d4a003sm52525316d6.35.2024.08.26.21.01.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 26 Aug 2024 21:01:44 -0700 (PDT)
+Message-ID: <edbb4c96-ad6f-03e5-54ea-9195936b04f1@gmail.com>
+Date: Tue, 27 Aug 2024 00:01:43 -0400
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: Assistance with U-Boot Compilation Error
+Content-Language: en-US
+To: Reyders Morales <reyders1@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <CAJueRn0OQknOW986AzmBEs-+LShGn0WimfHckjfoSKFpZiz_5w@mail.gmail.com>
+Cc: trini@konsulko.com, sjg@chromium.org
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <CAJueRn0OQknOW986AzmBEs-+LShGn0WimfHckjfoSKFpZiz_5w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -52,141 +97,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-since Radxa ROCK Pi E v3.0 is different to ROCK Pi E, "model" and
-"compatible" in DT need to be different.
-(specifically, sysupgrade[1] in OpenWrt)
+On 8/26/24 19:18, Reyders Morales wrote:
+> Dear Tom,
+> 
+> I hope this message finds you well.
+> 
+> My name is Reyders, and I am currently working on compiling U-Boot for
+> am335x_evm_defconfig. However, I have encountered a compilation error.
+> I greatly respect the work being done on this project and would be
+> very grateful for any guidance you could provide.
+> 
+> Details of the Issue:
+> 
+> Environment: Ubuntu 20.04, arm-linux-gnueabihf-gcc 9.4.0
+> Target Board/Architecture: am335x_evm_defconfig
+> U-Boot Version: v2024.10-rc3 or main
+> Error Message:
+> ---------
+> LD      spl/u-boot-spl
+> arm-linux-gnueabihf-ld.bfd: u-boot-spl section `__u_boot_list' will
+> not fit in region `.sram'
+> arm-linux-gnueabihf-ld.bfd: region `.sram' overflowed by 156 bytes
+> make[1]: *** [scripts/Makefile.spl:532: spl/u-boot-spl] Error 1
+> make: *** [Makefile:2095: spl/u-boot-spl] Error 2
+> ---------
 
-also, "mmc0" and "mmc1" aliases need to be swapped to align with other
-Radxa's boards.
 
-modify them after loading DT for kernel.
+Well, it's just what is says. Your U-Boot doesn't fit in ram.
 
-[1] https://openwrt.org/docs/techref/sysupgrade#how_it_works
+> Additional Context:
+> 
+> I've been able to successfully compile the v2024.07-rc5 version. I
+> think that this is the last one that works.
 
-Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
----
- arch/arm/mach-rockchip/rk3328/Kconfig       |  6 ++++++
- board/radxa/rockpie-rk3328/Kconfig          | 12 +++++++++++
- board/radxa/rockpie-rk3328/MAINTAINERS      |  6 ++++++
- board/radxa/rockpie-rk3328/Makefile         |  3 +++
- board/radxa/rockpie-rk3328/rockpie-rk3328.c | 22 +++++++++++++++++++++
- configs/rock-pi-e-v3-rk3328_defconfig       |  2 ++
- 6 files changed, 51 insertions(+)
- create mode 100644 board/radxa/rockpie-rk3328/Kconfig
- create mode 100644 board/radxa/rockpie-rk3328/MAINTAINERS
- create mode 100644 board/radxa/rockpie-rk3328/Makefile
- create mode 100644 board/radxa/rockpie-rk3328/rockpie-rk3328.c
+Try increasing CONFIG_SPL_MAX_SIZE and then use linux/scripts/bloat-o-meter
+to see where the growth is.
 
-diff --git a/arch/arm/mach-rockchip/rk3328/Kconfig b/arch/arm/mach-rockchip/rk3328/Kconfig
-index 70770da5fdf..654377672fe 100644
---- a/arch/arm/mach-rockchip/rk3328/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3328/Kconfig
-@@ -10,6 +10,11 @@ config TARGET_EVB_RK3328
- 	  with full function and phisical connectors support like
- 	  usb2.0 host ports, LVDS, JTAG, MAC, SDcard, HDMI, USB-2-serial...
- 
-+config TARGET_ROCK_PI_E_V3_RK3328
-+	bool "Radxa ROCK Pi E v3.0"
-+	help
-+	  Radxa ROCK Pi E v3.0 single board computers with a RK3328 SoC.
-+
- endchoice
- 
- config ROCKCHIP_BOOT_MODE_REG
-@@ -37,5 +42,6 @@ config TPL_SYS_MALLOC_F_LEN
- 	default 0x800
- 
- source "board/rockchip/evb_rk3328/Kconfig"
-+source "board/radxa/rockpie-rk3328/Kconfig"
- 
- endif
-diff --git a/board/radxa/rockpie-rk3328/Kconfig b/board/radxa/rockpie-rk3328/Kconfig
-new file mode 100644
-index 00000000000..73485d93513
---- /dev/null
-+++ b/board/radxa/rockpie-rk3328/Kconfig
-@@ -0,0 +1,12 @@
-+if TARGET_ROCK_PI_E_V3_RK3328
-+
-+config SYS_BOARD
-+	default "rockpie-rk3328"
-+
-+config SYS_VENDOR
-+	default "radxa"
-+
-+config SYS_CONFIG_NAME
-+	default "evb_rk3328"
-+
-+endif
-diff --git a/board/radxa/rockpie-rk3328/MAINTAINERS b/board/radxa/rockpie-rk3328/MAINTAINERS
-new file mode 100644
-index 00000000000..f98ddce4e58
---- /dev/null
-+++ b/board/radxa/rockpie-rk3328/MAINTAINERS
-@@ -0,0 +1,6 @@
-+ROCK-PI-E-V3-RK3328
-+M:	FUKAUMI Naoki <naoki@radxa.com>
-+S:	Maintained
-+F:	board/radxa/rockpie-rk3328
-+F:	configs/rock-pi-e-v3-rk3328_defconfig
-+F:	arch/arm/dts/rk3328-rock-pi-e*
-diff --git a/board/radxa/rockpie-rk3328/Makefile b/board/radxa/rockpie-rk3328/Makefile
-new file mode 100644
-index 00000000000..cede3b2605d
---- /dev/null
-+++ b/board/radxa/rockpie-rk3328/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+
-+obj-y += rockpie-rk3328.o
-diff --git a/board/radxa/rockpie-rk3328/rockpie-rk3328.c b/board/radxa/rockpie-rk3328/rockpie-rk3328.c
-new file mode 100644
-index 00000000000..3178af3e472
---- /dev/null
-+++ b/board/radxa/rockpie-rk3328/rockpie-rk3328.c
-@@ -0,0 +1,22 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+#include <fdt_support.h>
-+
-+#define MODEL		"Radxa ROCK Pi E v3.0"
-+#define COMPATIBLE1	"radxa,rockpi-e-v3"
-+#define COMPATIBLE2	"rockchip,rk3328"
-+
-+#define MMC0		"mmc@ff520000"
-+#define MMC1		"mmc@ff500000"
-+
-+int ft_board_setup(void *blob, struct bd_info *bd)
-+{
-+	fdt_setprop_string(blob, 0, "model", MODEL);
-+	fdt_setprop_string(blob, 0, "compatible", COMPATIBLE1);
-+	fdt_appendprop_string(blob, 0, "compatible", COMPATIBLE2);
-+
-+	fdt_find_and_setprop(blob, "/aliases", "mmc0", MMC0, 13, 1);
-+	fdt_find_and_setprop(blob, "/aliases", "mmc1", MMC1, 13, 1);
-+
-+	return 0;
-+}
-diff --git a/configs/rock-pi-e-v3-rk3328_defconfig b/configs/rock-pi-e-v3-rk3328_defconfig
-index 4c6cc634bd6..15036d01a40 100644
---- a/configs/rock-pi-e-v3-rk3328_defconfig
-+++ b/configs/rock-pi-e-v3-rk3328_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3328-rock-pi-e-v3"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3328=y
-+CONFIG_TARGET_ROCK_PI_E_V3_RK3328=y
- CONFIG_DEBUG_UART_BASE=0xFF130000
- CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SYS_LOAD_ADDR=0x800800
-@@ -18,6 +19,7 @@ CONFIG_FIT_VERBOSE=y
- CONFIG_SPL_FIT_SIGNATURE=y
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_OF_BOARD_SETUP=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3328-rock-pi-e.dtb"
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--- 
-2.43.0
+But the main thing is that U-Boot is tested with the latest GCC, and older
+versions tend to have worse optimization.
 
+The easiest way to get a newer GCC is to download one from [1]. Since you
+are on focal, you could also try [2] (but that only provides GCC 11).
+
+[1] https://mirrors.edge.kernel.org/pub/tools/crosstool/files/bin/
+[2] https://launchpad.net/~dristan-viburnums/+archive/ubuntu/toolchain
+
+> I was compiling the u-boot just for learning purposes. Sandly, I think
+> that I do not have the knowledge to fix it. If you can guide me in a
+> certain direction, I would greatly appreciate it.
+> 
+> In addition, I would greatly appreciate any insights or
+> recommendations you might have to help resolve this. If you need
+> further details or clarification on any point, I would be more than
+> happy to provide them.
+> 
+> Thank you very much for your time and for all the hard work that goes
+> into maintaining this project. I look forward to any advice you might
+> offer
+> 
+> Thanks in advance,
+> Reyders
+> PD: I wrote to you because I use the get_maintainer.pl script and they
+> show these names.
+
+Please CC the U-Boot mailing list.
+
+--Sean
