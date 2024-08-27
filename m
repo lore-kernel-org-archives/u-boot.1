@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A01AAC54731
-	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 19:25:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA34FC5472F
+	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 19:27:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA40F88A27;
-	Tue, 27 Aug 2024 21:25:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 41C2687B84;
+	Tue, 27 Aug 2024 21:27:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BRlIIzer";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SIBHSNWD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BDC888A74; Tue, 27 Aug 2024 21:25:17 +0200 (CEST)
-Received: from mail-vs1-xe33.google.com (mail-vs1-xe33.google.com
- [IPv6:2607:f8b0:4864:20::e33])
+ id 4E8CE87B84; Tue, 27 Aug 2024 21:27:00 +0200 (CEST)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2455888C1
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 21:25:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AE67B879C1
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 21:26:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-vs1-xe33.google.com with SMTP id
- ada2fe7eead31-498dccd3ce1so1852952137.1
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 12:25:14 -0700 (PDT)
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-e179c28f990so4917036276.0
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 12:26:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724786714; x=1725391514; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=v34+u9/zq8MPMfG5zjz/vRNf0DrFxtg1lcLU/SfoGfU=;
- b=BRlIIzertg/U8M0osbC4kNACihHhtIVdMBtBHjSJFwjgwmh9p/Y6LPyq3pDt71NkZ2
- RxxwG7DplLV6RTmasbMg4qxdVH7Ga3bLQnWx38TviYdKw509/32JpHBklOBKmwF5VWgW
- YIpQ9ZByXSLVs+uVdj3kVBPLMzsxCZZHjVFHQ=
+ d=chromium.org; s=google; t=1724786816; x=1725391616; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5Kq7vX9m16k3VS+7aKTFxnxYe1sxYsl7sxrpKAO9EsA=;
+ b=SIBHSNWD1EtoGCKTcQpuvZhsGkpFqExP7iOBsJSDDSFFvwtmuBzduZPzMZ51Jhq+0c
+ /lsB3GJDSkpiAokcgLOySVJMPNbS+GeaFKFvTtQxuhx4D/QEOgIRHH6A6V916qAahsm1
+ FgNOonP0ctO9z8GpkxOTdjttP1KAcbyX7n5so=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724786714; x=1725391514;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=v34+u9/zq8MPMfG5zjz/vRNf0DrFxtg1lcLU/SfoGfU=;
- b=X4WTaUePiiyGA6RcCT7FBjkJ+gKsE/LMSPEm2t6AVzM6Le4+ImjD39ZMeF3peSYRYS
- 8N6Qhqlb1legf9+FNk5KuvzSEREcH2aElFuFu7VsCkwRX/FvfMbrO8kDY7rT71ZjRl18
- CvShS1aX1yLq+C4eSda8XJPFdqb09TRKAJXOY30kYlpo30pOJgJ+qLvNxRiYRARTjacd
- S22esnZrgQ0Cttg/mPYzMtVDTXqaOrP12/4Gf+ORaNbeGZpVeWxDU2bi68G1mNQgPwjl
- 0HOjzUv7Swr7pTFzvl0WOLpDYgLVy42eALrac0ekuXz99XHAeYO2yY6LaEcbxNFJ59Oc
- YS/Q==
-X-Gm-Message-State: AOJu0YwmUhQCXlMXddSnmugUVVxToUdqxiZeq8mKhbwWmlnLHK9ttyuh
- jed1iqyEwYmjBEYb9AIDpyHvBHCdCkWSIWTxwo53FmfAbCVYF0DMHbtZEjoL540AMKFIP7LaipA
- Q8WLM3s5gVpzQoZqGE6zo5D4+cqZOeKSbxses
-X-Google-Smtp-Source: AGHT+IFkdq2565cfPCvwIxtO+3GdlsRxjrJ7QE3H616Vf5RP+yH+Eth+nhJcU/0p45lEqizdF8FbmJpW/NqJgRTn5+k=
-X-Received: by 2002:a05:6102:2ad0:b0:497:1b98:1f82 with SMTP id
- ada2fe7eead31-49a3bb62257mr5095944137.6.1724786713646; Tue, 27 Aug 2024
- 12:25:13 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1724786816; x=1725391616;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=5Kq7vX9m16k3VS+7aKTFxnxYe1sxYsl7sxrpKAO9EsA=;
+ b=SCehTEAO9F42WGFKvGitri0lL15EKhnI1o1YAWKp9VtdITO/WoZh0ZORqJ8pK1oENU
+ WXeDn9JP8hDxF40Awu9EU0RmLs0Y7tQFvXzyZBBBadRxyYEdXmbYu9K/zo7+l4E8ftqM
+ oqW+JMAPjbE6/amccapIimgM7eC/EbUkOnaEa7GArjcWF8LPchhKDCD4lx+/eaKdUbzS
+ M7gbizR7dsvuRlspFnb0IV23O3ZOOSL6nLi0TiKcTlt8V9CZxDUgYjlfb0rGR6RbHtlX
+ +Kj2a5CX6wJkNoi8hGYffcX4RJ7CO5vADM+PnG/WYy675UNyh9rBFJ/uLrA8Sc7g4bOH
+ b6OA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU9gtcODj+Xu69YpY0zko/yGayMfAov0LyTq8vPNek4EcyjFVZRUznuunhGcQ7ztwARVKHzgKs=@lists.denx.de
+X-Gm-Message-State: AOJu0YycCR8WvXJY397qmoltSPPLvc5if9NFTNNQT3X09SzRZlJvf6lm
+ MwO27W6icJiuz+GdERPNfOogCbBfxYD5t+VlY67paR18ey//KvDMW/uL1JwzRw0OxqyoHt+pXpZ
+ usAri15Pg9AYMFYtsrBJNYixDFsfVxbTjTgWp
+X-Google-Smtp-Source: AGHT+IGxVUCgD5kZyBSUKFg+ruB1wy996/PGMEkpAbmqEUtLjB2EsEOoAWCv3I77/cnFqEpZK8XAEm8E6UB7MJUvRfM=
+X-Received: by 2002:a05:6902:2d04:b0:e05:7c38:1085 with SMTP id
+ 3f1490d57ef6-e17a86639ecmr15893391276.41.1724786816469; Tue, 27 Aug 2024
+ 12:26:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240821161927.695717-1-sjg@chromium.org>
- <20240821161927.695717-27-sjg@chromium.org>
- <20240823133450.GA1627158@bill-the-cat>
- <CAFLszThQKH-pM1nTNJv5HwLanc9tGL4ZgvPLzxWk48LmxHa+NQ@mail.gmail.com>
- <20240823210723.GY1626301@bill-the-cat>
- <CAFLszTirvuCkhb7BTj84Y3oNey34fmi=+V=fFTwb73rV428i=Q@mail.gmail.com>
- <20240823214940.GC2479150@bill-the-cat>
- <CAFLszTh5JTmtm55TrHTpHSjYPzGSyxBVOa8hG=yUVfPg1y3jsw@mail.gmail.com>
- <20240826183318.GL2479150@bill-the-cat>
-In-Reply-To: <20240826183318.GL2479150@bill-the-cat>
+References: <20240808110654.4215b129@wsk>
+ <CAOMZO5A74MigLO0qkeXi04=7M70jaiEgk9zdFBjUV74vuZDP0g@mail.gmail.com>
+ <20240815221421.61f64a17@wsk>
+ <CAOMZO5B-fkLQsQx205mxXQdmk3ij6Hxx4ErM84DtEtBg3mYa7Q@mail.gmail.com>
+In-Reply-To: <CAOMZO5B-fkLQsQx205mxXQdmk3ij6Hxx4ErM84DtEtBg3mYa7Q@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 27 Aug 2024 13:25:03 -0600
-Message-ID: <CAFLszTh-gRK-3eTeF3rvNJ5yO5=X87Bgx7u8ND1rERiMq7_b_Q@mail.gmail.com>
-Subject: Re: [PATCH v2 26/35] global_data: Reduce size of early-malloc vars
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
+Date: Tue, 27 Aug 2024 13:26:45 -0600
+Message-ID: <CAFLszTggpR9aaDAH_Mx_zDNnKAb7r_O+sdyyVVG_xULqkrWnzg@mail.gmail.com>
+Subject: Re: [Binman] Question regarding SPL symbol offsets generation
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Lukasz Majewski <lukma@denx.de>,
+ Mamta Shukla <mamta.shukla@leica-geosystems.com>, 
+ Adam Ford <aford173@gmail.com>, u-boot@lists.denx.de,
+ Marek Vasut <marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,123 +91,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi,
 
-On Mon, 26 Aug 2024 at 12:33, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 27 Aug 2024 at 12:47, Fabio Estevam <festevam@gmail.com> wrote:
 >
-> On Fri, Aug 23, 2024 at 05:30:48PM -0600, Simon Glass wrote:
-> > Hi Tom,
+> Hi Lukasz,
+>
+> On Thu, Aug 15, 2024 at 5:14=E2=80=AFPM Lukasz Majewski <lukma@denx.de> w=
+rote:
+>
+> > Unfortunately not - this change is only for properly setting start
+> > address of the u-boot.
 > >
-> > On Fri, 23 Aug 2024 at 15:49, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Fri, Aug 23, 2024 at 03:44:45PM -0600, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Fri, 23 Aug 2024 at 15:07, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Fri, Aug 23, 2024 at 02:30:04PM -0600, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Fri, 23 Aug 2024 at 07:34, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Wed, Aug 21, 2024 at 10:19:18AM -0600, Simon Glass wrote:
-> > > > > > >
-> > > > > > > > The early malloc region is normally quite small and is certainly less
-> > > > > > > > than 4GB, so use a 32-bit value for the limit and pointer. Update the
-> > > > > > > > comment for clarity while we are here.
-> > > > > > > >
-> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > ---
-> > > > > > > >
-> > > > > > > > (no changes since v1)
-> > > > > > > >
-> > > > > > > >  arch/arm/lib/bdinfo.c             | 2 +-
-> > > > > > > >  common/board_r.c                  | 2 +-
-> > > > > > > >  common/malloc_simple.c            | 7 ++++---
-> > > > > > > >  common/spl/spl.c                  | 4 ++--
-> > > > > > > >  include/asm-generic/global_data.h | 6 +++---
-> > > > > > > >  5 files changed, 11 insertions(+), 10 deletions(-)
-> > > > > > >
-> > > > > > > This breaks booting on am64x_evm_a53 which is an odd platform that does
-> > > > > > > SPL->SPL->U-Boot.
-> > > > > >
-> > > > > > OK, I can repeat that on the Beagleplay in my lab. I sent a v3 patch.
-> > > > > > Thanks for bisecting.
-> > > > >
-> > > > > Oh good, beagleplay is run after the EVM in my loop and so I didn't see
-> > > > > it was broken there too.
-> > > > >
-> > > > > > I'd love to be able to push trees to gitlab and have them run on my
-> > > > > > lab. I think you said that the patches[1] break your lab, so let me
-> > > > > > know if there is anything I can fix.
-> > > > > >
-> > > > > > Regards,
-> > > > > > Simon
-> > > > > >
-> > > > > > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=420392
-> > > > >
-> > > > > Well the good news is that I've got the tests running again here, and I
-> > > > > think I mostly understand where the challenges will be in updating this
-> > > > > lab to a newer labgrid version and so being able to migrate it to on top
-> > > > > of your patches. The challenge next will be time. Likely the next steps
-> > > > > will be splitting out your serieses in to test fixes and labgrid
-> > > > > implementation details.
-> > > >
-> > > > I just sent v3 of the u-boot-test-hooks series. That needs to be in
-> > > > for Labgrid to work.
-> > >
-> > > Yes, thanks. It reminded me how far apart what you have is from what I
-> > > have, for labgrid.
+> > The _real_ problem here is the symbol placement generated by binman
+> > when we try to define the image as a single one.
 > >
-> > Oh...is it posted somewhere?
->
-> I posted it in response to your other lab grid series at various points.
-> At this point there's not much too it because it's just one-liners more
-> or less like:
-> $ cat console.labgrid
-> exec $LG_CLIENT -c $LG_ENV console
->
-> and so forth (and LG_CLIENT shouldn't be abstracted honestly, it should
-> just be labgrid-client).
->
-
-OK I see
-
-> > > > The only other series is [1] which makes the integration nicer, but is
-> > > > not necessary. That makes sense since we still want the lab to be able
-> > > > to test older commits.
-> > > >
-> > > > From that series patch [2] fixes a problem which breaks pytest runs,
-> > > > since without it, pytest gets a double echo of a few of the characters
-> > > > of the first command it sends. It is a pretty annoying problem which
-> > > > took a while to figure out. I tried very hard to fix it without
-> > > > patching U-Boot's pytest code, but I gave up. One thought I just had
-> > > > is that it is possible that setting up the terminal in the
-> > > > u-boot-test-console script might work most of the time, i.e. before
-> > > > calling Labgrid.
-> > >
-> > > I know with previous iterations of all of the test cleanups and changes
-> > > you did, my non-labgrid lab also started failing immediately. Keeping in
-> > > mind that today I run all of the pytests on a few hardware platforms,
-> > > both with and without labgrid, I need to see what changes you've done
-> > > lead to what behavior changes here, and then eventually get things
-> > > boiled down to just the your labgrid implementation specific parts, and
-> > > see how to work with them, or if it's too far away from the rest of my
-> > > use case.
+> > Moreover, this change follows other boards with imx8mm processor -
+> > ./configs/imx8mm_beacon_fspi_defconfig to be specific.
 > >
-> > It might have been that it stopped running conf.xxx files...I fixed that in v3.
-> >
-> > OK, I will wait to hear.
+> > The "fix" (for which I'd been now probably opt) for this issue would be
+> > to generate two images with binman - one for u-boot-spl-ddr.bin and the
+> > final flash.bin with the former one included (as it was before SHA1:
+> > 37e50627efacd8dae18b564e9d8886a033e181bc)
 >
-> It was I think a lack of the new top-level scripts being present, I
-> think. We might need to re-work that part of the series to be 3 parts,
-> where release.none/u-boot-test-release are added in preparation for
-> adding the labgrid specific one.
+> Is QSPI boot broken on i.MX8MM?
+>
+> I am adding Adam and Mamta who have tested QSPI booting on
+> imx8mm_beacon and imx8mm_evk, respectively.
 
-Yes that will help.
-
-I think I have a simple way to keep both things working at the same
-time, so let me try again with that u-boot-test-hooks series.
+Note also that I sent a series[1] which allows the symbols-base to be
+adjusted, if that helps.
 
 Regards,
 Simon
+
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=3D421010
