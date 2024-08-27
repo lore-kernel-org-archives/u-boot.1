@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25178C54731
-	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 19:43:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A346DC54736
+	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 19:43:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8CCF88A47;
-	Tue, 27 Aug 2024 21:43:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3694A88A92;
+	Tue, 27 Aug 2024 21:43:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iPHJIAaA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="baLFiGVa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A68E88A2F; Tue, 27 Aug 2024 21:43:24 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id 295C3889CA; Tue, 27 Aug 2024 21:43:30 +0200 (CEST)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4282D88A75
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 21:43:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD51588A92
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 21:43:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-2703967b10cso4166602fac.0
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 12:43:22 -0700 (PDT)
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-714187df604so12432b3a.1
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 12:43:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724787801; x=1725392601; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1724787804; x=1725392604; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rCXK0moNMngA8E1DVLnEuSS46dqTVrISoVui5Q8o84w=;
- b=iPHJIAaA72QqLfp+9OgzhDDkF8HjKoSUoNOzbFESuBqiy4vJTCzv0gU21+6TDu2umy
- m9/g8wjbMxXm0/Ts7KlqC52MJBMwV3HRFkk6yTCprbQuSiH/nRGqbD7TT/4AMivqZBud
- rtaSz9PlSDk2kG3Co5mynu2UYICzESfab3qpQgKKYkS68mipNhzi2O6S862gXVZwJnzQ
- +iHq3YxIRKgVz4G7KnYUKz/epxp9lTgHnMmaBkDGntEqTSg1zTESXit6UnRCmZOB08i/
- +k1VcbZ1QoWdV0+xNbN+rbFZXkUjtoXeDiYBvR20aHi+QQNziWtkrdVUnbNjgZgnWpna
- Vexg==
+ bh=Np833XPSBZKtxxKYmgSFUPbgyYdJJi1zzRp4THMAqsw=;
+ b=baLFiGVaDNl9PDpzQ7QWDlAB2Ja7+f1j5fvebMim1c7xS5aZ0RImUEbJS26etvkTLH
+ oip9yJ0ENHkb24hbKRVqukAcu5yIK/5iDYj4Hd4lRyfA0qbnV/Z5u9fhck8xs9tIvGyz
+ ypSfKI2wsfaz26REIGen9EkcnkSGnRSHLqkhCaN+95lS7IkAjG5jhxiB5hid5KYIAGAL
+ ff2ZghosbvqJuD84E/s8pXCq3ZyMTvPgCmFoWA8G0rRifyjDhbYxXXrjNa8edO0muEcG
+ tdqh0bVhe4AL4vZLYOvvG0JX0p6tqFa6izpZrBSL89bneEWFbIYGkjKphB3W8hfXsXSO
+ NPBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724787801; x=1725392601;
+ d=1e100.net; s=20230601; t=1724787804; x=1725392604;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rCXK0moNMngA8E1DVLnEuSS46dqTVrISoVui5Q8o84w=;
- b=t3QPGKD4QghNKjHjZwMlyJGWxtUh6OcDPF+2ufjecAOs6YGWKmBo5IuV+gseIWyp8A
- NbyKkr3bRA4vtvYohR9yRVzj4DNXBfFUvveMdVJ4Yj813LqxzmC4F1+Eq93SvziY8n95
- EznBzO+HcTdOUcvAWHrvBcdGuxj/u/kgp0lOnvygTK8FJE76tj26mpkXWFAKLRq2x9C9
- RdZfu0Xd7v6TV+r7wQ7FEVCPRa1gJ8jPaox85FvtG8TZlNlrRg/bDklyziNyRbURHQp5
- 0DI1TrynlhxviEs/W+DGqwD+F9g6cdPFuQMxBTEwq/4a3EWuypraW1GGcG/G4yVux26G
- j9fg==
+ bh=Np833XPSBZKtxxKYmgSFUPbgyYdJJi1zzRp4THMAqsw=;
+ b=XwqHAyDD7Tvu1tV3nRgQvoFSE2WhwrkSVlX7tCali8AGflzKrmvb4eX0uB9v6dqNyx
+ XFPi2E3os9pvvI45KCZQaWAScyeJn0DAZDMs4NBOr+vliyHPmwys32vF5wPJwCew2bQa
+ CAvxT2x2RIpFgd92W0py/Plq77iSApwTcz/UIQIXr/Br68PugurwEC2PdCcqMEfQWiS9
+ RwKFtZ7ReybW8zULcYE9a/BAcf9IJb/0CBRXDUxIMB51kjJwwLgD597NLRlnR/6ssnq9
+ qgRneBwmxbFsJHo3RNzmstgBfl+ufCIVK96X7UFwEx5AsgGCfE4EYAVpDg3OnrWZt/D/
+ dJ3w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW7ioo0JM8fnKkR7pl6hCIoYOYgNIcQOpoyNy5jafkVQets/b17BJtBsK/MlzO19kzkat+rtyA=@lists.denx.de
-X-Gm-Message-State: AOJu0YzMo6jXTvMNshXE+r0IShrsIEIcfPndZ+2GKU140saUtrRE+gXy
- KT3L7NVo8kCI2SdD8gylTBHZCWqwUkFk4FcFxbXQNB0+nNw1AqSL
-X-Google-Smtp-Source: AGHT+IFBSpewHHQ+o5gxu7gRc29dvOSeG+QlcBubQHhIhc8eQ3qEz60QhlWf4uR65mbKpG4a9CEmHQ==
-X-Received: by 2002:a05:6870:b406:b0:270:5d07:51f4 with SMTP id
- 586e51a60fabf-273e6727707mr16974832fac.45.1724787800818; 
- Tue, 27 Aug 2024 12:43:20 -0700 (PDT)
+ AJvYcCXuf/oRkyqvpg+1oUX/ys7CJxzxE1I5jATSznnwS2fCMy8oV5RwkC8cS9+Y4JVBfK0Ix8g1i+4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwGQTutz5MJqZQEiAs4snuNDM/4bt9Lljd4JwLhRvMHpq43a+l4
+ H7UGLk+Mwhq4a/ylTCDeeitvpFEO/crHpKWhedBtxmXTMDVC6dFC
+X-Google-Smtp-Source: AGHT+IHXw1wTlLdATV6TaQpc2XJ7z/41V2dsmpWuZ+C6I13m1ew8rAb8g1cZQA6seysyD5ACCNbvFA==
+X-Received: by 2002:a05:6a21:788b:b0:1c8:aa88:f10a with SMTP id
+ adf61e73a8af0-1cccfe0d2d4mr522567637.10.1724787803796; 
+ Tue, 27 Aug 2024 12:43:23 -0700 (PDT)
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:9a82:cd38:57a9:3c17])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7cd9acabccasm8311218a12.27.2024.08.27.12.43.18
+ 41be03b00d2f7-7cd9acabccasm8311218a12.27.2024.08.27.12.43.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Aug 2024 12:43:20 -0700 (PDT)
+ Tue, 27 Aug 2024 12:43:23 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: peng.fan@nxp.com
 Cc: marex@denx.de, u-boot@lists.denx.de, tharvey@gateworks.com, smoch@web.de,
  Fabio Estevam <festevam@denx.de>
-Subject: [PATCH v2 3/4] mx5: Remove CFG_MXC_USB_PORT
-Date: Tue, 27 Aug 2024 16:43:06 -0300
-Message-Id: <20240827194307.2933299-3-festevam@gmail.com>
+Subject: [PATCH v2 4/4] imx: Remove CFG_MXC_USB_PORTSC
+Date: Tue, 27 Aug 2024 16:43:07 -0300
+Message-Id: <20240827194307.2933299-4-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240827194307.2933299-1-festevam@gmail.com>
 References: <20240827194307.2933299-1-festevam@gmail.com>
@@ -96,94 +96,928 @@ X-Virus-Status: Clean
 
 From: Fabio Estevam <festevam@denx.de>
 
-CFG_MXC_USB_PORT is not used anywhere, so remove this unused symbol.
+The definition of CFG_MXC_USB_PORTSC as (PORT_PTS_UTMI | PORT_PTS_PTW)
+can be removed from mx5/mx6/mx7/mx8m board config files as it is the
+default in drivers/usb/host/ehci-mx5.c and drivers/usb/host/ehci-mx6.c.
 
 Suggested-by: Tim Harvey <tharvey@gateworks.com>
 Signed-off-by: Fabio Estevam <festevam@denx.de>
 ---
 Changes since v1:
-- Newly introduced.
+- Also remove the related context such as comments
+or ifdefs. (Soeren, Tim).
 
- include/configs/m53menlo.h   | 1 -
- include/configs/mx51evk.h    | 1 -
- include/configs/mx53cx9020.h | 1 -
- include/configs/mx53loco.h   | 1 -
- include/configs/mx53ppd.h    | 1 -
- include/configs/usbarmory.h  | 1 -
- 6 files changed, 6 deletions(-)
+ include/configs/apalis_imx6.h            | 4 ----
+ include/configs/aristainetos2.h          | 3 ---
+ include/configs/brppt2.h                 | 3 ---
+ include/configs/cl-som-imx7.h            | 3 ---
+ include/configs/cm_fx6.h                 | 3 ---
+ include/configs/colibri-imx6ull.h        | 4 ----
+ include/configs/colibri_imx6.h           | 4 ----
+ include/configs/colibri_imx7.h           | 4 ----
+ include/configs/dart_6ul.h               | 3 ---
+ include/configs/dh_imx6.h                | 3 ---
+ include/configs/display5.h               | 1 -
+ include/configs/embestmx6boards.h        | 3 ---
+ include/configs/ge_b1x5v2.h              | 3 ---
+ include/configs/gw_ventana.h             | 3 ---
+ include/configs/imx6_logic.h             | 5 -----
+ include/configs/imx6dl-mamoj.h           | 3 ---
+ include/configs/imx6q-bosch-acc.h        | 1 -
+ include/configs/imx7-cm.h                | 3 ---
+ include/configs/imx8mm-cl-iot-gate.h     | 3 ---
+ include/configs/kontron-sl-mx6ul.h       | 4 ----
+ include/configs/kontron-sl-mx8mm.h       | 4 ----
+ include/configs/kp_imx53.h               | 3 ---
+ include/configs/kp_imx6q_tpc.h           | 5 -----
+ include/configs/liteboard.h              | 5 -----
+ include/configs/m53menlo.h               | 7 -------
+ include/configs/meerkat96.h              | 3 ---
+ include/configs/mx51evk.h                | 1 -
+ include/configs/mx53cx9020.h             | 3 ---
+ include/configs/mx53loco.h               | 3 ---
+ include/configs/mx53ppd.h                | 3 ---
+ include/configs/mx6cuboxi.h              | 3 ---
+ include/configs/mx6memcal.h              | 1 -
+ include/configs/mx6sabreauto.h           | 3 ---
+ include/configs/mx6sabresd.h             | 5 -----
+ include/configs/mx6slevk.h               | 5 -----
+ include/configs/mx6sllevk.h              | 5 -----
+ include/configs/mx6sxsabreauto.h         | 4 ----
+ include/configs/mx6sxsabresd.h           | 4 ----
+ include/configs/mx6ul_14x14_evk.h        | 5 -----
+ include/configs/mx7dsabresd.h            | 3 ---
+ include/configs/mx7ulp_com.h             | 1 -
+ include/configs/mys_6ulx.h               | 3 ---
+ include/configs/nitrogen6x.h             | 3 ---
+ include/configs/novena.h                 | 5 -----
+ include/configs/npi_imx6ull.h            | 3 ---
+ include/configs/o4-imx6ull-nano.h        | 4 ----
+ include/configs/opos6uldev.h             | 5 -----
+ include/configs/pcl063.h                 | 3 ---
+ include/configs/pcl063_ull.h             | 3 ---
+ include/configs/pico-imx6.h              | 3 ---
+ include/configs/pico-imx6ul.h            | 3 ---
+ include/configs/pico-imx7d.h             | 3 ---
+ include/configs/somlabs_visionsom_6ull.h | 5 -----
+ include/configs/tbs2910.h                | 5 -----
+ include/configs/tqma6.h                  | 3 ---
+ include/configs/usbarmory.h              | 3 ---
+ include/configs/verdin-imx8mm.h          | 3 ---
+ include/configs/vining_2000.h            | 1 -
+ include/configs/wandboard.h              | 3 ---
+ include/configs/warp7.h                  | 1 -
+ include/configs/xpress.h                 | 3 ---
+ 61 files changed, 204 deletions(-)
 
-diff --git a/include/configs/m53menlo.h b/include/configs/m53menlo.h
-index 1491c509820..51ce030d831 100644
---- a/include/configs/m53menlo.h
-+++ b/include/configs/m53menlo.h
-@@ -70,7 +70,6 @@
-  * USB
-  */
- #ifdef CONFIG_CMD_USB
--#define CFG_MXC_USB_PORT		1
- #define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+diff --git a/include/configs/apalis_imx6.h b/include/configs/apalis_imx6.h
+index 097f819e44a..e5df82c6830 100644
+--- a/include/configs/apalis_imx6.h
++++ b/include/configs/apalis_imx6.h
+@@ -23,10 +23,6 @@
+ 
+ /* Network */
+ 
+-/* USB Configs */
+-/* Host */
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ /* Framebuffer and LCD */
+ 
+ /* Command definition */
+diff --git a/include/configs/aristainetos2.h b/include/configs/aristainetos2.h
+index 120ff9284ef..8a66b1275df 100644
+--- a/include/configs/aristainetos2.h
++++ b/include/configs/aristainetos2.h
+@@ -411,9 +411,6 @@
+ 
+ /* DMA stuff, needed for GPMI/MXS NAND support */
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ /* UBI support */
+ 
+ #define CFG_ENV_FLAGS_LIST_STATIC "ethaddr:mw,serial#:sw,board_type:sw," \
+diff --git a/include/configs/brppt2.h b/include/configs/brppt2.h
+index 38c98c5e21c..d01f0d37316 100644
+--- a/include/configs/brppt2.h
++++ b/include/configs/brppt2.h
+@@ -78,7 +78,4 @@ BUR_COMMON_ENV \
+ #define CFG_SYS_INIT_RAM_ADDR	IRAM_BASE_ADDR
+ #define CFG_SYS_INIT_RAM_SIZE	IRAM_SIZE
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #endif	/* __CONFIG_BRPP2_IMX6_H */
+diff --git a/include/configs/cl-som-imx7.h b/include/configs/cl-som-imx7.h
+index 96058d48148..8c363137b4f 100644
+--- a/include/configs/cl-som-imx7.h
++++ b/include/configs/cl-som-imx7.h
+@@ -95,7 +95,4 @@
+ #define CFG_SYS_FSL_USDHC_NUM	2
  #endif
  
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC  (PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #endif	/* __CONFIG_H */
+diff --git a/include/configs/cm_fx6.h b/include/configs/cm_fx6.h
+index fc2d59751c4..f7fd4c517b4 100644
+--- a/include/configs/cm_fx6.h
++++ b/include/configs/cm_fx6.h
+@@ -134,9 +134,6 @@
+ /* Ethernet */
+ #define CFG_FEC_MXC_PHYADDR		0
+ 
+-/* USB */
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ /* Boot */
+ #define CFG_SYS_BOOTMAPSZ	        (8 << 20)
+ 
+diff --git a/include/configs/colibri-imx6ull.h b/include/configs/colibri-imx6ull.h
+index c896a897cbf..26b29bad6a1 100644
+--- a/include/configs/colibri-imx6ull.h
++++ b/include/configs/colibri-imx6ull.h
+@@ -117,10 +117,6 @@
+ #define CFG_SYS_NAND_BASE		-1
+ #endif
+ 
+-/* USB Configs */
+-
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ /* USB Device Firmware Update support */
+ #define DFU_DEFAULT_POLL_TIMEOUT	300
+ 
+diff --git a/include/configs/colibri_imx6.h b/include/configs/colibri_imx6.h
+index 87c973883c3..664b7c8ce0c 100644
+--- a/include/configs/colibri_imx6.h
++++ b/include/configs/colibri_imx6.h
+@@ -21,10 +21,6 @@
+ #define CFG_SYS_FSL_ESDHC_ADDR	0
+ #define CFG_SYS_FSL_USDHC_NUM	2
+ 
+-/* USB Configs */
+-/* Host */
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ /* Command definition */
+ 
+ #define BOOT_TARGET_DEVICES(func) \
+diff --git a/include/configs/colibri_imx7.h b/include/configs/colibri_imx7.h
+index 0e0665038b1..c340dfb1189 100644
+--- a/include/configs/colibri_imx7.h
++++ b/include/configs/colibri_imx7.h
+@@ -159,8 +159,4 @@
+ #define CFG_SYS_NAND_BASE		0x40000000
+ #endif
+ 
+-/* USB Configs */
+-
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #endif
+diff --git a/include/configs/dart_6ul.h b/include/configs/dart_6ul.h
+index 4d715d4f425..2b329b4065c 100644
+--- a/include/configs/dart_6ul.h
++++ b/include/configs/dart_6ul.h
+@@ -46,9 +46,6 @@
+ #define CFG_SYS_INIT_RAM_ADDR	IRAM_BASE_ADDR
+ #define CFG_SYS_INIT_RAM_SIZE	IRAM_SIZE
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #define ENV_MMC \
+ 	"mmcdev=" __stringify(MMC_ROOTFS_DEV) "\0" \
+ 	"mmcpart=" __stringify(MMC_ROOTFS_PART) "\0" \
+diff --git a/include/configs/dh_imx6.h b/include/configs/dh_imx6.h
+index dc5ca9fc60c..9b6f03f6856 100644
+--- a/include/configs/dh_imx6.h
++++ b/include/configs/dh_imx6.h
+@@ -30,9 +30,6 @@
+ /* UART */
+ #define CFG_MXC_UART_BASE		UART1_BASE
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ /* USB Gadget (DFU, UMS) */
+ #if defined(CONFIG_CMD_DFU) || defined(CONFIG_CMD_USB_MASS_STORAGE)
+ #define DFU_DEFAULT_POLL_TIMEOUT	300
+diff --git a/include/configs/display5.h b/include/configs/display5.h
+index 2005a256d6e..51fa2b03a2e 100644
+--- a/include/configs/display5.h
++++ b/include/configs/display5.h
+@@ -287,5 +287,4 @@
+ /* The 0x120000 value corresponds to above SPI-NOR memory MAP */
+ #endif
+ 
+-#define CFG_MXC_USB_PORTSC           (PORT_PTS_UTMI | PORT_PTS_PTW)
+ #endif /* __CONFIG_H */
+diff --git a/include/configs/embestmx6boards.h b/include/configs/embestmx6boards.h
+index e378374a004..61c0d755a8d 100644
+--- a/include/configs/embestmx6boards.h
++++ b/include/configs/embestmx6boards.h
+@@ -17,9 +17,6 @@
+ 
+ #define PHYS_SDRAM_SIZE		(1u * 1024 * 1024 * 1024)
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ /* MMC Configs */
+ #define CFG_SYS_FSL_ESDHC_ADDR      0
+ 
+diff --git a/include/configs/ge_b1x5v2.h b/include/configs/ge_b1x5v2.h
+index 0bf31897a74..f3d85c9c11e 100644
+--- a/include/configs/ge_b1x5v2.h
++++ b/include/configs/ge_b1x5v2.h
+@@ -23,9 +23,6 @@
+ #define CONSOLE_DEVICE "ttymxc2" /* Base board debug connector */
+ #endif
+ 
+-/* USB */
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ /* Memory */
+ #define PHYS_SDRAM		       MMDC0_ARB_BASE_ADDR
+ 
+diff --git a/include/configs/gw_ventana.h b/include/configs/gw_ventana.h
+index f884d74d9ca..d112825ad1f 100644
+--- a/include/configs/gw_ventana.h
++++ b/include/configs/gw_ventana.h
+@@ -35,9 +35,6 @@
+ 
+ /* Various command support */
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC     (PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ /* Miscellaneous configurable options */
+ 
+ /* Memory configuration */
+diff --git a/include/configs/imx6_logic.h b/include/configs/imx6_logic.h
+index 19613e838fb..75997469cd9 100644
+--- a/include/configs/imx6_logic.h
++++ b/include/configs/imx6_logic.h
+@@ -114,11 +114,6 @@
+ #define CFG_SYS_NAND_BASE           0x40000000
+ #define CFG_SYS_NAND_U_BOOT_START	CONFIG_TEXT_BASE
+ 
+-/* USB Configs */
+-#ifdef CONFIG_CMD_USB
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-#endif
+-
+ /* Falcon Mode */
+ 
+ /* Falcon Mode - MMC support: args@1MB kernel@2MB */
+diff --git a/include/configs/imx6dl-mamoj.h b/include/configs/imx6dl-mamoj.h
+index 6651653d5e9..8abb58b0691 100644
+--- a/include/configs/imx6dl-mamoj.h
++++ b/include/configs/imx6dl-mamoj.h
+@@ -42,9 +42,6 @@
+ /* Ethernet */
+ #define CFG_FEC_MXC_PHYADDR		1
+ 
+-/* USB */
+-#define CFG_MXC_USB_PORTSC			(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ /* Falcon */
+ 
+ /* MMC support: args@1MB kernel@2MB */
+diff --git a/include/configs/imx6q-bosch-acc.h b/include/configs/imx6q-bosch-acc.h
+index aa365dc9a79..fab5063b73f 100644
+--- a/include/configs/imx6q-bosch-acc.h
++++ b/include/configs/imx6q-bosch-acc.h
+@@ -110,6 +110,5 @@
+ #endif
+ #endif
+ 
+-#define CFG_MXC_USB_PORTSC            (PORT_PTS_UTMI | PORT_PTS_PTW)
+ 
+ #endif /* __IMX6Q_ACC_H */
+diff --git a/include/configs/imx7-cm.h b/include/configs/imx7-cm.h
+index 131f18290b9..36c4c5b8b50 100644
+--- a/include/configs/imx7-cm.h
++++ b/include/configs/imx7-cm.h
+@@ -77,7 +77,4 @@
+ #define CFG_SYS_FSL_ESDHC_ADDR       USDHC1_BASE_ADDR
+ #define CFG_SYS_FSL_USDHC_NUM		2
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC  (PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #endif	/* __CONFIG_H */
+diff --git a/include/configs/imx8mm-cl-iot-gate.h b/include/configs/imx8mm-cl-iot-gate.h
+index 6442e3d570f..146f7945719 100644
+--- a/include/configs/imx8mm-cl-iot-gate.h
++++ b/include/configs/imx8mm-cl-iot-gate.h
+@@ -137,7 +137,4 @@
+ 
+ #define CFG_FEC_MXC_PHYADDR		-1 /* Auto search of PHY on MII */
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #endif /*__IMX8MM_CL_IOT_GATE_H*/
+diff --git a/include/configs/kontron-sl-mx6ul.h b/include/configs/kontron-sl-mx6ul.h
+index e68c667c505..015df01db4e 100644
+--- a/include/configs/kontron-sl-mx6ul.h
++++ b/include/configs/kontron-sl-mx6ul.h
+@@ -24,10 +24,6 @@
+ /* Board and environment settings */
+ #define CFG_MXC_UART_BASE		UART4_BASE
+ 
+-#ifdef CONFIG_USB_EHCI_HCD
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-#endif
+-
+ /* Boot order for distro boot */
+ #define BOOT_TARGET_DEVICES(func) \
+ 	func(MMC, mmc, 1) \
+diff --git a/include/configs/kontron-sl-mx8mm.h b/include/configs/kontron-sl-mx8mm.h
+index be1f70a9a59..3a129c5cce7 100644
+--- a/include/configs/kontron-sl-mx8mm.h
++++ b/include/configs/kontron-sl-mx8mm.h
+@@ -24,10 +24,6 @@
+ 
+ /* Board and environment settings */
+ 
+-#ifdef CONFIG_USB_EHCI_HCD
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-#endif
+-
+ /* GUID for capsule updatable firmware image */
+ #define KONTRON_SL_MX8MM_FIT_IMAGE_GUID \
+ 	EFI_GUID(0xd488e45a, 0x4929, 0x4b55, 0x8c, 0x14, \
+diff --git a/include/configs/kp_imx53.h b/include/configs/kp_imx53.h
+index 91caf03091c..48adff3f03a 100644
+--- a/include/configs/kp_imx53.h
++++ b/include/configs/kp_imx53.h
+@@ -10,9 +10,6 @@
+ #include <asm/arch/imx-regs.h>
+ #include <linux/sizes.h>
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ /* Command definition */
+ 
+ #define CFG_EXTRA_ENV_SETTINGS \
+diff --git a/include/configs/kp_imx6q_tpc.h b/include/configs/kp_imx6q_tpc.h
+index 74f6e4e9f96..c0cb3db23e7 100644
+--- a/include/configs/kp_imx6q_tpc.h
++++ b/include/configs/kp_imx6q_tpc.h
+@@ -16,11 +16,6 @@
+ 
+ /* FEC ethernet */
+ 
+-/* USB Configs */
+-#ifdef CONFIG_CMD_USB
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-#endif
+-
+ #define CFG_EXTRA_ENV_SETTINGS	\
+ 	"console=ttymxc0,115200\0"	\
+ 	"fdt_addr=0x18000000\0"		\
+diff --git a/include/configs/liteboard.h b/include/configs/liteboard.h
+index 25c30e6c6a5..fc6bc6b28ba 100644
+--- a/include/configs/liteboard.h
++++ b/include/configs/liteboard.h
+@@ -93,11 +93,6 @@
+ 
+ /* FLASH and environment organization */
+ 
+-/* USB Configs */
+-#ifdef CONFIG_CMD_USB
+-#define CFG_MXC_USB_PORTSC  (PORT_PTS_UTMI | PORT_PTS_PTW)
+-#endif
+-
+ #ifdef CONFIG_CMD_NET
+ #define CFG_FEC_ENET_DEV		0
+ 
+diff --git a/include/configs/m53menlo.h b/include/configs/m53menlo.h
+index 51ce030d831..b5943f48c69 100644
+--- a/include/configs/m53menlo.h
++++ b/include/configs/m53menlo.h
+@@ -66,13 +66,6 @@
+ #define CFG_SYS_I2C_RTC_ADDR		0x68
+ #endif
+ 
+-/*
+- * USB
+- */
+-#ifdef CONFIG_CMD_USB
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-#endif
+-
+ /* LVDS display */
+ #define CFG_SYS_LDB_CLOCK			33260000
+ 
+diff --git a/include/configs/meerkat96.h b/include/configs/meerkat96.h
+index 6ffc1282411..8e248177b1c 100644
+--- a/include/configs/meerkat96.h
++++ b/include/configs/meerkat96.h
+@@ -23,7 +23,4 @@
+ 
+ /* Environment configs */
+ 
+-/* USB configs */
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #endif
 diff --git a/include/configs/mx51evk.h b/include/configs/mx51evk.h
-index dff54d04a67..6c8cb78274b 100644
+index 6c8cb78274b..16a2d860619 100644
 --- a/include/configs/mx51evk.h
 +++ b/include/configs/mx51evk.h
 @@ -33,7 +33,6 @@
  #define CFG_SYS_FSL_ESDHC_ADDR	MMC_SDHC1_BASE_ADDR
  
  /* USB Configs */
--#define CFG_MXC_USB_PORT	1
- #define CFG_MXC_USB_PORTSC	PORT_PTS_ULPI
+-#define CFG_MXC_USB_PORTSC	PORT_PTS_ULPI
  #define CFG_MXC_USB_FLAGS	MXC_EHCI_POWER_PINS_ENABLED
  
+ /* Framebuffer and LCD */
 diff --git a/include/configs/mx53cx9020.h b/include/configs/mx53cx9020.h
-index ab6b0b65556..38bafc5156d 100644
+index 38bafc5156d..2ee5cc40e54 100644
 --- a/include/configs/mx53cx9020.h
 +++ b/include/configs/mx53cx9020.h
-@@ -22,7 +22,6 @@
+@@ -21,9 +21,6 @@
+ 
  /* bootz: zImage/initrd.img support */
  
- /* USB Configs */
--#define CFG_MXC_USB_PORT	1
- #define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
- 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
  /* Command definition */
+ 
+ #define BOOT_TARGET_DEVICES(func) \
 diff --git a/include/configs/mx53loco.h b/include/configs/mx53loco.h
-index 04f4b723209..e9340c59ae1 100644
+index e9340c59ae1..cec3658b189 100644
 --- a/include/configs/mx53loco.h
 +++ b/include/configs/mx53loco.h
-@@ -17,7 +17,6 @@
+@@ -16,9 +16,6 @@
+ /* MMC Configs */
  #define CFG_SYS_FSL_ESDHC_ADDR	0
  
- /* USB Configs */
--#define CFG_MXC_USB_PORT	1
- #define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
- 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
  /* PMIC Controller */
+ #define CFG_SYS_DIALOG_PMIC_I2C_ADDR	0x48
+ #define CFG_SYS_FSL_PMIC_I2C_ADDR	0x8
 diff --git a/include/configs/mx53ppd.h b/include/configs/mx53ppd.h
-index 3c9a9fb045b..e0bfbbb459c 100644
+index e0bfbbb459c..6e1cbec0c1f 100644
 --- a/include/configs/mx53ppd.h
 +++ b/include/configs/mx53ppd.h
-@@ -12,7 +12,6 @@
+@@ -11,9 +11,6 @@
+ 
  #include <asm/arch/imx-regs.h>
  
- /* USB Configs */
--#define CFG_MXC_USB_PORT	1
- #define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
- 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
  /* Command definition */
-diff --git a/include/configs/usbarmory.h b/include/configs/usbarmory.h
-index 28d86a26362..1d7caaa1448 100644
---- a/include/configs/usbarmory.h
-+++ b/include/configs/usbarmory.h
-@@ -23,7 +23,6 @@
+ 
+ #define PPD_CONFIG_NFS \
+diff --git a/include/configs/mx6cuboxi.h b/include/configs/mx6cuboxi.h
+index f0d6405d301..068b9e4d25f 100644
+--- a/include/configs/mx6cuboxi.h
++++ b/include/configs/mx6cuboxi.h
+@@ -14,9 +14,6 @@
+ /* MMC Configs */
+ #define CFG_SYS_FSL_ESDHC_ADDR	USDHC2_BASE_ADDR
+ 
+-/* USB */
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ /* Command definition */
+ 
+ #define CFG_MXC_UART_BASE	UART1_BASE
+diff --git a/include/configs/mx6memcal.h b/include/configs/mx6memcal.h
+index f2edd13eb88..a966c8b2a44 100644
+--- a/include/configs/mx6memcal.h
++++ b/include/configs/mx6memcal.h
+@@ -31,6 +31,5 @@
+ #define CFG_SYS_INIT_RAM_ADDR       IRAM_BASE_ADDR
+ #define CFG_SYS_INIT_RAM_SIZE       IRAM_SIZE
+ 
+-#define CFG_MXC_USB_PORTSC	PORT_PTS_UTMI
+ 
+ #endif	       /* __CONFIG_H */
+diff --git a/include/configs/mx6sabreauto.h b/include/configs/mx6sabreauto.h
+index eb963cbb0b3..e491af3e927 100644
+--- a/include/configs/mx6sabreauto.h
++++ b/include/configs/mx6sabreauto.h
+@@ -11,9 +11,6 @@
+ #define CFG_MXC_UART_BASE	UART4_BASE
+ #define CONSOLE_DEV		"ttymxc3"
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #define CFG_SYS_I2C_PCA953X_WIDTH	{ {0x30, 8}, {0x32, 8}, {0x34, 8} }
+ 
+ #include "mx6sabre_common.h"
+diff --git a/include/configs/mx6sabresd.h b/include/configs/mx6sabresd.h
+index 9160f878f4b..e34947c94d0 100644
+--- a/include/configs/mx6sabresd.h
++++ b/include/configs/mx6sabresd.h
+@@ -24,9 +24,4 @@
+ #define CFG_PCIE_IMX_POWER_GPIO	IMX_GPIO_NR(3, 19)
+ #endif
+ 
+-/* USB Configs */
+-#ifdef CONFIG_CMD_USB
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-#endif
+-
+ #endif                         /* __MX6SABRESD_CONFIG_H */
+diff --git a/include/configs/mx6slevk.h b/include/configs/mx6slevk.h
+index 65c6cdd4b87..d4e66a39882 100644
+--- a/include/configs/mx6slevk.h
++++ b/include/configs/mx6slevk.h
+@@ -88,11 +88,6 @@
+ 
+ /* Environment organization */
+ 
+-/* USB Configs */
+-#ifdef CONFIG_CMD_USB
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-#endif
+-
+ #define CFG_SYS_FSL_USDHC_NUM	3
+ 
+ #endif				/* __CONFIG_H */
+diff --git a/include/configs/mx6sllevk.h b/include/configs/mx6sllevk.h
+index 290996b51bc..0ba4054bbe4 100644
+--- a/include/configs/mx6sllevk.h
++++ b/include/configs/mx6sllevk.h
+@@ -92,10 +92,5 @@
+ #define CFG_SYS_FSL_ESDHC_ADDR	USDHC1_BASE_ADDR
+ #define CFG_SYS_FSL_USDHC_NUM	3
+ 
+-/* USB Configs */
+-#ifdef CONFIG_CMD_USB
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-#endif
+-
+ #include <linux/stringify.h>
+ #endif				/* __CONFIG_H */
+diff --git a/include/configs/mx6sxsabreauto.h b/include/configs/mx6sxsabreauto.h
+index 4e163d28e63..36d82e81d5d 100644
+--- a/include/configs/mx6sxsabreauto.h
++++ b/include/configs/mx6sxsabreauto.h
+@@ -95,10 +95,6 @@
+ #define IMX_FEC_BASE			ENET2_BASE_ADDR
+ #define CFG_FEC_MXC_PHYADDR          0x0
+ 
+-#ifdef CONFIG_CMD_USB
+-#define CFG_MXC_USB_PORTSC  (PORT_PTS_UTMI | PORT_PTS_PTW)
+-#endif
+-
+ #define CFG_SYS_FSL_USDHC_NUM	2
+ 
+ #endif				/* __CONFIG_H */
+diff --git a/include/configs/mx6sxsabresd.h b/include/configs/mx6sxsabresd.h
+index b43a1d81315..844becbfd2c 100644
+--- a/include/configs/mx6sxsabresd.h
++++ b/include/configs/mx6sxsabresd.h
+@@ -117,10 +117,6 @@
+ 
+ #define CFG_FEC_MXC_PHYADDR          0x1
+ 
+-#ifdef CONFIG_CMD_USB
+-#define CFG_MXC_USB_PORTSC  (PORT_PTS_UTMI | PORT_PTS_PTW)
+-#endif
+-
+ #ifdef CONFIG_CMD_PCI
+ #define CFG_PCIE_IMX_PERST_GPIO	IMX_GPIO_NR(2, 0)
+ #define CFG_PCIE_IMX_POWER_GPIO	IMX_GPIO_NR(2, 1)
+diff --git a/include/configs/mx6ul_14x14_evk.h b/include/configs/mx6ul_14x14_evk.h
+index fd0c87ffb01..3716dc75b96 100644
+--- a/include/configs/mx6ul_14x14_evk.h
++++ b/include/configs/mx6ul_14x14_evk.h
+@@ -114,11 +114,6 @@
+ 
+ /* environment organization */
+ 
+-/* USB Configs */
+-#ifdef CONFIG_CMD_USB
+-#define CFG_MXC_USB_PORTSC  (PORT_PTS_UTMI | PORT_PTS_PTW)
+-#endif
+-
+ #ifdef CONFIG_CMD_NET
+ #define CFG_FEC_ENET_DEV		1
+ 
+diff --git a/include/configs/mx7dsabresd.h b/include/configs/mx7dsabresd.h
+index 94bee75fdea..f5ab4720750 100644
+--- a/include/configs/mx7dsabresd.h
++++ b/include/configs/mx7dsabresd.h
+@@ -98,7 +98,4 @@
+ /* DMA stuff, needed for GPMI/MXS NAND support */
+ #endif
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC  (PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #endif	/* __CONFIG_H */
+diff --git a/include/configs/mx7ulp_com.h b/include/configs/mx7ulp_com.h
+index a310c64e794..f8e3950fa32 100644
+--- a/include/configs/mx7ulp_com.h
++++ b/include/configs/mx7ulp_com.h
+@@ -51,5 +51,4 @@
+ #define CFG_SYS_INIT_RAM_ADDR	IRAM_BASE_ADDR
+ #define CFG_SYS_INIT_RAM_SIZE	SZ_256K
+ 
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+ #endif	/* __CONFIG_H */
+diff --git a/include/configs/mys_6ulx.h b/include/configs/mys_6ulx.h
+index 8defdfc4fda..ddd46c8f945 100644
+--- a/include/configs/mys_6ulx.h
++++ b/include/configs/mys_6ulx.h
+@@ -29,9 +29,6 @@
+ /* NAND */
+ #define CFG_SYS_NAND_BASE		0x40000000
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #define CFG_EXTRA_ENV_SETTINGS \
+ 	"console=ttymxc0,115200n8\0" \
+ 	"fdt_addr_r=0x82000000\0" \
+diff --git a/include/configs/nitrogen6x.h b/include/configs/nitrogen6x.h
+index a8ad85050f7..23eefaffc72 100644
+--- a/include/configs/nitrogen6x.h
++++ b/include/configs/nitrogen6x.h
+@@ -18,9 +18,6 @@
+ #define IMX_FEC_BASE			ENET_BASE_ADDR
+ #define CFG_FEC_MXC_PHYADDR		6
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #ifdef CONFIG_CMD_MMC
+ #define DISTRO_BOOT_DEV_MMC(func) func(MMC, mmc, 0) func(MMC, mmc, 1)
+ #else
+diff --git a/include/configs/novena.h b/include/configs/novena.h
+index 144cf1b4a4b..059b8104e4b 100644
+--- a/include/configs/novena.h
++++ b/include/configs/novena.h
+@@ -51,11 +51,6 @@
+ /* UART */
+ #define CFG_MXC_UART_BASE		UART2_BASE
+ 
+-/* USB Configs */
+-#ifdef CONFIG_CMD_USB
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-#endif
+-
+ /* Extra U-Boot environment. */
+ #define CFG_EXTRA_ENV_SETTINGS					\
+ 	"fdt_high=0xffffffff\0"						\
+diff --git a/include/configs/npi_imx6ull.h b/include/configs/npi_imx6ull.h
+index f71e2657076..1caa63f0227 100644
+--- a/include/configs/npi_imx6ull.h
++++ b/include/configs/npi_imx6ull.h
+@@ -28,9 +28,6 @@
+ /* NAND */
+ #define CFG_SYS_NAND_BASE		0x40000000
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #ifdef CONFIG_CMD_NET
+ #define CFG_FEC_MXC_PHYADDR		0x1
+ #endif
+diff --git a/include/configs/o4-imx6ull-nano.h b/include/configs/o4-imx6ull-nano.h
+index 9050da8738b..f5a4898f90e 100644
+--- a/include/configs/o4-imx6ull-nano.h
++++ b/include/configs/o4-imx6ull-nano.h
+@@ -11,10 +11,6 @@
+ #define CFG_SYS_INIT_RAM_ADDR	IRAM_BASE_ADDR
+ #define CFG_SYS_INIT_RAM_SIZE	IRAM_SIZE
+ 
+-#if IS_ENABLED(CONFIG_CMD_USB)
+-#	define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-#endif /* CONFIG_CMD_USB */
+-
+ #define CFG_EXTRA_ENV_SETTINGS \
+ 	"mmcdev=0\0" \
+ 	"mmcpart=2\0" \
+diff --git a/include/configs/opos6uldev.h b/include/configs/opos6uldev.h
+index 12020d31e1c..fd945235af3 100644
+--- a/include/configs/opos6uldev.h
++++ b/include/configs/opos6uldev.h
+@@ -17,11 +17,6 @@
+ #define CFG_SYS_INIT_RAM_ADDR	IRAM_BASE_ADDR
+ #define CFG_SYS_INIT_RAM_SIZE	IRAM_SIZE
+ 
+-/* USB */
+-#ifdef CONFIG_USB_EHCI_MX6
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-#endif
+-
+ /* LCD */
+ #define MXS_LCDIF_BASE MX6UL_LCDIF1_BASE_ADDR
+ 
+diff --git a/include/configs/pcl063.h b/include/configs/pcl063.h
+index 2a729c3e454..0c96506b5fb 100644
+--- a/include/configs/pcl063.h
++++ b/include/configs/pcl063.h
+@@ -41,9 +41,6 @@
+ /* NAND */
+ #define CFG_SYS_NAND_BASE		0x40000000
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #define CFG_EXTRA_ENV_SETTINGS \
+ 	"console=ttymxc0,115200n8\0" \
+ 	"fdt_addr_r=0x82000000\0" \
+diff --git a/include/configs/pcl063_ull.h b/include/configs/pcl063_ull.h
+index afa8e7aeb71..0f265adc5dc 100644
+--- a/include/configs/pcl063_ull.h
++++ b/include/configs/pcl063_ull.h
+@@ -43,9 +43,6 @@
+ /* NAND */
+ #define CFG_SYS_NAND_BASE		0x40000000
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #define ENV_MMC \
+ 	"mmcdev=" __stringify(MMC_ROOTFS_DEV) "\0" \
+ 	"mmcpart=" __stringify(MMC_ROOTFS_PART) "\0" \
+diff --git a/include/configs/pico-imx6.h b/include/configs/pico-imx6.h
+index 6ccb3dc1902..500dd8c069a 100644
+--- a/include/configs/pico-imx6.h
++++ b/include/configs/pico-imx6.h
+@@ -15,9 +15,6 @@
+ /* MMC Configuration */
+ #define CFG_SYS_FSL_ESDHC_ADDR	USDHC3_BASE_ADDR
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #define DFU_DEFAULT_POLL_TIMEOUT 300
+ 
+ #define CFG_DFU_ENV_SETTINGS \
+diff --git a/include/configs/pico-imx6ul.h b/include/configs/pico-imx6ul.h
+index ef8281440e5..37f4c7d8a09 100644
+--- a/include/configs/pico-imx6ul.h
++++ b/include/configs/pico-imx6ul.h
+@@ -21,9 +21,6 @@
+ /* MMC Configs */
+ #define CFG_SYS_FSL_ESDHC_ADDR	USDHC1_BASE_ADDR
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #define DFU_DEFAULT_POLL_TIMEOUT 300
+ 
+ #define CFG_DFU_ENV_SETTINGS \
+diff --git a/include/configs/pico-imx7d.h b/include/configs/pico-imx7d.h
+index 21ec7fd3362..89850d8e4a7 100644
+--- a/include/configs/pico-imx7d.h
++++ b/include/configs/pico-imx7d.h
+@@ -105,7 +105,4 @@
+ 
+ #define CFG_SYS_FSL_USDHC_NUM		2
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC			(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #endif
+diff --git a/include/configs/somlabs_visionsom_6ull.h b/include/configs/somlabs_visionsom_6ull.h
+index aa09528acd9..c8fdb40d011 100644
+--- a/include/configs/somlabs_visionsom_6ull.h
++++ b/include/configs/somlabs_visionsom_6ull.h
+@@ -59,11 +59,6 @@
+ 
+ /* environment organization */
+ 
+-/* USB Configs */
+-#ifdef CONFIG_CMD_USB
+-#define CFG_MXC_USB_PORTSC  (PORT_PTS_UTMI | PORT_PTS_PTW)
+-#endif
+-
+ #ifdef CONFIG_CMD_NET
+ #define CFG_FEC_MXC_PHYADDR		0x1
+ #endif
+diff --git a/include/configs/tbs2910.h b/include/configs/tbs2910.h
+index 256331ae173..9ef774afd0f 100644
+--- a/include/configs/tbs2910.h
++++ b/include/configs/tbs2910.h
+@@ -25,11 +25,6 @@
+ #define CFG_PCIE_IMX_PERST_GPIO	IMX_GPIO_NR(7, 12)
+ #endif
+ 
+-/* USB */
+-#ifdef CONFIG_CMD_USB
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-#endif /* CONFIG_CMD_USB      */
+-
+ #define CFG_EXTRA_ENV_SETTINGS \
+ 	BOOTENV \
+ 	"bootargs_mmc1=console=ttymxc0,115200 di0_primary console=tty1\0" \
+diff --git a/include/configs/tqma6.h b/include/configs/tqma6.h
+index b4a06a75c53..e85c801e4fb 100644
+--- a/include/configs/tqma6.h
++++ b/include/configs/tqma6.h
+@@ -29,9 +29,6 @@
+ /* MMC Configs */
  #define CFG_SYS_FSL_ESDHC_ADDR	0
  
- /* USB */
--#define CFG_MXC_USB_PORT	1
- #define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #if defined(CONFIG_TQMA6X_MMC_BOOT)
  
+ #define TQMA6_UBOOT_OFFSET		SZ_1K
+diff --git a/include/configs/usbarmory.h b/include/configs/usbarmory.h
+index 1d7caaa1448..b895022ee9c 100644
+--- a/include/configs/usbarmory.h
++++ b/include/configs/usbarmory.h
+@@ -22,9 +22,6 @@
+ /* SD/MMC */
+ #define CFG_SYS_FSL_ESDHC_ADDR	0
+ 
+-/* USB */
+-#define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
  /* Linux boot */
+ 
+ #define BOOT_TARGET_DEVICES(func) func(MMC, mmc, 0)
+diff --git a/include/configs/verdin-imx8mm.h b/include/configs/verdin-imx8mm.h
+index 12d2b682305..b018bbe29dd 100644
+--- a/include/configs/verdin-imx8mm.h
++++ b/include/configs/verdin-imx8mm.h
+@@ -63,7 +63,4 @@
+ #define PHYS_SDRAM_2                 0x100000000
+ #define PHYS_SDRAM_2_SIZE            (long)(SZ_1G)
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #endif /* __VERDIN_IMX8MM_H */
+diff --git a/include/configs/vining_2000.h b/include/configs/vining_2000.h
+index 3c2d7e66891..2cf7bc70d8d 100644
+--- a/include/configs/vining_2000.h
++++ b/include/configs/vining_2000.h
+@@ -36,7 +36,6 @@
+ /* Network */
+ #define CFG_FEC_MXC_PHYADDR          0x0
+ 
+-#define CFG_MXC_USB_PORTSC  (PORT_PTS_UTMI | PORT_PTS_PTW)
+ 
+ #ifdef CONFIG_CMD_PCI
+ #define CFG_PCIE_IMX_PERST_GPIO	IMX_GPIO_NR(4, 6)
+diff --git a/include/configs/wandboard.h b/include/configs/wandboard.h
+index d64c4262bd6..b5b342b3538 100644
+--- a/include/configs/wandboard.h
++++ b/include/configs/wandboard.h
+@@ -16,9 +16,6 @@
+ #define CFG_SYS_FSL_USDHC_NUM	2
+ #define CFG_SYS_FSL_ESDHC_ADDR	0
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #define CFG_EXTRA_ENV_SETTINGS \
+ 	"console=ttymxc0\0" \
+ 	"splashpos=m,m\0" \
+diff --git a/include/configs/warp7.h b/include/configs/warp7.h
+index 0da9250c3b7..a5278d1cb9b 100644
+--- a/include/configs/warp7.h
++++ b/include/configs/warp7.h
+@@ -92,7 +92,6 @@
+ 
+ #define CFG_SYS_FSL_USDHC_NUM	1
+ 
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+ 
+ /* USB Device Firmware Update support */
+ #define DFU_DEFAULT_POLL_TIMEOUT	300
+diff --git a/include/configs/xpress.h b/include/configs/xpress.h
+index bb0a30c4344..8efebf77c3d 100644
+--- a/include/configs/xpress.h
++++ b/include/configs/xpress.h
+@@ -27,9 +27,6 @@
+ 
+ /* Environment is in stored in the eMMC boot partition */
+ 
+-/* USB Configs */
+-#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
+-
+ #define CFG_FEC_ENET_DEV		0
+ #define CFG_FEC_MXC_PHYADDR          0x0
+ 
 -- 
 2.34.1
 
