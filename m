@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1CB5C52D6F
-	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 06:27:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6115EC5320E
+	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 06:28:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42D6888618;
-	Tue, 27 Aug 2024 08:27:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D752888618;
+	Tue, 27 Aug 2024 08:28:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fD1DafZy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DXwd35xc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4FCC88915; Tue, 27 Aug 2024 08:27:43 +0200 (CEST)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
+ id 4E3E7888F0; Tue, 27 Aug 2024 08:28:25 +0200 (CEST)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9095387CF8
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 08:27:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 08E7988618
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 08:28:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-7141b04e7b5so3122495b3a.2
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 23:27:41 -0700 (PDT)
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-202089e57d8so32570725ad.0
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 23:28:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724740060; x=1725344860; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724740101; x=1725344901; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xRH9FT2eWlhloasZZkgXgGZReo/OyYASz6Da54RfDr8=;
- b=fD1DafZyhvLdOGnxDlo4jHPXrW7WMpqmkhSV3IEOlF5Aa8NFRbAno11ete8/D813l2
- nG4SAUD1pMJXLtdbZBLpgMdPhc4HT5UaVj+7VYVqiu16gSUxKmpGCMIgwT9VxonTfdtg
- oRu2EKguRH1bCqVzaIDI2tDltLJf+ZrerVEChkav8NRro/enMj2lgNxVOSN4kGEl6Fhv
- 0odQXPHTRZ9NLQxHPSK3DKvhwCA7X0vxCHLxsYAY9hEJ9xK7adr6KytRQxUToBnFGAnU
- AqvUao3md6bVm+4PSmAi1NEU/p1cPjuf9ziT4k8tw0q70akCdV6GT3cqqd5CZ4nUq1qx
- Zfyw==
+ bh=zYdBVp+/VY3Z+qK/oYDv8LCiSdF6f7DuMuXakjJL9Ok=;
+ b=DXwd35xcwBtyZBqcwe7nNsKCfebe9RtUR1F7XSj5a30+feydgdz+tHlpszoYDB5CVp
+ XkK2LJNlILH4LGk0BD148iXvRmAktsm10ICQjyZwzbo7sNMnLmBoN+d8nxMFSDJRwhd/
+ 95LQUZcKA2KdsiMxnB8inND83xfwo7opL8ckSEsJ+/OUXqpSxJHydhD9bs5gVemokazZ
+ J6dPS9yDgAQZ5K5cw1vY9p58VZy3KuAl3663JXo5427eEmg3h6m0iVd9buukedPJY4uL
+ /yHhBGQrYlNhtMXTA52+h8OR9LKij50Lm+atGIPAoV/G6WNnj5yL/Yf7Hb0TsUkxHojz
+ k34g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724740060; x=1725344860;
+ d=1e100.net; s=20230601; t=1724740101; x=1725344901;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xRH9FT2eWlhloasZZkgXgGZReo/OyYASz6Da54RfDr8=;
- b=W9iJQh2/Mm1chjfs367uAgzNZ2yB35zOZ+OH5yYOzOp8uazSM7gHkI1xY2BiS+Uiva
- veu4foQdHMHVdHMsgzeAgmbMl1eqhAc1S7x+w7KVTHfZnfdYrU7fZ7XuCXQ0CDE4PS0e
- FThLfG78ureMMewycv8EC17/eAse6PxZE0R73oljXZWKEXtw4toX+DtARMFA65yITlDd
- 5U/OakCSTQ6oaI+G9xYPijx6OS+mMwdEA/CWDyR7K/MCzE9x6cWz6MUWTyHwjs38Kzgc
- I50s6Xp/XiXTtZJ9NghswC9MfM6+N4UDKMAkmZjGAshb2btXrEHUkRAccCuj0RXSltyW
- +zxw==
-X-Gm-Message-State: AOJu0Yw1tNCEU8KYaP/AIflv0CwMiP0eibhmiQC6XsdBivmcB9G5V8M8
- TbusKn3ZCy7luJYJeTIBBsVxvFFF5JoPCHZUo3JNrp9Aovc9pruu17Nl7fNCltbbq/ksb2vpuH/
- /ZPNyBdThR5ct0PajYj/azrb1hXeSlUolRNEmDA==
-X-Google-Smtp-Source: AGHT+IE/mk2BHYbmhV5dk+WEEZtb82yP2qEizr+Qc18q9gBkyYC03RHtw0u0VH4nfWbmmkzDx7nAPFcMmUrcGKhP3z0=
-X-Received: by 2002:a05:6a21:4a4b:b0:1be:c2f7:275 with SMTP id
- adf61e73a8af0-1cc8a0810e2mr12039194637.50.1724740059896; Mon, 26 Aug 2024
- 23:27:39 -0700 (PDT)
+ bh=zYdBVp+/VY3Z+qK/oYDv8LCiSdF6f7DuMuXakjJL9Ok=;
+ b=VIDgJKPSOqgMA1ikfzufTQKM2cZg3P44+T3S84Kyr+HA8kuROu40Nkyi2BNNQ9ElgO
+ 8Ui/q6OL5u0yI8BT7CoVCgVSGkxrkwwa0htdxE1vzdcE+UV8SIjie+wIYYX0GtCpsC52
+ 91MU405DpCBRhZGkEato2tQ/Rj0FUiEMz2N83jEnPbs4M7q+ev0w9J0u1J4lGZ53YmXW
+ q4m3zdH+I3z1NQNZoYe7S7rVQSzuVafF3YkSAA8ikmB9d1akwzdFCBDqzIx9Tt/s31iS
+ d8ryY3fGehp3y6ZEOYjt6dMrdaMxTBU+Cmc0qT0RRbra4mh5Xtt7uiAF/zDHmhWhS/EV
+ pdYQ==
+X-Gm-Message-State: AOJu0YyWpBTqWww+iIRdoYSR0jT5gS0l5Cu5OzoW4S33KKYMKeECTMwv
+ PSmHFaKBo86eK2Dhwd1r4tc4KISjEzLPd5YEpXZ31gsRnB4YE0VdYQkfFtmvXJG0Ky3XfTkBcox
+ EUwC8Amu6rht7AfTkrvXSF/DNUTfkAoFJ5uWrtQ==
+X-Google-Smtp-Source: AGHT+IEGD8AxV8JJ5tVBO1lDDhdH+yJxFp9a8Gk0+B33/h8/qtf5Uy6znauEV/qBkPEWut/ADxjmA2h14bkbpJROn+g=
+X-Received: by 2002:a17:902:f74e:b0:1fc:4acb:3670 with SMTP id
+ d9443c01a7336-204ddcea966mr24658485ad.12.1724740101246; Mon, 26 Aug 2024
+ 23:28:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240826115940.3233167-1-sughosh.ganu@linaro.org>
- <20240826115940.3233167-15-sughosh.ganu@linaro.org>
-In-Reply-To: <20240826115940.3233167-15-sughosh.ganu@linaro.org>
+ <20240826115940.3233167-16-sughosh.ganu@linaro.org>
+In-Reply-To: <20240826115940.3233167-16-sughosh.ganu@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 27 Aug 2024 09:27:03 +0300
-Message-ID: <CAC_iWj+8RuPyb0AzF7Sh6HPgS32WxfO=MD3TGYqTgBXpEEB+Eg@mail.gmail.com>
-Subject: Re: [PATCH v4 14/27] lmb: bootm: remove superfluous lmb stub functions
+Date: Tue, 27 Aug 2024 09:27:43 +0300
+Message-ID: <CAC_iWjLbb_Nr0yEH-W=V8hGKXovdh5_4x9vqtmxZWtXFip=4eg@mail.gmail.com>
+Subject: Re: [PATCH v4 15/27] lmb: init: initialise the lmb data structures
+ during board init
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>, 
@@ -94,44 +95,70 @@ X-Virus-Status: Clean
 
 On Mon, 26 Aug 2024 at 15:01, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Remove a couple of superfluous LMB stub functions, and instead put a
-> check for calling the lmb_reserve() function.
+> The memory map maintained by the LMB module is now persistent and
+> global. This memory map is being maintained through the alloced list
+> structure which can be extended at runtime -- there is one list for
+> the available memory, and one for the used memory. Allocate and
+> initialise these lists during the board init.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > Reviewed-by: Simon Glass <sjg@chromium.org>
 > ---
 > Changes since V3: None
 >
->  boot/bootm.c | 9 +++------
->  1 file changed, 3 insertions(+), 6 deletions(-)
+>  common/board_r.c | 10 ++++++++++
+>  common/spl/spl.c |  3 +++
+>  2 files changed, 13 insertions(+)
 >
-> diff --git a/boot/bootm.c b/boot/bootm.c
-> index ddede08979..a61bbcfb45 100644
-> --- a/boot/bootm.c
-> +++ b/boot/bootm.c
-> @@ -239,11 +239,6 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
->         return 0;
+> diff --git a/common/board_r.c b/common/board_r.c
+> index f445803d7a..a60da39a29 100644
+> --- a/common/board_r.c
+> +++ b/common/board_r.c
+> @@ -22,6 +22,7 @@
+>  #include <hang.h>
+>  #include <image.h>
+>  #include <irq_func.h>
+> +#include <lmb.h>
+>  #include <log.h>
+>  #include <net.h>
+>  #include <asm/cache.h>
+> @@ -510,6 +511,14 @@ int initr_mem(void)
 >  }
+>  #endif
 >
-> -#if !CONFIG_IS_ENABLED(LMB)
-> -#define lmb_reserve(base, size)
-> -static inline void boot_start_lmb(void) { }
-> -#endif
-> -
->  static int bootm_start(void)
->  {
->         memset((void *)&images, 0, sizeof(images));
-> @@ -700,7 +695,9 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
->                 images->os.end = relocated_addr + image_size;
->         }
->
-> -       lmb_reserve(images->os.load, (load_end - images->os.load));
+> +static int initr_lmb(void)
+> +{
 > +       if (CONFIG_IS_ENABLED(LMB))
-> +               lmb_reserve(images->os.load, (load_end - images->os.load));
+> +               return lmb_init();
+> +       else
+> +               return 0;
+> +}
 > +
->         return 0;
->  }
+>  static int dm_announce(void)
+>  {
+>         int device_count;
+> @@ -612,6 +621,7 @@ static init_fnc_t init_sequence_r[] = {
+>  #ifdef CONFIG_CLOCKS
+>         set_cpu_clk_info, /* Setup clock information */
+>  #endif
+> +       initr_lmb,
+>  #ifdef CONFIG_EFI_LOADER
+>         efi_memory_init,
+>  #endif
+> diff --git a/common/spl/spl.c b/common/spl/spl.c
+> index 7c6e322ffd..ad2dc6a908 100644
+> --- a/common/spl/spl.c
+> +++ b/common/spl/spl.c
+> @@ -721,6 +721,9 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+>             IS_ENABLED(CONFIG_SPL_ATF))
+>                 dram_init_banksize();
 >
+> +       if (IS_ENABLED(CONFIG_SPL_LMB))
+> +               lmb_init();
+> +
+>         if (CONFIG_IS_ENABLED(PCI) && !(gd->flags & GD_FLG_DM_DEAD)) {
+>                 ret = pci_init();
+>                 if (ret)
 > --
 > 2.34.1
 >
