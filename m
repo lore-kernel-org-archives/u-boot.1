@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA718C54731
-	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 15:54:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 572D1C54731
+	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 16:50:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E58C388363;
-	Tue, 27 Aug 2024 17:54:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B33EE889A2;
+	Tue, 27 Aug 2024 18:50:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RusKNl22";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XVdCx51P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E9E788896; Tue, 27 Aug 2024 17:54:00 +0200 (CEST)
-Received: from mail-vk1-xa29.google.com (mail-vk1-xa29.google.com
- [IPv6:2607:f8b0:4864:20::a29])
+ id 7A15488928; Tue, 27 Aug 2024 18:50:33 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 899778657F
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 17:53:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2147788800
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 18:50:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-vk1-xa29.google.com with SMTP id
- 71dfb90a1353d-4fce9f16f83so1750765e0c.1
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 08:53:57 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-5de8ca99d15so2055088eaf.0
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 09:50:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724774036; x=1725378836; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JJ6cKoLZzIoyWlmQ5C+SlcOMXBnQv47e45falXWLncQ=;
- b=RusKNl22K30NuPYsKbz35W9bd00MZWEpebxxeePKv+9sZMaruHNExnMR9aFX7+phfR
- CIj9DjX3qjDtMcXtNIQbivOqjuitAYl+OQGFRHgJmlx3/p9S/wuQ4wv+CF72Pz6eFAgY
- yJmzam16vvXVQCRhYWrnxSnaPUiRrg8t77H90=
+ d=konsulko.com; s=google; t=1724777429; x=1725382229; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=axNmJTpjYYqmpFOE/JyZ6z0D36G5bjabkzRaL3zRyik=;
+ b=XVdCx51P/YjmObrQYS0SOLNsFFHmCrLH21IE0CKxZDVrvfhG8xbNWgX4Q9dAPiGz+B
+ EaMcPzlqbNnmDL5CalXImZZT+1Ly/Vfxke76ByJrvXOjikNoAgVxeZzbH0tkMyhdv06P
+ 8UICy8V5UjZl6FOPL50r+bfCZ29LUW/pQ3G3E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724774036; x=1725378836;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=JJ6cKoLZzIoyWlmQ5C+SlcOMXBnQv47e45falXWLncQ=;
- b=sqUMrBqHt/2zeOsV08pfON+4plTKWjY7P7ojjp6bTUVz8237JLS3T3CNbEm5VRH4oM
- rtQlPlB6tegWv/ZWsjliYpZjmEtyrvvLm2gISc1h/luRlD7Nm4Hu4L/vXmAvfrU48pjJ
- HveU45o7tg+C53o0bnl1+z+Zr5pOEbJe/DJ46X5bgLGi/rVQ/0XrUOdp51yfdRtGOb7h
- ZbfI7tk3WpT08T3kQdkd0V908NkdKvuloLx1odrQZSe1JSAwBQYskSF2QLSfE/P7V7rM
- 7R1V9by/Jx6k8a+hnkFzMzw9aD5gzlJCOOwCqS5lSru3rTWJ2g/NNR0sjgGjI/jmvelX
- 9VKw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXvef+ymRMwr+TUXFOnwceou1dN0lwPv+LKOwORsNcxZPfPEe7hVoVvjkaAw6KjgapdHDvOt/4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzRS+ZOscjC+TK53xOhlL4wlWd3SbTWo2uMxzjvQaSNp4R6FwXk
- Dz98doB0s3Kh04sYU35UIX4A76NZxfIeNO/DipIVXBeaRkGPJRNLhf7DHqaRigQwtsSwh7bjs1A
- C3rC2bDKRAZqmxPNSuR8Kt1chNKp2gpzQ8s6N
-X-Google-Smtp-Source: AGHT+IGNfWOWFs/69BtXbFOwfHEJFWfF54Xc9TdShTQymaTEx2k7hPNqKEIvge+KqY5uEphYfHUEw8l1vF86ay7kt5Q=
-X-Received: by 2002:a05:6122:2191:b0:4ef:5e6b:98c0 with SMTP id
- 71dfb90a1353d-4fd1a7dddf7mr16063220e0c.9.1724774036338; Tue, 27 Aug 2024
- 08:53:56 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1724777429; x=1725382229;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=axNmJTpjYYqmpFOE/JyZ6z0D36G5bjabkzRaL3zRyik=;
+ b=BT3g6HXlmqUSVXrSdb4gzF0JVf1Y7Qyxp263dl5aiwcl0kVOJLMWn2nxMqXiH92RJ6
+ Mc3OURIjDQ9vVLEm4TZ9ip8ZBEmHC1NdmRHQRaG2j/m47W/RKCNJuJQyA6/MBirN4xuv
+ f7/+BkrCMfFVUt4WVBXVb0uPqfThOarTNYARNAkIMukrdMuBBh3IAd8B3LOVLkWopgVK
+ 9wAOC4rHRlyruBlTCrcYuI9Pa6BBQcO8+H9pnYeUe0qRRWnnV9Tj6jGnZyvYZ7Ud3GU4
+ dX1lZLH7JuIk9aj1+lUEizfTjxE+oHgA/YhRmsgq7VngNwYhR6qvaWJoZJK/yYjWx4c2
+ J/qg==
+X-Gm-Message-State: AOJu0YwKZSHG2lvjND4SfjZq3LwG9Hx/gpEw1J1DdjYJkSTfAXUP8tAL
+ WPzejQsd+NxjnYjfSpIH0kFAiXHIGjRzYtJy3Q8ny4RKFpO1MRBUOLrTlvQzE1o=
+X-Google-Smtp-Source: AGHT+IHtkBO1krnZxnMSijIcEJeQDXirbhkTfhw+JNQOWzHS/eqt7NnS0oQN5tEG9UthaV670TaLKQ==
+X-Received: by 2002:a05:6358:7510:b0:1b5:e9e2:cbe5 with SMTP id
+ e5c5f4694b2df-1b5ec014206mr419265655d.20.1724777428677; 
+ Tue, 27 Aug 2024 09:50:28 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7a67f3d5cd2sm565867485a.82.2024.08.27.09.50.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 27 Aug 2024 09:50:28 -0700 (PDT)
+Date: Tue, 27 Aug 2024 10:50:25 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>
+Subject: Re: xPL terminology
+Message-ID: <20240827165025.GN2479150@bill-the-cat>
+References: <CAFLszThRq1MmeAukYW+uwe5nBiku94qXALLMZ4S9ySFfbW0AkA@mail.gmail.com>
 MIME-Version: 1.0
-References: <980adca3-27ac-440b-93b4-80146d050584@linaro.org>
- <CAOMZO5A2ZBb9G6krUmfNy3qnoNYgwdb2-DUgeNuvONy9VioEbQ@mail.gmail.com>
-In-Reply-To: <CAOMZO5A2ZBb9G6krUmfNy3qnoNYgwdb2-DUgeNuvONy9VioEbQ@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 27 Aug 2024 09:53:45 -0600
-Message-ID: <CAFLszTgZ9vFe1rahWG_QiVJXoCBOTc=umAJ=YZwu7ExyXWsuDg@mail.gmail.com>
-Subject: Re: imx8ulp_evk build with buildman fails every other time
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Gary Bisson <bisson.gary@gmail.com>, 
- Peng Fan <peng.fan@nxp.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="K8+RJcx40rD7eBrt"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThRq1MmeAukYW+uwe5nBiku94qXALLMZ4S9ySFfbW0AkA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,95 +90,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
 
-On Tue, 27 Aug 2024 at 08:53, Fabio Estevam <festevam@gmail.com> wrote:
->
-> Adding Gary and Peng on Cc.
->
-> On Tue, Aug 27, 2024 at 11:42=E2=80=AFAM Jerome Forissier
-> <jerome.forissier@linaro.org> wrote:
-> >
-> > Hi,
-> >
-> > Can someone explain what's happening with the imx8ulp_evk buildman buil=
-d
-> > below? It either fails with a mkimage error, or succeeds with a binman
-> > warning, every other time. 100% reproducible. /me confused :o
-> >
-> > =3D=3D=3D=3D8<=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D8<=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D
-> > $ docker run -it --rm trini/u-boot-gitlab-ci-runner:jammy-20240808-21Au=
-g2024
-> > uboot@42aa85c2d6b7:/$ cd
-> > uboot@42aa85c2d6b7:~$ git clone https://github.com/u-boot/u-boot.git
-> > uboot@42aa85c2d6b7:~/u-boot$ git log --oneline -n 1
-> > ee2af844ba (HEAD -> master, origin/master, origin/HEAD) Merge tag 'efi-=
-2024-10-rc4' of https://source.denx.de/u-boot/custodians/u-boot-efi
-> > uboot@42aa85c2d6b7:~$ cd u-boot
-> > uboot@42aa85c2d6b7:~/u-boot$ tools/buildman/buildman imx8ulp_evk
-> > Building current source for 1 boards (1 thread, 24 jobs per thread)
-> >    aarch64:  w+   imx8ulp_evk
-> > +WARNING 'mx8ulpa2-ahab-container.img' not found, resulting binary may =
-be not-functional
-> > +WARNING 'bl31.bin' not found, resulting binary may be not-functional
-> > +WARNING 'upower.bin' not found, resulting binary may be not-functional
-> > +WARNING 'm33_image.bin' not found, resulting binary may be not-functio=
-nal
-> >     0    1    0 /1              imx8ulp_evk
-> > Completed: 1 total built, 1 newly), duration 0:00:09, rate 0.11
-> > uboot@42aa85c2d6b7:~/u-boot$ tools/buildman/buildman imx8ulp_evk
-> > Building current source for 1 boards (1 thread, 24 jobs per thread)
-> >    aarch64:  +   imx8ulp_evk
-> > +WARNING 'bl31.bin' not found, resulting binary may be not-functional
-> > +binman: Error 1 running 'mkimage -d ./mkimage.spl.mkimage -n spl/u-boo=
-t-spl.cfgout -T imx8image -e 0x22020000 ./mkimage-out.spl.mkimage': Fail op=
-en first container file mx8ulpa2-ahab-container.img
-> > +
-> > +make[1]: *** [Makefile:1126: .binman_stamp] Error 1
-> > +make: *** [Makefile:177: sub-make] Error 2
-> >     0    0    1 /1              imx8ulp_evk
-> > Completed: 1 total built, 1 newly), duration 0:00:04, rate 0.25
-> > uboot@42aa85c2d6b7:~/u-boot$ tools/buildman/buildman imx8ulp_evk
-> > Building current source for 1 boards (1 thread, 24 jobs per thread)
-> >    aarch64:  w+   imx8ulp_evk
-> > +WARNING 'mx8ulpa2-ahab-container.img' not found, resulting binary may =
-be not-functional
-> > +WARNING 'upower.bin' not found, resulting binary may be not-functional
-> > +WARNING 'm33_image.bin' not found, resulting binary may be not-functio=
-nal
-> > +WARNING 'bl31.bin' not found, resulting binary may be not-functional
-> >     0    1    0 /1              imx8ulp_evk
-> > Completed: 1 total built, 1 newly), duration 0:00:04, rate 0.25
-> > uboot@42aa85c2d6b7:~/u-boot$ tools/buildman/buildman imx8ulp_evk
-> > Building current source for 1 boards (1 thread, 24 jobs per thread)
-> >    aarch64:  +   imx8ulp_evk
-> > +WARNING 'bl31.bin' not found, resulting binary may be not-functional
-> > +binman: Error 1 running 'mkimage -d ./mkimage.spl.mkimage -n spl/u-boo=
-t-spl.cfgout -T imx8image -e 0x22020000 ./mkimage-out.spl.mkimage': Fail op=
-en first container file mx8ulpa2-ahab-container.img
-> > +
-> > +make[1]: *** [Makefile:1126: .binman_stamp] Error 1
-> > +make: *** [Makefile:177: sub-make] Error 2
-> >     0    0    1 /1              imx8ulp_evk
-> > Completed: 1 total built, 1 newly), duration 0:00:04, rate 0.25
-> > =3D=3D=3D=3D8<=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D8<=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D
-> >
+--K8+RJcx40rD7eBrt
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I can't quite explain it but I have hit this before. It is why I have
-been unable to land [1]
+On Sun, Aug 25, 2024 at 07:07:23AM -0600, Simon Glass wrote:
 
-Perhaps binman is writing a file which is being picked up on the next
-run, but is not valid? Or perhaps the file from a previous build
-confuses things? I notice that some of the sections have filenames,
-meaning that they are written and persist between builds.
+> Hi,
+>=20
+> We have the term 'SPL', which has a dual meaning. It is both a
+> particular phase of U-Boot (the one that loads U-Boot proper) and a
+> generic name for any pre-proper phase.
+>=20
+> You can see that in a few areas, but for example CONFIG_SPL_BUILD is
+> enabled for TPL and VPL builds, not just SPL.
+>=20
+> I propose to rename the generic term from SPL to xPL (meaning any PL
+> phase), leaving SPL to just refer to the phase before U-Boot proper.
+>=20
+> The symbol would be CONFIG_XPL but in documentation we would talk of
+> xPL, with a lower-case X, so it is more obvious that it refers to any
+> phase.
+>=20
+> What do you think?
 
-You can try BINMAN_VERBOSE=3D4 or 5 to see what is happening, or
-BINMAN_DEBUG=3D1 to get a stack trace.
+I still worry this is just another part of the long symptom of needing
+to re-work how we configure / build as we have 1 case of "build things
+this way" (full U-Boot) and N cases of "build things another way" (SPL,
+TPL, VPL, UPL?). And really we need a way to short-hand
+"fooboard_defconfig" means "fooboard_spl_defconfig +
+fooboard_tpl_defconfig + fooboard_SOMETHING_defconfig".
 
-Regards,
-Simon
+But on the flip side, I also suppose replacing CONFIG_SPL_BUILD with
+CONFIG_XPL_BUILD would be less confusing.
 
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20240623175515.1466908=
--14-sjg@chromium.org/
+--=20
+Tom
+
+--K8+RJcx40rD7eBrt
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbOA80ACgkQFHw5/5Y0
+tyxlBAv/VJsoUIQk0NH8AGkMs2TQtVzb+Ptq+S1m43oF4L7Cs80+KDOrAwWjWpl+
+g01m7RKm9QcKDSfxuWlruAg+n0GPR6DgFaXxH0Qy0TkdSySbvMUnNOAGQ0B0Svur
+EGx9xSDlZQo8qC4vT5AtD3ZpF16qLbrM1qiBWozK1AS1Kh12lfcd/hHYm6pF2inD
+NX+ZJMmXxr/OAwMpiK6XKGV0yKRFzvhCOMp8ca5aRQN56aOfR0LqAvkLtJAL4H14
+MalDI8kXHmklDdd7rBNUSzauC2vwcwXQ8IHDh8osexn3KieTCvRx6fusGZl6KVQA
+elOhnQEqc0IKMk7aoJqbVJTGAYWsss4izCDeKXTDniMNv4LGJ2s3MruYrlLmncQQ
+21b8RW+RUfhEILucZq7d4rbz8lzndbLOJU8o/M1Q4KSYDZg/+oKLbxjD9wJXLapJ
+2UPcsDr/Ccz7kNnwtnP8HHIJeNxhmUYAeNYmrSKM9+A+rK6cD8efaIZxi8PwSD6j
+UlLZHTi9
+=cqiV
+-----END PGP SIGNATURE-----
+
+--K8+RJcx40rD7eBrt--
