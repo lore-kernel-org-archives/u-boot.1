@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EE4CC5320E
-	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 06:26:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1CB5C52D6F
+	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 06:27:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C69EE8891B;
-	Tue, 27 Aug 2024 08:26:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 42D6888618;
+	Tue, 27 Aug 2024 08:27:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mL/3bmqs";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fD1DafZy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2CB187C80; Tue, 27 Aug 2024 08:26:55 +0200 (CEST)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id C4FCC88915; Tue, 27 Aug 2024 08:27:43 +0200 (CEST)
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
+ [IPv6:2607:f8b0:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E0A9887F3
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 08:26:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9095387CF8
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 08:27:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-202318c4f45so52363545ad.0
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 23:26:53 -0700 (PDT)
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-7141b04e7b5so3122495b3a.2
+ for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 23:27:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724740012; x=1725344812; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724740060; x=1725344860; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kT3FW5S0qGxL46Aq6SUXImxuiMgzskTRGcAnZFUqEm0=;
- b=mL/3bmqsSmRq0+D0ez0Sqq2QGb21WLNh6dp3EadALG0Zz1/ioWcAynVXfhyJsw78MX
- J3v9fr7gUoPnCgIPjbRwHN+WIph9xhVHQvlki2Kv5SlcFxyWce/JwtaC5DqnDos1TdK3
- FiipgvSnWUoQcQot6mQdqejKjOGc5qGvFfR6QxpCsT9m62mFMcCswzTp4m7dgi91XR/u
- DWgHd1fWE0aWVNZiwkQuT8lkAoau9I83BsmieS8zVKSVgqmEQmI6NjiWx76Y1DJnNrrr
- fGkbU2WG0Xipk4Ij2/T+dfsJMqVetuBvWO14f3tvoeKSRrW/9lH/WjAVQv/L/vd4ZvvQ
- nwTw==
+ bh=xRH9FT2eWlhloasZZkgXgGZReo/OyYASz6Da54RfDr8=;
+ b=fD1DafZyhvLdOGnxDlo4jHPXrW7WMpqmkhSV3IEOlF5Aa8NFRbAno11ete8/D813l2
+ nG4SAUD1pMJXLtdbZBLpgMdPhc4HT5UaVj+7VYVqiu16gSUxKmpGCMIgwT9VxonTfdtg
+ oRu2EKguRH1bCqVzaIDI2tDltLJf+ZrerVEChkav8NRro/enMj2lgNxVOSN4kGEl6Fhv
+ 0odQXPHTRZ9NLQxHPSK3DKvhwCA7X0vxCHLxsYAY9hEJ9xK7adr6KytRQxUToBnFGAnU
+ AqvUao3md6bVm+4PSmAi1NEU/p1cPjuf9ziT4k8tw0q70akCdV6GT3cqqd5CZ4nUq1qx
+ Zfyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724740012; x=1725344812;
+ d=1e100.net; s=20230601; t=1724740060; x=1725344860;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=kT3FW5S0qGxL46Aq6SUXImxuiMgzskTRGcAnZFUqEm0=;
- b=Rmf65RfG9qY5eqyKJdrq5aUZPLJju60Aw6zp/ClqcfplzEJnHTTUiOgx+cOKL5s8YD
- Ih6UEfhdVVJtaghME1ZZLbqyR4/C5ZtBePv7oQKhnmF1mqliocyqOxpXhU/UF9Rph+7g
- 8sY8G7w2C6ivgoiBWpShcMkyc90QcsGE1xMRZAUbEsL0WhwOaiT1EvIKpUNWUGuGot8M
- xM7ygLRbgQyRJuDQILdQ2+ugLegqWh8EzeOH4ZSJ6iIxa4jF0FKqKI2QRtnCITme+7OW
- osR6fNirX9hXEzPJllQmH+dG3dtV36fwjaMxATQ9s9C6d03i8/tB2Z/stpMvWw/hcx6a
- MbvA==
-X-Gm-Message-State: AOJu0YyEI0ruhfUn/0sPgXXbJcMnlRCgyWywITik6bOmu6CXdbz8N/oi
- k6CHoB/PDIf/uBBFhlzVVPwhU1vmcHLMI3ZgnAERDSuW0pWn0UWik6nO2gNncg5Ah7shIo6QMYP
- Kod3Milhb/dooeTCC+2szPd6TcWzFbwfWAxRcKA==
-X-Google-Smtp-Source: AGHT+IHzbZsMMmPbYlzZ7cNOYYa/1Tb+nfKSrLwXqbGjpUvoS8206RQEcJp5JfOEiOj0Cg5hbrGChcDPTpem4q9reko=
-X-Received: by 2002:a17:903:1cc:b0:202:2d03:b699 with SMTP id
- d9443c01a7336-204df45e130mr16095485ad.26.1724740011916; Mon, 26 Aug 2024
- 23:26:51 -0700 (PDT)
+ bh=xRH9FT2eWlhloasZZkgXgGZReo/OyYASz6Da54RfDr8=;
+ b=W9iJQh2/Mm1chjfs367uAgzNZ2yB35zOZ+OH5yYOzOp8uazSM7gHkI1xY2BiS+Uiva
+ veu4foQdHMHVdHMsgzeAgmbMl1eqhAc1S7x+w7KVTHfZnfdYrU7fZ7XuCXQ0CDE4PS0e
+ FThLfG78ureMMewycv8EC17/eAse6PxZE0R73oljXZWKEXtw4toX+DtARMFA65yITlDd
+ 5U/OakCSTQ6oaI+G9xYPijx6OS+mMwdEA/CWDyR7K/MCzE9x6cWz6MUWTyHwjs38Kzgc
+ I50s6Xp/XiXTtZJ9NghswC9MfM6+N4UDKMAkmZjGAshb2btXrEHUkRAccCuj0RXSltyW
+ +zxw==
+X-Gm-Message-State: AOJu0Yw1tNCEU8KYaP/AIflv0CwMiP0eibhmiQC6XsdBivmcB9G5V8M8
+ TbusKn3ZCy7luJYJeTIBBsVxvFFF5JoPCHZUo3JNrp9Aovc9pruu17Nl7fNCltbbq/ksb2vpuH/
+ /ZPNyBdThR5ct0PajYj/azrb1hXeSlUolRNEmDA==
+X-Google-Smtp-Source: AGHT+IE/mk2BHYbmhV5dk+WEEZtb82yP2qEizr+Qc18q9gBkyYC03RHtw0u0VH4nfWbmmkzDx7nAPFcMmUrcGKhP3z0=
+X-Received: by 2002:a05:6a21:4a4b:b0:1be:c2f7:275 with SMTP id
+ adf61e73a8af0-1cc8a0810e2mr12039194637.50.1724740059896; Mon, 26 Aug 2024
+ 23:27:39 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240826115940.3233167-1-sughosh.ganu@linaro.org>
- <20240826115940.3233167-13-sughosh.ganu@linaro.org>
-In-Reply-To: <20240826115940.3233167-13-sughosh.ganu@linaro.org>
+ <20240826115940.3233167-15-sughosh.ganu@linaro.org>
+In-Reply-To: <20240826115940.3233167-15-sughosh.ganu@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 27 Aug 2024 09:26:15 +0300
-Message-ID: <CAC_iWjKCdDpeURp2NsqA0r-WVG-otW7c7FpfeQJsX-pSS_VodQ@mail.gmail.com>
-Subject: Re: [PATCH v4 12/27] lmb: remove the lmb_init_and_reserve() function
+Date: Tue, 27 Aug 2024 09:27:03 +0300
+Message-ID: <CAC_iWj+8RuPyb0AzF7Sh6HPgS32WxfO=MD3TGYqTgBXpEEB+Eg@mail.gmail.com>
+Subject: Re: [PATCH v4 14/27] lmb: bootm: remove superfluous lmb stub functions
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>, 
@@ -92,168 +92,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 26 Aug 2024 at 15:00, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Mon, 26 Aug 2024 at 15:01, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> With the changes to make the LMB reservations persistent, the common
-> memory regions are being added during board init. Remove the
-> now superfluous lmb_init_and_reserve() function.
+> Remove a couple of superfluous LMB stub functions, and instead put a
+> check for calling the lmb_reserve() function.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > Reviewed-by: Simon Glass <sjg@chromium.org>
 > ---
 > Changes since V3: None
 >
->  arch/arm/mach-apple/board.c          |  2 --
->  arch/arm/mach-snapdragon/board.c     |  2 --
->  arch/arm/mach-stm32mp/stm32mp1/cpu.c |  3 ---
->  cmd/bdinfo.c                         |  1 -
->  cmd/load.c                           |  2 --
->  fs/fs.c                              |  1 -
->  include/lmb.h                        |  1 -
->  lib/lmb.c                            | 13 -------------
->  net/tftp.c                           |  2 --
->  net/wget.c                           |  2 --
->  10 files changed, 29 deletions(-)
+>  boot/bootm.c | 9 +++------
+>  1 file changed, 3 insertions(+), 6 deletions(-)
 >
-> diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
-> index 213390d6e8..0b6d290b8a 100644
-> --- a/arch/arm/mach-apple/board.c
-> +++ b/arch/arm/mach-apple/board.c
-> @@ -775,8 +775,6 @@ int board_late_init(void)
->  {
->         u32 status = 0;
->
-> -       lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
-> -
->         /* somewhat based on the Linux Kernel boot requirements:
->          * align by 2M and maximal FDT size 2M
->          */
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index a63c8bec45..22a7d2a637 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -282,8 +282,6 @@ int board_late_init(void)
->  {
->         u32 status = 0;
->
-> -       lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
-> -
->         /* We need to be fairly conservative here as we support boards with just 1G of TOTAL RAM */
->         status |= env_set_hex("kernel_addr_r", addr_alloc(SZ_128M));
->         status |= env_set_hex("ramdisk_addr_r", addr_alloc(SZ_128M));
-> diff --git a/arch/arm/mach-stm32mp/stm32mp1/cpu.c b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-> index a913737342..64480da9f8 100644
-> --- a/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-> +++ b/arch/arm/mach-stm32mp/stm32mp1/cpu.c
-> @@ -141,9 +141,6 @@ int mach_cpu_init(void)
->
->  void enable_caches(void)
->  {
-> -       /* parse device tree when data cache is still activated */
-> -       lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
-> -
->         /* I-cache is already enabled in start.S: icache_enable() not needed */
->
->         /* deactivate the data cache, early enabled in arch_cpu_init() */
-> diff --git a/cmd/bdinfo.c b/cmd/bdinfo.c
-> index b31e0208df..3c40dee143 100644
-> --- a/cmd/bdinfo.c
-> +++ b/cmd/bdinfo.c
-> @@ -162,7 +162,6 @@ static int bdinfo_print_all(struct bd_info *bd)
->         bdinfo_print_num_l("multi_dtb_fit", (ulong)gd->multi_dtb_fit);
->  #endif
->         if (IS_ENABLED(CONFIG_LMB) && gd->fdt_blob) {
-> -               lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
->                 lmb_dump_all_force();
->                 if (IS_ENABLED(CONFIG_OF_REAL))
->                         printf("devicetree  = %s\n", fdtdec_get_srcname());
-> diff --git a/cmd/load.c b/cmd/load.c
-> index 56da3a4c5d..20d802502a 100644
-> --- a/cmd/load.c
-> +++ b/cmd/load.c
-> @@ -153,8 +153,6 @@ static ulong load_serial(long offset)
->         int     line_count =  0;
->         long ret;
->
-> -       lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
-> -
->         while (read_record(record, SREC_MAXRECLEN + 1) >= 0) {
->                 type = srec_decode(record, &binlen, &addr, binbuf);
->
-> diff --git a/fs/fs.c b/fs/fs.c
-> index 3fb00590be..4bc28d1dff 100644
-> --- a/fs/fs.c
-> +++ b/fs/fs.c
-> @@ -549,7 +549,6 @@ static int fs_read_lmb_check(const char *filename, ulong addr, loff_t offset,
->         if (len && len < read_len)
->                 read_len = len;
->
-> -       lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
->         lmb_dump_all();
->
->         if (lmb_alloc_addr(addr, read_len) == addr)
-> diff --git a/include/lmb.h b/include/lmb.h
-> index 70191456e5..04558724a7 100644
-> --- a/include/lmb.h
-> +++ b/include/lmb.h
-> @@ -63,7 +63,6 @@ struct lmb {
->   */
->  int lmb_init(void);
->
-> -void lmb_init_and_reserve(struct bd_info *bd, void *fdt_blob);
->  void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
->                                 void *fdt_blob);
->
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index 9b1854223d..de4d0d1803 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -227,19 +227,6 @@ static void lmb_reserve_common(void *fdt_blob)
->                 efi_lmb_reserve();
+> diff --git a/boot/bootm.c b/boot/bootm.c
+> index ddede08979..a61bbcfb45 100644
+> --- a/boot/bootm.c
+> +++ b/boot/bootm.c
+> @@ -239,11 +239,6 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
+>         return 0;
 >  }
 >
-> -/* Initialize the struct, add memory and call arch/board reserve functions */
-> -void lmb_init_and_reserve(struct bd_info *bd, void *fdt_blob)
-> -{
-> -       int i;
+> -#if !CONFIG_IS_ENABLED(LMB)
+> -#define lmb_reserve(base, size)
+> -static inline void boot_start_lmb(void) { }
+> -#endif
 > -
-> -       for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-> -               if (bd->bi_dram[i].size)
-> -                       lmb_add(bd->bi_dram[i].start, bd->bi_dram[i].size);
-> -       }
-> -
-> -       lmb_reserve_common(fdt_blob);
-> -}
-> -
->  /* Initialize the struct, add memory and call arch/board reserve functions */
->  void lmb_init_and_reserve_range(phys_addr_t base, phys_size_t size,
->                                 void *fdt_blob)
-> diff --git a/net/tftp.c b/net/tftp.c
-> index 99b2ab9fca..b5d227d8bc 100644
-> --- a/net/tftp.c
-> +++ b/net/tftp.c
-> @@ -718,8 +718,6 @@ static int tftp_init_load_addr(void)
->         if (CONFIG_IS_ENABLED(LMB)) {
->                 phys_size_t max_size;
->
-> -               lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
-> -
->                 max_size = lmb_get_free_size(image_load_addr);
->                 if (!max_size)
->                         return -1;
-> diff --git a/net/wget.c b/net/wget.c
-> index 241465b9b4..4a168641c6 100644
-> --- a/net/wget.c
-> +++ b/net/wget.c
-> @@ -75,8 +75,6 @@ static int wget_init_load_size(void)
+>  static int bootm_start(void)
 >  {
->         phys_size_t max_size;
+>         memset((void *)&images, 0, sizeof(images));
+> @@ -700,7 +695,9 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+>                 images->os.end = relocated_addr + image_size;
+>         }
 >
-> -       lmb_init_and_reserve(gd->bd, (void *)gd->fdt_blob);
-> -
->         max_size = lmb_get_free_size(image_load_addr);
->         if (!max_size)
->                 return -1;
+> -       lmb_reserve(images->os.load, (load_end - images->os.load));
+> +       if (CONFIG_IS_ENABLED(LMB))
+> +               lmb_reserve(images->os.load, (load_end - images->os.load));
+> +
+>         return 0;
+>  }
+>
 > --
 > 2.34.1
 >
