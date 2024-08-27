@@ -4,53 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F1F3C52D6F
-	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 04:31:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD53CC5320E
+	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 04:31:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CF9D884C3;
-	Tue, 27 Aug 2024 06:30:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7039488481;
+	Tue, 27 Aug 2024 06:31:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1724733059;
-	bh=lNGQ2gX7uZiza7x6BEHWdgPidkbVnS1CXomd/hVTuUs=;
+	s=phobos-20191101; t=1724733062;
+	bh=i527yAAQwTU/ixvLeT2c2CNB4PHqMtV5Qp/tKlYnzeQ=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=dFoUvW/KT71WpvPxxkawCsSBt1t0rQ6pydSrymuRsTw6bOMCHKcGMo2IkwkIZtM6x
-	 xM2DsKFwSkSAc4EtYeDdfsjDwxTFmTxiDDMiKY+2GP9MG3CA1aR2UK3xx9ab/x7BVs
-	 C1isq5cKwijOCQHRazzbgQvWK/oWsF1BX0yMeeTOhY0RtRwpyvn9VBxjDpuZ/FY9OP
-	 dMJMa1GRhIhYALFwHMRqu3xrmGBoMqRVpH0nXo2eGbEooEZOAdNL2Im+TZGALtDj+U
-	 kYyoCFJT1qAGQZKEL+f3rwOGui9Flw7BQGmhOU9Yl2Bqz0DqdEX1nyuLh9Wrh2WAkf
-	 jfGAh+BUbZsmw==
+	b=wVNF4dp/GZdvHw8iVDBzuXm1pii8m63jFmbKNpN3M2ghUD1VAIlBrNS28X8p+8YsO
+	 oLBWl2qFUDwvfe+b8zcAPKhVLmNb6N9zswq+0SEashXnCLODfILZzYR84AMyAKq2VC
+	 WNU73sNqFLcwq/j6djo2aMBalghIIxqAIdKkCByjWjvsI7pbVlQpro+yq0xuw9PeG0
+	 ft/pWXMaSSaRtfs8R2cAPIhC3DBkKw58L31ASfbYyXy9/Q8hHW0kydQNImwNG8V2My
+	 2IFsrvllXPgA5VgODd+dBQYf5JWj0adYIpw5BAmjg222m4bMvgFDOcSaEtnjlZwauA
+	 bOUZHssujfFjA==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id BA40288363;
- Tue, 27 Aug 2024 06:30:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 90BD988418;
+ Tue, 27 Aug 2024 06:30:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1724733059;
- bh=lNGQ2gX7uZiza7x6BEHWdgPidkbVnS1CXomd/hVTuUs=;
+ bh=i527yAAQwTU/ixvLeT2c2CNB4PHqMtV5Qp/tKlYnzeQ=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=bq+boYcF+1dyRD7KyN9eA4mIHBa11jWMYvfL1IdUy7m+GWbsi5kuAtG0xZX0fGzVS
- g58kOjM/G5FGuwOBjxDosV8Mps57ux1OTL0L8Z0hEBISYfrhgkvYY4CnCfzI7cL2s5
- UOw2FkcmN11LlPZqMC1tjjNHYE1Vh0SUB3/ys907aVoMegxqvuO9ul4ilkLlscA9YX
- nviF5ngn7O6n8oOVoFzZb0t7d2QDwBkq9P1ZOvpqep5EwqPA09IMpBcyJsTyNz+bvI
- rWg7dXNFf0sQC3wmBhzw5rqsJUmoy4x4UdTck6w8S9H4Wk5us1bF1Jtnvqkasep+Z0
- D1A54KWSW4w6w==
-Message-ID: <bd308c00-4bfd-4ace-a499-46ea41271228@denx.de>
-Date: Tue, 27 Aug 2024 06:28:45 +0200
+ b=szw8+Fue6//K6Z4groo79IM9JSfhq7f2iJO5O2bk2TIoc1MeUKjWAaJKiVqJ9osHR
+ K0T2TfkCMNw5650CusLf5cWXc9L9iBA7SyN0eXz9EVVRSG0akc511HSeAle20eAI2+
+ Upn4+0ITjGdfWOMiCeXEwqLSbttLey1V6+f+3CFgWHoPe/TDs1XmA6kPZ+9+zjYr2s
+ RLjWppe9zhDZHTBfgHqbwmkbHrSYto5qpZS1SXD4+9rtS6xIT9vf53aZ04LyIrHhM3
+ 9iDWqhXy0vEP14XBgog+G6YSDK/14feTY5A8/jkZG+WLWEMrZDLqthRYsZ+yPJGimK
+ XVKJlsgi0l60w==
+Message-ID: <e6a495cc-e4bd-4b74-8c5c-3810b3b6846c@denx.de>
+Date: Tue, 27 Aug 2024 06:29:30 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] imx: Remove CFG_MXC_USB_FLAGS
+Subject: Re: [PATCH 2/3] usb: ehci-mx5: Add a default for CFG_MXC_USB_PORTSC
 To: Fabio Estevam <festevam@gmail.com>, peng.fan@nxp.com
 Cc: u-boot@lists.denx.de, tharvey@gateworks.com,
  Fabio Estevam <festevam@denx.de>
 References: <20240827005826.2831478-1-festevam@gmail.com>
+ <20240827005826.2831478-2-festevam@gmail.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240827005826.2831478-1-festevam@gmail.com>
+In-Reply-To: <20240827005826.2831478-2-festevam@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,12 +73,26 @@ X-Virus-Status: Clean
 On 8/27/24 2:58 AM, Fabio Estevam wrote:
 > From: Fabio Estevam <festevam@denx.de>
 > 
-> CFG_MXC_USB_FLAGS is only used for drivers/usb/host/ehci-mx5.c, so it
-> can be removed from all the imx6/imx7/imx8m board config files.
+> Just like drivers/usb/host/ehci-mx6.c, add a default for
+> drivers/usb/host/ehci-mx5.c.
 > 
-> mx51evk.h is the only place CFG_MXC_USB_FLAGS is not set to 0.
+> The motivation for doing this is to remove CFG_MXC_USB_PORTSC
+> from board config files.
 > 
-> Suggested-by: Tim Harvey <tharvey@gateworks.com>
 > Signed-off-by: Fabio Estevam <festevam@denx.de>
+> ---
+>   drivers/usb/host/ehci-mx5.c | 4 ++++
+>   1 file changed, 4 insertions(+)
+> 
+> diff --git a/drivers/usb/host/ehci-mx5.c b/drivers/usb/host/ehci-mx5.c
+> index 44912de7787d..d8f521befe14 100644
+> --- a/drivers/usb/host/ehci-mx5.c
+> +++ b/drivers/usb/host/ehci-mx5.c
+> @@ -79,6 +79,10 @@
+>   /* USB_CTRL_1 */
+>   #define MXC_USB_CTRL_UH1_EXT_CLK_EN	(1 << 25)
+>   
+> +#ifndef CFG_MXC_USB_PORTSC
+> +#define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
 
-Reviewed-by: Marek Vasut <marex@denx.de>
+Why this specific value ? (this should be in the commit message)
