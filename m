@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F829C52D6F
-	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 06:35:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE6C5C52D6F
+	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 07:11:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE7B588155;
-	Tue, 27 Aug 2024 08:35:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 12BFC8831F;
+	Tue, 27 Aug 2024 09:11:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Dcs6z2zS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RU4dr8cY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89DA2880E6; Tue, 27 Aug 2024 08:35:40 +0200 (CEST)
-Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
- [IPv6:2607:f8b0:4864:20::42d])
+ id 4569988009; Tue, 27 Aug 2024 09:11:47 +0200 (CEST)
+Received: from mail-ua1-x92a.google.com (mail-ua1-x92a.google.com
+ [IPv6:2607:f8b0:4864:20::92a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A03F88155
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 08:35:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E57F881A1
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 09:11:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-71446fefddfso2737200b3a.0
- for <u-boot@lists.denx.de>; Mon, 26 Aug 2024 23:35:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x92a.google.com with SMTP id
+ a1e0cc1a2514c-8430fdf256bso1192174241.0
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 00:11:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724740536; x=1725345336; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724742703; x=1725347503; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9w/cwcgHuyMiT+c4jErCJhlKPEfjGKFq5bIYmJQVIFo=;
- b=Dcs6z2zSllDVcuJS5jdCmQ5k7eaJ5Z9HSJIfrmLrN1jRuZBRhV8ofN1GLNK6ZqsnzF
- Gfi8fbuCV+volcs71FuOw+UGBomFx+seVLQE6wv5nAHek5JuN9AwOlxfLzce1CneWe+q
- MBVmfhFHyyz0Wo5nF41jbzmquxqXpD4N02PYjSt3Z+0k7xSLoRIuSoZ9zwXc62aHdXDa
- 4+GQJauT0HuIdCtsas1NjG5wpeHwThgI72F8tmRs5qoCtiyXH1mI3vSFQR8ZhaHHtdHx
- 5cEocs0BaT6JEsDpUByjbwEYgvr8YVtnOkSQk3U+BFAtRgvdBv8tgp/SnS5DHsFx9le6
- Bn/Q==
+ bh=vz1uXn20XIcOKTc1VY6tyXWU9H0guXEH03GGegVzuy4=;
+ b=RU4dr8cY8DCwa7ZGHnwqCSxCw3YoyElA3xrSze0I6AEyJnE75RRzhR14sPR3YgaLq+
+ DJ6GcubeRAPC+DHS6dW+jXaRVUweDqNUII7zDS9vXznVdVQrdQm4lY2Lq+8fgkwztS0M
+ jBXjk7e/n61hk4ncmbSeFvbcCfdR9/gHkAJ9wrbCMaAZCA5Ftsx45ZHdWVQsakfCbQUX
+ VmyLqhT1qYRFezPRZ2fiPKFLgWa9/XHo5675bRF4w4EBn81Ca0Sa2uHVitWNSLANa6V7
+ vWZz56M2slRJoYdZdmGiRQMPNyE0WdY1UJHk+4NZmiKKmCpkFRwaodaWD9unVwscMxwp
+ i1qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724740536; x=1725345336;
+ d=1e100.net; s=20230601; t=1724742703; x=1725347503;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9w/cwcgHuyMiT+c4jErCJhlKPEfjGKFq5bIYmJQVIFo=;
- b=mLDcqkImN0P9fp9F1exB2blasE5GJ9xHqDHAa6YymNTg8BLfaXZFqDiPeD77LDPxfG
- Gb6IwRxbbZ7tRAfv1UQtZqndPMOSKKBOFSpuayrfq9h/6ui+OJXOqaQwoWnNHJEro4kf
- 09bduT8FiV8k5n5kvZeha1mUdnPQqoUNP2igMmXfq2KJBBJde65l/ubjbrJX6taWOmJV
- xXE9vnw04k8OEnxCHrsGd4NpDOgH7jD6EuVELuuSgCf0YlpP1mEpD9Yb7MylrMIQ/cog
- JCRDH3fy766hNjPdH4L8ePF3QnPpXmXFLksL5GmUY5MiFJZYLUzLAaUKbuCBxEivAwq/
- Dcow==
-X-Gm-Message-State: AOJu0YzLkg+hH/NUyanFRl1vefy7kWhqBtLq24BqlKR1KeXvz75VpjMx
- ZiqD4ogsI6CGtVmYUU/Sbo9PpaCwGMuAMvTNK1bKYWVVFV0SZJxWoHkk6UvgHuZZbM2yC6S5+b8
- i8WlnDTT2EBd7FQ/QHmHOh58cCmqHS13z6H/2BQ==
-X-Google-Smtp-Source: AGHT+IHnm99qmJJYxW1CwEbQsngIQvFludHs/KbSy16WqMGPk/6lvG5p8RFCOM1z4CB4jpxk0k+pEkeVLLi6yrIKMpo=
-X-Received: by 2002:a05:6a20:db0a:b0:1c4:9100:6a1b with SMTP id
- adf61e73a8af0-1cc89dbac71mr12854957637.30.1724740535629; Mon, 26 Aug 2024
- 23:35:35 -0700 (PDT)
+ bh=vz1uXn20XIcOKTc1VY6tyXWU9H0guXEH03GGegVzuy4=;
+ b=oSK2KqwmdrPi+hG1DmPgOW7Z2mZtPBO2W8NnS1TNzGP4vQvK4M5mHvMoAYiXRbuovL
+ d0/FbD152dRW3d/fC9DhEBR6PdiyBfSyYb9DwKEn3sVaYAEsIveGv8zUDIJVKqogxFqe
+ gw/zgzPAbR5D6U99SF4/DUHyucp6A9hgIwToH4OizmK5az4T8SapetfAMTWmDTcbv7RS
+ uppwwfJY/vCvtzV7qMU3CKB0OW9FBz9dlhbJKgg2BATOnG4Rk7OQFpkvGuOeK4P0qpWc
+ n6o//y1BAHzK1lRzgClvdwnR2SFcMawIf2tj0eCi34xvPolbH/0ogMKHm7wG45bEZPkP
+ C5Cg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXfADXi3wpAmo19rNNnXGRnG9d2FExklY+Led3KJHRYmbixMdAr6+FjroJWhJc4FZWZcWvn2ak=@lists.denx.de
+X-Gm-Message-State: AOJu0YyJqDayOpnc/BmpEFfv1pWq1YYTBoUeNs3b6kt6XFw/Ht3cSYcx
+ 8vH7VCcDWlr2mJoJ5cs9Bcrfiv7/Y0QKzy2k7DLgyrBxgind7QhmqpFe5AUJ6NYfKw4v7X0XZ18
+ f+8R5Ln83IGEsclEeMKC45IFgE53JJe6l5HYocw==
+X-Google-Smtp-Source: AGHT+IH4HakSulNaW1Wrv/Dw/b6iPzou9yOsjFjjmrXakEkWpTudWoP+i/K+SvfkSc1PrGgZE4plLTHiYrsOOR2BeQo=
+X-Received: by 2002:a05:6102:c93:b0:48f:eb5f:84d8 with SMTP id
+ ada2fe7eead31-498f4c5be07mr14185672137.27.1724742703074; Tue, 27 Aug 2024
+ 00:11:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240826115940.3233167-1-sughosh.ganu@linaro.org>
- <20240826115940.3233167-18-sughosh.ganu@linaro.org>
-In-Reply-To: <20240826115940.3233167-18-sughosh.ganu@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 27 Aug 2024 09:34:59 +0300
-Message-ID: <CAC_iWjKt1V4JRLW7ipMcd_boF+4kFZ8C_B0D-bnCfZEs41XkpQ@mail.gmail.com>
-Subject: Re: [PATCH v4 17/27] lmb: do away with arch_lmb_reserve()
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- Patrice CHOTARD <patrice.chotard@foss.st.com>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>
+References: <7765273f-7f36-41e4-a604-1901e4fbec62@siemens.com>
+ <20240813125245.ezlu6me3ljwx6dkj@margarine>
+ <89f8e976-e831-4035-8cd0-ab6284846d0a@siemens.com>
+ <4ec5108f-b7a4-47db-baa4-edee532c58af@siemens.com>
+ <CAFA6WYMQustcwo4Es7iJQj5Lva6UiYJ-j7WgSzMjOvEHemeDcQ@mail.gmail.com>
+ <66cc4396.670a0220.ebd0d.a836SMTPIN_ADDED_BROKEN@mx.google.com>
+ <CAFA6WYOgL6726=EVQyuWPqXEuf+efZyt0AOmVWQXcLq5eOUOrg@mail.gmail.com>
+ <66cc733b.050a0220.26d1c6.5ff7SMTPIN_ADDED_BROKEN@mx.google.com>
+In-Reply-To: <66cc733b.050a0220.26d1c6.5ff7SMTPIN_ADDED_BROKEN@mx.google.com>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Tue, 27 Aug 2024 12:41:31 +0530
+Message-ID: <CAFA6WYOuzJfDP1J=9c6Y=fg4m7UMguJBTAUj6gDnYmTNnCDmDQ@mail.gmail.com>
+Subject: Re: OF_UPSTREAM vs. additional dtbs
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Jan Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,479 +95,218 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 26 Aug 2024 at 15:01, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Mon, 26 Aug 2024 at 17:51, Jonas Karlman <jonas@kwiboo.se> wrote:
 >
-> All of the current definitions of arch_lmb_reserve() are doing the
-> same thing -- reserve the region of memory occupied by U-Boot,
-> starting from the current stack address to the ram_top. Introduce a
-> function lmb_reserve_uboot_region() which does this, and do away with
-> the arch_lmb_reserve() function.
+> Hi Sumit,
 >
-> Instead of using the current value of stack pointer for starting the
-> reserved region, have a fixed value, considering the stack size config
-> value.
+> On 2024-08-26 13:48, Sumit Garg wrote:
+> > Hi Jonas,
+> >
+> > On Mon, 26 Aug 2024 at 14:27, Jonas Karlman <jonas@kwiboo.se> wrote:
+> >>
+> >> Hi Sumit,
+> >>
+> >> On 2024-08-26 08:44, Sumit Garg wrote:
+> >>> Hi,
+> >>>
+> >>> On Wed, 14 Aug 2024 at 22:14, Jan Kiszka <jan.kiszka@siemens.com> wrote:
+> >>>>
+> >>>> On 14.08.24 11:41, Jan Kiszka wrote:
+> >>>>> On 13.08.24 14:52, Nishanth Menon wrote:
+> >>>>>> On 11:16-20240813, Jan Kiszka wrote:
+> >>>>>>> Hi all,
+> >>>>>>>
+> >>>>>>> I'm trying to migrate the TI AM65x IOT2050 boards to OF_UPSTREAM but I'm
+> >>>>>>> facing issues because I need to still build the u-boot-only overlays. It
+> >>>>>>> is also a bit weird (but works) having to specify
+> >>>>>>>
+> >>>>>>> CONFIG_SPL_OF_LIST="../../../../arch/arm/dts/k3-am65-iot2050-spl"
+> >>>>>>>
+> >>>>>
+> >>>>> Actually, this does NOT work: I just had a long morning debugging SPL
+> >>>>> which no longer started because it picked the non-filtered dtb. The
+> >>>>> filtered one ended up in a folder outside of the u-boot sources because
+> >>>>> of all those ../ and hard-wiring to dts/upstream.
+> >>>>>
+> >>>>>>> for our spl dtb.
+> >>>>>>>
+> >>>>>>> Are there means to still build certain dtb[o] files in arch/<arch>/dts?
+> >>>>>>> I'm a bit lost in the Makefile forest.
+> >>>>>>>
+> >>>>>>
+> >>>>>> Sumit: Any suggestions?
+> >>>>>>
+> >>>
+> >>> Apologies for the delayed reply. I was a bit busy with other high
+> >>> priority stuff.
+> >>>
+> >>>>>
+> >>>>> I would really like to hear some better proposals than my local
+> >>>>> workarounds to far. They don't converge although I already patched some
+> >>>>> core Makefile (overlays are building now).
+> >>>>>
+> >>>>
+> >>>> OK, I side-stepped the spl issue by using one of our variant DTBs for
+> >>>> spl as well - happens to work.
+> >>>
+> >>> That's good to know.
+> >>>
+> >>>>
+> >>>> For the overlays, I need to add
+> >>>>
+> >>>> --- a/scripts/Makefile.dts
+> >>>> +++ b/scripts/Makefile.dts
+> >>>> @@ -1,5 +1,7 @@
+> >>>>  # SPDX-License-Identifier: GPL-2.0+
+> >>>>
+> >>>> +include $(srctree)/config.mk
+> >>>> +
+> >>>>  dtb-y += $(patsubst %,%.dtb,$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $(CONFIG_OF_LIST) $(CONFIG_SPL_OF_LIST)))
+> >>>>
+> >>>>  ifeq ($(CONFIG_OF_UPSTREAM_BUILD_VENDOR),y)
+> >>>>
+> >>>>
+> >>>> in order to then be able to do
+> >>>>
+> >>>> --- a/board/siemens/iot2050/config.mk
+> >>>> +++ b/board/siemens/iot2050/config.mk
+> >>>> @@ -5,4 +5,12 @@
+> >>>>  # Authors:
+> >>>>  #   Jan Kiszka <jan.kiszka@siemens.com>
+> >>>>
+> >>>> +ifneq ($(CONFIG_SPL_BUILD),y)
+> >>>> +dtbo-list = \
+> >>>> +       k3-am6548-iot2050-advanced-m2-bkey-usb3-overlay \
+> >>>> +       k3-am6548-iot2050-advanced-m2-bkey-ekey-pcie-overlay
+> >>>> +
+> >>>> +dtb-y += $(patsubst %,../../../../arch/arm/dts/%.dtbo,$(dtbo-list))
+> >>>> +endif
+> >>>> +
+> >>>>  flash.bin: all
+> >>>>
+> >>>>
+> >>>> Does that make sense?
+> >>>
+> >>> A switch to OF_UPSTREAM means that we build all the DT artifacts from
+> >>> dts/upstream/src/ directory with the only exception that we include
+> >>> U-Boot specific overrides via *-u-boot.dtsi from arch/<arch>/dts. In
+> >>> case of overlays, is there any reason for IOT2050 board overlays not
+> >>> being pushed into Linux kernel repo? AFAIU, overlays are also
+> >>> describing puggable hardware so they shouldn't be referred to as
+> >>> "u-boot-only" overlays.
+> >>
+> >> I have a related issue where I would like to build board DT from
+> >> dts/upstream, however there is also a need for a limited U-Boot specific
+> >> DT that only is intended for initial boot so that U-Boot at runtime can
+> >> determine what hw revision is booting and select correct DT to use for
+> >> U-Boot proper and OS.
+> >>
+> >> For now I have just set the board target to use OF_UPSTREAM=n and
+> >> instead created minimal .dts-files in arch/<arch>/dts that include the
+> >> full .dts-file from dts/upstream.
+> >>
+> >> Any suggestion on how we better can support having a U-Boot only
+> >> .dts-file together with OF_UPSTREAM=y ?
+> >
+> > The motivation is rather to avoid any U-Boot specific DT files.
+> > Shouldn't you be able to create a DT overlay of v2.1 board over v1.1
+> > and push that upstream? The runtime DT choice sounds pretty similar to
+> > how you can choose to apply the DT overlay or not with common boot DT.
+> > Also, bundling multiple DT within U-Boot proper FIT image can be an
+> > alternative too.
 >
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
-> Changes since V3:
-> * s/16384/SZ_16K in lmb_reserve_uboot_region().
-> * Fix the corresponding comment for the above change.
-> * Fixed the alignment in lmb_reserve_uboot_region() as suggested by
->   checkpatch.
+> Both rk3566-orangepi-3b-v1.1.dts and rk3566-orangepi-3b-v2.1.dts are
+> in/from upstream Linux, and they are both included in the same FIT along
+> with the default U-Boot specific DT (rk3566-orangepi-3b.dtb):
 >
->  arch/arc/lib/cache.c        | 14 -------
->  arch/arm/lib/stack.c        | 14 -------
->  arch/m68k/lib/bootm.c       | 17 --------
->  arch/microblaze/lib/bootm.c | 14 -------
->  arch/mips/lib/bootm.c       | 15 -------
->  arch/nios2/lib/bootm.c      | 13 ------
->  arch/powerpc/lib/bootm.c    |  9 ----
->  arch/riscv/lib/bootm.c      | 13 ------
->  arch/sh/lib/bootm.c         | 13 ------
->  arch/x86/lib/bootm.c        | 18 --------
->  arch/xtensa/lib/bootm.c     | 13 ------
->  include/lmb.h               |  2 -
->  lib/lmb.c                   | 84 ++++++++++++++++++-------------------
->  13 files changed, 42 insertions(+), 197 deletions(-)
+>  CONFIG_OF_LIST="rk3566-orangepi-3b rk3566-orangepi-3b-v1.1 rk3566-orangepi-3b-v2.1"
 >
-> diff --git a/arch/arc/lib/cache.c b/arch/arc/lib/cache.c
-> index 5151af917a..5169fc627f 100644
-> --- a/arch/arc/lib/cache.c
-> +++ b/arch/arc/lib/cache.c
-> @@ -10,7 +10,6 @@
->  #include <linux/compiler.h>
->  #include <linux/kernel.h>
->  #include <linux/log2.h>
-> -#include <lmb.h>
->  #include <asm/arcregs.h>
->  #include <asm/arc-bcr.h>
->  #include <asm/cache.h>
-> @@ -820,16 +819,3 @@ void sync_n_cleanup_cache_all(void)
+>  Default Configuration: 'config-1'
+>  Configuration 0 (config-1)
+>   Description:  rk3566-orangepi-3b.dtb
+>   Kernel:       unavailable
+>   Firmware:     atf-1
+>   FDT:          fdt-1
+>   Loadables:    u-boot
+>                 atf-2
+>                 atf-3
+>                 atf-4
+>                 atf-5
+>                 atf-6
+>  Configuration 1 (config-2)
+>   Description:  rk3566-orangepi-3b-v1.1.dtb
+>   Kernel:       unavailable
+>   Firmware:     atf-1
+>   FDT:          fdt-2
+>   Loadables:    u-boot
+>                 atf-2
+>                 atf-3
+>                 atf-4
+>                 atf-5
+>                 atf-6
+>  Configuration 2 (config-3)
+>   Description:  rk3566-orangepi-3b-v2.1.dtb
+>   Kernel:       unavailable
+>   Firmware:     atf-1
+>   FDT:          fdt-3
+>   Loadables:    u-boot
+>                 atf-2
+>                 atf-3
+>                 atf-4
+>                 atf-5
+>                 atf-6
 >
->         __ic_entire_invalidate();
->  }
-> -
-> -static ulong get_sp(void)
-> -{
-> -       ulong ret;
-> -
-> -       asm("mov %0, sp" : "=r"(ret) : );
-> -       return ret;
-> -}
-> -
-> -void arch_lmb_reserve(void)
-> -{
-> -       arch_lmb_reserve_generic(get_sp(), gd->ram_top, 4096);
-> -}
-> diff --git a/arch/arm/lib/stack.c b/arch/arm/lib/stack.c
-> index 87d5c962d7..2b21ec0734 100644
-> --- a/arch/arm/lib/stack.c
-> +++ b/arch/arm/lib/stack.c
-> @@ -11,7 +11,6 @@
->   * Marius Groeger <mgroeger@sysgo.de>
->   */
->  #include <init.h>
-> -#include <lmb.h>
->  #include <asm/global_data.h>
+> Main reason why a U-Boot specific DT is used is because the hw revisions
+> use different voltage for Ethernet PHY, and we want to avoid causing
+> damage to a board when runtime cannot determine what hw revision is
+> running, and thus we use a safe U-Boot specific DT.
+
+Okay so the runtime check for hw revision isn't stable. If that's the
+case then I am unsure if we should enable it at all. IIUC in case a
+fallback to safe U-Boot DT is made then the ethernet won't be
+functional. I would rather favour separate U-Boot images for each
+board with corresponding DT to provide a fully functional system.
+
 >
->  DECLARE_GLOBAL_DATA_PTR;
-> @@ -33,16 +32,3 @@ int arch_reserve_stacks(void)
+> I do not see any reason to try and upstream this u-boot only DT to Linux,
+> since it's only purpose is to assist boot firmware to select correct DT.
+
+I suppose similar functionality would be needed if any other
+bootloader/firmware has to be enabled for these boards. So we can't
+say it's particularly specific to U-Boot but it is rather a dowsized
+DT which can boot on both boards with ethernet non-functional. You can
+also rather have a single downsized DT supported upstream with 2
+overlays one for each board which can be applied on successful
+detection of hw revision.
+
+-Sumit
+
 >
->         return 0;
->  }
-> -
-> -static ulong get_sp(void)
-> -{
-> -       ulong ret;
-> -
-> -       asm("mov %0, sp" : "=r"(ret) : );
-> -       return ret;
-> -}
-> -
-> -void arch_lmb_reserve(void)
-> -{
-> -       arch_lmb_reserve_generic(get_sp(), gd->ram_top, 16384);
-> -}
-> diff --git a/arch/m68k/lib/bootm.c b/arch/m68k/lib/bootm.c
-> index aee95f1e18..3dcff8076e 100644
-> --- a/arch/m68k/lib/bootm.c
-> +++ b/arch/m68k/lib/bootm.c
-> @@ -9,7 +9,6 @@
->  #include <command.h>
->  #include <env.h>
->  #include <image.h>
-> -#include <lmb.h>
->  #include <log.h>
->  #include <asm/global_data.h>
->  #include <u-boot/zlib.h>
-> @@ -27,14 +26,8 @@ DECLARE_GLOBAL_DATA_PTR;
->  #define LINUX_MAX_ENVS         256
->  #define LINUX_MAX_ARGS         256
+> Regards,
+> Jonas
 >
-> -static ulong get_sp (void);
->  static void set_clocks_in_mhz (struct bd_info *kbd);
+> >
+> > -Sumit
+> >
+> >>
+> >> Please see following for more details:
+> >> https://source.denx.de/u-boot/u-boot/-/commit/a52099b4a2ae9e8cafc79268325249bcad308012
+> >> https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/rk3566-orangepi-3b.dts
+> >> https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/rk3566-orangepi-3b-v1.1.dts
+> >> https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/rk3566-orangepi-3b-v2.1.dts
+> >>
+> >> Regards,
+> >> Jonas
+> >>
+> >>>
+> >>> -Sumit
+> >>>
+> >>>>
+> >>>> Jan
+> >>>>
+> >>>> --
+> >>>> Siemens AG, Technology
+> >>>> Linux Expert Center
+> >>>>
+> >>
 >
-> -void arch_lmb_reserve(void)
-> -{
-> -       arch_lmb_reserve_generic(get_sp(), gd->ram_top, 1024);
-> -}
-> -
->  int do_bootm_linux(int flag, struct bootm_info *bmi)
->  {
->         struct bootm_headers *images = bmi->images;
-> @@ -88,16 +81,6 @@ error:
->         return 1;
->  }
->
-> -static ulong get_sp (void)
-> -{
-> -       ulong sp;
-> -
-> -       asm("movel %%a7, %%d0\n"
-> -           "movel %%d0, %0\n": "=d"(sp): :"%d0");
-> -
-> -       return sp;
-> -}
-> -
->  static void set_clocks_in_mhz (struct bd_info *kbd)
->  {
->         char *s;
-> diff --git a/arch/microblaze/lib/bootm.c b/arch/microblaze/lib/bootm.c
-> index ce96bca28f..4879a41aab 100644
-> --- a/arch/microblaze/lib/bootm.c
-> +++ b/arch/microblaze/lib/bootm.c
-> @@ -15,7 +15,6 @@
->  #include <fdt_support.h>
->  #include <hang.h>
->  #include <image.h>
-> -#include <lmb.h>
->  #include <log.h>
->  #include <asm/cache.h>
->  #include <asm/global_data.h>
-> @@ -24,19 +23,6 @@
->
->  DECLARE_GLOBAL_DATA_PTR;
->
-> -static ulong get_sp(void)
-> -{
-> -       ulong ret;
-> -
-> -       asm("addik %0, r1, 0" : "=r"(ret) : );
-> -       return ret;
-> -}
-> -
-> -void arch_lmb_reserve(void)
-> -{
-> -       arch_lmb_reserve_generic(get_sp(), gd->ram_top, 4096);
-> -}
-> -
->  static void boot_jump_linux(struct bootm_headers *images, int flag)
->  {
->         void (*thekernel)(char *cmdline, ulong rd, ulong dt);
-> diff --git a/arch/mips/lib/bootm.c b/arch/mips/lib/bootm.c
-> index 8fb3a3923f..8719510002 100644
-> --- a/arch/mips/lib/bootm.c
-> +++ b/arch/mips/lib/bootm.c
-> @@ -9,7 +9,6 @@
->  #include <env.h>
->  #include <image.h>
->  #include <fdt_support.h>
-> -#include <lmb.h>
->  #include <log.h>
->  #include <asm/addrspace.h>
->  #include <asm/global_data.h>
-> @@ -28,20 +27,6 @@ static char **linux_env;
->  static char *linux_env_p;
->  static int linux_env_idx;
->
-> -static ulong arch_get_sp(void)
-> -{
-> -       ulong ret;
-> -
-> -       __asm__ __volatile__("move %0, $sp" : "=r"(ret) : );
-> -
-> -       return ret;
-> -}
-> -
-> -void arch_lmb_reserve(void)
-> -{
-> -       arch_lmb_reserve_generic(arch_get_sp(), gd->ram_top, 4096);
-> -}
-> -
->  static void linux_cmdline_init(void)
->  {
->         linux_argc = 1;
-> diff --git a/arch/nios2/lib/bootm.c b/arch/nios2/lib/bootm.c
-> index d33d45d28f..71319839ba 100644
-> --- a/arch/nios2/lib/bootm.c
-> +++ b/arch/nios2/lib/bootm.c
-> @@ -64,16 +64,3 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
->
->         return 1;
->  }
-> -
-> -static ulong get_sp(void)
-> -{
-> -       ulong ret;
-> -
-> -       asm("mov %0, sp" : "=r"(ret) : );
-> -       return ret;
-> -}
-> -
-> -void arch_lmb_reserve(void)
-> -{
-> -       arch_lmb_reserve_generic(get_sp(), gd->ram_top, 4096);
-> -}
-> diff --git a/arch/powerpc/lib/bootm.c b/arch/powerpc/lib/bootm.c
-> index 8f21cdb0a5..dc44bf3ab3 100644
-> --- a/arch/powerpc/lib/bootm.c
-> +++ b/arch/powerpc/lib/bootm.c
-> @@ -36,7 +36,6 @@
->
->  DECLARE_GLOBAL_DATA_PTR;
->
-> -static ulong get_sp (void);
->  extern void ft_fixup_num_cores(void *blob);
->  static void set_clocks_in_mhz (struct bd_info *kbd);
->
-> @@ -210,14 +209,6 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
->         return 0;
->  }
->
-> -static ulong get_sp (void)
-> -{
-> -       ulong sp;
-> -
-> -       asm( "mr %0,1": "=r"(sp) : );
-> -       return sp;
-> -}
-> -
->  static void set_clocks_in_mhz (struct bd_info *kbd)
->  {
->         char    *s;
-> diff --git a/arch/riscv/lib/bootm.c b/arch/riscv/lib/bootm.c
-> index bbf62f9e05..82502972ee 100644
-> --- a/arch/riscv/lib/bootm.c
-> +++ b/arch/riscv/lib/bootm.c
-> @@ -133,16 +133,3 @@ int do_bootm_vxworks(int flag, struct bootm_info *bmi)
->  {
->         return do_bootm_linux(flag, bmi);
->  }
-> -
-> -static ulong get_sp(void)
-> -{
-> -       ulong ret;
-> -
-> -       asm("mv %0, sp" : "=r"(ret) : );
-> -       return ret;
-> -}
-> -
-> -void arch_lmb_reserve(void)
-> -{
-> -       arch_lmb_reserve_generic(get_sp(), gd->ram_top, 4096);
-> -}
-> diff --git a/arch/sh/lib/bootm.c b/arch/sh/lib/bootm.c
-> index 44ac05988c..bb0f59e0aa 100644
-> --- a/arch/sh/lib/bootm.c
-> +++ b/arch/sh/lib/bootm.c
-> @@ -101,16 +101,3 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
->         /* does not return */
->         return 1;
->  }
-> -
-> -static ulong get_sp(void)
-> -{
-> -       ulong ret;
-> -
-> -       asm("mov r15, %0" : "=r"(ret) : );
-> -       return ret;
-> -}
-> -
-> -void arch_lmb_reserve(void)
-> -{
-> -       arch_lmb_reserve_generic(get_sp(), gd->ram_top, 4096);
-> -}
-> diff --git a/arch/x86/lib/bootm.c b/arch/x86/lib/bootm.c
-> index 114b31012e..55f581836d 100644
-> --- a/arch/x86/lib/bootm.c
-> +++ b/arch/x86/lib/bootm.c
-> @@ -253,21 +253,3 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
->
->         return boot_jump_linux(images);
->  }
-> -
-> -static ulong get_sp(void)
-> -{
-> -       ulong ret;
-> -
-> -#if CONFIG_IS_ENABLED(X86_64)
-> -       asm("mov %%rsp, %0" : "=r"(ret) : );
-> -#else
-> -       asm("mov %%esp, %0" : "=r"(ret) : );
-> -#endif
-> -
-> -       return ret;
-> -}
-> -
-> -void arch_lmb_reserve(void)
-> -{
-> -       arch_lmb_reserve_generic(get_sp(), gd->ram_top, 4096);
-> -}
-> diff --git a/arch/xtensa/lib/bootm.c b/arch/xtensa/lib/bootm.c
-> index bdbd6d4692..2958f20739 100644
-> --- a/arch/xtensa/lib/bootm.c
-> +++ b/arch/xtensa/lib/bootm.c
-> @@ -197,16 +197,3 @@ int do_bootm_linux(int flag, struct bootm_info *bmi)
->
->         return 1;
->  }
-> -
-> -static ulong get_sp(void)
-> -{
-> -       ulong ret;
-> -
-> -       asm("mov %0, a1" : "=r"(ret) : );
-> -       return ret;
-> -}
-> -
-> -void arch_lmb_reserve(void)
-> -{
-> -       arch_lmb_reserve_generic(get_sp(), gd->ram_top, 4096);
-> -}
-> diff --git a/include/lmb.h b/include/lmb.h
-> index 2f155d706e..fb1a6db8e2 100644
-> --- a/include/lmb.h
-> +++ b/include/lmb.h
-> @@ -108,8 +108,6 @@ void lmb_dump_all(void);
->  void lmb_dump_all_force(void);
->
->  void board_lmb_reserve(void);
-> -void arch_lmb_reserve(void);
-> -void arch_lmb_reserve_generic(ulong sp, ulong end, ulong align);
->
->  struct lmb *lmb_get(void);
->  int lmb_push(struct lmb *store);
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index 686988e34f..dbbc19ede9 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -18,6 +18,7 @@
->  #include <asm/global_data.h>
->  #include <asm/sections.h>
->  #include <linux/kernel.h>
-> +#include <linux/sizes.h>
->
->  DECLARE_GLOBAL_DATA_PTR;
->
-> @@ -147,42 +148,6 @@ static void lmb_fix_over_lap_regions(struct alist *lmb_rgn_lst,
->         lmb_remove_region(lmb_rgn_lst, r2);
->  }
->
-> -void arch_lmb_reserve_generic(ulong sp, ulong end, ulong align)
-> -{
-> -       ulong bank_end;
-> -       int bank;
-> -
-> -       /*
-> -        * Reserve memory from aligned address below the bottom of U-Boot stack
-> -        * until end of U-Boot area using LMB to prevent U-Boot from overwriting
-> -        * that memory.
-> -        */
-> -       debug("## Current stack ends at 0x%08lx ", sp);
-> -
-> -       /* adjust sp by 4K to be safe */
-> -       sp -= align;
-> -       for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-> -               if (!gd->bd->bi_dram[bank].size ||
-> -                   sp < gd->bd->bi_dram[bank].start)
-> -                       continue;
-> -               /* Watch out for RAM at end of address space! */
-> -               bank_end = gd->bd->bi_dram[bank].start +
-> -                       gd->bd->bi_dram[bank].size - 1;
-> -               if (sp > bank_end)
-> -                       continue;
-> -               if (bank_end > end)
-> -                       bank_end = end - 1;
-> -
-> -               lmb_reserve_flags(sp, bank_end - sp + 1, LMB_NOOVERWRITE);
-> -
-> -               if (gd->flags & GD_FLG_SKIP_RELOC)
-> -                       lmb_reserve_flags((phys_addr_t)(uintptr_t)_start,
-> -                                         gd->mon_len, LMB_NOOVERWRITE);
-> -
-> -               break;
-> -       }
-> -}
-> -
->  /**
->   * efi_lmb_reserve() - add reservations for EFI memory
->   *
-> @@ -215,10 +180,50 @@ static __maybe_unused int efi_lmb_reserve(void)
->         return 0;
->  }
->
-> +static void lmb_reserve_uboot_region(void)
-> +{
-> +       int bank;
-> +       ulong end, bank_end;
-> +       phys_addr_t rsv_start;
-> +
-> +       rsv_start = gd->start_addr_sp - CONFIG_STACK_SIZE;
-> +       end = gd->ram_top;
-> +
-> +       /*
-> +        * Reserve memory from aligned address below the bottom of U-Boot stack
-> +        * until end of RAM area to prevent LMB from overwriting that memory.
-> +        */
-> +       debug("## Current stack ends at 0x%08lx ", (ulong)rsv_start);
-> +
-> +       /* adjust sp by 16K to be safe */
-> +       rsv_start -= SZ_16K;
-> +       for (bank = 0; bank < CONFIG_NR_DRAM_BANKS; bank++) {
-> +               if (!gd->bd->bi_dram[bank].size ||
-> +                   rsv_start < gd->bd->bi_dram[bank].start)
-> +                       continue;
-> +               /* Watch out for RAM at end of address space! */
-> +               bank_end = gd->bd->bi_dram[bank].start +
-> +                       gd->bd->bi_dram[bank].size - 1;
-> +               if (rsv_start > bank_end)
-> +                       continue;
-> +               if (bank_end > end)
-> +                       bank_end = end - 1;
-> +
-> +               lmb_reserve_flags(rsv_start, bank_end - rsv_start + 1,
-> +                                 LMB_NOOVERWRITE);
-> +
-> +               if (gd->flags & GD_FLG_SKIP_RELOC)
-> +                       lmb_reserve_flags((phys_addr_t)(uintptr_t)_start,
-> +                                         gd->mon_len, LMB_NOOVERWRITE);
-> +
-> +               break;
-> +       }
-> +}
-> +
->  static void lmb_reserve_common(void *fdt_blob)
->  {
-> -       arch_lmb_reserve();
->         board_lmb_reserve();
-> +       lmb_reserve_uboot_region();
->
->         if (CONFIG_IS_ENABLED(OF_LIBFDT) && fdt_blob)
->                 boot_fdt_add_mem_rsv_regions(fdt_blob);
-> @@ -690,11 +695,6 @@ __weak void board_lmb_reserve(void)
->         /* please define platform specific board_lmb_reserve() */
->  }
->
-> -__weak void arch_lmb_reserve(void)
-> -{
-> -       /* please define platform specific arch_lmb_reserve() */
-> -}
-> -
->  static int lmb_setup(void)
->  {
->         bool ret;
-> --
-> 2.34.1
->
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
