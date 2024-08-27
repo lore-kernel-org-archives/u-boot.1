@@ -4,76 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 517ECC54735
-	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 10:21:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15D40C54734
+	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 10:39:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 695E88857C;
-	Tue, 27 Aug 2024 12:21:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=web.de
+	by phobos.denx.de (Postfix) with ESMTP id 3EF62887F3;
+	Tue, 27 Aug 2024 12:39:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=web.de header.i=smoch@web.de header.b="BPziHeUQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OpEqg4Nf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 413BF88905; Tue, 27 Aug 2024 12:21:23 +0200 (CEST)
-Received: from mout.web.de (mout.web.de [212.227.15.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A35C188905; Tue, 27 Aug 2024 12:39:45 +0200 (CEST)
+Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
+ [IPv6:2607:f8b0:4864:20::92c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F13A881A2
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 12:21:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 018CB8826E
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 12:39:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=web.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=smoch@web.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
- s=s29768273; t=1724754079; x=1725358879; i=smoch@web.de;
- bh=vLIxIR47jYP1BCwEEJJHitjVvNc5EonF1JEB0gG3H0Y=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=BPziHeUQ+WCHVY2xxePVF4cvm2aV9BljpXDKfyx6560csRDZkIs1eOSO4/ap+PAQ
- O3Nzaov/Ns/fDXt8ZK7LU+nrQ+EGrGGIOvbgfxozESAfmDQPAkMJKaIEsmyaaqfRi
- FgG+7i1U0BJ5z3nR3GmurrO+h26/PEDTKeI7jf1VrUFasz1NnIiNzFV1Wy1zL4pOH
- r3Zcgm2aNelYwELo8B+/rWko/K4lkd7dtFG61lziWTcwogApJ77pg1kYJdWBPTUEy
- cGhUh4Sy1mpjWdjWvKHvJVNBWGqIxDsycgVxOIZ4rzgMYBOwp6L8xA/fKMoGg8E9Q
- u5OlEH0CjPhcjVsi7A==
-X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
-Received: from [192.168.1.40] ([77.191.44.80]) by smtp.web.de (mrweb005
- [213.165.67.108]) with ESMTPSA (Nemesis) id 1N3Xnj-1s14LU0RQh-00roiP; Tue, 27
- Aug 2024 12:21:19 +0200
-Message-ID: <3f6f162e-7083-4ad9-984e-61e449e68b21@web.de>
-Date: Tue, 27 Aug 2024 12:21:17 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x92c.google.com with SMTP id
+ a1e0cc1a2514c-842f00b7352so1511036241.1
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 03:39:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1724755182; x=1725359982; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=VKNub7lVq8rtR9nzNDqBsAsKm4SyA8bgjM19xopO1eE=;
+ b=OpEqg4Nfem5fRhJFze76zowf0do1OAsQHhGENJFYmC98uEI6Um3EYN0DF7b64Z3Gxm
+ g4NAbtQ/LbwaHJzrw1dFejl5PdrcWh8aZ77qFxMLyYbNbiogk59j1oe0Akj7N3AOl6cZ
+ MqCsnZ8ePtxNGyWZskLKemzNrwwSfcQp/Le033zYqxqQPaY5C2wEXXYS5VC0/wUplC3h
+ yxfEJFzx9IQ1jkOnw1jKjS2omTgk9bxvlEnCJ1QLTgpVwuMNs/XdUdIOOJNkM+wOF7aZ
+ 4pB9L28WzVt4NJX+qSJbprCqmEh/6BPNAzwqQqsEaZSuTjdCmuhbbnrHgWmLLT2zJ7ml
+ AYIg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724755182; x=1725359982;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VKNub7lVq8rtR9nzNDqBsAsKm4SyA8bgjM19xopO1eE=;
+ b=in4pTZDfjZGED9PM85kpra1SMRRbx8hmXLDkZwXxI+u0LHD78k2XAYxTYCSl5l/KRX
+ zR7ZUEZePoyVAZyw+lVwm4LjarT50w10ZMbZBzFLX0FKCj65pg5qcwFGw8zXATWSoMQE
+ X+7SsjItZV8Isd73aaIOoyXGNox3wob/WKAwshByicTpRseWTMzqRuoLuX24qMt3/FEw
+ MnSZaD8c7cPJ4RGMNS0b5a2Y2Jxd/EYRo0H769Czzq6XXnQacXXops/Gq1z0EVyE/ORg
+ zi3oTxShvcgwnZiP6QMSlDA7deC8ASIZ9q6jbbE2ndwoKX5QSRATEJyTsBz8rOI8LUZB
+ Hw7Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWjJySTrodeb0fIAh00hxRPYD2zVcVIkx2lNOpIr36oljLKa0YwJlA9SANbcP9mW7jcSX+CrzQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx/IxtcdfIrOIB0shfwPKxgYnJxaTCTAhKXNn8z4qOBNUXABbpX
+ ym8MUdIbnAfttogGvYDc6gPDRx2I4ImsQreVD0guAMl+X2mDSFwL9ja49Cic7XDObFlakdVs0wX
+ W5NT66SDG6IL0QvoO4Gt+8mRm1Py5l6Z0vTWUCg==
+X-Google-Smtp-Source: AGHT+IF+lX4LRLI/jnKMpf92z2Y6uHLlHPDZ9KplUdD6nYjoTwGXoZBui3B1hzEscJwKXLrVkMycLhL5yILc1RZv8c8=
+X-Received: by 2002:a05:6102:b0f:b0:492:aded:1914 with SMTP id
+ ada2fe7eead31-498f4b17bf6mr15281082137.10.1724755181566; Tue, 27 Aug 2024
+ 03:39:41 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] imx: Remove CFG_MXC_USB_PORTSC
-To: Fabio Estevam <festevam@gmail.com>, peng.fan@nxp.com
-Cc: marex@denx.de, u-boot@lists.denx.de, tharvey@gateworks.com,
- Fabio Estevam <festevam@denx.de>
-References: <20240827005826.2831478-1-festevam@gmail.com>
- <20240827005826.2831478-3-festevam@gmail.com>
-Content-Language: en-US
-From: Soeren Moch <smoch@web.de>
-In-Reply-To: <20240827005826.2831478-3-festevam@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:yoii1jVd2zETtaYxjA6/QIzmkQQO5oGPYl5H5zJFpF4rDZ9y+H3
- CPu0g6lHdojpgtWvZ1SN5v0QF7ieywr1cRHozelcB00HwG1s7Y8A+nQpYOdynZHWT2TzySc
- 2/FpQR8obznbgxgIWoRIn/u9CTEfdDdA1mgbIutEgvCC5M2XtoD9Pv4OELBImCLFm8C3XGI
- bU1F+o6H+qcVRPwpEDieg==
-UI-OutboundReport: notjunk:1;M01:P0:lElLSvkS6tk=;7xo6ZpGDhgj1AIElzSNhaWKIbeV
- AVSBiSFmfrdTDrqGTxc4fTkXT9PtGoVnxIyeTnCv7oAlFUIT6q/ecXkCcF3Q+XNUm1jdUD7zu
- Z6Hlb5WaYc6tm/XSOerHq1NpHdqQgsTm1sAM2MZO8W/+fjh5akftC9WqgTGYYYBb+/gwTCzsi
- a3xiwDK++fKGWGCAlPYDBI+HJ/5qO9MQnqZ1BMldgG4/elNTsEXi3Ax4gH1fpnAeeovjBOt1p
- hY+e3VY6BEF2FqWx0ey6CbPII6iya/bPQcBLSJXB5KXJtri3BX7cglQZ0K09eTPDJ5mrKMIhz
- DLdWU4p3Q5gPjRCm8f3HRaQinso/bfXNBXSIy5/vN7caPbNNVGVBSvc1D0DKHzZxcFVnyfT01
- Xj5sN7sX6245rsjMSTePR7uv6iDowb7CyN38QN1zLOQeWp5kWP9rosUL5AfZqSWWn/qlSMzyo
- 64xKzmrFZOebKLSFSR+LqjG+KcdrHeqRB9RgI0P51wiHOblHyvfE8DHovGQFLpqm41MAWeIR5
- rlDKaJJREivLUx1xyQqQSpIIenOlIkxKaCNaU7ZjtB/JzCLfB3ztiOOsmZoya5E9vOGENaAVg
- AwBJdEtZmEL/0hd4ZNNQiMkYlMu3skw/FW4nSg/XBOXnuTB5o6EyK+6JORGe07I0C4GtXEU2A
- F4cPEaVkCd6c6iUgvI6TcP4zAt5WI84UHP8/ufCqFoLMF4Kaf79T9DoFgEuuN0oBO4SzMdEUr
- cLsAoo/Q5L259LmY/FJ6riEcWPZYduZEKFqN/QB4y6t4Onniv8Yl94hxqmIk5YYvnCcXHKaOQ
- oKyvRYGKaMuHJN0Ub9HB820g==
+References: <7765273f-7f36-41e4-a604-1901e4fbec62@siemens.com>
+ <20240813125245.ezlu6me3ljwx6dkj@margarine>
+ <89f8e976-e831-4035-8cd0-ab6284846d0a@siemens.com>
+ <4ec5108f-b7a4-47db-baa4-edee532c58af@siemens.com>
+ <CAFA6WYMQustcwo4Es7iJQj5Lva6UiYJ-j7WgSzMjOvEHemeDcQ@mail.gmail.com>
+ <4576b818-9732-45ff-a4ab-b98fc0ecf4c9@siemens.com>
+ <CAFA6WYNXgJkCX9-aoL5FGchAHGdV+ikTt4+pTJP-jZ_UJG8E6Q@mail.gmail.com>
+ <87a9fe3e-5d9a-41e8-a8b2-4368cb727a65@siemens.com>
+ <CAFA6WYMGyMAB=m-hkxs87PyHszcbQUk6+0_G0n+0-Yk8NeRXQQ@mail.gmail.com>
+ <f61a8c74-9838-481e-aa1e-09fcc07f044e@siemens.com>
+In-Reply-To: <f61a8c74-9838-481e-aa1e-09fcc07f044e@siemens.com>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Tue, 27 Aug 2024 16:09:30 +0530
+Message-ID: <CAFA6WYNdS0jZ1iESfCErX92SOL2fJSRNNLZ1a_7jHoSfOUrdgw@mail.gmail.com>
+Subject: Re: OF_UPSTREAM vs. additional dtbs
+To: Jan Kiszka <jan.kiszka@siemens.com>
+Cc: Nishanth Menon <nm@ti.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,101 +96,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio,
-
-On 27.08.24 02:58, Fabio Estevam wrote:
-> From: Fabio Estevam <festevam@denx.de>
+On Tue, 27 Aug 2024 at 15:05, Jan Kiszka <jan.kiszka@siemens.com> wrote:
 >
-> '#define CFG_MXC_USB_PORTSC     (PORT_PTS_UTMI | PORT_PTS_PTW)' can
-> be removed from mx5/mx6/mx7/mx8m board config files as it is the
-> default in drivers/usb/host/ehci-mx5.c and drivers/usb/host/ehci-mx6.c.
+> On 27.08.24 09:13, Sumit Garg wrote:
+> > On Mon, 26 Aug 2024 at 18:02, Jan Kiszka <jan.kiszka@siemens.com> wrote:
+> >>
+> >> On 26.08.24 09:10, Sumit Garg wrote:
+> >>> On Mon, 26 Aug 2024 at 12:19, Jan Kiszka <jan.kiszka@siemens.com> wrote:
+> >>>>
+> >>>> On 26.08.24 08:44, Sumit Garg wrote:
+> >>>>> Hi,
+> >>>>>
+> >>>>> On Wed, 14 Aug 2024 at 22:14, Jan Kiszka <jan.kiszka@siemens.com> wrote:
+> >>>>>>
+> >>>>>> On 14.08.24 11:41, Jan Kiszka wrote:
+> >>>>>>> On 13.08.24 14:52, Nishanth Menon wrote:
+> >>>>>>>> On 11:16-20240813, Jan Kiszka wrote:
+> >>>>>>>>> Hi all,
+> >>>>>>>>>
+> >>>>>>>>> I'm trying to migrate the TI AM65x IOT2050 boards to OF_UPSTREAM but I'm
+> >>>>>>>>> facing issues because I need to still build the u-boot-only overlays. It
+> >>>>>>>>> is also a bit weird (but works) having to specify
+> >>>>>>>>>
+> >>>>>>>>> CONFIG_SPL_OF_LIST="../../../../arch/arm/dts/k3-am65-iot2050-spl"
+> >>>>>>>>>
+> >>>>>>>
+> >>>>>>> Actually, this does NOT work: I just had a long morning debugging SPL
+> >>>>>>> which no longer started because it picked the non-filtered dtb. The
+> >>>>>>> filtered one ended up in a folder outside of the u-boot sources because
+> >>>>>>> of all those ../ and hard-wiring to dts/upstream.
+> >>>>>>>
+> >>>>>>>>> for our spl dtb.
+> >>>>>>>>>
+> >>>>>>>>> Are there means to still build certain dtb[o] files in arch/<arch>/dts?
+> >>>>>>>>> I'm a bit lost in the Makefile forest.
+> >>>>>>>>>
+> >>>>>>>>
+> >>>>>>>> Sumit: Any suggestions?
+> >>>>>>>>
+> >>>>>
+> >>>>> Apologies for the delayed reply. I was a bit busy with other high
+> >>>>> priority stuff.
+> >>>>>
+> >>>>>>>
+> >>>>>>> I would really like to hear some better proposals than my local
+> >>>>>>> workarounds to far. They don't converge although I already patched some
+> >>>>>>> core Makefile (overlays are building now).
+> >>>>>>>
+> >>>>>>
+> >>>>>> OK, I side-stepped the spl issue by using one of our variant DTBs for
+> >>>>>> spl as well - happens to work.
+> >>>>>
+> >>>>> That's good to know.
+> >>>>>
+> >>>>>>
+> >>>>>> For the overlays, I need to add
+> >>>>>>
+> >>>>>> --- a/scripts/Makefile.dts
+> >>>>>> +++ b/scripts/Makefile.dts
+> >>>>>> @@ -1,5 +1,7 @@
+> >>>>>>  # SPDX-License-Identifier: GPL-2.0+
+> >>>>>>
+> >>>>>> +include $(srctree)/config.mk
+> >>>>>> +
+> >>>>>>  dtb-y += $(patsubst %,%.dtb,$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $(CONFIG_OF_LIST) $(CONFIG_SPL_OF_LIST)))
+> >>>>>>
+> >>>>>>  ifeq ($(CONFIG_OF_UPSTREAM_BUILD_VENDOR),y)
+> >>>>>>
+> >>>>>>
+> >>>>>> in order to then be able to do
+> >>>>>>
+> >>>>>> --- a/board/siemens/iot2050/config.mk
+> >>>>>> +++ b/board/siemens/iot2050/config.mk
+> >>>>>> @@ -5,4 +5,12 @@
+> >>>>>>  # Authors:
+> >>>>>>  #   Jan Kiszka <jan.kiszka@siemens.com>
+> >>>>>>
+> >>>>>> +ifneq ($(CONFIG_SPL_BUILD),y)
+> >>>>>> +dtbo-list = \
+> >>>>>> +       k3-am6548-iot2050-advanced-m2-bkey-usb3-overlay \
+> >>>>>> +       k3-am6548-iot2050-advanced-m2-bkey-ekey-pcie-overlay
+> >>>>>> +
+> >>>>>> +dtb-y += $(patsubst %,../../../../arch/arm/dts/%.dtbo,$(dtbo-list))
+> >>>>>> +endif
+> >>>>>> +
+> >>>>>>  flash.bin: all
+> >>>>>>
+> >>>>>>
+> >>>>>> Does that make sense?
+> >>>>>
+> >>>>> A switch to OF_UPSTREAM means that we build all the DT artifacts from
+> >>>>> dts/upstream/src/ directory with the only exception that we include
+> >>>>> U-Boot specific overrides via *-u-boot.dtsi from arch/<arch>/dts. In
+> >>>>> case of overlays, is there any reason for IOT2050 board overlays not
+> >>>>> being pushed into Linux kernel repo? AFAIU, overlays are also
+> >>>>> describing puggable hardware so they shouldn't be referred to as
+> >>>>> "u-boot-only" overlays.
+> >>>>
+> >>>> We are using the overlay to massage the DT presented to the OS based on
+> >>>> firmware configuration.
+> >>>
+> >>> Agree and more than that I prefer the firmware to own the overall DT
+> >>> and present that to the OS.
+> >>>
+> >>>> So, those two belong to the firmware logically,
+> >>>> but - with some disclaimers, we could also try to upstream them.
+> >>>
+> >>> For historical reasons, Linux kernel source tree has become the
+> >>> defacto upstream repo for DT sources. So it's better to contribute
+> >>> there and sync back in U-Boot.
+> >>
+> >> Will do ASAP, hope to hit at least 6.12 then.
+> >>
+> >> Still, this will delay our next patches for U-Boot by many months. Also
+> >> for that reason, a plan B for U-Boot local DTs should remain, no
+> >> left-or-right policy.
+> >
+> > Yeah, the U-Boot local DTs should be used until the board is fully
+> > supported by the dts/upstream directory.
+> >
 >
-> Suggested-by: Tim Harvey <tharvey@gateworks.com>
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
-> ---
->   include/configs/apalis_imx6.h            | 1 -
->   include/configs/aristainetos2.h          | 1 -
->   include/configs/brppt2.h                 | 1 -
->   include/configs/cl-som-imx7.h            | 1 -
->   include/configs/cm_fx6.h                 | 1 -
->   include/configs/colibri-imx6ull.h        | 1 -
->   include/configs/colibri_imx6.h           | 1 -
->   include/configs/colibri_imx7.h           | 1 -
->   include/configs/dart_6ul.h               | 1 -
->   include/configs/dh_imx6.h                | 1 -
->   include/configs/display5.h               | 1 -
->   include/configs/embestmx6boards.h        | 1 -
->   include/configs/ge_b1x5v2.h              | 1 -
->   include/configs/gw_ventana.h             | 1 -
->   include/configs/imx6_logic.h             | 1 -
->   include/configs/imx6dl-mamoj.h           | 1 -
->   include/configs/imx6q-bosch-acc.h        | 1 -
->   include/configs/imx7-cm.h                | 1 -
->   include/configs/imx8mm-cl-iot-gate.h     | 1 -
->   include/configs/kontron-sl-mx6ul.h       | 1 -
->   include/configs/kontron-sl-mx8mm.h       | 1 -
->   include/configs/kp_imx53.h               | 1 -
->   include/configs/kp_imx6q_tpc.h           | 1 -
->   include/configs/liteboard.h              | 1 -
->   include/configs/m53menlo.h               | 1 -
->   include/configs/meerkat96.h              | 1 -
->   include/configs/mx53cx9020.h             | 1 -
->   include/configs/mx53loco.h               | 1 -
->   include/configs/mx53ppd.h                | 1 -
->   include/configs/mx6cuboxi.h              | 1 -
->   include/configs/mx6memcal.h              | 1 -
->   include/configs/mx6sabreauto.h           | 1 -
->   include/configs/mx6sabresd.h             | 1 -
->   include/configs/mx6slevk.h               | 1 -
->   include/configs/mx6sllevk.h              | 1 -
->   include/configs/mx6sxsabreauto.h         | 1 -
->   include/configs/mx6sxsabresd.h           | 1 -
->   include/configs/mx6ul_14x14_evk.h        | 1 -
->   include/configs/mx7dsabresd.h            | 1 -
->   include/configs/mx7ulp_com.h             | 1 -
->   include/configs/mys_6ulx.h               | 1 -
->   include/configs/nitrogen6x.h             | 1 -
->   include/configs/novena.h                 | 1 -
->   include/configs/npi_imx6ull.h            | 1 -
->   include/configs/o4-imx6ull-nano.h        | 1 -
->   include/configs/opos6uldev.h             | 1 -
->   include/configs/pcl063.h                 | 1 -
->   include/configs/pcl063_ull.h             | 1 -
->   include/configs/pico-imx6.h              | 1 -
->   include/configs/pico-imx6ul.h            | 1 -
->   include/configs/pico-imx7d.h             | 1 -
->   include/configs/somlabs_visionsom_6ull.h | 1 -
->   include/configs/tbs2910.h                | 1 -
->   include/configs/tqma6.h                  | 1 -
->   include/configs/usbarmory.h              | 1 -
->   include/configs/verdin-imx8mm.h          | 1 -
->   include/configs/vining_2000.h            | 1 -
->   include/configs/wandboard.h              | 1 -
->   include/configs/warp7.h                  | 1 -
->   include/configs/xpress.h                 | 1 -
->   60 files changed, 60 deletions(-)
+> This is not what I mean and won't help: Given the longer pipeline, it
+> should remain possible to carry also local changes after switching to
+> OF_UPSTREAM and while waiting for upstreaming to be done - if ever. We
+> are missing middle ground.
 
-[...]
+For local changes we already have the middle ground as *-u-boot.dtsi.
+Also, cherry-picking [1] from upstream rc* releases is pretty
+effective in shortening that pipeline. However, building DTB artifacts
+from multiple directories is going to make Makefiles messy and in turn
+will be difficult to be consumed by packaging tools like binman. Your
+Makefile change demonstrates it too. But if you can come up with a
+cleaner solution then I will be happy to review that.
 
+[1] https://docs.u-boot.org/en/latest/develop/devicetree/control.html#resyncing-with-devicetree-rebasing
 
-> diff --git a/include/configs/tbs2910.h b/include/configs/tbs2910.h
-> index 256331ae1733..eb5fdae0ea86 100644
-> --- a/include/configs/tbs2910.h
-> +++ b/include/configs/tbs2910.h
-> @@ -27,7 +27,6 @@
+-Sumit
+
 >
->   /* USB */
->   #ifdef CONFIG_CMD_USB
-> -#define CFG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
->   #endif /* CONFIG_CMD_USB      */
+> Jan
 >
->   #define CFG_EXTRA_ENV_SETTINGS \
-
-Can you please also remove the now useless comment and empty #ifdef
-block!?
-
-I have not checked in detail, but the same occurs also for other boards
-in this patch.
-
-Thanks,
-Soeren
+> --
+> Siemens AG, Technology
+> Linux Expert Center
+>
