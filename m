@@ -4,75 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EEF5C5472F
-	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 15:34:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA718C54731
+	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 15:54:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75DC58895E;
-	Tue, 27 Aug 2024 17:34:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id E58C388363;
+	Tue, 27 Aug 2024 17:54:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="qG8nouvD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RusKNl22";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C82288928; Tue, 27 Aug 2024 17:34:54 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 4E9E788896; Tue, 27 Aug 2024 17:54:00 +0200 (CEST)
+Received: from mail-vk1-xa29.google.com (mail-vk1-xa29.google.com
+ [IPv6:2607:f8b0:4864:20::a29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F34BC8895E
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 17:34:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 899778657F
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 17:53:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a868b739cd9so679268366b.2
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 08:34:51 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-vk1-xa29.google.com with SMTP id
+ 71dfb90a1353d-4fce9f16f83so1750765e0c.1
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 08:53:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1724772891; x=1725377691; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724774036; x=1725378836; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=klf1bGHqzvcaUQhxHhQC61YM7huPW846TUtrKh8teZY=;
- b=qG8nouvDJU13uUOLDyosHzW8PZyMUBkWWlVrO2zbDNJvLd6qCkauWML53MvVuUtRHP
- RYafOXg4DjbxKlJ5fbZUcIxz1YKQsfRdB6U0J8MqC2Uene1kNu6AYy1O1uUiMkAEVI2z
- pb/ZqHO3yGHMaLodB1qzJVkGTvSmyY+ZK6AAGHnU9BB6eAa6xDEobRWqxh3LJKFrmID9
- JNEN6q56Pvh3r/zpQ35H+CGuEM1yOIRnhrcW5rRe6IKlAo+OL7X7sX1UFIa+oEwXVDDI
- 3oJGzwQk9AeOHYRiu6GlJxeIIX0K/sjq4iKJ97dDUAumYfmh2yvGca15Az8zXBgL+pAV
- TFwg==
+ bh=JJ6cKoLZzIoyWlmQ5C+SlcOMXBnQv47e45falXWLncQ=;
+ b=RusKNl22K30NuPYsKbz35W9bd00MZWEpebxxeePKv+9sZMaruHNExnMR9aFX7+phfR
+ CIj9DjX3qjDtMcXtNIQbivOqjuitAYl+OQGFRHgJmlx3/p9S/wuQ4wv+CF72Pz6eFAgY
+ yJmzam16vvXVQCRhYWrnxSnaPUiRrg8t77H90=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724772891; x=1725377691;
+ d=1e100.net; s=20230601; t=1724774036; x=1725378836;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=klf1bGHqzvcaUQhxHhQC61YM7huPW846TUtrKh8teZY=;
- b=YFcOuCM92liswfGOh+TI9h6kae1EjTZPXgjWSquPcEFjgY2S/L2obig83QU2doMEOl
- IS5CvHKW38aAyWJ5QF+jFNXoakiSpcX50FKceF0mX/m3lIdowc6/9OXnGt2VrFLZEC9T
- SGd/BETKJRZ5BHPaw0Zy0rmQ9wloOny0RkPnD217Usmsdwg47JyksisTdqB+1wvO1ANB
- Vx/ijS+00EYbzBG/7GHmpDwDm9r134po9E/sTwIpolqMF5blUTpREX3m9roU1p8HutX8
- 44XbAbrG7KYEhuISQjDSho3UA0DCb9wo7iKaJASFmDdr5Cqdvmt5fNeC6z3EKibPCakF
- MgvQ==
+ bh=JJ6cKoLZzIoyWlmQ5C+SlcOMXBnQv47e45falXWLncQ=;
+ b=sqUMrBqHt/2zeOsV08pfON+4plTKWjY7P7ojjp6bTUVz8237JLS3T3CNbEm5VRH4oM
+ rtQlPlB6tegWv/ZWsjliYpZjmEtyrvvLm2gISc1h/luRlD7Nm4Hu4L/vXmAvfrU48pjJ
+ HveU45o7tg+C53o0bnl1+z+Zr5pOEbJe/DJ46X5bgLGi/rVQ/0XrUOdp51yfdRtGOb7h
+ ZbfI7tk3WpT08T3kQdkd0V908NkdKvuloLx1odrQZSe1JSAwBQYskSF2QLSfE/P7V7rM
+ 7R1V9by/Jx6k8a+hnkFzMzw9aD5gzlJCOOwCqS5lSru3rTWJ2g/NNR0sjgGjI/jmvelX
+ 9VKw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXgnfZiQv04yfoo4a51enopuGXt6OXhGIombquQYfY/K9SBepb6it2YNb2XwBBFzx9sKcq5FCE=@lists.denx.de
-X-Gm-Message-State: AOJu0YzisSBGfEQQiArB87jZk+kyK3LKxQmfNBofuoXMdlsOh6wwkvoU
- EZ+ZHBVhLkQBxCXtyN3y5OS0Zz0qyrhy+X36qdJMZhLBknO5aXd6iDbkGUD1jIMpCK4MN24rx2k
- Vc9klU6CI7oRks90cdbCVuH7AF8bBXcizXkqCpQ==
-X-Google-Smtp-Source: AGHT+IGuZz3rB7LZer54cYUmhDaew521FIqP8wTzDP9rdh9zapGFmVKqXsIwZ44WyR9T0dP8B/brZY9Mhddn3p+dcEY=
-X-Received: by 2002:a17:907:948e:b0:a72:44d8:3051 with SMTP id
- a640c23a62f3a-a86e39c9e4amr267686566b.16.1724772890711; Tue, 27 Aug 2024
- 08:34:50 -0700 (PDT)
+ AJvYcCXvef+ymRMwr+TUXFOnwceou1dN0lwPv+LKOwORsNcxZPfPEe7hVoVvjkaAw6KjgapdHDvOt/4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzRS+ZOscjC+TK53xOhlL4wlWd3SbTWo2uMxzjvQaSNp4R6FwXk
+ Dz98doB0s3Kh04sYU35UIX4A76NZxfIeNO/DipIVXBeaRkGPJRNLhf7DHqaRigQwtsSwh7bjs1A
+ C3rC2bDKRAZqmxPNSuR8Kt1chNKp2gpzQ8s6N
+X-Google-Smtp-Source: AGHT+IGNfWOWFs/69BtXbFOwfHEJFWfF54Xc9TdShTQymaTEx2k7hPNqKEIvge+KqY5uEphYfHUEw8l1vF86ay7kt5Q=
+X-Received: by 2002:a05:6122:2191:b0:4ef:5e6b:98c0 with SMTP id
+ 71dfb90a1353d-4fd1a7dddf7mr16063220e0c.9.1724774036338; Tue, 27 Aug 2024
+ 08:53:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240827005826.2831478-1-festevam@gmail.com>
- <20240827005826.2831478-3-festevam@gmail.com>
-In-Reply-To: <20240827005826.2831478-3-festevam@gmail.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Tue, 27 Aug 2024 08:34:38 -0700
-Message-ID: <CAJ+vNU1N23jisUTtD3-BrLUoe3JkW4K7OOXAsA2gaEyPLCZmfw@mail.gmail.com>
-Subject: Re: [PATCH 3/3] imx: Remove CFG_MXC_USB_PORTSC
+References: <980adca3-27ac-440b-93b4-80146d050584@linaro.org>
+ <CAOMZO5A2ZBb9G6krUmfNy3qnoNYgwdb2-DUgeNuvONy9VioEbQ@mail.gmail.com>
+In-Reply-To: <CAOMZO5A2ZBb9G6krUmfNy3qnoNYgwdb2-DUgeNuvONy9VioEbQ@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 27 Aug 2024 09:53:45 -0600
+Message-ID: <CAFLszTgZ9vFe1rahWG_QiVJXoCBOTc=umAJ=YZwu7ExyXWsuDg@mail.gmail.com>
+Subject: Re: imx8ulp_evk build with buildman fails every other time
 To: Fabio Estevam <festevam@gmail.com>
-Cc: peng.fan@nxp.com, marex@denx.de, u-boot@lists.denx.de, 
- Fabio Estevam <festevam@denx.de>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Gary Bisson <bisson.gary@gmail.com>, 
+ Peng Fan <peng.fan@nxp.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -91,45 +88,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Aug 26, 2024 at 5:58=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
-wrote:
+Hi Jerome,
+
+On Tue, 27 Aug 2024 at 08:53, Fabio Estevam <festevam@gmail.com> wrote:
 >
-> From: Fabio Estevam <festevam@denx.de>
+> Adding Gary and Peng on Cc.
 >
-> '#define CFG_MXC_USB_PORTSC     (PORT_PTS_UTMI | PORT_PTS_PTW)' can
-> be removed from mx5/mx6/mx7/mx8m board config files as it is the
-> default in drivers/usb/host/ehci-mx5.c and drivers/usb/host/ehci-mx6.c.
->
-> Suggested-by: Tim Harvey <tharvey@gateworks.com>
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
-> ---
-<snip>
->  #ifdef CONFIG_CMD_NET
-> diff --git a/include/configs/m53menlo.h b/include/configs/m53menlo.h
-> index 1491c509820d..a668eb70fc73 100644
-> --- a/include/configs/m53menlo.h
-> +++ b/include/configs/m53menlo.h
-> @@ -71,7 +71,6 @@
->   */
->  #ifdef CONFIG_CMD_USB
->  #define CFG_MXC_USB_PORT               1
-> -#define CFG_MXC_USB_PORTSC             (PORT_PTS_UTMI | PORT_PTS_PTW)
->  #endif
->
+> On Tue, Aug 27, 2024 at 11:42=E2=80=AFAM Jerome Forissier
+> <jerome.forissier@linaro.org> wrote:
+> >
+> > Hi,
+> >
+> > Can someone explain what's happening with the imx8ulp_evk buildman buil=
+d
+> > below? It either fails with a mkimage error, or succeeds with a binman
+> > warning, every other time. 100% reproducible. /me confused :o
+> >
+> > =3D=3D=3D=3D8<=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D8<=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D
+> > $ docker run -it --rm trini/u-boot-gitlab-ci-runner:jammy-20240808-21Au=
+g2024
+> > uboot@42aa85c2d6b7:/$ cd
+> > uboot@42aa85c2d6b7:~$ git clone https://github.com/u-boot/u-boot.git
+> > uboot@42aa85c2d6b7:~/u-boot$ git log --oneline -n 1
+> > ee2af844ba (HEAD -> master, origin/master, origin/HEAD) Merge tag 'efi-=
+2024-10-rc4' of https://source.denx.de/u-boot/custodians/u-boot-efi
+> > uboot@42aa85c2d6b7:~$ cd u-boot
+> > uboot@42aa85c2d6b7:~/u-boot$ tools/buildman/buildman imx8ulp_evk
+> > Building current source for 1 boards (1 thread, 24 jobs per thread)
+> >    aarch64:  w+   imx8ulp_evk
+> > +WARNING 'mx8ulpa2-ahab-container.img' not found, resulting binary may =
+be not-functional
+> > +WARNING 'bl31.bin' not found, resulting binary may be not-functional
+> > +WARNING 'upower.bin' not found, resulting binary may be not-functional
+> > +WARNING 'm33_image.bin' not found, resulting binary may be not-functio=
+nal
+> >     0    1    0 /1              imx8ulp_evk
+> > Completed: 1 total built, 1 newly), duration 0:00:09, rate 0.11
+> > uboot@42aa85c2d6b7:~/u-boot$ tools/buildman/buildman imx8ulp_evk
+> > Building current source for 1 boards (1 thread, 24 jobs per thread)
+> >    aarch64:  +   imx8ulp_evk
+> > +WARNING 'bl31.bin' not found, resulting binary may be not-functional
+> > +binman: Error 1 running 'mkimage -d ./mkimage.spl.mkimage -n spl/u-boo=
+t-spl.cfgout -T imx8image -e 0x22020000 ./mkimage-out.spl.mkimage': Fail op=
+en first container file mx8ulpa2-ahab-container.img
+> > +
+> > +make[1]: *** [Makefile:1126: .binman_stamp] Error 1
+> > +make: *** [Makefile:177: sub-make] Error 2
+> >     0    0    1 /1              imx8ulp_evk
+> > Completed: 1 total built, 1 newly), duration 0:00:04, rate 0.25
+> > uboot@42aa85c2d6b7:~/u-boot$ tools/buildman/buildman imx8ulp_evk
+> > Building current source for 1 boards (1 thread, 24 jobs per thread)
+> >    aarch64:  w+   imx8ulp_evk
+> > +WARNING 'mx8ulpa2-ahab-container.img' not found, resulting binary may =
+be not-functional
+> > +WARNING 'upower.bin' not found, resulting binary may be not-functional
+> > +WARNING 'm33_image.bin' not found, resulting binary may be not-functio=
+nal
+> > +WARNING 'bl31.bin' not found, resulting binary may be not-functional
+> >     0    1    0 /1              imx8ulp_evk
+> > Completed: 1 total built, 1 newly), duration 0:00:04, rate 0.25
+> > uboot@42aa85c2d6b7:~/u-boot$ tools/buildman/buildman imx8ulp_evk
+> > Building current source for 1 boards (1 thread, 24 jobs per thread)
+> >    aarch64:  +   imx8ulp_evk
+> > +WARNING 'bl31.bin' not found, resulting binary may be not-functional
+> > +binman: Error 1 running 'mkimage -d ./mkimage.spl.mkimage -n spl/u-boo=
+t-spl.cfgout -T imx8image -e 0x22020000 ./mkimage-out.spl.mkimage': Fail op=
+en first container file mx8ulpa2-ahab-container.img
+> > +
+> > +make[1]: *** [Makefile:1126: .binman_stamp] Error 1
+> > +make: *** [Makefile:177: sub-make] Error 2
+> >     0    0    1 /1              imx8ulp_evk
+> > Completed: 1 total built, 1 newly), duration 0:00:04, rate 0.25
+> > =3D=3D=3D=3D8<=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D8<=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D
+> >
 
-Hi Fabio,
+I can't quite explain it but I have hit this before. It is why I have
+been unable to land [1]
 
-Thanks for doing this - we are at a point where the
-include/configs/<board>.h files are almost empty.
+Perhaps binman is writing a file which is being picked up on the next
+run, but is not valid? Or perhaps the file from a previous build
+confuses things? I notice that some of the sections have filenames,
+meaning that they are written and persist between builds.
 
-It doesn't look like CFG_MXC_USB_PORT (defined in 6 mx51/mx53
-includes) is not used anymore so it can be removed as well.
+You can try BINMAN_VERBOSE=3D4 or 5 to see what is happening, or
+BINMAN_DEBUG=3D1 to get a stack trace.
 
-With all of these outdated USB defines removed you could also prune
-out the enclosing '#ifdef CONFIG_CMD_USB' and the '/* USB configs */'
-comments in the includes but that certainly would be a manual edit of
-the files.
+Regards,
+Simon
 
-Best Regards,
-
-Tim
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20240623175515.1466908=
+-14-sjg@chromium.org/
