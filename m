@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D071C52D6F
-	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 07:13:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0336C52D6F
+	for <u-boot@archiver.kernel.org>; Tue, 27 Aug 2024 08:05:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9829C886CC;
-	Tue, 27 Aug 2024 09:13:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C0ACF8891B;
+	Tue, 27 Aug 2024 10:05:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MaYA/S4U";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QLn+VCz1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B25EC886CC; Tue, 27 Aug 2024 09:13:55 +0200 (CEST)
-Received: from mail-vs1-xe35.google.com (mail-vs1-xe35.google.com
- [IPv6:2607:f8b0:4864:20::e35])
+ id 14C7C88955; Tue, 27 Aug 2024 10:05:36 +0200 (CEST)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72ACB8831F
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 09:13:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 341A580544
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 10:05:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe35.google.com with SMTP id
- ada2fe7eead31-498d0268541so2730966137.1
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 00:13:53 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-7141b04e7b5so3167687b3a.2
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 01:05:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724742832; x=1725347632; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724745932; x=1725350732; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JvpLjetmEy9aYlXGjIK1OuE7V5H2HYXTgPQz1s8K4g0=;
- b=MaYA/S4UpKfhEYs6YwABqsewQtVaaCccIuHHbuUA0gmd71jUBAWsXmFSj9c+4gLTzT
- rePs64EnCxZbfkBJmt90VXnFsL77EqOahEEPktqy+Z7hIO7qMFxIcR5lLV7mw3aWrXag
- cORcF4Htp0+FkdjHM9yGQvJuWLyamwg+xIzd/ZmS5FUqS3FL/2TST6dpAqpamCmL5i4+
- xsqEg0nFKTRd74KrE72fvEGzNRh7y9AyBpxeTHKDss6RC7r2ZuiiGRMJvHj3OgXFeWdH
- xTdqkpV8MnpbhOA2ijLYprJT7TZznHbQ8rJl/D2GKk7RcmXLwOT3Jb2k+BE3iIVKvkG2
- meyw==
+ bh=f7bZwR3sskNLne6gdUvh+Y5W336V2CaeTV4RqrOFoVE=;
+ b=QLn+VCz1TDgpxPQZl0fDC86CBc66iQyCT3v3rs0gdpX5cAiSmoPR2Vu3pe19NHiTuM
+ 3dVrlwHk5ygQ/QMLeT5j9QxsHrlkLJDblMhBGHguP259lg9gDScObGSIzNDB5apN8DGV
+ sjsDyFdyedzBxx61YKYWSniw7OmhPKA0ZXwRMRrWRqkjH7YPPLMDnPeGK4MlCbnSXzWa
+ MYENMEyGWYX1kUhp3kKgZJNKadtogsuo96r/D3nEKYzdn9AWybS9VGO7DXxbMTzQG9Qi
+ EkuOoIyFn1LW9zrZgqsWDY3y+bKxpZx2Xslhc1yyJoSekvoG6XCDO+5TcdcfofRzY64Q
+ 1/qQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724742832; x=1725347632;
+ d=1e100.net; s=20230601; t=1724745932; x=1725350732;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=JvpLjetmEy9aYlXGjIK1OuE7V5H2HYXTgPQz1s8K4g0=;
- b=KBVQHYMtcbNP3oUaiwCvfpli+EC65JYCLmxYMhhLz+5v5smjpwhdTcIx8wIJU6vKp2
- e6XAfPRXF1C5jLEX+nwo/IpX/SD88vAcuybWOrbWD0m62oTF0Odek3FpTUMN6wb0ljhb
- rcq4HtFp+ZIOe44DOMhKejVa2OW2MHKtobsDft+XcDMAHBZ7msrStAZzdIPRTVxkQnzm
- bdkr8gnNWIL9/+t4+4J3fnvdhh99GUrqPf3Z1GCayYYWIo1T41+UhFZQ0yrDf9e7bSe2
- 3dydP9ri9cN9QBrvjxAtuET3fduRrF87EUVXJuvngmbRsI1o68ijiGpIpHlbDXH1QAnZ
- f9VA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWIADCuc6WAC5aVTE4YoLE1Sd9WnoDd0yS1AwtWBqrSkCNp8glWoKeODKW+nVGmDA/o4muh4pY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxGEVoE9UMxH3wiUgQtW0khcJojRqaNzqYM7108tMUGDpRujSDQ
- flftwGB/Hs/UptEsd0Fzuva86yT+BLWQ9K34Vrvt3guBxtKCZz/QmqN3ri+RhuF+QE71o3sCN8A
- B1eDNhW+EJ85GOObjUX2aeHs7/+B9AZgi5IR82g==
-X-Google-Smtp-Source: AGHT+IH8rF2v9lEQ3Aj65iorVTNLfsR1ig+iQR6XA0v7tCaj8i6y6bn64N4JgueF75+DgH1jFKRicaX/fCR2ESY1CoY=
-X-Received: by 2002:a05:6102:2ac6:b0:495:c34d:ab5d with SMTP id
- ada2fe7eead31-49a3bd27ec0mr1561545137.13.1724742832121; Tue, 27 Aug 2024
- 00:13:52 -0700 (PDT)
+ bh=f7bZwR3sskNLne6gdUvh+Y5W336V2CaeTV4RqrOFoVE=;
+ b=ROrP+uIyGrF8AVRoXGSfwr+0ugCenDnGsIVLwNq1JO3yQLPHk16/i5R9zcOxjCJ527
+ QpmaIiTZ3BE1OcpnrbkeVm6EiZU1TV2nDKGcnN4Xb3Y7QEf6nh0foTCckdTnAq1+WhL+
+ boNCbqJAhqDpeM+XD5rqsugJJTjb+h/2SGcuR7EEqhfsjp7wK+xezNgQSmV8azJszZzQ
+ /MVyjPqIoz3BE/wj5oOzoqwuMykUbQusFAQgh9lPkiAB+IxN0v7imUc5fyl/j7Jun2YN
+ rvo12YyJtf4yY0sLzN8f8YoYxpjdeKsvsGXxVuiqhASVaEiKczO/QA+K/zPUZAtc1Wzv
+ flKw==
+X-Gm-Message-State: AOJu0Yx1We4CXFrK1H3Fn/1CFJFSoDPwh38ceqLPr27Sq7IeHzJfqVft
+ dmKHCUJNLJryyf9dWiERBAdG6EZt8gz3yWXDHaUdbpnfwSttuTNVPvrG8k8BqIcwd+le/SfzDwE
+ c++APfqpmeAvaDKC85a+YTs/E+9YYfacpkc1U2g==
+X-Google-Smtp-Source: AGHT+IH+5gCesm6sf9+mOHPpYH9dHTYFdT8S9DAX+LnBEeqxHsBTOfPiaxPnMmz6Ij5w0WNi975t4iYmV44p9Zp0NHU=
+X-Received: by 2002:a05:6a20:439f:b0:1ca:cc16:1ebc with SMTP id
+ adf61e73a8af0-1cc89d29a8amr14427980637.11.1724745931455; Tue, 27 Aug 2024
+ 01:05:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <7765273f-7f36-41e4-a604-1901e4fbec62@siemens.com>
- <20240813125245.ezlu6me3ljwx6dkj@margarine>
- <89f8e976-e831-4035-8cd0-ab6284846d0a@siemens.com>
- <4ec5108f-b7a4-47db-baa4-edee532c58af@siemens.com>
- <CAFA6WYMQustcwo4Es7iJQj5Lva6UiYJ-j7WgSzMjOvEHemeDcQ@mail.gmail.com>
- <4576b818-9732-45ff-a4ab-b98fc0ecf4c9@siemens.com>
- <CAFA6WYNXgJkCX9-aoL5FGchAHGdV+ikTt4+pTJP-jZ_UJG8E6Q@mail.gmail.com>
- <87a9fe3e-5d9a-41e8-a8b2-4368cb727a65@siemens.com>
-In-Reply-To: <87a9fe3e-5d9a-41e8-a8b2-4368cb727a65@siemens.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Tue, 27 Aug 2024 12:43:41 +0530
-Message-ID: <CAFA6WYMGyMAB=m-hkxs87PyHszcbQUk6+0_G0n+0-Yk8NeRXQQ@mail.gmail.com>
-Subject: Re: OF_UPSTREAM vs. additional dtbs
-To: Jan Kiszka <jan.kiszka@siemens.com>
-Cc: Nishanth Menon <nm@ti.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+References: <DU0PR10MB5244DD7996739E6063425201E1A12@DU0PR10MB5244.EURPRD10.PROD.OUTLOOK.COM>
+ <ZqeitfLsRW8_Tet_@hera>
+ <DU0PR10MB5244E4B10953B67C52F06322E1882@DU0PR10MB5244.EURPRD10.PROD.OUTLOOK.COM>
+In-Reply-To: <DU0PR10MB5244E4B10953B67C52F06322E1882@DU0PR10MB5244.EURPRD10.PROD.OUTLOOK.COM>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 27 Aug 2024 11:04:55 +0300
+Message-ID: <CAC_iWjJ0-qf=H1a-bE6fZ1KU5_tB3uCN19gNUUEbgdxXs5KTNg@mail.gmail.com>
+Subject: Re: [PATCH 3/3] tpm_tcg2: hash algo optimization
+To: Benjamin BARATTE <benjamin.baratte@st.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "akashi.tkhro@gmail.com" <akashi.tkhro@gmail.com>, 
+ "abdellatif.elkhlifi@arm.com" <abdellatif.elkhlifi@arm.com>, 
+ "eajames@linux.ibm.com" <eajames@linux.ibm.com>,
+ "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>, 
+ "kojima.masahisa@socionext.com" <kojima.masahisa@socionext.com>,
+ "sjg@chromium.org" <sjg@chromium.org>, 
+ "sughosh.ganu@linaro.org" <sughosh.ganu@linaro.org>,
+ "tharvey@gateworks.com" <tharvey@gateworks.com>, 
+ "trini@konsulko.com" <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,128 +96,265 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 26 Aug 2024 at 18:02, Jan Kiszka <jan.kiszka@siemens.com> wrote:
->
-> On 26.08.24 09:10, Sumit Garg wrote:
-> > On Mon, 26 Aug 2024 at 12:19, Jan Kiszka <jan.kiszka@siemens.com> wrote:
-> >>
-> >> On 26.08.24 08:44, Sumit Garg wrote:
-> >>> Hi,
-> >>>
-> >>> On Wed, 14 Aug 2024 at 22:14, Jan Kiszka <jan.kiszka@siemens.com> wrote:
-> >>>>
-> >>>> On 14.08.24 11:41, Jan Kiszka wrote:
-> >>>>> On 13.08.24 14:52, Nishanth Menon wrote:
-> >>>>>> On 11:16-20240813, Jan Kiszka wrote:
-> >>>>>>> Hi all,
-> >>>>>>>
-> >>>>>>> I'm trying to migrate the TI AM65x IOT2050 boards to OF_UPSTREAM but I'm
-> >>>>>>> facing issues because I need to still build the u-boot-only overlays. It
-> >>>>>>> is also a bit weird (but works) having to specify
-> >>>>>>>
-> >>>>>>> CONFIG_SPL_OF_LIST="../../../../arch/arm/dts/k3-am65-iot2050-spl"
-> >>>>>>>
-> >>>>>
-> >>>>> Actually, this does NOT work: I just had a long morning debugging SPL
-> >>>>> which no longer started because it picked the non-filtered dtb. The
-> >>>>> filtered one ended up in a folder outside of the u-boot sources because
-> >>>>> of all those ../ and hard-wiring to dts/upstream.
-> >>>>>
-> >>>>>>> for our spl dtb.
-> >>>>>>>
-> >>>>>>> Are there means to still build certain dtb[o] files in arch/<arch>/dts?
-> >>>>>>> I'm a bit lost in the Makefile forest.
-> >>>>>>>
-> >>>>>>
-> >>>>>> Sumit: Any suggestions?
-> >>>>>>
-> >>>
-> >>> Apologies for the delayed reply. I was a bit busy with other high
-> >>> priority stuff.
-> >>>
-> >>>>>
-> >>>>> I would really like to hear some better proposals than my local
-> >>>>> workarounds to far. They don't converge although I already patched some
-> >>>>> core Makefile (overlays are building now).
-> >>>>>
-> >>>>
-> >>>> OK, I side-stepped the spl issue by using one of our variant DTBs for
-> >>>> spl as well - happens to work.
-> >>>
-> >>> That's good to know.
-> >>>
-> >>>>
-> >>>> For the overlays, I need to add
-> >>>>
-> >>>> --- a/scripts/Makefile.dts
-> >>>> +++ b/scripts/Makefile.dts
-> >>>> @@ -1,5 +1,7 @@
-> >>>>  # SPDX-License-Identifier: GPL-2.0+
-> >>>>
-> >>>> +include $(srctree)/config.mk
-> >>>> +
-> >>>>  dtb-y += $(patsubst %,%.dtb,$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $(CONFIG_OF_LIST) $(CONFIG_SPL_OF_LIST)))
-> >>>>
-> >>>>  ifeq ($(CONFIG_OF_UPSTREAM_BUILD_VENDOR),y)
-> >>>>
-> >>>>
-> >>>> in order to then be able to do
-> >>>>
-> >>>> --- a/board/siemens/iot2050/config.mk
-> >>>> +++ b/board/siemens/iot2050/config.mk
-> >>>> @@ -5,4 +5,12 @@
-> >>>>  # Authors:
-> >>>>  #   Jan Kiszka <jan.kiszka@siemens.com>
-> >>>>
-> >>>> +ifneq ($(CONFIG_SPL_BUILD),y)
-> >>>> +dtbo-list = \
-> >>>> +       k3-am6548-iot2050-advanced-m2-bkey-usb3-overlay \
-> >>>> +       k3-am6548-iot2050-advanced-m2-bkey-ekey-pcie-overlay
-> >>>> +
-> >>>> +dtb-y += $(patsubst %,../../../../arch/arm/dts/%.dtbo,$(dtbo-list))
-> >>>> +endif
-> >>>> +
-> >>>>  flash.bin: all
-> >>>>
-> >>>>
-> >>>> Does that make sense?
-> >>>
-> >>> A switch to OF_UPSTREAM means that we build all the DT artifacts from
-> >>> dts/upstream/src/ directory with the only exception that we include
-> >>> U-Boot specific overrides via *-u-boot.dtsi from arch/<arch>/dts. In
-> >>> case of overlays, is there any reason for IOT2050 board overlays not
-> >>> being pushed into Linux kernel repo? AFAIU, overlays are also
-> >>> describing puggable hardware so they shouldn't be referred to as
-> >>> "u-boot-only" overlays.
-> >>
-> >> We are using the overlay to massage the DT presented to the OS based on
-> >> firmware configuration.
-> >
-> > Agree and more than that I prefer the firmware to own the overall DT
-> > and present that to the OS.
-> >
-> >> So, those two belong to the firmware logically,
-> >> but - with some disclaimers, we could also try to upstream them.
-> >
-> > For historical reasons, Linux kernel source tree has become the
-> > defacto upstream repo for DT sources. So it's better to contribute
-> > there and sync back in U-Boot.
->
-> Will do ASAP, hope to hit at least 6.12 then.
->
-> Still, this will delay our next patches for U-Boot by many months. Also
-> for that reason, a plan B for U-Boot local DTs should remain, no
-> left-or-right policy.
+Hi Benjamin,
 
-Yeah, the U-Boot local DTs should be used until the board is fully
-supported by the dts/upstream directory.
 
--Sumit
+On Fri, 23 Aug 2024 at 15:29, Benjamin BARATTE <benjamin.baratte@st.com> wrote:
+>
+> Hi @Ilias Apalodimas,
+>
+>
+> ST Restricted
+> > -----Original Message-----
+> > From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > Sent: Monday, July 29, 2024 4:10 PM
+> > To: Benjamin BARATTE <benjamin.baratte@st.com>
+> > Cc: u-boot@lists.denx.de; akashi.tkhro@gmail.com;
+> > abdellatif.elkhlifi@arm.com; eajames@linux.ibm.com; xypron.glpk@gmx.de;
+> > kojima.masahisa@socionext.com; sjg@chromium.org;
+> > sughosh.ganu@linaro.org; tharvey@gateworks.com; trini@konsulko.com
+> > Subject: Re: [PATCH 3/3] tpm_tcg2: hash algo optimization
+> >
+> > On Mon, Jul 15, 2024 at 01:33:19PM +0000, Benjamin BARATTE wrote:
+> > > To properly enable code optimization with hash algorithm, all the
+> > > reference of the hash algo should condition to hash enablement.
+> > > It is possible to fine tune the list of hash algorithms based on dTPM
+> > > configuration.
+> > > Therefore if dTPM supports only one bank, on one hash algorithm could
+> > > be selected (TCG PTP specification mention in case of single bank
+> > > support that SHA256 must be support and default value)
+> >
+> > Yes, but...
+> > In order to apply this we need a function that *configures* the TPM with only
+> > the supported compiled algorithms.  If a TPM is configured with more than
+> > what u-boot supports, there might be security implications since we will fail to
+> > cap all active PCRs. On top of that the EFI TCG explicitly says that all the active
+> > PCR banks needs to be updated when extending measurements.
+> >
+>
+> I'm agree with you, but this is more a configuration issue in that case.
+> Today to do such configuration, we need to do it with tpm2-tools under Linux
+> But if U-boot is preventing the Linux kernel to boot, this will become problematic.
+
+It's the same configuration issue for u-boot. If you enable all
+hashing algorithms Linux will be just fine.
+
+> And U-boot API to configure the TPM PCR will be more than welcome in U-boot.
+
+Configuring the TPM PCR available banks shouldnt be too much code, we
+already have a function to read the available ones.
 
 >
-> Jan
+> This will allow industrial user to manage this configuration in U-boot instead of Linux.
+
+Failing to cap all available PCR banks might lead to misconfiguration
+errors and eventually compromise the TPM security -- e.g unseal keys
+you shouldnt. There's an extended discussion about the same issue here
+[0]. Keeping that in mind, I don't want to pick patches that allow
+people to shoot themselves in the foot.
+
+[0] https://lore.kernel.org/linux-integrity/20240531010331.134441-7-ross.philipson@oracle.com/
+
+Thanks
+/Ilias
+
+
 >
-> --
-> Siemens AG, Technology
-> Linux Expert Center
+> Best Regards,
 >
+> Benjamin
+>
+> > Thanks
+> > /Ilias
+> >
+> > >
+> > > Signed-off-by: Benjamin BARATTE <benjamin.baratte@st.com>
+> > > ---
+> > >
+> > >  include/tpm-v2.h       |  8 --------
+> > >  lib/efi_loader/Kconfig |  4 ----
+> > >  lib/tpm_tcg2.c         | 38 ++++++++++++++++++++++++++++++++++++++
+> > >  3 files changed, 38 insertions(+), 12 deletions(-)
+> > >
+> > > diff --git a/include/tpm-v2.h b/include/tpm-v2.h index
+> > > 9848e1fd10..ec3504de44 100644
+> > > --- a/include/tpm-v2.h
+> > > +++ b/include/tpm-v2.h
+> > > @@ -285,38 +285,30 @@ struct digest_info {
+> > >
+> > >
+> > >  static const struct digest_info hash_algo_list[] = { -#if
+> > > IS_ENABLED(CONFIG_SHA1)
+> > >         {
+> > >                 "sha1",
+> > >                 TPM2_ALG_SHA1,
+> > >                 TCG2_BOOT_HASH_ALG_SHA1,
+> > >                 TPM2_SHA1_DIGEST_SIZE,
+> > >         },
+> > > -#endif
+> > > -#if IS_ENABLED(CONFIG_SHA256)
+> > >         {
+> > >                 "sha256",
+> > >                 TPM2_ALG_SHA256,
+> > >                 TCG2_BOOT_HASH_ALG_SHA256,
+> > >                 TPM2_SHA256_DIGEST_SIZE,
+> > >         },
+> > > -#endif
+> > > -#if IS_ENABLED(CONFIG_SHA384)
+> > >         {
+> > >                 "sha384",
+> > >                 TPM2_ALG_SHA384,
+> > >                 TCG2_BOOT_HASH_ALG_SHA384,
+> > >                 TPM2_SHA384_DIGEST_SIZE,
+> > >         },
+> > > -#endif
+> > > -#if IS_ENABLED(CONFIG_SHA512)
+> > >         {
+> > >                 "sha512",
+> > >                 TPM2_ALG_SHA512,
+> > >                 TCG2_BOOT_HASH_ALG_SHA512,
+> > >                 TPM2_SHA512_DIGEST_SIZE,
+> > >         },
+> > > -#endif
+> > >         {
+> > >                 "sha3_256",
+> > >                 TPM2_ALG_SHA3_256,
+> > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig index
+> > > ee71f41714..512fb710b5 100644
+> > > --- a/lib/efi_loader/Kconfig
+> > > +++ b/lib/efi_loader/Kconfig
+> > > @@ -405,10 +405,6 @@ config EFI_TCG2_PROTOCOL
+> > >         bool "EFI_TCG2_PROTOCOL support"
+> > >         default y
+> > >         depends on TPM_V2
+> > > -       select SHA1
+> > > -       select SHA256
+> > > -       select SHA384
+> > > -       select SHA512
+> > >         select HASH
+> > >         select SMBIOS_PARSER
+> > >         help
+> > > diff --git a/lib/tpm_tcg2.c b/lib/tpm_tcg2.c index
+> > > 7f868cc883..66573b838d 100644
+> > > --- a/lib/tpm_tcg2.c
+> > > +++ b/lib/tpm_tcg2.c
+> > > @@ -96,9 +96,15 @@ int tcg2_create_digest(struct udevice *dev, const u8
+> > *input, u32 length,
+> > >                        struct tpml_digest_values *digest_list)  {
+> > >         u8 final[sizeof(union tpmu_ha)];
+> > > +#if IS_ENABLED(CONFIG_SHA256)
+> > >         sha256_context ctx_256;
+> > > +#endif
+> > > +#if IS_ENABLED(CONFIG_SHA384) || IS_ENABLED(CONFIG_SHA512)
+> > >         sha512_context ctx_512;
+> > > +#endif
+> > > +#if IS_ENABLED(CONFIG_SHA1)
+> > >         sha1_context ctx;
+> > > +#endif
+> > >         u32 active;
+> > >         size_t i;
+> > >         u32 len;
+> > > @@ -114,30 +120,38 @@ int tcg2_create_digest(struct udevice *dev, const
+> > u8 *input, u32 length,
+> > >                         continue;
+> > >
+> > >                 switch (hash_algo_list[i].hash_alg) {
+> > > +#if IS_ENABLED(CONFIG_SHA1)
+> > >                 case TPM2_ALG_SHA1:
+> > >                         sha1_starts(&ctx);
+> > >                         sha1_update(&ctx, input, length);
+> > >                         sha1_finish(&ctx, final);
+> > >                         len = TPM2_SHA1_DIGEST_SIZE;
+> > >                         break;
+> > > +#endif
+> > > +#if IS_ENABLED(CONFIG_SHA256)
+> > >                 case TPM2_ALG_SHA256:
+> > >                         sha256_starts(&ctx_256);
+> > >                         sha256_update(&ctx_256, input, length);
+> > >                         sha256_finish(&ctx_256, final);
+> > >                         len = TPM2_SHA256_DIGEST_SIZE;
+> > >                         break;
+> > > +#endif
+> > > +#if IS_ENABLED(CONFIG_SHA384)
+> > >                 case TPM2_ALG_SHA384:
+> > >                         sha384_starts(&ctx_512);
+> > >                         sha384_update(&ctx_512, input, length);
+> > >                         sha384_finish(&ctx_512, final);
+> > >                         len = TPM2_SHA384_DIGEST_SIZE;
+> > >                         break;
+> > > +#endif
+> > > +#if IS_ENABLED(CONFIG_SHA512)
+> > >                 case TPM2_ALG_SHA512:
+> > >                         sha512_starts(&ctx_512);
+> > >                         sha512_update(&ctx_512, input, length);
+> > >                         sha512_finish(&ctx_512, final);
+> > >                         len = TPM2_SHA512_DIGEST_SIZE;
+> > >                         break;
+> > > +#endif
+> > >                 default:
+> > >                         printf("%s: unsupported algorithm %x\n", __func__,
+> > >                                hash_algo_list[i].hash_alg); @@ -236,10
+> > > +250,18 @@ static int tcg2_log_init(struct udevice *dev, struct
+> > tcg2_event_log *elog)
+> > >                         continue;
+> > >
+> > >                 switch (hash_algo_list[i].hash_alg) {
+> > > +#if IS_ENABLED(CONFIG_SHA1)
+> > >                 case TPM2_ALG_SHA1:
+> > > +#endif
+> > > +#if IS_ENABLED(CONFIG_SHA256)
+> > >                 case TPM2_ALG_SHA256:
+> > > +#endif
+> > > +#if IS_ENABLED(CONFIG_SHA384)
+> > >                 case TPM2_ALG_SHA384:
+> > > +#endif
+> > > +#if  IS_ENABLED(CONFIG_SHA512)
+> > >                 case TPM2_ALG_SHA512:
+> > > +#endif
+> > >                         count++;
+> > >                         break;
+> > >                 default:
+> > > @@ -337,10 +359,18 @@ static int tcg2_replay_eventlog(struct
+> > tcg2_event_log *elog,
+> > >                         algo = get_unaligned_le16(log + pos);
+> > >                         pos += offsetof(struct tpmt_ha, digest);
+> > >                         switch (algo) {
+> > > +#if IS_ENABLED(CONFIG_SHA1)
+> > >                         case TPM2_ALG_SHA1:
+> > > +#endif
+> > > +#if IS_ENABLED(CONFIG_SHA256)
+> > >                         case TPM2_ALG_SHA256:
+> > > +#endif
+> > > +#if IS_ENABLED(CONFIG_SHA384)
+> > >                         case TPM2_ALG_SHA384:
+> > > +#endif
+> > > +#if IS_ENABLED(CONFIG_SHA512)
+> > >                         case TPM2_ALG_SHA512:
+> > > +#endif
+> > >                                 len = tpm2_algorithm_to_len(algo);
+> > >                                 break;
+> > >                         default:
+> > > @@ -450,10 +480,18 @@ static int tcg2_log_parse(struct udevice *dev,
+> > struct tcg2_event_log *elog)
+> > >                         return 0;
+> > >
+> > >                 switch (algo) {
+> > > +#if IS_ENABLED(CONFIG_SHA1)
+> > >                 case TPM2_ALG_SHA1:
+> > > +#endif
+> > > +#if IS_ENABLED(CONFIG_SHA256)
+> > >                 case TPM2_ALG_SHA256:
+> > > +#endif
+> > > +#if IS_ENABLED(CONFIG_SHA384)
+> > >                 case TPM2_ALG_SHA384:
+> > > +#endif
+> > > +#if IS_ENABLED(CONFIG_SHA512)
+> > >                 case TPM2_ALG_SHA512:
+> > > +#endif
+> > >                         len = get_unaligned_le16(&event->digest_sizes[i].digest_size);
+> > >                         if (tpm2_algorithm_to_len(algo) != len)
+> > >                                 return 0;
+> > > --
+> > > 2.34.1
+> > >
+> > > ST Restricted
