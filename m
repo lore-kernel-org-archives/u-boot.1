@@ -4,58 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B620C5472D
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 08:03:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97468C5472D
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 08:04:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B711088859;
-	Wed, 28 Aug 2024 10:03:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2760C888C1;
+	Wed, 28 Aug 2024 10:04:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1724832237;
-	bh=/IUufR2KRB2+4BTyPpv+VasRV48hqpQIYL5wCSVPbdM=;
+	s=phobos-20191101; t=1724832295;
+	bh=9JSm6Oq67wQWqy66QShDrvV1yJeZ+vXGcFWRabXmb+Y=;
 	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=vTW7c3jZB/zUjWtj7wpgD785B0ak/9Yuoz9lFnujI1ZCcHRctQuFSnjxDEpxU2sDK
-	 nZVW/nsuvqs1lV52EYvhoo2NSH1y34KOgXTJPRo2kob4oX3E/gpGRYKuQ3ETbBILUk
-	 TBxzdpnk7pXt3J4jAgf9XzK5XmWBODJ4IuEyhy1unpqHPtdZhBtlqr3vHETXVa9yPM
-	 KQLp+SrZ5enPD8lFF9lQl+StI7QhY0sMJhE0uUX39TKUHgatj9KhalIDwdsXMHWWsE
-	 anUORZSTWprmO8QGxUwgP+m5Sc/zV5bNOuxKJCmGhSAef/l7XK8n0umn5AFHoLSpE0
-	 AP+/zXgBYN1+A==
+	b=BRLMkrzDoFWudEup2tldyz48uUoDgKlPXL9mNgu1F0e67myB+Yhf4Ovf9ClkZ1BVI
+	 Am2LzbYmXHdLj7DPG22HD4bA6ddm/2j1yLFOh/xRw1vE/M4C1r0XTo1JguNTHntf0J
+	 ajk8WAopLCH2229w7V/meHYuazqs+d+Qa4dRdBzpDhIMHRvAFEga11BxkmvYzxTsYV
+	 fA1t3yJYK+iqr9tgw8EEKDdFTMhtEADfqyL9mRvmX6RgrH+KWqL+hfwL2NdAaEnJop
+	 oxdnRjTlDL1W6btIfX04B4upxAs6IbEy0MT9OovPaEb5w9xx1u5yl5pK8B7gcblS9m
+	 7XyMTO5f7aSPw==
 Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 0252488714;
- Wed, 28 Aug 2024 10:03:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 9C3F888714;
+ Wed, 28 Aug 2024 10:04:53 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1724832237;
- bh=/IUufR2KRB2+4BTyPpv+VasRV48hqpQIYL5wCSVPbdM=;
+ s=phobos-20191101; t=1724832293;
+ bh=9JSm6Oq67wQWqy66QShDrvV1yJeZ+vXGcFWRabXmb+Y=;
  h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=bpHv2pOfLG0KuRMz+cu1iwCs+xzyL6I4JGIb+wUITYtDjLtBEt7EbZrUhR89kIhyH
- 5NcxopOzcmHxcStJs7lgTH/vhuW0jDODv+2LlGcIuDbHKdBCU+L0CNZKgQD+CzRrnR
- waVPdwJTp8pTLG4evr9h8ghM0GfFgHkYm4QAcDcuP4K6/dZSgFUf2krrVag88ezZ3C
- 1IchnhcoWlMn9nl1KqgYSd2k0LZVxSfpcQl/Y0BPaBpBgvP8IemfuU9O2P0wIr7G2G
- yT1lPYYQSvcwsZ4FHr6FhUOLLLf0TFZ3NhWd1ZSCgCFrpDttNDU8IdxiSMvqjZAZgm
- q6ZUY77XSQhGw==
-Date: Wed, 28 Aug 2024 10:03:55 +0200
+ b=ri7D1wvzXLgubDNA9mmy1qQMIrZNehTeWYkBgmPd/bVDjsS+6vPrkx6HiqLCze1OO
+ JcRhRlCYHY3+9ywGslGaP+IEQL8Xs+f8yxZ407oIySp/R9gW3Ye3R2u5Nrgb7to0rc
+ Kdc/HpQFtHhTSuX18PliMed2Rx62y2n+5b521KXntqCgnw8cxA8It/c3pAxhlZvA+9
+ PQVqrUKExIb42jnu/tWP8halnt81T4plzKDQUXF+PGZPx8CueXPLA57oNKhxxDku1q
+ iHq1Df3qNL1XdEKDFb8AZdmu2oHfUQ3nO18ELX8Bx9z6Cjz9/c8BS07WN0+Do5108g
+ o9Ok/mW2Ol+Dw==
+Date: Wed, 28 Aug 2024 10:04:52 +0200
 From: Lukasz Majewski <lukma@denx.de>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Mamta Shukla <mamta.shukla@leica-geosystems.com>, Adam Ford
- <aford173@gmail.com>, u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marex@denx.de>
+To: Simon Glass <sjg@chromium.org>
+Cc: Fabio Estevam <festevam@gmail.com>, Mamta Shukla
+ <mamta.shukla@leica-geosystems.com>, Adam Ford <aford173@gmail.com>,
+ u-boot@lists.denx.de, Marek Vasut <marex@denx.de>
 Subject: Re: [Binman] Question regarding SPL symbol offsets generation
-Message-ID: <20240828100355.655401d4@wsk>
-In-Reply-To: <CAOMZO5B-fkLQsQx205mxXQdmk3ij6Hxx4ErM84DtEtBg3mYa7Q@mail.gmail.com>
+Message-ID: <20240828100452.2143873d@wsk>
+In-Reply-To: <CAFLszTggpR9aaDAH_Mx_zDNnKAb7r_O+sdyyVVG_xULqkrWnzg@mail.gmail.com>
 References: <20240808110654.4215b129@wsk>
  <CAOMZO5A74MigLO0qkeXi04=7M70jaiEgk9zdFBjUV74vuZDP0g@mail.gmail.com>
  <20240815221421.61f64a17@wsk>
  <CAOMZO5B-fkLQsQx205mxXQdmk3ij6Hxx4ErM84DtEtBg3mYa7Q@mail.gmail.com>
+ <CAFLszTggpR9aaDAH_Mx_zDNnKAb7r_O+sdyyVVG_xULqkrWnzg@mail.gmail.com>
 Organization: denx.de
 X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/eNnfTvIGJOcDK3eJN0vrVmx";
+Content-Type: multipart/signed; boundary="Sig_/cHacqkXXd7ZJGKkdHgKj3wF";
  protocol="application/pgp-signature"; micalg=pgp-sha512
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -73,47 +74,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---Sig_/eNnfTvIGJOcDK3eJN0vrVmx
+--Sig_/cHacqkXXd7ZJGKkdHgKj3wF
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi Fabio,
+Hi Simon,
 
-> Hi Lukasz,
+> Hi,
 >=20
-> On Thu, Aug 15, 2024 at 5:14=E2=80=AFPM Lukasz Majewski <lukma@denx.de> w=
-rote:
->=20
-> > Unfortunately not - this change is only for properly setting start
-> > address of the u-boot.
+> On Tue, 27 Aug 2024 at 12:47, Fabio Estevam <festevam@gmail.com>
+> wrote:
 > >
-> > The _real_ problem here is the symbol placement generated by binman
-> > when we try to define the image as a single one.
+> > Hi Lukasz,
 > >
-> > Moreover, this change follows other boards with imx8mm processor -
-> > ./configs/imx8mm_beacon_fspi_defconfig to be specific.
+> > On Thu, Aug 15, 2024 at 5:14=E2=80=AFPM Lukasz Majewski <lukma@denx.de>
+> > wrote:=20
+> > > Unfortunately not - this change is only for properly setting start
+> > > address of the u-boot.
+> > >
+> > > The _real_ problem here is the symbol placement generated by
+> > > binman when we try to define the image as a single one.
+> > >
+> > > Moreover, this change follows other boards with imx8mm processor -
+> > > ./configs/imx8mm_beacon_fspi_defconfig to be specific.
+> > >
+> > > The "fix" (for which I'd been now probably opt) for this issue
+> > > would be to generate two images with binman - one for
+> > > u-boot-spl-ddr.bin and the final flash.bin with the former one
+> > > included (as it was before SHA1:
+> > > 37e50627efacd8dae18b564e9d8886a033e181bc) =20
 > >
-> > The "fix" (for which I'd been now probably opt) for this issue
-> > would be to generate two images with binman - one for
-> > u-boot-spl-ddr.bin and the final flash.bin with the former one
-> > included (as it was before SHA1:
-> > 37e50627efacd8dae18b564e9d8886a033e181bc) =20
+> > Is QSPI boot broken on i.MX8MM?
+> >
+> > I am adding Adam and Mamta who have tested QSPI booting on
+> > imx8mm_beacon and imx8mm_evk, respectively. =20
 >=20
-> Is QSPI boot broken on i.MX8MM?
+> Note also that I sent a series[1] which allows the symbols-base to be
+> adjusted, if that helps.
+
+I've seen them - but not yet tested.
+
+Thanks Simon for the patch series.
+
 >=20
+> Regards,
+> Simon
+>=20
+> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=3D421010
 
-With newest mainline - yes.
 
-Please consult (this works on polis):
-https://github.com/lmajewski/u-boot/commits/phycore-imx8mm-qspi-nvme
-
-The spl symbols after binman generation are off by 0x1000 (by the
-inserted on the beginning QSPI header)
-
-> I am adding Adam and Mamta who have tested QSPI booting on
-> imx8mm_beacon and imx8mm_evk, respectively.
-
-Ok. Good.
 
 
 Best regards,
@@ -126,20 +135,20 @@ DENX Software Engineering GmbH,      Managing Director: Erika Unter
 HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
 Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
 
---Sig_/eNnfTvIGJOcDK3eJN0vrVmx
+--Sig_/cHacqkXXd7ZJGKkdHgKj3wF
 Content-Type: application/pgp-signature
 Content-Description: OpenPGP digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmbO2ewACgkQAR8vZIA0
-zr2FNAgA3zNqsMRxCxeikSjpest5Q9tMuaOMEk+C2L7EYya4+ThPE6yQzuFkazZH
-yLYDyNkWCVyZL33S+lFsAsWQmQ2PWMFH2iD8/wQapl3RVSg8w3JtX5zoeHyxtcB9
-zbtwlFwTHXJAGJSpxhS9j0sloO/JKQ6OLwe7161yUimVTDKgbkw8Yt63/WiuWJR4
-cQG9pdLDHpE3YicPEbT7n8JQ7tU//dEuC/WJ0k+FGe/YMj9GaVlFGDD49Rxpo45o
-qy7nizSU34+Wj8p7s2xsSvUfpEiJAB6x1xykDXYvQ43d8gm6q60xGMQjyLLq/Gvb
-qE7nJajBuUAAKrsXqw2Yr6f4R5cbzg==
-=9sjS
+iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmbO2iQACgkQAR8vZIA0
+zr3ogwf+JLXVto679R+oGKchW6S58MB91SmkUQ8QhvhfVt1BhCHgnlH1fSRWu7ue
+iTuFINFEkRZ8+skVhM62K23yWlFcNlM7+2pRqD+VXr38zBeJQJh/kfCPCad2UnH7
+R/kjtAWdP+dL9K0hYPjp+j5DQqed5eh56h+FTaMCDixzkFROQDaqa3DmxxYBiqEX
+RBNxg1U+/M1O5JNvZiEOEbUBsyMbCP3U/MW/p79QvO4RaJAK1KR6eMp/GQluiqb7
+3Wr62d9bYAYgpz4C68aS5+bnPTxKAC+EYck4pe4y2JqNcoopz/2CH08XyEsCRBON
+LCo9yC5kvAQ8gYqzV/2Ahw7cO6Ok5g==
+=OldS
 -----END PGP SIGNATURE-----
 
---Sig_/eNnfTvIGJOcDK3eJN0vrVmx--
+--Sig_/cHacqkXXd7ZJGKkdHgKj3wF--
