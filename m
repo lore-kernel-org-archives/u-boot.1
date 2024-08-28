@@ -4,65 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AAADC54746
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 01:32:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D305FC54747
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 01:44:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4876488701;
-	Wed, 28 Aug 2024 03:32:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=email.cz
+	by phobos.denx.de (Postfix) with ESMTP id 1936188A8B;
+	Wed, 28 Aug 2024 03:44:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=email.cz header.i=@email.cz header.b="lZFjFoyI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PY6aTRwf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 034D98887E; Wed, 28 Aug 2024 03:32:00 +0200 (CEST)
-Received: from mxe-1-50f.seznam.cz (mxe-1-50f.seznam.cz
- [IPv6:2a02:598:128:8a00::1000:50f])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 307B888A8E; Wed, 28 Aug 2024 03:44:37 +0200 (CEST)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4865585B66
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 03:31:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B747688875
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 03:44:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=email.cz
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tomaspaukrt@email.cz
-Received: from email.seznam.cz by smtpc-mxe-6f7b5db655-grmdl
- (smtpc-mxe-6f7b5db655-grmdl [2a02:598:128:8a00::1000:50f])
- id 4fdfc08eb12b72244f514e96; Wed, 28 Aug 2024 03:31:55 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cz;
- s=szn20221014; t=1724808715;
- bh=mlLNks5kaXvp8nuJsxEwEdm+72mLP/3cnxIevMoRNbQ=;
- h=Received:From:To:Cc:Subject:Date:Message-Id:References:
- In-Reply-To:Mime-Version:X-Mailer:Content-Type:
- Content-Transfer-Encoding;
- b=lZFjFoyIDw/L28B9Na1EGNXGscSd+gYWL35Vg+sj3zTgEerKtwA4U95XvxT+rGi6s
- LMrOX9GzaliRENHlBXWSGsaN6Ol7IyXrGZyKgu4yG9X7yhNp04IafD3S/xC8JvNvzO
- TZQcrMtGZJTcdx2OWahn7+TuVCxqJDZIR6PxJbth0eqktzS3+4+d2yZxz9Dg1tSB5M
- wKqMG43AudOP5Z5R/h/K4TR21traZf5AGzfJm9WlLpNltBtbWe3vOtAEzarmYdK1tA
- NfWpPT28QxwKMqGMJPX/SeVgok0GJm3EgFMZkoEoVe1iLaEs08JI0+n/fa/i5eDWPj
- Sw2inAfMW4kHQ==
-Received: from unknown ([82.144.143.184])
- by email.seznam.cz (szn-UNKNOWN-unknown) with HTTP;
- Wed, 28 Aug 2024 03:31:52 +0200 (CEST)
-From: "Tomas Paukrt" <tomaspaukrt@email.cz>
-To: "Fabio Estevam" <festevam@gmail.com>
-Cc: <u-boot@lists.denx.de>, "Tom Rini" <trini@konsulko.com>,
- "Ye Li" <ye.li@nxp.com>, "Peng Fan" <peng.fan@nxp.com>
-Subject: =?utf-8?q?Re=3A_=5BPATCH=5D_gpio=3A_mxc=5Fgpio=3A_fix_reading_sta?=
- =?utf-8?q?te_of_GPIO_pins_in_output_mode?=
-Date: Wed, 28 Aug 2024 03:31:52 +0200 (CEST)
-Message-Id: <Mh.Zbul.1u3}4uost4Y.1cpdu8@seznam.cz>
-References: <GI.Za6b.48b6UC5Rsur.1cpWwh@seznam.cz>
- <CAOMZO5Aj9zSEWF9Gm5-tF9hTaczf6FXv0zo_z+Jws+BGPYPwrg@mail.gmail.com>
- <K9.Za7d.77W3I8GjZaJ.1cpYlf@seznam.cz>
- <CAOMZO5BshEknpJEeEiqip3e_YkN21kAKtKva0ik=8SKGJxmngw@mail.gmail.com>
- <CAOMZO5A1r4F403efkpAPbv9zJD7bjv=aHB8SgOK3pPXtVvzE2g@mail.gmail.com>
-In-Reply-To: <CAOMZO5A1r4F403efkpAPbv9zJD7bjv=aHB8SgOK3pPXtVvzE2g@mail.gmail.com>
-Mime-Version: 1.0 (szn-mime-2.1.61)
-X-Mailer: szn-UNKNOWN-unknown
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-824c85e414bso214174839f.2
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 18:44:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1724809473; x=1725414273; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=US8lenqosrseHrpdisQpyO+a+5Qan7uuIIdhkt73Wnk=;
+ b=PY6aTRwftRyw2UMtdVHvReKETa+mSfhfBUylEdi1UoGI7xDwxwmJ6mj+4XS5kOdYt4
+ BVWyqhemXdDaE/lpd2faclSB0/PHSBp+UmnkSMh+4iofdismtBRxfEAyjLK7oM9twZhb
+ KdCRdRWmdTZK7cK/j1D7jLlbqJifjgcKYsJ5A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724809473; x=1725414273;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=US8lenqosrseHrpdisQpyO+a+5Qan7uuIIdhkt73Wnk=;
+ b=VJqv2jK3BamuSzP5y1yvLCiMBNeuKZfOMPM5U3bJhJP6RGu6CKjjRIjFJFkSBPvgcO
+ EdduDGXKMhwVoJHaQ9OKfon2p1ydKBBlv6nK3AVE1e3NomJbluPWjtWy1+GOOswxS1+r
+ M1VIr7ot4u47VpfOftgeS+tOsG96hkteF+VoY25bzIyzBgiC+MnfuFkCEQ2sRC9uc6q0
+ k1TwAPXA8AJ7kN2/i3gF7l6N9lX1cV26YDBElU/14EEvJCaG8U3pHJ7QlFdkGFyi/LNr
+ nbaBGBijKzAhFoxHSds10cc3EwMh+4DAB7E58SS8KGn9ZT2w9Cens2o+upfaxKfYNyNY
+ VROA==
+X-Gm-Message-State: AOJu0YzWaOYOjKh6pK67vnBvEjqjCC+lt60p9nB+4F3IYRDkuDOOZIPg
+ dsDt5EsI3Y9AE0llbYvtPmC2CB5u4q7vwGGDGFAuGUYKB4o1EsqfzD756mcqVT61t/1vjWO3vjM
+ =
+X-Google-Smtp-Source: AGHT+IHUAKzDOQ28KlA59bjVfrJTe82u2ZAgBjee0rogwFknkCqkolAj9Eo3RnAakR41X53xyZE08w==
+X-Received: by 2002:a05:6602:341a:b0:7eb:7f2e:5b3a with SMTP id
+ ca18e2360f4ac-827873116d3mr2071312539f.2.1724809473133; 
+ Tue, 27 Aug 2024 18:44:33 -0700 (PDT)
+Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
+ [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-8253d3da8b9sm366342439f.0.2024.08.27.18.44.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 27 Aug 2024 18:44:32 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Alexander Gendin <agendin@matrox.com>, Eddie James <eajames@linux.ibm.com>,
+ Etienne Carriere <etienne.carriere@foss.st.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joshua Watt <jpewhacker@gmail.com>, Maxim Moskalets <maximmosk4@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Tom Fitzhenry <tom@tom-fitzhenry.me.uk>, Tom Rini <trini@konsulko.com>,
+ Troy Kisky <troykiskyboundary@gmail.com>
+Subject: [PATCH 0/6] x86: Correct timer overflow and add msr/cpuid commands
+Date: Tue, 27 Aug 2024 19:44:23 -0600
+Message-Id: <20240828014429.3320011-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,35 +96,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> For more information, please read this thread posted on
-> linux-arm-kernel ten years ago:
-> 
-> https://patchwork.kernel.org/project/linux-arm-kernel/patch/CAJ+vNU3w9Oi=
-+dErmy9x8g6ps=3DeLHLNLO-w7=3Dgn_8JtY4Kab6JQ@mail.gmail.com/
->
-> I hope this helps to clarify.
+This series corrects an overflow of the timer which happens on QEMU on
+newer hardware. It also adds commands to read/write CPU ID registers and
+machine-status registers (MSRs).
 
-There is a good point that using the PSR register is useful for board prot=
-otyping,
-because it indicates the level sensed on the pad which may differ if there=
 
-is an external level conflict on the pin.
+Simon Glass (6):
+  x86: Show the CPU vendor in bdinfo
+  x86: Ensure the CPU identity exists for timer init
+  x86: Avoid timer-clock overflow
+  x86: Sync up tsc_timer with Linux
+  x86: Add a cpuid command
+  x86: Add msr command
 
-On the other hand, there is a note that enabling SION for all pads in GPIO=
- mode
-will have some impact on the power consumption.
+ arch/x86/cpu/i386/cpu.c           | 99 +++++++++++++++++++------------
+ arch/x86/cpu/x86_64/cpu.c         |  6 ++
+ arch/x86/include/asm/u-boot-x86.h | 17 ++++++
+ arch/x86/lib/bdinfo.c             |  7 ++-
+ cmd/x86/Makefile                  |  2 +-
+ cmd/x86/cpuid.c                   | 37 ++++++++++++
+ cmd/x86/msr.c                     | 52 ++++++++++++++++
+ doc/usage/cmd/cpuid.rst           | 68 +++++++++++++++++++++
+ doc/usage/cmd/msr.rst             | 61 +++++++++++++++++++
+ doc/usage/index.rst               |  2 +
+ drivers/timer/tsc_timer.c         | 18 +++++-
+ test/cmd/Makefile                 |  1 +
+ test/cmd/cpuid.c                  | 22 +++++++
+ test/cmd/msr.c                    | 38 ++++++++++++
+ 14 files changed, 387 insertions(+), 43 deletions(-)
+ create mode 100644 cmd/x86/cpuid.c
+ create mode 100644 cmd/x86/msr.c
+ create mode 100644 doc/usage/cmd/cpuid.rst
+ create mode 100644 doc/usage/cmd/msr.rst
+ create mode 100644 test/cmd/cpuid.c
+ create mode 100644 test/cmd/msr.c
 
-I checked the current Linux driver and it uses the DR register for all out=
-puts.
-This change was implemented about a year later after the mentioned discuss=
-ion:
+-- 
+2.34.1
 
-https://lore.kernel.org/all/1430321701-13758-5-git-send-email-vladimir_zap=
-olskiy@mentor.com/
-
-So both the Linux kernel and the NXP U-Boot work as expected, but the main=
-line U-Boot does not.
-
-Best regards
-
-Tomas
