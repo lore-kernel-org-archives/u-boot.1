@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C098EC54746
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 01:47:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84368C54747
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 01:48:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA0E088BEA;
-	Wed, 28 Aug 2024 03:46:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 47C4288C09;
+	Wed, 28 Aug 2024 03:46:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dMoTNTDa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DdWvNVKu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 972D388BDC; Wed, 28 Aug 2024 03:46:00 +0200 (CEST)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id 1FBDE88BE6; Wed, 28 Aug 2024 03:46:01 +0200 (CEST)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20A3488B31
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 03:45:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 104FA88AA8
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 03:45:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-82521c46feaso228313439f.2
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 18:45:58 -0700 (PDT)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-829e856a173so99438839f.1
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 18:45:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724809557; x=1725414357; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724809558; x=1725414358; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FMLiyX0SXrM6Uln6jkFYTY/cgvOT7BdgUYLbTXDjVZw=;
- b=dMoTNTDahn8KHlT7TA3xi3wxhL3opttXfFKq+aoh/ey91H8ISx0CLQLRpKZfbmWh7e
- tEPeg7eFR+6RneJU83BKgL/3/rWauZDVRTFSkli+WDz3M9MxKFxIVp8KM57r3oS5wss5
- EZ+iK0ImXUD7iD8/+GZejfkBi1eyI6Rk9bYro=
+ bh=SMZ1XEvybYBo5tEuQSH7U4QrYUeXtptZ9+L0c8nCdhk=;
+ b=DdWvNVKuo2Xvg8bZ+TWp5ay9mvY7F6QwdRAxohhmpdiXNhKOl+Mzb1+sZDrNIs67Su
+ NqJxLQcoM/sop5Ns8fsAqwNWRTDWCtlteftd7qZPmtf6GnDVfjr2ogguvfMGiKkC//oN
+ hyZw9ySfqWnUwx8axdt9/SaVNKNGa8mBRbHCI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724809557; x=1725414357;
+ d=1e100.net; s=20230601; t=1724809558; x=1725414358;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FMLiyX0SXrM6Uln6jkFYTY/cgvOT7BdgUYLbTXDjVZw=;
- b=qNtI9a00jLt27YIyaLlH+8HVfJ6tjaf+SLmKrdk1/DYOK1s1xfZsm7OlzUFOxylwX+
- tO14WI8C4Ir8KHjLpCT9V4QqYsnnKRKB7oWMmTB2X24+tfF43ezmeNFuAyaz7+NDjK3l
- YusOkTs095h/7eCVlWujMB8m++cTWr6SqOOoSPi8AnHGqnFX4J0sdL9V5hdT/OwoESBC
- hQVGjgoRGnOqqQUGuTh943Ig7YDAhKykbK4RoWkgCtdMOSGcc2mTNMlD7Iifxz+GqmjQ
- RNRT03JnmzkKbRJIFPuQoXB/jdmE5SojW0v5CbQmlQ3KCYwvQ2cGKcsvO8xQmPWyF7P8
- 54Lw==
-X-Gm-Message-State: AOJu0YwoD6IPYNtWIMTUMTRWz+46vzjyeTtX60Mwpb2haDh/MjnH1POK
- 7LJJKg6UGn6tQ5fEMn9VdyBkQwpCBWw6XktgKRok3OcCy0euaiHE/87CN6dWzxWd0O4wvgYaC9M
+ bh=SMZ1XEvybYBo5tEuQSH7U4QrYUeXtptZ9+L0c8nCdhk=;
+ b=VyjXteaqKtSBCa3f96H6IRfqwx2hT/0CIuTqC7KPg/2VVSFiCc9N7zgD8z8ehorn1S
+ g3t/nWfPcCFUUJe1onEU/jzNy8Uj/g/mBzyYc8rHKIySBKwz1I+OCOzPGyz9n8wAjFgu
+ KSbLU7C4m9cPplzYNxf3OukwluGHKtohVdrhLic76sa9NMXX+Aaz1eL3zD0SwEwSLWS5
+ 95s88wdIy2tjwWVFfFCuTfwJT1M6Ypm6Y6Ml4OTIYnZJ5Wca1U8GXcenG5hR58/RHKAu
+ xSGEVP6+d4sG0JrNCqWHH/v94AbY5bmNRVpC8eRDd0eQQxcL+a+RGePD6DYtrZ0i9hE3
+ QENg==
+X-Gm-Message-State: AOJu0YwWVSrfMeVDxe8cTidgdXFxoS5IDfd5sN3ygsn4Dq3YZQUOu94D
+ 2DTKodgDhHin29WC1M8M4og5SDyTpzbOdOBbP4lhN41B/R0Spo3TLwFNSfm37rCxM1FDpkGlw2k
  =
-X-Google-Smtp-Source: AGHT+IGmw4n54V3HWGOCp+Ef/Tswu14cP2isfkY/2xxdYk+MphKHfd+MNa1Hz2a3YphOR15b/KwwUw==
-X-Received: by 2002:a05:6602:3fcc:b0:81f:c103:3e5d with SMTP id
- ca18e2360f4ac-827881eb252mr1546925339f.15.1724809556751; 
- Tue, 27 Aug 2024 18:45:56 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHsGps1tZsqleSE1wXqRW6S/uQGYFcxu2tfnNswMYg7LujRIbm6MiJC+ZJhDtwejS42Dp5JSQ==
+X-Received: by 2002:a05:6602:154f:b0:81f:8ae9:8f02 with SMTP id
+ ca18e2360f4ac-827881410eemr1763927139f.5.1724809557643; 
+ Tue, 27 Aug 2024 18:45:57 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ce70f5ca7csm2898342173.63.2024.08.27.18.45.56
+ 8926c6da1cb9f-4ce70f5ca7csm2898342173.63.2024.08.27.18.45.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Aug 2024 18:45:56 -0700 (PDT)
+ Tue, 27 Aug 2024 18:45:57 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Albert Aribaud <albert.u.boot@aribaud.net>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Sam Edwards <CFSworks@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 11/18] arm: Fix up a stale comment in sections.c
-Date: Tue, 27 Aug 2024 19:45:30 -0600
-Message-Id: <20240828014538.3322013-12-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Greg Malysa <greg.malysa@timesys.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 12/18] mmc: Support driver model in TPL
+Date: Tue, 27 Aug 2024 19:45:31 -0600
+Message-Id: <20240828014538.3322013-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240828014538.3322013-1-sjg@chromium.org>
 References: <20240828014538.3322013-1-sjg@chromium.org>
@@ -91,27 +95,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are currently four symbols here, so drop the word 'two'.
+Some boards want to use DM_MMC in TPL so add an option for that.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/arm/lib/sections.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/mmc/Kconfig | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/arch/arm/lib/sections.c b/arch/arm/lib/sections.c
-index 07efabaa7dc..8955aa6111c 100644
---- a/arch/arm/lib/sections.c
-+++ b/arch/arm/lib/sections.c
-@@ -5,7 +5,7 @@
- #include <linux/compiler.h>
+diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+index 982e84dc3bc..2b55ddb7af2 100644
+--- a/drivers/mmc/Kconfig
++++ b/drivers/mmc/Kconfig
+@@ -61,6 +61,18 @@ config SPL_DM_MMC
+ 	  appear as block devices in U-Boot and can support filesystems such
+ 	  as EXT4 and FAT.
  
- /**
-- * These two symbols are declared in a C file so that the linker
-+ * These symbols are declared in a C file so that the linker
-  * uses R_ARM_RELATIVE relocation, rather than the R_ARM_ABS32 one
-  * it would use if the symbols were defined in the linker file.
-  * Using only R_ARM_RELATIVE relocation ensures that references to
++config TPL_DM_MMC
++	bool "Enable MMC controllers using Driver Model in TPL"
++	depends on TPL_DM && DM_MMC
++	default y
++	select TPL_BLK
++	help
++	  This enables the MultiMediaCard (MMC) uclass which supports MMC and
++	  Secure Digital I/O (SDIO) cards. Both removable (SD, micro-SD, etc.)
++	  and non-removable (e.g. eMMC chip) devices are supported. These
++	  appear as block devices in U-Boot and can support filesystems such
++	  as EXT4 and FAT.
++
+ if MMC
+ 
+ config MMC_SDHCI_ADMA_HELPERS
 -- 
 2.34.1
 
