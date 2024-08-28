@@ -4,75 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0978C7113C
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 22:17:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 808D4C7114C
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 22:28:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A17538891E;
-	Thu, 29 Aug 2024 00:17:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D381F88381;
+	Thu, 29 Aug 2024 00:28:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ai5FYzs0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FAhOO+uO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65D1D88A76; Thu, 29 Aug 2024 00:17:17 +0200 (CEST)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id 268DE8862E; Thu, 29 Aug 2024 00:28:01 +0200 (CEST)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8A4388440
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:17:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EC23387E64
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:27:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-6bf6e17cc2bso136926d6.1
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 15:17:13 -0700 (PDT)
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-7a1dcba8142so89762385a.0
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 15:27:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724883432; x=1725488232; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724884078; x=1725488878; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Rdmy6nlGtpc3+h/zBx44zbbmwW+lwKk07D3JiXgYrlA=;
- b=ai5FYzs0nFudEL/Z1hWsNYkFSi9mei5XyIUWfwLZTyPA6oxa6pbJVG/e/xixSkDklf
- yxejLc0Ztwd1W30SXxNprgv8bZgSDl78jPvQWfEAf1cULywjgfB2ivUoPSLErNhYspuJ
- h3edyJ9GP4TgKpYcv11dOPF/0VpEMKW3EKEmk=
+ bh=EKaYZWRmpXzI0G72f7BD3P88yPxT5PxoYiWAv/uvlXA=;
+ b=FAhOO+uOU3FKJejDW+W5DWVqEZeW4+KCyUoOGCN9OjQoDLLP/XrJS9oNJTmcShYy0V
+ X6DoHrfKZ7iAmo9iuqbHSZua7PzfhrG1CYwNqyY/F7om22jYrmhqd39kc0c1jZ4nWVm9
+ ePJoTw1Kna+mdFW7NSZQ4xBW0LmtshzP7REAw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724883432; x=1725488232;
+ d=1e100.net; s=20230601; t=1724884078; x=1725488878;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Rdmy6nlGtpc3+h/zBx44zbbmwW+lwKk07D3JiXgYrlA=;
- b=WU8DDxBYZXkJNd19k2CM36VwglBgfQhvg0Yd6MF/Us7d4b3z83l7QA/NKoZZYwVpGM
- F+aqnDC4kZuxVRW4X71Il9ybE8lWKz2OmjlcGrl3fQzc5FzNyCuJ9y94kLkQV+92hfds
- Ze8wLO/u0NrySE8U9D8tMbNn61eMGi8nRdy5uBlafVw8V4+z4jKwVUNOpgmUu5VPvOzc
- l3B/g7tKbovXFHsG6P5hX9raXqhIfDs6ceJnmWqhR1XPJ00OACx0aQTA7fQv1WZYRutC
- Kq1cr58QAGXCF4YZ2ywfaxVClxm//2i6PPSdrNI2y3+XvUXAxcuAP5vkW0iG+3KoaKaO
- qUTA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV8J1egEN0hvQUB/FS4uqGrx01HVhE3MGi7r7SuFCA5AsAFnQQHBeKkt4zcquaLQA098HSmexc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwSd9usJLbps+5uG9kMYG3V3t57WAoFn9D7PnsK/m5zk8QG7d2A
- 2ZOLXukEVWwsX+uoHq3z3lMabRbnETYjMnJKjdeYbZWhBsrrV1OT7Ik0uZOAhUIaYPT7ku5aB4V
- J26oCAZ3CEguspxK+AtL6Kii8dQarKmiZgiboNLC7taDeZ0Q=
-X-Google-Smtp-Source: AGHT+IEdlkMpI40Y/MhXz3Lu5FOneatbl1g2A1tYugJ7IQ//XPQdj38oFV0S5qVGKaf6H4fuawP85D/5aa9W8IA5RPo=
-X-Received: by 2002:a05:6214:5f02:b0:6bf:8127:76df with SMTP id
- 6a1803df08f44-6c33e4f3973mr10761426d6.0.1724883432554; Wed, 28 Aug 2024
- 15:17:12 -0700 (PDT)
+ bh=EKaYZWRmpXzI0G72f7BD3P88yPxT5PxoYiWAv/uvlXA=;
+ b=idVfcmT/428HFAKd1s6qu0YQtYJAn55MJVbNHb68oaw2Oi+kF7nm/EkqqBfULPnIZf
+ D68bQ/HgjwCZm/LUWrT7ClasU2+FEH+TDRjeQwMjgtOqzMDBebiLiGMhTO/1KoKKpOVP
+ iA0nv9Pt3QXcZW5+5ClJeRe9cpc1JdpPnk9UGeBZejF3R3Kws52AWpY4ER44buyz4laG
+ MeIEjVkEguOpPrJLNzt2FzOsr4c4jQ+VgEFyqeVVU8Cr8xmbIiFUx3xXCR4iSJ9fYvD0
+ oPxo2LFnju96stNFKX1gvEptw9BD1QuxbSPQdfyEVhg6NyQ1zPbpAR7ZzybpA0xP3EyA
+ aUZQ==
+X-Gm-Message-State: AOJu0Yzmb/u/lgAwNGzLK1GIccnMfPBYMVEX/iMPlIlsT+6+Zfv4qVo7
+ rHDbKAzNHNQ+rd89S4LcuqfHr27o4pZGt0EHfQDDIaQTiXeGwhl9aWkcM6YG1AEuzVTCeG07wPp
+ o8ckGXOVv4B6NYqqCxstFZ+M3jPOVqUy5F0q+IkiCUxBoV58=
+X-Google-Smtp-Source: AGHT+IGpwKEzqsaEPbAAuN51maDjGwgtTBrYJI+/flHH4Up23DInc7cj74zd2032p3035GPV4M/VcDz1xT4Zpg7OLng=
+X-Received: by 2002:a05:6214:4203:b0:6af:33ed:87de with SMTP id
+ 6a1803df08f44-6c33f37dc39mr11812026d6.20.1724884077799; Wed, 28 Aug 2024
+ 15:27:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240803124149.2916030-1-jonas@kwiboo.se>
- <20240803124149.2916030-3-jonas@kwiboo.se>
- <CAFLszTha39GkRsZA1r91YpLdKJDiRfDmAzWsMTuByDtPC0YvGQ@mail.gmail.com>
- <CAFLszThNN-rfPtAYKSHtGTEUwuxFgz01A-yJMXRYtwX3WiA-Kg@mail.gmail.com>
- <0329ee07-3f99-4daf-8960-1e934ff753de@kwiboo.se>
- <CAFLszTgGhy+nY7MGDi19ZeB7ptstmXFwWG4NRUECtdjqPfMZSQ@mail.gmail.com>
- <CAFLszTiLsSA6JPBZanqk1wai9n109P87OO-wJJ=d-7-23=RWNA@mail.gmail.com>
- <4e3b907f-ed5a-4ae6-a533-d7cb16bb9775@kwiboo.se>
-In-Reply-To: <4e3b907f-ed5a-4ae6-a533-d7cb16bb9775@kwiboo.se>
+References: <20240828164523.125770-1-sjg@chromium.org>
+ <20240828164523.125770-4-sjg@chromium.org>
+ <20240828201912.GV2479150@bill-the-cat>
+ <CAFLszTjzH9kiM3SEzfjfhCWMCMnLLeBy1UipH9kW0-z3s-1xxA@mail.gmail.com>
+ <20240828213345.GW2479150@bill-the-cat>
+In-Reply-To: <20240828213345.GW2479150@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 28 Aug 2024 16:17:01 -0600
-Message-ID: <CAFLszTg0bVVWFR8WuxNia-XfoOnJ8YpUkFtw3L_8ZUwKsDAQqg@mail.gmail.com>
-Subject: Re: [PATCH 2/2] bootstage: Do not sort records
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Date: Wed, 28 Aug 2024 16:27:47 -0600
+Message-ID: <CAFLszTjG1ySeXpWD60aNEX5Te0nRKC53EXP5L1AoG+kXqFe8Ew@mail.gmail.com>
+Subject: Re: [u-boot-test-hooks PATCH v4 3/3] Provide some basic scripts for
+ Labgrid integration
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,228 +86,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Tom,
 
-On Wed, 28 Aug 2024 at 13:01, Jonas Karlman <jonas@kwiboo.se> wrote:
+On Wed, 28 Aug 2024 at 15:33, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Simon,
->
-> On 2024-08-28 20:11, Simon Glass wrote:
-> > Hi again Jonas,
+> On Wed, Aug 28, 2024 at 03:25:00PM -0600, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > On Wed, 28 Aug 2024 at 11:06, Simon Glass <sjg@chromium.org> wrote:
-> >>
-> >> Hi Jonas,
-> >>
-> >> On Wed, 28 Aug 2024 at 10:15, Jonas Karlman <jonas@kwiboo.se> wrote:
-> >>>
-> >>> Hi Simon,
-> >>>
-> >>> On 2024-08-28 18:01, Simon Glass wrote:
-> >>>> Hi Jonas,
-> >>>>
-> >>>> On Tue, 6 Aug 2024 at 15:50, Simon Glass <sjg@chromium.org> wrote:
-> >>>>>
-> >>>>> Hi Jonas,
-> >>>>>
-> >>>>> On Sat, 3 Aug 2024 at 06:42, Jonas Karlman <jonas@kwiboo.se> wrote:
-> >>>>>>
-> >>>>>> The timer counter on Rockchip SoCs may be reset in TF-A, this may cause
-> >>>>>> the bootstage records to be printed out of order and with an incorrect
-> >>>>>> elapsed time.
-> >>>>>
-> >>>>> Eek can we just fix TF-A? That seems like a bug.
-> >>>
-> >>> TF-A is vendor blob, so we have no control of it.
-> >>
-> >> Can we replace it, or is it one of the ones that has not been released?
-> >>
-> >> Can you file a bug with the vendor?
-> >>
-> >>>
-> >>>>>
-> >>>>>>
-> >>>>>> Fix this by not sorting the bootstage records.
-> >>>>>>
-> >>>>>> Before on a Radxa ZERO 3W (RK3566) board:
-> >>>>>>
-> >>>>>>   => bootstage report
-> >>>>>>   Timer summary in microseconds (12 records):
-> >>>>>>          Mark    Elapsed  Stage
-> >>>>>>             0          0  reset
-> >>>>>>         7,436      7,436  board_init_f
-> >>>>>>       164,826    157,390  SPL
-> >>>>>>       375,392    210,566  end phase
-> >>>>>>       423,909     48,517  board_init_r
-> >>>>>>       472,973     49,064  eth_common_init
-> >>>>>>       476,848      3,875  main_loop
-> >>>>>>       477,003        155  cli_loop
-> >>>>>>
-> >>>>>>   Accumulated time:
-> >>>>>>                    7,181  of_live
-> >>>>>>                   14,739  dm_spl
-> >>>>>>                   15,029  dm_r
-> >>>>>>                  315,150  dm_f
-> >>>>>>
-> >>>>>> With this the records can be printed in chronological order when the
-> >>>>>> counter is reset and SPL and board_init_r records show correct elapsed
-> >>>>>> time.
-> >>>>>>
-> >>>>>>   => bootstage report
-> >>>>>>   Timer summary in microseconds (12 records):
-> >>>>>>          Mark    Elapsed  Stage
-> >>>>>>             0          0  reset
-> >>>>>>       164,437    164,437  SPL
-> >>>>>>       375,023    210,586  end phase
-> >>>>>>         7,437      7,437  board_init_f
-> >>>>>>       424,390    416,953  board_init_r
-> >>>>>>       473,515     49,125  eth_common_init
-> >>>>>>       477,402      3,887  main_loop
-> >>>>>>       477,571        169  cli_loop
-> >>>>>>
-> >>>>>>   Accumulated time:
-> >>>>>>                   14,734  dm_spl
-> >>>>>>                  315,646  dm_f
-> >>>>>>                    7,339  of_live
-> >>>>>>                   14,977  dm_r
-> >>>>>>
-> >>>>>> For the tested board external TPL and BROM take ~164 ms to initialize
-> >>>>>> DRAM and load SPL, SPL take ~210ms to load images from FIT and U-Boot
-> >>>>>> proper take ~477ms to reach cli prompt.
-> >>>>>>
-> >>>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> >>>>>> ---
-> >>>>>>  common/bootstage.c | 12 ++----------
-> >>>>>>  1 file changed, 2 insertions(+), 10 deletions(-)
-> >>>>>>
-> >>>>
-> >>>> To put this more strongly, this breaks the timing output on other boards.
-> >>>
-> >>> Please elaborate, I cannot understand why not sorting would break output
-> >>> on other boards, are other boards adding records out of order?
-> >>>
-> >>> Do you have an example of how this change break other boards?
-> >>
-> >> Oh sure. The original reason was that the array was ordered by ID.
-> >> That was changed in [1], which I forgot about.
-> >>
-> >> The other bit is for coreboot (or potentially other prior phases) we
-> >> receive timestamps as a block and add them into U-Boot. We want these
-> >> to appear in the correct order with respect to the ones already adding
-> >> to U-Boot.
-> >>
-> >> Sadly coreboot uses its own toolchain and I seem to have deleted it,
-> >> but once it finishes building the world I will give it a try.
+> > On Wed, 28 Aug 2024 at 14:19, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Wed, Aug 28, 2024 at 10:45:23AM -0600, Simon Glass wrote:
+> > >
+> > > > With Labgrid we don't need to specify the various methods, except for
+> > > > the console, which simply calls labgrid-client.
+> > > >
+> > > > This allows supporting any boards in your lab, without adding per-board
+> > > > configuration to these hooks.
+> > > >
+> > > > Provide ellesmere files as an example.
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > >
+> > > I think maybe we call this version "labgrid-buildman" and make sure the
+> > > documentation emphasizes using buildman to provide U-Boot. This will
+> > > make it easier for me to provide a follow-up of say "labgrid-external"
+> > > that requires the binary to be provided, similar to our other hooks.
 > >
-> > OK I gave up and just built one toolchain instead of every one known
-> > to man, which is the default.
+> > It can be used in this way. The 'ub-pyt -B' does a bootstrap of the
+> > board without doing a build, if that helps to show the path through
+> > the code.
 > >
-> > The code has seriously rotted and is a somewhat fascinating window
-> > into what U-Boot was like 12 years ago...I will send a little series.
+> > If you don't pass --build to test.py then it won't do a build.
 > >
-> > Anyway, the start-romstage and device-xxx things below come from coreboot.
+> > If you like, you can pass --build-dir (and with the testb series
+> > --build-dir-extra) as you do now. The binary will be written to the
+> > board as is.
 >
-> Interesting, so coreboot is not running before U-Boot on this platform,
-> is it running in parallel with U-Boot?
+> Right, but this gets back to what I'm most confused about (and need to
+> talk with Kevin Hillman about maybe, but I missed my last meeting where
+> he was as well), you have a bunch of logic for integration of buildman
+> too, and I have a few wrappers around exiting labgrid-client commands.
+> And I don't know what direction upstream is going to want to take.
 
-It runs before, but U-Boot picks up the timestamps once it is ready to
-do so, i.e. after bootstage is inited.
+Hmm, who is Kevin?
 
->
-> How is timestamp_add_to_bootstage() called in U-Boot, I cannot see any
-> call to it, what am I missing?
+At the moment we are a long way from upstream. I have only one
+reviewed patch and it is pretty trivial. I just updated the stack
+again. I am hoping to meet some of the people in a few weeks, but they
+are pretty tied up on other projects, from my understanding.
 
-Yes, it was deleted. I just sent a series to bring i tback.
+Anyway, we could have a chat about it if you like. So far I'm pretty
+comfortable with the approach taken here. At this point it replaces my
+Labman as well as tbot for my use cases. Without integrated building,
+everything will be a PITA for me.
 
->
-> Guessing the records need to be sorted after/during that function call?
->
-> Also look like the sorting is done in bootstage_report() so the report
-> is possible logged to FDT with an unsorted order.
+I am not sure this much matters on your side though, since you don't
+intend to use the building features here? How exactly are you building
+U-Boot? Is it using the --build option with pytest, or something else?
 
-Yes, although that shouldn't really matter. Perhaps it is worth fixing?
+In the interim, one way of threading the needle would be to have
+test.py get the info from Labgrid using the 'query' and then run in
+the build in pytest. Or, even worse, have a separate yaml file with
+the required info and parse that in pytest and run buildman there...
+but as I say we are a long way from getting this integrated into
+Labgrid, so it is somewhat academic at present.
 
->
-> Let me know what you want me to do with this, I will drop this for now
-> and just keep carry this patch in my local tree.
-
-Hmmm step one is to complain about the bug. If it exists in ATF
-upstream, then it should be fixed. I can have a crack at fixing it if
-so. If it is a vendor binary, then they should fix it.
-
-Step 2, I suggest a Kconfig option enabled for these boards, so it is
-clear it is a workaround.
+My immediate goal is to get all these things merged in U-Boot, so I
+can get my lab running properly with gitlab, etc. and ideally allow
+other custodians to push to it. Getting the integration landed in
+labgrid will likely come a lot later.
 
 Regards,
 Simon
-
-
-> >
-> > => bootstage repo
-> > Timer summary in microseconds (20 records):
-> >        Mark    Elapsed  Stage
-> >           0          0  reset
-> >      25,322     25,322  board_init_f
-> >      32,175      6,853  start-romstage
-> >     117,158     84,983  board_init_r
-> >     208,409     91,251  device-initialize
-> >     293,286     84,877  device-done
-> >     547,606    254,320  selfboot-jump
-> >     621,050     73,444  eth_common_init
-> >     699,570     78,520  eth_initialize
-> >     744,210     44,640  main_loop
-> >     761,030     16,820  usb_start
-> >   3,988,265  3,227,235  netboot_common
-> >   3,988,330         65  eth_start
-> >   6,316,294  2,327,964  bootp_start
-> >  12,286,385  5,970,091  bootp_stop
-> >  12,297,353     10,968  netboot_common
-> >  12,300,596      3,243  netboot_common
-> >  28,327,263 16,026,667  cli_loop
-> >
-> > Accumulated time:
-> >                  8,600  dm_r
-> >                  8,659  dm_f
-> >
-> > Without the sort, I see:
-> >
-> > Timer summary in microseconds (18 records):
-> >        Mark    Elapsed  Stage
-> >           0          0  reset
-> >      36,582     36,582  board_init_f
-> >     125,775     89,193  board_init_r
-> >     642,577    516,802  eth_common_init
-> >     721,321     78,744  eth_initialize
-> >      31,357429,427,733,2  start-romstage
-> >     247,602    216,245  device-initialize
-> >     333,879     86,277  device-done
-> >     596,043    262,164  selfboot-jump
-> >     765,897    169,854  main_loop
-> >     783,397     17,500  usb_start
-> >   4,043,423  3,260,026  netboot_common
-> >   4,043,489         66  eth_start
-> >   6,371,702  2,328,213  bootp_start
-> >  11,609,247  5,237,545  netboot_common
-> >  15,476,116  3,866,869  cli_loop
-> >
-> > Accumulated time:
-> >                  8,639  dm_f
-> >                  8,923  dm_r
-> >
-> >>
-> >>>
-> >>>>
-> >>>> At the very least, this should be Kconfig option just enabled for
-> >>>> boards with a broken ATF.
-> >>>
-> >>> I can add a Kconfig option, but would like to understand why other/any
-> >>> board would need to sort the records in the first place.
-> >>
-> >> OK.
-> >
-> > Regards,
-> > Simon
-> >
-> >>
-> >> [1] 03ecac31498 bootstage: Use rec_count as the array index
->
