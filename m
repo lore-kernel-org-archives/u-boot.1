@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B725C7113C
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 22:11:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B57BAC7114C
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 22:12:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DDCA88A43;
+	by phobos.denx.de (Postfix) with ESMTP id C79B288B08;
 	Thu, 29 Aug 2024 00:09:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Vv+5T1UG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lEZWj+7R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C943A86462; Thu, 29 Aug 2024 00:09:07 +0200 (CEST)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id D6DF588B08; Thu, 29 Aug 2024 00:09:10 +0200 (CEST)
+Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
+ [IPv6:2607:f8b0:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77F92889ED
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:09:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4361888A25
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:09:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-39f392161e4so710955ab.3
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 15:09:02 -0700 (PDT)
+Received: by mail-il1-x12e.google.com with SMTP id
+ e9e14a558f8ab-39e6a32ae15so6690705ab.3
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 15:09:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724882941; x=1725487741; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724882942; x=1725487742; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pfHvQjnrcJc3eOvMFNi6sUUiuQUedBvy9QZ/zE1OGoo=;
- b=Vv+5T1UGA+9+vLxDK0rEykHuH5GG3Suh31RFtr6Xpnc9H78A2tLG1E6d2YikI8SC1T
- neh7DQFvDZ2l//en4suHRH10EzACr2bo3eC7cAjEJJT6wqY9c6gDreSqe0GxtCcvi9/v
- U9h3rIsT/jJIlY2g2tLDEcilyr0m5PI5eHpuI=
+ bh=P3HVmecpAcWUSprJ1UET/bULvC4KM3/4jLbvghsozKM=;
+ b=lEZWj+7RBL61q0zKTdtjZ1IXXnj84uHMA68oN3UPCSrNsbwlW12xM+maa/weoxB0xC
+ /mMk+q+kxbd8dQtFSCpd7oF1nUXuhSG7rQ66lGm+tSQKBm7je5MyaxXnJ7ZSOhOveq0p
+ 57dZtP3mpz7TYLS6mwWBv0YB3DVJkeNmxqE1I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724882941; x=1725487741;
+ d=1e100.net; s=20230601; t=1724882942; x=1725487742;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pfHvQjnrcJc3eOvMFNi6sUUiuQUedBvy9QZ/zE1OGoo=;
- b=RJOWkbbNN2Rza6Q8vmE/ODhnAz8f4X8s9E3lGvoC81iCWFiVaFDrpjew5u1KtAbwBy
- DVDOz/YjuxLYVZ6aChxNm8uJ9xVaWA1n/3KTiw+6bqBbj2eaJ57CBCDqkCWAod3wV83N
- 1LCCosKdtFHmcfsvXEBGdJYXSImvTbJ+BucHVoQ+RVNFw1mkEgPyRsUBLCl1VE1W82pM
- Eb03T+xF5A5cUIDw4Imw+cyo/kiylHb23TWatgnWhY6+KzT+NvXsbO4Hdf1qKKFwo7Fz
- wtONzPO0Q3rIL8ae3LCWcsONoeIoNaaQlmOwE0vZo9pNkKWCM2xWDZeIeCl2mYYYzVp0
- e7jA==
-X-Gm-Message-State: AOJu0Yxf6g3accMhRTw4KPCcYRwrikSv9Lr6qx985mB1HmPeWataW1a8
- haE/rugS3BbVQb2jD9LS6z4PCYH+m2Hj9PvWJi5hD0nc7V+UO1/rDGzThZxGoA/zzOP4y1z0NNs
+ bh=P3HVmecpAcWUSprJ1UET/bULvC4KM3/4jLbvghsozKM=;
+ b=WplcAoR+XqFVd1THSWd0ZdzU9IUh0gQL3wftckEK4R5duDz0PdY2W3kxIRsXfD5ni2
+ a4Fgu/8ttoGUQJtU9rTd/kosoY60jSGqjRtxSerkMEhEAK87n54MAHOplAJTqUi9IjOs
+ tHLVF6nZc2RkG2/b3x3xCk85bxP4uw0bv6TjeUXs7v7Xz31R86nZfqQRe/DdboYxQ2PF
+ gCoDbax99FAdN0wzgkB+Q7zMFVEy//obw8E69Wi2gMMKrGUb7LSTQQ3hxrvQtoM6wcNi
+ uhbJtJm1TLcnVniQfIp7D0wfqjw1S8ob9mxmT9in5aKv+4JlsYjfXHf9aqwFBl3ncZV9
+ ld2w==
+X-Gm-Message-State: AOJu0Yxi/JwvS+DTs9cfzTugV51at6bW1Jne5DIyqSYNxg4XzuAm4oac
+ MvCJDRz9wDrWbO1Ldx7PMMiRGgMiZvkg4/utwYf+mdllscObKfvmpFIZCdT2wMtf77MFsosF8gM
  =
-X-Google-Smtp-Source: AGHT+IGhunZoQL1P5u1uMGDMPAa3r/kFG+NBNjX5r2q/lj7sCoi8bLjh/sCbHIy53NL/IlHPJsNstw==
-X-Received: by 2002:a05:6e02:1b03:b0:39b:ddc:f079 with SMTP id
- e9e14a558f8ab-39f3780c5e8mr15623655ab.13.1724882941134; 
+X-Google-Smtp-Source: AGHT+IFvVfdkp4UlQxkUJ6IqIJgdLPz7BD4aSt4ORrqf8azHdiyL/0IR7vfDPunaUpiUGJpnvjSwlQ==
+X-Received: by 2002:a05:6e02:17cc:b0:39b:3c0c:c3a6 with SMTP id
+ e9e14a558f8ab-39f3784c70dmr12300695ab.22.1724882941818; 
  Wed, 28 Aug 2024 15:09:01 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39f38e683c1sm838105ab.19.2024.08.28.15.09.00
+ e9e14a558f8ab-39f38e683c1sm838105ab.19.2024.08.28.15.09.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Aug 2024 15:09:00 -0700 (PDT)
+ Wed, 28 Aug 2024 15:09:01 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v5 14/20] test: Improve handling of sending commands
-Date: Wed, 28 Aug 2024 16:08:40 -0600
-Message-Id: <20240828220846.1205813-15-sjg@chromium.org>
+Subject: [PATCH v5 15/20] test: Fix mulptiplex_log typo
+Date: Wed, 28 Aug 2024 16:08:41 -0600
+Message-Id: <20240828220846.1205813-16-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240828220846.1205813-1-sjg@chromium.org>
 References: <20240828220846.1205813-1-sjg@chromium.org>
@@ -89,76 +89,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We expect commands to be echoed and this should happen quite quickly,
-since U-Boot is sitting at the prompt waiting for a command.
-
-Reduce the timeout for this situation. Try to produce a more useful
-error message when something goes wrong. Also handle the case where the
-connection has gone away since the last command was issued.
+Fix a typo in a comment.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/py/u_boot_console_base.py | 35 ++++++++++++++++++++--------------
- 1 file changed, 21 insertions(+), 14 deletions(-)
+ test/py/u_boot_console_base.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/test/py/u_boot_console_base.py b/test/py/u_boot_console_base.py
-index bcba68f0aac..e2e78179555 100644
+index e2e78179555..f610fa9a6f8 100644
 --- a/test/py/u_boot_console_base.py
 +++ b/test/py/u_boot_console_base.py
-@@ -31,6 +31,7 @@ PAT_RE = 1
+@@ -123,7 +123,7 @@ class ConsoleBase(object):
+         Can only usefully be called by sub-classes.
  
- # Timeout before expecting the console to be ready (in milliseconds)
- TIMEOUT_MS = 30000                  # Standard timeout
-+TIMEOUT_CMD_MS = 10000              # Command-echo timeout
- 
- # Timeout for board preparation in lab mode. This needs to be enough to build
- # U-Boot, write it to the board and then boot the board. Since this process is
-@@ -300,22 +301,28 @@ class ConsoleBase(object):
- 
-         try:
-             self.at_prompt = False
-+            if not self.p:
-+                raise BootFail(
-+                    f"Lab failure: Connection lost when sending command '{cmd}'")
-+
-             if send_nl:
-                 cmd += '\n'
--            while cmd:
--                # Limit max outstanding data, so UART FIFOs don't overflow
--                chunk = cmd[:self.max_fifo_fill]
--                cmd = cmd[self.max_fifo_fill:]
--                self.p.send(chunk)
--                if not wait_for_echo:
--                    continue
--                chunk = re.escape(chunk)
--                chunk = chunk.replace('\\\n', '[\r\n]')
--                m = self.p.expect([chunk] + self.bad_patterns)
--                if m != 0:
--                    self.at_prompt = False
--                    raise BootFail('Bad pattern found on console: ' +
--                                    self.bad_pattern_ids[m - 1])
-+            rem = cmd  # Remaining to be sent
-+            with self.temporary_timeout(TIMEOUT_CMD_MS):
-+                while rem:
-+                    # Limit max outstanding data, so UART FIFOs don't overflow
-+                    chunk = rem[:self.max_fifo_fill]
-+                    rem = rem[self.max_fifo_fill:]
-+                    self.p.send(chunk)
-+                    if not wait_for_echo:
-+                        continue
-+                    chunk = re.escape(chunk)
-+                    chunk = chunk.replace('\\\n', '[\r\n]')
-+                    m = self.p.expect([chunk] + self.bad_patterns)
-+                    if m != 0:
-+                        self.at_prompt = False
-+                        raise BootFail(f"Failed to get echo on console (cmd '{cmd}':rem '{rem}'): " +
-+                                        self.bad_pattern_ids[m - 1])
-             if not wait_for_prompt:
-                 return
-             if wait_for_reboot:
+         Args:
+-            log: A mulptiplex_log.Logfile object, to which the U-Boot output
++            log: A multiplexed_log.Logfile object, to which the U-Boot output
+                 will be logged.
+             config: A configuration data structure, as built by conftest.py.
+             max_fifo_fill: The maximum number of characters to send to U-Boot
 -- 
 2.34.1
 
