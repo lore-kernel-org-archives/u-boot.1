@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 808D4C7114C
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 22:28:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EA94C7114C
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 22:56:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D381F88381;
-	Thu, 29 Aug 2024 00:28:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 8C350886F9;
+	Thu, 29 Aug 2024 00:56:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FAhOO+uO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l33qmBa2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 268DE8862E; Thu, 29 Aug 2024 00:28:01 +0200 (CEST)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id AA3E486E61; Thu, 29 Aug 2024 00:56:16 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC23387E64
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:27:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C179888C2
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:56:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-7a1dcba8142so89762385a.0
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 15:27:58 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6bf9db9740aso227846d6.2
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 15:56:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724884078; x=1725488878; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EKaYZWRmpXzI0G72f7BD3P88yPxT5PxoYiWAv/uvlXA=;
- b=FAhOO+uOU3FKJejDW+W5DWVqEZeW4+KCyUoOGCN9OjQoDLLP/XrJS9oNJTmcShYy0V
- X6DoHrfKZ7iAmo9iuqbHSZua7PzfhrG1CYwNqyY/F7om22jYrmhqd39kc0c1jZ4nWVm9
- ePJoTw1Kna+mdFW7NSZQ4xBW0LmtshzP7REAw=
+ d=konsulko.com; s=google; t=1724885773; x=1725490573; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3xNTeMJWuP2ZrHUr1Xvtf0D4CVv+dfpsduLt8MdCmFw=;
+ b=l33qmBa2ubU9efCMD21RVPTZeoAFbbijbRZTv6zLOssc2kSI6nL+3NcFFwe5rfSakL
+ tGd3dlj4QjgdWHsuQlySUfgQBiZKVV3aPhD/50pLsqXfxDI9OtjhTi9t7q/1H8Kn7oV9
+ DUZUO2lGVuSeh3y+lLw3ZIwaf+Osay9nWC04w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724884078; x=1725488878;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1724885773; x=1725490573;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=EKaYZWRmpXzI0G72f7BD3P88yPxT5PxoYiWAv/uvlXA=;
- b=idVfcmT/428HFAKd1s6qu0YQtYJAn55MJVbNHb68oaw2Oi+kF7nm/EkqqBfULPnIZf
- D68bQ/HgjwCZm/LUWrT7ClasU2+FEH+TDRjeQwMjgtOqzMDBebiLiGMhTO/1KoKKpOVP
- iA0nv9Pt3QXcZW5+5ClJeRe9cpc1JdpPnk9UGeBZejF3R3Kws52AWpY4ER44buyz4laG
- MeIEjVkEguOpPrJLNzt2FzOsr4c4jQ+VgEFyqeVVU8Cr8xmbIiFUx3xXCR4iSJ9fYvD0
- oPxo2LFnju96stNFKX1gvEptw9BD1QuxbSPQdfyEVhg6NyQ1zPbpAR7ZzybpA0xP3EyA
- aUZQ==
-X-Gm-Message-State: AOJu0Yzmb/u/lgAwNGzLK1GIccnMfPBYMVEX/iMPlIlsT+6+Zfv4qVo7
- rHDbKAzNHNQ+rd89S4LcuqfHr27o4pZGt0EHfQDDIaQTiXeGwhl9aWkcM6YG1AEuzVTCeG07wPp
- o8ckGXOVv4B6NYqqCxstFZ+M3jPOVqUy5F0q+IkiCUxBoV58=
-X-Google-Smtp-Source: AGHT+IGpwKEzqsaEPbAAuN51maDjGwgtTBrYJI+/flHH4Up23DInc7cj74zd2032p3035GPV4M/VcDz1xT4Zpg7OLng=
-X-Received: by 2002:a05:6214:4203:b0:6af:33ed:87de with SMTP id
- 6a1803df08f44-6c33f37dc39mr11812026d6.20.1724884077799; Wed, 28 Aug 2024
- 15:27:57 -0700 (PDT)
+ bh=3xNTeMJWuP2ZrHUr1Xvtf0D4CVv+dfpsduLt8MdCmFw=;
+ b=ucuackwOm6F9u3/qf8rdmMPpiSCdZErsEd+47LJ4QyoWMqB5yRJy2ys5GgxqhSLSUO
+ 7wrs0Wgy+hMKgc4y8hpVjrCcFi764Y4NvYFRURqTaqTyuFOnP6aXHmtszbi25qlo6AoF
+ qHIs0LDcJhbb2xKcV+jcbNKX7WRwmjq7hmhK89TeWRHyrVQrOblf1S6H8rNla/KcmpP+
+ bMeeZZ+L3QPFt6G8xnFPHpUmqQdIXFtL3zHIu2uDzw/1zJgk861w24eA7ybr+9ZVl8PB
+ N1m32XvJAF8tB891zwf2a78vsHFS2foAQC8rePaQshMIPS6cEw5UxOrA2LLntYcYJbGv
+ 5Dxg==
+X-Gm-Message-State: AOJu0YzWXu7dZHQPVLrYszb41RMekmM02Lm9tpFApx7a880JLPmu5tG4
+ ZWVkKriXJZcix7O3LL1NkokdKK85XpuJLIAbvffbqPMtjJgHjmTh75kWwUlUbmVUPcXUCg6Wf1C
+ x
+X-Google-Smtp-Source: AGHT+IG6mYJLpb3VB/N50USfoJX+GYWL/t2mGfn+VYp2lvtILVpvR3hNiNOSuIkb4S7G1D44B/waqg==
+X-Received: by 2002:a05:6214:4a8b:b0:6c1:6acc:767e with SMTP id
+ 6a1803df08f44-6c33e626d27mr13697296d6.14.1724885773373; 
+ Wed, 28 Aug 2024 15:56:13 -0700 (PDT)
+Received: from bill-the-cat.tail58a08.ts.net ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6c340c41e42sm216806d6.65.2024.08.28.15.56.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 28 Aug 2024 15:56:13 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Love Kumar <love.kumar@amd.com>, Michal Simek <michal.simek@amd.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH] test/py/tests/test_bootstage.py: Combine stash/unstash tests
+Date: Wed, 28 Aug 2024 16:56:10 -0600
+Message-Id: <20240828225610.3081635-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240828164523.125770-1-sjg@chromium.org>
- <20240828164523.125770-4-sjg@chromium.org>
- <20240828201912.GV2479150@bill-the-cat>
- <CAFLszTjzH9kiM3SEzfjfhCWMCMnLLeBy1UipH9kW0-z3s-1xxA@mail.gmail.com>
- <20240828213345.GW2479150@bill-the-cat>
-In-Reply-To: <20240828213345.GW2479150@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 28 Aug 2024 16:27:47 -0600
-Message-ID: <CAFLszTjG1ySeXpWD60aNEX5Te0nRKC53EXP5L1AoG+kXqFe8Ew@mail.gmail.com>
-Subject: Re: [u-boot-test-hooks PATCH v4 3/3] Provide some basic scripts for
- Labgrid integration
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,75 +87,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+When running the bootstage tests currently we get a warning like:
+tests/test_bootstage.py::test_bootstage_stash
+...PytestReturnNotNoneWarning: Expected None, but tests/test_bootstage.py::test_bootstage_stash returned (37748736, 4096), which will be an error in a future version of pytest.  Did you mean to use `assert` in stead of `return`?
 
-On Wed, 28 Aug 2024 at 15:33, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Aug 28, 2024 at 03:25:00PM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Wed, 28 Aug 2024 at 14:19, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Wed, Aug 28, 2024 at 10:45:23AM -0600, Simon Glass wrote:
-> > >
-> > > > With Labgrid we don't need to specify the various methods, except for
-> > > > the console, which simply calls labgrid-client.
-> > > >
-> > > > This allows supporting any boards in your lab, without adding per-board
-> > > > configuration to these hooks.
-> > > >
-> > > > Provide ellesmere files as an example.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > >
-> > > I think maybe we call this version "labgrid-buildman" and make sure the
-> > > documentation emphasizes using buildman to provide U-Boot. This will
-> > > make it easier for me to provide a follow-up of say "labgrid-external"
-> > > that requires the binary to be provided, similar to our other hooks.
-> >
-> > It can be used in this way. The 'ub-pyt -B' does a bootstrap of the
-> > board without doing a build, if that helps to show the path through
-> > the code.
-> >
-> > If you don't pass --build to test.py then it won't do a build.
-> >
-> > If you like, you can pass --build-dir (and with the testb series
-> > --build-dir-extra) as you do now. The binary will be written to the
-> > board as is.
->
-> Right, but this gets back to what I'm most confused about (and need to
-> talk with Kevin Hillman about maybe, but I missed my last meeting where
-> he was as well), you have a bunch of logic for integration of buildman
-> too, and I have a few wrappers around exiting labgrid-client commands.
-> And I don't know what direction upstream is going to want to take.
+This is because the unstash test will run the stash test and fetch the
+addr / size from that. Rework the test to be stash and unstash and then
+run the unstash command at the end of the current stash test.
 
-Hmm, who is Kevin?
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+It's possible we could solve this instead by getting addr / size again
+from our environment file, and then also noting that order-wise the
+unstash test follows the stash test. However, this felt more clean to
+me.
 
-At the moment we are a long way from upstream. I have only one
-reviewed patch and it is pretty trivial. I just updated the stack
-again. I am hoping to meet some of the people in a few weeks, but they
-are pretty tied up on other projects, from my understanding.
+Cc: Love Kumar <love.kumar@amd.com>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Simon Glass <sjg@chromium.org>
+---
+ test/py/tests/test_bootstage.py | 9 ++-------
+ 1 file changed, 2 insertions(+), 7 deletions(-)
 
-Anyway, we could have a chat about it if you like. So far I'm pretty
-comfortable with the approach taken here. At this point it replaces my
-Labman as well as tbot for my use cases. Without integrated building,
-everything will be a PITA for me.
+diff --git a/test/py/tests/test_bootstage.py b/test/py/tests/test_bootstage.py
+index a9eb9f0b4a11..bd71a1af3a25 100644
+--- a/test/py/tests/test_bootstage.py
++++ b/test/py/tests/test_bootstage.py
+@@ -33,7 +33,7 @@ def test_bootstage_report(u_boot_console):
+ @pytest.mark.buildconfigspec('bootstage')
+ @pytest.mark.buildconfigspec('cmd_bootstage')
+ @pytest.mark.buildconfigspec('bootstage_stash')
+-def test_bootstage_stash(u_boot_console):
++def test_bootstage_stash_and_unstash(u_boot_console):
+     f = u_boot_console.config.env.get('env__bootstage_cmd_file', None)
+     if not f:
+         pytest.skip('No bootstage environment file is defined')
+@@ -55,13 +55,8 @@ def test_bootstage_stash(u_boot_console):
+     # Check expected string in last column of output
+     output_last_col = ''.join([i.split()[-1] for i in output.split('\n')])
+     assert expected_text in output_last_col
+-    return addr, size
+ 
+-@pytest.mark.buildconfigspec('bootstage')
+-@pytest.mark.buildconfigspec('cmd_bootstage')
+-@pytest.mark.buildconfigspec('bootstage_stash')
+-def test_bootstage_unstash(u_boot_console):
+-    addr, size = test_bootstage_stash(u_boot_console)
++    # Check that unstash works as expected
+     u_boot_console.run_command('bootstage unstash %x %x' % (addr, size))
+     output = u_boot_console.run_command('echo $?')
+     assert output.endswith('0')
+-- 
+2.34.1
 
-I am not sure this much matters on your side though, since you don't
-intend to use the building features here? How exactly are you building
-U-Boot? Is it using the --build option with pytest, or something else?
-
-In the interim, one way of threading the needle would be to have
-test.py get the info from Labgrid using the 'query' and then run in
-the build in pytest. Or, even worse, have a separate yaml file with
-the required info and parse that in pytest and run buildman there...
-but as I say we are a long way from getting this integrated into
-Labgrid, so it is somewhat academic at present.
-
-My immediate goal is to get all these things merged in U-Boot, so I
-can get my lab running properly with gitlab, etc. and ideally allow
-other custodians to push to it. Getting the integration landed in
-labgrid will likely come a lot later.
-
-Regards,
-Simon
