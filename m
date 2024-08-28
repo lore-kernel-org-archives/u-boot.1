@@ -4,77 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D13EC71121
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 20:19:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9F41C7113C
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 21:25:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68096886E5;
-	Wed, 28 Aug 2024 22:19:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C0BEB888D4;
+	Wed, 28 Aug 2024 23:25:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sYdS/jMF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TOwDC2Bw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8B32885C5; Wed, 28 Aug 2024 22:19:18 +0200 (CEST)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
+ id D3BC38855C; Wed, 28 Aug 2024 23:25:11 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9819C879C1
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 22:19:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BD45D885C5
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 23:25:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-7a337501630so456124485a.3
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 13:19:16 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6c331543ef0so10862826d6.1
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 14:25:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724876355; x=1725481155; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=u5SqORkgsJp1g+V/G6fWpyentIHvyB3kWiMVU3t+Owo=;
- b=sYdS/jMFDMsUo1ME9BVE3y5yOdLYLDFpzGRtSowe2M+E84xOmi/6awIMs+yzJyW8mx
- Njb190h7H9T3TuoaZhdMCaO+Dz7PzN2MBlZfBCF3eyRFY1zDIz0u3hzUfR8eDvlMqlFU
- NqnNe7ElMZcoYbeOLbYAVRnPGqn8S5Vfk83is=
+ d=chromium.org; s=google; t=1724880308; x=1725485108; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=+WdvCXYzp4QDy2ieaLlh1rQ9EokK08w7zTayoDmSTRU=;
+ b=TOwDC2BwA1PdTh1cYdONZMIvUEG5Qx0zWWJQaPBJHxknZH418W6eyvE5E1GH0VXZG5
+ pTWxK7833PJEflii7Ilf7amGRdQ1eah82A0nNBCug3QtMpSx5MDmulrAcmXwyzpyUNda
+ f3itXER5Eb03arTtdMPFKYIfzAKnz0nq+ocag=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724876355; x=1725481155;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=u5SqORkgsJp1g+V/G6fWpyentIHvyB3kWiMVU3t+Owo=;
- b=ofcPSzH3wtEr8cAf1rjXr/qqNWyJ3iAXu23dzLZoCbRZCf7Xi8poTBR+FtcZiuU/kJ
- +hNtXyr+V3sxk5C6eHXWe45DX8faCkD3/Dr5xmmo5biBujt6ADV+lAUNOnPyAu7YMSpx
- CqAXLKZzD7gGKnqQOj/yNQsSNC3rvH8x0cV5njOCtLWCKqdsq1ifUhxj5AzrM66ommVM
- QhOKzIyDK/TdRf994afqBCeefwLnG7TaX6vbPA2Px0APS4hgW/NdXFt/Zs8UU2kQFUWn
- HzQpXsFK/21XoCu1k9lvwkVHAEZ1IJKFceLnSiDYqbPk0Lm1+CyN+k61xKEjmIjbbOrN
- ffbQ==
-X-Gm-Message-State: AOJu0YyGpXUTDULuXu6C9xW2vZfVbcqPtOokvuakR8avb+0pS86Jm5z8
- OZnbBy/Za7sbWV4jbhG5QZRuIuly4hArF8tpKtZQjk74tF7mThpuqhipv0aLi4w=
-X-Google-Smtp-Source: AGHT+IHyUJqfdtIK5uG+7NlQq3BVWphTm/lnIxg/j0dHiR5NHMjE40zzHgPLIg7n+d3gbhk+DDti8A==
-X-Received: by 2002:a05:620a:46ab:b0:7a3:51ed:38b0 with SMTP id
- af79cd13be357-7a8041838afmr68674985a.13.1724876355274; 
- Wed, 28 Aug 2024 13:19:15 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a67f3fc894sm664674685a.113.2024.08.28.13.19.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Aug 2024 13:19:14 -0700 (PDT)
-Date: Wed, 28 Aug 2024 14:19:12 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [u-boot-test-hooks PATCH v4 3/3] Provide some basic scripts for
- Labgrid integration
-Message-ID: <20240828201912.GV2479150@bill-the-cat>
+ d=1e100.net; s=20230601; t=1724880308; x=1725485108;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+WdvCXYzp4QDy2ieaLlh1rQ9EokK08w7zTayoDmSTRU=;
+ b=Xw/c9T+DzWx6qinWNcWx66R/jtnMIG8jaD39t0bt7B6fsPv3MwUVe7cn3o6MdazwqP
+ AqbKMSVOyBZPGBJCfGhbNPZ5AzSyfGtslr46HlaTfuz0CEJZUOSvcYe+BFdLjzuCzZ2E
+ /hcHuM4m285hVUaX3HvkzptgcjVyprrus2dqOU7/pqh/o8pBDrQJ/ywowZHQ0XzoOlXA
+ 4Qdg1s6OhiqhV63zb0Bf88F5OC7UEOp038NMoIojtEMDBhP7HTEDiEdXsuZoPxveudp5
+ JYM4vGLlMndUbufmuu8Ay8/UtZxbZYafMfZQxlMgA/rUZZ8iH5qq+//1rUEY93Ouf5Wl
+ caDw==
+X-Gm-Message-State: AOJu0Yy/sAPBFfyIGdHgG2Lf9LcOdWeljFUKkETxTbn/2CPhFm/VW3H1
+ M/sLm7tW5dMZJeZC1G/eyU8NDYfxFVTndYOu+8bf3Vck36lFaUvTDmSklEVeTdMQ3W1oXuu7vmj
+ EamYd7O7Imyx/ahy2gb52AxovTdi1GYVVZ/Jg
+X-Google-Smtp-Source: AGHT+IEBdSzQcEeE8zHw33/X4PTguybJvLdem4DQj/NDzOoapse5U39j/eO68l3/kYLwB/IF53MSG4uBljo2eE8yf4g=
+X-Received: by 2002:a05:6214:3b84:b0:6bf:5d95:1f31 with SMTP id
+ 6a1803df08f44-6c33e623041mr9271706d6.19.1724880308564; Wed, 28 Aug 2024
+ 14:25:08 -0700 (PDT)
+MIME-Version: 1.0
 References: <20240828164523.125770-1-sjg@chromium.org>
  <20240828164523.125770-4-sjg@chromium.org>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="DnL31iSdubakvSVz"
-Content-Disposition: inline
-In-Reply-To: <20240828164523.125770-4-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+ <CALeDE9Ptr0Ln4H24yMqxuw1+E_Wt5qBGdQabUH54PaYUTPf9Yg@mail.gmail.com>
+In-Reply-To: <CALeDE9Ptr0Ln4H24yMqxuw1+E_Wt5qBGdQabUH54PaYUTPf9Yg@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 28 Aug 2024 15:24:57 -0600
+Message-ID: <CAFLszThK_t5EwL28vnzmSp5UZQrSEpBRsaXhnNudMQRe8-7Ejw@mail.gmail.com>
+Subject: Re: [u-boot-test-hooks PATCH v4 3/3] Provide some basic scripts for
+ Labgrid integration
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,53 +84,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Peter,
 
---DnL31iSdubakvSVz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, 28 Aug 2024 at 12:14, Peter Robinson <pbrobinson@gmail.com> wrote:
+>
+> Hi Simon,
+>
+> > With Labgrid we don't need to specify the various methods, except for
+> > the console, which simply calls labgrid-client.
+> >
+> > This allows supporting any boards in your lab, without adding per-board
+> > configuration to these hooks.
+> >
+> > Provide ellesmere files as an example.
+>
+> What's ellesmere?
 
-On Wed, Aug 28, 2024 at 10:45:23AM -0600, Simon Glass wrote:
+It is a lake but also the name of a computer.
 
-> With Labgrid we don't need to specify the various methods, except for
-> the console, which simply calls labgrid-client.
->=20
-> This allows supporting any boards in your lab, without adding per-board
-> configuration to these hooks.
->=20
-> Provide ellesmere files as an example.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+>
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > Changes in v4:
+> > - Support pytest fully with dual-build boards like Beagleplay
+> >
+> > Changes in v3:
+> > - Update scripts for latest version of Labgrid integration
+> > - Add poweroff.none and poweron.none
+> > - Provide -n flag when querying board info
+> > - Target the grpc version of Labgrid which is now in -master
+> > - Update README to cover the changes
+> >
+> > Changes in v2:
+> > - Make use of the common script (only) to set bin_dir
+> >
+> >  README.md                    | 50 ++++++++++++++++++++++++++++++++++++
+>
+> Maybe that should be in a separate labsgrid readme?
 
-I think maybe we call this version "labgrid-buildman" and make sure the
-documentation emphasizes using buildman to provide U-Boot. This will
-make it easier for me to provide a follow-up of say "labgrid-external"
-that requires the binary to be provided, similar to our other hooks.
+My hope is that Labgrid becomes the normal way of running these tests,
+so having it in the main place (and perhaps eventually removing the
+old way) is my goal.
 
-My thinking is that while it would be good to be able to expose labs to
-CI, and I would like to get mine showing up as well it's also important
-that I be able to keep doing the type I do where I extend the normal
-defconfig with additional features to test.
+>
+> >  bin/console.labgrid          | 42 ++++++++++++++++++++++++++++++
+> >  bin/ellesmere/common-labgrid | 46 +++++++++++++++++++++++++++++++++
+> >  bin/ellesmere/conf.all       | 24 +++++++++++++++++
+> >  bin/getrole.labgrid          | 25 ++++++++++++++++++
+> >  bin/release.labgrid          | 22 ++++++++++++++++
+> >  bin/release.none             | 22 ++++++++++++++++
+> >  bin/u-boot-test-getrole      | 38 +++++++++++++++++++++++++++
+> >  bin/u-boot-test-release      | 26 +++++++++++++++++++
+> >  9 files changed, 295 insertions(+)
+> >  create mode 100644 bin/console.labgrid
+> >  create mode 100755 bin/ellesmere/common-labgrid
+> >  create mode 100644 bin/ellesmere/conf.all
+> >  create mode 100644 bin/getrole.labgrid
+> >  create mode 100644 bin/release.labgrid
+> >  create mode 100644 bin/release.none
+> >  create mode 100755 bin/u-boot-test-getrole
+> >  create mode 100755 bin/u-boot-test-release
+> >
 
---=20
-Tom
+[..]
 
---DnL31iSdubakvSVz
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbPhjwACgkQFHw5/5Y0
-tyyIWgv+N0XXUlO5WIFJtas12Pj8HNVimaibvReEqS6NVLD+qjy2cj2U8L7mcgPY
-Fz7EMJkqMp7pXNcamQBrDZry01XupaL/bSEconAb0dHJiwVu8gkLbLyO+R41FDeK
-lElGuC2k3l/v7CAKDHFS9J3nsrwUo8tZmMsySeAIDmne1L8dRK3groALcPOGlkWD
-JR12s2bAiVwhMzRDSUVDHsfI0Z+lTNIjAXbFNiPRpqRSlVOJuByker1WqsXyJcP5
-Sars1HhY88pdlx/fbx+qS0lWBaGuQAMY3oPC5J2l3nC8XrZefmuqgMvJIGB1/RVS
-jw8TS7NnAXdXKOMLgER43Eq2qcf7l0vb4lYEcATmoDuU8DzWS6FxqWWarFnHlBRJ
-4YWY1zpBSwJC7CgCnj9yyXO+Prq/LVnbZKi7YKO5Og17NumUHxsJS9Fm2SSqaO8X
-DyhCW4zffu9VnEBRFpDR33v8LHrrn7Cu/qZ0vUmzGlNEwOjo4PApqceU7WrqSH6Q
-nTz2udg4
-=AEi4
------END PGP SIGNATURE-----
-
---DnL31iSdubakvSVz--
+Regards,
+Simon
