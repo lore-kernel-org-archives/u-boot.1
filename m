@@ -4,79 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3B43C54749
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 01:54:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31A37C5474A
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 02:13:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B46D88875;
-	Wed, 28 Aug 2024 03:54:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9447F87FED;
+	Wed, 28 Aug 2024 04:13:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=email.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YdF0FrA7";
+	dkim=pass (2048-bit key; secure) header.d=email.cz header.i=@email.cz header.b="Ag1S69AU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5095C88AD7; Wed, 28 Aug 2024 03:54:49 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3DC0788A8E; Wed, 28 Aug 2024 04:13:49 +0200 (CEST)
+Received: from mxe-1-afc.seznam.cz (mxe-1-afc.seznam.cz
+ [IPv6:2a02:598:128:8a00::1000:afc])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BAF688800
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 03:54:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EA8887FA7
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 04:13:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=email.cz
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2f3fea6a0a9so1181381fa.0
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 18:54:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724810086; x=1725414886; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2nMBslhjtHzbxwaNrIuUzlyTPFXwOHCsDBZ2n7Krp6A=;
- b=YdF0FrA7l74bi8l15vbZzRbq0GX7k2OYGpLyZL//ZmVVyrQfOpDbbs+WcpkH1Ll0M8
- u7P7iQAjGojd1nDknBTXzaqLnI/tQc07BZKgri9/iLYjUAwQP+leeZSFB8IzyzPCqEsn
- +FKoFyaPdGdRSVGXtvWAGs1zlancwpVejn5Ebo8UIBKrwpxgFMFvqGPVehC/yV+BGaJZ
- fPsiQyz0H5CWBoOY7CjwCZrvZiT9kXEE7rmbW8c8fLjtmSZerA3ytpBDby505pf4oNlK
- E9zBmit+hzwTzshGYX+7NGQV8SqVXZCE2ipkvyqUhZ97K7GnHtQ6p8RdBvJMwiEdGVth
- Ghvg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724810086; x=1725414886;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2nMBslhjtHzbxwaNrIuUzlyTPFXwOHCsDBZ2n7Krp6A=;
- b=TT0LFH7eUsydse3YPcsxKZUpSEueXqJVnnsinbYSFf5awWpo3cJsmbAEwHtEITXZyD
- fa+S47/mmw+ZdYqnXH/svokQWjEg/PaGBJM4Dtt3EBeJti74Dl/uvbYMX9thDmkKxXbr
- pGxTFJl9yKCRf1IoAzFGvxCy8Efi80GFh6NhHt2UWXb9l+Lb8AcFIj2rGS91m1Btv8dT
- jxtbdiHv/yFJI1SVMnBe2pWUPTkAxsCmH+LrfmqIycjenDwXKNAVnwXIDVFm39oansR/
- SKSNxqRjeYRmEa6WTbzoq0AZ55mIF5082wUarR1BDLYPCflzdxWWGDMz+vUUmy9MmCRD
- Vk1Q==
-X-Gm-Message-State: AOJu0Yztv/pxwzDSC4Pk/E9O6+gk5xu65oaVCfDoXRK2HkFScO6IrkeM
- tx/9LedzrpQL62shq0Ukcqa/JDL0kFGM/OFx+EwcGwq6Q50oZcvtIt7p8JtCLhraNcP9kX+RzPH
- yesvz4ogiOsZLWDPkGaYzyCTrxBY=
-X-Google-Smtp-Source: AGHT+IFyCiKgkBN8vdTWRppvESQ9cOZCxF5WGS+CFz/3Pr+DvMuStF0AuXjZJQYMfYOsPP30QvrlelQgdw2wax964MI=
-X-Received: by 2002:a2e:9a12:0:b0:2ef:2843:4135 with SMTP id
- 38308e7fff4ca-2f523375fd7mr1622521fa.22.1724810085748; Tue, 27 Aug 2024
- 18:54:45 -0700 (PDT)
-MIME-Version: 1.0
-References: <GI.Za6b.48b6UC5Rsur.1cpWwh@seznam.cz>
- <CAOMZO5Aj9zSEWF9Gm5-tF9hTaczf6FXv0zo_z+Jws+BGPYPwrg@mail.gmail.com>
- <K9.Za7d.77W3I8GjZaJ.1cpYlf@seznam.cz>
- <CAOMZO5BshEknpJEeEiqip3e_YkN21kAKtKva0ik=8SKGJxmngw@mail.gmail.com>
- <CAOMZO5A1r4F403efkpAPbv9zJD7bjv=aHB8SgOK3pPXtVvzE2g@mail.gmail.com>
- <Mh.Zbul.1u3}4uost4Y.1cpdu8@seznam.cz>
-In-Reply-To: <Mh.Zbul.1u3}4uost4Y.1cpdu8@seznam.cz>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 27 Aug 2024 22:54:34 -0300
-Message-ID: <CAOMZO5AG_e-TCToM_+VJXJnBWJ81eT64MWRfnM6BnsehMLTBZw@mail.gmail.com>
-Subject: Re: [PATCH] gpio: mxc_gpio: fix reading state of GPIO pins in output
- mode
-To: Tomas Paukrt <tomaspaukrt@email.cz>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>,
- Peng Fan <peng.fan@nxp.com>
-Content-Type: text/plain; charset="UTF-8"
+ spf=pass smtp.mailfrom=tomaspaukrt@email.cz
+Received: from email.seznam.cz by smtpc-mxe-85b96b7dcc-nmbd7
+ (smtpc-mxe-85b96b7dcc-nmbd7 [2a02:598:128:8a00::1000:afc])
+ id 394a5312c7bee1b839c4dd0a; Wed, 28 Aug 2024 04:13:45 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cz;
+ s=szn20221014; t=1724811225;
+ bh=+8Eg99/H3lOEbpkDr1h6Wq2DS9jUCb2b5X1Vg/RwqNA=;
+ h=Received:From:To:Cc:Subject:Date:Message-Id:Mime-Version:X-Mailer:
+ Content-Type:Content-Transfer-Encoding;
+ b=Ag1S69AUjVrjBB9MYM8umVP2C//gJ7q+wMSoirZdTN4Dr/ynKWbzp0LrBK90s7iRx
+ acSxJa8GHBR8ao+YvjUxBiq9mR2CFBp4mJhjt8Msv4y4AVMRms4IRZ7Dc3HHREv24+
+ +HXlIQ22f9SHJE6rq54WrmnYtJrlhok9zFlaztSfrFAMQE8vvWwX3rsf6y7RCE5D9z
+ Yu/QZSvjt0dZfGYd3wQsoGL+pWDUJJHc4nkk5YogBq3V7GwM9GXBaZj2Xz2EZuLKzJ
+ Hm4QxpZQpfDZyjr3E8o/M8p3adKgyRIrfJecZVB2fjbwdMgbQGPaXatiZ3UvstUf+W
+ rRhe8+Y+5X4Pw==
+Received: from 184-143.ktuo.cz (184-143.ktuo.cz [82.144.143.184])
+ by email.seznam.cz (szn-UNKNOWN-unknown) with HTTP;
+ Wed, 28 Aug 2024 04:13:43 +0200 (CEST)
+From: "Tomas Paukrt" <tomaspaukrt@email.cz>
+To: <u-boot@lists.denx.de>
+Cc: <festevam@gmail.com>,
+	<trini@konsulko.com>
+Subject: =?utf-8?q?=5BPATCH_v2=5D_gpio=3A_mxc=5Fgpio=3A_fix_reading_state_?=
+ =?utf-8?q?of_GPIO_pins_in_output_mode_?=
+Date: Wed, 28 Aug 2024 04:13:43 +0200 (CEST)
+Message-Id: <Mn.Zbvh.7W8POzTA8pZ.1cpeVN@seznam.cz>
+Mime-Version: 1.0 (szn-mime-2.1.61)
+X-Mailer: szn-UNKNOWN-unknown
+Content-Type: text/plain;
+	charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,23 +72,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tomas,
+The PSR register works correctly for GPIO pins in input mode,
+but always returns 0 for GPIO pins in output mode unless the SION
+bit is set. The DR register works correctly in both modes without
+the need to set the SION bit.
 
-On Tue, Aug 27, 2024 at 10:31=E2=80=AFPM Tomas Paukrt <tomaspaukrt@email.cz=
-> wrote:
+Please note that the Linux gpio-mxc driver already uses
+the DR register for all GPIO pins in output mode:
 
-> I checked the current Linux driver and it uses the DR register for all ou=
-tputs.
-> This change was implemented about a year later after the mentioned discus=
-sion:
->
-> https://lore.kernel.org/all/1430321701-13758-5-git-send-email-vladimir_za=
-polskiy@mentor.com/
->
-> So both the Linux kernel and the NXP U-Boot work as expected, but the mai=
-nline U-Boot does not.
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/=
+?id=3D442b2494b17d1a4f0a14721580271eb23ebffd42
 
-Good point. I missed that.
+Signed-off-by: Tomas Paukrt <tomaspaukrt@email.cz>
+---
+ drivers/gpio/mxc_gpio.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Could you please send a v2 pointing to this commit in the Linux gpio-mxc dr=
-iver?
+diff --git a/drivers/gpio/mxc_gpio.c b/drivers/gpio/mxc_gpio.c
+index cac6b32..5cd7681 100644
+--- a/drivers/gpio/mxc_gpio.c
++++ b/drivers/gpio/mxc_gpio.c
+@@ -133,7 +133,7 @@ int gpio_get_value(unsigned gpio)
+ 
+ 	regs =3D (struct gpio_regs *)gpio_ports[port];
+ 
+-	val =3D (readl(&regs->gpio_psr) >> gpio) & 0x01;
++	val =3D (readl(&regs->gpio_dr) >> gpio) & 0x01;
+ 
+ 	return val;
+ }
+@@ -210,7 +210,7 @@ static void mxc_gpio_bank_set_value(struct gpio_regs *=
+regs, int offset,
+ 
+ static int mxc_gpio_bank_get_value(struct gpio_regs *regs, int offset)
+ {
+-	return (readl(&regs->gpio_psr) >> offset) & 0x01;
++	return (readl(&regs->gpio_dr) >> offset) & 0x01;
+ }
+ 
+ /* set GPIO pin 'gpio' as an input */
+-- 
+2.7.4
+ 
