@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99FDEC54743
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 00:00:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35A26C54744
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 00:21:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDB3B8897F;
-	Wed, 28 Aug 2024 02:00:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 3844488A74;
+	Wed, 28 Aug 2024 02:21:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="eSrxsbdP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OkwQxgvS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A9AD88A75; Wed, 28 Aug 2024 02:00:39 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 6AB4388A75; Wed, 28 Aug 2024 02:21:11 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E2DF88931
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 02:00:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 29311887B9
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 02:21:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5becd359800so6781337a12.0
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 17:00:37 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-53346132348so7291227e87.2
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 17:21:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1724803237; x=1725408037;
- darn=lists.denx.de; 
+ d=gmail.com; s=20230601; t=1724804468; x=1725409268; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DR+ljGSR2b/enNycIcgPd0skYT67s2F5h6hkjei7hHw=;
- b=eSrxsbdPViJZA2eSkupqAn0BZmYJDMLKKd8U+M8/vtu8aYjIlxRG4GwnXCA1qTCsQf
- f5rO1Ke9wjIGBemF7Bdbt7woSehsJe0ZmF3+XzydA2YKQ5nj4mReqJB424w1pfPI4U/+
- vnSwFQZV1WY7btM9dcFN3ZGSgUSkWu9XdH9Jk=
+ bh=mBznrfm8+T5nbzI943LCuM99GhGMKtbo4taxXLC9ZTA=;
+ b=OkwQxgvSStdHyeHONDph20JKnvOzI3YqGFYlw4q5qIRp3IAfzs9+LeWDisBj0zBc0q
+ l59iwGKgALvslZwEvUPo+8NMGX0Gu3ubJ0ZM7poF3DcmvV4GmnVO/UzJ/pSVX9xrxL+l
+ J/AVLqAVybhEv8yHeG3+7obmczu2Zi/Aj0MjYHIsZF1gfSLmcrheFATfem4PsE5bfTPI
+ NrA4/r2b0tDRRB2i16QUGymO/jVh21US4mH6U9MeZBR+1nBShqoHpu2kmAuGx0osw6sm
+ NOVRwcNQk7pakrtaQ4jd5hRpqbp5wm5cNlFzAH4ciQFqLavhKPGXM1/V5AlIHNs75XGV
+ Qtig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724803237; x=1725408037;
+ d=1e100.net; s=20230601; t=1724804468; x=1725409268;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DR+ljGSR2b/enNycIcgPd0skYT67s2F5h6hkjei7hHw=;
- b=Gi7bd6bTGJT/bbv4mvj9rXLXoZdzc2BZQUBZvW7Jee9Zyg9O/v46o3rPEQW5TW1pTR
- AYJAmA4kknDOp/Gej3YXHhk8GQIvwUsCgoBqHn1043amO1t0mPmnh689YNXmdxd9vRsS
- 5Zpzhb9BQ4oXL0HsGTl0DAfpUO5zfHsIT+V7B6Fr54jhjb9osHiFR57DQ95UGgy59jxY
- wFSywAcFXHXhCOkfum55m4N+aIlf98hoeg9az6KLyyeDESnY7Fhfi2UwaHzJ7ZivuQw2
- 3ra3OEfRe7ZRepARD+1Xf3f9CtksPX/tpXTgr/dYBuUSysvU98VOs6UGoUG6HVwcqmi6
- F5IA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWUI5WAya/vXY2tLBuQ4356s8VvqCP5fpTYkmETgOYUBkDH1zBjUfj7Pvg3snX9IW8hE9LbuTg=@lists.denx.de
-X-Gm-Message-State: AOJu0YyFrVOV+iuXhsIWWb15gVUsAcAwfLnhSaGH8/Hsj3o8QViLi13e
- 6/tT255OdPcMw/sZQFzyRIC5icGficXZrlZE52emCgcKKTRCcnX1KiwKuIKNTOYPOLCbgG/iu5n
- Pg05Wgw/37WuZRvgHxw10zYQ3yXuD+AuvOSwk8A==
-X-Google-Smtp-Source: AGHT+IH5qxZXx0VBztCc4EE/gr8LyyizuYWYO6yzy+CpOb/4plOQcDYNdnipnNhsR6BiYxp7xFmtqHsg1C/ez3okrS0=
-X-Received: by 2002:a05:6402:51c6:b0:5be:e1bc:2304 with SMTP id
- 4fb4d7f45d1cf-5c2138e0fdemr200194a12.7.1724803236179; Tue, 27 Aug 2024
- 17:00:36 -0700 (PDT)
+ bh=mBznrfm8+T5nbzI943LCuM99GhGMKtbo4taxXLC9ZTA=;
+ b=gQs4q+fU0uo1PIoxfG8qu2KPEQ1+UpDERV39DkKb6RIHF2mrg1KAvaaxvIfRokCSBK
+ YKJtOxGuVA3UhXWF5nXCKo9BZ4ApppdfqWccCPnEibtz36yXWbxWaCK6MCMZKMSbQZn6
+ /04oGzv/lQJ+KRye+PBPFDZoz9R4JgdqTDsdnc7WVg5EKFbH5REymwBTQllQD6UcI7Tf
+ hVMcFBdEd7Z1O6oQVPqObFe26rNioTSeiYq9qbYkzOcCS9OOkhRhyK4jcXFHWRi0PjGa
+ 142yEPZg8VPowFtWs3k9VPbBVVXOwsWMjXUEj4tfHEeNwbKb3CjbSVOgAXr/s4F3Resh
+ Bt/g==
+X-Gm-Message-State: AOJu0Yz9+XsU6mC+QLp6QcPAY0F/iXCYol1W/E7NqLkpm8meQRnhehyv
+ uhQbwTO3q5cb19clz2BFnGtNlA7wBrjnOTPqMMhv5C9xaSOr+tDGIB56lPymRWgwAGOxZJGiZ36
+ p7iNBEOKL/QP2l21EV+tfqCr85pc=
+X-Google-Smtp-Source: AGHT+IFPxrXEW23jv4eE9c2ATS9iCvUqerGuqKJ1ZPAL/TE4K1BmfNJ++RImwokRhsHg+VG+EM7bdy/1y08Sl5RMLBs=
+X-Received: by 2002:a05:6512:3191:b0:52e:f907:1023 with SMTP id
+ 2adb3069b0e04-534387c49d7mr10154146e87.49.1724804467958; Tue, 27 Aug 2024
+ 17:21:07 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240731145855.3122166-1-vigneshr@ti.com>
- <172480096431.2972894.12027347479310043926.b4-ty@konsulko.com>
-In-Reply-To: <172480096431.2972894.12027347479310043926.b4-ty@konsulko.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Wed, 28 Aug 2024 02:00:24 +0200
-Message-ID: <CAOf5uw=13uaaXOdgbv2w8FJwGA4KMEuEeNVYxQLKiAyrkaLhsA@mail.gmail.com>
-Subject: Re: [PATCH] mtd: nand: raw: omap_gpmc: Check return value of
- gpmc_nand_init
-To: Tom Rini <trini@konsulko.com>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>, Roger Quadros <rogerq@kernel.org>, 
- William Zhang <william.zhang@broadcom.com>, Sean Anderson <seanga2@gmail.com>,
- u-boot@lists.denx.de, s-k6@ti.com
+References: <GI.Za6b.48b6UC5Rsur.1cpWwh@seznam.cz>
+ <CAOMZO5Aj9zSEWF9Gm5-tF9hTaczf6FXv0zo_z+Jws+BGPYPwrg@mail.gmail.com>
+ <K9.Za7d.77W3I8GjZaJ.1cpYlf@seznam.cz>
+ <CAOMZO5BshEknpJEeEiqip3e_YkN21kAKtKva0ik=8SKGJxmngw@mail.gmail.com>
+In-Reply-To: <CAOMZO5BshEknpJEeEiqip3e_YkN21kAKtKva0ik=8SKGJxmngw@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 27 Aug 2024 21:20:56 -0300
+Message-ID: <CAOMZO5A1r4F403efkpAPbv9zJD7bjv=aHB8SgOK3pPXtVvzE2g@mail.gmail.com>
+Subject: Re: [PATCH] gpio: mxc_gpio: fix reading state of GPIO pins in output
+ mode
+To: Tomas Paukrt <tomaspaukrt@email.cz>, Ye Li <ye.li@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,40 +92,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+Hi Tomas,
 
-On Wed, Aug 28, 2024 at 1:22=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
-:
+On Tue, Aug 27, 2024 at 4:53=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+wrote:
 >
-> On Wed, 31 Jul 2024 20:28:55 +0530, Vignesh Raghavendra wrote:
+> Hi Tomas,
 >
-> > If the function is called with no NAND device attached, then this
-> > function can return error value, proceeding further ignoring the same
-> > can cause system crash. This is seen when "mtd list" is run with no NAN=
-D
-> > addon cards connected.
+> On Tue, Aug 27, 2024 at 4:41=E2=80=AFPM Tomas Paukrt <tomaspaukrt@email.c=
+z> wrote:
+>
+> > Hi Fabio,
 > >
+> > you are correct that the existing code will work if the SION bit is set=
+, but this is not always possible or desirable. For example, if you use the=
+ command "gpio set" to set the state of a pin that is not configured in DTS=
+ then you will get the error message "Warning: value of pin is still 0". Al=
+so the command "gpio status -a" shows wrong states of some output pins with=
+out this patch.
+>
+> This happens due to an incorrect devicetree description, i.e, the lack
+> of setting the SION bit.
+>
+> > Please see the chapters "GPIO data register (GPIOx_DR)" and "GPIO pad s=
+tatus register (GPIOx_PSR)" in the document IMX6ULLRM.pdf which show that i=
+t is possible to use the DR register instead of the PSR register in this ca=
+se.
 > >
+> > I also found the exactly same modification in NXP version of U-Boot (ht=
+tps://github.com/nxp-imx/uboot-imx/commit/4afc3f90943c6b117f79b66d2cd04e64f=
+437b0c2) made by an NXP employee.
 >
-> Applied to u-boot/next, thanks!
+> Adding Ye Li on Cc.
 >
-> --
-> Tom
->
->
-Thank you to pick it up, I did not see it
+> There were many attempts to fix this in both U-Boot and the kernel,
+> but the recommendation has always been: "Set the SION bit if you need
+> to read the output state".
 
-Michael
+For more information, please read this thread posted on
+linux-arm-kernel ten years ago:
 
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+https://patchwork.kernel.org/project/linux-arm-kernel/patch/CAJ+vNU3w9Oi+dE=
+rmy9x8g6ps=3DeLHLNLO-w7=3Dgn_8JtY4Kab6JQ@mail.gmail.com/
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+I hope this helps to clarify.
