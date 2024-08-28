@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F09DEC54E92
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 10:16:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59854C54E92
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 10:17:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 858ED88861;
-	Wed, 28 Aug 2024 12:16:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E5A4688AA7;
+	Wed, 28 Aug 2024 12:17:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Wxc91Inn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Xw/zSUcQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7620A8876E; Wed, 28 Aug 2024 12:16:47 +0200 (CEST)
-Received: from mail-pg1-x52a.google.com (mail-pg1-x52a.google.com
- [IPv6:2607:f8b0:4864:20::52a])
+ id 8113F8876E; Wed, 28 Aug 2024 12:17:04 +0200 (CEST)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0EC038873C
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 12:16:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 325268873C
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 12:17:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-7cf6641765dso2920493a12.1
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 03:16:44 -0700 (PDT)
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-71446fefddfso3744066b3a.0
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 03:17:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724840203; x=1725445003; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724840221; x=1725445021; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9a8sb2SmclLMO8fnyEhl5LtflwQkvPjo2U4AvKx6sks=;
- b=Wxc91Innp9DyPNHlikQB/wmJ94aDKEyPTPOgwoabDLVkSCnuzaeOWgbfVjxCySBv11
- N/vcVBoFYvsi43vP+HmkheNxMonuJbnS4IyQlDXKicwID0a8X1NYq+46w4fCYJEDQfXW
- CqaZjBQpgIi37w0tATOqsG9LAoIKRKFnIiy7far9tShnzxcvApASBqa+MRa4WJw5eIvr
- HNwiq9WKZ4+seo6d63iwPPFu0OrMAJzQeCUA2pmVLY8yju75O024+7z6No8hYG6DztsJ
- AHPuZs8ToV3W/pttWXZ20XRcwo7ywGBBZCPp0a7aKonienna5M0aHfpii2xD4gDGoCX9
- dn+A==
+ bh=pXo0PDrbuYewaScor9DunuA8C/dnToUTH4EH6b5PUf8=;
+ b=Xw/zSUcQ7mhALOYG1ak+FYKXHDakgugMRFjqW/iBsCMaMtjE1xYwsHp3wpH1Ufinvt
+ wFFtDk56cOMxtdr51gtlL2YOhfn7JlfeWn5tee0ddt/ozS94Sc7WZUdWuZqIH4jUnLXW
+ 4VouOrQk27Fnrsx5myU6dXhxb71utfhr9ZfQX810gPI54Mz02JLKuD9uqGDd0g3hDkjH
+ WzzfNB3jwqvNwow9HmJFOAzYDIs/N80wFqyjraV+Va0ZNdwD6MgjLG+VfCuBHE6q6KmE
+ VzCZ8uN2HhgRef3cXX8RFrtUgyi2VoUGsehv/Ed+iDCkEGGf6I1oO/58VwR2XKvXU1ff
+ QWuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724840203; x=1725445003;
+ d=1e100.net; s=20230601; t=1724840221; x=1725445021;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9a8sb2SmclLMO8fnyEhl5LtflwQkvPjo2U4AvKx6sks=;
- b=o63OAqklFaIOZlHehtj0FP3T9WU3H0sFIj21/BDPuSxEeYCpDjsl9+gy6PDDMirLb+
- SGoVx7URk6SwQDOqI7hwE0Js5x4kWIY4fRB8TRwxn8aDVee7vQKnRBpmXNdmjRAFwtA9
- 5llgCWVEN/X+Bu4LDs8OLOlpZ2bicBWv7CSmapaU44HHcr6ohRz47Za9oTZO2C4A5T6F
- U4OPUYGod7vbTLqto+aEiL7nvS9G790zDAT614gKrMRhnLx7ezbKr+WM4gmQjYjXTaSk
- C+KtNFfCkLxQYlG1P72oG4iNcsTpjRFZqu+yd+mdzWWLCJiJOovXad7MtGF31KicttQY
- 4hLQ==
-X-Gm-Message-State: AOJu0YwcB/zw0J6MtT6mqpWKXXNRvsfBhwmnmA1aZdlYnb+awsk7iH1w
- 7U4dybgFsJXBmL6RAK0S3ZKVj/DGHueOGAQ6AuzdH1KyTJGkBXglz1X1vN/DeWQ0teBQiTaLEtb
- RujmzsW25qjXM54FlV9ITGjF/NO58w1DBq4LntA==
-X-Google-Smtp-Source: AGHT+IFzTk0YOoY3L8smSbGspnOYpstoJYYAUNs9U/ZbUU3HwAQebDKaktENDYZhAJ6eSseyAFxI9Fh9ynqmRUPNico=
-X-Received: by 2002:a17:90b:3001:b0:2cf:c2da:771d with SMTP id
- 98e67ed59e1d1-2d646c452ebmr18074859a91.25.1724840203315; Wed, 28 Aug 2024
- 03:16:43 -0700 (PDT)
+ bh=pXo0PDrbuYewaScor9DunuA8C/dnToUTH4EH6b5PUf8=;
+ b=dF72UZZWBgzuAkUZQVmsascZBWgk1ZNa/o8m2VbG0LxqEjIG/2U9doVqeERIf1o0b2
+ YtQ/gieMUcGMZ1KRne6MLSYKr4jpoXLbwxyhQVcYcFx/RPO9j/Pbg3piPWxSmxA8IZ+L
+ H9U6JWH7tysmadZ/uoT3lPI6ftxSp2IhBm0apZYzIyffMfQ6CIeyXsIzQcvNwQKc1trB
+ EciPW8TFBeYLfERHNPk16uBjAbzyAFo1Prha92O9aMk5TJ/udwNaq6xUt4PjC80xjJsP
+ XZHrJga2T/jenKdWTRWLEO39KwpBcpD3wQYQwB5uZo51dLV4kgTpAcABf/Cp+14bJZ88
+ +0Nw==
+X-Gm-Message-State: AOJu0YxIEKFK2kb0h1l0dhTKxz1JVGPJ0jVy7uUD5AlEJ66xj1J152Js
+ o6Cw3ISQq5/lxSdkozLUt7Uexu6IgLACj28CoMY2D025TT9fj9p+MieBDSowfunxGNA/6pP9CV/
+ /EQjCzAmm0HrC2TT1s9LB0diMjJGWEotJJBKtDQ==
+X-Google-Smtp-Source: AGHT+IFH/qPYzOSG9uZfFTWHj7zLAOkioLjoFw+tkowXceozAIBRWhf5PHC9KVjSsppApAbnYPnjsVyq3A1Ftfh1knI=
+X-Received: by 2002:a05:6a20:4393:b0:1c4:8650:d6db with SMTP id
+ adf61e73a8af0-1cc89ee5efamr19780579637.40.1724840220415; Wed, 28 Aug 2024
+ 03:17:00 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240816214436.1877263-1-raymond.mao@linaro.org>
  <20240816214436.1877263-23-raymond.mao@linaro.org>
 In-Reply-To: <20240816214436.1877263-23-raymond.mao@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 28 Aug 2024 13:16:07 +0300
-Message-ID: <CAC_iWjKd+pLv4qCMixu1m2fehpAryHkEcs3KwDy4BDfzSf20sw@mail.gmail.com>
+Date: Wed, 28 Aug 2024 13:16:22 +0300
+Message-ID: <CAC_iWjJ3zNk79gJ=BpAD1rqUKya=p1iTgmN4PUhqEq-HhmeTJA@mail.gmail.com>
 Subject: Re: [PATCH v6 22/28] mbedtls: add MSCode parser porting layer
 To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
@@ -306,4 +306,6 @@ On Sat, 17 Aug 2024 at 00:53, Raymond Mao <raymond.mao@linaro.org> wrote:
 > +}
 > --
 > 2.25.1
->\\
+>
+
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
