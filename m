@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BEF5C54746
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 01:48:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B256C54747
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 01:49:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCBEA88C21;
-	Wed, 28 Aug 2024 03:46:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 316E988C30;
+	Wed, 28 Aug 2024 03:46:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YQQ9jpzq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z42uiQnU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96F3588C13; Wed, 28 Aug 2024 03:46:05 +0200 (CEST)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id 6B74F88C1D; Wed, 28 Aug 2024 03:46:06 +0200 (CEST)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 856D388AAA
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 03:46:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A16188BC0
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 03:46:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-81fb419f77bso342513939f.2
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 18:46:03 -0700 (PDT)
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-829f5e9d8e9so48861539f.3
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 18:46:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724809562; x=1725414362; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724809563; x=1725414363; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Y3/xInJECHE35Tf90dn0X5pXrNQbb6gt8KTkpwzNjcw=;
- b=YQQ9jpzqUHIfvFNyPm6Ga7yPaDdHIPbhoHbBG1P9jIfSbl6CeoSLLxvimIpzKVXjbn
- XzESDrUKi1F5lDKYcdOi8IG/0Bhmw/0DzzGCdiAVhCkWkf/a9oXaoigOrKTIjfd2lume
- 5v2ltjrzhrklt34ATm4PiDUnoPpofnpiQpJYU=
+ bh=Ee8Hg90R3rAamhddmBgUP9+hBAv5kaW1ENhd1jfn7dc=;
+ b=Z42uiQnUWeXuIgZ+7glDcsALi+nEbEyFI7UWeXlySJQoCPwrCWSRW6VDKvD3cRvXGc
+ 33zmuiB847bZW8+6Pqe+ZaXJQuc4+klAShJgoSgY5fHMKeQXgyU8sIeinFpCbNXgU2sv
+ FU9bLg7hYEuSoOHgSimM/6dUGsIfX39CmA/e0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724809562; x=1725414362;
+ d=1e100.net; s=20230601; t=1724809563; x=1725414363;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Y3/xInJECHE35Tf90dn0X5pXrNQbb6gt8KTkpwzNjcw=;
- b=W1ysNN045VB5slBRA7yF1yOQAYZXeLEfkqbAdZ2coIddyg9kmXA3J5b/9nezSoxIo7
- u0MZltGA3VJm2U7QO6BySLZTN/aSS04m3YvekTGRT4mYQTsZKGJiEwDf5hV3vnbIbGtS
- YIPFaQ0R36cHxzzHBcAGtbR04lo+qBTGrmNENTAGqCDDgJ+lvkGF4sIBe5uYgwHyhv7r
- KDOsYS/IC/OmEhDhoNfBIpJy3tCnDQKxJjbJXrYadif6fShZ/s5qcQzNGA/ekxJOSN0c
- JR4l/HwmjNdPKlQTYJmDALU+qvxsLPH+5saFS7W/K5kO4J8qEUxpEHeUFdy3TJxpcgV4
- UeDw==
-X-Gm-Message-State: AOJu0YzIgE9hgMsPEeDerhZa8z/FP/cAsaTzPLhsn8qnO5NkvTCh2U/u
- JyXVjCyS0lL/6DGD1/Yxd1nn192plbrNyQF23+K5HZZshVJP6I5iejeAhW85Wh8IhwAE6B8Zt3A
+ bh=Ee8Hg90R3rAamhddmBgUP9+hBAv5kaW1ENhd1jfn7dc=;
+ b=KMFgKzdy9LfW/rRgAHYtqa/uPfYFcr8QFGtGv6U25BceOmsJTJdQx2db2te2q5O8EY
+ MFTJQLza3ljcgi9//zREpTbTp05XStBCZ+s6rYFMhFfEIUPN7CngucrUoZuUfwXdOxZA
+ aZ3SdJgAPHslkVX1GOE4PsUXxXCXo3IT1tY7GFZBOhZmsvWUoIEE5Jn9rkkdLwXtbfpI
+ Eg7W+t9ScVXo0BSlUQ2pisAYjJrSjRSM2nAUHzFyX2SkkBGQWS7aFH/COhdZZz7EmgqK
+ 2ZiSJrPXGy5XanQHf5nlWRJyGOP54N5+sEixSOFiGVUavISr8sQM4wTwKRDKHOuWg59p
+ DSGg==
+X-Gm-Message-State: AOJu0YyePWRoCD4SEmWDwarStOgd54HPsM27nUG/45CqSjmkkH5yZbgK
+ BheVnTXucbDja16d6VKWyWVsiXlBUO4V19WreqdRhOINiVz+vHS1uwjYz4HOPHgJskCto/Fr+gA
  =
-X-Google-Smtp-Source: AGHT+IGvdgJ9yE8EYOPwW5fhL1RnkDWuuYPQ6OWQiB3Gx84TPBEhNA5+XkePblocHYbVH2gH6fx+dg==
-X-Received: by 2002:a05:6602:621a:b0:81f:c044:8f6e with SMTP id
- ca18e2360f4ac-8278731cf6emr1633974639f.8.1724809562093; 
+X-Google-Smtp-Source: AGHT+IE3eSyWfp9Nd7zTQJu8kFSZ6P7QY/gnygOD9N7lJlSJ0VZzZXakCkIuhqOUveqM2iirxl0bxg==
+X-Received: by 2002:a05:6602:2b04:b0:81f:803d:cbe7 with SMTP id
+ ca18e2360f4ac-827881ae8bemr2038735839f.12.1724809562950; 
  Tue, 27 Aug 2024 18:46:02 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ce70f5ca7csm2898342173.63.2024.08.27.18.46.01
+ 8926c6da1cb9f-4ce70f5ca7csm2898342173.63.2024.08.27.18.46.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Aug 2024 18:46:01 -0700 (PDT)
+ Tue, 27 Aug 2024 18:46:02 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Dragan Simic <dsimic@manjaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
+Cc: Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Jeffy Chen <jeffy.chen@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>, Peng Fan <peng.fan@nxp.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- huang lin <hl@rock-chips.com>
-Subject: [PATCH 17/18] rockchip: mmc: Fix a missing colon
-Date: Tue, 27 Aug 2024 19:45:36 -0600
-Message-Id: <20240828014538.3322013-18-sjg@chromium.org>
+ Kever Yang <kever.yang@rock-chips.com>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
+ Wan Yee Lau <wan.yee.lau@intel.com>, huang lin <hl@rock-chips.com>
+Subject: [PATCH 18/18] rockchip: Provided SPL control over efuse presence
+Date: Tue, 27 Aug 2024 19:45:37 -0600
+Message-Id: <20240828014538.3322013-19-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240828014538.3322013-1-sjg@chromium.org>
 References: <20240828014538.3322013-1-sjg@chromium.org>
@@ -93,27 +94,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a missing colon in rk3399_emmc_get_phy().
+This driver should not generally be present in SPL, even if misc devices
+are enabled. Update the Makefile rule accordingly.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- drivers/mmc/rockchip_sdhci.c | 2 +-
+ drivers/misc/Makefile | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
-index 15b4a39770a..6c5c8781c3e 100644
---- a/drivers/mmc/rockchip_sdhci.c
-+++ b/drivers/mmc/rockchip_sdhci.c
-@@ -230,7 +230,7 @@ static int rk3399_emmc_get_phy(struct udevice *dev)
- 
- 	grf_base = syscon_get_first_range(ROCKCHIP_SYSCON_GRF);
- 	if (IS_ERR_OR_NULL(grf_base)) {
--		printf("%s Get syscon grf failed", __func__);
-+		printf("%s Get syscon grf failed\n", __func__);
- 		return -ENODEV;
- 	}
- 	grf_phy_offset = ofnode_read_u32_default(phy_node, "reg", 0);
+diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+index e53d52c47b3..ff984d7b191 100644
+--- a/drivers/misc/Makefile
++++ b/drivers/misc/Makefile
+@@ -68,7 +68,7 @@ obj-$(CONFIG_QFW_MMIO) += qfw_mmio.o
+ obj-$(CONFIG_QFW_SMBIOS) += qfw_smbios.o
+ obj-$(CONFIG_SANDBOX) += qfw_sandbox.o
+ endif
+-obj-$(CONFIG_ROCKCHIP_EFUSE) += rockchip-efuse.o
++obj-$(CONFIG_$(SPL_TPL_)ROCKCHIP_EFUSE) += rockchip-efuse.o
+ obj-$(CONFIG_ROCKCHIP_OTP) += rockchip-otp.o
+ obj-$(CONFIG_$(SPL_TPL_)ROCKCHIP_IODOMAIN) += rockchip-io-domain.o
+ obj-$(CONFIG_SANDBOX) += syscon_sandbox.o misc_sandbox.o
 -- 
 2.34.1
 
