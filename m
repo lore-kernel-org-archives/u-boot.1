@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC9BBC636E5
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 17:06:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0157C636EE
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 18:10:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 305F9885A0;
-	Wed, 28 Aug 2024 19:06:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id F3F7A888C1;
+	Wed, 28 Aug 2024 20:10:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WPq/gtBw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ybd891kA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17D388862E; Wed, 28 Aug 2024 19:06:43 +0200 (CEST)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id 1D52F88744; Wed, 28 Aug 2024 20:10:04 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C5958841E
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 19:06:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D031488901
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 20:10:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6bf6721aae5so35782066d6.2
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 10:06:40 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5c0a9f2b967so4190434a12.2
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 11:10:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724864799; x=1725469599; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1724868601; x=1725473401; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PdchJK3idfmVZIwbsSydS21PMv3QVDa+PrgUcKuPVJU=;
- b=WPq/gtBw2LR/pcutZL7QH22gy/SqKhHEdFpih7m+droiCguYA8jifRzShJV+VmBR67
- VzsCmIiXCa2SgQKvdGGtDNXCXqQClfl1Wxo2NATnvAmGfcySek6gGmrm0RnGoQcFr5GG
- QGGM4IFJ/9KHjorrYEstj0ib4DopKTRUsPMUw=
+ bh=OyktsbBc4rH5BRS1el7tyWTtoVxFL9/xmHky8ikR1Fc=;
+ b=Ybd891kAu2LVB0iNSGoZ6+mbchPNDz2Fn4+IOQNIauRP0Tx4EqqNTmk0xeJFNoiiNw
+ MCnG7sqva5eRAu5qNGnoaT2/nZZ/WhVXhjGKlq0/pUf9vPzepd1wrgB/Ovencpit+4nS
+ uasERsX1Uw0VF/V2CNQr1C3QfbaMopyLCGgJpIOw/Hys6plThp6ODFjTi2XAtTM1GKdw
+ sVGmoXKPN2KnRz/frqw0JIZup5PfWJY6xJiQclpC6k2qKdNX5oqppbkMNESRbz8dmmex
+ LedvVWnJ+vpUyqQ7IPw5nrmXFKwuG/G7R4gzyW5gChkRbyrzAKjj51gOOsfsGookZftj
+ JWxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724864799; x=1725469599;
+ d=1e100.net; s=20230601; t=1724868601; x=1725473401;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=PdchJK3idfmVZIwbsSydS21PMv3QVDa+PrgUcKuPVJU=;
- b=VtaIIv/Q6bp7ITAXKufjc+bkt+DG7s7fKfY2gphWs3Aue4JxRKSj82YOnljmFK0frQ
- IDE867+Woi/9zKkzDxEZgxcdmcV5o4kdPDvcPTpJ91ChbC33aMVhTWnGoc+sbqGmHSaM
- R4/Ji/18RHlcoEnyO5Ke2mZp5Ax6fmR1JaGjmtWhNli0fCaKGCyZyJ5gAvcbTVph862E
- GYESUa8xsshO6F6EDX62KVHU9oZLzvO1owa5WZfE1m/L3yUNjaboqIcYHY6kDUyJ2vVp
- q0Mcz9OSks5oAUwfVdcFpYsis72ucVqT82bq7R381G9PyInB4tygpCPjai1DuOwL3o3z
- kbXA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWDCQZsTkJXEDzF0wdsoioWj8R1FJoc/rX04Pqno6HGJ4a0/yOPwczSYOyUwItRDAyn2rpDYww=@lists.denx.de
-X-Gm-Message-State: AOJu0YyLUQgdZ6JBrlwJGEPAM00XFvwwWs7z7j3ER4IjLwR1qGe5fcKp
- dAQdfFYSJk5kmWhP0uWy4o3r8CEhBjM3QQ+WzomY3o4G+ow8u+xzZkFlZ9+9FRTBgn3/4WJjj1Y
- aN1O6zp4YhfLCDnZFlDIJX6YN7j/FIp8z4YLU7mhCPr3pZ/w=
-X-Google-Smtp-Source: AGHT+IF2fXaP+V8We5uzv2mqn25bojPhAmmM5CAUT+MO970x1lfjpdGm+tGLBF/niFw0g98UHoMrCuG4zPWCKjPX39o=
-X-Received: by 2002:a05:6214:5882:b0:6c1:76c6:b673 with SMTP id
- 6a1803df08f44-6c33e617151mr1595166d6.22.1724864798957; Wed, 28 Aug 2024
- 10:06:38 -0700 (PDT)
+ bh=OyktsbBc4rH5BRS1el7tyWTtoVxFL9/xmHky8ikR1Fc=;
+ b=BJW/h1s4Ts0KFiHAtWuBNshJgWXe1JPFYYAnrHS6ejyLAcDNZG/gFujlqzdZix2L8W
+ DT/qmf3URa26N7N+3isv1d+/aT0WhufFgG5mBJ01SUWq2jTgi9TnpHNx2b6w11Zq3dGx
+ ORXbHR9WK6QzCY3nFoatj37EbGzuvEt2ynM0Tsi6H7xpFZn8vjlTqo/RZPGkW5vVMQAY
+ wAbbyUdmqcYYYlK9o+cbOWfayBWm71DT1/0LS8In92NeaDRJepTsEKgKTazzPG9k3O04
+ +d14ObbqdczhKZB/2dh04llvX4qN/EzHtaRBQTaw+bNZIaKvMp9FJuAxaCRTf/pSsf/B
+ f+og==
+X-Gm-Message-State: AOJu0YyMd942pXLzDco7vsPrE8MNGDVq3sV4PsnQzsA1rcU3oecHhZ1c
+ y1/WaJWVMGk3supnoT4HKov+tQbtimXS8JL/joJRWtLYGVYIoz7VHiObo5QDpdU2hll4TqkTvvO
+ zKL9v4x5aqGoR6g15vH3OQXjdMK8=
+X-Google-Smtp-Source: AGHT+IF+WpckjmW5B2m2+iv0AhqkuPDQp349alt7Zh28tSyYFvlS0R+LBs50297xqaI/zP3qRJFfaHxakIMRBeEZqtg=
+X-Received: by 2002:a05:6402:909:b0:5be:fe84:cc4a with SMTP id
+ 4fb4d7f45d1cf-5c21eda56c9mr225873a12.38.1724868600689; Wed, 28 Aug 2024
+ 11:10:00 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240803124149.2916030-1-jonas@kwiboo.se>
- <20240803124149.2916030-3-jonas@kwiboo.se>
- <CAFLszTha39GkRsZA1r91YpLdKJDiRfDmAzWsMTuByDtPC0YvGQ@mail.gmail.com>
- <CAFLszThNN-rfPtAYKSHtGTEUwuxFgz01A-yJMXRYtwX3WiA-Kg@mail.gmail.com>
- <0329ee07-3f99-4daf-8960-1e934ff753de@kwiboo.se>
-In-Reply-To: <0329ee07-3f99-4daf-8960-1e934ff753de@kwiboo.se>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 28 Aug 2024 11:06:28 -0600
-Message-ID: <CAFLszTgGhy+nY7MGDi19ZeB7ptstmXFwWG4NRUECtdjqPfMZSQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] bootstage: Do not sort records
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <cover.1724846454.git.jerome.forissier@linaro.org>
+In-Reply-To: <cover.1724846454.git.jerome.forissier@linaro.org>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Wed, 28 Aug 2024 19:09:49 +0100
+Message-ID: <CALeDE9PCTJZuF-rrv2kH76sVUbFT5tqBpDy0OVXzKbn1MPJJrg@mail.gmail.com>
+Subject: Re: [PATCH 00/13] Miscellaneous fixes
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,119 +85,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
-
-On Wed, 28 Aug 2024 at 10:15, Jonas Karlman <jonas@kwiboo.se> wrote:
+On Wed, 28 Aug 2024 at 13:10, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
 >
-> Hi Simon,
+> Miscellaneous fixes made when developing the lwIP series [1].
 >
-> On 2024-08-28 18:01, Simon Glass wrote:
-> > Hi Jonas,
-> >
-> > On Tue, 6 Aug 2024 at 15:50, Simon Glass <sjg@chromium.org> wrote:
-> >>
-> >> Hi Jonas,
-> >>
-> >> On Sat, 3 Aug 2024 at 06:42, Jonas Karlman <jonas@kwiboo.se> wrote:
-> >>>
-> >>> The timer counter on Rockchip SoCs may be reset in TF-A, this may cause
-> >>> the bootstage records to be printed out of order and with an incorrect
-> >>> elapsed time.
-> >>
-> >> Eek can we just fix TF-A? That seems like a bug.
+> [1] http://patchwork.ozlabs.org/project/uboot/list/?series=420712&state=%2A&archive=both
 >
-> TF-A is vendor blob, so we have no control of it.
+> Jerome Forissier (13):
+>   Makefile: detect HOST_ARCH properly when CROSS_COMPILE is multi-word
+>   flash: prefix error codes with FL_
+>   at91: rename mem_init() to at91_mem_init()
+>   arm: omap2: add missing #include <netdev.h>
+>   net: fm: call dtsec_init_phy() only when it is defined
+>   net: wget: removed unused function wget_success()
+>   net: phy: ncsi: depend on NET
+>   net: ftgmac100: depend on NET
+>   net: wget: allow EFI boot
+>   net: fec_mxc_init(): do not ignore return status of fec_open()
+>   test/py: net_boot: fix comment
+>   test/py: test_efi_loader: add missing dependency on cmd_tftpboot
+>   test/py: test_efi_loader: add HTTP (wget) test for the EFI loader
 
-Can we replace it, or is it one of the ones that has not been released?
+For the series:
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 
-Can you file a bug with the vendor?
-
+>  Makefile                                      |  2 +-
+>  arch/arm/mach-at91/include/mach/at91_common.h |  2 +-
+>  arch/arm/mach-at91/spl_at91.c                 |  2 +-
+>  arch/arm/mach-at91/spl_atmel.c                |  2 +-
+>  arch/arm/mach-omap2/omap3/emac.c              |  1 +
+>  .../atmel/at91sam9m10g45ek/at91sam9m10g45ek.c |  2 +-
+>  board/atmel/at91sam9n12ek/at91sam9n12ek.c     |  2 +-
+>  board/atmel/at91sam9x5ek/at91sam9x5ek.c       |  2 +-
+>  .../atmel/sama5d27_som1_ek/sama5d27_som1_ek.c |  2 +-
+>  .../sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c   |  2 +-
+>  board/atmel/sama5d2_icp/sama5d2_icp.c         |  2 +-
+>  .../atmel/sama5d2_xplained/sama5d2_xplained.c |  2 +-
+>  .../atmel/sama5d3_xplained/sama5d3_xplained.c |  2 +-
+>  board/atmel/sama5d3xek/sama5d3xek.c           |  2 +-
+>  .../atmel/sama5d4_xplained/sama5d4_xplained.c |  2 +-
+>  board/atmel/sama5d4ek/sama5d4ek.c             |  2 +-
+>  board/cobra5272/flash.c                       | 26 ++++----
+>  .../conclusive/kstr-sama5d27/kstr-sama5d27.c  |  2 +-
+>  board/freescale/m5253demo/flash.c             |  6 +-
+>  board/gardena/smart-gateway-at91sam/spl.c     |  2 +-
+>  board/siemens/corvus/board.c                  |  2 +-
+>  board/siemens/smartweb/smartweb.c             |  2 +-
+>  board/siemens/taurus/taurus.c                 |  2 +-
+>  common/flash.c                                | 44 ++++++-------
+>  drivers/mtd/cfi_flash.c                       | 36 +++++------
+>  drivers/net/Kconfig                           |  1 +
+>  drivers/net/fec_mxc.c                         |  3 +-
+>  drivers/net/fm/eth.c                          |  2 +
+>  drivers/net/phy/Kconfig                       |  1 +
+>  include/flash.h                               | 20 +++---
+>  net/wget.c                                    | 11 ++--
+>  test/py/tests/test_efi_loader.py              | 62 ++++++++++++++-----
+>  test/py/tests/test_net_boot.py                |  2 +-
+>  33 files changed, 144 insertions(+), 111 deletions(-)
 >
-> >>
-> >>>
-> >>> Fix this by not sorting the bootstage records.
-> >>>
-> >>> Before on a Radxa ZERO 3W (RK3566) board:
-> >>>
-> >>>   => bootstage report
-> >>>   Timer summary in microseconds (12 records):
-> >>>          Mark    Elapsed  Stage
-> >>>             0          0  reset
-> >>>         7,436      7,436  board_init_f
-> >>>       164,826    157,390  SPL
-> >>>       375,392    210,566  end phase
-> >>>       423,909     48,517  board_init_r
-> >>>       472,973     49,064  eth_common_init
-> >>>       476,848      3,875  main_loop
-> >>>       477,003        155  cli_loop
-> >>>
-> >>>   Accumulated time:
-> >>>                    7,181  of_live
-> >>>                   14,739  dm_spl
-> >>>                   15,029  dm_r
-> >>>                  315,150  dm_f
-> >>>
-> >>> With this the records can be printed in chronological order when the
-> >>> counter is reset and SPL and board_init_r records show correct elapsed
-> >>> time.
-> >>>
-> >>>   => bootstage report
-> >>>   Timer summary in microseconds (12 records):
-> >>>          Mark    Elapsed  Stage
-> >>>             0          0  reset
-> >>>       164,437    164,437  SPL
-> >>>       375,023    210,586  end phase
-> >>>         7,437      7,437  board_init_f
-> >>>       424,390    416,953  board_init_r
-> >>>       473,515     49,125  eth_common_init
-> >>>       477,402      3,887  main_loop
-> >>>       477,571        169  cli_loop
-> >>>
-> >>>   Accumulated time:
-> >>>                   14,734  dm_spl
-> >>>                  315,646  dm_f
-> >>>                    7,339  of_live
-> >>>                   14,977  dm_r
-> >>>
-> >>> For the tested board external TPL and BROM take ~164 ms to initialize
-> >>> DRAM and load SPL, SPL take ~210ms to load images from FIT and U-Boot
-> >>> proper take ~477ms to reach cli prompt.
-> >>>
-> >>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> >>> ---
-> >>>  common/bootstage.c | 12 ++----------
-> >>>  1 file changed, 2 insertions(+), 10 deletions(-)
-> >>>
-> >
-> > To put this more strongly, this breaks the timing output on other boards.
+> --
+> 2.40.1
 >
-> Please elaborate, I cannot understand why not sorting would break output
-> on other boards, are other boards adding records out of order?
->
-> Do you have an example of how this change break other boards?
-
-Oh sure. The original reason was that the array was ordered by ID.
-That was changed in [1], which I forgot about.
-
-The other bit is for coreboot (or potentially other prior phases) we
-receive timestamps as a block and add them into U-Boot. We want these
-to appear in the correct order with respect to the ones already adding
-to U-Boot.
-
-Sadly coreboot uses its own toolchain and I seem to have deleted it,
-but once it finishes building the world I will give it a try.
-
->
-> >
-> > At the very least, this should be Kconfig option just enabled for
-> > boards with a broken ATF.
->
-> I can add a Kconfig option, but would like to understand why other/any
-> board would need to sort the records in the first place.
-
-OK.
-
-Regards,
-Simon
-
-[1] 03ecac31498 bootstage: Use rec_count as the array index
