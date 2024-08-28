@@ -4,40 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98BE3C636E9
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 16:55:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC9BBC636E5
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 17:06:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77BE188A75;
-	Wed, 28 Aug 2024 18:55:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 305F9885A0;
+	Wed, 28 Aug 2024 19:06:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WPq/gtBw";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 284A1889F8; Wed, 28 Aug 2024 18:55:00 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id DB5CD88703
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 18:54:57 +0200 (CEST)
+ id 17D388862E; Wed, 28 Aug 2024 19:06:43 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C5958841E
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 19:06:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 77412DA7;
- Wed, 28 Aug 2024 09:55:23 -0700 (PDT)
-Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 352F13F73B;
- Wed, 28 Aug 2024 09:54:54 -0700 (PDT)
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2] list: use list_count_nodes() to count list entries
-Date: Wed, 28 Aug 2024 22:24:22 +0530
-Message-Id: <20240828165422.3553394-1-sughosh.ganu@linaro.org>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6bf6721aae5so35782066d6.2
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 10:06:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1724864799; x=1725469599; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=PdchJK3idfmVZIwbsSydS21PMv3QVDa+PrgUcKuPVJU=;
+ b=WPq/gtBw2LR/pcutZL7QH22gy/SqKhHEdFpih7m+droiCguYA8jifRzShJV+VmBR67
+ VzsCmIiXCa2SgQKvdGGtDNXCXqQClfl1Wxo2NATnvAmGfcySek6gGmrm0RnGoQcFr5GG
+ QGGM4IFJ/9KHjorrYEstj0ib4DopKTRUsPMUw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724864799; x=1725469599;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PdchJK3idfmVZIwbsSydS21PMv3QVDa+PrgUcKuPVJU=;
+ b=VtaIIv/Q6bp7ITAXKufjc+bkt+DG7s7fKfY2gphWs3Aue4JxRKSj82YOnljmFK0frQ
+ IDE867+Woi/9zKkzDxEZgxcdmcV5o4kdPDvcPTpJ91ChbC33aMVhTWnGoc+sbqGmHSaM
+ R4/Ji/18RHlcoEnyO5Ke2mZp5Ax6fmR1JaGjmtWhNli0fCaKGCyZyJ5gAvcbTVph862E
+ GYESUa8xsshO6F6EDX62KVHU9oZLzvO1owa5WZfE1m/L3yUNjaboqIcYHY6kDUyJ2vVp
+ q0Mcz9OSks5oAUwfVdcFpYsis72ucVqT82bq7R381G9PyInB4tygpCPjai1DuOwL3o3z
+ kbXA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWDCQZsTkJXEDzF0wdsoioWj8R1FJoc/rX04Pqno6HGJ4a0/yOPwczSYOyUwItRDAyn2rpDYww=@lists.denx.de
+X-Gm-Message-State: AOJu0YyLUQgdZ6JBrlwJGEPAM00XFvwwWs7z7j3ER4IjLwR1qGe5fcKp
+ dAQdfFYSJk5kmWhP0uWy4o3r8CEhBjM3QQ+WzomY3o4G+ow8u+xzZkFlZ9+9FRTBgn3/4WJjj1Y
+ aN1O6zp4YhfLCDnZFlDIJX6YN7j/FIp8z4YLU7mhCPr3pZ/w=
+X-Google-Smtp-Source: AGHT+IF2fXaP+V8We5uzv2mqn25bojPhAmmM5CAUT+MO970x1lfjpdGm+tGLBF/niFw0g98UHoMrCuG4zPWCKjPX39o=
+X-Received: by 2002:a05:6214:5882:b0:6c1:76c6:b673 with SMTP id
+ 6a1803df08f44-6c33e617151mr1595166d6.22.1724864798957; Wed, 28 Aug 2024
+ 10:06:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240803124149.2916030-1-jonas@kwiboo.se>
+ <20240803124149.2916030-3-jonas@kwiboo.se>
+ <CAFLszTha39GkRsZA1r91YpLdKJDiRfDmAzWsMTuByDtPC0YvGQ@mail.gmail.com>
+ <CAFLszThNN-rfPtAYKSHtGTEUwuxFgz01A-yJMXRYtwX3WiA-Kg@mail.gmail.com>
+ <0329ee07-3f99-4daf-8960-1e934ff753de@kwiboo.se>
+In-Reply-To: <0329ee07-3f99-4daf-8960-1e934ff753de@kwiboo.se>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 28 Aug 2024 11:06:28 -0600
+Message-ID: <CAFLszTgGhy+nY7MGDi19ZeB7ptstmXFwWG4NRUECtdjqPfMZSQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] bootstage: Do not sort records
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -54,112 +87,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the API function list_count_nodes() to count the number of list
-entries.
+Hi Jonas,
 
-Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
-Changes since V1: Rebased on top of next
+On Wed, 28 Aug 2024 at 10:15, Jonas Karlman <jonas@kwiboo.se> wrote:
+>
+> Hi Simon,
+>
+> On 2024-08-28 18:01, Simon Glass wrote:
+> > Hi Jonas,
+> >
+> > On Tue, 6 Aug 2024 at 15:50, Simon Glass <sjg@chromium.org> wrote:
+> >>
+> >> Hi Jonas,
+> >>
+> >> On Sat, 3 Aug 2024 at 06:42, Jonas Karlman <jonas@kwiboo.se> wrote:
+> >>>
+> >>> The timer counter on Rockchip SoCs may be reset in TF-A, this may cause
+> >>> the bootstage records to be printed out of order and with an incorrect
+> >>> elapsed time.
+> >>
+> >> Eek can we just fix TF-A? That seems like a bug.
+>
+> TF-A is vendor blob, so we have no control of it.
 
- boot/scene.c              | 8 +-------
- drivers/mtd/ubi/fastmap.c | 8 +++-----
- fs/yaffs2/yaffs_guts.c    | 5 ++---
- lib/fwu_updates/fwu_mtd.c | 5 +----
- test/boot/expo.c          | 4 +---
- 5 files changed, 8 insertions(+), 22 deletions(-)
+Can we replace it, or is it one of the ones that has not been released?
 
-diff --git a/boot/scene.c b/boot/scene.c
-index ac976aa26b..270c9c6723 100644
---- a/boot/scene.c
-+++ b/boot/scene.c
-@@ -79,13 +79,7 @@ int scene_title_set(struct scene *scn, uint id)
- 
- int scene_obj_count(struct scene *scn)
- {
--	struct scene_obj *obj;
--	int count = 0;
--
--	list_for_each_entry(obj, &scn->obj_head, sibling)
--		count++;
--
--	return count;
-+	return list_count_nodes(&scn->obj_head);
- }
- 
- void *scene_obj_find(const struct scene *scn, uint id, enum scene_obj_t type)
-diff --git a/drivers/mtd/ubi/fastmap.c b/drivers/mtd/ubi/fastmap.c
-index 21750e1817..9c6b15b8cb 100644
---- a/drivers/mtd/ubi/fastmap.c
-+++ b/drivers/mtd/ubi/fastmap.c
-@@ -581,13 +581,11 @@ static int count_fastmap_pebs(struct ubi_attach_info *ai)
- 	struct ubi_ainf_peb *aeb;
- 	struct ubi_ainf_volume *av;
- 	struct rb_node *rb1, *rb2;
--	int n = 0;
-+	int n;
- 
--	list_for_each_entry(aeb, &ai->erase, u.list)
--		n++;
-+	n = list_count_nodes(&ai->erase);
- 
--	list_for_each_entry(aeb, &ai->free, u.list)
--		n++;
-+	n += list_count_nodes(&ai->free);
- 
- 	 ubi_rb_for_each_entry(rb1, av, &ai->volumes, rb)
- 		ubi_rb_for_each_entry(rb2, aeb, &av->root, u.rb)
-diff --git a/fs/yaffs2/yaffs_guts.c b/fs/yaffs2/yaffs_guts.c
-index e89d02513c..c20f2f8298 100644
---- a/fs/yaffs2/yaffs_guts.c
-+++ b/fs/yaffs2/yaffs_guts.c
-@@ -4452,13 +4452,12 @@ loff_t yaffs_get_obj_length(struct yaffs_obj *obj)
- int yaffs_get_obj_link_count(struct yaffs_obj *obj)
- {
- 	int count = 0;
--	struct list_head *i;
- 
- 	if (!obj->unlinked)
- 		count++;	/* the object itself */
- 
--	list_for_each(i, &obj->hard_links)
--	    count++;		/* add the hard links; */
-+	/* add the hard links; */
-+	count += list_count_nodes(&obj->hard_links);
- 
- 	return count;
- }
-diff --git a/lib/fwu_updates/fwu_mtd.c b/lib/fwu_updates/fwu_mtd.c
-index ccaba3f311..c14203b9dd 100644
---- a/lib/fwu_updates/fwu_mtd.c
-+++ b/lib/fwu_updates/fwu_mtd.c
-@@ -60,10 +60,7 @@ int fwu_mtd_get_alt_num(efi_guid_t *image_id, u8 *alt_num,
- 	if (ret)
- 		return -ENOENT;
- 
--	nalt = 0;
--	list_for_each_entry(dfu, &dfu_list, list)
--		nalt++;
--
-+	nalt = list_count_nodes(&dfu_list);
- 	if (!nalt) {
- 		log_warning("No entities in dfu_alt_info\n");
- 		dfu_free_entities();
-diff --git a/test/boot/expo.c b/test/boot/expo.c
-index 4b24f504e2..9b4aa803eb 100644
---- a/test/boot/expo.c
-+++ b/test/boot/expo.c
-@@ -702,9 +702,7 @@ static int expo_test_build(struct unit_test_state *uts)
- 	txt = scene_obj_find(scn, item->label_id, SCENEOBJT_NONE);
- 	ut_asserteq_str("2 GHz", expo_get_str(exp, txt->str_id));
- 
--	count = 0;
--	list_for_each_entry(item, &menu->item_head, sibling)
--		count++;
-+	count = list_count_nodes(&menu->item_head);
- 	ut_asserteq(3, count);
- 
- 	expo_destroy(exp);
--- 
-2.34.1
+Can you file a bug with the vendor?
 
+>
+> >>
+> >>>
+> >>> Fix this by not sorting the bootstage records.
+> >>>
+> >>> Before on a Radxa ZERO 3W (RK3566) board:
+> >>>
+> >>>   => bootstage report
+> >>>   Timer summary in microseconds (12 records):
+> >>>          Mark    Elapsed  Stage
+> >>>             0          0  reset
+> >>>         7,436      7,436  board_init_f
+> >>>       164,826    157,390  SPL
+> >>>       375,392    210,566  end phase
+> >>>       423,909     48,517  board_init_r
+> >>>       472,973     49,064  eth_common_init
+> >>>       476,848      3,875  main_loop
+> >>>       477,003        155  cli_loop
+> >>>
+> >>>   Accumulated time:
+> >>>                    7,181  of_live
+> >>>                   14,739  dm_spl
+> >>>                   15,029  dm_r
+> >>>                  315,150  dm_f
+> >>>
+> >>> With this the records can be printed in chronological order when the
+> >>> counter is reset and SPL and board_init_r records show correct elapsed
+> >>> time.
+> >>>
+> >>>   => bootstage report
+> >>>   Timer summary in microseconds (12 records):
+> >>>          Mark    Elapsed  Stage
+> >>>             0          0  reset
+> >>>       164,437    164,437  SPL
+> >>>       375,023    210,586  end phase
+> >>>         7,437      7,437  board_init_f
+> >>>       424,390    416,953  board_init_r
+> >>>       473,515     49,125  eth_common_init
+> >>>       477,402      3,887  main_loop
+> >>>       477,571        169  cli_loop
+> >>>
+> >>>   Accumulated time:
+> >>>                   14,734  dm_spl
+> >>>                  315,646  dm_f
+> >>>                    7,339  of_live
+> >>>                   14,977  dm_r
+> >>>
+> >>> For the tested board external TPL and BROM take ~164 ms to initialize
+> >>> DRAM and load SPL, SPL take ~210ms to load images from FIT and U-Boot
+> >>> proper take ~477ms to reach cli prompt.
+> >>>
+> >>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> >>> ---
+> >>>  common/bootstage.c | 12 ++----------
+> >>>  1 file changed, 2 insertions(+), 10 deletions(-)
+> >>>
+> >
+> > To put this more strongly, this breaks the timing output on other boards.
+>
+> Please elaborate, I cannot understand why not sorting would break output
+> on other boards, are other boards adding records out of order?
+>
+> Do you have an example of how this change break other boards?
+
+Oh sure. The original reason was that the array was ordered by ID.
+That was changed in [1], which I forgot about.
+
+The other bit is for coreboot (or potentially other prior phases) we
+receive timestamps as a block and add them into U-Boot. We want these
+to appear in the correct order with respect to the ones already adding
+to U-Boot.
+
+Sadly coreboot uses its own toolchain and I seem to have deleted it,
+but once it finishes building the world I will give it a try.
+
+>
+> >
+> > At the very least, this should be Kconfig option just enabled for
+> > boards with a broken ATF.
+>
+> I can add a Kconfig option, but would like to understand why other/any
+> board would need to sort the records in the first place.
+
+OK.
+
+Regards,
+Simon
+
+[1] 03ecac31498 bootstage: Use rec_count as the array index
