@@ -4,75 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59B47C7114C
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 22:13:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30A24C7114C
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 22:17:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8B7488B0C;
-	Thu, 29 Aug 2024 00:09:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 969F6889D2;
+	Thu, 29 Aug 2024 00:17:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P8JWshd0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TgPqdPUv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68A7A889EF; Thu, 29 Aug 2024 00:09:19 +0200 (CEST)
-Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
- [IPv6:2607:f8b0:4864:20::12e])
+ id 2C174889D1; Thu, 29 Aug 2024 00:17:15 +0200 (CEST)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40CFF88A9B
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:09:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 66C3C8862E
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:17:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12e.google.com with SMTP id
- e9e14a558f8ab-39d21fdc11bso25804985ab.2
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 15:09:07 -0700 (PDT)
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6bf7a2035d9so11002276d6.1
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 15:17:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724882945; x=1725487745; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0zuFXfhZT+VhkGr/iJUpZVtkVEyaxCfxQccXFd56CYA=;
- b=P8JWshd0QSf5KJpERdUY/KzchFGkHQY8oEA5XyqVi58cvj1UWHZll5UTanav6Rfq+B
- RiSqyc8h734foA40quPbbZ6au77XsSg5rLneEBjkOIh+VP0G5cWzqgWQObMINgBILDGg
- cRD/HGX4EAqWvH7cYKn7FXNGEFjT0r0FhlGr8=
+ d=chromium.org; s=google; t=1724883426; x=1725488226; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=cBiGxGPlgc7Gd3Sxj1IEiXxIsm4OQtxebqsqGuSoAvo=;
+ b=TgPqdPUv8yB8mvtIe7lt19soUjqWewvBC8gF457APmv5zu3dYcDwGvbv/+KQzTF+QI
+ Oizwc/D+yrd9Q/IwEDBu1PuYltre8P8iSh9t0Rt2s3+h3xNtVYQngaJ9Jo31NThUvpAX
+ TGautNBkIsBLnn4NuCJeldVuwj4qpV8XlBBR4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724882945; x=1725487745;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0zuFXfhZT+VhkGr/iJUpZVtkVEyaxCfxQccXFd56CYA=;
- b=VrrNQ374qA+ZWmaKXTiMqcmJrO3KQ4EvPWbbT1k1DkW3HDUe4e9NuHLVNspUeCevPG
- zanKWdvAN3DRqB+FUj9apEbmVcVRWIpAxvxanZbjACYUhhCYwNETftxyiPVHZ7LOj1FZ
- +4BoMGsWZudPVZUteD4mxitiqzEgwGzpjKRfW7iM26aCuQmACA6uOrIIdAl0Gp32Xg01
- 8BU7QS/3eOdYLuiFN+j/DHIzePc4DtuHQy/k7R/x56vwpIICNVU6eDR5YzGOF4/9Pw1D
- ebIqn6RlXIZjjirVqPpw2vb8IR/thKdNqJjccU8EkllIm3zosxzUfFOfmY/4Q3NeZvbl
- SQYQ==
-X-Gm-Message-State: AOJu0Yw2yaRxJk3d56yz9DTgwl+BTj6VSg0A3O+ypqxsYXBf2PuuMEip
- YpIIONEQ9/tZRG6PLhQbscKvH0ui9llrda6Ykbkusu6KW0XAxb2iIJkkjmM1BYl7JQkDdMkE+h4
- =
-X-Google-Smtp-Source: AGHT+IER3xyYFpeUK7xXjIYC1xMtndKibjXzmiKMg0LJH7GK1LJgSF6WEsLfBFLS46pQwBmnwELqVQ==
-X-Received: by 2002:a05:6e02:1847:b0:39b:3462:70af with SMTP id
- e9e14a558f8ab-39f377df2dcmr11712005ab.8.1724882945574; 
- Wed, 28 Aug 2024 15:09:05 -0700 (PDT)
-Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
- [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39f38e683c1sm838105ab.19.2024.08.28.15.09.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Aug 2024 15:09:05 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
-Subject: [PATCH v5 20/20] CI: Allow running tests on sjg lab
-Date: Wed, 28 Aug 2024 16:08:46 -0600
-Message-Id: <20240828220846.1205813-21-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240828220846.1205813-1-sjg@chromium.org>
-References: <20240828220846.1205813-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1724883426; x=1725488226;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=cBiGxGPlgc7Gd3Sxj1IEiXxIsm4OQtxebqsqGuSoAvo=;
+ b=o7VPU8UcZA4cV0ZScS6kkQFRJFNfFWVZqZkySCtQhQc6ESSqfI/65VMcQARFmi0TbH
+ e4/xnj5xSbxXggnhAw7IqCkxn1lccy5/4NL5+eKndekSpdPt6q8j9gxngeXYiw6R8g9/
+ b5YEo6/0Rw3vBm3Eg72BikPwBhK5x+C+nZZ4XQuFRfuLUlpusYZmvKHjCZr60TuQebPG
+ 1Lr3YEbibPsvGzM1Hp/8G7tDB3yrycn853DluVQVtn3U7E5jRdgz5C2dIbPkTicmNvPi
+ MxdAJN/2RrDR3+XofildJHo0qd9jfLQ4DYfkfPwspVJ/OkGfNCmDWsrSyFx5rC9FINH1
+ W8Zg==
+X-Gm-Message-State: AOJu0YzAHC+6oh8HN0NMwMuBm8h180DcXQUKuJRqd+xok4iiDROWXXXa
+ uKAAUJDaQfQMcR7dbD5BUfX/aiu1c7vKG+HilhS+OX96m8+LLcZtP9W9dJr1HGtHftyDphNvbRV
+ R99oTm8w5dlO1klQst4F82G7nc7rxWWXQ2sPk
+X-Google-Smtp-Source: AGHT+IHrplIwR+/eznMDBMmzg2EJ8hzoJ8wq+Bg7ce1DHY2s8EbO+77UEJPLBbO7R1bq9QCkX8Jsv4OGkJYdBy9sARY=
+X-Received: by 2002:a05:6214:23c8:b0:6b5:2be1:cd6e with SMTP id
+ 6a1803df08f44-6c33f32490bmr10664166d6.4.1724883426247; Wed, 28 Aug 2024
+ 15:17:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240828014538.3322013-1-sjg@chromium.org>
+ <CALeDE9MX6MMECX+vNCjMs8Z2_G3+gSio4BxFHgez-H_a4f2Uyg@mail.gmail.com>
+In-Reply-To: <CALeDE9MX6MMECX+vNCjMs8Z2_G3+gSio4BxFHgez-H_a4f2Uyg@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 28 Aug 2024 16:16:55 -0600
+Message-ID: <CAFLszTgrCGhvhO0GDSLABu1D10H97dBWFSnEf8gSJujq6iUduw@mail.gmail.com>
+Subject: Re: [PATCH 00/18] vbe: Series part D
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andre Przywara <andre.przywara@arm.com>, 
+ Apurva Nandan <a-nandan@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Greg Malysa <greg.malysa@timesys.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jayesh Choudhary <j-choudhary@ti.com>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Kever Yang <kever.yang@rock-chips.com>,
+ Kongyang Liu <seashell11234455@gmail.com>, 
+ Minkyu Kang <mk7.kang@samsung.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>, Stefan Roese <sr@denx.de>,
+ Tony Dinh <mibodhi@gmail.com>, Vaishnav Achath <vaishnav.a@ti.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, 
+ huang lin <hl@rock-chips.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,200 +95,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a way to run tests on a real hardware lab. This is in the very early
-experimental stages. There are only 23 boards and 3 of those are broken!
-(bob, ff3399, samus). A fourth fails due to problems with the TPM tests.
+Hi Peter,
 
-To try this, assuming you have gitlab access, set SJG_LAB=1, e.g.:
+On Wed, 28 Aug 2024 at 03:59, Peter Robinson <pbrobinson@gmail.com> wrote:
+>
+> Hi Simon,
+>
+> > This includes various patches towards implementing the VBE abrec
+>
+> What is abrec?
 
-   git push -o ci.variable="SJG_LAB=1" dm HEAD:try
+It's a VBE method which supports A, B and recovery images and permits
+updating from SPL onwards. The idea is that you can safely update
+without bricking a device.
 
-This relies on the two previous series targeted at -next as well as the
-bugfix series for -master
+>
+> > bootmeth in U-Boot.
+> >
+> >
+> > Simon Glass (18):
+> >   sandbox: Add missing header file
+> >   bootstd: Add stub for bootdev_setup_for_sibling_blk()
+> >   gzip: Correct function comment for gunzip()
+>
+> Is this from upstream gzip code somewher?
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
----
+I'm not sure, actually.
 
-(no changes since v3)
+>
+> >   fdtdec: Support separate BSS for all XPL builds
 
-Changes in v3:
-- Split out most patches into two new series and update cover letter
+Needed so that VPL can use DDT
 
-Changes in v2:
-- Avoid running a docker image for skipped lab tests
+> >   tiny-printf: Correct return values
 
- .gitlab-ci.yml | 153 +++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 153 insertions(+)
+I can't remember, sorry.
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 0a15b7352cd..8586a472be1 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -17,6 +17,7 @@ stages:
-   - testsuites
-   - test.py
-   - world build
-+  - sjg-lab
- 
- .buildman_and_testpy_template: &buildman_and_testpy_dfn
-   stage: test.py
-@@ -491,3 +492,155 @@ coreboot test.py:
-     TEST_PY_TEST_SPEC: "not sleep"
-     TEST_PY_ID: "--id qemu"
-   <<: *buildman_and_testpy_dfn
-+
-+.lab_template: &lab_dfn
-+  stage: sjg-lab
-+  rules:
-+    - if: $SJG_LAB == "1"
-+      when: always
-+    - when: manual
-+  tags: [ 'lab' ]
-+  script:
-+    - if [[ -z "${SJG_LAB}" ]]; then
-+        exit 0;
-+      fi
-+    # Environment:
-+    #   SRC  - source tree
-+    #   OUT  - output directory for builds
-+    - export SRC="$(pwd)"
-+    - export OUT="${SRC}/build/${BOARD}"
-+    - export PATH=$PATH:~/bin
-+    - export PATH=$PATH:/vid/software/devel/ubtest/u-boot-test-hooks/bin
-+
-+    # Load it on the device
-+    - ret=0
-+    - echo "role ${ROLE}"
-+    - export strategy="-s uboot -e off"
-+    # export verbose="-v"
-+    - ${SRC}/test/py/test.py --role ${ROLE} --build-dir "${OUT}"
-+        --capture=tee-sys -k "not bootstd"|| ret=$?
-+    - U_BOOT_BOARD_IDENTITY="${ROLE}" u-boot-test-release || true
-+    - if [[ $ret -ne 0 ]]; then
-+        exit $ret;
-+      fi
-+  artifacts:
-+    when: always
-+    paths:
-+      - "build/${BOARD}/test-log.html"
-+      - "build/${BOARD}/multiplexed_log.css"
-+    expire_in: 1 week
-+
-+rpi3:
-+  variables:
-+    ROLE: rpi3
-+  <<: *lab_dfn
-+
-+opi_pc:
-+  variables:
-+    ROLE: opi_pc
-+  <<: *lab_dfn
-+
-+pcduino3_nano:
-+  variables:
-+    ROLE: pcduino3_nano
-+  <<: *lab_dfn
-+
-+samus:
-+  variables:
-+    ROLE: samus
-+  <<: *lab_dfn
-+
-+link:
-+  variables:
-+    ROLE: link
-+  <<: *lab_dfn
-+
-+jerry:
-+  variables:
-+    ROLE: jerry
-+  <<: *lab_dfn
-+
-+minnowmax:
-+  variables:
-+    ROLE: minnowmax
-+  <<: *lab_dfn
-+
-+opi_pc2:
-+  variables:
-+    ROLE: opi_pc2
-+  <<: *lab_dfn
-+
-+bpi:
-+  variables:
-+    ROLE: bpi
-+  <<: *lab_dfn
-+
-+rpi2:
-+  variables:
-+    ROLE: rpi2
-+  <<: *lab_dfn
-+
-+bob:
-+  variables:
-+    ROLE: bob
-+  <<: *lab_dfn
-+
-+ff3399:
-+  variables:
-+    ROLE: ff3399
-+  <<: *lab_dfn
-+
-+coral:
-+  variables:
-+    ROLE: coral
-+  <<: *lab_dfn
-+
-+rpi3z:
-+  variables:
-+    ROLE: rpi3z
-+  <<: *lab_dfn
-+
-+bbb:
-+  variables:
-+    ROLE: bbb
-+  <<: *lab_dfn
-+
-+kevin:
-+  variables:
-+    ROLE: kevin
-+  <<: *lab_dfn
-+
-+pine64:
-+  variables:
-+    ROLE: pine64
-+  <<: *lab_dfn
-+
-+c4:
-+  variables:
-+    ROLE: c4
-+  <<: *lab_dfn
-+
-+rpi4:
-+  variables:
-+    ROLE: rpi4
-+  <<: *lab_dfn
-+
-+rpi0:
-+  variables:
-+    ROLE: rpi0
-+  <<: *lab_dfn
-+
-+snow:
-+  variables:
-+    ROLE: snow
-+  <<: *lab_dfn
-+
-+pcduino3:
-+  variables:
-+    ROLE: pcduino3
-+  <<: *lab_dfn
-+
-+nyan-big:
-+  variables:
-+    ROLE: nyan-big
-+  <<: *lab_dfn
--- 
-2.34.1
+> >   tpl: Support numbered aliases in device tree
 
+The MMC needs to be accessed using its sequence number
+
+> >   ram: Support driver model in TPL
+
+That should say VPL...but again I'm not quite sure
+
+> >   serial: Support debug UART in TPL
+
+This allows debugging of the jump from TPL to VPL
+
+> >   armv8: Support not having separate BSS
+
+VPL doesn't want a separate BSS since SDRAM isn't available that early
+
+> >   arm: cache: Drop a stale comment
+
+Just something I noticed
+
+> >   arm: Fix up a stale comment in sections.c
+
+Another thing I noticed
+
+> >   mmc: Support driver model in TPL
+
+TPL needs to read VPL from MMC
+
+> >   mmc: Add more debugging for SPL
+> >   mmc: Log the error when init fails
+> >   mmc: rockchip: Log some error returns
+> >   mmc: rockchip: Allow clocks to be missing
+
+These all help with debugging reading of VPL from the correct MMC device
+
+> >   rockchip: mmc: Fix a missing colon
+
+Just something I noticed
+
+> >   rockchip: Provided SPL control over efuse presence
+
+We don't want this driver in TPL or VPL
+
+>
+> I'm not sure what most of these patches have to do with VBE?
+
+Basically there are a lot of little tweaks needed.
+
+>
+> >  arch/arm/cpu/armv8/u-boot-spl.lds   | 12 ++++++++++++
+> >  arch/arm/lib/cache.c                |  2 --
+> >  arch/arm/lib/sections.c             |  2 +-
+> >  arch/sandbox/include/asm/sections.h |  1 +
+> >  common/spl/spl_mmc.c                | 13 +++++++++++++
+> >  drivers/core/Kconfig                |  8 ++++++++
+> >  drivers/misc/Makefile               |  2 +-
+> >  drivers/mmc/Kconfig                 | 12 ++++++++++++
+> >  drivers/mmc/mmc.c                   |  2 +-
+> >  drivers/mmc/rockchip_dw_mmc.c       | 10 ++++------
+> >  drivers/mmc/rockchip_sdhci.c        | 11 +++++------
+> >  drivers/ram/Kconfig                 |  9 +++++++++
+> >  drivers/serial/Kconfig              |  7 +++++++
+> >  include/bootdev.h                   |  8 ++++++++
+> >  include/gzip.h                      |  6 ++++--
+> >  lib/fdtdec.c                        |  2 +-
+> >  lib/tiny-printf.c                   | 15 ++++++---------
+> >  17 files changed, 93 insertions(+), 29 deletions(-)
+> >
+> > --
+> > 2.34.1
+> >
+
+Regards,
+SImon
