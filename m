@@ -4,80 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A628C54EE3
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 12:13:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B78BFC54F32
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 12:15:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87E0288B7F;
-	Wed, 28 Aug 2024 14:11:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3683C88874;
+	Wed, 28 Aug 2024 14:15:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="K8UkZGDW";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F6BA88868; Wed, 28 Aug 2024 14:10:57 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F203888875; Wed, 28 Aug 2024 14:15:31 +0200 (CEST)
+Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 542F288868
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 14:10:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C46388847
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 14:15:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-42819654737so56724935e9.1
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 05:10:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724847054; x=1725451854; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=05192NsFH2MG3emPZoYYF3sUntFvJjHm1ytV4NXnLXs=;
- b=K8UkZGDWNzg6XgZ4Way8DRFVUPL8r1tvVO0vrRiOEnSoWflL4+ruXqrTA7EIT3M/yS
- sjdA5aS70AW8WrBD79b9ZjuczDoeTyCvM3r/3qEG0xdkSTd/R9uvt8eSuv/Yyzgdqy9R
- vSFsIrxXjcVWqAkVcWAmrgmmqx+VWHAvIU3PqISSfKEbUP1AE5/tcfzDUYewi7fu5Vcm
- mQJH5xAcQcwr3MUN+vJy5IvYvDxpPmotMt0MjfWDZ0uHhIf243wjtdk2MZYRQyFbeGWo
- objwvzBv6JeBht00MbV/2+/xaDV0zD3nR3oI1iJnJxtCr8ViP778+xWHaVCnk6Y117ui
- 8Peg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724847054; x=1725451854;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=05192NsFH2MG3emPZoYYF3sUntFvJjHm1ytV4NXnLXs=;
- b=pLidBMP6O9bWXDCGlJauHM0ZHo1UH4Z3/7K/gO1ciPSYbm8n3XwczuShGXzLF38deL
- zCQHAnQ5DcfI6r2pAfXUD1fs3hfpHBZY7U3eOxWAVFT0hAixduKm1a8FSWjOKkkCtMhQ
- pAOGLwAwF4Csn/Jjgta/XyNLhw6WHr1063qcPJVZOssPNSZVh4QaTRlpBVZLVs0V0y+y
- c80zMZOPUYrjL/9FeA/0LtVLk7QI0ncdwdLVXBsg2Tn1/vDEFDXWZmydIW/T8MlQ8BG5
- Q5G3lcudT31bbpn8jXXlYuqaLzauOGIGFnpPDcmecqPbkMtVOIvcSzsP1l5Afzkfzhuc
- NvRg==
-X-Gm-Message-State: AOJu0YyvOG4prcOmPBHEM7ecrIFSGfvmY4fb6Ijufd0DwaTtQFJN+460
- QIu8A43j92a/IZdePciExj1KwkdGbvLs8B9l+xPNo9F5rjqQyYVgjYqno8NDZ6oyVMJLu4zOBnQ
- Py2E6vH0O
-X-Google-Smtp-Source: AGHT+IHYqpM184lV3c6oeXgVoxlrciBfTPJGmZGK5JTKXm8farvw9mT5PwWb7eeiqD6sQiTU6urGvw==
-X-Received: by 2002:a05:600c:a08:b0:426:6e95:78d6 with SMTP id
- 5b1f17b1804b1-42acd534890mr114138235e9.4.1724847054467; 
- Wed, 28 Aug 2024 05:10:54 -0700 (PDT)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:8ac3:aada:f033:985a])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42ba639687csm19470365e9.8.2024.08.28.05.10.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Aug 2024 05:10:54 -0700 (PDT)
-From: Jerome Forissier <jerome.forissier@linaro.org>
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
+Received: from secure.fukaumi.org ([10.0.0.2])
+ by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
+ 47SCFNuG031691; Wed, 28 Aug 2024 21:15:24 +0900
+From: FUKAUMI Naoki <naoki@radxa.com>
 To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH 13/13] test/py: test_efi_loader: add HTTP (wget) test for the
- EFI loader
-Date: Wed, 28 Aug 2024 14:10:36 +0200
-Message-Id: <719ff6dc8f79e0ccb6160bbbbc834b30ac70ca78.1724846454.git.jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <cover.1724846454.git.jerome.forissier@linaro.org>
-References: <cover.1724846454.git.jerome.forissier@linaro.org>
+Cc: trini@konsulko.com, FUKAUMI Naoki <naoki@radxa.com>
+Subject: [PATCH] led: gpio: handle GPIO_ACTIVE_LOW flag properly
+Date: Wed, 28 Aug 2024 21:15:16 +0900
+Message-ID: <20240828121516.19696-1-naoki@radxa.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,130 +49,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a test to test_efi_loader.py similar to the TFTP test but for HTTP
-with the wget command.
+invert gpio state if GPIO_ACTIVE_LOW is specified in dts.
 
-Suggested-by: Tom Rini <trini@konsulko.com>
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Tested-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
 ---
- test/py/tests/test_efi_loader.py | 62 +++++++++++++++++++++++---------
- 1 file changed, 46 insertions(+), 16 deletions(-)
+ drivers/led/led_gpio.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/test/py/tests/test_efi_loader.py b/test/py/tests/test_efi_loader.py
-index 7c1e0ffa59..5f3b448a06 100644
---- a/test/py/tests/test_efi_loader.py
-+++ b/test/py/tests/test_efi_loader.py
-@@ -45,11 +45,18 @@ env__efi_loader_helloworld_file = {
-     'crc32': 'c2244b26',                   # CRC32 check sum
-     'addr': 0x40400000,                    # load address
+diff --git a/drivers/led/led_gpio.c b/drivers/led/led_gpio.c
+index ce22fb49f2a..54aa84e0726 100644
+--- a/drivers/led/led_gpio.c
++++ b/drivers/led/led_gpio.c
+@@ -25,6 +25,8 @@ static int gpio_led_set_state(struct udevice *dev, enum led_state_t state)
+ 	switch (state) {
+ 	case LEDST_OFF:
+ 	case LEDST_ON:
++		if (priv->gpio.flags & GPIOD_ACTIVE_LOW)
++			state = !state;
+ 		break;
+ 	case LEDST_TOGGLE:
+ 		ret = dm_gpio_get_value(&priv->gpio);
+@@ -50,6 +52,9 @@ static enum led_state_t gpio_led_get_state(struct udevice *dev)
+ 	if (ret < 0)
+ 		return ret;
+ 
++	if (priv->gpio.flags & GPIOD_ACTIVE_LOW)
++		ret = !ret;
++
+ 	return ret ? LEDST_ON : LEDST_OFF;
  }
-+
-+# False if the helloworld EFI over HTTP boot test should be performed.
-+# If HTTP boot testing is not possible or desired, set this variable to True or
-+# ommit it.
-+env__efi_helloworld_net_http_test_skip = True
- """
- 
- import pytest
- import u_boot_utils
- 
-+PROTO_TFTP, PROTO_HTTP = range(0, 2)
-+
- net_set_up = False
- 
- def test_efi_pre_commands(u_boot_console):
-@@ -110,10 +117,10 @@ def test_efi_setup_static(u_boot_console):
-     global net_set_up
-     net_set_up = True
- 
--def fetch_tftp_file(u_boot_console, env_conf):
--    """Grab an env described file via TFTP and return its address
-+def fetch_file(u_boot_console, env_conf, proto):
-+    """Grab an env described file via TFTP or HTTP and return its address
- 
--    A file as described by an env config <env_conf> is downloaded from the TFTP
-+    A file as described by an env config <env_conf> is downloaded from the
-     server. The address to that file is returned.
-     """
-     if not net_set_up:
-@@ -128,7 +135,13 @@ def fetch_tftp_file(u_boot_console, env_conf):
-         addr = u_boot_utils.find_ram_base(u_boot_console)
- 
-     fn = f['fn']
--    output = u_boot_console.run_command('tftpboot %x %s' % (addr, fn))
-+    if proto == PROTO_TFTP:
-+        cmd = 'tftpboot'
-+    elif proto == PROTO_HTTP:
-+        cmd = 'wget'
-+    else:
-+        assert False
-+    output = u_boot_console.run_command('%s %x %s' % (cmd, addr, fn))
-     expected_text = 'Bytes transferred = '
-     sz = f.get('size', None)
-     if sz:
-@@ -147,17 +160,8 @@ def fetch_tftp_file(u_boot_console, env_conf):
- 
-     return addr
- 
--@pytest.mark.buildconfigspec('of_control')
--@pytest.mark.buildconfigspec('cmd_bootefi_hello_compile')
--@pytest.mark.buildconfigspec('cmd_tftpboot')
--def test_efi_helloworld_net(u_boot_console):
--    """Run the helloworld.efi binary via TFTP.
--
--    The helloworld.efi file is downloaded from the TFTP server and is executed
--    using the fallback device tree at $fdtcontroladdr.
--    """
--
--    addr = fetch_tftp_file(u_boot_console, 'env__efi_loader_helloworld_file')
-+def do_test_efi_helloworld_net(u_boot_console, proto):
-+    addr = fetch_file(u_boot_console, 'env__efi_loader_helloworld_file', proto)
- 
-     output = u_boot_console.run_command('bootefi %x' % addr)
-     expected_text = 'Hello, world'
-@@ -165,6 +169,32 @@ def test_efi_helloworld_net(u_boot_console):
-     expected_text = '## Application failed'
-     assert expected_text not in output
- 
-+@pytest.mark.buildconfigspec('of_control')
-+@pytest.mark.buildconfigspec('cmd_bootefi_hello_compile')
-+@pytest.mark.buildconfigspec('cmd_tftpboot')
-+def test_efi_helloworld_net_tftp(u_boot_console):
-+    """Run the helloworld.efi binary via TFTP.
-+
-+    The helloworld.efi file is downloaded from the TFTP server and is executed
-+    using the fallback device tree at $fdtcontroladdr.
-+    """
-+
-+    do_test_efi_helloworld_net(u_boot_console, PROTO_TFTP);
-+
-+@pytest.mark.buildconfigspec('of_control')
-+@pytest.mark.buildconfigspec('cmd_bootefi_hello_compile')
-+@pytest.mark.buildconfigspec('cmd_wget')
-+def test_efi_helloworld_net_http(u_boot_console):
-+    """Run the helloworld.efi binary via HTTP.
-+
-+    The helloworld.efi file is downloaded from the HTTP server and is executed
-+    using the fallback device tree at $fdtcontroladdr.
-+    """
-+    if u_boot_console.config.env.get('env__efi_helloworld_net_http_test_skip', True):
-+        pytest.skip('helloworld.efi HTTP test is not enabled!')
-+
-+    do_test_efi_helloworld_net(u_boot_console, PROTO_HTTP);
-+
- @pytest.mark.buildconfigspec('cmd_bootefi_hello')
- def test_efi_helloworld_builtin(u_boot_console):
-     """Run the builtin helloworld.efi binary.
-@@ -187,7 +217,7 @@ def test_efi_grub_net(u_boot_console):
-     executed.
-     """
- 
--    addr = fetch_tftp_file(u_boot_console, 'env__efi_loader_grub_file')
-+    addr = fetch_file(u_boot_console, 'env__efi_loader_grub_file', PROTO_TFTP)
- 
-     u_boot_console.run_command('bootefi %x' % addr, wait_for_prompt=False)
  
 -- 
-2.40.1
+2.43.0
 
