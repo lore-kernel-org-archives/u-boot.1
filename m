@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E03A9C636EE
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 18:36:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00BF5C636EE
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 18:56:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D6408857C;
-	Wed, 28 Aug 2024 20:36:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4FDB588744;
+	Wed, 28 Aug 2024 20:56:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hv1/qHn5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OaW/8D83";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D41C788916; Wed, 28 Aug 2024 20:36:09 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id 044BA8870D; Wed, 28 Aug 2024 20:56:35 +0200 (CEST)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E51AD80805
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 20:36:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CBE4B888D4
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 20:56:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-533de5a88f8so6621073e87.3
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 11:36:07 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-7a8049d4a40so4598285a.1
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 11:56:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724870167; x=1725474967; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IbjpZIiEBDiLSjZy7BgydKGdhv/3eL/qI4wRA65slac=;
- b=hv1/qHn5Jjp6AUntCeL1XNen5zFPopYet/IcHwMj1zHU4E+BqCHAlmN42hjjJ9qEuC
- ijag8PPvYh+Nh8Xd7SQtfc6UrSe9dC19NjPjOQWGpu4dpWMALZwX61by7LTaUoJb6kIW
- oYRW1Kzfl8O74DWwJ9OzFNyYo1ufyHzfF/paNCjIL7V3WPoqaJq0ifz5PLHIP72/Hpeh
- 36Sbqjvjpt+4VRswlJkicHjQdv10MUhs4nqH/KWjT/qkYlcxVo0Sym/hGevGGtXdi/Ws
- H3o1XwVSU2Jly1lT3s5iTTNkYnGnO7JFcVsvvCPYAv1Sm4PquB7HSZVN/OZTXvg4Zy92
- gxnQ==
+ d=konsulko.com; s=google; t=1724871392; x=1725476192; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ULAbRzwZrkyyHpUr+uIAWQTrjZJi8YqeFXAaoJQKRbE=;
+ b=OaW/8D83YC8qd6lCEznigFHBOkwzvSCW8W8jQxBRjcLxYWjYghI5NDRoQYqMYxHeFG
+ /JhIB8/xodTHe4V3CEgOP6kF4/4XrzptTbK9h5NnvgT/a5eRwUHAQ7tXMSZWQLwSLzNX
+ CFN8VyHpBhnO41cIQH0aZLtaesSBJJuTisUC4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724870167; x=1725474967;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IbjpZIiEBDiLSjZy7BgydKGdhv/3eL/qI4wRA65slac=;
- b=Y0kHuY+Cb7JHbi18yNHZKm3nSXutcQerLUtfd2iIr6PnBia0hNoKcaGsuKsMKWZFsd
- PsytQwCuzkbDf1HAOQronUpQgSwtvspxkTTuumDUrfGp4Qj1siTma6CncA5jNenEaJGO
- Mo8bpf5twNb56tzQjuD4XqA1U8W/MyVbElAMVDEYNBfPdDbPwljKZZWYRe0VPii3GC4+
- +MbhjhuL5U253PUBSZVqOw7VSAszc1dQO1hCyKBHm9p0xVaQE1hhfhoTZZUCT4TLpjFZ
- Imd3XyN89JInNc0Agl0sMSbH2iQSr1ZBlkxcdt47gVaOovV1V/HZal0S52QE8zE1YgH9
- gqow==
-X-Gm-Message-State: AOJu0Yyr0CHClDp7xPe/JMg5xqHjgiDMxaJ+XkMi1kV2bdll2gQLisAX
- 2sVRU6jpM9v5/bJdooyBbYvP4/zuVvwXA6hTJd47Jhp5dPjhcCVXmO4BanlvAi9q9HNH4cc1mCI
- y/X0DwBn2DCdvXK31NA21t3JrnYQ=
-X-Google-Smtp-Source: AGHT+IFVGvLqq6EhUjIxuy+19nzslttpGsnJiC75zyfeU58g2m3r2UcWMlNUo8A2nJtVZA1cJe0WZXhJQgCCnKvur7g=
-X-Received: by 2002:a05:6512:2211:b0:530:ab86:3 with SMTP id
- 2adb3069b0e04-5353e54640emr110777e87.1.1724870166675; Wed, 28 Aug 2024
- 11:36:06 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1724871392; x=1725476192;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ULAbRzwZrkyyHpUr+uIAWQTrjZJi8YqeFXAaoJQKRbE=;
+ b=BSjxkxWUo9iEr89FbcZH0carDnL5efJfKBQ/aBdwg+VprbuYQunc/Zxjwrpagmuobx
+ t95suvha1Pgydn+hWOVpZLX3DrbovPU77ewPcj34sYGWglJxQgXbfkHiSuFfBjl//e0d
+ XDe5cgb0uT62+ZpWaPDUxuL2KM7lCBi6HcOzQu/xcw7t6Z78vNumWmA10cuTnR8U3MuF
+ kqHXqFLf9SI9m4HaAUfnV6OKbe4BW63CbuHaDHsyChJNIOlCE1mpU2eNsAFRH8PGdFGx
+ GdCYXlr3nJO2HLcAZgBWBvR8+iZ572uPOJnFeN+JcrbBLAXpMl/KdKKEC2s4cjrA38Ye
+ udOQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWU1RMMVn0KCIXmUKNA6ZBK2XgwW+LPXautrcOsBrjoRrhQB9mBCTgQ1Ju3FwjaXYv7VUUHpzw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyAj1vkxrSTsubAmZfNaP08+cqW1PeXaEN6wlxCt9eDes5b3T2C
+ WjaxH9XUPRJpkxl2leA4IjzMVxHl46U+ymJRx4wjxnhoKZ67uySf+e8Wt+Afz/4=
+X-Google-Smtp-Source: AGHT+IFNBOGTe5cZZoKY8AhI78VZ47fjtxxiyRzaLTpb60qixHIMOBYza5pxD+D1a6kfkL9K1+ksZg==
+X-Received: by 2002:a05:620a:d83:b0:7a1:c40d:7575 with SMTP id
+ af79cd13be357-7a8041b363dmr34242785a.17.1724871391506; 
+ Wed, 28 Aug 2024 11:56:31 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7a8042414cdsm8357385a.21.2024.08.28.11.56.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 28 Aug 2024 11:56:30 -0700 (PDT)
+Date: Wed, 28 Aug 2024 12:56:27 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/2] bootstage: Fix unstash of records from SPL
+Message-ID: <20240828185627.GT2479150@bill-the-cat>
+References: <20240803124149.2916030-1-jonas@kwiboo.se>
+ <20240803124149.2916030-2-jonas@kwiboo.se>
+ <172486961888.3064792.636174658599384187.b4-ty@konsulko.com>
+ <c6b27581-890d-4308-84df-2f338a81e15f@kwiboo.se>
 MIME-Version: 1.0
-References: <20240827200400.217058-1-marex@denx.de>
-In-Reply-To: <20240827200400.217058-1-marex@denx.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 28 Aug 2024 15:35:55 -0300
-Message-ID: <CAOMZO5DDkkV-M+3MEUJAKJwFMwSdFfkJTySkc=0aG3CxCdWHVw@mail.gmail.com>
-Subject: Re: [PATCH] ARM: imx: Enable MMU and dcache very early on i.MX8M
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Peng Fan <peng.fan@nxp.com>, 
- Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="dhyCpa9Ed7pwp1dZ"
+Content-Disposition: inline
+In-Reply-To: <c6b27581-890d-4308-84df-2f338a81e15f@kwiboo.se>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,15 +94,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
 
-On Tue, Aug 27, 2024 at 5:04=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
->
-> Enable MMU and caches very early on in the boot process on i.MX8M
-> in U-Boot proper. This allows board_init_f to run with icache and
-> dcache enabled, which saves some 700 milliseconds of boot time on
-> i.MX8M Plus based device.
+--dhyCpa9Ed7pwp1dZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Nice improvement!
+On Wed, Aug 28, 2024 at 08:32:36PM +0200, Jonas Karlman wrote:
 
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
+> Hi Tom,
+>=20
+> On 2024-08-28 20:26, Tom Rini wrote:
+> > On Sat, 03 Aug 2024 12:41:44 +0000, Jonas Karlman wrote:
+> >=20
+> >> The commit b81e31a1e6c5 ("bootstash: Do not provide a default address
+> >> for all") changed a bootstage unstash call to bootstage stash, this
+> >> has resulted in bootstage records stashed in SPL no longer get unstaged
+> >> in U-Boot proper. Fix this by changing back to a unstage call.
+> >>
+> >>
+> >=20
+> > Applied to u-boot/next, thanks!
+> >=20
+>=20
+> I expected this patch to go to master as it fixes a regression
+> introduced in v2024.10-rc1.
+
+OK, good point. I'll push it to master when I have other stuff as well,
+I've cherry-picked it now.
+
+--=20
+Tom
+
+--dhyCpa9Ed7pwp1dZ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbPctgACgkQFHw5/5Y0
+tywISwwAibS3Hfa8g7/eE5XSxz1NIFml99cfN+SRImLLHHAyRY2jdu1/DZZu/Ao8
+WdO+EiF3LUF2CHr5HUM9bQKmd0rMYzoGg8PvHXAXbzSHAjaXAbG8CvZjp7+mWBZk
+Rjl2nRKKzNKOoh394gzGkyRViMvjAC9rKIGjPvUptxZ/ZTaZpDjVxsScCMVKiaPL
+/C5BzVyHl7sfh2mMorpuxMbLHKYaBitaWxA7VDY67BCS3plPUcA3W8m0KaL1Kq7V
+SthTVTZp8NVWVRaCvGOzeyAUWqHqMgYsXUYLvDsY7edFR6/iBgK+xeMtnoNut1H0
+P3FD0qUA1r7+FCC6HmVBdEGXk+F5rZapJyEGm2bxn/5fEP5H7n6vP1bCVaNC8gcf
+H65U0HWisjLPyp0prMGWp1d8WC+8WZ3/f3B1xzjQXPfBFejzwEay3mxlJ74aUk55
+QiN4Y1Th+KPfliyf2OK1zWQFXywhOBZ2szSCDrRWgSyorbPse46jqYIRgRZehimq
+n8AoGD2L
+=blpn
+-----END PGP SIGNATURE-----
+
+--dhyCpa9Ed7pwp1dZ--
