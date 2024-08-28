@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71D8DC54EE3
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 12:11:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51313C54EE3
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 12:12:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62C9688874;
+	by phobos.denx.de (Postfix) with ESMTP id BDBBA88AA7;
 	Wed, 28 Aug 2024 14:10:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xF+ijc7T";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HzYaQyxw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B614788B1B; Wed, 28 Aug 2024 14:10:51 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 8D5D288B40; Wed, 28 Aug 2024 14:10:53 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 956F488AC2
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 14:10:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 91F9988874
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 14:10:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-42ba9b47f4eso1869925e9.1
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 05:10:49 -0700 (PDT)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-4281c164408so57192675e9.1
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 05:10:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724847049; x=1725451849; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724847050; x=1725451850; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=r30FER1u6ArC2MC1YI7nnZsRsMetzEXKpzkVRsNl8s0=;
- b=xF+ijc7TRfphJOHtxiG5d4Bc5Uwrdc+OoNzd8NQTWYVCvW7nNbMABTDcgcZvuk8Ou4
- wMBRUsh6gwKiChg3hyxrrxbx3Ui+XoWJ7zw9wLSpbIye+iN/gKP6lcjn70T5AhKLJ4eQ
- HIJQxy+BCQyXWfLFTMXzUIrYKzluaijezzb+TD3Sm0Nu0daJYPXqC0zN732GRLi5f76K
- e/Jh372LlTL1/rmdf8voytLrBOkCvjXQTxFRaU3udfJFU9AL/WsfNIvSPV8MnI+JnX7W
- Atb97SmtKW56Sj3N9OevRGoSil2Zdnse9n5NSjz8nP1yE6UHroPCA2qHxwSmXIkLre07
- 9YuQ==
+ bh=dT3eVdcZ7+yTL3gKrjedSQI9zhitj9PAgp3LECTzRy0=;
+ b=HzYaQyxwGKjuUxgzIiFzL7bxPMUUDMJ8oIpoQG+FtIAlTXtrwK2YIO5xgjNLgO89+3
+ SMrRBSXiHJPq/WaE5NAIQo6pX3zQEHz0aKu3LsLsCfnl8UtV1VnRnPuu8CltM1sjz6VG
+ 5k4UzxK8jw1IOq6lomkSHWCEgZDds0zIvdVH1XC+7yCfOuRqkzhStZlWxTf338IXFEbt
+ uJSkGQi2YMLEkxjABTten4HjlSWlaQnkczklou5abSnINWo5TkCZvnL3eL1rJ30fVhcO
+ lwzMIkxb0PnOkXhzhoS05ELFK/4y4Aoa8HwhOlQb7dO53swco23WVHWptsJWknAr1ph8
+ Ss5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724847049; x=1725451849;
+ d=1e100.net; s=20230601; t=1724847050; x=1725451850;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=r30FER1u6ArC2MC1YI7nnZsRsMetzEXKpzkVRsNl8s0=;
- b=dPgSGCsq2Np2qFtJciv/9YSMJ0wh7bYwfQ1xs8Luccj2JyQ7nCAbD/zSl6KePAs+7k
- nlK8NiRN2+KjQLMw2h3eSN+7DtZlOAGWAkF6E35wA1iPgcj85BFLP15tRPry+gxoaWCb
- HWSwazdUgs9n3it2V1Z8c+O/8/3HBVborMzyoz3idOMbu92ecZcu0tc0yUL3GYfH7wtE
- DC8OGvB5t5XZ/RV5P8GWNjML1aDSxTRMWjC42ZESTq4P6Rot8FzfuvvqkDv6hS4WtSYh
- BmIRPPmUNkpkfWUMzMbBwWGCUKvLCZqqJrM+vGK6vOdhWatfVmxI9RBiYvpDl69qO8Tm
- NBTg==
-X-Gm-Message-State: AOJu0Yz9M7SDDMi28ur4217M9WSpu0D0oRJ1+4YYcpvZMSEb9Keprpyt
- 8xRrrX5qKhXEvF3drY36dEbRsvfDfngdSvjxEczldEZPt+7DeVRDWah256G4EMjUgxsbuLoKsxq
- 42R7UDA==
-X-Google-Smtp-Source: AGHT+IGgmROtls3CVYxfAnXNYT5kfhzdlNI0D5twiJO1n8M4k2sXPYm3yF0ip5n/so8osi964n3zNg==
-X-Received: by 2002:a05:600c:35c3:b0:426:5b17:8458 with SMTP id
- 5b1f17b1804b1-42ba56b9395mr11423195e9.12.1724847048915; 
- Wed, 28 Aug 2024 05:10:48 -0700 (PDT)
+ bh=dT3eVdcZ7+yTL3gKrjedSQI9zhitj9PAgp3LECTzRy0=;
+ b=BzWiPhe5o0mbYmeFIqpOwNivCs7s+Z2sNmDPFMCdlv9Hc6KPpoQN1vG8BXuLNhJrs4
+ hpW7xw64P0c2sNxF7Yu5rHf/707x0NP0OVGFoOmSauiz3EsA68DVxsrGoxu3WbIV2r7o
+ 1yiUHdxqPdtNQc/4Q9vlPGNuna+vbv1iPXOx6yr8kBpMPFdftHGq9P8eyCnF9Mj/0+9v
+ WyIjUnuTmXcdIfgHkVjcDpdNQiNZlyVD7ryg2JEOjwppVs7qd3QWOgH2SaZkVrCr12I/
+ rRoCsWd+hX1sgSk85f0XLcH33wyRmXq5620k/LYOQgXpQqtjuyVyvbZdWzDUeferpHa1
+ 4iuQ==
+X-Gm-Message-State: AOJu0YzeQagJz+SWryeFvFyuj4j+6hnlii86iTmmyEp+FrMccxs6gFlc
+ t/HavepnN5KcqdOMg/Vd6DmmLUjVlJHxuh0kLipV1EfUC1C1CyKxpInIGs7MTKBdxiD9E9BRSdh
+ lBNi3m2i+
+X-Google-Smtp-Source: AGHT+IFHwHfXrG1XAYVS6A5DXeJ/GWoET5RnkkZyFw/ScCbbBHXBCr0ANbAle0b6r36ONKIrdFQijg==
+X-Received: by 2002:a05:600c:19cd:b0:427:ff7a:794 with SMTP id
+ 5b1f17b1804b1-42ba6692269mr12315785e9.4.1724847049817; 
+ Wed, 28 Aug 2024 05:10:49 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:8ac3:aada:f033:985a])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42ba639687csm19470365e9.8.2024.08.28.05.10.48
+ 5b1f17b1804b1-42ba639687csm19470365e9.8.2024.08.28.05.10.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Aug 2024 05:10:48 -0700 (PDT)
+ Wed, 28 Aug 2024 05:10:49 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -72,11 +72,13 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 07/13] net: phy: ncsi: depend on NET
-Date: Wed, 28 Aug 2024 14:10:30 +0200
-Message-Id: <898bcb397c26f6eb7b0750b91c6c6ad2783d5195.1724846454.git.jerome.forissier@linaro.org>
+ Yang Xiwen <forbidden405@outlook.com>,
+ Robert Marko <robert.marko@sartura.hr>, Gabor Juhos <j4g8y7@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Boon Khai Ng <boon.khai.ng@intel.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH 08/13] net: ftgmac100: depend on NET
+Date: Wed, 28 Aug 2024 14:10:31 +0200
+Message-Id: <3112cb1127580bf714f50a199b4ec9e998322202.1724846454.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1724846454.git.jerome.forissier@linaro.org>
 References: <cover.1724846454.git.jerome.forissier@linaro.org>
@@ -98,27 +100,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-PHY_NCSI enables drivers/net/phy/ncsi.c which calls net_loop() and
-net_set_timeout_handler(). That's the legacy NET stack (as opposed to
-NET_LWIP). Therefore add the dependency to Kconfig.
+FTGMAC100 enables drivers/net/ftgmac100.c which uses
+PHY_INTERFACE_MODE_NCSI, which is defined only when PHY_NCSI is enabled.
+Therefore FTGMAC100 depends on PHY_NCSI. However adding such a
+dependency causes a "recursive dependency detected!" message, so
+add a dependency on NET instead (PHY_NCSI depends on NET).
+All in all, either the stack is NET and FTGMAC100 can be enabled,
+or it is NET_LWIP (or NO_NET) and it cannot.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- drivers/net/phy/Kconfig | 1 +
+ drivers/net/Kconfig | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
-index 73064b2af6..a9efc50981 100644
---- a/drivers/net/phy/Kconfig
-+++ b/drivers/net/phy/Kconfig
-@@ -368,6 +368,7 @@ config PHY_FIXED
- 
- config PHY_NCSI
- 	bool "NC-SI based PHY"
+diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+index 69ae7c0750..3382e533f4 100644
+--- a/drivers/net/Kconfig
++++ b/drivers/net/Kconfig
+@@ -461,6 +461,7 @@ config FTMAC100
+ config FTGMAC100
+ 	bool "Ftgmac100 Ethernet Support"
+ 	select PHYLIB
 +	depends on NET
- 
- endif #PHYLIB
- 
+ 	help
+ 	  This driver supports the Faraday's FTGMAC100 Gigabit SoC
+ 	  Ethernet controller that can be found on Aspeed SoCs (which
 -- 
 2.40.1
 
