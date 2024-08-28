@@ -4,52 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E1C0C5474A
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 07:58:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B620C5472D
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 08:03:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC88D88A75;
-	Wed, 28 Aug 2024 09:58:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=KARO-electronics.de
+	by phobos.denx.de (Postfix) with ESMTP id B711088859;
+	Wed, 28 Aug 2024 10:03:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 2373588A75; Wed, 28 Aug 2024 09:58:36 +0200 (CEST)
-Received: from smtprelay08.ispgateway.de (smtprelay08.ispgateway.de
- [134.119.228.98])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1724832237;
+	bh=/IUufR2KRB2+4BTyPpv+VasRV48hqpQIYL5wCSVPbdM=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=vTW7c3jZB/zUjWtj7wpgD785B0ak/9Yuoz9lFnujI1ZCcHRctQuFSnjxDEpxU2sDK
+	 nZVW/nsuvqs1lV52EYvhoo2NSH1y34KOgXTJPRo2kob4oX3E/gpGRYKuQ3ETbBILUk
+	 TBxzdpnk7pXt3J4jAgf9XzK5XmWBODJ4IuEyhy1unpqHPtdZhBtlqr3vHETXVa9yPM
+	 KQLp+SrZ5enPD8lFF9lQl+StI7QhY0sMJhE0uUX39TKUHgatj9KhalIDwdsXMHWWsE
+	 anUORZSTWprmO8QGxUwgP+m5Sc/zV5bNOuxKJCmGhSAef/l7XK8n0umn5AFHoLSpE0
+	 AP+/zXgBYN1+A==
+Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F14D0888C1
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 09:58:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=KARO-electronics.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=LW@KARO-electronics.de
-Received: from [89.1.81.74] (helo=karo-electronics.de)
- by smtprelay08.ispgateway.de with esmtpsa (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.98)
- (envelope-from <LW@KARO-electronics.de>) id 1sjDZZ-000000003MD-1IUK;
- Wed, 28 Aug 2024 09:58:33 +0200
-Date: Wed, 28 Aug 2024 09:58:32 +0200
-From: Lothar =?UTF-8?B?V2HDn21hbm4=?= <LW@KARO-electronics.de>
-To: "Tomas Paukrt" <tomaspaukrt@email.cz>
-Cc: "Peng Fan" <peng.fan@nxp.com>, "marex@denx.de" <marex@denx.de>,
- "festevam@gmail.com" <festevam@gmail.com>, "trini@konsulko.com"
- <trini@konsulko.com>, Francesco   Dolcini <francesco.dolcini@toradex.com>,
- "tharvey@gateworks.com" <tharvey@gateworks.com>, "aford173@gmail.com"
- <aford173@gmail.com>, "Ye Li" <ye.li@nxp.com>,
- "michael@amarulasolutions.com" <michael@amarulasolutions.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3] gpio: mxc_gpio: fix reading state of GPIO pins in
- output mode
-Message-ID: <20240828095832.4b750b9f@karo-electronics.de>
-In-Reply-To: <WG.ZbwF.4nJHVDUTLil.1cpjQO@seznam.cz>
-References: <Q9.ZbwV.3d4YBfwRcrs.1cphoJ@seznam.cz>
- <PAXPR04MB84594F2939AE13CFEAD7E97688952@PAXPR04MB8459.eurprd04.prod.outlook.com>
- <WG.ZbwF.4nJHVDUTLil.1cpjQO@seznam.cz>
-Organization: Ka-Ro electronics GmbH
+ (Authenticated sender: lukma@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 0252488714;
+ Wed, 28 Aug 2024 10:03:56 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1724832237;
+ bh=/IUufR2KRB2+4BTyPpv+VasRV48hqpQIYL5wCSVPbdM=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=bpHv2pOfLG0KuRMz+cu1iwCs+xzyL6I4JGIb+wUITYtDjLtBEt7EbZrUhR89kIhyH
+ 5NcxopOzcmHxcStJs7lgTH/vhuW0jDODv+2LlGcIuDbHKdBCU+L0CNZKgQD+CzRrnR
+ waVPdwJTp8pTLG4evr9h8ghM0GfFgHkYm4QAcDcuP4K6/dZSgFUf2krrVag88ezZ3C
+ 1IchnhcoWlMn9nl1KqgYSd2k0LZVxSfpcQl/Y0BPaBpBgvP8IemfuU9O2P0wIr7G2G
+ yT1lPYYQSvcwsZ4FHr6FhUOLLLf0TFZ3NhWd1ZSCgCFrpDttNDU8IdxiSMvqjZAZgm
+ q6ZUY77XSQhGw==
+Date: Wed, 28 Aug 2024 10:03:55 +0200
+From: Lukasz Majewski <lukma@denx.de>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Mamta Shukla <mamta.shukla@leica-geosystems.com>, Adam Ford
+ <aford173@gmail.com>, u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>
+Subject: Re: [Binman] Question regarding SPL symbol offsets generation
+Message-ID: <20240828100355.655401d4@wsk>
+In-Reply-To: <CAOMZO5B-fkLQsQx205mxXQdmk3ij6Hxx4ErM84DtEtBg3mYa7Q@mail.gmail.com>
+References: <20240808110654.4215b129@wsk>
+ <CAOMZO5A74MigLO0qkeXi04=7M70jaiEgk9zdFBjUV74vuZDP0g@mail.gmail.com>
+ <20240815221421.61f64a17@wsk>
+ <CAOMZO5B-fkLQsQx205mxXQdmk3ij6Hxx4ErM84DtEtBg3mYa7Q@mail.gmail.com>
+Organization: denx.de
+X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Df-Sender: bHdAa2Fyby1lbGVjdHJvbmljcy5kb21haW5mYWN0b3J5LWt1bmRlLmRl
+Content-Type: multipart/signed; boundary="Sig_/eNnfTvIGJOcDK3eJN0vrVmx";
+ protocol="application/pgp-signature"; micalg=pgp-sha512
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,31 +73,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+--Sig_/eNnfTvIGJOcDK3eJN0vrVmx
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, 28 Aug 2024 09:49:44 +0200 (CEST) Tomas Paukrt wrote:
-> > You may give a look to this
-> >
-> > https://lore.kernel.org/u-boot/57015C5F.3080209@denx.de/
-> >
-> > Regards,
-> > Peng. =20
+Hi Fabio,
+
+> Hi Lukasz,
 >=20
-> The Linux driver uses the DR register for about 9 years and
-> the NXP U-Boot driver uses the DR register for about 7 years,
-> so only the mainline U-Boot driver still uses the PSR register.
+> On Thu, Aug 15, 2024 at 5:14=E2=80=AFPM Lukasz Majewski <lukma@denx.de> w=
+rote:
 >=20
-> Please give a look to:
-> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit=
-/?id=3D442b2494b17d1a4f0a14721580271eb23ebffd42
-> https://github.com/nxp-imx/uboot-imx/commit/4afc3f90943c6b117f79b66d2cd04=
-e64f437b0c2
->
-Reading the PSR (with SION set) has the advantage that it provides the
-_actual_ pin state rather than the programmed output value even in case
-external hardware drives against the output driver.
-This is especially useful for Opendrain outputs or in case the output
-driver is disabled via the pad_ctl register.
+> > Unfortunately not - this change is only for properly setting start
+> > address of the u-boot.
+> >
+> > The _real_ problem here is the symbol placement generated by binman
+> > when we try to define the image as a single one.
+> >
+> > Moreover, this change follows other boards with imx8mm processor -
+> > ./configs/imx8mm_beacon_fspi_defconfig to be specific.
+> >
+> > The "fix" (for which I'd been now probably opt) for this issue
+> > would be to generate two images with binman - one for
+> > u-boot-spl-ddr.bin and the final flash.bin with the former one
+> > included (as it was before SHA1:
+> > 37e50627efacd8dae18b564e9d8886a033e181bc) =20
+>=20
+> Is QSPI boot broken on i.MX8MM?
+>=20
+
+With newest mainline - yes.
+
+Please consult (this works on polis):
+https://github.com/lmajewski/u-boot/commits/phycore-imx8mm-qspi-nvme
+
+The spl symbols after binman generation are off by 0x1000 (by the
+inserted on the beginning QSPI header)
+
+> I am adding Adam and Mamta who have tested QSPI booting on
+> imx8mm_beacon and imx8mm_evk, respectively.
+
+Ok. Good.
 
 
-Lothar Wa=C3=9Fmann
+Best regards,
+
+Lukasz Majewski
+
+--
+
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
+
+--Sig_/eNnfTvIGJOcDK3eJN0vrVmx
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmbO2ewACgkQAR8vZIA0
+zr2FNAgA3zNqsMRxCxeikSjpest5Q9tMuaOMEk+C2L7EYya4+ThPE6yQzuFkazZH
+yLYDyNkWCVyZL33S+lFsAsWQmQ2PWMFH2iD8/wQapl3RVSg8w3JtX5zoeHyxtcB9
+zbtwlFwTHXJAGJSpxhS9j0sloO/JKQ6OLwe7161yUimVTDKgbkw8Yt63/WiuWJR4
+cQG9pdLDHpE3YicPEbT7n8JQ7tU//dEuC/WJ0k+FGe/YMj9GaVlFGDD49Rxpo45o
+qy7nizSU34+Wj8p7s2xsSvUfpEiJAB6x1xykDXYvQ43d8gm6q60xGMQjyLLq/Gvb
+qE7nJajBuUAAKrsXqw2Yr6f4R5cbzg==
+=9sjS
+-----END PGP SIGNATURE-----
+
+--Sig_/eNnfTvIGJOcDK3eJN0vrVmx--
