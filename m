@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55B27C54E92
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 10:14:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BCA1C54E71
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 10:14:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6D3888B93;
-	Wed, 28 Aug 2024 12:12:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0A39688AD7;
+	Wed, 28 Aug 2024 12:12:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="d92kFMYV";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="StDSuLPt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53C5288A3E; Wed, 28 Aug 2024 12:12:32 +0200 (CEST)
+ id 58CE688744; Wed, 28 Aug 2024 12:12:32 +0200 (CEST)
 Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6880588ABA
+ by phobos.denx.de (Postfix) with ESMTPS id 4CAED88AB1
  for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 12:12:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+Oliver.Gaskell.analog.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 51B2CA434BC;
+ by nyc.source.kernel.org (Postfix) with ESMTP id 2B4ECA434E9;
  Wed, 28 Aug 2024 10:12:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 17563C4E694;
- Wed, 28 Aug 2024 10:04:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id CFDE6C4E678;
+ Wed, 28 Aug 2024 10:04:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1724839449;
- bh=oviPxZ4E09WDqPXtI5PammIGlJoizxq+OWMlFhvq2tI=;
+ s=k20201202; t=1724839448;
+ bh=C5sF0QPF01NoXjHhAJUfElhNgBSqSyGMeempLt23Gag=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=d92kFMYVUig9HgbvJKC9d4ZYW/5lF6rN0r8SfO+lgobfRwnz45JuDym+psdoltME5
- M1+e37rhIUMuumVArcuHpXMHnLpPhV/K1tBT380zc11ZrbyoFc8stAciWUtGi1brPO
- K7VSVgYZBj13+gXaVyyOmQi3988vuGPmSnJfVkm8n0Q3KdGbSKHTiojaiw9JJ5pX1j
- qh+qX7md1PudhGonPpx64U+STSrdZ1YdKv3DotgbCpBVAZx5pv1QGWBbimCZUuyAwh
- mTH7TQsfkILRlKTzQIR9Kc6jIT5BSVVP0ktY9R0u+KLdD80wANikkfBOgeS7iRertN
- //pFGp0mY6xWw==
+ b=StDSuLPtcm9ABngbRm2fYOQwCsg8nB8LDBy2QQAu37RMQW8sLyisigSWWHFZrR8UM
+ om/aRXVZwhxaD72p983KxAw37fUa1MO+wZZrGk/jF9hJcPlycJL3GkmS8DtZ2sVRPy
+ IpISKL33gDGSSYhHFtUtr+P0iaEK2Slr8wnv6UC/H330hx/+8exX15eBahpy16GGbU
+ GsqBmavvYsuMJUSMAU+dGHapbKHMp/SMWCFoIn7IH18nTGbxWwJBS7EDb4+j6tlcFb
+ YptnR39ZiTZAeATvE8CB3YVohuBqSktGG8bQ4rQIDagFyYs08w9Tbtsd7oIgaHRjp0
+ 1VvtI17ZtpUNQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 0F504C54E83;
- Wed, 28 Aug 2024 10:04:09 +0000 (UTC)
+ by smtp.lore.kernel.org (Postfix) with ESMTP id C8EB1C54E71;
+ Wed, 28 Aug 2024 10:04:08 +0000 (UTC)
 From: Oliver Gaskell via B4 Relay
  <devnull+Oliver.Gaskell.analog.com@kernel.org>
-Date: Wed, 28 Aug 2024 11:02:22 +0100
-Subject: [PATCH 14/20] arm: SC598-SOM-EZLITE initial support
+Date: Wed, 28 Aug 2024 11:02:18 +0100
+Subject: [PATCH 10/20] dt-bindings: clock: Add SC5xx clock tree bindings
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240828-sc5xx-upstreaming-patches-v1-14-44d9adfdf327@analog.com>
+Message-Id: <20240828-sc5xx-upstreaming-patches-v1-10-44d9adfdf327@analog.com>
 References: <20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com>
 In-Reply-To: <20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com>
 To: Tom Rini <trini@konsulko.com>, 
@@ -65,11 +65,11 @@ To: Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, adsp-linux@analog.com, 
  Oliver Gaskell <Oliver.Gaskell@analog.com>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1724839434; l=4067;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1724839434; l=4095;
  i=Oliver.Gaskell@analog.com; s=20240821; h=from:subject:message-id;
- bh=YLyEL6ITWehoiQARPsFI7ZAnETeirU+Gf3uKxS/f2PA=;
- b=T148U5KLlv2uOQ956SowDhkfSffcO+k3oJljB61Zip6qc4t/95AHfjuZeV1tQAfEICf0SSztd
- Y/JpgHjcCBaDi0iVF3pK8mp3vKbYveFhKXi21BOWBgINRIFsf4OLDsC
+ bh=cuAg1O7gfyKVhPAk0NCafanQ9M53hS0+HLqu+jCXmdg=;
+ b=4Dc9BZALHaIZPVGBa4rkTTd3ppNC6nnP2e4Sy8b0tgctHvzLE/tO/QiAxML31qr9AZFSwLG05
+ R+qC8Ooh2OvCN/fRKRBPtq7BqqBgJgqAJPEwe3ZlFY2j6LtDXArOi13
 X-Developer-Key: i=Oliver.Gaskell@analog.com; a=ed25519;
  pk=Icq9TxwFJ6FePHS28YbBWMvtZpFWxpPQLhLA9cNvZ/Y=
 X-Endpoint-Received: by B4 Relay for Oliver.Gaskell@analog.com/20240821
@@ -94,215 +94,146 @@ X-Virus-Status: Clean
 
 From: Oliver Gaskell <Oliver.Gaskell@analog.com>
 
-Adds support for Analog Devices' SC598-SOM-EZLITE board. Includes:
-- Board specific configs in mach-sc5xx/Kconfig
-- Board-specific Kconfig and environment in board/adi/
+Add devicetree schema for the clock tree on Analog Devices SC5xx series
+SoCs.
 
+Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 Signed-off-by: Oliver Gaskell <Oliver.Gaskell@analog.com>
 ---
- arch/arm/mach-sc5xx/Kconfig                     |   6 +
- board/adi/sc598-som-ezlite/Kconfig              | 150 ++++++++++++++++++++++++
- board/adi/sc598-som-ezlite/sc598-som-ezlite.env |  13 ++
- 3 files changed, 169 insertions(+)
+ MAINTAINERS                                        |   1 +
+ .../clock/adi,sc5xx-clocks.yaml                    | 112 +++++++++++++++++++++
+ 2 files changed, 113 insertions(+)
 
-diff --git a/arch/arm/mach-sc5xx/Kconfig b/arch/arm/mach-sc5xx/Kconfig
-index cd3c7011f4..b3a17036e7 100644
---- a/arch/arm/mach-sc5xx/Kconfig
-+++ b/arch/arm/mach-sc5xx/Kconfig
-@@ -51,6 +51,11 @@ if SC59X_64
- choice
- 	prompt "SC59x 64-bit board select"
- 
-+config TARGET_SC598_SOM_EZLITE
-+	bool
-+	prompt "SC598-SOM with SOMCRR-EZLITE"
-+	select ADI_CARRIER_SOMCRR_EZLITE
-+
- config TARGET_SC598_SOM_EZKIT
- 	bool
- 	prompt "SC598-SOM with SOMCRR-EZKIT"
-@@ -500,5 +505,6 @@ config PINCTRL_ADI
- 	default y
- 
- source "board/adi/sc598-som-ezkit/Kconfig"
-+source "board/adi/sc598-som-ezlite/Kconfig"
- 
- endif
-diff --git a/board/adi/sc598-som-ezlite/Kconfig b/board/adi/sc598-som-ezlite/Kconfig
+diff --git a/MAINTAINERS b/MAINTAINERS
+index c283e09901..d5f79097a1 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -608,6 +608,7 @@ F:	arch/arm/dts/sc5*
+ F:	arch/arm/include/asm/arch-adi/
+ F:	arch/arm/mach-sc5xx/
+ F:	doc/device-tree-bindings/arm/adi/adi,sc5xx.yaml
++F:	doc/device-tree-bindings/clock/adi,sc5xx-clocks.yaml
+ F:	drivers/clk/adi/
+ F:	drivers/serial/serial_adi_uart4.c
+ F:	drivers/timer/adi_sc5xx_timer.c
+diff --git a/doc/device-tree-bindings/clock/adi,sc5xx-clocks.yaml b/doc/device-tree-bindings/clock/adi,sc5xx-clocks.yaml
 new file mode 100644
-index 0000000000..0dbb89cde5
+index 0000000000..9bbd5467a0
 --- /dev/null
-+++ b/board/adi/sc598-som-ezlite/Kconfig
-@@ -0,0 +1,150 @@
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+#
-+# (C) Copyright 2024 - Analog Devices, Inc.
++++ b/doc/device-tree-bindings/clock/adi,sc5xx-clocks.yaml
+@@ -0,0 +1,112 @@
++# SPDX-License-Identifier: (GPL-2.0+)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/clock/adi,sc5xx-clocks.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
 +
-+if TARGET_SC598_SOM_EZLITE
++title: Clock Tree Drivers for Analog Devices SC5XX Processors
 +
-+config SYS_VENDOR
-+	default "adi"
++maintainers:
++  - Vasileios Bimpikas <vasileios.bimpikas@analog.com>
++  - Utsav Agarwal <utsav.agarwal@analog.com>
++  - Arturs Artamonovs <arturs.artamonovs@analog.com>
 +
-+config LDR_CPU
-+	default "ADSP-SC598-0.0"
++description: |
++  These drivers read in the processors CDU (clock distribution unit)
++  and CGU (clock generation unit) values to determine various clock
++  rates
 +
-+config SYS_BOARD
-+	default "sc598-som-ezlite"
++properties:
++  compatible:
++    enum:
++      - adi,sc5xx-clocks # Any
++      - adi,sc57x-clocks # 32-Bit SC573 processor
++      - adi,sc58x-clocks # 32-Bit SC584, SC589 processors
++      - adi,sc594-clocks # 32-Bit SC594 processor
++      - adi,sc598-clocks # 64-Bit SC598 processor
 +
-+config SYS_CONFIG_NAME
-+	default "sc598-som"
++  '#clock-cells':
++    const: 1
 +
-+config DEFAULT_DEVICE_TREE
-+	default "sc598-som-ezlite"
++  reg:
++    minItems: 3
++    maxItems: 4
 +
-+config SPL_MAX_SIZE
-+	default 0x30000 # 256KB
++  reg-names:
++    description:
++      String reference names for the reg property
++    minItems: 3
++    maxItems: 4
 +
-+config ADI_IMAGE
-+	default "minimal"
++  clocks:
++    description:
++      Specifies the CLKIN0 and CLKIN1 reference clock(s) from which the
++      output frequencies are derived via CDU+CGU
++    minItems: 2
++    maxItems: 2
 +
-+config NR_DRAM_BANKS
-+	default 1
++  clock-names:
++    description:
++      String reference names for CLKIN0 and CLKIN1
++    minItems: 2
++    maxItems: 2
 +
-+config SPL_BSS_START_ADDR
-+	hex
-+	default 0x200B0000
++required:
++  - compatible
++  - reg
++  - clocks
++  - '#clock-cells'
++  - clock-names
 +
-+config SPL_BSS_MAX_SIZE
-+	hex
-+	default 0x10000 # 64K
++additionalProperties: false
 +
-+config SYS_SPL_MALLOC_START
-+	hex
-+	default 0x200C0000
++examples:
++  - |
++    clk0: clocks@3108d000 {
++      compatible = "adi,sc57x-clocks";
++      reg = <0x3108d000 0x1000>,
++            <0x3108e000 0x1000>,
++            <0x3108f000 0x1000>;
++      #clock-cells = <1>;
++      clocks = <&sys_clkin0>, <&sys_clkin1>;
++      clock-names = "sys_clkin0", "sys_clkin1";
++      status = "okay";
++    };
 +
-+config SYS_SPL_MALLOC_SIZE
-+	hex
-+	default 0x10000 # 64K
++  - |
++    clk1: clocks@3108d000 {
++      compatible = "adi,sc58x-clocks";
++      reg = <0x3108d000 0x1000>,
++            <0x3108e000 0x1000>,
++            <0x3108f000 0x1000>;
++      #clock-cells = <1>;
++      clocks = <&sys_clkin0>, <&sys_clkin1>;
++      clock-names = "sys_clkin0", "sys_clkin1";
++      status = "okay";
++    };
 +
-+config SPL_STACK
-+	hex
-+	default 0x200E4000
++  - |
++    clk2: clocks@3108d000 {
++      compatible = "adi,sc594-clocks";
++      reg = <0x3108d000 0x1000>,
++            <0x3108e000 0x1000>,
++            <0x3108f000 0x1000>;
++      #clock-cells = <1>;
++      clocks = <&sys_clkin0>, <&sys_clkin1>;
++      clock-names = "sys_clkin0", "sys_clkin1";
++      status = "okay";
++    };
 +
-+config SPL_STACK_SIZE
-+	hex
-+	default 0x14000 # 64K
++  - |
++    clk3: clocks@3108d000 {
++      compatible = "adi,sc598-clocks";
++      reg = <0x3108d000 0x1000>,
++            <0x3108e000 0x1000>,
++            <0x3108f000 0x1000>,
++            <0x310a9000 0x1000>;
++      #clock-cells = <1>;
++      clocks = <&sys_clkin0>, <&sys_clkin1>;
++      clock-names = "sys_clkin0", "sys_clkin1";
++      status = "okay";
++    };
 +
-+config TEXT_BASE
-+	hex
-+	default 0x96000000
-+
-+config CUSTOM_SYS_INIT_SP_ADDR
-+	hex
-+	default 0x96000000
-+
-+config SYS_LOAD_ADDR
-+	hex
-+	default 0x0
-+
-+# SPL
-+
-+config SPL_TEXT_BASE
-+	default 0x20080000
-+
-+config SPL_PAYLOAD_ARGS_ADDR
-+	hex
-+	default 0x99000000
-+
-+config SPL_OF_LIBFDT_ASSUME_MASK
-+	hex
-+	default 0x0
-+
-+# SPI Flash
-+
-+config SF_DEFAULT_BUS
-+	default 2
-+
-+config SF_DEFAULT_CS
-+	default 1
-+
-+config SF_DEFAULT_SPEED
-+	default 10000000
-+
-+# Clock Configs
-+
-+config CGU0_DF_DIV
-+	default 0
-+
-+config CGU0_VCO_MULT
-+	default 80
-+
-+config CGU0_CCLK_DIV
-+	default 2
-+
-+config CGU0_SCLK_DIV
-+	default 4
-+
-+config CGU0_SCLK0_DIV
-+	default 4
-+
-+config CGU0_SCLK1_DIV
-+	default 2
-+
-+config CGU0_DCLK_DIV
-+	default 3
-+
-+config CGU0_OCLK_DIV
-+	default 8
-+
-+config CGU0_DIV_S1SELEX
-+	default 6
-+
-+config CGU1_VCO_MULT
-+	default 72
-+
-+config CGU1_DF_DIV
-+	default 0
-+
-+config CGU1_CCLK_DIV
-+	default 16
-+
-+config CGU1_SCLK_DIV
-+	default 8
-+
-+config CGU1_SCLK0_DIV
-+	default 4
-+
-+config CGU1_SCLK1_DIV
-+	default 2
-+
-+config CGU1_DCLK_DIV
-+	default 18
-+
-+config CGU1_OCLK_DIV
-+	default 16
-+
-+config CGU1_DIV_S0SELEX
-+	default 36
-+
-+config CGU1_DIV_S1SELEX
-+	default 90
-+
-+endif
-diff --git a/board/adi/sc598-som-ezlite/sc598-som-ezlite.env b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
-new file mode 100644
-index 0000000000..036c9ae759
---- /dev/null
-+++ b/board/adi/sc598-som-ezlite/sc598-som-ezlite.env
-@@ -0,0 +1,13 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later+ */
-+
-+/*
-+ * (C) Copyright 2024 - Analog Devices, Inc.
-+ */
-+
-+#include <env/adi/adi_boot.env>
-+
-+adi_stage2_offset=0x40000
-+adi_image_offset=0x01a0000
-+adi_rfs_offset=0x1020000
-+loadaddr=0x90000000
-+jffs2file=adsp-sc5xx-__stringify(CONFIG_ADI_IMAGE)-adsp-sc598-som-ezlite.jffs2
 
 -- 
 2.34.1
