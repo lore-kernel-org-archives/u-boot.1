@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DF61C54F32
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 12:12:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 215BCC54EE3
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 12:12:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76CD388A2E;
-	Wed, 28 Aug 2024 14:10:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D8B4388B5A;
+	Wed, 28 Aug 2024 14:11:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VWodHQFv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Gutv4wh6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6CB688A2E; Wed, 28 Aug 2024 14:10:54 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 5FA0488AA7; Wed, 28 Aug 2024 14:10:55 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F19088AA7
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 14:10:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 80E8788AF8
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 14:10:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-42ab880b73eso59982785e9.0
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 05:10:52 -0700 (PDT)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-3730749ee7aso3899209f8f.2
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 05:10:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724847051; x=1725451851; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724847053; x=1725451853; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pSCk/K3y0znMBwS36qz04ulKJ9c8kUuxfDOEXC+T2eY=;
- b=VWodHQFvhvknrees0AVzYVR7rHKsD8oQHl7LeGQ9W2vtr02mH0NtINHnX1fA8+GER3
- E4Gh1QRFh+nPZ3wvWGlk4y9hCEU0L2cupWY5hez+fG+Bl7/fmR5JzVkKbByKVadf/Iwe
- /l95UThNbGeKFc1FY7w8GOmQzzRvj/P69j7UpJl5fsYderY6TsKPp8/kXpQuF1ycKGeI
- TE2peKG8loQHxQP8Iz+K9aty3ny+z/XlGiRQuiMsKX5IxFgrxODR2G6SkgBcX751DTvn
- Q93hyhIJycTPEPm3q2mPji9nRwKJYp2z2xlNI41PZ+GhzkwO7srEyvl1fnWaFiCSU4dy
- f6HQ==
+ bh=Tt2vjY7MaKscycbDjgQS+EhvZk4u1eI0iM4tc60Fq+8=;
+ b=Gutv4wh6LfIhPaHvquQIMpPqBr0MfavTkWTC4OT+maF58Vd1NsGJr0HKLnUjtJoYzj
+ Se1pS6qCfkLMfGnGZeSCeomwzEWauo4+Cq08E1TjMQuHN8A5vuqdyL0HcWantXw3dx6g
+ xtwhPBaorsyHCZ55Wlo7yBxZt3qn3EFoqUeLo+w3CyfUaeR3x0dNUvLCSV/lp8aL5r7C
+ 6KT76RfyvUe00T9uGZYBjMKSWobOwN2g0R9ji8cf2qBJJzDgYpFccKHjiouJW/WV3EGh
+ nxMFGByMLiTXQHPgnuEslkeSKNNshlUBVhWwCyMOywV1nRXbac9eTZRcIIcrunQ3rU1Q
+ z+XA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724847051; x=1725451851;
+ d=1e100.net; s=20230601; t=1724847053; x=1725451853;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pSCk/K3y0znMBwS36qz04ulKJ9c8kUuxfDOEXC+T2eY=;
- b=YfHpqvb43UrQLHDnnnys728qrYkQYBWpmxwp7QQbi29ZGSqIUIrPIIf3lbnp8uxBHI
- +jlzeDD4Yt/LBO1/uDKIdzLEzhNeUGKyCz0zYyUbxHdbDZuI4kbJGY3KTyN7aZ9/yeXK
- c/QOA3SYewQYVIE1uTmVwMemhk5N3P0eBaT4XV6oio8I6SLg5+qXrqaZgXZLZCjQhyuf
- sGUmoLIoUp/cU1Bs0yMRQ/ZgY2JkgCnns6eXm6uJlY8L6/ZP8DXZBsfFPA16A3B5n5Q/
- D90BYVdVuLWNrZAE+lfuAwDTQDqkvfnQmrD1DyALRDGHYIDaz2qgywxyCkdZTAS7Nik4
- XNOw==
-X-Gm-Message-State: AOJu0YwGZib6j4GXLO6GsoPZRZ8z9rpsdo/pm6UrMfz/OHM8Qq0M0AlB
- Spq2Fv6Lw507YBZBvPRlswBzHxYo54sMZMkyWnBfTvNNXa0cnPOvO0tMM2Vps3SyaaJ1YH6+98v
- AP1I/lnHg
-X-Google-Smtp-Source: AGHT+IFKE6vEyo6n8qObhIyPYf9gI37xSGt99ARlKlY8CyQ9mWMeThTH6iwkh9/EwurB5kVKxA5Ptw==
-X-Received: by 2002:a05:600c:4f83:b0:426:6320:7ddf with SMTP id
- 5b1f17b1804b1-42ba66c1a10mr10959975e9.35.1724847051555; 
- Wed, 28 Aug 2024 05:10:51 -0700 (PDT)
+ bh=Tt2vjY7MaKscycbDjgQS+EhvZk4u1eI0iM4tc60Fq+8=;
+ b=TO0RszQvHe2Zct27RgxdfWG0+q4FVvpza2Y+fAMluEdYHqR5sC1juVnoyZZ40MaWEK
+ 2kovgTgAgrFjIOi4LP7pTRayaD4oaYrTYIzjyllKyjJMBI5IUn8vW5XEM4LjemBlgQ+7
+ /rU3VyBI3+kvcgmRHXGlpn9lv6NOzfCqZ8yLbzPI4QGd1yjDYlWBT/m3rmzLuk3nzvQP
+ etlk3pWTqP12K4ASo7pIsb3y9hH8JSjHvz3LzVev4tDdGZDTpFbPJaoN4G9RonHCOSKy
+ t9lQ2yVIFuaiBERGEf/J3dwhTMgqrnEW1YIS0FNzYETIpnIPpIuxWfWj1wHAQhRI4xlG
+ 0N4Q==
+X-Gm-Message-State: AOJu0YwCR6zNQAX9PH5zAGOS1fhjV5MErIwxlG06V5PMgpVJ2CAcDB2S
+ Szq099AyxSGLRaVIiBPF/lsE9Oc5djLy+MAj5q9CD7AQgb2Ztkj/ZESI5w7JbO9Yt/DntF7yEdo
+ Ys83Cl4F3
+X-Google-Smtp-Source: AGHT+IHKMLDry5yqq8F6hoaqPodWpQbGAvy9nlH0WDpSPKCTKCfoTd0G8U4tfMSXgylcOc7jrJQ86Q==
+X-Received: by 2002:a5d:5911:0:b0:371:728e:d000 with SMTP id
+ ffacd0b85a97d-3749680af92mr1212900f8f.1.1724847052741; 
+ Wed, 28 Aug 2024 05:10:52 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:8ac3:aada:f033:985a])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42ba639687csm19470365e9.8.2024.08.28.05.10.50
+ 5b1f17b1804b1-42ba639687csm19470365e9.8.2024.08.28.05.10.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Aug 2024 05:10:51 -0700 (PDT)
+ Wed, 28 Aug 2024 05:10:52 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Peter Robinson <pbrobinson@gmail.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Fabio Estevam <festevam@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- Ye Li <ye.li@nxp.com>
-Subject: [PATCH 10/13] net: fec_mxc_init(): do not ignore return status of
- fec_open()
-Date: Wed, 28 Aug 2024 14:10:33 +0200
-Message-Id: <4d8009789411a42fb860fcd00343c73d8fbe628c.1724846454.git.jerome.forissier@linaro.org>
+ Tom Rini <trini@konsulko.com>, Love Kumar <love.kumar@amd.com>
+Subject: [PATCH 11/13] test/py: net_boot: fix comment
+Date: Wed, 28 Aug 2024 14:10:34 +0200
+Message-Id: <418bd1a5d16cf1e0061fd499ac82bef5bae82f68.1724846454.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1724846454.git.jerome.forissier@linaro.org>
 References: <cover.1724846454.git.jerome.forissier@linaro.org>
@@ -99,31 +95,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The fec_mxc_init() function currently always returns 0. This does not
-allow the callers to detect when for instance the PHY initialization
-failed due to the port being unconnected. Fix that by returning the
-status of fec_open().
+If env__pxe_boot_test_skip is not present, it defaults to True not
+False. Therefore fix the comment.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
 ---
- drivers/net/fec_mxc.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ test/py/tests/test_net_boot.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/net/fec_mxc.c b/drivers/net/fec_mxc.c
-index 0a0d92bc2c..2dc1364bee 100644
---- a/drivers/net/fec_mxc.c
-+++ b/drivers/net/fec_mxc.c
-@@ -615,8 +615,7 @@ static int fecmxc_init(struct udevice *dev)
- 	if (fec->xcv_type != SEVENWIRE)
- 		miiphy_restart_aneg(dev);
- #endif
--	fec_open(dev);
--	return 0;
-+	return fec_open(dev);
+diff --git a/test/py/tests/test_net_boot.py b/test/py/tests/test_net_boot.py
+index 63309fe82e..d7d7435692 100644
+--- a/test/py/tests/test_net_boot.py
++++ b/test/py/tests/test_net_boot.py
+@@ -75,7 +75,7 @@ env__net_pxe_bootable_file = {
+     'check_pattern': 'ERROR',
  }
  
- /**
+-# False or omitted if a PXE boot test should be tested.
++# False if a PXE boot test should be tested.
+ # If PXE boot testing is not possible or desired, set this variable to True.
+ # For example: If pxe configuration file is not proper to boot
+ env__pxe_boot_test_skip = False
 -- 
 2.40.1
 
