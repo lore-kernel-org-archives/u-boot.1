@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC525C7114C
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 22:11:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B858C7113C
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 22:11:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CDA988B0A;
-	Thu, 29 Aug 2024 00:09:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B429B888A3;
+	Thu, 29 Aug 2024 00:09:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W/bvm6jr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="b+L0rM9B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70DE188A9F; Thu, 29 Aug 2024 00:09:07 +0200 (CEST)
-Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
- [IPv6:2607:f8b0:4864:20::131])
+ id 84241888A3; Thu, 29 Aug 2024 00:09:07 +0200 (CEST)
+Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
+ [IPv6:2607:f8b0:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FB77888A3
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:09:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 104608870D
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:09:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x131.google.com with SMTP id
- e9e14a558f8ab-39d2256ee95so33627935ab.2
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 15:09:01 -0700 (PDT)
+Received: by mail-il1-x12e.google.com with SMTP id
+ e9e14a558f8ab-39d2cea1239so26696045ab.3
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 15:09:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724882940; x=1725487740; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724882939; x=1725487739; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OekkaGKVZQKSxo/jnTMrQExGWkoBXuVQhuKWvUVL2WQ=;
- b=W/bvm6jrUJbXd3ClLbgRKCWg35jTIzz9YgRVFlhlgj8serS6YqhF/QfKhcV+Ro0Wqk
- 8S6m30ru8mc7vgaX55bIsWHiu3wIXg3av7RSo5Jhim4KAG4rEpi3h1XGg+s+N2ajgfB7
- 3kVUcJvhE8SclZOco2Dv9t8jBUl+2XgkMWTrM=
+ bh=2x9oOo24RY0A+1APG0gi11LDfWgMXj7Q6hssuqCXIkY=;
+ b=b+L0rM9Bc6v9Z+Ub1shqTQJawkWAnbmcYRvthEAmPgBrLNg9D4Fhaa4wfW+U+0YxTz
+ WpJPMxpzAKsmq4zJtoZDN9F7CM/ANS6dB/yoh6eLcBu2Oa2maxi77WUIyfQ7uNleOv1s
+ Bqh7W+8PCztgu7xoPLuHuBS9NdHWywzjvENe8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724882940; x=1725487740;
+ d=1e100.net; s=20230601; t=1724882939; x=1725487739;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OekkaGKVZQKSxo/jnTMrQExGWkoBXuVQhuKWvUVL2WQ=;
- b=bDSkQX5hS5iGgsQOMHxKPMRBYe3B9WaEKgni1gE7uMjOPP7XsHe38J/AGvTeGfC4VH
- z3xjSeOzhKv/WfGp0i1bdpzwK7wUJlzeb6J1Vf1EQgTk+U5nVXEt7pME6X1l3jghur5H
- kBoj1KdOaTPsVsC6c4FKz+qrrA1JOLzisyEXdTCZfC4dp/zc71XIE23cbR39kmBWoHea
- WhVC+E3RBvy4m+my/9nJAjGA8GTd8BCONdsZWl/dWz42+wkbU/gU8Elvus0pue357Bn5
- 4q6P9ktAy1gFJjrRtynaBd8tSCVblFUfoAqoleQSzoU6GxaU/1+60pmIJBX2H64mBMAo
- zYag==
-X-Gm-Message-State: AOJu0Ywy71q/2HluKRxcw+fk7JRwKV03OQ6jow1lQKvZ3kN20YsfpHmo
- 4dDZr4fQCGZMZlQj9ksheYZ4wGEgtl7krdkCqVKTyUtgSeQOJFriJrLo+ezGe5g6i6nW2oik6ec
+ bh=2x9oOo24RY0A+1APG0gi11LDfWgMXj7Q6hssuqCXIkY=;
+ b=VwtlIJ2U3uBvCNKbV6wy/i4NEo2sXZ1iR88q1ezZ26nr9UypnWRE674rffzJpXJWSO
+ +fmvDeDRo7ZKZwcPdarcgjS+7AE3acLDJWIkJy17UkuDvbbNefmWXWtF16TzjmcsJudE
+ GimbQZ9hP2l7XsfygkpJawOmJ3JX87dNl0HT0kfVU+Uay92TxNrIa4yWSowOeh4Cx2fh
+ tqLSP9chyFK8D6ccyrg5qUyZ/H2xdeGcZfQslFrSBwxtO60X5+3Up7dgiFX0nTu5KjHW
+ zUUoClMoy+tJgxnwboUhe+F48dnkpttUXuBlOr/yrUiMFVpOMpMJYTTOdBGggrqazL4t
+ YiMg==
+X-Gm-Message-State: AOJu0YwEicMrbhXq4+XEBCweRHVgW4COgDywgfz28nGpqB3QSCQOTXCQ
+ 4KK9QJuXV2q7H04eGIQy095g0rvCcpvX0b2mWC3g69b7siJH7VLINefdV8EXjBVWRu88XDGUYrE
  =
-X-Google-Smtp-Source: AGHT+IG/xkbLgmd24nngJTQyPalBN6P6X7NH+Ej2eSbSWdDd+KsbPmOTu1gieGaavJ5R0x/DVuLrsA==
-X-Received: by 2002:a92:cd88:0:b0:39b:3894:9298 with SMTP id
- e9e14a558f8ab-39f37712626mr15686615ab.0.1724882940011; 
- Wed, 28 Aug 2024 15:09:00 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFeRF1Tctuk+JuAcu9UXP84gCxZt+4A5K5dxYRTGFDeffHCpOrG0qjcmj333CccUXYU3i5PsQ==
+X-Received: by 2002:a05:6e02:156b:b0:39d:554e:6986 with SMTP id
+ e9e14a558f8ab-39f378846admr14380545ab.23.1724882938686; 
+ Wed, 28 Aug 2024 15:08:58 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39f38e683c1sm838105ab.19.2024.08.28.15.08.59
+ e9e14a558f8ab-39f38e683c1sm838105ab.19.2024.08.28.15.08.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Aug 2024 15:08:59 -0700 (PDT)
+ Wed, 28 Aug 2024 15:08:58 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v5 13/20] test: Introduce lab mode
-Date: Wed, 28 Aug 2024 16:08:39 -0600
-Message-Id: <20240828220846.1205813-14-sjg@chromium.org>
+Subject: [PATCH v5 11/20] test: Detect dead connections
+Date: Wed, 28 Aug 2024 16:08:37 -0600
+Message-Id: <20240828220846.1205813-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240828220846.1205813-1-sjg@chromium.org>
 References: <20240828220846.1205813-1-sjg@chromium.org>
@@ -89,147 +89,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is quite a bit of code in pytest to try to start up U-Boot on a
-board, with timeouts, expects, etc.
-
-This is tedious to maintain and is peripheral to the test system's
-purpose. It seems better to put this logic in the lab itself, where is
-can provide such support.
-
-With Labgrid we can use the UbootStrategy class to get the board into a
-useful state, however it needs to do it. Then it can report to pytest
-by writing a suitable string along with the U-Boot version it detected.
-
-Add support for detecting 'lab mode' and simply assume that all is well
-in that case. Collect the version string when Labgrid says it is ready.
+When the connection to a board dies, assume it is dead forever until
+some user action is taken. Skip all remaining tests. This avoids CI
+runs taking an hour, with hundreds of 30-second timeouts all to no
+avail.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/py/u_boot_console_base.py | 68 ++++++++++++++++++++++++++--------
- 1 file changed, 53 insertions(+), 15 deletions(-)
+ test/py/conftest.py     | 19 +++++++++++++++++--
+ test/py/u_boot_spawn.py | 38 ++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 55 insertions(+), 2 deletions(-)
 
-diff --git a/test/py/u_boot_console_base.py b/test/py/u_boot_console_base.py
-index 9474fa87ec9..bcba68f0aac 100644
---- a/test/py/u_boot_console_base.py
-+++ b/test/py/u_boot_console_base.py
-@@ -23,13 +23,21 @@ pattern_stop_autoboot_prompt = re.compile('Hit any key to stop autoboot: ')
- pattern_unknown_command = re.compile('Unknown command \'.*\' - try \'help\'')
- pattern_error_notification = re.compile('## Error: ')
- pattern_error_please_reset = re.compile('### ERROR ### Please RESET the board ###')
--pattern_ready_prompt = re.compile('U-Boot is ready')
-+pattern_ready_prompt = re.compile('{lab ready in (.*)s: (.*)}')
-+pattern_lab_mode = re.compile('{lab mode.*}')
+diff --git a/test/py/conftest.py b/test/py/conftest.py
+index 03dfd8ab562..9eea65b5929 100644
+--- a/test/py/conftest.py
++++ b/test/py/conftest.py
+@@ -25,6 +25,7 @@ import re
+ from _pytest.runner import runtestprotocol
+ import subprocess
+ import sys
++from u_boot_spawn import BootFail, Timeout, Unexpected, handle_exception
  
- PAT_ID = 0
- PAT_RE = 1
+ # Globals: The HTML log file, and the connection to the U-Boot console.
+ log = None
+@@ -287,6 +288,7 @@ def pytest_configure(config):
+     ubconfig.gdbserver = gdbserver
+     ubconfig.no_prompt_wait = config.getoption('no_prompt_wait')
+     ubconfig.dtb = build_dir + '/arch/sandbox/dts/test.dtb'
++    ubconfig.connection_ok = True
  
- # Timeout before expecting the console to be ready (in milliseconds)
--TIMEOUT_MS = 30000
-+TIMEOUT_MS = 30000                  # Standard timeout
+     env_vars = (
+         'board_type',
+@@ -453,8 +455,21 @@ def u_boot_console(request):
+     Returns:
+         The fixture value.
+     """
+-
+-    console.ensure_spawned()
++    if not ubconfig.connection_ok:
++        pytest.skip('Cannot get target connection')
++        return None
++    try:
++        console.ensure_spawned()
++    except OSError as err:
++        handle_exception(ubconfig, console, log, err, 'Lab failure', True)
++    except Timeout as err:
++        handle_exception(ubconfig, console, log, err, 'Lab timeout', True)
++    except BootFail as err:
++        handle_exception(ubconfig, console, log, err, 'Boot fail', True,
++                         console.get_spawn_output())
++    except Unexpected:
++        handle_exception(ubconfig, console, log, err, 'Unexpected test output',
++                         False)
+     return console
+ 
+ anchors = {}
+diff --git a/test/py/u_boot_spawn.py b/test/py/u_boot_spawn.py
+index 57ea845ad4c..62eb4118731 100644
+--- a/test/py/u_boot_spawn.py
++++ b/test/py/u_boot_spawn.py
+@@ -8,6 +8,7 @@ Logic to spawn a sub-process and interact with its stdio.
+ import os
+ import re
+ import pty
++import pytest
+ import signal
+ import select
+ import sys
+@@ -28,6 +29,43 @@ class BootFail(Exception):
+ class Unexpected(Exception):
+     """An exception sub-class that indicates that unexpected test was seen."""
+ 
 +
-+# Timeout for board preparation in lab mode. This needs to be enough to build
-+# U-Boot, write it to the board and then boot the board. Since this process is
-+# under the control of another program (e.g. Labgrid), it will failure sooner
-+# if something goes way. So use a very long timeout here to cover all possible
-+# situations.
-+TIMEOUT_PREPARE_MS = 3 * 60 * 1000
- 
- bad_pattern_defs = (
-     ('spl_signon', pattern_u_boot_spl_signon),
-@@ -143,6 +151,7 @@ class ConsoleBase(object):
- 
-         self.at_prompt = False
-         self.at_prompt_logevt = None
-+        self.lab_mode = False
- 
-     def get_spawn(self):
-         # This is not called, ssubclass must define this.
-@@ -176,40 +185,69 @@ class ConsoleBase(object):
-             self.p.close()
-         self.logstream.close()
- 
-+    def set_lab_mode(self):
-+        """Select lab mode
++def handle_exception(ubconfig, console, log, err, name, fatal, output=''):
++    """Handle an exception from the console
 +
-+        This tells us that we will get a 'lab ready' message when the board is
-+        ready for use. We don't need to look for signon messages.
-+        """
-+        self.log.info(f'test.py: Lab mode is active')
-+        self.p.timeout = TIMEOUT_PREPARE_MS
-+        self.lab_mode = True
++    Exceptions can occur when there is unexpected output or due to the board
++    crashing or hanging. Some exceptions are likely fatal, where retrying will
++    just chew up time to no available. In those cases it is best to cause
++    further tests be skipped.
 +
-     def wait_for_boot_prompt(self, loop_num = 1):
-         """Wait for the boot up until command prompt. This is for internal use only.
-         """
-         try:
-+            self.log.info('Waiting for U-Boot to be ready')
-             bcfg = self.config.buildconfig
-             config_spl_serial = bcfg.get('config_spl_serial', 'n') == 'y'
-             env_spl_skipped = self.config.env.get('env__spl_skipped', False)
-             env_spl_banner_times = self.config.env.get('env__spl_banner_times', 1)
- 
--            while loop_num > 0:
-+            while not self.lab_mode and loop_num > 0:
-                 loop_num -= 1
-                 while config_spl_serial and not env_spl_skipped and env_spl_banner_times > 0:
--                    m = self.p.expect([pattern_u_boot_spl_signon] +
--                                      self.bad_patterns)
--                    if m != 0:
-+                    m = self.p.expect([pattern_u_boot_spl_signon,
-+                                       pattern_lab_mode] + self.bad_patterns)
-+                    if m == 1:
-+                        self.set_lab_mode()
-+                        break
-+                    elif m != 0:
-                         raise BootFail('Bad pattern found on SPL console: ' +
--                                        self.bad_pattern_ids[m - 1])
-+                                       self.bad_pattern_ids[m - 1])
-                     env_spl_banner_times -= 1
- 
--                m = self.p.expect([pattern_u_boot_main_signon] + self.bad_patterns)
--                if m != 0:
--                    raise BootFail('Bad pattern found on console: ' +
--                                    self.bad_pattern_ids[m - 1])
--            self.u_boot_version_string = self.p.after
-+                if not self.lab_mode:
-+                    m = self.p.expect([pattern_u_boot_main_signon,
-+                                       pattern_lab_mode] + self.bad_patterns)
-+                    if m == 1:
-+                        self.set_lab_mode()
-+                    elif m != 0:
-+                        raise BootFail('Bad pattern found on console: ' +
-+                                       self.bad_pattern_ids[m - 1])
-+            if not self.lab_mode:
-+                self.u_boot_version_string = self.p.after
-             while True:
-                 m = self.p.expect([self.prompt_compiled, pattern_ready_prompt,
-                     pattern_stop_autoboot_prompt] + self.bad_patterns)
--                if m == 0 or m == 1:
-+                if m == 0:
-+                    self.log.info(f'Found ready prompt {m}')
-+                    break
-+                elif m == 1:
-+                    m = pattern_ready_prompt.search(self.p.after)
-+                    self.u_boot_version_string = m.group(2)
-+                    self.log.info(f'Lab: Board is ready')
-+                    self.p.timeout = TIMEOUT_MS
-                     break
-                 if m == 2:
-+                    self.log.info(f'Found autoboot prompt {m}')
-                     self.p.send(' ')
-                     continue
--                raise BootFail('Bad pattern found on console: ' +
--                                self.bad_pattern_ids[m - 3])
-+                if not self.lab_mode:
-+                    raise BootFail('Missing prompt / ready message on console: ' +
-+                                   self.bad_pattern_ids[m - 3])
-+            self.log.info(f'U-Boot is ready')
- 
-         finally:
-             self.log.timestamp()
++    Args:
++        ubconfig (ArbitraryAttributeContainer): ubconfig object
++        log (Logfile): Place to log errors
++        console (ConsoleBase): Console to clean up, if fatal
++        err (Exception): Exception which was thrown
++        name (str): Name of problem, to log
++        fatal (bool): True to abort all tests
++        output (str): Extra output to report on boot failure. This can show the
++           target's console output as it tried to boot
++    """
++    msg = f'{name}: '
++    if fatal:
++        msg += 'Marking connection bad - no other tests will run'
++    else:
++        msg += 'Assuming that lab is healthy'
++    print(msg)
++    log.error(msg)
++    log.error(f'Error: {err}')
++
++    if output:
++        msg += f'; output {output}'
++
++    if fatal:
++        ubconfig.connection_ok = False
++        console.cleanup_spawn()
++        pytest.exit(msg)
++
++
+ class Spawn:
+     """Represents the stdio of a freshly created sub-process. Commands may be
+     sent to the process, and responses waited for.
 -- 
 2.34.1
 
