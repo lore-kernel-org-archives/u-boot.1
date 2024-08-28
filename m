@@ -4,76 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35A26C54744
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 00:21:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F326EC54747
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 00:38:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3844488A74;
-	Wed, 28 Aug 2024 02:21:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 39C4F887B9;
+	Wed, 28 Aug 2024 02:38:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OkwQxgvS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zjyhavMg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AB4388A75; Wed, 28 Aug 2024 02:21:11 +0200 (CEST)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id 29DF78897F; Wed, 28 Aug 2024 02:38:23 +0200 (CEST)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29311887B9
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 02:21:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7156F8876E
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 02:38:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-53346132348so7291227e87.2
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 17:21:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-699ac6dbf24so54761037b3.3
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 17:38:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724804468; x=1725409268; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724805499; x=1725410299; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mBznrfm8+T5nbzI943LCuM99GhGMKtbo4taxXLC9ZTA=;
- b=OkwQxgvSStdHyeHONDph20JKnvOzI3YqGFYlw4q5qIRp3IAfzs9+LeWDisBj0zBc0q
- l59iwGKgALvslZwEvUPo+8NMGX0Gu3ubJ0ZM7poF3DcmvV4GmnVO/UzJ/pSVX9xrxL+l
- J/AVLqAVybhEv8yHeG3+7obmczu2Zi/Aj0MjYHIsZF1gfSLmcrheFATfem4PsE5bfTPI
- NrA4/r2b0tDRRB2i16QUGymO/jVh21US4mH6U9MeZBR+1nBShqoHpu2kmAuGx0osw6sm
- NOVRwcNQk7pakrtaQ4jd5hRpqbp5wm5cNlFzAH4ciQFqLavhKPGXM1/V5AlIHNs75XGV
- Qtig==
+ bh=nSMPNvvRE/Fws48aHMLMEeDStMg8yekG8vEPwTabMz0=;
+ b=zjyhavMgkKnvaTgatubyNvRRCvByl8UxeTLiQDr/u1hZotwonvsjHGxcxWOGvOVV+E
+ qmfTMWF0AJs79VP7sPq11QISOwS0ueojqG8Oe1HHWVXiNtVWSrkHNRlNtwg5STC4vsZQ
+ M8As9zcSKTnvOWhBqY5iH4uQPqtuuNMVvV0TILw4tX792JlohScl+mUPNgc+4AyXlCSg
+ Nilefmswjm4XKrFcsLZUUm2rS+AJKAvxrD4vTxlJm/jWW/0hlL4cvsN5HXKB0qdz1ohG
+ zCQVo3XUtlg+f7O8ITkXWoz2AP9Z8d4LoaYg/fB80e58fHU8BtMo+8yy8BC0cMzc+TUi
+ 6s+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724804468; x=1725409268;
+ d=1e100.net; s=20230601; t=1724805499; x=1725410299;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mBznrfm8+T5nbzI943LCuM99GhGMKtbo4taxXLC9ZTA=;
- b=gQs4q+fU0uo1PIoxfG8qu2KPEQ1+UpDERV39DkKb6RIHF2mrg1KAvaaxvIfRokCSBK
- YKJtOxGuVA3UhXWF5nXCKo9BZ4ApppdfqWccCPnEibtz36yXWbxWaCK6MCMZKMSbQZn6
- /04oGzv/lQJ+KRye+PBPFDZoz9R4JgdqTDsdnc7WVg5EKFbH5REymwBTQllQD6UcI7Tf
- hVMcFBdEd7Z1O6oQVPqObFe26rNioTSeiYq9qbYkzOcCS9OOkhRhyK4jcXFHWRi0PjGa
- 142yEPZg8VPowFtWs3k9VPbBVVXOwsWMjXUEj4tfHEeNwbKb3CjbSVOgAXr/s4F3Resh
- Bt/g==
-X-Gm-Message-State: AOJu0Yz9+XsU6mC+QLp6QcPAY0F/iXCYol1W/E7NqLkpm8meQRnhehyv
- uhQbwTO3q5cb19clz2BFnGtNlA7wBrjnOTPqMMhv5C9xaSOr+tDGIB56lPymRWgwAGOxZJGiZ36
- p7iNBEOKL/QP2l21EV+tfqCr85pc=
-X-Google-Smtp-Source: AGHT+IFPxrXEW23jv4eE9c2ATS9iCvUqerGuqKJ1ZPAL/TE4K1BmfNJ++RImwokRhsHg+VG+EM7bdy/1y08Sl5RMLBs=
-X-Received: by 2002:a05:6512:3191:b0:52e:f907:1023 with SMTP id
- 2adb3069b0e04-534387c49d7mr10154146e87.49.1724804467958; Tue, 27 Aug 2024
- 17:21:07 -0700 (PDT)
+ bh=nSMPNvvRE/Fws48aHMLMEeDStMg8yekG8vEPwTabMz0=;
+ b=nwsSReLmjjeC2Tq/svFn4I4kGLqiDCEGBTOeXiQFKSf4Jo4od+kZeXBXV4RXLjhAd+
+ Py5zgwBW2FgxtbxAN+Zc5YPu0PeGqsyp19NrhBR6qXogdR2oPQcMv2Mb5i6cZUUQjNr6
+ KcdMUjBOdTq4RVDdhSeu8VWVZoZFgXg6sgKid8hladbHZoVgOLdYSmsAR7uTTlCIQwcZ
+ 0KhpDFamEY7HHTbUCfe4GCVIXcQ2A+zv9kw/7z1SzHYfVcawnyEGvVYehUv3OMOV9MM3
+ BMeXY0CwEpmJ5LxrgJhLWg9mHuAk3DJFK59mNDXDnjjrXw+xZ+i5WAiAZuvmRELoJNF/
+ BgSg==
+X-Gm-Message-State: AOJu0Yypi103caCD+7qDRNFDHxlab0CSRGPZoqOQ8B6WO826PWvu7O2z
+ XQPKF6TiIac7uHV6Agxt5LLOBllJ4Ejsx1OwPXna9ilCiUk4Z3qDg9DkrvifTzd2PqKze0e9j8X
+ 7rLoAascTQhzSgzWMllD5ceMEwOBa56oFaDx5KQ==
+X-Google-Smtp-Source: AGHT+IFgM/qdiNOS+VB5k3dTFaW5N2H+jjaYmKVB+qFgNGJ2OhlwbpurRmzyoqXFN2rnFtEqFkbS/b5gADuyd4LT/OE=
+X-Received: by 2002:a05:690c:4082:b0:6b2:7bd8:d7b7 with SMTP id
+ 00721157ae682-6c629fd77a7mr113378077b3.46.1724805499198; Tue, 27 Aug 2024
+ 17:38:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <GI.Za6b.48b6UC5Rsur.1cpWwh@seznam.cz>
- <CAOMZO5Aj9zSEWF9Gm5-tF9hTaczf6FXv0zo_z+Jws+BGPYPwrg@mail.gmail.com>
- <K9.Za7d.77W3I8GjZaJ.1cpYlf@seznam.cz>
- <CAOMZO5BshEknpJEeEiqip3e_YkN21kAKtKva0ik=8SKGJxmngw@mail.gmail.com>
-In-Reply-To: <CAOMZO5BshEknpJEeEiqip3e_YkN21kAKtKva0ik=8SKGJxmngw@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 27 Aug 2024 21:20:56 -0300
-Message-ID: <CAOMZO5A1r4F403efkpAPbv9zJD7bjv=aHB8SgOK3pPXtVvzE2g@mail.gmail.com>
-Subject: Re: [PATCH] gpio: mxc_gpio: fix reading state of GPIO pins in output
- mode
-To: Tomas Paukrt <tomaspaukrt@email.cz>, Ye Li <ye.li@nxp.com>,
- Peng Fan <peng.fan@nxp.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+References: <20240807141434.733085-1-JPEWhacker@gmail.com>
+In-Reply-To: <20240807141434.733085-1-JPEWhacker@gmail.com>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Tue, 27 Aug 2024 19:38:08 -0500
+Message-ID: <CAPLW+4kyTO=c0JCepDd+S67ABDF3y0bK-xHiEOnCUXeA+8vvmg@mail.gmail.com>
+Subject: Re: [PATCH] android_ab: Fix backup offset calculation
+To: Joshua Watt <jpewhacker@gmail.com>
+Cc: u-boot@lists.denx.de, Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,47 +88,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tomas,
+On Wed, Aug 7, 2024 at 9:14=E2=80=AFAM Joshua Watt <jpewhacker@gmail.com> w=
+rote:
+>
+> The backup offset is in bytes, but was incorrectly be interpreted as
+> blocks, leading to it being written to the wrong location. Fix the
+> calculation and clarify that ANDROID_AB_BACKUP_OFFSET is in bytes and
+> must be a multiple of the block size.
+>
+> Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
+> ---
 
-On Tue, Aug 27, 2024 at 4:53=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
-wrote:
->
-> Hi Tomas,
->
-> On Tue, Aug 27, 2024 at 4:41=E2=80=AFPM Tomas Paukrt <tomaspaukrt@email.c=
-z> wrote:
->
-> > Hi Fabio,
-> >
-> > you are correct that the existing code will work if the SION bit is set=
-, but this is not always possible or desirable. For example, if you use the=
- command "gpio set" to set the state of a pin that is not configured in DTS=
- then you will get the error message "Warning: value of pin is still 0". Al=
-so the command "gpio status -a" shows wrong states of some output pins with=
-out this patch.
->
-> This happens due to an incorrect devicetree description, i.e, the lack
-> of setting the SION bit.
->
-> > Please see the chapters "GPIO data register (GPIOx_DR)" and "GPIO pad s=
-tatus register (GPIOx_PSR)" in the document IMX6ULLRM.pdf which show that i=
-t is possible to use the DR register instead of the PSR register in this ca=
-se.
-> >
-> > I also found the exactly same modification in NXP version of U-Boot (ht=
-tps://github.com/nxp-imx/uboot-imx/commit/4afc3f90943c6b117f79b66d2cd04e64f=
-437b0c2) made by an NXP employee.
->
-> Adding Ye Li on Cc.
->
-> There were many attempts to fix this in both U-Boot and the kernel,
-> but the recommendation has always been: "Set the SION bit if you need
-> to read the output state".
+In addition to what Mattijs said, I think it makes sense to add
+"Fixes:" tag for this patch.
 
-For more information, please read this thread posted on
-linux-arm-kernel ten years ago:
-
-https://patchwork.kernel.org/project/linux-arm-kernel/patch/CAJ+vNU3w9Oi+dE=
-rmy9x8g6ps=3DeLHLNLO-w7=3Dgn_8JtY4Kab6JQ@mail.gmail.com/
-
-I hope this helps to clarify.
+>  boot/android_ab.c | 4 ++--
+>  common/Kconfig    | 3 ++-
+>  2 files changed, 4 insertions(+), 3 deletions(-)
+>
+> diff --git a/boot/android_ab.c b/boot/android_ab.c
+> index 143f373aae..b253200161 100644
+> --- a/boot/android_ab.c
+> +++ b/boot/android_ab.c
+> @@ -139,8 +139,8 @@ static int ab_control_store(struct blk_desc *dev_desc=
+,
+>  {
+>         ulong abc_offset, abc_blocks, ret;
+>
+> -       abc_offset =3D offset +
+> -                    offsetof(struct bootloader_message_ab, slot_suffix) =
+/
+> +       abc_offset =3D (offset +
+> +                     offsetof(struct bootloader_message_ab, slot_suffix)=
+) /
+>                      part_info->blksz;
+>         abc_blocks =3D DIV_ROUND_UP(sizeof(struct bootloader_control),
+>                                   part_info->blksz);
+> diff --git a/common/Kconfig b/common/Kconfig
+> index 83c81edac2..e1b8557e0c 100644
+> --- a/common/Kconfig
+> +++ b/common/Kconfig
+> @@ -986,7 +986,8 @@ config ANDROID_AB_BACKUP_OFFSET
+>         help
+>           If non-zero, a backup bootloader message starting at this offse=
+t in
+>           the partition will tried in the event that the primary one (sta=
+rting
+> -         at offset 0) fails its checksum.
+> +         at offset 0) fails its checksum. The offset is in bytes and mus=
+t be
+> +         multiple of the block size.
+>
+>  endmenu
+>
+> --
+> 2.45.2
+>
