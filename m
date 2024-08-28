@@ -4,81 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30A24C7114C
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 22:17:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E244FC7114C
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 22:17:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 969F6889D2;
-	Thu, 29 Aug 2024 00:17:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0E30C88A25;
+	Thu, 29 Aug 2024 00:17:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TgPqdPUv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="I4G7JYrv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C174889D1; Thu, 29 Aug 2024 00:17:15 +0200 (CEST)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id D6741888A3; Thu, 29 Aug 2024 00:17:15 +0200 (CEST)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66C3C8862E
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:17:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C6DE687FA7
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:17:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6bf7a2035d9so11002276d6.1
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 15:17:07 -0700 (PDT)
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-6bf6721aae5so68126d6.2
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 15:17:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724883426; x=1725488226; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cBiGxGPlgc7Gd3Sxj1IEiXxIsm4OQtxebqsqGuSoAvo=;
- b=TgPqdPUv8yB8mvtIe7lt19soUjqWewvBC8gF457APmv5zu3dYcDwGvbv/+KQzTF+QI
- Oizwc/D+yrd9Q/IwEDBu1PuYltre8P8iSh9t0Rt2s3+h3xNtVYQngaJ9Jo31NThUvpAX
- TGautNBkIsBLnn4NuCJeldVuwj4qpV8XlBBR4=
+ d=chromium.org; s=google; t=1724883431; x=1725488231; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hDWWcj5/c4hfnz+49nSndtwudeloj+MjcR9eaaxC/0E=;
+ b=I4G7JYrv1ycO7vNGCWWFetyBKMtxIzFV3/HPqjMHr2QDWcTj4IZEh1YvPXNtgmrtAs
+ llgBHFdLS59flBtPIwK6joYs4Y9VAea2nul6/OPcQWNixD9cRR4rT8bvN1a4QnK4AVNR
+ I+EfQe/6NNoea60a1lskbOP/bb3hbY2e30llo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724883426; x=1725488226;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cBiGxGPlgc7Gd3Sxj1IEiXxIsm4OQtxebqsqGuSoAvo=;
- b=o7VPU8UcZA4cV0ZScS6kkQFRJFNfFWVZqZkySCtQhQc6ESSqfI/65VMcQARFmi0TbH
- e4/xnj5xSbxXggnhAw7IqCkxn1lccy5/4NL5+eKndekSpdPt6q8j9gxngeXYiw6R8g9/
- b5YEo6/0Rw3vBm3Eg72BikPwBhK5x+C+nZZ4XQuFRfuLUlpusYZmvKHjCZr60TuQebPG
- 1Lr3YEbibPsvGzM1Hp/8G7tDB3yrycn853DluVQVtn3U7E5jRdgz5C2dIbPkTicmNvPi
- MxdAJN/2RrDR3+XofildJHo0qd9jfLQ4DYfkfPwspVJ/OkGfNCmDWsrSyFx5rC9FINH1
- W8Zg==
-X-Gm-Message-State: AOJu0YzAHC+6oh8HN0NMwMuBm8h180DcXQUKuJRqd+xok4iiDROWXXXa
- uKAAUJDaQfQMcR7dbD5BUfX/aiu1c7vKG+HilhS+OX96m8+LLcZtP9W9dJr1HGtHftyDphNvbRV
- R99oTm8w5dlO1klQst4F82G7nc7rxWWXQ2sPk
-X-Google-Smtp-Source: AGHT+IHrplIwR+/eznMDBMmzg2EJ8hzoJ8wq+Bg7ce1DHY2s8EbO+77UEJPLBbO7R1bq9QCkX8Jsv4OGkJYdBy9sARY=
-X-Received: by 2002:a05:6214:23c8:b0:6b5:2be1:cd6e with SMTP id
- 6a1803df08f44-6c33f32490bmr10664166d6.4.1724883426247; Wed, 28 Aug 2024
- 15:17:06 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1724883431; x=1725488231;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hDWWcj5/c4hfnz+49nSndtwudeloj+MjcR9eaaxC/0E=;
+ b=E3TWS3BK2bbN3E7jx5dCYKT+D4PwRi2IhDlTyOGOpiQEkcc6x8r/fzSpFoql8nXHc3
+ PeSxcGwGrxj8AtmBi9PZTRITdIUEzVvrRH39fzLpqIAAaT/LCI0v9QM2RiUg2ZcbA1WJ
+ LSPbDYDkSrUORCw3g6DkUZL3GOFCeJeLpYMwzDhbeEVPfppG8z/P+XpKHQo8QAeTxyzt
+ wLExDqGBridhzl26qpsFtOJmGJRBpPYW6N6bfZFloERcDmKo4KpaMqD1PZ7iRZfUdxRG
+ mje1/hKy2cc5RDxZICtLA0Le9XvZ6e8WokxqEYcYZANuYMn9Wb/xXqW+IE/uEk/BE3Jd
+ 7KvQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUmgpRNCxoVnczpfCTPO1i5E0H2SoyPqUeisS11X4/ktbmqkIje0Tz+zWGFK2X1LKNqVOTKvMs=@lists.denx.de
+X-Gm-Message-State: AOJu0YzTBhKB5zlWqNVaG2V5JIlCBsoLCeRaz52XhIYTgZT4M23lKOcA
+ ZDwDT0HWlDlqGRl5K32vzlz5JeBjO3/lwAILrTWdKty+oEXGwZ3zrOwm/pfOyOZ1NAzHY7FNGXH
+ otOUa5S1MjS+XlvpmxO7nQ7GY5//0izDZu6hL
+X-Google-Smtp-Source: AGHT+IG73x/5prqshBvcjBN/Mmd+daDzEyEHxE5XY5MtfQleZ1zIFvi6tIHMFnvGczdSFNDsv4HtcgryEudZpKWSYqY=
+X-Received: by 2002:a05:6214:598b:b0:6b5:e4da:2d51 with SMTP id
+ 6a1803df08f44-6c33e684418mr11185356d6.45.1724883430612; Wed, 28 Aug 2024
+ 15:17:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240828014538.3322013-1-sjg@chromium.org>
- <CALeDE9MX6MMECX+vNCjMs8Z2_G3+gSio4BxFHgez-H_a4f2Uyg@mail.gmail.com>
-In-Reply-To: <CALeDE9MX6MMECX+vNCjMs8Z2_G3+gSio4BxFHgez-H_a4f2Uyg@mail.gmail.com>
+References: <980adca3-27ac-440b-93b4-80146d050584@linaro.org>
+ <CAOMZO5A2ZBb9G6krUmfNy3qnoNYgwdb2-DUgeNuvONy9VioEbQ@mail.gmail.com>
+ <CAFLszTgZ9vFe1rahWG_QiVJXoCBOTc=umAJ=YZwu7ExyXWsuDg@mail.gmail.com>
+ <aeba3da3-b287-481c-a704-4b56884deaaf@linaro.org>
+In-Reply-To: <aeba3da3-b287-481c-a704-4b56884deaaf@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 28 Aug 2024 16:16:55 -0600
-Message-ID: <CAFLszTgrCGhvhO0GDSLABu1D10H97dBWFSnEf8gSJujq6iUduw@mail.gmail.com>
-Subject: Re: [PATCH 00/18] vbe: Series part D
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Andre Przywara <andre.przywara@arm.com>, 
- Apurva Nandan <a-nandan@ti.com>, Bryan Brattlof <bb@ti.com>,
- Greg Malysa <greg.malysa@timesys.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jayesh Choudhary <j-choudhary@ti.com>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Kever Yang <kever.yang@rock-chips.com>,
- Kongyang Liu <seashell11234455@gmail.com>, 
- Minkyu Kang <mk7.kang@samsung.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>, Stefan Roese <sr@denx.de>,
- Tony Dinh <mibodhi@gmail.com>, Vaishnav Achath <vaishnav.a@ti.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, 
- huang lin <hl@rock-chips.com>
+Date: Wed, 28 Aug 2024 16:17:00 -0600
+Message-ID: <CAFLszTjZVFCoPBTojmHwCoo7jKsyEYzFBLq9SxjOco7uLzJ_ZA@mail.gmail.com>
+Subject: Re: imx8ulp_evk build with buildman fails every other time
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Fabio Estevam <festevam@gmail.com>, Gary Bisson <bisson.gary@gmail.com>, 
+ Peng Fan <peng.fan@nxp.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,113 +89,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter,
-
-On Wed, 28 Aug 2024 at 03:59, Peter Robinson <pbrobinson@gmail.com> wrote:
+On Wed, 28 Aug 2024 at 09:40, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
 >
-> Hi Simon,
 >
-> > This includes various patches towards implementing the VBE abrec
 >
-> What is abrec?
-
-It's a VBE method which supports A, B and recovery images and permits
-updating from SPL onwards. The idea is that you can safely update
-without bricking a device.
-
->
-> > bootmeth in U-Boot.
+> On 8/27/24 17:53, Simon Glass wrote:
+> > Hi Jerome,
 > >
+> > On Tue, 27 Aug 2024 at 08:53, Fabio Estevam <festevam@gmail.com> wrote:
+> >>
+> >> Adding Gary and Peng on Cc.
+> >>
+> >> On Tue, Aug 27, 2024 at 11:42=E2=80=AFAM Jerome Forissier
+> >> <jerome.forissier@linaro.org> wrote:
+> >>>
+> >>> Hi,
+> >>>
+> >>> Can someone explain what's happening with the imx8ulp_evk buildman bu=
+ild
+> >>> below? It either fails with a mkimage error, or succeeds with a binma=
+n
+> >>> warning, every other time. 100% reproducible. /me confused :o
+> >>>
+> >>> =3D=3D=3D=3D8<=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D8<=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >>> $ docker run -it --rm trini/u-boot-gitlab-ci-runner:jammy-20240808-21=
+Aug2024
+> >>> uboot@42aa85c2d6b7:/$ cd
+> >>> uboot@42aa85c2d6b7:~$ git clone https://github.com/u-boot/u-boot.git
+> >>> uboot@42aa85c2d6b7:~/u-boot$ git log --oneline -n 1
+> >>> ee2af844ba (HEAD -> master, origin/master, origin/HEAD) Merge tag 'ef=
+i-2024-10-rc4' of https://source.denx.de/u-boot/custodians/u-boot-efi
+> >>> uboot@42aa85c2d6b7:~$ cd u-boot
+> >>> uboot@42aa85c2d6b7:~/u-boot$ tools/buildman/buildman imx8ulp_evk
+> >>> Building current source for 1 boards (1 thread, 24 jobs per thread)
+> >>>    aarch64:  w+   imx8ulp_evk
+> >>> +WARNING 'mx8ulpa2-ahab-container.img' not found, resulting binary ma=
+y be not-functional
+> >>> +WARNING 'bl31.bin' not found, resulting binary may be not-functional
+> >>> +WARNING 'upower.bin' not found, resulting binary may be not-function=
+al
+> >>> +WARNING 'm33_image.bin' not found, resulting binary may be not-funct=
+ional
+> >>>     0    1    0 /1              imx8ulp_evk
+> >>> Completed: 1 total built, 1 newly), duration 0:00:09, rate 0.11
+> >>> uboot@42aa85c2d6b7:~/u-boot$ tools/buildman/buildman imx8ulp_evk
+> >>> Building current source for 1 boards (1 thread, 24 jobs per thread)
+> >>>    aarch64:  +   imx8ulp_evk
+> >>> +WARNING 'bl31.bin' not found, resulting binary may be not-functional
+> >>> +binman: Error 1 running 'mkimage -d ./mkimage.spl.mkimage -n spl/u-b=
+oot-spl.cfgout -T imx8image -e 0x22020000 ./mkimage-out.spl.mkimage': Fail =
+open first container file mx8ulpa2-ahab-container.img
+> >>> +
+> >>> +make[1]: *** [Makefile:1126: .binman_stamp] Error 1
+> >>> +make: *** [Makefile:177: sub-make] Error 2
+> >>>     0    0    1 /1              imx8ulp_evk
+> >>> Completed: 1 total built, 1 newly), duration 0:00:04, rate 0.25
+> >>> uboot@42aa85c2d6b7:~/u-boot$ tools/buildman/buildman imx8ulp_evk
+> >>> Building current source for 1 boards (1 thread, 24 jobs per thread)
+> >>>    aarch64:  w+   imx8ulp_evk
+> >>> +WARNING 'mx8ulpa2-ahab-container.img' not found, resulting binary ma=
+y be not-functional
+> >>> +WARNING 'upower.bin' not found, resulting binary may be not-function=
+al
+> >>> +WARNING 'm33_image.bin' not found, resulting binary may be not-funct=
+ional
+> >>> +WARNING 'bl31.bin' not found, resulting binary may be not-functional
+> >>>     0    1    0 /1              imx8ulp_evk
+> >>> Completed: 1 total built, 1 newly), duration 0:00:04, rate 0.25
+> >>> uboot@42aa85c2d6b7:~/u-boot$ tools/buildman/buildman imx8ulp_evk
+> >>> Building current source for 1 boards (1 thread, 24 jobs per thread)
+> >>>    aarch64:  +   imx8ulp_evk
+> >>> +WARNING 'bl31.bin' not found, resulting binary may be not-functional
+> >>> +binman: Error 1 running 'mkimage -d ./mkimage.spl.mkimage -n spl/u-b=
+oot-spl.cfgout -T imx8image -e 0x22020000 ./mkimage-out.spl.mkimage': Fail =
+open first container file mx8ulpa2-ahab-container.img
+> >>> +
+> >>> +make[1]: *** [Makefile:1126: .binman_stamp] Error 1
+> >>> +make: *** [Makefile:177: sub-make] Error 2
+> >>>     0    0    1 /1              imx8ulp_evk
+> >>> Completed: 1 total built, 1 newly), duration 0:00:04, rate 0.25
+> >>> =3D=3D=3D=3D8<=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D8<=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >>>
 > >
-> > Simon Glass (18):
-> >   sandbox: Add missing header file
-> >   bootstd: Add stub for bootdev_setup_for_sibling_blk()
-> >   gzip: Correct function comment for gunzip()
->
-> Is this from upstream gzip code somewher?
-
-I'm not sure, actually.
-
->
-> >   fdtdec: Support separate BSS for all XPL builds
-
-Needed so that VPL can use DDT
-
-> >   tiny-printf: Correct return values
-
-I can't remember, sorry.
-
-> >   tpl: Support numbered aliases in device tree
-
-The MMC needs to be accessed using its sequence number
-
-> >   ram: Support driver model in TPL
-
-That should say VPL...but again I'm not quite sure
-
-> >   serial: Support debug UART in TPL
-
-This allows debugging of the jump from TPL to VPL
-
-> >   armv8: Support not having separate BSS
-
-VPL doesn't want a separate BSS since SDRAM isn't available that early
-
-> >   arm: cache: Drop a stale comment
-
-Just something I noticed
-
-> >   arm: Fix up a stale comment in sections.c
-
-Another thing I noticed
-
-> >   mmc: Support driver model in TPL
-
-TPL needs to read VPL from MMC
-
-> >   mmc: Add more debugging for SPL
-> >   mmc: Log the error when init fails
-> >   mmc: rockchip: Log some error returns
-> >   mmc: rockchip: Allow clocks to be missing
-
-These all help with debugging reading of VPL from the correct MMC device
-
-> >   rockchip: mmc: Fix a missing colon
-
-Just something I noticed
-
-> >   rockchip: Provided SPL control over efuse presence
-
-We don't want this driver in TPL or VPL
-
->
-> I'm not sure what most of these patches have to do with VBE?
-
-Basically there are a lot of little tweaks needed.
-
->
-> >  arch/arm/cpu/armv8/u-boot-spl.lds   | 12 ++++++++++++
-> >  arch/arm/lib/cache.c                |  2 --
-> >  arch/arm/lib/sections.c             |  2 +-
-> >  arch/sandbox/include/asm/sections.h |  1 +
-> >  common/spl/spl_mmc.c                | 13 +++++++++++++
-> >  drivers/core/Kconfig                |  8 ++++++++
-> >  drivers/misc/Makefile               |  2 +-
-> >  drivers/mmc/Kconfig                 | 12 ++++++++++++
-> >  drivers/mmc/mmc.c                   |  2 +-
-> >  drivers/mmc/rockchip_dw_mmc.c       | 10 ++++------
-> >  drivers/mmc/rockchip_sdhci.c        | 11 +++++------
-> >  drivers/ram/Kconfig                 |  9 +++++++++
-> >  drivers/serial/Kconfig              |  7 +++++++
-> >  include/bootdev.h                   |  8 ++++++++
-> >  include/gzip.h                      |  6 ++++--
-> >  lib/fdtdec.c                        |  2 +-
-> >  lib/tiny-printf.c                   | 15 ++++++---------
-> >  17 files changed, 93 insertions(+), 29 deletions(-)
+> > I can't quite explain it but I have hit this before. It is why I have
+> > been unable to land [1]
 > >
-> > --
-> > 2.34.1
+> > Perhaps binman is writing a file which is being picked up on the next
+> > run, but is not valid? Or perhaps the file from a previous build
+> > confuses things? I notice that some of the sections have filenames,
+> > meaning that they are written and persist between builds.
 > >
+> > You can try BINMAN_VERBOSE=3D4 or 5 to see what is happening, or
+> > BINMAN_DEBUG=3D1 to get a stack trace.
+>
+> That one wasn't super easy to track down :-/ but I think I have a proper
+> fix. See https://lists.denx.de/pipermail/u-boot/2024-August/563355.html.
 
-Regards,
-SImon
+Nice work!!
+
+- Simon
+
+> >
+> > [1] https://patchwork.ozlabs.org/project/uboot/patch/20240623175515.146=
+6908-14-sjg@chromium.org/
