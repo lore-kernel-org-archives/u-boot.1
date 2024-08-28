@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 215BCC54EE3
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 12:12:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCACBC54F32
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 12:12:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8B4388B5A;
-	Wed, 28 Aug 2024 14:11:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 35B9288B6A;
+	Wed, 28 Aug 2024 14:11:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Gutv4wh6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="trmFF7eK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FA0488AA7; Wed, 28 Aug 2024 14:10:55 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id 446FA88B55; Wed, 28 Aug 2024 14:10:56 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80E8788AF8
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 14:10:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6216888AD2
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 14:10:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3730749ee7aso3899209f8f.2
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 05:10:53 -0700 (PDT)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4281c164408so57193285e9.1
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 05:10:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1724847053; x=1725451853; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Tt2vjY7MaKscycbDjgQS+EhvZk4u1eI0iM4tc60Fq+8=;
- b=Gutv4wh6LfIhPaHvquQIMpPqBr0MfavTkWTC4OT+maF58Vd1NsGJr0HKLnUjtJoYzj
- Se1pS6qCfkLMfGnGZeSCeomwzEWauo4+Cq08E1TjMQuHN8A5vuqdyL0HcWantXw3dx6g
- xtwhPBaorsyHCZ55Wlo7yBxZt3qn3EFoqUeLo+w3CyfUaeR3x0dNUvLCSV/lp8aL5r7C
- 6KT76RfyvUe00T9uGZYBjMKSWobOwN2g0R9ji8cf2qBJJzDgYpFccKHjiouJW/WV3EGh
- nxMFGByMLiTXQHPgnuEslkeSKNNshlUBVhWwCyMOywV1nRXbac9eTZRcIIcrunQ3rU1Q
- z+XA==
+ bh=uOvm+usFf/OfMNJfit/RQ0Rx+oQkfNfrdGJgctlqbYk=;
+ b=trmFF7eK+waUtCqcODGbwbdMJdreP1EdnPPCoiqs4RnJR9V8xEcTNG6wQumkEhMdEP
+ HTad4+QMstczZRxVPPwwudBauXej2lJ+RB3fJe5esdPfdYqCfW0D3lZYnSYW6ScTUG5+
+ +2D/ab7+2j3Id6YobycPsQ6Uwhx0jWnhZQ2/wvcG6HfX+myAtx4tYh3RwE7rJHKbxYtN
+ 9ApNokRzuvIqShWna0krxViOMxFpyFxZYS6kteLPM3T21O3sOzjM3bptEKDCYMoZqpEJ
+ yQKOwVtJKvsj4pQIJpYU4GUq6Nm0k6sO4vShGYi2xqx50fPZ25OuQmxaTDEp3TrV9ByN
+ RPtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1724847053; x=1725451853;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Tt2vjY7MaKscycbDjgQS+EhvZk4u1eI0iM4tc60Fq+8=;
- b=TO0RszQvHe2Zct27RgxdfWG0+q4FVvpza2Y+fAMluEdYHqR5sC1juVnoyZZ40MaWEK
- 2kovgTgAgrFjIOi4LP7pTRayaD4oaYrTYIzjyllKyjJMBI5IUn8vW5XEM4LjemBlgQ+7
- /rU3VyBI3+kvcgmRHXGlpn9lv6NOzfCqZ8yLbzPI4QGd1yjDYlWBT/m3rmzLuk3nzvQP
- etlk3pWTqP12K4ASo7pIsb3y9hH8JSjHvz3LzVev4tDdGZDTpFbPJaoN4G9RonHCOSKy
- t9lQ2yVIFuaiBERGEf/J3dwhTMgqrnEW1YIS0FNzYETIpnIPpIuxWfWj1wHAQhRI4xlG
- 0N4Q==
-X-Gm-Message-State: AOJu0YwCR6zNQAX9PH5zAGOS1fhjV5MErIwxlG06V5PMgpVJ2CAcDB2S
- Szq099AyxSGLRaVIiBPF/lsE9Oc5djLy+MAj5q9CD7AQgb2Ztkj/ZESI5w7JbO9Yt/DntF7yEdo
- Ys83Cl4F3
-X-Google-Smtp-Source: AGHT+IHKMLDry5yqq8F6hoaqPodWpQbGAvy9nlH0WDpSPKCTKCfoTd0G8U4tfMSXgylcOc7jrJQ86Q==
-X-Received: by 2002:a5d:5911:0:b0:371:728e:d000 with SMTP id
- ffacd0b85a97d-3749680af92mr1212900f8f.1.1724847052741; 
- Wed, 28 Aug 2024 05:10:52 -0700 (PDT)
+ bh=uOvm+usFf/OfMNJfit/RQ0Rx+oQkfNfrdGJgctlqbYk=;
+ b=O73JAceRhaafxH70j7RAkTnDSrmwRu6f1662fa+zCRrAoLpd8RomMylh/1KI70swJL
+ KfGU/cNM9dKsDhJMkZAF4I0NHg0JUuMuYktMEmccQ+9eLoh6rjtKC/9A53ZEh6K0Z/e7
+ BQXDJauaH2aF8rdz5gTInlXmcYGR/tUkkecKlh9yZKnlojlL8O12HWvkbHHQVQCrCsNm
+ TN3sz6VnxthTaDQeh2V2ZzHrVi87Ese1YEW2sYaoFUqX1J6pxtOhWVfS+/cmYaTvHyKl
+ OlE88QzqyyTgM12tfkbDvPmggdR5Cgeg7jjK6Hp7p+HB7gOifK2qm2+nMQgp0cckoVde
+ 6brA==
+X-Gm-Message-State: AOJu0Yz2h4wSKzZ1DXLe3NDAiRL9yTRTGV6r+db7wUZeI7+ndZHSRHuG
+ HuLgHvnqRl662/AsPjyAf7aOEog6YKo0hS10Q7RplUwg8uMCUBV90YGrxGXm8mTzesvCfKCJ7Yr
+ SavccgAMA
+X-Google-Smtp-Source: AGHT+IF+RKZw+841g6OckxKyD4tBNYujn2qHWMN69RcLQW6JZt2WXxbN1UO63rz8nb3Lpubib7ajJQ==
+X-Received: by 2002:a05:600c:a0b:b0:42b:8a35:1acf with SMTP id
+ 5b1f17b1804b1-42ba66a8dd7mr12594775e9.25.1724847053536; 
+ Wed, 28 Aug 2024 05:10:53 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:8ac3:aada:f033:985a])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42ba639687csm19470365e9.8.2024.08.28.05.10.52
+ 5b1f17b1804b1-42ba639687csm19470365e9.8.2024.08.28.05.10.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Aug 2024 05:10:52 -0700 (PDT)
+ Wed, 28 Aug 2024 05:10:53 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Peter Robinson <pbrobinson@gmail.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Love Kumar <love.kumar@amd.com>
-Subject: [PATCH 11/13] test/py: net_boot: fix comment
-Date: Wed, 28 Aug 2024 14:10:34 +0200
-Message-Id: <418bd1a5d16cf1e0061fd499ac82bef5bae82f68.1724846454.git.jerome.forissier@linaro.org>
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH 12/13] test/py: test_efi_loader: add missing dependency on
+ cmd_tftpboot
+Date: Wed, 28 Aug 2024 14:10:35 +0200
+Message-Id: <f58fb904ed74d2f458d58fa3dc42a6c0914627fe.1724846454.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1724846454.git.jerome.forissier@linaro.org>
 References: <cover.1724846454.git.jerome.forissier@linaro.org>
@@ -95,27 +96,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If env__pxe_boot_test_skip is not present, it defaults to True not
-False. Therefore fix the comment.
+test_efi_helloworld_net() and test_efi_grub_net() depend on
+cmd_tftpboot so add the missing annotations.
 
+Reported-by: Tom Rini <trini@konsulko.com>
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- test/py/tests/test_net_boot.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ test/py/tests/test_efi_loader.py | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/test/py/tests/test_net_boot.py b/test/py/tests/test_net_boot.py
-index 63309fe82e..d7d7435692 100644
---- a/test/py/tests/test_net_boot.py
-+++ b/test/py/tests/test_net_boot.py
-@@ -75,7 +75,7 @@ env__net_pxe_bootable_file = {
-     'check_pattern': 'ERROR',
- }
+diff --git a/test/py/tests/test_efi_loader.py b/test/py/tests/test_efi_loader.py
+index 85473a9049..7c1e0ffa59 100644
+--- a/test/py/tests/test_efi_loader.py
++++ b/test/py/tests/test_efi_loader.py
+@@ -149,6 +149,7 @@ def fetch_tftp_file(u_boot_console, env_conf):
  
--# False or omitted if a PXE boot test should be tested.
-+# False if a PXE boot test should be tested.
- # If PXE boot testing is not possible or desired, set this variable to True.
- # For example: If pxe configuration file is not proper to boot
- env__pxe_boot_test_skip = False
+ @pytest.mark.buildconfigspec('of_control')
+ @pytest.mark.buildconfigspec('cmd_bootefi_hello_compile')
++@pytest.mark.buildconfigspec('cmd_tftpboot')
+ def test_efi_helloworld_net(u_boot_console):
+     """Run the helloworld.efi binary via TFTP.
+ 
+@@ -178,6 +179,7 @@ def test_efi_helloworld_builtin(u_boot_console):
+ 
+ @pytest.mark.buildconfigspec('of_control')
+ @pytest.mark.buildconfigspec('cmd_bootefi')
++@pytest.mark.buildconfigspec('cmd_tftpboot')
+ def test_efi_grub_net(u_boot_console):
+     """Run the grub.efi binary via TFTP.
+ 
 -- 
 2.40.1
 
