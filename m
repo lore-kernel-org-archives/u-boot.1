@@ -4,56 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 450BCC54E71
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 10:15:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 244D2C54E92
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 10:15:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84A9788BBE;
-	Wed, 28 Aug 2024 12:12:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E779F88892;
+	Wed, 28 Aug 2024 12:12:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="aC2D0rX9";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="WWJGqiiU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76F3488744; Wed, 28 Aug 2024 12:12:32 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ id CC2D188B59; Wed, 28 Aug 2024 12:12:33 +0200 (CEST)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7720B88AD2
+ by phobos.denx.de (Postfix) with ESMTPS id 5738188AB9
  for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 12:12:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+Oliver.Gaskell.analog.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id 53854A434C4;
- Wed, 28 Aug 2024 10:12:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 7DBF0C4E675;
+ by sin.source.kernel.org (Postfix) with ESMTP id 6DFCDCE1787;
+ Wed, 28 Aug 2024 10:12:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 453CAC4DE1E;
  Wed, 28 Aug 2024 10:04:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1724839448;
- bh=kk2bIIEhpKRFnO5eW74Rg38WRh++YTnW4G04TwriIdE=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=aC2D0rX9J6Ed1swv2G2ibMrF6rfOjZsLgzwiyIUOeIxnT5CZYIe7BG6obGs5DPYoR
- Lj0yXzwaG6P1k2+73/evJIM3zU2p3rebUHPRFB2t5GdOweLehCTHADzUd9UxQjXe4x
- 4P5KxIiRfPMy83hrR4AXBhoS4MGnlkkNE+B3M18x01hqLmWYHgqXoXcAT04sSZkMbJ
- zj79qfDmmhFaj4BiaWHDoidNCiFepSZ2+LEAhsTQe/PAKqr0BbhOx4Bj0nkNnPZVy5
- wLfzU2tn3Ebbly61n5kjS4YnEp/YwO+EOgDN7s8M0Fh8NdZOLYtmoLgV9od9GKQBHJ
- HPp/fCjBBim1Q==
+ bh=RrRosQ7LQ4UBnRipIUNFLD3i+WHKmXH6jYlumQxEnqE=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=WWJGqiiUDZMMX54uCcrtBbb+itKZO9f3kvdoEXh4DUdTa48BaDHshFFS+uYLoBgPb
+ BfNV2bI/YBmmf4Y69OYKFfai/sWYnIYX7y/XgsIuFvcOYjcwtfNBPrJm3aUORklCsJ
+ C2Mp5Fa83H9crqZYk7KS2xRvRhqslc0JfxWJ6ej/vcvCVQIOMmzcpu0Ds1j5J4suyj
+ 97UXZazS3pmkM7DhBt7Lf7Kx4Pg++6ZeNNoSqzm/dGY+swVT4hs8Vm72oBkCuKG7/w
+ yMHVFdmP/c7pvugZdN9R+n2qqgDIjDNFEw5g6OCkn0ymvmP3xii3U/MQx1bLGrpJQ6
+ 0pUWwrrudLezQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 6FFFBC54E71;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 2DDBEC5474B;
  Wed, 28 Aug 2024 10:04:08 +0000 (UTC)
 From: Oliver Gaskell via B4 Relay
  <devnull+Oliver.Gaskell.analog.com@kernel.org>
-Date: Wed, 28 Aug 2024 11:02:12 +0100
-Subject: [PATCH 04/20] arm: dts: Support SC589-EZKIT
+Subject: [PATCH 00/20] arm: Initial support for Analog Devices SC5xx boards
+Date: Wed, 28 Aug 2024 11:02:08 +0100
+Message-Id: <20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240828-sc5xx-upstreaming-patches-v1-4-44d9adfdf327@analog.com>
-References: <20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com>
-In-Reply-To: <20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com>
+X-B4-Tracking: v=1; b=H4sIAKH1zmYC/x3MQQqEMAxA0atI1gZqUbReRVzETtQsrKVxhoJ4d
+ 8ss3+L/G5STsMJY3ZD4JypnKGjqCvxOYWOUTzFYY1sz2AbVdznjN+qVmA4JG0a6/M6K3rTDQm5
+ 1vSMofUy8Sv6/p/l5XprC1/5rAAAA
 To: Tom Rini <trini@konsulko.com>, 
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
  Greg Malysa <greg.malysa@timesys.com>, 
@@ -66,11 +67,11 @@ Cc: u-boot@lists.denx.de, adsp-linux@analog.com,
  Oliver Gaskell <Oliver.Gaskell@analog.com>, 
  Trevor Woerner <twoerner@gmail.com>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1724839434; l=1554;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1724839434; l=4844;
  i=Oliver.Gaskell@analog.com; s=20240821; h=from:subject:message-id;
- bh=EJwgZUVSyndPps3cDB9V1vFCVu8Ydi1nVmdp7mKN7ug=;
- b=zuw9JPceHBkhZMsCfdJop953B40NQFhqF8D+ufIk6OoGdspV+cSbFoqfUs1mjBN3Wdy+FQXoU
- /8gzKajPXuLCQ+2tsPfwBPpo+u0RgY6eTerbCyexgB/K3M+xCag3Nvd
+ bh=RrRosQ7LQ4UBnRipIUNFLD3i+WHKmXH6jYlumQxEnqE=;
+ b=RkEE7bFcphXifnDlk7P7dBVDdLGEFZaaY1PJNirKbC8raGqqPi0U+GghervSgvSSOE07YDqPW
+ Zwe6ZbY2ZmTA6ajy416p882PybaQl5FL+klcvg9+s1JqKJk9t7bME7h
 X-Developer-Key: i=Oliver.Gaskell@analog.com; a=ed25519;
  pk=Icq9TxwFJ6FePHS28YbBWMvtZpFWxpPQLhLA9cNvZ/Y=
 X-Endpoint-Received: by B4 Relay for Oliver.Gaskell@analog.com/20240821
@@ -93,54 +94,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Oliver Gaskell <Oliver.Gaskell@analog.com>
+ADSP-SC5xx is a series of ARM-based DSPs.
+This comprises the armv7 based SC57x, SC58x and SC594 series, and the
+armv8 based SC598.
 
-Add minimal device tree for Analog Devices' SC589-EZKIT board.
+This patch series includes configurations, init code, and minimal DTs
+to enable Analog Devices' evaluation boards for these SoCs to boot
+through SPL and into U-Boot Proper, as well as devicetree schemas for
+the added DTs.
 
-This patch depends on Patches 01 and 02, for sc5xx.dtsi and sc58x.dtsi.
+This patch series depends on ("arm: Add Analog Devices SC5xx Machine
+Type") (https://lists.denx.de/pipermail/u-boot/2024-April/552043.html)
 
-Co-developed-by: Greg Malysa <greg.malysa@timesys.com>
-Co-developed-by: Trevor Woerner <twoerner@gmail.com>
-Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 Signed-off-by: Oliver Gaskell <Oliver.Gaskell@analog.com>
 ---
- arch/arm/dts/Makefile        |  1 +
- arch/arm/dts/sc589-ezkit.dts | 13 +++++++++++++
- 2 files changed, 14 insertions(+)
+Oliver Gaskell (20):
+      arm: dts: Support SC573-EZKIT
+      arm: dts: Support SC584-EZKIT
+      arm: dts: Support SC589-MINI
+      arm: dts: Support SC589-EZKIT
+      arm: dts: Support SC594-SOM-EZKIT
+      arm: dts: Support SC594-SOM-EZLITE
+      arm: dts: Support SC598-SOM-EZKIT
+      arm: dts: Support SC598-SOM-EZLITE
+      dt-bindings: arm: Add SC5xx Series binding
+      dt-bindings: clock: Add SC5xx clock tree bindings
+      dt-bindings: timer: Add SC5xx Timer bindings
+      arm: mach-sc5xx: clean up Kconfig
+      arm: SC598-SOM-EZKIT initial support
+      arm: SC598-SOM-EZLITE initial support
+      arm: SC594-SOM-EZKIT initial support
+      arm: SC594-SOM-EZLITE initial support
+      arm: SC584-EZKIT initial support
+      arm: SC589-EZKIT initial support
+      arm: SC589-MINI initial support
+      arm: SC573-EZKIT initial support
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 34c7ede8cb..321ac82a29 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -1278,6 +1278,7 @@ dtb-$(CONFIG_TARGET_IMX8MM_CL_IOT_GATE_OPTEE) += imx8mm-cl-iot-gate-optee.dtb \
- dtb-$(CONFIG_TARGET_SC573_EZKIT) += sc573-ezkit.dtb
- dtb-$(CONFIG_TARGET_SC584_EZKIT) += sc584-ezkit.dtb
- dtb-$(CONFIG_TARGET_SC589_MINI) += sc589-mini.dtb
-+dtb-$(CONFIG_TARGET_SC589_EZKIT) += sc589-ezkit.dtb
- 
- ifneq ($(CONFIG_TARGET_IMX8MP_RSB3720A1_4G)$(CONFIG_TARGET_IMX8MP_RSB3720A1_6G),)
- dtb-y += imx8mp-rsb3720-a1.dtb
-diff --git a/arch/arm/dts/sc589-ezkit.dts b/arch/arm/dts/sc589-ezkit.dts
-new file mode 100644
-index 0000000000..8a1c0ce086
---- /dev/null
-+++ b/arch/arm/dts/sc589-ezkit.dts
-@@ -0,0 +1,13 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * (C) Copyright 2024 - Analog Devices, Inc.
-+ */
-+
-+/dts-v1/;
-+
-+#include "sc58x.dtsi"
-+
-+/ {
-+	model = "ADI SC589-EZKIT";
-+	compatible = "adi,sc589-ezkit", "adi,sc58x";
-+};
+ MAINTAINERS                                        |   7 +
+ arch/arm/Kconfig                                   |  14 ++
+ arch/arm/dts/Makefile                              |   9 +
+ arch/arm/dts/sc573-ezkit.dts                       |  13 ++
+ arch/arm/dts/sc57x.dtsi                            |  21 +++
+ arch/arm/dts/sc584-ezkit.dts                       |  13 ++
+ arch/arm/dts/sc589-ezkit.dts                       |  13 ++
+ arch/arm/dts/sc589-mini.dts                        |  13 ++
+ arch/arm/dts/sc58x.dtsi                            |  23 +++
+ arch/arm/dts/sc594-som-ezkit.dts                   |  13 ++
+ arch/arm/dts/sc594-som-ezlite.dts                  |  13 ++
+ arch/arm/dts/sc594-som.dtsi                        |  19 +++
+ arch/arm/dts/sc598-som-ezkit.dts                   |  13 ++
+ arch/arm/dts/sc598-som-ezlite.dts                  |  13 ++
+ arch/arm/dts/sc598-som.dtsi                        |  31 ++++
+ arch/arm/dts/sc5xx.dtsi                            |  54 ++++++
+ arch/arm/mach-sc5xx/Kconfig                        | 134 ++++++++++++---
+ arch/arm/mach-sc5xx/Makefile                       |   4 +
+ arch/arm/mach-sc5xx/sc57x-spl.c                    |  26 +++
+ arch/arm/mach-sc5xx/sc58x-spl.c                    |  26 +++
+ arch/arm/mach-sc5xx/sc59x-spl.c                    |  26 +++
+ arch/arm/mach-sc5xx/sc59x_64-spl.c                 |  26 +++
+ arch/arm/mach-sc5xx/sc59x_64.c                     |  25 +++
+ arch/arm/mach-sc5xx/soc.c                          |  44 +++++
+ board/adi/sc573-ezkit/Kconfig                      | 160 ++++++++++++++++++
+ board/adi/sc573-ezkit/sc573-ezkit.env              |  13 ++
+ board/adi/sc584-ezkit/Kconfig                      | 160 ++++++++++++++++++
+ board/adi/sc584-ezkit/sc584-ezkit.env              |  13 ++
+ board/adi/sc589-ezkit/Kconfig                      | 160 ++++++++++++++++++
+ board/adi/sc589-ezkit/sc589-ezkit.env              |  13 ++
+ board/adi/sc589-mini/Kconfig                       | 160 ++++++++++++++++++
+ board/adi/sc589-mini/sc589-mini.env                |  13 ++
+ board/adi/sc594-som-ezkit/Kconfig                  | 181 +++++++++++++++++++++
+ board/adi/sc594-som-ezkit/sc594-som-ezkit.env      |  13 ++
+ board/adi/sc594-som-ezlite/Kconfig                 | 181 +++++++++++++++++++++
+ board/adi/sc594-som-ezlite/sc594-som-ezlite.env    |  13 ++
+ board/adi/sc598-som-ezkit/Kconfig                  | 150 +++++++++++++++++
+ board/adi/sc598-som-ezkit/sc598-som-ezkit.env      |  13 ++
+ board/adi/sc598-som-ezlite/Kconfig                 | 150 +++++++++++++++++
+ board/adi/sc598-som-ezlite/sc598-som-ezlite.env    |  13 ++
+ doc/device-tree-bindings/arm/adi/adi,sc5xx.yaml    |  46 ++++++
+ .../clock/adi,sc5xx-clocks.yaml                    | 112 +++++++++++++
+ .../timer/adi,sc5xx-gptimer.yaml                   |  42 +++++
+ include/configs/sc573-ezkit.h                      |  18 ++
+ include/configs/sc584-ezkit.h                      |  18 ++
+ include/configs/sc589.h                            |  19 +++
+ include/configs/sc594-som.h                        |  19 +++
+ include/configs/sc598-som.h                        |  23 +++
+ 48 files changed, 2274 insertions(+), 22 deletions(-)
+---
+base-commit: 34377bc0b0dc446853c7831efaccef8b50c22841
+change-id: 20240821-sc5xx-upstreaming-patches-c048ba9f979a
 
+Best regards,
 -- 
-2.34.1
+Oliver Gaskell <Oliver.Gaskell@analog.com>
 
 
