@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 160F4C54EE3
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 12:11:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D173C54EE3
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 12:11:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89EE488AAA;
-	Wed, 28 Aug 2024 14:10:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E772588AFB;
+	Wed, 28 Aug 2024 14:10:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U4z4WKDJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="smx6SlBJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 489AB88868; Wed, 28 Aug 2024 14:10:46 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 54349888A3; Wed, 28 Aug 2024 14:10:48 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0ACF88875
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 14:10:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2173288A3E
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 14:10:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3718706cf8aso3840835f8f.3
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 05:10:43 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-37189d8e637so3860185f8f.3
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 05:10:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724847043; x=1725451843; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724847045; x=1725451845; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VJKqBRZXsx6/cMes6o8RBGAAWb2rNuGoBSL8WlcYTyc=;
- b=U4z4WKDJILF60dvdMdHRrxRqgQm7BdEwsqODcW5VB4Xmqg9v8wtyBzUEyt09UYUeHs
- myBFBclqTsUzU1nQhX99f2OC74q3mxK5e2MU6qNJilyQwrtyr7U8sNXJrw0VysxsKRD7
- zcClHNpwJmqG18t45ckOM+OPd0Et+mtygpn+7xideqdJzKMu9K1HOhtT5d57+B802/gT
- Ujn+HoXt7GiCVJvmwfW9KNQc5GkLJMJHOlp/DA0eWX4UyK6zGxXSHSyLkCF91tJNbMvp
- FGP50gNsid05frPwO7WXJUErEAIeXsxxqMCef3Dh9auMHL0raMhTkvsxOI6qhRUvbHsM
- iA3w==
+ bh=sDBcEVogIBVBSmglcRAffFeYWv3UMkJZDLIS/N29gaM=;
+ b=smx6SlBJ9B0wvnk7+1xj/ndvBwh2UU7fIqEwpi+6kdkIUjovVwK/mSh3zaOGAzMMa3
+ 0k8lUePbGYI6oA/Hvdesapw1Hoqj2qjnw2nWbFZbYoWN3DqcvxIrM6T+RGIwYhiX263z
+ ayayJ8TQ/PDrVIgZYieTp9UNKDR1p24djkL1rpGRPZ/7npiwQkoX58Z3R3x+waO2cerV
+ iXGIpWWTDUon+zq3pCI85/RzhUiXu14PAXmCfzak4GV4OGrSYKB+uUvXZCry22tfE1Gq
+ Bp9A+xZbJojtbtHtYXZXOVvJZIBuhdr5gUvxSSQMjGPXFbBgtWZKfYropGCx5lTkPZsi
+ bkCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724847043; x=1725451843;
+ d=1e100.net; s=20230601; t=1724847045; x=1725451845;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VJKqBRZXsx6/cMes6o8RBGAAWb2rNuGoBSL8WlcYTyc=;
- b=ZICiny5fvZ0yHVMLh+WEakJtFHEhC9giqgjb9muroB1o9kFXGIDTTDkm9SyqAiF9RW
- IfaeBr233ATYVDOCdUkiSBzFqv2I8lq3TPj69XWO86hSpWBF7i1CnGowX04PZ9VH/0Cg
- XPMFHDAL0Zur56VMWkLqDFYpTKFnc35bnPwCMdOmK/t7VHIlHpN6BKJn3YAulLRUCFNi
- 6mXBtPU+NtMowk/J5LUW9HdX0DGzF+KYVpjXiMj5JKKBrNKI9ORzMB+MmoaNXRi++biU
- OCpVBPdqLxBvsZB/vNf+QnxUwqJ4CfPJ5PnMq+g7iCvDkDTBGsHmcmAT2/EP/6mCOcVF
- TEQg==
-X-Gm-Message-State: AOJu0Yy57eR/qiY8ZUvIt8Oxc5cHoL0OitS0XXGxDYsxAxVCExRA1TKs
- PMjYdJsRf1YPVCchC/y1SxTWIBO3RyuW1vkbinu0a3tAdT7E+ht+zGhi5IPNU9dvdImOOqVAv2p
- OqHmpOQ==
-X-Google-Smtp-Source: AGHT+IE8Qarf46jQYOXTzQbuHwJ3hvwFtp0Br1jU7zUQMSzc2HXviGI0C0Eo1qjNEJbFpugckhw5og==
-X-Received: by 2002:a05:6000:2c2:b0:36b:357a:bfee with SMTP id
- ffacd0b85a97d-37311841b2dmr13258946f8f.1.1724847043051; 
- Wed, 28 Aug 2024 05:10:43 -0700 (PDT)
+ bh=sDBcEVogIBVBSmglcRAffFeYWv3UMkJZDLIS/N29gaM=;
+ b=t9xxx0eN84qnWveTxi80uOIF6HraVw+vs70IiCcz90TcFylbSGw2Yix+Zqf9+Phy6C
+ /BtC+Etps0u+s0G03E+QJLugvalJKslZgY9FLhNG4C+m5s925WuXfSA09LgQgSQHSAPY
+ YT7E3fYA11VncRjJGJ9gqdciztFpJd9/0OocWb75rosgDC4j6j+PIl+wgVzmC8+oeI4z
+ 72g//wh067vVSRadAjPLTnM/y6rCoJ2d016XjhX/LVaFzO3VNKpa1GMetciPenJnhLl5
+ mixvQKnAIJ3w8snv4oRN9d1oBrvqYz5LOAIr6Hbnp/KbjX2khNXGrjEp97n4wOst5CVP
+ yLwA==
+X-Gm-Message-State: AOJu0Yw9zhhTA1Omf3kCfvRy/zMRq4YX5oy9R2BQTt3GS6l8lLYffoOI
+ 62zbKZ/QpgaSdPCme2NmHVvV2vXI4K3TB5ybomGH0B2pBNiAXVOAz4BvAu5iLhG3n1oA66OPu32
+ u5B4+gg==
+X-Google-Smtp-Source: AGHT+IFZUYDsYik9bkzS74f75GQbdlmupznQuRoQtfK+wsxrSzsnlwqIbtMOft0B8zoO7JpSzCeQig==
+X-Received: by 2002:a05:6000:8b:b0:362:8ec2:53d6 with SMTP id
+ ffacd0b85a97d-373118ef032mr11249606f8f.61.1724847045328; 
+ Wed, 28 Aug 2024 05:10:45 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:8ac3:aada:f033:985a])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42ba639687csm19470365e9.8.2024.08.28.05.10.42
+ 5b1f17b1804b1-42ba639687csm19470365e9.8.2024.08.28.05.10.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Aug 2024 05:10:42 -0700 (PDT)
+ Wed, 28 Aug 2024 05:10:45 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Peter Robinson <pbrobinson@gmail.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Angelo Dureghello <angelo@kernel-space.org>,
- TsiChung Liew <Tsi-Chung.Liew@nxp.com>, Stefan Roese <sr@denx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jason Liu <jason.hui.liu@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- William Zhang <william.zhang@broadcom.com>
-Subject: [PATCH 02/13] flash: prefix error codes with FL_
-Date: Wed, 28 Aug 2024 14:10:25 +0200
-Message-Id: <7251eb28f680327a709aa00f0b3e713f129e827f.1724846454.git.jerome.forissier@linaro.org>
+ Eugen Hristev <eugen.hristev@collabora.com>, Tom Rini <trini@konsulko.com>,
+ Nicolas Ferre <nicolas.ferre@microchip.com>,
+ Jakub Klama <jakub@conclusive.pl>, Artur Rojek <artur@conclusive.pl>,
+ Stefan Roese <sr@denx.de>, Heiko Schocher <hs@denx.de>,
+ Marcin Jabrzyk <marcin@conclusive.pl>
+Subject: [PATCH 03/13] at91: rename mem_init() to at91_mem_init()
+Date: Wed, 28 Aug 2024 14:10:26 +0200
+Message-Id: <7f010d834c665c15888b7738a0ad16334fa03443.1724846454.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1724846454.git.jerome.forissier@linaro.org>
 References: <cover.1724846454.git.jerome.forissier@linaro.org>
@@ -99,440 +99,282 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Prefix the flash status codes (ERR_*) with FL_ in order to avoid clashes
-with third-party libraries. Case in point: including the lwIP library
-header file <lwip/err.h> which defines err_enum_t as an enum with values
-being ERR_*.
+THe AT91-based platforms have a mem_init() function declared in
+arch/arm/mach-at91/include/mach/at91_common.h and implemented in various
+places. In preparation of the introduction of the lwIP networking library
+which also has a global mem_init() function, rename the AT91 one to
+at91_mem_init().
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- board/cobra5272/flash.c           | 26 +++++++++---------
- board/freescale/m5253demo/flash.c |  6 ++---
- common/flash.c                    | 44 +++++++++++++++----------------
- drivers/mtd/cfi_flash.c           | 36 ++++++++++++-------------
- include/flash.h                   | 20 +++++++-------
- 5 files changed, 66 insertions(+), 66 deletions(-)
+ arch/arm/mach-at91/include/mach/at91_common.h       | 2 +-
+ arch/arm/mach-at91/spl_at91.c                       | 2 +-
+ arch/arm/mach-at91/spl_atmel.c                      | 2 +-
+ board/atmel/at91sam9m10g45ek/at91sam9m10g45ek.c     | 2 +-
+ board/atmel/at91sam9n12ek/at91sam9n12ek.c           | 2 +-
+ board/atmel/at91sam9x5ek/at91sam9x5ek.c             | 2 +-
+ board/atmel/sama5d27_som1_ek/sama5d27_som1_ek.c     | 2 +-
+ board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c | 2 +-
+ board/atmel/sama5d2_icp/sama5d2_icp.c               | 2 +-
+ board/atmel/sama5d2_xplained/sama5d2_xplained.c     | 2 +-
+ board/atmel/sama5d3_xplained/sama5d3_xplained.c     | 2 +-
+ board/atmel/sama5d3xek/sama5d3xek.c                 | 2 +-
+ board/atmel/sama5d4_xplained/sama5d4_xplained.c     | 2 +-
+ board/atmel/sama5d4ek/sama5d4ek.c                   | 2 +-
+ board/conclusive/kstr-sama5d27/kstr-sama5d27.c      | 2 +-
+ board/gardena/smart-gateway-at91sam/spl.c           | 2 +-
+ board/siemens/corvus/board.c                        | 2 +-
+ board/siemens/smartweb/smartweb.c                   | 2 +-
+ board/siemens/taurus/taurus.c                       | 2 +-
+ 19 files changed, 19 insertions(+), 19 deletions(-)
 
-diff --git a/board/cobra5272/flash.c b/board/cobra5272/flash.c
-index 616842e62f..d324aa6ac1 100644
---- a/board/cobra5272/flash.c
-+++ b/board/cobra5272/flash.c
-@@ -135,22 +135,22 @@ int flash_erase(flash_info_t *info, int s_first, int s_last)
- {
- 	ulong result;
- 	int iflag, cflag, prot, sect;
--	int rc = ERR_OK;
-+	int rc = FL_ERR_OK;
- 	int chip1;
- 	ulong start;
- 
- 	/* first look for protection bits */
- 
- 	if (info->flash_id == FLASH_UNKNOWN)
--		return ERR_UNKNOWN_FLASH_TYPE;
-+		return FL_ERR_UNKNOWN_FLASH_TYPE;
- 
- 	if ((s_first < 0) || (s_first > s_last)) {
--		return ERR_INVAL;
-+		return FL_ERR_INVAL;
- 	}
- 
- 	if ((info->flash_id & FLASH_VENDMASK) !=
- 	    (AMD_MANUFACT & FLASH_VENDMASK)) {
--		return ERR_UNKNOWN_FLASH_VENDOR;
-+		return FL_ERR_UNKNOWN_FLASH_VENDOR;
- 	}
- 
- 	prot = 0;
-@@ -160,7 +160,7 @@ int flash_erase(flash_info_t *info, int s_first, int s_last)
- 		}
- 	}
- 	if (prot)
--		return ERR_PROTECTED;
-+		return FL_ERR_PROTECTED;
- 
- 	/*
- 	 * Disable interrupts which might cause a timeout
-@@ -217,11 +217,11 @@ int flash_erase(flash_info_t *info, int s_first, int s_last)
- 			MEM_FLASH_ADDR1 = CMD_READ_ARRAY;
- 
- 			if (chip1 == ERR) {
--				rc = ERR_PROG_ERROR;
-+				rc = FL_ERR_PROG_ERROR;
- 				goto outahere;
- 			}
- 			if (chip1 == TMO) {
--				rc = ERR_TIMEOUT;
-+				rc = FL_ERR_TIMEOUT;
- 				goto outahere;
- 			}
- 
-@@ -252,7 +252,7 @@ static int write_word(flash_info_t *info, ulong dest, ulong data)
- {
- 	volatile u16 *addr = (volatile u16 *) dest;
- 	ulong result;
--	int rc = ERR_OK;
-+	int rc = FL_ERR_OK;
- 	int cflag, iflag;
- 	int chip1;
- 	ulong start;
-@@ -262,7 +262,7 @@ static int write_word(flash_info_t *info, ulong dest, ulong data)
- 	 */
- 	result = *addr;
- 	if ((result & data) != data)
--		return ERR_NOT_ERASED;
-+		return FL_ERR_NOT_ERASED;
- 
- 	/*
- 	 * Disable interrupts which might cause a timeout
-@@ -302,7 +302,7 @@ static int write_word(flash_info_t *info, ulong dest, ulong data)
- 	*addr = CMD_READ_ARRAY;
- 
- 	if (chip1 == ERR || *addr != data)
--		rc = ERR_PROG_ERROR;
-+		rc = FL_ERR_PROG_ERROR;
- 
- 	if (iflag)
- 		enable_interrupts();
-@@ -320,13 +320,13 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
- 
- 	if (addr & 1) {
- 		printf ("unaligned destination not supported\n");
--		return ERR_ALIGN;
-+		return FL_ERR_ALIGN;
- 	}
- 
- #if 0
- 	if (cnt & 1) {
- 		printf ("odd transfer sizes not supported\n");
--		return ERR_ALIGN;
-+		return FL_ERR_ALIGN;
- 	}
+diff --git a/arch/arm/mach-at91/include/mach/at91_common.h b/arch/arm/mach-at91/include/mach/at91_common.h
+index 683e539b1b..8fec346c1e 100644
+--- a/arch/arm/mach-at91/include/mach/at91_common.h
++++ b/arch/arm/mach-at91/include/mach/at91_common.h
+@@ -28,7 +28,7 @@ void at91_pllb_init(u32 pllar);
+ void at91_mck_init(u32 mckr);
+ void at91_mck_init_down(u32 mckr);
+ void at91_pmc_init(void);
+-void mem_init(void);
++void at91_mem_init(void);
+ void at91_phy_reset(void);
+ void at91_sdram_hw_init(void);
+ void at91_mck_init(u32 mckr);
+diff --git a/arch/arm/mach-at91/spl_at91.c b/arch/arm/mach-at91/spl_at91.c
+index cde1700a28..0d1233cd10 100644
+--- a/arch/arm/mach-at91/spl_at91.c
++++ b/arch/arm/mach-at91/spl_at91.c
+@@ -142,7 +142,7 @@ void board_init_f(ulong dummy)
+ 	preloader_console_init();
  #endif
  
-@@ -364,5 +364,5 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
- 		cnt -= 1;
- 	}
+-	mem_init();
++	at91_mem_init();
  
--	return ERR_OK;
-+	return FL_ERR_OK;
+ 	at91_spl_board_init();
  }
-diff --git a/board/freescale/m5253demo/flash.c b/board/freescale/m5253demo/flash.c
-index 334518a4bc..ab5d2ebff6 100644
---- a/board/freescale/m5253demo/flash.c
-+++ b/board/freescale/m5253demo/flash.c
-@@ -72,7 +72,7 @@ int flash_get_offsets(ulong base, flash_info_t * info)
- 		}
- 	}
+diff --git a/arch/arm/mach-at91/spl_atmel.c b/arch/arm/mach-at91/spl_atmel.c
+index 62a7df8a19..7bfbadf048 100644
+--- a/arch/arm/mach-at91/spl_atmel.c
++++ b/arch/arm/mach-at91/spl_atmel.c
+@@ -134,7 +134,7 @@ void board_init_f(ulong dummy)
  
--	return ERR_OK;
-+	return FL_ERR_OK;
- }
+ 	board_early_init_f();
  
- void flash_print_info(flash_info_t * info)
-@@ -369,9 +369,9 @@ int write_buff(flash_info_t * info, uchar * src, ulong addr, ulong cnt)
- 	}
+-	mem_init();
++	at91_mem_init();
  
- 	if (cnt == 0)
--		return ERR_OK;
-+		return FL_ERR_OK;
- 
--	return ERR_OK;
-+	return FL_ERR_OK;
+ 	ret = spl_init();
+ 	if (ret) {
+diff --git a/board/atmel/at91sam9m10g45ek/at91sam9m10g45ek.c b/board/atmel/at91sam9m10g45ek/at91sam9m10g45ek.c
+index 3bd94d0889..af486e977e 100644
+--- a/board/atmel/at91sam9m10g45ek/at91sam9m10g45ek.c
++++ b/board/atmel/at91sam9m10g45ek/at91sam9m10g45ek.c
+@@ -125,7 +125,7 @@ static void ddr2_conf(struct atmel_mpddrc_config *ddr2)
+ 		      2 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET);
  }
  
- /*-----------------------------------------------------------------------
-diff --git a/common/flash.c b/common/flash.c
-index 24ddc8bee7..a64e51a9b5 100644
---- a/common/flash.c
-+++ b/common/flash.c
-@@ -110,13 +110,13 @@ addr2info(ulong addr)
-  * Make sure all target addresses are within Flash bounds,
-  * and no protected sectors are hit.
-  * Returns:
-- * ERR_OK          0 - OK
-- * ERR_TIMEOUT     1 - write timeout
-- * ERR_NOT_ERASED  2 - Flash not erased
-- * ERR_PROTECTED   4 - target range includes protected sectors
-- * ERR_INVAL       8 - target address not in Flash memory
-- * ERR_ALIGN       16 - target address not aligned on boundary
-- *			(only some targets require alignment)
-+ * FL_ERR_OK          0 - OK
-+ * FL_ERR_TIMEOUT     1 - write timeout
-+ * FL_ERR_NOT_ERASED  2 - Flash not erased
-+ * FL_ERR_PROTECTED   4 - target range includes protected sectors
-+ * FL_ERR_INVAL       8 - target address not in Flash memory
-+ * FL_ERR_ALIGN       16 - target address not aligned on boundary
-+ *			   (only some targets require alignment)
-  */
- int
- flash_write(char *src, ulong addr, ulong cnt)
-@@ -131,11 +131,11 @@ flash_write(char *src, ulong addr, ulong cnt)
- 	__maybe_unused ulong cnt_orig = cnt;
- 
- 	if (cnt == 0) {
--		return (ERR_OK);
-+		return (FL_ERR_OK);
- 	}
- 
- 	if (!info_first || !info_last) {
--		return (ERR_INVAL);
-+		return (FL_ERR_INVAL);
- 	}
- 
- 	for (info = info_first; info <= info_last; ++info) {
-@@ -146,7 +146,7 @@ flash_write(char *src, ulong addr, ulong cnt)
- 
- 			if ((end >= info->start[i]) && (addr < e_addr) &&
- 			    (info->protect[i] != 0) ) {
--				return (ERR_PROTECTED);
-+				return (FL_ERR_PROTECTED);
- 			}
- 		}
- 	}
-@@ -169,11 +169,11 @@ flash_write(char *src, ulong addr, ulong cnt)
- #if defined(CONFIG_FLASH_VERIFY)
- 	if (memcmp(src_orig, addr_orig, cnt_orig)) {
- 		printf("\nVerify failed!\n");
--		return ERR_PROG_ERROR;
-+		return FL_ERR_PROG_ERROR;
- 	}
- #endif /* CONFIG_SYS_FLASH_VERIFY_AFTER_WRITE */
- 
--	return (ERR_OK);
-+	return (FL_ERR_OK);
- }
- 
- /*-----------------------------------------------------------------------
-@@ -182,33 +182,33 @@ flash_write(char *src, ulong addr, ulong cnt)
- void flash_perror(int err)
+-void mem_init(void)
++void at91_mem_init(void)
  {
- 	switch (err) {
--	case ERR_OK:
-+	case FL_ERR_OK:
- 		break;
--	case ERR_TIMEOUT:
-+	case FL_ERR_TIMEOUT:
- 		puts ("Timeout writing to Flash\n");
- 		break;
--	case ERR_NOT_ERASED:
-+	case FL_ERR_NOT_ERASED:
- 		puts ("Flash not Erased\n");
- 		break;
--	case ERR_PROTECTED:
-+	case FL_ERR_PROTECTED:
- 		puts ("Can't write to protected Flash sectors\n");
- 		break;
--	case ERR_INVAL:
-+	case FL_ERR_INVAL:
- 		puts ("Outside available Flash\n");
- 		break;
--	case ERR_ALIGN:
-+	case FL_ERR_ALIGN:
- 		puts ("Start and/or end address not on sector boundary\n");
- 		break;
--	case ERR_UNKNOWN_FLASH_VENDOR:
-+	case FL_ERR_UNKNOWN_FLASH_VENDOR:
- 		puts ("Unknown Vendor of Flash\n");
- 		break;
--	case ERR_UNKNOWN_FLASH_TYPE:
-+	case FL_ERR_UNKNOWN_FLASH_TYPE:
- 		puts ("Unknown Type of Flash\n");
- 		break;
--	case ERR_PROG_ERROR:
-+	case FL_ERR_PROG_ERROR:
- 		puts ("General Flash Programming Error\n");
- 		break;
--	case ERR_ABORTED:
-+	case FL_ERR_ABORTED:
- 		puts("Flash Programming Aborted\n");
- 		break;
- 	default:
-diff --git a/drivers/mtd/cfi_flash.c b/drivers/mtd/cfi_flash.c
-index a7826e81c1..e50502824a 100644
---- a/drivers/mtd/cfi_flash.c
-+++ b/drivers/mtd/cfi_flash.c
-@@ -593,11 +593,11 @@ static int flash_status_check(flash_info_t *info, flash_sect_t sector,
- 			       flash_read_long(info, sector, 0));
- 			flash_write_cmd(info, sector, 0, info->cmd_reset);
- 			udelay(1);
--			return ERR_TIMEOUT;
-+			return FL_ERR_TIMEOUT;
- 		}
- 		udelay(1);		/* also triggers watchdog */
- 	}
--	return ERR_OK;
-+	return FL_ERR_OK;
+ 	struct atmel_mpddrc_config ddr2;
+ 
+diff --git a/board/atmel/at91sam9n12ek/at91sam9n12ek.c b/board/atmel/at91sam9n12ek/at91sam9n12ek.c
+index afc0c0520e..6f9abcbb12 100644
+--- a/board/atmel/at91sam9n12ek/at91sam9n12ek.c
++++ b/board/atmel/at91sam9n12ek/at91sam9n12ek.c
+@@ -167,7 +167,7 @@ static void ddr2_conf(struct atmel_mpddrc_config *ddr2)
+ 		      2 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET);
  }
  
- /*-----------------------------------------------------------------------
-@@ -616,9 +616,9 @@ static int flash_full_status_check(flash_info_t *info, flash_sect_t sector,
- 	case CFI_CMDSET_INTEL_PROG_REGIONS:
- 	case CFI_CMDSET_INTEL_EXTENDED:
- 	case CFI_CMDSET_INTEL_STANDARD:
--		if (retcode == ERR_OK &&
-+		if (retcode == FL_ERR_OK &&
- 		    !flash_isset(info, sector, 0, FLASH_STATUS_DONE)) {
--			retcode = ERR_INVAL;
-+			retcode = FL_ERR_INVAL;
- 			printf("Flash %s error at address %lx\n", prompt,
- 			       info->start[sector]);
- 			if (flash_isset(info, sector, 0, FLASH_STATUS_ECLBS |
-@@ -627,14 +627,14 @@ static int flash_full_status_check(flash_info_t *info, flash_sect_t sector,
- 			} else if (flash_isset(info, sector, 0,
- 						FLASH_STATUS_ECLBS)) {
- 				puts("Block Erase Error.\n");
--				retcode = ERR_NOT_ERASED;
-+				retcode = FL_ERR_NOT_ERASED;
- 			} else if (flash_isset(info, sector, 0,
- 						FLASH_STATUS_PSLBS)) {
- 				puts("Locking Error\n");
- 			}
- 			if (flash_isset(info, sector, 0, FLASH_STATUS_DPS)) {
- 				puts("Block locked.\n");
--				retcode = ERR_PROTECTED;
-+				retcode = FL_ERR_PROTECTED;
- 			}
- 			if (flash_isset(info, sector, 0, FLASH_STATUS_VPENS))
- 				puts("Vpp Low Error.\n");
-@@ -702,12 +702,12 @@ static int flash_status_poll(flash_info_t *info, void *src, void *dst,
- 		if (get_timer(start) > tout) {
- 			printf("Flash %s timeout at address %lx data %lx\n",
- 			       prompt, (ulong)dst, (ulong)flash_read8(dst));
--			return ERR_TIMEOUT;
-+			return FL_ERR_TIMEOUT;
- 		}
- 		udelay(1);		/* also triggers watchdog */
- 	}
- #endif /* CONFIG_SYS_CFI_FLASH_STATUS_POLL */
--	return ERR_OK;
-+	return FL_ERR_OK;
+-void mem_init(void)
++void at91_mem_init(void)
+ {
+ 	struct at91_pmc *pmc = (struct at91_pmc *)ATMEL_BASE_PMC;
+ 	struct at91_matrix *matrix = (struct at91_matrix *)ATMEL_BASE_MATRIX;
+diff --git a/board/atmel/at91sam9x5ek/at91sam9x5ek.c b/board/atmel/at91sam9x5ek/at91sam9x5ek.c
+index e5688c6cf1..f52b9a9773 100644
+--- a/board/atmel/at91sam9x5ek/at91sam9x5ek.c
++++ b/board/atmel/at91sam9x5ek/at91sam9x5ek.c
+@@ -181,7 +181,7 @@ static void ddr2_conf(struct atmel_mpddrc_config *ddr2)
+ 		      2 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET);
  }
  
- /*-----------------------------------------------------------------------
-@@ -810,7 +810,7 @@ static int flash_write_cfiword(flash_info_t *info, ulong dest, cfiword_t cword)
- 		break;
- 	}
- 	if (!flag)
--		return ERR_NOT_ERASED;
-+		return FL_ERR_NOT_ERASED;
+-void mem_init(void)
++void at91_mem_init(void)
+ {
+ 	struct at91_pmc *pmc = (struct at91_pmc *)ATMEL_BASE_PMC;
+ 	struct at91_matrix *matrix = (struct at91_matrix *)ATMEL_BASE_MATRIX;
+diff --git a/board/atmel/sama5d27_som1_ek/sama5d27_som1_ek.c b/board/atmel/sama5d27_som1_ek/sama5d27_som1_ek.c
+index 36995a927c..cb3cd7ac9a 100644
+--- a/board/atmel/sama5d27_som1_ek/sama5d27_som1_ek.c
++++ b/board/atmel/sama5d27_som1_ek/sama5d27_som1_ek.c
+@@ -146,7 +146,7 @@ static void ddrc_conf(struct atmel_mpddrc_config *ddrc)
+ 		      (8 << ATMEL_MPDDRC_TPR2_TFAW_OFFSET));
+ }
  
- 	/* Disable interrupts which might cause a timeout here */
- 	flag = disable_interrupts();
-@@ -899,7 +899,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
- 		shift = 3;
- 		break;
- 	default:
--		retcode = ERR_INVAL;
-+		retcode = FL_ERR_INVAL;
- 		goto out_unmap;
- 	}
+-void mem_init(void)
++void at91_mem_init(void)
+ {
+ 	struct at91_pmc *pmc = (struct at91_pmc *)ATMEL_BASE_PMC;
+ 	struct atmel_mpddr *mpddrc = (struct atmel_mpddr *)ATMEL_BASE_MPDDRC;
+diff --git a/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c b/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c
+index c775d593e5..15cbd0daa6 100644
+--- a/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c
++++ b/board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c
+@@ -208,7 +208,7 @@ static void ddrc_conf(struct atmel_mpddrc_config *ddrc)
+ 	ddrc->cal_mr4 |= ATMEL_MPDDRC_CAL_MR4_MR4R(0xFFFE);
+ }
  
-@@ -930,7 +930,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
- 		}
- 	}
- 	if (!flag) {
--		retcode = ERR_NOT_ERASED;
-+		retcode = FL_ERR_NOT_ERASED;
- 		goto out_unmap;
- 	}
+-void mem_init(void)
++void at91_mem_init(void)
+ {
+ 	struct at91_pmc *pmc = (struct at91_pmc *)ATMEL_BASE_PMC;
+ 	struct atmel_mpddr *mpddrc = (struct atmel_mpddr *)ATMEL_BASE_MPDDRC;
+diff --git a/board/atmel/sama5d2_icp/sama5d2_icp.c b/board/atmel/sama5d2_icp/sama5d2_icp.c
+index 986da01639..6f0d578abf 100644
+--- a/board/atmel/sama5d2_icp/sama5d2_icp.c
++++ b/board/atmel/sama5d2_icp/sama5d2_icp.c
+@@ -180,7 +180,7 @@ static void ddrc_conf(struct atmel_mpddrc_config *ddrc)
+ 		      (7 << ATMEL_MPDDRC_TPR2_TFAW_OFFSET));
+ }
  
-@@ -950,7 +950,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
- 		retcode = flash_status_check(info, sector,
- 					     info->buffer_write_tout,
- 					     "write to buffer");
--		if (retcode == ERR_OK) {
-+		if (retcode == FL_ERR_OK) {
- 			/* reduce the number of loops by the width of
- 			 * the port
- 			 */
-@@ -975,7 +975,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
- 					src += 8, dst += 8;
- 					break;
- 				default:
--					retcode = ERR_INVAL;
-+					retcode = FL_ERR_INVAL;
- 					goto out_unmap;
- 				}
- 			}
-@@ -1025,7 +1025,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
- 			}
- 			break;
- 		default:
--			retcode = ERR_INVAL;
-+			retcode = FL_ERR_INVAL;
- 			goto out_unmap;
- 		}
+-void mem_init(void)
++void at91_mem_init(void)
+ {
+ 	struct at91_pmc *pmc = (struct at91_pmc *)ATMEL_BASE_PMC;
+ 	struct atmel_mpddr *mpddrc = (struct atmel_mpddr *)ATMEL_BASE_MPDDRC;
+diff --git a/board/atmel/sama5d2_xplained/sama5d2_xplained.c b/board/atmel/sama5d2_xplained/sama5d2_xplained.c
+index c8a8eb4982..d104736fa7 100644
+--- a/board/atmel/sama5d2_xplained/sama5d2_xplained.c
++++ b/board/atmel/sama5d2_xplained/sama5d2_xplained.c
+@@ -146,7 +146,7 @@ static void ddrc_conf(struct atmel_mpddrc_config *ddrc)
+ 		      7 << ATMEL_MPDDRC_TPR2_TFAW_OFFSET);
+ }
  
-@@ -1043,7 +1043,7 @@ static int flash_write_cfibuffer(flash_info_t *info, ulong dest, uchar *cp,
+-void mem_init(void)
++void at91_mem_init(void)
+ {
+ 	struct at91_pmc *pmc = (struct at91_pmc *)ATMEL_BASE_PMC;
+ 	struct atmel_mpddr *mpddrc = (struct atmel_mpddr *)ATMEL_BASE_MPDDRC;
+diff --git a/board/atmel/sama5d3_xplained/sama5d3_xplained.c b/board/atmel/sama5d3_xplained/sama5d3_xplained.c
+index 54cc3c4d90..f98322fb54 100644
+--- a/board/atmel/sama5d3_xplained/sama5d3_xplained.c
++++ b/board/atmel/sama5d3_xplained/sama5d3_xplained.c
+@@ -175,7 +175,7 @@ static void ddr2_conf(struct atmel_mpddrc_config *ddr2)
+ 		      8 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET);
+ }
  
- 	default:
- 		debug("Unknown Command Set\n");
--		retcode = ERR_INVAL;
-+		retcode = FL_ERR_INVAL;
- 		break;
- 	}
+-void mem_init(void)
++void at91_mem_init(void)
+ {
+ 	struct atmel_mpddrc_config ddr2;
  
-@@ -1389,7 +1389,7 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
- 		if (i > cnt)
- 			i = cnt;
- 		rc = flash_write_cfibuffer(info, wp, src, i);
--		if (rc != ERR_OK)
-+		if (rc != FL_ERR_OK)
- 			return rc;
- 		i -= i & (info->portwidth - 1);
- 		wp += i;
-@@ -1398,7 +1398,7 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
- 		FLASH_SHOW_PROGRESS(scale, dots, digit, i);
- 		/* Only check every once in a while */
- 		if ((cnt & 0xFFFF) < buffered_size && ctrlc())
--			return ERR_ABORTED;
-+			return FL_ERR_ABORTED;
- 	}
- #else
- 	while (cnt >= info->portwidth) {
-@@ -1413,7 +1413,7 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
- 		FLASH_SHOW_PROGRESS(scale, dots, digit, info->portwidth);
- 		/* Only check every once in a while */
- 		if ((cnt & 0xFFFF) < info->portwidth && ctrlc())
--			return ERR_ABORTED;
-+			return FL_ERR_ABORTED;
- 	}
- #endif /* CONFIG_SYS_FLASH_USE_BUFFER_WRITE */
+diff --git a/board/atmel/sama5d3xek/sama5d3xek.c b/board/atmel/sama5d3xek/sama5d3xek.c
+index f2e1242fcb..28079a8151 100644
+--- a/board/atmel/sama5d3xek/sama5d3xek.c
++++ b/board/atmel/sama5d3xek/sama5d3xek.c
+@@ -241,7 +241,7 @@ static void ddr2_conf(struct atmel_mpddrc_config *ddr2)
+ 		      8 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET);
+ }
  
-diff --git a/include/flash.h b/include/flash.h
-index 60babe8a80..32bc65e7b6 100644
---- a/include/flash.h
-+++ b/include/flash.h
-@@ -127,16 +127,16 @@ void flash_perror(int err);
- /*-----------------------------------------------------------------------
-  * return codes from flash_write():
-  */
--#define ERR_OK				0
--#define ERR_TIMEOUT			1
--#define ERR_NOT_ERASED			2
--#define ERR_PROTECTED			4
--#define ERR_INVAL			8
--#define ERR_ALIGN			16
--#define ERR_UNKNOWN_FLASH_VENDOR	32
--#define ERR_UNKNOWN_FLASH_TYPE		64
--#define ERR_PROG_ERROR			128
--#define ERR_ABORTED			256
-+#define FL_ERR_OK			0
-+#define FL_ERR_TIMEOUT			1
-+#define FL_ERR_NOT_ERASED		2
-+#define FL_ERR_PROTECTED		4
-+#define FL_ERR_INVAL			8
-+#define FL_ERR_ALIGN			16
-+#define FL_ERR_UNKNOWN_FLASH_VENDOR	32
-+#define FL_ERR_UNKNOWN_FLASH_TYPE	64
-+#define FL_ERR_PROG_ERROR		128
-+#define FL_ERR_ABORTED			256
+-void mem_init(void)
++void at91_mem_init(void)
+ {
+ 	struct atmel_mpddrc_config ddr2;
  
- /*-----------------------------------------------------------------------
-  * Protection Flags for flash_protect():
+diff --git a/board/atmel/sama5d4_xplained/sama5d4_xplained.c b/board/atmel/sama5d4_xplained/sama5d4_xplained.c
+index 09ca16ca88..f9112fc532 100644
+--- a/board/atmel/sama5d4_xplained/sama5d4_xplained.c
++++ b/board/atmel/sama5d4_xplained/sama5d4_xplained.c
+@@ -184,7 +184,7 @@ static void ddr2_conf(struct atmel_mpddrc_config *ddr2)
+ 		      8 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET);
+ }
+ 
+-void mem_init(void)
++void at91_mem_init(void)
+ {
+ 	struct atmel_mpddrc_config ddr2;
+ 
+diff --git a/board/atmel/sama5d4ek/sama5d4ek.c b/board/atmel/sama5d4ek/sama5d4ek.c
+index 1f8b85f061..0bdc6adbdc 100644
+--- a/board/atmel/sama5d4ek/sama5d4ek.c
++++ b/board/atmel/sama5d4ek/sama5d4ek.c
+@@ -169,7 +169,7 @@ static void ddr2_conf(struct atmel_mpddrc_config *ddr2)
+ 		      8 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET);
+ }
+ 
+-void mem_init(void)
++void at91_mem_init(void)
+ {
+ 	struct atmel_mpddrc_config ddr2;
+ 	const struct atmel_mpddr *mpddr = (struct atmel_mpddr *)ATMEL_BASE_MPDDRC;
+diff --git a/board/conclusive/kstr-sama5d27/kstr-sama5d27.c b/board/conclusive/kstr-sama5d27/kstr-sama5d27.c
+index 64282ae9dc..37750137ad 100644
+--- a/board/conclusive/kstr-sama5d27/kstr-sama5d27.c
++++ b/board/conclusive/kstr-sama5d27/kstr-sama5d27.c
+@@ -182,7 +182,7 @@ static void ddrc_conf(struct atmel_mpddrc_config *ddrc)
+ 		      (8 << ATMEL_MPDDRC_TPR2_TFAW_OFFSET));
+ }
+ 
+-void mem_init(void)
++void at91_mem_init(void)
+ {
+ 	struct at91_pmc *pmc = (struct at91_pmc *)ATMEL_BASE_PMC;
+ 	struct atmel_mpddr *mpddrc = (struct atmel_mpddr *)ATMEL_BASE_MPDDRC;
+diff --git a/board/gardena/smart-gateway-at91sam/spl.c b/board/gardena/smart-gateway-at91sam/spl.c
+index fb3ec48f9c..db9ba88188 100644
+--- a/board/gardena/smart-gateway-at91sam/spl.c
++++ b/board/gardena/smart-gateway-at91sam/spl.c
+@@ -110,7 +110,7 @@ static void ddr2_conf(struct atmel_mpddrc_config *ddr2)
+ 		      2 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET);
+ }
+ 
+-void mem_init(void)
++void at91_mem_init(void)
+ {
+ 	struct at91_matrix *matrix = (struct at91_matrix *)ATMEL_BASE_MATRIX;
+ 	struct at91_pmc *pmc = (struct at91_pmc *)ATMEL_BASE_PMC;
+diff --git a/board/siemens/corvus/board.c b/board/siemens/corvus/board.c
+index 7d73d1f2b3..cd27fc1cc3 100644
+--- a/board/siemens/corvus/board.c
++++ b/board/siemens/corvus/board.c
+@@ -187,7 +187,7 @@ static void ddr2_conf(struct atmel_mpddrc_config *ddr2)
+ 		      2 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET);
+ }
+ 
+-void mem_init(void)
++void at91_mem_init(void)
+ {
+ 	struct atmel_mpddrc_config ddr2;
+ 
+diff --git a/board/siemens/smartweb/smartweb.c b/board/siemens/smartweb/smartweb.c
+index 946fbc3f22..e9e4bc348c 100644
+--- a/board/siemens/smartweb/smartweb.c
++++ b/board/siemens/smartweb/smartweb.c
+@@ -238,7 +238,7 @@ void at91_spl_board_init(void)
+ 			 | AT91_SDRAMC_TRP_VAL(2) | AT91_SDRAMC_TRCD_VAL(2) \
+ 			 | AT91_SDRAMC_TRAS_VAL(5) | AT91_SDRAMC_TXSR_VAL(8))
+ 
+-void mem_init(void)
++void at91_mem_init(void)
+ {
+ 	struct at91_matrix *ma = (struct at91_matrix *)ATMEL_BASE_MATRIX;
+ 	struct at91_port *port = (struct at91_port *)ATMEL_BASE_PIOC;
+diff --git a/board/siemens/taurus/taurus.c b/board/siemens/taurus/taurus.c
+index bda12a9770..3764ab48ab 100644
+--- a/board/siemens/taurus/taurus.c
++++ b/board/siemens/taurus/taurus.c
+@@ -177,7 +177,7 @@ void sdramc_configure(unsigned int mask)
+ 	sdramc_initialize(ATMEL_BASE_CS1, &setting);
+ }
+ 
+-void mem_init(void)
++void at91_mem_init(void)
+ {
+ 	unsigned int ram_size = 0;
+ 
 -- 
 2.40.1
 
