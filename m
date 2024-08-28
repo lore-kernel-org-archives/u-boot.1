@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73CDAC636E0
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 16:46:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFF2FC636E9
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 16:53:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AC1E88A8B;
-	Wed, 28 Aug 2024 18:45:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 67CA188703;
+	Wed, 28 Aug 2024 18:53:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="U3ajByKI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bCDAt0Q0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C08DB889DA; Wed, 28 Aug 2024 18:45:38 +0200 (CEST)
-Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
- [IPv6:2607:f8b0:4864:20::d2b])
+ id AB02C888C1; Wed, 28 Aug 2024 18:53:19 +0200 (CEST)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1F27889B3
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 18:45:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 27C648862E
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 18:53:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-81f86fd93acso30873639f.1
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 09:45:35 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7a7fa4cb3fdso31549585a.2
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 09:53:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724863534; x=1725468334; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=D3iNLmN15FSEfdTFTKj3FK94tAMqYNV2x5v5BY8QQyI=;
- b=U3ajByKIV0yAJnBrto+qeyQ0nvT6xWpaNB6ffV6i7KJg2rOBw3IPcpRY5u6IJARYXi
- kkiLNFw/+6Cpbe0D9OTLxyKD3SW6bWTL5yiCpHKfzzFpJ4evy1yEVMZ0h9TL/ahRRgaD
- Ukxs0MqUc55Gf+GZqcopI8S2uH4YKMLKPlEt4=
+ d=konsulko.com; s=google; t=1724863996; x=1725468796; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=0RBvMWOiPBAoHEmDO5NF7KpXyX8CiUgS69SU+LRu33o=;
+ b=bCDAt0Q0HG/SSMW83tqFrdkGZ+51y9dCk3h/L9VSmanVIQAAVJvVNj/z4iBMp+isVK
+ 76Oml6pHEdosVT4V1NbNVay3yJt8ShBc3ebkRJHaW+y4ccBclHqN/5Srz7prOB4gcfFZ
+ kUFfB/TxOBpXq+qFExtQ4wndtPQm3KEDeN4hA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724863534; x=1725468334;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=D3iNLmN15FSEfdTFTKj3FK94tAMqYNV2x5v5BY8QQyI=;
- b=qkR/31SzRIhdsV76MTPhITLeYiAC3c5fSXSKTBDDHTVHBF/T1oOO9/EhlESTdiKd8l
- hjUU+BVRIm1aOxeNcsEWU2O4x3YCEi8yDOA7aZTN/25URUqUttHQ2qC2GCX6C5K34B9P
- rFGad3JvnypvCD8nlL5En+SQwZJhcaaVyHs++CGqxyQrvPh7VCtMSsVdJbkNjw/zrrlC
- S8b+3Zoci+h5Is0qbMTQ5R1CfuvNXrzv0lwipNZ2nznnaxOLj0lDI1T91Iz77NwQozH1
- 2d03L6eudeo8x+IxnDoddMJFc+4zuK/DAfni4G7InNYZRl6jep5ntlfdfF5snzqRHA6r
- rVbg==
-X-Gm-Message-State: AOJu0Ywyv1fldgMEQGL+1tAnjll1yVleSrYNgeH7G4NHLto7YJfMpG6c
- hU0VBkbyt+nQYTS97WC8Cx2HLNRE2vCQTSTchC5EfY4vDERe+9ehjHxPp6ictOQ/LO/ClEh3JMo
- =
-X-Google-Smtp-Source: AGHT+IFJ6T8v9bxKI3IwqBcmQFQWsxKMTCdaxY119M98vlA30EVRChOjHLhvBbIj6aAI5v0K4hJd9w==
-X-Received: by 2002:a05:6602:1843:b0:825:2a81:e96c with SMTP id
- ca18e2360f4ac-82a03526b51mr173179339f.0.1724863534338; 
- Wed, 28 Aug 2024 09:45:34 -0700 (PDT)
-Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
- [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-82a0ffed35dsm5530939f.31.2024.08.28.09.45.33
+ d=1e100.net; s=20230601; t=1724863996; x=1725468796;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0RBvMWOiPBAoHEmDO5NF7KpXyX8CiUgS69SU+LRu33o=;
+ b=lAC9wjFwXPXdesd+5eITbxvUCNnm0np1WMtcMi+wRnpE9+x11XLttHnAqyX/4fzbPW
+ 0KZ/30T+qXpYElYEvEgj1YtVF9Eb3qY4LZ9XhWPmA/ydPKw2YryW7iOfYlpBQHXyoDIC
+ kA84UwZZptgwW8nwYiQebxl6ncsDtIqyMcXOmRyaqJlhuEwFIy9PR4FAdQ0ImI8Lxwym
+ +cVfDHr95XO2BsxFL+y+gBggO0Tzbz2cZsZm5kSeBl4V7krseTD55oUSYbN4UuHWfZA2
+ OxFHNJY6E7m8IaCL94iZv7W8MQtnMu9fqXqayRWnONSRVFXRgrsvCoWEVaHIgLNZ/Clc
+ dt0g==
+X-Gm-Message-State: AOJu0Yw0B3n7Tu5FI8FpAglGwlymGtyswQ08jTo7PE8LV1TAO3dh3WBg
+ lDOgbFFyiepHoO1k6DeO6HHjgyj5dM3w+CjJdHxDeNIH3USSMH1QUMGSocPCR6Q=
+X-Google-Smtp-Source: AGHT+IGYzi9aF1k515RIhhRF07rH9QIXWEgpsbG+yIcsWECJPiAlrYDLStCOCXXxxJvH1FPPVKI1tg==
+X-Received: by 2002:a05:620a:1906:b0:79e:ff47:3307 with SMTP id
+ af79cd13be357-7a6896dc84amr2099118985a.8.1724863995738; 
+ Wed, 28 Aug 2024 09:53:15 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7a67f318e5bsm652336085a.20.2024.08.28.09.53.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Aug 2024 09:45:34 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [u-boot-test-hooks PATCH v4 3/3] Provide some basic scripts for
- Labgrid integration
-Date: Wed, 28 Aug 2024 10:45:23 -0600
-Message-Id: <20240828164523.125770-4-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240828164523.125770-1-sjg@chromium.org>
-References: <20240828164523.125770-1-sjg@chromium.org>
+ Wed, 28 Aug 2024 09:53:15 -0700 (PDT)
+Date: Wed, 28 Aug 2024 10:53:12 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 2/2] bootstage: Do not sort records
+Message-ID: <20240828165312.GR2479150@bill-the-cat>
+References: <20240803124149.2916030-1-jonas@kwiboo.se>
+ <20240803124149.2916030-3-jonas@kwiboo.se>
+ <CAFLszTha39GkRsZA1r91YpLdKJDiRfDmAzWsMTuByDtPC0YvGQ@mail.gmail.com>
+ <CAFLszThNN-rfPtAYKSHtGTEUwuxFgz01A-yJMXRYtwX3WiA-Kg@mail.gmail.com>
+ <0329ee07-3f99-4daf-8960-1e934ff753de@kwiboo.se>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="2ZWLwbXGXXsC6eYZ"
+Content-Disposition: inline
+In-Reply-To: <0329ee07-3f99-4daf-8960-1e934ff753de@kwiboo.se>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,403 +93,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With Labgrid we don't need to specify the various methods, except for
-the console, which simply calls labgrid-client.
 
-This allows supporting any boards in your lab, without adding per-board
-configuration to these hooks.
+--2ZWLwbXGXXsC6eYZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Provide ellesmere files as an example.
+On Wed, Aug 28, 2024 at 06:15:32PM +0200, Jonas Karlman wrote:
+> Hi Simon,
+>=20
+> On 2024-08-28 18:01, Simon Glass wrote:
+> > Hi Jonas,
+> >=20
+> > On Tue, 6 Aug 2024 at 15:50, Simon Glass <sjg@chromium.org> wrote:
+> >>
+> >> Hi Jonas,
+> >>
+> >> On Sat, 3 Aug 2024 at 06:42, Jonas Karlman <jonas@kwiboo.se> wrote:
+> >>>
+> >>> The timer counter on Rockchip SoCs may be reset in TF-A, this may cau=
+se
+> >>> the bootstage records to be printed out of order and with an incorrect
+> >>> elapsed time.
+> >>
+> >> Eek can we just fix TF-A? That seems like a bug.
+>=20
+> TF-A is vendor blob, so we have no control of it.
+>=20
+> >>
+> >>>
+> >>> Fix this by not sorting the bootstage records.
+> >>>
+> >>> Before on a Radxa ZERO 3W (RK3566) board:
+> >>>
+> >>>   =3D> bootstage report
+> >>>   Timer summary in microseconds (12 records):
+> >>>          Mark    Elapsed  Stage
+> >>>             0          0  reset
+> >>>         7,436      7,436  board_init_f
+> >>>       164,826    157,390  SPL
+> >>>       375,392    210,566  end phase
+> >>>       423,909     48,517  board_init_r
+> >>>       472,973     49,064  eth_common_init
+> >>>       476,848      3,875  main_loop
+> >>>       477,003        155  cli_loop
+> >>>
+> >>>   Accumulated time:
+> >>>                    7,181  of_live
+> >>>                   14,739  dm_spl
+> >>>                   15,029  dm_r
+> >>>                  315,150  dm_f
+> >>>
+> >>> With this the records can be printed in chronological order when the
+> >>> counter is reset and SPL and board_init_r records show correct elapsed
+> >>> time.
+> >>>
+> >>>   =3D> bootstage report
+> >>>   Timer summary in microseconds (12 records):
+> >>>          Mark    Elapsed  Stage
+> >>>             0          0  reset
+> >>>       164,437    164,437  SPL
+> >>>       375,023    210,586  end phase
+> >>>         7,437      7,437  board_init_f
+> >>>       424,390    416,953  board_init_r
+> >>>       473,515     49,125  eth_common_init
+> >>>       477,402      3,887  main_loop
+> >>>       477,571        169  cli_loop
+> >>>
+> >>>   Accumulated time:
+> >>>                   14,734  dm_spl
+> >>>                  315,646  dm_f
+> >>>                    7,339  of_live
+> >>>                   14,977  dm_r
+> >>>
+> >>> For the tested board external TPL and BROM take ~164 ms to initialize
+> >>> DRAM and load SPL, SPL take ~210ms to load images from FIT and U-Boot
+> >>> proper take ~477ms to reach cli prompt.
+> >>>
+> >>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> >>> ---
+> >>>  common/bootstage.c | 12 ++----------
+> >>>  1 file changed, 2 insertions(+), 10 deletions(-)
+> >>>
+> >=20
+> > To put this more strongly, this breaks the timing output on other board=
+s.
+>=20
+> Please elaborate, I cannot understand why not sorting would break output
+> on other boards, are other boards adding records out of order?
+>=20
+> Do you have an example of how this change break other boards?
+>=20
+> >=20
+> > At the very least, this should be Kconfig option just enabled for
+> > boards with a broken ATF.
+>=20
+> I can add a Kconfig option, but would like to understand why other/any
+> board would need to sort the records in the first place.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+This got me to re-check everything and see I hadn't finished configuring
+bootstage for pytest for Pi in my lab. And when building with:
+CONFIG_BOOTSTAGE_STASH_ADDR=3D0x02400000
+CONFIG_BOOTSTAGE=3Dy
+CONFIG_BOOTSTAGE_STASH=3Dy
+CONFIG_CMD_BOOTSTAGE=3Dy
 
-Changes in v4:
-- Support pytest fully with dual-build boards like Beagleplay
+And this in the boardenv py file:
 
-Changes in v3:
-- Update scripts for latest version of Labgrid integration
-- Add poweroff.none and poweron.none
-- Provide -n flag when querying board info
-- Target the grpc version of Labgrid which is now in -master
-- Update README to cover the changes
+env__bootstage_cmd_file =3D {
+    'addr': 0x2400000,
+    'size': 0x1000,
+    'bootstage_magic_addr': 0xb00757a3,
+}
 
-Changes in v2:
-- Make use of the common script (only) to set bin_dir
+All three tests pass, with both parts of the series applied. Of course
+Pi is not a great example as there's not TF-A in the loop here and
+that's part of the problem equation.
 
- README.md                    | 50 ++++++++++++++++++++++++++++++++++++
- bin/console.labgrid          | 42 ++++++++++++++++++++++++++++++
- bin/ellesmere/common-labgrid | 46 +++++++++++++++++++++++++++++++++
- bin/ellesmere/conf.all       | 24 +++++++++++++++++
- bin/getrole.labgrid          | 25 ++++++++++++++++++
- bin/release.labgrid          | 22 ++++++++++++++++
- bin/release.none             | 22 ++++++++++++++++
- bin/u-boot-test-getrole      | 38 +++++++++++++++++++++++++++
- bin/u-boot-test-release      | 26 +++++++++++++++++++
- 9 files changed, 295 insertions(+)
- create mode 100644 bin/console.labgrid
- create mode 100755 bin/ellesmere/common-labgrid
- create mode 100644 bin/ellesmere/conf.all
- create mode 100644 bin/getrole.labgrid
- create mode 100644 bin/release.labgrid
- create mode 100644 bin/release.none
- create mode 100755 bin/u-boot-test-getrole
- create mode 100755 bin/u-boot-test-release
+And also, JFYI:
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D warnings summary =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+tests/test_bootstage.py::test_bootstage_stash
+  /home/trini/labgrid-venv/lib/python3.11/site-packages/_pytest/python.py:1=
+63: PytestReturnNotNoneWarning: Expected None, but tests/test_bootstage.py:=
+:test_bootstage_stash returned (37748736, 4096), which will be an error in =
+a future version of pytest.  Did you mean to use `assert` instead of `retur=
+n`?
+    warnings.warn(
 
-diff --git a/README.md b/README.md
-index 290e4d0..18a9a5b 100644
---- a/README.md
-+++ b/README.md
-@@ -199,6 +199,56 @@ scripts must be replicated once per board instance, or their actions somehow
- serialized, since they copy files into their own directories when executing, and
- hence parallel execution would cause incorrect operation.
- 
-+## Labgrid Integration
-+
-+Labgrid is a python library for embedded-board-control. It includes a client
-+program which is used to integrate with the U-Boot pytests.
-+
-+Since Labgrid has all the information necessary to build and boot on a lab,
-+there is no per-board configuration required. The various flash.xxx and
-+recovery.xxx scripts are not used. To set it up:
-+
-+- In your bin/$hostname directory, create an executable file `common-labgrid`
-+  and set your crossbar and environment information, for example:
-+
-+      # Hostname and port for the gRPC coordinator
-+      export LG_COORDINATOR=kea:20408
-+
-+      # Environment file for the lab
-+      export LG_ENV="/path/to/env.cfg"
-+
-+      # Location of the U-Boot test hooks
-+      export UB_TEST_HOOKS=/path/to/u-boot-test-hooks
-+
-+      # Make sure only one buildman can run at a time, since it uses all CPUs
-+      export BUILDMAN_PROCESS_LIMIT=1
-+
-+      # Use the internal console since microcom can miss serial input at boot
-+      export LG_CONSOLE="internal"
-+
-+      # Tell u-boot-test-hooks to use the Labgrid integration
-+      export USE_LABGRID=1
-+
-+      flash_impl=none
-+      reset_impl=none
-+      console_impl=labgrid
-+      release_impl=labgrid
-+      getrole_impl=labgrid
-+      power_impl=none
-+
-+The last 6 lines tell the hooks to use Labgrid for console and board release
-+as well as a new 'getrole' hook which is only used by Labgrid. The flash, reset
-+and power features of boards are all handled by entirely by Labgrid.
-+
-+Then create another executable file (in the same directory) called 'conf.all',
-+containing::
-+
-+    .. code-block:: bash
-+
-+    . "${bin_dir}/${hostname}/common-labgrid"
-+
-+That should be all that is needed.
-+
- ## Dependencies
- 
- The example scripts depend on various external tools, the installation location
-diff --git a/bin/console.labgrid b/bin/console.labgrid
-new file mode 100644
-index 0000000..85e7da5
---- /dev/null
-+++ b/bin/console.labgrid
-@@ -0,0 +1,42 @@
-+# Copyright 2024 Google LLC
-+# Written by Simon Glass
-+#
-+# Permission is hereby granted, free of charge, to any person obtaining a
-+# copy of this software and associated documentation files (the "Software"),
-+# to deal in the Software without restriction, including without limitation
-+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+# and/or sell copies of the Software, and to permit persons to whom the
-+# Software is furnished to do so, subject to the following conditions:
-+#
-+# The above copyright notice and this permission notice shall be included in
-+# all copies or substantial portions of the Software.
-+#
-+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+# DEALINGS IN THE SOFTWARE.
-+
-+# The variables here can come from one of two places:
-+#
-+# 1. When using the ub-xxx scripts (e.g. ub-int) they come from those scripts,
-+#    set by the get_args.sh script
-+#
-+# 2. When running from gitlab, the variables are all empty and so take the
-+#    default values below, except for ${strategy} which is set in the gitlab
-+#    script
-+
-+# On input:
-+# strategy: Strategy arguments to use, e.g. "-s start". Normally this is
-+# "-s uboot -e off" but it can be "-s start -e off" or even empty
-+# verbose: Verbose argument to use, e.g. "-v"
-+#
-+# These variables are set by .gitlab-ci.yml or by
-+
-+exec labgrid-client -V do-bootstrap ${bootstrap:-1} -V do-build ${build:-1} \
-+    -V do-send ${send:-0} -V do-clean ${clean:-0} \
-+    -V process-limit ${BUILDMAN_PROCESS_LIMIT:-0} \
-+    -r "${U_BOOT_BOARD_IDENTITY}" ${strategy} ${verbose} -a console \
-+    ${console_log}
-diff --git a/bin/ellesmere/common-labgrid b/bin/ellesmere/common-labgrid
-new file mode 100755
-index 0000000..8bfb036
---- /dev/null
-+++ b/bin/ellesmere/common-labgrid
-@@ -0,0 +1,46 @@
-+# Copyright 2024 Google LLC
-+# Written by Simon Glass
-+#
-+# Permission is hereby granted, free of charge, to any person obtaining a
-+# copy of this software and associated documentation files (the "Software"),
-+# to deal in the Software without restriction, including without limitation
-+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+# and/or sell copies of the Software, and to permit persons to whom the
-+# Software is furnished to do so, subject to the following conditions:
-+#
-+# The above copyright notice and this permission notice shall be included in
-+# all copies or substantial portions of the Software.
-+#
-+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+# DEALINGS IN THE SOFTWARE.
-+
-+# Hostname and port for the gRPC coordinator
-+export LG_COORDINATOR=kea:20408
-+
-+# Environment file for the lab
-+export LG_ENV=/vid/software/devel/ubtest/lab/cfg/env.cfg
-+
-+# Make sure only one buildman can run at a time, since it uses all CPUs
-+export BUILDMAN_PROCESS_LIMIT=1
-+
-+# Location of the U-Boot test hooks
-+export UB_TEST_HOOKS=/vid/software/devel/ubtest/u-boot-test-hooks
-+
-+# Use the internal console since microcom can miss serial input at boot
-+export LG_CONSOLE=internal
-+
-+# Tell u-boot-test-hooks to use the Labgrid integration
-+export USE_LABGRID=1
-+
-+
-+flash_impl=none
-+reset_impl=none
-+console_impl=labgrid
-+release_impl=labgrid
-+getrole_impl=labgrid
-+power_impl=none
-diff --git a/bin/ellesmere/conf.all b/bin/ellesmere/conf.all
-new file mode 100644
-index 0000000..6cbe561
---- /dev/null
-+++ b/bin/ellesmere/conf.all
-@@ -0,0 +1,24 @@
-+#!/bin/bash
-+
-+# Copyright 2024 Google LLC
-+# Written by Simon Glass <sjg@chromium.org>
-+#
-+# Permission is hereby granted, free of charge, to any person obtaining a
-+# copy of this software and associated documentation files (the "Software"),
-+# to deal in the Software without restriction, including without limitation
-+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+# and/or sell copies of the Software, and to permit persons to whom the
-+# Software is furnished to do so, subject to the following conditions:
-+#
-+# The above copyright notice and this permission notice shall be included in
-+# all copies or substantial portions of the Software.
-+#
-+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+# DEALINGS IN THE SOFTWARE.
-+
-+. "${bin_dir}/${hostname}/common-labgrid"
-diff --git a/bin/getrole.labgrid b/bin/getrole.labgrid
-new file mode 100644
-index 0000000..52fc3ce
---- /dev/null
-+++ b/bin/getrole.labgrid
-@@ -0,0 +1,25 @@
-+# Copyright 2024 Google LLC
-+# Written by Simon Glass
-+#
-+# Permission is hereby granted, free of charge, to any person obtaining a
-+# copy of this software and associated documentation files (the "Software"),
-+# to deal in the Software without restriction, including without limitation
-+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+# and/or sell copies of the Software, and to permit persons to whom the
-+# Software is furnished to do so, subject to the following conditions:
-+#
-+# The above copyright notice and this permission notice shall be included in
-+# all copies or substantial portions of the Software.
-+#
-+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+# DEALINGS IN THE SOFTWARE.
-+
-+[ -n "${do_configure}" ] && config_arg=",config_file"
-+
-+exec labgrid-client -r "${target}" -a query -n \
-+	UBootProviderDriver:board,board_extra,source_dir,build_dir,build_dir_extra${config_arg}
-diff --git a/bin/release.labgrid b/bin/release.labgrid
-new file mode 100644
-index 0000000..54e7895
---- /dev/null
-+++ b/bin/release.labgrid
-@@ -0,0 +1,22 @@
-+# Copyright 2024 Google LLC
-+# Written by Simon Glass
-+#
-+# Permission is hereby granted, free of charge, to any person obtaining a
-+# copy of this software and associated documentation files (the "Software"),
-+# to deal in the Software without restriction, including without limitation
-+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+# and/or sell copies of the Software, and to permit persons to whom the
-+# Software is furnished to do so, subject to the following conditions:
-+#
-+# The above copyright notice and this permission notice shall be included in
-+# all copies or substantial portions of the Software.
-+#
-+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+# DEALINGS IN THE SOFTWARE.
-+
-+exec labgrid-client -r "${U_BOOT_BOARD_IDENTITY}" release -a
-diff --git a/bin/release.none b/bin/release.none
-new file mode 100644
-index 0000000..284d1b1
---- /dev/null
-+++ b/bin/release.none
-@@ -0,0 +1,22 @@
-+# Copyright 2024 Google LLC
-+# Written by Simon Glass <sjg@chromium.org>
-+#
-+# Permission is hereby granted, free of charge, to any person obtaining a
-+# copy of this software and associated documentation files (the "Software"),
-+# to deal in the Software without restriction, including without limitation
-+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+# and/or sell copies of the Software, and to permit persons to whom the
-+# Software is furnished to do so, subject to the following conditions:
-+#
-+# The above copyright notice and this permission notice shall be included in
-+# all copies or substantial portions of the Software.
-+#
-+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+# DEALINGS IN THE SOFTWARE.
-+
-+# No releasing needed
-diff --git a/bin/u-boot-test-getrole b/bin/u-boot-test-getrole
-new file mode 100755
-index 0000000..ac8e02a
---- /dev/null
-+++ b/bin/u-boot-test-getrole
-@@ -0,0 +1,38 @@
-+#!/bin/bash
-+
-+# Copyright 2024 Google LLC
-+# Written by Simon Glass <sjg@chromium.org>
-+#
-+# Permission is hereby granted, free of charge, to any person obtaining a
-+# copy of this software and associated documentation files (the "Software"),
-+# to deal in the Software without restriction, including without limitation
-+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+# and/or sell copies of the Software, and to permit persons to whom the
-+# Software is furnished to do so, subject to the following conditions:
-+#
-+# The above copyright notice and this permission notice shall be included in
-+# all copies or substantial portions of the Software.
-+#
-+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+# DEALINGS IN THE SOFTWARE.
-+
-+# Prints the following pieces of information, each on a separate line
-+#
-+# - U-Boot board name
-+# - source path
-+# - build dir
-+# - filename of .config file
-+#
-+# For example
-+
-+. "$(dirname $0)/u-boot-test-common"
-+
-+target="$1"
-+[ -n "$2" ] && do_configure=1
-+
-+. "${bin_dir}/getrole.${getrole_impl:-none}"
-diff --git a/bin/u-boot-test-release b/bin/u-boot-test-release
-new file mode 100755
-index 0000000..5a3a849
---- /dev/null
-+++ b/bin/u-boot-test-release
-@@ -0,0 +1,26 @@
-+#!/bin/bash
-+
-+# Copyright 2024 Google LLC
-+# Written by Simon Glass <sjg@chromium.org>
-+#
-+# Permission is hereby granted, free of charge, to any person obtaining a
-+# copy of this software and associated documentation files (the "Software"),
-+# to deal in the Software without restriction, including without limitation
-+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
-+# and/or sell copies of the Software, and to permit persons to whom the
-+# Software is furnished to do so, subject to the following conditions:
-+#
-+# The above copyright notice and this permission notice shall be included in
-+# all copies or substantial portions of the Software.
-+#
-+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+# DEALINGS IN THE SOFTWARE.
-+
-+. "$(dirname $0)/u-boot-test-common"
-+
-+. "${bin_dir}/release.${release_impl:-none}"
--- 
-2.34.1
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 
+--=20
+Tom
+
+--2ZWLwbXGXXsC6eYZ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbPVfQACgkQFHw5/5Y0
+tyyfHgv/dGnUSRLvJLdtX3Km6qjIq1Lu9HgeMDyljS7g0FooIDfotGj4WTGXxXpk
+EH6h9yZXC3zhtgDJvfXXgVaKKJ1ecqsxIURyIIanI9ML2KOvmiLh9GtQyrgzHU0E
+CvsKdCrWL791+N7rQPOTiDicMrmphQd2M4nJqJol8vK3T5paJSSI7uTatWH2unCr
+Wrr9CPo6cdHXVjMsGQ80Rdf6ruAVbB/YMPFMpOxockpuQG7bxckzgvyKzZDLngbr
+hLcIvoGTw8jlVv2aea4osqtslh6NCyjq4piyczQfmZEnY6Obj8UGFjMpc+2Pn2bA
+3GSGSVLCP4cOEcs1lmWH0iLmutvtSdfhMoaSeTqlB6iG6eTnL4DsQCoyZMdPimWF
+JTRgwizrVIxYy8pBRXJGMapJWWDwAoG3MX6PYFUQK3l081OgnKpGO6u4teQBLuql
+tqyvl/1Bst88DAGk0gRwBJzsQYz2kldW++BAIA8WNneNLuVPHnxurAkskXMaJWAr
+O4qeW6PW
+=s+Nv
+-----END PGP SIGNATURE-----
+
+--2ZWLwbXGXXsC6eYZ--
