@@ -4,78 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACFA0C636E5
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 16:54:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98BE3C636E9
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 16:55:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21120889A7;
-	Wed, 28 Aug 2024 18:54:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 77BE188A75;
+	Wed, 28 Aug 2024 18:55:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IdUw/CJr";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DED988916; Wed, 28 Aug 2024 18:54:54 +0200 (CEST)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9449588703
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 18:54:52 +0200 (CEST)
+ id 284A1889F8; Wed, 28 Aug 2024 18:55:00 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id DB5CD88703
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 18:54:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-7a1df0a93eeso409368985a.1
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 09:54:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724864091; x=1725468891; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=apv+cEQsk6Pv1uD+fBliTH7aw9v4GssJE3SyWlNivb8=;
- b=IdUw/CJrOse96bpX6PnKRW4Ry+Y5mqqiFbBESpC8JOD+iiSxGKDLhfXE3us2F+gVPU
- hGl2m4XzF7rnnJOCxD7O4maSQQ4+6WeHAkn8qEKOOfKcAI5nP4ikXa9X3FEFxTA5MseX
- ZLsBkXc/GsThXiFodyLAo0DL7lvorP86XBYvs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724864091; x=1725468891;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=apv+cEQsk6Pv1uD+fBliTH7aw9v4GssJE3SyWlNivb8=;
- b=In7HVVb0KkGVQ5y3nakRPNYgRjzSu/b0TDJsikSEGDnpASkRavf31pjbFfsVVsORc9
- wATn/+Rl/uw/ByTcfwKCo2GXeQkIY8JNCyrSng2bBCLMXB5DkckYFAPJdntHYYhBzGPh
- vwgBjYcUgNRb6xflBPrnw7ARAO338a8+oZQTHbbpEv1KJBP64zdwGJSbAJZ+ZCE705Go
- rnEcvud5LlJSu6nmpu+Z8BdzIyw3MTXE57t8+57ohmfpCQKpeUxoqY+eMFAJH2EBsr5p
- +CYXtUbUKjqjhTUMbgkpk6k7xQ5wEDGRFnPNVtcEtZmn5RsSxUHPhHpqhsn6gT2YwI9C
- iq0g==
-X-Gm-Message-State: AOJu0YxDSyGMmrTF3vOIh89HbjulIs9npNVtodowQGpdBNl9xpzb6Yf4
- KGGqJwYagaT2PO+Kx5EK/4hygnIfnd23MDhyBILDG93Bm8o4btdZKUnvsr8QgJHJLBK2xSDkqBm
- E8IxHVg==
-X-Google-Smtp-Source: AGHT+IGQzvLKZH6mn6xyS6mYNFjszeRIqu21EzXtn++g070whMll4FSdK3HCIGK4J6iLcu91UI3sBg==
-X-Received: by 2002:a05:620a:4452:b0:79f:190a:8ad7 with SMTP id
- af79cd13be357-7a7f4c940f7mr299199285a.33.1724864091273; 
- Wed, 28 Aug 2024 09:54:51 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a7ef227da6sm122558485a.90.2024.08.28.09.54.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Aug 2024 09:54:50 -0700 (PDT)
-Date: Wed, 28 Aug 2024 10:54:48 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [u-boot-test-hooks PATCH v4 1/3] Create a common file for test
- scripts
-Message-ID: <20240828165448.GS2479150@bill-the-cat>
-References: <20240828164523.125770-1-sjg@chromium.org>
- <20240828164523.125770-2-sjg@chromium.org>
+ spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 77412DA7;
+ Wed, 28 Aug 2024 09:55:23 -0700 (PDT)
+Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 352F13F73B;
+ Wed, 28 Aug 2024 09:54:54 -0700 (PDT)
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: [PATCH v2] list: use list_count_nodes() to count list entries
+Date: Wed, 28 Aug 2024 22:24:22 +0530
+Message-Id: <20240828165422.3553394-1-sughosh.ganu@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3oYI6ghwLgPGrBWo"
-Content-Disposition: inline
-In-Reply-To: <20240828164523.125770-2-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,41 +54,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Use the API function list_count_nodes() to count the number of list
+entries.
 
---3oYI6ghwLgPGrBWo
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+Changes since V1: Rebased on top of next
 
-On Wed, Aug 28, 2024 at 10:45:21AM -0600, Simon Glass wrote:
+ boot/scene.c              | 8 +-------
+ drivers/mtd/ubi/fastmap.c | 8 +++-----
+ fs/yaffs2/yaffs_guts.c    | 5 ++---
+ lib/fwu_updates/fwu_mtd.c | 5 +----
+ test/boot/expo.c          | 4 +---
+ 5 files changed, 8 insertions(+), 22 deletions(-)
 
-> The top part of each of the u-boot-test-* files is common. Put it in
-> a common script file to avoid duplication and to allow it to be
-> replaced for the Labgrid integration.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+diff --git a/boot/scene.c b/boot/scene.c
+index ac976aa26b..270c9c6723 100644
+--- a/boot/scene.c
++++ b/boot/scene.c
+@@ -79,13 +79,7 @@ int scene_title_set(struct scene *scn, uint id)
+ 
+ int scene_obj_count(struct scene *scn)
+ {
+-	struct scene_obj *obj;
+-	int count = 0;
+-
+-	list_for_each_entry(obj, &scn->obj_head, sibling)
+-		count++;
+-
+-	return count;
++	return list_count_nodes(&scn->obj_head);
+ }
+ 
+ void *scene_obj_find(const struct scene *scn, uint id, enum scene_obj_t type)
+diff --git a/drivers/mtd/ubi/fastmap.c b/drivers/mtd/ubi/fastmap.c
+index 21750e1817..9c6b15b8cb 100644
+--- a/drivers/mtd/ubi/fastmap.c
++++ b/drivers/mtd/ubi/fastmap.c
+@@ -581,13 +581,11 @@ static int count_fastmap_pebs(struct ubi_attach_info *ai)
+ 	struct ubi_ainf_peb *aeb;
+ 	struct ubi_ainf_volume *av;
+ 	struct rb_node *rb1, *rb2;
+-	int n = 0;
++	int n;
+ 
+-	list_for_each_entry(aeb, &ai->erase, u.list)
+-		n++;
++	n = list_count_nodes(&ai->erase);
+ 
+-	list_for_each_entry(aeb, &ai->free, u.list)
+-		n++;
++	n += list_count_nodes(&ai->free);
+ 
+ 	 ubi_rb_for_each_entry(rb1, av, &ai->volumes, rb)
+ 		ubi_rb_for_each_entry(rb2, aeb, &av->root, u.rb)
+diff --git a/fs/yaffs2/yaffs_guts.c b/fs/yaffs2/yaffs_guts.c
+index e89d02513c..c20f2f8298 100644
+--- a/fs/yaffs2/yaffs_guts.c
++++ b/fs/yaffs2/yaffs_guts.c
+@@ -4452,13 +4452,12 @@ loff_t yaffs_get_obj_length(struct yaffs_obj *obj)
+ int yaffs_get_obj_link_count(struct yaffs_obj *obj)
+ {
+ 	int count = 0;
+-	struct list_head *i;
+ 
+ 	if (!obj->unlinked)
+ 		count++;	/* the object itself */
+ 
+-	list_for_each(i, &obj->hard_links)
+-	    count++;		/* add the hard links; */
++	/* add the hard links; */
++	count += list_count_nodes(&obj->hard_links);
+ 
+ 	return count;
+ }
+diff --git a/lib/fwu_updates/fwu_mtd.c b/lib/fwu_updates/fwu_mtd.c
+index ccaba3f311..c14203b9dd 100644
+--- a/lib/fwu_updates/fwu_mtd.c
++++ b/lib/fwu_updates/fwu_mtd.c
+@@ -60,10 +60,7 @@ int fwu_mtd_get_alt_num(efi_guid_t *image_id, u8 *alt_num,
+ 	if (ret)
+ 		return -ENOENT;
+ 
+-	nalt = 0;
+-	list_for_each_entry(dfu, &dfu_list, list)
+-		nalt++;
+-
++	nalt = list_count_nodes(&dfu_list);
+ 	if (!nalt) {
+ 		log_warning("No entities in dfu_alt_info\n");
+ 		dfu_free_entities();
+diff --git a/test/boot/expo.c b/test/boot/expo.c
+index 4b24f504e2..9b4aa803eb 100644
+--- a/test/boot/expo.c
++++ b/test/boot/expo.c
+@@ -702,9 +702,7 @@ static int expo_test_build(struct unit_test_state *uts)
+ 	txt = scene_obj_find(scn, item->label_id, SCENEOBJT_NONE);
+ 	ut_asserteq_str("2 GHz", expo_get_str(exp, txt->str_id));
+ 
+-	count = 0;
+-	list_for_each_entry(item, &menu->item_head, sibling)
+-		count++;
++	count = list_count_nodes(&menu->item_head);
+ 	ut_asserteq(3, count);
+ 
+ 	expo_destroy(exp);
+-- 
+2.34.1
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---3oYI6ghwLgPGrBWo
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbPVlgACgkQFHw5/5Y0
-tywehQwArz8o7O1GWquDv0v5pDyDqpIYS2wU1Lub/yB1/vuxsKxyqeDVoKUT0Gm/
-D+SDH1GGrE68x3AV1Xthsw59eSkb0R8a0Q/IjXX99XYr7CmTkQzIW0iKYqANnzkx
-HtXmX9l5ynIf1PP/+fks7vmjKJ2YVeXJh6miC6WgdYfXpXhAl0jRX5dZJEhVOaME
-Mt+otREPnyg09MRkDwu1ncye58JF0nCVm3X0NWBFEZANV2e2tQPFgBrQKYt3UN12
-N7QwvfPnwDXY6E4TDz+D+fS03YfEEhDq7pLNgYh/DcWrBUYR9yrW9hApehnJeL5C
-y/I4MYmiuqJsIY6Bmb0LR6xlQ4TAP9/ANrEjtB2hEhxkhkQh17xRTrNTaPHJmXgQ
-qoMtr3ULZ281xiuT1Dvqe8MN1XU+FNXB85Sp5lmy42cVRRyroMsLnEHzLxE7yuNh
-F7ZwN0EgvTrV0uOp6vG6XRzpQdP0gdDhwrYn4DyZ7re7qeOYYITDL7WbanPeAYi4
-Yhc7NBMI
-=xfSD
------END PGP SIGNATURE-----
-
---3oYI6ghwLgPGrBWo--
