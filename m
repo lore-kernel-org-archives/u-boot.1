@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E244FC7114C
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 22:17:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0978C7113C
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 22:17:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E30C88A25;
-	Thu, 29 Aug 2024 00:17:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A17538891E;
+	Thu, 29 Aug 2024 00:17:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="I4G7JYrv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ai5FYzs0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6741888A3; Thu, 29 Aug 2024 00:17:15 +0200 (CEST)
+ id 65D1D88A76; Thu, 29 Aug 2024 00:17:17 +0200 (CEST)
 Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
  [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6DE687FA7
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:17:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8A4388440
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:17:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-6bf6721aae5so68126d6.2
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 15:17:11 -0700 (PDT)
+ 6a1803df08f44-6bf6e17cc2bso136926d6.1
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 15:17:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724883431; x=1725488231; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hDWWcj5/c4hfnz+49nSndtwudeloj+MjcR9eaaxC/0E=;
- b=I4G7JYrv1ycO7vNGCWWFetyBKMtxIzFV3/HPqjMHr2QDWcTj4IZEh1YvPXNtgmrtAs
- llgBHFdLS59flBtPIwK6joYs4Y9VAea2nul6/OPcQWNixD9cRR4rT8bvN1a4QnK4AVNR
- I+EfQe/6NNoea60a1lskbOP/bb3hbY2e30llo=
+ d=chromium.org; s=google; t=1724883432; x=1725488232; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Rdmy6nlGtpc3+h/zBx44zbbmwW+lwKk07D3JiXgYrlA=;
+ b=ai5FYzs0nFudEL/Z1hWsNYkFSi9mei5XyIUWfwLZTyPA6oxa6pbJVG/e/xixSkDklf
+ yxejLc0Ztwd1W30SXxNprgv8bZgSDl78jPvQWfEAf1cULywjgfB2ivUoPSLErNhYspuJ
+ h3edyJ9GP4TgKpYcv11dOPF/0VpEMKW3EKEmk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724883431; x=1725488231;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hDWWcj5/c4hfnz+49nSndtwudeloj+MjcR9eaaxC/0E=;
- b=E3TWS3BK2bbN3E7jx5dCYKT+D4PwRi2IhDlTyOGOpiQEkcc6x8r/fzSpFoql8nXHc3
- PeSxcGwGrxj8AtmBi9PZTRITdIUEzVvrRH39fzLpqIAAaT/LCI0v9QM2RiUg2ZcbA1WJ
- LSPbDYDkSrUORCw3g6DkUZL3GOFCeJeLpYMwzDhbeEVPfppG8z/P+XpKHQo8QAeTxyzt
- wLExDqGBridhzl26qpsFtOJmGJRBpPYW6N6bfZFloERcDmKo4KpaMqD1PZ7iRZfUdxRG
- mje1/hKy2cc5RDxZICtLA0Le9XvZ6e8WokxqEYcYZANuYMn9Wb/xXqW+IE/uEk/BE3Jd
- 7KvQ==
+ d=1e100.net; s=20230601; t=1724883432; x=1725488232;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Rdmy6nlGtpc3+h/zBx44zbbmwW+lwKk07D3JiXgYrlA=;
+ b=WU8DDxBYZXkJNd19k2CM36VwglBgfQhvg0Yd6MF/Us7d4b3z83l7QA/NKoZZYwVpGM
+ F+aqnDC4kZuxVRW4X71Il9ybE8lWKz2OmjlcGrl3fQzc5FzNyCuJ9y94kLkQV+92hfds
+ Ze8wLO/u0NrySE8U9D8tMbNn61eMGi8nRdy5uBlafVw8V4+z4jKwVUNOpgmUu5VPvOzc
+ l3B/g7tKbovXFHsG6P5hX9raXqhIfDs6ceJnmWqhR1XPJ00OACx0aQTA7fQv1WZYRutC
+ Kq1cr58QAGXCF4YZ2ywfaxVClxm//2i6PPSdrNI2y3+XvUXAxcuAP5vkW0iG+3KoaKaO
+ qUTA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUmgpRNCxoVnczpfCTPO1i5E0H2SoyPqUeisS11X4/ktbmqkIje0Tz+zWGFK2X1LKNqVOTKvMs=@lists.denx.de
-X-Gm-Message-State: AOJu0YzTBhKB5zlWqNVaG2V5JIlCBsoLCeRaz52XhIYTgZT4M23lKOcA
- ZDwDT0HWlDlqGRl5K32vzlz5JeBjO3/lwAILrTWdKty+oEXGwZ3zrOwm/pfOyOZ1NAzHY7FNGXH
- otOUa5S1MjS+XlvpmxO7nQ7GY5//0izDZu6hL
-X-Google-Smtp-Source: AGHT+IG73x/5prqshBvcjBN/Mmd+daDzEyEHxE5XY5MtfQleZ1zIFvi6tIHMFnvGczdSFNDsv4HtcgryEudZpKWSYqY=
-X-Received: by 2002:a05:6214:598b:b0:6b5:e4da:2d51 with SMTP id
- 6a1803df08f44-6c33e684418mr11185356d6.45.1724883430612; Wed, 28 Aug 2024
- 15:17:10 -0700 (PDT)
+ AJvYcCV8J1egEN0hvQUB/FS4uqGrx01HVhE3MGi7r7SuFCA5AsAFnQQHBeKkt4zcquaLQA098HSmexc=@lists.denx.de
+X-Gm-Message-State: AOJu0YwSd9usJLbps+5uG9kMYG3V3t57WAoFn9D7PnsK/m5zk8QG7d2A
+ 2ZOLXukEVWwsX+uoHq3z3lMabRbnETYjMnJKjdeYbZWhBsrrV1OT7Ik0uZOAhUIaYPT7ku5aB4V
+ J26oCAZ3CEguspxK+AtL6Kii8dQarKmiZgiboNLC7taDeZ0Q=
+X-Google-Smtp-Source: AGHT+IEdlkMpI40Y/MhXz3Lu5FOneatbl1g2A1tYugJ7IQ//XPQdj38oFV0S5qVGKaf6H4fuawP85D/5aa9W8IA5RPo=
+X-Received: by 2002:a05:6214:5f02:b0:6bf:8127:76df with SMTP id
+ 6a1803df08f44-6c33e4f3973mr10761426d6.0.1724883432554; Wed, 28 Aug 2024
+ 15:17:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <980adca3-27ac-440b-93b4-80146d050584@linaro.org>
- <CAOMZO5A2ZBb9G6krUmfNy3qnoNYgwdb2-DUgeNuvONy9VioEbQ@mail.gmail.com>
- <CAFLszTgZ9vFe1rahWG_QiVJXoCBOTc=umAJ=YZwu7ExyXWsuDg@mail.gmail.com>
- <aeba3da3-b287-481c-a704-4b56884deaaf@linaro.org>
-In-Reply-To: <aeba3da3-b287-481c-a704-4b56884deaaf@linaro.org>
+References: <20240803124149.2916030-1-jonas@kwiboo.se>
+ <20240803124149.2916030-3-jonas@kwiboo.se>
+ <CAFLszTha39GkRsZA1r91YpLdKJDiRfDmAzWsMTuByDtPC0YvGQ@mail.gmail.com>
+ <CAFLszThNN-rfPtAYKSHtGTEUwuxFgz01A-yJMXRYtwX3WiA-Kg@mail.gmail.com>
+ <0329ee07-3f99-4daf-8960-1e934ff753de@kwiboo.se>
+ <CAFLszTgGhy+nY7MGDi19ZeB7ptstmXFwWG4NRUECtdjqPfMZSQ@mail.gmail.com>
+ <CAFLszTiLsSA6JPBZanqk1wai9n109P87OO-wJJ=d-7-23=RWNA@mail.gmail.com>
+ <4e3b907f-ed5a-4ae6-a533-d7cb16bb9775@kwiboo.se>
+In-Reply-To: <4e3b907f-ed5a-4ae6-a533-d7cb16bb9775@kwiboo.se>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 28 Aug 2024 16:17:00 -0600
-Message-ID: <CAFLszTjZVFCoPBTojmHwCoo7jKsyEYzFBLq9SxjOco7uLzJ_ZA@mail.gmail.com>
-Subject: Re: imx8ulp_evk build with buildman fails every other time
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Fabio Estevam <festevam@gmail.com>, Gary Bisson <bisson.gary@gmail.com>, 
- Peng Fan <peng.fan@nxp.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Wed, 28 Aug 2024 16:17:01 -0600
+Message-ID: <CAFLszTg0bVVWFR8WuxNia-XfoOnJ8YpUkFtw3L_8ZUwKsDAQqg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] bootstage: Do not sort records
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,109 +90,228 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 28 Aug 2024 at 09:40, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
+Hi Jonas,
+
+On Wed, 28 Aug 2024 at 13:01, Jonas Karlman <jonas@kwiboo.se> wrote:
 >
+> Hi Simon,
 >
->
-> On 8/27/24 17:53, Simon Glass wrote:
-> > Hi Jerome,
+> On 2024-08-28 20:11, Simon Glass wrote:
+> > Hi again Jonas,
 > >
-> > On Tue, 27 Aug 2024 at 08:53, Fabio Estevam <festevam@gmail.com> wrote:
+> > On Wed, 28 Aug 2024 at 11:06, Simon Glass <sjg@chromium.org> wrote:
 > >>
-> >> Adding Gary and Peng on Cc.
+> >> Hi Jonas,
 > >>
-> >> On Tue, Aug 27, 2024 at 11:42=E2=80=AFAM Jerome Forissier
-> >> <jerome.forissier@linaro.org> wrote:
+> >> On Wed, 28 Aug 2024 at 10:15, Jonas Karlman <jonas@kwiboo.se> wrote:
 > >>>
-> >>> Hi,
+> >>> Hi Simon,
 > >>>
-> >>> Can someone explain what's happening with the imx8ulp_evk buildman bu=
-ild
-> >>> below? It either fails with a mkimage error, or succeeds with a binma=
-n
-> >>> warning, every other time. 100% reproducible. /me confused :o
+> >>> On 2024-08-28 18:01, Simon Glass wrote:
+> >>>> Hi Jonas,
+> >>>>
+> >>>> On Tue, 6 Aug 2024 at 15:50, Simon Glass <sjg@chromium.org> wrote:
+> >>>>>
+> >>>>> Hi Jonas,
+> >>>>>
+> >>>>> On Sat, 3 Aug 2024 at 06:42, Jonas Karlman <jonas@kwiboo.se> wrote:
+> >>>>>>
+> >>>>>> The timer counter on Rockchip SoCs may be reset in TF-A, this may cause
+> >>>>>> the bootstage records to be printed out of order and with an incorrect
+> >>>>>> elapsed time.
+> >>>>>
+> >>>>> Eek can we just fix TF-A? That seems like a bug.
 > >>>
-> >>> =3D=3D=3D=3D8<=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D8<=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >>> $ docker run -it --rm trini/u-boot-gitlab-ci-runner:jammy-20240808-21=
-Aug2024
-> >>> uboot@42aa85c2d6b7:/$ cd
-> >>> uboot@42aa85c2d6b7:~$ git clone https://github.com/u-boot/u-boot.git
-> >>> uboot@42aa85c2d6b7:~/u-boot$ git log --oneline -n 1
-> >>> ee2af844ba (HEAD -> master, origin/master, origin/HEAD) Merge tag 'ef=
-i-2024-10-rc4' of https://source.denx.de/u-boot/custodians/u-boot-efi
-> >>> uboot@42aa85c2d6b7:~$ cd u-boot
-> >>> uboot@42aa85c2d6b7:~/u-boot$ tools/buildman/buildman imx8ulp_evk
-> >>> Building current source for 1 boards (1 thread, 24 jobs per thread)
-> >>>    aarch64:  w+   imx8ulp_evk
-> >>> +WARNING 'mx8ulpa2-ahab-container.img' not found, resulting binary ma=
-y be not-functional
-> >>> +WARNING 'bl31.bin' not found, resulting binary may be not-functional
-> >>> +WARNING 'upower.bin' not found, resulting binary may be not-function=
-al
-> >>> +WARNING 'm33_image.bin' not found, resulting binary may be not-funct=
-ional
-> >>>     0    1    0 /1              imx8ulp_evk
-> >>> Completed: 1 total built, 1 newly), duration 0:00:09, rate 0.11
-> >>> uboot@42aa85c2d6b7:~/u-boot$ tools/buildman/buildman imx8ulp_evk
-> >>> Building current source for 1 boards (1 thread, 24 jobs per thread)
-> >>>    aarch64:  +   imx8ulp_evk
-> >>> +WARNING 'bl31.bin' not found, resulting binary may be not-functional
-> >>> +binman: Error 1 running 'mkimage -d ./mkimage.spl.mkimage -n spl/u-b=
-oot-spl.cfgout -T imx8image -e 0x22020000 ./mkimage-out.spl.mkimage': Fail =
-open first container file mx8ulpa2-ahab-container.img
-> >>> +
-> >>> +make[1]: *** [Makefile:1126: .binman_stamp] Error 1
-> >>> +make: *** [Makefile:177: sub-make] Error 2
-> >>>     0    0    1 /1              imx8ulp_evk
-> >>> Completed: 1 total built, 1 newly), duration 0:00:04, rate 0.25
-> >>> uboot@42aa85c2d6b7:~/u-boot$ tools/buildman/buildman imx8ulp_evk
-> >>> Building current source for 1 boards (1 thread, 24 jobs per thread)
-> >>>    aarch64:  w+   imx8ulp_evk
-> >>> +WARNING 'mx8ulpa2-ahab-container.img' not found, resulting binary ma=
-y be not-functional
-> >>> +WARNING 'upower.bin' not found, resulting binary may be not-function=
-al
-> >>> +WARNING 'm33_image.bin' not found, resulting binary may be not-funct=
-ional
-> >>> +WARNING 'bl31.bin' not found, resulting binary may be not-functional
-> >>>     0    1    0 /1              imx8ulp_evk
-> >>> Completed: 1 total built, 1 newly), duration 0:00:04, rate 0.25
-> >>> uboot@42aa85c2d6b7:~/u-boot$ tools/buildman/buildman imx8ulp_evk
-> >>> Building current source for 1 boards (1 thread, 24 jobs per thread)
-> >>>    aarch64:  +   imx8ulp_evk
-> >>> +WARNING 'bl31.bin' not found, resulting binary may be not-functional
-> >>> +binman: Error 1 running 'mkimage -d ./mkimage.spl.mkimage -n spl/u-b=
-oot-spl.cfgout -T imx8image -e 0x22020000 ./mkimage-out.spl.mkimage': Fail =
-open first container file mx8ulpa2-ahab-container.img
-> >>> +
-> >>> +make[1]: *** [Makefile:1126: .binman_stamp] Error 1
-> >>> +make: *** [Makefile:177: sub-make] Error 2
-> >>>     0    0    1 /1              imx8ulp_evk
-> >>> Completed: 1 total built, 1 newly), duration 0:00:04, rate 0.25
-> >>> =3D=3D=3D=3D8<=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D8<=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >>> TF-A is vendor blob, so we have no control of it.
+> >>
+> >> Can we replace it, or is it one of the ones that has not been released?
+> >>
+> >> Can you file a bug with the vendor?
+> >>
 > >>>
+> >>>>>
+> >>>>>>
+> >>>>>> Fix this by not sorting the bootstage records.
+> >>>>>>
+> >>>>>> Before on a Radxa ZERO 3W (RK3566) board:
+> >>>>>>
+> >>>>>>   => bootstage report
+> >>>>>>   Timer summary in microseconds (12 records):
+> >>>>>>          Mark    Elapsed  Stage
+> >>>>>>             0          0  reset
+> >>>>>>         7,436      7,436  board_init_f
+> >>>>>>       164,826    157,390  SPL
+> >>>>>>       375,392    210,566  end phase
+> >>>>>>       423,909     48,517  board_init_r
+> >>>>>>       472,973     49,064  eth_common_init
+> >>>>>>       476,848      3,875  main_loop
+> >>>>>>       477,003        155  cli_loop
+> >>>>>>
+> >>>>>>   Accumulated time:
+> >>>>>>                    7,181  of_live
+> >>>>>>                   14,739  dm_spl
+> >>>>>>                   15,029  dm_r
+> >>>>>>                  315,150  dm_f
+> >>>>>>
+> >>>>>> With this the records can be printed in chronological order when the
+> >>>>>> counter is reset and SPL and board_init_r records show correct elapsed
+> >>>>>> time.
+> >>>>>>
+> >>>>>>   => bootstage report
+> >>>>>>   Timer summary in microseconds (12 records):
+> >>>>>>          Mark    Elapsed  Stage
+> >>>>>>             0          0  reset
+> >>>>>>       164,437    164,437  SPL
+> >>>>>>       375,023    210,586  end phase
+> >>>>>>         7,437      7,437  board_init_f
+> >>>>>>       424,390    416,953  board_init_r
+> >>>>>>       473,515     49,125  eth_common_init
+> >>>>>>       477,402      3,887  main_loop
+> >>>>>>       477,571        169  cli_loop
+> >>>>>>
+> >>>>>>   Accumulated time:
+> >>>>>>                   14,734  dm_spl
+> >>>>>>                  315,646  dm_f
+> >>>>>>                    7,339  of_live
+> >>>>>>                   14,977  dm_r
+> >>>>>>
+> >>>>>> For the tested board external TPL and BROM take ~164 ms to initialize
+> >>>>>> DRAM and load SPL, SPL take ~210ms to load images from FIT and U-Boot
+> >>>>>> proper take ~477ms to reach cli prompt.
+> >>>>>>
+> >>>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> >>>>>> ---
+> >>>>>>  common/bootstage.c | 12 ++----------
+> >>>>>>  1 file changed, 2 insertions(+), 10 deletions(-)
+> >>>>>>
+> >>>>
+> >>>> To put this more strongly, this breaks the timing output on other boards.
+> >>>
+> >>> Please elaborate, I cannot understand why not sorting would break output
+> >>> on other boards, are other boards adding records out of order?
+> >>>
+> >>> Do you have an example of how this change break other boards?
+> >>
+> >> Oh sure. The original reason was that the array was ordered by ID.
+> >> That was changed in [1], which I forgot about.
+> >>
+> >> The other bit is for coreboot (or potentially other prior phases) we
+> >> receive timestamps as a block and add them into U-Boot. We want these
+> >> to appear in the correct order with respect to the ones already adding
+> >> to U-Boot.
+> >>
+> >> Sadly coreboot uses its own toolchain and I seem to have deleted it,
+> >> but once it finishes building the world I will give it a try.
 > >
-> > I can't quite explain it but I have hit this before. It is why I have
-> > been unable to land [1]
+> > OK I gave up and just built one toolchain instead of every one known
+> > to man, which is the default.
 > >
-> > Perhaps binman is writing a file which is being picked up on the next
-> > run, but is not valid? Or perhaps the file from a previous build
-> > confuses things? I notice that some of the sections have filenames,
-> > meaning that they are written and persist between builds.
+> > The code has seriously rotted and is a somewhat fascinating window
+> > into what U-Boot was like 12 years ago...I will send a little series.
 > >
-> > You can try BINMAN_VERBOSE=3D4 or 5 to see what is happening, or
-> > BINMAN_DEBUG=3D1 to get a stack trace.
+> > Anyway, the start-romstage and device-xxx things below come from coreboot.
 >
-> That one wasn't super easy to track down :-/ but I think I have a proper
-> fix. See https://lists.denx.de/pipermail/u-boot/2024-August/563355.html.
+> Interesting, so coreboot is not running before U-Boot on this platform,
+> is it running in parallel with U-Boot?
 
-Nice work!!
+It runs before, but U-Boot picks up the timestamps once it is ready to
+do so, i.e. after bootstage is inited.
 
-- Simon
+>
+> How is timestamp_add_to_bootstage() called in U-Boot, I cannot see any
+> call to it, what am I missing?
+
+Yes, it was deleted. I just sent a series to bring i tback.
+
+>
+> Guessing the records need to be sorted after/during that function call?
+>
+> Also look like the sorting is done in bootstage_report() so the report
+> is possible logged to FDT with an unsorted order.
+
+Yes, although that shouldn't really matter. Perhaps it is worth fixing?
+
+>
+> Let me know what you want me to do with this, I will drop this for now
+> and just keep carry this patch in my local tree.
+
+Hmmm step one is to complain about the bug. If it exists in ATF
+upstream, then it should be fixed. I can have a crack at fixing it if
+so. If it is a vendor binary, then they should fix it.
+
+Step 2, I suggest a Kconfig option enabled for these boards, so it is
+clear it is a workaround.
+
+Regards,
+Simon
+
 
 > >
-> > [1] https://patchwork.ozlabs.org/project/uboot/patch/20240623175515.146=
-6908-14-sjg@chromium.org/
+> > => bootstage repo
+> > Timer summary in microseconds (20 records):
+> >        Mark    Elapsed  Stage
+> >           0          0  reset
+> >      25,322     25,322  board_init_f
+> >      32,175      6,853  start-romstage
+> >     117,158     84,983  board_init_r
+> >     208,409     91,251  device-initialize
+> >     293,286     84,877  device-done
+> >     547,606    254,320  selfboot-jump
+> >     621,050     73,444  eth_common_init
+> >     699,570     78,520  eth_initialize
+> >     744,210     44,640  main_loop
+> >     761,030     16,820  usb_start
+> >   3,988,265  3,227,235  netboot_common
+> >   3,988,330         65  eth_start
+> >   6,316,294  2,327,964  bootp_start
+> >  12,286,385  5,970,091  bootp_stop
+> >  12,297,353     10,968  netboot_common
+> >  12,300,596      3,243  netboot_common
+> >  28,327,263 16,026,667  cli_loop
+> >
+> > Accumulated time:
+> >                  8,600  dm_r
+> >                  8,659  dm_f
+> >
+> > Without the sort, I see:
+> >
+> > Timer summary in microseconds (18 records):
+> >        Mark    Elapsed  Stage
+> >           0          0  reset
+> >      36,582     36,582  board_init_f
+> >     125,775     89,193  board_init_r
+> >     642,577    516,802  eth_common_init
+> >     721,321     78,744  eth_initialize
+> >      31,357429,427,733,2  start-romstage
+> >     247,602    216,245  device-initialize
+> >     333,879     86,277  device-done
+> >     596,043    262,164  selfboot-jump
+> >     765,897    169,854  main_loop
+> >     783,397     17,500  usb_start
+> >   4,043,423  3,260,026  netboot_common
+> >   4,043,489         66  eth_start
+> >   6,371,702  2,328,213  bootp_start
+> >  11,609,247  5,237,545  netboot_common
+> >  15,476,116  3,866,869  cli_loop
+> >
+> > Accumulated time:
+> >                  8,639  dm_f
+> >                  8,923  dm_r
+> >
+> >>
+> >>>
+> >>>>
+> >>>> At the very least, this should be Kconfig option just enabled for
+> >>>> boards with a broken ATF.
+> >>>
+> >>> I can add a Kconfig option, but would like to understand why other/any
+> >>> board would need to sort the records in the first place.
+> >>
+> >> OK.
+> >
+> > Regards,
+> > Simon
+> >
+> >>
+> >> [1] 03ecac31498 bootstage: Use rec_count as the array index
+>
