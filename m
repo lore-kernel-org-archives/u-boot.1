@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BBC2C54746
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 01:46:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1718C54747
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 01:46:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45A5088B35;
+	by phobos.denx.de (Postfix) with ESMTP id D43EC88B67;
 	Wed, 28 Aug 2024 03:45:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FUCzjlge";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ddq/yBQe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2C4988B31; Wed, 28 Aug 2024 03:45:51 +0200 (CEST)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
+ id 5A2CE88AFA; Wed, 28 Aug 2024 03:45:52 +0200 (CEST)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2B7488A7B
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 03:45:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F6E088AA8
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 03:45:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-828fb89785cso101313139f.0
- for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 18:45:49 -0700 (PDT)
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-81fd925287eso226747139f.3
+ for <u-boot@lists.denx.de>; Tue, 27 Aug 2024 18:45:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724809548; x=1725414348; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724809549; x=1725414349; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qomlv5+5BmQ36gt2HABUHiQzDEQ8UGmqKsVQ5FmUsbA=;
- b=FUCzjlge+hszFpmZObMUE51zNH8+TcuuwWQ3PyReB2o6Jiq/ybDl0Cq7MzNEwrOj6m
- CVRj4CVupcr51sXJBOCox341iuJq2kmnmpRlA5EC/GwvThkBY5KHjnzfTUqM7L0zfSE+
- SWI+FBSvHq3dhWY8w816TGEFn2YNH39DxJQC4=
+ bh=QtnmH4ebFa5vWLQEucgyQKceO2m6RTtSZiuTNjMM20M=;
+ b=Ddq/yBQek1+sEUqRqPEZ7xB5QFAmjAK/yjVrYSIMPF65dLua6IolAcPBpLW3chrj5t
+ g3BlolyXGuf+aYurWbXSryGVQvxAVTDtt0T08K4qjEN3C4sOUfQD6HxWVl70FVoKwcVP
+ zoZHevhWjARnFnntnRKHP4UtSQ9agLHJSfyZA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724809548; x=1725414348;
+ d=1e100.net; s=20230601; t=1724809549; x=1725414349;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qomlv5+5BmQ36gt2HABUHiQzDEQ8UGmqKsVQ5FmUsbA=;
- b=DPHc1GykYSyjmKgL20MHpRafozyQ08xTDeHnYg8YUMAE7kNPwRD8FCI/FiNHSnqVjk
- aNWTWKxSNxiIr0nakc74Z1vOGXvMhM50pKACNYKNZ7LoSQXfXOjSXb1cDZAWfnEbWyT3
- 5qFVJrWCpCb6tPek4OwUH68q3Hv8CYVYkbd158McoZDsLxXYbcLIjmVbR/Rxf4w8sS/2
- dGH5PJTX4Xz1roqHfH0rRxIArRYyWCPJfsNSWqqlr+xpyRxp5rcF8c85b+ud5lvxH9PU
- KdJ6hqJAGkapG7Oqy0SFQcrn+gOHCarYwdt5gvveVVQEK/gLIJws5xL9CTA+T4ukH3bz
- smHg==
-X-Gm-Message-State: AOJu0Yxb4IYSTtVBqemPrbjeVQ7XZrIpgpqOjz5nyZITBnoNnljx07ZV
- yK/+d/GrbYZywlu07F+86Iu7tbE+YOJlhdcVJW4HKMGszuCjd/JvdMhcT5dw7Mvj7CKZwKqn07A
+ bh=QtnmH4ebFa5vWLQEucgyQKceO2m6RTtSZiuTNjMM20M=;
+ b=pSrGl7XNIJa6m4r70PTfFc02HLDXkh5p/dyHWbIQqUcD0RxsJwISfGpOEKVdni/URv
+ xoAma/syag0ULDLyQiQl7aC1YBJXkYWViv/+gkpboT/ExutFDMpt63RzEjOYJC8/mwJW
+ lSy2Qndq0p9w/puuYAUkalIzKKYyVvwVLFMWDrOZSIiogccWiTKgdDXn/0lWkif+irZs
+ 6KVG8nufRQTLv+KTJ3p2ViFPlPX0Uvvp7t5+AzvBFm+w59/W40dssuhMyfvWGiWB2d6M
+ XhooXxIRYmAxTWDFFF8XysLFVEjphb3lcMKvyUqUGWtW5YRBK5nNvFUvOmOsZ5WR36vB
+ zpDw==
+X-Gm-Message-State: AOJu0YylEWm8qWo9om/GQ/HrpXFZVo1Aa6+GnyVfVvORc0k3Z7rWifgj
+ S7n6MjxvfuqOOtP9XExyI9q6WQd1aBdM05Trm2CJL7dNGq8eCjlNfmfQv/s74X2u3Vq7FXc2Mh4
  =
-X-Google-Smtp-Source: AGHT+IHRm9ux3/cg5lCwyDn7vJpml0qyAJdS713QmcrQ6MdorkMir9sazWh226WrrvZewLUBoA63UQ==
-X-Received: by 2002:a05:6602:3fd4:b0:829:e867:d6bb with SMTP id
- ca18e2360f4ac-82a03e714e1mr67224639f.9.1724809547881; 
- Tue, 27 Aug 2024 18:45:47 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHFT0uxQqlPwjs48zIuK7dcem/KTHSUu9MFSytBVtv1sgd01m9SlzTY05cwVT1bR98H8a35TQ==
+X-Received: by 2002:a05:6602:6218:b0:805:e2bf:f303 with SMTP id
+ ca18e2360f4ac-82a03e453b7mr67656339f.8.1724809548929; 
+ Tue, 27 Aug 2024 18:45:48 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ce70f5ca7csm2898342173.63.2024.08.27.18.45.47
+ 8926c6da1cb9f-4ce70f5ca7csm2898342173.63.2024.08.27.18.45.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Aug 2024 18:45:47 -0700 (PDT)
+ Tue, 27 Aug 2024 18:45:48 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 01/18] sandbox: Add missing header file
-Date: Tue, 27 Aug 2024 19:45:20 -0600
-Message-Id: <20240828014538.3322013-2-sjg@chromium.org>
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>
+Subject: [PATCH 02/18] bootstd: Add stub for bootdev_setup_for_sibling_blk()
+Date: Tue, 27 Aug 2024 19:45:21 -0600
+Message-Id: <20240828014538.3322013-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240828014538.3322013-1-sjg@chromium.org>
 References: <20240828014538.3322013-1-sjg@chromium.org>
@@ -89,27 +90,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This file uses __aligned so should include the header which defines
-that.
+When bootstd is not enabled, bootdevs should not be set up. Add a
+static inline function to see to this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/sandbox/include/asm/sections.h | 1 +
- 1 file changed, 1 insertion(+)
+ include/bootdev.h | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/arch/sandbox/include/asm/sections.h b/arch/sandbox/include/asm/sections.h
-index 88837bb35c8..5e1577419b0 100644
---- a/arch/sandbox/include/asm/sections.h
-+++ b/arch/sandbox/include/asm/sections.h
-@@ -10,6 +10,7 @@
- #define __SANDBOX_SECTIONS_H
+diff --git a/include/bootdev.h b/include/bootdev.h
+index 2cee8832d26..ad4af0d1310 100644
+--- a/include/bootdev.h
++++ b/include/bootdev.h
+@@ -395,6 +395,7 @@ int bootdev_next_prio(struct bootflow_iter *iter, struct udevice **devp);
+  */
+ int bootdev_setup_for_dev(struct udevice *parent, const char *drv_name);
  
- #include <asm-generic/sections.h>
-+#include <linux/compiler_attributes.h>
++#if CONFIG_IS_ENABLED(BOOTSTD)
+ /**
+  * bootdev_setup_for_sibling_blk() - Bind a new bootdev device for a blk device
+  *
+@@ -409,6 +410,13 @@ int bootdev_setup_for_dev(struct udevice *parent, const char *drv_name);
+  * Return: 0 if OK, -ve on error
+  */
+ int bootdev_setup_for_sibling_blk(struct udevice *blk, const char *drv_name);
++#else
++static int bootdev_setup_for_sibling_blk(struct udevice *blk,
++					 const char *drv_name)
++{
++	return 0;
++}
++#endif
  
- struct sandbox_cmdline_option;
- 
+ /**
+  * bootdev_get_sibling_blk() - Locate the block device for a bootdev
 -- 
 2.34.1
 
