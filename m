@@ -4,85 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9204C54E90
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 10:05:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75BBAC54E71
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 10:12:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E87CB8873C;
-	Wed, 28 Aug 2024 12:05:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CB0EC88AFB;
+	Wed, 28 Aug 2024 12:12:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J6252PU0";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Z0lgTuf2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E34E886AF; Wed, 28 Aug 2024 12:05:10 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 561ED88A7B; Wed, 28 Aug 2024 12:12:26 +0200 (CEST)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B0958873C
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 12:05:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5bf0261f162so7688956a12.0
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 03:05:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724839508; x=1725444308; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=svr6C3VUPOR+ZrEz8NpxMz2IEdRaU2tv8HNouB0sKoc=;
- b=J6252PU0I7cNvoQ1jXJ7Qw4NuZYRYllP1uTQKXlBZwRBKT1aNhJltK4HjnJHYJskiR
- pB8Cg9aDVXxH/abtLYVBlU7ths1A4KI4AA9c1u5C7WjghRlqwEyfAmN1yNB4hfKaJG6b
- +ZS7486iJuzY29enF/o4U4sBf5/SjGD5ZKuiWz2hBfhe+x6yNg2A5S3Z6fMkFe4wEcHk
- tLS6GkJz5MfStSbVDPSDJ0QIY2iaUpXhIIT/GKD76pEo7tZkfIhoo8qFdUFKYotgW6kF
- 7gQOj2+LEvlHMGiitXzGBzUu/GAn9XYHBzXJ0jU+fwGIoKude9qUORsmSkY3S0+l7pnl
- vYwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724839508; x=1725444308;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=svr6C3VUPOR+ZrEz8NpxMz2IEdRaU2tv8HNouB0sKoc=;
- b=GzFRkvh+Zor9Y1SiiYTjJSNju+dud18npGG+6j+vkTpf86rUvLcG2zBA8st0iHo+7/
- ijVVlUCABTpMtpjXe/VbsRNsS5PsWib1178epA1lndb0StnxjLZuFr6WC0+1Dla7jtQp
- AMXhT8buAEXLggPmCFGmf7EFjcZTfw1GmyxHygNHqG/mPSlAwDEM4mqNN2Wv2r6L7Xzy
- RSO1SGHDBnpyw2Wka/YIpqk6bU+AZqB1s87nMo56qcHqH1sKHpdfUYhuKMxxQXixf0+r
- XVQUm4VXqB935DhRg7VIzD/tB60w4t8V/avpyvh24qfdhDqa6H4q4buPyJkocMETIYv7
- 6IsQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUbD7ufJKdeGsYiPRhsarC+2xerrAyS9u+cm5dVS62tAUJq+aJSHS2Ys/LgWDDJr1auapM/yS8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzVWC3yDUGSkg+ExGv/zFvTliomgwBWFik+SCZ/NXNfUeV/VwIx
- FMse7vVrZ8T5v7e3ratSiaQy/smGu+woPyNXzFcBWCex8oxS8X3xMex2U0BGvLIc+4ltNU1PwFk
- 1yMAJ2qjsGiNBWdSAiK4mStViN84=
-X-Google-Smtp-Source: AGHT+IGWkVMV/fRykD2fhs5J3Hkukp4IMIForHAkjd4ACJCw+ujtATAp2InpdnYfJ1XF6J8DOgDdk1UnFX+y/SpiX7M=
-X-Received: by 2002:a05:6402:430a:b0:5bf:a2c:4f35 with SMTP id
- 4fb4d7f45d1cf-5c0891663fbmr12287938a12.10.1724839506848; Wed, 28 Aug 2024
- 03:05:06 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id E707D8870B
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 12:12:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+Oliver.Gaskell.analog.com@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id C9EF2A402E7;
+ Wed, 28 Aug 2024 10:12:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 513D6C4E672;
+ Wed, 28 Aug 2024 10:04:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1724839448;
+ bh=eM8RjWG47fSFRTrSf/BTgOm4pIig8a7IEAX+0/slPTo=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=Z0lgTuf2H3Zl+2K7KkzNxt/G1wwm2YSjyRtLuKj96vkPnXQcVS999E4r0nAHs5CBR
+ LIlcrOtUEmsG5VZzYVqlrha/Pryw53YG7HI2hCaNu/tKAYxs3H+NiumpGDey4KBXp1
+ iOAFbh2sP4FP8GyIFLfrGhV/AC7iVdHvyvooVL+dl1eFvDyjpyRZkNSy0NpEBQkVt5
+ QIkBaT+ATZ1o8yvyFZPt2Z25QnGc5ShyL2yEckGIEldw20B4DwXx6oayUPUOdDASnO
+ G19kY4GEpEu0DZI1oPRFwiVOgKM54ruE6UCjfgGyHZjmdcpp6/CrfgH5D0yuahlmTM
+ HB8fmnrDRcD5g==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 41575C5479A;
+ Wed, 28 Aug 2024 10:04:08 +0000 (UTC)
+From: Oliver Gaskell via B4 Relay
+ <devnull+Oliver.Gaskell.analog.com@kernel.org>
+Date: Wed, 28 Aug 2024 11:02:09 +0100
+Subject: [PATCH 01/20] arm: dts: Support SC573-EZKIT
 MIME-Version: 1.0
-References: <20240814103145.1347645-1-mikhail.kshevetskiy@iopsys.eu>
- <20240814103145.1347645-8-mikhail.kshevetskiy@iopsys.eu>
-In-Reply-To: <20240814103145.1347645-8-mikhail.kshevetskiy@iopsys.eu>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 28 Aug 2024 11:04:55 +0100
-Message-ID: <CALeDE9PiqED4JqDCaBLfaVgntwR+_EXi8ay45SyYHXOq7UBo2A@mail.gmail.com>
-Subject: Re: [RESEND PATCH v3 7/9] net/tcp: simplify tcp header filling code
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Cc: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Anand Moon <linux.amoon@gmail.com>, 
- Marek Vasut <marex@denx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Sean Anderson <seanga2@gmail.com>, 
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20240828-sc5xx-upstreaming-patches-v1-1-44d9adfdf327@analog.com>
+References: <20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com>
+In-Reply-To: <20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com>
+To: Tom Rini <trini@konsulko.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Greg Malysa <greg.malysa@timesys.com>, 
+ Ian Roberts <ian.roberts@timesys.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
+ Utsav Agarwal <utsav.agarwal@analog.com>, 
+ Arturs Artamonovs <arturs.artamonovs@analog.com>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>
+Cc: u-boot@lists.denx.de, adsp-linux@analog.com, 
+ Oliver Gaskell <Oliver.Gaskell@analog.com>
+X-Mailer: b4 0.14.1
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1724839434; l=4193;
+ i=Oliver.Gaskell@analog.com; s=20240821; h=from:subject:message-id;
+ bh=OVSg+BZV1AHkTE15V5hBb895rNTFv7VgbOq175IFpOE=;
+ b=xMRO3AATlzZo3ZKGsCAmkZTgHUinRMPrcQ23TL9LEsIzTOkqlVpNcU5wsEOw89wvz7d6aLybe
+ zsxugsbYK9fDBeEyDs36/xdvxZp5ZH0s6eYG7dlYRE4CFa3ssytiQgk
+X-Developer-Key: i=Oliver.Gaskell@analog.com; a=ed25519;
+ pk=Icq9TxwFJ6FePHS28YbBWMvtZpFWxpPQLhLA9cNvZ/Y=
+X-Endpoint-Received: by B4 Relay for Oliver.Gaskell@analog.com/20240821
+ with auth_id=197
+X-Original-From: Oliver Gaskell <Oliver.Gaskell@analog.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,127 +86,167 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Oliver.Gaskell@analog.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This needs an actual description, please add details what and why for
-this 70 line patch.
+From: Oliver Gaskell <Oliver.Gaskell@analog.com>
 
-> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-> ---
->  net/tcp.c | 70 +++++++++++++++++++++++++++++--------------------------
->  1 file changed, 37 insertions(+), 33 deletions(-)
->
-> diff --git a/net/tcp.c b/net/tcp.c
-> index 2c34556c26d..7014d5b4f43 100644
-> --- a/net/tcp.c
-> +++ b/net/tcp.c
-> @@ -527,10 +527,37 @@ void net_set_syn_options(struct tcp_stream *tcp, union tcp_build_pkt *b)
->         b->ip.end = TCP_O_END;
->  }
->
-> +const char *tcpflags_to_str(char tcpflags, char *buf, int size)
-> +{
-> +       int i = 0, len;
-> +       char *orig = buf;
-> +       const struct {
-> +               int             bit;
-> +               const char      *name;
-> +       } desc[] = {{TCP_RST, "RST"}, {TCP_SYN, "SYN"}, {TCP_PUSH, "PSH"},
-> +                   {TCP_FIN, "FIN"}, {TCP_ACK, "ACK"}, {0, NULL}};
-> +
-> +       *orig = '\0';
-> +       while (desc[i].name != NULL) {
-> +               len = strlen(desc[i].name);
-> +               if (size <= len + 1)
-> +                       break;
-> +               if (buf != orig) {
-> +                       *buf++ = ',';
-> +                       size--;
-> +               }
-> +               strcpy(buf, desc[i].name);
-> +               buf += len;
-> +               size -= len;
-> +       }
-> +       return orig;
-> +}
-> +
->  int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int payload_len,
->                        u8 action, u32 tcp_seq_num, u32 tcp_ack_num)
->  {
->         union tcp_build_pkt *b = (union tcp_build_pkt *)pkt;
-> +       char buf[24];
->         int pkt_hdr_len;
->         int pkt_len;
->         int tcp_len;
-> @@ -540,55 +567,32 @@ int tcp_set_tcp_header(struct tcp_stream *tcp, uchar *pkt, int payload_len,
->          *         4 bits reserved options
->          */
->         b->ip.hdr.tcp_flags = action;
-> -       pkt_hdr_len = IP_TCP_HDR_SIZE;
->         b->ip.hdr.tcp_hlen = SHIFT_TO_TCPHDRLEN_FIELD(LEN_B_TO_DW(TCP_HDR_SIZE));
->
->         switch (action) {
->         case TCP_SYN:
->                 debug_cond(DEBUG_DEV_PKT,
-> -                          "TCP Hdr:SYN (%pI4, %pI4, sq=%u, ak=%u)\n",
-> -                          &tcp->rhost, &net_ip,
-> -                          tcp_seq_num, tcp_ack_num);
-> +                          "TCP Hdr:%s (%pI4, %pI4, s=%u, a=%u)\n",
-> +                          tcpflags_to_str(action, buf, sizeof(buf)),
-> +                          &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num);
->                 net_set_syn_options(tcp, b);
->                 pkt_hdr_len = IP_TCP_O_SIZE;
->                 break;
-> -       case TCP_SYN | TCP_ACK:
-> -       case TCP_ACK:
-> -               pkt_hdr_len = IP_HDR_SIZE + net_set_ack_options(tcp, b);
-> -               b->ip.hdr.tcp_flags = action;
-> -               debug_cond(DEBUG_DEV_PKT,
-> -                          "TCP Hdr:ACK (%pI4, %pI4, s=%u, a=%u, A=%x)\n",
-> -                          &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num,
-> -                          action);
-> -               break;
-> -       case TCP_FIN:
-> -               debug_cond(DEBUG_DEV_PKT,
-> -                          "TCP Hdr:FIN  (%pI4, %pI4, s=%u, a=%u)\n",
-> -                          &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num);
-> -               payload_len = 0;
-> -               pkt_hdr_len = IP_TCP_HDR_SIZE;
-> -               break;
->         case TCP_RST | TCP_ACK:
->         case TCP_RST:
->                 debug_cond(DEBUG_DEV_PKT,
-> -                          "TCP Hdr:RST  (%pI4, %pI4, s=%u, a=%u)\n",
-> +                          "TCP Hdr:%s (%pI4, %pI4, s=%u, a=%u)\n",
-> +                          tcpflags_to_str(action, buf, sizeof(buf)),
->                            &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num);
-> +               pkt_hdr_len = IP_TCP_HDR_SIZE;
->                 break;
-> -       /* Notify connection closing */
-> -       case (TCP_FIN | TCP_ACK):
-> -       case (TCP_FIN | TCP_ACK | TCP_PUSH):
-> -               debug_cond(DEBUG_DEV_PKT,
-> -                          "TCP Hdr:FIN ACK PSH(%pI4, %pI4, s=%u, a=%u, A=%x)\n",
-> -                          &tcp->rhost, &net_ip,
-> -                          tcp_seq_num, tcp_ack_num, action);
-> -               fallthrough;
->         default:
->                 pkt_hdr_len = IP_HDR_SIZE + net_set_ack_options(tcp, b);
-> -               b->ip.hdr.tcp_flags = action | TCP_PUSH | TCP_ACK;
->                 debug_cond(DEBUG_DEV_PKT,
-> -                          "TCP Hdr:dft  (%pI4, %pI4, s=%u, a=%u, A=%x)\n",
-> -                          &tcp->rhost, &net_ip,
-> -                          tcp_seq_num, tcp_ack_num, action);
-> +                          "TCP Hdr:%s (%pI4, %pI4, s=%u, a=%u)\n",
-> +                          tcpflags_to_str(action, buf, sizeof(buf)),
-> +                          &tcp->rhost, &net_ip, tcp_seq_num, tcp_ack_num);
-> +               break;
->         }
->
->         pkt_len = pkt_hdr_len + payload_len;
-> --
-> 2.39.2
->
+Adds minimal device tree for Analog Devices' SC573-EZKIT board and
+common files for the SC57x/SC5xx family.
+
+This also adds all sc5* devicetrees to ARM SC5XX in MAINTAINERS, and
+adds the ADSP Linux mailing list as the list for ARM SC5XX.
+
+Co-developed-by: Greg Malysa <greg.malysa@timesys.com>
+Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Signed-off-by: Oliver Gaskell <Oliver.Gaskell@analog.com>
+---
+ MAINTAINERS                  |  2 ++
+ arch/arm/dts/Makefile        |  2 ++
+ arch/arm/dts/sc573-ezkit.dts | 13 +++++++++++
+ arch/arm/dts/sc57x.dtsi      | 21 +++++++++++++++++
+ arch/arm/dts/sc5xx.dtsi      | 54 ++++++++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 92 insertions(+)
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index a6e47e8a21..0640d56991 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -601,8 +601,10 @@ M:	Ian Roberts <ian.roberts@timesys.com>
+ M:	Vasileios Bimpikas <vasileios.bimpikas@analog.com>
+ M:	Utsav Agarwal <utsav.agarwal@analog.com>
+ M:	Arturs Artamonovs <arturs.artamonovs@analog.com>
++L:	adsp-linux@analog.com
+ S:	Supported
+ T:	git https://github.com/analogdevicesinc/lnxdsp-u-boot
++F:	arch/arm/dts/sc5*
+ F:	arch/arm/include/asm/arch-adi/
+ F:	arch/arm/mach-sc5xx/
+ F:	drivers/clk/adi/
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index a4d95c8306..8fa56cc9f4 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -1275,6 +1275,8 @@ dtb-$(CONFIG_TARGET_IMX8MM_CL_IOT_GATE_OPTEE) += imx8mm-cl-iot-gate-optee.dtb \
+ 					imx8mm-cl-iot-gate-ied-tpm0.dtbo \
+ 					imx8mm-cl-iot-gate-ied-tpm1.dtbo
+ 
++dtb-$(CONFIG_TARGET_SC573_EZKIT) += sc573-ezkit.dtb
++
+ ifneq ($(CONFIG_TARGET_IMX8MP_RSB3720A1_4G)$(CONFIG_TARGET_IMX8MP_RSB3720A1_6G),)
+ dtb-y += imx8mp-rsb3720-a1.dtb
+ endif
+diff --git a/arch/arm/dts/sc573-ezkit.dts b/arch/arm/dts/sc573-ezkit.dts
+new file mode 100644
+index 0000000000..0dc2962618
+--- /dev/null
++++ b/arch/arm/dts/sc573-ezkit.dts
+@@ -0,0 +1,13 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * (C) Copyright 2024 - Analog Devices, Inc.
++ */
++
++/dts-v1/;
++
++#include "sc57x.dtsi"
++
++/ {
++	model = "ADI SC573-EZKIT";
++	compatible = "adi,sc573-ezkit", "adi,sc57x";
++};
+diff --git a/arch/arm/dts/sc57x.dtsi b/arch/arm/dts/sc57x.dtsi
+new file mode 100644
+index 0000000000..ddfcae8d19
+--- /dev/null
++++ b/arch/arm/dts/sc57x.dtsi
+@@ -0,0 +1,21 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * (C) Copyright 2024 - Analog Devices, Inc.
++ */
++
++#include "sc5xx.dtsi"
++
++/ {
++	gic: interrupt-controller@310b2000 {
++		compatible = "arm,cortex-a5-gic";
++		#interrupt-cells = <3>;
++		#address-cells = <0>;
++		interrupt-controller;
++		reg = <0x310B2000 0x1000>,
++		      <0x310B4000 0x100>;
++	};
++};
++
++&timer0 {
++	clocks = <&clk ADSP_SC57X_CLK_CGU0_SCLK0>;
++};
+diff --git a/arch/arm/dts/sc5xx.dtsi b/arch/arm/dts/sc5xx.dtsi
+new file mode 100644
+index 0000000000..3f440dac29
+--- /dev/null
++++ b/arch/arm/dts/sc5xx.dtsi
+@@ -0,0 +1,54 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * (C) Copyright 2024 - Analog Devices, Inc.
++ */
++
++#include <dt-bindings/interrupt-controller/arm-gic.h>
++#include <dt-bindings/clock/adi-sc5xx-clock.h>
++
++/ {
++	#address-cells = <1>;
++	#size-cells = <1>;
++
++	clocks {
++		sys_clkin0: sys_clkin0 {
++			compatible = "fixed-clock";
++			#clock-cells = <0>;
++			clock-frequency = <25000000>;
++			bootph-all;
++		};
++
++		sys_clkin1: sys_clkin1 {
++			compatible = "fixed-clock";
++			#clock-cells = <0>;
++			clock-frequency = <25000000>;
++			bootph-all;
++		};
++	};
++
++	soc {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		compatible = "simple-bus";
++		device_type = "soc";
++		ranges;
++		bootph-all;
++
++		timer0: timer@31018000 {
++			compatible = "adi,sc5xx-gptimer";
++			reg = <0x31018004 0x100>,
++			      <0x31018060 0x100>;
++			status = "okay";
++			bootph-all;
++		};
++
++		clk: clocks@3108d000 {
++			reg = <0x3108d000 0x1000>;
++			#clock-cells = <1>;
++			clocks = <&sys_clkin0>, <&sys_clkin1>;
++			clock-names = "sys_clkin0", "sys_clkin1";
++			status = "okay";
++			bootph-all;
++		};
++	};
++};
+
+-- 
+2.34.1
+
+
