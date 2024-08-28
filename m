@@ -4,77 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32602C636EE
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 18:27:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8714BC636EE
+	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 18:32:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEF4D88AA4;
-	Wed, 28 Aug 2024 20:27:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D099088744;
+	Wed, 28 Aug 2024 20:32:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PmwP5JaN";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="anOvPKFN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CECDD88A5A; Wed, 28 Aug 2024 20:27:04 +0200 (CEST)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 107D58857C; Wed, 28 Aug 2024 20:32:51 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E696288AAA
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 20:26:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A77BF88744
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 20:32:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6bf7a2035d9so9055916d6.1
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 11:26:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724869619; x=1725474419; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Z1FvJn/6JNr1wsNngzHmvzMyJR1fvcKVud5RImkS0wM=;
- b=PmwP5JaNkBSVQnDjPdDdnqcHDdVgkI1J9R2lZYp/CtxCnKDJhE9gquRaLM4AtMm7Rz
- IITVTnCiD7ifwu6pbdjPrhGOBxtU6M2LYMlhGTWlEcw7Y1z5sLhkki1rvF8gkaWy1de6
- EkoC16B50VWMBcPy8aoxpxuekSFkvgHVkInLw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724869619; x=1725474419;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Z1FvJn/6JNr1wsNngzHmvzMyJR1fvcKVud5RImkS0wM=;
- b=mmui3nCR3oIXuf36s4EgwSg/mdAPUdRM+SrthjChQNB1pY3KeOq7k7w2UIWtLhXkKv
- kLEPMppcP2Yfzd0b/Ifztenkm15N4D3gS5e+MOnerGN/dLNgRuDCoirslT21wRoPaRu0
- OGMvwijvzvO2TL5BLlBOeZhsZf6CiEr13MF8J34SDBIOh7jynLnwsNUHkfZgXCJoNz6Z
- 6viK4dAhFnxc4hJp1rTGZgMJvQvC9EDjm8A+1V+09xiFGMiD6nAxN1YI3SwSU1idxkfc
- zm1jfFSGy2/cY7AC+2MLHHUBD58SQVA5raHs0afzb6e2AMMbzD03XZ76kXeD47fSzcVf
- fLjg==
-X-Gm-Message-State: AOJu0Yy3+F9fRv97MmFPBqmzFwLl7YkWRGlAdBE1dHNN9KOzPyuzbi29
- FwwFtVzGK3m929LcFXAo105P4iizIAHfvwau52FU6YqIPZPtlwxjEhOp6+flinPhMauGximQrZr
- jLjDspw==
-X-Google-Smtp-Source: AGHT+IFEaQmwAroBDby10eyEG6ZmIITZ1kbMG5625J1lCnmMab62nv70ksZwj+xy/YnLsVc+To86Ew==
-X-Received: by 2002:a05:6214:29e5:b0:6b5:fb9:4899 with SMTP id
- 6a1803df08f44-6c33f3259e8mr1104966d6.3.1724869618784; 
- Wed, 28 Aug 2024 11:26:58 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6c162dcddadsm67835536d6.121.2024.08.28.11.26.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Aug 2024 11:26:58 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Franco Venturi <fventuri@comcast.net>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, 
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240731130913.487121-1-fventuri@comcast.net>
-References: <20240731130913.487121-1-fventuri@comcast.net>
-Subject: Re: [PATCH v2] mmc: fix signed vs unsigned compare in read check
- in _spl_load()
-Message-Id: <172486961749.3064792.4380164569809780009.b4-ty@konsulko.com>
-Date: Wed, 28 Aug 2024 12:26:57 -0600
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=4830=P4=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1724869963;
+ bh=fI0cgWzge9sGRsvM9kz90n8YbMK6aBMmr8mtjn1EsAU=;
+ b=anOvPKFNNpH/kk/NEPehlLy4WR47HDZwAvw6RXG3hpKnA0pKXiMgIfB19UB17uXul3Udu9GFh
+ dzulYPcJjeLU0jH0NBNastDjwDnNDD3IGmIKfoMqDyOKmG7oC8nfzAidqVoC680y4FiFUYiya2I
+ 7U2BgC0F21i1cbPc3q7Aw0/rG5Xb+1ub5rrKnYgfdDmIxESYVHy24wfuJx4I/v9GxHPtkOQ0rx0
+ WLTx8svOcjKyJhxyLzZrZepT9e1DMIzn+GItwB/MdndATk7VgjUrgT7YT3rNM7e9VxpLSoc6B5u
+ vGFpfEZePSJD5bWPmi3OuP1b9eVAX+QIQRBKriKfinPw==
+Message-ID: <c6b27581-890d-4308-84df-2f338a81e15f@kwiboo.se>
+Date: Wed, 28 Aug 2024 20:32:36 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] bootstage: Fix unstash of records from SPL
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+References: <20240803124149.2916030-1-jonas@kwiboo.se>
+ <20240803124149.2916030-2-jonas@kwiboo.se>
+ <172486961888.3064792.636174658599384187.b4-ty@konsulko.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <172486961888.3064792.636174658599384187.b4-ty@konsulko.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66cf6d480a22b811484a04f7
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,28 +73,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 31 Jul 2024 09:09:00 -0400, Franco Venturi wrote:
+Hi Tom,
 
-> Fix signed vs unsigned compare in read check in _spl_load()
+On 2024-08-28 20:26, Tom Rini wrote:
+> On Sat, 03 Aug 2024 12:41:44 +0000, Jonas Karlman wrote:
 > 
-> Issue: when info->read() returns a negative value because of an error,
->        the comparison of 'read' (signed) with 'sizeof(*header)'
->        (unsigned silently converts the negative value into a very
->        large unsigned value and the check on the error condition
->        always return false, i.e. the error is not detected
-> Symptoms: if spl_load_image_fat() is unable to find the file 'uImage',
->           the SPL phase of the boot process just hangs after displaying
->           the following line:
->           Trying to boot from MMC1
-> Fix: cast 'sizeof(*header)' to int so the compare is now between
->      signed types
-> Reference: https://stackoverflow.com/questions/17293749/sizeof-operator-in-if-statement
+>> The commit b81e31a1e6c5 ("bootstash: Do not provide a default address
+>> for all") changed a bootstage unstash call to bootstage stash, this
+>> has resulted in bootstage records stashed in SPL no longer get unstaged
+>> in U-Boot proper. Fix this by changing back to a unstage call.
+>>
+>>
 > 
-> [...]
+> Applied to u-boot/next, thanks!
+> 
 
-Applied to u-boot/next, thanks!
+I expected this patch to go to master as it fixes a regression
+introduced in v2024.10-rc1.
 
--- 
-Tom
-
+Regards,
+Jonas
 
