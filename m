@@ -4,110 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF59EC83F2C
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 14:22:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 908D7C83F2D
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 14:25:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7195C88C17;
-	Thu, 29 Aug 2024 16:22:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 099EA88C35;
+	Thu, 29 Aug 2024 16:25:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jZ6shkHO";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="qFZ9DK4y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0414688C40; Thu, 29 Aug 2024 16:22:52 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id C8B9788C39; Thu, 29 Aug 2024 16:25:32 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E5A488B88
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 16:22:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-37196681d3bso455562f8f.3
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 07:22:50 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 4366288B88
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 16:25:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7093d565310so598982a34.2
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 07:25:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724941369; x=1725546169; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=zB6f8368YsesH1OuP0NKiKNGKFYUgCW/dZ+5mkg3mrA=;
- b=jZ6shkHOsHojhwL9eAKUR0i34UkRgIz0YMT5udLYWb/KX3hG3raDBolFRiBoGXYAO6
- 0H84W1EnvxpdIvWCIOTvOOH03uo1PakPaonbUygO24pch6SmJtNcenG5XY3So5XUMeER
- nAch/tV5McnuzALbxgUksUFf5oCuXs3XkB6950ZNh+reP0/Vk3HCDRo3Y6LdKh5DikCS
- wxvrQ9Z7iF5YyD5ZvBwhFkFYYxF1U06jj0nHsuw7eLTtaPFi8NFw560Nddzyp4jSdPqt
- Ewcdxco6XFRqYiC3OjF0LsQfRpz84bKR0y9/E2hDBuTlI/B4N9dpwxGO9FzRei7UGytP
- Vgdg==
+ d=amarulasolutions.com; s=google; t=1724941529; x=1725546329;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=euW7zubb7mEKcnCEznURmxsPKVG/wJNrsIishYFovig=;
+ b=qFZ9DK4yE4jztGbKtQtFxMsityx6OYTeSiBoaCVXjV8JWuVtfzLRE0lhU5xhJI7YZW
+ zHALNNCfKIfE/gcAPbhJ2tAFAdLeu8b6THbshSLSWUWfpwfbOdcGdH6mQYDbUHSWJfmS
+ gBpN4OfT0aotMQiwd8IOxWMe4yfLMH8zLEXdI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724941369; x=1725546169;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=zB6f8368YsesH1OuP0NKiKNGKFYUgCW/dZ+5mkg3mrA=;
- b=brpLhIm1uEIjoR87QhJtUj56/PKzvyIN8vbo+f5JmzSRweBO68NvmGXreSndDsbGew
- jXSsRVlrpCp3xUqsXYNT+I3DXzYLsJvUu4mWUs2ymdQtvCSNKl5IDdgfwPXysW8Yg8Tk
- tpgDpoYTIj35cA2fPjbi4JMnHIEUgc4r1ECsUsuKsxCYPjhugkla9zoboXAFOFFxdw8w
- x7gM9on8EasE/DQ/rljW/Hct/44ELLJaq9sIKufu7kWcYAg2CiaZXWX9BS+9hup4BowQ
- CdWHR9YH3jeruaA8tnNYcAPOEI+PVuUTxXNbet9vE6e/P4E+7YOvT3+c2LjNBmT2Np5L
- HDiw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWegD+JRa117TwOZTvEmPgrYnyJKfhmDYGiQcRVRrnRloDnUZLcLx1ICkqnZUutviXoB9SQ3eU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx1hyJehCx/ItGMGxju0x5JEtnkj1sB0hlKMwN0almdIEym3gOr
- zjwO7kCYDoJkwqOhUrNYjjog5i16asbFSNYiK1LKuFIQ/ng52ZFGhnXrypDMO6j/KCn179gL6cO
- 5
-X-Google-Smtp-Source: AGHT+IE34q58xKS3IUJNvQE8Tj330FTk8F2+wK/RuSO9SGYwJCQiebXFzHIkCl757BD1F/MuEhWreg==
-X-Received: by 2002:adf:efc9:0:b0:371:87d4:8f23 with SMTP id
- ffacd0b85a97d-3749b585a68mr2073052f8f.58.1724941369160; 
- Thu, 29 Aug 2024 07:22:49 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:12f5:c9c:a0e1:6915?
- ([2a01:e0a:982:cbb0:12f5:c9c:a0e1:6915])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42bb6e274c1sm18987835e9.36.2024.08.29.07.22.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 Aug 2024 07:22:48 -0700 (PDT)
-Message-ID: <b2a176a0-f3fc-440c-ba59-8bb97fb858dd@linaro.org>
-Date: Thu, 29 Aug 2024 16:22:48 +0200
+ d=1e100.net; s=20230601; t=1724941529; x=1725546329;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=euW7zubb7mEKcnCEznURmxsPKVG/wJNrsIishYFovig=;
+ b=Qxv9JsVNyJKR5tZF29GxLF10Zb5xdW2lfJlwo4r5uwZN/VQHo2rQVNFxU4v85Vf9E9
+ aIu9Pp7cCwdTyt2PFBSkseePcQG71tX1eocWMnzlvNxdskXuvid66cfHtQC13WUv8Ln4
+ Ud7AnXYIP+jHDF+bdurMcx2CpVZdzJ7p9IcJKhTHxqsKwJjxbEPuKp9JiiLa64G6HTDk
+ OUJgOfnLDvPl2NbR6wmVpQh/duP3Ii7EH/jxn5QUJPx9Ab4SpLbESWv7dkgWxkCN+JeT
+ Qhvgz/rx326CAODZhgozgZKPR+Js3QX3W2fzauCnzeDskcjfopJ0KJjvVenOaMckrr/o
+ 2dmg==
+X-Gm-Message-State: AOJu0YzfQrkEkDtqxLPgbO/FkBO9ZwqhmBDczMDsfE5DLaE8/uv9njn1
+ McuYbY8IXUiI6VyeiYoQXEbQjdz1V8ebFFoQyRaueb58TcjAunKeLLZdENvOvwyVjG35Kk+YMWP
+ 7u8jNXznnJHVGIgXbKS5pVQH8rr8CVNSujT1aWeu5WGe8/5eKaxdSSg==
+X-Google-Smtp-Source: AGHT+IEZQ9iIUf8/+gxHBHxvGYkc7NrnFYuXUQp6OiEbb5KjlbwFVQlAlZV/uSSGhXoYWbsHLtV5AZv2el49iHgr2MQ=
+X-Received: by 2002:a05:6830:4123:b0:709:4829:47bd with SMTP id
+ 46e09a7af769-70f5c3d97b2mr2775000a34.22.1724941529011; Thu, 29 Aug 2024
+ 07:25:29 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v5 03/20] test: Pass stderr to stdout
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-References: <20240828220846.1205813-1-sjg@chromium.org>
- <20240828220846.1205813-4-sjg@chromium.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20240828220846.1205813-4-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20240825122617.3708982-1-dario.binacchi@amarulasolutions.com>
+ <20240825122617.3708982-2-dario.binacchi@amarulasolutions.com>
+ <CAFLszTgN=GWbrJAmtBrb95i2ovAhfE1BPco5p3whnL-oCAhbKw@mail.gmail.com>
+In-Reply-To: <CAFLszTgN=GWbrJAmtBrb95i2ovAhfE1BPco5p3whnL-oCAhbKw@mail.gmail.com>
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Date: Thu, 29 Aug 2024 16:25:18 +0200
+Message-ID: <CABGWkvpfiduptB9H_5zK3SwKwXjuQN1u1YPGukypviDstuZoEg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] cmd: booti: adjust the print format
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, linux-amarula@amarulasolutions.com, 
+ Eddie James <eajames@linux.ibm.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,45 +84,89 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 29/08/2024 00:08, Simon Glass wrote:
-> Some tests may output things to stderr. Ensure that this output is not
-> dropped, by redirecting it to stdout
+Hi Simon,
 
-Can't you make sure to output all labgrid output to stdout in the hook script instead ?
+On Thu, Aug 29, 2024 at 4:05=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi Dario,
+>
+> On Sun, 25 Aug 2024 at 06:26, Dario Binacchi
+> <dario.binacchi@amarulasolutions.com> wrote:
+> >
+> > All three addresses printed are in hexadecimal format, but only the
+> > first two have the "0x" prefix. The patch aligns the format of the
+> > "end" address with the other two by adding the "0x" prefix.
+> >
+> > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> >
+> > ---
+> >
+> >  cmd/booti.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/cmd/booti.c b/cmd/booti.c
+> > index 62b19e834366..ea811244a0a9 100644
+> > --- a/cmd/booti.c
+> > +++ b/cmd/booti.c
+> > @@ -78,7 +78,7 @@ static int booti_start(struct bootm_info *bmi)
+> >
+> >         /* Handle BOOTM_STATE_LOADOS */
+> >         if (relocated_addr !=3D ld) {
+> > -               printf("Moving Image from 0x%lx to 0x%lx, end=3D%lx\n",=
+ ld,
+> > +               printf("Moving Image from 0x%lx to 0x%lx, end=3D0x%lx\n=
+", ld,
+> >                        relocated_addr, relocated_addr + image_size);
+> >                 memmove((void *)relocated_addr, (void *)ld, image_size)=
+;
+> >         }
+> > --
+> > 2.43.0
+> >
+>
+> I really don't like this...numbers are hex in U-Boot and this just
+> adds confusion.
 
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
-> (no changes since v1)
-> 
->   test/py/u_boot_spawn.py | 2 ++
->   1 file changed, 2 insertions(+)
-> 
-> diff --git a/test/py/u_boot_spawn.py b/test/py/u_boot_spawn.py
-> index 97e95e07c80..81a09a9d639 100644
-> --- a/test/py/u_boot_spawn.py
-> +++ b/test/py/u_boot_spawn.py
-> @@ -10,6 +10,7 @@ import re
->   import pty
->   import signal
->   import select
-> +import sys
->   import time
->   import traceback
->   
-> @@ -59,6 +60,7 @@ class Spawn:
->                   signal.signal(signal.SIGHUP, signal.SIG_DFL)
->                   if cwd:
->                       os.chdir(cwd)
-> +                sys.stderr = sys.stdout
->                   os.execvp(args[0], args)
->               except:
->                   print('CHILD EXECEPTION:')
+Sorry, but I'm quite confused.
+Doesn't printing 3 numbers in hexadecimal format with different
+formatting (two with `0x` and
+ one without) create more confusion?
+At least we should ensure formatting consistency.
+Also, it seems to me that this patch:
+https://patchwork.ozlabs.org/project/uboot/patch/20240825122617.3708982-1-d=
+ario.binacchi@amarulasolutions.com/
+has been considered correct.
 
+Thanks and regards,
+Dario
+>
+> Regards,
+> Simon
+
+
+
+--=20
+
+Dario Binacchi
+
+Senior Embedded Linux Developer
+
+dario.binacchi@amarulasolutions.com
+
+__________________________________
+
+
+Amarula Solutions SRL
+
+Via Le Canevare 30, 31100 Treviso, Veneto, IT
+
+T. +39 042 243 5310
+info@amarulasolutions.com
+
+www.amarulasolutions.com
