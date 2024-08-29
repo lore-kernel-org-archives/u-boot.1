@@ -4,68 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96632C83F2D
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 15:02:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4BEEC83F2E
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 15:02:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4979288C90;
-	Thu, 29 Aug 2024 17:00:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B86DB88C44;
+	Thu, 29 Aug 2024 17:00:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UVFdzFFZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Rx81uHnO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEE4188C45; Thu, 29 Aug 2024 17:00:40 +0200 (CEST)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id BC82988C35; Thu, 29 Aug 2024 17:00:45 +0200 (CEST)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 473BC88C35
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 17:00:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D1AF088CD8
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 17:00:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6bf705959f1so7060766d6.1
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 08:00:38 -0700 (PDT)
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-6bf7f4a133aso4145726d6.2
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 08:00:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724943637; x=1725548437; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4OxkXfxgeJFZHSvjOaB9yCSCoeq0bh2HYx9xcp20S1g=;
- b=UVFdzFFZB9pxpY58/YgLFhirzumlc1cPeV1wHqEKXgTOCLod4gmNq22Y+1SedGxeOZ
- 1sT9B/I0c5fVyrbQCbEZwjwH3XPPvzEFNlZvHkTEyBJkfMMtzH/qvu26ReJJ7Z/Lv8SK
- 9NBmeoxrC0HT3HF0vVuGPq85XQVmmpylicxRY=
+ d=chromium.org; s=google; t=1724943642; x=1725548442; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qLD4GbrXbRCMmB9UnIp7cpELepp3L4pbA6UIORsTGTU=;
+ b=Rx81uHnOWTFz87IHIl4LE8Muwx10jo7jUq1siWYgGUYLq15Kx+nb12UX05ErnknBTm
+ 45yPo2Oedgj3lX5NSvytIEukIV1nm82+NvGbj5wT5stkFSZQixnWSgKZDLaUgW0sExkp
+ Hg0bR4tCda20CdExUmqeBLh7IezjIhhOF0dPc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724943637; x=1725548437;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=4OxkXfxgeJFZHSvjOaB9yCSCoeq0bh2HYx9xcp20S1g=;
- b=ForbIjn5uL5kQRIlHVIBIR945+hM2opobbUIznZDbCAtu8ceFdkvKOd3aT7y/4m6dU
- cTDsPMlc1V4s45lkdvwJHq+JZ9qqpR/MJemBPfFOCVIpIuiLqMjVTm5evGH7r/1PCbUj
- gJQm3VSeJFr/jcWTu8JWRJUG/8FVkvVyLkfHC2jZh3+NjmyzqXQDPXNPa77IgETIvZVi
- POPv5cx7WyrTBJt8vcv+UWQlGDLahmTqWWJdebfWIw+m5q5Zox+aIbPPXUeakrBIJe+1
- 8qaDQUv8m1EIfXcTXYHo4u6ku40BIv8EZmyBQIh0tmTwwcr0+cSjDvYplKYEw3Mm1AVZ
- GSHg==
-X-Gm-Message-State: AOJu0YxHOUPF8qUJqpXNBKzMBYhVzJcI9EgMwPcQmbvUz7W517ngvBBh
- m1DISI0rQCOknRYslknhIVoo4ljXkYHMh/GyJszdl4eRR3hID9W0p/CvuHBfq5+pWpybi/0kJ5W
- ULbxw2y9zwHjpe9NCbTNjzYPpixzBMgzh77cO4GiT0gz0b24=
-X-Google-Smtp-Source: AGHT+IGsF4rCkd1Ow6Eh5ETtwkXhshselbPkGRWeXRaNdCAfCHBG39WJCDBUqRnmwsgSZ929d6S18hrDsxMRNFgRsZc=
-X-Received: by 2002:a05:6214:3106:b0:6c1:6c05:fa87 with SMTP id
- 6a1803df08f44-6c341d02305mr46542056d6.8.1724943636674; Thu, 29 Aug 2024
- 08:00:36 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1724943642; x=1725548442;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=qLD4GbrXbRCMmB9UnIp7cpELepp3L4pbA6UIORsTGTU=;
+ b=tkxzNXth2q27DmclmL9Mj2zVYoMgm+WWhq5vFkfPlcdS7ynjuuF+ngF6akK3R67WHO
+ gxUE7oX9KoX2ZNH+yQx/4FciRjLUdBY+GM8m4Hvl5ctZelZr972TXAvz+WAqM5b0fuCS
+ TIQM1lZA/6Wl/z0GvGM2o+Ue0Hty9QrQB7L7SoguFaxBdGjq9R+tAMEZZcMR2pSCrFBc
+ t8cJNc+ihF9I4xwOajdIzBK1NsK8r30ysoE997wh1nMylVmW/okObzDeGqJJ7E8CF383
+ PThYfYea9LiLFdm/DmssCix8SvYuI5AYbVceHbSmj6KNiYgyzoX5y7ZVupS0otREGM8M
+ 4O4A==
+X-Gm-Message-State: AOJu0YyCGXOFaTtjzuWKlEr8gykNyVUO5bPTrYiebjPAHKjyQ5jchsA9
+ ZvbIIQDdvawLKk0/FCqxC6E0M1nz6+uOp70GJ2wj6BXNXuq5utNFCII2kXiN9HqMjojxlNHmYVQ
+ r/MRmCpYSRHtofHBYutP3An/4o2x3TIakM6BX
+X-Google-Smtp-Source: AGHT+IFuey3sD7Q58ytoEXnJ+uPNlffNOINYVrIKoRUbj0dygnynm6CLXLf/0U49ftm6C7piB3D4c3xQPCnD7K7/RCE=
+X-Received: by 2002:a05:6214:598e:b0:6b5:4435:fe4d with SMTP id
+ 6a1803df08f44-6c33e6b1cddmr39921686d6.38.1724943641512; Thu, 29 Aug 2024
+ 08:00:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240828220846.1205813-1-sjg@chromium.org>
- <20240829140921.GX2479150@bill-the-cat>
-In-Reply-To: <20240829140921.GX2479150@bill-the-cat>
+References: <20240825122617.3708982-1-dario.binacchi@amarulasolutions.com>
+ <20240825122617.3708982-2-dario.binacchi@amarulasolutions.com>
+ <CAFLszTgN=GWbrJAmtBrb95i2ovAhfE1BPco5p3whnL-oCAhbKw@mail.gmail.com>
+ <CABGWkvpfiduptB9H_5zK3SwKwXjuQN1u1YPGukypviDstuZoEg@mail.gmail.com>
+In-Reply-To: <CABGWkvpfiduptB9H_5zK3SwKwXjuQN1u1YPGukypviDstuZoEg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 29 Aug 2024 09:00:25 -0600
-Message-ID: <CAFLszTgTwHbp8TPaca4jOis+qh=yEUpQA7T-w3toB4hLh0Y-MQ@mail.gmail.com>
-Subject: Re: [PATCH v5 00/20] labgrid: Provide an integration with Labgrid
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Thu, 29 Aug 2024 09:00:30 -0600
+Message-ID: <CAFLszTg47_=TnQ6qy2UJj0n89B8TWrw0tH4RVk+GQKFS_+Sjmg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] cmd: booti: adjust the print format
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Cc: u-boot@lists.denx.de, linux-amarula@amarulasolutions.com, 
+ Eddie James <eajames@linux.ibm.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,131 +88,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Dario,
 
-On Thu, 29 Aug 2024 at 08:13, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 29 Aug 2024 at 08:25, Dario Binacchi
+<dario.binacchi@amarulasolutions.com> wrote:
 >
-> On Wed, Aug 28, 2024 at 04:08:26PM -0600, Simon Glass wrote:
+> Hi Simon,
 >
-> > Labgrid provides access to a hardware lab in an automated way. It is
-> > possible to boot U-Boot on boards in the lab without physically touching
-> > them. It relies on relays, USB UARTs and SD muxes, among other things.
+> On Thu, Aug 29, 2024 at 4:05=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
+ote:
 > >
-> > By way of background, about 4 years ago I wrong a thing called Labman[1]
-> > which allowed my lab of about 30 devices to be operated remotely, using
-> > tbot for the console and build integration. While it worked OK and I
-> > used it for many bisects, I didn't take it any further.
+> > Hi Dario,
 > >
-> > It turns out that there was already an existing program, called Labgrid,
-> > which I did not know about at time (thank you Tom for telling me). It is
-> > more rounded than Labman and has a number of advantages:
+> > On Sun, 25 Aug 2024 at 06:26, Dario Binacchi
+> > <dario.binacchi@amarulasolutions.com> wrote:
+> > >
+> > > All three addresses printed are in hexadecimal format, but only the
+> > > first two have the "0x" prefix. The patch aligns the format of the
+> > > "end" address with the other two by adding the "0x" prefix.
+> > >
+> > > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> > >
+> > > ---
+> > >
+> > >  cmd/booti.c | 2 +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > >
+> > > diff --git a/cmd/booti.c b/cmd/booti.c
+> > > index 62b19e834366..ea811244a0a9 100644
+> > > --- a/cmd/booti.c
+> > > +++ b/cmd/booti.c
+> > > @@ -78,7 +78,7 @@ static int booti_start(struct bootm_info *bmi)
+> > >
+> > >         /* Handle BOOTM_STATE_LOADOS */
+> > >         if (relocated_addr !=3D ld) {
+> > > -               printf("Moving Image from 0x%lx to 0x%lx, end=3D%lx\n=
+", ld,
+> > > +               printf("Moving Image from 0x%lx to 0x%lx, end=3D0x%lx=
+\n", ld,
+> > >                        relocated_addr, relocated_addr + image_size);
+> > >                 memmove((void *)relocated_addr, (void *)ld, image_siz=
+e);
+> > >         }
+> > > --
+> > > 2.43.0
+> > >
 > >
-> > - does not need udev rules, mostly
-> > - has several existing users who rely on it
-> > - supports multiple machines exporting their devices
-> >
-> > It lacks a 'lab check' feature and a few other things, but these can be
-> > remedied.
-> >
-> > On and off over the past several weeks I have been experimenting with
-> > Labgrid. I have managed to create an initial U-Boot integration (this
-> > series) by adding various features to Labgrid[2] and the U-Boot test
-> > hooks.
-> >
-> > I hope that this might inspire others to set up boards and run tests
-> > automatically, rather than relying on infrequent, manual test. Perhaps
-> > it may even be possible to have a number of labs available.
-> >
-> > Included in the integration are a number of simple scripts which make it
-> > easy to connect to boards and run tests:
-> >
-> > ub-int <target>
-> >     Build and boot on a target, starting an interactive session
-> >
-> > ub-cli <target>
-> >     Build and boot on a target, ensure U-Boot starts and provide an interactive
-> >     session from there
-> >
-> > ub-smoke <target>
-> >     Smoke test U-Boot to check that it boots to a prompt on a target
-> >
-> > ub-bisect <target>
-> >     Bisect a git tree to locate a failure on a particular target
-> >
-> > ub-pyt <target> <testspec>
-> >     Run U-Boot pytests on a target
-> >
-> > Some of these help to provide the same tbot[4] workflow which I have
-> > relied on for several years, albeit much simpler versions.
-> >
-> > The goal here is to create some sort of script which can collect
-> > patches from the mailing list, apply them and test them on a selection
-> > of boards. I suspect that script already exists, so please let me know
-> > what you suggest.
-> >
-> > I hope you find this interesting and take a look!
-> >
-> > [1] https://github.com/sjg20/u-boot/tree/lab6a
-> > [2] https://github.com/labgrid-project/labgrid/pull/1411
-> > [3] https://github.com/sjg20/uboot-test-hooks/tree/labgrid
-> > [4] https://tbot.tools/index.html
+> > I really don't like this...numbers are hex in U-Boot and this just
+> > adds confusion.
 >
-> Part of my concern here is still that this series contains:
+> Sorry, but I'm quite confused.
+> Doesn't printing 3 numbers in hexadecimal format with different
+> formatting (two with `0x` and
+>  one without) create more confusion?
+> At least we should ensure formatting consistency.
+> Also, it seems to me that this patch:
+> https://patchwork.ozlabs.org/project/uboot/patch/20240825122617.3708982-1=
+-dario.binacchi@amarulasolutions.com/
+> has been considered correct.
 >
-> - Generic test improvements and fixes:
->
-> >   test: Use a constant for the test timeout
-> >   test: Pass stderr to stdout
-> >   test: Avoid failing skipped tests
-> >   test: Move the receive code into a function
-> >   test: Separate out the exception handling
-> >   test: Detect dead connections
-> >   test: Tidy up remaining exceptions
-> >   test: Improve handling of sending commands
-> >   test: Fix mulptiplex_log typo
-> >   test: Avoid double echo when starting up
+> Thanks and regards,
 
-So should I send those as a separate series?
-
-Note that when things land we will need to look at the gitlab output,
-to make sure it is what we want.
-
->
-> - Labgrid specific listed as generic changes:
->
-> >   test: Release board after tests complete
-> >   test: Try to shut down the lab console gracefully
->
-> - Your labgrid+builman implementation specific changes:
->
-> >   test: Allow signaling that U-Boot is ready
-> >   test: Allow connecting to a running board
-> >   test: Create a common function to get the config
-> >   test: Introduce the concept of a role
-> >   test: Introduce lab mode
-> >   test: Add a section for closing the connection
-> >   test: Support testing with two board-builds
->
-> Which makes this harder to review and clearly merge. For example, we
-> already have hooks for power on / power off, and we should just call
-> them as wow that would make everyones lab easier (I used to have a
-> pre-script to turn on everything).
-
-Power on/off is handled by the strategy[1] in Labgrid. Some boards
-have power control, some don't. Some use reset, some don't. Some need
-a recovery button to be pressed when resetting. The fundamental point
-here is that Labgrid knows how to manage the lab, so any external
-scripts are always going to be fiddly. Also, they are such a pain to
-maintain.
-
-I see Labgrid as a lab manager, something which looks after the lab
-and knows how to operate it.
-
->
-> --
-> Tom
+IMO we should avoid adding 0x to things...particularly for addresses.
+Better to remove it when it has crept in.
 
 Regards,
-Simon
-
-[1] https://github.com/labgrid-project/labgrid/pull/1411/commits/7445dc5ea7ffcd9f5f1d99f5b12f58c6681ef6ac#diff-cb9504114f18f1638d04357204de7a2c4a7acb87347d6e97569b4ecf74adbabe
+SImon
