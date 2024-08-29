@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F04DAC83F14
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 12:53:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D8A5C83F16
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 13:13:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3989F88B23;
-	Thu, 29 Aug 2024 14:53:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8C66F887F3;
+	Thu, 29 Aug 2024 15:13:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ED+4raBz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Wdf2w/Kf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3C2B88AD7; Thu, 29 Aug 2024 14:53:04 +0200 (CEST)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
+ id 1744388B5F; Thu, 29 Aug 2024 10:30:54 +0200 (CEST)
+Received: from mail-pf1-x441.google.com (mail-pf1-x441.google.com
+ [IPv6:2607:f8b0:4864:20::441])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A336288BE4
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 14:52:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C068588B0B
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 10:30:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-5334c4d6829so795539e87.2
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 05:52:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=coiaprant@gmail.com
+Received: by mail-pf1-x441.google.com with SMTP id
+ d2e1a72fcca58-714302e7285so329392b3a.2
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 01:30:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724935976; x=1725540776; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=njCxtvhO2DhRlGjGeUUhgFuEcta2vt1MdzgZ5GW8MEE=;
- b=ED+4raBzybWpSTI6OiiuDiQqegvwwUgpQmkjwtTwsLWF7/bkRw6nzQzDczd6CqQsyD
- BUQhbfZRrL5RbBOh/6Q46VKQ+jQwUvNqBCRV3rBGhoGieZPrwpk3MEyqz4e+pS5yjnYR
- ePhh+AWvsGABdR1DkkmIyeVM/gq1Z4Sj1zZ7xC+a/xTYQ0fL3fpsHGwAWDcq865ZwiY/
- A1P2AQDfF+gjNYFz87R0erJ20a14KhyLEzVgqjRkV16ceSFFitIEMdgfxZok1aGrqAt+
- Py6eBOTOiE1t9slGRw4t0cgEG4l1TwoA/tkMIB0OZQLmhL+nD6gY3nvzk9gOWkNGFe3y
- 5hKw==
+ d=gmail.com; s=20230601; t=1724920249; x=1725525049; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=jaYmFLWlSAXMvw/4JyRF0sEo92YZIm+UJnVLARyAR8o=;
+ b=Wdf2w/KfGUDs9Vew/f/8hRzUECfu1jK4nku02dIMVKjFgJc54cqeZU/lSDxK4VQSgM
+ 89prlZyEMS28I9eFA/N2gib2UEiXW9OrQdAdPq8oAUrdnGPmxC8tdmt3vPBgJuITCDbR
+ o0V7EPMhEFIcE1SiOOrw993G3N8DqW85b7Ijew63k6RpdqS7Hxdw+V8lMK2AjrLOwlDw
+ asI8m3Xei4l436OswwWpzr9ewC/SDxD3eZwmEDRBSYwTc8KMOmfWILu4nuWl6n064UIN
+ xlw6LdvIgxdd1UaPnOuUvK2ZjGRRONMDN2uf3LQQDemEhoyNNDLs0yMaoYjw2DDYbV9w
+ w6gQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724935976; x=1725540776;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=njCxtvhO2DhRlGjGeUUhgFuEcta2vt1MdzgZ5GW8MEE=;
- b=BsXwHbmMIURyCPQr95zLogviyIq5uVBqKOgz00dk0lcqAXpTXBBdBwR/Ug+bffvFsV
- nz4yP7jx08ayvcwNnrN+4dF+2CG9Z3FFrrTNDp0lrJpmsxnWKsZ+9u6k3cZsseJkzv1N
- 0sHWJkjI8I8gQY0XwxaC1DNYN4eQnO0xqy8utHdb5lhm58vm7hKnPNHw/JihI3jhEu6o
- zLHc4fmeiEtaHgytzfRntf9NqoC7qg2rcV4hXUIEvXh/e9WoPJTLZXstBHuQ1Utb/iqI
- 5u9lqIij+fWO3ne9JYcS/WJMBT/BhkkUy8AsfkBcgf8BummqbhIYi7cm/3hBmYSGCAxk
- KTvQ==
-X-Gm-Message-State: AOJu0YxYy5jrYtgfIj3Hp+uI5QeoPVlgH6E0xrquD7u/AtUc/uxq5JWO
- elSc2wtQTvsPwsXLVY8j2c3qLiO40t/a9vRIHWqnUatMBcktbLaYaYOiEsDqp8rYjqU1x/SGSEU
- B+hbsHcuk1tnFwQp0naEmHNoZ+DI=
-X-Google-Smtp-Source: AGHT+IF0rLdsBMY+ff+7TZjd3TJH9KaQcab94QuSL7wnB/6eRBSOFj4QCNX2DnO3VwLySQTrxk/LvL/8Vf8km0SeGHk=
-X-Received: by 2002:a05:6512:3189:b0:533:77d:116f with SMTP id
- 2adb3069b0e04-5353e541ceamr1678938e87.9.1724935975367; Thu, 29 Aug 2024
- 05:52:55 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1724920249; x=1725525049;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jaYmFLWlSAXMvw/4JyRF0sEo92YZIm+UJnVLARyAR8o=;
+ b=aqBkvw1Xe4tiUl7CdTmrCkwTMCGSE1QnlunXwZAjQUCfGxhAa038Amclr/jI2B1kLm
+ EPUbNGwCbXTfwDK5XkGlBla86L06hHRol/gSPcnBTbcJVizt6GdFPuRmbGL2IaiYR+c8
+ VgEkmOfNvjf2KnNVtFlHh1ZwJSWsbZgdIHdHfks0Qc6fv1FOq3RBrSeJp4wDurFVhcHQ
+ VOeKZ9CIpOzPQYDGlQSM829dRMDpwdJ4ucFqGniOgKX8Gjl4iS3nxLeiILFAjyGOPiMS
+ SodzzMtEuSyl9zLDHdL98AQB2ONXYr/nD5vtsudv2PdpGcuQIOHxKnNMxHYhVB2/9fg1
+ LSMA==
+X-Gm-Message-State: AOJu0YwP4TZJgG2za2F+jSA/kzbrvfAIuQm0hIIm6hTBpvh8aGzQsyb/
+ DIOGE8mcrQTBWyFW6jJFIf4r3kxw4K7CgOjqG0rhTisubDJyFtRua7qoLD3AEoDpyA==
+X-Google-Smtp-Source: AGHT+IGwwhsGRaWgfV8DKvNeHQz6Rk3pbvMeK17wIce+KQyvYAHbS3TcKhQSZQoMIANlaanjXcpLiA==
+X-Received: by 2002:a05:6a20:e617:b0:1c4:2134:dd54 with SMTP id
+ adf61e73a8af0-1cce10ef0cfmr2459396637.45.1724920249354; 
+ Thu, 29 Aug 2024 01:30:49 -0700 (PDT)
+Received: from server.lan ([103.213.4.16]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-20515552b6dsm6582755ad.249.2024.08.29.01.30.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 Aug 2024 01:30:48 -0700 (PDT)
+From: Coia Prant <coiaprant@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Coia Prant <coiaprant@gmail.com>
+Subject: [PATCH 1/2] watchdog: Add a driver for the photonicat watchdog
+Date: Thu, 29 Aug 2024 16:30:34 +0800
+Message-Id: <20240829083035.227423-1-coiaprant@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <20240828153637.1818625-1-jerome.forissier@linaro.org>
-In-Reply-To: <20240828153637.1818625-1-jerome.forissier@linaro.org>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 29 Aug 2024 09:52:44 -0300
-Message-ID: <CAOMZO5A0+xsoQ=3jETxnmJnhVwUjSfEZagEE9jZT152Gu=aUtQ@mail.gmail.com>
-Subject: Re: [PATCH] mach-imx: do not use if_changed more than once per target
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Gary Bisson <bisson.gary@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, 
- Mathieu Othacehe <m.othacehe@gmail.com>, Stefano Babic <sbabic@denx.de>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>, 
- Sean Anderson <seanga2@gmail.com>, Hiago De Franco <hiago.franco@toradex.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 29 Aug 2024 15:13:13 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,31 +88,266 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
+This driver supports the photonicat watchdog timers.
 
-On Wed, Aug 28, 2024 at 12:37=E2=80=AFPM Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
-> doc/develop/makefiles.rst has the following note:
->
->   if_changed should not be used more than once per target.
->   It stores the executed command in a corresponding .cmd
->   file and multiple calls would result in overwrites and
->   unwanted results when the target is up to date and only the
->   tests on changed commands trigger execution of commands.
->
-> The mach-imx Makefile does not follow this recommandation, so fix it
-> by implementing a single command that performs both the cpp_cfg
-> and imx9_check actions.
->
-> This change fixes an issue with "tools/buildman/buildman imx8ulp_evk"
-> failing every other time [1].
->
-> [1] https://lists.denx.de/pipermail/u-boot/2024-August/563192.html
->
-> Fixes: f637dfe8c468 ("mach-imx: Add i.MX93 binman support.")
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Signed-off-by: Coia Prant <coiaprant@gmail.com>
+---
+ drivers/watchdog/Kconfig    |   6 +
+ drivers/watchdog/Makefile   |   1 +
+ drivers/watchdog/pcat_wdt.c | 218 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 225 insertions(+)
+ create mode 100644 drivers/watchdog/pcat_wdt.c
 
-Thanks for the fix.
+diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+index 0c3e9913..f0a52ecf 100644
+--- a/drivers/watchdog/Kconfig
++++ b/drivers/watchdog/Kconfig
+@@ -421,4 +421,10 @@ config WDT_FTWDT010
+ 	help
+ 	  Faraday Technology ftwdt010 watchdog is an architecture independent
+ 	  watchdog. It is usually used in SoC chip design.
++
++config WDT_PCAT
++	bool "photonicat board watchdog support"
++	depends on WDT && SERIAL && DM
++	help
++	  Select this to enable watchdog timer on photonicat board.
+ endmenu
+diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+index 7b39adcf..829b5ed1 100644
+--- a/drivers/watchdog/Makefile
++++ b/drivers/watchdog/Makefile
+@@ -50,3 +50,4 @@ obj-$(CONFIG_WDT_STM32MP) += stm32mp_wdt.o
+ obj-$(CONFIG_WDT_SUNXI) += sunxi_wdt.o
+ obj-$(CONFIG_WDT_TANGIER) += tangier_wdt.o
+ obj-$(CONFIG_WDT_XILINX) += xilinx_wwdt.o
++obj-$(CONFIG_WDT_PCAT) += pcat_wdt.o
+\ No newline at end of file
+diff --git a/drivers/watchdog/pcat_wdt.c b/drivers/watchdog/pcat_wdt.c
+new file mode 100644
+index 00000000..cac07fb6
+--- /dev/null
++++ b/drivers/watchdog/pcat_wdt.c
+@@ -0,0 +1,218 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++#include <dm.h>
++#include <dm/device_compat.h>
++#include <wdt.h>
++#include <asm/gpio.h>
++#include <linux/delay.h>
++#include <serial.h>
++#include <dm/device-internal.h>
++
++struct pcat_wdt_priv
++{
++	struct udevice *serial_dev;
++	struct dm_serial_ops *serial_ops;
++	uint16_t packet_count;
++};
++
++static uint16_t pcat_pmu_serial_compute_crc16(const uint8_t *data,
++											  size_t len)
++{
++	uint16_t crc = 0xFFFF;
++	size_t i;
++	unsigned int j;
++
++	for (i = 0; i < len; i++)
++	{
++		crc ^= data[i];
++		for (j = 0; j < 8; j++)
++		{
++			if (crc & 1)
++			{
++				crc = (crc >> 1) ^ 0xA001;
++			}
++			else
++			{
++				crc >>= 1;
++			}
++		}
++	}
++
++	return crc;
++}
++
++static int pcat_wdt_reset(struct udevice *dev)
++{
++	struct pcat_wdt_priv *priv = dev_get_priv(dev);
++	uint8_t packet[13] = "\xA5\x01\x81\x00\x00\x03\x00\x01\x00"
++						 "\x00\x00\x00\x5A";
++	uint16_t crc;
++	int err = 0;
++	unsigned int i;
++
++	packet[3] = priv->packet_count & 0xFF;
++	packet[4] = (priv->packet_count >> 8) & 0xFF;
++	priv->packet_count++;
++
++	crc = pcat_pmu_serial_compute_crc16(packet + 1, 9);
++	packet[10] = crc & 0xFF;
++	packet[11] = (crc >> 8) & 0xFF;
++
++	i = 0;
++	while (i < 13)
++	{
++		err = priv->serial_ops->putc(
++			priv->serial_dev, ((const char *)packet)[i]);
++		if (!err)
++		{
++			i++;
++		}
++		else if (err == -EAGAIN)
++		{
++			;
++		}
++		else
++		{
++			pr_err("%s: unable to send watchdog setup "
++				   "request: %d\n",
++				   __func__, err);
++			break;
++		}
++	}
++	return err;
++}
++
++static int pcat_wdt_setup(struct pcat_wdt_priv *priv, u64 timeout)
++{
++	uint8_t packet[16] = "\xA5\x01\x81\x00\x00\x06\x00\x13\x00"
++						 "\x3C\x3C\x00\x00\x00\x00\x5A";
++	uint16_t crc;
++	int err = 0;
++	unsigned int i;
++
++	if (timeout > 255)
++	{
++		pr_warn("%s: timeout cannot be more than 255s\n",
++				__func__);
++		timeout = 255;
++	}
++
++	packet[3] = priv->packet_count & 0xFF;
++	packet[4] = (priv->packet_count >> 8) & 0xFF;
++	priv->packet_count++;
++	packet[11] = timeout & 0xFF;
++
++	crc = pcat_pmu_serial_compute_crc16(packet + 1, 12);
++	packet[13] = crc & 0xFF;
++	packet[14] = (crc >> 8) & 0xFF;
++
++	i = 0;
++	while (i < 16)
++	{
++		err = priv->serial_ops->putc(
++			priv->serial_dev, ((const char *)packet)[i]);
++		if (!err)
++		{
++			i++;
++		}
++		else if (err == -EAGAIN)
++		{
++			;
++		}
++		else
++		{
++			pr_err("%s: unable to send watchdog setup "
++				   "request: %d\n",
++				   __func__, err);
++			break;
++		}
++	}
++
++	return err;
++}
++
++static int pcat_wdt_start(struct udevice *dev, u64 timeout, ulong flags)
++{
++	struct pcat_wdt_priv *priv = dev_get_priv(dev);
++
++	pcat_wdt_setup(priv, timeout);
++
++	return 0;
++}
++
++static int pcat_wdt_stop(struct udevice *dev)
++{
++	struct pcat_wdt_priv *priv = dev_get_priv(dev);
++
++	pcat_wdt_setup(priv, 0);
++
++	return 0;
++}
++
++static int dm_probe(struct udevice *dev)
++{
++	struct pcat_wdt_priv *priv = dev_get_priv(dev);
++	struct udevice *serial_dev = NULL;
++	struct dm_serial_ops *ops;
++	int ret;
++
++	ret = uclass_get_device_by_phandle(UCLASS_SERIAL, dev, "port",
++									   &serial_dev);
++	if (ret)
++	{
++		pr_err("%s: unable to find serial port device: %d\n",
++			   __func__, ret);
++		return ret;
++	}
++
++	ret = device_probe(serial_dev);
++	if (ret)
++	{
++		pr_err("%s: unable to probe serial port device: %d\n",
++			   __func__, ret);
++		return ret;
++	}
++
++	ops = serial_get_ops(serial_dev);
++	if (!ops)
++	{
++		printf("Cannot get ops for PMU serial port!\n");
++		return -EINVAL;
++	}
++
++	if (ops->setconfig)
++	{
++		ops->setconfig(serial_dev, SERIAL_DEFAULT_CONFIG);
++	}
++	if (ops->setbrg)
++	{
++		ops->setbrg(serial_dev, 115200);
++	}
++
++	priv->serial_dev = serial_dev;
++	priv->serial_ops = ops;
++	priv->packet_count = 0;
++
++	pcat_wdt_stop(dev);
++
++	return 0;
++}
++
++static const struct wdt_ops pcat_wdt_ops = {
++	.start = pcat_wdt_start,
++	.reset = pcat_wdt_reset,
++	.stop = pcat_wdt_stop,
++};
++
++static const struct udevice_id pcat_wdt_ids[] = {
++	{.compatible = "linux,wdt-pcat"},
++	{}};
++
++U_BOOT_DRIVER(wdt_pcat) = {
++	.name = "wdt_pcat",
++	.id = UCLASS_WDT,
++	.of_match = pcat_wdt_ids,
++	.ops = &pcat_wdt_ops,
++	.probe = dm_probe,
++	.priv_auto = sizeof(struct pcat_wdt_priv),
++};
+\ No newline at end of file
+-- 
+2.39.2
 
-Applied to u-boot-imx/master, thanks.
