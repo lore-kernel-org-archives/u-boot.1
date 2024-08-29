@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74B2BC83F2D
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 14:22:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF59EC83F2C
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 14:22:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B16E88C1B;
-	Thu, 29 Aug 2024 16:22:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7195C88C17;
+	Thu, 29 Aug 2024 16:22:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pSsguSAk";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jZ6shkHO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F24088B88; Thu, 29 Aug 2024 16:22:16 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 0414688C40; Thu, 29 Aug 2024 16:22:52 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB17B88C1C
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 16:22:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E5A488B88
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 16:22:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-3718eaf4046so598955f8f.3
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 07:22:13 -0700 (PDT)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-37196681d3bso455562f8f.3
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 07:22:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724941333; x=1725546133; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724941369; x=1725546169; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=v7x7lwbCNEY6e64YVx1m2T+gcDRt14vshyI5yzJekVo=;
- b=pSsguSAkZeomQBBAbIA7yLQ7p2dDbp8LkaCeVdZ1ShZFRz5GeiqTZ9qMDhPlICrBS6
- Ns/CY5XbPd9hCOczRph/CAs2HZVNer7RuRGpI2hJUi1EdgHeCd9bDG3VPmuthy6q3QFM
- 4OZYqy0owvBAId0rWPbbuQli8KxGR5PFSBjV82EnC5cCLF2/tHxucFj1LfEOzi1J2I2c
- NTo4QFvBdrBmw3RZtvkmfEsVNcDgHoOS064HsJL7O+VEwIon5iOtgH2tpj9hhc50qF5G
- EW7MH6x+jVRHFGzwB2p5mZdIn4J9NE86sMnxf1f+WboPhkAkru1Jy+nftJxCdgiK958T
- 2ckg==
+ :reply-to; bh=zB6f8368YsesH1OuP0NKiKNGKFYUgCW/dZ+5mkg3mrA=;
+ b=jZ6shkHOsHojhwL9eAKUR0i34UkRgIz0YMT5udLYWb/KX3hG3raDBolFRiBoGXYAO6
+ 0H84W1EnvxpdIvWCIOTvOOH03uo1PakPaonbUygO24pch6SmJtNcenG5XY3So5XUMeER
+ nAch/tV5McnuzALbxgUksUFf5oCuXs3XkB6950ZNh+reP0/Vk3HCDRo3Y6LdKh5DikCS
+ wxvrQ9Z7iF5YyD5ZvBwhFkFYYxF1U06jj0nHsuw7eLTtaPFi8NFw560Nddzyp4jSdPqt
+ Ewcdxco6XFRqYiC3OjF0LsQfRpz84bKR0y9/E2hDBuTlI/B4N9dpwxGO9FzRei7UGytP
+ Vgdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724941333; x=1725546133;
+ d=1e100.net; s=20230601; t=1724941369; x=1725546169;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=v7x7lwbCNEY6e64YVx1m2T+gcDRt14vshyI5yzJekVo=;
- b=TPrNzpDvUYfZ/8v1qpOj9v2AUOdYRdhfqiNy9rTCwubrN7M5ioGpK9Ik6OIY3KbYM7
- upyMP8dmjaUoqfP8UTMPDiVjuWGB1mefEt8n3AFsmsjwY5TwLmLAB5XIFySaHuyh6iLl
- 8VctVyrpJ8E5f5X7Od9dRCWI19VdJgkQt8il1hZjwTiKfvymO+kNXk29Bw+O5qw/4ENw
- A98U/iAlKECgQDevOpFF5dygFe4mKOdMKko8tnrGAmdNNksyqDPAtr9eidAGZpcVmZoJ
- 0LQ6zMOdyPyNcPk671DHl1duaxaLgCglXzm+zfvBhd8pSbBiNPaMQVeL+hgAmKSD4RrT
- 9rSw==
+ bh=zB6f8368YsesH1OuP0NKiKNGKFYUgCW/dZ+5mkg3mrA=;
+ b=brpLhIm1uEIjoR87QhJtUj56/PKzvyIN8vbo+f5JmzSRweBO68NvmGXreSndDsbGew
+ jXSsRVlrpCp3xUqsXYNT+I3DXzYLsJvUu4mWUs2ymdQtvCSNKl5IDdgfwPXysW8Yg8Tk
+ tpgDpoYTIj35cA2fPjbi4JMnHIEUgc4r1ECsUsuKsxCYPjhugkla9zoboXAFOFFxdw8w
+ x7gM9on8EasE/DQ/rljW/Hct/44ELLJaq9sIKufu7kWcYAg2CiaZXWX9BS+9hup4BowQ
+ CdWHR9YH3jeruaA8tnNYcAPOEI+PVuUTxXNbet9vE6e/P4E+7YOvT3+c2LjNBmT2Np5L
+ HDiw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX1jF0oEeglSqflHpzh7T938u82htoYpKxLuVwKuAgdwmFYdZ4pBlXTbnVAnhM/9Qyl1TdzaNw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzwwjVn/Vrqx4Mli4SLon2CbQm1USEfLYZMgzAjuxjGDxfMb86D
- +winRgUI6arO91SxUpwJyBbWQZAI51SDKVqYQqI2Rt4r7LHOJv9rKtQUlxA2HeoHHatD9JT7/LQ
- 6
-X-Google-Smtp-Source: AGHT+IEgrjF1R26qcg6aeJfrCau/+jfF76+tFaIOPZPEOL/cOp8v/jgHuJ8NcmBwF0hoAzYeT9uEUg==
-X-Received: by 2002:a05:6000:2ab:b0:371:8e24:1191 with SMTP id
- ffacd0b85a97d-3749b583df1mr3470923f8f.53.1724941332741; 
- Thu, 29 Aug 2024 07:22:12 -0700 (PDT)
+ AJvYcCWegD+JRa117TwOZTvEmPgrYnyJKfhmDYGiQcRVRrnRloDnUZLcLx1ICkqnZUutviXoB9SQ3eU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx1hyJehCx/ItGMGxju0x5JEtnkj1sB0hlKMwN0almdIEym3gOr
+ zjwO7kCYDoJkwqOhUrNYjjog5i16asbFSNYiK1LKuFIQ/ng52ZFGhnXrypDMO6j/KCn179gL6cO
+ 5
+X-Google-Smtp-Source: AGHT+IE34q58xKS3IUJNvQE8Tj330FTk8F2+wK/RuSO9SGYwJCQiebXFzHIkCl757BD1F/MuEhWreg==
+X-Received: by 2002:adf:efc9:0:b0:371:87d4:8f23 with SMTP id
+ ffacd0b85a97d-3749b585a68mr2073052f8f.58.1724941369160; 
+ Thu, 29 Aug 2024 07:22:49 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:982:cbb0:12f5:c9c:a0e1:6915?
  ([2a01:e0a:982:cbb0:12f5:c9c:a0e1:6915])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3749ee5080asm1608935f8f.18.2024.08.29.07.22.12
+ 5b1f17b1804b1-42bb6e274c1sm18987835e9.36.2024.08.29.07.22.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 Aug 2024 07:22:12 -0700 (PDT)
-Message-ID: <904f71d4-b2b4-428b-bb2f-31fe6d916135@linaro.org>
-Date: Thu, 29 Aug 2024 16:22:11 +0200
+ Thu, 29 Aug 2024 07:22:48 -0700 (PDT)
+Message-ID: <b2a176a0-f3fc-440c-ba59-8bb97fb858dd@linaro.org>
+Date: Thu, 29 Aug 2024 16:22:48 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v5 01/20] test: Allow signaling that U-Boot is ready
+Subject: Re: [PATCH v5 03/20] test: Pass stderr to stdout
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>
 References: <20240828220846.1205813-1-sjg@chromium.org>
- <20240828220846.1205813-2-sjg@chromium.org>
+ <20240828220846.1205813-4-sjg@chromium.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -105,7 +105,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20240828220846.1205813-2-sjg@chromium.org>
+In-Reply-To: <20240828220846.1205813-4-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -126,21 +126,10 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 29/08/2024 00:08, Simon Glass wrote:
-> When Labgrid is used, it can get U-Boot ready for running tests. It
-> prints a message when it has done so.
-> 
-> Add logic to detect this message and accept it.
+> Some tests may output things to stderr. Ensure that this output is not
+> dropped, by redirecting it to stdout
 
-So labgrid can boot and wait for `board_type & board_identity` itself right ?
-
-It's cool, but if the boots fails for a reason, what would happen ?
-Having the U-Boot pytest to parse the U-Boot boot log makes sure we can identify crash
-and report them in the pytest log.
-
-And this adds a labgrid-only string to parse, which could potentially
-collide with pre-uboot or whatever log when not using labgrid.
-
-Neil
+Can't you make sure to output all labgrid output to stdout in the hook script instead ?
 
 > 
 > Signed-off-by: Simon Glass <sjg@chromium.org>
@@ -148,39 +137,27 @@ Neil
 > 
 > (no changes since v1)
 > 
->   test/py/u_boot_console_base.py | 9 +++++----
->   1 file changed, 5 insertions(+), 4 deletions(-)
+>   test/py/u_boot_spawn.py | 2 ++
+>   1 file changed, 2 insertions(+)
 > 
-> diff --git a/test/py/u_boot_console_base.py b/test/py/u_boot_console_base.py
-> index 76a550d45a1..882d04cd1e9 100644
-> --- a/test/py/u_boot_console_base.py
-> +++ b/test/py/u_boot_console_base.py
-> @@ -22,6 +22,7 @@ pattern_stop_autoboot_prompt = re.compile('Hit any key to stop autoboot: ')
->   pattern_unknown_command = re.compile('Unknown command \'.*\' - try \'help\'')
->   pattern_error_notification = re.compile('## Error: ')
->   pattern_error_please_reset = re.compile('### ERROR ### Please RESET the board ###')
-> +pattern_ready_prompt = re.compile('U-Boot is ready')
+> diff --git a/test/py/u_boot_spawn.py b/test/py/u_boot_spawn.py
+> index 97e95e07c80..81a09a9d639 100644
+> --- a/test/py/u_boot_spawn.py
+> +++ b/test/py/u_boot_spawn.py
+> @@ -10,6 +10,7 @@ import re
+>   import pty
+>   import signal
+>   import select
+> +import sys
+>   import time
+>   import traceback
 >   
->   PAT_ID = 0
->   PAT_RE = 1
-> @@ -196,15 +197,15 @@ class ConsoleBase(object):
->                                       self.bad_pattern_ids[m - 1])
->               self.u_boot_version_string = self.p.after
->               while True:
-> -                m = self.p.expect([self.prompt_compiled,
-> +                m = self.p.expect([self.prompt_compiled, pattern_ready_prompt,
->                       pattern_stop_autoboot_prompt] + self.bad_patterns)
-> -                if m == 0:
-> +                if m == 0 or m == 1:
->                       break
-> -                if m == 1:
-> +                if m == 2:
->                       self.p.send(' ')
->                       continue
->                   raise Exception('Bad pattern found on console: ' +
-> -                                self.bad_pattern_ids[m - 2])
-> +                                self.bad_pattern_ids[m - 3])
->   
->           except Exception as ex:
->               self.log.error(str(ex))
+> @@ -59,6 +60,7 @@ class Spawn:
+>                   signal.signal(signal.SIGHUP, signal.SIG_DFL)
+>                   if cwd:
+>                       os.chdir(cwd)
+> +                sys.stderr = sys.stdout
+>                   os.execvp(args[0], args)
+>               except:
+>                   print('CHILD EXECEPTION:')
 
