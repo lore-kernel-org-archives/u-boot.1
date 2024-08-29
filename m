@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BF70C83F2C
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 14:19:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74B2BC83F2D
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 14:22:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 707B488AD7;
-	Thu, 29 Aug 2024 16:19:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0B16E88C1B;
+	Thu, 29 Aug 2024 16:22:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SN5xv3qi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pSsguSAk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BF1988B23; Thu, 29 Aug 2024 16:19:23 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 3F24088B88; Thu, 29 Aug 2024 16:22:16 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E00E888DD
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 16:19:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB17B88C1C
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 16:22:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-429da8b5feaso8327675e9.2
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 07:19:21 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3718eaf4046so598955f8f.3
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 07:22:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724941161; x=1725545961; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724941333; x=1725546133; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=WDYZpA18SeFFlRYaobNMaRatjCqDhsHNvMCjWINJVrI=;
- b=SN5xv3qi9/bZc5qVhTOdHvOEsZIRxwhFeaTGoyt8lwVxDHqrgHAbqICxnF+HyrR6hR
- pZdEF1j8lC/PhauaxO3YV50Whvs5WK1j5+un45mGmSoMoYq48ijeUb+5DhmjtA+IqnoD
- wfXcLotSg6LdTOY6SZjJp///D69BKb2CTo1e/3fg+djaFLj4n6/yEW31CLXkAXn9x8w2
- vJKHjUp5kK3+JU2an1dbRrKx8KR/wOMhIUvhgbH3NVVQV4CY9tzhfHNUOSKwMexowHIy
- w/IzkzT3U3QSJZm416nJrh0bFUeEKpGOjRyVPRFW//6boFKCiVCmJCDlwAbJqmGN+Rce
- hbQw==
+ :reply-to; bh=v7x7lwbCNEY6e64YVx1m2T+gcDRt14vshyI5yzJekVo=;
+ b=pSsguSAkZeomQBBAbIA7yLQ7p2dDbp8LkaCeVdZ1ShZFRz5GeiqTZ9qMDhPlICrBS6
+ Ns/CY5XbPd9hCOczRph/CAs2HZVNer7RuRGpI2hJUi1EdgHeCd9bDG3VPmuthy6q3QFM
+ 4OZYqy0owvBAId0rWPbbuQli8KxGR5PFSBjV82EnC5cCLF2/tHxucFj1LfEOzi1J2I2c
+ NTo4QFvBdrBmw3RZtvkmfEsVNcDgHoOS064HsJL7O+VEwIon5iOtgH2tpj9hhc50qF5G
+ EW7MH6x+jVRHFGzwB2p5mZdIn4J9NE86sMnxf1f+WboPhkAkru1Jy+nftJxCdgiK958T
+ 2ckg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724941161; x=1725545961;
+ d=1e100.net; s=20230601; t=1724941333; x=1725546133;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=WDYZpA18SeFFlRYaobNMaRatjCqDhsHNvMCjWINJVrI=;
- b=LumUXHXuWi6VMt0TWjouac4bO3VuYHYL/K2yyKqonA7DU9VwyCDFcRASrd6XXIjSAU
- luHdGNJHJ4rBzAA8qG0kMS/MpnA8aV1eqrdZTH1XYf5+b/qOGXVgGLni9Gre2CGrhCDs
- POqCDtzKTW7gbj4X2blsdVkoQUL5ncjZpZ7mumSfKCFjkYH/heIn2UP1poznBhePWs7V
- un3qy8544ThGhrBtYR0khW2fGS6WCguySkGXny7R5s73AOHPTlE5T8WYOQTMgsBJsOO1
- z468jPWctl9MFCo9I4ThBbZRvtaD/IjzMS3kfCFYDy0W2hb03XVp5TWIbjKx3Asyq1UY
- alSg==
+ bh=v7x7lwbCNEY6e64YVx1m2T+gcDRt14vshyI5yzJekVo=;
+ b=TPrNzpDvUYfZ/8v1qpOj9v2AUOdYRdhfqiNy9rTCwubrN7M5ioGpK9Ik6OIY3KbYM7
+ upyMP8dmjaUoqfP8UTMPDiVjuWGB1mefEt8n3AFsmsjwY5TwLmLAB5XIFySaHuyh6iLl
+ 8VctVyrpJ8E5f5X7Od9dRCWI19VdJgkQt8il1hZjwTiKfvymO+kNXk29Bw+O5qw/4ENw
+ A98U/iAlKECgQDevOpFF5dygFe4mKOdMKko8tnrGAmdNNksyqDPAtr9eidAGZpcVmZoJ
+ 0LQ6zMOdyPyNcPk671DHl1duaxaLgCglXzm+zfvBhd8pSbBiNPaMQVeL+hgAmKSD4RrT
+ 9rSw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUu0TkR9Bm5/Fi9YcEg0RANUnSkBAcA2jcl3LBfktzcil70LqIrW7VrMBkSBmhXdLUquoTC06M=@lists.denx.de
-X-Gm-Message-State: AOJu0YzqJ9ZqtGlCkcMOG9m4qCsapi0BBosznFv732i+ow0I/T33Gb4X
- gi1obSpG6o0mMA+wJx38hEU0fEZXL2wMiUJsdnpKwnxkypy8bhTi4VqBNrbTqus=
-X-Google-Smtp-Source: AGHT+IFM/K5/R9pzaNV4L8uS4r5ExD1keveMnY0t7U2FwNbL2q6tFCmOo200sjbK2ja3VnIFpIKgzg==
-X-Received: by 2002:a05:600c:4f07:b0:428:f0a:3f92 with SMTP id
- 5b1f17b1804b1-42bb01c1d40mr32236395e9.21.1724941160218; 
- Thu, 29 Aug 2024 07:19:20 -0700 (PDT)
+ AJvYcCX1jF0oEeglSqflHpzh7T938u82htoYpKxLuVwKuAgdwmFYdZ4pBlXTbnVAnhM/9Qyl1TdzaNw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzwwjVn/Vrqx4Mli4SLon2CbQm1USEfLYZMgzAjuxjGDxfMb86D
+ +winRgUI6arO91SxUpwJyBbWQZAI51SDKVqYQqI2Rt4r7LHOJv9rKtQUlxA2HeoHHatD9JT7/LQ
+ 6
+X-Google-Smtp-Source: AGHT+IEgrjF1R26qcg6aeJfrCau/+jfF76+tFaIOPZPEOL/cOp8v/jgHuJ8NcmBwF0hoAzYeT9uEUg==
+X-Received: by 2002:a05:6000:2ab:b0:371:8e24:1191 with SMTP id
+ ffacd0b85a97d-3749b583df1mr3470923f8f.53.1724941332741; 
+ Thu, 29 Aug 2024 07:22:12 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:982:cbb0:12f5:c9c:a0e1:6915?
  ([2a01:e0a:982:cbb0:12f5:c9c:a0e1:6915])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42bb6df1066sm18839965e9.18.2024.08.29.07.19.19
+ ffacd0b85a97d-3749ee5080asm1608935f8f.18.2024.08.29.07.22.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 Aug 2024 07:19:19 -0700 (PDT)
-Message-ID: <4ab84c7a-c129-41e9-aa1e-6e802fdd6f87@linaro.org>
-Date: Thu, 29 Aug 2024 16:19:19 +0200
+ Thu, 29 Aug 2024 07:22:12 -0700 (PDT)
+Message-ID: <904f71d4-b2b4-428b-bb2f-31fe6d916135@linaro.org>
+Date: Thu, 29 Aug 2024 16:22:11 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v5 08/20] test: Introduce the concept of a role
+Subject: Re: [PATCH v5 01/20] test: Allow signaling that U-Boot is ready
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>
 References: <20240828220846.1205813-1-sjg@chromium.org>
- <20240828220846.1205813-9-sjg@chromium.org>
+ <20240828220846.1205813-2-sjg@chromium.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -104,7 +105,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20240828220846.1205813-9-sjg@chromium.org>
+In-Reply-To: <20240828220846.1205813-2-sjg@chromium.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -124,32 +125,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
 On 29/08/2024 00:08, Simon Glass wrote:
-> In Labgrid there is the concept of a 'role', which is similar to the
-> U-Boot board ID in U-Boot's pytest subsystem.
+> When Labgrid is used, it can get U-Boot ready for running tests. It
+> prints a message when it has done so.
 > 
-> The role indicates both the target and information about the U-Boot
-> build to use. It can also provide any amount of other configuration.
-> The information is obtained using the 'labgrid-client query' operation.
-> 
-> Make use of this in tests, so that only the role is required in gitlab
-> and other situations. The board type and other things can be queried
-> as needed.
-> 
-> Use a new 'u-boot-test-getrole' script to obtain the requested
-> information.
-> 
-> With this it is possible to run lab tests in gitlab with just a single
-> 'ROLE' variable for each board.
+> Add logic to detect this message and accept it.
 
-Can't this be in the hook script ? I mean allmost no CI system have a 1:1
-usage of board_type & board_identity, but we use those fields and transform
-them accordingly.
+So labgrid can boot and wait for `board_type & board_identity` itself right ?
 
-u-boot-test-getrole is labgrid only, all script receives board_type & board_identity,
-so why add some labgrind specific python here ?
+It's cool, but if the boots fails for a reason, what would happen ?
+Having the U-Boot pytest to parse the U-Boot boot log makes sure we can identify crash
+and report them in the pytest log.
+
+And this adds a labgrid-only string to parse, which could potentially
+collide with pre-uboot or whatever log when not using labgrid.
 
 Neil
 
@@ -157,76 +146,41 @@ Neil
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 > 
-> Changes in v5:
-> - Add a few more comments
-> - Comment out the debugging, which might be useful later
+> (no changes since v1)
 > 
->   test/py/conftest.py | 38 ++++++++++++++++++++++++++++++++++----
->   1 file changed, 34 insertions(+), 4 deletions(-)
+>   test/py/u_boot_console_base.py | 9 +++++----
+>   1 file changed, 5 insertions(+), 4 deletions(-)
 > 
-> diff --git a/test/py/conftest.py b/test/py/conftest.py
-> index 6547c6922c6..03dfd8ab562 100644
-> --- a/test/py/conftest.py
-> +++ b/test/py/conftest.py
-> @@ -23,6 +23,7 @@ from pathlib import Path
->   import pytest
->   import re
->   from _pytest.runner import runtestprotocol
-> +import subprocess
->   import sys
+> diff --git a/test/py/u_boot_console_base.py b/test/py/u_boot_console_base.py
+> index 76a550d45a1..882d04cd1e9 100644
+> --- a/test/py/u_boot_console_base.py
+> +++ b/test/py/u_boot_console_base.py
+> @@ -22,6 +22,7 @@ pattern_stop_autoboot_prompt = re.compile('Hit any key to stop autoboot: ')
+>   pattern_unknown_command = re.compile('Unknown command \'.*\' - try \'help\'')
+>   pattern_error_notification = re.compile('## Error: ')
+>   pattern_error_please_reset = re.compile('### ERROR ### Please RESET the board ###')
+> +pattern_ready_prompt = re.compile('U-Boot is ready')
 >   
->   # Globals: The HTML log file, and the connection to the U-Boot console.
-> @@ -79,6 +80,7 @@ def pytest_addoption(parser):
->       parser.addoption('--gdbserver', default=None,
->           help='Run sandbox under gdbserver. The argument is the channel '+
->           'over which gdbserver should communicate, e.g. localhost:1234')
-> +    parser.addoption('--role', help='U-Boot board role (for Labgrid)')
->       parser.addoption('--no-prompt-wait', default=False, action='store_true',
->           help="Assume that U-Boot is ready and don't wait for a prompt")
+>   PAT_ID = 0
+>   PAT_RE = 1
+> @@ -196,15 +197,15 @@ class ConsoleBase(object):
+>                                       self.bad_pattern_ids[m - 1])
+>               self.u_boot_version_string = self.p.after
+>               while True:
+> -                m = self.p.expect([self.prompt_compiled,
+> +                m = self.p.expect([self.prompt_compiled, pattern_ready_prompt,
+>                       pattern_stop_autoboot_prompt] + self.bad_patterns)
+> -                if m == 0:
+> +                if m == 0 or m == 1:
+>                       break
+> -                if m == 1:
+> +                if m == 2:
+>                       self.p.send(' ')
+>                       continue
+>                   raise Exception('Bad pattern found on console: ' +
+> -                                self.bad_pattern_ids[m - 2])
+> +                                self.bad_pattern_ids[m - 3])
 >   
-> @@ -130,12 +132,40 @@ def get_details(config):
->               str: Build directory
->               str: Source directory
->       """
-> -    board_type = config.getoption('board_type')
-> -    board_identity = config.getoption('board_identity')
-> +    role = config.getoption('role')
-> +
-> +    # Get a few provided parameters
->       build_dir = config.getoption('build_dir')
-> +    if role:
-> +        # When using a role, build_dir and build_dir_extra are normally not set,
-> +        # since they are picked up from Labgrid via the u-boot-test-getrole
-> +        # script
-> +        board_identity = role
-> +        cmd = ['u-boot-test-getrole', role, '--configure']
-> +        env = os.environ.copy()
-> +        if build_dir:
-> +            env['U_BOOT_BUILD_DIR'] = build_dir
-> +        proc = subprocess.run(cmd, capture_output=True, encoding='utf-8',
-> +                              env=env)
-> +        if proc.returncode:
-> +            raise ValueError(proc.stderr)
-> +        # For debugging
-> +        # print('conftest: lab:', proc.stdout)
-> +        vals = {}
-> +        for line in proc.stdout.splitlines():
-> +            item, value = line.split(' ', maxsplit=1)
-> +            k = item.split(':')[-1]
-> +            vals[k] = value
-> +        # For debugging
-> +        # print('conftest: lab info:', vals)
-> +        board_type, default_build_dir, source_dir = (vals['board'],
-> +            vals['build_dir'], vals['source_dir'])
-> +    else:
-> +        board_type = config.getoption('board_type')
-> +        board_identity = config.getoption('board_identity')
->   
-> -    source_dir = os.path.dirname(os.path.dirname(TEST_PY_DIR))
-> -    default_build_dir = source_dir + '/build-' + board_type
-> +        source_dir = os.path.dirname(os.path.dirname(TEST_PY_DIR))
-> +        default_build_dir = source_dir + '/build-' + board_type
->       if not build_dir:
->           build_dir = default_build_dir
->   
+>           except Exception as ex:
+>               self.log.error(str(ex))
 
