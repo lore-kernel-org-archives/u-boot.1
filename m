@@ -4,64 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BB50C7EE3A
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 08:35:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2A23C7EE3A
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 08:44:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D16A88B23;
-	Thu, 29 Aug 2024 10:35:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D210688966;
+	Thu, 29 Aug 2024 10:43:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=web.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JqcdSYBH";
+	dkim=pass (2048-bit key; secure) header.d=web.de header.i=smoch@web.de header.b="g3U1ns0l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B850C88B59; Thu, 29 Aug 2024 10:35:15 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7E05788B8E; Thu, 29 Aug 2024 10:43:58 +0200 (CEST)
+Received: from mout.web.de (mout.web.de [212.227.15.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB627889FF
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 10:35:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7DCAF8891E
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 10:43:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47T8ZAe7129572;
- Thu, 29 Aug 2024 03:35:11 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1724920511;
- bh=4rt1LZFDSdDF3JxtdmV4IlAQMbPFgHZBsrRE0LsMZPg=;
- h=From:To:CC:Subject:Date;
- b=JqcdSYBHCYvfWNWTHSuDL5nIX/IVKdXfFGqqFW9LOefkoXONaqS65n6mLY7OvEJBc
- 4XQtAQqi4V3m1/nhIKbntyHmBM7an1dhK3kyjsKw/ZwfwFg0fF1jmWuC6Kn3YGfjFS
- 1bOVJTfO7AZVzz2mkGMwpGSMOARsmgOVNA/B4hM8=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47T8ZAu5130127
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 29 Aug 2024 03:35:10 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 29
- Aug 2024 03:35:10 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 29 Aug 2024 03:35:10 -0500
-Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.18])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47T8Z7m3044292;
- Thu, 29 Aug 2024 03:35:08 -0500
-From: Udit Kumar <u-kumar1@ti.com>
-To: <trini@konsulko.com>
-CC: <nm@ti.com>, <u-boot@lists.denx.de>, <n-francis@ti.com>, <bb@ti.com>, Udit
- Kumar <u-kumar1@ti.com>, Andreas Dannenberg <dannenberg@ti.com>
-Subject: [PATCH] ram: k3-ddrss: Handle error properly in lpddr4_start
-Date: Thu, 29 Aug 2024 14:04:53 +0530
-Message-ID: <20240829083453.647044-1-u-kumar1@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=quarantine dis=none) header.from=web.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=smoch@web.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
+ s=s29768273; t=1724921034; x=1725525834; i=smoch@web.de;
+ bh=zSANLzi9uAAZqdMWQJX2oGUv9CtF5dT+E2Zb/c/8gZw=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=g3U1ns0lN+INq7QfaWTA4awrzLHLyw5AfD/Nk4cKj1jEuA5H9Bny5yk2o43RSfO7
+ XxvYB4g55vpIvUJL/d0UCcyyskMqkLpryK7md1/n+P+CP2698W4erxVuEwCPkK1XM
+ soScScu4YtsxAR/lWAWDqwkj5//FyxtGStV134a8rbtawyBP+mJZXFJfDDwfTZOHz
+ /V9F/Ye6LrkI198iq34do0RhYAuLXZzdkuO+f0KqmuYU14S7L5BZr61lKV8Y7LGO9
+ tyPwip+SkHWkMr9FuCzQ275w83L84xiy/Li16WLwvfKYF5UCCuBzfP2eDAPAVxS49
+ 9qT3zWG16WC0PeExlA==
+X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
+Received: from [192.168.1.40] ([77.191.136.96]) by smtp.web.de (mrweb005
+ [213.165.67.108]) with ESMTPSA (Nemesis) id 1MSZMD-1sdJLs46ED-00ZBQh; Thu, 29
+ Aug 2024 10:43:54 +0200
+Message-ID: <9b177470-a138-42f8-9ddb-5f4fa01e5d32@web.de>
+Date: Thu, 29 Aug 2024 10:43:46 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 4/4] imx: Remove CFG_MXC_USB_PORTSC
+To: Fabio Estevam <festevam@gmail.com>, peng.fan@nxp.com
+Cc: marex@denx.de, u-boot@lists.denx.de, tharvey@gateworks.com,
+ Fabio Estevam <festevam@denx.de>
+References: <20240828132529.3098961-1-festevam@gmail.com>
+ <20240828132529.3098961-4-festevam@gmail.com>
+Content-Language: en-US
+From: Soeren Moch <smoch@web.de>
+In-Reply-To: <20240828132529.3098961-4-festevam@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Provags-ID: V03:K1:t+jSAXjTBeOfDTcWhMbCg2Y7vEJrjBVY1r2C/GJ5im2dcvu+767
+ y4vvmua+ySke3ryUxJgONcsMnBXUp+/EOSvlmrwsCb++yr3bB4spaAiMD2h+YNJqRk4eywZ
+ 7JZb7Uu93lyyFgOJGl3JiQINBfi8T5UWH8LovcW70HhVpuSnVUNdjf9GB9GyveQoUwFybWh
+ f+ZF+rmCDvD05c1Fzf+gg==
+UI-OutboundReport: notjunk:1;M01:P0:ctoGCMolHpk=;zf6dQMPaggKEoBJBgFpwHQW2RC7
+ 2m5y8DcNaTQU4NFgAh3pauX6swIkF8EqobLgTC+khizwzl+ln3lJszJM4e4Wk3KkjgcLIoCwb
+ P4/9nBO/4EP4iFqJmzSnZJQ/jD0lBqgVXn5y5V5QrHYL9q+c1+RS8jSdjv9bQV1bmtMXMkKxg
+ aTgbgkruW4Qd6VoIBN04rX4MR7b0aZFKSlkuellVe8qk6SDTmP4+cfxJ2hZuS4eush+DQeYsu
+ 9rfVYNHzXmDchSA39QGEmrAU9MbIk0yPw+ItfOe46awc2TIHEilRgtSHQR0dqu9DZejNvMS1t
+ JHNzBYrKrUVu6Bb0mirxRtM3AJncxFq1JfNU3TUU4RQD8lAX0ik0a6pwxOAX3NXdl334d45sn
+ 5VocMESQtGF6V2BCI5sAgUr6mQZBZVNxYwvOR7gAsk0VEAGvC6Lh8faACrYx9PmtkG/Sp867s
+ 6XhMvOVuW2xx32eGWOrK5PlREKCEl+2mlMMd0FHO3cpwtk8yX99T1mwK7ze/RnFKHiBrlg8rp
+ 2dYVTsOSvh9d7ABwBzBGqdJnh+hdoWx3YvkaYBYfE4rfCB2hXG2NzSAFciX0+jpqkyY1AfRwT
+ ycSP6cIGM84Z4GblaUtrNxCc+tFPs5xW/VD+2a5jCriYjm26w0YKys5O80RNfEMCcwv+NF/Ko
+ eAWQR9sFVcjQf/2vR9GP2BXykNOL9fkFdykGqQBjX75PYj5a9SRXt46GMljGisi56ECg+yLyM
+ 3dYieyrGde3V9PPEtqHBs1jT/90dSWy7DR6t5DA+SXLkJB45hMmMtay/JBKcBcpTHoNbiYBfJ
+ T5N4fiR0Qyr3iaakROI2V3kA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,34 +90,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In lpddr4_start function error returned by lpddr4_enablepiinitiator
-may go undetected due to overwrite of return code.
-Add support to handle error in above case.
+On 28.08.24 15:25, Fabio Estevam wrote:
+> From: Fabio Estevam <festevam@denx.de>
+>
+> The definition of CFG_MXC_USB_PORTSC as (PORT_PTS_UTMI | PORT_PTS_PTW)
+> can be removed from mx5/mx6/mx7/mx8m board config files as it is the
+> default in drivers/usb/host/ehci-mx5.c and drivers/usb/host/ehci-mx6.c.
+>
+> Suggested-by: Tim Harvey <tharvey@gateworks.com>
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
+> Reviewed-by: Tim Harvey <tharvey@gateworks.com>
+> ---
+> Changes since v2:
+> - Keep mx51evk.h intact as it uses a different CFG_MXC_USB_PORTSC
+> definition.
+>
+>   include/configs/apalis_imx6.h            | 4 ----
+>   include/configs/aristainetos2.h          | 3 ---
+>   include/configs/brppt2.h                 | 3 ---
+>   include/configs/cl-som-imx7.h            | 3 ---
+>   include/configs/cm_fx6.h                 | 3 ---
+>   include/configs/colibri-imx6ull.h        | 4 ----
+>   include/configs/colibri_imx6.h           | 4 ----
+>   include/configs/colibri_imx7.h           | 4 ----
+>   include/configs/dart_6ul.h               | 3 ---
+>   include/configs/dh_imx6.h                | 3 ---
+>   include/configs/display5.h               | 1 -
+>   include/configs/embestmx6boards.h        | 3 ---
+>   include/configs/ge_b1x5v2.h              | 3 ---
+>   include/configs/gw_ventana.h             | 3 ---
+>   include/configs/imx6_logic.h             | 5 -----
+>   include/configs/imx6dl-mamoj.h           | 3 ---
+>   include/configs/imx6q-bosch-acc.h        | 1 -
+>   include/configs/imx7-cm.h                | 3 ---
+>   include/configs/imx8mm-cl-iot-gate.h     | 3 ---
+>   include/configs/kontron-sl-mx6ul.h       | 4 ----
+>   include/configs/kontron-sl-mx8mm.h       | 4 ----
+>   include/configs/kp_imx53.h               | 3 ---
+>   include/configs/kp_imx6q_tpc.h           | 5 -----
+>   include/configs/liteboard.h              | 5 -----
+>   include/configs/m53menlo.h               | 7 -------
+>   include/configs/meerkat96.h              | 3 ---
+>   include/configs/mx53cx9020.h             | 3 ---
+>   include/configs/mx53loco.h               | 3 ---
+>   include/configs/mx53ppd.h                | 3 ---
+>   include/configs/mx6cuboxi.h              | 3 ---
+>   include/configs/mx6memcal.h              | 1 -
+>   include/configs/mx6sabreauto.h           | 3 ---
+>   include/configs/mx6sabresd.h             | 5 -----
+>   include/configs/mx6slevk.h               | 5 -----
+>   include/configs/mx6sllevk.h              | 5 -----
+>   include/configs/mx6sxsabreauto.h         | 4 ----
+>   include/configs/mx6sxsabresd.h           | 4 ----
+>   include/configs/mx6ul_14x14_evk.h        | 5 -----
+>   include/configs/mx7dsabresd.h            | 3 ---
+>   include/configs/mx7ulp_com.h             | 1 -
+>   include/configs/mys_6ulx.h               | 3 ---
+>   include/configs/nitrogen6x.h             | 3 ---
+>   include/configs/novena.h                 | 5 -----
+>   include/configs/npi_imx6ull.h            | 3 ---
+>   include/configs/o4-imx6ull-nano.h        | 4 ----
+>   include/configs/opos6uldev.h             | 5 -----
+>   include/configs/pcl063.h                 | 3 ---
+>   include/configs/pcl063_ull.h             | 3 ---
+>   include/configs/pico-imx6.h              | 3 ---
+>   include/configs/pico-imx6ul.h            | 3 ---
+>   include/configs/pico-imx7d.h             | 3 ---
+>   include/configs/somlabs_visionsom_6ull.h | 5 -----
+>   include/configs/tbs2910.h                | 5 -----
+>   include/configs/tqma6.h                  | 3 ---
+>   include/configs/usbarmory.h              | 3 ---
+>   include/configs/verdin-imx8mm.h          | 3 ---
+>   include/configs/vining_2000.h            | 1 -
+>   include/configs/wandboard.h              | 3 ---
+>   include/configs/warp7.h                  | 1 -
+>   include/configs/xpress.h                 | 3 ---
+>   60 files changed, 203 deletions(-)
 
-Reported-by: Andreas Dannenberg <dannenberg@ti.com>
-Signed-off-by: Udit Kumar <u-kumar1@ti.com>
----
- drivers/ram/k3-ddrss/lpddr4.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+Reviewed-by: Soeren Moch <smoch@web.de>
 
-diff --git a/drivers/ram/k3-ddrss/lpddr4.c b/drivers/ram/k3-ddrss/lpddr4.c
-index 11ef242a37..9f9abfeca4 100644
---- a/drivers/ram/k3-ddrss/lpddr4.c
-+++ b/drivers/ram/k3-ddrss/lpddr4.c
-@@ -155,10 +155,11 @@ u32 lpddr4_start(const lpddr4_privatedata *pd)
- 	u32 result = 0U;
- 
- 	result = lpddr4_startsf(pd);
--	if (result == (u32)0) {
-+	if (result == (u32)0)
- 		result = lpddr4_enablepiinitiator(pd);
-+	if (result == (u32)0)
- 		result = lpddr4_startsequencecontroller(pd);
--	}
-+
- 	return result;
- }
- 
--- 
-2.34.1
+Thanks,
+Soeren
 
