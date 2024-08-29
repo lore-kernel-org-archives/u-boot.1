@@ -4,86 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF798C87FC3
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 16:40:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6856C87FC5
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 16:48:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2689988CA1;
-	Thu, 29 Aug 2024 18:40:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2934988CA1;
+	Thu, 29 Aug 2024 18:48:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cQQrDQ6P";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tTrVLOV7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3BDB88CCF; Thu, 29 Aug 2024 18:40:09 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id AF27588C1C; Thu, 29 Aug 2024 18:48:55 +0200 (CEST)
+Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
+ [IPv6:2607:f8b0:4864:20::831])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AAB9A88440
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 18:40:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 96CF688CD2
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 18:48:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-42817bee9e8so7734795e9.3
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 09:40:07 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x831.google.com with SMTP id
+ d75a77b69052e-45677965a0eso4705851cf.1
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 09:48:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724949607; x=1725554407; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=rIsvoc5gOZoFhTOiAYtKt+ShOaQCtxEK1xqE98i4EZ8=;
- b=cQQrDQ6PAU+IUYoGAO32Lql1YXU1q68aRbpX/+ELIbUKshPAGed5lVyubAROAzPuHV
- HOU5p0ONSjUjvdccqcdnDDaQPzG6JNaC81RfBKZUwMedIjPxQUSl2noJ3D/YtXHjWSAb
- 6bzjIn888R5ayldpz0RLq75BexBAhobSye9CJ2OtgCO6ZMofCyJoFvGolrmeiu0W8f4h
- dkMnXIqdkcDg+CO0b8l2e7hSU9j1Rs5hP0mYXRnjejfuQ02X/LdreogSkW2BpeucJToR
- dFc8pomIfaOuPzYeptvw8a5JPn9EVMNhSkRaXqVGmN7N8K6z+SB0PC9pkD6TXl1p2/My
- z9Wg==
+ d=konsulko.com; s=google; t=1724950132; x=1725554932; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/xZh8RJYACUx1jDNIcq5rwpm2cPcm1rSM9FI8hinJ50=;
+ b=tTrVLOV7uehvNLY3JP+lHg3WliyUCfJfjoHGM2cNzy/iXdhToe+Dt9ljJxj1CmlHIP
+ FrC2zMTeJ6GNQpGt1JMBprJqWhOmHr/oKbpD7KU3u6pPWQEx2jsOmgakjTMmBaWanl8j
+ quC9OHMvB+fSFecFku48oKgrKF3/Gy8UjhMKQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724949607; x=1725554407;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=rIsvoc5gOZoFhTOiAYtKt+ShOaQCtxEK1xqE98i4EZ8=;
- b=tA+vKNHQaGwti0jB310Ppfnhn0UNgOsTRv75oDkhl1oR+G2TwVI0V0O1F7E4s8vh7I
- sVRkhT+8SaPiIMDCUs9hRBBpbWjTxBMZFCoknOOGAXIguuRiwCugVEOVB3aC9d0jTJUQ
- A/tQGcQ9saLJlwKzTcUNFwqkh/ysKLpIUV4gANtVQkr3m4WOColp6DFmX4ndqTw3kRCx
- 1hHMZ+/WJSxTdllGcH2f6TdWdEQq2sBhxe2b9YaTfhqigHt4Mig4c/Hy6ps3ejd0e9gk
- VTRvag9Iz6gVcpOC8vwCbAzuOR8o1YBZjtqgN5zR13j0o0NcGVZ//Kwe1vfMb138YT8A
- Otdg==
-X-Gm-Message-State: AOJu0YwNZNfzilcZIL09czCgSVhkihnOFIYRQggVzH6m3EswdBWlr7yE
- jHPFc/nqk15E8xSIvCGyU7T1dcxjN04Mpw4SOpdbZSClTXyKQJEjO4PlFa9T5Fc=
-X-Google-Smtp-Source: AGHT+IGt+xDRYp2k6waEQ2d9IoW+Eew1/7KoIOu5+W213lzSwpjLink1AHumTktkkE1xCoR+sbBeag==
-X-Received: by 2002:a05:600c:470f:b0:426:5ef5:bcb1 with SMTP id
- 5b1f17b1804b1-42bb01aa115mr28358695e9.6.1724949606983; 
- Thu, 29 Aug 2024 09:40:06 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:dda4:b3aa:27ae:d28a?
- ([2a01:e0a:3cb:7bb0:dda4:b3aa:27ae:d28a])
+ d=1e100.net; s=20230601; t=1724950132; x=1725554932;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/xZh8RJYACUx1jDNIcq5rwpm2cPcm1rSM9FI8hinJ50=;
+ b=wneekN68KYzACGSXhibgBfyv1pY7F7Y5w9pMjDX0tLEUk38msXH4pjM9sX/Ny+gTq9
+ yfJ0jTkt3vfIMBWfVLRQKmCsJpvuExE1Yg+s/hjMIeXjEwM5dgGSgZzI3i5GqvcqvclH
+ EQAOBcxam7oZF+RT0uozuxR+aKbGmboHBVRG/qppxQ9ylZCV1aTIEcbQve1YsRoAv1dV
+ ksxxM/X8rwWbpbpYrB1FSalAHIeG1jZLJSfKnULZRIWq+N9RjS43XnYosMuKzj/JVTtf
+ Zdd2vGoG5y++c7/UzUxFSGwVp2boS+/nMkMRbP3Oy4iL2i9bje3X40TnCDOlb3GMe6oo
+ avAg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUBUSbEvmXh1JFvp2h1n6azff3zD9vEryRPBi+sEX8dQgUbc319QKUtckRD5h3ElM4GA6unuNg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwJXHOYS+kQWvy1AUiDmd3EYs2vu9qMulLGM/+fNyoX2eShm4xA
+ qUkDvUAN8QH0yUjSr89Wx0f2+PqlYJRDc9p7dHdVsHtkhdkuUXKHF0ow4FfSVts=
+X-Google-Smtp-Source: AGHT+IFGVPioqcPwxVkB85To0n9vUhABf3yjYeeNMoEE1Ug3CAgGmuK48LIYsm3HQiuEtHBKwHVJog==
+X-Received: by 2002:a05:622a:1b0a:b0:451:d75e:abb2 with SMTP id
+ d75a77b69052e-4567f5271e8mr38362301cf.19.1724950132221; 
+ Thu, 29 Aug 2024 09:48:52 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3749ef7ea08sm1820393f8f.68.2024.08.29.09.40.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 Aug 2024 09:40:06 -0700 (PDT)
-Message-ID: <1c7c2e70-aa24-46b3-ac3b-47c6dc9fde3c@linaro.org>
-Date: Thu, 29 Aug 2024 18:40:06 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 05/13] net: fm: call dtsec_init_phy() only when it is
- defined
+ d75a77b69052e-45682ce5b05sm6302101cf.51.2024.08.29.09.48.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 Aug 2024 09:48:51 -0700 (PDT)
+Date: Thu, 29 Aug 2024 10:48:48 -0600
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <cover.1724846454.git.jerome.forissier@linaro.org>
- <679e20bfd9ac3de6560e202f82452563b01fca7a.1724846454.git.jerome.forissier@linaro.org>
- <CAFLszTh87_wd-+XLe1EeXziMiu9p_rT-qfAgHg4PxGwhsAKUtQ@mail.gmail.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAFLszTh87_wd-+XLe1EeXziMiu9p_rT-qfAgHg4PxGwhsAKUtQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Cc: neil.armstrong@linaro.org, U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v5 03/20] test: Pass stderr to stdout
+Message-ID: <20240829164848.GF2479150@bill-the-cat>
+References: <20240828220846.1205813-1-sjg@chromium.org>
+ <20240828220846.1205813-4-sjg@chromium.org>
+ <b2a176a0-f3fc-440c-ba59-8bb97fb858dd@linaro.org>
+ <CAFLszThcq98op7bcJY=-tW8EtVe6yav43tA0WnoXRiybdjDgaA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Zb0xPCbwZLO9nSQ5"
+Content-Disposition: inline
+In-Reply-To: <CAFLszThcq98op7bcJY=-tW8EtVe6yav43tA0WnoXRiybdjDgaA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,81 +95,50 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--Zb0xPCbwZLO9nSQ5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 8/29/24 16:04, Simon Glass wrote:
-> Hi Jerome,
-> 
-> On Wed, 28 Aug 2024 at 06:11, Jerome Forissier
-> <jerome.forissier@linaro.org> wrote:
->>
->> dtsec_init_phy() is defined only with MII so add the proper conditional
->> in the caller code.
->>
->> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->> ---
->>  drivers/net/fm/eth.c | 2 ++
->>  1 file changed, 2 insertions(+)
->>
->> diff --git a/drivers/net/fm/eth.c b/drivers/net/fm/eth.c
->> index 19f3f0fef0..e4ec769693 100644
->> --- a/drivers/net/fm/eth.c
->> +++ b/drivers/net/fm/eth.c
->> @@ -701,8 +701,10 @@ static int init_phy(struct fm_eth *fm_eth)
->>                 supported |= SUPPORTED_2500baseX_Full;
->>  #endif
->>
->> +#if defined(CONFIG_MII) || defined(CONFIG_CMD_MII) && !defined(BITBANGMII)
->>         if (fm_eth->type == FM_ETH_1G_E)
->>                 dtsec_init_phy(fm_eth);
->> +#endif
-> 
-> We really want to avoid #ifdefs in the code as they create different
-> build paths. Can you use if (IS_ENABLED) ?
+On Thu, Aug 29, 2024 at 09:01:11AM -0600, Simon Glass wrote:
+> Hi Neil,
+>=20
+> On Thu, 29 Aug 2024 at 08:22, <neil.armstrong@linaro.org> wrote:
+> >
+> > On 29/08/2024 00:08, Simon Glass wrote:
+> > > Some tests may output things to stderr. Ensure that this output is not
+> > > dropped, by redirecting it to stdout
+> >
+> > Can't you make sure to output all labgrid output to stdout in the hook =
+script instead ?
+>=20
+> Possibly. Do you mean having the hook script redirect stderr to stdout?
 
-Sure.
+This gets back to one of the points I was making. In this case, "some
+tests" is what? And then, what's even going on? Are we missing output
+that we should be parsing? Are we not catching errors? Or is this just
+related to how today we have for say the filesystem tests so many
+try/except things that we inadvertently need a series of failures?
 
-> Also BITBANGMII seems liike
-> it needs a CONFIG_ prefix.
+--=20
+Tom
 
-I agree. I have copied the line verbatim from line 29 because the condition
-needs to be the same. And I suspect there is another issue with the operator
-precedence. Do we want "MII || (CMD_MII && !BITBANGMII)" or
-do we rather want "(MII || CMD_MII) && !BITBANGMII"? I guess the latter.
+--Zb0xPCbwZLO9nSQ5
+Content-Type: application/pgp-signature; name="signature.asc"
 
-So how about:
+-----BEGIN PGP SIGNATURE-----
 
-diff --git a/drivers/net/fm/eth.c b/drivers/net/fm/eth.c
-index 19f3f0fef0..22025b6a27 100644
---- a/drivers/net/fm/eth.c
-+++ b/drivers/net/fm/eth.c
-@@ -26,7 +26,8 @@
- 
- #include "fm.h"
- 
--#if defined(CONFIG_MII) || defined(CONFIG_CMD_MII) && !defined(BITBANGMII)
-+#if ((defined(CONFIG_MII) || defined(CONFIG_CMD_MII)) && \
-+     !defined(CONFIG_BITBANGMII))
- 
- #define TBIANA_SETTINGS (TBIANA_ASYMMETRIC_PAUSE | TBIANA_SYMMETRIC_PAUSE | \
- 			 TBIANA_FULL_DUPLEX)
-@@ -701,8 +702,11 @@ static int init_phy(struct fm_eth *fm_eth)
- 		supported |= SUPPORTED_2500baseX_Full;
- #endif
- 
--	if (fm_eth->type == FM_ETH_1G_E)
--		dtsec_init_phy(fm_eth);
-+	if ((IS_ENABLED(CONFIG_MII) || IS_ENABLED(CONFIG_CMD_MII)) &&
-+	    !IS_ENABLED(CONFIG_BITBANGMII)) {
-+		if (fm_eth->type == FM_ETH_1G_E)
-+			dtsec_init_phy(fm_eth);
-+	}
- 
- #ifdef CONFIG_PHYLIB
- #ifdef CONFIG_DM_MDIO
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbQpm0ACgkQFHw5/5Y0
+tyxA6AwAhluxBz8wrPZc/Zs5qISPPYEKx4f7DFG0QYaNpUIG5XdsfujgxXNnLStQ
+HJdZvM8Y//K4ZMoAZSCfcjgwLEL2XstmgtVJGv0aTKCjSsysDDoB94rnN/9dMKdz
+6v7/Y1gfa4Z5/dd8+/1IqW9N42Vcuyw6NGwQ9qushWZ5X71HTAWN2Oc75G9K0Xqm
+zgS2tunpBfd8u/lZ8sbInYp9YYD5kTID1Jr0T/Pcr9aFy/tGadH67m9wOZPvSP+T
+6+B1fUcQ9ophCKCqR8Z0JZqsew4Ht0w+itYLnnO13gGqE6NuoJAU7lJgx5j0iXbH
+oxtXRJU56CtBdjISb8kP4Q7XpH4G16PfGs7rsJB6PVIyW/fSUUT1zmreuKPXqKsH
+JvllhuHVeYnxAmZz3qLEUIfLBMSo84p9sy/vKtJ0FhA8hfABDQ/kSI4SDVVwIKum
+MknyvHr3OplsKdCj9DizXx9ccOc5IjdSNnsLqaGfOk9J9y9YhqUQkkRZGzzuHg/F
+12UyOAoC
+=jP+g
+-----END PGP SIGNATURE-----
 
-
-???
-
-Thanks,
--- 
-Jerome
+--Zb0xPCbwZLO9nSQ5--
