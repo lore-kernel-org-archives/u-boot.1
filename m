@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D8A5C83F16
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 13:13:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB74DC83F15
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 13:13:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C66F887F3;
+	by phobos.denx.de (Postfix) with ESMTP id E7A9188C09;
 	Thu, 29 Aug 2024 15:13:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Wdf2w/Kf";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kIgGVawB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1744388B5F; Thu, 29 Aug 2024 10:30:54 +0200 (CEST)
-Received: from mail-pf1-x441.google.com (mail-pf1-x441.google.com
- [IPv6:2607:f8b0:4864:20::441])
+ id 4A87788B0B; Thu, 29 Aug 2024 10:30:55 +0200 (CEST)
+Received: from mail-pl1-x644.google.com (mail-pl1-x644.google.com
+ [IPv6:2607:f8b0:4864:20::644])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C068588B0B
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 10:30:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B594889FF
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 10:30:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=coiaprant@gmail.com
-Received: by mail-pf1-x441.google.com with SMTP id
- d2e1a72fcca58-714302e7285so329392b3a.2
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 01:30:51 -0700 (PDT)
+Received: by mail-pl1-x644.google.com with SMTP id
+ d9443c01a7336-201e52ca0caso2594735ad.3
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 01:30:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1724920249; x=1725525049; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
+ d=gmail.com; s=20230601; t=1724920251; x=1725525051; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
  bh=jaYmFLWlSAXMvw/4JyRF0sEo92YZIm+UJnVLARyAR8o=;
- b=Wdf2w/KfGUDs9Vew/f/8hRzUECfu1jK4nku02dIMVKjFgJc54cqeZU/lSDxK4VQSgM
- 89prlZyEMS28I9eFA/N2gib2UEiXW9OrQdAdPq8oAUrdnGPmxC8tdmt3vPBgJuITCDbR
- o0V7EPMhEFIcE1SiOOrw993G3N8DqW85b7Ijew63k6RpdqS7Hxdw+V8lMK2AjrLOwlDw
- asI8m3Xei4l436OswwWpzr9ewC/SDxD3eZwmEDRBSYwTc8KMOmfWILu4nuWl6n064UIN
- xlw6LdvIgxdd1UaPnOuUvK2ZjGRRONMDN2uf3LQQDemEhoyNNDLs0yMaoYjw2DDYbV9w
- w6gQ==
+ b=kIgGVawBkeuBT5QgMjpTpRk6okub5Yihbwr/2tvfFoliQnBN47vSe0/kEfbzU/TzwX
+ NVvA1jaJ/FhMou/Lf3aakQQ8qXj6vduLA0qKk8U52qwUK/X675YS5+ECpaovhwnZOMW2
+ JZdSMhpV0Pd3S6NHBefn8wSpcLJllD2XR9BQ7kHz0tUMe6Ji9poQqPCO95K+KwPfILyb
+ QiFA2iGigdRtLN0VEx+R0m62IHDNCMOhGf80+Pvj44wHG/kwbWljCAV7SkJ57QyJkeDC
+ ech4KNeXvqXlXAIfuQOulL8TSX7P8o2yY3P5PSU1oXt0JOKlvWo/7q+tAaSBP+EY46DY
+ 2GFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724920249; x=1725525049;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
+ d=1e100.net; s=20230601; t=1724920251; x=1725525051;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
  bh=jaYmFLWlSAXMvw/4JyRF0sEo92YZIm+UJnVLARyAR8o=;
- b=aqBkvw1Xe4tiUl7CdTmrCkwTMCGSE1QnlunXwZAjQUCfGxhAa038Amclr/jI2B1kLm
- EPUbNGwCbXTfwDK5XkGlBla86L06hHRol/gSPcnBTbcJVizt6GdFPuRmbGL2IaiYR+c8
- VgEkmOfNvjf2KnNVtFlHh1ZwJSWsbZgdIHdHfks0Qc6fv1FOq3RBrSeJp4wDurFVhcHQ
- VOeKZ9CIpOzPQYDGlQSM829dRMDpwdJ4ucFqGniOgKX8Gjl4iS3nxLeiILFAjyGOPiMS
- SodzzMtEuSyl9zLDHdL98AQB2ONXYr/nD5vtsudv2PdpGcuQIOHxKnNMxHYhVB2/9fg1
- LSMA==
-X-Gm-Message-State: AOJu0YwP4TZJgG2za2F+jSA/kzbrvfAIuQm0hIIm6hTBpvh8aGzQsyb/
- DIOGE8mcrQTBWyFW6jJFIf4r3kxw4K7CgOjqG0rhTisubDJyFtRua7qoLD3AEoDpyA==
-X-Google-Smtp-Source: AGHT+IGwwhsGRaWgfV8DKvNeHQz6Rk3pbvMeK17wIce+KQyvYAHbS3TcKhQSZQoMIANlaanjXcpLiA==
-X-Received: by 2002:a05:6a20:e617:b0:1c4:2134:dd54 with SMTP id
- adf61e73a8af0-1cce10ef0cfmr2459396637.45.1724920249354; 
- Thu, 29 Aug 2024 01:30:49 -0700 (PDT)
+ b=CbuSE8FTj9zn9uStn96+XIVwEP5Nz28fYwiyWUgmDS0ZvI3ATVaQuZBn74x8vtRDXp
+ H5nWBwUQcyE9LXGi4QvFeaj9nwLHCcsTkGVgf7G62xZF46lR/l4HftxnSeu2/LquDXxt
+ kwuxExQPyGKJ84RPzZMfTyW8UgxzPwinx04v0NCUbkuNtypvc+SDEQKAFMzjSdj+m4pO
+ IQPKmyXx8RZMI2bwNLFl/ObF2+2q1jTz+Tnyduix7FvDvHIdpRTP8TTQ3Vb6VWI08B9d
+ 8kBl8X+TZG9gDBNkwvxvSAAPymIHDJWS+KzscQoQvFFzgfxHNju/vObzJperIVW8XC4D
+ DZyQ==
+X-Gm-Message-State: AOJu0YyraoGQnxfAyBq2q6kxgf5fLhTEtBprv9uscbbD66IQ7+TDd5n/
+ CB26ckNMvUmZJTuQIW2XfNqXwMSMiRR0kyKrlYNp0N6/2E85NQt+nHmmjO2IfCMYqA==
+X-Google-Smtp-Source: AGHT+IG6LOyqm3WmcXx6j9wuxAe55x8WFGC4oSiF+eaYQ7WU/ZUwktCpCjjAtjSrno5qUhgA/RBSmg==
+X-Received: by 2002:a17:903:238e:b0:201:d659:4c29 with SMTP id
+ d9443c01a7336-2050c237657mr24313125ad.21.1724920251003; 
+ Thu, 29 Aug 2024 01:30:51 -0700 (PDT)
 Received: from server.lan ([103.213.4.16]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20515552b6dsm6582755ad.249.2024.08.29.01.30.47
+ d9443c01a7336-20515552b6dsm6582755ad.249.2024.08.29.01.30.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Aug 2024 01:30:48 -0700 (PDT)
+ Thu, 29 Aug 2024 01:30:50 -0700 (PDT)
 From: Coia Prant <coiaprant@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Coia Prant <coiaprant@gmail.com>
 Subject: [PATCH 1/2] watchdog: Add a driver for the photonicat watchdog
-Date: Thu, 29 Aug 2024 16:30:34 +0800
-Message-Id: <20240829083035.227423-1-coiaprant@gmail.com>
+Date: Thu, 29 Aug 2024 16:30:35 +0800
+Message-Id: <20240829083035.227423-2-coiaprant@gmail.com>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240829083035.227423-1-coiaprant@gmail.com>
+References: <20240829083035.227423-1-coiaprant@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 29 Aug 2024 15:13:13 +0200
