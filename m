@@ -4,82 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59A36C7EE32
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 07:44:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0E97C7EE3A
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 08:01:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3FD888B3C;
-	Thu, 29 Aug 2024 09:44:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 7A33088950;
+	Thu, 29 Aug 2024 10:01:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="G3DFdxEo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mbXgnCcj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 608C088B59; Thu, 29 Aug 2024 09:44:39 +0200 (CEST)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id 81F55888C1; Thu, 29 Aug 2024 10:01:53 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6CC6788297
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 09:44:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 91D5A889FF
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 10:01:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-37189d8e637so213809f8f.3
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:44:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5bef295a429so353559a12.2
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 01:01:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1724917477; x=1725522277;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=VvXR84GuCiJq1Fjb4OafSOfEkcnp1Pozl2saDnA9lX8=;
- b=G3DFdxEo37r79SKaWribUc++SjMG5OT3v4CS8+1tk0hdabbK4pnGP165nqxjrktdb+
- cS7fpPEuPvm4R3WB6iq+lsiqpY8TXM83IUo5Ku6FwKMhpZCz31e1AUEkahuTTTTLyuNC
- BUSC3l5Gy6brdOrQK9nxax+vFU73h1ZjEbcdTQnKphQWkpYTj+s7hFEMHXbsC46odtkM
- EBtPy1vBZvWX00MfMRNCPtq7aALns/IsqkRjfWw6YiIGvf7MMddUPK02bZWLk4UqlAt3
- FWflw0Jfor6nmPpWxRoktjcuzS4SjWykL7oJ7hHKSbqrwfbaiv1775ocGA2lPWzm+4J4
- dZKg==
+ d=gmail.com; s=20230601; t=1724918511; x=1725523311; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=U54JoKSwBGslVZd5lUbZM+i77nT/yJLQlPO1muIkMKU=;
+ b=mbXgnCcjHHhkN6MsaguuKAY9rhSvi4yPXd187anFStWwXr78KTmY27vyt0dAkSAUDa
+ 8ewM19QstBESeNvCYpHIIuc3Rg/w55uhPwxf/WaPTZK03GDIj0AmFYgPOZAsY0u7Jtis
+ AeOPdUq5upnZIPKAxhhzPDX72Itk0dwKpL8TdCr3+kKkmngfNE9nThl9T+aTn+8+gadw
+ +xHoUm29W43Q4wl4C2qYzTAYYzFnOiCNjvwBe5WQoIrn3F3NmPd+iEqILeXFzibbD/7V
+ il/qcf6iGOY6m2kkDmYlh98bTlJTP5NruXaVJphe5VHTdnerm+xk6jA2NKXFIbD5pr//
+ ZI2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724917477; x=1725522277;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1724918511; x=1725523311;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VvXR84GuCiJq1Fjb4OafSOfEkcnp1Pozl2saDnA9lX8=;
- b=AqNWWFsYKSnC6Q72Hx1cL0q6kSKg7Ydc6bt7loM/JDcW4XpTPdJmbfEsFRO+WQXhp0
- fG36n/Kvk7Ql/+jzmVblkNVvbBj0xiKJaYlOMjITw5XW/rww2RLh40Y94eD29zZP4fZf
- 1nrktwLh8BBia4dptwHA0aVRTgp6w3i5xRtXMFCvYRHtutY7sHZQHfoZJ45m0YvZrhUW
- +3rLluG9VBjV2c0u50KZDgoxSKaIBpF2y+mkQ0kHqg6Juu0P+21vvrKxUrtNxsFronc5
- gWswff+YpdYuhyrij0raaf00Gx79dsGeHDP5ATxBDmnfLzEjIMba9HYFbLTz4LXc09nO
- n4+w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWv9Ga8D2wIktSz8h66OhnMU7zcFkCQQAQZJUeBLM52wUSe0svFMfyDsXeFPG/Ws2Dn5dPN8Ho=@lists.denx.de
-X-Gm-Message-State: AOJu0YxTGjSuiQhZqtaCGRH01ekzHztE1lqXgyg3dYeSFqMiURB/HJiK
- DZ2XtQI4XW28fUbOiSSVxP5weBcqKYDbBu/sLSeSaDbAH/2fQAZZOgKFhR0g/DU=
-X-Google-Smtp-Source: AGHT+IGSDwjW9UniFk4k+DSh+YhSvb55XH3CGNzYHTof9+Wq+VKWuIu28ybRqWrFzEuG1AzIQ5FbOQ==
-X-Received: by 2002:a05:6000:50:b0:368:667a:3dec with SMTP id
- ffacd0b85a97d-3749b557de2mr1253382f8f.18.1724917476411; 
- Thu, 29 Aug 2024 00:44:36 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42bb6df0adbsm8836045e9.15.2024.08.29.00.44.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Aug 2024 00:44:36 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Linus Walleij
- <linus.walleij@linaro.org>, Lukasz Majewski <lukma@denx.de>, Miquel Raynal
- <miquel.raynal@bootlin.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Nishanth Menon <nm@ti.com>, Zixun LI <admin@hifiphile.com>
-Subject: Re: [PATCH 5/6] usb: gadget: dwc2: Drop
- get/set_udc_gadget_private_data()
-In-Reply-To: <20240826143851.8020-5-marek.vasut+renesas@mailbox.org>
-References: <20240826143851.8020-1-marek.vasut+renesas@mailbox.org>
- <20240826143851.8020-5-marek.vasut+renesas@mailbox.org>
-Date: Thu, 29 Aug 2024 09:44:33 +0200
-Message-ID: <87wmjzrcwu.fsf@baylibre.com>
+ bh=U54JoKSwBGslVZd5lUbZM+i77nT/yJLQlPO1muIkMKU=;
+ b=D/MQP5hZ8jDE35+K12X0R7IpsubvO2RSFkXwN5RFRMc/MRldd6OJCY968i/9D29HFy
+ VtZukjaCw4wjC1UIzrdiUCvyHepCqCe0ps7zJpphQclXzNPmN6N5ISSkaFlqfm1x/Jh9
+ ITon5ASp9fBIoOIw6I77bJoVs0S1/B5KFZleZG+vlG5tWrObXt2HE3fzrRShYbWoevsw
+ hjcu4GHDY3KkgibWUzL/4AJxGhabTTvjsnbvXgg8+En3MyvNtSx19nVLBfLNBdR4LoLE
+ lz6CRhCpgWzz8f3zG6qwiyTlA/0wxJY0oJaAHGnraTZFQsG+82zFGZWQ8XP6ECRZf3/c
+ +ZrQ==
+X-Gm-Message-State: AOJu0YxvYSfx32TM9kr1vMvqFI/dgMySG0laBIRnnD67xMspVcgjpv/r
+ TnuSsG3YuBilww4dhEK/3rEzEjcr/OaSIzBhiTNJ4CON+8HnDZnHyBG1I10buAkw/dB8zaL3mwk
+ +CZzvcxmK6W+XNvLAegtz8frQ5AHQaJ7sYDc=
+X-Google-Smtp-Source: AGHT+IE+A39GPSBWTRSCqlHLw9jgNIURCRnMX8f/89tJDV+DCN+ApJ1l4wQstj0QCn4TzvOWsZ9G6f62iXXb3UKaRzI=
+X-Received: by 2002:a05:6402:3482:b0:5a1:24fc:9a47 with SMTP id
+ 4fb4d7f45d1cf-5c21ed85338mr1193272a12.27.1724918510218; Thu, 29 Aug 2024
+ 01:01:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+References: <7f33e3d7-e5ab-4c1d-a69a-153a50a6b0c2@Spark>
+ <7cbce75d-51fe-4c87-9c90-01e86a06f0fe@Spark>
+In-Reply-To: <7cbce75d-51fe-4c87-9c90-01e86a06f0fe@Spark>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Thu, 29 Aug 2024 09:01:38 +0100
+Message-ID: <CALeDE9PEMh14rp8paEvhN6pRebxzXonCqidvaTaByHHG2MLgZw@mail.gmail.com>
+Subject: =?UTF-8?Q?Re=3A_Grub_doesn=E2=80=99t_load_devicetree?=
+To: =?UTF-8?B?VG9tYcW+IFphbWFu?= <tomaz@mono.si>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,56 +88,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
-
-Thank you for the patch.
-
-On lun., ao=C3=BBt 26, 2024 at 16:38, Marek Vasut <marek.vasut+renesas@mail=
-box.org> wrote:
-
-> Neither get_udc_gadget_private_data() nor set_udc_gadget_private_data()
-> is ever called anywhere, remove both.
+On Thu, 29 Aug 2024 at 05:14, Toma=C5=BE Zaman <tomaz@mono.si> wrote:
 >
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
-> ---
-> Cc: Linus Walleij <linus.walleij@linaro.org>
-> Cc: Lukasz Majewski <lukma@denx.de>
-> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Cc: Miquel Raynal <miquel.raynal@bootlin.com>
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: Nishanth Menon <nm@ti.com>
-> Cc: Zixun LI <admin@hifiphile.com>
-> ---
->  drivers/usb/gadget/dwc2_udc_otg.c | 13 -------------
->  1 file changed, 13 deletions(-)
+> I=E2=80=99m working on an arm64 board with an NXP LS1046A CPU and I simpl=
+y cannot get Grub to load a different device tree than the one that=E2=80=
+=99s provided to it by the EFI Stub.
 >
-> diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_=
-udc_otg.c
-> index 7e9dd6f4268..fbd6c9600fc 100644
-> --- a/drivers/usb/gadget/dwc2_udc_otg.c
-> +++ b/drivers/usb/gadget/dwc2_udc_otg.c
-> @@ -121,19 +121,6 @@ static void nuke(struct dwc2_ep *ep, int status);
->  static int dwc2_udc_set_halt(struct usb_ep *_ep, int value);
->  static void dwc2_udc_set_nak(struct dwc2_ep *ep);
->=20=20
-> -void set_udc_gadget_private_data(void *p)
-> -{
-> -	debug_cond(DEBUG_SETUP !=3D 0,
-> -		   "%s: the_controller: 0x%p, p: 0x%p\n", __func__,
-> -		   the_controller, p);
-> -	the_controller->gadget.dev.device_data =3D p;
-> -}
-> -
-> -void *get_udc_gadget_private_data(struct usb_gadget *gadget)
-> -{
-> -	return gadget->dev.device_data;
-> -}
-> -
->  static struct usb_ep_ops dwc2_ep_ops =3D {
->  	.enable =3D dwc2_ep_enable,
->  	.disable =3D dwc2_ep_disable,
-> --=20
-> 2.45.2
+> =3D> fatload mmc 0:1 $kernel_addr_r /EFI/boot/grubaa64.efi
+> =3D> fatload mmc 0:1 $fdt_addr_r /boot/dtb/fsl-ls1046a-rdb-sdk.dtb
+> =3D> bootefi $kernel_addr_r $fdt_addr_r
+>
+> At his point, I get a couple of errors like =E2=80=9Csmmu node not found=
+=E2=80=9D.
+>
+> However, if I, instead of "fsl-ls1046a-rdb-sdk.dtb=E2=80=9D use "fsl-ls10=
+46a-rdb.dtb=E2=80=9D, then I get to Grub without any errors.
+>
+> And this is where I encounter the issue. Because I would like to use a di=
+fferent DTB for booting Linux than the one that=E2=80=99s provided by the E=
+FI configuration table, I set
+>
+> devicetree /boot/dtb/fsl-ls1046a-rdb-sdk.dtb
+> linux /boot/vmlinuz-6.6.3-arm64
+> initrd /boot/initrd.img-6.6.3-arm64
+>
+> In this case, the devicetree instruction gets ignored completely, and bef=
+ore I see kernel loading, the message =E2=80=9CUsing FDT from the EFI confi=
+guration table"
+>
+> Is there a way for me to override/replace the device tree that u-boot pas=
+sed to Grub? I tried passing the =E2=80=9Cdtb=3D=E2=80=9C parameter to the =
+kernel boot command, but in that case, I get "EFI stub: ERROR: Failed to ha=
+ndle fs_proto=E2=80=9D because kernel when booting doesn=E2=80=99t appear t=
+o have access to the same filesystem that Grub does.
+
+Why don't you load a new one into memory with u-boot and then grub
+will already have the one you want to use and grun doesn't need to do
+anything. Something like this on the U-Boot command line would load
+the DT and grub and start to boot:
+
+load mmc 0:1 ${kernel_addr_r} EFI/BOOT/BOOTAA64.EFI
+load mmc 0:1 ${fdt_addr_r} dtb/${fdtfile}
+bootefi ${kernel_addr_r} ${fdt_addr_r}
+
+You'll need to adjust for storage, partitions, file paths etc.
+
+> Thank you!
+>
+>
+> (this is my first time using *any* mailing list, so apologies if this is =
+the wrong address to send this question to)
+>
+> Toma=C5=BE Zaman, CEO
+> Mono Technologies Inc.
+> +386 30 651 645
+>
+> [cid:18EB2FEE485A4DD7A1CE716CE14FCBC7]
+>
