@@ -4,80 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59A11C87FCD
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 17:31:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44EF8C87FCD
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 18:10:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB58088C1B;
-	Thu, 29 Aug 2024 19:31:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 80662886CC;
+	Thu, 29 Aug 2024 20:10:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="R9n8JVoC";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OAVqUIF/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D61988CA1; Thu, 29 Aug 2024 19:31:23 +0200 (CEST)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EC04A88BEF; Thu, 29 Aug 2024 20:10:09 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06DB087BF4
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 19:31:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E08688481
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 20:10:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-270596dbf59so633229fac.3
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 10:31:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724952680; x=1725557480; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Wg4ZJlI0gu98JoOS2QXeUOMcuLdDOG/lR0vukwGCPUo=;
- b=R9n8JVoC/nvhnAbflNyKI+8z0P2FuaxK/ydZtexkKo+ZdmmxhUcrcOu9CuH1ZcJ3Ft
- v2/ZqcRIqIJzkMFF4aFeUgJcsNRqBTQr5lUjgOm16pg6yvjTxb1RD0QRvZZ1sDzAUGr0
- On0EzeQRZz72uEuKCSdIQiK6ZMBYfFGrDlzVE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724952680; x=1725557480;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Wg4ZJlI0gu98JoOS2QXeUOMcuLdDOG/lR0vukwGCPUo=;
- b=rQsItCUGBPomgeZQ3p98pXiLupgSjyADVlva13O+IhtXEYvR8h29qwmE7IaMHcq8e8
- /1Z3NZXXCTRBNJdCX4ve/2VomuJOGDMz3gZ7a+1SEn57WNxTln0W++h6p+PyRWvFviYb
- bOmeHyyxxd3CxE5aBFAF/cL0z/g5GpmqBN2PNP7Tl1XxusdheDCHGVUIKxYqxAkMO+Lz
- blYkWS9DBG9eJi2VuRpOucATzapErOzmifat5HQF6zIz5oBDsb+2KHhkH1s/UkUivOa3
- BdcqvTfjq2SmuPyMA2bHcqd8GoGCeUVXvwHk1c3kv4AZRpEl+XonbAfGZ6e2aQQvCr3V
- kT+A==
-X-Gm-Message-State: AOJu0Yz/MhFuRWXS/Cf3uOUEDCHLfS7Bb2h9XcSslKEhsLXIbF+e8Zav
- jHb2O1MGm3ZUOKMTEamahMOlmHu3GzvKKylvQNnihumnmTldVnuXXxM/FoIaBkY=
-X-Google-Smtp-Source: AGHT+IFzfIMqgmHw3JS2CtfB7zbo5vPLaIYxy+Slw134ncKWZQxjHYKd0mXIOl1Km500tcefwvpR8g==
-X-Received: by 2002:a05:6870:9110:b0:25d:fab0:b6f4 with SMTP id
- 586e51a60fabf-2779008e683mr3886447fac.1.1724952679633; 
- Thu, 29 Aug 2024 10:31:19 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a806d5dda7sm69049985a.106.2024.08.29.10.31.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Aug 2024 10:31:18 -0700 (PDT)
-Date: Thu, 29 Aug 2024 11:31:15 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Eddie James <eajames@linux.ibm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Subject: Re: [PATCH 18/19] boot: Imply CRC8 with VBE
-Message-ID: <20240829173115.GM2479150@bill-the-cat>
-References: <20240829145802.1827952-1-sjg@chromium.org>
- <20240829145802.1827952-19-sjg@chromium.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47TIA5f0119017;
+ Thu, 29 Aug 2024 13:10:05 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1724955005;
+ bh=V+wUPnSiwYMJF6hsdWC+asFEqOM6vNtl6bEBAK5LI0I=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=OAVqUIF/B7x+yw3e/Pac/3Zi0j96BOTCo4qqbp0PZEWFgKFKxL8t04AkvIb7LwUBS
+ jpggV3ZBJbEQEsWTDAWPmm3OXPOvWzXYTlGD82jaAZtmZXY0eHRQrBdvoT8LeByNLR
+ gG/r5Irbm1mFpgBuz+0L/ZgNoR+h89GoXW01OkiQ=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47TIA52w075094
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 29 Aug 2024 13:10:05 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 29
+ Aug 2024 13:10:04 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 29 Aug 2024 13:10:04 -0500
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47TIA48Q070737;
+ Thu, 29 Aug 2024 13:10:04 -0500
+Date: Thu, 29 Aug 2024 13:10:04 -0500
+From: Nishanth Menon <nm@ti.com>
+To: "Limaye, Aniket" <a-limaye@ti.com>
+CC: Tom Rini <trini@konsulko.com>, "Kumar, Udit" <u-kumar1@ti.com>,
+ <u-boot@lists.denx.de>, <n-francis@ti.com>, <m-chawdhry@ti.com>
+Subject: Re: [EXTERNAL] Re: [PATCH 1/6] arm: dts: k3-j7200-r5: Add the pmic
+ node in R5 dt
+Message-ID: <20240829181004.kux7akxy5hn5tmek@lucid>
+References: <20240531130823.646311-1-a-limaye@ti.com>
+ <20240531130823.646311-2-a-limaye@ti.com>
+ <ace9596b-4fa6-4eb6-9ef8-35a545a2a022@ti.com>
+ <30131b07-9368-46b7-b526-55c3af0a9c28@ti.com>
+ <20240614145503.GQ68077@bill-the-cat>
+ <0963146f-c050-4a37-b0ea-bc6f62663832@ti.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="wII9/Byf9IGA14Bh"
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Disposition: inline
-In-Reply-To: <20240829145802.1827952-19-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <0963146f-c050-4a37-b0ea-bc6f62663832@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,58 +85,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 14:02-20240829, Limaye, Aniket wrote:
+> 
+> 
+> On 6/14/2024 8:25 PM, Tom Rini wrote:
+> > On Fri, May 31, 2024 at 10:24:30PM +0530, Limaye, Aniket wrote:
+> > > 
+> > > 
+> > > On 5/31/2024 7:25 PM, Kumar, Udit wrote:
+> > > > 
+> > > > On 5/31/2024 6:38 PM, Aniket Limaye wrote:
+> > > > > Add bootph-pre-ram property to the buck node in the pmic needed for
+> > > > > ESM error event handling.
+> > > > > 
+> > > > > Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+> > > > > ---
+> > > > >    arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 9 +++++++++
+> > > > >    1 file changed, 9 insertions(+)
+> > > > > 
+> > > > > diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+> > > > > b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+> > > > > index fb7e2e50239..78d07ff4e70 100644
+> > > > > --- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+> > > > > +++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+> > > > > @@ -96,3 +96,12 @@
+> > > > >    &mcu_udmap {
+> > > > >        ti,sci = <&dm_tifs>;
+> > > > >    };
+> > > > > +
+> > > > > +&tps659414 {
+> > > > > +    regulators {
+> > > > > +        bucka1: buck1 {
+> > > > > +            bootph-pre-ram;
+> > > > > +        };
+> > > > 
+> > > > 
+> > > > why not to add this in kernel DT
+> > > 
+> > > Manorit has already posted a series to kernel to add bootph- properties
+> > > across platforms... Specifically the patch here [0] addresses this.
+> > > 
+> > > Once that is merged, and goes through the rebasing tree in u-boot we will
+> > > need to send patches to remove the bootph properties from the -u-boot and
+> > > -r5 files. Until then we need this patch for the ESM to work. Else we can
+> > > wait till the kernel dt patches make it through to u-boot for me to roll out
+> > > a v2.
+> > 
+> > Yes, we'll wait until we can get this all in via OF_UPSTREAM.
+> > 
+> 
+> Tom, Udit,
+> 
+> The patch in Kernel DT here [0] seems to be taking longer to go through.
+> In the meantime, does it make sense for me to send this current series in
+> u-boot with the bootph patch above, to unblock ESM support for j7200-evm?
 
---wII9/Byf9IGA14Bh
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+NAK! This is why there is a review process in upstream. Lack of ESM
+survived in j7200 for years now - there is no urgency to carry that
+stuff and then have someone to start tracking and cleaning up behind.
+Please DO NOT. The only exception we have permitted now is for you to
+add patches in dts/ which *have* been upstreamed and accepted by
+maintainers but it is a couple of months away for OF_UPSTREAM to sync
+(aka for the next rebase, those changes will be dropped).
 
-On Thu, Aug 29, 2024 at 08:58:01AM -0600, Simon Glass wrote:
-> VBE uses a crc8 checksum to verify that the nvdata is valid, so make
-> sure it is available if VBE is enabled.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
->  boot/Kconfig | 2 ++
->  1 file changed, 2 insertions(+)
->=20
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index afe04c7327a..49e99e5e155 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -716,6 +716,8 @@ config SPL_BOOTMETH_VBE_REQUEST
->  config BOOTMETH_VBE_SIMPLE
->  	bool "Bootdev support for VBE 'simple' method"
->  	default y
-> +	imply SPL_CRC8
-> +	imply VPL_CRC8
->  	help
->  	  Enables support for VBE 'simple' boot. This allows updating a single
->  	  firmware image in boot media such as MMC. It does not support any sort
+This policy has been asserted over and over again on these platforms.
+Please focus instead on helping getting kernel changes upstream by
+helping support engineers in that effort.
 
-I really worry the lack of "if SPL" / "if VPL" here leads to Kconfig
-warnings that CI doesn't pick up.
+> 
+> When the Kernel DT patch is merged and taken through OF_UPSTREAM, I will
+> anyway send a patch to remove all of the bootph from the u-boot DT files.
+> With that, I can take care of removing the above bootph property too.
+> 
+> Let me know what you think, and I'll rebase this series and resend it then.
+> 
+> [0]: https://lore.kernel.org/all/20240814-b4-upstream-bootph-all-v4-0-f2b462000f25@ti.com/
+> 
+> Thanks,
+> Aniket
 
---=20
-Tom
 
---wII9/Byf9IGA14Bh
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbQsGMACgkQFHw5/5Y0
-tyyHqQv8C+9WgsW30otd1kjEcJwQCiCFihbEAi93t0yccQ9sWmI6puDsw5UlICQz
-8TmU73Y5+Z/9Bfra0/5V636BB4p+UXozMu18DGgdJFqeqosBR68vTJJ/BmEjBDiG
-CdnPQFD/1BepUuvqy3a6G2g04Xrw6pxsZoV0aztTgubpOeegpQHeeNQwnTCxLDXo
-LNm6uqRYOpbvIZMAzzc/EuvvaEwd9vqDTnQd4uv0MGaqJw+kNoTjYpGCKQHsulth
-Xv6d0FGINW0jluWibSaDnuuQpQKB0b6bfWIRqni0wi+zMSZgoseHbA6o6TWRPBEF
-xfqomXOR0+ofO1MYtJiSdChGZFAXu811qac9twzTMxYOByvwvM58QqUx8Ahr6rZT
-Dn0tYzD6tqXKzyCPpuraYo9BVvo/aXVaVqsKevNg5GSERj8QKfUL9/GZAZ5I8DvB
-8yu9PjdGHz6TldGAcn5hKaj/ZTMxfd7GW5icCxH/gMRwV8sXRmXytVxUzNEy+jdn
-iiADTQ34
-=oJJ3
------END PGP SIGNATURE-----
-
---wII9/Byf9IGA14Bh--
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
