@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82B8AC7115A
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 01:23:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61968C7115B
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 01:26:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01C5688A3E;
-	Thu, 29 Aug 2024 03:23:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 967FC886F9;
+	Thu, 29 Aug 2024 03:26:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="t1RzZmuW";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="n4Ucyk+5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WKet/RzE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C79D886A3; Thu, 29 Aug 2024 03:23:05 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6AF2E886A3; Thu, 29 Aug 2024 03:26:29 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1141C88A58
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 03:23:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B539886F9
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 03:26:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4WvNnf5vBPz9sjB;
- Thu, 29 Aug 2024 03:23:02 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1724894582;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Ou1RjCH/IGLzGGeYpJ6mBsUGWAAFylSeA+9nzlDWFIk=;
- b=t1RzZmuW6DSgpFkWYR4LHembNwm9GVXBjShNTl4UrHnp5ns3XC06JQwxw45UbWAySuGV4Z
- EpHnh7omN+FvpnhYbCcTgwk2dPIaHpqLYL2GIneWcH0EIGzY0cRkCDyj/JGbzLLmLed1rU
- gxLtVFCy/CcOP1YtIDmpV2Tcj4JZts1j4DXZ+RcrMYyV7SceBZQ/O6sUvvtQMBm6gLb506
- qKt8EGNJO8kCpFKS8mYB5ERtMCxSJzEBjB7PrLAC2C0Mw5PifeEnrZ42x+1lDfmEuvKWD5
- Xxp5ntpa6D9gHOhQiXm3bAhKN+3YSNyLBxAfAsiB3MfZSRsBfkoUiY9yruh4BQ==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1724894581;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Ou1RjCH/IGLzGGeYpJ6mBsUGWAAFylSeA+9nzlDWFIk=;
- b=n4Ucyk+5tpdPAWSsEEZ64HJJKATve7DXZtizBhraQfUyhlyoATmOKNI11syuj4TR8iAV47
- CvOwp3XB0U++MBusaHH/o/9Uzc0uFXiup7wyubK1JB22i+4DPqJJ/GvDwsCCy94FdS3WAL
- Lz44FVw6D1mv7np13PxeGqS7GSYXkxO3Y31DCmRCcT0iIpGOqnTp2pzeSd9XTl0I8ePHpR
- 2zz2fdmVziE5mQZmRiI0EOTt52N8zYoZfQhjXst6bOCouCcTcVT3XziNPdS+Cf2d5uOgpx
- SBfaWf+y9Y8x7cJnJSDbVn7sMCnmfox9QizepB/ZkEx+Y8ce9sZwPYGpCtvavg==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Sean Anderson <seanga2@gmail.com>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] ARM: imx: Wrap i.MX config options in HAVE_IMX
-Date: Thu, 29 Aug 2024 03:22:29 +0200
-Message-ID: <20240829012247.179471-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-53436e04447so122888e87.1
+ for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 18:26:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1724894787; x=1725499587; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=V9oJtVaJzYjUu2FnA7G8i4YMP0e9lQ5kKbos+CDcoCE=;
+ b=WKet/RzE2YF8o6iQQCUwD9PtG1+T2BMW1/n0obbCfkSv1pKBwbcThKr6rCj1xZa6JB
+ IZtTf9G5C+dxJVqcWGVHcGrzo32Z+IYD/FE3ZwdUV3DgL8LV7L5l4fQRI9SYpewOIfTB
+ KZfvfz6LUV2ODJ0cZq915ddVc1zVMLXLF10dB2pQv4/bffY1SkF4HLUOQxWO8VihQ1IB
+ 1h7Q4XwOpGEkVmUdSmyG2AM3Jq15Hp3wp2LpDp+Tavrj21RJNrkZ58afC1swQo4sVXYi
+ TkNQT/lEDZbUd2NgUcxQ3qtcjlJGtXZFPkoCHwddazY0tjHKBS4FdE9yAxtR9aEuxgRL
+ 4tPg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724894787; x=1725499587;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=V9oJtVaJzYjUu2FnA7G8i4YMP0e9lQ5kKbos+CDcoCE=;
+ b=KjZYB0NyDPbijC0TmvINlvGVSZ1Sbg4wrFbJJAZmDzu923X62zVjXTiycrM3Mpg94q
+ a/D/B+hIeeWnip96mdryp1OGBj6BgcagU6xJuZJ95m0vL77CBPlSG/iVkUJE7zL73SXA
+ FNPXIKuxxnfWiTDTWwqDWbzOS/Azlz0eTre+FGi/0kn1Bwvydjiqhq311RxBbih4cQHR
+ 4tgmULbmRaArubp5xAOM9O1zVhIhKmTsGKPluko7sOqVujV/QqHyU1dnytvcn8UEFc/p
+ BertI5nUij9y7NEcSksHTvGzTC/5Id04AhPHRGKimDoIQMikS/q/wMGT2VmmUCC4Cl5U
+ 6CfQ==
+X-Gm-Message-State: AOJu0Yz33zjuTOm2MvzEikXCDXdxJpgBb4VwNYYL1s2KbnIBJtbvI570
+ ZjA9jhepX8uxWqa4xZ67wFrNRZlCpiADlBul+22JKFaWhyG+hIc3ocVXJtd41CO4pUWeYHFkpP7
+ nOO0c7IPyJkdjSduVYmvCsNc2lSI=
+X-Google-Smtp-Source: AGHT+IGeb2wkH9QtRnaGq2+foN+xVLu4WSS/ts+tqsivob8b3ZhhJXMZ6qLNPMzVU3Rt1G3db19dXZVml44i6oUbCrk=
+X-Received: by 2002:a05:6512:39d3:b0:52e:a737:2958 with SMTP id
+ 2adb3069b0e04-5353ebf75b1mr200062e87.28.1724894786178; Wed, 28 Aug 2024
+ 18:26:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 6f02b75051bf9b3efac
-X-MBO-RS-META: 5o96effb7cdpbhcsdyc9mskt59hawots
-X-Rspamd-Queue-Id: 4WvNnf5vBPz9sjB
+References: <20240829012247.179471-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240829012247.179471-1-marek.vasut+renesas@mailbox.org>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 28 Aug 2024 22:26:14 -0300
+Message-ID: <CAOMZO5AnrOU87M1NigUqzF-p8zMctDv105C36XTzbcgKPbUyEg@mail.gmail.com>
+Subject: Re: [PATCH] ARM: imx: Wrap i.MX config options in HAVE_IMX
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,41 +90,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Wrap all the i.MX specific options in HAVE_IMX, otherwise they keep
-showing up in other SoC vendor configurations. No functional change.
+Hi Marek,
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Cc: Sean Anderson <seanga2@gmail.com>
-Cc: Stefano Babic <sbabic@denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- arch/arm/mach-imx/Kconfig | 4 ++++
- 1 file changed, 4 insertions(+)
+On Wed, Aug 28, 2024 at 10:23=E2=80=AFPM Marek Vasut
+<marek.vasut+renesas@mailbox.org> wrote:
+>
+> Wrap all the i.MX specific options in HAVE_IMX, otherwise they keep
 
-diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-imx/Kconfig
-index c34bc25c0bf..134e42028c3 100644
---- a/arch/arm/mach-imx/Kconfig
-+++ b/arch/arm/mach-imx/Kconfig
-@@ -1,6 +1,8 @@
- config MACH_IMX
- 	bool
- 
-+if MACH_IMX
-+
- config HAS_CAAM
- 	bool
- 
-@@ -200,3 +202,5 @@ config IOMUX_LPSR
- 
- config IOMUX_SHARE_CONF_REG
- 	bool
-+
-+endif
--- 
-2.45.2
-
+Do you mean MACH_IMX instead?
