@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1BE6C83F2E
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 15:01:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F863C83F2D
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 15:01:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9850488CB6;
-	Thu, 29 Aug 2024 16:58:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 16F8C88C88;
+	Thu, 29 Aug 2024 16:58:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AkT3pYCr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hk7Oq8/T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DF3E88CA8; Thu, 29 Aug 2024 16:58:32 +0200 (CEST)
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
- [IPv6:2607:f8b0:4864:20::134])
+ id 82FA888CCA; Thu, 29 Aug 2024 16:58:34 +0200 (CEST)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60FF988C3E
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 16:58:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7888988C88
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 16:58:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x134.google.com with SMTP id
- e9e14a558f8ab-39f370a944bso2610895ab.1
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 07:58:30 -0700 (PDT)
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-39d3636e955so2677985ab.3
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 07:58:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724943509; x=1725548309; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724943510; x=1725548310; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fN1LFjtOGpMay28yScUBX9npNVOkoNtSLy1JSwW+LYo=;
- b=AkT3pYCri7/Ce5R54uA3CkADsqN1zwbuClKI93weayHPneVCqbcHMmSVXRZAngtabQ
- pRNNPxsA10AlAJnRMTZlhWHe6YO84lM6O5SZQWE9QmQrOm5wRIEnW5OPkUmbzjSQsk4B
- JSSGkPIFUPSrJfGRO6NxY5KOwGYxle/PtDFkI=
+ bh=umguDeUwn9N9p/E+qVSByJL6Fw72fYu+qjzrR9ckJeA=;
+ b=hk7Oq8/TDgdyxpv4MLQXFxIdmN+fmAfbZo8YjrKJj1HeRMybHZq1vxI2dCzagF0B1b
+ yoQCWUucihniEyobWiI0XFCP+MsOe8iUq35cM/ZSuIohZsYpEC7a4N3ftWsjWQXt9mMG
+ +Ga78tPRni55it5YS7Gha/c3OrnKewxrDjtwQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724943509; x=1725548309;
+ d=1e100.net; s=20230601; t=1724943510; x=1725548310;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fN1LFjtOGpMay28yScUBX9npNVOkoNtSLy1JSwW+LYo=;
- b=Z1BQ4khJFjcPb6jQrqqUUtjfkzn8sEZ9SQ3nUH5RvfQqfBF6HOnb3kM4Y8sZeeGdRH
- DumP1MslJXkQyVPoWlTX1U2NaNO+C10NZXSqrFHqhju1gor3rbGDj8p6UKZAFOMWOF4h
- cWh1IdVZQ6JLpZag+5kf1u28akwRO7xuozX/nR6TLdMjPuRe89rt867CwB436sy8y7bV
- NfxUoV2hh+d/28jOmnjVkCVHmmYY8/u60TtTeBI2J1dCAXQlFQTIZTH7OQAsfX5WzVpk
- PRMQymoN4OHVeVwY99e0kn4eMGClZ4BJVib6ZiWzpfuhTrrI8fHeK5VfnY8Bgu2v/7qV
- /AVw==
-X-Gm-Message-State: AOJu0YwmTx4saLAdotLxTr1XTBReKWBihYThZlvv1b59iVxexknKuXGE
- Sj6M2WaoO/26Zv9DstjGHWbopjeQyOMC+u4n6KXl6RPUNE+KFZMLdYFmb1eVVTf/CIcVl1qgTxQ
+ bh=umguDeUwn9N9p/E+qVSByJL6Fw72fYu+qjzrR9ckJeA=;
+ b=YsudIFTAKOAVYsN/xP8iNYnFkj3jLdIe5ZfYDlcivp5p13kEWEqTyRyNZ7M5T6rvKE
+ 5vlYYoYtTgfMh9FpkD4Iz4C6IDyREzPsjRU43n9vN1HR+V/7BZRd2lSbUNNtlrQgZja0
+ jbprHGNb1KipJipPXZgaazcXQNU1l1UP1VIXSyIKWiyo7VHfxgkd+TwI6sbmCldjWRNV
+ Tyvy+OYVBu0Umkfe89av7VMD7nO63UuZWtXbUxbtkPJ9IuGgOFhjzh3EE/tRui01hGbJ
+ NNkJcaOoVpsZ2RJq+Rri+yo7GLKl2utCFt/nAwr3OAOx9/UKE64pEz8vq+e3F4xxDQ9N
+ EJng==
+X-Gm-Message-State: AOJu0YzjlzQZu92NeCuZ86w1Cn7TaC57GI1O2Px6xhtSmCD9hC9KNhVa
+ o6qSimEpT+Uu80ewea4Jpwh1DTr0RDF5w6rq/nsvJNFSDt/AeYWbFzV6580ugzW58nAsMWw13ww
  =
-X-Google-Smtp-Source: AGHT+IGXb/VpkR5bzWXODGmgmkSR7e1kbK/GYDnPtY6FzMrhH0gMP//NJuFZXBEhg4rHx3LMfl5BLA==
+X-Google-Smtp-Source: AGHT+IGYTS1/Ll+6HsE5nD+sEgrDi05BInDfaC+1P4B/hwcDGh7o5kn58VaQlnPZxy/Lz2L0sumz9w==
 X-Received: by 2002:a05:6e02:1b09:b0:382:b3f8:9f72 with SMTP id
- e9e14a558f8ab-39f37820a2emr42453005ab.15.1724943508944; 
- Thu, 29 Aug 2024 07:58:28 -0700 (PDT)
+ e9e14a558f8ab-39f37820a2emr42453335ab.15.1724943509897; 
+ Thu, 29 Aug 2024 07:58:29 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ced2dcdd2bsm284900173.21.2024.08.29.07.58.28
+ 8926c6da1cb9f-4ced2dcdd2bsm284900173.21.2024.08.29.07.58.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Aug 2024 07:58:28 -0700 (PDT)
+ Thu, 29 Aug 2024 07:58:29 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>,
+ Eddie James <eajames@linux.ibm.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Sean Anderson <sean.anderson@seco.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 15/19] spl: lib: Allow for decompression in any SPL build
-Date: Thu, 29 Aug 2024 08:57:58 -0600
-Message-Id: <20240829145802.1827952-16-sjg@chromium.org>
+ Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 16/19] boot: Allow use of FIT in TPL and VPL
+Date: Thu, 29 Aug 2024 08:57:59 -0600
+Message-Id: <20240829145802.1827952-17-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240829145802.1827952-1-sjg@chromium.org>
 References: <20240829145802.1827952-1-sjg@chromium.org>
@@ -93,101 +95,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add Kconfig symbols and update the Makefile rules so that decompression
-can be used in TPL and VPL
+With VBE we want to use FIT in all phases of the boot. Add Kconfig
+options to support this.
+
+Disable the options for sandbox_vpl for now.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- lib/Kconfig  | 35 +++++++++++++++++++++++++++++++++++
- lib/Makefile |  8 ++++----
- 2 files changed, 39 insertions(+), 4 deletions(-)
+ boot/Kconfig                  | 69 ++++++++++++++++++++++++++++++++++-
+ boot/Makefile                 |  4 +-
+ configs/sandbox_vpl_defconfig |  3 +-
+ 3 files changed, 71 insertions(+), 5 deletions(-)
 
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 2059219a120..72a5f3cb04f 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -811,12 +811,36 @@ config SPL_LZ4
- 	  fast compression and decompression speed. It belongs to the LZ77
- 	  family of byte-oriented compression schemes.
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 7ac34574079..afe04c7327a 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -161,6 +161,18 @@ config SPL_FIT
+ 	select SPL_HASH
+ 	select SPL_OF_LIBFDT
  
-+config TPL_LZ4
-+	bool "Enable LZ4 decompression support in TPL"
-+	depends on TPL
-+	help
-+	  This enables support for the LZ4 decompression algorithm in TPL. LZ4
-+	  is a lossless data compression algorithm that is focused on
-+	  fast compression and decompression speed. It belongs to the LZ77
-+	  family of byte-oriented compression schemes.
-+
-+config VPL_LZ4
-+	bool "Enable LZ4 decompression support in VPL"
++config VPL_FIT
++	bool "Support Flattened Image Tree within VPL"
 +	depends on VPL
-+	help
-+	  This enables support for the LZ4 decompression algorithm in VPL. LZ4
-+	  is a lossless data compression algorithm that is focused on
-+	  fast compression and decompression speed. It belongs to the LZ77
-+	  family of byte-oriented compression schemes.
++	select VPL_HASH
++	select VPL_OF_LIBFDT
 +
- config SPL_LZMA
- 	bool "Enable LZMA decompression support for SPL build"
- 	depends on SPL
- 	help
- 	  This enables support for LZMA compression algorithm for SPL boot.
- 
-+config TPL_LZMA
-+	bool "Enable LZMA decompression support for TPL build"
++config TPL_FIT
++	bool "Support Flattened Image Tree within TPL"
 +	depends on TPL
-+	help
-+	  This enables support for LZMA compression algorithm for TPL boot.
++	select TPL_HASH
++	select TPL_OF_LIBFDT
 +
- config VPL_LZMA
- 	bool "Enable LZMA decompression support for VPL build"
- 	default y if LZMA
-@@ -835,11 +859,22 @@ config SPL_GZIP
- 	help
- 	  This enables support for the GZIP compression algorithm for SPL boot.
+ config SPL_FIT_PRINT
+ 	bool "Support FIT printing within SPL"
+ 	depends on SPL_FIT
+@@ -265,6 +277,28 @@ config SPL_LOAD_FIT_FULL
+ 	  particular it can handle selecting from multiple device tree
+ 	  and passing the correct one to U-Boot.
  
-+config TPL_GZIP
-+	bool "Enable gzip decompression support for SPL build"
-+	select TPL_ZLIB
++config TPL_LOAD_FIT
++	bool "Enable TPL loading U-Boot as a FIT (basic fitImage features)"
++	depends on TPL
++	select TPL_FIT
 +	help
-+	  This enables support for the GZIP compression algorithm for TPL
++	  Normally with the SPL framework a legacy image is generated as part
++	  of the build. This contains U-Boot along with information as to
++	  where it should be loaded. This option instead enables generation
++	  of a FIT (Flat Image Tree) which provides more flexibility. In
++	  particular it can handle selecting from multiple device tree
++	  and passing the correct one to U-Boot.
 +
- config SPL_ZLIB
- 	bool
- 	help
- 	  This enables compression lib for SPL boot.
++	  This path has the following limitations:
++
++	  1. "loadables" images, other than FDTs, which do not have a "load"
++	     property will not be loaded. This limitation also applies to FPGA
++	     images with the correct "compatible" string.
++	  2. For FPGA images, the supported "compatible" list is in the
++	     doc/uImage.FIT/source_file_format.txt.
++	  3. FDTs are only loaded for images with an "os" property of "u-boot".
++	     "linux" images are also supported with Falcon boot mode.
++
+ config SPL_FIT_IMAGE_POST_PROCESS
+ 	bool "Enable post-processing of FIT artifacts after loading by the SPL"
+ 	depends on SPL_LOAD_FIT
+@@ -312,6 +346,22 @@ config VPL_FIT
+ 	select VPL_HASH
+ 	select VPL_OF_LIBFDT
  
-+config TPL_ZLIB
-+	bool
++config VPL_LOAD_FIT
++	bool "Enable VPL loading U-Boot as a FIT (basic fitImage features)"
++	select VPL_FIT
++	default y
++
++config VPL_LOAD_FIT_FULL
++	bool "Enable SPL loading U-Boot as a FIT (full fitImage features)"
++	select VPL_FIT
 +	help
-+	  This enables compression lib for TPL
++	  Normally with the SPL framework a legacy image is generated as part
++	  of the build. This contains U-Boot along with information as to
++	  where it should be loaded. This option instead enables generation
++	  of a FIT (Flat Image Tree) which provides more flexibility. In
++	  particular it can handle selecting from multiple device tree
++	  and passing the correct one to U-Boot.
 +
- config SPL_ZSTD
- 	bool "Enable Zstandard decompression support in SPL"
- 	depends on SPL
-diff --git a/lib/Makefile b/lib/Makefile
-index 81b503ab526..d122f764f9f 100644
---- a/lib/Makefile
-+++ b/lib/Makefile
-@@ -82,12 +82,12 @@ obj-$(CONFIG_$(SPL_)SHA512) += sha512.o
- obj-$(CONFIG_CRYPT_PW) += crypt/
- obj-$(CONFIG_$(SPL_)ASN1_DECODER) += asn1_decoder.o
+ config VPL_FIT_PRINT
+ 	bool "Support FIT printing within VPL"
+ 	depends on VPL_FIT
+@@ -632,6 +682,15 @@ config VPL_BOOTMETH_VBE
+ 	  supports selection of various firmware components, selection of an OS to
+ 	  boot as well as updating these using fwupd.
  
--obj-$(CONFIG_$(SPL_)ZLIB) += zlib/
-+obj-$(CONFIG_$(SPL_TPL_)ZLIB) += zlib/
- obj-$(CONFIG_$(SPL_)ZSTD) += zstd/
--obj-$(CONFIG_$(SPL_)GZIP) += gunzip.o
-+obj-$(CONFIG_$(SPL_TPL_)GZIP) += gunzip.o
- obj-$(CONFIG_$(SPL_)LZO) += lzo/
--obj-$(CONFIG_$(SPL_)LZMA) += lzma/
--obj-$(CONFIG_$(SPL_)LZ4) += lz4_wrapper.o
-+obj-$(CONFIG_$(SPL_TPL_)LZMA) += lzma/
-+obj-$(CONFIG_$(SPL_TPL_)LZ4) += lz4_wrapper.o
++config TPL_BOOTMETH_VBE
++	bool "Bootdev support for Verified Boot for Embedded (TPL)"
++	depends on TPL
++	default y
++	help
++	  Enables support for VBE boot. This is a standard boot method which
++	  supports selection of various firmware components, seleciton of an OS to
++	  boot as well as updating these using fwupd.
++
+ if BOOTMETH_VBE
  
- obj-$(CONFIG_$(SPL_)LIB_RATIONAL) += rational.o
+ config BOOTMETH_VBE_REQUEST
+@@ -710,7 +769,15 @@ config VPL_BOOTMETH_VBE_SIMPLE_FW
+ 	  This option enabled for VPL, since it is the phase where the SPL
+ 	  decision is made.
  
+-endif # BOOTMETH_VBE
++config TPL_BOOTMETH_VBE_SIMPLE_FW
++	bool "Bootdev support for VBE 'simple' method firmware phase (TPL)"
++	depends on VPL
++	default y
++	help
++	  Enables support for the firmware parts of VBE 'simple' boot, in TPL.
++	  TPL loads a FIT containing the VPL binary and a suitable devicetree.
++
++endif # BOOTMETH_VBE_SIMPLE
+ 
+ config EXPO
+ 	bool "Support for expos - groups of scenes displaying a UI"
+diff --git a/boot/Makefile b/boot/Makefile
+index f4675d6ffd5..40e2337de0f 100644
+--- a/boot/Makefile
++++ b/boot/Makefile
+@@ -58,9 +58,7 @@ obj-$(CONFIG_$(SPL_TPL_)FIT_CIPHER) += image-cipher.o
+ 
+ obj-$(CONFIG_CMD_ADTIMG) += image-android-dt.o
+ 
+-ifdef CONFIG_SPL_BUILD
+-obj-$(CONFIG_SPL_LOAD_FIT) += common_fit.o
+-endif
++obj-$(CONFIG_$(SPL_TPL_)LOAD_FIT) += common_fit.o
+ 
+ obj-$(CONFIG_$(SPL_TPL_)EXPO) += expo.o scene.o expo_build.o
+ obj-$(CONFIG_$(SPL_TPL_)EXPO) += scene_menu.o scene_textline.o
+diff --git a/configs/sandbox_vpl_defconfig b/configs/sandbox_vpl_defconfig
+index 96e9211bd19..d18bb7a0353 100644
+--- a/configs/sandbox_vpl_defconfig
++++ b/configs/sandbox_vpl_defconfig
+@@ -27,9 +27,10 @@ CONFIG_FIT=y
+ CONFIG_FIT_VERBOSE=y
+ CONFIG_FIT_BEST_MATCH=y
+ CONFIG_SPL_LOAD_FIT=y
++# CONFIG_TPL_BOOTMETH_VBE is not set
++# CONFIG_TPL_BOOTMETH_VBE_SIMPLE_FW is not set
+ CONFIG_UPL=y
+ CONFIG_UPL_IN=y
+-CONFIG_SPL_UPL_OUT=y
+ CONFIG_BOOTSTAGE=y
+ CONFIG_BOOTSTAGE_REPORT=y
+ CONFIG_BOOTSTAGE_FDT=y
 -- 
 2.34.1
 
