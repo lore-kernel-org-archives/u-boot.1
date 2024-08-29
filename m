@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EA94C7114C
-	for <u-boot@archiver.kernel.org>; Wed, 28 Aug 2024 22:56:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F4CCC7115C
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 01:22:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C350886F9;
-	Thu, 29 Aug 2024 00:56:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8C144886F9;
+	Thu, 29 Aug 2024 03:22:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l33qmBa2";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="uZ7cGDV3";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="K9PK+AqK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA3E486E61; Thu, 29 Aug 2024 00:56:16 +0200 (CEST)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C513C8891E; Thu, 29 Aug 2024 03:22:29 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C179888C2
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:56:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AF285879C1
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 03:22:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6bf9db9740aso227846d6.2
- for <u-boot@lists.denx.de>; Wed, 28 Aug 2024 15:56:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724885773; x=1725490573; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=3xNTeMJWuP2ZrHUr1Xvtf0D4CVv+dfpsduLt8MdCmFw=;
- b=l33qmBa2ubU9efCMD21RVPTZeoAFbbijbRZTv6zLOssc2kSI6nL+3NcFFwe5rfSakL
- tGd3dlj4QjgdWHsuQlySUfgQBiZKVV3aPhD/50pLsqXfxDI9OtjhTi9t7q/1H8Kn7oV9
- DUZUO2lGVuSeh3y+lLw3ZIwaf+Osay9nWC04w=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724885773; x=1725490573;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3xNTeMJWuP2ZrHUr1Xvtf0D4CVv+dfpsduLt8MdCmFw=;
- b=ucuackwOm6F9u3/qf8rdmMPpiSCdZErsEd+47LJ4QyoWMqB5yRJy2ys5GgxqhSLSUO
- 7wrs0Wgy+hMKgc4y8hpVjrCcFi764Y4NvYFRURqTaqTyuFOnP6aXHmtszbi25qlo6AoF
- qHIs0LDcJhbb2xKcV+jcbNKX7WRwmjq7hmhK89TeWRHyrVQrOblf1S6H8rNla/KcmpP+
- bMeeZZ+L3QPFt6G8xnFPHpUmqQdIXFtL3zHIu2uDzw/1zJgk861w24eA7ybr+9ZVl8PB
- N1m32XvJAF8tB891zwf2a78vsHFS2foAQC8rePaQshMIPS6cEw5UxOrA2LLntYcYJbGv
- 5Dxg==
-X-Gm-Message-State: AOJu0YzWXu7dZHQPVLrYszb41RMekmM02Lm9tpFApx7a880JLPmu5tG4
- ZWVkKriXJZcix7O3LL1NkokdKK85XpuJLIAbvffbqPMtjJgHjmTh75kWwUlUbmVUPcXUCg6Wf1C
- x
-X-Google-Smtp-Source: AGHT+IG6mYJLpb3VB/N50USfoJX+GYWL/t2mGfn+VYp2lvtILVpvR3hNiNOSuIkb4S7G1D44B/waqg==
-X-Received: by 2002:a05:6214:4a8b:b0:6c1:6acc:767e with SMTP id
- 6a1803df08f44-6c33e626d27mr13697296d6.14.1724885773373; 
- Wed, 28 Aug 2024 15:56:13 -0700 (PDT)
-Received: from bill-the-cat.tail58a08.ts.net ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6c340c41e42sm216806d6.65.2024.08.28.15.56.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 Aug 2024 15:56:13 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4WvNmz2nfMz9slm;
+ Thu, 29 Aug 2024 03:22:27 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1724894547;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=MH067EdUGU9ZbqBlt0v0JlCKF0xu1ucR+9XB7lgjIrQ=;
+ b=uZ7cGDV3z/UYvgB1nbfNoKb6P0gU+RBmxV3erJFq6N0s1/sW0LlwiWir9ODVh0T7qtQZi9
+ sXmdYBLh1+p5FkpuAIkuOsjI4Kflt/ZTrA6CBYRwQTwVtWaNhwBkFBcWL3N1BX/DDUHk3M
+ qqqqJBuls9+PUYPIdOy6E+MA8YqCB/SbU1PKy/zfLNYoeKcmj7Igr10+coBD88jzKmcorN
+ 6ba5rWef+4v9xttOMM+a0KMtqqVlSGD3xOLNvD+c+6qg9OD3wtjr7nG7XerPv2dtZZroMQ
+ fjZFuXyAQBVcM2ScrmpQvyTG0r4TlZ28eXx0w0c+OaIIQ15BLfv/yVWvnF63Pw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1724894545;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=MH067EdUGU9ZbqBlt0v0JlCKF0xu1ucR+9XB7lgjIrQ=;
+ b=K9PK+AqKsve6A6u6Rx4zLG7IIixsnbRWxztg61CMzCiAzTSaFT8sR03d/jBpMARcDGsXgg
+ meucxZ74F7y3om6Xagie/JBsfZbPji505Xxxo0gy26WL27m2I51Ho479PrjwSAWAlklTOP
+ h8llXDwW61GfY9+2fb8zzLxYtiGSuKP5szbugQQI12j1NQ1/KNLijycMXFcL2JsuIYV9b4
+ c/9eqMC9TzV5F7qkB1xBpZvkkXJAh8yPilDPUXQkYNcZ0ce+SLp8mn318rVUmCoVifSs9r
+ PQfvNNycbfD4UJn6VW107VKuX7J4GxAJskitieJhjN1Ll/EHrffdH31TdmYa5A==
 To: u-boot@lists.denx.de
-Cc: Love Kumar <love.kumar@amd.com>, Michal Simek <michal.simek@amd.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH] test/py/tests/test_bootstage.py: Combine stash/unstash tests
-Date: Wed, 28 Aug 2024 16:56:10 -0600
-Message-Id: <20240828225610.3081635-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] mmc: Hide mmc speed command under mmc command
+Date: Thu, 29 Aug 2024 03:22:01 +0200
+Message-ID: <20240829012210.179436-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 34a38e42fd3bb7cbcf0
+X-MBO-RS-META: dbr7yba4kncxeywym85a79erikwweahs
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,56 +87,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When running the bootstage tests currently we get a warning like:
-tests/test_bootstage.py::test_bootstage_stash
-...PytestReturnNotNoneWarning: Expected None, but tests/test_bootstage.py::test_bootstage_stash returned (37748736, 4096), which will be an error in a future version of pytest.  Did you mean to use `assert` in stead of `return`?
+The mmc speed command configuration option keeps showing up in
+Kconfig even if CMD_MMC is not set. Move MMC_SPEED_MODE_SET under
+CMD_MMC to show up the Kconfig option only if MMC command is enabled.
 
-This is because the unstash test will run the stash test and fetch the
-addr / size from that. Rework the test to be stash and unstash and then
-run the unstash command at the end of the current stash test.
-
-Signed-off-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-It's possible we could solve this instead by getting addr / size again
-from our environment file, and then also noting that order-wise the
-unstash test follows the stash test. However, this felt more clean to
-me.
-
-Cc: Love Kumar <love.kumar@amd.com>
+Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>
+Cc: Francis Laniel <francis.laniel@amarulasolutions.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Cc: Michal Simek <michal.simek@amd.com>
 Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
 ---
- test/py/tests/test_bootstage.py | 9 ++-------
- 1 file changed, 2 insertions(+), 7 deletions(-)
+ cmd/Kconfig | 19 +++++++++----------
+ 1 file changed, 9 insertions(+), 10 deletions(-)
 
-diff --git a/test/py/tests/test_bootstage.py b/test/py/tests/test_bootstage.py
-index a9eb9f0b4a11..bd71a1af3a25 100644
---- a/test/py/tests/test_bootstage.py
-+++ b/test/py/tests/test_bootstage.py
-@@ -33,7 +33,7 @@ def test_bootstage_report(u_boot_console):
- @pytest.mark.buildconfigspec('bootstage')
- @pytest.mark.buildconfigspec('cmd_bootstage')
- @pytest.mark.buildconfigspec('bootstage_stash')
--def test_bootstage_stash(u_boot_console):
-+def test_bootstage_stash_and_unstash(u_boot_console):
-     f = u_boot_console.config.env.get('env__bootstage_cmd_file', None)
-     if not f:
-         pytest.skip('No bootstage environment file is defined')
-@@ -55,13 +55,8 @@ def test_bootstage_stash(u_boot_console):
-     # Check expected string in last column of output
-     output_last_col = ''.join([i.split()[-1] for i in output.split('\n')])
-     assert expected_text in output_last_col
--    return addr, size
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 978f44eda42..efe2357d044 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1399,6 +1399,15 @@ config CMD_MMC_SWRITE
+ 	  Enable support for the "mmc swrite" command to write Android sparse
+ 	  images to eMMC.
  
--@pytest.mark.buildconfigspec('bootstage')
--@pytest.mark.buildconfigspec('cmd_bootstage')
--@pytest.mark.buildconfigspec('bootstage_stash')
--def test_bootstage_unstash(u_boot_console):
--    addr, size = test_bootstage_stash(u_boot_console)
-+    # Check that unstash works as expected
-     u_boot_console.run_command('bootstage unstash %x %x' % (addr, size))
-     output = u_boot_console.run_command('echo $?')
-     assert output.endswith('0')
++config MMC_SPEED_MODE_SET
++	bool "set speed mode using mmc command"
++	help
++	  Enable setting speed mode using mmc rescan and mmc dev commands.
++	  The speed mode is provided as the last argument in these commands
++	  and is indicated using the index from enum bus_mode in
++	  include/mmc.h. A speed mode can be set only if it has already
++	  been enabled in the device tree.
++
+ endif
+ 
+ config CMD_CLONE
+@@ -2963,16 +2972,6 @@ config CMD_UBIFS
+ 	help
+ 	  UBIFS is a file system for flash devices which works on top of UBI.
+ 
+-config MMC_SPEED_MODE_SET
+-	bool "set speed mode using mmc command"
+-	depends on CMD_MMC
+-	help
+-	  Enable setting speed mode using mmc rescan and mmc dev commands.
+-	  The speed mode is provided as the last argument in these commands
+-	  and is indicated using the index from enum bus_mode in
+-	  include/mmc.h. A speed mode can be set only if it has already
+-	  been enabled in the device tree.
+-
+ config CMD_MESON
+ 	bool "Amlogic Meson commands"
+ 	depends on ARCH_MESON
 -- 
-2.34.1
+2.45.2
 
