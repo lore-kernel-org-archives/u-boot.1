@@ -4,64 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E820AC7115E
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 02:28:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4532C7115E
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 03:44:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5247788A0E;
-	Thu, 29 Aug 2024 04:28:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id BD26388A76;
+	Thu, 29 Aug 2024 05:44:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="m8hECCXj";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66EF8889E9; Thu, 29 Aug 2024 04:28:06 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3979588A7F; Thu, 29 Aug 2024 05:44:09 +0200 (CEST)
+Received: from smtpbgau1.qq.com (smtpbgau1.qq.com [54.206.16.166])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC9F488A0E
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 04:28:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B0D1688A75
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 05:43:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4WvQDc5hbxz9sjL;
- Thu, 29 Aug 2024 04:28:00 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1724898480;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=FoVGRntpzIYZ3hcnAzUjA/EPnwiuA+6WuLsAsD20swU=;
- b=m8hECCXj5HAIeOfYpr0l9OGGBTtcz4E40inRS1EAIgosdCoaXWJPw3aaiJX/tYCbUf7HYn
- IbxqBEW/U23kslaBJNnli+xNQSGA9tqYiQRYzHCRLTPN2AOjWS1BDsm3eYzL8/DN/2RHhB
- MKQyvpYA1b/dIsp2tiUIdkqz7ko1rCHK57P6INbETdBL089qj2a989izNR5fGOU67Xv1SM
- Hw6kiBIyRxCVSeTG4p8KEKNAjnujeNaY1h6XMlv8mFXuhH0DaWBKnDszYfIIQC5avxRnlL
- afCcwBBDIk7gcoSlznoScyzDTDItEd/jMC6zA93S1YyC8kisMSmUeobQJiarxA==
-Message-ID: <aaf209a9-c558-4674-a841-fa93b94c36ad@mailbox.org>
-Date: Thu, 29 Aug 2024 04:27:56 +0200
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
+X-QQ-mid: bizesmtpsz9t1724903025tixkfa2
+X-QQ-Originating-IP: yXU8ZEv4CM4/0/AKZ4cJntdV8X7nOYZr5OrkSk6pwIs=
+Received: from [192.168.159.131] ( [106.150.157.243])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Thu, 29 Aug 2024 11:43:43 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 1108091534434705893
+Message-ID: <4E1AAA1D0BD543EF+d4413c57-9600-4b81-89bc-2d089f343bae@radxa.com>
+Date: Thu, 29 Aug 2024 12:43:43 +0900
 MIME-Version: 1.0
-Subject: Re: [PATCH] ARM: imx: Wrap i.MX config options in HAVE_IMX
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Sean Anderson <seanga2@gmail.com>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>
-References: <20240829012247.179471-1-marek.vasut+renesas@mailbox.org>
- <CAOMZO5AnrOU87M1NigUqzF-p8zMctDv105C36XTzbcgKPbUyEg@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] led: gpio: handle GPIO_ACTIVE_LOW flag properly
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com
+References: <20240828121516.19696-1-naoki@radxa.com>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <CAOMZO5AnrOU87M1NigUqzF-p8zMctDv105C36XTzbcgKPbUyEg@mail.gmail.com>
+From: FUKAUMI Naoki <naoki@radxa.com>
+In-Reply-To: <20240828121516.19696-1-naoki@radxa.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 8c22b44d1a6e2a17568
-X-MBO-RS-META: m1fkymmz5giax6u5scdqjqnznzp8kyfw
+Content-Transfer-Encoding: 7bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtpsz:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,16 +60,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/29/24 3:26 AM, Fabio Estevam wrote:
-> Hi Marek,
+sorry, this patch seems to be wrong.
+I'll check it again.
 
-Hi,
+Best regards,
 
-> On Wed, Aug 28, 2024 at 10:23 PM Marek Vasut
-> <marek.vasut+renesas@mailbox.org> wrote:
->>
->> Wrap all the i.MX specific options in HAVE_IMX, otherwise they keep
+--
+FUKAUMI Naoki
+Radxa Computer (Shenzhen) Co., Ltd.
+
+On 8/28/24 21:15, FUKAUMI Naoki wrote:
+> invert gpio state if GPIO_ACTIVE_LOW is specified in dts.
 > 
-> Do you mean MACH_IMX instead?
-
-Yes, will be fixed in V2.
+> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+> ---
+>   drivers/led/led_gpio.c | 5 +++++
+>   1 file changed, 5 insertions(+)
+> 
+> diff --git a/drivers/led/led_gpio.c b/drivers/led/led_gpio.c
+> index ce22fb49f2a..54aa84e0726 100644
+> --- a/drivers/led/led_gpio.c
+> +++ b/drivers/led/led_gpio.c
+> @@ -25,6 +25,8 @@ static int gpio_led_set_state(struct udevice *dev, enum led_state_t state)
+>   	switch (state) {
+>   	case LEDST_OFF:
+>   	case LEDST_ON:
+> +		if (priv->gpio.flags & GPIOD_ACTIVE_LOW)
+> +			state = !state;
+>   		break;
+>   	case LEDST_TOGGLE:
+>   		ret = dm_gpio_get_value(&priv->gpio);
+> @@ -50,6 +52,9 @@ static enum led_state_t gpio_led_get_state(struct udevice *dev)
+>   	if (ret < 0)
+>   		return ret;
+>   
+> +	if (priv->gpio.flags & GPIOD_ACTIVE_LOW)
+> +		ret = !ret;
+> +
+>   	return ret ? LEDST_ON : LEDST_OFF;
+>   }
+>   
