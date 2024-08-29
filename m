@@ -4,83 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89587C83F15
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 12:45:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E533C83F14
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 12:51:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE04D88BF7;
-	Thu, 29 Aug 2024 14:45:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pritschet.eu
+	by phobos.denx.de (Postfix) with ESMTP id B35FC88B31;
+	Thu, 29 Aug 2024 14:51:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=pritschet.eu header.i=@pritschet.eu header.b="pHwOOMzj";
-	dkim=permerror (0-bit key) header.d=pritschet.eu header.i=@pritschet.eu header.b="44toNygJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TCAxSFCl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B0EA88BF7; Thu, 29 Aug 2024 14:45:11 +0200 (CEST)
-Received: from mo4-p00-ob.smtp.rzone.de (mo4-p00-ob.smtp.rzone.de
- [81.169.146.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7050A88BC0; Thu, 29 Aug 2024 14:51:32 +0200 (CEST)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24AE688953
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 14:45:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EADCC88AD7
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 14:51:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=pritschet.eu
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=matthias@pritschet.eu
-ARC-Seal: i=1; a=rsa-sha256; t=1724935508; cv=none;
- d=strato.com; s=strato-dkim-0002;
- b=fEUTWy0xYucd3oDzvXoadlcwFfgH3OCYijyF23NNfBY1TyDY8RrjnNQpDbmgjyEaBo
- mvVAcY6GB7IX94l3BMCOfnuWP6yKyU/BYEFV2hkmdoeDrxXdn68lVQWKftf955PttpoG
- FTFSjIeNHVjTlVMmqzZ45Z1y5YeK2CLW3PqOLKEGVlRJjU7CYbejuNORuOdfjM82GDV0
- +ZaEgeGvxmDIzcsRGWYFe5BG9EzrOfPxi39rsOu48irFZdWvps664/b3aXlB+rRARxnK
- F2HDlHwK9StJH/OzTXSsO0cOV1GcKHS8rRhjep3NwwE2iarNHIwR/91Q/yalTnLA8TX/
- 4t5A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1724935508;
- s=strato-dkim-0002; d=strato.com;
- h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
- bh=ASKCOtMpYFFh0+khqICmzItNdexZipWLHwSF+wgf/J4=;
- b=kk/7C/ZqZwaoQYOpMcYT/UL1sCqUUNiUysRk02Nof6d7K3FKX++ZpGQj42g3A46aGV
- Xgcn1k7FE1jTxBkqDt3t5cJQ5OMHQnbOYbhaBvcsm+9zW/s3dyEGBs0zDufHSuwCxFKL
- STlbtdVKAD/ZxYPUM+YBh7Qvnd1G/DF/SizuNsEwWWOxsIwRkW+to02Wou3m4BxHnaRp
- rQh+d0VwoFZhr6cAW2cBxx4BlvbOxR2QUIQoC2UOtraYU7F1Ne0k3VvDi360O2ZB8jfJ
- eooOoh5SeHaOD+PhvZQjL+b1uXtEQDr+1lRVmnf4gAG9mbcuh1bShKhPFHLUaLMT2m6G
- j5Sw==
-ARC-Authentication-Results: i=1; strato.com;
-    arc=none;
-    dkim=none
-X-RZG-CLASS-ID: mo00
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1724935508;
- s=strato-dkim-0002; d=pritschet.eu;
- h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
- bh=ASKCOtMpYFFh0+khqICmzItNdexZipWLHwSF+wgf/J4=;
- b=pHwOOMzj2If4EbJhc7ujTlvZcUxrqMO18WXRUAK7TRQPPsSMZHuZLDbxy8/91zEf74
- WED/GJ+bIWf6P/USFFSao9Sw3nZ3wJJDxtLdgN8dwjXLGbq1GzbyZQQqeZYorvB1hPBq
- mJOZij1GF2fHf+0nau7D+O6mNCIUJQ8Sn1M7UX0TLB2MfTIn7CR3X6LBQYh+TTKMV7Se
- p94nA7JbWbl2cx/pKSHw+UAV1Q2pdUtMHdOf4a/7JqQZduhFMGiKTJ1X6U1l1bhYJTkb
- qmk0DSutK4qVOYymQU/SueRG7LHvbAWVVGCwXnfHzAbezgm8hHrcQTjGXURtGz7dj+7P
- sCrQ==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1724935508;
- s=strato-dkim-0003; d=pritschet.eu;
- h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
- bh=ASKCOtMpYFFh0+khqICmzItNdexZipWLHwSF+wgf/J4=;
- b=44toNygJB2jajY6y7rLbJD5CIHuoqPzRgRGHDSOTVd1su/STdf/6sRDdr8UYMyzWNM
- QmPIMhKXyujL+Wf+zlAw==
-X-RZG-AUTH: ":IW0QYUiheuxX18P29qqHt/qCfjagLCCd1qyzKexpcQi1jQNsuxOyhTejoQQ4wC2Bp2/bdTC02FQEAl7eTc3J8M8FnIwqKAofPvalCcY="
-Received: from nibbler.fritz.box by smtp.strato.de (RZmta 51.2.3 AUTH)
- with ESMTPSA id Yed7a707TCj7xsU
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Thu, 29 Aug 2024 14:45:07 +0200 (CEST)
-From: Matthias Pritschet <matthias@pritschet.eu>
-To: u-boot@lists.denx.de
-Cc: Matthias Pritschet <matthias.pritschet@itk-engineering.de>
-Subject: [PATCH] mkimage: ecdsa: add nodes to signature/key node
-Date: Thu, 29 Aug 2024 14:44:47 +0200
-Message-Id: <20240829124447.46451-1-matthias@pritschet.eu>
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-2d3d0b06a2dso481965a91.0
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 05:51:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1724935888; x=1725540688; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=otbri4EorOxCXAC/lB8iG3512qZtwvoAE2st5hYUch8=;
+ b=TCAxSFCl8lXn+5D9sHNNe0w5vTvLbJqJKheH6h80bGADT7JFm3ll1N9y5CG8TXdXDx
+ ZK2Mg0ooVn7YNkEsGHqNjbKByleuVIxC3JNjU6bRb1n+lSPS9gPtbbsmVJA6p0vHINK6
+ VJsH4CNQ0hDfhx5YaE1GZ/bFS68zwASuFEJQ3n1iiBFGHZPtnkH7FkXuEkdC+55wmhcs
+ J8VYzUdDOjPf69tm1ugX1CSfsz5Nle1T5GtCI61eOY2xrPA2xXaaXvmQTDOsfnd2t0Vo
+ SKuwmJOqOAXLkWJmrEm0bGSHGzjNUmjfrvxrQuvO2DUMhvnqwNFgPqbjSn6s3c6MnRP4
+ Nm3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724935888; x=1725540688;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=otbri4EorOxCXAC/lB8iG3512qZtwvoAE2st5hYUch8=;
+ b=TS5odBuzXf8njXilbp42uBREuWJGwM2V8lFYXfKnjOi6Xw7zKlPCl/bx2Gax9rCYev
+ ip6Bh158zgqfy5w3531NoYV2/FszPp68KunXjJL+sa3lPfYYbtTYSj4Ipt4SL82ZFdk+
+ CeZ8u4uLMi4g4m4yg4M3wi0I/lQeMIUNqd12B4zfRqaH3p1xvb54IwLH9tLe1wsu9VXk
+ SX+ifnk/kEyTq3E9N9kIOqrRUBFWKR3aOufYLS2alxVk/5l/Ei23sMIJ9a2g74WFdpDG
+ ecte2UMPxnsfnMYvkalXvB08eI+37l9rrNRxapGzIdkAag9ShdakQ5JkYrZwKNB+5o2l
+ SFQA==
+X-Gm-Message-State: AOJu0YxcmjCMl3rk8WYdlzSwR6NZVUGYno9n6i+ozCNIyTQh5+GZ5BPV
+ vr1OjorkuXczI2+/lCxM1lCdxX+tHCH+wyd+kr4oggmGVYeRcx6sdTKanw==
+X-Google-Smtp-Source: AGHT+IFp4FdhfAQw2wDXTNot3mGNYRFZMi6C3et3PX9/fZs8G6agrTAqbTzOoC4JDIDYMvpbfJYUQA==
+X-Received: by 2002:a17:902:c94b:b0:202:38d8:173 with SMTP id
+ d9443c01a7336-2050c343658mr28519435ad.29.1724935888285; 
+ Thu, 29 Aug 2024 05:51:28 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:adb0:3b7e:78c6:e307])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2d85b0fe17bsm1505263a91.10.2024.08.29.05.51.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 Aug 2024 05:51:27 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-master-20240829
+Date: Thu, 29 Aug 2024 09:51:24 -0300
+Message-Id: <20240829125124.3339348-1-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,71 +88,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Matthias Pritschet <matthias.pritschet@itk-engineering.de>
+Hi Tom,
 
-Add the "required", "algo", and "key-name-hint" nodes to the
-signature/key node if ecdsa256 is used.
+Please pull from u-boot-imx/master, thanks.
 
-This change is mainly copy&paste from rsa_add_verify_data which already
-adds these nodes.
+The following changes since commit ee2af844ba1b27b2e959c4e649e4b769fbeb4074:
 
-Signed-off-by: Matthias Pritschet <matthias.pritschet@itk-engineering.de>
----
- lib/ecdsa/ecdsa-libcrypto.c | 19 +++++++++++++++++--
- 1 file changed, 17 insertions(+), 2 deletions(-)
+  Merge tag 'efi-2024-10-rc4' of https://source.denx.de/u-boot/custodians/u-boot-efi (2024-08-24 14:03:28 -0600)
 
-diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
-index db0a828a29..4513703d08 100644
---- a/lib/ecdsa/ecdsa-libcrypto.c
-+++ b/lib/ecdsa/ecdsa-libcrypto.c
-@@ -272,7 +272,8 @@ int ecdsa_verify(struct image_sign_info *info,
- 	return ret;
- }
- 
--static int do_add(struct signer *ctx, void *fdt, const char *key_node_name)
-+static int do_add(struct signer *ctx, void *fdt, const char *key_node_name,
-+		  struct image_sign_info *info)
- {
- 	int signature_node, key_node, ret, key_bits;
- 	const char *curve_name;
-@@ -322,6 +322,11 @@ static int do_add(struct signer *ctx, void *fdt, const char *key_node_name)
- 	point = EC_KEY_get0_public_key(ctx->ecdsa_key);
- 	EC_POINT_get_affine_coordinates(group, point, x, y, NULL);
- 
-+	ret = fdt_setprop_string(fdt, key_node, FIT_KEY_HINT,
-+				 info->keyname);
-+	if (ret < 0)
-+		return ret;
-+
- 	ret = fdt_setprop_string(fdt, key_node, "ecdsa,curve", curve_name);
- 	if (ret < 0)
- 		return ret;
-@@ -334,6 +339,16 @@ static int do_add(struct signer *ctx, void *fdt, const char *key_node_name)
- 	if (ret < 0)
- 		return ret;
- 
-+	ret = fdt_setprop_string(fdt, key_node, FIT_ALGO_PROP,
-+				 info->name);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = fdt_setprop_string(fdt, key_node, FIT_KEY_REQUIRED,
-+				 info->require_keys);
-+	if (ret < 0)
-+		return ret;
-+
- 	return key_node;
- }
- 
-@@ -346,7 +361,7 @@ int ecdsa_add_verify_data(struct image_sign_info *info, void *fdt)
- 	fdt_key_name = info->keyname ? info->keyname : "default-key";
- 	ret = prepare_ctx(&ctx, info);
- 	if (ret >= 0){
--		ret = do_add(&ctx, fdt, fdt_key_name);
-+		ret = do_add(&ctx, fdt, fdt_key_name, info);
- 		if (ret < 0)
- 			ret = ret == -FDT_ERR_NOSPACE ? -ENOSPC : -EIO;
- 	}
--- 
-2.34.1
+are available in the Git repository at:
 
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20240829
+
+for you to fetch changes up to aec0015a52d3faf723fec9ed9fe1d1af0b89e996:
+
+  mach-imx: do not use if_changed more than once per target (2024-08-29 08:34:46 -0300)
+
+u-boot-imx-master-20240829
+--------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/22162
+
+- Fix an issue with "tools/buildman/buildman imx8ulp_evk"
+failing every other time. 
+----------------------------------------------------------------
+Jerome Forissier (1):
+      mach-imx: do not use if_changed more than once per target
+
+ arch/arm/mach-imx/Makefile | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
