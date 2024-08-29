@@ -4,82 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D272AC83010
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 08:59:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FFB8C71135
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 09:25:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F15D88B70;
-	Thu, 29 Aug 2024 10:59:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 912DD88BBC;
+	Thu, 29 Aug 2024 11:25:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="rQv0uOYq";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="zj5o5bCy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95A5088AD7; Thu, 29 Aug 2024 10:59:33 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1F43C88BBE; Thu, 29 Aug 2024 11:25:21 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99F3B88B70
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 10:59:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6ECD888BB6
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 11:25:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-3719f0758c6so269237f8f.1
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 01:59:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1724921971; x=1725526771;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=x6SAdp/MPACKrTGCC+1uEHRxGkkcEPHMmtQM5pLa7eU=;
- b=rQv0uOYqjCjp6p3vone5NQ6xlY2FOdYyv0yoLHGRLY6NSKKC/VanhaOh9pG8vOiuIS
- WoREzDhoouMEIb/NK8AaKIKiMM+8F5BHriHrC3SwYJH0e+jy+vGMJKK3tX5fqbcKxU2v
- gN7h0MZ6xeGvcDBsoigz8n3RVWI6eE0eE8e5Lkv46GbuVlixViXy5TraCHJKmyWQkB/R
- qbkk4w0BjdSSR4Ojt5rxWBNkIew0E/Xzi+5TxIQBmgUZBQNrxtSFzw45tCxUJld01Eiy
- CtHcXh8aSgLgkNTGb4uGPilUc26bp0ILBId4oLTYZ4qQJ2QsLPJVINWebB3I8xaL9FJT
- /yjw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724921971; x=1725526771;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=x6SAdp/MPACKrTGCC+1uEHRxGkkcEPHMmtQM5pLa7eU=;
- b=HqkLCuVQTpRvGW1gBKf/sH2fsGrHz7VrDgzwoL+YlP5FQg5DOZGNG1ugVgef6feWm5
- sDX0HeqANK3yrjjltjwNtjx4mXoRGK0UuwsAeeahZzMqghH2UYsB3jtIouNQpvYCsOON
- XVgxloal2oX7baA/n5p8gwQYmN7ktymjQ5JBsUezRUvcBhcWUc8pUJevxpsotgirtBOR
- Q87uF34OAWmFK1wEiaPFQSQVSCqRN5tpH2dlqIdrri/dMPtF0nKp0eb6EkbFbztW68ic
- +aIvxvmgvRSm4HXE6dHs1pzzGUG0oxrRfykyrcItMx0d9g9EQeKny66c5zhVVRluVaLq
- 5NwA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUaItTI06T29NUt6xKJA0BG8KMQtiqru01+xwKe9UKCVcrI3U79agZdYdrzkCb12hfTlhP8VF8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxYsSd2yLmqVlUigka3R02jeek0na/x9fFzbgcUkp1qkMf7Y0gw
- nG5m6rEO8+e3HB+fOFI86cyhRLnittmyd9VHAWf8fYdMfQYkU6Bwx/d9DZLcTrc=
-X-Google-Smtp-Source: AGHT+IEhNQyHAgX+F5ThlMO3DN/zvJxLPHzoN3bF5+v1skp2qLUOB7nyu2/vhMK0DjFq/4xF6UrWiw==
-X-Received: by 2002:a5d:4309:0:b0:368:37e3:dff7 with SMTP id
- ffacd0b85a97d-3749b552b2fmr1514782f8f.34.1724921970477; 
- Thu, 29 Aug 2024 01:59:30 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42bb6a10353sm10055115e9.1.2024.08.29.01.59.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Aug 2024 01:59:30 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, AKASHI Takahiro
- <akashi.tkhro@gmail.com>, Francis Laniel
- <francis.laniel@amarulasolutions.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Michal Simek <michal.simek@amd.com>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] mmc: Hide mmc speed command under mmc command
-In-Reply-To: <20240829012210.179436-1-marek.vasut+renesas@mailbox.org>
-References: <20240829012210.179436-1-marek.vasut+renesas@mailbox.org>
-Date: Thu, 29 Aug 2024 10:59:27 +0200
-Message-ID: <87o75br9g0.fsf@baylibre.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=4830=P4=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1724923513;
+ bh=JDPH9dRP9ynEjaE8wB7bKmYbJIR0Zx4P1j2Ay60rBhU=;
+ b=zj5o5bCy2SC/dth96EuMALpxOSk1EcrZJWT6pP2tZLnoroQLtrerS+VN4rT/RRYpixh3/zLUy
+ vkdeBVBPm4WM3vIyHkvsNpVq9bk00FYaBt6rHv2jsIdVfIYPyHgN10jn3NEB9OWjrSmLRRNVmnl
+ B9rPUcreEMKGzMHOC71z7zpTQIVkxFin1NVm15KjLk8yzqXo2xjx3V8jB4NCeoWU/YQD0YvuyZL
+ hXSdqRW84TyBY+V+t4f9n82s1wRkG/oMhAzDX2TvWDvwfck+TPkDnL20dvzDWhYm8fhWxlfSSTr
+ YkFAdUadPH0HvFI/bFY/mEIVSyJVVJUobtEJxc7blbPA==
+Message-ID: <75bb8477-de40-4a51-8141-d84ccb7b44ec@kwiboo.se>
+Date: Thu, 29 Aug 2024 11:25:05 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] bootstage: Do not sort records
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20240803124149.2916030-1-jonas@kwiboo.se>
+ <20240803124149.2916030-3-jonas@kwiboo.se>
+ <CAFLszTha39GkRsZA1r91YpLdKJDiRfDmAzWsMTuByDtPC0YvGQ@mail.gmail.com>
+ <CAFLszThNN-rfPtAYKSHtGTEUwuxFgz01A-yJMXRYtwX3WiA-Kg@mail.gmail.com>
+ <0329ee07-3f99-4daf-8960-1e934ff753de@kwiboo.se>
+ <CAFLszTgGhy+nY7MGDi19ZeB7ptstmXFwWG4NRUECtdjqPfMZSQ@mail.gmail.com>
+ <CAFLszTiLsSA6JPBZanqk1wai9n109P87OO-wJJ=d-7-23=RWNA@mail.gmail.com>
+ <4e3b907f-ed5a-4ae6-a533-d7cb16bb9775@kwiboo.se>
+ <CAFLszTg0bVVWFR8WuxNia-XfoOnJ8YpUkFtw3L_8ZUwKsDAQqg@mail.gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CAFLszTg0bVVWFR8WuxNia-XfoOnJ8YpUkFtw3L_8ZUwKsDAQqg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66d03e76782a0f1f8775d8d1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,70 +79,359 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Simon,
 
-Thank you for the patch.
+On 2024-08-29 00:17, Simon Glass wrote:
+> Hi Jonas,
+> 
+> On Wed, 28 Aug 2024 at 13:01, Jonas Karlman <jonas@kwiboo.se> wrote:
+>>
+>> Hi Simon,
+>>
+>> On 2024-08-28 20:11, Simon Glass wrote:
+>>> Hi again Jonas,
+>>>
+>>> On Wed, 28 Aug 2024 at 11:06, Simon Glass <sjg@chromium.org> wrote:
+>>>>
+>>>> Hi Jonas,
+>>>>
+>>>> On Wed, 28 Aug 2024 at 10:15, Jonas Karlman <jonas@kwiboo.se> wrote:
+>>>>>
+>>>>> Hi Simon,
+>>>>>
+>>>>> On 2024-08-28 18:01, Simon Glass wrote:
+>>>>>> Hi Jonas,
+>>>>>>
+>>>>>> On Tue, 6 Aug 2024 at 15:50, Simon Glass <sjg@chromium.org> wrote:
+>>>>>>>
+>>>>>>> Hi Jonas,
+>>>>>>>
+>>>>>>> On Sat, 3 Aug 2024 at 06:42, Jonas Karlman <jonas@kwiboo.se> wrote:
+>>>>>>>>
+>>>>>>>> The timer counter on Rockchip SoCs may be reset in TF-A, this may cause
+>>>>>>>> the bootstage records to be printed out of order and with an incorrect
+>>>>>>>> elapsed time.
+>>>>>>>
+>>>>>>> Eek can we just fix TF-A? That seems like a bug.
+>>>>>
+>>>>> TF-A is vendor blob, so we have no control of it.
+>>>>
+>>>> Can we replace it, or is it one of the ones that has not been released?
+>>>>
+>>>> Can you file a bug with the vendor?
+>>>>
+>>>>>
+>>>>>>>
+>>>>>>>>
+>>>>>>>> Fix this by not sorting the bootstage records.
+>>>>>>>>
+>>>>>>>> Before on a Radxa ZERO 3W (RK3566) board:
+>>>>>>>>
+>>>>>>>>   => bootstage report
+>>>>>>>>   Timer summary in microseconds (12 records):
+>>>>>>>>          Mark    Elapsed  Stage
+>>>>>>>>             0          0  reset
+>>>>>>>>         7,436      7,436  board_init_f
+>>>>>>>>       164,826    157,390  SPL
+>>>>>>>>       375,392    210,566  end phase
+>>>>>>>>       423,909     48,517  board_init_r
+>>>>>>>>       472,973     49,064  eth_common_init
+>>>>>>>>       476,848      3,875  main_loop
+>>>>>>>>       477,003        155  cli_loop
+>>>>>>>>
+>>>>>>>>   Accumulated time:
+>>>>>>>>                    7,181  of_live
+>>>>>>>>                   14,739  dm_spl
+>>>>>>>>                   15,029  dm_r
+>>>>>>>>                  315,150  dm_f
+>>>>>>>>
+>>>>>>>> With this the records can be printed in chronological order when the
+>>>>>>>> counter is reset and SPL and board_init_r records show correct elapsed
+>>>>>>>> time.
+>>>>>>>>
+>>>>>>>>   => bootstage report
+>>>>>>>>   Timer summary in microseconds (12 records):
+>>>>>>>>          Mark    Elapsed  Stage
+>>>>>>>>             0          0  reset
+>>>>>>>>       164,437    164,437  SPL
+>>>>>>>>       375,023    210,586  end phase
+>>>>>>>>         7,437      7,437  board_init_f
+>>>>>>>>       424,390    416,953  board_init_r
+>>>>>>>>       473,515     49,125  eth_common_init
+>>>>>>>>       477,402      3,887  main_loop
+>>>>>>>>       477,571        169  cli_loop
+>>>>>>>>
+>>>>>>>>   Accumulated time:
+>>>>>>>>                   14,734  dm_spl
+>>>>>>>>                  315,646  dm_f
+>>>>>>>>                    7,339  of_live
+>>>>>>>>                   14,977  dm_r
+>>>>>>>>
+>>>>>>>> For the tested board external TPL and BROM take ~164 ms to initialize
+>>>>>>>> DRAM and load SPL, SPL take ~210ms to load images from FIT and U-Boot
+>>>>>>>> proper take ~477ms to reach cli prompt.
+>>>>>>>>
+>>>>>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>>>>>>> ---
+>>>>>>>>  common/bootstage.c | 12 ++----------
+>>>>>>>>  1 file changed, 2 insertions(+), 10 deletions(-)
+>>>>>>>>
+>>>>>>
+>>>>>> To put this more strongly, this breaks the timing output on other boards.
+>>>>>
+>>>>> Please elaborate, I cannot understand why not sorting would break output
+>>>>> on other boards, are other boards adding records out of order?
+>>>>>
+>>>>> Do you have an example of how this change break other boards?
+>>>>
+>>>> Oh sure. The original reason was that the array was ordered by ID.
+>>>> That was changed in [1], which I forgot about.
+>>>>
+>>>> The other bit is for coreboot (or potentially other prior phases) we
+>>>> receive timestamps as a block and add them into U-Boot. We want these
+>>>> to appear in the correct order with respect to the ones already adding
+>>>> to U-Boot.
+>>>>
+>>>> Sadly coreboot uses its own toolchain and I seem to have deleted it,
+>>>> but once it finishes building the world I will give it a try.
+>>>
+>>> OK I gave up and just built one toolchain instead of every one known
+>>> to man, which is the default.
+>>>
+>>> The code has seriously rotted and is a somewhat fascinating window
+>>> into what U-Boot was like 12 years ago...I will send a little series.
+>>>
+>>> Anyway, the start-romstage and device-xxx things below come from coreboot.
+>>
+>> Interesting, so coreboot is not running before U-Boot on this platform,
+>> is it running in parallel with U-Boot?
+> 
+> It runs before, but U-Boot picks up the timestamps once it is ready to
+> do so, i.e. after bootstage is inited.
 
-On jeu., ao=C3=BBt 29, 2024 at 03:22, Marek Vasut <marek.vasut+renesas@mail=
-box.org> wrote:
+I just tested using coreboot.rom picked from the docker image
+trini/u-boot-gitlab-ci-runner:jammy-20240808-21Aug2024 and using qemu:
 
-> The mmc speed command configuration option keeps showing up in
-> Kconfig even if CMD_MMC is not set. Move MMC_SPEED_MODE_SET under
-> CMD_MMC to show up the Kconfig option only if MMC command is enabled.
->
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+  make coreboot_defconfig all
+  cbfstool coreboot.rom remove -n fallback/payload
+  cbfstool coreboot.rom add-flat-binary -f u-boot.bin -n fallback/payload -c LZMA -l 0x1110000 -e 0x1110000
+  qemu-system-x86_64 -bios coreboot.rom -serial mon:stdio -display none
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+And can now see that coreboot is run before U-Boot, it also shows that
+coreboot or U-Boot also reset or use different counter, so the records
+added from coreboot should also not be sorted among the U-Boot bootstage
+records.
 
-> ---
-> Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>
-> Cc: Francis Laniel <francis.laniel@amarulasolutions.com>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Cc: Michal Simek <michal.simek@amd.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  cmd/Kconfig | 19 +++++++++----------
->  1 file changed, 9 insertions(+), 10 deletions(-)
->
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 978f44eda42..efe2357d044 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -1399,6 +1399,15 @@ config CMD_MMC_SWRITE
->  	  Enable support for the "mmc swrite" command to write Android sparse
->  	  images to eMMC.
->=20=20
-> +config MMC_SPEED_MODE_SET
-> +	bool "set speed mode using mmc command"
-> +	help
-> +	  Enable setting speed mode using mmc rescan and mmc dev commands.
-> +	  The speed mode is provided as the last argument in these commands
-> +	  and is indicated using the index from enum bus_mode in
-> +	  include/mmc.h. A speed mode can be set only if it has already
-> +	  been enabled in the device tree.
-> +
->  endif
->=20=20
->  config CMD_CLONE
-> @@ -2963,16 +2972,6 @@ config CMD_UBIFS
->  	help
->  	  UBIFS is a file system for flash devices which works on top of UBI.
->=20=20
-> -config MMC_SPEED_MODE_SET
-> -	bool "set speed mode using mmc command"
-> -	depends on CMD_MMC
-> -	help
-> -	  Enable setting speed mode using mmc rescan and mmc dev commands.
-> -	  The speed mode is provided as the last argument in these commands
-> -	  and is indicated using the index from enum bus_mode in
-> -	  include/mmc.h. A speed mode can be set only if it has already
-> -	  been enabled in the device tree.
-> -
->  config CMD_MESON
->  	bool "Amlogic Meson commands"
->  	depends on ARCH_MESON
-> --=20
-> 2.45.2
+  [DEBUG]  BS: BS_PAYLOAD_LOAD run times (exec / console): 210 / 4 ms
+  [DEBUG]  Jumping to boot code at 0x01110000(0x07f96000)
+  bootstage_add_record: name=reset mark=0
+  bootstage_add_record: name=board_init_f mark=32182
+  
+  
+  U-Boot 2024.10-rc3-00061-gc6b667a71fcc-dirty (Aug 29 2024 - 00:11:45 +0000)
+  
+  CPU: x86_64, vendor AMD, device 663h
+  DRAM:  127 MiB
+  bootstage_add_record: name=board_init_r mark=129405
+  Core:  19 devices, 13 uclasses, devicetree: separate
+  MMC:
+  Loading Environment from nowhere... OK
+  Video: No video mode configured in coreboot (err=-6)
+  Video: No video mode configured in coreboot (err=-6)
+  Model: Standard PC (i440FX + PIIX, 1996)
+  Manufacturer: QEMU
+  Prior-stage version: 4.22.01-2ff2409037
+  Prior-stage date: 08/21/2024
+  Net:   bootstage_add_record: name=eth_common_init mark=179706
+  e1000: 52:54:00:12:34:56
+         bootstage_add_record: name=eth_initialize mark=238014
+  eth0: e1000#0
+  bootstage_add_record: name=start-romstage mark=14867
+  bootstage_add_record: name=device-initialize mark=146126
+  bootstage_add_record: name=device-done mark=172344
+  bootstage_add_record: name=selfboot-jump mark=432299
+  bootstage_add_record: name=u-boot-inited mark=471225
+  Finalizing coreboot
+  bootstage_add_record: name=main_loop mark=251887
+  
+  starting USB...
+  bootstage_add_record: name=usb_start mark=256733
+  No USB controllers found
+  Hit any key to stop autoboot:  0
+  bootstage_add_record: name=cli_loop mark=260244
+  => bootstage report
+  Timer summary in microseconds (15 records):
+         Mark    Elapsed  Stage
+            0          0  reset
+       32,182     32,182  board_init_f
+      129,405     97,223  board_init_r
+      179,706     50,301  eth_common_init
+      238,014     58,308  eth_initialize
+       14,867     14,867  start-romstage
+      146,126    131,259  device-initialize
+      172,344     26,218  device-done
+      432,299    259,955  selfboot-jump
+      471,225     38,926  u-boot-inited
+      251,887    251,887  main_loop
+      256,733      4,846  usb_start
+      260,244      3,511  cli_loop
+  
+  Accumulated time:
+                   9,222  dm_f
+                   9,102  dm_r
+
+
+Above is without sorting and the records added from coreboot
+is imported after eth_initialize, however all the coreboot
+records should have happened before the board_init_f record.
+
+
+  => bootstage report
+  Timer summary in microseconds (15 records):
+         Mark    Elapsed  Stage
+            0          0  reset
+       15,918     15,918  start-romstage
+      145,553    129,635  device-initialize
+      172,201     26,648  device-done
+      423,150    250,949  selfboot-jump
+      461,836     38,686  u-boot-inited
+       31,925     31,925  board_init_f
+      135,370    135,370  board_init_r
+      181,557     46,187  eth_common_init
+      235,974     54,417  eth_initialize
+      247,009     11,035  main_loop
+      250,549      3,540  usb_start
+      354,321    103,772  cli_loop
+  
+  Accumulated time:
+                   9,041  dm_f
+                   9,354  dm_r
+
+
+Something like above would more correctly show all steps taken in
+chronological order and with correct elapsed time from prior mark.
+
+> 
+>>
+>> How is timestamp_add_to_bootstage() called in U-Boot, I cannot see any
+>> call to it, what am I missing?
+> 
+> Yes, it was deleted. I just sent a series to bring i tback.
+
+Thanks, tested with your series.
+
+> 
+>>
+>> Guessing the records need to be sorted after/during that function call?
+>>
+>> Also look like the sorting is done in bootstage_report() so the report
+>> is possible logged to FDT with an unsorted order.
+> 
+> Yes, although that shouldn't really matter. Perhaps it is worth fixing?
+
+After testing with coreboot I still think removing the sorting as done
+in this patch is still correct. However the coreboot records should 
+probably be imported into correct position of the bootstage records
+table.
+
+> 
+>>
+>> Let me know what you want me to do with this, I will drop this for now
+>> and just keep carry this patch in my local tree.
+> 
+> Hmmm step one is to complain about the bug. If it exists in ATF
+> upstream, then it should be fixed. I can have a crack at fixing it if
+> so. If it is a vendor binary, then they should fix it.
+
+Not even sure how to go about to report such bug to rockchip ;-)
+
+Have also not tested with the recently merged rk35xx support in upstream
+TF-A so not sure it is also an issue with upstream.
+
+> 
+> Step 2, I suggest a Kconfig option enabled for these boards, so it is
+> clear it is a workaround.
+
+I would disagree, seeing how the coreboot records is also affected and
+incorrectly intermixed with U-Boot records, doing any type of sorting
+should be avoided, and instead the intermixed importing of the coreboot
+records should probably be fixed.
+
+Regards,
+Jonas
+
+> 
+> Regards,
+> Simon
+> 
+> 
+>>>
+>>> => bootstage repo
+>>> Timer summary in microseconds (20 records):
+>>>        Mark    Elapsed  Stage
+>>>           0          0  reset
+>>>      25,322     25,322  board_init_f
+>>>      32,175      6,853  start-romstage
+>>>     117,158     84,983  board_init_r
+>>>     208,409     91,251  device-initialize
+>>>     293,286     84,877  device-done
+>>>     547,606    254,320  selfboot-jump
+>>>     621,050     73,444  eth_common_init
+>>>     699,570     78,520  eth_initialize
+>>>     744,210     44,640  main_loop
+>>>     761,030     16,820  usb_start
+>>>   3,988,265  3,227,235  netboot_common
+>>>   3,988,330         65  eth_start
+>>>   6,316,294  2,327,964  bootp_start
+>>>  12,286,385  5,970,091  bootp_stop
+>>>  12,297,353     10,968  netboot_common
+>>>  12,300,596      3,243  netboot_common
+>>>  28,327,263 16,026,667  cli_loop
+>>>
+>>> Accumulated time:
+>>>                  8,600  dm_r
+>>>                  8,659  dm_f
+>>>
+>>> Without the sort, I see:
+>>>
+>>> Timer summary in microseconds (18 records):
+>>>        Mark    Elapsed  Stage
+>>>           0          0  reset
+>>>      36,582     36,582  board_init_f
+>>>     125,775     89,193  board_init_r
+>>>     642,577    516,802  eth_common_init
+>>>     721,321     78,744  eth_initialize
+>>>      31,357429,427,733,2  start-romstage
+>>>     247,602    216,245  device-initialize
+>>>     333,879     86,277  device-done
+>>>     596,043    262,164  selfboot-jump
+>>>     765,897    169,854  main_loop
+>>>     783,397     17,500  usb_start
+>>>   4,043,423  3,260,026  netboot_common
+>>>   4,043,489         66  eth_start
+>>>   6,371,702  2,328,213  bootp_start
+>>>  11,609,247  5,237,545  netboot_common
+>>>  15,476,116  3,866,869  cli_loop
+>>>
+>>> Accumulated time:
+>>>                  8,639  dm_f
+>>>                  8,923  dm_r
+>>>
+>>>>
+>>>>>
+>>>>>>
+>>>>>> At the very least, this should be Kconfig option just enabled for
+>>>>>> boards with a broken ATF.
+>>>>>
+>>>>> I can add a Kconfig option, but would like to understand why other/any
+>>>>> board would need to sort the records in the first place.
+>>>>
+>>>> OK.
+>>>
+>>> Regards,
+>>> Simon
+>>>
+>>>>
+>>>> [1] 03ecac31498 bootstage: Use rec_count as the array index
+>>
+
