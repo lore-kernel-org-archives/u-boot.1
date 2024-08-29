@@ -4,61 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 527FAC6FD35
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 08:28:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85027C7EE3A
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 08:32:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 742B688AFB;
-	Thu, 29 Aug 2024 10:28:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id F0C6C88B0B;
+	Thu, 29 Aug 2024 10:32:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1724920120;
-	bh=1E2G3+o/DlUoGldje2/K4IX4TkOJbb4up8JeIu63bC8=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=Sd0WRs/1LUFTvXvbrho4NXjI3QEtWz2B0aKUeop7EnnQbYyZH/wcCEfZV3YBgR/Ws
-	 XjqXt/pFa+D3afjKq4dMryEXOYtkgqjK4pt3AK32stG479JYFfSjJTA1K5guMp5IEE
-	 VStrjoVCitEafWnQzYRmG5RaZzMYpzQReiX0W2nLE1KvHVtwxzr/RWAlvtp1OtsnIY
-	 Jz5SXJi2nxy1EQEptqAJKVD00GC/6Hkz/4UHI5zHKGrSp7D/+PsNjVhWPDR3+93rkX
-	 lfO+t3TV8nYubf8lnK8nVdvwZxuqDLw4Igr9htPh8y3ZFOUwITH2Yn38OGiXkH6a+8
-	 A/QldljGUidQQ==
-Received: from [192.168.1.107] (89-186-113-255.pool.digikabel.hu
- [89.186.113.255])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 5912688950;
- Thu, 29 Aug 2024 10:28:37 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1724920119;
- bh=1E2G3+o/DlUoGldje2/K4IX4TkOJbb4up8JeIu63bC8=;
- h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
- b=C2NARoroLGoCK6PX5iVQlTXn/PdntG4j9Ozh1WTktyeflZWJkZX1g6qwWopZ4UuHo
- 0g+QHN3g1VdvGRdb2RmcyKy+Ea0Z+1MWOrHeYDTLlZzhdcQyszKtPfUcisajhJrRRC
- Okj8p1j7ekF608U54wKlXO52CdC+GJHQ6i075t4Am1GkUDCKeHz78IbmMQm5hD4dbL
- uU9DBZyk1IE6Mq8+bf8AmmtqJ8b4d2T5OWmk/m9hu0bMa2FzuNXcM3WzGhk1qKC9zY
- PkP3BqrGSpeP/3lIAMTvSuo5JE7JTDnl8Fff0C7AtoyFLQnBAz+U0LSIo5XCd9ER+R
- 7hXLB9uEazZmw==
-Message-ID: <2e5bbf2d-7a2b-411d-4b6c-2657de9e2b17@denx.de>
-Date: Thu, 29 Aug 2024 10:27:19 +0200
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jgpO9fwZ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 59C8288B23; Thu, 29 Aug 2024 10:32:52 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 351F9889FF
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 10:32:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 47T8Wlj5084037;
+ Thu, 29 Aug 2024 03:32:47 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1724920367;
+ bh=8t2LfW0P9hH1Mj30sUB09u6rr9yg3IaUnh2SVnodkuU=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=jgpO9fwZky1Twd8QTE8afHYxjofCR+ZqIGXqlpzSEjpY40LileZn4jKwkGb3mz1qj
+ cPOk48WLiRjPuOShvh+1TfZ1Vzem+PoAg+XbgNI5v2ByL0QCGFCCMtchNrJElDOECL
+ OFKrAcywAnGdG9U039Ix33FD0/x94LHgrteJBQz8=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 47T8WlkE069627
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 29 Aug 2024 03:32:47 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 29
+ Aug 2024 03:32:47 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 29 Aug 2024 03:32:47 -0500
+Received: from [172.24.19.111] (lt5cd112gt3k.dhcp.ti.com [172.24.19.111])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 47T8WiLE041456;
+ Thu, 29 Aug 2024 03:32:45 -0500
+Message-ID: <0963146f-c050-4a37-b0ea-bc6f62663832@ti.com>
+Date: Thu, 29 Aug 2024 14:02:43 +0530
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH 03/13] at91: rename mem_init() to at91_mem_init()
+User-Agent: Mozilla Thunderbird
+Subject: Re: [EXTERNAL] Re: [PATCH 1/6] arm: dts: k3-j7200-r5: Add the pmic
+ node in R5 dt
+To: Tom Rini <trini@konsulko.com>
+CC: "Kumar, Udit" <u-kumar1@ti.com>, <u-boot@lists.denx.de>,
+ <n-francis@ti.com>, <m-chawdhry@ti.com>, <nm@ti.com>
+References: <20240531130823.646311-1-a-limaye@ti.com>
+ <20240531130823.646311-2-a-limaye@ti.com>
+ <ace9596b-4fa6-4eb6-9ef8-35a545a2a022@ti.com>
+ <30131b07-9368-46b7-b526-55c3af0a9c28@ti.com>
+ <20240614145503.GQ68077@bill-the-cat>
 Content-Language: en-US
-To: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- Eugen Hristev <eugen.hristev@collabora.com>, Tom Rini <trini@konsulko.com>,
- Nicolas Ferre <nicolas.ferre@microchip.com>,
- Jakub Klama <jakub@conclusive.pl>, Artur Rojek <artur@conclusive.pl>,
- Stefan Roese <sr@denx.de>, Marcin Jabrzyk <marcin@conclusive.pl>
-References: <cover.1724846454.git.jerome.forissier@linaro.org>
- <7f010d834c665c15888b7738a0ad16334fa03443.1724846454.git.jerome.forissier@linaro.org>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <7f010d834c665c15888b7738a0ad16334fa03443.1724846454.git.jerome.forissier@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+From: "Limaye, Aniket" <a-limaye@ti.com>
+In-Reply-To: <20240614145503.GQ68077@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,51 +80,73 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Jerome,
 
-On 28.08.24 14:10, Jerome Forissier wrote:
-> THe AT91-based platforms have a mem_init() function declared in
-> arch/arm/mach-at91/include/mach/at91_common.h and implemented in various
-> places. In preparation of the introduction of the lwIP networking library
-> which also has a global mem_init() function, rename the AT91 one to
-> at91_mem_init().
+
+On 6/14/2024 8:25 PM, Tom Rini wrote:
+> On Fri, May 31, 2024 at 10:24:30PM +0530, Limaye, Aniket wrote:
+>>
+>>
+>> On 5/31/2024 7:25 PM, Kumar, Udit wrote:
+>>>
+>>> On 5/31/2024 6:38 PM, Aniket Limaye wrote:
+>>>> Add bootph-pre-ram property to the buck node in the pmic needed for
+>>>> ESM error event handling.
+>>>>
+>>>> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
+>>>> ---
+>>>>    arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 9 +++++++++
+>>>>    1 file changed, 9 insertions(+)
+>>>>
+>>>> diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+>>>> b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+>>>> index fb7e2e50239..78d07ff4e70 100644
+>>>> --- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+>>>> +++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+>>>> @@ -96,3 +96,12 @@
+>>>>    &mcu_udmap {
+>>>>        ti,sci = <&dm_tifs>;
+>>>>    };
+>>>> +
+>>>> +&tps659414 {
+>>>> +    regulators {
+>>>> +        bucka1: buck1 {
+>>>> +            bootph-pre-ram;
+>>>> +        };
+>>>
+>>>
+>>> why not to add this in kernel DT
+>>
+>> Manorit has already posted a series to kernel to add bootph- properties
+>> across platforms... Specifically the patch here [0] addresses this.
+>>
+>> Once that is merged, and goes through the rebasing tree in u-boot we will
+>> need to send patches to remove the bootph properties from the -u-boot and
+>> -r5 files. Until then we need this patch for the ESM to work. Else we can
+>> wait till the kernel dt patches make it through to u-boot for me to roll out
+>> a v2.
 > 
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> ---
->   arch/arm/mach-at91/include/mach/at91_common.h       | 2 +-
->   arch/arm/mach-at91/spl_at91.c                       | 2 +-
->   arch/arm/mach-at91/spl_atmel.c                      | 2 +-
->   board/atmel/at91sam9m10g45ek/at91sam9m10g45ek.c     | 2 +-
->   board/atmel/at91sam9n12ek/at91sam9n12ek.c           | 2 +-
->   board/atmel/at91sam9x5ek/at91sam9x5ek.c             | 2 +-
->   board/atmel/sama5d27_som1_ek/sama5d27_som1_ek.c     | 2 +-
->   board/atmel/sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c | 2 +-
->   board/atmel/sama5d2_icp/sama5d2_icp.c               | 2 +-
->   board/atmel/sama5d2_xplained/sama5d2_xplained.c     | 2 +-
->   board/atmel/sama5d3_xplained/sama5d3_xplained.c     | 2 +-
->   board/atmel/sama5d3xek/sama5d3xek.c                 | 2 +-
->   board/atmel/sama5d4_xplained/sama5d4_xplained.c     | 2 +-
->   board/atmel/sama5d4ek/sama5d4ek.c                   | 2 +-
->   board/conclusive/kstr-sama5d27/kstr-sama5d27.c      | 2 +-
->   board/gardena/smart-gateway-at91sam/spl.c           | 2 +-
->   board/siemens/corvus/board.c                        | 2 +-
->   board/siemens/smartweb/smartweb.c                   | 2 +-
->   board/siemens/taurus/taurus.c                       | 2 +-
->   19 files changed, 19 insertions(+), 19 deletions(-)
+> Yes, we'll wait until we can get this all in via OF_UPSTREAM.
+> 
 
-Thanks!
+Tom, Udit,
 
-Reviewed-by: Heiko Schocher <hs@denx.de>
+The patch in Kernel DT here [0] seems to be taking longer to go through.
+In the meantime, does it make sense for me to send this current series 
+in u-boot with the bootph patch above, to unblock ESM support for j7200-evm?
 
-bye,
-Heiko
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+When the Kernel DT patch is merged and taken through OF_UPSTREAM, I will 
+anyway send a patch to remove all of the bootph from the u-boot DT 
+files. With that, I can take care of removing the above bootph property too.
+
+Let me know what you think, and I'll rebase this series and resend it then.
+
+[0]: 
+https://lore.kernel.org/all/20240814-b4-upstream-bootph-all-v4-0-f2b462000f25@ti.com/
+
+Thanks,
+Aniket
