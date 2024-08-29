@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5384C7EE32
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 07:43:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59A36C7EE32
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 07:44:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56C2388360;
-	Thu, 29 Aug 2024 09:43:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D3FD888B3C;
+	Thu, 29 Aug 2024 09:44:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="QG2cmqOh";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="G3DFdxEo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0A2C88297; Thu, 29 Aug 2024 09:43:13 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 608C088B59; Thu, 29 Aug 2024 09:44:39 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0637D8870D
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 09:43:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CC6788297
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 09:44:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-42bb72a5e0bso2199725e9.1
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:43:12 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-37189d8e637so213809f8f.3
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:44:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1724917391; x=1725522191;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1724917477; x=1725522277;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=B9ERjpS6Q7vQoc0wnc6N31qOKk6+tzrK4o1wIu6oN+I=;
- b=QG2cmqOhWTsT4rxxpxilmB3X5bBJz0b2tgiCUnK3WyHk/Ia5OfNyf/NPFa5IUfCTFO
- KPz1Op/b8Px+KWECyOaW4ik6AZi0XaN0uijo8Jz8KctOIaEWgxdSSK6ktH8oJ5Qvlz/q
- 0/LiSM1QC5ULwGmUhpPze2yi7lK5GeEn6rHlPyk/hx40IYePSrcDd/jyXlNEWR6Oe733
- e0SfGU+hQVv4a6kVutgcJIUKoejRT2YCYpaHhOyUlMPm7dmqDDSPo1jIPn/y8Bx6eX+q
- hu75c5DmpewWA3iDBLhYr1af0FDES95hINhE06qOUIbt1g3RLON5/7aKW0FaxNgzxNrT
- PtjA==
+ :reply-to; bh=VvXR84GuCiJq1Fjb4OafSOfEkcnp1Pozl2saDnA9lX8=;
+ b=G3DFdxEo37r79SKaWribUc++SjMG5OT3v4CS8+1tk0hdabbK4pnGP165nqxjrktdb+
+ cS7fpPEuPvm4R3WB6iq+lsiqpY8TXM83IUo5Ku6FwKMhpZCz31e1AUEkahuTTTTLyuNC
+ BUSC3l5Gy6brdOrQK9nxax+vFU73h1ZjEbcdTQnKphQWkpYTj+s7hFEMHXbsC46odtkM
+ EBtPy1vBZvWX00MfMRNCPtq7aALns/IsqkRjfWw6YiIGvf7MMddUPK02bZWLk4UqlAt3
+ FWflw0Jfor6nmPpWxRoktjcuzS4SjWykL7oJ7hHKSbqrwfbaiv1775ocGA2lPWzm+4J4
+ dZKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724917391; x=1725522191;
+ d=1e100.net; s=20230601; t=1724917477; x=1725522277;
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=B9ERjpS6Q7vQoc0wnc6N31qOKk6+tzrK4o1wIu6oN+I=;
- b=e9lv918dF51tdJGDM3oTo5dzTlwtezDE1fpJu3YOMK/ul7Do84P0WyNQCnneOBMm7d
- waMmTUAbE5Q3o0ZzD8/oFZW37reDQLEiUzbxUwSAymw2ZGGjh/pR1DbALhJq3eRdIiW9
- bV+BF/+gC3amClZX1MozO52RbosIlsQbhjHRnEbLWlR6PN5g+d3P2OzypJ/b8H4u7SRu
- KuF5GCnBOiOkE53ZHcP2pxi4SojT3rOy2apL2jm1ekCmsY4kAAGCkDuL8lKidHwyEcWj
- S5XAxcYBx3KraxN3waaFI0kXLQ5kvYg7Qv+T65LaYtfNzbN95PY5cLdz92eemA3PA6Qr
- K00w==
+ bh=VvXR84GuCiJq1Fjb4OafSOfEkcnp1Pozl2saDnA9lX8=;
+ b=AqNWWFsYKSnC6Q72Hx1cL0q6kSKg7Ydc6bt7loM/JDcW4XpTPdJmbfEsFRO+WQXhp0
+ fG36n/Kvk7Ql/+jzmVblkNVvbBj0xiKJaYlOMjITw5XW/rww2RLh40Y94eD29zZP4fZf
+ 1nrktwLh8BBia4dptwHA0aVRTgp6w3i5xRtXMFCvYRHtutY7sHZQHfoZJ45m0YvZrhUW
+ +3rLluG9VBjV2c0u50KZDgoxSKaIBpF2y+mkQ0kHqg6Juu0P+21vvrKxUrtNxsFronc5
+ gWswff+YpdYuhyrij0raaf00Gx79dsGeHDP5ATxBDmnfLzEjIMba9HYFbLTz4LXc09nO
+ n4+w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVupi3Eroo787apgsuNhjSB+E3LnvUwdhr4GpAU3i+5QdK5uQnlCwdsafKraLyGfQ9hJxcxD04=@lists.denx.de
-X-Gm-Message-State: AOJu0YyYTP1Xa1GjYOqMyatfuqzbI/1A2d4lB+e5eobUH6WGTUqA/y8K
- iDevyMgNUP25MSbScjjP2Q5ho7djxA/hdPoEV0itbteKBSdH4tey8j+0ALfadWA=
-X-Google-Smtp-Source: AGHT+IFhpM+2RYZsGsaPme76fKHFvZ5MIt1vlFuuL3zlEZnyRijwtTGHZiAhrdoqTBcvNuufzkdzRg==
-X-Received: by 2002:a05:600c:1389:b0:426:6326:4cec with SMTP id
- 5b1f17b1804b1-42bb01e6befmr15112195e9.29.1724917390822; 
- Thu, 29 Aug 2024 00:43:10 -0700 (PDT)
+ AJvYcCWv9Ga8D2wIktSz8h66OhnMU7zcFkCQQAQZJUeBLM52wUSe0svFMfyDsXeFPG/Ws2Dn5dPN8Ho=@lists.denx.de
+X-Gm-Message-State: AOJu0YxTGjSuiQhZqtaCGRH01ekzHztE1lqXgyg3dYeSFqMiURB/HJiK
+ DZ2XtQI4XW28fUbOiSSVxP5weBcqKYDbBu/sLSeSaDbAH/2fQAZZOgKFhR0g/DU=
+X-Google-Smtp-Source: AGHT+IGSDwjW9UniFk4k+DSh+YhSvb55XH3CGNzYHTof9+Wq+VKWuIu28ybRqWrFzEuG1AzIQ5FbOQ==
+X-Received: by 2002:a05:6000:50:b0:368:667a:3dec with SMTP id
+ ffacd0b85a97d-3749b557de2mr1253382f8f.18.1724917476411; 
+ Thu, 29 Aug 2024 00:44:36 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42ba641da5asm42377545e9.36.2024.08.29.00.43.10
+ 5b1f17b1804b1-42bb6df0adbsm8836045e9.15.2024.08.29.00.44.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Aug 2024 00:43:10 -0700 (PDT)
+ Thu, 29 Aug 2024 00:44:36 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Linus Walleij
  <linus.walleij@linaro.org>, Lukasz Majewski <lukma@denx.de>, Miquel Raynal
  <miquel.raynal@bootlin.com>, Neil Armstrong <neil.armstrong@linaro.org>,
  Nishanth Menon <nm@ti.com>, Zixun LI <admin@hifiphile.com>
-Subject: Re: [PATCH 4/6] usb: gadget: Drop dev_to_usb_gadget()
-In-Reply-To: <20240826143851.8020-4-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH 5/6] usb: gadget: dwc2: Drop
+ get/set_udc_gadget_private_data()
+In-Reply-To: <20240826143851.8020-5-marek.vasut+renesas@mailbox.org>
 References: <20240826143851.8020-1-marek.vasut+renesas@mailbox.org>
- <20240826143851.8020-4-marek.vasut+renesas@mailbox.org>
-Date: Thu, 29 Aug 2024 09:43:07 +0200
-Message-ID: <87zfovrcz8.fsf@baylibre.com>
+ <20240826143851.8020-5-marek.vasut+renesas@mailbox.org>
+Date: Thu, 29 Aug 2024 09:44:33 +0200
+Message-ID: <87wmjzrcwu.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -103,7 +104,8 @@ Thank you for the patch.
 On lun., ao=C3=BBt 26, 2024 at 16:38, Marek Vasut <marek.vasut+renesas@mail=
 box.org> wrote:
 
-> This function is unused, remove it.
+> Neither get_udc_gadget_private_data() nor set_udc_gadget_private_data()
+> is ever called anywhere, remove both.
 >
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
@@ -118,26 +120,33 @@ Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 > Cc: Nishanth Menon <nm@ti.com>
 > Cc: Zixun LI <admin@hifiphile.com>
 > ---
->  include/linux/usb/gadget.h | 5 -----
->  1 file changed, 5 deletions(-)
+>  drivers/usb/gadget/dwc2_udc_otg.c | 13 -------------
+>  1 file changed, 13 deletions(-)
 >
-> diff --git a/include/linux/usb/gadget.h b/include/linux/usb/gadget.h
-> index a2b8520bc99..194025ebd12 100644
-> --- a/include/linux/usb/gadget.h
-> +++ b/include/linux/usb/gadget.h
-> @@ -558,11 +558,6 @@ static inline void *get_gadget_data(struct usb_gadge=
-t *gadget)
->  	return gadget->driver_data;
->  }
+> diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_=
+udc_otg.c
+> index 7e9dd6f4268..fbd6c9600fc 100644
+> --- a/drivers/usb/gadget/dwc2_udc_otg.c
+> +++ b/drivers/usb/gadget/dwc2_udc_otg.c
+> @@ -121,19 +121,6 @@ static void nuke(struct dwc2_ep *ep, int status);
+>  static int dwc2_udc_set_halt(struct usb_ep *_ep, int value);
+>  static void dwc2_udc_set_nak(struct dwc2_ep *ep);
 >=20=20
-> -static inline struct usb_gadget *dev_to_usb_gadget(struct device *dev)
+> -void set_udc_gadget_private_data(void *p)
 > -{
-> -	return container_of(dev, struct usb_gadget, dev);
+> -	debug_cond(DEBUG_SETUP !=3D 0,
+> -		   "%s: the_controller: 0x%p, p: 0x%p\n", __func__,
+> -		   the_controller, p);
+> -	the_controller->gadget.dev.device_data =3D p;
 > -}
 > -
->  /* iterates the non-control endpoints; 'tmp' is a struct usb_ep pointer =
-*/
->  #define gadget_for_each_ep(tmp, gadget) \
->  	list_for_each_entry(tmp, &(gadget)->ep_list, ep_list)
+> -void *get_udc_gadget_private_data(struct usb_gadget *gadget)
+> -{
+> -	return gadget->dev.device_data;
+> -}
+> -
+>  static struct usb_ep_ops dwc2_ep_ops =3D {
+>  	.enable =3D dwc2_ep_enable,
+>  	.disable =3D dwc2_ep_disable,
 > --=20
 > 2.45.2
