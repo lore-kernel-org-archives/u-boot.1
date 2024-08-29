@@ -4,65 +4,162 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FFB8C71135
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 09:25:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF2B4C71135
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 09:31:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 912DD88BBC;
-	Thu, 29 Aug 2024 11:25:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 5DC3F88BDE;
+	Thu, 29 Aug 2024 11:31:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=mono.si
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="zj5o5bCy";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=mono.si header.i=@mono.si header.b="lJmhAAEC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F43C88BBE; Thu, 29 Aug 2024 11:25:21 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 09B7B88BE4; Thu, 29 Aug 2024 11:31:32 +0200 (CEST)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2070a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2414::70a])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6ECD888BB6
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 11:25:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EA20788BCF
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 11:31:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=4830=P4=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1724923513;
- bh=JDPH9dRP9ynEjaE8wB7bKmYbJIR0Zx4P1j2Ay60rBhU=;
- b=zj5o5bCy2SC/dth96EuMALpxOSk1EcrZJWT6pP2tZLnoroQLtrerS+VN4rT/RRYpixh3/zLUy
- vkdeBVBPm4WM3vIyHkvsNpVq9bk00FYaBt6rHv2jsIdVfIYPyHgN10jn3NEB9OWjrSmLRRNVmnl
- B9rPUcreEMKGzMHOC71z7zpTQIVkxFin1NVm15KjLk8yzqXo2xjx3V8jB4NCeoWU/YQD0YvuyZL
- hXSdqRW84TyBY+V+t4f9n82s1wRkG/oMhAzDX2TvWDvwfck+TPkDnL20dvzDWhYm8fhWxlfSSTr
- YkFAdUadPH0HvFI/bFY/mEIVSyJVVJUobtEJxc7blbPA==
-Message-ID: <75bb8477-de40-4a51-8141-d84ccb7b44ec@kwiboo.se>
-Date: Thu, 29 Aug 2024 11:25:05 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] bootstage: Do not sort records
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20240803124149.2916030-1-jonas@kwiboo.se>
- <20240803124149.2916030-3-jonas@kwiboo.se>
- <CAFLszTha39GkRsZA1r91YpLdKJDiRfDmAzWsMTuByDtPC0YvGQ@mail.gmail.com>
- <CAFLszThNN-rfPtAYKSHtGTEUwuxFgz01A-yJMXRYtwX3WiA-Kg@mail.gmail.com>
- <0329ee07-3f99-4daf-8960-1e934ff753de@kwiboo.se>
- <CAFLszTgGhy+nY7MGDi19ZeB7ptstmXFwWG4NRUECtdjqPfMZSQ@mail.gmail.com>
- <CAFLszTiLsSA6JPBZanqk1wai9n109P87OO-wJJ=d-7-23=RWNA@mail.gmail.com>
- <4e3b907f-ed5a-4ae6-a533-d7cb16bb9775@kwiboo.se>
- <CAFLszTg0bVVWFR8WuxNia-XfoOnJ8YpUkFtw3L_8ZUwKsDAQqg@mail.gmail.com>
+ dmarc=none (p=none dis=none) header.from=mono.si
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=tomaz@mono.si
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ccATLE3Vpy5A6ENZnulApj50sKTvBg6xw/vOsW6mWtSaQv95ZZpJomjk0624f3Di8xPkF4ihB94hVHuh9mtaSJyCCxAqUejTYmuCppndeJ2QpA7k4SJj0gx3Xlps+cyG3IjfYHgzpgFo9+aPXjOLju+X0pVY4My3jkTBCVWrDqKWzMxoNhMxwWpOBIriBg1mthIhXJBV1vB5XymcmjtkaRel1seioAEz1LbwCikyi9cp/IdcblREcFfGzi8d7PPX3R9t8Yb/sV4FUgc6qJeqJNSGp5X3bbH/entml+qNwPdRvlyYSXWKhWoRV/E/5Gy+n85DDCp3x89gEcIkkGxhFA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nvvoPVpjBKPX7+vRJVmkuZNUpJH1R2EhbclWOA2DcTo=;
+ b=BZb3tr0tCnDaclv5ZeVC3M2915lUCQa6wDnbD4HJDJQfQsB+WVsgj9Hx5/gsRCmdRnV+DzC6RSR6kjeNbJ8JbKuVbNe5NaX5picJkgeyXkfItcEbn7KloawfwTJjWpPe1bwOJMzAY5Le4BHFNxV/uYAwOXXT2Y41xwR9ZGT4rXo8/638yJYrrzTXuvfd995xZ7ooAWSAVuYzpRoa6Kiq6mbQSpDi+lLrEoQsPeOL2fUqvD4x7aB9R4TJAmNtiN/chY7K2E937q0DHf0kylwmXLPhQyX24+NDh59RWul5PiVsnze0cTphF8DAX9IIDYNk6EcaUEejTdZ5RNrl9yeYAw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=mono.si; dmarc=pass action=none header.from=mono.si; dkim=pass
+ header.d=mono.si; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mono.si; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=nvvoPVpjBKPX7+vRJVmkuZNUpJH1R2EhbclWOA2DcTo=;
+ b=lJmhAAECjYRhLacJE0Uj3tGcUXfAafQ0Lwiieiw8wfi8BOxfXCUAaaYiUbT/TtQGrWvr65OazCNCuB7v3WQK07+qblQ7H1mF61mPDY5yATyZ64DuQc4DGrRo3pXVasThj2qENoUrbXk7KF0xfUTP06nvNhbNi6LUd+2rhRSMSwXQpZ0YMQUfBYVMK6JYWKr0mL/qri8mmr3q79/zhT6MF2XkIQckzuBCR8IXWIGt9fYFxv9lv3unXUyHlDuWeB/VM06perHkLBXQ7Pzn7fPZuUEs8glPzI27M2MXqEmA3Q8f3OruQBvq4ykPPbkCMYQhj9VirwTt7g0/uSgJNJggyQ==
+Received: from SN4PR22MB2870.namprd22.prod.outlook.com (2603:10b6:806:209::5)
+ by SA6PR22MB5930.namprd22.prod.outlook.com (2603:10b6:806:40f::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.20; Thu, 29 Aug
+ 2024 09:31:26 +0000
+Received: from SN4PR22MB2870.namprd22.prod.outlook.com
+ ([fe80::5f68:bf29:bbc9:f5ca]) by SN4PR22MB2870.namprd22.prod.outlook.com
+ ([fe80::5f68:bf29:bbc9:f5ca%6]) with mapi id 15.20.7897.027; Thu, 29 Aug 2024
+ 09:31:26 +0000
+From: =?utf-8?B?VG9tYcW+IFphbWFu?= <tomaz@mono.si>
+To: Peter Robinson <pbrobinson@gmail.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: =?utf-8?B?UmU6IEdydWIgZG9lc27igJl0IGxvYWQgZGV2aWNldHJlZQ==?=
+Thread-Topic: =?utf-8?B?R3J1YiBkb2VzbuKAmXQgbG9hZCBkZXZpY2V0cmVl?=
+Thread-Index: AQHa+aq5s5if99FqF02wvYWB7MIEc7I94AMAgAAZEYA=
+Date: Thu, 29 Aug 2024 09:31:26 +0000
+Message-ID: <69306a5c-90cf-4526-b2c0-483996910a88@Spark>
+References: <7f33e3d7-e5ab-4c1d-a69a-153a50a6b0c2@Spark>
+ <7cbce75d-51fe-4c87-9c90-01e86a06f0fe@Spark>
+ <CALeDE9PEMh14rp8paEvhN6pRebxzXonCqidvaTaByHHG2MLgZw@mail.gmail.com>
+In-Reply-To: <CALeDE9PEMh14rp8paEvhN6pRebxzXonCqidvaTaByHHG2MLgZw@mail.gmail.com>
+Accept-Language: en-GB, en-US
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CAFLszTg0bVVWFR8WuxNia-XfoOnJ8YpUkFtw3L_8ZUwKsDAQqg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 66d03e76782a0f1f8775d8d1
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=mono.si;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SN4PR22MB2870:EE_|SA6PR22MB5930:EE_
+x-ms-office365-filtering-correlation-id: 1ccdb133-29ba-4f7f-e79a-08dcc80d5ad6
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|366016|1800799024|376014|38070700018;
+x-microsoft-antispam-message-info: =?utf-8?B?akRGQSttQ1Iwa1FHZ2F0ZVA1Tmd5Vyttc05hSG90ZFVqTk4wVnFtcitXYW1D?=
+ =?utf-8?B?TWEvUTAvQkd3bi9RK2hlbUlHL2RCZ0h3UThwdU1qQi82VkxkeWdYTER2WHFn?=
+ =?utf-8?B?SDJhWjk3ZElKYUZZdU5VVjRMUW5iVk5SM2pERXFXc0YyZnhZWHYvd0pVSjdm?=
+ =?utf-8?B?eGZ3NExiQVgra1VEc2NKMm9mU2dmTm5UQlJzMG0yRFVYZHNxTVNQa1FtRW9V?=
+ =?utf-8?B?OGtXK3dqS3lua2xmaWhaYjJSQmk2MnF5aFRnWTFVZXgrQ1ZuUXB1WTZpRE9i?=
+ =?utf-8?B?RGp2L1V2SDRwc01QTVZNQmRVL0ZsT0tTam9iOUN2K29ldXBFc0NtZGFlQk5O?=
+ =?utf-8?B?c2s4bHh6YlhUOEVpSk1PMnVENDB3KzNuNzVZM2VGYmRxd2dSSFpnYkNlby9j?=
+ =?utf-8?B?NCtWbC9WNlJTMUFwTE9ITnM0bmNRODk2L20rZEFPRWRETXhKQ3FkSWFKUElX?=
+ =?utf-8?B?WGpCWDhVZ3JFUCtkazlWMlA0NFJOVjNxdWVoRFFRZTBnUy9xR096WUROTGY5?=
+ =?utf-8?B?UW9va0hEb0N5aDBuU2NhYmp4bzJEMGUyNGJtQlNnT2JDU2xXV0pNRFBpTVJC?=
+ =?utf-8?B?TjBFYUloQjBPb0hWUlBDaTJhY1F0OXVkY3Q1clJoTVlDczdtZ3drL2hYM2tp?=
+ =?utf-8?B?TGdIMVRaUURPQWt1cVd6M2I3NDd6Z0lMZjBPMDJxZCtybVV4dXJSUDU0UlhD?=
+ =?utf-8?B?MXdjcUdEN1hTMnloa1hrVnR1NUVhOUZCYzNjVUl3bi9rU0UvZDBEMmF1WnhO?=
+ =?utf-8?B?dkl2YW5Tbnh1TDVxb211QkY3eFZHYUhDK3IxQU1CWVh2eW1BRmFNd2l5TlhL?=
+ =?utf-8?B?SXlrMUt0b3dUWGpYb09ZeGtyN1hVRkJjNHFzRzdDUTZNMWc3ZE5Ibk1SUUdQ?=
+ =?utf-8?B?WXdKREtibGhmWGFkSGVBMFN3SEJncTA0QlQwVDFmZHp0SE4zU2dFLy9PLzQ2?=
+ =?utf-8?B?Q0xHTXZCTXhmTUVrNUxtUlk3Tjd1RDRMS1dmYTU3dFV0aUpsc2J2Z0hjVkVk?=
+ =?utf-8?B?WGJuTzA1WVBEZHJORXZpMmh1V0NKOGNLMk9zNnhZaVhEbGk4MkxGekp4aytj?=
+ =?utf-8?B?WHYxVjBsY0ZONkpSL3BmMzNhUm1JMWxtZkVvVlgrQkd6Mnc5ZGhtQlRRdFJP?=
+ =?utf-8?B?VjhuSE0vMHZMSEN2TDJLalJzOXBEdlRjMlFtRHBYZnQ3VlJmTWcwWENmRita?=
+ =?utf-8?B?QTNhWXBXdkIzNXFZMk5hM3p5cStaazQ1alZQcnhyQWRWMFlYTWZRcVBlY0E5?=
+ =?utf-8?B?dTZVeWRJdm8xdHAwQnN6VC8xdkpwMU5FTTlLSDQxd2cwRTdOOE5JOHAxSEV3?=
+ =?utf-8?B?TDYyNitTWkxBTFBzQ1k3MnJjd2RoYzFjenhlYzJxQkczdDFiNk53T3BMM2pR?=
+ =?utf-8?B?S082bTBCYnFZVUZVTE5jK3B3elpzUHpBbGtBU2xDdVVEOE4wdjg5aGgxdzBh?=
+ =?utf-8?B?aE50M1ZnWXNWY2k3R3B5NUZZR3BVWEhvWDJwdFBaTFBzMHNHQ1RJa280T01Y?=
+ =?utf-8?B?dXVNeTZaWWI3Mi85aUJsdzFRR0tRdDcvRWRpZ3NkZkNoalorTDlFYjBmam5s?=
+ =?utf-8?B?ZTVBL28xMVdDajlKNUFtdGpHemU2bVlMNnh1U3c2RE45RUg3Wm9DNit4SUxV?=
+ =?utf-8?B?Si9mQ0YxKzJFRTRjRUVZT0NDMVBqRURYaHdlakpuUE80dUY3MHo3R0ZpanRk?=
+ =?utf-8?B?U2dHZTVBeXdDWDEwbHlZVXk5OEVORUJ2ZHFaWTlVbXozM1dNdkJOcTlmQ3JS?=
+ =?utf-8?B?ajYyRTZPQnpEZzRxTHgycjNrcUphQTNTSXFOZ0t6V2F6cExpNHd0NkthUzMy?=
+ =?utf-8?B?Z2xJMEtsUkNIRHpuVG9DdlFUYzlONm12Q3U0ZndXNWt5UUxEeHZuellzUVdD?=
+ =?utf-8?B?M0FnK2ZIM01Fb3VKdVRhN1h0akpIM2MyUFpDWHNoNlh3K2c9PQ==?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SN4PR22MB2870.namprd22.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(38070700018); DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?ZmJpNHhpVmRwN0I4NjBSUTlFMkVZZXFUcS9qaDBlUHM5ZjR3ZVFQdzRFdmc2?=
+ =?utf-8?B?N2VwTVkwa1FyN292cXRtZjczS2VpV3NYK2ZyOS8wTUErcTNUQUhOeDdIbVlq?=
+ =?utf-8?B?YnVnMGZ1QWtCVkdIZjJ6Njh0MlZQQUFSNXZMZjlZOG9qZFM1ODUreDk2aUR6?=
+ =?utf-8?B?aFhVN0oyWUxIUitjNG0zdmFkd0oxYytzdThTc2J3UUw4dWNGZDlHK0piVENP?=
+ =?utf-8?B?d0ZTK1FrWVNkNmNUaDJvemZmM0w4eXJrMnpiSCtidmZDYkNCdWVCdytUbXJw?=
+ =?utf-8?B?WnRNeDNxeGlvcmFoQjRiY21qN2Q3TTQ3UEtQT1JmOHFhMVBaajlydDhEU2ZM?=
+ =?utf-8?B?andBbnpydXcxa3pmY2d4dnVNQXg5VlF5QjVHQ2E4TmYydDBGZU9PSUIvMG5D?=
+ =?utf-8?B?OWVZdkpvTFIwRHJNVDVOZHJPZGFybitvVVA1NDN5YmlzRmdNdXhBY1pDclQz?=
+ =?utf-8?B?amJ5T3U5VjVhekpqVG5vWm1PVVg3b1RWNFE0cEpiWk9FaUJqZXYyUlh4Q0Vn?=
+ =?utf-8?B?M3dPYWJ2cmQzTDU2K2Z6N0JUOS9tTVpDdThna0VnSzNXaGdwUGZpejdBaThx?=
+ =?utf-8?B?c1N4ZXNKU2t1ZTZjTFpCK3VaZlovbjYxdWtkZ0tkS2s2Q3BQUzU3Zm9Xc24x?=
+ =?utf-8?B?TEI5dHkzeTRTTW1PamZMSzlnYm5ScW5xN2J6T3dpQU8xS0graEkvM2w3ZktY?=
+ =?utf-8?B?VkVNMjdPcDFkV042T3ptcnNsMXBPMjZuVTB5d2RlWkxmNlpRMklaaXdYQ0ZG?=
+ =?utf-8?B?SjZaYkMxR2xmSHJjelJhZFcyMXVZZXhNSUt4czNUYTJxdkpLUXd0UEFnV1VN?=
+ =?utf-8?B?YkJpRmF4VmRwVHhucDhFazk4b285WlQrVHhLajBsTXZKeVJ3aWgrYmd5Z1Za?=
+ =?utf-8?B?MGUreXdIQlNOWXAwQXpJeDh5ODBXRHRpeFRjbWp2azQ5YmhPWUxUNXRUalkw?=
+ =?utf-8?B?cEI5SXRVWFhDTmh4MFMzQU1IeVVaMEJFYktuMkdCdjNjeDVybWxueDU2YzF5?=
+ =?utf-8?B?MWNWYW1vSzJZdmxZbVl3aVA1Zk8yT3BaajBNQWhVOUtyTW15U0hTZ2ppRGZw?=
+ =?utf-8?B?SFowaGRjTHhhL3BTc1R6Y29ESGZaaXc3MHZvTjBxVTg4cjFVQnRzTHZxNUts?=
+ =?utf-8?B?cTNST1F3K0gzd2Q5M0tzc2E5cmVuaGZBdnNFOEF0YUhKekdBWEdmUm9IKzBs?=
+ =?utf-8?B?Q1VWZTZuckluc2NCaHgxcFBXU2QwK0NXbElsb1U2QnhwK0JSYVZzWFlqS2t6?=
+ =?utf-8?B?OGlBV2liNnh3RGRFSitIZUYxdFRjK3NSQnZFZ0ZUOW0rUGVpeU81LzJkdzh4?=
+ =?utf-8?B?Y0kzNmNxMWdaeGVRRXdaUEFQa2Z0LzMrZjV2VUhYcy9zSGlsRk5jazA5R2ty?=
+ =?utf-8?B?V3g3a2Q2UU9nSmNmdXVuaGRhbk9nZkZuY2RyZGQwNzVvUnYwRUY5WmNVN1FZ?=
+ =?utf-8?B?eS9OTXJ3THh6Qmh5NllhVmM5Z1hjUWxnRGlWaXNYRnVFRGN0UFVEMUZ4ejMx?=
+ =?utf-8?B?STQ4UnZPcEtySEpUVEk1clpjRVFSckpIcThUYk5TUU9EbE9rblk3aWlBWnd6?=
+ =?utf-8?B?dFpzMzFtTVhKVTh2ZER0ZGtTMWg0ZVBjN3NFSHMrbzY5NjRGb3k1Y2RGQVBS?=
+ =?utf-8?B?K2gzT3NteUVBb0swWFZGQ0tHTjFUSEhiT3JJbzNySENLckFDTVZaS3gwanox?=
+ =?utf-8?B?YW1tbml0SXBUcHpVNkNQa3pFZTcxM0hoSE9VT0l5Y1JBN2xNU09Ic3h6b1I4?=
+ =?utf-8?B?QUhFVEViVUczUG9Ybkg5WFFvWFVOMkI0MjdnRU9mNjhLdW5vQXlUOVp0ZEFG?=
+ =?utf-8?B?d2d3c2FzbWRBelNna1JXcXlHdCsyT1ZxcE1IT1hTejQyeklXOUU0aCtoSlFk?=
+ =?utf-8?B?bVYzWVRoUlpxVHZIWjhHYUpBdVg1ak40NmdvK3llYnJ3Mkw3QzdZVmZUakNP?=
+ =?utf-8?B?Zy8vb1F0WWgzbXowTUg1blZtNCtPeExKUlFPamRhZHMrcFYyUUYrclg0RTVi?=
+ =?utf-8?B?VFZVUXZkcTFtMVpQZTJqY0FVaFE5WVUrd3NmK3NRaEFnMWI0aFdCT08rOXha?=
+ =?utf-8?B?T1QvWTdvWHJvL2RTb3pUQXZabW1mdUUzeVdjWThxalhoc2dDWUMzRnNpckFx?=
+ =?utf-8?Q?6CSQmEGkZmzqI98piXWFcdi7r?=
+Content-Type: multipart/related;
+ boundary="_004_69306a5c90cf4526b2c0483996910a88Spark_";
+ type="multipart/alternative"
+MIME-Version: 1.0
+X-OriginatorOrg: mono.si
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SN4PR22MB2870.namprd22.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1ccdb133-29ba-4f7f-e79a-08dcc80d5ad6
+X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Aug 2024 09:31:26.3844 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 8511cf05-6076-4943-8b43-da9210b18021
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Gix/RboxdvIWiTx1lSkHsiHvMBl5V73Fm5rZJf6Htg5yYx4m6GpcD4XH0/rrDdHh
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA6PR22MB5930
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,359 +176,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+--_004_69306a5c90cf4526b2c0483996910a88Spark_
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On 2024-08-29 00:17, Simon Glass wrote:
-> Hi Jonas,
-> 
-> On Wed, 28 Aug 2024 at 13:01, Jonas Karlman <jonas@kwiboo.se> wrote:
->>
->> Hi Simon,
->>
->> On 2024-08-28 20:11, Simon Glass wrote:
->>> Hi again Jonas,
->>>
->>> On Wed, 28 Aug 2024 at 11:06, Simon Glass <sjg@chromium.org> wrote:
->>>>
->>>> Hi Jonas,
->>>>
->>>> On Wed, 28 Aug 2024 at 10:15, Jonas Karlman <jonas@kwiboo.se> wrote:
->>>>>
->>>>> Hi Simon,
->>>>>
->>>>> On 2024-08-28 18:01, Simon Glass wrote:
->>>>>> Hi Jonas,
->>>>>>
->>>>>> On Tue, 6 Aug 2024 at 15:50, Simon Glass <sjg@chromium.org> wrote:
->>>>>>>
->>>>>>> Hi Jonas,
->>>>>>>
->>>>>>> On Sat, 3 Aug 2024 at 06:42, Jonas Karlman <jonas@kwiboo.se> wrote:
->>>>>>>>
->>>>>>>> The timer counter on Rockchip SoCs may be reset in TF-A, this may cause
->>>>>>>> the bootstage records to be printed out of order and with an incorrect
->>>>>>>> elapsed time.
->>>>>>>
->>>>>>> Eek can we just fix TF-A? That seems like a bug.
->>>>>
->>>>> TF-A is vendor blob, so we have no control of it.
->>>>
->>>> Can we replace it, or is it one of the ones that has not been released?
->>>>
->>>> Can you file a bug with the vendor?
->>>>
->>>>>
->>>>>>>
->>>>>>>>
->>>>>>>> Fix this by not sorting the bootstage records.
->>>>>>>>
->>>>>>>> Before on a Radxa ZERO 3W (RK3566) board:
->>>>>>>>
->>>>>>>>   => bootstage report
->>>>>>>>   Timer summary in microseconds (12 records):
->>>>>>>>          Mark    Elapsed  Stage
->>>>>>>>             0          0  reset
->>>>>>>>         7,436      7,436  board_init_f
->>>>>>>>       164,826    157,390  SPL
->>>>>>>>       375,392    210,566  end phase
->>>>>>>>       423,909     48,517  board_init_r
->>>>>>>>       472,973     49,064  eth_common_init
->>>>>>>>       476,848      3,875  main_loop
->>>>>>>>       477,003        155  cli_loop
->>>>>>>>
->>>>>>>>   Accumulated time:
->>>>>>>>                    7,181  of_live
->>>>>>>>                   14,739  dm_spl
->>>>>>>>                   15,029  dm_r
->>>>>>>>                  315,150  dm_f
->>>>>>>>
->>>>>>>> With this the records can be printed in chronological order when the
->>>>>>>> counter is reset and SPL and board_init_r records show correct elapsed
->>>>>>>> time.
->>>>>>>>
->>>>>>>>   => bootstage report
->>>>>>>>   Timer summary in microseconds (12 records):
->>>>>>>>          Mark    Elapsed  Stage
->>>>>>>>             0          0  reset
->>>>>>>>       164,437    164,437  SPL
->>>>>>>>       375,023    210,586  end phase
->>>>>>>>         7,437      7,437  board_init_f
->>>>>>>>       424,390    416,953  board_init_r
->>>>>>>>       473,515     49,125  eth_common_init
->>>>>>>>       477,402      3,887  main_loop
->>>>>>>>       477,571        169  cli_loop
->>>>>>>>
->>>>>>>>   Accumulated time:
->>>>>>>>                   14,734  dm_spl
->>>>>>>>                  315,646  dm_f
->>>>>>>>                    7,339  of_live
->>>>>>>>                   14,977  dm_r
->>>>>>>>
->>>>>>>> For the tested board external TPL and BROM take ~164 ms to initialize
->>>>>>>> DRAM and load SPL, SPL take ~210ms to load images from FIT and U-Boot
->>>>>>>> proper take ~477ms to reach cli prompt.
->>>>>>>>
->>>>>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->>>>>>>> ---
->>>>>>>>  common/bootstage.c | 12 ++----------
->>>>>>>>  1 file changed, 2 insertions(+), 10 deletions(-)
->>>>>>>>
->>>>>>
->>>>>> To put this more strongly, this breaks the timing output on other boards.
->>>>>
->>>>> Please elaborate, I cannot understand why not sorting would break output
->>>>> on other boards, are other boards adding records out of order?
->>>>>
->>>>> Do you have an example of how this change break other boards?
->>>>
->>>> Oh sure. The original reason was that the array was ordered by ID.
->>>> That was changed in [1], which I forgot about.
->>>>
->>>> The other bit is for coreboot (or potentially other prior phases) we
->>>> receive timestamps as a block and add them into U-Boot. We want these
->>>> to appear in the correct order with respect to the ones already adding
->>>> to U-Boot.
->>>>
->>>> Sadly coreboot uses its own toolchain and I seem to have deleted it,
->>>> but once it finishes building the world I will give it a try.
->>>
->>> OK I gave up and just built one toolchain instead of every one known
->>> to man, which is the default.
->>>
->>> The code has seriously rotted and is a somewhat fascinating window
->>> into what U-Boot was like 12 years ago...I will send a little series.
->>>
->>> Anyway, the start-romstage and device-xxx things below come from coreboot.
->>
->> Interesting, so coreboot is not running before U-Boot on this platform,
->> is it running in parallel with U-Boot?
-> 
-> It runs before, but U-Boot picks up the timestamps once it is ready to
-> do so, i.e. after bootstage is inited.
+RG9lc27igJl0IHdvcmsgLSBhdCBsZWFzdCBub3QgY29ycmVjdGx5Og0KDQo9PiBmYXRsb2FkIG1t
+YyAwOjEgJGZkdF9hZGRyX3IgL2Jvb3QvZHRiL2ZzbC1sczEwNDZhLXJkYi1zZGsuZHRiDQozMTc5
+MyBieXRlcyByZWFkIGluIDQgbXMgKDcuNiBNaUIvcykNCj0+IGZhdGxvYWQgbW1jIDA6MSAka2Vy
+bmVsX2FkZHJfciAvRUZJL2Jvb3QvZ3J1YmFhNjQuZWZpDQozOTc4Njg4IGJ5dGVzIHJlYWQgaW4g
+MTY4IG1zICgyMi42IE1pQi9zKQ0KPT4gc2V0ZW52IGZtYW5fdWNvZGUNCj0+IGJvb3RlZmkgJGtl
+cm5lbF9hZGRyX3IgJGZkdF9hZGRyX3INCkZhaWxlZCB0byBsb2FkIEVGSSB2YXJpYWJsZXMNCldB
+Uk5JTkcgZmFpbGVkIHRvIGdldCBzbW11IG5vZGU6IEZEVF9FUlJfTk9URk9VTkQNCldBUk5JTkcg
+ZmFpbGVkIHRvIGdldCBzbW11IG5vZGU6IEZEVF9FUlJfTk9URk9VTkQNCkJvb3RpbmcgL1xFRklc
+Ym9vdFxncnViYWE2NC5lZmkNCldlbGNvbWUgdG8gR1JVQiENCg0KQmVjYXVzZSBvZiB0aG9zZSBG
+RFRfRVJSX05PVEZPVU5EIGtlcm5lbCByZXBvcnRzIGEgYnVuY2ggb2YgZXJyb3JzIGFuZCBkb2Vz
+buKAmXQgYm9vdCB3aXRoIGFsbCB0aGUgaGFyZHdhcmUgc3VwcG9ydCBJIG5lZWQgaXQgdG8uDQoN
+Ck9uIHRoZSBvdGhlciBoYW5kLCBpZiBJIHJ1biB0aGUgc2FtZSBrZXJuZWwvZGV2aWNldHJlZS9p
+bml0cmFtZnMgd2l0aCBib290aSwgYnlwYXNzaW5nIHRoZSBHcnViIGNvbXBsZXRlbHksIGl0IHdv
+cmtzIGZpbmUuIFRoZSBwcm9ibGVtIGlzLCBJIG5lZWQgR3J1YjIgZm9yIGhpcyBwcm9qZWN0Lg0K
+DQpUb21hxb4gWmFtYW4sIENFTw0KTW9ubyBUZWNobm9sb2dpZXMgSW5jLg0KKzM4NiAzMCA2NTEg
+NjQ1DQoNCltjaWQ6OTg1MTBFOTQyMzQ1NDZGMEI3RDE5RTYyRDMzRkRGQ0NdDQoNCk9uIDI5IEF1
+ZyAyMDI0IGF0IDEwOjAyICswMjAwLCBQZXRlciBSb2JpbnNvbiA8cGJyb2JpbnNvbkBnbWFpbC5j
+b20+LCB3cm90ZToNCk9uIFRodSwgMjkgQXVnIDIwMjQgYXQgMDU6MTQsIFRvbWHFviBaYW1hbiA8
+dG9tYXpAbW9uby5zaT4gd3JvdGU6DQoNCknigJltIHdvcmtpbmcgb24gYW4gYXJtNjQgYm9hcmQg
+d2l0aCBhbiBOWFAgTFMxMDQ2QSBDUFUgYW5kIEkgc2ltcGx5IGNhbm5vdCBnZXQgR3J1YiB0byBs
+b2FkIGEgZGlmZmVyZW50IGRldmljZSB0cmVlIHRoYW4gdGhlIG9uZSB0aGF04oCZcyBwcm92aWRl
+ZCB0byBpdCBieSB0aGUgRUZJIFN0dWIuDQoNCj0+IGZhdGxvYWQgbW1jIDA6MSAka2VybmVsX2Fk
+ZHJfciAvRUZJL2Jvb3QvZ3J1YmFhNjQuZWZpDQo9PiBmYXRsb2FkIG1tYyAwOjEgJGZkdF9hZGRy
+X3IgL2Jvb3QvZHRiL2ZzbC1sczEwNDZhLXJkYi1zZGsuZHRiDQo9PiBib290ZWZpICRrZXJuZWxf
+YWRkcl9yICRmZHRfYWRkcl9yDQoNCkF0IGhpcyBwb2ludCwgSSBnZXQgYSBjb3VwbGUgb2YgZXJy
+b3JzIGxpa2Ug4oCcc21tdSBub2RlIG5vdCBmb3VuZOKAnS4NCg0KSG93ZXZlciwgaWYgSSwgaW5z
+dGVhZCBvZiAiZnNsLWxzMTA0NmEtcmRiLXNkay5kdGLigJ0gdXNlICJmc2wtbHMxMDQ2YS1yZGIu
+ZHRi4oCdLCB0aGVuIEkgZ2V0IHRvIEdydWIgd2l0aG91dCBhbnkgZXJyb3JzLg0KDQpBbmQgdGhp
+cyBpcyB3aGVyZSBJIGVuY291bnRlciB0aGUgaXNzdWUuIEJlY2F1c2UgSSB3b3VsZCBsaWtlIHRv
+IHVzZSBhIGRpZmZlcmVudCBEVEIgZm9yIGJvb3RpbmcgTGludXggdGhhbiB0aGUgb25lIHRoYXTi
+gJlzIHByb3ZpZGVkIGJ5IHRoZSBFRkkgY29uZmlndXJhdGlvbiB0YWJsZSwgSSBzZXQNCg0KZGV2
+aWNldHJlZSAvYm9vdC9kdGIvZnNsLWxzMTA0NmEtcmRiLXNkay5kdGINCmxpbnV4IC9ib290L3Zt
+bGludXotNi42LjMtYXJtNjQNCmluaXRyZCAvYm9vdC9pbml0cmQuaW1nLTYuNi4zLWFybTY0DQoN
+CkluIHRoaXMgY2FzZSwgdGhlIGRldmljZXRyZWUgaW5zdHJ1Y3Rpb24gZ2V0cyBpZ25vcmVkIGNv
+bXBsZXRlbHksIGFuZCBiZWZvcmUgSSBzZWUga2VybmVsIGxvYWRpbmcsIHRoZSBtZXNzYWdlIOKA
+nFVzaW5nIEZEVCBmcm9tIHRoZSBFRkkgY29uZmlndXJhdGlvbiB0YWJsZSINCg0KSXMgdGhlcmUg
+YSB3YXkgZm9yIG1lIHRvIG92ZXJyaWRlL3JlcGxhY2UgdGhlIGRldmljZSB0cmVlIHRoYXQgdS1i
+b290IHBhc3NlZCB0byBHcnViPyBJIHRyaWVkIHBhc3NpbmcgdGhlIOKAnGR0Yj3igJwgcGFyYW1l
+dGVyIHRvIHRoZSBrZXJuZWwgYm9vdCBjb21tYW5kLCBidXQgaW4gdGhhdCBjYXNlLCBJIGdldCAi
+RUZJIHN0dWI6IEVSUk9SOiBGYWlsZWQgdG8gaGFuZGxlIGZzX3Byb3Rv4oCdIGJlY2F1c2Uga2Vy
+bmVsIHdoZW4gYm9vdGluZyBkb2VzbuKAmXQgYXBwZWFyIHRvIGhhdmUgYWNjZXNzIHRvIHRoZSBz
+YW1lIGZpbGVzeXN0ZW0gdGhhdCBHcnViIGRvZXMuDQoNCldoeSBkb24ndCB5b3UgbG9hZCBhIG5l
+dyBvbmUgaW50byBtZW1vcnkgd2l0aCB1LWJvb3QgYW5kIHRoZW4gZ3J1Yg0Kd2lsbCBhbHJlYWR5
+IGhhdmUgdGhlIG9uZSB5b3Ugd2FudCB0byB1c2UgYW5kIGdydW4gZG9lc24ndCBuZWVkIHRvIGRv
+DQphbnl0aGluZy4gU29tZXRoaW5nIGxpa2UgdGhpcyBvbiB0aGUgVS1Cb290IGNvbW1hbmQgbGlu
+ZSB3b3VsZCBsb2FkDQp0aGUgRFQgYW5kIGdydWIgYW5kIHN0YXJ0IHRvIGJvb3Q6DQoNCmxvYWQg
+bW1jIDA6MSAke2tlcm5lbF9hZGRyX3J9IEVGSS9CT09UL0JPT1RBQTY0LkVGSQ0KbG9hZCBtbWMg
+MDoxICR7ZmR0X2FkZHJfcn0gZHRiLyR7ZmR0ZmlsZX0NCmJvb3RlZmkgJHtrZXJuZWxfYWRkcl9y
+fSAke2ZkdF9hZGRyX3J9DQoNCllvdSdsbCBuZWVkIHRvIGFkanVzdCBmb3Igc3RvcmFnZSwgcGFy
+dGl0aW9ucywgZmlsZSBwYXRocyBldGMuDQoNClRoYW5rIHlvdSENCg0KDQoodGhpcyBpcyBteSBm
+aXJzdCB0aW1lIHVzaW5nICphbnkqIG1haWxpbmcgbGlzdCwgc28gYXBvbG9naWVzIGlmIHRoaXMg
+aXMgdGhlIHdyb25nIGFkZHJlc3MgdG8gc2VuZCB0aGlzIHF1ZXN0aW9uIHRvKQ0KDQpUb21hxb4g
+WmFtYW4sIENFTw0KTW9ubyBUZWNobm9sb2dpZXMgSW5jLg0KKzM4NiAzMCA2NTEgNjQ1DQoNCltj
+aWQ6MThFQjJGRUU0ODVBNEREN0ExQ0U3MTZDRTE0RkNCQzddDQoNCg==
 
-I just tested using coreboot.rom picked from the docker image
-trini/u-boot-gitlab-ci-runner:jammy-20240808-21Aug2024 and using qemu:
+--_004_69306a5c90cf4526b2c0483996910a88Spark_
+Content-Type: image/png; name="98510E94234546F0B7D19E62D33FDFCC.png"
+Content-Description: 98510E94234546F0B7D19E62D33FDFCC.png
+Content-Disposition: inline; filename="98510E94234546F0B7D19E62D33FDFCC.png";
+	size=5014; creation-date="Thu, 29 Aug 2024 09:31:26 GMT";
+	modification-date="Thu, 29 Aug 2024 09:31:26 GMT"
+Content-ID: <98510E94234546F0B7D19E62D33FDFCC>
+Content-Transfer-Encoding: base64
 
-  make coreboot_defconfig all
-  cbfstool coreboot.rom remove -n fallback/payload
-  cbfstool coreboot.rom add-flat-binary -f u-boot.bin -n fallback/payload -c LZMA -l 0x1110000 -e 0x1110000
-  qemu-system-x86_64 -bios coreboot.rom -serial mon:stdio -display none
+iVBORw0KGgoAAAANSUhEUgAAAJYAAAAmCAYAAAAmy2KXAAAAAXNSR0IArs4c6QAAAKRlWElmTU0A
+KgAAAAgABgESAAMAAAABAAEAAAEaAAUAAAABAAAAVgEbAAUAAAABAAAAXgEoAAMAAAABAAIAAAEy
+AAIAAAAUAAAAZodpAAQAAAABAAAAegAAAAAAAABIAAAAAQAAAEgAAAABMjAyMzowMzozMSAxOTo0
+MTo1MQAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAlqADAAQAAAABAAAAJgAAAABJtZgxAAAACXBI
+WXMAAAsTAAALEwEAmpwYAAAGrmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4
+bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNi4wLjAiPgogICA8cmRm
+OlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1u
+cyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxu
+czpleGlmPSJodHRwOi8vbnMuYWRvYmUuY29tL2V4aWYvMS4wLyIKICAgICAgICAgICAgeG1sbnM6
+dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOnht
+cE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgICAgICAgICB4bWxuczpz
+dEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIgog
+ICAgICAgICAgICB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iCiAgICAg
+ICAgICAgIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4w
+LyI+CiAgICAgICAgIDxleGlmOkNvbG9yU3BhY2U+MTwvZXhpZjpDb2xvclNwYWNlPgogICAgICAg
+ICA8ZXhpZjpQaXhlbFhEaW1lbnNpb24+MTA5MzwvZXhpZjpQaXhlbFhEaW1lbnNpb24+CiAgICAg
+ICAgIDxleGlmOlBpeGVsWURpbWVuc2lvbj4yNzY8L2V4aWY6UGl4ZWxZRGltZW5zaW9uPgogICAg
+ICAgICA8dGlmZjpJbWFnZVdpZHRoPjEwOTM8L3RpZmY6SW1hZ2VXaWR0aD4KICAgICAgICAgPHRp
+ZmY6UmVzb2x1dGlvblVuaXQ+MjwvdGlmZjpSZXNvbHV0aW9uVW5pdD4KICAgICAgICAgPHRpZmY6
+SW1hZ2VMZW5ndGg+Mjc2PC90aWZmOkltYWdlTGVuZ3RoPgogICAgICAgICA8dGlmZjpPcmllbnRh
+dGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICAgICA8dGlmZjpYUmVzb2x1dGlvbj43Mjwv
+dGlmZjpYUmVzb2x1dGlvbj4KICAgICAgICAgPHRpZmY6WVJlc29sdXRpb24+NzI8L3RpZmY6WVJl
+c29sdXRpb24+CiAgICAgICAgIDx4bXBNTTpIaXN0b3J5PgogICAgICAgICAgICA8cmRmOlNlcT4K
+ICAgICAgICAgICAgICAgPHJkZjpsaSByZGY6cGFyc2VUeXBlPSJSZXNvdXJjZSI+CiAgICAgICAg
+ICAgICAgICAgIDxzdEV2dDpzb2Z0d2FyZUFnZW50PkFmZmluaXR5IFBob3RvIDIgMi4wLjQ8L3N0
+RXZ0OnNvZnR3YXJlQWdlbnQ+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDphY3Rpb24+cHJvZHVj
+ZWQ8L3N0RXZ0OmFjdGlvbj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OndoZW4+MjAyMy0wMy0z
+MVQxOTo0MTo1MSswMjowMDwvc3RFdnQ6d2hlbj4KICAgICAgICAgICAgICAgPC9yZGY6bGk+CiAg
+ICAgICAgICAgIDwvcmRmOlNlcT4KICAgICAgICAgPC94bXBNTTpIaXN0b3J5PgogICAgICAgICA8
+eG1wOk1vZGlmeURhdGU+MjAyMy0wMy0zMVQxOTo0MTo1MSswMjowMDwveG1wOk1vZGlmeURhdGU+
+CiAgICAgICAgIDx4bXA6TWV0YWRhdGFEYXRlPjIwMjMtMDMtMzFUMTk6NDE6NTErMDI6MDA8L3ht
+cDpNZXRhZGF0YURhdGU+CiAgICAgICAgIDxwaG90b3Nob3A6SUNDUHJvZmlsZT5zUkdCIElFQzYx
+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
 
-And can now see that coreboot is run before U-Boot, it also shows that
-coreboot or U-Boot also reset or use different counter, so the records
-added from coreboot should also not be sorted among the U-Boot bootstage
-records.
-
-  [DEBUG]  BS: BS_PAYLOAD_LOAD run times (exec / console): 210 / 4 ms
-  [DEBUG]  Jumping to boot code at 0x01110000(0x07f96000)
-  bootstage_add_record: name=reset mark=0
-  bootstage_add_record: name=board_init_f mark=32182
-  
-  
-  U-Boot 2024.10-rc3-00061-gc6b667a71fcc-dirty (Aug 29 2024 - 00:11:45 +0000)
-  
-  CPU: x86_64, vendor AMD, device 663h
-  DRAM:  127 MiB
-  bootstage_add_record: name=board_init_r mark=129405
-  Core:  19 devices, 13 uclasses, devicetree: separate
-  MMC:
-  Loading Environment from nowhere... OK
-  Video: No video mode configured in coreboot (err=-6)
-  Video: No video mode configured in coreboot (err=-6)
-  Model: Standard PC (i440FX + PIIX, 1996)
-  Manufacturer: QEMU
-  Prior-stage version: 4.22.01-2ff2409037
-  Prior-stage date: 08/21/2024
-  Net:   bootstage_add_record: name=eth_common_init mark=179706
-  e1000: 52:54:00:12:34:56
-         bootstage_add_record: name=eth_initialize mark=238014
-  eth0: e1000#0
-  bootstage_add_record: name=start-romstage mark=14867
-  bootstage_add_record: name=device-initialize mark=146126
-  bootstage_add_record: name=device-done mark=172344
-  bootstage_add_record: name=selfboot-jump mark=432299
-  bootstage_add_record: name=u-boot-inited mark=471225
-  Finalizing coreboot
-  bootstage_add_record: name=main_loop mark=251887
-  
-  starting USB...
-  bootstage_add_record: name=usb_start mark=256733
-  No USB controllers found
-  Hit any key to stop autoboot:  0
-  bootstage_add_record: name=cli_loop mark=260244
-  => bootstage report
-  Timer summary in microseconds (15 records):
-         Mark    Elapsed  Stage
-            0          0  reset
-       32,182     32,182  board_init_f
-      129,405     97,223  board_init_r
-      179,706     50,301  eth_common_init
-      238,014     58,308  eth_initialize
-       14,867     14,867  start-romstage
-      146,126    131,259  device-initialize
-      172,344     26,218  device-done
-      432,299    259,955  selfboot-jump
-      471,225     38,926  u-boot-inited
-      251,887    251,887  main_loop
-      256,733      4,846  usb_start
-      260,244      3,511  cli_loop
-  
-  Accumulated time:
-                   9,222  dm_f
-                   9,102  dm_r
-
-
-Above is without sorting and the records added from coreboot
-is imported after eth_initialize, however all the coreboot
-records should have happened before the board_init_f record.
-
-
-  => bootstage report
-  Timer summary in microseconds (15 records):
-         Mark    Elapsed  Stage
-            0          0  reset
-       15,918     15,918  start-romstage
-      145,553    129,635  device-initialize
-      172,201     26,648  device-done
-      423,150    250,949  selfboot-jump
-      461,836     38,686  u-boot-inited
-       31,925     31,925  board_init_f
-      135,370    135,370  board_init_r
-      181,557     46,187  eth_common_init
-      235,974     54,417  eth_initialize
-      247,009     11,035  main_loop
-      250,549      3,540  usb_start
-      354,321    103,772  cli_loop
-  
-  Accumulated time:
-                   9,041  dm_f
-                   9,354  dm_r
-
-
-Something like above would more correctly show all steps taken in
-chronological order and with correct elapsed time from prior mark.
-
-> 
->>
->> How is timestamp_add_to_bootstage() called in U-Boot, I cannot see any
->> call to it, what am I missing?
-> 
-> Yes, it was deleted. I just sent a series to bring i tback.
-
-Thanks, tested with your series.
-
-> 
->>
->> Guessing the records need to be sorted after/during that function call?
->>
->> Also look like the sorting is done in bootstage_report() so the report
->> is possible logged to FDT with an unsorted order.
-> 
-> Yes, although that shouldn't really matter. Perhaps it is worth fixing?
-
-After testing with coreboot I still think removing the sorting as done
-in this patch is still correct. However the coreboot records should 
-probably be imported into correct position of the bootstage records
-table.
-
-> 
->>
->> Let me know what you want me to do with this, I will drop this for now
->> and just keep carry this patch in my local tree.
-> 
-> Hmmm step one is to complain about the bug. If it exists in ATF
-> upstream, then it should be fixed. I can have a crack at fixing it if
-> so. If it is a vendor binary, then they should fix it.
-
-Not even sure how to go about to report such bug to rockchip ;-)
-
-Have also not tested with the recently merged rk35xx support in upstream
-TF-A so not sure it is also an issue with upstream.
-
-> 
-> Step 2, I suggest a Kconfig option enabled for these boards, so it is
-> clear it is a workaround.
-
-I would disagree, seeing how the coreboot records is also affected and
-incorrectly intermixed with U-Boot records, doing any type of sorting
-should be avoided, and instead the intermixed importing of the coreboot
-records should probably be fixed.
-
-Regards,
-Jonas
-
-> 
-> Regards,
-> Simon
-> 
-> 
->>>
->>> => bootstage repo
->>> Timer summary in microseconds (20 records):
->>>        Mark    Elapsed  Stage
->>>           0          0  reset
->>>      25,322     25,322  board_init_f
->>>      32,175      6,853  start-romstage
->>>     117,158     84,983  board_init_r
->>>     208,409     91,251  device-initialize
->>>     293,286     84,877  device-done
->>>     547,606    254,320  selfboot-jump
->>>     621,050     73,444  eth_common_init
->>>     699,570     78,520  eth_initialize
->>>     744,210     44,640  main_loop
->>>     761,030     16,820  usb_start
->>>   3,988,265  3,227,235  netboot_common
->>>   3,988,330         65  eth_start
->>>   6,316,294  2,327,964  bootp_start
->>>  12,286,385  5,970,091  bootp_stop
->>>  12,297,353     10,968  netboot_common
->>>  12,300,596      3,243  netboot_common
->>>  28,327,263 16,026,667  cli_loop
->>>
->>> Accumulated time:
->>>                  8,600  dm_r
->>>                  8,659  dm_f
->>>
->>> Without the sort, I see:
->>>
->>> Timer summary in microseconds (18 records):
->>>        Mark    Elapsed  Stage
->>>           0          0  reset
->>>      36,582     36,582  board_init_f
->>>     125,775     89,193  board_init_r
->>>     642,577    516,802  eth_common_init
->>>     721,321     78,744  eth_initialize
->>>      31,357429,427,733,2  start-romstage
->>>     247,602    216,245  device-initialize
->>>     333,879     86,277  device-done
->>>     596,043    262,164  selfboot-jump
->>>     765,897    169,854  main_loop
->>>     783,397     17,500  usb_start
->>>   4,043,423  3,260,026  netboot_common
->>>   4,043,489         66  eth_start
->>>   6,371,702  2,328,213  bootp_start
->>>  11,609,247  5,237,545  netboot_common
->>>  15,476,116  3,866,869  cli_loop
->>>
->>> Accumulated time:
->>>                  8,639  dm_f
->>>                  8,923  dm_r
->>>
->>>>
->>>>>
->>>>>>
->>>>>> At the very least, this should be Kconfig option just enabled for
->>>>>> boards with a broken ATF.
->>>>>
->>>>> I can add a Kconfig option, but would like to understand why other/any
->>>>> board would need to sort the records in the first place.
->>>>
->>>> OK.
->>>
->>> Regards,
->>> Simon
->>>
->>>>
->>>> [1] 03ecac31498 bootstage: Use rec_count as the array index
->>
-
+--_004_69306a5c90cf4526b2c0483996910a88Spark_--
