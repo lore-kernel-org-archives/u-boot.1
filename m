@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C558DC83F26
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 14:13:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D62EC83F2A
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 14:14:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55636888DD;
-	Thu, 29 Aug 2024 16:13:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BE10E888DD;
+	Thu, 29 Aug 2024 16:14:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ywt7FOsu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HsMzwgcB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BAE788B94; Thu, 29 Aug 2024 16:13:47 +0200 (CEST)
-Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
- [IPv6:2607:f8b0:4864:20::830])
+ id AE4C288B94; Thu, 29 Aug 2024 16:14:45 +0200 (CEST)
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
+ [IPv6:2607:f8b0:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0334687F19
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 16:13:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1872987F19
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 16:14:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-44ff7bdb5a6so3723291cf.3
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 07:13:44 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-7cd967d8234so438652a12.2
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 07:14:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724940824; x=1725545624; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=faV0GDawvd4CnsjpQJjosUJ3T6/tynOUH0e7Ed1TXjQ=;
- b=Ywt7FOsuP/HN8niRzqvUfrP7vbKjlDaflLOONaIIrB+m6aVae6Qna+CT4M32+HJVDj
- 1gmE5cvBhJY5NlS8fbw1oLkUeurCTCxgfQ2EYOyftYpRHRoqCb6nFgUazZ3JziQWJoJA
- /6dGwWnrwFSa0sPqJ7PbLUMhYUr9TP8zkpv+I=
+ d=chromium.org; s=google; t=1724940881; x=1725545681; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=+bmGmUKq0QGRFjHq1UnJMuqBpOfffX11AC0Fr/BpbWo=;
+ b=HsMzwgcBUkWWzrE2WtxHGUU1ugX5JEJo+OkqwbSbkEHWIg86cmiUwm3kMhNPc8/BLK
+ mLxGAa5gmygnaPeeYmlJ0uKtPL4BKneBlbnKLcMaHGSZ1nmmmUYiADMXjxtkbC1Nq3ZF
+ IgAATRYvaEkbaLOxc1c1Zcl4+EQv2vLEM8WW8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724940824; x=1725545624;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=faV0GDawvd4CnsjpQJjosUJ3T6/tynOUH0e7Ed1TXjQ=;
- b=S+t1ZoFQz4jwy9akzTEotng9x3F5u9um5xWJ9HcTNl3lZ3qBhZ8U9rmTTNOFo7vjFd
- mGOZXWgsoJuTG9KjjYA4GR9+ILkyzY+uwHZwYguuYt+1MudVkr+8dt3QToj1olipaVRH
- 07T2Uw8JSyreniBohEHcBUwure1FUsLlo0Vnm8x6YbYA1unDDFrxFbDyII8mADyx4PqQ
- XVrlasFA8y7hQ4LTNU1Mm8QuBg59UPye9X9z4lqZ6PJW7b4DO061hFJSFf4a9XRx2+GS
- 30ihx/WiwXm/z2Blg71fxApG/2HVWFepFbccuLhrAjDzbu1H6wEhtBIQNP3mhxWhNu/W
- Akkg==
-X-Gm-Message-State: AOJu0YyZqhtfK4lOFr4RSPukJt3cZgvxyQRhzfGgVTCL3AwcDT23JS4s
- 3QhrTd5da1Kmei4EOpfBh+laCxNvhFnmMyRxuZcn128vwMZ9fphP8M7V0utuJzY=
-X-Google-Smtp-Source: AGHT+IFwJz2WgQzWQ4/ZWYDc07NPO9vZdS6+F9/8ic/QOFMc6oBfwqXVlfnbuL3xgrAHCgY8fo6DRQ==
-X-Received: by 2002:a05:622a:4812:b0:44f:f1ba:d9fd with SMTP id
- d75a77b69052e-4567f7212dfmr32958161cf.64.1724940823569; 
- Thu, 29 Aug 2024 07:13:43 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45682ce07aasm5090901cf.50.2024.08.29.07.13.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Aug 2024 07:13:42 -0700 (PDT)
-Date: Thu, 29 Aug 2024 08:13:39 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v5 00/20] labgrid: Provide an integration with Labgrid
-Message-ID: <20240829140921.GX2479150@bill-the-cat>
-References: <20240828220846.1205813-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1724940881; x=1725545681;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+bmGmUKq0QGRFjHq1UnJMuqBpOfffX11AC0Fr/BpbWo=;
+ b=USr1aymFxqYwXi8tRm4NcRKcIb3jpXiMG0xLyh8cfef3RT5VJcvZvnix8FRwsg2vpH
+ IXvV8BgPlqptyLDzOqNI0ypDGm97Kum4IUorPv73T+Wi+tDzOvOEr+FxtSNK4H+UAmaK
+ aqE8EscPzvPtfZ5AL3ccOGYSea75GUhzJWYfspHQu4rfvi209XeiEt6iBK/BvNIweXzK
+ OwyHHspDk7c5Uz6ngPxEfWxjQFW9OqSA0LKQxvuHp6pDvTMWBlEwARQnjUTDTJdI9CgT
+ PAK/rEPru55lvBuISo2CPCA9pqs3VZTNM5Vvyui9hRxaudpmRqbML4y4Pc4hsTQpCrbP
+ WHrg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXCImnUiug+IZ477taA0j/+nYIxLAYf6+mQqQ3agFTbSeMLSOO4pafYn89fTlKTKfBg4Djt5Rg=@lists.denx.de
+X-Gm-Message-State: AOJu0YxYaPCLp/pHxCe0rPrqTQy5f5XnXs5/7z1vx1DgT4kY11R3AFqp
+ RwgnDB/2PNZS+sglsgD44SvYLTBHjFLTyLirOEMsjqtznw12nHR5JriI7w57IVyW+8cUImKS2mx
+ 6QuibZd2MvSHVcuEQDJqpZYcwuig2i4PWdG5hZlKmiSTjjoI=
+X-Google-Smtp-Source: AGHT+IEtPSvVJ4WhwCKG2AyqF+yoOnXZ4D/sFD+BAYIDO99WpshBuOWXE9ChYuVRhMAcQEBQ1aXfrD7wuiVAYy9FGOY=
+X-Received: by 2002:a05:6a21:1304:b0:1c4:8bfd:4321 with SMTP id
+ adf61e73a8af0-1cce10aef48mr2670142637.34.1724940881505; Thu, 29 Aug 2024
+ 07:14:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="I5B6iuvrMd6u8wzd"
-Content-Disposition: inline
-In-Reply-To: <20240828220846.1205813-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240801173637.1071068-1-sjg@chromium.org>
+ <20240801173637.1071068-3-sjg@chromium.org>
+ <CAC_iWj+6CqPCxN8jSNJSzGiprd+sAw25ooQRaAf=t=Sdio67=A@mail.gmail.com>
+ <CAFLszThVpvHO8Jt2Mz1WB80=fDtYpzieo1eR4k2Jj=e37Gb87g@mail.gmail.com>
+ <CAC_iWjJJFygaws2ciBDMT=JJ4yMzhQC41T_Tg1RKFvrxzRTTyw@mail.gmail.com>
+ <CAFLszThsVcFwSe39geTeE=6bbJqK0bUT6kEYjULkOuNjO51e+Q@mail.gmail.com>
+ <CAC_iWjKPTv6Yzb6cQD=eJtC7Wm3bTC+cyaCUSmDXaWUySByoYw@mail.gmail.com>
+ <Zs7Ubog171uwz8jn@hades>
+ <CAFLszTgNnmyKFC5XKPieFoqT1J6aerYkD=qOof3tZ_V25SrO-A@mail.gmail.com>
+ <CAC_iWj+EO4L+Pu-QzWPDJL5=A1JNzDx13SKfvNZZcjkzVXn2Ow@mail.gmail.com>
+In-Reply-To: <CAC_iWj+EO4L+Pu-QzWPDJL5=A1JNzDx13SKfvNZZcjkzVXn2Ow@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 29 Aug 2024 08:14:30 -0600
+Message-ID: <CAFLszTi+QjPANqTREqO8NoXEh_Mqy8fraFS2Uq6qirKSGhcOxQ@mail.gmail.com>
+Subject: Re: [PATCH v2 2/3] efi: Convert device_path allocation to use malloc()
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,132 +92,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Ilias,
 
---I5B6iuvrMd6u8wzd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 29 Aug 2024 at 06:39, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> On Thu, 29 Aug 2024 at 15:17, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Ilias,
+> >
+> > On Wed, 28 Aug 2024 at 01:40, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
+> > >
+> > > Hi Simon,
+> > >
+> > > [...]
+> > >
+> > > > > > > > > ---
+> > > > > > > > >
+> > > > > > > > > (no changes since v1)
+> > > > > > > >
+> > > > > > > > What about https://lore.kernel.org/u-boot/CAFLszTjLAKaYK_jLXJ7Z571L-QMtoiqE-oxHCRs186dZ2Qok5g@mail.gmail.com/
+> > > > > > > > ?
+> > > > > > >
+> > > > > > > Yes, I reordered the patches in this series.
+> > > > > >
+> > > > > > You don't need to reorder them. As Heinrich already pointed out some
+> > > > > > of these functions are used in EFI protocols. e.g
+> > > > > > duplicate_device_path() requires the memory to be allocated by EFI
+> > > > > > memory services, you can't just replace it with malloc.
+> > > > >
+> > > > > The pointers returned can be freed with EFI services. I don't see any
+> > > > > problem here. All the tests pass and all the spec rules are followed,
+> > > > > so far as I can tell.
+> > > >
+> > > > Where exactly does that happen in the current patch?
+> > > >
+> > > > efi_alloc() calls efi_allocate_pool() and when we need to free the
+> > > > device path we are calling efi_free_pool()
+> > > >
+> > >
+> > > Looking at it again, this wasn't very clear. The previous patch converts
+> > > efi_allocate_pool() to use malloc. So this patch is not needed at all
+> >
+> > That's right, but ultimately I'd like to drop efi_alloc() and the only
+> > other place it is used is once in lib/efi_loader/efi_bootmgr.c
+>
+> Right, then the right thing to do here is to replace efi_alloc() with
+> efi_allocate_pool() which will be calling malloc in the end. That way
+> we are free to change the efi_allocate_pool implementation in the
+> future without affecting the functions described on the spec
 
-On Wed, Aug 28, 2024 at 04:08:26PM -0600, Simon Glass wrote:
+OK, that sounds good and it will make it clearer which things are
+internal memory allocations and which are presented to the app as
+things that it can free. The spec doesn't mention the pool, but I
+assume that is implicit.
 
-> Labgrid provides access to a hardware lab in an automated way. It is
-> possible to boot U-Boot on boards in the lab without physically touching
-> them. It relies on relays, USB UARTs and SD muxes, among other things.
->=20
-> By way of background, about 4 years ago I wrong a thing called Labman[1]
-> which allowed my lab of about 30 devices to be operated remotely, using
-> tbot for the console and build integration. While it worked OK and I
-> used it for many bisects, I didn't take it any further.
->=20
-> It turns out that there was already an existing program, called Labgrid,
-> which I did not know about at time (thank you Tom for telling me). It is
-> more rounded than Labman and has a number of advantages:
->=20
-> - does not need udev rules, mostly
-> - has several existing users who rely on it
-> - supports multiple machines exporting their devices
->=20
-> It lacks a 'lab check' feature and a few other things, but these can be
-> remedied.
->=20
-> On and off over the past several weeks I have been experimenting with
-> Labgrid. I have managed to create an initial U-Boot integration (this
-> series) by adding various features to Labgrid[2] and the U-Boot test
-> hooks.
->=20
-> I hope that this might inspire others to set up boards and run tests
-> automatically, rather than relying on infrequent, manual test. Perhaps
-> it may even be possible to have a number of labs available.
->=20
-> Included in the integration are a number of simple scripts which make it
-> easy to connect to boards and run tests:
->=20
-> ub-int <target>
->     Build and boot on a target, starting an interactive session
->=20
-> ub-cli <target>
->     Build and boot on a target, ensure U-Boot starts and provide an inter=
-active
->     session from there
->=20
-> ub-smoke <target>
->     Smoke test U-Boot to check that it boots to a prompt on a target
->=20
-> ub-bisect <target>
->     Bisect a git tree to locate a failure on a particular target
->=20
-> ub-pyt <target> <testspec>
->     Run U-Boot pytests on a target
->=20
-> Some of these help to provide the same tbot[4] workflow which I have
-> relied on for several years, albeit much simpler versions.
->=20
-> The goal here is to create some sort of script which can collect
-> patches from the mailing list, apply them and test them on a selection
-> of boards. I suspect that script already exists, so please let me know
-> what you suggest.
->=20
-> I hope you find this interesting and take a look!
->=20
-> [1] https://github.com/sjg20/u-boot/tree/lab6a
-> [2] https://github.com/labgrid-project/labgrid/pull/1411
-> [3] https://github.com/sjg20/uboot-test-hooks/tree/labgrid
-> [4] https://tbot.tools/index.html
-
-Part of my concern here is still that this series contains:
-
-- Generic test improvements and fixes:
-
->   test: Use a constant for the test timeout
->   test: Pass stderr to stdout
->   test: Avoid failing skipped tests
->   test: Move the receive code into a function
->   test: Separate out the exception handling
->   test: Detect dead connections
->   test: Tidy up remaining exceptions
->   test: Improve handling of sending commands
->   test: Fix mulptiplex_log typo
->   test: Avoid double echo when starting up
-
-- Labgrid specific listed as generic changes:
-
->   test: Release board after tests complete
->   test: Try to shut down the lab console gracefully
-
-- Your labgrid+builman implementation specific changes:
-
->   test: Allow signaling that U-Boot is ready
->   test: Allow connecting to a running board
->   test: Create a common function to get the config
->   test: Introduce the concept of a role
->   test: Introduce lab mode
->   test: Add a section for closing the connection
->   test: Support testing with two board-builds
-
-Which makes this harder to review and clearly merge. For example, we
-already have hooks for power on / power off, and we should just call
-them as wow that would make everyones lab easier (I used to have a
-pre-script to turn on everything).
-
---=20
-Tom
-
---I5B6iuvrMd6u8wzd
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbQghMACgkQFHw5/5Y0
-tywzRgwAuhAdDeAPJTIY5zgldkbkkYd3kATG7oNPd6esVHXQN6XQ4M8xQTmj+ltC
-cY+ds2qM8/zOwNgn6cSp1SWezgYgWkIU6PNsI6owK25AdvWyROAcJddkMPizuRmx
-jvRgSKOfHxuZ6u3z3B95KwMzzb7HYs3QHfrVhp2na+3t+aHQ/VOcdspcmkkAiPOr
-MmKGUaN+xCjwuM4pEKYUzivvRhcf+5Fc1sjGTGGci+cZ/h/5luq5vr2LQsp5oeg3
-L1w/Lirhbj/jk6f5ObIp7jwd2jNz/w0RAuZ02GV5Gd+Yv7kugTgsN4mDe1SU+b9U
-pd55LTAUasBSSbBcz6V4IPW7qBWvz5gGgVXZGg1w89V3nL5zPKtVINmNvcnyM78u
-5VEbVwyfbo5/UdSO43+1r5BFPZvmri74oOTaJn3K/1XiwaEMOjY9AmR02MmJ1JS6
-Q008sehjhrcL2RqiT+8wcUEoDI1wo8THiKfm97mAiSontEg3fuA1H2fg3x7JTphS
-9UuzJQRT
-=z2TL
------END PGP SIGNATURE-----
-
---I5B6iuvrMd6u8wzd--
+Regards,
+Simon
