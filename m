@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7AD5C83F2D
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 15:04:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A1ECC83F2E
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 15:04:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59F8988966;
-	Thu, 29 Aug 2024 17:02:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C441288C73;
+	Thu, 29 Aug 2024 17:02:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="O7hrPYlv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iJOP8F8u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 635E288CE5; Thu, 29 Aug 2024 17:02:04 +0200 (CEST)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
+ id 90EF188C88; Thu, 29 Aug 2024 17:02:56 +0200 (CEST)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A11988966
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 17:02:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FA0C889A7
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 17:02:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-7a802deea39so50900185a.2
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 08:02:02 -0700 (PDT)
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-7a1d6f47112so47931685a.0
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 08:02:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724943721; x=1725548521; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724943773; x=1725548573; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RmG6ITq8iSDezZl0RCXkbLNgVSPP2EVIEIawwHjAKCk=;
- b=O7hrPYlvzGEUVg9TMSXO5ZHTWf1hDQPQQ6In5szMsJbSKEcfFdYSOV8ugsYwIXWLbl
- c809Gz9Id7nsskStii9hqQg1amto5tc6kCPWMpSbWdHY/M+yCEkh2AHQAdlxVLiut/Y9
- uLjGUrgCDmphyf3RheLaG3ys2PPPX4gba0YqI=
+ bh=tg1AKqkwGoOrOrSDTeA1xgP4WfJMFTshB4ix6r2U4p4=;
+ b=iJOP8F8uFExsTiSpyNQG18VWAA0V8ODWL8R9HV4sGT0/twQTC7aLEhVFSfHmiTWl6/
+ LTMtbKfE6z4ZoejzakbYwveR1MkucveN0fpSJEyqTZ93Fy6IDdc5xR22WKnT5HPPMRs8
+ lwUCuuuUKyJSuKj5LlOKm7IGaU+SEiqEbvwkQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724943721; x=1725548521;
+ d=1e100.net; s=20230601; t=1724943773; x=1725548573;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=RmG6ITq8iSDezZl0RCXkbLNgVSPP2EVIEIawwHjAKCk=;
- b=nbP00G7Lot0lu1m2lSUsTMNlx0y8zE6IyAvon7QwLTCkOz6H1v26eYPJO9+C+zmzev
- fIWAa6v2dNGDRYKpis4y5BL+oQaZYMTdrei3ETYz2r+ovC6WO4XMkcCzn47ugPGhXunn
- /CQ+9SUkZO1KLfebdZS0cUOfssSROv/694qWLsH1fQMyHqrTU2fWTMbFRuD7kOv2592f
- R0PkOs4rezhh3VQWPHCts/pixE5gnYV/IAHjGjukr3cDJ3lfO1sbg9yC/QZ9hn1hNG3m
- iF5JQ+Bsuscg3dBBY57YscZ6UMrJ5HKAYczTaxPrzYfCWptMIXmOj0RczFrEd+QmeA1p
- kLCQ==
-X-Gm-Message-State: AOJu0YyS6JiC8ZRS0bJ4u6Te53yK+AiCn+gdB1KI5e5ffUz8c8rDMsku
- eSF6lLw1rEoi+xiqEFNexhd7ixDpy2dwlhz9W1nCvyHqoIZUQ+lwCNPPZj40A758t0lnzaIQYC9
- 93BLWYbGwgv5wFB0mTWYOPkJiFf7ApvB/TAUCAo8tpOERphc=
-X-Google-Smtp-Source: AGHT+IEpyN+2LIjkk3qotixEx161fVYhhDESGJl/F99jVhvWVRVNEHljOUL9FEuZ7VPnMfegiii4qR2kINe/c2V9Q84=
-X-Received: by 2002:a05:6214:4589:b0:6b5:32de:bfe7 with SMTP id
- 6a1803df08f44-6c33e616e2emr35603086d6.22.1724943720720; Thu, 29 Aug 2024
- 08:02:00 -0700 (PDT)
+ bh=tg1AKqkwGoOrOrSDTeA1xgP4WfJMFTshB4ix6r2U4p4=;
+ b=jftPIkXUtXfyHEeKk5YIqCViqfzeBYC6Yay7CXoVqQ/0xIwZ7IE83WzxAQi8RXkGNo
+ ZldTCVtE7ZglTB15fk6t78SUK6mWdoHaRfpX6nyxfaPGHs/RzceYWFjMfRfKubCFtvrg
+ lqG67pA2MqVdeVH+EHyA0/9h+DhxJdl4ecabasiUUcS4pkivEIAHN5Xbfh16Y68s0QwJ
+ 14z6FufXSe+kqPq7v/aJNTriZYvLIVGFeBq+QUkr7PXCPLe/CZECsnwk8MMlOMHs1vDD
+ bBG6EpEpJDrqkt133OWXdg2V3AWjsCclzW+nPOQM3vGtjxEdZDn5cye2Is69xhTvpYev
+ HQag==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW6i+JT2oUhIMYRl9YkdB9OzPQ5YE4U+wPNW4Rq4NFkd5FmYF9NPififJRs6oojcvLyDeTb40c=@lists.denx.de
+X-Gm-Message-State: AOJu0YzaupNWdaeeu8GmNSF+OoBh2uZaIg21smxsSkLmuSyLHB89qSpZ
+ Nribqpgywz8qIh31SDCC8rw7XdouMC0M2kOmyByqemXsT3CfPGy8UWlGqV5nXxWfACIO+Nm1SpZ
+ bl19q2SSKidgcM6ggXCGcrlodQSZsKgY5L0tA
+X-Google-Smtp-Source: AGHT+IFkKu+nNI92yoKBaEV0QY+oNu+bazkQeuYfbsywNtlgLBonuj+u5w5OFxqZhax3f5GHJhSqg2iQfdkV2pIzmNA=
+X-Received: by 2002:a05:620a:448d:b0:7a1:cd2c:f37d with SMTP id
+ af79cd13be357-7a80427a9d3mr354118785a.66.1724943769268; Thu, 29 Aug 2024
+ 08:02:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240826191143.426387-1-sjg@chromium.org>
- <CALeDE9PWV-c0cCagHaUwAvTdryX5g47286toBAd-xezczisTKg@mail.gmail.com>
-In-Reply-To: <CALeDE9PWV-c0cCagHaUwAvTdryX5g47286toBAd-xezczisTKg@mail.gmail.com>
+References: <20240828164523.125770-1-sjg@chromium.org>
+ <20240828164523.125770-4-sjg@chromium.org>
+ <CALeDE9Ptr0Ln4H24yMqxuw1+E_Wt5qBGdQabUH54PaYUTPf9Yg@mail.gmail.com>
+ <CAFLszThK_t5EwL28vnzmSp5UZQrSEpBRsaXhnNudMQRe8-7Ejw@mail.gmail.com>
+ <CALeDE9O-kmnqkosThf8xQpLZ2tEebiHvrUEzVJNDjiEff2-t2Q@mail.gmail.com>
+ <CAFLszThD=Haj4M5rUYfpjPDjr9JEOPygQb9tV36frcAM5Ey9tw@mail.gmail.com>
+ <c63147f4-d364-4568-8f6e-c0348914446a@linaro.org>
+In-Reply-To: <c63147f4-d364-4568-8f6e-c0348914446a@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 29 Aug 2024 09:01:49 -0600
-Message-ID: <CAFLszThinApHkFiW2w26ihqBP2Jq2r7_sPmSaP4dHk4gzbsCzw@mail.gmail.com>
-Subject: Re: [PATCH 00/15] binman: More patches to support VBE
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Brandon Maier <brandon.maier@collins.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>, 
- Massimo Pegorer <massimo.pegorer+oss@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, 
- Rong Tao <rongtao@cestc.cn>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Tom Rini <trini@konsulko.com>
+Date: Thu, 29 Aug 2024 09:02:38 -0600
+Message-ID: <CAFLszTgzM-FT64AYTy6FXwUw3FQg-3MQ7x0TZc6xBhX5c+bXEg@mail.gmail.com>
+Subject: Re: [u-boot-test-hooks PATCH v4 3/3] Provide some basic scripts for
+ Labgrid integration
+To: neil.armstrong@linaro.org
+Cc: Peter Robinson <pbrobinson@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,72 +91,164 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter,
+Hi Neil,
 
-On Wed, 28 Aug 2024 at 04:01, Peter Robinson <pbrobinson@gmail.com> wrote:
+On Thu, 29 Aug 2024 at 08:44, <neil.armstrong@linaro.org> wrote:
 >
-> On Mon, 26 Aug 2024 at 20:11, Simon Glass <sjg@chromium.org> wrote:
+> On 29/08/2024 14:17, Simon Glass wrote:
+> > Hi Peter,
 > >
-> > This series provides a number of patches to make VBE easier to
-> > implement, particularly with the new OF_UPSTREAM option.
+> > On Thu, 29 Aug 2024 at 04:43, Peter Robinson <pbrobinson@gmail.com> wrote:
+> >>
+> >> On Wed, 28 Aug 2024 at 22:25, Simon Glass <sjg@chromium.org> wrote:
+> >>>
+> >>> Hi Peter,
+> >>>
+> >>> On Wed, 28 Aug 2024 at 12:14, Peter Robinson <pbrobinson@gmail.com> wrote:
+> >>>>
+> >>>> Hi Simon,
+> >>>>
+> >>>>> With Labgrid we don't need to specify the various methods, except for
+> >>>>> the console, which simply calls labgrid-client.
+> >>>>>
+> >>>>> This allows supporting any boards in your lab, without adding per-board
+> >>>>> configuration to these hooks.
+> >>>>>
+> >>>>> Provide ellesmere files as an example.
+> >>>>
+> >>>> What's ellesmere?
+> >>>
+> >>> It is a lake but also the name of a computer.
+> >>>
+> >>>>
+> >>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+> >>>>> ---
+> >>>>>
+> >>>>> Changes in v4:
+> >>>>> - Support pytest fully with dual-build boards like Beagleplay
+> >>>>>
+> >>>>> Changes in v3:
+> >>>>> - Update scripts for latest version of Labgrid integration
+> >>>>> - Add poweroff.none and poweron.none
+> >>>>> - Provide -n flag when querying board info
+> >>>>> - Target the grpc version of Labgrid which is now in -master
+> >>>>> - Update README to cover the changes
+> >>>>>
+> >>>>> Changes in v2:
+> >>>>> - Make use of the common script (only) to set bin_dir
+> >>>>>
+> >>>>>   README.md                    | 50 ++++++++++++++++++++++++++++++++++++
+> >>>>
+> >>>> Maybe that should be in a separate labsgrid readme?
+> >>>
+> >>> My hope is that Labgrid becomes the normal way of running these tests,
+> >>
+> >> Generally I agree with automated testing platforms, I think <insert
+> >> you're preferred platform here> makes sense, there's a bunch like
+> >> Linaro and a bunch in the arm ecosystem use LAVA [1] and  there's a
+> >> bunch more that I'm aware of.
+> >
+> > I am somewhat familiar with LAVA and I believe it can be used to test
+> > U-Boot, although I need to learn how. Looking at a test run [2] for
+> > beaglebone black I see that it is using a recent kernel but the U-Boot
+> > seems to be older.
+> >
+> >>
+> >> Does it make sense, of course at some point in the future post this
+> >> being merged, make sense to look at a general way of making it easier
+> >> to plugin these sort of HW test platforms using this as a basis? I ask
+> >> mostly because putting a bunch of my devices into some sort of
+> >> platform can auto test things and of course everyone has an opinion to
+> >> which is the best one :-P
+> >
+> > Yes. I had heard from Tom that Labgrid is the new hotness for now.
+> > Having dug into it I believe it is a good solution, although it can
+> > certainly be improved to handle scale better.
+> >
+> > Anyway, IMO the current test hooks are not a great solution, just
+> > because the configuration is spread all over the place and it relies
+> > on lots of little shell scripts. So I believe that the Labgrid
+> > integration is a closer to where we want to be with others that come
+> > along.
 >
-> How? They mostly look unrelated to VBE.
+> I'd say all those scripts are actually here to ease integration with any
+> system, booting U-Boot and Linux are two different beasts.
 
-- we need binman symbols which provide a disk offset, not an address
-- we need to have a compressed section containing VPL, meaning that
-there is no valid image-pos for things within that section
-- we need to be able to locate the devicetree when OF_UPSTREAM is used
+That's fine, go ahead and use the scripts. My point is that Labgrid
+doesn't need them and in fact it makes everything pretty painful if we
+try to use all of them.
 
-The iMX8 one is for Marek, as until that is fixed I cannot enable
-code-coverage in Binman in CI, which I very-much want to do with VBE.
+> Most of the time you need special jumpers enabled to setup vendor-specific
+> bootrom mode to reflash or ram-boot U-Boot.
 
->
-> >
-> > Simon Glass (15):
-> >   binman: Fix up test coverage for mkeficapsule
-> >   binman: Correct the comment for fdtgrep
-> >   binman: Tidy up comments for Entry.GetEntryArgsOrProps()
-> >   binman: Tidy up comments and pylint warnings in fit
-> >   binman: Avoid setting the image_pos attribute directly
-> >   binman: Update fdt-list-dir to use the provided directory
-> >   binman: fit: Avoid assuming that a FIT member is a section
-> >   binman: fit: Set the image_pos attributes only once
-> >   binman: fit: Refine handling of devicetrees for OF_UPSTREAM
-> >   binman: Adjust naming for reading symbols
-> >   binman: Add minor improvements to symbol-writing
-> >   binman: Provide a way to set the symbol base address
-> >   binman: Unwind the end-at-4gb special-case a little
-> >   binman: Allow image_pos to be None when writing symbols
-> >   binman: Make a start on an iMX8 test
-> >
-> >  tools/binman/binman.rst                       |  19 ++-
-> >  tools/binman/btool/fdtgrep.py                 |   3 +-
-> >  tools/binman/elf.py                           |  14 +-
-> >  tools/binman/elf_test.py                      |   4 +-
-> >  tools/binman/entry.py                         |  25 ++-
-> >  tools/binman/etype/atf_fip.py                 |   2 +-
-> >  tools/binman/etype/blob_phase.py              |   5 +
-> >  tools/binman/etype/cbfs.py                    |   2 +-
-> >  tools/binman/etype/efi_capsule.py             |   2 +
-> >  tools/binman/etype/fit.py                     | 116 ++++++++-----
-> >  tools/binman/etype/nxp_imx8mimage.py          |   3 +-
-> >  tools/binman/etype/section.py                 |  31 ++--
-> >  tools/binman/ftest.py                         | 152 +++++++++++++++---
-> >  tools/binman/image.py                         |  21 ++-
-> >  tools/binman/image_test.py                    |   8 +-
-> >  tools/binman/test/336_symbols_base.dts        |  23 +++
-> >  tools/binman/test/337_symbols_base_expand.dts |  24 +++
-> >  tools/binman/test/338_symbols_comp.dts        |  26 +++
-> >  tools/binman/test/339_nxp_imx8.dts            |  17 ++
-> >  19 files changed, 386 insertions(+), 111 deletions(-)
-> >  create mode 100644 tools/binman/test/336_symbols_base.dts
-> >  create mode 100644 tools/binman/test/337_symbols_base_expand.dts
-> >  create mode 100644 tools/binman/test/338_symbols_comp.dts
-> >  create mode 100644 tools/binman/test/339_nxp_imx8.dts
-> >
-> > --
-> > 2.34.1
-> >
+I deal with this by soldering onto the recovery switch. For example
+Beagleplay needs it, otherwise it boots from internal eMMC or
+something.
+
+Perhaps Linaro could create a standard here, where boards have a
+'recovery' line which labs can twiddle?
+
+> So forcing us people to switch to Labgrid because it matches your boards
+> behavior is a little adventurous, and while we can add some enhancement
+> to the actual pytest and hooks, I'm against saying Labgrid should be the
+> golden CI system.
+
+Who is forcing anyone to use Labgrid?
+
+I invented my own system (Labman [3]) several years ago. Let me know
+if you are interested and I can share some slides. I was thinking of
+trying to tidy it up, but Tom suggested that Labgrid might be worth a
+look. I had never even heard of it before that.
+
+I don't mind about choosing golden CI systems. The more the merrier. I
+want to have my boards connected to gitlab so things like bloblist
+changes don't break my boards. At this point I have convinced myself
+that Labgrid (as amended) is a good solution for this.
 
 Regards,
-SImon
+Simon
+
+>
+> Neil
+>
+> >
+> > I would love for you to add a board into Labgrid and see how you go.
+> >
+> >>
+> >> [1] https://validation.linaro.org/
+> >>
+> >>> so having it in the main place (and perhaps eventually removing the
+> >>> old way) is my goal.
+> >>>
+> >>>>
+> >>>>>   bin/console.labgrid          | 42 ++++++++++++++++++++++++++++++
+> >>>>>   bin/ellesmere/common-labgrid | 46 +++++++++++++++++++++++++++++++++
+> >>>>>   bin/ellesmere/conf.all       | 24 +++++++++++++++++
+> >>>>>   bin/getrole.labgrid          | 25 ++++++++++++++++++
+> >>>>>   bin/release.labgrid          | 22 ++++++++++++++++
+> >>>>>   bin/release.none             | 22 ++++++++++++++++
+> >>>>>   bin/u-boot-test-getrole      | 38 +++++++++++++++++++++++++++
+> >>>>>   bin/u-boot-test-release      | 26 +++++++++++++++++++
+> >>>>>   9 files changed, 295 insertions(+)
+> >>>>>   create mode 100644 bin/console.labgrid
+> >>>>>   create mode 100755 bin/ellesmere/common-labgrid
+> >>>>>   create mode 100644 bin/ellesmere/conf.all
+> >>>>>   create mode 100644 bin/getrole.labgrid
+> >>>>>   create mode 100644 bin/release.labgrid
+> >>>>>   create mode 100644 bin/release.none
+> >>>>>   create mode 100755 bin/u-boot-test-getrole
+> >>>>>   create mode 100755 bin/u-boot-test-release
+> >>>>>
+> >>>
+> >>> [..]
+> >>>
+> >>> Regards,
+> >>> Simon
+> >
+> > Regards,
+> > Simon
+> >
+> > [2] https://validation.linaro.org/scheduler/job/4089871#results_482796468
+>
+
+[3] https://github.com/sjg20/u-boot/tree/lab6a/tools/labman
