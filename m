@@ -4,77 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B915C83F27
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 14:06:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87612C83F27
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 14:06:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95FAC88C3C;
-	Thu, 29 Aug 2024 16:05:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0485488C15;
+	Thu, 29 Aug 2024 16:05:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZaK7yGfm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CQlRvp2o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E338A88C29; Thu, 29 Aug 2024 16:05:20 +0200 (CEST)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 2DE0988C2E; Thu, 29 Aug 2024 16:05:26 +0200 (CEST)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A17D888C2A
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 16:05:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 97A0788C1B
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 16:05:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-2021537a8e6so5132615ad.2
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 07:05:18 -0700 (PDT)
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-201fba05363so5938485ad.3
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 07:05:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724940317; x=1725545117; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724940322; x=1725545122; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bnQZ7pZyVW/CE9Qe5ysqTZE8+esDSe+LGhFPz2hvVzk=;
- b=ZaK7yGfmbh1UlypGXm3EU8oussXxg3E8/IDYWb9x7T5LN4akSTVUkBR37A/G40UK17
- Ee58yvNGsf5bM00y2lChwJ9MFPFtFTF2ZLPDhcRIIW+WtV3TXpt9WMSybVbb5g37ReN6
- Q4CJQscqsgm91YfknOD5TxbmoSjSrUWIFhKhc=
+ bh=ZUIwpqpR0lAxddJyst40wd6eSJFQx9tVRlNvfprohF0=;
+ b=CQlRvp2oisU4kuJqabt5ad9yW3RTbiXUIPzhCGyd/vPJ2+toL5XU0QDcIp7/iD9fUx
+ /ZQk0ebAb9AzZOMbvl1bHwasefnwuS47ydIz+nnkCHu1JSwk5EhwJR0eEYSyE4RDm49/
+ 8LtwXfjqTcYddp2sy/uXcrnnALZE9kZgLLf08=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724940317; x=1725545117;
+ d=1e100.net; s=20230601; t=1724940322; x=1725545122;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bnQZ7pZyVW/CE9Qe5ysqTZE8+esDSe+LGhFPz2hvVzk=;
- b=a6spiiDmcGx2eD/v4e3A0FJVhTjtZHjYKkI8d5jj683XcRwEyJ/X5N1Fpac4GZoJRE
- 2LiKm47ezOirDq6SSUXjGKScW3VBMexKKmaGN88v0efO2osgxT5K7KvX204LjcM+JKx/
- KcBgsGpukO2M0Mfo/IoOrQEDjnR470f//mG8YQ6QV/Jt8EMT8G69oBoSysnpWo2vqKeT
- F1VfAd/8o6nEB6ujMyYILbaLwMNJinkr6k4/L50OIQZOvEBGLnynMnsG5BA0KznnTfBT
- D2Og/yJQ/PXK895gcOIpMCImP3vTJhGR+UBv2dOiujd6tW4Lm2MmPy79fHT9CAK5MXO9
- +TRQ==
-X-Gm-Message-State: AOJu0YyBHkeydLAOt3SEIMEdrpVGQ4kg3wDvJOo09h9XfPFJhwrPOQMw
- B4r3xbJlCJvm5aAcaKyg2yZYUYKHI3sqNBAZvXtgSP6NrfusjX1VeaVO3LsyC0QAXg1Z2WvKbUa
- NdvF2krm/llgEaTMfcXDqG8QsBL4XskzpFm6/
-X-Google-Smtp-Source: AGHT+IFMppliLfuB462GYzXVKxj5j9xXbFkJOendgj0YTn2TWDI+L56kkDXR6GYfWoO4b4/VrWi/fwQzuaJIL35jJGI=
-X-Received: by 2002:a17:903:2287:b0:203:a134:78ce with SMTP id
- d9443c01a7336-2050c352d06mr33232015ad.14.1724940316400; Thu, 29 Aug 2024
- 07:05:16 -0700 (PDT)
+ bh=ZUIwpqpR0lAxddJyst40wd6eSJFQx9tVRlNvfprohF0=;
+ b=huivwNJwRzKVUh00zuzNd46doZA2gNAwmx6mlT64LpBOKKpZUie0WCGA3TapkI1Asd
+ 8KEIFDXI6ATAyvAvRwNZAoHxvVgBj8vNLVBzv/knsVOr3qkV5b467ck/mXSQCXa04gs9
+ vjnv90SovOQGVa87WnUSfkYrpeg13wEOolcFevUXLrVLLSGYidhokLWruazBlmVtuL6M
+ JAFBHzbYT7f84l4KGUAt1bXAcXT4BUEB1WDGnSwGFbu8lveUQSb5je+kPL8TCFfdeTZ7
+ ROsUABgyNFXJKkGwRUVD4+nXWQ6jqfW0hntoIzl4+mFnfUU/b3BSZi72W9irggQmPT08
+ Ks6Q==
+X-Gm-Message-State: AOJu0Yw8yVIV4sWb7i7ZEjkRzwMnfpQXH7wvJ7uGt/nrGhdQUp4FU17Y
+ VCUD8uz3lyMTwGnKCdXuXneDZyZ/P7ZkkAT+XkA/J3jFxdl9TREdGtDqFdqJvKQJ0KIwPwl1bRR
+ JF6g5NqbjSvngdf9qT/mxHXIR795v6mlSeLek
+X-Google-Smtp-Source: AGHT+IGTRTYd4jAXBuC4JxIlmjOLGrLvCsWZySm/2nu/txvpSTRmIWcqBBzhWZs/qGgYEo8iki0dCCr9Ob7b0CHOg9k=
+X-Received: by 2002:a17:903:41c3:b0:202:3e52:e124 with SMTP id
+ d9443c01a7336-2050c3a732fmr33762725ad.31.1724940321902; Thu, 29 Aug 2024
+ 07:05:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1724419624.git.jerome.forissier@linaro.org>
- <64779fa9e2c5988a347fe7b9ee55fdf03b464fba.1724419624.git.jerome.forissier@linaro.org>
-In-Reply-To: <64779fa9e2c5988a347fe7b9ee55fdf03b464fba.1724419624.git.jerome.forissier@linaro.org>
+References: <20240814110009.45310-1-sughosh.ganu@linaro.org>
+ <20240814110009.45310-15-sughosh.ganu@linaro.org>
+ <CAFLszTjMwpW-MRWfJrOja2JGMcTtjYzLqH68hum=yDsXjc6PQQ@mail.gmail.com>
+ <CADg8p95k_0CtqD5x8_jjW31YoPOoiLSvDU-M_JtcBU_+V-4hEg@mail.gmail.com>
+ <CAFLszTji1FcHNitO+mKJ+uh-Kr5N33ZZjqZJx1Uaianj35Q4vQ@mail.gmail.com>
+ <CADg8p94QuMpjP3fU0Rz7Y2gzpM=93RdxFxLM7c7DkpRtnkVL0A@mail.gmail.com>
+ <CAFLszTg6CwCs8bQ7jUaJ0PDHnGvq3sg+0P-c4NTKxCN08OZAsQ@mail.gmail.com>
+ <CADg8p96NKKO4yzLGxLzkQG_jgvaCcapif5MeCPVhL=O9BQ2QMw@mail.gmail.com>
+In-Reply-To: <CADg8p96NKKO4yzLGxLzkQG_jgvaCcapif5MeCPVhL=O9BQ2QMw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 29 Aug 2024 08:05:04 -0600
-Message-ID: <CAFLszTju=hPXe5S+Kik=nbNY4sb79eVc9H6wEEnWUnQVYr40Fg@mail.gmail.com>
-Subject: Re: [PATCH v9 18/37] net: eth-uclass: add function eth_start_udev()
-To: Jerome Forissier <jerome.forissier@linaro.org>
+Date: Thu, 29 Aug 2024 08:05:06 -0600
+Message-ID: <CAFLszTjha7MzH+emoTXMr6MPTtSZAWDiuFGKwpUNZbb6DK08ow@mail.gmail.com>
+Subject: Re: [PATCH v2 14/32] lmb: introduce a function to add memory to the
+ lmb memory map
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>, 
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>, 
- Anton Antonov <Anton.Antonov@arm.com>, Tom Rini <trini@konsulko.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
- William Zhang <william.zhang@broadcom.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Sean Anderson <seanga2@gmail.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Fabio Estevam <festevam@denx.de>,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
- Michal Simek <michal.simek@amd.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>, 
+ Mark Kettenis <mark.kettenis@xs4all.nl>, Michal Simek <michal.simek@amd.com>, 
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ Patrice CHOTARD <patrice.chotard@foss.st.com>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>, 
+ Max Filippov <jcmvbkbc@gmail.com>, Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,134 +98,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
+Hi Sughosh,
 
-On Fri, 23 Aug 2024 at 07:49, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
+On Wed, 21 Aug 2024 at 08:40, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Add a function to start a given network device, and update eth_init()
-> to use it.
+> On Wed, 21 Aug 2024 at 19:30, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > +Bin Meng
+> >
+> > Hi Sughosh,
+> >
+> > On Tue, 20 Aug 2024 at 23:29, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > >
+> > > On Wed, 21 Aug 2024 at 07:41, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Sughosh,
+> > > >
+> > > > On Tue, 20 Aug 2024 at 02:17, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > > >
+> > > > > On Fri, 16 Aug 2024 at 02:04, Simon Glass <sjg@chromium.org> wrote:
+> > > > > >
+> > > > > > Hi Sughosh,
+> > > > > >
+> > > > > > On Wed, 14 Aug 2024 at 12:01, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > > > > >
+> > > > > > > Introduce a function lmb_add_memory() to add available memory to the
+> > > > > > > LMB memory map. Call this function during board init once the LMB data
+> > > > > > > structures have been initialised.
+> > > > > > >
+> > > > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > > > > ---
+> > > > > > > Changes since V1:
+> > > > > > > * Call the lmb_add_memory() from lmb_init() instead of
+> > > > > > >   lmb_mem_regions_init().
+> > > > > > >
+> > > > > > >
+> > > > > > >  include/lmb.h | 10 ++++++++++
+> > > > > > >  lib/lmb.c     | 42 ++++++++++++++++++++++++++++++++++++++++++
+> > > > > > >  2 files changed, 52 insertions(+)
+> > > > > > >
+> > > > > >
+> > > > > > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > > > > >
+> > > > > > But this should not be weak.
+> > > > >
+> > > > > This is being made weak, as there would be lmb_add_memory()
+> > > > > definitions added for powerpc and x86 arch's in the EFI part of my
+> > > > > patches. Moreover, the lmb_add_memory() function would be called even
+> > > > > in the SPL stage when LMB is enabled for that stage. So I am not sure
+> > > > > how do we get around this. You can check the relevant branch [1] on my
+> > > > > github to check for the specific commits [2][3] that I am referring
+> > > > > to. Thanks.
+> > > >
+> > > > This is really strange.
+> > > >
+> > > > The e820 is different on each x86 board. I'm not sure we want that in
+> > > > the lmb. What is the purpose of that? It is somewhat circular in most
+> > > > cases, since U-Boot sets it up itself. Where it comes from coreboot,
+> > > > it looks like we are mirroring it in the EFI memory map. I'm not sure
+> > > > I understand all this very well.
+> > >
+> > > Yes, me neither. And I want to keep the behaviour same as before the
+> > > patches. You would know that the function efi_add_known_memory() gets
+> > > the memory map from a function install_e820_map() which includes
+> > > conventional memory, which is the ram memory. And I am basically now
+> > > doing this as part of the lmb_add_memory() function instead. Are you
+> > > sure that we can do away with this function, and instead use the
+> > > ram_base and ram_top values from the global data structure instead? I
+> > > believe you have boards which exercise this code? So it will be great
+> > > if you can test this if I remove the function for the e820 module.
+> >
+> > We are suffering here from too many ways to do the same thing and too
+> > much confusion about the overall goal here.
+> >
+> > Typically the e820 thing is created in U-Boot - see
+> > install_e820_map(). The ISA and PCI ranges needs to be added, so EFI
+> > needs a way to know to do that.
+> >
+> > e820 is used for the normal kernel boot flow - the table is passed
+> > directly to Linux.
+> >
+> > With EFI the kernel calls back into U-Boot to get the memory map, so
+> > we want to add the same reservations to the EFI tables.
+> >
+> > So I would favour having EFI sending an event before booting, to allow
+> > other code to add new reservations. Then we can let e820 do its thing
+> > and not affect EFI. In fact the e820 code will never be called on an
+> > EFI boot.
+> >
+> > I say we can clean this up later, so what you have here will do for now.
+> >
+> > >
+> > > >
+> > > > For fsl, perhaps copy the #ifdef and handle arch.resv_ram in your code?
+> > >
+> > > This is for adding ram to the lmb memory map, but yes, I can check by
+> > > putting an ifdef in the function. Although the function might look
+> > > ugly and hackish. Thanks.
+> >
+> > Again, we can clean this up date. It is just one arch doing strange things.
 >
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> ---
->  drivers/mtd/altera_qspi.c |  4 ++--
->  include/net-common.h      |  1 +
->  net/eth-uclass.c          | 38 +++++++++++++++++++++++++-------------
->  3 files changed, 28 insertions(+), 15 deletions(-)
->
-> diff --git a/drivers/mtd/altera_qspi.c b/drivers/mtd/altera_qspi.c
-> index c26615821c8..e5c8df750b7 100644
-> --- a/drivers/mtd/altera_qspi.c
-> +++ b/drivers/mtd/altera_qspi.c
-> @@ -96,7 +96,7 @@ int flash_erase(flash_info_t *info, int s_first, int s_last)
->         ret = mtd_erase(mtd, &instr);
->         flash_set_verbose(0);
->         if (ret)
-> -               return ERR_PROTECTED;
-> +               return FL_ERR_PROTECTED;
+> Can you please take a look at the branch[1] which I pointed to in my
+> earlier reply. I believe this caters to your review comment on doing
+> away with the weak function, as well as providing the option to boards
+> to define their own memory map. Thanks.
 
-Could you put these in another patch?
-
->
->         puts(" done\n");
->         return 0;
-> @@ -114,7 +114,7 @@ int write_buff(flash_info_t *info, uchar *src, ulong addr, ulong cnt)
->
->         ret = mtd_write(mtd, to, cnt, &retlen, src);
->         if (ret)
-> -               return ERR_PROTECTED;
-> +               return FL_ERR_PROTECTED;
->
->         return 0;
->  }
-> diff --git a/include/net-common.h b/include/net-common.h
-> index 26674ec7e90..43bc6b9a0d5 100644
-> --- a/include/net-common.h
-> +++ b/include/net-common.h
-> @@ -192,6 +192,7 @@ int eth_env_set_enetaddr_by_index(const char *base_name, int index,
->  int usb_ether_init(void);
->
->  int eth_init(void);                    /* Initialize the device */
-> +int eth_start_udev(struct udevice *dev);
-
-Please add a proper function comment to all exported functions.
-
->  int eth_send(void *packet, int length);           /* Send a packet */
->  #if defined(CONFIG_API) || defined(CONFIG_EFI_LOADER)
->  int eth_receive(void *packet, int length); /* Receive a packet*/
-> diff --git a/net/eth-uclass.c b/net/eth-uclass.c
-> index e34d7af0229..6dd9b9bb98e 100644
-> --- a/net/eth-uclass.c
-> +++ b/net/eth-uclass.c
-> @@ -284,6 +284,27 @@ static int on_ethaddr(const char *name, const char *value, enum env_op op,
->  }
->  U_BOOT_ENV_CALLBACK(ethaddr, on_ethaddr);
->
-> +int eth_start_udev(struct udevice *dev)
-> +{
-> +       struct eth_device_priv *priv = dev_get_uclass_priv(dev);
-> +       int ret;
-> +
-> +       if (priv->running)
-> +               return 0;
-> +
-> +       if (!device_active(dev))
-> +               return -EINVAL;
-> +
-> +       ret = eth_get_ops(dev)->start(dev);
-> +       if (ret >= 0) {
-
-It is better to have the error path jump out, so:
-
-if (ret < 0)
-   return ret;
-
-> +               priv->state = ETH_STATE_ACTIVE;
-> +               priv->running = true;
-> +               ret = 0;
-> +       }
-> +
-> +       return ret;
-
-return 0
-
-> +}
-> +
->  int eth_init(void)
->  {
->         struct udevice *current = NULL;
-> @@ -328,20 +349,11 @@ int eth_init(void)
->                 if (current) {
->                         debug("Trying %s\n", current->name);
->
-> -                       if (device_active(current)) {
-> -                               ret = eth_get_ops(current)->start(current);
-> -                               if (ret >= 0) {
-> -                                       struct eth_device_priv *priv =
-> -                                               dev_get_uclass_priv(current);
-> -
-> -                                       priv->state = ETH_STATE_ACTIVE;
-> -                                       priv->running = true;
-> -                                       ret = 0;
-> -                                       goto end;
-> -                               }
-> -                       } else {
-> +                       ret = eth_start_udev(current);
-> +                       if (ret < 0)
->                                 ret = eth_errno;
-> -                       }
-> +                       else
-> +                               goto end;
-
-Can that be just a 'break' ?
-
->
->                         debug("FAIL\n");
->                 } else {
-> --
-> 2.40.1
->
+Yes your latest patch looks fine thank you.
 
 Regards,
 Simon
+
+
+
+>
+> -sughosh
+>
+> [1] - https://github.com/sughoshg/u-boot/tree/lmb_efi_sep_apis_nrfc_next_noweak_v3
+>
+> >
+> > > >
+> > > > [..]
+> > > >
+> > > > > [1] - https://github.com/sughoshg/u-boot/tree/lmb_efi_sep_apis_nrfc_next_v3
+> > > > > [2] - https://github.com/u-boot/u-boot/commit/077ced7aaa6d495b1b87b324fb1c60658c203ce1
+> > > > > [3] - https://github.com/u-boot/u-boot/commit/d0fa3a89865b796f3bbebffebbe4f7b5b048c140
+> > > > >
+> >
+> > Regards,
+> > Simon
