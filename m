@@ -4,88 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CF3CC7EE2D
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 07:02:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF008C7EE2C
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 07:08:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F1D288A7F;
-	Thu, 29 Aug 2024 09:02:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4C94487D1A;
+	Thu, 29 Aug 2024 09:08:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="kUBKQlBI";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="aaNbHz/k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8882F88A7F; Thu, 29 Aug 2024 09:02:32 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 122A7878ED; Thu, 29 Aug 2024 09:08:49 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DA698841E
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 09:02:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E93B587D1A
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 09:08:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-42ba9b47f4eso1541295e9.1
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:02:30 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-428178fc07eso2434545e9.3
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:08:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1724914950; x=1725519750;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1724915325; x=1725520125;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=L1YczRCxBZFxHWTEBQrzLL19zjDhyJ1sZKGIEOsHEeg=;
- b=kUBKQlBITlAOvYri1L9U5OU78pINzpsDkj5QRWKdJjA7jIL9+rD7NmrfKtVYRDd9Xh
- 2BXJR/eDAUbZORJ7LvCCjC3KHCA360/PI/h/78MAM1q4vlEsGiH8ut3cnjtbTWo80RQn
- 7IB1kUBZmpLQ57G9VUo6V70PmR0WS9grqSSPASQrOjMlHislg9XxfOtazUmKJ3HrjFhG
- SrMnMVZQIekm4FLWr1JNMvYZfIOO66q1NAemnAlqj4VeWO2w5x8qV4R4gEWMeiwG3Dt5
- OrCmNnUGZL5CRrP9N4FOPfKPbKD3VLiOZekAKQDnNWyJGfDBGvh7FqXwCo49DzxFisCy
- 8gYw==
+ :reply-to; bh=itQNSXbvc1hsH+qgM31hSWqUlKvAIDhgsRAo9AY1ZNY=;
+ b=aaNbHz/kUKhHLWoEhu764WOr00wJwH6wSWj/v56lkORZOmxtOF2JXSXfhj/nf4OGx8
+ VIdiwR0woloLcacAlJQv1tjoPMU666iz+TkQsbr8pQiVCjYdXzGkgYQ+0lc8BKFN1svD
+ vNJWuDQfd17nLAHeZb15fVIVwriNWKwLEHg7q1CLWrk0fPayNMt1PheRRpp9/htIHU88
+ koGUwfoGkGWOMSZu3f0n0OxY3JlKZxp6F6xadzCe8QYkV32HtMCDEH31/6fEetpl3yJt
+ TMp+KHEngrqgM+W05z5DCWzHgZM2j3ObXZnOg5xTu7ay9RwolpL/DKVbw5E+2qtyn2Gw
+ u/Tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724914950; x=1725519750;
+ d=1e100.net; s=20230601; t=1724915325; x=1725520125;
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=L1YczRCxBZFxHWTEBQrzLL19zjDhyJ1sZKGIEOsHEeg=;
- b=WUszfSXj0wcpsN3zZMf5Ls5qRDXK0OX0kEwTdqyaTjNuPYMIzWHzoek3izCSzFSm/e
- J1zbaPiIalkQ6KVHRTS3/r+ltIrUiUHYVZ+crVdlY+GrT9Bm8Dlr/icjbm6lq/bX95Ub
- SnlH8Z6lw/6xlMK2Sh5Ph123UZWBD2JoSW4zf41tK5YN/+HvHeiyWSDK8P2lCUaGHZpm
- rfUvqmnpHf8/k6M+yeur+sP7D+H+nPZ0JIuP90YSJoKJXcXLuiHO8RC/A+1YM23OmoWa
- Q+DlB1j2JBt0F4sZ6Gty0ANKjnxqLp40ABWdxom7CfeB31rsU/8bQbpSaIcXftCLVhYq
- NKZQ==
+ bh=itQNSXbvc1hsH+qgM31hSWqUlKvAIDhgsRAo9AY1ZNY=;
+ b=dSdcoFmhz1YcHZPFzVQwgoVctnR/KUM9d8wuq6x0xYri6RAySZgBTFmaom0oVNrAQH
+ jqkLvPF1VaR4b5Tg0Ow0P6enyDGpQNe10Aw9U/w/+RGJQRmpdqxynWVJrfRviCd3gl0q
+ kRBpY0Y47ZV/U65ZFNTZL7ek0+79JC2b7VVGdIAYewe1htOsFt6yD2Uosbnu4O0zhy71
+ +zwGyUJYdjVLE8VnOaA7u0GKmYwr+D9STm8i91+iUz1E3P1Mh/u5SshABrmb5WBebrqB
+ Mu0puACGaSdRF2DQ9i4HZ/WI94aOIwUvMZJuRbePPkLJmxZLeBEMHuE21/rVPxAt0sgn
+ 5iDA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWA6uOiqydk0TNAiuPVH1OH8epIQeYypVoBzb69rVozNhBx40lf9h7PdE10hTZgQZ8rAby98fw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzMrt5o9xHxuQpkBUGMkfb5kICMHlxAdqhgfw8BVtsqkqAYHtcJ
- GiOYNDON5IOTWuQKDR2vj99Zpn8h1wEZpYuYE6ZpYrSXpUPSmyluTIdycrY8+20=
-X-Google-Smtp-Source: AGHT+IEh95qGQzCiAY300IYV99aniWm8WqXU/ELaVA7JCQG/4HT7OThKyX3XM4Q+drkQ4qPcwkCcMg==
-X-Received: by 2002:a05:600c:4584:b0:42a:b32b:cc65 with SMTP id
- 5b1f17b1804b1-42bb4c4058fmr8488475e9.2.1724914949153; 
- Thu, 29 Aug 2024 00:02:29 -0700 (PDT)
+ AJvYcCUWfIQrcoUD28jb4i+yvi0yXBRBoT5CJibT0nkMFGov7Q7kDY2X6Ojd+bm6aanX7fTTfbQW7As=@lists.denx.de
+X-Gm-Message-State: AOJu0YzaF1t2TtHkCpW0ztuaCgmuQXQNBmpvRpnPzvPXm+3v71DXKXU2
+ Z8+Yq0Cug8swWF3GPaO2RB9rTA+iaf8HEAQnAcKIaQQoTOqAl0f0jRzlM04Uxq0=
+X-Google-Smtp-Source: AGHT+IEJHc5v7Al12pzgZbVbJnDs1N5KK2SarATxLIufJbUbexJPI/AV2IBWuP+SqZ6pxoVZmicYzw==
+X-Received: by 2002:a05:600c:1550:b0:426:6000:565a with SMTP id
+ 5b1f17b1804b1-42bb02f050emr12055035e9.16.1724915324519; 
+ Thu, 29 Aug 2024 00:08:44 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42bb6df0a4dsm7815275e9.12.2024.08.29.00.02.28
+ 5b1f17b1804b1-42bb6df954asm7969665e9.26.2024.08.29.00.08.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Aug 2024 00:02:28 -0700 (PDT)
+ Thu, 29 Aug 2024 00:08:44 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Marek Vasut <marex@denx.de>, Zixun LI <admin@hifiphile.com>
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] usb: gadget: ether: Disable USB pullup in eth probe
-In-Reply-To: <4e154bda-6d7d-45b8-bb7d-ba4d0623a932@denx.de>
-References: <20240821212218.2092540-1-admin@hifiphile.com>
- <5a1367d7-be94-4c75-9f40-891ca79f9c5b@denx.de>
- <CA+GyqeYxig+5pyYaCjPmQodXGjCYK=819cNZx9XmvJOnoYne_w@mail.gmail.com>
- <67e8423d-f8a8-412e-ae4a-014d52bf6a2f@denx.de>
- <CA+Gyqea1r6rP8gXfS6nOtOaKZ=sJ1+z_KguGzzJygQKmSNRakw@mail.gmail.com>
- <c7c61399-8b64-471f-bfcb-71afd387317b@denx.de>
- <CA+GyqebS7gVMpLJuMdxN9c8U=CpBLiTuFkqm_4-bA+LstLJpsQ@mail.gmail.com>
- <a86dd37e-2e55-4947-b665-06d68831b63a@denx.de>
- <CA+Gyqeair5Ak2-b32JL9PkoPrJaa9dg1NwQ3s+8+ycCxdv-HDg@mail.gmail.com>
- <5a278214-6343-418d-b1b4-05804585319c@denx.de>
- <c4e92485-439a-4216-a4d9-ab192e0bca80@denx.de>
- <CA+GyqeZ+_Lg7Jrga5N2+kAvWcM4Vtkv3hyqEs=+o583PoGw0Gw@mail.gmail.com>
- <4e154bda-6d7d-45b8-bb7d-ba4d0623a932@denx.de>
-Date: Thu, 29 Aug 2024 09:02:25 +0200
-Message-ID: <87bk1bstfi.fsf@baylibre.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Linus Walleij
+ <linus.walleij@linaro.org>, Lukasz Majewski <lukma@denx.de>, Miquel Raynal
+ <miquel.raynal@bootlin.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Nishanth Menon <nm@ti.com>, Zixun LI <admin@hifiphile.com>
+Subject: Re: [PATCH 1/6] usb: gadget: Inline usb_add_gadget_udc_release
+In-Reply-To: <20240826143851.8020-1-marek.vasut+renesas@mailbox.org>
+References: <20240826143851.8020-1-marek.vasut+renesas@mailbox.org>
+Date: Thu, 29 Aug 2024 09:08:41 +0200
+Message-ID: <878qwfst52.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -105,37 +95,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On lun., ao=C3=BBt 26, 2024 at 16:40, Marek Vasut <marex@denx.de> wrote:
+Hi Marek,
 
-> On 8/26/24 11:12 AM, Zixun LI wrote:
->> On Sun, Aug 25, 2024 at 2:13=E2=80=AFAM Marek Vasut <marex@denx.de> wrot=
-e:
->>>
->>>>
->>>> I am looking at the usb_add_gadget_udc_release() and
->>>> usb_gadget_probe_driver() and I am thinking, sigh, all that code is
->>>> ready to be replaced by something cleaner which does not use this
->>>> special struct usb_udc and udc_list, but instead only uses U-Boot DM
->>>> udevices . But I am reluctant to ask you to do all that rework, because
->>>> that is WAY out of scope of the problem you are trying to fix.
->>>
->>=20
->> Thank you for looking into this, refactor udc core could make things cle=
-ar.
->
-> Sigh, yeah, I think you ran into part of the UDC code which is just ...=20
-> not great ... sorry about that.
->
->>> Maybe this could be a start (compile tested only):
->>>
->>> https://source.denx.de/u-boot/custodians/u-boot-sh/-/commits/usb-udc-ud=
-evice
->>=20
->> Tested no regression with usba_udc.
->
-> Thanks for testing, patches posted.
+Thank you for the patch.
 
-For reference, the series was posted here:
+On lun., ao=C3=BBt 26, 2024 at 16:38, Marek Vasut <marek.vasut+renesas@mail=
+box.org> wrote:
 
-https://lore.kernel.org/r/20240826143851.8020-1-marek.vasut+renesas@mailbox=
-.org
+> The release parameter of usb_add_gadget_udc_release() is never used.
+> The function is never called from anywhere except from a wrapper in
+> udc-core.c . Inline the function into the wrapper.
+>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+> ---
+> Cc: Linus Walleij <linus.walleij@linaro.org>
+> Cc: Lukasz Majewski <lukma@denx.de>
+> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Cc: Miquel Raynal <miquel.raynal@bootlin.com>
+> Cc: Neil Armstrong <neil.armstrong@linaro.org>
+> Cc: Nishanth Menon <nm@ti.com>
+> Cc: Zixun LI <admin@hifiphile.com>
+> ---
+>  drivers/usb/gadget/udc/udc-core.c | 20 ++------------------
+>  include/linux/usb/gadget.h        |  2 --
+>  2 files changed, 2 insertions(+), 20 deletions(-)
+>
+> diff --git a/drivers/usb/gadget/udc/udc-core.c b/drivers/usb/gadget/udc/u=
+dc-core.c
+> index 6bb419ae2ab..37c0ee43c52 100644
+> --- a/drivers/usb/gadget/udc/udc-core.c
+> +++ b/drivers/usb/gadget/udc/udc-core.c
+> @@ -166,16 +166,14 @@ static void usb_udc_release(struct device *dev)
+>  }
+>=20=20
+>  /**
+> - * usb_add_gadget_udc_release - adds a new gadget to the udc class drive=
+r list
+> + * usb_add_gadget_udc - adds a new gadget to the udc class driver list
+>   * @parent: the parent device to this udc. Usually the controller driver=
+'s
+>   * device.
+>   * @gadget: the gadget to be added to the list.
+> - * @release: a gadget release function.
+>   *
+>   * Returns zero on success, negative errno otherwise.
+>   */
+> -int usb_add_gadget_udc_release(struct device *parent, struct usb_gadget =
+*gadget,
+> -		void (*release)(struct device *dev))
+> +int usb_add_gadget_udc(struct device *parent, struct usb_gadget *gadget)
+>  {
+>  	struct usb_udc		*udc;
+>  	int			ret =3D -ENOMEM;
+> @@ -205,20 +203,6 @@ int usb_add_gadget_udc_release(struct device *parent=
+, struct usb_gadget *gadget,
+>  err1:
+>  	return ret;
+>  }
+> -EXPORT_SYMBOL_GPL(usb_add_gadget_udc_release);
+> -
+> -/**
+> - * usb_add_gadget_udc - adds a new gadget to the udc class driver list
+> - * @parent: the parent device to this udc. Usually the controller
+> - * driver's device.
+> - * @gadget: the gadget to be added to the list
+> - *
+> - * Returns zero on success, negative errno otherwise.
+> - */
+> -int usb_add_gadget_udc(struct device *parent, struct usb_gadget *gadget)
+> -{
+> -	return usb_add_gadget_udc_release(parent, gadget, NULL);
+> -}
+>  EXPORT_SYMBOL_GPL(usb_add_gadget_udc);
+>=20=20
+>  static void usb_gadget_remove_driver(struct usb_udc *udc)
+> diff --git a/include/linux/usb/gadget.h b/include/linux/usb/gadget.h
+> index c7927df15aa..d62fba0ca02 100644
+> --- a/include/linux/usb/gadget.h
+> +++ b/include/linux/usb/gadget.h
+> @@ -890,8 +890,6 @@ int usb_gadget_register_driver(struct usb_gadget_driv=
+er *driver);
+>   */
+>  int usb_gadget_unregister_driver(struct usb_gadget_driver *driver);
+>=20=20
+> -int usb_add_gadget_udc_release(struct device *parent,
+> -		struct usb_gadget *gadget, void (*release)(struct device *dev));
+>  int usb_add_gadget_udc(struct device *parent, struct usb_gadget *gadget);
+>  void usb_del_gadget_udc(struct usb_gadget *gadget);
+>  /*----------------------------------------------------------------------=
+---*/
+> --=20
+> 2.45.2
