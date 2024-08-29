@@ -4,161 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64307C83031
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 10:23:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3786C83030
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 10:43:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C477588B59;
-	Thu, 29 Aug 2024 12:23:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 29A7D88A99;
+	Thu, 29 Aug 2024 12:43:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="EtqPExyi";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CXFxSURX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECB5E88B64; Thu, 29 Aug 2024 12:23:29 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B90BC88B31; Thu, 29 Aug 2024 12:43:27 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14CF088B31
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 12:23:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 721C2889FF
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 12:43:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=X2Ub/WOvaApOTPqpleqW93glzSxroNIDcIlr+/ftLUKE9TgXL0n0XcC6EU+mt4Z/GarbiMMzAoGrSNUWD/R2c48pc8rCd5EHl2hfNnySX/Xg4BL57ghEKqNi1bISuh4vbwpxeLxAOpVJP+7kfI1HVkiglD9zswcl1HSi2QnKOdY5/oY2rlV24/5qkJ1qN4247L/+eLXU8w9Jlogcmh76LRzx92ydnyU4FObe4vA5FksFgfRtiAdDxElVIaHjlBmIBJQA/P9jxrrHv77Q4yNdmoMQeLRxjP6ALJ1U3uOh+I1moqKPMfG0A9ovkBHevIsHEki0YtodTxOPWxS3c2ILEg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YTNTVtTOD+vfK1DJpBRf9GU6yYFGm0Ly1BhrOIjGvF4=;
- b=DAZ8QpsElEIfVm91zLtb2rYs5p65v4f98yVvt5K/4SyoQresHf3coWh3BCzkt4w5KICpGKO0+7gepCMe3sLbEBw+XyXeQ6hcaeuVkCHUAkLdLzzzotLCe7zMENDfA1MAG3e2RX0nYBI6XRrpNwMuSJO8EI3SKZWsggbg1/MKZZhOETA5pRt0apPo54lv+wh4sJkctpOJy4zJ9y1J8ekxTXP6kgujQ1w1CdfLSh+U6JI47spb7UwgH1UUW3xwHlSl9St5DOw/MMhhRzj+zQvm72jHkzHWS1smrgUjS0JSLte33lptKZ5DugOeJKZyv0KaUZsLFYYxFK4KgNa4I445gQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YTNTVtTOD+vfK1DJpBRf9GU6yYFGm0Ly1BhrOIjGvF4=;
- b=EtqPExyif8Fpundi67ESsfrurvbpMcDxAZTDS6hwk89ubyesO+tLzazX1hMRNasoxsHspM5oUkd989lk7brsR5NXeLkcWL7h2nssAon0SwVJGmbYiwdXF8Nvf2zeLRLTDjmWXwlT2Y2oTPonq1vG27iyDE40fJakqbRNZ/s+Mbo=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by VI2PR04MB10835.eurprd04.prod.outlook.com (2603:10a6:800:27c::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7897.22; Thu, 29 Aug
- 2024 10:23:24 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%5]) with mapi id 15.20.7897.027; Thu, 29 Aug 2024
- 10:23:24 +0000
-Message-ID: <7b1b065b-4bb4-4992-a841-119773de5c85@cherry.de>
-Date: Thu, 29 Aug 2024 12:23:23 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] arm: rockchip: PX30: Fix hard dependency to
- DEBUG_UART_BOARD_INIT
-To: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>, u-boot@lists.denx.de
-Cc: trini@konsulko.com, sjg@chromium.org, philipp.tomsich@vrull.eu,
- kever.yang@rock-chips.com
-References: <20240827142058.594556-1-lukasz.czechowski@thaumatec.com>
- <20240827142058.594556-5-lukasz.czechowski@thaumatec.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20240827142058.594556-5-lukasz.czechowski@thaumatec.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BE1P281CA0290.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:8a::11) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5becc379f3fso443520a12.3
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 03:43:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1724928205; x=1725533005; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=t3HUIxQdgc8adHb0hYUgrxI6ARA4dQRSHeURQa3DZ1c=;
+ b=CXFxSURXNMoAAQbkPFKEQ8DIyWi1LUIfnT23D7AQtb0Tq0ELKPPwXnzQyDBwk8au4Y
+ wGe+IyliBdTivgDoSnvN4AFrWe49zVwZjpxcjmgy2t8kvC2ucYPQpB0oFzpOwJEsdmYc
+ rRw4WfbkORarVnZkhf1wqqAXs0rL7URJvGdnsRgZ3JN2cN0wi8XtpIkQMlpbpTCcG0mQ
+ Hc/tBRg1Wj89O+QA4dgbRe+fknSwKyWUU0c/5MQ+/4aj31K1PAxuu8CGh//0M3AJHZIF
+ UzYqT2DMxHKsUxaP2Wzkt2PH5Bc+nZOQJ3w9m3HMrWHyoqhiuNlc/ACAIOrH1enQFgGp
+ cWXQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724928205; x=1725533005;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=t3HUIxQdgc8adHb0hYUgrxI6ARA4dQRSHeURQa3DZ1c=;
+ b=Inf7kA0fv0+tO81wMxoK+JSS0xbTRBn+KAEXs+iAS0HlFvUddhr/in18jhvZMTSRy4
+ IAllY+LVt7CsCCmcRaqk95mTa8gLo7yiFXx8uUNbSexT00pb0DdqJPCsQ0LIC1cdTfxG
+ uHckKJxuZwfVKFYbwBRyCbMkzh02myrcA7iqs9ZjPVhfz8QciWwW+5TRtvW8f0kvCy0q
+ rgJw21le6zK12eZRSEZPbVkU8LdwDWIoiGh7sQXtwH+dlQXz0kh9TalgndWHS81T1nDq
+ asRJMqU5aKA20iq4x0jBad+4PJYzRInEfffqDme5VdJiNE0iZe5txDrhwN/fhOcytowJ
+ +zbA==
+X-Gm-Message-State: AOJu0Yxu5CIiFHrhG8VTwE406pfxY2P2eKHWvuBaG9cRkCj+vsWQ3kso
+ bTWX+vRET56MQ3g70K8RLtaZdKubjuQANOZNNtNfYraZkxQn1/wfdTG3IRoXLh9/Fs/mOHrNG8a
+ V/3gSEOS5Tc/DZJ/ncKjI7iKn45I=
+X-Google-Smtp-Source: AGHT+IFhMGgs0ZISiobb7hO0olWk5HLmK9xtRsFGwd5RF91swCMAdM3RFLW7dfqKvdPmLuAOdsbT4tXvDfUGI+mnYj4=
+X-Received: by 2002:a05:6402:4308:b0:5c0:8c5a:f4f3 with SMTP id
+ 4fb4d7f45d1cf-5c21ed8699emr1854360a12.26.1724928204233; Thu, 29 Aug 2024
+ 03:43:24 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|VI2PR04MB10835:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2ad0c7eb-1166-45f4-5f2a-08dcc8149d66
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?dmpKUWRqZ1dWUjlsTHN3NU1qd2lJUzFhOEJya2pSV2cvc1RSTWVHRStSdlVV?=
- =?utf-8?B?Q3hzRWpVcFNRc1hWMjVYNWtBT3BaSTljY3FpZGxjNVlqb21Qd3YxZGpzVWFq?=
- =?utf-8?B?Zm1jU3lNRjh4bE5JQUdQSmNvMG1tMUg4SVQzY01iSzJNeWxIbWlVZHdnamVS?=
- =?utf-8?B?cWNHRktQQUkyQlQwQ0lHYmNqMnNpSVhSR3dVZlNuSnJnaG5Xam1Ednl0Z1ZC?=
- =?utf-8?B?YTBqYkNhYXFHT1lTYTZRQU8wZ1BZZllNaXgvZndtbkdEUTMycnBmMkJPRTJz?=
- =?utf-8?B?RVFmTjBYbDZHaXNNQW5SN3RZS0hhOUFpZ1MzNktjSXVUNHVEcU0ydUVBMnVq?=
- =?utf-8?B?MUY3TTFQRUtSeXZhNTEwSTMwMzZhYUd4VlhzZzI5MVhkUkxsSnFNU1QrcHRq?=
- =?utf-8?B?aktkcXptZGVic2pheHVHZDJ0VXpmdEUvTWRGTTVmN0V6UlBoeERLSnNWUnYr?=
- =?utf-8?B?aTd2QmpOOGhUeUROaVF1cGptNEcrZjBaY3hRQy95YkQvSkxOWVZ3Sjc5ZWN3?=
- =?utf-8?B?WnhFVHhzWGhMY3kwOGt5MkszQnFjVk4wbTMxUTRaMHlCS2FpcVFFdk5nZlI1?=
- =?utf-8?B?VGgzQ3NvZ1ZlVldISGFNdTVaRU51d2Erb3hQaysrdkVqRjBUUUthTjVSRHNw?=
- =?utf-8?B?SkVHU0lTRUNZTFdST0lxM2hwMGJ3T005eGIrcU9PS0tvVFVHUDFCT3A0dUlW?=
- =?utf-8?B?a25QR0xDT2ozSFNVUnc2dG1Lb3hZZnhBcERIMnhrd0U3V1pZU0Q5eXRPM0Fp?=
- =?utf-8?B?eGJDaVE0YTBlOXFueU05Zjc1UnkvSDdwaG5TckJGbmNhNTdmMDRjNWVkcnIz?=
- =?utf-8?B?bDIyMzFHaWo1VWFXQzM2OGpjNFdKR2t3MlJVKzNRMStKQTYzTG53d2NmNWQr?=
- =?utf-8?B?T3VBR1dZQzZwY1pSY3ZPclRGTUQ1TVRuaklSTWp5MDRkellvWTRmc3ZPdlg2?=
- =?utf-8?B?U0RTaWcvanF6RWNtNzU5aFNZaFFzSkpHZXhaN2F6a0NtbHAwNi9kUlMxU3Va?=
- =?utf-8?B?VU1EYmRIZWNrQ2FwWkk5Ukx3NFFpczZwcEJ1OTNJeDU5OS9uaDBJdm5OQ1Bp?=
- =?utf-8?B?Z0ZTcUhpSGZ4L0h4SGxUZUpTWGxwWnVKa29vdkFIT2NXQVQwQlJ6Mkt5eTRT?=
- =?utf-8?B?Q29sWHdoaXV5NWh1dzRXR0xFdm95Y3hXeEQ5ZkZzYjRQcHFqcDA0UGd3bHo4?=
- =?utf-8?B?NnFEZ1RUbEw0VElvd1JFSnp2UHh0QjZMcGhSc1ZONkxTZnVmVkovMXBHVTlR?=
- =?utf-8?B?R0hDc2dkVENFelY2c1hhK2ZhSFRmNHc2NDk3c0NENUQ1SWNvZEJBUXJwayt0?=
- =?utf-8?B?VE0za05iOHQ4RTZoaHRSd0M0NVVPN0ZUT0l2MWNUTjc5dXpuQWRuWnVHYUJM?=
- =?utf-8?B?WjZoRjZxUEhyVUx6bDZtTmFSb2ZKWVlMV2tEWjFuTGNXWXFQcHkzbmwzWW90?=
- =?utf-8?B?bGMyN1RpeFlyeVlLTTVkTFgrZlZQMEZZRm1YL1VaeS8zZ3JkQVhod29TUDBV?=
- =?utf-8?B?eHhIbG1MQ1JTeWh5MUVadENQN2piUUdjRjRhcXlqMlhtK2RaR2IyRWJZUTVv?=
- =?utf-8?B?djRoU1BQUlVuZXZmMG9hTGlUZUN1bVkxcENublBIQXVHTHUvY0NEdWp4RWZn?=
- =?utf-8?B?TlQ2dWtHT2hXMldjTmQrczNXc0hBWlZ5T2RpM1dPekFJdWczZ05PQlkvVVBS?=
- =?utf-8?B?ZmpGWFNCK1F3cDZSODlCQkExSWdkN0lROC9KOURZbHpmdWw2ZFJrUGkzQy9V?=
- =?utf-8?B?dmNxa1RnRVZLcGUvZi8zNzZMNFR2M0tkQUJZUU5yQURRTWpPckIybkxCSHlN?=
- =?utf-8?B?OS9jUDV1UEdJc2xEOEFpUT09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aWhMQlIzNEVCN1RYN21CK1lhM2lOVUlabFhMSnNPKzVwTUtPTnZ5dHZyL0x3?=
- =?utf-8?B?U1IvR0M0ZlJrQ3BIQnNjUDZrT3VLZVpQZHJKV1E2M3l6NWs3d1YzMENVWW5x?=
- =?utf-8?B?cEtYV0J3YjhqRThaYlc2VUkyK3Z6MUNvMVN4eFJ2cHgyM25Bb3N5aXliR1RS?=
- =?utf-8?B?SDlsbFh4WGJ4OTA2MEllQzNpbDhneTh4UVY4eFoyVWIvak5Gc0hFakJ5a1Nm?=
- =?utf-8?B?a01oTTBMT3ljaEpiSUN0Zjl2bUxEQVkvWStVVmhuQ3psZ0lRa29RVVRaaEdK?=
- =?utf-8?B?T2YrUHBHMHlVVFlCVG9tS3FUenEycGxPWDRkTUFWSXVkT09MdGVwalo4L2FT?=
- =?utf-8?B?cFhqYWtrdDB3b1oxQWF5RG5CdXpSL2EvMGh3NUpNUWlzM2lEN2dhNXNVU0NB?=
- =?utf-8?B?VjZFQTJIeEwxWWZUYXFhRnhyMi93Y0ZRVStnckxjbmdhMmNqcGZaMjgyUy9T?=
- =?utf-8?B?Si9IWEk3cU1nQmY5ZXlycTJ3TGRueFQ4aEl4TDFucVFDa3pWdjhIeEFVVkZo?=
- =?utf-8?B?M0dJZWI2aVhTNzRYM1dER1BNRFNUV3RadmZyQ0d6NXZpcE42clVhTUhyLzJX?=
- =?utf-8?B?UDFURFg0WWFGUGtqZFhQZ3ZBZjNjNE9xY3RrMXZuVDNNdW40ZloyWGFqNGhF?=
- =?utf-8?B?Qm9NTFZrUGJqbGwrODQwSUNnb1ZuNHBkL1g1aHZUd2lURGJnWE94MEtyVGZ5?=
- =?utf-8?B?VkgrM0g3MVBMNnVPbTIvUUJRY0x6QkNyV0w3WVBUdDZYek0rMEdLbjhDS0ZN?=
- =?utf-8?B?eEFtNWNGemh5NWNCZHRRL1FuMWdPN0VBbThtcy9WRFAxTXJ2L01iTHZhMzA2?=
- =?utf-8?B?b3RuNXdCR1RPaWsxRGdUZFk1c1ZzaEc2cGpzWmlzMFFjUitnMFpWZzZXaDNV?=
- =?utf-8?B?b0hEV2pHc0xJR1NNUUtHalV5blNGOWVzQThmdEdlRndwZ2VsUWt4cm5YSXpG?=
- =?utf-8?B?eVk3TzJtOVBsd2ZhTWVuWTh1U3NmSENHQXJDS0FtTW91VXo3T2hJVmlTd2g1?=
- =?utf-8?B?QWJ6UG51bHhsRWdTcWRWaXkvNy9iOHZQbkhjeUp5dWdRdXZRanVjS3Bzcjdn?=
- =?utf-8?B?d0RYTm1UWkdORnZjL0NKdTR3bDZqdlp1MExiK2F2WWFEc0wvTlE5eE9HOXpU?=
- =?utf-8?B?ekQxTXJVT1o4Tm5ob1d0ZVZ5bzNEaWtkbFcyc0MyT2N6YWNteDdwaDdpT0lm?=
- =?utf-8?B?blpTalIwaGhiczl3S05xOG1LT24ybWtYMHdTTGFTMy9tanRQdEF0djdZUDBa?=
- =?utf-8?B?cmlWSEVJSFVxOWh3dUFYN29vYnlJbGZQNXpoa1JWcCtwcFFjYkdWZWM4MlVP?=
- =?utf-8?B?TjJDOEM3Mkd2bjg0RlhyU25MMVJTMXQ0U21CTmF1cDY1elFrS2MzbGY5YkFO?=
- =?utf-8?B?Z21OMUZZSzNUKzZWZE9uUFRIZ0haTHlBcFNYMll5bk1Gc2srb1owVmNYbWo5?=
- =?utf-8?B?QWZkSFIrQ0hIaTZlTzJPazhKQ2VDZE42SHAwbGw3SXRyWDZ0VWx5KzNqRjU2?=
- =?utf-8?B?bkNvNisraGRhK2VKOHRuVll2UkE2a3NSdTJWNVRybk5HRUtmYS90L051T1VR?=
- =?utf-8?B?bXN4b3VhS3Y1THFsOFhVVG8yd05uRHVJQ2xpTXRhMVlrT0FFUFZWckhLV2ZC?=
- =?utf-8?B?QTNldmFRaTJMWWhWYmRDMXBJWFJqWW5NMTJMTEFvYW05TnRPQm56WjF1MlpJ?=
- =?utf-8?B?Y0c5Sk9WMlFNNk11YldqQllHbnJNRlFGSVpMZnV1MklJS0t0elVaWjlCbmFU?=
- =?utf-8?B?S2k3QmU1amVuVUxRR244OWgyMVV3MHhISFBoZ0YvVFpFOEJUUmhMcVBhU2JV?=
- =?utf-8?B?VG5wSWJtNXZnSUUwazZxeDNDcDNpUGNKWmx6WUg5b2Rhdy9SUHBEZ3Nrd3F6?=
- =?utf-8?B?RFU0NEcxMDR6bVdMNjNHMkxNazlWaSt6eEhqSkxzWm1uZnFsNUtzYlJHUGxm?=
- =?utf-8?B?MUxTZVhwQUJGV2VCZklDWENpMGVFV3VMdWJYK01TMjdTa05yekxTcGlyamRq?=
- =?utf-8?B?QnNlSVUycE92L0YwaXF4ZlhXaGdqMzBHR3EwaklSMGIwZmZqOG8wT1JyZGZT?=
- =?utf-8?B?RnVrakd4R1dOMkJEQ3NLd2thMWJoOUFsVGVxUVVRKytYK3I3WXBwV2hEQzgx?=
- =?utf-8?B?V0JMSVFMTEdUTTdkN1VyOHZqOE52czhUUEF6RUtaNUJyMlhFZ1d2dTVObUVT?=
- =?utf-8?B?aFE9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2ad0c7eb-1166-45f4-5f2a-08dcc8149d66
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Aug 2024 10:23:24.6557 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: CGkCh4vbiX0cB63qQ7F4QOQWNhs/UeQdcm1b3T+dP4+flRYO+cZGD3GDfkr2/MUhcwNclBEdxzsbKBQ7KYKbBK4ildRq5Pw1kNOvVpqfWa8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI2PR04MB10835
+References: <20240828164523.125770-1-sjg@chromium.org>
+ <20240828164523.125770-4-sjg@chromium.org>
+ <CALeDE9Ptr0Ln4H24yMqxuw1+E_Wt5qBGdQabUH54PaYUTPf9Yg@mail.gmail.com>
+ <CAFLszThK_t5EwL28vnzmSp5UZQrSEpBRsaXhnNudMQRe8-7Ejw@mail.gmail.com>
+In-Reply-To: <CAFLszThK_t5EwL28vnzmSp5UZQrSEpBRsaXhnNudMQRe8-7Ejw@mail.gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Thu, 29 Aug 2024 11:43:12 +0100
+Message-ID: <CALeDE9O-kmnqkosThf8xQpLZ2tEebiHvrUEzVJNDjiEff2-t2Q@mail.gmail.com>
+Subject: Re: [u-boot-test-hooks PATCH v4 3/3] Provide some basic scripts for
+ Labgrid integration
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -175,23 +89,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Lukasz,
+On Wed, 28 Aug 2024 at 22:25, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Peter,
+>
+> On Wed, 28 Aug 2024 at 12:14, Peter Robinson <pbrobinson@gmail.com> wrote:
+> >
+> > Hi Simon,
+> >
+> > > With Labgrid we don't need to specify the various methods, except for
+> > > the console, which simply calls labgrid-client.
+> > >
+> > > This allows supporting any boards in your lab, without adding per-board
+> > > configuration to these hooks.
+> > >
+> > > Provide ellesmere files as an example.
+> >
+> > What's ellesmere?
+>
+> It is a lake but also the name of a computer.
+>
+> >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > > Changes in v4:
+> > > - Support pytest fully with dual-build boards like Beagleplay
+> > >
+> > > Changes in v3:
+> > > - Update scripts for latest version of Labgrid integration
+> > > - Add poweroff.none and poweron.none
+> > > - Provide -n flag when querying board info
+> > > - Target the grpc version of Labgrid which is now in -master
+> > > - Update README to cover the changes
+> > >
+> > > Changes in v2:
+> > > - Make use of the common script (only) to set bin_dir
+> > >
+> > >  README.md                    | 50 ++++++++++++++++++++++++++++++++++++
+> >
+> > Maybe that should be in a separate labsgrid readme?
+>
+> My hope is that Labgrid becomes the normal way of running these tests,
 
-On 8/27/24 4:20 PM, Lukasz Czechowski wrote:
-> Because DEBUG_UART_BOARD_INIT depends on DEBUG_UART, hard dependency
-> to DEBUG_UART_BOARD_INIT in ROCKCHIP_PX30 can cause warnings if
-> DEBUG_UART is disabled.
-> The DEBUG_UART_BOARD_INIT is already implied by ARCH_ROCKCHIP entry.
-> Remove hard dependency from ROCKCHIP_PX30, so that it will be
-> consistent with other rockchip boards.
-> 
-> Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
+Generally I agree with automated testing platforms, I think <insert
+you're preferred platform here> makes sense, there's a bunch like
+Linaro and a bunch in the arm ecosystem use LAVA [1] and  there's a
+bunch more that I'm aware of.
 
-Same remark for the commit title as for patch 3/4
+Does it make sense, of course at some point in the future post this
+being merged, make sense to look at a general way of making it easier
+to plugin these sort of HW test platforms using this as a basis? I ask
+mostly because putting a bunch of my devices into some sort of
+platform can auto test things and of course everyone has an opinion to
+which is the best one :-P
 
-Change is fine, so
+[1] https://validation.linaro.org/
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-
-Thanks!
-Quentin
+> so having it in the main place (and perhaps eventually removing the
+> old way) is my goal.
+>
+> >
+> > >  bin/console.labgrid          | 42 ++++++++++++++++++++++++++++++
+> > >  bin/ellesmere/common-labgrid | 46 +++++++++++++++++++++++++++++++++
+> > >  bin/ellesmere/conf.all       | 24 +++++++++++++++++
+> > >  bin/getrole.labgrid          | 25 ++++++++++++++++++
+> > >  bin/release.labgrid          | 22 ++++++++++++++++
+> > >  bin/release.none             | 22 ++++++++++++++++
+> > >  bin/u-boot-test-getrole      | 38 +++++++++++++++++++++++++++
+> > >  bin/u-boot-test-release      | 26 +++++++++++++++++++
+> > >  9 files changed, 295 insertions(+)
+> > >  create mode 100644 bin/console.labgrid
+> > >  create mode 100755 bin/ellesmere/common-labgrid
+> > >  create mode 100644 bin/ellesmere/conf.all
+> > >  create mode 100644 bin/getrole.labgrid
+> > >  create mode 100644 bin/release.labgrid
+> > >  create mode 100644 bin/release.none
+> > >  create mode 100755 bin/u-boot-test-getrole
+> > >  create mode 100755 bin/u-boot-test-release
+> > >
+>
+> [..]
+>
+> Regards,
+> Simon
