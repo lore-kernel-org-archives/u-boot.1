@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F033C7EE30
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 07:34:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C10D5C7EE30
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 07:34:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC61B8862E;
-	Thu, 29 Aug 2024 09:34:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 47BA0889FF;
+	Thu, 29 Aug 2024 09:34:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J2LEuVo7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jTv3W9+r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C924D88A2D; Thu, 29 Aug 2024 09:34:02 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id A9E7888360; Thu, 29 Aug 2024 09:34:24 +0200 (CEST)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CE9488360
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 09:34:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6894C889FF
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 09:34:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-201df0b2df4so2585635ad.0
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:34:00 -0700 (PDT)
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-202146e93f6so3417095ad.3
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 00:34:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724916839; x=1725521639; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1724916860; x=1725521660; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=V5AV+864QF/d2jvolZRudEj9DuTV+dZMFePeb4bKWi0=;
- b=J2LEuVo7OrKDrb7D30pMXCz/8jdlghHnhUTd1R1gX2CoMDaC82HJQLxXa1+gGU7VM3
- pRSNUk7Nl8xhMhJySsofjqdvDnN1CmMcMMZl/xJI7wtHPlldHvH3WH9Uf0XZatURvA5A
- xydBYTaUNHvLe3CIOnKqNf8wXPZDcjADLIx/4KkcTANzhweCwpvj9kUGFdbjs5mm2+bZ
- l7oiSsi+7vqb5QQ/33UlPd9dvH6ST0YmS9JRE75IQKlG73FmeW9WFMpvl5KD+451cMtn
- f+Qi32mALXwbq/amjI8tyuO7VPB59PyAiZfuUjLrFERp7kgLAq/g2NnsmSu0uyLNs927
- kqKw==
+ bh=dquML++yrjxa48JN9rWMB5Mgqd78IzZK8uVI5fV3JbU=;
+ b=jTv3W9+rkLzOnS99R4ivbLY3y5QI7Rk6NXtrzPQlQNda51GZLXh0RyICN7SQfqb/w5
+ YupI4WkvN5o68A5Amv79RLNRTDqf+kzw7a+YcTPhikd75/kVmo8mf1WSCO24G5WxSKg2
+ 490Xr51QqVIzInTMjMx5pumpTed5OS7a6zJ4mMZlmcwtfU0CTra98k7zsgT0mG2CNPtt
+ S92c6q/IF7Cv2gkWgphBQVwPSC9ed/4rQnYD0nS7GepDBYAnbF6u3aiFCffdZ3kPSjuE
+ DsMWwNkTKvZ22gjAPg7rtbWF5T/+D/8UfQ6LrfdLXdg0lCPz7S7AzjaZP5Q5C0e3JNeZ
+ 39Kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724916839; x=1725521639;
+ d=1e100.net; s=20230601; t=1724916860; x=1725521660;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=V5AV+864QF/d2jvolZRudEj9DuTV+dZMFePeb4bKWi0=;
- b=ex9J6eJ+/4LCLMoYC8RqimEW50V1NlbZwuZVBV0sS3E0KnBwxCi/81Yv0NHklZcLcY
- w9CgWpaPigYJ21Z7Ty8m1EPgk4Ue5miYf3cpBVReUMNeBXK2N+5ywZRQECt4G5p8O4hZ
- Htn2dYSpkAPj9saaTqHC9mZ+syySC93F8wKvqpLYu+oCVSoT3fteKcvzJPwW/MJP7jdG
- CjXzB1hyUxZX3ejy541vNhtT+2NCSaR4TQprl/lK1hz2txGAzw6zFeLmSAIyYY5eeKXK
- pPuNf0n/d5hXX5vPIzl9s6O9LaSFyg71RqR7K1Dm2kGgBsPQG0LjHhJpgtiDFjda38rG
- s5dw==
-X-Gm-Message-State: AOJu0YzB6WAcGMIPMuFYLh5n9jw+FIbn66HDBUL+Sxa53r17iurOj1s4
- k8Fg/WyHyU5YQchGmTvFCGfc+BK4uOkvrmkkIXqHlKkWPsNR8NMickd31VRL2YQC9ZBM9TAiKgm
- cpvOdvRoVTvic6w1MJmzRRsYHQPKBEyQAgB1YpA==
-X-Google-Smtp-Source: AGHT+IHQziB0iS7rQS5J+DLw4gOns3Zyqvxd33KoKJTpXs3Y2cmrJOafmDh92V2xmEhyho7sI3U5LFdyatho3+q4jok=
-X-Received: by 2002:a17:903:2444:b0:203:a046:c665 with SMTP id
- d9443c01a7336-2050c35478emr24182265ad.15.1724916838966; Thu, 29 Aug 2024
- 00:33:58 -0700 (PDT)
+ bh=dquML++yrjxa48JN9rWMB5Mgqd78IzZK8uVI5fV3JbU=;
+ b=KqL/dJyJJ3auC7y3FvFL0SSWlc79U9xRax74FY3lRWWi59Hx4/P6K51yg1swUGizyx
+ LfztHS/edK5R+8XgTfQ4KtsMYpgGDKE8c5BOcs3m/awZIiQwiVW6CPpeNLHb8X1XyqBg
+ SgllHi2s9tvOp0t78AuEn/VgwGf1t3RDo+Uh3+/szPTGM8c4TJ0Eiy/i7xdnUQKGIYyA
+ 0MW/DrIhfkwq6RTW9I0Sk/l0YFF9GJzWEi0jOHnNhSy6KXCQOKe1SJX/WOzrgn9AbumJ
+ ECRw7uHbXE/rkuYvFg2Ifx1GfEHAAXTw3d1nMkPeoViY57Pk5AXJvdVDHo5Bql27wdRt
+ xzfA==
+X-Gm-Message-State: AOJu0YwfplmzetIsfswnm0U04vddwdkr40gCe7nhtO6ccyCi41dLxfDE
+ f7myW3iL0Hu8qxV+i3aJWstIk2jAGiDnBEIGXWw4t9BSJBZ74CoGQbDm/q1UV7yvOjWCgn85w+N
+ 1f7KlbE6NTrvmsDFUOFbPGlnb38Ek7XzAj9EqgQ==
+X-Google-Smtp-Source: AGHT+IH0ekor7KQ48rPh8bg6zyr/s2ReiPjj49mqa2FB8bHLiQLpcKTgnAtxvwjxjzN/7HHH+GKUEj6imJXCZ2cltsM=
+X-Received: by 2002:a17:902:da91:b0:1ff:393d:5e56 with SMTP id
+ d9443c01a7336-2050c3d2563mr24271505ad.36.1724916859688; Thu, 29 Aug 2024
+ 00:34:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1724846454.git.jerome.forissier@linaro.org>
- <898bcb397c26f6eb7b0750b91c6c6ad2783d5195.1724846454.git.jerome.forissier@linaro.org>
-In-Reply-To: <898bcb397c26f6eb7b0750b91c6c6ad2783d5195.1724846454.git.jerome.forissier@linaro.org>
+ <1a6084e845a0612546a1e86d142208af945c8f77.1724846454.git.jerome.forissier@linaro.org>
+In-Reply-To: <1a6084e845a0612546a1e86d142208af945c8f77.1724846454.git.jerome.forissier@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 29 Aug 2024 10:33:22 +0300
-Message-ID: <CAC_iWjKEaoPVAcbVsZxms4fQvij42Nqvkyoq-nmOA6ia6G7ygg@mail.gmail.com>
-Subject: Re: [PATCH 07/13] net: phy: ncsi: depend on NET
+Date: Thu, 29 Aug 2024 10:33:43 +0300
+Message-ID: <CAC_iWjL9g0c8UHF3L44b8HEG-2=d57XsDXPpSogthWDPgzPcaw@mail.gmail.com>
+Subject: Re: [PATCH 09/13] net: wget: allow EFI boot
 To: Jerome Forissier <jerome.forissier@linaro.org>
 Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>, 
  Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
- Tom Rini <trini@konsulko.com>,
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>
+ Tom Rini <trini@konsulko.com>, Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Simon Glass <sjg@chromium.org>, Yasuharu Shibata <yasuharu.shibata@gmail.com>, 
+ Marek Vasut <marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,30 +93,48 @@ X-Virus-Status: Clean
 On Wed, 28 Aug 2024 at 15:10, Jerome Forissier
 <jerome.forissier@linaro.org> wrote:
 >
-> PHY_NCSI enables drivers/net/phy/ncsi.c which calls net_loop() and
-> net_set_timeout_handler(). That's the legacy NET stack (as opposed to
-> NET_LWIP). Therefore add the dependency to Kconfig.
+> wget followed by bootefi currently fails as follows:
+>
+>  U-Boot> wget 200000 192.168.0.30:helloworld.efi
+>  Waiting for Ethernet connection... done.
+>  HTTP/1.0 200 OK
+>  Packets received 13, Transfer Successful
+>  Bytes transferred = 12720 (31b0 hex)
+>  U-Boot> bootefi 200000
+>  No UEFI binary known at 200000
+>  U-Boot>
+>
+> Fix the problem by adding the missing efi_set_bootdev() call.
 >
 > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 > ---
->  drivers/net/phy/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
+>  net/wget.c | 4 ++++
+>  1 file changed, 4 insertions(+)
 >
-> diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
-> index 73064b2af6..a9efc50981 100644
-> --- a/drivers/net/phy/Kconfig
-> +++ b/drivers/net/phy/Kconfig
-> @@ -368,6 +368,7 @@ config PHY_FIXED
->
->  config PHY_NCSI
->         bool "NC-SI based PHY"
-> +       depends on NET
->
->  endif #PHYLIB
->
+> diff --git a/net/wget.c b/net/wget.c
+> index 0e4dc5159d..cf7681a4e7 100644
+> --- a/net/wget.c
+> +++ b/net/wget.c
+> @@ -8,6 +8,7 @@
+>  #include <command.h>
+>  #include <display_options.h>
+>  #include <env.h>
+> +#include <efi_loader.h>
+>  #include <image.h>
+>  #include <lmb.h>
+>  #include <mapmem.h>
+> @@ -429,6 +430,9 @@ static void wget_handler(uchar *pkt, u16 dport,
+>         case WGET_TRANSFERRED:
+>                 printf("Packets received %d, Transfer Successful\n", packets);
+>                 net_set_state(wget_loop_state);
+> +               efi_set_bootdev("Net", "", image_url,
+> +                               map_sysmem(image_load_addr, 0),
+> +                               net_boot_file_size);
+>                 break;
+>         }
+>  }
 > --
 > 2.40.1
 >
 
-This sounds like that should be fixed on the phy driver if we want to use LWIP
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
