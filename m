@@ -4,76 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2A23C7EE3A
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 08:44:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A37E6C7EE3A
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 08:44:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D210688966;
-	Thu, 29 Aug 2024 10:43:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=web.de
+	by phobos.denx.de (Postfix) with ESMTP id 3E2A088B84;
+	Thu, 29 Aug 2024 10:44:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=web.de header.i=smoch@web.de header.b="g3U1ns0l";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="W7NnFztt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E05788B8E; Thu, 29 Aug 2024 10:43:58 +0200 (CEST)
-Received: from mout.web.de (mout.web.de [212.227.15.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 487908891E; Thu, 29 Aug 2024 10:44:15 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DCAF8891E
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 10:43:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E099588B70
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 10:44:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=web.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=smoch@web.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
- s=s29768273; t=1724921034; x=1725525834; i=smoch@web.de;
- bh=zSANLzi9uAAZqdMWQJX2oGUv9CtF5dT+E2Zb/c/8gZw=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=g3U1ns0lN+INq7QfaWTA4awrzLHLyw5AfD/Nk4cKj1jEuA5H9Bny5yk2o43RSfO7
- XxvYB4g55vpIvUJL/d0UCcyyskMqkLpryK7md1/n+P+CP2698W4erxVuEwCPkK1XM
- soScScu4YtsxAR/lWAWDqwkj5//FyxtGStV134a8rbtawyBP+mJZXFJfDDwfTZOHz
- /V9F/Ye6LrkI198iq34do0RhYAuLXZzdkuO+f0KqmuYU14S7L5BZr61lKV8Y7LGO9
- tyPwip+SkHWkMr9FuCzQ275w83L84xiy/Li16WLwvfKYF5UCCuBzfP2eDAPAVxS49
- 9qT3zWG16WC0PeExlA==
-X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
-Received: from [192.168.1.40] ([77.191.136.96]) by smtp.web.de (mrweb005
- [213.165.67.108]) with ESMTPSA (Nemesis) id 1MSZMD-1sdJLs46ED-00ZBQh; Thu, 29
- Aug 2024 10:43:54 +0200
-Message-ID: <9b177470-a138-42f8-9ddb-5f4fa01e5d32@web.de>
-Date: Thu, 29 Aug 2024 10:43:46 +0200
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-428178fc07eso3207495e9.3
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 01:44:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1724921052; x=1725525852;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=tKSmnPfQt5CfjBkWbYl37QK/cnIexEstUEBT3PinNq4=;
+ b=W7NnFzttGw6Z9QBEnAsse5jhg1LFX4kQQfwdFcxrdqAX5giE9wkdOdV8QdpQtEuItB
+ yvVL4WvPJFDbz32gQv65MXznTrUgxK4D9kLIh+mJX8EU/weSZPNKdCnCWDNU6ZZhoM0C
+ VLHyehyHrOYctgy8cjEe2zUWclOXNS0md5RmPI2GfGTkks0WF7269YoSXG3jJ/H3Z3yM
+ QSr0i5i3h453OtnyGhc51zLdEaqjObs4a+yRtF4xIxRkrGJ8x5Gi+sE2YDfPQXALL+h8
+ qimcXGLK8c/6xAA4v6E+YMougfV0yMzSvuDPeu0IwJvDq+J1MhvJTDoGjsrVH9eL+Kd2
+ cvUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724921052; x=1725525852;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=tKSmnPfQt5CfjBkWbYl37QK/cnIexEstUEBT3PinNq4=;
+ b=iP0MBnw37hyxsL4ugyNaN0kvz93IElHGcnuuCueCl6Kw6WINMzgr8PHe0GkoCbx0k1
+ tVh9U0kjlh07TZ9rLZl8Ja2WAsR2zGHi3db8/yzy7L+8/wjnB3kVIc+0gnpTWkHL653j
+ /czy57b5Hu/hpfz9/b8/XKxndkwJaDPh1hMWFEmjFXrzktBmtKB8taMr941k5JPS4DIj
+ InDdPAmNoLxJvCjT7+oawq5fQ5uOnfcyUAMzstJNvRuq49wdm7cDdamXvLLGPYcbKlma
+ dkktdvklkdZWSROJ1jTd7yaqxWtAkvfzeh5vRr0GwqfJ8x7GlsRk0lFQnIM9mZjUoCne
+ /LPA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX+sCk1nHy8IeEQzwHEMwNS2NnOrza9W/z5/JcDMAbYUjbVv0L30IfU0Kn7CynyA5in1d0l2xE=@lists.denx.de
+X-Gm-Message-State: AOJu0YygaiTIvYCFPWsdwCkEgKuiRpHETTiu5aVhbjh3x9+XAxnoWEQ0
+ 0q+7MJ6DBsMfZgc34+A7KxSVhJcINswwVr68V4+IN2Lvifwme+t3/Qoqzomhtzw=
+X-Google-Smtp-Source: AGHT+IFGEhiyhJSTJf8I9K+4nvUpaG5eZmPY0lpyO1uRTvH9G4vreeMCx1cMqUfek3h/ctYDAJ1Qcw==
+X-Received: by 2002:a05:600c:1c83:b0:426:64a2:5362 with SMTP id
+ 5b1f17b1804b1-42bb02c10a4mr14640975e9.8.1724921051474; 
+ Thu, 29 Aug 2024 01:44:11 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42bb6df0a4dsm10144585e9.12.2024.08.29.01.44.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 Aug 2024 01:44:11 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, Linus Walleij
+ <linus.walleij@linaro.org>, Lukasz Majewski <lukma@denx.de>, Miquel Raynal
+ <miquel.raynal@bootlin.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Nishanth Menon <nm@ti.com>, Zixun LI <admin@hifiphile.com>
+Subject: Re: [PATCH 6/6] usb: gadget: Pass struct udevice to
+ usb_add_gadget_udc()
+In-Reply-To: <20240826143851.8020-6-marek.vasut+renesas@mailbox.org>
+References: <20240826143851.8020-1-marek.vasut+renesas@mailbox.org>
+ <20240826143851.8020-6-marek.vasut+renesas@mailbox.org>
+Date: Thu, 29 Aug 2024 10:44:08 +0200
+Message-ID: <87ttf3ra5j.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/4] imx: Remove CFG_MXC_USB_PORTSC
-To: Fabio Estevam <festevam@gmail.com>, peng.fan@nxp.com
-Cc: marex@denx.de, u-boot@lists.denx.de, tharvey@gateworks.com,
- Fabio Estevam <festevam@denx.de>
-References: <20240828132529.3098961-1-festevam@gmail.com>
- <20240828132529.3098961-4-festevam@gmail.com>
-Content-Language: en-US
-From: Soeren Moch <smoch@web.de>
-In-Reply-To: <20240828132529.3098961-4-festevam@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Provags-ID: V03:K1:t+jSAXjTBeOfDTcWhMbCg2Y7vEJrjBVY1r2C/GJ5im2dcvu+767
- y4vvmua+ySke3ryUxJgONcsMnBXUp+/EOSvlmrwsCb++yr3bB4spaAiMD2h+YNJqRk4eywZ
- 7JZb7Uu93lyyFgOJGl3JiQINBfi8T5UWH8LovcW70HhVpuSnVUNdjf9GB9GyveQoUwFybWh
- f+ZF+rmCDvD05c1Fzf+gg==
-UI-OutboundReport: notjunk:1;M01:P0:ctoGCMolHpk=;zf6dQMPaggKEoBJBgFpwHQW2RC7
- 2m5y8DcNaTQU4NFgAh3pauX6swIkF8EqobLgTC+khizwzl+ln3lJszJM4e4Wk3KkjgcLIoCwb
- P4/9nBO/4EP4iFqJmzSnZJQ/jD0lBqgVXn5y5V5QrHYL9q+c1+RS8jSdjv9bQV1bmtMXMkKxg
- aTgbgkruW4Qd6VoIBN04rX4MR7b0aZFKSlkuellVe8qk6SDTmP4+cfxJ2hZuS4eush+DQeYsu
- 9rfVYNHzXmDchSA39QGEmrAU9MbIk0yPw+ItfOe46awc2TIHEilRgtSHQR0dqu9DZejNvMS1t
- JHNzBYrKrUVu6Bb0mirxRtM3AJncxFq1JfNU3TUU4RQD8lAX0ik0a6pwxOAX3NXdl334d45sn
- 5VocMESQtGF6V2BCI5sAgUr6mQZBZVNxYwvOR7gAsk0VEAGvC6Lh8faACrYx9PmtkG/Sp867s
- 6XhMvOVuW2xx32eGWOrK5PlREKCEl+2mlMMd0FHO3cpwtk8yX99T1mwK7ze/RnFKHiBrlg8rp
- 2dYVTsOSvh9d7ABwBzBGqdJnh+hdoWx3YvkaYBYfE4rfCB2hXG2NzSAFciX0+jpqkyY1AfRwT
- ycSP6cIGM84Z4GblaUtrNxCc+tFPs5xW/VD+2a5jCriYjm26w0YKys5O80RNfEMCcwv+NF/Ko
- eAWQR9sFVcjQf/2vR9GP2BXykNOL9fkFdykGqQBjX75PYj5a9SRXt46GMljGisi56ECg+yLyM
- 3dYieyrGde3V9PPEtqHBs1jT/90dSWy7DR6t5DA+SXLkJB45hMmMtay/JBKcBcpTHoNbiYBfJ
- T5N4fiR0Qyr3iaakROI2V3kA==
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,85 +97,266 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 28.08.24 15:25, Fabio Estevam wrote:
-> From: Fabio Estevam <festevam@denx.de>
+Hi Marek,
+
+Thank you for the patch.
+
+On lun., ao=C3=BBt 26, 2024 at 16:38, Marek Vasut <marek.vasut+renesas@mail=
+box.org> wrote:
+
+> Almost every UDC driver already passes casted pointer to struct udevice
+> usb_add_gadget_udc(), even if the behavior is not exactly correct. That
+> struct udevice is at risk of being corrupted in case something modified
+> it in the UDC core, which does not happen right now. Switch UDC core to
+> use struct udevice outright and drop the casts.
 >
-> The definition of CFG_MXC_USB_PORTSC as (PORT_PTS_UTMI | PORT_PTS_PTW)
-> can be removed from mx5/mx6/mx7/mx8m board config files as it is the
-> default in drivers/usb/host/ehci-mx5.c and drivers/usb/host/ehci-mx6.c.
+> UX500 has to be updated slightly, as that is the last place which does
+> correctly use private struct device instance.
 >
-> Suggested-by: Tim Harvey <tharvey@gateworks.com>
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
-> Reviewed-by: Tim Harvey <tharvey@gateworks.com>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
 > ---
-> Changes since v2:
-> - Keep mx51evk.h intact as it uses a different CFG_MXC_USB_PORTSC
-> definition.
+> Cc: Linus Walleij <linus.walleij@linaro.org>
+> Cc: Lukasz Majewski <lukma@denx.de>
+> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Cc: Miquel Raynal <miquel.raynal@bootlin.com>
+> Cc: Neil Armstrong <neil.armstrong@linaro.org>
+> Cc: Nishanth Menon <nm@ti.com>
+> Cc: Zixun LI <admin@hifiphile.com>
+> ---
+>  drivers/usb/cdns3/gadget.c        |  2 +-
+>  drivers/usb/dwc3/gadget.c         |  2 +-
+>  drivers/usb/gadget/dwc2_udc_otg.c |  2 +-
+>  drivers/usb/gadget/max3420_udc.c  |  2 +-
+>  drivers/usb/gadget/udc/udc-core.c | 19 +++++++++----------
+>  drivers/usb/mtu3/mtu3_gadget.c    |  2 +-
+>  drivers/usb/musb-new/omap2430.c   |  2 +-
+>  drivers/usb/musb-new/ti-musb.c    |  2 +-
+>  drivers/usb/musb-new/ux500.c      |  2 +-
+>  include/linux/usb/gadget.h        |  4 ++--
+>  10 files changed, 19 insertions(+), 20 deletions(-)
 >
->   include/configs/apalis_imx6.h            | 4 ----
->   include/configs/aristainetos2.h          | 3 ---
->   include/configs/brppt2.h                 | 3 ---
->   include/configs/cl-som-imx7.h            | 3 ---
->   include/configs/cm_fx6.h                 | 3 ---
->   include/configs/colibri-imx6ull.h        | 4 ----
->   include/configs/colibri_imx6.h           | 4 ----
->   include/configs/colibri_imx7.h           | 4 ----
->   include/configs/dart_6ul.h               | 3 ---
->   include/configs/dh_imx6.h                | 3 ---
->   include/configs/display5.h               | 1 -
->   include/configs/embestmx6boards.h        | 3 ---
->   include/configs/ge_b1x5v2.h              | 3 ---
->   include/configs/gw_ventana.h             | 3 ---
->   include/configs/imx6_logic.h             | 5 -----
->   include/configs/imx6dl-mamoj.h           | 3 ---
->   include/configs/imx6q-bosch-acc.h        | 1 -
->   include/configs/imx7-cm.h                | 3 ---
->   include/configs/imx8mm-cl-iot-gate.h     | 3 ---
->   include/configs/kontron-sl-mx6ul.h       | 4 ----
->   include/configs/kontron-sl-mx8mm.h       | 4 ----
->   include/configs/kp_imx53.h               | 3 ---
->   include/configs/kp_imx6q_tpc.h           | 5 -----
->   include/configs/liteboard.h              | 5 -----
->   include/configs/m53menlo.h               | 7 -------
->   include/configs/meerkat96.h              | 3 ---
->   include/configs/mx53cx9020.h             | 3 ---
->   include/configs/mx53loco.h               | 3 ---
->   include/configs/mx53ppd.h                | 3 ---
->   include/configs/mx6cuboxi.h              | 3 ---
->   include/configs/mx6memcal.h              | 1 -
->   include/configs/mx6sabreauto.h           | 3 ---
->   include/configs/mx6sabresd.h             | 5 -----
->   include/configs/mx6slevk.h               | 5 -----
->   include/configs/mx6sllevk.h              | 5 -----
->   include/configs/mx6sxsabreauto.h         | 4 ----
->   include/configs/mx6sxsabresd.h           | 4 ----
->   include/configs/mx6ul_14x14_evk.h        | 5 -----
->   include/configs/mx7dsabresd.h            | 3 ---
->   include/configs/mx7ulp_com.h             | 1 -
->   include/configs/mys_6ulx.h               | 3 ---
->   include/configs/nitrogen6x.h             | 3 ---
->   include/configs/novena.h                 | 5 -----
->   include/configs/npi_imx6ull.h            | 3 ---
->   include/configs/o4-imx6ull-nano.h        | 4 ----
->   include/configs/opos6uldev.h             | 5 -----
->   include/configs/pcl063.h                 | 3 ---
->   include/configs/pcl063_ull.h             | 3 ---
->   include/configs/pico-imx6.h              | 3 ---
->   include/configs/pico-imx6ul.h            | 3 ---
->   include/configs/pico-imx7d.h             | 3 ---
->   include/configs/somlabs_visionsom_6ull.h | 5 -----
->   include/configs/tbs2910.h                | 5 -----
->   include/configs/tqma6.h                  | 3 ---
->   include/configs/usbarmory.h              | 3 ---
->   include/configs/verdin-imx8mm.h          | 3 ---
->   include/configs/vining_2000.h            | 1 -
->   include/configs/wandboard.h              | 3 ---
->   include/configs/warp7.h                  | 1 -
->   include/configs/xpress.h                 | 3 ---
->   60 files changed, 203 deletions(-)
-
-Reviewed-by: Soeren Moch <smoch@web.de>
-
-Thanks,
-Soeren
-
+> diff --git a/drivers/usb/cdns3/gadget.c b/drivers/usb/cdns3/gadget.c
+> index 32b2c412068..b3513cc9bdc 100644
+> --- a/drivers/usb/cdns3/gadget.c
+> +++ b/drivers/usb/cdns3/gadget.c
+> @@ -2660,7 +2660,7 @@ static int cdns3_gadget_start(struct cdns3 *cdns)
+>  	}
+>=20=20
+>  	/* add USB gadget device */
+> -	ret =3D usb_add_gadget_udc((struct device *)priv_dev->dev,
+> +	ret =3D usb_add_gadget_udc(priv_dev->dev,
+>  				 &priv_dev->gadget);
+>  	if (ret < 0) {
+>  		dev_err(priv_dev->dev,
+> diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
+> index fe33e307d3e..a3c3437aa3e 100644
+> --- a/drivers/usb/dwc3/gadget.c
+> +++ b/drivers/usb/dwc3/gadget.c
+> @@ -2688,7 +2688,7 @@ int dwc3_gadget_init(struct dwc3 *dwc)
+>  	if (ret)
+>  		goto err4;
+>=20=20
+> -	ret =3D usb_add_gadget_udc((struct device *)dwc->dev, &dwc->gadget);
+> +	ret =3D usb_add_gadget_udc(dwc->dev, &dwc->gadget);
+>  	if (ret) {
+>  		dev_err(dwc->dev, "failed to register udc\n");
+>  		goto err4;
+> diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_=
+udc_otg.c
+> index fbd6c9600fc..4b6327d86d1 100644
+> --- a/drivers/usb/gadget/dwc2_udc_otg.c
+> +++ b/drivers/usb/gadget/dwc2_udc_otg.c
+> @@ -1135,7 +1135,7 @@ static int dwc2_udc_otg_probe(struct udevice *dev)
+>=20=20
+>  	the_controller->driver =3D 0;
+>=20=20
+> -	ret =3D usb_add_gadget_udc((struct device *)dev, &the_controller->gadge=
+t);
+> +	ret =3D usb_add_gadget_udc(dev, &the_controller->gadget);
+>=20=20
+>  	return ret;
+>  }
+> diff --git a/drivers/usb/gadget/max3420_udc.c b/drivers/usb/gadget/max342=
+0_udc.c
+> index 557a1f0644e..7df73cd3625 100644
+> --- a/drivers/usb/gadget/max3420_udc.c
+> +++ b/drivers/usb/gadget/max3420_udc.c
+> @@ -836,7 +836,7 @@ static int max3420_udc_probe(struct udevice *dev)
+>  	max3420_setup_eps(udc);
+>  	max3420_setup_spi(udc);
+>=20=20
+> -	usb_add_gadget_udc((struct device *)dev, &udc->gadget);
+> +	usb_add_gadget_udc(dev, &udc->gadget);
+>=20=20
+>  	return 0;
+>  }
+> diff --git a/drivers/usb/gadget/udc/udc-core.c b/drivers/usb/gadget/udc/u=
+dc-core.c
+> index 275d6fe7be8..102d74ec02a 100644
+> --- a/drivers/usb/gadget/udc/udc-core.c
+> +++ b/drivers/usb/gadget/udc/udc-core.c
+> @@ -37,7 +37,7 @@
+>  struct usb_udc {
+>  	struct usb_gadget_driver	*driver;
+>  	struct usb_gadget		*gadget;
+> -	struct device			dev;
+> +	struct udevice			*dev;
+>  	struct list_head		list;
+>  };
+>=20=20
+> @@ -157,7 +157,7 @@ static inline void usb_gadget_udc_stop(struct usb_udc=
+ *udc)
+>   *
+>   * Returns zero on success, negative errno otherwise.
+>   */
+> -int usb_add_gadget_udc(struct device *parent, struct usb_gadget *gadget)
+> +int usb_add_gadget_udc(struct udevice *parent, struct usb_gadget *gadget)
+>  {
+>  	struct usb_udc		*udc;
+>  	int			ret =3D -ENOMEM;
+> @@ -166,10 +166,9 @@ int usb_add_gadget_udc(struct device *parent, struct=
+ usb_gadget *gadget)
+>  	if (!udc)
+>  		goto err1;
+>=20=20
+> -	dev_set_name(&gadget->dev, "gadget");
+> -	gadget->dev.parent =3D parent;
+> +	gadget->dev =3D parent;
+>=20=20
+> -	udc->dev.parent =3D parent;
+> +	udc->dev =3D parent;
+>=20=20
+>  	udc->gadget =3D gadget;
+>=20=20
+> @@ -189,7 +188,7 @@ EXPORT_SYMBOL_GPL(usb_add_gadget_udc);
+>=20=20
+>  static void usb_gadget_remove_driver(struct usb_udc *udc)
+>  {
+> -	dev_dbg(&udc->dev, "unregistering UDC driver [%s]\n",
+> +	dev_dbg(udc->dev, "unregistering UDC driver [%s]\n",
+>  			udc->driver->function);
+>=20=20
+>  	usb_gadget_disconnect(udc->gadget);
+> @@ -216,13 +215,13 @@ void usb_del_gadget_udc(struct usb_gadget *gadget)
+>  		if (udc->gadget =3D=3D gadget)
+>  			goto found;
+>=20=20
+> -	dev_err(gadget->dev.parent, "gadget not registered.\n");
+> +	dev_err(gadget->dev, "gadget not registered.\n");
+>  	mutex_unlock(&udc_lock);
+>=20=20
+>  	return;
+>=20=20
+>  found:
+> -	dev_vdbg(gadget->dev.parent, "unregistering gadget\n");
+> +	dev_vdbg(gadget->dev, "unregistering gadget\n");
+>=20=20
+>  	list_del(&udc->list);
+>  	mutex_unlock(&udc_lock);
+> @@ -260,7 +259,7 @@ static int udc_bind_to_driver(struct usb_udc *udc, st=
+ruct usb_gadget_driver *dri
+>  {
+>  	int ret;
+>=20=20
+> -	dev_dbg(&udc->dev, "registering UDC driver [%s]\n",
+> +	dev_dbg(udc->dev, "registering UDC driver [%s]\n",
+>  			driver->function);
+>=20=20
+>  	udc->driver =3D driver;
+> @@ -280,7 +279,7 @@ static int udc_bind_to_driver(struct usb_udc *udc, st=
+ruct usb_gadget_driver *dri
+>  	return 0;
+>  err1:
+>  	if (ret !=3D -EISNAM)
+> -		dev_err(&udc->dev, "failed to start %s: %d\n",
+> +		dev_err(udc->dev, "failed to start %s: %d\n",
+>  			udc->driver->function, ret);
+>  	udc->driver =3D NULL;
+>  	return ret;
+> diff --git a/drivers/usb/mtu3/mtu3_gadget.c b/drivers/usb/mtu3/mtu3_gadge=
+t.c
+> index 027b7e61113..949b22f41c7 100644
+> --- a/drivers/usb/mtu3/mtu3_gadget.c
+> +++ b/drivers/usb/mtu3/mtu3_gadget.c
+> @@ -631,7 +631,7 @@ int mtu3_gadget_setup(struct mtu3 *mtu)
+>=20=20
+>  	mtu3_gadget_init_eps(mtu);
+>=20=20
+> -	return usb_add_gadget_udc((struct device *)mtu->dev, &mtu->g);
+> +	return usb_add_gadget_udc(mtu->dev, &mtu->g);
+>  }
+>=20=20
+>  void mtu3_gadget_cleanup(struct mtu3 *mtu)
+> diff --git a/drivers/usb/musb-new/omap2430.c b/drivers/usb/musb-new/omap2=
+430.c
+> index ba600d01102..54dff01db71 100644
+> --- a/drivers/usb/musb-new/omap2430.c
+> +++ b/drivers/usb/musb-new/omap2430.c
+> @@ -231,7 +231,7 @@ static int omap2430_musb_probe(struct udevice *dev)
+>  		if (!host->host)
+>  			return -EIO;
+>=20=20
+> -		return usb_add_gadget_udc((struct device *)otg_board_data, &host->host=
+->g);
+> +		return usb_add_gadget_udc(dev, &host->host->g);
+>  	}
+>=20=20
+>  	musbp =3D musb_register(&plat->plat, (struct device *)otg_board_data,
+> diff --git a/drivers/usb/musb-new/ti-musb.c b/drivers/usb/musb-new/ti-mus=
+b.c
+> index ec1baa9337d..9e3f793af06 100644
+> --- a/drivers/usb/musb-new/ti-musb.c
+> +++ b/drivers/usb/musb-new/ti-musb.c
+> @@ -247,7 +247,7 @@ static int ti_musb_peripheral_probe(struct udevice *d=
+ev)
+>=20=20
+>  	ti_musb_set_phy_power(dev, 1);
+>  	musb_gadget_setup(priv->periph);
+> -	return usb_add_gadget_udc((struct device *)dev, &priv->periph->g);
+> +	return usb_add_gadget_udc(dev, &priv->periph->g);
+>  }
+>=20=20
+>  static int ti_musb_peripheral_remove(struct udevice *dev)
+> diff --git a/drivers/usb/musb-new/ux500.c b/drivers/usb/musb-new/ux500.c
+> index be0085f403d..c994dc2f04d 100644
+> --- a/drivers/usb/musb-new/ux500.c
+> +++ b/drivers/usb/musb-new/ux500.c
+> @@ -130,7 +130,7 @@ static int ux500_musb_probe(struct udevice *dev)
+>  	if (!host->host)
+>  		return -EIO;
+>=20=20
+> -	return usb_add_gadget_udc(&glue->dev, &host->host->g);
+> +	return usb_add_gadget_udc(dev, &host->host->g);
+>  #endif
+>  }
+>=20=20
+> diff --git a/include/linux/usb/gadget.h b/include/linux/usb/gadget.h
+> index 194025ebd12..e631f71eab8 100644
+> --- a/include/linux/usb/gadget.h
+> +++ b/include/linux/usb/gadget.h
+> @@ -543,7 +543,7 @@ struct usb_gadget {
+>  	unsigned			a_hnp_support:1;
+>  	unsigned			a_alt_hnp_support:1;
+>  	const char			*name;
+> -	struct device			dev;
+> +	struct udevice			*dev;
+>  	void				*driver_data;
+>  	unsigned			quirk_ep_out_aligned_size:1;
+>  };
+> @@ -886,7 +886,7 @@ int usb_gadget_register_driver(struct usb_gadget_driv=
+er *driver);
+>   */
+>  int usb_gadget_unregister_driver(struct usb_gadget_driver *driver);
+>=20=20
+> -int usb_add_gadget_udc(struct device *parent, struct usb_gadget *gadget);
+> +int usb_add_gadget_udc(struct udevice *parent, struct usb_gadget *gadget=
+);
+>  void usb_del_gadget_udc(struct usb_gadget *gadget);
+>  /*----------------------------------------------------------------------=
+---*/
+>=20=20
+> --=20
+> 2.45.2
