@@ -4,112 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A1E2C83F2D
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 14:44:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4A0DC83F2D
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 14:51:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BE8788C0B;
-	Thu, 29 Aug 2024 16:44:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4E07288440;
+	Thu, 29 Aug 2024 16:51:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U+5USJyt";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p84GE6Jd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38F3588BCD; Thu, 29 Aug 2024 16:44:34 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id AD30A88440; Thu, 29 Aug 2024 16:51:51 +0200 (CEST)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CDF7E889A7
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 16:44:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 504A988966
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 16:51:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-42817f1eb1fso6825445e9.1
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 07:44:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-456774a0fe7so4060461cf.0
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 07:51:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1724942671; x=1725547471; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=RJy5WnBzkWs9iLpxwbWJAnXTgoGcq+FbWhbWDxeQpbI=;
- b=U+5USJytmupH4VpwLnt4VzJh5t5j/NMHWwdF8F6IcXiq8lk036HZOkLWceyWXG4AAy
- Q116IjYxoOPw1ONTRvXGVdcxyl0fmwhO8mCWeCess/haEn8Us/yQi+LJWkhItRXq2tsF
- Baj2CFLbuNMi2DM9+sbqT5C6wpuodY5T0LLqb6cPvmViL0kxSMHH1pQ0+5LEOrDqTT9o
- 2qk1V0ZisPwj/CLDiibUFktF7vg2c10nO+7SG44rbIjaikSA/NzTE9oUi40pwfGVbvtk
- R7uhjkBN4FcvM4oxUSBsy9m3a01TlLoOVD5DheOK0z3xYy2U4XlYJaQvWz8ZrySNUH+t
- lrbw==
+ d=konsulko.com; s=google; t=1724943108; x=1725547908; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TEVtdAcBGBAR0tz9IAD5XG27JyGkzSthbMLMOkt8Byg=;
+ b=p84GE6JdV5+9bsmMsPjonVDhnXoeTyu3h1997zH+KTtuZ6Tmvjxch/kHpXYJacqegU
+ VjhlOqZe3FpMkYOKTs0E6WePEllMrXFTzBCayWV4t5JQSk+tY+KUo2wJDSCRbkUbn0vs
+ vdtOhkbQQMQwVb6wRVKDrBSr3Vz+s0ggvvyc4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724942671; x=1725547471;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=RJy5WnBzkWs9iLpxwbWJAnXTgoGcq+FbWhbWDxeQpbI=;
- b=j3ZDg100nteh/RMpIj+hAfaGe4A+gbtTAJyKu/120+K7zLdC4eYS5O4y2wfiMgLhJm
- OAyw9T9rEvFg5nLzKBfqZIrmKi4Qmlf6p/QlnQqNwHiibZIqetTa6OTbBi1NU2BT8+1A
- g/3XjJUNYrq4EZaAGSZDweKq0o68YWTbi2tO42HTcktUzt1O7vLEzQN/4VCTsEqQ8meU
- sx/zRAqtSjyHCGxWpGYqSB7hdCzdpWQajrp9heAymOwKnW9XR5E01iDVmu3OYUt3LJXo
- MGVVd9hckdPVCTjTnD45C4e2d+KFKdf5Ec3AWjQASzCbErLriXwaXn4Tt2TaPCrZrvV+
- TAwQ==
-X-Gm-Message-State: AOJu0YzqEeFRjYjrzYQ8D2KbsfeQNqfXKpejU2oCag9TMSSpXlhasslN
- 5h/L97tHpBsEram+fpT6WIAp6XZpbDx5UPcNw+YEVp6+nq14TZTnwRSgCWGdkY4=
-X-Google-Smtp-Source: AGHT+IE4PpUekYYQegFHwUfz1rgVY7qEWj2k9vs9wAbo13L9hpTlXbdiU1f/J93JscZWIdPdpK8luQ==
-X-Received: by 2002:a05:600c:3c88:b0:42b:ac94:692c with SMTP id
- 5b1f17b1804b1-42bb0205b6amr28234745e9.0.1724942670591; 
- Thu, 29 Aug 2024 07:44:30 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:12f5:c9c:a0e1:6915?
- ([2a01:e0a:982:cbb0:12f5:c9c:a0e1:6915])
+ d=1e100.net; s=20230601; t=1724943108; x=1725547908;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TEVtdAcBGBAR0tz9IAD5XG27JyGkzSthbMLMOkt8Byg=;
+ b=IK9CqE1UEbqYZ/UCIQuAEd0/pZXhGHUDLHLL0LcA6onchm/Eo1ID/8rzzwUUsviXW1
+ AB7XYS5HkRVT9p7jxZNhFSKTtMVlgOYuk8gezDp6/KaNnrq6QaftMuFnvYPK8Cz03fkI
+ UYpZkn7cjYHVHQTT07hYMqGXG2d9SiQsNh2vAzcPg4DHg0vKCQrKkaCsAtzHP0bfc/DI
+ A2jnJ7bH2RzrQ8OUKXXLxpZ5F1H6N4LiJnjJ1nl9EXuaFKgLHiSxL9mey24KeiqQCGHi
+ 22OBLLNrzBJKidEp7SfiI74vtYZzVpOjYYAg8pdvNsNgnnSNjg8HWgyP2MnwUehVPTLs
+ UG5A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVo02ZYyRyKeSv51QAc5QY6LCEf2VeK1Qet9P0soVtFgZNKdkfXK4DGlNhtMHyB2KgBmWtNiPM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy03q2LFDAsa0zZcY3sqzVu9WAxsoffYTEpX1sXKgru10p70GC8
+ QM32E59ab1ZDUcZ5XRqIvKCtvYyi8LEmqKsAe+0LXVNVq04/+tFYUuFCt803k0A=
+X-Google-Smtp-Source: AGHT+IGKw4CTmojupWm6wXvWPzANVlCvhUIisW71t6h7+fRFdMboSeAxuZCXugJtEaJIlj3296cnkQ==
+X-Received: by 2002:a05:622a:578f:b0:44f:e056:fe06 with SMTP id
+ d75a77b69052e-4567f5941bcmr33495751cf.36.1724943107975; 
+ Thu, 29 Aug 2024 07:51:47 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42bb6deb1ebsm19517435e9.3.2024.08.29.07.44.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 29 Aug 2024 07:44:30 -0700 (PDT)
-Message-ID: <c63147f4-d364-4568-8f6e-c0348914446a@linaro.org>
-Date: Thu, 29 Aug 2024 16:44:29 +0200
+ d75a77b69052e-45682d9592asm5389641cf.83.2024.08.29.07.51.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 Aug 2024 07:51:47 -0700 (PDT)
+Date: Thu, 29 Aug 2024 08:51:43 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Oliver.Gaskell@analog.com
+Cc: Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Greg Malysa <greg.malysa@timesys.com>,
+ Ian Roberts <ian.roberts@timesys.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ u-boot@lists.denx.de, adsp-linux@analog.com,
+ Trevor Woerner <twoerner@gmail.com>
+Subject: Re: [PATCH 00/20] arm: Initial support for Analog Devices SC5xx boards
+Message-ID: <20240829145143.GA2479150@bill-the-cat>
+References: <20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [u-boot-test-hooks PATCH v4 3/3] Provide some basic scripts for
- Labgrid integration
-To: Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-References: <20240828164523.125770-1-sjg@chromium.org>
- <20240828164523.125770-4-sjg@chromium.org>
- <CALeDE9Ptr0Ln4H24yMqxuw1+E_Wt5qBGdQabUH54PaYUTPf9Yg@mail.gmail.com>
- <CAFLszThK_t5EwL28vnzmSp5UZQrSEpBRsaXhnNudMQRe8-7Ejw@mail.gmail.com>
- <CALeDE9O-kmnqkosThf8xQpLZ2tEebiHvrUEzVJNDjiEff2-t2Q@mail.gmail.com>
- <CAFLszThD=Haj4M5rUYfpjPDjr9JEOPygQb9tV36frcAM5Ey9tw@mail.gmail.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <CAFLszThD=Haj4M5rUYfpjPDjr9JEOPygQb9tV36frcAM5Ey9tw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="R54pBoCx/59MGJcf"
+Content-Disposition: inline
+In-Reply-To: <20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,135 +94,54 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 29/08/2024 14:17, Simon Glass wrote:
-> Hi Peter,
-> 
-> On Thu, 29 Aug 2024 at 04:43, Peter Robinson <pbrobinson@gmail.com> wrote:
->>
->> On Wed, 28 Aug 2024 at 22:25, Simon Glass <sjg@chromium.org> wrote:
->>>
->>> Hi Peter,
->>>
->>> On Wed, 28 Aug 2024 at 12:14, Peter Robinson <pbrobinson@gmail.com> wrote:
->>>>
->>>> Hi Simon,
->>>>
->>>>> With Labgrid we don't need to specify the various methods, except for
->>>>> the console, which simply calls labgrid-client.
->>>>>
->>>>> This allows supporting any boards in your lab, without adding per-board
->>>>> configuration to these hooks.
->>>>>
->>>>> Provide ellesmere files as an example.
->>>>
->>>> What's ellesmere?
->>>
->>> It is a lake but also the name of a computer.
->>>
->>>>
->>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
->>>>> ---
->>>>>
->>>>> Changes in v4:
->>>>> - Support pytest fully with dual-build boards like Beagleplay
->>>>>
->>>>> Changes in v3:
->>>>> - Update scripts for latest version of Labgrid integration
->>>>> - Add poweroff.none and poweron.none
->>>>> - Provide -n flag when querying board info
->>>>> - Target the grpc version of Labgrid which is now in -master
->>>>> - Update README to cover the changes
->>>>>
->>>>> Changes in v2:
->>>>> - Make use of the common script (only) to set bin_dir
->>>>>
->>>>>   README.md                    | 50 ++++++++++++++++++++++++++++++++++++
->>>>
->>>> Maybe that should be in a separate labsgrid readme?
->>>
->>> My hope is that Labgrid becomes the normal way of running these tests,
->>
->> Generally I agree with automated testing platforms, I think <insert
->> you're preferred platform here> makes sense, there's a bunch like
->> Linaro and a bunch in the arm ecosystem use LAVA [1] and  there's a
->> bunch more that I'm aware of.
-> 
-> I am somewhat familiar with LAVA and I believe it can be used to test
-> U-Boot, although I need to learn how. Looking at a test run [2] for
-> beaglebone black I see that it is using a recent kernel but the U-Boot
-> seems to be older.
-> 
->>
->> Does it make sense, of course at some point in the future post this
->> being merged, make sense to look at a general way of making it easier
->> to plugin these sort of HW test platforms using this as a basis? I ask
->> mostly because putting a bunch of my devices into some sort of
->> platform can auto test things and of course everyone has an opinion to
->> which is the best one :-P
-> 
-> Yes. I had heard from Tom that Labgrid is the new hotness for now.
-> Having dug into it I believe it is a good solution, although it can
-> certainly be improved to handle scale better.
-> 
-> Anyway, IMO the current test hooks are not a great solution, just
-> because the configuration is spread all over the place and it relies
-> on lots of little shell scripts. So I believe that the Labgrid
-> integration is a closer to where we want to be with others that come
-> along.
 
-I'd say all those scripts are actually here to ease integration with any
-system, booting U-Boot and Linux are two different beasts.
-Most of the time you need special jumpers enabled to setup vendor-specific
-bootrom mode to reflash or ram-boot U-Boot.
-So forcing us people to switch to Labgrid because it matches your boards
-behavior is a little adventurous, and while we can add some enhancement
-to the actual pytest and hooks, I'm against saying Labgrid should be the
-golden CI system.
+--R54pBoCx/59MGJcf
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Neil
+On Wed, Aug 28, 2024 at 11:02:08AM +0100, Oliver Gaskell via B4 Relay wrote:
+> ADSP-SC5xx is a series of ARM-based DSPs.
+> This comprises the armv7 based SC57x, SC58x and SC594 series, and the
+> armv8 based SC598.
+>=20
+> This patch series includes configurations, init code, and minimal DTs
+> to enable Analog Devices' evaluation boards for these SoCs to boot
+> through SPL and into U-Boot Proper, as well as devicetree schemas for
+> the added DTs.
+>=20
+> This patch series depends on ("arm: Add Analog Devices SC5xx Machine
+> Type") (https://lists.denx.de/pipermail/u-boot/2024-April/552043.html)
 
-> 
-> I would love for you to add a board into Labgrid and see how you go.
-> 
->>
->> [1] https://validation.linaro.org/
->>
->>> so having it in the main place (and perhaps eventually removing the
->>> old way) is my goal.
->>>
->>>>
->>>>>   bin/console.labgrid          | 42 ++++++++++++++++++++++++++++++
->>>>>   bin/ellesmere/common-labgrid | 46 +++++++++++++++++++++++++++++++++
->>>>>   bin/ellesmere/conf.all       | 24 +++++++++++++++++
->>>>>   bin/getrole.labgrid          | 25 ++++++++++++++++++
->>>>>   bin/release.labgrid          | 22 ++++++++++++++++
->>>>>   bin/release.none             | 22 ++++++++++++++++
->>>>>   bin/u-boot-test-getrole      | 38 +++++++++++++++++++++++++++
->>>>>   bin/u-boot-test-release      | 26 +++++++++++++++++++
->>>>>   9 files changed, 295 insertions(+)
->>>>>   create mode 100644 bin/console.labgrid
->>>>>   create mode 100755 bin/ellesmere/common-labgrid
->>>>>   create mode 100644 bin/ellesmere/conf.all
->>>>>   create mode 100644 bin/getrole.labgrid
->>>>>   create mode 100644 bin/release.labgrid
->>>>>   create mode 100644 bin/release.none
->>>>>   create mode 100755 bin/u-boot-test-getrole
->>>>>   create mode 100755 bin/u-boot-test-release
->>>>>
->>>
->>> [..]
->>>
->>> Regards,
->>> Simon
-> 
-> Regards,
-> Simon
-> 
-> [2] https://validation.linaro.org/scheduler/job/4089871#results_482796468
+Since that series has been merged since early May, what is this series
+based on top of? It should be based on top of current (or close enough
+to not matter) -next. Also, has everything been passed through
+checkpatch.pl and the results looked at? Thanks.
 
+--=20
+Tom
+
+--R54pBoCx/59MGJcf
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbQivkACgkQFHw5/5Y0
+tyzXzwv4nSjqOQZLYHvU3YYveFH2j1Nk6tfMG77JTPXvzc228PxT4tGbyb+4x19/
+tAdt8GR+jved/QAK6i7yi7FKdLNwZWV2ytNBHCzIo0asTKayICsWTXc8yLaxtufu
+peJTBY5QSc40My9xNn3VyNUTtNUoC1/qesjqTzV01FKCgP+YMs2oEfNQeEJnTrTf
+qlLDG7h/mMGHmoP3xprnwb8KqvGKnH3yKyLxfqABDDG+1YqtBApTYqITSOT+gFVL
+dk3IlfP9ZJhmLZYsx1e3lXiBvyVHzlhNFY8se5ZuBXTRVCkPknnLtiHdB0pxg2r8
+QfggGJH+lYFGiJwcRKgbJTHCrTQtcUC+qJtK6dalq5Nkk+BXTXgQn0EZ6+4Ny/Sv
+Y9MP6CrMrncRz3PEbyzCwrKSii6y5vlCjn/bxsq+OlMIidHUMINOeKxViGU9r99N
+DAlbdCJfqyUkQit2Fv2F2zfG0DISd8RnWUIOFoe21CCx3qf6MT/6iZZCIDnbeDBj
+a/VXf48=
+=3qPv
+-----END PGP SIGNATURE-----
+
+--R54pBoCx/59MGJcf--
