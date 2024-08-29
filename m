@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4A0DC83F2D
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 14:51:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D9B6C83F2D
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 14:58:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E07288440;
-	Thu, 29 Aug 2024 16:51:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 24CF388C35;
+	Thu, 29 Aug 2024 16:58:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p84GE6Jd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GZa43/vN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD30A88440; Thu, 29 Aug 2024 16:51:51 +0200 (CEST)
-Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
- [IPv6:2607:f8b0:4864:20::836])
+ id A311A88C0B; Thu, 29 Aug 2024 16:58:20 +0200 (CEST)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 504A988966
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 16:51:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DB77688C44
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 16:58:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x836.google.com with SMTP id
- d75a77b69052e-456774a0fe7so4060461cf.0
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 07:51:49 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-39d2044b522so2698645ab.0
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 07:58:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1724943108; x=1725547908; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TEVtdAcBGBAR0tz9IAD5XG27JyGkzSthbMLMOkt8Byg=;
- b=p84GE6JdV5+9bsmMsPjonVDhnXoeTyu3h1997zH+KTtuZ6Tmvjxch/kHpXYJacqegU
- VjhlOqZe3FpMkYOKTs0E6WePEllMrXFTzBCayWV4t5JQSk+tY+KUo2wJDSCRbkUbn0vs
- vdtOhkbQQMQwVb6wRVKDrBSr3Vz+s0ggvvyc4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724943108; x=1725547908;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1724943496; x=1725548296; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TEVtdAcBGBAR0tz9IAD5XG27JyGkzSthbMLMOkt8Byg=;
- b=IK9CqE1UEbqYZ/UCIQuAEd0/pZXhGHUDLHLL0LcA6onchm/Eo1ID/8rzzwUUsviXW1
- AB7XYS5HkRVT9p7jxZNhFSKTtMVlgOYuk8gezDp6/KaNnrq6QaftMuFnvYPK8Cz03fkI
- UYpZkn7cjYHVHQTT07hYMqGXG2d9SiQsNh2vAzcPg4DHg0vKCQrKkaCsAtzHP0bfc/DI
- A2jnJ7bH2RzrQ8OUKXXLxpZ5F1H6N4LiJnjJ1nl9EXuaFKgLHiSxL9mey24KeiqQCGHi
- 22OBLLNrzBJKidEp7SfiI74vtYZzVpOjYYAg8pdvNsNgnnSNjg8HWgyP2MnwUehVPTLs
- UG5A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVo02ZYyRyKeSv51QAc5QY6LCEf2VeK1Qet9P0soVtFgZNKdkfXK4DGlNhtMHyB2KgBmWtNiPM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy03q2LFDAsa0zZcY3sqzVu9WAxsoffYTEpX1sXKgru10p70GC8
- QM32E59ab1ZDUcZ5XRqIvKCtvYyi8LEmqKsAe+0LXVNVq04/+tFYUuFCt803k0A=
-X-Google-Smtp-Source: AGHT+IGKw4CTmojupWm6wXvWPzANVlCvhUIisW71t6h7+fRFdMboSeAxuZCXugJtEaJIlj3296cnkQ==
-X-Received: by 2002:a05:622a:578f:b0:44f:e056:fe06 with SMTP id
- d75a77b69052e-4567f5941bcmr33495751cf.36.1724943107975; 
- Thu, 29 Aug 2024 07:51:47 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45682d9592asm5389641cf.83.2024.08.29.07.51.46
+ bh=WsX9jb99takRUHMQMWW+Mt2APc0hODiE34uAeBg6oSg=;
+ b=GZa43/vN4Jfn1ZznN7Ebu/3V+NdPkBvnSsR+GURNfv3mn6UmPCYx+FPAIMRJuoOgH+
+ umvIg7RQ+Coydk1I7zQdViIa9ZijJi3DjVfX5fTI7wOjTEwYC6hcV473NbypZS89Rm++
+ KKUJr/WXHyEGQfToskMjuOenyIX3pPGcdk5bg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724943496; x=1725548296;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WsX9jb99takRUHMQMWW+Mt2APc0hODiE34uAeBg6oSg=;
+ b=l0xU2/41cMZTAMZ43yzt1O2h3ZakkgwpdRg8G6SiYyqPTTHw8KqI5K3qHgjXWmlXxS
+ F9Q8G+kHpkdNrrs2BFwu745Zh3b+HxxMBlDxM/i47gESO1hMCyZ3T/PmLmrtN/ZYlR6X
+ gT1cuzbtWHSTm5uzJc5Wz1G3rTej/PMeEF0zPPJHQNH0D1xet2cjheGxOQ37yM39D3h7
+ jKo/+wiLyQ3Z5Q3DollUo2E7GiWHZc4R7o2Jfkk/OTWBb6FoUCivvpblZXS4BLOZHdTY
+ TFvvhs/GT7RxLG/uthIp9U9qWKTW92K/0vxfB16UOVM2YOacSrMISirhYEP63M1zEoO9
+ 43vA==
+X-Gm-Message-State: AOJu0Yxg/buXmQY/Ek02I0Yudaxx/l/oTlx+UMjWQHj3mJuUGSx8isPv
+ WRTaAjypijXCWizCkQcdo54wzGz/sb80zfzPTRaUEuWRvgBnkT7GgauzmOUTvtImvPeojUEjxD8
+ =
+X-Google-Smtp-Source: AGHT+IHFMn5vSFuwxife2vZieBwo69Fy+BYiz/vP+L35Q/+M7Nx+bGUX6chCBVQv7y5GWqsciI4p0Q==
+X-Received: by 2002:a05:6e02:b27:b0:39f:36f3:1957 with SMTP id
+ e9e14a558f8ab-39f377ce412mr38220065ab.3.1724943496462; 
+ Thu, 29 Aug 2024 07:58:16 -0700 (PDT)
+Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
+ [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4ced2dcdd2bsm284900173.21.2024.08.29.07.58.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Aug 2024 07:51:47 -0700 (PDT)
-Date: Thu, 29 Aug 2024 08:51:43 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Oliver.Gaskell@analog.com
-Cc: Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Greg Malysa <greg.malysa@timesys.com>,
- Ian Roberts <ian.roberts@timesys.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- u-boot@lists.denx.de, adsp-linux@analog.com,
- Trevor Woerner <twoerner@gmail.com>
-Subject: Re: [PATCH 00/20] arm: Initial support for Analog Devices SC5xx boards
-Message-ID: <20240829145143.GA2479150@bill-the-cat>
-References: <20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com>
+ Thu, 29 Aug 2024 07:58:16 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>,
+ Roman Stratiienko <r.stratiienko@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 01/19] image: Add a prototype for fit_image_get_phase()
+Date: Thu, 29 Aug 2024 08:57:44 -0600
+Message-Id: <20240829145802.1827952-2-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240829145802.1827952-1-sjg@chromium.org>
+References: <20240829145802.1827952-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="R54pBoCx/59MGJcf"
-Content-Disposition: inline
-In-Reply-To: <20240828-sc5xx-upstreaming-patches-v1-0-44d9adfdf327@analog.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,49 +95,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This function exists but is not exported. Add a prototype so it can be
+used elsewhere.
 
---R54pBoCx/59MGJcf
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-On Wed, Aug 28, 2024 at 11:02:08AM +0100, Oliver Gaskell via B4 Relay wrote:
-> ADSP-SC5xx is a series of ARM-based DSPs.
-> This comprises the armv7 based SC57x, SC58x and SC594 series, and the
-> armv8 based SC598.
->=20
-> This patch series includes configurations, init code, and minimal DTs
-> to enable Analog Devices' evaluation boards for these SoCs to boot
-> through SPL and into U-Boot Proper, as well as devicetree schemas for
-> the added DTs.
->=20
-> This patch series depends on ("arm: Add Analog Devices SC5xx Machine
-> Type") (https://lists.denx.de/pipermail/u-boot/2024-April/552043.html)
+ include/image.h | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-Since that series has been merged since early May, what is this series
-based on top of? It should be based on top of current (or close enough
-to not matter) -next. Also, has everything been passed through
-checkpatch.pl and the results looked at? Thanks.
+diff --git a/include/image.h b/include/image.h
+index dd4042d1bd9..dbf8d0e7ba9 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -1183,6 +1183,18 @@ int fit_image_get_data_size_unciphered(const void *fit, int noffset,
+ int fit_image_get_data_and_size(const void *fit, int noffset,
+ 				const void **data, size_t *size);
+ 
++/**
++ * fit_image_get_phase() - Get the phase from a FIT image
++ *
++ * @fit: FIT to read from
++ * @offset: offset node to read
++ * @phasep: Returns phase, if any
++ * Return: 0 if read OK and *phasep is value, -ENOENT if there was no phase
++ * property in the node, other -ve value on other error
++ */
++int fit_image_get_phase(const void *fit, int offset,
++			enum image_phase_t *phasep);
++
+ /**
+  * fit_get_data_node() - Get verified image data for an image
+  * @fit: Pointer to the FIT format image header
+-- 
+2.34.1
 
---=20
-Tom
-
---R54pBoCx/59MGJcf
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbQivkACgkQFHw5/5Y0
-tyzXzwv4nSjqOQZLYHvU3YYveFH2j1Nk6tfMG77JTPXvzc228PxT4tGbyb+4x19/
-tAdt8GR+jved/QAK6i7yi7FKdLNwZWV2ytNBHCzIo0asTKayICsWTXc8yLaxtufu
-peJTBY5QSc40My9xNn3VyNUTtNUoC1/qesjqTzV01FKCgP+YMs2oEfNQeEJnTrTf
-qlLDG7h/mMGHmoP3xprnwb8KqvGKnH3yKyLxfqABDDG+1YqtBApTYqITSOT+gFVL
-dk3IlfP9ZJhmLZYsx1e3lXiBvyVHzlhNFY8se5ZuBXTRVCkPknnLtiHdB0pxg2r8
-QfggGJH+lYFGiJwcRKgbJTHCrTQtcUC+qJtK6dalq5Nkk+BXTXgQn0EZ6+4Ny/Sv
-Y9MP6CrMrncRz3PEbyzCwrKSii6y5vlCjn/bxsq+OlMIidHUMINOeKxViGU9r99N
-DAlbdCJfqyUkQit2Fv2F2zfG0DISd8RnWUIOFoe21CCx3qf6MT/6iZZCIDnbeDBj
-a/VXf48=
-=3qPv
------END PGP SIGNATURE-----
-
---R54pBoCx/59MGJcf--
