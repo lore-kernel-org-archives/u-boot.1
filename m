@@ -4,78 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D62EC83F2A
-	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 14:14:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BF70C83F2C
+	for <u-boot@archiver.kernel.org>; Thu, 29 Aug 2024 14:19:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE10E888DD;
-	Thu, 29 Aug 2024 16:14:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 707B488AD7;
+	Thu, 29 Aug 2024 16:19:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HsMzwgcB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SN5xv3qi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE4C288B94; Thu, 29 Aug 2024 16:14:45 +0200 (CEST)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
+ id 8BF1988B23; Thu, 29 Aug 2024 16:19:23 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1872987F19
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 16:14:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E00E888DD
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 16:19:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-7cd967d8234so438652a12.2
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 07:14:43 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-429da8b5feaso8327675e9.2
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 07:19:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724940881; x=1725545681; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+bmGmUKq0QGRFjHq1UnJMuqBpOfffX11AC0Fr/BpbWo=;
- b=HsMzwgcBUkWWzrE2WtxHGUU1ugX5JEJo+OkqwbSbkEHWIg86cmiUwm3kMhNPc8/BLK
- mLxGAa5gmygnaPeeYmlJ0uKtPL4BKneBlbnKLcMaHGSZ1nmmmUYiADMXjxtkbC1Nq3ZF
- IgAATRYvaEkbaLOxc1c1Zcl4+EQv2vLEM8WW8=
+ d=linaro.org; s=google; t=1724941161; x=1725545961; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=WDYZpA18SeFFlRYaobNMaRatjCqDhsHNvMCjWINJVrI=;
+ b=SN5xv3qi9/bZc5qVhTOdHvOEsZIRxwhFeaTGoyt8lwVxDHqrgHAbqICxnF+HyrR6hR
+ pZdEF1j8lC/PhauaxO3YV50Whvs5WK1j5+un45mGmSoMoYq48ijeUb+5DhmjtA+IqnoD
+ wfXcLotSg6LdTOY6SZjJp///D69BKb2CTo1e/3fg+djaFLj4n6/yEW31CLXkAXn9x8w2
+ vJKHjUp5kK3+JU2an1dbRrKx8KR/wOMhIUvhgbH3NVVQV4CY9tzhfHNUOSKwMexowHIy
+ w/IzkzT3U3QSJZm416nJrh0bFUeEKpGOjRyVPRFW//6boFKCiVCmJCDlwAbJqmGN+Rce
+ hbQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724940881; x=1725545681;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+bmGmUKq0QGRFjHq1UnJMuqBpOfffX11AC0Fr/BpbWo=;
- b=USr1aymFxqYwXi8tRm4NcRKcIb3jpXiMG0xLyh8cfef3RT5VJcvZvnix8FRwsg2vpH
- IXvV8BgPlqptyLDzOqNI0ypDGm97Kum4IUorPv73T+Wi+tDzOvOEr+FxtSNK4H+UAmaK
- aqE8EscPzvPtfZ5AL3ccOGYSea75GUhzJWYfspHQu4rfvi209XeiEt6iBK/BvNIweXzK
- OwyHHspDk7c5Uz6ngPxEfWxjQFW9OqSA0LKQxvuHp6pDvTMWBlEwARQnjUTDTJdI9CgT
- PAK/rEPru55lvBuISo2CPCA9pqs3VZTNM5Vvyui9hRxaudpmRqbML4y4Pc4hsTQpCrbP
- WHrg==
+ d=1e100.net; s=20230601; t=1724941161; x=1725545961;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=WDYZpA18SeFFlRYaobNMaRatjCqDhsHNvMCjWINJVrI=;
+ b=LumUXHXuWi6VMt0TWjouac4bO3VuYHYL/K2yyKqonA7DU9VwyCDFcRASrd6XXIjSAU
+ luHdGNJHJ4rBzAA8qG0kMS/MpnA8aV1eqrdZTH1XYf5+b/qOGXVgGLni9Gre2CGrhCDs
+ POqCDtzKTW7gbj4X2blsdVkoQUL5ncjZpZ7mumSfKCFjkYH/heIn2UP1poznBhePWs7V
+ un3qy8544ThGhrBtYR0khW2fGS6WCguySkGXny7R5s73AOHPTlE5T8WYOQTMgsBJsOO1
+ z468jPWctl9MFCo9I4ThBbZRvtaD/IjzMS3kfCFYDy0W2hb03XVp5TWIbjKx3Asyq1UY
+ alSg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXCImnUiug+IZ477taA0j/+nYIxLAYf6+mQqQ3agFTbSeMLSOO4pafYn89fTlKTKfBg4Djt5Rg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxYaPCLp/pHxCe0rPrqTQy5f5XnXs5/7z1vx1DgT4kY11R3AFqp
- RwgnDB/2PNZS+sglsgD44SvYLTBHjFLTyLirOEMsjqtznw12nHR5JriI7w57IVyW+8cUImKS2mx
- 6QuibZd2MvSHVcuEQDJqpZYcwuig2i4PWdG5hZlKmiSTjjoI=
-X-Google-Smtp-Source: AGHT+IEtPSvVJ4WhwCKG2AyqF+yoOnXZ4D/sFD+BAYIDO99WpshBuOWXE9ChYuVRhMAcQEBQ1aXfrD7wuiVAYy9FGOY=
-X-Received: by 2002:a05:6a21:1304:b0:1c4:8bfd:4321 with SMTP id
- adf61e73a8af0-1cce10aef48mr2670142637.34.1724940881505; Thu, 29 Aug 2024
- 07:14:41 -0700 (PDT)
+ AJvYcCUu0TkR9Bm5/Fi9YcEg0RANUnSkBAcA2jcl3LBfktzcil70LqIrW7VrMBkSBmhXdLUquoTC06M=@lists.denx.de
+X-Gm-Message-State: AOJu0YzqJ9ZqtGlCkcMOG9m4qCsapi0BBosznFv732i+ow0I/T33Gb4X
+ gi1obSpG6o0mMA+wJx38hEU0fEZXL2wMiUJsdnpKwnxkypy8bhTi4VqBNrbTqus=
+X-Google-Smtp-Source: AGHT+IFM/K5/R9pzaNV4L8uS4r5ExD1keveMnY0t7U2FwNbL2q6tFCmOo200sjbK2ja3VnIFpIKgzg==
+X-Received: by 2002:a05:600c:4f07:b0:428:f0a:3f92 with SMTP id
+ 5b1f17b1804b1-42bb01c1d40mr32236395e9.21.1724941160218; 
+ Thu, 29 Aug 2024 07:19:20 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:12f5:c9c:a0e1:6915?
+ ([2a01:e0a:982:cbb0:12f5:c9c:a0e1:6915])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42bb6df1066sm18839965e9.18.2024.08.29.07.19.19
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 29 Aug 2024 07:19:19 -0700 (PDT)
+Message-ID: <4ab84c7a-c129-41e9-aa1e-6e802fdd6f87@linaro.org>
+Date: Thu, 29 Aug 2024 16:19:19 +0200
 MIME-Version: 1.0
-References: <20240801173637.1071068-1-sjg@chromium.org>
- <20240801173637.1071068-3-sjg@chromium.org>
- <CAC_iWj+6CqPCxN8jSNJSzGiprd+sAw25ooQRaAf=t=Sdio67=A@mail.gmail.com>
- <CAFLszThVpvHO8Jt2Mz1WB80=fDtYpzieo1eR4k2Jj=e37Gb87g@mail.gmail.com>
- <CAC_iWjJJFygaws2ciBDMT=JJ4yMzhQC41T_Tg1RKFvrxzRTTyw@mail.gmail.com>
- <CAFLszThsVcFwSe39geTeE=6bbJqK0bUT6kEYjULkOuNjO51e+Q@mail.gmail.com>
- <CAC_iWjKPTv6Yzb6cQD=eJtC7Wm3bTC+cyaCUSmDXaWUySByoYw@mail.gmail.com>
- <Zs7Ubog171uwz8jn@hades>
- <CAFLszTgNnmyKFC5XKPieFoqT1J6aerYkD=qOof3tZ_V25SrO-A@mail.gmail.com>
- <CAC_iWj+EO4L+Pu-QzWPDJL5=A1JNzDx13SKfvNZZcjkzVXn2Ow@mail.gmail.com>
-In-Reply-To: <CAC_iWj+EO4L+Pu-QzWPDJL5=A1JNzDx13SKfvNZZcjkzVXn2Ow@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 29 Aug 2024 08:14:30 -0600
-Message-ID: <CAFLszTi+QjPANqTREqO8NoXEh_Mqy8fraFS2Uq6qirKSGhcOxQ@mail.gmail.com>
-Subject: Re: [PATCH v2 2/3] efi: Convert device_path allocation to use malloc()
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+From: neil.armstrong@linaro.org
+Subject: Re: [PATCH v5 08/20] test: Introduce the concept of a role
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+References: <20240828220846.1205813-1-sjg@chromium.org>
+ <20240828220846.1205813-9-sjg@chromium.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20240828220846.1205813-9-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,66 +118,115 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi,
 
-On Thu, 29 Aug 2024 at 06:39, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> On Thu, 29 Aug 2024 at 15:17, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Ilias,
-> >
-> > On Wed, 28 Aug 2024 at 01:40, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > > [...]
-> > >
-> > > > > > > > > ---
-> > > > > > > > >
-> > > > > > > > > (no changes since v1)
-> > > > > > > >
-> > > > > > > > What about https://lore.kernel.org/u-boot/CAFLszTjLAKaYK_jLXJ7Z571L-QMtoiqE-oxHCRs186dZ2Qok5g@mail.gmail.com/
-> > > > > > > > ?
-> > > > > > >
-> > > > > > > Yes, I reordered the patches in this series.
-> > > > > >
-> > > > > > You don't need to reorder them. As Heinrich already pointed out some
-> > > > > > of these functions are used in EFI protocols. e.g
-> > > > > > duplicate_device_path() requires the memory to be allocated by EFI
-> > > > > > memory services, you can't just replace it with malloc.
-> > > > >
-> > > > > The pointers returned can be freed with EFI services. I don't see any
-> > > > > problem here. All the tests pass and all the spec rules are followed,
-> > > > > so far as I can tell.
-> > > >
-> > > > Where exactly does that happen in the current patch?
-> > > >
-> > > > efi_alloc() calls efi_allocate_pool() and when we need to free the
-> > > > device path we are calling efi_free_pool()
-> > > >
-> > >
-> > > Looking at it again, this wasn't very clear. The previous patch converts
-> > > efi_allocate_pool() to use malloc. So this patch is not needed at all
-> >
-> > That's right, but ultimately I'd like to drop efi_alloc() and the only
-> > other place it is used is once in lib/efi_loader/efi_bootmgr.c
->
-> Right, then the right thing to do here is to replace efi_alloc() with
-> efi_allocate_pool() which will be calling malloc in the end. That way
-> we are free to change the efi_allocate_pool implementation in the
-> future without affecting the functions described on the spec
+On 29/08/2024 00:08, Simon Glass wrote:
+> In Labgrid there is the concept of a 'role', which is similar to the
+> U-Boot board ID in U-Boot's pytest subsystem.
+> 
+> The role indicates both the target and information about the U-Boot
+> build to use. It can also provide any amount of other configuration.
+> The information is obtained using the 'labgrid-client query' operation.
+> 
+> Make use of this in tests, so that only the role is required in gitlab
+> and other situations. The board type and other things can be queried
+> as needed.
+> 
+> Use a new 'u-boot-test-getrole' script to obtain the requested
+> information.
+> 
+> With this it is possible to run lab tests in gitlab with just a single
+> 'ROLE' variable for each board.
 
-OK, that sounds good and it will make it clearer which things are
-internal memory allocations and which are presented to the app as
-things that it can free. The spec doesn't mention the pool, but I
-assume that is implicit.
+Can't this be in the hook script ? I mean allmost no CI system have a 1:1
+usage of board_type & board_identity, but we use those fields and transform
+them accordingly.
 
-Regards,
-Simon
+u-boot-test-getrole is labgrid only, all script receives board_type & board_identity,
+so why add some labgrind specific python here ?
+
+Neil
+
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+> Changes in v5:
+> - Add a few more comments
+> - Comment out the debugging, which might be useful later
+> 
+>   test/py/conftest.py | 38 ++++++++++++++++++++++++++++++++++----
+>   1 file changed, 34 insertions(+), 4 deletions(-)
+> 
+> diff --git a/test/py/conftest.py b/test/py/conftest.py
+> index 6547c6922c6..03dfd8ab562 100644
+> --- a/test/py/conftest.py
+> +++ b/test/py/conftest.py
+> @@ -23,6 +23,7 @@ from pathlib import Path
+>   import pytest
+>   import re
+>   from _pytest.runner import runtestprotocol
+> +import subprocess
+>   import sys
+>   
+>   # Globals: The HTML log file, and the connection to the U-Boot console.
+> @@ -79,6 +80,7 @@ def pytest_addoption(parser):
+>       parser.addoption('--gdbserver', default=None,
+>           help='Run sandbox under gdbserver. The argument is the channel '+
+>           'over which gdbserver should communicate, e.g. localhost:1234')
+> +    parser.addoption('--role', help='U-Boot board role (for Labgrid)')
+>       parser.addoption('--no-prompt-wait', default=False, action='store_true',
+>           help="Assume that U-Boot is ready and don't wait for a prompt")
+>   
+> @@ -130,12 +132,40 @@ def get_details(config):
+>               str: Build directory
+>               str: Source directory
+>       """
+> -    board_type = config.getoption('board_type')
+> -    board_identity = config.getoption('board_identity')
+> +    role = config.getoption('role')
+> +
+> +    # Get a few provided parameters
+>       build_dir = config.getoption('build_dir')
+> +    if role:
+> +        # When using a role, build_dir and build_dir_extra are normally not set,
+> +        # since they are picked up from Labgrid via the u-boot-test-getrole
+> +        # script
+> +        board_identity = role
+> +        cmd = ['u-boot-test-getrole', role, '--configure']
+> +        env = os.environ.copy()
+> +        if build_dir:
+> +            env['U_BOOT_BUILD_DIR'] = build_dir
+> +        proc = subprocess.run(cmd, capture_output=True, encoding='utf-8',
+> +                              env=env)
+> +        if proc.returncode:
+> +            raise ValueError(proc.stderr)
+> +        # For debugging
+> +        # print('conftest: lab:', proc.stdout)
+> +        vals = {}
+> +        for line in proc.stdout.splitlines():
+> +            item, value = line.split(' ', maxsplit=1)
+> +            k = item.split(':')[-1]
+> +            vals[k] = value
+> +        # For debugging
+> +        # print('conftest: lab info:', vals)
+> +        board_type, default_build_dir, source_dir = (vals['board'],
+> +            vals['build_dir'], vals['source_dir'])
+> +    else:
+> +        board_type = config.getoption('board_type')
+> +        board_identity = config.getoption('board_identity')
+>   
+> -    source_dir = os.path.dirname(os.path.dirname(TEST_PY_DIR))
+> -    default_build_dir = source_dir + '/build-' + board_type
+> +        source_dir = os.path.dirname(os.path.dirname(TEST_PY_DIR))
+> +        default_build_dir = source_dir + '/build-' + board_type
+>       if not build_dir:
+>           build_dir = default_build_dir
+>   
+
