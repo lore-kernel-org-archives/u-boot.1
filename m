@@ -4,75 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA58BCA0EF7
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 09:12:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D22ECA0EF9
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 09:28:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDA2588DA9;
-	Fri, 30 Aug 2024 11:10:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 10E1988B27;
+	Fri, 30 Aug 2024 11:28:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="KBCzyxoi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Re0brEn+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A1A7888D9A; Fri, 30 Aug 2024 11:10:20 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5D84A88B12; Fri, 30 Aug 2024 11:28:02 +0200 (CEST)
+Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
+ [IPv6:2607:f8b0:4864:20::531])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99C4B88D08
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 11:10:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 16D9888B37
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 11:28:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=D.Schultz@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1725009018; x=1727601018;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Iy88FAp4yyUnPgpBHzLxea0RFBOYXAHeNTixwYjsfaE=;
- b=KBCzyxoierya3Br87nQ2TkVf2GHewwyxlftCEGRh5yWKjK+PxyS4pTt1/UEKxyJv
- Qe/oSrqFQULPYXTZNuTmalsAZrnNcXeY8nMCWxwaX8H1xoRzpn/S+QzShWH/Q6Yi
- /7wPPcY2Nl4Oh7rmpHEgmkTJi4oAYL83+pz8mbNqxRk=;
-X-AuditID: ac14000a-03251700000021bc-49-66d18c7a9514
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 37.52.08636.A7C81D66;
- Fri, 30 Aug 2024 11:10:18 +0200 (CEST)
-Received: from ls-radium.phytec (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Fri, 30 Aug
- 2024 11:10:16 +0200
-From: Daniel Schultz <d.schultz@phytec.de>
-To: <w.egorov@phytec.de>, <trini@konsulko.com>, <joe.hershberger@ni.com>,
- <u-boot@lists.denx.de>
-CC: <upstream@lists.phytec.de>, Daniel Schultz <d.schultz@phytec.de>
-Subject: [PATCH 13/13] configs: phycore_am62x_*_defconfig: Set PHYTEC as
- Manufacturer
-Date: Fri, 30 Aug 2024 02:09:40 -0700
-Message-ID: <20240830090940.2592157-14-d.schultz@phytec.de>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240830090940.2592157-1-d.schultz@phytec.de>
-References: <20240830090940.2592157-1-d.schultz@phytec.de>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-7c6b4222fe3so1041017a12.3
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 02:27:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1725010078; x=1725614878; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=7RHLax0PHYMXb9DpoxxMijGt4aG1OSt9hS4ZIspB3jA=;
+ b=Re0brEn+XAZhAlUD4lpYvctX8v09ykKDakFac3vrOJuH7RIBxjFNt1g3h4gl3UPXIW
+ Jan/WH1SUJZzJ8ICoHMKKR7mMOEZZWhu26UT9pL69r7vgdFP6SHapWjfTqFkBuz1T5sn
+ nIRaavDO9yVnsy19Wsw678OilpsQfofdICpQsDbAhc7afj49DQAw5FDBeFTXExXccOo6
+ cq8WkaAl/wYAAVxTTbRelqxFgdpmBFg4dPeLamDVJfYKq116DsYYeS5DFqduEOoVvuoK
+ fFB5cECtnNa0OT+l8mAV7+cQxW8YdbUAnfxP7jE53DwTxoTDhsLxImzKIF7LeKFl2BtT
+ uAmg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725010078; x=1725614878;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7RHLax0PHYMXb9DpoxxMijGt4aG1OSt9hS4ZIspB3jA=;
+ b=Z7v3R98ytxwCv9pVDRTtteUWKWyCCn1ZXPOUBmMDxkshkHaQZzqEGOa0YdAUyGMpqH
+ 3vgX9tYMTc9teh1Llo1DM1fu4WuCRsCBe2TQWh2H0oh67UzlUAQpS6VR6llkivfvCJSf
+ bByewWka5Ei4KEehe3JBWFOfhfCZLgyI9ew0RQMM60LEXGAR6M2wLuULYG/db8FRQIVg
+ /PfvOZoFqXf44gLgT2huY12zCk3fdNwUHy9FWLDsRZ/qirzAK7SYpEOoMtSSE56Jb05L
+ oWe0aWdxA9khaRuy6HlxAU63b2/cIhH6p863Zzgpqh13Zp440KattsPJ0kmku5K9Kx2Q
+ gQdw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWJVU8LY78hL3ist9KnlmQfw1MNxsIbpOLYyGObsg/BJCXqvGVpuOAG5BofHLFzP8ZJm8lyoV0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwWMU4zmvl3qwwn+QUDdY1S6Vku1MxNK0jXUIpfNJ5VIy19a87A
+ dcYnDP9crVByaK+d/TE7MV2JDwOlOv1roovXkl1GZOzmrJMDIGVsno7Mr9LuQUNDMySiYSAUGCU
+ /mYLe+A+PYv9zAeh3yDumXWzaIAUCvIBwxmlAag==
+X-Google-Smtp-Source: AGHT+IGSRqudqjfBqHno2Ogy115e0dCf2mDZyaKRAUte1VFcT4MbXQfn/xkKlynk3XkSaiSPEfBW3+EbBoezPxhCtoU=
+X-Received: by 2002:a05:6a21:9688:b0:1c4:d438:7dd2 with SMTP id
+ adf61e73a8af0-1cce1034a3emr5593959637.32.1725010078286; Fri, 30 Aug 2024
+ 02:27:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrPLMWRmVeSWpSXmKPExsWyRpKBR7eq52KawcxeJYtPOx+zWkydtJnd
- 4u3eTnaL7nfqDiwerw6sYvc4e2cHo0d/dwurx/Uz25kCWKK4bFJSczLLUov07RK4Mq417mAu
- +MxVMfP3KqYGxhucXYycHBICJhKbDz9g7mLk4hASWMIkMethIwuEc59Roq/1IQtIFZuAlsSd
- LXOZQWwRgSSJXU+WsYHYzAIuEotvfGAFsYUFQiW2z5kLFmcRUJVYcGEyI4jNK2AtcfXXYxaI
- bfISMy99ZwexOYHim78+ALOFBKwkjk87xwZRLyhxcuYTFoj58hLNW2czQ9gSEgdfvGCGqFeQ
- mL0NYj7IzGnnXjND2KESRzatZprAKDQLyahZSEbNQjJqASPzKkah3Mzk7NSizGy9gozKktRk
- vZTUTYygQBdh4NrB2DfH4xAjEwfjIUYJDmYlEd4Tx8+mCfGmJFZWpRblxxeV5qQWH2KU5mBR
- Eudd3RGcKiSQnliSmp2aWpBaBJNl4uCUamBcm7iQd7HEZpP3US6FVQLRL+/tCOwMimOcW77z
- hIxViXiRyM+Lj+Y9XLeqd87vjZtWWe3+Pv2g0+Tz/+vP5sqf2LxY2/LKz6zI72HTuZxmpO2w
- OHpW6hfHz+bQ2fe/qP9zqZ1y/oTKzuqvLt93CFcy3HP5Nm1hnehvhYa3Z3wXJP4y+eH+9u3U
- VUosxRmJhlrMRcWJAFWW5f9iAgAA
+References: <cover.1724419624.git.jerome.forissier@linaro.org>
+ <1629f6845b448edcdead09a9350f1ae2ae7a4bb6.1724419624.git.jerome.forissier@linaro.org>
+ <CAFLszThJzVvHSd+dEjTSff2DUPPaQTGWeyCmHmP56Vtjr0WF-g@mail.gmail.com>
+ <d2465352-66ea-400c-9216-a92ce5351475@linaro.org>
+ <CAFLszThp9Ya-doN39L-uv6C_oZsw454PUiUfOZmYa7wHjoz+oA@mail.gmail.com>
+In-Reply-To: <CAFLszThp9Ya-doN39L-uv6C_oZsw454PUiUfOZmYa7wHjoz+oA@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 30 Aug 2024 12:27:21 +0300
+Message-ID: <CAC_iWjJ1aACnb2u+6+k30ATr6UAwkBQ++2syXy6xR5sSvzq4rQ@mail.gmail.com>
+Subject: Re: [PATCH v9 35/37] [TESTING] Kconfig: enable NET_LWIP by default
+ except for SANDBOX
+To: Simon Glass <sjg@chromium.org>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>, 
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Anton Antonov <Anton.Antonov@arm.com>, Tom Rini <trini@konsulko.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Jonas Karlman <jonas@kwiboo.se>, Greg Malysa <greg.malysa@timesys.com>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Shengyu Qu <wiagn233@outlook.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,40 +99,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit 371b379edbf3 ("configs: Make USB_GADGET_MANUFACTURER
-consistent over all PHYTEC boards") made the USB_GADGET_MANUFACTURER
-value consistent over all PHYTEC boards.
+Hi Simon,
 
-Update the phyCORE-AM62x defconfigs to make this config consistent
-as well.
+On Fri, 30 Aug 2024 at 03:59, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Jerome,
+>
+> On Thu, 29 Aug 2024 at 10:21, Jerome Forissier
+> <jerome.forissier@linaro.org> wrote:
+> >
+> >
+> >
+> > On 8/29/24 16:05, Simon Glass wrote:
+> > > Hi Jerome,
+> > >
+> > > On Fri, 23 Aug 2024 at 07:50, Jerome Forissier
+> > > <jerome.forissier@linaro.org> wrote:
+> > >>
+> > >> Enable NET_LWIP by default for testing purposes. SANDBOX doesn't support
+> > >> NET_LWIP so default to NET in this case.
+> > >
+> > > Sandbox needs to support NET_LWIP.
+> >
+> > I agree in principle, but AFAICT it is not a trivial task. Does it have to
+> > be done in this series or can it be dealt with later?
+>
+> Does it build OK with sandbox? We use it for almost all of our feature
+> development and testing, so I cannot imagine bringing this in if it
+> doesn't work. How did you develop this feature?
 
-Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
----
- configs/phycore_am62x_a53_defconfig       | 2 +-
- configs/phycore_am62x_r5_usbdfu_defconfig | 1 +
- 2 files changed, 2 insertions(+), 1 deletion(-)
+sandbox is deeply rooted into the old network stack. It fakes ACK
+responses, handles the ping request/replies with the sandbox ethernet
+driver etc. I was looking on adding LWIP support for it, but it's not
+trivial and I don't want us to add another hacky 'glue layer'. Since
+LWIP is a big feature on its own -- and is working on real hardware
+and QEMU, we discussed adding it, so people can test and contribute
+fixes while we fix sandbox.
 
-diff --git a/configs/phycore_am62x_a53_defconfig b/configs/phycore_am62x_a53_defconfig
-index 246b8743da0..5a1aa52c1ba 100644
---- a/configs/phycore_am62x_a53_defconfig
-+++ b/configs/phycore_am62x_a53_defconfig
-@@ -151,7 +151,7 @@ CONFIG_SPL_USB_DWC3_AM62=y
- CONFIG_USB_DWC3_AM62=y
- CONFIG_USB_GADGET=y
- CONFIG_SPL_USB_GADGET=y
--CONFIG_USB_GADGET_MANUFACTURER="Phytec"
-+CONFIG_USB_GADGET_MANUFACTURER="PHYTEC"
- CONFIG_USB_GADGET_VENDOR_NUM=0x0451
- CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
- CONFIG_USB_GADGET_DOWNLOAD=y
-diff --git a/configs/phycore_am62x_r5_usbdfu_defconfig b/configs/phycore_am62x_r5_usbdfu_defconfig
-index 237f5d344ce..1c05950dddf 100644
---- a/configs/phycore_am62x_r5_usbdfu_defconfig
-+++ b/configs/phycore_am62x_r5_usbdfu_defconfig
-@@ -1,2 +1,3 @@
- #include <configs/phycore_am62x_r5_defconfig>
- #include <configs/am62x_r5_usbdfu.config>
-+CONFIG_USB_GADGET_MANUFACTURER="PHYTEC"
--- 
-2.25.1
+>
+> >
+> > I would need to look into this more closely to give details, but if I
+> > remember correctly the sandbox tests expect a precise sequence of network
+> > packets. For example when doing a TFTP tests, it expects an ARP packet to
+> > go out first, but when lwIP is used the ARP might not go out because the IP
+> > may already be in the cache. So the sandbox is definitely not a black box
+> > in that respect which makes things a bit more difficult.
+>
+> The key thing is to have a way to reset the state. So long as you have
+> that, you should be able to put networking back to the initial state
+> before running a test.
 
+Thanks
+/Ilias
+>
+> Regards,
+> Simon
