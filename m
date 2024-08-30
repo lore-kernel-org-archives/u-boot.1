@@ -4,79 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38F48CA0ECC
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 00:59:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C47C6CA0ECD
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 00:59:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD32888D17;
-	Fri, 30 Aug 2024 02:59:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2556788D28;
+	Fri, 30 Aug 2024 02:59:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IkqLQB8L";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cqNoKteR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A02C88D1F; Fri, 30 Aug 2024 02:59:07 +0200 (CEST)
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
- [IPv6:2607:f8b0:4864:20::82c])
+ id C8D9788D06; Fri, 30 Aug 2024 02:59:11 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF44288D06
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 02:59:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD72688D28
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 02:59:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x82c.google.com with SMTP id
- d75a77b69052e-44febbc323fso6756811cf.1
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 17:59:04 -0700 (PDT)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6bf90d52e79so7569986d6.3
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 17:59:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724979543; x=1725584343; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4iELr4gaUmCtw1AkJ1B0Q53p1vCF1aIcu05n7dTHAVY=;
- b=IkqLQB8LkUEzeS0Mzq5OLB4rnzOloCUOZv+uUv70gwvkHybz2JHNCeVjmKRs08DsFd
- 3z4bXj66QhNKR9PgDKn/llz77GIrnz78seglOo2Cup2Xqfe6GzdFDi+uHSCYt3uDnNy9
- ER4+bFtn7hCylcqQ+lwLaTlOdQeR9hFYKqsOc=
+ d=chromium.org; s=google; t=1724979548; x=1725584348; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=uBfdnTrOd8p0+gBKK7k3054nwxTLCTvOv0qWpUJ7+AI=;
+ b=cqNoKteRi7WviiLeZw6tiSFvPfnG7E36YLAmRlcduDc3oXoyksxiU1hhXnfnPI0F+0
+ 4qT+SXeSvS9HYkywg0w2nsNwO02W99WQeQYn7cc0xT/A0CbCNyjjftvPeUzxU4FBXxxP
+ oeoe8PlpqZfs++7+I6R1JZPhz/oe6D0/BaUTQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724979543; x=1725584343;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4iELr4gaUmCtw1AkJ1B0Q53p1vCF1aIcu05n7dTHAVY=;
- b=b0BmbwYybtBceiJtq/WdHPRSXXJrQL5sWpRaGc30emsJvWrm5RouGAnpihvuGqr9rn
- abwym8kQ/ZzHItvbJWSF2vWGEOwHCg/fjzVRsiH64Md3oGe+Zmb9IxhMiDF5qiTrx3j2
- E080NnlcMESMQpI6aOkoVHFyE+vSR9o39Sa2WzIuSc4D+E0nCDN1gz/dvlbO62tWSJQK
- 616QxygyEtGbruwmbh3A4ga+oT5rYDk7UkV+nqFmzX5BHfK80y8KFU8ERqI83aNGHKx1
- Qx8klWB5oOChmMq7yzZAak2ULCCoCceqlMGQKkJtNpOvXUCJPOOnhC/I/VsjpbjgnaPr
- MgKQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU77jiwEfrPDo4xEI8JLYwwR/8AXPhdPge12G6F+Lp/tfF02PaOLsfur3+b5tRYE7KxmUhzfKI=@lists.denx.de
-X-Gm-Message-State: AOJu0YzMsVYxdfcgV0995ScWxiCYhgyjhaFMGjOpRzyRGewspwIC3uaw
- tOE2SZNJx7OYXxoZOH7H9K+W5wjkLMD97Q6n+3RXl+HByrwXVLtHAVNtWmqZEO10h0SQdX3QB2j
- iWJGH6ZilTAIaPyRGrBvh/Tou0qdCm33TDTg7
-X-Google-Smtp-Source: AGHT+IHZIt7ZTn/JnciWY6FK9HMDSRPVcfGecqgxm20kwhRNJYej0t9BRD0lncQHNapP3tgD4yBT1SIPHlFnda1/nks=
-X-Received: by 2002:a05:6214:5c02:b0:6c3:3c6a:a907 with SMTP id
- 6a1803df08f44-6c33e69c649mr47556786d6.44.1724979543575; Thu, 29 Aug 2024
- 17:59:03 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1724979548; x=1725584348;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uBfdnTrOd8p0+gBKK7k3054nwxTLCTvOv0qWpUJ7+AI=;
+ b=NuKoonEWpxU0H+va2Eamz1ngWSB+IM5gnWq3O6SRXFVOrK+hzEOO88sogdMi7NW70u
+ 9IAsht4LVvj7jIiPcAeYOiSibTtAzealDzhylvH9HMdAyuVgLHL0HJGVGpkCY1F7hNJV
+ dILlApWU5ce3vnB7tZSj2hjN/qojZLjgxrgLpTwfyqJvpdBO+AO3nc4emDCG1cs4dkP6
+ sXoSp5PM+N/FR5RsE3yWEfn6Nj62jIBCtKfh2od0Ux87uUJofcg0pnFG8igcM+MovOYF
+ dD/wDP3WTbo0tnU5GNMQ1TtE3yWWD3RZHd5OWUUTZbtG4l5LwNMFszmSghNcjJsXqiev
+ 7Zng==
+X-Gm-Message-State: AOJu0Yw50EpE29/zWOe9LCt+It306R2oYYUU1ckvWsSrzivj8fwnEMk+
+ lMb+dZAx4VK2YxqNvgSXTVr0vJGRelBpSn+6h+GUqq0CU0ZEds2U1xMpo7OHrXAv6QE4eaAnQjZ
+ b3YxAR30fspIdWGxRrr7+iHei+AlNr4JYaKuO
+X-Google-Smtp-Source: AGHT+IH6whnrTpVN9JGOb9dTKE+OpVlO40WLBUL5tt8FyVhdluhOrNPbbNzjI2Z9Di8b2EqNgc4luMcmk3r1JWuhoPE=
+X-Received: by 2002:a05:6214:5bc9:b0:6bf:6127:98a7 with SMTP id
+ 6a1803df08f44-6c33e6a44c0mr44769506d6.56.1724979548528; Thu, 29 Aug 2024
+ 17:59:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240825122617.3708982-1-dario.binacchi@amarulasolutions.com>
- <20240825122617.3708982-2-dario.binacchi@amarulasolutions.com>
- <CAFLszTgN=GWbrJAmtBrb95i2ovAhfE1BPco5p3whnL-oCAhbKw@mail.gmail.com>
- <CABGWkvpfiduptB9H_5zK3SwKwXjuQN1u1YPGukypviDstuZoEg@mail.gmail.com>
- <CAFLszTg47_=TnQ6qy2UJj0n89B8TWrw0tH4RVk+GQKFS_+Sjmg@mail.gmail.com>
- <20240829150329.GB2479150@bill-the-cat>
-In-Reply-To: <20240829150329.GB2479150@bill-the-cat>
+References: <cover.1724846454.git.jerome.forissier@linaro.org>
+ <679e20bfd9ac3de6560e202f82452563b01fca7a.1724846454.git.jerome.forissier@linaro.org>
+ <CAFLszTh87_wd-+XLe1EeXziMiu9p_rT-qfAgHg4PxGwhsAKUtQ@mail.gmail.com>
+ <1c7c2e70-aa24-46b3-ac3b-47c6dc9fde3c@linaro.org>
+In-Reply-To: <1c7c2e70-aa24-46b3-ac3b-47c6dc9fde3c@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 29 Aug 2024 18:58:52 -0600
-Message-ID: <CAFLszTiE4QApoJP3hfkL-HZbxZNLC0T2z2BaGrRDVedtB=f-LQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] cmd: booti: adjust the print format
-To: Tom Rini <trini@konsulko.com>
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de,
- linux-amarula@amarulasolutions.com, Eddie James <eajames@linux.ibm.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 29 Aug 2024 18:58:57 -0600
+Message-ID: <CAFLszTgWn0NhdkdKsmwwGk2fBbHuN1sJM6Kfc3vE2M55nw-EVg@mail.gmail.com>
+Subject: Re: [PATCH 05/13] net: fm: call dtsec_init_phy() only when it is
+ defined
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Peter Robinson <pbrobinson@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,84 +87,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Jerome,
 
-On Thu, 29 Aug 2024 at 09:03, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 29 Aug 2024 at 10:40, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
 >
-> On Thu, Aug 29, 2024 at 09:00:30AM -0600, Simon Glass wrote:
-> > Hi Dario,
-> >
-> > On Thu, 29 Aug 2024 at 08:25, Dario Binacchi
-> > <dario.binacchi@amarulasolutions.com> wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > > On Thu, Aug 29, 2024 at 4:05=E2=80=AFPM Simon Glass <sjg@chromium.org=
-> wrote:
-> > > >
-> > > > Hi Dario,
-> > > >
-> > > > On Sun, 25 Aug 2024 at 06:26, Dario Binacchi
-> > > > <dario.binacchi@amarulasolutions.com> wrote:
-> > > > >
-> > > > > All three addresses printed are in hexadecimal format, but only t=
-he
-> > > > > first two have the "0x" prefix. The patch aligns the format of th=
-e
-> > > > > "end" address with the other two by adding the "0x" prefix.
-> > > > >
-> > > > > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.co=
-m>
-> > > > >
-> > > > > ---
-> > > > >
-> > > > >  cmd/booti.c | 2 +-
-> > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > >
-> > > > > diff --git a/cmd/booti.c b/cmd/booti.c
-> > > > > index 62b19e834366..ea811244a0a9 100644
-> > > > > --- a/cmd/booti.c
-> > > > > +++ b/cmd/booti.c
-> > > > > @@ -78,7 +78,7 @@ static int booti_start(struct bootm_info *bmi)
-> > > > >
-> > > > >         /* Handle BOOTM_STATE_LOADOS */
-> > > > >         if (relocated_addr !=3D ld) {
-> > > > > -               printf("Moving Image from 0x%lx to 0x%lx, end=3D%=
-lx\n", ld,
-> > > > > +               printf("Moving Image from 0x%lx to 0x%lx, end=3D0=
-x%lx\n", ld,
-> > > > >                        relocated_addr, relocated_addr + image_siz=
-e);
-> > > > >                 memmove((void *)relocated_addr, (void *)ld, image=
-_size);
-> > > > >         }
-> > > > > --
-> > > > > 2.43.0
-> > > > >
-> > > >
-> > > > I really don't like this...numbers are hex in U-Boot and this just
-> > > > adds confusion.
-> > >
-> > > Sorry, but I'm quite confused.
-> > > Doesn't printing 3 numbers in hexadecimal format with different
-> > > formatting (two with `0x` and
-> > >  one without) create more confusion?
-> > > At least we should ensure formatting consistency.
-> > > Also, it seems to me that this patch:
-> > > https://patchwork.ozlabs.org/project/uboot/patch/20240825122617.37089=
-82-1-dario.binacchi@amarulasolutions.com/
-> > > has been considered correct.
-> > >
-> > > Thanks and regards,
-> >
-> > IMO we should avoid adding 0x to things...particularly for addresses.
-> > Better to remove it when it has crept in.
 >
-> That we don't prefix with "0x" like humans generally expect is why
-> people have been confused why partition 10 is in fact not 10-in-decimal
-> but 0x10.
+>
+> On 8/29/24 16:04, Simon Glass wrote:
+> > Hi Jerome,
+> >
+> > On Wed, 28 Aug 2024 at 06:11, Jerome Forissier
+> > <jerome.forissier@linaro.org> wrote:
+> >>
+> >> dtsec_init_phy() is defined only with MII so add the proper conditional
+> >> in the caller code.
+> >>
+> >> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> >> ---
+> >>  drivers/net/fm/eth.c | 2 ++
+> >>  1 file changed, 2 insertions(+)
+> >>
+> >> diff --git a/drivers/net/fm/eth.c b/drivers/net/fm/eth.c
+> >> index 19f3f0fef0..e4ec769693 100644
+> >> --- a/drivers/net/fm/eth.c
+> >> +++ b/drivers/net/fm/eth.c
+> >> @@ -701,8 +701,10 @@ static int init_phy(struct fm_eth *fm_eth)
+> >>                 supported |= SUPPORTED_2500baseX_Full;
+> >>  #endif
+> >>
+> >> +#if defined(CONFIG_MII) || defined(CONFIG_CMD_MII) && !defined(BITBANGMII)
+> >>         if (fm_eth->type == FM_ETH_1G_E)
+> >>                 dtsec_init_phy(fm_eth);
+> >> +#endif
+> >
+> > We really want to avoid #ifdefs in the code as they create different
+> > build paths. Can you use if (IS_ENABLED) ?
+>
+> Sure.
+>
+> > Also BITBANGMII seems liike
+> > it needs a CONFIG_ prefix.
+>
+> I agree. I have copied the line verbatim from line 29 because the condition
+> needs to be the same. And I suspect there is another issue with the operator
+> precedence. Do we want "MII || (CMD_MII && !BITBANGMII)" or
+> do we rather want "(MII || CMD_MII) && !BITBANGMII"? I guess the latter.
+>
+> So how about:
+>
+> diff --git a/drivers/net/fm/eth.c b/drivers/net/fm/eth.c
+> index 19f3f0fef0..22025b6a27 100644
+> --- a/drivers/net/fm/eth.c
+> +++ b/drivers/net/fm/eth.c
+> @@ -26,7 +26,8 @@
+>
+>  #include "fm.h"
+>
+> -#if defined(CONFIG_MII) || defined(CONFIG_CMD_MII) && !defined(BITBANGMII)
+> +#if ((defined(CONFIG_MII) || defined(CONFIG_CMD_MII)) && \
+> +     !defined(CONFIG_BITBANGMII))
+>
+>  #define TBIANA_SETTINGS (TBIANA_ASYMMETRIC_PAUSE | TBIANA_SYMMETRIC_PAUSE | \
+>                          TBIANA_FULL_DUPLEX)
+> @@ -701,8 +702,11 @@ static int init_phy(struct fm_eth *fm_eth)
+>                 supported |= SUPPORTED_2500baseX_Full;
+>  #endif
+>
+> -       if (fm_eth->type == FM_ETH_1G_E)
+> -               dtsec_init_phy(fm_eth);
+> +       if ((IS_ENABLED(CONFIG_MII) || IS_ENABLED(CONFIG_CMD_MII)) &&
+> +           !IS_ENABLED(CONFIG_BITBANGMII)) {
+> +               if (fm_eth->type == FM_ETH_1G_E)
+> +                       dtsec_init_phy(fm_eth);
+> +       }
+>
 
-Yes, that's the one example which was in my head when reviewing this patch.
+That's good
+
+>  #ifdef CONFIG_PHYLIB
+>  #ifdef CONFIG_DM_MDIO
+>
+>
+> ???
+
+You don't have to fix every #ifdef in every file you touch...it's just
+that if you are already touching code, you might as well bring it up
+to newer standards.
 
 Regards,
 Simon
