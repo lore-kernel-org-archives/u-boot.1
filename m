@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00885CA0FE1
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 11:58:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79A8ECA0FE4
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 11:59:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A94B88AB2;
-	Fri, 30 Aug 2024 13:58:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D14D288B55;
+	Fri, 30 Aug 2024 13:59:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bOIrkLXB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iq9DVPiE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A94CE88B94; Fri, 30 Aug 2024 13:58:38 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 1B94988B9E; Fri, 30 Aug 2024 13:59:22 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2C7D88A5B
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 13:58:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2907388A5B
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 13:59:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5bf0261f162so1798801a12.0
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 04:58:36 -0700 (PDT)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5bf006f37daso2911395a12.1
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 04:59:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725019116; x=1725623916; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1725019159; x=1725623959; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cMsQxmx0RVhHG7lbtpkSdrstlJ4z94gkbdrPC5hAM6U=;
- b=bOIrkLXBA1MNNUCEtf5/7Z387RDa2HywK4XgkuAsX8K9SRzo338DRPC7UxtWd9Aewo
- OAGSNtBDNRGHH11Nxd3AijlSMXdTvrNMDaTYEDgm5MWs5w6OCy3SSyBkFUUAhARApwjA
- X3BkZWibOQX2eWZ5t9qiaCuB+QrM4nqpPl5CTBDYrsmErB3PBDpHRcaqY58NBKiveT8W
- z9Q2I9N7cVMcobajQmOtAOxvPK4Dfh7TIDGv/KPIi19GWt6mMydNNMq9FRcFq8OipFO1
- VrKjnDOiAoq1+B3mJmKWC0JDH1ponMpSAe6upm7toM9U7ovcHGu9mXFp6PQwfU/zD5i/
- PtgA==
+ bh=gMHBYITiSxSrzi+sRdT8SspiSxI5lj/n+61dVmAbjcc=;
+ b=iq9DVPiEofOyzU73IlwX4W8O/3PefH1rvPaVlfwjEXe5Qij8HD2m2HuOtJEBoVZLQp
+ f4igAcClsElttKnIKRR2L6gsOq9qerrbpne5oBRvmPcz3yis34tejbGGh/BmJAnO3+nP
+ kzUePSjynWGxr/ehWe0Yg6j/yfoJ4HU7Ek5L5MO7LaWhufeQO5UrZq9fF1TYFjdo4g5X
+ Eg27FNGwLsxgKM36EOYIJtaz3s+IjzR82Y+dVwV5c4vi4BXby3NlmYPYNmUoubfy4qt9
+ SeqLioPB94UdF+hicDNmAnwWa9kY3OMNaKmJdyDYRF2tdTJP9JURjcehCS9hh/inDYjw
+ hPsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725019116; x=1725623916;
+ d=1e100.net; s=20230601; t=1725019159; x=1725623959;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=cMsQxmx0RVhHG7lbtpkSdrstlJ4z94gkbdrPC5hAM6U=;
- b=OX0DVriEvcK4ojUxSIoN3c20sppwWComOmb6pisJ9vq864qhJKFJhwVHYWru9mUQfN
- +9juEP9UCGglVJ8aotDczH+xa8nFRGkxXyvktmgDuepKxM6tgR2zsbjBbXQwn4InxAvX
- Zcw31n1pqHTt+OD2cujZOb3YseO3jMOQMu99Gq0dVBFWuL/oaZT+P4eqjXySHI/cIpJQ
- ze09TCQ329Np16CXMzkURUkJeKlzkD7dbHrpK1YowUcU7kGQ2CyXDwS6JWGUF3CjkWDX
- wdFl8xZsSLAQfmogD4Ef0PwXtGYtTkyGEq7cdwIGBibfq28/FkRQkr5mKUd+nzNAR/Gh
- 97+A==
-X-Gm-Message-State: AOJu0Yw4YNuZaP68QjPzwrOE2sPQ9wo0hD2127Wrrmn5MCiwwpNCmiJl
- 0G4jAca+x3HWA2vcQgC0wtHcSU2oOwsDiW0ed5XL9T+zI7wj+hIN3vcaSw6MvwjSQbgDBzW4X24
- 2P83mddDLW6/6SpAsV25JTQXYE7i8JAOM
-X-Google-Smtp-Source: AGHT+IGjfGTMA808VtTmkjek6O4cNacAnwJ5EIEwNqhiI8OsIXe57Pp4EkCL3Jvj7y8hjOn0VltdWr+O/FbWDJoH0vs=
-X-Received: by 2002:a05:6402:5288:b0:5c0:b639:ddf3 with SMTP id
- 4fb4d7f45d1cf-5c21ed52c23mr4812565a12.19.1725019115545; Fri, 30 Aug 2024
- 04:58:35 -0700 (PDT)
+ bh=gMHBYITiSxSrzi+sRdT8SspiSxI5lj/n+61dVmAbjcc=;
+ b=phPnG8vf0UNMi9TqLSVdyDKxZBr/jhDYTn4BIAR+DqMPAXgr8woW5wPUOIMDqScMV3
+ KpSnomYp/QhpX4vZ3I9yY/NEOvNJ4hGyLC35m9VC9wArsfJyqyGxyK4UMu4T9EJnh0BK
+ FBQsCceyyVBnRLmh85P1LGUSqvyCvjaVh9zsD7cMpkDeznunCgJPZ0YJU0OQcOGRjNKk
+ 1AaoPYZkTlpLF2tFrJAZ5Frrb6qnLVhsFNuBArwS1aRSShAg27V3v0HC7NBl9UosPO/x
+ GJ8zm4ouA/GKQexFkMmiB3SEBwlFhVf8Rd6K7gMEAE+XUBIIH/ts1997a8QnDtRGj3TK
+ HbQA==
+X-Gm-Message-State: AOJu0YzhRa6B7cJfTAoVroTMj6b90T9vZsSbfeouiwCrzPb2ZTmeDAhf
+ 17WXsyySI7YnGiTGk+M28nx1OQJ7SlCDwZDecMGKMLHlZfrLnF87D6Js9og7FdTQEyJ5O34Z39N
+ PvoQSU+nC5tK9rXVm5DoSKXfVMrS4oxxF
+X-Google-Smtp-Source: AGHT+IHbQIN6HYjnR2WuBXUqZD9KERzjKw1x7MOlW9nLWkEg40rlhxuzEtrdt0ol9879iZ/qDm/wiXLwVk3An3LjZnA=
+X-Received: by 2002:a05:6402:5290:b0:5bf:1974:2ba5 with SMTP id
+ 4fb4d7f45d1cf-5c2201d25ecmr5768444a12.19.1725019159029; Fri, 30 Aug 2024
+ 04:59:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1725012294.git.jerome.forissier@linaro.org>
- <655de02f937e3ea3a8f5306ef510d817bee8065b.1725012294.git.jerome.forissier@linaro.org>
-In-Reply-To: <655de02f937e3ea3a8f5306ef510d817bee8065b.1725012294.git.jerome.forissier@linaro.org>
+ <7d3aba410bc30a42540d0a18d668bf1895337b2c.1725012294.git.jerome.forissier@linaro.org>
+In-Reply-To: <7d3aba410bc30a42540d0a18d668bf1895337b2c.1725012294.git.jerome.forissier@linaro.org>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 30 Aug 2024 12:58:24 +0100
-Message-ID: <CALeDE9MVBH4AJUnc-KvXJeXfDq64F0E39JJ9UpjFC4gCLGGfFQ@mail.gmail.com>
-Subject: Re: [PATCH v2 02/16] buildman/toolchain.py: set CROSS_COMPILE only if
- self.cross is set
+Date: Fri, 30 Aug 2024 12:59:07 +0100
+Message-ID: <CALeDE9NB-3HjiKUCmU1ZnpR46KwS7rC7GWLHFyQ6TXHTh-ucVQ@mail.gmail.com>
+Subject: Re: [PATCH v2 06/16] net: fm: call dtsec_init_phy() only when it is
+ defined
 To: Jerome Forissier <jerome.forissier@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,54 +92,43 @@ X-Virus-Status: Clean
 On Fri, 30 Aug 2024 at 11:17, Jerome Forissier
 <jerome.forissier@linaro.org> wrote:
 >
-> In MakeEnvironment(), CROSS_COMPILE is defined to be self.cross (with
-> or without a full path), optionally prefixed by the toolchain wrapper
-> defined in ~/.buildman. This is fine when self.cross is not empty, but
-> it doesn't make sense when it is:
-> - Either there is no wrapper and we end up with an empty CROSS_COMPILE
-> which is the same as not defining it (the host compiler will be used),
-> - Or there is a wrapper and CROSS_COMPILE will contain only the wrapper
-> which obviously is not a valid compiler, hence an error.
->
-> Test case:
->
->  $ sudo apt install ccache
->  $ grep -q toolchain-wrapper ~/.buildman || \
->      printf "[toolchain-wrapper]\nwrapper = ccache\n" >>~/.buildman
->  $ make mrproper
->  $ ./tools/buildman/buildman sandbox_noinst
->  $ ./tools/buildman/buildman sandbox_noinst
->  Building current source for 1 boards (1 thread, 24 jobs per thread)
->     sandbox:  +   sandbox_noinst
->  +In file included from boot/bootmeth_efi.c:16:
->  +include/efi_default_filename.h:20:15: error: operator '==' has no left operand
->  +   20 | #if HOST_ARCH == HOST_ARCH_X86_64
->  +      |               ^~
->  [...]
+> dtsec_init_phy() is defined only with MII so add the proper conditional
+> in the caller code.
 >
 > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 > ---
->  tools/buildman/toolchain.py | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  drivers/net/fm/eth.c | 10 +++++++---
+>  1 file changed, 7 insertions(+), 3 deletions(-)
 >
-> diff --git a/tools/buildman/toolchain.py b/tools/buildman/toolchain.py
-> index 324ad0e082..ff987a9eea 100644
-> --- a/tools/buildman/toolchain.py
-> +++ b/tools/buildman/toolchain.py
-> @@ -201,10 +201,10 @@ class Toolchain:
->          if self.override_toolchain:
->              # We'll use MakeArgs() to provide this
->              pass
-> -        elif full_path:
-> +        elif full_path and self.cross:
->              env[b'CROSS_COMPILE'] = tools.to_bytes(
->                  wrapper + os.path.join(self.path, self.cross))
-> -        else:
-> +        elif self.cross:
->              env[b'CROSS_COMPILE'] = tools.to_bytes(wrapper + self.cross)
->              env[b'PATH'] = tools.to_bytes(self.path) + b':' + env[b'PATH']
+> diff --git a/drivers/net/fm/eth.c b/drivers/net/fm/eth.c
+> index 19f3f0fef0..22025b6a27 100644
+> --- a/drivers/net/fm/eth.c
+> +++ b/drivers/net/fm/eth.c
+> @@ -26,7 +26,8 @@
 >
+>  #include "fm.h"
+>
+> -#if defined(CONFIG_MII) || defined(CONFIG_CMD_MII) && !defined(BITBANGMII)
+> +#if ((defined(CONFIG_MII) || defined(CONFIG_CMD_MII)) && \
+> +     !defined(CONFIG_BITBANGMII))
+>
+>  #define TBIANA_SETTINGS (TBIANA_ASYMMETRIC_PAUSE | TBIANA_SYMMETRIC_PAUSE | \
+>                          TBIANA_FULL_DUPLEX)
+> @@ -701,8 +702,11 @@ static int init_phy(struct fm_eth *fm_eth)
+>                 supported |= SUPPORTED_2500baseX_Full;
+>  #endif
+>
+> -       if (fm_eth->type == FM_ETH_1G_E)
+> -               dtsec_init_phy(fm_eth);
+> +       if ((IS_ENABLED(CONFIG_MII) || IS_ENABLED(CONFIG_CMD_MII)) &&
+> +           !IS_ENABLED(CONFIG_BITBANGMII)) {
+> +               if (fm_eth->type == FM_ETH_1G_E)
+> +                       dtsec_init_phy(fm_eth);
+> +       }
+>
+>  #ifdef CONFIG_PHYLIB
+>  #ifdef CONFIG_DM_MDIO
 > --
 > 2.40.1
 >
