@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7CFCCA0FE1
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 12:35:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6375ACA0EE4
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 12:35:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE2DA88C36;
-	Fri, 30 Aug 2024 14:34:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 334F488C05;
+	Fri, 30 Aug 2024 14:34:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nxFJroXw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k3naNV7h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0438E88B16; Fri, 30 Aug 2024 14:34:41 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 0061688C20; Fri, 30 Aug 2024 14:34:41 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0474A88B16
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 14:34:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0729488BB8
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 14:34:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-4280b3a7efaso14990765e9.0
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 05:34:39 -0700 (PDT)
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-4280ca0791bso15891715e9.1
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 05:34:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725021278; x=1725626078; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1725021279; x=1725626079; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Zs4Gu8Qf2U45wSZmb1eyVaN9T3a2AvbsPdlCbYpA1zc=;
- b=nxFJroXwIGpDWJxOEVGE0IKyOi+H2mkVTVh1IxVzR3gWgCo62s58e0cLuSp5hkjW5k
- Z1FoSvKwqZ5L79jI0kULan50ksJpTGcPLmHOGWmUIbssRqZ/nvs9mTHBC/TyY4uynOlX
- OE/DTZTYpylkA3m50jX3UzpLphd24AarHtdol0anfR2H/HVl1S+HJHzu2zONUdno39Q+
- 35OqMfIMTtQ6krc/jZzbfBBeCdyqbQhiLQZ5x434iX2hfkFWJIvP+8EjaxOPn2AqfSft
- ztp5MeEP6heBxWsb5Nj69/YohlDlA/dVhQaWrOUI4MYd3QQxRJZF445W3uMEYr8i85jX
- NR7A==
+ :reply-to; bh=/b/8MiOtStSdfdpiDFC77Y/HYjbiXPx78MBnwUYXDa8=;
+ b=k3naNV7hZ+0iax+GuVqCFx1gxKxMCZInjrTrezvSxS8X3b4ieUcOFt3OwJq2sOoCZw
+ ezJv6HZhWvnmS5gn7rRfF8efYmtXVBJTa76lmlDUSHvTrs0lW1iyc/XDeDN2xolfZevI
+ js06BIj47knt4IQKMaK3xZYquZoZlwdHG7uTCDXNiHsZId5uUpbEx5Ld/kva58lQO3By
+ pqJeE4KLSdyKJsYS3Vseft8IDxhEgS5ugCAxeZEWx1RSzuiql6hrLqmh6zzK7OqC9ZEb
+ AR1cAmsLtQBBvD3SxZ2fJ2+nhTFDnAvIUkbiDAYW+seAOaNeVB9HTSVx2HKPcfm+igVl
+ LWpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725021278; x=1725626078;
+ d=1e100.net; s=20230601; t=1725021279; x=1725626079;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Zs4Gu8Qf2U45wSZmb1eyVaN9T3a2AvbsPdlCbYpA1zc=;
- b=xM23eO4MpBx6370wzW622mfAoxw5HSVCqXhJ1yCT7NYbk6uOZoyYTd0jqkJ2XWceHR
- /tlNpx8Q1QUxaKpU+Gv05IoQqdc6g7ug9T0rt1TLwrXxpj4Tl/Ohzlh6wmhrDyWTfo//
- z1shRQsXFMmgc3/oGclv82y5b0OK/p7H+JD3CrXvTBVlORnkKkQLyqH3FaG4R8chux4Y
- uezMEi2WwPQi4do4N6yGlkj75z6Yy/cl4pz5Z99sexeGklPHicjgEu08YdzZ9Oq+Q0Ed
- FGbqgZd7DgSukgvH6nKFM2cwx4omnRgFdcPk2Jd2F1muhIb3EwV0IpR7sVmb2Az+XklC
- K+Mw==
+ bh=/b/8MiOtStSdfdpiDFC77Y/HYjbiXPx78MBnwUYXDa8=;
+ b=oNlFjPVo+T1S9nsOcsjVSJYE2xqpBV6EZM0MGtwvlkA1/s6GrhnZcSXtTIECCitHdP
+ xkTvqD4dR0ntYKrcqO0IOfLo5Tojyg/Sy+lRzpwKwrTjbdcq6382kCW2qaBvXX3yMQNo
+ a5CTPA3gbxHbDBM7W6NBwMeElvrn7O/KtIjrEObkOebHMqLc2aDBUwQ+KPUKr0IVxOqq
+ +o3r/holaUDv3e9YXPxkw+2FIWDJYAb3Lfj8pI5n178xue7hfrfDVIqiYCfiMZLGFEAR
+ 2tILGV6pICMkgzo92MkCruHprAVdTq41zkt2Gi4z5kmtk2HmmhKhH995xijV+5bAaBgS
+ or+Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVpvi/aP3HKy+VGzVsDQEb3s/aXAN4fsy6E4+3vNfHLoChI0g08nEAvIwTH8bnyLytonMONwSo=@lists.denx.de
-X-Gm-Message-State: AOJu0YzaqtIhNjF55auTnL1g7muOg07MDYs3PvjER3CtJN6Qluom0FG2
- bAYPutxoCIKtmVcA2KOcY1vCdRRtnMcmZRbcttywwa3ANB5T01oYK8l+3GtQQtU=
-X-Google-Smtp-Source: AGHT+IEpYWzW9gRG4yQ/DuH9qL5f8bdE65oalkNXpYXuZsiu0HA3lEcEN+NIoolPnRiMWgZEQq3GGg==
-X-Received: by 2002:adf:a3ce:0:b0:371:879f:72e5 with SMTP id
- ffacd0b85a97d-374a956618bmr1315433f8f.20.1725021278400; 
- Fri, 30 Aug 2024 05:34:38 -0700 (PDT)
+ AJvYcCVLCXbl0W9Wr67UrGPme/m4n3di3R+F0K1D5qOgSk8DJZQDIkviOjRVmMHOc13eNzT7RF+08uA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw2EER09IeQw7prst9n3KPCECnmxut2q7vTLadSxi8EeYq2fOCP
+ xW5B2G0t6yiVuyKUiiOkECZPEEABkCyTASDz07b8Yo0FzGRYyUDtO0KtkMOkTtA=
+X-Google-Smtp-Source: AGHT+IFq6gHzSWvTD16xRTMCzPvdrwmMDMPpmPGxMrCXzgK4yJde4wnmpj7Xk+I9gumJBvwpMlvesA==
+X-Received: by 2002:a05:6000:1545:b0:371:7c83:12e5 with SMTP id
+ ffacd0b85a97d-3749b544876mr5587324f8f.19.1725021279348; 
+ Fri, 30 Aug 2024 05:34:39 -0700 (PDT)
 Received: from [192.168.1.17] (host-80-47-105-51.as13285.net. [80.47.105.51])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-374b960ef94sm648207f8f.103.2024.08.30.05.34.37
+ ffacd0b85a97d-374b960ef94sm648207f8f.103.2024.08.30.05.34.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Aug 2024 05:34:37 -0700 (PDT)
+ Fri, 30 Aug 2024 05:34:38 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Fri, 30 Aug 2024 13:34:33 +0100
-Subject: [PATCH v8 03/11] efi: add a helper to generate dynamic UUIDs
+Date: Fri, 30 Aug 2024 13:34:34 +0100
+Subject: [PATCH v8 04/11] doc: uefi: document dynamic UUID generation
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240830-b4-dynamic-uuid-v8-3-79b31b199bee@linaro.org>
+Message-Id: <20240830-b4-dynamic-uuid-v8-4-79b31b199bee@linaro.org>
 References: <20240830-b4-dynamic-uuid-v8-0-79b31b199bee@linaro.org>
 In-Reply-To: <20240830-b4-dynamic-uuid-v8-0-79b31b199bee@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
@@ -82,21 +82,21 @@ To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
 Cc: Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de, 
  Caleb Connolly <caleb.connolly@linaro.org>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4932;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2227;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=gMwk6mkD9Ufvv7gOE59jH5gnrG+CZ0zKKyfkCUdSwH8=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBm0bxZIXTUOUUw0elITJ9H8BStazsIGgU934TwE
- IVYDwLIYJiJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZtG8WQAKCRAFgzErGV9k
- toJ6D/91KC4Vq5XGgX/Nw0lX73XlIYM9+sMkb88GYUx8uWJtEFdY1yHRr0SrI17rCiliKlxaz1L
- ofKYe8JQUKDS1jzLYhaf1CuKqj7wZNfdxv4zltztaA/VOOzjmVQZ+Q7xGgU4Ze9tQGISSqeH6+r
- J9LfJcz6gMAeVEdIlaEhp9h1EN6kX+ooBcEjLlIphwUJVpuLazYclwMU6IGiB6QLzRiKcPgAQ6x
- e7h2APItRGqwKXErkkWzGpjViYtbU+d64LJ/s4Es5KKIWLcep5uWH8YiTI6lFE+2jtag2eQBVXD
- 7lR6MHqqTpbO9ewj/fOx8Yijjmgaz5gfpWSVPFOmlOnTBeVl+8UJuprMRiTfCKRce/kOpWlA8ve
- rC5kaPd0hBBZ3J2BVCpdh4wu1kdbRkAjBHZ4EUEr94mnq+geyuAgoqn4ESK529B/wS1Jkbs4dQl
- HAHy/HBD61lEyF77R0/ZkdIICaqKRMONDmZn77WpwwHNxkr6N+UPv4KP04JkMklMdd4VP1aPQMZ
- k54DIrWczGKmm5twtUnw2+5O8TFNElIrDRP1SOPSoK0zAj3DlZu4N4HHqcTG85RC1gcSV0fnYA9
- 8BfziwoPO5OW9kTD6tTahkOs6FFL+65CmCMmLbAdIwpH6RUAw/7r4/rr+6bn0IspqB6+S316/e7
- uIQVzFhipu/e7Kw==
+ bh=z+k7ehN+E2cuyiSmyz++J33laIvhLNnuuBKXIQoKanw=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBm0bxZxlz0AgnBdY5bQR47aTgPBRhNkgg1LfFZq
+ r0PWQVOLNmJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZtG8WQAKCRAFgzErGV9k
+ to9bD/9AUtLnQI/fPWD6dlCbJ3gL7rgMKkYc+tKqWE3KcKHsfBStWBbXr2SmK8detMiZ1HdE3XN
+ lhukt1Ww4/3scXV4yT6uyYXRhIdjiBGV2lbYHnEsnE3/3KnURxMZykGdowhegGbajvCGTcGwTSF
+ 5LuZ3S4yN9E53mBcP+GE38ss1cGOUcEyHpVuvhpaTKrBjp+IvMTOIPq5TnA6lxOm2eH3bNcM86O
+ EqrX8qVjD9O15ct8lC3H3mPMAPHt38REpDVmmD5Cpmm/FouGG1Ad9TS+8W1p7HX/1JWhDiFoDVr
+ SehD1JFeEuBTIVcY3IYnt1ADUhugZrV5dEFOyZVBtGzIiZjetpMWfH8ONt2dsDS6fr8kmcMa7fV
+ cAPGerMrBazcSbu3uLwIC7Ve3bebTJqOlINYa+oEwhfnjieqiswfvEqxtIIxc1ipe518lPrFjpM
+ LIGIFYIZvm8b/Uro1ijq1EoRgV4XkKBv7fAR5kcbKduLly6uXsnp1IOjdbwfvMGnYn8thn6kcYq
+ tVNvQMsj3x8Y1M1cHO/2Xa+CuTGieoZdrT+jFP/zf4Z7YTh5Zo7z13ScdeknWWtxB1Pkg8Cl0Zt
+ mEMmoOkX87+AxyuP8THDxbkcaFS9CUXo1beRGunxlZQSo6CRMz3tIAqIcALmnv+MxZz5XtxLjXF
+ o2U7PO6hhBY27Lw==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -115,148 +115,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce a new helper efi_capsule_update_info_gen_ids() which populates
-the capsule update fw images image_type_id field. This allows for
-determinstic UUIDs to be used that can scale to a large number of
-different boards and board variants without the need to maintain a big
-list.
-
-We call this from efi_fill_image_desc_array() to populate the UUIDs
-lazily on-demand.
+Document how platforms can generate GUIDs at runtime rather than
+maintaining a list of UUIDs per-board.
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- lib/efi_loader/Kconfig        | 12 ++++++++++
- lib/efi_loader/efi_capsule.c  |  1 +
- lib/efi_loader/efi_firmware.c | 55 ++++++++++++++++++++++++++++++++++++++++++-
- 3 files changed, 67 insertions(+), 1 deletion(-)
+ doc/develop/uefi/uefi.rst | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
 
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index 1179c31bb136..85a31113fcf0 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -236,8 +236,20 @@ config EFI_CAPSULE_ON_DISK_EARLY
- 	  If this option is enabled, capsules will be enforced to be
- 	  executed as part of U-Boot initialisation so that they will
- 	  surely take place whatever is set to distro_bootcmd.
+diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+index d450b12bf801..944827585731 100644
+--- a/doc/develop/uefi/uefi.rst
++++ b/doc/develop/uefi/uefi.rst
+@@ -448,8 +448,35 @@ the location of the firmware updates is not a very secure
+ practice. Getting this information from the firmware itself is more
+ secure, assuming the firmware has been verified by a previous stage
+ boot loader.
  
-+config EFI_CAPSULE_NAMESPACE_GUID
-+	string "Namespace for dynamic capsule GUIDs"
-+	# v4 UUID as a default for upstream U-Boot boards
-+	default "8c9f137e-91dc-427b-b2d6-b420faebaf2a"
-+	depends on EFI_HAVE_CAPSULE_SUPPORT
-+	help
-+	  Define the namespace or "salt" GUID used to generate the per-image
-+	  GUIDs. This should be a GUID in the standard 8-4-4-4-12 format.
++Dynamic Firmware Update GUIDs
++*****************************
 +
-+	  Device vendors are expected to generate their own namespace GUID
-+	  to avoid conflicts with upstream/community images.
++The image_type_id contains a GUID value which is specific to the image
++and board being updated, that is to say it should uniquely identify the
++board model (and revision if relevant) and image pair. Traditionally,
++these GUIDs are generated manually and hardcoded on a per-board basis,
++however this scheme makes it difficult to scale up to support many
++boards.
 +
- config EFI_CAPSULE_FIRMWARE
- 	bool
- 
- config EFI_CAPSULE_FIRMWARE_MANAGEMENT
-diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-index 635088f25a13..f3a2388506cc 100644
---- a/lib/efi_loader/efi_capsule.c
-+++ b/lib/efi_loader/efi_capsule.c
-@@ -19,8 +19,9 @@
- #include <mapmem.h>
- #include <sort.h>
- #include <sysreset.h>
- #include <asm/global_data.h>
-+#include <uuid.h>
- 
- #include <crypto/pkcs7.h>
- #include <crypto/pkcs7_parser.h>
- #include <linux/err.h>
-diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-index ba5aba098c0f..6650c2b8071d 100644
---- a/lib/efi_loader/efi_firmware.c
-+++ b/lib/efi_loader/efi_firmware.c
-@@ -244,8 +244,57 @@ void efi_firmware_fill_version_info(struct efi_firmware_image_descriptor *image_
- 
- 	free(var_state);
- }
- 
-+/**
-+ * efi_gen_capsule_guids - generate GUIDs for the images
-+ *
-+ * Generate the image_type_id for each image in the update_info.images array
-+ * using the first compatible from the device tree and a salt
-+ * UUID defined at build time.
-+ *
-+ * Returns:		status code
-+ */
-+static efi_status_t efi_gen_capsule_guids(void)
-+{
-+	int ret, i;
-+	struct uuid namespace;
-+	const char *compatible; /* Full array including null bytes */
-+	struct efi_fw_image *fw_array;
++To address this, v5 GUIDs can be used to generate board-specific GUIDs
++at runtime, based on the board's devicetree root compatible
++(e.g. "qcom,qrb5165-rb5").
 +
-+	fw_array = update_info.images;
-+	/* Check if we need to run (there are images and we didn't already generate their IDs) */
-+	if (!update_info.num_images ||
-+	    memchr_inv(&fw_array[0].image_type_id, 0, sizeof(fw_array[0].image_type_id)))
-+		return EFI_SUCCESS;
++These strings are combined with the fw_image name to generate GUIDs for
++each image. Support for dynamic UUIDs can be enabled by generating a new
++namespace UUID and setting EFI_CAPSULE_NAMESPACE_GUID to it. Dynamic GUID
++generation is only enabled if the image_type_id property is unset for your
++firmware images, this is to avoid breaking existing boards with hardcoded
++GUIDs.
 +
-+	ret = uuid_str_to_bin(CONFIG_EFI_CAPSULE_NAMESPACE_GUID,
-+			      (unsigned char *)&namespace, UUID_STR_FORMAT_GUID);
-+	if (ret) {
-+		log_debug("%s: EFI_CAPSULE_NAMESPACE_GUID is invalid: %d\n", __func__, ret);
-+		return EFI_INVALID_PARAMETER;
-+	}
++The mkeficapsule tool can be used to determine the GUIDs for a particular
++board and image. It can be found in the tools directory.
 +
-+	compatible = ofnode_read_string(ofnode_root(), "compatible");
-+	if (!compatible) {
-+		log_debug("%s: model or compatible not defined\n", __func__);
-+		return EFI_INVALID_PARAMETER;
-+	}
++Firmware update images
++**********************
 +
-+	for (i = 0; i < update_info.num_images; i++) {
-+		gen_v5_guid(&namespace,
-+			    &fw_array[i].image_type_id,
-+			    compatible, strlen(compatible),
-+			    fw_array[i].fw_name, u16_strlen(fw_array[i].fw_name) * sizeof(uint16_t),
-+			    NULL);
-+
-+		log_debug("Image %ls UUID %pUl\n", fw_array[i].fw_name,
-+			  &fw_array[i].image_type_id);
-+	}
-+
-+	return EFI_SUCCESS;
-+}
-+
- /**
-  * efi_fill_image_desc_array - populate image descriptor array
-  * @image_info_size:		Size of @image_info
-  * @image_info:			Image information
-@@ -271,9 +320,9 @@ static efi_status_t efi_fill_image_desc_array(
- 	u16 **package_version_name)
- {
- 	size_t total_size;
- 	struct efi_fw_image *fw_array;
--	int i;
-+	int i, ret;
- 
- 	total_size = sizeof(*image_info) * update_info.num_images;
- 
- 	if (*image_info_size < total_size) {
-@@ -282,8 +331,12 @@ static efi_status_t efi_fill_image_desc_array(
- 		return EFI_BUFFER_TOO_SMALL;
- 	}
- 	*image_info_size = total_size;
- 
-+	ret = efi_gen_capsule_guids();
-+	if (ret != EFI_SUCCESS)
-+		return ret;
-+
- 	fw_array = update_info.images;
- 	*descriptor_count = update_info.num_images;
- 	*descriptor_version = EFI_FIRMWARE_IMAGE_DESCRIPTOR_VERSION;
- 	*descriptor_size = sizeof(*image_info);
+ The firmware images structure defines the GUID values, image index
+ values and the name of the images that are to be updated through
+ the capsule update feature. These values are to be defined as part of
+ an array. These GUID values would be used by the Firmware Management
 
 -- 
 2.46.0
