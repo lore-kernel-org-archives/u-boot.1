@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 098FDCA0EFB
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 10:20:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08D4ECA0EFB
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 10:20:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6841988B61;
+	by phobos.denx.de (Postfix) with ESMTP id B7B5A88B6D;
 	Fri, 30 Aug 2024 12:17:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dHkYpQxI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BiKPRgLz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59DF5886E5; Fri, 30 Aug 2024 12:17:42 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 8CE4E88B40; Fri, 30 Aug 2024 12:17:43 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B8198817C
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 12:17:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9AF4288B29
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 12:17:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-428e1915e18so13773315e9.1
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 03:17:40 -0700 (PDT)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3730749ee7aso1123409f8f.2
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 03:17:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725013060; x=1725617860; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1725013061; x=1725617861; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rOUr1jJ+j6ojrKOGYMMp1I08UMtj5w8Ma+X7l6RjDsQ=;
- b=dHkYpQxIYXSOEYKVJfIC5bUov1NfyCTc0E1g1BLCU2YZaBKNBUeZQbtLMoJ39Mg03k
- dnb7oDIqE3L7lMQxQVoxUpMLzpNIueLsGAaVm3Iqyoadrws4LFnYjcHzUf8GbwuE0dQ7
- kohrPHi/x5BaQCENuJ4fOp2Ub8/oxw/YXwqN2n6580VQqcs8bocIZ2af1u+do8GiLrgz
- Y+yUKVgHu4OXhGO+o1BlEdduauDbKoZWUUTnxFdqJ3vZytbLpZmz/lDXHHPwAtK3sh2G
- dTEc3HZumGU2aBlEm/yuyEm67DifHjPLh/8MxdqRNpJ49kr30uy8wjRhcNcGHwQq2Lsc
- pkLA==
+ bh=+Tv8acgq5VmfVE0WMLnnNsQ3BITV0x/6LfX/TV/+s5A=;
+ b=BiKPRgLzwEAlqHmM54hretz3/M5JlDlTD4NXaMuybdpu1aoS2IpkZtKUBT2S3yQF67
+ wGBjuZGs+e1trxw/XPsX9/BR0BVR6YG7NwOy4RW+fQlwr+3hh+qSW8xwj++VzoIdgvsU
+ w/Ca+RzLZ29O82JWb2NbLDZil7XErYWcs4kCuwgTF0FMA3GZ1CNIm+ih+cYziewzHZ8K
+ PbKGbdjcZEGmn03ZHGPdk82GpW/Kh3VaS3Bfk2E95fnO21QnjwCMZ+8OfF/er1p/aH6C
+ LkEyIhZviZuELP4fI/9HY3KLtvvRyGRiAjhILtmkwEWm4lR5wqdHF3jl77nMnJbZ6ij/
+ PRrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725013060; x=1725617860;
+ d=1e100.net; s=20230601; t=1725013061; x=1725617861;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rOUr1jJ+j6ojrKOGYMMp1I08UMtj5w8Ma+X7l6RjDsQ=;
- b=PPwB9q+QHgakzPfkoCMa2Zx+IvPuNLB9hAAk2zRcee4sRwtm7UBlhUDN3pmuhPQJiW
- C+DxhKk3Qq8tjAt6Dzrp93Ort2Cxb7Eh/8aFOKepmU6vwZoGm85D10dMXOfPziPkPzFh
- lyx2nCE9+e5jRHZ2y0fogGdGMfO6yykZL0c/H9cC0aVMMCmGwPmEKSxikX2/x4n48dJP
- Imp7zKwrNh41jfiOB0SXxKvhN9+wvnrV/1EM9MVJGU/17DE/88aiiozDeeUcusTNO3Rs
- dWJ3HBa85ZR/bpmpuySYrGHl/FW9kkqgW+4Do3aXTuJtXutZUnpiBqk/bYtHCYZRthU+
- sZlQ==
-X-Gm-Message-State: AOJu0Yy20jdt3RKH18zOjk7RF9YCNzB2m0pDpreQ9k+5iD4dfLYIt3aE
- DkwnWA8hiW5kNLGiJmLWIHUhwCqTCsdQCCQq0ml/UM/2mxMD3dGWfdEzoO/c560YLb3pj8pMyj6
- qnfFwC973
-X-Google-Smtp-Source: AGHT+IFqmEqpnvUsHEWovOi3361uz63mM2qIo4tJPWFxz7PDVudrF7blg1Hd7M21jme76Tx0qA6h+Q==
-X-Received: by 2002:a5d:4b46:0:b0:366:f8e7:d898 with SMTP id
- ffacd0b85a97d-3749b58e7a1mr3547129f8f.50.1725013059727; 
- Fri, 30 Aug 2024 03:17:39 -0700 (PDT)
+ bh=+Tv8acgq5VmfVE0WMLnnNsQ3BITV0x/6LfX/TV/+s5A=;
+ b=k0RFdb04x33C2Yvay1YQJb8V98XMa8kxuvolu3SqMegJMe1+pvxO2mb98fnlxdDJSQ
+ hL+lF4jtryWzb0t10pXpOmJKJJw2b+u9LaMJrzbcqctWkxk5LYbo9+YdpkeuQSvp3nE+
+ Dml+CQWxqtvWAYij5SFwMesMmw1dNcyXXMb149lhlLfz9Xj3+p3dMWnof8xzO4SKNKu9
+ pfSeELp5btB7XSlNL5bTDzbi8Fa/rdQthjiAmoKVBuX2gy8WC7g4O9zCNrXpdzIlKK+Q
+ c8zb+3GifwlpSqeh59X6fAlblZVNPMNhu6kDhwO7kmaSQznLZNrplVsjiPQ/DUtORpVQ
+ bTGQ==
+X-Gm-Message-State: AOJu0Yz3LHJV6s9v/v8OfKRPZrwbRjkWZNfPmMBKnM1U/48orl1GvM92
+ AomjyrrdXyw5N6/lGnnEvyLlmJCTS90hA7yVQd7YR83YwxST6M5Z2XL8IbwqYWpo3sjJLssAVFx
+ 0XKLudxpC
+X-Google-Smtp-Source: AGHT+IFg05RLA+Q69qxpWqdV49PbJ2fGvEohk+St4D5C7+gz+Hdfb8AYxpTGbrMSpEclal1XI3tlkQ==
+X-Received: by 2002:a5d:5d86:0:b0:374:b69f:8 with SMTP id
+ ffacd0b85a97d-374b69f013emr404401f8f.33.1725013060877; 
+ Fri, 30 Aug 2024 03:17:40 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:6417:8cf6:a7f7:ee38])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-374b6a3d27fsm472728f8f.59.2024.08.30.03.17.39
+ ffacd0b85a97d-374b6a3d27fsm472728f8f.59.2024.08.30.03.17.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Aug 2024 03:17:39 -0700 (PDT)
+ Fri, 30 Aug 2024 03:17:40 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Peter Robinson <pbrobinson@gmail.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, Devarsh Thakkar <devarsht@ti.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH v2 15/16] common: update: UPDATE_COMMON implies CMD_TFTPBOOT
-Date: Fri, 30 Aug 2024 12:16:58 +0200
-Message-Id: <ba3bd0c9116b3338e4d08f4c2caebf5818c0d94e.1725012294.git.jerome.forissier@linaro.org>
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Michal Simek <michal.simek@amd.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Anand Moon <linux.amoon@gmail.com>
+Subject: [PATCH v2 16/16] cmd: pxe: CMD_PXE implies CMD_TFTPBOOT
+Date: Fri, 30 Aug 2024 12:16:59 +0200
+Message-Id: <2fc6c69a1aa28b578684642959906cfe000b2a0c.1725012294.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1725012294.git.jerome.forissier@linaro.org>
 References: <cover.1725012294.git.jerome.forissier@linaro.org>
@@ -99,27 +101,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-common/update.c (UPDATE_COMMON) depends on tftp_timeout_ms which is
-defined in cmd/tftp.c (CMD_TFTPBOOT). Therefore add the appropriate
-imply statement to Kconfig.
+cmd/pxe.c (CMD_PXE) calls do_get_tftp() (CMD_TFTPBOOT) therefore add
+an "imply" to cmd/Kconfig.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- common/Kconfig | 1 +
+ cmd/Kconfig | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/common/Kconfig b/common/Kconfig
-index 83c81edac2..968d4fb66a 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -934,6 +934,7 @@ menu "Update support"
- config UPDATE_COMMON
- 	bool
- 	select DFU_WRITE_ALT
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 978f44eda4..be15a4d267 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2091,6 +2091,7 @@ config CMD_ETHSW
+ config CMD_PXE
+ 	bool "pxe"
+ 	select PXE_UTILS
 +	imply CMD_TFTPBOOT
+ 	help
+ 	  Boot image via network using PXE protocol
  
- config UPDATE_TFTP
- 	bool "Auto-update using fitImage via TFTP"
 -- 
 2.40.1
 
