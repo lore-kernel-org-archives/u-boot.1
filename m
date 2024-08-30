@@ -4,96 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6227CA0EF9
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 09:37:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0B27CA0EFB
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 10:17:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26F84885A5;
-	Fri, 30 Aug 2024 11:37:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D254688896;
+	Fri, 30 Aug 2024 12:17:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JP26Ah67";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VfPUe/0c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D36DA88966; Fri, 30 Aug 2024 11:37:32 +0200 (CEST)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id DC63A888C1; Fri, 30 Aug 2024 12:17:23 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93265881A9
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 11:37:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 898718817C
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 12:17:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-201fbd0d7c2so15036125ad.0
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 02:37:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-42bbc70cc19so3425535e9.0
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 03:17:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725010649; x=1725615449; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1XGdeZBWDrF/0E12RXPqkDAgPgzGlnaq2frJlgQxV0Y=;
- b=JP26Ah67IEqhOt6T8B9nI8US/LSJZex4nnT5gLAzyZg/azzRVLr+jvIUiJ0MhNjB4n
- KuJjuWexKqI8EZ4cymZNdBSKPMd3ko9Vy5NRt30ozsl5ZoMtWKOq6U2jfbyvfUqPmH+0
- ddc9w+KFvlpDKoHhixaq24BpbENzXU6Ez6B1KOXLT4+HGtmqEUbdQkA97Bjk+Nk9kfBV
- hCkQAM+pA2B92TSnTolvSgn+ILBJyTGGnUr5vemp3FD9fVyPr0ol4TaoG/VpkGp+hI/0
- KKuhbo6tcCF9MbkrErxFtlkZpBdDzhSEwFL+xnmU/dk6/ctdGNAabp++JQUQJg92VlKl
- CkRA==
+ d=linaro.org; s=google; t=1725013041; x=1725617841; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/MPcX4J/nKvfQZbm5Jwvt3IQGybrl2ThSOVeM+rcY70=;
+ b=VfPUe/0cxgvNkwfvFadWhD2HZ4FB3hffWEqk4dYE7qf55WSRTLH2XOegc09ZDJDq1A
+ bBDCqIl9Gl62rmBicnzNr5pqaNthXWwuq3AffiZBPJLlQ2BRceajZafFn+6R5qM59CHY
+ zblEOBGF3DJrvmV7VaeZEEnB56Jj5d74lMKrAAed9/cm8qjk8m+7jba4lkDNy++q7gZ5
+ ff6gUWr1fIdJNUlLhhMqy2HNoM072Zegbx3dzdP2SKMbpCpES2l1asm7Up3AWxz66qNT
+ C6RoaM5IrW9XKkxrUy7PhjkPUB5LNhHUzQ9Ox4/MFNXlgxrlyhCoXoTEp+T5Unrgo2yu
+ fTfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725010649; x=1725615449;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1725013041; x=1725617841;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1XGdeZBWDrF/0E12RXPqkDAgPgzGlnaq2frJlgQxV0Y=;
- b=IaT/kOer6huK69ZowvaU3WaMxZiyEPbq+a123HO/pZwRx23DgxxZeeZ15A0uVkVUbo
- 3VBmKd4X1t+y9ubsf04BJIELE2zy/hEV5zwXHSS7dVbeZNtHgLR0CYSWh5DFE2OG4Ide
- XPnp+PvYi2e/DUcl8lel7iXykCdjL2zan/FV7d4CzFNq1NGkdp4hhx5/yTNsPzBVAdpk
- g6CGgiRZ7RCuuHRlB0OlEZVINfnw4c6EJS/uxgJL4+CvXx4E4hlYo/k6lNFFmqnZW0i2
- bgX9LCufTpNFL3TTc8gr2OGdlZz1aujblWT23COdxB/Z5Adom8wO2Fk5P3+p8vvBn5YX
- Ot3w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUh7IIpT6s7EU24s6UbbUmLAgoDmNP41XZEiozmJSoFDyktmqD0GBdmFCQ00qvylmLfg7+INnw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwD8vYEjiB5xZD/MkVBsdMBCOZnpnuRLn8uq87OGerZj2RyHToS
- xn2CeHnc9AHaOThD5FY1+anxuzc/YwMM4m3no9f62yZ8CIGkWKJOyOlN1EkT+dGpdMrqRm9nu+a
- yj0WtWAnp1pP0D1GXV5x9UfsVynXSbxD3Gt0DXA==
-X-Google-Smtp-Source: AGHT+IEDJDB8O8ydUwPrd7Cctdl4uCPWFBUwSdc+eP+Y6kTuLTtJZWvKutne6nFYvPJ3n362uNMsKtp8xRHAH7ybU4I=
-X-Received: by 2002:a17:903:18a:b0:1fd:9d0c:998c with SMTP id
- d9443c01a7336-2050c4a5032mr57038725ad.56.1725010648807; Fri, 30 Aug 2024
- 02:37:28 -0700 (PDT)
+ bh=/MPcX4J/nKvfQZbm5Jwvt3IQGybrl2ThSOVeM+rcY70=;
+ b=E05rMDOSUCnjb+6SJGLbIh/oN7K1Ffxnj/jzmKB0EAdxOPGK9wrF3tiX3mFdwfxvO9
+ NeomwZ6mSE7ptzGVsKYH5N2wBiM+umXhQQFzx57iYPk/QC/nqspBhQas1HRBm0M2e/3i
+ rgnpXpVO/lamlrwMiKJeDnxIj55QUZ7PcaSLISsfFsqAlDkQiPbl40W8Jd6b/oAiQ0jH
+ t9s7uLDQT0AfuZWLld0izhdRskwjLgLNTjzsmuWDPmN3x3cQnogYVUhUnEhj/G8p6x4K
+ NJlpSAjOLU4HBcvOXnRQl6OWedqrccfViIcLjdy0va1CvC0Hql+QQXqJ67sC9x/J4Dnu
+ X3kw==
+X-Gm-Message-State: AOJu0Yxe/EQlN3poHqXfxQvtdxbgibtzpfxu++8QH9hLVIJvs7XROaKV
+ +dwXegJgKor8OlcT7zZWH53xS6JqQ+rCvUy8VyNpiFDSL9M11C9p4J7pPQhjVKaImvGiTlabvgl
+ qR6tevA==
+X-Google-Smtp-Source: AGHT+IEZiCNQca2vN/IWoombqDwdG3+N5gIEyWzxfJlLUsaCk1ZAsVZUY2Bu2vvpyosnwOaE2nv0CA==
+X-Received: by 2002:adf:8bd1:0:b0:362:8ec2:53d6 with SMTP id
+ ffacd0b85a97d-3749b5948fdmr3849913f8f.61.1725013040585; 
+ Fri, 30 Aug 2024 03:17:20 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:6417:8cf6:a7f7:ee38])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-374b6a3d27fsm472728f8f.59.2024.08.30.03.17.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 30 Aug 2024 03:17:20 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+Subject: [PATCH v2 00/16] Miscellaneous fixes
+Date: Fri, 30 Aug 2024 12:16:43 +0200
+Message-Id: <cover.1725012294.git.jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20240816214436.1877263-1-raymond.mao@linaro.org>
- <20240816214436.1877263-8-raymond.mao@linaro.org>
- <CAFLszTiWFD2dpb6z_5cibDe0aOpuPYug-mrC-ZiZ7v+SEDFhdQ@mail.gmail.com>
-In-Reply-To: <CAFLszTiWFD2dpb6z_5cibDe0aOpuPYug-mrC-ZiZ7v+SEDFhdQ@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 30 Aug 2024 12:36:52 +0300
-Message-ID: <CAC_iWjJpfrK+-o_0x8ZJbWxhG4O-tprf1-oQvWmLZWOf=5qZMA@mail.gmail.com>
-Subject: Re: [PATCH v6 07/28] hash: integrate hash on mbedtls
-To: Simon Glass <sjg@chromium.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
- manish.pandey2@arm.com, 
- Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
- Mario Six <mario.six@gdsys.cc>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, 
- Andrew Davis <afd@ti.com>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Sumit Garg <sumit.garg@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Alexander Gendin <agendin@matrox.com>, Jonathan Humphreys <j-humphreys@ti.com>,
- Eddie James <eajames@linux.ibm.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,50 +91,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Miscellaneous fixes made when developing the lwIP series [1]. They are
+posted separately since they make sense on their own. Subsequent
+versions of the lwIP series will contain a squashed version of this one.
 
-On Thu, 29 Aug 2024 at 18:01, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Raymond,
->
-> On Fri, 16 Aug 2024 at 15:47, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > Integrate common/hash.c on the hash shim layer so that hash APIs
-> > from mbedtls can be leveraged by boot/image and efi_loader.
-> >
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > ---
-> > Changes in v2
-> > - Use the original head files instead of creating new ones.
-> > Changes in v3
-> > - Add handle checkers for malloc.
-> > Changes in v4
-> > - None.
-> > Changes in v5
-> > - Add __maybe_unused to solve linker errors in some platforms.
-> > - replace malloc with calloc.
-> > Changes in v6
-> > - None.
-> >
-> >  common/hash.c | 146 ++++++++++++++++++++++++++++++++++++++++++++++++++
-> >  1 file changed, 146 insertions(+)
->
-> I am not seeing the benefit of replacing U-Boot's hashing algorithms.
-> They work well and don't change. Also it seems to be making the code a
-> lot uglier, with an uncertain timeline for clean-up.
+[1] http://patchwork.ozlabs.org/project/uboot/list/?series=420712&state=%2A&archive=both
 
-A lot uglier where? It adds a few wrappers that fit into the current
-design and callbacks.
-I don't think what you are asking is possible. To do assymetric
-crypto, signatures  etc -- and in the future add TLS support in wget
-mbedTLS relies on its internal hashing functions for the cipher suites
-it supports. So what you are asking would just make the code even
-larger. Raymond can you please double check?
+Changes in v2:
 
-Thanks
-/Ilias
->
-> Can you do the rest of the integration first?
->
-> Regards,
-> Simon
+- Rebased onto master
+- "flash: prefix error codes with FL_"
+Update drivers/mtd/altera_qspi.c too. This was mentioned by Simon G.
+in my lwIP v9 thread [1]. Tom R./Ilias A./Peter R.: I kept your R-b
+tags, please shout if it's not OK.
+- "net: fm: call dtsec_init_phy() only when it is defined"
+Address Simon G.'s comments: update condition (parentheses,
+CONFIG_BITBANGMII, if instead of #if).
+Peter R: I dropped your R-b since the code changed significantly.
+- New patches:
+  "common: update: UPDATE_COMMON implies CMD_TFTPBOOT"
+  "cmd: pxe: CMD_PXE implies CMD_TFTPBOOT"
+  "buildman/toolchain.py: set CROSS_COMPILE only if self.cross is set"
+
+[1] https://lists.denx.de/pipermail/u-boot/2024-August/563497.html
+
+Jerome Forissier (16):
+  Makefile: detect HOST_ARCH properly when CROSS_COMPILE is multi-word
+  buildman/toolchain.py: set CROSS_COMPILE only if self.cross is set
+  flash: prefix error codes with FL_
+  at91: rename mem_init() to at91_mem_init()
+  arm: omap2: add missing #include <netdev.h>
+  net: fm: call dtsec_init_phy() only when it is defined
+  net: wget: removed unused function wget_success()
+  net: phy: ncsi: depend on NET
+  net: ftgmac100: depend on NET
+  net: wget: allow EFI boot
+  net: fec_mxc_init(): do not ignore return status of fec_open()
+  test/py: net_boot: fix comment
+  test/py: test_efi_loader: add missing dependency on cmd_tftpboot
+  test/py: test_efi_loader: add HTTP (wget) test for the EFI loader
+  common: update: UPDATE_COMMON implies CMD_TFTPBOOT
+  cmd: pxe: CMD_PXE implies CMD_TFTPBOOT
+
+ Makefile                                      |  2 +-
+ arch/arm/mach-at91/include/mach/at91_common.h |  2 +-
+ arch/arm/mach-at91/spl_at91.c                 |  2 +-
+ arch/arm/mach-at91/spl_atmel.c                |  2 +-
+ arch/arm/mach-omap2/omap3/emac.c              |  1 +
+ .../atmel/at91sam9m10g45ek/at91sam9m10g45ek.c |  2 +-
+ board/atmel/at91sam9n12ek/at91sam9n12ek.c     |  2 +-
+ board/atmel/at91sam9x5ek/at91sam9x5ek.c       |  2 +-
+ .../atmel/sama5d27_som1_ek/sama5d27_som1_ek.c |  2 +-
+ .../sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c   |  2 +-
+ board/atmel/sama5d2_icp/sama5d2_icp.c         |  2 +-
+ .../atmel/sama5d2_xplained/sama5d2_xplained.c |  2 +-
+ .../atmel/sama5d3_xplained/sama5d3_xplained.c |  2 +-
+ board/atmel/sama5d3xek/sama5d3xek.c           |  2 +-
+ .../atmel/sama5d4_xplained/sama5d4_xplained.c |  2 +-
+ board/atmel/sama5d4ek/sama5d4ek.c             |  2 +-
+ board/cobra5272/flash.c                       | 26 ++++----
+ .../conclusive/kstr-sama5d27/kstr-sama5d27.c  |  2 +-
+ board/freescale/m5253demo/flash.c             |  6 +-
+ board/gardena/smart-gateway-at91sam/spl.c     |  2 +-
+ board/siemens/corvus/board.c                  |  2 +-
+ board/siemens/smartweb/smartweb.c             |  2 +-
+ board/siemens/taurus/taurus.c                 |  2 +-
+ cmd/Kconfig                                   |  1 +
+ common/Kconfig                                |  1 +
+ common/flash.c                                | 44 ++++++-------
+ drivers/mtd/altera_qspi.c                     |  4 +-
+ drivers/mtd/cfi_flash.c                       | 36 +++++------
+ drivers/net/Kconfig                           |  1 +
+ drivers/net/fec_mxc.c                         |  3 +-
+ drivers/net/fm/eth.c                          | 10 ++-
+ drivers/net/phy/Kconfig                       |  1 +
+ include/flash.h                               | 20 +++---
+ net/wget.c                                    | 11 ++--
+ test/py/tests/test_efi_loader.py              | 62 ++++++++++++++-----
+ test/py/tests/test_net_boot.py                |  2 +-
+ tools/buildman/toolchain.py                   |  4 +-
+ 37 files changed, 155 insertions(+), 118 deletions(-)
+
+-- 
+2.40.1
+
