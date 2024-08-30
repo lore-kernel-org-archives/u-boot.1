@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4D01CA1008
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 15:59:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30326CA1008
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 15:59:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF1AA88C9C;
-	Fri, 30 Aug 2024 17:57:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 197B988CCE;
+	Fri, 30 Aug 2024 17:57:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dCgaW393";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TFCLG/u8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C818088CF7; Fri, 30 Aug 2024 17:57:47 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id B456E88C75; Fri, 30 Aug 2024 17:57:49 +0200 (CEST)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B77B88C4D
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 17:57:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1859388CD1
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 17:57:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=macroalpha82@gmail.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-70f6cb5518aso346659a34.1
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 08:57:45 -0700 (PDT)
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-26fda13f898so1199089fac.1
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 08:57:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725033464; x=1725638264; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1725033465; x=1725638265; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=m9pNeFmCdL12rOn66diT5pbvz0zTbF7OwHhL6mMDQC8=;
- b=dCgaW393yBlXz26ZtGoplDjSEtsNUwIKsPK6P6ALq95+vqGjsU5t8hkpstEKGLjACO
- s4Oi+dvj2kYM3KuoHQaUY3LPCCiVri+ZaXOIW3zsGNrLuI1hC7LrrvGEpCYayDAyAAsG
- Xj/dkBNPpdeI+1F9Y155t94//BhntFoHuxBHTSG5U5X+NMndkLNFrd1Va08YQ/QlPra/
- HdRe/RG7nHdmoSiA7GMTvvIBY2RWkOXgeMFC9Cgb1sxQuqEA1wtv05UqM2v6t8KFPH1C
- RxO1XyKGI6cTRPcGPGHGPJI4wGQjlbryFY2CBBT0IjKxn9a9E79VkobS2iQEX70O7fk0
- zJGQ==
+ bh=T3FW+I+lePMlHT5ixc8Sbpd6OJIkdW5ZAfASeRacnPw=;
+ b=TFCLG/u8O6WbhwcuMBf1UjuNgIFxJkrDhYsMKgFL2D4eWtFFK0IMbMljrGOEZQHWYN
+ c4vQhGAP6nIQGky4WSwJeU5JuUXDSC8ZSzstFw1zgBkA5lEhHamxaHzl7ljSpIPaebVr
+ 27lFyAzgOCxm1Aztc0i2y2hhlp9UsmYBVNqRBLgOMV20M02TaB6XQ+rZCjKv3az80jK0
+ W9fIktXIHnDJfWf72D2o/2EhM3CyL2FL/lFZCMHTV3sVolFhSEI9N1Ztu6HZeGT5Eidf
+ copnaVBVASflb+mLfrAgJe4/Gsl3ExIo+bLFxYAQtiVqBV1tNcBhPycDtJugCGJaS6Lc
+ tYRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725033464; x=1725638264;
+ d=1e100.net; s=20230601; t=1725033465; x=1725638265;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=m9pNeFmCdL12rOn66diT5pbvz0zTbF7OwHhL6mMDQC8=;
- b=JWVKjYJNoSfTed28YmaY+dosjUyJnWTkjvNQJ3nh7yTHVtSMbXNuauITcWkcLLZQSo
- BYs7y08sfyGPmINvhKFacs4T+exBmqbFic2UoxxCINy3jd1HqfNQ8ZXkXoCkFEJad0LT
- iOzNzmWOJx032Silxew1o3iNvKsxcqyonU0H4/zlh6hz2L+fsTDOYhEKJnmXrkGTnb6p
- +ued8K0UEpgVa1mV5t/NP5uJC+ulIAzT08+ozkp4CERm3K8UNSAdXTlMh7nm/56WCwcL
- DUXRp7pNwb8k950ZjJ9w16W+kmU2R6hZMsiDwtg7BdtfXsIjLuUR7w/rlJ5wDxKUsIAs
- sHbg==
-X-Gm-Message-State: AOJu0Yz+GJDr2HkUwGn58uBOWGNv+dfXbd4Sm4OXM7uuvCevkfafAMru
- 86VTIVmERgxw0o3xVgrkrVOKYTksN8NO22eS+JhTZReai350GebN+WfAKw==
-X-Google-Smtp-Source: AGHT+IEQy20l9GSiVtUdNG0/vDPOm/WmLKzLq6SKpe8+EWNVSjp3VgC/btzwfI4RQI/eivjzghVwgA==
-X-Received: by 2002:a05:6830:916:b0:708:29dc:d2fc with SMTP id
- 46e09a7af769-70f5c3a9a52mr6552587a34.19.1725033464013; 
+ bh=T3FW+I+lePMlHT5ixc8Sbpd6OJIkdW5ZAfASeRacnPw=;
+ b=C8g1dgb1HWEc5vdGA1voIw+6WnEIRpBmK56l+Rll4yMRmrS0SaSPZyoDmuh2yGaPwr
+ 6AaKQ3eZi+pvZnY224wVYysbtNSyjIdO4/QpRoVTr4+fA5mqwxT4HFhSL+wfZsEetbnM
+ 3kHVda3BaNo90KVISsFI98mv3i6g3Yqj3DPHmOzTe7AcIVySqB0nm/yK7ebVS2FxtHt1
+ Tf+YsKTPzncsakrctDkxi6zKh6OH9irwKzYwgSs9wpg9x6kHytG0kuyoYDXWN3Az3X5j
+ 6566kWdZLUnt65cXOIS0Ra+TtGz2rR70wdLNU00w17W1iWG7M6MMGts9eqsEUj8cXNXF
+ N1Aw==
+X-Gm-Message-State: AOJu0Yx5RsJjV5t7nNkTbDJTeQRKM9O9GtGuqdI8Q7HhfEjsvbSpGfNN
+ yjBCOLbx+p8EhiQIJpviBbskmeevgK9KTKRnvm1XTvU3tNjPvhO3gi6vJw==
+X-Google-Smtp-Source: AGHT+IFAS3TphuUTkO57Y8Q9Qh5aVD0ymKbJbH03pUd+zrglZbMaT/dPs1OgHiurMjbYJ0HHZ9WrTg==
+X-Received: by 2002:a05:6870:6594:b0:261:9fc:16b9 with SMTP id
+ 586e51a60fabf-277902b4b75mr8030788fac.33.1725033464704; 
  Fri, 30 Aug 2024 08:57:44 -0700 (PDT)
 Received: from localhost.localdomain ([2600:1700:fb0:1bcf::54])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-70f671a8630sm490092a34.51.2024.08.30.08.57.43
+ 46e09a7af769-70f671a8630sm490092a34.51.2024.08.30.08.57.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Aug 2024 08:57:43 -0700 (PDT)
+ Fri, 30 Aug 2024 08:57:44 -0700 (PDT)
 From: Chris Morgan <macroalpha82@gmail.com>
 To: u-boot@lists.denx.de
 Cc: sjg@chromium.org, jernej.skrabec@gmail.com, neil.armstrong@linaro.org,
  hdegoede@redhat.com, andre.przywara@arm.com, jagan@amarulasolutions.com,
  trini@konsulko.com, ryan@testtoast.com, iuncuim@gmail.com,
  sumit.garg@linaro.org, Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH V3 8/9] arm64: dts: allwinner: h616: Change RG35XX PMIC to
- r_i2c
-Date: Fri, 30 Aug 2024 10:55:13 -0500
-Message-Id: <20240830155514.481410-9-macroalpha82@gmail.com>
+Subject: [PATCH V3 9/9] sunxi: Add support for Anbernic RG35XX-2024
+Date: Fri, 30 Aug 2024 10:55:14 -0500
+Message-Id: <20240830155514.481410-10-macroalpha82@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240830155514.481410-1-macroalpha82@gmail.com>
 References: <20240830155514.481410-1-macroalpha82@gmail.com>
@@ -97,61 +96,73 @@ X-Virus-Status: Clean
 
 From: Chris Morgan <macromorgan@hotmail.com>
 
-Change the Anbernic RG35XX series to use the r_i2c bus for the PMIC
-instead of the r_rsb bus. This is to keep the device tree consistent
-as there are at least 3 devices (the RG35XX-SP, RG28XX, and RG40XX-H)
-that have an external RTC on the r_i2c bus.
+The Anbernic RG35XX series of devices are based around an Allwinner
+H700 SoC with 1GB of RAM, 2 SD cards, and multiple input buttons.
 
-Link: https://lore.kernel.org/linux-sunxi/172252952262.1669767.7675865282122079154.b4-ty@csie.org/
+This bootloader has been tested on the Anbernic RG35XX-2024 and
+RG35XX-H, but should be suitable for the entire lineup of H700 based
+devices.
 
-[ upstream commit: c712e5d0985628b1df13930489b49b740e610a2b ]
+A future series of updates will add board selection logic to identify
+and load the correct device tree automatically.
 
 Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
 ---
- arch/arm/dts/sun50i-h700-anbernic-rg35xx-2024.dts           | 6 +++---
- .../arm64/allwinner/sun50i-h700-anbernic-rg35xx-2024.dts    | 6 +++---
- 2 files changed, 6 insertions(+), 6 deletions(-)
+ board/sunxi/MAINTAINERS                |  5 +++++
+ configs/anbernic_rg35xx_h700_defconfig | 28 ++++++++++++++++++++++++++
+ 2 files changed, 33 insertions(+)
+ create mode 100644 configs/anbernic_rg35xx_h700_defconfig
 
-diff --git a/arch/arm/dts/sun50i-h700-anbernic-rg35xx-2024.dts b/arch/arm/dts/sun50i-h700-anbernic-rg35xx-2024.dts
-index ee30584b6a..e2bbd22bd8 100644
---- a/arch/arm/dts/sun50i-h700-anbernic-rg35xx-2024.dts
-+++ b/arch/arm/dts/sun50i-h700-anbernic-rg35xx-2024.dts
-@@ -201,12 +201,12 @@
- 	vcc-pi-supply = <&reg_cldo3>;
- };
+diff --git a/board/sunxi/MAINTAINERS b/board/sunxi/MAINTAINERS
+index 4ad77c75f5..84799879e8 100644
+--- a/board/sunxi/MAINTAINERS
++++ b/board/sunxi/MAINTAINERS
+@@ -132,6 +132,11 @@ M:	Paul Kocialkowski <contact@paulk.fr>
+ S:	Maintained
+ F:	configs/Ampe_A76_defconfig
  
--&r_rsb {
-+&r_i2c {
- 	status = "okay";
- 
--	axp717: pmic@3a3 {
-+	axp717: pmic@34 {
- 		compatible = "x-powers,axp717";
--		reg = <0x3a3>;
-+		reg = <0x34>;
- 		interrupt-controller;
- 		#interrupt-cells = <1>;
- 		interrupt-parent = <&nmi_intc>;
-diff --git a/dts/upstream/src/arm64/allwinner/sun50i-h700-anbernic-rg35xx-2024.dts b/dts/upstream/src/arm64/allwinner/sun50i-h700-anbernic-rg35xx-2024.dts
-index ee30584b6a..e2bbd22bd8 100644
---- a/dts/upstream/src/arm64/allwinner/sun50i-h700-anbernic-rg35xx-2024.dts
-+++ b/dts/upstream/src/arm64/allwinner/sun50i-h700-anbernic-rg35xx-2024.dts
-@@ -201,12 +201,12 @@
- 	vcc-pi-supply = <&reg_cldo3>;
- };
- 
--&r_rsb {
-+&r_i2c {
- 	status = "okay";
- 
--	axp717: pmic@3a3 {
-+	axp717: pmic@34 {
- 		compatible = "x-powers,axp717";
--		reg = <0x3a3>;
-+		reg = <0x34>;
- 		interrupt-controller;
- 		#interrupt-cells = <1>;
- 		interrupt-parent = <&nmi_intc>;
++ANBERNIC RG35XX-2024
++M:	Chris Morgan <macromorgan@hotmail.com>
++S:	Maintained
++F:	configs/anbernic_rg35xx_h700_defconfig
++
+ BANANAPI M1 PLUS
+ M:	Jagan Teki <jagan@amarulasolutions.com>
+ S:	Maintained
+diff --git a/configs/anbernic_rg35xx_h700_defconfig b/configs/anbernic_rg35xx_h700_defconfig
+new file mode 100644
+index 0000000000..57112f7d70
+--- /dev/null
++++ b/configs/anbernic_rg35xx_h700_defconfig
+@@ -0,0 +1,28 @@
++CONFIG_ARM=y
++CONFIG_ARCH_SUNXI=y
++CONFIG_DEFAULT_DEVICE_TREE="sun50i-h700-anbernic-rg35xx-2024"
++CONFIG_SPL=y
++CONFIG_DRAM_SUN50I_H616_DX_ODT=0x08080808
++CONFIG_DRAM_SUN50I_H616_DX_DRI=0x0e0e0e0e
++CONFIG_DRAM_SUN50I_H616_CA_DRI=0x0e0e
++CONFIG_DRAM_SUN50I_H616_ODT_EN=0x7887bbbb
++CONFIG_DRAM_SUN50I_H616_TPR2=0x1
++CONFIG_DRAM_SUN50I_H616_TPR6=0x40808080
++CONFIG_DRAM_SUN50I_H616_TPR10=0x402f6633
++CONFIG_DRAM_SUN50I_H616_TPR11=0x1b1f1e1c
++CONFIG_DRAM_SUN50I_H616_TPR12=0x06060606
++CONFIG_DRAM_SUN50I_H616_PHY_ADDR_MAP_1=y
++CONFIG_MACH_SUN50I_H616=y
++CONFIG_SUNXI_DRAM_H616_LPDDR4=y
++CONFIG_DRAM_CLK=672
++CONFIG_R_I2C_ENABLE=y
++CONFIG_DEFAULT_FDT_FILE="sun50i-h700-anbernic-rg35xx-2024.dtb"
++CONFIG_SPL_I2C=y
++CONFIG_SPL_SYS_I2C_LEGACY=y
++CONFIG_SYS_I2C_MVTWSI=y
++CONFIG_SYS_I2C_SLAVE=0x7f
++CONFIG_SYS_I2C_SPEED=400000
++CONFIG_REGULATOR_AXP=y
++CONFIG_AXP717_POWER=y
++CONFIG_AXP_DCDC2_VOLT=940
++CONFIG_AXP_DCDC3_VOLT=1100
 -- 
 2.34.1
 
