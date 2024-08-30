@@ -4,47 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D8CBCA0ED0
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 01:27:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5D7ACA0ECC
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 01:27:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FF9A88D4D;
-	Fri, 30 Aug 2024 03:26:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C3D6188D60;
+	Fri, 30 Aug 2024 03:26:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1724981205;
-	bh=QHZnMcvlfyLbRoGgUHJKWBPfIep+DkQWyO2ESEh3Ee4=;
+	s=phobos-20191101; t=1724981206;
+	bh=+SbkYwwm9OJZN5wuvbO6t0N3q+/n+mT4sFjt2xL8gF4=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=iQRD1gY+ctfORs654Z3NNygJ41T9QEFaqW4ThSk+GpE1OuRSPVvCQa/mh88ZJloKb
-	 iQiyTcCnLgwOmP/AEaK9jJu5uQCEeCBr1dqV4+QMJfasIk4Yd0Fy7P++s3xi2bhLdr
-	 PX63rhnJInsSXpRtEO0+iu+kXF9TPzRd5sn6bS43H1GKsMy5OSNF4dIc+vTkQXyrim
-	 FRUOvXX1FzV0I3xHeSDTEKe0HRh/7foUUpc+PZ6qE/VpEWNZDYwTMGQztEhm5o3dne
-	 wJRgoq8w+SRqdfxuR0iQ/0TPs/cV4Kzl5pa24afD6rGxR0jcg/DspUTY+FR8Y2XjRL
-	 +Jg7PZJPEimhA==
+	b=tpUPOm/BlgeUbOZCthVbvCi3168QuTPRSrJbV2kjROAbGAiNHz3Y3AXgYjkeNI/Cp
+	 HvQIeAlzMb0Q22W18lDykuP2StVe8ZzRTulpLlqbvUG3cMqM87Fih64xYswA0DUDxm
+	 FFbKuUpn03/gIfcgjGhWrypA5mrwPkzfdAEqQsCXW/gZYexhpVamJqloRIkyv7E7s3
+	 UNs2wcbm9AaB/3yO/IqLWqc4EyUGmXgEicapAEbj3kB/165AJ/7FxvnlIfQ3TUrZ5z
+	 CUUS4RDkEq5eX5OSkZ2X2pdHfl793EN5ys5ubC3OPako2iqGlg8yHetgWunX6EWTna
+	 doBU338Utb5EA==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 1EBC888D37;
- Fri, 30 Aug 2024 03:26:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 4CCFA886CC;
+ Fri, 30 Aug 2024 03:26:43 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1724981203;
- bh=QHZnMcvlfyLbRoGgUHJKWBPfIep+DkQWyO2ESEh3Ee4=;
+ s=phobos-20191101; t=1724981204;
+ bh=+SbkYwwm9OJZN5wuvbO6t0N3q+/n+mT4sFjt2xL8gF4=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Q9DfRhvII4SqVnl43yuc33gSyBoH377JInknwkND4YXFKgIRJFbW7sKsQ8H9FjpD8
- AhMunkbPleNDWmrwa/On+0CSApn6j4OSFjg8xymC9R3ae4t3yoTmscmV2WcY10fieP
- p+2Of6t8i3FjopwDzEe+CPhiZyEhaaWf2114phi5OX47IBxo0vhRNwj2Io0MCoxlka
- Qs5da9SLLuKaAU8nRgKz8XuvsKZmZ9zP9uTRKPDo4zMgvjrj/C4zqVDzHG9/NhMmJ9
- KK+ansO4fkWxa9UZeOgDcqY62W8/FW3p9I8hKSYC4QTsrlDNFbOa1CpzvXNmfq4M8b
- 3ZLDepL9ArhxA==
-Message-ID: <801768ea-1bca-4e5a-b9d0-d4fbbdb140b5@denx.de>
-Date: Fri, 30 Aug 2024 03:17:58 +0200
+ b=VSncRD71+v+Ck5f+ftlh0qp7nGJKLiuk8ZXzOXzeo57FkNTEjYW61oxsjbF5uwbdU
+ rdWA1BaswAsy6aKa5f3TRzdFRTlhUoKclmoG6+f1XMyqzJ/iCK1jz+fyKFkkIwwhEZ
+ LpOkKGdlFhffBBP2bxrhwXRTeeNMoMkNa869o82hD7/AimuNDiF22NMeo6ZzploEJH
+ V+B3Gj5omRu1axtsQpV4scci1qYjQojvXjrGO9bBSx0OdXx7BkKjmJNiDVc4vWNWuP
+ VMDZACFbhwWlab8TyFLUMTe5oJ25siSr3MgIohP1j1wg4z3DwxZux3voxahbPH6QmO
+ gw+vPP/v7OC8g==
+Message-ID: <377687e7-4487-406f-93ca-91000bb4e85b@denx.de>
+Date: Fri, 30 Aug 2024 03:20:16 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 3/9] phy: starfive: Add Starfive JH7110 PCIe 2.0 PHY
- driver
+Subject: Re: [PATCH v4 4/9] usb: cdns: starfive: Add cdns USB driver
 To: Minda Chen <minda.chen@starfivetech.com>, Tom Rini <trini@konsulko.com>,
  Roger Quadros <rogerq@kernel.org>, Rick Chen <rick@andestech.com>,
  Leo <ycliang@andestech.com>, Neil Armstrong <neil.armstrong@linaro.org>,
@@ -54,10 +53,10 @@ To: Minda Chen <minda.chen@starfivetech.com>, Tom Rini <trini@konsulko.com>,
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>, E Shattow <lucent@gmail.com>
 References: <20240829013058.6178-1-minda.chen@starfivetech.com>
- <20240829013058.6178-4-minda.chen@starfivetech.com>
+ <20240829013058.6178-5-minda.chen@starfivetech.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240829013058.6178-4-minda.chen@starfivetech.com>
+In-Reply-To: <20240829013058.6178-5-minda.chen@starfivetech.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -77,56 +76,99 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 8/29/24 3:30 AM, Minda Chen wrote:
+> Add cdns USB3 wrapper driver.
+> 
+> Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
+> ---
+>   drivers/usb/cdns3/Kconfig          |   7 ++
+>   drivers/usb/cdns3/Makefile         |   2 +
+>   drivers/usb/cdns3/cdns3-starfive.c | 191 +++++++++++++++++++++++++++++
+>   3 files changed, 200 insertions(+)
+>   create mode 100644 drivers/usb/cdns3/cdns3-starfive.c
+> 
+> diff --git a/drivers/usb/cdns3/Kconfig b/drivers/usb/cdns3/Kconfig
+> index 35b61497d9..f8f363982b 100644
+> --- a/drivers/usb/cdns3/Kconfig
+> +++ b/drivers/usb/cdns3/Kconfig
+> @@ -55,4 +55,11 @@ config USB_CDNS3_TI
+>   	help
+>   	  Say 'Y' here if you are building for Texas Instruments
+>   	  platforms that contain Cadence USB3 controller core. E.g.: J721e.
+> +
+> +config USB_CDNS3_STARFIVE
+> +	tristate "Cadence USB3 support on Starfive platforms"
+> +	default USB_CDNS3
+
+Should this be 'default y if SOMEPLATFORM' ?
 
 [...]
 
-> +static int phy_pcie_mode_set(struct jh7110_pcie_phy *data, bool usb_mode)
+> +static void cdns_mode_init(struct cdns_starfive *data, enum usb_dr_mode mode)
 > +{
-> +	unsigned int phy_mode, width, usb3_phy, ss_mode, split;
+> +	unsigned int strap, suspendm;
 > +
-> +	/* default is PCIe mode */
-> +	if (!data->stg_syscon || !data->sys_syscon) {
-> +		if (usb_mode) {
-> +			dev_err(data->phy->dev, "doesn't support usb3 mode\n");
-
-USB3 in capitals , USB is an abbreviation.
-
-[...]
-
-> +static int jh7110_pcie_phy_set_mode(struct phy *_phy,
-
-Use plain 'phy' variable name, drop the leading underscore .
-
-> +				    enum phy_mode mode, int submode)
-> +{
-> +	struct udevice *dev = _phy->dev;
-> +	struct jh7110_pcie_phy *phy = dev_get_priv(dev);
-> +	int ret;
-> +
-> +	if (mode == phy->mode)
-> +		return 0;
+> +	regmap_update_bits(data->stg_syscon, data->stg_usb_mode,
+> +			   USB_MISC_CFG_MASK,
+> +			   USB_SUSPENDM_BYPS | USB_PLL_EN | USB_REFCLK_MODE);
 > +
 > +	switch (mode) {
-> +	case PHY_MODE_USB_HOST:
-> +	case PHY_MODE_USB_DEVICE:
-> +	case PHY_MODE_USB_OTG:
-> +		ret = phy_pcie_mode_set(phy, 1);
-> +		if (ret)
-> +			return ret;
+> +	case USB_DR_MODE_HOST:
+> +		strap = USB_STRAP_HOST;
+> +		suspendm = USB_SUSPENDM_HOST;
 > +		break;
-> +	case PHY_MODE_PCIE:
-> +		phy_pcie_mode_set(phy, 0);
+> +
+> +	case USB_DR_MODE_PERIPHERAL:
+> +		strap = USB_STRAP_DEVICE;
+> +		suspendm = 0;
 > +		break;
 > +	default:
-> +		return -EINVAL;
+> +		return;
 > +	}
 > +
-> +	dev_dbg(_phy->dev, "Changing phy mode to %d\n", mode);
+> +	regmap_update_bits(data->stg_syscon, data->stg_usb_mode,
+> +			   USB_STRAP_MASK, strap);
+> +	regmap_update_bits(data->stg_syscon, data->stg_usb_mode,
+> +			   USB_SUSPENDM_MASK, suspendm);
 
-PHY in capitals.
+Are two consecutive writes to the same register mandatory here ?
 
-> +	phy->mode = mode;
+> +}
+
+[...]
+
+> +static int cdns_starfive_probe(struct udevice *dev)
+> +{
+> +	struct cdns_starfive *data = dev_get_plat(dev);
+> +	enum usb_dr_mode dr_mode;
+> +	ofnode node;
+> +	int ret;
+> +
+> +	data->dev = dev;
+> +
+> +	ret = cdns_starfive_get_syscon(data);
+> +	if (ret)
+> +		return ret;
+> +
+> +	node = ofnode_by_compatible(dev_ofnode(dev), "cdns,usb3");
+> +	if (!ofnode_valid(node)) {
+> +		dev_err(dev, "failed to get usb node\n");
+
+USB in capitals.
+
+> +		return -ENODEV;
+> +	}
+> +
+> +	dr_mode = usb_get_dr_mode(node);
+> +
+> +	data->mode = dr_mode;
+> +	ret = cdns_clk_rst_init(data);
+> +	if (ret) {
+> +		dev_err(data->dev, "clk reset failed: %d\n", ret);
+> +		return ret;
+> +	}
+> +	cdns_mode_init(data, dr_mode);
 > +
 > +	return 0;
 > +}
-Looks pretty good, thanks !
+
+Looks pretty good, thanks .
