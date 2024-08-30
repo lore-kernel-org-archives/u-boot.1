@@ -4,102 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63CDDCA0FE1
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 12:36:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2292CA0FF1
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 13:23:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F195F88C75;
-	Fri, 30 Aug 2024 14:34:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 15A1B88BBC;
+	Fri, 30 Aug 2024 15:23:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tUPa8t+O";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="Wk2JrFRK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D44788BBC; Fri, 30 Aug 2024 14:34:49 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4BE3788BF9; Fri, 30 Aug 2024 15:23:45 +0200 (CEST)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D53C88BFB
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 14:34:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C22B88BCF
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 15:23:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-42bac9469e8so14864215e9.3
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 05:34:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725021287; x=1725626087; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=T720AHi0i4hNwKP9CGAlVcXZIAOAU+9zGvK3MyjWnBM=;
- b=tUPa8t+OImzjM3/2s23OjQ1XNQQv5gXRsNuyVTPaSFxzgOTGn3deCZhAhc44JDc8S3
- r4uyl26pghFRntPOwnTq3ufZ5yoigR3Mj7/LMT+ZDA5YTE3/ILgEAS3w4TyOOGWrThpH
- lj5p0aa4U7gUefMyKgNei1tAbshqfmW1Pf30KLD/wJkVGj6DZSPPxzaFBKIL8cPzIvVL
- lILn5YlrmLYLngwXd214OMPRLmNYD7a70yiLIHjX2AwV/htwb2qG0S1InkA6+evcdeyw
- 4fFX1l3Knte1AkaSWKkg2kfXymxrWlG3A66FTlkHgvm9m7oxzHpsFb2ZFIvRKhQSjH9V
- 2G6g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725021287; x=1725626087;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=T720AHi0i4hNwKP9CGAlVcXZIAOAU+9zGvK3MyjWnBM=;
- b=VZNk+yP4GBG5S6e62eUEFD2L6MhN92sl0+1S7dYRjNF1wfxoCJZ6lHzp0yMWuWNqBZ
- UfS4TeOCAV8nqiYzgn/ptbbvWB+vNlV9Uj1A9neXyojXD+y7Ynxg45J8YvgBq57cqIxZ
- PBvWZg7g12nvW8QAlz59R1rxsRaE9mxj8XnJQdq9Y7rTzhc/HPSOkCaAAYegO5GtavM7
- YeHTSrKLQXXKpVYXoqA9hAAQaVWy5zhcCZQ9iQCqV3Kbl4FEOMl/7uEy7sIkG7Ob+eRi
- 4QPW3K8NxCAQ1gsXhTOmp7yKpthVa5QBtErrZTIy/JL7MNfTA0VhQGZCUuUt9UuMpHin
- yMuw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWVQJyEUyifV0iCQpLaO+906hbmn7CuNQOzhQTaZGbIQP0rGyJ7inVb8snLAiMDrM5db5V+mQY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxdS6cb0wQ7NzNLLIOO+A31o7TQnNmqMh7R4NpwHS9IDS8wgO7o
- uWTYSEn1pGjB+Hu7GUmU/fNKfJvlol7ZKSCL7ax1yVAdmPGUxDpM1njzfZyoOGc=
-X-Google-Smtp-Source: AGHT+IFKO1YTo4DIL/hHbR9dTQuF8pl0y1ZmBARCkGDN9W//2H7E5AYURO4zGedcxZZByLUlj4eeGw==
-X-Received: by 2002:a05:600c:3596:b0:42b:8a35:1ade with SMTP id
- 5b1f17b1804b1-42bb02d94f0mr50289425e9.27.1725021286994; 
- Fri, 30 Aug 2024 05:34:46 -0700 (PDT)
-Received: from [192.168.1.17] (host-80-47-105-51.as13285.net. [80.47.105.51])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-374b960ef94sm648207f8f.103.2024.08.30.05.34.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Aug 2024 05:34:46 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Fri, 30 Aug 2024 13:34:41 +0100
-Subject: [PATCH v8 11/11] test: lib/uuid: add tests for UUID
- version/variant bits
-MIME-Version: 1.0
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=B.Hahn@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1725024223; x=1727616223;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=gLAW3adIYANOgBLe2Odrggq9njXh20qcIYxRZqwJwzE=;
+ b=Wk2JrFRK8d+mwqdJ4IHnM5Lkn+JB45tQjSSeOnMlKvbGI4ZHmc45beu9iA52of2k
+ lPijhQgzWrgnEoeOdqb4oKGwXA9JRp6B3gm5T76D7ztfZL3zy4CCGZTar782bYwa
+ znffc+Bh8jQTV8aFI/yyVt4/bh2h6jSrYuMmVk3rx8U=;
+X-AuditID: ac14000a-03251700000021bc-b3-66d1c7de31af
+Received: from florix.phytec.de (Unknown_Domain [172.25.0.13])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 91.F3.08636.ED7C1D66;
+ Fri, 30 Aug 2024 15:23:42 +0200 (CEST)
+Received: from Berlix.phytec.de (172.25.0.12) by Florix.phytec.de
+ (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Fri, 30 Aug
+ 2024 15:23:42 +0200
+Received: from Berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4]) by
+ berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4%4]) with mapi id 15.01.2507.006;
+ Fri, 30 Aug 2024 15:23:42 +0200
+From: Benjamin Hahn <B.Hahn@phytec.de>
+To: Lukasz Majewski <lukma@denx.de>, Fabio Estevam <festevam@gmail.com>
+CC: Teresa Remmet <T.Remmet@phytec.de>, Stefano Babic <sbabic@denx.de>,
+ "uboot-imx@nxp.com" <uboot-imx@nxp.com>, Cem Tenruh <C.Tenruh@phytec.de>,
+ "Tom Rini" <trini@konsulko.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, Yannic Moog <Y.Moog@phytec.de>
+Subject: Re: [PATCH v2] config: imx: Define CFG_SYS_UBOOT_BASE for Phytec's
+ imx8mm SoM QSPI boot
+Thread-Topic: [PATCH v2] config: imx: Define CFG_SYS_UBOOT_BASE for Phytec's
+ imx8mm SoM QSPI boot
+Thread-Index: AQHa8xGkyD16oF/ixkOlEYvHo56qSLI7W+4AgADbqQCAA4BoAA==
+Date: Fri, 30 Aug 2024 13:23:42 +0000
+Message-ID: <dbf9bf5e-b96b-4e34-816c-215e68289526@phytec.de>
+References: <20240820145944.3048128-1-lukma@denx.de>
+ <CAOMZO5AAfn7zw1+VEGjdS6UAQLv5kTVT97_dy_oxhauntYeHvQ@mail.gmail.com>
+ <20240828095520.76f904bc@wsk>
+In-Reply-To: <20240828095520.76f904bc@wsk>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.25.0.11]
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240830-b4-dynamic-uuid-v8-11-79b31b199bee@linaro.org>
-References: <20240830-b4-dynamic-uuid-v8-0-79b31b199bee@linaro.org>
-In-Reply-To: <20240830-b4-dynamic-uuid-v8-0-79b31b199bee@linaro.org>
-To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Mario Six <mario.six@gdsys.cc>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-Cc: Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de, 
- Caleb Connolly <caleb.connolly@linaro.org>
-X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1868;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=N9V0m2aNtjrngrrxhmdCcdsnP8l6Sxth44kFjZd/FOA=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBm0bxaMn3NkReWtygfjw2EKX7TErNPR4UvfQdu9
- g980KT7KB6JAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZtG8WgAKCRAFgzErGV9k
- thBQEACMLUIhBxGMbW8dBkMXmC7x3CLnX/Me6xo9ckTcaVAXaThgU4iXOdJabQRQZNoJHeF7xTK
- Sp/S/LbzaE+81ghlGDS54T9kj7ESCwDEen1U5GVOnzTurMJ7G2hKolRBdrim+UddYvitwtYP5d2
- yKCe51NHawyycLn/iPYamXSXPb3OYYnG9KGIxsnyYTwkrUbMfF3JCWNMyfldV2EoWUvksFv6Gtl
- IqT7fqKiCXuI+u8F7X+q+nUU7BeJTKvIzE6UMPQAfSxi1+wvW8rzmi/gUXOJemDkNjPywy5U62H
- 0WyyXk+ARegKwpiYmyF8jGBrD8515UvethRqPb7L1qILUu7QX1kfOMcZq0kbhlclXKMYNb0QTMn
- uaO0tUNRGfxgYFMQXaYxkFj/csQ46WrZVDl7lu3sYgso41hD22GE+wgzn0m2xIWCgyme5jVS7MH
- axiaHaaOpNzEQOOSVzFAscRDE/uFeDO+xcE5Ka31fXrQNXwURWZUvXmALw+nze5heZKbqBxGaIA
- OvAngOjkCOxrXQM+gJr6VIAgtKIOMa77f95/GrfXB8envfjrWcKHP1PjXhrloIbtTqcQFhKQT9g
- MZHb2bCwXrXFEyd3I4Ppgt82oouUOlYyiBvA8bx81ZpMLdapnjhPvLd2XADM1xdkXsIRoXHUkLE
- CJnAdzDbeNwY86w==
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+Content-ID: <B3A7CF7C99DF6F408EBDC9DF41372C80@phytec.de>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrPIsWRmVeSWpSXmKPExsWyRpKBV/fe8YtpBkdO2Vg8vOpv8fzdZSaL
+ 9lM+FlMnbWa3eLu3k91iyuP17A5sHvNmnWDx2DnrLrvHqwOr2D3O3tnB6LHx3Q6mANYoLpuU
+ 1JzMstQifbsEroy58++wFuwRrtg8ja2B8Y9QFyMnh4SAicTz983MXYxcHEICS5gkrvz8wwbh
+ 3GeUuL5iNTtIlZDABkaJCRvyQWw2ATWJXW9es4LYIgLuEosOrmYBaWAWaGOS6Nn1AiwhLJAk
+ 8XzhTmaIomSJtSsfQDU4SRz//Y0FxGYRUJVomNTEBmLzCthILDn9kQVi2WxGiekvOEBsTgEt
+ iZZtB8BqGAVkJTZsOA82k1lAXGLTs++sEC8ISCzZAxGXEBCVePn4H1RcXuLErWlMXYwcQPWa
+ Eut36UO0WkhMujKREcJWlJjS/ZAd4gRBiZMzn7BMYBSfhWTDLITuWUi6ZyHpnoWkewEj6ypG
+ odzM5OzUosxsvYKMypLUZL2U1E2MoEgVYeDawdg3x+MQIxMH4yFGCQ5mJRHepXsupgnxpiRW
+ VqUW5ccXleakFh9ilOZgURLnXd0RnCokkJ5YkpqdmlqQWgSTZeLglGpgFM/d+ajt+Wqh2Iys
+ 68aqe6UuPMvVsT1sl1jx3v1b4HlDxUsPuPk9DFeaJ5fPOG/+do5E09zej3ufRZ8Kvtcce0bI
+ QEBY8tBfrvhXWktPBdaxF63R0+/fc2d17Oflv0VS7X973lcvOcromfj9adsZBbvueR+zXFfe
+ 8TzyoOLpLnudJ6/6m9dsUGIpzkg01GIuKk4EAGE+d7HCAgAA
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,69 +101,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a test to check the version/variant bits of v4 and v5 UUIDs.
-
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- test/lib/uuid.c | 41 +++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 41 insertions(+)
-
-diff --git a/test/lib/uuid.c b/test/lib/uuid.c
-index 4a1a16b4f315..bf5d5afdb521 100644
---- a/test/lib/uuid.c
-+++ b/test/lib/uuid.c
-@@ -42,8 +42,49 @@ static int lib_test_uuid_to_le(struct unit_test_state *uts)
- 	return 0;
- }
- LIB_TEST(lib_test_uuid_to_le, 0);
- 
-+#if defined(CONFIG_RANDOM_UUID) || defined(CONFIG_CMD_UUID)
-+/* Test UUID attribute bits (version, variant) */
-+static int lib_test_uuid_bits(struct unit_test_state *uts)
-+{
-+	unsigned char uuid[16];
-+	efi_guid_t guid;
-+	int i;
-+
-+	/*
-+	 * Reduce the chance of a randomly generated UUID disguising
-+	 * a regression by testing multiple times.
-+	 */
-+	for (i = 0; i < 5; i++) {
-+		/* Test UUID v4 */
-+		gen_rand_uuid((unsigned char *)&uuid);
-+
-+		printf("v4 UUID: %pUb\n", (efi_guid_t *)uuid);
-+
-+		/* version 4 */
-+		ut_assert((uuid[6] & 0xf0) == 0x40);
-+		/* variant 1 */
-+		ut_assert((uuid[8] & UUID_VARIANT_MASK) == (UUID_VARIANT << UUID_VARIANT_SHIFT));
-+
-+		/* Test v5, use the v4 UUID as the namespace */
-+		gen_v5_guid((struct uuid *)uuid,
-+			    &guid, "test", 4, NULL);
-+
-+		printf("v5 GUID: %pUl\n", (efi_guid_t *)uuid);
-+
-+		/* This is a GUID so bits 6 and 7 are swapped (little endian). Version 5 */
-+		ut_assert((guid.b[7] & 0xf0) == 0x50);
-+		/* variant 1 */
-+		ut_assert((guid.b[8] & UUID_VARIANT_MASK) == (UUID_VARIANT << UUID_VARIANT_SHIFT));
-+	}
-+
-+	return 0;
-+}
-+
-+LIB_TEST(lib_test_uuid_bits, 0);
-+#endif
-+
- struct dynamic_uuid_test_data {
- 	const char *compatible;
- 	const u16 *images[4];
- 	const char *expected_uuids[4];
-
--- 
-2.46.0
-
+SGkgTHVrYXN6LA0KDQpPbiAyOC4wOC4yNCAwOTo1NSwgTHVrYXN6IE1hamV3c2tpIHdyb3RlOg0K
+PiBIaSBGYWJpbywNCj4NCj4+IEhpIEx1a2FzeiwNCj4+DQo+PiBPbiBUdWUsIEF1ZyAyMCwgMjAy
+NCBhdCAxMjowMOKAr1BNIEx1a2FzeiBNYWpld3NraSA8bHVrbWFAZGVueC5kZT4NCj4+IHdyb3Rl
+Og0KPj4+IFRoZSBpbWFnZSBvZmZzZXQgd2hlbiBib290aW5nIGZyb20gU1BJLU5PUiAoUVNQSSwg
+RlNQSSBkcml2ZXIpIGlzDQo+Pj4gZGlmZmVyZW50IHRoYW4gb25lIGZvciBTRCBjYXJkIC8gZU1N
+QyBhcyBleHRyYSBzcGFjZSAoMHgxMDAwKSBpcw0KPj4+IGNvbnN1bWVkIGJ5IEZTUEkgY29uZmln
+dXJhdGlvbiBoZWFkZXIgKENPTkZJR19GU1BJX0NPTkZfSEVBREVSKS4NCj4+Pg0KPj4+IFNpZ25l
+ZC1vZmYtYnk6IEx1a2FzeiBNYWpld3NraSA8bHVrbWFAZGVueC5kZT4NCj4+PiAtLS0NCj4+PiBD
+aGFuZ2VzIGZvciB2MjoNCj4+PiAtIEF2b2lkIGxpbmUgYnJlYWtzIHdpdGggZGVmaW5lcw0KPj4g
+IEZyb20gdGhlIG90aGVyIHRocmVhZCwgbXkgdW5kZXJzdGFuZGluZyBpcyB0aGF0IFFTUEkgYm9v
+dCBpcyBzdGlsbCBub3QNCj4+IHdvcmtpbmcgd2l0aCB0aGlzIHBhdGNoIGFwcGxpZWQuDQo+Pg0K
+PiBCdXQgdGhpcyBpcyBhbiBvcnRob2dvbmFsIHByb2JsZW0gLSB0aGUgcHJvYmxlbSBpcyB3aXRo
+IGJpbm1hbiBpbWFnZQ0KPiBnZW5lcmF0aW9uLg0KPg0KPiBUaGlzIHBhdGNoIGZvbGxvd3MgdGhl
+IGNvZGUgYWxyZWFkeSBwcmVzZW50IGluIGUuZy4gaW14OG1tX2JlYWNvbioNCj4gYm9hcmRzLg0K
+Pg0KPj4gUGxlYXNlIHJlc2VuZCB0aGlzIHBhdGNoIHdoZW4gdGhlIFFTUEkgYm9vdCBwcm9ibGVt
+IGlzIHJlc29sdmVkLg0KPj4NCj4gQXMgSSd2ZSB3cml0dGVuIGFib3ZlIC0gcHJvYmxlbSBpcyBz
+b2xlbHkgd2l0aCBiaW5tYW4gY29kZSBnZW5lcmF0aW9uIC0NCj4gYWZ0ZXIgcmV2ZXJ0aW5nIDMg
+bGFzdCBjb21taXRzIGZyb20gaW14OG1tLXUtYm9vdC5kdHNpIHRoZSBpbWFnZSBpcw0KPiBjb3Jy
+ZWN0bHkgZ2VuZXJhdGVkLg0KDQpJIGNhbiBhbHNvIHNlZSB0aGlzLiBXaGVuIEkgYXBwbHkgYWxs
+IHlvdXIgcGF0Y2hlcyBhbmQgcmV2ZXJ0IHRob3NlIDMgDQpjb21taXRzLCBTRFAgYm9vdCB2aWEg
+dXV1IGFuZCBmbGFzaGluZyBTUEkgTk9SIGZsYXNoIHdpdGggdGhlIHFzcGkgSW1hZ2UgDQp3b3Jr
+cy4gQW5kIHRoZW4gYWxzbyBTUEkgYm9vdCB3b3Jrcy4NCldoZW4gSSBkb24ndCByZXZlcnQgdGhl
+IDMgY29tbWl0LCBpdCBkb2VzIG5vdCB3b3JrLiAoU0RQIGJvb3QgdmlhIHV1dSANCmRvZXMgbm90
+IHdvcmsgYW5kIHRoZSBJbWFnZSBkb2VzIG5vdCBib290IHdoZW4gZmxhc2hlZCBpbnRvIFNQSSBO
+T1IgZmxhc2gpLg0KDQpJIGhhdmVuJ3QgaW52ZXN0aWdhdGVkIHdoYXQgdGhlIHByb2JsZW0gaXMg
+b3IgaG93IGl0IGNhbiBiZSBmaXhlZCANCnRob3VnaC4gU28gSSBndWVzcyBmdXJ0aGVyIGludmVz
+dGlnYXRpb24gaXMgbmVlZGVkIGhlcmUuDQoNCkJlbmphbWluDQoNCj4NCj4+IFRoYW5rcw0KPg0K
+Pg0KPg0KPiBCZXN0IHJlZ2FyZHMsDQo+DQo+IEx1a2FzeiBNYWpld3NraQ0KPg0KPiAtLQ0KPg0K
+PiBERU5YIFNvZnR3YXJlIEVuZ2luZWVyaW5nIEdtYkgsICAgICAgTWFuYWdpbmcgRGlyZWN0b3I6
+IEVyaWthIFVudGVyDQo+IEhSQiAxNjUyMzUgTXVuaWNoLCBPZmZpY2U6IEtpcmNoZW5zdHIuNSwg
+RC04MjE5NCBHcm9lYmVuemVsbCwgR2VybWFueQ0KPiBQaG9uZTogKCs0OSktODE0Mi02Njk4OS01
+OSBGYXg6ICgrNDkpLTgxNDItNjY5ODktODAgRW1haWw6IGx1a21hQGRlbnguZGUNCg0KDQo=
