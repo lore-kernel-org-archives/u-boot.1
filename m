@@ -4,61 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5D7ACA0ECC
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 01:27:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CEB4CA0ED1
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 01:46:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3D6188D60;
-	Fri, 30 Aug 2024 03:26:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 5FF5388D50;
+	Fri, 30 Aug 2024 03:46:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1724981206;
-	bh=+SbkYwwm9OJZN5wuvbO6t0N3q+/n+mT4sFjt2xL8gF4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=tpUPOm/BlgeUbOZCthVbvCi3168QuTPRSrJbV2kjROAbGAiNHz3Y3AXgYjkeNI/Cp
-	 HvQIeAlzMb0Q22W18lDykuP2StVe8ZzRTulpLlqbvUG3cMqM87Fih64xYswA0DUDxm
-	 FFbKuUpn03/gIfcgjGhWrypA5mrwPkzfdAEqQsCXW/gZYexhpVamJqloRIkyv7E7s3
-	 UNs2wcbm9AaB/3yO/IqLWqc4EyUGmXgEicapAEbj3kB/165AJ/7FxvnlIfQ3TUrZ5z
-	 CUUS4RDkEq5eX5OSkZ2X2pdHfl793EN5ys5ubC3OPako2iqGlg8yHetgWunX6EWTna
-	 doBU338Utb5EA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="X0IUXPKu";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 9664A88D5B; Fri, 30 Aug 2024 03:46:31 +0200 (CEST)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 4CCFA886CC;
- Fri, 30 Aug 2024 03:26:43 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1724981204;
- bh=+SbkYwwm9OJZN5wuvbO6t0N3q+/n+mT4sFjt2xL8gF4=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=VSncRD71+v+Ck5f+ftlh0qp7nGJKLiuk8ZXzOXzeo57FkNTEjYW61oxsjbF5uwbdU
- rdWA1BaswAsy6aKa5f3TRzdFRTlhUoKclmoG6+f1XMyqzJ/iCK1jz+fyKFkkIwwhEZ
- LpOkKGdlFhffBBP2bxrhwXRTeeNMoMkNa869o82hD7/AimuNDiF22NMeo6ZzploEJH
- V+B3Gj5omRu1axtsQpV4scci1qYjQojvXjrGO9bBSx0OdXx7BkKjmJNiDVc4vWNWuP
- VMDZACFbhwWlab8TyFLUMTe5oJ25siSr3MgIohP1j1wg4z3DwxZux3voxahbPH6QmO
- gw+vPP/v7OC8g==
-Message-ID: <377687e7-4487-406f-93ca-91000bb4e85b@denx.de>
-Date: Fri, 30 Aug 2024 03:20:16 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 4872C8826E
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 03:46:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7a802deea39so90307085a.2
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 18:46:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1724982388; x=1725587188; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=376lpd8+/kOic3Dzscx6tOftL0aNE/Z7Upcpq/GcTyc=;
+ b=X0IUXPKuVKDfh1M8GkRdd8kk4dcmGvNvMyarXJvsGDCIDWyl730gbSAqBC7XWWsVHD
+ oCwFoHOZ34+k2G2ojqURx4N9NEL6mwhSSg3N38JZssry3geXMUx2MnJLzsUIl+1t6L2n
+ rzFWgxwYSgclbmnrfREcwiJ3jmRSMxzOsKsEk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1724982388; x=1725587188;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=376lpd8+/kOic3Dzscx6tOftL0aNE/Z7Upcpq/GcTyc=;
+ b=qP/e2/71Ec4ZYFfRLF/OtmZFnlHVHqBLgSRf5KMX4oksE5HU+lKdi87iaXwFoQR8nI
+ wHN8E+1Shq+QUYEnwMloZaXboATLLQUP05TR3Zkv4oEzaAkHcWY7vjS/rH6wXdCFoQkP
+ 6RVqwFHsfCyIyWQgM1qzqBP+QkkFj+sWcV7nt2pcbqsyxAMRs6c/jBiqenEOp+nwE36w
+ 6wgOCH2nlIEqbbQXiYH8dmLu3LrfuLP+JfZHOYM/HpKEMzguZeS3Aq02zpMcM2N+rrTK
+ oWlEh6OaMODoFq1tnQw5UIV6Mbc+3d65HUs+LjqAQvcbeNwshOVzEhUhCI+LqzBlVcEU
+ wVkA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUrzAQkselqzacPuMk0zCkdnOwjrkWjD0EGMWMel7LuREfRqlNPRXrgILcBUdHH36CBrR9G39U=@lists.denx.de
+X-Gm-Message-State: AOJu0YxUCDmL5wA5apQt9JseuUIkxgHoLkhR1dFYAWyqH+CUu1LGS0wQ
+ 7KAhS7Zxn3rbSGYiknWHi2EGNTGkxOSX2hJYqmxioEWD3mcY7dO0+IzUwjBJNLI=
+X-Google-Smtp-Source: AGHT+IGyKcR286UENuuKKyTV3FvZmcOZZseXEK6x9odumHZacgSnKg3gbLvjHzDEkXtD1tFu4uOrFA==
+X-Received: by 2002:a05:620a:254e:b0:795:5995:fc89 with SMTP id
+ af79cd13be357-7a8041ad0a1mr506119885a.18.1724982387929; 
+ Thu, 29 Aug 2024 18:46:27 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7a806d3be38sm102003285a.79.2024.08.29.18.46.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 Aug 2024 18:46:27 -0700 (PDT)
+Date: Thu, 29 Aug 2024 19:46:22 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Peter Robinson <pbrobinson@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Apurva Nandan <a-nandan@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Greg Malysa <greg.malysa@timesys.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jayesh Choudhary <j-choudhary@ti.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Minkyu Kang <mk7.kang@samsung.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Stefan Roese <sr@denx.de>, Tony Dinh <mibodhi@gmail.com>,
+ Vaishnav Achath <vaishnav.a@ti.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ huang lin <hl@rock-chips.com>
+Subject: Re: [PATCH 00/18] vbe: Series part D
+Message-ID: <20240830014622.GQ2479150@bill-the-cat>
+References: <20240828014538.3322013-1-sjg@chromium.org>
+ <CALeDE9MX6MMECX+vNCjMs8Z2_G3+gSio4BxFHgez-H_a4f2Uyg@mail.gmail.com>
+ <CAFLszTgrCGhvhO0GDSLABu1D10H97dBWFSnEf8gSJujq6iUduw@mail.gmail.com>
+ <20240830004936.GP2479150@bill-the-cat>
+ <CAFLszTjjni839jghOpforB-4+MnqRh7JXw575VtP_UO-SzfnKg@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 4/9] usb: cdns: starfive: Add cdns USB driver
-To: Minda Chen <minda.chen@starfivetech.com>, Tom Rini <trini@konsulko.com>,
- Roger Quadros <rogerq@kernel.org>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
- Nishanth Menon <nm@ti.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, E Shattow <lucent@gmail.com>
-References: <20240829013058.6178-1-minda.chen@starfivetech.com>
- <20240829013058.6178-5-minda.chen@starfivetech.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240829013058.6178-5-minda.chen@starfivetech.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="QnR0bfpeb3MZ0pX8"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjjni839jghOpforB-4+MnqRh7JXw575VtP_UO-SzfnKg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,100 +111,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/29/24 3:30 AM, Minda Chen wrote:
-> Add cdns USB3 wrapper driver.
-> 
-> Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
-> ---
->   drivers/usb/cdns3/Kconfig          |   7 ++
->   drivers/usb/cdns3/Makefile         |   2 +
->   drivers/usb/cdns3/cdns3-starfive.c | 191 +++++++++++++++++++++++++++++
->   3 files changed, 200 insertions(+)
->   create mode 100644 drivers/usb/cdns3/cdns3-starfive.c
-> 
-> diff --git a/drivers/usb/cdns3/Kconfig b/drivers/usb/cdns3/Kconfig
-> index 35b61497d9..f8f363982b 100644
-> --- a/drivers/usb/cdns3/Kconfig
-> +++ b/drivers/usb/cdns3/Kconfig
-> @@ -55,4 +55,11 @@ config USB_CDNS3_TI
->   	help
->   	  Say 'Y' here if you are building for Texas Instruments
->   	  platforms that contain Cadence USB3 controller core. E.g.: J721e.
-> +
-> +config USB_CDNS3_STARFIVE
-> +	tristate "Cadence USB3 support on Starfive platforms"
-> +	default USB_CDNS3
 
-Should this be 'default y if SOMEPLATFORM' ?
+--QnR0bfpeb3MZ0pX8
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-[...]
+On Thu, Aug 29, 2024 at 07:06:32PM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Thu, 29 Aug 2024 at 18:49, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Wed, Aug 28, 2024 at 04:16:55PM -0600, Simon Glass wrote:
+> > > Hi Peter,
+> > >
+> > > On Wed, 28 Aug 2024 at 03:59, Peter Robinson <pbrobinson@gmail.com> w=
+rote:
+> > > >
+> > > > Hi Simon,
+> > > >
+> > > > > This includes various patches towards implementing the VBE abrec
+> > > >
+> > > > What is abrec?
+> > >
+> > > It's a VBE method which supports A, B and recovery images and permits
+> > > updating from SPL onwards. The idea is that you can safely update
+> > > without bricking a device.
+> > >
+> > > >
+> > > > > bootmeth in U-Boot.
+> > > > >
+> > > > >
+> > > > > Simon Glass (18):
+> > > > >   sandbox: Add missing header file
+> > > > >   bootstd: Add stub for bootdev_setup_for_sibling_blk()
+> > > > >   gzip: Correct function comment for gunzip()
+> > > >
+> > > > Is this from upstream gzip code somewher?
+> > >
+> > > I'm not sure, actually.
+> > >
+> > > >
+> > > > >   fdtdec: Support separate BSS for all XPL builds
+> > >
+> > > Needed so that VPL can use DDT
+> > >
+> > > > >   tiny-printf: Correct return values
+> > >
+> > > I can't remember, sorry.
+> > >
+> > > > >   tpl: Support numbered aliases in device tree
+> > >
+> > > The MMC needs to be accessed using its sequence number
+> > >
+> > > > >   ram: Support driver model in TPL
+> > >
+> > > That should say VPL...but again I'm not quite sure
+> > >
+> > > > >   serial: Support debug UART in TPL
+> > >
+> > > This allows debugging of the jump from TPL to VPL
+> > >
+> > > > >   armv8: Support not having separate BSS
+> > >
+> > > VPL doesn't want a separate BSS since SDRAM isn't available that early
+> > >
+> > > > >   arm: cache: Drop a stale comment
+> > >
+> > > Just something I noticed
+> > >
+> > > > >   arm: Fix up a stale comment in sections.c
+> > >
+> > > Another thing I noticed
+> > >
+> > > > >   mmc: Support driver model in TPL
+> > >
+> > > TPL needs to read VPL from MMC
+> > >
+> > > > >   mmc: Add more debugging for SPL
+> > > > >   mmc: Log the error when init fails
+> > > > >   mmc: rockchip: Log some error returns
+> > > > >   mmc: rockchip: Allow clocks to be missing
+> > >
+> > > These all help with debugging reading of VPL from the correct MMC dev=
+ice
+> > >
+> > > > >   rockchip: mmc: Fix a missing colon
+> > >
+> > > Just something I noticed
+> > >
+> > > > >   rockchip: Provided SPL control over efuse presence
+> > >
+> > > We don't want this driver in TPL or VPL
+> > >
+> > > >
+> > > > I'm not sure what most of these patches have to do with VBE?
+> > >
+> > > Basically there are a lot of little tweaks needed.
+> >
+> > Well, I think this gets back to some common feedback. You have a lot of
+> > little bugfixes, which is good, but they get sprinkled in to the next
+> > big series you post, which is bad and hard to review. And that leads to
+> > fixes not getting merged / reviewed timely because nominally simple fix
+> > A is in part 3 of a series to introduce something larger and to which
+> > there is feedback to work through.
+>=20
+> I actually thought I was splitting them up quite nicely. What do you sugg=
+est?
 
-> +static void cdns_mode_init(struct cdns_starfive *data, enum usb_dr_mode mode)
-> +{
-> +	unsigned int strap, suspendm;
-> +
-> +	regmap_update_bits(data->stg_syscon, data->stg_usb_mode,
-> +			   USB_MISC_CFG_MASK,
-> +			   USB_SUSPENDM_BYPS | USB_PLL_EN | USB_REFCLK_MODE);
-> +
-> +	switch (mode) {
-> +	case USB_DR_MODE_HOST:
-> +		strap = USB_STRAP_HOST;
-> +		suspendm = USB_SUSPENDM_HOST;
-> +		break;
-> +
-> +	case USB_DR_MODE_PERIPHERAL:
-> +		strap = USB_STRAP_DEVICE;
-> +		suspendm = 0;
-> +		break;
-> +	default:
-> +		return;
-> +	}
-> +
-> +	regmap_update_bits(data->stg_syscon, data->stg_usb_mode,
-> +			   USB_STRAP_MASK, strap);
-> +	regmap_update_bits(data->stg_syscon, data->stg_usb_mode,
-> +			   USB_SUSPENDM_MASK, suspendm);
+I would refer back to your own comments about what some of the patches
+do and say that "Just something I noticed" should be a one off, and
+little fixes for this-and-that should be a 1-2 part series and so on.
 
-Are two consecutive writes to the same register mandatory here ?
+--=20
+Tom
 
-> +}
+--QnR0bfpeb3MZ0pX8
+Content-Type: application/pgp-signature; name="signature.asc"
 
-[...]
+-----BEGIN PGP SIGNATURE-----
 
-> +static int cdns_starfive_probe(struct udevice *dev)
-> +{
-> +	struct cdns_starfive *data = dev_get_plat(dev);
-> +	enum usb_dr_mode dr_mode;
-> +	ofnode node;
-> +	int ret;
-> +
-> +	data->dev = dev;
-> +
-> +	ret = cdns_starfive_get_syscon(data);
-> +	if (ret)
-> +		return ret;
-> +
-> +	node = ofnode_by_compatible(dev_ofnode(dev), "cdns,usb3");
-> +	if (!ofnode_valid(node)) {
-> +		dev_err(dev, "failed to get usb node\n");
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbRJGsACgkQFHw5/5Y0
+tyzK2Av/YEuPc8gvF+74/pzhrmJnxKcf8A5romGqeqjTV1TlVRo6z83isiPjji8t
+XalJMDom2lx/DjZkPMqQgoPkH113lk8z++I1vt2Gb2CJZ5mzWXHwwcNkGLHHYhaL
+GVMuSnetrMjMINqn+b/D4ZSL94h4ECp/JERHQKAqr2DzfCr7dwZNg+2KhOcldktS
+AU/hOKohn7HHFGjq0GUQxwGCfWzXi1hA9BvZrAQlLskvPw2Tn3/WYAEjLP/FEGcK
+uzhPF6wDiGOZyIap/ufK4+aN2rgAlwiqau6E9icr9qXkb5YR/lhcRN+kC2kaEe7e
+oXJ6FV2eNv2wwwY+YJmJIPYoM/tGBMufsGvksAb++OlABv2RRp85AQbfwB0nqYbj
+QfPECWhbgCHEvSBXszJ9jL2jJWXu2tl46DOMzSJc0/fAc82eEm1fh00x91ZVof4c
+PAKdHiN1yL3V11hG+uTWKLh5MYd7OG4fYqnHix3LLWvKtu5qJ+tuknAGcSdrbv3b
+mF3ghrbD
+=Dv9L
+-----END PGP SIGNATURE-----
 
-USB in capitals.
-
-> +		return -ENODEV;
-> +	}
-> +
-> +	dr_mode = usb_get_dr_mode(node);
-> +
-> +	data->mode = dr_mode;
-> +	ret = cdns_clk_rst_init(data);
-> +	if (ret) {
-> +		dev_err(data->dev, "clk reset failed: %d\n", ret);
-> +		return ret;
-> +	}
-> +	cdns_mode_init(data, dr_mode);
-> +
-> +	return 0;
-> +}
-
-Looks pretty good, thanks .
+--QnR0bfpeb3MZ0pX8--
