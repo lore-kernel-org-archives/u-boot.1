@@ -4,82 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A33FACA0FF1
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 13:31:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24988CA0FF2
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 13:31:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D63C88C19;
+	by phobos.denx.de (Postfix) with ESMTP id 750C688BE1;
 	Fri, 30 Aug 2024 15:31:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lfSGiXA8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="o+e+Wsqk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 690C488BDA; Fri, 30 Aug 2024 08:59:52 +0200 (CEST)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id 0D16588C09; Fri, 30 Aug 2024 14:18:08 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EBD288C23
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 08:59:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E888388B55
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 14:18:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marcus.folkesson@gmail.com
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-2f3f68dd44bso14624201fa.3
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 23:59:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-374b9761eecso171352f8f.2
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 05:18:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725001189; x=1725605989; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RB65wFPgpqXCMnZtLxD5+yiyEGbr2SfZBOkOdjbFbWA=;
- b=lfSGiXA8T1D53EvCxjGm2MPhXjC1Av4sc+YTqljHkOulnowwm/PNARz6Bac7IaUliR
- 9zxl3O09N1IcFEXSCQZZ18RkVILNBSS6etWZUtcaXCAxAwa4t3PMATpyGOUVoRMz/aoA
- iGN2Qjf1ur+vaD5J8qYs2UAd/ss9dIk7DQjmwWNV/wcn7ul2eC0FPVO92/lDgoAgmi1H
- jfSgX4MVzcSZWf7q5q7/F+i8S7c1Loz3cs/bSwkyx77IwLoyqto4yYmBzjRuj9hJp/gU
- qSIuW28fz5ZZBnAEKF0A0PvXHdZInTlajZuiZ97V0ddySMVY9o2wx6QQTg2XM+bvQT0x
- rWKg==
+ d=linaro.org; s=google; t=1725020285; x=1725625085; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=LIybKjA5GJlvqcPErCY/klyDulg/A7vSXQm5yrPnzlc=;
+ b=o+e+WsqkFQKNfG3E3L+KtpTuH1zUo3ALvB4NqH+JdE6jseIZZCYDmxeNvErkzV4u0r
+ Cfh5b8dGheOJ0XL/ZeUEhuflIn66X/ZGxJ2jKbnXkq1yNVfgmyp8/pgvoTW6gjP0oxvk
+ oW2QSZimU+t0pMsULYdTGEp2ioa+D4Yy/wZECMdxhGjnEJlZP9t4GZU7HjurIaEKbsLO
+ a+5kLM3wuaB/J8G73WOyzZ+GhGfMJW5aXeptqmNSgKP5HacQQWKvcM3MtcZO0gyoNtgg
+ bdq09S86sLVS25K3anZ9YJQKGHLPKOi2ESadtV9CxQAm8CSLOVFY7G+uSyx/P/runY/8
+ OyYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725001189; x=1725605989;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RB65wFPgpqXCMnZtLxD5+yiyEGbr2SfZBOkOdjbFbWA=;
- b=wnwQC9JWFLxRP8P6ZNeizSoiuf7nY1FbPZTg32aN/ZqtST8CrsYMTnt+8tudhxZbVX
- GubbE7k7Qo4OjApzcNuECC5qOuQzUPpBTZOMQd84nCj3RfB/iA43XVEKDEsBbuAMWkFT
- 3P/avREwYZzURMA0ltDkFOTzx2yrytjP6GVWbibdoB77VEAbP60+rU6D41w3prQBHRC/
- 5pdOWj58zNP9oNfQqlg4GWeCKNdNAbmUkQLZAHDYjKVPZQylUgxNPLG6ukSmAEChjTqv
- a5/1kJpC00/cqjc0qwT2LxGVWLgnaZSmE6AgSHYpokAaogWcPS+Jry5M0uEUbco39Rzd
- mHwQ==
-X-Gm-Message-State: AOJu0YyfHnJSKA+/DdgB3kyySPmEsanZPb7OOE0NIAKE64FwfOQgbhpo
- JSYS94GeydqN+CeXpBeiICUaEIR7Ipx18X7Wouc2Gie4JTvSkKyTkExdp4T0
-X-Google-Smtp-Source: AGHT+IF1TW6VtA1Bhy7Io7Q/9kyAQQ9vvlVbLqJsK74xOFM89u8iwfBJAGQIJfjNFy8hCQMrh1Oixg==
-X-Received: by 2002:a2e:a989:0:b0:2ef:232c:6938 with SMTP id
- 38308e7fff4ca-2f61e025793mr8002911fa.6.1725001188632; 
- Thu, 29 Aug 2024 23:59:48 -0700 (PDT)
-Received: from gmail.com (83-233-6-197.cust.bredband2.com. [83.233.6.197])
+ d=1e100.net; s=20230601; t=1725020285; x=1725625085;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=LIybKjA5GJlvqcPErCY/klyDulg/A7vSXQm5yrPnzlc=;
+ b=wmD/TRNGWvU2mEIIjWUDAQm8nYcJy5J2BuUtgoWDJZ82496WFi9OhGAWx4NavPQ4zT
+ n/1WvSbcFczsKbpq6yt8SLf52yCcP2VPWN5AU+ZSYgKaTnvpW3Zzd8dGYe3p0sWP9PGh
+ dE9C6F/KagM57Teg+ehrJwARKrGwLI3zp+trjHahZVi9oC8QXzXFwwCHgSgI350NX4Ls
+ t2zqZR8829UJuwSTjNtGbvBJmqlbNOKNI5w2uvoxrtclgz1+CIqkmToa5WGZNaWVk4ql
+ xMEqUl1VeIeo29Y1q7bjfg2Aj+XeGQoJktqhTBUvWMB6yT/Rv4WZUsTxSnJBW0t9bRHD
+ V9Gg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVlJsKNzt/ou/B+Uislw6YD/9Jc7xhVdrYqFf2q7stOPjX8cccq7/AYZ5u8iZmSsnTRc/Yiitw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzaTEU+mj8kPWgTa8PRn/Z1Qwaw/ldamOHaC2V/Hskf8I3B6AJQ
+ M7lkEbF4vgsOf/YUYKclfUrqj4LVPWwYAiIBeJWI0O0DP7oE2amUByg8YrOxV7Q=
+X-Google-Smtp-Source: AGHT+IE6wK5DMo3VFMYzjJH8224IXynParx0Hs4y8H0SZHv8CTP6E9Ob70e1zP5dSbKtJVllrrY2mw==
+X-Received: by 2002:a5d:65d1:0:b0:371:8c75:a085 with SMTP id
+ ffacd0b85a97d-3749b588137mr3696824f8f.58.1725020285230; 
+ Fri, 30 Aug 2024 05:18:05 -0700 (PDT)
+Received: from [192.168.1.17] (host-80-47-105-51.as13285.net. [80.47.105.51])
  by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-2f614ed1737sm5048191fa.2.2024.08.29.23.59.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Aug 2024 23:59:48 -0700 (PDT)
-Date: Fri, 30 Aug 2024 08:59:46 +0200
-From: Marcus Folkesson <marcus.folkesson@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Alexander Dahl <ada@thorsis.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Igor Prusov <ivprusov@salutedevices.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] mtd: nand: raw: atmel: remove unnecessary return value
-Message-ID: <ZtFt4rBOzF7Qgm-K@gmail.com>
-References: <20240809121556.3215132-1-marcus.folkesson@gmail.com>
+ ffacd0b85a97d-3749ee99d6dsm3918341f8f.48.2024.08.30.05.18.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 30 Aug 2024 05:18:04 -0700 (PDT)
+Message-ID: <58cd740a-da83-4ce2-91de-5fc228977e75@linaro.org>
+Date: Fri, 30 Aug 2024 13:18:02 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="bOKa5fasd0eN6+xe"
-Content-Disposition: inline
-In-Reply-To: <20240809121556.3215132-1-marcus.folkesson@gmail.com>
+User-Agent: Betterbird (Linux)
+Subject: Re: [PATCH 00/19] vbe: Series part E
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Chanho Park <chanho61.park@samsung.com>, Devarsh Thakkar <devarsht@ti.com>,
+ Eddie James <eajames@linux.ibm.com>, Gary Bisson <bisson.gary@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Julien Masson <jmasson@baylibre.com>, Kever Yang
+ <kever.yang@rock-chips.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Mathieu Othacehe <m.othacehe@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Nam Cao <namcao@linutronix.de>, Paul-Erwan Rio <paulerwan.rio@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Roman Stratiienko <r.stratiienko@gmail.com>,
+ Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>,
+ Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Suniel Mahesh <sunil@amarulasolutions.com>,
+ =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
+ Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+References: <20240829145802.1827952-1-sjg@chromium.org>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20240829145802.1827952-1-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Fri, 30 Aug 2024 15:31:35 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,44 +122,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
---bOKa5fasd0eN6+xe
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 29/08/2024 15:57, Simon Glass wrote:
+> 
+> This includes various patches towards implementing the VBE abrec
+> bootmeth in U-Boot. It mostly focuses on SPL tweaks and adjusting what
+> fatures are available in VPL.
 
-On Fri, Aug 09, 2024 at 02:15:43PM +0200, Marcus Folkesson wrote:
-> The condition 'ret' is always true as it is never set to other than
-> -EIO.
->=20
-> Remove 'ret' and the condition for copy.
->=20
-> Signed-off-by: Marcus Folkesson <marcus.folkesson@gmail.com>
-> ---
+It would be helpful if you could include some context as to what VBE is, 
+how this series fits in to previous ones, etc... If this is part of some 
+overarching changes then having some common background justification / 
+context which is copy-pasted to all the relevant patch series would make 
+sense imo.
 
-Any more thoughts on this?
+Thanks and regards,
+> 
+> 
+> Simon Glass (19):
+>    image: Add a prototype for fit_image_get_phase()
+>    serial: ns16550: Allow clocks to be missing
+>    boot: Allow FIT to fall back from best-match option
+>    bootstd: Avoid sprintf() in SPL when creating bootdevs
+>    boot: Respect the load_op in fit_image_load()
+>    malloc: Show amount of used space when memory runs out
+>    malloc: Provide a simple malloc for VPL
+>    Support setting a maximum size for the VPL image
+>    spl: Report a loader failure
+>    spl: Allow serial to be disabled in any XPL phase
+>    spl: Support a relocated stack in any XPL phase
+>    spl: Drop use of uintptr_t
+>    spl: Drop a duplicate variable in boot_from_devices()
+>    spl: Add some more debugging to load_simple_fit()
+>    spl: lib: Allow for decompression in any SPL build
+>    boot: Allow use of FIT in TPL and VPL
+>    lib: Allow crc8 in TPL and VPL
+>    boot: Imply CRC8 with VBE
+>    hash: Plumb crc8 into the hash functions
+> 
+>   boot/Kconfig                  | 71 ++++++++++++++++++++++++++++++++++-
+>   boot/Makefile                 |  4 +-
+>   boot/bootdev-uclass.c         | 10 ++++-
+>   boot/image-fit.c              | 29 ++++++++------
+>   common/hash.c                 |  8 ++++
+>   common/malloc_simple.c        |  3 +-
+>   common/spl/Kconfig.vpl        | 17 +++++++++
+>   common/spl/spl.c              | 15 +++++---
+>   common/spl/spl_atf.c          | 36 +++++++++---------
+>   common/spl/spl_fit.c          | 12 +++++-
+>   common/spl/spl_legacy.c       |  8 ++--
+>   configs/sandbox_vpl_defconfig |  3 +-
+>   drivers/serial/ns16550.c      |  2 +-
+>   include/image.h               | 16 +++++++-
+>   include/spl.h                 | 28 +++++++-------
+>   include/u-boot/crc.h          |  3 ++
+>   lib/Kconfig                   | 53 ++++++++++++++++++++++++++
+>   lib/Makefile                  |  8 ++--
+>   lib/crc8.c                    |  6 +++
+>   19 files changed, 263 insertions(+), 69 deletions(-)
+> 
 
-Thanks,
-Marcus Folkesson
-
---bOKa5fasd0eN6+xe
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEBVGi6LZstU1kwSxliIBOb1ldUjIFAmbRbd0ACgkQiIBOb1ld
-UjLxAxAA0jhzYUjayuf4TVXt+EEZxpBfyoLdMgF3uOpUV/4EZfTG5Nsm4/K3xs3R
-rZvZgDZHkfLa3JhSJLfZlTb9js9MfpDTQendAsz5o+ynq8KgUGJWhYJFdLA9VmgC
-VBk9/wBMGW8n3fNGksPf5Lestcetsxju16Sb87RJrOtx8Ks36ErodRWz52C0pebd
-0u2COz8GyRktXJCDUmLa1E+W0qq82qqUOmrMxJqnJzf1SPZ2K4dUp/IN3w2CqVqi
-w37n6jXa5bztxcn5zIYG5jUsE9uMaVSiGxBMErS9DoYee4KLMA4wrY5Zq6XH5lwS
-tlp8R7SnUlhy3QSdyGk/uqo47bdRyW7QT6ZPxlT4tp7C/JhSZThEUoL4MteFFjtS
-ot8WSst7OPRiJRkUYkPiu6BtjN1h0DdZ9x3tnYibOZ/aAriVgJymBYpOBMP6+NcK
-nJyJgUU4yNaZ5oX5cvhHLxOHXdOCqaQctIbwWHZWx/luyKShxutAwdWp1ohMnl46
-b4eZ9fDqoAOUrv39oaZeaaYPZey70MSBeKH4zA/VQIdZbACUDBDDd+5T8lERMjI1
-n4YrfBc+Zi775X/TM/rx6m9q+VPC3p9HUIFAeWuBOQnkOLl37tlGESotIv5SBEnz
-hrXAdlqcJgYTUUD603FdxzxgEaFHQuaL90TeJFuz2LH9rzDeI3k=
-=5P5/
------END PGP SIGNATURE-----
-
---bOKa5fasd0eN6+xe--
+-- 
+// Caleb (they/them)
