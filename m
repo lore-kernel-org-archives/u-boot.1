@@ -4,73 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9128CA0EFD
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 17:05:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C543CA0EFD
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 18:23:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3054C88A5B;
-	Fri, 30 Aug 2024 19:05:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0FC5688D16;
+	Fri, 30 Aug 2024 20:23:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IhXTQGAb";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="NbNBl9Ly";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 660DD88C8A; Fri, 30 Aug 2024 19:05:43 +0200 (CEST)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7BF4588D11; Fri, 30 Aug 2024 20:23:33 +0200 (CEST)
+Received: from bali.collaboradmins.com (bali.collaboradmins.com
+ [148.251.105.195])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FBAF888FD
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 19:05:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FF4588CE5
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 20:23:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-5334c018913so1853172e87.0
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 10:05:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725037541; x=1725642341; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gywE+AtWWuWYRUy543m6bVs0kT0InSH/TY/HTnsMjEE=;
- b=IhXTQGAbGp/T3S00cNEweyKVNON05NmGwnIBNTfmFm3+yK7ESjQa2UlAus+1QXojBF
- xWMxq5js1NNbh9YzD2uIuThR3d7WOqr7qiGt2np36qM/cPZpn2YKoxcwgImn3ozfsrnI
- X33ACKwkpkRSXHwvCkQMmrna76wkSLpRjJQLEP8vbOHOY7eogiUYsDudA2zK3mVmzA6p
- qg5CtpKsvLKxp3flBniUTrfzNYoeISHdufseIOt9UgsR8IQbeKHb3IRdcaa0BQdxLB4S
- tiaDg2oqxJ5ZolhCClqhaaSl5fTMfZ9JpindwTkWuUT71UAt9mHix5C626ugy5RqZ+b+
- VHhQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725037541; x=1725642341;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=gywE+AtWWuWYRUy543m6bVs0kT0InSH/TY/HTnsMjEE=;
- b=qjGscGulKPXxmfmOVTqz6jU0k5y6+pALtD32C6XMvRGlRWIjaElBJer0mzNYcb30Ro
- bObPMLllX1uIzVYbeiDe9epBiCjl9lB+OiOXA3scaiuNumlD5AgcLRgORCf7jlAVABu/
- ke35kgWGunwuzKt3dY9+UkrMrHClASppMNVJIwkqpkn6mwLySNIrZFZLlER17cr31dlv
- psKx0j40hM3n3AnEAh6dkE3PiP4kr+uKrxgC6iBUpNUID4NNjzc0g7RA3fhRvvlE3g6z
- 1r4ZzvnjdAaOznoK/Oqj7LABUuhkFT4ai/8y7R7TkS6C4cX6GowPsGH0GNGRexNhG11O
- TzYw==
-X-Gm-Message-State: AOJu0YyF8Z/sITwrpGKM+RfJm3d2Qb3E7Z2SVRfQxe/cPu7W/AUdoAwL
- 8V3dkn7faBYiZgsl3dOCIhwIUbaPvgmmSGetgWS5Km+uqyE9yuTNwbcU49SBHXJnyEQvEqsznjr
- BKNWOFfZ2TK9mpOoDL+IxLDKiTeM=
-X-Google-Smtp-Source: AGHT+IGPpNNL0vvjFi7A8LduprSgABPSzGPGUsC94qJF6AvttXDjfylistO39yolfOgwUpA/q/gfIEHsrOuTzDG7OB8=
-X-Received: by 2002:ac2:4c4f:0:b0:530:aa3e:f3c with SMTP id
- 2adb3069b0e04-53546b05f96mr2420774e87.14.1725037540167; Fri, 30 Aug 2024
- 10:05:40 -0700 (PDT)
+ spf=pass smtp.mailfrom=sebastian.reichel@collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1725042211;
+ bh=ZX6axD+oXcLLz2CuEGMGfBzxHwXeAIAlu4qav3t+kfk=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=NbNBl9LyaKJhJX8OWHy3QYOv14xgdZgzvSJylRf/HebJymUjbN6PlaiRKLuLnncK0
+ x8QyAH4LPaFNKrrjc4lUnpHnNZ+vIMnFdjycKiQOIy3sbZAv2Mx9OogSsU/BLDm7qR
+ 661QhZU9xdYP+eA8DOWtMbW/hOXOiywLIP/GBJdP5/NQh88TzIkqpuHNUMTLZnaqZS
+ oyMOq8NwgkRiKTOm1JyUkVl4oEc7W2dDpYNT7VMpiVVOLiB4xiKw5rTPFaw3eCAxkk
+ mZEhDwHQXis05IY+JOo47cr2bRP9Ppi3YZJSp3nJbQ5UsFBAPuhIK8FGwEcpEzBE4J
+ Aa95nkLbY73NA==
+Received: from jupiter.universe (dyndsl-091-248-208-243.ewe-ip-backbone.de
+ [91.248.208.243])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: sre)
+ by bali.collaboradmins.com (Postfix) with ESMTPSA id EA52317E10D4;
+ Fri, 30 Aug 2024 20:23:30 +0200 (CEST)
+Received: by jupiter.universe (Postfix, from userid 1000)
+ id A05B14800F6; Fri, 30 Aug 2024 20:23:30 +0200 (CEST)
+From: Sebastian Reichel <sebastian.reichel@collabora.com>
+To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+ Jonas Karlman <jonas@kwiboo.se>, Soeren Moch <smoch@web.de>
+Cc: Eugen Hristev <eugen.hristev@collabora.com>,
+ Tim Harvey <tharvey@gateworks.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>
+Subject: [PATCH v4 3/6] board: rock5b-rk3588: enable USB-C in operating system
+Date: Fri, 30 Aug 2024 20:22:17 +0200
+Message-ID: <20240830182330.49528-4-sebastian.reichel@collabora.com>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20240830182330.49528-1-sebastian.reichel@collabora.com>
+References: <20240830182330.49528-1-sebastian.reichel@collabora.com>
 MIME-Version: 1.0
-References: <CAOMZO5AUvhAGZd5VyiJGXXTKbEHJGysgTPLbjWE4H7wSh697hQ@mail.gmail.com>
-In-Reply-To: <CAOMZO5AUvhAGZd5VyiJGXXTKbEHJGysgTPLbjWE4H7wSh697hQ@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 30 Aug 2024 14:05:29 -0300
-Message-ID: <CAOMZO5Bx-drCkfw2sUBJtO-M_bPFqV=tNYV0GKwcnf1J9HqmZQ@mail.gmail.com>
-Subject: Re: imx6ull-evk: Hanging with Ethernet enabled
-To: Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>
-Cc: U-Boot-Denx <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,16 +76,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Aug 30, 2024 at 1:49=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
-wrote:
->
-> Hi Peng,
->
-> Running top of tree U-Boot on an imx6ull evk board causes the board to ha=
-ng:
+Since older U-Boot releases do not negotiate USB PD, the kernel
+DT may not enable the USB-C controller by default to avoid a
+regression. The plan is to upstream it with 'status = "fail";'
+instead. U-Boot should then mark it as 'status = "okay";' if
+it negotiated USB PD. Currently existing upstream kernel DTs do
+not yet have the USB-C controller at all, so we ignore any
+failures.
 
-I was using a imx6ulz, not imx6ull. The imx6ulz does not have Ethernet.
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+---
+ board/radxa/rock5b-rk3588/Makefile        |  6 ++++++
+ board/radxa/rock5b-rk3588/rock5b-rk3588.c | 16 ++++++++++++++++
+ 2 files changed, 22 insertions(+)
+ create mode 100644 board/radxa/rock5b-rk3588/Makefile
+ create mode 100644 board/radxa/rock5b-rk3588/rock5b-rk3588.c
 
-Sorry for the noise.
+diff --git a/board/radxa/rock5b-rk3588/Makefile b/board/radxa/rock5b-rk3588/Makefile
+new file mode 100644
+index 000000000000..95d813596da4
+--- /dev/null
++++ b/board/radxa/rock5b-rk3588/Makefile
+@@ -0,0 +1,6 @@
++# SPDX-License-Identifier:     GPL-2.0+
++#
++# Copyright (c) 2022 Collabora Ltd.
++#
++
++obj-y += rock5b-rk3588.o
+diff --git a/board/radxa/rock5b-rk3588/rock5b-rk3588.c b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
+new file mode 100644
+index 000000000000..fc2f69db2241
+--- /dev/null
++++ b/board/radxa/rock5b-rk3588/rock5b-rk3588.c
+@@ -0,0 +1,16 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2023-2024 Collabora Ltd.
++ */
++
++#include <fdtdec.h>
++#include <fdt_support.h>
++
++#ifdef CONFIG_OF_BOARD_SETUP
++int ft_board_setup(void *blob, struct bd_info *bd)
++{
++	if (IS_ENABLED(CONFIG_TYPEC_FUSB302))
++		fdt_status_okay_by_compatible(blob, "fcs,fusb302");
++	return 0;
++}
++#endif
+-- 
+2.45.2
 
-The imx6ull-evk is booting fine.
