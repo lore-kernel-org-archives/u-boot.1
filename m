@@ -4,119 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD958CA0EED
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 08:38:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A2C0CA0EF6
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 09:10:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 255D988D1F;
-	Fri, 30 Aug 2024 10:38:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7D27488D73;
+	Fri, 30 Aug 2024 11:09:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oWlDsAkd";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="q41YBsvc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 385BD88D1F; Fri, 30 Aug 2024 10:38:24 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F0CCF88D76; Fri, 30 Aug 2024 11:09:57 +0200 (CEST)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A275D88BFC
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 10:38:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F71888D74
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 11:09:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-371893dd249so1109853f8f.2
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 01:38:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725007101; x=1725611901; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=CxTyTsPZ8Afm3vApgvAAlGgl8I+1/Z2dnMMI67EQxt4=;
- b=oWlDsAkd0XC4wksEEz1X3YZHCOu46pp5e4E/wfVuyxUDoPkyJVCf3SPluO9xATnqP9
- Ocd3zZndG0i1VIlL3HrNCGo8o63D/BOxevB47Hv1Ma4DoCIMrnncLsEOgLlk0vd+o0gF
- iX0kW83mSrO76AlUNg/QHpMqXPMXjfBseIbMyfe2wXY5VMBDN8CijXcSaD31qIRLpknc
- RXcJzLFExDerW4kGPK/gZOVAAeh1d01fYA9MN/2Gs5PIlecOWD743RT2cvcW9MJlUMZQ
- M1jYonZ6L6jTGZC3l5/hmw0Ri8mrgDa1qRR642FDTZS7Ata0/l7Eq4o1oshSt6Zbai9b
- J9Kg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725007101; x=1725611901;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=CxTyTsPZ8Afm3vApgvAAlGgl8I+1/Z2dnMMI67EQxt4=;
- b=sthgw9WO3AlcgBDzDC9YQKcKocv9L9Or1C26lS9lVhPj1AKAh4CmrcMvzz+SGAH7HZ
- EfvEFx+llBtbJR1E0+SS7fY8zsnsq8vwncXm4ygV+sKybZhwEy4mZaY3Ew7d556Wa08r
- W9AZLlkolheXggoSm9pTEyEpSpsNDwLUk1y6AMZrbKLoAoloVt6CdqaTzwpaZ8hOLdAR
- OsUpgCIlhiYGcO+HSnr8GIgesz/6K9/fr+kYIGwzFi+e/nJHkUPE8yRZ1pr3j3Y6bOJi
- 7J6iZc+mp0B3lrsvCcN8+1ShngdmQYyul5kzo0zec1jtS3qyxwqJDZloNIxVPAsUtpju
- vRbA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV0j4f3qZpo2FOyV0llC+hkZb6wapTd4xHsOJUOlgIjA6/WFeJIXkK7N5zc4fVFSK82TEj7BcY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx6GtDA1Q0/msR6a2KtkllJCoCl185HYd4028rSv2d5B8df8Agz
- Fs2rWXx/4n6HiuY1zOOxtXYywLCh/juT1VviiC+vQL5pjNCKzRPHXKJGbKazMc0=
-X-Google-Smtp-Source: AGHT+IGJq7dONEFtshiBC3OJxJjdQcJIMdP+Bzmjvp29CMHWweG3tRY8QrNOnosu1IxUROOYBODJpw==
-X-Received: by 2002:adf:a341:0:b0:368:74c0:6721 with SMTP id
- ffacd0b85a97d-3749b581becmr3760188f8f.38.1725007100499; 
- Fri, 30 Aug 2024 01:38:20 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:5001:8e1b:dd18:1d3?
- ([2a01:e0a:982:cbb0:5001:8e1b:dd18:1d3])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3749eea50dasm3346194f8f.56.2024.08.30.01.38.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 30 Aug 2024 01:38:20 -0700 (PDT)
-Message-ID: <15a0707b-050e-4d5f-b339-7a73c7652ce8@linaro.org>
-Date: Fri, 30 Aug 2024 10:38:19 +0200
+ spf=pass smtp.mailfrom=D.Schultz@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1725008995; x=1727600995;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=vMAJIi0vHVMyIFcl6XlNwoJs7rVFMlvm7sa7ImRh7EM=;
+ b=q41YBsvcQT3jH4kkmX/hTcpnpktGxaJWwhxH1wzAgGoxLIPVVffYKQzXFIcA4R23
+ IGRzUhrrnXDRHJn0I4DiMIkM6EWpT7P5BEjZq2Rtk939WRXklg1xkDw+ftMib0fA
+ JCndIVbj89R2Ns62TsXTAi+BGoWehtsL2FLo7mIKzQw=;
+X-AuditID: ac14000a-03251700000021bc-0f-66d18c63ea0e
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id C0.42.08636.36C81D66;
+ Fri, 30 Aug 2024 11:09:55 +0200 (CEST)
+Received: from ls-radium.phytec (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Fri, 30 Aug
+ 2024 11:09:53 +0200
+From: Daniel Schultz <d.schultz@phytec.de>
+To: <w.egorov@phytec.de>, <trini@konsulko.com>, <joe.hershberger@ni.com>,
+ <u-boot@lists.denx.de>
+CC: <upstream@lists.phytec.de>, Daniel Schultz <d.schultz@phytec.de>
+Subject: [PATCH 00/13] phycore-am62/4: Add more boot sources
+Date: Fri, 30 Aug 2024 02:09:27 -0700
+Message-ID: <20240830090940.2592157-1-d.schultz@phytec.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [u-boot-test-hooks PATCH v4 3/3] Provide some basic scripts for
- Labgrid integration
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-References: <20240828164523.125770-1-sjg@chromium.org>
- <20240828164523.125770-4-sjg@chromium.org>
- <CALeDE9Ptr0Ln4H24yMqxuw1+E_Wt5qBGdQabUH54PaYUTPf9Yg@mail.gmail.com>
- <CAFLszThK_t5EwL28vnzmSp5UZQrSEpBRsaXhnNudMQRe8-7Ejw@mail.gmail.com>
- <CALeDE9O-kmnqkosThf8xQpLZ2tEebiHvrUEzVJNDjiEff2-t2Q@mail.gmail.com>
- <CAFLszThD=Haj4M5rUYfpjPDjr9JEOPygQb9tV36frcAM5Ey9tw@mail.gmail.com>
- <c63147f4-d364-4568-8f6e-c0348914446a@linaro.org>
- <CAFLszTgzM-FT64AYTy6FXwUw3FQg-3MQ7x0TZc6xBhX5c+bXEg@mail.gmail.com>
- <20240829152052.GE2479150@bill-the-cat>
- <CAFLszTjqVsZ1owvpCaOer7U-k0ZvtDfLC9g+kFPW8gJJeQ1Ktw@mail.gmail.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <CAFLszTjqVsZ1owvpCaOer7U-k0ZvtDfLC9g+kFPW8gJJeQ1Ktw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrOLMWRmVeSWpSXmKPExsWyRpKBRze552KaQfsRWYtPOx+zWkydtJnd
+ 4u3eTnaL7nfqDiwerw6sYvc4e2cHo0d/dwurx/Uz25kCWKK4bFJSczLLUov07RK4MtadXMxc
+ 8IKv4s3mK4wNjK08XYycHBICJhLHr9xn7mLk4hASWMIkcbb3JSOEc59RYv/CTywgVWwCWhJ3
+ tsxlBrFFBJIkdj1ZxgZiMwu4SCy+8YEVxBYWsJHo3/EULM4ioCrxcvIVdhCbV8BKoqP5GhPE
+ NnmJmZe+Q8UFJU7OfMICMUdeonnrbGYIW0Li4IsXYLaQgILE7G2TGWF6p517zQxhh0oc2bSa
+ aQKjwCwko2YhGTULyagFjMyrGIVyM5OzU4sys/UKMipLUpP1UlI3MYICV4SBawdj3xyPQ4xM
+ HIyHGCU4mJVEeE8cP5smxJuSWFmVWpQfX1Sak1p8iFGag0VJnHd1R3CqkEB6YklqdmpqQWoR
+ TJaJg1OqgdFGtEezX3Fm9Iz6068unpGPjPyW1Rk39bRaTGaZwCzFN/e0Xnf9mMUkryfTEZfx
+ 83K5AOvz0P2lgdyC16ps7DfP0vzQfaLAlTmi/UzZ635nz1nXgx1cb+y+vvvNy1MX9j37x7mr
+ c1tWgFLblXsTF2tfLlL8NWvDNZNQ8WXSdze2x+7apPC7wVuJpTgj0VCLuag4EQChmNBFSgIA
+ AA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,318 +81,51 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 30/08/2024 03:09, Simon Glass wrote:
-> Hi Tom,
-> 
-> On Thu, 29 Aug 2024 at 09:20, Tom Rini <trini@konsulko.com> wrote:
->>
->> On Thu, Aug 29, 2024 at 09:02:38AM -0600, Simon Glass wrote:
->>> Hi Neil,
->>>
->>> On Thu, 29 Aug 2024 at 08:44, <neil.armstrong@linaro.org> wrote:
->>>>
->>>> On 29/08/2024 14:17, Simon Glass wrote:
->>>>> Hi Peter,
->>>>>
->>>>> On Thu, 29 Aug 2024 at 04:43, Peter Robinson <pbrobinson@gmail.com> wrote:
->>>>>>
->>>>>> On Wed, 28 Aug 2024 at 22:25, Simon Glass <sjg@chromium.org> wrote:
->>>>>>>
->>>>>>> Hi Peter,
->>>>>>>
->>>>>>> On Wed, 28 Aug 2024 at 12:14, Peter Robinson <pbrobinson@gmail.com> wrote:
->>>>>>>>
->>>>>>>> Hi Simon,
->>>>>>>>
->>>>>>>>> With Labgrid we don't need to specify the various methods, except for
->>>>>>>>> the console, which simply calls labgrid-client.
->>>>>>>>>
->>>>>>>>> This allows supporting any boards in your lab, without adding per-board
->>>>>>>>> configuration to these hooks.
->>>>>>>>>
->>>>>>>>> Provide ellesmere files as an example.
->>>>>>>>
->>>>>>>> What's ellesmere?
->>>>>>>
->>>>>>> It is a lake but also the name of a computer.
->>>>>>>
->>>>>>>>
->>>>>>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
->>>>>>>>> ---
->>>>>>>>>
->>>>>>>>> Changes in v4:
->>>>>>>>> - Support pytest fully with dual-build boards like Beagleplay
->>>>>>>>>
->>>>>>>>> Changes in v3:
->>>>>>>>> - Update scripts for latest version of Labgrid integration
->>>>>>>>> - Add poweroff.none and poweron.none
->>>>>>>>> - Provide -n flag when querying board info
->>>>>>>>> - Target the grpc version of Labgrid which is now in -master
->>>>>>>>> - Update README to cover the changes
->>>>>>>>>
->>>>>>>>> Changes in v2:
->>>>>>>>> - Make use of the common script (only) to set bin_dir
->>>>>>>>>
->>>>>>>>>    README.md                    | 50 ++++++++++++++++++++++++++++++++++++
->>>>>>>>
->>>>>>>> Maybe that should be in a separate labsgrid readme?
->>>>>>>
->>>>>>> My hope is that Labgrid becomes the normal way of running these tests,
->>>>>>
->>>>>> Generally I agree with automated testing platforms, I think <insert
->>>>>> you're preferred platform here> makes sense, there's a bunch like
->>>>>> Linaro and a bunch in the arm ecosystem use LAVA [1] and  there's a
->>>>>> bunch more that I'm aware of.
->>>>>
->>>>> I am somewhat familiar with LAVA and I believe it can be used to test
->>>>> U-Boot, although I need to learn how. Looking at a test run [2] for
->>>>> beaglebone black I see that it is using a recent kernel but the U-Boot
->>>>> seems to be older.
->>>>>
->>>>>>
->>>>>> Does it make sense, of course at some point in the future post this
->>>>>> being merged, make sense to look at a general way of making it easier
->>>>>> to plugin these sort of HW test platforms using this as a basis? I ask
->>>>>> mostly because putting a bunch of my devices into some sort of
->>>>>> platform can auto test things and of course everyone has an opinion to
->>>>>> which is the best one :-P
->>>>>
->>>>> Yes. I had heard from Tom that Labgrid is the new hotness for now.
->>>>> Having dug into it I believe it is a good solution, although it can
->>>>> certainly be improved to handle scale better.
->>>>>
->>>>> Anyway, IMO the current test hooks are not a great solution, just
->>>>> because the configuration is spread all over the place and it relies
->>>>> on lots of little shell scripts. So I believe that the Labgrid
->>>>> integration is a closer to where we want to be with others that come
->>>>> along.
->>>>
->>>> I'd say all those scripts are actually here to ease integration with any
->>>> system, booting U-Boot and Linux are two different beasts.
->>>
->>> That's fine, go ahead and use the scripts. My point is that Labgrid
->>> doesn't need them and in fact it makes everything pretty painful if we
->>> try to use all of them.
->>
->> I guess I really need to clean-up and post my former co-workers scripts
->> as I strongly disagree with that statement.
-> 
-> See some examples below. Bear in mind also that my goal has been to
-> get my lab fully running, that includes interactive access to boards,
-> as well as running tests. For that I have been using tbot (with
-> integrated build and software-loading features). WIth Labgrid I have
-> been able to replace most of the pytest scripts, tbot and Labman with
-> Labgrid + 60 patches and some configuration files.
-> 
-> Let's look through the scripts:
-> 
-> u-boot-test-common - new script
-> 
-> u-boot-test-console - needed
-> 
-> u-boot-test-flash - here's an example:
-> 
-> . poweroff.${power_impl}
-> sleep 0.1
-> . flash.sdwire_common_mount
-> . poweron.${power_impl}
-> 
-> Here's another:
-> 
-> # Handles the common SDwire mounting (caller does power control)
-> 
-> mount_dir=/media/${mount_point}
-> 
-> # Switch over to get USB card access
-> sd-mux-ctrl --device-serial ${sdwire_serial} --ts
-> 
-> complete=false
-> for i in {0..9}; do
->      if out="$(mount UUID=${mount_uuid} 2>&1)"; then
->          complete=true
->          break
->      fi
->      echo $out
-> 
->      # If it is already mounted, try to unmount it first. It may have been
->      # mounted by another user so we won't have the access we need. If this gives
->      # an error then we know we cannot continue
->      if [[ $out == *"already mounted"* ]]; then
->          umount UUID=${mount_uuid}
->      fi
->      sleep 1
-> done
-> if [[ $complete = false ]]; then
->      echo "Failed to mount UUID ${mount_uuid} after 10 tries"
->      exit 1
-> fi
-> 
-> # Sanity check
-> if ! mountpoint -q ${mount_dir}; then
->      echo "Mount ${mount_dir} not available after 'mount'"
->      exit 1
-> fi
-> 
-> # Perform the write, pass along as much environment as possible
-> . writer.${flash_writer}
-> 
-> complete=false
-> for i in {0..9}; do
->      if out="$(umount ${mount_dir} 2>&1)"; then
->          complete=true
->          break
->      fi
->      echo $out
->      sleep 1
-> done
-> 
-> if [[ $complete = false ]]; then
->      echo "Failed to umount UUID ${mount_uuid} after 10 tries"
->      exit 1
-> fi
-> 
-> # Sanity check
-> if mountpoint -q ${mount_dir}; then
->      echo "Mount ${mount_dir} still available after 'umount'"
->      exit 1
-> fi
-> 
-> # Back to card access for the DUT
-> sd-mux-ctrl --device-serial ${sdwire_serial} --dut
-> 
-> 
-> Of course that assumes an SDwire which may not always be the case.
-> Abstracting all of this into shell scripts is just too painful. Also I
-> have found it to be error-prone.
-> 
-> There is also bin/flash.sdwire_relay_mount:
-> 
-> . poweroff.${power_impl}
-> 
-> sleep 0.1
-> 
-> . flash.sdwire_common_mount
-> 
-> . poweron.${power_impl}
-> 
-> 
-> u-boot-test-getrole
-> - New script
-> 
-> u-boot-test-power-off
-> - This one fits with Labgrid quite well, but of course there may not
-> actually be power control
-> 
-> u-boot-test-power-on
-> - This one also fits with Labgrid, but since serial output can come
-> out as soon as it is called, jumping back into Labgrid later to bring
-> up a console results in lots of missing output. Also there may not
-> actually be power control
-> 
-> u-boot-test-release
-> - New script. Actually this isn't really needed, since I added
-> automatic release to Labgrid. I was just worried that Labgrid might
-> crash
-> 
-> u-boot-test-reset
-> - Unfortunately labgrid doesn't provide a reset option, although I'm
-> sure it could be added. You still need to know whether to use power or
-> reset or both, though, so again you have shell scripts with this stuff
-> 
-> reset.recovery_download - another thing I had to add, BTW
-> 
-> . "${bin_dir}/recovery.${recovery_impl}"
-> 
-> # USB enumeration delay
-> for ((i = 0; i <= 100; i++)); do
->      if [ -e "${board_usb_dev}" ]; then
->          break
->      fi
->      sleep 0.1
-> done
-> if [ ! -e "${board_usb_dev}" ]; then
->      echo "Cannot find device ${board_usb_dev}"
->      exit 1
-> fi
-> sleep 1
-> 
-> . "${bin_dir}/download.${download_impl}"
-> 
-> or another case, this is Zynq which tries to wait a bit before calling
-> picocom. It mostly works, but it loses output
-> 
-> # Some boards have a UART built into them and it doesn't appear until the
-> # board is powered on. An example is zynq_zybo. Try to handle this by waiting
-> # for the console and then continuing as soon as possible (so we don't miss
-> # the U-Boot banner).
-> if [ -n "${console_wait}" ]; then
->      for i in {0..99}; do
->          if [ -e "${console_dev}" ]; then
->              break
->          fi
->          sleep .1
->      done
->      if [ ! -e "${console_dev}" ]; then
->          echo "Console ${console_dev} not found"
->          exit 1
->      fi
-> fi
-> 
-> exec picocom -b "${console_baud}" "${console_dev}"
-> 
-> So that's about a third of the reason why I don't think the scripts scale.
+This patch stack extends the phyCORE-AM62x/AM64x U-Boot by following boot
+sources:
 
-My integration requires only this file:
+  - Load U-Boot with USB DFU
+  - Load a Linux and initramfs from OSPI/QSPI NOR flash
+  - Load a Linux and rootfs from Network
 
-bin/console.abcd
-====><============
-FIP_DIR=`mktemp -d`
-￼
-￼pushd ${boot_fip_dir}
-￼./build-fip.sh ${boot_fip_board} ${U_BOOT_BUILD_DIR}/u-boot.bin ${FIP_DIR}
-￼cp ${FIP_DIR}/u-boot.bin ${U_BOOT_BUILD_DIR}/u-boot.bin.abcd
-￼popd
-￼rm -rf ${FIP_DIR}
-￼
-￼exec "${abcd_binary}" -h ${abcd_host} -b ${abcd_board} ${abcd_extra_args} ${U_BOOT_BUILD_DIR}/u-boot.bin.abcd
-====><============
+Moreover, it adds required changes to the environment to boot an A/B
+system with RAUC and includes some minor fixes.
 
-the abcd_binary does all the dirty work, connecting the the server and connecting the board
-TTY to stdout, and the server does all the dirty power-up and loading u-boot to memory.
+Daniel Schultz (12):
+  include: env: phytec: k3_mmc: Rename variables
+  include: env: phytec: Add raucinit to k3_mmc environment
+  include: net: phytec: Add K3 network boot logic
+  include: env: phytec: Add K3 boot logic for OSPI/QSPI flashes
+  board: phytec: phycore_am62x: Add Network/SPI Boot
+  board: phytec: phycore_am64x: Add Network/SPI Boot
+  configs: phycore_am62x_a53_defconfig: Make BOOTCMD generic
+  configs: phycore_am64x_a53_defconfig: Make BOOTCMD generic
+  configs: phycore_am62x_a53_defconfig: Merge am62x_a53_usbdfu.config
+  configs: Add phycore_am62x_r5_usbdfu_defconfig
+  configs: phycore_am62x_a53_defconfig: Fix CONFIG_ENV_SIZE
+  configs: phycore_am62x_*_defconfig: Set PHYTEC as Manufacturer
 
-I still wonder why you need so much changes if labgrid is so simple.
+Wadim Egorov (1):
+  configs: phycore_am64x_a53_defconfig: Enable CONFIG_OF_BOARD_SETUP
 
-For LAVA, it would likely very similar, exact we should generate a job to load
-u-boot, submit it and somehow interact with the board.
+ board/phytec/phycore_am62x/phycore_am62x.env |  8 +++++++
+ board/phytec/phycore_am64x/phycore_am64x.env |  8 +++++++
+ configs/phycore_am62x_a53_defconfig          |  8 +++----
+ configs/phycore_am62x_r5_usbdfu_defconfig    |  3 +++
+ configs/phycore_am64x_a53_defconfig          |  3 ++-
+ include/env/phytec/k3_mmc.env                | 16 +++++++-------
+ include/env/phytec/k3_net.env                | 22 ++++++++++++++++++++
+ include/env/phytec/k3_spi.env                | 18 ++++++++++++++++
+ 8 files changed, 74 insertions(+), 12 deletions(-)
+ create mode 100644 configs/phycore_am62x_r5_usbdfu_defconfig
+ create mode 100644 include/env/phytec/k3_net.env
+ create mode 100644 include/env/phytec/k3_spi.env
 
-Neil
-
-> 
->> The only "painful" part is
->> the shared pain, regardless of framework, for "put blob $X at location
->> $Y", which I believe you abstract out in to python?
-> 
-> Sort-of. The Python knows how to handle all the different writing
-> methods and is at [2], but it is entirely controlled by yaml[3] (the
-> example_env.yaml). See the ti,am625 method for example and the 'play'
-> board right at the bottom of the end file.
-> 
-> I very much like the configuration files (although I hope one day
-> Labgrid will allow the two files to be combined). It makes it easier
-> to add a new board, since there is much less to think about. It really
-> did take a long time to fiddle with all those hook scripts and I got
-> tired of it.
-> 
-> Regards,
-> Simon
-> 
-> [1] https://github.com/sjg20/u-boot/tree/lab6a/tools/labman
-> [2] https://github.com/labgrid-project/labgrid/pull/1411/commits/c7ea03987362af70bbbb94d14ff74c54a1ee5ed8#diff-e994502495dc8083c0b70ab20ace18fb5f85217805d01a54270a69c84ec31023R107
-> [3] https://github.com/labgrid-project/labgrid/pull/1411/commits/6d3b4a0cfc7e35e0547dcd14065328df4b4b5e1f#diff-66f82743402c95b2eac8f9937c61c582bd0aca2b35e841477d62122c811b7750R1187
+-- 
+2.25.1
 
