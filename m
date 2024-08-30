@@ -4,55 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13C6BCA101A
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 22:42:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A0C5CA101C
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 22:44:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 580008888F;
-	Sat, 31 Aug 2024 00:42:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id C63C08888F;
+	Sat, 31 Aug 2024 00:44:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="PluzpdOY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="A6u4+Vjg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 501948888F; Sat, 31 Aug 2024 00:42:48 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 531AB886E5; Sat, 31 Aug 2024 00:44:20 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B09DE886E5
- for <u-boot@lists.denx.de>; Sat, 31 Aug 2024 00:42:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 031E388D14
+ for <u-boot@lists.denx.de>; Sat, 31 Aug 2024 00:44:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=a7c1=P6=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1725057755;
- bh=h5GCOaDEm7NtkuqE5WZNb1QEzm593bFc/jFSRJp5UBg=;
- b=PluzpdOYh1VHbBok299/GiPap473XYhExBVilDTMxhGE27bYTZHYjgtw/OdAg1SAvlQl53fo6
- Cu41uSuKfSW9qVkAnTBmXGKUfdSF7nCmbtk9SK07a72dgU2rI5hAy2mot5f6UFUwW6oqRnG/Y81
- C5pFIEO0sRms3fgfXMluCskgt3z5fkezkAYpZpQjacdhGM1qIQw20Ve2Qiu/muRZJVg0GW8UuRm
- mS401HYUrq6XDMVYW882IivUN+AQaqtQboeqeHVZcyyChdZY9SQYZYxDh8WTeGbmXpTT20KD3Ha
- e6O8AZAGHuoLtatHq6cuM02/vQ2Z9+JR/KB4te1R0u0w==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Jonas Karlman <jonas@kwiboo.se>,
-	u-boot@lists.denx.de
-Subject: [PATCH] regulator: rk8xx: Fix buck get and set enabled state on RK806
-Date: Fri, 30 Aug 2024 22:42:05 +0000
-Message-ID: <20240830224207.2568205-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.46.0
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=linus.walleij@linaro.org
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-533521cd1c3so2748775e87.1
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 15:44:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1725057856; x=1725662656; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TPc2D1Bq3gFngKn//slA/dPXZIgd1zzG1lPMW63aCss=;
+ b=A6u4+VjgvsQ07ytjTNcfepYWhnBYX501pj4W/1LmmCNjtEGvqDoIxNPl7C4X6XEEMJ
+ rAPLdtnoPEUNS73EjEq6wpsGBnx7ZAcrxdJ8Qpf/5gEOe0vRe3OhxM5HWZ3HdVei8Ga5
+ pVST+swOvh7UJ4JRtjq43tSbqrHQ6IfJ9Czmt87GKn3qF2hYZJJQeqqaaGPd8oZtwHgV
+ BKnjldjHSFMoYwt9IisheBsc26paxrD4c+o37bS2diXAFDAUz8xy53hfLt3B49AIUVjo
+ ryYs7h1V0HukteCYspWhIpyEIykW5Ure6tr169Co/Yl60O3mckS8MZk6VVGMt3M+iBPQ
+ Kqeg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725057856; x=1725662656;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TPc2D1Bq3gFngKn//slA/dPXZIgd1zzG1lPMW63aCss=;
+ b=cDIcWCjhk71ryoT1qfZz4LOMuUtLr5gDSAY4O2LJCEgPbxBJzrsJOoR5bz9pxw/qx8
+ +U6GUblfD61padv7RGmDpO2CvN5uGa+37VNdFEdUaZSEnf9dAg7bOm8nYK94CGSO1mjh
+ GPhe7Z68RUF6bK6uTMCVlMhwbeHCcrisZmoP94cnbe469BWkKiT2BYy59f+3nRD6XskU
+ HYc/BgEE9f6gRbT4xIIAnNRxK1IqiNvRqW0U35MXo66xfzyl4kp+2kJhTCrwLPtP3tod
+ uWoWddEhjJVJWW52dTkPc8UXhgPiy0N1wnHs8dAbAKu+yjFtYwF/WeNMtrUeK5OmzH4I
+ 8U9w==
+X-Gm-Message-State: AOJu0YztQw//4duF6ytSezwJkDuIx8AJtrqQGQkNIrcU0KQ2DzPFCho2
+ m41kuXKlZUbylSai8CO/CuYpy73TockxG6Q3qLiN7G71wHKlVx1+Do1iJsVwBWdWPChOHH8Xnpr
+ FcQsLtQFtXmk0d8qGSOrhGIidTmAj/yma7+fDNw==
+X-Google-Smtp-Source: AGHT+IEUsA6wsox9JMLBmQ3GtX6vg0xr2rmKkEEytRu/QzjTwtqhXjTaVmgRui3EJLf/P+Oat4tImStylwLUs4cDm+M=
+X-Received: by 2002:a05:6512:3b95:b0:52d:582e:4111 with SMTP id
+ 2adb3069b0e04-53546b36865mr3142206e87.18.1725057855170; Fri, 30 Aug 2024
+ 15:44:15 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 66d24ad86aeca15848b5ea55
+References: <20240826143851.8020-1-marek.vasut+renesas@mailbox.org>
+ <20240826143851.8020-6-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240826143851.8020-6-marek.vasut+renesas@mailbox.org>
+From: Linus Walleij <linus.walleij@linaro.org>
+Date: Sat, 31 Aug 2024 00:44:04 +0200
+Message-ID: <CACRpkdanZmv+eO-sTfzCQ_wasLM=N5GzfxNNkGxTgQFbZ=Ji1A@mail.gmail.com>
+Subject: Re: [PATCH 6/6] usb: gadget: Pass struct udevice to
+ usb_add_gadget_udc()
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Nishanth Menon <nm@ti.com>,
+ Zixun LI <admin@hifiphile.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,66 +93,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Wrong POWER_EN reg is used to get and set enabled state for the RK806
-buck 4 and 8 regulators, also wrong POWER_SLP_EN0 bit is used for
-suspend state for the RK806 buck 1-8 regulators.
+On Mon, Aug 26, 2024 at 4:39=E2=80=AFPM Marek Vasut
+<marek.vasut+renesas@mailbox.org> wrote:
 
-Fix this by not adding one to the zero based buck variable.
+> Almost every UDC driver already passes casted pointer to struct udevice
+> usb_add_gadget_udc(), even if the behavior is not exactly correct. That
+> struct udevice is at risk of being corrupted in case something modified
+> it in the UDC core, which does not happen right now. Switch UDC core to
+> use struct udevice outright and drop the casts.
+>
+> UX500 has to be updated slightly, as that is the last place which does
+> correctly use private struct device instance.
+>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-Fixes: f172575d92cd ("power: rk8xx: add support for RK806")
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- drivers/power/regulator/rk8xx.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+Reviewed-by: Linus Walleij <linus.walleij@linaro.org>
 
-diff --git a/drivers/power/regulator/rk8xx.c b/drivers/power/regulator/rk8xx.c
-index 34e61511d884..3f5ec02b3824 100644
---- a/drivers/power/regulator/rk8xx.c
-+++ b/drivers/power/regulator/rk8xx.c
-@@ -415,7 +415,7 @@ static int _buck_set_enable(struct udevice *pmic, int buck, bool enable)
- 		break;
- 	case RK806_ID:
- 		value = RK806_POWER_EN_CLRSETBITS(buck % 4, enable);
--		en_reg = RK806_POWER_EN((buck + 1) / 4);
-+		en_reg = RK806_POWER_EN(buck / 4);
- 		ret = pmic_reg_write(pmic, en_reg, value);
- 		break;
- 	case RK808_ID:
-@@ -494,7 +494,7 @@ static int _buck_get_enable(struct udevice *pmic, int buck)
- 		break;
- 	case RK806_ID:
- 		mask = BIT(buck % 4);
--		ret = pmic_reg_read(pmic, RK806_POWER_EN((buck + 1) / 4));
-+		ret = pmic_reg_read(pmic, RK806_POWER_EN(buck / 4));
- 		break;
- 	case RK808_ID:
- 	case RK818_ID:
-@@ -541,10 +541,10 @@ static int _buck_set_suspend_enable(struct udevice *pmic, int buck, bool enable)
- 
- 			if (buck + 1 >= 9) {
- 				reg = RK806_POWER_SLP_EN1;
--				mask = BIT(buck + 1 - 3);
-+				mask = BIT(buck - 2);
- 			} else {
- 				reg = RK806_POWER_SLP_EN0;
--				mask = BIT(buck + 1);
-+				mask = BIT(buck);
- 			}
- 			ret = pmic_clrsetbits(pmic, reg, mask, enable ? mask : 0);
- 		}
-@@ -592,10 +592,10 @@ static int _buck_get_suspend_enable(struct udevice *pmic, int buck)
- 
- 			if (buck + 1 >= 9) {
- 				reg = RK806_POWER_SLP_EN1;
--				mask = BIT(buck + 1 - 3);
-+				mask = BIT(buck - 2);
- 			} else {
- 				reg = RK806_POWER_SLP_EN0;
--				mask = BIT(buck + 1);
-+				mask = BIT(buck);
- 			}
- 			val = pmic_reg_read(pmic, reg);
- 		}
--- 
-2.46.0
-
+Yours,
+Linus Walleij
