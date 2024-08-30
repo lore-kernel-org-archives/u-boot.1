@@ -4,79 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 983DECA0EDC
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 16:45:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24459CA0EFD
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 16:49:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6F0F88C09;
-	Fri, 30 Aug 2024 18:45:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6E7FE88C09;
+	Fri, 30 Aug 2024 18:49:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gx4kwssC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XQ8HZYSN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C301688C69; Fri, 30 Aug 2024 18:45:20 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id 6FFE888C8C; Fri, 30 Aug 2024 18:49:29 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A31988A5B
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 18:45:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7894C88C09
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 18:49:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-6c3552ce7faso729816d6.1
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 09:45:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-5353d0b7463so3735508e87.3
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 09:49:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1725036317; x=1725641117; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=d4oG6iz0veVH0Z+BOcZhx7wONW3v34WJ+tzBweOpxZs=;
- b=gx4kwssCj2dBX1dOCiG8et5BSuj3gm/vQPk0dxP9Za4TxM5sMHjP9fAs9AHTiLasXc
- eHMljrZ2UH/0qpyyqcU88iZAN14auwLYAfe6iDGUJ2wjaGQBPHqrioqX1lROUrZyTjha
- Hi5tnUSQJOWMXhY9t7w8wtaYA3CvT8zQgo0HM=
+ d=gmail.com; s=20230601; t=1725036567; x=1725641367; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=jMkdA66U3X+N0Wn+uaF5Y287WDGtoiJhVPx4i0RvmJk=;
+ b=XQ8HZYSNWBTk9JnqofZa63BYwMV8SS6k0rdqURPMjCkVDxbkR+tOQk7vQBihxV5VDT
+ mmORhKi9bBKVzIEQy5X0U5fpXtuyHEMkQTWtbgNg7xDeVWVKJKWVJ1s1onrSaZMZF6UF
+ cRwxqcjBjWzT4DWDaRT7ATiUJDUDt3Be/vdVGyoAxZs+ywE1zTZ3EIshv+g6m9/fGqlJ
+ dqZLAM/3deJ5ihhRp4RVXqix6gU2D5WsAQkual28TYdotEtxQPZHNNdGFEcInUjTL7ZV
+ CO8gAW1ZBSFhdbH0+AisOicvhjxJdqW06M1dIpHUVIWEqFHf7Am83QMJEVXXr3iLOG/k
+ DAzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725036317; x=1725641117;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=d4oG6iz0veVH0Z+BOcZhx7wONW3v34WJ+tzBweOpxZs=;
- b=mySEzWWCPfcVlo4xchqPo96aBRtM5oRB20pEcXXmbq85EV647lGZ19sGwONJqanCbo
- ts5k3yVlDnA3xIUBKz8rVeidyO6IoH82/JWcaY72luiL/J4xQfRsQvKtks5BMeZSqwkY
- Vli3br7bR5P3K9wjfEHcCNS1BxzAbmCfkS6H/XF1yAifZ6iIm90Od/eqMzd20AXSYcy1
- owT1UAK6iGgCtTX48yctHgcabkRdW0UTYGwCA0X9ekd5TWmLTBa6AgOIZ5+oE+D2UEcj
- OAlilyD0RrWKQ2hYGq4HtRk4ZoI+dIol+ShiA8MfP573JlBiq79ESEqZyVHtDi2Si+ZK
- B9Zg==
-X-Gm-Message-State: AOJu0Yzn3L6mbUXcbjtk2gGJaivML3AqiUQ5rVoWasYHJMCNsUPcr5t0
- yMx9w+z5xdEwl/EEDCinD7FkrvQUsCo9Ec2VT6L0Zy3Hn9rf29nMtV2w7eT8v6c=
-X-Google-Smtp-Source: AGHT+IFu9bydIqYRb5KByPz5PjbeUP7llXiWScy385hubFdbgqtNX2CzvRbt6h5JpuWit2O+FH+yBg==
-X-Received: by 2002:a05:6214:765:b0:6b5:e761:73ce with SMTP id
- 6a1803df08f44-6c33f351a03mr87294946d6.16.1725036317284; 
- Fri, 30 Aug 2024 09:45:17 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6c340c96804sm16036746d6.93.2024.08.30.09.45.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Aug 2024 09:45:16 -0700 (PDT)
-Date: Fri, 30 Aug 2024 10:45:13 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [u-boot-test-hooks][PATCH 1/2] bin/writer.rpi_mount: Use kernel=
- and simplify logic
-Message-ID: <20240830164513.GV2479150@bill-the-cat>
-References: <20240829185602.3179812-1-trini@konsulko.com>
- <CAFLszThtfWK7pm-JV35Z083G43TL3ySfcuX9a83-rcMHmh=OnA@mail.gmail.com>
- <20240830014943.GR2479150@bill-the-cat>
- <CAFLszTivDQ50yvTgXqc88afxX6UgcFNVLCGp=34HuwgaGt7ytw@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1725036567; x=1725641367;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=jMkdA66U3X+N0Wn+uaF5Y287WDGtoiJhVPx4i0RvmJk=;
+ b=Vu4BVJLfyMnGA8tCA7srzYjc3Jbado2LQgQbv94xPPcD+qZlt3u7MhTxtyw1fzp/3v
+ iwIBUmyJzj3bOto4CodfxkDuZTd6uXI3W/t5rKxVcaxK7l6+I8LsQupmoWrBAlyykhvg
+ uBPwHwGg0+iWC+4KpIBoFsI8C6AXixKMU5elj5shCn7cRfdFTKXG6qsUiwGJv/yced0t
+ 75k1mfi0NLrim69M+gmXJbEpExGcaSV0T5uOgS+poiKP/eKoiKlOYpZN407fzVWDaE8W
+ 9ac/dr1u95DC7HlY1IrBMrrFXcIADOBP0Oe0/XfZvG6ePnRwfjQrWr7/QVbkQYWjZfgY
+ EbpQ==
+X-Gm-Message-State: AOJu0YylZ2Jf1VJ2cvBTb4xi7CEk+Ra39H/rx9K3R69PlbR0CJtDl3OH
+ 28UreONUGlWJrNZh4CNTSVKGfJ7jPpqGTXZUWIAVRWYGTb6oRtLQtD3nO/EdZNq4tsv2/fCi6Lq
+ u0qYKc3OxtMYnZpThoxMVi4ko7tSYir2y
+X-Google-Smtp-Source: AGHT+IFSLe7/nDCn3NUmizWqvZnWP9BfN0teM/yonhiwy117DdgxiCsMI5S2Jhgd7mLkyoY+g6sNfOvMzfHZxI0huWk=
+X-Received: by 2002:a05:6512:32c8:b0:52c:9ae0:beed with SMTP id
+ 2adb3069b0e04-53546bfbf9dmr2529288e87.52.1725036566304; Fri, 30 Aug 2024
+ 09:49:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="eeNPwt6FNKq8Csl2"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTivDQ50yvTgXqc88afxX6UgcFNVLCGp=34HuwgaGt7ytw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 30 Aug 2024 13:49:15 -0300
+Message-ID: <CAOMZO5AUvhAGZd5VyiJGXXTKbEHJGysgTPLbjWE4H7wSh697hQ@mail.gmail.com>
+Subject: imx6ull-evk: Hanging with Ethernet enabled
+To: Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>
+Cc: U-Boot-Denx <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,86 +82,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Peng,
 
---eeNPwt6FNKq8Csl2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Running top of tree U-Boot on an imx6ull evk board causes the board to hang:
 
-On Fri, Aug 30, 2024 at 08:19:04AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Thu, Aug 29, 2024, 19:49 Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Thu, Aug 29, 2024 at 07:06:06PM -0600, Simon Glass wrote:
-> > > On Thu, 29 Aug 2024 at 12:56, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > Rather than guess what we need to name our u-boot.bin file as for i=
-t to
-> > > > boot make use of the kernel=3D option to always call it u-boot.bin =
-and
-> > > > then on 64bit platforms (and since future platforms use rpi_arm64 t=
-his
-> > > > list should not grow) also pass in arm_64bit=3D1.
-> > > >
-> > > > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > > > ---
-> > > >  bin/writer.rpi_mount | 25 ++++++-------------------
-> > > >  1 file changed, 6 insertions(+), 19 deletions(-)
-> > > >
-> > >
-> > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > >
-> > > > diff --git a/bin/writer.rpi_mount b/bin/writer.rpi_mount
-> > > > index 73fb8bf6af04..ab7c3b5a2430 100755
-> > > > --- a/bin/writer.rpi_mount
-> > > > +++ b/bin/writer.rpi_mount
-> > > > @@ -25,30 +25,17 @@ build=3D${U_BOOT_BUILD_DIR}
-> > > >
-> > > >  echo "Writing to ${mount_dir} from build at ${build}"
-> > > >
-> > > > +sudo cp -v ${build}/u-boot.bin ${mount_dir}/u-boot.bin
-> > > > +
-> > > > +echo "enable_uart=3D1" | sudo tee ${mount_dir}/config.txt
-> > > > +echo "kernel=3Du-boot.bin" | sudo tee -a ${mount_dir}/config.txt
-> > >
-> > > Does this keep appending more and more lines?
-> >
-> > No, the first tee will zero the file and subsequent -a's append.
->=20
-> Oh yes.
->=20
-> This is one trouble I have with rpi - there is an existing config.txt
-> and some of it seems to be necessary on some boards. But I don't have
-> the code to set up everything. Typically I just get a config from a
-> distro and that is how stays, with just an addition or two. If we can
-> generate it from scratch as you do here, then things are easier.
+U-Boot 2024.10-rc3-00015-g57949a99b7bd (Aug 30 2024 - 13:46:12 -0300)
 
-Yeah, it's very possible to go down a large rabbit-hole with Pi and the
-config.txt and getting everything Just Right(tm). Enabling the UART and
-as needed, saying it's 64bit is enough for basic testing but more is
-likely needed if say a follow up step was to run some wayland tests and
-confirm that output.
+CPU:   Freescale i.MX6ULL rev1.1 900 MHz (running at 396 MHz)
+CPU:   Commercial temperature grade (0C to 95C) at 27C
+Reset cause: POR
+Model: Freescale i.MX6 UltraLiteLite 14x14 EVK Board
+Board: MX6ULL 14x14 EVK
+DRAM:  512 MiB
+Core:  69 devices, 19 uclasses, devicetree: separate
+MMC:   FSL_SDHC: 0, FSL_SDHC: 1
+Loading Environment from MMC... Reading from MMC(1)... *** Warning -
+bad CRC, using default environment
 
---=20
-Tom
+In:    serial@2020000
+Out:   serial@2020000
+Err:   serial@2020000
+Net:
 
---eeNPwt6FNKq8Csl2
-Content-Type: application/pgp-signature; name="signature.asc"
+If I disable Ethernet, U-Boot boots fine.
 
------BEGIN PGP SIGNATURE-----
+I haven't had a chance to investigate, but wanted to report it.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbR9xMACgkQFHw5/5Y0
-tywLmgwAgTYxMWueVSmvj5ulcvwOOSbzYiJ/A3dk98H6y9Q8K/YguhxrJUzrmSBP
-Ei+lyocPc+P6ROr0cDyigBs6cAjnY0B3DNElYfKzh3qhOMIvE1oJ6pyoqLKxyHDX
-XnIVI7p8OTu8TV6njUdftixNojuQuk6S7t0LO7bLLrbiGNzYOXMvPBb+GfGfVNNE
-Vefu8gGntLO6B6zggKMndxCKmjVT002jM+qKySTEa1yjXygmsMhFgZSQjD1+uetO
-dhugXX06VOW5pHkjLVkzn0vFsfuH5wM24KW3FR86kOSLlfWq1cP5e2h1pe8g2O0t
-kZ4Px3QhvdQ5xUp+5QkQSsTPf5l5W69mUOtsP2BNclrg1SpASXXLzWE3yJKWQEEO
-eenJUfRQ0AeI7enazgA8wU0FTWo5Uk3ooPBWOv/6ENh5JaOXx3H3uOKF880U+04J
-GX0CpZ/fNyhdVhcVKhHBAu09TlH/Ca4mlcE0yiLcK1Wyv/+O13cN2K5lOkhcii4o
-F733h2pu
-=uLvx
------END PGP SIGNATURE-----
+Please take a look when you have a chance.
 
---eeNPwt6FNKq8Csl2--
+Regards,
+
+Fabio Estevam
