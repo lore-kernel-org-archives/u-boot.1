@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2292CA0FF1
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 13:23:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A33FACA0FF1
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 13:31:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15A1B88BBC;
-	Fri, 30 Aug 2024 15:23:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 0D63C88C19;
+	Fri, 30 Aug 2024 15:31:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="Wk2JrFRK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lfSGiXA8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4BE3788BF9; Fri, 30 Aug 2024 15:23:45 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 690C488BDA; Fri, 30 Aug 2024 08:59:52 +0200 (CEST)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C22B88BCF
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 15:23:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7EBD288C23
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 08:59:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=B.Hahn@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1725024223; x=1727616223;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gLAW3adIYANOgBLe2Odrggq9njXh20qcIYxRZqwJwzE=;
- b=Wk2JrFRK8d+mwqdJ4IHnM5Lkn+JB45tQjSSeOnMlKvbGI4ZHmc45beu9iA52of2k
- lPijhQgzWrgnEoeOdqb4oKGwXA9JRp6B3gm5T76D7ztfZL3zy4CCGZTar782bYwa
- znffc+Bh8jQTV8aFI/yyVt4/bh2h6jSrYuMmVk3rx8U=;
-X-AuditID: ac14000a-03251700000021bc-b3-66d1c7de31af
-Received: from florix.phytec.de (Unknown_Domain [172.25.0.13])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 91.F3.08636.ED7C1D66;
- Fri, 30 Aug 2024 15:23:42 +0200 (CEST)
-Received: from Berlix.phytec.de (172.25.0.12) by Florix.phytec.de
- (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Fri, 30 Aug
- 2024 15:23:42 +0200
-Received: from Berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4]) by
- berlix.phytec.de ([fe80::197e:d26b:2ca:c7b4%4]) with mapi id 15.01.2507.006;
- Fri, 30 Aug 2024 15:23:42 +0200
-From: Benjamin Hahn <B.Hahn@phytec.de>
-To: Lukasz Majewski <lukma@denx.de>, Fabio Estevam <festevam@gmail.com>
-CC: Teresa Remmet <T.Remmet@phytec.de>, Stefano Babic <sbabic@denx.de>,
- "uboot-imx@nxp.com" <uboot-imx@nxp.com>, Cem Tenruh <C.Tenruh@phytec.de>,
- "Tom Rini" <trini@konsulko.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, Yannic Moog <Y.Moog@phytec.de>
-Subject: Re: [PATCH v2] config: imx: Define CFG_SYS_UBOOT_BASE for Phytec's
- imx8mm SoM QSPI boot
-Thread-Topic: [PATCH v2] config: imx: Define CFG_SYS_UBOOT_BASE for Phytec's
- imx8mm SoM QSPI boot
-Thread-Index: AQHa8xGkyD16oF/ixkOlEYvHo56qSLI7W+4AgADbqQCAA4BoAA==
-Date: Fri, 30 Aug 2024 13:23:42 +0000
-Message-ID: <dbf9bf5e-b96b-4e34-816c-215e68289526@phytec.de>
-References: <20240820145944.3048128-1-lukma@denx.de>
- <CAOMZO5AAfn7zw1+VEGjdS6UAQLv5kTVT97_dy_oxhauntYeHvQ@mail.gmail.com>
- <20240828095520.76f904bc@wsk>
-In-Reply-To: <20240828095520.76f904bc@wsk>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.25.0.11]
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <B3A7CF7C99DF6F408EBDC9DF41372C80@phytec.de>
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marcus.folkesson@gmail.com
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2f3f68dd44bso14624201fa.3
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 23:59:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1725001189; x=1725605989; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=RB65wFPgpqXCMnZtLxD5+yiyEGbr2SfZBOkOdjbFbWA=;
+ b=lfSGiXA8T1D53EvCxjGm2MPhXjC1Av4sc+YTqljHkOulnowwm/PNARz6Bac7IaUliR
+ 9zxl3O09N1IcFEXSCQZZ18RkVILNBSS6etWZUtcaXCAxAwa4t3PMATpyGOUVoRMz/aoA
+ iGN2Qjf1ur+vaD5J8qYs2UAd/ss9dIk7DQjmwWNV/wcn7ul2eC0FPVO92/lDgoAgmi1H
+ jfSgX4MVzcSZWf7q5q7/F+i8S7c1Loz3cs/bSwkyx77IwLoyqto4yYmBzjRuj9hJp/gU
+ qSIuW28fz5ZZBnAEKF0A0PvXHdZInTlajZuiZ97V0ddySMVY9o2wx6QQTg2XM+bvQT0x
+ rWKg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725001189; x=1725605989;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RB65wFPgpqXCMnZtLxD5+yiyEGbr2SfZBOkOdjbFbWA=;
+ b=wnwQC9JWFLxRP8P6ZNeizSoiuf7nY1FbPZTg32aN/ZqtST8CrsYMTnt+8tudhxZbVX
+ GubbE7k7Qo4OjApzcNuECC5qOuQzUPpBTZOMQd84nCj3RfB/iA43XVEKDEsBbuAMWkFT
+ 3P/avREwYZzURMA0ltDkFOTzx2yrytjP6GVWbibdoB77VEAbP60+rU6D41w3prQBHRC/
+ 5pdOWj58zNP9oNfQqlg4GWeCKNdNAbmUkQLZAHDYjKVPZQylUgxNPLG6ukSmAEChjTqv
+ a5/1kJpC00/cqjc0qwT2LxGVWLgnaZSmE6AgSHYpokAaogWcPS+Jry5M0uEUbco39Rzd
+ mHwQ==
+X-Gm-Message-State: AOJu0YyfHnJSKA+/DdgB3kyySPmEsanZPb7OOE0NIAKE64FwfOQgbhpo
+ JSYS94GeydqN+CeXpBeiICUaEIR7Ipx18X7Wouc2Gie4JTvSkKyTkExdp4T0
+X-Google-Smtp-Source: AGHT+IF1TW6VtA1Bhy7Io7Q/9kyAQQ9vvlVbLqJsK74xOFM89u8iwfBJAGQIJfjNFy8hCQMrh1Oixg==
+X-Received: by 2002:a2e:a989:0:b0:2ef:232c:6938 with SMTP id
+ 38308e7fff4ca-2f61e025793mr8002911fa.6.1725001188632; 
+ Thu, 29 Aug 2024 23:59:48 -0700 (PDT)
+Received: from gmail.com (83-233-6-197.cust.bredband2.com. [83.233.6.197])
+ by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-2f614ed1737sm5048191fa.2.2024.08.29.23.59.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 Aug 2024 23:59:48 -0700 (PDT)
+Date: Fri, 30 Aug 2024 08:59:46 +0200
+From: Marcus Folkesson <marcus.folkesson@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Alexander Dahl <ada@thorsis.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Igor Prusov <ivprusov@salutedevices.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] mtd: nand: raw: atmel: remove unnecessary return value
+Message-ID: <ZtFt4rBOzF7Qgm-K@gmail.com>
+References: <20240809121556.3215132-1-marcus.folkesson@gmail.com>
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrPIsWRmVeSWpSXmKPExsWyRpKBV/fe8YtpBkdO2Vg8vOpv8fzdZSaL
- 9lM+FlMnbWa3eLu3k91iyuP17A5sHvNmnWDx2DnrLrvHqwOr2D3O3tnB6LHx3Q6mANYoLpuU
- 1JzMstQifbsEroy58++wFuwRrtg8ja2B8Y9QFyMnh4SAicTz983MXYxcHEICS5gkrvz8wwbh
- 3GeUuL5iNTtIlZDABkaJCRvyQWw2ATWJXW9es4LYIgLuEosOrmYBaWAWaGOS6Nn1AiwhLJAk
- 8XzhTmaIomSJtSsfQDU4SRz//Y0FxGYRUJVomNTEBmLzCthILDn9kQVi2WxGiekvOEBsTgEt
- iZZtB8BqGAVkJTZsOA82k1lAXGLTs++sEC8ISCzZAxGXEBCVePn4H1RcXuLErWlMXYwcQPWa
- Eut36UO0WkhMujKREcJWlJjS/ZAd4gRBiZMzn7BMYBSfhWTDLITuWUi6ZyHpnoWkewEj6ypG
- odzM5OzUosxsvYKMypLUZL2U1E2MoEgVYeDawdg3x+MQIxMH4yFGCQ5mJRHepXsupgnxpiRW
- VqUW5ccXleakFh9ilOZgURLnXd0RnCokkJ5YkpqdmlqQWgSTZeLglGpgFM/d+ajt+Wqh2Iys
- 68aqe6UuPMvVsT1sl1jx3v1b4HlDxUsPuPk9DFeaJ5fPOG/+do5E09zej3ufRZ8Kvtcce0bI
- QEBY8tBfrvhXWktPBdaxF63R0+/fc2d17Oflv0VS7X973lcvOcromfj9adsZBbvueR+zXFfe
- 8TzyoOLpLnudJ6/6m9dsUGIpzkg01GIuKk4EAGE+d7HCAgAA
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="bOKa5fasd0eN6+xe"
+Content-Disposition: inline
+In-Reply-To: <20240809121556.3215132-1-marcus.folkesson@gmail.com>
+X-Mailman-Approved-At: Fri, 30 Aug 2024 15:31:35 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,35 +97,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgTHVrYXN6LA0KDQpPbiAyOC4wOC4yNCAwOTo1NSwgTHVrYXN6IE1hamV3c2tpIHdyb3RlOg0K
-PiBIaSBGYWJpbywNCj4NCj4+IEhpIEx1a2FzeiwNCj4+DQo+PiBPbiBUdWUsIEF1ZyAyMCwgMjAy
-NCBhdCAxMjowMOKAr1BNIEx1a2FzeiBNYWpld3NraSA8bHVrbWFAZGVueC5kZT4NCj4+IHdyb3Rl
-Og0KPj4+IFRoZSBpbWFnZSBvZmZzZXQgd2hlbiBib290aW5nIGZyb20gU1BJLU5PUiAoUVNQSSwg
-RlNQSSBkcml2ZXIpIGlzDQo+Pj4gZGlmZmVyZW50IHRoYW4gb25lIGZvciBTRCBjYXJkIC8gZU1N
-QyBhcyBleHRyYSBzcGFjZSAoMHgxMDAwKSBpcw0KPj4+IGNvbnN1bWVkIGJ5IEZTUEkgY29uZmln
-dXJhdGlvbiBoZWFkZXIgKENPTkZJR19GU1BJX0NPTkZfSEVBREVSKS4NCj4+Pg0KPj4+IFNpZ25l
-ZC1vZmYtYnk6IEx1a2FzeiBNYWpld3NraSA8bHVrbWFAZGVueC5kZT4NCj4+PiAtLS0NCj4+PiBD
-aGFuZ2VzIGZvciB2MjoNCj4+PiAtIEF2b2lkIGxpbmUgYnJlYWtzIHdpdGggZGVmaW5lcw0KPj4g
-IEZyb20gdGhlIG90aGVyIHRocmVhZCwgbXkgdW5kZXJzdGFuZGluZyBpcyB0aGF0IFFTUEkgYm9v
-dCBpcyBzdGlsbCBub3QNCj4+IHdvcmtpbmcgd2l0aCB0aGlzIHBhdGNoIGFwcGxpZWQuDQo+Pg0K
-PiBCdXQgdGhpcyBpcyBhbiBvcnRob2dvbmFsIHByb2JsZW0gLSB0aGUgcHJvYmxlbSBpcyB3aXRo
-IGJpbm1hbiBpbWFnZQ0KPiBnZW5lcmF0aW9uLg0KPg0KPiBUaGlzIHBhdGNoIGZvbGxvd3MgdGhl
-IGNvZGUgYWxyZWFkeSBwcmVzZW50IGluIGUuZy4gaW14OG1tX2JlYWNvbioNCj4gYm9hcmRzLg0K
-Pg0KPj4gUGxlYXNlIHJlc2VuZCB0aGlzIHBhdGNoIHdoZW4gdGhlIFFTUEkgYm9vdCBwcm9ibGVt
-IGlzIHJlc29sdmVkLg0KPj4NCj4gQXMgSSd2ZSB3cml0dGVuIGFib3ZlIC0gcHJvYmxlbSBpcyBz
-b2xlbHkgd2l0aCBiaW5tYW4gY29kZSBnZW5lcmF0aW9uIC0NCj4gYWZ0ZXIgcmV2ZXJ0aW5nIDMg
-bGFzdCBjb21taXRzIGZyb20gaW14OG1tLXUtYm9vdC5kdHNpIHRoZSBpbWFnZSBpcw0KPiBjb3Jy
-ZWN0bHkgZ2VuZXJhdGVkLg0KDQpJIGNhbiBhbHNvIHNlZSB0aGlzLiBXaGVuIEkgYXBwbHkgYWxs
-IHlvdXIgcGF0Y2hlcyBhbmQgcmV2ZXJ0IHRob3NlIDMgDQpjb21taXRzLCBTRFAgYm9vdCB2aWEg
-dXV1IGFuZCBmbGFzaGluZyBTUEkgTk9SIGZsYXNoIHdpdGggdGhlIHFzcGkgSW1hZ2UgDQp3b3Jr
-cy4gQW5kIHRoZW4gYWxzbyBTUEkgYm9vdCB3b3Jrcy4NCldoZW4gSSBkb24ndCByZXZlcnQgdGhl
-IDMgY29tbWl0LCBpdCBkb2VzIG5vdCB3b3JrLiAoU0RQIGJvb3QgdmlhIHV1dSANCmRvZXMgbm90
-IHdvcmsgYW5kIHRoZSBJbWFnZSBkb2VzIG5vdCBib290IHdoZW4gZmxhc2hlZCBpbnRvIFNQSSBO
-T1IgZmxhc2gpLg0KDQpJIGhhdmVuJ3QgaW52ZXN0aWdhdGVkIHdoYXQgdGhlIHByb2JsZW0gaXMg
-b3IgaG93IGl0IGNhbiBiZSBmaXhlZCANCnRob3VnaC4gU28gSSBndWVzcyBmdXJ0aGVyIGludmVz
-dGlnYXRpb24gaXMgbmVlZGVkIGhlcmUuDQoNCkJlbmphbWluDQoNCj4NCj4+IFRoYW5rcw0KPg0K
-Pg0KPg0KPiBCZXN0IHJlZ2FyZHMsDQo+DQo+IEx1a2FzeiBNYWpld3NraQ0KPg0KPiAtLQ0KPg0K
-PiBERU5YIFNvZnR3YXJlIEVuZ2luZWVyaW5nIEdtYkgsICAgICAgTWFuYWdpbmcgRGlyZWN0b3I6
-IEVyaWthIFVudGVyDQo+IEhSQiAxNjUyMzUgTXVuaWNoLCBPZmZpY2U6IEtpcmNoZW5zdHIuNSwg
-RC04MjE5NCBHcm9lYmVuemVsbCwgR2VybWFueQ0KPiBQaG9uZTogKCs0OSktODE0Mi02Njk4OS01
-OSBGYXg6ICgrNDkpLTgxNDItNjY5ODktODAgRW1haWw6IGx1a21hQGRlbnguZGUNCg0KDQo=
+
+--bOKa5fasd0eN6+xe
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Aug 09, 2024 at 02:15:43PM +0200, Marcus Folkesson wrote:
+> The condition 'ret' is always true as it is never set to other than
+> -EIO.
+>=20
+> Remove 'ret' and the condition for copy.
+>=20
+> Signed-off-by: Marcus Folkesson <marcus.folkesson@gmail.com>
+> ---
+
+Any more thoughts on this?
+
+Thanks,
+Marcus Folkesson
+
+--bOKa5fasd0eN6+xe
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEBVGi6LZstU1kwSxliIBOb1ldUjIFAmbRbd0ACgkQiIBOb1ld
+UjLxAxAA0jhzYUjayuf4TVXt+EEZxpBfyoLdMgF3uOpUV/4EZfTG5Nsm4/K3xs3R
+rZvZgDZHkfLa3JhSJLfZlTb9js9MfpDTQendAsz5o+ynq8KgUGJWhYJFdLA9VmgC
+VBk9/wBMGW8n3fNGksPf5Lestcetsxju16Sb87RJrOtx8Ks36ErodRWz52C0pebd
+0u2COz8GyRktXJCDUmLa1E+W0qq82qqUOmrMxJqnJzf1SPZ2K4dUp/IN3w2CqVqi
+w37n6jXa5bztxcn5zIYG5jUsE9uMaVSiGxBMErS9DoYee4KLMA4wrY5Zq6XH5lwS
+tlp8R7SnUlhy3QSdyGk/uqo47bdRyW7QT6ZPxlT4tp7C/JhSZThEUoL4MteFFjtS
+ot8WSst7OPRiJRkUYkPiu6BtjN1h0DdZ9x3tnYibOZ/aAriVgJymBYpOBMP6+NcK
+nJyJgUU4yNaZ5oX5cvhHLxOHXdOCqaQctIbwWHZWx/luyKShxutAwdWp1ohMnl46
+b4eZ9fDqoAOUrv39oaZeaaYPZey70MSBeKH4zA/VQIdZbACUDBDDd+5T8lERMjI1
+n4YrfBc+Zi775X/TM/rx6m9q+VPC3p9HUIFAeWuBOQnkOLl37tlGESotIv5SBEnz
+hrXAdlqcJgYTUUD603FdxzxgEaFHQuaL90TeJFuz2LH9rzDeI3k=
+=5P5/
+-----END PGP SIGNATURE-----
+
+--bOKa5fasd0eN6+xe--
