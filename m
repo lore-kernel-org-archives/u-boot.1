@@ -4,185 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B81A7CA0FFF
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 15:06:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB8E1CA0FFF
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 15:13:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2FB5788B55;
-	Fri, 30 Aug 2024 17:06:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id 3C3B188B55;
+	Fri, 30 Aug 2024 17:13:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="RbV2Ie9p";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WgXbvTGu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E360E88B55; Fri, 30 Aug 2024 17:06:32 +0200 (CEST)
-Received: from EUR02-AM0-obe.outbound.protection.outlook.com
- (mail-am0eur02on2060a.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2606::60a])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E754188BFB; Fri, 30 Aug 2024 17:13:36 +0200 (CEST)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5F6B88A5B
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 17:06:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 22A2C88637
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 17:13:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Er6BvSWYerBCQKFWfHesVd8wFu1b9emC2xQUD9ZZgxVJ11z/AVhfVf72c2MIdi8a/y4geM9YmMBWbhdECdfc4SyY0uUU2nrAbTHq8WYWaXvGtmNOMJVAbDKCe24CR+o26UKQmKTZQHBGsxOdY/FGnGq8WwPx1zbVXw8eM/7ruuoJjP6H9WkgfMHpr/KriWcILILyRVJO371El2aZJuXoGbhEMv4RaHJ41YfERNxmdZI5HSz85oukmE5zAm53sF+SlRWwtG3kQXyO1fEigDNg3EcIQG3Qj66ATxms/Gi4HiDBl8N5rCTEaYkeQ51ZoBpkdb5gGoFBWk5z2RHMVEWaCA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IlnNrUEhz49nvYNlKU4hhNxwBldNy3YFOnDPl6rN0bg=;
- b=bWoGS5y9JuJmq90T5jbOpTrQ0cfuz2jznqQAY3cKxxbJGJ0b0ZUEYYb8dMFJfURpXYngf17D65s3x6NeL1E/9NPb++HR5/Ay5G5s2i8jZSG8RZ4YKIA1o7slj567GygLUu2Smv904itKYHSOaf+sPAMbbxCwZSrO32JzDnn2jwV43PdYy8Mq3ojiFEiBXk8X6bh1erXWoqK0AjhqIvfxIY2OPoD1h70PF7PvEu+2pjbmLSFcURW+7Ug47qzvYloKjLv/1+PLzvZSfP+irW3DqIhjYzg8seyDoP0Ikv7EuZhr9q1ED4fYx8WVlvBGk+sMUP1ykFCtKtkEzNipcM3Hbg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IlnNrUEhz49nvYNlKU4hhNxwBldNy3YFOnDPl6rN0bg=;
- b=RbV2Ie9pL9rWL1p8WFmrZFvO1Lzjqa8y0sExnujt54YjMCeJgIZRK3xldRflRiPd2lW7QNNqX13YAdKO1g1dsa98P2ChR0VZt0C8VE4C4/fS1w2eRae0QAFMzLAeXp6hCgsKEbC76+ekLvdwGTSwVUy9xhrH3cxDUpLP2xy0JR0zjZm9DYsZEwT9FqZL4Aylr670gCfMN1prMCaE5Ros2NFkAMMNnZm5p3aEQMpwqjz5wUJenRAtMPl2Lixr4/H5raBO14H+3gbakecd1UEkSzSgdpXxCZojtFcC5XAaGYjqNVRxGGnTb5lJZGJ1csDHv2KzTqjb1K5ynOckIU2B2w==
-Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5b6::22)
- by DBAPR10MB4044.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:1ce::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.20; Fri, 30 Aug
- 2024 15:06:29 +0000
-Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::baa6:3ada:fbe6:98f4]) by AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::baa6:3ada:fbe6:98f4%3]) with mapi id 15.20.7918.019; Fri, 30 Aug 2024
- 15:06:28 +0000
-From: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
-To: "joao.goncalves@toradex.com" <joao.goncalves@toradex.com>,
- "sumit.garg@linaro.org" <sumit.garg@linaro.org>, "c-vankar@ti.com"
- <c-vankar@ti.com>, "francesco.dolcini@toradex.com"
- <francesco.dolcini@toradex.com>, "nm@ti.com" <nm@ti.com>, "dannenberg@ti.com"
- <dannenberg@ti.com>, "n-francis@ti.com" <n-francis@ti.com>,
- "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
- "trini@konsulko.com" <trini@konsulko.com>, "afd@ti.com" <afd@ti.com>,
- "seanga2@gmail.com" <seanga2@gmail.com>, "s-vadapalli@ti.com"
- <s-vadapalli@ti.com>, "michal.simek@amd.com" <michal.simek@amd.com>,
- "quentin.schulz@cherry.de" <quentin.schulz@cherry.de>, "d-gole@ti.com"
- <d-gole@ti.com>, "danishanwar@ti.com" <danishanwar@ti.com>, "devarsht@ti.com"
- <devarsht@ti.com>, "mkorpershoek@baylibre.com" <mkorpershoek@baylibre.com>,
- "w.egorov@phytec.de" <w.egorov@phytec.de>, "jonas@kwiboo.se"
- <jonas@kwiboo.se>, "kishon@ti.com" <kishon@ti.com>, "sjg@chromium.org"
- <sjg@chromium.org>, "matthias.schiffer@ew.tq-group.com"
- <matthias.schiffer@ew.tq-group.com>, "u-kumar1@ti.com" <u-kumar1@ti.com>,
- "vigneshr@ti.com" <vigneshr@ti.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH v6 05/11] soc: ti: k3-navss-ringacc: Fix reconfiguration
- of qmode API
-Thread-Topic: [PATCH v6 05/11] soc: ti: k3-navss-ringacc: Fix reconfiguration
- of qmode API
-Thread-Index: AQHa96JYztj0wi53vU+DU/iomUgBsbI/60SAgAAB1QA=
-Date: Fri, 30 Aug 2024 15:06:28 +0000
-Message-ID: <d9a9dc7c95ea7c97a507643205f83de9fc357c4e.camel@siemens.com>
-References: <20240826102515.2774296-1-c-vankar@ti.com>
- <20240826102515.2774296-6-c-vankar@ti.com>
- <debe9b01-9c43-46e3-9d8b-7ac812c5f2d3@ti.com>
-In-Reply-To: <debe9b01-9c43-46e3-9d8b-7ac812c5f2d3@ti.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS8PR10MB6867:EE_|DBAPR10MB4044:EE_
-x-ms-office365-filtering-correlation-id: f4d06f49-b593-41cf-94f2-08dcc9055345
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|376014|7416014|1800799024|38070700018|921020; 
-x-microsoft-antispam-message-info: =?utf-8?B?KzhyWUVrQXRwOUsxd3hCQW00N0wvSTBTNjlUUkFVSy83c2RJVW5qSWluS00w?=
- =?utf-8?B?UmtKV2FYN0NxVmhWSFRsMHJGVEFRODZpTktUMHlWZllsS2FjeldWamRRT1hu?=
- =?utf-8?B?L1MzeGl1STRnMVFHbkhwRVViMXlDVnhVNGh1YjY3cndqZDRBMXBHTkFHV2xH?=
- =?utf-8?B?UEt4blkxRkhkckpvWXNJTlNiQUVHUGlqMW0vb0kzczVyTzJOUGpyQjBUbDVZ?=
- =?utf-8?B?cTIyM2NZOWNiOFRqb1MvM3dyU2FDR3lFYjFDQWVFUmk0bjJLRTVTemx1cW5E?=
- =?utf-8?B?TWRKVFdUQ1dKS2xKU2VQRWhQRzF2azFrY0FDMUY0bkQxTnJDSzdoR2k2OUVM?=
- =?utf-8?B?MlZIbENuM0puZUlqcHEyT0RSM3dpSERxS0wxSFJOK1FTTUtzNEk0RHdXMXB6?=
- =?utf-8?B?MkZGSzdyRms3UkRYdEFYdUdaUkh2Z3l6WDV6Y3psNEx1akVrd1QyRnplZFFP?=
- =?utf-8?B?M1JRNytKdkVzdXRRcVpOWDVSY0tIRGx1aE1YQUxPMi9MVVFTNTRVeEpQcGtS?=
- =?utf-8?B?c2JEMXZNeWVqZXZaYUhVSkw1TXJPME9Va20yUVJXeU56UU5ic3hMRnF0UUZ0?=
- =?utf-8?B?SlI2VmM2cVJuaDl0dUYwMkxtRGNxSWNDdDl6MFlmNDFvK2NDVldjL3pvU2lx?=
- =?utf-8?B?c2wwanNHTGluV0swT1pzS0wycjQzaVNFL3VGVkxGcjJpU0k5R2w0WVovMFVW?=
- =?utf-8?B?M2o3aFFpR09nN1kyM1FiODBJS3Q2Q1pvRVpIRXkrWHBsODNCakpjcUkzMTVJ?=
- =?utf-8?B?UG03bm9DenBHcWMyWm1OLytQNk52djJpTzJ3Q3YyMWtMSExwR3JvMURDODFr?=
- =?utf-8?B?WFMvYVZzU1dBaDVYU2hjVFUwZHpwbHF5OU5HSXpySGxhSkZzZmNGYmw5dkFL?=
- =?utf-8?B?WnhvNGlZZENLVmY5Z0ZZNVYyVXpod0l3d29CdjFjSExwcnRMTE5nYVltaXNh?=
- =?utf-8?B?MEtra1QyanRPTXBGdmlySXNndlFsM09kTy9oTGtSNTFFN2NHVkczcERXNGRG?=
- =?utf-8?B?b2ZtZ0x4L1ZJQ0RneEVScWJLZGk1ckkwQzN2ZGMzWTNad1VLaTdyb3ZGa0pZ?=
- =?utf-8?B?THhXT1QwV0FaampuWUdzVnZvME53TllESDhQN3ovVVZEdkZlK3ZWejdNbzYx?=
- =?utf-8?B?STVoN1NOUVhRUEc0WFkxMXN0bCtBaXY4Q25hZ3RIcVNnay9YQWl1MUNMN0ps?=
- =?utf-8?B?TnliOXRpNDVZaVgveDZ6aTVkbjVGMm5lZ0pwQVd3Y3l0Q1M3dDR1N1NFV3Na?=
- =?utf-8?B?UUlTR3JzYTBQWjR2c0k3b0pVSVlDbjVxY05jSW5yTm9WUE9RWVFiTndpTzkw?=
- =?utf-8?B?WUg1S2lYSEY4eFZDa2E2VUczL0JNQ1gzeXN4V25ybCtjczE0cVJtYlpzTnFy?=
- =?utf-8?B?dnMzOFN6MUFSVXlwTjdBb05xQnVFdlVTZFFEQUhGS05aV1ZzRS9Wb0JhTXJj?=
- =?utf-8?B?WmpFejNjcEJVZVdwaHhiTEpZajFKV1FxektFZWhxVnJ5UnowRUNDU3YzOUY1?=
- =?utf-8?B?blJVSEdFUjBYeHhuNjV2K2MvUmp2YjlJZ1pvVlg5QjhOUHFDWHV6QytnMVRZ?=
- =?utf-8?B?bjNGUnFhaGc5WVg1aXpVVWJKbU9peGY2dDVzRTJmYU9xTjNXeG02R0MxZlFv?=
- =?utf-8?B?eElwbWlTb3hFODVTNERyRHpWMVNiZzN3U2NHWUJzSVlPdjU5VFlzRUQzb3VL?=
- =?utf-8?B?TFQ1TUhiSEN6Wk1JU1p6WTR1cSs3ZmZoN3c2UDZPSjlETWxSbzNuRGRRS29p?=
- =?utf-8?B?YjNHSWtSUHpLclNzaFhrUlNmcTJjbWRQTFRINnpHb3ZJaE5DOWlwbURmMmVQ?=
- =?utf-8?B?UHY0K0VrczlXN3liUWNFZzRoWVJFYkRCVmhCWTVtR09hVGZRMzliVDRwa2tQ?=
- =?utf-8?Q?ysRm1hTQtY78y?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(7416014)(1800799024)(38070700018)(921020);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?Z2xGWUNjdzNyRkgzYmRTbnZuanBod2VYR0h6MC9GbEcwajQxVTNOWHZ4c3h4?=
- =?utf-8?B?M1psdXF6ZXVaSnVuV2Y0dElCckZLdlZDRFk2UllnUE5Lc2tqaytqeUpzdFBt?=
- =?utf-8?B?OG4xNDNieDVzcC8yMzJtbUdDb0liRm4zSW9xVlNKamVzUU9BSmJoNWlDbkVN?=
- =?utf-8?B?bkNaUXBsNlpDN3ZpWUZkSmM2VWlBdjZaV1NRbUdqdnkxd0s0MWFRbFcyZDVx?=
- =?utf-8?B?T1haRGZPM2JTT3NodjZyK2dKUjFpZFh5NXJFcDc1QXYyNUFxcFRnUm14bGF0?=
- =?utf-8?B?OU1ldS9rVHAyM0JjUTZ4MW9MZFlLYmlza2U5U3BlclhQMTliTThaalN6YldF?=
- =?utf-8?B?Z0JWd09acjVZTkMxWFZlVm5JYmtIRVBiTTk4YzE4c2l3em16R1FiMExFSUhY?=
- =?utf-8?B?RzhnL1Nra0t5SjNwL2FLeG91NUFTZEUxS0ROUXVscDFvbjBhRW54NkpRUWlX?=
- =?utf-8?B?SUY0bm9SNGZwRE1ZaWJ0eE1XS1VsQytxV0RPQ3Rpbjd5Um5CL3Q5a0J2WWgz?=
- =?utf-8?B?c2RoYnVFR3k1Z0V3eE5YYmFEQmxmak42aklJZ3BoUUFYVUJzVEpQc2xLaFJF?=
- =?utf-8?B?WWJNMFo5L0dEOERwZlhaUHQxS0tWNm5IMzh2TkttZG5RWHJpMVNxU1Q1Y0lt?=
- =?utf-8?B?eHo1akJKblE2Rkt1cTJieFMzbWpKZU5jZWVpUzZRODl6Umw4QVkxVGozZmxu?=
- =?utf-8?B?OEc1dlprZ0o2WE9GYUxzNWV6b2dsSkdNK3F6bUxmRExQeGJzQi9KYURJaVNw?=
- =?utf-8?B?alZHYk91MlFEOFRYUFlXME05MThPb0pQeDNyWjllNE9YVk1GRzZsZHBVZmty?=
- =?utf-8?B?UG5rTGRXT2wzWWY1N1ZSRDQ1QklHRXdxT1JFNUd5UE9WQTRCTzJab0hiczJV?=
- =?utf-8?B?a0lQa3hMSUdmNjBaS0dZRW1VbkFoMUhIbXlVUVc5d1libHBRMXpEMFFFQzB1?=
- =?utf-8?B?OU9pSFF5V2g0bVVyUnVhckJ2ZXlKZmxlK2c0OU5wKy9kU3VqbDN6cnNnSzFo?=
- =?utf-8?B?WjlWWldxMlRZUXFqV3JkYjNzSks4REoxaHE5N0hBdVVFVEtTUWM3L21ET2lO?=
- =?utf-8?B?aytrWng0a1BYM25wQksvamU4Q2w4YjUwNjRzaUJ0ajN5dTR1aUtVayswRjQ4?=
- =?utf-8?B?WFRoaVkxL3JRenJGb3E4dWtsbEZSdFY5VnFJdFpMek53dDlXQk9QMlZiNFBy?=
- =?utf-8?B?eEEySmVyLzBzYndQZDhjdGRnNkRjTTZqclFyazIwb0dzZEMzbmZDTDNzQ1pC?=
- =?utf-8?B?RHlBeXBLWDgya3JvaDMzVDgzS054d2F3Y001NzVoNmlYZy9hY3IrUGRtdDll?=
- =?utf-8?B?bnR3cFdXYndvbVZLdmNHQmpiemdhM3liK1dTVHhmaE0yN3ZuWk5EYUJZU0F6?=
- =?utf-8?B?cXB6WEZSSWNlQU4xUHpPeHJMWDdiVUFKQnc0a3dGaFk1UlphaFBTR0I2cEVz?=
- =?utf-8?B?NjBxKzRmRFE2eU5LNXh4a1JjWUR4REl5NFI5UVQzZlRqL1d0SithWFM0ZlVq?=
- =?utf-8?B?STZKbUQ2MzdFd0FMQXlCTWdwNUFPaTBTLzBVWG91K0pkSjdodjliRVlNdWJF?=
- =?utf-8?B?NDF3TjBybW91eUVWY2lid0FrdlEvMVdCUjlaVjVycG1UclZtWjRvT3F1SnpV?=
- =?utf-8?B?Vy9mVHdRdFp4bWU5YXZ3eEZhZnI4bU5BQ0VlczZJb2JLZjFkQ0duQUJhcm9R?=
- =?utf-8?B?L0U3WmZHVmRzcUF3TVo3Q3h4TmpzQW9EZ2x3K3UyRm1vbVYyQnB4YXZkSXpn?=
- =?utf-8?B?dnVxVUdqdWtYRGlkcFo2UE9IWnlyTmpNT2Zndjh3b0c5TmFaSC9SNFJFdEFj?=
- =?utf-8?B?d01aTlZ5enJRWlZ3NTVrdWdMYlNjZjUwTWhwbTMxQ1kvK1NUU0RJK0lsOHRS?=
- =?utf-8?B?cnlwMWN1V0J6azE2eCtFWlpmVDJJYUNQQUZIeEhLdmhlRjJEK2lpa3ZoTzZT?=
- =?utf-8?B?VVNQeUJjZWxyY1JRbGxKZHYyV2NBRUhGN0ljMUt6M0F3OHBtd28rYUV6VEYw?=
- =?utf-8?B?UTYzT2xPSFR3UmIvNFowRk9lUEx3TitUMmtRR1dMbG9HQUxoTy9LQ0paY09p?=
- =?utf-8?B?SzB3cGZkMzBVUmlOSWhkSDBVOHBkRk1paHdIYkJFWlVUSTgvMUpxckRVY1h2?=
- =?utf-8?B?U0w5dlNhaUZzT2lrRVZuUzZ3TjFBNzl4MGZxUy9wOCtRTHZIM2VsRFdqUDVl?=
- =?utf-8?Q?FUhWFC8elzu5IoaWrtXD5uQ=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <2A0B59999CC45F419FACD043B9D0EEAC@EURPRD10.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-6c34c2a7dc7so3502266d6.3
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 08:13:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1725030813; x=1725635613; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=rivSUs8flp+4ot9x+6OdZocmrWOlS2oHqqtWxjQGN/I=;
+ b=WgXbvTGuyidEqpdPJxvsthgH4vZhTijNVMXola2IP8sZ8ZvBbnucvBL3+YfC2XMlkG
+ ntPBHOvF1PBEKu+qMOabysyiyNkItg27WkLsMXRfOBOaeTk6JNF1BVqYtCe7Hu/a5ybU
+ 1MxtPbSnuBgskHbYEpp6uz1qNtpJT18TcMbVo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725030813; x=1725635613;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rivSUs8flp+4ot9x+6OdZocmrWOlS2oHqqtWxjQGN/I=;
+ b=szDfN289kLTP4/yz/nOg18UXQbm0SQFzRlf2WlK8hgHHEo8goJj5L905jTrnmDv+2H
+ mU8iUM4Y4s2AxhfrOY2j9H8WH9qf2GXf0TitX7AOmmd0qoApMhCcgaQFMXYKN4AI5Y19
+ Y4Jgs9J/MFd1U0Lu20rUhJh/RQepMIqYyZRGY2H6fuIDP0iSh6IJc4xRCxSA4WMBZ9nL
+ BO6QRR+V+pyvqIeaRJILwgRkLSJAeclL0Pi14JHOrmACCz9tf0oRxYGRH8dFVzs3x2oX
+ aArhqWhclLQgId8wdgu0npix2lA2/+nEEc9Fw43XPZbMgROyj/vjd/TtSd4ksViJwpqt
+ 4edQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVMJ8nH/nazgM90uzmK4OrP7sMaKdAhSJIj9BdlbCqJ31Zr2Qf6iGHjoAJ7DTKNGrHu5cGQIEU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyr9edDxUwuvH+zCC3Tp78eR/R0Y7nS+NucgwTYlDQFhC7TA6EB
+ YtF9NZO/SDoMZjcjKM1mGkpK27Rmi2dJFP5D1bkQy/8UvF3d3mgtU/P84nGSFSw=
+X-Google-Smtp-Source: AGHT+IH+MOpEiKQvyEhLD28OkLrQ3Yq8KHsdQHjGr74/cGq1XMQvwxtiSUDo6qdBJM06ULn6vLeRsA==
+X-Received: by 2002:a05:6214:534a:b0:6c1:5f1e:c6bc with SMTP id
+ 6a1803df08f44-6c33e6a7b5fmr74178056d6.47.1725030812601; 
+ Fri, 30 Aug 2024 08:13:32 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6c340c41e4dsm15137666d6.63.2024.08.30.08.13.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 30 Aug 2024 08:13:30 -0700 (PDT)
+Date: Fri, 30 Aug 2024 09:13:27 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: neil.armstrong@linaro.org, Peter Robinson <pbrobinson@gmail.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [u-boot-test-hooks PATCH v4 3/3] Provide some basic scripts for
+ Labgrid integration
+Message-ID: <20240830151327.GU2479150@bill-the-cat>
+References: <20240828164523.125770-1-sjg@chromium.org>
+ <20240828164523.125770-4-sjg@chromium.org>
+ <CALeDE9Ptr0Ln4H24yMqxuw1+E_Wt5qBGdQabUH54PaYUTPf9Yg@mail.gmail.com>
+ <CAFLszThK_t5EwL28vnzmSp5UZQrSEpBRsaXhnNudMQRe8-7Ejw@mail.gmail.com>
+ <CALeDE9O-kmnqkosThf8xQpLZ2tEebiHvrUEzVJNDjiEff2-t2Q@mail.gmail.com>
+ <CAFLszThD=Haj4M5rUYfpjPDjr9JEOPygQb9tV36frcAM5Ey9tw@mail.gmail.com>
+ <c63147f4-d364-4568-8f6e-c0348914446a@linaro.org>
+ <CAFLszTgzM-FT64AYTy6FXwUw3FQg-3MQ7x0TZc6xBhX5c+bXEg@mail.gmail.com>
+ <20240829152052.GE2479150@bill-the-cat>
+ <CAFLszTjqVsZ1owvpCaOer7U-k0ZvtDfLC9g+kFPW8gJJeQ1Ktw@mail.gmail.com>
 MIME-Version: 1.0
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: f4d06f49-b593-41cf-94f2-08dcc9055345
-X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Aug 2024 15:06:28.8750 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: E5nbDx0As2TXAiQqjedkcRRup9O9jRMzSYAli3YG0swd2hZdyfVN6Qr+fu7QBb5HdUXZs/BrWOIiJDtMAQg9IlupXGn355lKf9fZbd+hozM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR10MB4044
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="JiXxU5zlHPVEnF7Y"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjqVsZ1owvpCaOer7U-k0ZvtDfLC9g+kFPW8gJJeQ1Ktw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -199,28 +102,391 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkhDQoNCk9uIEZyaSwgMjAyNC0wOC0zMCBhdCAyMDoyOSArMDUzMCwgVmlnbmVzaCBSYWdoYXZl
-bmRyYSB3cm90ZToNCj4gT24gMjYvMDgvMjQgMTU6NTUsIENoaW50YW4gVmFua2FyIHdyb3RlOg0K
-PiA+IEZ1bmN0aW9uICJrM19yaW5nYWNjX3JpbmdfcmVjb25maWdfcW1vZGVfcmF3KCkiIHNob3Vs
-ZCByZXNldCBxbW9kZSB0bw0KPiA+IHJlcXVlc3RlZCB2YWx1ZSBhbmQgc2hvdWxkIG5vdCB1cGRh
-dGUgb3RoZXIgZmllbGRzIGluIHJpbmcgY29uZmlndXJhdGlvbg0KPiA+IHJlZ2lzdGVyLg0KPiA+
-IA0KPiA+IFNpZ25lZC1vZmYtYnk6IENoaW50YW4gVmFua2FyIDxjLXZhbmthckB0aS5jb20+DQo+
-ID4gLS0tDQo+ID4gDQo+IA0KPiBUaGFua3MgZm9yIGZpeCB0aGlzIHVwOg0KPiANCj4gDQo+IFJl
-dmlld2VkLWJ5OiBWaWduZXNoIFJhZ2hhdmVuZHJhIDx2aWduZXNockB0aS5jb20+DQo+IA0KDQpS
-ZXZpZXdlZC1ieTogQWxleGFuZGVyIFN2ZXJkbGluIDxhbGV4YW5kZXIuc3ZlcmRsaW5Ac2llbWVu
-cy5jb20+DQoNCj4gPiBUaGlzIHBhdGNoIGlzIG5ld2VseSBhZGRlZCBpbiB0aGlzIHNlcmllcy4N
-Cj4gPiANCj4gPiDCoCBkcml2ZXJzL3NvYy90aS9rMy1uYXZzcy1yaW5nYWNjLXUtYm9vdC5jIHwg
-MiArLQ0KPiA+IMKgIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigt
-KQ0KPiA+IA0KPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3NvYy90aS9rMy1uYXZzcy1yaW5nYWNj
-LXUtYm9vdC5jIGIvZHJpdmVycy9zb2MvdGkvazMtbmF2c3MtcmluZ2FjYy11LWJvb3QuYw0KPiA+
-IGluZGV4IDI3OTlmMjE0Yzc3Li44MjI3ZDhiYzNlMyAxMDA2NDQNCj4gPiAtLS0gYS9kcml2ZXJz
-L3NvYy90aS9rMy1uYXZzcy1yaW5nYWNjLXUtYm9vdC5jDQo+ID4gKysrIGIvZHJpdmVycy9zb2Mv
-dGkvazMtbmF2c3MtcmluZ2FjYy11LWJvb3QuYw0KPiA+IEBAIC00Miw3ICs0Miw3IEBAIHN0YXRp
-YyB2b2lkIGszX3JpbmdhY2NfcmluZ19yZWNvbmZpZ19xbW9kZV9yYXcoc3RydWN0IGszX25hdl9y
-aW5nICpyaW5nLCBlbnVtIGszDQo+ID4gwqDCoAl1MzIgdmFsOw0KPiA+IMKgIA0KPiA+IMKgwqAJ
-dmFsID0gcmVhZGwoJnJpbmctPmNmZy0+c2l6ZSk7DQo+ID4gLQl2YWwgJj0gS05BVl9SSU5HQUND
-X0NGR19SSU5HX1NJWkVfUU1PREVfTUFTSzsNCj4gPiArCXZhbCAmPSB+S05BVl9SSU5HQUNDX0NG
-R19SSU5HX1NJWkVfUU1PREVfTUFTSzsNCj4gPiDCoMKgCXZhbCB8PSBtb2RlIDw8IEtOQVZfUklO
-R0FDQ19DRkdfUklOR19TSVpFX1FNT0RFX1NISUZUOw0KPiA+IMKgwqAJd3JpdGVsKHZhbCwgJnJp
-bmctPmNmZy0+c2l6ZSk7DQo+ID4gwqAgfQ0KDQotLSANCkFsZXhhbmRlciBTdmVyZGxpbg0KU2ll
-bWVucyBBRw0Kd3d3LnNpZW1lbnMuY29tDQo=
+
+--JiXxU5zlHPVEnF7Y
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Aug 29, 2024 at 07:09:22PM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Thu, 29 Aug 2024 at 09:20, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Thu, Aug 29, 2024 at 09:02:38AM -0600, Simon Glass wrote:
+> > > Hi Neil,
+> > >
+> > > On Thu, 29 Aug 2024 at 08:44, <neil.armstrong@linaro.org> wrote:
+> > > >
+> > > > On 29/08/2024 14:17, Simon Glass wrote:
+> > > > > Hi Peter,
+> > > > >
+> > > > > On Thu, 29 Aug 2024 at 04:43, Peter Robinson <pbrobinson@gmail.co=
+m> wrote:
+> > > > >>
+> > > > >> On Wed, 28 Aug 2024 at 22:25, Simon Glass <sjg@chromium.org> wro=
+te:
+> > > > >>>
+> > > > >>> Hi Peter,
+> > > > >>>
+> > > > >>> On Wed, 28 Aug 2024 at 12:14, Peter Robinson <pbrobinson@gmail.=
+com> wrote:
+> > > > >>>>
+> > > > >>>> Hi Simon,
+> > > > >>>>
+> > > > >>>>> With Labgrid we don't need to specify the various methods, ex=
+cept for
+> > > > >>>>> the console, which simply calls labgrid-client.
+> > > > >>>>>
+> > > > >>>>> This allows supporting any boards in your lab, without adding=
+ per-board
+> > > > >>>>> configuration to these hooks.
+> > > > >>>>>
+> > > > >>>>> Provide ellesmere files as an example.
+> > > > >>>>
+> > > > >>>> What's ellesmere?
+> > > > >>>
+> > > > >>> It is a lake but also the name of a computer.
+> > > > >>>
+> > > > >>>>
+> > > > >>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > >>>>> ---
+> > > > >>>>>
+> > > > >>>>> Changes in v4:
+> > > > >>>>> - Support pytest fully with dual-build boards like Beagleplay
+> > > > >>>>>
+> > > > >>>>> Changes in v3:
+> > > > >>>>> - Update scripts for latest version of Labgrid integration
+> > > > >>>>> - Add poweroff.none and poweron.none
+> > > > >>>>> - Provide -n flag when querying board info
+> > > > >>>>> - Target the grpc version of Labgrid which is now in -master
+> > > > >>>>> - Update README to cover the changes
+> > > > >>>>>
+> > > > >>>>> Changes in v2:
+> > > > >>>>> - Make use of the common script (only) to set bin_dir
+> > > > >>>>>
+> > > > >>>>>   README.md                    | 50 +++++++++++++++++++++++++=
++++++++++++
+> > > > >>>>
+> > > > >>>> Maybe that should be in a separate labsgrid readme?
+> > > > >>>
+> > > > >>> My hope is that Labgrid becomes the normal way of running these=
+ tests,
+> > > > >>
+> > > > >> Generally I agree with automated testing platforms, I think <ins=
+ert
+> > > > >> you're preferred platform here> makes sense, there's a bunch like
+> > > > >> Linaro and a bunch in the arm ecosystem use LAVA [1] and  there'=
+s a
+> > > > >> bunch more that I'm aware of.
+> > > > >
+> > > > > I am somewhat familiar with LAVA and I believe it can be used to =
+test
+> > > > > U-Boot, although I need to learn how. Looking at a test run [2] f=
+or
+> > > > > beaglebone black I see that it is using a recent kernel but the U=
+-Boot
+> > > > > seems to be older.
+> > > > >
+> > > > >>
+> > > > >> Does it make sense, of course at some point in the future post t=
+his
+> > > > >> being merged, make sense to look at a general way of making it e=
+asier
+> > > > >> to plugin these sort of HW test platforms using this as a basis?=
+ I ask
+> > > > >> mostly because putting a bunch of my devices into some sort of
+> > > > >> platform can auto test things and of course everyone has an opin=
+ion to
+> > > > >> which is the best one :-P
+> > > > >
+> > > > > Yes. I had heard from Tom that Labgrid is the new hotness for now.
+> > > > > Having dug into it I believe it is a good solution, although it c=
+an
+> > > > > certainly be improved to handle scale better.
+> > > > >
+> > > > > Anyway, IMO the current test hooks are not a great solution, just
+> > > > > because the configuration is spread all over the place and it rel=
+ies
+> > > > > on lots of little shell scripts. So I believe that the Labgrid
+> > > > > integration is a closer to where we want to be with others that c=
+ome
+> > > > > along.
+> > > >
+> > > > I'd say all those scripts are actually here to ease integration wit=
+h any
+> > > > system, booting U-Boot and Linux are two different beasts.
+> > >
+> > > That's fine, go ahead and use the scripts. My point is that Labgrid
+> > > doesn't need them and in fact it makes everything pretty painful if we
+> > > try to use all of them.
+> >
+> > I guess I really need to clean-up and post my former co-workers scripts
+> > as I strongly disagree with that statement.
+>=20
+> See some examples below. Bear in mind also that my goal has been to
+> get my lab fully running, that includes interactive access to boards,
+> as well as running tests. For that I have been using tbot (with
+> integrated build and software-loading features). WIth Labgrid I have
+> been able to replace most of the pytest scripts, tbot and Labman with
+> Labgrid + 60 patches and some configuration files.
+
+That's certainly good and useful progress. And I feel like one of the
+lessons of this thread is that every lab ends up a bit different and so
+there's just not going to be as much standardization as we'd all like.
+
+> Let's look through the scripts:
+>=20
+> u-boot-test-common - new script
+>=20
+> u-boot-test-console - needed
+>=20
+> u-boot-test-flash - here's an example:
+>=20
+> . poweroff.${power_impl}
+> sleep 0.1
+> . flash.sdwire_common_mount
+> . poweron.${power_impl}
+>=20
+> Here's another:
+>=20
+> # Handles the common SDwire mounting (caller does power control)
+>=20
+> mount_dir=3D/media/${mount_point}
+>=20
+> # Switch over to get USB card access
+> sd-mux-ctrl --device-serial ${sdwire_serial} --ts
+>=20
+> complete=3Dfalse
+> for i in {0..9}; do
+>     if out=3D"$(mount UUID=3D${mount_uuid} 2>&1)"; then
+>         complete=3Dtrue
+>         break
+>     fi
+>     echo $out
+>=20
+>     # If it is already mounted, try to unmount it first. It may have been
+>     # mounted by another user so we won't have the access we need. If thi=
+s gives
+>     # an error then we know we cannot continue
+>     if [[ $out =3D=3D *"already mounted"* ]]; then
+>         umount UUID=3D${mount_uuid}
+>     fi
+>     sleep 1
+> done
+> if [[ $complete =3D false ]]; then
+>     echo "Failed to mount UUID ${mount_uuid} after 10 tries"
+>     exit 1
+> fi
+>=20
+> # Sanity check
+> if ! mountpoint -q ${mount_dir}; then
+>     echo "Mount ${mount_dir} not available after 'mount'"
+>     exit 1
+> fi
+>=20
+> # Perform the write, pass along as much environment as possible
+> . writer.${flash_writer}
+>=20
+> complete=3Dfalse
+> for i in {0..9}; do
+>     if out=3D"$(umount ${mount_dir} 2>&1)"; then
+>         complete=3Dtrue
+>         break
+>     fi
+>     echo $out
+>     sleep 1
+> done
+>=20
+> if [[ $complete =3D false ]]; then
+>     echo "Failed to umount UUID ${mount_uuid} after 10 tries"
+>     exit 1
+> fi
+>=20
+> # Sanity check
+> if mountpoint -q ${mount_dir}; then
+>     echo "Mount ${mount_dir} still available after 'umount'"
+>     exit 1
+> fi
+>=20
+> # Back to card access for the DUT
+> sd-mux-ctrl --device-serial ${sdwire_serial} --dut
+>=20
+>=20
+> Of course that assumes an SDwire which may not always be the case.
+
+Or some other piece of hardware that sd-mux-ctrl supports, but yes.
+
+> Abstracting all of this into shell scripts is just too painful.
+
+Abstracting it to something else sounds even more painful however.
+
+> Also I have found it to be error-prone.
+>=20
+> There is also bin/flash.sdwire_relay_mount:
+>=20
+> . poweroff.${power_impl}
+>=20
+> sleep 0.1
+>=20
+> . flash.sdwire_common_mount
+>=20
+> . poweron.${power_impl}
+
+Yup. It's possible we could do some slightly nicer check/sleep loop but
+it probably wouldn't really get us much.
+
+> u-boot-test-getrole
+> - New script
+
+Which is for how you abstracted hardware from software configurations it
+can run (for example, the Pi 4 case of rpi_4, rpi_4_32b and rpi_arm64
+all being valid defconfigs).
+
+> u-boot-test-power-off
+> - This one fits with Labgrid quite well, but of course there may not
+> actually be power control
+>=20
+> u-boot-test-power-on
+> - This one also fits with Labgrid, but since serial output can come
+> out as soon as it is called, jumping back into Labgrid later to bring
+> up a console results in lots of missing output. Also there may not
+> actually be power control
+
+Right, but in both cases, poweron/poweroff.labgrid could just do:
+labgrid-client power $state || true
+if power isn't supported (which sounds odd, but, maybe makes sense in
+some setup).
+
+> u-boot-test-release
+> - New script. Actually this isn't really needed, since I added
+> automatic release to Labgrid. I was just worried that Labgrid might
+> crash
+
+What I saw in working on my scripts was that if you don't release you
+can't acquire later and there's not an option for "you already have
+acquired it". On my scripts, I should update the cleanup function to
+release the current LG_PLACE.
+
+> u-boot-test-reset
+> - Unfortunately labgrid doesn't provide a reset option, although I'm
+> sure it could be added. You still need to know whether to use power or
+> reset or both, though, so again you have shell scripts with this stuff
+
+Perhaps this is something to talk with upstream about, for the cases
+where "reset" is not just another name for "power cycle" ? I know we
+have scripts today for a number of cases but the only ones I wrote are
+just power cycle (digital-loggers) or power cycle via USB (ykush, the
+USB hubs that support per-port power control intentionally).
+
+> reset.recovery_download - another thing I had to add, BTW
+>=20
+> . "${bin_dir}/recovery.${recovery_impl}"
+>=20
+> # USB enumeration delay
+> for ((i =3D 0; i <=3D 100; i++)); do
+>     if [ -e "${board_usb_dev}" ]; then
+>         break
+>     fi
+>     sleep 0.1
+> done
+> if [ ! -e "${board_usb_dev}" ]; then
+>     echo "Cannot find device ${board_usb_dev}"
+>     exit 1
+> fi
+> sleep 1
+>=20
+> . "${bin_dir}/download.${download_impl}"
+>=20
+> or another case, this is Zynq which tries to wait a bit before calling
+> picocom. It mostly works, but it loses output
+>=20
+> # Some boards have a UART built into them and it doesn't appear until the
+> # board is powered on. An example is zynq_zybo. Try to handle this by wai=
+ting
+> # for the console and then continuing as soon as possible (so we don't mi=
+ss
+> # the U-Boot banner).
+> if [ -n "${console_wait}" ]; then
+>     for i in {0..99}; do
+>         if [ -e "${console_dev}" ]; then
+>             break
+>         fi
+>         sleep .1
+>     done
+>     if [ ! -e "${console_dev}" ]; then
+>         echo "Console ${console_dev} not found"
+>         exit 1
+>     fi
+> fi
+>=20
+> exec picocom -b "${console_baud}" "${console_dev}"
+>=20
+> So that's about a third of the reason why I don't think the scripts scale.
+
+This is where I think looking at https://github.com/bootlin/snagboot
+which Kevin Hillman pointed me at a while ago might come in handy,
+instead.
+
+> > The only "painful" part is
+> > the shared pain, regardless of framework, for "put blob $X at location
+> > $Y", which I believe you abstract out in to python?
+>=20
+> Sort-of. The Python knows how to handle all the different writing
+> methods and is at [2], but it is entirely controlled by yaml[3] (the
+> example_env.yaml). See the ti,am625 method for example and the 'play'
+> board right at the bottom of the end file.
+>=20
+> I very much like the configuration files (although I hope one day
+> Labgrid will allow the two files to be combined). It makes it easier
+> to add a new board, since there is much less to think about. It really
+> did take a long time to fiddle with all those hook scripts and I got
+> tired of it.
+>=20
+> Regards,
+> Simon
+>=20
+> [1] https://github.com/sjg20/u-boot/tree/lab6a/tools/labman
+> [2] https://github.com/labgrid-project/labgrid/pull/1411/commits/c7ea0398=
+7362af70bbbb94d14ff74c54a1ee5ed8#diff-e994502495dc8083c0b70ab20ace18fb5f852=
+17805d01a54270a69c84ec31023R107
+> [3] https://github.com/labgrid-project/labgrid/pull/1411/commits/6d3b4a0c=
+fc7e35e0547dcd14065328df4b4b5e1f#diff-66f82743402c95b2eac8f9937c61c582bd0ac=
+a2b35e841477d62122c811b7750R1187
+
+Yeah, personally I don't care for that. I know I'm not going to convince
+people and it's just one of those "goodness, I'm the old guy now"
+things, but, no. It would be easier if you had comments for each SoC as
+to what / why each of the magic values, but then shouldn't it be
+abstracted more? Perhaps to a file per SoC, and at that point how is
+this easier to follow than a commented shell script? But in sum, I'm
+just cranky about yaml and I know your opinion is the opposite.
+
+As an aside, please review the ti,am625 stuff with some TI folks, that's
+both far too specific (you're going to need to add different am62 and
+am64 and am69 and j7... and on and on cases) and I forget if there's
+some work to have a slightly easier way to know what file to use going
+on.
+
+--=20
+Tom
+
+--JiXxU5zlHPVEnF7Y
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbR4ZAACgkQFHw5/5Y0
+tyx7Wgv+KkyAFo8nGUCn7ErIP4n0VI2xrH9erqifln0vPwnKNtGh7Rqy36U9cCpm
+5fUiOXL7amdVeGzlKeSbziLCz8Ydz2a8MloEyP0HOOYfYHmqdnZaKIaVI/LiGEVa
+gi7/4a36qKfEcCAObeNJ0Ucjw+euaTk/kRKVRtEMX4YlGhTlGHBQlYp+NsMZ5cFN
+ncGZ08OGcajD3vr0WiXq/S1sLy1mPkJOt75TFFGSwqwRDLD7+Iwxr80x8V7VjxK+
+K3JXvNYrfCqLYyVjivUPSIVlITbDqUkiP2LAfC2XcyaczhzhGKAysQbS/FMnCiv8
+mPauPYEAnF3FZUI96HtdUQ6ik7VSgw6eVdkQuatRB8+5J3DGQAtSDxL1Zerrc/w4
+vjXCr5CXhkSrQPjp6FsaSdBVp3x6csi2UeARrJZijBIDYLnnupYL1FiKbdOm5Pmc
+CsjmhUJZ7aMdE0XQECPT8w92azZgpIYs19bdBLFB/wlUfB/4/6MLH6ke4XzCLGhb
+DCa6KKHr
+=I0Og
+-----END PGP SIGNATURE-----
+
+--JiXxU5zlHPVEnF7Y--
