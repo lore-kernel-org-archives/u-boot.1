@@ -4,73 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 277B2CA100A
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 23:30:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2501ECA101A
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 23:30:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6126188D04;
-	Sat, 31 Aug 2024 01:30:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C37AF88D35;
+	Sat, 31 Aug 2024 01:30:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sAE8vR2/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Op3+aonO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B2AA88D27; Sat, 31 Aug 2024 01:30:20 +0200 (CEST)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id 5BBF488CC9; Sat, 31 Aug 2024 01:30:21 +0200 (CEST)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 546F288CC9
- for <u-boot@lists.denx.de>; Sat, 31 Aug 2024 01:30:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 51D2488D14
+ for <u-boot@lists.denx.de>; Sat, 31 Aug 2024 01:30:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-7a802deeb9aso144146085a.0
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 16:30:18 -0700 (PDT)
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-7a95efbaf49so642985a.3
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 16:30:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1725060617; x=1725665417; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1725060618; x=1725665418; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QhNKzMg15cYsY32xiOxULIefnMdBvDnzH6vcSU34pMM=;
- b=sAE8vR2/pB1sxBfDpqGvK5fyBlWJpS1qgMdYtBj87l4UTFe5I8eAmhE2x0t6EtB8Ra
- 3qAcS8X0nid6EbX/xJ9+8Q+mKs1THXF+VPg4UEwhM/HgDeXIZ24YJV9JDbl3OyCZOy8n
- a6Dik4JqxQP0+mFDD3EXnduTFBx1VX9UyTVng=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=i+pmOtDNpVmGkgq4dhZOSrt87r+Unza79IOZZzCAOrk=;
+ b=Op3+aonOPO0QPua20U/mCfMq2kIEPlHmovlLfI1cbsMov/ihKmGN4P3+E6zJi5bYjZ
+ umax73LAnOiTs9PIhdSmOR11cIJwzrakSH26aOgn2b9uJo28ZP+I4bRRfLpcDHAVaXC8
+ yvcnnVdH+/z+5EpkQNj3M6cm/WWUNSijFQn5U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725060617; x=1725665417;
+ d=1e100.net; s=20230601; t=1725060618; x=1725665418;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QhNKzMg15cYsY32xiOxULIefnMdBvDnzH6vcSU34pMM=;
- b=cOLQfQolCwDLUIlxAVta3kPd9pTSsrFig8y4kVyEFR/vRuzb3HDrg9EkZ/x+lJTr0D
- lYyA8J/o0BuFWuO5h6/+Uhh6tWDKaPPzk4lJn4LVXtHeQdMB7pnAIHtMUiokArm0mdNC
- OvzgJzGqcG5T53/izxplPQ3XIiebeCeKFj0Ms8tUjBz2LGxUsTBNSoGAmU9mRIweZdL4
- td3spW1Bp/ajc/YKYb36XMU6PnmCDBnnJTD6hKWDB6/9NToC/0lkPS6yS4ytFhQC1LmR
- vsK272pVmq+t6U8+HCVkQ0O2wOz04+XGxZg+++0jbug77c8p/2dyxEVPlzaoKpzoBHyE
- X7sA==
-X-Gm-Message-State: AOJu0YzPltEvNa8I1xaTT/jtLUzex1vkp1YEsBE6zkYur8wBva8kRMdB
- +1ARgngOYPtchg4FIBsyx0hurCuONcquhGbdMCEUjWxDEbpMldvjdHcWpa7XPPv9YRx432DqoOM
- Q0es=
-X-Google-Smtp-Source: AGHT+IHJaujlWFlIQ2g2Yl1bJwM9qtSDgNsXfcDB3qNlUqAU+GMszCYE39s0+V/ZBG6NwF80KfALVA==
-X-Received: by 2002:a05:620a:4402:b0:79f:7b8:4950 with SMTP id
- af79cd13be357-7a89aca7855mr163475085a.51.1725060616994; 
- Fri, 30 Aug 2024 16:30:16 -0700 (PDT)
+ bh=i+pmOtDNpVmGkgq4dhZOSrt87r+Unza79IOZZzCAOrk=;
+ b=MQgO4WJoYKSfoHoA7JCu8LTtuxhakDj4OhaXMTyQoCaXC0b0YdDl5kXwStEhcXg7B4
+ UskolVeSeTzw4x1N/WzqbEEtqeVYx3UkP7I72s/3kEiCVJVWpWtjbNxaAahHtcDXMe7b
+ 7aDCQ8oTFXeYM5DZlLq+d8a3kF5Fx8vrN4o07EaIPN9hC2U76t9MizdHnoinRLnDd8+Q
+ ijVAC623uwARhc0rJZ3++6HrDQXFKX/bT3/KZigl+KJk/GMN+BCcho05YsDBtOjqYKW1
+ pTG1p8NXfPqbLAOyWHkkhbi3CR5D6qvk2NLFhCRbV9JqPUyfBZ0gge1ADQEV9NnpbkDv
+ rP6Q==
+X-Gm-Message-State: AOJu0YwJ3tDcl5QFoAve7ldolQaEuab9qtVmfCInLbDWo5hVKsnSVXmu
+ fTEG8hUI3qQJm+yCBFF6GKgaFTPqtxkoVv7r8b0LIdFQWWEc1zx+iAosa7XFWLkTxNO9R3bM+8C
+ YyLI=
+X-Google-Smtp-Source: AGHT+IHBOlv4GKK2GKLC5ROzFcGanN+qrMPKLltWg1oTVcvkwBi7aCkVRPKy+gm+zRdELNflkSJnJg==
+X-Received: by 2002:a05:620a:410f:b0:79e:f9aa:870d with SMTP id
+ af79cd13be357-7a8042876c3mr848462285a.69.1725060618044; 
+ Fri, 30 Aug 2024 16:30:18 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a806c1f974sm193224085a.37.2024.08.30.16.30.15
+ af79cd13be357-7a806c1f974sm193224085a.37.2024.08.30.16.30.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Aug 2024 16:30:16 -0700 (PDT)
+ Fri, 30 Aug 2024 16:30:17 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240828165422.3553394-1-sughosh.ganu@linaro.org>
-References: <20240828165422.3553394-1-sughosh.ganu@linaro.org>
-Subject: Re: [PATCH v2] list: use list_count_nodes() to count list entries
-Message-Id: <172506061515.3280213.13483732347066743078.b4-ty@konsulko.com>
-Date: Fri, 30 Aug 2024 17:30:15 -0600
+To: u-boot@lists.denx.de, Tomas Paukrt <tomaspaukrt@email.cz>
+In-Reply-To: <GK.Za7R.19AhVTpFILn.1cpWy1@seznam.cz>
+References: <GK.Za7R.19AhVTpFILn.1cpWy1@seznam.cz>
+Subject: Re: [PATCH] lib: crypto: fix ASYMMETRIC_KEY_TYPE dependency
+Message-Id: <172506061710.3280213.1639235709078669021.b4-ty@konsulko.com>
+Date: Fri, 30 Aug 2024 17:30:17 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -91,10 +87,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 28 Aug 2024 22:24:22 +0530, Sughosh Ganu wrote:
+On Tue, 27 Aug 2024 19:38:09 +0200, Tomas Paukrt wrote:
 
-> Use the API function list_count_nodes() to count the number of list
-> entries.
+> Fix the dependency to avoid a warning if RSA_VERIFY_WITH_PKEY is enabled.
 > 
 > 
 
