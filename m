@@ -4,72 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C47C6CA0ECD
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 00:59:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 130BECA0ECD
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 00:59:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2556788D28;
-	Fri, 30 Aug 2024 02:59:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 81C7688D2E;
+	Fri, 30 Aug 2024 02:59:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cqNoKteR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GpEYHNzt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8D9788D06; Fri, 30 Aug 2024 02:59:11 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id BE19D88D2D; Fri, 30 Aug 2024 02:59:25 +0200 (CEST)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD72688D28
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 02:59:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FF6388D30
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 02:59:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6bf90d52e79so7569986d6.3
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 17:59:09 -0700 (PDT)
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-6bf6beda0c0so7409656d6.1
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 17:59:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724979548; x=1725584348; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724979561; x=1725584361; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uBfdnTrOd8p0+gBKK7k3054nwxTLCTvOv0qWpUJ7+AI=;
- b=cqNoKteRi7WviiLeZw6tiSFvPfnG7E36YLAmRlcduDc3oXoyksxiU1hhXnfnPI0F+0
- 4qT+SXeSvS9HYkywg0w2nsNwO02W99WQeQYn7cc0xT/A0CbCNyjjftvPeUzxU4FBXxxP
- oeoe8PlpqZfs++7+I6R1JZPhz/oe6D0/BaUTQ=
+ bh=C689Wl4h/TtO4g5j7A/Yzep1Broqg6W4pKiJ9AFRtjI=;
+ b=GpEYHNztPXhAPAeXqdiihVpq17mzD5xzAJyAL43MYmURZ36XTxICSLCyH4adun5uWf
+ 7Ibbfh3iRxzoUStBbN2sByAAt5D8gpaoC8IpMcNLqKsCCRtpKpWB2AqQDfb0tdi3ESLp
+ 9EB5sSDCTcO3OtqCL+fLMn5XHZQTBDp/ohQuk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724979548; x=1725584348;
+ d=1e100.net; s=20230601; t=1724979561; x=1725584361;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=uBfdnTrOd8p0+gBKK7k3054nwxTLCTvOv0qWpUJ7+AI=;
- b=NuKoonEWpxU0H+va2Eamz1ngWSB+IM5gnWq3O6SRXFVOrK+hzEOO88sogdMi7NW70u
- 9IAsht4LVvj7jIiPcAeYOiSibTtAzealDzhylvH9HMdAyuVgLHL0HJGVGpkCY1F7hNJV
- dILlApWU5ce3vnB7tZSj2hjN/qojZLjgxrgLpTwfyqJvpdBO+AO3nc4emDCG1cs4dkP6
- sXoSp5PM+N/FR5RsE3yWEfn6Nj62jIBCtKfh2od0Ux87uUJofcg0pnFG8igcM+MovOYF
- dD/wDP3WTbo0tnU5GNMQ1TtE3yWWD3RZHd5OWUUTZbtG4l5LwNMFszmSghNcjJsXqiev
- 7Zng==
-X-Gm-Message-State: AOJu0Yw50EpE29/zWOe9LCt+It306R2oYYUU1ckvWsSrzivj8fwnEMk+
- lMb+dZAx4VK2YxqNvgSXTVr0vJGRelBpSn+6h+GUqq0CU0ZEds2U1xMpo7OHrXAv6QE4eaAnQjZ
- b3YxAR30fspIdWGxRrr7+iHei+AlNr4JYaKuO
-X-Google-Smtp-Source: AGHT+IH6whnrTpVN9JGOb9dTKE+OpVlO40WLBUL5tt8FyVhdluhOrNPbbNzjI2Z9Di8b2EqNgc4luMcmk3r1JWuhoPE=
-X-Received: by 2002:a05:6214:5bc9:b0:6bf:6127:98a7 with SMTP id
- 6a1803df08f44-6c33e6a44c0mr44769506d6.56.1724979548528; Thu, 29 Aug 2024
- 17:59:08 -0700 (PDT)
+ bh=C689Wl4h/TtO4g5j7A/Yzep1Broqg6W4pKiJ9AFRtjI=;
+ b=KnksH1lgNd4v7JuvYn0WlemKnm8yl2JVqTGMBJGtK2uYtR8rEk7AZGYr+aj3o2fUqH
+ ZqUIrHpug7eVz4JYdyCyEIecQQd71Frpq0RKYHXS0UhoNg5Pfa02u42ifEZufoY0j8kg
+ EvBVxdaiBKUbpIvUl48R1KxnLZqfQQVp7YcvqLIOj8DHfD0XSP9QXprR26Edpnl+FoQv
+ AYOT7wxb9gHyPqJzdrdTl8LHEF7f/nU/9Z+1SYwir9sDSY5zd6eiz2IcQ8L6Un6EqeVC
+ Ofm+85tv0iRo9T6CzW2VSLHGefgcW0TuTSaxMPistlkoekghnXNVk3okbXQOFb/GfqSF
+ aAVA==
+X-Gm-Message-State: AOJu0YzK4earQehIqaLKnrByVXwwkIkdgzkPb4xL8R2D4neDJ5G/mZq6
+ RCnngcBpigPYm/F8gDzZ3lbD5GFNdD7sDegYB5E6hfd3xq2CYSK8DVbcYoU7RfJhVMqBC9f7vnT
+ vmeBTaVXpzTqfnUxUbZMcAHiiP2A/tMAqSHLQ
+X-Google-Smtp-Source: AGHT+IHeyJGBKUEEh/CCP4RLp1xKwpKb3DXL+oDQxcuCxwhe2T29py0VxcmXwMs40uaa1qQy6iDcW/GclqjUIb40z/s=
+X-Received: by 2002:a05:6214:3a8a:b0:6bf:940d:286f with SMTP id
+ 6a1803df08f44-6c33e6a7ec4mr61302096d6.50.1724979560917; Thu, 29 Aug 2024
+ 17:59:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1724846454.git.jerome.forissier@linaro.org>
- <679e20bfd9ac3de6560e202f82452563b01fca7a.1724846454.git.jerome.forissier@linaro.org>
- <CAFLszTh87_wd-+XLe1EeXziMiu9p_rT-qfAgHg4PxGwhsAKUtQ@mail.gmail.com>
- <1c7c2e70-aa24-46b3-ac3b-47c6dc9fde3c@linaro.org>
-In-Reply-To: <1c7c2e70-aa24-46b3-ac3b-47c6dc9fde3c@linaro.org>
+References: <cover.1724419624.git.jerome.forissier@linaro.org>
+ <1629f6845b448edcdead09a9350f1ae2ae7a4bb6.1724419624.git.jerome.forissier@linaro.org>
+ <CAFLszThJzVvHSd+dEjTSff2DUPPaQTGWeyCmHmP56Vtjr0WF-g@mail.gmail.com>
+ <d2465352-66ea-400c-9216-a92ce5351475@linaro.org>
+In-Reply-To: <d2465352-66ea-400c-9216-a92ce5351475@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 29 Aug 2024 18:58:57 -0600
-Message-ID: <CAFLszTgWn0NhdkdKsmwwGk2fBbHuN1sJM6Kfc3vE2M55nw-EVg@mail.gmail.com>
-Subject: Re: [PATCH 05/13] net: fm: call dtsec_init_phy() only when it is
- defined
+Date: Thu, 29 Aug 2024 18:59:10 -0600
+Message-ID: <CAFLszThp9Ya-doN39L-uv6C_oZsw454PUiUfOZmYa7wHjoz+oA@mail.gmail.com>
+Subject: Re: [PATCH v9 35/37] [TESTING] Kconfig: enable NET_LWIP by default
+ except for SANDBOX
 To: Jerome Forissier <jerome.forissier@linaro.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Peter Robinson <pbrobinson@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+ Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>, 
+ Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Anton Antonov <Anton.Antonov@arm.com>, Tom Rini <trini@konsulko.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Jonas Karlman <jonas@kwiboo.se>, Greg Malysa <greg.malysa@timesys.com>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Shengyu Qu <wiagn233@outlook.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,91 +94,40 @@ X-Virus-Status: Clean
 
 Hi Jerome,
 
-On Thu, 29 Aug 2024 at 10:40, Jerome Forissier
+On Thu, 29 Aug 2024 at 10:21, Jerome Forissier
 <jerome.forissier@linaro.org> wrote:
 >
 >
 >
-> On 8/29/24 16:04, Simon Glass wrote:
+> On 8/29/24 16:05, Simon Glass wrote:
 > > Hi Jerome,
 > >
-> > On Wed, 28 Aug 2024 at 06:11, Jerome Forissier
+> > On Fri, 23 Aug 2024 at 07:50, Jerome Forissier
 > > <jerome.forissier@linaro.org> wrote:
 > >>
-> >> dtsec_init_phy() is defined only with MII so add the proper conditional
-> >> in the caller code.
-> >>
-> >> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> >> ---
-> >>  drivers/net/fm/eth.c | 2 ++
-> >>  1 file changed, 2 insertions(+)
-> >>
-> >> diff --git a/drivers/net/fm/eth.c b/drivers/net/fm/eth.c
-> >> index 19f3f0fef0..e4ec769693 100644
-> >> --- a/drivers/net/fm/eth.c
-> >> +++ b/drivers/net/fm/eth.c
-> >> @@ -701,8 +701,10 @@ static int init_phy(struct fm_eth *fm_eth)
-> >>                 supported |= SUPPORTED_2500baseX_Full;
-> >>  #endif
-> >>
-> >> +#if defined(CONFIG_MII) || defined(CONFIG_CMD_MII) && !defined(BITBANGMII)
-> >>         if (fm_eth->type == FM_ETH_1G_E)
-> >>                 dtsec_init_phy(fm_eth);
-> >> +#endif
+> >> Enable NET_LWIP by default for testing purposes. SANDBOX doesn't support
+> >> NET_LWIP so default to NET in this case.
 > >
-> > We really want to avoid #ifdefs in the code as they create different
-> > build paths. Can you use if (IS_ENABLED) ?
+> > Sandbox needs to support NET_LWIP.
 >
-> Sure.
->
-> > Also BITBANGMII seems liike
-> > it needs a CONFIG_ prefix.
->
-> I agree. I have copied the line verbatim from line 29 because the condition
-> needs to be the same. And I suspect there is another issue with the operator
-> precedence. Do we want "MII || (CMD_MII && !BITBANGMII)" or
-> do we rather want "(MII || CMD_MII) && !BITBANGMII"? I guess the latter.
->
-> So how about:
->
-> diff --git a/drivers/net/fm/eth.c b/drivers/net/fm/eth.c
-> index 19f3f0fef0..22025b6a27 100644
-> --- a/drivers/net/fm/eth.c
-> +++ b/drivers/net/fm/eth.c
-> @@ -26,7 +26,8 @@
->
->  #include "fm.h"
->
-> -#if defined(CONFIG_MII) || defined(CONFIG_CMD_MII) && !defined(BITBANGMII)
-> +#if ((defined(CONFIG_MII) || defined(CONFIG_CMD_MII)) && \
-> +     !defined(CONFIG_BITBANGMII))
->
->  #define TBIANA_SETTINGS (TBIANA_ASYMMETRIC_PAUSE | TBIANA_SYMMETRIC_PAUSE | \
->                          TBIANA_FULL_DUPLEX)
-> @@ -701,8 +702,11 @@ static int init_phy(struct fm_eth *fm_eth)
->                 supported |= SUPPORTED_2500baseX_Full;
->  #endif
->
-> -       if (fm_eth->type == FM_ETH_1G_E)
-> -               dtsec_init_phy(fm_eth);
-> +       if ((IS_ENABLED(CONFIG_MII) || IS_ENABLED(CONFIG_CMD_MII)) &&
-> +           !IS_ENABLED(CONFIG_BITBANGMII)) {
-> +               if (fm_eth->type == FM_ETH_1G_E)
-> +                       dtsec_init_phy(fm_eth);
-> +       }
->
+> I agree in principle, but AFAICT it is not a trivial task. Does it have to
+> be done in this series or can it be dealt with later?
 
-That's good
+Does it build OK with sandbox? We use it for almost all of our feature
+development and testing, so I cannot imagine bringing this in if it
+doesn't work. How did you develop this feature?
 
->  #ifdef CONFIG_PHYLIB
->  #ifdef CONFIG_DM_MDIO
 >
->
-> ???
+> I would need to look into this more closely to give details, but if I
+> remember correctly the sandbox tests expect a precise sequence of network
+> packets. For example when doing a TFTP tests, it expects an ARP packet to
+> go out first, but when lwIP is used the ARP might not go out because the IP
+> may already be in the cache. So the sandbox is definitely not a black box
+> in that respect which makes things a bit more difficult.
 
-You don't have to fix every #ifdef in every file you touch...it's just
-that if you are already touching code, you might as well bring it up
-to newer standards.
+The key thing is to have a way to reset the state. So long as you have
+that, you should be able to put networking back to the initial state
+before running a test.
 
 Regards,
 Simon
