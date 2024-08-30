@@ -4,75 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0B27CA0EFB
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 10:17:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00725CA0EFB
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 10:17:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D254688896;
-	Fri, 30 Aug 2024 12:17:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3921F8897B;
+	Fri, 30 Aug 2024 12:17:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VfPUe/0c";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aMhzyAwn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC63A888C1; Fri, 30 Aug 2024 12:17:23 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 68CFE8817C; Fri, 30 Aug 2024 12:17:24 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 898718817C
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 12:17:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 812B988744
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 12:17:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-42bbc70cc19so3425535e9.0
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 03:17:21 -0700 (PDT)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-371a92d8c90so961236f8f.3
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 03:17:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725013041; x=1725617841; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/MPcX4J/nKvfQZbm5Jwvt3IQGybrl2ThSOVeM+rcY70=;
- b=VfPUe/0cxgvNkwfvFadWhD2HZ4FB3hffWEqk4dYE7qf55WSRTLH2XOegc09ZDJDq1A
- bBDCqIl9Gl62rmBicnzNr5pqaNthXWwuq3AffiZBPJLlQ2BRceajZafFn+6R5qM59CHY
- zblEOBGF3DJrvmV7VaeZEEnB56Jj5d74lMKrAAed9/cm8qjk8m+7jba4lkDNy++q7gZ5
- ff6gUWr1fIdJNUlLhhMqy2HNoM072Zegbx3dzdP2SKMbpCpES2l1asm7Up3AWxz66qNT
- C6RoaM5IrW9XKkxrUy7PhjkPUB5LNhHUzQ9Ox4/MFNXlgxrlyhCoXoTEp+T5Unrgo2yu
- fTfg==
+ d=linaro.org; s=google; t=1725013042; x=1725617842; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=S0RBhVoNaek3QAHuKn+tz7pK4sQBIpxCfm7RmAzgMQ8=;
+ b=aMhzyAwnvmFH2/aanplGhMTeSxuP+JiNbyk6VY2I9XWSRC23nZSmRrYVDC2oc/z4Cg
+ O75hoNh8uszWx+hzLsg1XP+WCSYrwiB4xnhZEcfAlaEofSGm4w9QpZQWCglcsRafmEx2
+ 9yUFJwXMeczR+GzqO5zrOZeE8AphkIpSf002mOX1eBd/Ld0YtkoVePcu7bdbBfE46riG
+ gJwl4NZrCy2OLxK8alwk1veOidOYgctXaHJf4WGEZUBwCcUNmyLJ7+0tsiW2onsp6QZI
+ M8znomz/E6uAPaXD2J7HcshAxI4tb/0W8a7apG7dKkwZz62F+PaisgP2BwBl9hXjOyzq
+ EyJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725013041; x=1725617841;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/MPcX4J/nKvfQZbm5Jwvt3IQGybrl2ThSOVeM+rcY70=;
- b=E05rMDOSUCnjb+6SJGLbIh/oN7K1Ffxnj/jzmKB0EAdxOPGK9wrF3tiX3mFdwfxvO9
- NeomwZ6mSE7ptzGVsKYH5N2wBiM+umXhQQFzx57iYPk/QC/nqspBhQas1HRBm0M2e/3i
- rgnpXpVO/lamlrwMiKJeDnxIj55QUZ7PcaSLISsfFsqAlDkQiPbl40W8Jd6b/oAiQ0jH
- t9s7uLDQT0AfuZWLld0izhdRskwjLgLNTjzsmuWDPmN3x3cQnogYVUhUnEhj/G8p6x4K
- NJlpSAjOLU4HBcvOXnRQl6OWedqrccfViIcLjdy0va1CvC0Hql+QQXqJ67sC9x/J4Dnu
- X3kw==
-X-Gm-Message-State: AOJu0Yxe/EQlN3poHqXfxQvtdxbgibtzpfxu++8QH9hLVIJvs7XROaKV
- +dwXegJgKor8OlcT7zZWH53xS6JqQ+rCvUy8VyNpiFDSL9M11C9p4J7pPQhjVKaImvGiTlabvgl
- qR6tevA==
-X-Google-Smtp-Source: AGHT+IEZiCNQca2vN/IWoombqDwdG3+N5gIEyWzxfJlLUsaCk1ZAsVZUY2Bu2vvpyosnwOaE2nv0CA==
-X-Received: by 2002:adf:8bd1:0:b0:362:8ec2:53d6 with SMTP id
- ffacd0b85a97d-3749b5948fdmr3849913f8f.61.1725013040585; 
- Fri, 30 Aug 2024 03:17:20 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1725013042; x=1725617842;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=S0RBhVoNaek3QAHuKn+tz7pK4sQBIpxCfm7RmAzgMQ8=;
+ b=pf4+8w2f9hiJSjEE75w2hV4G1WVJhuKJuBTKxx5P2GMdlJWm/Y7k73YONxO9GPGDp+
+ cu6l0j9rLurJVLWuocHSsaDwdRcv4h6FOQ6mMPQPfKmE1X/hLSXioAxI3Vt4wxNsJdOR
+ ZkkNoUPfITvbiXRFCVQw8W9Jqagil5CZ7kEkjrnTlpIzM4960QJTGN5l+DWCwNFndjaC
+ EuqIHOKoWiz6yPt3nc6bJN+Wx293V5OLREPuqC0gg450TIFXO4c1nDt+Sni85Q+CuSko
+ h7VG3uP55I+ILx3l28Z+LM0kU4nLx2jPRuf0aWx+NkKjU0VcFqVLv8yFSVCMESDFLPYh
+ JdaQ==
+X-Gm-Message-State: AOJu0YwfBL6OkTur13QJjPXxc4/cxkH71GbaQNI8JHCT7Nx0JlJJdUPz
+ dCn8N3yzz3U1UcPNsmeg7vGsTowhJs2QS6i/ZtTc38AI5wHQVURY/St1pxNRDEXQ0G3WyYRnI3Y
+ wAk3Ylw==
+X-Google-Smtp-Source: AGHT+IGEmN/P6yUVcC/QU3B5YUBQSanMwfgKlSm2xQdUR7wlYe/mIIFSbuBb+dbv2zLLMx7NEl/Ixg==
+X-Received: by 2002:a5d:6605:0:b0:374:959a:780a with SMTP id
+ ffacd0b85a97d-374a9677377mr969434f8f.57.1725013041684; 
+ Fri, 30 Aug 2024 03:17:21 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:6417:8cf6:a7f7:ee38])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-374b6a3d27fsm472728f8f.59.2024.08.30.03.17.20
+ ffacd0b85a97d-374b6a3d27fsm472728f8f.59.2024.08.30.03.17.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Aug 2024 03:17:20 -0700 (PDT)
+ Fri, 30 Aug 2024 03:17:21 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Peter Robinson <pbrobinson@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>
-Subject: [PATCH v2 00/16] Miscellaneous fixes
-Date: Fri, 30 Aug 2024 12:16:43 +0200
-Message-Id: <cover.1725012294.git.jerome.forissier@linaro.org>
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Bryan Brattlof <bb@ti.com>,
+ Jesse Taube <mr.bossman075@gmail.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>
+Subject: [PATCH v2 01/16] Makefile: detect HOST_ARCH properly when
+ CROSS_COMPILE is multi-word
+Date: Fri, 30 Aug 2024 12:16:44 +0200
+Message-Id: <e2f0809aa4b9d81cf1709a6b82d803a21ea1fac7.1725012294.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <cover.1725012294.git.jerome.forissier@linaro.org>
+References: <cover.1725012294.git.jerome.forissier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,87 +101,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Miscellaneous fixes made when developing the lwIP series [1]. They are
-posted separately since they make sense on their own. Subsequent
-versions of the lwIP series will contain a squashed version of this one.
+When CROSS_COMPILE contains multiple words, HOST_ARCH is not properly
+detected and the sandbox build fail. It typically happens when using
+ccache. For example:
 
-[1] http://patchwork.ozlabs.org/project/uboot/list/?series=420712&state=%2A&archive=both
+ $ make sandbox_defconfig
+ $ make CROSS_COMPILE="ccache x86_64-linux-gnu-" \
+        CC="ccache x86_64-linux-gnu-gcc"
+ [...]
+ In file included from boot/bootmeth_efi.c:16:
+ include/efi_default_filename.h:33:2: error: #error Unsupported UEFI architecture
+    33 | #error Unsupported UEFI architecture
+       |  ^~~~~
 
-Changes in v2:
+A similar error occurs when the build is done via buildman and
+~/.buildman contains:
 
-- Rebased onto master
-- "flash: prefix error codes with FL_"
-Update drivers/mtd/altera_qspi.c too. This was mentioned by Simon G.
-in my lwIP v9 thread [1]. Tom R./Ilias A./Peter R.: I kept your R-b
-tags, please shout if it's not OK.
-- "net: fm: call dtsec_init_phy() only when it is defined"
-Address Simon G.'s comments: update condition (parentheses,
-CONFIG_BITBANGMII, if instead of #if).
-Peter R: I dropped your R-b since the code changed significantly.
-- New patches:
-  "common: update: UPDATE_COMMON implies CMD_TFTPBOOT"
-  "cmd: pxe: CMD_PXE implies CMD_TFTPBOOT"
-  "buildman/toolchain.py: set CROSS_COMPILE only if self.cross is set"
+  [toolchain-wrapper]
+  wrapper = ccache
 
-[1] https://lists.denx.de/pipermail/u-boot/2024-August/563497.html
+Fix the issue by considering only the last word in $(CROSS_COMPILE).
 
-Jerome Forissier (16):
-  Makefile: detect HOST_ARCH properly when CROSS_COMPILE is multi-word
-  buildman/toolchain.py: set CROSS_COMPILE only if self.cross is set
-  flash: prefix error codes with FL_
-  at91: rename mem_init() to at91_mem_init()
-  arm: omap2: add missing #include <netdev.h>
-  net: fm: call dtsec_init_phy() only when it is defined
-  net: wget: removed unused function wget_success()
-  net: phy: ncsi: depend on NET
-  net: ftgmac100: depend on NET
-  net: wget: allow EFI boot
-  net: fec_mxc_init(): do not ignore return status of fec_open()
-  test/py: net_boot: fix comment
-  test/py: test_efi_loader: add missing dependency on cmd_tftpboot
-  test/py: test_efi_loader: add HTTP (wget) test for the EFI loader
-  common: update: UPDATE_COMMON implies CMD_TFTPBOOT
-  cmd: pxe: CMD_PXE implies CMD_TFTPBOOT
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- Makefile                                      |  2 +-
- arch/arm/mach-at91/include/mach/at91_common.h |  2 +-
- arch/arm/mach-at91/spl_at91.c                 |  2 +-
- arch/arm/mach-at91/spl_atmel.c                |  2 +-
- arch/arm/mach-omap2/omap3/emac.c              |  1 +
- .../atmel/at91sam9m10g45ek/at91sam9m10g45ek.c |  2 +-
- board/atmel/at91sam9n12ek/at91sam9n12ek.c     |  2 +-
- board/atmel/at91sam9x5ek/at91sam9x5ek.c       |  2 +-
- .../atmel/sama5d27_som1_ek/sama5d27_som1_ek.c |  2 +-
- .../sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c   |  2 +-
- board/atmel/sama5d2_icp/sama5d2_icp.c         |  2 +-
- .../atmel/sama5d2_xplained/sama5d2_xplained.c |  2 +-
- .../atmel/sama5d3_xplained/sama5d3_xplained.c |  2 +-
- board/atmel/sama5d3xek/sama5d3xek.c           |  2 +-
- .../atmel/sama5d4_xplained/sama5d4_xplained.c |  2 +-
- board/atmel/sama5d4ek/sama5d4ek.c             |  2 +-
- board/cobra5272/flash.c                       | 26 ++++----
- .../conclusive/kstr-sama5d27/kstr-sama5d27.c  |  2 +-
- board/freescale/m5253demo/flash.c             |  6 +-
- board/gardena/smart-gateway-at91sam/spl.c     |  2 +-
- board/siemens/corvus/board.c                  |  2 +-
- board/siemens/smartweb/smartweb.c             |  2 +-
- board/siemens/taurus/taurus.c                 |  2 +-
- cmd/Kconfig                                   |  1 +
- common/Kconfig                                |  1 +
- common/flash.c                                | 44 ++++++-------
- drivers/mtd/altera_qspi.c                     |  4 +-
- drivers/mtd/cfi_flash.c                       | 36 +++++------
- drivers/net/Kconfig                           |  1 +
- drivers/net/fec_mxc.c                         |  3 +-
- drivers/net/fm/eth.c                          | 10 ++-
- drivers/net/phy/Kconfig                       |  1 +
- include/flash.h                               | 20 +++---
- net/wget.c                                    | 11 ++--
- test/py/tests/test_efi_loader.py              | 62 ++++++++++++++-----
- test/py/tests/test_net_boot.py                |  2 +-
- tools/buildman/toolchain.py                   |  4 +-
- 37 files changed, 155 insertions(+), 118 deletions(-)
-
+diff --git a/Makefile b/Makefile
+index f90e48f58a..dc7bdd7942 100644
+--- a/Makefile
++++ b/Makefile
+@@ -21,7 +21,7 @@ include include/host_arch.h
+ ifeq ("", "$(CROSS_COMPILE)")
+   MK_ARCH="${shell uname -m}"
+ else
+-  MK_ARCH="${shell echo $(CROSS_COMPILE) | sed -n 's/^[[:space:]]*\([^\/]*\/\)*\([^-]*\)-[^[:space:]]*/\2/p'}"
++  MK_ARCH="${shell echo ${lastword $(CROSS_COMPILE)} | sed -n 's/^[[:space:]]*\([^\/]*\/\)*\([^-]*\)-[^[:space:]]*/\2/p'}"
+ endif
+ unexport HOST_ARCH
+ ifeq ("x86_64", $(MK_ARCH))
 -- 
 2.40.1
 
