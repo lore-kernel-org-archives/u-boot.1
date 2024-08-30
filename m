@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A19F0CA0FFB
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 14:26:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 379DFCA0FFB
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 14:28:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1823788C09;
-	Fri, 30 Aug 2024 16:26:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9126888C2E;
+	Fri, 30 Aug 2024 16:28:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AIDPEdDm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cPG0rhMV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F24688C19; Fri, 30 Aug 2024 16:26:28 +0200 (CEST)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id 92F1A888FD; Fri, 30 Aug 2024 16:28:25 +0200 (CEST)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E32F888FD
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 16:26:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D538388C2E
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 16:28:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-6bf9ac165d3so10770496d6.0
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 07:26:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-714187df604so1847353b3a.1
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 07:28:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1725027985; x=1725632785; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rjktAWL8KxDeat/IhCxeKMjxmcu+Io8VbnBdLemA8/c=;
- b=AIDPEdDmtMyVXzLjUfoOSqy5lgoeneolzWouUSrcqJV9ChsADwVJW7s9IfZ+TIYCqD
- yYt2SSkAN1iUK6vo9mXHLm8u80ExSCflYf+rVzKlwDsn0eZ8YemmHaXWN8IcboxeXzyo
- xFUyq1ymmCwMFZDeldkCuHsPDPgotBT9MsvxQ=
+ d=linaro.org; s=google; t=1725028100; x=1725632900; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=0jbu908kupGpXeh/0CDFPG27kVUVDuK7tuCDubNEaA0=;
+ b=cPG0rhMVJSN9fjLOj2vmWvARxPFXmExoueudp1s+zQdlBlDK7l5A6cQBK0/UfRknw3
+ GZiJTefOhgDO/e6GMwlU2tpqCEdof9OQ/Aho+oz/2qNolVN0y0+NUMak12BBrRSrZUWr
+ TbIkMScPmYyLrQbcbzTX8fjTmJGWwJ0v+qRBVSVAhDEVKWiPbEmgLkosYMDZo/K0+WW6
+ 5xrJKof4AM6Dsv+H8WLhDT8v/P7qd2sNKX/JfRkWeE2Xr7XvAP7PB+r2nipers/UYd2V
+ WMUrx4zC2dlmfx4g5+EDc0jCVmyy+SNIwBaY7l/2YuREeGS/Sos0Bs+EKNMPKCbramaI
+ Le1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725027985; x=1725632785;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rjktAWL8KxDeat/IhCxeKMjxmcu+Io8VbnBdLemA8/c=;
- b=i94r/GNSGq5+jE3g4lmh1FH8TB3DP/GHBzyulJHT03ydzJS0OTzt/0oo+xo4w3AN64
- 81s3JUL65LZqPBzwKqJdmAAkAeccH3ztgBfUy8WXFPyCVCszQBVRax8qfYZVGrqAAlKG
- qRummxTN22SYoGZFYn4ScJRTkgIn7MdJVKmdXYXipZlENlVROh2f7aq0K/9U63sCN6O1
- e2Pj+3VGJ5E6X09wNp9+U6wLH7yOSe1gcKcRHygp3BY0xf8mG+5W3JIzt9xfUgjN6fJA
- csEdHzf5FT+HrHz1NoZF1slSrsb6NAFu8rc6DnwTWQfktXvQrrGurnc19ynHF4YJc7my
- 660Q==
+ d=1e100.net; s=20230601; t=1725028100; x=1725632900;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0jbu908kupGpXeh/0CDFPG27kVUVDuK7tuCDubNEaA0=;
+ b=RGLQ9VWaiPrvNeFCnv44IgdrAWY/+AcX1CMev0oc900oh2qZm8Jb9wQxMlTh9blK4Z
+ BlDcKqty6K3t7GxY+d7xSSzP4wFRYVADZHv21qbmAogN9rtDJUx6buF/DoFa+7ZSZOI4
+ Y/dGOdi56dvCCCoKEHuCknhoCEFRtkH/JQezelRgygxE64h1Z4N0KC9GowDVQbcUKSDV
+ BvpJncYnya3LhJJm/GnLoKqgfIZIhsYKJREB3u9JygrXt0vVKrq3+zOBp3naoTe69mSe
+ p+SycIlGvYxCAg1pgRA2Y1w8Kt0g5C2BzE8KxnyJ4ptpdNheuLP1ZEH1/wpzYLhI1Bb8
+ Htnw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUtsuU0jNeuxfBroMtWkorr3Rh6B0TM5FDOwh8+/JFP6mjdZwrybK6p0xi4W0niWsp27c+2+ek=@lists.denx.de
-X-Gm-Message-State: AOJu0YwSxwtRswXwp7h1AwJdpCr1jphtjyHr3PvWSflDgpBwWd6FeZX5
- B1f13p6cX4HmkMe2vrn/0a2GY2OoDHjJdsvVzu6tc5Tmj4WxuHnCrskMbtCTTxM=
-X-Google-Smtp-Source: AGHT+IHi2smst7Py6z0bxcHlUQpe60u4ZfMd8x2dksJaOiomgEHg8C7fqe04j6xzUb9rx0Dj5+1x5A==
-X-Received: by 2002:a05:6214:5c07:b0:6c3:2a81:44de with SMTP id
- 6a1803df08f44-6c33e626fdemr68895436d6.32.1725027984680; 
- Fri, 30 Aug 2024 07:26:24 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6c34995321dsm6371656d6.111.2024.08.30.07.26.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Aug 2024 07:26:23 -0700 (PDT)
-Date: Fri, 30 Aug 2024 08:26:20 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: neil.armstrong@linaro.org, U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v5 17/20] test: Try to shut down the lab console gracefully
-Message-ID: <20240830142620.GS2479150@bill-the-cat>
-References: <20240828220846.1205813-1-sjg@chromium.org>
- <20240828220846.1205813-18-sjg@chromium.org>
- <1637be2a-2fa8-4686-8868-077ed430ae8a@linaro.org>
- <CAFLszTjZOjXwY4PXGWkCu-7ehuA_XBCcnjLtmF4hKUC2K-NyNA@mail.gmail.com>
- <20240829165906.GG2479150@bill-the-cat>
- <CAFLszTh4A2NH8d6hocom3pAzYB4ExgVbDRa+6phux7K5P9X4Pg@mail.gmail.com>
+ AJvYcCUfi+TXEi2gLxai1qaiqWdxsxKrywP9VTVSh5Zj6NXXDsBPbmejUmAkHbsAmkX9uL34HRl310I=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz7zAX/6vGAwEAmmsWDTbIfMyGn80922Qz2y+wEBOucZ7z/K3yx
+ FnM4RMBGW/DB6zQegrJ4BjHr8HuuRy6PRkztUhDGfeMtrj/nZsyjIu/tAABHagVDrpoTsCm8iSo
+ pQfQjVXeVhxljnl1j2aMLV/E9fiFJEMG/cs1Fyg==
+X-Google-Smtp-Source: AGHT+IHA8JmfOQFK+v4HVYdjO9sUNHqBpSSdEuA2LyFkzZx3krJ4bX3A/stcHwHM4MqS8qTaM3W+rYQOiDDA4Rc41Ws=
+X-Received: by 2002:a17:902:d4cb:b0:1f9:d6bf:a67c with SMTP id
+ d9443c01a7336-205276c7067mr39901575ad.5.1725028100118; Fri, 30 Aug 2024
+ 07:28:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="e+J803lVMra+L6wG"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTh4A2NH8d6hocom3pAzYB4ExgVbDRa+6phux7K5P9X4Pg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <cover.1724846454.git.jerome.forissier@linaro.org>
+ <1a6084e845a0612546a1e86d142208af945c8f77.1724846454.git.jerome.forissier@linaro.org>
+ <CAC_iWjL9g0c8UHF3L44b8HEG-2=d57XsDXPpSogthWDPgzPcaw@mail.gmail.com>
+ <CAFLszTjLmgXO-31CwAOv1qQ9x0aDk4aHGVkScDF1bz-WhfrHGw@mail.gmail.com>
+ <CAFLszTgQNatTrhY_PVwN96tbuRvS=PRqawhH93+1TM9y_Mg79Q@mail.gmail.com>
+In-Reply-To: <CAFLszTgQNatTrhY_PVwN96tbuRvS=PRqawhH93+1TM9y_Mg79Q@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 30 Aug 2024 17:27:43 +0300
+Message-ID: <CAC_iWjLg5h5uPgK0rO04ajGL1z8bpxYAzv3j048hsXAwz22MzQ@mail.gmail.com>
+Subject: Re: [PATCH 09/13] net: wget: allow EFI boot
+To: Simon Glass <sjg@chromium.org>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
+ Peter Robinson <pbrobinson@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, Marek Vasut <marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,68 +95,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon
 
---e+J803lVMra+L6wG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Aug 29, 2024 at 07:04:36PM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Thu, 29 Aug 2024 at 10:59, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 30 Aug 2024 at 17:18, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Jerome,
+>
+> On Thu, 29 Aug 2024 at 08:04, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > On Thu, Aug 29, 2024 at 09:01:17AM -0600, Simon Glass wrote:
-> > > Hi Neil,
+> > On Thu, 29 Aug 2024 at 01:34, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
 > > >
-> > > On Thu, 29 Aug 2024 at 08:26, <neil.armstrong@linaro.org> wrote:
+> > > On Wed, 28 Aug 2024 at 15:10, Jerome Forissier
+> > > <jerome.forissier@linaro.org> wrote:
 > > > >
-> > > > On 29/08/2024 00:08, Simon Glass wrote:
-> > > > > Send the Labgrid quit characters to ask it to exit gracefully. Th=
-is
-> > > > > typically allows it to power off the board being used.
+> > > > wget followed by bootefi currently fails as follows:
 > > > >
-> > > > Sending those characters every time could collide with other CI sys=
-tems,
-> > > > I don't think it's a good idea.
-> > >
-> > > What systems are you thinking about and what sort of collision would =
-occur?
-> > >
-> > > What do you suggest instead?
+> > > >  U-Boot> wget 200000 192.168.0.30:helloworld.efi
+> > > >  Waiting for Ethernet connection... done.
+> > > >  HTTP/1.0 200 OK
+> > > >  Packets received 13, Transfer Successful
+> > > >  Bytes transferred = 12720 (31b0 hex)
+> > > >  U-Boot> bootefi 200000
+> > > >  No UEFI binary known at 200000
+> > > >  U-Boot>
+> > > >
+> > > > Fix the problem by adding the missing efi_set_bootdev() call.
+> > > >
+> > > > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> > > > ---
+> > > >  net/wget.c | 4 ++++
+> > > >  1 file changed, 4 insertions(+)
 > >
-> > Why do we need this at all? Did I miss where we send picocom the
-> > disconnect nicely key-combination?
->=20
-> When labgrid gets a signal, it exits. It doesn't continue its
-> co-routines and execute the end strategy to power things off, etc. I
-> suspect it could be made to do that, but I already have 62 Labgrid
-> patches, so I thought this would be expedient...
->=20
-> I can make this conditional on the new USE_LABGRID variable.
+> > OMG the hack never dies. I hope I will someday create a series to tidy this up.
+>
+> I'm sorry for that remark, not helpful to collaboration.
 
-It sounds to me like we need to make generic improvements to our hooks
-then, if there's not a "now call poweroff" hook.
+If you've figured out what needs to be done to remove it, I can deal with it.
+If not I'll put it on my backlog and have a look
 
---=20
-Tom
-
---e+J803lVMra+L6wG
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbR1okACgkQFHw5/5Y0
-tywmagv/fcZYERvtgowPNWadV7PCMVVYFIjffGADYMjmQ+dFOUTtmdOf2amgMHul
-lQ+8oeMzr7macFn/PEl6rGevp22gbkt0lsPYAMN9olxHIZRgc2pPAxO9veYjKmkw
-xOa4nOJ2c04n19Qg70yTR/TV+cg8xCwo+NR278ICJsbowKUQ7wmd8l5iADHtoUbM
-xuFbIXbb3IZPH3Ormpt/skZa1zaBKPNwP5Lf+lGQPkrvvT2OBMK8/hlvAy4vg0rb
-pgPu/sOA4/dSVCxImv8P9BcnZblUGw5dpUdd3yYTkbPvTSjBHHh7i1AqHHlLOX8x
-zD4EfLZmBxqYg8MZYXbvxXWcyG7A3i7vXLR2lFRWjcaGC421XGWBHcQdb2985NcR
-2i6O30gloF78nt5atZHZRrEX+bydRxzQ7eRwjj7ctU/5oZh/cXE//nM2zVJE+R61
-xqvePtKO9UlZe2NE+s7dmdKuHVeOUWR8LEGoPWUgU7jJiSyiwtYxXp4KH/05fZBj
-8djXYup4
-=frCD
------END PGP SIGNATURE-----
-
---e+J803lVMra+L6wG--
+Thanks
+/Ilias
+>
+> Regards,
+> Simon
