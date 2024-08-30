@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7794CA0ECC
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 01:04:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 897E6CA0ECD
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 01:06:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EC0588D28;
-	Fri, 30 Aug 2024 03:04:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0A51A88D35;
+	Fri, 30 Aug 2024 03:06:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ij57uFqX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WHQYODgQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D02F288D2C; Fri, 30 Aug 2024 03:04:49 +0200 (CEST)
-Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
- [IPv6:2607:f8b0:4864:20::836])
+ id CB84288D28; Fri, 30 Aug 2024 03:06:17 +0200 (CEST)
+Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
+ [IPv6:2607:f8b0:4864:20::c36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B47D488D17
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 03:04:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ED5F388D17
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 03:06:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x836.google.com with SMTP id
- d75a77b69052e-44ff7cc5432so8813981cf.3
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 18:04:47 -0700 (PDT)
+Received: by mail-oo1-xc36.google.com with SMTP id
+ 006d021491bc7-5dfabdbef52so233049eaf.3
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 18:06:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724979886; x=1725584686; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1724979974; x=1725584774; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=94cB59IEu03/K2S4Ila2dUuArCplnMWMIcBFcRb//44=;
- b=Ij57uFqXdp6ul82hvjlCuD/NmnLCnbRRc0/jWs4a7hYcNeYrAcIpySd+sKLCv5KFvf
- XMEbx9Q3zhIMR0mTUGvGHw8VCuFv/QiniWBkP+Sdk8e8xV3MjWOZs6TeuqQygoerUwj2
- moNdfCftLgLzegvZYKfViCPjMR4jEUOIXqDfQ=
+ bh=UPByMnZ5NhfAbExc8ePnzfRTjGlL1knHDHa7zODnbaY=;
+ b=WHQYODgQ75eBABMmztCd/Jf8gJl2Q0fLZg7nUz/XPOZGVdfOuopMJV/WnRZAkpw7Al
+ Zghr3XUBt4PJB4uEftVGNy1myrd9nivlrq4yUhV+v7nJ4H7VKXX1nyoL4otTXLOSSsId
+ m4w7PdbSgYdBbbnKCJ0AqTinezCl82T/MJLUA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724979886; x=1725584686;
+ d=1e100.net; s=20230601; t=1724979974; x=1725584774;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=94cB59IEu03/K2S4Ila2dUuArCplnMWMIcBFcRb//44=;
- b=PWUOKRtJJmYYFDsaTS4CT06yuS0VF9dAAPBGxntQj8FZoL7a1QDe4aehvAYD3bsk0S
- QMO4bgVpMcxRziW3iUc/mcvvkZZggnISKJXP3pxWEIxv6P9l/fYLg1qfmSREZBjx0BPx
- QoNwrq7iIZd1DVzUFykEt9Q1mReByu0wr+2Vs93lIUkYaVhd8zbY5sDFcbaj8SFmpnsc
- JOthAiL40xxPBItNQ4rJxjKBDNGzN4W4Ag22qHTNfUqAvRVPdYtkpj8yzZa2EUZQfy9L
- ofcc9gknyPUQnIcJLmomLiPggaYIpJ3zdW7tiAlA7wBR0ksexqvhhZJJTPw0qRp8Z+9s
- Jajw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXES53ENT8zh9fG1gsoQ2OEaXcZs44nYjh4ELgoh9U/tlUJLI6ZpI2nuB7qbAlbE+CpVJvTQRc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwMOKbFcjLr6hPkq0OcAgAictW7b1AeE59+GsDouaHacV2ao3yP
- ExeJi77o5m+VCQXcgLrW/WMBkOWKVw+4Ksdr69+CnxDTgZUpx552pqZzXYQZKgVPdb6pKoilNx6
- tVSxbETZZLnv340zZVkBmYFUGbdR5DRWxepYI
-X-Google-Smtp-Source: AGHT+IE1LIJ1PsYFgRwSdNnnXlOSNFlOHiRFhLoUvqiIVb/MWQsy+i4HNybQAjBjWh7veEOMVgb5F+7wMOWsMNGp5/A=
-X-Received: by 2002:ad4:4c0a:0:b0:6c3:4655:8d50 with SMTP id
- 6a1803df08f44-6c346558fadmr16316646d6.3.1724979886703; Thu, 29 Aug 2024
- 18:04:46 -0700 (PDT)
+ bh=UPByMnZ5NhfAbExc8ePnzfRTjGlL1knHDHa7zODnbaY=;
+ b=utdErxMLDdgzYkdi4dfaN3/R6rmuIv/Mwbp6gP8wW68au7tsXkOURR47Oai/UieYyX
+ FSz9Eko6iBzeswxK1CxN0FsNpqn85J/S73b6JMtrO2WCQJm0mKAHeN3RkyH4qV65LZpj
+ 1w+VtxlEpLk5vdh/XU8HAo/RHXpmglgy/vfIpSFAheHqO7JDr4fQqFa5ZZzCcyNbMJLp
+ TFWVver/A0MnBEgaWu817Z5x2rqZ+qQBTSwPa2yNFXTmxgLrXh0/eR6lCYQ0tUWhggpA
+ hHb2vBAsHt0hdvnxnd08GvLt9DGEnicsGu6X2mFcXkyhFXepOMARrzXrvWX4hIQhEQCG
+ 0/lA==
+X-Gm-Message-State: AOJu0YxFsH6yYrx7+dqehKHvZYt26bPMGGd4h1essXxvCuOPjjTTlpMh
+ 1OVImQa+xUgG0NHlHi7k3lPxksxBp3NUqZ9KklIVndXzM+gnssyt1+seustzVN29crf2GdP/IEl
+ HM5J0c6jZCbf6woFCWdBhKOJ5CdMZC7Rgh2/f
+X-Google-Smtp-Source: AGHT+IE4HZ1G9wRlRn0CUcICvejHqUH5UeDHHnHxpz1B4sDZrkiL2jevCUb3TfEVG0lxIPoEgaEGim8Fmg6gvyZAFwI=
+X-Received: by 2002:a05:6820:1506:b0:5d5:9ffb:b9de with SMTP id
+ 006d021491bc7-5dfacf11c85mr795076eaf.4.1724979973616; Thu, 29 Aug 2024
+ 18:06:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240828220846.1205813-1-sjg@chromium.org>
- <20240828220846.1205813-18-sjg@chromium.org>
- <1637be2a-2fa8-4686-8868-077ed430ae8a@linaro.org>
- <CAFLszTjZOjXwY4PXGWkCu-7ehuA_XBCcnjLtmF4hKUC2K-NyNA@mail.gmail.com>
- <20240829165906.GG2479150@bill-the-cat>
-In-Reply-To: <20240829165906.GG2479150@bill-the-cat>
+References: <CAFLszThRq1MmeAukYW+uwe5nBiku94qXALLMZ4S9ySFfbW0AkA@mail.gmail.com>
+ <20240827165025.GN2479150@bill-the-cat>
+ <CAFLszTgD6aeYziHHJrsbYgP+eWTR6GJ+BJNvoitPZCyJpyV-8Q@mail.gmail.com>
+ <20240827214330.GP2479150@bill-the-cat>
+In-Reply-To: <20240827214330.GP2479150@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 29 Aug 2024 19:04:36 -0600
-Message-ID: <CAFLszTh4A2NH8d6hocom3pAzYB4ExgVbDRa+6phux7K5P9X4Pg@mail.gmail.com>
-Subject: Re: [PATCH v5 17/20] test: Try to shut down the lab console gracefully
+Date: Thu, 29 Aug 2024 19:06:03 -0600
+Message-ID: <CAFLszTiywgEjTB2s4Zmz4vcmqLhRXLcbTnJGyig3b38c9Y2KUw@mail.gmail.com>
+Subject: Re: xPL terminology
 To: Tom Rini <trini@konsulko.com>
-Cc: neil.armstrong@linaro.org, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,33 +87,94 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Thu, 29 Aug 2024 at 10:59, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 27 Aug 2024 at 15:43, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Thu, Aug 29, 2024 at 09:01:17AM -0600, Simon Glass wrote:
-> > Hi Neil,
+> On Tue, Aug 27, 2024 at 01:24:59PM -0600, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > On Thu, 29 Aug 2024 at 08:26, <neil.armstrong@linaro.org> wrote:
+> > On Tue, 27 Aug 2024 at 10:50, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On 29/08/2024 00:08, Simon Glass wrote:
-> > > > Send the Labgrid quit characters to ask it to exit gracefully. This
-> > > > typically allows it to power off the board being used.
+> > > On Sun, Aug 25, 2024 at 07:07:23AM -0600, Simon Glass wrote:
 > > >
-> > > Sending those characters every time could collide with other CI systems,
-> > > I don't think it's a good idea.
+> > > > Hi,
+> > > >
+> > > > We have the term 'SPL', which has a dual meaning. It is both a
+> > > > particular phase of U-Boot (the one that loads U-Boot proper) and a
+> > > > generic name for any pre-proper phase.
+> > > >
+> > > > You can see that in a few areas, but for example CONFIG_SPL_BUILD is
+> > > > enabled for TPL and VPL builds, not just SPL.
+> > > >
+> > > > I propose to rename the generic term from SPL to xPL (meaning any PL
+> > > > phase), leaving SPL to just refer to the phase before U-Boot proper.
+> > > >
+> > > > The symbol would be CONFIG_XPL but in documentation we would talk of
+> > > > xPL, with a lower-case X, so it is more obvious that it refers to any
+> > > > phase.
+> > > >
+> > > > What do you think?
+> > >
+> > > I still worry this is just another part of the long symptom of needing
+> > > to re-work how we configure / build as we have 1 case of "build things
+> > > this way" (full U-Boot) and N cases of "build things another way" (SPL,
+> > > TPL, VPL, UPL?). And really we need a way to short-hand
+> > > "fooboard_defconfig" means "fooboard_spl_defconfig +
+> > > fooboard_tpl_defconfig + fooboard_SOMETHING_defconfig".
 > >
-> > What systems are you thinking about and what sort of collision would occur?
-> >
-> > What do you suggest instead?
+> > IMO my XPL series does this, at least for some definition of this. I'd
+> > really like to get that in as it would make all of this much easier.
 >
-> Why do we need this at all? Did I miss where we send picocom the
-> disconnect nicely key-combination?
+> Yeah, what I recall of your XPL series was that it made a lot of changes
+> I didn't like and highlighted what I thought was that yes, really
+> Yamada-san was right all along and we need a different way of
+> configuring + building.
+>
+> I had even today thought that we could possibly
+> get away with some shorthand where if for "fooboard_defconfig" we _also_
+> had "fooboard_spl_defconfig" we knew to build in ${O}/spl/ the spl
+> variant. It would be harder for cases where we have "fooboard_defconfig"
+> and "fooboard_hs_defconfig" that both need "fooboard_spl_defconfig", but
+> it would cover many cases at least. Anyhow...
 
-When labgrid gets a signal, it exits. It doesn't continue its
-co-routines and execute the end strategy to power things off, etc. I
-suspect it could be made to do that, but I already have 62 Labgrid
-patches, so I thought this would be expedient...
+We should discuss this sometime as it has come up once or twice
+before. Given the dependencies between XPL and proper and don't think
+we can sensible split into separate files, let alone separate the
+Kconfig. In fact I still believe that we need a small Kconfig-language
+addition to support this sort of thing and avoid duplicating the rules
+everywhere*. I believe I might have even done a patch for it. We got
+very close to sorting all this out a year or two ago and then it all
+died.
 
-I can make this conditional on the new USE_LABGRID variable.
+We are really stuck on making progress on 'generic XPL' (or whatever
+it is called) until we can figure this out.
+
+>
+> I think a series that replaces CONFIG_SPL_BUILD with CONFIG_XPL_BUILD
+> (and the required logic to make that work...) would be fine.
+
+OK.
+
+>
+> > > But on the flip side, I also suppose replacing CONFIG_SPL_BUILD with
+> > > CONFIG_XPL_BUILD would be less confusing.
+> >
+> > Yes. What do you think of E's idea of renaming all the options? I
+> > quite liked it when I read it, but now I am thinking that having
+> > everything be xPL is quite a nice convention. If we have SETUP_... and
+> > TINY_... it is less clear that they are related.
+>
+> Yes, I think we need better descriptive documentation for what we have
+> and then only maybe renaming a few things that might be too cryptic.
+
+OK. Well I can look at splitting CONFIG_SPL_BUILD into two:
+
+- CONFIG_XPL_BUILD means that it is not building U-Boot proper (i.e.
+the current meaning of CONFIG_SPL_BUILD
+- CONFIG_SPL_BUILD means it is building SPL (and not TPL or VPL)
 
 Regards,
 Simon
+
+* Yes, Linux will never accept a Kconfig addition; this is the same
+Linux that refused FIT for 10 years so IMO that issue is not relevant
+to the discussion or what is best for U-Boot
