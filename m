@@ -4,95 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5AC8CA0EDB
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 04:39:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46036CA0EDF
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 05:00:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCEFB88A24;
-	Fri, 30 Aug 2024 06:39:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 6EF448855C;
+	Fri, 30 Aug 2024 07:00:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ElK9Owbw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="evN0a2rB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70B2088D2F; Fri, 30 Aug 2024 03:06:40 +0200 (CEST)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
+ id D9706886CC; Fri, 30 Aug 2024 07:00:24 +0200 (CEST)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6CB3E88D3E
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 03:06:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DBC88817C
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 07:00:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-e04196b7603so1282551276.0
- for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 18:06:36 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tkuw584924@gmail.com
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-202318c4f45so13786595ad.0
+ for <u-boot@lists.denx.de>; Thu, 29 Aug 2024 22:00:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1724979995; x=1725584795; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Cf6M2F1tvjJqxEb+pYLNuivDpwq+/7lDx8MKI/Cb7ak=;
- b=ElK9OwbwaYvl/Kx17D+HD4PavwpAr7cwe8TBAd0kKXNagiVWc4pfSLQhO+fmlGSsJl
- v3HSXMOWNOsvij3roA2MtuwH6Uii/jY8fuq3U2jBH299IesafjOqUpoUqHSQyN5LoVOH
- IwHEa8h4OONcjmfRJ7/snsfHJbzlT4uvWuFWw=
+ d=gmail.com; s=20230601; t=1724994021; x=1725598821; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=RAY2Ea+jPqLOyTERY7utV0UGbHNqz9IpPpJkR+5f5to=;
+ b=evN0a2rBTtWjwJpRrGzTBRltp17rUuoaR8hEnS9QjLNHjtR9BRS+o9kL8k/8EoH2+S
+ rZcog8R+em+7KgIUKUtve5mltUB+Jd0coDrUVCkEDzEPg1RHCJpDHuUVYobEoTCIZABH
+ ino98NqopqD23ytfdlLLNOB4BxJ4QxLm8CIdcuDn6iS2NBjBaIi5fYKQbTzWOuvaiY6R
+ hcclvaXDMzeDisYWVMVOIfWAZ5vJJd7UG9cl4p59nLJjZ2gqOGn9Nzn20mGNWzbCVCae
+ sya6wQrICqiumry7ebAld4457J3fYHsWqMqM5QiDonO7b9VHX/wevRWOlXGdz2oHVxFM
+ MNaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1724979995; x=1725584795;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1724994021; x=1725598821;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Cf6M2F1tvjJqxEb+pYLNuivDpwq+/7lDx8MKI/Cb7ak=;
- b=WSbhg1Uda9FyLkmqNR1AM57vuYijlqGzaj8t2NWtfxXFQNqTQqqTX69Qtx7kMWag3Q
- hzQpzBZxvCFy0EFRV7Mqw7HaWwMJ0qSnjHBEGb6ELJ+aDtLI7WroyDhmqFa0GvmV5PY7
- C0nyWMPW/7cOX2QdvhD0WJKqR2NVnQAiN1X6JQAGDol3aG4XA4Htpu7LACgdxzZvtOnL
- Q+fElumFR0D6EN+NgzCIYiP78pr9vkZBpRg8G4w1VbY7oHWjKLQfN6NUrcyOqyYEx2RT
- CZ85LuXrxSTIKHoKaB657fXRiK7fPeaQgfWR+/uKNGeWk2o3haS2SwQWogphmyBMVXRw
- GdGA==
-X-Gm-Message-State: AOJu0Yy6IhI8hCqF8FujGEu1eM5TAjWIwRJhvLb9LaqOJdoERSYBYekY
- QS2gHsI17/wphF1Emds3aGXkuUc2qi6bqaSGWPDdJvWyexlJv6fngjH73ppm//9/MhgQNIwDF75
- sG12nOVhmRpLCojcnXp7t8X8dmb9aWgI3hfaY
-X-Google-Smtp-Source: AGHT+IEycXiGkAfq6gvly4OV4Uy6IAGlzUioEGQ2r2aHPUFAG8/2yegyUDjp34ueqq6nTRSRd9fZdhEo8YtZt+dFn/c=
-X-Received: by 2002:a05:6902:11cc:b0:e13:d399:38cc with SMTP id
- 3f1490d57ef6-e1a7a1a4dc8mr609611276.45.1724979995256; Thu, 29 Aug 2024
- 18:06:35 -0700 (PDT)
+ bh=RAY2Ea+jPqLOyTERY7utV0UGbHNqz9IpPpJkR+5f5to=;
+ b=YWcUpfcYPfhymma9LofGI5O9J4nTvKIUNDutaQvFB7d0ie94Q/6WII6iecisjo7yju
+ Y59whoqCP6iDOxd7kZ6j/IBRq5cw0EgkJPOUEhvz8+NnAq65Pq3ij2hHvJiMxguSr0FH
+ aLxIZAiJR7ClXRY+bl36tDKne+hxKGYZtM80MJejtsSzm6mb5ZaELFNklyxVmklEb0RK
+ DGhMOrfIwTP2ANNxpPaTBsPIuFkGACAv1+kJUrpLQb6Yuj2l6APcCXgVYnahi5NAHXf1
+ uWdWWfzXXlNuLxGMoxhysrcxrh/qYMN3CX+70HCq+lt0JNuzIGdjV4uGp5A8KzXLz1gd
+ F4rA==
+X-Gm-Message-State: AOJu0Yzq6ffdYlSjj+U8qRoorUsJKIN+MSeN4ZZ9G5yy0yuoG12jjik9
+ 8vWKbMPSYXsqvqQu90jx2otiX6ewGKcLqH1eBcf7qG1er7ip7dgaAbeFhw==
+X-Google-Smtp-Source: AGHT+IHwj0QTP8TPctUoqrxRFzV2ENKF7/5EL3ED4lu5mXfE/QvOLd815dy99Zwrk4jlOnGkr/SfPg==
+X-Received: by 2002:a17:902:c40e:b0:202:508c:b598 with SMTP id
+ d9443c01a7336-2050c4b9a58mr51768325ad.59.1724994020616; 
+ Thu, 29 Aug 2024 22:00:20 -0700 (PDT)
+Received: from ISCN5CG2520RPD.infineon.com (KD106168128197.ppp-bb.dion.ne.jp.
+ [106.168.128.197]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-205152b4dd0sm19371015ad.15.2024.08.29.22.00.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 Aug 2024 22:00:20 -0700 (PDT)
+From: tkuw584924@gmail.com
+X-Google-Original-From: Takahiro.Kuwano@infineon.com
+To: u-boot@lists.denx.de
+Cc: jagan@amarulasolutions.com, vigneshr@ti.com, tudor.ambarus@linaro.org,
+ pratyush@kernel.org, tkuw584924@gmail.com, Bacem.Daassi@infineon.com,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Subject: [PATCH] mtd: spi-nor-ids: Add support for S28HS256T
+Date: Fri, 30 Aug 2024 14:00:12 +0900
+Message-Id: <20240830050012.28870-1-Takahiro.Kuwano@infineon.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240829145802.1827952-1-sjg@chromium.org>
- <20240829183257.GN2479150@bill-the-cat>
-In-Reply-To: <20240829183257.GN2479150@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 29 Aug 2024 19:06:24 -0600
-Message-ID: <CAFLszTgzAZKzzTspccw2_ax5K6WWkgNA1h_8D9sD17SqPVN-hw@mail.gmail.com>
-Subject: Re: [PATCH 00/19] vbe: Series part E
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
- Chanho Park <chanho61.park@samsung.com>, Devarsh Thakkar <devarsht@ti.com>, 
- Eddie James <eajames@linux.ibm.com>, Gary Bisson <bisson.gary@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, 
- Julien Masson <jmasson@baylibre.com>, Kever Yang <kever.yang@rock-chips.com>, 
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Mathieu Othacehe <m.othacehe@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Maxim Moskalets <maximmosk4@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Nam Cao <namcao@linutronix.de>, Paul-Erwan Rio <paulerwan.rio@gmail.com>, 
- Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Raymond Mao <raymond.mao@linaro.org>,
- Roman Stratiienko <r.stratiienko@gmail.com>, 
- Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>,
- Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Suniel Mahesh <sunil@amarulasolutions.com>, 
- =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>, 
- Tony Dinh <mibodhi@gmail.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Fri, 30 Aug 2024 06:39:05 +0200
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,25 +91,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 
-On Thu, 29 Aug 2024 at 12:33, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Aug 29, 2024 at 08:57:43AM -0600, Simon Glass wrote:
->
-> > This includes various patches towards implementing the VBE abrec
-> > bootmeth in U-Boot. It mostly focuses on SPL tweaks and adjusting what
-> > fatures are available in VPL.
->
-> A lot of this series makes me really want to stop and rework how we
-> configure / build things. Having say ZLIB, SPL_ZLIB, TPL_ZLIB and
-> VPL_ZLIB really isn't good.
+Infineon S28HS256T is 256Mb Octal SPI device which has same
+functionalities with 512Mb and 1Gb parts.
 
-Yup and I had a solution or that a year or two ago and it died.
+Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+---
+Datasheet can be found:
+https://www.infineon.com/dgdl/Infineon-S28HS256T_S28HL256T_256Mb_SEMPER_Flash_Octal_interface_1_8V_3-DataSheet-v02_00-EN.pdf?fileId=8ac78c8c8fc2dd9c018fc66787aa0657
 
-Any revival of that, or new solution will have to wait until VBE abrec
-is done. I hope there is only one more series after this, then a small
-one for the VBE thing itself.
+Tested on Xilinx Zynq-7000 board and Infineon internal SPI controller.
+---
+ drivers/mtd/spi/spi-nor-ids.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Regards,
-Simon
+diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+index 457965dad1..5769e662e0 100644
+--- a/drivers/mtd/spi/spi-nor-ids.c
++++ b/drivers/mtd/spi/spi-nor-ids.c
+@@ -383,6 +383,7 @@ const struct flash_info spi_nor_ids[] = {
+ #ifdef CONFIG_SPI_FLASH_S28HX_T
+ 	{ INFO("s28hl512t",  0x345a1a,      0, 256 * 1024, 256, SPI_NOR_OCTAL_DTR_READ) },
+ 	{ INFO("s28hl01gt",  0x345a1b,      0, 256 * 1024, 512, SPI_NOR_OCTAL_DTR_READ) },
++	{ INFO("s28hs256t",  0x345b19,      0, 256 * 1024, 128, SPI_NOR_OCTAL_DTR_READ) },
+ 	{ INFO("s28hs512t",  0x345b1a,      0, 256 * 1024, 256, SPI_NOR_OCTAL_DTR_READ) },
+ 	{ INFO("s28hs01gt",  0x345b1b,      0, 256 * 1024, 512, SPI_NOR_OCTAL_DTR_READ) },
+ 	{ INFO("s28hs02gt",  0x345b1c,      0, 256 * 1024, 1024, SPI_NOR_OCTAL_DTR_READ | NO_CHIP_ERASE) },
+-- 
+2.34.1
+
