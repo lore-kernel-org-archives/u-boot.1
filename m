@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A0C5CA101C
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 22:44:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4109CA101A
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 22:57:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C63C08888F;
-	Sat, 31 Aug 2024 00:44:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 533E688CFA;
+	Sat, 31 Aug 2024 00:57:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="A6u4+Vjg";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="WY0zoa38";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 531AB886E5; Sat, 31 Aug 2024 00:44:20 +0200 (CEST)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id 1A46288BFB; Fri, 30 Aug 2024 15:36:16 +0200 (CEST)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 031E388D14
- for <u-boot@lists.denx.de>; Sat, 31 Aug 2024 00:44:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB09388BBC
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 15:36:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linus.walleij@linaro.org
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-533521cd1c3so2748775e87.1
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 15:44:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=jagan@amarulasolutions.com
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-e165ab430e7so1854932276.2
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 06:36:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725057856; x=1725662656; darn=lists.denx.de;
+ d=amarulasolutions.com; s=google; t=1725024973; x=1725629773;
+ darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TPc2D1Bq3gFngKn//slA/dPXZIgd1zzG1lPMW63aCss=;
- b=A6u4+VjgvsQ07ytjTNcfepYWhnBYX501pj4W/1LmmCNjtEGvqDoIxNPl7C4X6XEEMJ
- rAPLdtnoPEUNS73EjEq6wpsGBnx7ZAcrxdJ8Qpf/5gEOe0vRe3OhxM5HWZ3HdVei8Ga5
- pVST+swOvh7UJ4JRtjq43tSbqrHQ6IfJ9Czmt87GKn3qF2hYZJJQeqqaaGPd8oZtwHgV
- BKnjldjHSFMoYwt9IisheBsc26paxrD4c+o37bS2diXAFDAUz8xy53hfLt3B49AIUVjo
- ryYs7h1V0HukteCYspWhIpyEIykW5Ure6tr169Co/Yl60O3mckS8MZk6VVGMt3M+iBPQ
- Kqeg==
+ bh=pzet2kh29brG4zVVOjRpUNweZI7M1j6Rgxjui1gy+Fw=;
+ b=WY0zoa38K9OMyWazBQOzcBOvO2gOLGJ0vcatiEj4+nGXQnDWbn4/pa8Es20rXTYKTl
+ 1CEwRd0bR8n00OYcRRjCHX2ZmHnGgjIeXuof2MSFGXC2dpwl3EMpAg/r7Sk6yQ6Wax/U
+ SAl+uBLH9Sdw4bKDQJB+/weo0t/opuLejkMO8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725057856; x=1725662656;
+ d=1e100.net; s=20230601; t=1725024973; x=1725629773;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TPc2D1Bq3gFngKn//slA/dPXZIgd1zzG1lPMW63aCss=;
- b=cDIcWCjhk71ryoT1qfZz4LOMuUtLr5gDSAY4O2LJCEgPbxBJzrsJOoR5bz9pxw/qx8
- +U6GUblfD61padv7RGmDpO2CvN5uGa+37VNdFEdUaZSEnf9dAg7bOm8nYK94CGSO1mjh
- GPhe7Z68RUF6bK6uTMCVlMhwbeHCcrisZmoP94cnbe469BWkKiT2BYy59f+3nRD6XskU
- HYc/BgEE9f6gRbT4xIIAnNRxK1IqiNvRqW0U35MXo66xfzyl4kp+2kJhTCrwLPtP3tod
- uWoWddEhjJVJWW52dTkPc8UXhgPiy0N1wnHs8dAbAKu+yjFtYwF/WeNMtrUeK5OmzH4I
- 8U9w==
-X-Gm-Message-State: AOJu0YztQw//4duF6ytSezwJkDuIx8AJtrqQGQkNIrcU0KQ2DzPFCho2
- m41kuXKlZUbylSai8CO/CuYpy73TockxG6Q3qLiN7G71wHKlVx1+Do1iJsVwBWdWPChOHH8Xnpr
- FcQsLtQFtXmk0d8qGSOrhGIidTmAj/yma7+fDNw==
-X-Google-Smtp-Source: AGHT+IEUsA6wsox9JMLBmQ3GtX6vg0xr2rmKkEEytRu/QzjTwtqhXjTaVmgRui3EJLf/P+Oat4tImStylwLUs4cDm+M=
-X-Received: by 2002:a05:6512:3b95:b0:52d:582e:4111 with SMTP id
- 2adb3069b0e04-53546b36865mr3142206e87.18.1725057855170; Fri, 30 Aug 2024
- 15:44:15 -0700 (PDT)
+ bh=pzet2kh29brG4zVVOjRpUNweZI7M1j6Rgxjui1gy+Fw=;
+ b=Pj8w0La59wKtye5wf5M5EP4/ECXHSvnVFSfaa/t1sEwQmWNnTZ1n3HbAZTrhm8AoBX
+ nu511Lx73uxnhBeXMkj8j4qTEgFHggtPEDykY7svVHPF4S2p5Ot6N6eZaLFthywnbHuZ
+ m3QgKseixZ0LramZ7pN8qAde0V71e6iwiVx+NJCGgPq0eCtVBPFgorZT3yrfXoUPGtSJ
+ qNRl9S9Zqkdfn0PI8lrI4RsFh7yc6xILZ/gJ5sTHZ/uMFEMqgwmikt0/SmNlA+ElF1I1
+ XAC/fX5bEeJb8MbbikUktQGxf6oKkYPa3LpwGg/QOR+kRW+sPA3M6mYWBDX8yDWE0kFv
+ Z3YA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXbU2rqkIojepaVPArPD7ANEHTZ7kYGBQeosnEBgvSxPgC4Is0rpKq6/VGNz4vicJ7fxCSMcfU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzq0detfhS+1kDFbpNn56DQ4rterOAU29DyO4g4PQlUW5gtiB6r
+ IhCXrVSXXqBlxKylaZvL5gBE03jyWqtZ00d26pSJ3G7/C+VvxS4jAD4kf5gJeiBEoNpPxs9x1yb
+ iC8tZEJOLV7GHpc4WsRDATsID+WK23h+SaVsDPQ==
+X-Google-Smtp-Source: AGHT+IGGgTYivM0Qot11++GAJtn8n2eetm+qPX+ej1sx8HDVaGKd9omfGRFu/QxltFQCtgXYIVOa8HQpatNAox9Kf9w=
+X-Received: by 2002:a05:6902:1b8c:b0:e13:c6ec:2a7d with SMTP id
+ 3f1490d57ef6-e1a7a1a1cdemr2637510276.37.1725024972852; Fri, 30 Aug 2024
+ 06:36:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240826143851.8020-1-marek.vasut+renesas@mailbox.org>
- <20240826143851.8020-6-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240826143851.8020-6-marek.vasut+renesas@mailbox.org>
-From: Linus Walleij <linus.walleij@linaro.org>
-Date: Sat, 31 Aug 2024 00:44:04 +0200
-Message-ID: <CACRpkdanZmv+eO-sTfzCQ_wasLM=N5GzfxNNkGxTgQFbZ=Ji1A@mail.gmail.com>
-Subject: Re: [PATCH 6/6] usb: gadget: Pass struct udevice to
- usb_add_gadget_udc()
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Nishanth Menon <nm@ti.com>,
- Zixun LI <admin@hifiphile.com>
+References: <20240304161607.82759-1-marex@denx.de>
+ <CAMty3ZB=s5ZNhgHZ2Q8vbzcvFCdO=62xHSY+dAeyr=y3ujkgWA@mail.gmail.com>
+ <19a4f9fd-81c7-4ff7-a202-8f0f0c5857a9@denx.de>
+In-Reply-To: <19a4f9fd-81c7-4ff7-a202-8f0f0c5857a9@denx.de>
+From: Jagan Teki <jagan@amarulasolutions.com>
+Date: Fri, 30 Aug 2024 19:06:01 +0530
+Message-ID: <CAMty3ZD0e1N_AQVOn_eCNkQQusib64QannFfx8Edku57WZWrfA@mail.gmail.com>
+Subject: Re: [PATCH] mtd: spi-nor: Clear Winbond SR3 WPS bit on boot
+To: Marek Vasut <marex@denx.de>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
+ Hai Pham <hai.pham.ud@renesas.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Johann Neuhauser <jneuhauser@dh-electronics.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Vignesh R <vigneshr@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 31 Aug 2024 00:57:39 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,21 +96,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Aug 26, 2024 at 4:39=E2=80=AFPM Marek Vasut
-<marek.vasut+renesas@mailbox.org> wrote:
-
-> Almost every UDC driver already passes casted pointer to struct udevice
-> usb_add_gadget_udc(), even if the behavior is not exactly correct. That
-> struct udevice is at risk of being corrupted in case something modified
-> it in the UDC core, which does not happen right now. Switch UDC core to
-> use struct udevice outright and drop the casts.
+On Sun, Aug 25, 2024 at 5:58=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
 >
-> UX500 has to be updated slightly, as that is the last place which does
-> correctly use private struct device instance.
+> On 5/24/24 6:05 PM, Jagan Teki wrote:
+> > On Mon, Mar 4, 2024 at 9:46=E2=80=AFPM Marek Vasut <marex@denx.de> wrot=
+e:
+> >>
+> >> Some Winbond SPI NORs have special SR3 register which is
+> >> used among other things to control whether non-standard
+> >> "Individual Block/Sector Write Protection" (WPS bit)
+> >> locking scheme is activated. This non-standard locking
+> >> scheme is not supported by either U-Boot or Linux SPI
+> >> NOR stack so make sure it is disabled, otherwise the
+> >> SPI NOR may appear locked for no obvious reason.
+> >>
+> >> This SR3 WPS appears e.g. on W25Q16FW which has the same ID as
+> >> W25Q16DW, but the W25Q16DW does not implement the SR3 WPS bit.
+> >>
+> >> Signed-off-by: Marek Vasut <marex@denx.de>
+> >> ---
+> >
+> > Applied to u-boot-spi/master
 >
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> I do not see this patch in u-boot/master , was it missed ?
 
-Reviewed-by: Linus Walleij <linus.walleij@linaro.org>
+I missed it, I will send it as part of PR soon.
 
-Yours,
-Linus Walleij
+Jagan.
