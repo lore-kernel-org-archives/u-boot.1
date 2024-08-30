@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF160CA0FE1
-	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 12:36:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63CDDCA0FE1
+	for <u-boot@archiver.kernel.org>; Fri, 30 Aug 2024 12:36:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96FB688C51;
+	by phobos.denx.de (Postfix) with ESMTP id F195F88C75;
 	Fri, 30 Aug 2024 14:34:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CJFRPAK2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tUPa8t+O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BB9988C3F; Fri, 30 Aug 2024 14:34:49 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 9D44788BBC; Fri, 30 Aug 2024 14:34:49 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7321688BBC
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 14:34:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D53C88BFB
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 14:34:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4281ca54fd3so16088395e9.2
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 05:34:46 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-42bac9469e8so14864215e9.3
+ for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 05:34:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725021286; x=1725626086; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1725021287; x=1725626087; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=XQKUnmyBwBLvsTbpwbjgaHTP7ZZ59+35Ps2sQ2R6uIk=;
- b=CJFRPAK2qB/bP1/kt4ue2PukcaANK7rD2WOC/IoCKSrFZVh1RFuzGxajuT2NUAMfmB
- SlnH3pwJlntia/+MhaDVRUJVp61603fSlQqEYPQ9A/lqacNIb3wvTF/KXMkk1M70XvVH
- xXY7gjsVKEyEkNdpdDNzBSY8hF8y61gpf6ZLwan0JsfGFg97hTlRWDyq63bQ9KcwMZ0U
- 4mbE++5nRMAnQLM+q1qd1CTDPwfbM21tl+klgCfGqhSEdAW4QO6S9CapMmUNAvV03ce/
- q7b1W7ZwLvJJUsX4xOKJwr+Sz/7d7vl2EBmRWMiQQxOCnRQzrw/NObSEhUmWEUz2FOM7
- xwqA==
+ :reply-to; bh=T720AHi0i4hNwKP9CGAlVcXZIAOAU+9zGvK3MyjWnBM=;
+ b=tUPa8t+OImzjM3/2s23OjQ1XNQQv5gXRsNuyVTPaSFxzgOTGn3deCZhAhc44JDc8S3
+ r4uyl26pghFRntPOwnTq3ufZ5yoigR3Mj7/LMT+ZDA5YTE3/ILgEAS3w4TyOOGWrThpH
+ lj5p0aa4U7gUefMyKgNei1tAbshqfmW1Pf30KLD/wJkVGj6DZSPPxzaFBKIL8cPzIvVL
+ lILn5YlrmLYLngwXd214OMPRLmNYD7a70yiLIHjX2AwV/htwb2qG0S1InkA6+evcdeyw
+ 4fFX1l3Knte1AkaSWKkg2kfXymxrWlG3A66FTlkHgvm9m7oxzHpsFb2ZFIvRKhQSjH9V
+ 2G6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725021286; x=1725626086;
+ d=1e100.net; s=20230601; t=1725021287; x=1725626087;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XQKUnmyBwBLvsTbpwbjgaHTP7ZZ59+35Ps2sQ2R6uIk=;
- b=NyXCLmEb9/f8ZTsNw0YCen0Sw6zJv+30ebSEjYP3Ca8ygG24155+uJWAWTdi0ouRau
- msTY6LSggMHrlYvv5XFlL/8nw/qN1KVFdPclWSlmkb+weTbUkTANRw/X77yWKC5wL0iH
- ksphN93TmpOLoUm5xgEabmZarwIZavimxNUnQwKMdMq1SPxkYZd2lvKoiVmR0F+FhGyN
- InXjimRfuy7QK0BnxstALBqsBDs8WrAgxCFFSI8jrDfY88GELlGL763POj1ej7cuvxlI
- AWBJdTZOfn/ip/F3HW9JxcDbmyntQSfj1q0G6iP/hhe7Qmcqz2zkFlt/NaV5dzPzHxRo
- quBQ==
+ bh=T720AHi0i4hNwKP9CGAlVcXZIAOAU+9zGvK3MyjWnBM=;
+ b=VZNk+yP4GBG5S6e62eUEFD2L6MhN92sl0+1S7dYRjNF1wfxoCJZ6lHzp0yMWuWNqBZ
+ UfS4TeOCAV8nqiYzgn/ptbbvWB+vNlV9Uj1A9neXyojXD+y7Ynxg45J8YvgBq57cqIxZ
+ PBvWZg7g12nvW8QAlz59R1rxsRaE9mxj8XnJQdq9Y7rTzhc/HPSOkCaAAYegO5GtavM7
+ YeHTSrKLQXXKpVYXoqA9hAAQaVWy5zhcCZQ9iQCqV3Kbl4FEOMl/7uEy7sIkG7Ob+eRi
+ 4QPW3K8NxCAQ1gsXhTOmp7yKpthVa5QBtErrZTIy/JL7MNfTA0VhQGZCUuUt9UuMpHin
+ yMuw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXU3q3X0a/IJyKd+ZDxIppNz1QSDAr1hiWlVXJbfLWKdl1OxTx3NfteRKxPYks+rUyDBd8zUy0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxQWliYH9B/nAP3PDvdqeqeC2bfkyyNKcOlZQMHx/iCikWIbC3H
- bitwQJD0Ae4+X6ui8q51K3TFTIQ/Ycn6gT0q6/0UQOKVnQ7GXucJ1x47cr7Bqh6TPZLIYUaExy8
- S
-X-Google-Smtp-Source: AGHT+IGSqRKeXcoTiP+8Byy8Qcvd/vkW61KBbeC65le4mIXZ5j8T3O6FbhY/OUBHfHAviaBz0MtlkQ==
-X-Received: by 2002:adf:9b89:0:b0:371:9366:6d8d with SMTP id
- ffacd0b85a97d-3749b5495abmr4289097f8f.19.1725021285832; 
- Fri, 30 Aug 2024 05:34:45 -0700 (PDT)
+ AJvYcCWVQJyEUyifV0iCQpLaO+906hbmn7CuNQOzhQTaZGbIQP0rGyJ7inVb8snLAiMDrM5db5V+mQY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxdS6cb0wQ7NzNLLIOO+A31o7TQnNmqMh7R4NpwHS9IDS8wgO7o
+ uWTYSEn1pGjB+Hu7GUmU/fNKfJvlol7ZKSCL7ax1yVAdmPGUxDpM1njzfZyoOGc=
+X-Google-Smtp-Source: AGHT+IFKO1YTo4DIL/hHbR9dTQuF8pl0y1ZmBARCkGDN9W//2H7E5AYURO4zGedcxZZByLUlj4eeGw==
+X-Received: by 2002:a05:600c:3596:b0:42b:8a35:1ade with SMTP id
+ 5b1f17b1804b1-42bb02d94f0mr50289425e9.27.1725021286994; 
+ Fri, 30 Aug 2024 05:34:46 -0700 (PDT)
 Received: from [192.168.1.17] (host-80-47-105-51.as13285.net. [80.47.105.51])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-374b960ef94sm648207f8f.103.2024.08.30.05.34.44
+ ffacd0b85a97d-374b960ef94sm648207f8f.103.2024.08.30.05.34.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Aug 2024 05:34:45 -0700 (PDT)
+ Fri, 30 Aug 2024 05:34:46 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Fri, 30 Aug 2024 13:34:40 +0100
-Subject: [PATCH v8 10/11] test: lib/uuid: add unit tests for dynamic UUIDs
+Date: Fri, 30 Aug 2024 13:34:41 +0100
+Subject: [PATCH v8 11/11] test: lib/uuid: add tests for UUID
+ version/variant bits
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240830-b4-dynamic-uuid-v8-10-79b31b199bee@linaro.org>
+Message-Id: <20240830-b4-dynamic-uuid-v8-11-79b31b199bee@linaro.org>
 References: <20240830-b4-dynamic-uuid-v8-0-79b31b199bee@linaro.org>
 In-Reply-To: <20240830-b4-dynamic-uuid-v8-0-79b31b199bee@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
@@ -83,21 +83,21 @@ To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
 Cc: Richard Hughes <hughsient@gmail.com>, u-boot@lists.denx.de, 
  Caleb Connolly <caleb.connolly@linaro.org>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3066;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1868;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=nQtu1CuT1dJvWShrMxbtGhtMhEP33bTMHgB54rEEcWk=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBm0bxafPDuPmk4Oj7igpnA5gfslpNag0Z6cSHaL
- Uf2DKBcNnSJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZtG8WgAKCRAFgzErGV9k
- tq4cD/9jjEkp0JBL9sJJf6YBmUnLwgxTfY58rMUrEjGn5K6f2+9PPMClO2jNbnxy+pNw6ZSU2f1
- 4M0Td9JmKjsFmFlss9G1N4nY+6C3YGlkpONOM8k/T28xeqNJNXWGcagCXLsO199vGj9DwHhaZ9l
- 4P1XPz0sxZyE+zIVpze7P1jeD0UOYSSOGgOCD2aYDp0io648tyTxdWfcbDhfL5O4KNVpavfhMe1
- 4TDOLH9oV+fo0eGDgCWtTrw1nwWwqUqso38i2wGlhlrLYVYsLgVs3BgZBf1veG3xO+Y/Up15xjW
- +uXPB6yTbL7PzHbQAH6UH5RVmsnM3JZnPDHrnUrg81oZiLmeaTDFRwcv676jS4m15oBrydINDbv
- UTdKR+uW+2Y5THa6utxaIi+PIxFb0CtFhEvPJI1dOLdBq/06O0tFSdwVWutrhJgUhZqP9r0Rf7p
- eGqi8wXqq6xloLGlQqc/uCQvp06QirMoF3EST8eT3vBBM79MgWuSyq0/0/NNflNoQwuFKOXbGPi
- AcYxKVR5sBaeEy+FuWG/7Oi3uM80tm9Ng8gPXgd5E+Z3f2R4r0gY09c0tMZr8ib6PEpFG8SLZKJ
- r9+Dg5IeF7Jt0esNLp8nZcDp0GW14spYIFFuyct6KsTYbHbI61rqS40TFCk3/1JQzaCq+v8h61X
- 057b98wHlqaQigg==
+ bh=N9V0m2aNtjrngrrxhmdCcdsnP8l6Sxth44kFjZd/FOA=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBm0bxaMn3NkReWtygfjw2EKX7TErNPR4UvfQdu9
+ g980KT7KB6JAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZtG8WgAKCRAFgzErGV9k
+ thBQEACMLUIhBxGMbW8dBkMXmC7x3CLnX/Me6xo9ckTcaVAXaThgU4iXOdJabQRQZNoJHeF7xTK
+ Sp/S/LbzaE+81ghlGDS54T9kj7ESCwDEen1U5GVOnzTurMJ7G2hKolRBdrim+UddYvitwtYP5d2
+ yKCe51NHawyycLn/iPYamXSXPb3OYYnG9KGIxsnyYTwkrUbMfF3JCWNMyfldV2EoWUvksFv6Gtl
+ IqT7fqKiCXuI+u8F7X+q+nUU7BeJTKvIzE6UMPQAfSxi1+wvW8rzmi/gUXOJemDkNjPywy5U62H
+ 0WyyXk+ARegKwpiYmyF8jGBrD8515UvethRqPb7L1qILUu7QX1kfOMcZq0kbhlclXKMYNb0QTMn
+ uaO0tUNRGfxgYFMQXaYxkFj/csQ46WrZVDl7lu3sYgso41hD22GE+wgzn0m2xIWCgyme5jVS7MH
+ axiaHaaOpNzEQOOSVzFAscRDE/uFeDO+xcE5Ka31fXrQNXwURWZUvXmALw+nze5heZKbqBxGaIA
+ OvAngOjkCOxrXQM+gJr6VIAgtKIOMa77f95/GrfXB8envfjrWcKHP1PjXhrloIbtTqcQFhKQT9g
+ MZHb2bCwXrXFEyd3I4Ppgt82oouUOlYyiBvA8bx81ZpMLdapnjhPvLd2XADM1xdkXsIRoXHUkLE
+ CJnAdzDbeNwY86w==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -116,123 +116,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add some basic unit tests to validate that the UUID generation behaves
-as expected. This matches the implementation in efi_loader for sandbox
-and a Qualcomm board and should catch any regressions.
+Add a test to check the version/variant bits of v4 and v5 UUIDs.
 
 Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- test/lib/uuid.c | 82 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 82 insertions(+)
+ test/lib/uuid.c | 41 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 41 insertions(+)
 
 diff --git a/test/lib/uuid.c b/test/lib/uuid.c
-index 3d62e18bcfee..4a1a16b4f315 100644
+index 4a1a16b4f315..bf5d5afdb521 100644
 --- a/test/lib/uuid.c
 +++ b/test/lib/uuid.c
-@@ -7,15 +7,20 @@
-  * Authors:
-  *   Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
-  */
- 
-+#include <charset.h>
- #include <u-boot/uuid.h>
- #include <test/lib.h>
- #include <test/test.h>
- #include <test/ut.h>
- 
-+#include <efi.h>
-+
- /* test UUID */
- #define TEST_SVC_UUID	"ed32d533-4209-99e6-2d72-cdd998a79cc0"
-+/* U-Boot default fw image namespace */
-+#define DEFAULT_FW_IMAGE_NAMESPACE "8c9f137e-91dc-427b-b2d6-b420faebaf2a"
- 
- #define UUID_SIZE 16
- 
- /* The UUID binary data (little-endian format) */
-@@ -36,4 +41,81 @@ static int lib_test_uuid_to_le(struct unit_test_state *uts)
- 
+@@ -42,8 +42,49 @@ static int lib_test_uuid_to_le(struct unit_test_state *uts)
  	return 0;
  }
  LIB_TEST(lib_test_uuid_to_le, 0);
-+
-+struct dynamic_uuid_test_data {
-+	const char *compatible;
-+	const u16 *images[4];
-+	const char *expected_uuids[4];
-+};
-+
-+static int lib_test_dynamic_uuid_case(struct unit_test_state *uts,
-+				      const struct dynamic_uuid_test_data *data)
+ 
++#if defined(CONFIG_RANDOM_UUID) || defined(CONFIG_CMD_UUID)
++/* Test UUID attribute bits (version, variant) */
++static int lib_test_uuid_bits(struct unit_test_state *uts)
 +{
-+	struct uuid namespace;
-+	int j;
++	unsigned char uuid[16];
++	efi_guid_t guid;
++	int i;
 +
-+	ut_assertok(uuid_str_to_bin(DEFAULT_FW_IMAGE_NAMESPACE, (unsigned char *)&namespace,
-+				    UUID_STR_FORMAT_GUID));
++	/*
++	 * Reduce the chance of a randomly generated UUID disguising
++	 * a regression by testing multiple times.
++	 */
++	for (i = 0; i < 5; i++) {
++		/* Test UUID v4 */
++		gen_rand_uuid((unsigned char *)&uuid);
 +
-+	for (j = 0; data->images[j]; j++) {
-+		const char *expected_uuid = data->expected_uuids[j];
-+		const u16 *image = data->images[j];
-+		efi_guid_t uuid;
-+		char uuid_str[37];
++		printf("v4 UUID: %pUb\n", (efi_guid_t *)uuid);
 +
-+		gen_v5_guid(&namespace, &uuid,
-+			    data->compatible, strlen(data->compatible),
-+			    image, u16_strlen(image) * sizeof(uint16_t),
-+			    NULL);
-+		uuid_bin_to_str((unsigned char *)&uuid, uuid_str, UUID_STR_FORMAT_GUID);
++		/* version 4 */
++		ut_assert((uuid[6] & 0xf0) == 0x40);
++		/* variant 1 */
++		ut_assert((uuid[8] & UUID_VARIANT_MASK) == (UUID_VARIANT << UUID_VARIANT_SHIFT));
 +
-+		ut_asserteq_str(expected_uuid, uuid_str);
++		/* Test v5, use the v4 UUID as the namespace */
++		gen_v5_guid((struct uuid *)uuid,
++			    &guid, "test", 4, NULL);
++
++		printf("v5 GUID: %pUl\n", (efi_guid_t *)uuid);
++
++		/* This is a GUID so bits 6 and 7 are swapped (little endian). Version 5 */
++		ut_assert((guid.b[7] & 0xf0) == 0x50);
++		/* variant 1 */
++		ut_assert((guid.b[8] & UUID_VARIANT_MASK) == (UUID_VARIANT << UUID_VARIANT_SHIFT));
 +	}
 +
 +	return 0;
 +}
 +
-+static int lib_test_dynamic_uuid(struct unit_test_state *uts)
-+{
-+	int ret, i;
-+	const struct dynamic_uuid_test_data test_data[] = {
-+		{
-+			.compatible = "sandbox",
-+			.images = {
-+				u"SANDBOX-UBOOT",
-+				u"SANDBOX-UBOOT-ENV",
-+				u"SANDBOX-FIT",
-+				NULL,
-+			},
-+			.expected_uuids = {
-+				"985f2937-7c2e-5e9a-8a5e-8e063312964b",
-+				"9e339473-c2eb-530a-a69b-0cd6bbbed40e",
-+				"46610520-469e-59dc-a8dd-c11832b877ea",
-+				NULL,
-+			}
-+		},
-+		{
-+			.compatible = "qcom,qrb4210-rb2",
-+			.images = {
-+				u"QUALCOMM-UBOOT",
-+				NULL,
-+			},
-+			.expected_uuids = {
-+				"d5021fac-8dd0-5ed7-90c2-763c304aaf86",
-+				NULL,
-+			}
-+		},
-+	};
++LIB_TEST(lib_test_uuid_bits, 0);
++#endif
 +
-+	for (i = 0; i < ARRAY_SIZE(test_data); i++) {
-+		ret = lib_test_dynamic_uuid_case(uts, &test_data[i]);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+LIB_TEST(lib_test_dynamic_uuid, 0);
-+
+ struct dynamic_uuid_test_data {
+ 	const char *compatible;
+ 	const u16 *images[4];
+ 	const char *expected_uuids[4];
 
 -- 
 2.46.0
