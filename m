@@ -4,61 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8982BCD13D9
-	for <u-boot@archiver.kernel.org>; Sat, 31 Aug 2024 20:32:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3636BCD13D9
+	for <u-boot@archiver.kernel.org>; Sat, 31 Aug 2024 20:32:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D88C88DB1;
-	Sat, 31 Aug 2024 22:32:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9F0CF88D92;
+	Sat, 31 Aug 2024 22:32:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="xdY4KUtO";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="WkjeS+qp";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="yGvbMWy0";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="k9CRa70Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DDFA88D96; Sat, 31 Aug 2024 22:32:15 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id D2CA688DA4; Sat, 31 Aug 2024 22:32:16 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6CE588D92
- for <u-boot@lists.denx.de>; Sat, 31 Aug 2024 22:32:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E53F888D64
+ for <u-boot@lists.denx.de>; Sat, 31 Aug 2024 22:32:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4Wx6Bj2lQwz9slX;
- Sat, 31 Aug 2024 22:32:13 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4Wx6Bk55cqz9sxL;
+ Sat, 31 Aug 2024 22:32:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1725136333;
+ s=mail20150812; t=1725136334;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=l++f/OBvNFarYjUVLXIMeDXzuY4pCvZXfQ+5Dg7YxTE=;
- b=xdY4KUtOf5vId17dXfvkMDOmAcS/sKWpjZ3xL9GJw2gCkHgxLF4VoKY1aJSvnRHH4XSIWN
- vDgxKEcTPTEhJRLmXTR1uOKFAtrioJJTR6eE//zIx2fjLDOtBikU+/HUIxwaa6S7AGPvx9
- x8+rh8gdeeHzxxXUPzf2XScSf0/z9G+9VMuvdQNWPyh5Doz7P4awRqgblgMdqQ3/pzZndK
- lFAASoPA64wr/Fk/Xf/FQT0Ibhz/ViRXnoEXyhLBdX4BHlkqGPZwR+iUv35cqs1fIIrLcn
- V18f1/pzQAs48M9+fGeFQlBbz84xMm4V93claOkB/h+/ykHV3ZEU6fGMq+BVwg==
+ bh=GodN1tIKB5QEgValOwYfuz6cjNz8LYtxFfTDORziQQk=;
+ b=yGvbMWy0MSkgf5kWPSIOunx3nrHB4DTT6o/6PAHfnp9figUwkXDWhX3lgEkLJlyH2ueWVl
+ 3FI5m1ItcGO0TYg+qc5Tpfv4g8Mf6iErIoofXhHNzmEt3MGI2vBGpePrMHcpPVsglADEhz
+ O6k2M2ny6lA52e0jTpsjdUXa9KGj4yJxc0l8wVD/vXjyecNKi/9hfs0RU9SAX21YJ8vgz0
+ tYyZV+dN7Ojh2G6deNQMjpGaBjRVuAUPJFIqVPzIMpP7NAA7Z5R3GO54PzNfeEsAMaCY38
+ O8MzA7uxqv6ZonqUAgywxVRR4uiNffTWUwU60y1snVJJ/UaklqRgVL8nHeTC+g==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1725136331;
+ s=mail20150812; t=1725136332;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=l++f/OBvNFarYjUVLXIMeDXzuY4pCvZXfQ+5Dg7YxTE=;
- b=WkjeS+qpYZKjLWqvh5PHJyrtda7VSQiNv05bplulPc6ez0H7TJgWLVjn8HGOA303N9UXgV
- MPH84d+x44iDfucxSB2GFBUeHnYtuED95bCbz4zWyfEbALh8tLunbswnzgz9jGMJVZtyls
- stHbtxh013ZNBTq8LPuQ5hPWIAWPq5eU4Kug9bcGES2lEMygjGjuPD9ssIFqxiQg7kfFMN
- crvqPy7wpA/b72dTlWT9Y/p0wVKS+PX/ykGdC2YQrfeo0ePG5Ipp9o34k9D10qQkkBCyIB
- LmBYuASWkq5yLfQ83MrCTxiMX23aHDYz0puFj6+oZculeY85MOgkRpAr9KzUJQ==
+ bh=GodN1tIKB5QEgValOwYfuz6cjNz8LYtxFfTDORziQQk=;
+ b=k9CRa70Z/LV18aRPWQ3Z0UAldVqu9zvpUlrWP4k/YO+Vnu4oNPcsVc7Xtv4la4lqexxkUc
+ EFcyQ04bPe00UDzff+Yi9B/OzJMEK2LnheACk6dTNcWRyjEI5q2cY2KkWGNHUyJhcKuHle
+ VMjPSE+WUIC7oZSjNG1kMzGQ7k/xN1y44Sv7On8oRFwRZRSkmRKLb8H8LrstRjTHnqx1PB
+ XWS6KVqEsPVaqAztMYgckZDSb/yYddEVeFLzbMJ6imQ2c1xTGyEc7UyVkSQPn/33NmB1UJ
+ Va2ZmlRBVvbi5q58iwo3dOuLFqu/REz8MFaVVVKWWocwVKSzS0jniwvRebCSDg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
@@ -67,17 +65,16 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>,
  William Zhang <william.zhang@broadcom.com>
-Subject: [PATCH 3/5] mtd: spi: renesas: Configure DRDRENR register
-Date: Sat, 31 Aug 2024 22:31:46 +0200
-Message-ID: <20240831203153.547743-3-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 4/5] mtd: spi: renesas: Configure RPC PHY timing registers
+Date: Sat, 31 Aug 2024 22:31:47 +0200
+Message-ID: <20240831203153.547743-4-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20240831203153.547743-1-marek.vasut+renesas@mailbox.org>
 References: <20240831203153.547743-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: b3def2f327face91a3d
-X-MBO-RS-META: 6yki3b439ze6h5b5hy696ipofdr4qzkx
-X-Rspamd-Queue-Id: 4Wx6Bj2lQwz9slX
+X-MBO-RS-ID: 3bb5f386fdc1b9bc746
+X-MBO-RS-META: gw419sqagfbhg6fsfdajab9fj1ndi1ow
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,11 +91,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make sure DRDRENR register is configured before performing external
-address space read. This register might have been configured by a
-prior stage bootloader and leaving it unconfigured would interfere
-with U-Boot operation. Since U-Boot RPC SPI driver does not support
-DDR data transfer mode yet, set this register unconditionally to 0.
+Make sure RPC PHY timing registers are configured before performing
+bus access. These registers might have been left unconfigured or may
+have been configured by a prior stage bootloader and leaving them
+unconfigured or misconfigured would interfere with U-Boot operation.
+
+Set PHYOFFSET1 DDRTMG field to 3 which enables DDR timing adjustment
+when SPIDRE or DRDRE = 0 and set PHYOFFSET2 OCTTMG field to 4 which
+makes the interface operate in Serial flash or HyperFlash mode.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -111,21 +111,39 @@ Cc: Tom Rini <trini@konsulko.com>
 Cc: William Zhang <william.zhang@broadcom.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/spi/renesas_rpc_spi.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/spi/renesas_rpc_spi.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
 diff --git a/drivers/spi/renesas_rpc_spi.c b/drivers/spi/renesas_rpc_spi.c
-index a2ac5525b90..50890981149 100644
+index 50890981149..9aab71db1de 100644
 --- a/drivers/spi/renesas_rpc_spi.c
 +++ b/drivers/spi/renesas_rpc_spi.c
-@@ -294,6 +294,7 @@ static int rpc_spi_mem_exec_op(struct spi_slave *spi,
+@@ -145,6 +145,12 @@
+ #define RPC_PHYCNT_WBUF		BIT(2)
+ #define RPC_PHYCNT_MEM(v)	(((v) & 0x3) << 0)
  
- 		writel(8 * op->dummy.nbytes - 1, priv->regs + RPC_DRDMCR);
- 		writel(0, priv->regs + RPC_DROPR);
-+		writel(0, priv->regs + RPC_DRDRENR);
- 		writel(smenr, priv->regs + RPC_DRENR);
++#define RPCIF_PHYOFFSET1	0x0080	/* R/W */
++#define RPCIF_PHYOFFSET1_DDRTMG(v) (((v) & 0x3) << 28)
++
++#define RPCIF_PHYOFFSET2	0x0084	/* R/W */
++#define RPCIF_PHYOFFSET2_OCTTMG(v) (((v) & 0x7) << 8)
++
+ #define RPC_PHYINT		0x0088	/* R/W */
+ #define RPC_PHYINT_RSTEN	BIT(18)
+ #define RPC_PHYINT_WPEN		BIT(17)
+@@ -227,6 +233,12 @@ static int rpc_spi_claim_bus(struct udevice *dev, bool manual)
+ 	struct udevice *bus = dev->parent;
+ 	struct rpc_spi_priv *priv = dev_get_priv(bus);
  
- 		memcpy_fromio(din, (void *)(priv->extr + offset), op->data.nbytes);
++	setbits_le32(priv->regs + RPCIF_PHYOFFSET1,
++		     RPCIF_PHYOFFSET1_DDRTMG(3));
++	clrsetbits_le32(priv->regs + RPCIF_PHYOFFSET2,
++			RPCIF_PHYOFFSET2_OCTTMG(7),
++			RPCIF_PHYOFFSET2_OCTTMG(4));
++
+ 	/* NOTE: The 0x260 are undocumented bits, but they must be set. */
+ 	writel(RPC_PHYCNT_CAL | rpc_spi_get_strobe_delay() | 0x260,
+ 	       priv->regs + RPC_PHYCNT);
 -- 
 2.45.2
 
