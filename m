@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B53EFC5474C
-	for <u-boot@archiver.kernel.org>; Sat, 31 Aug 2024 03:17:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FC51CA101C
+	for <u-boot@archiver.kernel.org>; Sat, 31 Aug 2024 11:16:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5DD888D3F;
-	Sat, 31 Aug 2024 05:17:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0x0f.com
+	by phobos.denx.de (Postfix) with ESMTP id 26D6C8863E;
+	Sat, 31 Aug 2024 13:16:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=0x0f.com header.i=@0x0f.com header.b="Es+5UCjb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UqHM1sqV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F4A088D40; Sat, 31 Aug 2024 05:17:33 +0200 (CEST)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id 2970E8888F; Sat, 31 Aug 2024 13:16:53 +0200 (CEST)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A67F188BBC
- for <u-boot@lists.denx.de>; Sat, 31 Aug 2024 05:17:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BCF8E884DB
+ for <u-boot@lists.denx.de>; Sat, 31 Aug 2024 13:16:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0x0f.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=daniel@0x0f.com
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-20219a0fe4dso22175325ad.2
- for <u-boot@lists.denx.de>; Fri, 30 Aug 2024 20:17:29 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-5343e75c642so3560064e87.2
+ for <u-boot@lists.denx.de>; Sat, 31 Aug 2024 04:16:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=0x0f.com; s=google; t=1725074248; x=1725679048; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=z64fZ6YeDLuMDZrUxCtq4n5IuPkHiE0NpFTBhbsS4Jw=;
- b=Es+5UCjbLg7QvL7iywqiccu82WaWcb5RCX0rVel50nFWxxFWjRsAnRYH3+bm1fCkqd
- qhgx5J5vig1e90DXiiAk9flUCe1T7jWlY0AVNZNAPGt9HKZ2nnG/6hXMVohIBH/bA74H
- wSQ+tnyP5RLfjYSWNKxxBW3O6bB/zg77imICI=
+ d=gmail.com; s=20230601; t=1725103010; x=1725707810; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nET3b3DVeArkXHXIiMc7G7+xPaGpw/mVXd2Kj0G1rDg=;
+ b=UqHM1sqVecbsRUWXSZi5FP5QgfOdECTKAW0zFE2Gsao49GrIiFBgbN2ASgYXp9tCHm
+ SC+hv/cycCd4TgdjYvRNYvI/94PlvmB5nXwPPG9pD8WzfXEhPT3RPTd7BKCaimv11bTv
+ UjLeSL3lhtoX9JbWeexj3/+f40wFCLJMVuRDsxnxClqY0UelAgzbHj5cUIGw6g9pDRTL
+ H08PGkrHcjuheHJ15QO8CzS/x2yR1zsXnQTIu/zBoAtvoPeKZ1Q1FzpKsWMhWAfz0i5z
+ 8aFP+WKj+aALqTdFUhKyeV1UmNhvaT154EWsVCkf4ae2igekfm8fg25cg0UEC5Pccle5
+ x7CA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725074248; x=1725679048;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=z64fZ6YeDLuMDZrUxCtq4n5IuPkHiE0NpFTBhbsS4Jw=;
- b=YoBCE7QHsPhpOMwJGUCIuFBEdsjJ9x70a9Egh+st8y6462NHGCPwsGsRbhDrUBUUpC
- xGDBRnpNeG+SmMPsWHzeOSUyNI+h+WBr0q7a2WqKrvvi8pGRwf+jUFSU5IX8wUCC9yvV
- YBrToTX+DeiTH0BDjdYmhhtJfotmPNuke7yLb2XuSTYNq/AkP4vXVmapltquM8FcJ9FC
- PMVh+qQCCDeMfTj/UeRlGx+AVUeKnRM9sWtzwM4cIyVSNtm4RtmhJmt2ycThz0wmf6fn
- RIjxwzBKuo6Lwj4PW9qxw1cCOsx2vlVfgfbsjPqpQxZt2mazkRebMyq9PrjLGewqOQz9
- sktw==
-X-Gm-Message-State: AOJu0Yx1/fkS/8nroSfRcMNELV+17c1/LIJO48PLNwuNXQ/ze/+a5Sxs
- i9aIaXRkZIkOC7wEFMeEXPBZ2e20dnx5L9CJB9U4SALXypIFhFqM1rqJb7Jc1KgZrzmW3C7v3qN
- IpC4=
-X-Google-Smtp-Source: AGHT+IF7VkH/Y77Tkjo9+uKOwH0UjRH/ZEYncZ+EGxZoia6FMLDO1uU8uLlocg1A7AHwLgEO1J0LAA==
-X-Received: by 2002:a17:903:2285:b0:205:4e4a:72c6 with SMTP id
- d9443c01a7336-2054e4a79bdmr2571365ad.5.1725074247723; 
- Fri, 30 Aug 2024 20:17:27 -0700 (PDT)
-Received: from shiro.work.home.arpa
- (p1980092-ipxg00g01sizuokaden.shizuoka.ocn.ne.jp. [153.201.32.92])
- by smtp.googlemail.com with ESMTPSA id
- d9443c01a7336-2052e67fbf0sm16168845ad.137.2024.08.30.20.17.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Aug 2024 20:17:27 -0700 (PDT)
-From: Daniel Palmer <daniel@0x0f.com>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com,
-	sjg@chromium.org,
-	Daniel Palmer <daniel@0x0f.com>
-Subject: [PATCH] spl: spl_load: fix comparison between negative error code and
- unsigned size
-Date: Sat, 31 Aug 2024 12:17:06 +0900
-Message-ID: <20240831031706.2654697-1-daniel@0x0f.com>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20230601; t=1725103010; x=1725707810;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nET3b3DVeArkXHXIiMc7G7+xPaGpw/mVXd2Kj0G1rDg=;
+ b=Y+5qxaYmYagEkhUudigsdLXwfsX8fuC/7irR6sXUQnbnqg0Q7XpeOsuw9G+atdgkdI
+ eFvqdUovKd64rCuqP+FKlKAq7gTAtm0JRCGGwbjuFlASF8XKg/imfvKn3q2FkcZqqo/G
+ ugWJbbBhnuyakQrxHKmm+a4DnPgCliqlMuJRcfl06ay0jy2e/38Uv7lJqzSW+0mzlY7a
+ FLLngOGgf7ECRLQ/axa6Z9ZY/vevcBLTow3KNvaZesche4x/40zTsVF7D7Zg1qLrNemR
+ aI/FwyXdf7kygkXQiD7xC7ByBfcZy/MUtlMPorC2dcs17hXvWFBpNHvpCG6qH3l+twC8
+ zH0w==
+X-Gm-Message-State: AOJu0YzwmDVtnQm6z/SSAd8Hw/ljpYq/mExaDcPN3z1TzUG9rabeZcSR
+ QpWLCt+/vOgVMOqK2K5L7pugWGDTm4Zb+fXm+AAeThFaHJqn8hu8X6MeTTnI7LtH6/J5jswvDnm
+ zfRvWo6+wIthdjnJLQioh2LV319Y=
+X-Google-Smtp-Source: AGHT+IHI/AoI+XEW4Gbn3cPEwzHDVU81tstT1XjQpTEsc3C+IIq3I1P9imqX0VJ3Yva33xQg0e3ZDvHtQ49qfTh23Z8=
+X-Received: by 2002:a05:6512:3191:b0:52c:e4cf:4f31 with SMTP id
+ 2adb3069b0e04-53546bc01a4mr3646955e87.49.1725103009481; Sat, 31 Aug 2024
+ 04:16:49 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240827200400.217058-1-marex@denx.de>
+In-Reply-To: <20240827200400.217058-1-marex@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sat, 31 Aug 2024 08:16:38 -0300
+Message-ID: <CAOMZO5CXfVAXnyZ9s5dZdHbK+QLJZvmP5UeUaz=Bkv3mtbxc4g@mail.gmail.com>
+Subject: Re: [PATCH] ARM: imx: Enable MMU and dcache very early on i.MX8M
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,38 +89,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-read could be a negative error value but size in spl_image is unsigned
-so when they are compared read is used as if it's a unsigned value
-and if it's negative it'll most likely be bigger than size and the
-result will be true and _spl_load() will return 0 to the caller.
+Hi Marek,
 
-This results in the caller to _spl_load() not seeing that an error happened
-as it should and continuing as if the load was completed when it might
-not have been.
+On Tue, Aug 27, 2024 at 5:04=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
 
-Check if read is negative and return it's value if it is before comparing
-against size in spl_image.
+> +/*
+> + * Place early TLB into the .data section so that it will not
+> + * get cleared, use 16 kiB alignment.
+> + */
+> +#define EARLY_TLB_SIZE SZ_64K
+> +u8 early_tlb[EARLY_TLB_SIZE] __section(".data") __aligned(0x4000);
 
-Signed-off-by: Daniel Palmer <daniel@0x0f.com>
----
- include/spl_load.h | 4 ++++
- 1 file changed, 4 insertions(+)
+This causes a CI failure:
 
-diff --git a/include/spl_load.h b/include/spl_load.h
-index 1c2b296c0a2c..7de834f402b8 100644
---- a/include/spl_load.h
-+++ b/include/spl_load.h
-@@ -83,6 +83,10 @@ static inline int _spl_load(struct spl_image_info *spl_image,
- 
- 	read = info->read(info, offset + image_offset, size,
- 			  map_sysmem(spl_image->load_addr - overhead, size));
-+
-+	if (read < 0)
-+		return read;
-+
- 	return read < spl_image->size ? -EIO : 0;
- }
- 
--- 
-2.43.0
+https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/895190/raw
 
+   aarch64:  +   imx8mp_beacon
++arch/arm/mach-imx/imx8m/soc.c:602:24: error: 'SZ_64K' undeclared here
+(not in a function)
++  602 | #define EARLY_TLB_SIZE SZ_64K
++      |                        ^~~~~~
++arch/arm/mach-imx/imx8m/soc.c:603:14: note: in expansion of macro
+'EARLY_TLB_SIZE'
++  603 | u8 early_tlb[EARLY_TLB_SIZE] __section(".data") __aligned(0x4000);
++      |              ^~~~~~~~~~~~~~
++make[3]: *** [scripts/Makefile.build:257:
+arch/arm/mach-imx/imx8m/soc.o] Error 1
++make[2]: *** [scripts/Makefile.build:397: arch/arm/mach-imx/imx8m] Error 2
++make[1]: *** [Makefile:1897: arch/arm/mach-imx] Error 2
++make: *** [Makefile:177: sub-make] Error 2
+
+Please take a look.
