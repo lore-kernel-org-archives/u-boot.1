@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B64F5CA101C
-	for <u-boot@archiver.kernel.org>; Sat, 31 Aug 2024 12:06:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 033AECD13D2
+	for <u-boot@archiver.kernel.org>; Sat, 31 Aug 2024 13:36:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC75288440;
-	Sat, 31 Aug 2024 14:06:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1019D88C5C;
+	Sat, 31 Aug 2024 15:36:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=web.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="K3tZAQ9o";
+	dkim=pass (2048-bit key; secure) header.d=web.de header.i=smoch@web.de header.b="ndSYaeot";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D1E48855C; Sat, 31 Aug 2024 14:06:48 +0200 (CEST)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 737E388D60; Sat, 31 Aug 2024 15:36:53 +0200 (CEST)
+Received: from mout.web.de (mout.web.de [212.227.17.11])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8267187DC7
- for <u-boot@lists.denx.de>; Sat, 31 Aug 2024 14:06:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5002F88A43
+ for <u-boot@lists.denx.de>; Sat, 31 Aug 2024 15:36:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=al.kochet@gmail.com
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2f401c20b56so31839151fa.0
- for <u-boot@lists.denx.de>; Sat, 31 Aug 2024 05:06:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725106005; x=1725710805; darn=lists.denx.de;
- h=to:date:message-id:subject:mime-version:content-transfer-encoding
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=i62QYSa1Pwv1B7wp5FHDdBDIxBB1n9yEpuRyEq/ctxQ=;
- b=K3tZAQ9ogjBoYrafY9vqwVlLO1tyxHkzcJsJUKhkggbjpCm5usY4kmjnABd4KGqXUI
- 3Q05phUpdqg/Q1xE4JJtdYcM4Ql4YWBpHdC4eciN5X164b+lGzMwRH+vyFkn+77oif2a
- HLuN+sL0qb4pFSal3w4MSZ8c7IUCF4MyXb/zh1LSpVFzvHOTVUALQgJ60olFOkeAVO5u
- zn8dQdoeunHp/vUFViy/Mnf0yjK9WuHJHRrRGVSbO9uBqNw7IC6XirnzlEPlnu6GyGCA
- 21+L8Csf3DJOiZJk5GnxlNAYhaRXChTXfAAqPqJ8whf+kY2CFjkV5xmqQFWPh6gRLmgq
- qyhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725106005; x=1725710805;
- h=to:date:message-id:subject:mime-version:content-transfer-encoding
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=i62QYSa1Pwv1B7wp5FHDdBDIxBB1n9yEpuRyEq/ctxQ=;
- b=UFcerDj0LqXVZDUfXwJ6w6gxqESih8l1ojdN9G4rfM1XPfG4SrWGrlOsJZCvzUsrlv
- noxbg1+jt+YMyi8MeQlrCQGWfMSzJrEpOU2FnqRNR3hEYOzJUt1roOOKLMThowTm3q5l
- wG592uv2T7x1IH3z6UNbqLR9hpOG1/gD9fnls/uYn0cVbcBb4TQxi1xM3ASj0CAR0CfI
- IfbhZimLCgMU9hSE0wT7cKv6pvqt0bmsrUQqjcAnPUzqkZoGOcZ/0jJd7zqW6gIR+kJu
- Laeb1daTtGsfGvdL1Lm+m6SxIVMA0Mb5f1dlWNkkfE0eGFYhG1fzMUjTOELDVzw+QJeX
- q1NQ==
-X-Gm-Message-State: AOJu0YxnO06tIfHHg/IXLmI5gEbRgOLqUgb+sHZwIBgd+G5TlvB3m0XH
- GE+l9XAPHahNQ1twk6cCEMYYFwX7qm7DjCSnYGlXjs/LsSqIfnG2wBTdGg==
-X-Google-Smtp-Source: AGHT+IH6zfj8rrIlX6seyb318DEtmi/7E4WtQzDoBqzZa1XVFxO1SPvBqhnDlDHRqgl9krXiRwJs1A==
-X-Received: by 2002:a05:6512:239c:b0:52e:8161:4ce6 with SMTP id
- 2adb3069b0e04-5354634774fmr1834127e87.25.1725106004620; 
- Sat, 31 Aug 2024 05:06:44 -0700 (PDT)
-Received: from smtpclient.apple (95-24-48-192.broadband.corbina.ru.
- [95.24.48.192]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5354084cb51sm944604e87.254.2024.08.31.05.06.43
- for <u-boot@lists.denx.de>
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Sat, 31 Aug 2024 05:06:44 -0700 (PDT)
-From: Alexander Kochetkov <al.kochet@gmail.com>
-Content-Type: text/plain;
-	charset=utf-8
+ dmarc=pass (p=quarantine dis=none) header.from=web.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=smoch@web.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
+ s=s29768273; t=1725111399; x=1725716199; i=smoch@web.de;
+ bh=VmBeoLI7H2LZ1xF5TQf37cpm1rIMc7Uuc2Im7S/7jqs=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=ndSYaeotmJm1xuBFK7R+9NU4ChWR3G1k1jQA/2LoRsE0XsFexp2xUcZ8nvaivZrj
+ wT3ZJfLiCoO2SH3GEniEPTJcnQTU3JL58alwuijpBt3VDPhwdGIhXMBjDBZ//p4ZI
+ SilM6ZhA6OP6JWOosI0e5dwkaVJYqCWkCoJppm++5l/lwhx6lwAwykHMF4nzgdiY4
+ CG0NYbB1A2VPaC44ym0J2XimRtEUOFiIAfo5MFRXm0JWjYPdWzJVhWas+JMhIiuYw
+ axV8GZzw2PixanBx55NMbXUYSfbpcDxi2h2vnGpRkPk5ZvS2daslg3KBhngnvLZ1R
+ socZ9iNgpMHxLQLWpA==
+X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
+Received: from [192.168.1.40] ([89.14.56.113]) by smtp.web.de (mrweb106
+ [213.165.67.124]) with ESMTPSA (Nemesis) id 1MfKtN-1s8He93wFf-00jJn3; Sat, 31
+ Aug 2024 15:36:39 +0200
+Message-ID: <420b6d01-d081-4a6a-a9b7-219d8806099a@web.de>
+Date: Sat, 31 Aug 2024 15:36:37 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 0/6] FUSB302 USB-C controller support
+To: Sebastian Reichel <sebastian.reichel@collabora.com>,
+ Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
+ Jonas Karlman <jonas@kwiboo.se>
+Cc: Eugen Hristev <eugen.hristev@collabora.com>,
+ Tim Harvey <tharvey@gateworks.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>
+References: <20240830182330.49528-1-sebastian.reichel@collabora.com>
+Content-Language: en-US
+From: Soeren Moch <smoch@web.de>
+In-Reply-To: <20240830182330.49528-1-sebastian.reichel@collabora.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3776.700.51\))
-Subject: What is the proper way to sign fit images using binman/mkimage for
- verified boot
-Message-Id: <339DE2F4-312A-4817-85E8-A2F88125196D@gmail.com>
-Date: Sat, 31 Aug 2024 15:06:33 +0300
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-X-Mailer: Apple Mail (2.3776.700.51)
+X-Provags-ID: V03:K1:g7RFQkkcLxQpO+Jlt4PyBkksJPKE5wJvYCUJX8otqKlsxovJouC
+ UogX21vUaM8fM6fjJb7K7I4B3nmgkpIKBWCwgKocjPuLJzs3lEnoqmbQJP3oM5Jk+Ygm4XH
+ bR1fAmfSjhip8YWIpVC8xItg9OfB/5OLmJNSxG/Bu+sThKkAZJGUY1ftF68Mymjc1rYKhVW
+ 9qqkJSS+cEgCnxTtyqWsg==
+UI-OutboundReport: notjunk:1;M01:P0:azfOs1v/VmU=;xg4DilXy0oxBTzI99FAWjNpGWUS
+ yzOp8yuaFzpW5VSltykElkg4JHVklITel2cE+zOm7Fvv0qrweHJwfb4TxKeO/b/hS3UzDRdxD
+ dXks4vYprkKvWaeI5ijbXG6soOyfjtxPMu0o91kCJAzxTspqve7NZrPJYBfVdxosctnCY3bYU
+ NZXOdaH2QZxjrP1hSrkc2dDiSmvlPLpe9HVOAXxFuLtcZTHTwFkuHf/GOGhCoYNREv/jE+ayV
+ JJjOFzJDRqSBNxi/krAJ75mKxlkkaiYfQznxb65nEMKykiHqrcKJuVrAq16+3Wl+8n8R4VVNF
+ vEmzlUYZJ4HB0l6aH0SbxsWE4f9y4vaMUkd057szKfx64S3nLGbM63a4i0Tus4CzltEGebDcU
+ YCYVjKpBC2HvllzvO9hoprSg+86ikQOiH1h65ZCmN0HnL9g9bPXsuEUJwB8TqT2dOXHgL6rbr
+ rcQZGowpszMvxYMJvW6+GJy9aF8yjPef4SkY8uhgK3uLfe8EbriWrn5p+wuOJVwYQbTRFKKtO
+ 9QqK7If20gZbdpvpgAnGLCYcXzeYalXtknPp/avp3LnLQzeTIAAcEWaJbaX3g4dxa3sjeB5tq
+ CpfM3mZhhjma0wqcQfFcU0yLxkQguEN6s4VB/3hYxIkkkvJf3Sh71OvjrH7AOtTtzhmLcTUqI
+ 0CNIw4hNRLjxGRjYJDFeYX6Q+JjInr+lqSgXbwsOAT8H01HbNRXOYByS/AVT+rCR5Xe0xsV/2
+ 5yXze2S7XpUXcX+6HBQ4CiiDdzC+jGQB0tfG45b+GezUDjRZQF3mVqNKawP4VWVNOsKVr9uSc
+ gwSJMwevc0orCjRULCRIpPKQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,92 +92,209 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello!
+Hi Sebastian,
 
-I used to sign images for verified boot for u-boot v2020.04 for =
-allwinner A64-based board. It was simple.
-I=E2=80=99ve just added signature nodes for atf, u-boot, dtb, =
-configurations to the generated by mksunxi_fit_atf.sh
-its file and mkimage signed the fit image.
+On 30.08.24 20:22, Sebastian Reichel wrote:
+> Hi,
+>
+> On ROCK 5B power is usually supplied via it's USB-C port. This port has =
+the
+> data lines connected to RK3588, VBUS connected to the input regulator an=
+d
+> CC pins connected to FUSB302. FUSB302 is a USB-C controller, which can b=
+e
+> accessed via I2C from RK3588. The USB-C controller is needed to figure o=
+ut
+> the USB-C cable orientation, but also to do USB PD communication. Thus i=
+t
+> would be great to enable support for it in the operating system.
+>
+> But the USB-PD specification requires, that a device reacts to USB-PD me=
+ssages
+> send by the power-supply within around 5 seconds. If that does not happe=
+n the
+> power-supply assumes, that the device does not support USB-PD. If a devi=
+ce
+> later starts sending USB-PD messages it is considered an error, which is=
+ solved
+> by doing a hard reset. A USB-PD hard reset means, that all supply voltag=
+es are
+> removed for a short period of time. For boards, which are solely powered
+> through their USB-C port, like the Radxa Rock 5B, this results in an mac=
+hine
+> reset. This is currently worked around by not describing the FUSB302 in =
+the
+> kernel DT, so nothing will ever speak USB-PD on the Rock 5B. This means
+>
+> 1. the USB-C port cannot be used at all
+> 2. the board will be running via fallback supply, which provides limited
+>     power capabilities
+>
+> In order to avoid the hard reset, this adds FUSB302 support to U-Boot, s=
+o
+> that we react to the power-supply's queries in time. The code, which is
+> originally from the Linux kernel, consists of two parts:
+>
+> 1. the tcpm state machine, which implements the Type C port manager stat=
+e
+>     machine as described in the USB PD specification
+> 2. the fusb302 driver, which knows about specific registers
+>
+> Especially the first part has been heavily modified compared to the
+> kernel, which makes use of multiple delayed works and threads. For this
+> I used a priorly ported version from Rockchip, removed their hacks and
+> any states not necessary in U-Boot (e.g. audio accessory support).
+>
+> This version has been tested on Radxa Rock 5B using the open source TF-A
+> (patches recently got merged into master branch) using the following pow=
+er
+> supplies:
+>
+>   * non PD capable (reports 5V 0A)
+>   * RavPower 90W (ok)
+>   * UGREEN 100W (ok)
+>   * Anker 45W (ok)
+>   * RavPower PB (hard resets in U-Boot, but succeeds at some point,
+>     I still need to investigate)
+>
+> Changes since PATCHv3:
+>   * Rebase to latest master (57949a99b7bd)
+>   * Rework autoprobing; tcpm_post_bind tries to check if a probe is need=
+ed
+>     based on DT properties and then sets the DM_FLAG_PROBE_AFTER_BIND fl=
+ag.
+>     If this accidently increases boot time on some boards they are proba=
+bly
+>     missing a 'self-powered;' flag in their USB-C connector node.
+>   * Rock 5B ft_board_setup(): check for CONFIG_TYPEC_FUSB302 instead of
+>     CONFIG_MISC_INIT_R to reflect the above change
+>   * Drop adding 'CONFIG_MISC_INIT_R' to rock5b-rk3588_defconfig because =
+of
+>     the reworked autoprobing
+>   * Log an error message if tcpm_send_queued_message() exits early
+>   * Add R-b for the rockchip specific changes from Kever Yang
+>   * Increase the timeout in tcpm_pd_transmit(), which seems to be the is=
+sue
+>     S=C3=B6ren Moch ran into. I could not really reproduce it. Please te=
+st if this
+>     helps with your supply (and share the logs if it does not help). I n=
+oticed
+>     this version has issues with an old PD capable powerbank I own. I'm =
+still
+>     looking into that but wanted to share a new version so that the othe=
+r
+>     changes can get reviewed.
+Unfortunately I see the same problem as in v3: boot loop when powering
+the board from my notebook (ThinkPad X1 Nano running Ubuntu 24.04.1 LTS),
+see boot log below.
 
-Now I trying to do the same for u-boot v2024.07. I work with Radxa Model =
-3a. It=E2=80=99s fit image is generated
-using binman. It=E2=80=99s bimnan configuration is located in the file =
-arch/arm/dts/rockchip-u-boot.dtsi.
+Patch version v2 is still running totally fine in the exact same setup
+(patch series on top of u-boot 2024.07, same board, same cabling).
 
-I have 3 ideas about how to get the job done:
-- improve binman, to support signing fit images during fit image =
-generation. Sort of implementing
-  image-signature etype
-- fix mkimage to allow signing generated by binman images. Now I getting =
-error, then I try to do that
-- may be I do the job in a wrong way? Could you please direct me in a =
-correct way?
+Unfortunately I currently have no access to the miniPC (Zotac ZBOX CI620)
+I used as additional test platform before.
 
-First I think, that I have to add signature entries to binman =
-configuration. So, I added following:
-
-&binman {
-    simple-bin {
-        =E2=80=A6
-        fit: fit {
-            =E2=80=A6
-            images {
-                =E2=80=A6
-                @atf-SEQ {
-                     =E2=80=A6
-                     signature {
-                         algo =3D "sha256,rsa2048=C2=BB;
-                         key-name-hint =3D "uboot-spl=C2=BB;
-                         sign-images =3D "atf-SEQ=C2=BB;
-                    };
-                };
-            };
-        };
-    };
-};
-
-This signature entry was copied to resulted fit image without =
-processing. No signature was generated.
-SEQ was not replaced to 1:
-
-atf-1 {
-    ...
-    hash {
-        value =3D <0xb5946ac6 0x3df8fb35 0x69407a75 0xcf2f6aa3 =
-0x96551ba0 0x11e1a84b 0xec654dc9 0x982ba063>;
-        algo =3D "sha256=C2=BB;
-    };
-
-    signature {
-        algo =3D "sha256,rsa2048=C2=BB;
-        key-name-hint =3D "uboot-spl=C2=BB;
-        sign-images =3D "atf-SEQ=C2=BB;
-    };
-};
-
-So, obviously binman is not support this way of signing images. If this =
-way looks reasonable, I can try to implement
-it and send patches to u-boot. I played with binman etypes, tryied to =
-add custom 'image-signature' etype. Looks like I
-can complete such work.
-
-Second solution looks for me as follows. We need run mkimage to sign =
-generated by binman fit image.
-Some sort of running mkimage like this:
-
-./tools/mkimage -k /media/yocto/build-yocto/=E2=80=A6. -F ./u-boot.itb
-
-Now I getting error then I run mkimage:
-Can't add verification data for node 'atf-1' (<unknown error>)
-
-If that solution is reasonable, I can fix <unknown error> and send =
-patches.
-
-Third thought, may be there is another proper way to sign fit image for =
-verified boot?
-Could you please provide an idea how to do that.
+The boot log is unfortunately not very helpful. If you provide an addition=
+al
+patch enabling more debug output, I'm happy to retest with that (v2
+and/or v4).
 
 Regards,
-Alexander.
+Soeren
+
+
+
+Boot Log:
+
+DDR 9fffbe1e78 cym 24/02/04-10:09:20,fwver: v1.16
+LPDDR4X, 2112MHz
+channel[0] BW=3D16 Col=3D10 Bk=3D8 CS0 Row=3D17 CS=3D1 Die BW=3D16 Size=3D=
+2048MB
+channel[1] BW=3D16 Col=3D10 Bk=3D8 CS0 Row=3D17 CS=3D1 Die BW=3D16 Size=3D=
+2048MB
+channel[2] BW=3D16 Col=3D10 Bk=3D8 CS0 Row=3D17 CS=3D1 Die BW=3D16 Size=3D=
+2048MB
+channel[3] BW=3D16 Col=3D10 Bk=3D8 CS0 Row=3D17 CS=3D1 Die BW=3D16 Size=3D=
+2048MB
+Manufacturer ID:0xff
+CH0 RX Vref:26.7%, TX Vref:21.8%,0.0%
+CH1 RX Vref:27.5%, TX Vref:19.8%,0.0%
+CH2 RX Vref:28.5%, TX Vref:20.8%,0.0%
+CH3 RX Vref:29.3%, TX Vref:20.8%,0.0%
+change to F1: 528MHz
+change to F2: 1068MHz
+change to F3: 1560MHz
+change to F0: 2112MHz
+out
+
+U-Boot SPL 2024.07-00006-g65a73892d9 (Aug 31 2024 - 13:45:46 +0200)
+Trying to boot from MMC2
+## Checking hash(es) for config config-1 ... OK
+## Checking hash(es) for Image atf-1 ... sha256+ OK
+## Checking hash(es) for Image u-boot ... sha256+ OK
+## Checking hash(es) for Image fdt-1 ... sha256+ OK
+## Checking hash(es) for Image atf-2 ... sha256+ OK
+## Checking hash(es) for Image atf-3 ... sha256+ OK
+INFO:=C2=A0=C2=A0=C2=A0 Preloader serial: 2
+NOTICE:=C2=A0 BL31: v2.3():v2.3-682-g4ca8a8422:derrick.huang, fwver: v1.45
+NOTICE:=C2=A0 BL31: Built : 10:11:21, Dec 27 2023
+INFO:=C2=A0=C2=A0=C2=A0 spec: 0x1
+INFO:=C2=A0=C2=A0=C2=A0 code: 0x88
+INFO:=C2=A0=C2=A0=C2=A0 ext 32k is not valid
+INFO:=C2=A0=C2=A0=C2=A0 ddr: stride-en 4CH
+INFO:=C2=A0=C2=A0=C2=A0 GICv3 without legacy support detected.
+INFO:=C2=A0=C2=A0=C2=A0 ARM GICv3 driver initialized in EL3
+INFO:=C2=A0=C2=A0=C2=A0 valid_cpu_msk=3D0xff bcore0_rst =3D 0x0, bcore1_rs=
+t =3D 0x0
+INFO:=C2=A0=C2=A0=C2=A0 l3 cache partition cfg-0
+INFO:=C2=A0=C2=A0=C2=A0 system boots from cpu-hwid-0
+INFO:=C2=A0=C2=A0=C2=A0 disable memory repair
+INFO:=C2=A0=C2=A0=C2=A0 idle_st=3D0x21fff, pd_st=3D0x11fff9, repair_st=3D0=
+xfff70001
+INFO:=C2=A0=C2=A0=C2=A0 dfs DDR fsp_params[0].freq_mhz=3D 2112MHz
+INFO:=C2=A0=C2=A0=C2=A0 dfs DDR fsp_params[1].freq_mhz=3D 528MHz
+INFO:=C2=A0=C2=A0=C2=A0 dfs DDR fsp_params[2].freq_mhz=3D 1068MHz
+INFO:=C2=A0=C2=A0=C2=A0 dfs DDR fsp_params[3].freq_mhz=3D 1560MHz
+INFO:=C2=A0=C2=A0=C2=A0 BL31: Initialising Exception Handling Framework
+INFO:=C2=A0=C2=A0=C2=A0 BL31: Initializing runtime services
+WARNING: No OPTEE provided by BL2 boot loader, Booting device without
+OPTEE initialization. SMC`s destined for OPTEE will return SMC_UNK
+ERROR:=C2=A0=C2=A0 Error initializing runtime service opteed_fast
+INFO:=C2=A0=C2=A0=C2=A0 BL31: Preparing for EL3 exit to normal world
+INFO:=C2=A0=C2=A0=C2=A0 Entry point address =3D 0xa00000
+INFO:=C2=A0=C2=A0=C2=A0 SPSR =3D 0x3c9
+
+
+U-Boot 2024.07-00006-g65a73892d9 (Aug 31 2024 - 13:45:46 +0200)
+
+Model: Radxa ROCK 5 Model B
+DRAM:=C2=A0 8 GiB
+DDR 9fffbe1e78 cym 24/02/04-10:09:20,fwver: v1.16
+LPDDR4X, 2112MHz
+channel[0] BW=3D16 Col=3D10 Bk=3D8 CS0 Row=3D17 CS=3D1 Die BW=3D16 Size=3D=
+2048MB
+channel[1] BW=3D16 Col=3D10 Bk=3D8 CS0 Row=3D17 CS=3D1 Die BW=3D16 Size=3D=
+2048MB
+channel[2] BW=3D16 Col=3D10 Bk=3D8 CS0 Row=3D17 CS=3D1 Die BW=3D16 Size=3D=
+2048MB
+channel[3] BW=3D16 Col=3D10 Bk=3D8 CS0 Row=3D17 CS=3D1 Die BW=3D16 Size=3D=
+2048MB
+Manufacturer ID:0xff
+CH0 RX Vref:26.7%, TX Vref:21.8%,0.0%
+CH1 RX Vref:27.5%, TX Vref:19.8%,0.0%
+CH2 RX Vref:28.5%, TX Vref:20.8%,0.0%
+CH3 RX Vref:30.1%, TX Vref:19.8%,0.0%
+change to F1: 528MHz
+change to F2: 1068MHz
+change to F3: 1560MHz
+change to F0: 2112MHz
+out
+
+U-Boot SPL 2024.07-00006-g65a73892d9 (Aug 31 2024 - 13:45:46 +0200)
+Trying to boot from MMC2
+...
+
+
+
+
 
