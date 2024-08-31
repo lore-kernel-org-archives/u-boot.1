@@ -4,98 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D953CCD13DE
-	for <u-boot@archiver.kernel.org>; Sat, 31 Aug 2024 16:48:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54D6ACD13DD
+	for <u-boot@archiver.kernel.org>; Sat, 31 Aug 2024 16:49:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00D0A88AAC;
-	Sat, 31 Aug 2024 18:48:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8385588D83;
+	Sat, 31 Aug 2024 18:49:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="X3tyiUD5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="S6PGrbuX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2C1788D7E; Sat, 31 Aug 2024 18:48:56 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id AED0588835; Sat, 31 Aug 2024 18:48:57 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B068C87DC7
- for <u-boot@lists.denx.de>; Sat, 31 Aug 2024 18:48:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A781388AAC
+ for <u-boot@lists.denx.de>; Sat, 31 Aug 2024 18:48:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-42bb8c6e250so20294435e9.1
- for <u-boot@lists.denx.de>; Sat, 31 Aug 2024 09:48:54 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-42bb9d719d4so17605495e9.3
+ for <u-boot@lists.denx.de>; Sat, 31 Aug 2024 09:48:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725122934; x=1725727734; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=7nLmjWeLEaBF+e+cuznp9+YYS4lcM/XEDjUSdmuqLEg=;
- b=X3tyiUD5N0HysnmbobdMrKpVIFoWRq7SoWLylCPc7us1GeY4v4tT5gsGSnB0Nq988i
- DJF6w0z3n9sU47VUUZSS2oiCgB8lWqNH3eivcGR41tlpU3QUsCLBgCKwIRCvesV4GfLz
- cdp8WWiaso5WwOffpMzSZIAbKcYI9aoF+MFZzX1h5ejWjEowwkzvdSzBMa//Z+VvhzZT
- jLb50kQv6D6RpwaY6ydj1Gk33SPaXOxjjX+/UglcVJ2K3macU2bXABZ3aEb8t8IcZM2Z
- yabIgKmasIKJxGgzw1aphdH7ysgwxSHhffrPWOv+VpAmJZv1K3xZkXH2di70Li6O/2n9
- VC0g==
+ d=linaro.org; s=google; t=1725122935; x=1725727735; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=i24W4kkDll46qQStjY9GdsUEz7ArP6BCj1Z9xp5I/wA=;
+ b=S6PGrbuXO29TMknP6JNX9VzAT8gLVHLdRhkE4pbPUaNZoGDZpT/6hTyE6wIHbN8VkA
+ gsAAX9weekr/fHv0nrQCKuo7D7yKd813dLlPc3bgrKBzx1u2te0b0VWq8npMPHOAm3Ps
+ 44LQdWUNiYoW5zb9pmqGrGtpTHx8E9MVFG7KSVuZ7BERS2A4C2ZVmIVxze7Dk51IxQnn
+ ZaLs3I63i6EQ3RC4ZWtRfXK2VR36TA5KqU+e372A5IdHFUgGqK1Hgvgpnp4VcCqIjJpe
+ yM/gsV4iBLWePSLKZIiEp3HYpFhXqmr03KWGJEUhA6DQJHKhVQrb22GH61QyZruslaSX
+ WsPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725122934; x=1725727734;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7nLmjWeLEaBF+e+cuznp9+YYS4lcM/XEDjUSdmuqLEg=;
- b=g67mrW5DKp8Hx5yI8X5m+AcBig/RmyRVNaGmFeak8/WeN0RUELqh6EsIJriyR2F/qV
- vXYNri4ql6EvSCUxNJxB+gZnpPPGyRjFQYWVVtSdm3g1jrByOTkrCDOpzHPrunFHCg0i
- ySW03vKzmaJvmWk3yPuX0HCVI1CErQG/opGuy/AT2qHOvl8A3y69Khee5hlv7SaV2AqG
- 93+a9vaHpRvkzb8HhseKreNN4AvxL8z/QLAWXFZoyf7p5NMGLlJReOiNMGFdIGgxjmSR
- 3h7CS63Ki5PLBHG+oSUviMfuZ64IPTF3V6IqJqGSN44A400N1cDpw3FS961JQH3LbQbh
- Kf3w==
+ d=1e100.net; s=20230601; t=1725122935; x=1725727735;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=i24W4kkDll46qQStjY9GdsUEz7ArP6BCj1Z9xp5I/wA=;
+ b=sE2SxH+rNO8dwpAFIky34V5eDNUkgdw2fZ4g9icmuzCnihOXo05UsGLM6nFFK4uaWn
+ IgnN7cCMuLQRywLFbnKvIUW7pReFtPVdbA6uCUuQpQSPGFkiyjq3U07jgbzFymY9Z8oC
+ vRAiCU1XhuU3eqjaHkbO5q0T0x7HJH04xjHHhS2Dr5asilhWv4/NGVFsVFTS1UV3/xSK
+ +yJe4+y0ZJtBrdqBBh49WBShFNvwZe5RGh1L/CFk+RPq3UoAbh7GE53lJisv9ibIz59l
+ SJURK25VuFMR4ACdzrcEl3r8MfjfDEibjbTnFp7o7ekxU6cT9QOUojyYrQNKDKwzQ5mX
+ xTPA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWoKmLb1eoj4qpXRfHv6MLfdjAE0LXnCHLF6RpvCrEJvI3bkG65hl5rZ6/+wsa4QwN5FKkatHc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx/Wnqp+sQ6HhTGCruh931Fm54Ml1/tAwFsLN43A1z62wKO/Yqe
- PIh0AM2IqOefPuszHdumBMPsxDVYL9vOf6WZmSqQPo32dnTM1CGIRhzno32JmiP3ANhNCWJoNkW
- blRw=
-X-Google-Smtp-Source: AGHT+IECGPPEtw18GOQ/OF6kSwz8IX/npSVDUdz+Um6Kxy0G5MvqAzu9sYuCG48W3s6VEJPEORtUqw==
-X-Received: by 2002:a05:600c:3145:b0:426:6667:bbbe with SMTP id
- 5b1f17b1804b1-42bb0257a2fmr74067855e9.9.1725122933821; 
- Sat, 31 Aug 2024 09:48:53 -0700 (PDT)
+ AJvYcCUyKhRpqItqmppdWd6+Vox6CFLf2qwWp6CV02uCika4hwufG9jZlYm2czzWIKUS3L9uCMf6S7w=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyxf7I8jguwO/lJ5X+FLETPpk7zcZTiYgQaysGuEuqPCNrdIyPF
+ YoMCD8gJ9MgeAS739I1pS18utM9blGxOf102bufcK73gKx0GZyEiyQ5SwGpSFRU=
+X-Google-Smtp-Source: AGHT+IHq2mXoaL8U0XxKVjrdXb3kxSNqA/zUPyz7lxKfUU7LRqAICVPOuq94kdCxbDYCvFMGvjFzQA==
+X-Received: by 2002:a05:600c:3c88:b0:42b:ac94:692c with SMTP id
+ 5b1f17b1804b1-42bb0205b6amr78691475e9.0.1725122935164; 
+ Sat, 31 Aug 2024 09:48:55 -0700 (PDT)
 Received: from [172.18.168.79] (ip-185-104-138-67.ptr.icomera.net.
  [185.104.138.67]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42ba6425a77sm116699105e9.45.2024.08.31.09.48.52
+ 5b1f17b1804b1-42ba6425a77sm116699105e9.45.2024.08.31.09.48.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 31 Aug 2024 09:48:53 -0700 (PDT)
+ Sat, 31 Aug 2024 09:48:54 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PATCH 0/4] Qualcomm smartphone support
-Date: Sat, 31 Aug 2024 17:48:50 +0100
-Message-Id: <20240831-qcom-phones-v1-0-08614edd8e35@linaro.org>
+Date: Sat, 31 Aug 2024 17:48:51 +0100
+Subject: [PATCH 1/4] board/qualcomm: introduce phone config
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAHJJ02YC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIxMDC2ND3cLk/Fzdgoz8vNRi3WRzC8sUQ5OUVDNTcyWgjoKi1LTMCrBp0bG
- 1tQBr8C6mXQAAAA==
+Message-Id: <20240831-qcom-phones-v1-1-08614edd8e35@linaro.org>
+References: <20240831-qcom-phones-v1-0-08614edd8e35@linaro.org>
+In-Reply-To: <20240831-qcom-phones-v1-0-08614edd8e35@linaro.org>
 To: Caleb Connolly <caleb.connolly@linaro.org>, 
  Neil Armstrong <neil.armstrong@linaro.org>, 
  Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2097;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3149;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=R5HUaYQi4k3Zu/3SIQTH27iH38wpZ8WBU2lGn0Wwqb4=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBm00lzBZFV6ZnjmjimC1Cs4hcotLmIOGt4Llrlf
- DANjpTm30+JAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZtNJcwAKCRAFgzErGV9k
- thZtD/wKal+IuPAklMRwuUOWI7xzdOlg+9brd8UpFrg1HwClKNlL9g8IGrMhMI+RkB9aMcRY8H3
- FQSzJN0BR6xP7Lmw1cFxjYO5/8cBhn8KgD31fJH0X7yliiQTvNYvvJ0JDUoUTUziMxWsHQ/wYdw
- Hw1vnrnrgrvJyr4WlQ3J4lM2kMxflBy/oTftp/P9eNBO3b0Plzpk1XKC8BmKHwKF7k6lKWSFFHW
- Onn6cf+LI5pSlhj+zvk2JUAvtirgqJTVK0hgKWN46MUfR0viLn8HQ4CIZ9jSKeVC2vqyeSk8WoU
- GSxp+/jUllVfbGsuGlUJ99apDSAQxbgzX/NMfymt8b4TRJmvcKH/fmWc8E/HgAirQ0uihNp1/vL
- /rY7eQq0aLRfN4IwQuM/tmmfyFUyFEtFpPviX6BRy1gIRAUxrD7xYObKSkJHb8RsmiaiQRPAldW
- zqWe8MNlwyebebGXLyvYMjlW2avJswl6/sZ0B69co6CQOy6kiR8hFYTax+4h+QuyIcQ2CENpeYq
- Zu7cvJEAmIsXAE5+YZYqAymI+etcv9rTTuMvrtQXBC3ywmHimSrUQtkrQkmUkq3SjxtRBJo948K
- Yum8xozts10NmsnNfYBTqqDH9ZXLXDEAgj8N9xWrnd+NUBL0FLki+GW1XA935+Jiv9vhvXR2x3J
- Bxo0j0JqYcbBo/Q==
+ bh=/498lubALH9NHF/IT2J0k0n671CVhRDgQSpw0A6WbdY=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBm00lzI1iexdsUXcKjltQG/PFTmBVeYTtustnjX
+ ERxN0PP0ZSJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZtNJcwAKCRAFgzErGV9k
+ ttslD/0YWQIc0jJxhuip16AIK5CAMkmJTiSGvDWbEl70EJ0unCeG8G9AvhUHawetENzV+j4syR9
+ 3ouu3e38/XgptDCAeeuVh38jkJrj6TICiWHpakMJQXgnveTr5gfu7jcMR0C3pthrq5Oeb/sCSBS
+ +CEIJrLr+68j3nPkDuYyvcSY77jHcoLg9SqQv00hZ7D2FePkNqyg67rL1Rhz9Z4MuXjSgs9xmBs
+ A8AcBmyzgCAyML6pBS3hWJIIeFPBZrVf/AZ+UkmxlSrVn98zflstSXRdwijFlzqjm2r1LTGBhLG
+ 3y3Sq50Kn7FBl0cx3ADsDPWiOuAhePKZTI4QczaiNgCgNf6eqA0yVA8SqR6e6Qic96ehcznlbjD
+ RwdJ9ZeS9C8XOEFo1PbGsnEVLyfWbAA0q8CL9Dg0ZTgxaHysnlpJ6KIvOJTcUEcRk0kUrNZftWh
+ EUVqxW4EPTyuG0SBcO8g1VCiHt7+Z35N6wxZKb6AEkN89TaySssLtX8Bi9/6lkyAdlPxv1Kb8CK
+ 5/8WlT2iNxyJI819sFhS0m1x4Z8pycDRuZPeMni1CfW+l7ENadSLMXRSRn73K5Xo6kJxOAq7fg9
+ ji0wlsgkFC6MAofhwoMFLAKzIjYxorgFUHv+g0eB3qnp3hA4Y0JA90MXAd5GMNmEsNs6OZ8ExpK
+ /HZgKwRAIqxttyQ==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -114,54 +112,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Improve support for running U-Boot on Qualcomm smartphones, with:
+Phones don't have keyboards! Introduce a phone-specific config fragment
+and associated environment file to make U-Boot more useful on these
+devices. This allows for navigating via the buttons and enabling
+various USB gadget modes or displaying info about U-Boot.
 
-* A boot menu which can be entered by holding power during boot
-* Hang on panic (so errors can be read on the display)
-* Serial gadget which can be enabled by holding volume down or via
-  boot menu
-
-In its current form, U-Boot's boot menu is perfectly adequate, however
-once an option is picked U-Boot will just drop to the CLI again.
-
-On a phone (with no keyboard), dropping to the CLI effectively makes the
-device unusable until manually rebooted, since there is no way to run
-any commands...
-
-To rectify this, let's revive CONFIG_BOOT_RETRY for the
-hush parser and make it run the contents of "bootcmd", as well as
-re-reading the value of the bootretry environment variable. In tandem,
-this provides for a flexible menu system which we can enter and exit.
-See qcom-phone.env in patch 1 for more details.
-
-Finally, provide some rough-ish documentation to describe how Qualcomm
-phone support works and outline some debugging steps for when UART and
-the framebuffer are unavailable.
-
-This series depends on CONFIG_REMAP_PHONE_KEYS [1] to enable navigating the
-boot menu when using upstream DT.
-
-[1]: https://lore.kernel.org/u-boot/20240714194948.1271135-1-caleb.connolly@linaro.org/
-
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
-Caleb Connolly (4):
-      board/qualcomm: introduce phone config
-      cli_hush: run bootmenu on retry
-      bootretry: check for bootretry variable changes
-      doc: board/qualcomm: describe phone support and bringup
+ board/qualcomm/qcom-phone.config | 12 ++++++++++
+ board/qualcomm/qcom-phone.env    | 49 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 61 insertions(+)
 
- board/qualcomm/qcom-phone.config |  12 ++++
- board/qualcomm/qcom-phone.env    |  49 ++++++++++++++++
- boot/bootretry.c                 |   2 +
- common/cli_hush.c                |   2 +-
- common/cli_hush_upstream.c       |   2 +-
- doc/board/qualcomm/board.rst     |   5 ++
- doc/board/qualcomm/index.rst     |   1 +
- doc/board/qualcomm/phones.rst    | 122 +++++++++++++++++++++++++++++++++++++++
- 8 files changed, 193 insertions(+), 2 deletions(-)
----
-change-id: 20240831-qcom-phones-c789d14de657
-base-commit: f0ec3e608902ca1f573e5b7017da6bc804483f55
+diff --git a/board/qualcomm/qcom-phone.config b/board/qualcomm/qcom-phone.config
+new file mode 100644
+index 000000000000..4639e19a3df2
+--- /dev/null
++++ b/board/qualcomm/qcom-phone.config
+@@ -0,0 +1,12 @@
++# Settings for phones
++CONFIG_USE_DEFAULT_ENV_FILE=y
++CONFIG_DEFAULT_ENV_FILE="board/qualcomm/qcom-phone.env"
++CONFIG_PANIC_HANG=y
++CONFIG_CMD_PAUSE=y
++CONFIG_BOOTSTD=y
++CONFIG_BOOT_RETRY=y
++CONFIG_BOOT_RETRY_TIME=1
++CONFIG_REMAP_PHONE_KEYS=y
++
++# Many phones don't actually define a serial port in their DTS
++# CONFIG_REQUIRE_SERIAL_CONSOLE is not set
+diff --git a/board/qualcomm/qcom-phone.env b/board/qualcomm/qcom-phone.env
+new file mode 100644
+index 000000000000..2a0791c888c6
+--- /dev/null
++++ b/board/qualcomm/qcom-phone.env
+@@ -0,0 +1,49 @@
++bootdelay=0
++bootretry=1
++stdin=serial,button-kbd
++stdout=serial,vidconsole
++stderr=serial,vidconsole
++
++# Fastboot is keen to use the address from kconfig, but we
++# allocate its buffer at runtime.
++fastboot=fastboot -l $fastboot_addr_r usb 0
++
++# Shortcut to enable USB serial gadget and disable bootretry
++serial_gadget=setenv stdin serial,button-kbd,usbacm; \
++	setenv stdout serial,vidconsole,usbacm; \
++	setenv stderr serial,vidconsole,usbacm; \
++	setenv bootretry -1; \
++	echo Enabled U-Boot console serial gadget
++
++# bootretry will run this command over and over, if we fail once
++# then bail out to the boot menu instead (with a pause to read
++# the error message)
++bootcmd=bootefi bootmgr; pause; run menucmd
++
++# When entering the menu (either from button press or failed boot)
++# remap bootcmd so it will re-open the menu and we won't get stuck
++# at the console with no way to type
++menucmd=setenv bootcmd run menucmd; bootmenu -1
++
++# Pause is used so the output can be read on the display
++bootmenu_0=Boot=bootefi bootmgr; pause
++bootmenu_1=Enable serial console gadget=run serial_gadget
++bootmenu_2=Enable USB mass storage=ums 0 scsi 0
++bootmenu_3=Reset device=reset
++bootmenu_4=Dump clocks=clk dump; pause
++bootmenu_5=Dump environment=printenv; pause
++bootmenu_6=Board info=bdinfo; pause
++bootmenu_7=Dump bootargs=fdt print /chosen bootargs; pause
++bootmenu_8=Enable fastboot mode=run fastboot
++# Disabling bootretry means we'll just drop the shell
++bootmenu_9=Drop to shell=setenv bootretry -1
++
++# Allow holding the power button while U-Boot loads to enter
++# the boot menu
++button_cmd_0_name=pwrkey
++button_cmd_0=run menucmd
++
++# Hold volume down to drop to a shell with the USB serial gadget
++# enabled for debugging
++button_cmd_1_name=Volume down
++button_cmd_1=run serial_gadget
 
-// Caleb (they/them)
+-- 
+2.46.0
 
