@@ -4,79 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D0E7CD13DF
-	for <u-boot@archiver.kernel.org>; Sat, 31 Aug 2024 20:32:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26370CD13D9
+	for <u-boot@archiver.kernel.org>; Sat, 31 Aug 2024 20:34:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0729A88DA4;
-	Sat, 31 Aug 2024 22:32:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A983688D82;
+	Sat, 31 Aug 2024 22:34:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="PTR1qVSa";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="tDD7AFY2";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Drgj3MsN";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="X+EsiGM3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0141888DB6; Sat, 31 Aug 2024 22:32:18 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
+ id CB80888D87; Sat, 31 Aug 2024 22:34:07 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 195F68861D
- for <u-boot@lists.denx.de>; Sat, 31 Aug 2024 22:32:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E145488D64
+ for <u-boot@lists.denx.de>; Sat, 31 Aug 2024 22:34:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Wx6Bl5v74z9scZ;
- Sat, 31 Aug 2024 22:32:15 +0200 (CEST)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Wx6Ds3SXbz9t0F;
+ Sat, 31 Aug 2024 22:34:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1725136335;
+ s=mail20150812; t=1725136445;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=9eiptkV8sDTaEm5WUBlRCYJu5Ra8tt8mqwB3Vw0awlU=;
- b=PTR1qVSasOW/PvpE3Fwl2DNW/XlvXzKXP/XP779LCK8pXT0CjrADtatbwXfZfFx4n4PP1v
- 9eO6Wn1NVLMeVuBvBWn5YDfBHND5+tzNSgvAieeck5zMkU/1Ua08zuzDDRdoXfKRxKv8T1
- mmY3jiYwFp+6XvXHF74Zo7tLVxWvH8l1EFGo8cqQXf7aaG64FI5njXSsZsudu4rAGFdEcp
- cPQnbEW6EWAvTqt5hOnVKCn6lrCiM4RublMFe+jCF1rtBzTp2o4XuuNbJwySYIl7utKcfh
- v8YyVQOpPGgs4TopJWdklgZnGFt72yORHr0y9RfqyOpiHSKNtw16KQy3U8Ti9g==
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=H6S0SOFUqMgv7CPHL34POcXsK8nisutgAJhF3qayN3Q=;
+ b=Drgj3MsNA06Rmk6MQye17CqrtGQAMPoKUYVAkcGBlYx58BKSS6jkNvQrGvlIAXmuxoMLbd
+ OJliusPZF5gwysYu7wGlVjqXa31l12NNyhhnolJvHfHaiDvh2ZTnMNGVGKH6x7tC+yWMD/
+ WhQOLapyWBX75aeJDV1mUGpXQ5CYozFpbRhFOx4TPIGM/iQ4DADNSJhtu+hDnGp8cVMFDM
+ TmBhnn14+kYQOg4opQ/vYSKIvqxZjZSp9yxI7DIYmcY2a3uhYhjYNjKwv+3r7gnvRU/etV
+ 4/yfDN1UOZ25b0z01BBIZzPDTediJSaRnqxJ5LlwWkAZAlcRfdLKhkdDEWxnTA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1725136334;
+ s=mail20150812; t=1725136443;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=9eiptkV8sDTaEm5WUBlRCYJu5Ra8tt8mqwB3Vw0awlU=;
- b=tDD7AFY2aiuDj0pg2zgRRPzMYzCS2jQzCV/KHW9CzeMcv20ldSTlOId5M/smHNXGaTkJ9C
- tIioyZUbir58hoNl6xNLxgYHbDaqfMoP5IOQcKQQq6vGs3cIgRVZ6kvdKYcKMmwFOrOLPq
- 9hP0utjpIQ+soB6dn6YtTZWk5IWQMmMQD7wV22hLL8MJftxp/bbxb4ZLJrTpKR/h8RmJSp
- kicidjP3pNUsJnjmDQBCswfhMjP+fNK0hQBk9GX+tR9NSiNh7Pigvtfoe5AGb6ex9knme0
- ycl37wxCUsBLzADQnyVoxdLOyyz95g5/VvouwMdSWMgtW5hrlJ4y2HF4UEuvHg==
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=H6S0SOFUqMgv7CPHL34POcXsK8nisutgAJhF3qayN3Q=;
+ b=X+EsiGM3YJUQxEQzJj+fPVyzSMGOUrUSEZoXIeJ9cgdedARE+XEyLvBx34LxU4fPFzE5jc
+ 1pUkbp6SZkLoYTPue7Njz2bjHY3w83Zmejn2/8noGJvl2pfv+iZxPlLvoRvT6KKLYbX+AV
+ mSGe09DQmEoHS61CXF0MqFjZBOb4a0oWgEroDukFnm5QXZ7su6KnNp1bpC8/7DxZIybGBT
+ MOlBH80HPUuJxTVuO2MicKRWmAs5tSylZM57UrAIqc3HPW4B0mjP6i2VlzETpRYX7AceDP
+ YAWYCUWXN6wpxBPGVjW1yQz0wTEskt5n4waaLahl+Q0xmrImJ3MJNoM7lyI4Fw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
- Hai Pham <hai.pham.ud@renesas.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>,
- William Zhang <william.zhang@broadcom.com>
-Subject: [PATCH 5/5] mtd: spi: renesas: Add R-Car Gen4 DT compatible
-Date: Sat, 31 Aug 2024 22:31:48 +0200
-Message-ID: <20240831203153.547743-5-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20240831203153.547743-1-marek.vasut+renesas@mailbox.org>
-References: <20240831203153.547743-1-marek.vasut+renesas@mailbox.org>
+ Adam Ford <aford173@gmail.com>, Cong Dang <cong.dang.xn@renesas.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] ARM: dts: renesas: Minimize R8A779G0 V4H RPC SPI DT node
+Date: Sat, 31 Aug 2024 22:33:37 +0200
+Message-ID: <20240831203352.547864-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 0031977272fc2e6a3ce
-X-MBO-RS-META: 6wtsdy7ms1ckzhe5j8bra38tkaf6ajcq
-X-Rspamd-Queue-Id: 4Wx6Bl5v74z9scZ
+X-MBO-RS-META: 8xu1f8xd4dy45ohzok1ybyeyboki6bob
+X-MBO-RS-ID: 9d0c25d731888a11fde
+X-Rspamd-Queue-Id: 4Wx6Ds3SXbz9t0F
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,35 +85,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add device tree compatible string "renesas,rcar-gen4-rpc-if" to
-the driver to match on upstream RPC DT node in R-Car Gen4 DTs.
+The RPC SPI DT node is now part of mainline Linux DT, remove the
+duplicate content from U-Boot DT extras. The SPI flash DT node name
+has been changed from "spi-flash@0" to "flash@0", reflect this change
+in this patch. Retain "bank-width" and "num-cs" DT properties which
+are used by U-Boot. Retain "spi-rx-bus-width" and "spi-tx-bus-width"
+DT properties to indicate the bus should always be operated in 1-1-1
+mode as the U-Boot RPC SPI driver does not support higher bus width
+modes yet.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: "Cédric Le Goater" <clg@kaod.org>
-Cc: Hai Pham <hai.pham.ud@renesas.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Adam Ford <aford173@gmail.com>
+Cc: Cong Dang <cong.dang.xn@renesas.com>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: William Zhang <william.zhang@broadcom.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/spi/renesas_rpc_spi.c | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/dts/r8a779g0-u-boot.dtsi            |  1 -
+ arch/arm/dts/r8a779g0-white-hawk-u-boot.dtsi | 22 +-------------------
+ 2 files changed, 1 insertion(+), 22 deletions(-)
 
-diff --git a/drivers/spi/renesas_rpc_spi.c b/drivers/spi/renesas_rpc_spi.c
-index 9aab71db1de..f1e6f9f4e01 100644
---- a/drivers/spi/renesas_rpc_spi.c
-+++ b/drivers/spi/renesas_rpc_spi.c
-@@ -465,6 +465,7 @@ static const struct dm_spi_ops rpc_spi_ops = {
- static const struct udevice_id rpc_spi_ids[] = {
- 	{ .compatible = "renesas,r7s72100-rpc-if" },
- 	{ .compatible = "renesas,rcar-gen3-rpc-if" },
-+	{ .compatible = "renesas,rcar-gen4-rpc-if" },
- 	{ }
+diff --git a/arch/arm/dts/r8a779g0-u-boot.dtsi b/arch/arm/dts/r8a779g0-u-boot.dtsi
+index cc8becac996..f60eba531e4 100644
+--- a/arch/arm/dts/r8a779g0-u-boot.dtsi
++++ b/arch/arm/dts/r8a779g0-u-boot.dtsi
+@@ -8,7 +8,6 @@
+ #include "r8a779x-u-boot.dtsi"
+ 
+ &rpc {
+-	reg = <0 0xee200000 0 0x200>, <0 0x08000000 0 0x04000000>;
+ 	bank-width = <2>;
+ 	num-cs = <1>;
+ };
+diff --git a/arch/arm/dts/r8a779g0-white-hawk-u-boot.dtsi b/arch/arm/dts/r8a779g0-white-hawk-u-boot.dtsi
+index a102639010d..c3704d789e8 100644
+--- a/arch/arm/dts/r8a779g0-white-hawk-u-boot.dtsi
++++ b/arch/arm/dts/r8a779g0-white-hawk-u-boot.dtsi
+@@ -13,29 +13,9 @@
+ 	};
  };
  
+-&pfc {
+-	qspi0_pins: qspi0 {
+-		groups = "qspi0_ctrl", "qspi0_data4";
+-		function = "qspi0";
+-	};
+-};
+-
+ &rpc {
+-	pinctrl-0 = <&qspi0_pins>;
+-	pinctrl-names = "default";
+-
+-	#address-cells = <1>;
+-	#size-cells = <0>;
+-	spi-max-frequency = <40000000>;
+-	status = "disabled";
+-
+-	spi-flash@0 {
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		compatible = "s25fs512s", "jedec,spi-nor";
+-		reg = <0>;
++	flash@0 {
+ 		spi-tx-bus-width = <1>;
+ 		spi-rx-bus-width = <1>;
+-		spi-max-frequency = <40000000>;
+ 	};
+ };
 -- 
 2.45.2
 
