@@ -4,81 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 388FFC54FC6
-	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 20:10:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD16BCD3420
+	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 20:11:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7D4F88A02;
-	Sun,  1 Sep 2024 22:09:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3F25D88B3F;
+	Sun,  1 Sep 2024 22:09:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GZVN6Thf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WMNf0Icl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFF27889A2; Sun,  1 Sep 2024 22:09:57 +0200 (CEST)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id A5EEA88A7F; Sun,  1 Sep 2024 22:09:58 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91BEA88A13
- for <u-boot@lists.denx.de>; Sun,  1 Sep 2024 22:09:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BC7588637
+ for <u-boot@lists.denx.de>; Sun,  1 Sep 2024 22:09:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6c331543ef0so20243616d6.1
- for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 13:09:55 -0700 (PDT)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-70f6e65d605so1168634a34.3
+ for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 13:09:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1725221394; x=1725826194; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1725221395; x=1725826195; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NhwNPKnRGlgu2EMiEh3GB6mP7uVhaSRMZTpv157/qVg=;
- b=GZVN6ThfIsR98k16lSSK3jVLf+fISEY0sCEmy/D6NBh/c2NvHTdxQWv5VMz7uCrGV4
- nC05+5BOeFy3VBfNs5mI1L4pyMt2C7uyb5kiZtv9wwoUKfZBlgd278xwAyzwyCvqN/+L
- Vtq+uW1b5kMEGAtmJKiA+RjlHDNmtx+7B9x/o=
+ bh=NmwgUtG4wNtC/IQZudIGDO+tywj0cF5nMcDzO6BRUv8=;
+ b=WMNf0IcljajKahe4Xfic1hGgr/ouFxltV+/dkb29j2iqSeh7ohZTNTgyb9iz1S9sKW
+ MgyrssEUBSH1L5KW5Rcb3dqFQ4AsKrDtXDI8lvbx01jrI6VSIuc8L/zMfm3JIleyxUaP
+ QSjaL6via3B0jM/si227eXatXldzXD1suhGd0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725221394; x=1725826194;
+ d=1e100.net; s=20230601; t=1725221395; x=1725826195;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=NhwNPKnRGlgu2EMiEh3GB6mP7uVhaSRMZTpv157/qVg=;
- b=DeQV99xn4ZsaoiIs28mjml73VRepe2rj7s4GiJYWMX7oUDogSW2drJnlBuF5uYYtiv
- JxWskk//060YDI18afnBGmCsG9678NZtp6QRQ4rq4c7ok81jVTcJCJO0vuzWPVF77mjE
- 9KqlodjVwmHqBHJcpassW/iRGXHu/JctI1NwbzpIZkWNXBmtzzpJxX/bvGveinukIYX2
- I6i2QpR4zT6WIDtREYdk4zbBYGlkq+agRzCK/MBqZwalG5P1fIRjmeeG2LsKBuwwLyEa
- LCGTNsNa+9uTazC4f1h0OUUDlBKrD8ReF2QA4Th6uZYbE7hEsHUcnWSxjnAspx9F7+oS
- HseQ==
+ bh=NmwgUtG4wNtC/IQZudIGDO+tywj0cF5nMcDzO6BRUv8=;
+ b=rRYbGW9McGCETY2k/sULOJfUONwtu/3Z65MAsKPfBhFtbnEuaQG+xqFroAkcy2akgA
+ d0k2wlD2ueReAFLwY+qBwSbk6csV2FYVWWX7gmxz0lm3Qdilgie0DB1vY5D0ilgAhu/m
+ T2tjugqqRwPW6m5cK9PfCrQQ9oRSyIkW8w0UI7QMfP82OTKHiLDZCbnUeE85Q2Zb2CCB
+ /TjdzSBDXt4+hxdaralZPgJC+LBICshQ4/NAOhxnNWAnEvwJwy8RUDepQH4Vr1zmJh/r
+ rdtdYRpVZ66aqL3Egj5MIYXiUVOGo8/2cYpcav8sCbcxP98TLYSko7gotxskZlPfuzc8
+ AY6w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWipeYHtJmoKMt3h858mkrmNeBHrh8UTVVhv21V6c1+afnW5nGZe1syYycyHhlNGTcFOAIifyQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy98B7BbdU8gUX/26TyX+qL4QXDEtUZJsNY+cXbsq0W8YmMHnVf
- KYOGIH2RSfT5IftwWasD0rCWbU41C4zfbhAOJsC6aCngTGuZydf9vpe94LCcXzXQS8Ro/xit90X
- fxeODQHez0fUE5HxTI4pnIy6PZ+4983bfF43QCq0jCaOy/CY=
-X-Google-Smtp-Source: AGHT+IEI8A418r84VXVbTMv67jJfn/epOYK+wWjg1VT2m/Bq6aHcQtpkhILSuzLhyCLDkKpmCFj4GqZnuqY/ZPdraes=
-X-Received: by 2002:a05:6214:418b:b0:6bf:8971:1320 with SMTP id
- 6a1803df08f44-6c3553f3dc1mr55921686d6.18.1725221394457; Sun, 01 Sep 2024
- 13:09:54 -0700 (PDT)
+ AJvYcCUQPGyzQWrxJ6aNAb5w9IsF50S8ZfowuuiiDVsX9Sb5a/2knchDkgMmsTS217oINMyPjJXd6sY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzLG3ySJ5CLWUnwePdu9099UHp5nGXI+AaaDoXxB0aQ+hC35CZg
+ VR/RlDqQNp6sZMgK1psjFUUA5HyisjX50PJqGeF4jZAzEsJA1w2djyigDG3dL6OYHzSbTZF5mOj
+ kIOrChS8+1p0TTZZjI3BhinbNoPN427+V7sBS
+X-Google-Smtp-Source: AGHT+IHQCEXe0IQC3tyPHTuP34EiagYsc6GYwXpFZ4v6t0AImbldsvxoObpz8Rz8fw8nJRrVNbntPr9AH4Gk697KgzI=
+X-Received: by 2002:a05:6830:368d:b0:709:3a05:36c9 with SMTP id
+ 46e09a7af769-70f5c491cedmr14919155a34.29.1725221395308; Sun, 01 Sep 2024
+ 13:09:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <cover.1724419624.git.jerome.forissier@linaro.org>
- <1629f6845b448edcdead09a9350f1ae2ae7a4bb6.1724419624.git.jerome.forissier@linaro.org>
- <CAFLszThJzVvHSd+dEjTSff2DUPPaQTGWeyCmHmP56Vtjr0WF-g@mail.gmail.com>
- <d2465352-66ea-400c-9216-a92ce5351475@linaro.org>
- <CAFLszThp9Ya-doN39L-uv6C_oZsw454PUiUfOZmYa7wHjoz+oA@mail.gmail.com>
- <CAC_iWjJ1aACnb2u+6+k30ATr6UAwkBQ++2syXy6xR5sSvzq4rQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjJ1aACnb2u+6+k30ATr6UAwkBQ++2syXy6xR5sSvzq4rQ@mail.gmail.com>
+References: <20240816214436.1877263-1-raymond.mao@linaro.org>
+ <20240816214436.1877263-8-raymond.mao@linaro.org>
+ <CAFLszTiWFD2dpb6z_5cibDe0aOpuPYug-mrC-ZiZ7v+SEDFhdQ@mail.gmail.com>
+ <CAC_iWjJpfrK+-o_0x8ZJbWxhG4O-tprf1-oQvWmLZWOf=5qZMA@mail.gmail.com>
+In-Reply-To: <CAC_iWjJpfrK+-o_0x8ZJbWxhG4O-tprf1-oQvWmLZWOf=5qZMA@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 1 Sep 2024 14:09:43 -0600
-Message-ID: <CAFLszTh-5o8hEv47+jb2od=xQxMhjOGpG0qC_PjL5XkLx5nM2w@mail.gmail.com>
-Subject: Re: [PATCH v9 35/37] [TESTING] Kconfig: enable NET_LWIP by default
- except for SANDBOX
+Date: Sun, 1 Sep 2024 14:09:44 -0600
+Message-ID: <CAFLszThL=Z_=Qome2ZzwdqcUxX4bVg7MsMKMgk05TkrV2wcMGg@mail.gmail.com>
+Subject: Re: [PATCH v6 07/28] hash: integrate hash on mbedtls
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>, 
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>, 
- Anton Antonov <Anton.Antonov@arm.com>, Tom Rini <trini@konsulko.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Jonas Karlman <jonas@kwiboo.se>, Greg Malysa <greg.malysa@timesys.com>, 
- Jesse Taube <mr.bossman075@gmail.com>, Shengyu Qu <wiagn233@outlook.com>
+Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
+ manish.pandey2@arm.com, 
+ Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
+ Mario Six <mario.six@gdsys.cc>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Andrew Davis <afd@ti.com>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Sumit Garg <sumit.garg@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Alexander Gendin <agendin@matrox.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Eddie James <eajames@linux.ibm.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,68 +109,82 @@ X-Virus-Status: Clean
 
 Hi Ilias,
 
-On Fri, 30 Aug 2024 at 03:27, Ilias Apalodimas
+On Fri, 30 Aug 2024 at 03:37, Ilias Apalodimas
 <ilias.apalodimas@linaro.org> wrote:
 >
 > Hi Simon,
 >
-> On Fri, 30 Aug 2024 at 03:59, Simon Glass <sjg@chromium.org> wrote:
+> On Thu, 29 Aug 2024 at 18:01, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > Hi Jerome,
+> > Hi Raymond,
 > >
-> > On Thu, 29 Aug 2024 at 10:21, Jerome Forissier
-> > <jerome.forissier@linaro.org> wrote:
+> > On Fri, 16 Aug 2024 at 15:47, Raymond Mao <raymond.mao@linaro.org> wrote:
 > > >
+> > > Integrate common/hash.c on the hash shim layer so that hash APIs
+> > > from mbedtls can be leveraged by boot/image and efi_loader.
 > > >
+> > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > > ---
+> > > Changes in v2
+> > > - Use the original head files instead of creating new ones.
+> > > Changes in v3
+> > > - Add handle checkers for malloc.
+> > > Changes in v4
+> > > - None.
+> > > Changes in v5
+> > > - Add __maybe_unused to solve linker errors in some platforms.
+> > > - replace malloc with calloc.
+> > > Changes in v6
+> > > - None.
 > > >
-> > > On 8/29/24 16:05, Simon Glass wrote:
-> > > > Hi Jerome,
-> > > >
-> > > > On Fri, 23 Aug 2024 at 07:50, Jerome Forissier
-> > > > <jerome.forissier@linaro.org> wrote:
-> > > >>
-> > > >> Enable NET_LWIP by default for testing purposes. SANDBOX doesn't support
-> > > >> NET_LWIP so default to NET in this case.
-> > > >
-> > > > Sandbox needs to support NET_LWIP.
-> > >
-> > > I agree in principle, but AFAICT it is not a trivial task. Does it have to
-> > > be done in this series or can it be dealt with later?
+> > >  common/hash.c | 146 ++++++++++++++++++++++++++++++++++++++++++++++++++
+> > >  1 file changed, 146 insertions(+)
 > >
-> > Does it build OK with sandbox? We use it for almost all of our feature
-> > development and testing, so I cannot imagine bringing this in if it
-> > doesn't work. How did you develop this feature?
+> > I am not seeing the benefit of replacing U-Boot's hashing algorithms.
+> > They work well and don't change. Also it seems to be making the code a
+> > lot uglier, with an uncertain timeline for clean-up.
 >
-> sandbox is deeply rooted into the old network stack. It fakes ACK
-> responses, handles the ping request/replies with the sandbox ethernet
-> driver etc. I was looking on adding LWIP support for it, but it's not
-> trivial and I don't want us to add another hacky 'glue layer'. Since
-> LWIP is a big feature on its own -- and is working on real hardware
-> and QEMU, we discussed adding it, so people can test and contribute
-> fixes while we fix sandbox.
+> A lot uglier where? It adds a few wrappers that fit into the current
+> design and callbacks.
+> I don't think what you are asking is possible. To do assymetric
+> crypto, signatures  etc -- and in the future add TLS support in wget
+> mbedTLS relies on its internal hashing functions for the cipher suites
+> it supports. So what you are asking would just make the code even
+> larger. Raymond can you please double check?
 
-At the very least it needs to build on sandbox.
+It's really just a case of dropping the hash calls. It should not
+cause any other problems, so far as I can see, but I have not dug in
+in detail.
 
-I am not sure what tests LWIP has. The U-Boot networking tests are
-very simple on sandbox. The test provides a handler to generate a
-packet that it wants, then does a networking operation. It should not
-be hard to plumb that through.
+Re TLS is relying on its internal hashing functions, is this what you
+are talking about?
 
-I am nervous about this going in with an intention to fix it up later...
+$ git grep mbedtls_sha1_free
+common/hash.c:          mbedtls_sha1_free(ctx);
+common/hash.c:          mbedtls_sha1_free((mbedtls_sha1_context *)ctx);
+lib/mbedtls/external/mbedtls/include/mbedtls/sha1.h:void
+mbedtls_sha1_free(mbedtls_sha1_context *ctx);
+lib/mbedtls/external/mbedtls/library/md.c:
+mbedtls_sha1_free(ctx->md_ctx);
+lib/mbedtls/external/mbedtls/library/psa_crypto_hash.c:
+mbedtls_sha1_free(&operation->ctx.sha1);
+lib/mbedtls/external/mbedtls/library/sha1.c:void
+mbedtls_sha1_free(mbedtls_sha1_context *ctx)
+lib/mbedtls/external/mbedtls/library/sha1.c:    mbedtls_sha1_free(ctx);
+lib/mbedtls/external/mbedtls/library/sha1.c:    mbedtls_sha1_free(&ctx);
+lib/mbedtls/external/mbedtls/library/sha1.c:    mbedtls_sha1_free(&ctx);
+lib/mbedtls/sha1.c:     mbedtls_sha1_free(ctx);
 
->
-> >
-> > >
-> > > I would need to look into this more closely to give details, but if I
-> > > remember correctly the sandbox tests expect a precise sequence of network
-> > > packets. For example when doing a TFTP tests, it expects an ARP packet to
-> > > go out first, but when lwIP is used the ARP might not go out because the IP
-> > > may already be in the cache. So the sandbox is definitely not a black box
-> > > in that respect which makes things a bit more difficult.
-> >
-> > The key thing is to have a way to reset the state. So long as you have
-> > that, you should be able to put networking back to the initial state
-> > before running a test.
+I see this in psa_crypto_hash.c (not sure what that is though).
+
+> > Can you do the rest of the integration first?
+
+I believe this is the best approach. We need to permit using crypto
+acceleration too (via driver model), which is obviously impossible if
+mbed algorithms are using built-in hashing.
+
+The biggest challenge here is that common/hash.c needs some love, as I
+mentioned in an earlier version.
 
 Regards,
 Simon
