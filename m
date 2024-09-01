@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B288ECA101E
-	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 22:28:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E913FC54FC6
+	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 22:28:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7590C88B1C;
-	Mon,  2 Sep 2024 00:27:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D4D8E88C35;
+	Mon,  2 Sep 2024 00:27:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JDmqlVyA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IIwlthdP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01CFB8690D; Mon,  2 Sep 2024 00:27:01 +0200 (CEST)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
+ id 297B288B16; Mon,  2 Sep 2024 00:27:02 +0200 (CEST)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE1B188B1C
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 00:26:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B35988BD4
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 00:27:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-82521c46feaso155890139f.2
- for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 15:26:58 -0700 (PDT)
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-82a13d1c8f9so166015939f.1
+ for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 15:27:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1725229617; x=1725834417; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1725229618; x=1725834418; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2IygGC5xPxLHqhdh3DgzIhupCTPE9OhyRMzduVqbHsA=;
- b=JDmqlVyATsQwCHvqdkORqzqz6ZhKOkfbldejgovAFMiLRXLm+IHWy8aKr6J9gjMGbQ
- H3g2HDQp8UPCN4BxTxuDE470AHQ7WlqBwpVqIWn6QY1dhtr9HC/+3rzcA87wkMNDWjUh
- ORqYP2YFqGxokpDF4M+tZBPLKHKkfLX+kCnVM=
+ bh=/teZiUk0bTynahU246G+ye0nJzrAnwKyFUvVPIr9uqY=;
+ b=IIwlthdP9L6Ed1EECbOH3tmAYS/WEBx23AzQW5B4IFK3YpXbtNWY3DeDcZ6ayLiu/X
+ +w49d79MX8hW9FChFpyHoX6GmXZFz/9chKv2F86PHWeKVDLlztC9VPfjTjZs6h/eB4nN
+ K52gesXWZSbCckxaVIrghme9wJkixaM9OdL0o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725229617; x=1725834417;
+ d=1e100.net; s=20230601; t=1725229618; x=1725834418;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2IygGC5xPxLHqhdh3DgzIhupCTPE9OhyRMzduVqbHsA=;
- b=m1pM6eWfsBBalaKVFnwVrdjoBvQpmCUwYFsl4j5Pa3T5KIzdizpt8VE9MCmmd4FZ34
- R6hDa/29JU3Ni3Y749CaDULqt6ruBcg6E0iFFw0tXjNaTxFR3b2fABfuPy4CgqORDi2i
- jvYYLQUJXFz6eUM/uhmLAYa/77BhWYNmVGD04jPc/1zQrPXfn0bDMIWS6aNjqq8M5qn0
- hF+RY3SR/g8uHsZzRrz1iPKj5wy8gwtpsNz8YH29kvKLIDTw45xy569SdXI5nVlmNcz2
- 5exSIqRQmPRH3PQQgzCf9FDl0fE+LCkmxgFHz9m8QZ++Bp/78WvVa/lsbAqn6tiLWpIy
- dFJQ==
-X-Gm-Message-State: AOJu0Yx52E49WBMvGs6pDv5eXSk3Grfb6rBAaQ/ME/uLK5j9A2cxEpL/
- xRbkTKi5Hyp0fiV2Rrbw+ul+e3VULghqQEUK870NfyBgc2NzaN/LmQFzaMWXtg6fKxBVGZQ9PcI
+ bh=/teZiUk0bTynahU246G+ye0nJzrAnwKyFUvVPIr9uqY=;
+ b=HFnAU7W9q859JvIrfhj4E/tja3UdVM/JiGqMCjhqfKLZS5f3lKN/qg62+8gwrCQO4O
+ Thd8ojPpkPrc7CS5UdtzUDBpzlqP1Dj2tPlVyLM2tLjQ5V5iF1FeL2mXfvzaAIUaKWMQ
+ wfFD9DTjW/KnAaUbc8grRn2KebhqeyjAD9VxfpfJ+XW+fMVC6fEG7mLSLQSGAjZpdp+Z
+ q2oJ82ofTWI5OQhVl+gIcp/ZlgJcef7WhCGmgEOYdmxTLT/JEqPmpYW0KZ6uwYY3hvUW
+ CT46VkC3rwRJGyeVwFd0boXE2Tf5eAL/WVr7PuV01LFwASmuwd6VnITihY6Zxc9etrhb
+ z77w==
+X-Gm-Message-State: AOJu0YzSnTIIPII6wEqo/lEglb0/cR1JiJcwTsIM36kpSoXlLFrRA173
+ BG6kH1ULJuNyR3bsW/mE5MZhWZWxoV64fJQB4/vr8UYNuf9InsaXY5Cz539gfl3nFWaAepIdUWM
  =
-X-Google-Smtp-Source: AGHT+IELM+uCV8cZ04Q3QcT7lbsRCH3jjk/zgfAjAx/EM6qNwfLaK/lsFQFLGKC2JU4fi18CGe17Bw==
-X-Received: by 2002:a05:6602:1647:b0:827:a979:87e4 with SMTP id
- ca18e2360f4ac-82a3751d83fmr683032039f.10.1725229617034; 
- Sun, 01 Sep 2024 15:26:57 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFE2BP7wPWuOMgsP7sYZq/TaIKQ0sUy8hsojjXRyZqILsUCZhBTdmsynYMxOanjWCbA4NDo/g==
+X-Received: by 2002:a05:6602:b90:b0:82a:3d74:6c4c with SMTP id
+ ca18e2360f4ac-82a3d746dfamr512267539f.15.1725229618443; 
+ Sun, 01 Sep 2024 15:26:58 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-82a1a4c099asm215751839f.48.2024.09.01.15.26.55
+ ca18e2360f4ac-82a1a4c099asm215751839f.48.2024.09.01.15.26.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Sep 2024 15:26:56 -0700 (PDT)
+ Sun, 01 Sep 2024 15:26:57 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marex@denx.de>, Pavel Herrmann <morpheus.ibis@gmail.com>
-Subject: [PATCH v4 09/23] dm: usb: Deal with USB keyboard persisting across
- tests
-Date: Sun,  1 Sep 2024 16:26:20 -0600
-Message-Id: <20240901222634.460873-10-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH v4 10/23] test: mbr: Adjust test to use lower-case hex
+Date: Sun,  1 Sep 2024 16:26:21 -0600
+Message-Id: <20240901222634.460873-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240901222634.460873-1-sjg@chromium.org>
 References: <20240901222634.460873-1-sjg@chromium.org>
@@ -90,176 +89,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Clear any USB-keyboard devices before running a unit test, to avoid
-using a stale udevice pointer in stdio. Add a long comment to explain
-this situation and why this solution seems best, at least for now.
+Switch to lower-case hex which is more commonly used in U-Boot.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- common/console.c  | 34 ++++++++++++++++++++++++++++++++++
- common/usb_kbd.c  |  5 +++++
- include/console.h |  8 ++++++++
- include/usb.h     | 12 ++++++++++++
- test/test-main.c  | 38 ++++++++++++++++++++++++++++++++++++++
- 5 files changed, 97 insertions(+)
+ test/cmd/mbr.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/common/console.c b/common/console.c
-index 0f00f3d8d5b..c9e206aec41 100644
---- a/common/console.c
-+++ b/common/console.c
-@@ -1244,3 +1244,37 @@ int console_init_r(void)
- }
+diff --git a/test/cmd/mbr.c b/test/cmd/mbr.c
+index e1a9cdffb04..98a745df6bc 100644
+--- a/test/cmd/mbr.c
++++ b/test/cmd/mbr.c
+@@ -50,7 +50,7 @@ static char * mbr_parts_tail = "'";
+ 000001e0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+ 000001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa  |..............U.|
+ */
+-static unsigned mbr_cmp_start = 0x1B8;
++static unsigned int mbr_cmp_start = 0x1b8;
+ static unsigned mbr_cmp_size = 0x48;
+ static unsigned char mbr_parts_ref_p1[] = {
+                                                 0x78, 0x56, 0x34, 0x12, 0x00, 0x00, 0x80, 0x05,
+@@ -257,7 +257,7 @@ static int mbr_test_run(struct unit_test_state *uts)
+ 	mbr_wa = map_to_sysmem(mbr_wbuf);
+ 	ebr_wa = map_to_sysmem(ebr_wbuf);
+ 	ra = map_to_sysmem(rbuf);
+-	ebr_blk = (ulong)0xB00000 / 0x200;
++	ebr_blk = (ulong)0xb00000 / 0x200;
  
- #endif /* CONFIG_IS_ENABLED(SYS_CONSOLE_IS_IN_ENV) */
-+
-+int console_remove_by_name(const char *name)
-+{
-+	int err = 0;
-+
-+#if CONFIG_IS_ENABLED(CONSOLE_MUX)
-+	int fnum;
-+
-+	log_debug("removing console device %s\n", name);
-+	for (fnum = 0; fnum < MAX_FILES; fnum++) {
-+		struct stdio_dev **src, **dest;
-+		int i;
-+
-+		log_debug("file %d: %d devices: ", fnum, cd_count[fnum]);
-+		src = console_devices[fnum];
-+		dest = src;
-+		for (i = 0; i < cd_count[fnum]; i++, src++) {
-+			struct stdio_dev *sdev = *src;
-+			int ret = 0;
-+
-+			if (!strcmp(sdev->name, name))
-+				ret = stdio_deregister_dev(sdev, true);
-+			else
-+				*dest++ = *src;
-+			if (ret && !err)
-+				err = ret;
-+		}
-+		cd_count[fnum] = dest - console_devices[fnum];
-+		log_debug("now %d\n", cd_count[fnum]);
-+	}
-+#endif /* CONSOLE_MUX */
-+
-+	return err;
-+}
-diff --git a/common/usb_kbd.c b/common/usb_kbd.c
-index 1d9845b01ed..bbfee23bc26 100644
---- a/common/usb_kbd.c
-+++ b/common/usb_kbd.c
-@@ -137,6 +137,11 @@ extern int __maybe_unused net_busy_flag;
- /* The period of time between two calls of usb_kbd_testc(). */
- static unsigned long kbd_testc_tms;
+ 	/* Make sure mmc6 exists */
+ 	ut_asserteq(6, blk_get_device_by_str("mmc", "6", &mmc_dev_desc));
+@@ -267,7 +267,8 @@ static int mbr_test_run(struct unit_test_state *uts)
+ 	ut_assert_console_end();
  
-+int usb_kbd_remove_for_test(void)
-+{
-+	return console_remove_by_name(DEVNAME);
-+}
-+
- /* Puts character in the queue and sets up the in and out pointer. */
- static void usb_kbd_put_queue(struct usb_kbd_pdata *data, u8 c)
- {
-diff --git a/include/console.h b/include/console.h
-index 6b6d0f9de73..57fdb0834c1 100644
---- a/include/console.h
-+++ b/include/console.h
-@@ -179,6 +179,14 @@ void console_puts_select_stderr(bool serial_only, const char *s);
-  */
- int console_clear(void);
+ 	/* Make sure mmc6 is 12+ MiB in size */
+-	ut_assertok(run_commandf("mmc read 0x%lx 0x%lx 1", ra, (ulong)0xBFFE00 / 0x200));
++	ut_assertok(run_commandf("mmc read 0x%lx 0x%lx 1", ra,
++				 (ulong)0xbffe00 / 0x200));
  
-+/**
-+ * console_remove_by_name() - Remove a console by its stdio name
-+ *
-+ * This must only be used in tests. It removes any use of the named stdio device
-+ * from the console tables.
-+ */
-+int console_remove_by_name(const char *name);
-+
- /*
-  * CONSOLE multiplexing.
-  */
-diff --git a/include/usb.h b/include/usb.h
-index e37f853482c..be37ed272e1 100644
---- a/include/usb.h
-+++ b/include/usb.h
-@@ -1092,4 +1092,16 @@ struct usb_generic_descriptor **usb_emul_find_descriptor(
-  */
- void usb_show_tree(void);
- 
-+/**
-+ * usb_kbd_remove_for_test() - Remove any USB keyboard
-+ *
-+ * This can only be called from test_pre_run(). It removes the USB keyboard from
-+ * the console system so that the USB device can be dropped
-+ */
-+#if CONFIG_IS_ENABLED(USB_KEYBOARD)
-+int usb_kbd_remove_for_test(void);
-+#else
-+static inline int usb_kbd_remove_for_test(void) { return 0; }
-+#endif
-+
- #endif /*_USB_H_ */
-diff --git a/test/test-main.c b/test/test-main.c
-index 63e8be0ccd1..b3d3e24cdce 100644
---- a/test/test-main.c
-+++ b/test/test-main.c
-@@ -12,6 +12,7 @@
- #include <net.h>
- #include <of_live.h>
- #include <os.h>
-+#include <usb.h>
- #include <dm/ofnode.h>
- #include <dm/root.h>
- #include <dm/test.h>
-@@ -289,6 +290,43 @@ static int test_pre_run(struct unit_test_state *uts, struct unit_test *test)
- {
- 	ut_assertok(event_init());
- 
-+	/*
-+	 * Remove any USB keyboard, so that we can add and remove USB devices
-+	 * in tests.
-+	 *
-+	 * For UT_TESTF_DM tests, the old driver model state is saved and
-+	 * restored across each test. Within in each test there is therefore a
-+	 * new driver model state, which means that any USB keyboard device in
-+	 * stdio points to the old state.
-+	 *
-+	 * This is fine in most cases. But if a non-UT_TESTF_DM test starts up
-+	 * USB (thus creating a stdio record pointing to the USB keyboard
-+	 * device) then when the test finishes, the new driver model state is
-+	 * freed, meaning that there is now a stale pointer in stdio.
-+	 *
-+	 * This means that any future UT_TESTF_DM test which uses stdin will
-+	 * cause the console system to call tstc() on the stale device pointer,
-+	 * causing a crash.
-+	 *
-+	 * We don't want to fix this by enabling UT_TESTF_DM for all tests as
-+	 * this causes other problems. For example, bootflow_efi relies on
-+	 * U-Boot going through a proper init - without that we don't have the
-+	 * TCG measurement working and get an error
-+	 * 'tcg2 measurement fails(0x8000000000000007)'. Once we tidy up how EFI
-+	 * runs tests (e.g. get rid of all the restarting of U-Boot) we could
-+	 * potentially make the bootstd tests set UT_TESTF_DM, but other tests
-+	 * might do the same thing.
-+	 *
-+	 * We could add a test flag to declare that USB is being used, but that
-+	 * seems unnecessary, at least for now. We could detect USB being used
-+	 * in a test, but there is no obvious drawback to clearing out stale
-+	 * pointers always.
-+	 *
-+	 * So just remove any USB keyboards from the console tables. This allows
-+	 * UT_TESTF_DM and non-UT_TESTF_DM tests to coexist happily.
-+	 */
-+	usb_kbd_remove_for_test();
-+
- 	if (test->flags & UTF_DM)
- 		ut_assertok(dm_test_pre_run(uts));
- 
+ 	/* Test one MBR partition */
+ 	init_write_buffers(mbr_wbuf, sizeof(mbr_wbuf), ebr_wbuf, sizeof(ebr_wbuf), __LINE__);
 -- 
 2.34.1
 
