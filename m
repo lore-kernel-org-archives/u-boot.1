@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70BAAC54FC6
-	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 22:31:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B113C54FC6
+	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 22:31:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2B6488A3C;
-	Mon,  2 Sep 2024 00:27:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2D5D788CF6;
+	Mon,  2 Sep 2024 00:27:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UtYqu+JE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Mj4Mkx1/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25003889FC; Mon,  2 Sep 2024 00:27:48 +0200 (CEST)
-Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
- [IPv6:2607:f8b0:4864:20::12c])
+ id 60DA088C6F; Mon,  2 Sep 2024 00:27:50 +0200 (CEST)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F35FE889FC
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 00:27:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2977A88CFB
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 00:27:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-39d22965434so13702075ab.0
- for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 15:27:45 -0700 (PDT)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-82a238e0a9cso126636539f.3
+ for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 15:27:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1725229664; x=1725834464; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1725229665; x=1725834465; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6WL8AW1iwOEe5uhwAoQzo/LgeIFDwCpMMcRbgPCfb3c=;
- b=UtYqu+JEbssO3c/qWMG2LBNV8oZV7QMCCj+C+K4M11QOn+xyr8a5E6RGEnKUC4Nkez
- 3nlsaL9WtDnsJ7Ugjen9XpycXShm8NrchsisKG6jOONm+oa9J/gNt4OYxiH3rjzdjTo5
- cG1Y6JU8prxeWViDigO27yaVGuI0SPf4gIQaw=
+ bh=kHLSpsEitVXzP9nxjSGKZ6Onrp/N0+j5xPcO2BpW+vo=;
+ b=Mj4Mkx1/M6JKTB2mKdTpQHG1vfutmBRJR8w223mWx3yTl7LedzKyvFd4v1r3iGXhxf
+ xmO7zvu+3VbFkujurkhr2sU4APqVfk78ECvOwKqMI13mMupW+U2P8sVv+OZFsimTQs9A
+ bJFeLrk54hj/9xr9aOObDycHYlP5SbECbMjU8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725229664; x=1725834464;
+ d=1e100.net; s=20230601; t=1725229665; x=1725834465;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6WL8AW1iwOEe5uhwAoQzo/LgeIFDwCpMMcRbgPCfb3c=;
- b=i5hi2/u8fUpmni0LKyvbQODBPw0mVP0hR9hGoOhp0o8+ByJjN5i+hBL3vQ+87Kny5r
- TnJeExKrbd5RupJ7I1mH2vYGk8oDtDFLp5XYu8GvjnD0rXg9DmNM+smLWv1BlbNifwoH
- qAmoeaLYdn//5F/CJTVDqzEhkJqjP9Ik3E9M1IArrRBDN4POdlkDf/KTIP6gnPYL3sf7
- j+pEpTeboN5oJxVwkUqhlXzIuk1tDpNHNayRmEifkRH5QSPM13rrbQT7eCkHKLv3tgQV
- qBi0vKaxmi1ODYbalLqF+T5L36p0k8gPAmqHdYZ1/xLED6uPYpFvkff2AkqdH/Vtpxo5
- RtOg==
-X-Gm-Message-State: AOJu0Yy9OV7T0fMpM7JrRjyKsVsBt+BciDKzU/St9kHyTjcTuVsASSzY
- RVLq/DnIY3YAkx61TTWF8zHdFyT+fOn3bF1GyFeM+8qinD2E+QEJ4thNy8nsl+N1gHyx2jZZ5v8
+ bh=kHLSpsEitVXzP9nxjSGKZ6Onrp/N0+j5xPcO2BpW+vo=;
+ b=GUck+dniwOu7uz2vwyZMfESY5QRLZQLReJ3QtsO/ezhLLAHabT7u5E1etcVjBtjxl8
+ mjTS/KHHzHj4m+IQy4nUyCJvh8GmaKFo6rQ5XtTTt8IButF90Pk+M4lkzPU0yYRlSMz1
+ IISVFwgmDqiq6uLPZguGzO9mxpdJwEQR47UWHFF2KnLuiqGukpWB6TjHkZ4bMXwNfq6s
+ wnMw/H4rKjMz8fjA1YfLtVDMi5muPK2l0RE5H1fm/2nTCYkaCBA7/0JQvoLYpXPMOYhX
+ xYxU0fwq9NTNeh3Ou2yhO1AJUXQhs9eSSbaIrkIpnN859vAh+drWgGQ4xsXZorkDYeai
+ XxoQ==
+X-Gm-Message-State: AOJu0Yyx2wAPmUGGRHQ9fv39Q5BiccPTAuNWplu7A5okJ5Lk5ZtQ7AW/
+ 9Mr13jc68o0thVAC1IfCqMgVtBS9KqypsDjbvsEtkfjcJk5Du6+o1ZitAQ69fCOkV4BMlCRA4bw
  =
-X-Google-Smtp-Source: AGHT+IHc8I5YOVabMrfTCBmhdi1dtTXpOlExVTG7hNT0EANmDLan3vR3rR/ZuzAVPMRYE0PvVeuXhA==
-X-Received: by 2002:a05:6e02:1aaa:b0:375:a3eb:bfcd with SMTP id
- e9e14a558f8ab-39f38b0c73fmr91340305ab.8.1725229664164; 
- Sun, 01 Sep 2024 15:27:44 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEaJJAH5IuxNyf/1vIw3EadALvHnM1OAgcCFtzQe4QSQYArkbXi3fX7+WfPWi+dioKyIMWJdQ==
+X-Received: by 2002:a05:6602:26c7:b0:82a:168f:bc92 with SMTP id
+ ca18e2360f4ac-82a168fbd4amr1700043039f.4.1725229665599; 
+ Sun, 01 Sep 2024 15:27:45 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ced2e17bb4sm1866981173.82.2024.09.01.15.27.43
+ 8926c6da1cb9f-4ced2e17bb4sm1866981173.82.2024.09.01.15.27.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Sep 2024 15:27:43 -0700 (PDT)
+ Sun, 01 Sep 2024 15:27:44 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 3/8] bootstd: Avoid depending on BLK
-Date: Sun,  1 Sep 2024 16:27:29 -0600
-Message-Id: <20240901222734.462334-4-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: [PATCH v3 4/8] sunxi: Add a bootmeth for FEL
+Date: Sun,  1 Sep 2024 16:27:30 -0600
+Message-Id: <20240901222734.462334-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240901222734.462334-1-sjg@chromium.org>
 References: <20240901222734.462334-1-sjg@chromium.org>
@@ -91,95 +92,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In principle bootstd can work without block devices, even if it does
-require driver model to be enabled in that case.
-
-The use of a 'depends on BLK' for BOOTSTD conflicts with the way 'BLK'
-is now defined, producing recursive errors through multiple different
-paths, one of which is this (with Linksprite_pcDuino3 and
-BOOTSTD_DEFAULTS enabled):
-
-  arch/arm/Kconfig:7:error: recursive dependency detected!
-  arch/arm/Kconfig:7: symbol ARM64 is selected by ARCH_UNIPHIER_V8_MULTI
-  arch/arm/mach-uniphier/Kconfig:17: symbol ARCH_UNIPHIER_V8_MULTI is
-     part of choice <choice>
-  arch/arm/mach-uniphier/Kconfig:6: choice <choice> contains symbol
-     ARCH_UNIPHIER_V8_MULTI
-  arch/arm/mach-uniphier/Kconfig:17: symbol ARCH_UNIPHIER_V8_MULTI is
-     part of choice SPL
-  arch/arm/mach-stm32mp/Kconfig:3: symbol SPL depends on SUPPORT_SPL
-  common/spl/Kconfig:1: symbol SUPPORT_SPL is selected by ASPEED_AST2600
-  arch/arm/mach-aspeed/Kconfig:26: symbol ASPEED_AST2600 is part of
-     choice <choice>
-  arch/arm/mach-aspeed/Kconfig:12: choice <choice> contains symbol
-     ASPEED_AST2500
-  arch/arm/mach-aspeed/Kconfig:17: symbol ASPEED_AST2500 is part of
-     choice DM_RESET
-  arch/arm/mach-renesas/Kconfig.rcar3:197: symbol DM_RESET is selected
-     by CLK_RCAR_GEN3
-  drivers/clk/renesas/Kconfig:53: symbol CLK_RCAR_GEN3 depends on
-     CLK_RENESAS
-  drivers/clk/renesas/Kconfig:1: symbol CLK_RENESAS depends on CLK
-  drivers/clk/Kconfig:3: symbol CLK is selected by IMX8M_POWER_DOMAIN
-  drivers/power/domain/Kconfig:35: symbol IMX8M_POWER_DOMAIN depends on
-     POWER_DOMAIN
-  drivers/power/domain/Kconfig:3: symbol POWER_DOMAIN is selected by
-     BCM6318_USBH_PHY
-  drivers/phy/Kconfig:83: symbol BCM6318_USBH_PHY depends on PHY
-  drivers/phy/Kconfig:4: symbol PHY is selected by USB_EHCI_MX7
-  drivers/usb/host/Kconfig:211: symbol USB_EHCI_MX7 depends on USB
-  drivers/usb/Kconfig:1: symbol USB is selected by BOOTSTD_DEFAULTS
-  boot/Kconfig:455: symbol BOOTSTD_DEFAULTS depends on BOOTSTD
-  boot/Kconfig:398: symbol BOOTSTD depends on BLK
-  drivers/block/Kconfig:1: symbol BLK is selected by PVBLOCK
-  drivers/xen/Kconfig:1: symbol PVBLOCK depends on XEN
-  Kconfig:176: symbol XEN depends on ARM64
-
-We don't want to revert the change to BLK, which has been in place for
-a year now. We don't want to select BLK in BOOTSTD since it should
-support booting without block devices. The only realistic option is to
-remove BOOTSTD's dependency on BLK.
-
-Disable standard boot on the one board which fails.
+Add support for booting from a script loaded over FEL. This mirrors the
+bootcmd_fel provided by distro boot.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
 
-Changes in v3:
-- Drop wip (work-in-progress) comment in commit
+(no changes since v2)
 
 Changes in v2:
-- Add new patch to resolve BOOTSTD->BLK recursion with Kconfig
+- Put the FEL bootmeth before all other global bootmeths
 
- boot/Kconfig                                   | 2 +-
- configs/gardena-smart-gateway-mt7688_defconfig | 1 +
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ boot/Kconfig        | 14 ++++++++
+ boot/Makefile       |  1 +
+ boot/bootmeth_fel.c | 81 +++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 96 insertions(+)
+ create mode 100644 boot/bootmeth_fel.c
 
 diff --git a/boot/Kconfig b/boot/Kconfig
-index 7ac34574079..291919ea1ef 100644
+index 291919ea1ef..7d6e819bde6 100644
 --- a/boot/Kconfig
 +++ b/boot/Kconfig
-@@ -398,7 +398,7 @@ config BOOT_DEFAULTS
- menuconfig BOOTSTD
- 	bool "Standard boot"
- 	default y
--	depends on DM && OF_CONTROL && BLK
-+	depends on DM && OF_CONTROL
- 	help
- 	  U-Boot supports a standard way of locating something to boot,
- 	  typically an Operating System such as Linux, provided by a distro such
-diff --git a/configs/gardena-smart-gateway-mt7688_defconfig b/configs/gardena-smart-gateway-mt7688_defconfig
-index f4642e3fcff..36bf5f11d9a 100644
---- a/configs/gardena-smart-gateway-mt7688_defconfig
-+++ b/configs/gardena-smart-gateway-mt7688_defconfig
-@@ -30,6 +30,7 @@ CONFIG_HAS_BOARD_SIZE_LIMIT=y
- CONFIG_BOARD_SIZE_LIMIT=655360
- CONFIG_FIT=y
- CONFIG_FIT_SIGNATURE=y
-+# CONFIG_BOOTSTD is not set
- CONFIG_LEGACY_IMAGE_FORMAT=y
- CONFIG_AUTOBOOT_KEYED=y
- CONFIG_AUTOBOOT_STOP_STR="x"
+@@ -585,6 +585,20 @@ config BOOTMETH_EFI_BOOTMGR
+ 	  the EFI binary to be launched is determined. To set the EFI variables
+ 	  use the eficonfig command.
+ 
++config BOOTMETH_FEL
++	bool "Bootdev support for Sunxi FEL"
++	depends on ARCH_SUNXI
++	default y
++	help
++	  Enables support for booting over USB on a Sunxi device. This uses
++	  the FEL protocol and obtains the script address from the
++	  'fel_scriptaddr' environment variable.
++
++	  This method is only available if booting from FEL, i.e. the
++	  'fel_booted' environment variable is set.
++
++	  See https://linux-sunxi.org/FEL/Protocol for more information.
++
+ config BOOTMETH_QFW
+ 	bool "Boot method using QEMU parameters"
+ 	depends on QFW
+diff --git a/boot/Makefile b/boot/Makefile
+index f4675d6ffd5..295f27dfd39 100644
+--- a/boot/Makefile
++++ b/boot/Makefile
+@@ -30,6 +30,7 @@ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EXTLINUX) += bootmeth_extlinux.o
+ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EXTLINUX_PXE) += bootmeth_pxe.o
+ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EFILOADER) += bootmeth_efi.o
+ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_CROS) += bootm.o bootm_os.o bootmeth_cros.o
++obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_FEL) += bootmeth_fel.o
+ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_QFW) += bootmeth_qfw.o
+ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SANDBOX) += bootmeth_sandbox.o
+ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SCRIPT) += bootmeth_script.o
+diff --git a/boot/bootmeth_fel.c b/boot/bootmeth_fel.c
+new file mode 100644
+index 00000000000..160ba6eb827
+--- /dev/null
++++ b/boot/bootmeth_fel.c
+@@ -0,0 +1,81 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Bootmethod for sunxi FEL loading
++ *
++ * Copyright 2024 Google LLC
++ * Written by Simon Glass <sjg@chromium.org>
++ */
++
++#define LOG_CATEGORY UCLASS_BOOTSTD
++
++#include <bootdev.h>
++#include <bootflow.h>
++#include <bootmeth.h>
++#include <command.h>
++#include <dm.h>
++#include <env.h>
++
++static int fel_check(struct udevice *dev, struct bootflow_iter *iter)
++{
++	return 0;
++}
++
++static int fel_read_bootflow(struct udevice *dev, struct bootflow *bflow)
++{
++	if (!env_get("fel_booted") || !env_get("fel_scriptaddr"))
++		return -ENOENT;
++
++	bflow->state = BOOTFLOWST_READY;
++
++	return 0;
++}
++
++static int fel_read_file(struct udevice *dev, struct bootflow *bflow,
++			 const char *file_path, ulong addr, ulong *sizep)
++{
++	return -ENOSYS;
++}
++
++static int fel_boot(struct udevice *dev, struct bootflow *bflow)
++{
++	ulong addr;
++	int ret;
++
++	addr = env_get_hex("fel_scriptaddr", 0);
++	ret = cmd_source_script(addr, NULL, NULL);
++	if (ret)
++		return log_msg_ret("boot", ret);
++
++	return 0;
++}
++
++static int fel_bootmeth_bind(struct udevice *dev)
++{
++	struct bootmeth_uc_plat *plat = dev_get_uclass_plat(dev);
++
++	plat->desc = IS_ENABLED(CONFIG_BOOTSTD_FULL) ?
++	   "Sunxi FEL boot over USB" : "FEL";
++	plat->flags = BOOTMETHF_GLOBAL;
++
++	return 0;
++}
++
++static struct bootmeth_ops fel_bootmeth_ops = {
++	.check		= fel_check,
++	.read_bootflow	= fel_read_bootflow,
++	.read_file	= fel_read_file,
++	.boot		= fel_boot,
++};
++
++static const struct udevice_id fel_bootmeth_ids[] = {
++	{ .compatible = "u-boot,fel-bootmeth" },
++	{ }
++};
++
++U_BOOT_DRIVER(bootmeth_2fel) = {
++	.name		= "bootmeth_fel",
++	.id		= UCLASS_BOOTMETH,
++	.of_match	= fel_bootmeth_ids,
++	.ops		= &fel_bootmeth_ops,
++	.bind		= fel_bootmeth_bind,
++};
 -- 
 2.34.1
 
