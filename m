@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69397C54FC6
-	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 22:27:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA960CA101E
+	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 22:27:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9EF3388AD7;
-	Mon,  2 Sep 2024 00:26:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 02A1F88AA9;
+	Mon,  2 Sep 2024 00:26:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A6g+0D6w";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jyble+ml";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4514688A7F; Mon,  2 Sep 2024 00:26:52 +0200 (CEST)
+ id 60C6388B29; Mon,  2 Sep 2024 00:26:54 +0200 (CEST)
 Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
  [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E702A8690D
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 00:26:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 95A0788A75
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 00:26:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-io1-xd2a.google.com with SMTP id
- ca18e2360f4ac-82a3acaa1bbso42167639f.2
- for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 15:26:49 -0700 (PDT)
+ ca18e2360f4ac-82a20efed34so188553839f.2
+ for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 15:26:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1725229608; x=1725834408; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1725229610; x=1725834410; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JOKXGXx2O0QuWJLmpb70snzkVoo3Pg5CAS+f/O7nx4k=;
- b=A6g+0D6w2PwUY1czocyEPV4Nv0L0efuHdvteRzsH2kMhkupjl0xHKCqJO30tHyiiwu
- DoqyI7uCiG/bVEW9EOU+GP84YNVhX0WUWZEYIq8/5UPbSg+YxyPVptIrbmWl2oI4nrSL
- zclzSzMGUjG0HSmrQ6BQma7x+yi8FChhDF5nQ=
+ bh=xVyTDmUvuhTVv38JnbN24w4MSW3iJraazcROZtvVKiM=;
+ b=jyble+mlorSr/HagQtr4lRjfrDuDqot/zAwVyxurkLNPyZI9ZdjhssjWfHQu386IIB
+ EDGhIj1JdBoyaIaT7sr/aYZ27jsm6fSxEXje0POk7cwa3WytRtnFXx8CA1NlNFK0GcT/
+ xt/mn+uCN98t8LeGO8sUk+GWlNcj0Qz6Z5+z4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725229608; x=1725834408;
+ d=1e100.net; s=20230601; t=1725229610; x=1725834410;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JOKXGXx2O0QuWJLmpb70snzkVoo3Pg5CAS+f/O7nx4k=;
- b=kp6+eG4h8+sEKBnGJOkZk9TtIkVc/+NU51qcWm1Q80/fBOtYBK+Ly0k8uzHUbtiEeJ
- FOuCt/W6OnYYBNCQUv5cr+TJrINgtGbzT+XuQ31lItydlcu0qSSij8OQs5daCpZJzyx5
- /nfrZY4Z1ov4ZH8btFQ7RSe7AoOi+Zzo4yiY6XVCYYSeulHYSRNVDpX0NlCh+HZV3NmD
- YBWlG/Y+yaqP/If97J/U9EGsBRMQnNcILvz4m+xhSZuRH0lRkFdUCdCKFLEQ6srIrsh1
- 6P1HNjQLaxhLTDKeCHo9XkRgcEBbyZDJctK4k5BDDtRsubJ7TJiJrJkXQfm9JxDfA+QO
- m74Q==
-X-Gm-Message-State: AOJu0YzsOHYfCAZq93MGRe8i5kRFdiR3mqiPnj676jmXkMiSYq1OF3Aj
- oOzDZPnY5dBekubXOpZbusmkSNIhTtAbI21h6rpi0k0Z7hCEvoMeWqcgqcQgOvj6QD5uF9XTqac
+ bh=xVyTDmUvuhTVv38JnbN24w4MSW3iJraazcROZtvVKiM=;
+ b=ZpWI2pXtWad92iRgU36li6I7JWVn3n5rCdzfH3rQwOEjYQvr101/UhDueUEmRmBMnP
+ TaB0n4r6sedT/bc19EPl1vn6L+/2IO30cjOxgj1W76jDP5aPoLOn+ESGJEp1FWKNhWWB
+ KlWUGDQLQG+er1AU6S2IGO5kiJM/65ha3PXUG183uLD1S7KsKJyalseoALyj/DavoBst
+ 97fiYAsMRGQrYY5LL9AUSVi2U8TpJ0cwSl7OfXhDY9kk18QQBOXrsBfWUQYgxHG/quQu
+ VE3K3p4g8zTafXjMXFGpLWCddTbbPGiKoyxyLkFaJVZ4FVvzx0Um0sL9PaqSs3Z+breC
+ 1hbw==
+X-Gm-Message-State: AOJu0Yzfug4A5m2wAyXktjbSPjpHOKNn5Efw2OKLCdRQoiGKs38UG34K
+ fW02XR+Bs0O/Rf8LebuoSFvc8QJve79gk1D+g6dYC+c1Va+x8h5Goak1l8o410Q5komy7nyhEiU
  =
-X-Google-Smtp-Source: AGHT+IHZv9C8C9lMDAXyJOwP2ZW0ewYVwW5SLmpCRWGTujrveTFf/bQ1tsu6vb7afk+L90NFcetshw==
-X-Received: by 2002:a05:6602:60c7:b0:807:f0fb:11a2 with SMTP id
- ca18e2360f4ac-82a11094588mr1529340639f.13.1725229608030; 
- Sun, 01 Sep 2024 15:26:48 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGohY9+nvqfpwX+DCWO+cYzgQBFRzh7R2c1VgTX9ypsz4KdGAisqiSf4mKuO230sHwdovsouw==
+X-Received: by 2002:a05:6602:3fc3:b0:81f:9328:9631 with SMTP id
+ ca18e2360f4ac-82a3418c1dfmr708969339f.2.1725229609595; 
+ Sun, 01 Sep 2024 15:26:49 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-82a1a4c099asm215751839f.48.2024.09.01.15.26.46
+ ca18e2360f4ac-82a1a4c099asm215751839f.48.2024.09.01.15.26.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Sep 2024 15:26:47 -0700 (PDT)
+ Sun, 01 Sep 2024 15:26:48 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
-Subject: [PATCH v4 03/23] test/py: Fix some pylint warnings in test_ut.py
-Date: Sun,  1 Sep 2024 16:26:14 -0600
-Message-Id: <20240901222634.460873-4-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH v4 04/23] scripts: Update pylint.base
+Date: Sun,  1 Sep 2024 16:26:15 -0600
+Message-Id: <20240901222634.460873-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240901222634.460873-1-sjg@chromium.org>
 References: <20240901222634.460873-1-sjg@chromium.org>
@@ -89,250 +89,528 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tidy up most of these warnings. Remaining are four of these:
+There have been quite a few changes in the Python scripts, so update the
+pylint baseline.
 
-   R0914: Too many local variables
+This was created using:
 
-which can only by fixed by splitting things into functions, so that is
-left for another time.
-
-Part of this change was done by the flynt tool.
+   make pylint
+   cp pylint.cur scripts/pylint.base
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/py/tests/test_ut.py | 94 ++++++++++++++++++++--------------------
- 1 file changed, 48 insertions(+), 46 deletions(-)
+ scripts/pylint.base | 462 ++++++++++++++++++++++++++------------------
+ 1 file changed, 272 insertions(+), 190 deletions(-)
 
-diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-index 05e15830590..39aa1035e34 100644
---- a/test/py/tests/test_ut.py
-+++ b/test/py/tests/test_ut.py
-@@ -1,6 +1,12 @@
- # SPDX-License-Identifier: GPL-2.0
--# Copyright (c) 2016, NVIDIA CORPORATION. All rights reserved.
-+"""
-+Unit-test runner
-+
-+Provides a test_ut() function which is used by conftest.py to run each unit
-+test one at a time, as well setting up some files needed by the tests.
- 
-+# Copyright (c) 2016, NVIDIA CORPORATION. All rights reserved.
-+"""
- import collections
- import getpass
- import gzip
-@@ -44,8 +50,8 @@ def setup_image(cons, mmc_dev, part_type, second_part=False):
-     if second_part:
-         spec += '\ntype=c'
- 
--    u_boot_utils.run_and_log(cons, 'qemu-img create %s 20M' % fname)
--    u_boot_utils.run_and_log(cons, 'sudo sfdisk %s' % fname,
-+    u_boot_utils.run_and_log(cons, f'qemu-img create {fname} 20M')
-+    u_boot_utils.run_and_log(cons, f'sudo sfdisk {fname}',
-                              stdin=spec.encode('utf-8'))
-     return fname, mnt
- 
-@@ -61,13 +67,13 @@ def mount_image(cons, fname, mnt, fstype):
-     Returns:
-         str: Name of loop device used
-     """
--    out = u_boot_utils.run_and_log(cons, 'sudo losetup --show -f -P %s' % fname)
-+    out = u_boot_utils.run_and_log(cons, f'sudo losetup --show -f -P {fname}')
-     loop = out.strip()
-     part = f'{loop}p1'
-     u_boot_utils.run_and_log(cons, f'sudo mkfs.{fstype} {part}')
-     opts = ''
-     if fstype == 'vfat':
--         opts += f' -o uid={os.getuid()},gid={os.getgid()}'
-+        opts += f' -o uid={os.getuid()},gid={os.getgid()}'
-     u_boot_utils.run_and_log(cons, f'sudo mount -o loop {part} {mnt}{opts}')
-     u_boot_utils.run_and_log(cons, f'sudo chown {getpass.getuser()} {mnt}')
-     return loop
-@@ -82,9 +88,7 @@ def copy_prepared_image(cons, mmc_dev, fname):
-     """
-     infname = os.path.join(cons.config.source_dir,
-                            f'test/py/tests/bootstd/mmc{mmc_dev}.img.xz')
--    u_boot_utils.run_and_log(
--        cons,
--        ['sh', '-c', 'xz -dc %s >%s' % (infname, fname)])
-+    u_boot_utils.run_and_log(cons, ['sh', '-c', f'xz -dc {infname} >{fname}'])
- 
- def setup_bootmenu_image(cons):
-     """Create a 20MB disk image with a single ext4 partition
-@@ -101,9 +105,6 @@ def setup_bootmenu_image(cons):
-         loop = mount_image(cons, fname, mnt, 'ext4')
-         mounted = True
- 
--        vmlinux = 'Image'
--        initrd = 'uInitrd'
--        dtbdir = 'dtb'
-         script = '''# DO NOT EDIT THIS FILE
- #
- # Please edit /boot/armbianEnv.txt to set supported parameters
-@@ -177,12 +178,12 @@ booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
- 
- # Recompile with:
- # mkimage -C none -A arm -T script -d /boot/boot.cmd /boot/boot.scr
--''' % (mmc_dev)
-+'''
-         bootdir = os.path.join(mnt, 'boot')
-         mkdir_cond(bootdir)
-         cmd_fname = os.path.join(bootdir, 'boot.cmd')
-         scr_fname = os.path.join(bootdir, 'boot.scr')
--        with open(cmd_fname, 'w') as outf:
-+        with open(cmd_fname, 'w', encoding='ascii') as outf:
-             print(script, file=outf)
- 
-         infname = os.path.join(cons.config.source_dir,
-@@ -212,13 +213,12 @@ booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
-         complete = True
- 
-     except ValueError as exc:
--        print('Falled to create image, failing back to prepared copy: %s',
--              str(exc))
-+        print(f'Falled to create image, failing back to prepared copy: {exc}')
-     finally:
-         if mounted:
--            u_boot_utils.run_and_log(cons, 'sudo umount --lazy %s' % mnt)
-+            u_boot_utils.run_and_log(cons, f'sudo umount --lazy {mnt}')
-         if loop:
--            u_boot_utils.run_and_log(cons, 'sudo losetup -d %s' % loop)
-+            u_boot_utils.run_and_log(cons, f'sudo losetup -d {loop}')
- 
-     if not complete:
-         copy_prepared_image(cons, mmc_dev, fname)
-@@ -254,32 +254,32 @@ label Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
-         ext = os.path.join(mnt, 'extlinux')
-         mkdir_cond(ext)
- 
--        with open(os.path.join(ext, 'extlinux.conf'), 'w') as fd:
-+        conf = os.path.join(ext, 'extlinux.conf')
-+        with open(conf, 'w', encoding='ascii') as fd:
-             print(script, file=fd)
- 
-         inf = os.path.join(cons.config.persistent_data_dir, 'inf')
-         with open(inf, 'wb') as fd:
-             fd.write(gzip.compress(b'vmlinux'))
--        u_boot_utils.run_and_log(cons, 'mkimage -f auto -d %s %s' %
--                                 (inf, os.path.join(mnt, vmlinux)))
-+        u_boot_utils.run_and_log(
-+            cons, f'mkimage -f auto -d {inf} {os.path.join(mnt, vmlinux)}')
- 
--        with open(os.path.join(mnt, initrd), 'w') as fd:
-+        with open(os.path.join(mnt, initrd), 'w', encoding='ascii') as fd:
-             print('initrd', file=fd)
- 
-         mkdir_cond(os.path.join(mnt, dtbdir))
- 
--        dtb_file = os.path.join(mnt, '%s/sandbox.dtb' % dtbdir)
-+        dtb_file = os.path.join(mnt, f'{dtbdir}/sandbox.dtb')
-         u_boot_utils.run_and_log(
--            cons, 'dtc -o %s' % dtb_file, stdin=b'/dts-v1/; / {};')
-+            cons, f'dtc -o {dtb_file}', stdin=b'/dts-v1/; / {};')
-         complete = True
-     except ValueError as exc:
--        print('Falled to create image, failing back to prepared copy: %s',
--              str(exc))
-+        print(f'Falled to create image, failing back to prepared copy: {exc}')
-     finally:
-         if mounted:
--            u_boot_utils.run_and_log(cons, 'sudo umount --lazy %s' % mnt)
-+            u_boot_utils.run_and_log(cons, f'sudo umount --lazy {mnt}')
-         if loop:
--            u_boot_utils.run_and_log(cons, 'sudo losetup -d %s' % loop)
-+            u_boot_utils.run_and_log(cons, f'sudo losetup -d {loop}')
- 
-     if not complete:
-         copy_prepared_image(cons, mmc_dev, fname)
-@@ -303,7 +303,8 @@ def setup_cros_image(cons):
-         Return:
-             bytes: Packed-kernel data
-         """
--        kern_part = os.path.join(cons.config.result_dir, 'kern-part-{arch}.bin')
-+        kern_part = os.path.join(cons.config.result_dir,
-+                                 f'kern-part-{arch}.bin')
-         u_boot_utils.run_and_log(
-             cons,
-             f'futility vbutil_kernel --pack {kern_part} '
-@@ -332,7 +333,7 @@ def setup_cros_image(cons):
- 
-     mmc_dev = 5
-     fname = os.path.join(cons.config.source_dir, f'mmc{mmc_dev}.img')
--    u_boot_utils.run_and_log(cons, 'qemu-img create %s 20M' % fname)
-+    u_boot_utils.run_and_log(cons, f'qemu-img create {fname} 20M')
-     #mnt = os.path.join(cons.config.persistent_data_dir, 'mnt')
-     #mkdir_cond(mnt)
-     u_boot_utils.run_and_log(cons, f'cgpt create {fname}')
-@@ -381,20 +382,20 @@ def setup_cros_image(cons):
- 
-     u_boot_utils.run_and_log(cons, f'cgpt boot -p {fname}')
-     out = u_boot_utils.run_and_log(cons, f'cgpt show -q {fname}')
--    '''We expect something like this:
--        8239        2048       1  Basic data
--          45        2048       2  ChromeOS kernel
--        8238           1       3  ChromeOS rootfs
--        2093        2048       4  ChromeOS kernel
--        8237           1       5  ChromeOS rootfs
--          41           1       6  ChromeOS kernel
--          42           1       7  ChromeOS rootfs
--        4141        2048       8  Basic data
--          43           1       9  ChromeOS reserved
--          44           1      10  ChromeOS reserved
--          40           1      11  ChromeOS firmware
--        6189        2048      12  EFI System Partition
--    '''
-+
-+    # We expect something like this:
-+    #   8239        2048       1  Basic data
-+    #     45        2048       2  ChromeOS kernel
-+    #   8238           1       3  ChromeOS rootfs
-+    #   2093        2048       4  ChromeOS kernel
-+    #   8237           1       5  ChromeOS rootfs
-+    #     41           1       6  ChromeOS kernel
-+    #     42           1       7  ChromeOS rootfs
-+    #   4141        2048       8  Basic data
-+    #     43           1       9  ChromeOS reserved
-+    #     44           1      10  ChromeOS reserved
-+    #     40           1      11  ChromeOS firmware
-+    #   6189        2048      12  EFI System Partition
- 
-     # Create a dict (indexed by partition number) containing the above info
-     for line in out.splitlines():
-@@ -446,7 +447,7 @@ def setup_android_image(cons):
- 
-     mmc_dev = 7
-     fname = os.path.join(cons.config.source_dir, f'mmc{mmc_dev}.img')
--    u_boot_utils.run_and_log(cons, 'qemu-img create %s 20M' % fname)
-+    u_boot_utils.run_and_log(cons, f'qemu-img create {fname} 20M')
-     u_boot_utils.run_and_log(cons, f'cgpt create {fname}')
- 
-     ptr = 40
-@@ -498,11 +499,12 @@ def setup_android_image(cons):
-     with open(fname, 'wb') as outf:
-         outf.write(disk_data)
- 
--    print('wrote to {}'.format(fname))
-+    print(f'wrote to {fname}')
- 
-     return fname
- 
- def setup_cedit_file(cons):
-+    """Set up a .dtb file for use with testing expo and configuration editor"""
-     infname = os.path.join(cons.config.source_dir,
-                            'test/boot/files/expo_layout.dts')
-     inhname = os.path.join(cons.config.source_dir,
-@@ -584,7 +586,7 @@ def test_ut(u_boot_console, ut_subtest):
-         # ut hush hush_test_simple_dollar prints "Unknown command" on purpose.
-         with u_boot_console.disable_check('unknown_command'):
-             output = u_boot_console.run_command('ut ' + ut_subtest)
--        assert('Unknown command \'quux\' - try \'help\'' in output)
-+        assert 'Unknown command \'quux\' - try \'help\'' in output
-     else:
-         output = u_boot_console.run_command('ut ' + ut_subtest)
-     assert output.endswith('Failures: 0')
+diff --git a/scripts/pylint.base b/scripts/pylint.base
+index c7d141ed393..bc39e2385a3 100644
+--- a/scripts/pylint.base
++++ b/scripts/pylint.base
+@@ -1,229 +1,311 @@
+-test_conftest.py 6.56
+-test_multiplexed_log.py 7.49
+-test_test.py 8.18
++test_conftest.py 6.78
++test_multiplexed_log.py 7.68
++test_test.py 9.00
++test_tests_fit_util.py 7.19
++test_tests_fs_helper.py 10.00
+ test_tests_test_000_version.py 7.50
+-test_tests_test_android_test_ab.py 6.50
+-test_tests_test_android_test_abootimg.py 6.09
+-test_tests_test_android_test_avb.py 5.52
+-test_tests_test_bind.py -2.99
++test_tests_test_android_test_ab.py 7.00
++test_tests_test_android_test_abootimg.py 6.52
++test_tests_test_android_test_avb.py 6.38
++test_tests_test_bind.py 8.89
+ test_tests_test_bootmenu.py 10.00
++test_tests_test_bootstage.py 7.14
+ test_tests_test_button.py 3.33
+-test_tests_test_dfu.py 5.45
+-test_tests_test_dm.py 9.52
+-test_tests_test_efi_capsule_capsule_defs.py 6.67
+-test_tests_test_efi_capsule_conftest.py 1.86
+-test_tests_test_efi_capsule_test_capsule_firmware.py 4.52
+-test_tests_test_efi_capsule_test_capsule_firmware_signed.py 4.85
+-test_tests_test_efi_fit.py 8.16
+-test_tests_test_efi_loader.py 7.38
+-test_tests_test_efi_secboot_conftest.py -3.29
+-test_tests_test_efi_secboot_defs.py 6.67
+-test_tests_test_efi_secboot_test_authvar.py 8.93
+-test_tests_test_efi_secboot_test_signed.py 8.41
+-test_tests_test_efi_secboot_test_signed_intca.py 8.10
+-test_tests_test_efi_secboot_test_unsigned.py 8.00
+-test_tests_test_efi_selftest.py 6.36
+-test_tests_test_env.py 7.15
+-test_tests_test_extension.py 2.14
+-test_tests_test_fit.py 6.83
+-test_tests_test_fit_ecdsa.py 7.94
+-test_tests_test_fit_hashes.py 7.70
+-test_tests_test_fpga.py 1.81
+-test_tests_test_fs_conftest.py 5.13
++test_tests_test_cat_conftest.py 10.00
++test_tests_test_cat_test_cat.py 10.00
++test_tests_test_cleanup_build.py 10.00
++test_tests_test_dfu.py 6.23
++test_tests_test_dm.py 8.98
++test_tests_test_efi_bootmgr_conftest.py 10.00
++test_tests_test_efi_bootmgr_test_efi_bootmgr.py 10.00
++test_tests_test_efi_capsule_capsule_common.py 10.00
++test_tests_test_efi_capsule_capsule_defs.py 10.00
++test_tests_test_efi_capsule_conftest.py 3.26
++test_tests_test_efi_capsule_test_capsule_firmware_fit.py 10.00
++test_tests_test_efi_capsule_test_capsule_firmware_raw.py 9.62
++test_tests_test_efi_capsule_test_capsule_firmware_signed_fit.py 9.74
++test_tests_test_efi_capsule_test_capsule_firmware_signed_raw.py 9.75
++test_tests_test_efi_fit.py 8.84
++test_tests_test_efi_loader.py 8.00
++test_tests_test_efi_secboot_conftest.py 0.00
++test_tests_test_efi_secboot_defs.py 10.00
++test_tests_test_efi_secboot_test_authvar.py 9.38
++test_tests_test_efi_secboot_test_signed.py 8.60
++test_tests_test_efi_secboot_test_signed_intca.py 8.81
++test_tests_test_efi_secboot_test_unsigned.py 8.75
++test_tests_test_efi_selftest.py 8.07
++test_tests_test_eficonfig_conftest.py 10.00
++test_tests_test_eficonfig_test_eficonfig.py 9.47
++test_tests_test_env.py 7.76
++test_tests_test_event_dump.py 2.22
++test_tests_test_extension.py 2.50
++test_tests_test_fit.py 7.54
++test_tests_test_fit_auto_signed.py 9.09
++test_tests_test_fit_ecdsa.py 8.29
++test_tests_test_fit_hashes.py 7.94
++test_tests_test_fpga.py 2.94
++test_tests_test_fs_conftest.py 5.21
+ test_tests_test_fs_fstest_defs.py 8.33
+ test_tests_test_fs_fstest_helpers.py 4.29
+-test_tests_test_fs_test_basic.py 0.60
+-test_tests_test_fs_test_ext.py 0.00
++test_tests_test_fs_test_basic.py 1.90
++test_tests_test_fs_test_erofs.py 8.97
++test_tests_test_fs_test_ext.py 1.48
+ test_tests_test_fs_test_fs_cmd.py 8.00
+-test_tests_test_fs_test_mkdir.py 1.96
+-test_tests_test_fs_test_squashfs_sqfs_common.py 8.41
+-test_tests_test_fs_test_squashfs_test_sqfs_load.py 7.46
+-test_tests_test_fs_test_squashfs_test_sqfs_ls.py 8.00
+-test_tests_test_fs_test_symlink.py 1.22
+-test_tests_test_fs_test_unlink.py 2.78
+-test_tests_test_gpio.py 6.09
+-test_tests_test_gpt.py 7.67
++test_tests_test_fs_test_fs_fat.py 2.50
++test_tests_test_fs_test_mkdir.py 3.04
++test_tests_test_fs_test_squashfs_sqfs_common.py 8.38
++test_tests_test_fs_test_squashfs_test_sqfs_load.py 7.63
++test_tests_test_fs_test_squashfs_test_sqfs_ls.py 8.04
++test_tests_test_fs_test_symlink.py 2.04
++test_tests_test_fs_test_unlink.py 4.07
++test_tests_test_gpio.py 7.60
++test_tests_test_gpt.py 8.55
+ test_tests_test_handoff.py 5.00
+-test_tests_test_help.py 5.00
+-test_tests_test_hush_if_test.py 9.27
+-test_tests_test_log.py 8.64
++test_tests_test_help.py 8.64
++test_tests_test_i2c.py 7.42
++test_tests_test_kconfig.py 5.38
++test_tests_test_log.py 8.75
+ test_tests_test_lsblk.py 8.00
+ test_tests_test_md.py 3.64
++test_tests_test_mdio.py 6.82
++test_tests_test_memtest.py 8.39
++test_tests_test_mii.py 8.55
++test_tests_test_mmc.py 7.01
+ test_tests_test_mmc_rd.py 6.05
+ test_tests_test_mmc_wr.py 3.33
+-test_tests_test_net.py 6.84
++test_tests_test_net.py 8.43
++test_tests_test_net_boot.py 8.23
++test_tests_test_of_migrate.py 7.86
+ test_tests_test_ofplatdata.py 5.71
++test_tests_test_optee_rpmb.py 0.00
+ test_tests_test_part.py 8.00
+-test_tests_test_pinmux.py 3.27
++test_tests_test_pinmux.py 3.40
+ test_tests_test_pstore.py 2.31
+ test_tests_test_qfw.py 8.75
++test_tests_test_reset.py 9.55
+ test_tests_test_sandbox_exit.py 6.50
++test_tests_test_sandbox_opts.py 1.11
++test_tests_test_saveenv.py 7.87
+ test_tests_test_scp03.py 3.33
+-test_tests_test_sf.py 7.13
++test_tests_test_scsi.py 8.47
++test_tests_test_semihosting_conftest.py 10.00
++test_tests_test_semihosting_test_hostfs.py 10.00
++test_tests_test_sf.py 7.45
+ test_tests_test_shell_basics.py 9.58
+-test_tests_test_sleep.py 7.78
+-test_tests_test_spl.py 2.22
++test_tests_test_sleep.py 8.28
++test_tests_test_smbios.py 9.47
++test_tests_test_source.py 7.20
++test_tests_test_spl.py 6.67
+ test_tests_test_stackprotector.py 5.71
+-test_tests_test_tpm2.py 8.51
+-test_tests_test_ums.py 6.32
++test_tests_test_tpm2.py 8.45
++test_tests_test_trace.py 8.70
++test_tests_test_ums.py 5.92
+ test_tests_test_unknown_cmd.py 5.00
+-test_tests_test_ut.py 7.06
+-test_tests_test_vboot.py 6.01
+-test_tests_vboot_evil.py 8.95
++test_tests_test_upl.py 5.33
++test_tests_test_usb.py 7.08
++test_tests_test_ut.py 9.44
++test_tests_test_vbe.py 7.22
++test_tests_test_vbe_vpl.py 6.11
++test_tests_test_vboot.py 5.37
++test_tests_test_vpl.py 2.22
++test_tests_test_xxd_conftest.py 10.00
++test_tests_test_xxd_test_xxd.py 10.00
++test_tests_test_zynq_secure.py 7.60
++test_tests_test_zynqmp_rpu.py 7.54
++test_tests_test_zynqmp_secure.py 7.68
++test_tests_vboot_evil.py 9.45
+ test_tests_vboot_forge.py 9.22
+-test_u_boot_console_base.py 7.08
+-test_u_boot_console_exec_attach.py 9.23
+-test_u_boot_console_sandbox.py 8.06
+-test_u_boot_spawn.py 7.65
+-test_u_boot_utils.py 6.94
+-tools_binman_bintool 8.59
++test_u_boot_console_base.py 7.73
++test_u_boot_console_exec_attach.py 9.62
++test_u_boot_console_sandbox.py 8.64
++test_u_boot_spawn.py 8.57
++test_u_boot_utils.py 7.83
++tools_binman_bintool 9.16
+ tools_binman_bintool_test 9.87
+-tools_binman_btool__testing 6.09
++tools_binman_btool__testing 6.52
++tools_binman_btool_bootgen 4.50
++tools_binman_btool_btool_gzip 0.00
++tools_binman_btool_bzip2 0.00
+ tools_binman_btool_cbfstool 7.83
+-tools_binman_btool_fiptool 7.62
+-tools_binman_btool_futility 7.39
++tools_binman_btool_cst 5.00
++tools_binman_btool_fdt_add_pubkey 7.00
++tools_binman_btool_fdtgrep 5.20
++tools_binman_btool_fiptool 7.22
++tools_binman_btool_futility 6.67
+ tools_binman_btool_ifwitool 3.81
+-tools_binman_btool_lz4 6.30
++tools_binman_btool_lz4 4.76
+ tools_binman_btool_lzma_alone 6.97
+-tools_binman_btool_mkimage 7.86
+-tools_binman_cbfs_util 8.46
+-tools_binman_cbfs_util_test 9.38
+-tools_binman_cmdline 9.03
+-tools_binman_comp_util 6.88
+-tools_binman_control 5.01
+-tools_binman_elf 6.98
+-tools_binman_elf_test 5.62
+-tools_binman_entry 3.55
+-tools_binman_entry_test 5.34
+-tools_binman_etype__testing 0.83
+-tools_binman_etype_atf_bl31 -6.00
+-tools_binman_etype_atf_fip 0.29
+-tools_binman_etype_blob -1.58
+-tools_binman_etype_blob_dtb -10.00
+-tools_binman_etype_blob_ext -19.09
++tools_binman_btool_lzop 0.00
++tools_binman_btool_mkeficapsule 7.69
++tools_binman_btool_mkimage 6.36
++tools_binman_btool_openssl 4.63
++tools_binman_btool_xz 0.00
++tools_binman_btool_zstd 0.00
++tools_binman_cbfs_util 8.93
++tools_binman_cbfs_util_test 9.81
++tools_binman_cmdline 9.33
++tools_binman_control 6.92
++tools_binman_elf 7.52
++tools_binman_elf_test 8.40
++tools_binman_entry 6.40
++tools_binman_entry_test 6.99
++tools_binman_etype__testing 2.02
++tools_binman_etype_alternates_fdt 5.09
++tools_binman_etype_atf_bl31 0.00
++tools_binman_etype_atf_fip 0.44
++tools_binman_etype_blob 0.41
++tools_binman_etype_blob_dtb 0.21
++tools_binman_etype_blob_ext 0.00
+ tools_binman_etype_blob_ext_list 0.00
+-tools_binman_etype_blob_named_by_arg -7.78
+-tools_binman_etype_blob_phase -5.00
+-tools_binman_etype_cbfs -1.44
++tools_binman_etype_blob_named_by_arg 0.00
++tools_binman_etype_blob_phase 0.50
++tools_binman_etype_cbfs 1.86
+ tools_binman_etype_collection 2.67
+-tools_binman_etype_cros_ec_rw -6.00
+-tools_binman_etype_fdtmap -3.28
+-tools_binman_etype_files -7.43
+-tools_binman_etype_fill -6.43
+-tools_binman_etype_fit 6.31
+-tools_binman_etype_fmap -0.29
+-tools_binman_etype_gbb 0.83
+-tools_binman_etype_image_header 5.77
+-tools_binman_etype_intel_cmc -12.50
++tools_binman_etype_cros_ec_rw 0.00
++tools_binman_etype_efi_capsule 3.33
++tools_binman_etype_efi_empty_capsule 0.00
++tools_binman_etype_encrypted 1.43
++tools_binman_etype_fdtmap 0.16
++tools_binman_etype_files 0.00
++tools_binman_etype_fill 0.00
++tools_binman_etype_fit 7.52
++tools_binman_etype_fmap 0.54
++tools_binman_etype_gbb 1.35
++tools_binman_etype_image_header 4.81
++tools_binman_etype_intel_cmc 0.00
+ tools_binman_etype_intel_descriptor 4.62
+ tools_binman_etype_intel_fit 0.00
+ tools_binman_etype_intel_fit_ptr 2.35
+-tools_binman_etype_intel_fsp -12.50
+-tools_binman_etype_intel_fsp_m -12.50
+-tools_binman_etype_intel_fsp_s -12.50
+-tools_binman_etype_intel_fsp_t -12.50
+-tools_binman_etype_intel_ifwi 2.88
+-tools_binman_etype_intel_me -12.50
+-tools_binman_etype_intel_mrc -10.00
+-tools_binman_etype_intel_refcode -10.00
+-tools_binman_etype_intel_vbt -12.50
+-tools_binman_etype_intel_vga -12.50
+-tools_binman_etype_mkimage 1.47
+-tools_binman_etype_opensbi -6.00
+-tools_binman_etype_powerpc_mpc85xx_bootpg_resetvec -10.00
+-tools_binman_etype_scp -6.00
+-tools_binman_etype_section 4.57
+-tools_binman_etype_tee_os -6.00
+-tools_binman_etype_text -0.48
+-tools_binman_etype_u_boot -15.71
+-tools_binman_etype_u_boot_dtb -12.22
+-tools_binman_etype_u_boot_dtb_with_ucode 0.39
+-tools_binman_etype_u_boot_elf -8.42
++tools_binman_etype_intel_fsp 0.00
++tools_binman_etype_intel_fsp_m 0.00
++tools_binman_etype_intel_fsp_s 0.00
++tools_binman_etype_intel_fsp_t 0.00
++tools_binman_etype_intel_ifwi 3.13
++tools_binman_etype_intel_me 0.00
++tools_binman_etype_intel_mrc 0.00
++tools_binman_etype_intel_refcode 0.00
++tools_binman_etype_intel_vbt 0.00
++tools_binman_etype_intel_vga 0.00
++tools_binman_etype_mkimage 4.88
++tools_binman_etype_null 0.00
++tools_binman_etype_nxp_imx8mcst 2.44
++tools_binman_etype_nxp_imx8mimage 0.00
++tools_binman_etype_opensbi 0.00
++tools_binman_etype_powerpc_mpc85xx_bootpg_resetvec 0.00
++tools_binman_etype_pre_load 3.68
++tools_binman_etype_rockchip_tpl 0.00
++tools_binman_etype_scp 0.00
++tools_binman_etype_section 6.04
++tools_binman_etype_tee_os 4.00
++tools_binman_etype_text 0.00
++tools_binman_etype_ti_board_config 5.40
++tools_binman_etype_ti_dm 0.00
++tools_binman_etype_ti_secure 4.22
++tools_binman_etype_ti_secure_rom 2.22
++tools_binman_etype_u_boot 0.00
++tools_binman_etype_u_boot_dtb 0.00
++tools_binman_etype_u_boot_dtb_with_ucode 1.73
++tools_binman_etype_u_boot_elf 0.00
+ tools_binman_etype_u_boot_env 0.74
+-tools_binman_etype_u_boot_expanded -10.00
+-tools_binman_etype_u_boot_img -15.71
+-tools_binman_etype_u_boot_nodtb -15.71
+-tools_binman_etype_u_boot_spl -10.91
+-tools_binman_etype_u_boot_spl_bss_pad -9.29
+-tools_binman_etype_u_boot_spl_dtb -12.22
+-tools_binman_etype_u_boot_spl_elf -15.71
+-tools_binman_etype_u_boot_spl_expanded -9.09
+-tools_binman_etype_u_boot_spl_nodtb -10.91
+-tools_binman_etype_u_boot_spl_with_ucode_ptr -5.00
+-tools_binman_etype_u_boot_tpl -10.91
+-tools_binman_etype_u_boot_tpl_bss_pad -9.29
+-tools_binman_etype_u_boot_tpl_dtb -12.22
+-tools_binman_etype_u_boot_tpl_dtb_with_ucode -7.50
+-tools_binman_etype_u_boot_tpl_elf -15.71
+-tools_binman_etype_u_boot_tpl_expanded -9.09
+-tools_binman_etype_u_boot_tpl_nodtb -10.91
+-tools_binman_etype_u_boot_tpl_with_ucode_ptr -20.83
++tools_binman_etype_u_boot_expanded 0.00
++tools_binman_etype_u_boot_img 0.00
++tools_binman_etype_u_boot_nodtb 0.00
++tools_binman_etype_u_boot_spl 0.00
++tools_binman_etype_u_boot_spl_bss_pad 0.00
++tools_binman_etype_u_boot_spl_dtb 0.00
++tools_binman_etype_u_boot_spl_elf 0.00
++tools_binman_etype_u_boot_spl_expanded 0.00
++tools_binman_etype_u_boot_spl_nodtb 0.00
++tools_binman_etype_u_boot_spl_pubkey_dtb 1.21
++tools_binman_etype_u_boot_spl_with_ucode_ptr 0.00
++tools_binman_etype_u_boot_tpl 0.00
++tools_binman_etype_u_boot_tpl_bss_pad 0.00
++tools_binman_etype_u_boot_tpl_dtb 0.00
++tools_binman_etype_u_boot_tpl_dtb_with_ucode 0.00
++tools_binman_etype_u_boot_tpl_elf 0.00
++tools_binman_etype_u_boot_tpl_expanded 0.00
++tools_binman_etype_u_boot_tpl_nodtb 0.00
++tools_binman_etype_u_boot_tpl_with_ucode_ptr 0.00
+ tools_binman_etype_u_boot_ucode 1.52
+-tools_binman_etype_u_boot_with_ucode_ptr -0.71
+-tools_binman_etype_vblock 0.27
+-tools_binman_etype_x86_reset16 -15.71
+-tools_binman_etype_x86_reset16_spl -15.71
+-tools_binman_etype_x86_reset16_tpl -15.71
+-tools_binman_etype_x86_start16 -15.71
+-tools_binman_etype_x86_start16_spl -15.71
+-tools_binman_etype_x86_start16_tpl -15.71
+-tools_binman_fdt_test 10.00
++tools_binman_etype_u_boot_vpl 0.00
++tools_binman_etype_u_boot_vpl_bss_pad 0.00
++tools_binman_etype_u_boot_vpl_dtb 0.00
++tools_binman_etype_u_boot_vpl_elf 0.00
++tools_binman_etype_u_boot_vpl_expanded 0.00
++tools_binman_etype_u_boot_vpl_nodtb 0.00
++tools_binman_etype_u_boot_with_ucode_ptr 0.00
++tools_binman_etype_vblock 0.79
++tools_binman_etype_x509_cert 3.10
++tools_binman_etype_x86_reset16 0.00
++tools_binman_etype_x86_reset16_spl 0.00
++tools_binman_etype_x86_reset16_tpl 0.00
++tools_binman_etype_x86_start16 0.00
++tools_binman_etype_x86_start16_spl 0.00
++tools_binman_etype_x86_start16_tpl 0.00
++tools_binman_etype_xilinx_bootgen 6.06
++tools_binman_fdt_test 7.74
+ tools_binman_fip_util 9.85
+ tools_binman_fip_util_test 10.00
+-tools_binman_fmap_util 6.88
+-tools_binman_ftest 7.46
+-tools_binman_image 7.12
+-tools_binman_image_test 4.48
+-tools_binman_main 4.86
+-tools_binman_setup 5.00
+-tools_binman_state 4.15
+-tools_buildman_board 7.82
+-tools_buildman_bsettings 1.71
+-tools_buildman_builder 6.92
+-tools_buildman_builderthread 7.48
+-tools_buildman_cfgutil 7.83
+-tools_buildman_cmdline 8.89
+-tools_buildman_control 8.12
+-tools_buildman_func_test 7.18
+-tools_buildman_kconfiglib 7.49
+-tools_buildman_main -1.11
+-tools_buildman_test 6.56
+-tools_buildman_toolchain 6.44
+-tools_concurrencytest_concurrencytest 7.26
+-tools_dtoc_dtb_platdata 7.90
+-tools_dtoc_fdt 4.46
+-tools_dtoc_fdt_util 6.80
+-tools_dtoc_main 7.78
+-tools_dtoc_setup 5.00
+-tools_dtoc_src_scan 8.91
+-tools_dtoc_test_dtoc 8.56
+-tools_dtoc_test_fdt 6.88
+-tools_dtoc_test_src_scan 9.43
+-tools_efivar 6.71
++tools_binman_fmap_util 6.94
++tools_binman_ftest 8.04
++tools_binman_image 7.29
++tools_binman_image_test 5.52
++tools_binman_main 5.63
++tools_binman_setup 0.00
++tools_binman_state 4.88
++tools_buildman_board 6.36
++tools_buildman_boards 9.72
++tools_buildman_bsettings 5.00
++tools_buildman_builder 7.66
++tools_buildman_builderthread 9.63
++tools_buildman_cfgutil 10.00
++tools_buildman_cmdline 10.00
++tools_buildman_control 9.26
++tools_buildman_func_test 8.38
++tools_buildman_kconfiglib 8.33
++tools_buildman_main 8.10
++tools_buildman_test 7.16
++tools_buildman_toolchain 6.99
++tools_dtoc_dtb_platdata 8.10
++tools_dtoc_fdt 6.31
++tools_dtoc_fdt_util 7.62
++tools_dtoc_main 8.54
++tools_dtoc_setup 0.00
++tools_dtoc_src_scan 9.14
++tools_dtoc_test_dtoc 8.97
++tools_dtoc_test_fdt 9.93
++tools_dtoc_test_src_scan 9.46
++tools_efivar 7.39
+ tools_endian-swap 9.29
+-tools_microcode-tool 7.25
+-tools_moveconfig 8.34
++tools_expo 9.72
++tools_key2dtsi 7.14
++tools_microcode-tool 6.55
+ tools_patman___init__ 0.00
+-tools_patman_checkpatch 8.48
+-tools_patman_command 5.51
+-tools_patman_commit 4.50
+-tools_patman_control 8.14
+-tools_patman_cros_subprocess 7.76
+-tools_patman_func_test 8.51
+-tools_patman_get_maintainer 7.06
+-tools_patman_gitutil 6.65
+-tools_patman_main 7.90
+-tools_patman_patchstream 9.11
++tools_patman___main__ 9.44
++tools_patman_checkpatch 8.90
++tools_patman_cmdline 10.00
++tools_patman_commit 6.43
++tools_patman_control 8.29
++tools_patman_func_test 9.02
++tools_patman_get_maintainer 7.50
++tools_patman_gitutil 7.37
++tools_patman_patchstream 9.21
+ tools_patman_project 7.78
+-tools_patman_series 6.16
+-tools_patman_settings 5.89
++tools_patman_series 7.54
++tools_patman_settings 7.94
+ tools_patman_setup 5.00
+-tools_patman_status 8.62
+-tools_patman_terminal 8.00
+-tools_patman_test_checkpatch 7.75
+-tools_patman_test_util 7.64
+-tools_patman_tools 5.68
+-tools_patman_tout 5.31
+-tools_rkmux 6.90
+-tools_rmboard 7.76
++tools_patman_status 8.52
++tools_patman_test_checkpatch 8.51
++tools_patman_test_settings 8.78
++tools_qconfig 9.79
++tools_rkmux 7.10
++tools_rmboard 8.06
++tools_u_bootlib___init__.py 0.00
++tools_u_bootlib___main__.py 7.78
++tools_u_bootlib_command.py 6.48
++tools_u_bootlib_cros_subprocess.py 9.25
++tools_u_bootlib_terminal.py 8.50
++tools_u_bootlib_test_util.py 7.31
++tools_u_bootlib_tools.py 6.97
++tools_u_bootlib_tout.py 6.56
+ tools_zynqmp_pm_cfg_obj_convert 6.67
 -- 
 2.34.1
 
