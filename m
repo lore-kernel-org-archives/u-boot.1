@@ -4,70 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFC55C54FC6
-	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 22:15:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A78F3C54FC6
+	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 22:23:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FB148806C;
-	Mon,  2 Sep 2024 00:15:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DA83088970;
+	Mon,  2 Sep 2024 00:23:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fS+19kDr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DIy7YEnV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5521287FCD; Mon,  2 Sep 2024 00:15:07 +0200 (CEST)
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [IPv6:2607:f8b0:4864:20::533])
+ id C7A7E888C8; Mon,  2 Sep 2024 00:23:07 +0200 (CEST)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12ED0888B2
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 00:15:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 581538690D
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 00:23:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-7cd9d408040so2628063a12.0
- for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 15:15:04 -0700 (PDT)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-82a3096ae9aso106677239f.0
+ for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 15:23:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1725228903; x=1725833703; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=h9R/4eimnIYYTEgZvY8QMB9QcXPRxKCy5uWBPx5g2pQ=;
- b=fS+19kDrLhfYPTmmQfC93Eeh/+COyXcJ3byT0pfKjP3pUEZ/DCo7+YOzYkoVkvt6rw
- mK1GQu+5SEhMtRvPwubyZSb1jl9ZHe26BBEs3mtnPsSIMQisM6ggN7vCYOG2I/YktLW7
- zrE8KYYj9u6r5ro9yylUyjctX6+4Aj2YPpROI=
+ d=chromium.org; s=google; t=1725229383; x=1725834183; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Z0s/2NnUwB+0MeyUyVH5fMQGhx0okHuKRo6o0nhrvE8=;
+ b=DIy7YEnVH48LGU7Wi1x1cD1vyUMg46lPNqtzLczPJDWCFE/nPmcAuwskUgD2szZl5L
+ cdFgtpeBTYbfSiwJV5ct8p78wEVO8wB/LXuczilc3dZZCabpWgr+C7e1qa7HxU2IFLza
+ jks4Dcv1z8xp1SdO2ULhtvYybDF4s6ssfr+Qw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725228903; x=1725833703;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=h9R/4eimnIYYTEgZvY8QMB9QcXPRxKCy5uWBPx5g2pQ=;
- b=uONwnlY77/bXqspQICNjEtpTPmF2I3Q2VQ2X0r777yqNIZKlRkiQguN/03NWhDJP0p
- uKiThKQo7e39+730RhFkHPmn+0V7b06Njb/HothSVdwE6zFCbfs7Ln7pGebLJldGhUbr
- PO2XrfRcrjy3MVGtYaoOmmHTi/fVR66tzdI/HCJs8t2QB2efwo4JkhFf7opC00MdpEs2
- Y4vsDKjgprbCyQ3LuqeFD5SmHdXrEKK2cT3N/DjP/H37oSp7gcsyp6HjZOQ3y8BmK2Oo
- WKEpUOqg7+EX1IznGrCog9OUcrLSsW2z1I7j3JDm1QJWHBgvNL4L7giiK9qY2vJJwyZU
- FIxA==
-X-Gm-Message-State: AOJu0YxrMI8xVQIrTUV/tKeWvzKr5srfPF7nzlthhmfVyh7HxLcUGRyw
- 2nP/o/Y9cNWpoTqrYE+fP1EmupwlsCzVY6YVBNvflXK3MDFXNXcix1yfsVN2VUF7mI81AGP02FB
- ucJORD+y3sJBpOH7DlFPDXfowbfcF5AtcUexIhgXX3eVHUtY=
-X-Google-Smtp-Source: AGHT+IGp6gDczgEfPxGWq9gWfDp7BcfRFgHOkLJwaob/3FmicwEkrz/PUxpRkofEkhyy3TG5V+TaNVmy63RK38CqX18=
-X-Received: by 2002:a17:902:eccd:b0:202:51ca:9823 with SMTP id
- d9443c01a7336-20546b35b37mr60439555ad.46.1725228903440; Sun, 01 Sep 2024
- 15:15:03 -0700 (PDT)
-MIME-Version: 1.0
-References: <339DE2F4-312A-4817-85E8-A2F88125196D@gmail.com>
-In-Reply-To: <339DE2F4-312A-4817-85E8-A2F88125196D@gmail.com>
+ d=1e100.net; s=20230601; t=1725229383; x=1725834183;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Z0s/2NnUwB+0MeyUyVH5fMQGhx0okHuKRo6o0nhrvE8=;
+ b=SiVoI9onyHBpd2dbPKMtYq4y0gkz5eMXo30jDDWnj+8OpRJw6yBWYoZMNTZ3p/MRhe
+ hCZ2rs8fckHeNnWc9X1Sp0TDiH8cMFYC8AI7hAiXIpT/i7W/Z6qinW+vVK+zX0zLjaIN
+ iO0ZrNScnu7UzoxGubCNMB7Zkz2hFsJPT2H3OgqdIhLU2luJIzNlUpx+r2lhRMPDaYP8
+ EbiolfOfdirFUz6D5Nj2+6Pdae4Gzs4lYzL65w6fSlcjHF8LPrq2VxQ9Gh/C37oT03RG
+ Hh6G0L14FnsJU3dEkdcLW2cJohBOQEF9FcLQWthgs/5ncScNpV35G8A+1bulacVyhpy2
+ HVzQ==
+X-Gm-Message-State: AOJu0YzGpS4NKRk10P6qAOnCk62jz4+j0ISfMkP5CNPCyrMgNdPcGcY6
+ SeCGRa6dp+MMEkrcDKdoWZerf42JmOKZk5swE78VQBdgIRhNYZYI21dJ7i5yTgPg3yMjp7OgdOo
+ =
+X-Google-Smtp-Source: AGHT+IHmQiJp2mYXmdKPn9i2FDzt1JJskBERtHYCTf+u+FSibvwF5omcZ/JmnLSJ6pAhOQnZnAEe5A==
+X-Received: by 2002:a05:6602:2c13:b0:803:cc64:e0bf with SMTP id
+ ca18e2360f4ac-82a10e22177mr1555049839f.2.1725229383365; 
+ Sun, 01 Sep 2024 15:23:03 -0700 (PDT)
+Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
+ [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-82a1a2f0759sm213887339f.2.2024.09.01.15.23.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 01 Sep 2024 15:23:02 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 1 Sep 2024 16:14:51 -0600
-Message-ID: <CAFLszTiPfknR4OoO=+FfPZa6nkgbDpq0DfsRYBtxG-KsGzdqoA@mail.gmail.com>
-Subject: Re: What is the proper way to sign fit images using binman/mkimage
- for verified boot
-To: Alexander Kochetkov <al.kochet@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Eugene Uriev <eugeneuriev@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Richard Weinberger <richard@nod.at>, Sean Anderson <seanga2@gmail.com>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
+Subject: [PATCH v3 0/3] efi: Start tidying up memory management
+Date: Sun,  1 Sep 2024 16:22:56 -0600
+Message-Id: <20240901222259.456932-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,113 +93,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexander,
+We have been discussing the state of EFI memory management for some
+years so I thought it might be best to send a short series showing some
+of the issues we have talked about.
 
-On Sat, 31 Aug 2024 at 06:06, Alexander Kochetkov <al.kochet@gmail.com> wro=
-te:
->
-> Hello!
->
-> I used to sign images for verified boot for u-boot v2020.04 for allwinner=
- A64-based board. It was simple.
-> I=E2=80=99ve just added signature nodes for atf, u-boot, dtb, configurati=
-ons to the generated by mksunxi_fit_atf.sh
-> its file and mkimage signed the fit image.
->
-> Now I trying to do the same for u-boot v2024.07. I work with Radxa Model =
-3a. It=E2=80=99s fit image is generated
-> using binman. It=E2=80=99s bimnan configuration is located in the file ar=
-ch/arm/dts/rockchip-u-boot.dtsi.
->
-> I have 3 ideas about how to get the job done:
-> - improve binman, to support signing fit images during fit image generati=
-on. Sort of implementing
->   image-signature etype
-> - fix mkimage to allow signing generated by binman images. Now I getting =
-error, then I try to do that
-> - may be I do the job in a wrong way? Could you please direct me in a cor=
-rect way?
->
-> First I think, that I have to add signature entries to binman configurati=
-on. So, I added following:
->
-> &binman {
->     simple-bin {
->         =E2=80=A6
->         fit: fit {
->             =E2=80=A6
->             images {
->                 =E2=80=A6
->                 @atf-SEQ {
->                      =E2=80=A6
->                      signature {
->                          algo =3D "sha256,rsa2048=C2=BB;
->                          key-name-hint =3D "uboot-spl=C2=BB;
->                          sign-images =3D "atf-SEQ=C2=BB;
->                     };
->                 };
->             };
->         };
->     };
-> };
->
-> This signature entry was copied to resulted fit image without processing.=
- No signature was generated.
-> SEQ was not replaced to 1:
->
-> atf-1 {
->     ...
->     hash {
->         value =3D <0xb5946ac6 0x3df8fb35 0x69407a75 0xcf2f6aa3 0x96551ba0=
- 0x11e1a84b 0xec654dc9 0x982ba063>;
->         algo =3D "sha256=C2=BB;
->     };
->
->     signature {
->         algo =3D "sha256,rsa2048=C2=BB;
->         key-name-hint =3D "uboot-spl=C2=BB;
->         sign-images =3D "atf-SEQ=C2=BB;
->     };
-> };
->
-> So, obviously binman is not support this way of signing images. If this w=
-ay looks reasonable, I can try to implement
-> it and send patches to u-boot. I played with binman etypes, tryied to add=
- custom 'image-signature' etype. Looks like I
-> can complete such work.
+This one just deals with memory allocation. It provides a way to detect
+EFI 'page allocations' when U-Boot' malloc() should be used. It should
+help us to clean up this area of U-Boot.
 
-Yes this looks good to me. You should be able to extend one of the
-tests like testFit(). Be careful to test any error cases too.
+It also updates EFI to use U-Boot memory allocation for the pool. Most
+functions use that anyway and it is much more efficient. It also avoids
+allocating things 'in space' in conflict with the loaded images.
 
->
-> Second solution looks for me as follows. We need run mkimage to sign gene=
-rated by binman fit image.
-> Some sort of running mkimage like this:
->
-> ./tools/mkimage -k /media/yocto/build-yocto/=E2=80=A6. -F ./u-boot.itb
->
-> Now I getting error then I run mkimage:
-> Can't add verification data for node 'atf-1' (<unknown error>)
->
-> If that solution is reasonable, I can fix <unknown error> and send patche=
-s.
+This series also includes a little patch to show more information in
+the index for the EFI pages.
 
-Hmmm so are you signing an intermediate file produced by Binman? That
-error is likely to be that the dtb is out of space, but it should be
-handled...so a patch for that would be welcome, too, if you have time.
+Note that this series is independent from Sugosh's lmb series[1],
+although I believe it will point the way to simplifying some of the
+later patches in that series.
 
->
-> Third thought, may be there is another proper way to sign fit image for v=
-erified boot?
-> Could you please provide an idea how to do that.
+Overall, some issues which should be resolved are:
+- allocation inconsistency, e.g. efi_add_protocol() uses malloc() but
+  efi_dp_dup() does not (this series makes a start)
+- change efi_bl_init() to register events later, when the devices are
+  actually used
+- rather than efi_set_bootdev(), provide a bootstd way to take note of
+  the device images came from and allow EFI to query that when needed
+- EFI_LOADER_BOUNCE_BUFFER - can use U-Boot bounce buffers?
 
-I think your first way seems best for what you want to do (sign images
-in one step as part of build).
+Minor questions on my mind:
+- is unaligned access useful? Is there a performance penalty?
+- API confusion about whether something is an address or a pointer
 
-There is 'binman sign' for updating an existing one, but I'm not sure
-if that is useful for you.
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=416441
 
-BTW thanks for the detailed notes.
+Changes in v3:
+- Add new patch to drop the memset() from efi_alloc()
+- Drop patch to convert device_path allocation to use malloc()
 
-Regards,
-Simon
+Changes in v2:
+- Drop patch 'Show more information in efi index'
+- Drop patch 'Avoid pool allocation in efi_get_memory_map_alloc()'
+- Add the word 'warning', use log_warning() and show the end address
+
+Simon Glass (3):
+  efi: Drop the memset() from efi_alloc()
+  efi: Allow use of malloc() for the EFI pool
+  efi: Show the location of the bounce buffer
+
+ common/dlmalloc.c            |   7 +++
+ include/efi_loader.h         |  29 ++++++++-
+ include/malloc.h             |   7 +++
+ lib/efi_loader/efi_bootbin.c |  11 ++++
+ lib/efi_loader/efi_memory.c  | 119 ++++++++++++++++++++++++-----------
+ 5 files changed, 136 insertions(+), 37 deletions(-)
+
+-- 
+2.34.1
+
