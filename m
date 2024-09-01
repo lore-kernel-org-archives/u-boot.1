@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB5F8C54FC6
-	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 22:31:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70BAAC54FC6
+	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 22:31:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F6E688D0C;
-	Mon,  2 Sep 2024 00:27:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D2B6488A3C;
+	Mon,  2 Sep 2024 00:27:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dRPIVz9V";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UtYqu+JE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 827C388CF0; Mon,  2 Sep 2024 00:27:46 +0200 (CEST)
-Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
- [IPv6:2607:f8b0:4864:20::d2b])
+ id 25003889FC; Mon,  2 Sep 2024 00:27:48 +0200 (CEST)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74C1587CF8
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 00:27:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F35FE889FC
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 00:27:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-82a35ea3edaso93418539f.3
- for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 15:27:44 -0700 (PDT)
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-39d22965434so13702075ab.0
+ for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 15:27:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1725229663; x=1725834463; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1725229664; x=1725834464; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vhuRES6RdflloOM8gsZyQPRoox8duyX4YqH2/v1iNGs=;
- b=dRPIVz9VTQytno0DVSgsgzfTUXsB2P+11AVIc6NSJh4xAxUEB8NWSXbtTmzeK9g28j
- QToXZB9lXjZ5jSX5ZMuBG+89Kzg5ClK9XyKFV7mzGQAJVqNWqG7nMPAXsWPkx0Z/LYsp
- 86EOq0V4F6m0CfgT4pcMxGbmy1Up77ii+B54g=
+ bh=6WL8AW1iwOEe5uhwAoQzo/LgeIFDwCpMMcRbgPCfb3c=;
+ b=UtYqu+JEbssO3c/qWMG2LBNV8oZV7QMCCj+C+K4M11QOn+xyr8a5E6RGEnKUC4Nkez
+ 3nlsaL9WtDnsJ7Ugjen9XpycXShm8NrchsisKG6jOONm+oa9J/gNt4OYxiH3rjzdjTo5
+ cG1Y6JU8prxeWViDigO27yaVGuI0SPf4gIQaw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725229663; x=1725834463;
+ d=1e100.net; s=20230601; t=1725229664; x=1725834464;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vhuRES6RdflloOM8gsZyQPRoox8duyX4YqH2/v1iNGs=;
- b=ZMpFJP+d+upODGS2Fgs9EC2ytoSC8v8rMYIIpxW/s1qpbMfHlH2ivxWwev8uPWseb1
- lvWlp6nWc5OdQZ15yEKlt5avJkZwEek4ZKEcpeOAKp5yS6CytqmaurdqdPdD6+xQLDsf
- ZasU2CupDTbknXUyl3DyBFnEeCqje3vB68IulEp2XOUb8RXhO8JmRfTK/U/uwCtXCAWx
- Ep2PAVY/tahsxIiRcz5aacWNBt2IC/Ch6MFmDfYYN2a8VxFlCcrAmUbTn9e/fERpkxU9
- 0aVAfuv9u4RxZtWor1bhySjnc5aaObctECggjDvUOG9cxtsLakrBqTqfuJkEYRuitwXD
- vL2Q==
-X-Gm-Message-State: AOJu0YxUveBTDvjalY70dE3r8fEfmeAewnT0qNqvkz+/qJut9MenRmxB
- bGLubgzK98VNNQAfLBxHHdojQe3/GiLEhGDF8SqgN2+7K5C25A+WtSA71CbwGxyS+HTs0ZhlIUI
+ bh=6WL8AW1iwOEe5uhwAoQzo/LgeIFDwCpMMcRbgPCfb3c=;
+ b=i5hi2/u8fUpmni0LKyvbQODBPw0mVP0hR9hGoOhp0o8+ByJjN5i+hBL3vQ+87Kny5r
+ TnJeExKrbd5RupJ7I1mH2vYGk8oDtDFLp5XYu8GvjnD0rXg9DmNM+smLWv1BlbNifwoH
+ qAmoeaLYdn//5F/CJTVDqzEhkJqjP9Ik3E9M1IArrRBDN4POdlkDf/KTIP6gnPYL3sf7
+ j+pEpTeboN5oJxVwkUqhlXzIuk1tDpNHNayRmEifkRH5QSPM13rrbQT7eCkHKLv3tgQV
+ qBi0vKaxmi1ODYbalLqF+T5L36p0k8gPAmqHdYZ1/xLED6uPYpFvkff2AkqdH/Vtpxo5
+ RtOg==
+X-Gm-Message-State: AOJu0Yy9OV7T0fMpM7JrRjyKsVsBt+BciDKzU/St9kHyTjcTuVsASSzY
+ RVLq/DnIY3YAkx61TTWF8zHdFyT+fOn3bF1GyFeM+8qinD2E+QEJ4thNy8nsl+N1gHyx2jZZ5v8
  =
-X-Google-Smtp-Source: AGHT+IF/jXmI+AthausWmivfcoRBdd/irVjjYXckoaSv/ZipD9+KPP9/eXHN+on/wWp1TTI04iAdcg==
-X-Received: by 2002:a05:6602:640d:b0:82a:2fe8:59af with SMTP id
- ca18e2360f4ac-82a2fe85b24mr957125039f.9.1725229662888; 
- Sun, 01 Sep 2024 15:27:42 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHc8I5YOVabMrfTCBmhdi1dtTXpOlExVTG7hNT0EANmDLan3vR3rR/ZuzAVPMRYE0PvVeuXhA==
+X-Received: by 2002:a05:6e02:1aaa:b0:375:a3eb:bfcd with SMTP id
+ e9e14a558f8ab-39f38b0c73fmr91340305ab.8.1725229664164; 
+ Sun, 01 Sep 2024 15:27:44 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ced2e17bb4sm1866981173.82.2024.09.01.15.27.42
+ 8926c6da1cb9f-4ced2e17bb4sm1866981173.82.2024.09.01.15.27.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Sep 2024 15:27:42 -0700 (PDT)
+ Sun, 01 Sep 2024 15:27:43 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 2/8] bootstd: Avoid calling unavailable block functions
-Date: Sun,  1 Sep 2024 16:27:28 -0600
-Message-Id: <20240901222734.462334-3-sjg@chromium.org>
+Subject: [PATCH v3 3/8] bootstd: Avoid depending on BLK
+Date: Sun,  1 Sep 2024 16:27:29 -0600
+Message-Id: <20240901222734.462334-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240901222734.462334-1-sjg@chromium.org>
 References: <20240901222734.462334-1-sjg@chromium.org>
@@ -91,32 +91,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When BLK is not enabled but BOOTSTD is, some features of standard boot
-become unavailable. Add a check for this in the only site that is
-currently apparent.
+In principle bootstd can work without block devices, even if it does
+require driver model to be enabled in that case.
+
+The use of a 'depends on BLK' for BOOTSTD conflicts with the way 'BLK'
+is now defined, producing recursive errors through multiple different
+paths, one of which is this (with Linksprite_pcDuino3 and
+BOOTSTD_DEFAULTS enabled):
+
+  arch/arm/Kconfig:7:error: recursive dependency detected!
+  arch/arm/Kconfig:7: symbol ARM64 is selected by ARCH_UNIPHIER_V8_MULTI
+  arch/arm/mach-uniphier/Kconfig:17: symbol ARCH_UNIPHIER_V8_MULTI is
+     part of choice <choice>
+  arch/arm/mach-uniphier/Kconfig:6: choice <choice> contains symbol
+     ARCH_UNIPHIER_V8_MULTI
+  arch/arm/mach-uniphier/Kconfig:17: symbol ARCH_UNIPHIER_V8_MULTI is
+     part of choice SPL
+  arch/arm/mach-stm32mp/Kconfig:3: symbol SPL depends on SUPPORT_SPL
+  common/spl/Kconfig:1: symbol SUPPORT_SPL is selected by ASPEED_AST2600
+  arch/arm/mach-aspeed/Kconfig:26: symbol ASPEED_AST2600 is part of
+     choice <choice>
+  arch/arm/mach-aspeed/Kconfig:12: choice <choice> contains symbol
+     ASPEED_AST2500
+  arch/arm/mach-aspeed/Kconfig:17: symbol ASPEED_AST2500 is part of
+     choice DM_RESET
+  arch/arm/mach-renesas/Kconfig.rcar3:197: symbol DM_RESET is selected
+     by CLK_RCAR_GEN3
+  drivers/clk/renesas/Kconfig:53: symbol CLK_RCAR_GEN3 depends on
+     CLK_RENESAS
+  drivers/clk/renesas/Kconfig:1: symbol CLK_RENESAS depends on CLK
+  drivers/clk/Kconfig:3: symbol CLK is selected by IMX8M_POWER_DOMAIN
+  drivers/power/domain/Kconfig:35: symbol IMX8M_POWER_DOMAIN depends on
+     POWER_DOMAIN
+  drivers/power/domain/Kconfig:3: symbol POWER_DOMAIN is selected by
+     BCM6318_USBH_PHY
+  drivers/phy/Kconfig:83: symbol BCM6318_USBH_PHY depends on PHY
+  drivers/phy/Kconfig:4: symbol PHY is selected by USB_EHCI_MX7
+  drivers/usb/host/Kconfig:211: symbol USB_EHCI_MX7 depends on USB
+  drivers/usb/Kconfig:1: symbol USB is selected by BOOTSTD_DEFAULTS
+  boot/Kconfig:455: symbol BOOTSTD_DEFAULTS depends on BOOTSTD
+  boot/Kconfig:398: symbol BOOTSTD depends on BLK
+  drivers/block/Kconfig:1: symbol BLK is selected by PVBLOCK
+  drivers/xen/Kconfig:1: symbol PVBLOCK depends on XEN
+  Kconfig:176: symbol XEN depends on ARM64
+
+We don't want to revert the change to BLK, which has been in place for
+a year now. We don't want to select BLK in BOOTSTD since it should
+support booting without block devices. The only realistic option is to
+remove BOOTSTD's dependency on BLK.
+
+Disable standard boot on the one board which fails.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v3:
+- Drop wip (work-in-progress) comment in commit
 
- boot/bootdev-uclass.c | 3 +++
- 1 file changed, 3 insertions(+)
+Changes in v2:
+- Add new patch to resolve BOOTSTD->BLK recursion with Kconfig
 
-diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
-index 807f8dfb064..64ec4fde493 100644
---- a/boot/bootdev-uclass.c
-+++ b/boot/bootdev-uclass.c
-@@ -434,6 +434,9 @@ int bootdev_find_by_label(const char *label, struct udevice **devp,
- 	struct uclass *uc;
- 	enum uclass_id id;
- 
-+	if (!CONFIG_IS_ENABLED(BLK))
-+		return -ENOSYS;
-+
- 	ret = label_to_uclass(label, &seq, &method_flags);
- 	if (ret < 0)
- 		return log_msg_ret("uc", ret);
+ boot/Kconfig                                   | 2 +-
+ configs/gardena-smart-gateway-mt7688_defconfig | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/boot/Kconfig b/boot/Kconfig
+index 7ac34574079..291919ea1ef 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -398,7 +398,7 @@ config BOOT_DEFAULTS
+ menuconfig BOOTSTD
+ 	bool "Standard boot"
+ 	default y
+-	depends on DM && OF_CONTROL && BLK
++	depends on DM && OF_CONTROL
+ 	help
+ 	  U-Boot supports a standard way of locating something to boot,
+ 	  typically an Operating System such as Linux, provided by a distro such
+diff --git a/configs/gardena-smart-gateway-mt7688_defconfig b/configs/gardena-smart-gateway-mt7688_defconfig
+index f4642e3fcff..36bf5f11d9a 100644
+--- a/configs/gardena-smart-gateway-mt7688_defconfig
++++ b/configs/gardena-smart-gateway-mt7688_defconfig
+@@ -30,6 +30,7 @@ CONFIG_HAS_BOARD_SIZE_LIMIT=y
+ CONFIG_BOARD_SIZE_LIMIT=655360
+ CONFIG_FIT=y
+ CONFIG_FIT_SIGNATURE=y
++# CONFIG_BOOTSTD is not set
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_AUTOBOOT_KEYED=y
+ CONFIG_AUTOBOOT_STOP_STR="x"
 -- 
 2.34.1
 
