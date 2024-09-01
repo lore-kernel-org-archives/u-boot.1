@@ -4,85 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AAFBCD3420
-	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 20:13:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88931C54FC6
+	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 20:13:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1C8F88C8A;
-	Sun,  1 Sep 2024 22:10:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 65B8B88C53;
+	Sun,  1 Sep 2024 22:10:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y+qoTtM1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GiTZyIt9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF3B888C6D; Sun,  1 Sep 2024 22:10:23 +0200 (CEST)
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
+ id 020B588C3E; Sun,  1 Sep 2024 22:10:26 +0200 (CEST)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4CE588C3F
- for <u-boot@lists.denx.de>; Sun,  1 Sep 2024 22:10:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD37188C69
+ for <u-boot@lists.denx.de>; Sun,  1 Sep 2024 22:10:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-7cd967d8234so2130367a12.2
- for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 13:10:19 -0700 (PDT)
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-71456acebe8so2763655b3a.3
+ for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 13:10:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1725221418; x=1725826218; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1725221422; x=1725826222; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MQHyKaoJSkyD4Ua+V51exR7NeyRvhzWy3guPj6gcpOM=;
- b=Y+qoTtM13NNJWK5VSXOqGySHbHSIVpbW/vWOepSfKTlICcY+vBiroBoSjMj/EeiNuj
- b+r5Cdvf60rtazcr+wthcEAfVlV11OUSCVijaswjCMJsAWl9gN7OIiX/pBnGaK9exLIA
- 0JZehRddJ0AYbzkJ6wua1WCgdYW696y6KJfMw=
+ bh=ODXwVXm/4DYlzqW/oGmEn0JN5Qf5+sNSNcqxQXq9f4U=;
+ b=GiTZyIt9W8rHTTkrJvX4qFmD8lTFTA5p2ch7swuYH2nqH+W0NdCEHA7B8fSfyIvfih
+ kwZaMPC3vQN3RpJrSpzNS8fhsS4aFv0uA6KIyqlqaQGNa/d4Qqw97O3/Gijdua+ipTtp
+ RdprKA/sIlx5mFL/LnG1HYVM/XQabM+27QgoQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725221418; x=1725826218;
+ d=1e100.net; s=20230601; t=1725221422; x=1725826222;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=MQHyKaoJSkyD4Ua+V51exR7NeyRvhzWy3guPj6gcpOM=;
- b=uW8qPnNo3FWL8MhkHJeMmi03YSnF93Fh3jNY1p6v141xp/m+4f4DBug5UjNqrSU0Tb
- mQ+jQkY5rAqu9F3E7CpNih13e2MTv9tWLImNQKZ8WvwfwTuHRAmw16057rKmQklyxdLi
- 2R3q3Vl+nplGDShEKE3NoPi52oppa3+1DQSw8XEfdmGccQ556BnhUpkrZLVbmjRW7o15
- hpuoAOQLn70mLozS0QF+u8A7C9lmEw5EYhKfGp4WxDEjl1n4KYDkwA7ufya4dXoC6SMp
- EGavnpOeVFfmcCO9U0D+kLk0FaUTpxRio0gPjQmQK2p9IfY95cjF0IsWsUtniCWcHafI
- qXCw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX6JmbDlrQiR9zmtZU5VolwPS3uF6ZJlm4SpDmazsF4t8hOx2wQu9bTl31aQbVLMPv/0szx9B0=@lists.denx.de
-X-Gm-Message-State: AOJu0YycOY8vzIkveMdU3EF1tJNd25V6MX8+UtBU1ZC6OKVERA9XCnjD
- XU3m13trtX/0lZ3Tp58n1NtdSYvLtYZEUsZXCnSr7Za7y0m1mR6EEH7T8Tj0mEKp3k6hoUrO18+
- 3S9ZUSwV9vIVSsFGM3IBpDkUVCI16YEZZOkAX
-X-Google-Smtp-Source: AGHT+IEKhTqxxD6/D4sjzWHwE1JSFIz2/8VmKWR4KIft3HJZ3Ff46QPg3YvqTlC3gZrlq4zkEY0oSCjySdjen61p3gs=
-X-Received: by 2002:a05:6a21:2d8d:b0:1cc:d2d9:b408 with SMTP id
- adf61e73a8af0-1ced0439cffmr4116659637.3.1725221418062; Sun, 01 Sep 2024
- 13:10:18 -0700 (PDT)
+ bh=ODXwVXm/4DYlzqW/oGmEn0JN5Qf5+sNSNcqxQXq9f4U=;
+ b=n+C2Eo4qJKkxtt2yYPU8EcwK5N8oDww/EqxqqebZ6+Jl5YmbZqK8B/OlFyBNJwEGD8
+ mFH+1BwSAHz999txfemD/xbSq17DDymbZ7g4IKypEUcidjSqyIJXizFxTSFuBvkJyoN1
+ 34chgZpXLFOsc/U7GoobfL8Lz1XtyVkL6uFsn273eUpymrwj0bsjg/9rwciXIZsQW5Lp
+ dN6gUC5SLAghwEyYcMXNRKU8YhxJP8XR0V2PyPKL2HzVyIaH+1sKub0UzwODmlzHOOCf
+ gqt9qGXqjYxWGKe+YNf3nJiVFw5s9BEAP3uQRlv8U82CSvObekZFRLJhUeHbnJa4ASig
+ dZOQ==
+X-Gm-Message-State: AOJu0Yz59O3UIShoRMcG9YlCVTS48oute+00PsK82/jzrWawsOLOfVhI
+ ruRiOmLN0zV7zyE9xh53kBvO9/duHf0Si21+uhgu5w5Z3/b+rC+ZVTAs8zUC/7HmtjKYtc2Q/eQ
+ tOpJjTlpOKfkCUSgx3iiCK1B8VLskHcbjxngU
+X-Google-Smtp-Source: AGHT+IH/fOH/7AI1beQM14S/kfkcSXvimzbT2Dtwm/BtGebXPyjHZ+MLEY9AoGkGk/FYRVgil1g0AHx6LdNFfiief5A=
+X-Received: by 2002:a05:6a20:9e49:b0:1c4:ae55:2b5a with SMTP id
+ adf61e73a8af0-1cce100ecd0mr12723068637.18.1725221422170; Sun, 01 Sep 2024
+ 13:10:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240806120659.686073-1-prasad.kummari@amd.com>
- <CAFLszTgAiRBih1JOtqvBEi8QbVc4-yV7Mq3kam=_FRgw58mtjg@mail.gmail.com>
- <SJ0PR12MB66851EC7FDDD9A61A63E4DE982B82@SJ0PR12MB6685.namprd12.prod.outlook.com>
- <CAFLszTg9VemEeiHkOzh+jnQ84y34V3A+EPU2_YaOJgZwhn=7GQ@mail.gmail.com>
- <9aaf2326-2339-4d9a-b5b8-c5115e844599@amd.com>
- <CAFLszTgHsgJ6hP3FjLicHoiMAh--OCFLJtSUCVWiCukDBczoCw@mail.gmail.com>
- <59d3c644-350a-4325-8e64-c14f6649a60f@amd.com>
- <CAFLszTj5HW1NGaKgV51tCv-i-vSUR3btYcFbc3-WFsG8CJtFCg@mail.gmail.com>
- <cab33499-07f3-4833-836c-005f3ec67fbb@amd.com>
- <CAFLszTipK435Oii=UuAUaFd4zXPvML8U88s9iCk13hOWL5N2jg@mail.gmail.com>
- <ae9343ac-a862-4a7b-ab8f-dbc4ae5433e4@amd.com>
-In-Reply-To: <ae9343ac-a862-4a7b-ab8f-dbc4ae5433e4@amd.com>
+References: <20240829145802.1827952-1-sjg@chromium.org>
+ <20240829145802.1827952-20-sjg@chromium.org>
+ <CALeDE9OE1n-9uATQrUi-qxsa_-cvBbfvj-_WaWF16PShNZ9Rgw@mail.gmail.com>
+In-Reply-To: <CALeDE9OE1n-9uATQrUi-qxsa_-cvBbfvj-_WaWF16PShNZ9Rgw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 1 Sep 2024 14:10:06 -0600
-Message-ID: <CAFLszTg9WYPVTrVBbJ_U4yrYWuYDN8+Wtzr=TC9LOs-QKqVxgw@mail.gmail.com>
-Subject: Re: [PATCH] cmd: sf: prevent overwriting the reserved memory
-To: Michal Simek <michal.simek@amd.com>
-Cc: "Kummari, Prasad" <Prasad.Kummari@amd.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
- "git (AMD-Xilinx)" <git@amd.com>, "Abbarapu,
- Venkatesh" <venkatesh.abbarapu@amd.com>, 
- "git@xilinx.com" <git@xilinx.com>,
- "jagan@amarulasolutions.com" <jagan@amarulasolutions.com>, 
- "n-francis@ti.com" <n-francis@ti.com>, "d-gole@ti.com" <d-gole@ti.com>,
- Love Kumar <love.kumar@amd.com>
+Date: Sun, 1 Sep 2024 14:09:57 -0600
+Message-ID: <CAFLszTj87YjhUCUi0UsjFGTYKUH=BwYZ0pmzaswvTAs0Ho-Daw@mail.gmail.com>
+Subject: Re: [PATCH 19/19] hash: Plumb crc8 into the hash functions
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,149 +87,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
+Hi Peter,
 
-On Mon, 26 Aug 2024 at 02:48, Michal Simek <michal.simek@amd.com> wrote:
+On Fri, 30 Aug 2024 at 06:17, Peter Robinson <pbrobinson@gmail.com> wrote:
 >
-> Hi Simon,
->
-> On 8/9/24 17:58, Simon Glass wrote:
-> > Hi Michal,
+> On Thu, 29 Aug 2024 at 16:02, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > On Fri, 9 Aug 2024 at 08:47, Michal Simek <michal.simek@amd.com> wrote:
-> >>
-> >>
-> >>
-> >> On 8/9/24 16:44, Simon Glass wrote:
-> >>> Hi Michal,
-> >>>
-> >>> On Thu, 8 Aug 2024 at 23:39, Michal Simek <michal.simek@amd.com> wrote:
-> >>>>
-> >>>> Hi Simon,
-> >>>>
-> >>>> On 8/8/24 16:28, Simon Glass wrote:
-> >>>>> Hi Michal,
-> >>>>>
-> >>>>> On Wed, 7 Aug 2024 at 23:31, Michal Simek <michal.simek@amd.com> wrote:
-> >>>>>>
-> >>>>>>
-> >>>>>>
-> >>>>>> On 8/7/24 16:36, Simon Glass wrote:
-> >>>>>>> Hi Prasad,
-> >>>>>>>
-> >>>>>>> On Tue, 6 Aug 2024 at 23:05, Kummari, Prasad <Prasad.Kummari@amd.com> wrote:
-> >>>>>>>>
-> >>>>>>>> Hi Glass,
-> >>>>>>>>
-> >>>>>>>>> -----Original Message-----
-> >>>>>>>>> From: Simon Glass <sjg@chromium.org>
-> >>>>>>>>> Sent: Wednesday, August 7, 2024 3:21 AM
-> >>>>>>>>> To: Kummari, Prasad <Prasad.Kummari@amd.com>
-> >>>>>>>>> Cc: u-boot@lists.denx.de; git (AMD-Xilinx) <git@amd.com>; Simek, Michal
-> >>>>>>>>> <michal.simek@amd.com>; Abbarapu, Venkatesh
-> >>>>>>>>> <venkatesh.abbarapu@amd.com>; git@xilinx.com;
-> >>>>>>>>> jagan@amarulasolutions.com; n-francis@ti.com; d-gole@ti.com
-> >>>>>>>>> Subject: Re: [PATCH] cmd: sf: prevent overwriting the reserved memory
-> >>>>>>>>>
-> >>>>>>>>> Caution: This message originated from an External Source. Use proper
-> >>>>>>>>> caution when opening attachments, clicking links, or responding.
-> >>>>>>>>>
-> >>>>>>>>>
-> >>>>>>>>> Hi Prasad,
-> >>>>>>>>>
-> >>>>>>>>> On Tue, 6 Aug 2024 at 06:08, Prasad Kummari <prasad.kummari@amd.com> wrote:
-> >>>>>>>>>>
-> >>>>>>>>>> Added LMB API to prevent SF command from overwriting reserved memory
-> >>>>>>>>>> areas. The current SPI code does not use LMB APIs for loading data
-> >>>>>>>>>> into memory addresses. To resolve this, LMB APIs were added to check
-> >>>>>>>>>> the load address of an SF command and ensure it does not overwrite
-> >>>>>>>>>> reserved memory addresses. Similar checks are used in TFTP, serial
-> >>>>>>>>>> load, and boot code to prevent overwriting reserved memory.
-> >>>>>>>>>
-> >>>>>>>>> The SPI flash may be used to load other things, not just an OS. What is your
-> >>>>>>>>> use case or problem here?
-> >>>>>>>>
-> >>>>>>>> [Prasad]:  We have observed that SF command can overwrite the reserved area without throwing any errors or warnings.
-> >>>>>>>>      This issue was noticed when the TF-A area is reserved in the Device Tree at address 0xf000000. The sf command is
-> >>>>>>>>      corrupting the reserved area,  and U-Boot relocation address too.
-> >>>>>>>>
-> >>>>>>>> EX: TF-A reserved at ddr address 0xf000000
-> >>>>>>>>
-> >>>>>>>>           Versal NET> sf read 0x0f000000 0x0 0x100     ----> Overwriting reserved area.
-> >>>>>>>>           device 0 offset 0x0, size 0x100
-> >>>>>>>>           SF: 256 bytes @ 0x0 Read: OK
-> >>>>>>>>
-> >>>>>>>>          U-boot relocation address relocaddr   = 0x000000007fec2000
-> >>>>>>>>
-> >>>>>>>>           Versal NET> sf write 0x0000000077ec2000 0x0 0x100   --> Overwriting reserved area.
-> >>>>>>>>           device 0 offset 0x0, size 0x100
-> >>>>>>>>           SF: 256 bytes @ 0x0 Written: OK
-> >>>>>>>
-> >>>>>>> Yes. There are many things which can overwrite memory, e.g. the mw
-> >>>>>>> command. It is a boot loader so this is normal.
-> >>>>>>>
-> >>>>>>> What image are you loading here?
-> >>>>>>
-> >>>>>> In spi boot it can be Kernel/rootfs but at the end of day it doesn't really matter.
-> >>>>>
-> >>>>> OK, in that case yes it should use lmb. That was the question I was
-> >>>>> trying to understand.
-> >>>>>
-> >>>>>>
-> >>>>>> We have protection for srec, fs load, tftp and wget already.
-> >>>>>>
-> >>>>>> c6855195e4b4 ("loads: Block writes into LMB reserved areas of U-Boot")
-> >>>>>> aa3c609e2be5 ("fs: prevent overwriting reserved memory")
-> >>>>>> a156c47e39ad ("tftp: prevent overwriting reserved memory")
-> >>>>>> 04592adbdb99 ("net: wget: prevent overwriting reserved memory")
-> >>>>>>
-> >>>>>> And this is just +1 patch to protect sf command that it doesn't touch reserved
-> >>>>>> location.
-> >>>>>> The same code should be used for other commands(nand, usb, etc) which loading
-> >>>>>> block of data to memory because all of them shouldn't rewrite reserved memory.
-> >>>>>>
-> >>>>>> In connection to mw/mtest/etc command protection can be also done but not sure
-> >>>>>> if this is useful because you normally not using them for booting.
-> >>>>>
-> >>>>> Exactly.
-> >>>>>
-> >>>>> I am hoping that we can pull SPI flash into bootstd...has anyone
-> >>>>> looked at that? Are you using scripts or is there a special bootmeth?
-> >>>>
-> >>>> We didn't find this issue in connection to boot. As I wrote in another reply we
-> >>>> found it via spi testcases where TF-A was placed lower in DDR and test overwrite
-> >>>> it without any other evidence. Part of the reason is that protection units are
-> >>>> not enabled to protect secure FW.
-> >>>
-> >>> Do you mean the sandbox test test/dm/sf.c ? Or something else? If the
-> >>> former, then we could mark dm_test_spi_flash() with CONFIG_SANDBOX
-> >>
-> >> pytest one and I think it was this one.
-> >> https://github.com/Xilinx/u-boot-xlnx/blob/master/test/py/tests/test_spi.py
-> >>
-> >> Love is working on sending this test upstream as he did with others.
-> >
-> > OK. But why is TF-A low in RAM? We really need to have a think about
-> > this TF-A thing. This is the second problem I've seen in a week (the
-> > first was rockchip resetting the timer). Is there a spec for what TF-A
-> > is supposed to do / not do?
+> > Add an entry for crc8, with watchdog handling.
 >
-> It is user choice where they put trusted firmware.
-> All depends on their application. Normally TF-A is in OCM but some users can
-> have a need to use OCM for user application because for example it is much
-> faster than DDR.
->
-> Not sure if there is any official spec but documentation is here.
-> https://trustedfirmware-a.readthedocs.io/en/latest/
->
-> But this issue is not related to TF-A. It is just the way how we found it based
-> on our partitioning.
-> Because DDR can be partitioned for Secure OS, different cpus (RPUs in our case)
-> or for processing units(MB/Risc-V/other masters) running out of programmable
-> logic. In general when you are reserved location for whatever reason all loading
-> commands shouldn't use them.
+> What's the watchdog handling do? What's this used for?
 
-OK thanks for the info.
+It does the hashing in chunks and touches the watchdog after every
+chunk, to avoid the board resetting.
+
+>
+> Looking at the use of crc8 it's minimally used.
+
+Yes, it's a cheap algorithm which provides some protection, so I am
+using it in the VBE relocating loader (to come).
+
+>
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  common/hash.c        | 8 ++++++++
+> >  include/u-boot/crc.h | 3 +++
+> >  lib/crc8.c           | 6 ++++++
+> >  3 files changed, 17 insertions(+)
+> >
+> > diff --git a/common/hash.c b/common/hash.c
+> > index ac63803fed9..43c4e185750 100644
+> > --- a/common/hash.c
+> > +++ b/common/hash.c
+> > @@ -304,6 +304,14 @@ static struct hash_algo hash_algo[] = {
+> >                 .hash_update    = hash_update_crc16_ccitt,
+> >                 .hash_finish    = hash_finish_crc16_ccitt,
+> >         },
+> > +#if CONFIG_IS_ENABLED(CRC8)
+> > +       {
+> > +               .name           = "crc8",
+> > +               .digest_size    = 1,
+> > +               .chunk_size     = CHUNKSZ_CRC32,
+> > +               .hash_func_ws   = crc8_wd_buf,
+> > +       },
+> > +#endif
+> >  #if CONFIG_IS_ENABLED(CRC32)
+> >         {
+> >                 .name           = "crc32",
+> > diff --git a/include/u-boot/crc.h b/include/u-boot/crc.h
+> > index 5174bd7ac41..b2badaf6a97 100644
+> > --- a/include/u-boot/crc.h
+> > +++ b/include/u-boot/crc.h
+> > @@ -25,6 +25,9 @@
+> >   */
+> >  unsigned int crc8(unsigned int crc_start, const unsigned char *vptr, int len);
+> >
+> > +void crc8_wd_buf(const unsigned char *input, unsigned int len,
+> > +                unsigned char output[1], unsigned int chunk_sz);
+> > +
+> >  /* lib/crc16.c - 16 bit CRC with polynomial x^16 + x^15 + x^2 + 1 */
+> >  uint16_t crc16(uint16_t crc, const unsigned char *buffer, size_t len);
+> >
+> > diff --git a/lib/crc8.c b/lib/crc8.c
+> > index 20d46d16147..811e19917b4 100644
+> > --- a/lib/crc8.c
+> > +++ b/lib/crc8.c
+> > @@ -32,3 +32,9 @@ unsigned int crc8(unsigned int crc, const unsigned char *vptr, int len)
+> >
+> >         return crc;
+> >  }
+> > +
+> > +void crc8_wd_buf(const unsigned char *input, unsigned int len,
+> > +                unsigned char output[1], unsigned int chunk_sz)
+> > +{
+> > +       *output = crc8(0, input, len);
+> > +}
+> > --
+> > 2.34.1
+> >
 
 Regards,
 Simon
