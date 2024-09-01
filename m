@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A9C8C54FC6
-	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 20:09:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80B1ACD3420
+	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 20:10:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B76D288706;
-	Sun,  1 Sep 2024 22:09:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2E389889AE;
+	Sun,  1 Sep 2024 22:09:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Sc7+Qwi+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SVtfVv1K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1B4788970; Sun,  1 Sep 2024 22:09:52 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
+ id A316587DEA; Sun,  1 Sep 2024 22:09:53 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50CA787DEA
- for <u-boot@lists.denx.de>; Sun,  1 Sep 2024 22:09:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8248888675
+ for <u-boot@lists.denx.de>; Sun,  1 Sep 2024 22:09:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-5df9dec9c0eso2413965eaf.2
- for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 13:09:50 -0700 (PDT)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6bf8a662467so18835726d6.3
+ for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 13:09:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1725221389; x=1725826189; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1725221390; x=1725826190; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UMt4+jNqd9HlfxTVNMeuOmTc8VAaJ0piew4DiziAFs0=;
- b=Sc7+Qwi+Ay9vCgBda5CygyXm/VKhWMMy+iRGN3Q3piuht5G+odHBJwRS21y2hKKrJ2
- YCpWg9JAvoTj5o5F4FZfW6a2K+B0KXXwNfrCLe9KLu6NHTvhSilCsmPxJBnbiRerLWBO
- TjcvrmBQktN/uoABw0T3VyDJFI9aNSnFx3jfs=
+ bh=OzFl/nYD3DK4ZD/xwETm+Te69rbGKDwdqs40sdmKYew=;
+ b=SVtfVv1KPFPsAVt6C/gHS1H2/3vV/dGRqoIxwfSz1Gn8H4aoboHmSTrs7/ezBYkLjv
+ rYEVAhAbJeAfeWIwaI5Fsuk0jSI0gJ9xjAG5qpSK6AU4YQx1rAO74Hm3ptmtoiXIQKrp
+ 13SBIwHgzZ3owF9BwQOqvIA8t71ofXTNrcpeU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725221389; x=1725826189;
+ d=1e100.net; s=20230601; t=1725221390; x=1725826190;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UMt4+jNqd9HlfxTVNMeuOmTc8VAaJ0piew4DiziAFs0=;
- b=a4xS9qO3mvOchoUer/gagToJOWCeyDoLAK99307POKLIYMoNVjv3QzP+GqDohnXPik
- M12swQ5iU2lxw8X/y8nw1VNiT7Y6hDbeqNC+/mpTxlRwq+5FU2JKp90HnGEhXDMgrawL
- hulq85OHImlnldXMedBXWu6+BLF8qFrSpVengLZfp9wQVzAC7NZ4/iymI4wMBmRW03lR
- 5Zjj16Ka9YInSRUVUUZrAXu4EMAVwI04yrfGGtriQVzYKD/Jk2ddpcgvimIixt8Q5OWa
- 1ht9ADlXo9PsCUVJ3qN5Y8o5gkOYUtr5ygeMeiW5Brsp5o3UgvmblwGyE/Nn1NPLxeSA
- NFEw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX4/VAzieWpIzmN98QnTkYeTJYI77+RkuUv4lslLHTP2hXh/5tT3AkNfY3TI5GRwXGDw6swvGM=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywu/y4CiHVNTkZ6b4F+sU2u6pbLtD1xI2IaQd8LpqNjXqNyqdVy
- o81dz2kq/bYfnmgU3Z9bxAi8+YbiLbLKYoTa1GgmzukDe/NawNrSmLP6E0OgdK9Q8nCfUjD/02H
- gmpDntKuuASZEuIx5zXo5OvreBuTRWPQ/QcY5
-X-Google-Smtp-Source: AGHT+IFsZNNUSn+YetcyASM3QdYsRukgeqayi6dvtOwL5PxAZQkyXJ52iu5VtUFAoz51JPSyroo9xSA5HnZWo20Ur00=
-X-Received: by 2002:a05:6358:e4a9:b0:1ad:282:126d with SMTP id
- e5c5f4694b2df-1b7ef6c80cfmr700084555d.12.1725221388945; Sun, 01 Sep 2024
- 13:09:48 -0700 (PDT)
+ bh=OzFl/nYD3DK4ZD/xwETm+Te69rbGKDwdqs40sdmKYew=;
+ b=llXAd64FBaWJfEDRUbWrt1PWSlXM2SE+YTHAMb6Bu+rnpGYqmpSqwMQTzo/TXR4Bsh
+ sXfovWBoaDCbrfuBX3Oqdw8BAfFwmWcMzQ6TzvK7yOAcvDYOaOprSBWF+dgSsUSZ6baY
+ P7E5AgCEx3wARSmyXctlU6S3XtDP0ATQyyMg1KE2Z888LuJ22BTQr54ae+IKvEBh7Hfz
+ xKE8TsMwSGFjUgISroUw2fAt1P6YEwzKbBBVhrvgqWVeCmhCP2TFrsesR1SptiR9OZ0o
+ ApdJaKS49o9zQLHooNIBUJvY9/ETw4syzJd3hOe0gzcZDwaifhJER7/JZXUUF5aYVD5t
+ EEiw==
+X-Gm-Message-State: AOJu0YzJRDL36WRL3LMJmiXmDTDbKpZCe1eUBy/f3yPPlpUCoV5oZutN
+ Rg0mBuqR/OX883QX+ZZ1IhvEv+YpgVVcPTs8lkSCv8nX+Xx/bOdmAn2ONofwecxc1G+sZATxUA7
+ 3Iovm4wrYpj/xc0j33Qgad0fP8UbiNkPTgeiE
+X-Google-Smtp-Source: AGHT+IH9UqMmzAOnMPDfUidu2b6GbWMAYmaxMQjnkmx8JKTeGZFC2aWoU4KJ3vk+LHGvJa9+wy4RShJ8MlbMWo/cBoI=
+X-Received: by 2002:a05:6214:318e:b0:6c3:4c75:f0fe with SMTP id
+ 6a1803df08f44-6c3554a6dd4mr48795486d6.47.1725221390370; Sun, 01 Sep 2024
+ 13:09:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240801173637.1071068-1-sjg@chromium.org>
- <20240801173637.1071068-3-sjg@chromium.org>
- <CAC_iWj+6CqPCxN8jSNJSzGiprd+sAw25ooQRaAf=t=Sdio67=A@mail.gmail.com>
- <CAFLszThVpvHO8Jt2Mz1WB80=fDtYpzieo1eR4k2Jj=e37Gb87g@mail.gmail.com>
- <CAC_iWjJJFygaws2ciBDMT=JJ4yMzhQC41T_Tg1RKFvrxzRTTyw@mail.gmail.com>
- <CAFLszThsVcFwSe39geTeE=6bbJqK0bUT6kEYjULkOuNjO51e+Q@mail.gmail.com>
- <CAC_iWjKPTv6Yzb6cQD=eJtC7Wm3bTC+cyaCUSmDXaWUySByoYw@mail.gmail.com>
- <Zs7Ubog171uwz8jn@hades>
- <CAFLszTgNnmyKFC5XKPieFoqT1J6aerYkD=qOof3tZ_V25SrO-A@mail.gmail.com>
- <CAC_iWj+EO4L+Pu-QzWPDJL5=A1JNzDx13SKfvNZZcjkzVXn2Ow@mail.gmail.com>
- <CAFLszTi+QjPANqTREqO8NoXEh_Mqy8fraFS2Uq6qirKSGhcOxQ@mail.gmail.com>
-In-Reply-To: <CAFLszTi+QjPANqTREqO8NoXEh_Mqy8fraFS2Uq6qirKSGhcOxQ@mail.gmail.com>
+References: <20240815195746.749042-1-sjg@chromium.org>
+ <20240815195746.749042-3-sjg@chromium.org>
+ <20240816172237.GA1626301@bill-the-cat>
+ <CAFLszTh1Nig-hs+Gtxzg8f-=vE1z4BvNSfEyUGtatZohj0pnuQ@mail.gmail.com>
+ <CAFLszTgufCxvXjJupqDphcGwJ0gfvrYxQACK3kYRKaumpKgrYQ@mail.gmail.com>
+ <20240822141013.GQ1626301@bill-the-cat>
+In-Reply-To: <20240822141013.GQ1626301@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 1 Sep 2024 14:09:38 -0600
-Message-ID: <CAFLszThGJVd6RFcmu_8RNXCfOWK=QzsyyTLkJ6Lg9_SBOkTA_w@mail.gmail.com>
-Subject: Re: [PATCH v2 2/3] efi: Convert device_path allocation to use malloc()
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Sun, 1 Sep 2024 14:09:39 -0600
+Message-ID: <CAFLszTiV8Nut06NeJFqT87y8qSTfzMYwxY6vc10+Q6NY6u2m-A@mail.gmail.com>
+Subject: Re: [PATCH v3 2/3] buildman: Allow skipping the dtc build
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Brandon Maier <brandon.maier@collins.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,73 +89,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Tom,
 
-On Thu, 29 Aug 2024 at 08:14, Simon Glass <sjg@chromium.org> wrote:
+On Thu, 22 Aug 2024 at 08:10, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Ilias,
->
-> On Thu, 29 Aug 2024 at 06:39, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
+> On Wed, Aug 21, 2024 at 09:00:25PM -0600, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > On Thu, 29 Aug 2024 at 15:17, Simon Glass <sjg@chromium.org> wrote:
+> > On Fri, 16 Aug 2024 at 17:53, Simon Glass <sjg@chromium.org> wrote:
 > > >
-> > > Hi Ilias,
+> > > Hi Tom,
 > > >
-> > > On Wed, 28 Aug 2024 at 01:40, Ilias Apalodimas
-> > > <ilias.apalodimas@linaro.org> wrote:
+> > > On Fri, 16 Aug 2024 at 11:22, Tom Rini <trini@konsulko.com> wrote:
 > > > >
-> > > > Hi Simon,
+> > > > On Thu, Aug 15, 2024 at 01:57:45PM -0600, Simon Glass wrote:
 > > > >
-> > > > [...]
-> > > >
-> > > > > > > > > > ---
-> > > > > > > > > >
-> > > > > > > > > > (no changes since v1)
-> > > > > > > > >
-> > > > > > > > > What about https://lore.kernel.org/u-boot/CAFLszTjLAKaYK_jLXJ7Z571L-QMtoiqE-oxHCRs186dZ2Qok5g@mail.gmail.com/
-> > > > > > > > > ?
-> > > > > > > >
-> > > > > > > > Yes, I reordered the patches in this series.
-> > > > > > >
-> > > > > > > You don't need to reorder them. As Heinrich already pointed out some
-> > > > > > > of these functions are used in EFI protocols. e.g
-> > > > > > > duplicate_device_path() requires the memory to be allocated by EFI
-> > > > > > > memory services, you can't just replace it with malloc.
-> > > > > >
-> > > > > > The pointers returned can be freed with EFI services. I don't see any
-> > > > > > problem here. All the tests pass and all the spec rules are followed,
-> > > > > > so far as I can tell.
+> > > > > For most boards, the device-tree compiler is built in-tree, ignoring the
+> > > > > system version. Add a special option to skip this build. This can be
+> > > > > useful when the system dtc is up-to-date, as it speeds up the build.
 > > > > >
-> > > > > Where exactly does that happen in the current patch?
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
 > > > > >
-> > > > > efi_alloc() calls efi_allocate_pool() and when we need to free the
-> > > > > device path we are calling efi_free_pool()
+> > > > > (no changes since v1)
 > > > > >
+> > > > >  tools/buildman/builder.py       | 27 ++++++++++++++++++++++++++-
+> > > > >  tools/buildman/builderthread.py |  4 ++--
+> > > > >  tools/buildman/buildman.rst     |  3 +++
+> > > > >  tools/buildman/cmdline.py       |  2 ++
+> > > > >  tools/buildman/control.py       |  3 ++-
+> > > > >  tools/buildman/test.py          | 31 +++++++++++++++++++++++++++++++
+> > > > >  6 files changed, 66 insertions(+), 4 deletions(-)
 > > > >
-> > > > Looking at it again, this wasn't very clear. The previous patch converts
-> > > > efi_allocate_pool() to use malloc. So this patch is not needed at all
+> > > > We should probably do this more generically, outside of buildman. We
+> > > > have scripts/dtc-version.sh and if the system version isn't new enough
+> > > > (and we just need to define whatever the minimum version is), then we
+> > > > build our (not currently that new anymore) dtc instead.
 > > >
-> > > That's right, but ultimately I'd like to drop efi_alloc() and the only
-> > > other place it is used is once in lib/efi_loader/efi_bootmgr.c
+> > > Yes I think I did a patch for that ages ago [1], but it was rejected.
+> > >
+> > > I'd be very happy for it to be applied as I think it is a better
+> > > solution than this one.
+> > >
+> > > I see that some poor sod tried to do this in Linux this morning.
 > >
-> > Right, then the right thing to do here is to replace efi_alloc() with
-> > efi_allocate_pool() which will be calling malloc in the end. That way
-> > we are free to change the efi_allocate_pool implementation in the
-> > future without affecting the functions described on the spec
+> > Any thoughts on that patch?
 >
-> OK, that sounds good and it will make it clearer which things are
-> internal memory allocations and which are presented to the app as
-> things that it can free. The spec doesn't mention the pool, but I
-> assume that is implicit.
+> I'm open to re-considering [1] again, but we need to handle the warning
+> problem first. That means...
+>
+> > Also I do see one problem. Newer dtc version produce a lot of
+> > warnings, which causes CI to fail. So if we always use the newest
+> > version, people are going to see a ton of warnings when they run
+> > locally. Am I missing something here?
+>
+> Well, it would be great to get our Kbuild logic anywhere close to
+> in-sync again with upstream. But syncing up the disabling warning flags
+> shouldn't be too hard.
 
-OK, so it turns out that this increases code size, since the EFI call
-has more parameters. So I think the best thing to do is just leave
-efi_alloc() alone (or perhaps use it more consistently). For now I can
-drop the memset() in there, which seems to serve no purpose and is
-confusing.
+So, coming back to this patch, the nice thing about it is that it is
+deterministic. So people who build U-Boot and don't want funky
+behaviour will be happy. It will use the internal dtc by default. To
+use the external one, you must provide an option.
 
-I'll send a v3 of this series.
+This patch only affects buildman, but as you can see the mechanism it
+uses is to set the DTC variable, which people can do without buildman.
+It's just a convenience, but useful enough to have a flag, I believe.
 
 Regards,
 Simon
