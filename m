@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A78F3C54FC6
-	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 22:23:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF9D4C54FC6
+	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 22:23:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA83088970;
-	Mon,  2 Sep 2024 00:23:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3CFFE889FC;
+	Mon,  2 Sep 2024 00:23:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DIy7YEnV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cmds8J2f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7A7E888C8; Mon,  2 Sep 2024 00:23:07 +0200 (CEST)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id 2F7718882C; Mon,  2 Sep 2024 00:23:09 +0200 (CEST)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 581538690D
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 00:23:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 166B98882C
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 00:23:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-82a3096ae9aso106677239f.0
- for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 15:23:05 -0700 (PDT)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-82a3acaa1bbso42137639f.2
+ for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 15:23:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1725229383; x=1725834183; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Z0s/2NnUwB+0MeyUyVH5fMQGhx0okHuKRo6o0nhrvE8=;
- b=DIy7YEnVH48LGU7Wi1x1cD1vyUMg46lPNqtzLczPJDWCFE/nPmcAuwskUgD2szZl5L
- cdFgtpeBTYbfSiwJV5ct8p78wEVO8wB/LXuczilc3dZZCabpWgr+C7e1qa7HxU2IFLza
- jks4Dcv1z8xp1SdO2ULhtvYybDF4s6ssfr+Qw=
+ d=chromium.org; s=google; t=1725229385; x=1725834185; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/3bMtd/oOnKUojGMHkW+I6zk6qtnwSbt5uzTu9YQylg=;
+ b=cmds8J2fUz29DKtvH+XifoFIOJ1yhs1I88zmxrPsFKy27nhFueSzb1hYqbxi96QTGp
+ Fr6eFERxr5bUpN1Y4Za6zTbVxvj1Qs+p12OrnpkEkz265nTvV5iI4F/C83WrTVjv/6E/
+ hwuAW2sDKp53DHWtVz8x5PH5AurXrHP/qavnk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725229383; x=1725834183;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Z0s/2NnUwB+0MeyUyVH5fMQGhx0okHuKRo6o0nhrvE8=;
- b=SiVoI9onyHBpd2dbPKMtYq4y0gkz5eMXo30jDDWnj+8OpRJw6yBWYoZMNTZ3p/MRhe
- hCZ2rs8fckHeNnWc9X1Sp0TDiH8cMFYC8AI7hAiXIpT/i7W/Z6qinW+vVK+zX0zLjaIN
- iO0ZrNScnu7UzoxGubCNMB7Zkz2hFsJPT2H3OgqdIhLU2luJIzNlUpx+r2lhRMPDaYP8
- EbiolfOfdirFUz6D5Nj2+6Pdae4Gzs4lYzL65w6fSlcjHF8LPrq2VxQ9Gh/C37oT03RG
- Hh6G0L14FnsJU3dEkdcLW2cJohBOQEF9FcLQWthgs/5ncScNpV35G8A+1bulacVyhpy2
- HVzQ==
-X-Gm-Message-State: AOJu0YzGpS4NKRk10P6qAOnCk62jz4+j0ISfMkP5CNPCyrMgNdPcGcY6
- SeCGRa6dp+MMEkrcDKdoWZerf42JmOKZk5swE78VQBdgIRhNYZYI21dJ7i5yTgPg3yMjp7OgdOo
+ d=1e100.net; s=20230601; t=1725229385; x=1725834185;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/3bMtd/oOnKUojGMHkW+I6zk6qtnwSbt5uzTu9YQylg=;
+ b=R/PfykvdWdYFWotnv50Pn/AWIYv7KxYM8HeuELHZOmjaP8TwD91B7aWjsHwFCETPyi
+ usoSebK7Kf6lyPLxG6KPekMBldITfc5pedo7crHZFSVCqBbou9bwWvGSv9guX52CMBIM
+ 2rPHuDb7X7KnZth8hKLtDOcfB8/jKO/U2HI6tUmeGyYlyjISOpTHm7h9+cmABwwjE1GE
+ Wd4+G7VATjgSMUsXC+9l0m8UEsv0+XMwXcwwhN50xnEKTi70gWvGxgT4++0pK93YNUOL
+ aw9nPFojG7scEv7d+6Szme/BDwg5cWAInFL/UABiAYbHvfU0IaRbuMTVUb1hltAbnGN+
+ bLmA==
+X-Gm-Message-State: AOJu0YwltxoBfFT3GcnC5ikmNk3oE/LCq7MDRzW6gsKhKpEaDngbQ7l3
+ X42sC6sroNqe7pW51Hbt94aUMff00II55ZCGHLuvu3+VHpggJ5GIHQ4gCcttjB0pCbvtRRv3MaI
  =
-X-Google-Smtp-Source: AGHT+IHmQiJp2mYXmdKPn9i2FDzt1JJskBERtHYCTf+u+FSibvwF5omcZ/JmnLSJ6pAhOQnZnAEe5A==
-X-Received: by 2002:a05:6602:2c13:b0:803:cc64:e0bf with SMTP id
- ca18e2360f4ac-82a10e22177mr1555049839f.2.1725229383365; 
- Sun, 01 Sep 2024 15:23:03 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGJf0jOjZxY8P7htSrPowV5ekSZWtlsoloENq0H/6Jljw3rEWgDZ6/is1StWeDU8UrqTCsamA==
+X-Received: by 2002:a05:6602:2d8e:b0:82a:4480:badc with SMTP id
+ ca18e2360f4ac-82a4480bcc7mr382374039f.10.1725229385278; 
+ Sun, 01 Sep 2024 15:23:05 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-82a1a2f0759sm213887339f.2.2024.09.01.15.23.02
+ ca18e2360f4ac-82a1a2f0759sm213887339f.2.2024.09.01.15.23.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Sep 2024 15:23:02 -0700 (PDT)
+ Sun, 01 Sep 2024 15:23:04 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
  AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Eugene Uriev <eugeneuriev@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
- Richard Weinberger <richard@nod.at>, Sean Anderson <seanga2@gmail.com>,
  =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
-Subject: [PATCH v3 0/3] efi: Start tidying up memory management
-Date: Sun,  1 Sep 2024 16:22:56 -0600
-Message-Id: <20240901222259.456932-1-sjg@chromium.org>
+Subject: [PATCH v3 1/3] efi: Drop the memset() from efi_alloc()
+Date: Sun,  1 Sep 2024 16:22:57 -0600
+Message-Id: <20240901222259.456932-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240901222259.456932-1-sjg@chromium.org>
+References: <20240901222259.456932-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -93,61 +93,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We have been discussing the state of EFI memory management for some
-years so I thought it might be best to send a short series showing some
-of the issues we have talked about.
+From my inspection none of the users need the memory to be zeroed. It
+is somewhat unexpected that it does so, since the name gives no clue to
+this.
 
-This one just deals with memory allocation. It provides a way to detect
-EFI 'page allocations' when U-Boot' malloc() should be used. It should
-help us to clean up this area of U-Boot.
+Drop the memset() so that it effectively becomes a wrapper around the
+normal EFI-pool allocator.
 
-It also updates EFI to use U-Boot memory allocation for the pool. Most
-functions use that anyway and it is much more efficient. It also avoids
-allocating things 'in space' in conflict with the loaded images.
+Another option would be to drop this function and call
+efi_allocate_pool() directly, but that increase code size a little.
 
-This series also includes a little patch to show more information in
-the index for the EFI pages.
+Move the function comment to the header file like most other exported
+functions in U-Boot.
 
-Note that this series is independent from Sugosh's lmb series[1],
-although I believe it will point the way to simplifying some of the
-later patches in that series.
-
-Overall, some issues which should be resolved are:
-- allocation inconsistency, e.g. efi_add_protocol() uses malloc() but
-  efi_dp_dup() does not (this series makes a start)
-- change efi_bl_init() to register events later, when the devices are
-  actually used
-- rather than efi_set_bootdev(), provide a bootstd way to take note of
-  the device images came from and allow EFI to query that when needed
-- EFI_LOADER_BOUNCE_BUFFER - can use U-Boot bounce buffers?
-
-Minor questions on my mind:
-- is unaligned access useful? Is there a performance penalty?
-- API confusion about whether something is an address or a pointer
-
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=416441
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
 Changes in v3:
 - Add new patch to drop the memset() from efi_alloc()
 - Drop patch to convert device_path allocation to use malloc()
 
-Changes in v2:
-- Drop patch 'Show more information in efi index'
-- Drop patch 'Avoid pool allocation in efi_get_memory_map_alloc()'
-- Add the word 'warning', use log_warning() and show the end address
+ include/efi_loader.h        | 11 ++++++++++-
+ lib/efi_loader/efi_memory.c |  9 ---------
+ 2 files changed, 10 insertions(+), 10 deletions(-)
 
-Simon Glass (3):
-  efi: Drop the memset() from efi_alloc()
-  efi: Allow use of malloc() for the EFI pool
-  efi: Show the location of the bounce buffer
-
- common/dlmalloc.c            |   7 +++
- include/efi_loader.h         |  29 ++++++++-
- include/malloc.h             |   7 +++
- lib/efi_loader/efi_bootbin.c |  11 ++++
- lib/efi_loader/efi_memory.c  | 119 ++++++++++++++++++++++++-----------
- 5 files changed, 136 insertions(+), 37 deletions(-)
-
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index f84852e384f..38971d01442 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -758,8 +758,17 @@ efi_status_t efi_next_variable_name(efi_uintn_t *size, u16 **buf,
+  * Return:	size in pages
+  */
+ #define efi_size_in_pages(size) (((size) + EFI_PAGE_MASK) >> EFI_PAGE_SHIFT)
+-/* Allocate boot service data pool memory */
++
++/**
++ * efi_alloc() - allocate boot services data pool memory
++ *
++ * Allocate memory from pool with type EFI_BOOT_SERVICES_DATA
++ *
++ * @size:	number of bytes to allocate
++ * Return:	pointer to allocated memory, or NULL if out of memory
++ */
+ void *efi_alloc(size_t len);
++
+ /* Allocate pages on the specified alignment */
+ void *efi_alloc_aligned_pages(u64 len, int memory_type, size_t align);
+ /* More specific EFI memory allocator, called by EFI payloads */
+diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+index c6f1dd09456..50cb2f3898b 100644
+--- a/lib/efi_loader/efi_memory.c
++++ b/lib/efi_loader/efi_memory.c
+@@ -664,14 +664,6 @@ efi_status_t efi_allocate_pool(enum efi_memory_type pool_type, efi_uintn_t size,
+ 	return r;
+ }
+ 
+-/**
+- * efi_alloc() - allocate boot services data pool memory
+- *
+- * Allocate memory from pool and zero it out.
+- *
+- * @size:	number of bytes to allocate
+- * Return:	pointer to allocated memory or NULL
+- */
+ void *efi_alloc(size_t size)
+ {
+ 	void *buf;
+@@ -681,7 +673,6 @@ void *efi_alloc(size_t size)
+ 		log_err("out of memory");
+ 		return NULL;
+ 	}
+-	memset(buf, 0, size);
+ 
+ 	return buf;
+ }
 -- 
 2.34.1
 
