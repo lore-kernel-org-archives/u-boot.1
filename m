@@ -4,72 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB483CD3425
-	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 00:38:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A89F5CA101E
+	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 06:54:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 094BE88835;
-	Sun,  1 Sep 2024 02:38:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 79E3B8870D;
+	Sun,  1 Sep 2024 08:54:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=short.pl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ohD2BXsy";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="yJgwXUrA";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66FEC88835; Sun,  1 Sep 2024 02:38:34 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
+ id D559E88714; Sun,  1 Sep 2024 08:54:48 +0200 (CEST)
+Received: from mx01.ayax.eu (mx01.ayax.eu [188.137.98.110])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0583D8876F
- for <u-boot@lists.denx.de>; Sun,  1 Sep 2024 02:38:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C803F886E7
+ for <u-boot@lists.denx.de>; Sun,  1 Sep 2024 08:54:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=fail (p=none dis=none) header.from=short.pl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4WxCft5Wf1z9scL;
- Sun,  1 Sep 2024 02:38:30 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1725151110;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=4A1Sj/StT60ESv8BeIMvJYm7VLqJv0tNGtyIWmSIz70=;
- b=ohD2BXsyMm59BZNzPpAi6BUzI9EBj/QnBDC66M+tO158xWY1cF7o/kQgjFHJR6Fq/rBPr/
- AvSPjc2CpTKiuTRaoZKk1jKCsFdlGGB0FQucz/0J6dXGV4afQmVCM0aFVvaNW7Fn9E31PW
- rCW6GJRKJgcbo/5zH8RiH0ZSwNx/ixr8tdwNrkARo4/IRA5PHe95f9En2qUG1R0L023ns1
- PpURAxkJhT18j9WzBDQZovCE4+8zj0MctUdmS/8aZwCPtUU/QttGvub9FyJjJit83j0AQi
- wNuQ85pt+N4/30Nt5HcI08chucRSlcrGP++7yBVlOqNQTikbqQOe3g5SJ8wMvw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1725151108;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=4A1Sj/StT60ESv8BeIMvJYm7VLqJv0tNGtyIWmSIz70=;
- b=yJgwXUrAzv1GJKXFgj3BbCuYAEbzec2XGVdvkgsdB96ObRK6bPqS50vD3LfY5DA/oq3rB5
- j45P+q+wgEnH2PIDbhyKByZJ6XaAqMrDuhjqfYlY/A6xu/ozXXiEsDgKbHhGSP7Jgv0vc9
- A4hvgTFRsO+/pB6RXgG8G8/d3zHrBDJuGu18oyDNqt1Rnarcj7aQVI+IDwBdoMZryuEFF8
- 8JHOMTuBn+MKWx9Jv0TZMSgf7wDjlVwadynS7kAQDJw3EBFTVAEv5ZsEL3C7bTRorB02KH
- V48wkz6xFUrIkfTGxkM98/fuLuKCPYyW1Fm4wjQsoOy052GdDBFoTJNi76hxuA==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Sean Anderson <seanga2@gmail.com>, Stefano Babic <sbabic@denx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2] ARM: imx: Wrap i.MX config options in MACH_IMX
-Date: Sun,  1 Sep 2024 02:38:00 +0200
-Message-ID: <20240901003813.674730-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=gszymaszek@short.pl
+Received: from [192.168.192.146] (port=51134 helo=nx64de-b91e0e)
+ by mx01.ayax.eu with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.94.2)
+ (envelope-from <gszymaszek@short.pl>)
+ id 1skeTx-000XpK-V5; Sun, 01 Sep 2024 08:54:41 +0200
+Date: Sun, 1 Sep 2024 08:54:39 +0200
+From: Grzegorz Szymaszek <gszymaszek@short.pl>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com
+Subject: Re: [Uboot-stm32] [PATCH 2/3] doc: stm32mp1: fix literal block
+ markers (::)
+Message-ID: <ZtQPr1wKHkvAVNv-@nx64de-b91e0e>
+Mail-Followup-To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com
+References: <41ae952bf3f45545e3c6579463df3d0408f6343a.1722014005.git.gszymaszek@short.pl>
+ <789acb2e22e681aa86302d522c9385a4bae34582.1722014005.git.gszymaszek@short.pl>
+ <cc33dbd1-d4a9-4989-a236-f6cf8d950512@gmx.de>
+ <ZqpiP594mbXqx7SI@nx64de-b91e0e>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: q5ob5s364zffx3onwbpey5eki6nh4pgw
-X-MBO-RS-ID: ecd1402a1afc58b81da
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9mSM6gLp99aXOr+U"
+Content-Disposition: inline
+In-Reply-To: <ZqpiP594mbXqx7SI@nx64de-b91e0e>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,43 +65,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Wrap all the i.MX specific options in MACH_IMX, otherwise they keep
-showing up in other SoC vendor configurations. No functional change.
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Cc: Sean Anderson <seanga2@gmail.com>
-Cc: Stefano Babic <sbabic@denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
-V2: s@HAVE_IMX@MACH_IMX@g
----
- arch/arm/mach-imx/Kconfig | 4 ++++
- 1 file changed, 4 insertions(+)
+--9mSM6gLp99aXOr+U
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-imx/Kconfig
-index c34bc25c0bf..134e42028c3 100644
---- a/arch/arm/mach-imx/Kconfig
-+++ b/arch/arm/mach-imx/Kconfig
-@@ -1,6 +1,8 @@
- config MACH_IMX
- 	bool
- 
-+if MACH_IMX
-+
- config HAS_CAAM
- 	bool
- 
-@@ -200,3 +202,5 @@ config IOMUX_LPSR
- 
- config IOMUX_SHARE_CONF_REG
- 	bool
-+
-+endif
--- 
-2.45.2
+On Wed, Jul 31, 2024 at 06:11:43PM +0200, Grzegorz Szymaszek wrote:
+> Hi Heinrich,
+>=20
+> thank you for comprehensive review. I'll respond to the specific points
+> later, but there's one thing I feel I should explain. In this series I
+> intended to only fix/improve the reStructuredText/HTML syntax and then,
+> if the changes were approved, I would go with making the actual text
+> easier to understand, I have some drafts already prepared. So I'm not
+> sure if fixing, for example, unnecessary root prompts is really in scope
+> of this changeset.
 
+A gentle ping, I'm still unsure how to approach the issue.
+
+> On Wed, Jul 31, 2024 at 07:15:10AM +0200, Heinrich Schuchardt wrote:
+> > Please, provide a commit message.
+>=20
+> (Two perhaps, not one.) Is it really necessary in case of such trivial
+> changes? See sending_patches.rst:
+>=20
+> > Put a detailed description after the summary and blank line. If the
+> > summary line is sufficient to describe the change (e.g. it is a trivial
+> > spelling correction or whitespace update), you can omit the blank line
+> > and detailed description.
+
+Same here.
+
+--9mSM6gLp99aXOr+U
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEZT55kPBhnB69hD4ZeE9lGUIcpz4FAmbUD68ACgkQeE9lGUIc
+pz4m1w//aPauycaPMfu8aVeGFHrS0OoXF54oQyRS+JErYN2C5NkENY1FQi3TOE7N
+eOQc7i/cfH0Bdg2XiScJTCLMaxJ2RS7E5SSn6bAKZmyWXJre7ThG19ef5z5vqjTG
+E4eDue6+zklQIts4P3Qt6dzuBmSfQDTrytWTeIyDSC/Cyff5TtSVEB0nculjSGGa
+mvtyYVs5AtPQl/uBckDRE2zUMmSxu7JIVNuurfFhOf4NsIghm7Z71h6O9fkEhqA6
+9KyDWczvbwYTAXzmMZ1SMFa6WsHkPoVOHD6lZbfuohI/+iymruPsEpGlKY7V+5a5
+2M4mj6MYA0IVwMh3VDlul+nO03KygC1dDWZpFpDIuq/S19mgfPyJikHIHmsyv8mV
+bprofM7LjhF8IcL79rsA62lfeaYOchPZmgPyu1PrZDRgNCLIXOT3AvCkeMgBwOgv
+edRz7kdUtmhmquP51d3qphh7ZnYQIDWJbm4wxO+FHYVm+VWp0YgLWhtqgZMBKBqZ
+isE0VRGZu8rOwaO0Kpri0CMmYoiQcjfQkMaPT75n+Vgg4YZ9goUsHzkP6McnvRV+
+KN0nSN/zz1FhZDLMi9mS3AbRR574005wVbBJRNOwD0dJ1rbLGF2Viqp9RvE+Oqi0
+Oe1GzVSa+4ImkfXoY0slLjbhDKfqGpDbqN9m+g48dWgLBpmp+XQ=
+=ufUV
+-----END PGP SIGNATURE-----
+
+--9mSM6gLp99aXOr+U--
