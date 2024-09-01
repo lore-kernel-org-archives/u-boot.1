@@ -4,59 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF8B8C54FC6
-	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 21:05:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFC55C54FC6
+	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 22:15:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39FE7884C3;
-	Sun,  1 Sep 2024 23:05:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0FB148806C;
+	Mon,  2 Sep 2024 00:15:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1725224736;
-	bh=Fc99Zrajj0tLvNTP0nIx3KGyR3IyxG6APcqtbf6tcno=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=hEaD/VSwj63Y+qvok+IFawvkB2vTP8QJ8c6LabskdNpIYsbG0oBBd936Q0PcvdR+D
-	 5XkF1LLZJkSS63boVrP40hwVvJ09E0gC7PXO7GtiwAp9bQc7L2eRd0fZWjU9ERN9IA
-	 U2hlzgEtWGUqWaqoK3q9wtpbhQsBqtgl3eJyQ7ke7kNs68LcqNHR1Qq645+JE5jZIi
-	 nkUQI86GHg+3IsOdY789K9aTeCJR9btrqi4lFRgA7s1IezYkdf8Z6zpkhAvH3Xw0z8
-	 SDsqp5nqbLJmp4yyQUowL1nwFRS7R2yFh0rrfhMqFkWmwjItci305+d5JF/EjsWqIC
-	 Vl+pwrJHfAbcw==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fS+19kDr";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 5521287FCD; Mon,  2 Sep 2024 00:15:07 +0200 (CEST)
+Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
+ [IPv6:2607:f8b0:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 75A798690D;
- Sun,  1 Sep 2024 23:05:33 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1725224734;
- bh=Fc99Zrajj0tLvNTP0nIx3KGyR3IyxG6APcqtbf6tcno=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=J7iC0i30SQI8TWirn26J2gm8SaxGtlm93Gx6Oc1qB/jJh3V6lb9b60bzo1VKfsFbl
- tCvWdFJ5fTX315LY1u5MzIlM3HIiZL3b28c+9m0GrUnBUdhVr7H2hLEG2b5lzDzs8P
- ZQofng3rRsRoZhQHp317tsj0ZU5EwuUZwfNs6ky97a46KcnWYzgPumru1QsuQllIFf
- BJ2eNZBsVv6BuGFlscygi8eLtjkDlsfjiCeOe3kLi/5f6FXaxVi5ftxUEl7MNWWA+i
- nF6NXwSvGpXudMMdikh7CfrOK8Ms3Oz4rS1rJ9ZOrCYesQcxgsX77a4Gjl6w+u99K/
- SRP3odPnpY36g==
-Message-ID: <c45c75ec-71b2-48cc-9493-96d25e1da1dd@denx.de>
-Date: Sun, 1 Sep 2024 23:05:32 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 12ED0888B2
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 00:15:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-7cd9d408040so2628063a12.0
+ for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 15:15:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1725228903; x=1725833703; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=h9R/4eimnIYYTEgZvY8QMB9QcXPRxKCy5uWBPx5g2pQ=;
+ b=fS+19kDrLhfYPTmmQfC93Eeh/+COyXcJ3byT0pfKjP3pUEZ/DCo7+YOzYkoVkvt6rw
+ mK1GQu+5SEhMtRvPwubyZSb1jl9ZHe26BBEs3mtnPsSIMQisM6ggN7vCYOG2I/YktLW7
+ zrE8KYYj9u6r5ro9yylUyjctX6+4Aj2YPpROI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725228903; x=1725833703;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=h9R/4eimnIYYTEgZvY8QMB9QcXPRxKCy5uWBPx5g2pQ=;
+ b=uONwnlY77/bXqspQICNjEtpTPmF2I3Q2VQ2X0r777yqNIZKlRkiQguN/03NWhDJP0p
+ uKiThKQo7e39+730RhFkHPmn+0V7b06Njb/HothSVdwE6zFCbfs7Ln7pGebLJldGhUbr
+ PO2XrfRcrjy3MVGtYaoOmmHTi/fVR66tzdI/HCJs8t2QB2efwo4JkhFf7opC00MdpEs2
+ Y4vsDKjgprbCyQ3LuqeFD5SmHdXrEKK2cT3N/DjP/H37oSp7gcsyp6HjZOQ3y8BmK2Oo
+ WKEpUOqg7+EX1IznGrCog9OUcrLSsW2z1I7j3JDm1QJWHBgvNL4L7giiK9qY2vJJwyZU
+ FIxA==
+X-Gm-Message-State: AOJu0YxrMI8xVQIrTUV/tKeWvzKr5srfPF7nzlthhmfVyh7HxLcUGRyw
+ 2nP/o/Y9cNWpoTqrYE+fP1EmupwlsCzVY6YVBNvflXK3MDFXNXcix1yfsVN2VUF7mI81AGP02FB
+ ucJORD+y3sJBpOH7DlFPDXfowbfcF5AtcUexIhgXX3eVHUtY=
+X-Google-Smtp-Source: AGHT+IGp6gDczgEfPxGWq9gWfDp7BcfRFgHOkLJwaob/3FmicwEkrz/PUxpRkofEkhyy3TG5V+TaNVmy63RK38CqX18=
+X-Received: by 2002:a17:902:eccd:b0:202:51ca:9823 with SMTP id
+ d9443c01a7336-20546b35b37mr60439555ad.46.1725228903440; Sun, 01 Sep 2024
+ 15:15:03 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 0/6] FUSB302 USB-C controller support
-To: Simon Glass <sjg@chromium.org>,
- Sebastian Reichel <sebastian.reichel@collabora.com>
-Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>,
- Soeren Moch <smoch@web.de>, Eugen Hristev <eugen.hristev@collabora.com>,
- Tim Harvey <tharvey@gateworks.com>, Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>
-References: <20240830182330.49528-1-sebastian.reichel@collabora.com>
- <CAFLszTgLDHR2bVFmHaKktfP5Swd_4QZfavQC9GrAsHQh2-zj-A@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAFLszTgLDHR2bVFmHaKktfP5Swd_4QZfavQC9GrAsHQh2-zj-A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <339DE2F4-312A-4817-85E8-A2F88125196D@gmail.com>
+In-Reply-To: <339DE2F4-312A-4817-85E8-A2F88125196D@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 1 Sep 2024 16:14:51 -0600
+Message-ID: <CAFLszTiPfknR4OoO=+FfPZa6nkgbDpq0DfsRYBtxG-KsGzdqoA@mail.gmail.com>
+Subject: Re: What is the proper way to sign fit images using binman/mkimage
+ for verified boot
+To: Alexander Kochetkov <al.kochet@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,12 +84,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/1/24 10:09 PM, Simon Glass wrote:
+Hi Alexander,
 
-Hi,
+On Sat, 31 Aug 2024 at 06:06, Alexander Kochetkov <al.kochet@gmail.com> wro=
+te:
+>
+> Hello!
+>
+> I used to sign images for verified boot for u-boot v2020.04 for allwinner=
+ A64-based board. It was simple.
+> I=E2=80=99ve just added signature nodes for atf, u-boot, dtb, configurati=
+ons to the generated by mksunxi_fit_atf.sh
+> its file and mkimage signed the fit image.
+>
+> Now I trying to do the same for u-boot v2024.07. I work with Radxa Model =
+3a. It=E2=80=99s fit image is generated
+> using binman. It=E2=80=99s bimnan configuration is located in the file ar=
+ch/arm/dts/rockchip-u-boot.dtsi.
+>
+> I have 3 ideas about how to get the job done:
+> - improve binman, to support signing fit images during fit image generati=
+on. Sort of implementing
+>   image-signature etype
+> - fix mkimage to allow signing generated by binman images. Now I getting =
+error, then I try to do that
+> - may be I do the job in a wrong way? Could you please direct me in a cor=
+rect way?
+>
+> First I think, that I have to add signature entries to binman configurati=
+on. So, I added following:
+>
+> &binman {
+>     simple-bin {
+>         =E2=80=A6
+>         fit: fit {
+>             =E2=80=A6
+>             images {
+>                 =E2=80=A6
+>                 @atf-SEQ {
+>                      =E2=80=A6
+>                      signature {
+>                          algo =3D "sha256,rsa2048=C2=BB;
+>                          key-name-hint =3D "uboot-spl=C2=BB;
+>                          sign-images =3D "atf-SEQ=C2=BB;
+>                     };
+>                 };
+>             };
+>         };
+>     };
+> };
+>
+> This signature entry was copied to resulted fit image without processing.=
+ No signature was generated.
+> SEQ was not replaced to 1:
+>
+> atf-1 {
+>     ...
+>     hash {
+>         value =3D <0xb5946ac6 0x3df8fb35 0x69407a75 0xcf2f6aa3 0x96551ba0=
+ 0x11e1a84b 0xec654dc9 0x982ba063>;
+>         algo =3D "sha256=C2=BB;
+>     };
+>
+>     signature {
+>         algo =3D "sha256,rsa2048=C2=BB;
+>         key-name-hint =3D "uboot-spl=C2=BB;
+>         sign-images =3D "atf-SEQ=C2=BB;
+>     };
+> };
+>
+> So, obviously binman is not support this way of signing images. If this w=
+ay looks reasonable, I can try to implement
+> it and send patches to u-boot. I played with binman etypes, tryied to add=
+ custom 'image-signature' etype. Looks like I
+> can complete such work.
 
-> Are you able to build this on sandbox?
+Yes this looks good to me. You should be able to extend one of the
+tests like testFit(). Be careful to test any error cases too.
 
-Let's find out:
+>
+> Second solution looks for me as follows. We need run mkimage to sign gene=
+rated by binman fit image.
+> Some sort of running mkimage like this:
+>
+> ./tools/mkimage -k /media/yocto/build-yocto/=E2=80=A6. -F ./u-boot.itb
+>
+> Now I getting error then I run mkimage:
+> Can't add verification data for node 'atf-1' (<unknown error>)
+>
+> If that solution is reasonable, I can fix <unknown error> and send patche=
+s.
 
-https://source.denx.de/u-boot/custodians/u-boot-usb/-/pipelines/22195
+Hmmm so are you signing an intermediate file produced by Binman? That
+error is likely to be that the dtb is out of space, but it should be
+handled...so a patch for that would be welcome, too, if you have time.
+
+>
+> Third thought, may be there is another proper way to sign fit image for v=
+erified boot?
+> Could you please provide an idea how to do that.
+
+I think your first way seems best for what you want to do (sign images
+in one step as part of build).
+
+There is 'binman sign' for updating an existing one, but I'm not sure
+if that is useful for you.
+
+BTW thanks for the detailed notes.
+
+Regards,
+Simon
