@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80B1ACD3420
-	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 20:10:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DF31C54FC6
+	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 20:10:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E389889AE;
-	Sun,  1 Sep 2024 22:09:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 933588895E;
+	Sun,  1 Sep 2024 22:09:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SVtfVv1K";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VgezRfyh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A316587DEA; Sun,  1 Sep 2024 22:09:53 +0200 (CEST)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id DFBBF88A5B; Sun,  1 Sep 2024 22:09:55 +0200 (CEST)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8248888675
- for <u-boot@lists.denx.de>; Sun,  1 Sep 2024 22:09:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D80488916
+ for <u-boot@lists.denx.de>; Sun,  1 Sep 2024 22:09:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6bf8a662467so18835726d6.3
- for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 13:09:51 -0700 (PDT)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-70f6732a16dso2094272a34.3
+ for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 13:09:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1725221390; x=1725826190; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1725221391; x=1725826191; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=OzFl/nYD3DK4ZD/xwETm+Te69rbGKDwdqs40sdmKYew=;
- b=SVtfVv1KPFPsAVt6C/gHS1H2/3vV/dGRqoIxwfSz1Gn8H4aoboHmSTrs7/ezBYkLjv
- rYEVAhAbJeAfeWIwaI5Fsuk0jSI0gJ9xjAG5qpSK6AU4YQx1rAO74Hm3ptmtoiXIQKrp
- 13SBIwHgzZ3owF9BwQOqvIA8t71ofXTNrcpeU=
+ bh=JfDUFLSVSW3wt0U8AkqAqYXRox+dRXIV6RcJchF8Iyo=;
+ b=VgezRfyhzTz1k+sKo7UPcaRcdRUjFfsTrm8xbBK9NOTdqrQjKdK6XXPeVyqE4hnnwn
+ C3tVfF03P2gOoQh1B3hGlVmoZQ4soEcNtcODocXTSB8IhgiCDTry/EqXoSTs1VA8Xk51
+ cewmNmwn13fV+bUkODDJFgGkVTULEOhh6JYb4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725221390; x=1725826190;
+ d=1e100.net; s=20230601; t=1725221391; x=1725826191;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=OzFl/nYD3DK4ZD/xwETm+Te69rbGKDwdqs40sdmKYew=;
- b=llXAd64FBaWJfEDRUbWrt1PWSlXM2SE+YTHAMb6Bu+rnpGYqmpSqwMQTzo/TXR4Bsh
- sXfovWBoaDCbrfuBX3Oqdw8BAfFwmWcMzQ6TzvK7yOAcvDYOaOprSBWF+dgSsUSZ6baY
- P7E5AgCEx3wARSmyXctlU6S3XtDP0ATQyyMg1KE2Z888LuJ22BTQr54ae+IKvEBh7Hfz
- xKE8TsMwSGFjUgISroUw2fAt1P6YEwzKbBBVhrvgqWVeCmhCP2TFrsesR1SptiR9OZ0o
- ApdJaKS49o9zQLHooNIBUJvY9/ETw4syzJd3hOe0gzcZDwaifhJER7/JZXUUF5aYVD5t
- EEiw==
-X-Gm-Message-State: AOJu0YzJRDL36WRL3LMJmiXmDTDbKpZCe1eUBy/f3yPPlpUCoV5oZutN
- Rg0mBuqR/OX883QX+ZZ1IhvEv+YpgVVcPTs8lkSCv8nX+Xx/bOdmAn2ONofwecxc1G+sZATxUA7
- 3Iovm4wrYpj/xc0j33Qgad0fP8UbiNkPTgeiE
-X-Google-Smtp-Source: AGHT+IH9UqMmzAOnMPDfUidu2b6GbWMAYmaxMQjnkmx8JKTeGZFC2aWoU4KJ3vk+LHGvJa9+wy4RShJ8MlbMWo/cBoI=
-X-Received: by 2002:a05:6214:318e:b0:6c3:4c75:f0fe with SMTP id
- 6a1803df08f44-6c3554a6dd4mr48795486d6.47.1725221390370; Sun, 01 Sep 2024
- 13:09:50 -0700 (PDT)
+ bh=JfDUFLSVSW3wt0U8AkqAqYXRox+dRXIV6RcJchF8Iyo=;
+ b=iAYauF1mxDRS3FgbCTbBqdgdiXBNLFbBxoXGcUUXWmfra3ijwquWEPNI4H6q0ZoKXm
+ XsA5of+RKIr8ab3ZV4b0xs87BKyMsZZebHEPiyZfnG6pjvlI3zRSTTLi1bemIPkfG2D7
+ tpppRuaHMDv3PkG6HYwnDstHfmnPwiiPcg7O0+gGcPeFJgBLtVKSXmnq5g/+HVhdkoV9
+ 7zJP9HDsiyrOyZunOlUGOI+XefFanUNYNs39Bn9WZqG9U7NkJ5d797uTHlhInVndSpfo
+ Xz2sleIziKOCLULLZxfEVwbbOtx/+NxQ8a7UcVAmMDOpHzsAqrorwkjanslWYM0QJwCT
+ F3UQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUuPXZaGervJfXmY1avOECRNb4xexzM+9tqYeQhLA4igcDHBpgMAgtNUiSHeXu8HyZGmW5MnBg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwawpSts3FRaAoQDYv8HDI8YX0JWZmLDGyKUTtSCjK5+KdF0xB1
+ o06fosAvUT9rUgMvs30KibZK5/OjU/hpFhYDDhhXAGJxgdSlUp95sh55rO7f42cC9l3GJf7iQBM
+ TBuW88R/LgvexQPPkdvz3fbFMLMIJBQOxtX3b
+X-Google-Smtp-Source: AGHT+IGlWTRyU0rVO0GFfEaWoeKo3GqzFuaqO2mNHiHxP2civspbTrqMgeXDCv8b5XxXxiQfN3qy5Gbub/XKdg6gGbY=
+X-Received: by 2002:a05:6830:2705:b0:70c:9c66:af53 with SMTP id
+ 46e09a7af769-70f5c3e53c0mr13387138a34.25.1725221391172; Sun, 01 Sep 2024
+ 13:09:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240815195746.749042-1-sjg@chromium.org>
- <20240815195746.749042-3-sjg@chromium.org>
- <20240816172237.GA1626301@bill-the-cat>
- <CAFLszTh1Nig-hs+Gtxzg8f-=vE1z4BvNSfEyUGtatZohj0pnuQ@mail.gmail.com>
- <CAFLszTgufCxvXjJupqDphcGwJ0gfvrYxQACK3kYRKaumpKgrYQ@mail.gmail.com>
- <20240822141013.GQ1626301@bill-the-cat>
-In-Reply-To: <20240822141013.GQ1626301@bill-the-cat>
+References: <cover.1724846454.git.jerome.forissier@linaro.org>
+ <1a6084e845a0612546a1e86d142208af945c8f77.1724846454.git.jerome.forissier@linaro.org>
+ <CAC_iWjL9g0c8UHF3L44b8HEG-2=d57XsDXPpSogthWDPgzPcaw@mail.gmail.com>
+ <CAFLszTjLmgXO-31CwAOv1qQ9x0aDk4aHGVkScDF1bz-WhfrHGw@mail.gmail.com>
+ <CAFLszTgQNatTrhY_PVwN96tbuRvS=PRqawhH93+1TM9y_Mg79Q@mail.gmail.com>
+ <CAC_iWjLg5h5uPgK0rO04ajGL1z8bpxYAzv3j048hsXAwz22MzQ@mail.gmail.com>
+In-Reply-To: <CAC_iWjLg5h5uPgK0rO04ajGL1z8bpxYAzv3j048hsXAwz22MzQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 1 Sep 2024 14:09:39 -0600
-Message-ID: <CAFLszTiV8Nut06NeJFqT87y8qSTfzMYwxY6vc10+Q6NY6u2m-A@mail.gmail.com>
-Subject: Re: [PATCH v3 2/3] buildman: Allow skipping the dtc build
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Brandon Maier <brandon.maier@collins.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+Date: Sun, 1 Sep 2024 14:09:40 -0600
+Message-ID: <CAFLszTjsTYi_jddj+05i77xjQ7gdvYC115C2hYYauAv7xTEhNg@mail.gmail.com>
+Subject: Re: [PATCH 09/13] net: wget: allow EFI boot
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
+ Peter Robinson <pbrobinson@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, Marek Vasut <marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,72 +92,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Ilias,
 
-On Thu, 22 Aug 2024 at 08:10, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 30 Aug 2024 at 08:28, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> On Wed, Aug 21, 2024 at 09:00:25PM -0600, Simon Glass wrote:
-> > Hi Tom,
+> Hi Simon
+>
+> On Fri, 30 Aug 2024 at 17:18, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > On Fri, 16 Aug 2024 at 17:53, Simon Glass <sjg@chromium.org> wrote:
+> > Hi Jerome,
+> >
+> > On Thu, 29 Aug 2024 at 08:04, Simon Glass <sjg@chromium.org> wrote:
 > > >
-> > > Hi Tom,
-> > >
-> > > On Fri, 16 Aug 2024 at 11:22, Tom Rini <trini@konsulko.com> wrote:
+> > > On Thu, 29 Aug 2024 at 01:34, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
 > > > >
-> > > > On Thu, Aug 15, 2024 at 01:57:45PM -0600, Simon Glass wrote:
-> > > >
-> > > > > For most boards, the device-tree compiler is built in-tree, ignoring the
-> > > > > system version. Add a special option to skip this build. This can be
-> > > > > useful when the system dtc is up-to-date, as it speeds up the build.
+> > > > On Wed, 28 Aug 2024 at 15:10, Jerome Forissier
+> > > > <jerome.forissier@linaro.org> wrote:
 > > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > wget followed by bootefi currently fails as follows:
+> > > > >
+> > > > >  U-Boot> wget 200000 192.168.0.30:helloworld.efi
+> > > > >  Waiting for Ethernet connection... done.
+> > > > >  HTTP/1.0 200 OK
+> > > > >  Packets received 13, Transfer Successful
+> > > > >  Bytes transferred = 12720 (31b0 hex)
+> > > > >  U-Boot> bootefi 200000
+> > > > >  No UEFI binary known at 200000
+> > > > >  U-Boot>
+> > > > >
+> > > > > Fix the problem by adding the missing efi_set_bootdev() call.
+> > > > >
+> > > > > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 > > > > > ---
-> > > > >
-> > > > > (no changes since v1)
-> > > > >
-> > > > >  tools/buildman/builder.py       | 27 ++++++++++++++++++++++++++-
-> > > > >  tools/buildman/builderthread.py |  4 ++--
-> > > > >  tools/buildman/buildman.rst     |  3 +++
-> > > > >  tools/buildman/cmdline.py       |  2 ++
-> > > > >  tools/buildman/control.py       |  3 ++-
-> > > > >  tools/buildman/test.py          | 31 +++++++++++++++++++++++++++++++
-> > > > >  6 files changed, 66 insertions(+), 4 deletions(-)
-> > > >
-> > > > We should probably do this more generically, outside of buildman. We
-> > > > have scripts/dtc-version.sh and if the system version isn't new enough
-> > > > (and we just need to define whatever the minimum version is), then we
-> > > > build our (not currently that new anymore) dtc instead.
+> > > > >  net/wget.c | 4 ++++
+> > > > >  1 file changed, 4 insertions(+)
 > > >
-> > > Yes I think I did a patch for that ages ago [1], but it was rejected.
-> > >
-> > > I'd be very happy for it to be applied as I think it is a better
-> > > solution than this one.
-> > >
-> > > I see that some poor sod tried to do this in Linux this morning.
+> > > OMG the hack never dies. I hope I will someday create a series to tidy this up.
 > >
-> > Any thoughts on that patch?
+> > I'm sorry for that remark, not helpful to collaboration.
 >
-> I'm open to re-considering [1] again, but we need to handle the warning
-> problem first. That means...
->
-> > Also I do see one problem. Newer dtc version produce a lot of
-> > warnings, which causes CI to fail. So if we always use the newest
-> > version, people are going to see a ton of warnings when they run
-> > locally. Am I missing something here?
->
-> Well, it would be great to get our Kbuild logic anywhere close to
-> in-sync again with upstream. But syncing up the disabling warning flags
-> shouldn't be too hard.
+> If you've figured out what needs to be done to remove it, I can deal with it.
+> If not I'll put it on my backlog and have a look
 
-So, coming back to this patch, the nice thing about it is that it is
-deterministic. So people who build U-Boot and don't want funky
-behaviour will be happy. It will use the internal dtc by default. To
-use the external one, you must provide an option.
-
-This patch only affects buildman, but as you can see the mechanism it
-uses is to set the DTC variable, which people can do without buildman.
-It's just a convenience, but useful enough to have a flag, I believe.
+Mostly...my idea is to track loads within bootstd, adding a way for
+bootmeths to record files they load, in struct bootflow. Then when
+booting EFI, we just pass that info from distro_efi_boot() to
+efi_binary_run().
 
 Regards,
 Simon
