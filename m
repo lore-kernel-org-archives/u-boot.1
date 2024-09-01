@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0979BC54FC6
-	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 22:31:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AF65C54FC6
+	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 22:32:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 041D188CF0;
+	by phobos.denx.de (Postfix) with ESMTP id 5580588D1B;
 	Mon,  2 Sep 2024 00:27:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Xauno3jJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CuRIh4or";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47A1088D06; Mon,  2 Sep 2024 00:27:52 +0200 (CEST)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id 1D1B0889FC; Mon,  2 Sep 2024 00:27:53 +0200 (CEST)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89E3587CF8
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 00:27:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0719388CF0
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 00:27:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-82a35ea3edaso93421039f.3
- for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 15:27:49 -0700 (PDT)
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-82a245753bfso121721239f.3
+ for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 15:27:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1725229668; x=1725834468; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1725229669; x=1725834469; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=b5Ve6E7oWEnzyPygQkgA6GP6HSXp8JxBxPfPOExYwb8=;
- b=Xauno3jJfHd+S/9JyjheWOTWNf+evWSeMI8rUiDTR8yx2wbVLL5P1adg0R9MnvAqxm
- NjJkBdDC5g/+8XxR8VQCOGWcLCy/2F0uMJrsoZKzdBMYkhT2T6kg9SalWB9MP3dmBjYj
- Iz/g6JHE31iXhd3dKFYGsonjYeU1RXwHX2Bs8=
+ bh=ppXySfOHv1nMJoKJ+QM6YwRuhCi4lZtlTlLoTXhR4ds=;
+ b=CuRIh4or47kCEoFvwxeKosxLdL6uke/K6iauNmcxNSX4fkp1nXZCYraeoOnrbrMRbt
+ S4ixIDioJRfv4wr+uOL8Kl0GLB5H+UQeNrgbYGnvFHd5S2mBISq3TP4wDr/EeqTYZYBb
+ NeRaH7IoIkOux7ffLxvzJRMYaOYI9B6A8XjYI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725229668; x=1725834468;
+ d=1e100.net; s=20230601; t=1725229669; x=1725834469;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=b5Ve6E7oWEnzyPygQkgA6GP6HSXp8JxBxPfPOExYwb8=;
- b=l6Ay0L1TQlPAuexskdCOe7xBXihfqgyc5ip4I6HeqCI8Gcwo/vEh1CKqvVZezAgsC1
- ocMDbd3B4P9LXFSAyx79W2soSEQBTzD9Od6b3mqh4ldw8ae/eiqWOACqBICd8YfwIVpN
- kkhsiOh5pZNzGce2T+9lK9zFCBy08pCgGlzYcndHA56y0wJPc+roSOZukvNfybsuuAXg
- IMfcOsv3poTbxrYZndKp2LGiNjyIf4EG2yfCu6Y/GYaTNHqcQfPM0v6AjYR/6HpkPAFN
- Ce3FNpFvLnBWKBrjGdtZL2MJZLnz5Z7IuCLfbXizqGb3wqo35+U2dP5b8cf8ryZiNWRK
- +o/w==
-X-Gm-Message-State: AOJu0YzEtLocKgqy/pMN2/FAYbkAtIlYt9xIg3XQrPAYSl60noHdtSL/
- x4ZZqefqB2G/Gu9BFjBW7kPijp/LyFYQF7v307C78kw9cm343tiYpZ2ljDpszjO/Xl2ZeKm1KnA
+ bh=ppXySfOHv1nMJoKJ+QM6YwRuhCi4lZtlTlLoTXhR4ds=;
+ b=s4MI1+179PCiHL2g/DIcPL0gZKpfoP4Xcx4YeHgAG2ndlnzMwd1hA5nl0TIWcacMsi
+ 2FymqMiGx9SGfzX8io8ICYnsjURdko3DhnHzYZMU/bpTQj+yYMSLi1ejk3zTfP3fNgpV
+ 8Ytoamek412i9ec0GtSfRAmDM1fGIqxpTsmJOid1ORvzaeXdJRl+AaC6VTxdxo/MK3HH
+ YI5w6gKARZooG8DOpmiIAZv0hzNDubuRfVVZ5S+VvuYsqKEbnthnrIgY0Z4Cc2ayednf
+ o3wNxo67ak8H48VHGPCzXoxkaFZoesWkqRnT2oBqVq9obTb4QdPTSNBo+ex8IWfgZoZT
+ mbPw==
+X-Gm-Message-State: AOJu0YyebchWRrd+JdlKpjVVejKH6lieC5sOZnutjmSCuD4RJINMrv7d
+ +OK/EEeV1XjALG7PxHo0D4Q7QJTgstXcPtEGvHD0Xe86REkPsTj5qdJLqAZnuNjM1mBR9tvjcRE
  =
-X-Google-Smtp-Source: AGHT+IF6KT/5U+0PDKTjbOOMrYF58iPj3UCP1pN8ZUHdX6tLroBUOy5FprB9wl9yS6nt7lNER/vK7w==
-X-Received: by 2002:a05:6602:2c0f:b0:824:e864:569 with SMTP id
- ca18e2360f4ac-82a1107a833mr1731073539f.11.1725229668071; 
- Sun, 01 Sep 2024 15:27:48 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEizC4EZukcmX12UdohIIx4Erm4KnvocAZqKGqjsrRNuMa2Rgq2VwG/ecDvB34ZW3uNj8Qb2g==
+X-Received: by 2002:a05:6602:3413:b0:82a:1cdf:2c37 with SMTP id
+ ca18e2360f4ac-82a1cdf3607mr1457243639f.12.1725229669201; 
+ Sun, 01 Sep 2024 15:27:49 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ced2e17bb4sm1866981173.82.2024.09.01.15.27.47
+ 8926c6da1cb9f-4ced2e17bb4sm1866981173.82.2024.09.01.15.27.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Sep 2024 15:27:47 -0700 (PDT)
+ Sun, 01 Sep 2024 15:27:48 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 6/8] sunxi: Drop old distro boot variables
-Date: Sun,  1 Sep 2024 16:27:32 -0600
-Message-Id: <20240901222734.462334-7-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Joe Hershberger <joe.hershberger@ni.com>
+Subject: [PATCH v3 7/8] env: Provide a work-around for unquoting fdtfile
+Date: Sun,  1 Sep 2024 16:27:33 -0600
+Message-Id: <20240901222734.462334-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240901222734.462334-1-sjg@chromium.org>
 References: <20240901222734.462334-1-sjg@chromium.org>
@@ -91,121 +91,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These are not needed as bootstd handles the boot now. Drop them.
+Some boards use a CONFIG option to specify the value of this variable.
+This is normally handled by efi_get_distro_fdt_name() but in the case
+of sunxi this does not work, since 'soc' is sunxi, but the files are
+in the allwinner directory.
 
-Keep BOOTCMD_SUNXI_COMPAT for now since it does not relate to
-distro boot.
+Provide a work-around for this particular case.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v2)
+Changes in v3:
+- Fix 'supressed' typo
+- Use backquotes to highlight DEFAULT_DEVICE_TREE
 
-Changes in v2:
-- Keep BOOTCMD_SUNXI_COMPAT
+ Makefile                  |  1 +
+ doc/usage/environment.rst | 12 ++++++++++++
+ 2 files changed, 13 insertions(+)
 
- include/configs/sunxi-common.h | 75 +---------------------------------
- 1 file changed, 1 insertion(+), 74 deletions(-)
-
-diff --git a/include/configs/sunxi-common.h b/include/configs/sunxi-common.h
-index b29a25d5617..666553ccadb 100644
---- a/include/configs/sunxi-common.h
-+++ b/include/configs/sunxi-common.h
-@@ -156,76 +156,6 @@
- 	"fdt ram " FDT_ADDR_R " 0x100000;" \
- 	"ramdisk ram " RAMDISK_ADDR_R " 0x4000000\0"
+diff --git a/Makefile b/Makefile
+index 9a52cc8d0b4..2452a916244 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1844,6 +1844,7 @@ quiet_cmd_gen_envp = ENVP    $@
+ 		$(CPP) -P $(cpp_flags) -x assembler-with-cpp -undef \
+ 			-D__ASSEMBLY__ \
+ 			-D__UBOOT_CONFIG__ \
++			-DDEFAULT_DEVICE_TREE=$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE)) \
+ 			-I . -I include -I $(srctree)/include \
+ 			-include linux/kconfig.h -include include/config.h \
+ 			-I$(srctree)/arch/$(ARCH)/include \
+diff --git a/doc/usage/environment.rst b/doc/usage/environment.rst
+index cc33d3ec0f2..379125a1982 100644
+--- a/doc/usage/environment.rst
++++ b/doc/usage/environment.rst
+@@ -87,6 +87,18 @@ settings. For example::
  
--/****************************************************************************
-- *                  definitions for the distro boot system                  *
-- ****************************************************************************/
--#ifdef CONFIG_MMC
--#if CONFIG_MMC_SUNXI_SLOT_EXTRA != -1
--#define BOOTENV_DEV_MMC_AUTO(devtypeu, devtypel, instance)		\
--	BOOTENV_DEV_MMC(MMC, mmc, 0)					\
--	BOOTENV_DEV_MMC(MMC, mmc, 1)					\
--	"bootcmd_mmc_auto="						\
--		"if test ${mmc_bootdev} -eq 1; then "			\
--			"run bootcmd_mmc1; "				\
--			"run bootcmd_mmc0; "				\
--		"elif test ${mmc_bootdev} -eq 0; then "			\
--			"run bootcmd_mmc0; "				\
--			"run bootcmd_mmc1; "				\
--		"fi\0"
--
--#define BOOTENV_DEV_NAME_MMC_AUTO(devtypeu, devtypel, instance) \
--	"mmc_auto "
--
--#define BOOT_TARGET_DEVICES_MMC(func) func(MMC_AUTO, mmc_auto, na)
--#else
--#define BOOT_TARGET_DEVICES_MMC(func) func(MMC, mmc, 0)
--#endif
--#else
--#define BOOT_TARGET_DEVICES_MMC(func)
--#endif
--
--#ifdef CONFIG_AHCI
--#define BOOT_TARGET_DEVICES_SCSI(func) func(SCSI, scsi, 0)
--#else
--#define BOOT_TARGET_DEVICES_SCSI(func)
--#endif
--
--#ifdef CONFIG_USB_STORAGE
--#define BOOT_TARGET_DEVICES_USB(func) func(USB, usb, 0)
--#else
--#define BOOT_TARGET_DEVICES_USB(func)
--#endif
--
--#ifdef CONFIG_CMD_PXE
--#define BOOT_TARGET_DEVICES_PXE(func) func(PXE, pxe, na)
--#else
--#define BOOT_TARGET_DEVICES_PXE(func)
--#endif
--
--#ifdef CONFIG_CMD_DHCP
--#define BOOT_TARGET_DEVICES_DHCP(func) func(DHCP, dhcp, na)
--#else
--#define BOOT_TARGET_DEVICES_DHCP(func)
--#endif
--
--/* FEL boot support, auto-execute boot.scr if a script address was provided */
--#define BOOTENV_DEV_FEL(devtypeu, devtypel, instance) \
--	"bootcmd_fel=" \
--		"if test -n ${fel_booted} && test -n ${fel_scriptaddr}; then " \
--			"echo '(FEL boot)'; " \
--			"source ${fel_scriptaddr}; " \
--		"fi\0"
--#define BOOTENV_DEV_NAME_FEL(devtypeu, devtypel, instance) \
--	"fel "
--
--#define BOOT_TARGET_DEVICES(func) \
--	func(FEL, fel, na) \
--	BOOT_TARGET_DEVICES_MMC(func) \
--	BOOT_TARGET_DEVICES_SCSI(func) \
--	BOOT_TARGET_DEVICES_USB(func) \
--	BOOT_TARGET_DEVICES_PXE(func) \
--	BOOT_TARGET_DEVICES_DHCP(func)
--
- #ifdef CONFIG_OLD_SUNXI_KERNEL_COMPAT
- #define BOOTCMD_SUNXI_COMPAT \
- 	"bootcmd_sunxi_compat=" \
-@@ -242,8 +172,6 @@
- #define BOOTCMD_SUNXI_COMPAT
- #endif
+    #include <env/ti/mmc.env>
  
--#include <config_distro_bootcmd.h>
--
- #ifdef CONFIG_USB_KEYBOARD
- #define CONSOLE_STDIN_SETTINGS \
- 	"stdin=serial,usbkbd\0"
-@@ -296,7 +224,6 @@
- 	"uuid_gpt_esp=" UUID_GPT_ESP "\0" \
- 	"uuid_gpt_system=" UUID_GPT_SYSTEM "\0" \
- 	"partitions=" PARTS_DEFAULT "\0" \
--	BOOTCMD_SUNXI_COMPAT \
--	BOOTENV
-+	BOOTCMD_SUNXI_COMPAT
++Quotes are not suppressed, for example::
++
++    fdtfile=CONFIG_DEFAULT_DEVICE_TREE.dtb
++    # produces: fdtfile="sun7i-a20-pcduino3.dtb"
++
++For this particular issue you can use ``DEFAULT_DEVICE_TREE`` instead::
++
++    fdtfile=DEFAULT_DEVICE_TREE.dtb
++    # produces: fdtfile=sun7i-a20-pcduino3.dtb
++
++There is no general way to remove quotes.
++
+ If CONFIG_ENV_SOURCE_FILE is empty and the default filename is not present, then
+ the old-style C environment is used instead. See below.
  
- #endif /* _SUNXI_COMMON_CONFIG_H */
 -- 
 2.34.1
 
