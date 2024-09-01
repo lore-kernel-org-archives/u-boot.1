@@ -4,84 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A530C54FC6
-	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 14:21:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A9C8C54FC6
+	for <u-boot@archiver.kernel.org>; Sun,  1 Sep 2024 20:09:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71F918873C;
-	Sun,  1 Sep 2024 16:21:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B76D288706;
+	Sun,  1 Sep 2024 22:09:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GIw5Ed23";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Sc7+Qwi+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04C1A889F8; Sun,  1 Sep 2024 16:21:46 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id D1B4788970; Sun,  1 Sep 2024 22:09:52 +0200 (CEST)
+Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
+ [IPv6:2607:f8b0:4864:20::c33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8B778873C
- for <u-boot@lists.denx.de>; Sun,  1 Sep 2024 16:21:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 50CA787DEA
+ for <u-boot@lists.denx.de>; Sun,  1 Sep 2024 22:09:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a86883231b4so392438266b.3
- for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 07:21:43 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-5df9dec9c0eso2413965eaf.2
+ for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 13:09:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725200503; x=1725805303; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=dcI2kzHNA/wBW68m3Cwd4AipmdJ6JvN80lQy/IzMc4I=;
- b=GIw5Ed23xNHdOAXVQpIlK3Mj59+ioytK/KInV36z15JD2kf0ixpUqx1QiX8KO1i0jm
- TEGBkMvdtodk3x1DeL+rd2LViBcGq0880mGQhiTdA8N0gXECiHFJTdM7t9Ck0Pyek5bW
- OOJcOatlmIT++frI5pt7GeOUMA9CLLjDo7Op4CGPhlwQsiyIC9A6lBxglOFYbOOsJOMV
- GTpwsNhezwPQciO8NT9gNTnlWur1EMVj56EF9yugK0gTuBOw5EjlS69Ip5HzxmEeEkpD
- 3wmtebCBtBrmvoNVIQ20FOemUq2NNcSeKymIsQtsoMpnOcsOY12ZJ5DUgSLgENdWdVUs
- ykwA==
+ d=chromium.org; s=google; t=1725221389; x=1725826189; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=UMt4+jNqd9HlfxTVNMeuOmTc8VAaJ0piew4DiziAFs0=;
+ b=Sc7+Qwi+Ay9vCgBda5CygyXm/VKhWMMy+iRGN3Q3piuht5G+odHBJwRS21y2hKKrJ2
+ YCpWg9JAvoTj5o5F4FZfW6a2K+B0KXXwNfrCLe9KLu6NHTvhSilCsmPxJBnbiRerLWBO
+ TjcvrmBQktN/uoABw0T3VyDJFI9aNSnFx3jfs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725200503; x=1725805303;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dcI2kzHNA/wBW68m3Cwd4AipmdJ6JvN80lQy/IzMc4I=;
- b=OXC1hAZE9kaQYMbaMgjDm/y12XM6EvythG0IgafYDGXRtrgMmNuxUmP/zVUwbVytIT
- QCCT/4o3f0TtN/oWung22uO8T87jm26PXpD09ijpQO8YAbrk2C6IHeU1qOqzcoCTqckz
- ycrXdQOTYEhuYHjcF6SzcqxF94jMzK8BCqUY7o85LW1TFDVepR1PV25lrrZ5/B/xAZl0
- 9c+FmcVSIiOtDEhQNN5mJPwxiq0wsZa0YVEYSS5PFMT20AmNiqcbV8+mnA+fq8IQvA8+
- E8/83m/bbsSGgLce/IJEDlDm29rXJXOm+NDOpUGt6rNf8oJ1rTvdBqVGoHvWou9fH5pL
- gxNg==
+ d=1e100.net; s=20230601; t=1725221389; x=1725826189;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=UMt4+jNqd9HlfxTVNMeuOmTc8VAaJ0piew4DiziAFs0=;
+ b=a4xS9qO3mvOchoUer/gagToJOWCeyDoLAK99307POKLIYMoNVjv3QzP+GqDohnXPik
+ M12swQ5iU2lxw8X/y8nw1VNiT7Y6hDbeqNC+/mpTxlRwq+5FU2JKp90HnGEhXDMgrawL
+ hulq85OHImlnldXMedBXWu6+BLF8qFrSpVengLZfp9wQVzAC7NZ4/iymI4wMBmRW03lR
+ 5Zjj16Ka9YInSRUVUUZrAXu4EMAVwI04yrfGGtriQVzYKD/Jk2ddpcgvimIixt8Q5OWa
+ 1ht9ADlXo9PsCUVJ3qN5Y8o5gkOYUtr5ygeMeiW5Brsp5o3UgvmblwGyE/Nn1NPLxeSA
+ NFEw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUvPVonoTiF6QGjh1irMkCJ9NrTYafxXn+/DFvVPICi83VL32v9oJXzx+1sv+G7nd3El929TDA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxL6DelBidJiv7Fbm27VIMoI2P+lz/xDJAejrfz8kG7JoINk/fl
- jfsUP4c2iDEYBPN2UuUBBugHr1bgKfIRNBw9sWuu6shD5N2wA+CYpp8C5vArvCI=
-X-Google-Smtp-Source: AGHT+IHQnkDmrtEf/SmyrmYrfFT3tglYUuMt3vEdUNaZqjx53SWPXPAT76ibE9WnPDLkDyxeY4z60Q==
-X-Received: by 2002:a17:907:d08:b0:a86:8f32:3a68 with SMTP id
- a640c23a62f3a-a89d879c0femr279952666b.37.1725200503091; 
- Sun, 01 Sep 2024 07:21:43 -0700 (PDT)
-Received: from ?IPV6:2a02:2455:812b:6300:9265:84ff:fec9:103a?
- ([2a02:2455:812b:6300:9265:84ff:fec9:103a])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a89890229b5sm446715066b.51.2024.09.01.07.21.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 01 Sep 2024 07:21:42 -0700 (PDT)
-Message-ID: <feff5299-6378-4de9-867d-808c23625af4@linaro.org>
-Date: Sun, 1 Sep 2024 15:21:41 +0100
+ AJvYcCX4/VAzieWpIzmN98QnTkYeTJYI77+RkuUv4lslLHTP2hXh/5tT3AkNfY3TI5GRwXGDw6swvGM=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywu/y4CiHVNTkZ6b4F+sU2u6pbLtD1xI2IaQd8LpqNjXqNyqdVy
+ o81dz2kq/bYfnmgU3Z9bxAi8+YbiLbLKYoTa1GgmzukDe/NawNrSmLP6E0OgdK9Q8nCfUjD/02H
+ gmpDntKuuASZEuIx5zXo5OvreBuTRWPQ/QcY5
+X-Google-Smtp-Source: AGHT+IFsZNNUSn+YetcyASM3QdYsRukgeqayi6dvtOwL5PxAZQkyXJ52iu5VtUFAoz51JPSyroo9xSA5HnZWo20Ur00=
+X-Received: by 2002:a05:6358:e4a9:b0:1ad:282:126d with SMTP id
+ e5c5f4694b2df-1b7ef6c80cfmr700084555d.12.1725221388945; Sun, 01 Sep 2024
+ 13:09:48 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Betterbird (Linux)
-Subject: Re: [PATCH] cmd: fdt: use U-Boot's FDT by default
-To: E Shattow <lucent@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-References: <20240831164639.2298097-1-caleb.connolly@linaro.org>
- <CANV2PTM+wevfK7w15j-=a2oakPMMXpTdr7ntzBfkc3jbbv+veg@mail.gmail.com>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CANV2PTM+wevfK7w15j-=a2oakPMMXpTdr7ntzBfkc3jbbv+veg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20240801173637.1071068-1-sjg@chromium.org>
+ <20240801173637.1071068-3-sjg@chromium.org>
+ <CAC_iWj+6CqPCxN8jSNJSzGiprd+sAw25ooQRaAf=t=Sdio67=A@mail.gmail.com>
+ <CAFLszThVpvHO8Jt2Mz1WB80=fDtYpzieo1eR4k2Jj=e37Gb87g@mail.gmail.com>
+ <CAC_iWjJJFygaws2ciBDMT=JJ4yMzhQC41T_Tg1RKFvrxzRTTyw@mail.gmail.com>
+ <CAFLszThsVcFwSe39geTeE=6bbJqK0bUT6kEYjULkOuNjO51e+Q@mail.gmail.com>
+ <CAC_iWjKPTv6Yzb6cQD=eJtC7Wm3bTC+cyaCUSmDXaWUySByoYw@mail.gmail.com>
+ <Zs7Ubog171uwz8jn@hades>
+ <CAFLszTgNnmyKFC5XKPieFoqT1J6aerYkD=qOof3tZ_V25SrO-A@mail.gmail.com>
+ <CAC_iWj+EO4L+Pu-QzWPDJL5=A1JNzDx13SKfvNZZcjkzVXn2Ow@mail.gmail.com>
+ <CAFLszTi+QjPANqTREqO8NoXEh_Mqy8fraFS2Uq6qirKSGhcOxQ@mail.gmail.com>
+In-Reply-To: <CAFLszTi+QjPANqTREqO8NoXEh_Mqy8fraFS2Uq6qirKSGhcOxQ@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 1 Sep 2024 14:09:38 -0600
+Message-ID: <CAFLszThGJVd6RFcmu_8RNXCfOWK=QzsyyTLkJ6Lg9_SBOkTA_w@mail.gmail.com>
+Subject: Re: [PATCH v2 2/3] efi: Convert device_path allocation to use malloc()
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,77 +93,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Ilias,
 
-On 31/08/2024 23:22, E Shattow wrote:
-> Hi Caleb, the problem here is hidden conditional behavior.
-> 
-> On Sat, Aug 31, 2024 at 9:56 AM Caleb Connolly
-> <caleb.connolly@linaro.org> wrote:
->>
->> When using the FDT command to inspect an arbitrary FDT in memory, it
->> will always be necessary to explicitly set the FDT address. However it
->> is also quite likely that the command is being used to inspect U-Boot's
->> own FDT. Simplify that common workflow of running "fdt addr -c" to get
->> the control address and set it by just making $fdtcontroladdr the
->> default FDT if there isn't one.
->>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->>   cmd/fdt.c | 9 +++++++++
->>   1 file changed, 9 insertions(+)
->>
->> diff --git a/cmd/fdt.c b/cmd/fdt.c
->> index d16b141ce32d..8909706e2483 100644
->> --- a/cmd/fdt.c
->> +++ b/cmd/fdt.c
->> @@ -276,8 +276,17 @@ static int do_fdt(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
->>
->>                  return CMD_RET_SUCCESS;
->>          }
->>
->> +       /* Try using U-Boot's FDT by default */
->> +       if (!working_fdt) {
->> +               struct fdt_header *addr;
->> +
->> +               addr = (void *)env_get_hex("fdtcontroladdr", 0);
->> +               if (addr && fdt_check_header(&addr))
->> +                       set_working_fdt_addr((phys_addr_t)addr);
->> +       }
->> +
->>          if (!working_fdt) {
->>                  puts("No FDT memory address configured. Please configure\n"
->>                       "the FDT address via \"fdt addr <address>\" command.\n"
->>                       "Aborting!\n");
->> --
->> 2.46.0
->>
-> 
-> The use of `fdt` command in the default action might be depended on by
-> some userspace script as a success/fail result. I don't imagine what
-> that might possibly be, just that the logic of scripts in u-boot
-> depend on that pattern of use.
+On Thu, 29 Aug 2024 at 08:14, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Ilias,
+>
+> On Thu, 29 Aug 2024 at 06:39, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > On Thu, 29 Aug 2024 at 15:17, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Ilias,
+> > >
+> > > On Wed, 28 Aug 2024 at 01:40, Ilias Apalodimas
+> > > <ilias.apalodimas@linaro.org> wrote:
+> > > >
+> > > > Hi Simon,
+> > > >
+> > > > [...]
+> > > >
+> > > > > > > > > > ---
+> > > > > > > > > >
+> > > > > > > > > > (no changes since v1)
+> > > > > > > > >
+> > > > > > > > > What about https://lore.kernel.org/u-boot/CAFLszTjLAKaYK_jLXJ7Z571L-QMtoiqE-oxHCRs186dZ2Qok5g@mail.gmail.com/
+> > > > > > > > > ?
+> > > > > > > >
+> > > > > > > > Yes, I reordered the patches in this series.
+> > > > > > >
+> > > > > > > You don't need to reorder them. As Heinrich already pointed out some
+> > > > > > > of these functions are used in EFI protocols. e.g
+> > > > > > > duplicate_device_path() requires the memory to be allocated by EFI
+> > > > > > > memory services, you can't just replace it with malloc.
+> > > > > >
+> > > > > > The pointers returned can be freed with EFI services. I don't see any
+> > > > > > problem here. All the tests pass and all the spec rules are followed,
+> > > > > > so far as I can tell.
+> > > > >
+> > > > > Where exactly does that happen in the current patch?
+> > > > >
+> > > > > efi_alloc() calls efi_allocate_pool() and when we need to free the
+> > > > > device path we are calling efi_free_pool()
+> > > > >
+> > > >
+> > > > Looking at it again, this wasn't very clear. The previous patch converts
+> > > > efi_allocate_pool() to use malloc. So this patch is not needed at all
+> > >
+> > > That's right, but ultimately I'd like to drop efi_alloc() and the only
+> > > other place it is used is once in lib/efi_loader/efi_bootmgr.c
+> >
+> > Right, then the right thing to do here is to replace efi_alloc() with
+> > efi_allocate_pool() which will be calling malloc in the end. That way
+> > we are free to change the efi_allocate_pool implementation in the
+> > future without affecting the functions described on the spec
+>
+> OK, that sounds good and it will make it clearer which things are
+> internal memory allocations and which are presented to the app as
+> things that it can free. The spec doesn't mention the pool, but I
+> assume that is implicit.
 
-I'm not sure what the rule is about breaking changes in the CLI, I do 
-think this is not a realistic concern here though. Maybe Tom or Simon 
-can weigh in?
-> 
-> Secondly there would need to be a warning to the user that some hidden
-> conditional action is being applied? i.e. "No valid FDT address is
-> configured to $fdt_addr_r or $fdt_addr so now configuring to use
-> $fdtcontroladdr instead." or however you would phrase that.
+OK, so it turns out that this increases code size, since the EFI call
+has more parameters. So I think the best thing to do is just leave
+efi_alloc() alone (or perhaps use it more consistently). For now I can
+drop the memset() in there, which seems to serve no purpose and is
+confusing.
 
-Since I call set_working_fdt_addr() it prints a message telling you that 
-the fdt address was set on the first call.
-> 
-> Otherwise I agree improvement to the fdt is welcome and my memory of
-> first using this command is that it has not-sensible defaults but I
-> then assumed it was designed this way because of possible use in
-> U-Boot scripts.
+I'll send a v3 of this series.
 
-Thanks.
-> 
-> -E
-
--- 
-// Caleb (they/them)
+Regards,
+Simon
