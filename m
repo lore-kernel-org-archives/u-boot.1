@@ -4,58 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A72ECD13CF
-	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 18:49:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3619ECA0ED3
+	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 18:59:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B84A9888FB;
-	Mon,  2 Sep 2024 20:49:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=email.cz
+	by phobos.denx.de (Postfix) with ESMTP id A7B4488ABA;
+	Mon,  2 Sep 2024 20:59:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=email.cz header.i=@email.cz header.b="uq+IMVJM";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 33F5388A0A; Mon,  2 Sep 2024 20:49:24 +0200 (CEST)
-Received: from mxc-1-40a.seznam.cz (mxc-1-40a.seznam.cz
- [IPv6:2a02:598:128:8a00::1000:40a])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1725303551;
+	bh=qzTPkQ7G2BRte4bOp9EFyGtQXOOkRNFIx36xXJZRpaY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=htIHY8py7rjTmK5MWShUsbTNnuC/F62hCbYPK3WT531lkkdSg5ej/n0p4hp6njPa4
+	 woOJrAQB2ITlZTNPEcRgXTkD/M3IGLLzgy7uDVcFtCMQEZp2ZyymKIsfPUUAUJxj4L
+	 9/PTpBpZ+ZJO4IwEhrIjaR0kTOYTNPL6BH+d6gx5Y37TxApyWUzlsCHza7b3AD/m0U
+	 kYW4GOxJAYLA1M+gFXwQNtUKwdU4sbmqNRYHENq4mITPRIwF71Axx/UvZjtDiY6PoZ
+	 QfDFPUUZsHwz584YMwe8ywoG27AIaDA4T/RcACHX9udTGIhgffkEWOR3hCDzw5Qhif
+	 6+INunuLLENuA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 359CA88860
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 20:49:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=email.cz
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tomaspaukrt@email.cz
-Received: from email.seznam.cz by smtpc-mxc-6f6fb7bdc4-w9hp5
- (smtpc-mxc-6f6fb7bdc4-w9hp5 [2a02:598:128:8a00::1000:40a])
- id 145428f9eaa09a5314daa6e1; Mon, 02 Sep 2024 20:49:20 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cz;
- s=szn20221014; t=1725302960;
- bh=ssD5Ovu1nocnf9V7Rzhs/QeK/ybLLbKjohu2wQf2O40=;
- h=Received:From:To:Cc:Subject:Date:Message-Id:Mime-Version:X-Mailer:
- Content-Type:Content-Transfer-Encoding;
- b=uq+IMVJM5oDg1lVaWIsluYeW+EZwEIy0ox3XuxW486QvexWLWawPbaubxIBPUbD3b
- pnKqGa1BaFn5cho2HY24KlUyhnUbUDcNU3+XN05RLUTp/FcoDBg/inM0HWpQp9OCrK
- cCKuPS+C1RH2YQbGSqhB8xzgXea6JInFU/N5FlhOFv/TVg8jGn94gqi2haPnsvbchm
- NJDhxc1WWKs9+9e/D8d6466gZPf9r4AipJJ19udVR2Pd4kcBftSJeJi3SO/IGDd46W
- 2ehqUjVPuEafHRXtzuR4Dm8KXMAfbCv73ybqnP3a/joM5rQhzznFHbrOvPejAt2C6p
- y6na27iL3iUdw==
-Received: from 184-143.ktuo.cz (184-143.ktuo.cz [82.144.143.184])
- by email.seznam.cz (szn-UNKNOWN-unknown) with HTTP;
- Mon, 02 Sep 2024 20:49:17 +0200 (CEST)
-From: "Tomas Paukrt" <tomaspaukrt@email.cz>
-To: <u-boot@lists.denx.de>
-Cc: <trini@konsulko.com>,
-	<festevam@gmail.com>
-Subject: =?utf-8?q?=5BPATCH_v3=5D_cmd=3A_mmc=3A_Allow_using_partition_name?=
- =?utf-8?q?_in_mmc_erase_command_?=
-Date: Mon, 02 Sep 2024 20:49:17 +0200 (CEST)
-Message-Id: <3hD.ZbWV.1{t85GxWb7T.1crWYj@seznam.cz>
-Mime-Version: 1.0 (szn-mime-2.1.61)
-X-Mailer: szn-UNKNOWN-unknown
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 16AED88BEF;
+ Mon,  2 Sep 2024 20:59:10 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1725303550;
+ bh=qzTPkQ7G2BRte4bOp9EFyGtQXOOkRNFIx36xXJZRpaY=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=ebTLmlQ41jdWcelcC1H4X45XNKhzhHWG7sMuqRmUG3whsw9FX5BQTYZfHJwYJVjVF
+ 9OW82z3lsDyrqK+Uy3OacBC6YBtq3F370RFj+HHYLakV+rvkEzKQMvldUjPXjZx4Jx
+ v2rgZKbbHX8AGt8XPP2IGzb2bwCqQ8P8HHQTnRYq+RWZZjUn1W4a1VNu4WdTWQQaEZ
+ 24s2l3639xD9QpunfBgDJLJO0XOtjjxhVv2pWt76ui/1s3TKK2qR+lJnt76ZmRy5+q
+ TAgvCQitlC7eLFpeDaKNvryBaSkVpd6ONxaYxffezsekiVvoFrQAX+sDuzDpuew35G
+ n9zwp0iAXHxmA==
+Message-ID: <283930cd-61dd-4feb-ae49-5977a8698350@denx.de>
+Date: Mon, 2 Sep 2024 20:40:48 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/7] usb: onboard-hub: Add reset-gpio support
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
+Cc: michal.simek@amd.com, fabrice.gasnier@foss.st.com, git@amd.com
+References: <20240605100221.3571-1-venkatesh.abbarapu@amd.com>
+ <20240605100221.3571-2-venkatesh.abbarapu@amd.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20240605100221.3571-2-venkatesh.abbarapu@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,102 +69,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The mmc erase command currently requires blk# and cnt parameters
-which can be obtained using the part start and part size commands
-if the entire partition needs to be erased.
+On 6/5/24 12:02 PM, Venkatesh Yadav Abbarapu wrote:
+> As part of the reset, sets the direction of the pin to output before
+> toggling the pin. Delay of millisecond is added in between low and
+> high to meet the setup and hold time requirement of the reset.
+> 
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> ---
+>   common/usb_onboard_hub.c | 44 +++++++++++++++++++++++++++++++++++++---
+>   1 file changed, 41 insertions(+), 3 deletions(-)
+> 
+> diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
+> index 89e18a2ddad..2f6fb71935d 100644
+> --- a/common/usb_onboard_hub.c
+> +++ b/common/usb_onboard_hub.c
+> @@ -7,17 +7,26 @@
+>    * Mostly inspired by Linux kernel v6.1 onboard_usb_hub driver
+>    */
+>   
+> +#include <asm/gpio.h>
+>   #include <common.h>
+>   #include <dm.h>
+>   #include <dm/device_compat.h>
+> +#include <linux/delay.h>
+>   #include <power/regulator.h>
+>   
+>   struct onboard_hub {
+>   	struct udevice *vdd;
+> +	struct gpio_desc *reset_gpio;
+> +};
+> +
+> +struct onboard_hub_data {
+> +	unsigned long reset_us;
+>   };
+>   
+>   static int usb_onboard_hub_probe(struct udevice *dev)
+>   {
+> +	struct onboard_hub_data *data =
+> +		(struct onboard_hub_data *)dev_get_driver_data(dev);
+>   	struct onboard_hub *hub = dev_get_priv(dev);
+>   	int ret;
+>   
+> @@ -31,7 +40,24 @@ static int usb_onboard_hub_probe(struct udevice *dev)
+>   	if (ret)
+>   		dev_err(dev, "can't enable vdd-supply: %d\n", ret);
+>   
+> -	return ret;
+> +	hub->reset_gpio = devm_gpiod_get_optional(dev, "reset",
+> +						  GPIOD_IS_OUT | GPIOD_ACTIVE_LOW);
+> +	/* property is optional, don't return error! */
+> +	if (hub->reset_gpio) {
+> +		ret = dm_gpio_set_value(hub->reset_gpio, 1);
+> +		if (ret)
+> +			return ret;
+> +
+> +		udelay(data->reset_us);
 
-Simplify the use of the mmc erase command by allowing the partition
-name to be specified directly.
+Where is this assigned ?
 
-Signed-off-by: Tomas Paukrt <tomaspaukrt@email.cz>
----
-Changes since v1:
-- Swapped init_mmc_device call and argc check
-- Removed round down info.size to a multiple of erase_grp_size
-- Split the syntax into two separate lines
----
- cmd/mmc.c             | 17 +++++++++++++----
- doc/usage/cmd/mmc.rst |  6 +++++-
- 2 files changed, 18 insertions(+), 5 deletions(-)
+> +		ret = dm_gpio_set_value(hub->reset_gpio, 0);
+> +		if (ret)
+> +			return ret;
+> +
+> +		udelay(data->reset_us);
+> +	}
 
-diff --git a/cmd/mmc.c b/cmd/mmc.c
-index 7244a90..2fc05f9 100644
---- a/cmd/mmc.c
-+++ b/cmd/mmc.c
-@@ -472,18 +472,26 @@ static int do_mmc_erase(struct cmd_tbl *cmdtp, int f=
-lag,
- 			int argc, char *const argv[])
- {
- 	struct mmc *mmc;
-+	struct disk_partition info;
- 	u32 blk, cnt, n;
- 
--	if (argc !=3D 3)
-+	if (argc < 2 || argc > 3)
- 		return CMD_RET_USAGE;
- 
--	blk =3D hextoul(argv[1], NULL);
--	cnt =3D hextoul(argv[2], NULL);
--
- 	mmc =3D init_mmc_device(curr_device, false);
- 	if (!mmc)
- 		return CMD_RET_FAILURE;
- 
-+	if (argc =3D=3D 3) {
-+		blk =3D hextoul(argv[1], NULL);
-+		cnt =3D hextoul(argv[2], NULL);
-+	} else if (part_get_info_by_name(mmc_get_blk_desc(mmc), argv[1], &info) =
->=3D 0) {
-+		blk =3D info.start;
-+		cnt =3D info.size;
-+	} else {
-+		return CMD_RET_FAILURE;
-+	}
-+
- 	printf("\nMMC erase: dev # %d, block # %d, count %d ... ",
- 	       curr_device, blk, cnt);
- 
-@@ -1271,6 +1279,7 @@ U_BOOT_CMD(
- 	"mmc swrite addr blk#\n"
- #endif
- 	"mmc erase blk# cnt\n"
-+	"mmc erase partname\n"
- 	"mmc rescan [mode]\n"
- 	"mmc part - lists available partition on current mmc device\n"
- 	"mmc dev [dev] [part] [mode] - show or set current mmc device [partition=
-] and set mode\n"
-diff --git a/doc/usage/cmd/mmc.rst b/doc/usage/cmd/mmc.rst
-index 5a64400..55391fd 100644
---- a/doc/usage/cmd/mmc.rst
-+++ b/doc/usage/cmd/mmc.rst
-@@ -15,6 +15,7 @@ Synopsis
-     mmc read addr blk# cnt
-     mmc write addr blk# cnt
-     mmc erase blk# cnt
-+    mmc erase partname
-     mmc rescan [mode]
-     mmc part
-     mmc dev [dev] [part] [mode]
-@@ -44,12 +45,15 @@ The 'mmc write' command writes raw data to MMC device =
-from memory address with b
-     cnt
-         block count
- 
--The 'mmc erase' command erases *cnt* blocks on the MMC device starting at=
- block *blk#*.
-+The 'mmc erase' command erases *cnt* blocks on the MMC device starting at=
- block *blk#* or
-+the entire partition specified by *partname*.
- 
-     blk#
-         start block offset
-     cnt
-         block count
-+    partname
-+        partition name
- 
- The 'mmc rescan' command scans the available MMC device.
- 
--- 
-2.7.4
- 
+Is the reset asserted time and post-reset time identical for all USB 
+HUBs ? I don't think it is.
+
+> +	return 0;
+>   }
+>   
+>   static int usb_onboard_hub_remove(struct udevice *dev)
+> @@ -39,6 +65,12 @@ static int usb_onboard_hub_remove(struct udevice *dev)
+>   	struct onboard_hub *hub = dev_get_priv(dev);
+>   	int ret;
+>   
+> +	if (hub->reset_gpio) {
+> +		struct gpio_desc *hub_reset_gpio = hub->reset_gpio;
+> +
+> +		dm_gpio_free(hub_reset_gpio->dev, hub_reset_gpio);
+> +	}
+> +
+>   	ret = regulator_set_enable_if_allowed(hub->vdd, false);
+>   	if (ret)
+>   		dev_err(dev, "can't disable vdd-supply: %d\n", ret);
+> @@ -46,10 +78,16 @@ static int usb_onboard_hub_remove(struct udevice *dev)
+>   	return ret;
+>   }
+>   
+> +static const struct onboard_hub_data usb2514_data = {
+> +	/* TBD */
+
+Do not add this if not used.
