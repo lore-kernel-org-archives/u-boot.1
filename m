@@ -4,75 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBDF5CD13CF
-	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 17:46:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B88C1CA0ED3
+	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 18:00:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4736788CE9;
-	Mon,  2 Sep 2024 19:46:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 33D0A88754;
+	Mon,  2 Sep 2024 20:00:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=email.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DgckvSIN";
+	dkim=pass (2048-bit key; secure) header.d=email.cz header.i=@email.cz header.b="l6iCNQqQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AD5A88CEB; Mon,  2 Sep 2024 19:46:31 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BBD2288754; Mon,  2 Sep 2024 20:00:49 +0200 (CEST)
+Received: from mxe-1-50f.seznam.cz (mxe-1-50f.seznam.cz
+ [IPv6:2a02:598:128:8a00::1000:50f])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FABB88C53
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 19:46:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B079886DF
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 20:00:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=email.cz
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-5353d0b7463so7543171e87.3
- for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 10:46:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725299189; x=1725903989; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=iSvW+v4eqHKGVsOulrN/2E8nfE9OXlzmd+KeH6BG17A=;
- b=DgckvSINX/Rvzj5Oz999GIIIzbHIwYDeNo70pnFK+EpSj7C4rKSuVBPvdSdwU4Vnii
- swsbksJ9zBeaehukPXUHzyjdetDq/qTdH2UITKLFISG9MHKGPv+piIchocnWZeLWsn3P
- N/JS5Iyh+XnhpRtH/bvHb/hyLBVGsNz7Fms3qCV9IjoNu/HPkQ8R8Ldg4yzonSQ0suGy
- Y/5KYGbN5ueS5wl3so9nD8K+y2HowVui4xbycSrqGfD7/CnWc1fZK0eha82uc/SIuz5Y
- W4o1+bYdeJefg9G4dvpTB/JoPsgKqhYqX7AkWmtaOhpwe7qwU19HjQgYRTRX0vZP4dli
- sLTQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725299189; x=1725903989;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=iSvW+v4eqHKGVsOulrN/2E8nfE9OXlzmd+KeH6BG17A=;
- b=alvYwLR4TznVOpUhodSKQGnlysORXn2e2zsvxHWIDAS9Zldtx9oHL/HFXRQnEJsUXY
- xTSkHtlCMIdpQX4/ljtc3SuJi8BNvkxdvTp7CaUoUdl24BdQnEp2YY2WNlyGxhQCoXzn
- Gl1d0Txj8S5kBXr5ZylRs7mUSw46Fv2vpCvKtdRt5h8MfU6MQ5+slpGPBySapwXCIG5O
- 5uv4ILQT4Assi6dO4Hs/VeFF1ZUUH4eD2X/M9cAcGE03lQH+6x4c1yS531bB7vll835Y
- tRWfhYyR5SA/qUF5fW0ilMhK49lzSCx0LynqDQDhS67Z+BUTYn5KNncd5yCT1sVedCI6
- 5i/g==
-X-Gm-Message-State: AOJu0YzS3Fy/DOxZfOaQM1bnPDvee6VJwxHcMLNT5Z5aOGdy7OvsMLZF
- 1N9xs5NJJBDCRTdDgpKWfBGhGXF8K9kBlOVHQFRo/QIfizMOmVV6/ECTEK1Uyj/4ydVxb35kHSM
- Lq4Lp0U6zWKEDl5LAIyASk7iYOdE=
-X-Google-Smtp-Source: AGHT+IGHEs5gRuKEdVCsRQUhkFEWv7CepJKD5H98cIqE2dhKZcftqzVhC8+1uPMe9niy0dv0BjHaQrEEIPxpibYr6l0=
-X-Received: by 2002:a05:6512:6ca:b0:535:3da7:5b59 with SMTP id
- 2adb3069b0e04-53546b1c7f8mr9266166e87.12.1725299188571; Mon, 02 Sep 2024
- 10:46:28 -0700 (PDT)
-MIME-Version: 1.0
-References: <py.Zbyp.4iSBCzZ4lgW.1cpo6S@seznam.cz>
-In-Reply-To: <py.Zbyp.4iSBCzZ4lgW.1cpo6S@seznam.cz>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 2 Sep 2024 14:46:17 -0300
-Message-ID: <CAOMZO5By67qkxz0u9A6NxqzaMTRtd=rAYVZLFNE=gtfiW7X2NA@mail.gmail.com>
-Subject: Re: [PATCH v4] gpio: mxc_gpio: fix reading state of GPIO pins in
- output mode
-To: Tomas Paukrt <tomaspaukrt@email.cz>
-Cc: u-boot@lists.denx.de, marex@denx.de, trini@konsulko.com, 
- francesco.dolcini@toradex.com, tharvey@gateworks.com, aford173@gmail.com, 
- peng.fan@nxp.com, ye.li@nxp.com, michael@amarulasolutions.com
-Content-Type: text/plain; charset="UTF-8"
+ spf=pass smtp.mailfrom=tomaspaukrt@email.cz
+Received: from email.seznam.cz by smtpc-mxe-6f7b5db655-grmdl
+ (smtpc-mxe-6f7b5db655-grmdl [2a02:598:128:8a00::1000:50f])
+ id 125a9fc9ecae2d6312d411d1; Mon, 02 Sep 2024 20:00:46 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cz;
+ s=szn20221014; t=1725300046;
+ bh=SXbz4kT3B2EZhAeNVCZaw8wa2iW2Ip57kPzt0JpYbCM=;
+ h=Received:From:To:Cc:Subject:Date:Message-Id:Mime-Version:X-Mailer:
+ Content-Type:Content-Transfer-Encoding;
+ b=l6iCNQqQ28Ey99tRuPk40VBVRMuz5gwjezxPyDz700sv7SAh3/WLyWYdA70qpW4ye
+ s6Y5aLJo9CdiHTBtW2F+w9RAZtogqmGae7i14evWGjadYsfRzuFJeIwsV+wZdNpnBW
+ 9NPEvapLE7kYrVyj/dJfRiPTCyKTomKtQ69OhdiftCINjjG7YNGa0h9HzUeNCa+cHB
+ vXyUkgCgZsRYrHpgfxF/agXeLI2izyoxtYxCzpoXKsvMyrujjFPjSXHiPrpQg7oz73
+ lwAgQxdoYgbORU5SuU3ytoQsGQcAau2BQXgDRDb8rgMOVXeWKFRSFNbZkhYcPVDJX9
+ h+cYFiD/vcGDA==
+Received: from 184-143.ktuo.cz (184-143.ktuo.cz [82.144.143.184])
+ by email.seznam.cz (szn-UNKNOWN-unknown) with HTTP;
+ Mon, 02 Sep 2024 20:00:43 +0200 (CEST)
+From: "Tomas Paukrt" <tomaspaukrt@email.cz>
+To: <u-boot@lists.denx.de>
+Cc: <trini@konsulko.com>
+Subject: =?utf-8?q?=5BPATCH_v2=5D_cmd=3A_mmc=3A_Allow_using_partition_name?=
+ =?utf-8?q?_in_mmc_erase_command_?=
+Date: Mon, 02 Sep 2024 20:00:43 +0200 (CEST)
+Message-Id: <3fG.Zblj.WuvIm1nVob.1crVrB@seznam.cz>
+Mime-Version: 1.0 (szn-mime-2.1.61)
+X-Mailer: szn-UNKNOWN-unknown
+Content-Type: text/plain;
+	charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,24 +71,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Aug 28, 2024 at 10:09=E2=80=AFAM Tomas Paukrt <tomaspaukrt@email.cz=
-> wrote:
->
-> The PSR register works correctly for GPIO pins in input mode,
-> but always returns 0 for GPIO pins in output mode unless the SION
-> bit is set.
->
-> The DR register should be used for GPIO pins in output mode
-> to allow correct getting of previously set output value.
->
-> Please note that the Linux gpio-mxc driver and the NXP U-Boot mxc_gpio
-> driver already use the DR register for all GPIO pins in output mode:
->
-> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit=
-/?id=3D442b2494b17d1a4f0a14721580271eb23ebffd42
-> https://github.com/nxp-imx/uboot-imx/commit/4afc3f90943c6b117f79b66d2cd04=
-e64f437b0c2
->
-> Signed-off-by: Tomas Paukrt <tomaspaukrt@email.cz>
+The mmc erase command currently requires blk# and cnt parameters
+which can be obtained using the part start and part size commands
+if the entire partition needs to be erased.
 
-Applied, thanks.
+Simplify the use of the mmc erase command by allowing the partition
+name to be specified directly.
+---
+ cmd/mmc.c             | 17 +++++++++++++----
+ doc/usage/cmd/mmc.rst |  6 +++++-
+ 2 files changed, 18 insertions(+), 5 deletions(-)
+
+diff --git a/cmd/mmc.c b/cmd/mmc.c
+index 7244a90..2fc05f9 100644
+--- a/cmd/mmc.c
++++ b/cmd/mmc.c
+@@ -472,18 +472,26 @@ static int do_mmc_erase(struct cmd_tbl *cmdtp, int f=
+lag,
+ 			int argc, char *const argv[])
+ {
+ 	struct mmc *mmc;
++	struct disk_partition info;
+ 	u32 blk, cnt, n;
+ 
+-	if (argc !=3D 3)
++	if (argc < 2 || argc > 3)
+ 		return CMD_RET_USAGE;
+ 
+-	blk =3D hextoul(argv[1], NULL);
+-	cnt =3D hextoul(argv[2], NULL);
+-
+ 	mmc =3D init_mmc_device(curr_device, false);
+ 	if (!mmc)
+ 		return CMD_RET_FAILURE;
+ 
++	if (argc =3D=3D 3) {
++		blk =3D hextoul(argv[1], NULL);
++		cnt =3D hextoul(argv[2], NULL);
++	} else if (part_get_info_by_name(mmc_get_blk_desc(mmc), argv[1], &info) =
+>=3D 0) {
++		blk =3D info.start;
++		cnt =3D info.size;
++	} else {
++		return CMD_RET_FAILURE;
++	}
++
+ 	printf("\nMMC erase: dev # %d, block # %d, count %d ... ",
+ 	       curr_device, blk, cnt);
+ 
+@@ -1271,6 +1279,7 @@ U_BOOT_CMD(
+ 	"mmc swrite addr blk#\n"
+ #endif
+ 	"mmc erase blk# cnt\n"
++	"mmc erase partname\n"
+ 	"mmc rescan [mode]\n"
+ 	"mmc part - lists available partition on current mmc device\n"
+ 	"mmc dev [dev] [part] [mode] - show or set current mmc device [partition=
+] and set mode\n"
+diff --git a/doc/usage/cmd/mmc.rst b/doc/usage/cmd/mmc.rst
+index 5a64400..55391fd 100644
+--- a/doc/usage/cmd/mmc.rst
++++ b/doc/usage/cmd/mmc.rst
+@@ -15,6 +15,7 @@ Synopsis
+     mmc read addr blk# cnt
+     mmc write addr blk# cnt
+     mmc erase blk# cnt
++    mmc erase partname
+     mmc rescan [mode]
+     mmc part
+     mmc dev [dev] [part] [mode]
+@@ -44,12 +45,15 @@ The 'mmc write' command writes raw data to MMC device =
+from memory address with b
+     cnt
+         block count
+ 
+-The 'mmc erase' command erases *cnt* blocks on the MMC device starting at=
+ block *blk#*.
++The 'mmc erase' command erases *cnt* blocks on the MMC device starting at=
+ block *blk#* or
++the entire partition specified by *partname*.
+ 
+     blk#
+         start block offset
+     cnt
+         block count
++    partname
++        partition name
+ 
+ The 'mmc rescan' command scans the available MMC device.
+ 
+-- 
+2.7.4
+ 
