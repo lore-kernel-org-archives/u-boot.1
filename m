@@ -4,86 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24508CD13CF
-	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 13:24:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 821D1CA0ED3
+	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 13:25:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9AF9888B4B;
-	Mon,  2 Sep 2024 15:24:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 11CAD88B4B;
+	Mon,  2 Sep 2024 15:25:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rC9sMoYV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sLQsORMR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35FC388BFB; Mon,  2 Sep 2024 15:24:36 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id 441AD88C39; Mon,  2 Sep 2024 15:25:44 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25E3788B49
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 15:24:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 53F7B88B49
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 15:25:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2f50f1d864fso48392831fa.1
- for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 06:24:34 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-374bb1a3addso1502755f8f.1
+ for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 06:25:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725283473; x=1725888273; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=MEr+V1nwUl8MonHhzdGso9Fmx0TBJwlEY12+4+wIit0=;
- b=rC9sMoYVlNhZBvwfk5+8VgGhoj/sVpUasZcVgttlPp7HBChzLEBPvDXnD1wlQjtl3S
- wvqlKV2DnhCbe/E4yXZiOBBBfnACnQJnl2gHVGtKfiA7ExEcnLS3aRgISJJcipdw6Bd3
- AS3saRa2cCf1KTLwkfsPCwO/042H0QIKYlUhwZuCLeb0WXm1gqPZ4zeS7hH+9pSM6NTK
- Rqb2eZ8DxtP1We3z32vu+m6TpiLwMowMEzyDe2bnymp0NKyIWEUbmxY6mOWjMHgkrIkX
- q3B3i2fbpcQ6CBeYpyyMR316JaQqB5j1LPSRnLOZ1j5Ix9zngfhklfoP/MWBM1ss34Qx
- uL/Q==
+ d=linaro.org; s=google; t=1725283541; x=1725888341; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=2YqgAKzPcZIp7cigAi39MJ60yMHP2xJr5ZWvqMJCk9k=;
+ b=sLQsORMRGW0PqfLSG0JPx86+Or/wuAqCbh8bWQq8IjaJTYdKoI9r6gzSllQpLRInEm
+ /tYhZlAt9dIumRZ4go5YJ9dS1k9LtbLMkZyiO+EvAg8NmuwjUSiDx7Zp/Uc7fDwnY21j
+ vGmwFjeWGBh13HyupLvsARqrtE09MD2Rj+FkzIQPDoyU/f+1c8st2//ZEPK4q6OUIvVr
+ 8P4rnC8v8FXR0s86qGIH4FjXI4oPBjUAOSxL58CxM/YTsxWt9ymSdndlCwGS8OvliSrK
+ u8GbpksPqNNVv/JtMuH3WO2aR5EABKlhFWmZarfMxYiIwCkLnjo2OFPTScOgONmgSNeJ
+ SA/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725283473; x=1725888273;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=MEr+V1nwUl8MonHhzdGso9Fmx0TBJwlEY12+4+wIit0=;
- b=EWaGuxbInoGxsiEFvBEdrtxS2aRlovt1chIz/BpLH86vnGZ+WslF90DOeWaJw4kyi9
- NVc2RgFmalSpR9xQL0Dlqiu0RoCUHW0siFhMlXtsgpVQa1QIXRiBOzTf6p95OJuzqSnv
- xrKfuweYid6QJfyG2pBaaKzCgOUbUBObCB183h0Tvi48ZKurNCtQGepM4iCGW1t6BXon
- JhhsuU2QXOmiMQk42a7c28o2PkY8KC1I9ooAjxY1aHL40oMFVBoRox8xXLi0E3iAjPA/
- 9UIicOp/oi5AjYYscWQHMEdlDblVMJs53ux1Tg31E45f9Kkue4aTFJCEvdPfRLf6oCEY
- mDHQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVtGAw0msvsQTFjUt5/SuBd5iQm2BI/sNZcpFF8nNBG0qabRKSIqwOfRcIcvPigG40KlbtWDyI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw7+zXTxQ3dB5OLSyfXle4flaLg8lwNkJrEb8+WQ7DFYvMrIzff
- RsIz6lIhtu1dWY9CeTuuXjiAfnngAeqIaKPs1W6FnZrpYjlSUQnPyFZDRvTcSfc=
-X-Google-Smtp-Source: AGHT+IE1QPV14L1rvW7SoHj2xNGoLK3dZmePD2ADPFWR7GR1K/Qho0lGSb4jjvuwzod5BhJEDkaIbg==
-X-Received: by 2002:a05:6512:ea7:b0:52e:f950:31f5 with SMTP id
- 2adb3069b0e04-53546b1c55dmr6792366e87.18.1725283473203; 
- Mon, 02 Sep 2024 06:24:33 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:6677:431e:31d2:9da9?
- ([2a01:e0a:3cb:7bb0:6677:431e:31d2:9da9])
+ d=1e100.net; s=20230601; t=1725283541; x=1725888341;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2YqgAKzPcZIp7cigAi39MJ60yMHP2xJr5ZWvqMJCk9k=;
+ b=CgfZ11tgZQv9KZmZLZtApRfmNjOvNwCy9N7mlkAICPL7VU0VeAR+Ti7cYNr+9NE6fC
+ MG1iIR3k7m0/YSLCm9U8D4b000Dp/vxDBW+HmRKAq0uXIALFpf2GJvOKXaVAvOdeKnFi
+ eoWPB6gzkaZqxOjTT2RaX2M0v7PNnjT0o8BpZjPslTdOAx1UIf4eRT0aWTjuAcCtnm/E
+ UOAhXbgALtaiS2pTcyiHUUwjNkCaiXu+O/Q7wwK2cCnlIQGprs/sC6J2et8LiI4ns12V
+ 1E7baLIQuvQOZtv9kwxq8RAoxoEIQ1+VrCyYn9DNv3QSPYiAX1ZhOyIijE3jX7hKg+Wk
+ JyJw==
+X-Gm-Message-State: AOJu0YyVmPlj1ae6EOuyVI7q/HJQNtnrVeOL+i3aaO6p9CdFyJd/QkOT
+ pIfFQRxgjAzxREUEEBwurX5VeVmUBrVYfArZHrObY7o0xMlGTqhwrqCGAWLSCmqTyp5sHrSaIN1
+ wJb18Nw==
+X-Google-Smtp-Source: AGHT+IEslZ5mDGytOBNCeOFEDiQOKN14kDOTZtHdcagvNgrWzuG5RBaHqa2qgurDjBj6zZWozU3pFA==
+X-Received: by 2002:a05:6000:18a1:b0:374:cd36:8533 with SMTP id
+ ffacd0b85a97d-374cd368862mr2227988f8f.54.1725283541377; 
+ Mon, 02 Sep 2024 06:25:41 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:6417:8cf6:a7f7:ee38])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8a1900d4fcsm24965766b.144.2024.09.02.06.24.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 02 Sep 2024 06:24:32 -0700 (PDT)
-Message-ID: <56b0792d-0b21-446d-b1f0-7b6e60eb5ae1@linaro.org>
-Date: Mon, 2 Sep 2024 15:24:31 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: guard call to tftp_start() with #if
- defined(CONFIG_CMD_TFTPBOOT)
-To: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ ffacd0b85a97d-3749ee5080asm11723512f8f.18.2024.09.02.06.25.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 02 Sep 2024 06:25:41 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>
-References: <20240902125917.119941-1-jerome.forissier@linaro.org>
- <ccdf5291-604b-48bb-9e3d-8f3214483237@cherry.de>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <ccdf5291-604b-48bb-9e3d-8f3214483237@cherry.de>
-Content-Type: text/plain; charset=UTF-8
+Subject: [PATCH] net: guard call to tftp_start() with
+ IS_ENABLED(CONFIG_CMD_TFTPBOOT)
+Date: Mon,  2 Sep 2024 15:25:11 +0200
+Message-Id: <20240902132511.148683-1-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.40.1
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,59 +94,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+net_auto_load() cannot call tftp_start() if CONFIG_CMD_TFTPBOOT is
+disabled.
 
-On 9/2/24 15:09, Quentin Schulz wrote:
-> Hi Jerome,
-> 
-> On 9/2/24 2:59 PM, Jerome Forissier wrote:
->> net_auto_load() cannot call tftp_start() if CONFIG_CMD_TFTPBOOT is
->> disabled.
->>
->> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->> ---
->>   net/net.c | 2 ++
->>   1 file changed, 2 insertions(+)
->>
->> diff --git a/net/net.c b/net/net.c
->> index d9bc9df643f..35961ba1c7d 100644
->> --- a/net/net.c
->> +++ b/net/net.c
->> @@ -334,6 +334,7 @@ void net_auto_load(void)
->>           net_set_state(NETLOOP_SUCCESS);
->>           return;
->>       }
->> +#if defined(CONFIG_CMD_TFTPBOOT)
-> 
-> I think we're supposed to use if IS_ENABLED(CONFIG_CMD_TFTPBOOT) now.
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+---
+ net/net.c | 23 ++++++++++++++---------
+ 1 file changed, 14 insertions(+), 9 deletions(-)
 
-Ah yes. I thought it was only with an if () construct but I suppose that
-works fine with #if too.
+diff --git a/net/net.c b/net/net.c
+index d9bc9df643f..1e0b7c85624 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -334,17 +334,22 @@ void net_auto_load(void)
+ 		net_set_state(NETLOOP_SUCCESS);
+ 		return;
+ 	}
+-	if (net_check_prereq(TFTPGET)) {
+-/* We aren't expecting to get a serverip, so just accept the assigned IP */
+-		if (IS_ENABLED(CONFIG_BOOTP_SERVERIP)) {
+-			net_set_state(NETLOOP_SUCCESS);
+-		} else {
+-			printf("Cannot autoload with TFTPGET\n");
+-			net_set_state(NETLOOP_FAIL);
++	if (IS_ENABLED(CONFIG_CMD_TFTPBOOT)) {
++		if (net_check_prereq(TFTPGET)) {
++			/*
++			 * We aren't expecting to get a serverip, so just
++			 * accept the assigned IP
++			 */
++			if (IS_ENABLED(CONFIG_BOOTP_SERVERIP)) {
++				net_set_state(NETLOOP_SUCCESS);
++			} else {
++				printf("Cannot autoload with TFTPGET\n");
++				net_set_state(NETLOOP_FAIL);
++			}
++			return;
+ 		}
+-		return;
++		tftp_start(TFTPGET);
+ 	}
+-	tftp_start(TFTPGET);
+ }
  
-> Additionally, it's highly recommended to rather use "normal" if's wherever possible, i.e.:
-> 
->         if (IS_ENABLED(CONFIG_CMD_TFTPBOOT)) {
->             if (net_check_prereq(TFTPGET)) {
->                 if (IS_ENABLED(CONFIG_BOOTP_SERVERIP)) {
-> [...]
->                 return;
->             }
->             tftp_start(TFTPGET);
->         }
->     }
-> 
-> Would that work?
-
-Absolutely. I thought about doing just that but I wrongly assumed tftp_start()
-would not even be defined as a prototype if CMD_TFTPBOOT was disabled, which
-is clearly not the case.
-
-So yes, that works and I will send a v2.
-
-Thanks,
+ static int net_init_loop(void)
 -- 
-Jerome
+2.40.1
 
-> 
-> Cheers,
-> Quentin
