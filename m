@@ -4,202 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A141CA0ED3
-	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 10:11:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAC1ACD13CF
+	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 10:27:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D387C885B9;
-	Mon,  2 Sep 2024 12:11:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3DB3C887BB;
+	Mon,  2 Sep 2024 12:27:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="FZNVwtm9";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="PY+sb1iR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EEA58884C3; Mon,  2 Sep 2024 12:11:37 +0200 (CEST)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2060d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::60d])
+ id E0D30885B9; Mon,  2 Sep 2024 12:27:25 +0200 (CEST)
+Received: from NAM02-DM3-obe.outbound.protection.outlook.com
+ (mail-dm3nam02on2062b.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2405::62b])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 561C488785
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 12:11:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D915F886E5
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 12:27:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Q027gBT16i0dEK0S4+YJgDanZuehTwZ09/NtphwITYsVbEj8svbFFI3NJbwFVZbosxKODq4y7S0e194ybAevMRf0JC0qeMlqSRO5AswQy8v9NOOdKV+zZyugd12wFhU/S/43h9blUqfAIRVPRGvf/AIszJpn4oqxZO+4h63u6nyjcYOSuDUWIXxpNl+zPhhxA8Z2FktFt2m05NegL8kBhEYZct5JcTDlxZvrhOfPDX9Ojkft3xBmW2tBExGWB7a0IbYBNdRJKxikf76LM+wUpg1Pt0zk/xvNMxJRWr7gHO+SYlCBSjQPNz6L0cfs8ExDmskt/U1KcMOv09bGQSK8ag==
+ b=t5zbDdoBluqD30Ud0LNjHB3LMP4e2N6vCl4xGQjmxjurpe6eqNcQUR1NJwnF0+0KaXopZxZzwgVz2mlAZAJvGyVirLluRxQn/uBgl2NUxr4+FLzjKmNy/ptKM3hqeJJe6q0PuwEY3/Eb89AG7clEnOqQRrhPXjFhJMCGQqlHBQsopZ6zsyMM2J0BveSBTDyDbEAVj7wsJAiKWIB026qHLZfgPl2Cp8DvYLmluYjggWlb+2Y41bAaCuxshKJ06qvwIkJoUJbikTdO1V66DHHV8HgClpqI3c2B/zhDE/Zxo2CVArJDM3R6FCwMCjiXvBOehxcpKkc0zniKMavyyCZnYA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZoZStYTS750+x72Ehonc0bYdxM2qgQikxMtQlZjN8WE=;
- b=Z7kAO3n7qSPMHhJstZZE4iqpxLuBurHKr+mF4evg27OkVA3BOhWFxbtUaolkRHO/4oyR6bgFRoX4boUCLKsLnUFcxwljGeTPKLDVSTm38O/UDonlFwCxIXvVnPwPcBAvf9xzLmoXEmEUSda7H9PJpn1+4/Duin8v+r9yhi7c15HAMYHDRtKtWOfWpT3pnOfJNU/kK/UwiOaQSXCZ2vEMkxjnY1j+qINZGE8SgIu8fsLNaqu8G9ldQdc+DkZfreH7fLzBoNca8f8u1Xz8uAsqzLruipwFDGoNfCum23e0PZgd4/7g5mYfeeq6AYOXQdUP8P9lD7oS80xpbwMfM2cVFQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
+ bh=NYAbFhTJTOGt01E03OIo15A8ZYFT5kNTC8Q3asWT6d8=;
+ b=HPeHVSGPvP5A5Ho4RxU7wYIycfjp42qlrbTTkvx5kAG8KO9QZ74EX0CH0qgnV+/ZbeEjaM22nkBBIko0Z0hRhHHkho57+JsEd/TlumBEautbl5c9tmsBbZzKjaQPtT8vm0znMT1/OusL8meB41I0ogIEYXeRs0FhDqrVGoWcsMefGn0xpVqZ01a0bL3GwNUB6VqzQDo/FmeQlnKgncUce8vZ8yevsfwsKYp6lKfSxo+PwuBP2UBt9tD5Y7pO06nAqpcgEsoCMImoJFjQPBBX/Lc6c291adTqbwG8zMGecofGc1vn+gnlNvx/0lioKUQG7i+f7ZrPkVM+b6CbGEnl0w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZoZStYTS750+x72Ehonc0bYdxM2qgQikxMtQlZjN8WE=;
- b=FZNVwtm9fKL/YaMOJYMgtrM3p9HoeY9MFDNUvbudwVi4BBWM7G4ErOi3Vs+4cHoBVdKs89ZXYeJIqZqWeNGJScNJFI7wXEpoNRotczQ8Pz36ue1EsEhVpBb6wUDZilb8iySURuGYmN72d8oPeuO6bA12MWZWsONWLl6ifIPHTrQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by SA3PR12MB9177.namprd12.prod.outlook.com (2603:10b6:806:39d::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.24; Mon, 2 Sep
- 2024 10:11:32 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30%4]) with mapi id 15.20.7918.020; Mon, 2 Sep 2024
- 10:11:31 +0000
-Message-ID: <93b022d1-63ae-4b7a-aa62-6be2a5c2a7e1@amd.com>
-Date: Mon, 2 Sep 2024 12:11:22 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [u-boot-test-hooks][PATCH] travis-ci: Skip the saveenv and reset
- test cases on xilinx zynq qemu
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
-Cc: trini@konsulko.com, git@amd.com
-References: <20240902095357.311-1-venkatesh.abbarapu@amd.com>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20240902095357.311-1-venkatesh.abbarapu@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR04CA0104.eurprd04.prod.outlook.com
- (2603:10a6:803:64::39) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
+ bh=NYAbFhTJTOGt01E03OIo15A8ZYFT5kNTC8Q3asWT6d8=;
+ b=PY+sb1iRoXQumpOlZ0cF+7+GDfWe1a77KkHK2+EO0FC5SEg0MIm6StJDaR3SOE1EA9JvDDXTn9llOiMrSBfwfpFMRy0Ni4dVbFaZ5bNNGyrOJEg8s4hudU3QWOLOtvZtN8WEJCul6+BLqxMEqmg0t3oRYI5VDdFWjXtKInsM3JM=
+Received: from DM6PR08CA0012.namprd08.prod.outlook.com (2603:10b6:5:80::25) by
+ SN7PR12MB7300.namprd12.prod.outlook.com (2603:10b6:806:298::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7918.23; Mon, 2 Sep 2024 10:27:16 +0000
+Received: from DS3PEPF000099D6.namprd04.prod.outlook.com
+ (2603:10b6:5:80:cafe::c4) by DM6PR08CA0012.outlook.office365.com
+ (2603:10b6:5:80::25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.24 via Frontend
+ Transport; Mon, 2 Sep 2024 10:27:16 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DS3PEPF000099D6.mail.protection.outlook.com (10.167.17.7) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7918.13 via Frontend Transport; Mon, 2 Sep 2024 10:27:16 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 2 Sep
+ 2024 05:27:15 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 2 Sep
+ 2024 05:27:15 -0500
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Mon, 2 Sep 2024 05:27:13 -0500
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>,
+ <trini@konsulko.com>, <git@amd.com>
+Subject: [PATCH v12 0/9] spi-nor: Add parallel and stacked memories support
+Date: Mon, 2 Sep 2024 15:56:57 +0530
+Message-ID: <20240902102706.1107-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|SA3PR12MB9177:EE_
-X-MS-Office365-Filtering-Correlation-Id: 35ee6fce-9702-4d65-7902-08dccb379e2c
-X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099D6:EE_|SN7PR12MB7300:EE_
+X-MS-Office365-Filtering-Correlation-Id: b0ea0052-f6ec-4065-e82c-08dccb39d14b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?UEM0bDZUaWNtd3dTT2RDTWJTUTJ2QURkdXBjUVF6NitLSElNL1R4MFUrUnN2?=
- =?utf-8?B?d1gvUW5KL0pNU01Tb3hhYXo1U2VrRXhlNThJdnN6SkMrckF4eEpONjRnQlJ1?=
- =?utf-8?B?WEJhSkFqUkxwV0JFSlZhWWwrN2NKOU41NThkdXQzUUx0Qy9QWnJZWGhUSHNi?=
- =?utf-8?B?bUJLT1lHUW1LMXMxdGlNYmhYMFhlN0Y3OTY1VDlvaHNMUUxxbWgrRG5TL21Y?=
- =?utf-8?B?L094ZjIrK0VtYVkrZVJhRHVBcGIyYi9KTHRaWmhaaFlLRlZ3WDNqV1haRkM5?=
- =?utf-8?B?YXhYdCtTVG1sZUowZTdXU3Z5RisvQkZtMURDaWQzQWpPTzZsUUVrMm1vRFlW?=
- =?utf-8?B?c0VKZmRPaTJKTU1OMmN2NDdQTWwrNTNwdExiTkE0RFhNZXlpV05uN2x3SGVy?=
- =?utf-8?B?Zm1wajJVQmNKRUJjMmtmQTFEcllvMm5YT1hzOUJlNzFHZVZqcUpFaGl2d3Rq?=
- =?utf-8?B?a01YRHh3YVFQY01XbnhDTmllUXlxd3kyVEJPM1phb3BYQjFmaGlmVkllUURZ?=
- =?utf-8?B?c2RZZitTZXllNnFab1ZHUzI5cms1RTREbEhGQTY4c1ZaYzgxaTVqSGFpVW9P?=
- =?utf-8?B?N3llUWNGMzR5RDR4WWh1c05wMW01ZGdUYk9ZWnVLRVY5Z2hHZjAva25jTjJ6?=
- =?utf-8?B?VE5HR3NCTVpBdUExQWZIdWdKWktwSGNUTm80Q1F1aUpjd1JZK2VYVXVabk94?=
- =?utf-8?B?YkZRL2ZLaVJqK0s1RmlGVFB4cmtsVG9OOTJCYVFWaTBCQWduTVZDbW5PU2hQ?=
- =?utf-8?B?Ylp4VmNQYmNISUhsZUwrVGttcjJVMWRWRmNTQ3hjaGZWeDhWTUNuWXNzcnpa?=
- =?utf-8?B?cWN0NHQvZnE4Qm95cll0QlYvTWdlc0tsRVNOeVY4V2dVb0N6cDlOV0VKeW04?=
- =?utf-8?B?cll0SXJYdWhYUUZybFRxNklua0VKZXU3T2Y5a0tvb0NheHlib1VhU0g3NGd2?=
- =?utf-8?B?MzBLYUord01qMWlTckJ1VUNpc0NZaExyR0c2dTgydjd3bythZUFwczErL2cw?=
- =?utf-8?B?OTgxVE1pNlhFazluL3Vub0hOcDVEVHAweEQ2WEZPcnhLQlVMRDlQNy9WajUy?=
- =?utf-8?B?aVhPSkROdEJEZGJIK1BFN0RyVEh5c1Y4a3pFaGx3bmpCNDQ0NkFGVFpXQ1Yx?=
- =?utf-8?B?eXdOZXRia0ZYNHhpSUoyYmF4ZUQ0MkN2RldFY1NjaXBkbVVRbU43Z0I3ZENu?=
- =?utf-8?B?YUZzZU9DY25hczhQZEdnNlRwY21LY0kxRUdKQXZpdHdhYVAxeWFSamJHbzQz?=
- =?utf-8?B?ajAvN3FTbU1oTkNZVEd1NCtyRzJtQitSRkdNTDZWZWsvMzRlamVQaVdYM0pJ?=
- =?utf-8?B?aGRHcUVybmFUaTNKc3RCWW4xQ3oyeHd5MHRMR2s3VFRmMVJtWTB3OUJYcVBE?=
- =?utf-8?B?Y1BUTUVNeHA4M29NeC9Hb2o1OWhsVmRKQ0t3bFpVbDVnY0FHbGNKUlE5VUlH?=
- =?utf-8?B?eFRaRjkxcGZqbmlyUEJvbEVIU2o2bTBoNnY0cTFDNlFJemtTRkJqOXJONUJl?=
- =?utf-8?B?eElsSjF5T09qQXlaalNDaDk3Q0MvQUlCcnpaRnZxZmxVazJPTm5LZDI3NXc2?=
- =?utf-8?B?dDJGTXJ2cmdUQlN0WHkrbktuWW4ycXg0NWVrM0J2Wm9vWWVsSXdWTi8yT0Y1?=
- =?utf-8?B?bVJpbHJJV01HUDVTYnBkV3AwRzFJZEVzaGhUNy82VUdxR05TUzErM1d0WWcy?=
- =?utf-8?B?S1JaOXNOZkg2dDAzanVHVXhJc1h5NnFhZXY5citNZGdjTEtxYUlGbDZpNTlC?=
- =?utf-8?Q?+Gq97iWGn2JcLa2yfk=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MnpKcmlHbDdNc1pXWjU5Rk55ZWFiQ0hyQ2Rza011VzEvY00vZHY4L1h6T3ZB?=
- =?utf-8?B?ei9ZL1BPSHIrUmFpbjY4eFVZTVBtQmhhRVJHYXJRZVBvd2d1SUxQMmt1NmdL?=
- =?utf-8?B?enJNK1RLbldIT3BuZmJKNzBnT21JV0d3R0xVQnkyTjErVEI1a1pjaVhJTlZh?=
- =?utf-8?B?c0pscXN1L1NndFUzQWlOZkFzMC82TU1PcXFIeVhUSE9KU0hiTzhxWDVMalU1?=
- =?utf-8?B?bWdKVk8zN1JmSHFxNmJZeHdFclNCUGpKS055UjJmRkkrZE1ZaER5RytQNk1l?=
- =?utf-8?B?ZDZ5UElqRlQ5aTNtUGMzMU1QcHRxeFEyU3RNdkZRdEdGT3gwN1lQOUkrNk1J?=
- =?utf-8?B?dnFQTmJYWXZxTERUM21BSmhadVp6dE1QNU5RY3Vxc052TXpmR2FEVUI3STdr?=
- =?utf-8?B?Tm1JL01oR2NlWDFuZC84by80K2xmMWdCRUkxUmhmTFRYQVRNMjl6S25rcTE5?=
- =?utf-8?B?ajN2UUd4ejBGZHdYcFE0K0cyYTJwV0krM1hrMSt1UHlhZmlBSHhOYldvdlVS?=
- =?utf-8?B?QWpQd2VQUVdIUUQwUHlmcVlZNWFsQUlWQTNEMXFwTHdZVWhvb3g0RGxTZGY4?=
- =?utf-8?B?Q0svTlM3dkd2bjJqYXZqVW9tMjVzNlRzRmVydHFsd2RUbzVQUjBmY2R5RjJQ?=
- =?utf-8?B?UTI2cXNweHpIamhwNllWYm1yTGNPaHpkWkV6Vjc4ZzJ4dG1Gb3RzY1p5VDNM?=
- =?utf-8?B?SDdNQWNQdGJYNDk5QnlsYjdhZmdWVytYakIvSVBYSUI1OHViYVZJNmFQa21H?=
- =?utf-8?B?bW80N0J3bG1nUTd0UGVBU1lwTEJ2YjBtM0dmNm9KTzZBVUNMRVUyMHFMam9D?=
- =?utf-8?B?SWdCeTIxdlE5Z2M0akE5OEZMNklKVldDZkhtOHhjbDJlRW1qNE10K2hwOEhB?=
- =?utf-8?B?UG4wZktUeFJyWnNGWlByWGg5NmczZGlzeXdYM3czTlRpQmNlM05wSjR2Sjc5?=
- =?utf-8?B?ZHZrdGFFMys0N0p6KzNqYTBabTdpMTVyVmU4Rkxwd0RIV0RCaTZyM3BOMzlp?=
- =?utf-8?B?YjJFR0VFN21VcnVFZlZ3NllFTk54YTFRckVRc3VGL0xNaWMrNFVoQWdjZ2xq?=
- =?utf-8?B?ek9TZ09qdWp0Lzh4ckZlSkJmV3FEaTFIK1Bicmd6dE95Y1Z6MENqczNVSzc5?=
- =?utf-8?B?WXIyUDEyTTZQd0FzajFLdFJIU21mM0hQWWxtZ1REWlp2WEE2WGViRUl1MzdJ?=
- =?utf-8?B?Q3V2bk1DY1N0NHR4VU9yK2J2VldPVmF6SjkrNWtrN1BJbkp1bHoyZWF2NEQ5?=
- =?utf-8?B?TFFpV1lUUG9vMEVpNXZESDgyNkVHV1YzdFdBMjlCU1puYjR1VlNxZ0hZTjVY?=
- =?utf-8?B?UlQ3WFN5Tm5DQ29FUE5YM2JKaHBYdDJOVjVxYURaaklhZ0hHMkczNkNlZWl1?=
- =?utf-8?B?am8zZGNta0FxRjR5MW5WSldISEFEWVM4MS9YTGJZSG1Ja0ZEOHZDS2lPUExj?=
- =?utf-8?B?SUsrNDFWbENUMm92VlBzajlpVC9QVVNYcmRhNzhRUERPaitUR25MSkpwYUZL?=
- =?utf-8?B?MkdYRGEyNWNqcjh2TDJRWU9XN3c0TXU2Q1ZpL2FpSXM3VXplR3RvNXlBY1B5?=
- =?utf-8?B?cUZTUjkxc2F1RXhLeE9GZm1FRDlKSllEdFBZc2ZVY2lhck5qUm83QjVnSzJk?=
- =?utf-8?B?Nm9PcDBGbUdWbDdIZHRmck5IeDAva05ZT3hZb3puZVViSk5nZG1Ib1JDbEl3?=
- =?utf-8?B?T0xmaE5MdXZKY2xRN0RBakxGa1FlUHNiN3B5UVFCaXMrZTJjRUE4OE9YcmJw?=
- =?utf-8?B?VjNDMENpRld6M2pZT3k5bzRYL3doS0xXSW9XMFEyb1NkZ0pwdFQ2WFgyUmFB?=
- =?utf-8?B?eHR4VnBuYzZGaVYreCtlSTBYcW4wMjU5a1dXRDJ2TDNqR05aOGxWWFVCdDY1?=
- =?utf-8?B?M1BURHN6OUJpMEltc2drS2Q3ZTJxb1NWQ2xHcitDTDJLZmRzTmZaODQ3TGdS?=
- =?utf-8?B?b2c0K1dtaVJUNzV2SWYxMTV2ZWtpeTd5WmtHSXVZNmluVWEvSEc1bm9uSDF2?=
- =?utf-8?B?cmZTcmgwNnhSWm5hVG9XY2FSVVliR1ZJc3VIRnkvbURLQnFpRUM1MWNCU0ZS?=
- =?utf-8?B?QUlObmlQTGVVQ0hJVHlSVmNSZXdVVVdnYlNzc2pNTjNQRlZ5Ykl5ZVlTVElC?=
- =?utf-8?Q?IwNrrFrktlT03kOXHf8wZvRXm?=
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|36860700013|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?lTrja1zHEXoYSVx4CYAJCRlvLy3gOYYDDU7/JXYB0i7exzIddZSAGVDswoPJ?=
+ =?us-ascii?Q?f7srGI+Tg+g2hBkNLaiZhIfdmK1yAniS9BKK349msJDpaCuQrAqM2GZaPxNZ?=
+ =?us-ascii?Q?CGtNphWry8vzYgJVds6bV+3040Hn16kB6xG1kkIspu+xZEbsEuW678bCyKtC?=
+ =?us-ascii?Q?sOLOpXmAHFXsRnd3doY1WmiuOCZhFCuvTnYUy1Cb+BA/KEGN4k2qlP9PE27F?=
+ =?us-ascii?Q?S1o2pkhfjqeiy1IPbGJsezafYawdN55fzh1k27mEs+ej76tUqt8h7XmAHDd6?=
+ =?us-ascii?Q?4BBU+kEP9QLyRHohWXJePCK2WsXJfCt1VcdQonWbb93tQkbOC13CcGBAEjFP?=
+ =?us-ascii?Q?MFS/YxQfvs2j6Dab0RJlrZHC9tcAJOWeYbTUAJaxZTjaL+wZIhYNGEA+ac9d?=
+ =?us-ascii?Q?kbSz1YPm2IDYFIaSyMD9+RWDBbgdNhNWoeMBQcn1L9E5VJqsQv83bzlVdSGd?=
+ =?us-ascii?Q?qJ9LIL/yTHoBN/EoXjGN5aUw3U15i7hAdV412L0zYo6yz+BPZiTCs2Q80OkK?=
+ =?us-ascii?Q?O14rgei5XlJW/jH7cgv9/QWHhXcvuwVtzUgUuBVD5kDUzHB49lUGVMbBKN7t?=
+ =?us-ascii?Q?wqDa/vE8qibwVvDmNnMGfwMH5ER76lFI6aIqFVVSZA7cqqXfYkfZ+UAfL3iN?=
+ =?us-ascii?Q?GwaSQJdI1cqfhMX2rBYAoGPK5k1MruUvVjDaKmwdaxdOrfysS+v6FkIX4Oin?=
+ =?us-ascii?Q?5tfwuYS7LqTYm+n85cciXVtqtjoabyavOUXf81/RY53GtUnxe5ogT5I2XPfi?=
+ =?us-ascii?Q?03LcjmX+Vuvy58dGegL7FL0GC8LNGnQU8qgO1LwOqVofQqEpva4mNh3CoSYy?=
+ =?us-ascii?Q?IkF+kOFKcpiyWkU6/0U2ekbJL4sIrPlDHLe8K+UthbOSCMpTzYfezElob29y?=
+ =?us-ascii?Q?A2cxUowg2f5ovhK/uofUwMllZ57WtBOTt8Yfmt00MIZprARLzyBonKHepD2I?=
+ =?us-ascii?Q?5nhZ9UB6s2vOaLImoWMgufz4+6kCbkgkGD1BRx3FblX49q/rVXNZPQeAzqpw?=
+ =?us-ascii?Q?7KHjf+GMUoqIpqGCsEoGCWECjYFC4r4/iqgmY6XdG+GebvIRQRUh2VIqv0Jn?=
+ =?us-ascii?Q?nkEh2oWthQwLcmb+8u2iHfRKAXec/v2YJ4gZwvv7SwZ5xtn+v6KQe92yqvw0?=
+ =?us-ascii?Q?nat89oYESBCONzEA2R7GaoBOafKuzsBPRuSILXIakmmWXqRHABVldCVkWqPC?=
+ =?us-ascii?Q?W+EaY/gehGpHDXwWhq+39ZqnIYOgXzKqDigx0jHKOeQlhbTmvbNYnQlFsF9G?=
+ =?us-ascii?Q?s8oo1DpTW2dojYEcp5q0L8W93NLTvjifzg58ObzciF3nPp1dTp2vZgmoSfI4?=
+ =?us-ascii?Q?kfacQhEMa01GMos0PG+XcFGamcMl00hmK5Am5TIhOF0ONW8LIi2+//mrRb5U?=
+ =?us-ascii?Q?wnB5Phy3w4hBhxYebzZDJigMAr4IWcWsfBVKnA+GuSsr96MBulXIoJn9VTy7?=
+ =?us-ascii?Q?sdLM2FPxXAYT4vgv/bygbJbZAHa71ads?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026); DIR:OUT;
+ SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 35ee6fce-9702-4d65-7902-08dccb379e2c
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2024 10:11:31.9404 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2024 10:27:16.3661 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b0ea0052-f6ec-4065-e82c-08dccb39d14b
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Q6niOdzM79ETAqALBbVxdsYjtgPXi4NaRBnkMQSteW3/1q56YA2gfcD8j2Cgfi8D
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR12MB9177
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099D6.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7300
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -216,52 +147,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+This series adds support for Xilinx qspi parallel and
+stacked memeories.
 
-On 9/2/24 11:53, Venkatesh Yadav Abbarapu wrote:
-> There is an issue with the xilinx zynq qemu qspi driver during the erase
-> operation in dual parallel configuration, so skip these
-> tests for now.
-> 
-> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> ---
->   py/travis-ci/u_boot_boardenv_xilinx_zynq_virt_qemu.py | 2 ++
->   py/travis-ci/u_boot_boardenv_zynq_zc702_qemu.py       | 2 ++
->   2 files changed, 4 insertions(+)
-> 
-> diff --git a/py/travis-ci/u_boot_boardenv_xilinx_zynq_virt_qemu.py b/py/travis-ci/u_boot_boardenv_xilinx_zynq_virt_qemu.py
-> index 267285f..42685ad 100644
-> --- a/py/travis-ci/u_boot_boardenv_xilinx_zynq_virt_qemu.py
-> +++ b/py/travis-ci/u_boot_boardenv_xilinx_zynq_virt_qemu.py
-> @@ -1 +1,3 @@
->   env__spl_skipped = True
-> +env__saveenv_test_skip = True
-> +env__reset_test_skip = True
-> diff --git a/py/travis-ci/u_boot_boardenv_zynq_zc702_qemu.py b/py/travis-ci/u_boot_boardenv_zynq_zc702_qemu.py
-> index 267285f..42685ad 100644
-> --- a/py/travis-ci/u_boot_boardenv_zynq_zc702_qemu.py
-> +++ b/py/travis-ci/u_boot_boardenv_zynq_zc702_qemu.py
-> @@ -1 +1,3 @@
->   env__spl_skipped = True
-> +env__saveenv_test_skip = True
-> +env__reset_test_skip = True
+In parallel mode, the current implementation assumes that a maximum
+of two flashes are connected. The QSPI controller splits the data
+evenly between both the flashes so, both the flashes that are connected
+in parallel mode should be identical.
+During each operation SPI-NOR sets 0th bit for CS0 & 1st bit for CS1 in
+nor->flags.
 
+In stacked mode the current implementation assumes that a maximum of two
+flashes are connected and both the flashes are of same make but can differ
+in sizes. So, except the sizes all other flash parameters of both the flashes
+are identical.
 
-CI found bug in Qemu which is reported here.
-https://source.denx.de/u-boot/custodians/u-boot-microblaze/-/jobs/878781
+Spi-nor will pass on the appropriate flash select flag to low level driver,
+and it will select pass all the data to that particular flash.
 
-as
+Write operation in parallel mode are performed in page size * 2 chunks as
+each write operation results in writing both the flashes. For doubling the
+address space each operation is performed at addr/2 flash offset, where addr
+is the address specified by the user.
 
------------------------------ Captured stdout call -----------------------------
-Saving Environment to SPIFlash... Erasing SPI flash...qemu-system-arm: 
-../util/fifo8.c:62: fifo8_pop: Assertion `fifo->num > 0' failed.
+Similarly for read and erase operations it will read from both flashes, so
+size and offset are divided by 2 and send to flash.
 
-It is bug in Qemu and we have already asked our Qemu team to fix this but hard 
-to say when fix reach upstream and then there is CI pipeline update too.
-That's why the most sensible thing to do is disable these tests to be able to 
-pass CI for dual stacked/parallel configurations.
+Changes in v2:
+- Fixed the compilation issues.
+Changes in v3:
+- Fixed the CI issues.
+Changes in v4:
+- Removed the dio,dummy_bytes variables from zynq_qspi driver.
+- Fix the compilation issue by including the DM_SPI config.
+Changes in v5:
+- Fixed the issue reported by buildman.
+Changes in v6:
+- Fixed the issues reported while running the sandbox test cases.
+Changes in v7:
+- Fixed the issues reported while running these da850evm_defconfig,
+  imx28_xea_defconfig configs.
+- Fixed the issue when DM_SPI config is disabled.
+- Fixed the issue while running the sandbox_noinst_defconfig with spl
+  ./spl/u-boot-spl -d arch/sandbox/dts/test.dtb
+   jedec_spi_nor spi.bin@0: has no valid 'reg' property (-12)
+   jedec_spi_nor spi.bin@1: has no valid 'reg' property (-12)
+   ### ERROR ### Please RESET the board ### Changes in v8:
+- Fixed the compilation issue with imx28_xea_defconfig.
+- Fixed the SPL size issue with the axm and taurus defconfigs.
+- Rebased the patches on top of next branch.
+Changes in v9:
+- Updated the commit log why SPL_FIT is being enabled.
+Changes in v10:
+- Added the new config SPI_ADVANCE to fix the issue while enabling imx28_xea_defconfig.
+Changes in v11:
+- Removed the unused variable, corrected the type of variable and replaced memcpy with memmove.
+Changes in v12:
+- Fixed the compilation issue with mx6sabresd defconfig, as the binary size got exceeded.
 
-Acked-by: Michal Simek <michal.simek@amd.com>
+Ashok Reddy Soma (2):
+  mtd: spi-nor: Add parallel memories support for read_sr and read_fsr
+  mtd: spi-nor: Add parallel and stacked memories support in read_bar
+    and write_bar
 
-Thanks,
-Michal
+Venkatesh Yadav Abbarapu (7):
+  mtd: spi-nor: Add parallel and stacked memories support
+  spi: spi-uclass: Read chipselect and restrict capabilities
+  spi: zynqmp_gqspi: Add parallel memories support in GQSPI driver
+  spi: zynq_qspi: Add parallel memories support in QSPI driver
+  spi: Add the spi advance options for non SPL
+  config: xea: Enable the SPI_ADVANCE config option
+  config: mx6sabresd: Default don't enable the flash lock
+
+ configs/imx28_xea_defconfig    |   1 +
+ configs/mx6sabresd_defconfig   |   1 +
+ drivers/mtd/spi/sandbox.c      |   2 +-
+ drivers/mtd/spi/spi-nor-core.c | 400 ++++++++++++++++++++++++++++-----
+ drivers/spi/Kconfig            |   8 +
+ drivers/spi/altera_spi.c       |   4 +-
+ drivers/spi/atcspi200_spi.c    |   2 +-
+ drivers/spi/ath79_spi.c        |   2 +-
+ drivers/spi/atmel_spi.c        |   6 +-
+ drivers/spi/bcm63xx_hsspi.c    |  42 ++--
+ drivers/spi/bcm63xx_spi.c      |   6 +-
+ drivers/spi/bcmbca_hsspi.c     |  34 +--
+ drivers/spi/cf_spi.c           |   6 +-
+ drivers/spi/davinci_spi.c      |   8 +-
+ drivers/spi/fsl_dspi.c         |  18 +-
+ drivers/spi/fsl_espi.c         |   4 +-
+ drivers/spi/fsl_qspi.c         |   4 +-
+ drivers/spi/gxp_spi.c          |   2 +-
+ drivers/spi/mpc8xx_spi.c       |   4 +-
+ drivers/spi/mpc8xxx_spi.c      |  10 +-
+ drivers/spi/mscc_bb_spi.c      |   4 +-
+ drivers/spi/mxc_spi.c          |   6 +-
+ drivers/spi/npcm_fiu_spi.c     |  14 +-
+ drivers/spi/nxp_fspi.c         |   2 +-
+ drivers/spi/octeon_spi.c       |   2 +-
+ drivers/spi/omap3_spi.c        |   4 +-
+ drivers/spi/pic32_spi.c        |   2 +-
+ drivers/spi/rk_spi.c           |   4 +-
+ drivers/spi/rockchip_sfc.c     |   2 +-
+ drivers/spi/spi-aspeed-smc.c   |  28 +--
+ drivers/spi/spi-mxic.c         |   6 +-
+ drivers/spi/spi-qup.c          |   4 +-
+ drivers/spi/spi-sifive.c       |   6 +-
+ drivers/spi/spi-sn-f-ospi.c    |   2 +-
+ drivers/spi/spi-sunxi.c        |   6 +-
+ drivers/spi/spi-synquacer.c    |   4 +-
+ drivers/spi/spi-uclass.c       |  34 ++-
+ drivers/spi/stm32_qspi.c       |   2 +-
+ drivers/spi/stm32_spi.c        |   4 +-
+ drivers/spi/ti_qspi.c          |  14 +-
+ drivers/spi/xilinx_spi.c       |   6 +-
+ drivers/spi/zynq_qspi.c        | 121 ++++++++--
+ drivers/spi/zynq_spi.c         |   6 +-
+ drivers/spi/zynqmp_gqspi.c     | 141 ++++++++++--
+ include/linux/mtd/spi-nor.h    |  12 +
+ include/spi.h                  |  23 +-
+ lib/acpi/acpi_device.c         |   2 +-
+ 47 files changed, 794 insertions(+), 231 deletions(-)
+
+-- 
+2.17.1
+
