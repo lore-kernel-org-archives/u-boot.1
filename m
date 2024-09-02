@@ -4,138 +4,158 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAAECCA0ED3
-	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 10:29:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11DD9CA0ED3
+	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 10:31:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 040CB88A31;
-	Mon,  2 Sep 2024 12:27:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 88BD388785;
+	Mon,  2 Sep 2024 12:30:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="g/u8ra5J";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="jD2PQlXr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A3ED88A31; Mon,  2 Sep 2024 12:27:50 +0200 (CEST)
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
- (mail-sn1nam02on2060f.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7ea9::60f])
+ id 0D4FE88906; Mon,  2 Sep 2024 12:30:58 +0200 (CEST)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com
+ (mail-am0eur02on2061d.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2606::61d])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F6BC88A92
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 12:27:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E998A886E5
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 12:30:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xc/PeSDkQKcLqHj4ByviAbPqJ62KdBFh8ty3Xmw4LZKEUlQEqvTLwZtsK0zLkcH7ZZvimZZDwqtUCpdR8Xk585hTeH6OHThIyaPJhoMeJPLwMQQMQcYRisEJ4yAyyOkCQIDJ0CZdWDh8relkVJEJgvFZxxU7ixbeW/PgZvWi5AMkXh4nnzx1VLsNTaQn5aajZRY5b/C8YkFhtr25NW+7yzaWWca+z2LXkyXA16wvoE4PH2MrBKqqhZqpHl0u2R/aSbfWQ+9X+kZTxRvOQEood2Tp3itD/d2caU5iPoDorLJDoWahqj5dt/f4iyv+OfyUPJc3YBHzOnIwCa+omZLJig==
+ b=FFyrY/AER8/4jAg8X8pV+znHjt9PTsgmZrVW2yPtZ1eoM39gOkC00eoGjKw6FFccxMh67W2pb+NQkNZvszwSOZLBShA+B69kRYtUpbpwUbk8Mek/0jFsodpbQBRxW1OVAWdq3AH698IvFXG/F2gNUDmcTdsZ9m1H0JOWT2dhrGyGpfanYO0wsx6VSe0ZhKKKpRTlzNaKmqWv8nUC/Th0KZyyPPkdfS1L9MtrKxJfAOPHfM5XVNUpHbG42CqPu/QtzgoM206W0KI7Bourk1yPFEhb56DeqlSLjrKgyK76LAifvh0ErQIZuazYErfRiBK6Rtzho1cE+13N0QOMrMQv6g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uNT7MRfq/Iv+RXUCMsiHgDqTMDxnZz1wTJteVhciewQ=;
- b=UB1X+HT/l3CZNS1hgBkcDsGeKiMGxyhA9o7UGsQ54w+H4WK4QvqCswcdWKZCWC+kSnhkI4nFQaDbPoV3ssU9ZQhk/PZrkSZv8ewji+jZodZJkFddsjpw9anYCaTbEUZvLifNFX1apV9NtZAdHlobUYUgAvYMhEAH5d0df0OW1LISj4nWhGlHYthvMzJ7W7qk94bdUpYSrx1adli3+TmsSB8fuyzqSeyGWTzxy7HZEfnGNMFVYnkkZxiY7n1/UpEYEFsUk77kqg7fX76Nhq2STV1XGTbQJxstjfneWc8icZNSdyBwGRXajXkP3qwsw4Ft4ryZ8AWj2Kp9U/Qub60Vaw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ bh=Fa95/HEdtwZ5wRzFsrLID8x+Pm3GPe+ajmDLhTGucrE=;
+ b=rMEae01WI8IAazIoBm35GF0HoFMeRZqO6UkTu4CToQGDXU0/KVg/z0nE64gPRBOxv/GBNDI0uAq89yLgnEexgPdHn5vKBRcLsLqbxPS3fccKMoI/948Qc4D1sP4UZV5n00ZrJ6J3nt0dulUXmbB2oaP41JDr/S1/94V6IOLM26NvJr9BR4rhsnUU3YGkK3uSv9AmCW3u0/qekF24eQTYNKNSpv6c4rbgfeFf6YMET7asfB5WSN83ks7tTob4EDVM7T1rMgUfV8Njg8cSPluPffmyRv7g1g1+WyacK/WZxxL2ZgrKT5P+tVeLBC/889Fot4/GzsM9Mmadz0u0aMo0pw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uNT7MRfq/Iv+RXUCMsiHgDqTMDxnZz1wTJteVhciewQ=;
- b=g/u8ra5Jy8y0/xi+FqirbTc0BATbXT4yGRLpmOmLvo2bK/yW6yZY7780LNyMTgnEOIDa8Kh0nKjOxR47ROtntLivzTwe2PSHjq+qedsF1efIh/mezGa5P4fu3xqw4RyGdW3VyrjYKRAtkmNZDuUUY//KAyO0XQpkLe1Xo8aBWQg=
-Received: from SA1P222CA0167.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:3c3::15)
- by CH2PR12MB4103.namprd12.prod.outlook.com (2603:10b6:610:7e::17)
+ bh=Fa95/HEdtwZ5wRzFsrLID8x+Pm3GPe+ajmDLhTGucrE=;
+ b=jD2PQlXr5KCY+70RB75hWf7Y/Xm70PRJlK0svXtkCjt/0qaJGSfWapM+RPBJzFzeJNlosP/FtYyxOBtJ9XqA6+a84wE4D9QUBc10tX67PTxLshZDILWpcv2m24V2p9cNo93VegN43tw3RGa64b0NuQUGMw1LChgsFCimHGbVhL0=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by DB9PR04MB9915.eurprd04.prod.outlook.com (2603:10a6:10:4ec::14)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.23; Mon, 2 Sep
- 2024 10:27:44 +0000
-Received: from DS3PEPF000099D3.namprd04.prod.outlook.com
- (2603:10b6:806:3c3:cafe::33) by SA1P222CA0167.outlook.office365.com
- (2603:10b6:806:3c3::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.25 via Frontend
- Transport; Mon, 2 Sep 2024 10:27:44 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS3PEPF000099D3.mail.protection.outlook.com (10.167.17.4) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7918.13 via Frontend Transport; Mon, 2 Sep 2024 10:27:43 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 2 Sep
- 2024 05:27:37 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 2 Sep
- 2024 05:27:36 -0500
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Mon, 2 Sep 2024 05:27:35 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>,
- <trini@konsulko.com>, <git@amd.com>
-Subject: [PATCH v12 9/9] config: mx6sabresd: Default don't enable the flash
- lock
-Date: Mon, 2 Sep 2024 15:57:06 +0530
-Message-ID: <20240902102706.1107-10-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20240902102706.1107-1-venkatesh.abbarapu@amd.com>
-References: <20240902102706.1107-1-venkatesh.abbarapu@amd.com>
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.24; Mon, 2 Sep
+ 2024 10:30:53 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%5]) with mapi id 15.20.7918.024; Mon, 2 Sep 2024
+ 10:30:53 +0000
+Message-ID: <f8357ca4-e23f-4748-969c-f07f5776feb5@cherry.de>
+Date: Mon, 2 Sep 2024 12:30:51 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] cmd: mmc: Allow using partition name in mmc erase command
+To: Tomas Paukrt <tomaspaukrt@email.cz>, u-boot@lists.denx.de
+Cc: trini@konsulko.com
+References: <2p9.Zbg}.7NiPNKVgoiP.1cr7Cm@seznam.cz>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <2p9.Zbg}.7NiPNKVgoiP.1cr7Cm@seznam.cz>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BE1P281CA0168.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:66::16) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099D3:EE_|CH2PR12MB4103:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5620ff97-4caf-4700-38f4-08dccb39e1a0
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DB9PR04MB9915:EE_
+X-MS-Office365-Filtering-Correlation-Id: 191781ce-8429-4d87-8436-08dccb3a5246
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?mhJUeynwUg0ytXj7ScNCM7IjT6eoxS7wKONHR2SPXZpFFx4ZYilF3o+h2eyJ?=
- =?us-ascii?Q?QdqR+5m/NvWbTBGzWlmIwYC0hF6PH+Zu2v8MiCPDq7f8sHT2cYexYbkGPLBx?=
- =?us-ascii?Q?sebSNQBePyeYM7ZudDbVAM3QdgZKkXmzYk+Z+Pe2+ReCDrn0XGzvx2DcOexP?=
- =?us-ascii?Q?jJzRpTfd7NJpEbhZNVY27W9FMuXi8fWv8SseJuyTNVoBbKY/8nJWCa6RHx7Z?=
- =?us-ascii?Q?UjHOdYKVaNc845/zUkeWntZNHkpS4pNebyE3idDzvQ+T/YI1QhtYm4RbjaCz?=
- =?us-ascii?Q?f86eQ7Z3YOm0hcxwb4dd3hsUKMutYsGcPCk/ZvvPOMoZEAsq+eNsvfMq4K1T?=
- =?us-ascii?Q?VxhTbOIo11RwwqdPPTYyWR2x35SQx89jA8WkbMBiQR+drRQ0xh9/CPybNGwo?=
- =?us-ascii?Q?mWJGW2EiOOL0/4lc1ZHuLSXTMo/TpydxmpXf+eT2rO4meiNtpqVSqZ5CEzUv?=
- =?us-ascii?Q?SEjc/D/gyKPCIXi4iykkKG0WRDUzbTiFNY+SU+b2AT1wbueygDfAGhQfQtoa?=
- =?us-ascii?Q?XG5g1n3iHodSLK7KU0EO5NzXwdqIwr5uIZh8Flzz6ji8cf1UksGhxou6YIdI?=
- =?us-ascii?Q?WdwtCZ+R5wMbTSRGDNcO2zu9ctYEYHR3obDxDH91dlyq1yPdhNkPn8kAykmm?=
- =?us-ascii?Q?KEH6z0qFzGPRlFW2/q4h8oY5aTCi3+/OJ6YJOvueSyPaSurEH9CHbLUP01UB?=
- =?us-ascii?Q?wk1axM4/eIO+deAhr77erXMmxWUdczYQo4k3TFgECTu6i9whOzyAWNyJ8CXn?=
- =?us-ascii?Q?gdDBtzzC7ZGD/TfsOb7XH44y88t/5KV0j97g9y50N8/+VBOHEsuw4ZzegFnT?=
- =?us-ascii?Q?RufuUVEqDAAqAIUq9wTUDLkBILL8gOLv1d1vos/yPIFQJME94K9WbUrTLCVF?=
- =?us-ascii?Q?vPUZtaOIQsKGheTiWA80gc/2YMjpHMwKXjKYb4lvs8/1Q8fn7rk2If7fUpPc?=
- =?us-ascii?Q?eAs7khyygI3Y73jEB/eJg+BnONpdvO9jy7I0PNcHHssuSUpphhQtPMco1h2K?=
- =?us-ascii?Q?/d9zH8ccetgTaYLbDTtyPSyJqfDdWIDY9pasPlwvdELwm2iRdQDiFUAXodee?=
- =?us-ascii?Q?YfiexN6TRLb3aakyrd1WJ1IQRHTfgygyyECXb8ZQr8waT1ZG6OPNi58wN2z8?=
- =?us-ascii?Q?dx1gkv5qHPE6fYLad/PKXvPwp2MM/XaWUUAzUPnpfWlCsAZtdJHD3Cbb2pI4?=
- =?us-ascii?Q?hJDtLGoQV/28Jdq8gcIrSMx2dftXc/hJSyewNJG9ZZqVnlYjnRHurHzROjJd?=
- =?us-ascii?Q?tBBH6ZXZHUEeJlR2sVh5i3G/+L87BCW1WUN0ZhxzHJQORnk+o71NNRNKPfrz?=
- =?us-ascii?Q?k1gtHy8//2dwOc7SFk3VTG78wGq0J1QD21W2D4gr2R/kezm7EQmumYTGEeBb?=
- =?us-ascii?Q?ScvFeSNjlahvFjWv/iIUt4h2wzZL/qy+7w2nyi7swzB81TMsPFzTsepbVxg8?=
- =?us-ascii?Q?oPdQBfC0KLvqlX1dVYgtvaMr/ukScHKJ?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2024 10:27:43.8091 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5620ff97-4caf-4700-38f4-08dccb39e1a0
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099D3.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4103
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dmtRQnp3eEtWOTJrZ3JaVnAwR042dURnSkIwSzVPN3FXcHZlc1VJZXpWVE5p?=
+ =?utf-8?B?M01wVEgxcExHQnNzdnJucUhhNDdWS2hOZWJzNGJwMmxMREtYR3gwMk03L2NP?=
+ =?utf-8?B?bGlLMGpqZm95ZkFrZVI3TkpITDVkdE9VdUpPVlU2MXhhWHRBS2FQMGE0dFJO?=
+ =?utf-8?B?ZDFyQVU4aEJJYWQxdXM4K3BCRDhOREV6QVhzSlB3cHJHMlFPNjdoT0l1Ukc2?=
+ =?utf-8?B?S0N3bFd4ek53dWhGaitoS2lUbzFpV2swUkVmbUVSU3hMRWRuZERVR211QnQz?=
+ =?utf-8?B?bGpPVWl4TzNaeHBWMmQzVkUwTGtHN05JNVM1Y1hoRFNXdy9TUHdTeW9kMzQv?=
+ =?utf-8?B?TkJhZEx2M0tzTUs3R1V0QjZONUVsK0FxaTk1N0wzMGMrVFFzV0RsVCtoOG5Q?=
+ =?utf-8?B?UFpMRW9aYUlPbjRTUWpXdUJGaUxkWGQzZ1FoUjE4bUM3ZUMyVGFQNy9Ebmts?=
+ =?utf-8?B?RDZSRjRPMzBPUEh0bFVidHFHR2RVZC9LcDZaajd1UGtjRzJWZE9SZEFraVk0?=
+ =?utf-8?B?aW1sT0JoSGFya3orTFU0bjRBRlVOVEVoZ05VbmpCR2RnbkFzVUVNUWIvaXVs?=
+ =?utf-8?B?Sm13UFZTbVMxMEFCRnQrQTdiNXkvTlczaHlqL1ppZGlnVTk2S3VvZ1F6azRw?=
+ =?utf-8?B?aU5VWC9UN2pvYit2MjI3VDJEN2tpT2FWK3lMZHJxYlN6dCtxbnA3TWJPWEUz?=
+ =?utf-8?B?WXFSOEtEcllyREw2RERhTmtyMXNGYVVFYlhKRlF2UGtwWW1GVk40Sk4rU2JM?=
+ =?utf-8?B?dzUzMENwZjUyM3ZqNnBuaWhrSi81NSs1aEF6c0FtWng2bUNVcThtd2VkeGI5?=
+ =?utf-8?B?aTBsSXJJQWR3WnVXZWZEM21FYzFOLzVYY2pwV3lYakdOb1pqenRRc1hvS2x2?=
+ =?utf-8?B?QW16Uit5cmxIOEdYTTFCZVYyUnRqVHRuNUsyWDZyQjYvTmtsOUVjc3cxTlEx?=
+ =?utf-8?B?OUdZVDFOTHQxNGUwajVNMVhYR3JBbHYyVmxvVUdhVDJ4ei9PSGdYcmZWK2li?=
+ =?utf-8?B?VGtGOHJpK2RiL2x2b3daOFM1V1RNUmdlZ01oWGcvUUF5OFVMOWxoMXo0TU4v?=
+ =?utf-8?B?bFhhUkNRd0Q0czlVaTFmT1dCZWtoWnJ4VjI2c2F6QWIrOVFTNHhWd1c1eEtn?=
+ =?utf-8?B?ajBYam42TWdFbnVFdzV6MkRleURCNUgzQ0pVTFNtQmxNSVNVZTlIeEVjNDFK?=
+ =?utf-8?B?MldZZHdUTjFlY3M5QzBldDhIVTJ2Y3VKeG5jd1ZZN28raG5rM2VBbDgvdSs4?=
+ =?utf-8?B?OWlqRFo3aEZIODhYVGV4V0pLZ1pvWEVxMTdmc3N0TUVpenlmYnRRZURlaTBR?=
+ =?utf-8?B?dXpLenBJNUZmam9SQ040Y2JwcC9FK0labTZBSWNzQmlHS3BldFdLeHRYbnQx?=
+ =?utf-8?B?djE4bWRaUTU2dXRySGRES09oYkpPeXhZcFZoWmQ2aFBwWkx5Y2lGdWRqTlFp?=
+ =?utf-8?B?eFJ1Sk5vZllwc2pUTHh6SFNjc3k3cHJNbDJmQzc3bTlDWEhwRnhvQkUzeHlT?=
+ =?utf-8?B?Y0ZVZnJjeFBqUHZ3M1BmYmVmWWhMNkg1a1ZQMXJPVGZhbzBjd2VTWFM1ZUlp?=
+ =?utf-8?B?NWpLKzQ4a3ZsTWZ1dVUxSkVDN0NRdVQ1VmUvK2JJbDBvckhlNjFNalFMcUtY?=
+ =?utf-8?B?ZVZHYTZxekdqeUJlbkwvVVpLM3MvUmNOa1F3TVMzYU5DVzI2TkJFdFppUDJ5?=
+ =?utf-8?B?VDdEb1MxQ05DcUx3ZnF4ZzFDTy9CUHFOcVl3c2dLbHVxZEhKcDRNN3dCdjIy?=
+ =?utf-8?B?eTVBS0RmMWFqMkREcmlXWlc3UDlOQ1kyNDJUblJpdGswY3FzeVpvc0UyTDFp?=
+ =?utf-8?B?VTQwNjU1L3hpTmdkWk9FZz09?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MXR2TXlrNEdCZXYxRnc1ZzJMNVNHeUU0WS91RmFSWnFwTVFRaW1hNVlwM0hL?=
+ =?utf-8?B?a1l1U2gwWWVXTHpPM2pZSEhvOUo0Qk9oUGhPNGIvcnNVUng4SjJTSGFCZEtN?=
+ =?utf-8?B?SW5KL0k3VnFYZGZWNytqK04rTGZqaTFyMWhGMkFweXA4dkRpRndSRGhqSFcy?=
+ =?utf-8?B?TmVZdml4ejZrMlJGTXVtUDBsOGFBbGFzMXRwazF1S1lIa2hIcXU4SzFOVFhx?=
+ =?utf-8?B?MDJxcnNDR3M4aGthNkpKK2d2Z25FNzVsYXB4cFcvSllpTWozV1NoTG5uVWkx?=
+ =?utf-8?B?bjE5K29VRzFHSkZybGwvSno4alFVdHhiS1kzdEh5RGY3VGhaOVZnVjZuQlZN?=
+ =?utf-8?B?VGFzTkhTYUV1NUZpa2Z4TnpodUdPN1YzMHlvanZDUm42Q25LbjBrM0w4enMv?=
+ =?utf-8?B?S1YyYzFmTTJUdU5yaE02b2FkU2VBTmY1VEtIQ2YwSGFUeE9nekc1NXovcU5H?=
+ =?utf-8?B?WE5tZ0FKNUtXMDVzNTgwbWJyMEJOeVBuclIrbXlJYkhITlhWVlZKaFMzSG9Y?=
+ =?utf-8?B?YnNFalN5RFJTVlQ3UEIyUEFPb3UvZ0NaU1JiampwWmZQZ05LSmJCQ281b3h1?=
+ =?utf-8?B?Y2VtOFRPNEthUzhicDN4MUdwSUp6NEdlMlBQR1AxTk9PdFZQbkF2QU50ejMr?=
+ =?utf-8?B?VmdIY3paeGlEd2dxdVVaaEd1cVMvUzRrTnR1czlMTGREOW5IOGNzUHMwdytF?=
+ =?utf-8?B?Sy8zY0lGUW1FSXMwV3pyNFpWcmZteVdERjlzanNxUkNFS3poYUhXalA4ZU5o?=
+ =?utf-8?B?MlRBenhZZmphbHlFMGxmRWJJb1drZFNnTnBPYWU4dER4S2crbHQ3WnhWbitD?=
+ =?utf-8?B?RGVSZlYyWmxMa3lNSzI0ZHlYeHkxbkIxck9ONlNlZG9iNDB5QldyUWwxV2Jv?=
+ =?utf-8?B?SlRuMkJ3ZlNuK3JPZXowdGZFb0VtcU1ubkE5Sy9tbnNYUUllUytkbGhncEZF?=
+ =?utf-8?B?REY1WEtvNlJWQnRoQTdaRjdOZnVxTi9MdHgwSGtKRENuemd3UWpiRko4UERs?=
+ =?utf-8?B?WEczQ3hyQmwxY0ZmK29MMW00VjZOdTY0YXRQRDBFcVR4aDdkenRJTGZVUW5i?=
+ =?utf-8?B?NWVsb3U1VUEzY1Z2K1pRNjlxLzVXczVQOXphVW1uelkwMHNnZEtySEZqRUg4?=
+ =?utf-8?B?dkMrUXlzQVg4NDdXbUh0d0Yrc0tETmlheGozYTdtbVF5a1BLYVE5NWpwT3dS?=
+ =?utf-8?B?NkZmMDFFSnpaYkE2WnNaUncrZVJRL0JtcjZCTG5jVCtNMW1sZFVwa0Y5bVQ4?=
+ =?utf-8?B?cCthSEJwbkFIdzJaRWdIcTVsUjNDNmQ4Mzc3NFdnUHJGRUpWcWI3cGk0byt6?=
+ =?utf-8?B?cFdyNUF5aFM5WGZyL3h5VjZPaFowN3VjQUExdnphZFpIMExYVUxwL0NlZXdI?=
+ =?utf-8?B?QmlDT3dQTVJWMlZxS3JpR3p2K2VMcEpGQXVWMEYreUM4WEtGM29aMWo4UU1C?=
+ =?utf-8?B?Q0Q1WTloT1h5b2lJZVJGdmp3dGJCOU5VQjhEY1dPeXN2cDdqTGp4RHV3ajRN?=
+ =?utf-8?B?Z2Q3OFBtc3dLTUdzdlpnS3N3Z0sxUVdvTFY5YkphYVYrUmIreDdTZDVTdy9i?=
+ =?utf-8?B?UE5kWHNVYjFTT0lRdTF3ZDdaajB2ci9kc0pZNlJCRk1GdmpMMG40VHlMTG1Z?=
+ =?utf-8?B?dW5KeFpBT2xRdG1MTEExaDdCMXFHTHlPK2ZrYW5IRXBjOVNaQVJnWk9yVWNI?=
+ =?utf-8?B?T3BHcHppNkwrc3NsRjZqR2ZEMGhYZU5jUG9iSjBwbjBQTTNUZU9GTHZZK1ly?=
+ =?utf-8?B?OEFWaGl4YVZLaWluQndudXlvMWFyWENGdlhMU0wzSE1pN2dWNFdjVmhzOWxD?=
+ =?utf-8?B?Y0hXQjYyZFdUbGZsa3NTczYrUlIrVXBHMTQ4dGFEUlFnQmppOExPT1llNExF?=
+ =?utf-8?B?TTZsTWpvQndXTkN5Z1VJem8rK2RLVGVFcThwUkpocFRhUnFTdWJ1a0lHVEdI?=
+ =?utf-8?B?SThVN1J2ZmtDTDVkODNWa1F5cDBaTkZ0ays0QzI1RGFRNmREZ1VOcUordC9I?=
+ =?utf-8?B?Q0VFZjJ2czhhc2F2VlNJTlZzdlo4UzVQbUtjck81aVB0REtNL1lULzd5SFFa?=
+ =?utf-8?B?aHB5YThjV1lMY0U3aS8xZFpaM1NaeFpKaWtXYTQ2aTRuNHlZZnRBSkRoNm9u?=
+ =?utf-8?B?LytyU0dlam9oR0duWThoY3hza1QyOWtNb2R2TTdzVTBJWmhEOEdNWFBSZ2Zt?=
+ =?utf-8?B?eGc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 191781ce-8429-4d87-8436-08dccb3a5246
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2024 10:30:52.9877 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6/HAfNAjdFUTbA9ClRuoInbCJJ+SFjI869+EWM09dKrQv2CHdjrXGGKebJPY/N+O8G53x704qhvdZNmxqLw0E2hPH/2Il1SQgO8L5EtQdiQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB9915
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,27 +172,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-By default flash lock option is enabled, enable this option only
-when it is required. By disabling the lock config will save some
-amount of memory.
+Hi Tomas,
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- configs/mx6sabresd_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+On 9/1/24 3:59 PM, Tomas Paukrt wrote:
+> The mmc erase command currently requires blk# and cnt parameters
+> which can be obtained using the part command if the entire partition
+> needs to be deleted.
+> 
+> Simplify the use of the mmc erase command by allowing the partition
+> name to be specified directly.
+> 
+> Signed-off-by: Tomas Paukrt <tomaspaukrt@email.cz>
+> ---
+>   cmd/mmc.c             | 21 ++++++++++++++-------
+>   doc/usage/cmd/mmc.rst |  4 +++-
+>   2 files changed, 17 insertions(+), 8 deletions(-)
+> 
+> diff --git a/cmd/mmc.c b/cmd/mmc.c
+> index 7244a90..ba2f506 100644
+> --- a/cmd/mmc.c
+> +++ b/cmd/mmc.c
+> @@ -472,18 +472,25 @@ static int do_mmc_erase(struct cmd_tbl *cmdtp, int flag,
+>   			int argc, char *const argv[])
+>   {
+>   	struct mmc *mmc;
+> +	struct disk_partition info;
+>   	u32 blk, cnt, n;
+>   
+> -	if (argc != 3)
+> -		return CMD_RET_USAGE;
+> -
+> -	blk = hextoul(argv[1], NULL);
+> -	cnt = hextoul(argv[2], NULL);
+> -
+>   	mmc = init_mmc_device(curr_device, false);
+>   	if (!mmc)
+>   		return CMD_RET_FAILURE;
+>   
 
-diff --git a/configs/mx6sabresd_defconfig b/configs/mx6sabresd_defconfig
-index 80f7cd60b5..2a83b8cd06 100644
---- a/configs/mx6sabresd_defconfig
-+++ b/configs/mx6sabresd_defconfig
-@@ -86,6 +86,7 @@ CONFIG_SUPPORT_EMMC_BOOT=y
- CONFIG_FSL_USDHC=y
- CONFIG_MTD=y
- CONFIG_DM_SPI_FLASH=y
-+# CONFIG_SPI_FLASH_LOCK is not set
- CONFIG_SPI_FLASH_STMICRO=y
- CONFIG_PHYLIB=y
- CONFIG_PHY_ATHEROS=y
--- 
-2.17.1
+I assume we do not want to to init the mmc device if we know the command 
+is wrong (based on the number of arguments)?
 
+So keep the first if condition, but check also if it's different from 2 ?
+
+> +	if (argc == 2) {
+> +		if (part_get_info_by_name(mmc_get_blk_desc(mmc), argv[1], &info) < 0)
+> +			return CMD_RET_FAILURE;
+> +		blk = info.start;
+> +		cnt = info.size & ~(mmc->erase_grp_size - 1);
+
+Is this basically a way to round down info.size to a multiple of 
+erase_grp_size? If I read that correctly, please add a comment to make 
+this explicit.
+
+I'm not too familiar with MMC, but do all MMCs have the same block size 
+by standard? I know it's 512B for eMMC, but don't know for other MMCs. 
+The same question for the disk partition? The fact that there's a 
+blksize member in struct disk_partition seems to indicate the opposite.
+
+I'm wondering if we shouldn't be using mmc_berase() instead?
+
+> +	} else if (argc == 3) {
+> +		blk = hextoul(argv[1], NULL);
+> +		cnt = hextoul(argv[2], NULL);
+> +	} else {
+> +		return CMD_RET_USAGE;
+> +	}
+> +
+>   	printf("\nMMC erase: dev # %d, block # %d, count %d ... ",
+>   	       curr_device, blk, cnt);
+>   
+> @@ -1270,7 +1277,7 @@ U_BOOT_CMD(
+>   #if CONFIG_IS_ENABLED(CMD_MMC_SWRITE)
+>   	"mmc swrite addr blk#\n"
+>   #endif
+> -	"mmc erase blk# cnt\n"
+> +	"mmc erase blk# cnt | partname\n"
+
+It's not entirely clear to me if "partname" replaces "blk# cnt" or just 
+"cnt" by just reading this line.
+
+Maybe have another line:
+
+mmc erase partname
+
+or is there a better way to show this I don't know about?
+
+Cheers,
+Quentin
