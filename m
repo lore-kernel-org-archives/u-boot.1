@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 891D0C54FC6
-	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 01:19:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A827CA101E
+	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 01:20:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D747886FD;
+	by phobos.denx.de (Postfix) with ESMTP id A18B788A49;
 	Mon,  2 Sep 2024 03:18:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aAgMuPgo";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EwDqRHmU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8250488A31; Mon,  2 Sep 2024 03:18:46 +0200 (CEST)
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
- [IPv6:2607:f8b0:4864:20::135])
+ id 0860988A31; Mon,  2 Sep 2024 03:18:47 +0200 (CEST)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA56088A75
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 03:18:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E77B588717
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 03:18:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x135.google.com with SMTP id
- e9e14a558f8ab-39f4ff22a49so6273315ab.1
- for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 18:18:43 -0700 (PDT)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-82a2a035b59so112619139f.0
+ for <u-boot@lists.denx.de>; Sun, 01 Sep 2024 18:18:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1725239922; x=1725844722; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1725239923; x=1725844723; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bcP6BtqafScc0NdTztSLCjfNhuuO7jN51LuoNSQ0VeE=;
- b=aAgMuPgo1BXmLmqKxQPNqV5XuaS/f9PrnbWk8MT+oOqwlaXCb9sEPiJp/vPqxfkC5+
- 1ltSdn5zwjMDeRCftsrSgfzadzlLEX+OzsLHtutB/wUgEzvygw1pfnZGeiujbrUBeDP6
- 8PwdK2AKeXdXlSuVS9nrHA0seg8c0KIC+WCKU=
+ bh=nqr+BHhkymfVA0BI9nYI05WKqVyavf2N8o9TANhxBkc=;
+ b=EwDqRHmUWjhdL1KXs43z61pLonQzxF94q8ld4bi+lYoDls3YAlJiS9O8wMSPwH1/Rk
+ ynazEy/Dg0h3oN643if+9rv1gBJurLTWKTXp5XB3tzg4Gzn9jFLabpD43JiNVAO7ufDw
+ phBk8uS3nM+uwCaJa6nXnoDuhCs6LG/Pgczsw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725239922; x=1725844722;
+ d=1e100.net; s=20230601; t=1725239923; x=1725844723;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bcP6BtqafScc0NdTztSLCjfNhuuO7jN51LuoNSQ0VeE=;
- b=umakw/XPxfVB3MduElYTjmszQNLBgPe705ZfLnaw4Ex69A51C6/BCeglSWbUVz3WFy
- vGreeeasiEPYDniDxZhunNhT5ztaJR2sk8ymuEOxLB+kq+7x1baZptI16VEIA3WSzh64
- FxRjq1dj1LOUeIfJuxhoCoOnmoQt4/ypEcU/sCDXMRzG/GkI+wDxLNgYPRkotk/rMZFg
- L/hUyGJQVD1aHWT7JrAWta8+c8Z7H50EHja6I0Cv/Ks9cOf13woHmFTm/d6OQlpsiDco
- GVtalxSVkRdcCbYVXrJsEMSMj+Ys9SWgigV10L4d68bcm0zHF2dHHLCApKknM7Ys4yXb
- Ryqw==
-X-Gm-Message-State: AOJu0YyCFQsI5OQMKwGGareyrpwLttkso0bSXiJ9SLhO5RQCyqgeMhNt
- RwqCmp3uG9vSEExlMBfFCAV97P3vkcgZjKjB/gYmFYWhpsAm0y8gkANHZfy4W8Ow09ThcxFkobg
+ bh=nqr+BHhkymfVA0BI9nYI05WKqVyavf2N8o9TANhxBkc=;
+ b=IpoeQNeixSuWMW7R0r3NWRrakBUBWf4HViZMuCg5HqLZ30zCkCHnOg3oph6suiCYxO
+ MTgcmVJ901LOr62vfWTq+tVzZgQ7uRiVWC9VG6QjxfkXh0rfF0XEkzWOMfX+SH7KcK3J
+ MqZSbwiWDpVXK5FeFbo39xf+We1xcqkvCFBZ0PBCHRoLWZgqcFmYDGB/mMO8Djn2/OS6
+ huqT7IiHeexVwVSe9YO4DnzsqM4qFZFzVyhoFQDNEClw/4OaqL7f2xgBPYbSg0jQAmRx
+ Uel/4nYjgjtIYmPJgkFtJOPiyvSUD00WTDQUQx91L27X4eWTKM/3ukfT4PscCnEs/yYj
+ 733w==
+X-Gm-Message-State: AOJu0YxMOuBGs9T1/WK1cqs3iEFRUsSLL+WA9gtHKBues505Wcfo8LG8
+ dLGEa2ThXnG0updFgCelzCAPRSMXkq7qcHu3mNN4pj8HNPypFN3lwr2xqZXA79KpFOrMGWuZenI
  =
-X-Google-Smtp-Source: AGHT+IHfXVoEe3tZgRRs8KiJbof1kPWZmttOAiAcXBexl+38cG7H8ZpAxar9SxWWe8NO6xscR4MeMg==
-X-Received: by 2002:a05:6e02:b45:b0:39f:577d:8979 with SMTP id
- e9e14a558f8ab-39f577d8b15mr39747375ab.22.1725239922236; 
- Sun, 01 Sep 2024 18:18:42 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGJHvx97orouOtVZxuEyqZh4n6O5d43yVFrpEZ51zapzLg27yHsMZQKP7rX7n5WETUYsx+25Q==
+X-Received: by 2002:a05:6e02:1885:b0:39f:6180:afca with SMTP id
+ e9e14a558f8ab-39f6180b0ecmr16449375ab.13.1725239923378; 
+ Sun, 01 Sep 2024 18:18:43 -0700 (PDT)
 Received: from chromium.org (c-107-2-138-191.hsd1.co.comcast.net.
  [107.2.138.191]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-39f3b03f266sm22925335ab.57.2024.09.01.18.18.41
+ e9e14a558f8ab-39f3b03f266sm22925335ab.57.2024.09.01.18.18.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Sep 2024 18:18:41 -0700 (PDT)
+ Sun, 01 Sep 2024 18:18:42 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v5 07/14] efi_loader: Show the vendor in helloworld
-Date: Sun,  1 Sep 2024 19:18:18 -0600
-Message-Id: <20240902011825.746421-8-sjg@chromium.org>
+Subject: [PATCH v5 08/14] efi: Use the same filename for all sandbox builds
+Date: Sun,  1 Sep 2024 19:18:19 -0600
+Message-Id: <20240902011825.746421-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240902011825.746421-1-sjg@chromium.org>
 References: <20240902011825.746421-1-sjg@chromium.org>
@@ -90,35 +90,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Show the vendor name so it is clear which firmware is being used, e.g.
-whether U-Boot is providing the boot services.
+Sandbox is not a real architecture, but within U-Boot it is real enough.
+We should not need to pretend it is x86 or ARM anywhere in the code.
+
+Also we want to be able to locate the sandbox app using a single
+filename, 'bootsbox.efi', to avoid needing tests to produce different
+files on each host architecture.
+
+Drop the confusing use of host architecture and just let sandbox be
+sandbox.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 
-(no changes since v2)
+Changes in v5:
+- Drop the Fixes tag
 
-Changes in v2:
-- Reword commit message
-- Use 'Firmware vendor' instead of just 'Vendor'
+Changes in v3:
+- Put back the Linaro copyright accidentally removed
 
- lib/efi_loader/helloworld.c | 3 +++
- 1 file changed, 3 insertions(+)
+ include/efi_default_filename.h | 24 ++----------------------
+ 1 file changed, 2 insertions(+), 22 deletions(-)
 
-diff --git a/lib/efi_loader/helloworld.c b/lib/efi_loader/helloworld.c
-index 586177de0c8..c4d2afcb40a 100644
---- a/lib/efi_loader/helloworld.c
-+++ b/lib/efi_loader/helloworld.c
-@@ -237,6 +237,9 @@ efi_status_t EFIAPI efi_main(efi_handle_t handle,
- 			(con_out, u"Missing device path for device handle\r\n");
- 		goto out;
- 	}
-+	con_out->output_string(con_out, u"Firmware vendor: ");
-+	con_out->output_string(con_out, systab->fw_vendor);
-+	con_out->output_string(con_out, u"\n");
- 	con_out->output_string(con_out, u"Boot device: ");
- 	ret = print_device_path(device_path, device_path_to_text);
- 	if (ret != EFI_SUCCESS)
+diff --git a/include/efi_default_filename.h b/include/efi_default_filename.h
+index 77932984b55..06ca8735002 100644
+--- a/include/efi_default_filename.h
++++ b/include/efi_default_filename.h
+@@ -16,26 +16,8 @@
+ #undef BOOTEFI_NAME
+ 
+ #ifdef CONFIG_SANDBOX
+-
+-#if HOST_ARCH == HOST_ARCH_X86_64
+-#define BOOTEFI_NAME "BOOTX64.EFI"
+-#elif HOST_ARCH == HOST_ARCH_X86
+-#define BOOTEFI_NAME "BOOTIA32.EFI"
+-#elif HOST_ARCH == HOST_ARCH_AARCH64
+-#define BOOTEFI_NAME "BOOTAA64.EFI"
+-#elif HOST_ARCH == HOST_ARCH_ARM
+-#define BOOTEFI_NAME "BOOTARM.EFI"
+-#elif HOST_ARCH == HOST_ARCH_RISCV32
+-#define BOOTEFI_NAME "BOOTRISCV32.EFI"
+-#elif HOST_ARCH == HOST_ARCH_RISCV64
+-#define BOOTEFI_NAME "BOOTRISCV64.EFI"
+-#else
+-#error Unsupported UEFI architecture
+-#endif
+-
+-#else
+-
+-#if defined(CONFIG_ARM64)
++#define BOOTEFI_NAME "BOOTSBOX.EFI"
++#elif defined(CONFIG_ARM64)
+ #define BOOTEFI_NAME "BOOTAA64.EFI"
+ #elif defined(CONFIG_ARM)
+ #define BOOTEFI_NAME "BOOTARM.EFI"
+@@ -52,5 +34,3 @@
+ #endif
+ 
+ #endif
+-
+-#endif
 -- 
 2.34.1
 
