@@ -4,85 +4,162 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3932CD342A
-	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 13:07:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 651F4CD13CF
+	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 13:09:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 442CC87DC7;
-	Mon,  2 Sep 2024 15:07:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BA31887DC7;
+	Mon,  2 Sep 2024 15:09:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="We8qTsgb";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="la7XWtnC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA3EA88C01; Mon,  2 Sep 2024 15:07:57 +0200 (CEST)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3B6A588A3C; Mon,  2 Sep 2024 15:09:18 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170130004.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::4])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0D0C87873
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 15:07:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1078987873
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 15:09:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-53345dcd377so5766949e87.2
- for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 06:07:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725282475; x=1725887275; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=vMKhsFnJMv0d6rS8N8pfpd9dv6v30Tau2F9mUcrNSqU=;
- b=We8qTsgby6+p2611uU1rnXEHLI24slvAqSzFtg6Vuu9MaLm2tJ8FQC8D9i4tz50qsf
- LwKqw+rvlYk0gV0E/iZ4QcAzTiNG8C74G/6BgMgAf0Zn/S2q5CogYt/QNX46bdFIiJ+9
- /CrIC2E/DEsG0OG/+SP3sCDmhD5EgbN/qPFYU4DG/soBiJgygQJz0iWuModee/ECu5D3
- ECTiYqNjDETeKEOINxg+uhA6MkOUiTi7AIpKLllaypcgOQiLY+f8+TkQUuu4OvDUXOvZ
- EfFX4rpiTQMkzpjdutsREA3syk0lsBASXC/H4+m+E9rix7HJn8AcptstZYuYHpffkNmq
- ACxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725282475; x=1725887275;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=vMKhsFnJMv0d6rS8N8pfpd9dv6v30Tau2F9mUcrNSqU=;
- b=nXqbbTJ217Sf6Uq8CDw9KimZt2tGBAVQTmZ7AtoxlL3hQMtYtS/cmPq3e+V4d3oVBR
- dQ5HTM9QIMN+kW9oA+kRFUK3T1CxfNuBWkppwtCfJOf0dvhofmqe9jgkOVcPPxcLmdM9
- N9dg+vXPXbxQNySJ8YMgibNQLzuTmHouWbsZa9YhAbT3Fs8eY2Qp+5CvIbY28kZeb7qI
- k4FFckP7kXZkxy4OZYnUwgu6/tmwrAx+sGZSaFf+tXFQ+IpBEWIBfJqgDOCp3ERppbJv
- ebZIQ5eeKUdDrlUUTRnHrrTWRsOSwbuQ/as6EErhiRDxbIuz40dDcJBUNjM2TehlhusD
- 0Nyw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW7Di2nyPjDzGJ/ngLcL14dK4PInR7dxTYVA6mhRzq0MQFBHiU2kcuV03EPMdDuWFfyb2TtXKo=@lists.denx.de
-X-Gm-Message-State: AOJu0YwfjxAPTNJ7LtIcHRhgPOkPuIHH6YGUk2C+2qCCrYkwWrNWlsth
- 6oWgHvHOqwFb66VfQ40rC81poAFavXuKMA/E6oHNGtg0FSdNN0wwxGdJyycYBFM=
-X-Google-Smtp-Source: AGHT+IGHOA6rxFeszRBJSm/9sCYwC9mT25LhFvl8l9TFCdc8Qj7EqsZDWPraL7Zp+CFWLxrnmsLleQ==
-X-Received: by 2002:a05:6512:3095:b0:533:4b38:3983 with SMTP id
- 2adb3069b0e04-53546b037c6mr6773946e87.20.1725282474549; 
- Mon, 02 Sep 2024 06:07:54 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::a253? ([2a02:8109:aa0d:be00::a253])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8989196876sm554929166b.110.2024.09.02.06.07.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 02 Sep 2024 06:07:54 -0700 (PDT)
-Message-ID: <96798312-858e-40e9-b174-a850da8de6e9@linaro.org>
-Date: Mon, 2 Sep 2024 15:07:44 +0200
-MIME-Version: 1.0
-User-Agent: Betterbird (Linux)
-Subject: Re: [PATCH] cmd: fdt: use U-Boot's FDT by default
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mLaFC/UKB98nCPlN3fSg/q8P9V0Kw4QE/90ynijPI7t7adJV0Bc5usgIPa3Cj5Ba1DGdiUGzCrcHOy9386O8OrqVT0ztV8pJN+shd60tdZm7RstJrFrBghN0edEnjThfwxGhhTzg70e37n3P8t/e4ltCx6Iu98hWxeEYF0xOWbKaVoDrvpMs6sdHDpBGfE3YsHalpnDPZ4jD5q9KoxCTbI0jl6pdchm5VeYxAguxHq2FLe7ruTUF2OgeDsUDOdZoqhp/Qm7/z0SLdHO5+OtQzYkpENjkyk4nfoNrNgc3gOLI7ZU4973yQoH/4vfISRswGT5xX7dWPHmcgXOQNQp5Cw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=8/JODarbaBf9PdqtCPzsilWnsABxfq3NLyQPYFOguTY=;
+ b=VkYIb3VFmHzst2g2uji/n8xtwacinFHRsH4IfbUE4eVJxAJGqSlLFgfrUhi4qjO/XN9RfpedQLzigqjECo8+MEUoNjDiLLPYlnkm7T4DTRZWCL5hDbH62uD+IdCWrZp1Zt9cBOpQtbcr0JqWfFQrms4y72mKZjTV81PU5XK+qxuk3CeaNJaxKHgngjkzykHN9EsZBlFyKk8bR63oduymcnZaTPCuAiz92q7fbftIAaYVmErqQ7xzKBM1V4zUMnEnwN7cQRjGGf+SG/xwQR9vBPcnO+VDQ7uMBgoEXn34q4RUObBY4P2aNYlM809dkCuk9/JRP2SLThCWYmLUSc8gJA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8/JODarbaBf9PdqtCPzsilWnsABxfq3NLyQPYFOguTY=;
+ b=la7XWtnCMtZNpVJTcJd/FFtbHUAOpf2Tyk9/CQB4lb4GgNwOw1Zv0fRlO70OUYgwJChUHMqSohQ3gnD2gxzK0HB3BD1iJJWglU0CD3nCSX5BFmMm3VWxdHECrU+OAKFGk8rwpUVVBUnnRyfoxao1hE5wPP305hoPWC6dwA2AQQ8=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by VI1PR04MB6783.eurprd04.prod.outlook.com (2603:10a6:803:130::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.23; Mon, 2 Sep
+ 2024 13:09:06 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%5]) with mapi id 15.20.7918.024; Mon, 2 Sep 2024
+ 13:09:06 +0000
+Message-ID: <ccdf5291-604b-48bb-9e3d-8f3214483237@cherry.de>
+Date: Mon, 2 Sep 2024 15:09:03 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] net: guard call to tftp_start() with #if
+ defined(CONFIG_CMD_TFTPBOOT)
+To: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+References: <20240902125917.119941-1-jerome.forissier@linaro.org>
 Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: E Shattow <lucent@gmail.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-References: <20240831164639.2298097-1-caleb.connolly@linaro.org>
- <CANV2PTM+wevfK7w15j-=a2oakPMMXpTdr7ntzBfkc3jbbv+veg@mail.gmail.com>
- <feff5299-6378-4de9-867d-808c23625af4@linaro.org>
- <CAFLszTiZ75zK2L8=5E9dXOHXqEybh7O=OsQiW5hkJ9xoPiWT4Q@mail.gmail.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFLszTiZ75zK2L8=5E9dXOHXqEybh7O=OsQiW5hkJ9xoPiWT4Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20240902125917.119941-1-jerome.forissier@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BE1P281CA0226.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:8c::17) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|VI1PR04MB6783:EE_
+X-MS-Office365-Filtering-Correlation-Id: db1036f5-7e5e-465a-0bdd-08dccb506ca4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Ty94VjUxZjlacVE0bzZQMWM4N0wvWXoremE0ZTRCRkhlckkwcStUNFlZTlhF?=
+ =?utf-8?B?aldlenJIQWIrTm91ZjRYQUp5RzlFNFhvcEVWeEJNYjdvMHVrWURuZ3MyaUx1?=
+ =?utf-8?B?aDFOWFh1UnNJRHBEcjl2VEJCamVuaG1LOUY2am5mWXpjN2JiQmhJMWFmOXZF?=
+ =?utf-8?B?d2pCSk1OTDdRbWk3bkVvdHY5UlZsOU42cmhTMllYMkRFcjBubGEwN3NpMkJE?=
+ =?utf-8?B?K3NHOFZuUEVya3JXS01SRW4yK1RMVThQUFBrT0JNNFNBNUhHRXRxYTQwVysz?=
+ =?utf-8?B?RUhrNHAvNVhTN09IMVpiQm1wenJWR1RzM29XOWczUHBqWFBZajVpKzFkK0JD?=
+ =?utf-8?B?U2xjMlpZM0hnSTF4SnZZWDYzZ1BQSzMvOVc2Q2I3SENxNWU3VkJ2RjNHWXgx?=
+ =?utf-8?B?elpYS1dFbUZ5eDg1WGgxdTRCWEpUNzg0OTcxRUNCNzM4ZklncG1ZenlUOHJt?=
+ =?utf-8?B?NEJCZzc4WlA0VzIvOTZWOTVQNDY5ODM1cW5COGZncHNsTVNCWXYzcFFTRUU3?=
+ =?utf-8?B?YW1FTHJiZDNjOS9yZFFEUjlzTTF0YkYwcDJCRitnMG13YjlLdFFTaFVZZWJt?=
+ =?utf-8?B?SmtyZFd0alBrZzdiVVgwUHdSZ2Q2SjAzQ1hjQjF5UFg2bWxnalo2ZlZiUDhn?=
+ =?utf-8?B?UU9YbWo0a1pmVHB4dGVCVXR0TXRhSHhjMUZWQy9HS3Y4amJxVHptVVZ4b2sy?=
+ =?utf-8?B?Y01ndStBR3Y1WFFiSUFqVHlVbEdVMTBtK3JjOUY1d2NoaGNVdkM3dnlFcnhL?=
+ =?utf-8?B?SXdzWmw3YTNtamtSWVdLQVZ3UUR4UFFkYzdDZHliK2ZBWGxORDE0Tld0RThh?=
+ =?utf-8?B?WURlQlpwWXhkT1pzVzhENnV6ZnJmaXd0aDdNTU95Y1dlQWoxenRaR3hCTjdO?=
+ =?utf-8?B?dkQ4aVU4TTdsMExETVhhRkZja3U5WmdJeDN3dkljRW5GOW53THgzQXNNL0pP?=
+ =?utf-8?B?c1NhNEdFSU1FaEJ1TVhkbVR1UWphT1VWajU2YUdCWHFzUFp5dzE4U2h2cDFP?=
+ =?utf-8?B?M2xEek5DVjJHT3puRHlnOU8wSk9Ob01wdXloL1ZTSVpDaWw1VmNJbzhnZUg2?=
+ =?utf-8?B?WGFmQWJWS0IxQy82aTluMzhCSjZvNlBZdEpiZWF0WVFGVmJhdkRqZWhRZ0ZH?=
+ =?utf-8?B?WEZvVjZaejd4OWJOU3RxaFZLZjc3Z1Rrc3pPbC9iemdMRmRzczJBYlVUTkM2?=
+ =?utf-8?B?bllZU3kvR0RmSU81WEVPeFFPMmp4azgvM3gzRnlpWFZDVUN4SWlmS0lhVzZQ?=
+ =?utf-8?B?WVhjTkN3UHYwMFBvK21rZW1hUldGUkhyaUJyK1BsVWZEN0ZVSWxGVzRXZ1RE?=
+ =?utf-8?B?aS94Y0NaT1k1Rnp4ZTArMVIzN1FvRE50VlN5Vjl2dGpCaVIzSHNVY3pzdmhN?=
+ =?utf-8?B?b1VVaEV3TkRraHV1M2xEK0hzbStuMnRjY0NxQUdyaHNHOXFPazNtRlYyakxJ?=
+ =?utf-8?B?dG0rMWdjSGdWNEd5eFcxVUR2Tkk5OTc2R0ZlRDNSQ2lnZzZRVU1rV0ZmTkNW?=
+ =?utf-8?B?WCtXQjk1Q0djUTYrMGUvWVFTelZqTWlodEdpaEZjU0xzVU4zWGpEU29ETHNk?=
+ =?utf-8?B?ZnNXMmFkMDlESTlGMVE4ZTlCblBtT1M4aTVtUER0SHdMcHI5WXc1Q1RKTitt?=
+ =?utf-8?B?MUl5elJkSS95U0x2Q0RqRkdRblY5d2wya0pPWm5iWjkvUlFOWVl6enh3SnRa?=
+ =?utf-8?B?dDdMaFlvRjZUWHVwc3ZVRmxPcm9NREova29tM0dWLzBjb0NWTEl2WkNKN2Er?=
+ =?utf-8?B?K0Zmamx1d0pxTGtZT0NEOEVJY2pmRnVJM2NYQkZPdTB2a3I3dXdia2VYeUZK?=
+ =?utf-8?B?Z0ZWRTdYQyt6OHl6SzNRdz09?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?a2o1c2V5U0lqTDlkaE9Od0pOUkxDanRBREo0RkgwYmJ0dFRVSHRpZ0l4VHZa?=
+ =?utf-8?B?cXYrMytMWFlsTXJTQWh0OVVlblpOaWh0MHhlVGVpdjlMeTZhZGM2T20rWVlN?=
+ =?utf-8?B?dlRSZklVQytMQ2JvZlYyRy9keWFDa1BkMlpISDZkQWE1dFNJWnZKdzY5MHhJ?=
+ =?utf-8?B?Wk1Hd1JUK3RseUk0ekdlVHRtZ2tLcE05cWptWXdRczdMbVEzL3JBYzJEQTdo?=
+ =?utf-8?B?Z2lxREhOY1MvR2lpeVAvbXpNUzdDaGVzNW5iNVV1MS95c1I1eWlTc0tQRnJs?=
+ =?utf-8?B?a09FYUd1emJwcjlQL2ducFlyU0UwMHoxZzI2NVc3R2FMK1ZsaW1HM2dqaXZs?=
+ =?utf-8?B?dFFGb1FFN0pyMld3NG9RZDcra09mWEUxamVyUmhIZG9DeUVoUGR4NFh5b1Rp?=
+ =?utf-8?B?TS85NVk0K0J4MmVaK0tncWxWaDJnWTVqR3pmZnp1by9PMXJrelJidUUwTDlR?=
+ =?utf-8?B?Q1RKN25pRGszcWw1R3U3K2JjcjBCSG1VendVdUc5SzVkNlVjbmllbG5VVDVX?=
+ =?utf-8?B?QlR0L213MFJVQTR4TTJlWGc3bXpjM0dCMkY4dm0yQjBHK1Rxc0tOTXpOZmxn?=
+ =?utf-8?B?TC9TMUk5SnZ0NG1hcS9BTUs0WWppcE9KTjVBbmVkaFBxaGhyKzI0TGt6NFA1?=
+ =?utf-8?B?Q1FxV0tmZWIwdEVkMnFVZzBLOTZobFM5cUUvYnA0WEx6ejR5b0RZbHdYVXph?=
+ =?utf-8?B?ZGpLK0gvTFdUdTYvczZMTUIxUzhETmIyTzFpbUxUbXBYZ0x6dkgyekwzNnJB?=
+ =?utf-8?B?UndPc2hKZ2xCTi9jaURGMU9mNkZqQnFESHA3SnNzRlZhYzlSY25OWDlMRDhK?=
+ =?utf-8?B?V1JNQkNWejBHZWQzQnVxRjFyRGQ0Yk5BQ2xzbDBaNWN5Rzc4bGovY1ROQTBq?=
+ =?utf-8?B?MHlreWg5UmxUSkVWbkU3bFdid2ROdkQwekx5dTV5K2ZjTzhXUmYzeCtrMFU5?=
+ =?utf-8?B?OUVzaFRXVjluOUtTdU9TOGtZSkFpMzN4b3VMNWNYdTlzZEc3TGc0R1hZQkFP?=
+ =?utf-8?B?R0hacW8vLzNHSFFSUXk2bi94YnJYcnJkNFNjc2ZjTFNrMWx6MVcvazZVa3Vr?=
+ =?utf-8?B?enR5OHNTdDMxQ2k2cktRcVlFT0lqT3h4bHNycDJWR3hoeVdNRnc3VHljdmsz?=
+ =?utf-8?B?ZWJJQmdGL2dtdmh2aDBOTmFxSHB5RjZFaG84WDVBRWo2d2crdHZUdXBwV1BE?=
+ =?utf-8?B?alhzeWNDYkdMQlZSTUJtaGQzeXRGckdkdmk1NkpNUnBkS1llK0t2RVQxZWtC?=
+ =?utf-8?B?MkNEMHdsRUV6S0VsaWtZUU8va1NOQm40anliazV6RFZBOVFwRnY0dkphUVJt?=
+ =?utf-8?B?dXpxZzNvcHNHQnVCdFhLcGl3UFZGREtraktGeXo5K2o0eGlnaTRnK0FYNEta?=
+ =?utf-8?B?NCt2UzZ4S1FkMCtPekMyNGtzWG5nc09nemNESmE0L2FsdGlHMUZZaFBMMHRZ?=
+ =?utf-8?B?SDN4Y0JJYUdscFpxN0pWVmY3aVo1dDgzMHZHZjNSbEU4bjQvU2dTWlFSM0ht?=
+ =?utf-8?B?VitKd2NIajViZWdSdUdGZDl2dU0xOE4za0FBbFdGTTdvVGliNTVaYXhIV0pW?=
+ =?utf-8?B?RjliUmg4QnozUS9vWDl2ZzVHeWVNQkhBODlXeTdwd0dza1BBVEN4N1I4TXJZ?=
+ =?utf-8?B?aHliSXRadEovSzY0WW5BbFNDU2E1bTJIVnlHK1QyckpwVEUvMFRyekFjaTFr?=
+ =?utf-8?B?UHRhNTQzd3pITVYrTy9xUUVqSkU5OXlpNmx0MGhCVk9ENnVMT0JqcTlWMWlZ?=
+ =?utf-8?B?UVo1d29mOHBQSVp2eXpYN2NxQ3RSLzhCMDMxOXBJaUpMYTVZa2Mwem1GYUQx?=
+ =?utf-8?B?NXNmSDdXSkJSZ2cyZ2IzUWszMHJqcU9FQWpFRzltWEtrc3ZubHlGVCticVVt?=
+ =?utf-8?B?SkZvTTNTOWVscEJPV1k2NVVaWHhjRXhvK0hJQ1lzMWdUdzJjNzNCWXZXL0t5?=
+ =?utf-8?B?dGZDWllIbThRRmpzczlNTXhhMkVMLzhUWjhQUG5CdjQza1dWMFVFU1RjMUYr?=
+ =?utf-8?B?VlMvRkRreE1vRnlGWDVHQkk3VzdvcGtYT3dQNURmNHozM3FjcU5FWUprT3hR?=
+ =?utf-8?B?TFdHOXU0YndLdlZkUGt4Um9VanlpTHVlNjdkZjE0YTBtNysyWUNXV0NQQWZ1?=
+ =?utf-8?B?bXQ0M0FUNC9BN0hWU0dmb3lhZlQzKzJQNTNxZ2g5VDZPK0ZCUWRBenhBZmJ3?=
+ =?utf-8?B?dFE9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: db1036f5-7e5e-465a-0bdd-08dccb506ca4
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2024 13:09:06.1584 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: hLIUVjChVgYtQtc/ut+JNU5qUG1hebYHBySyPy09SUayOu76SCSr6SIsq0hc0CtH0lfbL4xKZX1TjTp6Bij+64bA21F1saxf4eRdj6tE+QM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB6783
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,93 +176,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Jerome,
 
-On 01/09/2024 21:10, Simon Glass wrote:
-> Hi Caleb,
+On 9/2/24 2:59 PM, Jerome Forissier wrote:
+> net_auto_load() cannot call tftp_start() if CONFIG_CMD_TFTPBOOT is
+> disabled.
 > 
-> On Sun, 1 Sept 2024 at 08:21, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>
->> Hi,
->>
->> On 31/08/2024 23:22, E Shattow wrote:
->>> Hi Caleb, the problem here is hidden conditional behavior.
->>>
->>> On Sat, Aug 31, 2024 at 9:56 AM Caleb Connolly
->>> <caleb.connolly@linaro.org> wrote:
->>>>
->>>> When using the FDT command to inspect an arbitrary FDT in memory, it
->>>> will always be necessary to explicitly set the FDT address. However it
->>>> is also quite likely that the command is being used to inspect U-Boot's
->>>> own FDT. Simplify that common workflow of running "fdt addr -c" to get
->>>> the control address and set it by just making $fdtcontroladdr the
->>>> default FDT if there isn't one.
->>>>
->>>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->>>> ---
->>>>   cmd/fdt.c | 9 +++++++++
->>>>   1 file changed, 9 insertions(+)
->>>>
->>>> diff --git a/cmd/fdt.c b/cmd/fdt.c
->>>> index d16b141ce32d..8909706e2483 100644
->>>> --- a/cmd/fdt.c
->>>> +++ b/cmd/fdt.c
->>>> @@ -276,8 +276,17 @@ static int do_fdt(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
->>>>
->>>>                  return CMD_RET_SUCCESS;
->>>>          }
->>>>
->>>> +       /* Try using U-Boot's FDT by default */
->>>> +       if (!working_fdt) {
->>>> +               struct fdt_header *addr;
->>>> +
->>>> +               addr = (void *)env_get_hex("fdtcontroladdr", 0);
->>>> +               if (addr && fdt_check_header(&addr))
->>>> +                       set_working_fdt_addr((phys_addr_t)addr);
->>>> +       }
->>>> +
->>>>          if (!working_fdt) {
->>>>                  puts("No FDT memory address configured. Please configure\n"
->>>>                       "the FDT address via \"fdt addr <address>\" command.\n"
->>>>                       "Aborting!\n");
->>>> --
->>>> 2.46.0
->>>>
->>>
->>> The use of `fdt` command in the default action might be depended on by
->>> some userspace script as a success/fail result. I don't imagine what
->>> that might possibly be, just that the logic of scripts in u-boot
->>> depend on that pattern of use.
->>
->> I'm not sure what the rule is about breaking changes in the CLI, I do
->> think this is not a realistic concern here though. Maybe Tom or Simon
->> can weigh in?
->>>
->>> Secondly there would need to be a warning to the user that some hidden
->>> conditional action is being applied? i.e. "No valid FDT address is
->>> configured to $fdt_addr_r or $fdt_addr so now configuring to use
->>> $fdtcontroladdr instead." or however you would phrase that.
->>
->> Since I call set_working_fdt_addr() it prints a message telling you that
->> the fdt address was set on the first call.
->>>
->>> Otherwise I agree improvement to the fdt is welcome and my memory of
->>> first using this command is that it has not-sensible defaults but I
->>> then assumed it was designed this way because of possible use in
->>> U-Boot scripts.
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>   net/net.c | 2 ++
+>   1 file changed, 2 insertions(+)
 > 
-> Definitely a useful feature, but how about adding a flag which sets
-> the working fdt to the control one? That would make it less painful
-> than using -c, and will keep existing cases running.
+> diff --git a/net/net.c b/net/net.c
+> index d9bc9df643f..35961ba1c7d 100644
+> --- a/net/net.c
+> +++ b/net/net.c
+> @@ -334,6 +334,7 @@ void net_auto_load(void)
+>   		net_set_state(NETLOOP_SUCCESS);
+>   		return;
+>   	}
+> +#if defined(CONFIG_CMD_TFTPBOOT)
 
-Surely we have to /have/ some usecases to justify this??
-> 
-> Also note that test/cmd/fdt.c and doc/usage/cmd/fdt.rst need an update for this.
+I think we're supposed to use if IS_ENABLED(CONFIG_CMD_TFTPBOOT) now.
 
-For sure
-> 
-> Regards,
-> Simon
+Additionally, it's highly recommended to rather use "normal" if's 
+wherever possible, i.e.:
 
--- 
-// Caleb (they/them)
+         if (IS_ENABLED(CONFIG_CMD_TFTPBOOT)) {
+             if (net_check_prereq(TFTPGET)) {
+                 if (IS_ENABLED(CONFIG_BOOTP_SERVERIP)) {
+[...]
+                 return;
+             }
+             tftp_start(TFTPGET);
+         }
+     }
+
+Would that work?
+
+Cheers,
+Quentin
