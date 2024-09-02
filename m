@@ -4,131 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF39BCA0ED3
-	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 09:54:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C83ABCD342A
+	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 10:04:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50B93888C8;
-	Mon,  2 Sep 2024 11:54:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C148884C3;
+	Mon,  2 Sep 2024 12:04:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="SDoEvER3";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WD9tbbZa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D52A889A6; Mon,  2 Sep 2024 11:54:12 +0200 (CEST)
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam04on20604.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2409::604])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 458EB885B9; Mon,  2 Sep 2024 12:04:16 +0200 (CEST)
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [IPv6:2607:f8b0:4864:20::630])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19583885B9
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 11:54:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EDA7A86462
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 12:04:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ufqv0wtKWeDMy/HUpI8zC3rsYtnsEqVBZl6GzKjSEZDWauLWXQOiOTuVMrr7F5aQhwo7kP1gfx6MSrOMTi6ABNdanA0OfbsOf5AasCd4mSmY1OE5RUVJ0oTfi9pr8RGGUzcHwX/mzqh48g5g78Cg0Nc3SH6D3gsFpDP2gduUOrhP9gNRwoZNx3w2BmsNbHVIiCAguGXOdVOYlxTpODGBt0ziOWQOu3zjSalXATtv0jKpjmhFUFRIh14mhomLBa6QYqvI5KZPpsba3Xk4iE14/a48FsISLIJdzVOcTObZviakPdAMR088izVQ1bG6RyHcCiNcF25mx3MBUxhh5xfSyQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+UAocs2oMz7Gvs7xbMF8q/I7Iyr+SmiNWo2fHULFD1s=;
- b=kmhtxGKP1SMu6icNtuOohTOIYAWxuGdjAOj5V5o1PA2Rp3mIwRN5Z8rYM8lIOW7ox+3Q7p5M3II/DJ4qXByf5jKPlcKdUnWrMuVymAdBbbuBZABGXNT1gDRyJ+HJfu656itk/leQRXSEkxz6GOHAmXpTMHGt3zXAn7KXnXdw6tI2boEdT3I0rLH7G/YjWV2zCdC1KRzIgKDGJPfK/OkzyeTaL89gp8u9tSnG1wa8k5ANSjjwSNvlvvpGTmZpXW9MdEBPHHlsXgf5ocFNesKcyJofEOaiYz7O5Efd8E0M7n8GFsuf3zCgGX0Ks2/5rJMruwfyiVm+Jl1tXDY6+T+CYw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+UAocs2oMz7Gvs7xbMF8q/I7Iyr+SmiNWo2fHULFD1s=;
- b=SDoEvER38O5YOEQbF4Zr60rd5RpQfrONx0s/hlaF9H4gMPfYFMjsBeZG7Pjky98dMoWy2p/A50lsA1Gz9NJEtS6nbSk+UctF8h1i/Ot13HXRjlEuV9jatKn/Qu5ubK/W64E85EXdujxK0zocxV+sAQ1u2kZl3NA81cBZ6KJA8lQ=
-Received: from SA9PR13CA0039.namprd13.prod.outlook.com (2603:10b6:806:22::14)
- by PH8PR12MB7277.namprd12.prod.outlook.com (2603:10b6:510:223::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.23; Mon, 2 Sep
- 2024 09:54:07 +0000
-Received: from SN1PEPF000397B4.namprd05.prod.outlook.com
- (2603:10b6:806:22:cafe::e) by SA9PR13CA0039.outlook.office365.com
- (2603:10b6:806:22::14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.12 via Frontend
- Transport; Mon, 2 Sep 2024 09:54:07 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SN1PEPF000397B4.mail.protection.outlook.com (10.167.248.58) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7918.13 via Frontend Transport; Mon, 2 Sep 2024 09:54:06 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 2 Sep
- 2024 04:54:05 -0500
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Mon, 2 Sep 2024 04:54:04 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <trini@konsulko.com>, <git@amd.com>
-Subject: [u-boot-test-hooks][PATCH] travis-ci: Skip the saveenv and reset test
- cases on xilinx zynq qemu
-Date: Mon, 2 Sep 2024 15:23:57 +0530
-Message-ID: <20240902095357.311-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
+ spf=pass smtp.mailfrom=hrsourabh1107@gmail.com
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-2053616fa36so20788985ad.0
+ for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 03:04:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1725271452; x=1725876252; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=t9OdqZSDo6PaE2zs/0+Smg7dp7sj3NJGw/vfmGRQ2Qg=;
+ b=WD9tbbZat8X56vMGSTlS0Xv4XUBkuR4ROltxz4TvBH4zPDyzab8VfPiSZpdjeMlcts
+ sTzTW8HWxZKqW0HHV51PW9A2oMCO17VIvnvkGPjKdgu7leAd0L6qf4dFvps7rHhPlon4
+ c9Rmp57DMYMr2zBEfLVvhp9J+4J3mSHJy5R+zkGrz/f3NDm0yc8cZqwUopdM7tMtZPOw
+ utZy8fpjF8IR6s/i/AdxUdeJezE9x2TvJ1NtcH4NDo9ibRB51sYDyoDIGBR0gj6HqPn/
+ Ao6wyl/zp8ROQCsl9XL+SAdfJioJUfiBU865oO4KuEIFM6/hPXqv5qQrW/O9x5+aN/bV
+ du4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725271452; x=1725876252;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=t9OdqZSDo6PaE2zs/0+Smg7dp7sj3NJGw/vfmGRQ2Qg=;
+ b=rCX19oBrLLVnnP61Kdg0gbVugrBP0twzXwA5eLxyIEyUNuJ0F65KdWnCCnoNKHkhOB
+ Bjv8O+4wkyX4/3XIho+usXdW2nNKJHaRT/ipIk4B1O4ITTe7osx0yg75UVnYK4IOL0fc
+ RhoDfNTumxfEYSMZIB1yccVNf1q0/vkKJPeqq9WMjz/3lByc8u7qL44VvGiRAkt/ArpF
+ ZNsJb5R3LMh2r5FsihLtJMb5t95IUiUnzqu8GJ2T1LrV6au9Wy6rII9EPr4nLKcbWer1
+ F7hdzyNIF7wSppwDeGCJk+o+QWUdvi1EzIyRzqhk/7jrpLApgZBXu385qa20dEnImB10
+ r04A==
+X-Gm-Message-State: AOJu0YyAMvkznjz2F/dOwhEjkqfX30xOvNge5V4gAk5jV8wsXidSWNEt
+ J+WukFLllUkNWiukhFRaCekL4JyT04fBCCovhafIolqsvJaucx+IGeFTh2ktTM3KPYc9IwT6Afy
+ jcz9hkBSzdycaMZrAE9ywb1qtNJqL6tXT
+X-Google-Smtp-Source: AGHT+IGYBVs5vm3iXrKAEXJ7zsmOw6bfImQXYASc6RA+idUBFVHsItPc5kziKU1pRCKPOhBqaiJjHZug7gbimChYd38=
+X-Received: by 2002:a17:902:e54e:b0:205:6c5f:e3a2 with SMTP id
+ d9443c01a7336-2056c5fe70fmr33082065ad.0.1725271452180; Mon, 02 Sep 2024
+ 03:04:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF000397B4:EE_|PH8PR12MB7277:EE_
-X-MS-Office365-Filtering-Correlation-Id: e58d8f44-5c80-40f4-1086-08dccb352f5b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700013|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Wqb6r1gCX+ktELlQ4PvBBChcvRHl/UTuCxRiJQvVYISGvebs9ic8oF3d49Br?=
- =?us-ascii?Q?ANGgqaFXmql3s3K01L81aAVhsXvQScR2k96UxnO+57P0NwNElUtW08SLiQ7X?=
- =?us-ascii?Q?4e+HTMdxllm+8E1JIFRkHEjjzHvZ9vfK4R0YSZUEyuehAOfJUQhbpTH3cVSF?=
- =?us-ascii?Q?rAJFEjK8toRTBwHzilekoeQehxnzkitnyEyTnnvNozdp0gmwuTEV8eOsiNSZ?=
- =?us-ascii?Q?8kmGMYeAIzcyF8SVXjNhT61bjaVvj1tzrq9B3RmT3a23Tj8kF+I9P4hBussO?=
- =?us-ascii?Q?oKGy25NeZjsprFcsD3LOMCWj/RZwC+9FLi9q0N5FmtO+2GPzLnhjHt41tsvY?=
- =?us-ascii?Q?IxtXpDuTLKc8KOCLFsHSPGDdGIE/CyFIKc7DTg2GjWwRHquyUETp4Zw12qPY?=
- =?us-ascii?Q?yb/szawJkMzPut65E4Lx7JwiCU+63zJ8sLj/8dybLDq9XBQauu2hGu14BUAL?=
- =?us-ascii?Q?35w4Nq51ruQ5s/vOz5RvsmyuZecgi3390A3wLU5VY1Q+le2PWcd6j9ZJgmnr?=
- =?us-ascii?Q?I6F9qa27E8arYqY1qUyCqHkYvnnVLQNAkSwfb0+qeHKv4mXprMcFATqDNlKK?=
- =?us-ascii?Q?xHGEtLXuMItwfQIG3Xs6dseGmhStxSJj1V85VBfYkr4JHyZNGgKmku1AoIdj?=
- =?us-ascii?Q?8Mq0FpD1QdSttsnmy6MbFWRwP6xN94zykcnHDsDRP73zbB+Kzv/5PJNvPzeg?=
- =?us-ascii?Q?Gj3aBbBH++H9MK3StKjcRH/V16csGdegUKpKlWjGYTNjO2tegEv+vCgKyO7F?=
- =?us-ascii?Q?NIQj0symCRUcDRtxSVPQZs8jilr2iDpBDW+ElZe9lQhW6PG2aO82ZziAP49Y?=
- =?us-ascii?Q?Urp0Fv4jHJ8Vixh2XK235SN7UkMtecn/zLJWIlmxd+94nIptAcvUZJWKlIe1?=
- =?us-ascii?Q?/amlFiuGsfBvtOW3LVlbBG9G29gggZs7DNm/48d9OZ4n9DhCxJIQshYOH/r+?=
- =?us-ascii?Q?3jqCup9DZwt7H6tQVtbApWEZsKHEPHLi2mFmX69BTGHgY935aEvCCEQkou20?=
- =?us-ascii?Q?No/FGUtfaa27lzyFsUp8HKaSETpuT/2R8wPFW0F5ypTN/BJ4Uwms6PS35ipe?=
- =?us-ascii?Q?cUf67/2Tg4HU9/7ins1Ht9O8EW7NpTS43/2zhJDRka0GMyHCHyqhTwGtSKSw?=
- =?us-ascii?Q?pCd5I0jdeE9U75MOcTT5ah/U9G3Ta9pku7uvMwHc/UYUH4GH7/WmGH2WXHUd?=
- =?us-ascii?Q?IHlZN+vIQwX4noOnmzmi81BgVqrUKXlj0K50oBcq310Bz7q0JrCG35Nxcfo+?=
- =?us-ascii?Q?WYi9xvhMf8qbEtqDotTHvzH56UWiG/vuDqSYWre3YKq6eUs7BCbhTAYWmuwP?=
- =?us-ascii?Q?+bHVVtmTOcaFW1kOgO4hU3E6nX3pvofOqMRYmoewrJL0lb/Xs+nh3yu6V0JY?=
- =?us-ascii?Q?3nNdiQDscMCHXeE5vHr8U21s73qKSUWY0l3jDQLKjaUZjYlXZG3v+5fytSE4?=
- =?us-ascii?Q?Pm3OzXoICuea/xcuzF3YyinImEihL8L2?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2024 09:54:06.7188 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e58d8f44-5c80-40f4-1086-08dccb352f5b
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF000397B4.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7277
+References: <CAHseuWCmRF2HsVJ3RbK49aKwB6rbrHwPAOX10caJWQhLtFo1Zw@mail.gmail.com>
+ <CAHseuWBeMu2kgKNQHc4OWa6Au0mAry_j4N5CVy4qWaSr3JUouA@mail.gmail.com>
+ <CALeDE9NuRLfeDfPusTTxnWkz6HyRGUFOhuL710BRe6EybWHdfQ@mail.gmail.com>
+ <CAHseuWCP8jk=s7GH3w7KyzCrD=MbSqrgNFmKcb00-qRyvXv0rA@mail.gmail.com>
+ <CALeDE9PtZ3cfKW-XDm52ALLDM-=97NMpXd5NQCfLz4wz7FgqyA@mail.gmail.com>
+In-Reply-To: <CALeDE9PtZ3cfKW-XDm52ALLDM-=97NMpXd5NQCfLz4wz7FgqyA@mail.gmail.com>
+From: Sourabh Hegde Ramu <hrsourabh1107@gmail.com>
+Date: Mon, 2 Sep 2024 12:04:01 +0200
+Message-ID: <CAHseuWBtrG-2zXRAP1e9tude9h7VyWCp_1nvy13hMOvVpiqybw@mail.gmail.com>
+Subject: Re: How to retrieve cpu info from u-boot fucntion?
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,32 +91,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is an issue with the xilinx zynq qemu qspi driver during the erase
-operation in dual parallel configuration, so skip these
-tests for now.
+Hi,
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- py/travis-ci/u_boot_boardenv_xilinx_zynq_virt_qemu.py | 2 ++
- py/travis-ci/u_boot_boardenv_zynq_zc702_qemu.py       | 2 ++
- 2 files changed, 4 insertions(+)
+Thanks for the update.
 
-diff --git a/py/travis-ci/u_boot_boardenv_xilinx_zynq_virt_qemu.py b/py/travis-ci/u_boot_boardenv_xilinx_zynq_virt_qemu.py
-index 267285f..42685ad 100644
---- a/py/travis-ci/u_boot_boardenv_xilinx_zynq_virt_qemu.py
-+++ b/py/travis-ci/u_boot_boardenv_xilinx_zynq_virt_qemu.py
-@@ -1 +1,3 @@
- env__spl_skipped = True
-+env__saveenv_test_skip = True
-+env__reset_test_skip = True
-diff --git a/py/travis-ci/u_boot_boardenv_zynq_zc702_qemu.py b/py/travis-ci/u_boot_boardenv_zynq_zc702_qemu.py
-index 267285f..42685ad 100644
---- a/py/travis-ci/u_boot_boardenv_zynq_zc702_qemu.py
-+++ b/py/travis-ci/u_boot_boardenv_zynq_zc702_qemu.py
-@@ -1 +1,3 @@
- env__spl_skipped = True
-+env__saveenv_test_skip = True
-+env__reset_test_skip = True
--- 
-2.17.1
+I was testing the Raspberry Pi 5 with u-boot and noticed I get below error
+regarding MAC address
 
+bcm2835: Could not query MAC address
+Net:   No ethernet found.
+
+Is this because of a missing implementation of Pi5 network hardware?
+
+Thanks again!
+
+On Thu, Aug 29, 2024 at 10:05=E2=80=AFAM Peter Robinson <pbrobinson@gmail.c=
+om>
+wrote:
+
+> Hi Sourabh,
+>
+> > Thanks for the update. Looking at the board/raspberrypi/rpi/rpi.c I
+> think MAC address is only returned for models that have onboard ethernet.
+> but for models raspberry pi 0w / pi 02w it might not return any value.
+> > Am I correct? (maybe I overlooked it?) Is there any other approach for
+> this?
+>
+> TBH I have no idea, in a lot of cases the MACs are written to SoCs
+> long before they end up in a final product so they may well be there.
+>
+> I have not tried, I was merely pointing out to you possible solutions
+> for you to try. I don't have the original pi0 but I also gave you
+> other possible ways to solve you're problem :)
+>
+> > Thanks in advance
+> >
+> > On Wed, Aug 28, 2024 at 5:31=E2=80=AFPM Peter Robinson <pbrobinson@gmai=
+l.com>
+> wrote:
+> >>
+> >> Hi,
+> >>
+> >> I appear to have missed the first post.
+> >>
+> >> > Is there any update on the below request? Are there any functions
+> similar
+> >> > to eth_get_ethaddr() to retrieve device-specific info? I am working
+> with
+> >> > raspberry pi 0 and there is no network interface card.
+> >> > So, eth_get_ethaddr() returns null
+> >>
+> >> So there's a bunch of drivers for OTP/eFuses in drivers/misc/* which
+> >> provide access to those sort of unique options such as CPU serial
+> >> numbers, and possibly stored MACs etc.
+> >>
+> >> I know the RPi has a OTP/eFUSE HW IP block, I don't believe U-Boot has
+> >> a driver for that as yet.
+> >> The main RPi firmware may have an mbox/API for querying those sorts of
+> >> things, looking at board/raspberrypi/rpi/rpi.c there's a
+> >> set_usbethaddr which calls a msg_get_mac_address to request a MAC from
+> >> the RPi firmware, I suspect that may work for your needs.
+> >>
+> >> Peter
+> >>
+> >> > Thanks in advance
+> >> >
+> >> > On Wed, Jun 19, 2024 at 9:11=E2=80=AFAM Sourabh Hegde Ramu <
+> hrsourabh1107@gmail.com>
+> >> > wrote:
+> >> >
+> >> > > Hello,
+> >> > >
+> >> > > Currently, I am using the MAC address from eth_get_ethaddr()
+> function to
+> >> > > calculate a hash value. But, I would like to replace this with a
+> more
+> >> > > unique device info such as cpuid or other values. But I could not
+> find any
+> >> > > function that can retrieve cpu info.
+> >> > >
+> >> > > Can anyone please point me in the correct direction? Do we have an=
+y
+> >> > > functions for this? Are these things part of the documentation?
+> >> > >
+> >> > > Thanks in advance.
+> >> > >
+> >> > > Kind regards,
+> >> > > Sourabh
+> >> > >
+>
