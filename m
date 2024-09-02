@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83E3FCD13CF
-	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 16:10:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C6E8CD13CF
+	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 16:19:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C407E88498;
-	Mon,  2 Sep 2024 18:10:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C55CC88498;
+	Mon,  2 Sep 2024 18:18:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iMvcBdAo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uRzj28YO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FCC58876E; Mon,  2 Sep 2024 18:10:55 +0200 (CEST)
-Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
- [IPv6:2607:f8b0:4864:20::82f])
+ id C8E9C88860; Mon,  2 Sep 2024 18:18:56 +0200 (CEST)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F183588365
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 18:10:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C019588363
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 18:18:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82f.google.com with SMTP id
- d75a77b69052e-45693d58a19so14707481cf.1
- for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 09:10:52 -0700 (PDT)
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-7a7ff6c4fd0so275172385a.1
+ for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 09:18:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1725293452; x=1725898252; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=NuTAMq1AO5kdvzcyg/yi07eHF14PaiIdI7LjEhpmUyc=;
- b=iMvcBdAoU8MwVlgyg/q5IypnjtEtrFZsedu1wvRqUyNtKmZKRTNEKMnfMZl7bU2I82
- WRnQhweQREOCbPUVERg9YNEvd6hOiccbKYVbc6n0/gJyP8wCcobqSebmKUU2pRsEYLat
- 1H+RGZMP8aPRaSbdsE1tSZ6AJZMKuH58BUSXg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725293452; x=1725898252;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1725293933; x=1725898733; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NuTAMq1AO5kdvzcyg/yi07eHF14PaiIdI7LjEhpmUyc=;
- b=s5W4hwmp/oVlWeoJ+dJ647T5mEp7aQAW54hauZr6VySbnCfQ8aPOfZx50dcLZnbv0Q
- lelzR8pnictpenuBcMt7Os09o4VtckRy2P+wIwo090av3NPb4TOI8lpzdYjnFg8F/0E5
- vxKjmeR3XYJ5kjJ24cm8Mv5Sp597mwEgaxDGRYjarSAb1emJnYs5ztMXIeclk2OHNeYr
- WtmH1yMNDgQLPbPXrL1o+klKmlNfewXKAfAkhiB81EEGpzZEZiU6tOeIQtU8pRhyXvL7
- j4jWx3H1wSSJVc/jqSrHhulCrmPEwKXKEZF/ZSejMlgrOyPFgdyAwh8ynz+nQ1yvRboh
- GBYQ==
-X-Gm-Message-State: AOJu0YypCXfkzjjdMaPb3j9JHuP8FTV5hZ1pMK3cmjZEDGCDqwyR0eIb
- 633HU+XCcT8U2RMpAjIX299+J0JCBkERfw8mtv2HNo3dX/Y5rLzT2V8lxaE9HCE=
-X-Google-Smtp-Source: AGHT+IH53GaWU2k9CauvR5afCnUULS6NIF+zLCpWv+jLMVMgkNZ4BZHJvxgq/9PSYiyp8r9DBLP8Zw==
-X-Received: by 2002:ac8:6f12:0:b0:446:5aac:ca7f with SMTP id
- d75a77b69052e-4567f522837mr188617641cf.22.1725293451631; 
- Mon, 02 Sep 2024 09:10:51 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45682c9d2e5sm40403161cf.25.2024.09.02.09.10.50
+ bh=uXR6z2prSnNqwqQFYESP1+NfDTGW9iJmhuY4WDL5ljQ=;
+ b=uRzj28YOMwvjxwF2lNAov4p7OH+8IA60bKKGeKLjfo2RCXvzdyWpZ+Mp6VKpF+TA7s
+ tW7Gsuy2RtjRO05E0x09bdVg80b0WnF1B5Kf8ZuCMjbzSGqrRK8NkaI/E959zQ5frxT+
+ 3ze/9lJPemlYXWx8+qkjknWjmMnlM9+1keA1Q=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725293933; x=1725898733;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=uXR6z2prSnNqwqQFYESP1+NfDTGW9iJmhuY4WDL5ljQ=;
+ b=FreTOklpZvA/O1f/4qGskOk2u70QEYVbwa+DFbDGQapjtLzdE+BIfWiSV6i/k4ERDZ
+ uhbF6D/M/3af1A5LU1GWyKasL5kBOIuwTnc8An/rrOSVPFhOBfD173JpANYNNX5MjwF+
+ 74wbqcjLYUUHFHZbNgGhRUE9428RbyRJ8w59xd0cxTOIabICyTZfTegLuvNSVt2gcyYm
+ EsNpOg9opYI+gPY8uG4SVg6HCjpAeZMZ3Ub2xVYvSjgnTiFwTMhqBI1NfRIdLK8n8Gil
+ zPPPHe1YDvj9oYsi/xJpmyl/5YZRjxUumZXIYNa7iXwqaHmWNaZsBBBeN98rwk89M+cI
+ ArAQ==
+X-Gm-Message-State: AOJu0Yzg7CZcaL/AgY7A0m19TWXrv04PD9FbdZ9u0qCOhDAg5ZYCiRg2
+ KsklrE0CEt8hhW5dsT5n+9mk4gMKyjW4p1w7gpbcIjzT94R7gxofFL3p750ccNg=
+X-Google-Smtp-Source: AGHT+IFTGdCkM0siJnIXjS40wFjo/umNnTzpQh8FfmJykQy2Olg+ABLmWTgS3NfxmT1uqt8AyM1RgA==
+X-Received: by 2002:a05:620a:1a21:b0:79d:7ae0:ffd2 with SMTP id
+ af79cd13be357-7a89ac15371mr883373785a.49.1725293933373; 
+ Mon, 02 Sep 2024 09:18:53 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7a806bfc86csm433632685a.1.2024.09.02.09.18.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Sep 2024 09:10:50 -0700 (PDT)
-Date: Mon, 2 Sep 2024 10:10:47 -0600
+ Mon, 02 Sep 2024 09:18:52 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v4 02/23] nvmxip: Avoid probing on boot
-Message-ID: <20240902161047.GC2479150@bill-the-cat>
-References: <20240901222634.460873-1-sjg@chromium.org>
- <20240901222634.460873-3-sjg@chromium.org>
+To: u-boot@lists.denx.de, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Cc: michal.simek@amd.com, git@amd.com
+In-Reply-To: <20240902095357.311-1-venkatesh.abbarapu@amd.com>
+References: <20240902095357.311-1-venkatesh.abbarapu@amd.com>
+Subject: Re: [u-boot-test-hooks][PATCH] travis-ci: Skip the saveenv and
+ reset test cases on xilinx zynq qemu
+Message-Id: <172529393203.1461948.1630194782950346662.b4-ty@konsulko.com>
+Date: Mon, 02 Sep 2024 10:18:52 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zUdVFGxnESvwiboM"
-Content-Disposition: inline
-In-Reply-To: <20240901222634.460873-3-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,68 +90,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 02 Sep 2024 15:23:57 +0530, Venkatesh Yadav Abbarapu wrote:
 
---zUdVFGxnESvwiboM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> There is an issue with the xilinx zynq qemu qspi driver during the erase
+> operation in dual parallel configuration, so skip these
+> tests for now.
+> 
+> 
 
-On Sun, Sep 01, 2024 at 04:26:13PM -0600, Simon Glass wrote:
+Applied to u-boot/u-boot-test-hooks.git/master, thanks!
 
-> Devices should be probed when they are used, not before. Drop this
-> boot-time probing.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
-> (no changes since v1)
->=20
->  drivers/mtd/nvmxip/nvmxip-uclass.c | 7 -------
->  1 file changed, 7 deletions(-)
->=20
-> diff --git a/drivers/mtd/nvmxip/nvmxip-uclass.c b/drivers/mtd/nvmxip/nvmx=
-ip-uclass.c
-> index 58e8c3fb74b..d18bd0e3d6b 100644
-> --- a/drivers/mtd/nvmxip/nvmxip-uclass.c
-> +++ b/drivers/mtd/nvmxip/nvmxip-uclass.c
-> @@ -53,14 +53,7 @@ int nvmxip_probe(struct udevice *udev)
->  	return 0;
->  }
-> =20
-> -static int nvmxip_post_bind(struct udevice *udev)
-> -{
-> -	dev_or_flags(udev, DM_FLAG_PROBE_AFTER_BIND);
-> -	return 0;
-> -}
-> -
->  UCLASS_DRIVER(nvmxip) =3D {
->  	.name	   =3D "nvmxip",
->  	.id	   =3D UCLASS_NVMXIP,
-> -	.post_bind =3D nvmxip_post_bind,
->  };
-
-Once again, adding in the corstone1000 maintainers as the platform that
-actually uses this.
-
---=20
+-- 
 Tom
 
---zUdVFGxnESvwiboM
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbV430ACgkQFHw5/5Y0
-tyz1GwwAharZgm5+OEQrZn4Sa+4+iCSlOIiwoDPmIILXBn0Ngoe6OExUiwm9XiFp
-RdXay5qcxgptN9i6m9uYBbFQBlNQnw3q1NTgPMrfUKNOxpycFohYOs7nUdy1Vefi
-b5o8vZVUxv94kP3nsHffAnmFXz8X8f0ig5FepEGVG8lyZAb70Mc5MK7nLuTjrkhE
-YAc8UbwryH6zzg7Ni6cjdRAeD/fd11PX3U7E2pP4f/RM5fvTk/BJKQ5RpkDOUKPv
-Ca5slnupKxON7rFiEeP5DsqSktQz9M2LitHqPeHxrsCdJ+qyTe3nv+Uq1DuZO5R4
-+i5IoCAZdKffwkAr25goFy3b9M5VuL0N//ZVRVvpNORpMl/r8dwjM3eDqsz1GPzk
-3tQ4uyQ2WmA1yMzKtTJS2Xhf8u7e8ew6Ko5vqoktI9Ss4IQCbgmHRTOiaLUmlJ2M
-YShkpRRMB5P6jUk7jFoh66wxAk4vrxD6TKGYzaVHDePpzrO4+0jlG4zDDSd4/3e6
-46s1trYR
-=TtI6
------END PGP SIGNATURE-----
-
---zUdVFGxnESvwiboM--
