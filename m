@@ -4,84 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB406CD13CF
-	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 16:31:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AB8DCD13CF
+	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 17:41:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7252788C50;
-	Mon,  2 Sep 2024 18:31:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 8260988875;
+	Mon,  2 Sep 2024 19:41:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="NWccar4K";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nM5STP06";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0EC888860; Mon,  2 Sep 2024 18:31:28 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 267FD8876E; Mon,  2 Sep 2024 19:41:27 +0200 (CEST)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D56A488C50
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 18:31:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B4C9E88C01
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 19:41:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=glaroque@baylibre.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-42c2e50ec13so20605575e9.0
- for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 09:31:23 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-7141feed424so3467433b3a.2
+ for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 10:41:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1725294683; x=1725899483;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=cC1hNtijWJaYPRuR8NyE71yasvS/p+S3tcruCs/845k=;
- b=NWccar4Kszru52HZvxuicYSijowryh8/QB1MgdithJUpPyN5Ie4AJ8fBW9xUf/PsLi
- 0G2XQj/8VeK6/NDYWoUrbDsM6LcDlIiuFBjz+8DP40tfl89F/tkZ4Yu2J+15CAGix870
- siHitCAMFT9qFlbKE5Eg6MWJzMDDO08EyeoKwwc+2OG/TKlzwkDqjNyQ3td0IGE901jm
- YjjoTXhhb8bCFclwy4mPD5VmVVs8TzFcfp2qdeR2+2ClYQlbt9LgWx1lnU3w1b/PCcls
- Oe39U2YUJuZCg6fNRCLoMECOlCrX0KdVuaTAUipLj5XxTIP/904+3Smj0Epx0kQerQn6
- kpDQ==
+ d=gmail.com; s=20230601; t=1725298882; x=1725903682; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=CwAx2NQ/1QrMaYKmpQRxNHFY+mU+ilMmEi4L79M4Ykk=;
+ b=nM5STP06b+Jc5Klcvm4OWim8Xl5H0mWEmYg5AgCqNdKsRlKbL6j5R+iFUaw5Emp/uv
+ 9GgrGR6HWhRBAjZ95WeFZbm8ZaOM4a13W2ioN3RP7Tbdg+9P8bN12de+R/Tv78PKQYod
+ Ca84GzDCWvh8zLzfWLWI9CPJ77ozaMzjSnQMaH1/LJScjrkg+gTd/qH3uNTqOwpXgOFT
+ 41kXb7RxtszWp8irVDxeDyfxpby+XnmmgeYRpRkW877wZfW+TlIKVRPN2Krb3ovmvc7F
+ Kt3SLqoUbrJrp4kk6gfOl1IePs+WPdxnuZDgZgtwF8H6iSXEsOSwL4uD0AB9le/Jkfcz
+ nRMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725294683; x=1725899483;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cC1hNtijWJaYPRuR8NyE71yasvS/p+S3tcruCs/845k=;
- b=bwbJeP/uRbka5ik+OyMdQKH6NTOTm5iEg6LqEFeCV3ayyXQPjiZ0UrdzMxERKdjuhr
- HoocO0eU1CAkO1BneQpp0skSP2FixcY5qg+CXV0QYGPM/wkakLkznRDmfq5NirOLDPFp
- NSEKTWRFAFbNYdDW866/vOLcYzvfIZk6G+sMDrDvbSsuJvQGiPfrFYPLXaA3yYT4hzGs
- hKIQdraMkZaI1scEtdVx3ek5Ua8HvxqucWk/62zmvJNeUaymVXexCPBcLjgYOg5mCViV
- p5NYKZ63rEDxKFLONmbS68H8XG19hzItVQEhwtFHjVmdGI0HOB3uGkNs00fWU2ADVOi9
- cIGw==
-X-Gm-Message-State: AOJu0YzjDEO/EDK6EMw21gXIevGm16ScwdazQfrYBkikJdh+3Cd8gj2N
- 9zLNcK9feJYxWGAH4MFP7V3vh98F25748mGnKj2WHGuo5B0mjrFQvVh5Rmlj9dA=
-X-Google-Smtp-Source: AGHT+IHbCEnNgV4HDMeQMN2Wvz3HMIUZhHbFGYX2LytsSPvE+Jfo55XETY9bjKuPEvJcX4AyU/DcAw==
-X-Received: by 2002:a05:600c:1d1d:b0:426:5269:1a50 with SMTP id
- 5b1f17b1804b1-42bbb205a6bmr77599995e9.11.1725294683198; 
- Mon, 02 Sep 2024 09:31:23 -0700 (PDT)
-Received: from [127.0.1.1] ([2a05:6e02:10a5:e010:36ea:3dbe:c83a:7e39])
+ d=1e100.net; s=20230601; t=1725298882; x=1725903682;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CwAx2NQ/1QrMaYKmpQRxNHFY+mU+ilMmEi4L79M4Ykk=;
+ b=Lxb1gK/GILyEU995AxlZDY0h4ajUZPTf56gHJh3yu5+a+PnJxRwC5ZncyyGNUcuCYB
+ XKeATikl3oqP0nrO34zvXkvmdtokFPNPInN4PeCC+Pog5WvQCmpmshVQWmfmeJ3oQfAZ
+ tUGJROIgisg5/l1ksmAZ4RSWT45COtMdAWpppEhzZgI5RrlVZjgBkZeddUbSm1ZMrXS4
+ Dm0q16/GQ6x8wwrejEgp4EJBNPScbPhIQsN5DfBrN+Ba2XqxI0r2iVVgOKGlsfjNl837
+ +DTdNq4Xb7i50SjtaUuBlP9S8Wb6J6RAnLgcP3mbcgz9ZHsD2NGsQdHSqIM6nOe67URH
+ Qdag==
+X-Gm-Message-State: AOJu0YwH9sT4br/FlHGPogEsxjB+iSBighho2N5Qp6nhZ/uAcb2C3Gmo
+ ry3CtidMLjVSpAON71nmj4BHvS/smsSY2fjatwl7bcidtRh+nYHOtQLEVw==
+X-Google-Smtp-Source: AGHT+IGb0Vb6M8zzdWuAOr7LvE42gFTQzrPibRbk8K9IpdXZKR0boM8rw3C1lx8HNCGCO/dVlVQxRw==
+X-Received: by 2002:a05:6a00:8c6:b0:706:b10c:548a with SMTP id
+ d2e1a72fcca58-7173faecd26mr5906927b3a.22.1725298882127; 
+ Mon, 02 Sep 2024 10:41:22 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:9956:477a:b751:c148])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42bb6e274ccsm145122185e9.37.2024.09.02.09.31.22
+ d2e1a72fcca58-715e5576d7bsm7107098b3a.30.2024.09.02.10.41.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Sep 2024 09:31:22 -0700 (PDT)
-From: Guillaume La Roque <glaroque@baylibre.com>
-Date: Mon, 02 Sep 2024 18:31:20 +0200
-Subject: [PATCH 2/3] board: beagle: beagleplay: Add android bootflow
- support
+ Mon, 02 Sep 2024 10:41:21 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-next-20240902
+Date: Mon,  2 Sep 2024 14:41:18 -0300
+Message-Id: <20240902174118.908571-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240902-sitaraupstream-v1-2-0c478c33c08b@baylibre.com>
-References: <20240902-sitaraupstream-v1-0-0c478c33c08b@baylibre.com>
-In-Reply-To: <20240902-sitaraupstream-v1-0-0c478c33c08b@baylibre.com>
-To: Bryan Brattlof <bb@ti.com>, Tom Rini <trini@konsulko.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, Nishanth Menon <nm@ti.com>, 
- Robert Nelson <robertcnelson@gmail.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Vishal Mahaveer <vishalm@ti.com>, 
- Guillaume La Roque <glaroque@baylibre.com>
-X-Mailer: b4 0.14.1
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,69 +88,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Hi Tom,
 
-Beagle Play has a different boot flow than the AM62x SK EVM.
+Please pull from u-boot-imx/next, thanks.
 
-AM62x SK EVM:
-1. Boot rom reads UDA (User Data Area), looking for tiboot3
-2. Boot rom finds tiboot3 and loads it
+The following changes since commit e83ced1a24095de66e526bd6c10f0f24584baaee:
 
-Beagle Play:
-1. Boot rom looks for tiboot3 in mmc0boot0
-2. Boot rom finds tiboot3 and loads it
+  bootstage: Fix unstash of records from SPL (2024-08-28 10:07:59 -0600)
 
-Because of this difference, we need to have a different
-partitioning table than the generic TI one.
+are available in the Git repository at:
 
-Include generic TI android support and override the partitioning table
-to boot Android.
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20240902
 
-Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
----
- board/beagle/beagleplay/beagleplay.env | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
+for you to fetch changes up to d1349097222b5a3264f614b3e4fe672e0df26435:
 
-diff --git a/board/beagle/beagleplay/beagleplay.env b/board/beagle/beagleplay/beagleplay.env
-index 354bc987d12b..fc29d49712db 100644
---- a/board/beagle/beagleplay/beagleplay.env
-+++ b/board/beagle/beagleplay/beagleplay.env
-@@ -17,3 +17,33 @@ bootdir=/boot
- boot_targets=mmc1 mmc0
- bootmeths=script extlinux efi pxe
- rd_spec=-
-+
-+#if CONFIG_BOOTMETH_ANDROID
-+#include <env/ti/android.env>
-+/* Override Android partitions
-+ * Required because tiboot3 is in mmc0boot0, not in UDA
-+ * note that += is needed because \n is converted by space in .env files */
-+partitions=
-+       name=bootloader,start=5M,size=8M,uuid=${uuid_gpt_bootloader};
-+partitions+=name=misc,start=13824K,size=512K,uuid=${uuid_gpt_misc};
-+partitions+=name=frp,size=512K,uuid=${uuid_gpt_frp};
-+partitions+=name=boot_a,size=40M,uuid=${uuid_gpt_boot_a};
-+partitions+=name=boot_b,size=40M,uuid=${uuid_gpt_boot_b};
-+partitions+=name=vendor_boot_a,size=32M,uuid=${uuid_gpt_vendor_boot_a};
-+partitions+=name=vendor_boot_b,size=32M,uuid=${uuid_gpt_vendor_boot_b};
-+partitions+=name=init_boot_a,size=8M,uuid=${uuid_gpt_init_boot_a};
-+partitions+=name=init_boot_b,size=8M,uuid=${uuid_gpt_init_boot_b};
-+partitions+=name=dtbo_a,size=8M,uuid=${uuid_gpt_dtbo_a};
-+partitions+=name=dtbo_b,size=8M,uuid=${uuid_gpt_dtbo_b};
-+partitions+=name=vbmeta_a,size=64K,uuid=${uuid_gpt_vbmeta_a};
-+partitions+=name=vbmeta_b,size=64K,uuid=${uuid_gpt_vbmeta_b};
-+partitions+=name=vbmeta_vendor_dlkm_a,size=64K,uuid=${uuid_gpt_vbmeta_vendor_dlkm_a};
-+partitions+=name=vbmeta_vendor_dlkm_b,size=64K,uuid=${uuid_gpt_vbmeta_vendor_dlkm_b};
-+partitions+=name=super,size=4608M,uuid=${uuid_gpt_super};
-+partitions+=name=metadata,size=64M,uuid=${uuid_gpt_metadata};
-+partitions+=name=persist,size=32M,uuid=${uuid_gpt_persist};
-+partitions+=name=userdata,size=-,uuid=${uuid_gpt_userdata}
-+fastboot_raw_partition_tiboot3="0x0 0x800 mmcpart 1"
-+
-+adtb_idx=2
-+#endif
+  ARM: imx: Wrap i.MX config options in MACH_IMX (2024-09-02 13:23:36 -0300)
 
--- 
-2.34.1
+u-boot-imx-next-20240902
+------------------------
 
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/22211
+
+- Enable SPI NOR flash support and MTD partitions for phycore_imx8mp.
+- Convert mx6slevk to OF_UPSTREAM and watchdog DM.
+- Cleanup some mx5/mx6 USB options.
+- Make PLL settings configurable at board level.
+- Set CONFIG_SPL_LOAD_FIT_ADDRESS for verdin-imx8m/p.
+- Make the mxc-gpio reading state of GPIO pins in output mode to be consistent
+with the Linux kernel.
+- Add HUK derivation support for ELE AHAB.
+----------------------------------------------------------------
+Benjamin Hahn (2):
+      configs: phycore-imx8mp_defconfig: Enable SPI NOR flash support
+      board: phytec: phycore_imx8mp: Add mtd spi partitions
+
+Fabio Estevam (8):
+      mx6slevk: Convert to watchdog driver model
+      mx6slevk: Fix the boot device number
+      mx6slevk: Keep a single defconfig
+      mx6slevk: Convert to OF_UPSTREAM
+      imx: Remove CFG_MXC_USB_FLAGS
+      usb: ehci-mx5: Add a default for CFG_MXC_USB_PORTSC
+      mx5: Remove CFG_MXC_USB_PORT
+      imx: Remove CFG_MXC_USB_PORTSC
+
+Marek Vasut (2):
+      ARM: imx: Make PLL settings configurable at board level
+      ARM: imx: Wrap i.MX config options in MACH_IMX
+
+Mathieu Othacehe (1):
+      imx: ele_ahab: Add HUK derivation support
+
+Rogerio Guerra Borin (1):
+      configs: verdin-imx8m[mp]: set CONFIG_SPL_LOAD_FIT_ADDRESS
+
+Tomas Paukrt (1):
+      gpio: mxc_gpio: fix reading state of GPIO pins in output mode
+
+ arch/arm/dts/imx6sl-evk.dts                    |  658 ---------------
+ arch/arm/dts/imx6sl-pinfunc.h                  | 1073 ------------------------
+ arch/arm/dts/imx6sl.dtsi                       | 1005 ----------------------
+ arch/arm/include/asm/mach-imx/ele_api.h        |    2 +
+ arch/arm/mach-imx/Kconfig                      |    4 +
+ arch/arm/mach-imx/ele_ahab.c                   |   31 +
+ arch/arm/mach-imx/imx8m/clock_imx8mm.c         |   11 +-
+ arch/arm/mach-imx/mx6/Kconfig                  |    1 +
+ board/phytec/phycore_imx8mp/phycore-imx8mp.c   |   34 +
+ board/phytec/phycore_imx8mp/phycore_imx8mp.env |    4 +
+ configs/mx6slevk_defconfig                     |    7 +-
+ configs/mx6slevk_spinor_defconfig              |   71 --
+ configs/mx6slevk_spl_defconfig                 |   88 --
+ configs/phycore-imx8mp_defconfig               |   24 +
+ configs/verdin-imx8mm_defconfig                |    1 +
+ configs/verdin-imx8mp_defconfig                |    1 +
+ drivers/gpio/mxc_gpio.c                        |   10 +-
+ drivers/misc/imx_ele/ele_api.c                 |   77 ++
+ drivers/usb/host/ehci-mx5.c                    |    4 +
+ include/configs/apalis_imx6.h                  |    5 -
+ include/configs/aristainetos2.h                |    4 -
+ include/configs/brppt2.h                       |    3 -
+ include/configs/cl-som-imx7.h                  |    4 -
+ include/configs/cm_fx6.h                       |    4 -
+ include/configs/colibri-imx6ull.h              |    5 -
+ include/configs/colibri_imx6.h                 |    5 -
+ include/configs/colibri_imx7.h                 |    5 -
+ include/configs/dart_6ul.h                     |    4 -
+ include/configs/dh_imx6.h                      |    4 -
+ include/configs/display5.h                     |    1 -
+ include/configs/embestmx6boards.h              |    4 -
+ include/configs/ge_b1x5v2.h                    |    4 -
+ include/configs/gw_ventana.h                   |    4 -
+ include/configs/imx6_logic.h                   |    6 -
+ include/configs/imx6dl-mamoj.h                 |    4 -
+ include/configs/imx6q-bosch-acc.h              |    2 -
+ include/configs/imx7-cm.h                      |    3 -
+ include/configs/imx8mm-cl-iot-gate.h           |    3 -
+ include/configs/kontron-sl-mx6ul.h             |    5 -
+ include/configs/kontron-sl-mx8mm.h             |    5 -
+ include/configs/kp_imx53.h                     |    1 -
+ include/configs/kp_imx6q_tpc.h                 |    6 -
+ include/configs/liteboard.h                    |    6 -
+ include/configs/m53menlo.h                     |    2 -
+ include/configs/meerkat96.h                    |    3 -
+ include/configs/mx51evk.h                      |    1 -
+ include/configs/mx53cx9020.h                   |    2 -
+ include/configs/mx53loco.h                     |    2 -
+ include/configs/mx53ppd.h                      |    2 -
+ include/configs/mx6cuboxi.h                    |    3 -
+ include/configs/mx6memcal.h                    |    1 -
+ include/configs/mx6sabreauto.h                 |    4 -
+ include/configs/mx6sabresd.h                   |    6 -
+ include/configs/mx6slevk.h                     |   10 +-
+ include/configs/mx6sllevk.h                    |    5 -
+ include/configs/mx6sxsabreauto.h               |    5 -
+ include/configs/mx6sxsabresd.h                 |    5 -
+ include/configs/mx6ul_14x14_evk.h              |    6 -
+ include/configs/mx7dsabresd.h                  |    3 -
+ include/configs/mx7ulp_com.h                   |    1 -
+ include/configs/mys_6ulx.h                     |    4 -
+ include/configs/nitrogen6x.h                   |    4 -
+ include/configs/novena.h                       |    6 -
+ include/configs/npi_imx6ull.h                  |    4 -
+ include/configs/o4-imx6ull-nano.h              |    4 -
+ include/configs/opos6uldev.h                   |    6 -
+ include/configs/pcl063.h                       |    4 -
+ include/configs/pcl063_ull.h                   |    4 -
+ include/configs/pico-imx6.h                    |    4 -
+ include/configs/pico-imx6ul.h                  |    4 -
+ include/configs/pico-imx7d.h                   |    4 -
+ include/configs/somlabs_visionsom_6ull.h       |    6 -
+ include/configs/tbs2910.h                      |    5 -
+ include/configs/tqma6.h                        |    3 -
+ include/configs/usbarmory.h                    |    2 -
+ include/configs/verdin-imx8mm.h                |    3 -
+ include/configs/vining_2000.h                  |    2 -
+ include/configs/wandboard.h                    |    4 -
+ include/configs/warp7.h                        |    1 -
+ include/configs/xpress.h                       |    4 -
+ 80 files changed, 208 insertions(+), 3134 deletions(-)
+ delete mode 100644 arch/arm/dts/imx6sl-evk.dts
+ delete mode 100644 arch/arm/dts/imx6sl-pinfunc.h
+ delete mode 100644 arch/arm/dts/imx6sl.dtsi
+ delete mode 100644 configs/mx6slevk_spinor_defconfig
+ delete mode 100644 configs/mx6slevk_spl_defconfig
