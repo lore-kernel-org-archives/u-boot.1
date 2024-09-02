@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC137CA0ED3
-	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 17:43:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27026CD13CF
+	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 17:44:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4200F88C55;
-	Mon,  2 Sep 2024 19:43:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AACEE8876E;
+	Mon,  2 Sep 2024 19:44:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b1JYjXwK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="juOztE6F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E8B088C67; Mon,  2 Sep 2024 19:43:03 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id 9B2E288C61; Mon,  2 Sep 2024 19:44:11 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8704B882EF
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 19:43:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF6FD8876E
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 19:44:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-53346132348so5531522e87.2
- for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 10:43:01 -0700 (PDT)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-5343e75c642so5811769e87.2
+ for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 10:44:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725298981; x=1725903781; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1725299049; x=1725903849; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qAl246om1jTm4V7B/CD5rqwtwNCDx+A/b87INzhZ7FU=;
- b=b1JYjXwKxZKddRBYfnZL2XGH+OHx0fffyYRtP6odJMgjSd/FmGuCc55mWQuoNqFiw4
- axnM4h1G/QpoDoz0gkV1RApBZ+d00RvagBoaKgdhyQYhXsNK1/O5pfQSMsuA03ht8qdT
- 0rESi4DOv3gEEkx+fr/DnblhcFVcgOPcibvSOUWKuomeSCXJK3J0+DBrAwTThfxSQBB0
- 4YDKlFpPKg/HRJ1is/6UK5nsMtkEamR0gazq/BSMGjlo+2oXJ0xL9Os4qmQ7zUPSFQ+y
- zgUtI/9l/ucfgXALHaVgRzakzddcJBtdym9PH6ZdYWYtQab4Kw2Jy9lUvyI9K6p73qb2
- 40EQ==
+ bh=FCfrZkc1LK05ZREFrc/STwu4oht6Hs/gf2+9fxUT07I=;
+ b=juOztE6FJ4lV7EzFZCWiiRSFnWSmkhPmWKdmnEVp5udytkPi7HSbwPtpaXX3ceBCS1
+ /4YzPTyGvvYhXwB2hNA8oeUUgx19U5AUSnNI5OsAMkf/+uRORCz2ltibNEbSAceFpSHl
+ MdBhHfY2iY+4a+NYwzydNG85VeJ5ekzEdtUQRII1HbtoKy8X1/WszWwd2q5MRo6cWTTJ
+ KVvQDhgRD72kKCOG7nysUcRTxj4rLlXRhe7HuMFIR/zhvNh4YDhlU51UxhaKxhYfJTf6
+ AOkiSOF8d7xtR2IRiBJzZ3goTtAWl1nXh8npQ9E/wXfuvLz4ZM7dQvUI6Qqkdyp7V+XA
+ KqHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725298981; x=1725903781;
+ d=1e100.net; s=20230601; t=1725299049; x=1725903849;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qAl246om1jTm4V7B/CD5rqwtwNCDx+A/b87INzhZ7FU=;
- b=a1Yjl+fzZggH19DoID0KWom095cSTF21RZe1rkitEAHxv9Wx6qXMV+XUw5M3oqB3qv
- 4XnmNd5xKfq5+4N4vCiYpENBBJ3RSf2gblZUeeMDx72PB3UK+C/CgE4q5ebIf1CZd8iu
- vpTsUNYpSq8WbHBQ9Yp1CP4eRwu7O2Li3UBX5zM6c6aGhm1ajINqKhMUeQNFt3x+cLBB
- IJmklpCNAOa2DTLz0+jg422P4/hkgQ1H3e9D8dLX7jNHBTt5EGBm5LzWtIdoHirYg4C4
- MSujIOuwB7eVISmSwiQx/LDi7MB4/eWXfqeQyzF8XwPhoaBZlDoxNXYRyjBi1c6Dh3E/
- SlIQ==
-X-Gm-Message-State: AOJu0YxDRAWR194A0X2bIBERhn79KxakAj3ArI0dN9yz7HyGj0OW4kO5
- K0mprmGBj+CDweYGhrbNasvkPzT9C9QGg1YjrU9eJwrvusHFVe5jdHrPVJNPCrCimN+FNH6K/dN
- RU9zJmp+KTLMYMo8EO8KB5YBbXRatoA==
-X-Google-Smtp-Source: AGHT+IEMQM1FGGpvEdpPEF9LyUmV9KD72e3Gf2Vb+0tS3kva/q9PTTvu2ZbJeqkWOhcmLnI6FeYkMV35v9SztvMZojI=
-X-Received: by 2002:a05:6512:1091:b0:52b:c1cc:51f1 with SMTP id
- 2adb3069b0e04-53546b2597emr7327149e87.23.1725298980391; Mon, 02 Sep 2024
- 10:43:00 -0700 (PDT)
+ bh=FCfrZkc1LK05ZREFrc/STwu4oht6Hs/gf2+9fxUT07I=;
+ b=lg+0K1VRKhTPTEfShFmyJ0xbMlNH1dlP/7xu5mWY28QHEyf4hR0i0BH/iEMQwlLAIi
+ /CHnIDDc0BqkQ4q5CtBt6HVBiEuXJ4d5Y+yLnafnWZlqTh1mzojr2RJAczWkaKMc9Tph
+ zp0srOQ8aauun76OWpGY4mSlA7JcnI5T0v43Gen8tpK3FrZIwRjyJSZj/Ugrah8UBmKl
+ sRjSvnXt3BdJ15aPPTTUV4vxp6QJHSWwtOWRAghuKKlHgg5gls25Hv6eTmSLVweWrSYP
+ k4WCauYUUajapks42LX9ljQ7IWw4y2B1rDSRZxaNOaDXshdPdXpY8GtLsHr8CROPCl4n
+ 5eUQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWBhOtRs0xRCd6iGTF5Ujt73PdbUf0m3+PT2wfQxd1UR4eJjHtyzixsRDECaPwqnjN2pKt1vfo=@lists.denx.de
+X-Gm-Message-State: AOJu0YzVJT8TWhaU94Sp0SCRHZZ+XMCwtwVY5KeIRXNV2AtGwt8VB+yw
+ 9l1EcLhIKfMKzWN8fLn0el81pUppTLDaRuJ/mwzon0I7QKeGvqhZhPrROd3SPBZ0tYQgkIlqF9v
+ Ku7uTY4sRuduVi1u8ivR0VwIjLzA=
+X-Google-Smtp-Source: AGHT+IHHPZ+/O/NwEmwPRukaq9NyOVFN2P5P8HbbaQHHDdPpSmBw0TJHeomfomAs0NFR/z3RnZYZVXBoOZq1TGieb/g=
+X-Received: by 2002:a05:6512:4016:b0:52c:e3bd:c70b with SMTP id
+ 2adb3069b0e04-53546afae58mr8522948e87.1.1725299048558; Mon, 02 Sep 2024
+ 10:44:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240826180454.2778016-1-festevam@gmail.com>
-In-Reply-To: <20240826180454.2778016-1-festevam@gmail.com>
+References: <20240828132529.3098961-1-festevam@gmail.com>
+In-Reply-To: <20240828132529.3098961-1-festevam@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 2 Sep 2024 14:42:49 -0300
-Message-ID: <CAOMZO5ARqAkVCmC-AaKeuiT=PJuzyAbY9cSR97C7JS3_Xm226Q@mail.gmail.com>
-Subject: Re: [PATCH 1/4] mx6slevk: Convert to watchdog driver model
+Date: Mon, 2 Sep 2024 14:43:57 -0300
+Message-ID: <CAOMZO5AfuTROcB9tWMRy3LjuzC2QjjW-VvoUXAoSJYHqkkykAA@mail.gmail.com>
+Subject: Re: [PATCH v3 1/4] imx: Remove CFG_MXC_USB_FLAGS
 To: peng.fan@nxp.com
-Cc: u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
+Cc: marex@denx.de, u-boot@lists.denx.de, tharvey@gateworks.com, smoch@web.de, 
+ Fabio Estevam <festevam@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,17 +90,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Aug 26, 2024 at 3:05=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
-wrote:
->
-> From: Fabio Estevam <festevam@denx.de>
->
-> Commit 68dcbdd594d4 ("ARM: imx: Add weak default reset_cpu()") caused
-> the 'reset' command in U-Boot to not cause a board reset.
->
-> Fix it by switching to the watchdog driver model via sysreset, which
-> is the preferred method for implementing the watchdog reset.
->
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
+On Wed, Aug 28, 2024 at 10:25=E2=80=AFAM Fabio Estevam <festevam@gmail.com>=
+ wrote:
 
-Applied all, thanks.
+>  include/configs/m53menlo.h               | 1 -
+>  include/configs/mx53cx9020.h             | 1 -
+>  include/configs/mx53loco.h               | 1 -
+>  include/configs/mx53ppd.h                | 1 -
+
+I kept the mx5 lines and applied all, thanks.
