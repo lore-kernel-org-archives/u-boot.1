@@ -4,105 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1E1CCD13CF
-	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 16:26:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B94AFCD13CF
+	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 16:31:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 348C388875;
-	Mon,  2 Sep 2024 18:26:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0C65388875;
+	Mon,  2 Sep 2024 18:31:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yvGscgla";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="dTPvOIgf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5990088C39; Mon,  2 Sep 2024 18:26:24 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
+ id 0C08A88C59; Mon,  2 Sep 2024 18:31:25 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 15F6988363
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 18:26:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CB5588860
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 18:31:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-374c962e5adso708128f8f.1
- for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 09:26:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=glaroque@baylibre.com
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-42c7bc97423so21720365e9.0
+ for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 09:31:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725294381; x=1725899181; darn=lists.denx.de;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=U0IRX6WpW/9MmbP4RjtAoTzg2pR3yhtmDYoE75t5k3c=;
- b=yvGscglaEYZis+JAuD5nBkiy/G/YVcAFbLOrNLSH7OqE04JNNUkgjGwW0YyN4Fcmdd
- Ac9BlqqcTs64YDtdRTZ1C7cZMalXdzs7bfpdmiejA8BsT/O5YTVw70uPjCKZHJWPFXP0
- N9qLXUH7dwFGY780ri6Fd4qv+dAVvpndLPAg2vRX65vPVkrzp/fpYGmo6TAptm/oStWM
- H9oQHvJvndmZT3ATcZqoQNMhbLZvhKdr/b/oAsMctw/yWjGKr7VNkp03YtAl1hOdG0Lp
- F08vkOMpZ2fQqIxpa0oIzURVQT3frtzYUAw00CuGBE2hUwfbOc90pKSdPTjm2juvJ99m
- Pi1A==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1725294682; x=1725899482;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ohgXiGysGRgjwtc3oN4t1LeYOS2E/43dJj8URgQ7jMw=;
+ b=dTPvOIgfIgLWT9QcOirJez4Q86zoSVg8QzKIqxNsbptq1D7iIUPYm/b+Llanff0g2b
+ KgkgXwso51BuAKYw/q2/Ptg3sSnXw2WBwnA88Iwvl3zSR5j+bhqExODelcJDXqFIWhAH
+ Df1HrafQoHsTrgw4iEUgpCjKHduhijm8O2xQe5h7VtbtPg9iE0IkyJMgQrZ2F/m5xTLp
+ Vgd3LIOjHt4tqoppuvwQRCik+/RdU0V0prKeoQrdfekzosndxQLcfU2/HPYzevn/YbVz
+ DMbR21O+ZmlbecUhrFqI8QBaq/E7fbgkounRXde3ESf0Pj9mRl66buFSU3woc/8/9qeQ
+ NbdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725294381; x=1725899181;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=U0IRX6WpW/9MmbP4RjtAoTzg2pR3yhtmDYoE75t5k3c=;
- b=u+st4pziQ3/x8ROSt+hXphKt2l2XMQTkw5zzm5mTiSLrigzDsfaKF+s0H7qPLG/7fq
- KkNqP4bYBGMALZ5bwJV5I3vf9sd/iV8W5S4duiO2oZJeEMK5fTR39iXGBB4DKAFuB3UA
- uKDe+yKoIxt9YRyv15X5O9r+qn0Q+LrkcyeHRrA6boqbPecwDNXYiU6EvmmoCO7iRtRp
- 6UdcTG2KQyvScVeM+dtJ6IxkGTihMjJ7Hf6EogNVIaSXbfB/ZEmPEbBWUwO8gUs7zn4l
- uZIbEAMWYpRluLyhqonMywCEoLYDpvYN1vtzmTAmeRpM2yFQiT/miZVqE1tanVlj9X7F
- n9sQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVdkESUt2Jh0RBqVu6xuebYR318xaXlHsvBJ/IttMMt8YVtdDXgisRg/Og7ex+IQ6KazJKV2+c=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy41gMOyj5VI7CwdXhaZArBzoKTiFWUB447uEL82xeC1azeMLKO
- +THDGxGoGP5vdbyAORBHA2T9E9qIVSVVVw727NGtVuph3f/mrHZRrSkxsDC8Bks=
-X-Google-Smtp-Source: AGHT+IEkQ86FRaqwu3nwXwwIeuSM10p8VSHHU3bEodYOQhl1hwK0nUiYLrTGt/Tm3krPQg1BhW0fRQ==
-X-Received: by 2002:a5d:47cb:0:b0:363:ac4d:c44f with SMTP id
- ffacd0b85a97d-374a91a4118mr7694892f8f.17.1725294380976; 
- Mon, 02 Sep 2024 09:26:20 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:7dba:3cd0:a1f4:e3fa?
- ([2a01:e0a:982:cbb0:7dba:3cd0:a1f4:e3fa])
+ d=1e100.net; s=20230601; t=1725294682; x=1725899482;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ohgXiGysGRgjwtc3oN4t1LeYOS2E/43dJj8URgQ7jMw=;
+ b=IMgmuj61SxAY2EzZTATm0ysQE/vnnm6U/6CRRUkYjX7YmKAlQwbOxI7TeuG2Wkm44l
+ YCyq99qdLDBa0KcAW1HXsDRfy25L9UqfFSSKlrT+S1/wAEdcvtnBRxT26faMQL+2ofA+
+ C3GGCcAt+Tpe2g6FjJ/WKryi4SIVtr05HGOewD9pR6GvhD791q+FpTT8NtzWeMNHSMvV
+ Hdc2rN8X0rSgT2wJtioeSjFrGsO2kuCc1lci0ftOOV3UxOgblVwznwfDZa765NlZFT7o
+ 3f7vn2/Oi+XhlNJdMgAXuLT3CyAGWPEESS3E7GP0P9MI8aKcUT2wRBABq9nZ9+A9p0Or
+ vh7Q==
+X-Gm-Message-State: AOJu0Yy+Qceq4v4SAVVC/WCydEwgZ30eIbfrg08gJctdmw8O1ZvlR3sf
+ nPVgHQYyki/A5rwVCGb1ft4rWY7CBBsPwLaj81sCarNParmoaRISyuSfINQK7e4=
+X-Google-Smtp-Source: AGHT+IEvjU/L2BedUWvWSDIUMVC0DRdWXhT3a7XMLTxNlbV6v8Y+BLDGsrrB19CRfMESR4bTW0ZXqg==
+X-Received: by 2002:a05:600c:a03:b0:426:5f09:cf53 with SMTP id
+ 5b1f17b1804b1-42bb01b9c73mr145898215e9.15.1725294681626; 
+ Mon, 02 Sep 2024 09:31:21 -0700 (PDT)
+Received: from [127.0.1.1] ([2a05:6e02:10a5:e010:36ea:3dbe:c83a:7e39])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-374bfbfc7b7sm6898110f8f.88.2024.09.02.09.26.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 02 Sep 2024 09:26:20 -0700 (PDT)
-Message-ID: <024f632a-8139-4673-bbcf-0b8e5b633624@linaro.org>
-Date: Mon, 2 Sep 2024 18:26:20 +0200
+ 5b1f17b1804b1-42bb6e274ccsm145122185e9.37.2024.09.02.09.31.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 02 Sep 2024 09:31:21 -0700 (PDT)
+From: Guillaume La Roque <glaroque@baylibre.com>
+Subject: [PATCH 0/3] Add Android 14 bootflow support for AM62X and AM62P board
+Date: Mon, 02 Sep 2024 18:31:18 +0200
+Message-Id: <20240902-sitaraupstream-v1-0-0c478c33c08b@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [GIT PULL] Please pull u-boot-amlogic-next-20240902
-To: trini@konsulko.com
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAFbo1WYC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxMDC2MD3eLMksSixNKC4pKi1MRcXdMkQ4s04yRLCyOTNCWgpoKi1LTMCrC
+ B0bG1tQD9Xf+WYAAAAA==
+To: Bryan Brattlof <bb@ti.com>, Tom Rini <trini@konsulko.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Nishanth Menon <nm@ti.com>, 
+ Robert Nelson <robertcnelson@gmail.com>, 
+ Vignesh Raghavendra <vigneshr@ti.com>
+Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Vishal Mahaveer <vishalm@ti.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>
+X-Mailer: b4 0.14.1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,41 +93,42 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Ths patchset add support of Android 14 with boot image version 4
+for :
+- AM62X-SK EVM: https://www.ti.com/tool/SK-AM62B
+- BeaglePlay: https://beagleplay.org/
+- AM62PX-SK EVM: https://www.ti.com/tool/SK-AM62P-LP
 
-A simple set of changes to allow using the bootrom NAND pages, ported from Linux.
+Android Images use to test this series are on the Official TI website:
+- AM62x/BeaglePlay: https://www.ti.com/tool/PROCESSOR-SDK-AM62X
+- AM62PX: https://www.ti.com/tool/PROCESSOR-SDK-AM62P
 
-Thanks,
-Neil
+Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
+---
+Guillaume La Roque (1):
+      board: ti: am62x_evm: Add android bootflow
 
-The following changes since commit ee2af844ba1b27b2e959c4e649e4b769fbeb4074:
+Mattijs Korpershoek (2):
+      board: beagle: beagleplay: Add android bootflow support
+      board: ti: am62px: Add android bootflow support
 
-   Merge tag 'efi-2024-10-rc4' of https://source.denx.de/u-boot/custodians/u-boot-efi (2024-08-24 14:03:28 -0600)
+ board/beagle/beagleplay/beagleplay.env | 30 ++++++++++++++++++++++++++++++
+ board/ti/am62px/am62px.env             |  5 +++++
+ board/ti/am62x/am62x.env               |  5 +++++
+ configs/am62x_a53_android.config       | 34 ++++++++++++++++++++++++++++++++++
+ doc/board/ti/am62x_sk.rst              | 14 ++++++++++++++
+ include/env/ti/android.env             | 31 +++++++++++++++++++++++++++++++
+ 6 files changed, 119 insertions(+)
+---
+base-commit: 57949a99b7bd0aa21abbde1ffa7e50e5d9e10a4e
+change-id: 20240830-sitaraupstream-5b18f3b9824f
 
-are available in the Git repository at:
+Best regards,
+-- 
+Guillaume La Roque <glaroque@baylibre.com>
 
-   https://source.denx.de/u-boot/custodians/u-boot-amlogic.git tags/u-boot-amlogic-next-20240902
-
-for you to fetch changes up to 35ff967a99e97b523732096628bdbc78758922f6:
-
-   mtd: rawnand: meson: read/write access for boot ROM pages (2024-08-28 16:05:45 +0200)
-
-----------------------------------------------------------------
-- meson_nand: R/W support for pages used by boot ROM
-
-----------------------------------------------------------------
-Arseniy Krasnov (3):
-       mtd: rawnand: nand_base: support for 'NAND_IS_BOOT_MEDIUM' flag
-       mtd: rawnand: meson: refactor use of 'meson_nfc_cmd_access()'
-       mtd: rawnand: meson: read/write access for boot ROM pages
-
-  drivers/mtd/nand/raw/meson_nand.c | 84 ++++++++++++++++++++++++++-------------
-  drivers/mtd/nand/raw/nand_base.c  |  3 ++
-  include/linux/mtd/rawnand.h       |  5 +++
-  3 files changed, 65 insertions(+), 27 deletions(-)
