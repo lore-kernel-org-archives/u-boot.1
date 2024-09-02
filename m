@@ -4,56 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF269CD13CF
-	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 18:59:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39F1ECD13CF
+	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 20:09:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34F0C88CF6;
-	Mon,  2 Sep 2024 20:59:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 44BAC88C41;
+	Mon,  2 Sep 2024 22:09:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1725303554;
-	bh=5RvF0/eNrDBy4jAAq7wcDIyoKEDnyg21O1x1h/BTBzM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=0LcgGAeaI5X8B47pkaDC7Z73g/9YrgxwMBqepdCWudN0suolXBIcoEiuxrav8Okc1
-	 0TufU64/oPUxT0A2/dKfwIbI128oGYYvFC9uEiORczXdq0304ZkHc+96HAuzhvcIHS
-	 0OJ6yqZFdkDwFji7OAdx+1j/Ih3gUsC9V3ykHvv8snxcHmeP+2OYm3yakscFeFgwYH
-	 OzxAduW2JhJIBq0OkrxeHnP9Bv6xeSzQWw1HK197FXMEIz2huXetWvChpmvGI9I3Ba
-	 S6J8mqGKTEhla+GnjB6YaAFxU4orvjWMaFDkIxI/gOzbvQvXrn+PW/TbKjx71Hh3iN
-	 FB0+j0AJfHUHQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ihgObFTv";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 8C00F88C41; Mon,  2 Sep 2024 22:09:03 +0200 (CEST)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 54C9088CAF;
- Mon,  2 Sep 2024 20:59:12 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1725303552;
- bh=5RvF0/eNrDBy4jAAq7wcDIyoKEDnyg21O1x1h/BTBzM=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=YpSGMXoURvG1UmfrQC5bipEFWG3dxazF7TIheBzzkm3sPPC7Sihm2EEAUDGp0eGQn
- CADhptGbNYW5NpPUWxXoexG8bYPjOAw4WA21UM5o/Pe4cHuPrCDoHuRYKwRa5pGdaH
- mLu7DJSfmVkVxzX+P0k8KRY/lcicJ3U6d+1FIMNB/xVHYAIPyOZ9t+JAa6EGqECdxN
- qX6UYVwL5aU8Tka2ERCy1lLbKhjaow4mLj9bI3S1hrN8W2B8zZdDw17wh87HylGfOC
- psc0bAyasRH8nMGD5VMLZ9SLGcqgHUIg1YmNi3+nNPataJeSiBY1CwxCNcyyHK8ZLt
- anl2Zvaifs4HA==
-Message-ID: <538fdc56-d06f-4cdb-8467-2439a43e1725@denx.de>
-Date: Mon, 2 Sep 2024 20:58:21 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 1869D88498
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 22:08:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-6bf9db9740aso20008196d6.2
+ for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 13:08:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1725307738; x=1725912538; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ENXvbpTAWpIXoqCYw2Unb2JiiUPx1rBJlAFMMec/5gE=;
+ b=ihgObFTvXKaxg6Mf2MKYB630MP6mMqdW5f1IxMh0dHKOj9BroJXyU75y4rr2JbfkWU
+ jlYSLNkzgjd4jvzuYPqk7Pq8AMwIdAQzlrMhUEqMKmx90ta96l5sAteZGVjXyDl+L5uL
+ 8PJSGXxmaEvdT0vq2tMtfWsfMfNo1MzlcSz0I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725307738; x=1725912538;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ENXvbpTAWpIXoqCYw2Unb2JiiUPx1rBJlAFMMec/5gE=;
+ b=ZXjr/OuhIXEYVH2cl+Qab8rvUj2++DFq361arkar00jI1rBD2W99SuCNiKRwH+oeb9
+ vtNX1A6+eXktTKVQme2YeAPaglQjMqBPBt5tEJjQ8hrU1+tyQDT6uOdXoWdmvT8peS6f
+ QRqfyv5DxS7Q+M6guiVExCaMr2CG7CeIZS4biZAQRCWMW2vtGzfe1618aIWE65vNMUYY
+ uL6vaHAga19uB44uu/N3Os+m57tbSLiZpJFtIneQ1sGsvl5o75muGUMvd6HMaTKqaRjs
+ xWguIK1EA/X/V92/HbYR9byVS29fvWFWECoOmu6mpGnSTKGHHQGCKUHbX+Gnnj8b13MG
+ pteQ==
+X-Gm-Message-State: AOJu0YzVGSHJmcIpALJTqi2bFIyiRAj2ZJM2ZYTtHPtXk74DavK2vVcg
+ TdyRBTZgNg2Me1KkYqWangUtr6XDhRIhYdFdpTBl/OOiF1OC4XSgThgkKolMQ8WmslcUSUrHccn
+ 7
+X-Google-Smtp-Source: AGHT+IE3sX9UlybjNbCb9fVIVuBPqr25Sl5xOBrqLzgQ12xg5O0HIVKy77FfhaXvq6R/1qoOGKVoPw==
+X-Received: by 2002:a05:6214:2dc7:b0:6c3:4736:17d1 with SMTP id
+ 6a1803df08f44-6c355e65a14mr98963526d6.10.1725307737823; 
+ Mon, 02 Sep 2024 13:08:57 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6c36e798771sm6934606d6.68.2024.09.02.13.08.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 02 Sep 2024 13:08:57 -0700 (PDT)
+Date: Mon, 2 Sep 2024 14:08:54 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: [ANN] U-Boot v2024.10-rc4 released
+Message-ID: <20240902200854.GE2479150@bill-the-cat>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/7] usb: onboard-hub: Bail out if peer hub is already
- probed
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
-Cc: michal.simek@amd.com, fabrice.gasnier@foss.st.com, git@amd.com
-References: <20240605100221.3571-1-venkatesh.abbarapu@amd.com>
- <20240605100221.3571-6-venkatesh.abbarapu@amd.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240605100221.3571-6-venkatesh.abbarapu@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="qDOE9oYQuZc7nwm/"
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,70 +86,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/5/24 12:02 PM, Venkatesh Yadav Abbarapu wrote:
-> Many physical hub chips include multiple logical hubs to handle both
-> USB and 
 
-Remove the 'and' here.
+--qDOE9oYQuZc7nwm/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> 2 and 3
+Hey all,
 
-USB 2.0 and USB 3.0 .
+It's release day and here is -rc4. Things have been and I am optimistic
+will remain fairly quiet moving forward.
 
->. Both logical hubs will then match the onboard hub
-> driver, which means it will end up with two driver instances trying to
-> control the reset GPIO that is only present once on the physical chip.
-> 
-> The reference for this change is taken from
-> https://lore.barebox.org/barebox/20240327165554.894805-1-l.stach@pengutronix.de/
-> 
-> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> ---
->   common/usb_onboard_hub.c | 16 +++++++++++++++-
->   1 file changed, 15 insertions(+), 1 deletion(-)
-> 
-> diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-> index 09ce452af1b..519bad337e1 100644
-> --- a/common/usb_onboard_hub.c
-> +++ b/common/usb_onboard_hub.c
-> @@ -11,6 +11,7 @@
->   #include <common.h>
->   #include <dm.h>
->   #include <dm/device_compat.h>
-> +#include <dm/uclass-internal.h>
->   #include <i2c.h>
->   #include <linux/delay.h>
->   #include <power/regulator.h>
-> @@ -21,7 +22,7 @@
->   #define USB5744_CONFIG_REG_ACCESS_LSB 0x99
->   
->   struct onboard_hub {
-> -	struct udevice *vdd;
-> +	struct udevice *vdd, *dev;
+In terms of a changelog,=20
+git log --merges v2024.10-rc3..v2024.10-rc4
+contains what I've pulled but as always, better PR messages and tags
+will provide better results here.
 
-One field per line please.
+I hope to remain on schedule and that means the rest of the rcs every
+other Monday, and with final release on Monday, October 7th, 2024.
+Thanks all!
 
->   	struct gpio_desc *reset_gpio;
->   };
->   
-> @@ -106,8 +107,18 @@ static int usb_onboard_hub_probe(struct udevice *dev)
->   	struct onboard_hub_data *data =
->   		(struct onboard_hub_data *)dev_get_driver_data(dev);
->   	struct onboard_hub *hub = dev_get_priv(dev);
-> +	struct ofnode_phandle_args phandle;
-> +	struct udevice *hub_dev;
->   	int ret;
->   
-> +	if (!dev_read_phandle_with_args(dev, "peer-hub", NULL, 0, 0, &phandle)) {
-> +		if (ofnode_valid(phandle.node)) {
-> +			ret = uclass_find_device_by_ofnode(UCLASS_USB_HUB, phandle.node, &hub_dev);
-> +			if (hub_dev && hub_dev->priv_)
-> +				return 0;
-> +		}
-> +	}
-> +
+--=20
+Tom
 
-Implement .bind function of this driver, bind the correct "half" of the 
-hub that you want the driver to bind to, and return -ENODEV for the 
-other "half". See rpc_spi_bind() in drivers/spi/renesas_rpc_spi.c for 
-example of this.
+--qDOE9oYQuZc7nwm/
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbWG1YACgkQFHw5/5Y0
+tyxqxQv/SeolYd4MrGjRRPhGqZBWUkZh5Feudr8lGRbukGT+VqFMzZiCTTAcpqlw
+a5pfuWNRv4iZsheyt2bKXedYtvMaOKvkZLdx6nehgHweBBob0eiZZc4d6H1FOV2D
+KNdJZzxs6zwN+m/jc/5P2/WoANIMOyTtoHY6o5JNU7eyJxM+i46NI6EaqHOoN93f
+u3DU/biKNnfRoGSfR0J5sW3R4myT3ls860XdlTCDIBN4VomAhPAmXPKfOISQssGA
+DVXZh5gRV09nXT+ZU5XdurC4oHm4xEUffxAIC2/DJ0niWIK1qPbi8dTxaqmdBYad
+3gBpej+9PfmrdsxTRXIsnNbB97HbCSpT+sJuVSklwTZeooBIPyzDu1P6VOWOVThK
+umfBseL8c7PpP6RIkQCQQ1ZuFMq3/ltjJMF8tOAQL57smIsigm46Ir2WWC1s/P7j
+1zVJTC3oucPRDDYrZJFi1myyhSG4AT1mabOEKJuRXLVIER8s4PfA1sXoCLvzaTvD
+wMq0QhZK
+=N2/m
+-----END PGP SIGNATURE-----
+
+--qDOE9oYQuZc7nwm/--
