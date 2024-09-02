@@ -4,80 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8374CA0ED3
-	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 16:19:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1E1CCD13CF
+	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 16:26:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 331F588C39;
-	Mon,  2 Sep 2024 18:19:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 348C388875;
+	Mon,  2 Sep 2024 18:26:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jQDegF2T";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yvGscgla";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC04988C40; Mon,  2 Sep 2024 18:19:28 +0200 (CEST)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id 5990088C39; Mon,  2 Sep 2024 18:26:24 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FA5A88363
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 18:19:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 15F6988363
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 18:26:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-6c35b72f943so13367206d6.0
- for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 09:19:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-374c962e5adso708128f8f.1
+ for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 09:26:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1725293965; x=1725898765; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Z19wiATM+rI47+ayfHuiz3T9GfeKEzEh3tZQHlJtqiI=;
- b=jQDegF2T7dqKwMlGliOLrMMM8vqWkSsj8iYqN8Hf1nMC4nyU8Wygnh7bQhp5Pr/FQK
- QjYdUUQSVYasTDsQwzyXStv/CjsrfnJ5JOOwqIM/6fsx9775lOyHsEnYe7i+LI5IJ/yP
- t8HBQwflERGyT49XkFFgiclNtbSDe1dZtAvos=
+ d=linaro.org; s=google; t=1725294381; x=1725899181; darn=lists.denx.de;
+ h=content-transfer-encoding:organization:autocrypt:content-language
+ :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=U0IRX6WpW/9MmbP4RjtAoTzg2pR3yhtmDYoE75t5k3c=;
+ b=yvGscglaEYZis+JAuD5nBkiy/G/YVcAFbLOrNLSH7OqE04JNNUkgjGwW0YyN4Fcmdd
+ Ac9BlqqcTs64YDtdRTZ1C7cZMalXdzs7bfpdmiejA8BsT/O5YTVw70uPjCKZHJWPFXP0
+ N9qLXUH7dwFGY780ri6Fd4qv+dAVvpndLPAg2vRX65vPVkrzp/fpYGmo6TAptm/oStWM
+ H9oQHvJvndmZT3ATcZqoQNMhbLZvhKdr/b/oAsMctw/yWjGKr7VNkp03YtAl1hOdG0Lp
+ F08vkOMpZ2fQqIxpa0oIzURVQT3frtzYUAw00CuGBE2hUwfbOc90pKSdPTjm2juvJ99m
+ Pi1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725293965; x=1725898765;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Z19wiATM+rI47+ayfHuiz3T9GfeKEzEh3tZQHlJtqiI=;
- b=gMpZ5CuuwxPVsWmbgNFdR5IkMwCCqP1Os6iXgiC/S4IOwjxhPQaF/ZTajwLXqrHhCN
- KChvpAa2AbDiyUrLu3xHTefEMI5G8qgWvf4/mNxg74kLAAlMZOWDDlmt0BghUqs2uZQj
- noms7Pa/Er9aiI2KyHubHXX0OEyBT+WG9LwivkNve26y3rPYOh+ajkjtPkhDwBCLzQKE
- vPECTVtggk9C1Il3eJ0E4d0ywGP2ZZPnGY0+iomZy/8AnGjfeY/bZHXJW9AYNGtQgefa
- TClLQ5Mko4op7zf5U3gD/PQAHHxWJBnZSQyujL1JHUYQEqnLXCRZM5Um8EPIUwyOKmmC
- p6Ug==
+ d=1e100.net; s=20230601; t=1725294381; x=1725899181;
+ h=content-transfer-encoding:organization:autocrypt:content-language
+ :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=U0IRX6WpW/9MmbP4RjtAoTzg2pR3yhtmDYoE75t5k3c=;
+ b=u+st4pziQ3/x8ROSt+hXphKt2l2XMQTkw5zzm5mTiSLrigzDsfaKF+s0H7qPLG/7fq
+ KkNqP4bYBGMALZ5bwJV5I3vf9sd/iV8W5S4duiO2oZJeEMK5fTR39iXGBB4DKAFuB3UA
+ uKDe+yKoIxt9YRyv15X5O9r+qn0Q+LrkcyeHRrA6boqbPecwDNXYiU6EvmmoCO7iRtRp
+ 6UdcTG2KQyvScVeM+dtJ6IxkGTihMjJ7Hf6EogNVIaSXbfB/ZEmPEbBWUwO8gUs7zn4l
+ uZIbEAMWYpRluLyhqonMywCEoLYDpvYN1vtzmTAmeRpM2yFQiT/miZVqE1tanVlj9X7F
+ n9sQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXFxfZnFV7P+F3TKnKjft+2DcjYOz+NSyOhwm1Ln7pQRXVNmfMIX/tMUl5oNoUMr/vr1WLuLr0=@lists.denx.de
-X-Gm-Message-State: AOJu0YwGYlPcoT4PRRmeiYFMzhEG6j6KbEZwBU01YyOLonSBfvm9YesW
- H4tFlDW2g4KD7h2XMXwwnmkev0D7KNm3LZqIImCf/XgELp7dBxi7k0Y97n+zRIE=
-X-Google-Smtp-Source: AGHT+IHtipve8LS0YAVcLP9IhIwpMDE2qxdOv1leQxMElkoEeAQCfgbnrwRr8FluTn6QsRGSj1Y9xg==
-X-Received: by 2002:a05:6214:c8:b0:6c3:5392:4e03 with SMTP id
- 6a1803df08f44-6c35392539fmr158878526d6.21.1725293965166; 
- Mon, 02 Sep 2024 09:19:25 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
+ AJvYcCVdkESUt2Jh0RBqVu6xuebYR318xaXlHsvBJ/IttMMt8YVtdDXgisRg/Og7ex+IQ6KazJKV2+c=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy41gMOyj5VI7CwdXhaZArBzoKTiFWUB447uEL82xeC1azeMLKO
+ +THDGxGoGP5vdbyAORBHA2T9E9qIVSVVVw727NGtVuph3f/mrHZRrSkxsDC8Bks=
+X-Google-Smtp-Source: AGHT+IEkQ86FRaqwu3nwXwwIeuSM10p8VSHHU3bEodYOQhl1hwK0nUiYLrTGt/Tm3krPQg1BhW0fRQ==
+X-Received: by 2002:a5d:47cb:0:b0:363:ac4d:c44f with SMTP id
+ ffacd0b85a97d-374a91a4118mr7694892f8f.17.1725294380976; 
+ Mon, 02 Sep 2024 09:26:20 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:7dba:3cd0:a1f4:e3fa?
+ ([2a01:e0a:982:cbb0:7dba:3cd0:a1f4:e3fa])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6c35bd06de7sm20989456d6.17.2024.09.02.09.19.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Sep 2024 09:19:24 -0700 (PDT)
-Date: Mon, 2 Sep 2024 10:19:22 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- u-boot@lists.denx.de, git@amd.com
-Subject: Re: [u-boot-test-hooks][PATCH] travis-ci: Skip the saveenv and reset
- test cases on xilinx zynq qemu
-Message-ID: <20240902161922.GD2479150@bill-the-cat>
-References: <20240902095357.311-1-venkatesh.abbarapu@amd.com>
- <93b022d1-63ae-4b7a-aa62-6be2a5c2a7e1@amd.com>
+ ffacd0b85a97d-374bfbfc7b7sm6898110f8f.88.2024.09.02.09.26.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 02 Sep 2024 09:26:20 -0700 (PDT)
+Message-ID: <024f632a-8139-4673-bbcf-0b8e5b633624@linaro.org>
+Date: Mon, 2 Sep 2024 18:26:20 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="lfSGlSTZfzkR9FRV"
-Content-Disposition: inline
-In-Reply-To: <93b022d1-63ae-4b7a-aa62-6be2a5c2a7e1@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [GIT PULL] Please pull u-boot-amlogic-next-20240902
+To: trini@konsulko.com
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,91 +114,41 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---lfSGlSTZfzkR9FRV
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+A simple set of changes to allow using the bootrom NAND pages, ported from Linux.
 
-On Mon, Sep 02, 2024 at 12:11:22PM +0200, Michal Simek wrote:
-> Hi Tom,
->=20
-> On 9/2/24 11:53, Venkatesh Yadav Abbarapu wrote:
-> > There is an issue with the xilinx zynq qemu qspi driver during the erase
-> > operation in dual parallel configuration, so skip these
-> > tests for now.
-> >=20
-> > Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> > ---
-> >   py/travis-ci/u_boot_boardenv_xilinx_zynq_virt_qemu.py | 2 ++
-> >   py/travis-ci/u_boot_boardenv_zynq_zc702_qemu.py       | 2 ++
-> >   2 files changed, 4 insertions(+)
-> >=20
-> > diff --git a/py/travis-ci/u_boot_boardenv_xilinx_zynq_virt_qemu.py b/py=
-/travis-ci/u_boot_boardenv_xilinx_zynq_virt_qemu.py
-> > index 267285f..42685ad 100644
-> > --- a/py/travis-ci/u_boot_boardenv_xilinx_zynq_virt_qemu.py
-> > +++ b/py/travis-ci/u_boot_boardenv_xilinx_zynq_virt_qemu.py
-> > @@ -1 +1,3 @@
-> >   env__spl_skipped =3D True
-> > +env__saveenv_test_skip =3D True
-> > +env__reset_test_skip =3D True
-> > diff --git a/py/travis-ci/u_boot_boardenv_zynq_zc702_qemu.py b/py/travi=
-s-ci/u_boot_boardenv_zynq_zc702_qemu.py
-> > index 267285f..42685ad 100644
-> > --- a/py/travis-ci/u_boot_boardenv_zynq_zc702_qemu.py
-> > +++ b/py/travis-ci/u_boot_boardenv_zynq_zc702_qemu.py
-> > @@ -1 +1,3 @@
-> >   env__spl_skipped =3D True
-> > +env__saveenv_test_skip =3D True
-> > +env__reset_test_skip =3D True
->=20
->=20
-> CI found bug in Qemu which is reported here.
-> https://source.denx.de/u-boot/custodians/u-boot-microblaze/-/jobs/878781
->=20
-> as
->=20
-> ----------------------------- Captured stdout call ----------------------=
--------
-> Saving Environment to SPIFlash... Erasing SPI flash...qemu-system-arm:
-> ../util/fifo8.c:62: fifo8_pop: Assertion `fifo->num > 0' failed.
->=20
-> It is bug in Qemu and we have already asked our Qemu team to fix this but
-> hard to say when fix reach upstream and then there is CI pipeline update
-> too.
-> That's why the most sensible thing to do is disable these tests to be able
-> to pass CI for dual stacked/parallel configurations.
->=20
-> Acked-by: Michal Simek <michal.simek@amd.com>
+Thanks,
+Neil
 
-Thanks for explaining, I'm sure once QEMU is fixed and we've updated our
-Dockerfile to have it someone will send a revert for this change.
+The following changes since commit ee2af844ba1b27b2e959c4e649e4b769fbeb4074:
 
---=20
-Tom
+   Merge tag 'efi-2024-10-rc4' of https://source.denx.de/u-boot/custodians/u-boot-efi (2024-08-24 14:03:28 -0600)
 
---lfSGlSTZfzkR9FRV
-Content-Type: application/pgp-signature; name="signature.asc"
+are available in the Git repository at:
 
------BEGIN PGP SIGNATURE-----
+   https://source.denx.de/u-boot/custodians/u-boot-amlogic.git tags/u-boot-amlogic-next-20240902
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbV5YkACgkQFHw5/5Y0
-tyy4/gwAmy/aCi0LC5wb3pL6/ZLuPomlRumbnqGpmWvpeSe0JWAk1/joj8fUhjOd
-lfgfn7M7BqEMCbfcVcNkL/O05kr6km6NdEVmI7tKODwdYkD/iE33yAUXC0KmffWr
-ewt6PK0Xfqpm4djvqofmKCcd4WfN2vp9+ftPi66ddaK4A4tWGSXO9TeO+43rJXxr
-9RmepjOs1MtKl7xD4qdsIDiOVRPyinSwNRFHMhL39au5wdXZGW0QIvSUStyIiKqi
-sTOj35FeH3wZrvBfQg9ErRtED6ZUyHAWxrcWp31l+kUvFJkaTXrGQaJKX+ySmtMP
-ZmQwN6qoczkyJg6LgN64dxTkD3l5obfngPHe0Xb6vPqGSgzEdk+h1/BNh6H+7NKQ
-Ge++6ix9RI+GpN44Q32ZkWwqQdY06XsJMyzMb/rAeiZGNUhzeVF43h8AMcXjjVyG
-xLX1SaNZmM5OPpnXGm8FFY00qvUiyYGZB9zPgwZLDxdYTHObegPjQCGn8PUZeIJL
-SeF96YOj
-=RFay
------END PGP SIGNATURE-----
+for you to fetch changes up to 35ff967a99e97b523732096628bdbc78758922f6:
 
---lfSGlSTZfzkR9FRV--
+   mtd: rawnand: meson: read/write access for boot ROM pages (2024-08-28 16:05:45 +0200)
+
+----------------------------------------------------------------
+- meson_nand: R/W support for pages used by boot ROM
+
+----------------------------------------------------------------
+Arseniy Krasnov (3):
+       mtd: rawnand: nand_base: support for 'NAND_IS_BOOT_MEDIUM' flag
+       mtd: rawnand: meson: refactor use of 'meson_nfc_cmd_access()'
+       mtd: rawnand: meson: read/write access for boot ROM pages
+
+  drivers/mtd/nand/raw/meson_nand.c | 84 ++++++++++++++++++++++++++-------------
+  drivers/mtd/nand/raw/nand_base.c  |  3 ++
+  include/linux/mtd/rawnand.h       |  5 +++
+  3 files changed, 65 insertions(+), 27 deletions(-)
