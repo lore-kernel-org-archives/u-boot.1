@@ -4,162 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 651F4CD13CF
-	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 13:09:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A436CA0ED3
+	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 13:13:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA31887DC7;
-	Mon,  2 Sep 2024 15:09:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id C637C88C1C;
+	Mon,  2 Sep 2024 15:13:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="la7XWtnC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Pnl98jT4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B6A588A3C; Mon,  2 Sep 2024 15:09:18 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170130004.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::4])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 84D9088A3C; Mon,  2 Sep 2024 15:13:37 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1078987873
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 15:09:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id AA9A088C1C
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 15:13:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mLaFC/UKB98nCPlN3fSg/q8P9V0Kw4QE/90ynijPI7t7adJV0Bc5usgIPa3Cj5Ba1DGdiUGzCrcHOy9386O8OrqVT0ztV8pJN+shd60tdZm7RstJrFrBghN0edEnjThfwxGhhTzg70e37n3P8t/e4ltCx6Iu98hWxeEYF0xOWbKaVoDrvpMs6sdHDpBGfE3YsHalpnDPZ4jD5q9KoxCTbI0jl6pdchm5VeYxAguxHq2FLe7ruTUF2OgeDsUDOdZoqhp/Qm7/z0SLdHO5+OtQzYkpENjkyk4nfoNrNgc3gOLI7ZU4973yQoH/4vfISRswGT5xX7dWPHmcgXOQNQp5Cw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8/JODarbaBf9PdqtCPzsilWnsABxfq3NLyQPYFOguTY=;
- b=VkYIb3VFmHzst2g2uji/n8xtwacinFHRsH4IfbUE4eVJxAJGqSlLFgfrUhi4qjO/XN9RfpedQLzigqjECo8+MEUoNjDiLLPYlnkm7T4DTRZWCL5hDbH62uD+IdCWrZp1Zt9cBOpQtbcr0JqWfFQrms4y72mKZjTV81PU5XK+qxuk3CeaNJaxKHgngjkzykHN9EsZBlFyKk8bR63oduymcnZaTPCuAiz92q7fbftIAaYVmErqQ7xzKBM1V4zUMnEnwN7cQRjGGf+SG/xwQR9vBPcnO+VDQ7uMBgoEXn34q4RUObBY4P2aNYlM809dkCuk9/JRP2SLThCWYmLUSc8gJA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8/JODarbaBf9PdqtCPzsilWnsABxfq3NLyQPYFOguTY=;
- b=la7XWtnCMtZNpVJTcJd/FFtbHUAOpf2Tyk9/CQB4lb4GgNwOw1Zv0fRlO70OUYgwJChUHMqSohQ3gnD2gxzK0HB3BD1iJJWglU0CD3nCSX5BFmMm3VWxdHECrU+OAKFGk8rwpUVVBUnnRyfoxao1hE5wPP305hoPWC6dwA2AQQ8=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by VI1PR04MB6783.eurprd04.prod.outlook.com (2603:10a6:803:130::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.23; Mon, 2 Sep
- 2024 13:09:06 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%5]) with mapi id 15.20.7918.024; Mon, 2 Sep 2024
- 13:09:06 +0000
-Message-ID: <ccdf5291-604b-48bb-9e3d-8f3214483237@cherry.de>
-Date: Mon, 2 Sep 2024 15:09:03 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: guard call to tftp_start() with #if
- defined(CONFIG_CMD_TFTPBOOT)
-To: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-42c7a49152aso21059795e9.2
+ for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 06:13:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1725282815; x=1725887615; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=bE63JmFfQ0+Ab7/OwcOGltljG+c7yJ/ppoXquDcYrR4=;
+ b=Pnl98jT47zdg83qWU8mZhtUP0KEuQu9+LaVAE9Rdq8CNKuUd4+PlA8TPb1haBQOHPf
+ 7idhDhij4gEkw/K28MiQHfPb5kTh7XwhWtTVHNBGOrGV1dgdbgGlEMwq+YrYUl+ERAsD
+ OD16ylYgJDoRvNGmpGNBwruyjdyq+a//thBJ2cDBc8qnvtN3GxBfx6x2r1W5IApuU9pS
+ XLlTas6fwKzd38ueKJ+e1h/wDWwurRdIbxNTZTIeQ/uU6JEdmCnz1zRiT+VD/3efBoWt
+ PSiy6nEyvWOsjGOw9cnVULPrs7CHVInb7IoAiohLZyBcZv5dPDnlE1qTT77pxiavCVl1
+ SBeA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725282815; x=1725887615;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bE63JmFfQ0+Ab7/OwcOGltljG+c7yJ/ppoXquDcYrR4=;
+ b=nLAT2dr7tFQPEv4jT04zkzY0KX1Km73tZVB5fu49fOvplvz/WMae0CcbpYBo9uu9fE
+ EGgnfsEywvfHnN5g4cas72DjM+eZsSYcfusUZFeGPgE4e8PE+hmdHiWLUkLq/uc0zn8t
+ KTs3hMukZM/CihsSJzs6kFH6b75zrTCoL2r7gQ3eIJJM6qZmcXxnVcA9Dv39A0g2OKn0
+ lv1vkNSo8KvpXuEhhppKhz3Sox3Fr5HiFM5Ot6w6ve8X8cO73DzglxNYt2CQCNVwBr3q
+ U3AmvQ5KjRkXkT7QazOsxRp91QZqkPt79IKUMK34r2BWR1lMfAa/bw6iu19n0e7qT/3z
+ BrTw==
+X-Gm-Message-State: AOJu0Ywy3a7H0foi/59ltrRuolXt/HA2lVF+DjtNs+VZy1VxvHboNn+J
+ T+5a74McvTNBEDGrlE1ngEjgrjlF2tfJQfSujdgu3xY4qYQcs4xQjOOozyA0Rk0Y4C63G4rzhT5
+ 3xqclBg==
+X-Google-Smtp-Source: AGHT+IHigYj+I6SKsKS2oi1nOwaLrUniVo03ZbILbrCvIM8jSo6sod7v41roYNe5fRqp1XYYhsmjRA==
+X-Received: by 2002:a5d:570e:0:b0:374:c318:2190 with SMTP id
+ ffacd0b85a97d-374c3182363mr3839831f8f.59.1725282814724; 
+ Mon, 02 Sep 2024 06:13:34 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:6417:8cf6:a7f7:ee38])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-374c08e07b6sm6229388f8f.63.2024.09.02.06.13.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 02 Sep 2024 06:13:34 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ egnite GmbH <info@egnite.de>, Tom Rini <trini@konsulko.com>,
+ Heiko Schocher <hs@denx.de>, Simon Glass <sjg@chromium.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>
-References: <20240902125917.119941-1-jerome.forissier@linaro.org>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20240902125917.119941-1-jerome.forissier@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BE1P281CA0226.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:8c::17) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+Subject: [PATCH] configs/ethernut5.h: define CFG_SYS_I2C_RTC_ADDR
+ unconditionally
+Date: Mon,  2 Sep 2024 15:12:46 +0200
+Message-Id: <20240902131246.127897-1-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|VI1PR04MB6783:EE_
-X-MS-Office365-Filtering-Correlation-Id: db1036f5-7e5e-465a-0bdd-08dccb506ca4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Ty94VjUxZjlacVE0bzZQMWM4N0wvWXoremE0ZTRCRkhlckkwcStUNFlZTlhF?=
- =?utf-8?B?aldlenJIQWIrTm91ZjRYQUp5RzlFNFhvcEVWeEJNYjdvMHVrWURuZ3MyaUx1?=
- =?utf-8?B?aDFOWFh1UnNJRHBEcjl2VEJCamVuaG1LOUY2am5mWXpjN2JiQmhJMWFmOXZF?=
- =?utf-8?B?d2pCSk1OTDdRbWk3bkVvdHY5UlZsOU42cmhTMllYMkRFcjBubGEwN3NpMkJE?=
- =?utf-8?B?K3NHOFZuUEVya3JXS01SRW4yK1RMVThQUFBrT0JNNFNBNUhHRXRxYTQwVysz?=
- =?utf-8?B?RUhrNHAvNVhTN09IMVpiQm1wenJWR1RzM29XOWczUHBqWFBZajVpKzFkK0JD?=
- =?utf-8?B?U2xjMlpZM0hnSTF4SnZZWDYzZ1BQSzMvOVc2Q2I3SENxNWU3VkJ2RjNHWXgx?=
- =?utf-8?B?elpYS1dFbUZ5eDg1WGgxdTRCWEpUNzg0OTcxRUNCNzM4ZklncG1ZenlUOHJt?=
- =?utf-8?B?NEJCZzc4WlA0VzIvOTZWOTVQNDY5ODM1cW5COGZncHNsTVNCWXYzcFFTRUU3?=
- =?utf-8?B?YW1FTHJiZDNjOS9yZFFEUjlzTTF0YkYwcDJCRitnMG13YjlLdFFTaFVZZWJt?=
- =?utf-8?B?SmtyZFd0alBrZzdiVVgwUHdSZ2Q2SjAzQ1hjQjF5UFg2bWxnalo2ZlZiUDhn?=
- =?utf-8?B?UU9YbWo0a1pmVHB4dGVCVXR0TXRhSHhjMUZWQy9HS3Y4amJxVHptVVZ4b2sy?=
- =?utf-8?B?Y01ndStBR3Y1WFFiSUFqVHlVbEdVMTBtK3JjOUY1d2NoaGNVdkM3dnlFcnhL?=
- =?utf-8?B?SXdzWmw3YTNtamtSWVdLQVZ3UUR4UFFkYzdDZHliK2ZBWGxORDE0Tld0RThh?=
- =?utf-8?B?WURlQlpwWXhkT1pzVzhENnV6ZnJmaXd0aDdNTU95Y1dlQWoxenRaR3hCTjdO?=
- =?utf-8?B?dkQ4aVU4TTdsMExETVhhRkZja3U5WmdJeDN3dkljRW5GOW53THgzQXNNL0pP?=
- =?utf-8?B?c1NhNEdFSU1FaEJ1TVhkbVR1UWphT1VWajU2YUdCWHFzUFp5dzE4U2h2cDFP?=
- =?utf-8?B?M2xEek5DVjJHT3puRHlnOU8wSk9Ob01wdXloL1ZTSVpDaWw1VmNJbzhnZUg2?=
- =?utf-8?B?WGFmQWJWS0IxQy82aTluMzhCSjZvNlBZdEpiZWF0WVFGVmJhdkRqZWhRZ0ZH?=
- =?utf-8?B?WEZvVjZaejd4OWJOU3RxaFZLZjc3Z1Rrc3pPbC9iemdMRmRzczJBYlVUTkM2?=
- =?utf-8?B?bllZU3kvR0RmSU81WEVPeFFPMmp4azgvM3gzRnlpWFZDVUN4SWlmS0lhVzZQ?=
- =?utf-8?B?WVhjTkN3UHYwMFBvK21rZW1hUldGUkhyaUJyK1BsVWZEN0ZVSWxGVzRXZ1RE?=
- =?utf-8?B?aS94Y0NaT1k1Rnp4ZTArMVIzN1FvRE50VlN5Vjl2dGpCaVIzSHNVY3pzdmhN?=
- =?utf-8?B?b1VVaEV3TkRraHV1M2xEK0hzbStuMnRjY0NxQUdyaHNHOXFPazNtRlYyakxJ?=
- =?utf-8?B?dG0rMWdjSGdWNEd5eFcxVUR2Tkk5OTc2R0ZlRDNSQ2lnZzZRVU1rV0ZmTkNW?=
- =?utf-8?B?WCtXQjk1Q0djUTYrMGUvWVFTelZqTWlodEdpaEZjU0xzVU4zWGpEU29ETHNk?=
- =?utf-8?B?ZnNXMmFkMDlESTlGMVE4ZTlCblBtT1M4aTVtUER0SHdMcHI5WXc1Q1RKTitt?=
- =?utf-8?B?MUl5elJkSS95U0x2Q0RqRkdRblY5d2wya0pPWm5iWjkvUlFOWVl6enh3SnRa?=
- =?utf-8?B?dDdMaFlvRjZUWHVwc3ZVRmxPcm9NREova29tM0dWLzBjb0NWTEl2WkNKN2Er?=
- =?utf-8?B?K0Zmamx1d0pxTGtZT0NEOEVJY2pmRnVJM2NYQkZPdTB2a3I3dXdia2VYeUZK?=
- =?utf-8?B?Z0ZWRTdYQyt6OHl6SzNRdz09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?a2o1c2V5U0lqTDlkaE9Od0pOUkxDanRBREo0RkgwYmJ0dFRVSHRpZ0l4VHZa?=
- =?utf-8?B?cXYrMytMWFlsTXJTQWh0OVVlblpOaWh0MHhlVGVpdjlMeTZhZGM2T20rWVlN?=
- =?utf-8?B?dlRSZklVQytMQ2JvZlYyRy9keWFDa1BkMlpISDZkQWE1dFNJWnZKdzY5MHhJ?=
- =?utf-8?B?Wk1Hd1JUK3RseUk0ekdlVHRtZ2tLcE05cWptWXdRczdMbVEzL3JBYzJEQTdo?=
- =?utf-8?B?Z2lxREhOY1MvR2lpeVAvbXpNUzdDaGVzNW5iNVV1MS95c1I1eWlTc0tQRnJs?=
- =?utf-8?B?a09FYUd1emJwcjlQL2ducFlyU0UwMHoxZzI2NVc3R2FMK1ZsaW1HM2dqaXZs?=
- =?utf-8?B?dFFGb1FFN0pyMld3NG9RZDcra09mWEUxamVyUmhIZG9DeUVoUGR4NFh5b1Rp?=
- =?utf-8?B?TS85NVk0K0J4MmVaK0tncWxWaDJnWTVqR3pmZnp1by9PMXJrelJidUUwTDlR?=
- =?utf-8?B?Q1RKN25pRGszcWw1R3U3K2JjcjBCSG1VendVdUc5SzVkNlVjbmllbG5VVDVX?=
- =?utf-8?B?QlR0L213MFJVQTR4TTJlWGc3bXpjM0dCMkY4dm0yQjBHK1Rxc0tOTXpOZmxn?=
- =?utf-8?B?TC9TMUk5SnZ0NG1hcS9BTUs0WWppcE9KTjVBbmVkaFBxaGhyKzI0TGt6NFA1?=
- =?utf-8?B?Q1FxV0tmZWIwdEVkMnFVZzBLOTZobFM5cUUvYnA0WEx6ejR5b0RZbHdYVXph?=
- =?utf-8?B?ZGpLK0gvTFdUdTYvczZMTUIxUzhETmIyTzFpbUxUbXBYZ0x6dkgyekwzNnJB?=
- =?utf-8?B?UndPc2hKZ2xCTi9jaURGMU9mNkZqQnFESHA3SnNzRlZhYzlSY25OWDlMRDhK?=
- =?utf-8?B?V1JNQkNWejBHZWQzQnVxRjFyRGQ0Yk5BQ2xzbDBaNWN5Rzc4bGovY1ROQTBq?=
- =?utf-8?B?MHlreWg5UmxUSkVWbkU3bFdid2ROdkQwekx5dTV5K2ZjTzhXUmYzeCtrMFU5?=
- =?utf-8?B?OUVzaFRXVjluOUtTdU9TOGtZSkFpMzN4b3VMNWNYdTlzZEc3TGc0R1hZQkFP?=
- =?utf-8?B?R0hacW8vLzNHSFFSUXk2bi94YnJYcnJkNFNjc2ZjTFNrMWx6MVcvazZVa3Vr?=
- =?utf-8?B?enR5OHNTdDMxQ2k2cktRcVlFT0lqT3h4bHNycDJWR3hoeVdNRnc3VHljdmsz?=
- =?utf-8?B?ZWJJQmdGL2dtdmh2aDBOTmFxSHB5RjZFaG84WDVBRWo2d2crdHZUdXBwV1BE?=
- =?utf-8?B?alhzeWNDYkdMQlZSTUJtaGQzeXRGckdkdmk1NkpNUnBkS1llK0t2RVQxZWtC?=
- =?utf-8?B?MkNEMHdsRUV6S0VsaWtZUU8va1NOQm40anliazV6RFZBOVFwRnY0dkphUVJt?=
- =?utf-8?B?dXpxZzNvcHNHQnVCdFhLcGl3UFZGREtraktGeXo5K2o0eGlnaTRnK0FYNEta?=
- =?utf-8?B?NCt2UzZ4S1FkMCtPekMyNGtzWG5nc09nemNESmE0L2FsdGlHMUZZaFBMMHRZ?=
- =?utf-8?B?SDN4Y0JJYUdscFpxN0pWVmY3aVo1dDgzMHZHZjNSbEU4bjQvU2dTWlFSM0ht?=
- =?utf-8?B?VitKd2NIajViZWdSdUdGZDl2dU0xOE4za0FBbFdGTTdvVGliNTVaYXhIV0pW?=
- =?utf-8?B?RjliUmg4QnozUS9vWDl2ZzVHeWVNQkhBODlXeTdwd0dza1BBVEN4N1I4TXJZ?=
- =?utf-8?B?aHliSXRadEovSzY0WW5BbFNDU2E1bTJIVnlHK1QyckpwVEUvMFRyekFjaTFr?=
- =?utf-8?B?UHRhNTQzd3pITVYrTy9xUUVqSkU5OXlpNmx0MGhCVk9ENnVMT0JqcTlWMWlZ?=
- =?utf-8?B?UVo1d29mOHBQSVp2eXpYN2NxQ3RSLzhCMDMxOXBJaUpMYTVZa2Mwem1GYUQx?=
- =?utf-8?B?NXNmSDdXSkJSZ2cyZ2IzUWszMHJqcU9FQWpFRzltWEtrc3ZubHlGVCticVVt?=
- =?utf-8?B?SkZvTTNTOWVscEJPV1k2NVVaWHhjRXhvK0hJQ1lzMWdUdzJjNzNCWXZXL0t5?=
- =?utf-8?B?dGZDWllIbThRRmpzczlNTXhhMkVMLzhUWjhQUG5CdjQza1dWMFVFU1RjMUYr?=
- =?utf-8?B?VlMvRkRreE1vRnlGWDVHQkk3VzdvcGtYT3dQNURmNHozM3FjcU5FWUprT3hR?=
- =?utf-8?B?TFdHOXU0YndLdlZkUGt4Um9VanlpTHVlNjdkZjE0YTBtNysyWUNXV0NQQWZ1?=
- =?utf-8?B?bXQ0M0FUNC9BN0hWU0dmb3lhZlQzKzJQNTNxZ2g5VDZPK0ZCUWRBenhBZmJ3?=
- =?utf-8?B?dFE9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: db1036f5-7e5e-465a-0bdd-08dccb506ca4
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2024 13:09:06.1584 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hLIUVjChVgYtQtc/ut+JNU5qUG1hebYHBySyPy09SUayOu76SCSr6SIsq0hc0CtH0lfbL4xKZX1TjTp6Bij+64bA21F1saxf4eRdj6tE+QM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB6783
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -176,43 +93,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
+The PCF6563 RTC driver needs the I2C address of the chip on the board
+to be defined as CFG_SYS_I2C_RTC_ADDR. ethernut5 selects this driver
+but defines CFG_SYS_I2C_RTC_ADDR only when CMD_DATE or CMD_SNTP is
+enabled which is clearly wrong. The condition should be on the driver's
+Kconfig instead (#ifdef CONFIG_RTC_PCF8563), but there is no harm in
+defining the symbol even when the driver is not selected, as all other
+boards do. So just remove the condition.
 
-On 9/2/24 2:59 PM, Jerome Forissier wrote:
-> net_auto_load() cannot call tftp_start() if CONFIG_CMD_TFTPBOOT is
-> disabled.
-> 
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> ---
->   net/net.c | 2 ++
->   1 file changed, 2 insertions(+)
-> 
-> diff --git a/net/net.c b/net/net.c
-> index d9bc9df643f..35961ba1c7d 100644
-> --- a/net/net.c
-> +++ b/net/net.c
-> @@ -334,6 +334,7 @@ void net_auto_load(void)
->   		net_set_state(NETLOOP_SUCCESS);
->   		return;
->   	}
-> +#if defined(CONFIG_CMD_TFTPBOOT)
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+---
+ include/configs/ethernut5.h | 2 --
+ 1 file changed, 2 deletions(-)
 
-I think we're supposed to use if IS_ENABLED(CONFIG_CMD_TFTPBOOT) now.
+diff --git a/include/configs/ethernut5.h b/include/configs/ethernut5.h
+index c327bbbe07d..338306dfe08 100644
+--- a/include/configs/ethernut5.h
++++ b/include/configs/ethernut5.h
+@@ -55,9 +55,7 @@
+ #endif
+ 
+ /* RTC */
+-#if defined(CONFIG_CMD_DATE) || defined(CONFIG_CMD_SNTP)
+ #define CFG_SYS_I2C_RTC_ADDR		0x51
+-#endif
+ 
+ #define I2C_SOFT_DECLARATIONS
+ 
+-- 
+2.40.1
 
-Additionally, it's highly recommended to rather use "normal" if's 
-wherever possible, i.e.:
-
-         if (IS_ENABLED(CONFIG_CMD_TFTPBOOT)) {
-             if (net_check_prereq(TFTPGET)) {
-                 if (IS_ENABLED(CONFIG_BOOTP_SERVERIP)) {
-[...]
-                 return;
-             }
-             tftp_start(TFTPGET);
-         }
-     }
-
-Would that work?
-
-Cheers,
-Quentin
