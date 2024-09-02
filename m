@@ -4,55 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98BFDCD13CF
-	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 18:59:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFE52CD13CF
+	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 18:59:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7701A88CEA;
-	Mon,  2 Sep 2024 20:59:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D61B888BEF;
+	Mon,  2 Sep 2024 20:59:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1725303552;
-	bh=7cGcmGh6ZH6pXoiRrtf/IjdAfldFmsb8/6W6bGHmX2s=;
+	s=phobos-20191101; t=1725303553;
+	bh=HpoZupQQpyh0RYfn70bEl6Fw4HcdyLk6gBagdQ6n2ms=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=CirEiD4+PT+cftbG1NQTgruUwOS0GlmIyf3PKdAHXkBASrVOfFIBBnSbwFNAMJX6z
-	 gnTUzVLhqsBdVhgU2e3ao22cJMQmiux5lLtytuYI5lKsnY4Jg6qetnFxqSJjDLpiCg
-	 knkGOKSxjfdjeel42vDEVs2pN8d51xOSsO19ROUa+Dk/eDdTajeqLeK/vfEhmQdaz+
-	 gOBhz9DKU/6ohLGKQUtQkaz+z0K/u9AKLeNbkSwlteyoyHcMzymBnc4O12xyT+uayV
-	 LrR2pITgDGupzC1Suatm1ONWYbh1v8W6a4L4cdsHfmWOgEDOGw2rlHXv5U1pH0dZDA
-	 ZbpOzW/1qojaA==
+	b=OD3p0JJFnwwCRc4jeJDdNkAClZWpuPR4btV4+t6VYniESYO07rw+vl1uVi9ItDYqi
+	 iGA9F6jRiGTFLnFxRAjOi+EeMtLZn6+cBvd7egR/D6AkjZsmx05O3txhQptm8SopEO
+	 ACrzXCfpu58i/H46CGzaGbVzMzXIZWHtBDXqYyiO0eWUeyKdwWI40LkKLOuMpkAtpf
+	 KemaKR6KDMJ6jAnWLLzPdh0sweJprGXZQhtaKuCDn0t2QyQ+m2Sy2VWPss475k6HGA
+	 gA5vnfpgRqW4Sg+1WnRDjyvwaZ2QZr3pBt8cHsWZqIVc5hNf+8fuZhG7n2qpzVeL2G
+	 bqesVpLP3u5sg==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 2C68A887D1;
+ by phobos.denx.de (Postfix) with ESMTPSA id BCB3188C55;
  Mon,  2 Sep 2024 20:59:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1725303551;
- bh=7cGcmGh6ZH6pXoiRrtf/IjdAfldFmsb8/6W6bGHmX2s=;
+ s=phobos-20191101; t=1725303552;
+ bh=HpoZupQQpyh0RYfn70bEl6Fw4HcdyLk6gBagdQ6n2ms=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=fNhL9HZ416yqGp7NQJ8FLUG6JFzO6BMt7IdstgTvlKFitbVCoyyV6do0j/8UNs2bT
- wT15aNu0R/A8/dw9acRBBV8aiP0UW7DVv0CkTBrrrq+Bny41Nx3avCW6V3+PH7IYlI
- rpKv2nyoT3mTXBFKdnIzAmQxg1f5937BZf6lM/luvH6qHdx556SKkkWSMAc6V4UDI9
- pzoG/O+Ck8R49OOAkcfk5do301GfWH1c4wD9Wz09rhe/Kwl9vqRGSSiXinI/6OH0cO
- jJdvX+TbE3SLTTH08MfjXMXsFZi8sbZpFblJuD1vzZkIifWZHe7vktgjou6oTtGDUE
- DGwtzpJApBh+A==
-Message-ID: <79cadc15-2d38-4665-bf44-5a66bfc2a324@denx.de>
-Date: Mon, 2 Sep 2024 20:46:13 +0200
+ b=CSFT8zvdUdsk/k1cMVpeblHZUEuUfFX+7pPYyYDgVpehN4tujoNmL00GDL0lHhsfR
+ AQd9T/BobB0g2/0IrkfnCQKpNnscKpOQJKljPDDI+X3j+CLTyW59ErBylTYJwYb/Q3
+ fhn6TkpQLrla2pcC1KX+YlNw+OZ6RqT5fGCOJBtpCdkqP4O06sb9YE/6xz/SRiFBOW
+ BRTQANNee9m0Ct90QUUbe2SHDTD2yVe2e+rwRnajl3le61u7VFwKmFCVfNuZzpZxnn
+ j2YBE5fE34fZx2tSrZg7x56vC2tbKxVTTDX5fbyfmzdMqdAM+AAyzo7qTJHH3gDkFy
+ MJFCtdwBlRWrw==
+Message-ID: <fa20e7d1-e2e5-4ee1-b053-624091c51a02@denx.de>
+Date: Mon, 2 Sep 2024 20:53:37 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/7] usb: onboard-hub: add support for Microchip USB5744
+Subject: Re: [PATCH 4/7] usb: onboard-hub: Add i2c initialization for usb5744
+ hub
 To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
 Cc: michal.simek@amd.com, fabrice.gasnier@foss.st.com, git@amd.com
 References: <20240605100221.3571-1-venkatesh.abbarapu@amd.com>
- <20240605100221.3571-4-venkatesh.abbarapu@amd.com>
+ <20240605100221.3571-5-venkatesh.abbarapu@amd.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240605100221.3571-4-venkatesh.abbarapu@amd.com>
+In-Reply-To: <20240605100221.3571-5-venkatesh.abbarapu@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,39 +71,167 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 6/5/24 12:02 PM, Venkatesh Yadav Abbarapu wrote:
-> Add support for the Microchip USB5744 USB3.0 and USB2.0 Hub.
-> The usb5744 driver trigger hub reset signal after soft reset.
-> The usb5744 hub need to reset after the phy initialization,
-> which toggles the gpio.
+> Add i2c initialization hook and set usb5744 platform
+> data with function having required i2c initialization sequence.
+> 
+> Apart from the USB command attach, prevent the hub from suspend.
+> when the “USB Attach with SMBUS (0xAA56)” command is issued to the hub,
+> the hub is getting enumerated and then it puts in a suspend mode.
+> This causes the hub to NAK any SMBUS access made by the SMBUS Master
+> during this period and not able to see the hub's slave address while
+> running the "i2c probe" command.
+> 
+> Prevent the MCU from the putting the HUB in suspend mode through register
+> write. The BYPASS_UDC_SUSPEND bit (Bit 3) of the RuntimeFlags2 register at
+> address 0x411D controls this aspect of the hub. The BYPASS_UDC_SUSPEND
+> bit in register 0x411Dh must be set to ensure that the MCU is always
+> enabled and ready to respond to SMBus runtime commands. This register
+> needs to be written before the USB attach command is issued.
+> The byte sequence is as follows:
+> Slave addr: 0x2d           00 00 05 00 01 41 1D 08
+> Slave addr: 0x2d           99 37 00
+> Slave addr: 0x2d           AA 56 00
 > 
 > Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 > ---
->   common/usb_onboard_hub.c | 10 ++++++++++
->   1 file changed, 10 insertions(+)
+>   common/usb_onboard_hub.c | 86 ++++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 86 insertions(+)
 > 
 > diff --git a/common/usb_onboard_hub.c b/common/usb_onboard_hub.c
-> index 0cfaa90fce3..50870285995 100644
+> index 50870285995..09ce452af1b 100644
 > --- a/common/usb_onboard_hub.c
 > +++ b/common/usb_onboard_hub.c
-> @@ -88,11 +88,21 @@ static const struct onboard_hub_data usb2514_data = {
->   	/* TBD */
+> @@ -11,9 +11,15 @@
+>   #include <common.h>
+>   #include <dm.h>
+>   #include <dm/device_compat.h>
+> +#include <i2c.h>
+>   #include <linux/delay.h>
+>   #include <power/regulator.h>
+>   
+> +#define USB5744_COMMAND_ATTACH        0x0056
+> +#define USB5744_COMMAND_ATTACH_LSB    0xAA
+> +#define USB5744_CONFIG_REG_ACCESS     0x0037
+> +#define USB5744_CONFIG_REG_ACCESS_LSB 0x99
+> +
+>   struct onboard_hub {
+>   	struct udevice *vdd;
+>   	struct gpio_desc *reset_gpio;
+> @@ -21,8 +27,80 @@ struct onboard_hub {
+>   
+>   struct onboard_hub_data {
+>   	unsigned long reset_us;
+> +	int (*onboard_dev_i2c_init)(struct udevice *dev);
+
+Why not call it simply "init" ?
+
 >   };
 >   
-> +static const struct onboard_hub_data usb5744_data = {
-> +	.reset_us = 10000,
-> +};
-> +
->   static const struct udevice_id usb_onboard_hub_ids[] = {
->   	/* Use generic usbVID,PID dt-bindings (usb-device.yaml) */
->   	{
->   		.compatible = "usb424,2514", /* USB2514B USB 2.0 */
->   		.data = (ulong)&usb2514_data,
-> +	}, {
-> +		.compatible = "usb424,5744", /* USB5744 USB 3.0 */
-> +		.data = (ulong)&usb5744_data,
-> +	}, {
-> +		.compatible = "usb424,2744", /* USB2744 USB 2.0 */
-> +		.data = (ulong)&usb5744_data,
->   	}
+> +static int usb5744_i2c_init(struct udevice *dev)
+> +{
+> +	/*
+> +	 *  Prevent the MCU from the putting the HUB in suspend mode through register write.
+> +	 *  The BYPASS_UDC_SUSPEND bit (Bit 3) of the RuntimeFlags2 register at address
+> +	 *  0x411D controls this aspect of the hub.
+> +	 *  Format to write to hub registers via SMBus- 2D 00 00 05 00 01 41 1D 08
+> +	 *  Byte 0: Address of slave 2D
+> +	 *  Byte 1: Memory address 00
+> +	 *  Byte 2: Memory address 00
+> +	 *  Byte 3: Number of bytes to write to memory
+> +	 *  Byte 4: Write configuration register (00)
+> +	 *  Byte 5: Write the number of data bytes (01- 1 data byte)
+> +	 *  Byte 6: LSB of register address 0x41
+> +	 *  Byte 7: MSB of register address 0x1D
+> +	 *  Byte 8: value to be written to the register
+> +	 */
+> +	char data_buf[8] = {0x0, 0x5, 0x0, 0x1, 0x41, 0x1D, 0x08};
 
-Keep the list sorted.
+This should be u8 [] , not an array of signed chars.
+
+> +	int ret, slave_addr;
+> +	u32 buf = USB5744_COMMAND_ATTACH;
+> +	u32 config_reg_access_buf = USB5744_CONFIG_REG_ACCESS;
+
+This should be u8 [] , right ?
+
+> +	struct dm_i2c_chip *i2c_chip;
+> +	struct ofnode_phandle_args phandle;
+> +	struct udevice *i2c_bus = NULL, *i2c_dev;
+
+Make sure this list of variables is ordered as reverse xmas tree if 
+possible.
+
+> +	if (!dev_read_phandle_with_args(dev, "i2c-bus", NULL, 0, 0, &phandle)) {
+
+Invert the condition and return early to reduce indent, i.e.
+
+if (dev...)
+  return 0;
+
+> +		ret = device_get_global_by_ofnode(ofnode_get_parent(phandle.node), &i2c_bus);
+> +		if (ret) {
+> +			dev_err(dev, "Failed to get i2c node, err: %d\n", ret);
+> +			return ret;
+> +		}
+> +		ret = ofnode_read_u32(phandle.node, "reg", &slave_addr);
+> +		if (ret)
+> +			return ret;
+> +
+> +		ret = i2c_get_chip(i2c_bus, slave_addr, 1, &i2c_dev);
+> +		if (ret) {
+> +			debug("%s: can't find i2c chip device for addr %x\n", __func__,
+
+dev_dbg(dev, ...)
+
+> +			      slave_addr);
+> +			return ret;
+> +		}
+> +
+> +		i2c_chip = dev_get_parent_plat(i2c_dev);
+> +		if (i2c_chip) {
+
+if (!i2c_chip)
+   return ...
+
+> +			i2c_chip->flags &= ~DM_I2C_CHIP_WR_ADDRESS;
+> +			/* SMBus write command */
+> +			ret = dm_i2c_write(i2c_dev, 0, (uint8_t *)&data_buf, 8);
+> +			if (ret) {
+> +				dev_err(dev, "data_buf i2c_write failed, err:%d\n", ret);
+> +				return ret;
+> +			}
+> +
+> +			/* Configuration register access command */
+> +			ret = dm_i2c_write(i2c_dev, USB5744_CONFIG_REG_ACCESS_LSB,
+> +					   (uint8_t *)&config_reg_access_buf, 2);
+> +			if (ret) {
+> +				dev_err(dev, "config_reg_access i2c_write failed, err: %d\n", ret);
+> +				return ret;
+> +			}
+> +
+> +			/* USB Attach with SMBus */
+> +			ret = dm_i2c_write(i2c_dev, USB5744_COMMAND_ATTACH_LSB, (uint8_t *)&buf, 2);
+> +			if (ret) {
+> +				dev_err(dev, "usb_attach i2c_write failed, err: %d\n", ret);
+> +				return ret;
+> +			}
+> +		}
+> +	}
+> +	return 0;
+> +}
+> +
+>   static int usb_onboard_hub_probe(struct udevice *dev)
+>   {
+>   	struct onboard_hub_data *data =
+> @@ -63,6 +141,13 @@ static int usb_onboard_hub_probe(struct udevice *dev)
+>   		udelay(data->reset_us);
+>   	}
+>   
+> +	if (data->onboard_dev_i2c_init) {
+> +		ret = data->onboard_dev_i2c_init(dev);
+> +		if (ret) {
+> +			dev_err(dev, "onboard i2c init failed: %d\n", ret);
+> +			return ret;
+
+This should implement some sort of 'goto err' failpath and put the hub 
+back into reset, since the hub was brought out of reset right above here.
