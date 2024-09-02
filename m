@@ -4,80 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 821D1CA0ED3
-	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 13:25:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5B42CD13CF
+	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 13:37:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11CAD88B4B;
-	Mon,  2 Sep 2024 15:25:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3173888C01;
+	Mon,  2 Sep 2024 15:37:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sLQsORMR";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="tqiyZ/JZ";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="DyyRtwmu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 441AD88C39; Mon,  2 Sep 2024 15:25:44 +0200 (CEST)
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D8AF188C1C; Mon,  2 Sep 2024 15:37:41 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53F7B88B49
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 15:25:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CAAF588C01
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 15:37:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-374bb1a3addso1502755f8f.1
- for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 06:25:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725283541; x=1725888341; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=2YqgAKzPcZIp7cigAi39MJ60yMHP2xJr5ZWvqMJCk9k=;
- b=sLQsORMRGW0PqfLSG0JPx86+Or/wuAqCbh8bWQq8IjaJTYdKoI9r6gzSllQpLRInEm
- /tYhZlAt9dIumRZ4go5YJ9dS1k9LtbLMkZyiO+EvAg8NmuwjUSiDx7Zp/Uc7fDwnY21j
- vGmwFjeWGBh13HyupLvsARqrtE09MD2Rj+FkzIQPDoyU/f+1c8st2//ZEPK4q6OUIvVr
- 8P4rnC8v8FXR0s86qGIH4FjXI4oPBjUAOSxL58CxM/YTsxWt9ymSdndlCwGS8OvliSrK
- u8GbpksPqNNVv/JtMuH3WO2aR5EABKlhFWmZarfMxYiIwCkLnjo2OFPTScOgONmgSNeJ
- SA/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725283541; x=1725888341;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2YqgAKzPcZIp7cigAi39MJ60yMHP2xJr5ZWvqMJCk9k=;
- b=CgfZ11tgZQv9KZmZLZtApRfmNjOvNwCy9N7mlkAICPL7VU0VeAR+Ti7cYNr+9NE6fC
- MG1iIR3k7m0/YSLCm9U8D4b000Dp/vxDBW+HmRKAq0uXIALFpf2GJvOKXaVAvOdeKnFi
- eoWPB6gzkaZqxOjTT2RaX2M0v7PNnjT0o8BpZjPslTdOAx1UIf4eRT0aWTjuAcCtnm/E
- UOAhXbgALtaiS2pTcyiHUUwjNkCaiXu+O/Q7wwK2cCnlIQGprs/sC6J2et8LiI4ns12V
- 1E7baLIQuvQOZtv9kwxq8RAoxoEIQ1+VrCyYn9DNv3QSPYiAX1ZhOyIijE3jX7hKg+Wk
- JyJw==
-X-Gm-Message-State: AOJu0YyVmPlj1ae6EOuyVI7q/HJQNtnrVeOL+i3aaO6p9CdFyJd/QkOT
- pIfFQRxgjAzxREUEEBwurX5VeVmUBrVYfArZHrObY7o0xMlGTqhwrqCGAWLSCmqTyp5sHrSaIN1
- wJb18Nw==
-X-Google-Smtp-Source: AGHT+IEslZ5mDGytOBNCeOFEDiQOKN14kDOTZtHdcagvNgrWzuG5RBaHqa2qgurDjBj6zZWozU3pFA==
-X-Received: by 2002:a05:6000:18a1:b0:374:cd36:8533 with SMTP id
- ffacd0b85a97d-374cd368862mr2227988f8f.54.1725283541377; 
- Mon, 02 Sep 2024 06:25:41 -0700 (PDT)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:6417:8cf6:a7f7:ee38])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3749ee5080asm11723512f8f.18.2024.09.02.06.25.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Sep 2024 06:25:41 -0700 (PDT)
-From: Jerome Forissier <jerome.forissier@linaro.org>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Wy8vR4Xftz9sSL;
+ Mon,  2 Sep 2024 15:37:39 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1725284259;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=l/Gpjl9UeWhfJsccFrnMrJIsWRdbsawNwAEqV5a3x88=;
+ b=tqiyZ/JZoqs16mAKmEUQHBlCOEUVD4Zve2EJ/NrbThEJAKhQFr53EiDINtdo14Of1i0Hk7
+ JaxT04ge+EXTv77LQgevxPx1F99DQaVC6NFPpYkquKSHYLgjjL6myCuT2njCu938vvrJDN
+ Q2qYaT33KVcsf1uBV+r1Z+RtEfjtaYD7cdl8Ki+aoV8Vdd0p4Vkq0nL8lTIKY3IqeKhFVQ
+ Q7jsJvEp31eB2Fzw4oWGuvR0pF9T3i/zVrKwWcSPbSiiAgjXszMOMsFiRHfJDoGklyH8dv
+ 3EqssmSTx64BpOj4s0NbSGz4/H7eisMAUVRVK6cKV9kVmfCydDnCmyljGtXtgA==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1725284257;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=l/Gpjl9UeWhfJsccFrnMrJIsWRdbsawNwAEqV5a3x88=;
+ b=DyyRtwmugLaTX2dliD4LOBm3Z+1OAkTDBnuV7zfrcl8/lHo1SOcPRjKD1Hm+CifCV/jeBJ
+ iSKf1nw2VShNG/FPg1sqDD6KG7b7KSY/HVnKibszxTS32VPg8CpFsm0nOSVj5KDSPSA9+G
+ 0DqanAf9zNV5iwAKSSVUu6udKDaxUKLP6DmcP8TOkb88e4OQuMNJK+uQi3WkyzLcduJWfF
+ w+KAYXEdIlri0/hBBgRbN+E1DtKqDCt7vqw20mzrzFngnTN4/GSB8qlcwxpKfFbF+X/19k
+ zBCAcwrSgs40uCbfziK3zlJAxMV/XrIGMxxrN4sxLwOwbgu73wyMwQUXkQmBww==
 To: u-boot@lists.denx.de
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH] net: guard call to tftp_start() with
- IS_ENABLED(CONFIG_CMD_TFTPBOOT)
-Date: Mon,  2 Sep 2024 15:25:11 +0200
-Message-Id: <20240902132511.148683-1-jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.40.1
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] mmc: Hide mmc speed command under mmc command
+Date: Mon,  2 Sep 2024 15:37:09 +0200
+Message-ID: <20240902133721.18938-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: eb94ef459c57daf928d
+X-MBO-RS-META: 4zmos111ikf1ej5bei7u3qftxie4cuyz
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,50 +88,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-net_auto_load() cannot call tftp_start() if CONFIG_CMD_TFTPBOOT is
-disabled.
+The mmc speed command configuration option keeps showing up in
+Kconfig directly in 'Command line interface'. Move MMC_SPEED_MODE_SET
+under CMD_MMC to make it show up alongside the MMC command.
 
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- net/net.c | 23 ++++++++++++++---------
- 1 file changed, 14 insertions(+), 9 deletions(-)
+Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>
+Cc: Francis Laniel <francis.laniel@amarulasolutions.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+V2: Rework the commit message
+---
+ cmd/Kconfig | 19 +++++++++----------
+ 1 file changed, 9 insertions(+), 10 deletions(-)
 
-diff --git a/net/net.c b/net/net.c
-index d9bc9df643f..1e0b7c85624 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -334,17 +334,22 @@ void net_auto_load(void)
- 		net_set_state(NETLOOP_SUCCESS);
- 		return;
- 	}
--	if (net_check_prereq(TFTPGET)) {
--/* We aren't expecting to get a serverip, so just accept the assigned IP */
--		if (IS_ENABLED(CONFIG_BOOTP_SERVERIP)) {
--			net_set_state(NETLOOP_SUCCESS);
--		} else {
--			printf("Cannot autoload with TFTPGET\n");
--			net_set_state(NETLOOP_FAIL);
-+	if (IS_ENABLED(CONFIG_CMD_TFTPBOOT)) {
-+		if (net_check_prereq(TFTPGET)) {
-+			/*
-+			 * We aren't expecting to get a serverip, so just
-+			 * accept the assigned IP
-+			 */
-+			if (IS_ENABLED(CONFIG_BOOTP_SERVERIP)) {
-+				net_set_state(NETLOOP_SUCCESS);
-+			} else {
-+				printf("Cannot autoload with TFTPGET\n");
-+				net_set_state(NETLOOP_FAIL);
-+			}
-+			return;
- 		}
--		return;
-+		tftp_start(TFTPGET);
- 	}
--	tftp_start(TFTPGET);
- }
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 43f78a5aeb1..953e1f0ef2a 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1406,6 +1406,15 @@ config CMD_MMC_SWRITE
+ 	  Enable support for the "mmc swrite" command to write Android sparse
+ 	  images to eMMC.
  
- static int net_init_loop(void)
++config MMC_SPEED_MODE_SET
++	bool "set speed mode using mmc command"
++	help
++	  Enable setting speed mode using mmc rescan and mmc dev commands.
++	  The speed mode is provided as the last argument in these commands
++	  and is indicated using the index from enum bus_mode in
++	  include/mmc.h. A speed mode can be set only if it has already
++	  been enabled in the device tree.
++
+ endif
+ 
+ config CMD_CLONE
+@@ -2971,16 +2980,6 @@ config CMD_UBIFS
+ 	help
+ 	  UBIFS is a file system for flash devices which works on top of UBI.
+ 
+-config MMC_SPEED_MODE_SET
+-	bool "set speed mode using mmc command"
+-	depends on CMD_MMC
+-	help
+-	  Enable setting speed mode using mmc rescan and mmc dev commands.
+-	  The speed mode is provided as the last argument in these commands
+-	  and is indicated using the index from enum bus_mode in
+-	  include/mmc.h. A speed mode can be set only if it has already
+-	  been enabled in the device tree.
+-
+ config CMD_MESON
+ 	bool "Amlogic Meson commands"
+ 	depends on ARCH_MESON
 -- 
-2.40.1
+2.45.2
 
