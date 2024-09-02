@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20A3BCD13CF
-	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 15:13:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0750CCA0ED3
+	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 15:21:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D47188B49;
-	Mon,  2 Sep 2024 17:13:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4120588AD2;
+	Mon,  2 Sep 2024 17:21:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SA/WLGqD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gcIoaqQo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3C3888B4B; Mon,  2 Sep 2024 17:13:02 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 4FDFB88B49; Mon,  2 Sep 2024 17:21:11 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD8D788AD3
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 17:13:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BAE6588861
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 17:21:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a86e9db75b9so469492966b.1
- for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 08:13:00 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a86a37208b2so502554766b.0
+ for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 08:21:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725289980; x=1725894780; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1725290468; x=1725895268; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=84ytfQkAptZIZoQjKCbMfyRWOmvktaEuFcbB61eiT7E=;
- b=SA/WLGqDnkUZzUoBAi/mosazvCb2a9ErbLVhzDzwatkf+YAZTJtxZQybmYFwxMG4km
- MUff//556JOlPmCsbrESkGdhHYlRKmu8m88Tck+3eG18TueTHON6I3kKMQ69P/zBrJcG
- r1F9BF+gYLZNU2QvvqJ18gLNLWIt/2GIgy+e/XwjrY13IDBYw3CM2SndZWTOaSMK8OV/
- UNDj0pjLiSf4D7v3RcfxmxOdGwJXHSPh1ogVXTRW5EusF1V5Fitm5c7QZvzIeQ0n+YAU
- UOKjPErPKj5ewd+b8DR9LDYWWd/4vBteNvFDiQn8MKCvhtxWcUFGl1HukZKq1wLVxWWQ
- xGqw==
+ bh=i9pfx2H9uPAIL/Uo4WyeGS0F27UqV3nvha+5vC0dmIY=;
+ b=gcIoaqQomIL6cmIaeZf4tnzkmkX8K6Ryo2M4BcRKktIYRi9ewrhsLYsj5RAXbomahe
+ qti3DiEt9JH+gXuz0dZFjaLLHgbgmkEvAt2cmNmwQv51ERReEKAguY2RJ7XAwJU7FA3x
+ PFAf54/ohBtBINTQhOa5E2oy17Z4VbT5bd34TdFCA/SFBez6uLealiCBdLWTBvVw9FD0
+ dlS19vyTBZ4Hauo5tm0R7MGXWWYfEQ5rvyiVRwGo50dcvIZZZor0zEEYpApbKhj0zsun
+ MWN8CvPypifW+kcjCRbWp/4K2HACBDEN7Bl89DDnOc4SYKryc6zPVfxy06Qaec+KWoLj
+ f6mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725289980; x=1725894780;
+ d=1e100.net; s=20230601; t=1725290468; x=1725895268;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=84ytfQkAptZIZoQjKCbMfyRWOmvktaEuFcbB61eiT7E=;
- b=uvA3Eh3rRcTcg7LhRbfGeWba5fpyPF7/csy0oazwpSkZPKA86feskkFbm5ZTT/DZUB
- S0SyWm+7U/VdveToOPpvT0KLQeDPA/D+E0ZAUVEJcMfgHLETxAodc4W45YMHNW7UnyC8
- +1fqYd1NZ/10c8ThDTpQ2FrNBz53C4+hRVnx2vGSVuKQGFUk2C0VBVfBOPitLM6LtE30
- 3Q4M2dnQcNLqD9PppKbcThdPWtijzjClBd5F0ffpiuwEpr6uQ2xC3EmOc3bhnLITgQsF
- Kay/hb2hUBIbpacksaGDieiC8KdNIP+Z8AUFxT6EDLzghcpYpRwnM5j6ucupHX3fzY6k
- cYlA==
-X-Gm-Message-State: AOJu0YwF8GtPm6WqYbhYhEIt1Kn4GZQulf1npE8iLbXG+hkBY9uCb7fX
- 6/AXFHaYjY77KKcvtE8gDrfd2tUahd0UQpM7uwqY655kk7Zc6oSne0pXnNcBP8E=
-X-Google-Smtp-Source: AGHT+IEi3DOMObSv+WaaIGqdglwVpom74AC2CM8YmV10t/WATkCFmDF959XTHH8ilb1aWRVPjxFWsA==
-X-Received: by 2002:a17:907:2ce6:b0:a86:80b7:4743 with SMTP id
- a640c23a62f3a-a8a1d2c9c26mr40444066b.24.1725289980056; 
- Mon, 02 Sep 2024 08:13:00 -0700 (PDT)
+ bh=i9pfx2H9uPAIL/Uo4WyeGS0F27UqV3nvha+5vC0dmIY=;
+ b=Kwxoa2WKEztMtvhfI4HqrsFqGy4L7DVhLGo08YDQtu6Lz90d7nG57FwgrZFt+egv2/
+ I+6IfdsTjsACQaliyQE4HOo3jvsjwh62uTwp+dn/mlsd2KdosGRnlhwwYRqGF61x/U5I
+ I9/dpdNPLoZfoxAOVTL5CTO0Bm7ZRBx0FKDIP7sawSEnrJw4ziNi6+oul47GomGHQObq
+ cgQu1b25S3uduew2UsOb8ENrSiDgH2BLTlXfMEPU+1G+A5RbT+qafBTNbBEyUGuaPyti
+ 5A6yM/QRmo//ePWzlku1anEMue/UFirmdiCV8z6oXHctsI1v1jiKxjPf0Hbny7YlynRW
+ eq7g==
+X-Gm-Message-State: AOJu0Yx560X90ucWjZ9u+oPew4fD7+F6dLYFwDGfabBHejJ8d/C7mmqP
+ kIT3cVye2P7IbduZ8jkyXwGM3euonEMxgfsp/mQowc/lEz91rxx6S2EIzbXQl1E=
+X-Google-Smtp-Source: AGHT+IGEGsBcCERMcx0q7o0VbBYCVmWBohMsd4VzMkRX0+KNsKBs/qSjuCnhHxgvQreZVDyPLjMICw==
+X-Received: by 2002:a17:907:94c2:b0:a77:c95e:9b1c with SMTP id
+ a640c23a62f3a-a897f84bb8cmr1265940466b.27.1725290467958; 
+ Mon, 02 Sep 2024 08:21:07 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3cb:7bb0:6677:431e:31d2:9da9?
  ([2a01:e0a:3cb:7bb0:6677:431e:31d2:9da9])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a89891a3ceasm567022866b.115.2024.09.02.08.12.59
+ a640c23a62f3a-a898919670asm578354866b.140.2024.09.02.08.21.07
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 02 Sep 2024 08:12:59 -0700 (PDT)
-Message-ID: <e22a18ee-9451-4a78-b557-786c120bc7a0@linaro.org>
-Date: Mon, 2 Sep 2024 17:12:58 +0200
+ Mon, 02 Sep 2024 08:21:07 -0700 (PDT)
+Message-ID: <e2a3445f-00ba-4261-84f2-8d061ad6710e@linaro.org>
+Date: Mon, 2 Sep 2024 17:21:06 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 02/16] buildman/toolchain.py: set CROSS_COMPILE only if
- self.cross is set
+Subject: Re: [PATCH v2 01/16] Makefile: detect HOST_ARCH properly when
+ CROSS_COMPILE is multi-word
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Bryan Brattlof <bb@ti.com>,
+ Jesse Taube <mr.bossman075@gmail.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>
 References: <cover.1725012294.git.jerome.forissier@linaro.org>
- <655de02f937e3ea3a8f5306ef510d817bee8065b.1725012294.git.jerome.forissier@linaro.org>
- <CAFLszTgrNpeObzMCpgg_gDfVNSsYNEzU2uZOgSB=B-Bcrpf5oA@mail.gmail.com>
+ <e2f0809aa4b9d81cf1709a6b82d803a21ea1fac7.1725012294.git.jerome.forissier@linaro.org>
+ <CAFLszTgPCkaSrfzcT1i=4pH-VS4mqBfOa2Tw6Ow02J=rc+V3aw@mail.gmail.com>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAFLszTgrNpeObzMCpgg_gDfVNSsYNEzU2uZOgSB=B-Bcrpf5oA@mail.gmail.com>
+In-Reply-To: <CAFLszTgPCkaSrfzcT1i=4pH-VS4mqBfOa2Tw6Ow02J=rc+V3aw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -99,82 +103,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-On 9/1/24 22:10, Simon Glass wrote:
+
+On 9/1/24 22:09, Simon Glass wrote:
 > Hi Jerome,
 > 
 > On Fri, 30 Aug 2024 at 04:17, Jerome Forissier
 > <jerome.forissier@linaro.org> wrote:
 >>
->> In MakeEnvironment(), CROSS_COMPILE is defined to be self.cross (with
->> or without a full path), optionally prefixed by the toolchain wrapper
->> defined in ~/.buildman. This is fine when self.cross is not empty, but
->> it doesn't make sense when it is:
->> - Either there is no wrapper and we end up with an empty CROSS_COMPILE
->> which is the same as not defining it (the host compiler will be used),
->> - Or there is a wrapper and CROSS_COMPILE will contain only the wrapper
->> which obviously is not a valid compiler, hence an error.
+>> When CROSS_COMPILE contains multiple words, HOST_ARCH is not properly
+>> detected and the sandbox build fail. It typically happens when using
+>> ccache. For example:
 >>
->> Test case:
->>
->>  $ sudo apt install ccache
->>  $ grep -q toolchain-wrapper ~/.buildman || \
->>      printf "[toolchain-wrapper]\nwrapper = ccache\n" >>~/.buildman
->>  $ make mrproper
->>  $ ./tools/buildman/buildman sandbox_noinst
->>  $ ./tools/buildman/buildman sandbox_noinst
->>  Building current source for 1 boards (1 thread, 24 jobs per thread)
->>     sandbox:  +   sandbox_noinst
->>  +In file included from boot/bootmeth_efi.c:16:
->>  +include/efi_default_filename.h:20:15: error: operator '==' has no left operand
->>  +   20 | #if HOST_ARCH == HOST_ARCH_X86_64
->>  +      |               ^~
+>>  $ make sandbox_defconfig
+>>  $ make CROSS_COMPILE="ccache x86_64-linux-gnu-" \
+>>         CC="ccache x86_64-linux-gnu-gcc"
 >>  [...]
+>>  In file included from boot/bootmeth_efi.c:16:
+>>  include/efi_default_filename.h:33:2: error: #error Unsupported UEFI architecture
+>>     33 | #error Unsupported UEFI architecture
+>>        |  ^~~~~
+>>
+>> A similar error occurs when the build is done via buildman and
+>> ~/.buildman contains:
+>>
+>>   [toolchain-wrapper]
+>>   wrapper = ccache
+>>
+>> Fix the issue by considering only the last word in $(CROSS_COMPILE).
 >>
 >> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>> Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+>> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 >> ---
->>  tools/buildman/toolchain.py | 4 ++--
->>  1 file changed, 2 insertions(+), 2 deletions(-)
+>>  Makefile | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> Can you please put this on top of [1]? I am trying to resolve a
-> code-coverage problem in the same function.
+> This patch[1] seems to fix the problem you mention, for the CC part at least.
 
-Which [1] and what do you mean by "on top off"?
-- pick patch [1], then pick this patch (resulting in two patches
-in the series)
-- or pick patch [1] and combine it with this one?
+No, it fails with buildman:
 
-> 
-> Also, please do add a test case.
+$ git log --oneline -n 1
+454b2b2e6ed (HEAD) efi: Use the same filename for all sandbox builds
+jerome@builder:~/work/u-boot ((454b2b2e6ed...))$ ./tools/buildman/buildman sandbox_noinst
+Building current source for 1 boards (1 thread, 24 jobs per thread)
+   sandbox:  +   sandbox_noinst
++arch/sandbox/lib/reloc_sandbox_efi.c:10:15: error: operator '==' has no left operand
++   10 | #if HOST_ARCH == HOST_ARCH_X86_64
++      |               ^~
+[...]
 
-Done in v3.
+> For the CROSS_COMPILE bit, why is it valid to use a cross compiler on sandbox?
 
-Thanks,
--- 
-Jerome
+Why not? "CROSS_COMPILE=x86_64-linux-gnu-" should result in x86_64-linux-gnu-gcc
+being used which is equivalent to gcc on a x86_64 system.
  
 >>
->> diff --git a/tools/buildman/toolchain.py b/tools/buildman/toolchain.py
->> index 324ad0e082..ff987a9eea 100644
->> --- a/tools/buildman/toolchain.py
->> +++ b/tools/buildman/toolchain.py
->> @@ -201,10 +201,10 @@ class Toolchain:
->>          if self.override_toolchain:
->>              # We'll use MakeArgs() to provide this
->>              pass
->> -        elif full_path:
->> +        elif full_path and self.cross:
->>              env[b'CROSS_COMPILE'] = tools.to_bytes(
->>                  wrapper + os.path.join(self.path, self.cross))
->> -        else:
->> +        elif self.cross:
->>              env[b'CROSS_COMPILE'] = tools.to_bytes(wrapper + self.cross)
->>              env[b'PATH'] = tools.to_bytes(self.path) + b':' + env[b'PATH']
->>
+>> diff --git a/Makefile b/Makefile
+>> index f90e48f58a..dc7bdd7942 100644
+>> --- a/Makefile
+>> +++ b/Makefile
+>> @@ -21,7 +21,7 @@ include include/host_arch.h
+>>  ifeq ("", "$(CROSS_COMPILE)")
+>>    MK_ARCH="${shell uname -m}"
+>>  else
+>> -  MK_ARCH="${shell echo $(CROSS_COMPILE) | sed -n 's/^[[:space:]]*\([^\/]*\/\)*\([^-]*\)-[^[:space:]]*/\2/p'}"
+>> +  MK_ARCH="${shell echo ${lastword $(CROSS_COMPILE)} | sed -n 's/^[[:space:]]*\([^\/]*\/\)*\([^-]*\)-[^[:space:]]*/\2/p'}"
+>>  endif
+>>  unexport HOST_ARCH
+>>  ifeq ("x86_64", $(MK_ARCH))
 >> --
 >> 2.40.1
 >>
 > 
 > Regards,
 > Simon
+> 
+> [1] https://patchwork.ozlabs.org/project/uboot/patch/20240815202424.766778-9-sjg@chromium.org/
+
+
+Thanks,
+-- 
+Jerome
