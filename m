@@ -4,75 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14A5ACA0ED3
-	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 13:19:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24508CD13CF
+	for <u-boot@archiver.kernel.org>; Mon,  2 Sep 2024 13:24:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D8A588B49;
-	Mon,  2 Sep 2024 15:19:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9AF9888B4B;
+	Mon,  2 Sep 2024 15:24:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dW1H50aI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rC9sMoYV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B64188C01; Mon,  2 Sep 2024 15:19:19 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 35FC388BFB; Mon,  2 Sep 2024 15:24:36 +0200 (CEST)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70B3B88AFA
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 15:19:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 25E3788B49
+ for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 15:24:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-58ef19aa69dso3874889a12.3
- for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 06:19:17 -0700 (PDT)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2f50f1d864fso48392831fa.1
+ for <u-boot@lists.denx.de>; Mon, 02 Sep 2024 06:24:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725283157; x=1725887957; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zerHVKIxYVYFNaJLwO00Ff2JqXQkMQ3VpMmf9bgc700=;
- b=dW1H50aINoU+6EuaUiBQhUsZUM7MjJDXUG178J1B6Nb5E8pdKlitkfkt6Hh1Qboi6b
- FvU89NqHg171rru9x8oHqpiQKN/wObqHJJ7X4jrtxcC/y1jdAmkLDDx+eRXh5P22UbWO
- sfkYEiFePMcefXgNA1ScKztOauDtuK+Vmzr5Z9vS8tbn/Y7iFUh0ioiJjaCr8ZxlUR7J
- gx+VOErWRPzDushyXXASJrCbG8oxIn+AaAj2zycJWZl3VTT7jx4MeowsdvLGR+HEbDGH
- 9H9PXYeM9uRJrMHUeHnkmeHoIKQzSdjC7xBSyePcfnaPJQQaVPrtiKDAzf6eRyFShHOz
- nAjw==
+ d=linaro.org; s=google; t=1725283473; x=1725888273; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=MEr+V1nwUl8MonHhzdGso9Fmx0TBJwlEY12+4+wIit0=;
+ b=rC9sMoYVlNhZBvwfk5+8VgGhoj/sVpUasZcVgttlPp7HBChzLEBPvDXnD1wlQjtl3S
+ wvqlKV2DnhCbe/E4yXZiOBBBfnACnQJnl2gHVGtKfiA7ExEcnLS3aRgISJJcipdw6Bd3
+ AS3saRa2cCf1KTLwkfsPCwO/042H0QIKYlUhwZuCLeb0WXm1gqPZ4zeS7hH+9pSM6NTK
+ Rqb2eZ8DxtP1We3z32vu+m6TpiLwMowMEzyDe2bnymp0NKyIWEUbmxY6mOWjMHgkrIkX
+ q3B3i2fbpcQ6CBeYpyyMR316JaQqB5j1LPSRnLOZ1j5Ix9zngfhklfoP/MWBM1ss34Qx
+ uL/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725283157; x=1725887957;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=zerHVKIxYVYFNaJLwO00Ff2JqXQkMQ3VpMmf9bgc700=;
- b=FZAawRsro1n1rheMlOBwxrkLUBi7b+TVnV22s4v3zk0hM7Pan80cDwwY59CsaCsKnb
- PCOnkDT6dXZOC3DoRJdYtjXNipEZViw6sdZ//qpGMRQfSgOtIx4h2MX3L6e8cBYrddv8
- udT/MUpvY4MKSvGMD2eNl5T0nw68YbrJoG/wbVosDD93yfdPTc/Ritpdniq1R/8w/fLE
- sB/TZXSZz7VhSSuphR2BhXgUK0XcIy2IEDP6u3NJt6vNy30sHEqTYBOPFaHHUrwuvgWW
- /iFgkoZvtXK8ldM9/aas2kaXfo9jDKMbEfcgjOr0lncFAlG34tj42Z9oHk1DUJIn9S1P
- H+iQ==
-X-Gm-Message-State: AOJu0YwGvFbVWeyMs8S3kJ/WvG1pk4uif8mttsnn1tjMbYZgzm+i6HTm
- 5scupwI7Ph3Guam9sWwpIHA9jO+MpzxApUmxWF6hzj/XfkUmwXmlssfd25qTxKNkfs2oFqtXCFB
- vY02IjFaIr3UB/HL7mqC3ouCkfX8=
-X-Google-Smtp-Source: AGHT+IGzJDq7fpAMOoCRMBC4o6pREj9m5kE3VqXwyNioLZxS1j20wKoFUwod0GTkaXW0Qolaq2CMGGl+oa3uuoEtoG4=
-X-Received: by 2002:a05:6402:3490:b0:5be:e01c:6b5f with SMTP id
- 4fb4d7f45d1cf-5c24301d953mr5217969a12.33.1725283156065; Mon, 02 Sep 2024
- 06:19:16 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1725283473; x=1725888273;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=MEr+V1nwUl8MonHhzdGso9Fmx0TBJwlEY12+4+wIit0=;
+ b=EWaGuxbInoGxsiEFvBEdrtxS2aRlovt1chIz/BpLH86vnGZ+WslF90DOeWaJw4kyi9
+ NVc2RgFmalSpR9xQL0Dlqiu0RoCUHW0siFhMlXtsgpVQa1QIXRiBOzTf6p95OJuzqSnv
+ xrKfuweYid6QJfyG2pBaaKzCgOUbUBObCB183h0Tvi48ZKurNCtQGepM4iCGW1t6BXon
+ JhhsuU2QXOmiMQk42a7c28o2PkY8KC1I9ooAjxY1aHL40oMFVBoRox8xXLi0E3iAjPA/
+ 9UIicOp/oi5AjYYscWQHMEdlDblVMJs53ux1Tg31E45f9Kkue4aTFJCEvdPfRLf6oCEY
+ mDHQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVtGAw0msvsQTFjUt5/SuBd5iQm2BI/sNZcpFF8nNBG0qabRKSIqwOfRcIcvPigG40KlbtWDyI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw7+zXTxQ3dB5OLSyfXle4flaLg8lwNkJrEb8+WQ7DFYvMrIzff
+ RsIz6lIhtu1dWY9CeTuuXjiAfnngAeqIaKPs1W6FnZrpYjlSUQnPyFZDRvTcSfc=
+X-Google-Smtp-Source: AGHT+IE1QPV14L1rvW7SoHj2xNGoLK3dZmePD2ADPFWR7GR1K/Qho0lGSb4jjvuwzod5BhJEDkaIbg==
+X-Received: by 2002:a05:6512:ea7:b0:52e:f950:31f5 with SMTP id
+ 2adb3069b0e04-53546b1c55dmr6792366e87.18.1725283473203; 
+ Mon, 02 Sep 2024 06:24:33 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:6677:431e:31d2:9da9?
+ ([2a01:e0a:3cb:7bb0:6677:431e:31d2:9da9])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-a8a1900d4fcsm24965766b.144.2024.09.02.06.24.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 02 Sep 2024 06:24:32 -0700 (PDT)
+Message-ID: <56b0792d-0b21-446d-b1f0-7b6e60eb5ae1@linaro.org>
+Date: Mon, 2 Sep 2024 15:24:31 +0200
 MIME-Version: 1.0
-References: <20240902131246.127897-1-jerome.forissier@linaro.org>
-In-Reply-To: <20240902131246.127897-1-jerome.forissier@linaro.org>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Mon, 2 Sep 2024 14:19:04 +0100
-Message-ID: <CALeDE9M2uNVouXb_2zjp7KYjz=wrrC2pN7Hn921mdszmATJbbA@mail.gmail.com>
-Subject: Re: [PATCH] configs/ethernut5.h: define CFG_SYS_I2C_RTC_ADDR
- unconditionally
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, egnite GmbH <info@egnite.de>,
- Tom Rini <trini@konsulko.com>, 
- Heiko Schocher <hs@denx.de>, Simon Glass <sjg@chromium.org>, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] net: guard call to tftp_start() with #if
+ defined(CONFIG_CMD_TFTPBOOT)
+To: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>
-Content-Type: text/plain; charset="UTF-8"
+References: <20240902125917.119941-1-jerome.forissier@linaro.org>
+ <ccdf5291-604b-48bb-9e3d-8f3214483237@cherry.de>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <ccdf5291-604b-48bb-9e3d-8f3214483237@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,44 +101,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tom,
+Hi Quentin,
 
-I wonder if it makes sense just to drop this board altogether? I
-looked at it for some other unloved feature at the beginning of the
-year and I never heard from the maintainers.
+On 9/2/24 15:09, Quentin Schulz wrote:
+> Hi Jerome,
+> 
+> On 9/2/24 2:59 PM, Jerome Forissier wrote:
+>> net_auto_load() cannot call tftp_start() if CONFIG_CMD_TFTPBOOT is
+>> disabled.
+>>
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>> ---
+>>   net/net.c | 2 ++
+>>   1 file changed, 2 insertions(+)
+>>
+>> diff --git a/net/net.c b/net/net.c
+>> index d9bc9df643f..35961ba1c7d 100644
+>> --- a/net/net.c
+>> +++ b/net/net.c
+>> @@ -334,6 +334,7 @@ void net_auto_load(void)
+>>           net_set_state(NETLOOP_SUCCESS);
+>>           return;
+>>       }
+>> +#if defined(CONFIG_CMD_TFTPBOOT)
+> 
+> I think we're supposed to use if IS_ENABLED(CONFIG_CMD_TFTPBOOT) now.
 
-Peter
+Ah yes. I thought it was only with an if () construct but I suppose that
+works fine with #if too.
+ 
+> Additionally, it's highly recommended to rather use "normal" if's wherever possible, i.e.:
+> 
+>         if (IS_ENABLED(CONFIG_CMD_TFTPBOOT)) {
+>             if (net_check_prereq(TFTPGET)) {
+>                 if (IS_ENABLED(CONFIG_BOOTP_SERVERIP)) {
+> [...]
+>                 return;
+>             }
+>             tftp_start(TFTPGET);
+>         }
+>     }
+> 
+> Would that work?
 
-On Mon, 2 Sept 2024 at 14:13, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
-> The PCF6563 RTC driver needs the I2C address of the chip on the board
-> to be defined as CFG_SYS_I2C_RTC_ADDR. ethernut5 selects this driver
-> but defines CFG_SYS_I2C_RTC_ADDR only when CMD_DATE or CMD_SNTP is
-> enabled which is clearly wrong. The condition should be on the driver's
-> Kconfig instead (#ifdef CONFIG_RTC_PCF8563), but there is no harm in
-> defining the symbol even when the driver is not selected, as all other
-> boards do. So just remove the condition.
->
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> ---
->  include/configs/ethernut5.h | 2 --
->  1 file changed, 2 deletions(-)
->
-> diff --git a/include/configs/ethernut5.h b/include/configs/ethernut5.h
-> index c327bbbe07d..338306dfe08 100644
-> --- a/include/configs/ethernut5.h
-> +++ b/include/configs/ethernut5.h
-> @@ -55,9 +55,7 @@
->  #endif
->
->  /* RTC */
-> -#if defined(CONFIG_CMD_DATE) || defined(CONFIG_CMD_SNTP)
->  #define CFG_SYS_I2C_RTC_ADDR           0x51
-> -#endif
->
->  #define I2C_SOFT_DECLARATIONS
->
-> --
-> 2.40.1
->
+Absolutely. I thought about doing just that but I wrongly assumed tftp_start()
+would not even be defined as a prototype if CMD_TFTPBOOT was disabled, which
+is clearly not the case.
+
+So yes, that works and I will send a v2.
+
+Thanks,
+-- 
+Jerome
+
+> 
+> Cheers,
+> Quentin
