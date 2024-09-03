@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3752DCD342F
-	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 07:40:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B34A3CD342F
+	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 07:42:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5D1B88C3A;
-	Tue,  3 Sep 2024 09:40:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 205BD888C2;
+	Tue,  3 Sep 2024 09:42:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="be5Tj91Y";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="g7WvU29c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C1A588C40; Tue,  3 Sep 2024 09:40:37 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 6512888A27; Tue,  3 Sep 2024 09:42:20 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CC6888C36
- for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 09:40:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 69F40885A0
+ for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 09:42:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-428e0d18666so42366725e9.3
- for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 00:40:35 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-42c7856ed66so23492475e9.3
+ for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 00:42:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1725349235; x=1725954035;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1725349338; x=1725954138;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=GC2d/KHrVdyswUWlxErQZST/E5L0Gc9a0T21vOPmYEo=;
- b=be5Tj91YCLOM9PmOYgw+a/1QXZz7Msbol+dYUwjkMC7/gH9VB2VXsaHb7Ga+0KJc9X
- yMKdsypboAQi/eFiSrvOi2U1hGWt1Yu9oiBw1FXd5wg49sKLcsL7PAmEU8b6GzaQXZGw
- 1MJ4W3ZVNW8zOrFr72Hzj5/qL3I1nc+W11w3pDTwraREyq2HAR44kqtt+/hzXj/04xC3
- vzxbVq7ILpyyMV03N9/k6FSMw4gihkE4UtPke3Dvi0v9jdv3HDJBKdOL3xHrJI3TBLZk
- Q6gyQh6AUknIXAblfOVpUapqOtQuciv+wsxYEGEGU8o/CkP+1//1cez/rNONNyDxoUtP
- fs+w==
+ bh=bSo7wPFr31kW34M+DkuiN5n5elYQ9XRGVElF1IpbxhE=;
+ b=g7WvU29cVgCUOwhWOZHtxHVEK/5VTr11SE/EQJaI40GO9/JZK+lzVGBZRCVHzEC8eA
+ MmIcZpTyn34LnMiGwBTF/R+pU1KoKntQ32rMUpUBxuKTme3b+oDVqoYIld64qHVlmwAV
+ Kxa0gx1//IHNLKRl0vFgaJJ34ax9ru6AF4RwGT3fRB+tjNNF0oUdrgArE36nTBMttKz2
+ qOXkZMFnoQ4CzathtcpUXsKhfu8ZYjd5/p7FjjD86adnA9w2ArfLTUjletVJ4Yyhry7S
+ CDCKHREBoKtwhJyNAN73rqwg3OwWukbXnQdgNC2fQVtXGOpNNWwErXfoB2xMLL7pe9nQ
+ eMyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725349235; x=1725954035;
+ d=1e100.net; s=20230601; t=1725349338; x=1725954138;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=GC2d/KHrVdyswUWlxErQZST/E5L0Gc9a0T21vOPmYEo=;
- b=ZSJBYH0AmZejn0gHdRymi+2uj7PJLVf+b30WskWasQFl//vvXYYgcVfuZPrI7wYVce
- oiee6Yw1Zzq9RsLW6QCfgIt3y/QjBR7oD/6Dc6jECy+f/XU2/vv5Os8iRdOHWqN0oMDY
- UfhlcvWkI6mXQ8FV7ORtS01OF19flrOg9fKrsAdCMRDyA8WsqNGOUoaElgXAn21dhSn6
- 53bVjXhJ6sP8eTok3TDC0HTTPuGyH35y5IbMow1M7NaDrRIAeHxHwidlFxWIqO3EUqHz
- N3qt1ta4PWveZjUmhFasQaaGlVSHWMTeB9M1lxkWnsctCkUbbcOLr4hvwPOaBhiKyF47
- Pcdw==
-X-Gm-Message-State: AOJu0YwZuu9YfS/anyHaBgScquka3GPTEnCus9nVnrZZw6rfbQEcuz8H
- /VVX2TU+wf410NnPW9QYZneKgN7m2Ikjqjb4eP4GyaJCfS/W60W6OSw0g2624zY=
-X-Google-Smtp-Source: AGHT+IFRHLJ3t0L09HWd9/LVMBoQn9Nhz9epDyPitp5YRJHMo6mm25sN//4SVCbqt7oF3RKPvGssIg==
-X-Received: by 2002:a05:600c:997:b0:42b:ac3f:f5c with SMTP id
- 5b1f17b1804b1-42bbb436de5mr78225265e9.26.1725349234146; 
- Tue, 03 Sep 2024 00:40:34 -0700 (PDT)
+ bh=bSo7wPFr31kW34M+DkuiN5n5elYQ9XRGVElF1IpbxhE=;
+ b=o3cXNuup+hF7uRwc4b10UrooB9P2jxTpGe3aZo7KI5sBHc2DZ0pNTuLhQL9oMzQ0VT
+ w/DvsIj3IgpHNc0M7QR67levFjEXdvOYopTji0UYSTeBm5YbeX6dR13Z5YLDfV6pnhTz
+ ihGE7mxXTW85C3KIkXqSxux7OlO3+CaRDgrslRtBavbOv19lu2XAJdRr3kaiOE67IpfM
+ HHnS/rk0X+hfArY7Cl4iRE3/55e53bFzHX8rWKPBTmBaalXxOIWbVTP6h+gXKBq1y/Gt
+ X9aWySnGUHtLlzByeJBhJYJp0iXthtRHhU3f5UCwe6pPoYVWxqBH6vPljj3AlXX+Eryu
+ qVXA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW12Ihjydcu/SMgfzYZKT3GO1LZbgU99YD1jl4ArtKb4J9ZZMfEsO2I9SHGYIlPjyiQlaaBTRM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwYVze/gPXBC82LDfvFlLEzZn3ZviCZcQxvQ/Foq8WztdP8DgL/
+ Kr5nofy/QtRbv464kT/7w1JDXyizW8tZWVWKHb3e7rRBvAa1PmnBX+6DfdGXT0g=
+X-Google-Smtp-Source: AGHT+IEzmWuX4WYa+sg7ZvnGdvbUjL1sKzy/nvHmBk/k2o2QacINlX4vBTdN/MvCsPTEuseFbbzV8w==
+X-Received: by 2002:a05:600c:444c:b0:427:ff3b:7a20 with SMTP id
+ 5b1f17b1804b1-42bb27a9c9dmr130966715e9.27.1725349337002; 
+ Tue, 03 Sep 2024 00:42:17 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42bb6deb27fsm161025205e9.10.2024.09.03.00.40.33
+ ffacd0b85a97d-374c6543ee3sm6386662f8f.12.2024.09.03.00.42.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Sep 2024 00:40:33 -0700 (PDT)
+ Tue, 03 Sep 2024 00:42:16 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Guillaume La Roque <glaroque@baylibre.com>, Bryan Brattlof <bb@ti.com>,
- Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
- Vignesh Raghavendra <vigneshr@ti.com>
-Cc: u-boot@lists.denx.de, Vishal Mahaveer <vishalm@ti.com>, Guillaume La
- Roque <glaroque@baylibre.com>
-Subject: Re: [PATCH 3/3] board: ti: am62px: Add android bootflow support
-In-Reply-To: <20240902-sitaraupstream-v1-3-0c478c33c08b@baylibre.com>
-References: <20240902-sitaraupstream-v1-0-0c478c33c08b@baylibre.com>
- <20240902-sitaraupstream-v1-3-0c478c33c08b@baylibre.com>
-Date: Tue, 03 Sep 2024 09:40:31 +0200
-Message-ID: <87y1496v80.fsf@baylibre.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>, Francis Laniel
+ <francis.laniel@amarulasolutions.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Michal Simek <michal.simek@amd.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v2] mmc: Hide mmc speed command under mmc command
+In-Reply-To: <26339e14-1d8a-4471-acdc-902d0ef2ed54@cherry.de>
+References: <20240902133721.18938-1-marek.vasut+renesas@mailbox.org>
+ <26339e14-1d8a-4471-acdc-902d0ef2ed54@cherry.de>
+Date: Tue, 03 Sep 2024 09:42:14 +0200
+Message-ID: <87v7zd6v55.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -93,46 +95,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Guillaume,
+On lun., sept. 02, 2024 at 15:41, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 
-Thank you for the patch.
+> Hi Marek,
+>
+> On 9/2/24 3:37 PM, Marek Vasut wrote:
+>> The mmc speed command configuration option keeps showing up in
+>> Kconfig directly in 'Command line interface'. Move MMC_SPEED_MODE_SET
+>> under CMD_MMC to make it show up alongside the MMC command.
+>> 
+>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>> ---
+>> Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>
+>> Cc: Francis Laniel <francis.laniel@amarulasolutions.com>
+>> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>> Cc: Michal Simek <michal.simek@amd.com>
+>> Cc: Quentin Schulz <quentin.schulz@cherry.de>
+>> Cc: Simon Glass <sjg@chromium.org>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: u-boot@lists.denx.de
+>> ---
+>> V2: Rework the commit message
+>
+> Better, thanks :)
+>
+>> ---
+>>   cmd/Kconfig | 19 +++++++++----------
+>>   1 file changed, 9 insertions(+), 10 deletions(-)
+>> 
+>> diff --git a/cmd/Kconfig b/cmd/Kconfig
+>> index 43f78a5aeb1..953e1f0ef2a 100644
+>> --- a/cmd/Kconfig
+>> +++ b/cmd/Kconfig
+>> @@ -1406,6 +1406,15 @@ config CMD_MMC_SWRITE
+>>   	  Enable support for the "mmc swrite" command to write Android sparse
+>>   	  images to eMMC.
+>>   
+>> +config MMC_SPEED_MODE_SET
+>
+> I'm wondering if we should prefix this with CMD_ maybe? It's used in 
+> drivers/mmc/ though.
+>
+> Anyway, not a blocker for this.
+>
+> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+>
+> (You forgot Mattijs's Rb from v1 BTW)
 
-On lun., sept. 02, 2024 at 18:31, Guillaume La Roque <glaroque@baylibre.com> wrote:
-
-> From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->
-> When CONFIG_BOOTMETH_ANDROID is set, enable Android boot flow support.
->
-> To build for AM62Px for Android, we can re-use
-> the am62x_a53_android.config fragment when building A53 bootloaders:
->
->   $ make am62px_evm_a53_defconfig
->   $ make am62x_a53_android.config
->   $ make
->
-> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
+Giving it again, thank you for noticing :)
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-> ---
->  board/ti/am62px/am62px.env | 5 +++++
->  1 file changed, 5 insertions(+)
 >
-> diff --git a/board/ti/am62px/am62px.env b/board/ti/am62px/am62px.env
-> index f8b6aff2c2fd..7ef54079aa8d 100644
-> --- a/board/ti/am62px/am62px.env
-> +++ b/board/ti/am62px/am62px.env
-> @@ -13,3 +13,8 @@ mmcdev=1
->  bootpart=1:2
->  bootdir=/boot
->  rd_spec=-
-> +
-> +#if CONFIG_BOOTMETH_ANDROID
-> +#include <env/ti/android.env>
-> +adtb_idx=3
-> +#endif
-> \ No newline at end of file
->
-> -- 
-> 2.34.1
+> Thanks!
+> Quentin
