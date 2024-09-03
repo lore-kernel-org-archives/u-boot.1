@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 470D9CD13CF
-	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 08:39:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08520CD3420
+	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 08:39:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDD3388C87;
-	Tue,  3 Sep 2024 10:38:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2AC3A88CD2;
+	Tue,  3 Sep 2024 10:38:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="A8uBSMEV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QUfQgVb9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89E5588CF2; Tue,  3 Sep 2024 10:38:55 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 6710088CEB; Tue,  3 Sep 2024 10:38:57 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BF0288C30
- for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 10:38:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 449BA88CF0
+ for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 10:38:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-42c7856ed66so23989195e9.3
- for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 01:38:53 -0700 (PDT)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-374c7d14191so1065373f8f.0
+ for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 01:38:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725352733; x=1725957533; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1725352734; x=1725957534; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eyG3QXG+UUiIibtKovBRnK2Z7clawHN81b2WLACzqvU=;
- b=A8uBSMEVeT0g8jB0NiaItGBGyvg0YdpEuW+lHvtc0Jm3XMuEwovdDGns0rWCQI+MdU
- V5zYP3AEoAVusvwNxtITgpGFCravzFflqzo/VIcK36kVNLeYtE++gqEIlLozot364bEh
- Qu9EXiIMGlynsUdhYH8O2Qx3xZYxOqUNWqlK4CPwfu1n5saVa0R1Y4LDsM0/aUM3UPGn
- UMQZwmMOull6sGF0kVXEihBdVT6+0e7Kxbe5ItWCWAycru0uUYzd5t1tgYJsojgq/bJN
- yf/D5sfYVEoDl9jkKUj4WSXVt90SVGedJX5crB4sQnj/nV6wzNFLQTeGy2qS+GvYelOw
- RlEw==
+ bh=nMH3K6RMJfnQZ/B/a5WpOMKrLegix2UP4tjC+okn3SY=;
+ b=QUfQgVb9NCS7VIOAuNahl5AhyRP8m40t1Omqv2wsB++BGjWZjmxejQdzMaH0pB/ckB
+ 8pJOG2s0himeDom54l2L8SYbRuONjthqyMg48i3W4Pbq4mOW14MnRLggAyG/OZtBhmQ4
+ dmY4T6tYvz0+9Jhv+wk9sNuGFblX+qkvNPO7BAj/cwirbCy1g0DhL9N8h4pwbp7W/1L9
+ smvKg9z7nRfBg0DM3/pJgRVd/RJck8gtHyBv275N0i46MY83330dcVU3sFAH8u9bJHIL
+ ros5a5O+3i30qEm6PvLPSZ5Cjr9LlkyOJwAuqEjpZkP56L4ZGIvt2JK7lGQ87m6xvhRT
+ mZZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725352733; x=1725957533;
+ d=1e100.net; s=20230601; t=1725352734; x=1725957534;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eyG3QXG+UUiIibtKovBRnK2Z7clawHN81b2WLACzqvU=;
- b=hmPvAJiC5vhbf7QTSL1H2fD3S+B7F4aKlzuexU8wiJ13ozXKm9SPOzWs1vOnbMSeSK
- mFR8fRXgVfHAAuZzCXFqUydSLzkm/FMB3YN6dnDt6ofeh55JjpZu0OtbvirWIs/duPeH
- dwDlkJ7Fofjj+JyQfKfzV/6HHQyIizYAVFY4erAgjNXdbqHsTiq095NSWA2laMR6EL6j
- nnA4s7qnnAaseiDJ2+83FYh9vsmI+vtHfOIC9LeO3mX0wCEYyIdd7Xytl7Db/FMTG4Uw
- dG1FG2UyYqYiHsfXbyxxNzBU6YKoGlo+oSnw01IMoSIJ4fShlknjgDY5Oc76rbXQr7wR
- r8Ig==
-X-Gm-Message-State: AOJu0YwcKR4zeveUMQJfRpIhwkDJTWGtvAFMWdr/OlvuEj7vWTqPOBHa
- ejuJ30/w6YsEpon7X63J/YSjQ3TloGo122pnpY2YxD3McvRpICu9Z1saJT62xGv+qRy4bcsRAQj
- rYw5S7w==
-X-Google-Smtp-Source: AGHT+IF33/nGoEy81AnCluOH09houJoN9FgYSswxftJ0U2sPHalWYxZzGUAnROFQcErIfdDkEx7tuw==
-X-Received: by 2002:a05:600c:3ba7:b0:425:7c5f:1bac with SMTP id
- 5b1f17b1804b1-42bb0306f94mr138048555e9.21.1725352732842; 
- Tue, 03 Sep 2024 01:38:52 -0700 (PDT)
+ bh=nMH3K6RMJfnQZ/B/a5WpOMKrLegix2UP4tjC+okn3SY=;
+ b=fl6+8k3C4OaKfc/JrpHyVHPFKFxYuuI3tcv6rl578lFXok3xW+F7vbXVPVLRPuNe5s
+ sZjNsBih+QdIejkvi/Jm1dhVwnCF5CVDtcZ0HOpfOqACiYYCGP5kDXN6zWsQtVm8QFdg
+ j8mTc7yavA3Kihrf2kSQe2ZvOF5yYCOpUXwfI3XBQyNkH6vbC/99tOAXa6g0hgDur5nj
+ QR+LVWTw0/de8XDCyVOl9HAr0OBnGfAvVgqbv9pHCMGr6ED0P0EYVb9SAOGu5Vnn908L
+ RUy2PhvgeHg6/ajPMMyLLBVwg/s9zzsazDagRL2fCvXBHxO5SsBg1P21dEKxC2JJ+sEA
+ VwJA==
+X-Gm-Message-State: AOJu0YzXpQYLftUJEga/Yur3qR9bFnKjoZxoXupCMItDGPV5WriAjInQ
+ qfWszUB22xxeSTDoh/6P1zDVe7rTFucKDcm5khc+ZHMimbYjm9nQELjCjqZrYGnBJjv4Zr8S8AE
+ s9Tj5Hg==
+X-Google-Smtp-Source: AGHT+IGMRBYTCVWiUGR4nEosjVgUJy65VkZ99L2GAEVUQnAjjfuGj9pSUhXMiMbgMtkD8ne07eJvQA==
+X-Received: by 2002:a5d:59a7:0:b0:374:c878:21f7 with SMTP id
+ ffacd0b85a97d-374c87823fcmr4793397f8f.10.1725352733802; 
+ Tue, 03 Sep 2024 01:38:53 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:6417:8cf6:a7f7:ee38])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42bb6df795asm163103325e9.21.2024.09.03.01.38.51
+ 5b1f17b1804b1-42bb6df795asm163103325e9.21.2024.09.03.01.38.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Sep 2024 01:38:52 -0700 (PDT)
+ Tue, 03 Sep 2024 01:38:53 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Peter Robinson <pbrobinson@gmail.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 05/16] arm: omap2: add missing #include <netdev.h>
-Date: Tue,  3 Sep 2024 10:38:02 +0200
-Message-Id: <5c4e108966560a56f1f6e9257d9c4f78059b8a2b.1725351676.git.jerome.forissier@linaro.org>
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 06/16] net: fm: call dtsec_init_phy() only when it is
+ defined
+Date: Tue,  3 Sep 2024 10:38:03 +0200
+Message-Id: <0313c96cea56acb5585f04bbf4da25145560de3b.1725351676.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1725351676.git.jerome.forissier@linaro.org>
 References: <cover.1725351676.git.jerome.forissier@linaro.org>
@@ -95,29 +97,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-emac.c implements cpu_eth_init() so it needs to pull the corresponding
-header file.
+dtsec_init_phy() is defined only with MII so add the proper conditional
+in the caller code.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- arch/arm/mach-omap2/omap3/emac.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/net/fm/eth.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm/mach-omap2/omap3/emac.c b/arch/arm/mach-omap2/omap3/emac.c
-index 7348e92cabd..1e30a06361d 100644
---- a/arch/arm/mach-omap2/omap3/emac.c
-+++ b/arch/arm/mach-omap2/omap3/emac.c
-@@ -9,6 +9,7 @@
- #include <net.h>
- #include <asm/io.h>
- #include <asm/arch/am35x_def.h>
-+#include <netdev.h>
+diff --git a/drivers/net/fm/eth.c b/drivers/net/fm/eth.c
+index 19f3f0fef07..22025b6a273 100644
+--- a/drivers/net/fm/eth.c
++++ b/drivers/net/fm/eth.c
+@@ -26,7 +26,8 @@
  
- /*
-  * Initializes on-chip ethernet controllers.
+ #include "fm.h"
+ 
+-#if defined(CONFIG_MII) || defined(CONFIG_CMD_MII) && !defined(BITBANGMII)
++#if ((defined(CONFIG_MII) || defined(CONFIG_CMD_MII)) && \
++     !defined(CONFIG_BITBANGMII))
+ 
+ #define TBIANA_SETTINGS (TBIANA_ASYMMETRIC_PAUSE | TBIANA_SYMMETRIC_PAUSE | \
+ 			 TBIANA_FULL_DUPLEX)
+@@ -701,8 +702,11 @@ static int init_phy(struct fm_eth *fm_eth)
+ 		supported |= SUPPORTED_2500baseX_Full;
+ #endif
+ 
+-	if (fm_eth->type == FM_ETH_1G_E)
+-		dtsec_init_phy(fm_eth);
++	if ((IS_ENABLED(CONFIG_MII) || IS_ENABLED(CONFIG_CMD_MII)) &&
++	    !IS_ENABLED(CONFIG_BITBANGMII)) {
++		if (fm_eth->type == FM_ETH_1G_E)
++			dtsec_init_phy(fm_eth);
++	}
+ 
+ #ifdef CONFIG_PHYLIB
+ #ifdef CONFIG_DM_MDIO
 -- 
 2.40.1
 
