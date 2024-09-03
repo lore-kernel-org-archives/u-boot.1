@@ -4,88 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42F39CD379F
-	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 16:07:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71BE5CD37A9
+	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 16:13:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7241E88B59;
-	Tue,  3 Sep 2024 18:07:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 948F18806C;
+	Tue,  3 Sep 2024 18:13:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dlYohwa5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lisCimSe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B616E88B4B; Tue,  3 Sep 2024 18:07:12 +0200 (CEST)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
+ id B143388B59; Tue,  3 Sep 2024 18:13:36 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 593AE8841E
- for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 18:07:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E1AC87705
+ for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 18:13:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-7d4c923a3d7so1114028a12.3
- for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 09:07:10 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-367990aaef3so3279238f8f.0
+ for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 09:13:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725379629; x=1725984429; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TPZ+fwc4uJPc1Ms46Ljckfx4pwVqyKN4kRjxlQupO9E=;
- b=dlYohwa51uME4VGqyaTbHQ2a8p2QlQfwKLfhQNzW73ZHbplj6v3PpTWVAEPu96qc/3
- wdoVljj54zdqna6SL8a/RSvBk0HLgRSXmRjYC1pztiZQAjWj+5/pi1rp8mzO/ryRURUK
- Fd8ALUp+NLM3zC0NoOdouzp0kWObCZ4OT6KVha48m2HkAFxKx68S3D+l6dIVww8Ramqx
- kjUAp6RYeA6UXzYZlYrk8myqFQzu4ZKdLawQjwVoIc3tBfvKTXHMlPTJXhP8WOMa8K2f
- Cl019RWNckZqyxa08c+mtwEP4FrUGYIJ3Hc6ZhVJ9c/sCm4ZHV+bHdCOOnVrsaQMofIm
- APlw==
+ d=linaro.org; s=google; t=1725380014; x=1725984814; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=1dV2siLIpW0XYxcz3YHoUgQJj3gtd+9lCoRd7FEhem4=;
+ b=lisCimSeX8LrlKmfK1RvfqBMIk8USYk0FO8Pl7eOTeZ5izVy70t5lx5ySK64nub10E
+ 2tiUlP92bX+wSxGkCDmonKYS/90PUbuvPIKvL5yAYlRM47CnjTwsrqq+jR8Ptu8yMgVI
+ +q+c2lHWmMG1mVXDlFwOhy0o3KPqyJddwHopVitjQNPaCnAdUKS8TkqmJ61jswztCqys
+ qBY/QbSX3kO7ld4Z6AwVZxFEwi9t+/DklafVj38nA6/7WfDNa4ep5znxcVEkM3XGDpDA
+ 3pR2qkyeCes03I6Ql2SgsqvwM6/v0r+7PfdxNlP+iMcECIkZabt8REH7XyTHj1tBKn9u
+ Hhzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725379629; x=1725984429;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1725380014; x=1725984814;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=TPZ+fwc4uJPc1Ms46Ljckfx4pwVqyKN4kRjxlQupO9E=;
- b=QCMCReHZyQdQ6tsTrxntQZCKq4ICZkr+W0KXux/ThgSWWieXWXhcN6BNpWu/TylK4j
- B0A2aWkm/mUvPS04JqvA5N0PJyQCEEf7ySOE+/DhmacEe5eNl+z807Dsm8w4mQIcgvp0
- xMEL+xifWuVTqsBuWssWOMlJB88tqkH1ffWyJeRqxhQmr9d3y/ggChp5cdJsJWRh4Qnl
- 87CvBdOmIWX8fnwI+RIqoq7+hxio91F18zeTi3IdA5QpSSmbYRH8LFAUHD+oXi9W7hs+
- RMx/hFDGy1YZ38oz2CDzK/Xo1mQXb8uk8KHG0cIwqbv7w3tQ4NHEGfinKFnwABsafRHI
- pi5A==
-X-Gm-Message-State: AOJu0YywXjhEeOhcsDKyok6lhgQJx7HZEAXbkNowcB6ZpiQLgDaz+B2G
- iH0njOLyANBxqjrN0acXoqmTl+vaE972cK6Z05fiMu3/rUkChlfDGUxfT7oWojeUsmOB8g57owg
- VWEofmuG/UW9PheMG+6Djpk9MJoutTQxrXdJvTg==
-X-Google-Smtp-Source: AGHT+IF/ThVB47BbE8MCa2k5vuBiM1Fb7ourDYCVN0LqVmUevrpNf3i1g0Up7IkjxG7xTZ4+1Tn4rJULJP9vLqFVFTo=
-X-Received: by 2002:a17:90b:1b11:b0:2d8:a9ca:17a4 with SMTP id
- 98e67ed59e1d1-2da5597ab68mr3836081a91.21.1725379628684; Tue, 03 Sep 2024
- 09:07:08 -0700 (PDT)
+ bh=1dV2siLIpW0XYxcz3YHoUgQJj3gtd+9lCoRd7FEhem4=;
+ b=mrkcbZddoaNLSiWbSYTiw5uDt3TuWDZ9dVkkvpZNxoJMgyuYUF9Tk0nYbRIQSe7LYx
+ AAP4HahV488S4oAjhJaGBahUwSwO6+L7GPbjYssmMRfw93bazxzzhe15rpLVnA478Y1t
+ UwPusDz5LALmnzXbn2XVsQRWu97Goos7T3rZxiMzfwHpT0ax1TGypA/L77stJlVOPsLu
+ 30a2Vg9VZCYLep9xrFRnX+8YwLniXzUTHIB72iHnsx7vVCSoVcBlmDiUZmWCzFvEKfmD
+ 5sJqxktyBIyx63B3zDoZQLR8+san+IppqzUtfQwesuC1MkkVDeYKIVg5qv/G4M5FEISS
+ NYuA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV6AKQZziLahdbqlVd4waovZF/i5MbnCrkY+aTzFBqbI8S4VfNI/FMdMMzifr9KdbmcLZlxCqk=@lists.denx.de
+X-Gm-Message-State: AOJu0YzzDgb9P3A36HnKRdKYEYB7GRIuwZ3KW4/rQ0D0rJp5TT2sFCEF
+ CQDDzWcbJ7/tTlkAQ359jL4iUVPH7/gzQbdFaR5IPhzClPHo5V4rnpBQUTuqoUY=
+X-Google-Smtp-Source: AGHT+IERDwb3xBrUwQh15UYA/90aGrHBapieplzo1vjogRZfcmMXub8b51XDQE2FOix3K24pU+NrJA==
+X-Received: by 2002:adf:ab18:0:b0:374:b69f:8 with SMTP id
+ ffacd0b85a97d-376dd71aademr1052783f8f.33.1725380013357; 
+ Tue, 03 Sep 2024 09:13:33 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3767dc16f83sm1807517f8f.60.2024.09.03.09.13.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Sep 2024 09:13:32 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH 0/2] regulators: qcom-rpmh: support SM8550 and SM8650 platforms
+Date: Tue, 03 Sep 2024 18:13:29 +0200
+Message-Id: <20240903-topic-sm8x50-regulators-support-v1-0-0857185bddc0@linaro.org>
 MIME-Version: 1.0
-References: <20240816154658.1866186-1-raymond.mao@linaro.org>
- <CAFLszTjE+8BmdmtFXER94LmEYshNDEA4x_MDTqvyGhHYed2OCw@mail.gmail.com>
-In-Reply-To: <CAFLszTjE+8BmdmtFXER94LmEYshNDEA4x_MDTqvyGhHYed2OCw@mail.gmail.com>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Tue, 3 Sep 2024 12:06:57 -0400
-Message-ID: <CAEfUkU+mhmesTgXAO+iGwVdH7hsmY9iF78M4fyM6YciK9o3Dzw@mail.gmail.com>
-Subject: Re: [PATCH 00/10] SMBIOS improvements
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Bin Meng <bmeng@tinylab.org>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Stefan Roese <sr@denx.de>,
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Wan Yee Lau <wan.yee.lau@intel.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Alexander Gendin <agendin@matrox.com>, Michal Simek <michal.simek@amd.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Max Krummenacher <max.krummenacher@toradex.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Sean Anderson <seanga2@gmail.com>, 
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Peter Robinson <pbrobinson@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAKk112YC/x3NQQqDMBBA0avIrB1IYkobryJdqB3tQDVhJhZBv
+ LvB5dv8f4CSMCm01QFCf1aOa4GtKxi//ToT8qcYnHHeBNNgjolH1OW1PwwKzduvz1EUdUspSsb
+ B+jA5b58uBCiVJDTxfh+693leRk24DnEAAAA=
+To: Caleb Connolly <caleb.connolly@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.14.1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=691;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=9DTjdj+V6Qp+4xLgTEqzdEYfoHOzQs14d6Erj01mW+8=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm1zWru3DLymzeX9ujW1tzy94bNXNv7r6SSkLyuw1K
+ QxizJWyJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZtc1qwAKCRB33NvayMhJ0Xl5EA
+ CRY/xptL8J6/IomE5y34IM6Bae1wQynyJhQ7rJnRQlwLgpWn1HyOp+g2PeU8bJQh8SIU3eNnmi7BZu
+ iWgMt5Nwgr7FhUXM6LPNsQSeo0AsMTQaKWbDxKEmn1HI5rcXEvRVBqGuXgw1IZaergTuVggk/9c3jj
+ 7Ez2mMlPGGHi5F/3KJfDE5ucqlI1ELp6lGBaF8SodUPJuelRV3H7fPWQoKLmu1J9UZEjNq7niCB448
+ G/LH/HS6YZ5zsKQ0J2V3f3O+Etcr15/vg+DiUZRli4DzjxTXy5Gee7msQjnJzFvfyyp9fDPJlILlRF
+ gjO1HDdX3+ZDavYuitB7p67RAzIkT8i1oTQFuUwKxNdUZpxIg4AzZWjN/qf5/58XJu/ylfjb8nokDE
+ wt6V8c13S1sC6WuJIVbtrQvB3b/EZBXS/4rmWzmVZUOOELb3lba+1gcFAw6poq0C8CRjYJU1lYhYB2
+ 5yVs1Pu52oimQqkuQawd9NduafnxPJDxD+/7TKjJP66zsOn4M9xnx7xJgULSAtNBnfH9z5rW8P8Soh
+ p07E+8sbEqNmdOaiECwQHrmzc25a4wWKmt3vOJGmvS2iUr7MO4oTMRblamMUl2D1igQ9izYuYTACgZ
+ sITvjYOkSt/eVh893Y1jmAduRteJNXLuVC19yBBWVVPXQvwEFcOwMcxV39IQ==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,93 +113,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Fix the RSC and add the tables for the PM8550 and related regulators.
 
-On Sat, 17 Aug 2024 at 11:58, Simon Glass <sjg@chromium.org> wrote:
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+Neil Armstrong (2):
+      soc: qcom: rpmh-rsc: add back __tcs_set_trigger() for SM8550/SM8650
+      regulator: qcom-rpmh-regulator: add support for PM8550 & related regulators
 
-> Hi Raymond,
->
-> On Fri, 16 Aug 2024 at 09:47, Raymond Mao <raymond.mao@linaro.org> wrote:
-> >
-> > Motivations for changes:
-> > Current SMBIOS library and command-line tool is not fully matching with
-> > the requirements:
-> > 1. Missing support for other mandatory types (#7, #9, #16, #17, #19).
-> > 2. Only a few platforms support SMBIOS node from the device tree.
-> > 3. Values of some fields are hardcoded in the library other than fetching
-> >    from the device hardware.
-> > 4. Embedded data with dynamic length is not supported (E.g. Contained
-> >    Object Handles in Type #2 and Contained Elements in Type #3)
-> >
-> > Changes:
-> > 1. Refactor the SMBIOS library and command-line tool to better align with
-> >    the SMBIOS spec.
-> > 2. Create an arch-specific driver for all aarch64-based platforms to
-> fetch
-> >    SMBIOS private data from the device hardware.
-> > 3. Create a sysinfo driver to poppulate platform SMBIOS private data.
-> > 4. Put device tree SMBIOS node as a fallback solution when SMBIOS data is
-> >    missing from sysinfo driver.
-> > 5. Add support for Type #7 (Cache Information) and link its handles to
-> >    Type #4.
-> >
-> > Once this patch is acceptted, subsequent patch sets will add other
-> missing
-> > types (#9, #16, #17, #19).
-> >
-> > Raymond Mao (10):
-> >   sysinfo: Add sysinfo API for accessing data area
-> >   sysinfo: Add sysinfo driver and data structure for SMBIOS
-> >   smbios: Refactor SMBIOS library
-> >   smbios: ignore the non-existence of platform sysinfo detect
-> >   armv8: Add arch-specific sysinfo driver
-> >   sysinfo: Add sysinfo driver for SMBIOS type 7
-> >   smbios: Add support to SMBIOS type 7
-> >   armv8: Add sysinfo driver for cache information
-> >   configs: Enable sysinfo for QEMU Arm64
-> >   tests: update smbios pytest
-> >
-> >  arch/arm/cpu/armv8/Makefile      |   5 +
-> >  arch/arm/cpu/armv8/sysinfo.c     | 391 ++++++++++++++++++++++++++
-> >  cmd/smbios.c                     | 350 ++++++++++++++++++++++-
-> >  configs/qemu_arm64_defconfig     |   2 +
-> >  drivers/misc/Kconfig             |   2 +-
-> >  drivers/sysinfo/Makefile         |   1 +
-> >  drivers/sysinfo/smbios_plat.c    | 442 +++++++++++++++++++++++++++++
-> >  drivers/sysinfo/smbios_plat.h    | 131 +++++++++
-> >  drivers/sysinfo/sysinfo-uclass.c |  20 ++
-> >  include/smbios.h                 | 240 ++++++++++++++--
-> >  include/sysinfo.h                | 124 ++++++++-
-> >  lib/Makefile                     |   2 +
-> >  lib/smbios.c                     | 461 ++++++++++++++++++++++++++-----
-> >  test/py/tests/test_smbios.py     |   2 +-
-> >  14 files changed, 2058 insertions(+), 115 deletions(-)
-> >  create mode 100644 arch/arm/cpu/armv8/sysinfo.c
-> >  create mode 100644 drivers/sysinfo/smbios_plat.c
-> >  create mode 100644 drivers/sysinfo/smbios_plat.h
-> >
-> > --
-> > 2.25.1
-> >
->
-> As a general comment, this is adding a load of code which is used by a
-> lot of platforms. As more and more aarch64 platforms are created, this
-> data grows. Why not use the devicetree for this hardware information?
-> That is what it is for.
->
-> Some of the information detected makes sense, such as cache setup, but
-> some of it seems like an approximation, or is missing, but suggests it
-> is authoritative.
->
-> The idea is that precise information can still come from dt (if the node
-exists,
-but as a fact, not many platforms have it up to now).
-When it does not exist, system drivers provides the information as much as
-it can (some comes from registers, some comes from generic strings/enums).
-So it is not assumed that each vendor to add their code but just uses the
-arch-specific code in this series - if vendors want precise
-information they can
-still add into the dt.
+ drivers/power/regulator/qcom-rpmh-regulator.c | 136 ++++++++++++++++++++++++++
+ drivers/soc/qcom/rpmh-rsc.c                   |  43 ++++++++
+ 2 files changed, 179 insertions(+)
+---
+base-commit: bb403c895887eb5b29652f916646f886b34c6309
+change-id: 20240903-topic-sm8x50-regulators-support-b149f2417299
 
-Regards,
-Raymond
+Best regards,
+-- 
+Neil Armstrong <neil.armstrong@linaro.org>
+
