@@ -4,203 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 771FBCD379F
-	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 17:07:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15DABCD379F
+	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 17:10:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F328C889BD;
-	Tue,  3 Sep 2024 19:07:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 7BBB788BBE;
+	Tue,  3 Sep 2024 19:10:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="vQb+sVTl";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="QZUvHXZS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17E5488B64; Tue,  3 Sep 2024 19:07:48 +0200 (CEST)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2062d.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::62d])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 64E1D88B49; Tue,  3 Sep 2024 19:10:10 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFD8B887EB
- for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 19:07:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=C2UGy3Oj2UlxjtFiQQXT+3AI3iKG77shbZaGTKRSnQkVPpPRkGOjEYwKDbz4NoIVTnpaqdW2rM4RuCXhy+MA3L+57CZ8Hm0NZHcTiVvoegwPWbAvzcdteNPjK2AQda2G1L0wmTYKWkeZJLJYSDItq/PdQ6PugRn3zr4IIfLgNPy5dg2U97FlhyDP6LQB/1eQsT3wj7MbgH2IEWIHaNK4vKDeRLPxk7oIFVMJDKKdxRfU7vzYGgZnxUNcGqTJp0Ob05cKPNWfYvdqWvfkU2cTsTmBmcCeXRnCw9Jt6fatCXrCZw+lz8XeWlbUnpuhSQvaqSiviakkfA8cORlAfVp9Qg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MfKZuIB919R/WUs5JlxIhCdrGsVRoqprWEvwyxKLkh4=;
- b=WGTFuNEk8pHdec7VOyPvkvmLz1DdsK2a7Yfckb/bVeRywRhbgdsgLb5/jo53ARt77jdpBSiFJjUgjwJri2IwBsRaibm6I7R2cLLjnqIEdiDMFI8GXgMWt+R91A2bWzLr1dldPZznggTFIyv+5MiCe5PFRu4cgPwfdVnwVazeFF3k/2Jm8cn8dNFgIfCn/kGKJXebCn54fwleQKLzZSVgn3gDUB0UjzHFEqHllELovuruUIcPlhJz4rGKpqdrLdVLiwhDt6/KYEr6f0/YXsmr4xjfni2xBstQoYgzFDKj1n1SaFyWpT28pAfTkmuNFo0XxDgiZbRnUEpt80njbzqeAw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MfKZuIB919R/WUs5JlxIhCdrGsVRoqprWEvwyxKLkh4=;
- b=vQb+sVTlFAq2QaSlEoRiMflMRp6jcDi4BEeiY0AFAhQvTvrgM7dOSF9o3uhTciKZgkmc6nD84NvVzPiZmHvaydxEEFavai1yx6GNISZzm+BhOjxM+HO/aYWCtYvPtJm06EVXOxKXmbJ97mkkvUf4WffWGGULI5FMeb40E25Nyrk=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by DS0PR12MB8574.namprd12.prod.outlook.com (2603:10b6:8:166::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.25; Tue, 3 Sep
- 2024 17:07:42 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30%4]) with mapi id 15.20.7918.024; Tue, 3 Sep 2024
- 17:07:42 +0000
-Message-ID: <8ca6fe22-c8ff-47a9-9cc0-b4781b9cc58a@amd.com>
-Date: Tue, 3 Sep 2024 19:07:37 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] fwu: v2: try reading both copies of metadata
-To: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-References: <20240830114057.891069-1-sughosh.ganu@linaro.org>
- <20240830114057.891069-3-sughosh.ganu@linaro.org>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20240830114057.891069-3-sughosh.ganu@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BYAPR05CA0020.namprd05.prod.outlook.com
- (2603:10b6:a03:c0::33) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
+ by phobos.denx.de (Postfix) with ESMTPS id DF96D88646
+ for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 19:10:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=francis.laniel@amarulasolutions.com
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-42bbc70caa4so37346625e9.0
+ for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 10:10:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1725383407; x=1725988207;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fBzqivPZTPTpFxcqckwdJ7L+Bbe65D6DbtGwktqoaHg=;
+ b=QZUvHXZSfEVch0CBQUExipAUIr2qoH4mgeq5wGIo2+XYVaUIXZXPzu/2jpvTp2zQ+W
+ 0Ho8YEX0F1cdss8w+RfzeJe+pLVOSi/asv91YSV8VRkFzEzCOg0iWm/pXnMSWh4dPkhs
+ IM2Loocat73GCAQo0B4cH2Dn3fZITOq1nrAdM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725383407; x=1725988207;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fBzqivPZTPTpFxcqckwdJ7L+Bbe65D6DbtGwktqoaHg=;
+ b=YeVEiTad5m70Xiugaf9/ndLZ6SIyQs0g90585KOtKh3IKPeMr8TYg4m7WOaowh5tJm
+ VyZ+xRcAxVw9cgjBnmNp5nRK0I7IBpbpRcpaB9L3yYpl5OzGLA9FSmUQcu76w9N+AXEV
+ CK9tDgZMZ+qf/06N4fWFLqNi+/P5QkeM//+FIGOEZQOmta5gPqAeJUhdyaExmLCn+/wf
+ Gn08z7HNgBcTJj4rQn8+e4SEDxohtTtzStSuO77mhwP07jp1cuv3D1b+c/25ccf/g7Q6
+ 6ml8Z7WJ2ee5HRXeMfEH6XFIx5BKDruEGu5qqpXxlxunYwk9lOYsqPwwZoJP7nrHmHGu
+ F47w==
+X-Gm-Message-State: AOJu0YzFI9umIFzoZ2468Eoz66/tTKwz52YGs0Vjf+moj+IYi9Runq9k
+ VSEpGVwEfEyxo48SoQr3n9/TLpOMM3w9aRQVIBiUgc+i5viGEkSheWDg2wu4LhZXagawvOUIMDn
+ q
+X-Google-Smtp-Source: AGHT+IEawyKSVoXImYrOt5hSCT08aTd1bNVReNEtLYsw6vzxjMRg/PvEbIeUd2WMsrRZaD9FCOkumA==
+X-Received: by 2002:a05:600c:4f47:b0:427:ff7a:79e with SMTP id
+ 5b1f17b1804b1-42c8de7b311mr12700865e9.16.1725383407126; 
+ Tue, 03 Sep 2024 10:10:07 -0700 (PDT)
+Received: from pwmachine.numericable.fr
+ (2a02-8429-e2c2-8d01-f9a2-0489-9dd5-0071.rev.sfr.net.
+ [2a02:8429:e2c2:8d01:f9a2:489:9dd5:71])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42bbd1eee1bsm146364975e9.9.2024.09.03.10.10.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Sep 2024 10:10:06 -0700 (PDT)
+From: Francis Laniel <francis.laniel@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Tom Rini <trini@konsulko.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>
+Subject: [PATCH 0/2] Bump new hush commits and fix old hush test behavior
+Date: Tue,  3 Sep 2024 19:09:41 +0200
+Message-Id: <20240903170944.98747-1-francis.laniel@amarulasolutions.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|DS0PR12MB8574:EE_
-X-MS-Office365-Filtering-Correlation-Id: 108a63ff-2e11-4182-07b6-08dccc3aec59
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?Q3JLeHBUVElMK1I1dUdndTBSSGhtNzN4Y05PKys3cFRaaWVnZ0RQWTdMSzE4?=
- =?utf-8?B?S3MvZUk4YzU4ZTk3aEs1TkFpaUoxdlQxbk1UY2ZEU3FidCtFQWR6MkNpL1g2?=
- =?utf-8?B?UFlkcE5mTVdVQUswQ2c4bmdxbStsOHhudUc4UWMrTE9MN25uYzhwZi95RU1J?=
- =?utf-8?B?OUh2UDQvdHdPdzJCSkF6Ym0xWUlWazR2NmxsN2U5ZU1ZRnI2Z1JLNkpyV3pv?=
- =?utf-8?B?Z1ZscDVoUWRrRS9qbGlIZG1FRHZiUjdLYjdEcFpUL2ViZ3NzNzNkZnI3UWhE?=
- =?utf-8?B?b3A5OThVaFlXdzVNWlUzdWxpc0RscjhCQ2ljcitETCtWdmIwYU5YNEV6M2dp?=
- =?utf-8?B?WEtGbUFJcXZGVk95Y3RDL1pBSXJmZkRLOWFqM05uTENzMmNlSFNrak82R0ND?=
- =?utf-8?B?Q3diRFFQK05zZUpVWWw4ZGlFV2tLNGN3Q2tCZksyb2RBNzJIWEJySmFDK3lE?=
- =?utf-8?B?NXFiMWM1aU9TcGN2ZCs3Q2srdi9TVVpqMkR0L0ZjUUNocytaeDBGdHd1NE5J?=
- =?utf-8?B?WTFCdlc2K1BKY0MzL0NUMVl6T3RvaE5ZcHpPQVdwUVQxNEJqMVE4WWFUN3Vy?=
- =?utf-8?B?Qi9kYmtQeTcwODMyWUNSNmtXbGV2aHlJTnVKNU5JR3pqMGpwYnlDVWVOUmhl?=
- =?utf-8?B?bnZBMGRNUyt5cDlJMGRWaWVpOVU4UFk2aTkrYWZmTkE3TmttOVhXMUdRUG9V?=
- =?utf-8?B?d3NWdS8wMHhVUzY0K1RBc08yZXVzU0VXamIxL0ZwejcwUFdpcXQ1RXFEOW00?=
- =?utf-8?B?Rlh0QkRLd2RDU29PVEtKZTR3Tkxmbk5xNE5ZUkFwNnJHY0F3YW9HYk5BOTdk?=
- =?utf-8?B?Mnk4eFNVOVdtQno5RGpLVDhxOVZONzlubFBSWFQzd0NNUUpvU2YrazlTNVJL?=
- =?utf-8?B?Z2JQaE9FeUNqRGRnL2pDSG5GYnVMUjhjZ2UwaEN5UndORnlEdktITEp3NnZY?=
- =?utf-8?B?L0kxK1FWdHlxMmFVeTluRmhpRzlzOURKSWcwSU1XeWtmKzVreC82ZnRwTTRy?=
- =?utf-8?B?ZTZsamJBV1NhVFhJek9GUkxZQXlrTHVWV0tOZUw3VVBKYmc5NjF5Y3pkSHli?=
- =?utf-8?B?OUZGbkRCczZBelBSUmZQblZPelpIK2FIams1UGY0Vi8wbWlnZ0YzTUxYNGRH?=
- =?utf-8?B?VW82VFJEVEtRZzJmamhPc0tzdnVzZFpDMFVZWXJYbjVkNGhkL1I2N3RoL2ZD?=
- =?utf-8?B?am0rNW5TamQ2NXNJS2ExcnEvclJLK2ZsVHJXaWFLL2g3OE51b1JHSWd2NVMr?=
- =?utf-8?B?SXRnd0FYSTdhUFIrWUNTVWl2ZHE4UDl5clRiK01RV3I3emYzUWF6aGd2YlBN?=
- =?utf-8?B?eXZVQ3d1ZDk1R2FtdkhyVnQzWmtEU2N3cC9OSEtQektYRGdRYVZ4M2NkbVQr?=
- =?utf-8?B?dzI3a0F5ajdKTWloRnBzV1FzcmR5SXh6Q0ZUZ044MlEvcnFkZGZjbzFoejhv?=
- =?utf-8?B?WXMxVlhqdkQ0WFNLOWJtUjE2NWFFaW16ZmNXMHZac1IzRis5UURDcWRxN0tJ?=
- =?utf-8?B?SldlaHJNOW1yb21aTmVudlpZUUVOeFdPWG1TM2VGdnNnSzc4dk5jeWUyZkFT?=
- =?utf-8?B?SXhiaHd1NjF6UlZuUVh4QzZoTnVzL2JlQXpPc2tWdmNZbTJkbGljSGQ0c295?=
- =?utf-8?B?SW9sc2tWZTV5UkVtcU5sWWdVZFlqYUlXejc3VENPQzh3eFdpYy8xVndPL2FG?=
- =?utf-8?B?enZFRFVzVkFpT1lEeDJlclFxNXNOb3ZSQ1E0TW5wcWhlWTk3M2VjaFd4SE1M?=
- =?utf-8?B?dXB3RXRNRTJkc2plQTYzN21LdVp4OCtMQ1F0d1VXNUx3L1IwcFdxWnc1UTBG?=
- =?utf-8?B?UnoxK2pQVy9YR00vYVZpdz09?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VVlCUFcxaEFmYkhYanJPVE9BNlI5OTkrZGpSY3daeFZiZmRHb1UwV2RaMGNR?=
- =?utf-8?B?Z3VGc044bE9rNUpaSWRZNUk1cGFaSkhmRjRzbEVrZGxub0wzd1BiQnVFb1NE?=
- =?utf-8?B?NERZUURMaENKTE5VU01xY1UxMkhLazNPVjBySFdxald1WGZWMFhkSUtnUDY1?=
- =?utf-8?B?eHhSVG1YNkxVWm9LUG83cG9iL095YW1KMmQyQnU3dEZCUGRRZi85L2JoQVlw?=
- =?utf-8?B?ZlVPQlRWUmR2a3Q3Mnh0N2QySjV6UnBuRjhaeEVEWVpwS3Y0M1JWTU9OY1hL?=
- =?utf-8?B?RVVURkgzNTZwSytwVTVJbkhXckFIWFVRNmczN2RjMkFRcE1iWjhnNkFIMnlp?=
- =?utf-8?B?Sk11cHRReEFpYUZuSmhqYlpnUlFaTE0wYnhZZzA2SFh3bGxrdGpsdklpeHg1?=
- =?utf-8?B?eDhEZzVCSERqUUJRRVVDc1N0d2lWM05ISWhONll4RUJBU1Uwa05CNC9SdlM2?=
- =?utf-8?B?eS9zd2gvT0x1bDFhL0RFVU1XTGZ2M0J5Ynd0ZGpJZ1lhMEJDbFFKZVl0MWNZ?=
- =?utf-8?B?YXhoa3BYV2lIL2JPS1VraDJ4VG0xcllOdjA1N2s5eVFILzg5dVo2RzRGbzhV?=
- =?utf-8?B?c1FXbytCUktrMVYxdWwrdVBFQ3ZJMW4wRE56MmJ1dGt2bThZZmh0YngrbjBB?=
- =?utf-8?B?MjVIWkRSZkNHZUY1MDFWc0FWRC9BTGdwZEhLc3lWTGZMRUpBc0tjRytqUUxo?=
- =?utf-8?B?RG9UUytPQWlkSFZ4MFNJbTNFWEZoc1F2Vm1oN1ZvWWhSOWFqRVIvN3p0ZzVW?=
- =?utf-8?B?WVo5aEE1ZkFVTTZ5ejUwMHR0QWFGOEFFYjdjdXNacW9jMmhUOTVzRUVjbGdy?=
- =?utf-8?B?S29QR2w4MDVmSmRVR2QzNW1JcTlqOTRvWGV5VlZJOHlOTmxJSjl5VGd0Zmx4?=
- =?utf-8?B?TUF5TnRiZW5COXRxV3ExMUswWEN5RnU3RmtNR2Z1UVhRL1E1bEdORnNkb2Nh?=
- =?utf-8?B?NXpXY1Q4TGU1S0xxNzNidWM0QjJhQWpSYytCV3RhaU90SWMvQTJIbHpsdW13?=
- =?utf-8?B?OC8vcmxkOGFZVm5Vc09RaWlvbHRUSUNKUFBQS0FhUnZ0cS8xb2hyTlN4M3pY?=
- =?utf-8?B?d0NMR2Y5QkZaZTdEYmcxL1RYUlJ2cy9EYko3bFN1d2oxMnQ0MGxpTGVLaVVW?=
- =?utf-8?B?d0ZWN2VmTkczWVJhM0lMTXA1L2d6WnU5Vm95SDhFOGcwcUFsSFRtOXVkQ3pR?=
- =?utf-8?B?SUVzdjNzSFVKUXVtdWNUbG9SMzN1ajFheERvSndrUG0vQ1VGcU5vaDU4ZGxF?=
- =?utf-8?B?TDFML0E3UXZ0bGs4M0Jya3JQYVJ5SXEyaTAxOFEvRXVuckFLN2YrZERBdEpF?=
- =?utf-8?B?enpNMmpjdEdkMU9IRkEvaFlkSE9LSUkraWozZ25QdlBrQzVZSjNqTDEwM2xj?=
- =?utf-8?B?cElHUjdtYVBwOWJlZWk4bjllZjBHeURmMDhuQlJqOERIRHFnOWJ1bjBZeU9I?=
- =?utf-8?B?MkYvUVdxdVFhYVJEMFVMZlZqTXQyNmgrTjdZTEwzS2tRWVhFOVBjQXhHdzB1?=
- =?utf-8?B?aUpRYkN6WFV2dm9pWGxXZ3VRK1k2RzBNVHM3N3Fja2VHTmhnbkN3eTVSYnYw?=
- =?utf-8?B?UEJRaGRMeDcya0NXZisxL3F2RU9pWmpWaGZFTUR1V0hKYUNnUDNSQXdSVEdo?=
- =?utf-8?B?M2VmbHMrVHh0OUlOZ2V3Q1FqQjNZUUJHTGd6eTVqeWIycDMvem80MnFaY0cx?=
- =?utf-8?B?Z1lQR1RHTEo5SEl3WVNrY3FZeVdCYytJL3luTDBQRWo4VUsxRzc5K0lscVls?=
- =?utf-8?B?QWJudWFGVTBKZS9JcFR1QzMwcGNkK05URmRyWUtIeU84SzVmQW1NdlR1T3NZ?=
- =?utf-8?B?VGFFL0xVSXhMOFdCQUswbGNHU052TUhYUmhsMzdRRXlvcklxT3ZuRXZucDVl?=
- =?utf-8?B?dXQ0QTZBYm00aGp0V1lDeWJzT0FUcjkvNkVuMjk5dHowb3M0RzBkZGtkVDM2?=
- =?utf-8?B?T09meTRDSG1sTWhoeUtyTHlrV1BYS1poRkgxUVM3VXhraW52bXRoVnVjVFVQ?=
- =?utf-8?B?WHV1N3FPU0pSREpQVnNxK0VNcld6ajA4MG44MUs2N1lwazh4MElsS3JBTnI1?=
- =?utf-8?B?NXI3TDBZci9vWGNjWXFoQ09pbDhnQTgxR25wTGVEUlA2b3BaZFZMRnNrbG5o?=
- =?utf-8?Q?hQ1/oeh4H4hmQ31HIkWRyrW5J?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 108a63ff-2e11-4182-07b6-08dccc3aec59
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Sep 2024 17:07:42.5770 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: RHaQdMDsI4ExA1A2B0nP+TLIyd0uoP9uHAc2imipQ33pB1uk5fnj1EaI9fLCClvv
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8574
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -217,59 +91,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi!
 
+With this series, I bumped the new hush to get the latest commits from upstream.
 
-On 8/30/24 13:40, Sughosh Ganu wrote:
-> In the version 2 of the FWU metadata, the metadata is broken into two
-> parts, a top-level structure, which provides information on the total
-> size of the structure among other things. Try reading the primary
-> partition first, and if that fails, try reading the secondary
-> partition. This will help in the scenario where the primary metadata
-> partition has been corrupted, but the secondary partition is intact.
-> 
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> ---
->   lib/fwu_updates/fwu_v2.c | 77 +++++++++++++++++++++-------------------
->   1 file changed, 41 insertions(+), 36 deletions(-)
-> 
-> diff --git a/lib/fwu_updates/fwu_v2.c b/lib/fwu_updates/fwu_v2.c
-> index d0d8a25929..69306282aa 100644
-> --- a/lib/fwu_updates/fwu_v2.c
-> +++ b/lib/fwu_updates/fwu_v2.c
-> @@ -10,6 +10,12 @@
->   #include <linux/types.h>
->   
->   #define FWU_MDATA_VERSION	0x2U
-> +#define FWU_IMG_DESC_OFFSET	0x20U
-> +
-> +static struct fwu_mdata g_mdata;
-> +
-> +#define PRI_PART		0x1U
-> +#define SEC_PART		0x2U
->   
->   static inline struct fwu_fw_store_desc *fwu_get_fw_desc(struct fwu_mdata *mdata)
->   {
-> @@ -109,6 +115,31 @@ static int fwu_trial_state_start(uint update_index)
->   	return 0;
->   }
->   
-> +static bool fwu_get_mdata_mandatory(uint part)
-> +{
-> +	int ret = 0;
-> +	struct udevice *fwu_dev = fwu_get_dev();
-> +
-> +	memset(&g_mdata, 0, sizeof(struct fwu_mdata));
-> +
-> +	ret = fwu_read_mdata(fwu_dev, &g_mdata,
-> +			     part == PRI_PART ? true : false,
-> +			     sizeof(struct fwu_mdata));
-> +	if (ret)
-> +		return false;
-> +
-> +	if (g_mdata.version != FWU_MDATA_VERSION)
-> +		return false;
+Also, I added back a reverted commit which goal was to fix a bad behavior in
+old hush test.
+I had to tweak a bit this commit, but everything worked both locally and in the
+CI [1].
 
-Any reason to remove error logs which were here?
+Francis Laniel (1):
+  cli: modern_hush: Add upstream commits up to 13 July 2024
 
-Thanks,
-Michal
+Ion Agorria (1):
+  test: hush: dollar: fix bugous behavior
+
+ common/cli_hush_modern.c   |   2 +-
+ common/cli_hush_upstream.c | 150 ++++++++++++++++++++++++-------------
+ test/hush/dollar.c         |  31 +++-----
+ 3 files changed, 110 insertions(+), 73 deletions(-)
+
+Best regards.
+---
+[1]: https://github.com/u-boot/u-boot/runs/29350673974
+--
+2.34.1
+
