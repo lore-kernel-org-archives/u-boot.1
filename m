@@ -4,93 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5677CD342A
-	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 15:04:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73B72CD343D
+	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 15:11:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2181A889ED;
-	Tue,  3 Sep 2024 17:04:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id ECD7288B59;
+	Tue,  3 Sep 2024 17:11:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="b5nwN4il";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QMST6oO3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C37C188C1C; Tue,  3 Sep 2024 17:04:08 +0200 (CEST)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
+ id CA38388B68; Tue,  3 Sep 2024 17:11:55 +0200 (CEST)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E93B88754
- for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 17:04:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6862988B4B
+ for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 17:11:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-7b0c9bbddb4so3742601a12.3
- for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 08:04:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-7a802deeb9aso337981085a.0
+ for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 08:11:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725375845; x=1725980645; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JN9BgUwppSh4gEW8vFcrzYVmU+3v2Krq1mU5gJ5qdrc=;
- b=b5nwN4ilYpWlXYD9rsi8l8bU+BgKy/rxWpltxCZ2DlSNHpipdDA5AyWXoF1U/SCq0i
- Wl0klB9Fwo6fO3Wgu6Gw6HaILkqA0UNCkw/32Rf82sbFej9k+93ugVm0OCvtmxDvXZTN
- g1pUY+0oEFLWiyIIRbzQBgkTsJatA3tQ1jIdWoRYNFqYdRZCn7au/Bpncb6a1ZGUoNZr
- veOdqao2/+Te2fbcfnFAXojFIqaOAa4seJu/veOl2BntXSj3JwfqMLHfyIC+4lJUtYoP
- R8P7+MX2/PLt5N9XSZRd+7Q+TqUb5VgcDGkiabHQdiSKe/I+nhhj9eEzMnKfJLF2Jexl
- UOpg==
+ d=konsulko.com; s=google; t=1725376312; x=1725981112; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ph1LJMHsmtpatXAcm4sqHv2XVNHFuzrN/NCdoCiW2YM=;
+ b=QMST6oO3TyHdX4CawHCSPnjfMSRaXk1HpJaTWjgh2OiG9t9/64RZjHlPuLNCbouEyV
+ GLDdqgmmgkjxOMdrEY4JMycGSFCNjbkcZzQGMTYQcwuCji0GqHloDxha2BZ7smqO2j1W
+ vIbf/wk8SsETaXWEawMzf5+9CqVHMf+WyV8Tw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725375845; x=1725980645;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JN9BgUwppSh4gEW8vFcrzYVmU+3v2Krq1mU5gJ5qdrc=;
- b=Yjxo8yfTrgUJFMc65Y1VLHGYAe0JKxwTy1EMnh0jkTnaObyDmC96NUNJfvQqVy7RtI
- f8TwyyplCPBPKjyUuQbH1zAehEbR+HypSP16zgU42qhZPB1PIfVy9xTLwyc5dXvIEL6m
- ZgpqhCfFHfu23Fb1JvswpjlXwqvduQ/tyCgIF/vMBIgWhkSZK7vVsIwTVyt0xd0YpzPR
- V0J/BKcjbQxZCzzm/wOSOPaxMptGQKhMY9mjeKkXZw0Lhn6kKIzEaCGJu7oIXPtRlniz
- LYIifNXI4ZOnGc67aW387cvCYuCf1a2soPdIA9yWirmLJw1w+GHgMNZCAUvAk2uQMJyq
- 9qGA==
-X-Gm-Message-State: AOJu0Yz5kywtkQubwIF4OIpIuxQwqPIVBLFk8BPlTIFRbkqnHqps64UA
- ZRVbczO19O2kXLtRJbR9DmNA+KcQSoYy0p34mHLaqt1nJP/XAZGM6VxNQvmslJjb4zcJs0WaDsx
- SgK5QONRXoRngsGwUao4YoWEFjQse2o1bFmcmOA==
-X-Google-Smtp-Source: AGHT+IFvKpRs4eShT0F79ax0YlgV7FTGD5BQITGk7xecedc/YiK1F3UF75GbQXoxIrs2KgMRHIwyVyAO+n1HAK/S13I=
-X-Received: by 2002:a17:90b:38d2:b0:2d8:b205:2345 with SMTP id
- 98e67ed59e1d1-2d8b2052574mr9355773a91.23.1725375844927; Tue, 03 Sep 2024
- 08:04:04 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1725376312; x=1725981112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ph1LJMHsmtpatXAcm4sqHv2XVNHFuzrN/NCdoCiW2YM=;
+ b=MvCtjV0xGv25aUTUf4DcXsSBpNF+yPc+Eld51AuToq1uxfdLepoPsDlJA++NbZLAvz
+ +8Uptb9O9sloGw856PhouRfOyg2/N24jGnjiXbarbA7FsxZLpGMXETOBBEd3/m3PYcJo
+ g8lRHDQtdkgFRi7xYlXyFL2+QNt6L+ngIy6rDsTzdhktUO2hbv529Zqbw4/rdbCOZAh2
+ S8EXj94ZS8W5xo6Zp7JqpUUF8kRF4crX5vg7SrSqFXczVElaZpkWKlkqYM3KRWSVVjsl
+ pF2HKOmotHoaHF6kzuNLvBJD9KlUXRuop1JeJE29BlOG4snQit6TzO4TRkYFXZHxQ398
+ ytWg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW0s3JDz+XD1Ry4FZyMib+v80D+L07QGlghesbRGmIBAw7CrBRPVFFTL7e4Ukw1HEFM+Z0PdTo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw8zgr10YF+G3c70Op9GfTuKDwaXlZ7+G+TPC30XT9t4kY7J3tw
+ 9ChmmIQOlR5FYnJb4SvB+YkkEUuv1UiJ71zXTmKMLG5857s7fF7l5K114VGGrA0=
+X-Google-Smtp-Source: AGHT+IHRd9CngohIGbaovJEUmMpGZmleyai01T9cbS5PEXOHHbuD21I8yus8SQ2M4oXxsapr5XXELw==
+X-Received: by 2002:a05:620a:25c9:b0:79f:b72:fb30 with SMTP id
+ af79cd13be357-7a8a3dc7929mr1157600185a.59.1725376312177; 
+ Tue, 03 Sep 2024 08:11:52 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7a806c2418csm538508285a.29.2024.09.03.08.11.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Sep 2024 08:11:51 -0700 (PDT)
+Date: Tue, 3 Sep 2024 09:11:48 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
+Subject: Re: [GIT PULL] Please pull u-boot-amlogic-next-20240902
+Message-ID: <20240903151148.GH2479150@bill-the-cat>
+References: <024f632a-8139-4673-bbcf-0b8e5b633624@linaro.org>
 MIME-Version: 1.0
-References: <20240816214436.1877263-1-raymond.mao@linaro.org>
- <20240819210437.GH1626301@bill-the-cat>
-In-Reply-To: <20240819210437.GH1626301@bill-the-cat>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Tue, 3 Sep 2024 11:03:53 -0400
-Message-ID: <CAEfUkU+SDHcAb5sJe5ccRzQ9NjNq3g7MGsr15WWtX16sfxY-uw@mail.gmail.com>
-Subject: Re: [PATCH v6 00/28] Integrate MbedTLS v3.6 LTS with U-Boot
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
- Stefan Bosch <stefan_b@posteo.net>, Mario Six <mario.six@gdsys.cc>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Sumit Garg <sumit.garg@linaro.org>, 
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Alexander Gendin <agendin@matrox.com>, Jonathan Humphreys <j-humphreys@ti.com>,
- Eddie James <eajames@linux.ibm.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="z9vlMYg9tWOShXo5"
+Content-Disposition: inline
+In-Reply-To: <024f632a-8139-4673-bbcf-0b8e5b633624@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,27 +91,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Mon, 19 Aug 2024 at 17:04, Tom Rini <trini@konsulko.com> wrote:
+--z9vlMYg9tWOShXo5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> On Fri, Aug 16, 2024 at 02:43:49PM -0700, Raymond Mao wrote:
->
-> > Integrate MbedTLS v3.6 LTS (currently v3.6.0) with U-Boot.
-> >
-> > Motivations:
-> > ------------
-> >
-> > 1. MbedTLS is well maintained with LTS versions.
-> > 2. LWIP is integrated with MbedTLS and easily to enable HTTPS.
-> > 3. MbedTLS recently switched license back to GPLv2.
->
-> Whereas I think v5 did well with global build with mbedTLS being the
-> default option, v6 blows up so many places.
->
+On Mon, Sep 02, 2024 at 06:26:20PM +0200, Neil Armstrong wrote:
 
-I didn't enable it except qemu_arm64, sandbox and nanopi_a64, I will run
-it on more platforms via CI.
+> Hi Tom,
+>=20
+> A simple set of changes to allow using the bootrom NAND pages, ported fro=
+m Linux.
+>=20
+> Thanks,
+> Neil
+>=20
+> The following changes since commit ee2af844ba1b27b2e959c4e649e4b769fbeb40=
+74:
+>=20
+>   Merge tag 'efi-2024-10-rc4' of https://source.denx.de/u-boot/custodians=
+/u-boot-efi (2024-08-24 14:03:28 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-amlogic.git tags/u-boot=
+-amlogic-next-20240902
+>=20
+> for you to fetch changes up to 35ff967a99e97b523732096628bdbc78758922f6:
+>=20
+>   mtd: rawnand: meson: read/write access for boot ROM pages (2024-08-28 1=
+6:05:45 +0200)
+>=20
 
-Regards,
-Raymond
+Applied to u-boot/next, thanks!
+
+--=20
+Tom
+
+--z9vlMYg9tWOShXo5
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbXJzEACgkQFHw5/5Y0
+tywzngv/XRAluRlzkXAghrf+m3idRDnHEK+JMxz8xb1sFFZbcrdtSRE3OpC4bid+
+wmkTHWihBa8pXlQJHG2sLX5fuWRDSi4tWZ5Ugu2mWJ6KMedQRM9TdYswi0C+XI0U
+Zaf0WO15+ZmK8iLYPbH8VWEow1FQBQ5Ritm/P9EHEo1QeKBKmE4vROSsTtCIYEH0
+MAJFIgS7S7aiRrg1GxG0V85xLHzKYdfNJpTLiKpWSarZHC7jSxwSYdyMoJK2T8UH
+xkE3uDaWlyPlLa499uEYuiHuOJvFJi8wB3Q7Iy9i0Lij+3slUCOuI0GXYU6/vVI5
+tTPlxPb8vtll+NrMxhDsMskzgpFxaDWITb2F0FjmqIBL78GiOkqUuVHFnXPwDWHX
+teeQPcqq3941UaksVoS6TZuhsPRYI1oTOT1qGKmYINIRNr2v7+hsO6vR8VigGoCn
+UiAKKRhnU9yge9YfNL6CgkcUYWz04t0aER3R9Sgd9mBDUKA6OluJO/n/VVD1g1w0
+NYvNBrWi
+=R7zy
+-----END PGP SIGNATURE-----
+
+--z9vlMYg9tWOShXo5--
