@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 966BDCD3446
-	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 15:49:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42D28CD3446
+	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 15:54:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4A5E88A0A;
-	Tue,  3 Sep 2024 17:49:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 954AC88A0A;
+	Tue,  3 Sep 2024 17:54:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k3dR/1u7";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Shmtid1S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A75588B9F; Tue,  3 Sep 2024 17:49:38 +0200 (CEST)
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [IPv6:2607:f8b0:4864:20::52e])
+ id 3E17D88AE8; Tue,  3 Sep 2024 17:54:40 +0200 (CEST)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D15E88754
- for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 17:49:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E686188754
+ for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 17:54:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-7c6aee8e8daso3912996a12.0
- for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 08:49:36 -0700 (PDT)
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-20536dcc6e9so25416145ad.2
+ for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 08:54:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725378575; x=1725983375; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1725378876; x=1725983676; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KEt/PuoS8T4xpHS48avw65Zu07aQchg0NGFGLRr7Z1c=;
- b=k3dR/1u7EzLePtWM7sWwmPf6cxE2mwUpXz4aoFp6yN+tHdP76yZ6lHM4G5rlEtY7aR
- M9Uo0mDnYzE7pRDcOAG005dCzIqqGCHsKxnAJzBdunyvW9gQZpA3Nhws3swhUpl3TucU
- duJyF4WnZx6Tp54xUZGUnIhzO+yMijqOOdf4lY4d0x0naL39x5dLdCeX4If53EEsNtwt
- dQbl1xUxGOYMAP63lJJUDc9pWLeLByDkXrz5r0KBQeO3XfZLBrifHGrtUWh4LMM2Mkcs
- mul4D09mOYbi1774WTDW4yhPJi87Rjunsq957HnKzbeW5Erk2CBx6/LNl6LIO42asmAT
- QQNw==
+ bh=Q8FJ0lzkmWPQLy8jA/QYvtR98GYEPFwnKJyJ8lFo5kQ=;
+ b=Shmtid1SIMURlq2Jo7/wYsVfzi68CNgzhfCir/gG2j5lNa9iFVCIXJXlSfPHTFtZGV
+ NooSWDEqh/V8J5flpdz7OlLAcpa1YztRDMj4bhYBA1hSKsHXxN7JJD7z4YcJBrIaf7mp
+ sALWkqrlzDL526WEK8igduaX5wWTp3O6k2AJw7z3GNPVE9nUNf/+4fKeGxA+b9SpUCSy
+ l2iBATtvFQbAQ5BWdKJ37Sh+f5+0t19mjjMSJUeHJIIeOF9N6JzNqv+R3bS+2Hc9M90C
+ naLqKsg4RZZuXTOAYgeU2mG0+3MhxwUPWeI4AbeM2kT4z6jSUqeq7M9mfzKDHYJOGjsJ
+ HvAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725378575; x=1725983375;
+ d=1e100.net; s=20230601; t=1725378876; x=1725983676;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=KEt/PuoS8T4xpHS48avw65Zu07aQchg0NGFGLRr7Z1c=;
- b=O0jXVLpA7V7qcrpyC5AS4jc7homBupT3TXBwrijRXEmYRpikf8ezfv+e81oe/ncpgq
- yB1VKssKfpDOfu9uKYubZw6W1V6Ni0p9qi18IY19BI5QAVru8KfnVwMY2w5PApAGgaOf
- /XTn0j0VzQTQRlGuXNatieIrC0glhvUukHoZUz4PtMgWcIueyIDJyFBVsilf7CR7QcXk
- u6bhd39p8sg2corq6S5H9y8exoJ/Ccd9ADrDnxPFemFUdJScJN9Gl1nZw+JoHvqkED7l
- lszNaJn/1WQDDzLLOcdRO8djMrV+4Ao7sYgRq5PfAw5QxPuaRhXWbs1niTmwO70xvfAz
- 6s2Q==
-X-Gm-Message-State: AOJu0YxxZpzYFqPoyiC6ozkPLHbcroqZO9UELnAebwjQYmHeCU1+Xg0O
- Nf0jNrWhOoZQNZOrkF9iO/HpgrrGouNFu7rEw4ORElRxrzp+GniThsmdKNr9Wr8y8vFDhpAZ4y5
- Gy5GmalY4kTv7If9b1Y24IDhq5WIjK6mAg0PI8Q==
-X-Google-Smtp-Source: AGHT+IF1l3tUMTtD/04iUdWEjvBe5iv31X7Ug94Im7ZCYBFfFPPv90pRDmXJrh1Y2VIVZOyj/8yS0Ej9UR7oWMLrFMA=
-X-Received: by 2002:a17:90a:b304:b0:2d8:84de:5e0e with SMTP id
- 98e67ed59e1d1-2d88d6d8bcdmr11646679a91.19.1725378574576; Tue, 03 Sep 2024
- 08:49:34 -0700 (PDT)
+ bh=Q8FJ0lzkmWPQLy8jA/QYvtR98GYEPFwnKJyJ8lFo5kQ=;
+ b=Hsj1K0czxxTEevcbloRRpGt6rURvhHo7cKd9C2ckUr4gk7evkPaiynewXEingu3e4h
+ dEv0wSyVchKJ7QuZ5BvdBGBKTr/1lAt8ux8Jggpn9NXrhOGlHJX6mj6t9WnYxhXOmcsP
+ iolDRjnLkrY+WDG2TlEOAXnDa4WVTd+ac1yGmU5oxVJliGITVeH/7fNb6Oxd4X1K6dwb
+ P0BBui4g1/oSHO2KqfvSe5xfnC7r5aoEoXixdEd8FdmXcsWjTkqB+PAmC4CMSR4B2vxW
+ VEGNP7sDBPI5NV5ZxhKU+sqvOBN+s6Hf0XGu7nPhVKR5AMjI1hyKjtrXjBcZg+gWoNKs
+ 8Syw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUvkzSMVX7VHzkppNExEwjd42Hne3lfhRYN978Wfjyl7WuEHc85/tkVNmO0w12nHr8m9qPt9xw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy1mhX4u9oQ0hn2YjT3VHcFB+w4OjTCT6czulmCsYNCQI2nLOuD
+ JkZm1vR7UAOcgl/WLrIBN2gBNLW9zUoEUgSmfnXIG765oLC20Ll7MQTgnjzMgrhx1LV6MB91MV9
+ /eCxnj6dUDgWKUgNu3/pbgdRv7NhYckKVqtOy+w==
+X-Google-Smtp-Source: AGHT+IGYS8WtlDPLWNAgsk0jYX0St6omcmHoe0FRBbfmxLFKU6+8av5RWWrM32obk0MHa6oSAvLmQxW+dZ3Awp0SB4U=
+X-Received: by 2002:a17:903:1109:b0:203:a0c5:fcfd with SMTP id
+ d9443c01a7336-2050c215d63mr179984715ad.3.1725378876346; Tue, 03 Sep 2024
+ 08:54:36 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240816214436.1877263-1-raymond.mao@linaro.org>
  <20240816214436.1877263-8-raymond.mao@linaro.org>
- <CAC_iWjKNFQA70MMiHbWwP9u-Qxs_O=yfE6QS0PF2TcmPD4MXMQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjKNFQA70MMiHbWwP9u-Qxs_O=yfE6QS0PF2TcmPD4MXMQ@mail.gmail.com>
+ <CAFLszTiWFD2dpb6z_5cibDe0aOpuPYug-mrC-ZiZ7v+SEDFhdQ@mail.gmail.com>
+ <CAC_iWjJpfrK+-o_0x8ZJbWxhG4O-tprf1-oQvWmLZWOf=5qZMA@mail.gmail.com>
+In-Reply-To: <CAC_iWjJpfrK+-o_0x8ZJbWxhG4O-tprf1-oQvWmLZWOf=5qZMA@mail.gmail.com>
 From: Raymond Mao <raymond.mao@linaro.org>
-Date: Tue, 3 Sep 2024 11:49:23 -0400
-Message-ID: <CAEfUkUKEspx_a8MAG00r9Dhq0jZ5_KMN75u4j0M6K_qT0z00Fg@mail.gmail.com>
+Date: Tue, 3 Sep 2024 11:54:25 -0400
+Message-ID: <CAEfUkUKD4CC4YkU58zehmVdkUA9UwTGk3=Prpw=JHMNMYwHcHA@mail.gmail.com>
 Subject: Re: [PATCH v6 07/28] hash: integrate hash on mbedtls
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ manish.pandey2@arm.com, 
  Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
  Mario Six <mario.six@gdsys.cc>, 
  Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Michal Simek <michal.simek@amd.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
  Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sean Anderson <seanga2@gmail.com>, 
@@ -110,94 +114,55 @@ X-Virus-Status: Clean
 
 Hi Ilias,
 
-On Wed, 28 Aug 2024 at 05:54, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On Fri, 30 Aug 2024 at 05:37, Ilias Apalodimas <ilias.apalodimas@linaro.org>
 wrote:
 
-> Hi Raymond
+> Hi Simon,
 >
-> On Sat, 17 Aug 2024 at 00:47, Raymond Mao <raymond.mao@linaro.org> wrote:
+> On Thu, 29 Aug 2024 at 18:01, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > Integrate common/hash.c on the hash shim layer so that hash APIs
-> > from mbedtls can be leveraged by boot/image and efi_loader.
+> > Hi Raymond,
 > >
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > ---
-> > Changes in v2
-> > - Use the original head files instead of creating new ones.
-> > Changes in v3
-> > - Add handle checkers for malloc.
-> > Changes in v4
-> > - None.
-> > Changes in v5
-> > - Add __maybe_unused to solve linker errors in some platforms.
-> > - replace malloc with calloc.
-> > Changes in v6
-> > - None.
+> > On Fri, 16 Aug 2024 at 15:47, Raymond Mao <raymond.mao@linaro.org>
+> wrote:
+> > >
+> > > Integrate common/hash.c on the hash shim layer so that hash APIs
+> > > from mbedtls can be leveraged by boot/image and efi_loader.
+> > >
+> > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > > ---
+> > > Changes in v2
+> > > - Use the original head files instead of creating new ones.
+> > > Changes in v3
+> > > - Add handle checkers for malloc.
+> > > Changes in v4
+> > > - None.
+> > > Changes in v5
+> > > - Add __maybe_unused to solve linker errors in some platforms.
+> > > - replace malloc with calloc.
+> > > Changes in v6
+> > > - None.
+> > >
+> > >  common/hash.c | 146 ++++++++++++++++++++++++++++++++++++++++++++++++++
+> > >  1 file changed, 146 insertions(+)
 > >
-> >  common/hash.c | 146 ++++++++++++++++++++++++++++++++++++++++++++++++++
-> >  1 file changed, 146 insertions(+)
-> >
-> > diff --git a/common/hash.c b/common/hash.c
-> > index ac63803fed9..d25fc4854c7 100644
-> > --- a/common/hash.c
-> > +++ b/common/hash.c
-> > @@ -35,6 +35,144 @@
-> >  #include <u-boot/sha512.h>
-> >  #include <u-boot/md5.h>
-> >
-> > +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_CRYPTO)
-> > +
-> > +static int __maybe_unused hash_init_sha1(struct hash_algo *algo, void
-> **ctxp)
-> > +{
-> > +       int ret;
-> > +       mbedtls_sha1_context *ctx = calloc(1, sizeof(*ctx));
-> > +
-> > +       if (!ctx)
-> > +               return -ENOMEM;
-> > +
-> > +       mbedtls_sha1_init(ctx);
-> > +       ret = mbedtls_sha1_starts(ctx);
-> > +       if (!ret) {
-> > +               *ctxp = ctx;
-> > +       } else {
-> > +               mbedtls_sha1_free(ctx);
-> > +               free(ctx);
-> > +       }
-> > +
-> > +       return ret;
-> > +}
-> > +
-> > +static int __maybe_unused hash_update_sha1(struct hash_algo *algo, void
-> *ctx,
-> > +                                          const void *buf, unsigned int
-> size,
-> > +                                          int is_last)
-> > +{
-> > +       return mbedtls_sha1_update((mbedtls_sha1_context *)ctx, buf,
-> size);
-> > +}
-> > +
-> > +static int __maybe_unused
-> > +hash_finish_sha1(struct hash_algo *algo, void *ctx, void *dest_buf, int
-> size)
-> > +{
-> > +       int ret;
-> > +
-> > +       if (size < algo->digest_size)
-> > +               return -1;
-> > +
-> > +       ret = mbedtls_sha1_finish((mbedtls_sha1_context *)ctx, dest_buf);
-> > +       if (!ret) {
+> > I am not seeing the benefit of replacing U-Boot's hashing algorithms.
+> > They work well and don't change. Also it seems to be making the code a
+> > lot uglier, with an uncertain timeline for clean-up.
 >
-> patch # calls finish & free regardless of the return result of
-> mbedtls_xxxx_finish().
-> I think this should happen here as well
+> A lot uglier where? It adds a few wrappers that fit into the current
+> design and callbacks.
+> I don't think what you are asking is possible. To do assymetric
+> crypto, signatures  etc -- and in the future add TLS support in wget
+> mbedTLS relies on its internal hashing functions for the cipher suites
+> it supports. So what you are asking would just make the code even
+> larger. Raymond can you please double check?
 >
-> Unlike the other one who returns void, this API returns int.
-Why don't we check the result here and return the error code when it exists?
-
-[snip]
+> Digest is the basic library of MbedTLS, I don't believe we can disable it
+but only use the ones for certificates, unless MbedTLS makes changes
+to allow hooking external digest libraries -  as I mentioned in a previous
+reply,
+I don't think this is what MbedTLS wants.
 
 Regards,
 Raymond
