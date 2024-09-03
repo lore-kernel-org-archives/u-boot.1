@@ -4,76 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F84FCD3420
-	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 11:06:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6001CCD13CF
+	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 11:44:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B19D8888AA;
-	Tue,  3 Sep 2024 13:06:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id 9432988AE8;
+	Tue,  3 Sep 2024 13:44:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="ImP78RdH";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="h/jA1Ec2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD39088AE8; Tue,  3 Sep 2024 13:06:35 +0200 (CEST)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1A8DF88AE8; Tue,  3 Sep 2024 13:44:12 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7967B88875
- for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 13:06:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 486D8888AA
+ for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 13:44:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-6b4412fac76so40714577b3.1
- for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 04:06:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1725361592; x=1725966392;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LtuEipPKp3BDVQAgDAaxzyoKsQbZK9wtCo7LIe0aN44=;
- b=ImP78RdHN1ECfWVDkxNgL/W8kNA2EvGvefmQ9vhl+RLxLVmQMtbRgtecyoo41Bm6tQ
- usHcKvZXkI8PkfZ4N5feQjZFqdsWrC2300HT0pKfBUQSLpECZ6k4l98RIBUwwgc9LEkJ
- K+eAZnGrnIQkuXHOW9ln1kd72LFO+CrI/VP7XcVLlh+imoby/Ee1S2NaxpCjYV8K17Yv
- 1Ak1YRkyjjNkSzz/5xA6BnSMUUDWjTELIbQlKmfKItaLqVUedz98tOdoY/SEoTQCR4kY
- vdymKthB75+glm4Sxz4jeXYy6VFL642CSqMx3HL7YTSOH7vR5FeqBOoeJAreM1jcaGuv
- xCMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725361592; x=1725966392;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=LtuEipPKp3BDVQAgDAaxzyoKsQbZK9wtCo7LIe0aN44=;
- b=kfJ7/NP0ZtRlSJYYfkPIIiw4FdM5NS8FJUWE4kuEnSkRjPp4XOb7RkmzkzUvVS/cI1
- zq301T/KUiIqBlkkE+pfT/FvkVduHlQ3cAriOwqpiTJ3BKcv8kg7+3r8ySPX1jlclqmD
- Y/wsDhik7+tTwvmOIvu+FoKYC3SWm9Xjmgn/UZhMwUu/stcbJuVS3cYEAJiVOhOTe4hU
- pKJEf/PaMTc+m0R96imCTGTSkJknwX9aBclYUyYBDA3r2rEVDQA5VHQrnS4vego/2J7M
- NQ7d8mgPcWmKvw97xSeK5kwJW396bdiE62ZKrEZOUj6Etjs7hRknlhy2JPARmqPyWQ//
- oO7Q==
-X-Gm-Message-State: AOJu0YxPOorSmE2mV3dxjnKp/zMHU9oxjJMvt64a2ODfVkNynhvlpzh/
- G2nCfKFkln9L7O8UxgifHZifMJYny6ddxkophXHnL9S00Ux5MLcoquaAyzlqvuuzKti4OI7SdmS
- OKBrdI3cBRAszZVTcKYKM5wyLPdn4R9LKLv8b
-X-Google-Smtp-Source: AGHT+IH1QqiZWakk8mRDS7THShu/MtZ8IeySaaxuy7AMk8nECwFdBiFBz1Cr/yDTJ5ZoxOnCSebleLbl533quRBko0E=
-X-Received: by 2002:a05:690c:5087:b0:6d3:e798:a1e1 with SMTP id
- 00721157ae682-6d6524069cfmr76668947b3.40.1725361592333; Tue, 03 Sep 2024
- 04:06:32 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 483Bi7Iw020984;
+ Tue, 3 Sep 2024 06:44:07 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1725363847;
+ bh=zNniZhHGm/gdJpJOdPWcwVES6Jl6x1c2SQEovi3RbhA=;
+ h=From:To:CC:Subject:Date;
+ b=h/jA1Ec21eK8T0ERqYoTtjiF0Jixs/sCIObtek5k/pPKMdq0Xtdo03U5NYin+ekUI
+ YgqfdJm3Q4st9XY2Dbc2hSm1xRWs5u0jvZjtQcSRwykRpVwvDCChXZIHncssPfsBDd
+ JCsMyxVGyPBrGBQI12Ew8N79G6R1vV0sh7Jd9j7E=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 483Bi7B5013700
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 3 Sep 2024 06:44:07 -0500
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 3
+ Sep 2024 06:44:06 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 3 Sep 2024 06:44:06 -0500
+Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36]
+ (may be forged))
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 483Bi2R2056540;
+ Tue, 3 Sep 2024 06:44:03 -0500
+From: Neha Malcom Francis <n-francis@ti.com>
+To: <trini@konsulko.com>
+CC: <b-padhi@ti.com>, <m-chawdhry@ti.com>, <afd@ti.com>, <hnagalla@ti.com>,
+ <j-choudhary@ti.com>, <bb@ti.com>, <nm@ti.com>, <vigneshr@ti.com>,
+ <j-keerthy@ti.com>, <u-kumar1@ti.com>, <n-francis@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: [RFC PATCH 0/6] Add support for K3 BIST
+Date: Tue, 3 Sep 2024 17:13:56 +0530
+Message-ID: <20240903114402.2155740-1-n-francis@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240208145827.3547501-1-massimiliano.minella@gmail.com>
-In-Reply-To: <20240208145827.3547501-1-massimiliano.minella@gmail.com>
-From: Michal Simek <monstr@monstr.eu>
-Date: Tue, 3 Sep 2024 13:06:21 +0200
-Message-ID: <CAHTX3dLUTJ=FKyZT1NaWMsGwKpUwy0MBMsra7YwNQCPERYNDoA@mail.gmail.com>
-Subject: Re: [PATCH v2] cmd: setexpr: fix no matching string in gsub return
- empty value
-To: Massimiliano Minella <massimiliano.minella@gmail.com>,
- Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, Lukas Funke <lukas.funke-oss@weidmueller.com>, 
- Massimiliano Minella <massimiliano.minella@se.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,68 +81,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-HI,
+This is an RFC series that aims to implement a driver for the BIST
+(Built-In Self Test) module for K3 devices. The BIST driver must ideally
+support triggering of BIST tests, both PBIST (Memory BIST) and LBIST
+(Logic BIST) on a core. Both tests are destructive in nature. Please see
+links [1] and [2] for further information regarding the two.
 
-=C4=8Dt 8. 2. 2024 v 16:00 odes=C3=ADlatel Massimiliano Minella
-<massimiliano.minella@gmail.com> napsal:
->
-> From: Massimiliano Minella <massimiliano.minella@se.com>
->
-> In gsub, when the destination string is empty, the string 't' is
-> provided and the regular expression doesn't match, then the final result
-> is an empty string.
->
-> Example:
->
-> =3D> echo ${foo}
->
-> =3D> setenv foo
-> =3D> setexpr foo gsub e a bar
-> =3D> echo ${foo}
->
-> =3D>
->
-> The variable ${foo} should contain "bar" and the lack of match shouldn't
-> be considered an error.
->
-> This patch fixes the erroneous behavior by removing the return
-> statement and breaking out of the loop in case of lack of match.
->
-> Also add a test for the no match case.
->
-> Signed-off-by: Massimiliano Minella <massimiliano.minella@se.com>
-> ---
-> Changes in V2:
->  - update documentation to describe the behavior
->
->  cmd/setexpr.c             |  9 ++++-----
->  doc/usage/cmd/setexpr.rst |  1 +
->  test/cmd/setexpr.c        | 10 ++++++++++
->  3 files changed, 15 insertions(+), 5 deletions(-)
->
-> diff --git a/cmd/setexpr.c b/cmd/setexpr.c
-> index 233471f6cb..ab76824a32 100644
-> --- a/cmd/setexpr.c
-> +++ b/cmd/setexpr.c
-> @@ -216,14 +216,12 @@ int setexpr_regex_sub(char *data, uint data_size, c=
-har *nbuf, uint nbuf_size,
->                 if (res =3D=3D 0) {
->                         if (loop =3D=3D 0) {
->                                 debug("%s: No match\n", data);
-> -                               return 1;
+At boot up, BIST is executed by hardware for the MCU domain
+automatically as part of HW POST. So BIST has been checked only for the
+MCU domain, and it makes sense to include our driver for BIST at the MCU
+R5 SPL stage. The driver can trigger BIST runs for the rest of the cores
+before loading and running any firmware on the cores.
 
-This patch actually changed the return value from command.
-In board/xilinx/zynqmp/zynqmp_kria.env we have
+The general procedure for triggering BIST on a core is:
+	1. Power on the core under test
+	2. Trigger the BIST test
+	3. Reset the core under test
 
-bootcmd=3Dsetenv model $board_name && if setexpr model gsub
-.*$k24_starter* $k24_starter || setexpr model gsub .*$k26_starter*
-$k26_starter; then run som_cc_boot; else run som_mmc_boot; run
-som_cc_boot; fi
+This series, triggers PBIST tests on the MAIN_R5_2_x cores.
 
-and this patch actually breaked it because we rely on return value.
-Changing return value is not described and I want to know if this
-patch should be fixed
-or we should update our commands to match new return value.
+This is marked as RFC for a couple of WIP reasons:
+	- the core under test is confirmed to be accessible (powered on)
+	  before running the test, and unaccessible after running the
+	  test by connecting the debugger to the core, however the
+	  firmware calls that check if a core is running or not at A72
+	  U-Boot stage responds as the core is still running. Due to
+	  this, before loading or running firmware, an explicit 'stop'
+	  needs to be issued by the remoteproc framework (which does not
+	  work at the earlier R5 stage as the DM firmware is not up
+	  yet). Please see the boot logs to understand. This is under
+	  debug.
+	- the driver currently implements all three PBIST tests (PBIST,
+	  PBIST failure insertion and PBIST ROM); LBIST is WIP but will
+	  be more or less similar to how PBIST has been implemented
 
-Thanks,
-Michal
+Would appreciate reviews/comments on how this driver is modelled.
+
+Boot logs:
+https://gist.github.com/nehamalcom/63e94dbfc8a9b9fcaba6f45210e20cea
+
+[1] https://software-dl.ti.com/jacinto7/esd/processor-sdk-rtos-jacinto7/latest/exports/docs/sdl/sdl_docs/userguide/j721e/modules/pbist.html#introduction
+[2] https://software-dl.ti.com/jacinto7/esd/processor-sdk-rtos-jacinto7/latest/exports/docs/sdl/sdl_docs/userguide/j721e/modules/lbist.html#introduction
+
+Neha Malcom Francis (6):
+  arm: mach-k3: j784s4: Add clk and power support for MAIN_R5_2_x PBIST
+  arm: dts: k3-j784s4-main: Add PBIST_14 node
+  arm: dts: k3-j784s4-main: Add clock and power domains for MAIN_R5_2_x
+  drivers: misc: k3_bist: Add K3 BIST driver
+  arm: mach-k3: j784s4_init: Trigger BIST
+  configs: j784s4_evm_r5_defconfig: Enable BIST
+
+ arch/arm/mach-k3/j784s4/j784s4_init.c         |  11 +
+ arch/arm/mach-k3/r5/j784s4/clk-data.c         |  13 +
+ arch/arm/mach-k3/r5/j784s4/dev-data.c         |   7 +
+ configs/j784s4_evm_r5_defconfig               |   2 +
+ drivers/misc/Kconfig                          |   8 +
+ drivers/misc/Makefile                         |   1 +
+ drivers/misc/k3_bist.c                        | 507 ++++++++++++++++
+ drivers/misc/k3_bist_static_data.h            | 551 ++++++++++++++++++
+ dts/upstream/src/arm64/ti/k3-j784s4-main.dtsi |  19 +
+ 9 files changed, 1119 insertions(+)
+ create mode 100644 drivers/misc/k3_bist.c
+ create mode 100644 drivers/misc/k3_bist_static_data.h
+
+-- 
+2.34.1
+
