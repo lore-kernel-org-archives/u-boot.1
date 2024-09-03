@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A38C7CD3420
-	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 11:00:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F84FCD3420
+	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 11:06:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0F18888AA;
-	Tue,  3 Sep 2024 13:00:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=web.de
+	by phobos.denx.de (Postfix) with ESMTP id B19D8888AA;
+	Tue,  3 Sep 2024 13:06:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=web.de header.i=smoch@web.de header.b="wtG5ze5U";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="ImP78RdH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3516988B68; Tue,  3 Sep 2024 13:00:24 +0200 (CEST)
-Received: from mout.web.de (mout.web.de [212.227.15.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AD39088AE8; Tue,  3 Sep 2024 13:06:35 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D3E48876E
- for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 13:00:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7967B88875
+ for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 13:06:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=web.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=smoch@web.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
- s=s29768273; t=1725361209; x=1725966009; i=smoch@web.de;
- bh=Uf26nITwig3xBflU+pr3r4YjwHqrONNAU5Ym+H2+HKw=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:From:To:
- Cc:References:In-Reply-To:Content-Type:Content-Transfer-Encoding:
- cc:content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=wtG5ze5U1GtjYmVP8lafxYsfv8guX/SJfCmAA0WOOWGfT1lud29JVjRaMJ6YxbWF
- EszoOLHtWKBOy8SDTyjm4ioR20HH+EYhqjKI3zwTNymUeY1RLVMPW9OjRbTH1LbJT
- HaKgDTOP4S2O152op1JoQ2fxLLhPIHmHttkslHk6JNqSkJaDIeZOBTc4+5UZZNt4i
- skQC49GJexsHGsTNTQk07gHpcReNYUr9jYvKNGERSuUl5TxOkTL/YlO5Q7cmD9O76
- focUp04RiWIq8AOYRjB9uUaJ4m1T98YxdZB5L3YATWdBC7OsG7sMOJ46I3amK+SXv
- OGX/1gGIrqDmrTMYUw==
-X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
-Received: from [192.168.1.40] ([77.191.123.194]) by smtp.web.de (mrweb005
- [213.165.67.108]) with ESMTPSA (Nemesis) id 1N4N98-1s1Y8l30b8-01488Z; Tue, 03
- Sep 2024 13:00:09 +0200
-Message-ID: <8489a7f6-32ab-4908-818e-ee1119aa0bad@web.de>
-Date: Tue, 3 Sep 2024 13:00:08 +0200
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-6b4412fac76so40714577b3.1
+ for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 04:06:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1725361592; x=1725966392;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LtuEipPKp3BDVQAgDAaxzyoKsQbZK9wtCo7LIe0aN44=;
+ b=ImP78RdHN1ECfWVDkxNgL/W8kNA2EvGvefmQ9vhl+RLxLVmQMtbRgtecyoo41Bm6tQ
+ usHcKvZXkI8PkfZ4N5feQjZFqdsWrC2300HT0pKfBUQSLpECZ6k4l98RIBUwwgc9LEkJ
+ K+eAZnGrnIQkuXHOW9ln1kd72LFO+CrI/VP7XcVLlh+imoby/Ee1S2NaxpCjYV8K17Yv
+ 1Ak1YRkyjjNkSzz/5xA6BnSMUUDWjTELIbQlKmfKItaLqVUedz98tOdoY/SEoTQCR4kY
+ vdymKthB75+glm4Sxz4jeXYy6VFL642CSqMx3HL7YTSOH7vR5FeqBOoeJAreM1jcaGuv
+ xCMA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725361592; x=1725966392;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LtuEipPKp3BDVQAgDAaxzyoKsQbZK9wtCo7LIe0aN44=;
+ b=kfJ7/NP0ZtRlSJYYfkPIIiw4FdM5NS8FJUWE4kuEnSkRjPp4XOb7RkmzkzUvVS/cI1
+ zq301T/KUiIqBlkkE+pfT/FvkVduHlQ3cAriOwqpiTJ3BKcv8kg7+3r8ySPX1jlclqmD
+ Y/wsDhik7+tTwvmOIvu+FoKYC3SWm9Xjmgn/UZhMwUu/stcbJuVS3cYEAJiVOhOTe4hU
+ pKJEf/PaMTc+m0R96imCTGTSkJknwX9aBclYUyYBDA3r2rEVDQA5VHQrnS4vego/2J7M
+ NQ7d8mgPcWmKvw97xSeK5kwJW396bdiE62ZKrEZOUj6Etjs7hRknlhy2JPARmqPyWQ//
+ oO7Q==
+X-Gm-Message-State: AOJu0YxPOorSmE2mV3dxjnKp/zMHU9oxjJMvt64a2ODfVkNynhvlpzh/
+ G2nCfKFkln9L7O8UxgifHZifMJYny6ddxkophXHnL9S00Ux5MLcoquaAyzlqvuuzKti4OI7SdmS
+ OKBrdI3cBRAszZVTcKYKM5wyLPdn4R9LKLv8b
+X-Google-Smtp-Source: AGHT+IH1QqiZWakk8mRDS7THShu/MtZ8IeySaaxuy7AMk8nECwFdBiFBz1Cr/yDTJ5ZoxOnCSebleLbl533quRBko0E=
+X-Received: by 2002:a05:690c:5087:b0:6d3:e798:a1e1 with SMTP id
+ 00721157ae682-6d6524069cfmr76668947b3.40.1725361592333; Tue, 03 Sep 2024
+ 04:06:32 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 0/6] FUSB302 USB-C controller support
-From: Soeren Moch <smoch@web.de>
-To: Sebastian Reichel <sebastian.reichel@collabora.com>,
- Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- Jonas Karlman <jonas@kwiboo.se>
-Cc: Eugen Hristev <eugen.hristev@collabora.com>,
- Tim Harvey <tharvey@gateworks.com>, Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>
-References: <20240830182330.49528-1-sebastian.reichel@collabora.com>
- <420b6d01-d081-4a6a-a9b7-219d8806099a@web.de>
-Content-Language: en-US
-In-Reply-To: <420b6d01-d081-4a6a-a9b7-219d8806099a@web.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <20240208145827.3547501-1-massimiliano.minella@gmail.com>
+In-Reply-To: <20240208145827.3547501-1-massimiliano.minella@gmail.com>
+From: Michal Simek <monstr@monstr.eu>
+Date: Tue, 3 Sep 2024 13:06:21 +0200
+Message-ID: <CAHTX3dLUTJ=FKyZT1NaWMsGwKpUwy0MBMsra7YwNQCPERYNDoA@mail.gmail.com>
+Subject: Re: [PATCH v2] cmd: setexpr: fix no matching string in gsub return
+ empty value
+To: Massimiliano Minella <massimiliano.minella@gmail.com>,
+ Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, Lukas Funke <lukas.funke-oss@weidmueller.com>, 
+ Massimiliano Minella <massimiliano.minella@se.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:M7zBfNqIuOEV5yN84jiDR9uU7OpsCNs1y4u7y+DV2FpfqY6oIRK
- lmnnQcyWK0KNBYid9i17lYD1vekgm48qCQrT0Zsum+by7PDcUtJMV9rgLkgUvOnC/N+7nV6
- EGKCczabIlb+mooZTLThmY3fg0Ta6Hg3Q9yp6zLOiLxibEH9+Qd9gg4yUsLRGx11cY8d15l
- 5KtqnTK+4Jj6/wZDfBrRQ==
-UI-OutboundReport: notjunk:1;M01:P0:AVkbM06lsWU=;pP2MlSzQktcTncMXI8icbRrTqJe
- XkQ7nTnWjHdR+eTToqpAj42ev+Jbs1zoSl3UbJQJkX3mv3DXcaDNlD33Gu6swwxLMfgA3Xdvw
- 6rcG2qDbipI6pS6cqA4V+qBIvj6aCftKEtfAN/XVz6NheDBlSTsPlY/B5dJiB01B/2c2rhzgj
- C2OKKFFkMyS2pgdfL2VE9e7UlI199Kf2BSic0OFNy1o4AeUcKvnj9K5jxmuQuArcFb6LRf5ZG
- QEad91GNnUuu1cYbPQW3mqwiLv1PzK+QKZF2Z5EYogtg7gpv4DiqN+XnNdUbiWX1Ty8gupsF/
- VTg0n9uY8nnhNFtQHbc+lS+CbvNDZ7gzIkyKMGSsyVq2ZLxLhoMk/C+6e90H5mjuzriF1tF6Y
- zN2inCwqRERO7nUN2O5Uc/2ntTAML6fMESMjxAOy346p/sdE/s16mKXVv6KsDMq+BaemGbsEW
- ADBNLCahAbREqJgUXx5WnhRc42+9ZoZi8ojs9irLUzbPx8pSjax52gPuUs6Bh7ajWGHTbYIX/
- X2uWfbK2gNN8y3Oaf0eV88JGp5TEo661fbLWCccdavKhfWOSzafobPg/RJTv9bXluqVzABONE
- PnBLu8wHnWaUBkYoxTPyWu3BvkQzWAtcrLcH9+gX7ByI62UFPF7l+JVtBs/Doi0qBelikoKu1
- NlB7878VvAzvcHthECEcIv2gkUsrICqIB4c7iTHcuLkQwV8FYTDREUXdTMYavHOKm/1EIrkqD
- mrkd7nQI/X/ecmapqTVCvpxfnspfWnZ634ibVaEApxFU0IISd9EelBR4Ga40dBWhLUiPViA8o
- ndbO2EbXTrUlBP0jBDUXMc4g==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,187 +90,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sebastian,
+HI,
 
-On 31.08.24 15:36, Soeren Moch wrote:
-[...]
-> Unfortunately I see the same problem as in v3: boot loop when powering
-> the board from my notebook (ThinkPad X1 Nano running Ubuntu 24.04.1 LTS)=
-,
-> see boot log below.
+=C4=8Dt 8. 2. 2024 v 16:00 odes=C3=ADlatel Massimiliano Minella
+<massimiliano.minella@gmail.com> napsal:
 >
-> Patch version v2 is still running totally fine in the exact same setup
-> (patch series on top of u-boot 2024.07, same board, same cabling).
+> From: Massimiliano Minella <massimiliano.minella@se.com>
 >
-> Unfortunately I currently have no access to the miniPC (Zotac ZBOX CI620=
-)
-> I used as additional test platform before.
+> In gsub, when the destination string is empty, the string 't' is
+> provided and the regular expression doesn't match, then the final result
+> is an empty string.
 >
-> The boot log is unfortunately not very helpful. If you provide an
-> additional
-> patch enabling more debug output, I'm happy to retest with that (v2
-> and/or v4).
+> Example:
+>
+> =3D> echo ${foo}
+>
+> =3D> setenv foo
+> =3D> setexpr foo gsub e a bar
+> =3D> echo ${foo}
+>
+> =3D>
+>
+> The variable ${foo} should contain "bar" and the lack of match shouldn't
+> be considered an error.
+>
+> This patch fixes the erroneous behavior by removing the return
+> statement and breaking out of the loop in case of lack of match.
+>
+> Also add a test for the no match case.
+>
+> Signed-off-by: Massimiliano Minella <massimiliano.minella@se.com>
+> ---
+> Changes in V2:
+>  - update documentation to describe the behavior
+>
+>  cmd/setexpr.c             |  9 ++++-----
+>  doc/usage/cmd/setexpr.rst |  1 +
+>  test/cmd/setexpr.c        | 10 ++++++++++
+>  3 files changed, 15 insertions(+), 5 deletions(-)
+>
+> diff --git a/cmd/setexpr.c b/cmd/setexpr.c
+> index 233471f6cb..ab76824a32 100644
+> --- a/cmd/setexpr.c
+> +++ b/cmd/setexpr.c
+> @@ -216,14 +216,12 @@ int setexpr_regex_sub(char *data, uint data_size, c=
+har *nbuf, uint nbuf_size,
+>                 if (res =3D=3D 0) {
+>                         if (loop =3D=3D 0) {
+>                                 debug("%s: No match\n", data);
+> -                               return 1;
 
-Here additional debug messages for the not working case (LOG_DEBUG enabled=
-):
+This patch actually changed the return value from command.
+In board/xilinx/zynqmp/zynqmp_kria.env we have
 
-U-Boot 2024.07-00006-g65a73892d9-dirty (Sep 03 2024 - 12:22:42 +0200)
+bootcmd=3Dsetenv model $board_name && if setexpr model gsub
+.*$k24_starter* $k24_starter || setexpr model gsub .*$k26_starter*
+$k26_starter; then run som_cc_boot; else run som_mmc_boot; run
+som_cc_boot; fi
 
-Model: Radxa ROCK 5 Model B
-DRAM:=C2=A0 8 GiB
-fusb302 usb-typec@22: set pd RX off
-fusb302 usb-typec@22: vconn is already off
-fusb302 usb-typec@22: TCPM: set polarity =3D 0
-fusb302 usb-typec@22: pd header : sink, device
-fusb302 usb-typec@22: TCPM: state change INVALID_STATE -> SNK_UNATTACHED
-fusb302 usb-typec@22: TCPM: Start toggling
-fusb302 usb-typec@22: TCPM: state change SNK_UNATTACHED -> TOGGLING
-fusb302 usb-typec@22: get cc1 =3D open, cc2 =3D open
-fusb302 usb-typec@22: TCPM: CC1: 0 -> 0, CC2: 0 -> 0 [state TOGGLING,
-polarity 0, disconnected]
-fusb302 usb-typec@22: IRQ: 0x80, a: 0x00, b: 0x00, status0: 0x83
-fusb302 usb-typec@22: IRQ: VBUS_OK, vbus=3DOn
-fusb302 usb-typec@22: IRQ: 0x01, a: 0x40, b: 0x00, status0: 0x82
-fusb302 usb-typec@22: IRQ: TOGDONE
-fusb302 usb-typec@22: get cc1 =3D rp-1.5, cc2 =3D open
-fusb302 usb-typec@22: TCPM: CC1: 0 -> 4, CC2: 0 -> 0 [state TOGGLING,
-polarity 0, connected]
-fusb302 usb-typec@22: TCPM: state change TOGGLING -> SNK_ATTACH_WAIT
-fusb302 usb-typec@22: TCPM: pending state change SNK_ATTACH_WAIT ->
-SNK_DEBOUNCED @ 200 ms [rev1]
-fusb302 usb-typec@22: detected cc1=3Drp-1.5, cc2=3Dopen
-fusb302 usb-typec@22: IRQ: 0x51, a: 0x00, b: 0x00, status0: 0x92
-fusb302 usb-typec@22: IRQ: BC_LVL, handler pending
-fusb302 usb-typec@22: BC_LVL handler, status0 =3D 0x92
-fusb302 usb-typec@22: IRQ: 0x51, a: 0x00, b: 0x00, status0: 0x92
-fusb302 usb-typec@22: IRQ: BC_LVL, handler pending
-fusb302 usb-typec@22: BC_LVL handler, status0 =3D 0x92
-fusb302 usb-typec@22: IRQ: 0x51, a: 0x00, b: 0x00, status0: 0xc2
-fusb302 usb-typec@22: IRQ: BC_LVL, handler pending
-fusb302 usb-typec@22: BC_LVL handler, status0 =3D 0xd1
-fusb302 usb-typec@22: cc1: rp-1.5 -> rp-def
-fusb302 usb-typec@22: get cc1 =3D rp-def, cc2 =3D open
-fusb302 usb-typec@22: TCPM: CC1: 4 -> 3, CC2: 0 -> 0 [state
-SNK_ATTACH_WAIT, polarity 0, connected]
-fusb302 usb-typec@22: IRQ: 0x51, a: 0x00, b: 0x00, status0: 0x92
-fusb302 usb-typec@22: IRQ: BC_LVL, handler pending
-fusb302 usb-typec@22: BC_LVL handler, status0 =3D 0x92
-fusb302 usb-typec@22: cc1: rp-def -> rp-1.5
-fusb302 usb-typec@22: get cc1 =3D rp-1.5, cc2 =3D open
-fusb302 usb-typec@22: TCPM: CC1: 3 -> 4, CC2: 0 -> 0 [state
-SNK_ATTACH_WAIT, polarity 0, connected]
-fusb302 usb-typec@22: TCPM: state change SNK_ATTACH_WAIT ->
-SNK_DEBOUNCED [delayed 200 ms]
-fusb302 usb-typec@22: TCPM: state change SNK_DEBOUNCED -> SNK_ATTACHED
-fusb302 usb-typec@22: TCPM: set polarity =3D 0
-fusb302 usb-typec@22: pd header : sink, device
-fusb302 usb-typec@22: TCPM: state change SNK_ATTACHED -> SNK_STARTUP
-fusb302 usb-typec@22: TCPM: state change SNK_STARTUP -> SNK_DISCOVERY
-fusb302 usb-typec@22: TCPM: set vbus =3D 0 charge =3D 1
-fusb302 usb-typec@22: TCPM: state change SNK_DISCOVERY ->
-SNK_WAIT_CAPABILITIES
-fusb302 usb-typec@22: set pd RX on
-fusb302 usb-typec@22: TCPM: pending state change SNK_WAIT_CAPABILITIES
--> SOFT_RESET_SEND @ 310 ms [rev3]
-fusb302 usb-typec@22: IRQ: 0x51, a: 0x00, b: 0x01, status0: 0x92
-fusb302 usb-typec@22: IRQ: BC_LVL, handler pending
-fusb302 usb-typec@22: BC_LVL handler, status0 =3D 0x92
-fusb302 usb-typec@22: IRQ: PD sent good CRC
-fusb302 usb-typec@22: Received PD message (header=3D0x17a1 len=3D4)
-fusb302 usb-typec@22: TCPM: PD RX, header: 0x17a1 [1]
-fusb302 usb-typec@22: TCPM: state change SNK_WAIT_CAPABILITIES ->
-SNK_NEGOTIATE_CAPABILITIES
-fusb302 usb-typec@22: TCPM: cc=3D0 cc1=3D4 cc2=3D0 vbus=3D0 vconn=3Dsink p=
-olarity=3D0
-fusb302 usb-typec@22: TCPM: PD TX, header: 0x1082
-fusb302 usb-typec@22: Send PD message (header=3D0x1082 len=3D4)
-fusb302 usb-typec@22: IRQ: 0x41, a: 0x04, b: 0x00, status0: 0x92
-fusb302 usb-typec@22: IRQ: BC_LVL, handler pending
-fusb302 usb-typec@22: BC_LVL handler, status0 =3D 0x92
-fusb302 usb-typec@22: IRQ: PD tx success
-fusb302 usb-typec@22: Received PD message (header=3D0x161 len=3D0)
-fusb302 usb-typec@22: TCPM: PD TX complete, status: 0
-fusb302 usb-typec@22: IRQ: 0x51, a: 0x00, b: 0x01, status0: 0x92
-fusb302 usb-typec@22: IRQ: BC_LVL, handler pending
-fusb302 usb-typec@22: BC_LVL handler, status0 =3D 0x92
-fusb302 usb-typec@22: IRQ: PD sent good CRC
-fusb302 usb-typec@22: Received PD message (header=3D0x9a3 len=3D0)
-fusb302 usb-typec@22: TCPM: PD RX, header: 0x9a3 [1]
-fusb302 usb-typec@22: TCPM: state change SNK_NEGOTIATE_CAPABILITIES ->
-SNK_TRANSITION_SINK
-fusb302 usb-typec@22: IRQ: 0x51, a: 0x00, b: 0x01, status0: 0x93
-fusb302 usb-typec@22: IRQ: BC_LVL, handler pending
-fusb302 usb-typec@22: BC_LVL handler, status0 =3D 0x92
-fusb302 usb-typec@22: IRQ: PD sent good CRC
-fusb302 usb-typec@22: Received PD message (header=3D0xba6 len=3D0)
-fusb302 usb-typec@22: TCPM: PD RX, header: 0xba6 [1]
-fusb302 usb-typec@22: TCPM: state change SNK_TRANSITION_SINK -> SNK_READY
-fusb302 usb-typec@22: IRQ: 0x01, a: 0x00, b: 0x00, status0: 0x92
-fusb302 usb-typec@22: IRQ: BC_LVL, handler pending
-fusb302 usb-typec@22: BC_LVL handler, status0 =3D 0x92
-fusb302 usb-typec@22: IRQ: 0x51, a: 0x00, b: 0x01, status0: 0x92
-fusb302 usb-typec@22: IRQ: BC_LVL, handler pending
-fusb302 usb-typec@22: BC_LVL handler, status0 =3D 0x92
-fusb302 usb-typec@22: IRQ: PD sent good CRC
-fusb302 usb-typec@22: Received PD message (header=3D0x1daf len=3D4)
-fusb302 usb-typec@22: TCPM: PD RX, header: 0x1daf [1]
-fusb302 usb-typec@22: IRQ: 0x01, a: 0x00, b: 0x00, status0: 0x92
-fusb302 usb-typec@22: IRQ: BC_LVL, handler pending
-fusb302 usb-typec@22: BC_LVL handler, status0 =3D 0x92
-fusb302 usb-typec@22: IRQ: 0x41, a: 0x00, b: 0x01, status0: 0x92
-fusb302 usb-typec@22: IRQ: BC_LVL, handler pending
-fusb302 usb-typec@22: BC_LVL handler, status0 =3D 0x92
-fusb302 usb-typec@22: IRQ: PD sent good CRC
-fusb302 usb-typec@22: Received PD message (header=3D0x1faf len=3D4)
-fusb302 usb-typec@22: TCPM: PD RX, header: 0x1faf [1]
-fusb302 usb-typec@22: IRQ: 0x51, a: 0x00, b: 0x00, status0: 0x92
-fusb302 usb-typec@22: IRQ: BC_LVL, handler pending
-fusb302 usb-typec@22: BC_LVL handler, status0 =3D 0x92
-fusb302 usb-typec@22: IRQ: 0x01, a: 0x00, b: 0x00, status0: 0x93
-fusb302 usb-typec@22: IRQ: BC_LVL, handler pending
-fusb302 usb-typec@22: BC_LVL handler, status0 =3D 0x93
-fusb302 usb-typec@22: cc1: rp-1.5 -> rp-3.0
-fusb302 usb-typec@22: get cc1 =3D rp-3.0, cc2 =3D open
-fusb302 usb-typec@22: TCPM: CC1: 4 -> 5, CC2: 0 -> 0 [state SNK_READY,
-polarity 0, connected]
-fusb302 usb-typec@22: IRQ: 0x01, a: 0x00, b: 0x00, status0: 0x92
-fusb302 usb-typec@22: IRQ: BC_LVL, handler pending
-fusb302 usb-typec@22: BC_LVL handler, status0 =3D 0x92
-fusb302 usb-typec@22: cc1: rp-3.0 -> rp-1.5
-fusb302 usb-typec@22: get cc1 =3D rp-1.5, cc2 =3D open
-fusb302 usb-typec@22: TCPM: CC1: 5 -> 4, CC2: 0 -> 0 [state SNK_READY,
-polarity 0, connected]
-fusb302 usb-typec@22: IRQ: 0x51, a: 0x00, b: 0x01, status0: 0x92
-fusb302 usb-typec@22: IRQ: BC_LVL, handler pending
-fusb302 usb-typec@22: BC_LVL handler, status0 =3D 0x92
-fusb302 usb-typec@22: IRQ: PD sent good CRC
-fusb302 usb-typec@22: Received PD message (header=3D0x11af len=3D4)
-fusb302 usb-typec@22: TCPM: PD RX, header: 0x11af [1]
-fusb302 usb-typec@22: IRQ: 0x01, a: 0x00, b: 0x00, status0: 0x93
-fusb302 usb-typec@22: IRQ: BC_LVL, handler pending
-fusb302 usb-typec@22: BC_LVL handler, status0 =3D 0x93
-fusb302 usb-typec@22: cc1: rp-1.5 -> rp-3.0
-fusb302 usb-typec@22: get cc1 =3D rp-3.0, cc2 =3D open
-fusb302 usb-typec@22: TCPM: CC1: 4 -> 5, CC2: 0 -> 0 [state SNK_READY,
-polarity 0, connected]
-fusb302 usb-typec@22: TCPM: PD transmit data failed: -110
-fusb302 usb-typec@22: TCPM: state change SNK_READY -> SNK_WAIT_CAPABILITIE=
-S
-fusb302 usb-typec@22: set pd RX on
-fusb302 usb-typec@22: TCPM: pending state change SNK_WAIT_CAPABILITIES
--> HARD_RESET_SEND @ 310 ms [rev3]
-fusb302 usb-typec@22: TCPM: state change SNK_WAIT_CAPABILITIES ->
-HARD_RESET_SEND [delayed 310 ms]
-fusb302 usb-typec@22: TCPM: PD TX, type: 0x5
-fusb302 usb-typec@22: IRQ: 0x41, a: 0x08, b: 0x00, status0: 0x93
-fusb302 usb-typec@22: IRQ: BC_LVL, handler pending
-fusb302 usb-typec@22: BC_LVL handler, status0 =3D 0x93
-fusb302 usb-typec@22: IRQ: PD hardreset sent
-fusb302 usb-typec@22: TCPM: PD TX complete, status: 0
-fusb302 usb-typec@22: IRQ: 0x01, a: 0x00, b: 0x00, status0: 0x83
-fusb302 usb-typec@22: IRQ: BC_LVL, handler pending
-fusb302 usb-typec@22: BC_LVL handler, status0 =3D 0x83
-<Reset>
+and this patch actually breaked it because we rely on return value.
+Changing return value is not described and I want to know if this
+patch should be fixed
+or we should update our commands to match new return value.
 
-HTH,
-Soeren
+Thanks,
+Michal
