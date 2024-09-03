@@ -4,56 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 115CECD342A
-	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 08:04:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C671BCD3427
+	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 08:38:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1AEFA88AB1;
-	Tue,  3 Sep 2024 10:04:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 06BB388C50;
+	Tue,  3 Sep 2024 10:38:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="TzvGR8p+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XQ4mZiYj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C51088C40; Tue,  3 Sep 2024 10:04:56 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BF37288C1C; Tue,  3 Sep 2024 10:38:48 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E419F886A3
- for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 10:04:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 3F0A65C5755;
- Tue,  3 Sep 2024 08:04:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7181AC4CEC5;
- Tue,  3 Sep 2024 08:04:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1725350692;
- bh=w6SOgSw+eI2lwG2oosmllYzSYwMKC5orNjA0/0uVEHU=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=TzvGR8p+PRrVxI6DVDMN4U9tTSmma0zaR0vVo517pHa7iv11I5ACxlYhmfpsbasff
- /P5KSxGyT0rk8pGe6NQv+w+0PYPnmkgHSQi0v5hh54rYzFLhVL1d2LjmzvCzYjMjZd
- CZ6zdKS4ul3pjNHvK4sKp5ZI9MU1A1oskRDicerlaXF9Z+ew+no6ZoMxde20YTjt93
- rYbc/HFGz/nXxoTsn+K4t1p5+hmDlKekiLbhWSlGJv/bVxGGFXmQdzGpp0W4Y0j+xn
- M3ZpPxXXsZH7p9DeLptEYY8kBttquY4EF50g3mMuCuZffU5/j9FjdSFmHVsnoR5kNb
- hDJnwDmYM9QQg==
-Date: Tue, 3 Sep 2024 10:04:48 +0200
-From: Marek =?utf-8?B?QmVow7pu?= <kabel@kernel.org>
-To: Stefan Roese <sr@denx.de>
-Cc: Marek =?utf-8?B?QmVow7pu?= <kabel@kernel.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH u-boot-marvell 2/3] arm: mvebu: turris_omnia: Use the
- i2c_eeprom misc driver for EEPROM reading in U-Boot proper
-Message-ID: <auikzq2r2eprb5u4hh4m6jgqsb3mzz3gznxcp6soldhu474r33@zryqeni47zju>
-References: <20240829080849.20276-1-kabel@kernel.org>
- <20240829080849.20276-3-kabel@kernel.org>
- <acfd0636-8132-4fa7-91e6-af78a6fdbeec@denx.de>
+ by phobos.denx.de (Postfix) with ESMTPS id 49AC088AB1
+ for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 10:38:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-42bb8cf8abeso39814525e9.2
+ for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 01:38:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1725352725; x=1725957525; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/QwzGNcFIWZTJS1MmYKEAWXX8PNoNSodrPmTmZlc+6I=;
+ b=XQ4mZiYjMSLbJjl5ZAxv4igKGLLnlcWnmLNoCQ1+GPV4Cy5f57NK1dk5qx6ZunUnEK
+ 9tHr+2i9g31HbBASXlwUbLWPyHsNsfyloGGbF1g/9fli/M8Wytc80oLN3FkwBfbr3o4b
+ 2JIt64Pp8rizc9JYyMHII/DKDrQKOtLezjsjcPQppbJIWEvh3ceBvgKXPkuqaDlC0bIZ
+ N2LM7cdJz1JTG5xipCmmJJOaNuA6Z6lnCBQz6o6LqRTTxrB+OBPhopythELP9W107wM8
+ gbjiEKFZku2UDLUatFMqnUZEtiQxGn341ueaLBRBvhkaYTKC8wOsWgtSgrVzr3a/BPY8
+ 9vDg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725352725; x=1725957525;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/QwzGNcFIWZTJS1MmYKEAWXX8PNoNSodrPmTmZlc+6I=;
+ b=reJVSxIedXyUQW7+FtOFlPqZWjY0fuE0PE5npKXxET6TIc03yzKrVWHPrT6/Q/GX6o
+ JRh0VK35cwCVwtLWwBY/3rwQu6k6TvNbv8gt0RrwXKiXzCrcfbcX+ootOter34+e9dzM
+ VBvLa8XdlJbPGC1Dp83H6X8iSO57/fMA/jcEVGox4/iurrNoS4cUyDJLGKgmFrObbEB4
+ h0o9V+BkktxC5ymdY/vt9JQcg1f3fHkLYXDingJzu57hJhjKcFPolFyoGencCu+cWeOf
+ IWrUdUd3pDCyBahQJfSAP/5Pvn0irzUHBsPQjVzi/uRR538jVJzb7/w9Zm3Py0zrcJat
+ HaIg==
+X-Gm-Message-State: AOJu0YwQqUHsVj5bGLSdKIUv6x5RBP8JuynMc7Q76+lDikpQNRKh6AbF
+ Xy2b2qtBpgKisuOk4tC8al0NS35LzqakU9sE/ajku4LgyDlSFSWRqlw4F7zryeQQDR5OkGMMw3h
+ DxPXSXw==
+X-Google-Smtp-Source: AGHT+IFf1czkdh+ETjSuJEmYr1J0p9JERqR/2u2DFOzB9qCaOXXs9nYzukP1Etq5sXhJfHDRx51W1Q==
+X-Received: by 2002:a5d:5c88:0:b0:374:c8e5:d56a with SMTP id
+ ffacd0b85a97d-374c8e5d5a4mr3671026f8f.48.1725352724779; 
+ Tue, 03 Sep 2024 01:38:44 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:6417:8cf6:a7f7:ee38])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42bb6df795asm163103325e9.21.2024.09.03.01.38.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Sep 2024 01:38:44 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+Subject: [PATCH v3 00/16] Miscellaneous fixes
+Date: Tue,  3 Sep 2024 10:37:57 +0200
+Message-Id: <cover.1725351676.git.jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <acfd0636-8132-4fa7-91e6-af78a6fdbeec@denx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,75 +91,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Sep 03, 2024 at 08:57:24AM +0200, Stefan Roese wrote:
-> On 8/29/24 10:08, Marek Behún wrote:
-> > Use the i2c_eeprom miscellaneous driver for reading Turris Omnia EEPROM
-> > in U-Boot proper. Keep using dm_i2c_read() in SPL build, since adding
-> > the i2c_eeprom driver to SPL build increases the image by 1.5 KiB.
-> > 
-> > Signed-off-by: Marek Behún <kabel@kernel.org>
-> > ---
-> >   arch/arm/mach-mvebu/Kconfig              | 1 +
-> >   board/CZ.NIC/turris_omnia/turris_omnia.c | 9 +++++++--
-> >   configs/turris_omnia_defconfig           | 1 -
-> >   3 files changed, 8 insertions(+), 3 deletions(-)
-> > 
-> > diff --git a/arch/arm/mach-mvebu/Kconfig b/arch/arm/mach-mvebu/Kconfig
-> > index 4a8328760eb..c1a1a333e6c 100644
-> > --- a/arch/arm/mach-mvebu/Kconfig
-> > +++ b/arch/arm/mach-mvebu/Kconfig
-> > @@ -149,6 +149,7 @@ config TARGET_TURRIS_OMNIA
-> >   	select SPL_SYS_MALLOC_SIMPLE
-> >   	select SYS_I2C_MVTWSI
-> >   	select ATSHA204A
-> > +	select I2C_EEPROM
-> >   	select ARMADA_38X_SUPPORT_OLD_DDR3_TRAINING
-> >   config TARGET_TURRIS_MOX
-> > diff --git a/board/CZ.NIC/turris_omnia/turris_omnia.c b/board/CZ.NIC/turris_omnia/turris_omnia.c
-> > index 392df53a6d8..46f20f05c05 100644
-> > --- a/board/CZ.NIC/turris_omnia/turris_omnia.c
-> > +++ b/board/CZ.NIC/turris_omnia/turris_omnia.c
-> > @@ -23,6 +23,7 @@
-> >   #include <dt-bindings/gpio/gpio.h>
-> >   #include <fdt_support.h>
-> >   #include <hexdump.h>
-> > +#include <i2c_eeprom.h>
-> >   #include <time.h>
-> >   #include <turris-omnia-mcu-interface.h>
-> >   #include <linux/bitops.h>
-> > @@ -473,9 +474,13 @@ static bool omnia_read_eeprom(struct omnia_eeprom *oep)
-> >   	if (!eeprom)
-> >   		return false;
-> > -	ret = dm_i2c_read(eeprom, 0, (void *)oep, sizeof(*oep));
-> > +	if (IS_ENABLED(CONFIG_SPL_BUILD))
-> > +		ret = dm_i2c_read(eeprom, 0, (void *)oep, sizeof(*oep));
-> > +	else
-> > +		ret = i2c_eeprom_read(eeprom, 0, (void *)oep, sizeof(*oep));
-> 
-> So whats the advantage using i2c_eeprom_read() here in U-Boot proper?
-> The only thing that stands out to me is that the code get more complex
-> because of the SPL/non-SPL distinction.
+Miscellaneous fixes made when developing the lwIP series [1]. They are
+posted separately since they make sense on their own. Subsequent
+versions of the lwIP series will contain a squashed version of this one.
 
-The reasons are as follows:
-- it's "more correct" semantically
+[1] http://patchwork.ozlabs.org/project/uboot/list/?series=420712&state=%2A&archive=both
 
-- the i2c_eeprom driver was already enabled for U-Boot proper in
-  defconfig (with this commit selected by the board), because of the
-  `eeprom` commmand, so I thought "why not use it?"
-  (looking at the code now, it goes
-     i2c_eeprom_read()
-       dereference of i2c_eeprom_ops->read method
-       i2c_eeprom_std_read()
-         dm_i2c_read()
-   so the complication is trivial, IMO)
+Changes in v3:
 
-- the following commit adds code that writes the eeprom, and this cannot
-  be done with simple dm_i2c_write(), because each eeprom page has to be
-  written by another transaction, which is what i2c_eeprom_write()
-  does.
+- Apply R-b tags from Peter R.
+- Rework "buildman/toolchain.py: set CROSS_COMPILE only if self.cross
+is set". Subject changed to "buildman/toolchain.py: do not set
+CROSS_COMPILE for sandbox", GetEnvArgs function fixed as well, and
+test cases added. (Simon G.)
 
-  So I knew that I was going to add i2c_eeprom_write(), and I thought
-  that it would seem weird writing with i2c_eeprom_write() but reading
-  with dm_i2c_read().
+Changes in v2:
 
-Marek
+- Rebased onto master
+- "flash: prefix error codes with FL_"
+Update drivers/mtd/altera_qspi.c too. This was mentioned by Simon G.
+in my lwIP v9 thread [1]. Tom R./Ilias A./Peter R.: I kept your R-b
+tags, please shout if it's not OK.
+- "net: fm: call dtsec_init_phy() only when it is defined"
+Address Simon G.'s comments: update condition (parentheses,
+CONFIG_BITBANGMII, if instead of #if).
+Peter R: I dropped your R-b since the code changed significantly.
+- New patches:
+  "common: update: UPDATE_COMMON implies CMD_TFTPBOOT"
+  "cmd: pxe: CMD_PXE implies CMD_TFTPBOOT"
+  "buildman/toolchain.py: set CROSS_COMPILE only if self.cross is set"
+
+[1] https://lists.denx.de/pipermail/u-boot/2024-August/563497.html
+
+Jerome Forissier (16):
+  Makefile: detect HOST_ARCH properly when CROSS_COMPILE is multi-word
+  buildman/toolchain.py: do not set CROSS_COMPILE for sandbox
+  flash: prefix error codes with FL_
+  at91: rename mem_init() to at91_mem_init()
+  arm: omap2: add missing #include <netdev.h>
+  net: fm: call dtsec_init_phy() only when it is defined
+  net: wget: removed unused function wget_success()
+  net: phy: ncsi: depend on NET
+  net: ftgmac100: depend on NET
+  net: wget: allow EFI boot
+  net: fec_mxc_init(): do not ignore return status of fec_open()
+  test/py: net_boot: fix comment
+  test/py: test_efi_loader: add missing dependency on cmd_tftpboot
+  test/py: test_efi_loader: add HTTP (wget) test for the EFI loader
+  common: update: UPDATE_COMMON implies CMD_TFTPBOOT
+  cmd: pxe: CMD_PXE implies CMD_TFTPBOOT
+
+ Makefile                                      |  2 +-
+ arch/arm/mach-at91/include/mach/at91_common.h |  2 +-
+ arch/arm/mach-at91/spl_at91.c                 |  2 +-
+ arch/arm/mach-at91/spl_atmel.c                |  2 +-
+ arch/arm/mach-omap2/omap3/emac.c              |  1 +
+ .../atmel/at91sam9m10g45ek/at91sam9m10g45ek.c |  2 +-
+ board/atmel/at91sam9n12ek/at91sam9n12ek.c     |  2 +-
+ board/atmel/at91sam9x5ek/at91sam9x5ek.c       |  2 +-
+ .../atmel/sama5d27_som1_ek/sama5d27_som1_ek.c |  2 +-
+ .../sama5d27_wlsom1_ek/sama5d27_wlsom1_ek.c   |  2 +-
+ board/atmel/sama5d2_icp/sama5d2_icp.c         |  2 +-
+ .../atmel/sama5d2_xplained/sama5d2_xplained.c |  2 +-
+ .../atmel/sama5d3_xplained/sama5d3_xplained.c |  2 +-
+ board/atmel/sama5d3xek/sama5d3xek.c           |  2 +-
+ .../atmel/sama5d4_xplained/sama5d4_xplained.c |  2 +-
+ board/atmel/sama5d4ek/sama5d4ek.c             |  2 +-
+ board/cobra5272/flash.c                       | 26 ++++----
+ .../conclusive/kstr-sama5d27/kstr-sama5d27.c  |  2 +-
+ board/freescale/m5253demo/flash.c             |  6 +-
+ board/gardena/smart-gateway-at91sam/spl.c     |  2 +-
+ board/siemens/corvus/board.c                  |  2 +-
+ board/siemens/smartweb/smartweb.c             |  2 +-
+ board/siemens/taurus/taurus.c                 |  2 +-
+ cmd/Kconfig                                   |  1 +
+ common/Kconfig                                |  1 +
+ common/flash.c                                | 44 ++++++-------
+ drivers/mtd/altera_qspi.c                     |  4 +-
+ drivers/mtd/cfi_flash.c                       | 36 +++++------
+ drivers/net/Kconfig                           |  1 +
+ drivers/net/fec_mxc.c                         |  3 +-
+ drivers/net/fm/eth.c                          | 10 ++-
+ drivers/net/phy/Kconfig                       |  1 +
+ include/flash.h                               | 20 +++---
+ net/wget.c                                    | 11 ++--
+ test/py/tests/test_efi_loader.py              | 62 ++++++++++++++-----
+ test/py/tests/test_net_boot.py                |  2 +-
+ tools/buildman/test.py                        | 46 ++++++++++++++
+ tools/buildman/toolchain.py                   |  6 +-
+ 38 files changed, 203 insertions(+), 118 deletions(-)
+
+-- 
+2.40.1
+
