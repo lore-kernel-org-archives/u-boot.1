@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75232CD3448
-	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 16:39:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E16BFCD379F
+	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 16:39:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D425C88C21;
-	Tue,  3 Sep 2024 18:39:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4488088C1D;
+	Tue,  3 Sep 2024 18:39:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="lEuVux2o";
+	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="FV20CAG1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B33A88C41; Tue,  3 Sep 2024 18:39:25 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id 11D4888C30; Tue,  3 Sep 2024 18:39:51 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3341388C1D
- for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 18:39:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A6F988606
+ for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 18:39:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=lukasz.czechowski@thaumatec.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2f504652853so62872291fa.0
- for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 09:39:23 -0700 (PDT)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5c25dd38824so2209163a12.0
+ for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 09:39:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1725381562; x=1725986362;
+ d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1725381588; x=1725986388;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jnZzDc4/9a/iuPUn1krXpYeqtkUN/a6IHTxZ/sOs+o4=;
- b=lEuVux2o9lwuAjMbrxewSF+l2wf0D6qFFAOwNlsi2J09e60AN/AS0o27mOZB6/O6Ks
- +DLeBB26J7ME7s52/slGbZ0NK6YcUJjnp3i8rpNRf2itPDweaOpR+j/nwi3O7Gbc+LKx
- Q9B7BGZMmrthSGNGJ+6iRqbImD+r6LZ6Xt707cmUhliIcYhyJGXun/H/F1xJ9/TUYzBo
- EPNI8CTSs6IxgQbb/laB6Ail5atZ1D/S6RA7WLi09UbqoEXSBcF5hVj1rE+ZTMr87tY4
- +SbAe/GNLuKgQ5RBmCee3jVYA+RhJphI1T6P0qq+ZJvj8byDcGtgvm7q1eA3m8SboxDO
- bqSQ==
+ bh=kTYojGfjLhzV2kZRX/mUuq+HtEaqCMpPF5UgVaZFXWo=;
+ b=FV20CAG1eFTxhDXM6nvWGZ/30rsKVIKewwOnj4Y2H68QdCbwkIxRwJ0tDk/74OlSQI
+ 8LFQARSPFAJA2fBkr1WjJ2Rgl2zV8IOqD6IAeutxpqadhUQgiYP2r2A74JYGIdzMPVFs
+ nNv+zFyave4rD7Mwga6sThJ15FqvKPTZAUSBMtxiVJwfuCBFvJ4FB88Sr7CSdPGN5Ssj
+ nwB5qFl8r0xuS5wzrJKaG3JihTujQmLATMScfPJeGkpPKUFgvDIq+iet5pUw9bqFWeP6
+ EMFnBJnHZNDdgb5DceBFMSbGkzNAt3s9Lc4qxYbGCr3eiRmjsLPOgwq5eDRhs+Ww4UFp
+ MnRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725381562; x=1725986362;
+ d=1e100.net; s=20230601; t=1725381588; x=1725986388;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jnZzDc4/9a/iuPUn1krXpYeqtkUN/a6IHTxZ/sOs+o4=;
- b=Z3ttf6Yqx9uZdZ8iStBfvjdduzw9koT8yWNQVfX8ogKobsi5SIeEvo4Gf3yWpxn5kO
- 0UySppN7gs8wYOAVygYy9uhcA4ULOxrMuaqtkviCNLffs6D7W3/iK1tlFazzc+Fc3V6u
- v8Jd0I1yrGN+8Ztkpzp2KfPS84fqMxQNLIrCW8PUYMbsWrw/pvuuLOXLQ/JF9E1rwfbZ
- kR2Og/6A7oE6zzwltsycYOktbsCanjbhtzMGty+3/nkVPmIMFW4q+GrPf8b68Cr8BrjB
- HRq7DDbvoPAwbt9xDjadn6nXVJa6iTXHOD7lihFWTfUtrvn08hc97DdzRj9PIvn1bYTk
- 5szg==
-X-Gm-Message-State: AOJu0Ywe/AZYUfe3sie2UqkAWbxC/buMDjEpxUN/YD4sSjZldaf9Satm
- XO3iDuyZ44SMe3h0yOnoOliu1QigPOxe9nOJzpXMJ2KmwcACJfbZmvWQCwE5tMaokgU3pVqs6S7
- R
-X-Google-Smtp-Source: AGHT+IHovVCz+pzzUBCzJ+cLQMem7gvGEq7d4LHCPBnmAHr5HkSHwPlEqK0sBPPx6EWFRTbERdw95Q==
-X-Received: by 2002:a2e:bc0c:0:b0:2ef:2e1c:79b5 with SMTP id
- 38308e7fff4ca-2f61e03460amr118222181fa.14.1725381562021; 
- Tue, 03 Sep 2024 09:39:22 -0700 (PDT)
+ bh=kTYojGfjLhzV2kZRX/mUuq+HtEaqCMpPF5UgVaZFXWo=;
+ b=G0xMSKajaVxxHq1rce8HA/Z4Wc7S3dZQTdgBg4k0z5ekDj2tO3md3aKKXTX5c+IHNv
+ pPlaCK6XTWiX5DZ/897pVpmkeAAcSFa+abi/fPINUBgc964psx+ZGOvVxQnFvZyPgK9X
+ MQq/42EFhNXVTAMcws+V6U4mU2zlXxZ3s5gmWZVGMfeQ3RrySsY3GTsuyC2ozvgCfrFU
+ lDwnVNy0qdASHdQdk8sgCHh0czZL13eD45cBAaiBu3OorS2QWz6fT2CVnBSCXrjLwQeM
+ 9mCpWpyIFSLiUG4+7Rxz+sdNq64/CM5pX4KDawrn7e6rO9Jeh+v8BqfaTq5y4+wRqxnj
+ URtg==
+X-Gm-Message-State: AOJu0YyBqU1ROvb8Xl4IJqIZVjDu4OttgMgmpW8HbWurIeu3NkkDy2DT
+ WBKTFugcvUOBnShwsFHfcWhSJw9mJ5xZDDhqe8Jy0C3YH0TJvWT41eRm4dTU+WDdRT/yuxhjCkh
+ H
+X-Google-Smtp-Source: AGHT+IFc+xY6K6pznelAZWambCj0r/uDLlLGnReqrS287UEN3ZF0w59YHNM+mA7F03WbRGC+jM8ACg==
+X-Received: by 2002:a05:6402:5186:b0:5c2:1014:295a with SMTP id
+ 4fb4d7f45d1cf-5c2200de37dmr18364778a12.2.1725381588162; 
+ Tue, 03 Sep 2024 09:39:48 -0700 (PDT)
 Received: from localhost.localdomain (178-36-242-203.dynamic.inetia.pl.
  [178.36.242.203]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c24b5ad63dsm4177197a12.80.2024.09.03.09.39.21
+ 4fb4d7f45d1cf-5c24b5ad63dsm4177197a12.80.2024.09.03.09.39.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Sep 2024 09:39:21 -0700 (PDT)
+ Tue, 03 Sep 2024 09:39:48 -0700 (PDT)
 From: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, sjg@chromium.org, philipp.tomsich@vrull.eu,
  kever.yang@rock-chips.com, quentin.schulz@cherry.de,
  Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
-Subject: [PATCH v2 1/5] debug_uart: Replace debug functions with dummies if
- CONFIG_DEBUG_UART is not set
-Date: Tue,  3 Sep 2024 18:38:54 +0200
-Message-ID: <20240903163858.1155218-2-lukasz.czechowski@thaumatec.com>
+Subject: [PATCH v2 2/5] ram: rockchip: Fix dependency of RAM_ROCKCHIP_DEBUG
+Date: Tue,  3 Sep 2024 18:38:55 +0200
+Message-ID: <20240903163858.1155218-3-lukasz.czechowski@thaumatec.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240903163858.1155218-1-lukasz.czechowski@thaumatec.com>
 References: <20240903163858.1155218-1-lukasz.czechowski@thaumatec.com>
@@ -96,52 +95,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In case DEBUG UART is not used, define dummy macros replacing
-the actual function implementations that will not be available.
-This allows to compile code and avoid linker errors.
-Because the DEBUG_UART_FUNCS macro should not be used if
-DEBUG UART is not available, redefine it to generate compilation
-warning.
+The RAM_ROCKCHIP_DEBUG can be used only if DEBUG_UART is
+available, otherwise it won't have any effect.
 
 Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- include/debug_uart.h | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ drivers/ram/rockchip/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/include/debug_uart.h b/include/debug_uart.h
-index 714b369e6fe..dc0f1aa4c98 100644
---- a/include/debug_uart.h
-+++ b/include/debug_uart.h
-@@ -128,6 +128,8 @@ void printdec(unsigned int value);
- 			(1 << CONFIG_DEBUG_UART_SHIFT), \
- 		CONFIG_DEBUG_UART_SHIFT)
+diff --git a/drivers/ram/rockchip/Kconfig b/drivers/ram/rockchip/Kconfig
+index 67c63ecba04..d707d09c1c8 100644
+--- a/drivers/ram/rockchip/Kconfig
++++ b/drivers/ram/rockchip/Kconfig
+@@ -15,6 +15,7 @@ if RAM_ROCKCHIP
  
-+#ifdef CONFIG_DEBUG_UART
-+
- /*
-  * Now define some functions - this should be inserted into the serial driver
-  */
-@@ -197,4 +199,18 @@ void printdec(unsigned int value);
- 		_DEBUG_UART_ANNOUNCE \
- 	} \
- 
-+#else
-+
-+#define DEBUG_UART_FUNCS \
-+	#warning "DEBUG_UART not defined!"
-+
-+#define printch(ch) do{}while(0);
-+#define printascii(str) do{}while(0);
-+#define printhex2(value) do{}while(0);
-+#define printhex4(value) do{}while(0);
-+#define printhex8(value) do{}while(0);
-+#define printdec(value) do{}while(0);
-+
-+#endif
-+
- #endif
+ config RAM_ROCKCHIP_DEBUG
+ 	bool "Rockchip ram drivers debugging"
++	depends on DEBUG_UART
+ 	default y
+ 	help
+ 	  This enables debugging ram driver API's for the platforms
 -- 
 2.43.0
 
