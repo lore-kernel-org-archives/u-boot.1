@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B265CD379F
-	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 16:13:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A785CD3448
+	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 16:13:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 020F68841E;
+	by phobos.denx.de (Postfix) with ESMTP id 5E22F88C21;
 	Tue,  3 Sep 2024 18:13:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fd0ps+4Q";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iipw5dyW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5389687705; Tue,  3 Sep 2024 18:13:37 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id ACDE38841E; Tue,  3 Sep 2024 18:13:38 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65A7F8841E
- for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 18:13:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2625E88A0A
+ for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 18:13:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-42c7b5b2d01so35328275e9.3
- for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 09:13:35 -0700 (PDT)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-374ba4e094aso2527263f8f.0
+ for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 09:13:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1725380015; x=1725984815; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=hAkEONzW+oXgMLW2KMeZTT3ujSgH9yx3Ok677iiHC3g=;
- b=fd0ps+4QnVFtturo1UgGfDJ4sLHP2aJYSp8DhqinT3m0Dx9t68Hd9Ix1K0iThMszRL
- sZZp2BFb9EItSoJ4oxdScyPIaPe4UwKZPYzRKP+wSm+UxMM3qTIs5mJldnHpwqf9lvJf
- k2vXF6evZKbXOJbfl6m3YEIsXNI1LZZO/ns/hf2wXLP0D/NxOszn7aqAFai2WwFupZDo
- 68oGpXCYQcn5oNZ5LwjyElAFWs6bc3DG0h0YB84G6WXhKQJb7H7jTDIrJZ/Vt6fFpCLp
- FieW9EckxftV1o32reaL2Z+caG3sV14nnRN/L/u2wi6B+zvaW5dQBuKLL3+3zdMhvQb4
- 5XZg==
+ :reply-to; bh=lYugHg9w4t1Ub63UYl/9rcAF1NKvyqgE2W84/KqQrWc=;
+ b=iipw5dyWeGRl9KgeiOSOGER4QVYtitIBlN6U9dqT5QBAw2tMRqjYV03ERlZtgEJofK
+ l0Gp/siXsNbrL47rWfpMQW+L+edErH1hX40lpBGyGqOanNdN3e3q01UUjkJQUWzl+orA
+ e17DiTDdVruXzJc4UuOJrFjR9kjSnq7Pkc95/utqhjsrApK4vnryEKKB9H+mhdsHq+pP
+ R4z5SbW0WkFzZktCjKXDAJCasZP7wSMiBV0gOWklQobi+AgvdwKAUk+jDpOMG5B5jgSO
+ 40jHsLKHNyyimZCl5oD2tRPf8rogLXvtF0jBSpmVd03Zzvdk0M01QDl3Qnt8I+JEfhp0
+ /dug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1725380015; x=1725984815;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hAkEONzW+oXgMLW2KMeZTT3ujSgH9yx3Ok677iiHC3g=;
- b=brMUIcEsPR/Ni/S1ECsukfWR/NkkSpiHRexWdyL9/MeL+8HrzSWNdfVjogf3bnN1TG
- fIvPnAvRnVrlXy84M5kVdDH4lLaFz+2kCBbQ+emLaQ4ebLew5zbJ+NNnqVt2s8rruYey
- 5V7dss4YAxexgESPy9fYSU7i1sYiSgQ2qFFCBtCYvM65N2DOPZ5O8O9iBpAbEAsxJ4qG
- pbtctmVc6tb2lnb+G4osLdqM3NDxyNbbfxaFByuJ/uaCni+e/vYLERj9bHVwORYJ9ppq
- XhsoT093lwr1LqjwZ3qq4dieOCzfW9SYqlaolqQyfoKtWzcQYItI/mJ3V3wXk4E5l1Ki
- d9Mw==
+ bh=lYugHg9w4t1Ub63UYl/9rcAF1NKvyqgE2W84/KqQrWc=;
+ b=MFrV/O2Du/r6j8PvLwg6wr8n/sKawxNsR/J28u/uK7TCFpqBzfytd1rnTiOLGsqCuP
+ 4o7e7wfWWalKcjlY6e41KUvmAy2hvt41Ar7vMEnwO04TuZCl1dBWW8v/xcbrvsboe9wb
+ OqWQTAjuthfkRpv9omQixolcjuvHAjGUfjAlfduftWi8OT+DCs2CJj7guYh7xQ6/jOLC
+ yoeG3YKoKe+W18Pq4eBMTTW7KIgOX591HTX8DWdyH2Lp8rzhT3GS96t2NKNIoEq14RCH
+ 4kwqRCAawFpM6H8ekbdUg9GlRegTPX8XpeEQ1xPqdTtmAykMaA1sWjcpUKdjpvuG6vDE
+ KoXg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXIdl9BZTS8KY9nS+MZ+LY244CVB+uBlO48IkxWTJrfxJOhG7p7oes0nTWmrHApuYLpjpU5tAc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwNUTOzJ4+23/nrEVeuAjURI8Vnj+UBXVRFL6dM5Q2i8BcFxbmT
- j0iiE+sKu7Emznp8fkqqU76MxPZFNEXso8uOPm5HOFpYsjj24D5tzKWKP7SWMBs=
-X-Google-Smtp-Source: AGHT+IHsyf//P+E0+9hfWB5qYNmLWSCSLi8hN6griS+Y0eWg9tqhbfVisa8x+DDFZWf6A1WKsrxSng==
-X-Received: by 2002:a05:600c:4f42:b0:426:6b14:1839 with SMTP id
- 5b1f17b1804b1-42bb0136dadmr170411535e9.0.1725380014289; 
- Tue, 03 Sep 2024 09:13:34 -0700 (PDT)
+ AJvYcCXneMUIl8gy1auOfr1A3xoJTHsBX99yf4hTFZZt2Vib2V5y85icQSbv+c/rTipwBFVnI9ctbRs=@lists.denx.de
+X-Gm-Message-State: AOJu0YznlaMfGmSnakhS7rp+xfTt7mM/wD0tUvlHNn8ngTHOUljOAvnL
+ bAlsnQDyA9WwkHWejiF0Ouf4Y4nPj/r2+Oqh8s8pvQ7xOp4S2SMsXOJy1hSTbAc=
+X-Google-Smtp-Source: AGHT+IEFPNdAlX+/ngi/Ty1labMCAYBcGS7O3M09abXDZEMljy1Lwh8zUYcyVxcmN7R3K7yUFNpP0Q==
+X-Received: by 2002:adf:e592:0:b0:34d:ae98:4e7 with SMTP id
+ ffacd0b85a97d-374bf1c7b74mr7166054f8f.41.1725380015140; 
+ Tue, 03 Sep 2024 09:13:35 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3767dc16f83sm1807517f8f.60.2024.09.03.09.13.33
+ ffacd0b85a97d-3767dc16f83sm1807517f8f.60.2024.09.03.09.13.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Sep 2024 09:13:33 -0700 (PDT)
+ Tue, 03 Sep 2024 09:13:34 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Tue, 03 Sep 2024 18:13:30 +0200
-Subject: [PATCH 1/2] soc: qcom: rpmh-rsc: add back __tcs_set_trigger() for
- SM8550/SM8650
+Date: Tue, 03 Sep 2024 18:13:31 +0200
+Subject: [PATCH 2/2] regulator: qcom-rpmh-regulator: add support for PM8550
+ & related regulators
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240903-topic-sm8x50-regulators-support-v1-1-0857185bddc0@linaro.org>
+Message-Id: <20240903-topic-sm8x50-regulators-support-v1-2-0857185bddc0@linaro.org>
 References: <20240903-topic-sm8x50-regulators-support-v1-0-0857185bddc0@linaro.org>
 In-Reply-To: <20240903-topic-sm8x50-regulators-support-v1-0-0857185bddc0@linaro.org>
 To: Caleb Connolly <caleb.connolly@linaro.org>, 
@@ -81,20 +81,20 @@ To: Caleb Connolly <caleb.connolly@linaro.org>,
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2858;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6802;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=smjWN8nyrz0L2KEatxfzxGPqyWxT87Bxols/pVkOpFc=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm1zWrC70kVHZ/i/ruCWdkyzLbcVH03srzXs7KSSUL
- H6202MyJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZtc1qwAKCRB33NvayMhJ0UVnD/
- 0UKDYWPHANqAQt5YsFueE1R+4QERL2GjBgNmieCBhpNAnsxtePuxIg6CO3195EB1kM3NNp6q6ox1Ko
- hgZksreGpLbu5XV1dKlyo1LxlDI0Ck0EdV6nZBs4ioeUIOqjci7624hzrxpCs4N7l2w2cTZZ6ZA4Uh
- B5xOvTrGA9qb6iE36zqPNWS5DAkGoahjfuxm70V4ScdsEs47klKVqd4tl2XHXcvfGAezscSbLUunVr
- 4tZLiPyI3EK6QwQSfpiyACVnIAZmMH5ygD7Qz7s9FKP9Sjj2M3wHVyoHI6wX78YQMI+o7PFueMsWWC
- tlrgIDFIn+3QSpCIZJ7PCvXoi7hfEApaBlZ84jdS5S37Im/Iw4OCBFoNbBEwcfDGx47PlGtCnMvI25
- zW0RqDstVAXcAe0OsdicKFmj4tkLplwRnEGBMrteHfZrQWhxbBQb6yNml4oJ9mUcDA+V4kPsZj0bbr
- vIQEvxtjhz3PexH6xn1krTfo3sKdyqcKPmp/XZaYRD6f+f+CAu8JFcYFaLjdOXYS56NV8cNQIYU9wW
- worCxgIFKoj3+phMNIF0MJns+WRaQ1TP9+R0bpEHIX/OpEjevvL9VJx/O7yvIi8V0A0diDWhXrkTVD
- dgavnHIlUb6Ek1ukq00LquLQbEVPN7oOs8JpMa/S4vkM/A0LBGwGZVKH08AQ==
+ bh=Fid6fZeFw3Kvdjg+Sw1MrfbE1HxCCFoaWW5H7HMfB8s=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBm1zWsfmrkr15MVyRItKsgi5Xrm8X8HJA2rd4uv7xu
+ qidHGEmJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZtc1rAAKCRB33NvayMhJ0YujD/
+ 9b0oU8OLLijlnXNF6ucwDxji0Iu3oS9gvlRcjEJ7KIDbS4Jx7608pV3F8Ht2Uud+VAHka3zGGnvWAF
+ B8kUyN41G4fdwCSBKtixtWeL9AM4VK7nwm0GTZtsz9CYxM0dW722uRdBnr9+s4+XO7ZNcb3PbnZVrP
+ SYRAvwlt75Jd3nupCSiFq1+90ofOqmT0AGvatLCAiIa2F1kia223M/kJhDuxyvoWDoHUjzYkCDMesv
+ dbXXjZmWOJxgIzc8EbXu2Q0MH+2JerZZ+tNxlnTWdhWoH02nMXdlAWvIkAqZX3E9XL6LN8i36UkHBE
+ tFLUOGyCFf6rHzGj/oyj9J2AL5nEqcS7Bzq8dPNk1egTUjWW/U8/GjlzEL7zH3doKVOj1Mgbcj7Hqt
+ 5rHVYtDORp2ecmWxbV2ZI9yo6VmWgFrEWXQpdlupPl81zKd2d4as1S19QzHSkVHTzUEUwp4dLEqYsN
+ wHOckkNgDYHx3Zcg0/+i6Ft+wbWHSeAGPMNSPrODbNz9zCEx8IAEJD8osRsFjpOU+FPP6uN13rXmZs
+ ZwMOdhB9UpXXkIam6tfDSN2DZou4SaCAoPL9v1sTVsH1YaNyjM9NndhO/ipJTeUXbctd45GWL8tAAm
+ 9t7Z2QOFNwVP483rKgQpzeA5oM5LnmAi1TE2+EbHAvay2av6Orgtc4zR10OQ==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -113,76 +113,182 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The TCS writes has no effect after the removal of the __tcs_set_trigger()
-call, obviously it seems the RSC version 3 requires it to complete the transactions.
+Add the PM8550 & related regulators found on the SM8550 and SM8650 platforms.
+The tables are imported from the Linux driver.
 
-Fixes: 80c5be164ad ("soc: qcom: rpmh-rsc: drop unused multi-threading and non-active TCS support")
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/soc/qcom/rpmh-rsc.c | 43 +++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 43 insertions(+)
+ drivers/power/regulator/qcom-rpmh-regulator.c | 136 ++++++++++++++++++++++++++
+ 1 file changed, 136 insertions(+)
 
-diff --git a/drivers/soc/qcom/rpmh-rsc.c b/drivers/soc/qcom/rpmh-rsc.c
-index 61fb2e69558..aee9e55194e 100644
---- a/drivers/soc/qcom/rpmh-rsc.c
-+++ b/drivers/soc/qcom/rpmh-rsc.c
-@@ -293,6 +293,48 @@ static void __tcs_buffer_write(struct rsc_drv *drv, int tcs_id, int cmd_id,
- 	write_tcs_reg(drv, drv->regs[RSC_DRV_CMD_ENABLE], tcs_id, cmd_enable);
- }
+diff --git a/drivers/power/regulator/qcom-rpmh-regulator.c b/drivers/power/regulator/qcom-rpmh-regulator.c
+index 06fd3f31956..2dc261d83e3 100644
+--- a/drivers/power/regulator/qcom-rpmh-regulator.c
++++ b/drivers/power/regulator/qcom-rpmh-regulator.c
+@@ -357,6 +357,69 @@ static const struct dm_regulator_ops rpmh_regulator_vrm_drms_ops = {
+ 	.get_mode = rpmh_regulator_vrm_get_mode,
+ };
  
-+/**
-+ * __tcs_set_trigger() - Start xfer on a TCS or unset trigger on a borrowed TCS
-+ * @drv:     The controller.
-+ * @tcs_id:  The global ID of this TCS.
-+ * @trigger: If true then untrigger/retrigger. If false then just untrigger.
-+ *
-+ * In the normal case we only ever call with "trigger=true" to start a
-+ * transfer. That will un-trigger/disable the TCS from the last transfer
-+ * then trigger/enable for this transfer.
-+ *
-+ * If we borrowed a wake TCS for an active-only transfer we'll also call
-+ * this function with "trigger=false" to just do the un-trigger/disable
-+ * before using the TCS for wake purposes again.
-+ *
-+ * Note that the AP is only in charge of triggering active-only transfers.
-+ * The AP never triggers sleep/wake values using this function.
-+ */
-+static void __tcs_set_trigger(struct rsc_drv *drv, int tcs_id, bool trigger)
-+{
-+	u32 enable;
-+	u32 reg = drv->regs[RSC_DRV_CONTROL];
++static struct dm_regulator_mode pmic_mode_map_pmic5_bob[] = {
++	{
++		.id = REGULATOR_MODE_LPM,
++		.register_value = PMIC5_BOB_MODE_PFM,
++		.name = "PMIC5_BOB_MODE_PFM"
++	}, {
++		.id = REGULATOR_MODE_AUTO,
++		.register_value = PMIC5_BOB_MODE_AUTO,
++		.name = "PMIC5_BOB_MODE_AUTO"
++	}, {
++		.id = REGULATOR_MODE_HPM,
++		.register_value = PMIC5_BOB_MODE_PWM,
++		.name = "PMIC5_BOB_MODE_PWM"
++	},
++};
 +
-+	/*
-+	 * HW req: Clear the DRV_CONTROL and enable TCS again
-+	 * While clearing ensure that the AMC mode trigger is cleared
-+	 * and then the mode enable is cleared.
-+	 */
-+	enable = read_tcs_reg(drv, reg, tcs_id);
-+	enable &= ~TCS_AMC_MODE_TRIGGER;
-+	write_tcs_reg_sync(drv, reg, tcs_id, enable);
-+	enable &= ~TCS_AMC_MODE_ENABLE;
-+	write_tcs_reg_sync(drv, reg, tcs_id, enable);
++static struct dm_regulator_mode pmic_mode_map_pmic5_smps[] = {
++	{
++		.id = REGULATOR_MODE_RETENTION,
++		.register_value = PMIC5_SMPS_MODE_RETENTION,
++		.name = "PMIC5_SMPS_MODE_RETENTION"
++	}, {
++		.id = REGULATOR_MODE_LPM,
++		.register_value = PMIC5_SMPS_MODE_PFM,
++		.name = "PMIC5_SMPS_MODE_PFM"
++	}, {
++		.id = REGULATOR_MODE_AUTO,
++		.register_value = PMIC5_SMPS_MODE_AUTO,
++		.name = "PMIC5_SMPS_MODE_AUTO"
++	}, {
++		.id = REGULATOR_MODE_HPM,
++		.register_value = PMIC5_SMPS_MODE_PWM,
++		.name = "PMIC5_SMPS_MODE_PWM"
++	},
++};
 +
-+	if (trigger) {
-+		/* Enable the AMC mode on the TCS and then trigger the TCS */
-+		enable = TCS_AMC_MODE_ENABLE;
-+		write_tcs_reg_sync(drv, reg, tcs_id, enable);
-+		enable |= TCS_AMC_MODE_TRIGGER;
-+		write_tcs_reg(drv, reg, tcs_id, enable);
-+	}
-+}
++static const struct rpmh_vreg_hw_data pmic5_bob = {
++	.regulator_type = VRM,
++	.ops = &rpmh_regulator_vrm_drms_ops,
++	.voltage_range = REGULATOR_LINEAR_RANGE(3000000, 0, 31, 32000),
++	.n_voltages = 32,
++	.pmic_mode_map = pmic_mode_map_pmic5_bob,
++	.n_modes = ARRAY_SIZE(pmic_mode_map_pmic5_bob),
++};
 +
- /**
-  * rpmh_rsc_send_data() - Write / trigger active-only message.
-  * @drv: The controller.
-@@ -348,6 +390,7 @@ int rpmh_rsc_send_data(struct rsc_drv *drv, const struct tcs_request *msg)
- 	 *   of __tcs_set_trigger() below.
- 	 */
- 	__tcs_buffer_write(drv, tcs_id, 0, msg);
-+	__tcs_set_trigger(drv, tcs_id, true);
++static const struct rpmh_vreg_hw_data pmic5_ftsmps525_lv = {
++	.regulator_type = VRM,
++	.ops = &rpmh_regulator_vrm_drms_ops,
++	.voltage_range = REGULATOR_LINEAR_RANGE(300000, 0, 267, 4000),
++	.n_voltages = 268,
++	.pmic_mode_map = pmic_mode_map_pmic5_smps,
++	.n_modes = ARRAY_SIZE(pmic_mode_map_pmic5_smps),
++};
++
++static const struct rpmh_vreg_hw_data pmic5_ftsmps525_mv = {
++	.regulator_type = VRM,
++	.ops = &rpmh_regulator_vrm_drms_ops,
++	.voltage_range = REGULATOR_LINEAR_RANGE(600000, 0, 267, 8000),
++	.n_voltages = 268,
++	.pmic_mode_map = pmic_mode_map_pmic5_smps,
++	.n_modes = ARRAY_SIZE(pmic_mode_map_pmic5_smps),
++};
++
+ static struct dm_regulator_mode pmic_mode_map_pmic5_ldo[] = {
+ 	{
+ 		.id = REGULATOR_MODE_RETENTION,
+@@ -393,6 +456,16 @@ static const struct rpmh_vreg_hw_data pmic5_pldo_lv = {
+ 	.n_modes = ARRAY_SIZE(pmic_mode_map_pmic5_ldo),
+ };
  
- 	/* U-Boot: Now wait for the TCS to be cleared, indicating that we're done */
- 	for (i = 0; i < USEC_PER_SEC; i++) {
++static const struct rpmh_vreg_hw_data pmic5_nldo515 = {
++	.regulator_type = VRM,
++	.ops = &rpmh_regulator_vrm_drms_ops,
++	.voltage_range = REGULATOR_LINEAR_RANGE(320000, 0, 210, 8000),
++	.n_voltages = 211,
++	.hpm_min_load_uA = 30000,
++	.pmic_mode_map = pmic_mode_map_pmic5_ldo,
++	.n_modes = ARRAY_SIZE(pmic_mode_map_pmic5_ldo),
++};
++
+ #define RPMH_VREG(_name, _resource_name, _hw_data, _supply_name) \
+ { \
+ 	.name		= _name, \
+@@ -412,6 +485,57 @@ static const struct rpmh_vreg_init_data pm8150l_vreg_data[] = {
+ 	{}
+ };
+ 
++static const struct rpmh_vreg_init_data pm8550_vreg_data[] = {
++	RPMH_VREG("ldo1",   "ldo%s1",  &pmic5_nldo515,    "vdd-l1-l4-l10"),
++	RPMH_VREG("ldo2",   "ldo%s2",  &pmic5_pldo,    "vdd-l2-l13-l14"),
++	RPMH_VREG("ldo3",   "ldo%s3",  &pmic5_nldo515,    "vdd-l3"),
++	RPMH_VREG("ldo4",   "ldo%s4",  &pmic5_nldo515,    "vdd-l1-l4-l10"),
++	RPMH_VREG("ldo5",   "ldo%s5",  &pmic5_pldo,    "vdd-l5-l16"),
++	RPMH_VREG("ldo6",   "ldo%s6",  &pmic5_pldo, "vdd-l6-l7"),
++	RPMH_VREG("ldo7",   "ldo%s7",  &pmic5_pldo, "vdd-l6-l7"),
++	RPMH_VREG("ldo8",   "ldo%s8",  &pmic5_pldo, "vdd-l8-l9"),
++	RPMH_VREG("ldo9",   "ldo%s9",  &pmic5_pldo,    "vdd-l8-l9"),
++	RPMH_VREG("ldo10",  "ldo%s10", &pmic5_nldo515,    "vdd-l1-l4-l10"),
++	RPMH_VREG("ldo11",  "ldo%s11", &pmic5_nldo515,    "vdd-l11"),
++	RPMH_VREG("ldo12",  "ldo%s12", &pmic5_nldo515,    "vdd-l12"),
++	RPMH_VREG("ldo13",  "ldo%s13", &pmic5_pldo,    "vdd-l2-l13-l14"),
++	RPMH_VREG("ldo14",  "ldo%s14", &pmic5_pldo,    "vdd-l2-l13-l14"),
++	RPMH_VREG("ldo15",  "ldo%s15", &pmic5_nldo515,    "vdd-l15"),
++	RPMH_VREG("ldo16",  "ldo%s16", &pmic5_pldo,    "vdd-l5-l16"),
++	RPMH_VREG("ldo17",  "ldo%s17", &pmic5_pldo,    "vdd-l17"),
++	RPMH_VREG("bob1",   "bob%s1",  &pmic5_bob,     "vdd-bob1"),
++	RPMH_VREG("bob2",   "bob%s2",  &pmic5_bob,     "vdd-bob2"),
++	{}
++};
++
++static const struct rpmh_vreg_init_data pm8550vs_vreg_data[] = {
++	RPMH_VREG("smps1",  "smp%s1",  &pmic5_ftsmps525_lv, "vdd-s1"),
++	RPMH_VREG("smps2",  "smp%s2",  &pmic5_ftsmps525_lv, "vdd-s2"),
++	RPMH_VREG("smps3",  "smp%s3",  &pmic5_ftsmps525_lv, "vdd-s3"),
++	RPMH_VREG("smps4",  "smp%s4",  &pmic5_ftsmps525_lv, "vdd-s4"),
++	RPMH_VREG("smps5",  "smp%s5",  &pmic5_ftsmps525_lv, "vdd-s5"),
++	RPMH_VREG("smps6",  "smp%s6",  &pmic5_ftsmps525_mv, "vdd-s6"),
++	RPMH_VREG("ldo1",   "ldo%s1",  &pmic5_nldo515,   "vdd-l1"),
++	RPMH_VREG("ldo2",   "ldo%s2",  &pmic5_nldo515,   "vdd-l2"),
++	RPMH_VREG("ldo3",   "ldo%s3",  &pmic5_nldo515,   "vdd-l3"),
++	{}
++};
++
++static const struct rpmh_vreg_init_data pm8550ve_vreg_data[] = {
++	RPMH_VREG("smps1", "smp%s1", &pmic5_ftsmps525_lv, "vdd-s1"),
++	RPMH_VREG("smps2", "smp%s2", &pmic5_ftsmps525_lv, "vdd-s2"),
++	RPMH_VREG("smps3", "smp%s3", &pmic5_ftsmps525_lv, "vdd-s3"),
++	RPMH_VREG("smps4", "smp%s4", &pmic5_ftsmps525_mv, "vdd-s4"),
++	RPMH_VREG("smps5", "smp%s5", &pmic5_ftsmps525_lv, "vdd-s5"),
++	RPMH_VREG("smps6", "smp%s6", &pmic5_ftsmps525_lv, "vdd-s6"),
++	RPMH_VREG("smps7", "smp%s7", &pmic5_ftsmps525_lv, "vdd-s7"),
++	RPMH_VREG("smps8", "smp%s8", &pmic5_ftsmps525_lv, "vdd-s8"),
++	RPMH_VREG("ldo1",  "ldo%s1", &pmic5_nldo515,   "vdd-l1"),
++	RPMH_VREG("ldo2",  "ldo%s2", &pmic5_nldo515,   "vdd-l2"),
++	RPMH_VREG("ldo3",  "ldo%s3", &pmic5_nldo515,   "vdd-l3"),
++	{}
++};
++
+ /* probe an individual regulator */
+ static int rpmh_regulator_probe(struct udevice *dev)
+ {
+@@ -526,6 +650,18 @@ static const struct udevice_id rpmh_regulator_ids[] = {
+ 		.compatible = "qcom,pm8150l-rpmh-regulators",
+ 		.data = (ulong)pm8150l_vreg_data,
+ 	},
++	{
++		.compatible = "qcom,pm8550-rpmh-regulators",
++		.data = (ulong)pm8550_vreg_data,
++	},
++	{
++		.compatible = "qcom,pm8550ve-rpmh-regulators",
++		.data = (ulong)pm8550ve_vreg_data,
++	},
++	{
++		.compatible = "qcom,pm8550vs-rpmh-regulators",
++		.data = (ulong)pm8550vs_vreg_data,
++	},
+ 	{ /* sentinal */ },
+ };
+ 
 
 -- 
 2.34.1
