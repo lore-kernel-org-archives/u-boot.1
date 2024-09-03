@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08520CD3420
-	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 08:39:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1D8ACD3420
+	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 08:40:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2AC3A88CD2;
-	Tue,  3 Sep 2024 10:38:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8718088CFB;
+	Tue,  3 Sep 2024 10:39:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QUfQgVb9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ylRWDEDU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6710088CEB; Tue,  3 Sep 2024 10:38:57 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id 9EDD888C30; Tue,  3 Sep 2024 10:38:58 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 449BA88CF0
- for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 10:38:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 71FB988CF3
+ for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 10:38:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-374c7d14191so1065373f8f.0
- for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 01:38:55 -0700 (PDT)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-42c2e50ec13so25658025e9.0
+ for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 01:38:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725352734; x=1725957534; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1725352735; x=1725957535; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nMH3K6RMJfnQZ/B/a5WpOMKrLegix2UP4tjC+okn3SY=;
- b=QUfQgVb9NCS7VIOAuNahl5AhyRP8m40t1Omqv2wsB++BGjWZjmxejQdzMaH0pB/ckB
- 8pJOG2s0himeDom54l2L8SYbRuONjthqyMg48i3W4Pbq4mOW14MnRLggAyG/OZtBhmQ4
- dmY4T6tYvz0+9Jhv+wk9sNuGFblX+qkvNPO7BAj/cwirbCy1g0DhL9N8h4pwbp7W/1L9
- smvKg9z7nRfBg0DM3/pJgRVd/RJck8gtHyBv275N0i46MY83330dcVU3sFAH8u9bJHIL
- ros5a5O+3i30qEm6PvLPSZ5Cjr9LlkyOJwAuqEjpZkP56L4ZGIvt2JK7lGQ87m6xvhRT
- mZZA==
+ bh=HQRratDTux43Q2ePlyrz4FZtTR8e+cQ86jEMfNCxWhs=;
+ b=ylRWDEDU/D5tMcUHyyXuyncyJ7Z2ZSBmyo2EduQyBGuaZOweKTj3pTtPuHQ4I40WPk
+ 56wnJzL9sdfIann44Aa41Om60+Ld+Df552vzZ6DALQCZhplsUXZoBDxfJAw2oDmR9Dda
+ 3mGd2rZc0J6DqjGckKKZDxXwxaYaXG0W61jhbbtNXwxnWldPBN2tIgujVP2J3yIL7p0A
+ ajRdwaBiMEKXzPJKeyYGz7sZUPoWKa0FvurUgdND2psKP+lZTAIYlDAYIhlKXQMUUV4k
+ zuELaxZ3jCYC8Io4vbrFd8voJreC5QmYIoFYmCOeGvGeBOFnrwe7E9ukcV855kcidtHs
+ zBdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725352734; x=1725957534;
+ d=1e100.net; s=20230601; t=1725352735; x=1725957535;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nMH3K6RMJfnQZ/B/a5WpOMKrLegix2UP4tjC+okn3SY=;
- b=fl6+8k3C4OaKfc/JrpHyVHPFKFxYuuI3tcv6rl578lFXok3xW+F7vbXVPVLRPuNe5s
- sZjNsBih+QdIejkvi/Jm1dhVwnCF5CVDtcZ0HOpfOqACiYYCGP5kDXN6zWsQtVm8QFdg
- j8mTc7yavA3Kihrf2kSQe2ZvOF5yYCOpUXwfI3XBQyNkH6vbC/99tOAXa6g0hgDur5nj
- QR+LVWTw0/de8XDCyVOl9HAr0OBnGfAvVgqbv9pHCMGr6ED0P0EYVb9SAOGu5Vnn908L
- RUy2PhvgeHg6/ajPMMyLLBVwg/s9zzsazDagRL2fCvXBHxO5SsBg1P21dEKxC2JJ+sEA
- VwJA==
-X-Gm-Message-State: AOJu0YzXpQYLftUJEga/Yur3qR9bFnKjoZxoXupCMItDGPV5WriAjInQ
- qfWszUB22xxeSTDoh/6P1zDVe7rTFucKDcm5khc+ZHMimbYjm9nQELjCjqZrYGnBJjv4Zr8S8AE
- s9Tj5Hg==
-X-Google-Smtp-Source: AGHT+IGMRBYTCVWiUGR4nEosjVgUJy65VkZ99L2GAEVUQnAjjfuGj9pSUhXMiMbgMtkD8ne07eJvQA==
-X-Received: by 2002:a5d:59a7:0:b0:374:c878:21f7 with SMTP id
- ffacd0b85a97d-374c87823fcmr4793397f8f.10.1725352733802; 
- Tue, 03 Sep 2024 01:38:53 -0700 (PDT)
+ bh=HQRratDTux43Q2ePlyrz4FZtTR8e+cQ86jEMfNCxWhs=;
+ b=HI1e22Ktk1ricMAdDPLcyfzVR28ooXdXHBkGyXHycNpSqNQgCiPw5awnCeCm9eB8Rw
+ AvgYny5et0NC/3k/JWWOdCfAY+8S9LhzS34msr2i4v47m+aPKprh4cJMAVhewzaOo2/4
+ r1J1RZvaN3sAznzbTGT2jlmTvgHqIxokT2akAFYpsoeRGIhlg8NQYbzc6JIEhXJmhlff
+ xIPNaByKeZGLYQvVogWwr5pLWzk0r1ggQNxjMWjUSDMLcSuV4/acmX71FXTOdiWo/u4R
+ 587kMV5FHYGLY/YAUa4jQwCr1iDJPplLA4cJn/uOhcIqo0o7GwNR8CJEAz6d4ikIBJtG
+ 695Q==
+X-Gm-Message-State: AOJu0YxX+fPOiaaX7I66r6BzQNkqM60aAUqvTYVP2D8AyEFs3kfvKEq3
+ KlRMP/TznQQKO9KnLq7fp53UxPK6y2vM3keOLSBtZh+aNaAfbXiMJRWjqDHNQq+rlLdta9ec/3k
+ aE3oEbA==
+X-Google-Smtp-Source: AGHT+IF6XQuwcEKfSceDHCGPOCSniwpPkwiiwhI+Bk0r2mnTdetcrGz2kNJ6JTgYDSuOi216s8vkpA==
+X-Received: by 2002:a05:600c:511c:b0:426:5b29:b5c8 with SMTP id
+ 5b1f17b1804b1-42bbb436e23mr93243215e9.28.1725352735307; 
+ Tue, 03 Sep 2024 01:38:55 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:6417:8cf6:a7f7:ee38])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42bb6df795asm163103325e9.21.2024.09.03.01.38.53
+ 5b1f17b1804b1-42bb6df795asm163103325e9.21.2024.09.03.01.38.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Sep 2024 01:38:53 -0700 (PDT)
+ Tue, 03 Sep 2024 01:38:54 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Peter Robinson <pbrobinson@gmail.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 06/16] net: fm: call dtsec_init_phy() only when it is
- defined
-Date: Tue,  3 Sep 2024 10:38:03 +0200
-Message-Id: <0313c96cea56acb5585f04bbf4da25145560de3b.1725351676.git.jerome.forissier@linaro.org>
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, Marek Vasut <marex@denx.de>
+Subject: [PATCH v3 07/16] net: wget: removed unused function wget_success()
+Date: Tue,  3 Sep 2024 10:38:04 +0200
+Message-Id: <11aad5fc807a2b544fe364e233c9a0613d18974f.1725351676.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <cover.1725351676.git.jerome.forissier@linaro.org>
 References: <cover.1725351676.git.jerome.forissier@linaro.org>
@@ -97,43 +99,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-dtsec_init_phy() is defined only with MII so add the proper conditional
-in the caller code.
+wget_success() is used nowhere so remove it.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 ---
- drivers/net/fm/eth.c | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
+ net/wget.c | 7 -------
+ 1 file changed, 7 deletions(-)
 
-diff --git a/drivers/net/fm/eth.c b/drivers/net/fm/eth.c
-index 19f3f0fef07..22025b6a273 100644
---- a/drivers/net/fm/eth.c
-+++ b/drivers/net/fm/eth.c
-@@ -26,7 +26,8 @@
+diff --git a/net/wget.c b/net/wget.c
+index f1dd7abeff6..0e4dc5159d0 100644
+--- a/net/wget.c
++++ b/net/wget.c
+@@ -199,13 +199,6 @@ void wget_fail(char *error_message, unsigned int tcp_seq_num,
+ 	wget_send(action, tcp_seq_num, tcp_ack_num, 0);
+ }
  
- #include "fm.h"
- 
--#if defined(CONFIG_MII) || defined(CONFIG_CMD_MII) && !defined(BITBANGMII)
-+#if ((defined(CONFIG_MII) || defined(CONFIG_CMD_MII)) && \
-+     !defined(CONFIG_BITBANGMII))
- 
- #define TBIANA_SETTINGS (TBIANA_ASYMMETRIC_PAUSE | TBIANA_SYMMETRIC_PAUSE | \
- 			 TBIANA_FULL_DUPLEX)
-@@ -701,8 +702,11 @@ static int init_phy(struct fm_eth *fm_eth)
- 		supported |= SUPPORTED_2500baseX_Full;
- #endif
- 
--	if (fm_eth->type == FM_ETH_1G_E)
--		dtsec_init_phy(fm_eth);
-+	if ((IS_ENABLED(CONFIG_MII) || IS_ENABLED(CONFIG_CMD_MII)) &&
-+	    !IS_ENABLED(CONFIG_BITBANGMII)) {
-+		if (fm_eth->type == FM_ETH_1G_E)
-+			dtsec_init_phy(fm_eth);
-+	}
- 
- #ifdef CONFIG_PHYLIB
- #ifdef CONFIG_DM_MDIO
+-void wget_success(u8 action, unsigned int tcp_seq_num,
+-		  unsigned int tcp_ack_num, int len, int packets)
+-{
+-	printf("Packets received %d, Transfer Successful\n", packets);
+-	wget_send(action, tcp_seq_num, tcp_ack_num, len);
+-}
+-
+ /*
+  * Interfaces of U-BOOT
+  */
 -- 
 2.40.1
 
