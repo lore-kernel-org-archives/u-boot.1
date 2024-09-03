@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F154CD37AA
-	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 19:43:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7188FCD37AC
+	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 19:53:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 914FF88B4B;
-	Tue,  3 Sep 2024 21:43:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DC78688381;
+	Tue,  3 Sep 2024 21:53:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FMORrtRl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NW6kVWPP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F37787C69; Tue,  3 Sep 2024 21:43:24 +0200 (CEST)
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
- [IPv6:2607:f8b0:4864:20::82c])
+ id 38D7C88381; Tue,  3 Sep 2024 21:53:56 +0200 (CEST)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E99188C19
- for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 21:43:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BD68988B9F
+ for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 21:53:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82c.google.com with SMTP id
- d75a77b69052e-456768fb0a6so32918631cf.1
- for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 12:43:21 -0700 (PDT)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6bf90d52e79so30096616d6.3
+ for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 12:53:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1725392600; x=1725997400; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kuJrZRNNkRj4V0aWoAWmhcbmCvs6JavLNWRf6QfFJac=;
- b=FMORrtRl4UbVUyr5qJ90X6S7979BCzawv0ZIqejAX8yRDo5EoH/ZAB82VoNeaMuLSy
- HzJ/paUkVU/EiphZHK2XTs63nCCqoy5d03atT7Brad/tYyPEW8ldUbvkzB+79l6TiCAz
- SLmNaUc1pqJx+cNv0e6dJI/t778J7gm0NKEhY=
+ d=konsulko.com; s=google; t=1725393232; x=1725998032; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=L2IH8PdmBh8cslQnVhLvfl7Q881IwJ95Vb9TZwEzuGY=;
+ b=NW6kVWPPmUQrwF8gwKhu35zAW1wz5Fos19rRmNSEpJGi7qhxFuiDH0AQCp63Zg98qP
+ DDOh3GXQKOHLQdYQHJBuAKp1284cOBGhNvKCChSQFesW20ECOHpBwf1sF1Mc4XFm8ptx
+ R7g1rJGakO2wb1Kg116Vl3sOBzPJATH8ISaJw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725392600; x=1725997400;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kuJrZRNNkRj4V0aWoAWmhcbmCvs6JavLNWRf6QfFJac=;
- b=fOEHGhTutqCHz1V0tS0eiVEz3gZO2YlzQGVJ1RBtsmMcTs2lTo+ooQJlBY5h5jC1A+
- 5xdEAO5esWeWhx/8iDnhxMWKIyDzAJwBhgxlCKms4hRELtZgX6CEYPHsFPUIvUn+mhyH
- k8BnI6QZlzlZlqLXHM92iBPrij93+GFNJjy0CTr8AWFDz94+NtBCxWiQ4zMjIIcH1b3P
- 1zpc8PqxMp1V4Q/74RzkTYD9DcK2+XA4kyXvCjnipj40IcqueXXMUe97hvH44LsYh/hU
- VpdxThWFpt4C1hb9S0NL/KRZ+OhdTk5KeUlmvaCNEp0ZwXG5Qox8SraQLJ8TBKPVzFJ0
- 57/g==
-X-Gm-Message-State: AOJu0YyzQKSbPViqEE223y4v0jpdLv4FF4qYftq6vyeb0CFVZR3/dPHk
- SN64GK5DRoOwBZMezU6fR8J1DLaiw80dKYVg47IzPNWfmE/jfnLyAtItVl8Vnf8=
-X-Google-Smtp-Source: AGHT+IEN+o0yzBSeV6fO0rqXKR9MA3YdEBUxDAMFi932WNVsz/Xq09G8ZyG/d5/9qwICLaEVFyMzHQ==
-X-Received: by 2002:a05:622a:1b03:b0:456:8575:c5cd with SMTP id
- d75a77b69052e-457e2dd1e96mr42001971cf.36.1725392600244; 
- Tue, 03 Sep 2024 12:43:20 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45682cd112dsm52942121cf.43.2024.09.03.12.43.17
+ d=1e100.net; s=20230601; t=1725393232; x=1725998032;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=L2IH8PdmBh8cslQnVhLvfl7Q881IwJ95Vb9TZwEzuGY=;
+ b=IpMDWJ+eCoWeX4tf5SZw8LNHTCF9+JmEWrL4ynHRQN8fm5xRzPwNVY5jxFHOdGKkAc
+ SAWzdNju/SYnGL4V2zj/pNV6ux/MRlhqrSzi5S5eW6E+UEeTNBtxQiAwORwrxl8xFxvx
+ BVnOo/TRW+POVyo9kMLOjyZn+Ghw6Fvpl60Evd8PFzb/rewtBueEU0/T6FSFZedTAflq
+ ooROBgi87ocxjLnDy/FVdA0qZNItwVb/bVvuOerjI8VbIfk9mMHCGT6Mr5IQhz51VC1S
+ VvKDk0jpP2votDU3o99C1xnsvMYJ0eozdYYbU2pv0s46u+Kt4D+xjcv54QMn54nqZlI0
+ nAiQ==
+X-Gm-Message-State: AOJu0YwIpyGFSgowwpAkXs7p+fqVycp8uyRLgoOL90fJzyyLJNzXY2Gy
+ UUV57YldgOlcACzf4JbUAa0RDlLyiFWc2h3VnrA1LOhGq/ffz8ZX0Net/27F1Ao=
+X-Google-Smtp-Source: AGHT+IGr9YINcM3fwwbQFW+h/LS6U64C98a08KxxZffJCG3cV4dO+yf7vX/XL7kcNh4PWFqqvM1VLQ==
+X-Received: by 2002:a05:6214:4a81:b0:6c3:5be4:cd54 with SMTP id
+ 6a1803df08f44-6c3c5be5a1amr54753476d6.18.1725393232404; 
+ Tue, 03 Sep 2024 12:53:52 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6c340bff43csm56712976d6.33.2024.09.03.12.53.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Sep 2024 12:43:19 -0700 (PDT)
+ Tue, 03 Sep 2024 12:53:51 -0700 (PDT)
+Date: Tue, 3 Sep 2024 13:53:48 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Philip Oberfichtner <pro@denx.de>
-Cc: bmeng.cn@gmail.com, caleb.connolly@linaro.org, 
- christophe.roullier@foss.st.com, epsi@gmx.de, eugen.hristev@collabora.com, 
- festevam@gmail.com, forbidden405@outlook.com, ivprusov@salutedevices.com, 
- joe.hershberger@ni.com, jonas@kwiboo.se, kever.yang@rock-chips.com, 
- leyfoon.tan@starfivetech.com, marek.vasut+renesas@mailbox.org, 
- marjolaine.amate@odyssee-systemes.fr, neil.armstrong@linaro.org, 
- n-francis@ti.com, patrice.chotard@foss.st.com, patrick.delaunay@foss.st.com, 
- philipp.tomsich@vrull.eu, rfried.dev@gmail.com, seanga2@gmail.com, 
- sebastian.reichel@collabora.com, sebastien.szymanski@armadeus.com, 
- sjg@chromium.org, sumit.garg@linaro.org, xypron.glpk@gmx.de, marex@denx.de
-In-Reply-To: <20240802092539.162892-1-pro@denx.de>
-References: <20240802092539.162892-1-pro@denx.de>
-Subject: Re: [PATCH v4 0/5] net: dwc_eth_qos: Add glue driver for Intel MAC
-Message-Id: <172539259711.1596488.16115769818735670415.b4-ty@konsulko.com>
-Date: Tue, 03 Sep 2024 13:43:17 -0600
+To: Prasad Kummari <prasad.kummari@amd.com>
+Cc: u-boot@lists.denx.de, git@amd.com, michal.simek@amd.com,
+ venkatesh.abbarapu@amd.com, padmarao.begari@amd.com, git@xilinx.com,
+ jagan@amarulasolutions.com, n-francis@ti.com, d-gole@ti.com
+Subject: Re: [PATCH 1/2] kbuild: Add generic rule to apply fdtoverlay
+Message-ID: <20240903195348.GO2479150@bill-the-cat>
+References: <20240903115152.430335-1-prasad.kummari@amd.com>
+ <20240903115152.430335-2-prasad.kummari@amd.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="lX6ufxgJzp9wVSz3"
+Content-Disposition: inline
+In-Reply-To: <20240903115152.430335-2-prasad.kummari@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,21 +92,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 02 Aug 2024 11:25:34 +0200, Philip Oberfichtner wrote:
 
-> This patch series implements the dwc_eth_qos glue driver for Intel SOCs.
-> Before doing that, a few general adaptions to the dwc_eth_qos.c main
-> driver are required. Most notably, the preparation for PCI based driver
-> instances, which do not necessarily use a device tree.
-> 
-> Changes in V4:
-> 	- Fix printf format string
-> 
-> [...]
+--lX6ufxgJzp9wVSz3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/next, thanks!
+On Tue, Sep 03, 2024 at 05:21:51PM +0530, Prasad Kummari wrote:
 
--- 
+> Add a generic rule in Makefile.lib to automatically apply
+> fdtoverlay, so that each platform doesn't need to include
+> a complex rule. This also automatically appends
+> DTC_FLAGS_foo_base +=3D -@ to all base files.
+>=20
+> The platform's Makefile only needs to have this now:
+>=20
+> foo-dtbs :=3D foo_base.dtb foo_overlay1.dtbo foo_overlay2.dtbo
+> dtb-y :=3D foo.dtb
+>=20
+> The suffix-search macro hard-codes the suffix, '.o' and
+> multi-search and real-search macros can be used for foo-dtbs,
+> multi-dtb-y is a list of DTB constructed overlays, and base-dtb-y
+> contains a list of base dtb.
+>=20
+> Reference:
+> https://lore.kernel.org/all/20920b0df6b067aca4040459a9677d7d1d6d766a.1615=
+354376.git.viresh.kumar@linaro.org/
+>=20
+> Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
+
+This really needs to be rephrased to be clear that you're
+cherry-picking:
+commit 15d16d6dadf6947ac7f9a686c615995c5a426ce2
+Author: Rob Herring <robh@kernel.org>
+Date:   Wed Mar 10 11:05:30 2021 +0530
+
+    kbuild: Add generic rule to apply fdtoverlay
+
+out of the Linux kernel. We have other cherry-picks, just look at git
+log on scripts/Makefile.lib.
+
+--=20
 Tom
 
+--lX6ufxgJzp9wVSz3
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbXaUgACgkQFHw5/5Y0
+tyxrcQwAgtfFXO4psnoYQUiyLpROqMJkRketCjTvAmoQzBKibbxlCJ0m1+JJbP4+
+gmnB0w3xHXkTlzHFp7h2l5sVJHjbxdMRrCET89Aii0eEQ8AmGllXRJvPsG5d1L8/
+X4FAlfm1KhHKionN8XEH5PRQOrf6L29XeqpwjZkfp2EaVF78VNt1LgIrLMCvXbrT
+6o311uIj9sHrlAklTkbTp1/XnYTfH2VhVOaa3gxxHWDgf+q+te/Bc1fesP9oTZPf
+zREnkg+e4kfsqIGLxMtqZBazTfCde5gkt5nu6/4xe5PmU6fgw6a4zAho7yAuEQuD
+rSogqAXY5NXdZykugQDaruKzMQoAIMCX+FdW3YoUxJ0Cz8Ol5bPz2nkGBnsWyYwq
+ufgG4ZEUIXyswB1zrvrhBozPxK/txpvb/W4MugB++ciXW2zkWmWBmvqT6Un74XP7
+OQHdjdKWOGFADsDXTYDSR989yr9rQY6KFm3jvUlD8xAVqWOyldH98Ue8ktRLcUmL
+76zbvf//
+=aRwA
+-----END PGP SIGNATURE-----
+
+--lX6ufxgJzp9wVSz3--
