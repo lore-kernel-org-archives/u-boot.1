@@ -4,57 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEA55CA0ED3
-	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 01:27:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92641CA101E
+	for <u-boot@archiver.kernel.org>; Tue,  3 Sep 2024 06:54:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 188A087FCD;
-	Tue,  3 Sep 2024 03:27:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id BBEC48891B;
+	Tue,  3 Sep 2024 08:54:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="IuKZDCCO";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1725346466;
+	bh=JXgGTOnchQ18dV3AslfBeQZrppBnpycJK7UyAihcB38=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=dJfrmr/bvqWKkZMzF+RWmZTeU2V9yId6tN8axAE1U4gwT6MSVCR4nWqUQrpTeyz2l
+	 i6RU1N5jCNBvCHT0yp9VEC4eKIPsN88noPZt4Zx5Otj/CcxSIlSVlb0sPfktlHO/uK
+	 XefyWRgN+jJL1zd7wNoJAdFLsa4ch5alGN2QUUc39POilxewFhHeFhVdbFnEXQzbVd
+	 NJ6TP+hARkcuULzI3TMIXDLpJUr7Os1F+LjcYfPB4n7CVqgXzB8+2dSjAKOAHZg1C3
+	 ALZbdo59wNz0ICLmRBZN9QJj/1d+cBAs2ZfOuG2WwGSwDu+WCaF8sJrpceqjuwbl+t
+	 2eBZ0Pop6SSnw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB86788327; Mon,  2 Sep 2024 17:39:02 +0200 (CEST)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ id 1A8EA8892C; Tue,  3 Sep 2024 08:54:26 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CFB9E88BEF
- for <u-boot@lists.denx.de>; Mon,  2 Sep 2024 17:39:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 331A6888FB
+ for <u-boot@lists.denx.de>; Tue,  3 Sep 2024 08:54:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pratyush@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id A94C2A42705;
- Mon,  2 Sep 2024 15:38:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4023CC4CEC2;
- Mon,  2 Sep 2024 15:38:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1725291539;
- bh=NGhFJDHhNOe0x1iMzXGJOfEXK5l91bngGo9k6AbEx1Y=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=IuKZDCCOQq5mFgbl9LC39ZTFul6HyDhBpeCpODc8cSnuQAj/TGFwnMkFxIEaED3Zr
- ipVscjd1UP+W9+trcTiRjzmItbVq3IJP5LvwZQR1gsp6OMIR2jtqTq25lbK/nD9VQm
- gl7BRcVSE1BqeSJdnTvM3qK8EVG6U3ZvV6yaNAagQJH2yK9aE2cSSZvttG1wSfFKNi
- UwyoCxIUoibkVjQ7R9Exc8TN7W6lY54qdtnxUaAf24C944ugnKCgJcW1RpYiB1iKCX
- AdU3XD4AsWIg64TijYuhpE9zDgwwL7TMDDcfqwXLsk6yzgSlX4RipWMzo/Gp4rxgBr
- zqWUGDl5orvng==
-From: Pratyush Yadav <pratyush@kernel.org>
-To: tkuw584924@gmail.com
-Cc: u-boot@lists.denx.de,  jagan@amarulasolutions.com,  vigneshr@ti.com,
- tudor.ambarus@linaro.org,  pratyush@kernel.org,
- Bacem.Daassi@infineon.com,  Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Subject: Re: [PATCH] mtd: spi-nor-ids: Add support for S28HS256T
-In-Reply-To: <20240830050012.28870-1-Takahiro.Kuwano@infineon.com> (tkuw's
- message of "Fri, 30 Aug 2024 14:00:12 +0900")
-References: <20240830050012.28870-1-Takahiro.Kuwano@infineon.com>
-Date: Mon, 02 Sep 2024 17:38:57 +0200
-Message-ID: <mafs0bk16xdym.fsf@kernel.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4Wybvf0zDyz9sSc;
+ Tue,  3 Sep 2024 08:54:22 +0200 (CEST)
+Message-ID: <316aaada-65be-42bc-a57f-d2421b79820b@denx.de>
+Date: Tue, 3 Sep 2024 08:54:21 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Mailman-Approved-At: Tue, 03 Sep 2024 03:27:18 +0200
+Subject: Re: [PATCH u-boot-marvell 1/3] arm: mvebu: turris_omnia: Rename
+ variable holding EEPROM udevice
+To: =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>
+Cc: u-boot@lists.denx.de
+References: <20240829080849.20276-1-kabel@kernel.org>
+ <20240829080849.20276-2-kabel@kernel.org>
+Content-Language: en-US
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20240829080849.20276-2-kabel@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,17 +69,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Aug 30 2024, tkuw584924@gmail.com wrote:
+On 8/29/24 10:08, Marek Behún wrote:
+> Rename the variable holding the EEPROM udevice from `chip` to `eeprom`.
+> 
+> Signed-off-by: Marek Behún <kabel@kernel.org>
+> ---
+>   board/CZ.NIC/turris_omnia/turris_omnia.c | 10 +++++-----
+>   1 file changed, 5 insertions(+), 5 deletions(-)
+> 
+> diff --git a/board/CZ.NIC/turris_omnia/turris_omnia.c b/board/CZ.NIC/turris_omnia/turris_omnia.c
+> index 2f29d26edf8..392df53a6d8 100644
+> --- a/board/CZ.NIC/turris_omnia/turris_omnia.c
+> +++ b/board/CZ.NIC/turris_omnia/turris_omnia.c
+> @@ -464,16 +464,16 @@ static bool check_eeprom_crc(const void *buf, size_t size, u32 expected,
+>   
+>   static bool omnia_read_eeprom(struct omnia_eeprom *oep)
+>   {
+> -	struct udevice *chip;
+> +	struct udevice *eeprom;
+>   	int ret;
+>   
+> -	chip = omnia_get_i2c_chip("EEPROM", OMNIA_I2C_EEPROM_CHIP_ADDR,
+> -				  OMNIA_I2C_EEPROM_CHIP_LEN);
+> +	eeprom = omnia_get_i2c_chip("EEPROM", OMNIA_I2C_EEPROM_CHIP_ADDR,
+> +				    OMNIA_I2C_EEPROM_CHIP_LEN);
+>   
+> -	if (!chip)
+> +	if (!eeprom)
+>   		return false;
+>   
+> -	ret = dm_i2c_read(chip, 0, (void *)oep, sizeof(*oep));
+> +	ret = dm_i2c_read(eeprom, 0, (void *)oep, sizeof(*oep));
+>   	if (ret) {
+>   		printf("dm_i2c_read failed: %i, cannot read EEPROM\n", ret);
+>   		return false;
 
-> From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
->
-> Infineon S28HS256T is 256Mb Octal SPI device which has same
-> functionalities with 512Mb and 1Gb parts.
->
-> Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Reviewed-by: Stefan Roese <sr@denx.de>
 
-Reviewed-by: Pratyush Yadav <pratyush@kernel.org>
-
--- 
-Regards,
-Pratyush Yadav
+Thanks,
+Stefan
