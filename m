@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4A89CD3431
-	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 07:18:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C97B0CA0ED3
+	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 07:19:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA02D88B68;
-	Wed,  4 Sep 2024 09:18:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2F54D88C8B;
+	Wed,  4 Sep 2024 09:18:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SNU3brfr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="w1mVJvoc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2722088C08; Wed,  4 Sep 2024 09:18:35 +0200 (CEST)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
+ id 7C22F88CA0; Wed,  4 Sep 2024 09:18:58 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F51A831A1
- for <u-boot@lists.denx.de>; Wed,  4 Sep 2024 09:18:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BBD3831A1
+ for <u-boot@lists.denx.de>; Wed,  4 Sep 2024 09:18:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2f64cc05564so14921051fa.2
- for <u-boot@lists.denx.de>; Wed, 04 Sep 2024 00:18:33 -0700 (PDT)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5c26b5f1ea6so497648a12.0
+ for <u-boot@lists.denx.de>; Wed, 04 Sep 2024 00:18:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725434312; x=1726039112; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1725434336; x=1726039136; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=G0SqsWNxw5NTEV0E4AGdIGI3/Ne5m6xGyDmFPrJaV54=;
- b=SNU3brfrcWcMkKaRR3V7dh8Eg9u8p5r8JmeSZWp0q0FjIqm+fkLowgMs0efBIQzZFK
- gPVEQdjlNG4U+0Dmi9xCaaSaaH29WQ7+7K73Y30EtUYuHFLgNB94aXwHtyRwPkfth0px
- FHbkGP+BTcsAqcPaMHMvRYhuV9qP5DPv68aTJmciV/GnYerdoHfqj2VhxqlpbqcHeoMH
- dOnvPIB99N58fD0WB6DcXCckK+X9amdRaYg5qVonbJriPSFrSlxJ47PDszHnv1KCxZj/
- 6RSqsAA6ffmWqcgjr1CqigZ683iVNAzk8pBu1UkxiqRinE7B9vte9GbiNymj3yRA5dL0
- 9nQQ==
+ bh=mKprRrHhunUY7XpMNsNjgn+fFvRusP/Gs1aRKeXpRys=;
+ b=w1mVJvoci3whgJ3t9ht2bEHY+prS5mbzu+wNk+PMuirHNS8y/yutmz5+MaKp/AHA8a
+ s3tsT1J3AQPF8cUYW2D3pknDOKF9DiAZujpALov33P6xO9eCFDF0B22v/401/d++yNGo
+ TaqL0VKL3tg1zmSvhYmw1vmmF8hrhKtj0AFgvPdaA8GPoZr6IftWfrM9/WlpNyDAVQQH
+ PEYS+qNeHZEP+EYoS+baTyNrqrQzUCukTDo5YQj4xlTTXDz/3imF1fjH4g80UTdBnGTQ
+ wA3lR8GtFsyViCIL7DqnS55B6rk4MDajEa4AJ13SMFse/+S9GHnWrkTlCgfUAuQeJBP0
+ Y4aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725434312; x=1726039112;
+ d=1e100.net; s=20230601; t=1725434336; x=1726039136;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=G0SqsWNxw5NTEV0E4AGdIGI3/Ne5m6xGyDmFPrJaV54=;
- b=A0fSRcdTcNpOqMmtIQ16Afey0UAgR3EntDX2vWt4ndswl6YSI6nFSaCOfRMxLX/kR/
- gYthBHanabD6B1KNq84B6pXYL0TSajE/ogfMXMVTL8C2VeMsJzGpNsQzkyukvYyg+4N7
- JtcSnxeZ3VLUnktA5cc2a/mAHTNvuYwETJ5Elm0ZzBDt04eElqH82qUqwCmYWIqZUBys
- v0jQ7QRA06tWOK26DloWvXiq3uvTwYvO8bJ2WIRJ5i9cAF/gT8/FYLhnXCnYe82mmg+x
- E9d4KHtX8IVbEJWTE3W3LRy3+MBpXvNrA4ltOYWsDZsVnubM3JPw58upADIbq0SZJ3tP
- 5kbA==
-X-Gm-Message-State: AOJu0YzSHrQ7D7000PnONGUNfXtee6zMBIdqFWH0KWvWUKvNkKlVtjL9
- HZ93QYSV/XRtfOPm6z+R41+7jSi1qkHt0AvGcvp/51Ly+zMF06SAHBV/rjk+PC3Jxh7Js+yuyhj
- mH1s4L51XlH2X774csKhiXV63dT0Q7nj63LGBYA==
-X-Google-Smtp-Source: AGHT+IE98IIUn5uaykchvMXF8UYda4WAC1SRoMCvbrsI92W4zDXWXqajITHL581jPt+rvUsamqE5W+cu/mAC4LfjH88=
-X-Received: by 2002:a2e:511a:0:b0:2f6:5f0a:9d00 with SMTP id
- 38308e7fff4ca-2f65f0a9f7dmr2262801fa.1.1725434312238; Wed, 04 Sep 2024
- 00:18:32 -0700 (PDT)
+ bh=mKprRrHhunUY7XpMNsNjgn+fFvRusP/Gs1aRKeXpRys=;
+ b=Qgs2U/64tudLEUg8Hg6gY8LIItnOVpE63kURZdDtWERNZpcfwntbepO0f3VqReUyQY
+ 4/TWfib4CIIr3VEQeQWj+cRtnMmZr2coj3YbJWOrF+No7yVkvdunyhOh5H7G5HJtC/Br
+ h7EIMfgj6ULfxkK7AYWtY4voXNTHwpddxlRo0xXI3NI68W1sm5Doureko5Ne3yWEJoIH
+ 9NrH6wCoQSs+vD08q8FPufd9RiWCqIToCYeuY+/GKDhF/IkUlrmWrtcYRdHcv0PIiJZh
+ d5VEEgw8Xbh8p+YvkssZMfrEziYXPudWHtf8u6m0cwE/8ta9V9w9iWok+7uKWmNXca2Q
+ X3dw==
+X-Gm-Message-State: AOJu0YzX2poD7OVkY4s2/tVvlaUcTbC5NRsombwTvME761AaQKDFQnYv
+ DUjC7pUPRyrRvfoY8eSG5MZTOq6HgrT4DnihBnX+yg2v84A9jmhmSr03TJ7J0FTqerm5Q3J+AiW
+ Jek9kleNn7bffnMyKq/IMzbqjs3Cya151Ms5bcw==
+X-Google-Smtp-Source: AGHT+IFTNXq/FtTAYp96QY0DZZoTJPZvDVr1iPdufcCEKdgVZx1j6QoIlWZPukXv/LlAyRHm+0AADhXbsG2Du8h5Fxw=
+X-Received: by 2002:a05:6402:26c7:b0:5c0:ad76:f6d5 with SMTP id
+ 4fb4d7f45d1cf-5c2c28f86d3mr1049032a12.5.1725434335965; Wed, 04 Sep 2024
+ 00:18:55 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240830114057.891069-1-sughosh.ganu@linaro.org>
- <20240830114057.891069-3-sughosh.ganu@linaro.org>
- <8ca6fe22-c8ff-47a9-9cc0-b4781b9cc58a@amd.com>
-In-Reply-To: <8ca6fe22-c8ff-47a9-9cc0-b4781b9cc58a@amd.com>
+ <20240830114057.891069-2-sughosh.ganu@linaro.org>
+ <f6c4b95b-9748-4cbb-b3f8-7f69b6c4c451@amd.com>
+In-Reply-To: <f6c4b95b-9748-4cbb-b3f8-7f69b6c4c451@amd.com>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Wed, 4 Sep 2024 12:48:21 +0530
-Message-ID: <CADg8p97Jh8Sor2VJDed2jDjs0iE1Hp4X1G2qw44vn8-rWDRt=Q@mail.gmail.com>
-Subject: Re: [PATCH 2/6] fwu: v2: try reading both copies of metadata
+Date: Wed, 4 Sep 2024 12:48:45 +0530
+Message-ID: <CADg8p96K2jx4F+Z2FpwS0tEHQZpnb+nEtsHMW1nmi2QK+GTZ9g@mail.gmail.com>
+Subject: Re: [PATCH 1/6] fwu: v2: perform some checks before reading metadata
 To: Michal Simek <michal.simek@amd.com>
 Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -88,62 +88,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 3 Sept 2024 at 22:37, Michal Simek <michal.simek@amd.com> wrote:
+On Tue, 3 Sept 2024 at 19:22, Michal Simek <michal.simek@amd.com> wrote:
 >
 >
 >
 > On 8/30/24 13:40, Sughosh Ganu wrote:
-> > In the version 2 of the FWU metadata, the metadata is broken into two
-> > parts, a top-level structure, which provides information on the total
-> > size of the structure among other things. Try reading the primary
-> > partition first, and if that fails, try reading the secondary
-> > partition. This will help in the scenario where the primary metadata
-> > partition has been corrupted, but the secondary partition is intact.
+> > The version 2 of the FWU metadata has a top level structure, followed
+> > by optional information on the updatable images. Perform some sanity
+> > checks on some of the fields in the top level structure to determine
+> > if the rest of the structure has to be read.
 > >
 > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > > ---
-> >   lib/fwu_updates/fwu_v2.c | 77 +++++++++++++++++++++-------------------
-> >   1 file changed, 41 insertions(+), 36 deletions(-)
+> >   lib/fwu_updates/fwu_v2.c | 36 ++++++++++++++++++------------------
+> >   1 file changed, 18 insertions(+), 18 deletions(-)
 > >
 > > diff --git a/lib/fwu_updates/fwu_v2.c b/lib/fwu_updates/fwu_v2.c
-> > index d0d8a25929..69306282aa 100644
+> > index 108bc9bb4a..d0d8a25929 100644
 > > --- a/lib/fwu_updates/fwu_v2.c
 > > +++ b/lib/fwu_updates/fwu_v2.c
-> > @@ -10,6 +10,12 @@
-> >   #include <linux/types.h>
+> > @@ -58,24 +58,6 @@ static int fwu_mdata_sanity_checks(void)
+> >       struct fwu_data *data = fwu_get_data();
+> >       struct fwu_mdata *mdata = data->fwu_mdata;
 > >
-> >   #define FWU_MDATA_VERSION   0x2U
-> > +#define FWU_IMG_DESC_OFFSET  0x20U
-> > +
-> > +static struct fwu_mdata g_mdata;
-> > +
-> > +#define PRI_PART             0x1U
-> > +#define SEC_PART             0x2U
+> > -     if (mdata->version != FWU_MDATA_VERSION) {
+> > -             log_err("FWU metadata version %u. Expected value of %u\n",
+> > -                     mdata->version, FWU_MDATA_VERSION);
+> > -             return -EINVAL;
+> > -     }
+> > -
+> > -     if (!mdata->desc_offset) {
+> > -             log_err("No image information provided with the Metadata. ");
+> > -             log_err("Image information expected in the metadata\n");
+> > -             return -EINVAL;
+> > -     }
+> > -
+> > -     if (mdata->desc_offset != 0x20) {
+> > -             log_err("Descriptor Offset(0x%x) in the FWU Metadata not equal to 0x20\n",
+> > -                     mdata->desc_offset);
+> > -             return -EINVAL;
+> > -     }
+> > -
+> >       num_banks = fwu_get_fw_desc(mdata)->num_banks;
+> >       num_images = fwu_get_fw_desc(mdata)->num_images;
 > >
-> >   static inline struct fwu_fw_store_desc *fwu_get_fw_desc(struct fwu_mdata *mdata)
-> >   {
-> > @@ -109,6 +115,31 @@ static int fwu_trial_state_start(uint update_index)
-> >       return 0;
-> >   }
+> > @@ -238,6 +220,24 @@ int fwu_init(void)
+> >               return ret;
+> >       }
 > >
-> > +static bool fwu_get_mdata_mandatory(uint part)
-> > +{
-> > +     int ret = 0;
-> > +     struct udevice *fwu_dev = fwu_get_dev();
+> > +     if (mdata.version != FWU_MDATA_VERSION) {
+> > +             log_err("FWU metadata version %u. Expected value of %u\n",
+> > +                     mdata.version, FWU_MDATA_VERSION);
+> > +             return -EINVAL;
+> > +     }
 > > +
-> > +     memset(&g_mdata, 0, sizeof(struct fwu_mdata));
+> > +     if (!mdata.desc_offset) {
+> > +             log_err("No image information provided with the Metadata. ");
+> > +             log_err("Image information expected in the metadata\n");
+> > +             return -EINVAL;
+> > +     }
 > > +
-> > +     ret = fwu_read_mdata(fwu_dev, &g_mdata,
-> > +                          part == PRI_PART ? true : false,
-> > +                          sizeof(struct fwu_mdata));
-> > +     if (ret)
-> > +             return false;
-> > +
-> > +     if (g_mdata.version != FWU_MDATA_VERSION)
-> > +             return false;
+> > +     if (mdata.desc_offset != 0x20) {
 >
-> Any reason to remove error logs which were here?
+> In 2/6 you are introducing this macro
+> +#define FWU_IMG_DESC_OFFSET    0x20U
+>
+> I think you can do it directly here and just use it in 2/6.
 
-They just got dropped during the code refactor. Will put them back. Thanks.
+Will do. Thanks.
 
 -sughosh
+
+>
+>
+> > +             log_err("Descriptor Offset(0x%x) in the FWU Metadata not equal to 0x20\n",
+> > +                     mdata.desc_offset);
+> > +             return -EINVAL;
+> > +     }
+> > +
+> >       ret = fwu_mdata_copies_allocate(mdata.metadata_size);
+> >       if (ret)
+> >               return ret;
+>
+> M
