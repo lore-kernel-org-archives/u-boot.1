@@ -4,96 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B49BDCD3431
-	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 12:49:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49D27CD37B4
+	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 14:10:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0D5688AA7;
-	Wed,  4 Sep 2024 14:48:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3FC5B880A5;
+	Wed,  4 Sep 2024 16:09:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EPmQ1kHH";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wskoVI7O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99ADA88AE4; Wed,  4 Sep 2024 14:48:57 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F11E28876E; Wed,  4 Sep 2024 06:19:28 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B59A2889FF
- for <u-boot@lists.denx.de>; Wed,  4 Sep 2024 14:48:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A42DA88C7C
+ for <u-boot@lists.denx.de>; Wed,  4 Sep 2024 06:19:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5c218866849so6969229a12.0
- for <u-boot@lists.denx.de>; Wed, 04 Sep 2024 05:48:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725454135; x=1726058935; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7dvg1GXJ/xCqU8moMAFTjwv6n3+GjfkSRxExokOEiag=;
- b=EPmQ1kHHYM41hISfY+U5GYu+5CnkRRjJxqNkO4VvKPnIBZ0lbIZqKy1iR9OWqIv+dC
- 5HeNsnAD22chLBi8O0sEli3OikBs07CCyHWeFTnHZ/T3YJS8bwL7CWj+Gwfmej8rs/EO
- Ii9kftAV9JHElaGqzzl3Di/0Dt1MKuCUoksUVgyIDPCySFfMbIO+WJB6BrT+4uzIQIyL
- Ro+owFeTaTkpGMrOwAmbbjlDtTldJ2upYJa2+COrCQ2EEmIuLI/Y2ynqodI9I/K3/sWS
- pvNdDpBN+pTu9/8Ot/9gCRvX0C0LC8IC3eoyw2gVasquqZJa+Xk8kyCMRbzgtcEoiA1l
- woig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725454135; x=1726058935;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7dvg1GXJ/xCqU8moMAFTjwv6n3+GjfkSRxExokOEiag=;
- b=VBfEY+G89OCAqbSl/Y97pYdszhW0ZKBGBO8lRSThLOYbpx6bSNdB2tMFHrVIXMpFQD
- WTNVdgn0mGdHuUZjdnnyqxHkUfYWSVcmxHppgoqNf9XFQn7t9W2l8Ro8XhWwU4iaufWL
- 35ll1m9TuKScJtAPp2hrI3qHghIaODMFOSdKIGZA0AZ2Wni042npAu3S/r8p8Qkc+Ynh
- pXLtU7CLMAJJd2h5qvsmhOn+uCPhASVJ+uQSsnwhsONl34xFM7I1zEUAJ9yewuNNpnmq
- k/dHGfQJ6Cda0+LdKCj7yWY11kXTDZk/E8ahRDP4v6w0XapHrBlwXKWc3fUxjEYspP+g
- HFRQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXNHE4rpZRwIkRzWkvOyh/QyE2CogZ9O/xwCH1xuhk3G76itrRZb/xdLrb7ppxrzPhFY8INf+A=@lists.denx.de
-X-Gm-Message-State: AOJu0YyYuU4V+GZuuUiwO9RQHJ+i5FHSf0q07Oj5upx4xeLtND9QeJEO
- bD5qmdhtqd1SyBcA6bZs82GHRmV+V4kwSjB1fKJ+y0Rl0jy+IeFNQDPbn2mliA5UShXEjXSt3da
- f3XqO2xBZEgOVS2jJh7m54IeE0YY=
-X-Google-Smtp-Source: AGHT+IHdBYb3nc7KvlQ2yqvYt0lfEd8OMc9wMML8FBG49c0OZ52hO7AgEUo7p6SoxKlQpRDi8eugd4vFYzBsQ7nA9B4=
-X-Received: by 2002:a05:6402:2707:b0:5c2:69f0:8d6c with SMTP id
- 4fb4d7f45d1cf-5c269f09289mr4967757a12.18.1725454134411; Wed, 04 Sep 2024
- 05:48:54 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4844JOI4114669;
+ Tue, 3 Sep 2024 23:19:24 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1725423564;
+ bh=S0O8fdebdbPUbmdhRMT3U9Qr9OWN+FHswgaIjLfYSdY=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=wskoVI7Oja/lRBTFbzZqL3y9gAf77hMx4njuJ7/ZIr6jFdGds2zqBaQSVcrSHZXVA
+ RD4nmyqVvIuddukAHOTfPwzebA9CRpDeJ1HRGecCwmkCkU3nBXfFGS6Wo07x1pS8e6
+ wZ63yhnuOl2lc6Jze+q6orYkKNqGvlRR9Vqvx1qE=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4844JO9w063718
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 3 Sep 2024 23:19:24 -0500
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 3
+ Sep 2024 23:19:23 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 3 Sep 2024 23:19:23 -0500
+Received: from [172.24.23.68] (lt5cd2489kgj.dhcp.ti.com [172.24.23.68])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4844JJao071177;
+ Tue, 3 Sep 2024 23:19:20 -0500
+Message-ID: <63af3c3c-2314-45fe-9922-e60a432f711d@ti.com>
+Date: Wed, 4 Sep 2024 09:49:19 +0530
 MIME-Version: 1.0
-References: <20240816214436.1877263-1-raymond.mao@linaro.org>
- <CAFLszTiRy3dkrTVnkV-H=CcCxJH6W5=RBM9tokOiSN-AVXGywA@mail.gmail.com>
-In-Reply-To: <CAFLszTiRy3dkrTVnkV-H=CcCxJH6W5=RBM9tokOiSN-AVXGywA@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 4 Sep 2024 13:48:43 +0100
-Message-ID: <CALeDE9PqT54MH0riLFng3ONi=rtEa53LsxRgYcV1ENX=ikuV0A@mail.gmail.com>
-Subject: Re: [PATCH v6 00/28] Integrate MbedTLS v3.6 LTS with U-Boot
-To: Simon Glass <sjg@chromium.org>
-Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
- manish.pandey2@arm.com, 
- Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
- Mario Six <mario.six@gdsys.cc>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Michal Simek <michal.simek@amd.com>, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sean Anderson <seanga2@gmail.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Sumit Garg <sumit.garg@linaro.org>, 
- Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, 
- Alexander Gendin <agendin@matrox.com>, Jonathan Humphreys <j-humphreys@ti.com>,
- Eddie James <eajames@linux.ibm.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 1/6] arm: mach-k3: j784s4: Add clk and power support
+ for MAIN_R5_2_x PBIST
+To: Neha Malcom Francis <n-francis@ti.com>, <trini@konsulko.com>
+CC: <b-padhi@ti.com>, <m-chawdhry@ti.com>, <afd@ti.com>, <hnagalla@ti.com>,
+ <j-choudhary@ti.com>, <bb@ti.com>, <nm@ti.com>, <vigneshr@ti.com>,
+ <j-keerthy@ti.com>, <u-boot@lists.denx.de>, <u-kumar1@ti.com>
+References: <20240903114402.2155740-1-n-francis@ti.com>
+ <20240903114402.2155740-2-n-francis@ti.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20240903114402.2155740-2-n-francis@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Mailman-Approved-At: Wed, 04 Sep 2024 16:09:57 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,50 +84,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-> I wonder if we could leave out the SHA stuff? The algorithms are
+On 9/3/2024 5:13 PM, Neha Malcom Francis wrote:
+> Add clock and power domains for MAIN_R5_2_0, MAIN_R5_2_1 and PBIST_14.
 
-One of the big advantages of the mbedtls when it comes to all things
-security is that it's seen a wide audit of it's code which for a lot
-of usecases is very useful from a security PoV, I'm not sure the
-amount of audit the U-Boot in project code has had, I'm sure there has
-been but I've not seen anything published.
 
-> stable and this would seem to avoid much of the size growth, and all
-> the pain of trying to integrate another yet another hashing layer (we
-> already have normal, progressive and h/w acceleration, plus
+Please keep provision for other R core as well, BIST may be needed in 
+future on those
 
-What's the difference between the first two?
-
-> UCLASS_HASH which h/w acceleration should use but that migration never
-
-How hard would it be for UCLASS_HASH to use the mbed hashing underneath?
-
-> happened). I struggle to see any benefit in replacing U-Boot's very
-> solid hashing infra with something else, particularly as this series
-
-I would need to look at the HW support in both U-Boot and mbedtls but
-given wider use of mbedtls I bet adding HW support there that U-Boot
-could utilise may be more apertising to most HW vendors as it means
-they only have to write one set of code and have it used much more
-widely.
-
-> adds yet another. Better to invest the time to refactor it. I asked
-> about this before and was told that it would happen 'later'. Let's
-> just not change it at all, then it is more likely someone will sort it
-
-What, like the HW support in UCLASS_HASH? Things clearly don't work like that.
-
-> Also, if MbedTLS is wanting to be a general library for TLS (I assume
-> transport-local security, not thread-local storage) perhaps it might
-> consider changing to non-Windows newlines, or perhaps even kernel code
-> style?
-
-I think the newlines might be a possible ask, they are generally
-receptive to change (they relicensed it to be a dual license
-compatible with U-Boot when asked), I don't think forcing a separate
-to the kernel project to a kernel code style is a fair request.
-
-Regards,
-Peter
+>
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> ---
+>   arch/arm/mach-k3/r5/j784s4/clk-data.c | 13 +++++++++++++
+>   arch/arm/mach-k3/r5/j784s4/dev-data.c |  7 +++++++
+>   2 files changed, 20 insertions(+)
+> [..]
