@@ -4,109 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08779CD4857
-	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 16:36:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97BC4CD4857
+	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 16:43:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB93088B13;
-	Wed,  4 Sep 2024 18:36:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0D29D88754;
+	Wed,  4 Sep 2024 18:43:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="e2C8Y87x";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aYZyCva3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D42C88B13; Wed,  4 Sep 2024 18:09:36 +0200 (CEST)
+ id 2144388B12; Wed,  4 Sep 2024 18:43:42 +0200 (CEST)
 Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
  [IPv6:2607:f8b0:4864:20::833])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1A9B88B1A
- for <u-boot@lists.denx.de>; Wed,  4 Sep 2024 18:09:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E3A0388381
+ for <u-boot@lists.denx.de>; Wed,  4 Sep 2024 18:43:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-45677452159so38182561cf.3
- for <u-boot@lists.denx.de>; Wed, 04 Sep 2024 09:09:33 -0700 (PDT)
+ d75a77b69052e-45681098bbdso9143141cf.1
+ for <u-boot@lists.denx.de>; Wed, 04 Sep 2024 09:43:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1725466172; x=1726070972; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1725468219; x=1726073019; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=eIpVueaNfzlJSiebnYAqjJgd3fp/AIyV3uNZ7BetCFs=;
- b=e2C8Y87x1DrumnpjI6NbpQUo1i9yflg8M6vw5ihaXIJF+4dTbRkDPktZLepTDWv7p7
- L8am3e04PeJ04CVqTOM3BqneHn+pJhMOwys67zKhSnThKm0H8RK6qsgVUGrJCYKdGdjz
- YHQDZznp9osf0CHutlqordXKldD9Vu/3elYBE=
+ bh=l7C/V9u6TyheFoUexeEtTRZu/bqlr3XXEs8U8CTIKcg=;
+ b=aYZyCva3RPbNEoxk5P0cYlg5gBIR9CHf4D61AfPuP4qnd8YDExhRmdx73SBdVBRARW
+ olYoMd2JsKAiqglChyyKpGJGXqXmjMIz848XuCthOrqFWdIEOwiYekfjIyMa3VJpJ0e3
+ O2pfHRgBSqCMAFp6aaS5gGmE5epq8MN7TzSbI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725466172; x=1726070972;
+ d=1e100.net; s=20230601; t=1725468219; x=1726073019;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eIpVueaNfzlJSiebnYAqjJgd3fp/AIyV3uNZ7BetCFs=;
- b=BIrY6IXdQqbAmgukApeeJJRyujh7mM/Xo4qtxWx4/IOIbdslhtoHbz9YJbYPAj2xs5
- dcLxlGQLEexxqC7kwdzzpnIyztlkas9LaO+sj+8/vaqF1Svm+LARnSzuqD7sGhA1qfW/
- YBd0BqLwYcKIV5OIZ72UHYYfLAbz0f0L4U8swser3J65QsXPOHY2sbPGHskjBQ04f3q5
- b+RFPTwDQNVwwFadR0jv4FhK6sGFoqTsa6OOdBrtIC4ht978t8jNgztXWLWK6koBRf9V
- 6i3q4vfCi0UJZAaHiUlz5CDH+Gj2aBfzQU15lV9OFo+9TjuxvEUC8IPmw5zLsk+x2eLD
- peAA==
+ bh=l7C/V9u6TyheFoUexeEtTRZu/bqlr3XXEs8U8CTIKcg=;
+ b=eIRcBpVJB7+u9vxgwTsBv/q8hOzj8H2+CxGyCv6Hkn8zIAoTmw2fKRyievHZOpp/ue
+ Jbp56CIrecQpOKnzPpfWqpxSVzg5AGRXcgCVHbO6wO/5L2H/O880N2MK+4XFu8qJJn3D
+ +xA+WqD1wHE08k5JT53h9mOpqu2Z1OgxOGbQq/NdBTXz/FFVab0Tt2rEYbjNeE+EwH7P
+ uoLZcArzxbEBC00Z83BKyrnV53JCvGgxwbPIBOzXDTeO1jgZ5wNNSvPN9sWvsAhMJb5N
+ 9bM+KW52sJeIceEWCyYjnKOMLT8OPI8dylmRHYfd/10wjbMdhaZccMsjeYvB1yshWNHf
+ /MQQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVJzeCIMo+cn4ieoKzB3450MhfnYMDI33jAkStiy5rV2U7BT7HF/cKRfb3pumvwEtHhBo9GaZ0=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywm4egpi/n9q8CMO/D8hgLySVxgvm+bVwJxYHYuWNqrTsHo79Y7
- enjwynZXpJ4lHjQk5fuNnhT8cPEc2Sch6GhuJYGvCUGvFYtWPQawHJjNeGStDh0=
-X-Google-Smtp-Source: AGHT+IE7OhtmXlC90QUIVeXRbm/64RY8JT8rospUPGdy3fuIo5Wrqhf7qhiwsJRlnrhIpvoNulKxCQ==
-X-Received: by 2002:ac8:67c2:0:b0:457:ca1c:fcc3 with SMTP id
- d75a77b69052e-457ca1cfe75mr108763081cf.50.1725466172304; 
- Wed, 04 Sep 2024 09:09:32 -0700 (PDT)
+ AJvYcCWcdhtmH1u8ChVo/T8/0kT6iuuJk5WI39VFQAcM7ounNsuoSSsaOAAyImaVCcxPWanLHHpMi0E=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw79pz18Nh7zPGZ1Lj51kiitkLjOPXch0JQpa5RKIKRGxcaVm1i
+ QtkJ9c+0Vg/SdQvqos2c8RWSTd4NYCQfCvlGemtMkyfCUOku0GHasF2XqQpGsBg=
+X-Google-Smtp-Source: AGHT+IFU5dmxNzVJ2t487UxgJWpIVEdub0mL8/URd2D9Bk+cXX4EowkokL9+SIXy+DtykB+JWx3roQ==
+X-Received: by 2002:ac8:7585:0:b0:447:d963:ebbf with SMTP id
+ d75a77b69052e-457f8c1079amr44203141cf.21.1725468218504; 
+ Wed, 04 Sep 2024 09:43:38 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45682cb02casm59932671cf.42.2024.09.04.09.09.27
+ d75a77b69052e-457e1dfb1basm21409781cf.56.2024.09.04.09.43.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Sep 2024 09:09:31 -0700 (PDT)
-Date: Wed, 4 Sep 2024 10:09:25 -0600
+ Wed, 04 Sep 2024 09:43:37 -0700 (PDT)
+Date: Wed, 4 Sep 2024 10:43:32 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, Raymond Mao <raymond.mao@linaro.org>,
+ u-boot@lists.denx.de, manish.pandey2@arm.com,
+ Stefan Bosch <stefan_b@posteo.net>, Mario Six <mario.six@gdsys.cc>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Anton Antonov <Anton.Antonov@arm.com>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Matteo Lisi <matteo.lisi@engicam.com>,
- Gilles Talis <gilles.talis@gmail.com>,
- Michal Simek <michal.simek@amd.com>, Marek Vasut <marex@denx.de>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Nishanth Menon <nm@ti.com>,
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- James Hilliard <james.hilliard1@gmail.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Petr Zejdl <petr.zejdl@cern.ch>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Eddie James <eajames@linux.ibm.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Johan Jonker <jbx6244@gmail.com>, Maxim Moskalets <maximmosk4@gmail.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sean Anderson <sean.anderson@seco.com>,
- Artur Rojek <artur@conclusive.pl>, Janne Grunau <j@jannau.net>,
- Neal Gompa <neal@gompa.dev>, Yang Xiwen <forbidden405@outlook.com>,
- Gabor Juhos <j4g8y7@gmail.com>, Kever Yang <kever.yang@rock-chips.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Boon Khai Ng <boon.khai.ng@intel.com>,
- Robert Marko <robert.marko@sartura.hr>
-Subject: Re: [PATCH v9 20/37] net-lwip: add DHCP support and dhcp commmand
-Message-ID: <20240904152011.GP2479150@bill-the-cat>
-References: <cover.1724419624.git.jerome.forissier@linaro.org>
- <36a13357261f734187444b48b74dec2540e73b86.1724419624.git.jerome.forissier@linaro.org>
- <CAFLszTi3YRpf4krkAYE1u7Sex0=Dn_YscSKxE8mQEh9Mxcgjow@mail.gmail.com>
- <a946cdb4-648c-46a7-83c5-302ab0d666d3@linaro.org>
+ Andrew Davis <afd@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>,
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Alexander Gendin <agendin@matrox.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Eddie James <eajames@linux.ibm.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Subject: Re: [PATCH v6 00/28] Integrate MbedTLS v3.6 LTS with U-Boot
+Message-ID: <20240904164332.GQ2479150@bill-the-cat>
+References: <20240816214436.1877263-1-raymond.mao@linaro.org>
+ <CAFLszTiRy3dkrTVnkV-H=CcCxJH6W5=RBM9tokOiSN-AVXGywA@mail.gmail.com>
+ <CALeDE9PqT54MH0riLFng3ONi=rtEa53LsxRgYcV1ENX=ikuV0A@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="YGGV4SLWaOgUzVDu"
+ protocol="application/pgp-signature"; boundary="J7bKpa7rzjarnbLk"
 Content-Disposition: inline
-In-Reply-To: <a946cdb4-648c-46a7-83c5-302ab0d666d3@linaro.org>
+In-Reply-To: <CALeDE9PqT54MH0riLFng3ONi=rtEa53LsxRgYcV1ENX=ikuV0A@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Wed, 04 Sep 2024 18:36:01 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,99 +117,100 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---YGGV4SLWaOgUzVDu
+--J7bKpa7rzjarnbLk
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 04, 2024 at 09:54:15AM +0200, Jerome Forissier wrote:
+On Wed, Sep 04, 2024 at 01:48:43PM +0100, Peter Robinson wrote:
 > Hi Simon,
 >=20
-> On 8/29/24 16:05, Simon Glass wrote:
-> > Hi Jerome,
-> >=20
-> > On Fri, 23 Aug 2024 at 07:49, Jerome Forissier
-> > <jerome.forissier@linaro.org> wrote:
-> >>
-> >> Add what it takes to enable NETDEVICES with NET_LWIP and enable DHCP as
-> >> well as the dhcp command. CMD_TFTPBOOT is selected by BOOTMETH_EFI due
-> >> to this code having an implicit dependency on do_tftpb().
-> >>
-> >> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> >> ---
-> >>  board/engicam/imx8mp/icore_mx8mp.c            |   2 +-
-> >>  .../imx8mp_debix_model_a.c                    |   2 +-
-> >>  board/ti/am335x/board.c                       |   3 +-
-> >>  board/xilinx/common/board.c                   |   3 +-
-> >>  boot/Kconfig                                  |   3 +-
-> >>  cmd/Kconfig                                   |  91 +++---
-> >>  cmd/Makefile                                  |   6 +-
-> >>  cmd/elf.c                                     |   2 +-
-> >>  cmd/net-lwip.c                                |  13 +
-> >>  common/board_r.c                              |   4 +-
-> >>  common/usb_kbd.c                              |   2 +-
-> >>  drivers/net/Kconfig                           |   2 +-
-> >>  include/net-lwip.h                            |   3 +
-> >>  lib/tiny-printf.c                             |   3 +-
-> >>  net/Makefile                                  |  14 +-
-> >>  net/lwip/Makefile                             |   5 +
-> >>  net/lwip/dhcp.c                               | 125 ++++++++
-> >>  net/lwip/eth_internal.h                       |  35 +++
-> >>  net/lwip/net-lwip.c                           | 286 ++++++++++++++++++
-> >>  net/lwip/tftp.c                               |  11 +
-> >>  20 files changed, 560 insertions(+), 55 deletions(-)
-> >>  create mode 100644 cmd/net-lwip.c
-> >>  create mode 100644 net/lwip/Makefile
-> >>  create mode 100644 net/lwip/dhcp.c
-> >>  create mode 100644 net/lwip/eth_internal.h
-> >>  create mode 100644 net/lwip/net-lwip.c
-> >>  create mode 100644 net/lwip/tftp.c
-> >>
-> >> diff --git a/board/engicam/imx8mp/icore_mx8mp.c b/board/engicam/imx8mp=
-/icore_mx8mp.c
-> >> index e2ed70caa43..bfdc447c478 100644
-> >> --- a/board/engicam/imx8mp/icore_mx8mp.c
-> >> +++ b/board/engicam/imx8mp/icore_mx8mp.c
-> >> @@ -33,7 +33,7 @@ static void setup_fec(void)
-> >>         setbits_le32(&gpr->gpr[1], BIT(22));
-> >>  }
-> >>
-> >> -#if CONFIG_IS_ENABLED(NET)
-> >> +#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)
-> >=20
-> > How about making NET mean 'net', rather than having two options?
-> >=20
-> > Perhaps the existing NET needs to be renamed to NET_INTERNAL or
-> > something like that?
+> > I wonder if we could leave out the SHA stuff? The algorithms are
 >=20
-> The problem with that is it will make it a bit harder to remove
-> the legacy NET implementation, because every occurrence of
-> "if NET" would need to be questioned if it is applicable to
-> NET_INTERNAL only or to NET_LWIP too. IOW, some of the thinking
-> already done here would need to be done again.
+> One of the big advantages of the mbedtls when it comes to all things
+> security is that it's seen a wide audit of it's code which for a lot
+> of usecases is very useful from a security PoV, I'm not sure the
+> amount of audit the U-Boot in project code has had, I'm sure there has
+> been but I've not seen anything published.
 
-Would a new symbol instead help? Make both NET and NEW_LWIP select
-HAS_NETWORKING or something along those lines.
+Yes, it's a positive in my mind to bring in the assorted hashing
+algorithms from mbedTLS here.
+
+> > stable and this would seem to avoid much of the size growth, and all
+> > the pain of trying to integrate another yet another hashing layer (we
+> > already have normal, progressive and h/w acceleration, plus
+>=20
+> What's the difference between the first two?
+>=20
+> > UCLASS_HASH which h/w acceleration should use but that migration never
+>=20
+> How hard would it be for UCLASS_HASH to use the mbed hashing underneath?
+
+This, long term, is what I would like to see figured out how to do.
+
+> > happened). I struggle to see any benefit in replacing U-Boot's very
+> > solid hashing infra with something else, particularly as this series
+>=20
+> I would need to look at the HW support in both U-Boot and mbedtls but
+> given wider use of mbedtls I bet adding HW support there that U-Boot
+> could utilise may be more apertising to most HW vendors as it means
+> they only have to write one set of code and have it used much more
+> widely.
+
+We had some discussion in earlier iterations about HW acceleration for
+the algorithms for mbedTLS and I thought this version of the series
+exposed what was available when it's available (like the ARM crc32
+instructions can be used, but not the full HW accelerators of some other
+HW platforms) ?
+
+> > adds yet another. Better to invest the time to refactor it. I asked
+> > about this before and was told that it would happen 'later'. Let's
+> > just not change it at all, then it is more likely someone will sort it
+>=20
+> What, like the HW support in UCLASS_HASH? Things clearly don't work like =
+that.
+
+Yes, I too am OK with figuring out what needs to be done here, if all
+that much / anything really, honestly, afterwards. Maybe common/hash.c
+needs to be split up, but "do something very clever to the hash_algo
+table" sounds like something that could be a lot of effort for
+questionable gains (and possibly some losses wrt code size).
+
+> > Also, if MbedTLS is wanting to be a general library for TLS (I assume
+> > transport-local security, not thread-local storage) perhaps it might
+> > consider changing to non-Windows newlines, or perhaps even kernel code
+> > style?
+>=20
+> I think the newlines might be a possible ask, they are generally
+> receptive to change (they relicensed it to be a dual license
+> compatible with U-Boot when asked), I don't think forcing a separate
+> to the kernel project to a kernel code style is a fair request.
+
+While it would be nice for newlines to change, I'm not sure it's
+strictly needed? One of the first steps in the process is fixing those,
+and I believe git handles subsequent re-merges fine. And yes, just like
+other external code we aren't really in a position to demand (nor should
+we, nor expect someone else to) rework their codebase.
 
 --=20
 Tom
 
---YGGV4SLWaOgUzVDu
+--J7bKpa7rzjarnbLk
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbYhjEACgkQFHw5/5Y0
-tyxCYQv6A8H87MrvInOF/+7jokK/aFCTnn08YT/n9d4IW5P5oM+5lpLp57AHLVhg
-MsxMJOVk015ZD2CSrk7oY2ZPOJfKva55/d2ngPQbpxD81ZtHF1zbMlVc/ZMIZ7nI
-E/ukU7WBDZB0vpOfS+E4mHCSYNBCCp1N+aVr3cAi4hU6MqZ1/RY8Lqd5N4fO8TY0
-8eCMTxZqfgKbWL2eBeZmt1pOknmSzDhfpEcXD6Qs5lt1Ak0yfULsU0t9ywXo8Res
-lRmLXDMjSqO7OWXfNy6ohy4nCt3ZLsved+ID3z5RiRxqXON6a10INJyFZG7p/5Li
-a6cdz3opROpCzL/FUW/n/s6etAGSC626rQcBbX0ApSIRTPyEfMEL+ji0dOao3v65
-JTDDqzhh4z4gjUmR4HBm5+8YCrxM4njYN4KxlOQv+mtHdt0a+1U0MbuBbzes0BEY
-hPw1eOoVk9ER8bdgKn/6gO3toItd6oLd2PoDttV8wvhfpzZvGPmbbenGek5OlmMF
-9EwkqpDQ
-=xjKC
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbYjjAACgkQFHw5/5Y0
+tyxd+gv/YCbGws76eayneJ1Y8uzPpSqsxncwbO4moQpBghuTV+IkGvxGjAqyr4ni
+LtuwQFkhAvkE5xcL2y1os4qphQDiFzDRMwrTYKQidUH7VvVoY2I5dI+MZcUB3oQM
+TqIk4y1O4CqtDRw4WZ9uPhkXMHiFAGeWhcDHVwVnWhXEoOy81uQODn1OWdT3Uluf
+ICc9eLcRhTsidnZ6mNeRLWvWKrcuKQBxl7wgL6vLRCbEIDNnyrRf/3FbP04hZSip
+ITKdO4LurxlTMeUNe6eQ4L/BFgpFrwdZp+QKZbJ8LzuzIfgMOBs6weJsKIRrDsKr
+hVTJ8ac9lExmQudZST6E29j+mGvtxyiHJmFeQmZT8VyBOGPGKThx+P1AwsZ+xuCP
+q9HHFd0dtdjry0RxOeFrct9fNiQ3zdTh42VTjgGEcBpslB3cS5b+27UWGyYEJUj+
+ErMOCru1Pie9MNnr4ggXpbw2SUFHMTQiFfuTB2CJD1M9UOhu7xfqtkBE545wPOBh
+NpgpYGhd
+=z0OU
 -----END PGP SIGNATURE-----
 
---YGGV4SLWaOgUzVDu--
+--J7bKpa7rzjarnbLk--
