@@ -4,45 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7F9ECD4F4A
-	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 23:39:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AE63CD4F4A
+	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 23:44:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 015A388B1A;
-	Thu,  5 Sep 2024 01:39:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 1ED8588C24;
+	Thu,  5 Sep 2024 01:44:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="d8jZ/VQK";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 556D788C1B; Thu,  5 Sep 2024 01:39:23 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 367F4889FF
- for <u-boot@lists.denx.de>; Thu,  5 Sep 2024 01:39:21 +0200 (CEST)
+ id 78C1D88BFA; Thu,  5 Sep 2024 01:44:41 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 532C488B6A
+ for <u-boot@lists.denx.de>; Thu,  5 Sep 2024 01:44:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C0CFFFEC;
- Wed,  4 Sep 2024 16:39:46 -0700 (PDT)
-Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 044043F66E;
- Wed,  4 Sep 2024 16:39:18 -0700 (PDT)
-Date: Thu, 5 Sep 2024 00:38:38 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Chris Morgan <macroalpha82@gmail.com>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, jernej.skrabec@gmail.com,
- neil.armstrong@linaro.org, hdegoede@redhat.com, jagan@amarulasolutions.com,
- trini@konsulko.com, ryan@testtoast.com, Chris Morgan
- <macromorgan@hotmail.com>
-Subject: Re: [PATCH 1/9] sunxi: H616: dram: DDR3: adjust settings
-Message-ID: <20240905003838.3158e3be@minigeek.lan>
-In-Reply-To: <20240801225519.336667-2-macroalpha82@gmail.com>
-References: <20240801225519.336667-1-macroalpha82@gmail.com>
- <20240801225519.336667-2-macroalpha82@gmail.com>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from gaggiata.pivistrello.it (93-49-2-63.ip317.fastwebnet.it
+ [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 9D97B1FA00;
+ Thu,  5 Sep 2024 01:44:38 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1725493478;
+ bh=tEU1lab1orMM8n1Bgd0S4necrYxWondX4SlDLGFyBs8=;
+ h=Received:From:To:Subject;
+ b=d8jZ/VQK6swQjVeJmagSC+DZEwpPc8BALAoBrn/dHxxBHJWkvM0uOA+bPDKbLV6D3
+ EF3kflMVNN5yyG36dgoUnQI/KWXYQScYRbAYls7PLVVsfmzBqqEPZgjGc+xi+9sW0U
+ ZWotIQ51d/9UXO8j1cnkf52twU8Rdb2ScqXe8jbremrxSy8ogcWgWf0qf/OR4LGr+y
+ juev/Zq6TDN+4i2GPn5kg7fBYPRUSDOg3W9h0DYFP2ZWrQtYBgPRdmcqpvuKVHGQjl
+ lhdLqjiay1+6LHyuv4EOcSVC85pMv2d+XpnUlYHV/NfrXhJKhAdh6/QR4C7F+4l+th
+ p88+BR/7Wz4YA==
+Received: by gaggiata.pivistrello.it (Postfix, from userid 1000)
+ id D62AE7F918; Thu,  5 Sep 2024 01:44:37 +0200 (CEST)
+Date: Thu, 5 Sep 2024 01:44:37 +0200
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Tom Rini <trini@konsulko.com>
+Cc: Francesco Dolcini <francesco@dolcini.it>,
+ Hiago De Franco <hiagofranco@gmail.com>, Keerthy <j-keerthy@ti.com>,
+ Amjad Ouled-Ameur <aouledameur@baylibre.com>, u-boot@lists.denx.de,
+ Hiago De Franco <hiago.franco@toradex.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>
+Subject: Re: [PATCH] fs: Fix SPL build if SPL_FS_LOADER is enabled and
+ FS_LOADER is disabled
+Message-ID: <Ztjw5bGI0RKpAIVP@gaggiata.pivistrello.it>
+References: <20240826181933.252020-1-hiagofranco@gmail.com>
+ <20240830205119.GA3268574@bill-the-cat>
+ <20240831134911.GA32220@francesco-nb>
+ <20240904212721.GZ2479150@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240904212721.GZ2479150@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,56 +76,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu,  1 Aug 2024 17:55:11 -0500
-Chris Morgan <macroalpha82@gmail.com> wrote:
+Hello Tom,
 
-> From: Jernej Skrabec <jernej.skrabec@gmail.com>
+On Wed, Sep 04, 2024 at 03:27:21PM -0600, Tom Rini wrote:
+> On Sat, Aug 31, 2024 at 03:49:11PM +0200, Francesco Dolcini wrote:
+> > On Fri, Aug 30, 2024 at 02:51:19PM -0600, Tom Rini wrote:
+> > > On Mon, Aug 26, 2024 at 03:19:33PM -0300, Hiago De Franco wrote:
+> > > 
+> > > > From: Hiago De Franco <hiago.franco@toradex.com>
+> > > > 
+> > > > When SPL_FS_LOADER is set to y and FS_LOADER is not enabled, the SPL build
+> > > > fails with the following errors:
+> > > > 
+> > > >   AR      spl/boot/built-in.o
+> > > >   LD      spl/u-boot-spl
+> > > > arm-none-linux-gnueabihf-ld.bfd: drivers/misc/fs_loader.o: in function
+> > > > `fw_get_filesystem_firmware':
+> > > > /u-boot/drivers/misc/fs_loader.c:162: undefined reference to
+> > > > `fs_set_blk_dev'
+> > > > arm-none-linux-gnueabihf-ld.bfd: /home/frh/tdx/src/u-boot/drivers/misc/
+> > > > fs_loader.c:185: undefined reference to `fs_read'
+> > > > arm-none-linux-gnueabihf-ld.bfd: drivers/misc/fs_loader.o: in function
+> > > > `select_fs_dev':
+> > > > /u-boot/drivers/misc/fs_loader.c:89: undefined reference to
+> > > > `fs_set_blk_dev_with_part'
+> > > > make[1]: *** [scripts/Makefile.spl:527: spl/u-boot-spl] Error 1
+> > > > make: *** [Makefile:2055: spl/u-boot-spl] Error 2
+> > > > 
+> > > > Fix it by replacing the FS_LOADER with SPL_FS_LOADER in the Makefile, so
+> > > > the fs.c with the necessary function definitions are compiled.
+> > > > 
+> > > > Fixes: b071a07743d4 ("drivers: misc: Makefile: Enable fs_loader compilation at SPL Level")
+> > > > Suggested-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+> > > > Signed-off-by: Hiago De Franco <hiago.franco@toradex.com>
+> > > > Reviewed-by: Tom Rini <trini@konsulko.com>
+> > > 
+> > > This leads to failure to build on sandbox_noinst_defconfig.
+> > 
+> > --- a/drivers/block/Kconfig
+> > +++ b/drivers/block/Kconfig
+> > @@ -110,6 +110,7 @@ config EFI_MEDIA
+> >  config SPL_BLK_FS
+> >         bool "Load images from filesystems on block devices"
+> >         depends on SPL_BLK
+> > +       select SPL_FS_LOADER
+> >         help
+> >           Use generic support to load images from fat/ext filesystems on
+> >           different types of block devices such as NVMe.
+> > 
+> > 
+> > ?
 > 
-> Adjust H616 DDR3 DRAM settings to be in line with vendor driver.
-> 
-> Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
-> Tested-by: Chris Morgan <macromorgan@hotmail.com>
-> ---
->  arch/arm/mach-sunxi/dram_timings/h616_ddr3_1333.c | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/mach-sunxi/dram_timings/h616_ddr3_1333.c b/arch/arm/mach-sunxi/dram_timings/h616_ddr3_1333.c
-> index 3faf8d5bd9..26b7eac342 100644
-> --- a/arch/arm/mach-sunxi/dram_timings/h616_ddr3_1333.c
-> +++ b/arch/arm/mach-sunxi/dram_timings/h616_ddr3_1333.c
-> @@ -24,8 +24,8 @@ void mctl_set_timing_params(const struct dram_para *para)
->  	u8 trrd		= max(ns_to_t(6), 4);	/* JEDEC: max(6 ns, 4nCK) */
->  	u8 trcd		= ns_to_t(15);		/* JEDEC: 13.5 ns */
->  	u8 trc		= ns_to_t(53);		/* JEDEC: 49.5 ns */
-> -	u8 txp		= max(ns_to_t(6), 3);	/* JEDEC: max(6 ns, 3nCK) */
->  	u8 trtp		= max(ns_to_t(8), 2);	/* JEDEC: max(7.5 ns, 4nCK) */
-> +	u8 txp		= trtp;			/* JEDEC: max(6 ns, 3nCK) */
+> I think "depends on" and sandbox_noinst_defconfig should enable
+> CONFIG_SPL_FS_LOADER too.
 
-I am not too sure this change makes sense: assuming that it really
-should read:
-	u8 txp		= max(ns_to_t(8), 2);
-(as txp and trtp are quite different delays), it wouldn't really change
-anything unless we drop below 500 MHz for the DRAM clock.
-8ns are rounded up to 3 clock cycles (nCK), for both 648 and 720 MHz. We
-would only get below 3nCK for frequencies under 500 MHz. 6ns would be
-3nCK at 720 MHz as well, but 2nCK at 648 MHz. But changing the minimum
-to 3nCK at the same time prevents any change. So since the current code
-matches JEDEC, I'd rather keep it.
+What do you mean?
 
-Cheers,
-Andre
+The change I proposed fixes the issue you reported with sandbox_noinst_defconfig and I
+think is the right solution. Are you ok with that or are you proposing to just
+change sandbox_noinst_defconfig enabling CONFIG_SPL_FS_LOADER explicitly?
 
->  	u8 trp		= ns_to_t(15);		/* JEDEC: >= 13.75 ns */
->  	u8 tras		= ns_to_t(38);		/* JEDEC >= 36 ns, <= 9*trefi */
->  	u16 trefi	= ns_to_t(7800) / 32;	/* JEDEC: 7.8us@Tcase <= 85C */
-> @@ -64,6 +64,9 @@ void mctl_set_timing_params(const struct dram_para *para)
->  	twr2rd = trtp + 2 + tcwl;
->  	trd2wr = tcl + 3 - tcwl;
->  
-> +	if (trtp + trp < tcl + 2)
-> +		trtp = tcl + 2 - trp;
-> +
->  	/* set DRAM timing */
->  	writel((twtp << 24) | (tfaw << 16) | (trasmax << 8) | tras,
->  	       &mctl_ctl->dramtmg[0]);
+Francesco
 
