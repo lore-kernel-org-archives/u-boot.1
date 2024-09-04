@@ -4,80 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0791ECA0ED3
-	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 04:56:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4A89CD3431
+	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 07:18:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71E8A88C63;
-	Wed,  4 Sep 2024 06:56:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=web.de
+	by phobos.denx.de (Postfix) with ESMTP id BA02D88B68;
+	Wed,  4 Sep 2024 09:18:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=web.de header.i=smoch@web.de header.b="BAvqOs9X";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SNU3brfr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBFC488C7A; Wed,  4 Sep 2024 06:56:49 +0200 (CEST)
-Received: from mout.web.de (mout.web.de [212.227.17.12])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2722088C08; Wed,  4 Sep 2024 09:18:35 +0200 (CEST)
+Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
+ [IPv6:2a00:1450:4864:20::22a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF01F88365
- for <u-boot@lists.denx.de>; Wed,  4 Sep 2024 06:56:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F51A831A1
+ for <u-boot@lists.denx.de>; Wed,  4 Sep 2024 09:18:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=web.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=smoch@web.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
- s=s29768273; t=1725425795; x=1726030595; i=smoch@web.de;
- bh=/O478IHut3oHCm0fZUleBcH7qVlnnzSYyLE98Bh987w=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=BAvqOs9XJaQGFgIglMkCv4Rw/X7jGxkcFBsv9rLugL/j7Dlj5U4C+j+i82DekYdj
- 7bLdxgIJg4UV0A6bwfSaQ5hSJClIlP9DXPV6DNEyPrD0LBQmQQrFfQqgOw1DnmZjC
- DGUBnJZUttRhFeVdeCnPUbkS59onCExSt1lk5A3ALHtffPYxNVx1ztmaMg4aN8N8y
- YIsDG8ygVq7uAtNIBLNUuyJJXguiLfv78PhxieltGqyptscHS+717yNDZnrM8qjVS
- Gsunq1EbEFQGhtVpa0FAPjRfUXkFA4EjjtzOql/El+jo6McZC+KL+IMZN/g7FCwgd
- X4/YBOsATUo9i+vGHg==
-X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
-Received: from [192.168.1.40] ([89.12.137.104]) by smtp.web.de (mrweb105
- [213.165.67.124]) with ESMTPSA (Nemesis) id 1My6pZ-1rqb9B3tfj-00xo71; Wed, 04
- Sep 2024 06:56:35 +0200
-Message-ID: <fccbf9a6-b27f-4dae-813c-5f045bfe829b@web.de>
-Date: Wed, 4 Sep 2024 06:56:33 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-lj1-x22a.google.com with SMTP id
+ 38308e7fff4ca-2f64cc05564so14921051fa.2
+ for <u-boot@lists.denx.de>; Wed, 04 Sep 2024 00:18:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1725434312; x=1726039112; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=G0SqsWNxw5NTEV0E4AGdIGI3/Ne5m6xGyDmFPrJaV54=;
+ b=SNU3brfrcWcMkKaRR3V7dh8Eg9u8p5r8JmeSZWp0q0FjIqm+fkLowgMs0efBIQzZFK
+ gPVEQdjlNG4U+0Dmi9xCaaSaaH29WQ7+7K73Y30EtUYuHFLgNB94aXwHtyRwPkfth0px
+ FHbkGP+BTcsAqcPaMHMvRYhuV9qP5DPv68aTJmciV/GnYerdoHfqj2VhxqlpbqcHeoMH
+ dOnvPIB99N58fD0WB6DcXCckK+X9amdRaYg5qVonbJriPSFrSlxJ47PDszHnv1KCxZj/
+ 6RSqsAA6ffmWqcgjr1CqigZ683iVNAzk8pBu1UkxiqRinE7B9vte9GbiNymj3yRA5dL0
+ 9nQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725434312; x=1726039112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=G0SqsWNxw5NTEV0E4AGdIGI3/Ne5m6xGyDmFPrJaV54=;
+ b=A0fSRcdTcNpOqMmtIQ16Afey0UAgR3EntDX2vWt4ndswl6YSI6nFSaCOfRMxLX/kR/
+ gYthBHanabD6B1KNq84B6pXYL0TSajE/ogfMXMVTL8C2VeMsJzGpNsQzkyukvYyg+4N7
+ JtcSnxeZ3VLUnktA5cc2a/mAHTNvuYwETJ5Elm0ZzBDt04eElqH82qUqwCmYWIqZUBys
+ v0jQ7QRA06tWOK26DloWvXiq3uvTwYvO8bJ2WIRJ5i9cAF/gT8/FYLhnXCnYe82mmg+x
+ E9d4KHtX8IVbEJWTE3W3LRy3+MBpXvNrA4ltOYWsDZsVnubM3JPw58upADIbq0SZJ3tP
+ 5kbA==
+X-Gm-Message-State: AOJu0YzSHrQ7D7000PnONGUNfXtee6zMBIdqFWH0KWvWUKvNkKlVtjL9
+ HZ93QYSV/XRtfOPm6z+R41+7jSi1qkHt0AvGcvp/51Ly+zMF06SAHBV/rjk+PC3Jxh7Js+yuyhj
+ mH1s4L51XlH2X774csKhiXV63dT0Q7nj63LGBYA==
+X-Google-Smtp-Source: AGHT+IE98IIUn5uaykchvMXF8UYda4WAC1SRoMCvbrsI92W4zDXWXqajITHL581jPt+rvUsamqE5W+cu/mAC4LfjH88=
+X-Received: by 2002:a2e:511a:0:b0:2f6:5f0a:9d00 with SMTP id
+ 38308e7fff4ca-2f65f0a9f7dmr2262801fa.1.1725434312238; Wed, 04 Sep 2024
+ 00:18:32 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 0/6] FUSB302 USB-C controller support
-To: Sebastian Reichel <sebastian.reichel@collabora.com>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- Jonas Karlman <jonas@kwiboo.se>, Eugen Hristev
- <eugen.hristev@collabora.com>, Tim Harvey <tharvey@gateworks.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>
-References: <20240903182136.153196-1-sebastian.reichel@collabora.com>
- <d17f96a6-8e24-41e6-900e-1e546b6bc42c@web.de>
- <01020191ba57e28c-d386c206-8177-45b4-b573-a1abdf6e69c9-000000@eu-west-1.amazonses.com>
-Content-Language: en-US
-From: Soeren Moch <smoch@web.de>
-In-Reply-To: <01020191ba57e28c-d386c206-8177-45b4-b573-a1abdf6e69c9-000000@eu-west-1.amazonses.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Provags-ID: V03:K1:aVAKD9WeYqYgQYpjZEdqkr+KG/30QmIrpB7by+zGT9aZ4NkxKk1
- yExLsttdjcGlODC6dT234TVeNsfkGpkL+kDFQm3lUjInMIy3o9nRjRXZ27NRalOyNLUD5Pu
- EBD7cl6O0/BGqnAK4/7MbzEpG5BPtEBdWwv5LJL4xtpH1TZ3/K8n3mKiSWV8vRbECUUYYsu
- ilkF/BvKg/8RvyNQBzjSA==
-UI-OutboundReport: notjunk:1;M01:P0:SAL2Mvfi7ck=;K1StW6cMKc6piE36JZLXDjXo5VJ
- oop0qYiwuy61syS0bO1B5V3JZdvQJOyhY4d9tdbjDbN6hgwrf25oxkzXFcXe1XCKuD0FQBnh0
- Oi0+QIS3ZAEfh1LYfzkIjrx8Wn+LzT/EwiFhAnMPRCe2lrdB/ButGE+2iltzgq/gMRztjf55I
- JvsGDC7nehf+nGvQ5sv53k6qchAnXT2iLkUqWrP+5+eT0loY+2yvdwcI+T2TQkfcKUkt9ssee
- tLkOnBGwm5ClZ/xg63Ry7TZJyPn01OuvMlHImugNuQKQSPU4fIxJPfsJvsPYApxubPTJWJiTo
- c3iNT1sCwnQxPQz+BsJvMUM1UXB8gh+Tzf4UnRbjS+jUg0A1OKqRS1PWcEYfx+b0DgIgMBCCr
- J6iavL/AqeAV9v5UuATqLLcMHbl1iDGMDz8FQbEwC9t7WQtoyfl4a729WQEN2Oo5jX38XzfIy
- O4mmeg/afrmAkDA61coPRvuGArQxTCHK31iKCcj7d09/kaODLfTBdGPVqMYKQy4dIMrYM9+Cf
- nDeTu3jxDVV/aAwtlKe1wi6RuwnAgw8PNs92sq3E/zlHR0dulDANvj8rZtJ7OuFyv9P18ImC7
- +0/ypWVeaHrsNidVK13pmuBwpKzFvHyxfB75jbDIX4xt3eSSXGyrw6LKH5jwcw+E+HHh/bplv
- bLOzSbc+7/XhORp18iCxQr9cB5IJyVX7pL6d04TXDxt6KuU5J6/MugLUTWghluXLNRqk8Bpnk
- zIqwB8uJWf5FJQ5HyWgSGOuStyAZANbJfjt8QSz36ntkQ5PlTuVoZbZz9VUBs7PM36pXyWT02
- 3WRLLOyNaknt4hvKsO+YCAuA==
+References: <20240830114057.891069-1-sughosh.ganu@linaro.org>
+ <20240830114057.891069-3-sughosh.ganu@linaro.org>
+ <8ca6fe22-c8ff-47a9-9cc0-b4781b9cc58a@amd.com>
+In-Reply-To: <8ca6fe22-c8ff-47a9-9cc0-b4781b9cc58a@amd.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Wed, 4 Sep 2024 12:48:21 +0530
+Message-ID: <CADg8p97Jh8Sor2VJDed2jDjs0iE1Hp4X1G2qw44vn8-rWDRt=Q@mail.gmail.com>
+Subject: Re: [PATCH 2/6] fwu: v2: try reading both copies of metadata
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,86 +88,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sebastian,
+On Tue, 3 Sept 2024 at 22:37, Michal Simek <michal.simek@amd.com> wrote:
+>
+>
+>
+> On 8/30/24 13:40, Sughosh Ganu wrote:
+> > In the version 2 of the FWU metadata, the metadata is broken into two
+> > parts, a top-level structure, which provides information on the total
+> > size of the structure among other things. Try reading the primary
+> > partition first, and if that fails, try reading the secondary
+> > partition. This will help in the scenario where the primary metadata
+> > partition has been corrupted, but the secondary partition is intact.
+> >
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> >   lib/fwu_updates/fwu_v2.c | 77 +++++++++++++++++++++-------------------
+> >   1 file changed, 41 insertions(+), 36 deletions(-)
+> >
+> > diff --git a/lib/fwu_updates/fwu_v2.c b/lib/fwu_updates/fwu_v2.c
+> > index d0d8a25929..69306282aa 100644
+> > --- a/lib/fwu_updates/fwu_v2.c
+> > +++ b/lib/fwu_updates/fwu_v2.c
+> > @@ -10,6 +10,12 @@
+> >   #include <linux/types.h>
+> >
+> >   #define FWU_MDATA_VERSION   0x2U
+> > +#define FWU_IMG_DESC_OFFSET  0x20U
+> > +
+> > +static struct fwu_mdata g_mdata;
+> > +
+> > +#define PRI_PART             0x1U
+> > +#define SEC_PART             0x2U
+> >
+> >   static inline struct fwu_fw_store_desc *fwu_get_fw_desc(struct fwu_mdata *mdata)
+> >   {
+> > @@ -109,6 +115,31 @@ static int fwu_trial_state_start(uint update_index)
+> >       return 0;
+> >   }
+> >
+> > +static bool fwu_get_mdata_mandatory(uint part)
+> > +{
+> > +     int ret = 0;
+> > +     struct udevice *fwu_dev = fwu_get_dev();
+> > +
+> > +     memset(&g_mdata, 0, sizeof(struct fwu_mdata));
+> > +
+> > +     ret = fwu_read_mdata(fwu_dev, &g_mdata,
+> > +                          part == PRI_PART ? true : false,
+> > +                          sizeof(struct fwu_mdata));
+> > +     if (ret)
+> > +             return false;
+> > +
+> > +     if (g_mdata.version != FWU_MDATA_VERSION)
+> > +             return false;
+>
+> Any reason to remove error logs which were here?
 
-On 04.09.24 02:03, Sebastian Reichel wrote:
-> Hi Soeren,
->
-> On Wed, Sep 04, 2024 at 12:26:43AM GMT, Soeren Moch wrote:
->>>    * non PD capable (reports 5V 0A)
->> With a dumb power supply (actually 12V w/o USB-PD) I see a error message
->> (not really sure if that makes sense, but no strong opinion from my side)
->> and 5V/1.5A reported with 'tcpm info', see below.
->> Can we expect 1.5A as fallback supply w/o USB-PD negotiation? 5V OK, but
->> I'm not sure if USB2/USB3 type A to type C cables are allowed according
->> to the USB spec, with lower possible currents.
->>
->> I'm not sure what the 'right' thing is to report in this situation
->> (also cable orientation makes no sense).
->> Just want to mention that I see something different here.
-> USB-C sources, which are not PD capable can use pull-up resistors to
-> change source advertisement as follows:
->
->      | advert.   | pull-up to 5V | pull-up to 3.3V |
->      | --------- | ------------- | --------------- |
->      | default   | 56K           | 36K             |
->      | 1.5A @ 5V | 22K           | 12K             |
->      | 3.0A @ 5V | 10K           | 4.7K            |
->
-> default means 500mA for USB2 or 900mA for USB3, which is reported as
-> 0 in this series.
-Ah, OK. Thanks for your explanation. This makes sense now.
-> Your setup seems to have pull resistors advertising
-> the 1.5A profile. If your setup includes an USB-A to USB-C cable the
-> pull resistors are in the cable, since the pull resistors are on the
-> CC pins, which do not exist for USB-A.
-This special setup is non-standard anyway, with 12V only save to use
-for rock-5b.
-The "3A-Cable" is advertising 1.5A, OK. Similar to my "35W USB-PD
-power supply" advertising 12V/2.5A, hooray.
-> The same pull-up resistors should give away the cable orientation :)
-Should have tried this.
->
->>>    * RavPower 90W
->>>    * UGREEN 100W
->>>    * Anker 45W
->>>    * RavPower PB
->>>
->>> Changes since PATCHv4:
->>>    * Rebase to latest master (v2024.10-rc4)
->>>    * Fix regression introduced in PATCHv3: The exit code for fusb302_set_vconn()
->>>      when vconn stays the same should be 0 instead of undefined
->>>    * Fix regression introduced in PATCHv3: tcpm_set_polarity() needs to update
->>>      port->polarity when there is no driver specific set_polarity function
->> I can confirm that these fixes indeed fix my reported regression from v2.
->> Booting to Linux works perfectly fine when powering from simple USB-PD
->> supplies (12V, 20V), as well as with power from my notebook computer.
->>
->> So for the v5 series:
->> Tested-by: Soeren Moch <smoch@web.de>
->>
->> I also tested powering from a UGREEN USB-C dock (see boot log below).
->> This also worked well. Only the data role was not switched correctly
->> to host as required for the dock. At least we got this 'not supported'
->> message probably related to that. Maybe that can be fixed later in
->> follow-up patches.
-> Yes, this series focuses on getting sink power role working as this
-> is needed to enable USB-C support in Linux (or any other OS). Handling
-> for data role swapping can happen on top of this. Linux should be able
-> to swap the data role if it had been configured the wrong way around in
-> the bootloader without triggering a hard reset.
-In a quick test this had not worked. Maybe something wrong with dts?
-Needs more investigation.
-> So this should only be
-> needed to have the dock's USB ports working in U-Boot itself.
-Would be nice to have. Not that important for me.
->
-> Also acting as USB-PD Source is not fully implemented and needs to be
-> added on top of this once it is required by anyone.
-Good to know. But not testable on rock-5b.
+They just got dropped during the code refactor. Will put them back. Thanks.
 
-Regards,
-Soeren
->
-> -- Sebastian
-
+-sughosh
