@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D6B5CD4842
-	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 02:43:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C265ACD4844
+	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 02:43:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D601E88B49;
-	Wed,  4 Sep 2024 04:43:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3748688C63;
+	Wed,  4 Sep 2024 04:43:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h/HIh2ju";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="F8P2rYgh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F04A88BC0; Wed,  4 Sep 2024 04:43:19 +0200 (CEST)
-Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
- [IPv6:2607:f8b0:4864:20::52f])
+ id 71AA988AE8; Wed,  4 Sep 2024 04:43:29 +0200 (CEST)
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
+ [IPv6:2607:f8b0:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BE3488AE8
- for <u-boot@lists.denx.de>; Wed,  4 Sep 2024 04:43:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AE2188C86
+ for <u-boot@lists.denx.de>; Wed,  4 Sep 2024 04:43:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-7c3d8f260easo3348312a12.1
- for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 19:43:17 -0700 (PDT)
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-7b8884631c4so2482021a12.2
+ for <u-boot@lists.denx.de>; Tue, 03 Sep 2024 19:43:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1725417796; x=1726022596; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ZU3dj6/Sf4gvIiiDH43cVWSELadgABw/5xyf28cald4=;
- b=h/HIh2ju3o1wF//dsU1ZyE1BqPOCnLNq87TXL3/VNAppI45VI27LyWJD5ngD8Z02Qj
- 9mDmYhVLyYHHIFwYSSPfUDaXoMkA4f893dJOHaeMm17e4fnCEY1N8e3jhE0kXwM2cpiu
- JvAz+1AoUXXDAAtC0PIoFC6zbIeeEwkkJAuJn884vOMtxPJx/TNu76OBm+XpHaBwSVXN
- KDm2FIoJIAyvsQF9Al4t4vUfqD6gS0D1UK2juK1RX9BxEeyq4XlTgnMJ4hbEK2Xdxwz9
- 6vuqw0pBfRgWoHXm7ouqGQzBB5+UfuxEKMCS89SqXN/N3qtcf10TS+gDqFeSJV8YB5wq
- mw/A==
+ d=gmail.com; s=20230601; t=1725417806; x=1726022606; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WlGWsJIdrdUK7KWwTokA2y2oXKg8dIjW/dS4UPVeRHM=;
+ b=F8P2rYghqjfJ2qDmV5xj/BSdP52GWH8UrOAALRN+VKBQKbH342E1Cll5Yevp9ERJRt
+ bxMEFQBF9/ctHMcSjMO9HOTcHE/TWqH97GDz6QM9G8QLOSEW95cDfP+0lphRhULXFvvU
+ 9fWD18dpLLZ07KRSS+t+8oz1BOjLbBVaijW4+uIQbhRv6kcO33//ckm2ET5rlPKK/c36
+ XryX814FunHFEfeBefikjFfHT7uBCGCcHqDxn5h9oWOdKXZYD6t8UYzInUYFl89OrMGq
+ Wt/U8Sjqz/UvOt4B2F1V+I7h4cagUwDT2reup5BpRn3bgz0Tlm2ZobEom/Y3Rl3m7vEk
+ Z+7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725417796; x=1726022596;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZU3dj6/Sf4gvIiiDH43cVWSELadgABw/5xyf28cald4=;
- b=rowuSGF/BZWrCjmzq3Pe+Mk2jhW6Ae/6v3XbD2kRDBDehCOwyAm+x5dPellJTSPM4n
- ngggiAQVd9lPZOFWTsonNSWKtGKlqooWhFVgyDQIE93LbsqkvbaXMRtyZdz9KBdWUDFD
- IizVw2QtH1U9LhcJTmNZMtgUf+d9RxIH+MLqydAOXp+mXy79LMCCBCWPSPAIZVANa2zS
- +KfJJmXGzkzAr2tEpaJ5V0DAIdkEd6gZeSt5apxw1dX/QjYfUH+GrDcbMhQzkcEBGM1w
- 3uFAl8YiI8/8r4FnJplhlbiPFNwFcV/N7292nmzkQ34xj/0qo9dJzvDYq+5mMrIyz4DL
- Lcxg==
-X-Gm-Message-State: AOJu0Yz4PrPEV8fGnPxl/vcCMx3H+9anw17NE+uxT5sdWzZDXe1evA6D
- f6xCJRKtMPv6DRsaLgwrx7hGC59qcM7a4J+/3J3RIzXJjjVqnsb5YFXaPu5A
-X-Google-Smtp-Source: AGHT+IGZ9YdTl+5C1bYZmE+jGnrvxQrSKq4SKtGTlIZ2OVfsy2yki80w3bsaXM2mVtHsmSLMFOQ8eA==
-X-Received: by 2002:a05:6a21:1584:b0:1cc:da34:585e with SMTP id
- adf61e73a8af0-1cce10d92c8mr19351301637.46.1725417795722; 
- Tue, 03 Sep 2024 19:43:15 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1725417806; x=1726022606;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WlGWsJIdrdUK7KWwTokA2y2oXKg8dIjW/dS4UPVeRHM=;
+ b=bDxjz3pgqKISngAELgFgiSHSL9fk/4WZ5hj7r0uFtY4CVmy2F9kTatQ2kiGDZTqpCm
+ paEBgRjFfsLU+uCh86j3SfqloZ48LS9ozeATMbXIPbzQOdchYD5O4J7hqIz+81d1Xp4M
+ Ybb+bMuudNktz/38jT/q2KtfsJsqwd8ekX/WFkElSh+57UzFrKULMCaOmXuO0MJ6qjez
+ xR6+teUUGEuOfrnjAA49F+zJBelzb+xQOz1KxghoEhkIwebRiRMRd3NVWfq77WMRy5bB
+ w+q0QSRTbcN0v3RSbl087yV3Q+jWx/k5E8rSgDRzdZE4AzDR5kDS+QHklMPeD8BFZVAc
+ 2HxQ==
+X-Gm-Message-State: AOJu0Yxxo3ugDzfGl7IdXnXQInGxGk8H+Eil8fh1Nit3QQdESBCg5P2/
+ HL0zwu/vfNSeXpG5fLwjfJvk/DgGiDCBnN04VjseTKv4bb4ZvttKvVgLPbe6
+X-Google-Smtp-Source: AGHT+IHZKL6CU1u3NU7sBVwMkuh+jEmUanGyrmF7Pcyig+lQxLaktQ3CpLEF9qSrVXeLEz9nvd+yog==
+X-Received: by 2002:a17:90b:3e89:b0:2da:6a4d:53a6 with SMTP id
+ 98e67ed59e1d1-2da748855c4mr3422875a91.19.1725417805706; 
+ Tue, 03 Sep 2024 19:43:25 -0700 (PDT)
 Received: from cs20-buildserver.. ([180.217.139.107])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2da7ba49b57sm1141829a91.18.2024.09.03.19.43.14
+ 98e67ed59e1d1-2da7ba49b57sm1141829a91.18.2024.09.03.19.43.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Sep 2024 19:43:15 -0700 (PDT)
+ Tue, 03 Sep 2024 19:43:25 -0700 (PDT)
 From: Jim Liu <jim.t90615@gmail.com>
 X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
 To: JJLIU0@nuvoton.com,
 	trini@konsulko.com,
 	jim.t90615@gmail.com
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 0/3] Arm: npcm: modify npcm8xx boot setting
-Date: Wed,  4 Sep 2024 10:41:03 +0800
-Message-Id: <20240904024106.2030437-1-JJLIU0@nuvoton.com>
+Subject: [PATCH v1 1/3] board: arbel: correct the dram bank size
+Date: Wed,  4 Sep 2024 10:41:04 +0800
+Message-Id: <20240904024106.2030437-2-JJLIU0@nuvoton.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240904024106.2030437-1-JJLIU0@nuvoton.com>
+References: <20240904024106.2030437-1-JJLIU0@nuvoton.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,22 +94,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Modify npcm8xx new boot design.
-Correct memory setting and set gpio default value.
+If CONFIG_SYS_MEM_TOP_HIDE is defined, gd->ram_size is reduced by
+CONFIG_SYS_MEM_TOP_HIDE. Need to correct the actual ram size in
+dram_init_banksize.
 
-Jim Liu (2):
-  board: arbel: correct the dram bank size
-  configs: arbel_evb: change env offset and boot address
+Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
+---
+ board/nuvoton/arbel_evb/arbel_evb.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-Stanley Chu (1):
-  pinctrl: npcm8xx: clear all gpio events
-
- board/nuvoton/arbel_evb/arbel_evb.c       |  8 ++++++--
- configs/arbel_evb_defconfig               |  4 ++--
- drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c | 18 ++++++++++++++++++
- include/configs/arbel.h                   |  2 +-
- 4 files changed, 27 insertions(+), 5 deletions(-)
-
+diff --git a/board/nuvoton/arbel_evb/arbel_evb.c b/board/nuvoton/arbel_evb/arbel_evb.c
+index 1f519219e7..55e93a77f0 100644
+--- a/board/nuvoton/arbel_evb/arbel_evb.c
++++ b/board/nuvoton/arbel_evb/arbel_evb.c
+@@ -59,17 +59,21 @@ int dram_init(void)
+ 
+ int dram_init_banksize(void)
+ {
++	phys_size_t ram_size = gd->ram_size;
+ 
+ 	gd->bd->bi_dram[0].start = 0;
+ 
+-	switch (gd->ram_size) {
++	#if defined(CONFIG_SYS_MEM_TOP_HIDE)
++		ram_size += CONFIG_SYS_MEM_TOP_HIDE;
++	#endif
++	switch (ram_size) {
+ 	case DRAM_512MB_ECC_SIZE:
+ 	case DRAM_512MB_SIZE:
+ 	case DRAM_1GB_ECC_SIZE:
+ 	case DRAM_1GB_SIZE:
+ 	case DRAM_2GB_ECC_SIZE:
+ 	case DRAM_2GB_SIZE:
+-		gd->bd->bi_dram[0].size = gd->ram_size;
++		gd->bd->bi_dram[0].size = ram_size;
+ 		gd->bd->bi_dram[1].start = 0;
+ 		gd->bd->bi_dram[1].size = 0;
+ 		break;
 -- 
 2.34.1
 
