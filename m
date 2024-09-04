@@ -4,88 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69861CD4F21
-	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 17:29:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31F0ACD4F21
+	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 18:14:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4B4288B5D;
-	Wed,  4 Sep 2024 19:29:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=public-files.de
+	by phobos.denx.de (Postfix) with ESMTP id 629568865D;
+	Wed,  4 Sep 2024 20:14:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="YTQyn/7o";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rqT0a2A3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0E3588B67; Wed,  4 Sep 2024 19:29:41 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EF0AC88B84; Wed,  4 Sep 2024 20:14:09 +0200 (CEST)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0529889AA
- for <u-boot@lists.denx.de>; Wed,  4 Sep 2024 19:29:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=public-files.de
+ by phobos.denx.de (Postfix) with ESMTPS id E559F8865D
+ for <u-boot@lists.denx.de>; Wed,  4 Sep 2024 20:14:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=frank-w@public-files.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=public-files.de;
- s=s31663417; t=1725470974; x=1726075774; i=frank-w@public-files.de;
- bh=k0ge8jIkJLb/ILfXKin8TaifMk+oUL4oKZifCoQDG8U=;
- h=X-UI-Sender-Class:MIME-Version:Message-ID:From:To:Cc:Subject:
- Content-Type:Date:In-Reply-To:References:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=YTQyn/7oltgl5WljT3wAA6dp/HoJnDx/vvO6VeqWnG+dOfS+Qpi6vqdh3t3n9xOk
- jL6nMRevqlJjDkeoCZucPLUq0Anb5PTMcr0Tx3TIwRkD8itmsrNoIqSwm1H/sFEiA
- 7jyIDEwRvgll8SFD3nFsxK3DDweGDcQocOPhWSW0Qf5ddCJNDti2IF1y/vx+yljkH
- xLD9EOASG7COeaAJEBcWtujnMJAeyOQV7e1iXvci+aWEIz/ewo2Fikwm37xAThpye
- iWGbXxIt3NM+uAhNMjGcCyPDWpuHxz3J+Cabhya6bG00YfBc/Czjll72k+hytt9Sg
- ZygUdmtBbhLydwCmHQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [157.180.226.103] ([157.180.226.103]) by web-mail.gmx.net
- (3c-app-gmx-bs17.server.lan [172.19.170.69]) (via HTTP); Wed, 4 Sep 2024
- 19:29:34 +0200
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-7a8197d82a9so327414585a.0
+ for <u-boot@lists.denx.de>; Wed, 04 Sep 2024 11:14:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1725473647; x=1726078447; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=8THYcw/b5nkODZyEzDKGTg1cbSdcLtHAzNZkmo5Ak8Y=;
+ b=rqT0a2A3fIi1Hat1g0SQtooQF1E6iLfHcQkTvhm9Bn2GSKpVMRe5b0z/wPDHbobXJ4
+ Pkj8GdBA0TaGPHMWW9AwxyowB2JE01DKj9LnOb8329ldZjrzXfrJvj609BofjXtWiXj1
+ pxejcmrFspF/CVoRLDH7mtZYhM9SXy2ft+LR0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725473647; x=1726078447;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8THYcw/b5nkODZyEzDKGTg1cbSdcLtHAzNZkmo5Ak8Y=;
+ b=L7xhYvEAHCDkAlA2KZ6KaYXaGqK+wILjlWS7k2ssRroYex43tHdDc9i4ftYSxJ2t85
+ mCwjHzpHCbb5fSfq28aoQxyxGMOUmuIutXIy/oTuDMJBqinK5ehwBQM7yqliFgzhe6Ug
+ z+6Wdm2veP0JPWMjkEtYXJ6Yi7mIhEjakW+Jph2C8KRLkVzPu0V04lvwtWOHRLU3mUCs
+ XukrnitBQC2f+liaJqR0kKYvGEnU7c0MgQ2K5omLhKRfLAyVam5G84+RPX9TaJ9KjNOy
+ IuCx2TKoPqeG4W22AbSYoAPZqXNvye6uFe1sFT2mHkKkpbBQzgoAVIL/RoSTqPKZELxq
+ dQEQ==
+X-Gm-Message-State: AOJu0Yzvo4s46v3o2IdH+DEFjGnFffNe9/ochALLySvO/PWzPNMtru5C
+ Un9iDyhsOFw3legw42+suTeqaIqNh9SYNhNTKGxqNCy9PCxy8JnA1XmiAx514KI=
+X-Google-Smtp-Source: AGHT+IGRjecLR5GJ/Av+a709Ln6VVfJUiWf+cTUmFRnC5CkpIegRI45CeLeppsFSL+LKvyduzsvp+g==
+X-Received: by 2002:a05:620a:2404:b0:79e:f82a:a219 with SMTP id
+ af79cd13be357-7a97bd2b31amr810641385a.61.1725473646631; 
+ Wed, 04 Sep 2024 11:14:06 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7a98ef4742fsm4400085a.58.2024.09.04.11.14.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 04 Sep 2024 11:14:06 -0700 (PDT)
+Date: Wed, 4 Sep 2024 12:14:03 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Stefan Roese <sr@denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>
+Subject: Re: Please pull u-boot-marvell/master
+Message-ID: <20240904181403.GS2479150@bill-the-cat>
+References: <ef195bc4-6b61-4c9e-9de8-269e93b73388@denx.de>
 MIME-Version: 1.0
-Message-ID: <trinity-13f6d284-1ea6-4a53-ad60-847791f0c127-1725470974423@3c-app-gmx-bs17>
-From: Frank Wunderlich <frank-w@public-files.de>
-To: Jan Kiszka <jan.kiszka@siemens.com>
-Cc: Sumit Garg <sumit.garg@linaro.org>, Nishanth Menon <nm@ti.com>, U-Boot
- Mailing List <u-boot@lists.denx.de>
-Subject: Aw: Re: OF_UPSTREAM vs. additional dtbs
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 4 Sep 2024 19:29:34 +0200
-Importance: normal
-Sensitivity: Normal
-In-Reply-To: <0ff5653f-60e2-49ee-b68b-d86801aa1d66@siemens.com>
-References: <7765273f-7f36-41e4-a604-1901e4fbec62@siemens.com>
- <20240813125245.ezlu6me3ljwx6dkj@margarine>
- <89f8e976-e831-4035-8cd0-ab6284846d0a@siemens.com>
- <4ec5108f-b7a4-47db-baa4-edee532c58af@siemens.com>
- <CAFA6WYMQustcwo4Es7iJQj5Lva6UiYJ-j7WgSzMjOvEHemeDcQ@mail.gmail.com>
- <4576b818-9732-45ff-a4ab-b98fc0ecf4c9@siemens.com>
- <CAFA6WYNXgJkCX9-aoL5FGchAHGdV+ikTt4+pTJP-jZ_UJG8E6Q@mail.gmail.com>
- <87a9fe3e-5d9a-41e8-a8b2-4368cb727a65@siemens.com>
- <CAFA6WYMGyMAB=m-hkxs87PyHszcbQUk6+0_G0n+0-Yk8NeRXQQ@mail.gmail.com>
- <f61a8c74-9838-481e-aa1e-09fcc07f044e@siemens.com>
- <CAFA6WYNdS0jZ1iESfCErX92SOL2fJSRNNLZ1a_7jHoSfOUrdgw@mail.gmail.com>
- <0ff5653f-60e2-49ee-b68b-d86801aa1d66@siemens.com>
-X-UI-Message-Type: mail
-X-Priority: 3
-X-Provags-ID: V03:K1:O+xmE6SNOM9hmi7hpuW8AhmicTXoGjzCshxLo++wxwkiMxjqFKS+McxFM1kO15r7AS5Dh
- 63SICz2T8ReG9vDeob4kugXzdBqoM2w0S0aofpXoxrez1wnmJu6KWKBFUFIuEdfavJ5S4SQKh5yG
- ChisI2Wq4+vV8SvUFas96wa4TO4oHxc+Rjg+QGMMgieHau/ET/4wCE2BpRAiY7vSrImCqN6jizJ5
- QtaEfr8wCnhYibA8CowgOx6CZb0dpdKwU4G16R2fJ36MyLeYXlj7sY6ABNjv+J8ZNN1PYYkiTTrY
- VA=
-UI-OutboundReport: notjunk:1;M01:P0:4Sa1ewPNVOw=;2PJUoDqYUS6buJs5MQoVDckFWW2
- UC4dOak/Kh74Q8VLx2kIbdAzGv29pUDFIVXJJDWDpAJyG7BnG96IxBWXMsjt/MJecnYJ78XvP
- KmY83GtrLgWg6eHu7bz8L78tpYh+PCNqlzRfc8l7aATiNFDynKLASeDn996B3yrJxJ/RwmFRo
- 7n25FDrkJr9sXx+r2iLNA2HnLz45xqeBSlV0d73Ct1o9sTT8FrHdw3lCjV7uMMBqI/leJLvzR
- fYmeVBcTKHm/iTbvGD+upD49eOj+NgVeJ08/O2pfF5VDuFsLieng5lUXruYYxijc/ltOyJw1n
- G0E5eW0oBdegJeAkcBc76ljlQMOKPTirv+04OegcHjKLNTLPlFnnhc2g86cdslFcHU1WfBKKs
- DQcb3IX4pEA+QD4y2aNJ8mLQzrVBLapmm3tW0/ocEQXHpjZuFhNYobu2eJKEm2PPfV9Vc/k7x
- Vcbt15DAtx9+7YISSs6KxtLuc9jBCCOx2kgBGyJLrxhpV+XhPNujzT3+RATVDpcYaqlC2Lxqp
- uFG5Bme7Wa5aN6H88KEwI9+JGKPCguNFI7tJ/VwZFEU/21fyWvIUhLarU2hdRr3qVbeYkiueG
- w6KrGpmggQBi6UJrYnPWry+WCG47Cm+fBuW2nrXaaAdNDp54yH8zWyjc4H2S7LTwc/3h6rIPA
- PVj9V34g1IEhkpIFaX6ZausovJjdSyzXY4vQPw1++w==
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="p/VLhIc1BuxoGhZ6"
+Content-Disposition: inline
+In-Reply-To: <ef195bc4-6b61-4c9e-9de8-269e93b73388@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,36 +91,41 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--p/VLhIc1BuxoGhZ6
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Gesendet: Mittwoch, 04. September 2024 um 19:16 Uhr
-> Von: "Jan Kiszka" <jan.kiszka@siemens.com>
-> OK, our overlay sources are on their way into mainline, will only take
-> until 6.12-rc1 to get them here. To accelerate the preparation, I ported
-> that change to a local branch - just to find out that OF_UPSTREAM has no
-> clue about DT overlays so far. And it is not just that there are no
-> build rules for them (that was quickly fixed). It's also that there is
-> no way to trigger their build for your u-boot proper.
->
-> Are there plans for addressing this? I'm inclined to revive my patch
-> that allows to augment dtb-y from the board's config.mk. Better suggesti=
-ons?
+On Wed, Sep 04, 2024 at 10:17:43AM +0200, Stefan Roese wrote:
 
-Hi
+> Hi Tom,
+>=20
+> I know it's late in the release process. But please consider
+> pulling these Turris Omnia DDR related patches / fixes, which
+> Marek would like to see in the upcoming release:
+>=20
 
-i hang also on this part, in my case i build the dtbos for the vendor and =
-try to use fdtoverlay to merge base-dt with the defined overlays.
+Applied to u-boot/master, thanks!
 
-see commits till July 11th
+--=20
+Tom
 
-https://github.com/frank-w/u-boot/commits/2024-07-bpi-ofupstream-all/
+--p/VLhIc1BuxoGhZ6
+Content-Type: application/pgp-signature; name="signature.asc"
 
-this fails because the target for fdtoverlays needs targets for the dtbos =
-(have used the fdtoverlay target from linux)...
-but i build then without dedicated target (while building the basedt).
+-----BEGIN PGP SIGNATURE-----
 
-maybe you can help solving the "small" problem in makefile.
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbYo2sACgkQFHw5/5Y0
+tyzMuQwAkBpRHJWeIo58aS7k4PXf2JmHzE6xxu1TKXqXhCuTHPq4Cib11lvG1yhf
+YJY5HRgYGtx4EZjiII6phwjdjQseyKZTdCuFSNNJcFWeHXugdPmycep7TbpxoCmQ
+rqKZKX1smxRr/uz9o0YY0Ss7Vrq3barHslnp8gOK5Nx71YNJZhERjLfM9kmTgjvb
+cZvcu1GuQ9YiqPIkHlWU0+EHNTKPA+mwfbN1t43OTgjdppPxDU9OSYihyhq3RrlY
+q7gypfJAZjZbbgE1GkEXlH7OTbT3eZrQAGfmW6Sdk7/DWuCxGRqgp2KxVJCzCVok
+VX12NeAk7HEaUT0/RUunhMMw5hz8tGjs1H3NftEpvyd1uVnNEIIUrpy89ZGLDUwH
+EJFHf5nlV0hhZzGXlujOSxfisajLZxbuMJsGwyKP9WDBVpwjeMED73aA6A9QqZOy
+mpn6+s9sAkI0s15ujVw2PNxJIaWJU0UXdCnxkvjpMDf84+b9zV+NGnoNxb3fWlXE
+V1boaNXg
+=CRG7
+-----END PGP SIGNATURE-----
 
-regards Frank
-
-> Jan
-
+--p/VLhIc1BuxoGhZ6--
