@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2371CD37B4
-	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 12:36:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46813CD37B4
+	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 12:37:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B147889C3;
-	Wed,  4 Sep 2024 14:36:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8E5BE8897C;
+	Wed,  4 Sep 2024 14:37:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="4DB1rwlR";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="DKPE8T27";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91BEA889FF; Wed,  4 Sep 2024 14:36:26 +0200 (CEST)
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on20617.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:200a::617])
+ id E1A7A88AFF; Wed,  4 Sep 2024 14:37:07 +0200 (CEST)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam12on2061b.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2417::61b])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B7ED8897C
- for <u-boot@lists.denx.de>; Wed,  4 Sep 2024 14:36:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 49CEB88960
+ for <u-boot@lists.denx.de>; Wed,  4 Sep 2024 14:37:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ViZmUIskojFhpupbVpmZD3oS3XFLctvvsrCtkJIotDhiUE4rlUiL5/G753tTk9AChrnXRgmGVo1FhNot/GNdB3YYLJQXj/4tbbdL/Bja28ggZHZ5Eefbk29jrZ492C2L2txVDhaRLkDZXCKATimG3e9b6f1td+Otlgq4Wqv9zmCPYTgrGsOwo+ZH8NBfeecYr+y4e2CSyo89haOl/4jTnM+sO0C2Kcnyudi4DEw0I4fFLx6LAxl1sDXqp1K4oX2RQCq5hI5Xf1jNedQdCsXPCOA3Q9FKmVVgHr2AG/DjOxqr/QmTouc120x/yCw8kOOkZKs8pSDcZyl9V+czM+shaQ==
+ b=G4gJ0b842VCVe7ziPyEo9/BwAejX/u/gUYphtzMfCr5EitTyLW9bYuATcqqI8Ac+FfXafuUPMmWO8TWEPFzJkfLurxT1pRcdd+cpT+agFmFSjXhvunump7SGnkOPohNGblVt7CFJITTICy2evdnQy3BM/PdG45L4p3/0L9ld/Lii0GQK5cJrf3ARKusptrn6nS/2DS+1Lc9fuI83/fFbi4RcL77dDce+8Xv5OrXG3OVvRLbXGeKwJbbi5nvajjibGKlnqy7J5X0TDceELnOsVuCamsSa++REXz5xgd76tbwyozoY7eZhPRd4Uu1sh0yhdYHgHorQjibo6cUIm1qxJg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ud6jbIECoDqqGN6mrcPiYMk+ugxCf78qbohqeYs4kh8=;
- b=qocyeE/iI9xHEhQF+K1wEICxdr5ZmT5WhHjEDumcaPm5dXYTyAEB4y8vZ1FVJMEhT6vOjeQVL43dOMlKf2r1DMJO9PK3fpGKWN7u4EYQK6BvlqAfDGhMaFHkFW9nZngelC6dJ0hLQahkBxMfa2pBgMzpAzlN+sgUciV2o/fHfwUuYIZ8fuajfyvTU0thwMVnomwfJAPJqCkJsr5gbEwUeZ5lIZJUGxq0IozlHyQolwAmEJb3T4V0qX/AaP2l3GnjbGVZLgSFqJtjshCm0j0yweOqnwRVri4mFaKgzhb+RCrTCMaLIFCX35ndpIO5P/T+2DjgSiYs9n4B0iR/bvjPjg==
+ bh=c9x2OYyYKaonqFGNiiJg8aVOrF9ZJ0L2VRY+2cz0yxM=;
+ b=dLmA07NMVaIlXcQSizj6HZ5hNEH2B4Ouq4opXNNBeiRNEjiLu03afpSfHDtCJqT1K3Gq06ilBo97LNqa9C6D5lCP3wMhlEWtVQ5M3h+t/rjZtpQ1Ebh4001c9PF3GRmwXFLdkMAQmCjXqrfcyVlEkNPNpftWasBVErmhherE2n0JnTNGHYvWmrgPdWLu8kfxjsYj2490d3Gbq1Djc2GbTnNJo6pru0zkStk1Bgj8wlbBVwx1bh0UkTda93+x3NqZQf7bw/ScwmGHM/4UA0/GePp1Z3jxm7dY8Sj78OKkj2zqY0k5tnWRvsSTmEnGniW8rN+fKg9vY6JK9Tl86ZYBpw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ud6jbIECoDqqGN6mrcPiYMk+ugxCf78qbohqeYs4kh8=;
- b=4DB1rwlRg2OXpEiktKHLrK0dOqyQJOfpNbW7GkMdMa97KoFdv7ApuJnKZiXadkSXOjvmTVpxvM/wNtgYerwOsr2JxPGsz6YmegdHzOBQOHGCFRmfv1akhlUV2id4z9EjRqrUCq9+tWQ6stD325dEdYm3fRl8FBeyczA02y7GjBM=
+ bh=c9x2OYyYKaonqFGNiiJg8aVOrF9ZJ0L2VRY+2cz0yxM=;
+ b=DKPE8T27VldhpU/0K8KFBrWx+pRS2YZ7B/A33edZJOetUWfJfM+YrL+psZTopdxSJrQ3RMCSZbe3ZMHu1rZY/gZRtHf1nGksgekq84kqzvTx561STHGFyrYCBtyJ5VU44+RqpSLyNmzbWnC6DmZkDricPNGbSVSZqsi+YjT7AJI=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
  by PH7PR12MB8180.namprd12.prod.outlook.com (2603:10b6:510:2b6::7)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.27; Wed, 4 Sep
- 2024 12:36:20 +0000
+ 2024 12:37:02 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30%4]) with mapi id 15.20.7918.024; Wed, 4 Sep 2024
- 12:36:20 +0000
-Message-ID: <53a73813-654b-4d9f-8296-a87228aea142@amd.com>
-Date: Wed, 4 Sep 2024 14:36:09 +0200
+ 12:37:02 +0000
+Message-ID: <c69414e0-c841-41b9-937f-1465b6d35d8a@amd.com>
+Date: Wed, 4 Sep 2024 14:36:51 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 6/6] fwu: do not allow capsule processing on exceeding
- Trial Counter threshold
+Subject: Re: [PATCH 4/6] fwu: check all images for transitioning out of Trial
+ State
 To: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
 References: <20240830114057.891069-1-sughosh.ganu@linaro.org>
- <20240830114057.891069-7-sughosh.ganu@linaro.org>
+ <20240830114057.891069-5-sughosh.ganu@linaro.org>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -108,99 +108,99 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <20240830114057.891069-7-sughosh.ganu@linaro.org>
+In-Reply-To: <20240830114057.891069-5-sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR09CA0140.eurprd09.prod.outlook.com
- (2603:10a6:803:12c::24) To SJ2PR12MB8109.namprd12.prod.outlook.com
+X-ClientProxiedBy: VI1PR09CA0138.eurprd09.prod.outlook.com
+ (2603:10a6:803:12c::22) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|PH7PR12MB8180:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4c94ad9a-6941-4b01-a899-08dcccde2dd4
+X-MS-Office365-Filtering-Correlation-Id: 338031bc-5f86-43e1-da03-08dcccde46c6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?dDJFOGRuNkRsSnNkYldaQ0o3WWJ0MmdkaW5PdFhnWVNBYWE4ZEtJQnVmVEdR?=
- =?utf-8?B?OFdMS01XdFlUTXljV3Q4cEYrc2hxTXV4dVJZZXVjRmt5bGhQSy9nRThveFlx?=
- =?utf-8?B?MDdhYjl2RWRyREFRV1FrakFsNVNmQjlBeFQrc29nbDNnZ1RvNU0xT2pzL0JD?=
- =?utf-8?B?ZVBFUGlCWGxhU2J1WmpsaGM4N292bHhiS1Bkcm85YnhZcDMrZXpVU1NvU1BI?=
- =?utf-8?B?cUQwbEVzV0F2YlNEWHVpRXRJWDRidno1SlBmYW5QK3VhUmhiS0FKdjM3UDYy?=
- =?utf-8?B?VXJlTHFlOVZzbXpLbTVBTzY3bFIveWRFWXZnY1BCekROeThzaFVrYmVQWXJv?=
- =?utf-8?B?aTczN0pkcFQ5RDdGM0hnc2RBcGo0L0V6SSthN2kzSkdwUUMwdmtBTkxXTGZU?=
- =?utf-8?B?QkFqa09FL2VjSkZWRHFJbXc2VTRPV2dGNi8rMFVNSDRUd0s2U3ZhZ1pMc3pQ?=
- =?utf-8?B?RXYwM1d3bVgyMGtweXVYNGZ2a1BoVk5UWm5EazM1bHFqdW44TlZLaGgvKy9Q?=
- =?utf-8?B?Sk1FWTkrajQ1c1c5MzBRdmZoN096bHlhRCs4ZDV6N0tNY1RZejJyczJkblhi?=
- =?utf-8?B?cERKZkJyaTRpcWtHWHZoRzhsR09qeTlBVmdhOXFhWitKVStlS09RQzdDNVVp?=
- =?utf-8?B?RDE3Z1I4VDYxcVV1TE0xV2UwRVR3djNqb1dwVmZCZ0dnMzQzU3NSQkxqL3hx?=
- =?utf-8?B?VnROL1gzMXZnblozQTlaZWRwRDk4K1MyWUVYdDZMNlpQVHBUTi9XUFA5dE80?=
- =?utf-8?B?RXZ1eXUrL2g0QzJ1cHV2T1VvbHJCUWJWMnZYdU9HSGtLUUpoSW9HSXdzNVI4?=
- =?utf-8?B?eThqdkdFMkQxcjRSMlZoMFRjOUFnQUFPMEVVek5LRTUzeFlmTE5ZVmNKbUN0?=
- =?utf-8?B?SDVpWkNNd09OclZEd2ZkdEpwR0pjZVNGVFREWFNjbG4xL3crT1l4cUxaOHNB?=
- =?utf-8?B?Qit4YktpNEd6RU94ak4rNjhOd3ozVGVPN1RwVHkremxwYklIY1RQcW0vSUMy?=
- =?utf-8?B?YzFQb1lVczF5b1VPaEM4Z3RwT1lCVEFlM09qSFF0MlJzbWw1RnY2RExKOFky?=
- =?utf-8?B?MHlUTXZMOFgxUUFpT0Y2c1VvK2F1ckg4SXJKZWlpN2VyRjlScUdBdEQvUkxl?=
- =?utf-8?B?UXVoSjQxNEVOeGNmNm8yYTFoRW9IY2lWV1d5Ry9jdGIvQ1lZV3BvcWZscmtK?=
- =?utf-8?B?OUtYVUVvZWYwNVA0WXNBUk4vNWR4Y2MvazBJVzBlanRETkd2SWRwV2xsa01j?=
- =?utf-8?B?NjJJMG9EV1dtK2pxdzN3Qk14Z3BvK2VhQSs4VEROOTA3V2RKVHNEU2RhanZI?=
- =?utf-8?B?bTdrQmdyOVhNWE9nNllvYlU0ZnY2M3lWZHV3Qy8xMEdBbnZwbXRKWGRnd1Z6?=
- =?utf-8?B?M2t6M2tYN0Y5ZUlabDdBdFN3dWVpSU5RTDYwRDZNVzhoKytxM2dudGNBT05h?=
- =?utf-8?B?RjVQQTBRK05keVlEMVFRd1pkRGRMUlB6UXpST2MvZVkvYXY1ajZteTVXSyta?=
- =?utf-8?B?citKMUVKL0JaeVFaWXgvUDBmc3UzSkhrSVJjcVhoMnJ1NU9zMGs3N1dHZDRD?=
- =?utf-8?B?aDROblpxM1lEVDdvcHhjWkNWYnIxZlpMYjJEamtqMit5RUVvVE5YcjJsYlQy?=
- =?utf-8?B?QzdJcUJJVnVBd0RQR0g5Ym1nbzk4blB2NDVLMjhHVVhmSjdUenY5R2Y4TThl?=
- =?utf-8?B?QUJnMi8rZkxuTVhmakpscytFQTVyeHFrQnJueGJWYXRFWUpOSUZaZzdXL0R3?=
- =?utf-8?B?emUzM1JCU3Z6MWx1VW1HN3NiUHJSWDlDTE9sWTZaMWxpNXFzaTREbmk1R2cy?=
- =?utf-8?B?d0Q2ZjBsdUgrbi91emw3QT09?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?cEowYXFBdkcxOU5kUUowcjBGd0drcmlYemwrTDlXQk5wS252SlduNk92ckZK?=
+ =?utf-8?B?Y3E3ZUFxbHlBalZMUXE3LytJODBOckFFQkVKeVFLWjRLa2JnN0hXUTlkbXQ3?=
+ =?utf-8?B?QnJPTEQ0aDlwcGtJWkErWUxiT1ZGMGthWEFtT3hYRkNLdE1hUWYwR2ZEZHpm?=
+ =?utf-8?B?S1ZWcTlpbGRxWXFCckZBZElnVDMxU0VUMVVwYStOWEc1MWV6SnliRWpXQkZY?=
+ =?utf-8?B?QWV0QWt0eGFwNTV6NWdHVmk1UjR1UXJyclBWUTVGd3BRTjcyV1hUeTZOUHlC?=
+ =?utf-8?B?d0RGcXZVcnRtQUVUQlNWenI1YXJmUDVTU2diVW5jQ3A4cjJkMXpPN3VJbThV?=
+ =?utf-8?B?ZHhKZWNEdkNEdjBlbi9zc3UvTFlCNzA2WGxwWnd0RC9ONngwL2JFU3I4K2ZG?=
+ =?utf-8?B?aDFpdXdHWUt5dGcvY0JwVUozaHB1ME1acTlRS25lT2U5b1NBQllEOGZINWhW?=
+ =?utf-8?B?TlNwc1pnbTlubDNSeHlZWXNxeCtHdlJ1REM3V29aeGcvTHAzYnVodFoyaEJM?=
+ =?utf-8?B?eVRtSFJ3UFdlWWhoekl2YTBKZ2NuV0hTYXhMM0R6OCs5RFY2ZUp4VWRZU2FB?=
+ =?utf-8?B?YktBeEpjOFo0cDc5VDg0azhCdnJMTzhBSURVc055YXpHcmFjcWwrTkFjZnpq?=
+ =?utf-8?B?SkM5OVprM3ROM3kwNngxb0szRnh1SndETzExdVEwT0llaGlGZGxyMXNmbnpH?=
+ =?utf-8?B?SUxPZEUwakorTUtZcnZwYXVkSC8vQVhaYnpsMXYyckg0UHhQOFYvQmdvY3dl?=
+ =?utf-8?B?dlF5cWVJaXlHNStJVmNicjZxZTQ1QklNcXdDckRNaWpubGcvY2YrK3dCMG1B?=
+ =?utf-8?B?d3NXWU5CMTVvRStnaTYzRE9odjZIeTdiaDRlNjltN09nL3RGcGxEa2NnT3ZT?=
+ =?utf-8?B?R050cFhXdUt5b1ZqQmxGNjZXVVp0SDl1eGtHYUdiMWM0SzllMGF2cHJCRWJa?=
+ =?utf-8?B?T1NiUUhUclhmMWNHZzZYODlCUVFxU3VHd1BKTjdQUFBjK3lBdG1VNEhLNVk2?=
+ =?utf-8?B?TkFWVWVlR2M4SkR4V201UGM2WXQ0Y3daNm84VU5Yd2Q3VFFKMGs1U3dYSXpX?=
+ =?utf-8?B?ckV0a2xvSnkyZklxL3NTWExjR2FNRzUrZUNBMnVGQVFaVmhJVnJucmlNU3l0?=
+ =?utf-8?B?M0FuZlg2RWwrNUlCU1NwNlpaeHZDelRpYlZ2SE54bHEvVHBPUk44UjZpck1M?=
+ =?utf-8?B?cDBoMEVqRkRyREMwS2FUa3VTRHg5RW5iR0g2YStJQjNzWnBHYWlVd0c0NGRX?=
+ =?utf-8?B?bkM0ZDh5NTZOWEc5cDRhOE5IN1hGR2x4V0loTkpHbGZPV1hlcVVhTmUwZXBz?=
+ =?utf-8?B?NWZpcWpWS1Y2V1gvTFZUZTltcjVwOGtPT0t2WjFzYU9VbmxmTnVZVUE5STB3?=
+ =?utf-8?B?VmFJN1IrdWZiSklmdmljcW9scnhicGY5K29XNUp4RWtzekRHNXZncTg4M0ZI?=
+ =?utf-8?B?bFpDMW81REVrcjdHRGk5K29ybTBFQzhQdU5PVW9KRDl5Qmg4dS94SFZ4RHpt?=
+ =?utf-8?B?NStSSW9hLytSd2QwUm1WWFBKQW1OWEhBZnRXMlNJdHZocVpmZ29kSHROOVdP?=
+ =?utf-8?B?SThFSGZvZE8zRFFBN3l1cjdEK1Q0YWlnR3A3OUdQUmpQMTFEWVRWQjBNRGVI?=
+ =?utf-8?B?M05DUmhjL0VjYkkwS0I3emZBY25tdERuZDFTV0FYOWhYR3VacmExanJWb0c1?=
+ =?utf-8?B?Tkp6Y05WamluVnBZNXhFTEVSYVJRMWVVZGh6UzVCRUcyY3V5MWFtMHlKYlNX?=
+ =?utf-8?B?cjBiblAwbGJERlhGbHFKTFVRcGUwZGd2TGVsdU9YQTRCSitVNUw0YkhrUnlN?=
+ =?utf-8?B?cFlpTG40c1BBcFNJWktRdz09?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Sm5GNlByYzJ1Y2FUdFF0WnkvMWRkamExZDlublRuT1pTaWdCOFhvQVo1eitK?=
- =?utf-8?B?QkZTWEdNdE5jMVV4WHNaZFF5SUV5SzVRdEhpaTBRV0ZVM0VSOXZyQ2RRVzIw?=
- =?utf-8?B?TGgxQ09MeTkzMTdQaTY5U05FM2lRVUhBT2RKWWxRclA3bEtFRWVxb0xKd1Vp?=
- =?utf-8?B?NHFxMmp0eG9IcFVRNm9DM2Fua0E5WW90TnE1TEdpMmFYVVY1cEFLcTVmY0ha?=
- =?utf-8?B?blBQL1hLZGlBdmRRRUhtemF2bXdDQnJWRHNEcXErR1RjMnlURUxvQVJENER4?=
- =?utf-8?B?TnZqRWNlcGRpOWQzemphK1ZlOENYSEJTMUUyYUJ2RjFnQWRPOGl3M2NENnBa?=
- =?utf-8?B?TUJSalM4OUY0RkdGcVhXOXpjVmVBcmFCTlhtTnNlNkwzeXVFTkRzRHBwUEJH?=
- =?utf-8?B?M1FqaEZqbEN2K2tLMnFWOTB0ZlQrS3MrVU5xYmRXR01HTzdoNlI2TGlaWWJa?=
- =?utf-8?B?UnRBcU9lRDgzU1podml0YWMwZE95ZGdBTTRyQnF6eUprbndvQktZMUxucjlz?=
- =?utf-8?B?RURWN1NxQnYxdU83cGRmVkYvMXU0T0J4OHVUS2l4MGZocnBnRmtaNWNLK2Vm?=
- =?utf-8?B?SW5nWHpyOWk3ZnNOSExRTkpXWUV0TFBweFRMbUhhZGVveWMvYjVwQnlNSW9h?=
- =?utf-8?B?TjQ0MXZHZWkwMk9KMlRTSjMzSTlnWi9MZ2pDSVM0ZEZkWEpYZW5Ic2g0Q2tX?=
- =?utf-8?B?ekpHMmNMTUVaMERpR2xraFNrSDRvL3BwclJOWDk5R0RZWlRQUHpWSmhwaXpR?=
- =?utf-8?B?VElZOFQ3MllEYXo3R3VMaEN5MllzZWNvTHlqdjE4VWlTZkc1U0hNWFBMeERj?=
- =?utf-8?B?c0RQWERHczBUUG93aFFyVzR4VVZ4aFp0bGkwT0ZuYVg2K1Z6SXByUWY1U2Vs?=
- =?utf-8?B?NEVRSUN6VnZRR1BnMi9udTI5TVFlTVlydURCZUMzRUp2RzNTM0l0NnIxOU5j?=
- =?utf-8?B?NFlxQlltcyt1b0JZZlZhaE1qSm9RNVcrbS90TGxSaXhFZjJqTnFHM3AwUkVt?=
- =?utf-8?B?RTA5WStDTUVSWTE4SGFZcWRKRHhUYU96MjFhZmsxcEpqak81MXpXQUtiMXIr?=
- =?utf-8?B?Y0RLVWFaalFpVGIzMmY4eEtYdWFuK1JGV1pvVGp5NVB6MUY0NVdKTTdvL1VK?=
- =?utf-8?B?MUJER2NBTVArN0N4bnZKUHo4bHpySmRhaHFHamNsbjBJaGZ3RnhqSjA2ekFS?=
- =?utf-8?B?YlM2VWxqZklOajJKZTN2NTUwYXkxekFVVVRHb01YWTJVQ05yR2xadzF6WkI3?=
- =?utf-8?B?aHVaZTgyZ2IvME5NWmlYbENRVVRQWXlxWVBBSUlpLzJlWnhDbEx1cU8wTjF1?=
- =?utf-8?B?dlBOQng1c2grMDJhZWNOVnptcG9JYndaREhZUHRucXY0bC9OM1hDci9PSVJT?=
- =?utf-8?B?Y2J4SHhqems3V2pVMWFDSEtIeWhnTXJkUm16YS9QZzBKZkdKTjlNa3dRUjA0?=
- =?utf-8?B?QTVINVRPL2tyY0JzNERlY2luejBlS05lY0RqdmlSZ1VwS0JJOWdrSWV6QnBQ?=
- =?utf-8?B?SmdMTGNxSFBFcE9QQXFWZVZiUWlOZTV5d3kvWkpRMk91WjFKRVlTNkZVSjhL?=
- =?utf-8?B?ODIxNGZCMCtiMUtSc2t4UHZKS3ZUVGdFb3Y1VnNGSWlsTXFKVGJWcVl2YlNI?=
- =?utf-8?B?VEtQMmdRVmF6L0trT1Z3Vlk5QUNja1lXVUVzWkQ0S25rZTBET2FUYllUUGt4?=
- =?utf-8?B?YnJsTzErZG1vbzc2VzcxUkQrVjcrbjlHSWFaUUVPcXdhK0EveFhYVUZPZTFR?=
- =?utf-8?B?RXhZOGk2VWRFNi9UdkhnK3BiL2Zmb2l2SkhieU5OazQ1aDhhOGlKMFk2TVA0?=
- =?utf-8?B?T0R1a2NIcEVIOFRSR0hhQk14Vyt2aE1mM2xMWEhha2t5ZWJXbEs3ekZTZHdi?=
- =?utf-8?B?Y3plR1lRM0tOWVhIRXJDY1haQWhRNGRVMERESmRpZS82WjlaU1ZTczlwUEJi?=
- =?utf-8?B?THd6Rzd5c0RqRWE4RnZabTdBUnRna0kzMzFFVmFaaUhIdEp1WW9vY2VWYmFW?=
- =?utf-8?B?Ry91OWo3ZGdwVEpMVjFYS1ZQZ2RhZnlOcDF0aU9aSHF1UUIzUitCWXh0VmR4?=
- =?utf-8?B?T285ZzY0YnNxKzg1Q3FSdVFnWCtXWUdNeHhHY2pGZExQQjJwTWhmSTl2NTZW?=
- =?utf-8?Q?PvZcNWRnWdfJI3lrmhbLeQIRE?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?M1FEOXlwOHJiRFlOZkYxMEwwM3VLd3ovZHg5UUJXdkNSMW1Hek1GYkYxc0ow?=
+ =?utf-8?B?c0RmTFVJaXZHUEQ2OTdpT1FBQ0ZCbVRBZzFTS2piK0tyeUpobUoyUEhjMmNv?=
+ =?utf-8?B?WS81MlRYMGpWdFRnTXNyTjJnWnQrVHNTaGdzeWlZb05Cc1hkWUY4Wk9NYTVU?=
+ =?utf-8?B?bVluYU8rM2VOZjRNSVBxNG5rZ25yQnllYWNCQnpzUERpUEo1ZklTaWZabWFx?=
+ =?utf-8?B?SGpUK0NmejY2Vy8vRm01MEdtU0RtT0lwMjRaTllsclpvOE8xSmdvUm9sWVFr?=
+ =?utf-8?B?RTFzTEx1K3ErMzgyYnY2aWh2Wm9JWklGZ1hWblNNNnpkU01USXdKQVJKS0lh?=
+ =?utf-8?B?M2VKVmkwWmxmVTVEbWJ6WHpaU21ZNURLc1VDY1NwT3RQdUtxWFZQb0tpemVh?=
+ =?utf-8?B?di9GZDJLWkVYZ2h0VXlteTZlejhLYWh4azBlQ3NqcTljcDA4QzZ2cmgrMm4x?=
+ =?utf-8?B?N2hJQTNtTHVTbndOUmg0OXdMRUtONStDVmVsWnY4V25kbHJQTzJDQ2pMZndC?=
+ =?utf-8?B?ajkyWS9lVHk5ZUZvN3J3dFBOeTRRVXdqWVAwamlISlhLSTVqWkxXRm5OUk1R?=
+ =?utf-8?B?UHdPUDVBSmlncUo0TEtVU1Y1aVdrMjNFVkZVOXlhNUhkWGZSdXdxcG9oVDdZ?=
+ =?utf-8?B?ZlR4QTM1VVdOLzdESllhWkhaaDBVRXFKWkZaS0ZYb0Ewb2V1bFVQbno5KzF5?=
+ =?utf-8?B?a1NOUlc4ZlZlVUovZHk2ZXh4ZGNIYlY2OVFEeXh4dHVkbzRINTVSdWNGclpi?=
+ =?utf-8?B?bWxaZlVVOWtLSi9jUERPQnB6YmxVMVlzejF0eDlkRFdQUE1RQTlybC83dEtK?=
+ =?utf-8?B?YXVTSWxpd2NZTjcxckNJNVJnSkxPMFJRRkVSelJFY1d0SDRZZkcyN0tJdTZE?=
+ =?utf-8?B?ZGlxWS9sSktFUFJteTZrOGNTdVNhbzhBaDBpM2MwVk1HdUE1SUZTa2crYUk1?=
+ =?utf-8?B?bHZNcVJzRmpFQ25MVElKaFY5MUxOdmRBcUdrZExEaURNa0hCNmhhSEcxN1Fz?=
+ =?utf-8?B?K2xlSCtXQ2pRTHo2QzZIU1AyZVdnK1VmMWVQcjJOQXEyYldlOEd2K0tBWDVI?=
+ =?utf-8?B?L01oU1Z6NVNwbUpUakxzMmo3ZFladTRBdG1hOVlnNU44N242RTl6dVhTS05U?=
+ =?utf-8?B?RVJLcGEyTmtpTHBSSEZIVWxtRk1MZ1ZZM2JqbTJSL3lwOVZQWWU1YjJNdFI3?=
+ =?utf-8?B?MjViUENZaS9tTmd6YzJIVllLWVEwamdjR3Qwc0ZTZmV6czB4QWFYSjhPQUhw?=
+ =?utf-8?B?Sk9ZZEZyMmVPVE1Zd1VUTThDVnhJM3lEaWdaUEVUWlY1bVNPZFo2RFozTHls?=
+ =?utf-8?B?cjZ1STNYMW51cjVQaXNLR3dtZXFmOElPQlVxZTM2b3hmRURhUW9jSC9sUEFE?=
+ =?utf-8?B?NUhjQWhlaXk1Q0dST3JlRGNKNzRxOXhCekdWZ0VyTkhEQjR4blhnaXdmb2tK?=
+ =?utf-8?B?c1JkajltQ09VRHlMQlNEYkdydG5RSmMzZk1tdWRLVmJOSjM1Smw1U3JNb0RT?=
+ =?utf-8?B?RWd6SmRKaW9VK3NKaW0xak9iTFF2WThXcUQwVVl6VGVXaDFEaVVwMmhPbHBB?=
+ =?utf-8?B?a0loemZ4TE9jVmhxVUtYdjJiYTdZRXpQNHBrQ1Zoc0J1WHg3aUNoTTBicXhy?=
+ =?utf-8?B?eXk1QURxZWpaTnBHTVdVVXlDZS8ybS90N1h6OG0zS2J3Mm5QbVZ2TWQ0bWMw?=
+ =?utf-8?B?MkJaTTdQWVJMZWdXZWI5bnQwekhvYmoxTVlWSkh4UlFXU1YxWktpZVh4VFgr?=
+ =?utf-8?B?NVcyaGpaeUtZeDExWHQzajNBd0MwSzBqS2lBZHIzVG5zdnRCcGZQclZXTW00?=
+ =?utf-8?B?d3JXdWFhcFBjWnlNR25zNGhTSjJHbEh4Q3NwQk52ZTEwc09wRkU0MWs1Sjky?=
+ =?utf-8?B?cDRoTDRKNkVpUWh4SHQvVFRSYXpKY3lHaG9pWk85L3hWd1VScVk2UVdMUnNT?=
+ =?utf-8?B?aEZPd3Nhb0xiS041NWovcHBhTm1BUzE4OHBIMmQ1Vjczd21XaWVscnVMT3pV?=
+ =?utf-8?B?VGRObHhZZzFONVlFTkYzQ2xWUE1teTJqSzBzVUh2cFJ3alNJUmR5M0JnSEhz?=
+ =?utf-8?B?ZXZLK2RTS0tVZk5XZmJoNU9aUjY4Y2dOSENIL2pNTm95Wlp0WWNadGl5NkVV?=
+ =?utf-8?Q?cqRJAhKxYkDRcSKMZUK8FPWYo?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4c94ad9a-6941-4b01-a899-08dcccde2dd4
+X-MS-Exchange-CrossTenant-Network-Message-Id: 338031bc-5f86-43e1-da03-08dcccde46c6
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2024 12:36:20.5815 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2024 12:37:02.4412 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: D8zTgGSGQGPH33+7fhKLfTlVtDRCtWJOa3TFfKoMfiG7RfTmTzIPjP5spkX8jkbb
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8prFfRDKDctmANupxQEGeb6dLsj4PTuVpxzZS2ZCbeC51Q0GlD1lWID18WW8WwF3
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB8180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -221,43 +221,120 @@ X-Virus-Status: Clean
 
 
 On 8/30/24 13:40, Sughosh Ganu wrote:
-> When in Trial State, the platform keeps a count of the number of times
-> it has booted in the Trial State. Once the threshold of the maximum
-> allowed count exceeds, the platform reverts to boot from a different
-> bank on subsequent boot, thus coming out of the Trial State. It is
-> expected that all the updated images would be accepted or rejected
-> while the platform is in Trial State. Put in checks so that it is not
-> possible to apply an empty capsule once the max Trial Count exceeds.
+> The platform transitions out of Trial State into the Regular State
+> only when all the images in the update bank have been accepted. Check
+> for this condition before transitioning out of Trial State.
 > 
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
->   lib/fwu_updates/fwu.c | 6 ++++--
->   1 file changed, 4 insertions(+), 2 deletions(-)
+>   include/fwu.h            | 11 +++++++++++
+>   lib/fwu_updates/fwu.c    | 25 +++++++++++++++++++++++++
+>   lib/fwu_updates/fwu_v1.c |  9 ++++++---
+>   lib/fwu_updates/fwu_v2.c |  3 +++
+>   4 files changed, 45 insertions(+), 3 deletions(-)
 > 
+> diff --git a/include/fwu.h b/include/fwu.h
+> index 77ec65e618..70a5166f5e 100644
+> --- a/include/fwu.h
+> +++ b/include/fwu.h
+> @@ -417,4 +417,15 @@ int fwu_state_machine_updates(bool trial_state, uint32_t update_index);
+>    */
+>   int fwu_init(void);
+>   
+> +/**
+> + * fwu_bank_accepted() - Has the bank been accepted
+> + * @data: Version agnostic FWU metadata information
+> + * @bank: Update bank to check
+> + *
+> + * Check in the given bank if all the images have been accepted.
+> + *
+> + * Return: true if all images accepted, false otherwise
+> + */
+> +bool fwu_bank_accepted(struct fwu_data *data, uint32_t bank);
+> +
+>   #endif /* _FWU_H_ */
 > diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
-> index a94a769a2b..7f085a0211 100644
+> index c7fc8987be..a94a769a2b 100644
 > --- a/lib/fwu_updates/fwu.c
 > +++ b/lib/fwu_updates/fwu.c
-> @@ -113,6 +113,8 @@ static int fwu_trial_count_update(void)
->   		ret = fwu_revert_boot_index();
+> @@ -28,6 +28,31 @@ enum {
+>   	IMAGE_ACCEPT_CLEAR,
+>   };
+>   
+> +/**
+> + * fwu_bank_accepted() - Has the bank been accepted
+> + * @data: Version agnostic FWU metadata information
+> + * @bank: Update bank to check
+> + *
+> + * Check in the given bank if all the images have been accepted.
+> + *
+> + * Return: true if all images accepted, false otherwise
+> + */
+> +bool fwu_bank_accepted(struct fwu_data *data, uint32_t bank)
+> +{
+> +	u32 i;
+> +	struct fwu_image_entry *img_entry;
+> +	struct fwu_image_bank_info *img_bank_info;
+> +
+> +	img_entry = &data->fwu_images[0];
+> +	for (i = 0; i < CONFIG_FWU_NUM_IMAGES_PER_BANK; i++) {
+> +		img_bank_info = &img_entry[i].img_bank_info[bank];
+> +		if (!img_bank_info->accepted)
+> +			return false;
+> +	}
+> +
+> +	return true;
+> +}
+> +
+>   static int trial_counter_update(u16 *trial_state_ctr)
+>   {
+>   	bool delete;
+> diff --git a/lib/fwu_updates/fwu_v1.c b/lib/fwu_updates/fwu_v1.c
+> index 023e43728d..c311a8857a 100644
+> --- a/lib/fwu_updates/fwu_v1.c
+> +++ b/lib/fwu_updates/fwu_v1.c
+> @@ -52,11 +52,14 @@ static void fwu_data_init(void)
+>   	memcpy(dst_img_info, src_img_info, image_info_size);
+>   }
+>   
+> -static int fwu_trial_state_update(bool trial_state)
+> +static int fwu_trial_state_update(bool trial_state, uint32_t bank)
+>   {
+>   	int ret;
+>   	struct fwu_data *data = fwu_get_data();
+>   
+> +	if (!trial_state && !fwu_bank_accepted(data, bank))
+> +		return 0;
+> +
+>   	if (trial_state) {
+>   		ret = fwu_trial_state_ctr_start();
 >   		if (ret)
->   			log_err("Unable to revert active_index\n");
-> +
-> +		trial_counter_update(NULL);
->   		ret = 1;
->   	} else {
->   		log_info("Trial State count: attempt %d out of %d\n",
-> @@ -762,8 +764,8 @@ static int fwu_boottime_checks(void)
->   		return 0;
+> @@ -112,9 +115,9 @@ void fwu_populate_mdata_image_info(struct fwu_data *data)
+>    * Return: 0 if OK, -ve on error
+>    */
+>   int fwu_state_machine_updates(bool trial_state,
+> -			      __maybe_unused uint32_t update_index)
+> +			      uint32_t update_index)
+>   {
+> -	return fwu_trial_state_update(trial_state);
+> +	return fwu_trial_state_update(trial_state, update_index);
+>   }
 >   
->   	in_trial = in_trial_state();
-> -	if (!in_trial || (ret = fwu_trial_count_update()) > 0)
-> -		ret = trial_counter_update(NULL);
-> +
-> +	ret = in_trial ? fwu_trial_count_update() : trial_counter_update(NULL);
+>   /**
+> diff --git a/lib/fwu_updates/fwu_v2.c b/lib/fwu_updates/fwu_v2.c
+> index 69306282aa..9c696952ed 100644
+> --- a/lib/fwu_updates/fwu_v2.c
+> +++ b/lib/fwu_updates/fwu_v2.c
+> @@ -88,6 +88,9 @@ static int fwu_bank_state_update(bool trial_state, uint32_t bank)
+>   	struct fwu_data *data = fwu_get_data();
+>   	struct fwu_mdata *mdata = data->fwu_mdata;
 >   
->   	if (!ret)
->   		boottime_check = 1;
+> +	if (!trial_state && !fwu_bank_accepted(data, bank))
+> +		return 0;
+> +
+>   	mdata->bank_state[bank] = data->bank_state[bank] = trial_state ?
+>   		FWU_BANK_VALID : FWU_BANK_ACCEPTED;
+>   
 
 Tested-by: Michal Simek <michal.simek@amd.com>
 
