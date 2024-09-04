@@ -4,74 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C29ACD4F48
-	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 22:58:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C6B9CD4F4B
+	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 23:08:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7B9188BB8;
-	Thu,  5 Sep 2024 00:58:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8877D88BB0;
+	Thu,  5 Sep 2024 01:08:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="etku9I3L";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A92688BCD; Thu,  5 Sep 2024 00:58:00 +0200 (CEST)
-Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
- [IPv6:2607:f8b0:4864:20::72b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E7F988BB0
- for <u-boot@lists.denx.de>; Thu,  5 Sep 2024 00:57:58 +0200 (CEST)
+ id D78E488481; Thu,  5 Sep 2024 01:08:07 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 9295D88BF7
+ for <u-boot@lists.denx.de>; Thu,  5 Sep 2024 01:08:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72b.google.com with SMTP id
- af79cd13be357-7a8197d82a9so10472585a.0
- for <u-boot@lists.denx.de>; Wed, 04 Sep 2024 15:57:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1725490677; x=1726095477; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=k9Rz2mMq+y3gqkwOGRSPn2AkB7id2cGSGPDBaGyrsvg=;
- b=etku9I3Lp0WWb4GvsUgK+HI08pujm/b2Dix9Cxt6encMIMZwEp0wAEDNMvWLp6eor0
- qkZuEyvvCdxuulIT3TuyHB7gpb7Gb6zO0WJPdlZSjAta97pwZ/GJERjnKHp55SipJ2Js
- IKfQiGM3sEJ6BlED2/Eh5dUsxgwJfAboxjLCM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725490677; x=1726095477;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=k9Rz2mMq+y3gqkwOGRSPn2AkB7id2cGSGPDBaGyrsvg=;
- b=DFFFJ3+KbMgTalGE1IrcJjYdDA9UjVlRu05QaKgsbKqzMJOKimB3rqgGvLN0oH4bEJ
- qGlx4xGT9mtrytDCSYazZupRt28jJQx+YI3RPA5L+Arr2el4X0aRRFtGFz7cU3UBuONe
- 2d/vDticQfD0Rf4qHLKoUShUjsAuafabQJOWX5fdhrc198lVSCCU2Vz/H7Id5diUfVwJ
- OzKyH7VqYGTYqdKeRySk4ddtWnsEXg58neGDGviUpEavqePRvABeBh6AYksIyGRVBLe5
- SBZZrOpt6QPWMZA4gFxMQGuinzUo0sjJIKr49J63edk4oDum1T21noKOwgyLxbOi/gtU
- 3hWw==
-X-Gm-Message-State: AOJu0YwBeWml653ZRPMOWpsxPJOyIzjY35SOGnlS+EQB4DmQN8FG5T0h
- FVZu21VL9L2tEyCs1buhksTISdEtI4ywu4D8yd8d7qeR9O+F43Yt5l7J2X/6WHjSxmmCibsUMEJ
- 1
-X-Google-Smtp-Source: AGHT+IH138cuUGpG+WPLbjHdj0ypO0YQ3nuQT2LwnDr7UvoxHGgJ8qQ606TrDH7uf7c3+1KTzSBt8Q==
-X-Received: by 2002:a05:620a:28ca:b0:7a7:ff36:a2f8 with SMTP id
- af79cd13be357-7a97bd2a946mr623664885a.65.1725490677382; 
- Wed, 04 Sep 2024 15:57:57 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7a98ef3adc0sm27177185a.37.2024.09.04.15.57.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Sep 2024 15:57:56 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20240829185602.3179812-1-trini@konsulko.com>
-References: <20240829185602.3179812-1-trini@konsulko.com>
-Subject: Re: [u-boot-test-hooks][PATCH 1/2] bin/writer.rpi_mount: Use
- kernel= and simplify logic
-Message-Id: <172549067635.1706866.14084557443852854948.b4-ty@konsulko.com>
-Date: Wed, 04 Sep 2024 16:57:56 -0600
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1F378FEC;
+ Wed,  4 Sep 2024 16:08:31 -0700 (PDT)
+Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 460473F66E;
+ Wed,  4 Sep 2024 16:08:03 -0700 (PDT)
+Date: Thu, 5 Sep 2024 00:07:18 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Mikhail Kalashnikov <iuncuim@gmail.com>
+Cc: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de,
+ sjg@chromium.org, jernej.skrabec@gmail.com, neil.armstrong@linaro.org,
+ hdegoede@redhat.com, jagan@amarulasolutions.com, trini@konsulko.com,
+ ryan@testtoast.com, Chris Morgan <macromorgan@hotmail.com>
+Subject: Re: [PATCH 2/9] sunxi: H616: dram: LPDDR3: adjust settings
+Message-ID: <20240905000718.12f6827c@minigeek.lan>
+In-Reply-To: <4c003cab-c8b8-484d-924d-084e71fe666e@gmail.com>
+References: <20240801225519.336667-1-macroalpha82@gmail.com>
+ <20240801225519.336667-3-macroalpha82@gmail.com>
+ <4c003cab-c8b8-484d-924d-084e71fe666e@gmail.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,18 +60,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 29 Aug 2024 12:56:01 -0600, Tom Rini wrote:
+On Sat, 3 Aug 2024 16:17:26 +0300
+Mikhail Kalashnikov <iuncuim@gmail.com> wrote:
 
-> Rather than guess what we need to name our u-boot.bin file as for it to
-> boot make use of the kernel= option to always call it u-boot.bin and
-> then on 64bit platforms (and since future platforms use rpi_arm64 this
-> list should not grow) also pass in arm_64bit=1.
+Hi Mikhail,
+
+> On 02.08.2024 01:55, Chris Morgan wrote:
+> > From: Jernej Skrabec <jernej.skrabec@gmail.com>
+> >
+> > Adjust H616 LPDDR3 DRAM settings to be in line with vendor driver.
+> >
+> > Signed-off-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+> > Tested-by: Chris Morgan <macromorgan@hotmail.com>
+> > ---
+> >   arch/arm/mach-sunxi/dram_sun50i_h616.c         | 2 +-
+> >   arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c | 2 +-
+> >   2 files changed, 2 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+> > index 37c139e0ee..a20264d8b4 100644
+> > --- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
+> > +++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+> > @@ -945,7 +945,7 @@ static bool mctl_phy_init(const struct dram_para *para,
+> >   		val = para->tpr6 & 0xff;
+> >   		break;
+> >   	case SUNXI_DRAM_TYPE_LPDDR3:
+> > -		val = para->tpr6 >> 8 & 0xff;
+> > +		val = para->tpr6 >> 16 & 0xff;  
 > 
+> This is the correct change to match the factory tpr6 parameters.
 > 
+> I think, we also need to change the default value in 
+> arch/arm/mach-sunxi/Kconfig:
+> 
+> from: config DRAM_SUN50I_H616_TPR6
+> hex "H616 DRAM TPR6 parameter"
+> default 0x3300c080
+> to
+> default 0x33c00080
 
-Applied to u-boot/u-boot-test-hooks.git/master, thanks!
+Can you please confirm what the vendor code does here? Does it use a
+value of 0xc0 for "val" above, so we need to change *both* the
+shift and the default value? Or does the vendor code write 0 (the
+original bits[23:16]) into val? I am a bit puzzled because I think we
+copied the TPR values verbatim from the vendor firmware, so changing
+DRAM_SUN50I_H616_TPR6 looks a bit odd.
 
--- 
-Tom
+> 
+> >   		break;
+> >   	case SUNXI_DRAM_TYPE_LPDDR4:
+> >   		val = para->tpr6 >> 24 & 0xff;
+> > diff --git a/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c b/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c
+> > index ce2ffa7a02..82b86084a6 100644
+> > --- a/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c
+> > +++ b/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c
+> > @@ -24,8 +24,8 @@ void mctl_set_timing_params(const struct dram_para *para)
+> >   	u8 trrd		= max(ns_to_t(6), 4);
+> >   	u8 trcd		= ns_to_t(24);
+> >   	u8 trc		= ns_to_t(70);
+> > -	u8 txp		= max(ns_to_t(8), 3);
+> >   	u8 trtp		= max(ns_to_t(8), 2);
+> > +	u8 txp		= trtp;  
+> 
+> I think Jernejchanged this value using RE. I checked the 047fb104 
+> register (dramtmg[1])
+> 
+> on my t98-h2b-lp3 tvbox, it has not changed and is the same as the 
+> factory value.
 
+So my educated guess (if that change originates from REing of binary
+driver code):
+- tXP and tRTP do not seem related, judging by JEDEC documentation. If
+  the txp value is assigned the value of trtp, that's probably some
+  compiler optimisation, because both variables were assigned to the
+  same expression, in the original vendor code.
+- The LPDDR3 spec describes tXP as "max(7.5ns,3nCK)", that would be
+  the original setting. Down to 500 MHz DRAM clock ns_to_t(8) results
+  in a value of 3 or higher, so this change would only be relevant for
+  DRAM clock speeds below 500 MHz. I doubt we have a board with
+  LPDDR3 DRAM that slow?
+
+So I am happy to change that code, if that's closer to what the vendor
+driver does, but I doubt that this will impact any actual hardware.
+Also I would like to change the assignment to copy the *formula* that
+trtp is using, instead of copying the value of it. So this effectively
+just lowers the minimum clock cycles to 2 (instead of 3).
+
+Does that make sense?
+
+Cheers,
+Andre
+
+> 
+> => md.l 0x47fb100  
+> 047fb100: 10141811 0004041c 04070d0d 0050500c .............PP.
+> 
 
