@@ -4,49 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ABEACA0ED3
-	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 09:12:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25C6ECA0ED3
+	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 09:38:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50C9888CAC;
-	Wed,  4 Sep 2024 11:12:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 50508889DA;
+	Wed,  4 Sep 2024 11:38:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="PPsD2xgN";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDEE788C88; Wed,  4 Sep 2024 11:12:01 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id E765888CAF
- for <u-boot@lists.denx.de>; Wed,  4 Sep 2024 11:11:58 +0200 (CEST)
+ id B9F2F889DA; Wed,  4 Sep 2024 11:38:30 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 79A568876E
+ for <u-boot@lists.denx.de>; Wed,  4 Sep 2024 11:38:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 68D22DA7;
- Wed,  4 Sep 2024 02:12:24 -0700 (PDT)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7D6153F73F;
- Wed,  4 Sep 2024 02:11:56 -0700 (PDT)
-Date: Wed, 4 Sep 2024 10:11:50 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de,
- sjg@chromium.org, jernej.skrabec@gmail.com, neil.armstrong@linaro.org,
- hdegoede@redhat.com, jagan@amarulasolutions.com, trini@konsulko.com,
- ryan@testtoast.com, iuncuim@gmail.com, Chris Morgan
- <macromorgan@hotmail.com>
-Subject: Re: [PATCH V3 7/9] arm64: dts: allwinner: h616: Add r_i2c pinctrl
- nodes
-Message-ID: <20240904101133.56a97d99@donnerap.manchester.arm.com>
-In-Reply-To: <CAFA6WYOQqt1qiN+B2jEDk2drtt2DxckO-yYwf+b58svFiSwR4g@mail.gmail.com>
-References: <20240830155514.481410-1-macroalpha82@gmail.com>
- <20240830155514.481410-8-macroalpha82@gmail.com>
- <CAFA6WYOQqt1qiN+B2jEDk2drtt2DxckO-yYwf+b58svFiSwR4g@mail.gmail.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-42bb6d3e260so53114005e9.1
+ for <u-boot@lists.denx.de>; Wed, 04 Sep 2024 02:38:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1725442708; x=1726047508;
+ darn=lists.denx.de; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=EJg2fvYfGnL473+ickHBnA7Jj7mqlC0QVh7VngZSn9Y=;
+ b=PPsD2xgN8fYxUiqLLmKGU0CpGtJZeKmgWrBDEsDuiR/RJOIKlmsmzzPTOegFbtadrz
+ QkG90ew5duz7G7wVczhgkilt4S0AHjeA1a/yEtIq9egC/FYI5G7k6SiNf/MhvJOoaASh
+ +3y18bhSCnQtYY8vrmT+KY2Sku7LfIenXZlXsW7ZOVAI9/LrqpcVU98EA87/TzSxwWMk
+ slWBczDsbS+H9QEFbU1+eKli6Jrn6Puq3X9YMzfZ/dMaCEWwhiZ2i6i0L3oOLflDVZzW
+ iSvcMhDAxVNi+QmGE0evHlhjrczn7I3FDQJ8fuKMqEy0q2eOnbeg7jzdct/JBwJBQrw7
+ jzRw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725442708; x=1726047508;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EJg2fvYfGnL473+ickHBnA7Jj7mqlC0QVh7VngZSn9Y=;
+ b=Yj4FYlsV2AehVnKBA34JEVC6V7H4FGCQWZv3/yer9GD5jXj3NUSrs2MSbpXJl66D/X
+ BDtERfW+mdzK7BGEte3IQRi7Cox78am1wefpyAJIxS6gmzne+fxTtUx1d3hibFuh39oJ
+ 6QlVfICtOYJhDaKwp3u9Z7gBUPYxCJz8Pd09/vRhtViO+TZj9Hvta0dB2PZ6hrv3BKc2
+ L1EQwy6imgBbZ28z6hd6s6DNDflsK+dHWMJE844ZUCHeJlfBposisYqSUyuJvaMDC7H8
+ +ncmkJyhBLEYaoc9eJyPb3vqW5QMoHzoCkLhpumlvI7Q+0aeR+q7lawPnJaVeY+gmb9L
+ 1zuA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUK/tevHMzR3kxvKlmTFV2t5t4O7pra2GM+B0188agqqS/+9n4nLzG9MkjfqctpXT+x+PhXjG4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwsuqVc2vx5fPXli7xxPsi94dAIJCHlkJfUR10drBbllPYp1ybo
+ OC12lyiYdea45WhE9+m1frF+IWejNLzJeANgdGxvPs89d/XKuCy69Ec5pyr1O4M=
+X-Google-Smtp-Source: AGHT+IHre0PEVfDyMg9q3X+laVyy61qruYhIIljb3M79sS7pAOx/YadKxOQMxYhwwyos5sX1n/jwAw==
+X-Received: by 2002:a05:600c:3b1b:b0:42a:a6d2:328b with SMTP id
+ 5b1f17b1804b1-42bdc64e691mr89606435e9.30.1725442706998; 
+ Wed, 04 Sep 2024 02:38:26 -0700 (PDT)
+Received: from groot.home ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-42bb01d300csm210261055e9.15.2024.09.04.02.38.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 04 Sep 2024 02:38:26 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Date: Wed, 04 Sep 2024 11:38:16 +0200
+Subject: [PATCH] bootstd: android: Add U-Boot version to cmdline
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20240904-bootmeth-bootloader-version-v1-1-9979a8428566@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAIcq2GYC/x2MMQqEMBQFryK/NhBjtlivIhYxvqwf1MiPiBC8u
+ 1m7mWImU4IwEnVVJsHJieNWpKkr8rPbflA8FSejjdVfbdUY47HimF9Yopsg6oT8O2WcGdtP8LA
+ +UDnsgsDXe++H+34AZr+yRm0AAAA=
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Cc: Guillaume La Roque <glaroque@baylibre.com>, 
+ Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+X-Mailer: b4 0.14.2-dev-b7dec
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,81 +97,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 4 Sep 2024 10:02:16 +0530
-Sumit Garg <sumit.garg@linaro.org> wrote:
+When booting into Android fastbootd (a subset of recovery), the default
+UI shows the bootloader version in the screen [1].
+This is done via the ro.bootloader property which should come from the
+bootloader.
 
-Hi,
+Provide the U-Boot version via a kernel commandline argument so that
+fastbootd can show it properly on the screen.
 
-> Hi Chris,
-> 
-> On Fri, 30 Aug 2024 at 21:27, Chris Morgan <macroalpha82@gmail.com> wrote:
-> >
-> > From: Chris Morgan <macromorgan@hotmail.com>
-> >
-> > Add pinctrl nodes for the r_i2c node. Without the pinmux defined the
-> > r_i2c bus may fail to work, possibly if the bootloader uses rsb mode
-> > for the PMIC.
-> >
-> > Link: https://lore.kernel.org/linux-sunxi/172252952262.1669767.7675865282122079154.b4-ty@csie.org/
-> >
-> > [ upstream commit: 7c9ea4ab76176f65f4f55aa144f9145a4bccaacb ]
-> >
-> > Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
-> > ---
-> >  arch/arm/dts/sun50i-h616.dtsi                     | 2 ++
-> >  dts/upstream/src/arm64/allwinner/sun50i-h616.dtsi | 2 ++
-> >  2 files changed, 4 insertions(+)
-> >
-> > diff --git a/arch/arm/dts/sun50i-h616.dtsi b/arch/arm/dts/sun50i-h616.dtsi
-> > index 921d5f61d8..41f2c23e07 100644
-> > --- a/arch/arm/dts/sun50i-h616.dtsi
-> > +++ b/arch/arm/dts/sun50i-h616.dtsi
-> > @@ -836,6 +836,8 @@
-> >                         clocks = <&r_ccu CLK_R_APB2_I2C>;
-> >                         dmas = <&dma 48>, <&dma 48>;
-> >                         dma-names = "rx", "tx";
-> > +                       pinctrl-names = "default";
-> > +                       pinctrl-0 = <&r_i2c_pins>;  
-> 
-> This change is sufficient with !OF_UPSTREAM.
-> 
-> >                         resets = <&r_ccu RST_R_APB2_I2C>;
-> >                         status = "disabled";
-> >                         #address-cells = <1>;
-> > diff --git a/dts/upstream/src/arm64/allwinner/sun50i-h616.dtsi b/dts/upstream/src/arm64/allwinner/sun50i-h616.dtsi
-> > index 921d5f61d8..41f2c23e07 100644
-> > --- a/dts/upstream/src/arm64/allwinner/sun50i-h616.dtsi
-> > +++ b/dts/upstream/src/arm64/allwinner/sun50i-h616.dtsi
-> > @@ -836,6 +836,8 @@
-> >                         clocks = <&r_ccu CLK_R_APB2_I2C>;
-> >                         dmas = <&dma 48>, <&dma 48>;
-> >                         dma-names = "rx", "tx";
-> > +                       pinctrl-names = "default";
-> > +                       pinctrl-0 = <&r_i2c_pins>;  
-> 
-> Please don't manually patch dts/upstream subtree. It is meant to be
-> updated only with tools/update-subtree.sh script. Also, it isn't
-> needed as well since you haven't converted to OF_UPSTREAM at this
-> point. Same applies to patch #8 as well.
+[1] https://android.googlesource.com/platform/bootable/recovery/+/refs/heads/main/fastboot/fastboot.cpp#42
 
-Yes, but the H616 OF_UPSTREAM patch is already on the list, and this
-series will intersect at some point. The change above is already in the
-queue for the kernel tree, so we will pick it up once it appears in the
-repo.
+Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+---
+ boot/bootmeth_android.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-I will sort this all out when merging, but meanwhile it's good to have
-some functioning series on the list.
+diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+index 6e8d3e615db0..2fb82a5073de 100644
+--- a/boot/bootmeth_android.c
++++ b/boot/bootmeth_android.c
+@@ -22,6 +22,7 @@
+ #include <malloc.h>
+ #include <mapmem.h>
+ #include <part.h>
++#include <version.h>
+ #include "bootmeth_android.h"
+ 
+ #define BCB_FIELD_COMMAND_SZ 32
+@@ -171,6 +172,12 @@ static int configure_serialno(struct bootflow *bflow)
+ 	return bootflow_cmdline_set_arg(bflow, "androidboot.serialno", serialno, false);
+ }
+ 
++static int configure_bootloader_version(struct bootflow *bflow)
++{
++	return bootflow_cmdline_set_arg(bflow, "androidboot.bootloader",
++					PLAIN_VERSION, false);
++}
++
+ static int android_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+ {
+ 	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
+@@ -267,6 +274,8 @@ static int android_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+ 	/* Ignoring return code: setting serial number is not mandatory for booting */
+ 	configure_serialno(bflow);
+ 
++	configure_bootloader_version(bflow);
++
+ 	if (priv->boot_mode == ANDROID_BOOT_MODE_NORMAL) {
+ 		ret = bootflow_cmdline_set_arg(bflow, "androidboot.force_normal_boot",
+ 					       "1", false);
 
-Cheers,
-Andre
+---
+base-commit: 360aaddd9cea8c256f50c576794415cadfb61819
+change-id: 20240904-bootmeth-bootloader-version-2a2b35fce4cf
 
-> 
-> -Sumit
-> 
-> >                         resets = <&r_ccu RST_R_APB2_I2C>;
-> >                         status = "disabled";
-> >                         #address-cells = <1>;
-> > --
-> > 2.34.1
-> >  
+Best regards,
+-- 
+Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
