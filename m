@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC2ECCD4F32
-	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 21:27:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28A1ECD4F3C
+	for <u-boot@archiver.kernel.org>; Wed,  4 Sep 2024 22:25:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F2F988B94;
-	Wed,  4 Sep 2024 23:27:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4F87D88B89;
+	Thu,  5 Sep 2024 00:25:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BQs7XI5E";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ns7ZrMPP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8766088B94; Wed,  4 Sep 2024 23:27:28 +0200 (CEST)
-Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
- [IPv6:2607:f8b0:4864:20::834])
+ id 9376E88BB0; Thu,  5 Sep 2024 00:25:39 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49B2B88381
- for <u-boot@lists.denx.de>; Wed,  4 Sep 2024 23:27:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D64188B86
+ for <u-boot@lists.denx.de>; Thu,  5 Sep 2024 00:25:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x834.google.com with SMTP id
- d75a77b69052e-45684218d61so679961cf.1
- for <u-boot@lists.denx.de>; Wed, 04 Sep 2024 14:27:26 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-70f6cb5518aso112819a34.1
+ for <u-boot@lists.denx.de>; Wed, 04 Sep 2024 15:25:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1725485245; x=1726090045; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1725488736; x=1726093536; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TDFdzEJC5OZNbRLXfZiOez4H8R9E+7wPtcOqYZsvMdM=;
- b=BQs7XI5EC4Rr2p7U/+cMq/H6grLS6tVz+EJpSE2DYemoqwl53Fhd/USwEzhFnvWDW0
- hrhXNBcumUt0Yf1YL/9WBV9GQSo3TqFKgEbbBQKWGWCtX4gLdSepD3OwDyxxjtMEJdTm
- vdcJkNIhoqSZvGpfaXSjT9M+/AILmg7YUJ/3Q=
+ bh=IBBNXzxwnuKyu2H3mb2BrHHTKTfBxBtlW1orh5BP/AE=;
+ b=ns7ZrMPPsN2So3SAC6TEbHWLOBresnEWYMxJ7yYzhnrflB9awU1qmvmboA96gH8RLS
+ BByfwE3VuuqxMHqgEqzsgeqFm1WSeDroxm/CYQm88Srk3WoSo1VqZ3Zij/sIyTxPyJtQ
+ RuXGSed3gg51L+NgEKFGWjPPEN62j3QMt/Mn4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725485245; x=1726090045;
+ d=1e100.net; s=20230601; t=1725488736; x=1726093536;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TDFdzEJC5OZNbRLXfZiOez4H8R9E+7wPtcOqYZsvMdM=;
- b=uNkbSyVL0pwI8PLtypcEN+6HeQXA5TmstITx1+f+34XEAOkXvEOlXuHLSxOYLouBmz
- tdnt43K6eHM7xE44WLrjnU6frc1mcxWwEOzAovNd9niE1l/cRN2E+L7HTASqjfUVuCq/
- r61hA8Py4hF7180G1lrQAaq+dG85A96bVcL535upo2rRY4xwfZJelT9CfFZdtpuPitEi
- BPJ5euxXVYh04n8qpKFRd+H0zmScrxPr+BXP5JfbD1DU8LhjYO0+FwD0QI4M2QWz4YMI
- MFh21/gHWXhbhJUfuvOXu9XM8mfgA2HhB3+4BDsnayFk5k43K3xkcG1xee6VrxpvKKRy
- FIGw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUv0ett771fNrLJiWIMMskFRwqdxZk0b6e3V5TPGsKR2z3MyEuH8++62wjLYHEHPOTciWVZaWo=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywrr/kviGbWw0KqYyjVnCvWiAHyf9enDs45xd8fdLqjHtK8qfl/
- 0tJYPGl2v7vRHghFTzV8Uy8JJAzge4VvoOkizF97Lx8OnEzU9qfsMxl0XabGy5c=
-X-Google-Smtp-Source: AGHT+IFimwbBOR1Ukvtfui9eYYNOa0yD0QV1zHD99pX64NT6ddkHm4rcac/QpYvOHPuEYRUl9x7zNQ==
-X-Received: by 2002:a05:622a:40c5:b0:453:2e51:e40a with SMTP id
- d75a77b69052e-4567f6b57f3mr244595701cf.46.1725485244867; 
- Wed, 04 Sep 2024 14:27:24 -0700 (PDT)
+ bh=IBBNXzxwnuKyu2H3mb2BrHHTKTfBxBtlW1orh5BP/AE=;
+ b=nuEC/+zKFWgx81LhQhzvPGAeC7ljqH/BZmUTwBX61CF5+DoDhiCqqvLUouAskNjE2n
+ SmHl1UFRX6cYvLodxkFBFzMBgRKBwSoJryqo3aYHTEPMB2MPXExyoa0nrtc3v+ad7BtG
+ 9HpD70w3zwZEuiNSije0h1m1YpJXjgeb3bSXdm5mmmsm5UUeq9P+MeymDIiqK5ImGJia
+ FiTkTruurg011TvA235JkpyhqinRIDpaqweuKZYUcD4m1UdYtxuZ4gi5YgEENH3zWSv8
+ 3zGg2MdnHSgNRzp4LTWPQG/6WEQ+Hd9fOVElHeUAE/vMmSPfBy6USO6zEYxMUi13xXXw
+ 7BcA==
+X-Gm-Message-State: AOJu0YwXWxSXofoBN8+T9RFjiVyYdTDPPki4o1SvkNatAyk46MbLcV9l
+ OLZzqLnF3DUIJeHre3repzZxK2sam7PlT+HoR8+PT++NtckSMxS+5PSTVNjz1M8=
+X-Google-Smtp-Source: AGHT+IHsqdxaoSWxyQfCEpEtcSUUrfO8n0eIZ6sL0t96rM/D6vBpBal/a73lz1pmy8NOst3diGjIoA==
+X-Received: by 2002:a05:6830:490e:b0:709:49c5:fd99 with SMTP id
+ 46e09a7af769-70f71ee9a36mr19151929a34.4.1725488736064; 
+ Wed, 04 Sep 2024 15:25:36 -0700 (PDT)
 Received: from bill-the-cat ([187.144.65.244])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-45801b327edsm1945781cf.28.2024.09.04.14.27.23
+ 6a1803df08f44-6c5202de768sm2494766d6.66.2024.09.04.15.25.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Sep 2024 14:27:24 -0700 (PDT)
-Date: Wed, 4 Sep 2024 15:27:21 -0600
+ Wed, 04 Sep 2024 15:25:35 -0700 (PDT)
+Date: Wed, 4 Sep 2024 16:25:31 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: Hiago De Franco <hiagofranco@gmail.com>, Keerthy <j-keerthy@ti.com>,
- Amjad Ouled-Ameur <aouledameur@baylibre.com>, u-boot@lists.denx.de,
- Hiago De Franco <hiago.franco@toradex.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>
-Subject: Re: [PATCH] fs: Fix SPL build if SPL_FS_LOADER is enabled and
- FS_LOADER is disabled
-Message-ID: <20240904212721.GZ2479150@bill-the-cat>
-References: <20240826181933.252020-1-hiagofranco@gmail.com>
- <20240830205119.GA3268574@bill-the-cat>
- <20240831134911.GA32220@francesco-nb>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Eddie James <eajames@linux.ibm.com>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Roman Stratiienko <r.stratiienko@gmail.com>
+Subject: Re: [PATCH 03/19] boot: Allow FIT to fall back from best-match option
+Message-ID: <20240904222531.GA2479150@bill-the-cat>
+References: <20240829145802.1827952-1-sjg@chromium.org>
+ <20240829145802.1827952-4-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="An19XbPV4hUSWa8a"
+ protocol="application/pgp-signature"; boundary="6QCI8GN+kjU1VYHO"
 Content-Disposition: inline
-In-Reply-To: <20240831134911.GA32220@francesco-nb>
+In-Reply-To: <20240829145802.1827952-4-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,85 +100,45 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---An19XbPV4hUSWa8a
+--6QCI8GN+kjU1VYHO
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Aug 31, 2024 at 03:49:11PM +0200, Francesco Dolcini wrote:
-> On Fri, Aug 30, 2024 at 02:51:19PM -0600, Tom Rini wrote:
-> > On Mon, Aug 26, 2024 at 03:19:33PM -0300, Hiago De Franco wrote:
-> >=20
-> > > From: Hiago De Franco <hiago.franco@toradex.com>
-> > >=20
-> > > When SPL_FS_LOADER is set to y and FS_LOADER is not enabled, the SPL =
-build
-> > > fails with the following errors:
-> > >=20
-> > >   AR      spl/boot/built-in.o
-> > >   LD      spl/u-boot-spl
-> > > arm-none-linux-gnueabihf-ld.bfd: drivers/misc/fs_loader.o: in function
-> > > `fw_get_filesystem_firmware':
-> > > /u-boot/drivers/misc/fs_loader.c:162: undefined reference to
-> > > `fs_set_blk_dev'
-> > > arm-none-linux-gnueabihf-ld.bfd: /home/frh/tdx/src/u-boot/drivers/mis=
-c/
-> > > fs_loader.c:185: undefined reference to `fs_read'
-> > > arm-none-linux-gnueabihf-ld.bfd: drivers/misc/fs_loader.o: in function
-> > > `select_fs_dev':
-> > > /u-boot/drivers/misc/fs_loader.c:89: undefined reference to
-> > > `fs_set_blk_dev_with_part'
-> > > make[1]: *** [scripts/Makefile.spl:527: spl/u-boot-spl] Error 1
-> > > make: *** [Makefile:2055: spl/u-boot-spl] Error 2
-> > >=20
-> > > Fix it by replacing the FS_LOADER with SPL_FS_LOADER in the Makefile,=
- so
-> > > the fs.c with the necessary function definitions are compiled.
-> > >=20
-> > > Fixes: b071a07743d4 ("drivers: misc: Makefile: Enable fs_loader compi=
-lation at SPL Level")
-> > > Suggested-by: Francesco Dolcini <francesco.dolcini@toradex.com>
-> > > Signed-off-by: Hiago De Franco <hiago.franco@toradex.com>
-> > > Reviewed-by: Tom Rini <trini@konsulko.com>
-> >=20
-> > This leads to failure to build on sandbox_noinst_defconfig.
+On Thu, Aug 29, 2024 at 08:57:46AM -0600, Simon Glass wrote:
+> When the best-match feature fails to find something, use the provided
+> config name as a fallback. The allows SPL to select a suitable config
+> when best-match is enabled.
 >=20
-> --- a/drivers/block/Kconfig
-> +++ b/drivers/block/Kconfig
-> @@ -110,6 +110,7 @@ config EFI_MEDIA
->  config SPL_BLK_FS
->         bool "Load images from filesystems on block devices"
->         depends on SPL_BLK
-> +       select SPL_FS_LOADER
->         help
->           Use generic support to load images from fat/ext filesystems on
->           different types of block devices such as NVMe.
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
 >=20
->=20
-> ?
+>  boot/image-fit.c | 19 ++++++++++---------
+>  include/image.h  |  4 +++-
+>  2 files changed, 13 insertions(+), 10 deletions(-)
 
-I think "depends on" and sandbox_noinst_defconfig should enable
-CONFIG_SPL_FS_LOADER too.
+Don't we need a documentation update? If no, because this mechanism
+isn't well documented, can you please follow up with that? Thanks.
 
 --=20
 Tom
 
---An19XbPV4hUSWa8a
+--6QCI8GN+kjU1VYHO
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbY0LkACgkQFHw5/5Y0
-tywBvwv/WiOu/Qr8bQzStA8yy0WWXE9mtUe31KYWA7naR6jjkRqDUy4ibkthwYeq
-DElGycuotQnj8jDuORpNVwzS4ziJ4PzaUilmxK2dVmz1lgisprmqdlZ3wi85W/t1
-+8bUdEjzh9oGJYpSOG78GMl2ydK5/cVNGV5B5siIRre2o69PSxo6DOF5j9R0Lnq2
-fyLELaUFvopZbpLzJrlGYUqnCVhdG1wVOH+r+7mGD2DLekmA3wkv4PAsgbEp81Lo
-BHF+VMb0XPC9kaddtTZSdcbGXHO0Y3XKDHWnT72DRpfiJ2Ya8zzyK0mVJ/+NRT/w
-VoHkBlFOCeEL667gHyRZ8cpReYfwU5w5BXVQgagWfNFlzn7pRUqHKvC+DOtzlgTn
-Har3uVAOX+l5x2/Bzd2IjkjWnVgaFHyFJeQ6P3Uiwo3hl7ivEVtTRFDcd+68f8zP
-zh754SdDt8R3j1QnvK5z2Ke70BpJcxkkdQ0KIEUaKtooeHHuMECmNHrXEoJnWdSr
-sT4HcsHV
-=twuE
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbY3lgACgkQFHw5/5Y0
+tyyRrgv+M5sLMosGVj/ON7wJ6voRFkUPfiW/AIGXlEHuPaV28VrgggzfpFjYmaXk
+djuqg5KgWkZyV4GnP8/jnHYL15qJ53s2EyJb5QbixSIPFMz+RpP0XsCpF8uRpwsz
+pOqwkUNFjcflfsjOWzeaxB4LW0Kq/EktORiN74yWrlGM//ArHBDhRW/6Ri9Ni5KP
+hKaPy86LGQ1zDjjrNQBkAVUjYFHJuHj6/iZFH/lCO40JgTsWqQM+bq7mqQzBd+iq
+1K3XX+LVsjk4F2v9MOEqMnR41uer7PFUiM8nfsz0/me8nASzivmm1jV8ql+nGEYO
+pIiChNCKyd4Df5FQviQ4rnB23vfQtAnvzmLeP01eKg+nlOWS1PCX/ToP+66MAwMU
+UH0op81mo/v5NuNB+oZ7I4odxr5aaJGKIkFaGk6ldJoV/VL5STjLlnJkGIhCrc1Y
++xK645GGhG+MTWvxV6sk/297xIzvG5WBkveiFwDViANUU3h9pXVIKEJ6SyUHAJ35
+CQVe8U2U
+=D/Mw
 -----END PGP SIGNATURE-----
 
---An19XbPV4hUSWa8a--
+--6QCI8GN+kjU1VYHO--
