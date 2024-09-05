@@ -4,136 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88DDBCD4F4E
-	for <u-boot@archiver.kernel.org>; Thu,  5 Sep 2024 03:23:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CD31CD4848
+	for <u-boot@archiver.kernel.org>; Thu,  5 Sep 2024 03:23:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E44688B31;
-	Thu,  5 Sep 2024 05:23:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8060A88C1B;
+	Thu,  5 Sep 2024 05:23:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="vsO0UCgx";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="h/SgfRYE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9ED4880A5; Thu,  5 Sep 2024 05:23:10 +0200 (CEST)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20615.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e88::615])
+ id 7ED9F88C6D; Thu,  5 Sep 2024 05:23:17 +0200 (CEST)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2061a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2416::61a])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D07ED88B31
- for <u-boot@lists.denx.de>; Thu,  5 Sep 2024 05:23:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 650F8880A5
+ for <u-boot@lists.denx.de>; Thu,  5 Sep 2024 05:23:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mXs+IdzOjgQW7XW+KW9QCTUj14dzYILHBnxYdVtfIK45HuRMWYIVI/WaupshDW2SMq79/1tviPFh9rpLdBWglbf5Mb6RuyTaDyXe1L3fduOmH0aNzmbwJYV6tplNYwyBj7Idi5YIyZqCRaHegNywNWYvHUK+MKB4qfoZmBaHdRRLnWNEzYxLFX6bD7ZLOyawPsxSzOvg4A/2oQQDJHsYRsNXcimGemNlE1zZNgrJjU8VXYjRcG5FSSFS7QcuMZpzj4skL9itVagFYjUZgb9zDXiQxqq2N6fn+0q/dA0DpjlO2dQvN256awNqQkpF/9Z7BiCX6ca/3siwoHLXWqTYKQ==
+ b=OPOT3++SjrcxC76eGwF+e7c67OH+NV4Q3g3yX7yvmbGgrIyhc7ngyzK4sJTKZS31SBI9MNcrG38aK78AQN9o9+1lX1FHfgmOiK2ppucps56sDO1gKXIsz0OEtCQJL+VJrCmjzX/dj21jy+pGga5rEH+kKAYQWBh4hhixGeru9KO+LbeZlGCvlouOWlNUwEtOiba+9p4lu0ignQmHNAtxNpcDsNImwiRVtHXLV2LvkKV0LUnfZ3YnboegxVHH2ZhRM6nI7K8qVOcOrdekcuF4oMjAkVtNY4TNF/G2FzrHPWejBus7UPs0nJd2Mgqkqlpw4NLAL6Rw2GlDTeH7mP7AHQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wywpmWIsUSgO4i7QMCNKOoFrk7cMF/rY2LFMIGUn3yA=;
- b=dzNJIHcOmJZjJgCwf9KGKuxe4jJmicrx2Z2aWA0mPtoI2RhDi8dCOxZkwKMrFXOPn8MIjGrXOOVkMtc77lZE3M8OtnVQ5bAKSI/+ArY/BJ0y2dSpS65cBxv4fG1DfwNTXmFlykEKo3Drfc887EA4aEepP6XnnSvDkOUc6QDYQJeCnFXqifJd9kdL5psQn2R0euOpFuv9Ag2JYYmVGgb4mAbMZRxkX/bp/kdud7Fu4BwbVKN4dBExlGtjcyGGQmVCtbKxkZDZpwagFwMfHaF7fkwee36aqAjix/QysfLxiHa/QBTEyMKmD+OFGozH1AY/1RPEEW2YmVrHzWytCR/8Bw==
+ bh=Kl9rSph8iwpuhaHuhoLv8PXEEUgvUdKr+19lDpHwaSM=;
+ b=uxHGglGmq07MCyFWNHllZDEXSxyG3JAlZbyKUBDmyNOFM7iWtXMwKD4AdKmaeVAAq26xyMXulyPR0FXwtLZHO8ycuCsaQlrTemzj3rI61jOKmi/mwzSr3Kf6+uXiz84ir7Dlt16NDGn+iqh80wd+fApjo2pBR/hxThPButfHVLbDp0iaXIjdWfKl3p8D6BUY/8s8MF7KOJZl9zeS1jazdPJmERAy7Mhbx3d86GpuVMpwd+5T6ovt92wIPqS8Mp/mhiXn5VCv8zgkEmGsKWNjIGYR2PbLX/oYfgFHu9IJ8Argk865YJbbP8QU1sf1fQdwRQBdoq29EyUo6Gwdt+0tvA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wywpmWIsUSgO4i7QMCNKOoFrk7cMF/rY2LFMIGUn3yA=;
- b=vsO0UCgxre/T89sQHwdXsgjVUq2ETER8nSy1LjQ4pqo/XNH3TATvxgT2ZNNTKCktD0amVDR2kUerIQU5GPtGljeYrDtOb3aoVS3lbcF7w+uroRkLG9N7hkgn5UKh4TDRbKPH9SaMulE86JQ0kHR3DLfyncEFjc7DRhA67g7EkMQ=
-Received: from CH0PR04CA0120.namprd04.prod.outlook.com (2603:10b6:610:75::35)
- by DS0PR12MB7802.namprd12.prod.outlook.com (2603:10b6:8:145::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.27; Thu, 5 Sep
- 2024 03:23:04 +0000
-Received: from CH3PEPF00000011.namprd21.prod.outlook.com
- (2603:10b6:610:75:cafe::91) by CH0PR04CA0120.outlook.office365.com
- (2603:10b6:610:75::35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.26 via Frontend
- Transport; Thu, 5 Sep 2024 03:23:04 +0000
+ bh=Kl9rSph8iwpuhaHuhoLv8PXEEUgvUdKr+19lDpHwaSM=;
+ b=h/SgfRYEdVlodq4z9oE70ZUeuo8VSynnzs0nsBMd3o20uxgWe+FKzzpAQAZru1TXFk9D7feWDsLh5xRa0oAp/m8FxbDdl+0fj7BW0jH+uSeh/7eQxGFF0hQQyZbt3SYt4Oh8CAiaDU/bDOG8kw3kAEGGHWPSZ4KQZUGjOdkaPIM=
+Received: from SJ0PR05CA0112.namprd05.prod.outlook.com (2603:10b6:a03:334::27)
+ by SN7PR12MB8103.namprd12.prod.outlook.com (2603:10b6:806:355::5)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.23; Thu, 5 Sep
+ 2024 03:23:09 +0000
+Received: from MWH0EPF000989E8.namprd02.prod.outlook.com
+ (2603:10b6:a03:334:cafe::3d) by SJ0PR05CA0112.outlook.office365.com
+ (2603:10b6:a03:334::27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7939.14 via Frontend
+ Transport; Thu, 5 Sep 2024 03:23:09 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CH3PEPF00000011.mail.protection.outlook.com (10.167.244.116) with Microsoft
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ MWH0EPF000989E8.mail.protection.outlook.com (10.167.241.135) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7962.2 via Frontend Transport; Thu, 5 Sep 2024 03:23:04 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.7918.13 via Frontend Transport; Thu, 5 Sep 2024 03:23:09 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 4 Sep
- 2024 22:22:39 -0500
+ 2024 22:23:03 -0500
 Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Wed, 4 Sep 2024 22:22:37 -0500
+ Transport; Wed, 4 Sep 2024 22:23:01 -0500
 From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 To: <u-boot@lists.denx.de>
 CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>,
- <trini@konsulko.com>, <git@amd.com>, Ashok Reddy Soma
- <ashok.reddy.soma@amd.com>
-Subject: [PATCH v13 4/8] mtd: spi-nor: Add parallel and stacked memories
- support in read_bar and write_bar
-Date: Thu, 5 Sep 2024 08:51:42 +0530
-Message-ID: <20240905032146.2470396-5-venkatesh.abbarapu@amd.com>
+ <trini@konsulko.com>, <git@amd.com>
+Subject: [PATCH v13 6/8] config: xilinx: Enable the SPI_ADVANCE config option
+Date: Thu, 5 Sep 2024 08:51:44 +0530
+Message-ID: <20240905032146.2470396-7-venkatesh.abbarapu@amd.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240905032146.2470396-1-venkatesh.abbarapu@amd.com>
 References: <20240905032146.2470396-1-venkatesh.abbarapu@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: venkatesh.abbarapu@amd.com does not
+Received-SPF: None (SATLEXMB03.amd.com: venkatesh.abbarapu@amd.com does not
  designate permitted sender hosts)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PEPF00000011:EE_|DS0PR12MB7802:EE_
-X-MS-Office365-Filtering-Correlation-Id: 31618d96-abf5-485e-da8a-08dccd5a0e12
+X-MS-TrafficTypeDiagnostic: MWH0EPF000989E8:EE_|SN7PR12MB8103:EE_
+X-MS-Office365-Filtering-Correlation-Id: cb962f85-68a4-4184-f424-08dccd5a1103
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?bAfjy5PgueKO7bAHWgBf7ylLxCEFo7tREPwq31/LLO90lzaHTYH8BlTsJ1xK?=
- =?us-ascii?Q?fk9ijYWIe2fiOw6uHbzKj/5KHo4CTjf8P0gL2B6nBKzN8q5XmsYAOAl1O92W?=
- =?us-ascii?Q?37gSWSTEwg5FWOTroD2rudIo1FqmgQM4MDr9RkR4zr3vLuhEd5U51k1zLt2x?=
- =?us-ascii?Q?GTx67VI0+Uy8e+G/7QDaIcPi6mhHmwLiVPn+0pzRHK/0KdZw60ChrCec0vJL?=
- =?us-ascii?Q?Z2pDR306lZGToNxUHq1bBT4UBUcO/mQWHanvFTmDRMFtFBOcM/b2dbGl+Q19?=
- =?us-ascii?Q?OM6lCvSRomiEyzcyDT1+H9yXO/CyXkM7us25om35eDapk70rtsgtOSMiEkeB?=
- =?us-ascii?Q?YSe0ROuIi5yOqAQLR7OW9IxjWk78XvClfvslGO4q6yXY9LRkF33twtFlNMSO?=
- =?us-ascii?Q?12i9V66vapzYYn/biEUdQrJyue0Ig9UCeopCUlbyi6zMZzTvSu5EEbjL4NEH?=
- =?us-ascii?Q?jarkCkAJzRiaEQ4lw1NWQGQNn1nInX5fVXGZNnMo3ii0z2PuXi0kBSm/WyAX?=
- =?us-ascii?Q?Ix/UPP70K1eGWvqFweSiZqLDconqjvYZFlfJReiBBUPhJzEz1MxQuvo2hXB4?=
- =?us-ascii?Q?ZNYvC0+cam/A1WGonOJxojJ0vjRUXuDh1KeLS+oI0sYaCBuUdn/1NLkVRrf/?=
- =?us-ascii?Q?BERItU7+iiUkhV2u0dcvdJkFE4WeH0O30RpChENtPH8h5GTOap/ZyRtuURo9?=
- =?us-ascii?Q?Yk1CG6TrkClRyEHa4DONCrcc8gf9RKH42XqT1maVnZAtEcWzFh0Umo8VGBz7?=
- =?us-ascii?Q?W0zgg/ua170352f2p5itxwm4+CK03p3dwzCgo8DxRcPdnQUV+IkSaFW3SQ4X?=
- =?us-ascii?Q?gnO8B7pJpp+UnrLBh3zNnKzSAtJ4FaX5XjbU4AR8WJO/bTP7dBum5n4prlgb?=
- =?us-ascii?Q?2m7YuFDtBWh9+CROQoiW33JXMebTzh5DRDh1m8ZYg3XnhF7ynZ2hxbcXN+fG?=
- =?us-ascii?Q?TPz87vz/6GHC2TQ7WdKX1DI1Yc43Gx9Bt+80cs21g50vAtlL6vYL4tEYt2xq?=
- =?us-ascii?Q?/8lGrx4OSg0GizPkETOTzbD3XzsHF5jZ33ysjs74MMDK7+DjaJvRfKOe71Xf?=
- =?us-ascii?Q?0GhqM4kOQ3NYdf1USX2ZCzLcUpZCh8wRqieb1baneOy5/mkENA26Eoxe3NpJ?=
- =?us-ascii?Q?bB/263g86lH7rmO7nJfCyxujaKX1kvO9zG5szpFNavCdz1f6gPom7ey5luL1?=
- =?us-ascii?Q?NlYA+am3wN75e7lyITWuS7xiGozPKX2tO/S01eJKqwXINnzmJ/JNGa8NKgvM?=
- =?us-ascii?Q?R2qZ7oOOAhbZsIOxwluWXaH+TsTkA8VWSDkOjllUe/7GJDZVszZ5ZuCi43p5?=
- =?us-ascii?Q?guB9VS1sQa/dcFc54EkrhNJK/RO10fjoAoqM2qij8XPdLWySfLd5fasY/KjH?=
- =?us-ascii?Q?Yr6YnmgSFp+ySXzY8B8thU9rfoKYma1V3i26Sd6OkgyBF/TTiTMuccN9BFpe?=
- =?us-ascii?Q?3cTml94QJ+VsowYKTT1gHn6UK+Sbr+jK?=
+ ARA:13230040|1800799024|376014|82310400026|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?7qQ0sdwG1aP7qn4ooTG27en2VTa+5iVzA3SQjcFZ4DXkei4eoagcsOFixbfg?=
+ =?us-ascii?Q?PhTcHwf/EnR682DXjUj/WsSMXoNKCCyY/B9KWw/Z4EprNX44TDg82D0PgxhX?=
+ =?us-ascii?Q?hRwNtZPwGPoYVyCpbWMLFtXzkQZ7Xt1MYpDaxwUt2NBMCg8GRyAsRgWbSbCX?=
+ =?us-ascii?Q?GFi8ZAjejTT7293GZmbxUxKH1O2MqiC6hEZ4CD6T1FCoWo4tSjLI6jYtNOwF?=
+ =?us-ascii?Q?rK9Zzxqj3dtZ+569SjKCyG5HBc37YIRKT6lHX/cdN9sewoJMbYaPq9+MhqRa?=
+ =?us-ascii?Q?lGDPWkNiH+g/41Cn0MztQzXGry5y+WwO/bkJjkoXAj8HMJ+m5c4nYEVJC56u?=
+ =?us-ascii?Q?AfQ9KOyFYzgqQO9Rw0Y3u+qGhZQS3gRs3gY4Zuoa2J/xbQT5nduzmPOQQcIC?=
+ =?us-ascii?Q?4F0EQ3KM64oASKb8S03YwK0oOZLqIkGmG6YLlVJIrv7uw7q/Yro5e1c30SZe?=
+ =?us-ascii?Q?g5UJZVJ7sDYUvxrnzX9R93ebMRZOOTDsFC/vUxyT98ofpeMtuOkynQI+qhXZ?=
+ =?us-ascii?Q?1Fv6nszx9ULySpRWMnK+2pR7vC+8RT5mDe6Bo7gPp252Z76W+gvE7G/X2Fka?=
+ =?us-ascii?Q?BVpczFP9ugySj4KODMhXxY7/IQJBlvMkBA8E0yWT3MWv3Uej9ivYbsMfclt5?=
+ =?us-ascii?Q?/VFspmYku7h5LOL9wpO+h4JdNG5W14NhCWTCzu4dvcEuilni07POHRWt2l+8?=
+ =?us-ascii?Q?qLNr6RZ8isC87PAoN61Rv5AbK7Xwcm9efS8SxFAui+3MLdeUhwDrOC1Q/YNy?=
+ =?us-ascii?Q?jioiJtbLJZsiSUufrprvN1mHcKlPxT4KYOZjTxIhH6cUkf+9mXYb4EaZi6mN?=
+ =?us-ascii?Q?mCovzkQPuT5m5KtixtSTVgRhEX2KIKdocRXuBAxiKyaZC+qdjy6A7jQXvvut?=
+ =?us-ascii?Q?O7SCX3nVlT3z/yoq7nnG4FQUr2//0DQLh8V9teKPGtaZ3p1D/RbLHtLmgyyb?=
+ =?us-ascii?Q?j4/BcKYg5k2/+DN6wA3e9yQ643Utg+A5hRpuuWJV+yv+jn3JtTgm3pWCqLD8?=
+ =?us-ascii?Q?8yiQWnF/TJjBT2D0z45AGfPBjhfHGH5FytYON5gJp8DQx/kX4sn9jE9A7d7A?=
+ =?us-ascii?Q?MuWAMsRI5QXnagt9xhcR0vyA1SKEaJqGTIfSS7nl31ejrzOOqqcnZh18Uhxe?=
+ =?us-ascii?Q?G8QoDmPxnkNDoNybfX6e/tmr3qYBtY3Mh3SkzKva4fBb9EjgUng8ew7hzFLb?=
+ =?us-ascii?Q?iazT0F3FDOZT2ha3cStrq3lfBGufDOy+n6o8zENYrB+BMqnGP7E8Lmwkz8ig?=
+ =?us-ascii?Q?ROYBTL5u0Z02yBkgm4SRKk57l+olJVuD6/WmGNjgeVNIyPSDvjU2wZJxDsFn?=
+ =?us-ascii?Q?Np1pNRNZE0lZiiWC+dwy/r6HXOwmkWaPBOixzmV321oEUGOUCHF0cal8Sc4n?=
+ =?us-ascii?Q?+dn6CmA8BHXm7V9lXKrXAL5eeL+AEbIn8FuElTyIvgtkLxnyvIJ6pseE/Bcm?=
+ =?us-ascii?Q?kebSVWo/mpkg/Cg6PsSgQGEYnR9iztJD?=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Sep 2024 03:23:04.5853 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 31618d96-abf5-485e-da8a-08dccd5a0e12
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Sep 2024 03:23:09.4271 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cb962f85-68a4-4184-f424-08dccd5a1103
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH3PEPF00000011.namprd21.prod.outlook.com
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000989E8.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7802
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8103
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,113 +148,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+Enable the SPI_ADVANCE config option for all xilinx platforms, as
+this is required for parallel-memories.
 
-Add support for parallel memories and stacked memories configuration
-in read_bar and write_bar functions.
-
-Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
 Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 ---
- drivers/mtd/spi/spi-nor-core.c | 55 +++++++++++++++++++++++++++++-----
- 1 file changed, 47 insertions(+), 8 deletions(-)
+ configs/xilinx_versal_net_virt_defconfig | 1 +
+ configs/xilinx_versal_virt_defconfig     | 1 +
+ configs/xilinx_zynq_virt_defconfig       | 1 +
+ configs/xilinx_zynqmp_virt_defconfig     | 1 +
+ 4 files changed, 4 insertions(+)
 
-diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index bc090094f4..0fc92fe7c2 100644
---- a/drivers/mtd/spi/spi-nor-core.c
-+++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -908,12 +908,32 @@ static int clean_bar(struct spi_nor *nor)
- 
- static int write_bar(struct spi_nor *nor, u32 offset)
- {
--	u8 cmd, bank_sel;
-+	u8 cmd, bank_sel, upage_curr;
- 	int ret;
-+	struct mtd_info *mtd = &nor->mtd;
-+
-+	/* Wait until previous write command is finished */
-+	if (spi_nor_wait_till_ready(nor))
-+		return 1;
-+
-+	if (nor->flags & (SNOR_F_HAS_PARALLEL | SNOR_F_HAS_STACKED) &&
-+	    mtd->size <= SZ_32M)
-+		return 0;
-+
-+	if (mtd->size <= SZ_16M)
-+		return 0;
-+
-+	offset = offset % (u32)mtd->size;
-+	bank_sel = offset >> 24;
- 
--	bank_sel = offset / SZ_16M;
--	if (bank_sel == nor->bank_curr)
--		goto bar_end;
-+	upage_curr = nor->spi->flags & SPI_XFER_U_PAGE;
-+
-+	if (!(nor->flags & SNOR_F_HAS_STACKED) && bank_sel == nor->bank_curr)
-+		return 0;
-+	else if (upage_curr == nor->upage_prev && bank_sel == nor->bank_curr)
-+		return 0;
-+
-+	nor->upage_prev = upage_curr;
- 
- 	cmd = nor->bank_write_cmd;
- 	write_enable(nor);
-@@ -923,15 +943,19 @@ static int write_bar(struct spi_nor *nor, u32 offset)
- 		return ret;
- 	}
- 
--bar_end:
- 	nor->bank_curr = bank_sel;
--	return nor->bank_curr;
-+
-+	return write_disable(nor);
- }
- 
- static int read_bar(struct spi_nor *nor, const struct flash_info *info)
- {
- 	u8 curr_bank = 0;
- 	int ret;
-+	struct mtd_info *mtd = &nor->mtd;
-+
-+	if (mtd->size <= SZ_16M)
-+		return 0;
- 
- 	switch (JEDEC_MFR(info)) {
- 	case SNOR_MFR_SPANSION:
-@@ -943,15 +967,30 @@ static int read_bar(struct spi_nor *nor, const struct flash_info *info)
- 		nor->bank_write_cmd = SPINOR_OP_WREAR;
- 	}
- 
-+	if (nor->flags & SNOR_F_HAS_PARALLEL)
-+		nor->spi->flags |= SPI_XFER_LOWER;
-+
- 	ret = nor->read_reg(nor, nor->bank_read_cmd,
--				    &curr_bank, 1);
-+			    &curr_bank, 1);
- 	if (ret) {
- 		debug("SF: fail to read bank addr register\n");
- 		return ret;
- 	}
- 	nor->bank_curr = curr_bank;
- 
--	return 0;
-+	// Make sure both chips use the same BAR
-+	if (nor->flags & SNOR_F_HAS_PARALLEL) {
-+		write_enable(nor);
-+		ret = nor->write_reg(nor, nor->bank_write_cmd, &curr_bank, 1);
-+		if (ret)
-+			return ret;
-+
-+		ret = write_disable(nor);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return ret;
- }
- #endif
- 
+diff --git a/configs/xilinx_versal_net_virt_defconfig b/configs/xilinx_versal_net_virt_defconfig
+index 40a9b16b9c..7225839437 100644
+--- a/configs/xilinx_versal_net_virt_defconfig
++++ b/configs/xilinx_versal_net_virt_defconfig
+@@ -126,6 +126,7 @@ CONFIG_XILINX_UARTLITE=y
+ CONFIG_SOC_DEVICE=y
+ CONFIG_SOC_XILINX_VERSAL_NET=y
+ CONFIG_SPI=y
++CONFIG_SPI_ADVANCE=y
+ CONFIG_DM_SPI=y
+ CONFIG_CADENCE_QSPI=y
+ CONFIG_CADENCE_OSPI_VERSAL=y
+diff --git a/configs/xilinx_versal_virt_defconfig b/configs/xilinx_versal_virt_defconfig
+index dc1754f6d1..12a2cd03c0 100644
+--- a/configs/xilinx_versal_virt_defconfig
++++ b/configs/xilinx_versal_virt_defconfig
+@@ -127,6 +127,7 @@ CONFIG_PL01X_SERIAL=y
+ CONFIG_XILINX_UARTLITE=y
+ CONFIG_SOC_XILINX_VERSAL=y
+ CONFIG_SPI=y
++CONFIG_SPI_ADVANCE=y
+ CONFIG_DM_SPI=y
+ CONFIG_CADENCE_QSPI=y
+ CONFIG_HAS_CQSPI_REF_CLK=y
+diff --git a/configs/xilinx_zynq_virt_defconfig b/configs/xilinx_zynq_virt_defconfig
+index f8b6a3f1aa..8e49c3b3b7 100644
+--- a/configs/xilinx_zynq_virt_defconfig
++++ b/configs/xilinx_zynq_virt_defconfig
+@@ -140,6 +140,7 @@ CONFIG_MII=y
+ CONFIG_ZYNQ_GEM=y
+ CONFIG_ARM_DCC=y
+ CONFIG_ZYNQ_SERIAL=y
++CONFIG_SPI_ADVANCE=y
+ CONFIG_ZYNQ_SPI=y
+ CONFIG_ZYNQ_QSPI=y
+ CONFIG_USB=y
+diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
+index 1133134e3f..9ffc681aba 100644
+--- a/configs/xilinx_zynqmp_virt_defconfig
++++ b/configs/xilinx_zynqmp_virt_defconfig
+@@ -203,6 +203,7 @@ CONFIG_XILINX_UARTLITE=y
+ CONFIG_ZYNQ_SERIAL=y
+ CONFIG_SOC_XILINX_ZYNQMP=y
+ CONFIG_SPI=y
++CONFIG_SPI_ADVANCE=y
+ CONFIG_ZYNQ_SPI=y
+ CONFIG_ZYNQMP_GQSPI=y
+ CONFIG_SYSRESET=y
 -- 
 2.25.1
 
