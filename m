@@ -4,134 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0217CD5BAE
-	for <u-boot@archiver.kernel.org>; Thu,  5 Sep 2024 11:59:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CCABCD5BAE
+	for <u-boot@archiver.kernel.org>; Thu,  5 Sep 2024 12:04:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 01E7188C88;
-	Thu,  5 Sep 2024 13:59:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 0801B88C88;
+	Thu,  5 Sep 2024 14:04:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="xggkihcL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="puRqdxuc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EA6988C97; Thu,  5 Sep 2024 13:59:06 +0200 (CEST)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20606.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2417::606])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0AA4B88C9C; Thu,  5 Sep 2024 14:04:23 +0200 (CEST)
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [IPv6:2a00:1450:4864:20::22f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A577F88C87
- for <u-boot@lists.denx.de>; Thu,  5 Sep 2024 13:59:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C5C4888C87
+ for <u-boot@lists.denx.de>; Thu,  5 Sep 2024 14:04:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Prasad.Kummari@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uE/09ZyO8fLQRlgGbkb+igmxFBQyRCa31+iKw3iwn6ovtoOiPEQZI7BNJxJU2+WRZurPKihf5BVWBbfMI87X4BNbm3PormTQ+XAxipeT69V4X0xsVC0j0ikQJSwpzRJ0coQihjivpcEXliuZ1H7/dG633ORiGlxV4eF8IpQ4f8XfoQasa+YnCHKee4gOcvF43G/o6vuM43Ici+5w9u4TAdlQWg0Obu6e17FQMBNGAQ61/r6qITRqku67zK/yOd2/T/IhkYyl2cDbPZIVbnfdePfk/LU5qcvJTLz6QX8Bh1QNBkL82jRvWV14Axns6EVD6u+UL26xGICHWYDgFZxbDQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tHPotmo893HNjp3I9M5DzkA2wWo1pwrs1x05qJW72W8=;
- b=dhrDh/fG8Q3LY97oI6fEes3iMvVyp8K+nVv3CXYsXbRmSFysf9rjkBMbhBTY1YbZNWct3nsJ5pd9k9iMgQhvzMX7qZ4hKhOa/rdQxVm9ghzbXvC9baX7zqc3bKSFacbaLHdw8eUn4gPpjgBN4sF+4MFHWuNEbhRcHf/bb9SukwGehcTODMyoac3XtAr8nV1c6NKy0fI2VetUjPH7lZ/hAQsGLXTddm1Rvj+ovK+xaJ37otACzqS3dTlwC5FpSFjXA6OarBladQSxiITEYgaANUn0kK0MF7VGBAjWKcRiXzYUrk8Tupo8ICJbWG7E6GSP0EpFMWUbJVCqgQ5rYGpNzw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tHPotmo893HNjp3I9M5DzkA2wWo1pwrs1x05qJW72W8=;
- b=xggkihcLlPhr4BdsDIAc+u30JNmTr1xxvAm9nbfAw49LtP9q2I26mYdCx5iTJXSgedYG094XACHqQgh1hWgtkEk7330JcxrX+CORG/LYUPKXq/rKnoXB1x/kxxWgy4w2vVFWRlNcSfIlizQYNQguEj3QQeWBXmTQdYQDf3imw5I=
-Received: from CH0PR03CA0185.namprd03.prod.outlook.com (2603:10b6:610:e4::10)
- by PH7PR12MB5688.namprd12.prod.outlook.com (2603:10b6:510:130::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.27; Thu, 5 Sep
- 2024 11:58:58 +0000
-Received: from DS3PEPF000099D3.namprd04.prod.outlook.com
- (2603:10b6:610:e4:cafe::31) by CH0PR03CA0185.outlook.office365.com
- (2603:10b6:610:e4::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7918.27 via Frontend
- Transport; Thu, 5 Sep 2024 11:58:58 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS3PEPF000099D3.mail.protection.outlook.com (10.167.17.4) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7918.13 via Frontend Transport; Thu, 5 Sep 2024 11:58:57 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 5 Sep
- 2024 06:58:56 -0500
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Thu, 5 Sep 2024 06:58:54 -0500
-From: Prasad Kummari <prasad.kummari@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>,
- <padmarao.begari@amd.com>, <git@xilinx.com>, <jagan@amarulasolutions.com>,
- <n-francis@ti.com>, <d-gole@ti.com>, Prasad Kummari <prasad.kummari@amd.com>
-Subject: [PATCH] xilinx: versal-net: fix no previous prototype for function
- warning.
-Date: Thu, 5 Sep 2024 17:27:59 +0530
-Message-ID: <20240905115758.999936-1-prasad.kummari@amd.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-2f4f2868621so8414331fa.0
+ for <u-boot@lists.denx.de>; Thu, 05 Sep 2024 05:04:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1725537860; x=1726142660; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=vDqrqgDO4jM7tZFMhPKU7AJFmjTXperAU3Io71d1HQE=;
+ b=puRqdxucdN5XXAOi8w9YNOZcnoezjiRNRjOz01rrj1m1lZueFx7l4aUGa8fRvcvEPv
+ gbLGg9PV+jKeEbWxtxb9v+XYo7fivqmmp3JKEeTaQlQI39Am2rYWCHd/hymB53K5IT9p
+ Jxpqo3S11CeRm4pGfZlak7heZPquTgsEypzzQrfQyVOuDIPOYRoEzaxXQ0urqdu9ckF3
+ dWdJVnFxy3NBnPMk1VKtDa/1zSRB2Le4CLDaUJXAOfPj4CBNv9VLR53AqKlpOrLHkOWR
+ LiBCaBJh/f0yVHDh7AJ9xcNM73A/nriGJkD+MAIbaiH8jJF/tvtGWSkYebo2qsTpnyVL
+ jQVQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725537860; x=1726142660;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=vDqrqgDO4jM7tZFMhPKU7AJFmjTXperAU3Io71d1HQE=;
+ b=D5HWGlJ/WY9BzE4tQBiNO+6LRoB5JdnPETmH2DncBhFUdsrJhzjwnJBdFct6/UeDaX
+ dEd0qdu65WveoDlQm2dF1mO0U9evOnbnRRpOfQurXtjop09EoATw/k2jpZRqH47kJYTC
+ jV0YBMTo/OtU6SMqSNNI0bx/HYKaL/u35OvWGkAhFI+U/MYCwXRoCKxDf9Vj4WUHzrAh
+ bbr64h9G+WUr6hBgZlKHYVRGL9qr3cHGtN16seNrRojBP70jw5y+qrzyY+BVLb34QJRy
+ qOf0RkJcwKx1HmUPEoLvUtqWS0GPChD2WlKJG2bx2cwe+TvgJab2reQnLDMMk0958dnx
+ yV4Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV139RRYtn+dwd4SNVAz4mbE8N9f6uZbd1YwMU4HFsP1szrCy3X6gb1/haAAxp8XurmhSKso3g=@lists.denx.de
+X-Gm-Message-State: AOJu0YyCvSs3EGPcosnDgvhonBBXwysBAh2kZ477fZkerVnK1kwx3Y2V
+ +wvVrDZpzLRjali5Aj/Fv5MkkVTO1nRq3cZ5l6ZG+WLIpVcriOjh74dcYS2Pe7Y=
+X-Google-Smtp-Source: AGHT+IETSCL07Ec/NaPoQOehA2FJEbRNstxfOKOK9krRaFBEqJgvwIMSpSpE+m6NspAxfyz0GHTGuA==
+X-Received: by 2002:a2e:b8c4:0:b0:2ef:2b38:879c with SMTP id
+ 38308e7fff4ca-2f62902e20amr133003231fa.3.1725537859674; 
+ Thu, 05 Sep 2024 05:04:19 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:aa0d:be00::8db? ([2a02:8109:aa0d:be00::8db])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5c3cc69ac64sm1158088a12.77.2024.09.05.05.04.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 05 Sep 2024 05:04:19 -0700 (PDT)
+Message-ID: <a2261c8b-08a5-4dc4-9397-eee8596791b7@linaro.org>
+Date: Thu, 5 Sep 2024 14:04:18 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: prasad.kummari@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099D3:EE_|PH7PR12MB5688:EE_
-X-MS-Office365-Filtering-Correlation-Id: ccbaa514-9e7e-4b20-858a-08dccda21fb4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|36860700013|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?hRS1Y0P3r9K2njchepwCCegdxR5INSkwTxf5AtxO2P8ql8naL0L0r/IBiP4H?=
- =?us-ascii?Q?opYu1Nu1b5+/KuC4BU8wfdtzNNsqRfcppFv9Z4kf/+TWyPMpbOMqxLY8kyP+?=
- =?us-ascii?Q?fSJvFXZVT9KMsK3x4AShv2+WCQTnfpjS/517On6iHB3KfodOCtarGgiIRwCL?=
- =?us-ascii?Q?F404FQSd2KBs4TGi22rrnLmecQqfiRNKWPS/m1r0NdekbfS9ZheI7d/XzeTF?=
- =?us-ascii?Q?NY+p1HH276xFuJqb6DTiq+0u0hnRzIVdnu8eQ8trEsvLiIbvGIbdwjCwZRx8?=
- =?us-ascii?Q?GAQAPla+J+aIruvYzkborQUJjlpFpCuQ9hNdtF0r75ST6sq5KrSb778zzqJP?=
- =?us-ascii?Q?zxUGRSwCtKVrDv34pJx0jTylDWYnUS7sAiZS5H3V5oBowFzzQzdEAtTUoKNE?=
- =?us-ascii?Q?iGb19v+jw2GpDtJs7Pmxd67Cw4wxiVF1fUUZnQ984puxYTiT0J5o77va/Wcy?=
- =?us-ascii?Q?7tuQeW0pZh1vt9G2qJPlSMOGTdsiHfDrrc0zCNyLXyv5M9Ta1yKTezWTPxvN?=
- =?us-ascii?Q?YsrAuva24q/HR+nRYTfTydyrJa2vHptabCJPhEzjhsMXeQkQsrcNLC4twBDU?=
- =?us-ascii?Q?xMvXplWUWOY0WF6FF+/S8A3BcK0ROY76CMEZ/eWPm/UxwX0VRSi/P/5LTWWQ?=
- =?us-ascii?Q?TBJKR+jzJM8T6L567qNczeeHKDzp0ghLBWcDwKq6j/q+U/ljrofEqzP8fRlZ?=
- =?us-ascii?Q?9eBXXawtyWdAzWQXfHFmieTzB7/QswwDX0RFE6a/4Z7DT2f/iQ6u8BiGVVhG?=
- =?us-ascii?Q?dP4Yk3aEuutUiDP1eQ7VjL4MhCd322wlbpchAyr/eylgJraJUdZwKRrjayN/?=
- =?us-ascii?Q?moC8ulLQhERVVG6RYcIEija+pfg9VmUBFnqRSt0z5iaV8hv0SOJ7ixGZlHmW?=
- =?us-ascii?Q?aHQeXYLQwxZkzbkVbr0JrpU6XnPuCCiJpRjo3s7gLTOH5gaPYbIJUFxJ591L?=
- =?us-ascii?Q?+4RLfUatUUUy7fZqk0NhthASMeMeovDsp52R7yGlHKX1ZuOxaZuf0ikkwdI8?=
- =?us-ascii?Q?aXgmx0qullsS7619FIrrzpNuyulLCB3VRtmSc7wePZ9XcSO17ABPngGY97bf?=
- =?us-ascii?Q?s2fmkFy+a8KGbZy8hUnfVKIKZ7F+nm5HKdVHgKIgYoKpoQ3uRVcKKVqS0DsF?=
- =?us-ascii?Q?yjUajZgYPvQv9kLMc3zGu5XoIAaO33CfsHyJF8JQIb8JSWrgOZYdhaQUnz70?=
- =?us-ascii?Q?1cc64yumAR/P3g425wKdVF+PBI1q3YOl7yjhE2UQP5R5/bpQhRqhzInrvYv2?=
- =?us-ascii?Q?8GOCygqCPzZvmDw53AywSnwLbYF77BWvJogw+CHUMJc6sl5lbgP2p8ffwuJr?=
- =?us-ascii?Q?xleTHhQERl1LGnmKT8GM5utig5SLO3MuC0dwESnu2ICvo7ZZXWSxqXCu2fBh?=
- =?us-ascii?Q?XZZq/nxGkvMYjwFA3kFwZ9XJSjQRdzfRyxaIls2KCFVsEnLKsi0M7RwQ1XRj?=
- =?us-ascii?Q?JQPGEADWj0FPoKTVR4tVucT1J1fTAXiw?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Sep 2024 11:58:57.8994 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ccbaa514-9e7e-4b20-858a-08dccda21fb4
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099D3.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB5688
+User-Agent: Betterbird (Linux)
+Subject: Re: [PATCH 0/4] clk/qcom: implement clk dump callback
+Content-Language: en-US
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20240819-b4-qcom-clk-dump-v1-0-182cf77c23a2@linaro.org>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20240819-b4-qcom-clk-dump-v1-0-182cf77c23a2@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,63 +97,191 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Included the SPI header to resolve the no previous prototypes
-for function. Removed unused mode variable.
-sparse warnings
-warning: no previous prototype for 'spi_get_env_dev'
-[-Wmissing-prototypes]
-warning: variable 'mode' set but not used
-[-Wunused-but-set-variable]
+Hi Lukasz,
 
-Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
----
- board/xilinx/versal-net/board.c | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+Could you take a quick look at this?
 
-diff --git a/board/xilinx/versal-net/board.c b/board/xilinx/versal-net/board.c
-index 1d67e3f318..4d5913cff1 100644
---- a/board/xilinx/versal-net/board.c
-+++ b/board/xilinx/versal-net/board.c
-@@ -12,6 +12,7 @@
- #include <env_internal.h>
- #include <log.h>
- #include <malloc.h>
-+#include <spi.h>
- #include <time.h>
- #include <asm/cache.h>
- #include <asm/global_data.h>
-@@ -196,7 +197,6 @@ static u8 versal_net_get_bootmode(void)
- int spi_get_env_dev(void)
- {
- 	struct udevice *dev;
--	const char *mode = NULL;
- 	int bootseq = -1;
- 
- 	switch (versal_net_get_bootmode()) {
-@@ -207,7 +207,6 @@ int spi_get_env_dev(void)
- 			debug("QSPI driver for QSPI device is not present\n");
- 			break;
- 		}
--		mode = "xspi";
- 		bootseq = dev_seq(dev);
- 		break;
- 	case QSPI_MODE_32BIT:
-@@ -217,7 +216,6 @@ int spi_get_env_dev(void)
- 			debug("QSPI driver for QSPI device is not present\n");
- 			break;
- 		}
--		mode = "xspi";
- 		bootseq = dev_seq(dev);
- 		break;
- 	case OSPI_MODE:
-@@ -227,7 +225,6 @@ int spi_get_env_dev(void)
- 			debug("OSPI driver for OSPI device is not present\n");
- 			break;
- 		}
--		mode = "xspi";
- 		bootseq = dev_seq(dev);
- 		break;
- 	default:
+Thanks and kind regards,
+
+On 19/08/2024 21:34, Caleb Connolly wrote:
+> Add support for dumping a few of the clocks used on Qualcomm platforms.
+> Naming the Global PLL's, Root Clock Generators, and gate clocks.
+> 
+> This helps a lot with platform bringup and feature enablement by making
+> it easy to sanity check that the clocks are programmed correctly.
+> 
+> == Usage ==
+> 
+> Enable CONFIG_CMD_CLK and "#define LOG_DEBUG" at the top of
+> qcom-<soc>.c.
+> 
+> If your SoC doesn't yet define the debug data for clocks, it can be
+> added using the Linux driver as a reference.
+> 
+> The "clk dump" command should print the states of all the gates, GPLLs
+> and RCGs for your SoC.
+> 
+> == Glossary ==
+> 
+> RCG: Root Clock Generator
+> * Takes in some fairly arbitrary high freq clock (configurable clock
+> source and options for taking just even pulses and other things)
+> * Output frequency = input_freq * (m/n) * (1/d) where m/n are arbitrary
+> 8 or 16-bit values (depending on the RCG), and d is a number (with
+> support for .5 offsets).
+> 
+> GPLL: Global Phase Locked Loop
+> * Crystal as input
+> * integer multiplier + exponent part (2^-40)
+> 
+> Gate: Simple on/off clock
+> * Put between RCGs and the peripherals they power
+> * Required to allow for correct power sequencing
+> 
+> If you do the maths manually using the equations from "clk dump", the
+> numbers should roughly line up by they're likely to be out by a handful
+> of MHz. They output is formatted so that it can be pasted directly into
+> the python interpreter.
+> 
+> == Example output ==
+> 
+> => clk dump
+>  Rate               Usecnt      Name
+> ------------------------------------------
+>  38400000             0        |-- xo-board
+>  32764                0        |-- sleep-clk
+> 
+> qcom_clk qcom_clk:
+> Gate Clocks:
+> GCC_AGGRE_USB3_SEC_AXI_CLK      : 
+> GCC_CFG_NOC_USB3_SEC_AXI_CLK    : 
+> GCC_QUPV3_WRAP0_S0_CLK          : 
+> GCC_QUPV3_WRAP0_S1_CLK          : 
+> GCC_QUPV3_WRAP0_S2_CLK          : 
+> GCC_QUPV3_WRAP0_S3_CLK          : 
+> GCC_QUPV3_WRAP0_S4_CLK          : 
+> GCC_QUPV3_WRAP0_S5_CLK          : 
+> GCC_QUPV3_WRAP0_S6_CLK          : 
+> GCC_QUPV3_WRAP0_S7_CLK          : 
+> GCC_QUPV3_WRAP1_S0_CLK          : 
+> GCC_QUPV3_WRAP1_S1_CLK          : ON
+> GCC_QUPV3_WRAP1_S3_CLK          : 
+> GCC_QUPV3_WRAP1_S4_CLK          : 
+> GCC_QUPV3_WRAP1_S5_CLK          : 
+> GCC_QUPV3_WRAP1_S6_CLK          : 
+> GCC_QUPV3_WRAP1_S7_CLK          : 
+> GCC_QUPV3_WRAP_0_M_AHB_CLK      : 
+> GCC_QUPV3_WRAP_0_S_AHB_CLK      : 
+> GCC_QUPV3_WRAP_1_M_AHB_CLK      : ON
+> GCC_QUPV3_WRAP_1_S_AHB_CLK      : ON
+> GCC_SDCC2_AHB_CLK               : ON
+> GCC_SDCC2_APPS_CLK              : ON
+> GCC_SDCC4_AHB_CLK               : 
+> GCC_SDCC4_APPS_CLK              : 
+> GCC_UFS_CARD_AHB_CLK            : 
+> GCC_UFS_CARD_AXI_CLK            : 
+> GCC_UFS_CARD_CLKREF_CLK         : ON
+> GCC_UFS_CARD_ICE_CORE_CLK       : 
+> GCC_UFS_CARD_PHY_AUX_CLK        : 
+> GCC_UFS_CARD_RX_SYMBOL_0_CLK    : 
+> GCC_UFS_CARD_RX_SYMBOL_1_CLK    : 
+> GCC_UFS_CARD_TX_SYMBOL_0_CLK    : 
+> GCC_UFS_CARD_UNIPRO_CORE_CLK    : 
+> GCC_UFS_MEM_CLKREF_CLK          : ON
+> GCC_UFS_PHY_AHB_CLK             : ON
+> GCC_UFS_PHY_AXI_CLK             : ON
+> GCC_UFS_PHY_ICE_CORE_CLK        : ON
+> GCC_UFS_PHY_PHY_AUX_CLK         : ON
+> GCC_UFS_PHY_RX_SYMBOL_0_CLK     : ON
+> GCC_UFS_PHY_RX_SYMBOL_1_CLK     : ON
+> GCC_UFS_PHY_TX_SYMBOL_0_CLK     : ON
+> GCC_UFS_PHY_UNIPRO_CORE_CLK     : ON
+> GCC_USB30_PRIM_MASTER_CLK       : ON
+> GCC_USB30_PRIM_MOCK_UTMI_CLK    : ON
+> GCC_USB30_PRIM_SLEEP_CLK        : ON
+> GCC_USB30_SEC_MASTER_CLK        : 
+> GCC_USB30_SEC_MOCK_UTMI_CLK     : 
+> GCC_USB30_SEC_SLEEP_CLK         : 
+> GCC_USB3_PRIM_CLKREF_CLK        : ON
+> GCC_USB3_PRIM_PHY_AUX_CLK       : ON
+> GCC_USB3_PRIM_PHY_COM_AUX_CLK   : ON
+> GCC_USB3_PRIM_PHY_PIPE_CLK      : ON
+> GCC_USB3_SEC_CLKREF_CLK         : ON
+> GCC_USB3_SEC_PHY_AUX_CLK        : 
+> GCC_USB3_SEC_PHY_PIPE_CLK       : 
+> GCC_USB3_SEC_PHY_COM_AUX_CLK    : 
+> GCC_USB_PHY_CFG_AHB2PHY_CLK     : ON
+> 
+> GPLL clocks:
+> | GPLL   | LOCKED | XO_BOARD  |  PLL_L     | ALPHA          |
+> +--------+--------+-----------+------------+----------------+
+> | GPLL0  | X      |  19200000 * (0x1f      + 0x0            * 2 ** -40 )/ 1000000
+> | GPLL1  | X      |  19200000 * (0x37      + 0x0            * 2 ** -40 ) / 1000000
+> | GPLL2  |        |  19200000 * (0x14      + 0x0            * 2 ** -40 ) / 1000000
+> | GPLL3  |        |  19200000 * (0x30      + 0x0            * 2 ** -40 )/ 1000000
+> | GPLL4  | X      |  19200000 * (0x29      + 0x0            * 2 ** -40 ) / 1000000
+> | GPLL5  |        |  19200000 * (0x30      + 0x0            * 2 ** -40 ) / 1000000
+> | GPLL6  |        |  19200000 * (0x0       + 0x0            * 2 ** -40 )/ 1000000
+> 
+> RCGs:
+> | NAME                             | ON | SRC | OUT_FREQ = input_freq * (m/n) * (1/d) | [CMD REG   ] |
+> +----------------------------------+----+-----+---------------------------------------+--------------+
+> GCC_USB30_PRIM_MASTER              | X  |   1 | input_freq * (   1/    1) * (1/4.5)   | [0x00000000]
+> GCC_USB30_PRIM_MOCK_UTMI           | X  |   0 | input_freq * (   1/    1) * (1/1  )   | [0x00000000]
+> GCC_USB3_PRIM_PHY_AUX              | X  |   0 | input_freq * (   1/    1) * (1/1  )   | [0x00000000]
+> GCC_USB30_SEC_MASTER               |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_USB30_SEC_MOCK_UTMI            |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_USB3_SEC_PHY_AUX               |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_SDCC2_APPS                     | X  |   5 | input_freq * (   1/    1) * (1/4  )   | [0x00000000]
+> GCC_SDCC4_APPS                     |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_QUPV3_WRAP0_CORE_2X            | X  |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x00000000]
+> GCC_QUPV3_WRAP0_S0                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_QUPV3_WRAP0_S1                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_QUPV3_WRAP0_S2                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_QUPV3_WRAP0_S3                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_QUPV3_WRAP0_S4                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_QUPV3_WRAP0_S5                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_QUPV3_WRAP0_S6                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_QUPV3_WRAP0_S7                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_QUPV3_WRAP1_S0                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_QUPV3_WRAP1_S1                 | X  |   6 | input_freq * ( 384/15625) * (1/1  )   | [0x00000000]
+> GCC_QUPV3_WRAP1_S2                 | X  |   0 | input_freq * (   1/    1) * (1/1  )   | [0x00000000]
+> GCC_QUPV3_WRAP1_S3                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_QUPV3_WRAP1_S4                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_QUPV3_WRAP1_S5                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_QUPV3_WRAP1_S6                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_QUPV3_WRAP1_S7                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_PCIE_0_AUX                     |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_PCIE_1_AUX                     |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_PCIE_PHY_REFGEN                | X  |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x00000000]
+> GCC_UFS_CARD_AXI                   | X  |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x00000000]
+> GCC_UFS_CARD_ICE_CORE              |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_UFS_CARD_UNIPRO_CORE           |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_UFS_CARD_PHY_AUX               |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
+> GCC_UFS_PHY_AXI                    | X  |   1 | input_freq * (   1/    1) * (1/3  )   | [0x00000000]
+> GCC_UFS_PHY_ICE_CORE               | X  |   1 | input_freq * (   1/    1) * (1/2  )   | [0x00000000]
+> GCC_UFS_PHY_UNIPRO_CORE            | X  |   1 | input_freq * (   1/    1) * (1/4  )   | [0x00000000]
+> GCC_UFS_PHY_PHY_AUX                | X  |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x00000000]
+> 
+> ---
+> Caleb Connolly (4):
+>       clk/qcom: implement clk dump
+>       clk/qcom: sdm845: add dump data
+>       clk/qcom: sm6115: add debug data
+>       clk/qcom: sm8250: add debug data
+> 
+>  drivers/clk/qcom/clock-qcom.c   | 117 ++++++++++++++++++++++++++++++++++++++++
+>  drivers/clk/qcom/clock-qcom.h   |   6 +++
+>  drivers/clk/qcom/clock-sdm845.c |  93 ++++++++++++++++++++++++++++++++
+>  drivers/clk/qcom/clock-sm6115.c |  63 ++++++++++++++++++++++
+>  drivers/clk/qcom/clock-sm8250.c | 115 +++++++++++++++++++++++++++++++++++++++
+>  5 files changed, 394 insertions(+)
+> ---
+> change-id: 20240819-b4-qcom-clk-dump-e25a0198f6c0
+> base-commit: b7d5ce05b1b52136af09cf34541c6a91079a4b86
+> 
+> // Caleb (they/them)
+> 
+
 -- 
-2.25.1
-
+// Caleb (they/them)
