@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC14ECD5BC9
-	for <u-boot@archiver.kernel.org>; Thu,  5 Sep 2024 15:17:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6AF3CD5BCB
+	for <u-boot@archiver.kernel.org>; Thu,  5 Sep 2024 15:17:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EDBD88CA2;
+	by phobos.denx.de (Postfix) with ESMTP id A359088CC3;
 	Thu,  5 Sep 2024 17:17:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="Hn8Z4MVu";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="cQ+dIydl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 710CF88CA2; Thu,  5 Sep 2024 17:17:12 +0200 (CEST)
+ id 9AB2788CA2; Thu,  5 Sep 2024 17:17:12 +0200 (CEST)
 Received: from bali.collaboradmins.com (bali.collaboradmins.com
- [IPv6:2a01:4f8:201:9162::2])
+ [148.251.105.195])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D4DC88CAC
+ by phobos.denx.de (Postfix) with ESMTPS id 6B09788C1C
  for <u-boot@lists.denx.de>; Thu,  5 Sep 2024 17:17:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=collabora.com
@@ -28,23 +28,23 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sebastian.reichel@collabora.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
  s=mail; t=1725549428;
- bh=kRtQV3aUzqRixo2bcjF9nXzgL+cYAS6B3o857NdybTM=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Hn8Z4MVuPomOScWvWRuPJHT3m84jMoUdUdcI4V6fC8w0zfN0PSB22YMSaMxRDqiQR
- D1gyzQpG0bCWuGp89DNtLngEOXCfXPqQh98ArUJFVvn5FVbYDlml9cXwVW02zXglIb
- KP92KXxaQTgjWDb6QntmbJHNZVhAMNOCCqIknf4YFMc4/7yGTUsOxI5VD/oY5bbwVJ
- aTVCT3SuwJvmXu7Dj150fFYeT0furN5MZT1P/MPFXd1/bnC9Dj+YTT6lm3kw6waCZN
- OcRx6P7sRha82dm44zV4xjWnpHPDGGYqTyWNSD72Xj7/CASin5aosS6NbZFpndvcfx
- 30yLrCrJPsm3g==
+ bh=ytQeX9syO1nwBXdtHlVtmA0BzQX6/tWebjckuZLC7Hw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=cQ+dIydljcGLQHj5AxiLeAG9MjNK4M9ZjD8E+7Y3JTxbhxx8oTZGplhq5T24CH3nC
+ tJY0mQfa4LNQZ0hHimD39hHNP333HXRdl5eVbZ37LnRaN/1NDLoQAcq7BGv5K9zyU4
+ iPNFY5zWB2w6jt2COjZpO6KhnhxAve3Ur6k7Oh18qxLhEqniEXpuJrfAnsWRgtDPpy
+ xzph2DW8y5czvFxgJUyx4SV/U5c5vi0pjxFb0xvZGneGjtGVQyONDJlCa8opkPVcCl
+ Zy9xX21+JliN416vQfOVpndCrZtxm8eKbCUuXd8fF+At06y2ehKYs61B3cRKq8FpdN
+ 11kNZ99dTVI5A==
 Received: from jupiter.universe (dyndsl-091-248-189-231.ewe-ip-backbone.de
  [91.248.189.231])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested) (Authenticated sender: sre)
- by bali.collaboradmins.com (Postfix) with ESMTPSA id EF4D117E14D6;
+ by bali.collaboradmins.com (Postfix) with ESMTPSA id EAF6917E0FD9;
  Thu,  5 Sep 2024 17:17:07 +0200 (CEST)
 Received: by jupiter.universe (Postfix, from userid 1000)
- id A518D4800F8; Thu, 05 Sep 2024 17:17:07 +0200 (CEST)
+ id 9D42C4800EA; Thu, 05 Sep 2024 17:17:07 +0200 (CEST)
 From: Sebastian Reichel <sebastian.reichel@collabora.com>
 To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
  Jonas Karlman <jonas@kwiboo.se>, Soeren Moch <smoch@web.de>
@@ -52,14 +52,12 @@ Cc: Eugen Hristev <eugen.hristev@collabora.com>,
  Tim Harvey <tharvey@gateworks.com>, Kever Yang <kever.yang@rock-chips.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
  Sebastian Reichel <sebastian.reichel@collabora.com>
-Subject: [PATCH v6 4/6] rockchip: rk3588-rock-5b: Add USB-C controller to
- u-boot.dtsi
-Date: Thu,  5 Sep 2024 17:08:40 +0200
-Message-ID: <20240905151707.59101-5-sebastian.reichel@collabora.com>
+Subject: [PATCH v6 0/6] FUSB302 USB-C controller support
+Date: Thu,  5 Sep 2024 17:08:36 +0200
+Message-ID: <20240905151707.59101-1-sebastian.reichel@collabora.com>
 X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240905151707.59101-1-sebastian.reichel@collabora.com>
-References: <20240905151707.59101-1-sebastian.reichel@collabora.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -77,72 +75,204 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add USB-C controller (fusb302), which will be used by U-Boot to
-initialize USB-PD. This is needed, because USB-PD communication
-must happen within 5 seconds after the USB-C connector got plugged.
-On my Rock 5B it often takes 5 seconds to jump to the Linux binary,
-so it must happen before Linux is initialized.
+Hi,
 
-This adds the DT node to the U-Boot specific file, since the Linux
-kernel DT currently does not describe it to avoid a system reset.
-The plan is to add it to the Linux DT with status = 'fail' and then
-let U-Boot mark it as status = 'okay' if it properly dealt with
-early USB-PD initialization. Until the Kernel DT has the node, let's
-add it in U-Boot to get things going.
+On ROCK 5B power is usually supplied via it's USB-C port. This port has the
+data lines connected to RK3588, VBUS connected to the input regulator and
+CC pins connected to FUSB302. FUSB302 is a USB-C controller, which can be
+accessed via I2C from RK3588. The USB-C controller is needed to figure out
+the USB-C cable orientation, but also to do USB PD communication. Thus it
+would be great to enable support for it in the operating system.
 
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
-Tested-by: Soeren Moch <smoch@web.de>
-Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
----
- arch/arm/dts/rk3588-rock-5b-u-boot.dtsi | 28 +++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
+But the USB-PD specification requires, that a device reacts to USB-PD messages
+send by the power-supply within around 5 seconds. If that does not happen the
+power-supply assumes, that the device does not support USB-PD. If a device
+later starts sending USB-PD messages it is considered an error, which is solved
+by doing a hard reset. A USB-PD hard reset means, that all supply voltages are
+removed for a short period of time. For boards, which are solely powered
+through their USB-C port, like the Radxa Rock 5B, this results in an machine
+reset. This is currently worked around by not describing the FUSB302 in the
+kernel DT, so nothing will ever speak USB-PD on the Rock 5B. This means
 
-diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-index 4dd17ff408cb..b0ad1158854c 100644
---- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-+++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-@@ -3,6 +3,7 @@
-  * Copyright (c) 2023 Collabora Ltd.
-  */
- 
-+#include <dt-bindings/usb/pd.h>
- #include "rk3588-u-boot.dtsi"
- 
- &fspim2_pins {
-@@ -10,6 +11,33 @@
- 	bootph-some-ram;
- };
- 
-+&i2c4 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&i2c4m1_xfer>;
-+	status = "okay";
-+
-+	usbc0: usb-typec@22 {
-+		compatible = "fcs,fusb302";
-+		reg = <0x22>;
-+		interrupt-parent = <&gpio3>;
-+		interrupts = <RK_PB4 IRQ_TYPE_LEVEL_LOW>;
-+		pinctrl-names = "default";
-+		status = "okay";
-+
-+		usb_con: connector {
-+			compatible = "usb-c-connector";
-+			label = "USB-C";
-+			data-role = "dual";
-+			power-role = "sink";
-+			try-power-role = "sink";
-+			op-sink-microwatt = <1000000>;
-+			sink-pdos =
-+				<PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)>,
-+				<PDO_VAR(5000, 20000, 5000)>;
-+		};
-+	};
-+};
-+
- &sdhci {
- 	cap-mmc-highspeed;
- 	mmc-hs200-1_8v;
+1. the USB-C port cannot be used at all
+2. the board will be running via fallback supply, which provides limited
+   power capabilities
+
+In order to avoid the hard reset, this adds FUSB302 support to U-Boot, so
+that we react to the power-supply's queries in time. The code, which is
+originally from the Linux kernel, consists of two parts:
+
+1. the tcpm state machine, which implements the Type C port manager state
+   machine as described in the USB PD specification
+2. the fusb302 driver, which knows about specific registers
+
+Especially the first part has been heavily modified compared to the
+kernel, which makes use of multiple delayed works and threads. For this
+I used a priorly ported version from Rockchip, removed their hacks and
+any states not necessary in U-Boot (e.g. audio accessory support).
+
+This version has been tested on Radxa Rock 5B using the open source TF-A
+(patches recently got merged into master branch) using the following power
+supplies:
+
+ * non PD capable (reports 5V 0A)
+ * RavPower 90W
+ * UGREEN 100W
+ * Anker 45W
+ * RavPower PB
+
+Changes since PATCHv5:
+ * Also avoid auto probing TCPM drivers when pd-disable property is set
+ * Add Tested-by from Soeren Moch
+
+Changes since PATCHv4:
+ * Rebase to latest master (v2024.10-rc4)
+ * Fix regression introduced in PATCHv3: The exit code for fusb302_set_vconn()
+   when vconn stays the same should be 0 instead of undefined
+ * Fix regression introduced in PATCHv3: tcpm_set_polarity() needs to update
+   port->polarity when there is no driver specific set_polarity function
+
+Changes since PATCHv3:
+ * Rebase to latest master (57949a99b7bd)
+ * Rework autoprobing; tcpm_post_bind tries to check if a probe is needed
+   based on DT properties and then sets the DM_FLAG_PROBE_AFTER_BIND flag.
+   If this accidently increases boot time on some boards they are probably
+   missing a 'self-powered;' flag in their USB-C connector node.
+ * Rock 5B ft_board_setup(): check for CONFIG_TYPEC_FUSB302 instead of
+   CONFIG_MISC_INIT_R to reflect the above change
+ * Drop adding 'CONFIG_MISC_INIT_R' to rock5b-rk3588_defconfig because of
+   the reworked autoprobing
+ * Log an error message if tcpm_send_queued_message() exits early
+ * Add R-b for the rockchip specific changes from Kever Yang
+ * Increase the timeout in tcpm_pd_transmit(), which seems to be the issue
+   Sören Moch ran into. I could not really reproduce it. Please test if this
+   helps with your supply (and share the logs if it does not help). I noticed
+   this version has issues with an old PD capable powerbank I own. I'm still
+   looking into that but wanted to share a new version so that the other
+   changes can get reviewed.
+
+Changes since PATCHv2:
+ * Rebase to latest master (a70d991212c9)
+ * Drop Wang Jie from Cc, since his address bounces
+ * I did not add a test suite. I fully agree, that it would be nice to have
+   one, but it is also a lot of work. Just emulating a FUSB302 is not enough,
+   we also need to emulate the remote USB-PD device to make this useful.
+   Without that we would only test what happens when a non-responsive USB-PD
+   supply is attached and that is the boring, very simple path in this code.
+   On the other hand implementing an emulated USB-C PD remote side more or less
+   requires implementing another big state machine.
+ * Add documentation for the 'tcpm' command (Simon Glass)
+ * I also got asked to add more documentation for the feature in general. I'm
+   not really sure what is needed. At least Tim Harvey managed to use it
+   considering he got stusb4500 working on top of PATCHV2. If there are more
+   specific requests I can write something.
+ * Just like PATCHv1, PATCHv2 received a 'Tested-by: Soeren Moch <smoch@web.de>',
+   which I did not take over. This time the changes are a lot smaller, but
+   the different handling of timeouts might have broken something. (On my end
+   things still behave correctly of course, otherwise I wouldn't have sent
+   this series)
+ * Address feedback from Marek Vasut
+  - TCPM core
+    - drop useless "failure" function
+    - replace printf with log in TCPM command code
+    - invert some conditions to reduce indent
+    - use read_poll_timeout() in tcpm_pd_transmit()
+    - did not add any more 'static' keywords to functions, the non-static
+      TCPM functions are exported and called from the fusb302 driver.
+    - add a safety guard to tcpm_send_queued_message(), which stops
+      the loop if more than 100 messages are send directly after each
+      other. This should never happen anyways, but it's better to exit
+      cleanly if the code runs astray.
+  - FUSB302 driver
+    - Drop default initialization for most local ret variables
+    - Make some local variables constant
+    - Make set_polarity callback optional on the uclass level and drop the
+      empty FUSB302 implementation
+    - Change buffer initialization in send message function
+    - Create define for max. message length magic value
+  - Rock 5B board code
+    - Add comment why misc_init_r explicitly initializes PD
+    - Split defconfig and DT into separate patches (Kever Yang)
+
+Changes since PATCHv1:
+ * tcpm: split uclass specific code to tcpm-uclass
+ * tcpm_print_info: move printing part to cmd/tcpm.c
+ * tcpm_print_info: report more information
+   - PD revision
+   - Cable orientation
+   - Power role
+   - Data role
+   - Print TCPM state based on connection status
+ * tcpm: use "struct udevice *dev" instead of "struct tcpm_port *port"
+   as function argument in most places and drop dev from the tcpm_port
+   struct
+ * tcpm: avoid useless kzalloc + copy + free for incoming events
+ * tcpm: use dev_get_uclass_plat() for tcpm_port
+ * tcpm: run tcpm_port_init() and tcpm_poll_event() from UCLASS post_probe()
+ * tcpm/fusb302: get rid of tcpc_dev by using dm_tcpm_ops() for the
+   function pointers and introducing get_connector_node() for the
+   ofnode
+ * fusb302: use "struct udevice *dev" instead of "struct fusb302_chip *chip"
+   as function argument and drop dev from the fusb302_chip struct
+ * fusb302: drop multiple unused members from fusb302_chip
+ * fusb302: directly use udelay instead of usleep_range define
+ * fusb302: use fusb302_ prefix for all functions. Afterwards tcpm_ prefix
+   is only used for the tcpm code itself
+ * fusb302: move fusb302_poll_event() to avoid forward defintion
+ * fusb302: drop probe function
+ * fusb302: drop unused LOG_BUFFER defines
+ * roughly 20% of all lines of the series changed between v1 and v2, so
+   I did not collect the Tested-by from Soeren Moch
+
+Greetings,
+
+-- Sebastian
+
+Sebastian Reichel (6):
+  usb: tcpm: add core framework
+  usb: tcpm: fusb302: add driver
+  board: rock5b-rk3588: enable USB-C in operating system
+  rockchip: rk3588-rock-5b: Add USB-C controller to u-boot.dtsi
+  rockchip: rock5b-rk3588: Enable USB-C PD support
+  MAINTAINERS: add TCPM section
+
+ MAINTAINERS                               |    9 +
+ Makefile                                  |    1 +
+ arch/arm/dts/rk3588-rock-5b-u-boot.dtsi   |   28 +
+ board/radxa/rock5b-rk3588/Makefile        |    6 +
+ board/radxa/rock5b-rk3588/rock5b-rk3588.c |   16 +
+ cmd/Kconfig                               |    7 +
+ cmd/Makefile                              |    1 +
+ cmd/tcpm.c                                |  136 ++
+ configs/rock5b-rk3588_defconfig           |    4 +
+ doc/usage/cmd/tcpm.rst                    |   66 +
+ doc/usage/index.rst                       |    1 +
+ drivers/usb/Kconfig                       |    2 +
+ drivers/usb/tcpm/Kconfig                  |   16 +
+ drivers/usb/tcpm/Makefile                 |    4 +
+ drivers/usb/tcpm/fusb302.c                | 1323 ++++++++++++
+ drivers/usb/tcpm/fusb302_reg.h            |  177 ++
+ drivers/usb/tcpm/tcpm-internal.h          |  173 ++
+ drivers/usb/tcpm/tcpm-uclass.c            |  149 ++
+ drivers/usb/tcpm/tcpm.c                   | 2288 +++++++++++++++++++++
+ include/dm/uclass-id.h                    |    1 +
+ include/usb/pd.h                          |  516 +++++
+ include/usb/tcpm.h                        |   99 +
+ 22 files changed, 5023 insertions(+)
+ create mode 100644 board/radxa/rock5b-rk3588/Makefile
+ create mode 100644 board/radxa/rock5b-rk3588/rock5b-rk3588.c
+ create mode 100644 cmd/tcpm.c
+ create mode 100644 doc/usage/cmd/tcpm.rst
+ create mode 100644 drivers/usb/tcpm/Kconfig
+ create mode 100644 drivers/usb/tcpm/Makefile
+ create mode 100644 drivers/usb/tcpm/fusb302.c
+ create mode 100644 drivers/usb/tcpm/fusb302_reg.h
+ create mode 100644 drivers/usb/tcpm/tcpm-internal.h
+ create mode 100644 drivers/usb/tcpm/tcpm-uclass.c
+ create mode 100644 drivers/usb/tcpm/tcpm.c
+ create mode 100644 include/usb/pd.h
+ create mode 100644 include/usb/tcpm.h
+
 -- 
 2.45.2
 
