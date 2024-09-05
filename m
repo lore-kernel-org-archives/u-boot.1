@@ -4,77 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62D35CD4F59
-	for <u-boot@archiver.kernel.org>; Thu,  5 Sep 2024 07:44:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0047CD4F59
+	for <u-boot@archiver.kernel.org>; Thu,  5 Sep 2024 07:47:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C11F088BF2;
-	Thu,  5 Sep 2024 09:44:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 70F9288BD6;
+	Thu,  5 Sep 2024 09:47:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="X/45RkYt";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 265AF88C03; Thu,  5 Sep 2024 09:44:06 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0946988AE4
- for <u-boot@lists.denx.de>; Thu,  5 Sep 2024 09:44:04 +0200 (CEST)
+ id CB67588C03; Thu,  5 Sep 2024 09:47:03 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 318A388549
+ for <u-boot@lists.denx.de>; Thu,  5 Sep 2024 09:47:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5bef295a45bso123307a12.0
- for <u-boot@lists.denx.de>; Thu, 05 Sep 2024 00:44:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725522243; x=1726127043; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HSiUwKbpsL9xBR38g2h2ocs5dV0Zd57KcdAASTjjY28=;
- b=X/45RkYt/03rbpMpDVyo7DEaVxthTUD+rcz9lFHWztQtDncKI6f0BnDQSJoEPS5geI
- jmLOTiI/DRKs6laJon6Oc7aHC63Cl894C6bmgFXN1rlfR8PZiuvMogV/Pwftj7hAvwWr
- zs/Vdm2UdFdCTgs+L6Va3y/QbBjvrDa/vOukIVjO0pYIbX4WWpQbMJc0TxWOrJqxytGw
- 1phX01ZmZ1N20bJYNAqHQ9Yh/AOOhklSSQjXQ95XdrYon2OlaCAcgQqtTd+M9BNPxj9s
- STtJi/GbUgXBGq1DimceiD+mmlJWq7Q9nOCHLytUPZB7LoygsfJeZIW/QJahqVfeoFv9
- O+Ww==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725522243; x=1726127043;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=HSiUwKbpsL9xBR38g2h2ocs5dV0Zd57KcdAASTjjY28=;
- b=UbqlgH/q6D3GUhALKJcH7ZuBz9Kc33e8fXPQtZNlG4iX4xXbJpLKJs0wDQV2MTaNe0
- rGfYFyGXzHIs7JOuieQgIbAV3yeA62Sq1EzkehRtBvtNiua4DMsWPb3qkyUUYXILyC4A
- wKq1+07L4n3bSJj0jMGsmJnoptRTEzI+Zvi3zR0K08bdwsInxv/GMe0yQIX5R7k9GO7t
- fTzCPEzOTdex2/N8bRVlbctJ+7oFuyE5w1/Gk+tImm8nPzfNK1t6vuizRULyCYWZCC6B
- 8MCw4mamNEUhwnREHvSdqzu9eDnIWUYrqGjCja+kTq24Ep84vQgZvCeIle6TqTKCTwm3
- aCjA==
-X-Gm-Message-State: AOJu0YwBAdMkO1XwfyMxlZb5Mc6a9vJ+zDHT12ZE1UeZkTD/Yy1pyO3q
- jdNbbMwP2AbAN0lRL4oZEJuGohKO0qvPFJoBn/40lgXDa/gF7pODXTL59obnT6JGcouwpZeta4g
- p3+7yCaCl6MaIoi5crO88Sjs3bIDa39NFVh34DQ==
-X-Google-Smtp-Source: AGHT+IFgvr//20Yk3Y6erP+JwKCSl9TcRlnkm/YdGrgjKRsf2LtYu9x3MdAkf/YfWZfzzS5l45rDLJgEilsXR1cm+fM=
-X-Received: by 2002:a05:6402:210b:b0:5c2:58fe:9304 with SMTP id
- 4fb4d7f45d1cf-5c3cd774308mr947630a12.1.1725522243232; Thu, 05 Sep 2024
- 00:44:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=vincent.stehle@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0F3F9FEC;
+ Thu,  5 Sep 2024 00:47:27 -0700 (PDT)
+Received: from debian (X72Y076X74.nice.arm.com [10.34.125.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 896B63F66E;
+ Thu,  5 Sep 2024 00:46:58 -0700 (PDT)
+Date: Thu, 5 Sep 2024 09:46:55 +0200
+From: Vincent =?utf-8?Q?Stehl=C3=A9?= <vincent.stehle@arm.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Eugene Uriev <eugeneuriev@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Richard Weinberger <richard@nod.at>, Sean Anderson <seanga2@gmail.com>
+Subject: Re: [PATCH v3 0/3] efi: Start tidying up memory management
+Message-ID: <Ztlh70H-G6eP0wOr@debian>
+Mail-Followup-To: Simon Glass <sjg@chromium.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Tom Rini <trini@konsulko.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Eugene Uriev <eugeneuriev@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Richard Weinberger <richard@nod.at>,
+ Sean Anderson <seanga2@gmail.com>
+References: <20240901222259.456932-1-sjg@chromium.org>
 MIME-Version: 1.0
-References: <20240830114057.891069-1-sughosh.ganu@linaro.org>
- <dc2c0bd1-3aa7-4347-a4d6-5754a40e5b7e@amd.com>
- <CADg8p95OdP5DE39VO+2uu28q_MeYFD1qqUZOvoAXQwUztBGZmA@mail.gmail.com>
- <6f1e9198-e9ef-46e3-afae-62b3f84d97c6@amd.com>
- <CADg8p97A+CJjmEtiVVU3S4GLvEie2FFNi6nN2Ho4ZtAceddJ=g@mail.gmail.com>
- <17fdf962-20b7-4bb9-93ba-bdb7335c4762@amd.com>
-In-Reply-To: <17fdf962-20b7-4bb9-93ba-bdb7335c4762@amd.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Thu, 5 Sep 2024 13:13:52 +0530
-Message-ID: <CADg8p979GVQ+bk4RYUmE94Fnd1jQ6sv41V82ZRW=+gjRhn6dwA@mail.gmail.com>
-Subject: Re: [PATCH 0/6] Miscellaneous FWU fixes
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240901222259.456932-1-sjg@chromium.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,103 +73,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 5 Sept 2024 at 13:09, Michal Simek <michal.simek@amd.com> wrote:
->
->
->
-> On 9/5/24 09:38, Sughosh Ganu wrote:
-> > On Thu, 5 Sept 2024 at 13:03, Michal Simek <michal.simek@amd.com> wrote:
-> >>
-> >>
-> >>
-> >> On 9/5/24 08:24, Sughosh Ganu wrote:
-> >>> On Wed, 4 Sept 2024 at 17:30, Michal Simek <michal.simek@amd.com> wrote:
-> >>>>
-> >>>>
-> >>>>
-> >>>> On 8/30/24 13:40, Sughosh Ganu wrote:
-> >>>>>
-> >>>>> The following set of patches are miscellaneous fixes and some
-> >>>>> hardening of the FWU update logic.
-> >>>>>
-> >>>>> Sughosh Ganu (6):
-> >>>>>      fwu: v2: perform some checks before reading metadata
-> >>>>>      fwu: v2: try reading both copies of metadata
-> >>>>>      fwu: v1: do a version check for the metadata
-> >>>>>      fwu: check all images for transitioning out of Trial State
-> >>>>>      fwu: add dependency checks for selecting FWU metadata version
-> >>>>>      fwu: do not allow capsule processing on exceeding Trial Counter
-> >>>>>        threshold
-> >>>>>
-> >>>>>     include/fwu.h            | 11 ++++++
-> >>>>>     lib/fwu_updates/Kconfig  |  1 +
-> >>>>>     lib/fwu_updates/fwu.c    | 31 +++++++++++++++-
-> >>>>>     lib/fwu_updates/fwu_v1.c | 18 +++++++--
-> >>>>>     lib/fwu_updates/fwu_v2.c | 80 ++++++++++++++++++++++------------------
-> >>>>>     5 files changed, 99 insertions(+), 42 deletions(-)
-> >>>>>
-> >>>>
-> >>>> I found one more thing.
-> >>>>
-> >>>> I did this change
-> >>>>
-> >>>> diff --git a/tools/mkfwumdata.c b/tools/mkfwumdata.c
-> >>>> index fbc2067bc12d..dab9530e499c 100644
-> >>>> --- a/tools/mkfwumdata.c
-> >>>> +++ b/tools/mkfwumdata.c
-> >>>> @@ -293,7 +293,7 @@ static void fwu_fill_version_specific_mdata(struct
-> >>>> fwu_mdata_object *mobj)
-> >>>>            struct fwu_mdata *mdata = mobj->mdata;
-> >>>>
-> >>>>            mdata->metadata_size = mobj->size;
-> >>>> -       mdata->desc_offset = sizeof(struct fwu_mdata);
-> >>>> +       mdata->desc_offset = 0x21; sizeof(struct fwu_mdata);
-> >>>>
-> >>>>            for (i = 0; i < MAX_BANKS_V2; i++)
-> >>>>                    mdata->bank_state[i] = i < mobj->banks ?
-> >>>>
-> >>>>
-> >>>> to break desc_offset location. I generated mdata structure and write it to
-> >>>> primary mdata partition.
-> >>>>
-> >>>> This has been spotted by (my debug) which is the reason why I did it.
-> >>>>
-> >>>>           if (g_mdata.desc_offset != FWU_IMG_DESC_OFFSET) {
-> >>>>                   printf("mdata offset is not 0x20\n");
-> >>>>                   return false;
-> >>>>           }
-> >>>>
-> >>>> But I got one more message below which
-> >>>>
-> >>>> mdata offset is not 0x20
-> >>>> Both FWU metadata copies are valid but do not match. Restoring the secondary
-> >>>> partition from the primary
-> >>>
-> >>> The reason why this logic is in place is to handle the scenario
-> >>> whereby, during the metadata update, the primary copy gets updated
-> >>> correctly, but due to some reason (like a power cut), the secondary
-> >>> copy does not -- this is because the primary copy gets updated first.
-> >>> In such a scenario, the secondary copy of metadata can be then
-> >>> restored from the primary copy. In the scenario where the primary copy
-> >>> is corrupted, it will show up in the crc check, and will get restored
-> >>> from the secondary copy.
-> >>
-> >> But in this case - CRC of primary is correct but data inside is wrong because
-> >> offset is at 0x21 not at 0x20.
-> >
-> > How will this event play out ? Am I missing something ? When the
-> > metadata is getting updated, the offset will be written as 0x20, and
-> > not 0x21. And in case the metadata gets corrupted, the CRC check would
-> > fail and the primary partition would get restored from the secondary
-> > (assuming that the secondary copy is correct).
->
-> It is not after update. It is initial state with incorrect mdata structure.
+On Sun, Sep 01, 2024 at 04:22:56PM -0600, Simon Glass wrote:
+> We have been discussing the state of EFI memory management for some
+> years so I thought it might be best to send a short series showing some
+> of the issues we have talked about.
+> 
+> This one just deals with memory allocation. It provides a way to detect
+> EFI 'page allocations' when U-Boot' malloc() should be used. It should
+> help us to clean up this area of U-Boot.
+> 
+> It also updates EFI to use U-Boot memory allocation for the pool. Most
+> functions use that anyway and it is much more efficient. It also avoids
+> allocating things 'in space' in conflict with the loaded images.
 
-Well, if the metadata partition is being written with incorrect data,
-not sure how we combat that (or even if we should). After all, the
-spec clearly states that the metadata cannot be protected against
-malicious writes. The logic that you pointed out earlier is to handle
-the scenario where the primary partition got updated, but the
-secondary did not.
+Hi Simon,
 
--sughosh
+Thank you for this series.
+
+I did test it on top of v2024.10-rc4 with AArch64 simulators (FVP & Qemu), with
+OS boots and ACS-IR, and I see no regression. Same with sandbox on x86 and the
+python tests.
+
+Best regards,
+Vincent.
+
+> 
+> This series also includes a little patch to show more information in
+> the index for the EFI pages.
+> 
+> Note that this series is independent from Sugosh's lmb series[1],
+> although I believe it will point the way to simplifying some of the
+> later patches in that series.
+> 
+> Overall, some issues which should be resolved are:
+> - allocation inconsistency, e.g. efi_add_protocol() uses malloc() but
+>   efi_dp_dup() does not (this series makes a start)
+> - change efi_bl_init() to register events later, when the devices are
+>   actually used
+> - rather than efi_set_bootdev(), provide a bootstd way to take note of
+>   the device images came from and allow EFI to query that when needed
+> - EFI_LOADER_BOUNCE_BUFFER - can use U-Boot bounce buffers?
+> 
+> Minor questions on my mind:
+> - is unaligned access useful? Is there a performance penalty?
+> - API confusion about whether something is an address or a pointer
+> 
+> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=416441
+> 
+> Changes in v3:
+> - Add new patch to drop the memset() from efi_alloc()
+> - Drop patch to convert device_path allocation to use malloc()
+> 
+> Changes in v2:
+> - Drop patch 'Show more information in efi index'
+> - Drop patch 'Avoid pool allocation in efi_get_memory_map_alloc()'
+> - Add the word 'warning', use log_warning() and show the end address
+> 
+> Simon Glass (3):
+>   efi: Drop the memset() from efi_alloc()
+>   efi: Allow use of malloc() for the EFI pool
+>   efi: Show the location of the bounce buffer
+> 
+>  common/dlmalloc.c            |   7 +++
+>  include/efi_loader.h         |  29 ++++++++-
+>  include/malloc.h             |   7 +++
+>  lib/efi_loader/efi_bootbin.c |  11 ++++
+>  lib/efi_loader/efi_memory.c  | 119 ++++++++++++++++++++++++-----------
+>  5 files changed, 136 insertions(+), 37 deletions(-)
+> 
+> -- 
+> 2.34.1
+> 
