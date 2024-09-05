@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CCABCD5BAE
-	for <u-boot@archiver.kernel.org>; Thu,  5 Sep 2024 12:04:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9048ACD5BAE
+	for <u-boot@archiver.kernel.org>; Thu,  5 Sep 2024 12:10:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0801B88C88;
-	Thu,  5 Sep 2024 14:04:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DBEA588C97;
+	Thu,  5 Sep 2024 14:10:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="puRqdxuc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bigAIRbF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AA4B88C9C; Thu,  5 Sep 2024 14:04:23 +0200 (CEST)
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [IPv6:2a00:1450:4864:20::22f])
+ id 071E988C9F; Thu,  5 Sep 2024 14:10:25 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5C4888C87
- for <u-boot@lists.denx.de>; Thu,  5 Sep 2024 14:04:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C86E688C88
+ for <u-boot@lists.denx.de>; Thu,  5 Sep 2024 14:10:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2f4f2868621so8414331fa.0
- for <u-boot@lists.denx.de>; Thu, 05 Sep 2024 05:04:20 -0700 (PDT)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5bf01bdaff0so782082a12.3
+ for <u-boot@lists.denx.de>; Thu, 05 Sep 2024 05:10:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1725537860; x=1726142660; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1725538222; x=1726143022; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=vDqrqgDO4jM7tZFMhPKU7AJFmjTXperAU3Io71d1HQE=;
- b=puRqdxucdN5XXAOi8w9YNOZcnoezjiRNRjOz01rrj1m1lZueFx7l4aUGa8fRvcvEPv
- gbLGg9PV+jKeEbWxtxb9v+XYo7fivqmmp3JKEeTaQlQI39Am2rYWCHd/hymB53K5IT9p
- Jxpqo3S11CeRm4pGfZlak7heZPquTgsEypzzQrfQyVOuDIPOYRoEzaxXQ0urqdu9ckF3
- dWdJVnFxy3NBnPMk1VKtDa/1zSRB2Le4CLDaUJXAOfPj4CBNv9VLR53AqKlpOrLHkOWR
- LiBCaBJh/f0yVHDh7AJ9xcNM73A/nriGJkD+MAIbaiH8jJF/tvtGWSkYebo2qsTpnyVL
- jQVQ==
+ bh=fe/XupOI/aueAnNpDPW6cnN9NwjnF2cOSz3s2meQy00=;
+ b=bigAIRbFN/0PfEzskXEh6x2/7kS8uGjpxCb2/sQC31GY1bMQo71AKyR34URtoZgZrZ
+ p9EBP4PHqOtFUyWkmo8BajhnTX7S0FNVy+5EsQ+qhne8QdSaYHEaJlchQ/I1gDJ2HtBP
+ KrAd+Fs6LWpnAw0Xf1cCfhEfeXr/I2k9U+63sjeAVD3/XRmKX/06MzghkJPKrUAqF/nm
+ QIqC0HBTSdcZJKOaGgXC/AbipiKDPxNkdVECevaKt49Pg8YbvO8u+WuJw/TmxUwfnl1a
+ Cf0TjI8HHUiDGpefgFfEGIQN2F/28tI/7kDFGimhhpeIYM7mjFCgO3JaA7MTSQNW3VmM
+ 1YuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725537860; x=1726142660;
+ d=1e100.net; s=20230601; t=1725538222; x=1726143022;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=vDqrqgDO4jM7tZFMhPKU7AJFmjTXperAU3Io71d1HQE=;
- b=D5HWGlJ/WY9BzE4tQBiNO+6LRoB5JdnPETmH2DncBhFUdsrJhzjwnJBdFct6/UeDaX
- dEd0qdu65WveoDlQm2dF1mO0U9evOnbnRRpOfQurXtjop09EoATw/k2jpZRqH47kJYTC
- jV0YBMTo/OtU6SMqSNNI0bx/HYKaL/u35OvWGkAhFI+U/MYCwXRoCKxDf9Vj4WUHzrAh
- bbr64h9G+WUr6hBgZlKHYVRGL9qr3cHGtN16seNrRojBP70jw5y+qrzyY+BVLb34QJRy
- qOf0RkJcwKx1HmUPEoLvUtqWS0GPChD2WlKJG2bx2cwe+TvgJab2reQnLDMMk0958dnx
- yV4Q==
+ bh=fe/XupOI/aueAnNpDPW6cnN9NwjnF2cOSz3s2meQy00=;
+ b=VCamkDNtmD5JBW9FxhniOC4lZss9T9O39BLwy6UQ5LfIvpHKGbtCXh8oKmllsuxRGe
+ 0TNoGo70u5Yf4XyeYBYG4gE9eZdzIn9a+gmq1mEkaZDTgw/j6qW3Y2RCzX3/o2j+5nmV
+ 5ekRKWVETcUxgb8qv0fkUUXF3dsqDtA1IefMJlnEEFUdaNrooFlGQv+aZDXKofC0AjGF
+ YJM2Tnm1hiob1vU0ROqLF/oOWYeU+3RyadAoGBLemgsznm2oLspRz+sxsrodhomcrQra
+ b/q+//4L0R3cNP/eH6hUzuSWejS24kW/wp2I5HMf3VIVS4LvkPVmAMEud2/iKUoke+lH
+ 758A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV139RRYtn+dwd4SNVAz4mbE8N9f6uZbd1YwMU4HFsP1szrCy3X6gb1/haAAxp8XurmhSKso3g=@lists.denx.de
-X-Gm-Message-State: AOJu0YyCvSs3EGPcosnDgvhonBBXwysBAh2kZ477fZkerVnK1kwx3Y2V
- +wvVrDZpzLRjali5Aj/Fv5MkkVTO1nRq3cZ5l6ZG+WLIpVcriOjh74dcYS2Pe7Y=
-X-Google-Smtp-Source: AGHT+IETSCL07Ec/NaPoQOehA2FJEbRNstxfOKOK9krRaFBEqJgvwIMSpSpE+m6NspAxfyz0GHTGuA==
-X-Received: by 2002:a2e:b8c4:0:b0:2ef:2b38:879c with SMTP id
- 38308e7fff4ca-2f62902e20amr133003231fa.3.1725537859674; 
- Thu, 05 Sep 2024 05:04:19 -0700 (PDT)
+ AJvYcCUKEaNxJRDYVEVNqyv46HeZy6Cf+R2VNXZg3kNZCmpHF11E3HxQYvCNM+6go03FqQ6UqimOG6U=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyu5YnPam7cS2vcUVGOBaJ888yh5zdIqSX4iuehO7fNEVoYby8z
+ ocm2JtWpGDt9ociTncIlHl2I7S1W2DuPbDlIP+MB+WXTf/oFBEHG8udaVwMD0GI=
+X-Google-Smtp-Source: AGHT+IECoRB9oz0o1DpF1R4C5n7I5S+ZxpB2D1qsbl8seoPbji8VHzQIeBSv3YQBDbg3p2CxNUFzZA==
+X-Received: by 2002:a05:6402:2813:b0:5c3:cd5b:3a0f with SMTP id
+ 4fb4d7f45d1cf-5c3cd5b3c01mr1890661a12.15.1725538222031; 
+ Thu, 05 Sep 2024 05:10:22 -0700 (PDT)
 Received: from ?IPV6:2a02:8109:aa0d:be00::8db? ([2a02:8109:aa0d:be00::8db])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c3cc69ac64sm1158088a12.77.2024.09.05.05.04.18
+ 4fb4d7f45d1cf-5c3cc529241sm1169127a12.11.2024.09.05.05.10.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Sep 2024 05:04:19 -0700 (PDT)
-Message-ID: <a2261c8b-08a5-4dc4-9397-eee8596791b7@linaro.org>
-Date: Thu, 5 Sep 2024 14:04:18 +0200
+ Thu, 05 Sep 2024 05:10:21 -0700 (PDT)
+Message-ID: <18791918-0b81-450c-a441-7c464e87430b@linaro.org>
+Date: Thu, 5 Sep 2024 14:10:20 +0200
 MIME-Version: 1.0
 User-Agent: Betterbird (Linux)
-Subject: Re: [PATCH 0/4] clk/qcom: implement clk dump callback
+Subject: Re: [PATCH 2/2] net: phy: add Qualcomm QCA807x driver
 Content-Language: en-US
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20240819-b4-qcom-clk-dump-v1-0-182cf77c23a2@linaro.org>
+To: Robert Marko <robert.marko@sartura.hr>, trini@konsulko.com,
+ joe.hershberger@ni.com, rfried.dev@gmail.com, u-boot@lists.denx.de
+Cc: j.beck@linefinity.com
+References: <20240522100638.224484-1-robert.marko@sartura.hr>
+ <20240522100638.224484-2-robert.marko@sartura.hr>
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240819-b4-qcom-clk-dump-v1-0-182cf77c23a2@linaro.org>
+In-Reply-To: <20240522100638.224484-2-robert.marko@sartura.hr>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,191 +97,290 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Lukasz,
+Hi all,
 
-Could you take a quick look at this?
+Not sure what the status of this series is, seems like it slipped by my
+inbox. Both patches are assigned to me on patchwork but they only affect
+the phy subsystem...
 
-Thanks and kind regards,
+At least for this one:
 
-On 19/08/2024 21:34, Caleb Connolly wrote:
-> Add support for dumping a few of the clocks used on Qualcomm platforms.
-> Naming the Global PLL's, Root Clock Generators, and gate clocks.
+Acked-by: Caleb Connolly <caleb.connolly@linaro.org>
+
+
+
+On 22/05/2024 12:06, Robert Marko wrote:
+> This adds driver for the Qualcomm QCA8072 and QCA8075 PHY-s.
 > 
-> This helps a lot with platform bringup and feature enablement by making
-> it easy to sanity check that the clocks are programmed correctly.
+> They are 2 or 5 port IEEE 802.3 clause 22 compliant
+> 10BASE-Te, 100BASE-TX and 1000BASE-T PHY-s.
 > 
-> == Usage ==
+> They feature 2 SerDes, one for PSGMII or QSGMII connection with MAC,
+> while second one is SGMII for connection to MAC or fiber.
 > 
-> Enable CONFIG_CMD_CLK and "#define LOG_DEBUG" at the top of
-> qcom-<soc>.c.
+> Both models have a combo port that supports 1000BASE-X and 100BASE-FX
+> fiber (Currently not supported in U-Boot)
 > 
-> If your SoC doesn't yet define the debug data for clocks, it can be
-> added using the Linux driver as a reference.
+> Each PHY inside of QCA807x series has 2 digitally controlled output only
+> pins that natively drive LED-s.
 > 
-> The "clk dump" command should print the states of all the gates, GPLLs
-> and RCGs for your SoC.
+> These PHY-s are commonly used in Qualcomm IPQ40xx, IPQ60xx and IPQ807x
+> boards.
 > 
-> == Glossary ==
-> 
-> RCG: Root Clock Generator
-> * Takes in some fairly arbitrary high freq clock (configurable clock
-> source and options for taking just even pulses and other things)
-> * Output frequency = input_freq * (m/n) * (1/d) where m/n are arbitrary
-> 8 or 16-bit values (depending on the RCG), and d is a number (with
-> support for .5 offsets).
-> 
-> GPLL: Global Phase Locked Loop
-> * Crystal as input
-> * integer multiplier + exponent part (2^-40)
-> 
-> Gate: Simple on/off clock
-> * Put between RCGs and the peripherals they power
-> * Required to allow for correct power sequencing
-> 
-> If you do the maths manually using the equations from "clk dump", the
-> numbers should roughly line up by they're likely to be out by a handful
-> of MHz. They output is formatted so that it can be pasted directly into
-> the python interpreter.
-> 
-> == Example output ==
-> 
-> => clk dump
->  Rate               Usecnt      Name
-> ------------------------------------------
->  38400000             0        |-- xo-board
->  32764                0        |-- sleep-clk
-> 
-> qcom_clk qcom_clk:
-> Gate Clocks:
-> GCC_AGGRE_USB3_SEC_AXI_CLK      : 
-> GCC_CFG_NOC_USB3_SEC_AXI_CLK    : 
-> GCC_QUPV3_WRAP0_S0_CLK          : 
-> GCC_QUPV3_WRAP0_S1_CLK          : 
-> GCC_QUPV3_WRAP0_S2_CLK          : 
-> GCC_QUPV3_WRAP0_S3_CLK          : 
-> GCC_QUPV3_WRAP0_S4_CLK          : 
-> GCC_QUPV3_WRAP0_S5_CLK          : 
-> GCC_QUPV3_WRAP0_S6_CLK          : 
-> GCC_QUPV3_WRAP0_S7_CLK          : 
-> GCC_QUPV3_WRAP1_S0_CLK          : 
-> GCC_QUPV3_WRAP1_S1_CLK          : ON
-> GCC_QUPV3_WRAP1_S3_CLK          : 
-> GCC_QUPV3_WRAP1_S4_CLK          : 
-> GCC_QUPV3_WRAP1_S5_CLK          : 
-> GCC_QUPV3_WRAP1_S6_CLK          : 
-> GCC_QUPV3_WRAP1_S7_CLK          : 
-> GCC_QUPV3_WRAP_0_M_AHB_CLK      : 
-> GCC_QUPV3_WRAP_0_S_AHB_CLK      : 
-> GCC_QUPV3_WRAP_1_M_AHB_CLK      : ON
-> GCC_QUPV3_WRAP_1_S_AHB_CLK      : ON
-> GCC_SDCC2_AHB_CLK               : ON
-> GCC_SDCC2_APPS_CLK              : ON
-> GCC_SDCC4_AHB_CLK               : 
-> GCC_SDCC4_APPS_CLK              : 
-> GCC_UFS_CARD_AHB_CLK            : 
-> GCC_UFS_CARD_AXI_CLK            : 
-> GCC_UFS_CARD_CLKREF_CLK         : ON
-> GCC_UFS_CARD_ICE_CORE_CLK       : 
-> GCC_UFS_CARD_PHY_AUX_CLK        : 
-> GCC_UFS_CARD_RX_SYMBOL_0_CLK    : 
-> GCC_UFS_CARD_RX_SYMBOL_1_CLK    : 
-> GCC_UFS_CARD_TX_SYMBOL_0_CLK    : 
-> GCC_UFS_CARD_UNIPRO_CORE_CLK    : 
-> GCC_UFS_MEM_CLKREF_CLK          : ON
-> GCC_UFS_PHY_AHB_CLK             : ON
-> GCC_UFS_PHY_AXI_CLK             : ON
-> GCC_UFS_PHY_ICE_CORE_CLK        : ON
-> GCC_UFS_PHY_PHY_AUX_CLK         : ON
-> GCC_UFS_PHY_RX_SYMBOL_0_CLK     : ON
-> GCC_UFS_PHY_RX_SYMBOL_1_CLK     : ON
-> GCC_UFS_PHY_TX_SYMBOL_0_CLK     : ON
-> GCC_UFS_PHY_UNIPRO_CORE_CLK     : ON
-> GCC_USB30_PRIM_MASTER_CLK       : ON
-> GCC_USB30_PRIM_MOCK_UTMI_CLK    : ON
-> GCC_USB30_PRIM_SLEEP_CLK        : ON
-> GCC_USB30_SEC_MASTER_CLK        : 
-> GCC_USB30_SEC_MOCK_UTMI_CLK     : 
-> GCC_USB30_SEC_SLEEP_CLK         : 
-> GCC_USB3_PRIM_CLKREF_CLK        : ON
-> GCC_USB3_PRIM_PHY_AUX_CLK       : ON
-> GCC_USB3_PRIM_PHY_COM_AUX_CLK   : ON
-> GCC_USB3_PRIM_PHY_PIPE_CLK      : ON
-> GCC_USB3_SEC_CLKREF_CLK         : ON
-> GCC_USB3_SEC_PHY_AUX_CLK        : 
-> GCC_USB3_SEC_PHY_PIPE_CLK       : 
-> GCC_USB3_SEC_PHY_COM_AUX_CLK    : 
-> GCC_USB_PHY_CFG_AHB2PHY_CLK     : ON
-> 
-> GPLL clocks:
-> | GPLL   | LOCKED | XO_BOARD  |  PLL_L     | ALPHA          |
-> +--------+--------+-----------+------------+----------------+
-> | GPLL0  | X      |  19200000 * (0x1f      + 0x0            * 2 ** -40 )/ 1000000
-> | GPLL1  | X      |  19200000 * (0x37      + 0x0            * 2 ** -40 ) / 1000000
-> | GPLL2  |        |  19200000 * (0x14      + 0x0            * 2 ** -40 ) / 1000000
-> | GPLL3  |        |  19200000 * (0x30      + 0x0            * 2 ** -40 )/ 1000000
-> | GPLL4  | X      |  19200000 * (0x29      + 0x0            * 2 ** -40 ) / 1000000
-> | GPLL5  |        |  19200000 * (0x30      + 0x0            * 2 ** -40 ) / 1000000
-> | GPLL6  |        |  19200000 * (0x0       + 0x0            * 2 ** -40 )/ 1000000
-> 
-> RCGs:
-> | NAME                             | ON | SRC | OUT_FREQ = input_freq * (m/n) * (1/d) | [CMD REG   ] |
-> +----------------------------------+----+-----+---------------------------------------+--------------+
-> GCC_USB30_PRIM_MASTER              | X  |   1 | input_freq * (   1/    1) * (1/4.5)   | [0x00000000]
-> GCC_USB30_PRIM_MOCK_UTMI           | X  |   0 | input_freq * (   1/    1) * (1/1  )   | [0x00000000]
-> GCC_USB3_PRIM_PHY_AUX              | X  |   0 | input_freq * (   1/    1) * (1/1  )   | [0x00000000]
-> GCC_USB30_SEC_MASTER               |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_USB30_SEC_MOCK_UTMI            |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_USB3_SEC_PHY_AUX               |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_SDCC2_APPS                     | X  |   5 | input_freq * (   1/    1) * (1/4  )   | [0x00000000]
-> GCC_SDCC4_APPS                     |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_QUPV3_WRAP0_CORE_2X            | X  |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x00000000]
-> GCC_QUPV3_WRAP0_S0                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_QUPV3_WRAP0_S1                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_QUPV3_WRAP0_S2                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_QUPV3_WRAP0_S3                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_QUPV3_WRAP0_S4                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_QUPV3_WRAP0_S5                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_QUPV3_WRAP0_S6                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_QUPV3_WRAP0_S7                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_QUPV3_WRAP1_S0                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_QUPV3_WRAP1_S1                 | X  |   6 | input_freq * ( 384/15625) * (1/1  )   | [0x00000000]
-> GCC_QUPV3_WRAP1_S2                 | X  |   0 | input_freq * (   1/    1) * (1/1  )   | [0x00000000]
-> GCC_QUPV3_WRAP1_S3                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_QUPV3_WRAP1_S4                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_QUPV3_WRAP1_S5                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_QUPV3_WRAP1_S6                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_QUPV3_WRAP1_S7                 |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_PCIE_0_AUX                     |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_PCIE_1_AUX                     |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_PCIE_PHY_REFGEN                | X  |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x00000000]
-> GCC_UFS_CARD_AXI                   | X  |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x00000000]
-> GCC_UFS_CARD_ICE_CORE              |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_UFS_CARD_UNIPRO_CORE           |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_UFS_CARD_PHY_AUX               |    |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x80000000]
-> GCC_UFS_PHY_AXI                    | X  |   1 | input_freq * (   1/    1) * (1/3  )   | [0x00000000]
-> GCC_UFS_PHY_ICE_CORE               | X  |   1 | input_freq * (   1/    1) * (1/2  )   | [0x00000000]
-> GCC_UFS_PHY_UNIPRO_CORE            | X  |   1 | input_freq * (   1/    1) * (1/4  )   | [0x00000000]
-> GCC_UFS_PHY_PHY_AUX                | X  |   0 | input_freq * (   1/    1) * (1/0.5)   | [0x00000000]
-> 
+> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
 > ---
-> Caleb Connolly (4):
->       clk/qcom: implement clk dump
->       clk/qcom: sdm845: add dump data
->       clk/qcom: sm6115: add debug data
->       clk/qcom: sm8250: add debug data
+>  drivers/net/phy/Kconfig   |   6 ++
+>  drivers/net/phy/Makefile  |   1 +
+>  drivers/net/phy/qca807x.c | 211 ++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 218 insertions(+)
+>  create mode 100644 drivers/net/phy/qca807x.c
 > 
->  drivers/clk/qcom/clock-qcom.c   | 117 ++++++++++++++++++++++++++++++++++++++++
->  drivers/clk/qcom/clock-qcom.h   |   6 +++
->  drivers/clk/qcom/clock-sdm845.c |  93 ++++++++++++++++++++++++++++++++
->  drivers/clk/qcom/clock-sm6115.c |  63 ++++++++++++++++++++++
->  drivers/clk/qcom/clock-sm8250.c | 115 +++++++++++++++++++++++++++++++++++++++
->  5 files changed, 394 insertions(+)
-> ---
-> change-id: 20240819-b4-qcom-clk-dump-e25a0198f6c0
-> base-commit: b7d5ce05b1b52136af09cf34541c6a91079a4b86
-> 
-> // Caleb (they/them)
-> 
+> diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
+> index 3d96938eab..cc79043b97 100644
+> --- a/drivers/net/phy/Kconfig
+> +++ b/drivers/net/phy/Kconfig
+> @@ -243,6 +243,12 @@ config PHY_NXP_TJA11XX
+>  	help
+>  	  Currently supports the NXP TJA1100 and TJA1101 PHY.
+>  
+> +config PHY_QCA807X
+> +	bool "Qualcomm QCA807x PHYs support"
+> +	help
+> +	  Currently supports the Qualcomm QCA8072, QCA8075 and the PSGMII
+> +	  control PHY.
+> +
+>  config PHY_REALTEK
+>  	bool "Realtek Ethernet PHYs support"
+>  
+> diff --git a/drivers/net/phy/Makefile b/drivers/net/phy/Makefile
+> index 2487f366e1..b2d31fe4f2 100644
+> --- a/drivers/net/phy/Makefile
+> +++ b/drivers/net/phy/Makefile
+> @@ -28,6 +28,7 @@ obj-$(CONFIG_PHY_MOTORCOMM) += motorcomm.o
+>  obj-$(CONFIG_PHY_NATSEMI) += natsemi.o
+>  obj-$(CONFIG_PHY_NXP_C45_TJA11XX) += nxp-c45-tja11xx.o
+>  obj-$(CONFIG_PHY_NXP_TJA11XX) += nxp-tja11xx.o
+> +obj-$(CONFIG_PHY_QCA807X) += qca807x.o
+>  obj-$(CONFIG_PHY_REALTEK) += realtek.o
+>  obj-$(CONFIG_PHY_SMSC) += smsc.o
+>  obj-$(CONFIG_PHY_TERANETICS) += teranetics.o
+> diff --git a/drivers/net/phy/qca807x.c b/drivers/net/phy/qca807x.c
+> new file mode 100644
+> index 0000000000..a851ff34a0
+> --- /dev/null
+> +++ b/drivers/net/phy/qca807x.c
+> @@ -0,0 +1,211 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (c) 2024 Sartura Ltd.
+> + *
+> + * Author: Robert Marko <robert.marko@sartura.hr>
+> + *
+> + * Qualcomm QCA8072 and QCA8075 PHY driver
+> + */
+> +
+> +#include <dm/device_compat.h>
+> +#include <linux/bitfield.h>
+> +#include <linux/bitops.h>
+> +#include <phy.h>
+> +
+> +#define PHY_ID_QCA8072			0x004dd0b2
+> +#define PHY_ID_QCA8075			0x004dd0b1
+> +#define PHY_ID_QCA807X_PSGMII		0x06820805
+> +#define PHY_ID_QCA807X_MASK		GENMASK(31, 0)
+> +
+> +#define QCA807X_CHIP_CONFIGURATION 				0x1f
+> +#define QCA807X_MMD7_1000BASE_T_POWER_SAVE_PER_CABLE_LENGTH	0x801a
+> +#define QCA807X_CONTROL_DAC_MASK				GENMASK(2, 0)
+> +/* List of tweaks enabled by this bit:
+> + * - With both FULL amplitude and FULL bias current: bias current
+> + *   is set to half.
+> + * - With only DSP amplitude: bias current is set to half and
+> + *   is set to 1/4 with cable < 10m.
+> + * - With DSP bias current (included both DSP amplitude and
+> + *   DSP bias current): bias current is half the detected current
+> + *   with cable < 10m.
+> + */
+> +#define QCA807X_CONTROL_DAC_BIAS_CURRENT_TWEAK			BIT(2)
+> +#define QCA807X_CONTROL_DAC_DSP_BIAS_CURRENT			BIT(1)
+> +#define QCA807X_CONTROL_DAC_DSP_AMPLITUDE			BIT(0)
+> +
+> +#define QCA807X_MMD7_LED_100N_1 	0x8074
+> +#define QCA807X_MMD7_LED_100N_2 	0x8075
+> +#define QCA807X_MMD7_LED_1000N_1 	0x8076
+> +#define QCA807X_MMD7_LED_1000N_2 	0x8077
+> +#define QCA807X_LED_TXACT_BLK_EN_2 	BIT(10)
+> +#define QCA807X_LED_RXACT_BLK_EN_2 	BIT(9)
+> +#define QCA807X_LED_GT_ON_EN_2 		BIT(6)
+> +#define QCA807X_LED_HT_ON_EN_2 		BIT(5)
+> +#define QCA807X_LED_BT_ON_EN_2 		BIT(4)
+> +
+> +/* PSGMII PHY specific */
+> +#define PSGMII_QSGMII_DRIVE_CONTROL_1 		0xb
+> +#define PSGMII_QSGMII_TX_DRIVER_MASK		GENMASK(7, 4)
+> +#define PQSGMII_TX_DRIVER_140MV				0x0
+> +#define PQSGMII_TX_DRIVER_160MV				0x1
+> +#define PQSGMII_TX_DRIVER_180MV				0x2
+> +#define PQSGMII_TX_DRIVER_200MV				0x3
+> +#define PQSGMII_TX_DRIVER_220MV				0x4
+> +#define PQSGMII_TX_DRIVER_240MV				0x5
+> +#define PQSGMII_TX_DRIVER_260MV				0x6
+> +#define PQSGMII_TX_DRIVER_280MV				0x7
+> +#define PQSGMII_TX_DRIVER_300MV				0x8
+> +#define PQSGMII_TX_DRIVER_320MV				0x9
+> +#define PQSGMII_TX_DRIVER_400MV				0xa
+> +#define PQSGMII_TX_DRIVER_500MV				0xb
+> +#define PQSGMII_TX_DRIVER_600MV				0xc
+> +#define PSGMII_MODE_CTRL 			0x6d
+> +#define PSGMII_MODE_CTRL_AZ_WORKAROUND_MASK 	GENMASK(3, 0)
+> +#define PSGMII_MMD3_SERDES_CONTROL		0x805a
+> +
+> +static int qca807x_config(struct phy_device *phydev)
+> +{
+> +	int control_dac, ret = 0;
+> +	bool dac_full_amplitude;
+> +	bool dac_full_bias_current;
+> +	bool dac_disable_bias_current_tweak;
+> +	ofnode node;
+> +
+> +	node = phy_get_ofnode(phydev);
+> +	if (!ofnode_valid(node))
+> +		return -EINVAL;
+> +
+> +	dac_full_amplitude = ofnode_read_bool(node, "qcom,dac-full-amplitude");
+> +	dac_full_bias_current = ofnode_read_bool(node, "qcom,dac-full-bias-current");
+> +	dac_disable_bias_current_tweak = ofnode_read_bool(node, "qcom,dac-disable-bias-current-tweak");
+> +
+> +	/* Check for Combo port */
+> +	if(phy_read(phydev, MDIO_DEVAD_NONE, QCA807X_CHIP_CONFIGURATION)) {
+> +		int psgmii_serdes;
+> +
+> +		/* Prevent PSGMII going into hibernation via PSGMII self test */
+> +		psgmii_serdes = phy_read_mmd(phydev, MDIO_MMD_PCS, PSGMII_MMD3_SERDES_CONTROL);
+> +		psgmii_serdes &= ~BIT(1);
+> +		ret = phy_write_mmd(phydev, MDIO_MMD_PCS, PSGMII_MMD3_SERDES_CONTROL, psgmii_serdes);
+> +	}
+> +
+> +	control_dac = phy_read_mmd(phydev, MDIO_MMD_AN, QCA807X_MMD7_1000BASE_T_POWER_SAVE_PER_CABLE_LENGTH);
+> +	control_dac &= ~QCA807X_CONTROL_DAC_MASK;
+> +	if (!dac_full_amplitude)
+> +		control_dac |= QCA807X_CONTROL_DAC_DSP_AMPLITUDE;
+> +	if (!dac_full_amplitude)
+> +		control_dac |= QCA807X_CONTROL_DAC_DSP_BIAS_CURRENT;
+> +	if (!dac_disable_bias_current_tweak)
+> +		control_dac |= QCA807X_CONTROL_DAC_BIAS_CURRENT_TWEAK;
+> +	ret = phy_write_mmd(phydev, MDIO_MMD_AN, QCA807X_MMD7_1000BASE_T_POWER_SAVE_PER_CABLE_LENGTH, control_dac);
+> +
+> +	phydev->supported = phydev->drv->features;
+> +	phydev->advertising = phydev->drv->features;
+> +
+> +	genphy_config_aneg(phydev);
+> +	genphy_restart_aneg(phydev);
+> +
+> +	return ret;
+> +}
+> +
+> +static int qca807x_psgmii_config(struct phy_device *phydev)
+> +{
+> +	int psgmii_az, tx_amp, ret = 0;
+> +	u32 tx_drive_strength;
+> +	ofnode node;
+> +
+> +	node = phy_get_ofnode(phydev);
+> +	if (!ofnode_valid(node))
+> +		return -EINVAL;
+> +
+> +	/* Default to 600mw if not defined */
+> +	if (ofnode_read_u32(node, "qcom,tx-drive-strength-milliwatt",
+> +	                    &tx_drive_strength))
+> +		tx_drive_strength = 600;
+> +
+> +	switch (tx_drive_strength) {
+> +	case 140:
+> +		tx_drive_strength = PQSGMII_TX_DRIVER_140MV;
+> +		break;
+> +	case 160:
+> +		tx_drive_strength = PQSGMII_TX_DRIVER_160MV;
+> +		break;
+> +	case 180:
+> +		tx_drive_strength = PQSGMII_TX_DRIVER_180MV;
+> +		break;
+> +	case 200:
+> +		tx_drive_strength = PQSGMII_TX_DRIVER_200MV;
+> +		break;
+> +	case 220:
+> +		tx_drive_strength = PQSGMII_TX_DRIVER_220MV;
+> +		break;
+> +	case 240:
+> +		tx_drive_strength = PQSGMII_TX_DRIVER_240MV;
+> +		break;
+> +	case 260:
+> +		tx_drive_strength = PQSGMII_TX_DRIVER_260MV;
+> +		break;
+> +	case 280:
+> +		tx_drive_strength = PQSGMII_TX_DRIVER_280MV;
+> +		break;
+> +	case 300:
+> +		tx_drive_strength = PQSGMII_TX_DRIVER_300MV;
+> +		break;
+> +	case 320:
+> +		tx_drive_strength = PQSGMII_TX_DRIVER_320MV;
+> +		break;
+> +	case 400:
+> +		tx_drive_strength = PQSGMII_TX_DRIVER_400MV;
+> +		break;
+> +	case 500:
+> +		tx_drive_strength = PQSGMII_TX_DRIVER_500MV;
+> +		break;
+> +	case 600:
+> +		tx_drive_strength = PQSGMII_TX_DRIVER_600MV;
+> +		break;
+> +	default:
+> +		return -EINVAL;
+> +	}
+> +
+> +	/* Workaround to enable AZ transmitting ability */
+> +	psgmii_az = phy_read_mmd(phydev, MDIO_MMD_PMAPMD, PSGMII_MODE_CTRL);
+> +	psgmii_az &= ~PSGMII_MODE_CTRL_AZ_WORKAROUND_MASK;
+> +	psgmii_az |= FIELD_PREP(PSGMII_MODE_CTRL_AZ_WORKAROUND_MASK, 0xc);
+> +	ret = phy_write_mmd(phydev, MDIO_MMD_PMAPMD, PSGMII_MODE_CTRL, psgmii_az);
+> +	psgmii_az = phy_read_mmd(phydev, MDIO_MMD_PMAPMD, PSGMII_MODE_CTRL);
+> +
+> +
+> +	tx_amp = phy_read(phydev, MDIO_DEVAD_NONE, PSGMII_QSGMII_DRIVE_CONTROL_1);
+> +	tx_amp &= ~PSGMII_QSGMII_TX_DRIVER_MASK;
+> +	tx_amp |= FIELD_PREP(PSGMII_QSGMII_TX_DRIVER_MASK, tx_drive_strength);
+> +	ret = phy_write(phydev, MDIO_DEVAD_NONE, PSGMII_QSGMII_DRIVE_CONTROL_1, tx_amp);
+> +
+> +	return ret;
+> +}
+> +
+> +U_BOOT_PHY_DRIVER(QCA8072_driver) =  {
+> +	.name = "Qualcomm QCA8072",
+> +	.uid = PHY_ID_QCA8072,
+> +	.mask = PHY_ID_QCA807X_MASK,
+> +	.features = PHY_GBIT_FEATURES,
+> +	.config = qca807x_config,
+> +	.startup = genphy_startup,
+> +	.shutdown = genphy_shutdown,
+> +};
+> +
+> +U_BOOT_PHY_DRIVER(QCA8075_driver) =  {
+> +	.name = "Qualcomm QCA8075",
+> +	.uid = PHY_ID_QCA8075,
+> +	.mask = PHY_ID_QCA807X_MASK,
+> +	.features = PHY_GBIT_FEATURES,
+> +	.config = qca807x_config,
+> +	.startup = genphy_startup,
+> +	.shutdown = genphy_shutdown,
+> +};
+> +
+> +U_BOOT_PHY_DRIVER(QCA807X_PSGMII_driver) =  {
+> +	.name = "Qualcomm QCA807x PSGMII",
+> +	.uid = PHY_ID_QCA807X_PSGMII,
+> +	.mask = PHY_ID_QCA807X_MASK,
+> +	.config = qca807x_psgmii_config,
+> +};
 
 -- 
 // Caleb (they/them)
