@@ -4,62 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27EADCD5BC8
-	for <u-boot@archiver.kernel.org>; Thu,  5 Sep 2024 13:54:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 478C6CD5BC9
+	for <u-boot@archiver.kernel.org>; Thu,  5 Sep 2024 15:07:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A6DD88C98;
-	Thu,  5 Sep 2024 15:54:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8DEA788C8A;
+	Thu,  5 Sep 2024 17:07:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1725544445;
-	bh=SjJ+8w55rDcuN76qniwjAk8JIjtMSprYbblZYXUATSg=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Tu09bKS0K7MalK3z8yPBythFa8n7EW0rjXOs6ofpkhxA3xlzpsvY1wgXCbUOjnZRu
-	 5AZLaK+fGWvvS5OYC+rlranDw8J7lTqEbOEq2f+Y8EkTPoPkRTHSUTowPo1K7N03co
-	 nLSwZglMwt9P2iBfvkYXoMF5u0OwKndMbiQdBFP62Lb0jTI+dCTpvTC0WLI8XFeliS
-	 o21DQV8EfZaDwk2vFbjA+K7sXZy7XSVPdnbwFvN/3vhiMeve0vPu/VCtBr0OZFWC+4
-	 PgBSoQP5vhB1T2rT0EGIQ7Y5wzU9A0E4aRrpZ2U7ncTTpy2Fyp25CvScBYnLpnG9+P
-	 KaD678dhKiMHQ==
-Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FCS9BvgF";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B317288C9D; Thu,  5 Sep 2024 17:07:19 +0200 (CEST)
+Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
+ [IPv6:2607:f8b0:4864:20::833])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id CC34288C88;
- Thu,  5 Sep 2024 15:54:03 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1725544444;
- bh=SjJ+8w55rDcuN76qniwjAk8JIjtMSprYbblZYXUATSg=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=JM0uLuzEVrhCpAlDtst+FAhHp2IBF6qfDyawAOE7pyfFmzBvVxfSb78p98c1xQlYH
- ea76whlMNfrtP5/pBfbFZPua45dyXtZQF0RRcR0HSd1/V9zamZbHb3TOoN7VrWdtKh
- oOCFzYZzS3byDcT59De7a4inyjtLkRNvis7XXobqw04Kg01WsU0v2hgbOO3VuSzPOh
- J7ig1terpeKCKgX4VlsyUErFaKprDieokd90nJqA6y49sOechPV8wqtJPLr7uxYk7A
- XYA5Ea3wn7uQqUtFsuAFbyvvW0VPFTCKN1Ug1FntXUqXYXnUx6iW1SFoMbWnAn5KCF
- KrZaDlfF+hYQQ==
-Date: Thu, 5 Sep 2024 15:54:02 +0200
-From: Lukasz Majewski <lukma@denx.de>
-To: Adam Ford <aford173@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, Fabio Estevam <festevam@gmail.com>,
- Mamta Shukla <mamta.shukla@leica-geosystems.com>, u-boot@lists.denx.de,
- Marek Vasut <marex@denx.de>
-Subject: Re: [Binman] Question regarding SPL symbol offsets generation
-Message-ID: <20240905155402.486a7110@wsk>
-In-Reply-To: <CAHCN7xLY4FxB4HZLcE0pEZsx7V=dhVokh2Wcrn2Jjf+B+SLCJg@mail.gmail.com>
-References: <20240808110654.4215b129@wsk>
- <CAOMZO5A74MigLO0qkeXi04=7M70jaiEgk9zdFBjUV74vuZDP0g@mail.gmail.com>
- <20240815221421.61f64a17@wsk>
- <CAOMZO5B-fkLQsQx205mxXQdmk3ij6Hxx4ErM84DtEtBg3mYa7Q@mail.gmail.com>
- <CAFLszTggpR9aaDAH_Mx_zDNnKAb7r_O+sdyyVVG_xULqkrWnzg@mail.gmail.com>
- <20240828100452.2143873d@wsk>
- <CAHCN7xLY4FxB4HZLcE0pEZsx7V=dhVokh2Wcrn2Jjf+B+SLCJg@mail.gmail.com>
-Organization: denx.de
-X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F2B088C8A
+ for <u-boot@lists.denx.de>; Thu,  5 Sep 2024 17:07:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-456825b4314so8051961cf.0
+ for <u-boot@lists.denx.de>; Thu, 05 Sep 2024 08:07:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1725548836; x=1726153636; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=yo/LS2q+M9BjkuPzbOW85g7Rtr0pPg/uYezWch9/t/A=;
+ b=FCS9BvgFkwlkCY/zI8ZBpnr6Ft9pzZOn6T+7LEoF+ffvZNas+oZ0DJQyw9/Wgm4Rrc
+ kkR0BEUigyYb78o9GCDO8foRHVnsxYi0YvntNulqDvDn3RdWmYb7xBUVEHqLTQxBD1d0
+ wjWoaHDjW22jURXCYxBm3hBk41jpBI0m6mQn8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1725548836; x=1726153636;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yo/LS2q+M9BjkuPzbOW85g7Rtr0pPg/uYezWch9/t/A=;
+ b=VSiWVYwCl15Sboc1oc5m+kxNQkjG2ZQOSLW76JNKWKIDFyyxFB0UP/vkWf6FjbI9wV
+ R4xF7uPl7zMqABfG/8hpjNRa7fnyl5WI81dEeBpeA5qxn74fqkO6iZ6sgcMoDWNZtZb1
+ fnB3qtQ37muUu9WSSM2/5BwMxKoaT+KlUD5WF8kUS1vFidBHAEcrc5yT6pbz0GUFaqhb
+ dyyUltvlzm1yGLAX0R0dZ65B3Q+S4/SexsKkRuZBVXd136sfpxd3a572/CPNvmzO7kM2
+ 8G56NvNYxvVYf3TVoNplfgVjSt0PEI/qS90yl2xz+GSH6zt5lZW2aZMcuU0IkbYdRUZU
+ i20g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV1/mG/dQmnHA9zDYslHoMErnD3kjC8wEIg8Tf96BZ+/MZipUBROs42MqUWAsIAlhrGts0cBjA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzlrUD4IHP+WTzFvYAvwffgOtHBgltjI6qKHZ30Fi0MEfD76sb6
+ PElebIl9g+ODgeIIskRZVGT2Y1u3dgivliGgc50IYe6fx68jb5iN+6iacHPoa1M=
+X-Google-Smtp-Source: AGHT+IF8nU/Tpsumrbl0rwCeTojHMNfFw3uazK2D+1paoNai2UBoS5lLocyYHfCa1c4UkDjn/5V+cg==
+X-Received: by 2002:a05:622a:1456:b0:458:a6c:806e with SMTP id
+ d75a77b69052e-4580a6c833cmr8170431cf.30.1725548836176; 
+ Thu, 05 Sep 2024 08:07:16 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-45801dc19b8sm7830411cf.82.2024.09.05.08.07.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 05 Sep 2024 08:07:13 -0700 (PDT)
+Date: Thu, 5 Sep 2024 09:07:10 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Francesco Dolcini <francesco@dolcini.it>
+Cc: Hiago De Franco <hiagofranco@gmail.com>, Keerthy <j-keerthy@ti.com>,
+ Amjad Ouled-Ameur <aouledameur@baylibre.com>, u-boot@lists.denx.de,
+ Hiago De Franco <hiago.franco@toradex.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>
+Subject: Re: [PATCH] fs: Fix SPL build if SPL_FS_LOADER is enabled and
+ FS_LOADER is disabled
+Message-ID: <20240905150710.GD2479150@bill-the-cat>
+References: <20240826181933.252020-1-hiagofranco@gmail.com>
+ <20240830205119.GA3268574@bill-the-cat>
+ <20240831134911.GA32220@francesco-nb>
+ <20240904212721.GZ2479150@bill-the-cat>
+ <Ztjw5bGI0RKpAIVP@gaggiata.pivistrello.it>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/YPXV.cYMJ6UDHzYvT6Uk9Rd";
- protocol="application/pgp-signature"; micalg=pgp-sha512
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ZTlt3Jl3WphpN7Z0"
+Content-Disposition: inline
+In-Reply-To: <Ztjw5bGI0RKpAIVP@gaggiata.pivistrello.it>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,120 +99,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---Sig_/YPXV.cYMJ6UDHzYvT6Uk9Rd
-Content-Type: text/plain; charset=UTF-8
+
+--ZTlt3Jl3WphpN7Z0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi Adam,
-
-> On Wed, Aug 28, 2024 at 3:04=E2=80=AFAM Lukasz Majewski <lukma@denx.de> w=
-rote:
-> >
-> > Hi Simon,
-> > =20
-> > > Hi,
-> > >
-> > > On Tue, 27 Aug 2024 at 12:47, Fabio Estevam <festevam@gmail.com>
-> > > wrote: =20
-> > > >
-> > > > Hi Lukasz,
-> > > >
-> > > > On Thu, Aug 15, 2024 at 5:14=E2=80=AFPM Lukasz Majewski <lukma@denx=
-.de>
-> > > > wrote: =20
-> > > > > Unfortunately not - this change is only for properly setting
-> > > > > start address of the u-boot.
-> > > > >
-> > > > > The _real_ problem here is the symbol placement generated by
-> > > > > binman when we try to define the image as a single one.
-> > > > >
-> > > > > Moreover, this change follows other boards with imx8mm
-> > > > > processor - ./configs/imx8mm_beacon_fspi_defconfig to be
-> > > > > specific.
-> > > > >
-> > > > > The "fix" (for which I'd been now probably opt) for this issue
-> > > > > would be to generate two images with binman - one for
-> > > > > u-boot-spl-ddr.bin and the final flash.bin with the former one
-> > > > > included (as it was before SHA1:
-> > > > > 37e50627efacd8dae18b564e9d8886a033e181bc) =20
-> > > >
-> > > > Is QSPI boot broken on i.MX8MM?
-> > > >
-> > > > I am adding Adam and Mamta who have tested QSPI booting on
-> > > > imx8mm_beacon and imx8mm_evk, respectively. =20
-> > >
-> > > Note also that I sent a series[1] which allows the symbols-base
-> > > to be adjusted, if that helps. =20
-> >
-> > I've seen them - but not yet tested.
-> >
-> > Thanks Simon for the patch series. =20
+On Thu, Sep 05, 2024 at 01:44:37AM +0200, Francesco Dolcini wrote:
+> Hello Tom,
 >=20
-> Is it still broken with this patch series?  I have been traveling and
-> haven't had much time to test.
-
-Yes, I can confirm that it is still broken.
-
-I've applied:
-https://patchwork.ozlabs.org/project/uboot/cover/20240826191143.426387-1-sj=
-g@chromium.org/
-
-on top of mainline:
-SHA1: 1630ff26cc960439b5949b80cfc604a2c8aa47dd
-
-Adding symbols-base =3D <0>; to imx8mm-u-boot.dtsi did not help.
-
+> On Wed, Sep 04, 2024 at 03:27:21PM -0600, Tom Rini wrote:
+> > On Sat, Aug 31, 2024 at 03:49:11PM +0200, Francesco Dolcini wrote:
+> > > On Fri, Aug 30, 2024 at 02:51:19PM -0600, Tom Rini wrote:
+> > > > On Mon, Aug 26, 2024 at 03:19:33PM -0300, Hiago De Franco wrote:
+> > > >=20
+> > > > > From: Hiago De Franco <hiago.franco@toradex.com>
+> > > > >=20
+> > > > > When SPL_FS_LOADER is set to y and FS_LOADER is not enabled, the =
+SPL build
+> > > > > fails with the following errors:
+> > > > >=20
+> > > > >   AR      spl/boot/built-in.o
+> > > > >   LD      spl/u-boot-spl
+> > > > > arm-none-linux-gnueabihf-ld.bfd: drivers/misc/fs_loader.o: in fun=
+ction
+> > > > > `fw_get_filesystem_firmware':
+> > > > > /u-boot/drivers/misc/fs_loader.c:162: undefined reference to
+> > > > > `fs_set_blk_dev'
+> > > > > arm-none-linux-gnueabihf-ld.bfd: /home/frh/tdx/src/u-boot/drivers=
+/misc/
+> > > > > fs_loader.c:185: undefined reference to `fs_read'
+> > > > > arm-none-linux-gnueabihf-ld.bfd: drivers/misc/fs_loader.o: in fun=
+ction
+> > > > > `select_fs_dev':
+> > > > > /u-boot/drivers/misc/fs_loader.c:89: undefined reference to
+> > > > > `fs_set_blk_dev_with_part'
+> > > > > make[1]: *** [scripts/Makefile.spl:527: spl/u-boot-spl] Error 1
+> > > > > make: *** [Makefile:2055: spl/u-boot-spl] Error 2
+> > > > >=20
+> > > > > Fix it by replacing the FS_LOADER with SPL_FS_LOADER in the Makef=
+ile, so
+> > > > > the fs.c with the necessary function definitions are compiled.
+> > > > >=20
+> > > > > Fixes: b071a07743d4 ("drivers: misc: Makefile: Enable fs_loader c=
+ompilation at SPL Level")
+> > > > > Suggested-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+> > > > > Signed-off-by: Hiago De Franco <hiago.franco@toradex.com>
+> > > > > Reviewed-by: Tom Rini <trini@konsulko.com>
+> > > >=20
+> > > > This leads to failure to build on sandbox_noinst_defconfig.
+> > >=20
+> > > --- a/drivers/block/Kconfig
+> > > +++ b/drivers/block/Kconfig
+> > > @@ -110,6 +110,7 @@ config EFI_MEDIA
+> > >  config SPL_BLK_FS
+> > >         bool "Load images from filesystems on block devices"
+> > >         depends on SPL_BLK
+> > > +       select SPL_FS_LOADER
+> > >         help
+> > >           Use generic support to load images from fat/ext filesystems=
+ on
+> > >           different types of block devices such as NVMe.
+> > >=20
+> > >=20
+> > > ?
+> >=20
+> > I think "depends on" and sandbox_noinst_defconfig should enable
+> > CONFIG_SPL_FS_LOADER too.
 >=20
-> adam
-> > =20
-> > >
-> > > Regards,
-> > > Simon
-> > >
-> > > [1]
-> > > https://patchwork.ozlabs.org/project/uboot/list/?series=3D421010 =20
-> >
-> >
-> >
-> >
-> > Best regards,
-> >
-> > Lukasz Majewski
-> >
-> > --
-> >
-> > DENX Software Engineering GmbH,      Managing Director: Erika Unter
-> > HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell,
-> > Germany Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email:
-> > lukma@denx.de =20
+> What do you mean?
+>=20
+> The change I proposed fixes the issue you reported with sandbox_noinst_de=
+fconfig and I
+> think is the right solution. Are you ok with that or are you proposing to=
+ just
+> change sandbox_noinst_defconfig enabling CONFIG_SPL_FS_LOADER explicitly?
 
+I'm saying, based on the other options which use SPL_FS_LOADER it should
+be a depends not select here, and that sandbox_noinst_defconfig should
+be enabling SPL_FS_LOADER. There's also an argument to be made that
+SPL_FS_LOADER (and FS_LOADER) should be unprompted options (ie "bool"
+without the text to explain the option) and selected by all of its
+users. I'm not immediately sure which is better now.
 
+--=20
+Tom
 
-
-Best regards,
-
-Lukasz Majewski
-
---
-
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
-
---Sig_/YPXV.cYMJ6UDHzYvT6Uk9Rd
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
+--ZTlt3Jl3WphpN7Z0
+Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmbZt/oACgkQAR8vZIA0
-zr0IRgf/aU+0VydxuLL/pqv38V2Z0Ag4YvlRQff2VnProoprconjNtC1Z54jQRxm
-TGBQe8Zfb79BxJTg+ZqpKIiBqis5eehL6S4+6qkPk1h+/stRuuD61rya0OVCaHxw
-MFNp5ZH1Jo93CyPC6eyzeDoHmbj65dDPL/ACEgyjXMyPoP/ZHaQZjkhcDrhqCNQd
-wN85lFYACoOH8X2jo+bdIWV+NQ8VEvci9vniNXX3dZICE+nDeVsDHWqZph/0EHS2
-F12xHjacIAbDJ6wo3AYzBZ2+23IF/5kMZshX8B17LDoVfouGbRqVvVwrCcPZ67oa
-6VB8mLfBe8caVf+E1CY4aYzI5A73gg==
-=kNjR
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbZyRoACgkQFHw5/5Y0
+tyySBwwAsmZzozxKRB0i2xJnNYaAU5+wsKm53vN4FmWaKwq6W8mrzbep00XsETv/
+SgWLdoeV8BpaCl43klzRFO1zh53KClmaXswdPlDnpStNLCP9xae/bRntns88C0eA
+n4rBPoOqCsYA+KkXtgteny9h3NzzEMolFPkMe2AuE/m1cUigQ5qHIOlFsdbLFumd
+HhiCNTeGPvvRL4ptfEcYwuXTm0zVxa6P44ZBysNr+ykyp7aFdFMc9dFsm0bjIys7
+C/FajDTUejMeSDV1aiZXYPwSxXT04hJ08Hxrs7nYl6DhBkdAM63skfmBJGu173CK
+z2epuDTSbOvghyb5n8DKDwOOM01ZVGS2Wm7iYe/ADuiWG+G8LP0w+/5roPBKdeLg
+QDrlKshVVtEKNgou+OrcsSaRw8IrtZDzuE96zLnGhJP/ztvHKWWBge2NujnyL+Oy
+U8taZHuNL1KfhHO3gN8B0vAQ8xLuCRvqRRgsMqfOnlxF48CW4vrQcYX+/t0YMY3f
+O8ajEjF+
+=z107
 -----END PGP SIGNATURE-----
 
---Sig_/YPXV.cYMJ6UDHzYvT6Uk9Rd--
+--ZTlt3Jl3WphpN7Z0--
