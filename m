@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C4D4CD4F5B
-	for <u-boot@archiver.kernel.org>; Thu,  5 Sep 2024 08:29:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD613CD4F5B
+	for <u-boot@archiver.kernel.org>; Thu,  5 Sep 2024 08:29:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7859788CC5;
-	Thu,  5 Sep 2024 10:28:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D0E0088C94;
+	Thu,  5 Sep 2024 10:28:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2317888C94; Thu,  5 Sep 2024 10:28:51 +0200 (CEST)
+ id 2410888C91; Thu,  5 Sep 2024 10:28:56 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 2CB6888C51
- for <u-boot@lists.denx.de>; Thu,  5 Sep 2024 10:28:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 190BD88CC2
+ for <u-boot@lists.denx.de>; Thu,  5 Sep 2024 10:28:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 396BF1063;
- Thu,  5 Sep 2024 01:29:15 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 27174FEC;
+ Thu,  5 Sep 2024 01:29:18 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 46B1C3F66E;
- Thu,  5 Sep 2024 01:28:46 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 342363F66E;
+ Thu,  5 Sep 2024 01:28:48 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 05/16] lib: Kconfig: add a config symbol for getting lmb
- memory map updates
-Date: Thu,  5 Sep 2024 13:58:00 +0530
-Message-Id: <20240905082811.1585467-6-sughosh.ganu@linaro.org>
+Subject: [PATCH 06/16] add a function to check if an address is in RAM memory
+Date: Thu,  5 Sep 2024 13:58:01 +0530
+Message-Id: <20240905082811.1585467-7-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240905082811.1585467-1-sughosh.ganu@linaro.org>
 References: <20240905082811.1585467-1-sughosh.ganu@linaro.org>
@@ -57,38 +56,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a Kconfig symbol to enable getting updates on any memory map
-changes that might be done by the LMB module. This notification
-mechanism can then be used to have a synchronous view of allocated and
-free memory.
+Add a function to check if a given address falls within the RAM
+address used by U-Boot. This will be used to notify other modules if
+the address gets allocated, so as to not get re-allocated by some
+other module.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
- lib/Kconfig | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ common/board_r.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 5f282ecb54..2e73cda580 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -74,6 +74,17 @@ config HAVE_PRIVATE_LIBGCC
- config LIB_UUID
- 	bool
+diff --git a/common/board_r.c b/common/board_r.c
+index 4faaa20242..877ea3afd0 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -72,6 +72,11 @@ DECLARE_GLOBAL_DATA_PTR;
  
-+config MEM_MAP_UPDATE_NOTIFY
-+	bool "Get notified of any changes to the LMB memory map"
-+	depends on LMB && EFI_LOADER
-+	select EVENT
-+	default y
-+	help
-+	  Enable this option to get notification on any changes to the
-+	  memory that is allocated or freed by the LMB module. This will
-+	  allow different modules that allocate memory or maintain a memory
-+	  map to have a synchronous view of available and allocated memory.
+ ulong monitor_flash_len;
+ 
++__weak bool __maybe_unused is_addr_in_ram(uintptr_t addr)
++{
++	return addr >= gd->ram_base && addr <= gd->ram_top;
++}
 +
- config RANDOM_UUID
- 	bool "GPT Random UUID generation"
- 	select LIB_UUID
+ __weak int board_flash_wp_on(void)
+ {
+ 	/*
 -- 
 2.34.1
 
