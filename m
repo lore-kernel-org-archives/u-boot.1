@@ -4,70 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 553D7CD5BC5
-	for <u-boot@archiver.kernel.org>; Thu,  5 Sep 2024 13:18:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27EADCD5BC8
+	for <u-boot@archiver.kernel.org>; Thu,  5 Sep 2024 13:54:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7B1C88CA8;
-	Thu,  5 Sep 2024 15:17:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 5A6DD88C98;
+	Thu,  5 Sep 2024 15:54:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ty2p0Lwv";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F11988C8A; Thu,  5 Sep 2024 13:50:19 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1725544445;
+	bh=SjJ+8w55rDcuN76qniwjAk8JIjtMSprYbblZYXUATSg=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Tu09bKS0K7MalK3z8yPBythFa8n7EW0rjXOs6ofpkhxA3xlzpsvY1wgXCbUOjnZRu
+	 5AZLaK+fGWvvS5OYC+rlranDw8J7lTqEbOEq2f+Y8EkTPoPkRTHSUTowPo1K7N03co
+	 nLSwZglMwt9P2iBfvkYXoMF5u0OwKndMbiQdBFP62Lb0jTI+dCTpvTC0WLI8XFeliS
+	 o21DQV8EfZaDwk2vFbjA+K7sXZy7XSVPdnbwFvN/3vhiMeve0vPu/VCtBr0OZFWC+4
+	 PgBSoQP5vhB1T2rT0EGIQ7Y5wzU9A0E4aRrpZ2U7ncTTpy2Fyp25CvScBYnLpnG9+P
+	 KaD678dhKiMHQ==
+Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9118C88C87
- for <u-boot@lists.denx.de>; Thu,  5 Sep 2024 13:50:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 485BoEe2024188;
- Thu, 5 Sep 2024 06:50:14 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1725537014;
- bh=kyNG1KbqOnjhJRx6Ok5fH0LtEYgvArTPdpSoCk/wfvU=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=Ty2p0LwvekFWuZKdsgiry7h4i5h+EaVhCh2a4Tnu2rn0OdOLmtET7sMHMZ2PN3kvn
- DGC2hIpffd9+rqeM5L+n/t7+ApwLHu0GIEij2QEhR6ZjdTsRAhD2+U+NlZe8sCbbxw
- vgrVpMAd40tpLPB8adqVwR177pY+9OWDHWveCrQU=
-Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 485BoEpq008745;
- Thu, 5 Sep 2024 06:50:14 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 5
- Sep 2024 06:50:13 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 5 Sep 2024 06:50:13 -0500
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 485Bo9eV097638;
- Thu, 5 Sep 2024 06:50:10 -0500
-Message-ID: <6819502c-0120-4bdd-bee9-049403463dac@ti.com>
-Date: Thu, 5 Sep 2024 17:20:08 +0530
+ (Authenticated sender: lukma@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id CC34288C88;
+ Thu,  5 Sep 2024 15:54:03 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1725544444;
+ bh=SjJ+8w55rDcuN76qniwjAk8JIjtMSprYbblZYXUATSg=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=JM0uLuzEVrhCpAlDtst+FAhHp2IBF6qfDyawAOE7pyfFmzBvVxfSb78p98c1xQlYH
+ ea76whlMNfrtP5/pBfbFZPua45dyXtZQF0RRcR0HSd1/V9zamZbHb3TOoN7VrWdtKh
+ oOCFzYZzS3byDcT59De7a4inyjtLkRNvis7XXobqw04Kg01WsU0v2hgbOO3VuSzPOh
+ J7ig1terpeKCKgX4VlsyUErFaKprDieokd90nJqA6y49sOechPV8wqtJPLr7uxYk7A
+ XYA5Ea3wn7uQqUtFsuAFbyvvW0VPFTCKN1Ug1FntXUqXYXnUx6iW1SFoMbWnAn5KCF
+ KrZaDlfF+hYQQ==
+Date: Thu, 5 Sep 2024 15:54:02 +0200
+From: Lukasz Majewski <lukma@denx.de>
+To: Adam Ford <aford173@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, Fabio Estevam <festevam@gmail.com>,
+ Mamta Shukla <mamta.shukla@leica-geosystems.com>, u-boot@lists.denx.de,
+ Marek Vasut <marex@denx.de>
+Subject: Re: [Binman] Question regarding SPL symbol offsets generation
+Message-ID: <20240905155402.486a7110@wsk>
+In-Reply-To: <CAHCN7xLY4FxB4HZLcE0pEZsx7V=dhVokh2Wcrn2Jjf+B+SLCJg@mail.gmail.com>
+References: <20240808110654.4215b129@wsk>
+ <CAOMZO5A74MigLO0qkeXi04=7M70jaiEgk9zdFBjUV74vuZDP0g@mail.gmail.com>
+ <20240815221421.61f64a17@wsk>
+ <CAOMZO5B-fkLQsQx205mxXQdmk3ij6Hxx4ErM84DtEtBg3mYa7Q@mail.gmail.com>
+ <CAFLszTggpR9aaDAH_Mx_zDNnKAb7r_O+sdyyVVG_xULqkrWnzg@mail.gmail.com>
+ <20240828100452.2143873d@wsk>
+ <CAHCN7xLY4FxB4HZLcE0pEZsx7V=dhVokh2Wcrn2Jjf+B+SLCJg@mail.gmail.com>
+Organization: denx.de
+X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 4/6] drivers: misc: k3_bist: Add K3 BIST driver
-To: Neha Malcom Francis <n-francis@ti.com>, <trini@konsulko.com>
-CC: <b-padhi@ti.com>, <m-chawdhry@ti.com>, <afd@ti.com>, <hnagalla@ti.com>,
- <j-choudhary@ti.com>, <bb@ti.com>, <nm@ti.com>, <vigneshr@ti.com>,
- <j-keerthy@ti.com>, <u-boot@lists.denx.de>, <u-kumar1@ti.com>
-References: <20240903114402.2155740-1-n-francis@ti.com>
- <20240903114402.2155740-5-n-francis@ti.com>
- <586db467-5524-42cd-9742-3a673bb02039@ti.com>
- <5198dbc7-19bc-419e-83b7-e7216269abd1@ti.com>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <5198dbc7-19bc-419e-83b7-e7216269abd1@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-Mailman-Approved-At: Thu, 05 Sep 2024 15:17:52 +0200
+Content-Type: multipart/signed; boundary="Sig_/YPXV.cYMJ6UDHzYvT6Uk9Rd";
+ protocol="application/pgp-signature"; micalg=pgp-sha512
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,224 +76,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+--Sig_/YPXV.cYMJ6UDHzYvT6Uk9Rd
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 9/5/2024 3:11 PM, Neha Malcom Francis wrote:
-> On 04/09/24 10:35, Kumar, Udit wrote:
->>
->> On 9/3/2024 5:14 PM, Neha Malcom Francis wrote:
->>> Add a driver for the BIST module which currently includes support for
->>> BIST IPs that trigger PBIST (Memory BIST).
->>>
->>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->>> ---
->>>   drivers/misc/Kconfig               |   8 +
->>>   drivers/misc/Makefile              |   1 +
->>>   drivers/misc/k3_bist.c             | 507 ++++++++++++++++++++++++++
->>>   drivers/misc/k3_bist_static_data.h | 551 
->>> +++++++++++++++++++++++++++++
->>>   4 files changed, 1067 insertions(+)
->>>   create mode 100644 drivers/misc/k3_bist.c
->>>   create mode 100644 drivers/misc/k3_bist_static_data.h
->>>
->>> [...]
->>> +
->>
->>
->> In general, few macro's name are too long
->>
->> many places hard-coded values are used, please consider to move to macro
->>
->> driver looks to be j784s4 specific including header files  ,
->>
->> please see, if we can make this generic driver.
->
-> I've put SoC specific (J784S4 right now) data protected with SoC 
-> specific configs in k3_bist_static_data.h; the hardcoded values are a 
-> sequence for triggering a specific test, whatever is generic and known 
-> I have put as a macro, however I'll try to better understand the 
-> sequence if I can put them as macros.
->
->>
->>
->>> +#include "k3_bist_static_data.h"
->>> +
->>> [...]
->>
->> Please consider to rename function name as per description above 
->> something like
->>
->> check_pbist_results_of_mcu_domain,, if you agree
->>
->> Also give more context, I believe, ROM runs BIST on MCU domain, 
->> Please consider to mention, if you want
->
-> Yes will do!
->
->>
->>> +{
->>> +    bool is_done, timed_out;
->>> +    u32 mask;
->>> +    u32 post_reg_val, shift;
->>> +
->>> +    /* Read HW POST status register */
->>> +    post_reg_val = readl(WKUP_CTRL_MMR0_BASE + 
->>> WKUP_CTRL_MMR_CFG0_WKUP_POST_STAT);
->>> +
->>> +    /* Check if HW POST PBIST was performed */
->>> +    shift = 
->>> WKUP_CTRL_MMR_CFG0_WKUP_POST_STAT_POST_MCU_PBIST_DONE_SHIFT;
->>> +    is_done = (((post_reg_val >> shift) & 0x1u) == 0x1u) ? 
->>> (bool)true : (bool)false;
->>> +
->>> +    if (!is_done) {
->>> +        /* HW POST: PBIST not completed, check if it timed out */
->>> +        shift = 
->>> WKUP_CTRL_MMR_CFG0_WKUP_POST_STAT_POST_MCU_PBIST_TIMEOUT_SHIFT;
->> Too long macro name
->>> +        timed_out = (((post_reg_val >> shift) & 0x1u) == 0x1u) ? 
->>> (bool)true : (bool)false;
->>> +
->>> +        if (!timed_out) {
->>> +            debug("%s: PBIST was not performed at all on this 
->>> device for this core\n",
->>> +                  __func__);
->>> +            return -EINVAL;
->>
->> This is error no ? , move to dev_err instead of debug
->>
->
-> The return in k3_bist_probe throws a dev_err saying HW POST failed to 
-> run successfully. So these were added as debugs in case the end user 
-> wants to know exact cause of failure, I can move it as a dev_err as well.
+Hi Adam,
 
-ok, thanks
+> On Wed, Aug 28, 2024 at 3:04=E2=80=AFAM Lukasz Majewski <lukma@denx.de> w=
+rote:
+> >
+> > Hi Simon,
+> > =20
+> > > Hi,
+> > >
+> > > On Tue, 27 Aug 2024 at 12:47, Fabio Estevam <festevam@gmail.com>
+> > > wrote: =20
+> > > >
+> > > > Hi Lukasz,
+> > > >
+> > > > On Thu, Aug 15, 2024 at 5:14=E2=80=AFPM Lukasz Majewski <lukma@denx=
+.de>
+> > > > wrote: =20
+> > > > > Unfortunately not - this change is only for properly setting
+> > > > > start address of the u-boot.
+> > > > >
+> > > > > The _real_ problem here is the symbol placement generated by
+> > > > > binman when we try to define the image as a single one.
+> > > > >
+> > > > > Moreover, this change follows other boards with imx8mm
+> > > > > processor - ./configs/imx8mm_beacon_fspi_defconfig to be
+> > > > > specific.
+> > > > >
+> > > > > The "fix" (for which I'd been now probably opt) for this issue
+> > > > > would be to generate two images with binman - one for
+> > > > > u-boot-spl-ddr.bin and the final flash.bin with the former one
+> > > > > included (as it was before SHA1:
+> > > > > 37e50627efacd8dae18b564e9d8886a033e181bc) =20
+> > > >
+> > > > Is QSPI boot broken on i.MX8MM?
+> > > >
+> > > > I am adding Adam and Mamta who have tested QSPI booting on
+> > > > imx8mm_beacon and imx8mm_evk, respectively. =20
+> > >
+> > > Note also that I sent a series[1] which allows the symbols-base
+> > > to be adjusted, if that helps. =20
+> >
+> > I've seen them - but not yet tested.
+> >
+> > Thanks Simon for the patch series. =20
+>=20
+> Is it still broken with this patch series?  I have been traveling and
+> haven't had much time to test.
+
+Yes, I can confirm that it is still broken.
+
+I've applied:
+https://patchwork.ozlabs.org/project/uboot/cover/20240826191143.426387-1-sj=
+g@chromium.org/
+
+on top of mainline:
+SHA1: 1630ff26cc960439b5949b80cfc604a2c8aa47dd
+
+Adding symbols-base =3D <0>; to imx8mm-u-boot.dtsi did not help.
+
+>=20
+> adam
+> > =20
+> > >
+> > > Regards,
+> > > Simon
+> > >
+> > > [1]
+> > > https://patchwork.ozlabs.org/project/uboot/list/?series=3D421010 =20
+> >
+> >
+> >
+> >
+> > Best regards,
+> >
+> > Lukasz Majewski
+> >
+> > --
+> >
+> > DENX Software Engineering GmbH,      Managing Director: Erika Unter
+> > HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell,
+> > Germany Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email:
+> > lukma@denx.de =20
 
 
->
->>
->>> +        } else {
->>> +            debug("%s: PBIST was attempted but timed out for this 
->>> section\n", __func__);
->>> +            return -ETIMEDOUT;
->>
->> This is error no ? , move to dev_err instead of debug .
->>
->> What next, reboot SOC or just continue booting in case of error
->
-> This is also something I wanted this RFC to address, I prefer 
-> rebooting SoC if HW POST fails. HW POST is performed by ROM based on 
-> certain switch settings, which implies that an end-user wants this 
-> check done if selected. And if it fails on the MCU domain itself, I do 
-> not think we should continue.
-
-Ok, if you are saying BIST in MCU domain in done based upon some switch 
-settings, then please put that switch logic here .
-
-Reading code above looks, BIST run always
-
-if (!is_done) {
-+		/* HW POST: PBIST not completed, check if it timed out */
-+	} else {
-+		/* HW POST: PBIST was completed on this device, check the result */
-
-So now have three conditions,
-1) BIST not attempted
-2) BIST ran and passed
-3) BIST ran and failed
-
-For 1) condition, please see if you can read some register or switch 
-settings or so.
-
-For 3) , as default we should hang.. In case users wants to continue on 
-failure they can modify u-boot source to do so :)
 
 
->>
->>
->>> [..]
->>> isn't some tisci call are ok to turn off the CPUs.
->>>
->
-> DM (Device Manager) firmware, responsible for power management is not 
-> up at this point in the boot flow (R5 SPL). Thus TISCI calls that turn 
-> on/turn off clocks and power domains are not available and we rely on 
-> the primitive clk-k3.c and ti-power-domain.c drivers to do this for 
-> us. As seen below, using the uclass functions which internally calls 
-> these primitive drivers would be the way to go.
->
-But DM is kind implemented by dev-data and dev-clk logic ?
+Best regards,
 
-For few calls DM just talk to TIFS, which are available at this point.
+Lukasz Majewski
 
-I request to check once, if possible
+--
 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
 
-> I could have used the remoteproc framework to do this but currently 
-> the rproc driver uses TISCI firmware calls from DM and as mentioned 
-> above that's not possible.
->
-> We should probably target modifying our remoteproc driver to use these 
-> generic uclass APIs instead of direct TISCI calls.
+--Sig_/YPXV.cYMJ6UDHzYvT6Uk9Rd
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
 
-Ok,
+-----BEGIN PGP SIGNATURE-----
 
->
->>
->>> [...]
->>> +    udelay(1000);
->>> +
->>> +    u32 timeout_count = 0;
->> Please move timeout_count at start of function
->>> +
->>> +    while ((!(readl(VIM_RAW(intr_num)) & VIM_RAW_MASK(intr_num))) &&
->>> +           (timeout_count++ < PBIST_MAX_TIMEOUT_VALUE))
->>> +        ;
->>
->> Do you want to add some delay instead of just reading in a loop
->>
->
-> That is possible... is there any benefit of delay over polling? 
-> Eithercase the possible time would be at max be PBIST_MAX_TIMEOUT_VALUE.
+iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmbZt/oACgkQAR8vZIA0
+zr0IRgf/aU+0VydxuLL/pqv38V2Z0Ag4YvlRQff2VnProoprconjNtC1Z54jQRxm
+TGBQe8Zfb79BxJTg+ZqpKIiBqis5eehL6S4+6qkPk1h+/stRuuD61rya0OVCaHxw
+MFNp5ZH1Jo93CyPC6eyzeDoHmbj65dDPL/ACEgyjXMyPoP/ZHaQZjkhcDrhqCNQd
+wN85lFYACoOH8X2jo+bdIWV+NQ8VEvci9vniNXX3dZICE+nDeVsDHWqZph/0EHS2
+F12xHjacIAbDJ6wo3AYzBZ2+23IF/5kMZshX8B17LDoVfouGbRqVvVwrCcPZ67oa
+6VB8mLfBe8caVf+E1CY4aYzI5A73gg==
+=kNjR
+-----END PGP SIGNATURE-----
 
-
-You could be definitive in waiting for this register,
-
-Say if hardware specs says, VIM register will be set in max time of 100 
-ms. then
-
-keep PBIST_MAX_TIMEOUT_VALUE as 100 and read wait for 1 ms and then read.
-
-
->
->>
->>> +
->>> +    if (!(readl(VIM_RAW(intr_num)) & VIM_RAW_MASK(intr_num))) {
->>> +        test_result = false;
->>> +        debug("%s(dev=%p): test failed\n", __func__, dev);
->>
->> Fail is error , no ?
->>
->>
->>> +    } else {
->>> +        debug("%s(dev=%p): test passed\n", __func__, dev);
->>> +    }
->>> +
->>> +    writel(0xffffffff, VIM_STS(intr_num));
->>> +
->>> +    return 0;
->>
->>
->> Caller always will see success
->>
->
-> Right, I wasn't sure about what action to take based on the result.
-
-
-Failure is failure, as default please print and call hang
-
->
->>
->>> +}
->>> +
->>> +/**
->>> [..]
+--Sig_/YPXV.cYMJ6UDHzYvT6Uk9Rd--
