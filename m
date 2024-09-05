@@ -4,57 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1669CD98FE
-	for <u-boot@archiver.kernel.org>; Thu,  5 Sep 2024 18:28:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D0C0CD98FE
+	for <u-boot@archiver.kernel.org>; Thu,  5 Sep 2024 18:33:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22E9788CC4;
-	Thu,  5 Sep 2024 20:28:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id BDD7388CA2;
+	Thu,  5 Sep 2024 20:33:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1725560933;
-	bh=pAwIbnhXZV41uTIoBT3yJlNRF4et1bhQ/eQUgeKAKPI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=pHXF16n8pPpawPURE89r2h+JXY1mOsfHHItHtCO/hbspINF9p2kXsSNXsWSjq7YDp
-	 Gfhe/N9KKVOE3u7RX/JyonTjjV4I4ECKIo3fekrVPeAb/1cADUm2ti+H2HIQ2QA41t
-	 VxJ9XBVkr7mqmoB6yGuRe7r+rE1grM3qnNcnp1+L0ccDeEgbltsXsglIeY271dC1ih
-	 KrCfWVCF/kQBb7o71WUnqaz3UYnIpxoajLs9DSHuww9vZ4KI6YDV+irtAUmj0N9gZ/
-	 SWitl/unlUrHZvzIPyj7K6/43H2mSf6Bh8QUBv2MS13PDi78Qa2mBMomQV2Ww8ShIu
-	 GsErSltYGYrAw==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="bWAzQL1m";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id CCE5888CBB; Thu,  5 Sep 2024 20:33:04 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id AD484889C3;
- Thu,  5 Sep 2024 20:28:51 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1725560932;
- bh=pAwIbnhXZV41uTIoBT3yJlNRF4et1bhQ/eQUgeKAKPI=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ofvNB5Y81i5rVpkglRTCvWwQIRtub3LO8KewWS3GZs6kV2zZcyy9zHydqExun4qxk
- haKkQL5Csfqo68k6C+e3+f9cfdDYD86XiGHZ17ABp1p3MiAUhBvz3AP9fbe/k6MKyK
- CuPctZKoHPuECbye7CnYPenNI/p5fPt47fY25LN6uxuy4NOdPj4dxzoFW4WmGZibJk
- hLqsDAI3VDGt4DTTvLyTtJapHJFjDWvlMcU5OIIV3AlqsGD1xY/ZCWZq56t2TJ2uSy
- +B/lAz3wvWr+d57uYZK74vkJQKFutiy14RJ9AyrVQxmK4VGIMMd4xovlMfkOAveD+7
- jG5+neYhdv+Ag==
-Message-ID: <dbcdcc5e-6f93-4f5e-911d-50b54bc584fa@denx.de>
-Date: Thu, 5 Sep 2024 17:36:05 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 3EEC588C1C
+ for <u-boot@lists.denx.de>; Thu,  5 Sep 2024 20:33:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4X07Jr2SJbz9t3F;
+ Thu,  5 Sep 2024 20:33:00 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1725561180;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=GmJCWiE8g/44htmJA6zvIla8UhHX+XdDLfxDz1dWHQg=;
+ b=bWAzQL1m8+VdrHBZNB0elnxc4TRvczz+HeffR3RQr/7DO4ovgWXM0HrLHuYtlPBEAatuGv
+ DsXClCGX2jjJqt6pg3kwcLvm6Ulke/ntApBdEJ66k39jUVd5KsC2Hs6P/JW2xU9SiwNwOd
+ e/c3M2vzncwQ2uhzHyw17wSq5gwOTmcHsLBq3Hn9vd+fQYuVR69jKLpHT2GK80RcYsCWnl
+ Q6vtzw2LPEQpdYNGA0XqIJLMbimprEeeD3XIkiGMd7CjN6F4kJLwNl28ZKMHpUBlq2C2HA
+ aSA7niUPLybB5e8/LlJg3NGrze8M5WjYslxmqHcHgVYV15+KZ84qSXlsZoDJzg==
+Message-ID: <9e31a388-98ca-4399-851f-1edc35ff7cd9@mailbox.org>
+Date: Thu, 5 Sep 2024 20:32:57 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: imx: Enable MMU and dcache very early on i.MX8M
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Peng Fan <peng.fan@nxp.com>, Stefano Babic <sbabic@denx.de>,
+Subject: Re: [PATCH v4] mmc: Poll CD in case cyclic framework is enabled
+From: Marek Vasut <marek.vasut@mailbox.org>
+To: Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de,
  Tom Rini <trini@konsulko.com>
-References: <20240827200400.217058-1-marex@denx.de>
- <CAOMZO5CXfVAXnyZ9s5dZdHbK+QLJZvmP5UeUaz=Bkv3mtbxc4g@mail.gmail.com>
+Cc: 'Peng Fan' <peng.fan@nxp.com>, 'Simon Glass' <sjg@chromium.org>
+References: <20240316201416.211480-1-marek.vasut+renesas@mailbox.org>
+ <CGME20240423231800epcas1p4e21bd06153b2394afd9a8696a4df6470@epcas1p4.samsung.com>
+ <fab40e09-1ac4-45c3-8dda-f0a1544d2d39@mailbox.org>
+ <000001da97a2$d3247950$796d6bf0$@samsung.com>
+ <e55e21af-7208-4b4d-9398-ee1e4825f69b@mailbox.org>
+ <050401da9a85$b24539a0$16cface0$@samsung.com>
+ <d1eb5f12-0718-4a85-bfe1-3c141ee6b049@mailbox.org>
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAOMZO5CXfVAXnyZ9s5dZdHbK+QLJZvmP5UeUaz=Bkv3mtbxc4g@mail.gmail.com>
+In-Reply-To: <d1eb5f12-0718-4a85-bfe1-3c141ee6b049@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: b8c464a05817de331c6
+X-MBO-RS-META: udcznq5ak4enduudf1oecidxm45myga6
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,37 +81,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/31/24 1:16 PM, Fabio Estevam wrote:
-> Hi Marek,
+On 4/30/24 3:48 AM, Marek Vasut wrote:
+> On 4/30/24 12:36 AM, Jaehoon Chung wrote:
+>>
+>>
+>>> -----Original Message-----
+>>> From: Marek Vasut <marek.vasut@mailbox.org>
+>>> Sent: Friday, April 26, 2024 8:41 PM
+>>> To: Jaehoon Chung <jh80.chung@samsung.com>; u-boot@lists.denx.de
+>>> Cc: 'Peng Fan' <peng.fan@nxp.com>; 'Simon Glass' <sjg@chromium.org>
+>>> Subject: Re: [PATCH v4] mmc: Poll CD in case cyclic framework is enabled
+>>>
+>>> On 4/26/24 8:27 AM, Jaehoon Chung wrote:
+>>>> Dear Marek,
+>>>>
+>>>>> -----Original Message-----
+>>>>> From: Marek Vasut <marek.vasut@mailbox.org>
+>>>>> Sent: Wednesday, April 24, 2024 8:18 AM
+>>>>> To: u-boot@lists.denx.de; Jaehoon Chung <jh80.chung@samsung.com>
+>>>>> Cc: Peng Fan <peng.fan@nxp.com>; Simon Glass <sjg@chromium.org>
+>>>>> Subject: Re: [PATCH v4] mmc: Poll CD in case cyclic framework is 
+>>>>> enabled
+>>>>>
+>>>>> On 3/16/24 9:13 PM, Marek Vasut wrote:
+>>>>>> In case the cyclic framework is enabled, poll the card detect of 
+>>>>>> already
+>>>>>> initialized cards and deinitialize them in case they are removed. 
+>>>>>> Since
+>>>>>> the card initialization is a longer process and card 
+>>>>>> initialization is
+>>>>>> done on first access to an uninitialized card anyway, avoid 
+>>>>>> initializing
+>>>>>> newly detected uninitialized cards in the cyclic callback.
+>>>>>
+>>>>> Any input on this ?
+>>>>
+>>>> When I have applied your patch from patchwork, it didn't apply 
+>>>> directly.
+>>>> If you're ok, I will apply after touch your patch. Is it ok?
+>>>
+>>> Sure.
+>>
+>> After touching your patch, I will inform again to you.
 > 
-> On Tue, Aug 27, 2024 at 5:04 PM Marek Vasut <marex@denx.de> wrote:
-> 
->> +/*
->> + * Place early TLB into the .data section so that it will not
->> + * get cleared, use 16 kiB alignment.
->> + */
->> +#define EARLY_TLB_SIZE SZ_64K
->> +u8 early_tlb[EARLY_TLB_SIZE] __section(".data") __aligned(0x4000);
-> 
-> This causes a CI failure:
-> 
-> https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/895190/raw
-> 
->     aarch64:  +   imx8mp_beacon
-> +arch/arm/mach-imx/imx8m/soc.c:602:24: error: 'SZ_64K' undeclared here
-> (not in a function)
-> +  602 | #define EARLY_TLB_SIZE SZ_64K
-> +      |                        ^~~~~~
-> +arch/arm/mach-imx/imx8m/soc.c:603:14: note: in expansion of macro
-> 'EARLY_TLB_SIZE'
-> +  603 | u8 early_tlb[EARLY_TLB_SIZE] __section(".data") __aligned(0x4000);
-> +      |              ^~~~~~~~~~~~~~
-> +make[3]: *** [scripts/Makefile.build:257:
-> arch/arm/mach-imx/imx8m/soc.o] Error 1
-> +make[2]: *** [scripts/Makefile.build:397: arch/arm/mach-imx/imx8m] Error 2
-> +make[1]: *** [Makefile:1897: arch/arm/mach-imx] Error 2
-> +make: *** [Makefile:177: sub-make] Error 2
-> 
-> Please take a look.
+> btw. what is the problem with the patch ?
 
-Missing linux/sizes.h , fixed in V2, thanks.
+Any news ?
