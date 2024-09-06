@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FEEECE7AA6
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 01:09:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02A30CE7AA5
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 01:09:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49C4888BD6;
-	Fri,  6 Sep 2024 03:09:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0948C8882C;
+	Fri,  6 Sep 2024 03:09:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZWsW4g5k";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qGykoqeQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E8CD88CDA; Fri,  6 Sep 2024 03:09:31 +0200 (CEST)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id B6F74886F9; Fri,  6 Sep 2024 03:09:37 +0200 (CEST)
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [IPv6:2607:f8b0:4864:20::b2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EE2588CC5
- for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 03:09:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 544EB8882C
+ for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 03:09:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6c159150ff4so8531366d6.2
- for <u-boot@lists.denx.de>; Thu, 05 Sep 2024 18:09:29 -0700 (PDT)
+Received: by mail-yb1-xb2c.google.com with SMTP id
+ 3f1490d57ef6-e164caa76e4so1655201276.1
+ for <u-boot@lists.denx.de>; Thu, 05 Sep 2024 18:09:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1725584968; x=1726189768; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tuNsHp4TjuhaxtAOwupzauvH56//vKj9Gn75pMiP2fU=;
- b=ZWsW4g5kM9zVcvNCrh84z6/FhsHtG/tUpL0FuEZXXOztHeP/KG0oO1lfvvsOaUhC8T
- 1mTFP1v+SoQXm8w7X+nXAgVlgn8BnV5JBHbSejkz4H+ZzYB+lEYOIFs5e6AHsDg9jTkN
- PAjh/MEqc7RhZcxtgVUEw68GDLo1B6M/lIgCg=
+ d=konsulko.com; s=google; t=1725584974; x=1726189774; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ne9lr8hfEFMbdYcIOl8IELUeCvXvXTCGmWuknLYsiZg=;
+ b=qGykoqeQRll6p1py8EritsQ39VuswjEL9IKuiis7sMHC67qTn/YmSmGmvTJBh4piTj
+ hfwNEN1Pk4DYXUM888GAQ0G4ojL26ZM640lsyGzcYn0NCVeQFLOIL3D9Sm9FzaZpzc1O
+ Q1dLQs/BMyC0K3l+0zY1H5ctVXuIdM9K3Xru0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725584968; x=1726189768;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=tuNsHp4TjuhaxtAOwupzauvH56//vKj9Gn75pMiP2fU=;
- b=ASWNR2vzrM8pSqdozhQpSwuby7ELneo2PlmQCiA6SW0Hq2E+8L4c8apjhGnAW0PRJa
- 2maEoAzSNvUKfCfReUxeNQoSusiy7S9TTk+9jZ5py/9qwo7EBZ48NDjc7XI5EV6cUTtd
- Fhm7IO9OtvO498YQtYHyH7wSYwJSC0lNE1ouFF19iIKyij+o5bFCYNcA49W3hOOfq7NA
- rpKLHwkWOqwpImOTue6vIegQGU5hWCku+10WrLybn1aLHMPgfNnJCKuF/6DwZH6A5rgl
- MXAz0Lk/ZcpVpI3xo5CRT2BDYV8Pk2NqFc/4R+tzTVZ1oiPIDaeq7qM1YZz42GClWrKH
- T79Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVVC9rNqHbIcneZxGD2PgawXnjEgD4b5kujQHKXWMpugvlLl5+KM0ErilZi5DIOI5W1JxtuHU0=@lists.denx.de
-X-Gm-Message-State: AOJu0YzuoHFjHxx0fACRvpDYFGsApne5XCtPETtjI+Sn7nN+ACxA2km4
- olmi9pdN76mwABqey7ONY/8nPN9HQtSLIlO3Rf/JBtuUdvDfFGhO9U/yWV32ViE=
-X-Google-Smtp-Source: AGHT+IFM3iOtTLjjLgp3KxuEJxbZYOY6Hxt9GPMqsntSpx4HYqkY67pwy3LBfiRy3eBvOMekHXpSow==
-X-Received: by 2002:a05:6214:570e:b0:6c3:6799:ddef with SMTP id
- 6a1803df08f44-6c5283f6d21mr13194746d6.3.1725584967922; 
- Thu, 05 Sep 2024 18:09:27 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.65.244]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6c52041803bsm12145516d6.105.2024.09.05.18.09.26
+ d=1e100.net; s=20230601; t=1725584974; x=1726189774;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ne9lr8hfEFMbdYcIOl8IELUeCvXvXTCGmWuknLYsiZg=;
+ b=FCGtgG54IqAeHO/C4W+YouI2iPoIDCEIk4TgsEqPbGJH0Vl6GaM/nWmShYzLF/WMb0
+ oDzxS/LNt20HXi9R6iJUDTQyfENhdxImErj+VroA5Ja45wXKcpiKkPIXmBaY2b22/p6V
+ zlILmJ1clwi4MYuiTehICbT+51uKX8b1I7YGAmMkVcJSZcYHUxTrPfArIkf/gHJzzMKS
+ D6y9p4aBB1ecJrc58bNnuBeGrSi9AAmHFDpTE/E9oed8+JlGYHjWqPSAcfeNsprExYXa
+ WyhB2+5vJ8nzojVkbFs9YfGmY9KiInU6PAgU7uuoO9h1enCTqx6POE3ihl2XWNkHWel8
+ tu4g==
+X-Gm-Message-State: AOJu0Yy+IqtKI+LuFhDmGRs2cWKpaVGRmm1GUeF+oZkB3/JVYXktKvi+
+ BAE1KcM05iIuOSYq6aWzNZUJYyITm3gkZZMFX7zWAy3sACEUHkF/VtzhZYiz7q4=
+X-Google-Smtp-Source: AGHT+IEBZ2Xm8jv58dcCxOD7P/gKJ+Fk3KiL3uBmuVpAUDZ1+nexSoP5C6ISi55v3wiRZy82mh/sGQ==
+X-Received: by 2002:a05:690c:dc5:b0:65f:d27d:3f6a with SMTP id
+ 00721157ae682-6db44d61d1dmr11006537b3.7.1725584974166; 
+ Thu, 05 Sep 2024 18:09:34 -0700 (PDT)
+Received: from bill-the-cat ([187.144.65.244])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7a98ef3a9cdsm125167985a.33.2024.09.05.18.09.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Sep 2024 18:09:27 -0700 (PDT)
+ Thu, 05 Sep 2024 18:09:33 -0700 (PDT)
+Date: Thu, 5 Sep 2024 19:09:30 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, 
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Sean Anderson <seanga2@gmail.com>, Peter Robinson <pbrobinson@gmail.com>, 
- Conor Dooley <conor.dooley@microchip.com>, 
- Minda Chen <minda.chen@starfivetech.com>, uboot-snps-arc@synopsys.com, 
- u-boot@lists.denx.de
-In-Reply-To: <20240721065907.7518-1-heinrich.schuchardt@canonical.com>
-References: <20240721065907.7518-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH v2 1/1] mmc: consider cd-gpios in Synopsys DesignWare
- driver
-Message-Id: <172558496623.1864439.9838811663120441423.b4-ty@konsulko.com>
-Date: Thu, 05 Sep 2024 19:09:26 -0600
+To: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
+Cc: u-boot@lists.denx.de, jh80.chung@samsung.com,
+ cheehong.ang@starfivetech.com, Alex Soo <yuklin.soo@starfivetech.com>,
+ Wei Liang Lim <weiliang.lim@starfivetech.com>
+Subject: Re: [PATCH v2] mmc: sdhci-cadence: Add support for Cadence sdmmc v6
+Message-ID: <20240906010930.GG2479150@bill-the-cat>
+References: <20231128063859.615-1-kuanlim.lee@starfivetech.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="l39XXTLk9YDaNXlG"
+Content-Disposition: inline
+In-Reply-To: <20231128063859.615-1-kuanlim.lee@starfivetech.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,20 +91,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 21 Jul 2024 08:59:07 +0200, Heinrich Schuchardt wrote:
 
-> The JH7110 SoC uses a GPIO for card detect.
-> 
-> * In the of_to_plat function check if a cd-gpios definition exists and
->   request the GPIO.
-> * In the getcd function return the GPIO value in this case.
-> 
-> 
-> [...]
+--l39XXTLk9YDaNXlG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Nov 28, 2023 at 02:38:30PM +0800, Kuan Lim Lee wrote:
+
+> Cadence SDMMC v6 controller has a lot of changes on initialize
+> compared to v4 controller. PHY is needed by v6 controller.
+>=20
+> Signed-off-by: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
+> Co-developed-by: Alex Soo <yuklin.soo@starfivetech.com>
+> Signed-off-by: Wei Liang Lim <weiliang.lim@starfivetech.com>
+> Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 
 Applied to u-boot/next, thanks!
 
--- 
+--=20
 Tom
 
+--l39XXTLk9YDaNXlG
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbaVkMACgkQFHw5/5Y0
+tywq2Av8CzegWO/H5cA6Wq24sSQNAMmD+6bEOcVrYxFeisLzB93kyXt7kHh+GG0O
+NAa5kgwSia9XqWxdpsSAC6NHQC34NazVsfQLrQbTnZ2+TT4+tYRJLzZ73HN4mttZ
+AoY1TqeoQsYwceJEKlYijKCKQqQiKUjz4Xf0ONPNRWXpqUTc0fOtq4lCElvIROGP
+VHvn4VT7EfhOkgjxvAINHFWSJHmz5Cl5N1tXj/xIfvityBCFhfsUWnIe02mn7VaC
+sKTyC0sBLPf1GE9+UxXTnJq0575ylp695CmxKb+uASdrcHHmVyKfZEa8tonHJY9L
+8Jwmroq9suzCBp1/ebPC4/BNmV+PTf1fIs7qqG6xRzXhCtnnnu3etL+KDT0C5X6j
+MClPStBYVHFiArPT/PZvF0+XjqO7ycAsbRJ2BdCemg8Ha4O4W/LxHv89dujQgvmE
+4HAb1nG4yfciHy8beiPnzhbG3slBjaC0w3uJalV33krDiQhl9QsvMWKgR9ouYpGJ
+oBtvxjNo
+=7/R2
+-----END PGP SIGNATURE-----
+
+--l39XXTLk9YDaNXlG--
