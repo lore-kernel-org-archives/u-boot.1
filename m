@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 050A1CE7AB8
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 07:23:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 520C7CE7AB9
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 07:24:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C39B988D5D;
-	Fri,  6 Sep 2024 09:22:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2995A88D67;
+	Fri,  6 Sep 2024 09:22:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="EbISOK8A";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="E8rX1oC5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2467088D4F; Fri,  6 Sep 2024 09:22:46 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id B2E9B88D5C; Fri,  6 Sep 2024 09:22:47 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28B1488580
+ by phobos.denx.de (Postfix) with ESMTPS id E1F8788D16
  for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 09:22:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a7a9cf7d3f3so222439766b.1
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-a86a37208b2so241579766b.0
  for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 00:22:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1725607362; x=1726212162; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1725607363; x=1726212163; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BHgKYI/94IZSKyVvJ03qJuSsrTGkqHgKrpgswsIlGOk=;
- b=EbISOK8AcVoefTrsNswmnzlo6MyqThRIbUAMypxi63OnICFY/xII7BL6WSN25BlyTK
- 0Sanor/4FMVc4K12kRrIIVK6pcx4n5LFIdyPeHlqQ9yujPfYSzkZDJrqvSYHenXnimbB
- GcJgMH6zndyyC8Nekt1e2pEWTCApt7QnLT8yqVGUlMq931SYFoRh+3u8CEA6RqEgn/c3
- vn/A9tXxBi82YtF0udQBpU8SMvZsm61rOUQrdXDJGbUaYOS68+heHbsv22K2BSByovya
- R5H5w1f442/1CnNXTepAQMuA6O71Fwttik1R7/kGjnX8+sWguS/T7wtRBAoYnnYELmem
- T6ZA==
+ bh=fWwAtuvGUTwXnbi30IVwTUxIM9btjMVWQAt6bX+T5+o=;
+ b=E8rX1oC5FH8kS3HF/Ic466ZmL5CpHh7fqFNiB98bYx//pGwDdzC7bz/u6980t66Y1C
+ iQs4+dP4CR0DRkML461H11MNyuV9q3MEoTCMV2VKb1ct5N/l8aiiFZsBSPtqLzWrn5iO
+ Q85RRNJypn+Bh+YmUlKLHPH7f5a5lJ7I6Ks7Z1QfYldLxvGYf3L/Leo2myuwRC22RU/G
+ 8Z4sRlaEqDSx2exfgoPmr1vEunz0m3OfovS79LuZ2vef5Kb86v5YsdqiQ+/BfyzDdmfR
+ REHlTysxKhY/Iw53dUGnG9UWcu7v2M8gSZ+1E3MGa42EkkZIIj2U/8F5/2eNiGixxGuQ
+ 5uIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725607362; x=1726212162;
+ d=1e100.net; s=20230601; t=1725607363; x=1726212163;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BHgKYI/94IZSKyVvJ03qJuSsrTGkqHgKrpgswsIlGOk=;
- b=TxdR946Th65jOlRAi01Lo3Ltr2Q7k2QzHcJSE/8BR6dJkHJFgtEkNLsrBcDrRmm9KA
- 7sg0q03zgzFfQ2LLNsQC0LFZl7C3sCmm7jpvtftdaZyhvp8PcpjzcntSe/e971NMFNQq
- NfWdIJAShkDqelsFKBSXXWZB40Fo22p8uOAx/LXb2Z/NmHs79PaPGxZU84FRvintsbT1
- oN5LdVcmLBYSQ4QsjqwHeQThhlkWXw5ljHOQavge64mcEoKqgHEPb7ATDw4y6OQa7sKw
- zG6+j6yNoWFocP+TUYUer4OeQJy0qA4TJi6tHSrXfou7stc6nog/NabMV2GDvApU0eDg
- 0hTg==
-X-Gm-Message-State: AOJu0Yz9SH0AMuyrJVQvaH3EjNsVuZ2Mhopjw8PGrdB9l0GpLrS60wtB
- MK5iSIIfIGHYu+5cMCidVECrE5KS2AXrKgpfQFQQV0LtF2SDNn7SPaKV/8mz/vZ3hnZ6V3Kqgux
- V
-X-Google-Smtp-Source: AGHT+IHXljtHGYPIf5jV7pTbeP3PWRYhCLd8on1nMqxJ4mItXATDLPiQLnkFcXvaVyduUFGa/eO5UQ==
-X-Received: by 2002:a17:907:869e:b0:a86:73cb:99ef with SMTP id
- a640c23a62f3a-a8a8866b206mr105351166b.39.1725607362509; 
- Fri, 06 Sep 2024 00:22:42 -0700 (PDT)
+ bh=fWwAtuvGUTwXnbi30IVwTUxIM9btjMVWQAt6bX+T5+o=;
+ b=HYHgiX7cG+WEhmmNOtlpJPBn/uWo3adliEfxCV426MyMpJCcNFFA1S19BCithCKwB/
+ 8u+z/mZLHEXHZ5aa0gPuZNMxohbY2ctXiiJLcejuTT9D5hSSTmGt8kSjNcAgCh4bXbxI
+ +jhVnet3R42zJy1z5qVnwAfWgLPP5QDKb+scV+S75zjfmLwTIQK/vXvjm1drLJjSeZ8H
+ yv1cP/L6pXheYnBKnioCjlSyG6ZChfusTiuF3u2xDrlEPs0rp3yGv6pf5GMNo3zXZYqL
+ UCh66dpv5Ek7B97IrKyISNinIHyU9tOdr7a982tnlnLl0woB5TC5gYBsPRnZfi/d4gvb
+ sS3g==
+X-Gm-Message-State: AOJu0Yx7z6LCdVYvJKMzlFChZsHSwBr7LtGmmp+wmoZoy4CVWlMsAeMw
+ EhocB54lrhJoXfaU4M0mrIW3BdEGolrP2Er/Rtoh3W/Z6rdfD1C+zkz0SqFccggFkuzXGMQJRAz
+ y
+X-Google-Smtp-Source: AGHT+IHx2JrvJ2z0xyUbNdnosPMXpNhPXr08ObONeR+24i1iFg8rLNr7gpF9XX2EkGSRarxILX1ECg==
+X-Received: by 2002:a17:907:948f:b0:a72:750d:ab08 with SMTP id
+ a640c23a62f3a-a897f77eef9mr1997891066b.14.1725607363319; 
+ Fri, 06 Sep 2024 00:22:43 -0700 (PDT)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8a7f7f541csm107748466b.193.2024.09.06.00.22.41
+ a640c23a62f3a-a8a7f7f541csm107748466b.193.2024.09.06.00.22.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Sep 2024 00:22:42 -0700 (PDT)
+ Fri, 06 Sep 2024 00:22:43 -0700 (PDT)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: u-boot@lists.denx.de
 Cc: sjg@chromium.org, bmeng.cn@gmail.com, trini@konsulko.com, sr@denx.de,
  pbrobinson@gmail.com, mbrugger@suse.com, maximilian.brune@9elements.com,
  Patrick Rudolph <patrick.rudolph@9elements.com>
-Subject: [PATCH v2 07/28] arm: acpi: Add generic ACPI methods
-Date: Fri,  6 Sep 2024 09:22:09 +0200
-Message-ID: <20240906072231.2531491-8-patrick.rudolph@9elements.com>
+Subject: [PATCH v2 08/28] acpi: Add fill_madt to acpi_ops
+Date: Fri,  6 Sep 2024 09:22:10 +0200
+Message-ID: <20240906072231.2531491-9-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20240906072231.2531491-1-patrick.rudolph@9elements.com>
 References: <20240906072231.2531491-1-patrick.rudolph@9elements.com>
@@ -95,335 +95,207 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add generic ACPI code to generate
-- MADT GICC
-- MADT GICD
-- MADT GICR
-- MADT GIC ITS
-- PPTT processor
-- PPTT cache
-
-as commonly used on arm platforms.
+Add a new method to acpi_ops to let drivers fill out ACPI MADT.
+The code is unused for now until drivers implement the new ops.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>
 ---
-Changelog v2:
-- Add full comments to exported functions
+ drivers/core/acpi.c   | 16 ++++++++++++++++
+ include/dm/acpi.h     | 26 ++++++++++++++++++++++++++
+ lib/acpi/acpi_table.c | 12 +++++++++++-
+ test/dm/acpi.c        | 42 ++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 95 insertions(+), 1 deletion(-)
 
----
- arch/arm/include/asm/acpi_table.h | 115 ++++++++++++++++++++++++++++++
- arch/arm/lib/Makefile             |   1 +
- arch/arm/lib/acpi_table.c         | 114 +++++++++++++++++++++++++++++
- include/acpi/acpi_table.h         |  34 ++++++++-
- 4 files changed, 263 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/lib/acpi_table.c
-
-diff --git a/arch/arm/include/asm/acpi_table.h b/arch/arm/include/asm/acpi_table.h
-index e69de29bb2..c65eabe837 100644
---- a/arch/arm/include/asm/acpi_table.h
-+++ b/arch/arm/include/asm/acpi_table.h
-@@ -0,0 +1,115 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
-+#ifndef __ASM_ACPI_TABLE_H__
-+#define __ASM_ACPI_TABLE_H__
-+
-+#ifndef __ACPI__
-+
-+#include <acpi/acpi_table.h>
-+
-+/**
-+ * acpi_write_madt_gicc() - Write out a MADT GICC sub-table
-+ *
-+ * Write out the GIC CPU Interface sub-table.
-+ *
-+ * @gicc:             Pointer to place to put the sub-table
-+ * @cpu_num:          GIC's CPU Interface Number
-+ * @perf_gsiv:        The GSIV used for Performance Monitoring Interrupts
-+ * @phys_base:        Address at which the processor can access this
-+ *                    GIC CPU Interface
-+ * @gicv:             Address of the GIC virtual CPU interface registers
-+ * @gich:             Address of the GIC virtual interface control block
-+ *                    registers
-+ * @vgic_maint_irq:   GSIV for Virtual GIC maintenance interrupt
-+ * @gicr_base:        Physical address of the associated Redistributor
-+ * @mpidr:            MPIDR as defined by ARM architecture
-+ * @efficiency:       Describes the relative power efficiency
-+ */
-+void acpi_write_madt_gicc(struct acpi_madt_gicc *gicc, uint cpu_num,
-+			  uint perf_gsiv, ulong phys_base, ulong gicv,
-+			  ulong gich, uint vgic_maint_irq, u64 gicr_base,
-+			  ulong mpidr, uint efficiency);
-+
-+/**
-+ * acpi_write_madt_gicd() - Write out a MADT GICD sub-table
-+ *
-+ * Write out the GIC Distributor sub-table.
-+ *
-+ * @gicd:            Pointer to place to put the sub-table
-+ * @gic_id:          This GIC Distributor's hardware ID
-+ * @phys_base:       The 64-bit physical address for this Distributor
-+ * @gic_version:     GIC version
-+ */
-+void acpi_write_madt_gicd(struct acpi_madt_gicd *gicd, uint gic_id,
-+			  ulong phys_base, uint gic_version);
-+
-+/**
-+ * acpi_write_madt_gicr() - Write out a MADT GICR sub-table
-+ *
-+ * Write out the GIC Redistributor sub-table.
-+ *
-+ * @gicr:                            Pointer to place to put the sub-table
-+ * @discovery_range_base_address:    Physical address of a page range
-+ *                                   containing all GIC Redistributors
-+ * @discovery_range_length:          Length of the GIC Redistributor
-+ *                                   Discovery page range
-+ */
-+void acpi_write_madt_gicr(struct acpi_madt_gicr *gicr,
-+			  u64 discovery_range_base_address,
-+			  u32 discovery_range_length);
-+
-+/**
-+ * acpi_write_madt_its() - Write out a MADT ITS sub-table
-+ *
-+ * Write out the GIC Interrupt Translation Service sub-table.
-+ *
-+ * @its:                    Pointer to place to put the sub-table
-+ * @its_id:                 Uniqueue GIC ITS ID
-+ * @physical_base_address:  Physical address for the Interrupt
-+ *                          Translation Service
-+ */
-+void acpi_write_madt_its(struct acpi_madt_its *its,
-+			 u32 its_id,
-+			 u64 physical_base_address);
-+
-+/**
-+ * acpi_pptt_add_proc() - Write out a PPTT processor sub-table
-+ *
-+ * Write out the Processor Properties Topology Table processor sub-table.
-+ *
-+ * @ctx:                   ACPI context pointer
-+ * @flags:                 Processor Structure Flags
-+ * @parent:                Reference to parent processor
-+ * @proc_id:               ACPI processor ID as defined in MADT
-+ * @num_resources:         Number of resource structure references
-+ * @resource_list:         References to other PPTT structures
-+ * Return: offset from start of PPTT in bytes
-+ */
-+int acpi_pptt_add_proc(struct acpi_ctx *ctx, const u32 flags, const u32 parent,
-+		       const u32 proc_id, const u32 num_resources,
-+		       const u32 *resource_list);
-+
-+/**
-+ * acpi_pptt_add_cache() - Write out a PPTT cache sub-table
-+ *
-+ * Write out the Processor Properties Topology Table cache sub-table.
-+ *
-+ * @ctx: ACPI context pointer
-+ * @flags:                Cache Structure Flags
-+ * @next_cache_level:     Reference to next level of cache
-+ * @size:                 Size of the cache in bytes
-+ * @sets:                 Number of sets in the cache
-+ * @assoc:                Integer number of ways
-+ * @attributes:           Allocation type, Cache type, policy
-+ * @line_size:            Line size in bytes
-+ * Return: offset from start of PPTT in bytes
-+ */
-+int acpi_pptt_add_cache(struct acpi_ctx *ctx, const u32 flags,
-+			const u32 next_cache_level, const u32 size,
-+			const u32 sets, const u8 assoc, const u8 attributes,
-+			const u16 line_size);
-+
-+#endif /* !__ASSEMBLY__ */
-+#endif /* !__ACPI__ */
-+
-+#endif /* __ASM_ACPI_TABLE_H__ */
-diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
-index 67275fba61..a7efed6771 100644
---- a/arch/arm/lib/Makefile
-+++ b/arch/arm/lib/Makefile
-@@ -86,6 +86,7 @@ obj-y	+= psci-dt.o
- obj-$(CONFIG_DEBUG_LL)	+= debug.o
- 
- obj-$(CONFIG_BLOBLIST)  += xferlist.o
-+obj-$(CONFIG_GENERATE_ACPI_TABLE) += acpi_table.o
- 
- # For EABI conformant tool chains, provide eabi_compat()
- ifneq (,$(findstring -mabi=aapcs-linux,$(PLATFORM_CPPFLAGS)))
-diff --git a/arch/arm/lib/acpi_table.c b/arch/arm/lib/acpi_table.c
-new file mode 100644
-index 0000000000..db6e40bdef
---- /dev/null
-+++ b/arch/arm/lib/acpi_table.c
-@@ -0,0 +1,114 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Based on acpi.c from coreboot
-+ *
-+ * Copyright (C) 2024 9elements GmbH
-+ */
-+
-+#define LOG_CATEGORY LOGC_ACPI
-+
-+#include <acpi/acpigen.h>
-+#include <acpi/acpi_device.h>
-+#include <acpi/acpi_table.h>
-+#include <string.h>
-+
-+void acpi_write_madt_gicc(struct acpi_madt_gicc *gicc, uint cpu_num,
-+			  uint perf_gsiv, ulong phys_base, ulong gicv,
-+			  ulong gich, uint vgic_maint_irq, u64 gicr_base,
-+			  ulong mpidr, uint efficiency)
-+{
-+	memset(gicc, '\0', sizeof(struct acpi_madt_gicc));
-+	gicc->type = ACPI_APIC_GICC;
-+	gicc->length = sizeof(struct acpi_madt_gicc);
-+	gicc->cpu_if_num = cpu_num;
-+	gicc->processor_id = cpu_num;
-+	gicc->flags = ACPI_MADTF_ENABLED;
-+	gicc->perf_gsiv = perf_gsiv;
-+	gicc->phys_base = phys_base;
-+	gicc->gicv = gicv;
-+	gicc->gich = gich;
-+	gicc->vgic_maint_irq = vgic_maint_irq;
-+	gicc->gicr_base = gicr_base;
-+	gicc->mpidr = mpidr;
-+	gicc->efficiency = efficiency;
-+}
-+
-+void acpi_write_madt_gicd(struct acpi_madt_gicd *gicd, uint gic_id,
-+			  ulong phys_base, uint gic_version)
-+{
-+	memset(gicd, '\0', sizeof(struct acpi_madt_gicd));
-+	gicd->type = ACPI_APIC_GICD;
-+	gicd->length = sizeof(struct acpi_madt_gicd);
-+	gicd->gic_id = gic_id;
-+	gicd->phys_base = phys_base;
-+	gicd->gic_version = gic_version;
-+}
-+
-+void acpi_write_madt_gicr(struct acpi_madt_gicr *gicr,
-+			  u64 discovery_range_base_address,
-+			  u32 discovery_range_length)
-+{
-+	memset(gicr, '\0', sizeof(struct acpi_madt_gicr));
-+	gicr->type = ACPI_APIC_GICR;
-+	gicr->length = sizeof(struct acpi_madt_gicr);
-+	gicr->discovery_range_base_address = discovery_range_base_address;
-+	gicr->discovery_range_length = discovery_range_length;
-+}
-+
-+void acpi_write_madt_its(struct acpi_madt_its *its,
-+			 u32 its_id,
-+			 u64 physical_base_address)
-+{
-+	memset(its, '\0', sizeof(struct acpi_madt_its));
-+	its->type = ACPI_APIC_ITS;
-+	its->length = sizeof(struct acpi_madt_its);
-+	its->gic_its_id = its_id;
-+	its->physical_base_address = physical_base_address;
-+}
-+
-+int acpi_pptt_add_proc(struct acpi_ctx *ctx, const u32 flags, const u32 parent,
-+		       const u32 proc_id, const u32 num_resources,
-+		       const u32 *resource_list)
-+{
-+	struct acpi_pptt_proc *proc = ctx->current;
-+	int offset;
-+
-+	offset = ctx->current - ctx->tab_start;
-+	proc->hdr.type = ACPI_PPTT_TYPE_PROC;
-+	proc->flags = flags;
-+	proc->parent = parent;
-+	proc->proc_id = proc_id;
-+	proc->num_resources = num_resources;
-+	proc->hdr.length = sizeof(struct acpi_pptt_proc) +
-+		sizeof(u32) * num_resources;
-+
-+	if (resource_list)
-+		memcpy(proc + 1, resource_list, sizeof(u32) * num_resources);
-+
-+	acpi_inc(ctx, proc->hdr.length);
-+
-+	return offset;
-+}
-+
-+int acpi_pptt_add_cache(struct acpi_ctx *ctx, const u32 flags,
-+			const u32 next_cache_level, const u32 size,
-+			const u32 sets, const u8 assoc, const u8 attributes,
-+			const u16 line_size)
-+{
-+	struct acpi_pptt_cache *cache = ctx->current;
-+	int offset;
-+
-+	offset = ctx->current - ctx->tab_start;
-+	cache->hdr.type = ACPI_PPTT_TYPE_CACHE;
-+	cache->hdr.length = sizeof(struct acpi_pptt_cache);
-+	cache->flags = flags;
-+	cache->next_cache_level = next_cache_level;
-+	cache->size = size;
-+	cache->sets = sets;
-+	cache->assoc = assoc;
-+	cache->attributes = attributes;
-+	cache->line_size = line_size;
-+	acpi_inc(ctx, cache->hdr.length);
-+
-+	return offset;
-+}
-diff --git a/include/acpi/acpi_table.h b/include/acpi/acpi_table.h
-index ac2dd0d6ad..efa5d7929e 100644
---- a/include/acpi/acpi_table.h
-+++ b/include/acpi/acpi_table.h
-@@ -342,7 +342,10 @@ enum acpi_apic_types {
- 	ACPI_APIC_LX2APIC,		/* Processor local x2APIC */
- 	ACPI_APIC_LX2APIC_NMI,		/* Local x2APIC NMI */
- 	ACPI_APIC_GICC,			/* Generic Interrupt Ctlr CPU i/f */
--	ACPI_APIC_GICD			/* Generic Interrupt Ctlr Distributor */
-+	ACPI_APIC_GICD,			/* Generic Interrupt Ctlr Distributor */
-+	ACPI_APIC_MSI_FRAME,		/* Generic Interrupt MSI Frame */
-+	ACPI_APIC_GICR,			/* Generic Interrupt Ctlr Redistributor */
-+	ACPI_APIC_ITS,			/* Interrupt Translation Service */
+diff --git a/drivers/core/acpi.c b/drivers/core/acpi.c
+index 9f78422892..4763963914 100644
+--- a/drivers/core/acpi.c
++++ b/drivers/core/acpi.c
+@@ -48,6 +48,7 @@ enum method_t {
+ 	METHOD_FILL_SSDT,
+ 	METHOD_INJECT_DSDT,
+ 	METHOD_SETUP_NHLT,
++	METHOD_FILL_MADT,
  };
  
- /* MADT: Processor Local APIC Structure */
-@@ -437,6 +440,35 @@ struct acpi_madt_gicd {
- 	u8 reserved3[3];
- } __packed;
+ /* Prototype for all methods */
+@@ -282,6 +283,8 @@ acpi_method acpi_get_method(struct udevice *dev, enum method_t method)
+ 		switch (method) {
+ 		case METHOD_WRITE_TABLES:
+ 			return aops->write_tables;
++		case METHOD_FILL_MADT:
++			return aops->fill_madt;
+ 		case METHOD_FILL_SSDT:
+ 			return aops->fill_ssdt;
+ 		case METHOD_INJECT_DSDT:
+@@ -328,6 +331,19 @@ int acpi_recurse_method(struct acpi_ctx *ctx, struct udevice *parent,
+ 	return 0;
+ }
+ 
++int acpi_fill_madt_subtbl(struct acpi_ctx *ctx)
++{
++	int ret;
++
++	log_debug("Writing MADT table\n");
++	ret = acpi_recurse_method(ctx, dm_root(), METHOD_FILL_MADT, TYPE_NONE);
++	log_debug("Writing MADT finished, err=%d\n", ret);
++	if (ret)
++		return log_msg_ret("build", ret);
++
++	return ret;
++}
++
+ int acpi_fill_ssdt(struct acpi_ctx *ctx)
+ {
+ 	void *start = ctx->current;
+diff --git a/include/dm/acpi.h b/include/dm/acpi.h
+index 3adfe21767..d6bc0c099a 100644
+--- a/include/dm/acpi.h
++++ b/include/dm/acpi.h
+@@ -146,6 +146,22 @@ struct acpi_ops {
+ 	 */
+ 	int (*write_tables)(const struct udevice *dev, struct acpi_ctx *ctx);
+ 
++	/**
++	 * fill_madt() - Generate MADT sub-tables for a device
++	 *
++	 * This is called to create the MADT table. The method should write out
++	 * whatever sub-table is needed by this device. It will end up in the
++	 * MADT table.
++	 *
++	 * Note that this is called 'fill' because the entire contents of the
++	 * MADT is build by calling this method on all devices.
++	 *
++	 * @dev: Device to write
++	 * @ctx: ACPI context to use
++	 * @return 0 if OK, -ve on error
++	 */
++	int (*fill_madt)(const struct udevice *dev, struct acpi_ctx *ctx);
++
+ 	/**
+ 	 * fill_ssdt() - Generate SSDT code for a device
+ 	 *
+@@ -231,6 +247,16 @@ int acpi_copy_name(char *out_name, const char *name);
+  */
+ int acpi_write_dev_tables(struct acpi_ctx *ctx);
  
 +/**
-+ * struct __packed acpi_madt_gicr - GIC Redistributor (type 0xe)
++ * acpi_fill_madt_subtbl() - Generate ACPI tables for MADT
 + *
-+ * This holds information about the Generic Interrupt Controller (GIC)
-+ * Redistributor interface. See ACPI Spec v6.3 section 5.2.12.17
-+ */
-+struct acpi_madt_gicr {
-+	u8 type;
-+	u8 length;
-+	u16 reserved;
-+	u64 discovery_range_base_address;
-+	u32 discovery_range_length;
-+} __packed;
-+
-+/**
-+ * struct __packed acpi_madt_its - GIC Interrupt Translation Service (type 0xf)
++ * This is called to create the MADT sub-tables for all devices.
 + *
-+ * This holds information about the Interrupt Translation Service (ITS)
-+ * Structure. See ACPI Spec v6.3 section 5.2.12.18
++ * @ctx: ACPI context to use
++ * Return: 0 if OK, -ve on error
 + */
-+struct acpi_madt_its {
-+	u8 type;
-+	u8 length;
-+	u16 reserved;
-+	u32 gic_its_id;
-+	u64 physical_base_address;
-+	u32 reserved2;
-+} __packed;
++int acpi_fill_madt_subtbl(struct acpi_ctx *ctx);
 +
- /* MCFG (PCI Express MMIO config space BAR description table) */
- struct acpi_mcfg {
- 	struct acpi_table_header header;
+ /**
+  * acpi_fill_ssdt() - Generate ACPI tables for SSDT
+  *
+diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
+index 823af43045..2173701e6d 100644
+--- a/lib/acpi/acpi_table.c
++++ b/lib/acpi/acpi_table.c
+@@ -249,6 +249,7 @@ int acpi_write_madt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+ 	struct acpi_table_header *header;
+ 	struct acpi_madt *madt;
+ 	void *current;
++	u32 old_length;
+ 
+ 	madt = ctx->current;
+ 
+@@ -261,14 +262,23 @@ int acpi_write_madt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+ 	header->revision = ACPI_MADT_REV_ACPI_3_0;
+ 
+ 	current = (void *)madt + sizeof(struct acpi_madt);
++	/* TODO: Get rid of acpi_fill_madt */
+ 	current = acpi_fill_madt(madt, current);
+ 
++	/* Calculate length */
++	header->length = (uintptr_t)current - (uintptr_t)madt;
++	old_length = header->length;
++	acpi_inc(ctx, madt->header.length);
++
++	acpi_fill_madt_subtbl(ctx);
++	current = ctx->current;
++
+ 	/* (Re)calculate length and checksum */
+ 	header->length = (uintptr_t)current - (uintptr_t)madt;
+ 
+ 	header->checksum = table_compute_checksum((void *)madt, header->length);
+ 	acpi_add_table(ctx, madt);
+-	acpi_inc(ctx, madt->header.length);
++	acpi_inc(ctx, madt->header.length - old_length);
+ 
+ 	return 0;
+ }
+diff --git a/test/dm/acpi.c b/test/dm/acpi.c
+index 7da381f1a5..cc032a4618 100644
+--- a/test/dm/acpi.c
++++ b/test/dm/acpi.c
+@@ -95,6 +95,21 @@ static int testacpi_get_name(const struct udevice *dev, char *out_name)
+ 		return acpi_copy_name(out_name, ACPI_TEST_DEV_NAME);
+ }
+ 
++static int testacpi_fill_madt(const struct udevice *dev, struct acpi_ctx *ctx)
++{
++	u64 *data = ctx->current;
++
++	/* Only fill madt once */
++	if (device_get_uclass_id(dev->parent) != UCLASS_TEST_ACPI)
++		return 0;
++
++	*data = 0xdeadbeef;
++
++	acpi_inc(ctx, sizeof(u64));
++
++	return 0;
++}
++
+ static int testacpi_fill_ssdt(const struct udevice *dev, struct acpi_ctx *ctx)
+ {
+ 	const char *data;
+@@ -124,6 +139,7 @@ static int testacpi_inject_dsdt(const struct udevice *dev, struct acpi_ctx *ctx)
+ struct acpi_ops testacpi_ops = {
+ 	.get_name	= testacpi_get_name,
+ 	.write_tables	= testacpi_write_tables,
++	.fill_madt	= testacpi_fill_madt,
+ 	.fill_ssdt	= testacpi_fill_ssdt,
+ 	.inject_dsdt	= testacpi_inject_dsdt,
+ };
+@@ -532,6 +548,32 @@ static int dm_test_acpi_fill_ssdt(struct unit_test_state *uts)
+ }
+ DM_TEST(dm_test_acpi_fill_ssdt, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
+ 
++/* Test acpi_fill_madt() */
++static int dm_test_acpi_fill_madt(struct unit_test_state *uts)
++{
++	struct acpi_ctx ctx;
++	u64 *buf;
++
++	buf = malloc(BUF_SIZE);
++	ut_assertnonnull(buf);
++
++	acpi_reset_items();
++	ctx.current = buf;
++	buf[1] = 'z';	/* sentinel */
++	ut_assertok(acpi_fill_madt_subtbl(&ctx));
++
++	/*
++	 * These values come from acpi-test2's acpi-ssdt-test-data property.
++	 * This device comes first because of u-boot,acpi-ssdt-order
++	 */
++	ut_asserteq(0xdeadbeef, buf[0]);
++
++	ut_asserteq('z', buf[1]);
++
++	return 0;
++}
++DM_TEST(dm_test_acpi_fill_madt, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
++
+ /* Test acpi_inject_dsdt() */
+ static int dm_test_acpi_inject_dsdt(struct unit_test_state *uts)
+ {
 -- 
 2.45.2
 
