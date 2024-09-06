@@ -4,111 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCA5DE6FE33
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 17:06:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01D43E6FE33
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 17:06:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE8DC88D25;
-	Fri,  6 Sep 2024 19:06:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 27DB888D1A;
+	Fri,  6 Sep 2024 19:06:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mDSzC1/y";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T765EBvd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 725AB888A7; Fri,  6 Sep 2024 17:21:50 +0200 (CEST)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id ED9B48641A; Fri,  6 Sep 2024 19:00:49 +0200 (CEST)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21B26886F9
- for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 17:21:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C3A688CD8
+ for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 19:00:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-4581e7f31eeso134401cf.0
- for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 08:21:48 -0700 (PDT)
+ spf=pass smtp.mailfrom=zamorozov.di5454@gmail.com
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-e0bd34b58d3so309601276.0
+ for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 10:00:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1725636107; x=1726240907; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=exv9vnsC2x+LB/rXuJXczUPgqlWHpSJjTDlb31ENGhk=;
- b=mDSzC1/yzrFvsCUHkioigWZUeY99oKhKqygJxmYyaOZcAGgkahgFzM7I5yM3i3BoLf
- FLr02WG7yifminKw9jj4EkjINS+8MetR86d804CYDWCeP8FbqgUJ1QQLyCacXNmBbWH1
- JzTq/xulYvd1QR4RkS7Us8pTdHlR0wQ4t7/Gk=
+ d=gmail.com; s=20230601; t=1725642046; x=1726246846; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=H2ASF/kN7YEu1QGzScsoHxIy89KmyOp4JtYj+m4j1U0=;
+ b=T765EBvd2qNjjdoh5fhmpO5MwIDmiP60UnvTxl3tkypeNJ2qI7JzyGI+xmbgNFd25H
+ RKka1eLoIUA5+khXhAoVm8BeK+EpSGrb6B+bnYADKpA3HKbiqSnJHHBEqMm//mvCVF5J
+ QzJvlJ6z1cACG8UIaF0p/Bl4zdVp+R4Ei7jjbcFOHhW0bSW6DAZP/vviziaoESQCXqbN
+ 4lNFyrBUVPnwvm9EmsJMKGe91ArvyJNCtKIbtpDRq6RMcG1kzgmmPTon90KuCk7P+QnE
+ v5pDNS3w2j7qaWR4//hg2pEI5/JhgED0KDB4smzpTPItCI1zVu5I5OTe6K65mpzj4PbP
+ xwcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725636107; x=1726240907;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=exv9vnsC2x+LB/rXuJXczUPgqlWHpSJjTDlb31ENGhk=;
- b=LfEvYVB5bfCAvJ9xFOezU9WvAk0rqrwcVc64xP95sLMrIzirPGmNCeZZ4XPlQ3nzbm
- qeBsMQUSp+xCyueWw7EokFzC5NWZjbMiNoa7gpqbLGPRu0H1zMZWEGl6f7RKjRHm0ouj
- A1HYNEqRxAQzzIGJGJEmIz81L0lNVIEGO0Re7oCaS2Hy+6FbFRbUyxWZi6LsJ6qqD1dJ
- SziFi1ReDeUuzixCI2x6aGS/R2qjwj4ddjpU65am5vnOxctkQcSfVg+52BTUHKi6GJf0
- vzKeX1AM9l8mRwS/5i0qzpjbXAap9zmO0UlA5Y9L4ppRCob/BKojbQlunF1Zg2sOjAvO
- 3L8Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX01xuI5LGgJY+hUIcjfVggRVLzkWpxJk44rFt1qRM5grn13n0MkeszIvb5Qbn28CdtYgDrl+0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyyqnW47nIkMnhnAwclbeZMrh7QPTXT6wZfjWxxe0qaMUFoKOot
- kKIZ2ntQGBX66juMuijyu3T6t3LREa5xqWzEepZ2B6Cevd89mx7RLbiKUcRTIK8=
-X-Google-Smtp-Source: AGHT+IHGxVh/AcwBrRwAZYMqSk6MKdQd25EMX8qvpLGJsjkgHrvdtXluSRWaOcPmAvXhIKZq5cKlZw==
-X-Received: by 2002:a05:622a:1ba1:b0:457:c851:8b10 with SMTP id
- d75a77b69052e-4580c6fe459mr39342381cf.33.1725636106597; 
- Fri, 06 Sep 2024 08:21:46 -0700 (PDT)
-Received: from bill-the-cat ([187.144.65.244])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4581add3a5esm1969161cf.74.2024.09.06.08.21.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Sep 2024 08:21:45 -0700 (PDT)
-Date: Fri, 6 Sep 2024 09:21:40 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>, Raymond Mao <raymond.mao@linaro.org>,
- Maxim Uvarov <muvarov@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Anton Antonov <Anton.Antonov@arm.com>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Matteo Lisi <matteo.lisi@engicam.com>,
- Gilles Talis <gilles.talis@gmail.com>,
- Michal Simek <michal.simek@amd.com>, Marek Vasut <marex@denx.de>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Nishanth Menon <nm@ti.com>,
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- James Hilliard <james.hilliard1@gmail.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Petr Zejdl <petr.zejdl@cern.ch>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Eddie James <eajames@linux.ibm.com>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Johan Jonker <jbx6244@gmail.com>, Maxim Moskalets <maximmosk4@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sean Anderson <sean.anderson@seco.com>,
- Artur Rojek <artur@conclusive.pl>, Janne Grunau <j@jannau.net>,
- Neal Gompa <neal@gompa.dev>, Yang Xiwen <forbidden405@outlook.com>,
- Gabor Juhos <j4g8y7@gmail.com>, Kever Yang <kever.yang@rock-chips.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Boon Khai Ng <boon.khai.ng@intel.com>,
- Robert Marko <robert.marko@sartura.hr>
-Subject: Re: [PATCH v9 20/37] net-lwip: add DHCP support and dhcp commmand
-Message-ID: <20240906152140.GA3879073@bill-the-cat>
-References: <cover.1724419624.git.jerome.forissier@linaro.org>
- <36a13357261f734187444b48b74dec2540e73b86.1724419624.git.jerome.forissier@linaro.org>
- <CAFLszTi3YRpf4krkAYE1u7Sex0=Dn_YscSKxE8mQEh9Mxcgjow@mail.gmail.com>
- <a946cdb4-648c-46a7-83c5-302ab0d666d3@linaro.org>
- <20240904152011.GP2479150@bill-the-cat>
- <5d0aa1f3-f8ce-46d5-8984-654a2786d5a5@linaro.org>
+ d=1e100.net; s=20230601; t=1725642046; x=1726246846;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=H2ASF/kN7YEu1QGzScsoHxIy89KmyOp4JtYj+m4j1U0=;
+ b=M/325NRJgKUYn5zVbz88s3/O+pYl9F5nQ/Rp01TBtHJ6anWxxktvpiWCzRQS4NBwlW
+ ey5M4WEINLvAyzXHaJ84WGbRunzrkUc3X1szQ5EC9NFqjOFrw0XPJ4iqYFSQJsqVKrx8
+ rJ39h61ddh9vU3h79tIjmvY7hRjEqrv9Htkn1D2pBjPkbxCoIOQrPGVZOeem21wDTfdS
+ OXekalcu0qU5u0UuPAR/iksI3ALyFvA8trJybDzdJs8vglFaAlOQtRZcCDFkGr1kNNl1
+ YF5dJfUL9CR1RLM5rOFUejzThWGnktC3ppNdOlgJJlroVC+gE4bV7cLjcdDYIIwMPHbW
+ v0Og==
+X-Gm-Message-State: AOJu0YwGLaM805AVWEdIkKZIW8swnq9fQn/mihT6yYvJSTA/o3DPc1fs
+ 6bs4fdm3OafXq6BDc7BZXnsHwgm0FI1BZj/Ksmy34xlE5rgUB6z5FaipVxRDOGvOpgXjmexKopJ
+ mwYDJBI7p7f3jmpiU5pMwLRQYKTuY8igRRbhcMw==
+X-Google-Smtp-Source: AGHT+IG4xHXRaGappXGMTxqWglQe/oFc2eDN+JFjarERk6IJK3AyvwY/utpudtKuRrMCHSgBOMGOvk1ONP6M40X5RzU=
+X-Received: by 2002:a05:690c:7281:b0:6d3:c6e:1aea with SMTP id
+ 00721157ae682-6db4526c4b0mr19753197b3.10.1725642043968; Fri, 06 Sep 2024
+ 10:00:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="U4SK8NIre+i4H2FB"
-Content-Disposition: inline
-In-Reply-To: <5d0aa1f3-f8ce-46d5-8984-654a2786d5a5@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Fri, 06 Sep 2024 19:06:02 +0200
+From: Mike <zamorozov.di5454@gmail.com>
+Date: Sat, 7 Sep 2024 01:00:33 +0800
+Message-ID: <CAN2hA0TreEPtpCoqo+gDwvhEp=5xwzhL=Qq+89sHGv=OKFdV3Q@mail.gmail.com>
+Subject: Assistance Required: U-Boot Access Issues on Amlogic A113X SoC
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Fri, 06 Sep 2024 19:06:18 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,111 +83,273 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Dear U-Boot Community,
 
---U4SK8NIre+i4H2FB
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I am working on a project involving the Amlogic A113X SoC and have
+encountered an issue with U-Boot during the boot process over UART. While I
+am able to connect via UART and observe the boot log, the system does not
+allow any interaction or command input. It seems that the manufacturer may
+have restricted this access, potentially violating the GNU GPL license.
 
-On Fri, Sep 06, 2024 at 02:09:28PM +0200, Jerome Forissier wrote:
->=20
->=20
-> On 9/4/24 18:09, Tom Rini wrote:
-> > On Wed, Sep 04, 2024 at 09:54:15AM +0200, Jerome Forissier wrote:
-> >> Hi Simon,
-> >>
-> >> On 8/29/24 16:05, Simon Glass wrote:
-> >>> Hi Jerome,
-> >>>
-> >>> On Fri, 23 Aug 2024 at 07:49, Jerome Forissier
-> >>> <jerome.forissier@linaro.org> wrote:
-> >>>>
-> >>>> Add what it takes to enable NETDEVICES with NET_LWIP and enable DHCP=
- as
-> >>>> well as the dhcp command. CMD_TFTPBOOT is selected by BOOTMETH_EFI d=
-ue
-> >>>> to this code having an implicit dependency on do_tftpb().
-> >>>>
-> >>>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> >>>> ---
-> >>>>  board/engicam/imx8mp/icore_mx8mp.c            |   2 +-
-> >>>>  .../imx8mp_debix_model_a.c                    |   2 +-
-> >>>>  board/ti/am335x/board.c                       |   3 +-
-> >>>>  board/xilinx/common/board.c                   |   3 +-
-> >>>>  boot/Kconfig                                  |   3 +-
-> >>>>  cmd/Kconfig                                   |  91 +++---
-> >>>>  cmd/Makefile                                  |   6 +-
-> >>>>  cmd/elf.c                                     |   2 +-
-> >>>>  cmd/net-lwip.c                                |  13 +
-> >>>>  common/board_r.c                              |   4 +-
-> >>>>  common/usb_kbd.c                              |   2 +-
-> >>>>  drivers/net/Kconfig                           |   2 +-
-> >>>>  include/net-lwip.h                            |   3 +
-> >>>>  lib/tiny-printf.c                             |   3 +-
-> >>>>  net/Makefile                                  |  14 +-
-> >>>>  net/lwip/Makefile                             |   5 +
-> >>>>  net/lwip/dhcp.c                               | 125 ++++++++
-> >>>>  net/lwip/eth_internal.h                       |  35 +++
-> >>>>  net/lwip/net-lwip.c                           | 286 +++++++++++++++=
-+++
-> >>>>  net/lwip/tftp.c                               |  11 +
-> >>>>  20 files changed, 560 insertions(+), 55 deletions(-)
-> >>>>  create mode 100644 cmd/net-lwip.c
-> >>>>  create mode 100644 net/lwip/Makefile
-> >>>>  create mode 100644 net/lwip/dhcp.c
-> >>>>  create mode 100644 net/lwip/eth_internal.h
-> >>>>  create mode 100644 net/lwip/net-lwip.c
-> >>>>  create mode 100644 net/lwip/tftp.c
-> >>>>
-> >>>> diff --git a/board/engicam/imx8mp/icore_mx8mp.c b/board/engicam/imx8=
-mp/icore_mx8mp.c
-> >>>> index e2ed70caa43..bfdc447c478 100644
-> >>>> --- a/board/engicam/imx8mp/icore_mx8mp.c
-> >>>> +++ b/board/engicam/imx8mp/icore_mx8mp.c
-> >>>> @@ -33,7 +33,7 @@ static void setup_fec(void)
-> >>>>         setbits_le32(&gpr->gpr[1], BIT(22));
-> >>>>  }
-> >>>>
-> >>>> -#if CONFIG_IS_ENABLED(NET)
-> >>>> +#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)
-> >>>
-> >>> How about making NET mean 'net', rather than having two options?
-> >>>
-> >>> Perhaps the existing NET needs to be renamed to NET_INTERNAL or
-> >>> something like that?
-> >>
-> >> The problem with that is it will make it a bit harder to remove
-> >> the legacy NET implementation, because every occurrence of
-> >> "if NET" would need to be questioned if it is applicable to
-> >> NET_INTERNAL only or to NET_LWIP too. IOW, some of the thinking
-> >> already done here would need to be done again.
-> >=20
-> > Would a new symbol instead help? Make both NET and NEW_LWIP select
-> > HAS_NETWORKING or something along those lines.
->=20
-> Well in principle this HAS_NETWORKING would be !NO_NET, wouldn't it?
+Here are the details:
 
-Yes, yes it would.
+   - *SoC:* Amlogic A113X
+   - *Bootloader:* U-Boot 2015.01 (Jan 13 2023 - 10:30:19)
+   - *Issue:* The device does not respond to input during the boot process
+   over UART (no response to Ctrl+C, Enter, etc.)
+   - *UART Log:*
 
---=20
-Tom
+   AXG:BL1:d1dbf2:a4926f;FEAT:F0DC31BC:2000;POC:F;EMMC:800;NAND:0;READ:0;0.0;0.0;CHK:0;
+   sdio debug board detected
+   TE: 139689
 
---U4SK8NIre+i4H2FB
-Content-Type: application/pgp-signature; name="signature.asc"
+   BL2 Built : 10:38:43, Apr 14 2020. axg gf27ed33 - jenkins@walle02-sh
 
------BEGIN PGP SIGNATURE-----
+   set vcck to 1100 mv
+   set vddee to 950 mv
+   Board ID = 3
+   CPU clk: 1200MHz
+   DDR low power enabled
+   DDR3 chl: Rank0 16bit @ 912MHz
+   bist_test rank: 0 1c 07 32 26 10 3c 1e 06 36 27 10 3f 00 00 00 00 00 00
+   00 00 00 00 00 00 772   - PASS
+   Rank0: 256MB(auto)-2T-13
+   AddrBus test pass!
+   NAND init
+   Load FIP HDR from NAND, src: 0x0000c000, des: 0x01700000, size:
+   0x00004000, part: 0
+   Load BL3x from NAND, src: 0x00010000, des: 0x01704000, size: 0x000b7c00,
+   part: 0
+   NOTICE:  BL31: v1.3(release):3edeb02
+   NOTICE:  BL31: Built : 16:43:54, Apr 14 2020
+   NOTICE:  BL31: AXG secure boot!
+   NOTICE:  BL31: BL33 decompress pass
+   OPS=0x43
+   [Image: axg_v1.1.3494-9ec8345 2020-04-17 18:16:39 jenkins@walle02-sh]
+   25 0c 43 00 c3 ac bf b3 9f 7a e1 5b 3a 07 57 99
+   bl30:axg ver: 9 mode: 0
+   bl30:axg thermal0
+   [0.015883 Inits done]
+   secure task start!
+   high task start!
+   low task start!
+   ERROR:   Error initializing runtime service opteed_fast
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmbbHe4ACgkQFHw5/5Y0
-tyyGnwv8C/20VUkUe2TBqibwW+rBfaVB5mnZ+hunhhLMoFJpJEUgL0I4GE8Uq5pz
-pU7NcHhrzmT5tBtzG0wL+KFeoilbyhagPwQkNZvXXOLBGqZwxaSsmBRzIcFRRxFU
-sJRNpIb1EzIZ574iGIUdy9dHCCo2aMo5u8VUxDNb5uAA+4jyXfyO98qcskqzA/v0
-rGkuhsvhmrRPDhQZr7fqBSMz4FvAXL0EtXLdQqWI9GsB8N44gnqtZ9/2Q+SsIy8L
-4C8TtV7YlxRFjp+DISCXsSv3H7zhceJfq8DCA+zQH5Z1TDchsWH4JE52ATbdeSke
-lypRO6Wb8kP30+7/1M5GWeiAj5CSqVGZ80AXGgZrW6/7wtdhf+sGj539m1hPFhpU
-ksi6YHPfsIkgyJZCs9ZxfYWR5X14F441V0O36v3lJfGTucLukuGeLXsJ1O8U7uPq
-KyAaVlOSFMN9B6LQYI3BLSiB5Y8xD0BtI5wlsmetde9bcVkox/Uv+UeLMj+MfMGo
-/DAw/yba
-=4WPV
------END PGP SIGNATURE-----
 
---U4SK8NIre+i4H2FB--
+   U-Boot 2015.01 (Jan 13 2023 - 10:30:19)
+
+   DRAM:  256 MiB
+   Relocation Offset is: 0eeb0000
+   mmu cfg end: 0x20000000
+   mmu cfg end: 0x20000000
+   register usb cfg[0][1] = 000000000ff6e198
+   aml_i2c_init_port init regs for 2
+   NAND:  get_sys_clk_rate_mtd() 292, clock setting 200!
+   bus cycle0: 6,timing: 7
+   NAND device id: 98 da 90 15 76 16
+   NAND device: Manufacturer ID: 0x98, Chip ID: 0x98 (Toshiba A revision
+   NAND 2Gib TC58NVG1S3HBAI4 )
+   get_sys_clk_rate_mtd() 292, clock setting 200!
+   m3_nand_adjust_timing() sys_clk_rate 200, bus_c 6, bus_t 7
+   oob_fill_cnt =32 oob_size =64, bch_bytes =14
+   ecc mode:6 ecc_page_num=2 eep_need_oobsize=16
+   plane_num=1 writesize=0x800 ecc.size=0x200 bch_mode=1
+   oob avail size 6
+   Creating 1 MTD partitions on "A revision NAND 2Gib TC58NVG1S3HBAI4 ":
+   0x000000000000-0x000000200000 : "bootloader"
+   A revision NAND 2Gib TC58NVG1S3HBAI4  initialized ok
+   get_sys_clk_rate_mtd() 292, clock setting 200!
+   bus cycle0: 6,timing: 7
+   NAND device id: 98 da 90 15 76 16
+   NAND device: Manufacturer ID: 0x98, Chip ID: 0x98 (Toshiba A revision
+   NAND 2Gib TC58NVG1S3HBAI4 )
+   get_sys_clk_rate_mtd() 292, clock setting 200!
+   m3_nand_adjust_timing() sys_clk_rate 200, bus_c 6, bus_t 7
+   oob_fill_cnt =32 oob_size =64, bch_bytes =14
+   ecc mode:6 ecc_page_num=2 eep_need_oobsize=16
+   PLANE change!
+   plane_num=1 writesize=0x800 ecc.size=0x200 bch_mode=1
+   aml_nand_init :oobmul=1,oobfree.length=8,
+   - oob_size=64
+   oob avail size 8
+   nbbt=20
+   nenv=24
+   nkey=32
+   ndtb=40
+   nddr=44
+   bbt_start=20 env_start=24 key_start=32 dtb_start=40 ddr_start=44
+   nbbt: info size=0x800 max_scan_blk=24, start_blk=20
+   nbbt : phy_blk_addr=20, ec=0, phy_page_addr=0, timestamp=1
+   nbbt free list:
+   blockN=21, ec=-1, dirty_flag=0
+   blockN=22, ec=-1, dirty_flag=0
+   blockN=23, ec=-1, dirty_flag=0
+   aml_nand_scan_rsv_info 1134: page_num=1
+   aml_nand_scan_rsv_info 1137
+   nbbt valid addr: 280000
+   aml_nand_bbt_check 1258 bbt is valid, reading.
+   aml_nand_read_rsv_info:446,read nbbt info to 280000
+   nenv: info size=0x10000 max_scan_blk=32, start_blk=24
+   nenv : phy_blk_addr=24, ec=0, phy_page_addr=0, timestamp=5
+   nenv free list:
+   blockN=25, ec=0, dirty_flag=1
+   blockN=26, ec=-1, dirty_flag=0
+   blockN=27, ec=-1, dirty_flag=0
+   blockN=28, ec=-1, dirty_flag=0
+   blockN=29, ec=-1, dirty_flag=0
+   blockN=30, ec=-1, dirty_flag=0
+   blockN=31, ec=-1, dirty_flag=0
+   aml_nand_scan_rsv_info 1134: page_num=32
+   aml_nand_scan_rsv_info 1137
+   nenv valid addr: 310000
+   nkey: info size=0x8000 max_scan_blk=40, start_blk=32
+   nkey : phy_blk_addr=33, ec=0, phy_page_addr=0, timestamp=2
+   nkey free list:
+   blockN=32, ec=0, dirty_flag=1
+   blockN=34, ec=-1, dirty_flag=0
+   blockN=35, ec=-1, dirty_flag=0
+   blockN=36, ec=-1, dirty_flag=0
+   blockN=37, ec=-1, dirty_flag=0
+   blockN=38, ec=-1, dirty_flag=0
+   blockN=39, ec=-1, dirty_flag=0
+   aml_nand_scan_rsv_info 1134: page_num=16
+   aml_nand_scan_rsv_info 1137
+   nkey valid addr: 430000
+   ndtb: info size=0x20000 max_scan_blk=44, start_blk=40
+   ndtb : phy_blk_addr=41, ec=0, phy_page_addr=0, timestamp=2
+   ndtb free list:
+   blockN=40, ec=-1, dirty_flag=0
+   blockN=42, ec=-1, dirty_flag=0
+   blockN=43, ec=-1, dirty_flag=0
+   aml_nand_scan_rsv_info 1134: page_num=64
+   aml_nand_scan_rsv_info 1137
+   ndtb valid addr: 520000
+   nddr: info size=0x800 max_scan_blk=46, start_blk=44
+   nddr : phy_blk_addr=-1, ec=0, phy_page_addr=0, timestamp=0
+   nddr free list:
+   blockN=44, ec=-1, dirty_flag=0
+   blockN=45, ec=-1, dirty_flag=0
+   aml_nand_scan_rsv_info 1134: page_num=1
+   nddr valid addr: fffffffffffe0000
+   aml_nand_rsv_info_check_except_bbt 1228 NO nddr exist
+   tpl: off 8388608, size 8388608
+    NAND bbt detect factory Bad block at c000000
+    NAND bbt detect factory Bad block at c020000
+   Creating 7 MTD partitions on "A revision NAND 2Gib TC58NVG1S3HBAI4 ":
+   0x000000800000-0x000001000000 : "tpl"
+   0x000001000000-0x000001200000 : "misc"
+   0x000001200000-0x000002200000 : "boot_a"
+   0x000002200000-0x000003200000 : "boot_b"
+   0x000003200000-0x000007200000 : "system_a"
+   0x000007200000-0x00000b200000 : "system_b"
+   0x00000b200000-0x000010000000 : "data"
+    NAND bbt detect factory Bad block at c000000
+    NAND bbt detect factory Bad block at c020000
+   A revision NAND 2Gib TC58NVG1S3HBAI4  initialized ok
+   MMC:   aml_priv->desc_buf = 0x000000000deae760
+   aml_priv->desc_buf = 0x000000000deb0aa0
+   SDIO Port B: 0, SDIO Port C: 1
+   uboot env amlnf_env_read : ####
+   aml_nand_read_rsv_info:446,read nenv info to 310000
+   In:    serial
+   Out:   serial
+   Err:   serial
+   aml log : internal sys error!
+   reboot_mode=cold_boot
+   Start read misc partition datas!
+   [burnup]Rd:Up sz 0x440 to align 0x1000
+   info->attemp_times = 12
+   info->active_slot = 0
+   info->slot_info[0].bootable = 1
+   info->slot_info[0].online = 1
+   info->slot_info[1].bootable = 1
+   info->slot_info[1].online = 0
+   info->attemp_times = 12
+   active slot = 0
+   cmd: imgread dtb boot_a ${dtb_mem_addr}
+   [imgread]szTimeStamp[2024071615081273]
+   [imgread]MTD pageShift 11, writesz 0x800
+   aml log : R-2048 check pass!
+   aml log : R2048 check pass!
+   [imgread]Enc dtb sz 0xe000
+         Amlogic multi-DTB tool
+         Single DTB detected
+   Net:   sysnopsys gmac3.7
+   Phy 0 not found
+   dwmac.ff3f0000amlkey_init() enter!
+   amlnf_key_read: ####
+   amlnf_key_read key data len too much
+   aml_nand_read_rsv_info:446,read nkey info to 430000
+   [EFUSE_MSG]keynum is 4
+   MACADDR:*(from chipid)
+
+   Start read misc partition datas!
+   [burnup]Rd:Up sz 0x440 to align 0x1000
+   info->attemp_times = 12
+   info->active_slot = 0
+   info->slot_info[0].bootable = 1
+   info->slot_info[0].online = 1
+   info->slot_info[1].bootable = 1
+   info->slot_info[1].online = 0
+   info->attemp_times = 12
+   active slot = 0
+   wipe_data=successful
+   wipe_cache=successful
+   Setting bus to 2
+   i2c_set_bus_num i2c sel 2 bus
+   aml_i2c_init_port init regs for 2
+   gpio: pin GPIOZ_4 (gpio 18) value is 1
+   recovery_status=
+   upgrade_step=2
+   s_version: U-Boot 2015.01
+   amlkey_init() enter!
+   amlkey_init() 71: already init!
+   [EFUSE_MSG]keynum is 4
+   [KM]Error:f[key_manage_query_size]L515:key[usid] not programed yet
+   [KM]Error:f[key_manage_query_size]L515:key[mac] not programed yet
+   InUsbBurn
+   noSof
+
+   CONFIG_SYSTEM_AS_ROOT: null
+   system_mode: 0
+   [imgread]szTimeStamp[2024071615081273]
+   [imgread]secureKernelImgSz=0x609800
+   [burnup]Rd:Up sz 0x509800 to align 0x1000
+   aml log : R-2048 check pass!
+   aml log : R2048 check pass!
+   aml log : R2048 check pass!
+   aml log : R2048 check pass!
+   avb2: 0
+   save_power_post ...
+   avb2: 0
+   ## Booting Android Image at 0x01080000 ...
+   reloc_addr =ded9810
+   copy done
+   Kernel command line: init=/sbin/init rootfstype=ubifs
+   [store]Is good fdt check header, no need decrypt!
+   load dtb from 0x1000000 ......
+         Amlogic multi-DTB tool
+         Single DTB detected
+      Uncompressing Kernel Image ... OK
+      kernel loaded at 0x01080000, end = 0x01a5b200
+      Loading Ramdisk to 0dcf0000, end 0de9d800 ... OK
+      Loading Device Tree to 000000000dce0000, end 000000000dceffe6 ... OK
+   fdt_fixup_memory_banks, reg:0000000000000000
+
+   Starting kernel ...
+
+   uboot time: 2751820 us
+
+I understand that U-Boot has been modified by the manufacturer, which
+complicates the situation. I am seeking advice on the following:
+
+   - Are there any known methods or workarounds to regain control over the
+   U-Boot environment in such scenarios?
+   - Are there any specific forums or community resources where I might
+   find additional help or similar cases?
+
+Any guidance or suggestions would be greatly appreciated. Thank you in
+advance for your assistance!
+
+Best regards,
+Mike
