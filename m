@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E68A1CE7AA6
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 00:28:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A073CE7AA6
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 00:31:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F195188CC2;
-	Fri,  6 Sep 2024 02:28:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AABDF88CC5;
+	Fri,  6 Sep 2024 02:30:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EoOHnh8I";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TEXBIzjm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5180E88CC5; Fri,  6 Sep 2024 02:28:31 +0200 (CEST)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id 4C45588CC2; Fri,  6 Sep 2024 02:30:58 +0200 (CEST)
+Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
+ [IPv6:2607:f8b0:4864:20::f29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D24A588CB6
- for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 02:28:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E0AE488CCE
+ for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 02:30:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6c353f2f954so8206396d6.3
- for <u-boot@lists.denx.de>; Thu, 05 Sep 2024 17:28:28 -0700 (PDT)
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6bf92f96f83so7815566d6.3
+ for <u-boot@lists.denx.de>; Thu, 05 Sep 2024 17:30:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1725582508; x=1726187308; darn=lists.denx.de;
- h=content-transfer-encoding:to:subject:message-id:date:from
+ d=chromium.org; s=google; t=1725582655; x=1726187455; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aO4CPTRBRUipCXndKIME5moiyZjBsTbNqPaHTutIubM=;
- b=EoOHnh8I2aqjV2JPIvmA7ftad13V6wPxlau+eG3oNcRuAVHOu9nMATCRjtLXQ7F+8n
- oUgM+exKBIQNZbrIM2vPaoh8E1E6ObFSkcjlW2ubJhE2ZTsu05Pv/0csc5v74KCzlOP5
- OD6eDiHZ5YQCx8spv7Ie/1K7ggVuQ2BosspVQ=
+ bh=UwkEQwfZfpR0tu0myETm7wYFgk6zcOHy+x+7DEL7k9M=;
+ b=TEXBIzjmPcpDildTo3Y+HW5RHr0XKpgBRTqpCNlhv5irTSG8+1sSxQbJQe2ugn17PU
+ SBAfA37mGZ3JQRYqJZVACvevIzcfuVCFmjH3qfuQ91XkCM+7RzVBj/rGksTEkuVeSHOl
+ sl/CRGTtulAsJQ35VtWDA2l6krzhjHJKlYZro=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725582508; x=1726187308;
- h=content-transfer-encoding:to:subject:message-id:date:from
+ d=1e100.net; s=20230601; t=1725582655; x=1726187455;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aO4CPTRBRUipCXndKIME5moiyZjBsTbNqPaHTutIubM=;
- b=iZuHVmrRKCSYfFb2SlaIWTPnk5HgvExiZTJTKt2v0P6NuuVXdvKIMv4meMLXojY0DO
- tN19AyPyMvZoprK1HV4DnH4SGvJ6GZvgrpeiKqG9BvM+LoP0+dgPD9RIgOYT8B9KoQ9p
- 4+1b77oVBJA5TsEprlI5ro/pQEywyq1MBXbZ9BxV+FFy2TUEp2yLiHmcO9ytXwl7l1Yt
- bSq2blvDBYNeGk0hFMbOgx3rw6rOLOy9XPyzRz5Tg6c0YmrSqrbNU9AdG4Y5BQ2rxJDV
- PVOWR+omctC4EmDPEjnk8y3XQYZBX+QS62rtnomL7d8/KuDtpvUr+TtXO8UTKjBQl5Oj
- OMeA==
+ bh=UwkEQwfZfpR0tu0myETm7wYFgk6zcOHy+x+7DEL7k9M=;
+ b=WA4dz4oMBGw1BoCrUgpdE1eC7LcgaWNT6f5CRmID2532Ouyxfh98Ns+xppxvcsTZcx
+ ClLIJj6zpBBZ1sjpl6pz4t0DOKLQ+8uzURSRGBuk59D/v6V1vpv2Ut4tECUcKFtgJ0r5
+ N3HeNUt4Y8fdjBJCuVSFO4AbHWM+qU7XG08rTV4V1BMLEIRi6L2o9cb2VCtiZzP+AOfN
+ +171ZpyDl2zb9uCAVbe4lf2WRR/aFb2FYTkR3d9wgkcBYhUCWlQ7E3Fxk8HZ7J6AIc17
+ Y3nv30BEjhewpuXouSS4RUemUwgdJgtdQNuS4BLNT++Ju1225GA3cX6auyTyoSC30CyQ
+ nDzg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXNL6sn9OEFwljzMhl7gQOZBBYukSX/ULw5AVx0cS6BbuM44NewOnfz1Nm2t4KK6I3Wc6qiGcw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzjPW2Tr9DtIgpz4evHinrs1CMrJh1ScR6GoXCTRbA18NssekIS
- e++9Q84nSHH+t/qGag29VYg2ZibV+B6D4JRWlgpAIZ18Eykjf8ibdNk/ncj3gu9hCKaIaugc9ts
- cw2wT6GpD+JrWKIPq4/kUvEZUdDVui6Qc0HWe
-X-Google-Smtp-Source: AGHT+IEKkHXCq/c9mssqp2xcrGHtHtjSg7UdYrbMu81X6WZjdBeHlk3q+mLk0emUq0yZz4ibPGS1uCuIGQhUPBKOpkM=
-X-Received: by 2002:a05:6214:3a09:b0:6c1:6aa0:c21 with SMTP id
- 6a1803df08f44-6c5282fe5aemr14284856d6.3.1725582507576; Thu, 05 Sep 2024
- 17:28:27 -0700 (PDT)
+ AJvYcCXH952lkhWX8xYmQdfRXu5UuxDvtcZCR60JjaTJ97f2D0VVH/NSFAUz8aiSyPZY/6quhFtyLIw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxTa51596VlKT4F+M+/9fmCgRyUdqfJCsVdjcOux0nt9FCLMpne
+ BH6RlDJyuDUn/y1QvInb+gxB2YkRYbY/m2EgksPUyCS3Vp9otEVrVOUoP0mvsJXERagxe1tD/eB
+ C7W5IPqmR909kwMojY4lgSVU4qPlcbY6vdK25
+X-Google-Smtp-Source: AGHT+IErAG9Gf/oKt2EucA8on/TPyIOEyE65byEv4fp776Q2ZmKMyO3HkqYgS1IgM3qYzkLMz0RwB7YYfFVPhCE0i9Y=
+X-Received: by 2002:a05:6214:3902:b0:6bf:75da:de1e with SMTP id
+ 6a1803df08f44-6c5283fac49mr13484996d6.25.1725582654736; Thu, 05 Sep 2024
+ 17:30:54 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240901222259.456932-1-sjg@chromium.org>
- <Ztlh70H-G6eP0wOr@debian>
-In-Reply-To: <Ztlh70H-G6eP0wOr@debian>
+References: <20240808110654.4215b129@wsk>
+ <CAOMZO5A74MigLO0qkeXi04=7M70jaiEgk9zdFBjUV74vuZDP0g@mail.gmail.com>
+ <20240815221421.61f64a17@wsk>
+ <CAOMZO5B-fkLQsQx205mxXQdmk3ij6Hxx4ErM84DtEtBg3mYa7Q@mail.gmail.com>
+ <CAFLszTggpR9aaDAH_Mx_zDNnKAb7r_O+sdyyVVG_xULqkrWnzg@mail.gmail.com>
+ <20240828100452.2143873d@wsk>
+ <CAHCN7xLY4FxB4HZLcE0pEZsx7V=dhVokh2Wcrn2Jjf+B+SLCJg@mail.gmail.com>
+ <20240905155402.486a7110@wsk>
+In-Reply-To: <20240905155402.486a7110@wsk>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 5 Sep 2024 18:28:16 -0600
-Message-ID: <CAFLszTieH03eQ4gTmu+HjYbRNLXkBjfR2g3kqZkR3f9U7-0C5A@mail.gmail.com>
-Subject: Re: [PATCH v3 0/3] efi: Start tidying up memory management
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Eugene Uriev <eugeneuriev@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Richard Weinberger <richard@nod.at>, Sean Anderson <seanga2@gmail.com>
+Date: Thu, 5 Sep 2024 18:30:44 -0600
+Message-ID: <CAFLszTh65OkyXnG3L7XTJFK69EYdj4DZwYGxizu4877n-mCw-w@mail.gmail.com>
+Subject: Re: [Binman] Question regarding SPL symbol offsets generation
+To: Lukasz Majewski <lukma@denx.de>
+Cc: Adam Ford <aford173@gmail.com>, Fabio Estevam <festevam@gmail.com>, 
+ Mamta Shukla <mamta.shukla@leica-geosystems.com>, u-boot@lists.denx.de, 
+ Marek Vasut <marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,93 +94,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Vincent,
+Hi Lukasz,
 
-On Thu, 5 Sept 2024 at 01:47, Vincent Stehl=C3=A9 <vincent.stehle@arm.com> =
-wrote:
+On Thu, 5 Sept 2024 at 07:54, Lukasz Majewski <lukma@denx.de> wrote:
 >
-> On Sun, Sep 01, 2024 at 04:22:56PM -0600, Simon Glass wrote:
-> > We have been discussing the state of EFI memory management for some
-> > years so I thought it might be best to send a short series showing some
-> > of the issues we have talked about.
+> Hi Adam,
+>
+> > On Wed, Aug 28, 2024 at 3:04=E2=80=AFAM Lukasz Majewski <lukma@denx.de>=
+ wrote:
+> > >
+> > > Hi Simon,
+> > >
+> > > > Hi,
+> > > >
+> > > > On Tue, 27 Aug 2024 at 12:47, Fabio Estevam <festevam@gmail.com>
+> > > > wrote:
+> > > > >
+> > > > > Hi Lukasz,
+> > > > >
+> > > > > On Thu, Aug 15, 2024 at 5:14=E2=80=AFPM Lukasz Majewski <lukma@de=
+nx.de>
+> > > > > wrote:
+> > > > > > Unfortunately not - this change is only for properly setting
+> > > > > > start address of the u-boot.
+> > > > > >
+> > > > > > The _real_ problem here is the symbol placement generated by
+> > > > > > binman when we try to define the image as a single one.
+> > > > > >
+> > > > > > Moreover, this change follows other boards with imx8mm
+> > > > > > processor - ./configs/imx8mm_beacon_fspi_defconfig to be
+> > > > > > specific.
+> > > > > >
+> > > > > > The "fix" (for which I'd been now probably opt) for this issue
+> > > > > > would be to generate two images with binman - one for
+> > > > > > u-boot-spl-ddr.bin and the final flash.bin with the former one
+> > > > > > included (as it was before SHA1:
+> > > > > > 37e50627efacd8dae18b564e9d8886a033e181bc)
+> > > > >
+> > > > > Is QSPI boot broken on i.MX8MM?
+> > > > >
+> > > > > I am adding Adam and Mamta who have tested QSPI booting on
+> > > > > imx8mm_beacon and imx8mm_evk, respectively.
+> > > >
+> > > > Note also that I sent a series[1] which allows the symbols-base
+> > > > to be adjusted, if that helps.
+> > >
+> > > I've seen them - but not yet tested.
+> > >
+> > > Thanks Simon for the patch series.
 > >
-> > This one just deals with memory allocation. It provides a way to detect
-> > EFI 'page allocations' when U-Boot' malloc() should be used. It should
-> > help us to clean up this area of U-Boot.
-> >
-> > It also updates EFI to use U-Boot memory allocation for the pool. Most
-> > functions use that anyway and it is much more efficient. It also avoids
-> > allocating things 'in space' in conflict with the loaded images.
+> > Is it still broken with this patch series?  I have been traveling and
+> > haven't had much time to test.
 >
-> Hi Simon,
+> Yes, I can confirm that it is still broken.
 >
-> Thank you for this series.
+> I've applied:
+> https://patchwork.ozlabs.org/project/uboot/cover/20240826191143.426387-1-=
+sjg@chromium.org/
 >
-> I did test it on top of v2024.10-rc4 with AArch64 simulators (FVP & Qemu)=
-, with
-> OS boots and ACS-IR, and I see no regression. Same with sandbox on x86 an=
-d the
-> python tests.
+> on top of mainline:
+> SHA1: 1630ff26cc960439b5949b80cfc604a2c8aa47dd
 >
+> Adding symbols-base =3D <0>; to imx8mm-u-boot.dtsi did not help.
 
-Thank you for testing.
-
-Ilias, Heinrich, can this series (and the EFI-test one) be applied?
-Sughosh has already sent a follow up where we start to diverge on how
-to fix the memory-allocation problems, so I would like to make sure
-these are in there first.
+Can you please point me to the tree? I suspect that the symbols-base
+is already 0, so setting it to 0 has no effect. I'm not sure though,
 
 Regards,
 Simon
-
-
-> Best regards,
-> Vincent.
->
-> >
-> > This series also includes a little patch to show more information in
-> > the index for the EFI pages.
-> >
-> > Note that this series is independent from Sugosh's lmb series[1],
-> > although I believe it will point the way to simplifying some of the
-> > later patches in that series.
-> >
-> > Overall, some issues which should be resolved are:
-> > - allocation inconsistency, e.g. efi_add_protocol() uses malloc() but
-> >   efi_dp_dup() does not (this series makes a start)
-> > - change efi_bl_init() to register events later, when the devices are
-> >   actually used
-> > - rather than efi_set_bootdev(), provide a bootstd way to take note of
-> >   the device images came from and allow EFI to query that when needed
-> > - EFI_LOADER_BOUNCE_BUFFER - can use U-Boot bounce buffers?
-> >
-> > Minor questions on my mind:
-> > - is unaligned access useful? Is there a performance penalty?
-> > - API confusion about whether something is an address or a pointer
-> >
-> > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=3D416441
-> >
-> > Changes in v3:
-> > - Add new patch to drop the memset() from efi_alloc()
-> > - Drop patch to convert device_path allocation to use malloc()
-> >
-> > Changes in v2:
-> > - Drop patch 'Show more information in efi index'
-> > - Drop patch 'Avoid pool allocation in efi_get_memory_map_alloc()'
-> > - Add the word 'warning', use log_warning() and show the end address
-> >
-> > Simon Glass (3):
-> >   efi: Drop the memset() from efi_alloc()
-> >   efi: Allow use of malloc() for the EFI pool
-> >   efi: Show the location of the bounce buffer
-> >
-> >  common/dlmalloc.c            |   7 +++
-> >  include/efi_loader.h         |  29 ++++++++-
-> >  include/malloc.h             |   7 +++
-> >  lib/efi_loader/efi_bootbin.c |  11 ++++
-> >  lib/efi_loader/efi_memory.c  | 119 ++++++++++++++++++++++++-----------
-> >  5 files changed, 136 insertions(+), 37 deletions(-)
-> >
-> > --
-> > 2.34.1
-> >
