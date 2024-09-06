@@ -4,81 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DA1BCE7AB8
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 07:27:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD74BCE7AE0
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 07:37:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4AB888DAE;
-	Fri,  6 Sep 2024 09:23:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
+	by phobos.denx.de (Postfix) with ESMTP id 1A52C88CFA;
+	Fri,  6 Sep 2024 09:37:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="caDJLlB1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bfc83u5G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D97E888D07; Fri,  6 Sep 2024 09:23:10 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 76A5488CF5; Fri,  6 Sep 2024 09:37:01 +0200 (CEST)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D89F788D7E
- for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 09:23:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=9elements.com
+ by phobos.denx.de (Postfix) with ESMTPS id 25E7B88CEB
+ for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 09:36:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a8696e9bd24so225294566b.0
- for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 00:23:01 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-2054e22ce3fso16980825ad.2
+ for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 00:36:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1725607381; x=1726212181; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WJ2ChgiFvyxLfEhoKFWc+a2sZpDFbv/oXZ3Fz2K0Spg=;
- b=caDJLlB1/OnaY4lx+y9cTZKEed9HulQl3x/d9C9IilhkqM5tcg5KiFBGCYufxITlBR
- Tp9h75cFaZuuPZOhReKfFW+tbTBMc6Mxh8cCkSIGZp8eQ8JWvd2Gxqcj+rJL9J8Bcrg8
- DklykKGhjlDeZ24Uu8T4fLes13aD+CQYwby1kraFaG453ZomlpQFY2Aezbyt/lUJ+28N
- VFg++wOzVenwccS+99EBud4IrtduQv36S+weexO2QMTFuIr0Rsm4yungb/S9Cf3LxiXV
- STF4XvqcHoK2LtQ0rUiEgv5pfQmznpQUBETufx5veaTxYP4GlR1Pn3/fL070XZmhPh/r
- t8kQ==
+ d=linaro.org; s=google; t=1725608218; x=1726213018; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=uWHfd/yMC/YzmwkXM8qj3Tfm9bpHGD6lKp9DHhgozEU=;
+ b=bfc83u5GcN+yyKIebhElLNBZynbmuIvwSh4QO0PexeuYJhHCJ+P+0ijO7PwnSzPR1Q
+ DZXasI7LPIEX6pIbaxTNSeYfRBOsJd9z69fCIt2IqA6QafLlsiRNZXygO+LLUrLn2UyM
+ LiAZyXtQ+lKBx1Ux1thQhReOh+OgX7/Znhss8VS9v69BT0qAtcN6GGmBh4W4JJ3YDtGj
+ 8pwNbyrUkupoTVoL48U7JR+vpktdfO2rTxsG57XU8wfCZY14r2p39nGfEOl1nthKAQzk
+ TOaN0ByIA8vtZ12WXlcSk3kTXHiAmG/D0T1nCaos0i8t87f0gY4t5JQtGQQ5db35z9wG
+ qBnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725607381; x=1726212181;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WJ2ChgiFvyxLfEhoKFWc+a2sZpDFbv/oXZ3Fz2K0Spg=;
- b=J31taQzHH5+p4GTJ8NEqNm4OyszmSwQlvWWlK/I1tt2cuLvpDqbsG0bMy3pz9FgsK/
- hollQ9WJVLKOM43+XKquVUb5N4fByGNboz07kPMFpFnNfocqflvrOMBb5PxqnvLAMY/o
- UBlmv6gXhpOfolceUgTEV9xFXTHbowXYaBnc+4c0GSmT3HWc5i8AGPiFpbzxTxBtQZ2D
- sTgWXESG13H/+C88PPFGaaKLbdf+oveuCPwA0ftSK0btoRrAn4lqKhr5ciY1rX2kzasL
- zVWXpJpir2mseGNTjFd2vHguDhYRYw6f9MXTFxn8CkBUYqJPuXX46ymo5IURCmB70sWH
- Z5iA==
-X-Gm-Message-State: AOJu0Yxfoj8qE7Dhlq3+FxrTEYYrxaykqJE2ykGyKNnCjzfVE5TxITO/
- pazxDTxnZ9K0uVhqv19yJASUVjPljn9NLkmU8ykYZPiIyHC/QzlsCkleDmV/RPg2uvhcAcAVRYM
- 2
-X-Google-Smtp-Source: AGHT+IGRs7MqvjcYkYbmLzb4vn92QH1oD/YuPQvtW5zCASeh0fv9vEuUGmIUW9o1Q0h8E0IvENUR5w==
-X-Received: by 2002:a17:907:6e93:b0:a8a:ead3:851c with SMTP id
- a640c23a62f3a-a8aead3a0b9mr30084166b.15.1725607381329; 
- Fri, 06 Sep 2024 00:23:01 -0700 (PDT)
-Received: from fedora.sec.9e.network
- (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a8a7f7f541csm107748466b.193.2024.09.06.00.23.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Sep 2024 00:23:01 -0700 (PDT)
-From: Patrick Rudolph <patrick.rudolph@9elements.com>
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, bmeng.cn@gmail.com, trini@konsulko.com, sr@denx.de,
- pbrobinson@gmail.com, mbrugger@suse.com, maximilian.brune@9elements.com,
- Patrick Rudolph <patrick.rudolph@9elements.com>
-Subject: [PATCH v2 28/28] configs: Add RPI4 ACPI defconfig
-Date: Fri,  6 Sep 2024 09:22:30 +0200
-Message-ID: <20240906072231.2531491-29-patrick.rudolph@9elements.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240906072231.2531491-1-patrick.rudolph@9elements.com>
-References: <20240906072231.2531491-1-patrick.rudolph@9elements.com>
+ d=1e100.net; s=20230601; t=1725608218; x=1726213018;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uWHfd/yMC/YzmwkXM8qj3Tfm9bpHGD6lKp9DHhgozEU=;
+ b=eKIKPnpNwwu74xYgUd15bFK4TewQXapbqPdU5533/ednEM/6veuCa27xRNK7A8ofsG
+ 3Yor0PtXGzR3p8CySiIvRIbC61FU+0cJSLHsjwlw089KH7fx9dmMlfsng0yaxCCoGhSk
+ 4bYUjPpeoiA4VySdd4q6+rc1S1Qv1O0A/n8hACCHOCXMlxjazdoZHPQg+9PSQaYkGPse
+ 3ksmpG2NwOfRA/p8w5tZgRwBjywOHtdsvgSd+YGZAwRtYkiUs1ipEhypbfulO1I/3JKl
+ UlLp77n2IKBUuur/ATtHthtDYWec6gQFoMWT1Gp5CrFvbUFQD8CVPS9RuKP67fJdrDYd
+ 8xvg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVig6xMJ9NjaZUPrKhJYglp0p1aUlVU8JPrsTsleCNB/wKKEphBpG4G6XdoZH8AKRrDP12XmK0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwsO/eL67oHkGXAgapGo6XQ+4Be/2s+ozY/kSafCi87xrNUipTs
+ vkBdiXubCa4IOLje0yufUJBj3ALTirhf4iPVPWkfpKwe86BEkkU//lYY9eNqiHvjdkOT2TTuxIT
+ rlbF8Ca553CmDXeXSpiCBIqUVG35w4tEB7sK7Ng==
+X-Google-Smtp-Source: AGHT+IHyC6+IkHnU5OmxKZYyRlxokzcff7YjTZ3Bb6subUfgFeO746ExvDh70aaE9fyKW/+bB8mmQm9t4WpMMK96FGg=
+X-Received: by 2002:a17:902:e550:b0:1fd:9a23:90cc with SMTP id
+ d9443c01a7336-206f052e09bmr18646735ad.26.1725608217430; Fri, 06 Sep 2024
+ 00:36:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240816214436.1877263-1-raymond.mao@linaro.org>
+ <20240816214436.1877263-8-raymond.mao@linaro.org>
+ <CAFLszTiWFD2dpb6z_5cibDe0aOpuPYug-mrC-ZiZ7v+SEDFhdQ@mail.gmail.com>
+ <CAC_iWjJpfrK+-o_0x8ZJbWxhG4O-tprf1-oQvWmLZWOf=5qZMA@mail.gmail.com>
+ <CAEfUkUKD4CC4YkU58zehmVdkUA9UwTGk3=Prpw=JHMNMYwHcHA@mail.gmail.com>
+In-Reply-To: <CAEfUkUKD4CC4YkU58zehmVdkUA9UwTGk3=Prpw=JHMNMYwHcHA@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 6 Sep 2024 10:36:21 +0300
+Message-ID: <CAC_iWjJbTVoV6vjGfRkYn5jOnfsmcVSseeCvN=stA4fmbZV25Q@mail.gmail.com>
+Subject: Re: [PATCH v6 07/28] hash: integrate hash on mbedtls
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ manish.pandey2@arm.com, 
+ Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
+ Mario Six <mario.six@gdsys.cc>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Andrew Davis <afd@ti.com>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Sumit Garg <sumit.garg@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Alexander Gendin <agendin@matrox.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Eddie James <eajames@linux.ibm.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,98 +112,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allows to build the RPi4 with ACPI enabled.
+Hi Raymond,
 
-TEST: - Boots on qemu-system-aarch64 -machine raspi4b
-      - Boots on real hardware with arm_64bit=1 in config.txt
+On Tue, 3 Sept 2024 at 18:54, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Hi Ilias,
+>
+> On Fri, 30 Aug 2024 at 05:37, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
+>>
+>> Hi Simon,
+>>
+>> On Thu, 29 Aug 2024 at 18:01, Simon Glass <sjg@chromium.org> wrote:
+>> >
+>> > Hi Raymond,
+>> >
+>> > On Fri, 16 Aug 2024 at 15:47, Raymond Mao <raymond.mao@linaro.org> wrote:
+>> > >
+>> > > Integrate common/hash.c on the hash shim layer so that hash APIs
+>> > > from mbedtls can be leveraged by boot/image and efi_loader.
+>> > >
+>> > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+>> > > ---
+>> > > Changes in v2
+>> > > - Use the original head files instead of creating new ones.
+>> > > Changes in v3
+>> > > - Add handle checkers for malloc.
+>> > > Changes in v4
+>> > > - None.
+>> > > Changes in v5
+>> > > - Add __maybe_unused to solve linker errors in some platforms.
+>> > > - replace malloc with calloc.
+>> > > Changes in v6
+>> > > - None.
+>> > >
+>> > >  common/hash.c | 146 ++++++++++++++++++++++++++++++++++++++++++++++++++
+>> > >  1 file changed, 146 insertions(+)
+>> >
+>> > I am not seeing the benefit of replacing U-Boot's hashing algorithms.
+>> > They work well and don't change. Also it seems to be making the code a
+>> > lot uglier, with an uncertain timeline for clean-up.
+>>
+>> A lot uglier where? It adds a few wrappers that fit into the current
+>> design and callbacks.
+>> I don't think what you are asking is possible. To do assymetric
+>> crypto, signatures  etc -- and in the future add TLS support in wget
+>> mbedTLS relies on its internal hashing functions for the cipher suites
+>> it supports. So what you are asking would just make the code even
+>> larger. Raymond can you please double check?
+>>
+> Digest is the basic library of MbedTLS, I don't believe we can disable it
+> but only use the ones for certificates, unless MbedTLS makes changes
+> to allow hooking external digest libraries -  as I mentioned in a previous reply,
+> I don't think this is what MbedTLS wants.
 
-Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Matthias Brugger <mbrugger@suse.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>
----
- configs/rpi_4_acpi_defconfig | 72 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 72 insertions(+)
- create mode 100644 configs/rpi_4_acpi_defconfig
+There's a config option on config.h we could use to override shaXXX,
+but given that mbedTLS can be used to add more hashing alogorithms, I
+dont think we should do that
 
-diff --git a/configs/rpi_4_acpi_defconfig b/configs/rpi_4_acpi_defconfig
-new file mode 100644
-index 0000000000..d8a3ee55f2
---- /dev/null
-+++ b/configs/rpi_4_acpi_defconfig
-@@ -0,0 +1,72 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_BCM283X=y
-+CONFIG_TEXT_BASE=0x00080000
-+CONFIG_TARGET_RPI_4=y
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x7fffe30
-+CONFIG_ENV_SIZE=0x4000
-+CONFIG_DEFAULT_DEVICE_TREE="bcm2711-rpi-4-b"
-+CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_DM_RESET=y
-+CONFIG_SYS_LOAD_ADDR=0x1000000
-+CONFIG_PCI=y
-+CONFIG_BOOTSTD_DEFAULTS=y
-+CONFIG_OF_BOARD_SETUP=y
-+CONFIG_FDT_SIMPLEFB=y
-+CONFIG_USE_PREBOOT=y
-+CONFIG_PREBOOT="pci enum; usb start;"
-+CONFIG_SYS_PBSIZE=1049
-+# CONFIG_DISPLAY_CPUINFO is not set
-+# CONFIG_DISPLAY_BOARDINFO is not set
-+CONFIG_MISC_INIT_R=y
-+CONFIG_SYS_PROMPT="U-Boot> "
-+CONFIG_CMD_DFU=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_FS_UUID=y
-+CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
-+CONFIG_TFTP_TSIZE=y
-+CONFIG_DM_DMA=y
-+CONFIG_DFU_MMC=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
-+CONFIG_SYS_DFU_MAX_FILE_SIZE=0x200000
-+CONFIG_BCM2835_GPIO=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_BCM2835=y
-+CONFIG_BCMGENET=y
-+CONFIG_PCI_BRCMSTB=y
-+CONFIG_PINCTRL=y
-+# CONFIG_PINCTRL_GENERIC is not set
-+CONFIG_DM_RNG=y
-+CONFIG_RNG_IPROC200=y
-+# CONFIG_REQUIRE_SERIAL_CONSOLE is not set
-+CONFIG_SYSINFO=y
-+CONFIG_SYSINFO_SMBIOS=y
-+CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_XHCI_PCI=y
-+CONFIG_USB_KEYBOARD=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="FSL"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0525
-+CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
-+CONFIG_USB_GADGET_DWC2_OTG=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_VIDEO=y
-+# CONFIG_VIDEO_BPP8 is not set
-+# CONFIG_VIDEO_BPP16 is not set
-+CONFIG_SYS_WHITE_ON_BLACK=y
-+CONFIG_VIDEO_BCM2835=y
-+CONFIG_CONSOLE_SCROLL_LINES=10
-+CONFIG_PHYS_TO_BUS=y
-+CONFIG_GENERATE_ACPI_TABLE=y
-+CONFIG_ACPI=y
-+CONFIG_ACPI_PARKING_PROTOCOL=y
-+CONFIG_CMD_ACPI=y
-+CONFIG_BOOTM_EFI=y
--- 
-2.45.2
-
+Cheers
+/Ilias
+>
+> Regards,
+> Raymond
