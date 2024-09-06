@@ -4,80 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A073CE7AA6
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 00:31:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 464FDCE7AA6
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 00:44:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AABDF88CC5;
-	Fri,  6 Sep 2024 02:30:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8AD538862E;
+	Fri,  6 Sep 2024 02:44:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TEXBIzjm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hGJtVV2W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C45588CC2; Fri,  6 Sep 2024 02:30:58 +0200 (CEST)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id C77498862E; Fri,  6 Sep 2024 02:43:58 +0200 (CEST)
+Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
+ [IPv6:2607:f8b0:4864:20::834])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0AE488CCE
- for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 02:30:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5557888CC6
+ for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 02:43:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6bf92f96f83so7815566d6.3
- for <u-boot@lists.denx.de>; Thu, 05 Sep 2024 17:30:55 -0700 (PDT)
+Received: by mail-qt1-x834.google.com with SMTP id
+ d75a77b69052e-4567587224eso9012591cf.0
+ for <u-boot@lists.denx.de>; Thu, 05 Sep 2024 17:43:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1725582655; x=1726187455; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UwkEQwfZfpR0tu0myETm7wYFgk6zcOHy+x+7DEL7k9M=;
- b=TEXBIzjmPcpDildTo3Y+HW5RHr0XKpgBRTqpCNlhv5irTSG8+1sSxQbJQe2ugn17PU
- SBAfA37mGZ3JQRYqJZVACvevIzcfuVCFmjH3qfuQ91XkCM+7RzVBj/rGksTEkuVeSHOl
- sl/CRGTtulAsJQ35VtWDA2l6krzhjHJKlYZro=
+ d=chromium.org; s=google; t=1725583435; x=1726188235; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=aYZIOSKcw9EapAAwOkNarxFvPoBZTVpKyrvJm2AnZms=;
+ b=hGJtVV2W5grsl1E33umBOsCMjpsqPIH4oqEgvXAZM2kSRfABeiIBlv33WEGV4jXdoX
+ q3kwkxjxsOcewNxz4dOjTcnjQaAJbKNykXHoQX1aWHnnjep9yUN+GIjMmxLntcd/VfRq
+ ECSysavuFkFqed4TlnO/ul7mlOcsuB0SXP65o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725582655; x=1726187455;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UwkEQwfZfpR0tu0myETm7wYFgk6zcOHy+x+7DEL7k9M=;
- b=WA4dz4oMBGw1BoCrUgpdE1eC7LcgaWNT6f5CRmID2532Ouyxfh98Ns+xppxvcsTZcx
- ClLIJj6zpBBZ1sjpl6pz4t0DOKLQ+8uzURSRGBuk59D/v6V1vpv2Ut4tECUcKFtgJ0r5
- N3HeNUt4Y8fdjBJCuVSFO4AbHWM+qU7XG08rTV4V1BMLEIRi6L2o9cb2VCtiZzP+AOfN
- +171ZpyDl2zb9uCAVbe4lf2WRR/aFb2FYTkR3d9wgkcBYhUCWlQ7E3Fxk8HZ7J6AIc17
- Y3nv30BEjhewpuXouSS4RUemUwgdJgtdQNuS4BLNT++Ju1225GA3cX6auyTyoSC30CyQ
- nDzg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXH952lkhWX8xYmQdfRXu5UuxDvtcZCR60JjaTJ97f2D0VVH/NSFAUz8aiSyPZY/6quhFtyLIw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxTa51596VlKT4F+M+/9fmCgRyUdqfJCsVdjcOux0nt9FCLMpne
- BH6RlDJyuDUn/y1QvInb+gxB2YkRYbY/m2EgksPUyCS3Vp9otEVrVOUoP0mvsJXERagxe1tD/eB
- C7W5IPqmR909kwMojY4lgSVU4qPlcbY6vdK25
-X-Google-Smtp-Source: AGHT+IErAG9Gf/oKt2EucA8on/TPyIOEyE65byEv4fp776Q2ZmKMyO3HkqYgS1IgM3qYzkLMz0RwB7YYfFVPhCE0i9Y=
-X-Received: by 2002:a05:6214:3902:b0:6bf:75da:de1e with SMTP id
- 6a1803df08f44-6c5283fac49mr13484996d6.25.1725582654736; Thu, 05 Sep 2024
- 17:30:54 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1725583435; x=1726188235;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=aYZIOSKcw9EapAAwOkNarxFvPoBZTVpKyrvJm2AnZms=;
+ b=PQjLV1RtEYsAOu5buGUhx4oKHNbtWjug4XXfJsgjmNr0/p8qL+6+HjK3YRuQHUaA3G
+ AxXepBn5sUiS94OipojUgUPtv1SAjU6n07Pri17UFuiOGscNWsx2j2VDqEj7UU0EjIk6
+ wi4V8zATvwh33+BB+ETK8RN4Koa547/Af1kex33CS9E83ifVwvtfpkMTt0vYw3upL/Qe
+ c+dZBe/+lSv1PAlhUYzGeVjMzMFoSOT1TD2lcyKMfQ3NjNt2CsfpQjsphdrzjezhZXWN
+ Ft/LgSVM54v7KMAyj4mAp638imZXyfyC/xwQLHCTD0XGWBLR7DGy2yoKrwC9eczUspPZ
+ pfUw==
+X-Gm-Message-State: AOJu0Yw4IqYzyc9mc3P5XvEb1foEm9KqmpJKWY1O3hiu3VTFgCzjRXBw
+ HNWWg+WytZtDukmtAxMDoedpkLz8ULrnIzDD+B8fLDqsNqTd3MreEy3Daj1b3mUSucpCOS7oziC
+ Yg7J0CdG7Eci4j/8PVIvdrnzelhswnFtIAeKB
+X-Google-Smtp-Source: AGHT+IH7wwIGGAJegSzuqyHoZUGlzZUFaeKZYxq8CNBOi4oGpRsiV3NRzc6IaxvRdIGNUeD70P/mcjQUmzIO9bI2pXo=
+X-Received: by 2002:a05:6214:3b8a:b0:6c3:8360:583c with SMTP id
+ 6a1803df08f44-6c383605a57mr126828526d6.23.1725583435092; Thu, 05 Sep 2024
+ 17:43:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240808110654.4215b129@wsk>
- <CAOMZO5A74MigLO0qkeXi04=7M70jaiEgk9zdFBjUV74vuZDP0g@mail.gmail.com>
- <20240815221421.61f64a17@wsk>
- <CAOMZO5B-fkLQsQx205mxXQdmk3ij6Hxx4ErM84DtEtBg3mYa7Q@mail.gmail.com>
- <CAFLszTggpR9aaDAH_Mx_zDNnKAb7r_O+sdyyVVG_xULqkrWnzg@mail.gmail.com>
- <20240828100452.2143873d@wsk>
- <CAHCN7xLY4FxB4HZLcE0pEZsx7V=dhVokh2Wcrn2Jjf+B+SLCJg@mail.gmail.com>
- <20240905155402.486a7110@wsk>
-In-Reply-To: <20240905155402.486a7110@wsk>
+References: <20240816214436.1877263-1-raymond.mao@linaro.org>
+ <CAFLszTiRy3dkrTVnkV-H=CcCxJH6W5=RBM9tokOiSN-AVXGywA@mail.gmail.com>
+ <CAEfUkU++=WbmePTa_JwPkn6VoG0C+Y=U7SebXmNhcLyPTbKrZQ@mail.gmail.com>
+In-Reply-To: <CAEfUkU++=WbmePTa_JwPkn6VoG0C+Y=U7SebXmNhcLyPTbKrZQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 5 Sep 2024 18:30:44 -0600
-Message-ID: <CAFLszTh65OkyXnG3L7XTJFK69EYdj4DZwYGxizu4877n-mCw-w@mail.gmail.com>
-Subject: Re: [Binman] Question regarding SPL symbol offsets generation
-To: Lukasz Majewski <lukma@denx.de>
-Cc: Adam Ford <aford173@gmail.com>, Fabio Estevam <festevam@gmail.com>, 
- Mamta Shukla <mamta.shukla@leica-geosystems.com>, u-boot@lists.denx.de, 
- Marek Vasut <marex@denx.de>
+Date: Thu, 5 Sep 2024 18:43:44 -0600
+Message-ID: <CAFLszTh56FrvLaHvat6Oz97EVzw9xYmQr+WyDNtYE=c2qmyJ5w@mail.gmail.com>
+Subject: Re: [PATCH v6 00/28] Integrate MbedTLS v3.6 LTS with U-Boot
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, manish.pandey2@arm.com, 
+ Tom Rini <trini@konsulko.com>, Stefan Bosch <stefan_b@posteo.net>,
+ Mario Six <mario.six@gdsys.cc>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Andrew Davis <afd@ti.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Sumit Garg <sumit.garg@linaro.org>, 
+ Jesse Taube <mr.bossman075@gmail.com>, Bryan Brattlof <bb@ti.com>, 
+ "Leon M. Busch-George" <leon@georgemail.eu>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Alexander Gendin <agendin@matrox.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Eddie James <eajames@linux.ibm.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,71 +104,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Lukasz,
+Hi Raymond,
 
-On Thu, 5 Sept 2024 at 07:54, Lukasz Majewski <lukma@denx.de> wrote:
+On Tue, 3 Sept 2024 at 08:59, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
-> Hi Adam,
+> Hi Simon,
 >
-> > On Wed, Aug 28, 2024 at 3:04=E2=80=AFAM Lukasz Majewski <lukma@denx.de>=
- wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > > > Hi,
-> > > >
-> > > > On Tue, 27 Aug 2024 at 12:47, Fabio Estevam <festevam@gmail.com>
-> > > > wrote:
-> > > > >
-> > > > > Hi Lukasz,
-> > > > >
-> > > > > On Thu, Aug 15, 2024 at 5:14=E2=80=AFPM Lukasz Majewski <lukma@de=
-nx.de>
-> > > > > wrote:
-> > > > > > Unfortunately not - this change is only for properly setting
-> > > > > > start address of the u-boot.
-> > > > > >
-> > > > > > The _real_ problem here is the symbol placement generated by
-> > > > > > binman when we try to define the image as a single one.
-> > > > > >
-> > > > > > Moreover, this change follows other boards with imx8mm
-> > > > > > processor - ./configs/imx8mm_beacon_fspi_defconfig to be
-> > > > > > specific.
-> > > > > >
-> > > > > > The "fix" (for which I'd been now probably opt) for this issue
-> > > > > > would be to generate two images with binman - one for
-> > > > > > u-boot-spl-ddr.bin and the final flash.bin with the former one
-> > > > > > included (as it was before SHA1:
-> > > > > > 37e50627efacd8dae18b564e9d8886a033e181bc)
-> > > > >
-> > > > > Is QSPI boot broken on i.MX8MM?
-> > > > >
-> > > > > I am adding Adam and Mamta who have tested QSPI booting on
-> > > > > imx8mm_beacon and imx8mm_evk, respectively.
-> > > >
-> > > > Note also that I sent a series[1] which allows the symbols-base
-> > > > to be adjusted, if that helps.
-> > >
-> > > I've seen them - but not yet tested.
-> > >
-> > > Thanks Simon for the patch series.
-> >
-> > Is it still broken with this patch series?  I have been traveling and
-> > haven't had much time to test.
->
-> Yes, I can confirm that it is still broken.
->
-> I've applied:
-> https://patchwork.ozlabs.org/project/uboot/cover/20240826191143.426387-1-=
-sjg@chromium.org/
->
-> on top of mainline:
-> SHA1: 1630ff26cc960439b5949b80cfc604a2c8aa47dd
->
-> Adding symbols-base =3D <0>; to imx8mm-u-boot.dtsi did not help.
+> On Sat, 17 Aug 2024 at 11:58, Simon Glass <sjg@chromium.org> wrote:
+>>
+>> Hi Raymond,
+>>
+>> On Fri, 16 Aug 2024 at 15:44, Raymond Mao <raymond.mao@linaro.org> wrote:
+>> >
+>> > Integrate MbedTLS v3.6 LTS (currently v3.6.0) with U-Boot.
+>> >
+>> > Motivations:
+>> > ------------
+>> >
+>> > 1. MbedTLS is well maintained with LTS versions.
+>> > 2. LWIP is integrated with MbedTLS and easily to enable HTTPS.
+>> > 3. MbedTLS recently switched license back to GPLv2.
+>> >
+>> > Prerequisite:
+>> > -------------
+>> >
+>> > This patch series requires mbedtls git repo to be added as a
+>> > subtree to the main U-Boot repo via:
+>> >     $ git subtree add --prefix lib/mbedtls/external/mbedtls \
+>> >           https://github.com/Mbed-TLS/mbedtls.git \
+>> >           v3.6.0 --squash
+>> > Moreover, due to the Windows-style files from mbedtls git repo,
+>> > we need to convert the CRLF endings to LF and do a commit manually:
+>> >     $ git add --renormalize .
+>> >     $ git commit
+>> >
+>> > New Kconfig options:
+>> > --------------------
+>> >
+>> > `MBEDTLS_LIB` is for MbedTLS general switch.
+>> > `MBEDTLS_LIB_CRYPTO` is for replacing original digest and crypto libs with
+>> > MbedTLS.
+>> > `MBEDTLS_LIB_X509` is for replacing original X509, PKCS7, MSCode, ASN1,
+>> > and Pubkey parser with MbedTLS.
+>> > `LEGACY_CRYPTO` is introduced as a main switch for legacy crypto library.
+>> > `LEGACY_CRYPTO_BASIC` is for the basic crypto functionalities and
+>> > `LEGACY_CRYPTO_CERT` is for the certificate related functionalities.
+>> > For each of the algorithm, a pair of `<alg>_LEGACY` and `<alg>_MBEDTLS`
+>> > Kconfig options are introduced. Meanwhile, `SPL_` Kconfig options are
+>> > introduced.
+>> >
+>> > In this patch set, MBEDTLS_LIB, MBEDTLS_LIB_CRYPTO and MBEDTLS_LIB_X509
+>> > are by default enabled in qemu_arm64_defconfig and sandbox_defconfig
+>> > for testing purpose.
+>> >
+>> > Patches for external MbedTLS project:
+>> > -------------------------------------
+>> >
+>> > Since U-Boot uses Microsoft Authentication Code to verify PE/COFFs
+>> > executables which is not supported by MbedTLS at the moment,
+>> > addtional patches for MbedTLS are created to adapt with the EFI loader:
+>> > 1. Decoding of Microsoft Authentication Code.
+>> > 2. Decoding of PKCS#9 Authenticate Attributes.
+>> > 3. Extending MbedTLS PKCS#7 lib to support multiple signer's certificates.
+>> > 4. MbedTLS native test suites for PKCS#7 signer's info.
+>> >
+>> > All above 4 patches (tagged with `mbedtls/external`) are submitted to
+>> > MbedTLS project and being reviewed, eventually they should be part of
+>> > MbedTLS LTS release.
+>> > But before that, please merge them into U-Boot, otherwise the building
+>> > will be broken when MBEDTLS_LIB_X509 is enabled.
+>> >
+>> > See below PR link for the reference:
+>> > https://github.com/Mbed-TLS/mbedtls/pull/9001
+>> >
+>> > Miscellaneous:
+>> > --------------
+>> >
+>> > Optimized MbedTLS library size by tailoring the config file
+>> > and disabling all unnecessary features for EFI loader.
+>> > From v2, original libs (rsa, asn1_decoder, rsa_helper, md5, sha1, sha256,
+>> > sha512) are completely replaced when MbedTLS is enabled.
+>> > From v3, the size-growth is slightly reduced by refactoring Hash functions.
+>> > From v6, smaller implementations for SHA256 and SHA512 are enabled and
+>> > target size reduce significantly.
+>> > Target(QEMU arm64) size-growth when enabling MbedTLS:
+>> > v1: 6.03%
+>> > v2: 4.66%
+>> > v3 - v5: 4.55%
+>> > v6: 2.90%
+>> >
+>> > Please see the latest output from buildman for size-growth on QEMU arm64,
+>> > Sandbox and Nanopi A64. [1]
+>> >
+>> > Tests done:
+>> > -----------
+>> >
+>> > EFI Secure Boot test (EFI variables loading and verifying, EFI signed image
+>> > verifying and booting) via U-Boot console.
+>> > EFI Secure Boot and Capsule sandbox test passed.
+>> >
+>> > Known issues:
+>> > -------------
+>> >
+>> > None.
+>>
+>> I wonder if we could leave out the SHA stuff? The algorithms are
+>> stable and this would seem to avoid much of the size growth, and all
+>> the pain of trying to integrate another yet another hashing layer (we
+>> already have normal, progressive and h/w acceleration, plus
+>> UCLASS_HASH which h/w acceleration should use but that migration never
+>> happened). I struggle to see any benefit in replacing U-Boot's very
+>> solid hashing infra with something else, particularly as this series
+>> adds yet another. Better to invest the time to refactor it. I asked
+>> about this before and was told that it would happen 'later'. Let's
+>> just not change it at all, then it is more likely someone will sort it
+>> out.
+>>
+> Unfortunately, MbedTLS depends on its own digest layer. Unless we patch MbedTLS
+> to allow an external digest library from U-Boot ...
 
-Can you please point me to the tree? I suspect that the symbols-base
-is already 0, so setting it to 0 has no effect. I'm not sure though,
+Yes that sounds best. It looks like only a few call sites, so it
+should be a matter of leaving out the MbedTLS code and adding some
+static inlines.
+
+>
+>>
+>> Also, if MbedTLS is wanting to be a general library for TLS (I assume
+>> transport-local security, not thread-local storage) perhaps it might
+>> consider changing to non-Windows newlines, or perhaps even kernel code
+>> style?
+>>
+> We can feedback this to the MbedTLS project when the first series are accepted.
+
+OK.
 
 Regards,
 Simon
