@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72460CE7B06
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 13:01:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AA1BCE7B06
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 13:01:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C641188CD1;
-	Fri,  6 Sep 2024 15:01:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2293688936;
+	Fri,  6 Sep 2024 15:01:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A2j8igZg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jTI//9l+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96ACC88CD9; Fri,  6 Sep 2024 15:01:39 +0200 (CEST)
-Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
- [IPv6:2607:f8b0:4864:20::836])
+ id 9916388CD9; Fri,  6 Sep 2024 15:01:40 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C61588936
- for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 15:01:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4FBE388CD1
+ for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 15:01:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x836.google.com with SMTP id
- d75a77b69052e-457e2537611so11777221cf.0
- for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 06:01:37 -0700 (PDT)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6bf6606363fso11082586d6.3
+ for <u-boot@lists.denx.de>; Fri, 06 Sep 2024 06:01:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1725627696; x=1726232496; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1725627697; x=1726232497; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EqFO7QiANoD//v3UXI1YLCwvxYHxVLitXSeREcTNOEI=;
- b=A2j8igZgXcqLL4rXjpL9sK9OKJsdaSJFSCtGqSjUoqpZrW6aUQn0Ok1kgyG8ijMf+s
- iOp7EdbYMV8i0UbvNBb4xKeSf2HecI8B2YLYdbQlf2+LuxYYRljY6BhLGX5fw+8nFzDq
- AmY5D/QSbAIXashIQDUImP74I8uRY1NzjLs1k=
+ bh=ooLFtMYB2HqubLAdo8iutwnt5drrWzbKXW2CIBY7lqY=;
+ b=jTI//9l+Im8aj8xBk1YFNBr1Lg1mVCri3mS7vEPS8Ln/ZQgabCQgqi4d/1B1IfwNhN
+ GNdhU7nHTr0+74UX0HCwZwHVyj5Ly6O/3R8one498N5eFk+2OenbdbjXbL+G8V+Ff/1J
+ GlDLbadjNGqLS6+7EpN1bsGtqBlTZgGA+nyXk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1725627696; x=1726232496;
+ d=1e100.net; s=20230601; t=1725627697; x=1726232497;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=EqFO7QiANoD//v3UXI1YLCwvxYHxVLitXSeREcTNOEI=;
- b=u4D3lrusC6MrwcovtUpnrZ8ARA7Jb8xYTvM0XQ1a5sOXUfy2W/pCOlHttUi4wgxGJZ
- nyVqFVdcRugWT2xD9fmEQX2h7aU1TYlUf6dxHuPtjqzHubn/080sy0wGzRTICQ1ysY5k
- 0xcYEVOUIzl75dlCuO8jHDlGNTFJF084nQPyctOfxgDOHMYV5Kh1rshcZwR6RhxtSlvb
- /JbDzhX1JW1Gm8uUo2FRhoWZjalFz5+oRqXMSlLreBSFmrhoohLt3cvHOyNeYpkb8HL3
- 404b3BlT1l5g/WRxqKCb9QIraAU1Zm5ojLYy2q/PxegwOlApAVIy4KPIWEnp6j8Rmyzx
- EggQ==
-X-Gm-Message-State: AOJu0Yy4OPY7fwHaKiukhml8oKkLbjZedA/A9imEuZRU/gdghteHP+cw
- 6Le/N24L2xLM7GYc41YIvtII4B1JpCRWWQUMMZDn8vijjUv6lwt/OARhVyK9JoatYwUGJb5XrMG
- W2lJ6Z1W8lbXGp+DLBJHAvFkmhNzcehn5YxKO
-X-Google-Smtp-Source: AGHT+IF643vM5QMLQ2HvjpEQbNwaqleKHvwTTyIcYt7FvFb6LD5Y7j0jDgUOmHnIVjTDiebXCruXGJWjsc5Kgw/UkvI=
-X-Received: by 2002:a05:6214:5d01:b0:6c3:66f2:a640 with SMTP id
- 6a1803df08f44-6c5284f61a7mr24025306d6.31.1725627694245; Fri, 06 Sep 2024
- 06:01:34 -0700 (PDT)
+ bh=ooLFtMYB2HqubLAdo8iutwnt5drrWzbKXW2CIBY7lqY=;
+ b=KwAepksBVKmy1lrLrZNVsEAf/fy6WWq9pC5xY3AnYnAAK8CS/c47XQFbYwY/rsUDwZ
+ 9kYaL1JKpSr1NROewfY2AQdy/KW2zpXDRTLl62yHtyKOZSkPO8GRiMJV5gli9U73ZyV7
+ 1JcJjPIPaAO4/ZAC+GRGBS1UWct196HO0rJdyV4/Sfj+0XYcJWF7JSPD9j9kgwggPtkq
+ Cq6hCnoJp9M+E1eythpasbRfiiE0kId5qi+6jdixPOdqtGePkfPMfT5FQbT5Lnt+4/vw
+ TtsbJupSKhwoYUKLxArtYX+KnfwPaNd+y0zYE3yOTESorZHA7qGvu/jjS65LB/Px5U6X
+ HA0Q==
+X-Gm-Message-State: AOJu0Yw9gY6zitjTipzkQtznNPzvmqRtNtCs4F1MI4LytzZkZpjAEfRV
+ L05DJ8r00KA15UPXJvKboqCkwn4kq1zoa5XDRP2Iki4CObHMrvsOaYcCLDEsDvt3WADeCntV/Is
+ Vfu1KKwnlgD7BCqDndEnKhigVdZA+7m3MoYok
+X-Google-Smtp-Source: AGHT+IGEMY9ipG2PGs0uCy52KJUTuElrLLW6nF5NB7SUhsoeQBlPsCn615238A3q2vGiHYdiHt5MV6EN7KjSVLNtpCA=
+X-Received: by 2002:a05:6214:aaf:b0:6c5:194a:4d7b with SMTP id
+ 6a1803df08f44-6c52851138emr30474686d6.33.1725627695596; Fri, 06 Sep 2024
+ 06:01:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240901222259.456932-1-sjg@chromium.org>
  <20240901222259.456932-3-sjg@chromium.org>
- <CADg8p96GUQcWXt3HPjjmZxF9o50d05GmPut5icqRr3Z1NA4hrg@mail.gmail.com>
-In-Reply-To: <CADg8p96GUQcWXt3HPjjmZxF9o50d05GmPut5icqRr3Z1NA4hrg@mail.gmail.com>
+ <CAC_iWjLwbeU2vO5-BdYz8gbpTH4Zq=7W_JeUVVURCnMtPg8DWg@mail.gmail.com>
+In-Reply-To: <CAC_iWjLwbeU2vO5-BdYz8gbpTH4Zq=7W_JeUVVURCnMtPg8DWg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 6 Sep 2024 07:01:22 -0600
-Message-ID: <CAFLszTiH=c1RYOOgQZMkYn2HQhL9h0d6bq6VRmzW8Hrk1YG6cg@mail.gmail.com>
+Date: Fri, 6 Sep 2024 07:01:25 -0600
+Message-ID: <CAFLszTicmXVmi45AVZgmxcT=gnxpUS4-UAyD5=_UC2LWDF2W1Q@mail.gmail.com>
 Subject: Re: [PATCH v3 2/3] efi: Allow use of malloc() for the EFI pool
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
  AKASHI Takahiro <akashi.tkhro@gmail.com>, Eugene Uriev <eugeneuriev@gmail.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, 
  Masahisa Kojima <kojima.masahisa@socionext.com>,
@@ -90,11 +90,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
+Hi Ilias,
 
-On Fri, 6 Sept 2024 at 00:23, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Fri, 6 Sept 2024 at 01:13, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
-> On Mon, 2 Sept 2024 at 03:53, Simon Glass <sjg@chromium.org> wrote:
+> Hi Simon,
+>
+> Apologies for the late reply, I was attending a conference.
+>
+> On Mon, 2 Sept 2024 at 01:23, Simon Glass <sjg@chromium.org> wrote:
 > >
 > > This API call is intended for allocating small amounts of memory,
 > > similar to malloc(). The current implementation rounds up to whole pages
@@ -170,69 +175,16 @@ On Fri, 6 Sept 2024 at 00:23, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > > +enum efi_alloc_flags {
 > > +       EFIAF_USE_MALLOC        = BIT(0),
 > > +};
-> > +
-> > +/**
-> > + * efi_set_alloc() - Set behaviour of EFI memory allocation
-> > + *
-> > + * @flags: new value for allocation flags (see enum efi_alloc_flags)
-> > + */
-> > +void efi_set_alloc(int flags);
-> > +
-> >  /* Adds new or overrides configuration table entry to the system table */
-> >  efi_status_t efi_install_configuration_table(const efi_guid_t *guid, void *table);
-> >  /* Sets up a loaded image */
-> > diff --git a/include/malloc.h b/include/malloc.h
-> > index 07d3e90a855..a64f117e2f2 100644
-> > --- a/include/malloc.h
-> > +++ b/include/malloc.h
-> > @@ -983,6 +983,13 @@ extern ulong mem_malloc_brk;
-> >
-> >  void mem_malloc_init(ulong start, ulong size);
-> >
-> > +/**
-> > + * malloc_check_in_range() - Check if a pointer is within the malloc() region
-> > + *
-> > + * Return: true if within malloc() region
-> > + */
-> > +bool malloc_check_in_range(void *ptr);
-> > +
-> >  #ifdef __cplusplus
-> >  };  /* end of extern "C" */
-> >  #endif
-> > diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
-> > index a87006b3c0e..5bb0fdcf75d 100644
-> > --- a/lib/efi_loader/efi_bootbin.c
-> > +++ b/lib/efi_loader/efi_bootbin.c
-> > @@ -201,6 +201,8 @@ efi_status_t efi_binary_run(void *image, size_t size, void *fdt)
-> >  {
-> >         efi_status_t ret;
-> >
-> > +       efi_set_alloc(0);
-> > +
 >
-> Here we are setting the flags to use the efi_allocate_pages() route to
-> allocate memory, when booting into an EFI app. Do we need to set it
-> back to EFIAF_USE_MALLOC if the app exits and control lands back in
-> U-Boot? I am not sure that is being handled.
+> Why do we need to handle cases differently? IOW can't all EFI
+> allocations that need a pool gi via malloc?
 
-I don't believe so. Once we have booted into the app, U-Boot loses
-control of its memory layout, in the sense that the
-efi_allocate_pages() has likely been called and placed things all over
-the place in the memory. People should expect this.
-
-We can potentially deal with this if we find a specific problem, but I
-can't think of one at the moment.
+Once the app boots, as Heinrich pointed out, it expects to be able to
+malloc() very large amount of memory, but the malloc() pool is small.
 
 >
-> -sughosh
+> [...]
 >
-> >         /* Initialize EFI drivers */
-> >         ret = efi_init_obj_list();
-> >         if (ret != EFI_SUCCESS) {
-> > diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> > index 50cb2f3898b..206d10f207a 100644
-> > --- a/lib/efi_loader/efi_memory.c
-> > +++ b/lib/efi_loader/efi_memory.c
 > > @@ -24,6 +24,14 @@ DECLARE_GLOBAL_DATA_PTR;
 > >  /* Magic number identifying memory allocated from pool */
 > >  #define EFI_ALLOC_POOL_MAGIC 0x1fe67ddf6491caa2
@@ -313,12 +265,32 @@ can't think of one at the moment.
 > > +                * resolved
 > > +                */
 > > +               ptr = memalign(8, size + 0x100);
+>
+> I don't think the explanation is enough here. On top of that adding
+> random values to fix the problem doesn't sound right. Can we figure
+> out why?
+
+My guess is that an allocated pointer is going beyond its limits. The
+newer upstream dlmalloc() has a checker which might help. I fiddled
+around a bit but could not work one where the problem was.
+
+>
 > > +               if (!ptr)
 > > +                       return EFI_OUT_OF_RESOURCES;
 > > +
 > > +               *buffer = ptr;
 > > +               r = EFI_SUCCESS;
 > > +               log_debug("EFI pool: malloc(%zx) = %p\n", size, ptr);
+>
+> So as I commented above, I think this is papering over whatever
+> problem you are seeing. If you want to move the pool to use malloc()
+> that's fine, but *all* of the pool allocations should use it. Not just
+> boot services because its easier to retrofit it on the current code.
+
+Please see above. Also, please see the commit message. This change
+actually solves the problems I am seeing, quite well.
+
+>
 > > +       } else {
 > > +               u64 num_pages = efi_size_in_pages(size +
 > > +                                       sizeof(struct efi_pool_allocation));
@@ -362,47 +334,7 @@ can't think of one at the moment.
 > > +               if (ret != EFI_SUCCESS)
 > > +                       return ret;
 > >
-> > -       /* Check that this memory was allocated by efi_allocate_pool() */
-> > -       if (((uintptr_t)alloc & EFI_PAGE_MASK) ||
-> > -           alloc->checksum != checksum(alloc)) {
-> > -               printf("%s: illegal free 0x%p\n", __func__, buffer);
-> > -               return EFI_INVALID_PARAMETER;
-> > -       }
-> > -       /* Avoid double free */
-> > -       alloc->checksum = 0;
-> > +               alloc = container_of(buffer, struct efi_pool_allocation, data);
-> >
-> > -       ret = efi_free_pages((uintptr_t)alloc, alloc->num_pages);
-> > +               /*
-> > +                * Check that this memory was allocated by efi_allocate_pool()
-> > +                */
-> > +               if (((uintptr_t)alloc & EFI_PAGE_MASK) ||
-> > +                   alloc->checksum != checksum(alloc)) {
-> > +                       printf("%s: illegal free 0x%p\n", __func__, buffer);
-> > +                       return EFI_INVALID_PARAMETER;
-> > +               }
-> > +               /* Avoid double free */
-> > +               alloc->checksum = 0;
-> > +
-> > +               ret = efi_free_pages((uintptr_t)alloc, alloc->num_pages);
-> > +               log_debug("EFI pool: pages free(%p)\n", buffer);
-> > +       }
-> >
-> >         return ret;
-> >  }
-> > @@ -926,6 +979,9 @@ static void add_u_boot_and_runtime(void)
-> >
-> >  int efi_memory_init(void)
-> >  {
-> > +       /* use malloc() pool where possible */
-> > +       efi_set_alloc(EFIAF_USE_MALLOC);
-> > +
-> >         efi_add_known_memory();
-> >
-> >         add_u_boot_and_runtime();
-> > --
-> > 2.34.1
-> >
+> [...]
 
 Regards,
 Simon
