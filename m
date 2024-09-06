@@ -4,65 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5CB4E6FE3D
-	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 18:27:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 200FFE6FE41
+	for <u-boot@archiver.kernel.org>; Fri,  6 Sep 2024 18:28:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2BD088D31;
-	Fri,  6 Sep 2024 20:27:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 9ADC088D2F;
+	Fri,  6 Sep 2024 20:28:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1725647221;
-	bh=tqL1o11QM3F5Twsvx06oD7qyRKS2L/5+AxUDfYTH29A=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=lZJcrGFyOsL6hEWnasBpT7Y3WDANIAJ1zalzcWOZyrfGg9ttDJ34RiZld7pcePNwo
-	 dIwkLCggDDhF4OMrC8ie1+m8f4QrG7sG1k2gzdKx1mAo8xDzXKDGwq9L+ZsTqRr8KI
-	 ZCWL2Sfd8oXwsXWbQmx8i05DZ/7V9SmuGSO0TMYtNRdS41mBHXMRglZrUbI2zOJoHI
-	 L1gA0hwDsyrXE/P9FTTHDU+zUAhSf7JaXy5JlJzbeBpVxhabK3mWAIn1Pswek19BlO
-	 O8u2LHpqV2w4wlTzqGIJ33W7nVK9le+xErle/u91WzvysZMay0vhXmPPcQXroFSsLE
-	 BvMUzcEktHX0g==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Q6Sgrf+T";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="FEe0u3lW";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 9092088D10; Fri,  6 Sep 2024 20:28:22 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id ED35888D10;
- Fri,  6 Sep 2024 20:26:56 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1725647219;
- bh=tqL1o11QM3F5Twsvx06oD7qyRKS2L/5+AxUDfYTH29A=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=hWHGO26/JXPvlCncFHVYBk4piIC1b314e0LenAxMEjqmwRHzBQu5YrkwGNaBg3rsW
- og15OlXHsLnghQDCCV44kf1XgqVK8SKXy8JK8zZQ5ajNDYli5PZ+G/qpU++0PG4WNz
- OsuZ/P9FOU89KeLIdL+9oUp8N0hOMj7fIoFFZb5q3u97uARfKtJ0127ss+D3PrT8fp
- mvHF0/tuOV8IbteXkBsR6SUFEnCgAZjIFARKlf635uo8/1bUaDFF5HpAy7JetBMhOG
- ErrHvdp0Mqs2R787DwJpLMmPv8SoWD+DGHF5gTmSkbTjk9Xbj1jVrBvjbrMwOeE3Ou
- a0JVn6GhSq9uA==
-Message-ID: <f3a60bad-2afd-443b-9e76-f4634193e4f2@denx.de>
-Date: Fri, 6 Sep 2024 19:23:46 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 51A4C88D34
+ for <u-boot@lists.denx.de>; Fri,  6 Sep 2024 20:28:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4X0l900yrQz9sd0;
+ Fri,  6 Sep 2024 20:28:20 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1725647300;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=9oMGXyXu/pfJPl9cO8uDXxV8HzVFS+HTJABZ9WlqFkQ=;
+ b=Q6Sgrf+T9f+f5s1HEyPUpMMe8xErVhERhmYWNFppFBIbRwV2sRHdIvFMCw4KwqM9rAbJkc
+ FpS4x+SAs48V1v/1Ws/yJz8pbI5+a60AZ9fiMO2SmrduIL/9Cr/CyIMOlrc90ZUe9J6wl6
+ rE/2Wx38zrMoCGc+Kf3o7L1X2SwFH1gM8eF0JuYy26HlPEer1R28QlLCerqXDIBOp00W6c
+ 46y97dZqzlMkWr0UwKWhOXToULXjPy0xzX41zXXoei56Ou1+pc/U9bipiftIoKFyfuJ7Gd
+ l/tvERqnBevUz0SVoSzlEdNrHUZpS3DFKN0k8W5l2nRxL5AUcsbQWHqhKK2f4Q==
+Message-ID: <73e90954-e6ef-4fa9-a05a-90eac9196fa3@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1725647298;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=9oMGXyXu/pfJPl9cO8uDXxV8HzVFS+HTJABZ9WlqFkQ=;
+ b=FEe0u3lWsnhAdcjc0+LFot0OwctriXI2012zaTmo32V2QoA0OXQyN67sWcW8UTIpPOkxND
+ GAd/Sr+v7SDZ8zBxv0lVq/UyA3dhLfHBFU2FNntm9osAslpw671FlOOW3v6CrZCdRvs/Vj
+ Y7hd25dmMZOUUbSLwtAlspacG9/cBQ77aFGH7KCu5L4m6JG9XRp+mXwltF42+BQ0rZ2scy
+ 9wrX72W/YAg0DB8nfi1bBD0SJ3ZMJr+H5zOps9u4sTdoYmrbKancjhu3Z1mRqOvhrU06U0
+ OXUX4EhjdoD4y7IMq/2QPmVqb7bTeJvuJDIChE447Q4JZ3wn2SCjVAgjz690Ww==
+Date: Fri, 6 Sep 2024 20:28:16 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/9] phy: starfive: Add Starfive JH7110 USB 2.0 PHY
- driver
-To: Minda Chen <minda.chen@starfivetech.com>, Tom Rini <trini@konsulko.com>,
- Roger Quadros <rogerq@kernel.org>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Alexey Romanov <avromanov@salutedevices.com>,
- Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
- Nishanth Menon <nm@ti.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- E Shattow <lucent@gmail.com>
-References: <20240829013058.6178-1-minda.chen@starfivetech.com>
- <20240829013058.6178-3-minda.chen@starfivetech.com>
- <cf1beaa1-8811-4c33-aad3-febd7ea3c00b@denx.de>
- <SHXPR01MB08632175780A7FBFE0C6B5D6E69E2@SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn>
+Subject: Re: [PATCH v5] mmc: Poll CD in case cyclic framework is enabled
+To: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Jaehoon Chung <jh80.chung@samsung.com>,
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>
+References: <20240616145857.26833-1-marek.vasut+renesas@mailbox.org>
+ <20240905220237.GA1823175@bill-the-cat>
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <SHXPR01MB08632175780A7FBFE0C6B5D6E69E2@SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20240905220237.GA1823175@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: uaghmx7m45gtg7oqw14ni4f17b8w3gsc
+X-MBO-RS-ID: ab26fddfa697b33750a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,25 +90,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/6/24 10:08 AM, Minda Chen wrote:
+On 9/6/24 12:02 AM, Tom Rini wrote:
+> On Sun, Jun 16, 2024 at 04:58:49PM +0200, Marek Vasut wrote:
 > 
+>> In case the cyclic framework is enabled, poll the card detect of already
+>> initialized cards and deinitialize them in case they are removed. Since
+>> the card initialization is a longer process and card initialization is
+>> done on first access to an uninitialized card anyway, avoid initializing
+>> newly detected uninitialized cards in the cyclic callback.
+>>
+>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>> ---
+>> Cc: Jaehoon Chung <jh80.chung@samsung.com>
+>> Cc: Peng Fan <peng.fan@nxp.com>
+>> Cc: Simon Glass <sjg@chromium.org>
+>> ---
+>> V2: Move the cyclic registration/unregistration into mmc init/deinit
+>> V3: Replace if (CONFIG_IS_ENABLED(CYCLIC)...) with #if as the former
+>>      does not work with structure members
+>> V4: Stuff the code with CONFIG_IS_ENABLED() variants to avoid #ifdefs
+>> V5: Rebase on u-boot/next
 > 
->>
->> On 8/29/24 3:30 AM, Minda Chen wrote:
->>
->> [...]
->>
->>> +menu "Starfive PHY driver"
->>> +
->>> +config PHY_STARFIVE_JH7110_USB2
->>> +	bool "Starfive JH7110 USB 2.0 PHY driver"
->>> +	select PHY
->>
->> Can this PHY_STARFIVE_JH7110_USB2 symbol be selected if CONFIG_PHY is not
->> set ? I think it cannot, so this 'select PHY' is unnecessary and should be removed.
->>
->> [...]
->>
-> Thanks. I will check it.
-> Other are format issues. I will modify them.
-Thank you
+> Sorry for the delay here, this no longer builds:
+>     sandbox:  +   sandbox
+Fixed in V6, sigh
